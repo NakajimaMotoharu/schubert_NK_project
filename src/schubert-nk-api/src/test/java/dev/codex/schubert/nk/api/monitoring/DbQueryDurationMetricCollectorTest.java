@@ -16,7 +16,6 @@ import io.micrometer.core.instrument.Meter;
 import io.micrometer.core.instrument.distribution.DistributionStatisticConfig;
 import io.micrometer.core.instrument.distribution.HistogramSnapshot;
 import io.micrometer.core.instrument.simple.SimpleConfig;
-import io.micrometer.core.instrument.simple.SimpleMeterRegistry;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -38,7 +37,7 @@ class DbQueryDurationMetricCollectorTest {
       List.of(Query.ASYNC_JOB_STATE_COUNTS, Query.OUTBOX_STATUS_COUNTS_OLDEST);
   private static final List<Outcome> OUTCOMES = List.of(Outcome.SUCCESS, Outcome.FAILURE);
 
-  private static final class Registry extends SimpleMeterRegistry implements AutoCloseable {
+  private static final class Registry extends ExactDurationMeterRegistry implements AutoCloseable {
     final AtomicInteger closes = new AtomicInteger();
     final AtomicInteger factories = new AtomicInteger();
     final AtomicInteger records = new AtomicInteger();
@@ -454,7 +453,7 @@ class DbQueryDurationMetricCollectorTest {
                         "DEBUG")));
         assertEquals(0, calls.get());
         assertEquals(2, registry.factories.get());
-        assertEquals(7, registry.getMeters().size());
+        assertEquals(6, registry.getMeters().size());
         assertEquals(0, registry.closes.get());
       } finally {
         registry.close();

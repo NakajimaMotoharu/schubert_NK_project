@@ -1,5 +1,13 @@
 # 1723 Duration極小/MAX混在 追加品質単体テスト仕様書
 
+## BUG1678是正後補足（元oracle・開始見積り不変更）
+
+元source0b78/7962は164/20中DBTIME009・MQTIME009が失敗、各小bucket期待3対実1、verify終了1。同source7966正常六compile終了0/PT0は別証跡として保持。修正前BUG1678/YKT1429起票済み。
+
+ExactDurationMeterRegistry専用EXDUR001..010を追加し、必要既164と合わせ当174/21を予定。001:各五境界の±1ns/equal全15入力、CDF2/5/8/11/14・sum7.833/max1.500000001。002:元009と同独立二極端順序、CDF3/count5/同sum-max。003:負/NaN/±無限/MAX超の6入力で更新なし。004:empty/保持snapshot配列改変・後続観測と非alias。005:scale/unit/histogram/client-percentile/boundary異常をfactory拒否。006:汎用registryはSTANDARDのみ、DEBUGは両recorderで拒否。007:他summary/counterの元SDK動作と所有。008:null構成/clock拒否・durationのclock未読・default構築。009:四worker各64入力1秒と並行128snapshot、終了count/sum256/max1/CDF0/0/0/256/256、全future期限内回収。010:補助gauge factory同一例外・非所有close/再試行なし、le gauge値1。
+
+独立期待値は上記literal/数学的CDF、Production関数でexpected生成しない。二元009の期待値と旧正常数値oracleは不変更。未要求かつ未受入のSDK phi補助だけ削除し、primary+五leの6meter契約へ明示更新。専用registryの二classとMain二/Test三の変更を別trace、実DB/MQ/clock/Root/actual exporter操作なし。対象class/methodはEXDURの名前と一意対応、null契約・全condition・静的解析/四counter・公開scanを当sourceで確認する。coverage未達や試験失敗は合格に含めない。
+
 group1947/NK-OPS-001/P01809/C07/RD171 MON005006/UI252/SS351/PG-D568570補強。DBTIME009・MQTIME009を追加し、既元製造8ずつとは別の**追加品質oracle**として計測する。Production Main/既期待値を先に変更しない。
 
 入力は独立固定二順序 [0,1ns,MAX,MAX,1ns] と [MAX,MAX,1ns,0,1ns]。DBは既Query二×Outcome二、MQは既LGNREQ01/WLGEVT01×Outcome二、各組合せfresh自己所有Registry/固定Clockを使う。いずれもcount5/sum1.8446744073709553E10秒/max9.223372036854776E9秒、既五有限bucket .001/.01/.1/1/1.5のCDFは小さい三入力（0/1ns/1ns）から全3と独立算出する。p95の数値精度・実exporterや実時間は未受入のままで、この試験をその受入へ代用しない。

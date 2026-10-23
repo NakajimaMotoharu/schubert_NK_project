@@ -16,7 +16,6 @@ import io.micrometer.core.instrument.Meter;
 import io.micrometer.core.instrument.distribution.DistributionStatisticConfig;
 import io.micrometer.core.instrument.distribution.HistogramSnapshot;
 import io.micrometer.core.instrument.simple.SimpleConfig;
-import io.micrometer.core.instrument.simple.SimpleMeterRegistry;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -99,7 +98,7 @@ class MqProcessingDurationMetricRecorderTest {
           "QWKREQ01",
           "WLGEVT01");
 
-  private static final class Registry extends SimpleMeterRegistry implements AutoCloseable {
+  private static final class Registry extends ExactDurationMeterRegistry implements AutoCloseable {
     final AtomicInteger registrations = new AtomicInteger();
     final AtomicInteger records = new AtomicInteger();
     final AtomicInteger closes = new AtomicInteger();
@@ -211,7 +210,7 @@ class MqProcessingDurationMetricRecorderTest {
   }
 
   private static void shape(Registry registry, Set<String> expectedPairs) {
-    assertEquals(expectedPairs.size() * 7, registry.getMeters().size());
+    assertEquals(expectedPairs.size() * 6, registry.getMeters().size());
     var primary = new java.util.HashSet<String>();
     var auxiliary = new java.util.HashSet<String>();
     for (var meter : registry.getMeters()) {
@@ -230,11 +229,8 @@ class MqProcessingDurationMetricRecorderTest {
         assertTrue(primary.add(pair));
       } else {
         assertEquals(Meter.Type.GAUGE, id.getType());
-        boolean percentile = id.getName().equals("nk_mq_processing_duration_seconds.percentile");
-        String kind = percentile ? "phi" : "le";
-        assertEquals(
-            "nk_mq_processing_duration_seconds." + (percentile ? "percentile" : "histogram"),
-            id.getName());
+        String kind = "le";
+        assertEquals("nk_mq_processing_duration_seconds.histogram", id.getName());
         assertEquals(
             Set.of("flow", "layout", "outcome", kind),
             id.getTags().stream().map(t -> t.getKey()).collect(Collectors.toSet()));
@@ -246,7 +242,6 @@ class MqProcessingDurationMetricRecorderTest {
     for (String pair : expectedPairs) {
       for (String bound : List.of("0.001", "0.01", "0.1", "1", "1.5"))
         expected.add(pair + "/le/" + bound);
-      expected.add(pair + "/phi/0.95");
     }
     assertEquals(expected, auxiliary);
   }
@@ -272,7 +267,7 @@ class MqProcessingDurationMetricRecorderTest {
       assertEquals(0, registry.records.get());
       for (var config : registry.configurations) {
         assertTrue(config.isPercentileHistogram());
-        assertArrayEquals(new double[] {.95}, config.getPercentiles());
+        assertArrayEquals(new double[0], config.getPercentiles());
         assertArrayEquals(
             new double[] {.001, .01, .1, 1., 1.5}, config.getServiceLevelObjectiveBoundaries());
       }

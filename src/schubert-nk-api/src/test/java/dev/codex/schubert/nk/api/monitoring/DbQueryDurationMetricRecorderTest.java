@@ -16,7 +16,6 @@ import io.micrometer.core.instrument.Meter;
 import io.micrometer.core.instrument.distribution.DistributionStatisticConfig;
 import io.micrometer.core.instrument.distribution.HistogramSnapshot;
 import io.micrometer.core.instrument.simple.SimpleConfig;
-import io.micrometer.core.instrument.simple.SimpleMeterRegistry;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -36,7 +35,7 @@ class DbQueryDurationMetricRecorderTest {
       List.of(Query.ASYNC_JOB_STATE_COUNTS, Query.OUTBOX_STATUS_COUNTS_OLDEST);
   private static final List<Outcome> OUTCOMES = List.of(Outcome.SUCCESS, Outcome.FAILURE);
 
-  private static final class Registry extends SimpleMeterRegistry implements AutoCloseable {
+  private static final class Registry extends ExactDurationMeterRegistry implements AutoCloseable {
     final AtomicInteger registrations = new AtomicInteger();
     final AtomicInteger records = new AtomicInteger();
     final AtomicInteger closes = new AtomicInteger();
@@ -151,7 +150,7 @@ class DbQueryDurationMetricRecorderTest {
 
   private static void shape(Registry registry, Set<String> pairs) {
     // SDK-generated gauges are checked separately, never silently filtered out of the denominator.
-    assertEquals(pairs.size() * 7, registry.getMeters().size());
+    assertEquals(pairs.size() * 6, registry.getMeters().size());
     var actual = new java.util.HashSet<String>();
     var auxiliary = new java.util.HashSet<String>();
     for (var meter : registry.getMeters()) {
@@ -167,11 +166,8 @@ class DbQueryDurationMetricRecorderTest {
         assertTrue(actual.add(pair));
       } else {
         assertEquals(Meter.Type.GAUGE, id.getType());
-        boolean percentile = id.getName().equals("nk_db_query_duration_seconds.percentile");
-        assertEquals(
-            "nk_db_query_duration_seconds." + (percentile ? "percentile" : "histogram"),
-            id.getName());
-        String label = percentile ? "phi" : "le";
+        assertEquals("nk_db_query_duration_seconds.histogram", id.getName());
+        String label = "le";
         assertEquals(
             Set.of("query_id", "outcome", label),
             id.getTags().stream().map(t -> t.getKey()).collect(Collectors.toSet()));
@@ -183,7 +179,6 @@ class DbQueryDurationMetricRecorderTest {
     for (String pair : pairs) {
       for (String boundary : List.of("0.001", "0.01", "0.1", "1", "1.5"))
         expectedAuxiliary.add(pair + "/le/" + boundary);
-      expectedAuxiliary.add(pair + "/phi/0.95");
     }
     assertEquals(expectedAuxiliary, auxiliary);
   }
@@ -199,7 +194,7 @@ class DbQueryDurationMetricRecorderTest {
       for (var config : registry.configurations) {
         assertEquals(Boolean.TRUE, config.isPercentileHistogram());
         assertTrue(config.isPublishingHistogram());
-        assertArrayEquals(new double[] {.95}, config.getPercentiles());
+        assertArrayEquals(new double[0], config.getPercentiles());
         assertArrayEquals(
             new double[] {.001, .01, .1, 1., 1.5}, config.getServiceLevelObjectiveBoundaries());
       }

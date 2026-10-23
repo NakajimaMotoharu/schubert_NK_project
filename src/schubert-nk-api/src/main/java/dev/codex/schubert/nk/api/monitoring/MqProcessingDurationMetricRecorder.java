@@ -36,6 +36,7 @@ public final class MqProcessingDurationMetricRecorder {
           default -> throw new IllegalArgumentException("CONFIG_INVALID");
         };
     var installed = new EnumMap<Outcome, DistributionSummary>(Outcome.class);
+    if (detailed) ExactDurationMeterRegistry.requireCompatible(registry);
     if (detailed)
       for (var outcome : Outcome.values())
         installed.put(
@@ -50,7 +51,7 @@ public final class MqProcessingDurationMetricRecorder {
                     "outcome",
                     outcome.name())
                 .publishPercentileHistogram()
-                .publishPercentiles(.95)
+                .publishPercentiles()
                 .serviceLevelObjectives(.001, .01, .1, 1., 1.5)
                 .register(registry));
     observations = Map.copyOf(installed);

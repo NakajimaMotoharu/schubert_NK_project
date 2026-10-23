@@ -48,6 +48,7 @@ public final class DbQueryDurationMetricRecorder {
           default -> throw new IllegalArgumentException("CONFIG_INVALID");
         };
     var queries = new EnumMap<Query, Map<Outcome, DistributionSummary>>(Query.class);
+    if (detailed) ExactDurationMeterRegistry.requireCompatible(registry);
     if (detailed)
       for (var query : Query.values()) {
         var outcomes = new EnumMap<Outcome, DistributionSummary>(Outcome.class);
@@ -58,8 +59,8 @@ public final class DbQueryDurationMetricRecorder {
                   .baseUnit("seconds")
                   .tags("query_id", query.name(), "outcome", outcome.name())
                   .publishPercentileHistogram()
-                  // Double histogram preserves fractional seconds; fixed-boundary rounds to long.
-                  .publishPercentiles(.95)
+                  .publishPercentiles()
+                  // Finite exact buckets are provided by the required duration-capable registry.
                   .serviceLevelObjectives(.001, .01, .1, 1., 1.5)
                   .register(registry));
         queries.put(query, Map.copyOf(outcomes));
