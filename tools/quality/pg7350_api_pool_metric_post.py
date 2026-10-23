@@ -12,7 +12,7 @@ METHODS={
  'poolMetric007PartialProviderFailurePreservesIdentityAndBorrowedLifetime',
  'poolMetric008OwnersAndRepeatedObservationsCannotGrowLabelCardinality'}
 
-if __name__=='__main__':
+def configure():
     post=previous.configure()
     post.SLOT=host.SLOT;post.RUN='PG7348-api-pool-metric-host-v1'
     post.OUT=post.host.BASE/'PG7350-api-pool-metric-post-v1'
@@ -21,4 +21,7 @@ if __name__=='__main__':
     post.NAMES|={post.PREFIX+n for n in ('DbPoolMetricRecorder','DbPoolMetricRecorder$Counts','DbPoolMetricRecorder$State')}
     post.EXPECTED_SUITES[host.SUITES[3]]=dict(tests=8,failures=0,errors=0,skipped=0)
     post.TOTAL_TESTS=32;post.SOURCE_FILE_COUNT=9
-    post.main()
+    return post
+
+if __name__=='__main__':
+    configure().main()
