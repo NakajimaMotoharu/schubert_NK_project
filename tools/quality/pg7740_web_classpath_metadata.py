@@ -1,6 +1,5 @@
 """BUG1671: offline metadata goal only on existing successful normal snapshot, no repeated compile or PT."""
 import datetime
-import hashlib
 import json
 import os
 from pathlib import Path
