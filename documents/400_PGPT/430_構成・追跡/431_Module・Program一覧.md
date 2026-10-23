@@ -1,5 +1,7 @@
 # Module・Program一覧
 
+2026-10-24 Web monitoring追加：MediaStreamsMetricCollector constructor/collect/snapshot → RD171/UI252/SS333351/PG-D564/1704 MEDIACONN001..008・1705結果/7762全115source-99physical。source047当Web43/6・実11四100/全1768、供給Function→既3Gaugeの私有owner lock/未知化だけ。実stream/HTTP/outer期限/所有真正性は未受入、生成14/current普通/全8raw理由、正式/工数/whole451不変更。
+
 2026-10-24 Web monitoring追加：MediaStreamsMetricRecorder constructor/record/missing/snapshot/detailedMetricsRequested/private value → RD171/UI252/SS333351/PG-D563/1702 MEDIASTREAM001..008、1703結果/7734全113source-98physical。sourcea1b当Web35/5・実10四100/全1767、借用registryと供給3type Gaugeのみ、actual stream/配信上限・HTTP/Browser未受入。生成既14/current ordinary・raw全5理由、正式/工数/whole451不変更。
 
 2026-10-24追加：MonitoringModePolicy.verifyObservedRetention/RetentionConfiguration＋MonitoringRetentionConfigurationTest→RETCONF001～008/1700～1701/PG-D562/RD171/UI252§5/SS351§8～9。source323925a42/Batch245PT32suite・実60四100/全1766/111source・97追加physical・生成120別契約/raw28全理由、既Policy一変更/109不変/一Test新。設定の完全供給観測だけで、実retention backend/量/age/権限/配置・全actualHOLD/正式未受入、API130は歴史source153bとして保持。

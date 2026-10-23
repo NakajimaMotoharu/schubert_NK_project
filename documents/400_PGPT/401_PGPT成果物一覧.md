@@ -1,5 +1,7 @@
 # PGPT成果物一覧・進捗
 
+2026-10-24最新：[1704 Web stream取得結線仕様](../../evidence/01_PT/018_NK-OPS-001/1704_WebMediaStream取得結線_単体テスト仕様書.md)・[1705結果追跡](../../evidence/01_PT/018_NK-OPS-001/1705_WebMediaStream取得結線_結果・追跡.md)。source047947f49/当43PT6suite（新8＋必要既35）・実11四100(L248M53C11B71)/全1768/115trace/生成14/raw8全個別理由、新BUG0。借用Functionのread/当type unknown/publicationだけ、実stream/HTTP/外側期限/所有真正性・whole451/正式/工数率未受入。
+
 2026-10-24最新：[1702 Web media仕様](../../evidence/01_PT/018_NK-OPS-001/1702_WebMediaStreamMetric_単体テスト仕様書.md)・[1703結果追跡](../../evidence/01_PT/018_NK-OPS-001/1703_WebMediaStreamMetric_結果・追跡.md)。sourcea1b528547/当Web35PT5suite（元製造8＋必要既27）、実10四100(L232M50C10B67)/全1767/113trace/生成14/raw5全個別理由。BUG1671classpath前提・1672結果serialization工具を元失敗保全/元compile-解析再演0で限定閉鎖。実stream/admission/HTTP/Browser・正式/whole451/工数率へ加算0。
 
 2026-10-24最新：[1700保持設定完全観測仕様](../../evidence/01_PT/018_NK-OPS-001/1700_保持設定完全観測_単体テスト仕様書.md)・[1701結果追跡](../../evidence/01_PT/018_NK-OPS-001/1701_保持設定完全観測_結果・追跡.md)。source323925a42/当Batch245PT32suite・実60四100/全1766/111trace/生成120/raw28個別理由、既mode全code逆投影一致、新製造8/新BUG0。actual retention backend/保存量/permission/配置・正式/whole451へ加算0。API130は別source153bの歴史byte-onlyで算術合算しない。
