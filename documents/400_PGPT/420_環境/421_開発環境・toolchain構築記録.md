@@ -1,5 +1,7 @@
 # 開発環境・toolchain構築記録
 
+2026-10-23 API readonly count source：既JDK25.0.4/Maven3.9.12/SDK四Jar/静的工具だけ再利用、取得/導入/実driver接続0。PG7314/7316当16PT/単一sessionCRC0/L76M15C4B41全miss0、lint-Werror-NullAway/SB-CS0・PMD raw2は実TWR誤検知で7324個別分類/抑制0。7318六Main/Test compile-packageのみPT0、7320全1727Jar/三POM/五rule0。最初のSpotless `-pl schubert-nk-api` exit1はroot相対path不足、`-pl src/schubert-nk-api`でformat0後sourcefaf7固定。再現command/実行環境/全path hashは1627～1630と元manifest、実環境HOLD不変更。
+
 ## 2026-10-23 API Async job metricの既SDK再利用
 
 PG-D539/1623～1626、APIへ既core1.17.1を一compile nodeだけ追加。SDK四Jar/入手元/versionは既Batch/Webの下記記録と同じで、新規取得/除外/別backend0。再現はPG7300（API monitoring ordinary verify/8PT1suite）→7302（実3class/CRC/四100/静的0）→7304（六正常Main/Test compileのみ）→7306（全1726/四domain/三POM厳密）→7307（harness/POM十二改変拒否/旧DDL五状態）→7308/7310（全65src/当APIと歴史域の独立転用拒否）。API childは既真Batch harnessのsource role/artifact/不要fixture routing以外全XML同義で、親Enforcer/NullAway/lint-Werror/SB/JaCoCo四1.0を維持。新8へ歴史Batch169/Web23の成功やcoverageを移植せず、実DB/API/Root/exporter/IT-STを認定しない。

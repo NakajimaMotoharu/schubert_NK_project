@@ -1,5 +1,7 @@
 # Module・Program一覧
 
+2026-10-23追加（P018-09/C07共有費0、未正式受入）：API monitoring.persistence.AsyncJobCountRepository.read/state→ASYNCDB001～008/1627～1630/PG-D540、RD171/UI252/SS331332342351。sourcefaf7/7314真正API16PT2suite（新8）→7316実4四100/CRC0/lint-NullAway-SB-CS0・PMD raw2はJava既存変数TWR誤検知/7324対象source別個分類→7318六compileのみ→7320全1727/旧1669不変/当API5一致/歴史Batch43・Web10byteだけ/三POM厳密→7322全67source/58physical・7324五転用/alias拒否。borrowed readonly RC固定一SELECT/RS-PS close/接続変更0を独立proxyで検証、actual DB/driver/role/collector/Root/exporter/全体451未受入。
+
 2026-10-23追加（P018-09/C07共有費0、未正式受入）：API AsyncJobMetricRecorder(constructor/state/record/missing/snapshot/detail/Snapshot.value-totalJobs/State)→ASYNCGAUGE001～008/1623～1626/PG-D539、RD171/UI252/SS324331351。source72/7300真正API8PT1suite→7302実3四100/CRC0/静的0→7304六compileのみ→7306全1726/旧1669不変・当API4一致/歴史Batch43・Web10はbyteだけ/三POM厳密→7307十二静的negative/旧DDL五状態不変・7308全65source/57physical・7310五転用/alias拒否。当APIに旧Batch169/Web23を合算0、actual collector/Root/exporter/全体451未受入。
 
 2026-10-23追加（P018-09/C07共有費0、未正式受入）：TransferHealthMonitor(constructor/observe/snapshot/observedUsage/detail/Evaluation)→TRANSFERCONN001～008/1619～1622/PG-D538、RD171/UI252/SS341351。source743/7286真正169PT23suite→7288実42四100/CRC0→7290六compileのみ→7292全1722/旧1669不変・当Batch43一致/歴史Web10byteのみ・二POM厳密→7294全61source/53physical追跡・7296原28理由同byte全照合/新finding0。実collector/Root/制御/exporter/全体451は未受入。

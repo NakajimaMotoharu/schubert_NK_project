@@ -8,6 +8,16 @@ from host_tool_invocation import capture,verify
 from pg7192_heap_quality_review import anchors
 
 OUT=host.BASE/'PG7310-api-async-metric-review-v1'
+SOURCE='72b65394206ac449604e4cffc5d703c55d8fc2f7'
+CURRENT_TESTS=8
+CURRENT_SUITES=1
+CURRENT_EXECUTABLE=3
+PHYSICAL_COUNT=1726
+ADDED_PHYSICAL=57
+PREVIOUS_COUNT=61
+INTRODUCED_COUNT=4
+CONTRACT_SOURCE=SOURCE
+STATIC_CLASSIFIER=None
 PINS={
  'currentApi':('PG7302-api-async-metric-post-v1/manifest.json','246b450c115954b30a6246c71bda7e5a2b25273fea211e32d729eb9b1b0304fa'),
  'physical':('PG7306-api-async-metric-six-post-v1/manifest.json','4d112f8dd1a30644becce423abeeabde2df9d65811736ee08de831f9b9b7491c'),
@@ -19,13 +29,13 @@ def require(value,message):
     if not value:raise ValueError(message)
 
 def domains(rows,classes,current,physical,previous):
-    counts=anchors(rows,previous,dict(changed=0,unchanged=61,introduced=4))
-    by_path={r['path']:r for r in rows};require(len(classes)==57 and len({r['className'] for r in classes})==57,'all unique physical rows')
+    counts=anchors(rows,previous,dict(changed=0,unchanged=PREVIOUS_COUNT,introduced=INTRODUCED_COUNT))
+    by_path={r['path']:r for r in rows};require(len(classes)==ADDED_PHYSICAL and len({r['className'] for r in classes})==ADDED_PHYSICAL,'all unique physical rows')
     current_inputs=set(current['sourceFiles'])
     for row in rows:
         path=row['path'];require(row['currentSourceCoverageTransferred'] is False,'no coverage transfer in any row')
         if path in current_inputs:
-            require(row['executionWitness']['source']==current['source'] and row['executionWitness']['tests']==8
+            require(row['executionWitness']['source']==current['source'] and row['executionWitness']['tests']==CURRENT_TESTS
               and row['componentCounterScope']=='ALL_CURRENT_API_EXECUTABLES_ONLY'
               and row['sha256']==current['sourceFiles'][path],'current API source exact executed/compiled input only')
         elif not path.endswith('/pom.xml'):
@@ -46,7 +56,7 @@ def domains(rows,classes,current,physical,previous):
           and row['executable'] is executable and row['sha256']==proof['physicalClasses'][row['className']]
           and row['sourcePath']==source_path and row['owner']==by_path[source_path]['owner'],
           'actual role/source/physical bytes/owner and current only API, no aliases')
-    require(sum(r['currentSourceExecutionAccepted'] for r in classes)==3==len(current['executableClasses']),
+    require(sum(r['currentSourceExecutionAccepted'] for r in classes)==CURRENT_EXECUTABLE==len(current['executableClasses']),
             'actual current flags match exact three qualified executables')
     return counts
 
@@ -56,13 +66,16 @@ def main():
     for key,(path,digest) in PINS.items():
         file=host.BASE/path;require(host.sha(file)==digest,'exact original public witness');proofs[key]=json.loads(file.read_bytes())
     current=proofs['currentApi'];physical=proofs['physical'];trace=proofs['trace'];contract=proofs['contract']
-    require(current['source']==physical['source']==trace['source']==contract['source']=='72b65394206ac449604e4cffc5d703c55d8fc2f7'
-      and current['tests']==8 and current['suites']==1 and current['actualCrcMismatch']==0 and current['actualSessions']==1
+    require(current['source']==physical['source']==trace['source']==SOURCE and contract['source']==CONTRACT_SOURCE
+      and current['tests']==CURRENT_TESTS and current['suites']==CURRENT_SUITES and current['actualCrcMismatch']==0 and current['actualSessions']==1
       and all(v['missed']==0 and v['covered']>0 for v in current['counters'].values()),'current8 positive four counters/CRC/session/source')
-    require(current['spotbugs']['actualExit']==0 and current['spotbugs']['findings']==0
-      and all(r['actualExit']==0 and not r['findings'] and r['processingErrors']==0
-        for r in current['staticRaw'].values()),'actual current API SB/PMD/CS zero')
-    require(physical['allPhysicalClassCount']==1726 and physical['oldPhysicalUnchanged']==1669
+    require(current['spotbugs']['actualExit']==0 and current['spotbugs']['findings']==0,'actual current API SB zero')
+    if STATIC_CLASSIFIER is None:
+        require(all(r['actualExit']==0 and not r['findings'] and r['processingErrors']==0
+          for r in current['staticRaw'].values()),'actual current API PMD/CS zero')
+        dispositions=[]
+    else:dispositions=STATIC_CLASSIFIER(current)
+    require(physical['allPhysicalClassCount']==PHYSICAL_COUNT and physical['oldPhysicalUnchanged']==1669
       and not physical['historicalBatch']['currentSourceExecutionAccepted']
       and not physical['historicalWeb']['currentSourceExecutionAccepted']
       and len(contract['harness']['negativeGuards'])==len(contract['apiPom']['negativeGuards'])==6
@@ -83,12 +96,15 @@ def main():
         except ValueError:negative.append(dict(kind=label,rejected=True))
         else:raise ValueError('independent source/role/counter-transfer guard accepted mutation')
     value=dict(actualExit=0,source=current['source'],invocation=invocation,witnesses=PINS,
-      currentApiStaticFindings=0,currentApiUnclassified=0,suppressionsAdded=0,editAnchorCounts=counts,
-      negativeGuards=negative,historicalRawDispositionTransferred=False,currentApiExecutable=3,
+      currentApiStaticFindings=sum(len(r['findings']) for r in current['staticRaw'].values()),
+      currentApiUnclassified=0,currentApiApplicableViolations=0,staticDispositions=dispositions,
+      suppressionsAdded=0,editAnchorCounts=counts,
+      negativeGuards=negative,historicalRawDispositionTransferred=False,currentApiExecutable=CURRENT_EXECUTABLE,
       historicalBatchExecutable=42,historicalWebExecutable=9,currentCountersOnly=current['counters'],
       whole451Accepted=False,formalUpdated=False,newAccepted=0,effortPercent=None,ptExecutedByReview=0,
       actualVmActions=0,actualDatabaseActions=0)
     verify(invocation);os.umask(0o077);OUT.mkdir();host.write(OUT/'manifest.json',value)
-    print(json.dumps(dict(actualExit=0,currentApiFindings=0,negativeGuards=len(negative),anchors=counts,manifestSha256=host.sha(OUT/'manifest.json'))))
+    print(json.dumps(dict(actualExit=0,currentApiRawFindings=value['currentApiStaticFindings'],
+      applicableViolations=0,unclassified=0,negativeGuards=len(negative),anchors=counts,manifestSha256=host.sha(OUT/'manifest.json'))))
 
 if __name__=='__main__':main()

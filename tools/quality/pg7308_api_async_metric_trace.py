@@ -13,8 +13,12 @@ OUT=host.BASE/'PG7308-api-async-metric-trace-v1'
 SOURCE_COUNT=65
 PREVIOUS_COUNT=61
 CURRENT_TESTS=8
+CURRENT_SUITES=1
 CURRENT_EXECUTABLE=3
 ADDED_PHYSICAL=57
+SPEC_ID=1623
+RESULT_ID=1624
+PHYSICAL_DOC_ID=1625
 PINS={
  'currentApi':('PG7302-api-async-metric-post-v1/manifest.json','246b450c115954b30a6246c71bda7e5a2b25273fea211e32d729eb9b1b0304fa'),
  'physical':('PG7306-api-async-metric-six-post-v1/manifest.json','4d112f8dd1a30644becce423abeeabde2df9d65811736ee08de831f9b9b7491c'),
@@ -22,6 +26,7 @@ PINS={
 DOCS={1623:'1623_APIAsyncJobMetric_単体テスト仕様書.md',1624:'1624_APIAsyncJobMetric_実行結果.md',
       1625:'1625_APIAsyncJobMetric_実Jar・資格domain.md'}
 ALLOWED_NEW={'AsyncJobMetricRecorder.java','AsyncJobMetricRecorderTest.java','package-info.java','pom.xml'}
+TEST_ID_FAMILY='ASYNCGAUGE001..008'
 
 def require(value,message):
     if not value:raise ValueError(message)
@@ -53,17 +58,17 @@ def main():
         else:
             require(path.startswith('src/schubert-nk-api/') and Path(path).name in ALLOWED_NEW,'only declared four newly tracked API files')
             row=dict(item,kind='DEPENDENCY_DESCRIPTOR' if path.endswith('/pom.xml') else 'TEST' if path.endswith('Test.java') else 'MAIN',
-              rd='MON005..013',ui='252',ss='324,331,351',testIdFamily='ASYNCGAUGE001..008',specifications=refs(1623),
+              rd='MON005..013',ui='252',ss='324,331,351',testIdFamily=TEST_ID_FAMILY,specifications=refs(SPEC_ID),
               previousSourceByteSha256=None,sourceChangedSincePreviousTrace=False,sourceIntroducedSincePreviousTrace=True)
         if 'executionWitness' in row:row['historicalExecutionWitness']=row.pop('executionWitness')
         if path.endswith('/pom.xml'):
-            row.update(qualificationRelationship='CURRENT_NORMAL_COMPILE_DEPENDENCY_DESCRIPTOR',results=refs(1625),
+            row.update(qualificationRelationship='CURRENT_NORMAL_COMPILE_DEPENDENCY_DESCRIPTOR',results=refs(PHYSICAL_DOC_ID),
               compileWitness=dict(path=PINS['physical'][0],sha256=PINS['physical'][1],source=SOURCE),
               componentCounterScope='NOT_EXECUTABLE_CONFIGURATION',currentSourceCoverageTransferred=False)
         elif path.startswith('src/schubert-nk-api/') and '/monitoring/' in path:
             require(current['sourceFiles'].get(path)==item['sha256'],'every current API Main/Test/metadata actually executed/compiled snapshot input')
-            row.update(qualificationRelationship='CURRENT_API_EXECUTION_OR_DECLARED_METADATA',results=refs(1624,1625),
-              executionWitness=dict(path=PINS['currentApi'][0],sha256=PINS['currentApi'][1],source=SOURCE,tests=CURRENT_TESTS,suites=1),
+            row.update(qualificationRelationship='CURRENT_API_EXECUTION_OR_DECLARED_METADATA',results=refs(RESULT_ID,PHYSICAL_DOC_ID),
+              executionWitness=dict(path=PINS['currentApi'][0],sha256=PINS['currentApi'][1],source=SOURCE,tests=CURRENT_TESTS,suites=CURRENT_SUITES),
               componentCounterScope='ALL_CURRENT_API_EXECUTABLES_ONLY',currentSourceCoverageTransferred=False)
         else:
             if 'results' in row:row['historicalResults']=row.pop('results')
