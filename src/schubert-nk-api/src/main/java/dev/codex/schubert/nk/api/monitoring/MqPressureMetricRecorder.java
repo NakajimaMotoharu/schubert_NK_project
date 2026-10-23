@@ -12,6 +12,9 @@ import java.util.function.ToDoubleFunction;
 
 /** Supplied MQ pressure only; no Artemis management/JMS/control. RD171/UI252/SS321351;1693. */
 public final class MqPressureMetricRecorder {
+  private static final String QUEUE_LABEL = "queue";
+  private static final String ADDRESS_LABEL = "address";
+
   /** Caller-supplied current sample, no inferred capacity or cross-measurement invariant. */
   public record Snapshot(
       long messages,
@@ -50,37 +53,42 @@ public final class MqPressureMetricRecorder {
         install(
             registry,
             "nk_mq_queue_messages",
-            "queue",
+            QUEUE_LABEL,
             destination.queue(),
             row,
             Snapshot::messages);
         install(
-            registry, "nk_mq_queue_bytes", "queue", destination.queue(), row, Snapshot::queueBytes);
+            registry,
+            "nk_mq_queue_bytes",
+            QUEUE_LABEL,
+            destination.queue(),
+            row,
+            Snapshot::queueBytes);
         install(
             registry,
             "nk_mq_address_memory_bytes",
-            "address",
+            ADDRESS_LABEL,
             destination.address(),
             row,
             Snapshot::addressMemoryBytes);
         install(
             registry,
             "nk_mq_address_paged_bytes",
-            "address",
+            ADDRESS_LABEL,
             destination.address(),
             row,
             Snapshot::addressPagedBytes);
         install(
             registry,
             "nk_mq_paging_active",
-            "address",
+            ADDRESS_LABEL,
             destination.address(),
             row,
             sample -> sample.pagingActive() ? 1 : 0);
         install(
             registry,
             "nk_mq_page_files",
-            "address",
+            ADDRESS_LABEL,
             destination.address(),
             row,
             Snapshot::pageFiles);

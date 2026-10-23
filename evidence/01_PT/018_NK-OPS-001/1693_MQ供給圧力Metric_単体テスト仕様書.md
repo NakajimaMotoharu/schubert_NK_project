@@ -1,5 +1,7 @@
 # 1693 MQ供給圧力metric 単体テスト仕様書
 
+2026-10-24実測追補：初回d8df/7644は真正114/14、7646はL414/M82/C23/B199全miss0・SB/CS0だがPMD新duplicate literal1（全14）でBUG1670/YKT1421起票、当qualityは未受入。元計画の実22/physical93/全1762はnested Snapshot一型の計上漏れで、実23/physical94/全1763へ技術測定見積を訂正（工数成果/受入増とはしない）。SS literal/期待値・8caseは不変更、Main固定label定数化後の7658/7660/7662/7664/7666/7668で同sourceを再資格する。初回成功/未実行draftを変更後の成功へ転用しない。
+
 NK-OPS-001/P01809/C07/RD171 MON/UI252/SS351§6・8/SS321§4～5/PG-D559/group1911。MqPressureMetricRecorder constructor/record/missing/snapshot/detailedMetricsRequestedとSnapshot全method。actual broker/management/JMS/送受信/再送/Queue browse/control/DB/Rootは行わず、供給済の現在snapshotを表示する内部部品。
 
 SS321のliteral6addressと対応6queueをlabelに、SS351のqueue_messages/queue_bytes二gauge（queue label）とaddress_memory_bytes/address_paged_bytes/paging_active/page_files四gauge（address label）をDEBUGだけ計36series事前登録。初期/欠測はNaN、真0と区別。STANDARDは登録/保持0。観測は一destination単位のimmutable snapshotでpublication、metric scrape全6fieldの横断atomic性や実source/timeを保証しない。件数/byte/memory/paged/filesは独立非負longで、異なる集計/制御値の同一化・容量比/最大値clamp・flagからbyte捏造をしない。booleanは既知true/falseだけ、unknownはwhole sample欠落とする。
