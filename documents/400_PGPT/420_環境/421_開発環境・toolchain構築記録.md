@@ -1,5 +1,7 @@
 # 開発環境・toolchain構築記録
 
+2026-10-23 WebLog滞留警報：既SDK4/normal六compile API専用2/全toolchain再利用・導入取得0。3174583f4/184普通PT25suite/実44四100/CRC0/六正常Main-Test compile0/PT0、全1745Main・旧1669byte不変/三POM/当五rule0/全90trace。raw28個別理由と生成新6＋既60samebyte/current ordinaryを結合、環境/command/time/hashは1673。新marker/外部接続/実queue観測0、mode-neutral pure health kernelのみ。
+
 2026-10-23 API Outbox二family結線：既toolchain/SDK/六aux/harness不変更/導入取得0、69a835b2b/98普通PT12suite/実20四100/CRC0/六正常Main-Test compile0/PT0、全1743Main/旧1669byte不変/三POM/当五rule0/全88trace。raw13の新private lock/同一failure未知化三contextを正確source行と独立ordinary契約へ個別分類、抑制・有効違反0。環境/command/time/hashは1668～1671、実DB/Clock/driver接続0。
 
 2026-10-23 API Outbox観測Repository：既toolchain/SDK/六aux/harness不変更、332f970a7/90普通PT11suite/実19四100/CRC0/六正常Main-Test compile0/PT0、全1742Main・旧1669byte不変/三POM/当五rule0/全86trace。raw10の新existing-variable TWR二件は正確source/row/column・全close故障fixtureへ個別理由、全未分類/有効違反0。導入取得0/実DB-driver接続0、環境/command/time/hashは1664～1667。
