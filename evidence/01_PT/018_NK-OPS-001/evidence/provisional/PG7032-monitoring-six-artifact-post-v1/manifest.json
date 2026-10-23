@@ -1,0 +1,251 @@
+{
+  "actualDatabaseActions": 0,
+  "actualExit": 0,
+  "actualVmActions": 0,
+  "architecture": {
+    "canariesReplayed": false,
+    "originalCanaryQualificationSha256": "7f80c3f1b1f1356ba51ada7f6c7dc55dfe82756072edcf3c7e88dcc164bbbb1f",
+    "receipt": {
+      "actualExit": 0,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-cp",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg7032-monitoring-six-artifact-post-v1/tool-classes:/home/mini/codex/project1/work/toolchain/architecture/archunit-1.4.2/archunit-1.4.2.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/slf4j/slf4j-api/2.0.18/slf4j-api-2.0.18.jar",
+        "ModuleDependencyAudit",
+        "protocol=/home/mini/codex/project1/work/pgpt-runs/PG379/pg7030-monitoring-six-compile-v1/snapshot/src/schubert-nk-protocol/target/schubert-nk-protocol-0.1.0-SNAPSHOT.jar",
+        "storage=/home/mini/codex/project1/work/pgpt-runs/PG379/pg7030-monitoring-six-compile-v1/snapshot/src/schubert-nk-storage/target/schubert-nk-storage-0.1.0-SNAPSHOT.jar",
+        "bootstrap=/home/mini/codex/project1/work/pgpt-runs/PG379/pg7030-monitoring-six-compile-v1/snapshot/src/schubert-nk-bootstrap/target/schubert-nk-bootstrap-0.1.0-SNAPSHOT.jar",
+        "api=/home/mini/codex/project1/work/pgpt-runs/PG379/pg7030-monitoring-six-compile-v1/snapshot/src/schubert-nk-api/target/schubert-nk-api-0.1.0-SNAPSHOT.jar",
+        "web=/home/mini/codex/project1/work/pgpt-runs/PG379/pg7030-monitoring-six-compile-v1/snapshot/src/schubert-nk-web/target/schubert-nk-web-0.1.0-SNAPSHOT.jar",
+        "batch=/home/mini/codex/project1/work/pgpt-runs/PG379/pg7030-monitoring-six-compile-v1/snapshot/src/schubert-nk-batch/target/schubert-nk-batch-0.1.0-SNAPSHOT.jar"
+      ],
+      "endUTC": "2026-10-23T00:44:08.303640+00:00",
+      "startUTC": "2026-10-23T00:44:06.122945+00:00",
+      "stderr": "audit-six.stderr.safe.log",
+      "stderrSha256": "2c58b87a0350a39bb1c3b5f4891defeeb9a785e84aa11a466dc9ddb21253bf58",
+      "stdout": "audit-six.stdout.safe.log",
+      "stdoutSha256": "b470fc0cc89d85074a57353b62c5785233e8547dd98d49c9cc4ffb37d2932736"
+    },
+    "result": {
+      "calls": 55092,
+      "dependencies": 77309,
+      "findings": [],
+      "imported": 1684,
+      "modules": {
+        "api": 408,
+        "batch": 588,
+        "bootstrap": 117,
+        "protocol": 176,
+        "storage": 80,
+        "web": 315
+      },
+      "physical": 1684,
+      "rules": {
+        "CONTROLLER_BOUNDARY": 0,
+        "FRAMEWORK_FENCES": 0,
+        "INTERNAL_OWNER": 0,
+        "MODULE_EDGES": 0,
+        "REPOSITORY_DIRECTION": 0
+      },
+      "version": "1.4.2"
+    },
+    "toolSourceSha256": "108e8b3d8be2bacd0b6e0d9a158fa65212354126a34fd7181d80623fbdc6fbb1"
+  },
+  "command": "python3 -B tools/quality/pg7032_monitoring_six_artifact_post.py",
+  "compileManifestSha256": "e795a9ca9ff3133f3e8aa0a32e615243847708486765073cd1a74a47101abe97",
+  "componentClassHashesEqualFreshProductionJar": true,
+  "currentComponentQualification": {
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG7028-monitoring-pipeline-post-v1/manifest.json",
+    "sha256": "aeabd8ec58d30a538af72ca839a893418d83bb7fd5c43242b5b312e526ef58e7",
+    "tests": 48
+  },
+  "effortPercent": null,
+  "existingChangedClassCount": 0,
+  "existingPhysicalClassCount": 1669,
+  "formalUpdated": false,
+  "fullRegressionStillRequiredForFormalAcceptance": true,
+  "jars": {
+    "api": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg7030-monitoring-six-compile-v1/snapshot/src/schubert-nk-api/target/schubert-nk-api-0.1.0-SNAPSHOT.jar",
+      "sha256": "9faa56f51bfbfef4e25a73d601b7a49703ec2bf3617d1312c50483ba0b91e58e"
+    },
+    "batch": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg7030-monitoring-six-compile-v1/snapshot/src/schubert-nk-batch/target/schubert-nk-batch-0.1.0-SNAPSHOT.jar",
+      "sha256": "a555495b360058f85c8c5ba3db7539b7974f9e8a7513ae6a80948b62995a898c"
+    },
+    "bootstrap": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg7030-monitoring-six-compile-v1/snapshot/src/schubert-nk-bootstrap/target/schubert-nk-bootstrap-0.1.0-SNAPSHOT.jar",
+      "sha256": "0c1a99de2310e6f9dd6790bbdbef1098a4b96cfb36e9fa8e1e71c61f26e0efcc"
+    },
+    "protocol": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg7030-monitoring-six-compile-v1/snapshot/src/schubert-nk-protocol/target/schubert-nk-protocol-0.1.0-SNAPSHOT.jar",
+      "sha256": "3a2790b089520d65720840795473e9be89fc385542a44c4aae1fef259b5da723"
+    },
+    "storage": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg7030-monitoring-six-compile-v1/snapshot/src/schubert-nk-storage/target/schubert-nk-storage-0.1.0-SNAPSHOT.jar",
+      "sha256": "0214342a19efaaffe02aa712b315b2d6439d61582fda8224272cc55b45ecb48e"
+    },
+    "web": {
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg7030-monitoring-six-compile-v1/snapshot/src/schubert-nk-web/target/schubert-nk-web-0.1.0-SNAPSHOT.jar",
+      "sha256": "365aab27152249c6f2c162e9a8e3af77b505c39c04dc00fb7cf4aeb1480f03ca"
+    }
+  },
+  "newAccepted": 0,
+  "newExecutableClassCount": 14,
+  "newMetadataClassCount": 1,
+  "newPhysicalClassCount": 15,
+  "newPhysicalClasses": {
+    "batch:dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$CauseClearance.class": "9b38a3b425429d131cdc8704285df173c55ad4c05e5c860dd4a815b60c5b23b9",
+    "batch:dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Condition.class": "49b34f2b7a8daa57055566a0b422f3a80370b51f2a50355690404f16c07e731b",
+    "batch:dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Event.class": "5d3a5f35f93162b0294e2dc423ec12f650d18fce7ea13d6dd1893445ddcfbcf7",
+    "batch:dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Service.class": "f363d58c5d7172041618f095846a5c28b8079e63c430c99b0067a2858f469bb5",
+    "batch:dev/codex/schubert/nk/batch/monitoring/AlertLifecycle$Severity.class": "4a90d8e671376316fe3af1709ae3ed7f91e4ab0cee8a8d8a2bcec405ade38ca6",
+    "batch:dev/codex/schubert/nk/batch/monitoring/AlertLifecycle.class": "532418b911214483712008c5f1e698155a89921e7a522324a8c7d829d45c73ac",
+    "batch:dev/codex/schubert/nk/batch/monitoring/AlertRegistry.class": "984380ad7441d2d63beaa62a8dcdf37ffe39912029b1c539e8fe6907e5d2ace4",
+    "batch:dev/codex/schubert/nk/batch/monitoring/AlertThresholds.class": "437b0cc331ddc2b3dbeff74190a03031316752d94d8954280ca90c233eec3408",
+    "batch:dev/codex/schubert/nk/batch/monitoring/MetricContract$Kind.class": "5f53b739b54db71413fca668c0a416066529d7c9652eb245dbe8cf23075300df",
+    "batch:dev/codex/schubert/nk/batch/monitoring/MetricContract.class": "a9b149b9df0620c6d863fcb9588b87e8e5ac28ad77a8a55a7c4dbd514323a280",
+    "batch:dev/codex/schubert/nk/batch/monitoring/MonitoringModePolicy$DetailService.class": "11826125298283615d52ec3920092ae0334bc052a4fd04dca51ec06c20cf7030",
+    "batch:dev/codex/schubert/nk/batch/monitoring/MonitoringModePolicy.class": "046c34e4730b28501beaeff9a0e5e3c096e83434647a707669477edc4f858ce8",
+    "batch:dev/codex/schubert/nk/batch/monitoring/MonitoringPolicyEngine.class": "831863c00f25e0141acb3eaa080423d60cb2ec355f0215e0b01e01169e973981",
+    "batch:dev/codex/schubert/nk/batch/monitoring/ObservationContext.class": "b3ff5e32cbbc02848950edf814043343fb53c25eda1968aa1e8ae4dafed23644",
+    "batch:dev/codex/schubert/nk/batch/monitoring/package-info.class": "be87566494520630402b9cc7c20713ac5fccac9b97505cbe551abc6c24843077"
+  },
+  "newSourceDelta": [
+    {
+      "acceptance": "NOT_WHOLE_LEAF_ACCEPTED",
+      "owner": "WBS-P018-09",
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/AlertLifecycle.java",
+      "sha256": "0941987e4f555a42df0c993f71a9f5e8b934adaf2a15a777389f813bed08774c",
+      "sharedAdditionalCostPp": 0,
+      "sharedReference": "WBS-C07"
+    },
+    {
+      "acceptance": "NOT_WHOLE_LEAF_ACCEPTED",
+      "owner": "WBS-P018-09",
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/AlertRegistry.java",
+      "sha256": "afca594b33bc9c92f988ddf519b75b34aaab6eeb0d546e1003465718b1933ace",
+      "sharedAdditionalCostPp": 0,
+      "sharedReference": "WBS-C07"
+    },
+    {
+      "acceptance": "NOT_WHOLE_LEAF_ACCEPTED",
+      "owner": "WBS-P018-09",
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/AlertThresholds.java",
+      "sha256": "ed9cb0ffcbe9a80791410f7008e97746e1d6517e78fd60a505c56e1c6ea2b15b",
+      "sharedAdditionalCostPp": 0,
+      "sharedReference": "WBS-C07"
+    },
+    {
+      "acceptance": "NOT_WHOLE_LEAF_ACCEPTED",
+      "owner": "WBS-P018-09",
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/MetricContract.java",
+      "sha256": "27f647517fc9bee05fdb31dc702bb10a3f4b7cd5c5c59932c55a7a9b7031a54a",
+      "sharedAdditionalCostPp": 0,
+      "sharedReference": "WBS-C07"
+    },
+    {
+      "acceptance": "NOT_WHOLE_LEAF_ACCEPTED",
+      "owner": "WBS-P018-09",
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/MonitoringModePolicy.java",
+      "sha256": "c62937d7cdd6eb053f78580e5a6d889ae464483db272de45ec0b8d93c70121c9",
+      "sharedAdditionalCostPp": 0,
+      "sharedReference": "WBS-C07"
+    },
+    {
+      "acceptance": "NOT_WHOLE_LEAF_ACCEPTED",
+      "owner": "WBS-P018-09",
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/MonitoringPolicyEngine.java",
+      "sha256": "d7df811befb430d563aacc6332adb4f4ff3f6f8e9cb5e17d04a0efcf20b8d61d",
+      "sharedAdditionalCostPp": 0,
+      "sharedReference": "WBS-C07"
+    },
+    {
+      "acceptance": "NOT_WHOLE_LEAF_ACCEPTED",
+      "owner": "WBS-P018-09",
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/ObservationContext.java",
+      "sha256": "5685db8a219acb224d463f9372c403ad9dfe36ac1d0c6a0fad308d377454cb26",
+      "sharedAdditionalCostPp": 0,
+      "sharedReference": "WBS-C07"
+    },
+    {
+      "acceptance": "NOT_WHOLE_LEAF_ACCEPTED",
+      "owner": "WBS-P018-09",
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/package-info.java",
+      "sha256": "009823dd0566a5c0e2a7f06af4b540c122629bec50003bc1585d5303c488d924",
+      "sharedAdditionalCostPp": 0,
+      "sharedReference": "WBS-C07"
+    },
+    {
+      "acceptance": "NOT_WHOLE_LEAF_ACCEPTED",
+      "owner": "WBS-P018-09",
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/AlertLifecycleTest.java",
+      "sha256": "7f711d2ab2e633d4c8d12b95083008ae43c00f99c759d1731a0023e13d958f96",
+      "sharedAdditionalCostPp": 0,
+      "sharedReference": "WBS-C07"
+    },
+    {
+      "acceptance": "NOT_WHOLE_LEAF_ACCEPTED",
+      "owner": "WBS-P018-09",
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/AlertRegistryTest.java",
+      "sha256": "b497ed64ca41a52d63520130560264c72c3a8eaffdcd5d49a3da9a6b1ea2f381",
+      "sharedAdditionalCostPp": 0,
+      "sharedReference": "WBS-C07"
+    },
+    {
+      "acceptance": "NOT_WHOLE_LEAF_ACCEPTED",
+      "owner": "WBS-P018-09",
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/AlertThresholdsTest.java",
+      "sha256": "e082b4f23593eff63f15256a04ba265db6c8d13adef2036d94e01e363f9d7533",
+      "sharedAdditionalCostPp": 0,
+      "sharedReference": "WBS-C07"
+    },
+    {
+      "acceptance": "NOT_WHOLE_LEAF_ACCEPTED",
+      "owner": "WBS-P018-09",
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/MetricContractTest.java",
+      "sha256": "3696e81cea6f82f010526ed2ca39aeceed718bd65c7fad84b4cf2d8a95e24f09",
+      "sharedAdditionalCostPp": 0,
+      "sharedReference": "WBS-C07"
+    },
+    {
+      "acceptance": "NOT_WHOLE_LEAF_ACCEPTED",
+      "owner": "WBS-P018-09",
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/MonitoringModePolicyTest.java",
+      "sha256": "525d72e00ac97b3510537e62426e91f25e0129f3d8812e34380f1efda4b4663c",
+      "sharedAdditionalCostPp": 0,
+      "sharedReference": "WBS-C07"
+    },
+    {
+      "acceptance": "NOT_WHOLE_LEAF_ACCEPTED",
+      "owner": "WBS-P018-09",
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/MonitoringPolicyEngineTest.java",
+      "sha256": "65a4dab85ffe67d49d568a6be64ab2f0c5ab9f9515a6fdecefd6eb78e166e53f",
+      "sharedAdditionalCostPp": 0,
+      "sharedReference": "WBS-C07"
+    },
+    {
+      "acceptance": "NOT_WHOLE_LEAF_ACCEPTED",
+      "owner": "WBS-P018-09",
+      "path": "src/schubert-nk-batch/src/test/resources/monitoring/metric-catalog.tsv",
+      "sha256": "1447faabc6f056120561e4356dd75696ace4df613b6379246af29f9837fc43dc",
+      "sharedAdditionalCostPp": 0,
+      "sharedReference": "WBS-C07"
+    }
+  ],
+  "original4222Repeated": false,
+  "original44Repeated": false,
+  "originalWholeQualification": {
+    "notRelabeledAsCurrentPass": true,
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG6930-current4222-cases/qualification.json",
+    "sha256": "728682a9eb414a4d4ef08abb84bcbd9237a8269a35a82d0f86c5bce97d596731",
+    "source": "e7d64fda2453e906ee6ccc5fe718e5c29841e4aa"
+  },
+  "physicalClassCount": 1684,
+  "source": "c285c38ac4fcc3f16bfd3d2051ec76c352227f74",
+  "targetsLoadedOrInitialized": false,
+  "testsExecutedByPost": 0,
+  "timeUTC": "2026-10-23T00:44:08.304408+00:00",
+  "toolSha256": "098364b11d5e9fc1b5b31dddc23bb2f1d0d96c69a299d27f0d95f9f6db44c882",
+  "whole451Accepted": false
+}
