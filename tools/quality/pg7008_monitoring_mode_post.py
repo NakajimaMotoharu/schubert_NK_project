@@ -24,6 +24,7 @@ METHODS = {
 EXPECTED_SUITES = {SUITE:dict(tests=7,failures=0,errors=0,skipped=0)}
 TOTAL_TESTS = 7
 SOURCE_FILE_COUNT = 3
+SOURCE_ROOT_PREFIX = 'src/schubert-nk-batch/'
 RUN = 'PG7006-monitoring-pure-host-v1'
 
 
@@ -47,7 +48,7 @@ def main():
     require(all(host.sha(snapshot/p)==h for p,h in begin['inputHashes'].items()),'all immutable original source/POM hashes')
     for p,h in original['xmlHashes'].items():
         require(host.sha(target/'surefire-reports'/p)==h,'actual original XML hash')
-    source_files = {p:h for p,h in begin['inputHashes'].items() if '/monitoring/' in p and p.endswith('.java')}
+    source_files = {p:h for p,h in begin['inputHashes'].items() if p.startswith(SOURCE_ROOT_PREFIX) and '/monitoring/' in p and p.endswith('.java')}
     require(len(source_files)==SOURCE_FILE_COUNT and all(host.sha(host.ROOT/p)==h for p,h in source_files.items()),'all declared current Main/Test source files exact')
     physical = {p.relative_to(target/'classes').as_posix():host.sha(p) for p in (target/'classes').rglob('*.class')}
     require(set(physical)=={n+'.class' for n in NAMES}|{PREFIX+'package-info.class'},'all declared executable plus metadata class')
