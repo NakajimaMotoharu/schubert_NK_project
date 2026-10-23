@@ -149,7 +149,7 @@ class ExactDurationMeterRegistryTest {
       assertEquals(0, empty.count());
       assertEquals(0, empty.total());
       assertEquals(0, empty.max());
-      empty.histogramCounts()[0] = new CountAtBucket(99, 99);
+      empty.histogramCounts()[0] = new CountAtBucket(99.0, 99);
       cdf(summary, 0, 0, 0, 0, 0);
       summary.record(1);
       var first = summary.takeSnapshot();
@@ -208,7 +208,7 @@ class ExactDurationMeterRegistryTest {
 
   @Test
   void exDur006GenericRegistryAcceptedOnlyWhenDetailedObservationDisabled() {
-    try (var registry = new SimpleMeterRegistry(SimpleConfig.DEFAULT, FIXED)) {
+    try (var registry = new GenericRegistry()) {
       assertFalse(
           new DbQueryDurationMetricRecorder(registry, "STANDARD").detailedMetricsRequested());
       assertFalse(
@@ -224,6 +224,12 @@ class ExactDurationMeterRegistryTest {
       assertThrows(
           IllegalArgumentException.class, () -> ExactDurationMeterRegistry.requireCompatible(null));
       assertEquals(0, registry.getMeters().size());
+    }
+  }
+
+  private static final class GenericRegistry extends SimpleMeterRegistry implements AutoCloseable {
+    GenericRegistry() {
+      super(SimpleConfig.DEFAULT, FIXED);
     }
   }
 
