@@ -1,5 +1,9 @@
 # 1708 Batch integrity metric 単体テスト仕様書
 
+2026-10-24 BUG1674/YKT1425追補：初期7788は253case/FES0だがbundle coverage exit1、Repository BatchStep.backup()のL1/M1未網羅で未合格。既Batch metricのStepはmonitoring.BatchMetricContract.Stepという別enumであり、下段の「既Batch metricでも利用中」は同じ十step概念を指す誤った型同一視として訂正する。初期source/tool/失敗manifestをcde30b746へ不変保持、INTEGRITYMET001へSS341のBACKUP_DB/CONFIGのみbackup=true・他八false、全typed values/配列分離/valueOf/未知/nullを独立追加する。Production Mainは変更しない。
+
+修正後7802普通253/33→7790監視62独立→7804正常六compile→7794全1772/7796全119-103→追加7806で**原1669内**Repository BatchStep一classのsame exec/CRC/counter/静的/owner WBS-P017-02を別検証（追加physical103へ重複加算0）→7798生成既120＋新Area2＋当依存2=124直接契約/全raw理由。現在のsource/rootと旧成功を混同せず1709へ原結果を分離保存する。Test ID/新製造8/群開始見積・上位/期待値の根拠を変更しない。
+
 NK-OPS-001/P01809/C07/RD171/UI252/SS341351/PG-D566。IntegrityFailureMetricRecorder constructor/record/detailedMetricsRequested、Area.parse/values/valueOf。新INTEGRITYMET001..008＋必要既Batch245を当253/33で普通実行予定。SS351 `nk_integrity_failures_total{area,step}`、Hash/path/configの三分類を内部Area HASH/PATH/CONFIGへ閉じ、stepは既BatchStepの十値だけ。DEBUG30counter事前登録/STD詳細0、既MonitoringModePolicy strict契約を再利用する。Batch供給失敗eventの計数部品であり、全サービスの検査/分類/実失敗/永続incident/調査・修復/手動退役/保護警報auto-closeを実装・認定しない。
 
 | Test ID | 目的/fixture・操作/独立期待値 |

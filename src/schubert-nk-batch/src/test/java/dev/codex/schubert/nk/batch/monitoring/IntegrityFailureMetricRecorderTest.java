@@ -132,6 +132,28 @@ class IntegrityFailureMetricRecorderTest {
 
   @Test
   void integrityMetric001ThirtyCanonicalBatchSeriesStartAtZero() {
+    BatchStep[] expectedSteps = {
+      BatchStep.BACKUP_DB,
+      BatchStep.BACKUP_CONFIG,
+      BatchStep.CLEAN_NOTIFICATION,
+      BatchStep.CLEAN_QUESTION,
+      BatchStep.CLEAN_SESSION,
+      BatchStep.CLEAN_INBOX_OUTBOX,
+      BatchStep.CLEAN_LOG,
+      BatchStep.CLEAN_BATCH_RUN,
+      BatchStep.CLEAN_TRANSFER,
+      BatchStep.CLEAN_EXPIRY
+    };
+    assertArrayEquals(expectedSteps, BatchStep.values());
+    var returned = BatchStep.values();
+    returned[0] = BatchStep.CLEAN_EXPIRY;
+    assertArrayEquals(expectedSteps, BatchStep.values());
+    for (int index = 0; index < expectedSteps.length; index++) {
+      assertSame(expectedSteps[index], BatchStep.valueOf(STEPS.get(index)));
+      assertEquals(index < 2, expectedSteps[index].backup());
+    }
+    assertThrows(IllegalArgumentException.class, () -> BatchStep.valueOf("unknown-step"));
+    assertThrows(NullPointerException.class, () -> BatchStep.valueOf(null));
     try (var registry = new Registry()) {
       var recorder = new IntegrityFailureMetricRecorder(registry, "DEBUG");
       assertTrue(recorder.detailedMetricsRequested());
