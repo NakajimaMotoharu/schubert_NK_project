@@ -1,5 +1,7 @@
 # Module・Program一覧
 
+2026-10-24現行：AlertLifecycle.normalとAlertLifecycleTest/AlertRegistryTest/MonitoringPolicyEngineTest/MonitoringMissingObservationTest→PROTECTEDALERT001～002・ALERTREG002・MONPIPE003・MONMISSING001/1681～1682/PG-D553/RD171/UI252/SS351§12。source3a863d360/204PT・実49四100/全1750/全94trace五編集、BUG1667-YKT1418自動close禁止限定CLOSED。実手動調査/退役/権限・永続は未受入、全体正式へ合算0。
+
 2026-10-24現行訂正完了：Main三/Test三のAsync byte独立入力/ByteUsage/Evaluation、1679～1680/PG-D552/BUG1665-YKT1416。source8f6b3bff2で202PT27suite・実49四100・全1750Main/94source/81physicaltrace/生成82/raw28全分類を確認、元192/200は歴史で割合要件PASSに流用0。実source/control・正式/whole451は未受入。
 
 2026-10-24現行：ExpiryBacklogMonitor/Evaluation→EXPIRYMON001～008/1676～1677/source6247/200PT。AsyncのAlertThresholds・MonitoringPolicyEngine・AsyncQueueMonitor/ByteUsage/Evaluation→THRESH003/013/014・MONPIPE002/003/007・ASYNCQUEUE001～008・ASYNCBYTE001～002/1679/PG-D552/BUG1665-YKT1416/RD171/UI252/SS321351。source8f6b3bff2の当202PT/27suite成功・独立品質未了、旧件数比PG-D550は歴史であり現行仕様ではない。actual観測/control・正式/whole451は未受入。

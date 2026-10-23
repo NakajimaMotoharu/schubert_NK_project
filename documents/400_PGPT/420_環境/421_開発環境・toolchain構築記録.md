@@ -1,5 +1,7 @@
 # 開発環境・toolchain構築記録
 
+2026-10-24自動close禁止：既toolchain/SDK再利用・導入取得0。source9c初回204F2/normal六compilePT0を保持し、旧oracle二追補source3aの204/27・実49四100/CRC0/新正常六compile/全1750/当五rule/全94traceを別資格。PMD全28は二source行移動をexact二行guard挿入へ結合し抑制0、全環境/command/日時/hash/失敗原因は1682。actual操作0。
+
 2026-10-24是正完了：source8f6b3bff2/202PT27suite/実49四100/六正常compile/全1750Main/SDK各pin一致/当五rule0・取得0。工具7542旧raw位置guard exit1を保存→新7543で一件の明示行移動context再認証・PT再演0、全command/OS/JDK/tool/time/hashは1680。最新fresh25/75・専有費N/Tnull、全actual操作0。
 
 2026-10-24：Expiry6247/200の全環境/commandは1677。Async byte単位是正8f6b3bff2/1679は既JDK25.0.4/Maven3.9.12/SDK4＋正常六compile API-only2をoffline再利用/導入取得0。host初回PYTHONPATH pyflakes不足import exit1/PT0/job未作成、正規PYTHONPATHで唯一7532実202/27成功、同source独立/六compile検証中。実broker/DB/VM操作0、旧成功の転用0。
