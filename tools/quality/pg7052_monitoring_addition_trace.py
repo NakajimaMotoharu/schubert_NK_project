@@ -6,10 +6,17 @@ import subprocess
 from pathlib import Path
 
 import pg6966_chr_adapter_host as host
+from host_tool_invocation import capture,verify
 
 SOURCE = '6ebb81e1173e001a627374b533b34766b44785b0'
 ORIGINAL = 'e7d64fda2453e906ee6ccc5fe718e5c29841e4aa'
 OUT = host.BASE/'PG7052-monitoring-addition-trace-v1'
+COMPONENT_LABEL='PG7046-monitoring-status-post-v1'
+PHYSICAL_LABEL='PG7050-monitoring-status-six-post-v1'
+COMPONENT_TESTS=54
+COMPONENT_SUITES=7
+SOURCE_COUNT=19
+PHYSICAL_COUNT=16
 PINS = {
  'PG7046-monitoring-status-post-v1':'bdee1eecf46db2f6df358c80c344d12e04463414d09e9cc1c77e8068bd62ea74',
  'PG7050-monitoring-status-six-post-v1':'740a1e6cecdc2a732ed0c32ed509ff1e8a76de694d3214de93310bb63a583d3f',
@@ -32,17 +39,18 @@ def require(value, message):
 
 
 def main():
+    invocation=capture(Path(__file__))
     require(not OUT.exists(),'new-only trace publication')
     witnesses={}
     for label,digest in PINS.items():
         path=host.BASE/label/'manifest.json'
         require(host.sha(path)==digest,'pinned original post, no replay')
         witnesses[label]=json.loads(path.read_bytes())
-    component=witnesses['PG7046-monitoring-status-post-v1']
-    physical=witnesses['PG7050-monitoring-status-six-post-v1']
-    require(component['source']==physical['source']==SOURCE and component['tests']==54
+    component=witnesses[COMPONENT_LABEL]
+    physical=witnesses[PHYSICAL_LABEL]
+    require(component['source']==physical['source']==SOURCE and component['tests']==COMPONENT_TESTS
             and component['actualCrcMismatch']==0 and physical['existingChangedClassCount']==0,
-            'exact54 source and old physical bytes, no cross-source inferred result')
+            'exact component source and old physical bytes, no cross-source inferred result')
     documents={}
     for path in (host.ROOT/'evidence/01_PT/018_NK-OPS-001').glob('*.md'):
         prefix=path.name.partition('_')[0]
@@ -73,7 +81,7 @@ def main():
           rd='MON005..013' if delta['owner']=='WBS-P018-09' else 'OPS005/OPS009/SYS002',
           ui='252' if delta['owner']=='WBS-P018-09' else '251/253',
           ss='351 sections6..10' if delta['owner']=='WBS-P018-09' else '343'))
-    require(len(rows)==19 and len({r['path'] for r in rows})==19,'all19 unique additions traced')
+    require(len(rows)==SOURCE_COUNT and len({r['path'] for r in rows})==SOURCE_COUNT,'all declared unique additions traced')
     class_rows=[]
     prefix='src/schubert-nk-batch/src/main/java/'
     bypath={r['path']:r for r in rows}
@@ -82,17 +90,18 @@ def main():
         source_path=prefix+entry.removesuffix('.class').split('$',1)[0]+'.java'
         require(role=='batch' and source_path in bypath,'every actual new nested/metadata class has one source owner')
         class_rows.append(dict(className=name,sha256=digest,source=source_path,owner=bypath[source_path]['owner']))
-    require(len(class_rows)==16,'all16 actual added physical classes, not inferred from source count')
+    require(len(class_rows)==PHYSICAL_COUNT,'all actual added physical classes, not inferred from source count')
     value=dict(actualExit=0,source=SOURCE,originalSource=ORIGINAL,
       timeUTC=datetime.datetime.now(datetime.timezone.utc).isoformat(),
       head=subprocess.check_output(['git','rev-parse','HEAD'],cwd=host.ROOT,text=True).strip(),
-      toolSha256=host.sha(Path(__file__)),originalPosts=PINS,sourceRows=rows,physicalRows=class_rows,
-      originalExistingClassBytesUnchanged=1669,addedPhysicalClasses=16,
-      ordinaryMonitoringRun=dict(source=SOURCE,tests=54,suites=7,counters=component['counters']),
+      toolSha256=host.sha(Path(__file__)),invocation=invocation,originalPosts=PINS,sourceRows=rows,physicalRows=class_rows,
+      originalExistingClassBytesUnchanged=1669,addedPhysicalClasses=PHYSICAL_COUNT,
+      ordinaryMonitoringRun=dict(source=SOURCE,tests=COMPONENT_TESTS,suites=COMPONENT_SUITES,counters=component['counters']),
       separateConfigurationRunsNotSummed=True,default485SourceNotReplaced=True,
       testsExecutedByTrace=0,original4222Repeated=False,original44Repeated=False,
       actualVmActions=0,actualDatabaseActions=0,whole451Accepted=False,
       newOriginal190Accepted=0,formalUpdated=False,effortPercent=None)
+    verify(invocation)
     os.umask(0o077);OUT.mkdir();host.write(OUT/'manifest.json',value)
     print(json.dumps(dict(actualExit=0,sources=len(rows),classes=len(class_rows),testsReplayed=0,
                          manifestSha256=host.sha(OUT/'manifest.json'))))
