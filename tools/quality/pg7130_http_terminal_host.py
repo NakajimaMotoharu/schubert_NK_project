@@ -16,6 +16,7 @@ LAUNCHER=host.TC/'m2/repository/org/junit/platform/junit-platform-launcher/1.13.
 LAUNCHER_SHA='0b0beaeb6880a31149641d2d848b863712885469670c12099586d7f798522564'
 AGENT=host.TC/'m2/repository/org/jacoco/org.jacoco.agent/0.8.15/org.jacoco.agent-0.8.15-runtime.jar'
 HELPER=host.ROOT/'tools/quality/architecture/HttpTerminalJunitLauncher.java'
+SESSION_ID='PG7130-HTTP-TERMINAL'
 COUNTS={'HttpMetricContractTest':6,'HttpMetricRecorderTest':9,'HttpMetricValveTest':8}
 
 
@@ -73,7 +74,7 @@ def main():
     stages=[compiled]
     if compiled['actualExit']==0:
         stages.append(step('selected-junit',[str(jdk/'java'),'-Dfile.encoding=UTF-8','-Duser.timezone=Asia/Tokyo',
-          '-javaagent:'+str(AGENT)+'=destfile='+str(SLOT/'jacoco.exec')+',append=false,sessionid=PG7130-HTTP-TERMINAL',
+          '-javaagent:'+str(AGENT)+'=destfile='+str(SLOT/'jacoco.exec')+',append=false,sessionid='+SESSION_ID,
           '-cp',str(classes)+os.pathsep+classpath,'HttpTerminalJunitLauncher',str(SLOT/'xml')]))
     suites={};cases=[];xml_hashes={}
     for path in sorted((SLOT/'xml').glob('TEST-*.xml')):

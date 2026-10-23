@@ -9,9 +9,14 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import dev.codex.schubert.nk.web.logging.WebRequestTrace;
 import io.micrometer.core.instrument.Counter;
 import io.micrometer.core.instrument.Meter;
+import io.micrometer.core.instrument.Timer;
+import io.micrometer.core.instrument.distribution.DistributionStatisticConfig;
+import io.micrometer.core.instrument.distribution.pause.PauseDetector;
 import io.micrometer.core.instrument.simple.SimpleMeterRegistry;
 import jakarta.servlet.ServletException;
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Proxy;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -44,6 +49,15 @@ class HttpMetricValveTest {
   private static final class FaultRegistry extends OwnedRegistry {
     Optional<Throwable> fault = Optional.empty();
     final AtomicInteger attempts = new AtomicInteger();
+    boolean timerFailure;
+
+    private void inject() {
+      attempts.incrementAndGet();
+      if (fault.isEmpty()) return;
+      Throwable failure = fault.orElseThrow();
+      if (failure instanceof Error fatal) throw fatal;
+      throw (RuntimeException) failure;
+    }
 
     @Override
     protected Counter newCounter(Meter.Id id) {
@@ -51,12 +65,7 @@ class HttpMetricValveTest {
       return new Counter() {
         @Override
         public void increment(double amount) {
-          attempts.incrementAndGet();
-          if (fault.isPresent()) {
-            Throwable failure = fault.orElseThrow();
-            if (failure instanceof Error fatal) throw fatal;
-            throw (RuntimeException) failure;
-          }
+          if (!timerFailure) inject();
           delegate.increment(amount);
         }
 
@@ -70,6 +79,45 @@ class HttpMetricValveTest {
           return delegate.getId();
         }
       };
+    }
+
+    @Override
+    protected Timer newTimer(Meter.Id id, DistributionStatisticConfig config, PauseDetector pause) {
+      Timer delegate = super.newTimer(id, config, pause);
+      return (Timer)
+          Proxy.newProxyInstance(
+              Timer.class.getClassLoader(),
+              new Class<?>[] {Timer.class},
+              (instance, method, args) -> {
+                if (timerFailure && method.getName().equals("record")) inject();
+                try {
+                  return method.invoke(delegate, args);
+                } catch (InvocationTargetException wrapped) {
+                  throw wrapped.getCause();
+                }
+              });
+    }
+  }
+
+  private static final class UnformattableFailure extends IllegalStateException {
+    private static final long serialVersionUID = 1L;
+
+    @Override
+    public String getMessage() {
+      throw new AssertionError("must not read provider text");
+    }
+
+    @Override
+    public String toString() {
+      throw new AssertionError("must not format provider");
+    }
+  }
+
+  private static final class SuppressionDisabledFailure extends RuntimeException {
+    private static final long serialVersionUID = 1L;
+
+    SuppressionDisabledFailure() {
+      super(null, null, false, false);
     }
   }
 
@@ -250,7 +298,11 @@ class HttpMetricValveTest {
                   called.incrementAndGet();
                   throw signalFailure;
                 });
-        failing.log(request("GET", "/"), response(200), 0);
+        var denied =
+            assertThrows(
+                IllegalStateException.class,
+                () -> failing.log(request("GET", "/"), response(200), 0));
+        assertEquals("HTTP metric terminal signal failed", denied.getMessage());
         assertEquals(1, called.get());
       }
     }
@@ -258,35 +310,42 @@ class HttpMetricValveTest {
 
   @Test
   void httpTerm006ProviderFailureIsNotRetriedOrFormatted() throws Exception {
-    for (Throwable failure : List.of(new IllegalStateException(), new AssertionError())) {
-      try (var registry = new FaultRegistry()) {
-        var called = new AtomicInteger();
-        var valve = valve(registry, called::incrementAndGet);
-        var request = request("GET", "/login");
-        var response = response(200);
-        valve.invoke(request, response);
-        registry.fault = Optional.of(failure);
-        assertSame(
-            failure, assertThrows(failure.getClass(), () -> valve.log(request, response, 1)));
-        valve.log(request, response, 1);
-        assertEquals(1, called.get());
-        assertEquals(1, registry.attempts.get());
-        assertEquals(0, total(registry));
-        assertEquals(0, registry.closes.get());
-        assertEquals(200, response.getStatus());
+    for (boolean timerFailure : List.of(false, true))
+      for (Throwable failure :
+          List.of(new IllegalStateException(), new AssertionError(), new UnformattableFailure())) {
+        try (var registry = new FaultRegistry()) {
+          registry.timerFailure = timerFailure;
+          var called = new AtomicInteger();
+          var valve = valve(registry, called::incrementAndGet);
+          var request = request("GET", "/login");
+          var response = response(200);
+          valve.invoke(request, response);
+          registry.fault = Optional.of(failure);
+          assertSame(
+              failure, assertThrows(failure.getClass(), () -> valve.log(request, response, 1)));
+          valve.log(request, response, 1);
+          assertEquals(1, called.get());
+          assertEquals(1, registry.attempts.get());
+          assertEquals(timerFailure ? 1 : 0, total(registry));
+          assertEquals(0, registry.get(DURATION).tag("route", "/login").timer().count());
+          assertEquals(0, registry.closes.get());
+          assertEquals(200, response.getStatus());
+        }
       }
-    }
   }
 
   @Test
   void httpTerm007SignalAndCyclicFatalGraphsKeepFatalIdentity() throws Exception {
-    for (String mode : List.of("ordinary", "fatal", "same", "cycle")) {
+    for (String mode : List.of("ordinary", "fatal", "same", "cycle", "suppression-disabled")) {
       try (var registry = new FaultRegistry()) {
         var called = new AtomicInteger();
-        var primary = new IllegalArgumentException();
+        RuntimeException primary =
+            mode.equals("suppression-disabled")
+                ? new SuppressionDisabledFailure()
+                : new IllegalArgumentException();
         var fatal = new AssertionError();
         Throwable secondary =
-            mode.equals("fatal")
+            mode.equals("fatal") || mode.equals("suppression-disabled")
                 ? fatal
                 : mode.equals("same") ? primary : new IllegalStateException();
         if (mode.equals("cycle")) {
@@ -307,13 +366,18 @@ class HttpMetricValveTest {
         var request = request("GET", "/");
         var response = response(200);
         valve.invoke(request, response);
-        Throwable expected = mode.equals("fatal") || mode.equals("cycle") ? fatal : primary;
+        Throwable expected =
+            mode.equals("fatal") || mode.equals("cycle") || mode.equals("suppression-disabled")
+                ? fatal
+                : primary;
         assertSame(
             expected, assertThrows(expected.getClass(), () -> valve.log(request, response, 0)));
         valve.log(request, response, 0);
         assertEquals(1, called.get());
         assertEquals(1, registry.attempts.get());
-        assertEquals(mode.equals("same") ? 0 : 1, primary.getSuppressed().length);
+        assertEquals(
+            mode.equals("same") || mode.equals("suppression-disabled") ? 0 : 1,
+            primary.getSuppressed().length);
       }
     }
   }

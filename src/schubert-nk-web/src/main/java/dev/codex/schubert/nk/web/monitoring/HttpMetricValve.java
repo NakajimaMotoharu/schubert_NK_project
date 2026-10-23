@@ -70,7 +70,8 @@ public final class HttpMetricValve extends ValveBase implements AccessLog {
       route = trace.orElseThrow().route();
       method = observedMethod;
     } catch (IllegalArgumentException | IllegalStateException malformed) {
-      signalFailure(malformed);
+      if (!signalFailure(malformed))
+        throw new IllegalStateException("HTTP metric terminal signal failed");
       return;
     }
     try {
@@ -82,13 +83,16 @@ public final class HttpMetricValve extends ValveBase implements AccessLog {
   }
 
   /** Never format a provider graph; preserve the original fatal even if the owner signal fails. */
-  private void signalFailure(Throwable failure) {
+  private boolean signalFailure(Throwable failure) {
     try {
       onTerminal.run();
     } catch (RuntimeException | Error signalFailure) {
       WebStartupException.attachSecondary(failure, signalFailure);
+      WebStartupException.preserveFatal(failure);
+      return false;
     }
     WebStartupException.preserveFatal(failure);
+    return true;
   }
 
   @Override
