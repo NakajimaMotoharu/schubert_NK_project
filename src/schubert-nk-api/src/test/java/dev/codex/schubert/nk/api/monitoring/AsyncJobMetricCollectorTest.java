@@ -24,6 +24,13 @@ import org.junit.jupiter.api.Test;
 
 /** ASYNCCONN001..008: owned JDBC doubles and SDK, not actual DB/runtime collection. */
 class AsyncJobMetricCollectorTest {
+  private static final class Registry extends SimpleMeterRegistry implements AutoCloseable {
+    @Override
+    public void close() {
+      super.close();
+    }
+  }
+
   private static AsyncJobMetricCollector collector(SimpleMeterRegistry registry, String mode) {
     return new AsyncJobMetricCollector(new AsyncJobCountRepository(), registry, mode);
   }
@@ -37,7 +44,7 @@ class AsyncJobMetricCollectorTest {
 
   @Test
   void asyncConn001DebugCollectPublishesOnlyAfterSuccessfulClose() throws SQLException {
-    try (var registry = new SimpleMeterRegistry()) {
+    try (var registry = new Registry()) {
       var collector = collector(registry, "DEBUG");
       missing(registry, collector);
       var f =
@@ -61,7 +68,7 @@ class AsyncJobMetricCollectorTest {
 
   @Test
   void asyncConn002FailureClearsStaleSuccessAndTrueEmptyCanRecover() throws SQLException {
-    try (var registry = new SimpleMeterRegistry()) {
+    try (var registry = new Registry()) {
       var collector = collector(registry, "DEBUG");
       var old = collector.collect(new Fixture(Row.row("ERROR", 4)).connection()).orElseThrow();
       var f = new Fixture();
@@ -102,7 +109,7 @@ class AsyncJobMetricCollectorTest {
               new SQLException("owned fixture failure"),
               new IllegalStateException("owned fixture failure"),
               new AssertionError("owned fixture failure"))) {
-        try (var registry = new SimpleMeterRegistry()) {
+        try (var registry = new Registry()) {
           var collector = collector(registry, "DEBUG");
           collector.collect(new Fixture(Row.row("RECEIVED", 9)).connection());
           var f = new Fixture(Row.row("COMPLETED", 1));
@@ -119,7 +126,7 @@ class AsyncJobMetricCollectorTest {
 
   @Test
   void asyncConn004StandardNeverReadsOrRegistersButRejectsNull() throws SQLException {
-    try (var registry = new SimpleMeterRegistry()) {
+    try (var registry = new Registry()) {
       var collector = collector(registry, "STANDARD");
       var f = new Fixture(Row.row("ERROR", 3));
       f.faults.put("autoCommit", new AssertionError("no standard detailed read"));
@@ -136,7 +143,7 @@ class AsyncJobMetricCollectorTest {
   @Test
   void asyncConn005ConstructorInvariantsAndInvalidNullCannotErasePriorSuccess()
       throws SQLException {
-    try (var registry = new SimpleMeterRegistry()) {
+    try (var registry = new Registry()) {
       assertThrows(
           NullPointerException.class, () -> new AsyncJobMetricCollector(null, registry, "DEBUG"));
       assertThrows(
@@ -182,7 +189,7 @@ class AsyncJobMetricCollectorTest {
 
   @Test
   void asyncConn006OwnerSerializesReadCloseAndPublication() throws Exception {
-    try (var registry = new SimpleMeterRegistry();
+    try (var registry = new Registry();
         var pool = Executors.newFixedThreadPool(2)) {
       var collector = collector(registry, "DEBUG");
       var first = new Fixture(Row.row("RECEIVED", 1));
@@ -218,8 +225,8 @@ class AsyncJobMetricCollectorTest {
 
   @Test
   void asyncConn007ParallelCallersAndIndependentOwnersHaveNoCrossState() throws Exception {
-    try (var registry = new SimpleMeterRegistry();
-        var otherRegistry = new SimpleMeterRegistry();
+    try (var registry = new Registry();
+        var otherRegistry = new Registry();
         var pool = Executors.newFixedThreadPool(8)) {
       var collector = collector(registry, "DEBUG");
       var other = collector(otherRegistry, "DEBUG");
@@ -269,7 +276,7 @@ class AsyncJobMetricCollectorTest {
     for (var failure :
         List.<Throwable>of(
             cycle, new UnformattableFailure(), new AssertionError("owned fatal fixture"))) {
-      try (var registry = new SimpleMeterRegistry()) {
+      try (var registry = new Registry()) {
         var collector = collector(registry, "DEBUG");
         var f = new Fixture(Row.row("ERROR", 1));
         f.faults.put("count", failure);

@@ -12,7 +12,7 @@ METHODS={
  'asyncConn007ParallelCallersAndIndependentOwnersHaveNoCrossState',
  'asyncConn008FailureGraphsAreNotWalkedAndNextSuccessRecovers'}
 
-if __name__=='__main__':
+def configure():
     post=previous.configure()
     post.SLOT=host.SLOT;post.RUN='PG7328-api-async-collector-host-v1'
     post.OUT=post.host.BASE/'PG7330-api-async-collector-post-v1'
@@ -21,4 +21,7 @@ if __name__=='__main__':
     post.NAMES|={post.PREFIX+'AsyncJobMetricCollector'}
     post.EXPECTED_SUITES[host.SUITES[2]]=dict(tests=8,failures=0,errors=0,skipped=0)
     post.TOTAL_TESTS=24;post.SOURCE_FILE_COUNT=7
-    post.main()
+    return post
+
+if __name__=='__main__':
+    configure().main()
