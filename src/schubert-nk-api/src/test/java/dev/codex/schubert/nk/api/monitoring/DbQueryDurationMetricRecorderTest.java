@@ -181,7 +181,7 @@ class DbQueryDurationMetricRecorderTest {
     assertEquals(pairs, actual);
     var expectedAuxiliary = new java.util.HashSet<String>();
     for (String pair : pairs) {
-      for (String boundary : List.of("0.001", "0.01", "0.1", "1.0", "1.5"))
+      for (String boundary : List.of("0.001", "0.01", "0.1", "1", "1.5"))
         expectedAuxiliary.add(pair + "/le/" + boundary);
       expectedAuxiliary.add(pair + "/phi/0.95");
     }
