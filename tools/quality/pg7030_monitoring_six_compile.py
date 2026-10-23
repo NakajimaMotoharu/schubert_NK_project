@@ -21,6 +21,7 @@ ROLES = ('protocol','storage','bootstrap','api','web','batch')
 PLUGINS = {'maven-compiler-plugin','maven-surefire-plugin','maven-jar-plugin',
            'jacoco-maven-plugin','spotbugs-maven-plugin','maven-enforcer-plugin',
            'spotless-maven-plugin'}
+DEPENDENCY_JARS = {}
 
 
 def preflight():
@@ -40,6 +41,8 @@ def preflight():
 
 def main():
     invocation=capture(Path(__file__))
+    if not all(Path(p).is_file() and host.sha(Path(p))==h for p,h in DEPENDENCY_JARS.items()):
+        raise ValueError('all fixed declared SDK bytes before six compilation')
     os.umask(0o077)
     if SLOT.exists():
         raise ValueError('new-only source compile, observe original job instead of restarting')
@@ -62,7 +65,7 @@ def main():
       archiveSha256=host.sha(archive),inputHashes=inputs,pomPreflight=poms,
       testsExecuted=0,testStatus='UNRUN_NOT_PASS_COMPILE_ONLY',wholePtQualified=False,
       commonModuleSelected=False,actualVmActions=0,actualDatabaseActions=0,rootMainInvoked=False,
-      toolSha256=host.sha(Path(__file__)),invocation=invocation)
+      toolSha256=host.sha(Path(__file__)),invocation=invocation,dependencyJarHashes=DEPENDENCY_JARS)
     host.write(SLOT/'begin.safe.json',begin)
     with (SLOT/'maven.log').open('xb') as log:
         child=subprocess.Popen(command,cwd=snapshot,env=env,stdout=log,stderr=subprocess.STDOUT)
@@ -84,6 +87,8 @@ def main():
     value=dict(begin=begin,terminal=terminal,jars=jars,source=SOURCE,actualExit=code,
       testsExecuted=0,testStatus='UNRUN_NOT_PASS_COMPILE_ONLY',sourceInputsUnchanged=True,
       whole451Accepted=False,formalUpdated=False,newAccepted=0,effortPercent=None)
+    if not all(host.sha(Path(p))==h for p,h in DEPENDENCY_JARS.items()):
+        raise ValueError('external SDK changed during six compilation')
     verify(invocation)
     host.write(SLOT/'manifest.safe.json',value)
     OUT.mkdir();host.write(OUT/'manifest.json',value)

@@ -5,6 +5,7 @@ import json
 import os
 import subprocess
 import zipfile
+import xml.etree.ElementTree as ET
 from pathlib import Path
 
 import pg6966_chr_adapter_host as host
@@ -20,10 +21,36 @@ PINS={
  'batchHistory':('PG7090-registry-missing-six-post-v1/manifest.json','63949a081586eb21c52e790267c74e4069633b30bcc5b2d3752290e5910c645a'),
  'currentHttp':('PG7096-web-http-metric-post-v1/manifest.json','cbcb5c9821ccbcf05d9f73701e252c2a8a833773d6d3ca2614620a33f8c3d01a'),
  'architecture':('PG6960-archunit-static-v1/manifest.json','7f80c3f1b1f1356ba51ada7f6c7dc55dfe82756072edcf3c7e88dcc164bbbb1f')}
+PHYSICAL_COUNT=1696
+CURRENT_PHYSICAL_COUNT=7
+CURRENT_TESTS=6
+SOURCE_DELTA_COUNT=29
+ALLOW_CORE_POM_CHANGE=False
 
 
 def require(value,message):
     if not value:raise ValueError(message)
+
+
+def verify_core_pom(old_bytes,new_bytes):
+    old=ET.fromstring(old_bytes);new=ET.fromstring(new_bytes)
+    dependencies=new.find('{*}dependencies')
+    require(dependencies is not None,'direct dependency section')
+    added=[node for node in dependencies.findall('{*}dependency')
+      if node.findtext('{*}groupId')=='io.micrometer' and node.findtext('{*}artifactId')=='micrometer-core']
+    require(len(added)==1 and {n.tag.rsplit('}',1)[-1] for n in added[0]}=={'groupId','artifactId'},
+            'only same-managed-version compile promotion, no scope/version/exclusions or other fields')
+    managed=[node.findtext('{*}version') for node in new.findall('{*}dependencyManagement/{*}dependencies/{*}dependency')
+      if node.findtext('{*}groupId')=='io.micrometer' and node.findtext('{*}artifactId')=='micrometer-core']
+    require(managed==['1.17.1'],'exact existing approved managed patch')
+    dependencies.remove(added[0])
+    for root in (old,new):
+        for node in root.iter():
+            node.text=node.text.strip() if node.text and node.text.strip() else None
+            node.tail=None
+    require(ET.tostring(old)==ET.tostring(new),'entire original POM semantic tree unchanged except the declared compile dependency')
+    return dict(artifact='io.micrometer:micrometer-core',managedVersion='1.17.1',scope='compile',
+                noOtherSemanticChange=True,noNewExclusions=True)
 
 
 def main():
@@ -43,11 +70,11 @@ def main():
     old=witnesses['original'];batch=witnesses['batchHistory'];http=witnesses['currentHttp']
     require(old['productionSource']=='e7d64fda2453e906ee6ccc5fe718e5c29841e4aa'
       and batch['source']=='71c6be37c1a0038314b66565b1188d6488bc7c8d'
-      and http['source']==compile_stage.SOURCE and http['tests']==6
+      and http['source']==compile_stage.SOURCE and http['tests']==CURRENT_TESTS
       and http['actualCrcMismatch']==0 and http['actualSessions']==1,'distinct genuine source domains, HTTP actually current')
     baseline=old['allPhysicalMainSha256'];prior=batch['newPhysicalClasses']
     current={'web:'+path:digest for path,digest in http['physicalClasses'].items()}
-    require(len(baseline)==1669 and len(prior)==20 and len(current)==7
+    require(len(baseline)==1669 and len(prior)==20 and len(current)==CURRENT_PHYSICAL_COUNT
       and not (set(baseline)&set(prior) or set(baseline)&set(current) or set(prior)&set(current)),
       'all three physical domains are exact and disjoint')
     physical={};jars={}
@@ -61,23 +88,32 @@ def main():
                     key=role+':'+entry
                     require(key not in physical,'unique physical module/class')
                     physical[key]=hashlib.sha256(jar.read(entry)).hexdigest()
-    require(physical=={**baseline,**prior,**current} and len(physical)==1696,
+    require(physical=={**baseline,**prior,**current} and len(physical)==PHYSICAL_COUNT,
             'old1669 and historical batch20 byte-identical, all seven current HTTP physical classes exact')
     parts=subprocess.check_output(['git','diff','--name-status','-z',old['productionSource'],compile_stage.SOURCE,'--','src'],cwd=host.ROOT).split(b'\0')[:-1]
     require(len(parts)%2==0,'complete added-source grammar')
     extras={'src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/SupplementaryUnitTemplateTest.java':'WBS-C02',
       'src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/ConfigurationTemplateContractTest.java':'WBS-C06'}
-    source_delta=[]
+    source_delta=[];pom_change=None
     for i in range(0,len(parts),2):
         status,path=parts[i].decode(),parts[i+1].decode()
         allowed=path.startswith(tuple('src/schubert-nk-'+role+'/src/'+kind+suffix
           for role in ('batch','web') for kind,suffix in (
           ('main/java/','dev/codex/schubert/nk/'+role+'/monitoring/'),
           ('test/java/','dev/codex/schubert/nk/'+role+'/monitoring/'),('test/resources/','monitoring/'))))
-        require(status=='A' and (allowed or path in extras),'only declared pure monitoring/source-test additions')
-        source_delta.append(dict(path=path,sha256=host.sha(snapshot/path),owner=extras.get(path,'WBS-P018-09'),
+        if status=='M':
+            require(ALLOW_CORE_POM_CHANGE and path=='src/schubert-nk-web/pom.xml' and pom_change is None,
+                    'only one explicitly reviewed Web compile dependency modification')
+            old_pom=subprocess.check_output(['git','show',old['productionSource']+':'+path],cwd=host.ROOT)
+            pom_change=verify_core_pom(old_pom,(snapshot/path).read_bytes())
+        else:
+            require(status=='A' and (allowed or path in extras),'only declared pure monitoring/source-test additions')
+        source_delta.append(dict(path=path,status=status,sha256=host.sha(snapshot/path),owner=extras.get(path,'WBS-P018-09'),
           sharedReference='WBS-C07' if allowed else None,sharedAdditionalCostPp=0))
-    require(len(source_delta)==29,'all29 additions, no old Main/POM/config/DDL changed')
+    require(len(source_delta)==SOURCE_DELTA_COUNT and bool(pom_change)==ALLOW_CORE_POM_CHANGE,
+            'entire source delta exact, no old Main/config/DDL changed')
+    require(raw['begin'].get('dependencyJarHashes',{})==http.get('additionalSdkAuxiliaryJarHashes',{}),
+            'original actual six compilation and current executed component bind identical SDK pins')
     previous_arch=witnesses['architecture']
     require(host.sha(architecture.SOURCE)==previous_arch['toolSourceSha256']
       and host.sha(architecture.ARCH)==architecture.ARCH_SHA and host.sha(architecture.SLF)==architecture.SLF_SHA,
@@ -89,23 +125,24 @@ def main():
     receipt,text=steps.step('audit-six',[str(architecture.JAVA),'-cp',os.pathsep.join([str(classes),str(architecture.ARCH),str(architecture.SLF)]),
       'ModuleDependencyAudit',*[role+'='+str(jars[role]) for role in architecture.MODULES]])
     result=architecture.parse(text)
-    require(receipt['actualExit']==0 and result['physical']==1696 and not result['findings']
+    require(receipt['actualExit']==0 and result['physical']==PHYSICAL_COUNT and not result['findings']
       and all(v==0 for v in result['rules'].values()),'all1696 fresh physical classes/five rules zero')
     value=dict(actualExit=0,source=compile_stage.SOURCE,timeUTC=datetime.datetime.now(datetime.timezone.utc).isoformat(),
       invocation=invocation,compileManifestSha256=host.sha(compile_stage.SLOT/'manifest.safe.json'),witnesses=PINS,
-      jars=raw['jars'],allPhysicalClassCount=1696,oldPhysicalUnchanged=1669,
+      jars=raw['jars'],allPhysicalClassCount=PHYSICAL_COUNT,oldPhysicalUnchanged=1669,
       historicalBatch=dict(source=batch['source'],physicalClasses=prior,byteIdentityOnly=True,
         currentSourceExecutionAccepted=False,coverageNotTransferred=True),
-      currentHttp=dict(source=http['source'],tests=6,physicalClasses=current,counters=http['counters'],
+      currentHttp=dict(source=http['source'],tests=CURRENT_TESTS,physicalClasses=current,counters=http['counters'],
         actualCrcMismatch=0,actualSessions=1),newSourceDelta=source_delta,
-      architecture=dict(result=result,receipt=receipt),targetClassesLoadedOrInitialized=False,
+      architecture=dict(result=result,receipt=receipt),reviewedWebPomChange=pom_change,
+      currentSdkJarHashes=http.get('additionalSdkAuxiliaryJarHashes',{}),targetClassesLoadedOrInitialized=False,
       testsExecutedByPost=0,actualVmActions=0,actualDatabaseActions=0,
       original4222Repeated=False,batch73Repeated=False,common44Repeated=False,coverageUnion=False,
       whole451Accepted=False,formalUpdated=False,newAccepted=0,effortPercent=None)
     verify(invocation)
     OUT.mkdir();host.write(OUT/'manifest.json',value)
-    print(json.dumps(dict(actualExit=0,physical=1696,oldUnchanged=1669,historicalBatchOnly=20,
-      currentHttp=7,architecture=result['rules'],manifestSha256=host.sha(OUT/'manifest.json'))))
+    print(json.dumps(dict(actualExit=0,physical=PHYSICAL_COUNT,oldUnchanged=1669,historicalBatchOnly=20,
+      currentHttp=CURRENT_PHYSICAL_COUNT,architecture=result['rules'],manifestSha256=host.sha(OUT/'manifest.json'))))
 
 
 if __name__=='__main__':main()
