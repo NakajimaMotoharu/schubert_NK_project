@@ -1,5 +1,7 @@
 # Module・Program一覧
 
+2026-10-23追加（P018-09/C07共有費0、未正式受入）：API DbPoolMetricRecorder/Counts/State→POOLMET001～008/1635～1638/PG-D542、RD171/UI252/SS342351。sourced237/7348真正32PT4suite（新8）→7350実8四100/CRC0/SB-CS0・新Pool raw0/既5個別理由→7352六compileのみ→7354全1731/旧1669byte不変/当API9一致・歴史Batch43/Web10byteだけ/三POM/五rule0→7356全71source/62physical・7358五負改変。供給API四long→固定4seriesだけ、actual pool/DB/管理/sampling/alert/Root/exporter/全体451未受入。
+
 2026-10-23追加（P018-09/C07共有費0、未正式受入）：API AsyncJobMetricCollector.constructor/collect/snapshot→ASYNCCONN001～008/1631～1634/PG-D541、RD171/UI252/SS331332351。source003/7340真正24PT3suite（新8）→7342実5四100/CRC0・PMD raw5個別分類/未分類・有効違反0→7344六compileのみ→7334全1728/旧1669不変/当API6一致・歴史Batch43/Web10はbyteだけ/三POM厳密→7336全69source/59physical・7338九静的負改変。BUG1659/YKT1412のowned fixture adapterは限定閉鎖、元compile失敗保持。actual DB/外側期限/Root/collector実起動/exporter/全体451未受入。
 
 2026-10-23追加（P018-09/C07共有費0、未正式受入）：API monitoring.persistence.AsyncJobCountRepository.read/state→ASYNCDB001～008/1627～1630/PG-D540、RD171/UI252/SS331332342351。sourcefaf7/7314真正API16PT2suite（新8）→7316実4四100/CRC0/lint-NullAway-SB-CS0・PMD raw2はJava既存変数TWR誤検知/7324対象source別個分類→7318六compileのみ→7320全1727/旧1669不変/当API5一致/歴史Batch43・Web10byteだけ/三POM厳密→7322全67source/58physical・7324五転用/alias拒否。borrowed readonly RC固定一SELECT/RS-PS close/接続変更0を独立proxyで検証、actual DB/driver/role/collector/Root/exporter/全体451未受入。
