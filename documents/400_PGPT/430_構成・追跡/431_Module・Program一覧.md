@@ -1,5 +1,7 @@
 # Module・Program一覧
 
+2026-10-24最新：1712_DbQueryDurationMetric仕様・1713結果横展開、source1540267d3/当API138PT17suite（新8＋必要既130）・実28四100(L504M95C28B241)/全1777/123delta-108追加physical/生成45/raw16全理由。BUG1676/1677を元失敗保全で限定閉鎖。供給二query×二outcomeの秒histogram/p95設定要求だけ、実query/DB/clock/exporter・正式/whole451/工数は未受入。
+
 2026-10-24 Batch monitoring追加：ProcessRestartMetricRecorder constructor/record/detailedMetricsRequested・Reason.parse/values/valueOf → RD171 OPS012/MON008・010～013/UI252/SS342351/PG-D567/1710 RESTARTMET001..008・1711結果/7822全121delta-105追加physical＋元依存別trace。source3751当261/34・実65四100(監視64＋元依存1)/全1774/生成126/raw28理由、新BUG0。実process/Unit/再起動/source真正性・正式/whole451未受入。
 
 2026-10-24 Batch monitoring追加：IntegrityFailureMetricRecorder constructor/record/detailedMetricsRequested・Area.parse/values/valueOf → RD171/UI252/SS341351/PG-D566/1708 INTEGRITYMET001..008・1709結果/7810全119delta-103追加physical。原Repository BatchStep(WBS-P017-02)は元1669内の追加依存trace/INTEGRITYMET001で当source再資格・追加共通費0/親WBS受入0。source5ac当253/33・実63四100(監視62＋元依存1)/全1772/生成124/raw28理由、実検査/修復/退役/正式/whole451未受入。
