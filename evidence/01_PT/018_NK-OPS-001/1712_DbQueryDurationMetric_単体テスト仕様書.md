@@ -1,5 +1,7 @@
 # 1712 DB query duration metric 単体テスト仕様書
 
+2026-10-24 BUG1676/YKT1427是正追記（下記開始計画を履歴保持）: 元source a2d/7830は真正verify1・138中6failure、7834compile0/PT0。fixed-boundaryのceil(long)量子化を避けるためpublishPercentiles(.95)を明示しdouble histogramを選択する。DBTIME002の独立小数CDF/秒sum/max/2MAX期待値は不変更。DBTIME001/005は四primary SummaryとSDK補助Gauge（各五le＋一phi=.95）を全量検証し、部分登録もprimary1＋補助6を厳密確認する。p95設定要求/自己所有SDKの表現は確認するが実exporterの公開/p95品質は未受入。変更後7844当138/17→7846独立/7848正常六compile→7850物理→7852trace→7854review→7856scanで1713へ記録する。元失敗/元工具はb3c8e7449へ保全、群1934/3-5-9pp上限10の手戻りで見積付替え0。
+
 NK-OPS-001/P01809/C07/RD171 MON006・010～013/UI252/SS331332351/PG-D568。DbQueryDurationMetricRecorder constructor/record/detailedMetricsRequested・Query/Outcome parse/values/valueOf。query_idは既AsyncJobCountRepository.readのSTATE集計をASYNC_JOB_STATE_COUNTS、既OutboxObservationRepository.readのstatus件数/最古をOUTBOX_STATUS_COUNTS_OLDESTとする内部閉二値。outcomeは供給SUCCESS/FAILURE二値。SQL文字列/parameter/任意ID/例外をlabelへ受けずDEBUG固定4series/STD詳細登録0。これ以外の業務SQL/全DB監視や実query hookは本群未受入。
 
 Micrometer1.17.1のDistributionSummaryをbaseUnit seconds/percentile histogram要求true、観測bucket .001/.01/.1/1/1.5秒として使用する。bucketは低遅延観測点と既1秒query timeout/1.5秒query budgetの参照点であり、新しい応答合否/alert/SLO制御ではない。long nsをdouble除算で秒へ変換、long ns累積のoverflowを導入しない。実Prometheusのhistogram exposition/bucket/default追加分・p95/clock/asOf/DB/tx所有は別未受入。使用SDK APIは既pinned Jarの非初期化javapで確認、導入/依存変更0。

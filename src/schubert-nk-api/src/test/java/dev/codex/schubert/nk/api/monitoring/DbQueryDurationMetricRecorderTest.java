@@ -140,25 +140,52 @@ class DbQueryDurationMetricRecorderTest {
   }
 
   private static void shape(Registry registry) {
-    assertEquals(4, registry.getMeters().size());
-    var actual = new java.util.HashSet<String>();
-    for (var meter : registry.getMeters()) {
-      var id = meter.getId();
-      assertEquals("nk_db_query_duration_seconds", id.getName());
-      assertEquals(Meter.Type.DISTRIBUTION_SUMMARY, id.getType());
-      assertEquals("seconds", id.getBaseUnit());
-      assertEquals(
-          Set.of("query_id", "outcome"),
-          id.getTags().stream().map(t -> t.getKey()).collect(Collectors.toSet()));
-      actual.add(id.getTag("query_id") + "/" + id.getTag("outcome"));
-    }
-    assertEquals(
+    shape(
+        registry,
         Set.of(
             "ASYNC_JOB_STATE_COUNTS/SUCCESS",
             "ASYNC_JOB_STATE_COUNTS/FAILURE",
             "OUTBOX_STATUS_COUNTS_OLDEST/SUCCESS",
-            "OUTBOX_STATUS_COUNTS_OLDEST/FAILURE"),
-        actual);
+            "OUTBOX_STATUS_COUNTS_OLDEST/FAILURE"));
+  }
+
+  private static void shape(Registry registry, Set<String> pairs) {
+    // SDK-generated gauges are checked separately, never silently filtered out of the denominator.
+    assertEquals(pairs.size() * 7, registry.getMeters().size());
+    var actual = new java.util.HashSet<String>();
+    var auxiliary = new java.util.HashSet<String>();
+    for (var meter : registry.getMeters()) {
+      var id = meter.getId();
+      var pair = id.getTag("query_id") + "/" + id.getTag("outcome");
+      assertTrue(pairs.contains(pair));
+      if (id.getName().equals("nk_db_query_duration_seconds")) {
+        assertEquals(Meter.Type.DISTRIBUTION_SUMMARY, id.getType());
+        assertEquals("seconds", id.getBaseUnit());
+        assertEquals(
+            Set.of("query_id", "outcome"),
+            id.getTags().stream().map(t -> t.getKey()).collect(Collectors.toSet()));
+        assertTrue(actual.add(pair));
+      } else {
+        assertEquals(Meter.Type.GAUGE, id.getType());
+        boolean percentile = id.getName().equals("nk_db_query_duration_seconds.percentile");
+        assertEquals(
+            "nk_db_query_duration_seconds." + (percentile ? "percentile" : "histogram"),
+            id.getName());
+        String label = percentile ? "phi" : "le";
+        assertEquals(
+            Set.of("query_id", "outcome", label),
+            id.getTags().stream().map(t -> t.getKey()).collect(Collectors.toSet()));
+        assertTrue(auxiliary.add(pair + "/" + label + "/" + id.getTag(label)));
+      }
+    }
+    assertEquals(pairs, actual);
+    var expectedAuxiliary = new java.util.HashSet<String>();
+    for (String pair : pairs) {
+      for (String boundary : List.of("0.001", "0.01", "0.1", "1.0", "1.5"))
+        expectedAuxiliary.add(pair + "/le/" + boundary);
+      expectedAuxiliary.add(pair + "/phi/0.95");
+    }
+    assertEquals(expectedAuxiliary, auxiliary);
   }
 
   @Test
@@ -172,6 +199,7 @@ class DbQueryDurationMetricRecorderTest {
       for (var config : registry.configurations) {
         assertEquals(Boolean.TRUE, config.isPercentileHistogram());
         assertTrue(config.isPublishingHistogram());
+        assertArrayEquals(new double[] {.95}, config.getPercentiles());
         assertArrayEquals(
             new double[] {.001, .01, .1, 1., 1.5}, config.getServiceLevelObjectiveBoundaries());
       }
@@ -317,7 +345,7 @@ class DbQueryDurationMetricRecorderTest {
             assertThrows(
                 problem.getClass(), () -> new DbQueryDurationMetricRecorder(registry, "DEBUG")));
         assertEquals(2, registry.registrations.get());
-        assertEquals(1, registry.getMeters().size());
+        shape(registry, Set.of("ASYNC_JOB_STATE_COUNTS/SUCCESS"));
         assertEquals(0, summary(registry, "ASYNC_JOB_STATE_COUNTS", "SUCCESS").count());
         assertEquals(0, registry.records.get());
         assertEquals(0, registry.closes.get());

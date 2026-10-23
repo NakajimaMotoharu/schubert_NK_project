@@ -58,6 +58,8 @@ public final class DbQueryDurationMetricRecorder {
                   .baseUnit("seconds")
                   .tags("query_id", query.name(), "outcome", outcome.name())
                   .publishPercentileHistogram()
+                  // Double histogram preserves fractional seconds; fixed-boundary rounds to long.
+                  .publishPercentiles(.95)
                   .serviceLevelObjectives(.001, .01, .1, 1., 1.5)
                   .register(registry));
         queries.put(query, Map.copyOf(outcomes));
