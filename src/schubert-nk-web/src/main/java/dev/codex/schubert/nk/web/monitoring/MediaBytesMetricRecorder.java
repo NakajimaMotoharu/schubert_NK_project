@@ -23,7 +23,7 @@ public final class MediaBytesMetricRecorder {
     }
   }
 
-  private static final List<Integer> STATUSES = List.of(200, 206, 416, 503);
+  private static final List<Integer> ACCEPTED_STATUSES = List.of(200, 206, 416, 503);
   private final boolean detailed;
   private final Map<MediaType, Map<Mode, Map<Integer, Counter>>> counters;
 
@@ -37,7 +37,7 @@ public final class MediaBytesMetricRecorder {
         var modes = new EnumMap<Mode, Map<Integer, Counter>>(Mode.class);
         for (var delivery : Mode.values()) {
           var statuses = new HashMap<Integer, Counter>();
-          for (int status : STATUSES)
+          for (int status : ACCEPTED_STATUSES)
             statuses.put(
                 status,
                 Counter.builder("nk_media_bytes_total")
@@ -56,7 +56,8 @@ public final class MediaBytesMetricRecorder {
   public void record(MediaType type, Mode mode, int status, long bytes) {
     Objects.requireNonNull(type, "media type");
     Objects.requireNonNull(mode, "media byte mode");
-    if (!STATUSES.contains(status)) throw new IllegalArgumentException("invalid media byte status");
+    if (!ACCEPTED_STATUSES.contains(status))
+      throw new IllegalArgumentException("invalid media byte status");
     if (bytes < 0) throw new IllegalArgumentException("invalid media byte count");
     if (detailed) {
       var modes = Objects.requireNonNull(counters.get(type), "registered media type");
@@ -71,6 +72,6 @@ public final class MediaBytesMetricRecorder {
   }
 
   public static List<Integer> statuses() {
-    return STATUSES;
+    return ACCEPTED_STATUSES;
   }
 }
