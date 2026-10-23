@@ -1,0 +1,228 @@
+{
+  "actualDatabaseActions": 0,
+  "actualVmActions": 0,
+  "artifacts": [
+    {
+      "costOwner": "WBS-C06",
+      "newCostAllocation": 0,
+      "owner": "WBS-C06",
+      "path": "src/deployment/config/common.yml.template",
+      "sha256": "d61acf911e08a15cfdb2700eb81db7bbbb920cb3ccd80f1665652af4b4b7880a"
+    },
+    {
+      "costOwner": "WBS-P018-05",
+      "newCostAllocation": 0,
+      "owner": "WBS-P018-05",
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/bootstrap/ApiManagementServer.java",
+      "sha256": "1dce86f75aa63c99fb60cdaacdf9f0f1556912b8da92bf178aff3ec61dac4507"
+    },
+    {
+      "costOwner": "WBS-P017-10",
+      "newCostAllocation": 0,
+      "owner": "WBS-P017-10",
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/mq/ArtemisQueuePressureClient.java",
+      "sha256": "930b0bb1448eaa78c8fa2406a41a06f2b9d1c5cbf6c953b19ec570d1139d386f"
+    },
+    {
+      "costOwner": "WBS-P018-01",
+      "newCostAllocation": 0,
+      "owner": "WBS-P018-01",
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/bootstrap/ApiNonSecretConfig.java",
+      "sha256": "44f593abd6204f9dbc9ebf672405e4adac7ff793f16c91c71f411d21d3b8ac45"
+    },
+    {
+      "costOwner": "WBS-P018-01",
+      "newCostAllocation": 0,
+      "owner": "WBS-P018-01",
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebNonSecretConfig.java",
+      "sha256": "a0254c980bdbead9800395cc2ea98704708cda4d7d81763fcd4d67b64f1c7620"
+    },
+    {
+      "costOwner": "WBS-P018-06",
+      "newCostAllocation": 0,
+      "owner": "WBS-P018-06",
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebManagementServer.java",
+      "sha256": "faf5d362d6fbd723fce76e471708c1092563b2c09762ef6460e427df5991354a"
+    }
+  ],
+  "boundedDeploymentMonitoringNameMatches": [],
+  "boundedSearchIsNotProofOfWholeImplementationAbsence": true,
+  "c07Accepted": false,
+  "command": "python3 -B tools/quality/pg6998_c07_requirement_map.py",
+  "createdUTC": "2026-10-23T00:00:06.288749+00:00",
+  "designFiles": [
+    {
+      "path": "documents/100_RD/170_運用・保守要件/171_運用・監視要件.md",
+      "sha256": "89c685c72b2c4314547fd2eb1a6daa8ba14a30ca0d28ecb102d3178cf86a7b87"
+    },
+    {
+      "path": "documents/200_UI/250_運用・非機能/252_ログ・監視・障害復旧設計.md",
+      "sha256": "76c30f05fc6656802015aedd25d4483f676e41793c41b0b038cc1fdaa14d78b3"
+    },
+    {
+      "path": "documents/300_SS/350_運用・品質/351_Log・metric・alert・error code設計.md",
+      "sha256": "9da7c4e4f24740e031f37f984ec562d56e14ff098b1433af3ec55fe15bd195e6"
+    }
+  ],
+  "effortPercent": null,
+  "executedTests": 0,
+  "existingTests": [
+    {
+      "declaredTestIdLines": [],
+      "executedByThisMap": false,
+      "methodDeclarations": [
+        "void httpOwn001FactoryFailureIdentityAndNullAreNotStarted() {",
+        "void ready005JdkStopMustPreserveCallerInterruptFlag() throws Exception {",
+        "void ready003ActualVendorStartedServerFailureClosesBoundOwner() throws Exception {",
+        "void ready001ActualDownUpDownPublicOnlyAndClosedRoutes() throws Exception {",
+        "void ready002HandoffFailureAndConcurrentStopNeverPromote() throws Exception {",
+        "void ready004OwnerClosedDuringAdmissionReleaseCannotPublishUp() throws Exception {",
+        "void ready003InformationNullUnknownInvalidAndRealBindCollision() throws Exception {"
+      ],
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/bootstrap/ApiManagementServerTest.java",
+      "sha256": "d309c0718cecfca7b2e01cb8465b2822630451bc907e6abafb6b64432d4ca13b"
+    },
+    {
+      "declaredTestIdLines": [
+        "/** PG242/PT-OPS-MQ-019..021; real Ops metrics and independent SS321 capacity literals. */"
+      ],
+      "executedByThisMap": false,
+      "methodDeclarations": [
+        "void opsMq019LiveSixEmptyQueueMetricsAndApplicationDenial() throws Exception {",
+        "void opsMq020EveryCountAndByteBoundaryIncludingDlqAlert() {",
+        "void opsMq021NullInvalidMetricsAndProviderFaultAreRedacted() {",
+        "private static void assertState(",
+        "private static void assertRedacted(org.junit.jupiter.api.function.Executable operation) {",
+        "public void close() throws Exception {"
+      ],
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/mq/ArtemisQueuePressureClientTest.java",
+      "sha256": "e8917d25956c76329d4013c4a8499f1ebf7d1e776b79234424eeac10ac6576d6"
+    },
+    {
+      "declaredTestIdLines": [
+        "/** PT-OPS-API-CFG-001..006: SS343 literals independent of production map construction. */"
+      ],
+      "executedByThisMap": false,
+      "methodDeclarations": [
+        "void opsApiCfg007IndependentManifestCountAndCanonicalHash() throws Exception {",
+        "void opsApiCfg001IndependentDefaultsAndCanonicalHash() throws Exception {",
+        "void opsApiCfg002LayeredNonSecretOverridesAndScalarTypes() throws Exception {",
+        "void opsApiCfg003YamlsRejectDuplicateUnknownSecretAndStructures() {",
+        "void opsApiCfg004AllFixedKeysUrlsAndRootsFailClosed() {",
+        "void opsApiCfg005NullUnknownAndConcurrentDeterminism() throws Exception {",
+        "void opsApiCfg006ShippedTemplatesMatchApprovedDefaults() throws Exception {"
+      ],
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/bootstrap/ApiNonSecretConfigTest.java",
+      "sha256": "c48aaae03b6901d3511ac2cda416c0f184044b6baefcf307d64c69997937a63c"
+    },
+    {
+      "declaredTestIdLines": [
+        "/** PT-OPS-WEB-CFG-001..006: SS343 literals, independent of production defaults. */"
+      ],
+      "executedByThisMap": false,
+      "methodDeclarations": [
+        "private static void rejected(String common, String web) {",
+        "void opsWebCfg007ExplicitDbMqSourcesAndNegativeBoundaries() throws Exception {",
+        "void opsWebCfg001IndependentDefaultsAndCanonicalHash() throws Exception {",
+        "void opsWebCfg002LayeredRangesAndScalarTypes() throws Exception {",
+        "void opsWebCfg003RejectMalformedUnknownSecretAndDecodedValues() {",
+        "void opsWebCfg004FixedKeysPortsTimeoutsCountsAndRoots() {",
+        "void opsWebCfg005NullUnknownAndConcurrentDeterminism() throws Exception {",
+        "void opsWebCfg006ShippedTemplatesMatchApprovedDefaults() throws Exception {"
+      ],
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/web/bootstrap/WebNonSecretConfigTest.java",
+      "sha256": "d56e00afaac0bfe0dd269d689b10df907a0f04a31e6021837a180ccea7f0b78b"
+    },
+    {
+      "declaredTestIdLines": [],
+      "executedByThisMap": false,
+      "methodDeclarations": [
+        "void ready007CompoundStartupCleanupKeepsPrimaryAndFixedDiagnostic() throws Exception {",
+        "void dispose() throws InterruptedException {",
+        "private static void fail(Throwable marker) {",
+        "public void setExecutor(java.util.concurrent.Executor value) {",
+        "public void stop(int delay) {",
+        "public void start() {",
+        "public void bind(java.net.InetSocketAddress address, int backlog) {",
+        "public void removeContext(String path) {",
+        "public void removeContext(com.sun.net.httpserver.HttpContext context) {",
+        "void httpOwn002FactoryFailureIdentityAndNullAreNotStarted() {",
+        "void ready003StartupFailureKeepsInterruptedCleanupSeparate() throws Exception {",
+        "public void start() {",
+        "public void bind(java.net.InetSocketAddress a, int b) throws IOException {",
+        "public void setExecutor(java.util.concurrent.Executor executor) {",
+        "public void stop(int delay) {",
+        "public void removeContext(String p) {",
+        "public void removeContext(com.sun.net.httpserver.HttpContext c) {",
+        "void ready005ActualBlockedHandlerUnknownJoinRetainsOwnerAndRetries() throws Exception {",
+        "void ready006HeldBindStartOnceAndStopBudgetBoundaries() throws Exception {",
+        "void ready003ActualVendorStartedServerFailureClosesBoundOwner() throws Exception {",
+        "void ready001ActualDownUpDownPublicOnlyAndClosedRoutes() throws Exception {",
+        "void ready002HandoffFailureAndConcurrentStopNeverPromote() throws Exception {",
+        "void ready004OwnerClosedDuringAdmissionReleaseCannotPublishUp() throws Exception {",
+        "void ready003InformationNullUnknownInvalidAndRealBindCollision() throws Exception {"
+      ],
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/bootstrap/WebManagementServerTest.java",
+      "sha256": "a95da75fffcffb573f22a5a3bebb3581cd61575053de1ef590eb4b112793d67d"
+    }
+  ],
+  "exitUnmet": [
+    "full catalogue/alert/deployment coverage",
+    "actual mode consistency and required451/trace",
+    "all individual C07 criteria"
+  ],
+  "formalUpdated": false,
+  "head": "3343f93324a37244a654e92a43910d723bce0ab4",
+  "newOriginal190Accepted": 0,
+  "nextOwner": "WBS-P018-09",
+  "nextStage": "pure MonitoringModePolicy and independent ordinary PT",
+  "original4222Repeated": false,
+  "productionSource": "e7d64fda2453e906ee6ccc5fe718e5c29841e4aa",
+  "requirementMapping": [
+    {
+      "existing": "REQUEST/ACTION logging has separate P018-09 implementation; not audited wholesale here",
+      "gap": "C07 deployment/rotation configuration and full catalogue linkage not proven",
+      "next": "Keep logging business code ownership P018-09; do not recharge as C07",
+      "requirements": "MON-002/003/004",
+      "section": "2-5"
+    },
+    {
+      "existing": "Management ready gauges plus batch Queue-pressure projection only; not SS351 whole metric catalogue",
+      "gap": "Per-metric exporter/instrumentation/label and cardinality TestID mapping incomplete",
+      "next": "Independent pure catalogue/label contract implementation may start under P018-09; actual exporter/runtime remains held",
+      "requirements": "MON-005/006/009/013",
+      "section": "6"
+    },
+    {
+      "existing": "ArtemisQueuePressureClient has finite count/byte policy, existing PT-OPS-MQ-019..021",
+      "gap": "Other threshold timing, dedup/recovery and deployment alert rules not mapped",
+      "next": "Pure alert policy and fixed-clock tests permitted; live target operations not permitted",
+      "requirements": "MON-005/006/008/009",
+      "section": "7"
+    },
+    {
+      "existing": "Common mode knob is C06; Web/API parsers validate the enum; management endpoint ready gauge is SS342-specific",
+      "gap": "Pure mode-to-detailed-service consistency/retention contract and tests absent from bounded references",
+      "next": "Implement pure MonitoringModePolicy with exhaustive independent mode/service-state PT under P018-09; do not change existing management/native entry",
+      "requirements": "MON-010/011/012/013",
+      "section": "8"
+    },
+    {
+      "existing": "Retention requirements approved in SS351/UI252",
+      "gap": "C07 monitoring15d/5GB/config artifacts not registered",
+      "next": "Record exact policy settings; real storage retention requires later configuration/runtime evidence",
+      "requirements": "MON-007/013",
+      "section": "9"
+    },
+    {
+      "existing": "Existing configuration and Queue tests are shared references, not whole-C07 acceptance",
+      "gap": "Mode switch/cardinality/all-alert/end-to-end TestID and execution coverage incomplete",
+      "next": "Normal pure PT permitted; actual mode/service switch and integration remain HOLD",
+      "requirements": "MON-001..013",
+      "section": "10"
+    }
+  ],
+  "schemaVersion": 1,
+  "startPermitted": "public source and pure host fixture code/PT, no external target/resource acquisition",
+  "toolSha256": "ca87cda3027acc5d62d2b1203f72c37f50669105d10fb0d1aa6f7fe94710150c"
+}
