@@ -16,7 +16,7 @@ import java.util.Objects;
 import java.util.Set;
 
 /** SS351/1723/BUG1678: exact cumulative finite SLO counts, without HDR range quantization. */
-public class ExactDurationMeterRegistry extends SimpleMeterRegistry {
+public class ExactDurationMeterRegistry extends SimpleMeterRegistry implements AutoCloseable {
   private static final Set<String> DURATION_NAMES =
       Set.of("nk_db_query_duration_seconds", "nk_mq_processing_duration_seconds");
   private static final double[] BOUNDARIES = {.001, .01, .1, 1., 1.5};
