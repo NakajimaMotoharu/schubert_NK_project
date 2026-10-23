@@ -12,7 +12,7 @@ METHODS={
  'outboxMetric007PartialRegistrationFailureKeepsIdentityAndCallerOwnership',
  'outboxMetric008OwnersAndRepeatedValuesCannotShareOrGrowSeries'}
 
-if __name__=='__main__':
+def configure():
     post=previous.configure()
     post.SLOT=host.SLOT;post.RUN='PG7390-api-outbox-rows-host-v1'
     post.OUT=post.host.BASE/'PG7392-api-outbox-rows-post-v1'
@@ -21,4 +21,7 @@ if __name__=='__main__':
     post.NAMES|={post.PREFIX+n for n in ('OutboxRowsMetricRecorder','OutboxRowsMetricRecorder$Counts','OutboxRowsMetricRecorder$Status')}
     post.EXPECTED_SUITES[host.SUITES[7]]=dict(tests=8,failures=0,errors=0,skipped=0)
     post.TOTAL_TESTS=64;post.SOURCE_FILE_COUNT=17
-    post.main()
+    return post
+
+if __name__=='__main__':
+    configure().main()
