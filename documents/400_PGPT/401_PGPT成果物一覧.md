@@ -1,5 +1,7 @@
 # PGPT成果物一覧・進捗
 
+2026-10-24最新：1718_MqMessageMetric仕様・1719結果追跡、source23b74be40/当API162PT20suite（新8＋必要既154）・実34四100(L605M111C34B275)/全1783/129delta-114physical/生成54/raw17全理由、新BUG0。API前資格130に新四部品32一意TestIDを加え当162で全再資格、実34(+9)/L+145/M+23/B+55を技術実績として記録。原190新受入0/正式/whole451/工数率は未更新、個別namespaceから実MQ処理・経路認可を推定しない。
+
 2026-10-24最新：1716_MqProcessingDurationMetric仕様・1717結果追跡、source602808269/当API154PT19suite（新8＋必要既146）・実32四100(L560M103C32B262)/全1781/127delta-112追加physical/生成52/raw17全理由、新BUG0。SS323全64layoutのflow S60/A2/I2/供給秒値だけ、実MQ-clock-consumer hook/exporter・正式/whole451/工数未受入。
 
 2026-10-24最新：1714_DbQueryDuration取得結線仕様・1715結果追跡、sourcee54364742/当API146PT18suite（新8＋必要既138）・実30四100(L523M98C30B247)/全1779/125delta-110追加physical/生成50/raw17全理由、新BUG0。借用providerの完全供給だけread→publication、missing/failureを0秒やFAILURE eventへ捏造0、actual DB-clock-hook/exporter・正式/whole451/工数未受入。
