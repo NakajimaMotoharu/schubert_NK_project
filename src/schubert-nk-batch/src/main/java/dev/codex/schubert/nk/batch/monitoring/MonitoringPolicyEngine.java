@@ -35,8 +35,16 @@ public final class MonitoringPolicyEngine {
   }
 
   public Optional<Event> asyncQueue(
-      Service service, long queued, long capacity, ObservationContext context) {
-    return record(Condition.ASYNC_QUEUE, service, thresholds.asyncQueue(queued, capacity), context);
+      Service service,
+      long queued,
+      long usedBytes,
+      long capacityBytes,
+      ObservationContext context) {
+    return record(
+        Condition.ASYNC_QUEUE,
+        service,
+        thresholds.asyncQueue(queued, usedBytes, capacityBytes),
+        context);
   }
 
   public Optional<Event> webLog(

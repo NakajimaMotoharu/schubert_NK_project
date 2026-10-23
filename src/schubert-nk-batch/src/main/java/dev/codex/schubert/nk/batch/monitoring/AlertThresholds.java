@@ -31,11 +31,13 @@ public final class AlertThresholds {
         bytes >= 4_500_000_000L || files >= 9_000, bytes >= 3_500_000_000L || files >= 5_000);
   }
 
-  public Severity asyncQueue(long queued, long capacity) {
+  /** SS351/SS321: message count and total storage bytes are independent dimensions. */
+  public Severity asyncQueue(long queued, long usedBytes, long capacityBytes) {
     nonnegative(queued);
-    if (capacity <= 0) throw new IllegalArgumentException(INVALID);
-    BigInteger numerator = BigInteger.valueOf(queued).multiply(BigInteger.valueOf(100));
-    BigInteger denominator = BigInteger.valueOf(capacity);
+    nonnegative(usedBytes);
+    if (capacityBytes <= 0) throw new IllegalArgumentException(INVALID);
+    BigInteger numerator = BigInteger.valueOf(usedBytes).multiply(BigInteger.valueOf(100));
+    BigInteger denominator = BigInteger.valueOf(capacityBytes);
     return level(
         queued >= 9_000 || numerator.compareTo(denominator.multiply(BigInteger.valueOf(90))) >= 0,
         queued >= 5_000 || numerator.compareTo(denominator.multiply(BigInteger.valueOf(70))) >= 0);

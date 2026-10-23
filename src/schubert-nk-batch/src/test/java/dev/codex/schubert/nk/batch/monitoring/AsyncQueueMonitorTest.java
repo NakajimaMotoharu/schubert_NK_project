@@ -10,6 +10,7 @@ import dev.codex.schubert.nk.batch.monitoring.AlertLifecycle.CauseClearance;
 import dev.codex.schubert.nk.batch.monitoring.AlertLifecycle.Condition;
 import dev.codex.schubert.nk.batch.monitoring.AlertLifecycle.Service;
 import dev.codex.schubert.nk.batch.monitoring.AlertLifecycle.Severity;
+import dev.codex.schubert.nk.batch.monitoring.AsyncQueueMonitor.ByteUsage;
 import dev.codex.schubert.nk.batch.monitoring.AsyncQueueMonitor.Evaluation;
 import java.math.BigInteger;
 import java.time.Duration;
@@ -22,7 +23,8 @@ import java.util.concurrent.Executors;
 import org.junit.jupiter.api.Test;
 
 /**
- * ASYNCQUEUE001..008/1674: supplied scalar/elapsed fixtures only, no sampling/control operations.
+ * ASYNCQUEUE001..008/1679, ASYNCBYTE002: supplied scalar/elapsed fixtures only, no sampling/control
+ * operations.
  */
 class AsyncQueueMonitorTest {
   private static final Instant AT = Instant.parse("2026-10-23T00:00:00Z");
@@ -35,7 +37,7 @@ class AsyncQueueMonitorTest {
       AsyncQueueMonitor monitor, long queued, long capacity, long seconds) {
     return monitor.observe(
         OptionalLong.of(queued),
-        OptionalLong.of(capacity),
+        Optional.of(new ByteUsage(0, capacity)),
         true,
         at(seconds, CauseClearance.CONFIRMED));
   }
@@ -46,50 +48,54 @@ class AsyncQueueMonitorTest {
     assertTrue(monitor.snapshot().isEmpty());
     var normal = sample(monitor, 4999, 100000, 0);
     assertTrue(normal.queuedPresent());
-    assertTrue(normal.capacityPresent());
+    assertTrue(normal.byteUsagePresent());
     assertTrue(normal.event().isEmpty());
     var missing =
         monitor.observe(
-            OptionalLong.empty(), OptionalLong.empty(), true, at(1, CauseClearance.CONFIRMED));
+            OptionalLong.empty(), Optional.empty(), true, at(1, CauseClearance.CONFIRMED));
     assertFalse(missing.queuedPresent());
-    assertFalse(missing.capacityPresent());
+    assertFalse(missing.byteUsagePresent());
     assertTrue(missing.event().isEmpty());
     var onlyCount =
         monitor.observe(
-            OptionalLong.of(0), OptionalLong.empty(), true, at(2, CauseClearance.CONFIRMED));
+            OptionalLong.of(0), Optional.empty(), true, at(2, CauseClearance.CONFIRMED));
     assertTrue(onlyCount.queuedPresent());
-    assertFalse(onlyCount.capacityPresent());
+    assertFalse(onlyCount.byteUsagePresent());
     assertTrue(onlyCount.event().isEmpty());
     var onlyAge =
         monitor.observe(
-            OptionalLong.empty(), OptionalLong.of(100000), true, at(3, CauseClearance.CONFIRMED));
+            OptionalLong.empty(),
+            Optional.of(new ByteUsage(0, 100000)),
+            true,
+            at(3, CauseClearance.CONFIRMED));
     assertFalse(onlyAge.queuedPresent());
-    assertTrue(onlyAge.capacityPresent());
+    assertTrue(onlyAge.byteUsagePresent());
     assertTrue(onlyAge.event().isEmpty());
   }
 
   @Test
   void asyncQueue002ExactAbsoluteAndRatioBoundariesUseIndependentGoldenValues() {
+    // count, usedBytes, limitBytes; non-correlated dimensions from SS321/351.
     long[][] vectors = {
-      {0, 1},
-      {69, 100},
-      {70, 100},
-      {89, 100},
-      {90, 100},
-      {699, 1000},
-      {700, 1000},
-      {899, 1000},
-      {900, 1000},
-      {7, 10},
-      {9, 10},
-      {1, 1},
-      {4999, 100000},
-      {5000, 100000},
-      {8999, 100000},
-      {9000, 100000},
-      {5000, Long.MAX_VALUE},
-      {9000, Long.MAX_VALUE},
-      {Long.MAX_VALUE, Long.MAX_VALUE}
+      {0, 0, 1},
+      {1, 69, 100},
+      {1, 70, 100},
+      {1, 89, 100},
+      {1, 90, 100},
+      {1, 699, 1000},
+      {1, 700, 1000},
+      {1, 899, 1000},
+      {1, 900, 1000},
+      {0, 7, 10},
+      {0, 9, 10},
+      {0, 1, 1},
+      {4999, 0, 1},
+      {5000, 0, 1},
+      {8999, 0, 1},
+      {9000, 0, 1},
+      {5000, 0, Long.MAX_VALUE},
+      {9000, 0, Long.MAX_VALUE},
+      {0, Long.MAX_VALUE, Long.MAX_VALUE}
     };
     Severity[] expected = {
       Severity.NORMAL,
@@ -114,9 +120,14 @@ class AsyncQueueMonitorTest {
     };
     for (int i = 0; i < vectors.length; i++) {
       var monitor = new AsyncQueueMonitor();
-      var result = sample(monitor, vectors[i][0], vectors[i][1], 0);
+      var result =
+          monitor.observe(
+              OptionalLong.of(vectors[i][0]),
+              Optional.of(new ByteUsage(vectors[i][1], vectors[i][2])),
+              true,
+              at(0, CauseClearance.CONFIRMED));
       assertTrue(result.queuedPresent());
-      assertTrue(result.capacityPresent());
+      assertTrue(result.byteUsagePresent());
       if (expected[i] == Severity.NORMAL) assertTrue(result.event().isEmpty());
       else {
         var event = result.event().orElseThrow();
@@ -136,27 +147,43 @@ class AsyncQueueMonitorTest {
           new AsyncQueueMonitor()
               .observe(
                   OptionalLong.of(counts[i]),
-                  OptionalLong.empty(),
+                  Optional.empty(),
                   true,
                   at(0, CauseClearance.CONFIRMED));
       assertTrue(result.queuedPresent());
-      assertFalse(result.capacityPresent());
+      assertFalse(result.byteUsagePresent());
       if (partial[i] == Severity.NORMAL) assertTrue(result.event().isEmpty());
       else assertEquals(partial[i], result.event().orElseThrow().severity());
+    }
+    for (long used : new long[] {70, 90, Long.MAX_VALUE}) {
+      var result =
+          new AsyncQueueMonitor()
+              .observe(
+                  OptionalLong.empty(),
+                  Optional.of(new ByteUsage(used, 100)),
+                  true,
+                  at(0, CauseClearance.CONFIRMED));
+      assertFalse(result.queuedPresent());
+      assertTrue(result.byteUsagePresent());
+      assertEquals(
+          used == 70 ? Severity.WARNING : Severity.CRITICAL,
+          result.event().orElseThrow().severity());
     }
     for (long capacity : new long[] {1, 100, Long.MAX_VALUE}) {
       var result =
           new AsyncQueueMonitor()
               .observe(
                   OptionalLong.empty(),
-                  OptionalLong.of(capacity),
+                  Optional.of(new ByteUsage(0, capacity)),
                   true,
                   at(0, CauseClearance.CONFIRMED));
       assertFalse(result.queuedPresent());
-      assertTrue(result.capacityPresent());
+      assertTrue(result.byteUsagePresent());
       assertTrue(result.event().isEmpty());
     }
   }
+
+  // Unknown count must not hide known byte overload.
 
   @Test
   void asyncQueue003UnknownAndPartialLowEvidenceBreakNormalRecoveryWithoutClosing() {
@@ -165,15 +192,18 @@ class AsyncQueueMonitorTest {
     sample(monitor, 0, 100000, 1);
     var absent =
         monitor.observe(
-            OptionalLong.empty(), OptionalLong.empty(), true, at(180, CauseClearance.CONFIRMED));
+            OptionalLong.empty(), Optional.empty(), true, at(180, CauseClearance.CONFIRMED));
     assertSame(first, absent.event().orElseThrow());
     var countOnly =
         monitor.observe(
-            OptionalLong.of(0), OptionalLong.empty(), true, at(181, CauseClearance.CONFIRMED));
+            OptionalLong.of(0), Optional.empty(), true, at(181, CauseClearance.CONFIRMED));
     assertSame(first, countOnly.event().orElseThrow());
     var ageOnly =
         monitor.observe(
-            OptionalLong.empty(), OptionalLong.of(100000), true, at(182, CauseClearance.CONFIRMED));
+            OptionalLong.empty(),
+            Optional.of(new ByteUsage(0, 100000)),
+            true,
+            at(182, CauseClearance.CONFIRMED));
     assertSame(first, ageOnly.event().orElseThrow());
     sample(monitor, 0, 100000, 200);
     assertTrue(sample(monitor, 0, 100000, 499).event().orElseThrow().isOpen());
@@ -197,7 +227,10 @@ class AsyncQueueMonitorTest {
     sample(monitor, 0, 100000, 2);
     var unconfirmed =
         monitor.observe(
-            OptionalLong.of(0), OptionalLong.of(100000), true, at(602, CauseClearance.UNCONFIRMED));
+            OptionalLong.of(0),
+            Optional.of(new ByteUsage(0, 100000)),
+            true,
+            at(602, CauseClearance.UNCONFIRMED));
     assertTrue(unconfirmed.event().orElseThrow().isOpen());
     var closed = sample(monitor, 0, 100000, 603).event().orElseThrow();
     assertFalse(closed.isOpen());
@@ -214,7 +247,10 @@ class AsyncQueueMonitorTest {
     sample(monitor, 5000, 100000, 0);
     sample(monitor, 0, 100000, 1);
     monitor.observe(
-        OptionalLong.of(0), OptionalLong.of(100000), false, at(300, CauseClearance.CONFIRMED));
+        OptionalLong.of(0),
+        Optional.of(new ByteUsage(0, 100000)),
+        false,
+        at(300, CauseClearance.CONFIRMED));
     assertTrue(sample(monitor, 0, 100000, 599).event().orElseThrow().isOpen());
     assertFalse(sample(monitor, 0, 100000, 600).event().orElseThrow().isOpen());
     assertTrue(monitor.snapshot().isEmpty());
@@ -226,13 +262,13 @@ class AsyncQueueMonitorTest {
     var first = sample(monitor, 5000, 100000, 5).event().orElseThrow();
     assertThrows(
         NullPointerException.class,
-        () -> monitor.observe(null, OptionalLong.empty(), true, at(6, CauseClearance.CONFIRMED)));
+        () -> monitor.observe(null, Optional.empty(), true, at(6, CauseClearance.CONFIRMED)));
     assertThrows(
         NullPointerException.class,
         () -> monitor.observe(OptionalLong.empty(), null, true, at(6, CauseClearance.CONFIRMED)));
     assertThrows(
         NullPointerException.class,
-        () -> monitor.observe(OptionalLong.empty(), OptionalLong.empty(), true, null));
+        () -> monitor.observe(OptionalLong.empty(), Optional.empty(), true, null));
     assertThrows(IllegalArgumentException.class, () -> sample(monitor, -1, 100000, 6));
     assertThrows(IllegalArgumentException.class, () -> sample(monitor, 0, -1, 6));
     assertThrows(IllegalArgumentException.class, () -> sample(monitor, 0, 100000, 4));
@@ -241,7 +277,10 @@ class AsyncQueueMonitorTest {
         IllegalArgumentException.class,
         () ->
             monitor.observe(
-                OptionalLong.empty(), OptionalLong.of(0), true, at(6, CauseClearance.CONFIRMED)));
+                OptionalLong.empty(),
+                Optional.of(new ByteUsage(0, 0)),
+                true,
+                at(6, CauseClearance.CONFIRMED)));
     assertSame(first, monitor.snapshot().orElseThrow());
     sample(monitor, 0, 100000, 6);
     assertFalse(sample(monitor, 0, 100000, 306).event().orElseThrow().isOpen());
@@ -260,7 +299,7 @@ class AsyncQueueMonitorTest {
           () -> {
             var result = sample(monitor, count, 100000, 0);
             return result.queuedPresent()
-                && result.capacityPresent()
+                && result.byteUsagePresent()
                 && result.event().orElseThrow().isOpen();
           });
     }
@@ -278,6 +317,33 @@ class AsyncQueueMonitorTest {
   }
 
   @Test
+  void asyncByte002ByteUsageInvariantsAndGeneratedContractsHaveIndependentOracles() {
+    var actual = new ByteUsage(70, 100);
+    Object same = actual;
+    Object absent = null;
+    Object other = "bytes";
+    assertTrue(actual.equals(same));
+    assertEquals(new ByteUsage(70, 100), actual);
+    assertFalse(actual.equals(absent));
+    assertFalse(actual.equals(other));
+    assertFalse(actual.equals(new ByteUsage(69, 100)));
+    assertFalse(actual.equals(new ByteUsage(70, 101)));
+    assertEquals(70, actual.usedBytes());
+    assertEquals(100, actual.capacityBytes());
+    assertEquals(2270, actual.hashCode());
+    assertEquals("ByteUsage[usedBytes=70, capacityBytes=100]", actual.toString());
+    var max = new ByteUsage(Long.MAX_VALUE, Long.MAX_VALUE);
+    assertEquals(Long.MAX_VALUE, max.usedBytes());
+    assertEquals(Long.MAX_VALUE, max.capacityBytes());
+    assertEquals(0, max.hashCode()); // Long.MAX_VALUE hash = 0x80000000; 32-fold wraps to zero.
+    for (long invalid : new long[] {-1, Long.MIN_VALUE}) {
+      assertThrows(IllegalArgumentException.class, () -> new ByteUsage(invalid, 1));
+      assertThrows(IllegalArgumentException.class, () -> new ByteUsage(0, invalid));
+    }
+    assertThrows(IllegalArgumentException.class, () -> new ByteUsage(0, 0));
+  }
+
+  @Test
   void asyncQueue008GeneratedEvaluationContractsHaveIndependentFieldAndPlatformOracles() {
     var actual = new Evaluation(true, true, Optional.empty());
     Object sameInstance = actual;
@@ -290,22 +356,22 @@ class AsyncQueueMonitorTest {
     assertFalse(actual.equals(new Evaluation(false, true, Optional.empty())));
     assertFalse(actual.equals(new Evaluation(true, false, Optional.empty())));
     assertFalse(new Evaluation(false, true, Optional.empty()).queuedPresent());
-    assertFalse(new Evaluation(true, false, Optional.empty()).capacityPresent());
+    assertFalse(new Evaluation(true, false, Optional.empty()).byteUsagePresent());
     var event = sample(new AsyncQueueMonitor(), 5000, 100000, 0).event().orElseThrow();
     assertFalse(actual.equals(new Evaluation(true, true, Optional.of(event))));
     assertTrue(actual.queuedPresent());
-    assertTrue(actual.capacityPresent());
+    assertTrue(actual.byteUsagePresent());
     assertEquals(Optional.empty(), actual.event());
     assertEquals(1221152, actual.hashCode());
     assertEquals(
-        "Evaluation[queuedPresent=true, capacityPresent=true, event=Optional.empty]",
+        "Evaluation[queuedPresent=true, byteUsagePresent=true, event=Optional.empty]",
         actual.toString());
     var populated = new Evaluation(true, true, Optional.of(event));
     assertSame(event, populated.event().orElseThrow());
     assertTrue(populated.equals(new Evaluation(true, true, Optional.of(event))));
     assertEquals(1221152 + System.identityHashCode(event), populated.hashCode());
     assertEquals(
-        "Evaluation[queuedPresent=true, capacityPresent=true, event=Optional[dev.codex.schubert.nk.batch.monitoring.AlertLifecycle$Event@"
+        "Evaluation[queuedPresent=true, byteUsagePresent=true, event=Optional[dev.codex.schubert.nk.batch.monitoring.AlertLifecycle$Event@"
             + Integer.toHexString(System.identityHashCode(event))
             + "]]",
         populated.toString());

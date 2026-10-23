@@ -49,17 +49,20 @@ class AlertThresholdsTest {
 
   @Test
   void threshold003AsyncCountRatioAndNoOverflow() {
-    assertEquals(Severity.NORMAL, thresholds.asyncQueue(0, 10_000));
-    assertEquals(Severity.NORMAL, thresholds.asyncQueue(4_999, 100_000));
-    assertEquals(Severity.WARNING, thresholds.asyncQueue(5_000, 100_000));
-    assertEquals(Severity.WARNING, thresholds.asyncQueue(8_999, 100_000));
-    assertEquals(Severity.CRITICAL, thresholds.asyncQueue(9_000, 100_000));
-    assertEquals(Severity.NORMAL, thresholds.asyncQueue(699, 1_000));
-    assertEquals(Severity.WARNING, thresholds.asyncQueue(700, 1_000));
-    assertEquals(Severity.WARNING, thresholds.asyncQueue(899, 1_000));
-    assertEquals(Severity.CRITICAL, thresholds.asyncQueue(900, 1_000));
-    assertEquals(Severity.CRITICAL, thresholds.asyncQueue(Long.MAX_VALUE, Long.MAX_VALUE));
-    assertEquals(Severity.CRITICAL, thresholds.asyncQueue(1, 1));
+    assertEquals(Severity.NORMAL, thresholds.asyncQueue(0, 0, 10_000));
+    assertEquals(Severity.NORMAL, thresholds.asyncQueue(4_999, 0, 100_000));
+    assertEquals(Severity.WARNING, thresholds.asyncQueue(5_000, 0, 100_000));
+    assertEquals(Severity.WARNING, thresholds.asyncQueue(8_999, 0, 100_000));
+    assertEquals(Severity.CRITICAL, thresholds.asyncQueue(9_000, 0, 100_000));
+    assertEquals(Severity.NORMAL, thresholds.asyncQueue(1, 699, 1_000));
+    assertEquals(Severity.WARNING, thresholds.asyncQueue(1, 700, 1_000));
+    assertEquals(Severity.WARNING, thresholds.asyncQueue(1, 899, 1_000));
+    assertEquals(Severity.CRITICAL, thresholds.asyncQueue(1, 900, 1_000));
+    assertEquals(Severity.CRITICAL, thresholds.asyncQueue(Long.MAX_VALUE, 0, Long.MAX_VALUE));
+    assertEquals(Severity.CRITICAL, thresholds.asyncQueue(0, 1, 1));
+    assertEquals(Severity.NORMAL, thresholds.asyncQueue(4999, 0, 1));
+    assertEquals(Severity.CRITICAL, thresholds.asyncQueue(0, Long.MAX_VALUE, Long.MAX_VALUE));
+    assertEquals(Severity.CRITICAL, thresholds.asyncQueue(0, 100, 99));
   }
 
   @Test
@@ -168,9 +171,10 @@ class AlertThresholdsTest {
         List.of(
             () -> thresholds.transfer(-1, 0),
             () -> thresholds.transfer(0, -1),
-            () -> thresholds.asyncQueue(-1, 1),
-            () -> thresholds.asyncQueue(0, 0),
-            () -> thresholds.asyncQueue(0, -1),
+            () -> thresholds.asyncQueue(-1, 0, 1),
+            () -> thresholds.asyncQueue(0, 0, 0),
+            () -> thresholds.asyncQueue(0, 0, -1),
+            () -> thresholds.asyncQueue(0, -1, 1),
             () -> thresholds.webLog(-1, ZERO),
             () -> thresholds.dlq(-1, false, false),
             () -> thresholds.expiry(-1),
@@ -236,7 +240,7 @@ class AlertThresholdsTest {
                 List.of(
                     thresholds.filesystem(80, FIVE, ZERO),
                     thresholds.transfer(3_500_000_000L, 0),
-                    thresholds.asyncQueue(700, 1000),
+                    thresholds.asyncQueue(1, 700, 1000),
                     thresholds.webLog(1, FIVE),
                     thresholds.dlq(1, false, false),
                     thresholds.expiry(1000),

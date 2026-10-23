@@ -57,7 +57,7 @@ class MonitoringPolicyEngineTest {
           engine.transfer(
               service, normal ? 0 : critical ? 4_500_000_000L : 3_500_000_000L, 0, context);
       case ASYNC_QUEUE ->
-          engine.asyncQueue(service, normal ? 0 : critical ? 900 : 700, 1000, context);
+          engine.asyncQueue(service, 1, normal ? 0 : critical ? 900 : 700, 1000, context);
       case WEB_LOG ->
           engine.webLog(service, normal ? 0 : 1, normal ? ZERO : critical ? THIRTY : FIVE, context);
       case DLQ -> engine.dlq(service, normal ? 0 : 1, critical, false, context);
@@ -209,6 +209,27 @@ class MonitoringPolicyEngineTest {
     assertThrows(NullPointerException.class, () -> engine.transfer(Service.WEB, 0, 0, null));
     assertEquals(before, engine.activeAlerts());
     assertEquals(BigInteger.ONE, engine.activeAlerts().getFirst().count());
+  }
+
+  @Test
+  void asyncByte001EngineUsesStorageBytesIndependentOfMessageCount() {
+    var context = context(0, CauseClearance.UNCONFIRMED);
+    var storage = new MonitoringPolicyEngine();
+    assertEquals(
+        Severity.CRITICAL,
+        storage.asyncQueue(Service.API, 1, 90, 100, context).orElseThrow().severity());
+    var count = new MonitoringPolicyEngine();
+    assertEquals(
+        Severity.CRITICAL,
+        count.asyncQueue(Service.API, 9000, 0, 1, context).orElseThrow().severity());
+    var normal = new MonitoringPolicyEngine();
+    assertTrue(normal.asyncQueue(Service.API, 4999, 0, 1, context).isEmpty());
+    var before = storage.activeAlerts();
+    assertThrows(
+        IllegalArgumentException.class, () -> storage.asyncQueue(Service.API, 1, -1, 100, context));
+    assertThrows(
+        IllegalArgumentException.class, () -> storage.asyncQueue(Service.API, 1, 0, 0, context));
+    assertEquals(before, storage.activeAlerts());
   }
 
   @Test
