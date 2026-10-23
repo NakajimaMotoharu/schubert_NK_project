@@ -1,5 +1,7 @@
 # PGPT成果物一覧・進捗
 
+2026-10-23最新：[1631 API count→metric結線仕様](../../evidence/01_PT/018_NK-OPS-001/1631_APIAsyncCountMetric結線_単体テスト仕様書.md)～[1634追跡・障害再試験](../../evidence/01_PT/018_NK-OPS-001/1634_APIAsyncCountMetric結線_追跡・障害再試験完了.md)。当source003のAPI24PT3suite（新8）・実5class四100/CRC0、六正常compile/全1728Jar/旧1669不変・三POM/全69source追跡。PMD raw5を誤検知二/context三へ個別分類し未分類/有効違反/抑制0。BUG1659/YKT1412はfixture九箇所/adapterだけ修正・四負改変/再試験で限定閉鎖、元d791のcompile失敗/PT0保全。実DB/Root等HOLDと全体451/正式1964-53・歴史17/別source新7・原190新受入0/工数nullを維持し、独立残PG/PTへ継続。
+
 2026-10-23最新：[1627 API readonly集計仕様](../../evidence/01_PT/018_NK-OPS-001/1627_APIAsyncJobCountSource_単体テスト仕様書.md)～[1630追跡・適用性](../../evidence/01_PT/018_NK-OPS-001/1630_APIAsyncJobCountSource_追跡・適用性完了.md)。当sourcefaf7のAPI16PT2suite（新8）・実4class四100/CRC0、六正常compile/全1727Jar/旧1669不変・三POM厳密/全67source追跡。PMD raw2は当実行sourceのJava TWR両資源への誤検知に限定分類、raw/exit4保全・未分類/有効違反/抑制0。実DB/Root等HOLDと全体451/正式1964-53・歴史17/別source新7・原190新受入0/工数nullを維持し、許可独立PG/PTへ継続する。
 
 2026-10-23最新：[1623 API Async job metric仕様](../../evidence/01_PT/018_NK-OPS-001/1623_APIAsyncJobMetric_単体テスト仕様書.md)～[1626追跡・独立domain検証](../../evidence/01_PT/018_NK-OPS-001/1626_APIAsyncJobMetric_追跡・独立domain検証完了.md)。当source72では新API8PT/実3class四100・静的0を実行、歴史Batch169/source743・Web23/source19cは現在byte同一だけに分離。通常六compile/全1726Jar/旧1669不変・三POM厳密/全65source追跡、harness/POM十二＋domain転用五の静的negativeを確認（通常PTへ加算0）。正式1964-53・歴史17/別source新7・原190新受入0/工数null/全体451・実HOLDは維持し、残PG/PTへ継続する。

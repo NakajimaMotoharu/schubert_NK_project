@@ -16,8 +16,10 @@ PHYSICAL_COUNT=1726
 ADDED_PHYSICAL=57
 PREVIOUS_COUNT=61
 INTRODUCED_COUNT=4
+CHANGED_COUNT=0
 CONTRACT_SOURCE=SOURCE
 STATIC_CLASSIFIER=None
+EXTRA_REVIEW={}
 PINS={
  'currentApi':('PG7302-api-async-metric-post-v1/manifest.json','246b450c115954b30a6246c71bda7e5a2b25273fea211e32d729eb9b1b0304fa'),
  'physical':('PG7306-api-async-metric-six-post-v1/manifest.json','4d112f8dd1a30644becce423abeeabde2df9d65811736ee08de831f9b9b7491c'),
@@ -29,7 +31,7 @@ def require(value,message):
     if not value:raise ValueError(message)
 
 def domains(rows,classes,current,physical,previous):
-    counts=anchors(rows,previous,dict(changed=0,unchanged=PREVIOUS_COUNT,introduced=INTRODUCED_COUNT))
+    counts=anchors(rows,previous,dict(changed=CHANGED_COUNT,unchanged=PREVIOUS_COUNT-CHANGED_COUNT,introduced=INTRODUCED_COUNT))
     by_path={r['path']:r for r in rows};require(len(classes)==ADDED_PHYSICAL and len({r['className'] for r in classes})==ADDED_PHYSICAL,'all unique physical rows')
     current_inputs=set(current['sourceFiles'])
     for row in rows:
@@ -102,7 +104,7 @@ def main():
       negativeGuards=negative,historicalRawDispositionTransferred=False,currentApiExecutable=CURRENT_EXECUTABLE,
       historicalBatchExecutable=42,historicalWebExecutable=9,currentCountersOnly=current['counters'],
       whole451Accepted=False,formalUpdated=False,newAccepted=0,effortPercent=None,ptExecutedByReview=0,
-      actualVmActions=0,actualDatabaseActions=0)
+      actualVmActions=0,actualDatabaseActions=0,additionalReview=EXTRA_REVIEW)
     verify(invocation);os.umask(0o077);OUT.mkdir();host.write(OUT/'manifest.json',value)
     print(json.dumps(dict(actualExit=0,currentApiRawFindings=value['currentApiStaticFindings'],
       applicableViolations=0,unclassified=0,negativeGuards=len(negative),anchors=counts,manifestSha256=host.sha(OUT/'manifest.json'))))

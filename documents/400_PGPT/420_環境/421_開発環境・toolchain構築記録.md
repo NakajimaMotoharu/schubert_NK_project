@@ -1,5 +1,7 @@
 # 開発環境・toolchain構築記録
 
+2026-10-23 API count→metric結線：既JDK25.0.4/Maven3.9.12/SDK四Jar/静的工具だけ再利用、取得/導入/実driver接続0。元d791/7328・7332はSDK registry型誤認でtestCompile exit1/PT0、BUG1659起票後003のtest-local AutoCloseable adapter九生成だけ修正。7340/7342当24PT/単一sessionCRC0/L91M18C5B43全miss0、lint-NullAway/SB-CS0・PMD raw5を7338同source限定分類/抑制0。7344正常六Main/Test compile0/PT0、7334全1728Jar/三POM/五rule0。環境・再現command/元失敗と成功path hashは1631～1634、実環境HOLD不変更。
+
 2026-10-23 API readonly count source：既JDK25.0.4/Maven3.9.12/SDK四Jar/静的工具だけ再利用、取得/導入/実driver接続0。PG7314/7316当16PT/単一sessionCRC0/L76M15C4B41全miss0、lint-Werror-NullAway/SB-CS0・PMD raw2は実TWR誤検知で7324個別分類/抑制0。7318六Main/Test compile-packageのみPT0、7320全1727Jar/三POM/五rule0。最初のSpotless `-pl schubert-nk-api` exit1はroot相対path不足、`-pl src/schubert-nk-api`でformat0後sourcefaf7固定。再現command/実行環境/全path hashは1627～1630と元manifest、実環境HOLD不変更。
 
 ## 2026-10-23 API Async job metricの既SDK再利用

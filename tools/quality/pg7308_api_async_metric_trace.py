@@ -27,6 +27,7 @@ DOCS={1623:'1623_APIAsyncJobMetric_単体テスト仕様書.md',1624:'1624_APIAs
       1625:'1625_APIAsyncJobMetric_実Jar・資格domain.md'}
 ALLOWED_NEW={'AsyncJobMetricRecorder.java','AsyncJobMetricRecorderTest.java','package-info.java','pom.xml'}
 TEST_ID_FAMILY='ASYNCGAUGE001..008'
+EDITED_EXISTING=set()
 
 def require(value,message):
     if not value:raise ValueError(message)
@@ -53,8 +54,9 @@ def main():
         path=item['path'];blob=subprocess.check_output(['git','show',SOURCE+':'+path],cwd=host.ROOT)
         require(host.sha(host.ROOT/path)==item['sha256']==hashlib.sha256(blob).hexdigest(),'current path/committed byte/normal compile source exact')
         if path in prior:
-            row=dict(prior[path]);require(row['sha256']==item['sha256'],'all previous61 source bytes unchanged')
-            row.update(previousSourceByteSha256=prior[path]['sha256'],sourceChangedSincePreviousTrace=False,sourceIntroducedSincePreviousTrace=False)
+            row=dict(prior[path]);changed=row['sha256']!=item['sha256']
+            require(changed is (path in EDITED_EXISTING),'only explicitly declared existing source edits')
+            row.update(sha256=item['sha256'],previousSourceByteSha256=prior[path]['sha256'],sourceChangedSincePreviousTrace=changed,sourceIntroducedSincePreviousTrace=False)
         else:
             require(path.startswith('src/schubert-nk-api/') and Path(path).name in ALLOWED_NEW,'only declared four newly tracked API files')
             row=dict(item,kind='DEPENDENCY_DESCRIPTOR' if path.endswith('/pom.xml') else 'TEST' if path.endswith('Test.java') else 'MAIN',
@@ -75,7 +77,7 @@ def main():
             row.update(qualificationRelationship='HISTORICAL_SOURCE_BYTES_UNCHANGED_NOT_CURRENT_EXECUTION',
               componentCounterScope='HISTORICAL_ONLY_NO_CURRENT_COUNTERS',currentSourceCoverageTransferred=False)
         rows.append(row)
-    counts=anchors(rows,prior,dict(changed=0,unchanged=PREVIOUS_COUNT,introduced=SOURCE_COUNT-PREVIOUS_COUNT))
+    counts=anchors(rows,prior,dict(changed=len(EDITED_EXISTING),unchanged=PREVIOUS_COUNT-len(EDITED_EXISTING),introduced=SOURCE_COUNT-PREVIOUS_COUNT))
     by_path={row['path']:row for row in rows};classes=[]
     for label,domain in (('CURRENT_API_QUALIFIED',physical['currentApi']),
                         ('HISTORICAL_BATCH_BYTE_IDENTITY_ONLY',physical['historicalBatch']),
