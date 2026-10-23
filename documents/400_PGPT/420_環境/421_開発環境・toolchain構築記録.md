@@ -1,5 +1,9 @@
 # 開発環境・toolchain構築記録
 
+## 2026-10-23 API Async job metricの既SDK再利用
+
+PG-D539/1623～1626、APIへ既core1.17.1を一compile nodeだけ追加。SDK四Jar/入手元/versionは既Batch/Webの下記記録と同じで、新規取得/除外/別backend0。再現はPG7300（API monitoring ordinary verify/8PT1suite）→7302（実3class/CRC/四100/静的0）→7304（六正常Main/Test compileのみ）→7306（全1726/四domain/三POM厳密）→7307（harness/POM十二改変拒否/旧DDL五状態）→7308/7310（全65src/当APIと歴史域の独立転用拒否）。API childは既真Batch harnessのsource role/artifact/不要fixture routing以外全XML同義で、親Enforcer/NullAway/lint-Werror/SB/JaCoCo四1.0を維持。新8へ歴史Batch169/Web23の成功やcoverageを移植せず、実DB/API/Root/exporter/IT-STを認定しない。
+
 ## 2026-10-23 Batch二metricの同版SDK再利用
 
 PG-D536/1611～1614、Batch direct compile/core1.17.1一nodeとhost harness同版を追加。SDK取得0/版変更0/除外0、下記1572/7106既入手元のcore9ca47dfa/commonsf2cee6ef/observationeb34f0cd/Hdr22d1d431全四Jarを開始/終了pinで照合。再現はPG7252 wrapper（offline通常verify/153PT21suite）→7254独立CRC/四100→7256通常六compileのみ→7257 POM一node/六負改変→7258全実Jar/二POM全semantic。新規install/downloadや実exporter/Batch/DB/Root起動は不要・未実施。Testは所有SimpleMeterRegistryにAutoCloseable bridge、productionは借用/close0。全50系列は40counter＋10gaugeでhistogram内部auxなし、未知lastSuccessはNaN。品質の範囲は当36classだけで全体451/IT-STを認定しない。

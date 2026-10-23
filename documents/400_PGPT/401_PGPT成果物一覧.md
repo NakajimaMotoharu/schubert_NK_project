@@ -1,5 +1,7 @@
 # PGPT成果物一覧・進捗
 
+2026-10-23最新：[1623 API Async job metric仕様](../../evidence/01_PT/018_NK-OPS-001/1623_APIAsyncJobMetric_単体テスト仕様書.md)～[1626追跡・独立domain検証](../../evidence/01_PT/018_NK-OPS-001/1626_APIAsyncJobMetric_追跡・独立domain検証完了.md)。当source72では新API8PT/実3class四100・静的0を実行、歴史Batch169/source743・Web23/source19cは現在byte同一だけに分離。通常六compile/全1726Jar/旧1669不変・三POM厳密/全65source追跡、harness/POM十二＋domain転用五の静的negativeを確認（通常PTへ加算0）。正式1964-53・歴史17/別source新7・原190新受入0/工数null/全体451・実HOLDは維持し、残PG/PTへ継続する。
+
 2026-10-23最新：[1619 Transfer警報・metric結線仕様](../../evidence/01_PT/018_NK-OPS-001/1619_Transfer警報Metric結線_単体テスト仕様書.md)～[1622追跡・適用性](../../evidence/01_PT/018_NK-OPS-001/1622_Transfer警報Metric結線_追跡・適用性完了.md)。当source743の監視169PT23suite（新8）・実42class四100/CRC0、六正常compile/全1722Jar/旧1669不変/61src追跡/原28静的理由同byte全照合・新finding0。STD health継続/詳細0、UNKNOWN/gap/二suffix合計の閾値を独立確認。正式1964-53・歴史17/別source新7・原190新受入0/工数null/全体451・実HOLDは維持し、許可済みの残PG/PTへ継続する。
 
 2026-10-23最新：[1615 Transfer二metric仕様](../../evidence/01_PT/018_NK-OPS-001/1615_Transfer二Metric記録_単体テスト仕様書.md)～[1618追跡・障害再試験](../../evidence/01_PT/018_NK-OPS-001/1618_Transfer二Metric記録_追跡・障害再試験完了.md)。当source147の監視161PT22suite（新8）・実40class四100/CRC0、六正常compile/全1720Jar/旧1669不変/59src追跡/raw28全分類。BUG1657/1658-YKT1410/1411限定閉鎖、元936の成功161/指摘31と工具exit1を保全、期待値変更/旧成功転用0。旧Mode承認三rawを消さずTransfer新違反0/未分類・有効違反0と区別する。正式1964-53・歴史17/別source新7・原190新受入0/工数null/実HOLD・全体451未受入は維持、次の独立PG/PTへ継続。

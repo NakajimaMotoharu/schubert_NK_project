@@ -1,5 +1,7 @@
 # Module・Program一覧
 
+2026-10-23追加（P018-09/C07共有費0、未正式受入）：API AsyncJobMetricRecorder(constructor/state/record/missing/snapshot/detail/Snapshot.value-totalJobs/State)→ASYNCGAUGE001～008/1623～1626/PG-D539、RD171/UI252/SS324331351。source72/7300真正API8PT1suite→7302実3四100/CRC0/静的0→7304六compileのみ→7306全1726/旧1669不変・当API4一致/歴史Batch43・Web10はbyteだけ/三POM厳密→7307十二静的negative/旧DDL五状態不変・7308全65source/57physical・7310五転用/alias拒否。当APIに旧Batch169/Web23を合算0、actual collector/Root/exporter/全体451未受入。
+
 2026-10-23追加（P018-09/C07共有費0、未正式受入）：TransferHealthMonitor(constructor/observe/snapshot/observedUsage/detail/Evaluation)→TRANSFERCONN001～008/1619～1622/PG-D538、RD171/UI252/SS341351。source743/7286真正169PT23suite→7288実42四100/CRC0→7290六compileのみ→7292全1722/旧1669不変・当Batch43一致/歴史Web10byteのみ・二POM厳密→7294全61source/53physical追跡・7296原28理由同byte全照合/新finding0。実collector/Root/制御/exporter/全体451は未受入。
 
 2026-10-23追加（P018-09/C07共有費0、未正式受入）：TransferMetricRecorder(constructor/record/missing/snapshot/detail/value/Counts/Usage/Suffix)→TRANSFERMET001～008/1615～1618/PG-D537・BUG1657/1658-YKT1410/1411、RD171/UI252/SS341351。source147/7272真正161PT22suite→7274実40四100/CRC0→7276六compileのみ→7278全1720/旧1669不変・当Batch41一致/歴史Web10byteのみ・二POM厳密→7280全59source/51physical追跡・7283 raw28全分類/新Transfer命名0・旧Mode承認三rawを保持。元936成功161/指摘31・元工具exit1は保全、期待値変更/旧成功転用0。実walk/collector/Root/control/exporter/全体451は未受入。
