@@ -20,12 +20,16 @@ import org.junit.jupiter.api.Test;
 /** Independent SS351 truth table/literals. PT-OPS-MONMODE-001..007, specification1541. */
 class MonitoringModePolicyTest {
   private static final List<DetailService> SERVICES =
-      List.of(DetailService.ACTUATOR, DetailService.PROMETHEUS, DetailService.GRAFANA,
+      List.of(
+          DetailService.ACTUATOR,
+          DetailService.PROMETHEUS,
+          DetailService.GRAFANA,
           DetailService.EXPORTERS);
 
   private static Map<DetailService, Boolean> observation(int mask) {
     var result = new EnumMap<DetailService, Boolean>(DetailService.class);
-    for (int index = 0; index < 4; index++) result.put(SERVICES.get(index), (mask & (1 << index)) != 0);
+    for (int index = 0; index < 4; index++)
+      result.put(SERVICES.get(index), (mask & (1 << index)) != 0);
     return result;
   }
 
@@ -47,10 +51,28 @@ class MonitoringModePolicyTest {
     var standard = observation(0);
     assertDoesNotThrow(() -> MonitoringModePolicy.DEBUG.verifyObserved(debug));
     assertDoesNotThrow(() -> MonitoringModePolicy.STANDARD.verifyObserved(standard));
-    assertEquals(Map.of(DetailService.ACTUATOR, true, DetailService.PROMETHEUS, true,
-        DetailService.GRAFANA, true, DetailService.EXPORTERS, true), debug);
-    assertEquals(Map.of(DetailService.ACTUATOR, false, DetailService.PROMETHEUS, false,
-        DetailService.GRAFANA, false, DetailService.EXPORTERS, false), standard);
+    assertEquals(
+        Map.of(
+            DetailService.ACTUATOR,
+            true,
+            DetailService.PROMETHEUS,
+            true,
+            DetailService.GRAFANA,
+            true,
+            DetailService.EXPORTERS,
+            true),
+        debug);
+    assertEquals(
+        Map.of(
+            DetailService.ACTUATOR,
+            false,
+            DetailService.PROMETHEUS,
+            false,
+            DetailService.GRAFANA,
+            false,
+            DetailService.EXPORTERS,
+            false),
+        standard);
   }
 
   @Test
@@ -60,8 +82,11 @@ class MonitoringModePolicyTest {
       for (var mode : MonitoringModePolicy.values()) {
         boolean expectedSuccess = mode == MonitoringModePolicy.DEBUG ? mask == 15 : mask == 0;
         if (expectedSuccess) assertDoesNotThrow(() -> mode.verifyObserved(observed));
-        else assertEquals("CONFIG_DRIFT",
-            assertThrows(IllegalStateException.class, () -> mode.verifyObserved(observed)).getMessage());
+        else
+          assertEquals(
+              "CONFIG_DRIFT",
+              assertThrows(IllegalStateException.class, () -> mode.verifyObserved(observed))
+                  .getMessage());
       }
     }
   }
@@ -69,13 +94,17 @@ class MonitoringModePolicyTest {
   @Test
   void monMode004MissingObservationNeverMeansHealthy() {
     for (var mode : MonitoringModePolicy.values()) {
-      assertEquals("CONFIG_DRIFT",
-          assertThrows(IllegalStateException.class, () -> mode.verifyObserved(Map.of())).getMessage());
+      assertEquals(
+          "CONFIG_DRIFT",
+          assertThrows(IllegalStateException.class, () -> mode.verifyObserved(Map.of()))
+              .getMessage());
       for (var service : SERVICES) {
         var missing = observation(mode == MonitoringModePolicy.DEBUG ? 15 : 0);
         missing.remove(service);
-        assertEquals("CONFIG_DRIFT",
-            assertThrows(IllegalStateException.class, () -> mode.verifyObserved(missing)).getMessage());
+        assertEquals(
+            "CONFIG_DRIFT",
+            assertThrows(IllegalStateException.class, () -> mode.verifyObserved(missing))
+                .getMessage());
       }
     }
   }
@@ -86,18 +115,31 @@ class MonitoringModePolicyTest {
     assertThrows(NullPointerException.class, () -> MonitoringModePolicy.DEBUG.verifyObserved(null));
     var nullKey = new HashMap<DetailService, Boolean>();
     nullKey.put(null, true);
-    assertThrows(NullPointerException.class, () -> MonitoringModePolicy.DEBUG.verifyObserved(nullKey));
+    assertThrows(
+        NullPointerException.class, () -> MonitoringModePolicy.DEBUG.verifyObserved(nullKey));
     var nullValue = observation(0);
     nullValue.put(DetailService.ACTUATOR, null);
-    assertThrows(NullPointerException.class, () -> MonitoringModePolicy.STANDARD.verifyObserved(nullValue));
+    assertThrows(
+        NullPointerException.class, () -> MonitoringModePolicy.STANDARD.verifyObserved(nullValue));
   }
 
   @Test
   void monMode006UnknownAndAliasedInputIsRedacted() {
-    for (String value : List.of("", "debug", "standard", " DEBUG", "DEBUG ", "TEST",
-        "synthetic-private-canary", "DEBUG\n", "STANDARD\t")) {
-      assertEquals("CONFIG_INVALID",
-          assertThrows(IllegalArgumentException.class, () -> MonitoringModePolicy.parse(value)).getMessage());
+    for (String value :
+        List.of(
+            "",
+            "debug",
+            "standard",
+            " DEBUG",
+            "DEBUG ",
+            "TEST",
+            "synthetic-private-canary",
+            "DEBUG\n",
+            "STANDARD\t")) {
+      assertEquals(
+          "CONFIG_INVALID",
+          assertThrows(IllegalArgumentException.class, () -> MonitoringModePolicy.parse(value))
+              .getMessage());
     }
   }
 
@@ -107,14 +149,15 @@ class MonitoringModePolicyTest {
     try {
       var tasks = new ArrayList<Callable<String>>();
       for (int index = 0; index < 64; index++) {
-        tasks.add(() -> {
-          MonitoringModePolicy.DEBUG.verifyObserved(observation(15));
-          MonitoringModePolicy.STANDARD.verifyObserved(observation(0));
-          assertEquals(15, MonitoringModePolicy.DEBUG.retentionDays());
-          assertEquals(5_000_000_000L, MonitoringModePolicy.DEBUG.retentionBytes());
-          assertEquals(0, MonitoringModePolicy.STANDARD.retentionBytes());
-          return "verified";
-        });
+        tasks.add(
+            () -> {
+              MonitoringModePolicy.DEBUG.verifyObserved(observation(15));
+              MonitoringModePolicy.STANDARD.verifyObserved(observation(0));
+              assertEquals(15, MonitoringModePolicy.DEBUG.retentionDays());
+              assertEquals(5_000_000_000L, MonitoringModePolicy.DEBUG.retentionBytes());
+              assertEquals(0, MonitoringModePolicy.STANDARD.retentionBytes());
+              return "verified";
+            });
       }
       for (var future : executor.invokeAll(tasks)) assertEquals("verified", future.get());
     } finally {

@@ -12,7 +12,9 @@ public enum MonitoringModePolicy {
   DEBUG(true, 15, 5_000_000_000L),
   STANDARD(false, 0, 0);
 
-  /** Only detailed monitoring components; basic health/journal/DB/disk monitoring is not included. */
+  /**
+   * Only detailed monitoring components; basic health/journal/DB/disk monitoring is not included.
+   */
   public enum DetailService {
     ACTUATOR,
     PROMETHEUS,
@@ -55,7 +57,8 @@ public enum MonitoringModePolicy {
 
   /**
    * Verify a caller-provided complete observation, not target ownership or an actual mode switch.
-   * Null inputs/elements violate the programming contract; absent/mismatched observations fail closed.
+   * Null inputs/elements violate the programming contract; absent/mismatched observations fail
+   * closed.
    */
   public void verifyObserved(Map<DetailService, Boolean> observed) {
     var snapshot = Map.copyOf(Objects.requireNonNull(observed, "monitoring observation"));

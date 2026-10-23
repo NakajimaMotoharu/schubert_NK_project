@@ -93,7 +93,7 @@ def main():
       measuredComponentCounters=counters,formalUpdated=False,newAccepted=0,
       effortPercent=None,qualification='RAW_TERMINAL_ONLY_INDEPENDENT_POST_PENDING')
     host.write(SLOT/'manifest.safe.json',value)
-    out = host.BASE/'PG7000-monitoring-mode-host-v1';out.mkdir();host.write(out/'manifest.json',value)
+    out = host.BASE/('PG'+SLOT.name.removeprefix('pg'));out.mkdir();host.write(out/'manifest.json',value)
     print(json.dumps(dict(source=source,actualExit=code,suites=suites,counters=counters,
                          manifestSha256=host.sha(out/'manifest.json'))))
     raise SystemExit(code)
