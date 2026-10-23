@@ -1,5 +1,7 @@
 # PGPT成果物一覧・進捗
 
+2026-10-24最新：[1697 MQ圧力取得結線仕様](../../evidence/01_PT/018_NK-OPS-001/1697_MQ圧力取得結線_単体テスト仕様書.md)・[1698結果追跡](../../evidence/01_PT/018_NK-OPS-001/1698_MQ圧力取得結線_結果・追跡.md)はsource153b/当130PT16suite・実25四100/全1765/110trace/生成41/raw16全個別理由。1691～1698のInbox/MQ圧力/再配送/取得結線で独立Test ID各8を追加（別sourceの成功件数を合算しない）。BUG1669工具誤分類・BUG1670固定label品質はそれぞれ1692/1694へ元失敗・再試験を分離保存し限定閉鎖。実broker/collector source/retention/whole451・正式受入/工数率は未更新。[1699配布保持限定照合](../../evidence/01_PT/018_NK-OPS-001/1699_監視・保持配布限定照合と次独立工程.md)はProduction PT0・次独立guardを選定する監査であり製造完了とはしない。
+
 2026-10-24現行：[1689 DLQ仕様](../../evidence/01_PT/018_NK-OPS-001/1689_DLQ供給観測警報_単体テスト仕様書.md)・[1690結果追跡](../../evidence/01_PT/018_NK-OPS-001/1690_DLQ供給観測警報_結果・追跡.md)。sourcecfd8c12dd/237PT31suite・実59四100/全1760/102trace/生成115/raw28理由、新製造8・新BUG0。実broker/triage/退役/正式・全体完了へ加算0。
 
 2026-10-24現行：[1687 Integrity仕様](../../evidence/01_PT/018_NK-OPS-001/1687_Integrity供給観測警報_単体テスト仕様書.md)・[1688結果追跡](../../evidence/01_PT/018_NK-OPS-001/1688_Integrity供給観測警報_結果・追跡.md)。source676b954e7/229PT30suite・実56四100/全1757/100trace/生成104/raw28理由、元製造新8・新BUG0。実probe/調査/修復/退役/正式・全体完了へ加算0。

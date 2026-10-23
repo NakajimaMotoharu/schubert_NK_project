@@ -1,5 +1,7 @@
 # Module・Program一覧
 
+2026-10-24最新（NK-OPS-001/P01809/C07/RD171/UI252/SS321323351）：InboxReplayMetricRecorder→INBOXMET001～008/1691～1692/PG-D558、MqPressureMetricRecorder/Snapshot→MQPRESS001～008/1693～1694/PG-D559、MqRedeliveryMetricRecorder→MQREDEL001～008/1695～1696/PG-D560、MqPressureMetricCollector→MQCONN001～008/1697～1698/PG-D561。最新候補source153b/130PT16suite・実25四100/全1765Main/全110source・96追加physical・生成41別契約/raw16全個別理由、Main/Test/module・既部品へのspec追加用途は7698/7700へ追跡。SS321§5.4/UI232の旧参照補足は1697。各結果は別source/歴史Batch-Web成功と合算せず、actual source/owner/runtime/Root等HOLD・正式未受入。1699は配置保持の27template限定監査/PT0であり次のobserved-retention guardへ接続する。
+
 2026-10-24追加：DlqHealthMonitor/Observation/Evaluation→DLQMON001～008/1689～1690/PG-D557/RD171/UI252/SS351353。sourcecfd8c12dd/237PT31suite・実59四100/全1760/102trace/生成115/raw28理由、coherent current-entry供給/既threshold/自動close禁止結線。歴史incident/実broker/owner/collector/triage/退役・正式未受入。
 
 2026-10-24追加：IntegrityHealthMonitor/Evaluation→INTEGRITYMON001～008/1687～1688/PG-D556/RD171/UI252/SS351§7・12。source676b954e7/229PT30suite・実56四100/全1757/100trace/生成104/raw28理由、供給count1重大・未知非正常化/正常/cause両値/MAX時間でも自動close禁止。actual source/probe/調査/修復/退役/collector・正式未受入。
