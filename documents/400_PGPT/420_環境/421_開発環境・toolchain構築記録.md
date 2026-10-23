@@ -1,5 +1,9 @@
 # 開発環境・toolchain構築記録
 
+## 2026-10-23 Batch二metricの同版SDK再利用
+
+PG-D536/1611～1614、Batch direct compile/core1.17.1一nodeとhost harness同版を追加。SDK取得0/版変更0/除外0、下記1572/7106既入手元のcore9ca47dfa/commonsf2cee6ef/observationeb34f0cd/Hdr22d1d431全四Jarを開始/終了pinで照合。再現はPG7252 wrapper（offline通常verify/153PT21suite）→7254独立CRC/四100→7256通常六compileのみ→7257 POM一node/六負改変→7258全実Jar/二POM全semantic。新規install/downloadや実exporter/Batch/DB/Root起動は不要・未実施。Testは所有SimpleMeterRegistryにAutoCloseable bridge、productionは借用/close0。全50系列は40counter＋10gaugeでhistogram内部auxなし、未知lastSuccessはNaN。品質の範囲は当36classだけで全体451/IT-STを認定しない。
+
 ## 2026-10-23 Web Micrometer coreを同版のままcompileへ昇格
 
 PG-D527/1573～1575、既managed/test版1.17.1のcoreをWeb direct compileへ正規追加。version変更/依存除外/他POM semantic変更0を7122 9e62721bで確認。runtime Hdr2.2.2は下記1572の正規local導入を使用。core9ca47dfa/commonsf2cee6ef/observationeb34f0cd/Hdr22d1d431の全Jarを元15PT/独立static/六compileの前後hashへ結合した。実SDKの自己所有SimpleMeterRegistry/MockClockだけで15PT/四counter100、実7classを正規Web Jarへ照合、全体451/実exporter/Root runtimeやIT-ST認定ではない。Micrometer registryはcloseを持つがAutoCloseableではないため、Test自己所有scopeにだけ明示bridgeを置き、本番Recorderは借用先をcloseしない。Simple providerは九SLO×35の315内部Gaugeをprimary1785とは別に保持、1573のprimary根拠/残存riskを維持する。新外部通信/SDK版変更/別backend置換0。

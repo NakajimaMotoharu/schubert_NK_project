@@ -1,6 +1,6 @@
 """Independent additive-scope review, requiring literal source/count/pins and unchanged rationale bytes.
 
-No original test execution, PMD suppression or acceptance publication. Only declared two private locks
+No original test execution, PMD suppression or acceptance publication. Only explicitly declared private locks
 may be introduced by this limited reviewer. Different finding types require another explicit review.
 """
 from collections import Counter
@@ -15,7 +15,8 @@ def require(value,message):
     if not value:raise ValueError(message)
 
 def review(*, entrypoint, out, pins, source, tests, suites, executable, physical_count,
-           added_physical, anchor_counts, new_class, test_ids, reason_document):
+           added_physical, anchor_counts, new_class, test_ids, reason_document,
+           lock_methods=('observe','snapshot')):
     invocation=capture(Path(entrypoint));require(not out.exists(),'new-only additive static review')
     proofs={}
     for key,(path,digest) in pins.items():
@@ -30,8 +31,9 @@ def review(*, entrypoint, out, pins, source, tests, suites, executable, physical
     canonical=lambda r:json.dumps(r,sort_keys=True)
     fresh=current['staticRaw']['pmd'];before=old['staticRaw']['pmd']
     prior=Counter(map(canonical,before['findings']));now=Counter(map(canonical,fresh['findings']))
-    require(prior<=now and sum((now-prior).values())==2 and fresh['actualExit']==4
-      and fresh['processingErrors']==0,'all raw prior rows plus exactly two, no suppression/unknown')
+    require(bool(lock_methods) and len(set(lock_methods))==len(lock_methods),'explicit nonempty unique method list')
+    require(prior<=now and sum((now-prior).values())==len(lock_methods) and fresh['actualExit']==4
+      and fresh['processingErrors']==0,'all raw prior rows plus exact declared additions, no suppression/unknown')
     for row in before['findings']:
         path='src/schubert-nk-batch/src/main/java/'+row['package'].replace('.','/')+'/'+row['class']+'.java'
         require(path in current['sourceFiles'] and current['sourceFiles'][path]==old['sourceFiles'][path],
@@ -39,11 +41,11 @@ def review(*, entrypoint, out, pins, source, tests, suites, executable, physical
     rows=[];methods=set()
     for raw,count in (now-prior).items():
         row=json.loads(raw);require(count==1 and row['class']==new_class
-          and row['method'] in ('observe','snapshot') and row['rule']=='AvoidSynchronizedStatement',
-          'only two explicitly reviewed private lock rows')
+          and row['method'] in lock_methods and row['rule']=='AvoidSynchronizedStatement',
+          'only explicitly reviewed private lock rows')
         methods.add(row['method']);rows.append(dict(raw=row,disposition='CONTRACT_REQUIRED',testIds=test_ids,
-          reasonDocument=reason_document,reason='PRIVATE_FINAL_OWNER_LOCK; window/lifecycle/elapsed serialized; no exposed monitor or reverse callback'))
-    require(methods=={'observe','snapshot'},'both methods classified once')
+          reasonDocument=reason_document,reason='PRIVATE_FINAL_OWNER_LOCK; dependent state serialized; no exposed monitor or reverse callback'))
+    require(methods==set(lock_methods),'all declared methods classified once')
     require(current['spotbugs']['actualExit']==0 and current['spotbugs']['findings']==0
       and current['staticRaw']['checkstyle']['actualExit']==0 and not current['staticRaw']['checkstyle']['findings'],
       'actual current SB/CS zero')

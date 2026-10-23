@@ -18,6 +18,7 @@ ADDED_PHYSICAL=32
 REPORTS=(1583,1584)
 NEW_SPEC=1582
 NEW_TEST_IDS='FSINPUT001..010'
+NEW_SS='351'
 ALLOWED_NEW_NAMES={'FilesystemHealthObservation.java','FilesystemHealthMonitor.java','FilesystemHealthObservationTest.java'}
 EDITED_EXISTING=set()
 EXTRA_SPECS={}
@@ -62,7 +63,7 @@ def main():
         else:
             require(path.startswith('src/schubert-nk-batch/') and Path(path).name in ALLOWED_NEW_NAMES,
               'only the declared new source files')
-            row=dict(item,kind='TEST' if path.endswith('Test.java') else 'MAIN',rd='MON005..013',ui='252',ss='351',
+            row=dict(item,kind='DEPENDENCY_DESCRIPTOR' if path.endswith('/pom.xml') else 'TEST' if path.endswith('Test.java') else 'MAIN',rd='MON005..013',ui='252',ss=NEW_SS,
               testIdFamily=NEW_TEST_IDS,specifications=refs([NEW_SPEC]),previousSourceByteSha256=None,
               sourceChangedSincePreviousTrace=False,sourceIntroducedSincePreviousTrace=True)
         if path in EXTRA_SPECS:row['specifications']=list(row.get('specifications',[]))+refs(EXTRA_SPECS[path])
@@ -72,6 +73,11 @@ def main():
               results=refs(REPORTS),executionWitness=dict(path=PINS['currentBatch'][0],sha256=PINS['currentBatch'][1],source=SOURCE,tests=CURRENT_TESTS,suites=CURRENT_SUITES),
               componentCounterScope='ALL_DECLARED_CURRENT_BATCH_EXECUTABLES_ONLY',currentSourceCoverageTransferred=False)
             if path.endswith('.java'):require(current['sourceFiles'].get(path)==item['sha256'],'all current monitored Java source actually bound to the current execution')
+        elif path.endswith('/pom.xml'):
+            if 'executionWitness' in row:row['historicalExecutionWitness']=row.pop('executionWitness')
+            row.update(qualificationRelationship='CURRENT_NORMAL_COMPILE_DEPENDENCY_DESCRIPTOR',
+              results=refs(REPORTS),compileWitness=dict(path=PINS['physical'][0],sha256=PINS['physical'][1],source=SOURCE),
+              componentCounterScope='NOT_EXECUTABLE_CONFIGURATION',currentSourceCoverageTransferred=False)
         else:
             if 'executionWitness' in row:row['historicalExecutionWitness']=row.pop('executionWitness')
             row.update(qualificationRelationship='HISTORICAL_SOURCE_BYTES_UNCHANGED_NOT_CURRENT_EXECUTION',

@@ -21,6 +21,7 @@ CURRENT_SUITES=12
 CURRENT_PHYSICAL=22
 PHYSICAL_COUNT=1701
 SOURCE_DELTA_COUNT=37
+POM_REVIEWERS={'src/schubert-nk-web/pom.xml':pom_contract.verify_core_pom}
 PINS={
  'original':('PG6930-current4222-cases/qualification.json','728682a9eb414a4d4ef08abb84bcbd9237a8269a35a82d0f86c5bce97d596731'),
  'currentBatch':('PG7154-filesystem-health-post-v1/manifest.json','a86ed6ca91bc6df6d9bd886cf7b487a5253176a2f22b55c7b82b31657a5e110f'),
@@ -70,7 +71,7 @@ def main():
     require(len(parts)%2==0,'exact source delta grammar')
     extras={'src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/SupplementaryUnitTemplateTest.java':'WBS-C02',
       'src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/ConfigurationTemplateContractTest.java':'WBS-C06'}
-    source_rows=[];reviewed_pom=None
+    source_rows=[];reviewed_poms={}
     for index in range(0,len(parts),2):
         status,path=parts[index].decode(),parts[index+1].decode()
         allowed=path.startswith(tuple('src/schubert-nk-'+role+'/src/'+kind+suffix
@@ -78,13 +79,14 @@ def main():
           ('main/java/','dev/codex/schubert/nk/'+role+'/monitoring/'),
           ('test/java/','dev/codex/schubert/nk/'+role+'/monitoring/'),('test/resources/','monitoring/'))))
         if status=='M':
-            require(path=='src/schubert-nk-web/pom.xml' and reviewed_pom is None,'only declared same-version core promotion')
+            require(path in POM_REVIEWERS and path not in reviewed_poms,'only exact explicitly declared POM semantic changes')
             before=subprocess.check_output(['git','show',old['productionSource']+':'+path],cwd=host.ROOT)
-            reviewed_pom=pom_contract.verify_core_pom(before,(snapshot/path).read_bytes())
+            reviewed_poms[path]=POM_REVIEWERS[path](before,(snapshot/path).read_bytes())
         else:require(status=='A' and (allowed or path in extras),'no undeclared legacy code/config/schema changes')
         source_rows.append(dict(path=path,status=status,sha256=host.sha(snapshot/path),owner=extras.get(path,'WBS-P018-09'),
-             sharedReference='WBS-C07' if allowed else None,sharedAdditionalCostPp=0))
-    require(len(source_rows)==SOURCE_DELTA_COUNT and reviewed_pom is not None,'all declared additions and single reviewed POM node change')
+             sharedReference='WBS-C07' if allowed or path in reviewed_poms else None,sharedAdditionalCostPp=0))
+    require(len(source_rows)==SOURCE_DELTA_COUNT and set(reviewed_poms)==set(POM_REVIEWERS),
+            'all declared additions and every exact reviewed POM change, no unspecified path')
     require(raw['begin']['dependencyJarHashes']==history['currentSdkJarHashes']
       and all(host.sha(Path(p))==h for p,h in raw['begin']['dependencyJarHashes'].items()),'unchanged actual SDK four jars, not a current Web execution claim')
     prior=witnesses['architecture']
@@ -106,7 +108,8 @@ def main():
       currentBatch=dict(source=current['source'],tests=CURRENT_TESTS,suites=CURRENT_SUITES,physicalClasses=batch,counters=current['counters'],
                         actualCrcMismatch=0,actualSessions=1,currentSourceExecutionAccepted=True),
       historicalWeb=dict(source=history['source'],physicalClasses=web,byteIdentityOnly=True,currentSourceExecutionAccepted=False,
-                         coverageNotTransferred=True),newSourceDelta=source_rows,reviewedWebPomChange=reviewed_pom,
+                         coverageNotTransferred=True),newSourceDelta=source_rows,
+      reviewedWebPomChange=reviewed_poms['src/schubert-nk-web/pom.xml'],reviewedPomChanges=reviewed_poms,
       currentNormalCompileSdkJarHashes=raw['begin']['dependencyJarHashes'],architecture=dict(result=result,receipt=stage),
       targetClassLoadOrInitialization=False,whole451Accepted=False,formalUpdated=False,newAccepted=0,effortPercent=None,
       original4222Replayed=False,original44Replayed=False,actualVmActions=0,actualDatabaseActions=0)

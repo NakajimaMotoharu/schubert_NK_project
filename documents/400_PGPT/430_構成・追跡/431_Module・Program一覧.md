@@ -1,5 +1,7 @@
 # Module・Program一覧
 
+2026-10-23追加（P018-09/C07共有費0、未正式受入）：BatchMetricContract(Step十/Status四/lookup/labels/names/mode)→BATCHMET001～005、BatchMetricRecorder(constructor/record/detail/seconds/tags)→BATCHREC001～008/1611～1614/PG-D536、RD171/UI252/SS341351。source348/PG7252真正153PT21suite→7254実36四100/CRC0→7256六compileのみ→7258全1716/旧1669不変・当Batch37一致/歴史Web10byteのみ・二POM厳密→7260全57source/47physical追跡・7262 raw28全分類。SDK既同版四Jar再利用/取得0、実Batch/DB/Root/terminal hook/永続lastSuccess/exporter/全体451は未受入。
+
 2026-10-23追加（P018-09/C07共有費0、未正式受入）：TimedSyncLatencyMonitor(constructor/observe/snapshot/Evaluation)→SYNCTIME001～008/1607～1610/PG-D535、RD171/UI252/SS351。source00ed/PG7238真正140PT19suite→7240実32四100/CRC0→7242六compileのみ→7244全1712/旧1669不変・当Batch33一致/歴史Web10byteのみ→7246全52source/43physical追跡・7248 raw27全分類。実分布/provider/Root/有限collector/exporter/control/全体451は未受入、別source歴史成果を現在実行へ合成しない。
 
 2026-10-23追加（P018-09/C07共有費0、未正式受入）：TimedDbPoolMonitor(constructor/observe/snapshot/Evaluation)→DBTIME001～008/1603～1606/PG-D534、RD171/UI252/SS351。sourcee9c/PG7224真正132PT18suite→7226実30四100/CRC0→7228六compileのみ→7230全1710/旧1669不変・当Batch31一致/歴史Web10byteのみ→7232全50source/41physical追跡・7234 raw25全分類。実pool/DB/Root/exporter/control/全体451は未受入、別source歴史成果を現在実行へ転用しない。
