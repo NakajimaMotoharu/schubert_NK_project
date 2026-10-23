@@ -1,5 +1,7 @@
 # Module・Program一覧
 
+2026-10-23追加（P01809/C07共有費0）：OutboxAgeMetricRecorder/Ages/OUTBOXAGE001～008→1660～1663/PG-D546/RD171/UI252/SS331351。d6c7f61b5/80PT10suite/実17四100/1740Main・旧1669byte不変/全84trace/raw8個別理由。非負Duration三つ/初期欠測NaN/真0/STD0/秒overflow安全/64並行/SDK故障所有、生成record六契約を含む。実SQL/時計/最古導出/WEB store/Root/全体451未受入。
+
 2026-10-23追加（P01809/C07追加発見）：GeneratedWebValueContractTest/GENWEB001～004→HttpMetricContract record1/enum4・生成14method、1658～1659/BUG1663-YKT1413。source6dbf7f17b/27PT4suite/実9四100/六正常compile/1738Main byte不変/全82trace、API-Batchは歴史byte-only/正式未更新。
 
 2026-10-23追加（P01809/C07追加発見、原190新受入0）：GeneratedBatchValueContractTest/GENB001～007→monitoring record7/enum12・生成60method、1656～1657/BUG1662/YKT1413。source9d8e52037/176PT24suite/実42四100・六compile0・全1738Main byte不変/全81source、歴史API-Webはbyte-only。BUG1662当scope閉鎖/横展開全体OPEN。

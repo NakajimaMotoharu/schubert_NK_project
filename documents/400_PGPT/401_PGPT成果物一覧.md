@@ -1,5 +1,7 @@
 # PGPT成果物一覧・進捗
 
+2026-10-23最新：[1660 API Outbox滞留時間仕様](../../evidence/01_PT/018_NK-OPS-001/1660_APIOutboxAgeMetric_単体テスト仕様書.md)～[1663追跡適用性](../../evidence/01_PT/018_NK-OPS-001/1663_APIOutboxAgeMetric_追跡・適用性完了.md)。sourced6c7f61b5/80PT10suite（元製造新8）/実17四100/CRC0、六正常compile/全1740Main・旧1669byte不変/全84trace・九静的負改変拒否。生成record六契約は初めから独立oracle・当classへ結合しcounter合成0、actual SQL/Root等・正式/工数は未更新。
+
 2026-10-23最新：[1658 Web生成Value仕様](../../evidence/01_PT/018_NK-OPS-001/1658_Web生成Value契約_追加単体テスト仕様書.md)・[1659結果追跡](../../evidence/01_PT/018_NK-OPS-001/1659_Web生成Value契約_結果・追跡.md)。source6dbf7f17b/27普通PT4suite/実9四100/CRC0・全1738Main byte不変/全82trace、新四独立caseで五型14methodを補完。BUG1663当scope閉鎖/横展開他候補OPEN、正式・工数・actualHOLD不変更。
 
 2026-10-23最新：[1656 Batch生成Value仕様](../../evidence/01_PT/018_NK-OPS-001/1656_Batch生成Value契約_追加単体テスト仕様書.md)・[1657結果追跡](../../evidence/01_PT/018_NK-OPS-001/1657_Batch生成Value契約_結果・追跡.md)。source9d8e52037の176PT/24suite・実42四100/CRC0、生成19型60methodを新GENB7で明示確認、六正常compile/全1738Main byte不変/全81trace。BUG1662 Batch限定閉鎖・YKT1413他候補OPEN、正式/工数/actualHOLD不変更。
