@@ -1,5 +1,7 @@
 # PGPT成果物一覧・進捗
 
+2026-10-23最新：[1658 Web生成Value仕様](../../evidence/01_PT/018_NK-OPS-001/1658_Web生成Value契約_追加単体テスト仕様書.md)・[1659結果追跡](../../evidence/01_PT/018_NK-OPS-001/1659_Web生成Value契約_結果・追跡.md)。source6dbf7f17b/27普通PT4suite/実9四100/CRC0・全1738Main byte不変/全82trace、新四独立caseで五型14methodを補完。BUG1663当scope閉鎖/横展開他候補OPEN、正式・工数・actualHOLD不変更。
+
 2026-10-23最新：[1656 Batch生成Value仕様](../../evidence/01_PT/018_NK-OPS-001/1656_Batch生成Value契約_追加単体テスト仕様書.md)・[1657結果追跡](../../evidence/01_PT/018_NK-OPS-001/1657_Batch生成Value契約_結果・追跡.md)。source9d8e52037の176PT/24suite・実42四100/CRC0、生成19型60methodを新GENB7で明示確認、六正常compile/全1738Main byte不変/全81trace。BUG1662 Batch限定閉鎖・YKT1413他候補OPEN、正式/工数/actualHOLD不変更。
 
 2026-10-23最新：[1654生成value横展開inventory仕様](../../evidence/01_PT/018_NK-OPS-001/1654_生成Value横展開_inventory仕様.md)～[1655結果・次対象](../../evidence/01_PT/018_NK-OPS-001/1655_生成Value横展開_inventory結果・次対象.md)。固定六Jar/1738を非初期化で照合しrecord356/enum144計500候補、元API6だけ既確認・他494は根拠/安全性照合待ち（未試験/障害とは断定0）。次候補Batch19/Web5、五静的変異拒否。metadataのみ/PT0/新受入0/YKT1413 OPEN、元WBS/正式/工数/全actualHOLD不変更で限定の既根拠照合へ継続。

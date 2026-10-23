@@ -1,5 +1,7 @@
 # Module・Program一覧
 
+2026-10-23追加（P01809/C07追加発見）：GeneratedWebValueContractTest/GENWEB001～004→HttpMetricContract record1/enum4・生成14method、1658～1659/BUG1663-YKT1413。source6dbf7f17b/27PT4suite/実9四100/六正常compile/1738Main byte不変/全82trace、API-Batchは歴史byte-only/正式未更新。
+
 2026-10-23追加（P01809/C07追加発見、原190新受入0）：GeneratedBatchValueContractTest/GENB001～007→monitoring record7/enum12・生成60method、1656～1657/BUG1662/YKT1413。source9d8e52037/176PT24suite/実42四100・六compile0・全1738Main byte不変/全81source、歴史API-Webはbyte-only。BUG1662当scope閉鎖/横展開全体OPEN。
 
 2026-10-23追加（P018-09/C07共有費0、未正式受入）：API OutboxRowsMetricRecorder/Counts/Status→OUTBOXMET001～008/1647～1648、生成補足GeneratedMetricValueContractTest→GENMET001～008/1650～1653・BUG1660/YKT1413。sourcefced/7402真正72PT9suite→7404実15四100/CRC0/raw8当個別理由→7406六compileのみ/7408全1738・当API16/歴史Batch43-Web10byteだけ/旧1669不変/三POM/五rule0→7410全80source/69physical→7413生成21契約/JDK公式byte/7412型別TestIDと九negative統合。元計画8と追加発見8を分離、BUG1660 API限定/1661工具限定閉鎖・YKT1413全体OPEN。実SQL/dispatch/oldest秒/WEB store/Root/全体451未受入。
