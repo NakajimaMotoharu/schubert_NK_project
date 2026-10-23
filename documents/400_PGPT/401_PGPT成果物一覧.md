@@ -1,5 +1,9 @@
 # PGPT成果物一覧・進捗
 
+2026-10-24現行：[1680 Asyncバイト割合是正結果](../../evidence/01_PT/018_NK-OPS-001/1680_AsyncQueueバイト割合是正_結果・横展開.md)。source8f6b3bff2/202PT27suite/実49四100・全1750Main/94trace/生成82/raw28全分類。BUG1665/1666-YKT1416/1417を当scope閉鎖、旧200/192と元7542exit1保持・whole451/正式認定更新0。
+
+2026-10-24現行：[1677 Expiry結果](../../evidence/01_PT/018_NK-OPS-001/1677_Expiry件数警報_結果・追跡.md)はsource6247/200PT・当範囲四100まで保存。[1679 Async byte割合是正规定](../../evidence/01_PT/018_NK-OPS-001/1679_AsyncQueueバイト割合是正_単体テスト仕様書.md)はBUG1665/YKT1416の修正source8f6b3bff2/202PT成功・独立品質進行中。旧PG-D520/550・1674/1675の件数比を現行要求と誤認せず歴史保持、正式受入は更新しない。
+
 2026-10-24最新：[1678 fresh利用枠binding是正](../../evidence/01_PT/018_NK-OPS-001/1678_fresh利用枠binding_是正記録.md)。BUG1664/YKT1415をtool/operator限定閉鎖、原1893誤23を残してfresh24へ追記訂正・receipt直結guard/初回pure10＋frozen writer4・Product PT加算0。Expiry Main/PG-D551は未commit・未試験、製品資格はd56/192のまま。
 
 2026-10-23最新：[1674 Async Queue警報仕様](../../evidence/01_PT/018_NK-OPS-001/1674_AsyncQueue警報_単体テスト仕様書.md)・[1675結果追跡](../../evidence/01_PT/018_NK-OPS-001/1675_AsyncQueue警報_結果・追跡.md)。sourced56b2cc0a/Batch192PT26suite（元製造新8）/実46四100/CRC0、六正常compile/全1747Main・旧1669byte不変/全92trace/raw28個別理由。供給count/capacityのexact ratio・partial unknownと既lifecycle結線、actual queue/control・正式/工数は未更新。

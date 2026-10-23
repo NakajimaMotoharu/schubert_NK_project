@@ -1,5 +1,9 @@
 # Module・Program一覧
 
+2026-10-24現行訂正完了：Main三/Test三のAsync byte独立入力/ByteUsage/Evaluation、1679～1680/PG-D552/BUG1665-YKT1416。source8f6b3bff2で202PT27suite・実49四100・全1750Main/94source/81physicaltrace/生成82/raw28全分類を確認、元192/200は歴史で割合要件PASSに流用0。実source/control・正式/whole451は未受入。
+
+2026-10-24現行：ExpiryBacklogMonitor/Evaluation→EXPIRYMON001～008/1676～1677/source6247/200PT。AsyncのAlertThresholds・MonitoringPolicyEngine・AsyncQueueMonitor/ByteUsage/Evaluation→THRESH003/013/014・MONPIPE002/003/007・ASYNCQUEUE001～008・ASYNCBYTE001～002/1679/PG-D552/BUG1665-YKT1416/RD171/UI252/SS321351。source8f6b3bff2の当202PT/27suite成功・独立品質未了、旧件数比PG-D550は歴史であり現行仕様ではない。actual観測/control・正式/whole451は未受入。
+
 2026-10-23追加（P01809/C07共有費0）：AsyncQueueMonitor/Evaluation→ASYNCQUEUE001～008/1674～1675/PG-D550/RD171/UI252/SS351。sourced56b2cc0a/Batch192PT26suite/実46四100/1747Main・旧1669byte不変/全92trace/raw28個別理由、新Main0。ASYNC_QUEUE/API・exact70/90% OR 5000/9000・未知normal復旧0/既lifecycle、actual source/capacity/owner/9001制御/whole451未受入。
 
 2026-10-23追加（P01809/C07共有費0）：WebLogBacklogMonitor/Evaluation→WEBLOG001～008/1672～1673/PG-D549/RD171/UI252/SS351。source3174583f4/Batch184PT25suite/実44四100/1745Main・旧1669byte不変/全90trace/raw28同byte理由/新Main raw0。既threshold→WEB_LOG/WEB lifecycle・partial known abnormal/unknown非正常化/5分10分と原因確認/並行、actual source/owner/合成/制御/whole451未受入。

@@ -1,5 +1,9 @@
 # 開発環境・toolchain構築記録
 
+2026-10-24是正完了：source8f6b3bff2/202PT27suite/実49四100/六正常compile/全1750Main/SDK各pin一致/当五rule0・取得0。工具7542旧raw位置guard exit1を保存→新7543で一件の明示行移動context再認証・PT再演0、全command/OS/JDK/tool/time/hashは1680。最新fresh25/75・専有費N/Tnull、全actual操作0。
+
+2026-10-24：Expiry6247/200の全環境/commandは1677。Async byte単位是正8f6b3bff2/1679は既JDK25.0.4/Maven3.9.12/SDK4＋正常六compile API-only2をoffline再利用/導入取得0。host初回PYTHONPATH pyflakes不足import exit1/PT0/job未作成、正規PYTHONPATHで唯一7532実202/27成功、同source独立/六compile検証中。実broker/DB/VM操作0、旧成功の転用0。
+
 2026-10-23 Async Queue警報：既toolchain/SDK4＋正常六compile API専用2再利用/取得0。d56b2cc0a/192普通PT26suite/実46四100/CRC0/六正常Main-Test compile0/PT0、全1747Main/旧1669byte不変/三POM/当五rule0/全92trace。元pin変更0を独立読取検査し、raw28同byte理由と新生成6＋既66当ordinaryを結合、環境/command/time/hashは1675。実queue/JMS/DB/外部操作0、mode-neutral pure kernelだけ。
 
 2026-10-23 WebLog滞留警報：既SDK4/normal六compile API専用2/全toolchain再利用・導入取得0。3174583f4/184普通PT25suite/実44四100/CRC0/六正常Main-Test compile0/PT0、全1745Main・旧1669byte不変/三POM/当五rule0/全90trace。raw28個別理由と生成新6＋既60samebyte/current ordinaryを結合、環境/command/time/hashは1673。新marker/外部接続/実queue観測0、mode-neutral pure health kernelのみ。
