@@ -1,0 +1,25 @@
+; NK-OPS-001/C07; UI252/253; SS351; PG-D582; GRAFCFG001..008/spec1735.
+; Non-executing candidate only. No service, admin or secret is provisioned.
+[paths]
+data = /var/lib/schubert-nk/monitoring/grafana
+provisioning = /etc/schubert-nk/monitoring/grafana/provisioning
+[server]
+protocol = http
+http_addr = 127.0.0.1
+http_port = 3000
+[security]
+disable_initial_admin_creation = true
+[users]
+allow_sign_up = false
+allow_org_create = false
+auto_assign_org = true
+auto_assign_org_role = Viewer
+[auth.anonymous]
+enabled = false
+[analytics]
+reporting_enabled = false
+check_for_updates = false
+check_for_plugin_updates = false
+[log]
+mode = console
+level = info
