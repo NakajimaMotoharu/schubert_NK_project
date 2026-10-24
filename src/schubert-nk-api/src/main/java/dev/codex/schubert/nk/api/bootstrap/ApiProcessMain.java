@@ -9,8 +9,8 @@ import dev.codex.schubert.nk.api.file.ServiceProcessResources;
 import dev.codex.schubert.nk.api.logging.WebLogIngestService;
 import dev.codex.schubert.nk.api.messaging.config.ApiBrokerContexts;
 import dev.codex.schubert.nk.api.messaging.inbound.ApiMessagingRuntime;
-import dev.codex.schubert.nk.api.monitoring.ApiDbPoolMetricBinding;
 import dev.codex.schubert.nk.api.monitoring.ApiMetricContext;
+import dev.codex.schubert.nk.api.monitoring.ApiServiceMetricBinding;
 import dev.codex.schubert.nk.api.storage.ApiApplicationPreparation;
 import dev.codex.schubert.nk.bootstrap.ServiceStartupAdmission;
 import dev.codex.schubert.nk.storage.NonSecretConfigSource;
@@ -218,11 +218,11 @@ public final class ApiProcessMain {
                                           new java.util.concurrent.atomic.AtomicBoolean();
                                       System.err.println("API startup entered MANAGEMENT");
                                       ResourceScope
-                                          .<ApiMetricContext<ApiDbPoolMetricBinding>, Boolean,
+                                          .<ApiMetricContext<ApiServiceMetricBinding>, Boolean,
                                               IOException>
                                               acquire(
                                                   () ->
-                                                      ApiDbPoolMetricBinding.prepareContext(
+                                                      ApiServiceMetricBinding.prepareContext(
                                                           inputs
                                                               .config()
                                                               .value("nk.monitoring.mode"),

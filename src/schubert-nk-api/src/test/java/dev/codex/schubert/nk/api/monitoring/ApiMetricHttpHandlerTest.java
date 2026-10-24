@@ -471,6 +471,27 @@ final class ApiMetricHttpHandlerTest {
     assertTrue(f.calls.isEmpty());
   }
 
+  @Test
+  void apimhttp022ServiceDefaultSourceIsExplicitlyMissingAtHttpBoundary() throws IOException {
+    var f = new DbPoolMetricObservationTest.Fixture();
+    try (var context = ApiServiceMetricBinding.prepareContext("DEBUG", f::pool, f::config)) {
+      context.initialize();
+      var exchange = new Exchange("GET", PATH);
+      new ApiMetricHttpHandler(context, () -> true).handle(exchange);
+      String body = exchange.output.toString(StandardCharsets.UTF_8);
+      assertTrue(body.startsWith(READY + "1\n"));
+      assertTrue(body.contains("nk_outbox_rows{status=\"PENDING\",store=\"API\"} NaN\n"));
+      assertTrue(body.contains("nk_outbox_oldest_seconds{status=\"ERROR\",store=\"API\"} NaN\n"));
+      assertTrue(context.bindings().orElseThrow().snapshot().isEmpty());
+      assertEquals(200, exchange.status);
+      assertEquals(body.getBytes(StandardCharsets.UTF_8).length, exchange.length);
+      assertEquals(METRIC, exchange.headers.getFirst("Content-Type"));
+      assertEquals("no-store", exchange.headers.getFirst("Cache-Control"));
+      assertEquals(1, exchange.closeCalls);
+      f.complete();
+    }
+  }
+
   private static ApiMetricContext<String> standard() {
     var context =
         new ApiMetricContext<String>(
