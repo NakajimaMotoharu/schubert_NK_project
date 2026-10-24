@@ -21,6 +21,7 @@ public final class WebMetricCatalog {
   private static final String SERVICE = "service";
   private static final String ROUTE = "route";
   private static final String MEDIA = "media_type";
+  private static final String GAUGE_TYPE = "gauge";
   private static final Set<String> WEB = Set.of("WEB");
   private static final Set<String> ROUTES = Set.copyOf(new HttpMetricContract().routeTemplates());
   private static final Set<String> MEDIA_TYPES = Set.of("AUDIO", "VIDEO", "MUSIC");
@@ -31,13 +32,13 @@ public final class WebMetricCatalog {
           TIMER,
           "histogram",
           POOL,
-          "gauge",
+          GAUGE_TYPE,
           ROWS,
-          "gauge",
+          GAUGE_TYPE,
           AGE,
-          "gauge",
+          GAUGE_TYPE,
           STREAMS,
-          "gauge",
+          GAUGE_TYPE,
           BYTES,
           "counter");
   private static final Map<String, Set<String>> OUTBOX =
@@ -78,7 +79,7 @@ public final class WebMetricCatalog {
   public WebMetricCatalog() {}
 
   public Map<String, Set<String>> gauges() {
-    return namespace("gauge");
+    return namespace(GAUGE_TYPE);
   }
 
   public Map<String, Set<String>> counters() {
