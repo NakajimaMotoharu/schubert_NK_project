@@ -285,6 +285,49 @@ final class WebMetricHttpHandlerTest {
     }
   }
 
+  @Test
+  void webmhttp017() throws IOException {
+    try (var context = standard()) {
+      var exchange = new Exchange("GET", PATH);
+      var handler = new WebMetricHttpHandler(context, () -> true);
+      handler.write(exchange);
+      assertFalse(exchange.closed);
+      assertEquals(0, exchange.closeCalls);
+      assertEquals(200, exchange.status);
+      assertEquals(READY + "1\n", exchange.output.toString(StandardCharsets.UTF_8));
+      assertEquals((READY + "1\n").getBytes(StandardCharsets.UTF_8).length, exchange.length);
+      assertEquals(METRIC, exchange.headers.getFirst("Content-Type"));
+      assertEquals("no-store", exchange.headers.getFirst("Cache-Control"));
+      exchange.close();
+      response(exchange, 200, READY + "1\n", METRIC);
+      assertEquals(READY + "0\n", context.render(false));
+      assertThrows(NullPointerException.class, () -> handler.write(null));
+    }
+  }
+
+  @Test
+  void webmhttp018() {
+    try (var context = standard()) {
+      var exchange = new Exchange("GET", PATH);
+      var failure = new IllegalStateException("fixed borrowed write");
+      var handler =
+          new WebMetricHttpHandler(
+              context,
+              () -> {
+                throw failure;
+              });
+      assertSame(failure, assertThrows(IllegalStateException.class, () -> handler.write(exchange)));
+      assertFalse(exchange.closed);
+      assertEquals(0, exchange.closeCalls);
+      assertEquals(0, exchange.headerCalls);
+      assertEquals(0, exchange.output.size());
+      assertTrue(exchange.headers.isEmpty());
+      exchange.close();
+      assertEquals(1, exchange.closeCalls);
+      assertEquals(READY + "1\n", context.render(true));
+    }
+  }
+
   private static WebMetricContext<String> standard() {
     var context =
         new WebMetricContext<String>(
@@ -304,10 +347,12 @@ final class WebMetricHttpHandlerTest {
     assertEquals("no-store", exchange.headers.getFirst("Cache-Control"));
     assertEquals(1, exchange.headerCalls);
     assertTrue(exchange.closed);
+    assertEquals(1, exchange.closeCalls);
   }
 
   private static void unpublished(Exchange exchange) {
     assertTrue(exchange.closed);
+    assertEquals(1, exchange.closeCalls);
     assertEquals(0, exchange.headerCalls);
     assertEquals(0, exchange.output.size());
     assertTrue(exchange.headers.isEmpty());
@@ -321,6 +366,7 @@ final class WebMetricHttpHandlerTest {
     private IOException headerFailure;
     private IOException bodyFailure;
     private boolean closed;
+    private int closeCalls;
     private int status;
     private long length;
     private int headerCalls;
@@ -358,6 +404,7 @@ final class WebMetricHttpHandlerTest {
     @Override
     public void close() {
       closed = true;
+      closeCalls++;
     }
 
     @Override

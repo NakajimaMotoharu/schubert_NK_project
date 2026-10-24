@@ -3,6 +3,8 @@ package dev.codex.schubert.nk.web.bootstrap;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpServer;
 import dev.codex.schubert.nk.bootstrap.ServiceStartupAdmission;
+import dev.codex.schubert.nk.web.monitoring.WebMetricContext;
+import dev.codex.schubert.nk.web.monitoring.WebMetricHttpHandler;
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.nio.charset.StandardCharsets;
@@ -36,6 +38,7 @@ final class WebManagementServer implements AutoCloseable {
   private final ThreadPoolExecutor executor;
   private final BooleanSupplier healthy;
   private final String information;
+  private final Optional<WebMetricHttpHandler> metricHandler;
   private final AtomicBoolean promoted = new AtomicBoolean();
   private final AtomicBoolean promotionAttempted = new AtomicBoolean();
   private final AtomicBoolean closed = new AtomicBoolean();
@@ -91,7 +94,29 @@ final class WebManagementServer implements AutoCloseable {
     Objects.requireNonNull(healthy, "runtime health");
     Objects.requireNonNull(factory, "management factory");
     String json = publicJson(information);
-    return new WebManagementServer(healthy, json, port, factory);
+    return new WebManagementServer(healthy, json, port, factory, Optional.empty());
+  }
+
+  // PG-D619/1819: caller retains/initializes context outside this bound server owner.
+  static WebManagementServer bind(
+      Map<String, String> information, BooleanSupplier healthy, WebMetricContext<?> context)
+      throws IOException {
+    return bind(information, healthy, 8081, HttpServer::create, context);
+  }
+
+  static WebManagementServer bind(
+      Map<String, String> information,
+      BooleanSupplier healthy,
+      int port,
+      Factory factory,
+      WebMetricContext<?> context)
+      throws IOException {
+    Objects.requireNonNull(information, "public information");
+    Objects.requireNonNull(healthy, "runtime health");
+    Objects.requireNonNull(factory, "management factory");
+    var borrowed = Optional.of(Objects.requireNonNull(context, "borrowed metric context"));
+    String json = publicJson(information);
+    return new WebManagementServer(healthy, json, port, factory, borrowed);
   }
 
   void start() {
@@ -110,9 +135,16 @@ final class WebManagementServer implements AutoCloseable {
   }
 
   private WebManagementServer(
-      BooleanSupplier healthy, String information, int port, Factory factory) throws IOException {
+      BooleanSupplier healthy,
+      String information,
+      int port,
+      Factory factory,
+      Optional<WebMetricContext<?>> context)
+      throws IOException {
     this.healthy = healthy;
     this.information = information;
+    // Resource-free handler is captured before acquisition; context remains caller-owned.
+    this.metricHandler = context.map(value -> new WebMetricHttpHandler(value, this::ready));
     var address = new InetSocketAddress("127.0.0.1", port);
     this.executor =
         new ThreadPoolExecutor(
@@ -170,6 +202,10 @@ final class WebManagementServer implements AutoCloseable {
   private void respond(HttpExchange exchange) throws IOException {
     try (exchange) {
       String path = exchange.getRequestURI().getRawPath();
+      if (metricHandler.isPresent() && METRICS_PATH.equals(path)) {
+        metricHandler.orElseThrow().write(exchange);
+        return;
+      }
       int status;
       String body;
       String contentType = "application/json; charset=utf-8";

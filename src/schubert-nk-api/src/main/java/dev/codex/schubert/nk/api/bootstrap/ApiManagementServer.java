@@ -2,6 +2,8 @@ package dev.codex.schubert.nk.api.bootstrap;
 
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpServer;
+import dev.codex.schubert.nk.api.monitoring.ApiMetricContext;
+import dev.codex.schubert.nk.api.monitoring.ApiMetricHttpHandler;
 import dev.codex.schubert.nk.bootstrap.ServiceStartupAdmission;
 import java.io.IOException;
 import java.net.InetSocketAddress;
@@ -35,6 +37,7 @@ final class ApiManagementServer implements AutoCloseable {
   private final ThreadPoolExecutor executor;
   private final BooleanSupplier healthy;
   private final String information;
+  private final Optional<ApiMetricHttpHandler> metricHandler;
   private final AtomicBoolean promoted = new AtomicBoolean();
   private final AtomicBoolean promotionAttempted = new AtomicBoolean();
   private final AtomicBoolean stopping = new AtomicBoolean();
@@ -89,7 +92,29 @@ final class ApiManagementServer implements AutoCloseable {
     Objects.requireNonNull(healthy, "runtime health");
     Objects.requireNonNull(factory, "management factory");
     String json = publicJson(information);
-    return new ApiManagementServer(healthy, json, port, factory);
+    return new ApiManagementServer(healthy, json, port, factory, Optional.empty());
+  }
+
+  // PG-D619/1819: caller retains/initializes context outside this bound server owner.
+  static ApiManagementServer bind(
+      Map<String, String> information, BooleanSupplier healthy, ApiMetricContext<?> context)
+      throws IOException {
+    return bind(information, healthy, 8091, HttpServer::create, context);
+  }
+
+  static ApiManagementServer bind(
+      Map<String, String> information,
+      BooleanSupplier healthy,
+      int port,
+      Factory factory,
+      ApiMetricContext<?> context)
+      throws IOException {
+    Objects.requireNonNull(information, "public information");
+    Objects.requireNonNull(healthy, "runtime health");
+    Objects.requireNonNull(factory, "management factory");
+    var borrowed = Optional.of(Objects.requireNonNull(context, "borrowed metric context"));
+    String json = publicJson(information);
+    return new ApiManagementServer(healthy, json, port, factory, borrowed);
   }
 
   void start() {
@@ -108,9 +133,16 @@ final class ApiManagementServer implements AutoCloseable {
   }
 
   private ApiManagementServer(
-      BooleanSupplier healthy, String information, int port, Factory factory) throws IOException {
+      BooleanSupplier healthy,
+      String information,
+      int port,
+      Factory factory,
+      Optional<ApiMetricContext<?>> context)
+      throws IOException {
     this.healthy = healthy;
     this.information = information;
+    // Resource-free handler is captured before acquisition; context remains caller-owned.
+    this.metricHandler = context.map(value -> new ApiMetricHttpHandler(value, this::ready));
     var address = new InetSocketAddress("127.0.0.1", port);
     this.executor =
         new ThreadPoolExecutor(
@@ -168,6 +200,10 @@ final class ApiManagementServer implements AutoCloseable {
   private void respond(HttpExchange exchange) throws IOException {
     try (exchange) {
       String path = exchange.getRequestURI().getRawPath();
+      if (metricHandler.isPresent() && METRICS_PATH.equals(path)) {
+        metricHandler.orElseThrow().write(exchange);
+        return;
+      }
       int status;
       String body;
       String contentType = "application/json; charset=utf-8";

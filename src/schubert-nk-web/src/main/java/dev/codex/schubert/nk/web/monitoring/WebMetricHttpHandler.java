@@ -30,26 +30,32 @@ public final class WebMetricHttpHandler implements HttpHandler {
   public void handle(HttpExchange exchange) throws IOException {
     Objects.requireNonNull(exchange, "metric exchange");
     try (exchange) {
-      int status;
-      String body;
-      String type = JSON_TYPE;
-      if (!"GET".equals(exchange.getRequestMethod())) {
-        status = 405;
-        body = "{}";
-      } else if (!PATH.equals(exchange.getRequestURI().getRawPath())) {
-        status = 404;
-        body = "{}";
-      } else {
-        // Complete both views first: a source failure must never publish a partial success body.
-        body = context.render(ready.getAsBoolean());
-        status = 200;
-        type = METRIC_TYPE;
-      }
-      byte[] bytes = body.getBytes(StandardCharsets.UTF_8);
-      exchange.getResponseHeaders().set("Content-Type", type);
-      exchange.getResponseHeaders().set("Cache-Control", "no-store");
-      exchange.sendResponseHeaders(status, bytes.length);
-      exchange.getResponseBody().write(bytes);
+      write(exchange);
     }
+  }
+
+  /** Borrowed exchange: caller closes it after both successful and failed writes. */
+  public void write(HttpExchange exchange) throws IOException {
+    Objects.requireNonNull(exchange, "metric exchange");
+    int status;
+    String body;
+    String type = JSON_TYPE;
+    if (!"GET".equals(exchange.getRequestMethod())) {
+      status = 405;
+      body = "{}";
+    } else if (!PATH.equals(exchange.getRequestURI().getRawPath())) {
+      status = 404;
+      body = "{}";
+    } else {
+      // Complete both views first: a source failure must never publish a partial success body.
+      body = context.render(ready.getAsBoolean());
+      status = 200;
+      type = METRIC_TYPE;
+    }
+    byte[] bytes = body.getBytes(StandardCharsets.UTF_8);
+    exchange.getResponseHeaders().set("Content-Type", type);
+    exchange.getResponseHeaders().set("Cache-Control", "no-store");
+    exchange.sendResponseHeaders(status, bytes.length);
+    exchange.getResponseBody().write(bytes);
   }
 }
