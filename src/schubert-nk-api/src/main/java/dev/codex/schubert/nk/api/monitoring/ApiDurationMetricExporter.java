@@ -23,6 +23,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
 import java.util.TreeMap;
 
@@ -48,11 +49,29 @@ public final class ApiDurationMetricExporter {
         PrometheusTextFormatWriter.builder().setIncludeCreatedTimestamps(false).build());
   }
 
+  /** Fixed API catalog, with these validated immutable Labels used in the same model. */
+  public String scrapeApproved(MeterRegistry source) {
+    var catalog = new ApiMetricCatalog();
+    return encode(
+        source,
+        catalog.summaries(),
+        PrometheusTextFormatWriter.builder().setIncludeCreatedTimestamps(false).build(),
+        Optional.of(catalog));
+  }
+
   // Package-private checked-writer seam for SUMENC023/024, no retained injected mutable resource.
   static String encode(
       MeterRegistry source,
       Map<String, Set<String>> approvedNameLabelKeys,
       ExpositionFormatWriter writer) {
+    return encode(source, approvedNameLabelKeys, writer, Optional.empty());
+  }
+
+  private static String encode(
+      MeterRegistry source,
+      Map<String, Set<String>> approvedNameLabelKeys,
+      ExpositionFormatWriter writer,
+      Optional<ApiMetricCatalog> catalog) {
     Objects.requireNonNull(source, "meter registry");
     Objects.requireNonNull(writer, "text writer");
     var namespace = new HashMap<String, Set<String>>();
@@ -79,7 +98,12 @@ public final class ApiDurationMetricExporter {
         throw new IllegalArgumentException("selected meter is not a summary");
       groups
           .computeIfAbsent(name, unused -> new ArrayList<>())
-          .add(point(summary, labels(id, keys)));
+          .add(
+              point(
+                  summary,
+                  catalog.isPresent()
+                      ? catalog.get().labels(name, id.getTags())
+                      : labels(id, keys)));
     }
     var families =
         groups.entrySet().stream()

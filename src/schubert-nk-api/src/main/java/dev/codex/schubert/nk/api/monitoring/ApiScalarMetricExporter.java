@@ -24,6 +24,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
 import java.util.TreeMap;
 
@@ -47,9 +48,36 @@ public final class ApiScalarMetricExporter {
         PrometheusTextFormatWriter.builder().setIncludeCreatedTimestamps(false).build());
   }
 
+  /** Fixed API values are copied directly into the point model, never preflighted then reread. */
+  public String scrapeApprovedCounters(MeterRegistry source) {
+    var catalog = new ApiMetricCatalog();
+    return encodeCounters(
+        source,
+        catalog.counters(),
+        PrometheusTextFormatWriter.builder().setIncludeCreatedTimestamps(false).build(),
+        Optional.of(catalog));
+  }
+
+  public String scrapeApprovedGauges(MeterRegistry source) {
+    var catalog = new ApiMetricCatalog();
+    return encodeGauges(
+        source,
+        catalog.gauges(),
+        PrometheusTextFormatWriter.builder().setIncludeCreatedTimestamps(false).build(),
+        Optional.of(catalog));
+  }
+
   // SCALAR019/020: package-private checked-writer seams, no injected resource retained.
   static String encodeCounters(
       MeterRegistry source, Map<String, Set<String>> approved, ExpositionFormatWriter writer) {
+    return encodeCounters(source, approved, writer, Optional.empty());
+  }
+
+  private static String encodeCounters(
+      MeterRegistry source,
+      Map<String, Set<String>> approved,
+      ExpositionFormatWriter writer,
+      Optional<ApiMetricCatalog> catalog) {
     var namespace = prepare(source, approved, writer, "nk_[a-z][a-z0-9_]*_total");
     var groups = new TreeMap<String, List<CounterDataPointSnapshot>>();
     for (var meter : source.getMeters()) {
@@ -59,7 +87,8 @@ public final class ApiScalarMetricExporter {
       if (keys == null) continue;
       if (!(meter instanceof Counter counter))
         throw new IllegalArgumentException("selected meter is not a counter");
-      var labels = labels(id, keys);
+      var labels =
+          catalog.isPresent() ? catalog.get().labels(name, id.getTags()) : labels(id, keys);
       double value = counter.count();
       if (!Double.isFinite(value) || value < 0)
         throw new IllegalArgumentException("invalid counter value");
@@ -77,6 +106,14 @@ public final class ApiScalarMetricExporter {
 
   static String encodeGauges(
       MeterRegistry source, Map<String, Set<String>> approved, ExpositionFormatWriter writer) {
+    return encodeGauges(source, approved, writer, Optional.empty());
+  }
+
+  private static String encodeGauges(
+      MeterRegistry source,
+      Map<String, Set<String>> approved,
+      ExpositionFormatWriter writer,
+      Optional<ApiMetricCatalog> catalog) {
     var namespace = prepare(source, approved, writer, "nk_[a-z][a-z0-9_]*");
     var groups = new TreeMap<String, List<GaugeDataPointSnapshot>>();
     for (var meter : source.getMeters()) {
@@ -86,7 +123,8 @@ public final class ApiScalarMetricExporter {
       if (keys == null) continue;
       if (!(meter instanceof Gauge gauge))
         throw new IllegalArgumentException("selected meter is not a gauge");
-      var labels = labels(id, keys);
+      var labels =
+          catalog.isPresent() ? catalog.get().labels(name, id.getTags()) : labels(id, keys);
       double value = gauge.value();
       groups
           .computeIfAbsent(name, unused -> new ArrayList<>())
