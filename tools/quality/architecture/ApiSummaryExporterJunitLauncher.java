@@ -133,15 +133,15 @@ public final class ApiSummaryExporterJunitLauncher {
     }
     var value = summary.getSummary();
     boolean passed =
-        value.getTestsFoundCount() == 56
-            && value.getTestsStartedCount() == 56
-            && value.getTestsSucceededCount() == 56
+        value.getTestsFoundCount() == 58
+            && value.getTestsStartedCount() == 58
+            && value.getTestsSucceededCount() == 58
             && value.getTestsFailedCount() == 0
             && value.getTestsSkippedCount() == 0
             && value.getTestsAbortedCount() == 0
             && value.getContainersFailedCount() == 0
             && value.getContainersAbortedCount() == 0
-            && results.size() == 56;
+            && results.size() == 58;
     String counts =
         "found="
             + value.getTestsFoundCount()

@@ -12,7 +12,7 @@ Productionはbootstrap.monitoring.PrometheusSummaryExporter。Micrometer1.17.1/�
 |---|---|
 |SUMENC001～024|bootstrap単体24：手書きsnapshot/秒CDF→標準text、複数family/series、escape、空/unknown、label/name/null、非summary、負/NaN/Infinity/count、境界順/CDF単調・整数・上限、2^53とlong最大、snapshot一回、借用closed/lifetime、IO/Runtime/Error伝播。期待値はliteralの標準text/sample値、Productionから生成しない|
 |APISUM001～006|API実registry＋Db/Mq recorder接続6：初期全series0、1ns、有限5境界の前/等/後（独立long ns）、二Long.MAX_VALUE nsの正sum1.8446744073709553E10秒、STANDARD空・二owner独立、並行更新。SQL/JMS/実VMなし|
-|既exDur001～010/Db8/Mq8|変更影響に必要な既26。合計56/5suiteを予定、最終source固定前に実Test一覧を照合。想定数と異なる結果を算術PASSへしない|
+|既exDur001～010/Db9/Mq9|現sourceの実Test一覧を開始前照合し既28を確定、合計58/5suite。初稿の8/8・56予定は過去版からの誤った仮計数で、実行前に最新009各一件を含め訂正、成功加算ではない。想定数と異なる結果を算術PASSへしない|
 
 fixtureはメモリのみ。IO例外はpackage内writer注入で独立故障、private反射なし。workerは有限・finally停止。null/欠落/空/未知を正常0へ扱わない。失敗時は未実装TDDと既実装違反を区別し、後者は915/916先行。
 
