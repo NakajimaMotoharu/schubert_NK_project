@@ -45,10 +45,10 @@ final class OwnedApiObservationWorkerTest {
 
   static final class Signal extends Semaphore {
     private static final long serialVersionUID = 1L;
-    final CountDownLatch waiting = new CountDownLatch(1);
+    final transient CountDownLatch waiting = new CountDownLatch(1);
     final AtomicInteger releases = new AtomicInteger();
     final AtomicInteger waits = new AtomicInteger();
-    volatile Runnable beforeWait = () -> {};
+    transient volatile Runnable beforeWait = () -> {};
     volatile Throwable releaseFault;
     volatile InterruptedException interrupt;
     final AtomicBoolean immediateOnce = new AtomicBoolean();
