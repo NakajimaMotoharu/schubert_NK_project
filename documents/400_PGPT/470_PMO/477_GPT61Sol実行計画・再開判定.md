@@ -1,5 +1,7 @@
 # 477 GPT-6.1 Sol実行計画・再開判定
 
+2026-10-25 BUG1726/YKT1477補正：以後source記録はsource_evidence_binding helperで完了manifestの実hash/source/終了と結合する。2069旧source転記は原文保全・2074一回追記訂正/1843参照、再演・測定/費用再加算0。G07は1842で固定55,722 blob scan完了だが40,086未分類/binary等22の限界があり未受入。未分類を0や誤検出に読み替えず、公開根拠付き分類と許可済み独立PG/PTを次群で継続する。通常区切り停止/全actualHOLD解除はしない。
+
 ## Source ownerと変更担当の分離（2026-10-25、BUG1725/YKT1476）
 
 以後のincremental traceは `tools/quality/trace_owner_join.py` と485の追加参照を用い、canonicalOwner/canonicalCostOwnerを既正本から保持し、現作業のchangeOwnerと分ける。過去のsourceRows.owner一律P018-09は変更群表示であって既artifactの主担当/費用ownerではない。現在232行の補正は1840/8958/8960を参照し、原941論理/943歴史physical・原event/開始見積/実費不明nullを上書きしない。新pathは根拠付き候補又はUNKNOWN、作業担当から既知を捏造しない。このtrace補正を製品PT/coverage/正式受入へ加算しない。

@@ -1,5 +1,7 @@
 # PGPT成果物一覧・進捗
 
+2026-10-25最新：1841～1843、Productionfb9不変更。G07固定55,722公開blob scanと独立hash/14負例まで完了、40,086未分類・binary等22限界のため全G07/451は未受入。元2069のsource転記だけ2074で追記訂正（BUG1726/YKT1477）、測定・費用再加算0。最新の技術増分653TestIDs/34Mainは異sourceの工程成果で、全体sourceの資格・formal1964PT/53scope・原190新受入0・工数nullと別。456/460を現在地・次の許可済みPG/PTの正本とし、全actualHOLD/QA051finalを維持する。
+
 2026-10-24最新：1802/1803、Productionf817b0047不変更、新4/2でready/標準SDK/実DB-MQ-HTTP duration recorderの同registry接続・両順・1ns/1.5秒sum-count-inclusiveCDFを確認。8646で原source/XML/log/exec-session1/実env・七metadata反例へ結合、新Main/coverage/static資格0/正常再build0。1759以降技術401ID/Main24は異sourceで正式/coverage合算0、formal1964-53/原190新受入0/工数null/全actualHOLD/whole451/QA051final維持、次Prometheus静的parserの条件確認へ継続。
 
 2026-10-24最新：1800/1801/pure API-Web legacyReady+approved custom payload sourcef817b0047、新26/2・実2四100(L17M4C2B11)/静的0/全1825・207owner/五edge0/fields0-prefix各1/legacy管理server不変更を限定確認、新BUG0。STD supplier0/DEBUG一回・primary/owner保持/legacy字句を検証、actual endpointではない。1759以降技術397ID/Main24は異sourceで正式/coverage合算0、formal1964-53/原190新受入0/工数null/全actualHOLD/whole451/QA051final維持。次payload/標準SDK/精度duration接続のsafe PTへ継続。

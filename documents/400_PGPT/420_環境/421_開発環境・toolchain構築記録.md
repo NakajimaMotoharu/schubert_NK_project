@@ -1,5 +1,11 @@
 # 開発環境・toolchain構築記録
 
+## 2026-10-25 G07 Gitleaks8.30.1専用toolchain（1841/1842、PG-D628）
+
+公式 https://github.com/gitleaks/gitleaks/releases/tag/v8.30.1 のLinux x64 archive/checksums二件を8966へ記録した固定SHA256/sizeで取得・照合、bin/licenseだけを `../toolchain/gitleaks-8.30.1-linux-x64/` のnew-only0700へ導入。binary SHA256 88f91962aa2f93ac6ab281d553b9e125f5197bbbce38f9f2437f7299c32e5509、実version8.30.1/終了0。取得URL/二asset hash/OS/actual command/実entry hash/licenseはPG8966 manifest ef630842…を正とする。published hash+HTTPSでありvendor署名とは称しない。system PATH/settings/credential/製品POM変更0、公開download2/target通信0。
+
+再現entry `tools/quality/pg8966_gitleaks_toolchain.py` は既slotへ再実行しないnew-only契約。scanは `pg8968_public_blob_scan.py` の明示固定content・合成canary成立後のみ、default rulesを明示configで使用しprojectignore/baseline非適用、reportはstdout memoryからallowlistへ変換する。8970で独立hash/安全出力を確認。今回55,722 blob/40,086未分類・binary等22限界、PG/PT合格やG07受入と同義でない。版/環境/証跡/制限・次分類は1842参照。
+
 2026-10-24配置訂正（1758/BUG1697）：Prometheus textformat/model/config1.7.0の取得/全checksum/専用M2座標はそのまま、Production依存はAPI/Web各appのtextformatsへ明示しBootstrapの新Micrometer/textformat依存を退役した。SS311限定共用起動責務を広げず、追加download0/新module0/既settings・内部snapshot上書き0。8317責務guardは既PT-IDEM-016のWeb→API test-only edgeを元f02 POMとscopeで区別し、compile/runtime等への昇格を拒否、製品POMの既test依存/実行JUnit5.13.4は不変更。各新sourceの正常六build/Enforcer/実classpathと1758の同source品質を正とし、以下初稿共用配置の記述は歴史として扱う。
 
 ## 2026-10-24 Summary formatter正式外部Maven座標（1753、PG-D592）

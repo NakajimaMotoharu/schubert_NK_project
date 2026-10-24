@@ -1,0 +1,124 @@
+{
+  "actualExit": 0,
+  "binaryOrContainerLimitedCount": 22,
+  "bytes": 1282356740,
+  "canary": {
+    "actualExit": 0,
+    "command": [
+      "/home/mini/codex/project1/work/toolchain/gitleaks-8.30.1-linux-x64/gitleaks",
+      "dir",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg8968-public-blob-scan-v1/synthetic",
+      "--config",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg8968-public-blob-scan-v1/default.toml",
+      "--gitleaks-ignore-path",
+      "/home/mini/codex/project1/work/pgpt-runs/PG379/pg8968-public-blob-scan-v1/empty.ignore",
+      "--ignore-gitleaks-allow",
+      "--redact=100",
+      "--report-format",
+      "json",
+      "--report-path",
+      "-",
+      "--max-archive-depth",
+      "0",
+      "--max-decode-depth",
+      "0",
+      "--timeout",
+      "60",
+      "--no-banner",
+      "--no-color",
+      "--log-level",
+      "error"
+    ],
+    "findings": [
+      {
+        "endLine": 1,
+        "inputSha256": "fe360f18c47b7d3038aeb6de0c3d950505477f7e9c909831be3bce50b758c8ce",
+        "path": "ignored/positive.txt",
+        "ruleId": "generic-api-key",
+        "startLine": 1
+      },
+      {
+        "endLine": 1,
+        "inputSha256": "b66c3e41a1bb2f6f32a4a0f7d9a7478c1b5d1fd909706eff6e6099041b519dfe",
+        "path": "positive.txt",
+        "ruleId": "aws-access-token",
+        "startLine": 1
+      },
+      {
+        "endLine": 1,
+        "inputSha256": "fe360f18c47b7d3038aeb6de0c3d950505477f7e9c909831be3bce50b758c8ce",
+        "path": ".hidden/positive.txt",
+        "ruleId": "generic-api-key",
+        "startLine": 1
+      },
+      {
+        "endLine": 1,
+        "inputSha256": "ae10cfcbbd545692fefaf6b7eceb86afb8f43a0f143bf9366f6a02a1542bd1b1",
+        "path": "inline.txt",
+        "ruleId": "generic-api-key",
+        "startLine": 1
+      }
+    ],
+    "hiddenAndGitignoredFixturesDetected": true,
+    "inlineAllowIgnored": true,
+    "positiveDetected": true,
+    "projectConfigIgnored": true,
+    "rawOutputPersisted": false,
+    "safeFixtureUnflagged": true,
+    "vendorExit": 1
+  },
+  "contentCommit": "05d73a7974da8df92228160b96d91e7a006768f3",
+  "findings": 40086,
+  "findingsClassified": false,
+  "fixedSnapshotBindingConfirmed": true,
+  "formalUpdated": false,
+  "historicalCommitsScanned": false,
+  "invocation": {
+    "actualPythonCommand": [
+      "python3",
+      "-B",
+      "tools/quality/pg8970_public_blob_scan_post.py"
+    ],
+    "arbitraryArgumentsRecorded": false,
+    "entrypointPath": "tools/quality/pg8970_public_blob_scan_post.py",
+    "entrypointSha256": "208b872f1258ebfc9793e93a8bd846f654de5708eda1aa98f98fb0e9f9ec93aa",
+    "helperPath": "tools/quality/host_tool_invocation.py",
+    "helperSha256": "85d616a3db4ff47f4c95ae2e0dd57954bc2b09f28b8f2a685b986e5621545c46",
+    "libraryPath": "tools/quality/pg8970_public_blob_scan_post.py",
+    "librarySha256": "208b872f1258ebfc9793e93a8bd846f654de5708eda1aa98f98fb0e9f9ec93aa",
+    "loadedProjectPythonSources": {
+      "tools/quality/host_tool_invocation.py": "85d616a3db4ff47f4c95ae2e0dd57954bc2b09f28b8f2a685b986e5621545c46",
+      "tools/quality/pg8970_public_blob_scan_post.py": "208b872f1258ebfc9793e93a8bd846f654de5708eda1aa98f98fb0e9f9ec93aa",
+      "tools/quality/public_blob_scan.py": "4d12a867a01f32c3437df37986f676a6624d2afde036e6a3eaca3ed1f666b78f"
+    },
+    "provenance": "OBSERVED_SYS_ARGV_AND_ORIG_ARGV_NOT_RECONSTRUCTED"
+  },
+  "newAccepted": 0,
+  "productCoverage": null,
+  "productTestsExecuted": 0,
+  "rawFindingFieldsAbsent": true,
+  "rejectedMetadataCases": [
+    "unknown-file",
+    "parent-path",
+    "external-absolute",
+    "control-path",
+    "invalid-rule",
+    "missing-rule",
+    "zero-line",
+    "bool-line",
+    "reversed-lines",
+    "past-eof",
+    "missing-file",
+    "object-not-array",
+    "array-member-not-object",
+    "invalid-json"
+  ],
+  "sanitizerGoldenCases": 3,
+  "scanManifestSha256": "f8e16b697c1c509791c6674bb17661c54e8685c0f04425bed8bf7ea86a94a739",
+  "scannerRerun": false,
+  "scannerVendorExit": 1,
+  "source": "fb9fce0f91de3d9fdfa634fe277592700f915e45",
+  "timeUTC": "2026-10-24T19:14:10.051024+00:00",
+  "trackedBlobsRehashed": 55722,
+  "whole451SecretGateAccepted": false
+}
