@@ -521,13 +521,24 @@ final class OwnedApiObservationWorkerTest {
 
   @Test
   void obsOwn024() throws Exception {
-    try (var f = new Fixture()) {
-      var entered = f.blockQuery();
-      f.worker.start();
-      await(entered);
-      assertThrows(IOException.class, () -> f.worker.awaitStopped(() -> -1));
-      f.releaseAll();
-    }
+    for (long initial : new long[] {-1, Long.MIN_VALUE})
+      try (var f = new Fixture()) {
+        var entered = f.blockQuery();
+        f.worker.start();
+        await(entered);
+        var reads = new AtomicInteger();
+        f.stopNanos =
+            () -> {
+              throw new AssertionError("nonpositive initial budget must precede clock read");
+            };
+        assertThrows(
+            IOException.class,
+            () ->
+                f.worker.awaitStopped(
+                    () -> reads.getAndIncrement() == 0 ? initial : Long.MAX_VALUE));
+        assertEquals(1, reads.get());
+        f.releaseAll();
+      }
   }
 
   @Test

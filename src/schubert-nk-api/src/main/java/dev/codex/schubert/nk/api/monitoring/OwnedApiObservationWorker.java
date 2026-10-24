@@ -127,6 +127,7 @@ public final class OwnedApiObservationWorker {
         throw new IOException(UNCONFIRMED);
       if (starting.get() || worker.isAlive()) {
         long firstRemaining = remainingNanos.getAsLong();
+        if (firstRemaining <= 0) throw new IOException(UNCONFIRMED);
         long began = nanos.getAsLong();
         while (starting.get() || worker.isAlive()) {
           long elapsed = nanos.getAsLong() - began;
