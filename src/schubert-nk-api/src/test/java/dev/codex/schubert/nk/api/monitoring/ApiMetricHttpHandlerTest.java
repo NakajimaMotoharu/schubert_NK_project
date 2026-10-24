@@ -419,6 +419,58 @@ final class ApiMetricHttpHandlerTest {
     f.complete();
   }
 
+  @Test
+  void apimhttp021DeferredFactoryReachesHttpWithoutReacquiringBorrowedReferences()
+      throws IOException {
+    var f = new DbPoolMetricObservationTest.Fixture();
+    f.active = 3;
+    f.idle = 5;
+    f.pending = 2;
+    f.maximum = 8;
+    var poolReads = new AtomicInteger();
+    var configReads = new AtomicInteger();
+    try (var context =
+        ApiDbPoolMetricBinding.prepareContext(
+            "DEBUG",
+            () -> {
+              poolReads.incrementAndGet();
+              return f.pool();
+            },
+            () -> {
+              configReads.incrementAndGet();
+              return f.config();
+            })) {
+      assertEquals(0, poolReads.get());
+      assertEquals(0, configReads.get());
+      context.initialize();
+      assertTrue(f.calls.isEmpty());
+      var handler = new ApiMetricHttpHandler(context, () -> true);
+      for (int sample = 0; sample < 2; sample++) {
+        f.active = sample == 0 ? 3 : 0;
+        var exchange = new Exchange("GET", PATH);
+        handler.handle(exchange);
+        String body = exchange.output.toString(StandardCharsets.UTF_8);
+        assertTrue(body.startsWith(READY + "1\n"));
+        assertTrue(
+            body.contains(
+                "nk_db_pool_connections{service=\"API\",state=\"active\"} "
+                    + (sample == 0 ? "3.0" : "0.0")
+                    + "\n"));
+        assertTrue(body.contains("nk_db_pool_connections{service=\"API\",state=\"max\"} 8.0\n"));
+        assertEquals(200, exchange.status);
+        assertEquals(body.getBytes(StandardCharsets.UTF_8).length, exchange.length);
+        assertEquals(METRIC, exchange.headers.getFirst("Content-Type"));
+        assertEquals("no-store", exchange.headers.getFirst("Cache-Control"));
+        assertEquals(1, exchange.closeCalls);
+        f.complete();
+        f.calls.clear();
+      }
+      assertEquals(1, poolReads.get());
+      assertEquals(1, configReads.get());
+    }
+    assertTrue(f.calls.isEmpty());
+  }
+
   private static ApiMetricContext<String> standard() {
     var context =
         new ApiMetricContext<String>(

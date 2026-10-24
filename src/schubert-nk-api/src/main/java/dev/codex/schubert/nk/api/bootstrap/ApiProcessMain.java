@@ -1,5 +1,6 @@
 package dev.codex.schubert.nk.api.bootstrap;
 
+import com.zaxxer.hikari.HikariDataSource;
 import dev.codex.schubert.nk.api.application.question.QuestionWorkerService;
 import dev.codex.schubert.nk.api.application.question.StubAnswerProvider;
 import dev.codex.schubert.nk.api.dispatch.ApiDependencyReadiness;
@@ -8,6 +9,8 @@ import dev.codex.schubert.nk.api.file.ServiceProcessResources;
 import dev.codex.schubert.nk.api.logging.WebLogIngestService;
 import dev.codex.schubert.nk.api.messaging.config.ApiBrokerContexts;
 import dev.codex.schubert.nk.api.messaging.inbound.ApiMessagingRuntime;
+import dev.codex.schubert.nk.api.monitoring.ApiDbPoolMetricBinding;
+import dev.codex.schubert.nk.api.monitoring.ApiMetricContext;
 import dev.codex.schubert.nk.api.storage.ApiApplicationPreparation;
 import dev.codex.schubert.nk.bootstrap.ServiceStartupAdmission;
 import dev.codex.schubert.nk.storage.NonSecretConfigSource;
@@ -214,50 +217,79 @@ public final class ApiProcessMain {
                                       var groupsReady =
                                           new java.util.concurrent.atomic.AtomicBoolean();
                                       System.err.println("API startup entered MANAGEMENT");
-                                      ResourceScope.acquire(
-                                          () ->
-                                              ApiManagementServer.bind(
-                                                  information,
-                                                  applicationReadiness(
-                                                      groupsReady::get,
-                                                      lifetime::stopping,
-                                                      outbox::healthy)),
-                                          ServiceProcessResources.ownedRelease(
-                                              ApiManagementServer::close, true),
-                                          management -> {
-                                            management.start();
-                                            System.err.println("API startup entered CONSUMERS");
-                                            return ResourceScope.acquire(
-                                                () ->
-                                                    ApiMessagingRuntime.startRetainingUnknown(
-                                                        broker.sync(),
-                                                        broker.webLog(),
-                                                        broker.async(),
-                                                        lifetime.guardSync(sync),
-                                                        lifetime.guardEvent(
-                                                            new WebLogIngestService(pool)),
-                                                        lifetime.guardEvent(worker),
-                                                        clock,
-                                                        lifetime.committedFailureHandler(),
-                                                        lifetime::fail),
-                                                ServiceProcessResources.ownedRelease(
-                                                    ApiMessagingRuntime::close, true),
-                                                runtime -> {
-                                                  try {
-                                                    groupsReady.set(true);
-                                                    System.err.println(
-                                                        "API startup entered ADMISSION_RELEASE");
-                                                    management.promote(ready);
-                                                    lifetime.await(
-                                                        runtimeReadiness(
-                                                            runtime::ready, outbox::healthy));
-                                                    return Boolean.TRUE;
-                                                  } finally {
-                                                    lifetime.stop();
-                                                    groupsReady.set(false);
-                                                  }
-                                                });
-                                          });
+                                      ResourceScope
+                                          .<ApiMetricContext<ApiDbPoolMetricBinding>, Boolean,
+                                              IOException>
+                                              acquire(
+                                                  () ->
+                                                      ApiDbPoolMetricBinding.prepareContext(
+                                                          inputs
+                                                              .config()
+                                                              .value("nk.monitoring.mode"),
+                                                          () ->
+                                                              HikariDataSource.class
+                                                                  .cast(pool)
+                                                                  .getHikariPoolMXBean(),
+                                                          () ->
+                                                              HikariDataSource.class
+                                                                  .cast(pool)
+                                                                  .getHikariConfigMXBean()),
+                                                  ServiceProcessResources.ownedRelease(
+                                                      metrics -> metrics.close(), true),
+                                                  metrics -> {
+                                                    metrics.initialize();
+                                                    return ResourceScope.acquire(
+                                                        () ->
+                                                            ApiManagementServer.bind(
+                                                                information,
+                                                                applicationReadiness(
+                                                                    groupsReady::get,
+                                                                    lifetime::stopping,
+                                                                    outbox::healthy),
+                                                                metrics),
+                                                        ServiceProcessResources.ownedRelease(
+                                                            ApiManagementServer::close, true),
+                                                        management -> {
+                                                          management.start();
+                                                          System.err.println(
+                                                              "API startup entered CONSUMERS");
+                                                          return ResourceScope.acquire(
+                                                              () ->
+                                                                  ApiMessagingRuntime
+                                                                      .startRetainingUnknown(
+                                                                          broker.sync(),
+                                                                          broker.webLog(),
+                                                                          broker.async(),
+                                                                          lifetime.guardSync(sync),
+                                                                          lifetime.guardEvent(
+                                                                              new WebLogIngestService(
+                                                                                  pool)),
+                                                                          lifetime.guardEvent(
+                                                                              worker),
+                                                                          clock,
+                                                                          lifetime
+                                                                              .committedFailureHandler(),
+                                                                          lifetime::fail),
+                                                              ServiceProcessResources.ownedRelease(
+                                                                  ApiMessagingRuntime::close, true),
+                                                              runtime -> {
+                                                                try {
+                                                                  groupsReady.set(true);
+                                                                  System.err.println(
+                                                                      "API startup entered ADMISSION_RELEASE");
+                                                                  management.promote(ready);
+                                                                  lifetime.await(
+                                                                      runtimeReadiness(
+                                                                          runtime::ready,
+                                                                          outbox::healthy));
+                                                                  return Boolean.TRUE;
+                                                                } finally {
+                                                                  lifetime.stop();
+                                                                  groupsReady.set(false);
+                                                                }
+                                                              });
+                                                        });
+                                                  });
                                     });
                                 return Boolean.TRUE;
                               });

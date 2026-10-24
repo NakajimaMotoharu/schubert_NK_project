@@ -270,6 +270,148 @@ final class ApiDbPoolMetricBindingTest {
     }
   }
 
+  @Test
+  void apipoolb011PreparedStandardNeverAcquiresBorrowedBeanReferences() {
+    try (var context =
+        ApiDbPoolMetricBinding.prepareContext(
+            "STANDARD",
+            () -> {
+              throw new AssertionError("pool must remain deferred");
+            },
+            () -> {
+              throw new AssertionError("configuration must remain deferred");
+            })) {
+      context.initialize();
+      assertTrue(context.bindings().isEmpty());
+      assertEquals(
+          "# TYPE schubert_nk_api_ready gauge\nschubert_nk_api_ready 1\n", context.render(true));
+    }
+  }
+
+  @Test
+  void apipoolb012FactoryRejectsNullAndUnknownModeBeforeSupplierRead() {
+    var f = fixture();
+    assertThrows(
+        NullPointerException.class,
+        () -> ApiDbPoolMetricBinding.prepareContext("DEBUG", null, f::config));
+    assertThrows(
+        NullPointerException.class,
+        () -> ApiDbPoolMetricBinding.prepareContext("DEBUG", f::pool, null));
+    assertThrows(
+        NullPointerException.class,
+        () -> ApiDbPoolMetricBinding.prepareContext(null, f::pool, f::config));
+    assertThrows(
+        IllegalArgumentException.class,
+        () -> ApiDbPoolMetricBinding.prepareContext("debug", f::pool, f::config));
+    assertTrue(f.calls.isEmpty());
+  }
+
+  @Test
+  void apipoolb013CallerCapturesOwnerBeforeDeferredBeanReferencesAndSamplesOnlyAtRender() {
+    var f = fixture();
+    var calls = new java.util.ArrayList<String>();
+    var owner = new AtomicReference<ApiMetricContext<ApiDbPoolMetricBinding>>();
+    try (var context =
+        ApiDbPoolMetricBinding.prepareContext(
+            "DEBUG",
+            () -> {
+              assertNotNull(owner.get());
+              calls.add("pool");
+              return f.pool();
+            },
+            () -> {
+              assertNotNull(owner.get());
+              calls.add("config");
+              return f.config();
+            })) {
+      owner.set(context);
+      assertTrue(calls.isEmpty());
+      context.initialize();
+      assertEquals(List.of("pool", "config"), calls);
+      assertTrue(f.calls.isEmpty());
+      assertTrue(context.bindings().orElseThrow().snapshot().isEmpty());
+      text(context.render(true), "3.0", "5.0", "2.0", "8.0");
+      f.complete();
+      f.calls.clear();
+      f.active = 0;
+      f.idle = 0;
+      f.pending = 4;
+      text(context.render(false), "0.0", "0.0", "4.0", "8.0");
+      f.complete();
+      assertEquals(List.of("pool", "config"), calls);
+    }
+  }
+
+  @Test
+  void apipoolb014PoolSupplierFailureOrNullRetainsPartialOwnerAndNeverReadsConfiguration() {
+    for (int kind = 0; kind < 3; kind++) {
+      final int selected = kind;
+      var runtime = new IllegalStateException("fixed pool supplier");
+      var fatal = new AssertionError("fixed pool supplier fatal");
+      var reads = new java.util.concurrent.atomic.AtomicInteger();
+      var f = fixture();
+      try (var context =
+          ApiDbPoolMetricBinding.prepareContext(
+              "DEBUG",
+              () -> {
+                reads.incrementAndGet();
+                if (selected == 0) throw runtime;
+                if (selected == 1) throw fatal;
+                return null;
+              },
+              () -> {
+                throw new AssertionError("configuration must not be reached");
+              })) {
+        if (selected == 0)
+          assertSame(runtime, assertThrows(IllegalStateException.class, context::initialize));
+        else if (selected == 1)
+          assertSame(fatal, assertThrows(AssertionError.class, context::initialize));
+        else assertThrows(NullPointerException.class, context::initialize);
+        assertEquals(1, reads.get());
+        assertThrows(IllegalStateException.class, context::initialize);
+        assertThrows(IllegalStateException.class, context::bindings);
+        assertThrows(IllegalStateException.class, () -> context.render(true));
+        assertTrue(f.calls.isEmpty());
+        assertEquals(1, reads.get());
+      }
+    }
+  }
+
+  @Test
+  void apipoolb015ConfigurationSupplierFailureOrNullPreservesPrimaryAndNeverReadsStatistics() {
+    for (int kind = 0; kind < 3; kind++) {
+      final int selected = kind;
+      var runtime = new IllegalArgumentException("fixed configuration supplier");
+      var fatal = new AssertionError("fixed configuration supplier fatal");
+      var order = new java.util.ArrayList<String>();
+      var f = fixture();
+      try (var context =
+          ApiDbPoolMetricBinding.prepareContext(
+              "DEBUG",
+              () -> {
+                order.add("pool");
+                return f.pool();
+              },
+              () -> {
+                order.add("config");
+                if (selected == 0) throw runtime;
+                if (selected == 1) throw fatal;
+                return null;
+              })) {
+        if (selected == 0)
+          assertSame(runtime, assertThrows(IllegalArgumentException.class, context::initialize));
+        else if (selected == 1)
+          assertSame(fatal, assertThrows(AssertionError.class, context::initialize));
+        else assertThrows(NullPointerException.class, context::initialize);
+        assertEquals(List.of("pool", "config"), order);
+        assertTrue(f.calls.isEmpty());
+        assertThrows(IllegalStateException.class, context::initialize);
+        assertThrows(IllegalStateException.class, context::bindings);
+        assertEquals(List.of("pool", "config"), order);
+      }
+    }
+  }
+
   private static void await(CountDownLatch latch) {
     try {
       assertTrue(latch.await(30, TimeUnit.SECONDS));
