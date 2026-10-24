@@ -267,4 +267,348 @@ class WebCustomMetricPayloadTest {
       assertEquals(64, total.get());
     }
   }
+
+  private static final String FULL_STANDARD =
+      "# TYPE system_cpu_count gauge\nsystem_cpu_count{service=\"WEB\"} 42.0\n";
+
+  private static final class FullProbe
+      extends io.micrometer.prometheusmetrics.PrometheusMeterRegistry {
+    final AtomicInteger scrapes = new AtomicInteger();
+    java.util.Optional<Throwable> failure = java.util.Optional.empty();
+    boolean nullText;
+
+    FullProbe() {
+      super(io.micrometer.prometheusmetrics.PrometheusConfig.DEFAULT);
+    }
+
+    @Override
+    public String scrape() {
+      scrapes.incrementAndGet();
+      if (failure.isPresent()) return fail(failure.orElseThrow());
+      if (nullText) return null;
+      return FULL_STANDARD;
+    }
+  }
+
+  private static WebStandardMetricSource fullOwner(FullProbe probe) {
+    var owner = new WebStandardMetricSource(() -> probe, (source, gc) -> {});
+    owner.bind("DEBUG");
+    return owner;
+  }
+
+  @Test
+  void webfull001StandardKeepsLegacyBytesAndNeverAcquiresEitherSource() {
+    var factories = new AtomicInteger();
+    var calls = new AtomicInteger();
+    var standard =
+        new WebStandardMetricSource(
+            () -> {
+              factories.incrementAndGet();
+              throw new AssertionError("unexpected source");
+            },
+            (source, gc) -> {});
+    try {
+      assertEquals(
+          READY_ONE,
+          payload.render(
+              true,
+              "STANDARD",
+              () -> {
+                calls.incrementAndGet();
+                throw new AssertionError("unexpected custom");
+              },
+              standard));
+      standard.close();
+      assertEquals(
+          READY_ZERO,
+          payload.render(
+              false,
+              "STANDARD",
+              () -> {
+                calls.incrementAndGet();
+                throw new AssertionError("unexpected custom");
+              },
+              standard));
+      assertEquals(0, calls.get());
+      assertEquals(0, factories.get());
+    } finally {
+      standard.close();
+    }
+  }
+
+  @Test
+  void webfull002LiteralFullOrderAndActualOfficialSdkValue() {
+    var probe = new FullProbe();
+    try (var bundle = new Bundle();
+        var standard = fullOwner(probe)) {
+      assertEquals(
+          READY_ZERO + CUSTOM + FULL_STANDARD,
+          payload.render(false, "DEBUG", () -> bundle.source, standard));
+      assertEquals(1, probe.scrapes.get());
+      assertFalse(bundle.source.isClosed());
+      assertFalse(probe.isClosed());
+      Reference.reachabilityFence(bundle);
+    }
+    try (var bundle = new Bundle();
+        var standard = new WebStandardMetricSource()) {
+      standard.bind("DEBUG");
+      String actual = payload.render(true, "DEBUG", () -> bundle.source, standard);
+      assertTrue(actual.startsWith(READY_ONE + CUSTOM));
+      String expected =
+          "system_cpu_count{service=\"WEB\"} "
+              + (double) Runtime.getRuntime().availableProcessors();
+      assertTrue(actual.lines().anyMatch(expected::equals));
+      assertTrue(actual.contains("jvm_memory_used_bytes{"));
+      var types = actual.lines().filter(line -> line.startsWith("# TYPE ")).toList();
+      assertEquals(types.size(), types.stream().distinct().count());
+      assertFalse(bundle.source.isClosed());
+      Reference.reachabilityFence(bundle);
+    }
+  }
+
+  @Test
+  void webfull003UnboundAndClosedStandardNeverBecomePartialSuccess() {
+    var calls = new AtomicInteger();
+    var standard = new WebStandardMetricSource();
+    try (var bundle = new Bundle()) {
+      assertThrows(
+          IllegalStateException.class,
+          () ->
+              payload.render(
+                  true,
+                  "DEBUG",
+                  () -> {
+                    calls.incrementAndGet();
+                    return bundle.source;
+                  },
+                  standard));
+      standard.close();
+      assertThrows(
+          IllegalStateException.class,
+          () ->
+              payload.render(
+                  false,
+                  "DEBUG",
+                  () -> {
+                    calls.incrementAndGet();
+                    return bundle.source;
+                  },
+                  standard));
+      assertEquals(2, calls.get());
+      assertFalse(bundle.source.isClosed());
+      Reference.reachabilityFence(bundle);
+    } finally {
+      standard.close();
+    }
+  }
+
+  @Test
+  void webfull004NullAndUnknownBoundariesReadNeitherProvider() {
+    var probe = new FullProbe();
+    var calls = new AtomicInteger();
+    java.util.function.Supplier<io.micrometer.core.instrument.MeterRegistry> source =
+        () -> {
+          calls.incrementAndGet();
+          throw new AssertionError("unexpected provider");
+        };
+    try (var standard = fullOwner(probe)) {
+      assertThrows(NullPointerException.class, () -> payload.render(true, "DEBUG", source, null));
+      assertThrows(NullPointerException.class, () -> payload.render(true, "DEBUG", null, standard));
+      assertThrows(NullPointerException.class, () -> payload.render(true, null, source, standard));
+      assertThrows(
+          IllegalArgumentException.class, () -> payload.render(true, "unknown", source, standard));
+      assertEquals(0, calls.get());
+      assertEquals(0, probe.scrapes.get());
+    }
+  }
+
+  @Test
+  void webfull005CustomRuntimeWinsBeforeStandardFailure() {
+    var probe = new FullProbe();
+    probe.failure = java.util.Optional.of(new AssertionError("unreached standard"));
+    var failure = new IllegalArgumentException("custom fixture");
+    try (var standard = fullOwner(probe)) {
+      assertSame(
+          failure,
+          assertThrows(
+              IllegalArgumentException.class,
+              () ->
+                  payload.render(
+                      true,
+                      "DEBUG",
+                      () -> {
+                        throw failure;
+                      },
+                      standard)));
+      assertEquals(0, probe.scrapes.get());
+      assertFalse(probe.isClosed());
+    }
+  }
+
+  @Test
+  void webfull006CustomErrorIdentityIsPreservedWithoutStandardRead() {
+    var probe = new FullProbe();
+    probe.failure = java.util.Optional.of(new IllegalStateException("unreached standard"));
+    var failure = new AssertionError("custom fatal fixture");
+    try (var standard = fullOwner(probe)) {
+      assertSame(
+          failure,
+          assertThrows(
+              AssertionError.class,
+              () ->
+                  payload.render(
+                      false,
+                      "DEBUG",
+                      () -> {
+                        throw failure;
+                      },
+                      standard)));
+      assertEquals(0, probe.scrapes.get());
+      assertFalse(probe.isClosed());
+    }
+  }
+
+  @Test
+  void webfull007CustomFormatterFailureKeepsBorrowedResources() {
+    var probe = new FullProbe();
+    var failure = new IllegalStateException("formatter fixture");
+    try (var broken = new Broken(failure);
+        var standard = fullOwner(probe)) {
+      assertSame(
+          failure,
+          assertThrows(
+              IllegalStateException.class,
+              () -> payload.render(true, "DEBUG", () -> broken, standard)));
+      assertEquals(0, probe.scrapes.get());
+      assertEquals(0, broken.closes.get());
+      assertFalse(probe.isClosed());
+    }
+  }
+
+  @Test
+  void webfull008StandardRuntimeNeverFallsBackOrClosesBorrowedCustom() {
+    var probe = new FullProbe();
+    var failure = new IllegalArgumentException("standard fixture");
+    probe.failure = java.util.Optional.of(failure);
+    try (var bundle = new Bundle();
+        var standard = fullOwner(probe)) {
+      assertSame(
+          failure,
+          assertThrows(
+              IllegalArgumentException.class,
+              () -> payload.render(true, "DEBUG", () -> bundle.source, standard)));
+      assertEquals(1, probe.scrapes.get());
+      assertFalse(bundle.source.isClosed());
+      assertFalse(probe.isClosed());
+      Reference.reachabilityFence(bundle);
+    }
+  }
+
+  @Test
+  void webfull009StandardErrorIdentityNeverBecomesReadyOnlySuccess() {
+    var probe = new FullProbe();
+    var failure = new AssertionError("standard fatal fixture");
+    probe.failure = java.util.Optional.of(failure);
+    try (var bundle = new Bundle();
+        var standard = fullOwner(probe)) {
+      assertSame(
+          failure,
+          assertThrows(
+              AssertionError.class,
+              () -> payload.render(false, "DEBUG", () -> bundle.source, standard)));
+      assertEquals(1, probe.scrapes.get());
+      assertFalse(bundle.source.isClosed());
+      Reference.reachabilityFence(bundle);
+    }
+  }
+
+  @Test
+  void webfull010ContractViolatingNullTextIsRejectedNotConcatenated() {
+    var probe = new FullProbe();
+    probe.nullText = true;
+    try (var bundle = new Bundle();
+        var standard = fullOwner(probe)) {
+      assertThrows(
+          NullPointerException.class,
+          () -> payload.render(true, "DEBUG", () -> bundle.source, standard));
+      assertEquals(1, probe.scrapes.get());
+      assertFalse(bundle.source.isClosed());
+      Reference.reachabilityFence(bundle);
+    }
+  }
+
+  @Test
+  void webfull011ConcurrentFullScrapesKeepIndependentGoldenAndOwnership() throws Exception {
+    try (var bundle = new Bundle();
+        var standard = new WebStandardMetricSource()) {
+      standard.bind("DEBUG");
+      String expected =
+          "system_cpu_count{service=\"WEB\"} "
+              + (double) Runtime.getRuntime().availableProcessors();
+      var executor = Executors.newFixedThreadPool(4);
+      try {
+        var tasks = new ArrayList<java.util.concurrent.Callable<String>>();
+        for (int index = 0; index < 64; index++)
+          tasks.add(() -> payload.render(true, "DEBUG", () -> bundle.source, standard));
+        for (var future : executor.invokeAll(tasks, 30, TimeUnit.SECONDS)) {
+          String actual = future.get(30, TimeUnit.SECONDS);
+          assertTrue(actual.startsWith(READY_ONE + CUSTOM));
+          assertTrue(actual.lines().anyMatch(expected::equals));
+        }
+        assertFalse(bundle.source.isClosed());
+      } finally {
+        executor.shutdownNow();
+        assertTrue(executor.awaitTermination(30, TimeUnit.SECONDS));
+      }
+      Reference.reachabilityFence(bundle);
+    }
+  }
+
+  @Test
+  void webfull012CallerCloseBetweenSourcesCannotReturnPartialText() throws Exception {
+    var entered = new java.util.concurrent.CountDownLatch(1);
+    var release = new java.util.concurrent.CountDownLatch(1);
+    var probe = new FullProbe();
+    var standard = fullOwner(probe);
+    var executor = Executors.newSingleThreadExecutor();
+    try (var bundle = new Bundle()) {
+      var future =
+          executor.submit(
+              () ->
+                  payload.render(
+                      true,
+                      "DEBUG",
+                      () -> {
+                        entered.countDown();
+                        awaitFull(release);
+                        return bundle.source;
+                      },
+                      standard));
+      assertTrue(entered.await(30, TimeUnit.SECONDS));
+      standard.close();
+      release.countDown();
+      var failure =
+          assertThrows(
+              java.util.concurrent.ExecutionException.class,
+              () -> future.get(30, TimeUnit.SECONDS));
+      assertInstanceOf(IllegalStateException.class, failure.getCause());
+      assertEquals(0, probe.scrapes.get());
+      assertFalse(bundle.source.isClosed());
+      Reference.reachabilityFence(bundle);
+    } finally {
+      release.countDown();
+      executor.shutdownNow();
+      assertTrue(executor.awaitTermination(30, TimeUnit.SECONDS));
+      standard.close();
+    }
+  }
+
+  private static void awaitFull(java.util.concurrent.CountDownLatch release) {
+    try {
+      assertTrue(release.await(30, TimeUnit.SECONDS));
+    } catch (InterruptedException interrupted) {
+      Thread.currentThread().interrupt();
+      throw new IllegalStateException("owned full fixture interrupted");
+    }
+  }
 }

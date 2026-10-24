@@ -9,10 +9,23 @@ import java.util.function.Supplier;
  * HTTP/health authority.
  */
 public final class ApiCustomMetricPayload {
+  private static final String STANDARD_MODE = "STANDARD";
   private static final String READY_PREFIX =
       "# TYPE schubert_nk_api_ready gauge\nschubert_nk_api_ready ";
 
   public ApiCustomMetricPayload() {}
+
+  /** SS351/1812/PG-D616: pure full view; both sources remain caller-owned, no HTTP authority. */
+  public String render(
+      boolean ready,
+      String mode,
+      Supplier<? extends MeterRegistry> source,
+      ApiStandardMetricSource standard) {
+    Objects.requireNonNull(standard, "standard metric owner");
+    if (STANDARD_MODE.equals(mode)) return render(ready, mode, source);
+    return render(ready, mode, source)
+        + Objects.requireNonNull(standard.scrape(mode), "standard metric text");
+  }
 
   /** Supplied ready state is not recomputed. Source is borrowed, not acquired or closed here. */
   public String render(boolean ready, String mode, Supplier<? extends MeterRegistry> source) {
