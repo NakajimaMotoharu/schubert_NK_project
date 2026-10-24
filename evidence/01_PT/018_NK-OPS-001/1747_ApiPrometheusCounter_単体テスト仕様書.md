@@ -1,5 +1,7 @@
 # 1747 API四Counter 実Prometheus SDK 単体テスト仕様書
 
+2026-10-24 BUG1691/YKT1442是正：元e196/PG8206は40中7失敗・終了1で保持、PG8207原60bdfffeが単位指定によるnk_mq_messages_total_messages_total変形を実証。PG-D589の最小修正source6246c954d6d0ac7171bf009663bb2e6539d8be32ではMQ CounterのbaseUnitのみ除去、MQEVENT001の内部metadataを未指定へ訂正した。外部正名/type/label/増分と新APICNT oracleは不変更。次PG8212当sourceの正常六compile/NullAway/PT0→新PG8214当40/5→8216独立6四100/static→8218全physical/traceと1748。旧e196正常compile/counter成功を当sourceへ流用しない。元群開始1/3/6/cap10は維持し、追加発見/修正・再認証を分離する。
+
 NK-OPS-001/WBS-P018-09/C07/RD171 MON005010013/UI252/SS321323351、1643/1691/1695/1718、PG-D588。group1974/PG8204fresh20残80/reset1793382075、開始1/3/6pp/cap10。既Simpleと後続索引/current sourceを照合し、実backend未検証だけを追加する。
 
 四対象はInboxReplayMetricRecorder、OperationMismatchMetricRecorder＋Operation、MqRedeliveryMetricRecorder、MqMessageMetricRecorder＋Stage＝実6Main。四family/801sample（Inbox64×12=768、operation8、queue6×delivery3=18、一固定layout/addressのMQstage7）。新APICNT001～008＋必要既四Test各8=40/5、一execで当6のline/method/class/branch100・CRC0/session1、生成二enum四factorymethodも同runtyped契約に結合。業務Inbox/再送/認可/鍵/発行権限を操作する試験でなく、own memoryへの供給済event観測のみ。
