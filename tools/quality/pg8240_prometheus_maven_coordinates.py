@@ -85,7 +85,7 @@ def parent(coordinate, depth=0):
 
 
 def main():
-    invocation = capture()
+    invocation = capture(Path(__file__))
     SLOT.mkdir(exist_ok=False)
     OUT.mkdir(exist_ok=False)
     rows = parent(('io.prometheus', 'client_java', '1.7.0'))
