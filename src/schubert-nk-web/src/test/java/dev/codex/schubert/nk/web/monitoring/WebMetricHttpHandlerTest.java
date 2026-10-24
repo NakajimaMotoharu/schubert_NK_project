@@ -287,7 +287,7 @@ final class WebMetricHttpHandlerTest {
 
   private static WebMetricContext<String> standard() {
     var context =
-        new WebMetricContext<>(
+        new WebMetricContext<String>(
             "STANDARD",
             registry -> {
               throw new AssertionError("STD setup");

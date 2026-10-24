@@ -287,7 +287,7 @@ final class ApiMetricHttpHandlerTest {
 
   private static ApiMetricContext<String> standard() {
     var context =
-        new ApiMetricContext<>(
+        new ApiMetricContext<String>(
             "STANDARD",
             registry -> {
               throw new AssertionError("STD setup");
