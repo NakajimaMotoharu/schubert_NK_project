@@ -15,6 +15,7 @@ import java.util.stream.Collectors;
  * escape.
  */
 public final class BatchMetricText {
+  private static final String STANDARD_MODE = "STANDARD";
   private static final String HELP = "Supplied Batch technical observation.";
   private final BatchMetricLabelPolicy labels = new BatchMetricLabelPolicy();
 
@@ -24,7 +25,7 @@ public final class BatchMetricText {
   public String scrape(MeterRegistry source, String mode, BatchStandardMetricSource standard) {
     Objects.requireNonNull(standard, "standard metric owner");
     String custom = scrape(source, mode);
-    if ("STANDARD".equals(mode)) return custom;
+    if (STANDARD_MODE.equals(mode)) return custom;
     return custom + Objects.requireNonNull(standard.scrape(mode), "standard metric text");
   }
 
