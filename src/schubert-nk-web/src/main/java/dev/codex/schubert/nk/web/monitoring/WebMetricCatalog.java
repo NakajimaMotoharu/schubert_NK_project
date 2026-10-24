@@ -93,7 +93,10 @@ public final class WebMetricCatalog {
     var result = new HashMap<String, Set<String>>();
     TYPES.forEach(
         (name, kind) -> {
-          if (kind.equals(type)) result.put(name, Set.copyOf(VALUES.get(name).keySet()));
+          if (kind.equals(type))
+            result.put(
+                name,
+                Set.copyOf(Objects.requireNonNull(VALUES.get(name), "metric domain").keySet()));
         });
     return Map.copyOf(result);
   }
