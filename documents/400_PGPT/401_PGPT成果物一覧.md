@@ -1,5 +1,7 @@
 # PGPT成果物一覧・進捗
 
+2026-10-25最新：1870/1871/sourceecfcbf9f6、API-local初回通知の60秒予算を新18/1で確認、全一MainL24M5C1B12四100/CS-SB0・PMD2個別判断/全1843・248owner/五arch0。clock失敗/逆行/期限後sticky0・signed wrap・同時begin一回、resource/TERM操作0。技術856新ID/42Main（＋18/1）/config静的5、正式1964-53/原190新受入0/工数nullを区別。元共有90の捕捉下限82/不明2/正確null・80大型群抑制を適用、次は短いLife供給接続PG/PT/保全。actual/native/全451/QA051final/G078379は未受入HOLD。
+
 2026-10-25最新：1868/1869/sourcecb91bc2ec、caller-held API観測/SDK assemblyを新26/1で検証、全一MainL58M7C1B20四100/CS-SB0・PMD4個別判断/全1842・246owner・五arch0。STD worker/SQLなし、DEBUG fake readonly→SDK供給とworker終端前SDK解放禁止・UNKNOWN永久保持を確認。技術Java838ID/41Main（＋26/1）/config静的5、正式1964PT/53scope・原190新受入0/工数nullを区別。元失敗/工具修正/横展開1869、現Mainの既stop budget供給・actual/native/全451/QA051final/G078379は未受入HOLD、次同経路の許可PG/PTへ継続。
 
 2026-10-25最新：1864/1865/sourcefdc229c9a、新OwnedApiObservationWorker44/1を普通私有JVM/fake JDBCで検証、対象一MainL87M7C1B46四100/CS-SB0・PMD20個別判断/全1841・244owner・五arch0。BUG1732～35/YKT1483～86の元失敗/修正/再発防止を分離保存。技術Java812ID/40Main（＋44/1）とconfig静的5、正式1964PT/53scope・原190新受入0/工数nullを区別。次同API caller/残期限/Pool寿命接続の許可PG/PT、実API/DB/VM/native/全451/QA051final/G078379は未受入HOLD。

@@ -1,5 +1,7 @@
 # Module・Program一覧
 
+2026-10-25追加trace：NK-OPS-001/PG-D637/1870-71、bootstrap.ApiStopBudget ctor/begin/remainingNanos/time→APISTOP001～018、owner/costWBS-P018-05・P018-09参照追加0。RD171/UI252/SS342351、sourceecfcbf9f6。9168 normal六→9170原3c87169a新18/1→9172原cf2f8da6全一MainL24M5C1B12四100/CS-SB0・PMD2個別根拠→9174v2原ebdbb146全1843・旧1842同byte/248owner/五arch0/17反例。旧246canonical mapping保持・新2pathだけ明示rule、unknownは推定assign0。現Life/Mainへの供給・actual/native/全451は別未受入HOLD。
+
 2026-10-25追加trace：NK-OPS-001/PG-D636/1868-69、ApiObservationContext prepare/ctor/initialize/rejectStopping/metrics/close→OBSCTX001～026。RD171/UI252/SS311332342351、sourcecb91bc2ec。9154v3 normal六→9156hostv4原cc25b55b実26/1→9158原f2729d1e全一MainL58M7C1B20四100/CS-SB0・PMD4個別根拠→9160原33d6811f全1842・旧1841同byte/246owner/五arch0/15反例。他25case/fixture保持・内部field renameのみを独立照合、BUG1736～38/横展開1869。actual caller stop remainder供給/native/全451は別未受入HOLD。
 
 2026-10-25追加trace：NK-OPS-001/PG-D635/1864-65、OwnedApiObservationWorker ctor/start/run/requestStop/awaitStopped→OBSOWN001～044。RD171/UI252/SS311332342351、sourcefdc229c9a。9132v4 normal六→9134v2原af479ed6 actual44/1→9136原24632ab8全一MainL87M7C1B46四100/CS-SB0・PMD20個別判断→9138原68dd7944全1841/旧1840同byte/244owner/五arch0。元予算/一回start/UNKNOWN永久保持・私有Thread回収を確認し、actual caller/Pool/SDK/停止残期限/native/全451は別未受入HOLD。障害4件/全横展開/独立compiler・算術canaryは1865。
