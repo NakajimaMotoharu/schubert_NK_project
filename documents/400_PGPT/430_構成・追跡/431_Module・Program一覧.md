@@ -1,5 +1,7 @@
 # Module・Program一覧
 
+2026-10-24追加trace：API四Counter（InboxReplay、OperationMismatch/Operation、MqRedelivery、MqMessage/Stage）実6は1747/1748、新APICNT001～008＋既各8＝40/5。BUG1691でMqMessageの内部unitのみ修正source6246c954d/1718・PG-D589、SS351外部正名/label/増分不変更。8216実6四100/生成4、8219全1799・元1669不変/一Main変更、155source-ownerを固定。旧e196の三SDK run112は歴史証跡、現在40とcoverage合算/全scope受入にしない。実業務/Root等HOLD・正式/工数不変更。
+
 2026-10-24追加trace：実Prometheus ordinary PTはWeb四Recorder＝1741/1742・新8＋既42=50/7・実15、API MQ圧力＝1743/1744・新6＋既8=14/2・実2、API rows/age/jobs/pool＝1745/1746・新8＋既40=48/6・実11。各Program/nested/Test/SS351/RD171/UI252は各結果表/manifestへ一意結合、全same Production Java/POM e196byte・別execのcounter合算0。新製品Main/正式受入増0、実owner/source/endpoint/DB/Root/Timer等HOLDを保持。
 
 2026-10-24最新：1739 SDK依存準備/1740結果、source69204dd13/公式registry1.17.1/client1.7.0新10Jar＋既5pin、全checksum/依存directgraph/1824class名重複0・新8173独立7反例/静的0。BUG1688prefixsource guardを00581f4b7でfull40へ是正/旧post保持。工具準備のみ・製品PT/製造/正式受入0、Production Java/POM/旧M2不変更・target init/実操作0-HOLD。次四Web Recorderのin-memory実SDK Gauge/Counter適合性を別ordinary PTへ。
