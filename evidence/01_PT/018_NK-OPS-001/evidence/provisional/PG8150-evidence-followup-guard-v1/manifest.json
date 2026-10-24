@@ -1,0 +1,394 @@
+{
+  "actualDatabaseActions": 0,
+  "actualExit": 0,
+  "actualNetworkActions": 0,
+  "actualVmActions": 0,
+  "additionalVerificationCases": 12,
+  "bugs": [
+    "BUG1686"
+  ],
+  "correctedEvents": [
+    "PGPT-20261008-1959",
+    "PGPT-20261008-1960"
+  ],
+  "effortPercent": null,
+  "environment": {
+    "os": "Linux-7.0.0-38-generic-x86_64-with-glibc2.43",
+    "python": "3.14.4 (main, Aug 20 2026, 10:41:58) [GCC 15.2.0]"
+  },
+  "errors": 0,
+  "failed": 0,
+  "firstIntroductions": {
+    "src/deployment/monitoring/prometheus/debug.yml.template": [
+      "7bc2095c895730dd1d76e85ecd6352280cad4889"
+    ],
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/WebDbPoolMetricRecorder.java": [
+      "e196d0816c8a4920696d4f601f8b4cf97e9e8b48"
+    ]
+  },
+  "formalUpdated": false,
+  "horizontal": [
+    "YKT1437"
+  ],
+  "invocation": {
+    "actualPythonCommand": [
+      "python3",
+      "-B",
+      "tools/quality/pg8150_evidence_followup_guard.py"
+    ],
+    "arbitraryArgumentsRecorded": false,
+    "entrypointPath": "tools/quality/pg8150_evidence_followup_guard.py",
+    "entrypointSha256": "4dac118ef98d050ed1c208ff3c0195a81440873ec6695cbe422238cc8b41169f",
+    "helperPath": "tools/quality/host_tool_invocation.py",
+    "helperSha256": "85d616a3db4ff47f4c95ae2e0dd57954bc2b09f28b8f2a685b986e5621545c46",
+    "libraryPath": "tools/quality/evidence_followup_index.py",
+    "librarySha256": "d5f0d89050f3aa7f7ad7e81c0663b9ce28f913bc32f9816bc9723e85c41e74cf",
+    "loadedProjectPythonSources": {
+      "tools/quality/evidence_followup_index.py": "d5f0d89050f3aa7f7ad7e81c0663b9ce28f913bc32f9816bc9723e85c41e74cf",
+      "tools/quality/host_tool_invocation.py": "85d616a3db4ff47f4c95ae2e0dd57954bc2b09f28b8f2a685b986e5621545c46",
+      "tools/quality/pg8150_evidence_followup_guard.py": "4dac118ef98d050ed1c208ff3c0195a81440873ec6695cbe422238cc8b41169f"
+    },
+    "provenance": "OBSERVED_SYS_ARGV_AND_ORIG_ARGV_NOT_RECONSTRUCTED"
+  },
+  "log": "test_FOLLOWUP001_number_order_not_modification_or_acceptance (evidence_followup_index.FollowupTest.test_FOLLOWUP001_number_order_not_modification_or_acceptance) ... ok\ntest_FOLLOWUP002_literal_unicode_and_case (evidence_followup_index.FollowupTest.test_FOLLOWUP002_literal_unicode_and_case) ... ok\ntest_FOLLOWUP003_invalid_query_and_metadata (evidence_followup_index.FollowupTest.test_FOLLOWUP003_invalid_query_and_metadata) ... ok\ntest_FOLLOWUP004_private_and_path_scope_not_authority (evidence_followup_index.FollowupTest.test_FOLLOWUP004_private_and_path_scope_not_authority) ... ok\n\n----------------------------------------------------------------------\nRan 4 tests in 0.001s\n\nOK\n",
+  "newAccepted": 0,
+  "noApprovalInferredFromIndex": true,
+  "originalEstimateUnchanged": {
+    "base": 1.5,
+    "high": 4,
+    "low": 0.5
+  },
+  "originalResultsRetained": true,
+  "originalWitnesses": {
+    "PG7036-c02-four-template-host-v1": {
+      "actualExit": 0,
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG7036-c02-four-template-host-v1/manifest.json",
+      "reexecuted": false,
+      "sha256": "ecf0f6e327f1a591bece5d695d54a5de6fb1fec850e41b5f59c3e72183aff58b",
+      "source": "748c880547dd44b455a344ad19c835c23ab133ae"
+    },
+    "PG7038-c02-four-template-post-v1": {
+      "actualExit": 0,
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG7038-c02-four-template-post-v1/manifest.json",
+      "reexecuted": false,
+      "sha256": "86e8d32bf2b07f73bb57e727be495f1f27b190a58979f872c50c848cfd22d9ef",
+      "source": "748c880547dd44b455a344ad19c835c23ab133ae"
+    },
+    "PG7040-c06-config-template-host-v1": {
+      "actualExit": 0,
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG7040-c06-config-template-host-v1/manifest.json",
+      "reexecuted": false,
+      "sha256": "3ce529149d8590257236d2cb3d9ff8e0692b0fb6644f3fa1a2078cfeb11a600b",
+      "source": "8c03e7c5ea5461bfe238705972bfa190a71b463a"
+    },
+    "PG7042-c06-config-template-post-v1": {
+      "actualExit": 0,
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG7042-c06-config-template-post-v1/manifest.json",
+      "reexecuted": false,
+      "sha256": "8866f08d6f317aca3ebd75415ca8ee2b9ca2b28c3762675aa95648375ec73250",
+      "source": "8c03e7c5ea5461bfe238705972bfa190a71b463a"
+    },
+    "PG8134-web-pool-qualification-v1": {
+      "actualExit": 0,
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG8134-web-pool-qualification-v1/manifest.json",
+      "reexecuted": false,
+      "sha256": "2e85494b1e4f14305a69f57d1dc595018773368652202c0088ea4bb47ba88c23",
+      "source": "e196d0816c8a4920696d4f601f8b4cf97e9e8b48"
+    },
+    "PG8140-prometheus-config-pt-v1": {
+      "actualExit": 0,
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG8140-prometheus-config-pt-v1/manifest.json",
+      "reexecuted": false,
+      "sha256": "25b268f050535f23fd5447083324435e838ce3bb882ae7c99c8273c27b4a8381",
+      "source": "7bc2095c895730dd1d76e85ecd6352280cad4889"
+    },
+    "PG8146-c02-four-profiles-pt-v1": {
+      "actualExit": 0,
+      "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG8146-c02-four-profiles-pt-v1/manifest.json",
+      "reexecuted": false,
+      "sha256": "82d65325ba9f495f698557bdd761a39d3fe51748f79b62b8a255e869e3bee959",
+      "source": "8733375423de7fceb69433b99dc8c60c111ea26a"
+    }
+  },
+  "plannedContractCompletionDelta": 0,
+  "plannedManufactureDelta": 0,
+  "productTestsExecutedByGuard": 0,
+  "publicCorpusFileCount": 1721,
+  "queries": {
+    "C02": {
+      "acceptanceInferred": false,
+      "mandatoryPrior": {
+        "name": "1555_C02四設定_実行結果.md",
+        "number": 1555,
+        "sha256": "2e897b5446bfb84387be9c5791f509dc67f6b04ff3727b5394895ba62b68c353",
+        "title": "# 1555 C02四設定 実行結果"
+      },
+      "matches": 94,
+      "newest": [
+        {
+          "name": "1734_重複着手訂正・後続成果索引.md",
+          "number": 1734,
+          "sha256": "41232c5613899c03a4bdf76f48a6ec48b8cad268cc8e2545f6839e78ea95f092",
+          "title": "# 1734 BUG1686/YKT1437 重複着手訂正・後続成果索引"
+        },
+        {
+          "name": "1733_C02未対応四設定_結果・追跡.md",
+          "number": 1733,
+          "sha256": "5eaaca814c94edd856a25ba9f04d745646b2d6be0254116c37a553983d021daf",
+          "title": "# 1733 C02 未対応四設定 宣言契約 結果・追跡"
+        },
+        {
+          "name": "1732_C02未対応四設定_単体テスト仕様書.md",
+          "number": 1732,
+          "sha256": "827901002708440ea938e7195207e01b579ef9de6d629598a817f1b56887ec63",
+          "title": "# 1732 C02 未対応四設定 宣言契約単体テスト仕様書"
+        },
+        {
+          "name": "1694_MQ供給圧力Metric_結果・追跡.md",
+          "number": 1694,
+          "sha256": "d0e4c69b111f0d6bba3b30c1c2b403fbf3c9e2d832be0749563421b1f7b45c77",
+          "title": "# 1694 MQ供給圧力metric 結果・追跡"
+        },
+        {
+          "name": "1690_DLQ供給観測警報_結果・追跡.md",
+          "number": 1690,
+          "sha256": "0682156ddcac1d6c2adb2e5c98f32f98eb5e134178bd4501960e657a56f0e005",
+          "title": "# 1690 DLQ供給観測警報 結果・追跡"
+        },
+        {
+          "name": "1646_APIOperationMismatchMetric_追跡・適用性完了.md",
+          "number": 1646,
+          "sha256": "f59b05fd3d2f39f4facd30b52853eef6be39a81ab2c50810cbf537eccb26a1d1",
+          "title": "# 1646 API operation mismatch metric 追跡・適用性完了"
+        },
+        {
+          "name": "1589_監視Clock時系列_追跡・適用性完了.md",
+          "number": 1589,
+          "sha256": "d60dd33af5495fd1ff3b75642af3488e26b99f5f8f42498ec2c87b1b65aaaa07",
+          "title": "# 1589 監視Clock時系列 追跡・適用性完了"
+        },
+        {
+          "name": "1569_Registry欠測実Jar・全追跡完了.md",
+          "number": 1569,
+          "sha256": "9db297754bbb7192c11be3f610e44e87a8383b6e0037a516275c22ce66d8c18c",
+          "title": "# 1569 Registry欠測実Jar・全追跡完了"
+        },
+        {
+          "name": "1566_当監視source全追加追跡・公開検査.md",
+          "number": 1566,
+          "sha256": "47d505a1b8f6db8bb86f39e532d2153c81fd995d8f762db20e0cfcb64f790616",
+          "title": "# 1566 当監視source全追加追跡・公開検査"
+        },
+        {
+          "name": "1560_追加source追跡・公開delta検査.md",
+          "number": 1560,
+          "sha256": "85b7485a694234edc03841508d39c44be3c1d51886a419a3a16130873fb1e88a",
+          "title": "# 1560 追加source追跡・公開delta検査"
+        }
+      ],
+      "readPriorBodyBeforeSelectingNext": true
+    },
+    "C06": {
+      "acceptanceInferred": false,
+      "mandatoryPrior": {
+        "name": "1557_C06_Batch既定値・非秘密設定境界_実行結果.md",
+        "number": 1557,
+        "sha256": "da31d0a76a054c9f80aa9989b670e7674babd7d61e60e4d982662e122ce47a2e",
+        "title": "# 1557 C06 Batch既定値・非秘密設定境界 実行結果"
+      },
+      "matches": 127,
+      "newest": [
+        {
+          "name": "1734_重複着手訂正・後続成果索引.md",
+          "number": 1734,
+          "sha256": "41232c5613899c03a4bdf76f48a6ec48b8cad268cc8e2545f6839e78ea95f092",
+          "title": "# 1734 BUG1686/YKT1437 重複着手訂正・後続成果索引"
+        },
+        {
+          "name": "1719_MqMessageMetric_結果・追跡.md",
+          "number": 1719,
+          "sha256": "7ffeef1b12ddffcf1e7019aac0750d61cd824919c036eeacd0fe1aab5bd18979",
+          "title": "# 1719 MQ event counter 結果・追跡"
+        },
+        {
+          "name": "1717_MqProcessingDurationMetric_結果・追跡.md",
+          "number": 1717,
+          "sha256": "79615f78e954f7c418502b47a806544bd1f9699d0f3244133985b3d9b4de99e3",
+          "title": "# 1717 MQ processing duration metric 結果・追跡"
+        },
+        {
+          "name": "1688_Integrity供給観測警報_結果・追跡.md",
+          "number": 1688,
+          "sha256": "9673d8a9df28c48a32777db4fa58909df44352e58e62e4aa736a72e3250c9c3c",
+          "title": "# 1688 Integrity供給観測警報 結果・追跡"
+        },
+        {
+          "name": "1641_APIPool観測結線_実Jar・資格domain.md",
+          "number": 1641,
+          "sha256": "21db201ec3d7ed03a1918269a3dfa6e587f069c2a1322d146000f35e98f9a4f5",
+          "title": "# 1641 API pool 借用観測結線 実Jar・資格domain"
+        },
+        {
+          "name": "1569_Registry欠測実Jar・全追跡完了.md",
+          "number": 1569,
+          "sha256": "9db297754bbb7192c11be3f610e44e87a8383b6e0037a516275c22ce66d8c18c",
+          "title": "# 1569 Registry欠測実Jar・全追跡完了"
+        },
+        {
+          "name": "1566_当監視source全追加追跡・公開検査.md",
+          "number": 1566,
+          "sha256": "47d505a1b8f6db8bb86f39e532d2153c81fd995d8f762db20e0cfcb64f790616",
+          "title": "# 1566 当監視source全追加追跡・公開検査"
+        },
+        {
+          "name": "1560_追加source追跡・公開delta検査.md",
+          "number": 1560,
+          "sha256": "85b7485a694234edc03841508d39c44be3c1d51886a419a3a16130873fb1e88a",
+          "title": "# 1560 追加source追跡・公開delta検査"
+        },
+        {
+          "name": "1559_MonitoringStatusText_実行結果.md",
+          "number": 1559,
+          "sha256": "70e5dd0c3561b02a25efd94fcf1dc0e65c16bf64100767c50381484ef14047f0",
+          "title": "# 1559 MonitoringStatusText 実行結果"
+        },
+        {
+          "name": "1557_C06_Batch既定値・非秘密設定境界_実行結果.md",
+          "number": 1557,
+          "sha256": "da31d0a76a054c9f80aa9989b670e7674babd7d61e60e4d982662e122ce47a2e",
+          "title": "# 1557 C06 Batch既定値・非秘密設定境界 実行結果"
+        }
+      ],
+      "readPriorBodyBeforeSelectingNext": true
+    },
+    "Prometheus": {
+      "acceptanceInferred": false,
+      "mandatoryPrior": {
+        "name": "1730_Prometheus配布設定_単体テスト仕様書.md",
+        "number": 1730,
+        "sha256": "0e3903da7f1e56cedeee819f889e305faa81bb921eb4bf5821f400900b90bcb1",
+        "title": "# 1730 Prometheus profile配布設定 単体テスト仕様書"
+      },
+      "matches": 16,
+      "newest": [
+        {
+          "name": "1734_重複着手訂正・後続成果索引.md",
+          "number": 1734,
+          "sha256": "41232c5613899c03a4bdf76f48a6ec48b8cad268cc8e2545f6839e78ea95f092",
+          "title": "# 1734 BUG1686/YKT1437 重複着手訂正・後続成果索引"
+        },
+        {
+          "name": "1731_Prometheus配布設定_結果・追跡.md",
+          "number": 1731,
+          "sha256": "59ec4fabaf738b3e4444420ed1e4e61f9badd3b80e75137f2c37cd35765aec85",
+          "title": "# 1731 Prometheus配布設定 結果・追跡"
+        },
+        {
+          "name": "1730_Prometheus配布設定_単体テスト仕様書.md",
+          "number": 1730,
+          "sha256": "0e3903da7f1e56cedeee819f889e305faa81bb921eb4bf5821f400900b90bcb1",
+          "title": "# 1730 Prometheus profile配布設定 単体テスト仕様書"
+        },
+        {
+          "name": "1729_WebPool観測結線_結果・追跡.md",
+          "number": 1729,
+          "sha256": "499be9ebe09df3eabfbb8522817ca963df402fcf6ac408142a2bf1c6eb3691bf",
+          "title": "# 1729 Web pool観測結線 結果・追跡"
+        },
+        {
+          "name": "1727_Metric全26所在・WebPool残経路_限定照合.md",
+          "number": 1727,
+          "sha256": "0c4eca4e20df975c2e2750a633e2a32197b9626dfbdbbef79ab09d79b5b84bc7",
+          "title": "# 1727 Metric全26所在・Web pool残経路 限定照合"
+        },
+        {
+          "name": "1720_監視factory所在・WebOutbox残経路限定照合.md",
+          "number": 1720,
+          "sha256": "0875289e4e39d74d980803b923b040cbd0e0c66932d4c0f87909f1b97bf5ae7a",
+          "title": "# 1720 監視factory所在・Web outbox残経路の限定照合"
+        },
+        {
+          "name": "1712_DbQueryDurationMetric_単体テスト仕様書.md",
+          "number": 1712,
+          "sha256": "9688f9465c36013e30bb67db40a1dd82e0a1c6d79803ff1d9e5b62d3ebb2d45d",
+          "title": "# 1712 DB query duration metric 単体テスト仕様書"
+        },
+        {
+          "name": "1699_監視・保持配布限定照合と次独立工程.md",
+          "number": 1699,
+          "sha256": "3ad3b10ef1f9460b28dd28bf820d152c9baf7d6aa7e08f29e53dcf7f69db4c43",
+          "title": "# 1699 監視・保持配布限定照合と次独立工程"
+        },
+        {
+          "name": "1574_MicrometerHTTP記録_実行結果.md",
+          "number": 1574,
+          "sha256": "fc3116e427b3ec4e6c3db1486e905c899f9ade6c748e7c53752e15b9b666f7bf",
+          "title": "# 1574 Micrometer HTTP記録 実行結果"
+        },
+        {
+          "name": "1573_MicrometerHTTP記録_単体テスト仕様書.md",
+          "number": 1573,
+          "sha256": "ba79aed8eef54d707ac382ad4a7827d2f5619824c78d56d878141f315f676f8c",
+          "title": "# 1573 Micrometer HTTP記録 単体テスト仕様書"
+        }
+      ],
+      "readPriorBodyBeforeSelectingNext": true
+    },
+    "WebDbPool": {
+      "acceptanceInferred": false,
+      "mandatoryPrior": {
+        "name": "1728_WebPool観測結線_単体テスト仕様書.md",
+        "number": 1728,
+        "sha256": "cfd71f3ab897e43dbca9f72c5274a181d4de6ae03944755736b50cb58f8d3fbe",
+        "title": "# 1728 Web pool観測結線 単体テスト仕様書"
+      },
+      "matches": 4,
+      "newest": [
+        {
+          "name": "1734_重複着手訂正・後続成果索引.md",
+          "number": 1734,
+          "sha256": "41232c5613899c03a4bdf76f48a6ec48b8cad268cc8e2545f6839e78ea95f092",
+          "title": "# 1734 BUG1686/YKT1437 重複着手訂正・後続成果索引"
+        },
+        {
+          "name": "1729_WebPool観測結線_結果・追跡.md",
+          "number": 1729,
+          "sha256": "499be9ebe09df3eabfbb8522817ca963df402fcf6ac408142a2bf1c6eb3691bf",
+          "title": "# 1729 Web pool観測結線 結果・追跡"
+        },
+        {
+          "name": "1728_WebPool観測結線_単体テスト仕様書.md",
+          "number": 1728,
+          "sha256": "cfd71f3ab897e43dbca9f72c5274a181d4de6ae03944755736b50cb58f8d3fbe",
+          "title": "# 1728 Web pool観測結線 単体テスト仕様書"
+        },
+        {
+          "name": "1727_Metric全26所在・WebPool残経路_限定照合.md",
+          "number": 1727,
+          "sha256": "0c4eca4e20df975c2e2750a633e2a32197b9626dfbdbbef79ab09d79b5b84bc7",
+          "title": "# 1727 Metric全26所在・Web pool残経路 限定照合"
+        }
+      ],
+      "readPriorBodyBeforeSelectingNext": true
+    }
+  },
+  "repeatGroupReclassified": "SELECTION_REWORK_DUPLICATE_CONFIRMATION_NOT_NEW_PLANNED_PROGRESS",
+  "skipped": 0,
+  "source": "3d77822789729c714ee8e78b5261ee517ed3ba73",
+  "startUTC": "2026-10-24T00:53:11.566917+00:00",
+  "static": {
+    "actualExit": 0,
+    "command": [
+      "/usr/bin/python3",
+      "-B",
+      "-m",
+      "pyflakes",
+      "/home/mini/codex/project1/work/pgpt-foundation/tools/quality/evidence_followup_index.py"
+    ],
+    "stderr": "",
+    "stdout": ""
+  },
+  "testsRun": 4,
+  "timeUTC": "2026-10-24T00:53:12.010889+00:00",
+  "whole451Accepted": false
+}
