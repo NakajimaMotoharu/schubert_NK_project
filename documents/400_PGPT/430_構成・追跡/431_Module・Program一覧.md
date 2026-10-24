@@ -1,5 +1,7 @@
 # Module・Program一覧
 
+2026-10-25追加trace：NK-OPS-001/PG-D632/1858-59、ApiReadOnlyObservationAttempt ctor/read/cleanup/closeOwned/status→ROATTEMPT001～032。RD171/UI252/SS311332342351、sourcee87ab6ec8。9090正常六→9092原8337c6a9新32/1→9094原0f882a2d全一MainL61M5C1B16四100/CS-SB0・PMD14個別判断→9096原287a0941全1839/旧1838同byte/239owner/五arch0・17metadata反例。BUG1731/YKT1482元不適格source/型再送出の是正hashと横展開1859、actual DB/worker/caller/cache publication/全451は別未受入HOLD。
+
 2026-10-25追加trace：NK-OPS-001/PG-D631/1854-55、ApiOutboxObservationSource ctor/observe/get/missing/Entry→OUTBOXSOURCE001～020、必要APISERVICE001～016。RD171/UI252/SS311332342351。source2ed81b14b、9042 normal六→9044原807a1232 actual36/2→9046原d188fc8a L25M5C2B7未網羅0/CS-SB0・PMD1個別private-lock判断/CRC0-session1→9048原9674bdae全1838/既1836同byte/237owner/五arch0/十一metadata反例。Entry実branch0/0=NAで除外0、技術新20/二Main・実producer/native/全451は未受入HOLD。
 
 2026-10-25追加trace：NK-OPS-001/PG-D630/1852-53、ApiServiceMetricBinding factory/refresh/snapshot→APISERVICE001～016＋APIMHTTP022/必要旧21。RD171/UI252/SS311332342351。source73d、9032原4585f250二MainL60M10C2B8四100/static0、9034v3原caf31066全1836/235owner/五arch0。default Outbox source empty六NaN・actual RO/worker未接続HOLD、当caller動的/全source品質は未受入。
