@@ -55,7 +55,6 @@ def main():
     require(host.sha(RUN/'manifest.safe.json')==RAW_SHA,'full original terminal witness')
     raw=json.loads((RUN/'manifest.safe.json').read_bytes())
     assess(raw)
-    compiled=json.loads((contract.COMPILE/'manifest.safe.json').read_bytes())
     require(host.sha(contract.COMPILE/'manifest.safe.json')==contract.COMPILE_SHA
             and raw['begin']['compileManifestSha256']==contract.COMPILE_SHA,'normal original source proof')
     snapshot=contract.COMPILE/'snapshot'
