@@ -1,0 +1,11 @@
+# API Outbox有限sampling pump・製造/単体仕様
+
+2026-10-25/PG-D634/NK-OPS-001/WBS-P018-09、RD171/UI252/SS311332342351、1854～1861の同一API経路。開始HEAD1248ab224f65942a54eb52aca8e41790f6355644/origin一致clean・製品fa29009e4、fresh54残46/reset1793382075、低3/基準6/高10pp・cap10固定。元/v4/v5、正式1964-53/原190新受入0/工数null/全actualHOLD不変更。
+
+ApiOutboxObservationPumpはresource-free状態機械とimmutable snapshot supplier。内部15秒samplingを既有scrapeとは独立した実装判断として採用する（同cadenceで不要重複queryを抑え、業務再送/QA050間隔・外部仕様・健康判定を変えない）。正のDuration.toNanosで有限intervalを注入可能とし、nano差分で初回/境界/wrapを判定する。STANDARDはfactory/nano未読、DEBUGだけcaller所有workerからsampleIfDueが呼ばれた際に一回claim。Thread/Scheduler/Clock実体/Poolを取得せず、重複inflightは開始しない。factoryは一回ownerをresource-freeに準備する契約、pumpが保持してからcache typed observeを呼ぶ。
+
+get/requestStop/isQuiescentはI/Oを行わずSQL待ちをしない。stopは新claim停止とmissingを即時反映、factory中のstopはSQL前に拒否、既開始SQLは所有cleanupまでdrainする。late resultもsupplierの停止gateとfinally invalidationで停止後へ公開しない。close UNKNOWNは一回ownerを保持し、有限diagnosticから例外が戻っても永久unconfirmedとし再sampling不可・quiescent=false。確認済SQL失敗はmissing/元exceptionをcallerへ返し、次周期のfresh観測だけ許す。fatalも同identity伝播、NPE正常扱い0。factory/clock失敗時もmissing/保持state後条件を検証する。
+
+新OUTBOXPUMP001～032を予定。constructor各null/mode/period0負overflow、資源/port未取得、正常/empty/初回・15秒境界/wrap/backward、STD、同source既SQL/rollback/close/diagnosticのSQL-Runtime-Error、factory null/RTE/Error・nano RTE/Error、stop前後/重複/進行中getとquiescence、factory中stop・SQL中stop・stop後unknown、旧owner再利用拒否をfake nano/typed JDBC/有限policy/独立固定wireで検証する。sleep同期0、latch bounded/finally解除、旧Test fixture outerのみcompileし旧成功確認再演/加点0。
+
+source固定→9118 normal六→9120新32→9121個別静的contextが必要なら実rawへ結合→9122全pump一Main四counter/NPE/静的→9124全1840Main見込/既1839同byte/242owner見込/五arch→1863結果・計測・公開scan・commit/push。実workerの生成/起動/有限join・caller所有接続・parent/Unit残期限、DB/native/CHR等は後続依存HOLDとして分離し、pumpのquiescenceだけを実ownedstopへ読み替えない。通常小区切りで停止しない。

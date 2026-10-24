@@ -1,5 +1,7 @@
 # PGPT成果物一覧・進捗
 
+2026-10-25最新：1862/1863/sourcef82e3e1ee、Thread/Scheduler非取得の有限sampling pumpを新32/1で検証、全一MainL50M6C1B31未網羅0/CS-SB0・PMD3個別判断/全1840・242owner・五arch0。停止/UNKNOWNはmissing・保持・quiescent=false/次取得禁止、worker/Pool解放の実証とは分離。技術Java768ID/39Main（＋32/1）とconfig静的5、正式1964PT/53scope・原190新受入0/工数nullを区別。次fake観測の所有worker PG/PT、実DB/VM/native/全451/QA051final/G078379は未受入HOLDのまま通常継続。
+
 2026-10-25最新：1860/1861/sourcefa29009e4、cleanup-confirmed readonly attempt→cache公開を新14＋必要20=34/2で検証、全二MainL33M6C2B11未網羅0/CS-SB0・PMD2個別判断/全1839・240owner・五arch0/旧overload本文完全保持。技術Java736ID/38Main（＋14/0）とconfig静的5、正式1964PT/53scope・原190新受入0/工数nullを区別。実producer/caller/DB/VM/native/全451/QA051final/G078379は未受入、次同経路の有限producer所有PG/PTへ通常継続する。
 
 2026-10-25最新：1858/1859/sourcee87ab6ec8、有限readonly観測ownerを新32/1で検証、全一MainL61M5C1B16未網羅0/CS-SB0・PMD14個別必要契約/全1839・239owner・五arch0。BUG1731/YKT1482の旧/中間source・SB2/1を保全して型再送出/phase cleanupを是正、部品scope限定close・旧試験転用0。技術Java722ID/38Main（＋32/1）とconfig静的5、正式1964PT/53scope・原190新受入0/工数nullを区別。次cache publication接続PG/PT、actual producer/VM/native/全451/QA051final/G078379等は未受入のまま通常継続。

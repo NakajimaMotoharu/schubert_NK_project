@@ -1,5 +1,7 @@
 # Module・Program一覧
 
+2026-10-25追加trace：NK-OPS-001/PG-D634/1862-63、ApiOutboxObservationPump ctor/create/sampleIfDue/requestStop/isQuiescent/get→OUTBOXPUMP001～032。RD171/UI252/SS311332342351、sourcef82e3e1ee。9118v2 normal六→9120原0258aba1新32/1→9122原d1393a7f全一MainL50M6C1B31四100/CS-SB0・PMD3個別判断→9124原e24df088全1840/旧1839同byte/242owner/五arch0/14metadata反例。v1/v2Main同byte・Unit差だけ、旧buildはPT0/転用0。actual worker/caller/Pool-stop/native/全451は別未受入HOLD。
+
 2026-10-25追加trace：NK-OPS-001/PG-D633/1860-61、ApiOutboxObservationSource.observe(ApiReadOnlyObservationAttempt)/get/missing/既overload/Entry→新OUTBOXPUBLISH001～014・必要OUTBOXSOURCE001～020。RD171/UI252/SS311332342351、sourcefa29009e4。9104 normal六→9106原76dfef76 actual34/2→9108原b3f6ed29全二MainL33M6C2B11四100/CS-SB0・PMD2個別判断→9110原0e74d487全1839/旧1838同byte/240owner/五arch0/旧overload完全保持/12metadata反例。実producer/caller/native/全451は別未受入HOLD、新BUG0。
 
 2026-10-25追加trace：NK-OPS-001/PG-D632/1858-59、ApiReadOnlyObservationAttempt ctor/read/cleanup/closeOwned/status→ROATTEMPT001～032。RD171/UI252/SS311332342351、sourcee87ab6ec8。9090正常六→9092原8337c6a9新32/1→9094原0f882a2d全一MainL61M5C1B16四100/CS-SB0・PMD14個別判断→9096原287a0941全1839/旧1838同byte/239owner/五arch0・17metadata反例。BUG1731/YKT1482元不適格source/型再送出の是正hashと横展開1859、actual DB/worker/caller/cache publication/全451は別未受入HOLD。
