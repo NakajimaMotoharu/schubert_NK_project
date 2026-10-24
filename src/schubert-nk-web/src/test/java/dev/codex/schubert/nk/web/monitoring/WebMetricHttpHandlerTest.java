@@ -419,6 +419,58 @@ final class WebMetricHttpHandlerTest {
     f.complete();
   }
 
+  @Test
+  void webmhttp021DeferredFactoryReachesHttpWithoutReacquiringBorrowedReferences()
+      throws IOException {
+    var f = new WebDbPoolMetricObservationTest.Fixture();
+    f.active = 1;
+    f.idle = 1;
+    f.pending = 0;
+    f.maximum = 2;
+    var poolReads = new AtomicInteger();
+    var configReads = new AtomicInteger();
+    try (var context =
+        WebDbPoolMetricBinding.prepareContext(
+            "DEBUG",
+            () -> {
+              poolReads.incrementAndGet();
+              return f.pool();
+            },
+            () -> {
+              configReads.incrementAndGet();
+              return f.config();
+            })) {
+      assertEquals(0, poolReads.get());
+      assertEquals(0, configReads.get());
+      context.initialize();
+      assertTrue(f.calls.isEmpty());
+      var handler = new WebMetricHttpHandler(context, () -> true);
+      for (int sample = 0; sample < 2; sample++) {
+        f.active = sample == 0 ? 1 : 0;
+        var exchange = new Exchange("GET", PATH);
+        handler.handle(exchange);
+        String body = exchange.output.toString(StandardCharsets.UTF_8);
+        assertTrue(body.startsWith(READY + "1\n"));
+        assertTrue(
+            body.contains(
+                "nk_db_pool_connections{service=\"WEB\",state=\"active\"} "
+                    + (sample == 0 ? "1.0" : "0.0")
+                    + "\n"));
+        assertTrue(body.contains("nk_db_pool_connections{service=\"WEB\",state=\"max\"} 2.0\n"));
+        assertEquals(200, exchange.status);
+        assertEquals(body.getBytes(StandardCharsets.UTF_8).length, exchange.length);
+        assertEquals(METRIC, exchange.headers.getFirst("Content-Type"));
+        assertEquals("no-store", exchange.headers.getFirst("Cache-Control"));
+        assertEquals(1, exchange.closeCalls);
+        f.complete();
+        f.calls.clear();
+      }
+      assertEquals(1, poolReads.get());
+      assertEquals(1, configReads.get());
+    }
+    assertTrue(f.calls.isEmpty());
+  }
+
   private static WebMetricContext<String> standard() {
     var context =
         new WebMetricContext<String>(

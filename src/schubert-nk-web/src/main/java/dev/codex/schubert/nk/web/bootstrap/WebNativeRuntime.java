@@ -1,5 +1,6 @@
 package dev.codex.schubert.nk.web.bootstrap;
 
+import com.zaxxer.hikari.HikariDataSource;
 import dev.codex.schubert.nk.api.file.ServiceCredentialSet;
 import dev.codex.schubert.nk.bootstrap.ServiceStartupAdmission;
 import dev.codex.schubert.nk.storage.DirectoryCalls;
@@ -28,6 +29,8 @@ import dev.codex.schubert.nk.web.messaging.JmsRequestReplyClient;
 import dev.codex.schubert.nk.web.messaging.LogoutWireClient;
 import dev.codex.schubert.nk.web.messaging.ReplyCorrelationRegistry;
 import dev.codex.schubert.nk.web.messaging.WebBrokerContexts;
+import dev.codex.schubert.nk.web.monitoring.WebDbPoolMetricBinding;
+import dev.codex.schubert.nk.web.monitoring.WebMetricContext;
 import dev.codex.schubert.nk.web.revocation.RevocationRetryCoordinator;
 import dev.codex.schubert.nk.web.revocation.RevocationRetryWorker;
 import dev.codex.schubert.nk.web.security.MqAuthenticationProvider;
@@ -89,6 +92,7 @@ final class WebNativeRuntime implements AutoCloseable {
   private volatile @Nullable RevocationRetryWorker retry;
   private volatile @Nullable WebHttpServer http;
   private volatile @Nullable WebManagementServer management;
+  private @Nullable WebMetricContext<WebDbPoolMetricBinding> metrics;
   private boolean startAttempted;
   private final WebRuntimeStop stop = new WebRuntimeStop(System::nanoTime);
 
@@ -240,12 +244,20 @@ final class WebNativeRuntime implements AutoCloseable {
           owned -> http = owned,
           WebBusinessAssembly.configurations());
       requireMappings(Objects.requireNonNull(http).mappedPaths());
+      metrics =
+          WebDbPoolMetricBinding.prepareContext(
+              config.value("nk.monitoring.mode"),
+              () -> HikariDataSource.class.cast(database).getHikariPoolMXBean(),
+              () -> HikariDataSource.class.cast(database).getHikariConfigMXBean());
+      var metricOwner = Objects.requireNonNull(metrics);
+      metricOwner.initialize();
       management =
           WebManagementServer.bind(
               information,
               this::healthy,
               ports.applyAsInt(config, "nk.web.management.port"),
-              com.sun.net.httpserver.HttpServer::create);
+              com.sun.net.httpserver.HttpServer::create,
+              metricOwner);
       var control = Objects.requireNonNull(management);
       control.start();
       control.promote(
@@ -387,6 +399,10 @@ final class WebNativeRuntime implements AutoCloseable {
         left -> {
           var value = management;
           if (value != null) value.closeWithin(left);
+        },
+        left -> {
+          var value = metrics;
+          if (value != null) value.close();
         },
         left -> {
           var value = assets;

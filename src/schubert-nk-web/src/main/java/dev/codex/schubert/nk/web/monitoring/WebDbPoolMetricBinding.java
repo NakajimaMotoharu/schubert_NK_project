@@ -6,6 +6,7 @@ import dev.codex.schubert.nk.web.monitoring.WebDbPoolMetricRecorder.Counts;
 import io.micrometer.core.instrument.MeterRegistry;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.function.Supplier;
 
 /**
  * NK-OPS-001/RD171/UI252/SS311342351/1825/PG-D621: non-resource borrowed pool metadata. No
@@ -16,6 +17,24 @@ public final class WebDbPoolMetricBinding {
   private final HikariPoolMXBean pool;
   private final HikariConfigMXBean config;
   private final WebDbPoolMetricCollector collector;
+
+  /** 1829/PG-D623: resource-free; caller retains owner before initialize. Borrowed references. */
+  public static WebMetricContext<WebDbPoolMetricBinding> prepareContext(
+      String mode,
+      Supplier<? extends HikariPoolMXBean> pool,
+      Supplier<? extends HikariConfigMXBean> config) {
+    Objects.requireNonNull(pool, "borrowed pool supplier");
+    Objects.requireNonNull(config, "borrowed pool configuration supplier");
+    return new WebMetricContext<WebDbPoolMetricBinding>(
+        mode,
+        registry ->
+            new WebDbPoolMetricBinding(
+                Objects.requireNonNull(pool.get(), "borrowed pool observation"),
+                Objects.requireNonNull(config.get(), "borrowed pool configuration observation"),
+                registry,
+                mode),
+        WebDbPoolMetricBinding::refresh);
+  }
 
   public WebDbPoolMetricBinding(
       HikariPoolMXBean pool, HikariConfigMXBean config, MeterRegistry registry, String mode) {
