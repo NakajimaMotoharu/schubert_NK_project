@@ -573,32 +573,36 @@ class BatchMetricTextTest {
   @Test
   void batchfull002StandardNeverAcquiresOrReadsDetailsEvenAfterOwnerClose() {
     var calls = new AtomicInteger();
-    try (var source = new Registry(counter(2.5));
-        var standard =
-            new BatchStandardMetricSource(
-                () -> {
-                  calls.incrementAndGet();
-                  throw new AssertionError("STD cannot acquire");
-                },
-                (registry, gc) -> {
-                  throw new AssertionError("STD cannot register");
-                })) {
+    var standard =
+        new BatchStandardMetricSource(
+            () -> {
+              calls.incrementAndGet();
+              throw new AssertionError("STD cannot acquire");
+            },
+            (registry, gc) -> {
+              throw new AssertionError("STD cannot register");
+            });
+    try (var source = new Registry(counter(2.5))) {
       assertEquals("", formatter.scrape(source, "STANDARD", standard));
       standard.close();
       assertEquals("", formatter.scrape(source, "STANDARD", standard));
       assertEquals(0, source.reads.get());
       assertEquals(0, calls.get());
+    } finally {
+      standard.close();
     }
   }
 
   @Test
   void batchfull003UnboundAndClosedStandardNeverReturnPartialCustom() {
-    try (var source = new Registry(counter(2.5));
-        var standard = new BatchStandardMetricSource()) {
+    var standard = new BatchStandardMetricSource();
+    try (var source = new Registry(counter(2.5))) {
       assertThrows(IllegalStateException.class, () -> formatter.scrape(source, "DEBUG", standard));
       standard.close();
       assertThrows(IllegalStateException.class, () -> formatter.scrape(source, "DEBUG", standard));
       assertFalse(source.isClosed());
+    } finally {
+      standard.close();
     }
   }
 
