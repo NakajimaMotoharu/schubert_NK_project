@@ -634,4 +634,199 @@ class WebMetricContextTest {
       assertEquals(List.of("S", "C"), h.order);
     }
   }
+
+  /** 1823/PG-D620 WEBMCTX027..033: own metadata refresh, no connections or I/O. */
+  @Test
+  void webmctx027RefreshUsesStrongBindingBeforeEachFullRender() {
+    var samples = new AtomicInteger();
+    double[] value = {7.5};
+    try (var context =
+        new WebMetricContext<double[]>(
+            "DEBUG",
+            registry -> {
+              Gauge.builder("nk_db_pool_connections", value, state -> state[0])
+                  .tags("service", "WEB", "state", "active")
+                  .register(registry);
+              return value;
+            },
+            binding -> {
+              assertSame(value, binding);
+              samples.incrementAndGet();
+              binding[0] += 2;
+            })) {
+      assertEquals(0, samples.get());
+      context.initialize();
+      assertEquals(0, samples.get());
+      assertTrue(
+          context
+              .render(true)
+              .startsWith(
+                  READY_ONE
+                      + "# TYPE nk_db_pool_connections gauge\nnk_db_pool_connections{service=\"WEB\",state=\"active\"} 9.5\n"));
+      assertTrue(
+          context
+              .render(false)
+              .startsWith(
+                  READY_ZERO
+                      + "# TYPE nk_db_pool_connections gauge\nnk_db_pool_connections{service=\"WEB\",state=\"active\"} 11.5\n"));
+      assertEquals(2, samples.get());
+      assertSame(value, context.bindings().orElseThrow());
+    }
+  }
+
+  @Test
+  void webmctx028StandardNeverReadsRefreshOrSetup() {
+    try (var context =
+        new WebMetricContext<String>(
+            "STANDARD",
+            registry -> {
+              throw new AssertionError("STD setup");
+            },
+            binding -> {
+              throw new AssertionError("STD refresh");
+            })) {
+      context.initialize();
+      assertEquals(READY_ONE, context.render(true));
+      assertEquals(READY_ZERO, context.render(false));
+      assertTrue(context.bindings().isEmpty());
+    }
+  }
+
+  @Test
+  void webmctx029NullRefreshRejectedBeforeRegistration() {
+    var calls = new AtomicInteger();
+    assertThrows(
+        NullPointerException.class,
+        () ->
+            new WebMetricContext<String>(
+                "DEBUG",
+                registry -> {
+                  calls.incrementAndGet();
+                  return "binding";
+                },
+                null));
+    assertEquals(0, calls.get());
+  }
+
+  @Test
+  void webmctx030RefreshRuntimeRetainsSdkAndAllowsOnlyExplicitNextRender() {
+    refreshFailure(new IllegalStateException("fixed metadata failure"));
+  }
+
+  @Test
+  void webmctx031RefreshErrorIdentityIsNotNormalOrFallback() {
+    refreshFailure(new AssertionError("fixed metadata fatal"));
+  }
+
+  private static void refreshFailure(Throwable failure) {
+    var samples = new AtomicInteger();
+    var observed = new AtomicReference<MeterRegistry>();
+    double[] value = {7.5};
+    try (var context =
+        new WebMetricContext<double[]>(
+            "DEBUG",
+            registry -> {
+              observed.set(registry);
+              Gauge.builder("nk_db_pool_connections", value, state -> state[0])
+                  .tags("service", "WEB", "state", "active")
+                  .register(registry);
+              return value;
+            },
+            binding -> {
+              assertSame(value, binding);
+              if (samples.getAndIncrement() == 0) raise(failure);
+            })) {
+      context.initialize();
+      assertSame(failure, assertThrows(failure.getClass(), () -> context.render(true)));
+      assertEquals(1, samples.get());
+      assertFalse(observed.get().isClosed());
+      assertSame(value, context.bindings().orElseThrow());
+      assertTrue(
+          context
+              .render(true)
+              .startsWith(
+                  READY_ONE
+                      + "# TYPE nk_db_pool_connections gauge\nnk_db_pool_connections{service=\"WEB\",state=\"active\"} 7.5\n"));
+      assertEquals(2, samples.get());
+    }
+    assertTrue(observed.get().isClosed());
+  }
+
+  @Test
+  void webmctx032RefreshReentrantStopCannotProduceDetailedSuccess() {
+    var owner = new AtomicReference<WebMetricContext<String>>();
+    var observed = new AtomicReference<MeterRegistry>();
+    var calls = new AtomicInteger();
+    var context =
+        new WebMetricContext<String>(
+            "DEBUG",
+            registry -> {
+              observed.set(registry);
+              return "binding";
+            },
+            binding -> {
+              assertEquals("binding", binding);
+              calls.incrementAndGet();
+              assertEquals(
+                  UNCONFIRMED,
+                  assertThrows(IllegalStateException.class, () -> owner.get().close())
+                      .getMessage());
+            });
+    owner.set(context);
+    try {
+      context.initialize();
+      assertThrows(IllegalStateException.class, () -> context.render(true));
+      assertEquals(1, calls.get());
+      assertFalse(observed.get().isClosed());
+      assertThrows(IllegalStateException.class, context::bindings);
+    } finally {
+      context.close();
+    }
+    assertTrue(observed.get().isClosed());
+  }
+
+  @Test
+  void webmctx033RefreshContendedStopRetainsUntilSamplerReturns() throws Exception {
+    var entered = new CountDownLatch(1);
+    var proceed = new CountDownLatch(1);
+    var observed = new AtomicReference<MeterRegistry>();
+    var context =
+        new WebMetricContext<String>(
+            "DEBUG",
+            registry -> {
+              observed.set(registry);
+              return "binding";
+            },
+            binding -> {
+              assertEquals("binding", binding);
+              entered.countDown();
+              await(proceed);
+            });
+    var worker = Executors.newSingleThreadExecutor();
+    try {
+      context.initialize();
+      var future = worker.submit(() -> context.render(true));
+      try {
+        await(entered);
+        assertEquals(
+            UNCONFIRMED, assertThrows(IllegalStateException.class, context::close).getMessage());
+        assertFalse(observed.get().isClosed());
+        assertThrows(IllegalStateException.class, context::bindings);
+      } finally {
+        proceed.countDown();
+      }
+      var failure = assertThrows(ExecutionException.class, () -> future.get(30, TimeUnit.SECONDS));
+      assertEquals(IllegalStateException.class, failure.getCause().getClass());
+      assertFalse(observed.get().isClosed());
+    } finally {
+      proceed.countDown();
+      worker.shutdownNow();
+      try {
+        assertTrue(worker.awaitTermination(30, TimeUnit.SECONDS));
+      } finally {
+        context.close();
+      }
+    }
+    assertTrue(observed.get().isClosed());
+  }
 }

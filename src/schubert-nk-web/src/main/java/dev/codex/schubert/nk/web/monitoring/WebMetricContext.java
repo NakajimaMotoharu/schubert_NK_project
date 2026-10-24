@@ -5,6 +5,7 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.locks.ReentrantLock;
+import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
@@ -21,6 +22,7 @@ public final class WebMetricContext<T> implements AutoCloseable {
   private final String mode;
   private final boolean detailed;
   private final Function<? super MeterRegistry, ? extends T> setup;
+  private final Optional<Consumer<? super T>> refresh;
   private final Supplier<? extends MeterRegistry> customFactory;
   private final WebStandardMetricSource standard;
   private Optional<MeterRegistry> ownedCustom = Optional.empty();
@@ -38,15 +40,56 @@ public final class WebMetricContext<T> implements AutoCloseable {
         new WebStandardMetricSource());
   }
 
+  /**
+   * 1823/PG-D620: samples pre-owned non-resource metadata before DEBUG output, under this owner.
+   * The sampler must not acquire connections/workers, perform I/O, or reenter this context.
+   */
+  public WebMetricContext(
+      String mode,
+      Function<? super MeterRegistry, ? extends T> setup,
+      Consumer<? super T> refresh) {
+    this(
+        mode,
+        setup,
+        refresh,
+        () -> new OverflowSafeHttpMeterRegistry(io.micrometer.core.instrument.Clock.SYSTEM),
+        new WebStandardMetricSource());
+  }
+
   // Fixed production factories above; fresh unbound standard/test ports transfer SDK ownership.
   WebMetricContext(
       String mode,
       Function<? super MeterRegistry, ? extends T> setup,
       Supplier<? extends MeterRegistry> customFactory,
       WebStandardMetricSource standard) {
+    this(mode, setup, Optional.empty(), customFactory, standard);
+  }
+
+  WebMetricContext(
+      String mode,
+      Function<? super MeterRegistry, ? extends T> setup,
+      Consumer<? super T> refresh,
+      Supplier<? extends MeterRegistry> customFactory,
+      WebStandardMetricSource standard) {
+    this(
+        mode,
+        setup,
+        Optional.<Consumer<? super T>>of(
+            Objects.requireNonNull(refresh, "metric metadata refresh")),
+        customFactory,
+        standard);
+  }
+
+  private WebMetricContext(
+      String mode,
+      Function<? super MeterRegistry, ? extends T> setup,
+      Optional<Consumer<? super T>> refresh,
+      Supplier<? extends MeterRegistry> customFactory,
+      WebStandardMetricSource standard) {
     this.mode = Objects.requireNonNull(mode, "monitoring mode");
     this.detailed = new HttpMetricContract().detailedMetricsEnabled(this.mode);
     this.setup = Objects.requireNonNull(setup, "metric binding registration");
+    this.refresh = Objects.requireNonNull(refresh, "metric refresh holder");
     this.customFactory = Objects.requireNonNull(customFactory, "custom metric factory");
     this.standard = Objects.requireNonNull(standard, "standard metric owner");
   }
@@ -95,6 +138,10 @@ public final class WebMetricContext<T> implements AutoCloseable {
     lock.lock();
     try {
       requireRunning();
+      if (detailed && refresh.isPresent()) {
+        refresh.orElseThrow().accept(retainedBindings.orElseThrow());
+        rejectStopping();
+      }
       var borrowed = ownedCustom;
       return new WebCustomMetricPayload().render(ready, mode, borrowed::orElseThrow, standard);
     } finally {

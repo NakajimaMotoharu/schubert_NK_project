@@ -328,6 +328,54 @@ final class WebMetricHttpHandlerTest {
     }
   }
 
+  @Test
+  void webmhttp019SampledBindingUpdatesActualHttpBodyWithoutLifecycleTransfer() throws IOException {
+    double[] value = {7.5};
+    var samples = new AtomicInteger();
+    var readiness = new AtomicInteger();
+    try (var context =
+        new WebMetricContext<double[]>(
+            "DEBUG",
+            registry -> {
+              Gauge.builder("nk_db_pool_connections", value, state -> state[0])
+                  .tags("service", "WEB", "state", "active")
+                  .register(registry);
+              return value;
+            },
+            binding -> {
+              assertSame(value, binding);
+              samples.incrementAndGet();
+              binding[0] += 2;
+            })) {
+      context.initialize();
+      var handler = new WebMetricHttpHandler(context, () -> readiness.getAndIncrement() == 0);
+      var first = new Exchange("GET", PATH);
+      var second = new Exchange("GET", PATH);
+      handler.handle(first);
+      handler.handle(second);
+      String firstText = first.output.toString(StandardCharsets.UTF_8);
+      String secondText = second.output.toString(StandardCharsets.UTF_8);
+      assertTrue(firstText.startsWith(READY + "1\n"));
+      assertTrue(secondText.startsWith(READY + "0\n"));
+      assertTrue(
+          firstText.contains("nk_db_pool_connections{service=\"WEB\",state=\"active\"} 9.5\n"));
+      assertTrue(
+          secondText.contains("nk_db_pool_connections{service=\"WEB\",state=\"active\"} 11.5\n"));
+      assertEquals(200, first.status);
+      assertEquals(200, second.status);
+      assertEquals(firstText.getBytes(StandardCharsets.UTF_8).length, first.length);
+      assertEquals(secondText.getBytes(StandardCharsets.UTF_8).length, second.length);
+      assertEquals(METRIC, first.headers.getFirst("Content-Type"));
+      assertEquals("no-store", second.headers.getFirst("Cache-Control"));
+      assertEquals(1, first.closeCalls);
+      assertEquals(1, second.closeCalls);
+      assertSame(value, context.bindings().orElseThrow());
+      assertEquals(11.5, value[0]);
+      assertEquals(2, samples.get());
+      assertEquals(2, readiness.get());
+    }
+  }
+
   private static WebMetricContext<String> standard() {
     var context =
         new WebMetricContext<String>(

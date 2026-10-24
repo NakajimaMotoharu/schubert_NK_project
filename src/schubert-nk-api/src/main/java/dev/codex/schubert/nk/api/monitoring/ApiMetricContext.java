@@ -5,6 +5,7 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.locks.ReentrantLock;
+import java.util.function.Consumer;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
@@ -21,6 +22,7 @@ public final class ApiMetricContext<T> implements AutoCloseable {
   private final String mode;
   private final boolean detailed;
   private final Function<? super MeterRegistry, ? extends T> setup;
+  private final Optional<Consumer<? super T>> refresh;
   private final Supplier<? extends MeterRegistry> customFactory;
   private final ApiStandardMetricSource standard;
   private Optional<MeterRegistry> ownedCustom = Optional.empty();
@@ -41,10 +43,53 @@ public final class ApiMetricContext<T> implements AutoCloseable {
         new ApiStandardMetricSource());
   }
 
+  /**
+   * 1823/PG-D620: samples pre-owned non-resource metadata before DEBUG output, under this owner.
+   * The sampler must not acquire connections/workers, perform I/O, or reenter this context.
+   */
+  public ApiMetricContext(
+      String mode,
+      Function<? super MeterRegistry, ? extends T> setup,
+      Consumer<? super T> refresh) {
+    this(
+        mode,
+        setup,
+        refresh,
+        () ->
+            new ExactDurationMeterRegistry(
+                io.micrometer.core.instrument.simple.SimpleConfig.DEFAULT,
+                io.micrometer.core.instrument.Clock.SYSTEM),
+        new ApiStandardMetricSource());
+  }
+
   // Fixed production factories above; fresh unbound standard/test ports transfer SDK ownership.
   ApiMetricContext(
       String mode,
       Function<? super MeterRegistry, ? extends T> setup,
+      Supplier<? extends MeterRegistry> customFactory,
+      ApiStandardMetricSource standard) {
+    this(mode, setup, Optional.empty(), customFactory, standard);
+  }
+
+  ApiMetricContext(
+      String mode,
+      Function<? super MeterRegistry, ? extends T> setup,
+      Consumer<? super T> refresh,
+      Supplier<? extends MeterRegistry> customFactory,
+      ApiStandardMetricSource standard) {
+    this(
+        mode,
+        setup,
+        Optional.<Consumer<? super T>>of(
+            Objects.requireNonNull(refresh, "metric metadata refresh")),
+        customFactory,
+        standard);
+  }
+
+  private ApiMetricContext(
+      String mode,
+      Function<? super MeterRegistry, ? extends T> setup,
+      Optional<Consumer<? super T>> refresh,
       Supplier<? extends MeterRegistry> customFactory,
       ApiStandardMetricSource standard) {
     this.mode = Objects.requireNonNull(mode, "monitoring mode");
@@ -55,6 +100,7 @@ public final class ApiMetricContext<T> implements AutoCloseable {
           default -> throw new IllegalArgumentException("CONFIG_INVALID");
         };
     this.setup = Objects.requireNonNull(setup, "metric binding registration");
+    this.refresh = Objects.requireNonNull(refresh, "metric refresh holder");
     this.customFactory = Objects.requireNonNull(customFactory, "custom metric factory");
     this.standard = Objects.requireNonNull(standard, "standard metric owner");
   }
@@ -103,6 +149,10 @@ public final class ApiMetricContext<T> implements AutoCloseable {
     lock.lock();
     try {
       requireRunning();
+      if (detailed && refresh.isPresent()) {
+        refresh.orElseThrow().accept(retainedBindings.orElseThrow());
+        rejectStopping();
+      }
       var borrowed = ownedCustom;
       return new ApiCustomMetricPayload().render(ready, mode, borrowed::orElseThrow, standard);
     } finally {
