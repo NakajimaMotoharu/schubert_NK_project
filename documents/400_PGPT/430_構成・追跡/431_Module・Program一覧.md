@@ -1,5 +1,7 @@
 # Module・Program一覧
 
+2026-10-24接続trace：Web三exporter.scrapeApprovedCounters/Gauges/Timers/encode optional policy、WebMetricCatalog.labels(Id)/labels(captured name,tags)/domain/copyを1767/1768・PG-D599・RD171/UI252/SS351へ。APPROVED001～012新12＋必要84＝96/9、sourceb347581d2/8396-98-8400で実5四100（L212M38C5B86）/static0/全1805・167owner/五edge0/責務五反例へ。元fixed domain/generic/IO/未知名順を保持、別preflight再読取ではなく検証済みLabelsを同pointへ。API Main不変更、formal/工数/actualHOLD不変更。
+
 2026-10-24是正trace：API ApiDurationMetricExporter/WebDurationMetricExporter/WebCounterMetricExporter/WebGaugeMetricExporterのencode名取得・namespace選択/groupingをPG-D598/1765～1766/RD171/UI252/SS351/BUG1701へ。新MIDNAME4＋必要96=100/9、sourcef775f095c・8384/86/88で実5四100（L216M29C5B112）/全static0/全1805・167owner/四Mainだけexact一回copy/他1801debug同byte/五edge0/責務七反例を結合。WebMetricTextは名を扱わず非該当を同scopeで再実証、catalogは同byte・14再演なし。上位/POM/正式/工数/actualHOLD不変更。
 
 2026-10-24追加trace：WebMetricCatalog.constructor/gauges/counters/timers/namespace/labels/clinit/lambdaを1763/1764・PG-D597・RD171/UI252/SS311351へ。新WEBCAT001～014/fixture1777・sourcee5f0ae543/8370-72-74で実1四100（L46M8C1B14）/static0/全1805・167owner/五edge0/new責務三反例へ一意結合。全旧input/POM/1804physical同byteは当PT合格の転用ではない、codec/mode/実公開・全451/正式/工数は未受入。
