@@ -1,5 +1,7 @@
 # 開発環境・toolchain構築記録
 
+2026-10-24配置訂正（1758/BUG1697）：Prometheus textformat/model/config1.7.0の取得/全checksum/専用M2座標はそのまま、Production依存はAPI/Web各appのtextformatsへ明示しBootstrapの新Micrometer/textformat依存を退役した。SS311限定共用起動責務を広げず、追加download0/新module0/既settings・内部snapshot上書き0。8317責務guardは既PT-IDEM-016のWeb→API test-only edgeを元f02 POMとscopeで区別し、compile/runtime等への昇格を拒否、製品POMの既test依存/実行JUnit5.13.4は不変更。各新sourceの正常六build/Enforcer/実classpathと1758の同source品質を正とし、以下初稿共用配置の記述は歴史として扱う。
+
 ## 2026-10-24 Summary formatter正式外部Maven座標（1753、PG-D592）
 
 既隔離SDK8170/8173のio.prometheus textformats/model/config1.7.0の各Jar/POM6byteを、既checksum＋SHA256と照合し専用M2の新外部座標だけへ配置。元8240原1028c8ee、独立8241原02af072fを正とし、元publicArtifactDownloads=2は誤りで実4（client_java/client_java_parent親POM＋checksum）。原改変せずBUG1694/YKT1445で追記訂正する。秘密/内部snapshot/settings上書き0、異hash/symlinkは拒否。

@@ -1,5 +1,7 @@
 # Module・Program一覧
 
+2026-10-24現行trace：1758/PG-D594/BUG1697、Bootstrapに置いたgeneric exporterはSS311限定責務外として退役し、`.api.monitoring.ApiDurationMetricExporter`（SUMENC24/API6）と`.web.monitoring.WebDurationMetricExporter`（TIMERENC16/Web6）へ。新52/4・source3968abace、両app2四100（L152M16C2B92）/CRC0/一exec/static全0、全1801/160owner・共用2退役/app2追加/他1799debug同byte、五edge0＋責務guard9反例/全測定input同byte。旧単位・wire golden保持、不要になった未受入modeだけ廃止。以下旧共用配置の記録は履歴で採用状態を表さず、現行は本段と1758。formal/工数/actualHOLD不変更。
+
 2026-10-24追加trace：Web OverflowSafeHttpMeterRegistry/OverflowSafeTimerのcount/record/totalTime/takeSnapshot/state helpers/close、RD171/UI252/SS351/PG-D593/1755～1756。新HTTPCDF001～004＋既factory12/Recorder10/Contract6=32/4、sourcef02fae44e当変更2四100（L69M21C2B20）/CRC0/一exec/静的全0、全1801physical/159owner/五architecture0。他1799byteとSummary/API旧scopeの同一性は旧成功の当source移転ではない。BUG1696/YKT1447全対象限定close・元失敗保持、endpoint/native/全451/正式・工数は未受入。
 
 2026-10-24追加trace：新bootstrap.monitoring.PrometheusSummaryExporter scrape/encode/labels/point（純borrowed formatter）＋API ExactDuration/Db/Mqの計8execは1753/1754、RD171/UI252/SS311351/PG-D592。新SUMENC24＋APISUM6/必要既28=58/5、新source7cba540ba当四100（L205M33C8B110）/CRC0/一exec・static未知0/生成6method、全1801/159source-owner/五architecture0。新Production Main1/POM外部依存、元1799byte不変、古いwhole/exec成果を合算0。Root/service/DB等actualHOLD、実endpoint/native/全451/正式・工数は未受入。

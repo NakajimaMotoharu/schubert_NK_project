@@ -1,5 +1,7 @@
 # PGPT成果物一覧・進捗
 
+2026-10-24最新：1757/1758、Timer標準textの新22＋必要旧30=52/4、source3968abace両app2四100（L152M16C2B92）/static全0・全1801/160owner/五edge0＋責務guard9反例/測定input同byte。BUG1697/YKT1448で誤った共用Bootstrap配置を上位変更せずAPI/Web監視adapterへ是正、旧1754共有配置は撤回/後継へ置換・元試験成功は履歴保持。新2app Main/旧共有Main1退役、実endpoint/actor/CHR/native/全451/正式1964-53/原190新受入0/工数nullは未受入。次Counter出力へ継続、全actualHOLD/QA051final不変更。
+
 2026-10-24最新：1755/1756、新HTTP CDF窓経過三件が実失敗→BUG1696/YKT1447先行起票・own原因確認→lifetime count/正total/九CDFを是正。追加保存則1込み新4＋必要既28=32/4、sourcef02fae44e/8296正常six→8298真正→8300変更2四100（L69M21C2B20）/PMD-CS-SB-missing0→8302全1801/159owner/五architecture0で限定close。原三失敗/途中静的拒否保持・新Main0/既一source是正、次Timer/counter標準textのPG/PTへ。正式1964-53/原190新受入0/工数null/QA051final/全actualHOLD不変、通常停止0。
 
 2026-10-24最新：1753/1754 共通Summary exporterを新Production Main1として実装、独立新30＋必要既28=58/5真正成功。source7cba540ba/8270正常six→8272→8274実8四100（L205M33C8B110）・SB/CS0/PMD既raw2個別分類→8276全1801/159owner/五architecture0。初回WIP/工具2不備/静的1不備は元失敗を保存しBUG1693～1695/YKT1444～1446を限定close。借用registry→API二histの標準textだけで、実endpoint/Root/native/全451/QA051final未受入・正式1964-53/工数null不変。次HTTP窓CDF普通PTへ継続、通常小区切り停止0。
