@@ -5,6 +5,7 @@ import io.micrometer.prometheusmetrics.PrometheusConfig;
 import io.micrometer.prometheusmetrics.PrometheusMeterRegistry;
 import java.util.Objects;
 import java.util.Optional;
+import java.util.concurrent.locks.ReentrantLock;
 import java.util.function.BiConsumer;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
@@ -14,7 +15,7 @@ import java.util.function.Supplier;
  * registry access, endpoint, scheduler, health authority or implicit rollback/retry.
  */
 public final class ApiStandardMetricSource implements AutoCloseable {
-  private final Object lock = new Object();
+  private final ReentrantLock lock = new ReentrantLock();
   private final Supplier<? extends PrometheusMeterRegistry> factory;
   private final BiConsumer<PrometheusMeterRegistry, Predicate<? super JvmGcMetrics>> registration;
   private Optional<PrometheusMeterRegistry> ownedRegistry = Optional.empty();
@@ -40,7 +41,8 @@ public final class ApiStandardMetricSource implements AutoCloseable {
 
   /** Single explicit initialization. Partial resources remain held after any failure. */
   public void bind(String mode) {
-    synchronized (lock) {
+    lock.lock();
+    try {
       if (!detailed(mode)) return;
       if (closed || attempted)
         throw new IllegalStateException("standard metric binding unavailable");
@@ -56,6 +58,8 @@ public final class ApiStandardMetricSource implements AutoCloseable {
             return true;
           });
       bound = true;
+    } finally {
+      lock.unlock();
     }
   }
 
@@ -63,10 +67,13 @@ public final class ApiStandardMetricSource implements AutoCloseable {
    * Only the fixed SDK binders can register; no supplied IDs/tags/text or mutable registry getter.
    */
   public String scrape(String mode) {
-    synchronized (lock) {
+    lock.lock();
+    try {
       if (!detailed(mode)) return "";
       if (closed || !bound) throw new IllegalStateException("standard metric source unavailable");
       return ownedRegistry.orElseThrow().scrape();
+    } finally {
+      lock.unlock();
     }
   }
 
@@ -81,12 +88,15 @@ public final class ApiStandardMetricSource implements AutoCloseable {
   /** Explicit caller close: GC before registry; failed close keeps ownership and is not success. */
   @Override
   public void close() {
-    synchronized (lock) {
+    lock.lock();
+    try {
       if (closed) return;
       bound = false;
       ownedGc.ifPresent(JvmGcMetrics::close);
       ownedRegistry.ifPresent(PrometheusMeterRegistry::close);
       closed = true;
+    } finally {
+      lock.unlock();
     }
   }
 }
