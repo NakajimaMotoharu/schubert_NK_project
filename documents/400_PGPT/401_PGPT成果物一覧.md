@@ -1,5 +1,7 @@
 # PGPT成果物一覧・進捗
 
+2026-10-24最新：1797/1798、Productione81adb968不変更、新6/3で標準SDK/custom同registryの両初期化順・固定全文golden/供給更新/STD空/SDK名排除/GC先closeを確認。8622で原source/XML/log/exec-session1/実env・七metadata反例を独立結合、新Main0/新coverage-static資格0/正常再build0。1759以降技術371ID/Main22は異sourceで正式/coverage合算0、formal1964-53/原190新受入0/工数null/全actualHOLD/whole451/QA051final維持。次C07の現artifact/未接続を限定照合して具体safe PG/PTへ継続。
+
 2026-10-24最新：1795/1796/WebBatch標準三段組立sourcee81adb968、新26/2・実2四100(L36M12C2B8、lambda含む)/静的0/全1823・203owner/五edge0/fields0/同source-owner captureを限定確認、新BUG0。1759以降技術365ID/Main22は異sourceで正式/coverage合算0、formal1964-53/原190新受入0/工数null/全actualHOLD/whole451/QA051final維持。次標準SDK/custom registry共存の未検証接続をsafe PTへ継続。
 
 2026-10-24最新：1793/1794/API standard三段組立source86ec58d4f、新13/1・実1四100(L21M6C1B7、lambda含む)/静的0/全1821・199owner/五edge0/fields0/同source-ownerを限定確認。BUG1708/YKT1459 metadata反例同値不備を元保持→工具是正・独立vector/当13のsource-only拒否/同型横展開でclose、正常/13再演0。1759以降技術339ID/Main20は異sourceで正式/coverage合算0、formal1964-53/原190新受入0/工数null/全actualHOLD/whole451/QA051final維持、次Web/Batch標準組立safe PG/PTへ継続。
