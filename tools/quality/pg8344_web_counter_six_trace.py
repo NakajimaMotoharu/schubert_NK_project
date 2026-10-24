@@ -1,7 +1,6 @@
 """Current Web text-only delta, all physical/owner/role bindings; no product initialization."""
 import copy
 import datetime
-import hashlib
 import json
 import os
 from pathlib import Path
