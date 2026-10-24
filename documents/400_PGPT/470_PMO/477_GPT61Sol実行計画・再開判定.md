@@ -1,5 +1,9 @@
 # 477 GPT-6.1 Sol実行計画・再開判定
 
+## Source ownerと変更担当の分離（2026-10-25、BUG1725/YKT1476）
+
+以後のincremental traceは `tools/quality/trace_owner_join.py` と485の追加参照を用い、canonicalOwner/canonicalCostOwnerを既正本から保持し、現作業のchangeOwnerと分ける。過去のsourceRows.owner一律P018-09は変更群表示であって既artifactの主担当/費用ownerではない。現在232行の補正は1840/8958/8960を参照し、原941論理/943歴史physical・原event/開始見積/実費不明nullを上書きしない。新pathは根拠付き候補又はUNKNOWN、作業担当から既知を捏造しない。このtrace補正を製品PT/coverage/正式受入へ加算しない。
+
 ## 次群選定の後続成果照合（2026-10-24、BUG1686/YKT1437）
 
 古い不足docを現在の未完一覧としない。新群開始前に `python3 -B tools/quality/evidence_followup_index.py --query <WBS/対象名>` で公開後続成果を番号順に索引し、候補の最新source/Test実在・導入履歴と先行成功証跡の対象を照合する。索引の一致/欠落は受入/実行許可ではなく、候補として原証拠を読む。既完了契約の再確認は元計画の新規消化にしない。C02四設定は1553～1555、C06七設定は1556～1557で既補完済み（1734訂正）。既成功原runは再演せず参照し、変更に必要な451検証は維持する。旧group開始見積/event/真正結果は保全して追記訂正、追加確認・選定手戻り・tool費を分離する。安全HOLD/停止/モデル/費用上限は変更しない。

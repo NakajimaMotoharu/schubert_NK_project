@@ -16,8 +16,10 @@ def proposed_owner(path):
     if '.private.' in parts.name: return None
     if path.startswith('src/deployment/monitoring/'):
         return ('WBS-C07','C07_SS351_MONITORING_CONFIGURATION')
-    if re.fullmatch(r'src/schubert-nk-(api|web|batch)/src/(main|test)/java/dev/codex/schubert/nk/\1/monitoring/[^/]+\.java',path):
+    if re.fullmatch(r'src/schubert-nk-(api|web|batch)/src/(main|test)/java/dev/codex/schubert/nk/\1/monitoring/(?:[A-Za-z_][A-Za-z0-9_]*/)*[^/]+\.java',path):
         return ('WBS-P018-09','P01809_RD171_UI252_SS351_MONITORING_CODE_AND_PT')
+    if path in ('src/schubert-nk-batch/src/test/resources/monitoring/metric-catalog.tsv','src/schubert-nk-web/src/test/resources/monitoring/http-route-labels.txt'):
+        return ('WBS-P018-09','P01809_SS312351_INDEPENDENT_METRIC_AND_ROUTE_FIXTURES')
     if re.fullmatch(r'src/schubert-nk-(api|web|batch|bootstrap)/pom\.xml',path):
         return ('WBS-F02','F02_MODULE_BUILD_DEPENDENCY_INPUT')
     if path=='src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/ConfigurationTemplateContractTest.java':
