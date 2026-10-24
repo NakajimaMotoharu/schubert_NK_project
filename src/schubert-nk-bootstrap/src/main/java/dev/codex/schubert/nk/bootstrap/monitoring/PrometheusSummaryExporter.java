@@ -12,6 +12,7 @@ import io.prometheus.metrics.model.snapshots.Exemplars;
 import io.prometheus.metrics.model.snapshots.HistogramSnapshot.HistogramDataPointSnapshot;
 import io.prometheus.metrics.model.snapshots.Labels;
 import io.prometheus.metrics.model.snapshots.MetricMetadata;
+import io.prometheus.metrics.model.snapshots.MetricSnapshot;
 import io.prometheus.metrics.model.snapshots.MetricSnapshots;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -77,14 +78,14 @@ public final class PrometheusSummaryExporter {
     }
     var families =
         groups.entrySet().stream()
-            .map(
+            .<MetricSnapshot>map(
                 entry ->
                     new io.prometheus.metrics.model.snapshots.HistogramSnapshot(
                         new MetricMetadata(entry.getKey()), entry.getValue()))
             .toList();
     var output = new ByteArrayOutputStream();
     try {
-      writer.write(output, new MetricSnapshots(families), EscapingScheme.UNDERSCORES);
+      writer.write(output, new MetricSnapshots(families), EscapingScheme.UNDERSCORE_ESCAPING);
     } catch (IOException failure) {
       throw new UncheckedIOException("summary encoding failed", failure);
     }
