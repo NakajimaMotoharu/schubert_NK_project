@@ -35,6 +35,8 @@ SDK15Jarは8170原371004a7＋8173原a5a2bfbe、jsr3053.0.2（元M2 SHA766ad2a078
 
 ## 対象品質とエビデンス
 
+初回PG8178は50起動49成功1失敗、fresh工具の独立route fixture同梱漏れ（BUG1689/YKT1440）で終了1、全合格へ加算しない。製品source/期待値は不変更、元6246af085と原manifest/XMLを保全し、fixtureのe196/current/owncopy SHA1777c4710e6448bdb459d5fd2beccf389f57ec4ea9effdca171cdbd6888d5331を束縛してPG8182で必要な50/7を新実行する。後続独立postはPG8184。再試験は失敗後の是正確認で、元成功の確認目的再演ではない。
+
 当Main scopeは四Recorder/nested9＋直接HttpMetricContract/nested6の**実15class**。package-infoのmetadataは保持、他program/依存のcounterを合算せず全15のline/method/class/branch100、CRC不一致0/一execを独立検査する。他Web10class/全scope/whole451を受入にしない。既生成10type/36methodは当42＋新8のtyped契約へ追跡し、実Mainの除外を増やさない。空marker/他programは適用性と実byte・ownerを明示する。normalcompile/metaは履歴source原e196の同byteとして参照、新compileや現在wholebuild完了を捏造しない。
 
 実command/OS/JDK/compiler/SDK/JUnit/agent/source-domain/qualificationHEAD/開始終端/実PID/終了・入力/expected/actual/XML/exec/coverage/静的適用/BUG/hashはPG8178以降/1742へ。元selected50の状態がunknownなら再発行せずbegin/process/exitを回収、JUnit失敗/compile/static/source不一致は修正前915/916。logは型・有限own frameのみ、Throwable message/cause/suppressedや秘密値を保存しない。全待機futureは有限、失敗を正常化しない。

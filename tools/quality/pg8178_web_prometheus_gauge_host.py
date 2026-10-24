@@ -1,5 +1,6 @@
 """Fresh selected 50/7 actual in-memory Prometheus JUnit; normal source bytes reused, no services."""
 import datetime
+import hashlib
 import json
 import os
 from pathlib import Path
@@ -25,6 +26,8 @@ AGENT=host.TC/'m2/repository/org/jacoco/org.jacoco.agent/0.8.15/org.jacoco.agent
 HELPER=host.ROOT/'tools/quality/architecture/WebPrometheusGaugeJunitLauncher.java'
 NEW_TEST=host.ROOT/'tools/quality/architecture/WebPrometheusGaugeContractTest.java'
 SESSION_ID='PG8178-WEB-PROMETHEUS-GAUGE'
+FIXTURE='src/schubert-nk-web/src/test/resources/monitoring/http-route-labels.txt'
+FIXTURE_SHA='1777c4710e6448bdb459d5fd2beccf389f57ec4ea9effdca171cdbd6888d5331'
 COUNTS={'HttpMetricContractTest':6,'GeneratedWebValueContractTest':4,
         'MediaStreamsMetricRecorderTest':8,'MediaBytesMetricRecorderTest':8,
         'WebOutboxMetricRecorderTest':8,'WebDbPoolMetricRecorderTest':8,
@@ -98,10 +101,19 @@ def main():
               for n in COUNTS if n!='WebPrometheusGaugeContractTest']
     test_sources=[*selected,NEW_TEST,HELPER]
     require(all(p.is_file() for p in test_sources),'all seven fresh test sources and launcher')
+    fixture=host.ROOT/FIXTURE
+    original_fixture=subprocess.check_output(['git','show',SOURCE+':'+FIXTURE],cwd=host.ROOT)
+    require(hashlib.sha256(original_fixture).hexdigest()==host.sha(fixture)==FIXTURE_SHA,
+            'independent original/current route fixture bytes, never expected generated from production')
     os.umask(0o077)
     SLOT.mkdir()
     classes=SLOT/'fresh-test-classes'
     classes.mkdir()
+    copied_fixture=classes/'monitoring/http-route-labels.txt'
+    copied_fixture.parent.mkdir()
+    with copied_fixture.open('xb') as stream:
+        stream.write(original_fixture)
+    require(host.sha(copied_fixture)==FIXTURE_SHA,'exact own fixture copy before any test')
     for p in (classes/'prometheus.properties',SLOT/'empty-prometheus.properties'):
         with p.open('xb'):
             pass
@@ -112,6 +124,7 @@ def main():
        classpathFileSha256=host.sha(cpfile),dependencyHashes={str(p):host.sha(p) for p in [*inputs,AGENT]},
        sdkManifestSha256=SDK_SHA,sdkPostSha256=SDK_POST_SHA,
        testSourceHashes={str(p):host.sha(p) for p in test_sources},selectedSuites=COUNTS,expectedTests=50,
+       fixtureHashes={str(fixture):FIXTURE_SHA,str(copied_fixture):FIXTURE_SHA},fixtureSource=SOURCE,
        emptyConfigHashes={str(p):host.sha(p) for p in (classes/'prometheus.properties',SLOT/'empty-prometheus.properties')},
        invocation=invocation,environment=ENV,actualVmActions=0,actualDatabaseActions=0,
        actualNetworkActions=0,actualServiceActions=0,rootMainInvoked=False,
@@ -149,6 +162,7 @@ def main():
     require(all(host.sha(snapshot/p)==h and host.sha(host.ROOT/p)==h for p,h in source_hashes.items()),
             'same source archive/current inputs after original run')
     require(all(host.sha(Path(p))==h for p,h in begin['emptyConfigHashes'].items()),'empty public configs unchanged')
+    require(all(host.sha(Path(p))==h for p,h in begin['fixtureHashes'].items()),'independent fixture unchanged after run')
     verify(invocation)
     value=dict(source=SOURCE,actualExit=code,begin=begin,stages=stages,suites=suites,cases=cases,xmlHashes=xml_hashes,
          execSha256=host.sha(SLOT/'jacoco.exec') if (SLOT/'jacoco.exec').exists() else None,
