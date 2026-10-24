@@ -50,7 +50,7 @@ if __name__ == '__main__':
         assert stage['actualExit'] == 0 and not stage['timedOut'] and host.sha(RUN / name) == stage['logSha256']
     rejected = []
     for name,mutate in (
-        ('source-tail',lambda r:r.update(source=r['source'][:-1]+'0')),
+        ('source-tail',lambda r:r.update(source=post.different_source_tail(r['source']))),
         ('failed-case',lambda r:r['cases'][0].update(result='NOT_PASS')),
         ('duplicate-case',lambda r:r['cases'].__setitem__(1,copy.deepcopy(r['cases'][0]))),
         ('fixture-change',lambda r:r['begin'].update(fixtureHashes={'unknown':'0'*64})),

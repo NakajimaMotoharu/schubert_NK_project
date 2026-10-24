@@ -43,6 +43,13 @@ def require(value,message):
         raise ValueError(message)
 
 
+def different_source_tail(source):
+    require(isinstance(source,str) and bool(source),'nonempty source id for metadata mutation')
+    changed=source[:-1]+('1' if source.endswith('0') else '0')
+    require(changed!=source,'source-only negative must actually differ')
+    return changed
+
+
 def step(name,command):
     require(not (SLOT/(name+'-begin.safe.json')).exists(),'never restart unknown own step')
     start=datetime.datetime.now(datetime.timezone.utc).isoformat()
@@ -108,7 +115,7 @@ def main():
     require('-javaagent:'+str(common.AGENT)+'=destfile='+str(RUN/'jacoco.exec')+',append=false,sessionid='+EXPECTED_SESSION in command,'one new actual exec identity')
     rejected=[]
     for name,change in (
-        ('source-tail',lambda x:x.update(source=x['source'][:-1]+'0')),
+        ('source-tail',lambda x:x.update(source=different_source_tail(x['source']))),
         ('failed-case',lambda x:x['cases'][0].update(result='NOT_PASS')),
         ('duplicate-case',lambda x:x['cases'].__setitem__(1,copy.deepcopy(x['cases'][0]))),
         ('fixture-scope-change',lambda x:x['begin'].update(fixtureHashes={'unknown':'0'*64})),
