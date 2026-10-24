@@ -1,5 +1,7 @@
 # PGPT成果物一覧・進捗
 
+2026-10-24最新：1765/1766、新MIDNAME4が既四exporterの名再読取不備を全4failureで検出、BUG1701/YKT1452先行→sourcef775f095cで一回copyへ。新4＋必要96=100/9成功、実5四100（L216M29C5B112）/static0/全1805・167owner/四Mainexact差分・他1801debug同byte/五edge0＋責務七反例、限定close。1759以降新Test ID62/新Main4はsource別技術測定で正式runへ合算0。次Labels-model直接接続、formal1964-53/原190新受入0/工数null/whole451/actualHOLD/QA051final不変更。
+
 2026-10-24最新：1763/1764、Web7family値catalog新Main1/新14-1、sourcee5f0ae543・8368正常six→8370原4024e0c1全成功→8372原a715bc34実1四100（L46M8C1B14）/static0/CRC0/一exec→8374原4349c8d9全1805/167owner・全旧1804debug同byte/五edge0/新責務三反例。BUG1700/YKT1451定数是正・旧静的停止保全で限定close。catalog自体だけで、検証済みLabels-model接続/mode policy/実公開は未完。formal1964-53/原190新受入0/工数null/whole451/actualHOLD/QA051final不変、継続。
 
 2026-10-24最新：1761/1762、precision Web registryのGauge標準textを新Main1/新22-2で閉鎖、sourcee1ba2ccc5・toolfixture832336f6f/normal8350→8352原7993a17f→8354原bee70ede実2四100（L53M10C2B22）/全static0/CRC0/一exec→8356原67c30e3b全1804/165owner・旧1803debug同byte/五edge0/new責務三反例。旧別SDK/Counter/Timerの成功再演/coverage合算なし、新BUG0。actual/whole451/正式1964-53/原190新受入0/工数null/QA051final不変更、safe接続へ継続。
