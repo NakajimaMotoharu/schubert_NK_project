@@ -1,6 +1,8 @@
 package dev.codex.schubert.nk.api.monitoring;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import dev.codex.schubert.nk.bootstrap.monitoring.PrometheusSummaryExporter;
 import dev.codex.schubert.nk.protocol.layout.LayoutId;

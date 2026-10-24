@@ -1,6 +1,10 @@
 package dev.codex.schubert.nk.bootstrap.monitoring;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import io.micrometer.core.instrument.DistributionSummary;
 import io.micrometer.core.instrument.Meter;
@@ -115,15 +119,18 @@ class PrometheusSummaryExporterTest {
   @Test
   void sumenc001LiteralCdfBecomesClassicHistogram() {
     assertEquals(
-        """
+        Set.copyOf(
+            """
         # TYPE nk_fixture_duration_seconds histogram
         nk_fixture_duration_seconds_bucket{outcome="SUCCESS",le="0.001"} 1
         nk_fixture_duration_seconds_bucket{outcome="SUCCESS",le="1.0"} 2
         nk_fixture_duration_seconds_bucket{outcome="SUCCESS",le="+Inf"} 3
         nk_fixture_duration_seconds_count{outcome="SUCCESS"} 3
         nk_fixture_duration_seconds_sum{outcome="SUCCESS"} 1.002
-        """,
-        text(valid()));
+        """
+                .lines()
+                .toList()),
+        Set.copyOf(text(valid()).lines().toList()));
   }
 
   @Test
