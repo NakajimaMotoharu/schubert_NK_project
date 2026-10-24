@@ -1,5 +1,7 @@
 # Module・Program一覧
 
+2026-10-24追加試験trace：PolicyAlertStatusConnectionTest ALERTPIPE001～004→MonitoringPolicyEngine全12入口/observationMissing/activeAlerts→MonitoringStatusText.renderを1806/1807・RD171/UI252/SS351へ結合。sourcef817不変更/正常8632同byte再利用、新4/1→8662原17749af7独立source/XML/exec-session/七反例、元unit/renderer成功確認の再演0。新Main/coverage-static資格0、全12固定status/回復/原因/調査保持/欠測の接続のみ。1737-38既syntax-onlyと1804-05 full-lint追加品質はBUG1710/2034の区分訂正を適用、元計画消化/正式/工数増0、全actualHOLD維持。
+
 2026-10-24追加試験trace：toolsのApiMetricPayloadPrecisionTest/WebMetricPayloadPrecisionTestを1802→1803/RD171/UI252/SS311332351へ。APIPIPE/WEBPIPE各001～002、sourcef817b0047/8644-46、新4/2で各StandardMetrics＋実Db/Mq/HttpMetricRecorder＋精度registry＋CustomMetricPayload接続を固定1ns/1.5秒CDF vectorで確認。Main追加変更/新coverage-static資格0、正常8632は同input byteで再演0、旧26/4確認再演なし。元環境/command/source/tool/deps/XML/exec-session/全hashはmanifest、正式/actual経路/工数は未受入。
 
 2026-10-24追加trace：api.monitoring.ApiCustomMetricPayload/web.monitoring.WebCustomMetricPayloadのctor/render・READY_PREFIXを1800→1801/PG-D613/RD171/UI252/SS311342351へ。APIPAY/WEBPAY各001～013/sourcef817b0047/8634-36-38、実2四100(L17M4C2B11)/static0/全1825・207owner/五edge0/fields0-prefix各1/旧管理server同byte。ready flagはcaller供給・権限なし、STD supplier0/DEBUG一回借用・primary伝播・owner保持、正式endpoint/標準text/fullcatalogは別未受入、旧成功確認再演なし。
