@@ -40,6 +40,11 @@ def require(value,message):
         raise ValueError(message)
 
 
+def validate_role(rows,role):
+    require(rows and all(p.startswith(role+':dev/') and not p.startswith(role+':'+role+':') for p in rows),
+            'prior witness uses explicit one-time role-qualified keys, not bare component entries')
+
+
 def main():
     invocation=capture(Path(__file__))
     require(not SLOT.exists() and not OUT.exists(),'new-only complete physical proof')
@@ -66,8 +71,7 @@ def main():
     require(len(before)==1669 and previous['source']==BEFORE,'original1669 and actual prior source')
     for role,key in (('web','currentWeb'),('api','historicalApi'),('batch','historicalBatch')):
         rows=previous[key]['physicalClasses']
-        require(all(p.startswith(role+':dev/') and not p.startswith(role+':'+role+':') for p in rows),
-                'prior witness uses explicit one-time role-qualified keys, not bare component entries')
+        validate_role(rows,role)
         require(not(set(before)&set(rows)),'disjoint prior physical owner domains')
         before.update(rows)
     require(len(before)==1799,'complete prior1799, not a partial summary')
