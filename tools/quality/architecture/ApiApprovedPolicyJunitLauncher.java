@@ -37,7 +37,7 @@ public final class ApiApprovedPolicyJunitLauncher {
             "dev.codex.schubert.nk.api.monitoring.ApiMetricScrapeTest",
             "dev.codex.schubert.nk.api.monitoring.ApiDurationMetricExporterTest",
             "dev.codex.schubert.nk.api.monitoring.ApiSummaryExporterContractTest",
-            "dev.codex.schubert.nk.api.monitoring.MetricIdentitySnapshotContractTest",
+            "dev.codex.schubert.nk.web.monitoring.MetricIdentitySnapshotContractTest",
             "dev.codex.schubert.nk.api.monitoring.ApiScalarMetricExporterTest",
             "dev.codex.schubert.nk.api.monitoring.ApiScalarPrecisionContractTest");
     List<Result> results = new ArrayList<>();
