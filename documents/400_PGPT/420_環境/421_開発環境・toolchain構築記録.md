@@ -1,5 +1,13 @@
 # 開発環境・toolchain構築記録
 
+## 2026-10-24 Summary formatter正式外部Maven座標（1753、PG-D592）
+
+既隔離SDK8170/8173のio.prometheus textformats/model/config1.7.0の各Jar/POM6byteを、既checksum＋SHA256と照合し専用M2の新外部座標だけへ配置。元8240原1028c8ee、独立8241原02af072fを正とし、元publicArtifactDownloads=2は誤りで実4（client_java/client_java_parent親POM＋checksum）。原改変せずBUG1694/YKT1445で追記訂正する。秘密/内部snapshot/settings上書き0、異hash/symlinkは拒否。
+
+Maven model解決用imported BOMはJunit6.1.0（8243原03d9fe43）、OpenTelemetry instrumentation2.28.1-alphaほか親/import四POM（8244原0b7fec5c）。これらは第三者POMのdescriptor解決のみで製品JUnit5.13.4やRoot/plugin設定を変更しない。各全座標/実URL/hash/command/PID/終了は公開manifestとown PG379 slotsに固定。入手先はhttps://repo.maven.apache.org/maven2/ の指定公開座標、curl --disable/HTTPS限定/有限timeout/size、proxy等非継承、retry/redirect/代替経路なし。published SHA1＋独自SHA256照合でありvendor署名とは称しない。
+
+再現entryは tools/quality/pg8240_prometheus_maven_coordinates.py → pg8241_prometheus_coordinates_post.py → pg8243_prometheus_bom_prepare.py → pg8244_prometheus_descriptor_closure.py。新only slot、既runを再起動せず元receiptを参照する。Pythonは既PYTHONPATH/pyflakes runtime、JDK25.0.4/Maven3.9.12/offlineの通常sixで確認、失敗/未実行PTは成功へ含めない。実daemon/service/VM/DB/network target操作は行わない。
+
 2026-10-24Prometheus SDK分離依存（1739～1740/PG-D584）：公式Maven Central固定registry1.17.1/client1.7.0新10Jarと既core/commons/observation1.17.1/Hdr2.2.2/jspecify1.0.1の5pin。隔離toolchain/prometheus-sdk-1.17.1-client-1.7.0-new-v1へPOM/Jar/各repoSHA1取得・独立SHA256、既M2/Production POM変更0/target init0。PG8170原371004a7/source69204dd136341d24df67d8b51fc6fea8fc3b7c31、当15Jar3,688,470byte/1824class名/重複0・新PG8173原a5a2bfbeの独立7反例で確認。旧8172prefix guardはBUG1688/YKT1439・00581f4b7で是正/元post保全。全hash/URL/directgraph/非runtime除外理由/再現は1740/原manifest、vendor署名やMaven全effective/製品PTを認定しない。実VM/DB/daemon等0・全actualHOLD維持。
 
 2026-10-24公式構文工具（1737～1738/PG-D583）：Prometheus LTS3.13.5/linux-amd64公式archive SHA0388822ace519c5a3a8ef556a541ce1b536e21d872f82deded465bd27a5a0699をhttps://github.com/prometheus/prometheus/releases/download/v3.13.5/prometheus-3.13.5.linux-amd64.tar.gzからnew-only取得。toolchain/promtool-3.13.5-linux-amd64へpromtool/LICENSE/NOTICEだけ抽出、実binary SHA4e84296dc89ef03d856674d76d387f5ccc54a698136c2f0dc30ceef2286908ff/mode0700/実version0。PG8162原ca3c9318（tool準備source0c246）/PG8164原df069f5e（source941bd/設定syntax6ID・5process期待0/0/1/1/1）/PG8165原f18a6b5f独立post。再現・由来/command/全hash/環境とnew-only再発行防止は1738、binaryはGit外。公式TLS+掲載SHAでvendor署名認定ではない。daemon抽出/実サービス/VM/DB/Root/target通信0、公式schema範囲だけで実運用/全品質未受入。元tool/config/Java/POM/秘密/原保全物の変更0。

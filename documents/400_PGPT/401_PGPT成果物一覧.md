@@ -1,5 +1,7 @@
 # PGPT成果物一覧・進捗
 
+2026-10-24最新：1753/1754 共通Summary exporterを新Production Main1として実装、独立新30＋必要既28=58/5真正成功。source7cba540ba/8270正常six→8272→8274実8四100（L205M33C8B110）・SB/CS0/PMD既raw2個別分類→8276全1801/159owner/五architecture0。初回WIP/工具2不備/静的1不備は元失敗を保存しBUG1693～1695/YKT1444～1446を限定close。借用registry→API二histの標準textだけで、実endpoint/Root/native/全451/QA051final未受入・正式1964-53/工数null不変。次HTTP窓CDF普通PTへ継続、通常小区切り停止0。
+
 2026-10-24最新：1751/1752、7Java/3POM＋15Jar/18public SDK型をPG8234原1d4e0e82でmetadata限定照合。製品PT/coverage/正式受入0、次は既API精度registry→src内共通summary encoder→公式snapshot/textの実PG/PT一経路。SDKLoader/private反射/fake markerを使わず、HTTPは時間窓CDFの追加確認を先行する。実Root等HOLD/正式1964-53・工数null不変更。
 
 2026-10-24最新：1749/1750、Batch実SDK新8＋必要既37=45/6全成功、実12四100（L195/M45/C12/B72）/CRC0/一exec・生成15/七反例。PMD raw既1は元個別理由/同byte厳密分類（隠さずraw1）、CS/SB/missing0。製品source6246c954d不変更/実backup-file-process等HOLD、正式1964-53/原190新受入0/工数null。SDK累計新38case/五run197は複数source履歴で全体coverage合算0。

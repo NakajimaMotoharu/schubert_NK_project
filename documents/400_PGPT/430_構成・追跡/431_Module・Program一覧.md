@@ -1,5 +1,7 @@
 # Module・Program一覧
 
+2026-10-24追加trace：新bootstrap.monitoring.PrometheusSummaryExporter scrape/encode/labels/point（純borrowed formatter）＋API ExactDuration/Db/Mqの計8execは1753/1754、RD171/UI252/SS311351/PG-D592。新SUMENC24＋APISUM6/必要既28=58/5、新source7cba540ba当四100（L205M33C8B110）/CRC0/一exec・static未知0/生成6method、全1801/159source-owner/五architecture0。新Production Main1/POM外部依存、元1799byte不変、古いwhole/exec成果を合算0。Root/service/DB等actualHOLD、実endpoint/native/全451/正式・工数は未受入。
+
 2026-10-24追加trace：Batch Transfer/IntegrityFailure/Batch/ProcessRestart四Recorderと直接BatchMetricContract・nested12は1749/1750、新BATCHPROM8＋既37=45/6。各Program/RD171/UI252/SS341351/TestID・fixture/expected/source6246c954dは結果表/元8226/8228へ一意対応。実12四100/生成15・PMD raw1厳密分類/CS-SB0、別program依存/旧source counterを合算しない。実backup/filewalk/process操作0-HOLD・正式/工数不変更。
 
 2026-10-24追加trace：API四Counter（InboxReplay、OperationMismatch/Operation、MqRedelivery、MqMessage/Stage）実6は1747/1748、新APICNT001～008＋既各8＝40/5。BUG1691でMqMessageの内部unitのみ修正source6246c954d/1718・PG-D589、SS351外部正名/label/増分不変更。8216実6四100/生成4、8219全1799・元1669不変/一Main変更、155source-ownerを固定。旧e196の三SDK run112は歴史証跡、現在40とcoverage合算/全scope受入にしない。実業務/Root等HOLD・正式/工数不変更。

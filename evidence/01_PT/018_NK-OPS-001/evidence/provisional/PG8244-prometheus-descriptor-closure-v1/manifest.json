@@ -1,0 +1,136 @@
+{
+  "entries": [
+    {
+      "coordinate": [
+        "io.opentelemetry.instrumentation",
+        "opentelemetry-instrumentation-bom-alpha",
+        "2.28.1-alpha"
+      ],
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/io/opentelemetry/instrumentation/opentelemetry-instrumentation-bom-alpha/2.28.1-alpha/opentelemetry-instrumentation-bom-alpha-2.28.1-alpha.pom",
+      "repositorySha1": "d13f53d6d1328ca86ab38d759231e652f940c0c0",
+      "sha256": "8e76193d171eacc1c82b8be68ad0e0a78a45b474db507fef5145489a2dbf1c4b",
+      "state": "CREATED_NEW_COORDINATE"
+    },
+    {
+      "coordinate": [
+        "io.opentelemetry",
+        "opentelemetry-bom",
+        "1.62.0"
+      ],
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/io/opentelemetry/opentelemetry-bom/1.62.0/opentelemetry-bom-1.62.0.pom",
+      "repositorySha1": "d8a8fa76c842bf20cd69f255f8698ca106ca8848",
+      "sha256": "d854f79a86be682184cf1d7f721fa74483dc7234a8434172ccf843036a344f98",
+      "state": "CREATED_NEW_COORDINATE"
+    },
+    {
+      "coordinate": [
+        "io.opentelemetry",
+        "opentelemetry-bom-alpha",
+        "1.62.0-alpha"
+      ],
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/io/opentelemetry/opentelemetry-bom-alpha/1.62.0-alpha/opentelemetry-bom-alpha-1.62.0-alpha.pom",
+      "repositorySha1": "f194ede700f9ed5d16bf2084ae3b53ab73a37690",
+      "sha256": "587dd3842aa000437393c78f06b4312a27495b46f64961506439ee55ea3095db",
+      "state": "CREATED_NEW_COORDINATE"
+    },
+    {
+      "coordinate": [
+        "io.opentelemetry.instrumentation",
+        "opentelemetry-instrumentation-bom",
+        "2.28.1"
+      ],
+      "path": "/home/mini/codex/project1/work/toolchain/m2/repository/io/opentelemetry/instrumentation/opentelemetry-instrumentation-bom/2.28.1/opentelemetry-instrumentation-bom-2.28.1.pom",
+      "repositorySha1": "1b7d5437ba7a936bbf69a6493700fff6f1b90a93",
+      "sha256": "950da20fb67c78901cbcbc2a778cb39cef6fca39cb5b6fa13fe7a832200fba91",
+      "state": "CREATED_NEW_COORDINATE"
+    }
+  ],
+  "importEdges": [
+    {
+      "imported": [
+        "io.opentelemetry",
+        "opentelemetry-bom",
+        "1.62.0"
+      ],
+      "parent": [
+        "io.opentelemetry.instrumentation",
+        "opentelemetry-instrumentation-bom-alpha",
+        "2.28.1-alpha"
+      ]
+    },
+    {
+      "imported": [
+        "io.opentelemetry",
+        "opentelemetry-bom-alpha",
+        "1.62.0-alpha"
+      ],
+      "parent": [
+        "io.opentelemetry.instrumentation",
+        "opentelemetry-instrumentation-bom-alpha",
+        "2.28.1-alpha"
+      ]
+    },
+    {
+      "imported": [
+        "io.opentelemetry.instrumentation",
+        "opentelemetry-instrumentation-bom",
+        "2.28.1"
+      ],
+      "parent": [
+        "io.opentelemetry.instrumentation",
+        "opentelemetry-instrumentation-bom-alpha",
+        "2.28.1-alpha"
+      ]
+    },
+    {
+      "imported": [
+        "io.opentelemetry",
+        "opentelemetry-bom",
+        "1.62.0"
+      ],
+      "parent": [
+        "io.opentelemetry",
+        "opentelemetry-bom-alpha",
+        "1.62.0-alpha"
+      ]
+    },
+    {
+      "imported": [
+        "io.opentelemetry",
+        "opentelemetry-bom",
+        "1.62.0"
+      ],
+      "parent": [
+        "io.opentelemetry.instrumentation",
+        "opentelemetry-instrumentation-bom",
+        "2.28.1"
+      ]
+    }
+  ],
+  "invocation": {
+    "actualPythonCommand": [
+      "python3",
+      "-B",
+      "tools/quality/pg8244_prometheus_descriptor_closure.py"
+    ],
+    "arbitraryArgumentsRecorded": false,
+    "entrypointPath": "tools/quality/pg8244_prometheus_descriptor_closure.py",
+    "entrypointSha256": "5eb9588d5cedfba3770834cba45bcb73db7f819754063e80ca7485ddfb7d42a2",
+    "helperPath": "tools/quality/host_tool_invocation.py",
+    "helperSha256": "85d616a3db4ff47f4c95ae2e0dd57954bc2b09f28b8f2a685b986e5621545c46",
+    "libraryPath": "tools/quality/pg8244_prometheus_descriptor_closure.py",
+    "librarySha256": "5eb9588d5cedfba3770834cba45bcb73db7f819754063e80ca7485ddfb7d42a2",
+    "loadedProjectPythonSources": {
+      "tools/quality/host_tool_invocation.py": "85d616a3db4ff47f4c95ae2e0dd57954bc2b09f28b8f2a685b986e5621545c46",
+      "tools/quality/pg8240_prometheus_maven_coordinates.py": "6c455be7858de9366006d2e47769fb1f1547a54fe1e8fef6d7425477c0b02b8d",
+      "tools/quality/pg8244_prometheus_descriptor_closure.py": "5eb9588d5cedfba3770834cba45bcb73db7f819754063e80ca7485ddfb7d42a2"
+    },
+    "provenance": "OBSERVED_SYS_ARGV_AND_ORIG_ARGV_NOT_RECONSTRUCTED"
+  },
+  "note": "BOMs resolve third-party model only; no parent project/plugin inheritance into NK",
+  "productionPT": 0,
+  "publicArtifactDownloads": 8,
+  "runtimeJunitUnchanged": "5.13.4",
+  "status": "PUBLIC_IMPORTED_DESCRIPTOR_CLOSURE_PREPARED",
+  "targetActions": 0
+}
