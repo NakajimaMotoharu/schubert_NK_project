@@ -1,5 +1,7 @@
 # PGPT成果物一覧・進捗
 
+2026-10-24最新：1749/1750、Batch実SDK新8＋必要既37=45/6全成功、実12四100（L195/M45/C12/B72）/CRC0/一exec・生成15/七反例。PMD raw既1は元個別理由/同byte厳密分類（隠さずraw1）、CS/SB/missing0。製品source6246c954d不変更/実backup-file-process等HOLD、正式1964-53/原190新受入0/工数null。SDK累計新38case/五run197は複数source履歴で全体coverage合算0。
+
 2026-10-24最新：1747/1748、実SDKでMQ Counter正名変形BUG1691を独立検出・製品1箇所是正source6246c954d（外部oracle不変更）。新source正常六build0/PT0→真正40/5（新8＋既32）/実6四100（L138/M19/C6/B54）/静的0/全1799/変更一Main・元1669byte不変/155trace/五architecture0。BUG1692工具schema是正・12反例と横展開全完了、旧失敗/成功保持。正式1964-53/原190新受入0/工数null・実runtime UNKNOWN/HOLD、旧112と現在40のcoverage合算0。
 
 2026-10-24最新：1745/1746、API四Gauge実SDK新8＋必要既40=48/6全成功、実11四100（L167/M46/C11/B88）/CRC0/一exec・実PMD/CS/SB/missing各0、生成6type25method/七反例。1742/1744と合わせ新22case・必要既90を含む三run計112成功（coverageを合算しない）。製品Java/POM元e196不変更、正式1964-53/原190新受入0/工数null・全actualHOLD不変更。
