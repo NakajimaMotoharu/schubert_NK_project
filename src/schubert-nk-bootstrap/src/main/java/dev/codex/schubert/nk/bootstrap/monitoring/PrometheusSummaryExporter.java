@@ -124,7 +124,7 @@ public final class PrometheusSummaryExporter {
           || bound <= previousBound
           || !Double.isFinite(count)
           || count < previousCount
-          || count != Math.rint(count)
+          || Double.compare(count, Math.rint(count)) != 0
           || count >= 0x1.0p53
           || count > snapshot.count())
         throw new IllegalArgumentException("invalid cumulative summary bucket");
