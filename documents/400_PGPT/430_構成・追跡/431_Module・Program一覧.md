@@ -1,5 +1,7 @@
 # Module・Program一覧
 
+2026-10-25追加trace：PG-D626/1837-38、sourcefb9fce0f9、ServiceBinding.withHttpObserver/NativeRuntime早期捕捉・Map供給/HttpServer trace後observerのPG→新WEBSERVICE015～022八件＋必要旧36=actual44/2。8946正常six→8948原3d3c2099→8950原46b55585二Main四100 L55M9C2B12/静的三0→8952原85aac967全1835/三変更・旧1832/原1664同byte/232owner/五edge0/旧core-Test14/既business-stop source保持/七protocol反例。二caller8951原155ddd3a静的1/PMD24未分類・CS-SB0、動的/coverage UNRUN_HOLD/null。全hash1838、新BUG0、actual pipeline/全451/正式は別未受入。
+
 2026-10-25追加trace：PG-D625/1835-36、sourcefb5bde926、新WebServiceMetricBinding prepareContext/ctor/refresh/createHttpObserver→WEBSERVICE001～014/WEBMHTTP022新15＋必要旧21=actual36/2。8932正常six→8934原3d4b63b3→8936原4e3d2c24二Main四100 L40M8C2B4/静的三0→8938原2066440e全1835/新一Main・旧1834-原1665同byte/231owner/五edge0・五protocol二field反例/旧HTTP21本文保持。8940原580ae5b1旧mutable Valve source含む四所有反例、BUG1724/YKT1475理由付き内部oracle訂正/元8926失敗保持/全hash1836。同custom textへDB/HTTP terminal接続、実pipeline/start/stop/全451は別未受入。
 
 2026-10-25追加trace：PG-D624/1833-34、source3359b1489、BatchMetricText.scrape三引数→BATCHFULL001～012新12＋必要BATCHTEXT旧24=actual36/1。8910正常six→8912原8034014d→8914原68b7069b一Main四100 L58M9C1B34/静的三0・CRC0/session1→8916原8f022a7a全1834/旧1833-原1665同byte/229owner/五edge0/旧二引数・Test24本文保持/五protocol反例。8905原03c969fb fixture原assert保持/旧TWR二反例、8917原12a44e17実constant guard三反例、BUG1722-23/YKT1473-74元失敗/限定closeと全hash1834。borrowed custom→standardだけでactual Batch/endpoint/全451は未受入。
