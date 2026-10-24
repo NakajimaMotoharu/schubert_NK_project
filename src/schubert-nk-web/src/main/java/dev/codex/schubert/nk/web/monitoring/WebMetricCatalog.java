@@ -1,9 +1,11 @@
 package dev.codex.schubert.nk.web.monitoring;
 
 import io.micrometer.core.instrument.Meter;
+import io.micrometer.core.instrument.Tag;
 import io.prometheus.metrics.model.snapshots.Labels;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
@@ -105,10 +107,24 @@ public final class WebMetricCatalog {
   /** Copy once and pass these validated Labels to the model; never approve a later reread. */
   public Labels labels(Meter.Id id) {
     Objects.requireNonNull(id, "metric identity");
-    var allowed = VALUES.get(Objects.requireNonNull(id.getName(), "metric name"));
+    var allowed = domain(id.getName());
+    return copy(allowed, id.getTags());
+  }
+
+  // APPROVED005..007: caller already captured the name; no second Id/provider metadata read.
+  Labels labels(String name, List<Tag> tags) {
+    return copy(domain(name), tags);
+  }
+
+  private static Map<String, Set<String>> domain(String name) {
+    var allowed = VALUES.get(Objects.requireNonNull(name, "metric name"));
     if (allowed == null) throw new IllegalArgumentException("unknown Web metric");
+    return allowed;
+  }
+
+  private static Labels copy(Map<String, Set<String>> allowed, List<Tag> tags) {
     var result = new TreeMap<String, String>();
-    for (var tag : Objects.requireNonNull(id.getTags(), "metric tags")) {
+    for (var tag : Objects.requireNonNull(tags, "metric tags")) {
       Objects.requireNonNull(tag, "metric tag");
       String key = Objects.requireNonNull(tag.getKey(), "metric label key");
       String value = Objects.requireNonNull(tag.getValue(), "metric label value");

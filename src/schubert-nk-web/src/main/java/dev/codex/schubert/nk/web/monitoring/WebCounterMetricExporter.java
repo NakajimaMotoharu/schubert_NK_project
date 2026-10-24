@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
 import java.util.TreeMap;
 
@@ -30,11 +31,29 @@ public final class WebCounterMetricExporter {
         PrometheusTextFormatWriter.builder().setIncludeCreatedTimestamps(false).build());
   }
 
+  /** SS351/1767: fixed Web names and closed label values, copied directly into each model. */
+  public String scrapeApprovedCounters(MeterRegistry source) {
+    var catalog = new WebMetricCatalog();
+    return encode(
+        source,
+        catalog.counters(),
+        PrometheusTextFormatWriter.builder().setIncludeCreatedTimestamps(false).build(),
+        Optional.of(catalog));
+  }
+
   // COUNTENC015/016: checked-writer seam, not a retained resource or public endpoint.
   static String encode(
       MeterRegistry source,
       Map<String, Set<String>> approvedNameLabelKeys,
       ExpositionFormatWriter writer) {
+    return encode(source, approvedNameLabelKeys, writer, Optional.empty());
+  }
+
+  private static String encode(
+      MeterRegistry source,
+      Map<String, Set<String>> approvedNameLabelKeys,
+      ExpositionFormatWriter writer,
+      Optional<WebMetricCatalog> catalog) {
     Objects.requireNonNull(source, "meter registry");
     Objects.requireNonNull(writer, "text writer");
     var support = new WebMetricText();
@@ -48,7 +67,10 @@ public final class WebCounterMetricExporter {
       if (keys == null) continue;
       if (!(meter instanceof Counter counter))
         throw new IllegalArgumentException("selected meter is not a counter");
-      var labels = support.labels(id, keys);
+      var labels =
+          catalog.isPresent()
+              ? catalog.orElseThrow().labels(name, id.getTags())
+              : support.labels(id, keys);
       double value = counter.count();
       if (!Double.isFinite(value) || value < 0)
         throw new IllegalArgumentException("invalid counter value");
