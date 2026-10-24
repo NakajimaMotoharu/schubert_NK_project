@@ -1,10 +1,8 @@
 package dev.codex.schubert.nk.web.monitoring;
 
-import io.micrometer.core.instrument.Meter;
 import io.micrometer.core.instrument.MeterRegistry;
 import io.micrometer.core.instrument.Timer;
 import io.micrometer.core.instrument.distribution.HistogramSnapshot;
-import io.prometheus.metrics.config.EscapingScheme;
 import io.prometheus.metrics.expositionformats.ExpositionFormatWriter;
 import io.prometheus.metrics.expositionformats.PrometheusTextFormatWriter;
 import io.prometheus.metrics.model.snapshots.ClassicHistogramBuckets;
@@ -14,12 +12,7 @@ import io.prometheus.metrics.model.snapshots.Labels;
 import io.prometheus.metrics.model.snapshots.MetricMetadata;
 import io.prometheus.metrics.model.snapshots.MetricSnapshot;
 import io.prometheus.metrics.model.snapshots.MetricSnapshots;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.UncheckedIOException;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -55,19 +48,8 @@ public final class WebDurationMetricExporter {
       ExpositionFormatWriter writer) {
     Objects.requireNonNull(source, "meter registry");
     Objects.requireNonNull(writer, "text writer");
-    var namespace = new HashMap<String, Set<String>>();
-    Objects.requireNonNull(approvedNameLabelKeys, "approved metric namespace")
-        .forEach(
-            (name, keys) -> {
-              if (!Objects.requireNonNull(name, "metric name")
-                  .matches("nk_[a-z][a-z0-9_]*_seconds"))
-                throw new IllegalArgumentException("invalid timer namespace");
-              var copy = Set.copyOf(keys);
-              for (var key : copy)
-                if (!key.matches("[a-z][a-z0-9_]*") || "le".equals(key))
-                  throw new IllegalArgumentException("invalid timer label namespace");
-              namespace.put(name, copy);
-            });
+    var support = new WebMetricText();
+    var namespace = support.namespace(approvedNameLabelKeys, "nk_[a-z][a-z0-9_]*_seconds", "timer");
     if (source.isClosed()) throw new IllegalStateException("metric registry closed");
     var groups = new TreeMap<String, List<HistogramDataPointSnapshot>>();
     for (var meter : source.getMeters()) {
@@ -78,7 +60,7 @@ public final class WebDurationMetricExporter {
         throw new IllegalArgumentException("selected meter is not a timer");
       groups
           .computeIfAbsent(id.getName(), unused -> new ArrayList<>())
-          .add(point(timer, labels(id, keys)));
+          .add(point(timer, support.labels(id, keys)));
     }
     var families =
         groups.entrySet().stream()
@@ -87,23 +69,7 @@ public final class WebDurationMetricExporter {
                     new io.prometheus.metrics.model.snapshots.HistogramSnapshot(
                         new MetricMetadata(entry.getKey()), entry.getValue()))
             .toList();
-    var output = new ByteArrayOutputStream();
-    try {
-      writer.write(output, new MetricSnapshots(families), EscapingScheme.UNDERSCORE_ESCAPING);
-    } catch (IOException failure) {
-      throw new UncheckedIOException("timer encoding failed", failure);
-    }
-    return output.toString(StandardCharsets.UTF_8);
-  }
-
-  private static Labels labels(Meter.Id id, Set<String> expectedKeys) {
-    var labels = new TreeMap<String, String>();
-    for (var tag : id.getTags())
-      if (labels.put(tag.getKey(), tag.getValue()) != null)
-        throw new IllegalArgumentException("duplicate summary label");
-    if (!labels.keySet().equals(expectedKeys))
-      throw new IllegalArgumentException("summary label contract mismatch");
-    return Labels.of(new ArrayList<>(labels.keySet()), new ArrayList<>(labels.values()));
+    return support.write(writer, new MetricSnapshots(families), "timer encoding failed");
   }
 
   private static HistogramDataPointSnapshot point(Timer timer, Labels labels) {
