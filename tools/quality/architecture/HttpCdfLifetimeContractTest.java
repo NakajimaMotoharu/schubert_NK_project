@@ -119,4 +119,30 @@ class HttpCdfLifetimeContractTest {
       assertFalse(registry.isClosed());
     }
   }
+
+  @Test
+  void httpcdf004ConcurrentSnapshotsKeepIndependentOneNanosecondConservation() throws Exception {
+    var clock = new MockClock();
+    try (var registry = new OverflowSafeHttpMeterRegistry(clock);
+        var workers = Executors.newFixedThreadPool(4)) {
+      var timer = timer(registry);
+      var jobs = new ArrayList<Future<?>>();
+      for (int index = 0; index < 4; index++)
+        jobs.add(
+            workers.submit(
+                () -> {
+                  for (int event = 0; event < 256; event++) timer.record(1, TimeUnit.NANOSECONDS);
+                }));
+      for (int observation = 0; observation < 256; observation++) {
+        var snapshot = timer.takeSnapshot();
+        // Independent conservation laws for supplied 1ns, no schedule-dependent expected count.
+        assertEquals(0.0, snapshot.total(TimeUnit.NANOSECONDS) - snapshot.count());
+        for (var bucket : snapshot.histogramCounts())
+          assertEquals(0.0, bucket.count() - snapshot.count());
+      }
+      for (var job : jobs) job.get(10, TimeUnit.SECONDS);
+      clock.add(Duration.ofSeconds(3));
+      cdf(timer, 1024, .000001024, 0, 1024, 1024, 1024, 1024, 1024, 1024, 1024, 1024, 1024);
+    }
+  }
 }

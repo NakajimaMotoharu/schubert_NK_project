@@ -4,6 +4,7 @@ import io.micrometer.core.instrument.Clock;
 import io.micrometer.core.instrument.Meter;
 import io.micrometer.core.instrument.MeterRegistry;
 import io.micrometer.core.instrument.Timer;
+import io.micrometer.core.instrument.distribution.CountAtBucket;
 import io.micrometer.core.instrument.distribution.DistributionStatisticConfig;
 import io.micrometer.core.instrument.distribution.HistogramSnapshot;
 import io.micrometer.core.instrument.distribution.pause.NoPauseDetector;
@@ -15,7 +16,7 @@ import java.util.Arrays;
 import java.util.Objects;
 import java.util.concurrent.Callable;
 import java.util.concurrent.TimeUnit;
-import java.util.concurrent.atomic.DoubleAdder;
+import java.util.concurrent.locks.ReentrantLock;
 import java.util.function.Supplier;
 import org.jspecify.annotations.Nullable;
 
@@ -69,14 +70,18 @@ public final class OverflowSafeHttpMeterRegistry extends SimpleMeterRegistry
   }
 
   /**
-   * The private standard delegate supplies count/max/finite integer buckets only. Its wrapping long
-   * total never escapes: every public sum, mean, measurement and snapshot uses our binary64 total.
-   * Cross-counter atomic scrape is not promised, as with the original SDK timer.
+   * SS351/1755/BUG1696: only max keeps the standard delegate's time window. Count, positive
+   * binary64 total and nine finite CDF counts have one private lifetime/atomic observation lock.
+   * Delegate callbacks/clock reads occur outside that lock. Native helper Gauges are not the public
+   * histogram family; exporters must select this Timer's snapshot, never a cached helper value.
    */
   private static final class OverflowSafeTimer implements Timer {
     private final Timer delegate;
     private final Clock clock;
-    private final DoubleAdder totalNanoseconds = new DoubleAdder();
+    private final ReentrantLock stateLock = new ReentrantLock();
+    private final long[] cumulativeBuckets = new long[BOUNDARIES.length];
+    private long sampleCount;
+    private double totalNanoseconds;
 
     private OverflowSafeTimer(Timer delegate, Clock clock) {
       this.delegate = delegate;
@@ -92,7 +97,18 @@ public final class OverflowSafeHttpMeterRegistry extends SimpleMeterRegistry
     public void record(long amount, TimeUnit unit) {
       Objects.requireNonNull(unit, "timer unit");
       delegate.record(amount, unit);
-      if (amount >= 0) totalNanoseconds.add(unit.toNanos(amount));
+      if (amount >= 0) {
+        long nanoseconds = unit.toNanos(amount);
+        stateLock.lock();
+        try {
+          sampleCount++;
+          totalNanoseconds += nanoseconds;
+          for (int index = 0; index < BOUNDARIES.length; index++)
+            if (nanoseconds <= BOUNDARIES[index]) cumulativeBuckets[index]++;
+        } finally {
+          stateLock.unlock();
+        }
+      }
     }
 
     @Override
@@ -130,12 +146,23 @@ public final class OverflowSafeHttpMeterRegistry extends SimpleMeterRegistry
 
     @Override
     public long count() {
-      return delegate.count();
+      stateLock.lock();
+      try {
+        return sampleCount;
+      } finally {
+        stateLock.unlock();
+      }
     }
 
     @Override
     public double totalTime(TimeUnit unit) {
-      return TimeUtils.nanosToUnit(totalNanoseconds.doubleValue(), unit);
+      Objects.requireNonNull(unit, "timer unit");
+      stateLock.lock();
+      try {
+        return TimeUtils.nanosToUnit(totalNanoseconds, unit);
+      } finally {
+        stateLock.unlock();
+      }
     }
 
     @Override
@@ -151,13 +178,21 @@ public final class OverflowSafeHttpMeterRegistry extends SimpleMeterRegistry
     @Override
     public HistogramSnapshot takeSnapshot() {
       var snapshot = delegate.takeSnapshot();
-      return new HistogramSnapshot(
-          snapshot.count(),
-          totalTime(TimeUnit.NANOSECONDS),
-          snapshot.max(),
-          snapshot.percentileValues(),
-          snapshot.histogramCounts(),
-          null);
+      stateLock.lock();
+      try {
+        var counts = new CountAtBucket[BOUNDARIES.length];
+        for (int index = 0; index < counts.length; index++)
+          counts[index] = new CountAtBucket(BOUNDARIES[index], cumulativeBuckets[index]);
+        return new HistogramSnapshot(
+            sampleCount,
+            totalNanoseconds,
+            snapshot.max(),
+            snapshot.percentileValues(),
+            counts,
+            null);
+      } finally {
+        stateLock.unlock();
+      }
     }
 
     @Override
