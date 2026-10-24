@@ -1,10 +1,10 @@
 package dev.codex.schubert.nk.batch.monitoring;
 
-import static org.junit.jupiter.batch.Assertions.assertEquals;
-import static org.junit.jupiter.batch.Assertions.assertFalse;
-import static org.junit.jupiter.batch.Assertions.assertSame;
-import static org.junit.jupiter.batch.Assertions.assertThrows;
-import static org.junit.jupiter.batch.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import io.micrometer.core.instrument.binder.jvm.JvmGcMetrics;
 import io.micrometer.prometheusmetrics.PrometheusConfig;
@@ -16,7 +16,7 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
-import org.junit.jupiter.batch.Test;
+import org.junit.jupiter.api.Test;
 
 /** SS351/1810 BATCHHOST001..016; independent ownership counts and official own-JVM CPU oracle. */
 class BatchStandardMetricSourceTest {

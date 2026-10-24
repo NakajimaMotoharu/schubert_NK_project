@@ -1,10 +1,10 @@
 package dev.codex.schubert.nk.web.monitoring;
 
-import static org.junit.jupiter.web.Assertions.assertEquals;
-import static org.junit.jupiter.web.Assertions.assertFalse;
-import static org.junit.jupiter.web.Assertions.assertSame;
-import static org.junit.jupiter.web.Assertions.assertThrows;
-import static org.junit.jupiter.web.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import io.micrometer.core.instrument.binder.jvm.JvmGcMetrics;
 import io.micrometer.prometheusmetrics.PrometheusConfig;
@@ -16,7 +16,7 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
-import org.junit.jupiter.web.Test;
+import org.junit.jupiter.api.Test;
 
 /** SS351/1810 WEBHOST001..016; independent ownership counts and official own-JVM CPU oracle. */
 class WebStandardMetricSourceTest {
