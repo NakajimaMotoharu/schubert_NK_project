@@ -28,7 +28,7 @@ def require(value):
 
 
 def assess(raw):
-    require(raw['actualExit']==0 and raw['source']=='69204dd13'+raw['source'][9:] and len(raw['source'])==40)
+    require(raw['actualExit']==0 and raw.get('source')=='69204dd136341d24df67d8b51fc6fea8fc3b7c31')
     require(raw['newJarCount']==len(raw['downloaded'])==10 and raw['existingJarCount']==len(raw['reused'])==5)
     require(raw['existingM2Writes']==raw['productionPomChanges']==raw['productTestsExecuted']==0)
     require(raw['targetClassLoaded'] is False and raw['targetClassInitialized'] is False)
@@ -76,6 +76,7 @@ def main():
     for name,change in (
         ('count-inflation',lambda x:x.update(newJarCount=11)),
         ('class-initialized',lambda x:x.update(targetClassInitialized=True)),
+        ('source-tail-substitution',lambda x:x.update(source=x['source'][:-1]+'0')),
         ('m2-write-hidden',lambda x:x.update(existingM2Writes=1)),
         ('unresolved-runtime',lambda x:next(iter(x['directCompileRuntimeGraph'].values())).append(
             dict(coordinate=['not.reviewed','unknown','1'],scope='runtime'))),

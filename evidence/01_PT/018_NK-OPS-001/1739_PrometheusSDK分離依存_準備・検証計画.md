@@ -1,5 +1,7 @@
 # 1739 Prometheus SDK分離依存 準備・検証計画
 
+準備後の独立post静的点検でBUG1688/YKT1439（source fieldのprefix自己結合）を修正前起票。元RAW全SHA/15Jar/原sourceは正しいが、guard単体のtail反例が不足。旧工具と初回post4423ecfcをf95e5c137へ保存してからfull40literalとtail改変拒否を追加、新無引数8173から同原byteを再読する。依存取得/target init/製品PT再演0、元postは保持。1740に再検証結果と全対象・修正commitを結合する。
+
 NK-OPS-001/WBS-P018-09/C07/RD171 MON005010013/UI252/SS351、PG-D584、group1966/PG8168fresh18残82/reset1793382075。開始0.25/0.75/2pp/cap10、工具準備は元製造/PT/新受入に加算しない。元/v4/v5/工数N-Tnull維持。
 
 ## 現在地・非重複
