@@ -1,5 +1,7 @@
 # Module・Program一覧
 
+2026-10-24追加trace：api.monitoring.ApiStandardMetrics ctor/bind/installと三遅延lambdaを1793→1794/PG-D611/RD171/UI252/SS311351へ結合。APISTD001～013/source86ec58d4f/8592-8600-8602、当新1四100(L21M6C1B7)/全static0/全1821・199owner/五edge0/fields0、三既helper/全旧byte不変。JVM→CPU-FD→owner ack付きGC、STD全未読/partial caller所有/GC先closeは実own SDKと記録port、実endpoint/全451/正式/工数は別未受入。工具BUG1708のmetadata反例修正は製品新13と分離し元exec再利用、旧成功確認再演なし。
+
 ## 2026-10-24 1771～1792追加program対応
 
 全行NK-OPS-001/RD171/UI252/SS311351/411451、主WBS-P018-09/C07参照0加算。source・全method/実行counter・Test ID・元XML/exec・全hashの詳細は各結果と結合manifestへ。通常PG/PT限定で、正式/whole451/実endpoint/全actualHOLDは別未受入。

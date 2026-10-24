@@ -1,5 +1,7 @@
 # API standard metric role内組立 PG/PT仕様
 
+最終結果は1794。新13成功後の旧8594 metadata工具不備を保全・是正し、原13を再実行せず8600同exec四100/全static0・8602全byte-ownerで限定完了。Production86ec58d4f/期待不変更、以下初期UNRUN/8594-8596予定は着手時記録。
+
 NK-OPS-001/RD171/UI252/SS311351/411451、PG-D611/group2020、WBS-P018-09/C07参照0加算。開始fresh36残64/reset1793382075/1-3-6pp/cap10はPG8588/event2020固定。既ApiJvmMetrics/ApiSystemMetrics/ApiGcMetricRegistrationを一つのApiStandardMetrics.bindへ結線する新Main1/Unit1、旧helper/POM/上位不変更。
 
 内部順序はJVM→CPU-FD→GC。非resource二段を先にし、GCは既owner保持ack後だけactivate、callerが借用registryと同GC handleを所有しpartial failure時も自身でcloseする。公開bindの各lambdaは既roleのhelper/同source/mode/ownerを固定captureし、ユーザー選択factoryではない。STANDARDは三action/owner/JMX/sourceを読まない。DEBUGはnonnull全境界/closedを先に検査しforward fail-fast、元Runtime/Error identityを保持、helper自身の暗黙close/rollback/retry/保持fieldなし。実endpointやshutdown authorityは追加しない。
