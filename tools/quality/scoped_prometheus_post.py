@@ -28,6 +28,9 @@ GENERATED={PREFIX+'MqPressureMetricRecorder$Snapshot':['messages','queueBytes','
 ENUM_TYPES=set()
 WITNESS_CASE_PREFIXES=('mqPress008',)
 EXPECTED_SESSION='PG8190-MQ-PROMETHEUS-GAUGE'
+MODULE='api'
+PMD_CONTEXT=()
+PMD_CONTEXT_WITNESS=None
 
 
 def require(value,message):
@@ -119,7 +122,7 @@ def main():
     SLOT.mkdir()
     component=SLOT/'component'
     component.mkdir()
-    target=snapshot/'src/schubert-nk-api/target/classes'
+    target=snapshot/f'src/schubert-nk-{MODULE}/target/classes'
     physical={}
     for name in sorted(NAMES|{PREFIX+'package-info'}):
         destination=component/(name+'.class')
@@ -192,8 +195,25 @@ def main():
         doc=ET.parse(report).getroot()
         findings=doc.findall('.//{*}violation') if name=='pmd' else doc.findall('.//error') if name=='checkstyle' else doc.findall('.//BugInstance')
         missing=doc.findall('.//MissingClass') if name=='spotbugs' else doc.findall('.//{*}error') if name=='pmd' else []
-        static_rows[name]=dict(row,reportSha256=host.sha(report),findings=len(findings),processingErrors=len(missing))
-        require(row['actualExit']==0 and not findings and not missing,'all exact-scope actual static checks zero')
+        actual_rows=[dict(n.attrib,message=' '.join(''.join(n.itertext()).split())) for n in findings]
+        static_rows[name]=dict(row,reportSha256=host.sha(report),findings=len(findings),processingErrors=len(missing),rawFindings=actual_rows)
+        require(row['timedOut'] is False and not missing,'actual static terminal, no timeout or missing/processing issue')
+        if name=='pmd':
+            expected_rows=[r['raw'] for r in PMD_CONTEXT]
+            canonical=lambda rows:sorted(json.dumps(r,sort_keys=True) for r in rows)
+            require(canonical(actual_rows)==canonical(expected_rows) and row['actualExit']==(4 if expected_rows else 0),
+                    'every actual raw finding exactly classified, never suppress unknown findings')
+            if PMD_CONTEXT:
+                require(PMD_CONTEXT_WITNESS is not None and host.sha(host.BASE/PMD_CONTEXT_WITNESS['path'])==PMD_CONTEXT_WITNESS['sha256'],
+                        'full immutable existing individual-rationale witness')
+                prior=json.loads((host.BASE/PMD_CONTEXT_WITNESS['path']).read_bytes())
+                require(prior['actualExit']==0 and prior['unclassified']==prior['actualViolationsOutstanding']==0,
+                        'existing reviewed rationale, not a caller raw-count allowance')
+                require(all(r in prior['staticDispositions'] and source_files.get(r['sourcePath'])==r['sourceSha256']
+                            and r['sourceOrRulesChanged'] is False and r['suppressionAdded'] is False for r in PMD_CONTEXT),
+                        'each actual issue-bearing source and exact per-row reason unchanged')
+        else:
+            require(row['actualExit']==0 and not findings,'all other exact-scope actual static checks zero')
     generated=[]
     for class_name,methods in sorted(GENERATED.items()):
         file=target/(class_name+'.class')
@@ -215,7 +235,8 @@ def main():
         tests=sum(COUNTS.values()),suites=len(COUNTS),sourceFiles=source_files,physicalClasses=physical,
         executableClasses=executable,counters=totals,actualCrcMismatch=0,actualSessions=1,
         coverageUnion=False,customExclusionsAdded=False,staticRaw=static_rows,
-        staticSemantics='NEW_EXACT_DECLARED_EXECUTABLE_SCOPE_AND_CURRENT_SOURCE_ACTUAL_RUNTIME_AUX_BINDINGS_NOT_FULL_API',
+        staticSemantics='NEW_EXACT_DECLARED_EXECUTABLE_SCOPE_AND_CURRENT_SOURCE_ACTUAL_RUNTIME_AUX_BINDINGS_NOT_WHOLE_MODULE_OR_451',
+        classifiedPmdContext=PMD_CONTEXT,classifiedPmdWitness=PMD_CONTEXT_WITNESS,unclassified=0,suppressionsAdded=False,
         generatedTypes=generated,generatedMethodCount=sum(len(m) for m in GENERATED.values()),
         negativeReceiptGuards=rejected,auditStages=audit_stages,auditHelperSha256=host.sha(helper),
         readerLibraryHashes={str(p):host.sha(p) for p in libraries},staticPomSha256=host.sha(pom),
