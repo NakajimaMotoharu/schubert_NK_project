@@ -1,5 +1,7 @@
 # Web/Batch standard metric role内三段組立 PG/PT仕様
 
+最終結果は1796。同sourcee81adb968の正常six/新26全成功/当Main2-lambda四100/全raw静的0/全byte-ownerで限定完了、以下UNRUNは着手時記録。仕様/期待/件数変更なし。
+
 NK-OPS-001/RD171/UI252/SS311351/411451、PG-D612/group2022、主WBS-P018-09/C07参照0加算。開始fresh37残63/reset1793382075/2-4-8pp/cap10はPG8606/event2022固定。WebStandardMetrics/BatchStandardMetrics新Main2/Unit2が各role内既JvmMetrics→SystemMetrics→GcMetricRegistrationを同source/mode/ownerで結線する。固定WEB/BATCH/既mode（Web未知invalid monitoring mode、Batch CONFIG_INVALID）、STD全三action/owner/source/JMX未読、nonnull/closedを先検査、forward fail-fast/元Runtime-Error identity/partial source caller所有、同GC候補はowner ack後だけactivationしcaller先close。新保持field/暗黙close/rollback/retry/権限なし、旧helper/POM/上位不変更。
 
 新WEBSTD001～013、BATCHSTD001～013、各13/1計26/2。oracleは固定三phase順/identity/各既mode/固定role/独立Runtime CPUcount・SDK公開名/typeとcaller event。001実own fresh JVMの三段/標準Gauge・CPU-FD・GC handle一個、GC_CLOSE→REGISTRY_CLOSE、002 STD全未読、003 JVM-SYSTEM-GC各一回/借用未close、004 source/mode/owner/三action null、005空/未知/小文字/空白mode未読、006closedDEBUGは全phase前拒否、007各Runtimeで前段だけ・後段0/primary/owner保持、008各Error同様・正常化0、009実GC owner falseでも前二段と同handle保持/未activation、010retain後ownerRuntime/Error同identity・再試行0、011closedSTD未読/再close0、012二default registry/GC identity隔離・各caller GC先close、013有限64並行/独立三記録port/192calls/join10sec/sleep0。expectedはproductionで生成せず、GC強制/イベント到達/負荷性能を合否にしない。
