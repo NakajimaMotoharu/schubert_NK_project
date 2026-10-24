@@ -1,5 +1,7 @@
 # Module・Program一覧
 
+2026-10-24追加試験trace：toolsのApiMetricPayloadPrecisionTest/WebMetricPayloadPrecisionTestを1802→1803/RD171/UI252/SS311332351へ。APIPIPE/WEBPIPE各001～002、sourcef817b0047/8644-46、新4/2で各StandardMetrics＋実Db/Mq/HttpMetricRecorder＋精度registry＋CustomMetricPayload接続を固定1ns/1.5秒CDF vectorで確認。Main追加変更/新coverage-static資格0、正常8632は同input byteで再演0、旧26/4確認再演なし。元環境/command/source/tool/deps/XML/exec-session/全hashはmanifest、正式/actual経路/工数は未受入。
+
 2026-10-24追加trace：api.monitoring.ApiCustomMetricPayload/web.monitoring.WebCustomMetricPayloadのctor/render・READY_PREFIXを1800→1801/PG-D613/RD171/UI252/SS311342351へ。APIPAY/WEBPAY各001～013/sourcef817b0047/8634-36-38、実2四100(L17M4C2B11)/static0/全1825・207owner/五edge0/fields0-prefix各1/旧管理server同byte。ready flagはcaller供給・権限なし、STD supplier0/DEBUG一回借用・primary伝播・owner保持、正式endpoint/標準text/fullcatalogは別未受入、旧成功確認再演なし。
 
 2026-10-24追加試験trace：tools/architectureのApiMetricCoexistenceTest/WebMetricCoexistenceTest/BatchMetricCoexistenceTestを1797→1798/RD171/UI252/SS351/各StandardMetrics＋ApiMetricScrape/WebMetricScrape/BatchMetricTextへ。APICOEX/WEBCOEX/BATCHCOEX各001～002、新6/3/sourcee81adb968/8620-22、各実registry両順とfull literal wire、STD空/GC caller先closeを確認。Production Main追加変更0・新coverage/static資格0、正常8608同input byteで再演0、前群26/API13確認再演なし。元command/実env/全source-tool-deps/XML/exec-session/全hashはmanifestに結合、正式/actual endpoint/工数は未受入。

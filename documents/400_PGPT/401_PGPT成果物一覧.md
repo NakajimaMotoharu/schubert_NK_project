@@ -1,5 +1,7 @@
 # PGPT成果物一覧・進捗
 
+2026-10-24最新：1802/1803、Productionf817b0047不変更、新4/2でready/標準SDK/実DB-MQ-HTTP duration recorderの同registry接続・両順・1ns/1.5秒sum-count-inclusiveCDFを確認。8646で原source/XML/log/exec-session1/実env・七metadata反例へ結合、新Main/coverage/static資格0/正常再build0。1759以降技術401ID/Main24は異sourceで正式/coverage合算0、formal1964-53/原190新受入0/工数null/全actualHOLD/whole451/QA051final維持、次Prometheus静的parserの条件確認へ継続。
+
 2026-10-24最新：1800/1801/pure API-Web legacyReady+approved custom payload sourcef817b0047、新26/2・実2四100(L17M4C2B11)/静的0/全1825・207owner/五edge0/fields0-prefix各1/legacy管理server不変更を限定確認、新BUG0。STD supplier0/DEBUG一回・primary/owner保持/legacy字句を検証、actual endpointではない。1759以降技術397ID/Main24は異sourceで正式/coverage合算0、formal1964-53/原190新受入0/工数null/全actualHOLD/whole451/QA051final維持。次payload/標準SDK/精度duration接続のsafe PTへ継続。
 
 2026-10-24最新：1797/1798、Productione81adb968不変更、新6/3で標準SDK/custom同registryの両初期化順・固定全文golden/供給更新/STD空/SDK名排除/GC先closeを確認。8622で原source/XML/log/exec-session1/実env・七metadata反例を独立結合、新Main0/新coverage-static資格0/正常再build0。1759以降技術371ID/Main22は異sourceで正式/coverage合算0、formal1964-53/原190新受入0/工数null/全actualHOLD/whole451/QA051final維持。次C07の現artifact/未接続を限定照合して具体safe PG/PTへ継続。
