@@ -1,5 +1,7 @@
 # Module・Program一覧
 
+2026-10-25追加trace：PG-D624/1833-34、source3359b1489、BatchMetricText.scrape三引数→BATCHFULL001～012新12＋必要BATCHTEXT旧24=actual36/1。8910正常six→8912原8034014d→8914原68b7069b一Main四100 L58M9C1B34/静的三0・CRC0/session1→8916原8f022a7a全1834/旧1833-原1665同byte/229owner/五edge0/旧二引数・Test24本文保持/五protocol反例。8905原03c969fb fixture原assert保持/旧TWR二反例、8917原12a44e17実constant guard三反例、BUG1722-23/YKT1473-74元失敗/限定closeと全hash1834。borrowed custom→standardだけでactual Batch/endpoint/全451は未受入。
+
 2026-10-25追加trace：PG-D623/1829-30、source28befbf2c、WebDbPoolMetricBinding.prepareContext/WebNativeRuntime nullable所有配線→WEBPOOLB011～015/WEBMHTTP021新6＋必要旧30=actual36/2。8868正常six→8870原3ac2644d→8871原c1ef8c75三raw理由/currentXML→8872原177a2494三Main四100 L58M11C3B8/CS-SB0/PMD raw3評価済/未分類0→8874原8dfa48d3全1834/二変更/229owner/五edge0/旧全source・Test本文保持/七protocol二owner反例。caller8873原8fc80c4c静的1/PMD未分類13/CS-SB0、動的/native/coverage UNRUN_HOLD/null、元30秒/phase cursor保持はPG source確認のみ。全hash1830/新BUG0、正式/全451は別未完。
 
 2026-10-25追加trace：PG-D622/1827-28、source0f065c63f、ApiDbPoolMetricBinding.prepareContextとApiProcessMain所有配線→新APIPOOLB011～015/APIMHTTP021六件＋必要旧30=actual36/2。8854正常six→8856原bc2fc81f→8857原ed206b2c三raw理由/currentXML→8858原05b78b6b三Main四100 L58M11C3B8/CS-SB0/PMD raw3評価済/未分類0→8862原0ec61b72全1834/二変更/228owner/五edge0・七protocol二owner反例/旧本文保持。caller8859原d230ac88は静的exit1/PMD未分類2・CS-SB0、PG/compileのみで動的/native・coverageはUNRUN_HOLD/null。BUG1720 tool限定close/全hash1828、実経路/全451・正式は未完。
