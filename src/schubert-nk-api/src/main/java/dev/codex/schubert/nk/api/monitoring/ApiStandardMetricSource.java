@@ -14,6 +14,7 @@ import java.util.function.Supplier;
  * registry access, endpoint, scheduler, health authority or implicit rollback/retry.
  */
 public final class ApiStandardMetricSource implements AutoCloseable {
+  private final Object lock = new Object();
   private final Supplier<? extends PrometheusMeterRegistry> factory;
   private final BiConsumer<PrometheusMeterRegistry, Predicate<? super JvmGcMetrics>> registration;
   private Optional<PrometheusMeterRegistry> ownedRegistry = Optional.empty();
@@ -38,29 +39,35 @@ public final class ApiStandardMetricSource implements AutoCloseable {
   }
 
   /** Single explicit initialization. Partial resources remain held after any failure. */
-  public synchronized void bind(String mode) {
-    if (!detailed(mode)) return;
-    if (closed || attempted) throw new IllegalStateException("standard metric binding unavailable");
-    attempted = true;
-    ownedRegistry = Optional.of(Objects.requireNonNull(factory.get(), "standard metric registry"));
-    var source = ownedRegistry.orElseThrow();
-    if (source.isClosed()) throw new IllegalStateException("standard metric registry closed");
-    registration.accept(
-        source,
-        resource -> {
-          ownedGc = Optional.of(Objects.requireNonNull(resource, "standard GC resource"));
-          return true;
-        });
-    bound = true;
+  public void bind(String mode) {
+    synchronized (lock) {
+      if (!detailed(mode)) return;
+      if (closed || attempted)
+        throw new IllegalStateException("standard metric binding unavailable");
+      attempted = true;
+      ownedRegistry =
+          Optional.of(Objects.requireNonNull(factory.get(), "standard metric registry"));
+      var source = ownedRegistry.orElseThrow();
+      if (source.isClosed()) throw new IllegalStateException("standard metric registry closed");
+      registration.accept(
+          source,
+          resource -> {
+            ownedGc = Optional.of(Objects.requireNonNull(resource, "standard GC resource"));
+            return true;
+          });
+      bound = true;
+    }
   }
 
   /**
    * Only the fixed SDK binders can register; no supplied IDs/tags/text or mutable registry getter.
    */
-  public synchronized String scrape(String mode) {
-    if (!detailed(mode)) return "";
-    if (closed || !bound) throw new IllegalStateException("standard metric source unavailable");
-    return ownedRegistry.orElseThrow().scrape();
+  public String scrape(String mode) {
+    synchronized (lock) {
+      if (!detailed(mode)) return "";
+      if (closed || !bound) throw new IllegalStateException("standard metric source unavailable");
+      return ownedRegistry.orElseThrow().scrape();
+    }
   }
 
   private static boolean detailed(String mode) {
@@ -73,11 +80,13 @@ public final class ApiStandardMetricSource implements AutoCloseable {
 
   /** Explicit caller close: GC before registry; failed close keeps ownership and is not success. */
   @Override
-  public synchronized void close() {
-    if (closed) return;
-    bound = false;
-    ownedGc.ifPresent(JvmGcMetrics::close);
-    ownedRegistry.ifPresent(PrometheusMeterRegistry::close);
-    closed = true;
+  public void close() {
+    synchronized (lock) {
+      if (closed) return;
+      bound = false;
+      ownedGc.ifPresent(JvmGcMetrics::close);
+      ownedRegistry.ifPresent(PrometheusMeterRegistry::close);
+      closed = true;
+    }
   }
 }
