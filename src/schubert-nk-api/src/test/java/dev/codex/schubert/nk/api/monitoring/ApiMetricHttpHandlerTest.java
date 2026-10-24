@@ -376,6 +376,49 @@ final class ApiMetricHttpHandlerTest {
     }
   }
 
+  @Test
+  void apimhttp020TypedBorrowedPoolRefreshesIntoActualResponseWithoutControlOperations()
+      throws IOException {
+    var f = new DbPoolMetricObservationTest.Fixture();
+    f.active = 3;
+    f.idle = 5;
+    f.pending = 2;
+    f.maximum = 8;
+    try (var context =
+        new ApiMetricContext<ApiDbPoolMetricBinding>(
+            "DEBUG",
+            registry -> new ApiDbPoolMetricBinding(f.pool(), f.config(), registry, "DEBUG"),
+            ApiDbPoolMetricBinding::refresh)) {
+      context.initialize();
+      assertTrue(f.calls.isEmpty());
+      var handler = new ApiMetricHttpHandler(context, () -> true);
+      var first = new Exchange("GET", PATH);
+      handler.handle(first);
+      String body = first.output.toString(StandardCharsets.UTF_8);
+      assertTrue(body.startsWith(READY + "1\n"));
+      assertTrue(body.contains("nk_db_pool_connections{service=\"API\",state=\"active\"} 3.0\n"));
+      assertTrue(body.contains("nk_db_pool_connections{service=\"API\",state=\"max\"} 8.0\n"));
+      assertEquals(200, first.status);
+      assertEquals(body.getBytes(StandardCharsets.UTF_8).length, first.length);
+      assertEquals(METRIC, first.headers.getFirst("Content-Type"));
+      assertEquals("no-store", first.headers.getFirst("Cache-Control"));
+      assertEquals(1, first.closeCalls);
+      f.complete();
+      f.calls.clear();
+      f.maximum = 0;
+      var missing = new Exchange("GET", PATH);
+      handler.handle(missing);
+      String missingText = missing.output.toString(StandardCharsets.UTF_8);
+      assertTrue(
+          missingText.contains("nk_db_pool_connections{service=\"API\",state=\"active\"} NaN\n"));
+      assertTrue(context.bindings().orElseThrow().snapshot().isEmpty());
+      assertEquals(200, missing.status);
+      assertEquals(1, missing.closeCalls);
+      f.complete();
+    }
+    f.complete();
+  }
+
   private static ApiMetricContext<String> standard() {
     var context =
         new ApiMetricContext<String>(

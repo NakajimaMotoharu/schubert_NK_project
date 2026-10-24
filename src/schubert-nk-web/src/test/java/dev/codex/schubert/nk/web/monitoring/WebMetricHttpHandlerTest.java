@@ -376,6 +376,49 @@ final class WebMetricHttpHandlerTest {
     }
   }
 
+  @Test
+  void webmhttp020TypedBorrowedPoolRefreshesIntoActualResponseWithoutControlOperations()
+      throws IOException {
+    var f = new WebDbPoolMetricObservationTest.Fixture();
+    f.active = 1;
+    f.idle = 1;
+    f.pending = 0;
+    f.maximum = 2;
+    try (var context =
+        new WebMetricContext<WebDbPoolMetricBinding>(
+            "DEBUG",
+            registry -> new WebDbPoolMetricBinding(f.pool(), f.config(), registry, "DEBUG"),
+            WebDbPoolMetricBinding::refresh)) {
+      context.initialize();
+      assertTrue(f.calls.isEmpty());
+      var handler = new WebMetricHttpHandler(context, () -> true);
+      var first = new Exchange("GET", PATH);
+      handler.handle(first);
+      String body = first.output.toString(StandardCharsets.UTF_8);
+      assertTrue(body.startsWith(READY + "1\n"));
+      assertTrue(body.contains("nk_db_pool_connections{service=\"WEB\",state=\"active\"} 1.0\n"));
+      assertTrue(body.contains("nk_db_pool_connections{service=\"WEB\",state=\"max\"} 2.0\n"));
+      assertEquals(200, first.status);
+      assertEquals(body.getBytes(StandardCharsets.UTF_8).length, first.length);
+      assertEquals(METRIC, first.headers.getFirst("Content-Type"));
+      assertEquals("no-store", first.headers.getFirst("Cache-Control"));
+      assertEquals(1, first.closeCalls);
+      f.complete();
+      f.calls.clear();
+      f.maximum = 0;
+      var missing = new Exchange("GET", PATH);
+      handler.handle(missing);
+      String missingText = missing.output.toString(StandardCharsets.UTF_8);
+      assertTrue(
+          missingText.contains("nk_db_pool_connections{service=\"WEB\",state=\"active\"} NaN\n"));
+      assertTrue(context.bindings().orElseThrow().snapshot().isEmpty());
+      assertEquals(200, missing.status);
+      assertEquals(1, missing.closeCalls);
+      f.complete();
+    }
+    f.complete();
+  }
+
   private static WebMetricContext<String> standard() {
     var context =
         new WebMetricContext<String>(
