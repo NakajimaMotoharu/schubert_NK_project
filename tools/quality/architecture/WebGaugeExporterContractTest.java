@@ -204,7 +204,17 @@ class WebGaugeExporterContractTest {
                   String result = b.text();
                   catalog(result);
                   assertEquals(3, value(result, POOL, "state", "active"));
+                  assertEquals(5, value(result, POOL, "state", "idle"));
+                  assertEquals(2, value(result, POOL, "state", "pending"));
+                  assertEquals(8, value(result, POOL, "state", "max"));
+                  assertEquals(2, value(result, ROWS, "status", "PENDING"));
+                  assertEquals(3, value(result, ROWS, "status", "SENT"));
+                  assertEquals(0, value(result, ROWS, "status", "ERROR"));
                   assertEquals(1.5, value(result, AGE, "status", "PENDING"));
+                  assertEquals(2, value(result, AGE, "status", "SENT"));
+                  assertEquals(0, value(result, AGE, "status", "ERROR"));
+                  assertEquals(2, value(result, STREAMS, "media_type", "AUDIO"));
+                  assertEquals(0, value(result, STREAMS, "media_type", "VIDEO"));
                   assertEquals(7, value(result, STREAMS, "media_type", "MUSIC"));
                   assertEquals(0, result.lines().filter(line -> line.endsWith("} NaN")).count());
                 }));
