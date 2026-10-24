@@ -84,7 +84,8 @@ public final class OwnedApiObservationWorker {
         } catch (SQLException temporary) {
           TemporaryInfrastructureException.preserveFatal(temporary);
         }
-        if (!stopping.get()) wake.tryAcquire(1, TimeUnit.SECONDS);
+        if (!stopping.get() && wake.tryAcquire(1, TimeUnit.SECONDS) && !stopping.get())
+          throw new IllegalStateException("observation signal without stop");
       }
     } catch (InterruptedException interrupted) {
       Thread.currentThread().interrupt();
@@ -135,9 +136,10 @@ public final class OwnedApiObservationWorker {
           if (elapsed < 0 || remaining <= 0) throw new IOException(UNCONFIRMED);
           try {
             if (starting.get()) {
-              startReturned.await(remaining, TimeUnit.NANOSECONDS);
+              if (!startReturned.await(remaining, TimeUnit.NANOSECONDS))
+                throw new IOException(UNCONFIRMED);
             } else {
-              worker.join(Duration.ofNanos(remaining));
+              if (!worker.join(Duration.ofNanos(remaining))) throw new IOException(UNCONFIRMED);
             }
           } catch (InterruptedException interruption) {
             interrupted = true;

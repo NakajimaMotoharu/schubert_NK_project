@@ -558,7 +558,8 @@ final class OwnedApiObservationWorkerTest {
                       limits.getAndIncrement() == 0
                           ? TimeUnit.MILLISECONDS.toNanos(2)
                           : TimeUnit.SECONDS.toNanos(50)));
-      assertTrue(clock.get() >= 3);
+      assertEquals(2, clock.get());
+      assertEquals(2, limits.get());
       assertTrue(f.actor.get().isAlive());
       f.releaseAll();
     }
@@ -892,6 +893,15 @@ final class OwnedApiObservationWorkerTest {
         assertSame(primary, f.failures.peek());
         assertSame(primary, f.uncaught.get());
       }
+    try (var f = new Fixture()) {
+      // A private stop notification without a stop request is not a successful wake.
+      f.signal.release();
+      f.worker.start();
+      await(f.notified);
+      f.worker.awaitStopped(budget());
+      assertInstanceOf(IllegalStateException.class, f.failures.peek());
+      assertSame(f.failures.peek(), f.uncaught.get());
+    }
   }
 
   @Test
