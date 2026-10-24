@@ -29,8 +29,10 @@ public final class ApiReadOnlyObservationAttempt {
   private final List<Throwable> failures = new ArrayList<>(4);
   private final AtomicBoolean unconfirmed = new AtomicBoolean();
   private @Nullable Connection retained;
-  private @Nullable Error primaryFatal;
   private boolean attempted;
+  private boolean transactionAttempted;
+  private boolean rollbackAttempted;
+  private boolean closeAttempted;
 
   /** Resource-free: prepare all ports/state before checkout, never mutate or close the pool. */
   public ApiReadOnlyObservationAttempt(
@@ -49,8 +51,6 @@ public final class ApiReadOnlyObservationAttempt {
     synchronized (lock) {
       if (attempted) throw new IllegalStateException("observation attempt already used");
       attempted = true;
-      boolean transactionAttempted = false;
-      @Nullable Snapshot result = null;
       try {
         @Nullable Connection supplied = pool.getConnection();
         if (supplied == null) throw new SQLException("observation connection unavailable");
@@ -61,60 +61,58 @@ public final class ApiReadOnlyObservationAttempt {
         supplied.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
         transactionAttempted = true;
         supplied.setAutoCommit(false);
-        result =
+        Snapshot result =
             repository.read(supplied, Objects.requireNonNull(clock.instant(), "observation time"));
-      } catch (SQLException | RuntimeException | Error failure) {
-        recordFailure(failure);
+        rollbackAttempted = true;
+        supplied.rollback();
+        closeOwned(supplied);
+        return result;
+      } catch (SQLException | RuntimeException | Error primary) {
+        failures.add(primary);
+        cleanup();
+        for (Throwable secondary : failures)
+          TemporaryInfrastructureException.attachSecondary(primary, secondary);
+        TemporaryInfrastructureException.preserveFatal(primary);
+        throw primary;
       }
-      @Nullable Connection owned = retained;
-      if (owned != null) {
-        if (transactionAttempted) {
-          try {
-            owned.rollback();
-          } catch (SQLException | RuntimeException | Error rollback) {
-            recordFailure(rollback);
-          }
-        }
-        try {
-          owned.close();
-          retained = null;
-        } catch (SQLException | RuntimeException | Error close) {
-          // Keep the exact Connection and failure frame; no implicit reclose/recheckout/clean
-          // return.
-          recordFailure(close);
-          unconfirmed.set(true);
-          try {
-            onUnconfirmed.accept(close);
-          } catch (RuntimeException | Error diagnostic) {
-            recordFailure(diagnostic);
-          }
-        }
-      }
-      rethrowFailure();
-      return Objects.requireNonNull(result, "successful readonly observation");
     }
   }
 
-  private void recordFailure(Throwable failure) {
-    if (failures.isEmpty() && failure instanceof Error fatal) primaryFatal = fatal;
-    failures.add(failure);
+  private void cleanup() {
+    @Nullable Connection owned = retained;
+    if (owned == null) return;
+    if (transactionAttempted && !rollbackAttempted) {
+      rollbackAttempted = true;
+      try {
+        owned.rollback();
+      } catch (SQLException | RuntimeException | Error rollback) {
+        failures.add(rollback);
+      }
+    }
+    if (!closeAttempted) {
+      try {
+        closeOwned(owned);
+      } catch (SQLException | RuntimeException | Error close) {
+        failures.add(close);
+      }
+    }
   }
 
-  private void rethrowFailure() throws SQLException {
-    if (failures.isEmpty()) return;
-    Throwable primary = failures.getFirst();
-    for (Throwable secondary : failures)
-      TemporaryInfrastructureException.attachSecondary(primary, secondary);
-    if (primary instanceof SQLException sql) {
-      TemporaryInfrastructureException.preserveFatal(sql);
-      throw sql;
+  private void closeOwned(Connection owned) throws SQLException {
+    closeAttempted = true;
+    try {
+      owned.close();
+      retained = null;
+    } catch (SQLException | RuntimeException | Error close) {
+      // Keep the exact Connection and failure frame; no implicit reclose/recheckout/clean return.
+      unconfirmed.set(true);
+      try {
+        onUnconfirmed.accept(close);
+      } catch (RuntimeException | Error diagnostic) {
+        failures.add(diagnostic);
+      }
+      throw close;
     }
-    if (primary instanceof RuntimeException runtime) {
-      TemporaryInfrastructureException.preserveFatal(runtime);
-      throw runtime;
-    }
-    // The remaining captured domain is the typed first Error, retained at capture time.
-    throw Objects.requireNonNull(primaryFatal, "captured fatal");
   }
 
   /** Nonblocking status only; no resource, provider text or lifecycle handle is exposed. */
