@@ -1,5 +1,7 @@
 # PGPT成果物一覧・進捗
 
+2026-10-25最新：1854/1855/source2ed81b14b、SDK非依存Outbox cache/借用RO repository read後publish・missing後の遅延公開fenceを新20＋必要16=36/2で確認。全二Main L25M5C2B7未網羅0（Entry実branch0/0=NA含む）/CS-SB0・PMD1個別判断/全1838・237owner/五arch0。実producer/Pool/Clock/nativeは未供給HOLD。技術Java690ID/37Main（＋20/2）とconfig静的5、正式1964PT/53scope・原190新受入0/工数nullを区別。G07未分類8379/QA051final/全actualHOLD、通常継続を維持する。
+
 2026-10-25最新：1852/1853/source73d、API pool＋immutable Outbox metadata/当HTTP経路を新17＋必要21=38/2で確認、二Main四100-static0/全1836・235owner/五arch0。実RO収集/worker/nativeは未供給HOLD・全C07未受入、default六NaNを0にしない。技術Java670ID/35Main（＋17/1、異sourceの全体資格ではない）とconfig静的5、正式1964PT/53scope・原190新受入0/工数nullを別計数。G07未分類8,379/QA051final/全actualHOLD維持、工具BUG1729/1730の失敗/限定是正も1853に保存し456/460から通常継続する。
 
 2026-10-25最新：1850/1851、sourcef690fa6be/C01template indentだけ是正し全token保存、当source static5/普通3成功・正常六build/全1835Main byte不変。実whole class coverage L24/133 M2/23 C1/1 B22/100で全四100未達、BUG1728/YKT1479は書式scope限定close/全C01未受入。G07は31,707根拠分類/8,379未分類を保持。技術Java653ID/34Mainと静的config新5を別計数、正式1964-53/原190新受入0/工数null/QA051final/全actualHOLD不変更、456/460を現況入口とする。
