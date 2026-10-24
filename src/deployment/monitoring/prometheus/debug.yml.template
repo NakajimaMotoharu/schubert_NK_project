@@ -1,0 +1,32 @@
+{
+  "global": {
+    "scrape_interval": "15s",
+    "scrape_timeout": "5s"
+  },
+  "scrape_configs": [
+    {
+      "job_name": "schubert-nk-web",
+      "metrics_path": "/actuator/prometheus",
+      "scheme": "http",
+      "follow_redirects": false,
+      "proxy_from_environment": false,
+      "honor_labels": false,
+      "honor_timestamps": false,
+      "static_configs": [
+        {"targets": ["127.0.0.1:8081"]}
+      ]
+    },
+    {
+      "job_name": "schubert-nk-api",
+      "metrics_path": "/actuator/prometheus",
+      "scheme": "http",
+      "follow_redirects": false,
+      "proxy_from_environment": false,
+      "honor_labels": false,
+      "honor_timestamps": false,
+      "static_configs": [
+        {"targets": ["127.0.0.1:8091"]}
+      ]
+    }
+  ]
+}
