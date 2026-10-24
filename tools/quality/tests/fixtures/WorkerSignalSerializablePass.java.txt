@@ -1,0 +1,8 @@
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.Semaphore;
+final class WorkerSignalSerializableCanary extends Semaphore {
+  private static final long serialVersionUID = 1L;
+  private final transient CountDownLatch waiting = new CountDownLatch(1);
+  private transient Runnable callback = () -> {};
+  WorkerSignalSerializableCanary() { super(0); }
+}

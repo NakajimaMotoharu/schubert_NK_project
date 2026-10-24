@@ -1,5 +1,7 @@
 # Module・Program一覧
 
+2026-10-25追加trace：NK-OPS-001/PG-D635/1864-65、OwnedApiObservationWorker ctor/start/run/requestStop/awaitStopped→OBSOWN001～044。RD171/UI252/SS311332342351、sourcefdc229c9a。9132v4 normal六→9134v2原af479ed6 actual44/1→9136原24632ab8全一MainL87M7C1B46四100/CS-SB0・PMD20個別判断→9138原68dd7944全1841/旧1840同byte/244owner/五arch0。元予算/一回start/UNKNOWN永久保持・私有Thread回収を確認し、actual caller/Pool/SDK/停止残期限/native/全451は別未受入HOLD。障害4件/全横展開/独立compiler・算術canaryは1865。
+
 2026-10-25追加trace：NK-OPS-001/PG-D634/1862-63、ApiOutboxObservationPump ctor/create/sampleIfDue/requestStop/isQuiescent/get→OUTBOXPUMP001～032。RD171/UI252/SS311332342351、sourcef82e3e1ee。9118v2 normal六→9120原0258aba1新32/1→9122原d1393a7f全一MainL50M6C1B31四100/CS-SB0・PMD3個別判断→9124原e24df088全1840/旧1839同byte/242owner/五arch0/14metadata反例。v1/v2Main同byte・Unit差だけ、旧buildはPT0/転用0。actual worker/caller/Pool-stop/native/全451は別未受入HOLD。
 
 2026-10-25追加trace：NK-OPS-001/PG-D633/1860-61、ApiOutboxObservationSource.observe(ApiReadOnlyObservationAttempt)/get/missing/既overload/Entry→新OUTBOXPUBLISH001～014・必要OUTBOXSOURCE001～020。RD171/UI252/SS311332342351、sourcefa29009e4。9104 normal六→9106原76dfef76 actual34/2→9108原b3f6ed29全二MainL33M6C2B11四100/CS-SB0・PMD2個別判断→9110原0e74d487全1839/旧1838同byte/240owner/五arch0/旧overload完全保持/12metadata反例。実producer/caller/native/全451は別未受入HOLD、新BUG0。

@@ -1,5 +1,7 @@
 # PGPT成果物一覧・進捗
 
+2026-10-25最新：1864/1865/sourcefdc229c9a、新OwnedApiObservationWorker44/1を普通私有JVM/fake JDBCで検証、対象一MainL87M7C1B46四100/CS-SB0・PMD20個別判断/全1841・244owner・五arch0。BUG1732～35/YKT1483～86の元失敗/修正/再発防止を分離保存。技術Java812ID/40Main（＋44/1）とconfig静的5、正式1964PT/53scope・原190新受入0/工数nullを区別。次同API caller/残期限/Pool寿命接続の許可PG/PT、実API/DB/VM/native/全451/QA051final/G078379は未受入HOLD。
+
 2026-10-25最新：1862/1863/sourcef82e3e1ee、Thread/Scheduler非取得の有限sampling pumpを新32/1で検証、全一MainL50M6C1B31未網羅0/CS-SB0・PMD3個別判断/全1840・242owner・五arch0。停止/UNKNOWNはmissing・保持・quiescent=false/次取得禁止、worker/Pool解放の実証とは分離。技術Java768ID/39Main（＋32/1）とconfig静的5、正式1964PT/53scope・原190新受入0/工数nullを区別。次fake観測の所有worker PG/PT、実DB/VM/native/全451/QA051final/G078379は未受入HOLDのまま通常継続。
 
 2026-10-25最新：1860/1861/sourcefa29009e4、cleanup-confirmed readonly attempt→cache公開を新14＋必要20=34/2で検証、全二MainL33M6C2B11未網羅0/CS-SB0・PMD2個別判断/全1839・240owner・五arch0/旧overload本文完全保持。技術Java736ID/38Main（＋14/0）とconfig静的5、正式1964PT/53scope・原190新受入0/工数nullを区別。実producer/caller/DB/VM/native/全451/QA051final/G078379は未受入、次同経路の有限producer所有PG/PTへ通常継続する。
