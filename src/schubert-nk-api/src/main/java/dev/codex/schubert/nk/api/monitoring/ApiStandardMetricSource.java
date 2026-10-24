@@ -75,6 +75,7 @@ public final class ApiStandardMetricSource implements AutoCloseable {
   @Override
   public synchronized void close() {
     if (closed) return;
+    bound = false;
     ownedGc.ifPresent(JvmGcMetrics::close);
     ownedRegistry.ifPresent(PrometheusMeterRegistry::close);
     closed = true;

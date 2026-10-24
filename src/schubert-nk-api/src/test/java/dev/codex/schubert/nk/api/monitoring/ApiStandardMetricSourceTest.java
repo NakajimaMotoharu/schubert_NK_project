@@ -218,6 +218,7 @@ class ApiStandardMetricSourceTest {
     var owner = new ApiStandardMetricSource(() -> source, (value, ack) -> assertTrue(ack.test(gc)));
     owner.bind("DEBUG");
     assertSame(failure, assertThrows(IllegalStateException.class, owner::close));
+    assertThrows(IllegalStateException.class, () -> owner.scrape("DEBUG"));
     assertFalse(source.isClosed());
     assertEquals(List.of("gc"), order);
     gc.failure = Optional.empty();
@@ -234,6 +235,7 @@ class ApiStandardMetricSourceTest {
     var owner = new ApiStandardMetricSource(() -> source, (value, ack) -> {});
     owner.bind("DEBUG");
     assertSame(failure, assertThrows(IllegalStateException.class, owner::close));
+    assertThrows(IllegalStateException.class, () -> owner.scrape("DEBUG"));
     assertFalse(source.isClosed());
     source.failure = Optional.empty();
     owner.close();
