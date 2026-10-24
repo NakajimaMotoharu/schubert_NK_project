@@ -23,7 +23,7 @@ ApiJvmMetricsはAPI固定service=API tagで上記四標準binderを借用registr
 
 動的値のexpectedをproduction factoryや同SDK binderから生成せず、固定literal・独立Java公開management API/port記録を用いる。対象はfresh own host JVM内だけ、他process/実VM/Root/DB/鍵/Backup/permission/ネットワーク/サービス/拒否再試行0。SDK依存byteは既normal/descriptor/pinの同一品、入手/更新なし。
 
-新normal六/NullAway/format→original14（一exec）→新Main1実line-method-class-branch100/PMD-CS-SB-missing0/CRC0/session1→全physical/owner/role/新class fields0→1780。command/環境/OS-JDK/branch/source/時刻/exit/input/expected/actual/XML/exec/counter/static/log/hash/BUG-YKTを新only公開manifestへ。既成功の確認再演/別source coverage合算なし、実装済み違反は修正前915/916へ。現在PT/coverage UNRUN。
+新normal六/NullAway/format→original14（一exec）→新Main1実line-method-class-branch100/PMD-CS-SB-missing0/CRC0/session1→全physical/owner/role/新class instance fields0（固定count定数1はresource保持ではない）→1780。BUG1704/YKT1455の元8474 testCompile warning1/PT0 UNRUN・8475限定PMD診断1/未資格を保全、960756223で途中close fixtureを明示finally所有・固定数をnamed constantへ是正する。初稿のfields0は保持するinstance stateが0という契約へ明確化し、非実行のcompile-time定数をcoverageから除外する設定は追加しない。command/環境/OS-JDK/branch/source/時刻/exit/input/expected/actual/XML/exec/counter/static/log/hash/BUG-YKTを新only公開manifestへ。既成功の確認再演/別source coverage合算なし、実装済み違反は修正前915/916へ。現在PT/coverage UNRUN。
 
 正式1964-53/原190新受入0/工数null/QA051final/PTALT0/whole451/CHR/F03Root11/actual VM-Root-DB-native-Backup-鍵-intent-permit-配備/拒否未特定HOLD、元-v4-v5/欠測不変更。GC/CPU/FD/標準text/actualendpointは別未完、通常区切り停止なし。
 
