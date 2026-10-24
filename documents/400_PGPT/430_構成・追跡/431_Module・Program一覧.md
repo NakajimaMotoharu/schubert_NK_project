@@ -1,5 +1,7 @@
 # Module・Program一覧
 
+2026-10-24追加trace：実Prometheus ordinary PTはWeb四Recorder＝1741/1742・新8＋既42=50/7・実15、API MQ圧力＝1743/1744・新6＋既8=14/2・実2、API rows/age/jobs/pool＝1745/1746・新8＋既40=48/6・実11。各Program/nested/Test/SS351/RD171/UI252は各結果表/manifestへ一意結合、全same Production Java/POM e196byte・別execのcounter合算0。新製品Main/正式受入増0、実owner/source/endpoint/DB/Root/Timer等HOLDを保持。
+
 2026-10-24最新：1739 SDK依存準備/1740結果、source69204dd13/公式registry1.17.1/client1.7.0新10Jar＋既5pin、全checksum/依存directgraph/1824class名重複0・新8173独立7反例/静的0。BUG1688prefixsource guardを00581f4b7でfull40へ是正/旧post保持。工具準備のみ・製品PT/製造/正式受入0、Production Java/POM/旧M2不変更・target init/実操作0-HOLD。次四Web Recorderのin-memory実SDK Gauge/Counter適合性を別ordinary PTへ。
 
 2026-10-24最新：1737公式Prometheus構文parser仕様/1738結果、tool-onlyLTS3.13.5/SHA固定/実version0、source941bd89d1/公式syntax6ID（実5process、DEBUG0/STD0/独立負例1×3）/元receipt独立post六改変拒否・静的0。1731の未実施公式schema工程だけを更新、元Java/POM/profile不変更/成功確認再演0・実daemon/VM/DB/target通信0。実endpoint/exporter/mode/容量/全451/正式1964-53/原190新受入0/工数未受入。
