@@ -31,6 +31,7 @@ FIXTURE_SHA='1777c4710e6448bdb459d5fd2beccf389f57ec4ea9effdca171cdbd6888d5331'
 COUNTS={}
 TEST_ROOT=host.ROOT/'src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring'
 FIXTURES={}
+EXTRA_TEST_SOURCES=()
 ENV={'PATH':str(host.TC/'jdk-25.0.4/bin')+':/usr/bin:/bin','LANG':'C.UTF-8'}
 
 
@@ -97,7 +98,7 @@ def main():
             'existing compile annotation pin')
     inputs=list(dict.fromkeys([*jars,*external,*[Path(p) for p in sdk_jars],LAUNCHER,annotation]))
     selected=[TEST_ROOT/(n+'.java') for n in COUNTS if n!=NEW_TEST.stem]
-    test_sources=[*selected,NEW_TEST,HELPER]
+    test_sources=[*selected,NEW_TEST,HELPER,*EXTRA_TEST_SOURCES]
     require(all(p.is_file() for p in test_sources),'all declared fresh test sources and launcher')
     require(COUNTS and NEW_TEST.stem in COUNTS and all(type(n) is int and n>0 for n in COUNTS.values()),
             'caller freezes nonempty exact test count matrix')
