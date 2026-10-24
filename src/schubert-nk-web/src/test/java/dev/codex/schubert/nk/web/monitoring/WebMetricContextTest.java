@@ -811,12 +811,12 @@ class WebMetricContextTest {
         assertEquals(
             UNCONFIRMED, assertThrows(IllegalStateException.class, context::close).getMessage());
         assertFalse(observed.get().isClosed());
-        assertThrows(IllegalStateException.class, context::bindings);
       } finally {
         proceed.countDown();
       }
       var failure = assertThrows(ExecutionException.class, () -> future.get(30, TimeUnit.SECONDS));
       assertEquals(IllegalStateException.class, failure.getCause().getClass());
+      assertThrows(IllegalStateException.class, context::bindings);
       assertFalse(observed.get().isClosed());
     } finally {
       proceed.countDown();
