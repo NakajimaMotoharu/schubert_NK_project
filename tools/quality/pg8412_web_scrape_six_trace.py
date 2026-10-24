@@ -3,9 +3,9 @@ import datetime
 import json
 import os
 from pathlib import Path
-import re
 import subprocess
 import pg8388_metric_identity_six_trace as common
+import web_metric_policy_field_contract as field_contract
 from host_tool_invocation import capture, verify
 
 host, architecture, steps = common.host, common.architecture, common.steps
@@ -68,11 +68,11 @@ def main():
     steps.SLOT = SLOT
     class_file = snapshot / 'src/schubert-nk-web/target/classes/dev/codex/schubert/nk/web/monitoring/WebMetricScrape.class'
     field_receipt, body = steps.step('policy-fields', [str(architecture.JAVA.with_name('javap')), '-p', '-s', str(class_file)])
-    field_lines = [line.strip() for line in body.splitlines() if line.strip().endswith(';') and '(' not in line]
-    parsed = re.findall(r'^  private final ([A-Za-z0-9_.$]+) ([A-Za-z0-9_]+);$', body, re.M)
-    fields = {name: type_name for type_name, name in parsed}
+    require(field_receipt['actualExit'] == 0, 'physical field reader terminal')
+    fields, methods = field_contract.verify_contract(body, FIELDS)
+    field_negatives = field_contract.negative_guards(body, FIELDS)
     owner = common.contract.java((snapshot / MAIN).read_text())
-    require(field_receipt['actualExit'] == 0 and len(field_lines) == len(parsed) == len(fields) == 3, 'every physical field is exact private final formatter')
+    require(len(fields) == 3 and len(methods) == 2 and len(field_negatives) == 5, 'three physical fields and two method pairs/five grammar negatives')
     validate_owner(owner, fields)
     rejected = []
     for name, other_owner, other_fields in (
