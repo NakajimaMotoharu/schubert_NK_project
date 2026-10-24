@@ -1,0 +1,1973 @@
+{
+  "schema": "PGPT_INDIVIDUAL_PMD40_SOURCE_REVIEW_V1",
+  "source": "84ee59a95cf4911b40635240a29fe1d8c71cdaf5",
+  "rawManifest": "PG8791-management-metric-static-v1/manifest.json",
+  "rawManifestSha256": "a90c75594c92df4ff73aa017a1a6c72eb152b97d32cdbc5df603b02e53990a47",
+  "originManifestSha256": "3b42b90552d2d8e6d91a3cfe805b2bda38398600dcb3028a701680d24f82cf36",
+  "formalDesignCommit": "8b91944df5820535e23ba2469740f1c0aa94c447",
+  "reviewedRawRows": 40,
+  "uniqueRawDiagnostics": 36,
+  "productTestsExecuted": 0,
+  "coverage": null,
+  "formalUpdated": false,
+  "rows": [
+    {
+      "index": 1,
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/bootstrap/ApiManagementServer.java",
+      "sourceSha256": "81c29219808b8c38764d7bcd9ec1d1e7fc32a709a158a0399237e7fe5d46cb5c",
+      "raw": {
+        "begincolumn": "17",
+        "beginline": "37",
+        "class": "ApiManagementServer",
+        "endcolumn": "35",
+        "endline": "37",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "message": "To be compliant to J2EE, a webapp should not use any thread.",
+        "package": "dev.codex.schubert.nk.api.bootstrap",
+        "priority": "3",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading"
+      },
+      "subject": "executor field",
+      "status": "CONTEXT_NOT_APPLICABLE_J2EE_RULE",
+      "reason": "PMD 7.28.0's primary rule explicitly assumes J2EE-server-managed threads; SS342 specifies standalone direct Java services and bounded management owners. This is contextual applicability, not runtime proof. Retains the one approved standalone management executor; no worker is acquired by this declaration.",
+      "counterexample": "A type reference is not an active J2EE resource or a termination receipt.",
+      "design": [
+        "RD171",
+        "UI252",
+        "SS342 SSC312/313/317/335",
+        "SS351",
+        "411/451"
+      ],
+      "reviewOwner": "PGPT_PARENT",
+      "reviewPasses": [
+        "RULE_TO_APPROVED_CONTRACT",
+        "COUNTEREXAMPLE_SOURCE_RECHECK"
+      ],
+      "reviewExpires": "ANY_RELEVANT_SOURCE_OR_APPROVED_CONTRACT_CHANGE",
+      "testReference": {
+        "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/bootstrap/ApiManagementBindTest.java",
+        "className": "dev.codex.schubert.nk.api.bootstrap.ApiManagementBindTest",
+        "method": "bind316002UnstartedOwnerRetainsAndInvalidInputsPrecedeFactory",
+        "currentRunStatus": "UNRUN_HOLD_REFERENCE_ONLY",
+        "currentXmlQualified": false
+      },
+      "rawWarningRetained": true,
+      "sourceChangedByReview": false,
+      "actualRuntimeProven": false,
+      "qualityGatePass": false,
+      "formalAccepted": false,
+      "ptAlternativeCompleted": 0
+    },
+    {
+      "index": 2,
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/bootstrap/ApiManagementServer.java",
+      "sourceSha256": "81c29219808b8c38764d7bcd9ec1d1e7fc32a709a158a0399237e7fe5d46cb5c",
+      "raw": {
+        "begincolumn": "14",
+        "beginline": "70",
+        "class": "ApiManagementServer",
+        "endcolumn": "30",
+        "endline": "70",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidcatchinggenericexception",
+        "message": "Avoid catching RuntimeException in try-catch block",
+        "method": "open",
+        "package": "dev.codex.schubert.nk.api.bootstrap",
+        "priority": "3",
+        "rule": "AvoidCatchingGenericException",
+        "ruleset": "Error Prone"
+      },
+      "subject": "start Runtime",
+      "status": "REQUIRED_CONTRACT_CURRENT_PT_JOIN_PENDING",
+      "reason": "SS342's acquired-owner failure contract requires RuntimeException/Error cleanup and preserved direct-fatal ordering; this is not catch(Exception), swallowing or normal recovery. Unchecked start failure still receives the one cleanup attempt on the already bound owner and is rethrown.",
+      "counterexample": "Removing this catch abandons the bound owner on unchecked setup failure.",
+      "design": [
+        "RD171",
+        "UI252",
+        "SS342 SSC312/313/317/335",
+        "SS351",
+        "411/451"
+      ],
+      "reviewOwner": "PGPT_PARENT",
+      "reviewPasses": [
+        "RULE_TO_APPROVED_CONTRACT",
+        "COUNTEREXAMPLE_SOURCE_RECHECK"
+      ],
+      "reviewExpires": "ANY_RELEVANT_SOURCE_OR_APPROVED_CONTRACT_CHANGE",
+      "testReference": {
+        "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/bootstrap/ApiManagementBindTest.java",
+        "className": "dev.codex.schubert.nk.api.bootstrap.ApiManagementBindTest",
+        "method": "bind316006FailedOpenRetainsPrimaryAndRedactsCleanup",
+        "currentRunStatus": "UNRUN_HOLD_REFERENCE_ONLY",
+        "currentXmlQualified": false
+      },
+      "rawWarningRetained": true,
+      "sourceChangedByReview": false,
+      "actualRuntimeProven": false,
+      "qualityGatePass": false,
+      "formalAccepted": false,
+      "ptAlternativeCompleted": 0
+    },
+    {
+      "index": 3,
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/bootstrap/ApiManagementServer.java",
+      "sourceSha256": "81c29219808b8c38764d7bcd9ec1d1e7fc32a709a158a0399237e7fe5d46cb5c",
+      "raw": {
+        "begincolumn": "33",
+        "beginline": "70",
+        "class": "ApiManagementServer",
+        "endcolumn": "38",
+        "endline": "70",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidcatchinggenericexception",
+        "message": "Avoid catching Error in try-catch block",
+        "method": "open",
+        "package": "dev.codex.schubert.nk.api.bootstrap",
+        "priority": "3",
+        "rule": "AvoidCatchingGenericException",
+        "ruleset": "Error Prone"
+      },
+      "subject": "start Error",
+      "status": "REQUIRED_CONTRACT_CURRENT_PT_JOIN_PENDING",
+      "reason": "SS342's acquired-owner failure contract requires RuntimeException/Error cleanup and preserved direct-fatal ordering; this is not catch(Exception), swallowing or normal recovery. Direct setup Error retains fatal identity through the specified cleanup ranking; no successful handle is returned.",
+      "counterexample": "Checked-only handling misses fatal setup failure, while wrapping Error demotes it.",
+      "design": [
+        "RD171",
+        "UI252",
+        "SS342 SSC312/313/317/335",
+        "SS351",
+        "411/451"
+      ],
+      "reviewOwner": "PGPT_PARENT",
+      "reviewPasses": [
+        "RULE_TO_APPROVED_CONTRACT",
+        "COUNTEREXAMPLE_SOURCE_RECHECK"
+      ],
+      "reviewExpires": "ANY_RELEVANT_SOURCE_OR_APPROVED_CONTRACT_CHANGE",
+      "testReference": {
+        "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/bootstrap/ApiManagementBindTest.java",
+        "className": "dev.codex.schubert.nk.api.bootstrap.ApiManagementBindTest",
+        "method": "bind316006FailedOpenRetainsPrimaryAndRedactsCleanup",
+        "currentRunStatus": "UNRUN_HOLD_REFERENCE_ONLY",
+        "currentXmlQualified": false
+      },
+      "rawWarningRetained": true,
+      "sourceChangedByReview": false,
+      "actualRuntimeProven": false,
+      "qualityGatePass": false,
+      "formalAccepted": false,
+      "ptAlternativeCompleted": 0
+    },
+    {
+      "index": 4,
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/bootstrap/ApiManagementServer.java",
+      "sourceSha256": "81c29219808b8c38764d7bcd9ec1d1e7fc32a709a158a0399237e7fe5d46cb5c",
+      "raw": {
+        "begincolumn": "16",
+        "beginline": "73",
+        "class": "ApiManagementServer",
+        "endcolumn": "32",
+        "endline": "73",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidcatchinggenericexception",
+        "message": "Avoid catching RuntimeException in try-catch block",
+        "method": "open",
+        "package": "dev.codex.schubert.nk.api.bootstrap",
+        "priority": "3",
+        "rule": "AvoidCatchingGenericException",
+        "ruleset": "Error Prone"
+      },
+      "subject": "cleanup Runtime",
+      "status": "REQUIRED_CONTRACT_CURRENT_PT_JOIN_PENDING",
+      "reason": "SS342's acquired-owner failure contract requires RuntimeException/Error cleanup and preserved direct-fatal ordering; this is not catch(Exception), swallowing or normal recovery. Nonfatal cleanup failure preserves the original primary and adds only a distinct fixed diagnostic.",
+      "counterexample": "Replacing primary with cleanup Runtime changes exception ranking and exposes provider details.",
+      "design": [
+        "RD171",
+        "UI252",
+        "SS342 SSC312/313/317/335",
+        "SS351",
+        "411/451"
+      ],
+      "reviewOwner": "PGPT_PARENT",
+      "reviewPasses": [
+        "RULE_TO_APPROVED_CONTRACT",
+        "COUNTEREXAMPLE_SOURCE_RECHECK"
+      ],
+      "reviewExpires": "ANY_RELEVANT_SOURCE_OR_APPROVED_CONTRACT_CHANGE",
+      "testReference": {
+        "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/bootstrap/ApiManagementBindTest.java",
+        "className": "dev.codex.schubert.nk.api.bootstrap.ApiManagementBindTest",
+        "method": "bind316006FailedOpenRetainsPrimaryAndRedactsCleanup",
+        "currentRunStatus": "UNRUN_HOLD_REFERENCE_ONLY",
+        "currentXmlQualified": false
+      },
+      "rawWarningRetained": true,
+      "sourceChangedByReview": false,
+      "actualRuntimeProven": false,
+      "qualityGatePass": false,
+      "formalAccepted": false,
+      "ptAlternativeCompleted": 0
+    },
+    {
+      "index": 5,
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/bootstrap/ApiManagementServer.java",
+      "sourceSha256": "81c29219808b8c38764d7bcd9ec1d1e7fc32a709a158a0399237e7fe5d46cb5c",
+      "raw": {
+        "begincolumn": "35",
+        "beginline": "73",
+        "class": "ApiManagementServer",
+        "endcolumn": "40",
+        "endline": "73",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidcatchinggenericexception",
+        "message": "Avoid catching Error in try-catch block",
+        "method": "open",
+        "package": "dev.codex.schubert.nk.api.bootstrap",
+        "priority": "3",
+        "rule": "AvoidCatchingGenericException",
+        "ruleset": "Error Prone"
+      },
+      "subject": "cleanup Error",
+      "status": "REQUIRED_CONTRACT_CURRENT_PT_JOIN_PENDING",
+      "reason": "SS342's acquired-owner failure contract requires RuntimeException/Error cleanup and preserved direct-fatal ordering; this is not catch(Exception), swallowing or normal recovery. Direct cleanup Error outranks only a non-Error primary; an already fatal primary remains original.",
+      "counterexample": "Flattening every Throwable demotes fatal state; unconditional replacement loses the original Error.",
+      "design": [
+        "RD171",
+        "UI252",
+        "SS342 SSC312/313/317/335",
+        "SS351",
+        "411/451"
+      ],
+      "reviewOwner": "PGPT_PARENT",
+      "reviewPasses": [
+        "RULE_TO_APPROVED_CONTRACT",
+        "COUNTEREXAMPLE_SOURCE_RECHECK"
+      ],
+      "reviewExpires": "ANY_RELEVANT_SOURCE_OR_APPROVED_CONTRACT_CHANGE",
+      "testReference": {
+        "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/bootstrap/ApiManagementBindTest.java",
+        "className": "dev.codex.schubert.nk.api.bootstrap.ApiManagementBindTest",
+        "method": "bind316006FailedOpenRetainsPrimaryAndRedactsCleanup",
+        "currentRunStatus": "UNRUN_HOLD_REFERENCE_ONLY",
+        "currentXmlQualified": false
+      },
+      "rawWarningRetained": true,
+      "sourceChangedByReview": false,
+      "actualRuntimeProven": false,
+      "qualityGatePass": false,
+      "formalAccepted": false,
+      "ptAlternativeCompleted": 0
+    },
+    {
+      "index": 6,
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/bootstrap/ApiManagementServer.java",
+      "sourceSha256": "81c29219808b8c38764d7bcd9ec1d1e7fc32a709a158a0399237e7fe5d46cb5c",
+      "raw": {
+        "begincolumn": "36",
+        "beginline": "74",
+        "class": "ApiManagementServer",
+        "endcolumn": "41",
+        "endline": "74",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidinstanceofchecksincatchclause",
+        "message": "An instanceof check is being performed on the caught exception. Create a separate catch clause for Error.",
+        "method": "open",
+        "package": "dev.codex.schubert.nk.api.bootstrap",
+        "priority": "3",
+        "rule": "AvoidInstanceofChecksInCatchClause",
+        "ruleset": "Error Prone"
+      },
+      "subject": "cleanup fatal predicate",
+      "status": "REQUIRED_CONTRACT_CURRENT_PT_JOIN_PENDING",
+      "reason": "The fixed two-operand direct-Error priority relation is intentional cleanup semantics, not an arbitrary caught-exception downcast; raw overlaps remain visible. The first Error operand identifies fatal cleanup; both overlapping raw PMD occurrences are retained.",
+      "counterexample": "Split-catch advice does not eliminate the need to rank against primary category.",
+      "design": [
+        "RD171",
+        "UI252",
+        "SS342 SSC312/313/317/335",
+        "SS351",
+        "411/451"
+      ],
+      "reviewOwner": "PGPT_PARENT",
+      "reviewPasses": [
+        "RULE_TO_APPROVED_CONTRACT",
+        "COUNTEREXAMPLE_SOURCE_RECHECK"
+      ],
+      "reviewExpires": "ANY_RELEVANT_SOURCE_OR_APPROVED_CONTRACT_CHANGE",
+      "testReference": {
+        "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/bootstrap/ApiManagementBindTest.java",
+        "className": "dev.codex.schubert.nk.api.bootstrap.ApiManagementBindTest",
+        "method": "bind316006FailedOpenRetainsPrimaryAndRedactsCleanup",
+        "currentRunStatus": "UNRUN_HOLD_REFERENCE_ONLY",
+        "currentXmlQualified": false
+      },
+      "rawWarningRetained": true,
+      "sourceChangedByReview": false,
+      "actualRuntimeProven": false,
+      "qualityGatePass": false,
+      "formalAccepted": false,
+      "ptAlternativeCompleted": 0
+    },
+    {
+      "index": 7,
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/bootstrap/ApiManagementServer.java",
+      "sourceSha256": "81c29219808b8c38764d7bcd9ec1d1e7fc32a709a158a0399237e7fe5d46cb5c",
+      "raw": {
+        "begincolumn": "36",
+        "beginline": "74",
+        "class": "ApiManagementServer",
+        "endcolumn": "41",
+        "endline": "74",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidinstanceofchecksincatchclause",
+        "message": "An instanceof check is being performed on the caught exception. Create a separate catch clause for Error.",
+        "method": "open",
+        "package": "dev.codex.schubert.nk.api.bootstrap",
+        "priority": "3",
+        "rule": "AvoidInstanceofChecksInCatchClause",
+        "ruleset": "Error Prone"
+      },
+      "subject": "same cleanup predicate duplicate",
+      "status": "REQUIRED_CONTRACT_CURRENT_PT_JOIN_PENDING",
+      "reason": "The fixed two-operand direct-Error priority relation is intentional cleanup semantics, not an arbitrary caught-exception downcast; raw overlaps remain visible. This is the identical second raw occurrence, retained against the same necessary fatal operand.",
+      "counterexample": "Deduplicating raw diagnostics or inventing another runtime path would alter measured inventory.",
+      "design": [
+        "RD171",
+        "UI252",
+        "SS342 SSC312/313/317/335",
+        "SS351",
+        "411/451"
+      ],
+      "reviewOwner": "PGPT_PARENT",
+      "reviewPasses": [
+        "RULE_TO_APPROVED_CONTRACT",
+        "COUNTEREXAMPLE_SOURCE_RECHECK"
+      ],
+      "reviewExpires": "ANY_RELEVANT_SOURCE_OR_APPROVED_CONTRACT_CHANGE",
+      "testReference": {
+        "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/bootstrap/ApiManagementBindTest.java",
+        "className": "dev.codex.schubert.nk.api.bootstrap.ApiManagementBindTest",
+        "method": "bind316006FailedOpenRetainsPrimaryAndRedactsCleanup",
+        "currentRunStatus": "UNRUN_HOLD_REFERENCE_ONLY",
+        "currentXmlQualified": false
+      },
+      "rawWarningRetained": true,
+      "sourceChangedByReview": false,
+      "actualRuntimeProven": false,
+      "qualityGatePass": false,
+      "formalAccepted": false,
+      "ptAlternativeCompleted": 0
+    },
+    {
+      "index": 8,
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/bootstrap/ApiManagementServer.java",
+      "sourceSha256": "81c29219808b8c38764d7bcd9ec1d1e7fc32a709a158a0399237e7fe5d46cb5c",
+      "raw": {
+        "begincolumn": "66",
+        "beginline": "74",
+        "class": "ApiManagementServer",
+        "endcolumn": "71",
+        "endline": "74",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidinstanceofchecksincatchclause",
+        "message": "An instanceof check is being performed on the caught exception. Create a separate catch clause for Error.",
+        "method": "open",
+        "package": "dev.codex.schubert.nk.api.bootstrap",
+        "priority": "3",
+        "rule": "AvoidInstanceofChecksInCatchClause",
+        "ruleset": "Error Prone"
+      },
+      "subject": "primary fatal predicate",
+      "status": "REQUIRED_CONTRACT_CURRENT_PT_JOIN_PENDING",
+      "reason": "The fixed two-operand direct-Error priority relation is intentional cleanup semantics, not an arbitrary caught-exception downcast; raw overlaps remain visible. The negated primary Error operand preserves the original Error when both failures are fatal.",
+      "counterexample": "Removing this operand incorrectly replaces a fatal setup primary.",
+      "design": [
+        "RD171",
+        "UI252",
+        "SS342 SSC312/313/317/335",
+        "SS351",
+        "411/451"
+      ],
+      "reviewOwner": "PGPT_PARENT",
+      "reviewPasses": [
+        "RULE_TO_APPROVED_CONTRACT",
+        "COUNTEREXAMPLE_SOURCE_RECHECK"
+      ],
+      "reviewExpires": "ANY_RELEVANT_SOURCE_OR_APPROVED_CONTRACT_CHANGE",
+      "testReference": {
+        "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/bootstrap/ApiManagementBindTest.java",
+        "className": "dev.codex.schubert.nk.api.bootstrap.ApiManagementBindTest",
+        "method": "bind316006FailedOpenRetainsPrimaryAndRedactsCleanup",
+        "currentRunStatus": "UNRUN_HOLD_REFERENCE_ONLY",
+        "currentXmlQualified": false
+      },
+      "rawWarningRetained": true,
+      "sourceChangedByReview": false,
+      "actualRuntimeProven": false,
+      "qualityGatePass": false,
+      "formalAccepted": false,
+      "ptAlternativeCompleted": 0
+    },
+    {
+      "index": 9,
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/bootstrap/ApiManagementServer.java",
+      "sourceSha256": "81c29219808b8c38764d7bcd9ec1d1e7fc32a709a158a0399237e7fe5d46cb5c",
+      "raw": {
+        "begincolumn": "66",
+        "beginline": "74",
+        "class": "ApiManagementServer",
+        "endcolumn": "71",
+        "endline": "74",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidinstanceofchecksincatchclause",
+        "message": "An instanceof check is being performed on the caught exception. Create a separate catch clause for Error.",
+        "method": "open",
+        "package": "dev.codex.schubert.nk.api.bootstrap",
+        "priority": "3",
+        "rule": "AvoidInstanceofChecksInCatchClause",
+        "ruleset": "Error Prone"
+      },
+      "subject": "same primary predicate duplicate",
+      "status": "REQUIRED_CONTRACT_CURRENT_PT_JOIN_PENDING",
+      "reason": "The fixed two-operand direct-Error priority relation is intentional cleanup semantics, not an arbitrary caught-exception downcast; raw overlaps remain visible. The second raw occurrence retains one source meaning without inventing another executed branch.",
+      "counterexample": "Overlapping diagnostics are not additional tests or new program work.",
+      "design": [
+        "RD171",
+        "UI252",
+        "SS342 SSC312/313/317/335",
+        "SS351",
+        "411/451"
+      ],
+      "reviewOwner": "PGPT_PARENT",
+      "reviewPasses": [
+        "RULE_TO_APPROVED_CONTRACT",
+        "COUNTEREXAMPLE_SOURCE_RECHECK"
+      ],
+      "reviewExpires": "ANY_RELEVANT_SOURCE_OR_APPROVED_CONTRACT_CHANGE",
+      "testReference": {
+        "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/bootstrap/ApiManagementBindTest.java",
+        "className": "dev.codex.schubert.nk.api.bootstrap.ApiManagementBindTest",
+        "method": "bind316006FailedOpenRetainsPrimaryAndRedactsCleanup",
+        "currentRunStatus": "UNRUN_HOLD_REFERENCE_ONLY",
+        "currentXmlQualified": false
+      },
+      "rawWarningRetained": true,
+      "sourceChangedByReview": false,
+      "actualRuntimeProven": false,
+      "qualityGatePass": false,
+      "formalAccepted": false,
+      "ptAlternativeCompleted": 0
+    },
+    {
+      "index": 10,
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/bootstrap/ApiManagementServer.java",
+      "sourceSha256": "81c29219808b8c38764d7bcd9ec1d1e7fc32a709a158a0399237e7fe5d46cb5c",
+      "raw": {
+        "begincolumn": "13",
+        "beginline": "75",
+        "class": "ApiManagementServer",
+        "endcolumn": "35",
+        "endline": "75",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#compareobjectswithequals",
+        "message": "Use equals() to compare object references.",
+        "method": "open",
+        "package": "dev.codex.schubert.nk.api.bootstrap",
+        "priority": "3",
+        "rule": "CompareObjectsWithEquals",
+        "ruleset": "Error Prone"
+      },
+      "subject": "Throwable identity",
+      "status": "REQUIRED_CONTRACT_CURRENT_PT_JOIN_PENDING",
+      "reason": "Throwable self-suppression is an identity relation; fixed diagnostics and distinct-primary guards must not be replaced by value equality. Reference identity prevents self-suppression and the only added object is the fixed diagnostic.",
+      "counterexample": "User-overridable equals is not the JDK self-suppression identity relation.",
+      "design": [
+        "RD171",
+        "UI252",
+        "SS342 SSC312/313/317/335",
+        "SS351",
+        "411/451"
+      ],
+      "reviewOwner": "PGPT_PARENT",
+      "reviewPasses": [
+        "RULE_TO_APPROVED_CONTRACT",
+        "COUNTEREXAMPLE_SOURCE_RECHECK"
+      ],
+      "reviewExpires": "ANY_RELEVANT_SOURCE_OR_APPROVED_CONTRACT_CHANGE",
+      "testReference": {
+        "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/bootstrap/ApiManagementBindTest.java",
+        "className": "dev.codex.schubert.nk.api.bootstrap.ApiManagementBindTest",
+        "method": "bind316006FailedOpenRetainsPrimaryAndRedactsCleanup",
+        "currentRunStatus": "UNRUN_HOLD_REFERENCE_ONLY",
+        "currentXmlQualified": false
+      },
+      "rawWarningRetained": true,
+      "sourceChangedByReview": false,
+      "actualRuntimeProven": false,
+      "qualityGatePass": false,
+      "formalAccepted": false,
+      "ptAlternativeCompleted": 0
+    },
+    {
+      "index": 11,
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/bootstrap/ApiManagementServer.java",
+      "sourceSha256": "81c29219808b8c38764d7bcd9ec1d1e7fc32a709a158a0399237e7fe5d46cb5c",
+      "raw": {
+        "begincolumn": "13",
+        "beginline": "150",
+        "class": "ApiManagementServer",
+        "endcolumn": "31",
+        "endline": "150",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "message": "To be compliant to J2EE, a webapp should not use any thread.",
+        "method": "ApiManagementServer",
+        "package": "dev.codex.schubert.nk.api.bootstrap",
+        "priority": "3",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading"
+      },
+      "subject": "fixed executor allocation",
+      "status": "CONTEXT_NOT_APPLICABLE_J2EE_RULE",
+      "reason": "PMD 7.28.0's primary rule explicitly assumes J2EE-server-managed threads; SS342 specifies standalone direct Java services and bounded management owners. This is contextual applicability, not runtime proof. Creates the required core/max1 executor with queue32 before HTTP acquisition in this standalone owner.",
+      "counterexample": "Unbounded pools or owner allocation after HTTP acquisition would be real defects, not justified here.",
+      "design": [
+        "RD171",
+        "UI252",
+        "SS342 SSC312/313/317/335",
+        "SS351",
+        "411/451"
+      ],
+      "reviewOwner": "PGPT_PARENT",
+      "reviewPasses": [
+        "RULE_TO_APPROVED_CONTRACT",
+        "COUNTEREXAMPLE_SOURCE_RECHECK"
+      ],
+      "reviewExpires": "ANY_RELEVANT_SOURCE_OR_APPROVED_CONTRACT_CHANGE",
+      "testReference": {
+        "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/bootstrap/ApiManagementBindTest.java",
+        "className": "dev.codex.schubert.nk.api.bootstrap.ApiManagementBindTest",
+        "method": "bind316002UnstartedOwnerRetainsAndInvalidInputsPrecedeFactory",
+        "currentRunStatus": "UNRUN_HOLD_REFERENCE_ONLY",
+        "currentXmlQualified": false
+      },
+      "rawWarningRetained": true,
+      "sourceChangedByReview": false,
+      "actualRuntimeProven": false,
+      "qualityGatePass": false,
+      "formalAccepted": false,
+      "ptAlternativeCompleted": 0
+    },
+    {
+      "index": 12,
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/bootstrap/ApiManagementServer.java",
+      "sourceSha256": "81c29219808b8c38764d7bcd9ec1d1e7fc32a709a158a0399237e7fe5d46cb5c",
+      "raw": {
+        "begincolumn": "32",
+        "beginline": "157",
+        "class": "ApiManagementServer",
+        "endcolumn": "38",
+        "endline": "157",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "message": "To be compliant to J2EE, a webapp should not use any thread.",
+        "method": "ApiManagementServer",
+        "package": "dev.codex.schubert.nk.api.bootstrap",
+        "priority": "3",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading"
+      },
+      "subject": "daemon factory",
+      "status": "CONTEXT_NOT_APPLICABLE_J2EE_RULE",
+      "reason": "PMD 7.28.0's primary rule explicitly assumes J2EE-server-managed threads; SS342 specifies standalone direct Java services and bounded management owners. This is contextual applicability, not runtime proof. Creates the approved named daemon management worker, outside a J2EE-container premise.",
+      "counterexample": "Daemon does not prove termination; actual worker/native stop stays held.",
+      "design": [
+        "RD171",
+        "UI252",
+        "SS342 SSC312/313/317/335",
+        "SS351",
+        "411/451"
+      ],
+      "reviewOwner": "PGPT_PARENT",
+      "reviewPasses": [
+        "RULE_TO_APPROVED_CONTRACT",
+        "COUNTEREXAMPLE_SOURCE_RECHECK"
+      ],
+      "reviewExpires": "ANY_RELEVANT_SOURCE_OR_APPROVED_CONTRACT_CHANGE",
+      "testReference": {
+        "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/bootstrap/ApiManagementBindTest.java",
+        "className": "dev.codex.schubert.nk.api.bootstrap.ApiManagementBindTest",
+        "method": "bind316002UnstartedOwnerRetainsAndInvalidInputsPrecedeFactory",
+        "currentRunStatus": "UNRUN_HOLD_REFERENCE_ONLY",
+        "currentXmlQualified": false
+      },
+      "rawWarningRetained": true,
+      "sourceChangedByReview": false,
+      "actualRuntimeProven": false,
+      "qualityGatePass": false,
+      "formalAccepted": false,
+      "ptAlternativeCompleted": 0
+    },
+    {
+      "index": 13,
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/bootstrap/ApiManagementServer.java",
+      "sourceSha256": "81c29219808b8c38764d7bcd9ec1d1e7fc32a709a158a0399237e7fe5d46cb5c",
+      "raw": {
+        "begincolumn": "27",
+        "beginline": "260",
+        "class": "ApiManagementServer",
+        "endcolumn": "33",
+        "endline": "260",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "message": "To be compliant to J2EE, a webapp should not use any thread.",
+        "method": "stopFailure",
+        "package": "dev.codex.schubert.nk.api.bootstrap",
+        "priority": "3",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading"
+      },
+      "subject": "API entry IRQ",
+      "status": "CONTEXT_NOT_APPLICABLE_J2EE_RULE",
+      "reason": "PMD 7.28.0's primary rule explicitly assumes J2EE-server-managed threads; SS342 specifies standalone direct Java services and bounded management owners. This is contextual applicability, not runtime proof. Captures and temporarily clears entry notification only as SSC313 requires, restoring it in finally.",
+      "counterexample": "Removing capture/restoration loses caller state; Web's different IRQ contract is not generalized.",
+      "design": [
+        "RD171",
+        "UI252",
+        "SS342 SSC312/313/317/335",
+        "SS351",
+        "411/451"
+      ],
+      "reviewOwner": "PGPT_PARENT",
+      "reviewPasses": [
+        "RULE_TO_APPROVED_CONTRACT",
+        "COUNTEREXAMPLE_SOURCE_RECHECK"
+      ],
+      "reviewExpires": "ANY_RELEVANT_SOURCE_OR_APPROVED_CONTRACT_CHANGE",
+      "testReference": {
+        "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/bootstrap/ApiManagementStopTest.java",
+        "className": "dev.codex.schubert.nk.api.bootstrap.ApiManagementStopTest",
+        "method": "apiStop003LockDeadlineAndNewInterruptNeverDuplicateStop",
+        "currentRunStatus": "UNRUN_HOLD_REFERENCE_ONLY",
+        "currentXmlQualified": false
+      },
+      "rawWarningRetained": true,
+      "sourceChangedByReview": false,
+      "actualRuntimeProven": false,
+      "qualityGatePass": false,
+      "formalAccepted": false,
+      "ptAlternativeCompleted": 0
+    },
+    {
+      "index": 14,
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/bootstrap/ApiManagementServer.java",
+      "sourceSha256": "81c29219808b8c38764d7bcd9ec1d1e7fc32a709a158a0399237e7fe5d46cb5c",
+      "raw": {
+        "begincolumn": "9",
+        "beginline": "266",
+        "class": "ApiManagementServer",
+        "endcolumn": "15",
+        "endline": "266",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "message": "To be compliant to J2EE, a webapp should not use any thread.",
+        "method": "stopFailure",
+        "package": "dev.codex.schubert.nk.api.bootstrap",
+        "priority": "3",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading"
+      },
+      "subject": "API lock IRQ",
+      "status": "CONTEXT_NOT_APPLICABLE_J2EE_RULE",
+      "reason": "PMD 7.28.0's primary rule explicitly assumes J2EE-server-managed threads; SS342 specifies standalone direct Java services and bounded management owners. This is contextual applicability, not runtime proof. Restores a new lock-wait interrupt and returns fixed unconfirmed state without vendor stop.",
+      "counterexample": "Clearing the signal or returning normal success hides a still-held owner.",
+      "design": [
+        "RD171",
+        "UI252",
+        "SS342 SSC312/313/317/335",
+        "SS351",
+        "411/451"
+      ],
+      "reviewOwner": "PGPT_PARENT",
+      "reviewPasses": [
+        "RULE_TO_APPROVED_CONTRACT",
+        "COUNTEREXAMPLE_SOURCE_RECHECK"
+      ],
+      "reviewExpires": "ANY_RELEVANT_SOURCE_OR_APPROVED_CONTRACT_CHANGE",
+      "testReference": {
+        "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/bootstrap/ApiManagementStopTest.java",
+        "className": "dev.codex.schubert.nk.api.bootstrap.ApiManagementStopTest",
+        "method": "apiStop003LockDeadlineAndNewInterruptNeverDuplicateStop",
+        "currentRunStatus": "UNRUN_HOLD_REFERENCE_ONLY",
+        "currentXmlQualified": false
+      },
+      "rawWarningRetained": true,
+      "sourceChangedByReview": false,
+      "actualRuntimeProven": false,
+      "qualityGatePass": false,
+      "formalAccepted": false,
+      "ptAlternativeCompleted": 0
+    },
+    {
+      "index": 15,
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/bootstrap/ApiManagementServer.java",
+      "sourceSha256": "81c29219808b8c38764d7bcd9ec1d1e7fc32a709a158a0399237e7fe5d46cb5c",
+      "raw": {
+        "begincolumn": "9",
+        "beginline": "276",
+        "class": "ApiManagementServer",
+        "endcolumn": "31",
+        "endline": "276",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "message": "To be compliant to J2EE, a webapp should not use any thread.",
+        "method": "stopFailure",
+        "package": "dev.codex.schubert.nk.api.bootstrap",
+        "priority": "3",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading"
+      },
+      "subject": "API shutdown request",
+      "status": "CONTEXT_NOT_APPLICABLE_J2EE_RULE",
+      "reason": "PMD 7.28.0's primary rule explicitly assumes J2EE-server-managed threads; SS342 specifies standalone direct Java services and bounded management owners. This is contextual applicability, not runtime proof. Requests stop on the owned executor, followed by remaining-deadline await rather than immediate closed.",
+      "counterexample": "shutdownNow alone is not a termination certificate or actual cleanup evidence.",
+      "design": [
+        "RD171",
+        "UI252",
+        "SS342 SSC312/313/317/335",
+        "SS351",
+        "411/451"
+      ],
+      "reviewOwner": "PGPT_PARENT",
+      "reviewPasses": [
+        "RULE_TO_APPROVED_CONTRACT",
+        "COUNTEREXAMPLE_SOURCE_RECHECK"
+      ],
+      "reviewExpires": "ANY_RELEVANT_SOURCE_OR_APPROVED_CONTRACT_CHANGE",
+      "testReference": {
+        "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/bootstrap/ApiManagementStopTest.java",
+        "className": "dev.codex.schubert.nk.api.bootstrap.ApiManagementStopTest",
+        "method": "apiStop003LockDeadlineAndNewInterruptNeverDuplicateStop",
+        "currentRunStatus": "UNRUN_HOLD_REFERENCE_ONLY",
+        "currentXmlQualified": false
+      },
+      "rawWarningRetained": true,
+      "sourceChangedByReview": false,
+      "actualRuntimeProven": false,
+      "qualityGatePass": false,
+      "formalAccepted": false,
+      "ptAlternativeCompleted": 0
+    },
+    {
+      "index": 16,
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/bootstrap/ApiManagementServer.java",
+      "sourceSha256": "81c29219808b8c38764d7bcd9ec1d1e7fc32a709a158a0399237e7fe5d46cb5c",
+      "raw": {
+        "begincolumn": "16",
+        "beginline": "278",
+        "class": "ApiManagementServer",
+        "endcolumn": "79",
+        "endline": "279",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "message": "To be compliant to J2EE, a webapp should not use any thread.",
+        "method": "stopFailure",
+        "package": "dev.codex.schubert.nk.api.bootstrap",
+        "priority": "3",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading"
+      },
+      "subject": "API finite join",
+      "status": "CONTEXT_NOT_APPLICABLE_J2EE_RULE",
+      "reason": "PMD 7.28.0's primary rule explicitly assumes J2EE-server-managed threads; SS342 specifies standalone direct Java services and bounded management owners. This is contextual applicability, not runtime proof. Waits only for the original monotonic deadline remainder; false retains unconfirmed state.",
+      "counterexample": "This source fact does not prove provider return or actual native worker termination.",
+      "design": [
+        "RD171",
+        "UI252",
+        "SS342 SSC312/313/317/335",
+        "SS351",
+        "411/451"
+      ],
+      "reviewOwner": "PGPT_PARENT",
+      "reviewPasses": [
+        "RULE_TO_APPROVED_CONTRACT",
+        "COUNTEREXAMPLE_SOURCE_RECHECK"
+      ],
+      "reviewExpires": "ANY_RELEVANT_SOURCE_OR_APPROVED_CONTRACT_CHANGE",
+      "testReference": {
+        "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/bootstrap/ApiManagementStopTest.java",
+        "className": "dev.codex.schubert.nk.api.bootstrap.ApiManagementStopTest",
+        "method": "apiStop003LockDeadlineAndNewInterruptNeverDuplicateStop",
+        "currentRunStatus": "UNRUN_HOLD_REFERENCE_ONLY",
+        "currentXmlQualified": false
+      },
+      "rawWarningRetained": true,
+      "sourceChangedByReview": false,
+      "actualRuntimeProven": false,
+      "qualityGatePass": false,
+      "formalAccepted": false,
+      "ptAlternativeCompleted": 0
+    },
+    {
+      "index": 17,
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/bootstrap/ApiManagementServer.java",
+      "sourceSha256": "81c29219808b8c38764d7bcd9ec1d1e7fc32a709a158a0399237e7fe5d46cb5c",
+      "raw": {
+        "begincolumn": "11",
+        "beginline": "282",
+        "class": "ApiManagementServer",
+        "endcolumn": "17",
+        "endline": "282",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "message": "To be compliant to J2EE, a webapp should not use any thread.",
+        "method": "stopFailure",
+        "package": "dev.codex.schubert.nk.api.bootstrap",
+        "priority": "3",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading"
+      },
+      "subject": "API join IRQ",
+      "status": "CONTEXT_NOT_APPLICABLE_J2EE_RULE",
+      "reason": "PMD 7.28.0's primary rule explicitly assumes J2EE-server-managed threads; SS342 specifies standalone direct Java services and bounded management owners. This is contextual applicability, not runtime proof. Restores join interruption and returns fixed unconfirmed state, never closed.",
+      "counterexample": "Swallowing the interrupt or caching completion in the catch hides an unfinished worker.",
+      "design": [
+        "RD171",
+        "UI252",
+        "SS342 SSC312/313/317/335",
+        "SS351",
+        "411/451"
+      ],
+      "reviewOwner": "PGPT_PARENT",
+      "reviewPasses": [
+        "RULE_TO_APPROVED_CONTRACT",
+        "COUNTEREXAMPLE_SOURCE_RECHECK"
+      ],
+      "reviewExpires": "ANY_RELEVANT_SOURCE_OR_APPROVED_CONTRACT_CHANGE",
+      "testReference": {
+        "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/bootstrap/ApiManagementStopTest.java",
+        "className": "dev.codex.schubert.nk.api.bootstrap.ApiManagementStopTest",
+        "method": "apiStop003LockDeadlineAndNewInterruptNeverDuplicateStop",
+        "currentRunStatus": "UNRUN_HOLD_REFERENCE_ONLY",
+        "currentXmlQualified": false
+      },
+      "rawWarningRetained": true,
+      "sourceChangedByReview": false,
+      "actualRuntimeProven": false,
+      "qualityGatePass": false,
+      "formalAccepted": false,
+      "ptAlternativeCompleted": 0
+    },
+    {
+      "index": 18,
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/bootstrap/ApiManagementServer.java",
+      "sourceSha256": "81c29219808b8c38764d7bcd9ec1d1e7fc32a709a158a0399237e7fe5d46cb5c",
+      "raw": {
+        "begincolumn": "24",
+        "beginline": "292",
+        "class": "ApiManagementServer",
+        "endcolumn": "30",
+        "endline": "292",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "message": "To be compliant to J2EE, a webapp should not use any thread.",
+        "method": "stopFailure",
+        "package": "dev.codex.schubert.nk.api.bootstrap",
+        "priority": "3",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading"
+      },
+      "subject": "API outer IRQ restore",
+      "status": "CONTEXT_NOT_APPLICABLE_J2EE_RULE",
+      "reason": "PMD 7.28.0's primary rule explicitly assumes J2EE-server-managed threads; SS342 specifies standalone direct Java services and bounded management owners. This is contextual applicability, not runtime proof. Restores entry notification on every return through the enclosing finally.",
+      "counterexample": "Normal-only restoration would lose notification on provider exceptions and early returns.",
+      "design": [
+        "RD171",
+        "UI252",
+        "SS342 SSC312/313/317/335",
+        "SS351",
+        "411/451"
+      ],
+      "reviewOwner": "PGPT_PARENT",
+      "reviewPasses": [
+        "RULE_TO_APPROVED_CONTRACT",
+        "COUNTEREXAMPLE_SOURCE_RECHECK"
+      ],
+      "reviewExpires": "ANY_RELEVANT_SOURCE_OR_APPROVED_CONTRACT_CHANGE",
+      "testReference": {
+        "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/bootstrap/ApiManagementStopTest.java",
+        "className": "dev.codex.schubert.nk.api.bootstrap.ApiManagementStopTest",
+        "method": "apiStop003LockDeadlineAndNewInterruptNeverDuplicateStop",
+        "currentRunStatus": "UNRUN_HOLD_REFERENCE_ONLY",
+        "currentXmlQualified": false
+      },
+      "rawWarningRetained": true,
+      "sourceChangedByReview": false,
+      "actualRuntimeProven": false,
+      "qualityGatePass": false,
+      "formalAccepted": false,
+      "ptAlternativeCompleted": 0
+    },
+    {
+      "index": 19,
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebManagementServer.java",
+      "sourceSha256": "f4b820069ae18d539f6ceb62fd2b2e3b95afe27dafb0bdaf72e35c1fe53a01cf",
+      "raw": {
+        "begincolumn": "17",
+        "beginline": "38",
+        "class": "WebManagementServer",
+        "endcolumn": "35",
+        "endline": "38",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "message": "To be compliant to J2EE, a webapp should not use any thread.",
+        "package": "dev.codex.schubert.nk.web.bootstrap",
+        "priority": "3",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading"
+      },
+      "subject": "Web executor field",
+      "status": "CONTEXT_NOT_APPLICABLE_J2EE_RULE",
+      "reason": "PMD 7.28.0's primary rule explicitly assumes J2EE-server-managed threads; SS342 specifies standalone direct Java services and bounded management owners. This is contextual applicability, not runtime proof. Retains the fixed standalone Web management executor; type declaration is not acquisition.",
+      "counterexample": "J2EE-managed resource prohibition cannot be assumed for the approved direct Java process.",
+      "design": [
+        "RD171",
+        "UI252",
+        "SS342 SSC312/313/317/335",
+        "SS351",
+        "411/451"
+      ],
+      "reviewOwner": "PGPT_PARENT",
+      "reviewPasses": [
+        "RULE_TO_APPROVED_CONTRACT",
+        "COUNTEREXAMPLE_SOURCE_RECHECK"
+      ],
+      "reviewExpires": "ANY_RELEVANT_SOURCE_OR_APPROVED_CONTRACT_CHANGE",
+      "testReference": {
+        "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/bootstrap/WebManagementServerTest.java",
+        "className": "dev.codex.schubert.nk.web.bootstrap.WebManagementServerTest",
+        "method": "ready006HeldBindStartOnceAndStopBudgetBoundaries",
+        "currentRunStatus": "UNRUN_HOLD_REFERENCE_ONLY",
+        "currentXmlQualified": false
+      },
+      "rawWarningRetained": true,
+      "sourceChangedByReview": false,
+      "actualRuntimeProven": false,
+      "qualityGatePass": false,
+      "formalAccepted": false,
+      "ptAlternativeCompleted": 0
+    },
+    {
+      "index": 20,
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebManagementServer.java",
+      "sourceSha256": "f4b820069ae18d539f6ceb62fd2b2e3b95afe27dafb0bdaf72e35c1fe53a01cf",
+      "raw": {
+        "begincolumn": "28",
+        "beginline": "50",
+        "class": "WebManagementServer",
+        "endcolumn": "35",
+        "endline": "50",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#avoidusingvolatile",
+        "message": "Use of modifier volatile is not recommended.",
+        "package": "dev.codex.schubert.nk.web.bootstrap",
+        "priority": "2",
+        "rule": "AvoidUsingVolatile",
+        "ruleset": "Multithreading",
+        "variable": "started"
+      },
+      "subject": "Web volatile started",
+      "status": "REQUIRED_CONTRACT_CURRENT_PT_JOIN_PENDING",
+      "reason": "411 thread-safe publication and SS342 readiness state require visibility for the private started flag read outside its write lock; no compound atomicity or actual readiness is inferred. Private volatile started is written true only after normal start under stopLock and read by ready outside that lock; visibility is required, not a compound-state transaction.",
+      "counterexample": "Removing volatile loses publication; volatile alone does not prove actual server readiness or atomicity of the full readiness tuple.",
+      "design": [
+        "RD171",
+        "UI252",
+        "SS342 SSC312/313/317/335",
+        "SS351",
+        "411/451"
+      ],
+      "reviewOwner": "PGPT_PARENT",
+      "reviewPasses": [
+        "RULE_TO_APPROVED_CONTRACT",
+        "COUNTEREXAMPLE_SOURCE_RECHECK"
+      ],
+      "reviewExpires": "ANY_RELEVANT_SOURCE_OR_APPROVED_CONTRACT_CHANGE",
+      "testReference": {
+        "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/bootstrap/WebManagementServerTest.java",
+        "className": "dev.codex.schubert.nk.web.bootstrap.WebManagementServerTest",
+        "method": "ready002HandoffFailureAndConcurrentStopNeverPromote",
+        "currentRunStatus": "UNRUN_HOLD_REFERENCE_ONLY",
+        "currentXmlQualified": false
+      },
+      "rawWarningRetained": true,
+      "sourceChangedByReview": false,
+      "actualRuntimeProven": false,
+      "qualityGatePass": false,
+      "formalAccepted": false,
+      "ptAlternativeCompleted": 0
+    },
+    {
+      "index": 21,
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebManagementServer.java",
+      "sourceSha256": "f4b820069ae18d539f6ceb62fd2b2e3b95afe27dafb0bdaf72e35c1fe53a01cf",
+      "raw": {
+        "begincolumn": "14",
+        "beginline": "73",
+        "class": "WebManagementServer",
+        "endcolumn": "30",
+        "endline": "73",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidcatchinggenericexception",
+        "message": "Avoid catching RuntimeException in try-catch block",
+        "method": "open",
+        "package": "dev.codex.schubert.nk.web.bootstrap",
+        "priority": "3",
+        "rule": "AvoidCatchingGenericException",
+        "ruleset": "Error Prone"
+      },
+      "subject": "Web start Runtime",
+      "status": "REQUIRED_CONTRACT_CURRENT_PT_JOIN_PENDING",
+      "reason": "SS342's acquired-owner failure contract requires RuntimeException/Error cleanup and preserved direct-fatal ordering; this is not catch(Exception), swallowing or normal recovery. Cleans the already bound owner on unchecked setup failure while retaining the original primary.",
+      "counterexample": "Removing Runtime coverage abandons the server; returning normally invents a successful open.",
+      "design": [
+        "RD171",
+        "UI252",
+        "SS342 SSC312/313/317/335",
+        "SS351",
+        "411/451"
+      ],
+      "reviewOwner": "PGPT_PARENT",
+      "reviewPasses": [
+        "RULE_TO_APPROVED_CONTRACT",
+        "COUNTEREXAMPLE_SOURCE_RECHECK"
+      ],
+      "reviewExpires": "ANY_RELEVANT_SOURCE_OR_APPROVED_CONTRACT_CHANGE",
+      "testReference": {
+        "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/bootstrap/WebManagementServerTest.java",
+        "className": "dev.codex.schubert.nk.web.bootstrap.WebManagementServerTest",
+        "method": "ready007CompoundStartupCleanupKeepsPrimaryAndFixedDiagnostic",
+        "currentRunStatus": "UNRUN_HOLD_REFERENCE_ONLY",
+        "currentXmlQualified": false
+      },
+      "rawWarningRetained": true,
+      "sourceChangedByReview": false,
+      "actualRuntimeProven": false,
+      "qualityGatePass": false,
+      "formalAccepted": false,
+      "ptAlternativeCompleted": 0
+    },
+    {
+      "index": 22,
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebManagementServer.java",
+      "sourceSha256": "f4b820069ae18d539f6ceb62fd2b2e3b95afe27dafb0bdaf72e35c1fe53a01cf",
+      "raw": {
+        "begincolumn": "33",
+        "beginline": "73",
+        "class": "WebManagementServer",
+        "endcolumn": "38",
+        "endline": "73",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidcatchinggenericexception",
+        "message": "Avoid catching Error in try-catch block",
+        "method": "open",
+        "package": "dev.codex.schubert.nk.web.bootstrap",
+        "priority": "3",
+        "rule": "AvoidCatchingGenericException",
+        "ruleset": "Error Prone"
+      },
+      "subject": "Web start Error",
+      "status": "REQUIRED_CONTRACT_CURRENT_PT_JOIN_PENDING",
+      "reason": "SS342's acquired-owner failure contract requires RuntimeException/Error cleanup and preserved direct-fatal ordering; this is not catch(Exception), swallowing or normal recovery. Retains direct setup Error through the explicit cleanup ranking without a successful handle.",
+      "counterexample": "Checked-only handling skips fatal setup cleanup and wrapping demotes Error.",
+      "design": [
+        "RD171",
+        "UI252",
+        "SS342 SSC312/313/317/335",
+        "SS351",
+        "411/451"
+      ],
+      "reviewOwner": "PGPT_PARENT",
+      "reviewPasses": [
+        "RULE_TO_APPROVED_CONTRACT",
+        "COUNTEREXAMPLE_SOURCE_RECHECK"
+      ],
+      "reviewExpires": "ANY_RELEVANT_SOURCE_OR_APPROVED_CONTRACT_CHANGE",
+      "testReference": {
+        "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/bootstrap/WebManagementServerTest.java",
+        "className": "dev.codex.schubert.nk.web.bootstrap.WebManagementServerTest",
+        "method": "ready007CompoundStartupCleanupKeepsPrimaryAndFixedDiagnostic",
+        "currentRunStatus": "UNRUN_HOLD_REFERENCE_ONLY",
+        "currentXmlQualified": false
+      },
+      "rawWarningRetained": true,
+      "sourceChangedByReview": false,
+      "actualRuntimeProven": false,
+      "qualityGatePass": false,
+      "formalAccepted": false,
+      "ptAlternativeCompleted": 0
+    },
+    {
+      "index": 23,
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebManagementServer.java",
+      "sourceSha256": "f4b820069ae18d539f6ceb62fd2b2e3b95afe27dafb0bdaf72e35c1fe53a01cf",
+      "raw": {
+        "begincolumn": "16",
+        "beginline": "76",
+        "class": "WebManagementServer",
+        "endcolumn": "32",
+        "endline": "76",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidcatchinggenericexception",
+        "message": "Avoid catching RuntimeException in try-catch block",
+        "method": "open",
+        "package": "dev.codex.schubert.nk.web.bootstrap",
+        "priority": "3",
+        "rule": "AvoidCatchingGenericException",
+        "ruleset": "Error Prone"
+      },
+      "subject": "Web cleanup Runtime",
+      "status": "REQUIRED_CONTRACT_CURRENT_PT_JOIN_PENDING",
+      "reason": "SS342's acquired-owner failure contract requires RuntimeException/Error cleanup and preserved direct-fatal ordering; this is not catch(Exception), swallowing or normal recovery. Retains primary and adds only a distinct prebuilt fixed diagnostic on nonfatal cleanup failure.",
+      "counterexample": "Replacing primary or attaching raw provider failure changes ranking and redaction.",
+      "design": [
+        "RD171",
+        "UI252",
+        "SS342 SSC312/313/317/335",
+        "SS351",
+        "411/451"
+      ],
+      "reviewOwner": "PGPT_PARENT",
+      "reviewPasses": [
+        "RULE_TO_APPROVED_CONTRACT",
+        "COUNTEREXAMPLE_SOURCE_RECHECK"
+      ],
+      "reviewExpires": "ANY_RELEVANT_SOURCE_OR_APPROVED_CONTRACT_CHANGE",
+      "testReference": {
+        "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/bootstrap/WebManagementServerTest.java",
+        "className": "dev.codex.schubert.nk.web.bootstrap.WebManagementServerTest",
+        "method": "ready007CompoundStartupCleanupKeepsPrimaryAndFixedDiagnostic",
+        "currentRunStatus": "UNRUN_HOLD_REFERENCE_ONLY",
+        "currentXmlQualified": false
+      },
+      "rawWarningRetained": true,
+      "sourceChangedByReview": false,
+      "actualRuntimeProven": false,
+      "qualityGatePass": false,
+      "formalAccepted": false,
+      "ptAlternativeCompleted": 0
+    },
+    {
+      "index": 24,
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebManagementServer.java",
+      "sourceSha256": "f4b820069ae18d539f6ceb62fd2b2e3b95afe27dafb0bdaf72e35c1fe53a01cf",
+      "raw": {
+        "begincolumn": "35",
+        "beginline": "76",
+        "class": "WebManagementServer",
+        "endcolumn": "40",
+        "endline": "76",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidcatchinggenericexception",
+        "message": "Avoid catching Error in try-catch block",
+        "method": "open",
+        "package": "dev.codex.schubert.nk.web.bootstrap",
+        "priority": "3",
+        "rule": "AvoidCatchingGenericException",
+        "ruleset": "Error Prone"
+      },
+      "subject": "Web cleanup Error",
+      "status": "REQUIRED_CONTRACT_CURRENT_PT_JOIN_PENDING",
+      "reason": "SS342's acquired-owner failure contract requires RuntimeException/Error cleanup and preserved direct-fatal ordering; this is not catch(Exception), swallowing or normal recovery. Promotes direct cleanup Error only above nonfatal setup; original fatal primary identity wins otherwise.",
+      "counterexample": "Converting every failure to IOException demotes fatal state; unconditional replacement changes ordering.",
+      "design": [
+        "RD171",
+        "UI252",
+        "SS342 SSC312/313/317/335",
+        "SS351",
+        "411/451"
+      ],
+      "reviewOwner": "PGPT_PARENT",
+      "reviewPasses": [
+        "RULE_TO_APPROVED_CONTRACT",
+        "COUNTEREXAMPLE_SOURCE_RECHECK"
+      ],
+      "reviewExpires": "ANY_RELEVANT_SOURCE_OR_APPROVED_CONTRACT_CHANGE",
+      "testReference": {
+        "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/bootstrap/WebManagementServerTest.java",
+        "className": "dev.codex.schubert.nk.web.bootstrap.WebManagementServerTest",
+        "method": "ready007CompoundStartupCleanupKeepsPrimaryAndFixedDiagnostic",
+        "currentRunStatus": "UNRUN_HOLD_REFERENCE_ONLY",
+        "currentXmlQualified": false
+      },
+      "rawWarningRetained": true,
+      "sourceChangedByReview": false,
+      "actualRuntimeProven": false,
+      "qualityGatePass": false,
+      "formalAccepted": false,
+      "ptAlternativeCompleted": 0
+    },
+    {
+      "index": 25,
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebManagementServer.java",
+      "sourceSha256": "f4b820069ae18d539f6ceb62fd2b2e3b95afe27dafb0bdaf72e35c1fe53a01cf",
+      "raw": {
+        "begincolumn": "36",
+        "beginline": "77",
+        "class": "WebManagementServer",
+        "endcolumn": "41",
+        "endline": "77",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidinstanceofchecksincatchclause",
+        "message": "An instanceof check is being performed on the caught exception. Create a separate catch clause for Error.",
+        "method": "open",
+        "package": "dev.codex.schubert.nk.web.bootstrap",
+        "priority": "3",
+        "rule": "AvoidInstanceofChecksInCatchClause",
+        "ruleset": "Error Prone"
+      },
+      "subject": "Web cleanup fatal predicate",
+      "status": "REQUIRED_CONTRACT_CURRENT_PT_JOIN_PENDING",
+      "reason": "The fixed two-operand direct-Error priority relation is intentional cleanup semantics, not an arbitrary caught-exception downcast; raw overlaps remain visible. First Error operand determines whether cleanup is directly fatal; preserve overlapping warnings.",
+      "counterexample": "A split catch still requires comparison with the primary fatal category.",
+      "design": [
+        "RD171",
+        "UI252",
+        "SS342 SSC312/313/317/335",
+        "SS351",
+        "411/451"
+      ],
+      "reviewOwner": "PGPT_PARENT",
+      "reviewPasses": [
+        "RULE_TO_APPROVED_CONTRACT",
+        "COUNTEREXAMPLE_SOURCE_RECHECK"
+      ],
+      "reviewExpires": "ANY_RELEVANT_SOURCE_OR_APPROVED_CONTRACT_CHANGE",
+      "testReference": {
+        "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/bootstrap/WebManagementServerTest.java",
+        "className": "dev.codex.schubert.nk.web.bootstrap.WebManagementServerTest",
+        "method": "ready007CompoundStartupCleanupKeepsPrimaryAndFixedDiagnostic",
+        "currentRunStatus": "UNRUN_HOLD_REFERENCE_ONLY",
+        "currentXmlQualified": false
+      },
+      "rawWarningRetained": true,
+      "sourceChangedByReview": false,
+      "actualRuntimeProven": false,
+      "qualityGatePass": false,
+      "formalAccepted": false,
+      "ptAlternativeCompleted": 0
+    },
+    {
+      "index": 26,
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebManagementServer.java",
+      "sourceSha256": "f4b820069ae18d539f6ceb62fd2b2e3b95afe27dafb0bdaf72e35c1fe53a01cf",
+      "raw": {
+        "begincolumn": "36",
+        "beginline": "77",
+        "class": "WebManagementServer",
+        "endcolumn": "41",
+        "endline": "77",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidinstanceofchecksincatchclause",
+        "message": "An instanceof check is being performed on the caught exception. Create a separate catch clause for Error.",
+        "method": "open",
+        "package": "dev.codex.schubert.nk.web.bootstrap",
+        "priority": "3",
+        "rule": "AvoidInstanceofChecksInCatchClause",
+        "ruleset": "Error Prone"
+      },
+      "subject": "Web cleanup predicate duplicate",
+      "status": "REQUIRED_CONTRACT_CURRENT_PT_JOIN_PENDING",
+      "reason": "The fixed two-operand direct-Error priority relation is intentional cleanup semantics, not an arbitrary caught-exception downcast; raw overlaps remain visible. Second raw occurrence at the same operand is kept without a second executable path.",
+      "counterexample": "Raw duplicate removal changes raw40 and must not become progress inflation.",
+      "design": [
+        "RD171",
+        "UI252",
+        "SS342 SSC312/313/317/335",
+        "SS351",
+        "411/451"
+      ],
+      "reviewOwner": "PGPT_PARENT",
+      "reviewPasses": [
+        "RULE_TO_APPROVED_CONTRACT",
+        "COUNTEREXAMPLE_SOURCE_RECHECK"
+      ],
+      "reviewExpires": "ANY_RELEVANT_SOURCE_OR_APPROVED_CONTRACT_CHANGE",
+      "testReference": {
+        "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/bootstrap/WebManagementServerTest.java",
+        "className": "dev.codex.schubert.nk.web.bootstrap.WebManagementServerTest",
+        "method": "ready007CompoundStartupCleanupKeepsPrimaryAndFixedDiagnostic",
+        "currentRunStatus": "UNRUN_HOLD_REFERENCE_ONLY",
+        "currentXmlQualified": false
+      },
+      "rawWarningRetained": true,
+      "sourceChangedByReview": false,
+      "actualRuntimeProven": false,
+      "qualityGatePass": false,
+      "formalAccepted": false,
+      "ptAlternativeCompleted": 0
+    },
+    {
+      "index": 27,
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebManagementServer.java",
+      "sourceSha256": "f4b820069ae18d539f6ceb62fd2b2e3b95afe27dafb0bdaf72e35c1fe53a01cf",
+      "raw": {
+        "begincolumn": "66",
+        "beginline": "77",
+        "class": "WebManagementServer",
+        "endcolumn": "71",
+        "endline": "77",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidinstanceofchecksincatchclause",
+        "message": "An instanceof check is being performed on the caught exception. Create a separate catch clause for Error.",
+        "method": "open",
+        "package": "dev.codex.schubert.nk.web.bootstrap",
+        "priority": "3",
+        "rule": "AvoidInstanceofChecksInCatchClause",
+        "ruleset": "Error Prone"
+      },
+      "subject": "Web primary fatal predicate",
+      "status": "REQUIRED_CONTRACT_CURRENT_PT_JOIN_PENDING",
+      "reason": "The fixed two-operand direct-Error priority relation is intentional cleanup semantics, not an arbitrary caught-exception downcast; raw overlaps remain visible. Negated primary Error operand protects original fatal identity when both are Error.",
+      "counterexample": "Removing the operand changes approved primary selection.",
+      "design": [
+        "RD171",
+        "UI252",
+        "SS342 SSC312/313/317/335",
+        "SS351",
+        "411/451"
+      ],
+      "reviewOwner": "PGPT_PARENT",
+      "reviewPasses": [
+        "RULE_TO_APPROVED_CONTRACT",
+        "COUNTEREXAMPLE_SOURCE_RECHECK"
+      ],
+      "reviewExpires": "ANY_RELEVANT_SOURCE_OR_APPROVED_CONTRACT_CHANGE",
+      "testReference": {
+        "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/bootstrap/WebManagementServerTest.java",
+        "className": "dev.codex.schubert.nk.web.bootstrap.WebManagementServerTest",
+        "method": "ready007CompoundStartupCleanupKeepsPrimaryAndFixedDiagnostic",
+        "currentRunStatus": "UNRUN_HOLD_REFERENCE_ONLY",
+        "currentXmlQualified": false
+      },
+      "rawWarningRetained": true,
+      "sourceChangedByReview": false,
+      "actualRuntimeProven": false,
+      "qualityGatePass": false,
+      "formalAccepted": false,
+      "ptAlternativeCompleted": 0
+    },
+    {
+      "index": 28,
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebManagementServer.java",
+      "sourceSha256": "f4b820069ae18d539f6ceb62fd2b2e3b95afe27dafb0bdaf72e35c1fe53a01cf",
+      "raw": {
+        "begincolumn": "66",
+        "beginline": "77",
+        "class": "WebManagementServer",
+        "endcolumn": "71",
+        "endline": "77",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidinstanceofchecksincatchclause",
+        "message": "An instanceof check is being performed on the caught exception. Create a separate catch clause for Error.",
+        "method": "open",
+        "package": "dev.codex.schubert.nk.web.bootstrap",
+        "priority": "3",
+        "rule": "AvoidInstanceofChecksInCatchClause",
+        "ruleset": "Error Prone"
+      },
+      "subject": "Web primary predicate duplicate",
+      "status": "REQUIRED_CONTRACT_CURRENT_PT_JOIN_PENDING",
+      "reason": "The fixed two-operand direct-Error priority relation is intentional cleanup semantics, not an arbitrary caught-exception downcast; raw overlaps remain visible. Second identical raw occurrence shares one source meaning while remaining independently joined.",
+      "counterexample": "The overlap is not an additional tested branch or a new accepted item.",
+      "design": [
+        "RD171",
+        "UI252",
+        "SS342 SSC312/313/317/335",
+        "SS351",
+        "411/451"
+      ],
+      "reviewOwner": "PGPT_PARENT",
+      "reviewPasses": [
+        "RULE_TO_APPROVED_CONTRACT",
+        "COUNTEREXAMPLE_SOURCE_RECHECK"
+      ],
+      "reviewExpires": "ANY_RELEVANT_SOURCE_OR_APPROVED_CONTRACT_CHANGE",
+      "testReference": {
+        "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/bootstrap/WebManagementServerTest.java",
+        "className": "dev.codex.schubert.nk.web.bootstrap.WebManagementServerTest",
+        "method": "ready007CompoundStartupCleanupKeepsPrimaryAndFixedDiagnostic",
+        "currentRunStatus": "UNRUN_HOLD_REFERENCE_ONLY",
+        "currentXmlQualified": false
+      },
+      "rawWarningRetained": true,
+      "sourceChangedByReview": false,
+      "actualRuntimeProven": false,
+      "qualityGatePass": false,
+      "formalAccepted": false,
+      "ptAlternativeCompleted": 0
+    },
+    {
+      "index": 29,
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebManagementServer.java",
+      "sourceSha256": "f4b820069ae18d539f6ceb62fd2b2e3b95afe27dafb0bdaf72e35c1fe53a01cf",
+      "raw": {
+        "begincolumn": "13",
+        "beginline": "78",
+        "class": "WebManagementServer",
+        "endcolumn": "35",
+        "endline": "78",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#compareobjectswithequals",
+        "message": "Use equals() to compare object references.",
+        "method": "open",
+        "package": "dev.codex.schubert.nk.web.bootstrap",
+        "priority": "3",
+        "rule": "CompareObjectsWithEquals",
+        "ruleset": "Error Prone"
+      },
+      "subject": "Web Throwable identity",
+      "status": "REQUIRED_CONTRACT_CURRENT_PT_JOIN_PENDING",
+      "reason": "Throwable self-suppression is an identity relation; fixed diagnostics and distinct-primary guards must not be replaced by value equality. Identity, not equals, guards distinct cleanup versus primary before adding the fixed diagnostic.",
+      "counterexample": "Provider equality overrides cannot define Java self-suppression.",
+      "design": [
+        "RD171",
+        "UI252",
+        "SS342 SSC312/313/317/335",
+        "SS351",
+        "411/451"
+      ],
+      "reviewOwner": "PGPT_PARENT",
+      "reviewPasses": [
+        "RULE_TO_APPROVED_CONTRACT",
+        "COUNTEREXAMPLE_SOURCE_RECHECK"
+      ],
+      "reviewExpires": "ANY_RELEVANT_SOURCE_OR_APPROVED_CONTRACT_CHANGE",
+      "testReference": {
+        "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/bootstrap/WebManagementServerTest.java",
+        "className": "dev.codex.schubert.nk.web.bootstrap.WebManagementServerTest",
+        "method": "ready007CompoundStartupCleanupKeepsPrimaryAndFixedDiagnostic",
+        "currentRunStatus": "UNRUN_HOLD_REFERENCE_ONLY",
+        "currentXmlQualified": false
+      },
+      "rawWarningRetained": true,
+      "sourceChangedByReview": false,
+      "actualRuntimeProven": false,
+      "qualityGatePass": false,
+      "formalAccepted": false,
+      "ptAlternativeCompleted": 0
+    },
+    {
+      "index": 30,
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebManagementServer.java",
+      "sourceSha256": "f4b820069ae18d539f6ceb62fd2b2e3b95afe27dafb0bdaf72e35c1fe53a01cf",
+      "raw": {
+        "begincolumn": "13",
+        "beginline": "152",
+        "class": "WebManagementServer",
+        "endcolumn": "31",
+        "endline": "152",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "message": "To be compliant to J2EE, a webapp should not use any thread.",
+        "method": "WebManagementServer",
+        "package": "dev.codex.schubert.nk.web.bootstrap",
+        "priority": "3",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading"
+      },
+      "subject": "Web fixed executor allocation",
+      "status": "CONTEXT_NOT_APPLICABLE_J2EE_RULE",
+      "reason": "PMD 7.28.0's primary rule explicitly assumes J2EE-server-managed threads; SS342 specifies standalone direct Java services and bounded management owners. This is contextual applicability, not runtime proof. Core/max1 and queue32 are created before HTTP acquisition in the approved standalone process.",
+      "counterexample": "This is no permission for arbitrary business threads; budgets and actual owned join remain mandatory.",
+      "design": [
+        "RD171",
+        "UI252",
+        "SS342 SSC312/313/317/335",
+        "SS351",
+        "411/451"
+      ],
+      "reviewOwner": "PGPT_PARENT",
+      "reviewPasses": [
+        "RULE_TO_APPROVED_CONTRACT",
+        "COUNTEREXAMPLE_SOURCE_RECHECK"
+      ],
+      "reviewExpires": "ANY_RELEVANT_SOURCE_OR_APPROVED_CONTRACT_CHANGE",
+      "testReference": {
+        "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/bootstrap/WebManagementServerTest.java",
+        "className": "dev.codex.schubert.nk.web.bootstrap.WebManagementServerTest",
+        "method": "ready006HeldBindStartOnceAndStopBudgetBoundaries",
+        "currentRunStatus": "UNRUN_HOLD_REFERENCE_ONLY",
+        "currentXmlQualified": false
+      },
+      "rawWarningRetained": true,
+      "sourceChangedByReview": false,
+      "actualRuntimeProven": false,
+      "qualityGatePass": false,
+      "formalAccepted": false,
+      "ptAlternativeCompleted": 0
+    },
+    {
+      "index": 31,
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebManagementServer.java",
+      "sourceSha256": "f4b820069ae18d539f6ceb62fd2b2e3b95afe27dafb0bdaf72e35c1fe53a01cf",
+      "raw": {
+        "begincolumn": "32",
+        "beginline": "159",
+        "class": "WebManagementServer",
+        "endcolumn": "38",
+        "endline": "159",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "message": "To be compliant to J2EE, a webapp should not use any thread.",
+        "method": "WebManagementServer",
+        "package": "dev.codex.schubert.nk.web.bootstrap",
+        "priority": "3",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading"
+      },
+      "subject": "Web daemon worker",
+      "status": "CONTEXT_NOT_APPLICABLE_J2EE_RULE",
+      "reason": "PMD 7.28.0's primary rule explicitly assumes J2EE-server-managed threads; SS342 specifies standalone direct Java services and bounded management owners. This is contextual applicability, not runtime proof. Named daemon management worker implements direct-Java ownership, not J2EE-container threading.",
+      "counterexample": "Daemon is not actual stopped state; native cleanup is not certified.",
+      "design": [
+        "RD171",
+        "UI252",
+        "SS342 SSC312/313/317/335",
+        "SS351",
+        "411/451"
+      ],
+      "reviewOwner": "PGPT_PARENT",
+      "reviewPasses": [
+        "RULE_TO_APPROVED_CONTRACT",
+        "COUNTEREXAMPLE_SOURCE_RECHECK"
+      ],
+      "reviewExpires": "ANY_RELEVANT_SOURCE_OR_APPROVED_CONTRACT_CHANGE",
+      "testReference": {
+        "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/bootstrap/WebManagementServerTest.java",
+        "className": "dev.codex.schubert.nk.web.bootstrap.WebManagementServerTest",
+        "method": "ready006HeldBindStartOnceAndStopBudgetBoundaries",
+        "currentRunStatus": "UNRUN_HOLD_REFERENCE_ONLY",
+        "currentXmlQualified": false
+      },
+      "rawWarningRetained": true,
+      "sourceChangedByReview": false,
+      "actualRuntimeProven": false,
+      "qualityGatePass": false,
+      "formalAccepted": false,
+      "ptAlternativeCompleted": 0
+    },
+    {
+      "index": 32,
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebManagementServer.java",
+      "sourceSha256": "f4b820069ae18d539f6ceb62fd2b2e3b95afe27dafb0bdaf72e35c1fe53a01cf",
+      "raw": {
+        "begincolumn": "32",
+        "beginline": "261",
+        "class": "WebManagementServer",
+        "endcolumn": "38",
+        "endline": "261",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "message": "To be compliant to J2EE, a webapp should not use any thread.",
+        "method": "stopFailure",
+        "package": "dev.codex.schubert.nk.web.bootstrap",
+        "priority": "3",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading"
+      },
+      "subject": "Web entry IRQ capture",
+      "status": "CONTEXT_NOT_APPLICABLE_J2EE_RULE",
+      "reason": "PMD 7.28.0's primary rule explicitly assumes J2EE-server-managed threads; SS342 specifies standalone direct Java services and bounded management owners. This is contextual applicability, not runtime proof. Temporarily clears entry signal for finite lock acquisition only, per SSC335.",
+      "counterexample": "Using API's clear-through-join policy here changes Web vendor/await semantics.",
+      "design": [
+        "RD171",
+        "UI252",
+        "SS342 SSC312/313/317/335",
+        "SS351",
+        "411/451"
+      ],
+      "reviewOwner": "PGPT_PARENT",
+      "reviewPasses": [
+        "RULE_TO_APPROVED_CONTRACT",
+        "COUNTEREXAMPLE_SOURCE_RECHECK"
+      ],
+      "reviewExpires": "ANY_RELEVANT_SOURCE_OR_APPROVED_CONTRACT_CHANGE",
+      "testReference": {
+        "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/bootstrap/WebManagementDeadlineTest.java",
+        "className": "dev.codex.schubert.nk.web.bootstrap.WebManagementDeadlineTest",
+        "method": "webMgmt335001ZeroBudgetDoesNotWaitForOtherCloseOwner",
+        "currentRunStatus": "UNRUN_HOLD_REFERENCE_ONLY",
+        "currentXmlQualified": false
+      },
+      "rawWarningRetained": true,
+      "sourceChangedByReview": false,
+      "actualRuntimeProven": false,
+      "qualityGatePass": false,
+      "formalAccepted": false,
+      "ptAlternativeCompleted": 0
+    },
+    {
+      "index": 33,
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebManagementServer.java",
+      "sourceSha256": "f4b820069ae18d539f6ceb62fd2b2e3b95afe27dafb0bdaf72e35c1fe53a01cf",
+      "raw": {
+        "begincolumn": "9",
+        "beginline": "267",
+        "class": "WebManagementServer",
+        "endcolumn": "15",
+        "endline": "267",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "message": "To be compliant to J2EE, a webapp should not use any thread.",
+        "method": "stopFailure",
+        "package": "dev.codex.schubert.nk.web.bootstrap",
+        "priority": "3",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading"
+      },
+      "subject": "Web lock IRQ restore",
+      "status": "CONTEXT_NOT_APPLICABLE_J2EE_RULE",
+      "reason": "PMD 7.28.0's primary rule explicitly assumes J2EE-server-managed threads; SS342 specifies standalone direct Java services and bounded management owners. This is contextual applicability, not runtime proof. Restores new lock-wait interruption and yields fixed IOException unconfirmed.",
+      "counterexample": "Clearing notification or reporting success hides a retained owner.",
+      "design": [
+        "RD171",
+        "UI252",
+        "SS342 SSC312/313/317/335",
+        "SS351",
+        "411/451"
+      ],
+      "reviewOwner": "PGPT_PARENT",
+      "reviewPasses": [
+        "RULE_TO_APPROVED_CONTRACT",
+        "COUNTEREXAMPLE_SOURCE_RECHECK"
+      ],
+      "reviewExpires": "ANY_RELEVANT_SOURCE_OR_APPROVED_CONTRACT_CHANGE",
+      "testReference": {
+        "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/bootstrap/WebManagementDeadlineTest.java",
+        "className": "dev.codex.schubert.nk.web.bootstrap.WebManagementDeadlineTest",
+        "method": "webMgmt335001ZeroBudgetDoesNotWaitForOtherCloseOwner",
+        "currentRunStatus": "UNRUN_HOLD_REFERENCE_ONLY",
+        "currentXmlQualified": false
+      },
+      "rawWarningRetained": true,
+      "sourceChangedByReview": false,
+      "actualRuntimeProven": false,
+      "qualityGatePass": false,
+      "formalAccepted": false,
+      "ptAlternativeCompleted": 0
+    },
+    {
+      "index": 34,
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebManagementServer.java",
+      "sourceSha256": "f4b820069ae18d539f6ceb62fd2b2e3b95afe27dafb0bdaf72e35c1fe53a01cf",
+      "raw": {
+        "begincolumn": "29",
+        "beginline": "271",
+        "class": "WebManagementServer",
+        "endcolumn": "35",
+        "endline": "271",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "message": "To be compliant to J2EE, a webapp should not use any thread.",
+        "method": "stopFailure",
+        "package": "dev.codex.schubert.nk.web.bootstrap",
+        "priority": "3",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading"
+      },
+      "subject": "Web pre-vendor IRQ",
+      "status": "CONTEXT_NOT_APPLICABLE_J2EE_RULE",
+      "reason": "PMD 7.28.0's primary rule explicitly assumes J2EE-server-managed threads; SS342 specifies standalone direct Java services and bounded management owners. This is contextual applicability, not runtime proof. Restores saved entry notification before vendor stop after successful lock acquisition.",
+      "counterexample": "A shared API-style deferred restoration changes the established Web contract.",
+      "design": [
+        "RD171",
+        "UI252",
+        "SS342 SSC312/313/317/335",
+        "SS351",
+        "411/451"
+      ],
+      "reviewOwner": "PGPT_PARENT",
+      "reviewPasses": [
+        "RULE_TO_APPROVED_CONTRACT",
+        "COUNTEREXAMPLE_SOURCE_RECHECK"
+      ],
+      "reviewExpires": "ANY_RELEVANT_SOURCE_OR_APPROVED_CONTRACT_CHANGE",
+      "testReference": {
+        "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/bootstrap/WebManagementDeadlineTest.java",
+        "className": "dev.codex.schubert.nk.web.bootstrap.WebManagementDeadlineTest",
+        "method": "webMgmt335001ZeroBudgetDoesNotWaitForOtherCloseOwner",
+        "currentRunStatus": "UNRUN_HOLD_REFERENCE_ONLY",
+        "currentXmlQualified": false
+      },
+      "rawWarningRetained": true,
+      "sourceChangedByReview": false,
+      "actualRuntimeProven": false,
+      "qualityGatePass": false,
+      "formalAccepted": false,
+      "ptAlternativeCompleted": 0
+    },
+    {
+      "index": 35,
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebManagementServer.java",
+      "sourceSha256": "f4b820069ae18d539f6ceb62fd2b2e3b95afe27dafb0bdaf72e35c1fe53a01cf",
+      "raw": {
+        "begincolumn": "33",
+        "beginline": "275",
+        "class": "WebManagementServer",
+        "endcolumn": "39",
+        "endline": "275",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "message": "To be compliant to J2EE, a webapp should not use any thread.",
+        "method": "stopFailure",
+        "package": "dev.codex.schubert.nk.web.bootstrap",
+        "priority": "3",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading"
+      },
+      "subject": "Web vendor flag read",
+      "status": "CONTEXT_NOT_APPLICABLE_J2EE_RULE",
+      "reason": "PMD 7.28.0's primary rule explicitly assumes J2EE-server-managed threads; SS342 specifies standalone direct Java services and bounded management owners. This is contextual applicability, not runtime proof. Observes isInterrupted before vendor stop without clearing the required visible signal.",
+      "counterexample": "Replacing this read with Thread.interrupted clears notification at the wrong phase.",
+      "design": [
+        "RD171",
+        "UI252",
+        "SS342 SSC312/313/317/335",
+        "SS351",
+        "411/451"
+      ],
+      "reviewOwner": "PGPT_PARENT",
+      "reviewPasses": [
+        "RULE_TO_APPROVED_CONTRACT",
+        "COUNTEREXAMPLE_SOURCE_RECHECK"
+      ],
+      "reviewExpires": "ANY_RELEVANT_SOURCE_OR_APPROVED_CONTRACT_CHANGE",
+      "testReference": {
+        "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/bootstrap/WebManagementDeadlineTest.java",
+        "className": "dev.codex.schubert.nk.web.bootstrap.WebManagementDeadlineTest",
+        "method": "webMgmt335001ZeroBudgetDoesNotWaitForOtherCloseOwner",
+        "currentRunStatus": "UNRUN_HOLD_REFERENCE_ONLY",
+        "currentXmlQualified": false
+      },
+      "rawWarningRetained": true,
+      "sourceChangedByReview": false,
+      "actualRuntimeProven": false,
+      "qualityGatePass": false,
+      "formalAccepted": false,
+      "ptAlternativeCompleted": 0
+    },
+    {
+      "index": 36,
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebManagementServer.java",
+      "sourceSha256": "f4b820069ae18d539f6ceb62fd2b2e3b95afe27dafb0bdaf72e35c1fe53a01cf",
+      "raw": {
+        "begincolumn": "30",
+        "beginline": "281",
+        "class": "WebManagementServer",
+        "endcolumn": "36",
+        "endline": "281",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "message": "To be compliant to J2EE, a webapp should not use any thread.",
+        "method": "stopFailure",
+        "package": "dev.codex.schubert.nk.web.bootstrap",
+        "priority": "3",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading"
+      },
+      "subject": "Web post-vendor restore",
+      "status": "CONTEXT_NOT_APPLICABLE_J2EE_RULE",
+      "reason": "PMD 7.28.0's primary rule explicitly assumes J2EE-server-managed threads; SS342 specifies standalone direct Java services and bounded management owners. This is contextual applicability, not runtime proof. Vendor-stop finally restores previously observed notification even if stop throws.",
+      "counterexample": "Restoring only on normal stop loses caller state on provider failure.",
+      "design": [
+        "RD171",
+        "UI252",
+        "SS342 SSC312/313/317/335",
+        "SS351",
+        "411/451"
+      ],
+      "reviewOwner": "PGPT_PARENT",
+      "reviewPasses": [
+        "RULE_TO_APPROVED_CONTRACT",
+        "COUNTEREXAMPLE_SOURCE_RECHECK"
+      ],
+      "reviewExpires": "ANY_RELEVANT_SOURCE_OR_APPROVED_CONTRACT_CHANGE",
+      "testReference": {
+        "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/bootstrap/WebManagementDeadlineTest.java",
+        "className": "dev.codex.schubert.nk.web.bootstrap.WebManagementDeadlineTest",
+        "method": "webMgmt335001ZeroBudgetDoesNotWaitForOtherCloseOwner",
+        "currentRunStatus": "UNRUN_HOLD_REFERENCE_ONLY",
+        "currentXmlQualified": false
+      },
+      "rawWarningRetained": true,
+      "sourceChangedByReview": false,
+      "actualRuntimeProven": false,
+      "qualityGatePass": false,
+      "formalAccepted": false,
+      "ptAlternativeCompleted": 0
+    },
+    {
+      "index": 37,
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebManagementServer.java",
+      "sourceSha256": "f4b820069ae18d539f6ceb62fd2b2e3b95afe27dafb0bdaf72e35c1fe53a01cf",
+      "raw": {
+        "begincolumn": "9",
+        "beginline": "284",
+        "class": "WebManagementServer",
+        "endcolumn": "31",
+        "endline": "284",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "message": "To be compliant to J2EE, a webapp should not use any thread.",
+        "method": "stopFailure",
+        "package": "dev.codex.schubert.nk.web.bootstrap",
+        "priority": "3",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading"
+      },
+      "subject": "Web shutdown request",
+      "status": "CONTEXT_NOT_APPLICABLE_J2EE_RULE",
+      "reason": "PMD 7.28.0's primary rule explicitly assumes J2EE-server-managed threads; SS342 specifies standalone direct Java services and bounded management owners. This is contextual applicability, not runtime proof. Requests owned executor stop, then awaits its termination within remaining budget.",
+      "counterexample": "Setting closed at shutdownNow would falsely certify termination.",
+      "design": [
+        "RD171",
+        "UI252",
+        "SS342 SSC312/313/317/335",
+        "SS351",
+        "411/451"
+      ],
+      "reviewOwner": "PGPT_PARENT",
+      "reviewPasses": [
+        "RULE_TO_APPROVED_CONTRACT",
+        "COUNTEREXAMPLE_SOURCE_RECHECK"
+      ],
+      "reviewExpires": "ANY_RELEVANT_SOURCE_OR_APPROVED_CONTRACT_CHANGE",
+      "testReference": {
+        "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/bootstrap/WebManagementDeadlineTest.java",
+        "className": "dev.codex.schubert.nk.web.bootstrap.WebManagementDeadlineTest",
+        "method": "webMgmt335001ZeroBudgetDoesNotWaitForOtherCloseOwner",
+        "currentRunStatus": "UNRUN_HOLD_REFERENCE_ONLY",
+        "currentXmlQualified": false
+      },
+      "rawWarningRetained": true,
+      "sourceChangedByReview": false,
+      "actualRuntimeProven": false,
+      "qualityGatePass": false,
+      "formalAccepted": false,
+      "ptAlternativeCompleted": 0
+    },
+    {
+      "index": 38,
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebManagementServer.java",
+      "sourceSha256": "f4b820069ae18d539f6ceb62fd2b2e3b95afe27dafb0bdaf72e35c1fe53a01cf",
+      "raw": {
+        "begincolumn": "16",
+        "beginline": "286",
+        "class": "WebManagementServer",
+        "endcolumn": "79",
+        "endline": "287",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "message": "To be compliant to J2EE, a webapp should not use any thread.",
+        "method": "stopFailure",
+        "package": "dev.codex.schubert.nk.web.bootstrap",
+        "priority": "3",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading"
+      },
+      "subject": "Web finite join",
+      "status": "CONTEXT_NOT_APPLICABLE_J2EE_RULE",
+      "reason": "PMD 7.28.0's primary rule explicitly assumes J2EE-server-managed threads; SS342 specifies standalone direct Java services and bounded management owners. This is contextual applicability, not runtime proof. Uses the same original monotonic deadline after lock and vendor phases; false is unconfirmed.",
+      "counterexample": "Vendor stop itself is not guaranteed to return within budget; SSC335 retains this risk.",
+      "design": [
+        "RD171",
+        "UI252",
+        "SS342 SSC312/313/317/335",
+        "SS351",
+        "411/451"
+      ],
+      "reviewOwner": "PGPT_PARENT",
+      "reviewPasses": [
+        "RULE_TO_APPROVED_CONTRACT",
+        "COUNTEREXAMPLE_SOURCE_RECHECK"
+      ],
+      "reviewExpires": "ANY_RELEVANT_SOURCE_OR_APPROVED_CONTRACT_CHANGE",
+      "testReference": {
+        "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/bootstrap/WebManagementDeadlineTest.java",
+        "className": "dev.codex.schubert.nk.web.bootstrap.WebManagementDeadlineTest",
+        "method": "webMgmt335001ZeroBudgetDoesNotWaitForOtherCloseOwner",
+        "currentRunStatus": "UNRUN_HOLD_REFERENCE_ONLY",
+        "currentXmlQualified": false
+      },
+      "rawWarningRetained": true,
+      "sourceChangedByReview": false,
+      "actualRuntimeProven": false,
+      "qualityGatePass": false,
+      "formalAccepted": false,
+      "ptAlternativeCompleted": 0
+    },
+    {
+      "index": 39,
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebManagementServer.java",
+      "sourceSha256": "f4b820069ae18d539f6ceb62fd2b2e3b95afe27dafb0bdaf72e35c1fe53a01cf",
+      "raw": {
+        "begincolumn": "11",
+        "beginline": "290",
+        "class": "WebManagementServer",
+        "endcolumn": "17",
+        "endline": "290",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "message": "To be compliant to J2EE, a webapp should not use any thread.",
+        "method": "stopFailure",
+        "package": "dev.codex.schubert.nk.web.bootstrap",
+        "priority": "3",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading"
+      },
+      "subject": "Web join IRQ restore",
+      "status": "CONTEXT_NOT_APPLICABLE_J2EE_RULE",
+      "reason": "PMD 7.28.0's primary rule explicitly assumes J2EE-server-managed threads; SS342 specifies standalone direct Java services and bounded management owners. This is contextual applicability, not runtime proof. Restores join interruption and returns fixed unconfirmed IOException rather than completion.",
+      "counterexample": "Swallowing the flag or accepting interruption as terminated violates owner retention.",
+      "design": [
+        "RD171",
+        "UI252",
+        "SS342 SSC312/313/317/335",
+        "SS351",
+        "411/451"
+      ],
+      "reviewOwner": "PGPT_PARENT",
+      "reviewPasses": [
+        "RULE_TO_APPROVED_CONTRACT",
+        "COUNTEREXAMPLE_SOURCE_RECHECK"
+      ],
+      "reviewExpires": "ANY_RELEVANT_SOURCE_OR_APPROVED_CONTRACT_CHANGE",
+      "testReference": {
+        "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/bootstrap/WebManagementDeadlineTest.java",
+        "className": "dev.codex.schubert.nk.web.bootstrap.WebManagementDeadlineTest",
+        "method": "webMgmt335001ZeroBudgetDoesNotWaitForOtherCloseOwner",
+        "currentRunStatus": "UNRUN_HOLD_REFERENCE_ONLY",
+        "currentXmlQualified": false
+      },
+      "rawWarningRetained": true,
+      "sourceChangedByReview": false,
+      "actualRuntimeProven": false,
+      "qualityGatePass": false,
+      "formalAccepted": false,
+      "ptAlternativeCompleted": 0
+    },
+    {
+      "index": 40,
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebManagementServer.java",
+      "sourceSha256": "f4b820069ae18d539f6ceb62fd2b2e3b95afe27dafb0bdaf72e35c1fe53a01cf",
+      "raw": {
+        "begincolumn": "29",
+        "beginline": "300",
+        "class": "WebManagementServer",
+        "endcolumn": "35",
+        "endline": "300",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "message": "To be compliant to J2EE, a webapp should not use any thread.",
+        "method": "stopFailure",
+        "package": "dev.codex.schubert.nk.web.bootstrap",
+        "priority": "3",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading"
+      },
+      "subject": "Web outer IRQ restore",
+      "status": "CONTEXT_NOT_APPLICABLE_J2EE_RULE",
+      "reason": "PMD 7.28.0's primary rule explicitly assumes J2EE-server-managed threads; SS342 specifies standalone direct Java services and bounded management owners. This is contextual applicability, not runtime proof. Outer finally restores entry notification across all normal, early and exceptional exits.",
+      "counterexample": "Normal-only restoration misses zero-budget, interrupted lock and provider-failure paths.",
+      "design": [
+        "RD171",
+        "UI252",
+        "SS342 SSC312/313/317/335",
+        "SS351",
+        "411/451"
+      ],
+      "reviewOwner": "PGPT_PARENT",
+      "reviewPasses": [
+        "RULE_TO_APPROVED_CONTRACT",
+        "COUNTEREXAMPLE_SOURCE_RECHECK"
+      ],
+      "reviewExpires": "ANY_RELEVANT_SOURCE_OR_APPROVED_CONTRACT_CHANGE",
+      "testReference": {
+        "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/bootstrap/WebManagementDeadlineTest.java",
+        "className": "dev.codex.schubert.nk.web.bootstrap.WebManagementDeadlineTest",
+        "method": "webMgmt335001ZeroBudgetDoesNotWaitForOtherCloseOwner",
+        "currentRunStatus": "UNRUN_HOLD_REFERENCE_ONLY",
+        "currentXmlQualified": false
+      },
+      "rawWarningRetained": true,
+      "sourceChangedByReview": false,
+      "actualRuntimeProven": false,
+      "qualityGatePass": false,
+      "formalAccepted": false,
+      "ptAlternativeCompleted": 0
+    }
+  ]
+}
