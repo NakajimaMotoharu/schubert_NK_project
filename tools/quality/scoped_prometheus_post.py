@@ -11,6 +11,7 @@ import xml.etree.ElementTree as ET
 
 import pg6966_chr_adapter_host as host
 import scoped_prometheus_host as common
+from marker_metadata_contract import verify_markers
 from host_tool_invocation import capture, verify
 
 RUN=host.W/'pg8190-mq-prometheus-gauge-host-v1'
@@ -29,6 +30,9 @@ ENUM_TYPES=set()
 WITNESS_CASE_PREFIXES=('mqPress008',)
 EXPECTED_SESSION='PG8190-MQ-PROMETHEUS-GAUGE'
 MODULE='api'
+CLASS_MODULES={}
+COMPONENT_METADATA=set()
+MARKERS={}
 PMD_CONTEXT=()
 PMD_CONTEXT_WITNESS=None
 
@@ -124,12 +128,14 @@ def main():
     component.mkdir()
     target=snapshot/f'src/schubert-nk-{MODULE}/target/classes'
     physical={}
-    for name in sorted(NAMES|{PREFIX+'package-info'}):
+    for name in sorted(NAMES|{PREFIX+'package-info'}|COMPONENT_METADATA|set(MARKERS)):
+        module=CLASS_MODULES.get(name,MODULE)
+        original=snapshot/f'src/schubert-nk-{module}/target/classes'/(name+'.class')
         destination=component/(name+'.class')
         destination.parent.mkdir(parents=True,exist_ok=True)
-        shutil.copyfile(target/(name+'.class'),destination)
+        shutil.copyfile(original,destination)
         physical[name+'.class']=host.sha(destination)
-        require(host.sha(target/(name+'.class'))==physical[name+'.class'],'all actual normal class bytes')
+        require(host.sha(original)==physical[name+'.class'],'all actual normal class bytes')
     jdk=host.TC/'jdk-25.0.4/bin'
     libraries=[host.TC/'m2/repository/org/jacoco/org.jacoco.core/0.8.15/org.jacoco.core-0.8.15.jar',
         *[host.TC/f'm2/repository/org/ow2/asm/{n}/9.10.1/{n}-9.10.1.jar' for n in ('asm','asm-tree','asm-commons')]]
@@ -138,9 +144,10 @@ def main():
     helper=host.ROOT/'tools/quality/architecture/ComponentCoverageAudit.java'
     cp=os.pathsep.join(str(p) for p in libraries)
     audit_stages=[]
+    marker_proofs=verify_markers(component,jdk/'javap',{n+'.class':reason for n,reason in MARKERS.items()})
     for name,cmd in (
         ('audit-compile',[str(jdk/'javac'),'--release','25','-proc:none','-Xlint:all','-Werror','-cp',cp,'-d',str(audit),str(helper)]),
-        ('audit-run',[str(jdk/'java'),'-cp',str(audit)+os.pathsep+cp,'ComponentCoverageAudit',str(RUN/'jacoco.exec'),str(component),*sorted(NAMES)])):
+        ('audit-run',[str(jdk/'java'),'-cp',str(audit)+os.pathsep+cp,'ComponentCoverageAudit',str(RUN/'jacoco.exec'),str(component),*sorted(NAMES),*['--metadata='+n for n in sorted(MARKERS)]])):
         row,output=step(name,cmd)
         audit_stages.append(row)
         require(row['actualExit']==0 and row['timedOut'] is False,'actual two-Main four100 CRC/session must qualify')
@@ -234,6 +241,7 @@ def main():
         os=platform.platform(),originalManifestSha256=RAW_SHA,originalCompileSha256=common.COMPILE_SHA,
         tests=sum(COUNTS.values()),suites=len(COUNTS),sourceFiles=source_files,physicalClasses=physical,
         executableClasses=executable,counters=totals,actualCrcMismatch=0,actualSessions=1,
+        markerMetadataProofs=marker_proofs,classModules=CLASS_MODULES,
         coverageUnion=False,customExclusionsAdded=False,staticRaw=static_rows,
         staticSemantics='NEW_EXACT_DECLARED_EXECUTABLE_SCOPE_AND_CURRENT_SOURCE_ACTUAL_RUNTIME_AUX_BINDINGS_NOT_WHOLE_MODULE_OR_451',
         classifiedPmdContext=PMD_CONTEXT,classifiedPmdWitness=PMD_CONTEXT_WITNESS,unclassified=0,suppressionsAdded=False,
