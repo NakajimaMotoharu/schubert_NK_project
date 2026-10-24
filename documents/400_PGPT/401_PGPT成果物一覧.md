@@ -1,5 +1,7 @@
 # PGPT成果物一覧・進捗
 
+2026-10-24最新：1761/1762、precision Web registryのGauge標準textを新Main1/新22-2で閉鎖、sourcee1ba2ccc5・toolfixture832336f6f/normal8350→8352原7993a17f→8354原bee70ede実2四100（L53M10C2B22）/全static0/CRC0/一exec→8356原67c30e3b全1804/165owner・旧1803debug同byte/五edge0/new責務三反例。旧別SDK/Counter/Timerの成功再演/coverage合算なし、新BUG0。actual/whole451/正式1964-53/原190新受入0/工数null/QA051final不変更、safe接続へ継続。
+
 2026-10-24最新：1759/1760、Web HTTP Counter標準textを新Main2/既Duration接続1で実装。新16＋実Web6/必要既Timer22＝44/4、source6c91f3785/実3四100（L109M16C3B58）/CRC0/一exec/全static0。全1803physical/163owner・追加2/変更1/他1800debug同byte/五edge0＋責務十反例、Bootstrap/API/POM不変更。BUG1698fixture/YKT1449・BUG1699tool lint/YKT1450を元失敗保持で限定close。formal1964-53/原190新受入0/工数null/whole451/actualHOLD/QA051final不変更、残safe工程へ継続。
 
 2026-10-24最新：1757/1758、Timer標準textの新22＋必要旧30=52/4、source3968abace両app2四100（L152M16C2B92）/static全0・全1801/160owner/五edge0＋責務guard9反例/測定input同byte。BUG1697/YKT1448で誤った共用Bootstrap配置を上位変更せずAPI/Web監視adapterへ是正、旧1754共有配置は撤回/後継へ置換・元試験成功は履歴保持。新2app Main/旧共有Main1退役、実endpoint/actor/CHR/native/全451/正式1964-53/原190新受入0/工数nullは未受入。次Counter出力へ継続、全actualHOLD/QA051final不変更。
