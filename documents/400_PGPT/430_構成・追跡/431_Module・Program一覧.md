@@ -1,5 +1,7 @@
 # Module・Program一覧
 
+2026-10-24追加trace：WebMetricCatalog.constructor/gauges/counters/timers/namespace/labels/clinit/lambdaを1763/1764・PG-D597・RD171/UI252/SS311351へ。新WEBCAT001～014/fixture1777・sourcee5f0ae543/8370-72-74で実1四100（L46M8C1B14）/static0/全1805・167owner/五edge0/new責務三反例へ一意結合。全旧input/POM/1804physical同byteは当PT合格の転用ではない、codec/mode/実公開・全451/正式/工数は未受入。
+
 2026-10-24追加trace：WebGaugeMetricExporter.constructor/scrapeGauges/encodeと既WebMetricText.namespace/labels/writeを1761/1762・PG-D596・RD171/UI252/SS311351へ結合。新GAUGEENC16/WEBGAUGE6=22/2、sourcee1ba2ccc5/toolfixture832336f6f・実2四100（L53M10C2B22）/全static0/全1804・165owner/五edge0/new責務三反例。全旧source/POM/物理1803同byte、既counterを当sourceへ転用0、正式/工数/actualHOLD不変更。
 
 2026-10-24追加trace：WebCounterMetricExporter.scrapeCounters/encode、WebMetricText.namespace/labels/write/constructor、WebDurationMetricExporter.scrapeTimers/encode/pointを1759/1760・PG-D595・RD171/UI252/SS311351へ対応。COUNTENC001～016/HTTPCOUNT001～006新22＋必要TIMERENC16/HTTPEXP6＝44/4、source6c91f3785/実3四100（L109M16C3B58）/全static0/全1803・163owner/五edge0/責務十反例。Web内共用だけでBootstrap/API/POM/上位不変更。全method/fixture/source/実行hashは1760と8340/42/44に一意結合、正式/全451/actualHOLD不変更。
