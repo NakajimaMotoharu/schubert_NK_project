@@ -72,12 +72,13 @@ public final class ApiDurationMetricExporter {
     var groups = new TreeMap<String, List<HistogramDataPointSnapshot>>();
     for (var meter : source.getMeters()) {
       var id = Objects.requireNonNull(meter, "meter").getId();
-      var keys = namespace.get(id.getName());
+      String name = Objects.requireNonNull(id.getName(), "metric name");
+      var keys = namespace.get(name);
       if (keys == null) continue;
       if (!(meter instanceof DistributionSummary summary))
         throw new IllegalArgumentException("selected meter is not a summary");
       groups
-          .computeIfAbsent(id.getName(), unused -> new ArrayList<>())
+          .computeIfAbsent(name, unused -> new ArrayList<>())
           .add(point(summary, labels(id, keys)));
     }
     var families =

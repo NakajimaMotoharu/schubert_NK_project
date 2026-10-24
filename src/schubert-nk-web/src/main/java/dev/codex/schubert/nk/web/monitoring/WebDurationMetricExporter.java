@@ -54,12 +54,13 @@ public final class WebDurationMetricExporter {
     var groups = new TreeMap<String, List<HistogramDataPointSnapshot>>();
     for (var meter : source.getMeters()) {
       var id = Objects.requireNonNull(meter, "meter").getId();
-      var keys = namespace.get(id.getName());
+      String name = Objects.requireNonNull(id.getName(), "metric name");
+      var keys = namespace.get(name);
       if (keys == null) continue;
       if (!(meter instanceof Timer timer))
         throw new IllegalArgumentException("selected meter is not a timer");
       groups
-          .computeIfAbsent(id.getName(), unused -> new ArrayList<>())
+          .computeIfAbsent(name, unused -> new ArrayList<>())
           .add(point(timer, support.labels(id, keys)));
     }
     var families =

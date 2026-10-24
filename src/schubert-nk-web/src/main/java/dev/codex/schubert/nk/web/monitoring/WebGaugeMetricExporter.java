@@ -45,14 +45,15 @@ public final class WebGaugeMetricExporter {
     var groups = new TreeMap<String, List<GaugeDataPointSnapshot>>();
     for (var meter : source.getMeters()) {
       var id = Objects.requireNonNull(meter, "meter").getId();
-      var keys = namespace.get(id.getName());
+      String name = Objects.requireNonNull(id.getName(), "metric name");
+      var keys = namespace.get(name);
       if (keys == null) continue;
       if (!(meter instanceof Gauge gauge))
         throw new IllegalArgumentException("selected meter is not a gauge");
       var labels = support.labels(id, keys);
       double value = gauge.value();
       groups
-          .computeIfAbsent(id.getName(), unused -> new ArrayList<>())
+          .computeIfAbsent(name, unused -> new ArrayList<>())
           .add(GaugeDataPointSnapshot.builder().value(value).labels(labels).build());
     }
     var families =

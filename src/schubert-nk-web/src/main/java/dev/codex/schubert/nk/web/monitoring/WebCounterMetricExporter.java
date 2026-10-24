@@ -43,7 +43,8 @@ public final class WebCounterMetricExporter {
     var groups = new TreeMap<String, List<CounterDataPointSnapshot>>();
     for (var meter : source.getMeters()) {
       var id = Objects.requireNonNull(meter, "meter").getId();
-      var keys = namespace.get(id.getName());
+      String name = Objects.requireNonNull(id.getName(), "metric name");
+      var keys = namespace.get(name);
       if (keys == null) continue;
       if (!(meter instanceof Counter counter))
         throw new IllegalArgumentException("selected meter is not a counter");
@@ -52,7 +53,7 @@ public final class WebCounterMetricExporter {
       if (!Double.isFinite(value) || value < 0)
         throw new IllegalArgumentException("invalid counter value");
       groups
-          .computeIfAbsent(id.getName(), unused -> new ArrayList<>())
+          .computeIfAbsent(name, unused -> new ArrayList<>())
           .add(CounterDataPointSnapshot.builder().value(value).labels(labels).build());
     }
     var families =
