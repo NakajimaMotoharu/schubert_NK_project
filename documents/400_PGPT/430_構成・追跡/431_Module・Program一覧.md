@@ -1,5 +1,7 @@
 # Module・Program一覧
 
+2026-10-24追加trace：ApiStandardMetricSource ctor/bind/scrape/detailed/closeとfactory-registrar-GC保持lambda（実9method）→APIHOST001～016/1808-1809/PG-D614/RD171/UI252/SS311351。source6cd77b76b・新1Main/API POM固定SDK1.17.1一依存、8690正常six→8692原cdd1aaad16/1→8694原8b2e7cf7実1四100 L43M9C1B19/static3種0/七metadata拒否→8696原aa45bd6f全1826・209owner/旧1825-原1669同byte/五edge0/private八field-公開四API/三role・三field反例、8697原0d1d7ace POM guard四反例。BUG1711～13/YKT1462～64元失敗/是正/非該当は1809。STD未取得/固定SDK text/GC保持先行/失敗owner/明示close・同期実経路だけで、正式endpoint/whole451/native/正式・工数は未受入。
+
 2026-10-24追加試験trace：PolicyAlertStatusConnectionTest ALERTPIPE001～004→MonitoringPolicyEngine全12入口/observationMissing/activeAlerts→MonitoringStatusText.renderを1806/1807・RD171/UI252/SS351へ結合。sourcef817不変更/正常8632同byte再利用、新4/1→8662原17749af7独立source/XML/exec-session/七反例、元unit/renderer成功確認の再演0。新Main/coverage-static資格0、全12固定status/回復/原因/調査保持/欠測の接続のみ。1737-38既syntax-onlyと1804-05 full-lint追加品質はBUG1710/2034の区分訂正を適用、元計画消化/正式/工数増0、全actualHOLD維持。
 
 2026-10-24追加試験trace：toolsのApiMetricPayloadPrecisionTest/WebMetricPayloadPrecisionTestを1802→1803/RD171/UI252/SS311332351へ。APIPIPE/WEBPIPE各001～002、sourcef817b0047/8644-46、新4/2で各StandardMetrics＋実Db/Mq/HttpMetricRecorder＋精度registry＋CustomMetricPayload接続を固定1ns/1.5秒CDF vectorで確認。Main追加変更/新coverage-static資格0、正常8632は同input byteで再演0、旧26/4確認再演なし。元環境/command/source/tool/deps/XML/exec-session/全hashはmanifest、正式/actual経路/工数は未受入。
