@@ -13,7 +13,8 @@ import java.util.function.Supplier;
  */
 public final class WebServiceMetricBinding {
   private final WebDbPoolMetricBinding database;
-  private final HttpMetricValve http;
+  private final HttpMetricRecorder http;
+  private final Runnable terminal;
 
   /** Resource-free factory: caller captures the returned owner before initialize. */
   public static WebMetricContext<WebServiceMetricBinding> prepareContext(
@@ -42,9 +43,9 @@ public final class WebServiceMetricBinding {
       MeterRegistry registry,
       String mode,
       Runnable terminal) {
-    Objects.requireNonNull(terminal, "HTTP metric terminal signal");
+    this.terminal = Objects.requireNonNull(terminal, "HTTP metric terminal signal");
     database = new WebDbPoolMetricBinding(pool, config, registry, mode);
-    http = new HttpMetricValve(new HttpMetricRecorder(registry, mode), terminal);
+    http = new HttpMetricRecorder(registry, mode);
   }
 
   /** Read-only DB observation; HTTP is recorded by the native terminal callback, never replayed. */
@@ -52,8 +53,8 @@ public final class WebServiceMetricBinding {
     database.refresh();
   }
 
-  /** Borrowed pipeline observer, not ownership of the context, database or HTTP lifecycle. */
-  public HttpMetricValve httpValve() {
-    return http;
+  /** Fresh pipeline-owned observer borrows the retained recorder, never internal mutable state. */
+  public HttpMetricValve createHttpObserver() {
+    return new HttpMetricValve(http, terminal);
   }
 }

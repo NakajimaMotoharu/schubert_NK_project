@@ -50,7 +50,7 @@ final class WebServiceMetricBindingTest {
   }
 
   static HttpMetricValve observer(WebServiceMetricBinding binding) {
-    var valve = binding.httpValve();
+    var valve = binding.createHttpObserver();
     valve.setNext(
         new ValveBase(true) {
           @Override
@@ -186,11 +186,28 @@ final class WebServiceMetricBindingTest {
   }
 
   @Test
-  void webservice005BorrowedValveIsRetainedAndRefreshReadsOnlyFourStatistics() {
+  void webservice005IndependentObserversBorrowOneRetainedRecorderAndDatabaseRefresh()
+      throws Exception {
     var f = fixture();
     try (var registry = new OverflowSafeHttpMeterRegistry()) {
       var binding = new WebServiceMetricBinding(f.pool(), f.config(), registry, "DEBUG", () -> {});
-      assertSame(binding.httpValve(), binding.httpValve());
+      var first = observer(binding);
+      var second = observer(binding);
+      assertNotSame(first, second);
+      var firstRequest = request();
+      var secondRequest = request();
+      var response = response();
+      first.invoke(firstRequest, response);
+      second.invoke(secondRequest, response);
+      first.log(firstRequest, response, 1);
+      second.log(secondRequest, response, 1);
+      assertEquals(
+          2.0,
+          registry
+              .get("nk_http_requests_total")
+              .tags("method", "GET", "route", "/login", "service", "WEB", "status_class", "2xx")
+              .counter()
+              .count());
       assertTrue(f.calls.isEmpty());
       binding.refresh();
       f.complete();
@@ -271,7 +288,7 @@ final class WebServiceMetricBindingTest {
     var signal = new AtomicInteger();
     try (var context = prepared(f, signal::incrementAndGet)) {
       context.initialize();
-      var valve = context.bindings().orElseThrow().httpValve();
+      var valve = context.bindings().orElseThrow().createHttpObserver();
       valve.log(null, response(), 1);
       valve.log(request(), null, 1);
       valve.log(request(), response(), -1);
@@ -374,7 +391,7 @@ final class WebServiceMetricBindingTest {
               throw primary;
             })) {
       context.initialize();
-      var valve = context.bindings().orElseThrow().httpValve();
+      var valve = context.bindings().orElseThrow().createHttpObserver();
       assertSame(primary, assertThrows(AssertionError.class, () -> valve.log(null, null, 1)));
       assertTrue(context.render(false).contains(REQUEST_ZERO));
     }

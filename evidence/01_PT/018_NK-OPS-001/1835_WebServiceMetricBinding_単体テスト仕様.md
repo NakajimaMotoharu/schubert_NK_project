@@ -8,7 +8,7 @@ NK-OPS-001/RD171 MON005～013/UI252/SS312351/PG-D625、group2065/P018-09・C07�
 |002|factory null supplier/mode/callback/未知mode|境界拒否/取得0|
 |003|STD/読まれるとErrorの参照supplier|setup/bean取得0、固定readyだけ/空bindings|
 |004|DEBUG deferred→owner捕捉→init→render|pool/config各一回/init getter0、DB1/1/0/2・HTTP初期0|
-|005|borrowed valve getter/refresh|同一valve強保持、DB四getterのみ/SDK open|
+|005|fresh pipeline observers/refresh|二observerは別identity・同recorderの二requestでcount2、DB四getterのみ/SDK open|
 |006|standalone STD binding・valid terminal|詳細series0/DB未読、HTTP結果不変更|
 |007|/login GET200 terminal250msを二回|counter1/timer count1・sum0.25、DBと同text/HTTP不変更|
 |008|再dispatch/own並行terminal|同request一回claim/他request別、有限Future回収|
@@ -23,3 +23,5 @@ NK-OPS-001/RD171 MON005～013/UI252/SS312351/PG-D625、group2065/P018-09・C07�
 14新＋HTTP新一=新15、必要既HTTP21=actual36/2。既WebDbPoolMetricObservationTest.Fixtureはhelper compile-only。Request/Response/Connectorは自己所有・未起動、network/socket/JMX lookup/DB/VM/Root/native/WebHttpServer startを行わない。期待はSS name/tag・独立literal/order/250000000ns÷1e9、原例外identity/explicitHTTP値で作りproduction expected生成0。
 
 8922正常六module→8924 actual36/2→8926新binding/既Handler二Main同source四counter100/静的0/CRC-session→8928全1835physical/旧1834不変・owner/private保持/borrowed protocol・旧HTTP21本文保持→1836/scan8930/保存push。全observer/recorder/context・実pipeline/endpoint/全451の100%とはしない。実NativeRuntime/WebHttpServer組込PGはこの有限部品群後に別依存として進める。command/UTC/環境/source/exit/XML/coverage/BUG/hashは元manifestと1836へ、formal1964-53/原190新受入0/QA051final/工数null/全actualHOLD不変。
+
+BUG1724/YKT1475（修正前起票後の内部契約訂正）：旧005の同一valve期待/旧source96575ba67の36成功と8926静的失敗を保持する。bindingが強保持するのはDB metadata/HTTP recorder/terminal callback、mutable Valveは保持せずcreateHttpObserverでfresh objectをpipelineへ渡す。二observerの別identityと共通recorder count2で所有分離を独立確認し、SS出力・terminal一回claim・STD/例外の期待は不変更。新source用のnew-only正常/36/品質/traceを1836へ結合、旧成功転用/抑制0。
