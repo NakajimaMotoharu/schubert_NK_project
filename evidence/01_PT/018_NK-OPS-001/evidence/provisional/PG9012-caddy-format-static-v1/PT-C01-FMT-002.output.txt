@@ -1,0 +1,33 @@
+# NK-OPS-001; UI251; SS342 section3/SSC178; CADDY455001002.
+# Render GLOBAL_IP under the same authorized maintenance/BOM deployment; no secret is stored here.
+{
+	admin off
+	auto_https disable_redirects
+	skip_install_trust
+}
+
+https://127.0.0.1:55160 {
+	bind 127.0.0.1
+	tls internal
+	request_body {
+		max_size 2MB
+	}
+	header {
+		Strict-Transport-Security "max-age=31536000"
+		X-Content-Type-Options "nosniff"
+		X-Frame-Options "DENY"
+		Referrer-Policy "same-origin"
+		-Server
+	}
+	reverse_proxy 127.0.0.1:8080 {
+		header_up X-Forwarded-For {remote_host}
+		header_up X-Forwarded-Proto {scheme}
+		header_up X-Forwarded-Host {host}
+		transport http {
+			dial_timeout 2s
+			response_header_timeout 30s
+			read_timeout 60s
+			write_timeout 60s
+		}
+	}
+}

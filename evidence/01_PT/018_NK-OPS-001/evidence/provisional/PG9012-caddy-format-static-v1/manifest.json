@@ -1,0 +1,185 @@
+{
+  "actualDaemonOrVmOrTlsOrProvisionActions": 0,
+  "actualExit": 0,
+  "artifact": "src/deployment/caddy/Caddyfile.template",
+  "artifactSha256": "2914bfd4134186911562071f92652ce750e513213a749672dd161615c3d8763c",
+  "binarySha256": "678c1849799e6d81c7cfbe63cebb8f92400cb70a67fc9f601697cb8ce7cdfa4a",
+  "designRef": "origin/main",
+  "designSha256": "3775cb1faf0b96572f4913d06682100da1861f1d364a66f4118b03e27abf4b82",
+  "formalUpdated": false,
+  "formatCounterexamples": [
+    "quoted-value",
+    "body",
+    "port",
+    "upstream",
+    "timeout",
+    "header",
+    "unclosed-quote",
+    "empty"
+  ],
+  "formatWarnings": 0,
+  "invocation": {
+    "actualPythonCommand": [
+      "python3",
+      "-B",
+      "tools/quality/pg9012_caddy_format_static.py"
+    ],
+    "arbitraryArgumentsRecorded": false,
+    "entrypointPath": "tools/quality/pg9012_caddy_format_static.py",
+    "entrypointSha256": "be6153c893457abffede39fad308ac29e8a6aeada1720428d6e1f4475466397b",
+    "helperPath": "tools/quality/host_tool_invocation.py",
+    "helperSha256": "85d616a3db4ff47f4c95ae2e0dd57954bc2b09f28b8f2a685b986e5621545c46",
+    "libraryPath": "tools/quality/pg9012_caddy_format_static.py",
+    "librarySha256": "be6153c893457abffede39fad308ac29e8a6aeada1720428d6e1f4475466397b",
+    "loadedProjectPythonSources": {
+      "tools/quality/caddy_public_format_contract.py": "523fc3c719fa330cad30a27f6c4ff288eb60ee9c9316da6f29ff993a3485c11e",
+      "tools/quality/host_tool_invocation.py": "85d616a3db4ff47f4c95ae2e0dd57954bc2b09f28b8f2a685b986e5621545c46",
+      "tools/quality/pg9012_caddy_format_static.py": "be6153c893457abffede39fad308ac29e8a6aeada1720428d6e1f4475466397b",
+      "tools/quality/public_blob_scan.py": "4d12a867a01f32c3437df37986f676a6624d2afde036e6a3eaca3ed1f666b78f"
+    },
+    "provenance": "OBSERVED_SYS_ARGV_AND_ORIG_ARGV_NOT_RECONSTRUCTED"
+  },
+  "javaProductTestsExecuted": 0,
+  "legacyMainOrImportsExecuted": false,
+  "newAccepted": 0,
+  "privateCredentialReads": 0,
+  "productCoverage": null,
+  "referenceVerifierSha256": "5e2b928aa3dd6d8c60e8439433d29da27151041096aee1a5e435bc59f4f70753",
+  "requiredExplicitHeaderWarningsPerAdapt": 3,
+  "semanticCounterexamples": [
+    "ipv4-admin",
+    "ipv4-listener",
+    "ipv4-trust",
+    "ipv6-admin",
+    "ipv6-listener",
+    "ipv6-trust"
+  ],
+  "source": "f690fa6be336550f8078e2bdde40ef34ab5efe6b",
+  "staticCaseCount": 5,
+  "staticCases": [
+    {
+      "caseId": "PT-C01-FMT-001",
+      "classifiedWarnings": [],
+      "command": [
+        "/home/mini/codex/project1/work/characterization-tools/root/usr/bin/caddy",
+        "fmt",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg9012-caddy-format-static-v1/template.Caddyfile"
+      ],
+      "fixedPoint": true,
+      "inputSha256": "2914bfd4134186911562071f92652ce750e513213a749672dd161615c3d8763c",
+      "startUTC": "2026-10-24T19:54:46.192471+00:00",
+      "terminal": {
+        "actualExit": 0,
+        "endUTC": "2026-10-24T19:54:46.206061+00:00",
+        "stderrBytes": 0,
+        "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stdoutBytes": 749,
+        "stdoutSha256": "2914bfd4134186911562071f92652ce750e513213a749672dd161615c3d8763c"
+      },
+      "unclassifiedWarnings": 0
+    },
+    {
+      "caseId": "PT-C01-FMT-002",
+      "classifiedWarnings": [],
+      "command": [
+        "/home/mini/codex/project1/work/characterization-tools/root/usr/bin/caddy",
+        "fmt",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg9012-caddy-format-static-v1/ipv4.Caddyfile"
+      ],
+      "fixedPoint": true,
+      "inputSha256": "9183b2257c6070d433eaeae86995f692d8f7cd4dae9e63512707ec24c1345df0",
+      "startUTC": "2026-10-24T19:54:46.206471+00:00",
+      "terminal": {
+        "actualExit": 0,
+        "endUTC": "2026-10-24T19:54:46.216589+00:00",
+        "stderrBytes": 0,
+        "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stdoutBytes": 745,
+        "stdoutSha256": "9183b2257c6070d433eaeae86995f692d8f7cd4dae9e63512707ec24c1345df0"
+      },
+      "unclassifiedWarnings": 0
+    },
+    {
+      "caseId": "PT-C01-FMT-003",
+      "classifiedWarnings": [],
+      "command": [
+        "/home/mini/codex/project1/work/characterization-tools/root/usr/bin/caddy",
+        "fmt",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg9012-caddy-format-static-v1/ipv6.Caddyfile"
+      ],
+      "fixedPoint": true,
+      "inputSha256": "adbd409a13407aaea67e12bdc83fb12cbee5e48055dc74256d0b80c9d67fa128",
+      "startUTC": "2026-10-24T19:54:46.217015+00:00",
+      "terminal": {
+        "actualExit": 0,
+        "endUTC": "2026-10-24T19:54:46.229445+00:00",
+        "stderrBytes": 0,
+        "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stdoutBytes": 751,
+        "stdoutSha256": "adbd409a13407aaea67e12bdc83fb12cbee5e48055dc74256d0b80c9d67fa128"
+      },
+      "unclassifiedWarnings": 0
+    },
+    {
+      "caseId": "PT-C01-FMT-004",
+      "classifiedWarnings": [
+        "SS_REQUIRED_EXPLICIT_X-Forwarded-For",
+        "SS_REQUIRED_EXPLICIT_X-Forwarded-Proto",
+        "SS_REQUIRED_EXPLICIT_X-Forwarded-Host"
+      ],
+      "command": [
+        "/home/mini/codex/project1/work/characterization-tools/root/usr/bin/caddy",
+        "adapt",
+        "--config",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg9012-caddy-format-static-v1/ipv4.Caddyfile",
+        "--adapter",
+        "caddyfile"
+      ],
+      "independentSsSemanticsConfirmed": true,
+      "inputSha256": "9183b2257c6070d433eaeae86995f692d8f7cd4dae9e63512707ec24c1345df0",
+      "startUTC": "2026-10-24T19:54:46.229976+00:00",
+      "terminal": {
+        "actualExit": 0,
+        "endUTC": "2026-10-24T19:54:46.243730+00:00",
+        "stderrBytes": 545,
+        "stderrSha256": "9305941b454ef69b9c30af1aa4a358b3b5a17201189815a89f733d0aa029e30c",
+        "stdoutBytes": 1087,
+        "stdoutSha256": "28f9a4df19349dc877a1a9765bdd3a4d6615fdb50633d68287b84531416395cf"
+      },
+      "unclassifiedWarnings": 0
+    },
+    {
+      "caseId": "PT-C01-FMT-005",
+      "classifiedWarnings": [
+        "SS_REQUIRED_EXPLICIT_X-Forwarded-For",
+        "SS_REQUIRED_EXPLICIT_X-Forwarded-Proto",
+        "SS_REQUIRED_EXPLICIT_X-Forwarded-Host"
+      ],
+      "command": [
+        "/home/mini/codex/project1/work/characterization-tools/root/usr/bin/caddy",
+        "adapt",
+        "--config",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg9012-caddy-format-static-v1/ipv6.Caddyfile",
+        "--adapter",
+        "caddyfile"
+      ],
+      "independentSsSemanticsConfirmed": true,
+      "inputSha256": "adbd409a13407aaea67e12bdc83fb12cbee5e48055dc74256d0b80c9d67fa128",
+      "startUTC": "2026-10-24T19:54:46.244497+00:00",
+      "terminal": {
+        "actualExit": 0,
+        "endUTC": "2026-10-24T19:54:46.257592+00:00",
+        "stderrBytes": 545,
+        "stderrSha256": "c8ffe986e431f5475bc1b5939c46ddefce7575c248124ea667556de183693be4",
+        "stdoutBytes": 1095,
+        "stdoutSha256": "66dbbdc0329b01b3b5b4d767a2024103f7c4e0e3d7a13747645dedc57fa1a837"
+      },
+      "unclassifiedWarnings": 0
+    }
+  ],
+  "targetServiceConnections": 0,
+  "timeUTC": "2026-10-24T19:54:46.258834+00:00",
+  "unclassifiedWarnings": 0,
+  "wholeC01Or451Accepted": false,
+  "xdgStateCreated": false
+}

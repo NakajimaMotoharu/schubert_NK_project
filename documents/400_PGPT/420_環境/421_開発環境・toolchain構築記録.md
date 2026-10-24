@@ -1,5 +1,7 @@
 # 開発環境・toolchain構築記録
 
+2026-10-25 C01 format（1851）：1519と同じ既Caddy2.6.2 binary `/home/mini/codex/project1/work/characterization-tools/root/usr/bin/caddy` SHA678c1849…を実byte照合して使用、新取得/版変更0。fmt stdoutだけをapply_patch反映、当sourceのfmt三/普通adapt二を最小env/自己slot XDG/15秒/明示inputで実行しstate生成0。別途存在する2.11.4を暗黙採用せず、実VM採用版/動作は未認証HOLD。JDK25.0.4/Maven3.9.12正常六compile/ordinary三/JaCoCo0.8.15+ASM9.10.1実partial計測のcommand/source/env/hashは9014/16/18/20へ固定。四100未達を0/PASSにしない。
+
 2026-10-25 1844/1845追補：8979で公式固定tag v8.30.1 default config97,731byte/222ruleを公開HTTPS一件追加取得、SHA256 e163e53b9e7e8a8511e77271e2b323ed057759542a6d988258afe3a1fa329caf。専用new-only slot/実URL/環境/entry hashは原manifest97b57201、既binary/config/settingsを上書きせずscanner再演0。8980/8982は既findingのexact captureと公開Git blob bytesの限定分類、29,468誤検出根拠付き/10,618未分類・vendor path限界53、全G07未受入。8966二downloadと別計数、秘密値出力0/製品PT0。
 
 ## 2026-10-25 G07 Gitleaks8.30.1専用toolchain（1841/1842、PG-D628）

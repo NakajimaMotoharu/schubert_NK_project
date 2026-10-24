@@ -1,5 +1,7 @@
 # PGPT成果物一覧・進捗
 
+2026-10-25最新：1850/1851、sourcef690fa6be/C01template indentだけ是正し全token保存、当source static5/普通3成功・正常六build/全1835Main byte不変。実whole class coverage L24/133 M2/23 C1/1 B22/100で全四100未達、BUG1728/YKT1479は書式scope限定close/全C01未受入。G07は31,707根拠分類/8,379未分類を保持。技術Java653ID/34Mainと静的config新5を別計数、正式1964-53/原190新受入0/工数null/QA051final/全actualHOLD不変更、456/460を現況入口とする。
+
 2026-10-25最新：1844/1845、G07原検出40,086を保持しexact capture/公開blob SHA256実証29,468を限定false-positive分類、10,618未分類・vendor path等限界のため全G07未受入。製品sourcefb9/技術653ID-34Main/正式1964-53/原190新受入0/工数null/全actualHOLD不変更。最新の実行中/保存/次工程は456/460参照。
 
 2026-10-25最新：1841～1843、Productionfb9不変更。G07固定55,722公開blob scanと独立hash/14負例まで完了、40,086未分類・binary等22限界のため全G07/451は未受入。元2069のsource転記だけ2074で追記訂正（BUG1726/YKT1477）、測定・費用再加算0。最新の技術増分653TestIDs/34Mainは異sourceの工程成果で、全体sourceの資格・formal1964PT/53scope・原190新受入0・工数nullと別。456/460を現在地・次の許可済みPG/PTの正本とし、全actualHOLD/QA051finalを維持する。
