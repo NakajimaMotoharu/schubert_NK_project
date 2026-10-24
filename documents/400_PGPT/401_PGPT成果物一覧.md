@@ -1,5 +1,7 @@
 # PGPT成果物一覧・進捗
 
+2026-10-25最新：1860/1861/sourcefa29009e4、cleanup-confirmed readonly attempt→cache公開を新14＋必要20=34/2で検証、全二MainL33M6C2B11未網羅0/CS-SB0・PMD2個別判断/全1839・240owner・五arch0/旧overload本文完全保持。技術Java736ID/38Main（＋14/0）とconfig静的5、正式1964PT/53scope・原190新受入0/工数nullを区別。実producer/caller/DB/VM/native/全451/QA051final/G078379は未受入、次同経路の有限producer所有PG/PTへ通常継続する。
+
 2026-10-25最新：1858/1859/sourcee87ab6ec8、有限readonly観測ownerを新32/1で検証、全一MainL61M5C1B16未網羅0/CS-SB0・PMD14個別必要契約/全1839・239owner・五arch0。BUG1731/YKT1482の旧/中間source・SB2/1を保全して型再送出/phase cleanupを是正、部品scope限定close・旧試験転用0。技術Java722ID/38Main（＋32/1）とconfig静的5、正式1964PT/53scope・原190新受入0/工数nullを区別。次cache publication接続PG/PT、actual producer/VM/native/全451/QA051final/G078379等は未受入のまま通常継続。
 
 2026-10-25最新：1854/1855/source2ed81b14b、SDK非依存Outbox cache/借用RO repository read後publish・missing後の遅延公開fenceを新20＋必要16=36/2で確認。全二Main L25M5C2B7未網羅0（Entry実branch0/0=NA含む）/CS-SB0・PMD1個別判断/全1838・237owner/五arch0。実producer/Pool/Clock/nativeは未供給HOLD。技術Java690ID/37Main（＋20/2）とconfig静的5、正式1964PT/53scope・原190新受入0/工数nullを区別。G07未分類8379/QA051final/全actualHOLD、通常継続を維持する。

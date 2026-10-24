@@ -1,5 +1,7 @@
 # Module・Program一覧
 
+2026-10-25追加trace：NK-OPS-001/PG-D633/1860-61、ApiOutboxObservationSource.observe(ApiReadOnlyObservationAttempt)/get/missing/既overload/Entry→新OUTBOXPUBLISH001～014・必要OUTBOXSOURCE001～020。RD171/UI252/SS311332342351、sourcefa29009e4。9104 normal六→9106原76dfef76 actual34/2→9108原b3f6ed29全二MainL33M6C2B11四100/CS-SB0・PMD2個別判断→9110原0e74d487全1839/旧1838同byte/240owner/五arch0/旧overload完全保持/12metadata反例。実producer/caller/native/全451は別未受入HOLD、新BUG0。
+
 2026-10-25追加trace：NK-OPS-001/PG-D632/1858-59、ApiReadOnlyObservationAttempt ctor/read/cleanup/closeOwned/status→ROATTEMPT001～032。RD171/UI252/SS311332342351、sourcee87ab6ec8。9090正常六→9092原8337c6a9新32/1→9094原0f882a2d全一MainL61M5C1B16四100/CS-SB0・PMD14個別判断→9096原287a0941全1839/旧1838同byte/239owner/五arch0・17metadata反例。BUG1731/YKT1482元不適格source/型再送出の是正hashと横展開1859、actual DB/worker/caller/cache publication/全451は別未受入HOLD。
 
 2026-10-25追加trace：NK-OPS-001/PG-D631/1854-55、ApiOutboxObservationSource ctor/observe/get/missing/Entry→OUTBOXSOURCE001～020、必要APISERVICE001～016。RD171/UI252/SS311332342351。source2ed81b14b、9042 normal六→9044原807a1232 actual36/2→9046原d188fc8a L25M5C2B7未網羅0/CS-SB0・PMD1個別private-lock判断/CRC0-session1→9048原9674bdae全1838/既1836同byte/237owner/五arch0/十一metadata反例。Entry実branch0/0=NAで除外0、技術新20/二Main・実producer/native/全451は未受入HOLD。
