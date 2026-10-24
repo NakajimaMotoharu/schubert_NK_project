@@ -26,7 +26,7 @@ public final class ApiObservationContext implements AutoCloseable {
   private final ReentrantLock lock = new ReentrantLock();
   private final AtomicBoolean stopping = new AtomicBoolean();
   private final AtomicBoolean unconfirmed = new AtomicBoolean();
-  private final ApiMetricContext<?> metrics;
+  private final ApiMetricContext<?> metricContext;
   private final Optional<OwnedApiObservationWorker> worker;
   private final LongSupplier remainingNanos;
   private final Consumer<Throwable> onUnconfirmed;
@@ -71,7 +71,7 @@ public final class ApiObservationContext implements AutoCloseable {
       Optional<OwnedApiObservationWorker> worker,
       LongSupplier remainingNanos,
       Consumer<Throwable> onUnconfirmed) {
-    this.metrics = Objects.requireNonNull(metrics, "metric context owner");
+    this.metricContext = Objects.requireNonNull(metrics, "metric context owner");
     this.worker = Objects.requireNonNull(worker, "observation worker holder");
     this.remainingNanos = Objects.requireNonNull(remainingNanos, "existing remaining stop budget");
     this.onUnconfirmed = Objects.requireNonNull(onUnconfirmed, "unconfirmed assembly policy");
@@ -84,7 +84,7 @@ public final class ApiObservationContext implements AutoCloseable {
       if (stopping.get() || attempted)
         throw new IllegalStateException("API observation initialization unavailable");
       attempted = true;
-      metrics.initialize();
+      metricContext.initialize();
       rejectStopping();
       worker.ifPresent(OwnedApiObservationWorker::start);
       rejectStopping();
@@ -100,7 +100,7 @@ public final class ApiObservationContext implements AutoCloseable {
 
   /** Borrowed endpoint input, not permission for Manager to initialize/close this context. */
   public ApiMetricContext<?> metrics() {
-    return metrics;
+    return metricContext;
   }
 
   /** No wait behind initialization; drain the worker using the original budget before SDK close. */
@@ -114,7 +114,7 @@ public final class ApiObservationContext implements AutoCloseable {
         if (closed) return;
         if (unconfirmed.get()) throw new IOException(UNCONFIRMED);
         if (worker.isPresent()) worker.orElseThrow().awaitStopped(remainingNanos);
-        metrics.close();
+        metricContext.close();
         if (unconfirmed.get()) throw new IOException(UNCONFIRMED);
         closed = true;
       } finally {
