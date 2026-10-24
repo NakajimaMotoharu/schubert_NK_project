@@ -14,7 +14,7 @@ def pom(data):
     require(b'<!DOCTYPE' not in data and b'<!ENTITY' not in data, 'no POM DTD/entity')
     root = ET.fromstring(data)
     return dict(artifact=root.findtext('m:artifactId', namespaces=NS),
-                dependencies=[tuple(node.findtext('m:' + key, namespaces=NS) or '' for key in ('groupId', 'artifactId', 'version')) for node in root.findall('m:dependencies/m:dependency', NS)])
+                dependencies=[tuple(node.findtext('m:' + key, namespaces=NS) or '' for key in ('groupId', 'artifactId', 'version')) + (node.findtext('m:scope', namespaces=NS) or 'compile',) for node in root.findall('m:dependencies/m:dependency', NS)])
 
 
 def java(data):
@@ -28,16 +28,18 @@ def validate(model):
     require(set(model) == {'bootstrap', 'api', 'web'}, 'three exact module responsibility inputs')
     shared = model['bootstrap']
     require(shared['artifact'] == 'schubert-nk-bootstrap', 'exact limited shared artifact')
-    require(not any(group.startswith(('io.prometheus', 'io.micrometer')) for group, _, _ in shared['dependencies']), 'no new bootstrap metric SDK responsibility')
+    require(not any(group.startswith(('io.prometheus', 'io.micrometer')) for group, _, _, _ in shared['dependencies']), 'no new bootstrap metric SDK responsibility')
     require(not shared['metricJavaImports'] and not shared['legacyMonitoringPaths'], 'no bootstrap metric source or package remains')
     for role, name, sdk_type in (('api', 'ApiDurationMetricExporter', 'DistributionSummary'),
                                   ('web', 'WebDurationMetricExporter', 'Timer')):
         app = model[role]
         require(app['artifact'] == 'schubert-nk-' + role, 'exact app artifact owner')
-        required = ('io.prometheus', 'prometheus-metrics-exposition-textformats', '1.7.0')
+        required = ('io.prometheus', 'prometheus-metrics-exposition-textformats', '1.7.0', 'compile')
         require(app['dependencies'].count(required) == 1, 'one exact approved app SDK coordinate')
         other = 'schubert-nk-web' if role == 'api' else 'schubert-nk-api'
-        require(not any(group == 'dev.codex.schubert' and artifact == other for group, artifact, _ in app['dependencies']), 'no app cross-artifact dependency')
+        edges = [entry for entry in app['dependencies'] if entry[:2] == ('dev.codex.schubert', other)]
+        expected = [('dev.codex.schubert', 'schubert-nk-api', '${project.version}', 'test')] if role == 'web' else []
+        require(edges == expected, 'no production app cross dependency; preserve only exact existing PT-IDEM-016 test edge')
         source = app['java']
         require(source['package'] == 'dev.codex.schubert.nk.' + role + '.monitoring' and source['type'] == name, 'fixed application-local exposition owner')
         require('io.micrometer.core.instrument.' + sdk_type in source['imports'], 'correct application observation type/unit boundary')
