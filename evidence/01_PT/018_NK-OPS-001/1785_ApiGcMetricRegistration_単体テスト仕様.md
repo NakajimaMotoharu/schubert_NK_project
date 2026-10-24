@@ -1,5 +1,7 @@
 # API GC register-before-activate PG/PT仕様
 
+最終実施状況は1786。旧7c6の14成功/静的停止は保全、BUG1706/YKT1457の明示owner parameter移譲20075e7f6で正常six/新14/一Main四100/全static0/全physical-ownerを完了。以下の初期UNRUN記述は着手時履歴であり、結果は1786の各source/run別にのみ認定する。期待値/Test ID/品質条件の変更なし。
+
 NK-OPS-001/RD171/UI252/SS311351/411/451、PG-D607/group2012、WBS-P018-09/C07参照0加算。開始fresh34残66/reset1793382075/2-4-8pp/cap10はPG8522/event2012固定。固定core1.17.1 SHA9ca47dfaの公開bytecodeでconstructorにはlistener登録がなく、bindToでNotificationEmitter.addNotificationListener、closeで同SDK listener解除を行うことを確認する。metadataを別に固定しprivate reflection/GC強制/外部process観測を使わない。
 
 ## 製造・所有

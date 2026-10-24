@@ -1,5 +1,7 @@
 # PGPT成果物一覧・進捗
 
+2026-10-24最新：1771～1786のAPI scalar32・API catalog/policy新28・Batch label14/text32・API JVM14・Web/Batch JVM28・SS26横断join6・API GC14の新ID168/新Main9を追加（1759以降技術256ID/Main14、異sourceなので正式run/coverageへ合算0）。直近1785/1786 GC source20075e7f6は新14/1/実1四100(L18M5C1B9)/静的0/全1815・187owner/五edge0/SDK activation前owner保持/field0を限定閉鎖、BUG1706/YKT1457元静的停止保持後close。schema29role行/unique26はprovider/実endpointの受入ではない。formal1964-53/原190新受入0/工数null/全actualHOLD/whole451/QA051final維持、次Web/Batch GC safe PG/PTへ継続。
+
 2026-10-24最新：1769/1770、pure Web mode/scrape新Main1/新14-1/source8c8a8c51a/実1四100（L10M2C1B2）/static0/全1806・169owner/全旧1805debug同byte/五edge0/owner三反例。STD詳細source読取0/DEBUG七family/部分成功なし/source非保持を確認。BUG1702/YKT1453のmetadata行誤分類だけ143275a16で是正し五pair反例・14再演0で限定close、元失敗source保持。1759以降新ID88/Main5は技術測定のみ、formal1964-53/原190新受入0/工数null/whole451/actualHOLD/QA051final不変更、残safe経路へ継続。
 
 2026-10-24最新：1767/1768、Web catalogの検証済みLabelsをpoint modelへ直接接続。新12＋必要84＝96/9/sourceb347581d2/実5四100（L212M38C5B86）/static0/全1805・167owner/Web四Main変更・他1801debug同byte/五edge0/役割五反例。元七family定義・generic API・API Main/POM/SS不変、新BUG0。1759以降新ID74/Main4は異source技術成果、正式1964-53/原190新受入0/工数null/whole451/actualHOLD/QA051finalへ加算0。次pure mode/scrape policy、継続。
