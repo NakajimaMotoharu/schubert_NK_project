@@ -471,6 +471,34 @@ final class WebMetricHttpHandlerTest {
     assertTrue(f.calls.isEmpty());
   }
 
+  @Test
+  void webmhttp022SharedServiceTerminalAndDatabaseReachActualResponseWithoutResamplingHttp()
+      throws Exception {
+    var f = WebServiceMetricBindingTest.fixture();
+    try (var context =
+        WebServiceMetricBinding.prepareContext("DEBUG", f::pool, f::config, () -> {})) {
+      context.initialize();
+      WebServiceMetricBindingTest.recordOne(context.bindings().orElseThrow());
+      var handler = new WebMetricHttpHandler(context, () -> true);
+      for (int i = 0; i < 2; i++) {
+        var exchange = new Exchange("GET", PATH);
+        handler.handle(exchange);
+        String body = exchange.output.toString(StandardCharsets.UTF_8);
+        assertTrue(body.startsWith(READY + "1\n"));
+        assertTrue(body.contains(WebServiceMetricBindingTest.REQUEST_ONE));
+        assertTrue(body.contains("nk_db_pool_connections{service=\"WEB\",state=\"max\"} 2.0\n"));
+        assertEquals(200, exchange.status);
+        assertEquals(body.getBytes(StandardCharsets.UTF_8).length, exchange.length);
+        assertEquals(METRIC, exchange.headers.getFirst("Content-Type"));
+        assertEquals("no-store", exchange.headers.getFirst("Cache-Control"));
+        assertEquals(1, exchange.closeCalls);
+        f.complete();
+        f.calls.clear();
+      }
+    }
+    assertTrue(f.calls.isEmpty());
+  }
+
   private static WebMetricContext<String> standard() {
     var context =
         new WebMetricContext<String>(
