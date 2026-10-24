@@ -3,6 +3,7 @@ package dev.codex.schubert.nk.api.monitoring;
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -213,7 +214,7 @@ class MqMessageMetricRecorderTest {
         var id = meter.getId();
         assertEquals("nk_mq_messages_total", id.getName());
         assertEquals(Meter.Type.COUNTER, id.getType());
-        assertEquals("messages", id.getBaseUnit());
+        assertNull(id.getBaseUnit(), "fixed SS351 counter name must not gain a unit suffix");
         assertEquals(
             Set.of("direction", "address", "layout", "outcome"),
             id.getTags().stream().map(t -> t.getKey()).collect(Collectors.toSet()));

@@ -67,8 +67,8 @@ public final class MqMessageMetricRecorder {
       for (var stage : Stage.values())
         installed.put(
             stage,
+            // SS351 fixes the full _total name; a baseUnit would extend it again in Prometheus.
             Counter.builder("nk_mq_messages_total")
-                .baseUnit("messages")
                 .tags(
                     "direction",
                     stage.direction(),

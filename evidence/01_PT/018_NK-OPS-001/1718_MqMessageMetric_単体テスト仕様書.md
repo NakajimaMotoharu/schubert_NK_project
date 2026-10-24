@@ -1,5 +1,7 @@
 # 1718 MQ event counter 単体テスト仕様書
 
+2026-10-24 BUG1691/PG-D589訂正：当初の内部baseUnit=messagesは実PrometheusでSS351正名をnk_mq_messages_total_messages_totalへ変形することをPG8207原60bdfffeで実証した。現行はbaseUnit未指定（Id=null）とし、上位の正名/型/label/増分は一切変更しない。元1719/source/旧Simple成功とPG8206失敗は歴史証跡として保持、是正後は1747/1748の新source/正常六compile/実SDK40・独立品質へ。RD/UI/SSにbaseUnit指定はなく、外部期待値を実測へ追従変更するのではなく、それに反した内部設定と内部metadata試験を是正する。
+
 NK-OPS-001/P01809/C07/RD171 MON005/010～013/UI231233252/SS321323351/PG-D571。MqMessageMetricRecorder constructor/record/detailedMetricsRequested・Stage constructor/direction/outcome/parse/values/valueOf。one ownerのLayoutId/version1とBrokerTopology addressをconstructorで固定、DEBUG七Counter/標準詳細0。Stageは供給観測の分類だけでJMS操作を発行せず、業務result code/ACK確定や再送成功/経路認可を推測しない。
 
 | Stage | direction | outcome |
@@ -12,11 +14,11 @@ NK-OPS-001/P01809/C07/RD171 MON005/010～013/UI231233252/SS321323351/PG-D571。M
 | RETRY | RECEIVE | RETRY |
 | DLQ | SEND | DLQ |
 
-SS351の送受信/ACK/retry/DLQ観測を上の内部七tupleへ固定する。ACKは将来の正規所有tx確認の供給値でありMessage.acknowledge()追加やJMS確定の代用ではない。layout/addressの個別namespace確認は経路の組合せの許可/送信admissionではなく、実送受信側の既guardを代替しない。任意query/user/token/context/messageID/exception本文をlabelへ受けない。全64layout×六既address×七tuple=2688固定primary Counter、型COUNTER/baseUnit messages/label4でSDK補助meterなし。将来のhookが正当なeventを供給する責任、複数ownerのexactly-once/永続counterは未受入。
+SS351の送受信/ACK/retry/DLQ観測を上の内部七tupleへ固定する。ACKは将来の正規所有tx確認の供給値でありMessage.acknowledge()追加やJMS確定の代用ではない。layout/addressの個別namespace確認は経路の組合せの許可/送信admissionではなく、実送受信側の既guardを代替しない。任意query/user/token/context/messageID/exception本文をlabelへ受けない。全64layout×六既address×七tuple=2688固定primary Counter、型COUNTER/baseUnit未指定/label4でSDK補助meterなし。将来のhookが正当なeventを供給する責任、複数ownerのexactly-once/永続counterは未受入。
 
 | Test ID | fixture/操作 | 独立期待値・観点 |
 |---|---|---|
-| MQEVENT001 | SS323全64手書literal＋SS321六address＋七tuple | 全2688 meterのname/type/label4/base messages/初期0を完全検証・任意系列0 |
+| MQEVENT001 | SS323全64手書literal＋SS321六address＋七tuple | 全2688 meterのname/type/label4/baseUnit未指定/初期0を完全検証・任意系列0 |
 | MQEVENT002 | 全stage一回＋SEND_FAILURE三回、別layout/別address | active七系列1/失敗4、他owner全0/呼出10、借用close0 |
 | MQEVENT003 | 七typed Stageと上表literal、parse/values/valueOf | direction/outcome全getter、全既知/空/小文字/未知/null拒否、values配列独立、新生成2method |
 | MQEVENT004 | registry/mode/layout/address null、UNKNOWN1両mode、未知mode、STD全stage/null | 任意namespace拒否/CONFIG_INVALID/NPE、STD factory/全meter/増分0、DEBUG null後既ACK1保持 |
