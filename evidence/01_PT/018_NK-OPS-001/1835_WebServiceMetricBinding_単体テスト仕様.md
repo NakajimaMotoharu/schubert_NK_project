@@ -1,6 +1,6 @@
 # Web DB＋HTTP terminal metric binding 単体テスト仕様
 
-NK-OPS-001/RD171 MON005～013/UI252/SS312351/PG-D625、group2065/P018-09・C07追加費0。開始fresh47残53/reset1793382075・3/6/10pp/cap10。新WebServiceMetricBindingは既DB bindingとHttpMetricRecorder/HttpMetricValveを一つのcaller-held custom registryへ登録し強保持する。factoryはresource-free、DEBUG initialize時だけ借用pool/config参照、refreshはDB四getterのみ、HTTPは既terminal logで一回記録。STD contextはsetup/supplier未読。binding自体にpool/registry/server/workerの所有・close・start・I/O権限なし。
+NK-OPS-001/RD171 MON005～013/UI252/SS312351/PG-D625、group2065/P018-09・C07追加費0。開始fresh47残53/reset1793382075・3/6/10pp/cap10。新WebServiceMetricBindingは既DB bindingとHttpMetricRecorder/terminal callbackを強保持し同caller-held custom registryへ登録する。pipeline observerはcreateHttpObserverで新規生成し同recorderを借用、内部Valveは保持/返却しない（BUG1724の補正根拠は末尾）。factoryはresource-free、DEBUG initialize時だけ借用pool/config参照、refreshはDB四getterのみ、HTTPは既terminal logで一回記録。STD contextはsetup/supplier未読。binding自体にpool/registry/server/workerの所有・close・start・I/O権限なし。
 
 |新WEBSERVICE ID|入力/操作|独立期待|
 |---|---|---|

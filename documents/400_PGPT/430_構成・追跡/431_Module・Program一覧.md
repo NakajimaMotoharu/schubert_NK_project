@@ -1,5 +1,7 @@
 # Module・Program一覧
 
+2026-10-25追加trace：PG-D625/1835-36、sourcefb5bde926、新WebServiceMetricBinding prepareContext/ctor/refresh/createHttpObserver→WEBSERVICE001～014/WEBMHTTP022新15＋必要旧21=actual36/2。8932正常six→8934原3d4b63b3→8936原4e3d2c24二Main四100 L40M8C2B4/静的三0→8938原2066440e全1835/新一Main・旧1834-原1665同byte/231owner/五edge0・五protocol二field反例/旧HTTP21本文保持。8940原580ae5b1旧mutable Valve source含む四所有反例、BUG1724/YKT1475理由付き内部oracle訂正/元8926失敗保持/全hash1836。同custom textへDB/HTTP terminal接続、実pipeline/start/stop/全451は別未受入。
+
 2026-10-25追加trace：PG-D624/1833-34、source3359b1489、BatchMetricText.scrape三引数→BATCHFULL001～012新12＋必要BATCHTEXT旧24=actual36/1。8910正常six→8912原8034014d→8914原68b7069b一Main四100 L58M9C1B34/静的三0・CRC0/session1→8916原8f022a7a全1834/旧1833-原1665同byte/229owner/五edge0/旧二引数・Test24本文保持/五protocol反例。8905原03c969fb fixture原assert保持/旧TWR二反例、8917原12a44e17実constant guard三反例、BUG1722-23/YKT1473-74元失敗/限定closeと全hash1834。borrowed custom→standardだけでactual Batch/endpoint/全451は未受入。
 
 2026-10-25追加trace：PG-D623/1829-30、source28befbf2c、WebDbPoolMetricBinding.prepareContext/WebNativeRuntime nullable所有配線→WEBPOOLB011～015/WEBMHTTP021新6＋必要旧30=actual36/2。8868正常six→8870原3ac2644d→8871原c1ef8c75三raw理由/currentXML→8872原177a2494三Main四100 L58M11C3B8/CS-SB0/PMD raw3評価済/未分類0→8874原8dfa48d3全1834/二変更/229owner/五edge0/旧全source・Test本文保持/七protocol二owner反例。caller8873原8fc80c4c静的1/PMD未分類13/CS-SB0、動的/native/coverage UNRUN_HOLD/null、元30秒/phase cursor保持はPG source確認のみ。全hash1830/新BUG0、正式/全451は別未完。
