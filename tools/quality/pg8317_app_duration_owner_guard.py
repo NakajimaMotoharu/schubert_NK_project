@@ -14,6 +14,7 @@ OUT = host.BASE / 'PG8317-app-duration-owner-guard-v1'
 def main():
     invocation = capture(Path(__file__))
     normal_file = host.BASE / 'PG8316-app-duration-six-compile-v1/manifest.json'
+    assert host.sha(normal_file) == '2b979a3b19cb662a6c74d42dc48b426ac9086d34c312928e093a434b88839196'
     normal = json.loads(normal_file.read_text())
     assert normal['source'] == SOURCE and normal['actualExit'] == normal['terminal']['actualExit'] == 0
     assert all(host.sha(host.ROOT / p) == h for p, h in normal['begin']['inputHashes'].items())
