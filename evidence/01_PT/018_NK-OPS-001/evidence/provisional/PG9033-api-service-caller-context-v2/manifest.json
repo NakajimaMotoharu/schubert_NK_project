@@ -1,0 +1,108 @@
+{
+  "actualExit": 0,
+  "applicabilityUnclassified": 0,
+  "applicableViolations": 0,
+  "coverage": null,
+  "decisions": [
+    {
+      "counterexample": "実際にWAR/EAR/J2EE containerへ移行した場合、又はExecStartがdirect javaでなくなった場合はこの分類を失効させ再判定する。現sourceだけで全runtime品質をPASSにしない。",
+      "currentCoverage": null,
+      "currentDynamicPt": "UNRUN_HOLD",
+      "currentSourceSha256": "0b2d91a4d09356e7a834fc1736a870f1a021494fed2213d5ad21845fae0f9c5e",
+      "raw": {
+        "begincolumn": "5",
+        "beginline": "90",
+        "class": "ApiProcessMain",
+        "endcolumn": "11",
+        "endline": "90",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "message": "To be compliant to J2EE, a webapp should not use any thread.",
+        "method": "main",
+        "package": "dev.codex.schubert.nk.api.bootstrap",
+        "priority": "3",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading"
+      },
+      "rawWarningRetained": true,
+      "reason": "原PMD規則はJ2EEコンテナがthreadを管理するwebappを前提とする。当APIはSS342と同sourceのsystemd templateでdirect java RootServiceLauncher APIを起動し、API自身がuncaught handlerを登録するstandalone契約。main/fatalのthread取扱いを削除すると承認済みfatal診断境界を変更するため、このJ2EE前提に限り非該当。実配備やhandler動作の成功は主張しない。",
+      "sourceChangedByReview": false,
+      "sourceSpan": [
+        "    Thread.currentThread().setUncaughtExceptionHandler(ApiProcessMain::fatal);"
+      ],
+      "status": "CONTEXT_NOT_APPLICABLE_J2EE_RULE"
+    },
+    {
+      "counterexample": "実際にWAR/EAR/J2EE containerへ移行した場合、又はExecStartがdirect javaでなくなった場合はこの分類を失効させ再判定する。現sourceだけで全runtime品質をPASSにしない。",
+      "currentCoverage": null,
+      "currentDynamicPt": "UNRUN_HOLD",
+      "currentSourceSha256": "0b2d91a4d09356e7a834fc1736a870f1a021494fed2213d5ad21845fae0f9c5e",
+      "raw": {
+        "begincolumn": "21",
+        "beginline": "321",
+        "class": "ApiProcessMain",
+        "endcolumn": "27",
+        "endline": "321",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "message": "To be compliant to J2EE, a webapp should not use any thread.",
+        "method": "fatal",
+        "package": "dev.codex.schubert.nk.api.bootstrap",
+        "priority": "3",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading"
+      },
+      "rawWarningRetained": true,
+      "reason": "原PMD規則はJ2EEコンテナがthreadを管理するwebappを前提とする。当APIはSS342と同sourceのsystemd templateでdirect java RootServiceLauncher APIを起動し、API自身がuncaught handlerを登録するstandalone契約。main/fatalのthread取扱いを削除すると承認済みfatal診断境界を変更するため、このJ2EE前提に限り非該当。実配備やhandler動作の成功は主張しない。",
+      "sourceChangedByReview": false,
+      "sourceSpan": [
+        "  static void fatal(Thread thread, Throwable failure) {"
+      ],
+      "status": "CONTEXT_NOT_APPLICABLE_J2EE_RULE"
+    }
+  ],
+  "formalDesignCommit": "8b91944df5820535e23ba2469740f1c0aa94c447",
+  "formalDesignSha256": "3775cb1faf0b96572f4913d06682100da1861f1d364a66f4118b03e27abf4b82",
+  "formalUpdated": false,
+  "invocation": {
+    "actualPythonCommand": [
+      "python3",
+      "-B",
+      "tools/quality/pg9033_api_service_caller_context_v2.py"
+    ],
+    "arbitraryArgumentsRecorded": false,
+    "entrypointPath": "tools/quality/pg9033_api_service_caller_context_v2.py",
+    "entrypointSha256": "089162dd55edbf3cc7ce5da638d5ec2fe335dc77fbe389a2ac48797f1aab5f1f",
+    "helperPath": "tools/quality/host_tool_invocation.py",
+    "helperSha256": "85d616a3db4ff47f4c95ae2e0dd57954bc2b09f28b8f2a685b986e5621545c46",
+    "libraryPath": "tools/quality/pg9033_api_service_caller_context_v2.py",
+    "librarySha256": "089162dd55edbf3cc7ce5da638d5ec2fe335dc77fbe389a2ac48797f1aab5f1f",
+    "loadedProjectPythonSources": {
+      "tools/quality/host_tool_invocation.py": "85d616a3db4ff47f4c95ae2e0dd57954bc2b09f28b8f2a685b986e5621545c46",
+      "tools/quality/pg9033_api_service_caller_context_v2.py": "089162dd55edbf3cc7ce5da638d5ec2fe335dc77fbe389a2ac48797f1aab5f1f",
+      "tools/quality/public_blob_scan.py": "4d12a867a01f32c3437df37986f676a6624d2afde036e6a3eaca3ed1f666b78f"
+    },
+    "provenance": "OBSERVED_SYS_ARGV_AND_ORIG_ARGV_NOT_RECONSTRUCTED"
+  },
+  "newAccepted": 0,
+  "oldGroundsRecheckedNotOldPtTransferred": true,
+  "productTestsExecuted": 0,
+  "ptExecutionExempt": false,
+  "qualityGatePass": false,
+  "rawFindings": 2,
+  "rawPmdExit": 4,
+  "rawStaticExit": 1,
+  "rawStaticManifestSha256": "1dab5cae1970063d2cabbe329b45556ada50b53803fb1d1fd8aba2220d93c90e",
+  "rejectedMetadataCases": [
+    "not-direct-java",
+    "war-role",
+    "changed-source-subject",
+    "wrong-rule"
+  ],
+  "rulePremiseSha256": "6fdce7acaf0b34485c8a26b5996f0ebcb10468a3c8a9f3614c2a768e96bb221e",
+  "source": "73d94fc525c6ea8828ca82d906ec583146fee7bf",
+  "sourceHash": "0b2d91a4d09356e7a834fc1736a870f1a021494fed2213d5ad21845fae0f9c5e",
+  "suppressionsAdded": false,
+  "timeUTC": "2026-10-24T20:33:38.688700+00:00",
+  "unitTemplateSha256": "c81f848198dff4e24f7d607aef3caf3b3fa5d401278eeb0b1707662bdbc2d630",
+  "vendorJarSha256": "068b2b5fb276559c32d52e3675d297a458bf27fe181b675cee10555a55c131bd",
+  "whole451Accepted": false
+}

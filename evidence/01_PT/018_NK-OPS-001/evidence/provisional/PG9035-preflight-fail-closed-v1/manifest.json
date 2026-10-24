@@ -1,0 +1,113 @@
+{
+  "actualExit": 0,
+  "actualLintReproductions": 2,
+  "actualTargetServiceOrVmActions": 0,
+  "bug": "BUG-1729",
+  "controls": [
+    {
+      "actualExit": 0,
+      "command": [
+        "/bin/bash",
+        "-c",
+        "set -e\n/usr/bin/python3 -B -m pyflakes /home/mini/codex/project1/work/pgpt-foundation/tools/quality/tests/fixtures/preflight-pass.py.txt\n/usr/bin/python3 -B /home/mini/codex/project1/work/pgpt-foundation/tools/quality/tests/fixtures/preflight-pass.py.txt"
+      ],
+      "endUTC": "2026-10-24T20:35:02.451121+00:00",
+      "expectedControlExit": 0,
+      "inputSha256": "0e0e7eaed7cbb486356c6101499ffe3dfbb88d49e884aaa1d604f970fb8c214c",
+      "name": "pass",
+      "outcome": "EXPECTED_SYNTHETIC_CONTROL",
+      "realJobsOrTargetsInvoked": false,
+      "startUTC": "2026-10-24T20:35:02.348667+00:00"
+    },
+    {
+      "actualExit": 1,
+      "command": [
+        "/bin/bash",
+        "-c",
+        "set -e\n/usr/bin/python3 -B -m pyflakes /home/mini/codex/project1/work/pgpt-foundation/tools/quality/tests/fixtures/preflight-reject.py.txt\n/usr/bin/python3 -B /home/mini/codex/project1/work/pgpt-foundation/tools/quality/tests/fixtures/preflight-reject.py.txt"
+      ],
+      "endUTC": "2026-10-24T20:35:02.538963+00:00",
+      "expectedControlExit": 1,
+      "inputSha256": "e1baf4a44588c61002724767598514e1f98ad6b4b401a89154c5290080bfae58",
+      "name": "lint-stop-before-child73",
+      "outcome": "EXPECTED_LINT_STOP_CHILD_NOT_REACHED",
+      "realJobsOrTargetsInvoked": false,
+      "startUTC": "2026-10-24T20:35:02.451303+00:00"
+    },
+    {
+      "actualExit": 73,
+      "command": [
+        "/bin/bash",
+        "-c",
+        "/usr/bin/python3 -B -m pyflakes /home/mini/codex/project1/work/pgpt-foundation/tools/quality/tests/fixtures/preflight-reject.py.txt\n/usr/bin/python3 -B /home/mini/codex/project1/work/pgpt-foundation/tools/quality/tests/fixtures/preflight-reject.py.txt"
+      ],
+      "endUTC": "2026-10-24T20:35:02.754616+00:00",
+      "expectedControlExit": 73,
+      "inputSha256": "e1baf4a44588c61002724767598514e1f98ad6b4b401a89154c5290080bfae58",
+      "name": "synthetic-broken-gate-control",
+      "outcome": "EXPECTED_SYNTHETIC_CONTROL",
+      "realJobsOrTargetsInvoked": false,
+      "startUTC": "2026-10-24T20:35:02.539278+00:00"
+    },
+    {
+      "actualExit": 1,
+      "command": [
+        "/usr/bin/python3",
+        "-B",
+        "-m",
+        "pyflakes",
+        "/home/mini/codex/project1/work/pgpt-foundation/tools/quality/pg9033_api_service_caller_context.py"
+      ],
+      "expectedControlExit": 1,
+      "inputSha256": "9c1492632fd3c2c573e7e42424f156ff524af0ff20162d57c6477a9fb98fb6fc",
+      "legacyToolExecuted": false,
+      "name": "original-unused-re-reproduced"
+    },
+    {
+      "actualExit": 0,
+      "command": [
+        "/usr/bin/python3",
+        "-B",
+        "-m",
+        "pyflakes",
+        "/home/mini/codex/project1/work/pgpt-foundation/tools/quality/pg9033_api_service_caller_context_v2.py"
+      ],
+      "expectedControlExit": 0,
+      "inputSha256": "089162dd55edbf3cc7ce5da638d5ec2fe335dc77fbe389a2ac48797f1aab5f1f",
+      "legacyToolExecuted": false,
+      "name": "corrected-import-lint"
+    }
+  ],
+  "formalUpdated": false,
+  "invocation": {
+    "actualPythonCommand": [
+      "python3",
+      "-B",
+      "tools/quality/pg9035_preflight_fail_closed.py"
+    ],
+    "arbitraryArgumentsRecorded": false,
+    "entrypointPath": "tools/quality/pg9035_preflight_fail_closed.py",
+    "entrypointSha256": "bde7436cb842aa973dd08ebea818387cefe19f043dd1ea4b8dc5f3551bc84434",
+    "helperPath": "tools/quality/host_tool_invocation.py",
+    "helperSha256": "85d616a3db4ff47f4c95ae2e0dd57954bc2b09f28b8f2a685b986e5621545c46",
+    "libraryPath": "tools/quality/pg9035_preflight_fail_closed.py",
+    "librarySha256": "bde7436cb842aa973dd08ebea818387cefe19f043dd1ea4b8dc5f3551bc84434",
+    "loadedProjectPythonSources": {
+      "tools/quality/host_tool_invocation.py": "85d616a3db4ff47f4c95ae2e0dd57954bc2b09f28b8f2a685b986e5621545c46",
+      "tools/quality/pg9035_preflight_fail_closed.py": "bde7436cb842aa973dd08ebea818387cefe19f043dd1ea4b8dc5f3551bc84434",
+      "tools/quality/public_blob_scan.py": "4d12a867a01f32c3437df37986f676a6624d2afde036e6a3eaca3ed1f666b78f"
+    },
+    "provenance": "OBSERVED_SYS_ARGV_AND_ORIG_ARGV_NOT_RECONSTRUCTED"
+  },
+  "newAccepted": 0,
+  "newContextManifestSha256": "6eb3e7e243937e445a6f5411c78e432cbe0786c2b457b2c0caf744e3ef8a9f88",
+  "newVersionLintQualified": true,
+  "oldVersionPreserved": true,
+  "oldVersionQualified": false,
+  "productJobsRerun": 0,
+  "productTestsExecuted": 0,
+  "source": "73d94fc525c6ea8828ca82d906ec583146fee7bf",
+  "syntheticFailFastCases": 3,
+  "timeUTC": "2026-10-24T20:35:03.088282+00:00",
+  "ykt": "YKT-1480"
+}
