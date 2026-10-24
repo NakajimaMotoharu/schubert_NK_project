@@ -122,18 +122,21 @@ final class ApiProcessLifetimeTest {
   void lifeBudget005() {
     var time = new java.util.concurrent.atomic.AtomicLong();
     var reads = new AtomicInteger();
-    try (var lifetime =
+    var lifetime =
         new ApiProcessLifetime(
             () -> {
               reads.incrementAndGet();
               return time.get();
-            })) {
+            });
+    try {
       lifetime.close();
       time.set(29);
       lifetime.close();
       lifetime.shutdown(); // Owner itself never waits; no hook is installed.
       assertEquals(59_999_999_971L, lifetime.remainingStopNanos());
       assertEquals(2, reads.get());
+    } finally {
+      lifetime.close();
     }
   }
 
