@@ -6,6 +6,8 @@ canonical SS311/411再照合で、共用Bootstrapは固定起動責務に限定�
 
 独立goldenは維持しclass/package/入力API参照だけ追随する。SUMENC24はAPI監視packageへ、TIMERENC16はWeb監視packageへ移動、API6/Web6同一源で再試験。SourceKindは役割固定appへ分けるので未受入内部enumを廃止し、TIMERENC016は旧型factory観点を廃止履歴として残してWeb checked IOの固定message/cause/borrowed確認へ置換（外部oracle弱化ではない、既API IO期待値不変更）。同source **52/4** と両app exporter全branch/四100/静的/六artifact・責務guardを実行する。BUG1697/YKT1448は全対象/変異guardと結合するまでOPEN。
 
+app分離後のper-role validation不足を実行前点検し、Webの004/006へduplicate label、null集合要素、未知name/label-key/le/欠落keyのnegativeを補完する（Test ID数/外部golden不変更）。d496の8318真正52成功は履歴として保持し、当Test source強化後の新sourceで正常six/fresh52・各app四100を確認する。新責務guard8317初稿はscopeを省略して既存PT-IDEM-016 Web→API test-only依存を誤拒否（source ef46be6c5、未公開/製品PT0）、同source既POM/f02 immutable witnessからscopeを明示し、productionへの昇格を拒否する九反例へ補完。製品POMの既test依存や品質条件を変更/緩和しない。
+
 NK-OPS-001/RD171/UI252/SS311351、1754/1756を前提、WBS-P018-09/C07、group1984開始3/5/9pp・cap10固定。現既資格candidate f02fae44e、全ownjob終端/未配備、actual VM/Root/DB/endpoint等HOLD。後続索引はSummary1754/1753で、Timer標準textは未実装を確認済み。
 
 ## PG-D594・今回の一経路

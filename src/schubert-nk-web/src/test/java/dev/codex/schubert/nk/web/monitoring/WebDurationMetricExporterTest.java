@@ -167,6 +167,24 @@ class WebDurationMetricExporterTest {
       assertEquals(2, result.lines().filter(line -> line.startsWith(NAME + "_sum{")).count());
       assertTrue(result.contains("route=\"a\\\"b\\\\c\\nd\""));
     }
+    Meter.Id duplicated =
+        new Meter.Id(NAME, Tags.empty(), "seconds", "", Meter.Type.TIMER) {
+          public List<io.micrometer.core.instrument.Tag> getTags() {
+            return List.of(
+                io.micrometer.core.instrument.Tag.of("route", "/login"),
+                io.micrometer.core.instrument.Tag.of("route", "/logout"),
+                io.micrometer.core.instrument.Tag.of("service", "WEB"));
+          }
+        };
+    var timer =
+        new FixedTimer(valid(), "/login") {
+          public Meter.Id getId() {
+            return duplicated;
+          }
+        };
+    try (var source = new Registry(timer)) {
+      assertThrows(IllegalArgumentException.class, () -> exporter.scrapeTimers(source, SPACE));
+    }
   }
 
   @Test
@@ -186,6 +204,26 @@ class WebDurationMetricExporterTest {
     assertThrows(NullPointerException.class, () -> exporter.scrapeTimers(null, SPACE));
     try (var source = new Registry(new FixedTimer(valid(), "/login"))) {
       assertThrows(NullPointerException.class, () -> exporter.scrapeTimers(source, null));
+      var invalid = new HashMap<String, Set<String>>();
+      invalid.put(null, Set.of());
+      assertThrows(NullPointerException.class, () -> exporter.scrapeTimers(source, invalid));
+      invalid.clear();
+      invalid.put(NAME, null);
+      assertThrows(NullPointerException.class, () -> exporter.scrapeTimers(source, invalid));
+      var keys = new HashSet<String>();
+      keys.add(null);
+      invalid.put(NAME, keys);
+      assertThrows(NullPointerException.class, () -> exporter.scrapeTimers(source, invalid));
+      assertThrows(
+          IllegalArgumentException.class,
+          () -> exporter.scrapeTimers(source, Map.of("nk_wrong_total", Set.of())));
+      for (String key : List.of("bad-key", "le"))
+        assertThrows(
+            IllegalArgumentException.class,
+            () -> exporter.scrapeTimers(source, Map.of(NAME, Set.of(key))));
+      assertThrows(
+          IllegalArgumentException.class,
+          () -> exporter.scrapeTimers(source, Map.of(NAME, Set.of("service"))));
     }
     assertThrows(NullPointerException.class, () -> text(null));
   }
