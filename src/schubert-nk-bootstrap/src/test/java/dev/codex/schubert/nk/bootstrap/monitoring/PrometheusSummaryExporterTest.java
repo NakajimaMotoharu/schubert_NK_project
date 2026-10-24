@@ -11,7 +11,7 @@ import io.micrometer.core.instrument.distribution.HistogramSnapshot;
 import io.micrometer.core.instrument.distribution.ValueAtPercentile;
 import io.micrometer.core.instrument.simple.SimpleMeterRegistry;
 import io.prometheus.metrics.config.EscapingScheme;
-import io.prometheus.metrics.expositionformats.PrometheusTextFormatWriter;
+import io.prometheus.metrics.expositionformats.ExpositionFormatWriter;
 import io.prometheus.metrics.model.snapshots.MetricSnapshots;
 import java.io.IOException;
 import java.io.OutputStream;
@@ -29,6 +29,16 @@ class PrometheusSummaryExporterTest {
   private static final String NAME = "nk_fixture_duration_seconds";
   private static final Map<String, Set<String>> SPACE = Map.of(NAME, Set.of("outcome"));
   private final PrometheusSummaryExporter exporter = new PrometheusSummaryExporter();
+
+  private abstract static class FixtureWriter implements ExpositionFormatWriter {
+    public boolean accepts(String accept) {
+      throw new AssertionError("no content negotiation");
+    }
+
+    public String getContentType() {
+      throw new AssertionError("not an HTTP endpoint");
+    }
+  }
 
   private static HistogramSnapshot snapshot(long count, double total, CountAtBucket... buckets) {
     return new HistogramSnapshot(count, total, 0, new ValueAtPercentile[0], buckets, null);
@@ -338,7 +348,7 @@ class PrometheusSummaryExporterTest {
   void sumenc023CheckedWriterFailureRetainsCauseAndConstantMessage() {
     var failure = new IOException("fixture");
     var writer =
-        new PrometheusTextFormatWriter(false) {
+        new FixtureWriter() {
           public void write(OutputStream output, MetricSnapshots metrics, EscapingScheme scheme)
               throws IOException {
             throw failure;
@@ -359,7 +369,7 @@ class PrometheusSummaryExporterTest {
   void sumenc024WriterErrorIsNotCaughtOrNormalized() {
     var failure = new AssertionError("fixture");
     var writer =
-        new PrometheusTextFormatWriter(false) {
+        new FixtureWriter() {
           public void write(OutputStream output, MetricSnapshots metrics, EscapingScheme scheme) {
             throw failure;
           }

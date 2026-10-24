@@ -41,7 +41,13 @@ public final class PrometheusSummaryExporter {
    * text.
    */
   public String scrape(MeterRegistry source, Map<String, Set<String>> approvedNameLabelKeys) {
-    return encode(source, approvedNameLabelKeys, new PrometheusTextFormatWriter(false));
+    return encode(
+        source,
+        approvedNameLabelKeys,
+        PrometheusTextFormatWriter.builder()
+            .setIncludeCreatedTimestamps(false)
+            .setTimestampsInMs(false)
+            .build());
   }
 
   // Package-private checked-writer seam for SUMENC023/024, no retained injected mutable resource.

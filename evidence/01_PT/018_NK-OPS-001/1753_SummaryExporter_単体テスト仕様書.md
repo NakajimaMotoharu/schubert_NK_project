@@ -18,6 +18,8 @@ fixtureはメモリのみ。IO例外はpackage内writer注入で独立故障、p
 
 ## 実行・品質・証跡
 
+実装WIP発見：元constructor(boolean)はpureだがSDK1.7.0でdeprecated（初回8248 -Werror、PT0）。public Builderのconstructor/二boolean設定/build bytecodeもpureでLoader呼出しなしを照合、非deprecatedの明示builder＋二flag falseを採用する。警告抑制なし。IO故障fixtureは公式interface実装としdeprecated constructorを呼ばない。元8248の失敗を変更/転用しない。
+
 JDK25.0.4/Maven3.9.12、既421と各実行manifestのcommand/branch/source/tool/hash/終了codeを正とする。新source正常six/NullAway/format→fresh対象PT→同exec CRC/line-method-class-branch100・静的・generated metadata・全physical/traceへ。新module境界を追加せず、既byteの成功を新Mainへ合算しない。必要全体451は別途未実行として維持。実行command・確定matrix・終了code・input/expected/actual/hash/BUGは1754と公開manifestへ記載する。
 
 現時点は未実装・未実行・coverage未測定。正式1964/53・原190新受入0・QA051final/PTALT0・工数null不変。actual VM/Root/cohort/native/DB/Backup/鍵/intent/permit/配備/サービス/拒否未特定操作HOLD。通常小区切りで終了せず、許可済みPG/PTを継続する。
