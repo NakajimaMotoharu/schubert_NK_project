@@ -1,5 +1,9 @@
 # Prometheus公開profile固定版parser 実行結果
 
+## 追記訂正（BUG1710/YKT1461、原結果・見積を不変で保持）
+
+後続431索引照合で1737～1738の既syntax-only parser成功を確認した。当8はstrict full `check config --lint=all --lint-fatal` の追加品質であり、正常二つ/未知root/job重複/timeout大小の五観点を元計画の新規進捗に加算しない。PROMPARSE003構文不正/005不正duration/008list型の三つを新規技術観点、他五つを追加品質・選定手戻りとして分離する。元group2032開始見積/2033記録/8原PASS/全hashは削除・改変せず訂正eventを追記。下記「新8/累計409」は当時の未区分値、現行は新技術3＋追加品質5、累計新404/24Main（異source・正式合算0）。原工程消化・正式受入増0。次群は431/既spec/固定artifactを選定前照合する。工具/管理手戻りと追加品質費を元計画進捗へ付替えない。
+
 2026-10-24、1804のPROMPARSE001～008を新規実行、8件/1suite F0/E0/S0、元javac/JVMとも終了0、timeout0。Production f817b004781e6c32aa2d384dd12855cad7175ddc・正常8632の全input byte一致、build再演0/新Main0/ソース変更0。PG8652原manifest SHA `e093e13bd04eff95006fb2df115cfe5472a6366b494c29fb29d5841c522db7b3`。
 
 元manifestは `evidence/provisional/PG8652-prometheus-profile-parser-host-v1/manifest.json`。選択FQCN8件と全XML、実command/日時/branch/環境/deps/tool/hash/元log/exec hashを固定。DEBUG/STD公開入力は各df964a07…/52e6254d…、binary4e84296d…、3.13.5/8162準備時の入手先・version・署名未確認という留保を継承。実workerは25.0.4+7-1-26.04-Ubuntu/Linux amd64 7.0.0-38-generic。
