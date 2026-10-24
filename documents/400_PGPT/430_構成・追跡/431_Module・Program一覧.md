@@ -1,5 +1,7 @@
 # Module・Program一覧
 
+2026-10-25追加trace：PG-D619/1819-20、source84ee59a95、二Handler.write/handle/ctor→APIMHTTP-WEBMHTTP001～018（actual36、新4/必要32）/8786原48456d32→8788原082e7f9f当handler二つ四100 L50M6C2B8/static0/七反例。二Manager新bind/ctor/respondは8790原b5305840 source強化レビュー・metadata/八反例・architecture0、実静的8791原a90c7559はCS-SB0/PMD40未分類、8793原3b42b905旧行由来40だけを結合、動的PT/coverageはUNRUN_HOLD/null（PASS/免除完了0）。全1832・変更四parent/旧1828-原1667同byte・223owner。caller Root/実source/観測鮮度/全451/正式未完を残す。
+
 2026-10-25追加trace：Api/WebMetricHttpHandler ctor/handle→APIMHTTP/WEBMHTTP001～016/1817-18/PG-D618/RD171/UI252/SS311342351、sourcedb9c16e03。8762正常six→8764原5e39866c新32/2→8766原ec84d9d9当2四100 L44M4C2B8/static0/七反例→8768原4a763bd2全1832/旧1830-原1669同byte/221owner（予定219の算術訂正）/五edge0・六role八protocol六field反例。借用full context/固定HTTP境界・headers前render/失敗とowner保持をmemory exchangeで確認。actual socket/Manager-Root配線/native/全catalog/451/正式・工数は未受入、BUG1715-16/全hash1818。
 
 2026-10-24追加trace：ApiMetricContext<T>/WebMetricContext<T>のctor二種/initialize/bindings/render/rejectStopping/requireRunning/close/default factory→APIMCTX/WEBMCTX001～026/1815-1816/PG-D617/RD171/UI252/SS311342351。sourcef1b570e45/8740正常six→8742原5510543f新52/2→8744原967efc86当2四100 L122M18C2B43/static0/七反例→8746原a18b0741全1830/217owner/旧1828同byte/五edge0・六role八protocol十field反例。caller捕捉後SDK init/metadata強保持/STD未取得/stop競合・再入未確認/partial owner/明示逆closeの構造依存だけ受入、実parent/defaultHTTP/全catalog・観測鮮度/全451/正式・工数は未受入、旧成功転用/確認再演0。
