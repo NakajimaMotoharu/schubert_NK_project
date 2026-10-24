@@ -38,7 +38,12 @@ public final class ApiGcMetricRegistration {
         };
     if (!detailed) return;
     if (source.isClosed()) throw new IllegalStateException("metric registry closed");
-    var resource = Objects.requireNonNull(factory.get(), "fresh GC resource");
+    activateOwned(source, Objects.requireNonNull(factory.get(), "fresh GC resource"), owner);
+  }
+
+  // Borrowed candidate: owner acknowledges retention before SDK activation; owner alone closes it.
+  private static void activateOwned(
+      MeterRegistry source, JvmGcMetrics resource, Predicate<? super JvmGcMetrics> owner) {
     if (!owner.test(resource)) throw new IllegalStateException("GC binding owner unavailable");
     resource.bindTo(source);
   }
