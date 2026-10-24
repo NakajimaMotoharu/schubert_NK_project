@@ -1,0 +1,742 @@
+{
+  "schema": "PGPT_CALLER15_INDIVIDUAL_STATIC_REVIEW_V1",
+  "source": "28befbf2cac86840b6adef53b6c5f972e6f9610f",
+  "formalDesignCommit": "8b91944df5820535e23ba2469740f1c0aa94c447",
+  "rows": [
+    {
+      "index": 1,
+      "role": "api",
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/bootstrap/ApiProcessMain.java",
+      "sourceSha256": "e44464c8d62bde4e6801a6d2badec54bfa8c86995f302828512f513679f1758b",
+      "raw": {
+        "begincolumn": "5",
+        "beginline": "90",
+        "class": "ApiProcessMain",
+        "endcolumn": "11",
+        "endline": "90",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "message": "To be compliant to J2EE, a webapp should not use any thread.",
+        "method": "main",
+        "package": "dev.codex.schubert.nk.api.bootstrap",
+        "priority": "3",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading"
+      },
+      "sourceSpan": [
+        "    Thread.currentThread().setUncaughtExceptionHandler(ApiProcessMain::fatal);"
+      ],
+      "rawManifest": "PG8859-api-caller-metric-static-v1/manifest.json",
+      "rawManifestSha256": "d230ac886953afcfa82fc3b6c78c766263d52d731e4d3c71cef0027d128b358a",
+      "rawSource": "0f065c63fe1667e014fa4b985579d4146c3d91c5",
+      "subject": "Thread.currentThread().setUncaughtExceptionHandler(ApiProcessMain::fatal);",
+      "status": "CONTEXT_NOT_APPLICABLE_J2EE_RULE",
+      "reviewOwner": "PGPT_PARENT",
+      "reviewPasses": [
+        "RULE_TO_SOURCE_CONTRACT",
+        "COUNTEREXAMPLE_SOURCE_RECHECK"
+      ],
+      "rawWarningRetained": true,
+      "qualityGatePass": false,
+      "actualRuntimeProven": false,
+      "formalAccepted": false,
+      "ptAlternativeCompleted": 0,
+      "currentXmlQualified": false,
+      "sourceChangedByReview": false,
+      "reason": "原PMD規則はJ2EEコンテナがthreadを管理するwebappを前提とする。当APIはSS342と同sourceのsystemd templateでdirect java RootServiceLauncher APIを起動し、API自身がuncaught handlerを登録するstandalone契約。main/fatalのthread取扱いを削除すると承認済みfatal診断境界を変更するため、このJ2EE前提に限り非該当。実配備やhandler動作の成功は主張しない。",
+      "counterexample": "実際にWAR/EAR/J2EE containerへ移行した場合、又はExecStartがdirect javaでなくなった場合はこの分類を失効させ再判定する。現sourceだけで全runtime品質をPASSにしない。",
+      "testReference": null
+    },
+    {
+      "index": 2,
+      "role": "api",
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/bootstrap/ApiProcessMain.java",
+      "sourceSha256": "e44464c8d62bde4e6801a6d2badec54bfa8c86995f302828512f513679f1758b",
+      "raw": {
+        "begincolumn": "21",
+        "beginline": "321",
+        "class": "ApiProcessMain",
+        "endcolumn": "27",
+        "endline": "321",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "message": "To be compliant to J2EE, a webapp should not use any thread.",
+        "method": "fatal",
+        "package": "dev.codex.schubert.nk.api.bootstrap",
+        "priority": "3",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading"
+      },
+      "sourceSpan": [
+        "  static void fatal(Thread thread, Throwable failure) {"
+      ],
+      "rawManifest": "PG8859-api-caller-metric-static-v1/manifest.json",
+      "rawManifestSha256": "d230ac886953afcfa82fc3b6c78c766263d52d731e4d3c71cef0027d128b358a",
+      "rawSource": "0f065c63fe1667e014fa4b985579d4146c3d91c5",
+      "subject": "static void fatal(Thread thread, Throwable failure) {",
+      "status": "CONTEXT_NOT_APPLICABLE_J2EE_RULE",
+      "reviewOwner": "PGPT_PARENT",
+      "reviewPasses": [
+        "RULE_TO_SOURCE_CONTRACT",
+        "COUNTEREXAMPLE_SOURCE_RECHECK"
+      ],
+      "rawWarningRetained": true,
+      "qualityGatePass": false,
+      "actualRuntimeProven": false,
+      "formalAccepted": false,
+      "ptAlternativeCompleted": 0,
+      "currentXmlQualified": false,
+      "sourceChangedByReview": false,
+      "reason": "原PMD規則はJ2EEコンテナがthreadを管理するwebappを前提とする。当APIはSS342と同sourceのsystemd templateでdirect java RootServiceLauncher APIを起動し、API自身がuncaught handlerを登録するstandalone契約。main/fatalのthread取扱いを削除すると承認済みfatal診断境界を変更するため、このJ2EE前提に限り非該当。実配備やhandler動作の成功は主張しない。",
+      "counterexample": "実際にWAR/EAR/J2EE containerへ移行した場合、又はExecStartがdirect javaでなくなった場合はこの分類を失効させ再判定する。現sourceだけで全runtime品質をPASSにしない。",
+      "testReference": null
+    },
+    {
+      "index": 3,
+      "role": "web",
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebNativeRuntime.java",
+      "sourceSha256": "e89d51c66f96fd360fbaa232aeb5f80737be8dd072153ebb65d0743715ca115c",
+      "raw": {
+        "begincolumn": "52",
+        "beginline": "90",
+        "class": "WebNativeRuntime",
+        "endcolumn": "59",
+        "endline": "90",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#avoidusingvolatile",
+        "message": "Use of modifier volatile is not recommended.",
+        "package": "dev.codex.schubert.nk.web.bootstrap",
+        "priority": "2",
+        "rule": "AvoidUsingVolatile",
+        "ruleset": "Multithreading",
+        "variable": "replies"
+      },
+      "sourceSpan": [
+        "  private volatile @Nullable ArtemisReplyConsumers replies;"
+      ],
+      "rawManifest": "PG8873-web-caller-metric-static-v1/manifest.json",
+      "rawManifestSha256": "8fc80c4cef3c23b217a9ded8ba1b150a857424c10d1345810608241da1a1f532",
+      "rawSource": "28befbf2cac86840b6adef53b6c5f972e6f9610f",
+      "subject": "private volatile @Nullable ArtemisReplyConsumers replies;",
+      "status": "REQUIRED_CONTRACT_DYNAMIC_JOIN_PENDING",
+      "reviewOwner": "PGPT_PARENT",
+      "reviewPasses": [
+        "RULE_TO_SOURCE_CONTRACT",
+        "COUNTEREXAMPLE_SOURCE_RECHECK"
+      ],
+      "rawWarningRetained": true,
+      "qualityGatePass": false,
+      "actualRuntimeProven": false,
+      "formalAccepted": false,
+      "ptAlternativeCompleted": 0,
+      "currentXmlQualified": false,
+      "sourceChangedByReview": false,
+      "testReference": {
+        "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/bootstrap/WebRuntimeHealthTest.java",
+        "className": "dev.codex.schubert.nk.web.bootstrap.WebRuntimeHealthTest",
+        "method": "health001EveryRequiredConditionIndependentlyRefusesAndStopsAtItsPosition",
+        "currentRunStatus": "UNRUN_HOLD_REFERENCE_ONLY",
+        "currentXmlQualified": false
+      },
+      "reason": "当宣言はstart/closeのownerLockとは別にhealthy/readyから読むpartial handleの可視性契約。sourceは同fieldをnullable snapshotとして取り、必須handle不足をreadyへ変換しない。volatileを単純削除すると外側監視threadに対する可視性を弱める。今回は個別source契約のみ確認し、実競合・停止の当source XML資格を未実施のまま残す。",
+      "counterexample": "volatile削除、別fieldへの代入、healthyでnullableをUPへ変換する変更は契約違反候補。当sourceの実caller並行PT/終了依存が未確認の間、非該当や静的全合格へ読み替えない。"
+    },
+    {
+      "index": 4,
+      "role": "web",
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebNativeRuntime.java",
+      "sourceSha256": "e89d51c66f96fd360fbaa232aeb5f80737be8dd072153ebb65d0743715ca115c",
+      "raw": {
+        "begincolumn": "49",
+        "beginline": "91",
+        "class": "WebNativeRuntime",
+        "endcolumn": "55",
+        "endline": "91",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#avoidusingvolatile",
+        "message": "Use of modifier volatile is not recommended.",
+        "package": "dev.codex.schubert.nk.web.bootstrap",
+        "priority": "2",
+        "rule": "AvoidUsingVolatile",
+        "ruleset": "Multithreading",
+        "variable": "replay"
+      },
+      "sourceSpan": [
+        "  private volatile @Nullable WebLogReplayWorker replay;"
+      ],
+      "rawManifest": "PG8873-web-caller-metric-static-v1/manifest.json",
+      "rawManifestSha256": "8fc80c4cef3c23b217a9ded8ba1b150a857424c10d1345810608241da1a1f532",
+      "rawSource": "28befbf2cac86840b6adef53b6c5f972e6f9610f",
+      "subject": "private volatile @Nullable WebLogReplayWorker replay;",
+      "status": "REQUIRED_CONTRACT_DYNAMIC_JOIN_PENDING",
+      "reviewOwner": "PGPT_PARENT",
+      "reviewPasses": [
+        "RULE_TO_SOURCE_CONTRACT",
+        "COUNTEREXAMPLE_SOURCE_RECHECK"
+      ],
+      "rawWarningRetained": true,
+      "qualityGatePass": false,
+      "actualRuntimeProven": false,
+      "formalAccepted": false,
+      "ptAlternativeCompleted": 0,
+      "currentXmlQualified": false,
+      "sourceChangedByReview": false,
+      "testReference": {
+        "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/bootstrap/WebRuntimeHealthTest.java",
+        "className": "dev.codex.schubert.nk.web.bootstrap.WebRuntimeHealthTest",
+        "method": "health001EveryRequiredConditionIndependentlyRefusesAndStopsAtItsPosition",
+        "currentRunStatus": "UNRUN_HOLD_REFERENCE_ONLY",
+        "currentXmlQualified": false
+      },
+      "reason": "当宣言はstart/closeのownerLockとは別にhealthy/readyから読むpartial handleの可視性契約。sourceは同fieldをnullable snapshotとして取り、必須handle不足をreadyへ変換しない。volatileを単純削除すると外側監視threadに対する可視性を弱める。今回は個別source契約のみ確認し、実競合・停止の当source XML資格を未実施のまま残す。",
+      "counterexample": "volatile削除、別fieldへの代入、healthyでnullableをUPへ変換する変更は契約違反候補。当sourceの実caller並行PT/終了依存が未確認の間、非該当や静的全合格へ読み替えない。"
+    },
+    {
+      "index": 5,
+      "role": "web",
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebNativeRuntime.java",
+      "sourceSha256": "e89d51c66f96fd360fbaa232aeb5f80737be8dd072153ebb65d0743715ca115c",
+      "raw": {
+        "begincolumn": "52",
+        "beginline": "92",
+        "class": "WebNativeRuntime",
+        "endcolumn": "57",
+        "endline": "92",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#avoidusingvolatile",
+        "message": "Use of modifier volatile is not recommended.",
+        "package": "dev.codex.schubert.nk.web.bootstrap",
+        "priority": "2",
+        "rule": "AvoidUsingVolatile",
+        "ruleset": "Multithreading",
+        "variable": "retry"
+      },
+      "sourceSpan": [
+        "  private volatile @Nullable RevocationRetryWorker retry;"
+      ],
+      "rawManifest": "PG8873-web-caller-metric-static-v1/manifest.json",
+      "rawManifestSha256": "8fc80c4cef3c23b217a9ded8ba1b150a857424c10d1345810608241da1a1f532",
+      "rawSource": "28befbf2cac86840b6adef53b6c5f972e6f9610f",
+      "subject": "private volatile @Nullable RevocationRetryWorker retry;",
+      "status": "REQUIRED_CONTRACT_DYNAMIC_JOIN_PENDING",
+      "reviewOwner": "PGPT_PARENT",
+      "reviewPasses": [
+        "RULE_TO_SOURCE_CONTRACT",
+        "COUNTEREXAMPLE_SOURCE_RECHECK"
+      ],
+      "rawWarningRetained": true,
+      "qualityGatePass": false,
+      "actualRuntimeProven": false,
+      "formalAccepted": false,
+      "ptAlternativeCompleted": 0,
+      "currentXmlQualified": false,
+      "sourceChangedByReview": false,
+      "testReference": {
+        "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/bootstrap/WebRuntimeHealthTest.java",
+        "className": "dev.codex.schubert.nk.web.bootstrap.WebRuntimeHealthTest",
+        "method": "health001EveryRequiredConditionIndependentlyRefusesAndStopsAtItsPosition",
+        "currentRunStatus": "UNRUN_HOLD_REFERENCE_ONLY",
+        "currentXmlQualified": false
+      },
+      "reason": "当宣言はstart/closeのownerLockとは別にhealthy/readyから読むpartial handleの可視性契約。sourceは同fieldをnullable snapshotとして取り、必須handle不足をreadyへ変換しない。volatileを単純削除すると外側監視threadに対する可視性を弱める。今回は個別source契約のみ確認し、実競合・停止の当source XML資格を未実施のまま残す。",
+      "counterexample": "volatile削除、別fieldへの代入、healthyでnullableをUPへ変換する変更は契約違反候補。当sourceの実caller並行PT/終了依存が未確認の間、非該当や静的全合格へ読み替えない。"
+    },
+    {
+      "index": 6,
+      "role": "web",
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebNativeRuntime.java",
+      "sourceSha256": "e89d51c66f96fd360fbaa232aeb5f80737be8dd072153ebb65d0743715ca115c",
+      "raw": {
+        "begincolumn": "44",
+        "beginline": "93",
+        "class": "WebNativeRuntime",
+        "endcolumn": "48",
+        "endline": "93",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#avoidusingvolatile",
+        "message": "Use of modifier volatile is not recommended.",
+        "package": "dev.codex.schubert.nk.web.bootstrap",
+        "priority": "2",
+        "rule": "AvoidUsingVolatile",
+        "ruleset": "Multithreading",
+        "variable": "http"
+      },
+      "sourceSpan": [
+        "  private volatile @Nullable WebHttpServer http;"
+      ],
+      "rawManifest": "PG8873-web-caller-metric-static-v1/manifest.json",
+      "rawManifestSha256": "8fc80c4cef3c23b217a9ded8ba1b150a857424c10d1345810608241da1a1f532",
+      "rawSource": "28befbf2cac86840b6adef53b6c5f972e6f9610f",
+      "subject": "private volatile @Nullable WebHttpServer http;",
+      "status": "REQUIRED_CONTRACT_DYNAMIC_JOIN_PENDING",
+      "reviewOwner": "PGPT_PARENT",
+      "reviewPasses": [
+        "RULE_TO_SOURCE_CONTRACT",
+        "COUNTEREXAMPLE_SOURCE_RECHECK"
+      ],
+      "rawWarningRetained": true,
+      "qualityGatePass": false,
+      "actualRuntimeProven": false,
+      "formalAccepted": false,
+      "ptAlternativeCompleted": 0,
+      "currentXmlQualified": false,
+      "sourceChangedByReview": false,
+      "testReference": {
+        "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/bootstrap/WebRuntimeHealthTest.java",
+        "className": "dev.codex.schubert.nk.web.bootstrap.WebRuntimeHealthTest",
+        "method": "health001EveryRequiredConditionIndependentlyRefusesAndStopsAtItsPosition",
+        "currentRunStatus": "UNRUN_HOLD_REFERENCE_ONLY",
+        "currentXmlQualified": false
+      },
+      "reason": "当宣言はstart/closeのownerLockとは別にhealthy/readyから読むpartial handleの可視性契約。sourceは同fieldをnullable snapshotとして取り、必須handle不足をreadyへ変換しない。volatileを単純削除すると外側監視threadに対する可視性を弱める。今回は個別source契約のみ確認し、実競合・停止の当source XML資格を未実施のまま残す。",
+      "counterexample": "volatile削除、別fieldへの代入、healthyでnullableをUPへ変換する変更は契約違反候補。当sourceの実caller並行PT/終了依存が未確認の間、非該当や静的全合格へ読み替えない。"
+    },
+    {
+      "index": 7,
+      "role": "web",
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebNativeRuntime.java",
+      "sourceSha256": "e89d51c66f96fd360fbaa232aeb5f80737be8dd072153ebb65d0743715ca115c",
+      "raw": {
+        "begincolumn": "50",
+        "beginline": "94",
+        "class": "WebNativeRuntime",
+        "endcolumn": "60",
+        "endline": "94",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#avoidusingvolatile",
+        "message": "Use of modifier volatile is not recommended.",
+        "package": "dev.codex.schubert.nk.web.bootstrap",
+        "priority": "2",
+        "rule": "AvoidUsingVolatile",
+        "ruleset": "Multithreading",
+        "variable": "management"
+      },
+      "sourceSpan": [
+        "  private volatile @Nullable WebManagementServer management;"
+      ],
+      "rawManifest": "PG8873-web-caller-metric-static-v1/manifest.json",
+      "rawManifestSha256": "8fc80c4cef3c23b217a9ded8ba1b150a857424c10d1345810608241da1a1f532",
+      "rawSource": "28befbf2cac86840b6adef53b6c5f972e6f9610f",
+      "subject": "private volatile @Nullable WebManagementServer management;",
+      "status": "REQUIRED_CONTRACT_DYNAMIC_JOIN_PENDING",
+      "reviewOwner": "PGPT_PARENT",
+      "reviewPasses": [
+        "RULE_TO_SOURCE_CONTRACT",
+        "COUNTEREXAMPLE_SOURCE_RECHECK"
+      ],
+      "rawWarningRetained": true,
+      "qualityGatePass": false,
+      "actualRuntimeProven": false,
+      "formalAccepted": false,
+      "ptAlternativeCompleted": 0,
+      "currentXmlQualified": false,
+      "sourceChangedByReview": false,
+      "testReference": {
+        "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/bootstrap/WebRuntimeHealthTest.java",
+        "className": "dev.codex.schubert.nk.web.bootstrap.WebRuntimeHealthTest",
+        "method": "health001EveryRequiredConditionIndependentlyRefusesAndStopsAtItsPosition",
+        "currentRunStatus": "UNRUN_HOLD_REFERENCE_ONLY",
+        "currentXmlQualified": false
+      },
+      "reason": "当宣言はstart/closeのownerLockとは別にhealthy/readyから読むpartial handleの可視性契約。sourceは同fieldをnullable snapshotとして取り、必須handle不足をreadyへ変換しない。volatileを単純削除すると外側監視threadに対する可視性を弱める。今回は個別source契約のみ確認し、実競合・停止の当source XML資格を未実施のまま残す。",
+      "counterexample": "volatile削除、別fieldへの代入、healthyでnullableをUPへ変換する変更は契約違反候補。当sourceの実caller並行PT/終了依存が未確認の間、非該当や静的全合格へ読み替えない。"
+    },
+    {
+      "index": 8,
+      "role": "web",
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebNativeRuntime.java",
+      "sourceSha256": "e89d51c66f96fd360fbaa232aeb5f80737be8dd072153ebb65d0743715ca115c",
+      "raw": {
+        "begincolumn": "5",
+        "beginline": "146",
+        "class": "WebNativeRuntime",
+        "endcolumn": "17",
+        "endline": "146",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#avoidsynchronizedstatement",
+        "message": "Use ReentrantLock rather than synchronization",
+        "method": "start",
+        "package": "dev.codex.schubert.nk.web.bootstrap",
+        "priority": "3",
+        "rule": "AvoidSynchronizedStatement",
+        "ruleset": "Multithreading"
+      },
+      "sourceSpan": [
+        "    synchronized (ownerLock) {"
+      ],
+      "rawManifest": "PG8873-web-caller-metric-static-v1/manifest.json",
+      "rawManifestSha256": "8fc80c4cef3c23b217a9ded8ba1b150a857424c10d1345810608241da1a1f532",
+      "rawSource": "28befbf2cac86840b6adef53b6c5f972e6f9610f",
+      "subject": "synchronized (ownerLock) {",
+      "status": "REQUIRED_CONTRACT_DYNAMIC_JOIN_PENDING",
+      "reviewOwner": "PGPT_PARENT",
+      "reviewPasses": [
+        "RULE_TO_SOURCE_CONTRACT",
+        "COUNTEREXAMPLE_SOURCE_RECHECK"
+      ],
+      "rawWarningRetained": true,
+      "qualityGatePass": false,
+      "actualRuntimeProven": false,
+      "formalAccepted": false,
+      "ptAlternativeCompleted": 0,
+      "currentXmlQualified": false,
+      "sourceChangedByReview": false,
+      "testReference": {
+        "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/bootstrap/WebNativeRuntimeOwnedComponentTest.java",
+        "className": "dev.codex.schubert.nk.web.bootstrap.WebNativeRuntimeOwnedComponentTest",
+        "method": "webown327004CloseCannotEnterWhileStartOwnsPrivateMonitor",
+        "currentRunStatus": "UNRUN_HOLD_REFERENCE_ONLY",
+        "currentXmlQualified": false
+      },
+      "reason": "当synchronizedはprivate final ownerLockでstart/closeの部分取得と段階停止を直列化する既契約。WebRuntimeStopの同deadline/cursorとpartial fieldsを同時に守るため、一般的ReentrantLock推奨だけを根拠に外すことはできない。source上のprivate監視は確認したが、現在sourceのcaller並行開始/停止XMLはHOLDで未結合、必要契約pendingとする。",
+      "counterexample": "public monitorへの交換、startとcloseで別lock、callback保持中にcloseが進む変更は要是正。当sourceの相互排他をsource比較だけで実行済みと主張しない。"
+    },
+    {
+      "index": 9,
+      "role": "web",
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebNativeRuntime.java",
+      "sourceSha256": "e89d51c66f96fd360fbaa232aeb5f80737be8dd072153ebb65d0743715ca115c",
+      "raw": {
+        "begincolumn": "11",
+        "beginline": "150",
+        "class": "WebNativeRuntime",
+        "endcolumn": "24",
+        "endline": "150",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#closeresource",
+        "message": "Ensure that resources like this WebBrokerContexts object are closed after use",
+        "method": "start",
+        "package": "dev.codex.schubert.nk.web.bootstrap",
+        "priority": "3",
+        "rule": "CloseResource",
+        "ruleset": "Error Prone",
+        "variable": "currentBroker"
+      },
+      "sourceSpan": [
+        "      var currentBroker = Objects.requireNonNull(broker);"
+      ],
+      "rawManifest": "PG8873-web-caller-metric-static-v1/manifest.json",
+      "rawManifestSha256": "8fc80c4cef3c23b217a9ded8ba1b150a857424c10d1345810608241da1a1f532",
+      "rawSource": "28befbf2cac86840b6adef53b6c5f972e6f9610f",
+      "subject": "var currentBroker = Objects.requireNonNull(broker);",
+      "status": "REQUIRED_CONTRACT_DYNAMIC_JOIN_PENDING",
+      "reviewOwner": "PGPT_PARENT",
+      "reviewPasses": [
+        "RULE_TO_SOURCE_CONTRACT",
+        "COUNTEREXAMPLE_SOURCE_RECHECK"
+      ],
+      "rawWarningRetained": true,
+      "qualityGatePass": false,
+      "actualRuntimeProven": false,
+      "formalAccepted": false,
+      "ptAlternativeCompleted": 0,
+      "currentXmlQualified": false,
+      "sourceChangedByReview": false,
+      "testReference": {
+        "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/bootstrap/WebRuntimeStopTest.java",
+        "className": "dev.codex.schubert.nk.web.bootstrap.WebRuntimeStopTest",
+        "method": "stop002UnknownPhaseRetainsLaterResourcesAndRetryUsesOriginalDeadline",
+        "currentRunStatus": "UNRUN_HOLD_REFERENCE_ONLY",
+        "currentXmlQualified": false
+      },
+      "reason": "当取得結果はWebNativeRuntimeのretained nullable fieldへ使用前に捕捉され、同ownerのclose phasesが対象に対応する。start内の局所TWRは正常稼働中のhandleを早期解放するため適用できず、外側WebRuntimeExecutionがstart失敗後も同runtime::closeを保持する。sourceの捕捉/cleanup対応は確認したが、factory内部と実callerの当source動的解放/UNKNOWN試験は未結合なのでpendingを維持する。",
+      "counterexample": "field捕捉前のresource使用、対応close phase欠落、管理未確認のままmetrics/assets等後段解放、取得失敗をnormalへ隠す変更は要是正。参照試験の宣言だけで未実行PT・coverageをPASSへしない。"
+    },
+    {
+      "index": 10,
+      "role": "web",
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebNativeRuntime.java",
+      "sourceSha256": "e89d51c66f96fd360fbaa232aeb5f80737be8dd072153ebb65d0743715ca115c",
+      "raw": {
+        "begincolumn": "11",
+        "beginline": "153",
+        "class": "WebNativeRuntime",
+        "endcolumn": "15",
+        "endline": "153",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#closeresource",
+        "message": "Ensure that resources like this WebNativeCodecs object are closed after use",
+        "method": "start",
+        "package": "dev.codex.schubert.nk.web.bootstrap",
+        "priority": "3",
+        "rule": "CloseResource",
+        "ruleset": "Error Prone",
+        "variable": "keys"
+      },
+      "sourceSpan": [
+        "      var keys = Objects.requireNonNull(codecs);"
+      ],
+      "rawManifest": "PG8873-web-caller-metric-static-v1/manifest.json",
+      "rawManifestSha256": "8fc80c4cef3c23b217a9ded8ba1b150a857424c10d1345810608241da1a1f532",
+      "rawSource": "28befbf2cac86840b6adef53b6c5f972e6f9610f",
+      "subject": "var keys = Objects.requireNonNull(codecs);",
+      "status": "REQUIRED_CONTRACT_DYNAMIC_JOIN_PENDING",
+      "reviewOwner": "PGPT_PARENT",
+      "reviewPasses": [
+        "RULE_TO_SOURCE_CONTRACT",
+        "COUNTEREXAMPLE_SOURCE_RECHECK"
+      ],
+      "rawWarningRetained": true,
+      "qualityGatePass": false,
+      "actualRuntimeProven": false,
+      "formalAccepted": false,
+      "ptAlternativeCompleted": 0,
+      "currentXmlQualified": false,
+      "sourceChangedByReview": false,
+      "testReference": {
+        "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/bootstrap/WebRuntimeStopTest.java",
+        "className": "dev.codex.schubert.nk.web.bootstrap.WebRuntimeStopTest",
+        "method": "stop002UnknownPhaseRetainsLaterResourcesAndRetryUsesOriginalDeadline",
+        "currentRunStatus": "UNRUN_HOLD_REFERENCE_ONLY",
+        "currentXmlQualified": false
+      },
+      "reason": "当取得結果はWebNativeRuntimeのretained nullable fieldへ使用前に捕捉され、同ownerのclose phasesが対象に対応する。start内の局所TWRは正常稼働中のhandleを早期解放するため適用できず、外側WebRuntimeExecutionがstart失敗後も同runtime::closeを保持する。sourceの捕捉/cleanup対応は確認したが、factory内部と実callerの当source動的解放/UNKNOWN試験は未結合なのでpendingを維持する。",
+      "counterexample": "field捕捉前のresource使用、対応close phase欠落、管理未確認のままmetrics/assets等後段解放、取得失敗をnormalへ隠す変更は要是正。参照試験の宣言だけで未実行PT・coverageをPASSへしない。"
+    },
+    {
+      "index": 11,
+      "role": "web",
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebNativeRuntime.java",
+      "sourceSha256": "e89d51c66f96fd360fbaa232aeb5f80737be8dd072153ebb65d0743715ca115c",
+      "raw": {
+        "begincolumn": "11",
+        "beginline": "158",
+        "class": "WebNativeRuntime",
+        "endcolumn": "23",
+        "endline": "158",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#closeresource",
+        "message": "Ensure that resources like this OwnedTransferDirectory object are closed after use",
+        "method": "start",
+        "package": "dev.codex.schubert.nk.web.bootstrap",
+        "priority": "3",
+        "rule": "CloseResource",
+        "ruleset": "Error Prone",
+        "variable": "transferRoot"
+      },
+      "sourceSpan": [
+        "      var transferRoot = Objects.requireNonNull(transfer);"
+      ],
+      "rawManifest": "PG8873-web-caller-metric-static-v1/manifest.json",
+      "rawManifestSha256": "8fc80c4cef3c23b217a9ded8ba1b150a857424c10d1345810608241da1a1f532",
+      "rawSource": "28befbf2cac86840b6adef53b6c5f972e6f9610f",
+      "subject": "var transferRoot = Objects.requireNonNull(transfer);",
+      "status": "REQUIRED_CONTRACT_DYNAMIC_JOIN_PENDING",
+      "reviewOwner": "PGPT_PARENT",
+      "reviewPasses": [
+        "RULE_TO_SOURCE_CONTRACT",
+        "COUNTEREXAMPLE_SOURCE_RECHECK"
+      ],
+      "rawWarningRetained": true,
+      "qualityGatePass": false,
+      "actualRuntimeProven": false,
+      "formalAccepted": false,
+      "ptAlternativeCompleted": 0,
+      "currentXmlQualified": false,
+      "sourceChangedByReview": false,
+      "testReference": {
+        "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/bootstrap/WebRuntimeStopTest.java",
+        "className": "dev.codex.schubert.nk.web.bootstrap.WebRuntimeStopTest",
+        "method": "stop002UnknownPhaseRetainsLaterResourcesAndRetryUsesOriginalDeadline",
+        "currentRunStatus": "UNRUN_HOLD_REFERENCE_ONLY",
+        "currentXmlQualified": false
+      },
+      "reason": "当取得結果はWebNativeRuntimeのretained nullable fieldへ使用前に捕捉され、同ownerのclose phasesが対象に対応する。start内の局所TWRは正常稼働中のhandleを早期解放するため適用できず、外側WebRuntimeExecutionがstart失敗後も同runtime::closeを保持する。sourceの捕捉/cleanup対応は確認したが、factory内部と実callerの当source動的解放/UNKNOWN試験は未結合なのでpendingを維持する。",
+      "counterexample": "field捕捉前のresource使用、対応close phase欠落、管理未確認のままmetrics/assets等後段解放、取得失敗をnormalへ隠す変更は要是正。参照試験の宣言だけで未実行PT・coverageをPASSへしない。"
+    },
+    {
+      "index": 12,
+      "role": "web",
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebNativeRuntime.java",
+      "sourceSha256": "e89d51c66f96fd360fbaa232aeb5f80737be8dd072153ebb65d0743715ca115c",
+      "raw": {
+        "begincolumn": "11",
+        "beginline": "165",
+        "class": "WebNativeRuntime",
+        "endcolumn": "20",
+        "endline": "165",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#closeresource",
+        "message": "Ensure that resources like this OwnedTransferDirectory object are closed after use",
+        "method": "start",
+        "package": "dev.codex.schubert.nk.web.bootstrap",
+        "priority": "3",
+        "rule": "CloseResource",
+        "ruleset": "Error Prone",
+        "variable": "assetRoot"
+      },
+      "sourceSpan": [
+        "      var assetRoot = Objects.requireNonNull(assets);"
+      ],
+      "rawManifest": "PG8873-web-caller-metric-static-v1/manifest.json",
+      "rawManifestSha256": "8fc80c4cef3c23b217a9ded8ba1b150a857424c10d1345810608241da1a1f532",
+      "rawSource": "28befbf2cac86840b6adef53b6c5f972e6f9610f",
+      "subject": "var assetRoot = Objects.requireNonNull(assets);",
+      "status": "REQUIRED_CONTRACT_DYNAMIC_JOIN_PENDING",
+      "reviewOwner": "PGPT_PARENT",
+      "reviewPasses": [
+        "RULE_TO_SOURCE_CONTRACT",
+        "COUNTEREXAMPLE_SOURCE_RECHECK"
+      ],
+      "rawWarningRetained": true,
+      "qualityGatePass": false,
+      "actualRuntimeProven": false,
+      "formalAccepted": false,
+      "ptAlternativeCompleted": 0,
+      "currentXmlQualified": false,
+      "sourceChangedByReview": false,
+      "testReference": {
+        "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/bootstrap/WebRuntimeStopTest.java",
+        "className": "dev.codex.schubert.nk.web.bootstrap.WebRuntimeStopTest",
+        "method": "stop002UnknownPhaseRetainsLaterResourcesAndRetryUsesOriginalDeadline",
+        "currentRunStatus": "UNRUN_HOLD_REFERENCE_ONLY",
+        "currentXmlQualified": false
+      },
+      "reason": "当取得結果はWebNativeRuntimeのretained nullable fieldへ使用前に捕捉され、同ownerのclose phasesが対象に対応する。start内の局所TWRは正常稼働中のhandleを早期解放するため適用できず、外側WebRuntimeExecutionがstart失敗後も同runtime::closeを保持する。sourceの捕捉/cleanup対応は確認したが、factory内部と実callerの当source動的解放/UNKNOWN試験は未結合なのでpendingを維持する。",
+      "counterexample": "field捕捉前のresource使用、対応close phase欠落、管理未確認のままmetrics/assets等後段解放、取得失敗をnormalへ隠す変更は要是正。参照試験の宣言だけで未実行PT・coverageをPASSへしない。"
+    },
+    {
+      "index": 13,
+      "role": "web",
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebNativeRuntime.java",
+      "sourceSha256": "e89d51c66f96fd360fbaa232aeb5f80737be8dd072153ebb65d0743715ca115c",
+      "raw": {
+        "begincolumn": "11",
+        "beginline": "252",
+        "class": "WebNativeRuntime",
+        "endcolumn": "22",
+        "endline": "252",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#closeresource",
+        "message": "Ensure that resources like this WebMetricContext object are closed after use",
+        "method": "start",
+        "package": "dev.codex.schubert.nk.web.bootstrap",
+        "priority": "3",
+        "rule": "CloseResource",
+        "ruleset": "Error Prone",
+        "variable": "metricOwner"
+      },
+      "sourceSpan": [
+        "      var metricOwner = Objects.requireNonNull(metrics);"
+      ],
+      "rawManifest": "PG8873-web-caller-metric-static-v1/manifest.json",
+      "rawManifestSha256": "8fc80c4cef3c23b217a9ded8ba1b150a857424c10d1345810608241da1a1f532",
+      "rawSource": "28befbf2cac86840b6adef53b6c5f972e6f9610f",
+      "subject": "var metricOwner = Objects.requireNonNull(metrics);",
+      "status": "REQUIRED_CONTRACT_DYNAMIC_JOIN_PENDING",
+      "reviewOwner": "PGPT_PARENT",
+      "reviewPasses": [
+        "RULE_TO_SOURCE_CONTRACT",
+        "COUNTEREXAMPLE_SOURCE_RECHECK"
+      ],
+      "rawWarningRetained": true,
+      "qualityGatePass": false,
+      "actualRuntimeProven": false,
+      "formalAccepted": false,
+      "ptAlternativeCompleted": 0,
+      "currentXmlQualified": false,
+      "sourceChangedByReview": false,
+      "testReference": {
+        "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/bootstrap/WebRuntimeStopTest.java",
+        "className": "dev.codex.schubert.nk.web.bootstrap.WebRuntimeStopTest",
+        "method": "stop002UnknownPhaseRetainsLaterResourcesAndRetryUsesOriginalDeadline",
+        "currentRunStatus": "UNRUN_HOLD_REFERENCE_ONLY",
+        "currentXmlQualified": false
+      },
+      "reason": "当取得結果はWebNativeRuntimeのretained nullable fieldへ使用前に捕捉され、同ownerのclose phasesが対象に対応する。start内の局所TWRは正常稼働中のhandleを早期解放するため適用できず、外側WebRuntimeExecutionがstart失敗後も同runtime::closeを保持する。sourceの捕捉/cleanup対応は確認したが、factory内部と実callerの当source動的解放/UNKNOWN試験は未結合なのでpendingを維持する。",
+      "counterexample": "field捕捉前のresource使用、対応close phase欠落、管理未確認のままmetrics/assets等後段解放、取得失敗をnormalへ隠す変更は要是正。参照試験の宣言だけで未実行PT・coverageをPASSへしない。"
+    },
+    {
+      "index": 14,
+      "role": "web",
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebNativeRuntime.java",
+      "sourceSha256": "e89d51c66f96fd360fbaa232aeb5f80737be8dd072153ebb65d0743715ca115c",
+      "raw": {
+        "begincolumn": "11",
+        "beginline": "261",
+        "class": "WebNativeRuntime",
+        "endcolumn": "18",
+        "endline": "261",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#closeresource",
+        "message": "Ensure that resources like this WebManagementServer object are closed after use",
+        "method": "start",
+        "package": "dev.codex.schubert.nk.web.bootstrap",
+        "priority": "3",
+        "rule": "CloseResource",
+        "ruleset": "Error Prone",
+        "variable": "control"
+      },
+      "sourceSpan": [
+        "      var control = Objects.requireNonNull(management);"
+      ],
+      "rawManifest": "PG8873-web-caller-metric-static-v1/manifest.json",
+      "rawManifestSha256": "8fc80c4cef3c23b217a9ded8ba1b150a857424c10d1345810608241da1a1f532",
+      "rawSource": "28befbf2cac86840b6adef53b6c5f972e6f9610f",
+      "subject": "var control = Objects.requireNonNull(management);",
+      "status": "REQUIRED_CONTRACT_DYNAMIC_JOIN_PENDING",
+      "reviewOwner": "PGPT_PARENT",
+      "reviewPasses": [
+        "RULE_TO_SOURCE_CONTRACT",
+        "COUNTEREXAMPLE_SOURCE_RECHECK"
+      ],
+      "rawWarningRetained": true,
+      "qualityGatePass": false,
+      "actualRuntimeProven": false,
+      "formalAccepted": false,
+      "ptAlternativeCompleted": 0,
+      "currentXmlQualified": false,
+      "sourceChangedByReview": false,
+      "testReference": {
+        "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/bootstrap/WebRuntimeStopTest.java",
+        "className": "dev.codex.schubert.nk.web.bootstrap.WebRuntimeStopTest",
+        "method": "stop002UnknownPhaseRetainsLaterResourcesAndRetryUsesOriginalDeadline",
+        "currentRunStatus": "UNRUN_HOLD_REFERENCE_ONLY",
+        "currentXmlQualified": false
+      },
+      "reason": "当取得結果はWebNativeRuntimeのretained nullable fieldへ使用前に捕捉され、同ownerのclose phasesが対象に対応する。start内の局所TWRは正常稼働中のhandleを早期解放するため適用できず、外側WebRuntimeExecutionがstart失敗後も同runtime::closeを保持する。sourceの捕捉/cleanup対応は確認したが、factory内部と実callerの当source動的解放/UNKNOWN試験は未結合なのでpendingを維持する。",
+      "counterexample": "field捕捉前のresource使用、対応close phase欠落、管理未確認のままmetrics/assets等後段解放、取得失敗をnormalへ隠す変更は要是正。参照試験の宣言だけで未実行PT・coverageをPASSへしない。"
+    },
+    {
+      "index": 15,
+      "role": "web",
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebNativeRuntime.java",
+      "sourceSha256": "e89d51c66f96fd360fbaa232aeb5f80737be8dd072153ebb65d0743715ca115c",
+      "raw": {
+        "begincolumn": "5",
+        "beginline": "378",
+        "class": "WebNativeRuntime",
+        "endcolumn": "17",
+        "endline": "378",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#avoidsynchronizedstatement",
+        "message": "Use ReentrantLock rather than synchronization",
+        "method": "close",
+        "package": "dev.codex.schubert.nk.web.bootstrap",
+        "priority": "3",
+        "rule": "AvoidSynchronizedStatement",
+        "ruleset": "Multithreading"
+      },
+      "sourceSpan": [
+        "    synchronized (ownerLock) {"
+      ],
+      "rawManifest": "PG8873-web-caller-metric-static-v1/manifest.json",
+      "rawManifestSha256": "8fc80c4cef3c23b217a9ded8ba1b150a857424c10d1345810608241da1a1f532",
+      "rawSource": "28befbf2cac86840b6adef53b6c5f972e6f9610f",
+      "subject": "synchronized (ownerLock) {",
+      "status": "REQUIRED_CONTRACT_DYNAMIC_JOIN_PENDING",
+      "reviewOwner": "PGPT_PARENT",
+      "reviewPasses": [
+        "RULE_TO_SOURCE_CONTRACT",
+        "COUNTEREXAMPLE_SOURCE_RECHECK"
+      ],
+      "rawWarningRetained": true,
+      "qualityGatePass": false,
+      "actualRuntimeProven": false,
+      "formalAccepted": false,
+      "ptAlternativeCompleted": 0,
+      "currentXmlQualified": false,
+      "sourceChangedByReview": false,
+      "testReference": {
+        "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/bootstrap/WebNativeRuntimeOwnedComponentTest.java",
+        "className": "dev.codex.schubert.nk.web.bootstrap.WebNativeRuntimeOwnedComponentTest",
+        "method": "webown327004CloseCannotEnterWhileStartOwnsPrivateMonitor",
+        "currentRunStatus": "UNRUN_HOLD_REFERENCE_ONLY",
+        "currentXmlQualified": false
+      },
+      "reason": "当synchronizedはprivate final ownerLockでstart/closeの部分取得と段階停止を直列化する既契約。WebRuntimeStopの同deadline/cursorとpartial fieldsを同時に守るため、一般的ReentrantLock推奨だけを根拠に外すことはできない。source上のprivate監視は確認したが、現在sourceのcaller並行開始/停止XMLはHOLDで未結合、必要契約pendingとする。",
+      "counterexample": "public monitorへの交換、startとcloseで別lock、callback保持中にcloseが進む変更は要是正。当sourceの相互排他をsource比較だけで実行済みと主張しない。"
+    }
+  ],
+  "reviewedRawRows": 15,
+  "rawWarningsRetained": true,
+  "productTestsExecuted": 0,
+  "coverage": null,
+  "formalUpdated": false,
+  "ptAlternativeCompleted": 0
+}
