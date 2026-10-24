@@ -114,7 +114,9 @@ final class WebManagementServer implements AutoCloseable {
     Objects.requireNonNull(information, "public information");
     Objects.requireNonNull(healthy, "runtime health");
     Objects.requireNonNull(factory, "management factory");
-    var borrowed = Optional.of(Objects.requireNonNull(context, "borrowed metric context"));
+    var borrowed =
+        Optional.<WebMetricContext<?>>of(
+            Objects.requireNonNull(context, "borrowed metric context"));
     String json = publicJson(information);
     return new WebManagementServer(healthy, json, port, factory, borrowed);
   }

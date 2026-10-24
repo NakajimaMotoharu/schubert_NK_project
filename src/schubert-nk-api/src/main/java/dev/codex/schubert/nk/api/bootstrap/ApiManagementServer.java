@@ -112,7 +112,9 @@ final class ApiManagementServer implements AutoCloseable {
     Objects.requireNonNull(information, "public information");
     Objects.requireNonNull(healthy, "runtime health");
     Objects.requireNonNull(factory, "management factory");
-    var borrowed = Optional.of(Objects.requireNonNull(context, "borrowed metric context"));
+    var borrowed =
+        Optional.<ApiMetricContext<?>>of(
+            Objects.requireNonNull(context, "borrowed metric context"));
     String json = publicJson(information);
     return new ApiManagementServer(healthy, json, port, factory, borrowed);
   }
