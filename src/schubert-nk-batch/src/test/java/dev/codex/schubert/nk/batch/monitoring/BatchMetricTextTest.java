@@ -1,0 +1,529 @@
+package dev.codex.schubert.nk.batch.monitoring;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+import io.micrometer.core.instrument.Counter;
+import io.micrometer.core.instrument.Meter;
+import io.micrometer.core.instrument.MockClock;
+import io.micrometer.core.instrument.Tag;
+import io.micrometer.core.instrument.Tags;
+import io.micrometer.core.instrument.noop.NoopCounter;
+import io.micrometer.core.instrument.noop.NoopDistributionSummary;
+import io.micrometer.core.instrument.noop.NoopGauge;
+import io.micrometer.core.instrument.noop.NoopTimer;
+import io.micrometer.core.instrument.simple.SimpleConfig;
+import io.micrometer.core.instrument.simple.SimpleMeterRegistry;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicReference;
+import org.junit.jupiter.api.Test;
+
+/** BATCHTEXT001..024/1777: literal vectors/borrowed memory providers only. */
+class BatchMetricTextTest {
+  private static final String C = "nk_batch_runs_total", G = "nk_file_transfer_files";
+  private static final String C_HEADER =
+      "# HELP nk_batch_runs_total Supplied Batch technical observation.\n# TYPE nk_batch_runs_total counter\n";
+  private static final String G_HEADER =
+      "# HELP nk_file_transfer_files Supplied Batch technical observation.\n# TYPE nk_file_transfer_files gauge\n";
+  private static final String C_ROW = "nk_batch_runs_total{status=\"SUCCESS\",step=\"BACKUP_DB\"} ";
+  private static final String G_ROW = "nk_file_transfer_files{suffix=\".part\"} ";
+  private final BatchMetricText formatter = new BatchMetricText();
+
+  private static class Registry extends SimpleMeterRegistry implements AutoCloseable {
+    List<Meter> meters;
+    final AtomicInteger reads = new AtomicInteger();
+
+    Registry(Meter... values) {
+      super(SimpleConfig.DEFAULT, new MockClock());
+      meters = Arrays.asList(values);
+    }
+
+    public List<Meter> getMeters() {
+      reads.incrementAndGet();
+      return meters;
+    }
+
+    public boolean isClosed() {
+      reads.incrementAndGet();
+      return super.isClosed();
+    }
+
+    public void close() {
+      meters = List.of();
+      super.close();
+    }
+  }
+
+  private static Meter.Id raw(String capturedName, List<Tag> capturedTags) {
+    return new Meter.Id("safe_fixture", Tags.empty(), "", "", Meter.Type.GAUGE) {
+      public String getName() {
+        return capturedName;
+      }
+
+      public List<Tag> getTags() {
+        return capturedTags;
+      }
+    };
+  }
+
+  private static List<Tag> ct() {
+    return List.of(Tag.of("step", "BACKUP_DB"), Tag.of("status", "SUCCESS"));
+  }
+
+  private static List<Tag> gt() {
+    return List.of(Tag.of("suffix", ".part"));
+  }
+
+  private static NoopCounter counter(double value) {
+    return new NoopCounter(raw(C, ct())) {
+      public double count() {
+        return value;
+      }
+    };
+  }
+
+  private static NoopGauge gauge(double value) {
+    return new NoopGauge(raw(G, gt())) {
+      public double value() {
+        return value;
+      }
+    };
+  }
+
+  private String text(Meter... values) {
+    try (var source = new Registry(values)) {
+      return formatter.scrape(source, "DEBUG");
+    }
+  }
+
+  private static Tag tag(String key, String value) {
+    return new Tag() {
+      public String getKey() {
+        return key;
+      }
+
+      public String getValue() {
+        return value;
+      }
+
+      public int compareTo(Tag other) {
+        throw new AssertionError("no provider sort");
+      }
+    };
+  }
+
+  @Test
+  void batchtext001LiteralCounterGoldenAndNoDuplicateSuffix() {
+    assertEquals(C_HEADER + C_ROW + "2.5\n", text(counter(2.5)));
+  }
+
+  @Test
+  void batchtext002GaugeUnknownInfinityNegativeAndSignedZeroVectors() {
+    double[] inputs = {
+      Double.NaN,
+      Double.POSITIVE_INFINITY,
+      Double.NEGATIVE_INFINITY,
+      -3,
+      0,
+      -0.0,
+      Double.MIN_VALUE,
+      Double.MAX_VALUE
+    };
+    String[] expected = {
+      "NaN", "+Inf", "-Inf", "-3.0", "0.0", "-0.0", "4.9E-324", "1.7976931348623157E308"
+    };
+    for (int i = 0; i < inputs.length; i++)
+      assertEquals(G_HEADER + G_ROW + expected[i] + "\n", text(gauge(inputs[i])));
+  }
+
+  @Test
+  void batchtext003CounterFiniteNonnegativeBoundaries() {
+    double[] inputs = {0, -0.0, Double.MIN_VALUE, Double.MAX_VALUE};
+    String[] expected = {"0.0", "-0.0", "4.9E-324", "1.7976931348623157E308"};
+    for (int i = 0; i < inputs.length; i++)
+      assertEquals(C_HEADER + C_ROW + expected[i] + "\n", text(counter(inputs[i])));
+  }
+
+  @Test
+  void batchtext004CounterRejectsNegativeNanAndInfinity() {
+    for (double value :
+        new double[] {
+          -Double.MIN_VALUE, -1, Double.NaN, Double.POSITIVE_INFINITY, Double.NEGATIVE_INFINITY
+        })
+      assertEquals(
+          "invalid Batch counter value",
+          assertThrows(IllegalArgumentException.class, () -> text(counter(value))).getMessage());
+  }
+
+  @Test
+  void batchtext005EmptyDoesNotFabricateObservationOrMetadata() {
+    assertEquals("", text());
+  }
+
+  @Test
+  void batchtext006UnknownNamesDoNotReadTagsOrValue() {
+    var reads = new AtomicInteger();
+    var id =
+        new Meter.Id("safe_fixture", Tags.empty(), "", "", Meter.Type.COUNTER) {
+          public String getName() {
+            return "nk_unapproved_fixture";
+          }
+
+          public List<Tag> getTags() {
+            throw new AssertionError("not selected");
+          }
+        };
+    var meter =
+        new NoopCounter(id) {
+          public double count() {
+            reads.incrementAndGet();
+            throw new AssertionError("not selected");
+          }
+        };
+    assertEquals("", text(meter));
+    assertEquals(0, reads.get());
+  }
+
+  @Test
+  void batchtext007BothSelectedTypesRejectWrongInstrument() {
+    for (Meter bad :
+        List.of(
+            new NoopGauge(raw(C, ct())),
+            new NoopTimer(raw(C, ct())),
+            new NoopDistributionSummary(raw(C, ct()))))
+      assertEquals(
+          "selected Batch metric is not a counter",
+          assertThrows(IllegalArgumentException.class, () -> text(bad)).getMessage());
+    for (Meter bad :
+        List.of(
+            new NoopCounter(raw(G, gt())),
+            new NoopTimer(raw(G, gt())),
+            new NoopDistributionSummary(raw(G, gt()))))
+      assertEquals(
+          "selected Batch metric is not a gauge",
+          assertThrows(IllegalArgumentException.class, () -> text(bad)).getMessage());
+  }
+
+  @Test
+  void batchtext008NullSourceModeAndUnknownModeFail() {
+    assertThrows(NullPointerException.class, () -> formatter.scrape(null, "STANDARD"));
+    try (var source = new Registry()) {
+      assertThrows(NullPointerException.class, () -> formatter.scrape(source, null));
+      for (String mode : List.of("", "debug", "DEBUG ", "UNKNOWN"))
+        assertThrows(IllegalArgumentException.class, () -> formatter.scrape(source, mode));
+    }
+  }
+
+  @Test
+  void batchtext009NullListMeterIdentityAndNameFail() {
+    try (var source = new Registry()) {
+      source.meters = null;
+      assertThrows(NullPointerException.class, () -> formatter.scrape(source, "DEBUG"));
+    }
+    try (var source = new Registry((Meter) null)) {
+      assertThrows(NullPointerException.class, () -> formatter.scrape(source, "DEBUG"));
+    }
+    Counter missing =
+        new Counter() {
+          public Meter.Id getId() {
+            return null;
+          }
+
+          public double count() {
+            throw new AssertionError("no value");
+          }
+
+          public void increment(double amount) {
+            throw new AssertionError("read only");
+          }
+        };
+    assertThrows(NullPointerException.class, () -> text(missing));
+    assertThrows(NullPointerException.class, () -> text(new NoopGauge(raw(null, gt()))));
+  }
+
+  @Test
+  void batchtext010ClosedDomainRejectsArbitraryEscapingAndNonAsciiInputs() {
+    for (String invalid : List.of("UNAPPROVED", "x\"y", "x\\y", "x\ny", "日本語")) {
+      var value = new NoopGauge(raw(G, List.of(Tag.of("suffix", invalid))));
+      assertThrows(IllegalArgumentException.class, () -> text(value));
+    }
+  }
+
+  @Test
+  void batchtext011MissingAndExtraLabelsFailBeforeReadingValue() {
+    for (var tags :
+        List.of(List.<Tag>of(), List.of(Tag.of("suffix", ".part"), Tag.of("actor", "INVALID")))) {
+      var meter =
+          new NoopGauge(raw(G, tags)) {
+            public double value() {
+              throw new AssertionError("validate first");
+            }
+          };
+      assertThrows(IllegalArgumentException.class, () -> text(meter));
+    }
+  }
+
+  @Test
+  void batchtext012DuplicateAndNullTagContractsAreNotNormalized() {
+    var duplicates = List.of(Tag.of("suffix", ".part"), Tag.of("suffix", ".part"));
+    assertEquals(List.of("suffix", "suffix"), duplicates.stream().map(Tag::getKey).toList());
+    assertThrows(IllegalArgumentException.class, () -> text(new NoopGauge(raw(G, duplicates))));
+    assertThrows(NullPointerException.class, () -> text(new NoopGauge(raw(G, null))));
+    var nullTags = new ArrayList<Tag>();
+    nullTags.add(null);
+    assertThrows(NullPointerException.class, () -> text(new NoopGauge(raw(G, nullTags))));
+    for (var invalid : List.of(tag(null, ".part"), tag("suffix", null)))
+      assertThrows(NullPointerException.class, () -> text(new NoopGauge(raw(G, List.of(invalid)))));
+  }
+
+  @Test
+  void batchtext013StandardReadsNoSourceTypeClosedOrValue() {
+    var values = new AtomicInteger();
+    var meter =
+        new NoopGauge(raw(G, List.of(Tag.of("actor", "INVALID")))) {
+          public double value() {
+            values.incrementAndGet();
+            throw new AssertionError("not read");
+          }
+        };
+    try (var source = new Registry(meter)) {
+      source.reads.set(0);
+      assertEquals("", formatter.scrape(source, "STANDARD"));
+      assertEquals(0, source.reads.get());
+      assertEquals(0, values.get());
+    }
+  }
+
+  @Test
+  void batchtext014BorrowedSourceClosedDebugFailsAndStandardDoesNotReopen() {
+    var source = new Registry(counter(2.5));
+    try {
+      assertEquals(C_HEADER + C_ROW + "2.5\n", formatter.scrape(source, "DEBUG"));
+      assertFalse(source.isClosed());
+      source.close();
+      source.reads.set(0);
+      assertEquals("", formatter.scrape(source, "STANDARD"));
+      assertEquals(0, source.reads.get());
+      assertThrows(IllegalStateException.class, () -> formatter.scrape(source, "DEBUG"));
+      assertTrue(source.isClosed());
+    } finally {
+      source.close();
+    }
+  }
+
+  @Test
+  void batchtext015CounterRuntimeAndErrorIdentityRetained() {
+    var failure = new IllegalStateException("fixture");
+    var broken =
+        new NoopCounter(raw(C, ct())) {
+          public double count() {
+            throw failure;
+          }
+        };
+    assertSame(failure, assertThrows(IllegalStateException.class, () -> text(broken)));
+    var fatal = new AssertionError("fixture");
+    var bad =
+        new NoopCounter(raw(C, ct())) {
+          public double count() {
+            throw fatal;
+          }
+        };
+    assertSame(fatal, assertThrows(AssertionError.class, () -> text(bad)));
+  }
+
+  @Test
+  void batchtext016GaugeRuntimeAndErrorIdentityRetained() {
+    var failure = new IllegalStateException("fixture");
+    var broken =
+        new NoopGauge(raw(G, gt())) {
+          public double value() {
+            throw failure;
+          }
+        };
+    assertSame(failure, assertThrows(IllegalStateException.class, () -> text(broken)));
+    var fatal = new AssertionError("fixture");
+    var bad =
+        new NoopGauge(raw(G, gt())) {
+          public double value() {
+            throw fatal;
+          }
+        };
+    assertSame(fatal, assertThrows(AssertionError.class, () -> text(bad)));
+  }
+
+  private void captured(boolean isCounter) {
+    var nameReads = new AtomicInteger();
+    var tagsReads = new AtomicInteger();
+    var valueReads = new AtomicInteger();
+    String approvedName = isCounter ? C : G;
+    var original = new ArrayList<>(isCounter ? ct() : gt());
+    var id =
+        new Meter.Id("safe_fixture", Tags.empty(), "", "", Meter.Type.GAUGE) {
+          public String getName() {
+            return nameReads.incrementAndGet() == 1 ? approvedName : "nk_unknown_after_capture";
+          }
+
+          public List<Tag> getTags() {
+            tagsReads.incrementAndGet();
+            return original;
+          }
+        };
+    Runnable mutate =
+        () -> {
+          valueReads.incrementAndGet();
+          original.clear();
+          original.add(Tag.of("actor", "UNAPPROVED"));
+        };
+    Meter meter =
+        isCounter
+            ? new NoopCounter(id) {
+              public double count() {
+                mutate.run();
+                return 2.5;
+              }
+            }
+            : new NoopGauge(id) {
+              public double value() {
+                mutate.run();
+                return 3;
+              }
+            };
+    assertEquals(isCounter ? C_HEADER + C_ROW + "2.5\n" : G_HEADER + G_ROW + "3.0\n", text(meter));
+    assertEquals(1, nameReads.get());
+    assertEquals(1, tagsReads.get());
+    assertEquals(1, valueReads.get());
+  }
+
+  @Test
+  void batchtext017CounterCapturedNameAndLabelsMatchSameValueModel() {
+    captured(true);
+  }
+
+  @Test
+  void batchtext018GaugeCapturedNameAndLabelsMatchSameValueModel() {
+    captured(false);
+  }
+
+  @Test
+  void batchtext019SixFamiliesAndSeriesHaveDeterministicOrder() {
+    var others =
+        Map.of(
+            "nk_batch_last_success_timestamp_seconds", List.of(Tag.of("step", "BACKUP_DB")),
+            "nk_file_transfer_bytes", List.of(Tag.of("suffix", ".ready")));
+    var meters = new ArrayList<Meter>();
+    meters.add(counter(2.5));
+    meters.add(gauge(3));
+    others.forEach(
+        (name, tags) ->
+            meters.add(
+                new NoopGauge(raw(name, tags)) {
+                  public double value() {
+                    return 5;
+                  }
+                }));
+    meters.add(
+        new NoopCounter(
+            raw(
+                "nk_integrity_failures_total",
+                List.of(Tag.of("area", "HASH"), Tag.of("step", "BACKUP_DB")))));
+    meters.add(
+        new NoopCounter(
+            raw(
+                "nk_process_restarts_total",
+                List.of(Tag.of("reason", "OOM"), Tag.of("service", "API")))));
+    String text = text(meters.toArray(Meter[]::new));
+    assertEquals(
+        List.of(
+            "nk_batch_last_success_timestamp_seconds",
+            "nk_batch_runs_total",
+            "nk_file_transfer_bytes",
+            "nk_file_transfer_files",
+            "nk_integrity_failures_total",
+            "nk_process_restarts_total"),
+        text.lines().filter(l -> l.startsWith("# TYPE ")).map(l -> l.split(" ")[2]).toList());
+    assertEquals(6, text.lines().filter(l -> !l.startsWith("#")).count());
+    assertTrue(text.contains("nk_process_restarts_total{reason=\"OOM\",service=\"API\"} 0.0\n"));
+  }
+
+  @Test
+  void batchtext020LaterFailureDoesNotReturnPartialText() {
+    var reads = new AtomicInteger();
+    var first =
+        new NoopGauge(raw(G, gt())) {
+          public double value() {
+            reads.incrementAndGet();
+            return 3;
+          }
+        };
+    var later =
+        new NoopCounter(raw(C, ct())) {
+          public double count() {
+            throw new IllegalStateException("fixture");
+          }
+        };
+    var returned = new AtomicReference<Optional<String>>(Optional.empty());
+    try (var source = new Registry(first, later)) {
+      assertThrows(
+          IllegalStateException.class,
+          () -> returned.set(Optional.of(formatter.scrape(source, "DEBUG"))));
+      assertEquals(1, reads.get());
+      assertTrue(returned.get().isEmpty());
+      assertFalse(source.isClosed());
+    }
+  }
+
+  @Test
+  void batchtext021OneMeterListReadAndSortedMultipleSeries() {
+    var ready =
+        new NoopGauge(raw(G, List.of(Tag.of("suffix", ".ready")))) {
+          public double value() {
+            return 5;
+          }
+        };
+    try (var source = new Registry(ready, gauge(3))) {
+      String text = formatter.scrape(source, "DEBUG");
+      assertEquals(2, source.reads.get());
+      assertEquals(G_HEADER + G_ROW + "3.0\nnk_file_transfer_files{suffix=\".ready\"} 5.0\n", text);
+    }
+  }
+
+  @Test
+  void batchtext022DuplicateSeriesNeverProducesAmbiguousText() {
+    assertEquals(
+        "duplicate Batch metric series",
+        assertThrows(IllegalArgumentException.class, () -> text(gauge(1), gauge(2))).getMessage());
+  }
+
+  @Test
+  void batchtext023OneFormatterDoesNotRetainPriorSourceOrFailure() {
+    try (var first = new Registry(counter(2.5));
+        var other = new Registry(gauge(3))) {
+      assertEquals(C_HEADER + C_ROW + "2.5\n", formatter.scrape(first, "DEBUG"));
+      assertEquals(G_HEADER + G_ROW + "3.0\n", formatter.scrape(other, "DEBUG"));
+      assertEquals(C_HEADER + C_ROW + "2.5\n", formatter.scrape(first, "DEBUG"));
+      assertFalse(first.isClosed());
+      assertFalse(other.isClosed());
+    }
+  }
+
+  @Test
+  void batchtext024FiniteConcurrentCallsKeepBorrowedOwner() throws Exception {
+    try (var source = new Registry(counter(2.5));
+        var workers = Executors.newFixedThreadPool(4)) {
+      var jobs = new ArrayList<Future<?>>();
+      for (int i = 0; i < 64; i++)
+        jobs.add(
+            workers.submit(
+                () -> assertEquals(C_HEADER + C_ROW + "2.5\n", formatter.scrape(source, "DEBUG"))));
+      for (var job : jobs) job.get(10, TimeUnit.SECONDS);
+      assertFalse(source.isClosed());
+    }
+  }
+}
