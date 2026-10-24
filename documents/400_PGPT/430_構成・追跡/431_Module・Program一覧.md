@@ -1,5 +1,7 @@
 # Module・Program一覧
 
+2026-10-25追加trace：PG-D620/1823-24、source32041eafe、Context public3/pkgConsumer5/privateOptional5 ctor/refresh holder/render分岐→新APIMCTX-WEBMCTX027～033・APIMHTTP-WEBMHTTP019（16）＋必要旧88=actual104/4、8822原ef14dd6e→8824原bbacc38e Context2＋HTTP2四100 L198M32C4B59/static0/七反例。8826原dbab6b7a全1832/Context2のみ変更・残1830/元1667不変/223owner・五edge0・四role八sampler四field反例/旧26-18各二Unit本文保持。DEBUG一回refresh→stop検査→full HTTP/STD未読/primary保持/SDK保全を限定受入、実Pool/Root/native/全catalog・451/正式は未完。BUG1718 fixture順序是正・元104/F2保持/全hash1824。
+
 2026-10-25追加trace：1821-22/F03 source84ee59a95不変更、二Manager rawPMD40/unique36を8797原ba2a09cb全rowのrule/座標/hash/理由/反証/SS/Test宣言へ結合、8798原084bfae2・8800原7d9b115a十九metadata反例。J2EE前提外21/必要契約review-currentPTjoin待ち19、実manager Test/coverage/現XML資格なし・品質全合格false、PTALT0。原40/exit1維持、568技術Test/31Main・全正式の増加0、F03全体から算術減算0。
 
 2026-10-25追加trace：PG-D619/1819-20、source84ee59a95、二Handler.write/handle/ctor→APIMHTTP-WEBMHTTP001～018（actual36、新4/必要32）/8786原48456d32→8788原082e7f9f当handler二つ四100 L50M6C2B8/static0/七反例。二Manager新bind/ctor/respondは8790原b5305840 source強化レビュー・metadata/八反例・architecture0、実静的8791原a90c7559はCS-SB0/PMD40未分類、8793原3b42b905旧行由来40だけを結合、動的PT/coverageはUNRUN_HOLD/null（PASS/免除完了0）。全1832・変更四parent/旧1828-原1667同byte・223owner。caller Root/実source/観測鮮度/全451/正式未完を残す。
