@@ -159,14 +159,9 @@ def qualify():
 if __name__=='__main__':
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--query')
-    parser.add_argument('--qualify-once',action='store_true')
     args=parser.parse_args()
-    if args.qualify_once:
-        if args.query is not None:
-            parser.error('query and qualification are separate')
-        qualify()
-    elif args.query is not None:
+    if args.query is not None:
         rows=index_entries(args.query,corpus())
         print(json.dumps(dict(query=args.query,totalMatches=len(rows),newest=rows[:15],acceptanceInferred=False),ensure_ascii=False))
     else:
-        parser.error('explicit bounded query or new-only guard qualification required')
+        parser.error('explicit bounded query required; qualification uses no-argument pg8150 entrypoint')
