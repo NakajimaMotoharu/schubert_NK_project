@@ -4,6 +4,7 @@ import dev.codex.schubert.nk.web.config.RequestLogMvcConfiguration;
 import dev.codex.schubert.nk.web.config.WebMvcConfiguration;
 import dev.codex.schubert.nk.web.logging.HttpRequestLoggingValve;
 import dev.codex.schubert.nk.web.logging.WebRequestLogProducer;
+import dev.codex.schubert.nk.web.monitoring.HttpMetricValve;
 import jakarta.servlet.Filter;
 import java.nio.file.Files;
 import java.nio.file.LinkOption;
@@ -107,6 +108,9 @@ public final class WebHttpServer implements AutoCloseable {
     Objects.requireNonNull(featureConfigurations, "featureConfigurations");
     validateConfiguration(runtimeDirectory, port, featureConfigurations);
     Map<Class<?>, ?> registeredDependencies = checkedDependencies(dependencies);
+    if (registeredDependencies.containsKey(HttpMetricValve.class)
+        && !registeredDependencies.containsKey(WebRequestLogProducer.class))
+      throw new IllegalArgumentException("HTTP metric observer requires request trace");
     var result = new WebHttpServer(tomcatFactory);
     var tomcat = result.tomcat;
     var mvc = result.mvc;
@@ -146,6 +150,10 @@ public final class WebHttpServer implements AutoCloseable {
             .getPipeline()
             .addValve(new HttpRequestLoggingValve((WebRequestLogProducer) requestLog));
         mvc.register(RequestLogMvcConfiguration.class);
+      }
+      Object metricObserver = registeredDependencies.get(HttpMetricValve.class);
+      if (metricObserver != null) {
+        context.getPipeline().addValve((HttpMetricValve) metricObserver);
       }
       Object admission = registeredDependencies.get(WebHttpAdmission.class);
       if (admission != null) {

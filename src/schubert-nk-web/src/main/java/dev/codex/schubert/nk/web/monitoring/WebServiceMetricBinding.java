@@ -3,6 +3,8 @@ package dev.codex.schubert.nk.web.monitoring;
 import com.zaxxer.hikari.HikariConfigMXBean;
 import com.zaxxer.hikari.HikariPoolMXBean;
 import io.micrometer.core.instrument.MeterRegistry;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 import java.util.function.Supplier;
 
@@ -56,5 +58,24 @@ public final class WebServiceMetricBinding {
   /** Fresh pipeline-owned observer borrows the retained recorder, never internal mutable state. */
   public HttpMetricValve createHttpObserver() {
     return new HttpMetricValve(http, terminal);
+  }
+
+  /** Structural snapshot only; dependency values and the fresh observer remain pipeline-owned. */
+  public Map<Class<?>, Object> withHttpObserver(Map<Class<?>, ?> dependencies) {
+    Objects.requireNonNull(dependencies, "HTTP metric pipeline dependencies");
+    var copied = new HashMap<Class<?>, Object>();
+    for (var supplied : dependencies.entrySet()) {
+      var entry = Objects.requireNonNull(supplied, "HTTP metric dependency entry");
+      Class<?> type = Objects.requireNonNull(entry.getKey(), "HTTP metric dependency type");
+      Object value = Objects.requireNonNull(entry.getValue(), "HTTP metric dependency value");
+      if (!type.isInstance(value))
+        throw new IllegalArgumentException("HTTP metric dependency type mismatch");
+      if (copied.putIfAbsent(type, value) != null)
+        throw new IllegalArgumentException("duplicate HTTP metric dependency type");
+    }
+    if (copied.containsKey(HttpMetricValve.class))
+      throw new IllegalArgumentException("HTTP metric observer already registered");
+    copied.put(HttpMetricValve.class, createHttpObserver());
+    return Map.copyOf(copied);
   }
 }

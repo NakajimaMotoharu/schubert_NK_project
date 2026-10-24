@@ -29,8 +29,8 @@ import dev.codex.schubert.nk.web.messaging.JmsRequestReplyClient;
 import dev.codex.schubert.nk.web.messaging.LogoutWireClient;
 import dev.codex.schubert.nk.web.messaging.ReplyCorrelationRegistry;
 import dev.codex.schubert.nk.web.messaging.WebBrokerContexts;
-import dev.codex.schubert.nk.web.monitoring.WebDbPoolMetricBinding;
 import dev.codex.schubert.nk.web.monitoring.WebMetricContext;
+import dev.codex.schubert.nk.web.monitoring.WebServiceMetricBinding;
 import dev.codex.schubert.nk.web.revocation.RevocationRetryCoordinator;
 import dev.codex.schubert.nk.web.revocation.RevocationRetryWorker;
 import dev.codex.schubert.nk.web.security.MqAuthenticationProvider;
@@ -92,7 +92,7 @@ final class WebNativeRuntime implements AutoCloseable {
   private volatile @Nullable RevocationRetryWorker retry;
   private volatile @Nullable WebHttpServer http;
   private volatile @Nullable WebManagementServer management;
-  private @Nullable WebMetricContext<WebDbPoolMetricBinding> metrics;
+  private @Nullable WebMetricContext<WebServiceMetricBinding> metrics;
   private boolean startAttempted;
   private final WebRuntimeStop stop = new WebRuntimeStop(System::nanoTime);
 
@@ -209,6 +209,14 @@ final class WebNativeRuntime implements AutoCloseable {
               app,
               version,
               failureSignal);
+      metrics =
+          WebServiceMetricBinding.prepareContext(
+              config.value("nk.monitoring.mode"),
+              () -> HikariDataSource.class.cast(database).getHikariPoolMXBean(),
+              () -> HikariDataSource.class.cast(database).getHikariConfigMXBean(),
+              failureSignal);
+      var metricOwner = Objects.requireNonNull(metrics);
+      metricOwner.initialize();
       var assembly =
           new WebBusinessAssembly(
               client,
@@ -240,17 +248,16 @@ final class WebNativeRuntime implements AutoCloseable {
       application.startOwnedWithCoreSessionDependencies(
           paths.apply(config, "runtime"),
           ports.applyAsInt(config, "nk.web.http.port"),
-          assembly::dependencies,
+          (core, sessions) -> {
+            var dependencies = assembly.dependencies(core, sessions);
+            var binding = metricOwner.bindings();
+            return binding.isPresent()
+                ? binding.orElseThrow().withHttpObserver(dependencies)
+                : dependencies;
+          },
           owned -> http = owned,
           WebBusinessAssembly.configurations());
       requireMappings(Objects.requireNonNull(http).mappedPaths());
-      metrics =
-          WebDbPoolMetricBinding.prepareContext(
-              config.value("nk.monitoring.mode"),
-              () -> HikariDataSource.class.cast(database).getHikariPoolMXBean(),
-              () -> HikariDataSource.class.cast(database).getHikariConfigMXBean());
-      var metricOwner = Objects.requireNonNull(metrics);
-      metricOwner.initialize();
       management =
           WebManagementServer.bind(
               information,

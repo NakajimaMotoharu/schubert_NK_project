@@ -424,4 +424,197 @@ final class WebServiceMetricBindingTest {
       context.close();
     }
   }
+
+  @Test
+  void webservice015EmptyDependenciesReceiveOneFreshObserverInImmutableCopy() {
+    var f = fixture();
+    try (var registry = new OverflowSafeHttpMeterRegistry()) {
+      var binding = new WebServiceMetricBinding(f.pool(), f.config(), registry, "DEBUG", () -> {});
+      var original = new java.util.HashMap<Class<?>, Object>();
+      var result = binding.withHttpObserver(original);
+      assertEquals(java.util.Set.of(HttpMetricValve.class), result.keySet());
+      assertInstanceOf(HttpMetricValve.class, result.get(HttpMetricValve.class));
+      assertThrows(UnsupportedOperationException.class, result::clear);
+      assertTrue(original.isEmpty());
+      assertTrue(f.calls.isEmpty());
+      assertFalse(registry.isClosed());
+    }
+  }
+
+  @Test
+  void webservice016DependencySnapshotPreservesValueIdentityAndIgnoresLaterInputMutation() {
+    var f = fixture();
+    try (var registry = new OverflowSafeHttpMeterRegistry()) {
+      var binding = new WebServiceMetricBinding(f.pool(), f.config(), registry, "DEBUG", () -> {});
+      var original = new java.util.HashMap<Class<?>, Object>();
+      String marker = "fixture marker";
+      Integer number = 7;
+      original.put(String.class, marker);
+      original.put(Integer.class, number);
+      var result = binding.withHttpObserver(original);
+      assertEquals(3, result.size());
+      assertEquals(2, original.size());
+      assertSame(marker, result.get(String.class));
+      assertSame(number, result.get(Integer.class));
+      original.clear();
+      assertEquals(3, result.size());
+      assertSame(marker, result.get(String.class));
+      assertTrue(f.calls.isEmpty());
+    }
+  }
+
+  private static java.util.Map<Class<?>, Object> entries(
+      java.util.Set<java.util.Map.Entry<Class<?>, Object>> supplied) {
+    return new java.util.AbstractMap<Class<?>, Object>() {
+      @Override
+      public java.util.Set<java.util.Map.Entry<Class<?>, Object>> entrySet() {
+        return supplied;
+      }
+    };
+  }
+
+  @Test
+  void webservice017NullMapEntryTypeAndValueNeverBecomeObserverDependencies() {
+    var f = fixture();
+    var signal = new AtomicInteger();
+    try (var registry = new OverflowSafeHttpMeterRegistry()) {
+      var binding =
+          new WebServiceMetricBinding(
+              f.pool(), f.config(), registry, "DEBUG", signal::incrementAndGet);
+      assertThrows(NullPointerException.class, () -> binding.withHttpObserver(null));
+      assertThrows(
+          NullPointerException.class,
+          () -> binding.withHttpObserver(entries(java.util.Collections.singleton(null))));
+      var nullType = new java.util.HashMap<Class<?>, Object>();
+      nullType.put(null, "marker");
+      assertThrows(NullPointerException.class, () -> binding.withHttpObserver(nullType));
+      var nullValue = new java.util.HashMap<Class<?>, Object>();
+      nullValue.put(String.class, null);
+      assertThrows(NullPointerException.class, () -> binding.withHttpObserver(nullValue));
+      assertEquals(0, signal.get());
+      assertTrue(f.calls.isEmpty());
+    }
+  }
+
+  @Test
+  void webservice018TypeMismatchAndPrimitiveKeyAreRejectedWithoutInputChanges() {
+    var f = fixture();
+    try (var registry = new OverflowSafeHttpMeterRegistry()) {
+      var binding = new WebServiceMetricBinding(f.pool(), f.config(), registry, "DEBUG", () -> {});
+      var mismatch = java.util.Map.<Class<?>, Object>of(String.class, 7);
+      var primitive = java.util.Map.<Class<?>, Object>of(int.class, 7);
+      assertThrows(IllegalArgumentException.class, () -> binding.withHttpObserver(mismatch));
+      assertThrows(IllegalArgumentException.class, () -> binding.withHttpObserver(primitive));
+      assertEquals(7, mismatch.get(String.class));
+      assertEquals(7, primitive.get(int.class));
+      assertTrue(f.calls.isEmpty());
+    }
+  }
+
+  @Test
+  void webservice019ExistingObserverIsNotReplacedOrRegisteredTwice() {
+    var f = fixture();
+    try (var registry = new OverflowSafeHttpMeterRegistry()) {
+      var binding = new WebServiceMetricBinding(f.pool(), f.config(), registry, "DEBUG", () -> {});
+      var existing = binding.createHttpObserver();
+      var supplied = java.util.Map.<Class<?>, Object>of(HttpMetricValve.class, existing);
+      assertThrows(IllegalArgumentException.class, () -> binding.withHttpObserver(supplied));
+      assertEquals(1, supplied.size());
+      assertSame(existing, supplied.get(HttpMetricValve.class));
+      assertTrue(f.calls.isEmpty());
+      assertFalse(registry.isClosed());
+    }
+  }
+
+  @Test
+  void webservice020DependencyProviderFailureIsOriginalAndNeverRetriedOrFormatted() {
+    var f = fixture();
+    try (var registry = new OverflowSafeHttpMeterRegistry()) {
+      var binding = new WebServiceMetricBinding(f.pool(), f.config(), registry, "DEBUG", () -> {});
+      var reads = new AtomicInteger();
+      var runtime = new IllegalStateException("entry provider fixture");
+      java.util.Map<Class<?>, Object> bad =
+          new java.util.AbstractMap<Class<?>, Object>() {
+            @Override
+            public java.util.Set<java.util.Map.Entry<Class<?>, Object>> entrySet() {
+              reads.incrementAndGet();
+              throw runtime;
+            }
+          };
+      assertSame(
+          runtime, assertThrows(IllegalStateException.class, () -> binding.withHttpObserver(bad)));
+      assertEquals(1, reads.get());
+      var fatal = new AssertionError("entry provider fatal fixture");
+      java.util.Map<Class<?>, Object> fatalMap =
+          new java.util.AbstractMap<Class<?>, Object>() {
+            @Override
+            public java.util.Set<java.util.Map.Entry<Class<?>, Object>> entrySet() {
+              reads.incrementAndGet();
+              throw fatal;
+            }
+          };
+      assertSame(
+          fatal, assertThrows(AssertionError.class, () -> binding.withHttpObserver(fatalMap)));
+      assertEquals(2, reads.get());
+      assertTrue(f.calls.isEmpty());
+    }
+  }
+
+  @Test
+  void webservice021TwoDependencySnapshotsOwnDistinctObserversButShareOneRecorder()
+      throws Exception {
+    var f = fixture();
+    try (var context = prepared(f, () -> {})) {
+      context.initialize();
+      var binding = context.bindings().orElseThrow();
+      var firstMap = binding.withHttpObserver(java.util.Map.of());
+      var secondMap = binding.withHttpObserver(java.util.Map.of());
+      var first = HttpMetricValve.class.cast(firstMap.get(HttpMetricValve.class));
+      var second = HttpMetricValve.class.cast(secondMap.get(HttpMetricValve.class));
+      assertNotSame(first, second);
+      first.setNext(
+          new ValveBase(true) {
+            @Override
+            public void invoke(Request request, Response response) {}
+          });
+      second.setNext(
+          new ValveBase(true) {
+            @Override
+            public void invoke(Request request, Response response) {}
+          });
+      var one = request();
+      var two = request();
+      var response = response();
+      first.invoke(one, response);
+      second.invoke(two, response);
+      first.log(one, response, 250_000_000);
+      second.log(two, response, 250_000_000);
+      first.log(two, response, 250_000_000);
+      String body = context.render(true);
+      assertTrue(
+          body.contains(
+              "nk_http_requests_total{method=\"GET\",route=\"/login\",service=\"WEB\",status_class=\"2xx\"} 2.0\n"));
+      assertTrue(body.contains("nk_db_pool_connections{service=\"WEB\",state=\"max\"} 2.0\n"));
+      f.complete();
+    }
+  }
+
+  @Test
+  void webservice022MalformedMapDuplicateTypeNeverOverwritesDependencies() {
+    var f = fixture();
+    try (var registry = new OverflowSafeHttpMeterRegistry()) {
+      var binding = new WebServiceMetricBinding(f.pool(), f.config(), registry, "DEBUG", () -> {});
+      var duplicate =
+          entries(
+              java.util.Set.of(
+                  new java.util.AbstractMap.SimpleImmutableEntry<Class<?>, Object>(
+                      String.class, "first"),
+                  new java.util.AbstractMap.SimpleImmutableEntry<Class<?>, Object>(
+                      String.class, "second")));
+      assertThrows(IllegalArgumentException.class, () -> binding.withHttpObserver(duplicate));
+      assertEquals(2, duplicate.entrySet().size());
+      assertTrue(f.calls.isEmpty());
+      assertFalse(registry.isClosed());
+    }
+  }
 }
