@@ -10,6 +10,7 @@ import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Consumer;
@@ -208,6 +209,18 @@ final class ApiOutboxObservationPumpTest {
     assertEquals(1, h.factoryReads);
     assertEquals(1, h.clockReads);
     h.fixtures.getFirst().cleanup(1, 1);
+    var empty = new Harness();
+    var fixture = new Fixture();
+    empty.prepared = fixture::attempt;
+    empty.pump.sampleIfDue();
+    var zero = empty.pump.get().orElseThrow();
+    assertEquals(0, zero.counts().pending());
+    assertEquals(0, zero.counts().sent());
+    assertEquals(0, zero.counts().error());
+    assertEquals(Duration.ZERO, zero.ages().pending());
+    assertEquals(Duration.ZERO, zero.ages().sent());
+    assertEquals(Duration.ZERO, zero.ages().error());
+    fixture.cleanup(1, 1);
   }
 
   @Test
@@ -527,12 +540,40 @@ final class ApiOutboxObservationPumpTest {
   }
 
   @Test
-  void outboxPump030() {
+  void outboxPump030() throws Exception {
     var h = new Harness();
     var primary = new SQLException("close");
-    h.configure = f -> f.faults.put("close", primary);
-    assertSame(primary, assertThrows(SQLException.class, h.pump::sampleIfDue));
-    h.pump.requestStop();
+    var entered = new CountDownLatch(1);
+    var release = new CountDownLatch(1);
+    h.configure =
+        f -> {
+          f.faults.put("close", primary);
+          f.query.beforeStatementClose =
+              () -> {
+                entered.countDown();
+                await(release);
+              };
+        };
+    try (var worker = Executors.newSingleThreadExecutor()) {
+      var pending =
+          worker.submit(
+              () -> {
+                h.pump.sampleIfDue();
+                return true;
+              });
+      try {
+        await(entered);
+        h.pump.requestStop();
+        assertFalse(h.pump.isQuiescent());
+        assertTrue(h.pump.get().isEmpty());
+      } finally {
+        release.countDown();
+      }
+      assertSame(
+          primary,
+          assertThrows(ExecutionException.class, () -> pending.get(10, TimeUnit.SECONDS))
+              .getCause());
+    }
     assertFalse(h.pump.isQuiescent());
     assertTrue(h.pump.get().isEmpty());
     assertDoesNotThrow(h.pump::sampleIfDue);
