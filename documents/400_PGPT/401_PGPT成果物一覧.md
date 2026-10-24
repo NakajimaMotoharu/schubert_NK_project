@@ -1,5 +1,7 @@
 # PGPT成果物一覧・進捗
 
+2026-10-24最新：1787/1788、Web/Batch GC owner-before-bind source623be8eea、新28/2・実2四100(L30M10C2B12)/静的0/全1817・191owner/五edge0/各固定role・mode/fields0で限定閉鎖。BUG1707/YKT1458工具選択の0UNRUNを保存し、正規二選択/起動前guard/三反例→新28でclose、正常build再演0。1759以降技術284ID/Main16は異sourceで正式run/coverageへ合算0、formal1964-53/原190新受入0/工数null/全actualHOLD/whole451/QA051final維持。次標準process/hostのsafe必要PG/PTへ継続。
+
 2026-10-24最新：1771～1786のAPI scalar32・API catalog/policy新28・Batch label14/text32・API JVM14・Web/Batch JVM28・SS26横断join6・API GC14の新ID168/新Main9を追加（1759以降技術256ID/Main14、異sourceなので正式run/coverageへ合算0）。直近1785/1786 GC source20075e7f6は新14/1/実1四100(L18M5C1B9)/静的0/全1815・187owner/五edge0/SDK activation前owner保持/field0を限定閉鎖、BUG1706/YKT1457元静的停止保持後close。schema29role行/unique26はprovider/実endpointの受入ではない。formal1964-53/原190新受入0/工数null/全actualHOLD/whole451/QA051final維持、次Web/Batch GC safe PG/PTへ継続。
 
 2026-10-24最新：1769/1770、pure Web mode/scrape新Main1/新14-1/source8c8a8c51a/実1四100（L10M2C1B2）/static0/全1806・169owner/全旧1805debug同byte/五edge0/owner三反例。STD詳細source読取0/DEBUG七family/部分成功なし/source非保持を確認。BUG1702/YKT1453のmetadata行誤分類だけ143275a16で是正し五pair反例・14再演0で限定close、元失敗source保持。1759以降新ID88/Main5は技術測定のみ、formal1964-53/原190新受入0/工数null/whole451/actualHOLD/QA051final不変更、残safe経路へ継続。

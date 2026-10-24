@@ -1,5 +1,7 @@
 # Web/Batch GC owner-before-bind PG/PT仕様
 
+最終結果は1788。元8548は工具選択誤りにより28UNRUNとして保全、BUG1707/YKT1458工具修正後8556の新28/2・8558当2四100/静的0・8560全byte-ownerで限定完了。Production623be8eeaは不変更、正常8546再演0、以下の当初予定8550/8552/UNRUNは着手時履歴として保持。
+
 NK-OPS-001/RD171/UI252/SS311351/411451、PG-D608/group2014、WBS-P018-09/C07参照0加算。開始fresh35残65/reset1793382075/2-4-8pp/cap10はPG8544/event2014固定。1785/1786のAPI owner-before-bind契約を役割固有に実装し、API既14を確認再演しない。Main2/Unit2/POM・上位不変更。
 
 WebGcMetricRegistrationは既HttpMetricContract.detailedMetricsEnabled（未知mode診断invalid monitoring mode）、BatchGcMetricRegistrationは既MonitoringModePolicy.parse（CONFIG_INVALID）。fixed service WEB/BATCH、STD factory/JMX/source/owner未読、DEBUGは閉鎖/nonnull境界後にfresh GC候補をborrowed activateOwnedへ渡す。owner保持true→SDK bindのみ、false/throwはactivate0、bind失敗も同handleを既ownerが保持、暗黙close/registry close/retryなし、fields0。caller契約は専用GC namespace/同lifecycle一回/fresh候補/保持成功ackと所有close、no-optrue不可。共通Bootstrapや相互app参照を増やさない。
