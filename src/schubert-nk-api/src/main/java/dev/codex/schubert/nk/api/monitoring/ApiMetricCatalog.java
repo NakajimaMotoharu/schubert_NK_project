@@ -39,7 +39,7 @@ public final class ApiMetricCatalog {
   private static final String LAYOUT = "layout";
   private static final String OUTCOME = "outcome";
   private static final String STATE = "state";
-  private static final Set<String> GAUGES =
+  private static final Set<String> GAUGE_NAMES =
       Set.of(
           ROWS,
           AGE,
@@ -51,8 +51,8 @@ public final class ApiMetricCatalog {
           ADDRESS_PAGED,
           PAGING,
           PAGE_FILES);
-  private static final Set<String> COUNTERS = Set.of(INBOX, OPERATION, REDELIVERY, MESSAGE);
-  private static final Set<String> SUMMARIES = Set.of(DB_DURATION, MQ_DURATION);
+  private static final Set<String> COUNTER_NAMES = Set.of(INBOX, OPERATION, REDELIVERY, MESSAGE);
+  private static final Set<String> SUMMARY_NAMES = Set.of(DB_DURATION, MQ_DURATION);
   private static final Set<String> LAYOUTS =
       LayoutRegistry.standard().all().stream()
           .map(d -> d.id().value())
@@ -138,15 +138,15 @@ public final class ApiMetricCatalog {
   public ApiMetricCatalog() {}
 
   public Map<String, Set<String>> gauges() {
-    return namespace(GAUGES);
+    return namespace(GAUGE_NAMES);
   }
 
   public Map<String, Set<String>> counters() {
-    return namespace(COUNTERS);
+    return namespace(COUNTER_NAMES);
   }
 
   public Map<String, Set<String>> summaries() {
-    return namespace(SUMMARIES);
+    return namespace(SUMMARY_NAMES);
   }
 
   private static Map<String, Set<String>> namespace(Set<String> names) {
