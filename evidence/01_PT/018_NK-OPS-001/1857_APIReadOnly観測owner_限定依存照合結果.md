@@ -1,0 +1,11 @@
+# API readonly観測owner・限定依存照合結果
+
+2026-10-25/1856/group2088、Production2ed81b14b不変更・正式main8b91944df fetch再照合。`evidence/provisional/PG9056-api-ro-owner-dependency-v1/manifest.json` SHA b91eee75c854969089f1a183cb4d1ea614c067c421879b3d3f744f98f2227869、実行exit0、13公開artifact/六依存を同ref/hashへ結合。新Test/Main/受入0、coverage null、確認だけの元36/4222再演0。開始0.5/2/4pp cap10、開始fresh53残47/reset1793382075、直前群末52から53の共有境界差1は本群実費へ付替えず他chat含む未配賦値とする。専有費/N-T/工数null、元/v4/v5保持。
+
+API Pool既定はRW/autocommit/max8/connect3s、観測DAOは別checkoutのRO/read-committed/non-autocommit＋statement1sを要求。業務dispatcher connectionを流用せず、取得したConnectionでtransaction準備→Clock取得→既DAO一回→rollback一回→close確認を行い、全正常後だけ観測結果を返す有限ownerが必要。cache observeの現在保証はstatement/rows closeまでで、Connection close後条件まで成立したと推定しない。scrape15s/timeout5sをsampler周期や停止全期限へ読み替えない。
+
+現ServiceProcessResourcesのUNKNOWN policyはexact release frameを保持して正常帰還せず、元Pool/credentialの下流closeへ進まない。有限ownerは取得前にport/policy/保持stateを準備し、close失敗を再close・再観測・clean成功にせず保持する。普通PTでは有限のreturning diagnostic callbackで同failure再throw/未確認stateを検証できるが、actual既保持policy/Pool/worker/親nativeの代替受入ではない。rollback失敗とConnection close失敗を区別し、主例外/secondary fatal/同instance・循環graphの既契約を壊さない。現在cache/caller/業務sourceは不変更。
+
+次の許可PG/PTは、resource-freeで構築する一回用readonly observation attempt：借用DataSource/Clock/repo/policy、開始一回、取得後所有の保持、TX準備/rollback/close確認、UNKNOWN状態保持と再試行拒否、同primary/fatal優先の独立negative/phase fault試験。fake JDBC/Clock/policyだけを用い、実DB/VM/Root/cohort/native/配備/HOLD対象を起動しない。続いてcacheへのcleanup-confirmed publication、有限producer/所有接続を依存順で進める。内部補足で上位業務仕様変更0、PG判断とPT仕様へ根拠を残し、判断が必要な新業務仕様を発見した場合のみ先行台帳へ戻す。
+
+正式1964PT/53scope/原190新受入0/技術690ID・37Main/config静的5/工数null/QA051final/G07未分類8379とactual全HOLDは保持。個別acceptance未成立を合格に読み替えず、通常報告・commitでは停止しない。
