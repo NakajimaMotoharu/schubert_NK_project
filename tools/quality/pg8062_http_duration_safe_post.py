@@ -24,6 +24,10 @@ NAMES|={PREFIX+'OverflowSafeHttpMeterRegistry',PREFIX+'OverflowSafeHttpMeterRegi
 MARKER=PREFIX+'OverflowSafeDurationSupport.class'
 RAW_SHA=None
 COMPILE_SHA=None
+TOTAL_TESTS=90
+SUITE_COUNT=11
+SOURCE_FILE_COUNT=23
+EXTRA_TYPED_POOL_JARS={}
 
 
 def require(value,message):
@@ -46,19 +50,20 @@ def main():
       'org.apache.maven.plugins:maven-dependency-plugin:3.9.0:build-classpath' in compiled['begin']['command'],'normal successful metadata goal')
     require(raw['begin']['prerequisiteMetadataReceipt']==prerequisite,'exact real metadata prerequisite bound before original JUnit')
     require(raw['actualExit']==compiled['actualExit']==0 and raw['source']==compiled['source'], 'same fixed source genuinely zero')
-    require(len(raw['cases'])==90 and all(c['result']=='PASS' for c in raw['cases'])
-            and len({(c['classname'],c['name']) for c in raw['cases']})==90,'genuine unique cases, no rerun/flaky/nonpass accepted')
-    require(len(raw['suites'])==11 and all(v==dict(tests=original.COUNTS[k.rpartition('.')[2]],failures=0,errors=0,skipped=0)
+    require(len(raw['cases'])==TOTAL_TESTS and all(c['result']=='PASS' for c in raw['cases'])
+            and len({(c['classname'],c['name']) for c in raw['cases']})==TOTAL_TESTS,'genuine unique cases, no rerun/flaky/nonpass accepted')
+    require(len(raw['suites'])==SUITE_COUNT and all(v==dict(tests=original.COUNTS[k.rpartition('.')[2]],failures=0,errors=0,skipped=0)
             for k,v in raw['suites'].items()),'all exact suites/FES0')
     require(all(host.sha(original.SLOT/'xml'/p)==h for p,h in raw['xmlHashes'].items()),'genuine returned XML')
     snapshot=original.COMPILE/'snapshot';target=snapshot/'src/schubert-nk-web/target'
     inputs=compiled['begin']['inputHashes']
     require(all(host.sha(snapshot/p)==h for p,h in inputs.items()),'all frozen source input bytes')
     sources={p:h for p,h in inputs.items() if p.startswith('src/schubert-nk-web/') and '/monitoring/' in p and p.endswith('.java')}
-    require(len(sources)==23 and all(host.sha(host.ROOT/p)==h for p,h in sources.items()),'complete twenty-three current Main/Test source files')
+    require(len(sources)==SOURCE_FILE_COUNT and all(host.sha(host.ROOT/p)==h for p,h in sources.items()),'complete declared current Main/Test source files')
     require(host.sha(original.SLOT/'jacoco.exec')==raw['execSha256'],'original one-session execution data')
     dependencies=raw['begin']['dependencyHashes']
     require(all(host.sha(Path(p))==h for p,h in dependencies.items()),'all actual current normal dependencies including internal six Jars')
+    require(all(dependencies.get(p)==h and host.sha(Path(p))==h for p,h in EXTRA_TYPED_POOL_JARS.items()),'all declared typed-pool library bytes match original runtime, never substitute coverage')
     require(all(dependencies.get(p)==h for p,h in sdk.SDK.items())
             and compiled['begin']['dependencyJarHashes']==normal_sdk.DEPENDENCIES,'actual JVM/static/compile same four pinned Micrometer dependencies')
     os.umask(0o077);SLOT.mkdir();steps.SLOT=SLOT
@@ -141,18 +146,19 @@ def main():
             if value is None:os.environ.pop(key,None)
             else:os.environ[key]=value
     require(all(host.sha(snapshot/p)==h for p,h in inputs.items()) and all(host.sha(Path(p))==h for p,h in dependencies.items()),'original source/dependencies unchanged after independent analysis')
-    value=dict(actualExit=0,source=raw['source'],sourceRun='PG'+original.SLOT.name.removeprefix('pg'),tests=90,suites=11,
+    value=dict(actualExit=0,source=raw['source'],sourceRun='PG'+original.SLOT.name.removeprefix('pg'),tests=TOTAL_TESTS,suites=SUITE_COUNT,
       originalManifestSha256=RAW_SHA,originalCompileSha256=COMPILE_SHA,invocation=invocation,prerequisiteMetadataReceipt=prerequisite,
       timeUTC=datetime.datetime.now(datetime.timezone.utc).isoformat(),os=platform.platform(),sourceFiles=sources,
       actualCrcMismatch=0,actualSessions=1,physicalClasses=physical,executableClasses=executable,counters=totals,
       metadataClasses=[PREFIX+'package-info.class',MARKER],additionalMarkerMetadataProofs=marker_proofs,
       additionalSdkAuxiliaryJarHashes=sdk.SDK,
+      additionalTypedPoolLibraryJarHashes=EXTRA_TYPED_POOL_JARS,
       staticRaw=static_raw,staticAnalysisPomSha256=host.sha(pom),staticAuxiliaryAliasSemantics='ACTUAL_RUNTIME_BYTE_BINDINGS_NOT_PRODUCTION_COORDINATES',
-      coverageScope='ALL_TWENTY_CURRENT_MONITORING_EXECUTABLES_NOT_ALL_WEB_OR_WHOLE451',
+      coverageScope='ALL_'+str(len(NAMES))+'_CURRENT_MONITORING_EXECUTABLES_NOT_ALL_WEB_OR_WHOLE451',
       originalXmlHashes=raw['xmlHashes'],coverageExecSha256=raw['execSha256'],auditStages=stages,
       actualVmActions=0,actualDatabaseActions=0,actualNetworkActions=0,whole451Accepted=False,newAccepted=0,formalUpdated=False,effortPercent=None)
     verify(invocation);host.write(SLOT/'manifest.safe.json',value);OUT.mkdir();host.write(OUT/'manifest.json',value)
-    print(json.dumps(dict(actualExit=0,tests=90,counters=totals,static={k:dict(actualExit=v['actualExit'],findings=len(v['findings']),processingErrors=v['processingErrors']) for k,v in static_raw.items()},manifestSha256=host.sha(OUT/'manifest.json'))))
+    print(json.dumps(dict(actualExit=0,tests=TOTAL_TESTS,counters=totals,static={k:dict(actualExit=v['actualExit'],findings=len(v['findings']),processingErrors=v['processingErrors']) for k,v in static_raw.items()},manifestSha256=host.sha(OUT/'manifest.json'))))
 
 
 if __name__=='__main__':main()

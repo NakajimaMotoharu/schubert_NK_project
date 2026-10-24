@@ -1,5 +1,7 @@
 # Module・Program一覧
 
+2026-10-24最新：1728 WebPool観測結線仕様/1729結果、sourcee196d0816/当Web114PT14suite（新製造24＋必要既90）・実25四100(L527M118C25B215)/全1799/147delta-130physical/生成10type36method/raw16全個別理由・static missing0。前Web90から新24ID/実class+5/L+71/M+18/B+39の技術実績、新BUG0。借用Hikari interface四getter→WEB四Gaugeのみ、実Pool/owner/source/scheduler/exporter/whole451/正式・工数率未受入。正式1964-53/原190新受入0/QA051final/全actualHOLD不変更。
+
 2026-10-24最新：1725 HTTP極小/MAX追加品質仕様・1726結果横展開、source731d84d79/当Web90PT11suite（新13＋必要既77）・実20四100(L456M100C20B176)/全1794/141delta-125physical/生成8type27method/raw13全理由・static missing0。元合計0の1failure/中間missing4/NullAway2/wrapper1と回収/metadata schema不備を別保全しBUG1681～1685/YKT1432～1436を限定閉鎖。前Web77から+13ID/実class+2/L+55/M+19/B+16の技術実績、原190新受入0/正式1964-53/工数null・全actualHOLD/whole451未受入維持。
 
 2026-10-24最新：1723 Duration極小/MAX追加品質仕様・1724結果横展開。source6c6ba4ab5/当API174PT21suite（追加品質12＋必要既162）・実36四100(L653M124C36B303)/全1791/138delta-122physical/生成54/raw19全個別理由。元2failure・二compile手戻り・SB1・独立工具不備を別保存し、BUG1678～1680/YKT1429～1431を限定閉鎖。API前162から新12ID/実class+2/L+48/M+13/B+28の技術実績、原190新受入0/正式1964-53/工数null維持。実assembly/DB/MQ/exporter/全actualHOLD・whole451未受入。
