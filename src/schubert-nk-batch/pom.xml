@@ -22,6 +22,8 @@
   </properties>
 
   <dependencies>
+    <!-- SS351/1810/PG-D615: standard SDK text source; no new endpoint or custom formatter change. -->
+    <dependency><groupId>io.micrometer</groupId><artifactId>micrometer-registry-prometheus</artifactId><version>1.17.1</version></dependency>
     <!-- RD171/SS351, PG-D536/BATCHREC: exact existing installed SDK, no exclusions. -->
     <dependency><groupId>io.micrometer</groupId><artifactId>micrometer-core</artifactId><version>1.17.1</version></dependency>
     <!-- SSC088: root startup uses only shared credentials/public proof/NSS, no business API. -->
