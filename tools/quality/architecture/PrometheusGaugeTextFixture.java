@@ -22,7 +22,7 @@ import org.jspecify.annotations.Nullable;
 final class PrometheusGaugeTextFixture extends PrometheusMeterRegistry implements AutoCloseable {
   final AtomicInteger closes = new AtomicInteger();
   private static final Pattern LINE = Pattern.compile("([a-z_]+)\\{([^{}]+)\\} (NaN|[-+0-9.eE]+)");
-  private static final Pattern LABEL = Pattern.compile("([a-z_]+)=\"([A-Za-z.]+)\"");
+  private static final Pattern LABEL = Pattern.compile("([a-z_]+)=\"([A-Za-z0-9_.]+)\"");
   private static final PrometheusConfig CONFIG =
       new PrometheusConfig() {
         @Override
