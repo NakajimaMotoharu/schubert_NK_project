@@ -392,9 +392,10 @@ final class ApiObservationContextTest {
       await(entered);
       f.remaining = () -> 0;
       var first = assertThrows(IOException.class, f.owner::close);
-      assertEquals(UNKNOWN, first.getMessage());
+      assertEquals("observation worker stop unconfirmed", first.getMessage());
+      assertSame(first, f.unknown.peek());
       f.w.releaseAll();
-      assertThrows(IOException.class, f.owner::close);
+      assertEquals(UNKNOWN, assertThrows(IOException.class, f.owner::close).getMessage());
       assertEquals(0, f.registry.closes.get());
       assertEquals(2, f.unknown.size());
     }
