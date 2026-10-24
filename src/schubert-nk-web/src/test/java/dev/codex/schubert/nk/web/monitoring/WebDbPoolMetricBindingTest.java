@@ -15,6 +15,13 @@ import org.junit.jupiter.api.Test;
 
 /** 1825 WEBPOOLB001..010: public typed getter fixtures only, no actual pool/DB. */
 final class WebDbPoolMetricBindingTest {
+  private static final class Registry extends SimpleMeterRegistry implements AutoCloseable {
+    @Override
+    public void close() {
+      super.close();
+    }
+  }
+
   private static final List<String> POINTS = List.of("active", "idle", "pending", "max");
 
   private static Fixture fixture() {
@@ -68,7 +75,7 @@ final class WebDbPoolMetricBindingTest {
   @Test
   void webpoolb001NullAndUnknownModeNeverReadBorrowedGetters() {
     var f = fixture();
-    try (var registry = new SimpleMeterRegistry()) {
+    try (var registry = new Registry()) {
       assertThrows(
           NullPointerException.class,
           () -> new WebDbPoolMetricBinding(null, f.config(), registry, "DEBUG"));
@@ -90,7 +97,7 @@ final class WebDbPoolMetricBindingTest {
   @Test
   void webpoolb002ConstructorRegistersMetadataWithoutSamplingThenPublishesExactValues() {
     var f = fixture();
-    try (var registry = new SimpleMeterRegistry()) {
+    try (var registry = new Registry()) {
       var binding = binding(f, registry, "DEBUG");
       assertTrue(f.calls.isEmpty());
       missing(binding, registry);
@@ -110,7 +117,7 @@ final class WebDbPoolMetricBindingTest {
   @Test
   void webpoolb003InvalidObservationClearsAndTrueZeroRecoversWithoutSeriesGrowth() {
     var f = fixture();
-    try (var registry = new SimpleMeterRegistry()) {
+    try (var registry = new Registry()) {
       var binding = binding(f, registry, "DEBUG");
       binding.refresh();
       known(binding, 1, 1, 0, 2);
@@ -142,7 +149,7 @@ final class WebDbPoolMetricBindingTest {
   void webpoolb004StandardNeverReadsEvenFailingGetterAndCreatesNoSeries() {
     var f = fixture();
     f.faults.put("active", new AssertionError("must not read"));
-    try (var registry = new SimpleMeterRegistry()) {
+    try (var registry = new Registry()) {
       var binding = binding(f, registry, "STANDARD");
       binding.refresh();
       assertTrue(binding.snapshot().isEmpty());
@@ -156,7 +163,7 @@ final class WebDbPoolMetricBindingTest {
     for (int point = 0; point < POINTS.size(); point++) {
       var f = fixture();
       var failure = new IllegalStateException("fixed getter failure");
-      try (var registry = new SimpleMeterRegistry()) {
+      try (var registry = new Registry()) {
         var binding = binding(f, registry, "DEBUG");
         binding.refresh();
         f.calls.clear();
@@ -177,7 +184,7 @@ final class WebDbPoolMetricBindingTest {
   void webpoolb006DirectGetterErrorRemainsFatalAndMissing() {
     var f = fixture();
     var failure = new AssertionError("fixed getter fatal");
-    try (var registry = new SimpleMeterRegistry()) {
+    try (var registry = new Registry()) {
       var binding = binding(f, registry, "DEBUG");
       binding.refresh();
       f.calls.clear();
@@ -191,7 +198,7 @@ final class WebDbPoolMetricBindingTest {
   @Test
   void webpoolb007LastSnapshotIsImmutableNotLiveGetterOrFreshnessAuthority() {
     var f = fixture();
-    try (var registry = new SimpleMeterRegistry()) {
+    try (var registry = new Registry()) {
       var binding = binding(f, registry, "DEBUG");
       binding.refresh();
       var first = binding.snapshot().orElseThrow();
@@ -248,7 +255,7 @@ final class WebDbPoolMetricBindingTest {
     f.idle = Integer.MAX_VALUE;
     f.pending = Integer.MAX_VALUE;
     f.maximum = Integer.MAX_VALUE;
-    try (var registry = new SimpleMeterRegistry()) {
+    try (var registry = new Registry()) {
       var binding = binding(f, registry, "DEBUG");
       binding.refresh();
       f.complete();
@@ -284,7 +291,7 @@ final class WebDbPoolMetricBindingTest {
           entered.countDown();
           await(release);
         };
-    try (var registry = new SimpleMeterRegistry()) {
+    try (var registry = new Registry()) {
       var binding = binding(f, registry, "DEBUG");
       var workers = Executors.newFixedThreadPool(2);
       try {
