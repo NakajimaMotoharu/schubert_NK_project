@@ -1,5 +1,7 @@
 # Module・Program一覧
 
+2026-10-24追加trace：WebMetricScrape.constructor/scrape(source,mode)を1769/1770・PG-D600・RD171/UI252/SS351へ、SCRAPE001～014/source8c8a8c51a/8408-10-8413で実1四100（L10M2C1B2）/全static0/全1806・169owner/五edge0/owner三反例・compiled fields三formatter/public methods二つへ結合。source非保持・STD no-provider/DEBUG固定七family・例外/部分成功なしは実14、JVM標準/実endpoint/mode/ownerは別未受入。旧1805byte同一をPT成功へ転用しない、formal/工数/actualHOLD不変更。
+
 2026-10-24接続trace：Web三exporter.scrapeApprovedCounters/Gauges/Timers/encode optional policy、WebMetricCatalog.labels(Id)/labels(captured name,tags)/domain/copyを1767/1768・PG-D599・RD171/UI252/SS351へ。APPROVED001～012新12＋必要84＝96/9、sourceb347581d2/8396-98-8400で実5四100（L212M38C5B86）/static0/全1805・167owner/五edge0/責務五反例へ。元fixed domain/generic/IO/未知名順を保持、別preflight再読取ではなく検証済みLabelsを同pointへ。API Main不変更、formal/工数/actualHOLD不変更。
 
 2026-10-24是正trace：API ApiDurationMetricExporter/WebDurationMetricExporter/WebCounterMetricExporter/WebGaugeMetricExporterのencode名取得・namespace選択/groupingをPG-D598/1765～1766/RD171/UI252/SS351/BUG1701へ。新MIDNAME4＋必要96=100/9、sourcef775f095c・8384/86/88で実5四100（L216M29C5B112）/全static0/全1805・167owner/四Mainだけexact一回copy/他1801debug同byte/五edge0/責務七反例を結合。WebMetricTextは名を扱わず非該当を同scopeで再実証、catalogは同byte・14再演なし。上位/POM/正式/工数/actualHOLD不変更。

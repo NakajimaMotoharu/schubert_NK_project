@@ -1,5 +1,7 @@
 # PGPT成果物一覧・進捗
 
+2026-10-24最新：1769/1770、pure Web mode/scrape新Main1/新14-1/source8c8a8c51a/実1四100（L10M2C1B2）/static0/全1806・169owner/全旧1805debug同byte/五edge0/owner三反例。STD詳細source読取0/DEBUG七family/部分成功なし/source非保持を確認。BUG1702/YKT1453のmetadata行誤分類だけ143275a16で是正し五pair反例・14再演0で限定close、元失敗source保持。1759以降新ID88/Main5は技術測定のみ、formal1964-53/原190新受入0/工数null/whole451/actualHOLD/QA051final不変更、残safe経路へ継続。
+
 2026-10-24最新：1767/1768、Web catalogの検証済みLabelsをpoint modelへ直接接続。新12＋必要84＝96/9/sourceb347581d2/実5四100（L212M38C5B86）/static0/全1805・167owner/Web四Main変更・他1801debug同byte/五edge0/役割五反例。元七family定義・generic API・API Main/POM/SS不変、新BUG0。1759以降新ID74/Main4は異source技術成果、正式1964-53/原190新受入0/工数null/whole451/actualHOLD/QA051finalへ加算0。次pure mode/scrape policy、継続。
 
 2026-10-24最新：1765/1766、新MIDNAME4が既四exporterの名再読取不備を全4failureで検出、BUG1701/YKT1452先行→sourcef775f095cで一回copyへ。新4＋必要96=100/9成功、実5四100（L216M29C5B112）/static0/全1805・167owner/四Mainexact差分・他1801debug同byte/五edge0＋責務七反例、限定close。1759以降新Test ID62/新Main4はsource別技術測定で正式runへ合算0。次Labels-model直接接続、formal1964-53/原190新受入0/工数null/whole451/actualHOLD/QA051final不変更。
