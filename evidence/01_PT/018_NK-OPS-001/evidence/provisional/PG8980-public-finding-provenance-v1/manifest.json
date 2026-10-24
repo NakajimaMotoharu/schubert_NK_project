@@ -1,0 +1,68 @@
+{
+  "actualExit": 0,
+  "classificationSha256": "9f1015e4dbad44b6edba70c5c3fbf432688f95375923df2bdbb39f29ffcef7b6",
+  "configSha256": "e163e53b9e7e8a8511e77271e2b323ed057759542a6d988258afe3a1fa329caf",
+  "contentCommit": "05d73a7974da8df92228160b96d91e7a006768f3",
+  "dispositions": {
+    "FALSE_POSITIVE_PUBLIC_BLOB_SHA256": 29468,
+    "UNCLASSIFIED": 10618
+  },
+  "findings": 40086,
+  "formalUpdated": false,
+  "invocation": {
+    "actualPythonCommand": [
+      "python3",
+      "-B",
+      "tools/quality/pg8980_public_finding_provenance.py"
+    ],
+    "arbitraryArgumentsRecorded": false,
+    "entrypointPath": "tools/quality/pg8980_public_finding_provenance.py",
+    "entrypointSha256": "68b4fca06a983aa782a672f48075931cb962e166bdb9485dd07cca9a19f10844",
+    "helperPath": "tools/quality/host_tool_invocation.py",
+    "helperSha256": "85d616a3db4ff47f4c95ae2e0dd57954bc2b09f28b8f2a685b986e5621545c46",
+    "libraryPath": "tools/quality/pg8980_public_finding_provenance.py",
+    "librarySha256": "68b4fca06a983aa782a672f48075931cb962e166bdb9485dd07cca9a19f10844",
+    "loadedProjectPythonSources": {
+      "tools/quality/host_tool_invocation.py": "85d616a3db4ff47f4c95ae2e0dd57954bc2b09f28b8f2a685b986e5621545c46",
+      "tools/quality/pg8980_public_finding_provenance.py": "68b4fca06a983aa782a672f48075931cb962e166bdb9485dd07cca9a19f10844",
+      "tools/quality/public_blob_scan.py": "4d12a867a01f32c3437df37986f676a6624d2afde036e6a3eaca3ed1f666b78f",
+      "tools/quality/public_finding_provenance.py": "43af119949e713e7f29735850c2026abc949235fccb4fb1e28d055a9057b5fbe"
+    },
+    "provenance": "OBSERVED_SYS_ARGV_AND_ORIG_ARGV_NOT_RECONSTRUCTED"
+  },
+  "liveSecretsConfirmed": null,
+  "newAccepted": 0,
+  "originalFindingsPreserved": true,
+  "productCoverage": null,
+  "productTestsExecuted": 0,
+  "rawCandidatesOrStandaloneCandidateHashPersisted": false,
+  "reasons": {
+    "EXACT_CAPTURE_NOT_A_PROVEN_PUBLIC_BLOB_HASH": 10286,
+    "EXACT_CAPTURE_NOT_BOUND_TO_FINDING_RANGE": 1,
+    "EXACT_RULE_CAPTURE_EQUALS_INDEPENDENTLY_HASHED_PUBLIC_GIT_BLOB": 29468,
+    "MULTIPLE_DISTINCT_CAPTURES": 331
+  },
+  "rejectedRanges": [
+    "zero",
+    "bool",
+    "reversed",
+    "past-eof"
+  ],
+  "ruleOrIgnoreModified": false,
+  "ruleProvenanceSha256": "97b57201394a789a6871fa2f73b6521d71e48e5452ff2b426a6e23e4ca580c8a",
+  "scanManifestSha256": "f8e16b697c1c509791c6674bb17661c54e8685c0f04425bed8bf7ea86a94a739",
+  "scannerRerun": false,
+  "source": "fb9fce0f91de3d9fdfa634fe277592700f915e45",
+  "syntheticGoldenCases": [
+    "public-exact",
+    "unknown-same-shape",
+    "nearby-public-not-match",
+    "two-different-captures",
+    "outside-range",
+    "safe-no-key"
+  ],
+  "timeUTC": "2026-10-24T19:24:05.984498+00:00",
+  "vendorPathLimitedCount": 53,
+  "vendorPathLimitsSha256": "ae9d886841bfa8f23855d117f81d4294e351948715378571a4714dbb23143be8",
+  "whole451SecretGateAccepted": false
+}

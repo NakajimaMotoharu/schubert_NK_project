@@ -1,5 +1,7 @@
 # 開発環境・toolchain構築記録
 
+2026-10-25 1844/1845追補：8979で公式固定tag v8.30.1 default config97,731byte/222ruleを公開HTTPS一件追加取得、SHA256 e163e53b9e7e8a8511e77271e2b323ed057759542a6d988258afe3a1fa329caf。専用new-only slot/実URL/環境/entry hashは原manifest97b57201、既binary/config/settingsを上書きせずscanner再演0。8980/8982は既findingのexact captureと公開Git blob bytesの限定分類、29,468誤検出根拠付き/10,618未分類・vendor path限界53、全G07未受入。8966二downloadと別計数、秘密値出力0/製品PT0。
+
 ## 2026-10-25 G07 Gitleaks8.30.1専用toolchain（1841/1842、PG-D628）
 
 公式 https://github.com/gitleaks/gitleaks/releases/tag/v8.30.1 のLinux x64 archive/checksums二件を8966へ記録した固定SHA256/sizeで取得・照合、bin/licenseだけを `../toolchain/gitleaks-8.30.1-linux-x64/` のnew-only0700へ導入。binary SHA256 88f91962aa2f93ac6ab281d553b9e125f5197bbbce38f9f2437f7299c32e5509、実version8.30.1/終了0。取得URL/二asset hash/OS/actual command/実entry hash/licenseはPG8966 manifest ef630842…を正とする。published hash+HTTPSでありvendor署名とは称しない。system PATH/settings/credential/製品POM変更0、公開download2/target通信0。
