@@ -32,6 +32,7 @@ COUNTS={}
 TEST_ROOT=host.ROOT/'src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring'
 FIXTURES={}
 EXTRA_TEST_SOURCES=()
+TEST_SOURCE_OVERRIDES={}
 ENV={'PATH':str(host.TC/'jdk-25.0.4/bin')+':/usr/bin:/bin','LANG':'C.UTF-8'}
 
 
@@ -97,7 +98,9 @@ def main():
     require(host.sha(annotation)=='766ad2a0783f2687962c8ad74ceecc38a28b9f72a2d085ee438b7813e928d0c7',
             'existing compile annotation pin')
     inputs=list(dict.fromkeys([*jars,*external,*[Path(p) for p in sdk_jars],LAUNCHER,annotation]))
-    selected=[TEST_ROOT/(n+'.java') for n in COUNTS if n!=NEW_TEST.stem]
+    require(set(TEST_SOURCE_OVERRIDES) <= (set(COUNTS)-{NEW_TEST.stem}),
+            'only declared selected test source overrides')
+    selected=[TEST_SOURCE_OVERRIDES.get(n,TEST_ROOT/(n+'.java')) for n in COUNTS if n!=NEW_TEST.stem]
     test_sources=[*selected,NEW_TEST,HELPER,*EXTRA_TEST_SOURCES]
     require(all(p.is_file() for p in test_sources),'all declared fresh test sources and launcher')
     require(COUNTS and NEW_TEST.stem in COUNTS and all(type(n) is int and n>0 for n in COUNTS.values()),
