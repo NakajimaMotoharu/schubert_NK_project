@@ -20,6 +20,14 @@ public final class BatchMetricText {
 
   public BatchMetricText() {}
 
+  /** 1833/PG-D624: both sources remain caller-owned; custom before standard, never partial text. */
+  public String scrape(MeterRegistry source, String mode, BatchStandardMetricSource standard) {
+    Objects.requireNonNull(standard, "standard metric owner");
+    String custom = scrape(source, mode);
+    if ("STANDARD".equals(mode)) return custom;
+    return custom + Objects.requireNonNull(standard.scrape(mode), "standard metric text");
+  }
+
   /**
    * STANDARD reads no detailed source; DEBUG returns no partial text after any provider failure.
    */

@@ -526,4 +526,249 @@ class BatchMetricTextTest {
       assertFalse(source.isClosed());
     }
   }
+
+  private static final String FULL_STANDARD =
+      "# TYPE system_cpu_count gauge\nsystem_cpu_count{service=\"BATCH\"} 42.0\n";
+
+  private static final class FullProbe
+      extends io.micrometer.prometheusmetrics.PrometheusMeterRegistry {
+    final AtomicInteger scrapes = new AtomicInteger();
+    RuntimeException failure;
+    Error fatal;
+    boolean nullText;
+
+    FullProbe() {
+      super(io.micrometer.prometheusmetrics.PrometheusConfig.DEFAULT);
+    }
+
+    @Override
+    public String scrape() {
+      scrapes.incrementAndGet();
+      if (failure != null) throw failure;
+      if (fatal != null) throw fatal;
+      return nullText ? null : FULL_STANDARD;
+    }
+  }
+
+  private static BatchStandardMetricSource fullOwner(FullProbe probe) {
+    var owner = new BatchStandardMetricSource(() -> probe, (source, gc) -> {});
+    owner.bind("DEBUG");
+    return owner;
+  }
+
+  @Test
+  void batchfull001LiteralCustomBeforeStandardAndBothOwnersRemainBorrowed() {
+    var probe = new FullProbe();
+    try (var source = new Registry(counter(2.5));
+        var standard = fullOwner(probe)) {
+      assertEquals(
+          C_HEADER + C_ROW + "2.5\n" + FULL_STANDARD, formatter.scrape(source, "DEBUG", standard));
+      assertEquals(1, probe.scrapes.get());
+      assertFalse(source.isClosed());
+      assertFalse(probe.isClosed());
+    }
+    assertTrue(probe.isClosed());
+  }
+
+  @Test
+  void batchfull002StandardNeverAcquiresOrReadsDetailsEvenAfterOwnerClose() {
+    var calls = new AtomicInteger();
+    try (var source = new Registry(counter(2.5));
+        var standard =
+            new BatchStandardMetricSource(
+                () -> {
+                  calls.incrementAndGet();
+                  throw new AssertionError("STD cannot acquire");
+                },
+                (registry, gc) -> {
+                  throw new AssertionError("STD cannot register");
+                })) {
+      assertEquals("", formatter.scrape(source, "STANDARD", standard));
+      standard.close();
+      assertEquals("", formatter.scrape(source, "STANDARD", standard));
+      assertEquals(0, source.reads.get());
+      assertEquals(0, calls.get());
+    }
+  }
+
+  @Test
+  void batchfull003UnboundAndClosedStandardNeverReturnPartialCustom() {
+    try (var source = new Registry(counter(2.5));
+        var standard = new BatchStandardMetricSource()) {
+      assertThrows(IllegalStateException.class, () -> formatter.scrape(source, "DEBUG", standard));
+      standard.close();
+      assertThrows(IllegalStateException.class, () -> formatter.scrape(source, "DEBUG", standard));
+      assertFalse(source.isClosed());
+    }
+  }
+
+  @Test
+  void batchfull004NullAndUnknownInputsFailBeforeStandardRead() {
+    var probe = new FullProbe();
+    try (var source = new Registry(counter(2.5));
+        var standard = fullOwner(probe)) {
+      assertThrows(NullPointerException.class, () -> formatter.scrape(source, "DEBUG", null));
+      assertThrows(NullPointerException.class, () -> formatter.scrape(null, "DEBUG", standard));
+      assertThrows(NullPointerException.class, () -> formatter.scrape(source, null, standard));
+      assertThrows(
+          IllegalArgumentException.class, () -> formatter.scrape(source, "debug", standard));
+      assertEquals(0, probe.scrapes.get());
+      assertEquals(0, source.reads.get());
+    }
+  }
+
+  @Test
+  void batchfull005CustomRuntimePreservesIdentityAndSkipsFailingStandard() {
+    var primary = new IllegalArgumentException("custom runtime fixture");
+    var probe = new FullProbe();
+    probe.fatal = new AssertionError("standard unreached");
+    try (var source =
+            new Registry() {
+              @Override
+              public List<Meter> getMeters() {
+                throw primary;
+              }
+            };
+        var standard = fullOwner(probe)) {
+      assertSame(
+          primary,
+          assertThrows(
+              IllegalArgumentException.class, () -> formatter.scrape(source, "DEBUG", standard)));
+      assertEquals(0, probe.scrapes.get());
+      assertFalse(probe.isClosed());
+    }
+  }
+
+  @Test
+  void batchfull006CustomFatalPreservesIdentityAndSkipsStandard() {
+    var primary = new AssertionError("custom fatal fixture");
+    var probe = new FullProbe();
+    probe.failure = new IllegalStateException("standard unreached");
+    try (var source =
+            new Registry() {
+              @Override
+              public List<Meter> getMeters() {
+                throw primary;
+              }
+            };
+        var standard = fullOwner(probe)) {
+      assertSame(
+          primary,
+          assertThrows(AssertionError.class, () -> formatter.scrape(source, "DEBUG", standard)));
+      assertEquals(0, probe.scrapes.get());
+    }
+  }
+
+  @Test
+  void batchfull007StandardRuntimeIsNotPartialCustomSuccess() {
+    var probe = new FullProbe();
+    var primary = new IllegalStateException("standard runtime fixture");
+    probe.failure = primary;
+    try (var source = new Registry(counter(2.5));
+        var standard = fullOwner(probe)) {
+      assertSame(
+          primary,
+          assertThrows(
+              IllegalStateException.class, () -> formatter.scrape(source, "DEBUG", standard)));
+      assertEquals(1, probe.scrapes.get());
+      assertFalse(source.isClosed());
+      assertFalse(probe.isClosed());
+    }
+  }
+
+  @Test
+  void batchfull008StandardFatalPreservesIdentityAndOwnership() {
+    var probe = new FullProbe();
+    var primary = new AssertionError("standard fatal fixture");
+    probe.fatal = primary;
+    try (var source = new Registry(counter(2.5));
+        var standard = fullOwner(probe)) {
+      assertSame(
+          primary,
+          assertThrows(AssertionError.class, () -> formatter.scrape(source, "DEBUG", standard)));
+      assertEquals(1, probe.scrapes.get());
+      assertFalse(source.isClosed());
+      assertFalse(probe.isClosed());
+    }
+  }
+
+  @Test
+  void batchfull009NullStandardTextIsRejectedRatherThanStringifiedOrEmptySuccess() {
+    var probe = new FullProbe();
+    probe.nullText = true;
+    try (var source = new Registry(counter(2.5));
+        var standard = fullOwner(probe)) {
+      assertThrows(NullPointerException.class, () -> formatter.scrape(source, "DEBUG", standard));
+      assertEquals(1, probe.scrapes.get());
+      assertFalse(probe.isClosed());
+    }
+  }
+
+  @Test
+  void batchfull010EmptyCustomAndNextSourceDoNotRetainHistory() {
+    var probe = new FullProbe();
+    try (var source = new Registry();
+        var standard = fullOwner(probe)) {
+      assertEquals(FULL_STANDARD, formatter.scrape(source, "DEBUG", standard));
+      source.meters = List.of(counter(1.5));
+      assertEquals(
+          C_HEADER + C_ROW + "1.5\n" + FULL_STANDARD, formatter.scrape(source, "DEBUG", standard));
+      assertEquals(2, probe.scrapes.get());
+    }
+  }
+
+  @Test
+  void batchfull011ConcurrentBorrowedSourcesNeverMixOrClose() throws Exception {
+    var firstProbe = new FullProbe();
+    var secondProbe = new FullProbe();
+    try (var first = new Registry(counter(1.5));
+        var second = new Registry(counter(2.5));
+        var firstStandard = fullOwner(firstProbe);
+        var secondStandard = fullOwner(secondProbe);
+        var workers = Executors.newFixedThreadPool(2)) {
+      var firstJob =
+          workers.submit(
+              () -> {
+                for (int i = 0; i < 16; i++)
+                  assertEquals(
+                      C_HEADER + C_ROW + "1.5\n" + FULL_STANDARD,
+                      formatter.scrape(first, "DEBUG", firstStandard));
+              });
+      var secondJob =
+          workers.submit(
+              () -> {
+                for (int i = 0; i < 16; i++)
+                  assertEquals(
+                      C_HEADER + C_ROW + "2.5\n" + FULL_STANDARD,
+                      formatter.scrape(second, "DEBUG", secondStandard));
+              });
+      firstJob.get(10, TimeUnit.SECONDS);
+      secondJob.get(10, TimeUnit.SECONDS);
+      assertEquals(16, firstProbe.scrapes.get());
+      assertEquals(16, secondProbe.scrapes.get());
+      assertFalse(first.isClosed());
+      assertFalse(second.isClosed());
+      assertFalse(firstProbe.isClosed());
+      assertFalse(secondProbe.isClosed());
+    }
+  }
+
+  @Test
+  void batchfull012ActualStandardSdkUsesIndependentOwnJvmCpuOracle() {
+    try (var source = new Registry(counter(2.5));
+        var standard = new BatchStandardMetricSource()) {
+      standard.bind("DEBUG");
+      String text = formatter.scrape(source, "DEBUG", standard);
+      assertTrue(text.startsWith(C_HEADER + C_ROW + "2.5\n"));
+      String cpu =
+          "system_cpu_count{service=\"BATCH\"} "
+              + (double) Runtime.getRuntime().availableProcessors();
+      assertTrue(text.lines().anyMatch(cpu::equals));
+      assertTrue(text.contains("# TYPE system_cpu_count gauge\n"));
+      assertTrue(text.contains("jvm_memory_used_bytes{"));
+      var types = text.lines().filter(line -> line.startsWith("# TYPE ")).toList();
+      assertEquals(types.size(), types.stream().distinct().count());
+      assertFalse(source.isClosed());
+    }
+  }
 }
