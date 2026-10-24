@@ -20,6 +20,8 @@ PG-D593：HTTP wrapperがprivate ReentrantLockでlong count/九有限CDF/正doub
 
 実行前最新一覧でRecorderは010まで10/Contractは006まで6と確認、旧仮8/5を訂正し**32/4**に確定（12＋4＋10＋6）。まだ実行していないので成功加算ではない。両caller Testの独立resource `/monitoring/http-route-labels.txt` は現source/正常snapshot/fixture既SHA1777c471へ束縛してfresh classpathへcopyする。
 
+是正途中f1a source：8288正常six成功、8290真正32/4全成功（原ea4d0449）、8292当2四100到達（L68/M19/C2/B20）/PMD-CS0後、SB CWO_CLOSED_WITHOUT_OPENEDがrecord/totalTimeの二箇所で発生し未合格。source上は各lock取得直後のtry/finallyでunlockし、count/snapshot同形はraw0。警告を無視/抑制せず、validation/delegate操作と純粋状態更新・読取のlock区間を別private methodへ分離し、全lock helperを取得から開始する同値構造へ修正する。BG1696の未受入是正途中の追加静的検証手戻りとして分離記録、原post/exec/XML/静的ログを保持し同新source32/4/四100/staticを必要再認証する。max/単位/負入力/例外/oracleは変えない。
+
 まず新三件だけを同source六Jar/SDKでfresh JUnit実行（PG8284）。既Main変更0なら新限定観点のactual成功だけを記録し、旧source coverageと合算しない。既実装が累積histogram契約に違反したら修正前915/916起票→原因/最小是正→必要既12＋新3等を同新sourceで実行し四coverage100/静的/traceへ。snapshot/operator/fixtureの誤りは先に独立根拠と照合し、実際値へoracleを合わせない。
 
 未実行/失敗をPASSへしない。1756と公開manifestへ実command/JDK/OS/source/actual XML/終了/exec/hash/BUG/再試行費を記録する。現時点PT0/coverage未測定、正式1964-53/原190新受入0/工数null/QA051final/PTALT0/全actual HOLD不変。次Timer/counterの標準encoderへ継続、通常小区切り停止0。

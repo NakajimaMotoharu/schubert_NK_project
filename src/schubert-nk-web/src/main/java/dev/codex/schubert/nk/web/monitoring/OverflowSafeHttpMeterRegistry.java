@@ -97,17 +97,18 @@ public final class OverflowSafeHttpMeterRegistry extends SimpleMeterRegistry
     public void record(long amount, TimeUnit unit) {
       Objects.requireNonNull(unit, "timer unit");
       delegate.record(amount, unit);
-      if (amount >= 0) {
-        long nanoseconds = unit.toNanos(amount);
-        stateLock.lock();
-        try {
-          sampleCount++;
-          totalNanoseconds += nanoseconds;
-          for (int index = 0; index < BOUNDARIES.length; index++)
-            if (nanoseconds <= BOUNDARIES[index]) cumulativeBuckets[index]++;
-        } finally {
-          stateLock.unlock();
-        }
+      if (amount >= 0) recordObservation(unit.toNanos(amount));
+    }
+
+    private void recordObservation(long nanoseconds) {
+      stateLock.lock();
+      try {
+        sampleCount++;
+        totalNanoseconds += nanoseconds;
+        for (int index = 0; index < BOUNDARIES.length; index++)
+          if (nanoseconds <= BOUNDARIES[index]) cumulativeBuckets[index]++;
+      } finally {
+        stateLock.unlock();
       }
     }
 
@@ -157,9 +158,13 @@ public final class OverflowSafeHttpMeterRegistry extends SimpleMeterRegistry
     @Override
     public double totalTime(TimeUnit unit) {
       Objects.requireNonNull(unit, "timer unit");
+      return TimeUtils.nanosToUnit(cumulativeTotalNanoseconds(), unit);
+    }
+
+    private double cumulativeTotalNanoseconds() {
       stateLock.lock();
       try {
-        return TimeUtils.nanosToUnit(totalNanoseconds, unit);
+        return totalNanoseconds;
       } finally {
         stateLock.unlock();
       }
