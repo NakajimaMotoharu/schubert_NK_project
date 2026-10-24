@@ -1,5 +1,7 @@
 # 開発環境・toolchain構築記録
 
+2026-10-24公式構文工具（1737～1738/PG-D583）：Prometheus LTS3.13.5/linux-amd64公式archive SHA0388822ace519c5a3a8ef556a541ce1b536e21d872f82deded465bd27a5a0699をhttps://github.com/prometheus/prometheus/releases/download/v3.13.5/prometheus-3.13.5.linux-amd64.tar.gzからnew-only取得。toolchain/promtool-3.13.5-linux-amd64へpromtool/LICENSE/NOTICEだけ抽出、実binary SHA4e84296dc89ef03d856674d76d387f5ccc54a698136c2f0dc30ceef2286908ff/mode0700/実version0。PG8162原ca3c9318（tool準備source0c246）/PG8164原df069f5e（source941bd/設定syntax6ID・5process期待0/0/1/1/1）/PG8165原f18a6b5f独立post。再現・由来/command/全hash/環境とnew-only再発行防止は1738、binaryはGit外。公式TLS+掲載SHAでvendor署名認定ではない。daemon抽出/実サービス/VM/DB/Root/target通信0、公式schema範囲だけで実運用/全品質未受入。元tool/config/Java/POM/秘密/原保全物の変更0。
+
 2026-10-24 DLQ供給観測：既JDK25.0.4/Maven3.9.12/SDK4＋正常六compile API-only2をoffline再利用/導入取得0。sourcecfd8c12dd/237普通PT31suite/実59四100/CRC0・正常六compile/PT0・全1760Main/元1669byte不変/三POM・SDK・当五rule0。raw28同byte全理由/生成115の当直接契約/除外0、環境/command/time/hashは1690、actual操作0。
 
 2026-10-24 Integrity：既JDK25.0.4/Maven3.9.12/SDK4＋正常六compile API-only2をoffline再利用/導入取得0。source676b954e7/229普通PT30suite/実56四100/CRC0・正常六compile/PT0・全1757Main/元1669byte不変/三POM・SDK・当五rule0、全環境/command/time/hashは1688。工具draft文字列置換の構文不備は実行前pyflakesで拒否/未実行工具のみ是正→実0、Product再演0、raw28全理由/生成104/除外0・actual操作0。

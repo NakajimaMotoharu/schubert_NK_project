@@ -1,5 +1,7 @@
 # Module・Program一覧
 
+2026-10-24最新：1737公式Prometheus構文parser仕様/1738結果、tool-onlyLTS3.13.5/SHA固定/実version0、source941bd89d1/公式syntax6ID（実5process、DEBUG0/STD0/独立負例1×3）/元receipt独立post六改変拒否・静的0。1731の未実施公式schema工程だけを更新、元Java/POM/profile不変更/成功確認再演0・実daemon/VM/DB/target通信0。実endpoint/exporter/mode/容量/全451/正式1964-53/原190新受入0/工数未受入。
+
 2026-10-24最新：1735 Grafana配布data仕様/1736結果、sourcef8c8dbf88/新三template＋README・独立semantic8ID/96不正変異/静的0。全INI7section16key・DEBUG一loopbackPromsource・STD空かつprunefalse/delete空、既sourceを削除しない。actual binary/parser/account/鍵/起動/停止/容量/BOM全HOLD、Java/POM/旧config不変更・成功確認再演0。正式1964-53/原190新受入0/工数更新0。
 
 2026-10-24訂正（BUG1686/YKT1437/1734）：直下の1732/1733「C02未対応補完」は古い1520を基点にした誤分類。同4file/111契約は1553～1555ですでに完了しており、当12ID/265変異は追加確認/選定手戻り・元計画進捗0とする。元成果/見積/eventは残して追記訂正し、新受入0/正式/工数を増やさない。C06の同様古い不足は1556/1557の既補完を着手前検出・実行0。Web pool/Prom三dataは初導入Gitで非重複を確認し製造成果を保持する。

@@ -1,0 +1,278 @@
+{
+  "actualCredentialReads": 0,
+  "actualDaemonActions": 0,
+  "actualDatabaseActions": 0,
+  "actualEndpointsQualified": false,
+  "actualExit": 0,
+  "actualRetentionQualified": false,
+  "actualScrapes": 0,
+  "actualServiceStopQualified": false,
+  "actualVmActions": 0,
+  "begin": {
+    "allowedCommand": [
+      "<verified-promtool>",
+      "check",
+      "config",
+      "--syntax-only",
+      "<owned-public-copy>"
+    ],
+    "binarySha256": "4e84296dc89ef03d856674d76d387f5ccc54a698136c2f0dc30ceef2286908ff",
+    "environmentSerialized": false,
+    "inputHashes": {
+      "evidence/01_PT/018_NK-OPS-001/1737_Prometheus公式構文parser_単体テスト仕様書.md": "3c563adaff18e2c56e4a88ae9c0096b85ec97c136a086096fc4af1340e2401a6",
+      "src/deployment/monitoring/prometheus/debug.yml.template": "df964a0793af23bc61d3531fa516d0dd4787a5a5595cda64e96d3f0e01f43f6a",
+      "src/deployment/monitoring/prometheus/standard.yml.template": "52e6254d2eb82f4f3072f8c5a96a2b21b2fee350480a8ebe3f4018f53d8716e8"
+    },
+    "invocation": {
+      "actualPythonCommand": [
+        "python3",
+        "-B",
+        "tools/quality/pg8164_promtool_config_pt.py"
+      ],
+      "arbitraryArgumentsRecorded": false,
+      "entrypointPath": "tools/quality/pg8164_promtool_config_pt.py",
+      "entrypointSha256": "1eb6d775b0c64580b6d96df998d7a2e3b47e960839becbbc1782bf9d7cb2e485",
+      "helperPath": "tools/quality/host_tool_invocation.py",
+      "helperSha256": "85d616a3db4ff47f4c95ae2e0dd57954bc2b09f28b8f2a685b986e5621545c46",
+      "libraryPath": "tools/quality/pg8164_promtool_config_pt.py",
+      "librarySha256": "1eb6d775b0c64580b6d96df998d7a2e3b47e960839becbbc1782bf9d7cb2e485",
+      "loadedProjectPythonSources": {
+        "tools/quality/host_tool_invocation.py": "85d616a3db4ff47f4c95ae2e0dd57954bc2b09f28b8f2a685b986e5621545c46",
+        "tools/quality/pg8162_promtool_prepare.py": "ecc2ed51d8335038f0309c85ad581e62a29ed11d3781e133e85df0d15887deed",
+        "tools/quality/pg8164_promtool_config_pt.py": "1eb6d775b0c64580b6d96df998d7a2e3b47e960839becbbc1782bf9d7cb2e485"
+      },
+      "provenance": "OBSERVED_SYS_ARGV_AND_ORIG_ARGV_NOT_RECONSTRUCTED"
+    },
+    "originalPreparationSha256": "ca3c93186503b91ff14183b1759b7c8b1e0e33fc73d16685974a8ebd2a01ecae",
+    "pid": 368936,
+    "schemaInvalidFixtureExpectedExit": 1,
+    "source": "941bd89d15da0d37c2023c7ce9536b9845311779",
+    "startUTC": "2026-10-24T01:10:37.681229+00:00"
+  },
+  "branch": "dev-foundation",
+  "branchCoverage": null,
+  "bugs": [],
+  "cases": [
+    {
+      "actualExit": 0,
+      "binarySha256": "4e84296dc89ef03d856674d76d387f5ccc54a698136c2f0dc30ceef2286908ff",
+      "expectedExit": 0,
+      "operation": "READ_ORIGINAL_ACTUAL_VERSION_CHECKSUM_RECEIPT_NO_REEXECUTION",
+      "originalPreparationSha256": "ca3c93186503b91ff14183b1759b7c8b1e0e33fc73d16685974a8ebd2a01ecae",
+      "result": "PASS",
+      "testId": "PROMTOOL001"
+    },
+    {
+      "actualExit": 0,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/promtool-3.13.5-linux-amd64/promtool",
+        "check",
+        "config",
+        "--syntax-only",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg8164-promtool-config-pt-v1/debug.yml"
+      ],
+      "endUTC": "2026-10-24T01:10:37.708757+00:00",
+      "expectedExit": 0,
+      "input": {
+        "productionPath": "src/deployment/monitoring/prometheus/debug.yml.template",
+        "sha256": "df964a0793af23bc61d3531fa516d0dd4787a5a5595cda64e96d3f0e01f43f6a"
+      },
+      "result": "PASS",
+      "startUTC": "2026-10-24T01:10:37.684735+00:00",
+      "stderr": "",
+      "stdout": "Checking /home/mini/codex/project1/work/pgpt-runs/PG379/pg8164-promtool-config-pt-v1/debug.yml\n SUCCESS: /home/mini/codex/project1/work/pgpt-runs/PG379/pg8164-promtool-config-pt-v1/debug.yml is valid prometheus config file syntax\n\n",
+      "testId": "PROMTOOL002",
+      "timeoutSeconds": 30
+    },
+    {
+      "actualExit": 0,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/promtool-3.13.5-linux-amd64/promtool",
+        "check",
+        "config",
+        "--syntax-only",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg8164-promtool-config-pt-v1/standard.yml"
+      ],
+      "endUTC": "2026-10-24T01:10:37.733468+00:00",
+      "expectedExit": 0,
+      "input": {
+        "productionPath": "src/deployment/monitoring/prometheus/standard.yml.template",
+        "sha256": "52e6254d2eb82f4f3072f8c5a96a2b21b2fee350480a8ebe3f4018f53d8716e8"
+      },
+      "result": "PASS",
+      "startUTC": "2026-10-24T01:10:37.710392+00:00",
+      "stderr": "",
+      "stdout": "Checking /home/mini/codex/project1/work/pgpt-runs/PG379/pg8164-promtool-config-pt-v1/standard.yml\n SUCCESS: /home/mini/codex/project1/work/pgpt-runs/PG379/pg8164-promtool-config-pt-v1/standard.yml is valid prometheus config file syntax\n\n",
+      "testId": "PROMTOOL003",
+      "timeoutSeconds": 30
+    },
+    {
+      "actualExit": 1,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/promtool-3.13.5-linux-amd64/promtool",
+        "check",
+        "config",
+        "--syntax-only",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg8164-promtool-config-pt-v1/unknown-field.yml"
+      ],
+      "endUTC": "2026-10-24T01:10:37.758303+00:00",
+      "expectedExit": 1,
+      "input": {
+        "independentFixture": {
+          "global": {
+            "scrape_interval": "15s",
+            "scrape_timeout": "5s"
+          },
+          "unregistered_root_property": true
+        },
+        "sha256": "717c19cf148598a35dbbff371fb4c502d76cd55dfe7ed2fe56f41c70a22f4d13"
+      },
+      "result": "PASS",
+      "startUTC": "2026-10-24T01:10:37.735294+00:00",
+      "stderr": "  FAILED: parsing YAML file /home/mini/codex/project1/work/pgpt-runs/PG379/pg8164-promtool-config-pt-v1/unknown-field.yml: yaml: unmarshal errors:\n  line 1: field unregistered_root_property not found in type config.plain\n",
+      "stdout": "Checking /home/mini/codex/project1/work/pgpt-runs/PG379/pg8164-promtool-config-pt-v1/unknown-field.yml\n\n",
+      "testId": "PROMTOOL004",
+      "timeoutSeconds": 30
+    },
+    {
+      "actualExit": 1,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/promtool-3.13.5-linux-amd64/promtool",
+        "check",
+        "config",
+        "--syntax-only",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg8164-promtool-config-pt-v1/timeout-greater-interval.yml"
+      ],
+      "endUTC": "2026-10-24T01:10:37.780473+00:00",
+      "expectedExit": 1,
+      "input": {
+        "independentFixture": {
+          "global": {
+            "scrape_interval": "15s",
+            "scrape_timeout": "16s"
+          },
+          "scrape_configs": []
+        },
+        "sha256": "ce6adc179438faf7be36dda3347fbfd6fc83e58a90b1ceab0d9c68d47fd60c20"
+      },
+      "result": "PASS",
+      "startUTC": "2026-10-24T01:10:37.760117+00:00",
+      "stderr": "  FAILED: parsing YAML file /home/mini/codex/project1/work/pgpt-runs/PG379/pg8164-promtool-config-pt-v1/timeout-greater-interval.yml: global scrape timeout greater than scrape interval\n",
+      "stdout": "Checking /home/mini/codex/project1/work/pgpt-runs/PG379/pg8164-promtool-config-pt-v1/timeout-greater-interval.yml\n\n",
+      "testId": "PROMTOOL005",
+      "timeoutSeconds": 30
+    },
+    {
+      "actualExit": 1,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/promtool-3.13.5-linux-amd64/promtool",
+        "check",
+        "config",
+        "--syntax-only",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg8164-promtool-config-pt-v1/duplicate-job.yml"
+      ],
+      "endUTC": "2026-10-24T01:10:37.803772+00:00",
+      "expectedExit": 1,
+      "input": {
+        "independentFixture": {
+          "scrape_configs": [
+            {
+              "job_name": "same-job",
+              "static_configs": [
+                {
+                  "targets": [
+                    "127.0.0.1:8081"
+                  ]
+                }
+              ]
+            },
+            {
+              "job_name": "same-job",
+              "static_configs": [
+                {
+                  "targets": [
+                    "127.0.0.1:8091"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        "sha256": "86ea7dba125ca55c0f8118476689bcf3a478b8d94c1eed7026ff219a47499c76"
+      },
+      "result": "PASS",
+      "startUTC": "2026-10-24T01:10:37.782117+00:00",
+      "stderr": "  FAILED: parsing YAML file /home/mini/codex/project1/work/pgpt-runs/PG379/pg8164-promtool-config-pt-v1/duplicate-job.yml: found multiple scrape configs with job name \"same-job\"\n",
+      "stdout": "Checking /home/mini/codex/project1/work/pgpt-runs/PG379/pg8164-promtool-config-pt-v1/duplicate-job.yml\n\n",
+      "testId": "PROMTOOL006",
+      "timeoutSeconds": 30
+    }
+  ],
+  "classCoverage": null,
+  "coverageApplicability": "CONFIGURATION_DATA_NOT_EXECUTABLE_JAVA_NO_EXCLUSION",
+  "effortPercent": null,
+  "endUTC": "2026-10-24T01:10:37.883723+00:00",
+  "environment": {
+    "os": "Linux-7.0.0-38-generic-x86_64-with-glibc2.43",
+    "parserMode": "check config --syntax-only",
+    "promtool": "3.13.5 linux-amd64",
+    "python": "3.14.4"
+  },
+  "errors": 0,
+  "exactOneInvocationPerSyntaxCase": true,
+  "failed": 0,
+  "fixtureHashes": {
+    "debug.yml": "df964a0793af23bc61d3531fa516d0dd4787a5a5595cda64e96d3f0e01f43f6a",
+    "duplicate-job.yml": "86ea7dba125ca55c0f8118476689bcf3a478b8d94c1eed7026ff219a47499c76",
+    "standard.yml": "52e6254d2eb82f4f3072f8c5a96a2b21b2fee350480a8ebe3f4018f53d8716e8",
+    "timeout-greater-interval.yml": "ce6adc179438faf7be36dda3347fbfd6fc83e58a90b1ceab0d9c68d47fd60c20",
+    "unknown-field.yml": "717c19cf148598a35dbbff371fb4c502d76cd55dfe7ed2fe56f41c70a22f4d13"
+  },
+  "formalUpdated": false,
+  "inputHashes": {
+    "evidence/01_PT/018_NK-OPS-001/1737_Prometheus公式構文parser_単体テスト仕様書.md": "3c563adaff18e2c56e4a88ae9c0096b85ec97c136a086096fc4af1340e2401a6",
+    "src/deployment/monitoring/prometheus/debug.yml.template": "df964a0793af23bc61d3531fa516d0dd4787a5a5595cda64e96d3f0e01f43f6a",
+    "src/deployment/monitoring/prometheus/standard.yml.template": "52e6254d2eb82f4f3072f8c5a96a2b21b2fee350480a8ebe3f4018f53d8716e8"
+  },
+  "invocation": {
+    "actualPythonCommand": [
+      "python3",
+      "-B",
+      "tools/quality/pg8164_promtool_config_pt.py"
+    ],
+    "arbitraryArgumentsRecorded": false,
+    "entrypointPath": "tools/quality/pg8164_promtool_config_pt.py",
+    "entrypointSha256": "1eb6d775b0c64580b6d96df998d7a2e3b47e960839becbbc1782bf9d7cb2e485",
+    "helperPath": "tools/quality/host_tool_invocation.py",
+    "helperSha256": "85d616a3db4ff47f4c95ae2e0dd57954bc2b09f28b8f2a685b986e5621545c46",
+    "libraryPath": "tools/quality/pg8164_promtool_config_pt.py",
+    "librarySha256": "1eb6d775b0c64580b6d96df998d7a2e3b47e960839becbbc1782bf9d7cb2e485",
+    "loadedProjectPythonSources": {
+      "tools/quality/host_tool_invocation.py": "85d616a3db4ff47f4c95ae2e0dd57954bc2b09f28b8f2a685b986e5621545c46",
+      "tools/quality/pg8162_promtool_prepare.py": "ecc2ed51d8335038f0309c85ad581e62a29ed11d3781e133e85df0d15887deed",
+      "tools/quality/pg8164_promtool_config_pt.py": "1eb6d775b0c64580b6d96df998d7a2e3b47e960839becbbc1782bf9d7cb2e485"
+    },
+    "provenance": "OBSERVED_SYS_ARGV_AND_ORIG_ARGV_NOT_RECONSTRUCTED"
+  },
+  "javaProductTestsExecuted": 0,
+  "methodCoverage": null,
+  "newAccepted": 0,
+  "originalPreparation": {
+    "binarySha256": "4e84296dc89ef03d856674d76d387f5ccc54a698136c2f0dc30ceef2286908ff",
+    "path": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG8162-promtool-prepare-v1/manifest.json",
+    "preparationToolSource": "0c24698fce3aa5ba1dd0cdb67e030fd9a9e39d9a",
+    "sha256": "ca3c93186503b91ff14183b1759b7c8b1e0e33fc73d16685974a8ebd2a01ecae",
+    "versionRerun": false
+  },
+  "publicArtifactDownloadsByPt": 0,
+  "referencedSecretOrRuleFilesQualified": false,
+  "serviceDiscoveryInvoked": false,
+  "skipped": 0,
+  "source": "941bd89d15da0d37c2023c7ce9536b9845311779",
+  "startUTC": "2026-10-24T01:10:37.681229+00:00",
+  "statementCoverage": null,
+  "syntaxProcesses": 5,
+  "targetNetworkActions": 0,
+  "tests": 6,
+  "whole451Accepted": false
+}
