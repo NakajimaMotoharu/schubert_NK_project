@@ -1,5 +1,7 @@
 # Module・Program一覧
 
+2026-10-25追加trace：PG-D623/1829-30、source28befbf2c、WebDbPoolMetricBinding.prepareContext/WebNativeRuntime nullable所有配線→WEBPOOLB011～015/WEBMHTTP021新6＋必要旧30=actual36/2。8868正常six→8870原3ac2644d→8871原c1ef8c75三raw理由/currentXML→8872原177a2494三Main四100 L58M11C3B8/CS-SB0/PMD raw3評価済/未分類0→8874原8dfa48d3全1834/二変更/229owner/五edge0/旧全source・Test本文保持/七protocol二owner反例。caller8873原8fc80c4c静的1/PMD未分類13/CS-SB0、動的/native/coverage UNRUN_HOLD/null、元30秒/phase cursor保持はPG source確認のみ。全hash1830/新BUG0、正式/全451は別未完。
+
 2026-10-25追加trace：PG-D622/1827-28、source0f065c63f、ApiDbPoolMetricBinding.prepareContextとApiProcessMain所有配線→新APIPOOLB011～015/APIMHTTP021六件＋必要旧30=actual36/2。8854正常six→8856原bc2fc81f→8857原ed206b2c三raw理由/currentXML→8858原05b78b6b三Main四100 L58M11C3B8/CS-SB0/PMD raw3評価済/未分類0→8862原0ec61b72全1834/二変更/228owner/五edge0・七protocol二owner反例/旧本文保持。caller8859原d230ac88は静的exit1/PMD未分類2・CS-SB0、PG/compileのみで動的/native・coverageはUNRUN_HOLD/null。BUG1720 tool限定close/全hash1828、実経路/全451・正式は未完。
 
 2026-10-25追加trace：PG-D621/1825-26、source1e4f40498、新Api/WebDbPoolMetricBinding ctor/refresh/snapshot→APIPOOLB-WEBPOOLB001～010＋APIMHTTP-WEBMHTTP020=新22/必要旧38=actual60/4。8844原fafa64a1→8845原cf3d5cf4既collector各三raw理由/current XML→8846原365f0a72 Binding2-collector2-HTTP2六Main四100 L104M18C6B16/CS-SB0/PMD raw6保持・未分類0/七反例→8848原0c669023全1834/旧1832同byte/227owner/五edge0・六role六protocol六field反例/旧HTTP19本文保持。8849原dee908db SDKadapter/十metadata反例、BUG1719/全hash1826。typed getterのみ・NoConnection/NoControl/NoClose、実Pool/Root/manager/native/全451・正式は未完。
