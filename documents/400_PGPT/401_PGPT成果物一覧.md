@@ -1,5 +1,7 @@
 # PGPT成果物一覧・進捗
 
+2026-10-24最新：1743/1744、MQ圧力実SDK新6＋必要既8=14/2全成功、実2四100（L47/M10/C2/B25）・CRC0/一exec・新対象PMD/CS/SB/missing各0、生成record9method/7反例。ProductionJava/POM元e196不変更・実broker/Root等HOLD/正式1964-53・原190新受入0・工数null。補助手順BUG1690/YKT1441の元lint逸脱を保全して不要bindingだけ是正、PG8193が四工具実0/差分限定を確認し限定CLOSED。
+
 2026-10-24最新：1741/1742、四Web Recorder実Prometheus SDK新8＋必要既42＝50/7全成功、当実15四100（L288/M71/C15/B117）/CRC0/単一exec・独立7反例。製品Java/POMはe196同byte、既normalcompile/静的証跡の適用範囲を限定して再結合、新compile/staticjobを捏造しない。BUG1689/YKT1440のfixture同梱漏れは先行起票→修正0567be8fd→真正再試験で限定CLOSED、原49/50終了1保持。正式1964-53/原190新受入0/工数null・全actualHOLD不変更。
 
 2026-10-24最新：1739 SDK依存準備/1740結果、source69204dd13/公式registry1.17.1/client1.7.0新10Jar＋既5pin、全checksum/依存directgraph/1824class名重複0・新8173独立7反例/静的0。BUG1688prefixsource guardを00581f4b7でfull40へ是正/旧post保持。工具準備のみ・製品PT/製造/正式受入0、Production Java/POM/旧M2不変更・target init/実操作0-HOLD。次四Web Recorderのin-memory実SDK Gauge/Counter適合性を別ordinary PTへ。
