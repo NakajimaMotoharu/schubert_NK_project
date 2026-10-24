@@ -16,6 +16,8 @@ import java.util.function.Supplier;
  * registry lifetime, target process access or endpoint ownership.
  */
 public final class ApiJvmMetrics {
+  private static final int BINDER_COUNT = 4;
+
   public ApiJvmMetrics() {}
 
   /** The caller owns the borrowed registry, including partial registration after a binder fails. */
@@ -36,7 +38,8 @@ public final class ApiJvmMetrics {
     if (!detailed) return;
     if (source.isClosed()) throw new IllegalStateException("metric registry closed");
     var binders = List.copyOf(Objects.requireNonNull(factory.get(), "JVM binders"));
-    if (binders.size() != 4) throw new IllegalArgumentException("invalid JVM binder count");
+    if (binders.size() != BINDER_COUNT)
+      throw new IllegalArgumentException("invalid JVM binder count");
     for (var binder : binders) binder.bindTo(source);
   }
 

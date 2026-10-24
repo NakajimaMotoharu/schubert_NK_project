@@ -342,8 +342,8 @@ class ApiJvmMetricsTest {
 
   @Test
   void apijvm013SameInstanceUsesDistinctRegistryOwners() {
-    try (var first = new Registry();
-        var other = new Registry()) {
+    var first = new Registry();
+    try (var other = new Registry()) {
       installer.bind(first, "DEBUG");
       installer.bind(other, "DEBUG");
       namespaces(first);
@@ -354,6 +354,8 @@ class ApiJvmMetricsTest {
       assertTrue(first.isClosed());
       namespaces(other);
       assertFalse(other.isClosed());
+    } finally {
+      first.close();
     }
   }
 
