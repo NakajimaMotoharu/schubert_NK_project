@@ -1,5 +1,7 @@
 # Module・Program一覧
 
+2026-10-25追加trace：NK-OPS-001/PG-D636/1868-69、ApiObservationContext prepare/ctor/initialize/rejectStopping/metrics/close→OBSCTX001～026。RD171/UI252/SS311332342351、sourcecb91bc2ec。9154v3 normal六→9156hostv4原cc25b55b実26/1→9158原f2729d1e全一MainL58M7C1B20四100/CS-SB0・PMD4個別根拠→9160原33d6811f全1842・旧1841同byte/246owner/五arch0/15反例。他25case/fixture保持・内部field renameのみを独立照合、BUG1736～38/横展開1869。actual caller stop remainder供給/native/全451は別未受入HOLD。
+
 2026-10-25追加trace：NK-OPS-001/PG-D635/1864-65、OwnedApiObservationWorker ctor/start/run/requestStop/awaitStopped→OBSOWN001～044。RD171/UI252/SS311332342351、sourcefdc229c9a。9132v4 normal六→9134v2原af479ed6 actual44/1→9136原24632ab8全一MainL87M7C1B46四100/CS-SB0・PMD20個別判断→9138原68dd7944全1841/旧1840同byte/244owner/五arch0。元予算/一回start/UNKNOWN永久保持・私有Thread回収を確認し、actual caller/Pool/SDK/停止残期限/native/全451は別未受入HOLD。障害4件/全横展開/独立compiler・算術canaryは1865。
 
 2026-10-25追加trace：NK-OPS-001/PG-D634/1862-63、ApiOutboxObservationPump ctor/create/sampleIfDue/requestStop/isQuiescent/get→OUTBOXPUMP001～032。RD171/UI252/SS311332342351、sourcef82e3e1ee。9118v2 normal六→9120原0258aba1新32/1→9122原d1393a7f全一MainL50M6C1B31四100/CS-SB0・PMD3個別判断→9124原e24df088全1840/旧1839同byte/242owner/五arch0/14metadata反例。v1/v2Main同byte・Unit差だけ、旧buildはPT0/転用0。actual worker/caller/Pool-stop/native/全451は別未受入HOLD。
