@@ -99,11 +99,16 @@ public final class ApiReadOnlyObservationAttempt {
     Throwable primary = failures.getFirst();
     for (Throwable secondary : failures)
       TemporaryInfrastructureException.attachSecondary(primary, secondary);
+    if (primary instanceof SQLException sql) {
+      TemporaryInfrastructureException.preserveFatal(sql);
+      throw sql;
+    }
+    if (primary instanceof RuntimeException runtime) {
+      TemporaryInfrastructureException.preserveFatal(runtime);
+      throw runtime;
+    }
+    // The remaining captured domain is Error; the classifier directly throws that same fatal.
     TemporaryInfrastructureException.preserveFatal(primary);
-    if (primary instanceof SQLException sql) throw sql;
-    // The captured domain is SQLException/RuntimeException/Error; preserveFatal already throws
-    // Error.
-    throw (RuntimeException) primary;
   }
 
   /** Nonblocking status only; no resource, provider text or lifecycle handle is exposed. */
