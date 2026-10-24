@@ -13,6 +13,7 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.BooleanSupplier;
 import java.util.function.Consumer;
+import java.util.function.LongSupplier;
 
 /**
  * Stop notification only; outer main owns acquisition/drain/close. Hook never closes a provider
@@ -24,7 +25,17 @@ final class ApiProcessLifetime implements AutoCloseable {
   private final CountDownLatch finished = new CountDownLatch(1);
   private final Thread owner = Thread.currentThread();
   private final Thread hook = new Thread(this::shutdown, "api-stop-owner");
+  private final ApiStopBudget stopBudget;
   private volatile boolean installed;
+
+  ApiProcessLifetime() {
+    this(System::nanoTime);
+  }
+
+  // 1872/PG-D638: resource-free clock port; normal production uses only the fixed constructor.
+  ApiProcessLifetime(LongSupplier nanos) {
+    stopBudget = new ApiStopBudget(nanos);
+  }
 
   void install() {
     Runtime.getRuntime().addShutdownHook(hook);
@@ -37,6 +48,12 @@ final class ApiProcessLifetime implements AutoCloseable {
 
   void stop() {
     retainedStopping.set(true);
+    stopBudget.begin();
+  }
+
+  /** Existing first-notification budget only; no new deadline at a later owner's close. */
+  long remainingStopNanos() {
+    return stopBudget.remainingNanos();
   }
 
   void fail() {
@@ -110,9 +127,9 @@ final class ApiProcessLifetime implements AutoCloseable {
 
   @Override
   public void close() {
-    stop();
     // Invoked only after all admitted scopes have returned/unwound, including failed cleanup.
     try {
+      stop();
       if (installed) {
         installed = false;
         try {

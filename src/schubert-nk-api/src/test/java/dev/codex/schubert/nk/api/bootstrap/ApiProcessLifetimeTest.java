@@ -57,6 +57,190 @@ final class ApiProcessLifetimeTest {
     }
   }
 
+  /** 1872: new selected methods below do not install hooks or invoke this historical TERM case. */
+  @Test
+  void lifeBudget001() {
+    assertThrows(NullPointerException.class, () -> new ApiProcessLifetime(null));
+  }
+
+  @Test
+  void lifeBudget002() {
+    var reads = new AtomicInteger();
+    try (var lifetime =
+        new ApiProcessLifetime(
+            () -> {
+              reads.incrementAndGet();
+              return 0;
+            })) {
+      assertFalse(lifetime.stopping());
+      assertThrows(IllegalStateException.class, lifetime::remainingStopNanos);
+      assertEquals(0, reads.get());
+    }
+    assertEquals(1, reads.get());
+  }
+
+  @Test
+  void lifeBudget003() {
+    var time = new java.util.concurrent.atomic.AtomicLong(100);
+    var reads = new AtomicInteger();
+    try (var lifetime =
+        new ApiProcessLifetime(
+            () -> {
+              reads.incrementAndGet();
+              return time.get();
+            })) {
+      lifetime.stop();
+      assertTrue(lifetime.stopping());
+      time.set(109);
+      lifetime.stop();
+      assertEquals(1, reads.get());
+      assertEquals(59_999_999_991L, lifetime.remainingStopNanos());
+    }
+    assertEquals(2, reads.get());
+  }
+
+  @Test
+  void lifeBudget004() {
+    try (var lifetime = new ApiProcessLifetime(() -> 0)) {
+      lifetime.fail();
+      assertTrue(lifetime.stopping());
+      assertEquals(60_000_000_000L, lifetime.remainingStopNanos());
+      assertEquals(
+          "API runtime unavailable",
+          assertThrows(
+                  IOException.class,
+                  () ->
+                      lifetime.await(
+                          () -> {
+                            throw new AssertionError("stopped health");
+                          }))
+              .getMessage());
+    }
+  }
+
+  @Test
+  void lifeBudget005() {
+    var time = new java.util.concurrent.atomic.AtomicLong();
+    var reads = new AtomicInteger();
+    try (var lifetime =
+        new ApiProcessLifetime(
+            () -> {
+              reads.incrementAndGet();
+              return time.get();
+            })) {
+      lifetime.close();
+      time.set(29);
+      lifetime.close();
+      lifetime.shutdown(); // Owner itself never waits; no hook is installed.
+      assertEquals(59_999_999_971L, lifetime.remainingStopNanos());
+      assertEquals(2, reads.get());
+    }
+  }
+
+  @Test
+  void lifeBudget006() {
+    for (RuntimeException primary :
+        List.of(new IllegalStateException("clock"), new NullPointerException("clock contract"))) {
+      var reads = new AtomicInteger();
+      try (var lifetime =
+          new ApiProcessLifetime(
+              () -> {
+                reads.incrementAndGet();
+                throw primary;
+              })) {
+        assertSame(primary, assertThrows(primary.getClass(), lifetime::stop));
+        assertTrue(lifetime.stopping());
+        assertEquals(0, lifetime.remainingStopNanos());
+        lifetime.stop();
+        assertEquals(1, reads.get());
+      }
+    }
+  }
+
+  @Test
+  void lifeBudget007() throws Exception {
+    var fatal = new AssertionError("clock");
+    var lifetime =
+        new ApiProcessLifetime(
+            () -> {
+              throw fatal;
+            });
+    assertSame(fatal, assertThrows(AssertionError.class, lifetime::close));
+    assertTrue(lifetime.stopping());
+    assertEquals(0, lifetime.remainingStopNanos());
+    try (var executor = java.util.concurrent.Executors.newSingleThreadExecutor()) {
+      var finished = executor.submit(lifetime::shutdown);
+      try {
+        finished.get(3, TimeUnit.SECONDS); // close's finally must already have notified this owner.
+      } finally {
+        lifetime.close(); // Fixture-only fallback if the new finally contract fails.
+      }
+    }
+  }
+
+  @Test
+  void lifeBudget008() {
+    var reads = new AtomicInteger();
+    try (var lifetime =
+        new ApiProcessLifetime(
+            () -> {
+              reads.incrementAndGet();
+              return 0;
+            })) {
+      assertEquals(
+          "API runtime unavailable",
+          assertThrows(IOException.class, () -> lifetime.await(() -> false)).getMessage());
+      assertTrue(lifetime.stopping());
+      assertEquals(60_000_000_000L, lifetime.remainingStopNanos());
+    }
+    assertEquals(2, reads.get());
+  }
+
+  @Test
+  void lifeBudget009() throws Exception {
+    var entered = new CountDownLatch(1);
+    var release = new CountDownLatch(1);
+    var reads = new AtomicInteger();
+    try (var lifetime =
+            new ApiProcessLifetime(
+                () -> {
+                  reads.incrementAndGet();
+                  entered.countDown();
+                  try {
+                    assertTrue(release.await(5, TimeUnit.SECONDS));
+                  } catch (InterruptedException interrupted) {
+                    Thread.currentThread().interrupt();
+                    throw new AssertionError(interrupted);
+                  }
+                  return 0;
+                });
+        var executor = java.util.concurrent.Executors.newFixedThreadPool(2)) {
+      var first = executor.submit(lifetime::stop);
+      java.util.concurrent.Future<?> second;
+      try {
+        assertTrue(entered.await(5, TimeUnit.SECONDS));
+        assertTrue(lifetime.stopping()); // Notification precedes the clock port, not its return.
+        second = executor.submit(lifetime::stop);
+      } finally {
+        release.countDown();
+      }
+      first.get(5, TimeUnit.SECONDS);
+      second.get(5, TimeUnit.SECONDS);
+      assertEquals(1, reads.get());
+      assertEquals(60_000_000_000L, lifetime.remainingStopNanos());
+    }
+    assertEquals(2, reads.get());
+  }
+
+  @Test
+  void lifeBudget010() {
+    try (var lifetime = new ApiProcessLifetime()) {
+      lifetime.stop();
+      long remaining = lifetime.remainingStopNanos();
+      assertTrue(remaining >= 0 && remaining <= 60_000_000_000L);
+    }
+  }
+
   @Test
   void ready006ActualJvmTermWaitsMainOwnerAndNeverSelfExits() throws Exception {
     var command = new java.util.ArrayList<String>();
