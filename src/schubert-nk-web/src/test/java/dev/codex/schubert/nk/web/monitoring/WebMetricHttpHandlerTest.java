@@ -60,7 +60,9 @@ final class WebMetricHttpHandlerTest {
             "DEBUG",
             registry -> {
               var value = new double[] {7.5};
-              Gauge.builder("nk_metric_http_fixture", value, state -> state[0]).register(registry);
+              Gauge.builder("nk_db_pool_connections", value, state -> state[0])
+                  .tags("service", "WEB", "state", "active")
+                  .register(registry);
               return value;
             })) {
       context.initialize();
@@ -69,7 +71,7 @@ final class WebMetricHttpHandlerTest {
       handler.handle(first);
       String body = first.output.toString(StandardCharsets.UTF_8);
       assertTrue(body.startsWith(READY + "1\n"));
-      assertTrue(body.contains("nk_metric_http_fixture{service=\"WEB\"} 7.5\n"));
+      assertTrue(body.contains("nk_db_pool_connections{service=\"WEB\",state=\"active\"} 7.5\n"));
       assertTrue(body.contains("jvm_memory_used_bytes"));
       assertEquals(body.getBytes(StandardCharsets.UTF_8).length, first.length);
       assertEquals(200, first.status);
@@ -83,7 +85,7 @@ final class WebMetricHttpHandlerTest {
           second
               .output
               .toString(StandardCharsets.UTF_8)
-              .contains("nk_metric_http_fixture{service=\"WEB\"} 9.5\n"));
+              .contains("nk_db_pool_connections{service=\"WEB\",state=\"active\"} 9.5\n"));
       assertEquals(9.5, context.bindings().orElseThrow()[0]);
     }
   }
