@@ -1,5 +1,7 @@
 # Module・Program一覧
 
+2026-10-24追加trace：ApiMetricContext<T>/WebMetricContext<T>のctor二種/initialize/bindings/render/rejectStopping/requireRunning/close/default factory→APIMCTX/WEBMCTX001～026/1815-1816/PG-D617/RD171/UI252/SS311342351。sourcef1b570e45/8740正常six→8742原5510543f新52/2→8744原967efc86当2四100 L122M18C2B43/static0/七反例→8746原a18b0741全1830/217owner/旧1828同byte/五edge0・六role八protocol十field反例。caller捕捉後SDK init/metadata強保持/STD未取得/stop競合・再入未確認/partial owner/明示逆closeの構造依存だけ受入、実parent/defaultHTTP/全catalog・観測鮮度/全451/正式・工数は未受入、旧成功転用/確認再演0。
+
 2026-10-24追加trace：既Api/WebCustomMetricPayloadのrender4引数/新STANDARD_MODEを1812→1813/PG-D616/RD171/UI252/SS311342351へ。source3613b2742/newMain0・変更Main2/新APIFULL-WEBFULL各12＋必要既APIPAY-WEBPAY各13=actual50/2。8722正常six→8724原8e87d9d6→8726原c26ae391当2四100 L25M6C2B15/static0/七反例→8728原28d74c1c全1828/213owner・当2以外旧1826同byte/五edge0・六role十field反例/旧3arg本文・旧26Test本文・旧管理server二つ不変。STD両詳細未読/DEBUG legacy-custom-standard順/primary/null保持/借用・並行・close境界だけ受入、実endpoint/起動/whole451/正式・工数は未受入、新50として二重計上0。
 
 2026-10-24追加trace：WebStandardMetricSource/BatchStandardMetricSourceのctor/bind/scrape/detailed/closeとfactory-registration-GC保持lambda（実18method）→WEBHOST/BATCHHOST001～016/1810-1811/PG-D615/RD171/UI252/SS311351。source4c97764a9/8705 import四file-12反例→8710正常six→8712原662cdf31新32/2→8714原03215142当2四100 L80M18C2B32/static0/七反例→8716原9dae7279全1828/213owner・旧1826同byte/五edge0・六role/六field/八descriptor反例。各既mode/固定role/private registry/STD未取得/GC保持先行/逆close・失敗owner/latch直列化だけ受入、BUG1714/YKT1465元失敗/全対象1811、正式endpoint/whole451/正式・工数は未受入。
