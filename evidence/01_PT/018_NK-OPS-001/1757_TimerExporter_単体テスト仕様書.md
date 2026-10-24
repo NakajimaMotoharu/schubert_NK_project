@@ -1,5 +1,11 @@
 # 1757 Timer標準text encoder PG/PT仕様
 
+## 現行訂正（BUG1697/YKT1448、元開始見積3-5-9/cap10不変更）
+
+canonical SS311/411再照合で、共用Bootstrapは固定起動責務に限定され、新monitoring formatter追加は不適合と判明。初稿のshared配置案は撤回し、上位文書を広げずAPI Summary/秒専用ApiDurationMetricExporter・Web Timer/ns→秒専用WebDurationMetricExporterへ是正する。Bootstrap monitoring package/二外部依存を退役、公式SDK依存は各appへ明示。app相互依存/新module/業務record共有/実HTTP/Root等は追加しない。以下初稿/既source1aの52成功・四100は履歴として保存し、配置受入へ流用しない。
+
+独立goldenは維持しclass/package/入力API参照だけ追随する。SUMENC24はAPI監視packageへ、TIMERENC16はWeb監視packageへ移動、API6/Web6同一源で再試験。SourceKindは役割固定appへ分けるので未受入内部enumを廃止し、TIMERENC016は旧型factory観点を廃止履歴として残してWeb checked IOの固定message/cause/borrowed確認へ置換（外部oracle弱化ではない、既API IO期待値不変更）。同source **52/4** と両app exporter全branch/四100/静的/六artifact・責務guardを実行する。BUG1697/YKT1448は全対象/変異guardと結合するまでOPEN。
+
 NK-OPS-001/RD171/UI252/SS311351、1754/1756を前提、WBS-P018-09/C07、group1984開始3/5/9pp・cap10固定。現既資格candidate f02fae44e、全ownjob終端/未配備、actual VM/Root/DB/endpoint等HOLD。後続索引はSummary1754/1753で、Timer標準textは未実装を確認済み。
 
 ## PG-D594・今回の一経路
