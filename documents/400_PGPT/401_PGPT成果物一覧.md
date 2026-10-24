@@ -1,5 +1,7 @@
 # PGPT成果物一覧・進捗
 
+2026-10-24訂正（BUG1686/YKT1437/1734）：直下の1732/1733「C02未対応補完」は古い1520を基点にした誤分類。同4file/111契約は1553～1555ですでに完了しており、当12ID/265変異は追加確認/選定手戻り・元計画進捗0とする。元成果/見積/eventは残して追記訂正し、新受入0/正式/工数を増やさない。C06の同様古い不足は1556/1557の既補完を着手前検出・実行0。Web pool/Prom三dataは初導入Gitで非重複を確認し製造成果を保持する。
+
 2026-10-24最新：1732 C02四設定仕様/1733結果、source873337542/新独立12ID/265不正変異・終了0/Pyflakes0。1520未対応Backup46・ADMIN41・Caddy22＋2=111ordered directiveを全量照合しreset/credential加算を保持。Production差0/元22再演0、実effective/依存/owner/Unit後条件HOLD・wholeC02/正式1964-53/原190新受入0/工数未更新。
 
 2026-10-24最新：1730 Prometheus配布data仕様/1731結果、source7bc2095c8/新三template＋README、独立構造8項目/96不正変異・終了0/Pyflakes0。DEBUG固定二loopback管理target/STD空scrape/decimal5000000000B・15dだけで、実daemon/promtool/収集・容量/停止/owner等はUNRUN-HOLD。Java/POM/旧deployment差0・確認目的全回帰0、Java四counterや正式1964-53/原190新受入0/工数への転用0。
