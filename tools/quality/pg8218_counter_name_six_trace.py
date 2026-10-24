@@ -66,7 +66,8 @@ def main():
     require(len(before)==1669 and previous['source']==BEFORE,'original1669 and actual prior source')
     for role,key in (('web','currentWeb'),('api','historicalApi'),('batch','historicalBatch')):
         rows=previous[key]['physicalClasses']
-        rows={role+':'+p:h for p,h in rows.items()} if role=='web' else rows
+        require(all(p.startswith(role+':dev/') and not p.startswith(role+':'+role+':') for p in rows),
+                'prior witness uses explicit one-time role-qualified keys, not bare component entries')
         require(not(set(before)&set(rows)),'disjoint prior physical owner domains')
         before.update(rows)
     require(len(before)==1799,'complete prior1799, not a partial summary')
