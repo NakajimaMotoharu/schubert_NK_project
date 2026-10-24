@@ -33,6 +33,7 @@ MODULE='api'
 CLASS_MODULES={}
 COMPONENT_METADATA=set()
 MARKERS={}
+EXPECTED_FIXTURE_HASHES={}
 PMD_CONTEXT=()
 PMD_CONTEXT_WITNESS=None
 
@@ -75,7 +76,7 @@ def assess(raw):
     require(len(raw['suites'])==len(COUNTS) and all(row==dict(tests=COUNTS[n.rpartition('.')[2]],failures=0,errors=0,skipped=0)
             for n,row in raw['suites'].items()),'exact suites FES0')
     require(len(raw['stages'])==2 and all(r['actualExit']==0 and r['timedOut'] is False for r in raw['stages']),'actual compile and original JVM terminal')
-    require(raw['begin']['fixtureHashes']=={} and raw['begin']['priorCoverageTransferred'] is False,'in-memory tests no undeclared fixture/old counter')
+    require(raw['begin']['fixtureHashes']==EXPECTED_FIXTURE_HASHES and raw['begin']['priorCoverageTransferred'] is False,'exact independent fixture closure, no undeclared fixture/old counter')
     require(raw['formalUpdated'] is False and raw['whole451Accepted'] is False and raw['effortPercent'] is None,'limited truth only')
 
 
@@ -89,7 +90,7 @@ def main():
     snapshot=common.COMPILE/'snapshot'
     for p,h in raw['begin']['sourceHashes'].items():
         require(host.sha(snapshot/p)==h and host.sha(host.ROOT/p)==h,'all original/current production bytes')
-    for key in ('dependencyHashes','testSourceHashes','emptyConfigHashes'):
+    for key in ('dependencyHashes','testSourceHashes','emptyConfigHashes','fixtureHashes'):
         require(all(host.sha(Path(p))==h for p,h in raw['begin'][key].items()),'all actual '+key+' byte pins')
     require(host.sha(RUN/'jacoco.exec')==raw['execSha256'],'original exec, not a union')
     actual_cases=[]

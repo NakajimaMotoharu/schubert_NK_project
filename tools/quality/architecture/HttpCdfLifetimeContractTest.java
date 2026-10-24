@@ -13,7 +13,7 @@ import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 import org.junit.jupiter.api.Test;
 
-/** HTTPCDF001..003/1755: provider-only fixture, never an actual HTTP request or clock authority. */
+/** HTTPCDF001..004/1755: provider-only fixture, never an actual HTTP request or clock authority. */
 class HttpCdfLifetimeContractTest {
   private static Timer timer(OverflowSafeHttpMeterRegistry registry) {
     return Timer.builder("nk_http_request_duration_seconds")
