@@ -49,7 +49,7 @@ class PrometheusSummaryExporterTest {
   }
 
   private static HistogramSnapshot valid() {
-    return snapshot(3, 1.002, new CountAtBucket(.001, 1), new CountAtBucket(1, 2));
+    return snapshot(3, 1.002, new CountAtBucket(.001, 1), new CountAtBucket(1.0, 2));
   }
 
   // A provider double, not an expected-value implementation. The exporter must takeSnapshot once.
@@ -94,7 +94,9 @@ class PrometheusSummaryExporterTest {
         name, Tags.of("outcome", value), "seconds", "", Meter.Type.DISTRIBUTION_SUMMARY);
   }
 
-  private static class Registry extends SimpleMeterRegistry {
+  private static class CloseableRegistry extends SimpleMeterRegistry implements AutoCloseable {}
+
+  private static class Registry extends CloseableRegistry {
     final List<Meter> supplied;
 
     Registry(Meter... meters) {
@@ -171,14 +173,14 @@ class PrometheusSummaryExporterTest {
       assertEquals("", exporter.scrape(source, SPACE));
       assertEquals("", exporter.scrape(source, Map.of()));
     }
-    try (var source = new SimpleMeterRegistry()) {
+    try (var source = new CloseableRegistry()) {
       assertEquals("", exporter.scrape(source, SPACE));
     }
   }
 
   @Test
   void sumenc006SelectedWrongMeterTypeFails() {
-    try (var source = new SimpleMeterRegistry()) {
+    try (var source = new CloseableRegistry()) {
       source.counter(NAME, "outcome", "SUCCESS");
       assertThrows(IllegalArgumentException.class, () -> exporter.scrape(source, SPACE));
     }
@@ -204,7 +206,7 @@ class PrometheusSummaryExporterTest {
 
   @Test
   void sumenc008NullBoundaryAndCollectionElementsFail() {
-    try (var source = new SimpleMeterRegistry()) {
+    try (var source = new CloseableRegistry()) {
       assertThrows(NullPointerException.class, () -> exporter.scrape(null, SPACE));
       assertThrows(NullPointerException.class, () -> exporter.scrape(source, null));
       assertThrows(
@@ -224,10 +226,10 @@ class PrometheusSummaryExporterTest {
 
   @Test
   void sumenc009NegativeTotalCountAndInvalidSumFail() {
-    rejects(snapshot(-1, 0, new CountAtBucket(1, 0)));
+    rejects(snapshot(-1, 0, new CountAtBucket(1.0, 0)));
     for (double sum :
         new double[] {-1, Double.NaN, Double.POSITIVE_INFINITY, Double.NEGATIVE_INFINITY})
-      rejects(snapshot(1, sum, new CountAtBucket(1, 0)));
+      rejects(snapshot(1, sum, new CountAtBucket(1.0, 0)));
   }
 
   @Test
@@ -244,34 +246,35 @@ class PrometheusSummaryExporterTest {
 
   @Test
   void sumenc012UnsortedAndDuplicateBoundsFail() {
-    rejects(snapshot(1, 1, new CountAtBucket(1, 0), new CountAtBucket(.5, 0)));
-    rejects(snapshot(1, 1, new CountAtBucket(1, 0), new CountAtBucket(1, 0)));
+    rejects(snapshot(1, 1, new CountAtBucket(1.0, 0), new CountAtBucket(.5, 0)));
+    rejects(snapshot(1, 1, new CountAtBucket(1.0, 0), new CountAtBucket(1.0, 0)));
   }
 
   @Test
   void sumenc013NonFiniteNegativeAndFractionalCdfFail() {
     for (double count :
         new double[] {-1, Double.NaN, Double.POSITIVE_INFINITY, Double.NEGATIVE_INFINITY, .5})
-      rejects(snapshot(2, 1, new CountAtBucket(1, count)));
+      rejects(snapshot(2, 1, new CountAtBucket(1.0, count)));
   }
 
   @Test
   void sumenc014DecreasingAndAboveTotalCdfFail() {
-    rejects(snapshot(2, 1, new CountAtBucket(.5, 2), new CountAtBucket(1, 1)));
-    rejects(snapshot(2, 1, new CountAtBucket(1, 3)));
+    rejects(snapshot(2, 1, new CountAtBucket(.5, 2), new CountAtBucket(1.0, 1)));
+    rejects(snapshot(2, 1, new CountAtBucket(1.0, 3)));
   }
 
   @Test
   void sumenc015Binary64FiniteCdfAmbiguityFailsWithoutClamping() {
-    rejects(snapshot(Long.MAX_VALUE, 1, new CountAtBucket(1, 9007199254740992.0)));
+    rejects(snapshot(Long.MAX_VALUE, 1, new CountAtBucket(1.0, 9007199254740992.0)));
     assertTrue(
-        text(snapshot(9007199254740991L, 1, new CountAtBucket(1, 9007199254740991.0)))
+        text(snapshot(9007199254740991L, 1, new CountAtBucket(1.0, 9007199254740991.0)))
             .contains("le=\"1.0\"} 9007199254740991\n"));
   }
 
   @Test
   void sumenc016LongTotalCountAndExtremePositiveSumRemainPositive() {
-    String result = text(snapshot(Long.MAX_VALUE, 1.8446744073709553E10, new CountAtBucket(1, 0)));
+    String result =
+        text(snapshot(Long.MAX_VALUE, 1.8446744073709553E10, new CountAtBucket(1.0, 0)));
     assertTrue(result.contains("_count{outcome=\"SUCCESS\"} 9223372036854775807\n"));
     assertTrue(result.contains("le=\"+Inf\"} 9223372036854775807\n"));
     assertTrue(result.contains("_sum{outcome=\"SUCCESS\"} 1.8446744073709553E10\n"));
