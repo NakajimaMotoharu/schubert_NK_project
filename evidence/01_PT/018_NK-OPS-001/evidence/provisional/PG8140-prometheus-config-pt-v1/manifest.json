@@ -1,0 +1,129 @@
+{
+  "actualDatabaseActions": 0,
+  "actualExit": 0,
+  "actualNetworkActions": 0,
+  "actualRetentionQualified": false,
+  "actualScrapes": 0,
+  "actualServiceOwnershipQualified": false,
+  "actualVmActions": 0,
+  "baselineJavaByteSource": "e196d0816c8a4920696d4f601f8b4cf97e9e8b48",
+  "branch": "dev-foundation",
+  "branchCoverage": null,
+  "bugs": [],
+  "cases": [
+    {
+      "actual": "all assertions passed",
+      "oracle": "1730 independently fixed entire typed JSON document or described mutation",
+      "result": "PASS",
+      "testId": "PROMCFG001"
+    },
+    {
+      "actual": "all assertions passed",
+      "oracle": "1730 independently fixed entire typed JSON document or described mutation",
+      "result": "PASS",
+      "testId": "PROMCFG002"
+    },
+    {
+      "actual": "all assertions passed",
+      "oracle": "1730 independently fixed entire typed JSON document or described mutation",
+      "result": "PASS",
+      "testId": "PROMCFG003"
+    },
+    {
+      "actual": "all assertions passed",
+      "oracle": "1730 independently fixed entire typed JSON document or described mutation",
+      "result": "PASS",
+      "testId": "PROMCFG004"
+    },
+    {
+      "actual": "all assertions passed",
+      "oracle": "1730 independently fixed entire typed JSON document or described mutation",
+      "result": "PASS",
+      "testId": "PROMCFG005"
+    },
+    {
+      "actual": "all assertions passed",
+      "oracle": "1730 independently fixed entire typed JSON document or described mutation",
+      "result": "PASS",
+      "testId": "PROMCFG006"
+    },
+    {
+      "actual": "all assertions passed",
+      "oracle": "1730 independently fixed entire typed JSON document or described mutation",
+      "result": "PASS",
+      "testId": "PROMCFG007"
+    },
+    {
+      "actual": "all assertions passed",
+      "oracle": "1730 independently fixed entire typed JSON document or described mutation",
+      "result": "PASS",
+      "testId": "PROMCFG008"
+    }
+  ],
+  "classCoverage": null,
+  "coverageApplicability": "DATA_ARTIFACT_HAS_NO_EXECUTABLE_COUNTERS_NOT_A_JAVA_EXCLUSION",
+  "daemonExecuted": false,
+  "effortPercent": null,
+  "endUTC": "2026-10-24T00:38:54.058640+00:00",
+  "environment": {
+    "configParser": "Python strict JSON subset only; actual Prometheus/promtool UNRUN",
+    "executable": "/usr/bin/python3",
+    "os": "Linux-7.0.0-38-generic-x86_64-with-glibc2.43",
+    "python": "3.14.4 (main, Aug 20 2026, 10:41:58) [GCC 15.2.0]"
+  },
+  "errors": 0,
+  "failed": 0,
+  "formalUpdated": false,
+  "inputHashes": {
+    "evidence/01_PT/018_NK-OPS-001/1730_Prometheus配布設定_単体テスト仕様書.md": "0e3903da7f1e56cedeee819f889e305faa81bb921eb4bf5821f400900b90bcb1",
+    "src/deployment/monitoring/prometheus/README.md": "12b5c4bfbe573c04cf276c925584c242140f1a514783779319f29a79df634d8a",
+    "src/deployment/monitoring/prometheus/debug-arguments.json.template": "8056a3d9ccb357da3d3fdfcf25215d951f9996b6fac9e03548106b246840405a",
+    "src/deployment/monitoring/prometheus/debug.yml.template": "df964a0793af23bc61d3531fa516d0dd4787a5a5595cda64e96d3f0e01f43f6a",
+    "src/deployment/monitoring/prometheus/standard.yml.template": "52e6254d2eb82f4f3072f8c5a96a2b21b2fee350480a8ebe3f4018f53d8716e8"
+  },
+  "invocation": {
+    "actualPythonCommand": [
+      "python3",
+      "-B",
+      "tools/quality/pg8140_prometheus_config_pt.py"
+    ],
+    "arbitraryArgumentsRecorded": false,
+    "entrypointPath": "tools/quality/pg8140_prometheus_config_pt.py",
+    "entrypointSha256": "aff53ff1d7697f05907b9c2adb6df9f6e40059700957a8543867f973807ebd14",
+    "helperPath": "tools/quality/host_tool_invocation.py",
+    "helperSha256": "85d616a3db4ff47f4c95ae2e0dd57954bc2b09f28b8f2a685b986e5621545c46",
+    "libraryPath": "tools/quality/pg8140_prometheus_config_pt.py",
+    "librarySha256": "aff53ff1d7697f05907b9c2adb6df9f6e40059700957a8543867f973807ebd14",
+    "loadedProjectPythonSources": {
+      "tools/quality/host_tool_invocation.py": "85d616a3db4ff47f4c95ae2e0dd57954bc2b09f28b8f2a685b986e5621545c46",
+      "tools/quality/pg8140_prometheus_config_pt.py": "aff53ff1d7697f05907b9c2adb6df9f6e40059700957a8543867f973807ebd14"
+    },
+    "provenance": "OBSERVED_SYS_ARGV_AND_ORIG_ARGV_NOT_RECONSTRUCTED"
+  },
+  "javaProductTestsExecuted": 0,
+  "log": "test_PROMCFG001_debug_all_fields (__main__.ConfigurationTest.test_PROMCFG001_debug_all_fields) ... ok\ntest_PROMCFG002_standard_no_collection (__main__.ConfigurationTest.test_PROMCFG002_standard_no_collection) ... ok\ntest_PROMCFG003_arguments_are_nonexecuting_data (__main__.ConfigurationTest.test_PROMCFG003_arguments_are_nonexecuting_data) ... ok\ntest_PROMCFG004_reader_and_profile_faults (__main__.ConfigurationTest.test_PROMCFG004_reader_and_profile_faults) ... ok\ntest_PROMCFG005_target_and_key_mutations (__main__.ConfigurationTest.test_PROMCFG005_target_and_key_mutations) ... ok\ntest_PROMCFG006_retention_listen_and_argv_mutations (__main__.ConfigurationTest.test_PROMCFG006_retention_listen_and_argv_mutations) ... ok\ntest_PROMCFG007_types_global_and_collection_faults (__main__.ConfigurationTest.test_PROMCFG007_types_global_and_collection_faults) ... ok\ntest_PROMCFG008_exact_source_trace_and_no_other_production_delta (__main__.ConfigurationTest.test_PROMCFG008_exact_source_trace_and_no_other_production_delta) ... ok\n\n----------------------------------------------------------------------\nRan 8 tests in 0.068s\n\nOK\n",
+  "methodCoverage": null,
+  "mutationChecks": 96,
+  "newAccepted": 0,
+  "promtoolExecuted": false,
+  "ptAlternative": 0,
+  "qa051Final": "HELD",
+  "skipped": 0,
+  "source": "7bc2095c895730dd1d76e85ecd6352280cad4889",
+  "startUTC": "2026-10-24T00:38:53.772281+00:00",
+  "statementCoverage": null,
+  "static": {
+    "actualExit": 0,
+    "command": [
+      "/usr/bin/python3",
+      "-B",
+      "-m",
+      "pyflakes",
+      "/home/mini/codex/project1/work/pgpt-foundation/tools/quality/pg8140_prometheus_config_pt.py"
+    ],
+    "stderr": "",
+    "stdout": ""
+  },
+  "testsRun": 8,
+  "whole451Accepted": false
+}
