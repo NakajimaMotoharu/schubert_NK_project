@@ -1,6 +1,5 @@
-package dev.codex.schubert.nk.bootstrap.monitoring;
+package dev.codex.schubert.nk.web.monitoring;
 
-import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertSame;
@@ -26,10 +25,10 @@ import java.util.function.Supplier;
 import org.junit.jupiter.api.Test;
 
 /** TIMERENC001..016/1757: literal ns snapshots, independent wire values and no private access. */
-class PrometheusTimerExporterTest {
+class WebDurationMetricExporterTest {
   private static final String NAME = "nk_http_request_duration_seconds";
   private static final Map<String, Set<String>> SPACE = Map.of(NAME, Set.of("service", "route"));
-  private final PrometheusSummaryExporter exporter = new PrometheusSummaryExporter();
+  private final WebDurationMetricExporter exporter = new WebDurationMetricExporter();
 
   private static HistogramSnapshot snapshot(long count, double total, CountAtBucket... buckets) {
     return new HistogramSnapshot(count, total, 0, new ValueAtPercentile[0], buckets, null);
@@ -306,21 +305,34 @@ class PrometheusTimerExporterTest {
   }
 
   @Test
-  void timerenc016KindFactoriesAreClosedTypedAndDefensive() {
-    var expected =
-        new PrometheusSummaryExporter.SourceKind[] {
-          PrometheusSummaryExporter.SourceKind.SUMMARY, PrometheusSummaryExporter.SourceKind.TIMER
+  void timerenc016CheckedWriterFailureRetainsCauseAndBorrowedOwner() {
+    var failure = new java.io.IOException("fixture");
+    var writer =
+        new io.prometheus.metrics.expositionformats.ExpositionFormatWriter() {
+          public boolean accepts(String accept) {
+            throw new AssertionError("no content negotiation");
+          }
+
+          public String getContentType() {
+            throw new AssertionError("no HTTP endpoint");
+          }
+
+          public void write(
+              java.io.OutputStream output,
+              io.prometheus.metrics.model.snapshots.MetricSnapshots snapshots,
+              io.prometheus.metrics.config.EscapingScheme scheme)
+              throws java.io.IOException {
+            throw failure;
+          }
         };
-    assertArrayEquals(expected, PrometheusSummaryExporter.SourceKind.values());
-    var first = PrometheusSummaryExporter.SourceKind.values();
-    first[0] = null;
-    assertArrayEquals(expected, PrometheusSummaryExporter.SourceKind.values());
-    assertSame(expected[0], PrometheusSummaryExporter.SourceKind.valueOf("SUMMARY"));
-    assertSame(expected[1], PrometheusSummaryExporter.SourceKind.valueOf("TIMER"));
-    assertThrows(
-        IllegalArgumentException.class,
-        () -> PrometheusSummaryExporter.SourceKind.valueOf("UNKNOWN"));
-    assertThrows(
-        NullPointerException.class, () -> PrometheusSummaryExporter.SourceKind.valueOf(null));
+    try (var source = new Registry(new FixedTimer(valid(), "/login"))) {
+      var actual =
+          assertThrows(
+              java.io.UncheckedIOException.class,
+              () -> WebDurationMetricExporter.encode(source, SPACE, writer));
+      assertSame(failure, actual.getCause());
+      assertEquals("timer encoding failed", actual.getMessage());
+      assertFalse(source.isClosed());
+    }
   }
 }

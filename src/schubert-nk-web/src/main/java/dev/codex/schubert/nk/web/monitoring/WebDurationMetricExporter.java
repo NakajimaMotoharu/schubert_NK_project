@@ -1,6 +1,5 @@
-package dev.codex.schubert.nk.bootstrap.monitoring;
+package dev.codex.schubert.nk.web.monitoring;
 
-import io.micrometer.core.instrument.DistributionSummary;
 import io.micrometer.core.instrument.Meter;
 import io.micrometer.core.instrument.MeterRegistry;
 import io.micrometer.core.instrument.Timer;
@@ -28,17 +27,13 @@ import java.util.Set;
 import java.util.TreeMap;
 
 /**
- * NK-OPS-001/RD171/UI252/SS351/1753/1757: atomic duration snapshots to standard histogram text. A
- * borrowed source is never closed. No global exporter configuration, clock, file or network reads.
+ * NK-OPS-001/RD171/UI252/SS351/1757/BUG1697: app-owned atomic Timer/ns snapshots to standard
+ * histogram text. A borrowed source is never closed. No global exporter configuration, clock, file
+ * or network reads.
  */
-public final class PrometheusSummaryExporter {
-  enum SourceKind {
-    SUMMARY,
-    TIMER
-  }
-
+public final class WebDurationMetricExporter {
   /** No resources acquired; the official writer is explicitly configured per scrape. */
-  public PrometheusSummaryExporter() {}
+  public WebDurationMetricExporter() {}
 
   /**
    * Exports only approved seconds names with exact label keys; caller supplies approved label
@@ -46,20 +41,11 @@ public final class PrometheusSummaryExporter {
    * observations. Unselected meters are ignored. Empty namespaces/registries produce empty standard
    * text.
    */
-  public String scrape(MeterRegistry source, Map<String, Set<String>> approvedNameLabelKeys) {
-    return encode(
-        source,
-        approvedNameLabelKeys,
-        PrometheusTextFormatWriter.builder().setIncludeCreatedTimestamps(false).build());
-  }
-
-  /** 1757: borrowed Timer nanosecond snapshots, seconds on wire; never exposes helper Gauges. */
   public String scrapeTimers(MeterRegistry source, Map<String, Set<String>> approvedNameLabelKeys) {
     return encode(
         source,
         approvedNameLabelKeys,
-        PrometheusTextFormatWriter.builder().setIncludeCreatedTimestamps(false).build(),
-        SourceKind.TIMER);
+        PrometheusTextFormatWriter.builder().setIncludeCreatedTimestamps(false).build());
   }
 
   // Package-private checked-writer seam for SUMENC023/024, no retained injected mutable resource.
@@ -67,14 +53,6 @@ public final class PrometheusSummaryExporter {
       MeterRegistry source,
       Map<String, Set<String>> approvedNameLabelKeys,
       ExpositionFormatWriter writer) {
-    return encode(source, approvedNameLabelKeys, writer, SourceKind.SUMMARY);
-  }
-
-  private static String encode(
-      MeterRegistry source,
-      Map<String, Set<String>> approvedNameLabelKeys,
-      ExpositionFormatWriter writer,
-      SourceKind kind) {
     Objects.requireNonNull(source, "meter registry");
     Objects.requireNonNull(writer, "text writer");
     var namespace = new HashMap<String, Set<String>>();
@@ -83,11 +61,11 @@ public final class PrometheusSummaryExporter {
             (name, keys) -> {
               if (!Objects.requireNonNull(name, "metric name")
                   .matches("nk_[a-z][a-z0-9_]*_seconds"))
-                throw new IllegalArgumentException("invalid summary namespace");
+                throw new IllegalArgumentException("invalid timer namespace");
               var copy = Set.copyOf(keys);
               for (var key : copy)
                 if (!key.matches("[a-z][a-z0-9_]*") || "le".equals(key))
-                  throw new IllegalArgumentException("invalid summary label namespace");
+                  throw new IllegalArgumentException("invalid timer label namespace");
               namespace.put(name, copy);
             });
     if (source.isClosed()) throw new IllegalStateException("metric registry closed");
@@ -96,29 +74,11 @@ public final class PrometheusSummaryExporter {
       var id = Objects.requireNonNull(meter, "meter").getId();
       var keys = namespace.get(id.getName());
       if (keys == null) continue;
-      HistogramSnapshot snapshot;
-      Labels labelValues;
-      double secondsDivisor;
-      if (kind == SourceKind.SUMMARY) {
-        if (!(meter instanceof DistributionSummary summary))
-          throw new IllegalArgumentException("selected meter is not a summary");
-        labelValues = labels(id, keys);
-        snapshot = summary.takeSnapshot();
-        secondsDivisor = 1;
-      } else {
-        if (!(meter instanceof Timer timer))
-          throw new IllegalArgumentException("selected meter is not a timer");
-        labelValues = labels(id, keys);
-        snapshot = timer.takeSnapshot();
-        secondsDivisor = 1_000_000_000.;
-      }
+      if (!(meter instanceof Timer timer))
+        throw new IllegalArgumentException("selected meter is not a timer");
       groups
           .computeIfAbsent(id.getName(), unused -> new ArrayList<>())
-          .add(
-              point(
-                  Objects.requireNonNull(snapshot, "summary snapshot"),
-                  labelValues,
-                  secondsDivisor));
+          .add(point(timer, labels(id, keys)));
     }
     var families =
         groups.entrySet().stream()
@@ -131,7 +91,7 @@ public final class PrometheusSummaryExporter {
     try {
       writer.write(output, new MetricSnapshots(families), EscapingScheme.UNDERSCORE_ESCAPING);
     } catch (IOException failure) {
-      throw new UncheckedIOException("summary encoding failed", failure);
+      throw new UncheckedIOException("timer encoding failed", failure);
     }
     return output.toString(StandardCharsets.UTF_8);
   }
@@ -146,10 +106,10 @@ public final class PrometheusSummaryExporter {
     return Labels.of(new ArrayList<>(labels.keySet()), new ArrayList<>(labels.values()));
   }
 
-  private static HistogramDataPointSnapshot point(
-      HistogramSnapshot snapshot, Labels labels, double secondsDivisor) {
+  private static HistogramDataPointSnapshot point(Timer timer, Labels labels) {
+    HistogramSnapshot snapshot = Objects.requireNonNull(timer.takeSnapshot(), "summary snapshot");
     if (snapshot.count() < 0 || !Double.isFinite(snapshot.total()) || snapshot.total() < 0)
-      throw new IllegalArgumentException("invalid summary totals");
+      throw new IllegalArgumentException("invalid timer totals");
     var cumulative = Objects.requireNonNull(snapshot.histogramCounts(), "summary buckets");
     if (cumulative.length == 0) throw new IllegalArgumentException("missing summary buckets");
     var bounds = new double[cumulative.length + 1];
@@ -158,7 +118,7 @@ public final class PrometheusSummaryExporter {
     long previousCount = 0;
     for (int index = 0; index < cumulative.length; index++) {
       var bucket = Objects.requireNonNull(cumulative[index], "summary bucket");
-      double bound = bucket.bucket() / secondsDivisor;
+      double bound = bucket.bucket() / 1_000_000_000.;
       double count = bucket.count();
       // CDF counts are binary64. Reject ambiguous integer precision, never round/clamp it silently.
       if (!Double.isFinite(bound)
@@ -179,7 +139,7 @@ public final class PrometheusSummaryExporter {
     intervals[cumulative.length] = snapshot.count() - previousCount;
     return new HistogramDataPointSnapshot(
         ClassicHistogramBuckets.of(bounds, intervals),
-        snapshot.total() / secondsDivisor,
+        snapshot.total() / 1_000_000_000.,
         labels,
         Exemplars.EMPTY,
         0);

@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import dev.codex.schubert.nk.bootstrap.monitoring.PrometheusSummaryExporter;
 import dev.codex.schubert.nk.protocol.layout.LayoutId;
 import java.util.List;
 import java.util.Map;
@@ -20,7 +19,7 @@ class ApiSummaryExporterContractTest {
   private static final Map<String, Set<String>> SPACE =
       Map.of(DB, Set.of("query_id", "outcome"), MQ, Set.of("flow", "layout", "outcome"));
   private static final String[] BOUNDS = {"0.001", "0.01", "0.1", "1.0", "1.5", "+Inf"};
-  private final PrometheusSummaryExporter exporter = new PrometheusSummaryExporter();
+  private final ApiDurationMetricExporter exporter = new ApiDurationMetricExporter();
 
   private static double sample(String text, String name, Map<String, String> labels) {
     var matches =

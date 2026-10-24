@@ -1,4 +1,4 @@
-package dev.codex.schubert.nk.bootstrap.monitoring;
+package dev.codex.schubert.nk.api.monitoring;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -29,10 +29,10 @@ import java.util.concurrent.atomic.AtomicInteger;
 import org.junit.jupiter.api.Test;
 
 /** SUMENC001..024/1753: literal independent snapshots, no application/SDK expected generator. */
-class PrometheusSummaryExporterTest {
+class ApiDurationMetricExporterTest {
   private static final String NAME = "nk_fixture_duration_seconds";
   private static final Map<String, Set<String>> SPACE = Map.of(NAME, Set.of("outcome"));
-  private final PrometheusSummaryExporter exporter = new PrometheusSummaryExporter();
+  private final ApiDurationMetricExporter exporter = new ApiDurationMetricExporter();
 
   private abstract static class FixtureWriter implements ExpositionFormatWriter {
     public boolean accepts(String accept) {
@@ -210,7 +210,7 @@ class PrometheusSummaryExporterTest {
       assertThrows(NullPointerException.class, () -> exporter.scrape(null, SPACE));
       assertThrows(NullPointerException.class, () -> exporter.scrape(source, null));
       assertThrows(
-          NullPointerException.class, () -> PrometheusSummaryExporter.encode(source, SPACE, null));
+          NullPointerException.class, () -> ApiDurationMetricExporter.encode(source, SPACE, null));
       var space = new HashMap<String, Set<String>>();
       space.put(null, Set.of());
       assertThrows(NullPointerException.class, () -> exporter.scrape(source, space));
@@ -368,7 +368,7 @@ class PrometheusSummaryExporterTest {
       var actual =
           assertThrows(
               UncheckedIOException.class,
-              () -> PrometheusSummaryExporter.encode(source, SPACE, writer));
+              () -> ApiDurationMetricExporter.encode(source, SPACE, writer));
       assertSame(failure, actual.getCause());
       assertEquals("summary encoding failed", actual.getMessage());
       assertFalse(source.isClosed());
@@ -388,7 +388,7 @@ class PrometheusSummaryExporterTest {
       assertSame(
           failure,
           assertThrows(
-              AssertionError.class, () -> PrometheusSummaryExporter.encode(source, SPACE, writer)));
+              AssertionError.class, () -> ApiDurationMetricExporter.encode(source, SPACE, writer)));
     }
   }
 }
