@@ -1,5 +1,7 @@
 # PGPT成果物一覧・進捗
 
+2026-10-24最新：1759/1760、Web HTTP Counter標準textを新Main2/既Duration接続1で実装。新16＋実Web6/必要既Timer22＝44/4、source6c91f3785/実3四100（L109M16C3B58）/CRC0/一exec/全static0。全1803physical/163owner・追加2/変更1/他1800debug同byte/五edge0＋責務十反例、Bootstrap/API/POM不変更。BUG1698fixture/YKT1449・BUG1699tool lint/YKT1450を元失敗保持で限定close。formal1964-53/原190新受入0/工数null/whole451/actualHOLD/QA051final不変更、残safe工程へ継続。
+
 2026-10-24最新：1757/1758、Timer標準textの新22＋必要旧30=52/4、source3968abace両app2四100（L152M16C2B92）/static全0・全1801/160owner/五edge0＋責務guard9反例/測定input同byte。BUG1697/YKT1448で誤った共用Bootstrap配置を上位変更せずAPI/Web監視adapterへ是正、旧1754共有配置は撤回/後継へ置換・元試験成功は履歴保持。新2app Main/旧共有Main1退役、実endpoint/actor/CHR/native/全451/正式1964-53/原190新受入0/工数nullは未受入。次Counter出力へ継続、全actualHOLD/QA051final不変更。
 
 2026-10-24最新：1755/1756、新HTTP CDF窓経過三件が実失敗→BUG1696/YKT1447先行起票・own原因確認→lifetime count/正total/九CDFを是正。追加保存則1込み新4＋必要既28=32/4、sourcef02fae44e/8296正常six→8298真正→8300変更2四100（L69M21C2B20）/PMD-CS-SB-missing0→8302全1801/159owner/五architecture0で限定close。原三失敗/途中静的拒否保持・新Main0/既一source是正、次Timer/counter標準textのPG/PTへ。正式1964-53/原190新受入0/工数null/QA051final/全actualHOLD不変、通常停止0。

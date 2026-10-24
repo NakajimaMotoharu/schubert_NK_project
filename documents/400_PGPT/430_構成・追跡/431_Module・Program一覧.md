@@ -1,5 +1,7 @@
 # Module・Program一覧
 
+2026-10-24追加trace：WebCounterMetricExporter.scrapeCounters/encode、WebMetricText.namespace/labels/write/constructor、WebDurationMetricExporter.scrapeTimers/encode/pointを1759/1760・PG-D595・RD171/UI252/SS311351へ対応。COUNTENC001～016/HTTPCOUNT001～006新22＋必要TIMERENC16/HTTPEXP6＝44/4、source6c91f3785/実3四100（L109M16C3B58）/全static0/全1803・163owner/五edge0/責務十反例。Web内共用だけでBootstrap/API/POM/上位不変更。全method/fixture/source/実行hashは1760と8340/42/44に一意結合、正式/全451/actualHOLD不変更。
+
 2026-10-24現行trace：1758/PG-D594/BUG1697、Bootstrapに置いたgeneric exporterはSS311限定責務外として退役し、`.api.monitoring.ApiDurationMetricExporter`（SUMENC24/API6）と`.web.monitoring.WebDurationMetricExporter`（TIMERENC16/Web6）へ。新52/4・source3968abace、両app2四100（L152M16C2B92）/CRC0/一exec/static全0、全1801/160owner・共用2退役/app2追加/他1799debug同byte、五edge0＋責務guard9反例/全測定input同byte。旧単位・wire golden保持、不要になった未受入modeだけ廃止。以下旧共用配置の記録は履歴で採用状態を表さず、現行は本段と1758。formal/工数/actualHOLD不変更。
 
 2026-10-24追加trace：Web OverflowSafeHttpMeterRegistry/OverflowSafeTimerのcount/record/totalTime/takeSnapshot/state helpers/close、RD171/UI252/SS351/PG-D593/1755～1756。新HTTPCDF001～004＋既factory12/Recorder10/Contract6=32/4、sourcef02fae44e当変更2四100（L69M21C2B20）/CRC0/一exec/静的全0、全1801physical/159owner/五architecture0。他1799byteとSummary/API旧scopeの同一性は旧成功の当source移転ではない。BUG1696/YKT1447全対象限定close・元失敗保持、endpoint/native/全451/正式・工数は未受入。
