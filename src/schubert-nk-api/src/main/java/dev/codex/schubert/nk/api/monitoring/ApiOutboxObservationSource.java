@@ -57,6 +57,21 @@ public final class ApiOutboxObservationSource implements Supplier<Optional<Snaps
     }
   }
 
+  /**
+   * 1860/PG-D633: publishes only a one-shot owner's cleanup-confirmed result, never its connection.
+   */
+  public Optional<Snapshot> observe(ApiReadOnlyObservationAttempt attempt) throws SQLException {
+    Objects.requireNonNull(attempt, "owned readonly observation attempt");
+    synchronized (writerLock) {
+      if (!detailed) return Optional.empty();
+      Entry pending = new Entry(Optional.empty());
+      current.set(pending);
+      Optional<Snapshot> supplied = Optional.of(attempt.read());
+      if (current.compareAndSet(pending, new Entry(supplied))) return supplied;
+      return Optional.empty();
+    }
+  }
+
   /** Nonblocking invalidation: an already-running read cannot republish after this returns. */
   public void missing() {
     current.set(new Entry(Optional.empty()));
