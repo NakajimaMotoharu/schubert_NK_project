@@ -1,5 +1,24 @@
 # Module・Program一覧
 
+## 2026-10-24 1771～1792追加program対応
+
+全行NK-OPS-001/RD171/UI252/SS311351/411451、主WBS-P018-09/C07参照0加算。source・全method/実行counter・Test ID・元XML/exec・全hashの詳細は各結果と結合manifestへ。通常PG/PT限定で、正式/whole451/実endpoint/全actualHOLDは別未受入。
+
+|Production owner/type・method群|PT仕様→結果（evidence/01_PT/018_NK-OPS-001）|判断|
+|---|---|---|
+|api.monitoring.ApiScalarMetricExporter ctor/scrapeCounters/Gauges/encode/point、後続approved入口|1771→1772、新32/2。approved変更は1773→1774で関連新source94/7|PG-D601/602|
+|api.monitoring.ApiMetricCatalog domain/names/labels/copy、ApiMetricScrape ctor/scrape|1773→1774、新APICAT14/APIPOL14＋必要既66|PG-D602|
+|batch.monitoring.BatchMetricLabelPolicy ctor/names/labels/copy|1775→1776、新14/1|PG-D603|
+|batch.monitoring.BatchMetricText ctor/scrape/read/number・grouping|1777→1778、新32/2・独立公式parser二入力|PG-D604|
+|api.monitoring.ApiJvmMetrics ctor/bind/install/defaults|1779→1780、APIJVM001～014|PG-D605|
+|web.monitoring.WebJvmMetrics、batch.monitoring.BatchJvmMetrics、各ctor/bind/install/defaults|1781→1782、WEBJVM/BATCHJVM各001～014|PG-D606|
+|api.monitoring.ApiGcMetricRegistration ctor/bind/install/activateOwned/candidate|1785→1786、APIGC001～014|PG-D607|
+|web.monitoring.WebGcMetricRegistration、batch.monitoring.BatchGcMetricRegistration、各同五method|1787→1788、WEBGC/BATCHGC各001～014|PG-D608|
+|api.monitoring.ApiSystemMetrics ctor/bind/install/defaults|1789→1790、APISYS001～014|PG-D609|
+|web.monitoring.WebSystemMetrics、batch.monitoring.BatchSystemMetrics、各同四method|1791→1792、WEBSYS/BATCHSYS各001～014|PG-D610|
+
+1783→1784のMETRICJOIN001～006はtools内の独立SS26 literal/role schema照合、Production追加Main0・新coverage/static資格0。各公開manifestのsourceRowsは全旧source同byteと新Main/Unitの責務を区別し、旧成功を新sourceのPASSへ転用しない。1759以降新技術326Test/Main19は異source集計で正式試験数やcoverage unionではない。
+
 2026-10-24追加trace：WebMetricScrape.constructor/scrape(source,mode)を1769/1770・PG-D600・RD171/UI252/SS351へ、SCRAPE001～014/source8c8a8c51a/8408-10-8413で実1四100（L10M2C1B2）/全static0/全1806・169owner/五edge0/owner三反例・compiled fields三formatter/public methods二つへ結合。source非保持・STD no-provider/DEBUG固定七family・例外/部分成功なしは実14、JVM標準/実endpoint/mode/ownerは別未受入。旧1805byte同一をPT成功へ転用しない、formal/工数/actualHOLD不変更。
 
 2026-10-24接続trace：Web三exporter.scrapeApprovedCounters/Gauges/Timers/encode optional policy、WebMetricCatalog.labels(Id)/labels(captured name,tags)/domain/copyを1767/1768・PG-D599・RD171/UI252/SS351へ。APPROVED001～012新12＋必要84＝96/9、sourceb347581d2/8396-98-8400で実5四100（L212M38C5B86）/static0/全1805・167owner/五edge0/責務五反例へ。元fixed domain/generic/IO/未知名順を保持、別preflight再読取ではなく検証済みLabelsを同pointへ。API Main不変更、formal/工数/actualHOLD不変更。

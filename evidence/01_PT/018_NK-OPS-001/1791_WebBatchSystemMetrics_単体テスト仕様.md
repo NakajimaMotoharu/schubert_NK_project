@@ -1,5 +1,7 @@
 # Web/Batch standard CPU/FD metrics PG/PT仕様
 
+最終結果は1792。同sourcea62763d2dの正常six/新28全成功/当Main2四100/全raw静的0/全byte-ownerで限定完了、以下UNRUNは着手時記録。仕様/期待/件数変更なし。
+
 NK-OPS-001/RD171/UI252/SS311351/411451、PG-D610/group2018、WBS-P018-09/C07参照0加算。開始fresh36残64/reset1793382075/2-4-8pp/cap10はPG8576/event2018固定。WebSystemMetrics/BatchSystemMetrics新Main2/Unit2、既coreのProcessorMetrics/FileDescriptorMetricsのみ、POM/旧source/上位不変更。固定WEB/BATCH/各既mode契約（Web診断invalid monitoring mode、Batch CONFIG_INVALID）、STANDARD source-factory-JMX未読、DEBUG nonnull/closed→factory一回→全nonnullで個数2のList.copyOf→順bind。借用sourceのpartial登録もcaller所有、元例外/暗黙close0/retry0、instance fields0/固定count2一個。
 
 新WEBSYS001～014、BATCHSYS001～014、各14/1計28/2。期待は独立SDK公開bytecode PG8565原a213a9ffと各既mode、literal固定role・記録portの順序/identity。001実default二SDKのCPUcountをRuntime.availableProcessors、FDmaxをUnixOperatingSystemMXBean、現在FD非負/最大以内、process.cpu.time FunctionCounter/raw nsを同own JVM公開MXBean before≤actual≤afterで照合（Linux/JDK25/Sun公開MXBeanが前提、不成立はskip合格にしない）。002 STD未読、003同source二port順/初回bindによる元list clear後もcopy全件/一factory、004 source-mode-factory null、005空/未知/小文字/末尾空白未読、006closedDEBUGfactory0、007factory list/要素null bind前拒否、008個数0/1/3/4拒否、009factoryRuntime/Error元identity、010各portRuntimeで後続停止/partial source保持、011各Error非正常化、012closedSTD未読/再close0、013二registry所有を隔離し片方close後も他有効、014有限64並行/各二port/128calls/join10sec/sleep0。SDK methodをexpected生成に使わず、変動CPU負荷を性能合否にしない。

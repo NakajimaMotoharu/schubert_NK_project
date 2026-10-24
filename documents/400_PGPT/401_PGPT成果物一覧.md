@@ -1,5 +1,7 @@
 # PGPT成果物一覧・進捗
 
+2026-10-24最新：1791/1792/WebBatch標準CPU-FD sourcea62763d2d、新28/2・実2四100(L30M8C2B16)/静的0/全1820・197owner/五edge0/fields0-定数各1/独立Runtime-MXBeanの値・ns bracketで限定閉鎖、新BUG0。431へ1771～1792の全追加program-method/仕様/結果/判断を横断対応。1759以降技術326ID/Main19は異sourceで正式/coverage合算0、formal1964-53/原190新受入0/工数null/全actualHOLD/whole451/QA051final維持、次標準metric role内組立等safe PG/PTへ継続。
+
 2026-10-24最新：1789/1790/API標準CPU-FD sourcee027929a7、新14/1/新Main1・実1四100(L18M4C1B11)/静的0/全1818・193owner/五edge0/fields0・定数1、公開SDK名/type/ns＋own JVM独立MXBean値を限定確認、新BUG0。1759以降技術298ID/Main17は異sourceで正式/coverage合算0、formal1964-53/原190新受入0/工数null/全actualHOLD/whole451/QA051final維持、次Web/Batch CPU-FD safe PG/PTへ継続。
 
 2026-10-24最新：1787/1788、Web/Batch GC owner-before-bind source623be8eea、新28/2・実2四100(L30M10C2B12)/静的0/全1817・191owner/五edge0/各固定role・mode/fields0で限定閉鎖。BUG1707/YKT1458工具選択の0UNRUNを保存し、正規二選択/起動前guard/三反例→新28でclose、正常build再演0。1759以降技術284ID/Main16は異sourceで正式run/coverageへ合算0、formal1964-53/原190新受入0/工数null/全actualHOLD/whole451/QA051final維持。次標準process/hostのsafe必要PG/PTへ継続。
