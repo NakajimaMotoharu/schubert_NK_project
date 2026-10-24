@@ -156,7 +156,7 @@ class WebCounterMetricExporterTest {
 
   @Test
   void countenc008DuplicateProviderTagsFail() {
-    var id =
+    var duplicatedId =
         new Meter.Id(NAME, Tags.empty(), "", "", Meter.Type.COUNTER) {
           public List<Tag> getTags() {
             return List.of(
@@ -166,9 +166,13 @@ class WebCounterMetricExporterTest {
     var counter =
         new FixedCounter(1, "/login") {
           public Meter.Id getId() {
-            return id;
+            return duplicatedId;
           }
         };
+    assertSame(duplicatedId, counter.getId());
+    assertEquals(
+        List.of("route", "route", "service"),
+        counter.getId().getTags().stream().map(Tag::getKey).toList());
     try (var source = new Registry(counter)) {
       assertThrows(IllegalArgumentException.class, () -> exporter.scrapeCounters(source, SPACE));
     }
