@@ -29,6 +29,7 @@ public final class ApiReadOnlyObservationAttempt {
   private final List<Throwable> failures = new ArrayList<>(4);
   private final AtomicBoolean unconfirmed = new AtomicBoolean();
   private @Nullable Connection retained;
+  private @Nullable Error primaryFatal;
   private boolean attempted;
 
   /** Resource-free: prepare all ports/state before checkout, never mutate or close the pool. */
@@ -63,7 +64,7 @@ public final class ApiReadOnlyObservationAttempt {
         result =
             repository.read(supplied, Objects.requireNonNull(clock.instant(), "observation time"));
       } catch (SQLException | RuntimeException | Error failure) {
-        failures.add(failure);
+        recordFailure(failure);
       }
       @Nullable Connection owned = retained;
       if (owned != null) {
@@ -71,7 +72,7 @@ public final class ApiReadOnlyObservationAttempt {
           try {
             owned.rollback();
           } catch (SQLException | RuntimeException | Error rollback) {
-            failures.add(rollback);
+            recordFailure(rollback);
           }
         }
         try {
@@ -80,18 +81,23 @@ public final class ApiReadOnlyObservationAttempt {
         } catch (SQLException | RuntimeException | Error close) {
           // Keep the exact Connection and failure frame; no implicit reclose/recheckout/clean
           // return.
-          failures.add(close);
+          recordFailure(close);
           unconfirmed.set(true);
           try {
             onUnconfirmed.accept(close);
           } catch (RuntimeException | Error diagnostic) {
-            failures.add(diagnostic);
+            recordFailure(diagnostic);
           }
         }
       }
       rethrowFailure();
       return Objects.requireNonNull(result, "successful readonly observation");
     }
+  }
+
+  private void recordFailure(Throwable failure) {
+    if (failures.isEmpty() && failure instanceof Error fatal) primaryFatal = fatal;
+    failures.add(failure);
   }
 
   private void rethrowFailure() throws SQLException {
@@ -107,8 +113,8 @@ public final class ApiReadOnlyObservationAttempt {
       TemporaryInfrastructureException.preserveFatal(runtime);
       throw runtime;
     }
-    // The remaining captured domain is Error; the classifier directly throws that same fatal.
-    TemporaryInfrastructureException.preserveFatal(primary);
+    // The remaining captured domain is the typed first Error, retained at capture time.
+    throw Objects.requireNonNull(primaryFatal, "captured fatal");
   }
 
   /** Nonblocking status only; no resource, provider text or lifecycle handle is exposed. */
