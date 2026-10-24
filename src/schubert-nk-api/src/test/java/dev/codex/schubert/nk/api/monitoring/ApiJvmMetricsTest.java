@@ -57,13 +57,17 @@ class ApiJvmMetricsTest {
         names.containsAll(
             Set.of(
                 "jvm.classes.loaded.count",
+                "jvm.classes.loaded",
+                "jvm.classes.unloaded",
                 "jvm.memory.used",
                 "jvm.threads.states",
                 "process.start.time",
                 "process.uptime")));
     assertFalse(names.stream().anyMatch(n -> n.startsWith("nk_")));
     for (var meter : source.getMeters()) assertEquals("API", meter.getId().getTag("service"));
-    assertTrue(source.get("jvm.classes.loaded.count").gauge().value() >= 0);
+    assertTrue(source.get("jvm.classes.loaded.count").functionCounter().count() >= 0);
+    assertTrue(source.get("jvm.classes.loaded").gauge().value() >= 0);
+    assertTrue(source.get("jvm.classes.unloaded").functionCounter().count() >= 0);
     assertFalse(source.get("jvm.memory.used").gauges().isEmpty());
     for (var gauge : source.get("jvm.threads.states").gauges()) assertTrue(gauge.value() >= 0);
   }
@@ -118,6 +122,7 @@ class ApiJvmMetricsTest {
             actual -> {
               assertSame(source, actual);
               calls.add(order);
+              if (order == 1) binders.clear();
             });
       }
       ApiJvmMetrics.install(
@@ -128,6 +133,7 @@ class ApiJvmMetricsTest {
             return binders;
           });
       assertEquals(List.of(1, 2, 3, 4), calls);
+      assertTrue(binders.isEmpty());
       assertEquals(1, factories.get());
       assertFalse(source.isClosed());
       assertEquals(0, source.closes.get());
