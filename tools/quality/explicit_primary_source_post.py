@@ -14,7 +14,7 @@ def sha(raw):return hashlib.sha256(raw).hexdigest()
 def validate(rows,expected):
     if rows!=expected:raise ValueError('frozen fullpath primary/related/runtime source metadata required')
 
-def run(library,out,subject_name,subject_sha,catalog_sha,spec_path,spec_sha,source_prefix,line_prefixes,expected_count,main_subjects):
+def run(library,out,subject_name,subject_sha,catalog_sha,spec_path,spec_sha,source_prefix,line_prefixes,expected_count,main_subjects,source_path_mutator=None,source_mutator_vectors=0):
     invocation=capture(library);assert not out.exists();subject=BASE/subject_name
     spec_raw=(ROOT/spec_path).read_bytes();assert sha(spec_raw)==spec_sha
     oracle={}
@@ -54,10 +54,11 @@ def run(library,out,subject_name,subject_sha,catalog_sha,spec_path,spec_sha,sour
     for item in classes.values():
         assert sha((ROOT/item['path']).read_bytes())==hashes[item['path']]
     rejected=[]
+    mutate_source=source_path_mutator or (lambda path:path.replace('schubert-nk-api','schubert-nk-web'))
     for label,edit in (('cost-only',lambda v:v[0].update(costOwner='WBS-G13.07')),('primary-forged',lambda v:v[0].update(owner='WBS-F01')),
       ('related-forged',lambda v:v[0].update(relatedOwners=['FORGED'])),('runtime-reason-forged',lambda v:v[0].update(unresolvedRuntimeReasons=['FORGED'])),
       ('runtime-success-invented',lambda v:v[0].update(targetRuntimeAccepted=True)),('source-byte-forged',lambda v:v[0].update(sha256='0'*64)),
-      ('source-other-module',lambda v:v[0].update(path=v[0]['path'].replace('schubert-nk-api','schubert-nk-web'))),
+      ('source-other-module',lambda v:v[0].update(path=mutate_source(v[0]['path']))),
       ('missing',lambda v:v.pop()),('duplicate',lambda v:v.append(copy.deepcopy(v[0])))):
         changed=copy.deepcopy(rows);edit(changed);assert changed!=rows
         if label=='cost-only':assert {k for k in rows[0] if rows[0][k]!=changed[0][k]}=={'costOwner'}
@@ -70,5 +71,5 @@ def run(library,out,subject_name,subject_sha,catalog_sha,spec_path,spec_sha,sour
           subjectManifestSha256=sha(raw),specSha256=spec_sha,catalogSha256=sha(catalog),primaryKeyKind='FULL_REPO_PATH',literalPrimaryOwners=oracle,
           sourceResponsibilitiesVerified=expected_count,relatedOwnersAndRuntimeReasonsPreserved=True,mainSubjects=main_subjects,
           independentTestClassDeclarations=len(classes),independentMainClassDeclarations=len(mains),independentUniqueMainSourceFiles=len({item['path'] for item in mains.values()}),
-          positiveBeforeNegatives=True,metadataCounterexamples=rejected,productTestsExecuted=0,newAccepted=0,coverage=None,formalUpdated=False),stream,sort_keys=True,indent=2);stream.write('\n')
+          sourceOtherModuleMutationVectors=source_mutator_vectors,positiveBeforeNegatives=True,metadataCounterexamples=rejected,productTestsExecuted=0,newAccepted=0,coverage=None,formalUpdated=False),stream,sort_keys=True,indent=2);stream.write('\n')
     print(json.dumps(dict(actualExit=0,literalSourceResponsibilities=expected_count,metadataNegatives=len(rejected),manifestSha256=sha((out/'manifest.json').read_bytes()))))
