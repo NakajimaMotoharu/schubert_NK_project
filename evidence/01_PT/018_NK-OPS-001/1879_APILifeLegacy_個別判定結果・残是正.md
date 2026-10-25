@@ -1,0 +1,11 @@
+# API Life旧静的二行・個別判定結果
+
+2026-10-25/group2110、仕様1878、source3641d0f49不変更。PG9224-api-life-legacy-contract-v1/manifest.json SHA74c11ab1997d4dc48bd4ef46dd92940825697bb1a8c2dbc257f4a73f08dedc67。current normal9210/source・元9183 raw9/9185既review7をhash結合、二行を未分類から具体是正対象へ分類したが、未解決は2のまま。製品PT/新Main/coverage/受入増分0。
+
+AvoidUsingVolatileはpin済みPMD7.28 vendorに例外なし・AtomicBoolean推奨の明記があり、独立boolean可視性だから非該当とはできない。installedは既install正常後set、closeは既stop通知後一回release claimという内部責務なので、AtomicBoolean/set(true)/getAndSet(false)への是正対象とする。SS342の通知だけのhook/同owner解放を変更しない。
+
+EmptyCatchBlockもallowCommentedBlocks=falseの元ruleに一致。JDK25.0.4 compiled Runtime.removeShutdownHook→ApplicationShutdownHooks.removeをjavapで読み、shutdown開始でhooks=null→IllegalStateExceptionとすることを確認。現catchはその既知競合だけで、外側finallyがfinishedを通知する。catch type/正常通知/finallyを保持し明示return-through-finallyで終端を表現する是正候補とする。ignored rename/comment allowlist/抑制/無意味assertで0化しない。JDK modules/javap hash・実command/exit0・bytecode/SS main8b hashは9224に保持、Hook操作実行0。metadata未知行/広域catch/通知欠落/旧state消去の4反例を拒否。
+
+横展開検索はapi/web/batch mainの同installed/catch pattern、API二箇所とWebProcessLifetime.closeの同empty catch一箇所。Web installedは既private stateLockで保護しているためvolatile原因は非該当、同catchは是正候補。これ以上対象拡大せず同じ通知/解放経路の内部是正へ。raw静的CLI1/PMD9-exit4/元7reviewは保全、未解決2/Program PT/全451/actualHOLDを維持する。
+
+開始0.25/0.5/1pp cap1固定、fresh59→59丸め共有0・専有費/token工数null。登録済category照合前にREAUTHENTICATIONとしたappend前guard失敗1をtool構築費に分離、487のCONTRACT_AUDITへ正規記録し旧events上書き0。元90捕捉下限84・不明2/正確null/80大型抑制・保全buffer2を維持、元/v4/v5不変更。正式1964-53/新190受入0/技術875（部分19含む）不変更。通常報告で止めず、次の同API/Web最小内部是正はfresh予算と着手条件を満たす場合だけ別群で固定する。
