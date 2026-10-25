@@ -1,15 +1,34 @@
 package dev.codex.schubert.nk.batch.repository;
 
-import static dev.codex.schubert.nk.batch.repository.CleanupStepFixture.*;
-import static org.junit.jupiter.api.Assertions.*;
+import static dev.codex.schubert.nk.batch.repository.CleanupStepFixture.RUN;
+import static dev.codex.schubert.nk.batch.repository.CleanupStepFixture.START;
+import static dev.codex.schubert.nk.batch.repository.CleanupStepFixture.locked;
+import static dev.codex.schubert.nk.batch.repository.CleanupStepFixture.query;
+import static dev.codex.schubert.nk.batch.repository.CleanupStepFixture.sql;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.nio.file.Path;
 import java.sql.Connection;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.OffsetDateTime;
-import java.util.*;
-import org.junit.jupiter.api.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.UUID;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 /** CTERM001..003: independent SQL fixture/full-row data, no native Unit acceptance. SSC119. */

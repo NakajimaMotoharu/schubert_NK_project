@@ -1,6 +1,8 @@
 package dev.codex.schubert.nk.web.logging;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.lang.reflect.Proxy;
 import java.sql.Connection;

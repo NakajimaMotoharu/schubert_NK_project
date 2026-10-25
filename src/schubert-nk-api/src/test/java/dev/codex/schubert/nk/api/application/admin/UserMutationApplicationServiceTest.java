@@ -1,14 +1,38 @@
 package dev.codex.schubert.nk.api.application.admin;
 
-import static dev.codex.schubert.nk.api.application.admin.UserApplicationFixture.*;
-import static org.junit.jupiter.api.Assertions.*;
+import static dev.codex.schubert.nk.api.application.admin.UserApplicationFixture.MESSAGE;
+import static dev.codex.schubert.nk.api.application.admin.UserApplicationFixture.NOW;
+import static dev.codex.schubert.nk.api.application.admin.UserApplicationFixture.PASSWORD;
+import static dev.codex.schubert.nk.api.application.admin.UserApplicationFixture.TOKEN;
+import static dev.codex.schubert.nk.api.application.admin.UserApplicationFixture.context;
+import static dev.codex.schubert.nk.api.application.admin.UserApplicationFixture.input;
+import static dev.codex.schubert.nk.api.application.admin.UserApplicationFixture.reply;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import dev.codex.schubert.nk.api.error.TemporaryInfrastructureException;
 import dev.codex.schubert.nk.api.logging.ApiLogDatabaseFixture;
 import dev.codex.schubert.nk.protocol.codec.PermanentProtocolException;
 import java.nio.file.Path;
-import java.util.*;
-import org.junit.jupiter.api.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.HexFormat;
+import java.util.List;
+import java.util.Locale;
+import java.util.Optional;
+import java.util.Set;
+import java.util.UUID;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
 import org.junit.jupiter.api.io.TempDir;
 
@@ -36,8 +60,8 @@ class UserMutationApplicationServiceTest {
           h.sql(
               "update schubert.app_users set locked_until='2026-09-08T00:02:00Z',failed_count=2,failure_window_started_at='2026-09-08T00:00:00Z' where id=3");
         var request = input(layout, 3, 0, true, MESSAGE, TOKEN, 1);
-        long target = layout.equals("UCRREQ01") ? 4 : 3,
-            version = layout.equals("UCRREQ01") ? 0 : 1;
+        long target = layout.equals("UCRREQ01") ? 4 : 3;
+        long version = layout.equals("UCRREQ01") ? 0 : 1;
         reply(h.service.process(request), request, "0000", target, version, 2);
         assertEquals(1, h.inboxCount());
         assertEquals(version, h.version(target));
@@ -330,7 +354,8 @@ class UserMutationApplicationServiceTest {
                               TOKEN,
                               1))));
         }
-        int fresh = 0, replay = 0;
+        int fresh = 0;
+        int replay = 0;
         var ids = new HashSet<String>();
         for (int i = 0; i < 100; i++) {
           byte[] body = results.get(i).get(30, java.util.concurrent.TimeUnit.SECONDS);

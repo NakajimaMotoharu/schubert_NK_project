@@ -1,37 +1,62 @@
 package dev.codex.schubert.nk.api.application.question;
 
 import static dev.codex.schubert.nk.api.application.question.QuestionQueryRequestTest.lp;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import dev.codex.schubert.nk.api.domain.Role;
 import dev.codex.schubert.nk.api.error.TemporaryInfrastructureException;
-import dev.codex.schubert.nk.api.idempotency.*;
+import dev.codex.schubert.nk.api.idempotency.BoundInboxExecution;
+import dev.codex.schubert.nk.api.idempotency.EncryptedResponseSnapshot;
+import dev.codex.schubert.nk.api.idempotency.FingerprintKeyRing;
+import dev.codex.schubert.nk.api.idempotency.InboxCompletion;
+import dev.codex.schubert.nk.api.idempotency.InboxCompletionState;
+import dev.codex.schubert.nk.api.idempotency.InboxExecution;
+import dev.codex.schubert.nk.api.idempotency.InboxResultReference;
+import dev.codex.schubert.nk.api.idempotency.InboxResultReferenceType;
+import dev.codex.schubert.nk.api.idempotency.ResponseSnapshotCodec;
 import dev.codex.schubert.nk.api.security.AuthenticatedActor;
-import dev.codex.schubert.nk.protocol.codec.*;
-import dev.codex.schubert.nk.protocol.header.*;
-import dev.codex.schubert.nk.protocol.layout.*;
-import dev.codex.schubert.nk.protocol.layout.question.*;
+import dev.codex.schubert.nk.protocol.codec.PermanentProtocolException;
+import dev.codex.schubert.nk.protocol.header.AuthenticationContext;
+import dev.codex.schubert.nk.protocol.header.CommonHeader;
+import dev.codex.schubert.nk.protocol.header.InteractionKind;
+import dev.codex.schubert.nk.protocol.header.MessageKind;
+import dev.codex.schubert.nk.protocol.header.ResultCode;
+import dev.codex.schubert.nk.protocol.layout.FieldValueSet;
+import dev.codex.schubert.nk.protocol.layout.FixedPayload;
+import dev.codex.schubert.nk.protocol.layout.LayoutId;
+import dev.codex.schubert.nk.protocol.layout.PayloadValues;
+import dev.codex.schubert.nk.protocol.layout.WireMessage;
+import dev.codex.schubert.nk.protocol.layout.question.NotificationCancelResponseData;
+import dev.codex.schubert.nk.protocol.layout.question.QuestionDeleteResponseData;
 import dev.codex.schubert.nk.protocol.layout.semantic.NotificationState;
-import java.io.*;
+import java.io.ByteArrayOutputStream;
+import java.io.DataOutputStream;
 import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
-import java.time.*;
+import java.time.Instant;
 import java.time.temporal.ChronoUnit;
-import java.util.*;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Locale;
+import java.util.Optional;
+import java.util.UUID;
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
 import org.junit.jupiter.api.Test;
 
 /** UI236 literal wire and SS324 LP/JCE/NKREF1 independent oracles; no expected codec. */
 final class QuestionMutationReplayServiceTest {
-  static final UUID M = new UUID(711, 1),
-      R = new UUID(711, 2),
-      NEXT = new UUID(711, 3),
-      TOKEN = new UUID(711, 4);
-  static final Instant AT = Instant.parse("2026-10-01T00:00:01.123456Z"),
-      LATER = AT.plusSeconds(3600);
-  static final AuthenticatedActor USER = new AuthenticatedActor(1, "u1", Role.USER),
-      ADMIN = new AuthenticatedActor(1, "u1", Role.ADMIN);
+  static final UUID M = new UUID(711, 1);
+  static final UUID R = new UUID(711, 2);
+  static final UUID NEXT = new UUID(711, 3);
+  static final UUID TOKEN = new UUID(711, 4);
+  static final Instant AT = Instant.parse("2026-10-01T00:00:01.123456Z");
+  static final Instant LATER = AT.plusSeconds(3600);
+  static final AuthenticatedActor USER = new AuthenticatedActor(1, "u1", Role.USER);
+  static final AuthenticatedActor ADMIN = new AuthenticatedActor(1, "u1", Role.ADMIN);
 
   @Test
   void qry036OriginalTargetCanonicalAndTokenHeaderRoleExcluded() throws Exception {

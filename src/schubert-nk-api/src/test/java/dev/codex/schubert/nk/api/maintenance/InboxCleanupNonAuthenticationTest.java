@@ -1,8 +1,18 @@
 package dev.codex.schubert.nk.api.maintenance;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import dev.codex.schubert.nk.api.idempotency.*;
+import dev.codex.schubert.nk.api.idempotency.InboxCompletion;
+import dev.codex.schubert.nk.api.idempotency.InboxCompletionState;
+import dev.codex.schubert.nk.api.idempotency.InboxResultReference;
+import dev.codex.schubert.nk.api.idempotency.InboxResultReferenceType;
+import dev.codex.schubert.nk.api.idempotency.ResponseSnapshotCodec;
+import dev.codex.schubert.nk.api.idempotency.ResponseSnapshotIdentity;
 import dev.codex.schubert.nk.api.logging.ApiLogDatabaseFixture;
 import dev.codex.schubert.nk.api.messaging.outbound.SqlConnectionProvider;
 import dev.codex.schubert.nk.api.security.AuthContextCodec;
@@ -10,12 +20,24 @@ import dev.codex.schubert.nk.api.security.ContextHash;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
 import java.security.SecureRandom;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.time.Instant;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.Set;
+import java.util.UUID;
 import java.util.concurrent.Callable;
 import java.util.concurrent.Executors;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 /**
@@ -49,10 +71,11 @@ final class InboxCleanupNonAuthenticationTest {
           "USRRSP01",
           "UDTRSP01",
           "LGSRSP01");
-  private static final InboxResultReference
-      USER = InboxResultReference.numeric(InboxResultReferenceType.USER, 9),
-      SCRIPT = InboxResultReference.numeric(InboxResultReferenceType.SCENARIO_FILE, 11),
-      NONE = InboxResultReference.none();
+  private static final InboxResultReference USER =
+      InboxResultReference.numeric(InboxResultReferenceType.USER, 9);
+  private static final InboxResultReference SCRIPT =
+      InboxResultReference.numeric(InboxResultReferenceType.SCENARIO_FILE, 11);
+  private static final InboxResultReference NONE = InboxResultReference.none();
 
   @BeforeAll
   static void start() throws Exception {

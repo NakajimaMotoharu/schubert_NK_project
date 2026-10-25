@@ -1,13 +1,19 @@
 package dev.codex.schubert.nk.api.messaging.outbound;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.nio.charset.StandardCharsets;
 import java.sql.SQLException;
 import java.time.Clock;
-import java.util.concurrent.*;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 import java.util.concurrent.atomic.AtomicReference;
 import org.junit.jupiter.api.Test;
 
@@ -181,7 +187,8 @@ class OwnedOutboxDispatcherTest {
 
   @Test
   void outbox002CloseJoinsInFlightDispatchBeforeOwnerCanReleaseDependencies() throws Exception {
-    CountDownLatch entered = new CountDownLatch(1), release = new CountDownLatch(1);
+    CountDownLatch entered = new CountDownLatch(1);
+    CountDownLatch release = new CountDownLatch(1);
     var owned =
         OwnedOutboxDispatcher.start(
             dispatcher(
@@ -275,7 +282,8 @@ class OwnedOutboxDispatcherTest {
       owned.close();
     }
 
-    CountDownLatch gate = new CountDownLatch(1), completed = new CountDownLatch(1);
+    CountDownLatch gate = new CountDownLatch(1);
+    CountDownLatch completed = new CountDownLatch(1);
     AtomicReference<OwnedOutboxDispatcher> reference = new AtomicReference<>();
     var self =
         OwnedOutboxDispatcher.start(

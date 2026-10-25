@@ -1,10 +1,25 @@
 package dev.codex.schubert.nk.bootstrap;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNotSame;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.IOException;
-import java.lang.foreign.*;
-import java.util.*;
+import java.lang.foreign.Arena;
+import java.lang.foreign.MemorySegment;
+import java.lang.foreign.ValueLayout;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.HexFormat;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
 import java.util.concurrent.atomic.AtomicReference;
 import org.junit.jupiter.api.Test;
 
@@ -384,20 +399,26 @@ final class LinuxSystemdSessionTest {
 
   static final class Calls implements LinuxSystemdSession.Calls {
     final Arena data;
-    final MemorySegment bus, creds, message;
+    final MemorySegment bus;
+    final MemorySegment creds;
+    final MemorySegment message;
     final List<String> events = new ArrayList<>();
-    String failure = "",
-        negative = "",
-        wrongType = "",
-        nullPointer = "",
-        unique = ":1.7",
-        string = "loaded",
-        member = "";
+    String failure = "";
+    String negative = "";
+    String wrongType = "";
+    String nullPointer = "";
+    String unique = ":1.7";
+    String string = "loaded";
+    String member = "";
     int arrayLength = 16;
-    int readyAfter, readyReads;
-    long elapsedMicros, rpcDelayMicros, waitDelayMicros;
+    int readyAfter;
+    int readyReads;
+    long elapsedMicros;
+    long rpcDelayMicros;
+    long waitDelayMicros;
     final List<Long> rpcBudgets = new ArrayList<>();
-    boolean badRelease, expireAtSetter;
+    boolean badRelease;
+    boolean expireAtSetter;
 
     Calls(Arena data) {
       this.data = data;

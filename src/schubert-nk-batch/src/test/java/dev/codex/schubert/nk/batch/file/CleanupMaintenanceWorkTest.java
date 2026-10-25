@@ -1,17 +1,35 @@
 package dev.codex.schubert.nk.batch.file;
 
-import static dev.codex.schubert.nk.batch.repository.CleanupStepFixture.*;
-import static org.junit.jupiter.api.Assertions.*;
+import static dev.codex.schubert.nk.batch.repository.CleanupStepFixture.RUN;
+import static dev.codex.schubert.nk.batch.repository.CleanupStepFixture.locked;
+import static dev.codex.schubert.nk.batch.repository.CleanupStepFixture.query;
+import static dev.codex.schubert.nk.batch.repository.CleanupStepFixture.reset;
+import static dev.codex.schubert.nk.batch.repository.CleanupStepFixture.sql;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.fail;
 
-import dev.codex.schubert.nk.batch.cleanup.*;
+import dev.codex.schubert.nk.batch.cleanup.InspectionAttempt;
 import dev.codex.schubert.nk.batch.platform.RootStartupContext;
-import dev.codex.schubert.nk.batch.repository.*;
+import dev.codex.schubert.nk.batch.repository.BatchDatabaseFixture;
+import dev.codex.schubert.nk.batch.repository.BatchRepositoryException;
+import dev.codex.schubert.nk.batch.repository.BatchStepResult;
+import dev.codex.schubert.nk.batch.repository.CleanupCounts;
+import dev.codex.schubert.nk.batch.repository.CleanupTerminalRepository;
+import dev.codex.schubert.nk.batch.repository.MaintenanceCompletion;
 import dev.codex.schubert.nk.bootstrap.MaintenanceOwnerFrame;
 import java.io.IOException;
 import java.nio.file.Path;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 import java.util.concurrent.atomic.AtomicInteger;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 /** CEXEC host ordering/real PG only. Synthetic Unit ports are NEVER native acceptance/coverage. */

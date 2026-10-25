@@ -1,7 +1,13 @@
 package dev.codex.schubert.nk.api.file;
 
-import static dev.codex.schubert.nk.api.file.AssetChecksumManifestTest.*;
-import static org.junit.jupiter.api.Assertions.*;
+import static dev.codex.schubert.nk.api.file.AssetChecksumManifestTest.FORMATS;
+import static dev.codex.schubert.nk.api.file.AssetChecksumManifestTest.descriptor;
+import static dev.codex.schubert.nk.api.file.AssetChecksumManifestTest.reject;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import dev.codex.schubert.nk.storage.StorageIdentity;
 import java.io.IOException;

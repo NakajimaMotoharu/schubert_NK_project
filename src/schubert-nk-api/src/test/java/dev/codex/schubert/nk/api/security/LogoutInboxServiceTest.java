@@ -1,12 +1,32 @@
 package dev.codex.schubert.nk.api.security;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
-import dev.codex.schubert.nk.api.idempotency.*;
+import dev.codex.schubert.nk.api.idempotency.EncryptedResponseSnapshot;
+import dev.codex.schubert.nk.api.idempotency.FingerprintKeyRing;
+import dev.codex.schubert.nk.api.idempotency.InboxCompletion;
+import dev.codex.schubert.nk.api.idempotency.InboxCompletionState;
+import dev.codex.schubert.nk.api.idempotency.InboxResultReference;
+import dev.codex.schubert.nk.api.idempotency.JdbcInboxCoordinator;
+import dev.codex.schubert.nk.api.idempotency.ResponseSnapshotCodec;
+import dev.codex.schubert.nk.api.idempotency.ResponseSnapshotIdentity;
 import dev.codex.schubert.nk.api.logging.ApiLogDatabaseFixture;
 import dev.codex.schubert.nk.protocol.codec.PermanentProtocolException;
-import dev.codex.schubert.nk.protocol.header.*;
-import dev.codex.schubert.nk.protocol.layout.*;
+import dev.codex.schubert.nk.protocol.header.AuthenticationContext;
+import dev.codex.schubert.nk.protocol.header.CommonHeader;
+import dev.codex.schubert.nk.protocol.header.InteractionKind;
+import dev.codex.schubert.nk.protocol.header.MessageKind;
+import dev.codex.schubert.nk.protocol.header.ResultCode;
+import dev.codex.schubert.nk.protocol.layout.FixedPayload;
+import dev.codex.schubert.nk.protocol.layout.LayoutId;
+import dev.codex.schubert.nk.protocol.layout.WireMessage;
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.lang.reflect.InvocationTargetException;
@@ -15,15 +35,34 @@ import java.lang.reflect.Proxy;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
 import java.security.MessageDigest;
-import java.sql.*;
-import java.time.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.time.Clock;
+import java.time.Instant;
+import java.time.ZoneId;
+import java.time.ZoneOffset;
 import java.time.temporal.ChronoUnit;
-import java.util.*;
-import java.util.concurrent.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.HexFormat;
+import java.util.List;
+import java.util.Optional;
+import java.util.Set;
+import java.util.UUID;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicLong;
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
 import org.junit.jupiter.api.io.TempDir;
 
@@ -40,7 +79,8 @@ final class LogoutInboxServiceTest {
   private static AuthSessionRevocationService revocations;
   private static final Instant NOW = Instant.parse("2026-09-08T01:00:00.123456Z");
   private static final String STAMP = "20260908100000123";
-  private static final UUID REQUEST = new UUID(0, 101), SESSION = new UUID(0, 1);
+  private static final UUID REQUEST = new UUID(0, 101);
+  private static final UUID SESSION = new UUID(0, 1);
   private static final AuthenticationContext RAW = AuthenticationContext.of("a".repeat(64));
   private final AtomicLong ids = new AtomicLong(1000);
 
@@ -197,7 +237,8 @@ final class LogoutInboxServiceTest {
     try (var pool = Executors.newFixedThreadPool(16)) {
       List<Future<byte[]>> calls = new ArrayList<>();
       for (int i = 0; i < 100; i++) calls.add(pool.submit(() -> call(service, input, NOW)));
-      int initial = 0, replay = 0;
+      int initial = 0;
+      int replay = 0;
       Set<UUID> emitted = new HashSet<>();
       for (var future : calls) {
         byte[] body = future.get();

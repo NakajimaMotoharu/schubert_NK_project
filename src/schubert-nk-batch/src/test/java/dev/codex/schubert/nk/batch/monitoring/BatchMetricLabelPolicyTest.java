@@ -1,6 +1,8 @@
 package dev.codex.schubert.nk.batch.monitoring;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import io.micrometer.core.instrument.Tag;
 import java.util.AbstractList;
@@ -17,12 +19,12 @@ import org.junit.jupiter.api.Test;
 
 /** BATCHLABEL001..014/1775: independent SS literal domain matrix, no business or IO operation. */
 class BatchMetricLabelPolicyTest {
-  private static final String RUNS = "nk_batch_runs_total",
-      SUCCESS = "nk_batch_last_success_timestamp_seconds",
-      FILES = "nk_file_transfer_files",
-      BYTES = "nk_file_transfer_bytes",
-      INTEGRITY = "nk_integrity_failures_total",
-      RESTARTS = "nk_process_restarts_total";
+  private static final String RUNS = "nk_batch_runs_total";
+  private static final String SUCCESS = "nk_batch_last_success_timestamp_seconds";
+  private static final String FILES = "nk_file_transfer_files";
+  private static final String BYTES = "nk_file_transfer_bytes";
+  private static final String INTEGRITY = "nk_integrity_failures_total";
+  private static final String RESTARTS = "nk_process_restarts_total";
   private static final List<String> STEPS =
       List.of(
           "BACKUP_DB",
@@ -54,7 +56,8 @@ class BatchMetricLabelPolicyTest {
   }
 
   private static class MutableTag implements Tag {
-    String key, value;
+    String key;
+    String value;
 
     MutableTag(String key, String value) {
       this.key = key;
@@ -95,7 +98,9 @@ class BatchMetricLabelPolicyTest {
   void batchlabel002AllIndependentBatchAndTransferDomains() {
     assertEquals(10, STEPS.size());
     assertEquals(10, Set.copyOf(STEPS).size());
-    int runs = 0, success = 0, transfer = 0;
+    int runs = 0;
+    int success = 0;
+    int transfer = 0;
     for (String step : STEPS) {
       check(SUCCESS, Map.of("step", step));
       success++;

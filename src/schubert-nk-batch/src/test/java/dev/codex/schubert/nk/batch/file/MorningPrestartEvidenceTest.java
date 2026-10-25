@@ -1,15 +1,41 @@
 package dev.codex.schubert.nk.batch.file;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import dev.codex.schubert.nk.batch.backup.BackupManifest;
-import dev.codex.schubert.nk.batch.platform.*;
-import dev.codex.schubert.nk.batch.repository.*;
+import dev.codex.schubert.nk.batch.platform.ExpiryReceiptFixture;
+import dev.codex.schubert.nk.batch.platform.MorningBackupUnitCycle;
+import dev.codex.schubert.nk.batch.repository.BackupStepFixture;
+import dev.codex.schubert.nk.batch.repository.BackupStepRepository;
+import dev.codex.schubert.nk.batch.repository.BatchRun;
+import dev.codex.schubert.nk.batch.repository.BatchStep;
+import dev.codex.schubert.nk.batch.repository.BatchStepAttempt;
+import dev.codex.schubert.nk.batch.repository.BatchStepResult;
+import dev.codex.schubert.nk.batch.repository.CleanupTerminalRepository;
+import dev.codex.schubert.nk.batch.repository.ExpiryAuditRepository;
+import dev.codex.schubert.nk.batch.repository.MaintenanceActivation;
+import dev.codex.schubert.nk.batch.repository.MorningDatabaseSession;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.security.NoSuchAlgorithmException;
-import java.time.*;
-import java.util.*;
+import java.time.Clock;
+import java.time.Instant;
+import java.time.ZoneOffset;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.UUID;
 import org.junit.jupiter.api.Test;
 
 /** ISSSTEP004..007/SSC134: literal SS343 golden vectors, independent SQL-shaped input. */
@@ -18,7 +44,8 @@ final class MorningPrestartEvidenceTest {
   static final BatchRun RUN = MANIFEST.run();
   static final Instant START = Instant.parse("2026-09-13T02:00:00Z");
   static final Instant END = START.plusSeconds(3);
-  static final String MORNING = "a".repeat(32), BROKER = "b".repeat(32);
+  static final String MORNING = "a".repeat(32);
+  static final String BROKER = "b".repeat(32);
   static final StartupPermitRecords.Epoch EPOCH =
       new StartupPermitRecords.Epoch(
           StartupPermitRecords.State.INVALID,
@@ -88,7 +115,8 @@ final class MorningPrestartEvidenceTest {
   }
 
   static Input input(String mode) throws Exception {
-    boolean failed = mode.equals("failed"), reused = mode.equals("reused");
+    boolean failed = mode.equals("failed");
+    boolean reused = mode.equals("reused");
     Instant backupEnd = reused ? END.plusSeconds(1) : END;
     var begins =
         reused
@@ -175,8 +203,8 @@ final class MorningPrestartEvidenceTest {
             () -> 10_000_000_000L);
     var cleanupRows = new ArrayList<CleanupTerminalRepository.Entry>();
     var cleanupPrior = new ArrayList<Optional<CleanupTerminalRepository.Entry>>();
-    Instant cleanStart = Instant.parse("2026-09-13T02:01:00Z"),
-        cleanEnd = cleanStart.plusSeconds(1);
+    Instant cleanStart = Instant.parse("2026-09-13T02:01:00Z");
+    Instant cleanEnd = cleanStart.plusSeconds(1);
     for (int n = 0; n < 7; n++) {
       var step = CleanupTerminalRepository.STEPS.get(n);
       boolean skip = reused || (failed && n < 6);
@@ -207,8 +235,8 @@ final class MorningPrestartEvidenceTest {
             new CleanupTerminalRepository.Snapshot(cleanupRows),
             ExpiryReceiptFixture.cleanupReceipt(0, "c".repeat(32)),
             cleanupPrior);
-    Instant expiryStart = Instant.parse("2026-09-13T02:02:00Z"),
-        expiryEnd = expiryStart.plusSeconds(1);
+    Instant expiryStart = Instant.parse("2026-09-13T02:02:00Z");
+    Instant expiryEnd = expiryStart.plusSeconds(1);
     var original = new BatchStepAttempt(107, RUN, BatchStep.CLEAN_EXPIRY, 1, expiryStart, false);
     var audit =
         new ExpiryAuditRepository.Snapshot(

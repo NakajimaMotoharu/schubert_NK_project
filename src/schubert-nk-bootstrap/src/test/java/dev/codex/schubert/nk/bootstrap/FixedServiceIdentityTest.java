@@ -1,12 +1,28 @@
 package dev.codex.schubert.nk.bootstrap;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import dev.codex.schubert.nk.storage.ServiceConfigFiles;
-import java.io.*;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.nio.charset.StandardCharsets;
-import java.util.*;
-import java.util.concurrent.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.Callable;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 import org.junit.jupiter.api.Test;
 
 /** PT-OPS-SERVICEID-001..008; public literal NSS vectors, no production expected generation. */
@@ -390,10 +406,13 @@ final class FixedServiceIdentityTest {
   }
 
   static class Fake extends Process {
-    boolean alive, done = true, interrupt;
-    int exit, destroyed;
-    InputStream out = new ByteArrayInputStream(bytes("PUBLIC\n")),
-        err = new ByteArrayInputStream(new byte[0]);
+    boolean alive;
+    boolean done = true;
+    boolean interrupt;
+    int exit;
+    int destroyed;
+    InputStream out = new ByteArrayInputStream(bytes("PUBLIC\n"));
+    InputStream err = new ByteArrayInputStream(new byte[0]);
     OutputStream in = new ByteArrayOutputStream();
 
     public InputStream getInputStream() {

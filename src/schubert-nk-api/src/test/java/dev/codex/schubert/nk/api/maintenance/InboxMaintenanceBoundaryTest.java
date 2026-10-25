@@ -1,19 +1,35 @@
 package dev.codex.schubert.nk.api.maintenance;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import dev.codex.schubert.nk.api.database.MigrationInventory;
 import dev.codex.schubert.nk.api.logging.ApiLogDatabaseFixture;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.security.MessageDigest;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.time.Instant;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.HexFormat;
+import java.util.List;
+import java.util.Set;
+import java.util.UUID;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 import org.flywaydb.core.Flyway;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 /** PT-DB-INBOX-049..056; V010 SQL matrix, not an AES/Java-deletion/oneshot certificate. */
@@ -23,11 +39,11 @@ final class InboxMaintenanceBoundaryTest {
   private static String url;
   private static byte[] hash;
   private static final String ROLE = "schubert_inbox_inspector";
-  private static final UUID RUN = new UUID(0, 42),
-      MESSAGE = new UUID(0, 101),
-      SESSION = new UUID(0, 104);
-  private static final Instant COMPLETED = Instant.parse("2026-09-09T00:00:00.123Z"),
-      CUTOFF = Instant.parse("2026-09-17T00:00:00.123Z");
+  private static final UUID RUN = new UUID(0, 42);
+  private static final UUID MESSAGE = new UUID(0, 101);
+  private static final UUID SESSION = new UUID(0, 104);
+  private static final Instant COMPLETED = Instant.parse("2026-09-09T00:00:00.123Z");
+  private static final Instant CUTOFF = Instant.parse("2026-09-17T00:00:00.123Z");
   private static final Set<String> TOKEN =
       Set.of("UCR", "UST", "URL", "UPW", "ULK", "QSB", "NTC", "QDL");
   private static final List<String> ROUTES =
@@ -35,9 +51,10 @@ final class InboxMaintenanceBoundaryTest {
           "LGN", "LOG", "GAM", "SPK", "RTE", "SCF", "SRC", "SCN", "AUD", "ANM", "ANL", "VID", "MCT",
           "MCS", "MTR", "MED", "USR", "UDT", "LGS", "UCR", "UST", "URL", "UPW", "ULK", "NTS", "NTD",
           "QSS", "QSD", "QSB", "NTC", "QDL");
-  private static final String NEXT = "schubert.maintenance_next_inbox(uuid,timestamptz,uuid)",
-      DELETE = "schubert.maintenance_delete_inbox(uuid,timestamptz,uuid,text,bytea)",
-      HELPER = "schubert.maintenance_lock_inbox_backup(uuid,timestamptz)";
+  private static final String NEXT = "schubert.maintenance_next_inbox(uuid,timestamptz,uuid)";
+  private static final String DELETE =
+      "schubert.maintenance_delete_inbox(uuid,timestamptz,uuid,text,bytea)";
+  private static final String HELPER = "schubert.maintenance_lock_inbox_backup(uuid,timestamptz)";
 
   @BeforeAll
   static void start() throws Exception {

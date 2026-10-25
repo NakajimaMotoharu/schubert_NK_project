@@ -1,11 +1,30 @@
 package dev.codex.schubert.nk.batch.platform;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.io.*;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.nio.charset.StandardCharsets;
-import java.util.*;
-import java.util.concurrent.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.IdentityHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.TreeSet;
+import java.util.concurrent.ConcurrentLinkedQueue;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicReference;
 import org.junit.jupiter.api.Test;
@@ -406,22 +425,23 @@ final class ConfigurationGroupResolverTest {
     final Set<byte[]> observed = Collections.newSetFromMap(new IdentityHashMap<>());
     final IllegalStateException runtime = new IllegalStateException("synthetic runtime failure");
     final AssertionError fatal = new AssertionError("synthetic fatal reader");
-    String mode = "success",
-        closeFailure = "",
-        readBehavior = "normal",
-        getFailure = "",
-        nullGetter = "",
-        runtimeAt = "";
-    int exit,
-        position,
-        maximum,
-        destroyed,
-        forceDestroyed,
-        outputClosed,
-        inputClosed,
-        errorClosed,
-        chunk = Integer.MAX_VALUE;
-    boolean alive, interruptClose;
+    String mode = "success";
+    String closeFailure = "";
+    String readBehavior = "normal";
+    String getFailure = "";
+    String nullGetter = "";
+    String runtimeAt = "";
+    int exit;
+    int position;
+    int maximum;
+    int destroyed;
+    int forceDestroyed;
+    int outputClosed;
+    int inputClosed;
+    int errorClosed;
+    int chunk = Integer.MAX_VALUE;
+    boolean alive;
+    boolean interruptClose;
     java.util.function.Consumer<String> compound = name -> {};
 
     Child(byte[] record) {

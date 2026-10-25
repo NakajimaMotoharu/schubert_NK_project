@@ -282,7 +282,9 @@ class WebOutboxMetricCollectorTest {
       var expected = new ArrayList<long[]>();
       var jobs = new ArrayList<Callable<Optional<Observation>>>();
       for (int i = 1; i <= 64; i++) {
-        long p = i, s = i + 1L, e = i + 2L;
+        long p = i;
+        long s = i + 1L;
+        long e = i + 2L;
         expected.add(new long[] {p, s, e});
         jobs.add(
             () -> {

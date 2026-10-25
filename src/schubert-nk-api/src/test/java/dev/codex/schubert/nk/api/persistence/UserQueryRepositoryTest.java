@@ -1,6 +1,12 @@
 package dev.codex.schubert.nk.api.persistence;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import dev.codex.schubert.nk.api.domain.Role;
 import dev.codex.schubert.nk.api.logging.ApiLogDatabaseFixture;
@@ -8,17 +14,38 @@ import dev.codex.schubert.nk.api.security.AuthenticatedActor;
 import dev.codex.schubert.nk.api.security.AuthorizationException;
 import dev.codex.schubert.nk.protocol.codec.PayloadCodec;
 import dev.codex.schubert.nk.protocol.header.ResultCode;
-import dev.codex.schubert.nk.protocol.layout.*;
-import dev.codex.schubert.nk.protocol.layout.admin.*;
+import dev.codex.schubert.nk.protocol.layout.FixedPayload;
+import dev.codex.schubert.nk.protocol.layout.LayoutId;
+import dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalog;
+import dev.codex.schubert.nk.protocol.layout.TypedPayloadValues;
+import dev.codex.schubert.nk.protocol.layout.admin.UserDetailRequestData;
+import dev.codex.schubert.nk.protocol.layout.admin.UserDetailResponseData;
+import dev.codex.schubert.nk.protocol.layout.admin.UserRecord;
+import dev.codex.schubert.nk.protocol.layout.admin.UserSearchRequestData;
 import dev.codex.schubert.nk.protocol.layout.common.PagedResponseData;
-import dev.codex.schubert.nk.protocol.layout.semantic.*;
+import dev.codex.schubert.nk.protocol.layout.semantic.UserId;
+import dev.codex.schubert.nk.protocol.layout.semantic.UserRole;
+import dev.codex.schubert.nk.protocol.layout.semantic.UserState;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.time.Instant;
-import java.util.*;
-import java.util.concurrent.*;
-import org.junit.jupiter.api.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import java.util.Optional;
+import java.util.UUID;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
 import org.junit.jupiter.api.io.TempDir;
 
@@ -52,8 +79,10 @@ class UserQueryRepositoryTest {
       for (int requested : new int[] {1, 2, 3, 999999}) {
         try (var c = read()) {
           var actual = QUERIES.search(c, ADMIN, request(null, null, null, requested), NOW);
-          int pages = Math.max(1, (count + 49) / 50), page = Math.min(requested, pages);
-          int first = count == 0 ? 0 : (page - 1) * 50 + 1, last = Math.min(page * 50, count);
+          int pages = Math.max(1, (count + 49) / 50);
+          int page = Math.min(requested, pages);
+          int first = count == 0 ? 0 : (page - 1) * 50 + 1;
+          int last = Math.min(page * 50, count);
           assertPage(actual, page, count, pages, first, last);
           assertEquals(count == 0 ? 0 : last - first + 1, actual.records().size());
           for (int i = first; i > 0 && i <= last; i++) {

@@ -1,6 +1,11 @@
 package dev.codex.schubert.nk.batch.monitoring;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import io.micrometer.core.instrument.MeterRegistry;
 import io.micrometer.core.instrument.MockClock;
@@ -22,7 +27,8 @@ class BatchGcMetricRegistrationTest {
   private final BatchGcMetricRegistration registration = new BatchGcMetricRegistration();
 
   private static class Registry extends SimpleMeterRegistry implements AutoCloseable {
-    final AtomicInteger reads = new AtomicInteger(), closeInvocations = new AtomicInteger();
+    final AtomicInteger reads = new AtomicInteger();
+    final AtomicInteger closeInvocations = new AtomicInteger();
 
     Registry() {
       super(SimpleConfig.DEFAULT, new MockClock());
@@ -45,8 +51,8 @@ class BatchGcMetricRegistrationTest {
   }
 
   private static final class Fake extends JvmGcMetrics {
-    final AtomicInteger bindInvocations = new AtomicInteger(),
-        closeInvocations = new AtomicInteger();
+    final AtomicInteger bindInvocations = new AtomicInteger();
+    final AtomicInteger closeInvocations = new AtomicInteger();
     Consumer<MeterRegistry> onBindCallback = source -> {};
     Runnable onCloseCallback = () -> {};
 

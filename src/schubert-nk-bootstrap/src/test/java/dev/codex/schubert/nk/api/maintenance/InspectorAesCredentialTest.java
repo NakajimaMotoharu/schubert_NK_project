@@ -1,11 +1,24 @@
 package dev.codex.schubert.nk.api.maintenance;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotSame;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.nio.charset.StandardCharsets;
 import java.security.SecureRandom;
-import java.util.*;
-import java.util.concurrent.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Base64;
+import java.util.List;
+import java.util.concurrent.Callable;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -15,7 +28,8 @@ final class InspectorAesCredentialTest {
   @Test
   void validKeyAndVersionBounds() {
     for (String version : List.of("v", "Abcdef0123456789", "v1-._test", "9")) {
-      byte[] expected = key(32), input = envelope(version, expected);
+      byte[] expected = key(32);
+      byte[] input = envelope(version, expected);
       try (var material = InspectorAesCredential.consume(input)) {
         assertEquals(version, material.version());
         byte[] copy = material.copyKey();
@@ -118,7 +132,8 @@ final class InspectorAesCredentialTest {
       bad(input);
       input = envelope("v1", key);
       String alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
-      int pos = input.length - 3, index = alphabet.indexOf(input[pos]);
+      int pos = input.length - 3;
+      int index = alphabet.indexOf(input[pos]);
       assertEquals(0, index % 4);
       input[pos] =
           (byte) alphabet.charAt(index + 1); // same decoded32, noncanonical low padding bits
@@ -136,7 +151,8 @@ final class InspectorAesCredentialTest {
 
   @Test
   void consumedInputAndCopiedKeysDoNotAlias() {
-    byte[] expected = key(32), input = envelope("v1", expected);
+    byte[] expected = key(32);
+    byte[] input = envelope("v1", expected);
     var material = InspectorAesCredential.consume(input);
     try {
       assertArrayEquals(new byte[input.length], input);
@@ -183,7 +199,8 @@ final class InspectorAesCredentialTest {
         int index = i;
         tasks.add(
             () -> {
-              byte[] expected = key(32), input = envelope("v" + index, expected);
+              byte[] expected = key(32);
+              byte[] input = envelope("v" + index, expected);
               try (var material = InspectorAesCredential.consume(input)) {
                 assertArrayEquals(new byte[input.length], input);
                 assertEquals("v" + index, material.version());

@@ -1,21 +1,38 @@
 package dev.codex.schubert.nk.api.persistence;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import dev.codex.schubert.nk.api.domain.Role;
 import dev.codex.schubert.nk.api.logging.ApiLogDatabaseFixture;
 import dev.codex.schubert.nk.api.security.AuthenticatedActor;
 import dev.codex.schubert.nk.protocol.codec.PayloadCodec;
-import dev.codex.schubert.nk.protocol.layout.*;
+import dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalog;
+import dev.codex.schubert.nk.protocol.layout.TypedPayloadValues;
 import dev.codex.schubert.nk.protocol.layout.common.PagedResponseData;
-import dev.codex.schubert.nk.protocol.layout.log.*;
-import dev.codex.schubert.nk.protocol.layout.semantic.*;
+import dev.codex.schubert.nk.protocol.layout.log.LogRecord;
+import dev.codex.schubert.nk.protocol.layout.log.LogSearchRequestData;
+import dev.codex.schubert.nk.protocol.layout.semantic.ElapsedMilliseconds;
+import dev.codex.schubert.nk.protocol.layout.semantic.LogLevel;
+import dev.codex.schubert.nk.protocol.layout.semantic.LogType;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.time.Instant;
-import java.util.*;
-import org.junit.jupiter.api.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import java.util.Optional;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 /** UI235 fixed offsets and actual PostgreSQL projection, SSC-036/PT-ADM-055..060. */
@@ -48,9 +65,9 @@ class LogQueryRepositoryTest {
                   tracking.wrap(c),
                   ADMIN,
                   request(null, null, null, null, null, null, null, requested));
-          int pages = Math.max(1, (total + 99) / 100),
-              page = Math.min(requested, pages),
-              count = Math.min(100, Math.max(0, total - (page - 1) * 100));
+          int pages = Math.max(1, (total + 99) / 100);
+          int page = Math.min(requested, pages);
+          int count = Math.min(100, Math.max(0, total - (page - 1) * 100));
           assertEquals(
               new PagedResponseData(
                   page,

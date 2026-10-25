@@ -1,10 +1,16 @@
 package dev.codex.schubert.nk.batch.file;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
-import java.lang.reflect.*;
-import java.sql.*;
-import java.util.*;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.lang.reflect.Proxy;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.Map;
+import java.util.TreeMap;
 
 /** Public JDBC observation only; actual owned resources close before close-fault injection. */
 final class CompletionJdbcProbe {
@@ -13,8 +19,10 @@ final class CompletionJdbcProbe {
   }
 
   final Map<String, Integer> seen = new TreeMap<>();
-  Hook before = (key, count) -> {}, after = (key, count) -> {};
-  int statements, rows;
+  Hook before = (key, count) -> {};
+  Hook after = (key, count) -> {};
+  int statements;
+  int rows;
 
   Connection wrap(Connection real) {
     return (Connection)

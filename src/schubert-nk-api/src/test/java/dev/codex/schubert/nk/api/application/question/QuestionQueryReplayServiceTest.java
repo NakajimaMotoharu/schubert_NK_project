@@ -1,33 +1,69 @@
 package dev.codex.schubert.nk.api.application.question;
 
-import static dev.codex.schubert.nk.api.application.question.QuestionQueryRequestTest.*;
-import static org.junit.jupiter.api.Assertions.*;
+import static dev.codex.schubert.nk.api.application.question.QuestionQueryRequestTest.ADMIN;
+import static dev.codex.schubert.nk.api.application.question.QuestionQueryRequestTest.MESSAGE;
+import static dev.codex.schubert.nk.api.application.question.QuestionQueryRequestTest.NOW;
+import static dev.codex.schubert.nk.api.application.question.QuestionQueryRequestTest.USER;
+import static dev.codex.schubert.nk.api.application.question.QuestionQueryRequestTest.data;
+import static dev.codex.schubert.nk.api.application.question.QuestionQueryRequestTest.message;
+import static dev.codex.schubert.nk.api.application.question.QuestionQueryRequestTest.put;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import dev.codex.schubert.nk.api.domain.Role;
 import dev.codex.schubert.nk.api.error.TemporaryInfrastructureException;
-import dev.codex.schubert.nk.api.idempotency.*;
+import dev.codex.schubert.nk.api.idempotency.EncryptedResponseSnapshot;
+import dev.codex.schubert.nk.api.idempotency.InboxCompletion;
+import dev.codex.schubert.nk.api.idempotency.InboxCompletionState;
+import dev.codex.schubert.nk.api.idempotency.InboxResultReference;
+import dev.codex.schubert.nk.api.idempotency.InboxResultReferenceType;
+import dev.codex.schubert.nk.api.idempotency.ResponseSnapshotCodec;
 import dev.codex.schubert.nk.api.security.AuthenticatedActor;
-import dev.codex.schubert.nk.protocol.header.*;
-import dev.codex.schubert.nk.protocol.layout.*;
+import dev.codex.schubert.nk.protocol.header.ResultCode;
+import dev.codex.schubert.nk.protocol.layout.LayoutId;
+import dev.codex.schubert.nk.protocol.layout.PayloadRecord;
+import dev.codex.schubert.nk.protocol.layout.TypedPayloadValues;
 import dev.codex.schubert.nk.protocol.layout.common.PagedResponseData;
-import dev.codex.schubert.nk.protocol.layout.question.*;
-import dev.codex.schubert.nk.protocol.layout.semantic.*;
-import java.io.*;
+import dev.codex.schubert.nk.protocol.layout.question.NotificationDetailResponseData;
+import dev.codex.schubert.nk.protocol.layout.question.NotificationRecord;
+import dev.codex.schubert.nk.protocol.layout.question.QuestionDetailResponseData;
+import dev.codex.schubert.nk.protocol.layout.question.QuestionSummaryRecord;
+import dev.codex.schubert.nk.protocol.layout.semantic.AnswerState;
+import dev.codex.schubert.nk.protocol.layout.semantic.NotificationId;
+import dev.codex.schubert.nk.protocol.layout.semantic.NotificationState;
+import dev.codex.schubert.nk.protocol.layout.semantic.NotificationType;
+import dev.codex.schubert.nk.protocol.layout.semantic.QuestionId;
+import java.io.ByteArrayOutputStream;
+import java.io.DataOutputStream;
 import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
-import java.time.*;
+import java.time.Instant;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
-import java.util.*;
-import java.util.zip.*;
+import java.util.Arrays;
+import java.util.HexFormat;
+import java.util.List;
+import java.util.Locale;
+import java.util.Optional;
+import java.util.UUID;
+import java.util.zip.Deflater;
+import java.util.zip.DeflaterOutputStream;
 import javax.crypto.Cipher;
-import javax.crypto.spec.*;
+import javax.crypto.spec.GCMParameterSpec;
+import javax.crypto.spec.SecretKeySpec;
 import org.junit.jupiter.api.Test;
 
 /** UI236 literal wire/SSC157 prefix and independent JCE; PT-QRY013..017/NTF010. */
 final class QuestionQueryReplayServiceTest {
-  static final UUID RESPONSE = new UUID(101, 1), REPLY = new UUID(101, 2);
-  static final Instant COMPLETED = NOW.plusNanos(123456789), LATER = NOW.plusSeconds(3600);
+  static final UUID RESPONSE = new UUID(101, 1);
+  static final UUID REPLY = new UUID(101, 2);
+  static final Instant COMPLETED = NOW.plusNanos(123456789);
+  static final Instant LATER = NOW.plusSeconds(3600);
   static final long ID = 999999999999L;
 
   @Test
@@ -432,12 +468,12 @@ final class QuestionQueryReplayServiceTest {
   /** Literal whole wire: UI236 independent offsets, no production codec for expected. */
   static byte[] wire(
       QuestionQueryRequest request, UUID response, Instant at, String code, int count) {
-    boolean success = code.equals("0000") || code.equals("0200"),
-        detail = request.detailRequest(),
-        question = request.questionScope();
-    int dataLength = detail ? (question ? 8352 : 8896) : 48,
-        recordLength = detail ? 0 : (question ? 672 : 624),
-        records = success && !detail ? count : 0;
+    boolean success = code.equals("0000") || code.equals("0200");
+    boolean detail = request.detailRequest();
+    boolean question = request.questionScope();
+    int dataLength = detail ? (question ? 8352 : 8896) : 48;
+    int recordLength = detail ? 0 : (question ? 672 : 624);
+    int records = success && !detail ? count : 0;
     byte[] b = new byte[256 + dataLength + recordLength * records];
     Arrays.fill(b, (byte) 32);
     put(b, 0, "SCHBNK01001");

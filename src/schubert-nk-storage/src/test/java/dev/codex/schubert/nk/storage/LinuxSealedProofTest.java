@@ -1,13 +1,31 @@
 package dev.codex.schubert.nk.storage;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
-import java.io.*;
-import java.lang.foreign.*;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.lang.foreign.Linker;
+import java.lang.foreign.MemorySegment;
+import java.lang.foreign.ValueLayout;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.*;
-import java.util.*;
-import java.util.concurrent.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardOpenOption;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
+import java.util.concurrent.Callable;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 import org.junit.jupiter.api.Test;
 
 /** PT-OPS-SEAL-001..008; independent public byte vectors and actual immutable Linux memfd. */
@@ -287,8 +305,11 @@ final class LinuxSealedProofTest {
     final List<String> events = new ArrayList<>();
     final ByteArrayOutputStream written = new ByteArrayOutputStream();
     String failed = "";
-    long writeResult = Long.MIN_VALUE, readResult = Long.MIN_VALUE;
-    int seals = 15, reserved = 129, chunk = 8193;
+    long writeResult = Long.MIN_VALUE;
+    long readResult = Long.MIN_VALUE;
+    int seals = 15;
+    int reserved = 129;
+    int chunk = 8193;
     Throwable cleanupUnknown;
 
     Fixture(byte[] vector) {

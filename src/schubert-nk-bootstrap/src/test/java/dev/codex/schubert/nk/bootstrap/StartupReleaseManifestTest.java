@@ -1,16 +1,35 @@
 package dev.codex.schubert.nk.bootstrap;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import dev.codex.schubert.nk.storage.*;
+import dev.codex.schubert.nk.storage.DirectoryCalls;
+import dev.codex.schubert.nk.storage.InodeSecurityCalls;
+import dev.codex.schubert.nk.storage.LinuxDirectoryCalls;
+import dev.codex.schubert.nk.storage.LinuxInodeSecurity;
+import dev.codex.schubert.nk.storage.StorageIoException;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.channels.SeekableByteChannel;
-import java.nio.file.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.attribute.FileTime;
 import java.nio.file.attribute.PosixFilePermissions;
-import java.util.*;
-import java.util.concurrent.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.HexFormat;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 import java.util.function.Consumer;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
@@ -115,7 +134,10 @@ final class StartupReleaseManifestTest {
   static class Calls implements DirectoryCalls {
     final DirectoryCalls delegate = LinuxDirectoryCalls.create();
     final Set<Integer> owned = new HashSet<>();
-    int opened, closed, failOpenAt, failCloseAt;
+    int opened;
+    int closed;
+    int failOpenAt;
+    int failCloseAt;
     RuntimeException unknown;
 
     int add(int fd) throws StorageIoException {
@@ -171,22 +193,30 @@ final class StartupReleaseManifestTest {
   }
 
   final class Fixture implements StartupReleaseManifest.Io, InodeSecurityCalls {
-    final Path opt, app, releases, release, manifest;
+    final Path opt;
+    final Path app;
+    final Path releases;
+    final Path release;
+    final Path manifest;
     final Calls calls = new Calls();
     final StartupReleaseManifest.NioIo nio = new StartupReleaseManifest.NioIo();
     Consumer<Map<String, Object>> mutation = a -> {};
-    int observations, changeAt, selectors, selectorChangeAt, channelsClosed;
+    int observations;
+    int changeAt;
+    int selectors;
+    int selectorChangeAt;
+    int channelsClosed;
     String changedKey = "ino";
     byte[] acl = {};
-    boolean zeroRead,
-        shortRead,
-        oversizedRead,
-        alteredSize,
-        channelCloseFailure,
-        failAttributes,
-        failSelector,
-        failRead,
-        failOpen;
+    boolean zeroRead;
+    boolean shortRead;
+    boolean oversizedRead;
+    boolean alteredSize;
+    boolean channelCloseFailure;
+    boolean failAttributes;
+    boolean failSelector;
+    boolean failRead;
+    boolean failOpen;
     RuntimeException unknown;
 
     Fixture(String name) throws Exception {
@@ -231,7 +261,8 @@ final class StartupReleaseManifestTest {
       if (failOpen) throw new IOException("PRIVATE");
       SeekableByteChannel source = nio.open(held);
       return new SeekableByteChannel() {
-        int sizes, reads;
+        int sizes;
+        int reads;
 
         public int read(ByteBuffer b) throws IOException {
           if (failRead) throw new IOException("PRIVATE");

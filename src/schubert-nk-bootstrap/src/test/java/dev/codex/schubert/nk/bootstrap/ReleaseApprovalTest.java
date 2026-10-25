@@ -1,10 +1,17 @@
 package dev.codex.schubert.nk.bootstrap;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.nio.charset.StandardCharsets;
-import java.util.*;
-import java.util.concurrent.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.concurrent.CyclicBarrier;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
 import org.junit.jupiter.api.Test;
 
 /** Independent literal ASCII frames; public digest only, never production-generated expected. */
@@ -90,7 +97,8 @@ final class ReleaseApprovalTest {
 
   @Test
   void approval006DefensiveCopies() {
-    byte[] input = bytes(GOLDEN), saved = input.clone();
+    byte[] input = bytes(GOLDEN);
+    byte[] saved = input.clone();
     var value = ReleaseApproval.parse(input);
     assertArrayEquals(saved, input);
     Arrays.fill(input, (byte) 0);

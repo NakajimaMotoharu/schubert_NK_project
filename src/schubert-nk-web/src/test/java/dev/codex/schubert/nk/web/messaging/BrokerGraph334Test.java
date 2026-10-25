@@ -1,6 +1,11 @@
 package dev.codex.schubert.nk.web.messaging;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import jakarta.jms.ConnectionFactory;
 import java.lang.reflect.Proxy;
@@ -26,8 +31,11 @@ final class BrokerGraph334Test {
 
   private static Throwable observeOpen(Throwable fault, boolean supplierFailure) {
     var copy = new char[] {'P', 'T'};
-    int[] reads = {0}, creates = {0}, closes = {0};
-    int[] arity = {0}, unexpected = {0};
+    int[] reads = {0};
+    int[] creates = {0};
+    int[] closes = {0};
+    int[] arity = {0};
+    int[] unexpected = {0};
     Object[] roleAndMode = new Object[2];
     ConnectionFactory factory =
         (ConnectionFactory)
@@ -83,7 +91,8 @@ final class BrokerGraph334Test {
   }
 
   private static Throwable observeClose(Throwable failure) {
-    int[] reads = {0}, closes = {0};
+    int[] reads = {0};
+    int[] closes = {0};
     Throwable[] fault = {failure};
     ConnectionFactory factory =
         (ConnectionFactory)

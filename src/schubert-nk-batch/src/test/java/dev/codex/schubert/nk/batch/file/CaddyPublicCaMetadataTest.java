@@ -1,6 +1,6 @@
 package dev.codex.schubert.nk.batch.file;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.io.IOException;
 import java.nio.file.attribute.FileTime;

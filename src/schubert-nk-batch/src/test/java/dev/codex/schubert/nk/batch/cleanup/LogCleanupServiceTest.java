@@ -1,15 +1,36 @@
 package dev.codex.schubert.nk.batch.cleanup;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import dev.codex.schubert.nk.batch.repository.*;
+import dev.codex.schubert.nk.batch.repository.BatchDatabaseFixture;
+import dev.codex.schubert.nk.batch.repository.BatchRepositoryException;
+import dev.codex.schubert.nk.batch.repository.BatchRun;
+import dev.codex.schubert.nk.batch.repository.CleanupCounts;
+import dev.codex.schubert.nk.batch.repository.CleanupKind;
+import dev.codex.schubert.nk.batch.repository.CleanupRepository;
+import dev.codex.schubert.nk.batch.repository.LogCleanupProgress;
 import java.nio.file.Path;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.time.Instant;
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.UUID;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.LongSupplier;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 /** NK-BAT-001; UI251/SS341/SSC-051; PG-D-138; PT-BAT-018..029. */
@@ -634,7 +655,8 @@ final class LogCleanupServiceTest {
       throws Exception {
     reset();
     var probe = new ServiceJdbcProbe();
-    String body = pair.get(0), close = pair.get(1);
+    String body = pair.get(0);
+    String close = pair.get(1);
     boolean clockBody = body.equals("clock");
     Throwable primary = first < 0 ? null : resourceFault(first, clockBody);
     Throwable secondary = same ? primary : resourceFault(second, false);

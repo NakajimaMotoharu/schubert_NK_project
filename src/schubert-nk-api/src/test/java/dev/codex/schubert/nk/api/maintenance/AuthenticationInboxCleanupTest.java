@@ -1,18 +1,37 @@
 package dev.codex.schubert.nk.api.maintenance;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import dev.codex.schubert.nk.api.idempotency.*;
+import dev.codex.schubert.nk.api.idempotency.InboxResultReference;
+import dev.codex.schubert.nk.api.idempotency.ResponseSnapshotCodec;
+import dev.codex.schubert.nk.api.idempotency.ResponseSnapshotIdentity;
 import dev.codex.schubert.nk.api.logging.ApiLogDatabaseFixture;
 import dev.codex.schubert.nk.bootstrap.MaintenanceOwnerFrame;
 import java.io.IOException;
 import java.nio.file.Path;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.time.Instant;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.Set;
+import java.util.UUID;
 import java.util.concurrent.Callable;
 import java.util.concurrent.Executors;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 /**
@@ -22,7 +41,8 @@ final class AuthenticationInboxCleanupTest {
   @TempDir static Path root;
   private static ApiLogDatabaseFixture db;
   private static String url;
-  private static final UUID MESSAGE = new UUID(0, 101), SESSION = new UUID(0, 104);
+  private static final UUID MESSAGE = new UUID(0, 101);
+  private static final UUID SESSION = new UUID(0, 104);
   private static final InspectionRun RUN =
       new InspectionRun(new UUID(0, 42), Instant.parse("2026-09-17T00:00:00.123Z"));
   private static final ResponseSnapshotIdentity LOGIN =

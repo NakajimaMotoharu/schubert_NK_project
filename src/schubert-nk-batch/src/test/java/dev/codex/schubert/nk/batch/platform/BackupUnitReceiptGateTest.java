@@ -1,6 +1,10 @@
 package dev.codex.schubert.nk.batch.platform;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -317,7 +321,9 @@ final class BackupUnitReceiptGateTest {
     final List<String> calls = new ArrayList<>();
     List<Optional<InspectorUnitSnapshot>> bus;
     List<Optional<InspectorUnitSnapshot>> kernel;
-    int b, k, roots;
+    int b;
+    int k;
+    int roots;
     int rootFailureAt;
     boolean kernelFailure;
 

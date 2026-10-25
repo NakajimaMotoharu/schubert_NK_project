@@ -1,6 +1,8 @@
 package dev.codex.schubert.nk.api.security;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.nio.charset.StandardCharsets;
 import java.util.List;
@@ -54,7 +56,9 @@ final class LoginUsernameTest {
 
   @Test
   void java25ScalarLowercaseExpansionFitsTheIndependentNinetySixByteBound() {
-    int maximumNumerator = 1, maximumDenominator = 1, maximumScalar = 0;
+    int maximumNumerator = 1;
+    int maximumDenominator = 1;
+    int maximumScalar = 0;
     for (int scalar = 0; scalar <= Character.MAX_CODE_POINT; scalar++) {
       if (scalar >= 0xd800 && scalar <= 0xdfff) continue;
       String input = Character.toString(scalar);

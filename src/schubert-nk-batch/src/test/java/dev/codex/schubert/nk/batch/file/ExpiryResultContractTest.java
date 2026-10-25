@@ -1,17 +1,31 @@
 package dev.codex.schubert.nk.batch.file;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import dev.codex.schubert.nk.batch.mq.*;
+import dev.codex.schubert.nk.batch.mq.ArtemisExpiryPurgeClient;
+import dev.codex.schubert.nk.batch.mq.ArtemisExpiryPurgeException;
+import dev.codex.schubert.nk.batch.mq.ArtemisManagementReadinessException;
 import dev.codex.schubert.nk.batch.platform.CleanupWorkerRequest;
-import dev.codex.schubert.nk.batch.repository.*;
+import dev.codex.schubert.nk.batch.repository.BatchDatabaseFixture;
+import dev.codex.schubert.nk.batch.repository.BatchRun;
 import dev.codex.schubert.nk.bootstrap.MaintenanceOwnerFrame;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.sql.Connection;
 import java.time.Instant;
-import java.util.*;
-import org.junit.jupiter.api.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 /** EXP711: literal MQ outcomes + genuine isolated SQL; never a native admission claim. */
@@ -85,7 +99,10 @@ final class ExpiryResultContractTest {
 
   static final class Work implements CleanupExpiryExecution.ExpiryWork {
     final List<String> calls = new ArrayList<>();
-    boolean purgeFails, unhealthy, healthFails, noSelected;
+    boolean purgeFails;
+    boolean unhealthy;
+    boolean healthFails;
+    boolean noSelected;
     RuntimeException unknown;
     int healthCalls;
 

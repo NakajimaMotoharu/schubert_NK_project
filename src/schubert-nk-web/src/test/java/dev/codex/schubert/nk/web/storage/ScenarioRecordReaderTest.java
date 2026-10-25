@@ -1,6 +1,8 @@
 package dev.codex.schubert.nk.web.storage;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import dev.codex.schubert.nk.protocol.codec.PermanentProtocolException;
 import dev.codex.schubert.nk.protocol.layout.LayoutValidationException;
@@ -148,7 +150,9 @@ class ScenarioRecordReaderTest {
     final FileChannel delegate;
     final Path file;
     String mode = "NORMAL";
-    int maximumRead = 4800, maximumRequested, rewinds;
+    int maximumRead = 4800;
+    int maximumRequested;
+    int rewinds;
     long bytesRead;
 
     FaultChannel(Path file) throws IOException {

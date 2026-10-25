@@ -1,11 +1,14 @@
 package dev.codex.schubert.nk.api.persistence;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -14,8 +17,14 @@ final class UserQueryFaults {
   final Map<String, Integer> faultOccurrences = new HashMap<>();
   final Map<String, Object> columns = new HashMap<>();
   String fault = "none";
-  int changedRow, statements, resultCloses, statementCloses;
-  boolean empty, duplicate, wrongReadOnly, wrongAutoCommit;
+  int changedRow;
+  int statements;
+  int resultCloses;
+  int statementCloses;
+  boolean empty;
+  boolean duplicate;
+  boolean wrongReadOnly;
+  boolean wrongAutoCommit;
 
   Connection wrap(Connection connection) {
     return (Connection)
@@ -58,7 +67,8 @@ final class UserQueryFaults {
 
   private ResultSet rows(ResultSet rows) {
     final int[] row = {0};
-    final boolean[] altered = {false}, wasNull = {false};
+    final boolean[] altered = {false};
+    final boolean[] wasNull = {false};
     return (ResultSet)
         Proxy.newProxyInstance(
             ResultSet.class.getClassLoader(),

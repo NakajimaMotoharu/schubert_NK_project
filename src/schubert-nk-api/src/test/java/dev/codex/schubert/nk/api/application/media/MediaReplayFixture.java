@@ -1,20 +1,46 @@
 package dev.codex.schubert.nk.api.application.media;
 
-import static dev.codex.schubert.nk.api.application.media.MediaRequestFixture.*;
-import static org.junit.jupiter.api.Assertions.*;
+import static dev.codex.schubert.nk.api.application.media.MediaRequestFixture.data;
+import static dev.codex.schubert.nk.api.application.media.MediaRequestFixture.field;
+import static dev.codex.schubert.nk.api.application.media.MediaRequestFixture.message;
+import static dev.codex.schubert.nk.api.application.media.MediaRequestFixture.put;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import dev.codex.schubert.nk.api.idempotency.*;
+import dev.codex.schubert.nk.api.idempotency.EncryptedResponseSnapshot;
+import dev.codex.schubert.nk.api.idempotency.InboxCompletion;
+import dev.codex.schubert.nk.api.idempotency.InboxCompletionState;
+import dev.codex.schubert.nk.api.idempotency.InboxResultReference;
+import dev.codex.schubert.nk.api.idempotency.ResponseSnapshotCodec;
 import dev.codex.schubert.nk.protocol.codec.PayloadCodec;
-import dev.codex.schubert.nk.protocol.header.*;
-import dev.codex.schubert.nk.protocol.layout.*;
-import java.io.*;
+import dev.codex.schubert.nk.protocol.header.AuthenticationContext;
+import dev.codex.schubert.nk.protocol.header.CommonHeader;
+import dev.codex.schubert.nk.protocol.header.InteractionKind;
+import dev.codex.schubert.nk.protocol.header.MessageKind;
+import dev.codex.schubert.nk.protocol.layout.FixedPayload;
+import dev.codex.schubert.nk.protocol.layout.LayoutId;
+import dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalog;
+import dev.codex.schubert.nk.protocol.layout.TypedPayloadValues;
+import dev.codex.schubert.nk.protocol.layout.WireMessage;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
 import java.time.Instant;
-import java.util.*;
-import java.util.zip.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Locale;
+import java.util.Optional;
+import java.util.UUID;
+import java.util.zip.Deflater;
+import java.util.zip.DeflaterOutputStream;
+import java.util.zip.InflaterInputStream;
 import javax.crypto.Cipher;
-import javax.crypto.spec.*;
+import javax.crypto.spec.GCMParameterSpec;
+import javax.crypto.spec.SecretKeySpec;
 
 /** UI232/235 byte offsets and independent SS352 JCE/AAD oracle. No expected production codec. */
 final class MediaReplayFixture {

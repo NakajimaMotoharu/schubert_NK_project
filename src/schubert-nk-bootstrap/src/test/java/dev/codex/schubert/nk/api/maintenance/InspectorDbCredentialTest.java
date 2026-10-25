@@ -1,6 +1,11 @@
 package dev.codex.schubert.nk.api.maintenance;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotSame;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
@@ -50,7 +55,8 @@ final class InspectorDbCredentialTest {
   void ownedCopiesAndClose() {
     var material = InspectorDbCredential.consume(new byte[] {65, 66, 67});
     try {
-      char[] first = material.copyPassword(), second = material.copyPassword();
+      char[] first = material.copyPassword();
+      char[] second = material.copyPassword();
       assertNotSame(first, second);
       first[0] = 'Z';
       assertArrayEquals(new char[] {65, 66, 67}, second);

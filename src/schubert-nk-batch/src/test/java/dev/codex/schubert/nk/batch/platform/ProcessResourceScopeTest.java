@@ -1,10 +1,23 @@
 package dev.codex.schubert.nk.batch.platform;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.io.*;
-import java.util.*;
-import java.util.concurrent.*;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.FutureTask;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 import org.junit.jupiter.api.Test;
 
@@ -315,7 +328,11 @@ final class ProcessResourceScopeTest {
   private static final class StreamingChild extends Process {
     final String mode;
     final CountDownLatch drained = new CountDownLatch(1);
-    int waits, destroyed, outputClosed, inputClosed, errorClosed;
+    int waits;
+    int destroyed;
+    int outputClosed;
+    int inputClosed;
+    int errorClosed;
 
     StreamingChild(String mode) {
       this.mode = mode;
@@ -440,7 +457,9 @@ final class ProcessResourceScopeTest {
     final boolean missing;
     final int[] closes = new int[3];
     final IllegalStateException fault = new IllegalStateException("private getter");
-    int getters, destroyed, waits;
+    int getters;
+    int destroyed;
+    int waits;
 
     Child(int failing, boolean missing) {
       this.failing = failing;

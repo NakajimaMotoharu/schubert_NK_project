@@ -1,6 +1,9 @@
 package dev.codex.schubert.nk.api.messaging.inbound;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import jakarta.jms.JMSConsumer;
 import jakarta.jms.JMSContext;
@@ -154,7 +157,12 @@ final class ParentGraph334Test {
   private static final class Fixture {
     final List<Integer> closeOrder = new ArrayList<>();
     final Throwable[] closeFaults = new Throwable[6];
-    int created, started, logAcquires, asyncAcquires, signals, business;
+    int created;
+    int started;
+    int logAcquires;
+    int asyncAcquires;
+    int signals;
+    int business;
 
     JMSContext context() {
       int index = created++;

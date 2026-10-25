@@ -1,6 +1,11 @@
 package dev.codex.schubert.nk.web.media;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -86,7 +91,9 @@ class MediaBodyStreamerTest {
   private static final class Output extends java.io.OutputStream {
     final ByteArrayOutputStream bytes = new ByteArrayOutputStream();
     int maxWrite;
-    boolean closed, flushed, fail;
+    boolean closed;
+    boolean flushed;
+    boolean fail;
 
     @Override
     public void write(int value) {
@@ -114,7 +121,10 @@ class MediaBodyStreamerTest {
   private static final class Channel implements SeekableByteChannel {
     final byte[] data = new byte[100];
     String fault = "none";
-    int cursor, maxRead = 100, reads, failAfter = Integer.MAX_VALUE;
+    int cursor;
+    int maxRead = 100;
+    int reads;
+    int failAfter = Integer.MAX_VALUE;
     boolean closed;
 
     Channel() {

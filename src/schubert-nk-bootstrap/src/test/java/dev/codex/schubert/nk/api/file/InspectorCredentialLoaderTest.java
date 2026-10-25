@@ -1,17 +1,42 @@
 package dev.codex.schubert.nk.api.file;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
-import dev.codex.schubert.nk.storage.*;
+import dev.codex.schubert.nk.storage.DirectoryCalls;
+import dev.codex.schubert.nk.storage.InodeSecurityCalls;
+import dev.codex.schubert.nk.storage.LinuxDirectoryCalls;
+import dev.codex.schubert.nk.storage.LinuxInodeSecurity;
+import dev.codex.schubert.nk.storage.OwnedTransferDirectory;
+import dev.codex.schubert.nk.storage.StorageIoException;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.channels.SeekableByteChannel;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.*;
+import java.nio.file.Files;
+import java.nio.file.NoSuchFileException;
+import java.nio.file.Path;
 import java.nio.file.attribute.FileTime;
 import java.security.SecureRandom;
-import java.util.*;
-import java.util.concurrent.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Base64;
+import java.util.EnumMap;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.HexFormat;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.concurrent.Callable;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 import java.util.function.Consumer;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
@@ -446,11 +471,21 @@ final class InspectorCredentialLoaderTest {
 
   static final class TestIo implements InspectorCredentialLoader.Io {
     final InspectorCredentialLoader.NioIo actual = new InspectorCredentialLoader.NioIo();
-    String fault = "", securityFault = "";
-    int rootAttributes, fileAttributes, opens, reads, closes, fileNative, rootRo, fileRo;
+    String fault = "";
+    String securityFault = "";
+    int rootAttributes;
+    int fileAttributes;
+    int opens;
+    int reads;
+    int closes;
+    int fileNative;
+    int rootRo;
+    int fileRo;
     int maxRead = 70;
-    Consumer<Map<String, Object>> rootChange = a -> {}, fileChange = a -> {};
-    Consumer<Map<String, Object>> lateRootChange = a -> {}, lateFileChange = a -> {};
+    Consumer<Map<String, Object>> rootChange = (a) -> {};
+    Consumer<Map<String, Object>> fileChange = (a) -> {};
+    Consumer<Map<String, Object>> lateRootChange = (a) -> {};
+    Consumer<Map<String, Object>> lateFileChange = (a) -> {};
     Hook beforeRead = () -> {};
     final List<byte[]> buffers = new ArrayList<>();
     byte[] observedContent = new byte[0];
@@ -512,7 +547,8 @@ final class InspectorCredentialLoaderTest {
             default:
               break;
           }
-          int originalLimit = buffer.limit(), start = buffer.position();
+          int originalLimit = buffer.limit();
+          int start = buffer.position();
           buffer.limit(Math.min(originalLimit, start + maxRead));
           int count;
           try {
@@ -629,7 +665,9 @@ final class InspectorCredentialLoaderTest {
   static final class EntryCloseProbe implements DirectoryCalls {
     final DirectoryCalls delegate = LinuxDirectoryCalls.create();
     final Set<Integer> entries = new HashSet<>();
-    boolean closeMissing, closeUnavailable, openFailure;
+    boolean closeMissing;
+    boolean closeUnavailable;
+    boolean openFailure;
 
     @Override
     public int openRoot() throws StorageIoException {

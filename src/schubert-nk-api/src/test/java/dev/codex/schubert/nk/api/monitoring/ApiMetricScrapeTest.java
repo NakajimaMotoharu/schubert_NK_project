@@ -1,6 +1,11 @@
 package dev.codex.schubert.nk.api.monitoring;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import dev.codex.schubert.nk.protocol.header.ResultCode;
 import dev.codex.schubert.nk.protocol.layout.LayoutId;
@@ -32,10 +37,10 @@ import org.junit.jupiter.api.Test;
 
 /** APIPOL001..014/1773: literal domains and values, pure host memory, no business/IO authority. */
 class ApiMetricScrapeTest {
-  private static final String POOL = "nk_db_pool_connections",
-      INBOX = "nk_inbox_replays_total",
-      DB = "nk_db_query_duration_seconds",
-      MQD = "nk_mq_processing_duration_seconds";
+  private static final String POOL = "nk_db_pool_connections";
+  private static final String INBOX = "nk_inbox_replays_total";
+  private static final String DB = "nk_db_query_duration_seconds";
+  private static final String MQD = "nk_mq_processing_duration_seconds";
   private final ApiMetricScrape policy = new ApiMetricScrape();
 
   private static class Registry extends SimpleMeterRegistry implements AutoCloseable {

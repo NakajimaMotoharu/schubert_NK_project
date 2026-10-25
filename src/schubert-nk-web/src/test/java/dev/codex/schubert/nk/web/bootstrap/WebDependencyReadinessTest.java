@@ -1,6 +1,10 @@
 package dev.codex.schubert.nk.web.bootstrap;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import dev.codex.schubert.nk.web.logging.WebLogDatabaseFixture;
 import jakarta.jms.JMSConsumer;

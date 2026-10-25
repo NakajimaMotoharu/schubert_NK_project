@@ -1,18 +1,33 @@
 package dev.codex.schubert.nk.api.application.question;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import dev.codex.schubert.nk.api.domain.Role;
-import dev.codex.schubert.nk.api.idempotency.*;
+import dev.codex.schubert.nk.api.idempotency.FingerprintKeyRing;
 import dev.codex.schubert.nk.api.security.AuthenticatedActor;
-import dev.codex.schubert.nk.protocol.codec.*;
-import dev.codex.schubert.nk.protocol.header.*;
-import dev.codex.schubert.nk.protocol.layout.*;
+import dev.codex.schubert.nk.protocol.codec.PermanentProtocolException;
+import dev.codex.schubert.nk.protocol.header.AuthenticationContext;
+import dev.codex.schubert.nk.protocol.header.CommonHeader;
+import dev.codex.schubert.nk.protocol.header.InteractionKind;
+import dev.codex.schubert.nk.protocol.header.MessageKind;
+import dev.codex.schubert.nk.protocol.layout.FixedPayload;
+import dev.codex.schubert.nk.protocol.layout.LayoutId;
+import dev.codex.schubert.nk.protocol.layout.TypedPayloadValues;
+import dev.codex.schubert.nk.protocol.layout.WireMessage;
 import dev.codex.schubert.nk.protocol.layout.common.PagedResponseData;
-import java.io.*;
+import java.io.ByteArrayOutputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.time.Instant;
-import java.util.*;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
 import org.junit.jupiter.api.Test;
@@ -21,8 +36,8 @@ import org.junit.jupiter.api.Test;
 final class QuestionQueryRequestTest {
   static final UUID MESSAGE = new UUID(100, 100);
   static final Instant NOW = Instant.parse("2026-10-01T00:00:01Z");
-  static final AuthenticatedActor USER = new AuthenticatedActor(1, "u1", Role.USER),
-      ADMIN = new AuthenticatedActor(1, "u1", Role.ADMIN);
+  static final AuthenticatedActor USER = new AuthenticatedActor(1, "u1", Role.USER);
+  static final AuthenticatedActor ADMIN = new AuthenticatedActor(1, "u1", Role.ADMIN);
 
   @Test
   void qry009CanonicalFieldsNullAndAllLayoutsUseIndependentJce() throws Exception {
@@ -36,7 +51,9 @@ final class QuestionQueryRequestTest {
         assertEquals(layout.equals("QSSREQ01") && populated, request.usernameSpecified());
         assertEquals(layout.substring(0, 3) + "RSP01", request.responseLayoutId().value());
         assertEquals("QuestionQueryRequest[REDACTED]", request.toString());
-        List<String> names, types, values;
+        List<String> names;
+        List<String> types;
+        List<String> values;
         if (layout.equals("QSSREQ01")) {
           names =
               List.of(

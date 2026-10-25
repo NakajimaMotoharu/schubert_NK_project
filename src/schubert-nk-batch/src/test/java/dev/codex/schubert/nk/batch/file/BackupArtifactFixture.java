@@ -1,18 +1,44 @@
 package dev.codex.schubert.nk.batch.file;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import dev.codex.schubert.nk.batch.backup.*;
-import dev.codex.schubert.nk.storage.*;
+import dev.codex.schubert.nk.batch.backup.BackupFileDigest;
+import dev.codex.schubert.nk.batch.backup.BackupManifest;
+import dev.codex.schubert.nk.batch.backup.BackupManifestFixture;
+import dev.codex.schubert.nk.storage.DirectoryCalls;
+import dev.codex.schubert.nk.storage.InodeSecurityCalls;
+import dev.codex.schubert.nk.storage.LinuxDirectoryCalls;
+import dev.codex.schubert.nk.storage.OwnedTransferDirectory;
+import dev.codex.schubert.nk.storage.StorageIoException;
 import java.io.IOException;
-import java.lang.reflect.*;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Proxy;
 import java.nio.ByteBuffer;
 import java.nio.channels.SeekableByteChannel;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.*;
-import java.security.*;
-import java.util.*;
-import java.util.function.*;
+import java.nio.file.DirectoryIteratorException;
+import java.nio.file.DirectoryStream;
+import java.nio.file.Files;
+import java.nio.file.LinkOption;
+import java.nio.file.Path;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.IdentityHashMap;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Set;
+import java.util.TreeMap;
+import java.util.function.BiConsumer;
+import java.util.function.Function;
 
 /**
  * Public synthetic content, real Linux FD/IO, synthetic root/dedicated UID policy.
@@ -24,7 +50,8 @@ final class BackupArtifactFixture
         BackupManifestReader.Io,
         InodeSecurityCalls {
   static final String DIR = "20260913-000002-12345678-9abc-def0-8123-456789abcdef";
-  static final long UID = 2000, GID = 2001;
+  static final long UID = 2000;
+  static final long GID = 2001;
   static final String DUMP_HASH =
       "9ae12cbba1c4e9e71419a38fde527ad49dac8ecd22d408173df80165d27d0aa9";
   static final String CONFIG_HASH =
@@ -57,21 +84,34 @@ final class BackupArtifactFixture
           Map.entry("effectiveUid", 2),
           Map.entry("clock", 207));
 
-  final Path parent, child;
+  final Path parent;
+  final Path child;
   final OwnedTransferDirectory root;
   final BackupArtifactVerifier.NioIo real = new BackupArtifactVerifier.NioIo();
   final Map<String, Integer> counts = new LinkedHashMap<>();
   final List<String> events = new ArrayList<>();
-  final Set<Integer> directories = new HashSet<>(), entries = new HashSet<>();
+  final Set<Integer> directories = new HashSet<>();
+  final Set<Integer> entries = new HashSet<>();
   final Set<byte[]> buffers = Collections.newSetFromMap(new IdentityHashMap<>());
   final Map<String, byte[]> initial;
   final int rootDescriptor;
-  int channelCount, streamCount, faultAt, position;
+  int channelCount;
+  int streamCount;
+  int faultAt;
+  int position;
   int smallRead = Integer.MAX_VALUE;
-  long effective = 0, clockValue = 100;
-  boolean tracking, readonly, nullAttributes, nullChannel, nullNames, nullDigest;
+  long effective = 0;
+  long clockValue = 100;
+  boolean tracking;
+  boolean readonly;
+  boolean nullAttributes;
+  boolean nullChannel;
+  boolean nullNames;
+  boolean nullDigest;
   byte[] acl = new byte[0];
-  String selectedRole = "*", readMode = "", sizeMode = "";
+  String selectedRole = "*";
+  String readMode = "";
+  String sizeMode = "";
   Throwable primary;
   final Set<String> extraFaults = new HashSet<>();
   final Map<String, Throwable> faultTypes = new HashMap<>();
@@ -307,7 +347,8 @@ final class BackupArtifactFixture
     String role = role(held);
     channelCount++;
     return new SeekableByteChannel() {
-      int reads, sizes;
+      int reads;
+      int sizes;
 
       @Override
       public int read(ByteBuffer buffer) throws IOException {

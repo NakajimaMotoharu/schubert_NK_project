@@ -1,28 +1,78 @@
 package dev.codex.schubert.nk.web.messaging;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import dev.codex.schubert.nk.protocol.header.*;
-import dev.codex.schubert.nk.protocol.layout.*;
-import dev.codex.schubert.nk.protocol.layout.admin.*;
-import dev.codex.schubert.nk.protocol.layout.auth.*;
-import dev.codex.schubert.nk.protocol.layout.media.*;
-import dev.codex.schubert.nk.protocol.layout.question.*;
-import dev.codex.schubert.nk.protocol.layout.semantic.*;
+import dev.codex.schubert.nk.protocol.header.AuthenticationContext;
+import dev.codex.schubert.nk.protocol.header.ResultCode;
+import dev.codex.schubert.nk.protocol.layout.LayoutId;
+import dev.codex.schubert.nk.protocol.layout.PayloadData;
+import dev.codex.schubert.nk.protocol.layout.TypedPayloadValues;
+import dev.codex.schubert.nk.protocol.layout.admin.PasswordResetRequestData;
+import dev.codex.schubert.nk.protocol.layout.admin.UserCreateRequestData;
+import dev.codex.schubert.nk.protocol.layout.admin.UserDetailRequestData;
+import dev.codex.schubert.nk.protocol.layout.admin.UserMutationResponseData;
+import dev.codex.schubert.nk.protocol.layout.admin.UserRoleRequestData;
+import dev.codex.schubert.nk.protocol.layout.admin.UserSearchRequestData;
+import dev.codex.schubert.nk.protocol.layout.admin.UserStatusRequestData;
+import dev.codex.schubert.nk.protocol.layout.admin.UserUnlockRequestData;
+import dev.codex.schubert.nk.protocol.layout.auth.LogoutRequestData;
+import dev.codex.schubert.nk.protocol.layout.auth.LogoutResponseData;
+import dev.codex.schubert.nk.protocol.layout.media.AudioDescriptorRequestData;
+import dev.codex.schubert.nk.protocol.layout.media.MusicDescriptorRequestData;
+import dev.codex.schubert.nk.protocol.layout.media.VideoDescriptorRequestData;
+import dev.codex.schubert.nk.protocol.layout.question.NotificationCancelRequestData;
+import dev.codex.schubert.nk.protocol.layout.question.NotificationCancelResponseData;
+import dev.codex.schubert.nk.protocol.layout.question.NotificationDetailRequestData;
+import dev.codex.schubert.nk.protocol.layout.question.NotificationSearchRequestData;
+import dev.codex.schubert.nk.protocol.layout.question.QuestionDeleteRequestData;
+import dev.codex.schubert.nk.protocol.layout.question.QuestionDeleteResponseData;
+import dev.codex.schubert.nk.protocol.layout.question.QuestionDetailRequestData;
+import dev.codex.schubert.nk.protocol.layout.question.QuestionSearchRequestData;
+import dev.codex.schubert.nk.protocol.layout.question.QuestionSubmitRequestData;
+import dev.codex.schubert.nk.protocol.layout.question.QuestionSubmitResponseData;
+import dev.codex.schubert.nk.protocol.layout.semantic.AudioId;
+import dev.codex.schubert.nk.protocol.layout.semantic.ContentDisposition;
+import dev.codex.schubert.nk.protocol.layout.semantic.NotificationId;
+import dev.codex.schubert.nk.protocol.layout.semantic.NotificationState;
+import dev.codex.schubert.nk.protocol.layout.semantic.QuestionId;
+import dev.codex.schubert.nk.protocol.layout.semantic.UserId;
+import dev.codex.schubert.nk.protocol.layout.semantic.UserRole;
 import jakarta.jms.JMSException;
 import java.nio.charset.StandardCharsets;
-import java.time.*;
-import java.util.*;
-import java.util.concurrent.*;
-import java.util.concurrent.atomic.*;
-import java.util.function.*;
+import java.time.Clock;
+import java.time.Duration;
+import java.time.Instant;
+import java.time.ZoneOffset;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Locale;
+import java.util.Optional;
+import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicLong;
+import java.util.function.BiFunction;
+import java.util.function.Consumer;
+import java.util.function.Supplier;
 import org.junit.jupiter.api.Test;
 
 /** NK-WEB001/UI232/234/235/236/SS323; PG-D-342; PT-WEB-S3WIRE001..008. */
 class WebBusinessWireClientsTest {
   private static final Clock CLOCK =
       Clock.fixed(Instant.parse("2026-10-02T19:00:00.123456Z"), ZoneOffset.UTC);
-  private static final UUID ID = new UUID(0, 1), TOKEN = new UUID(0, 2);
+  private static final UUID ID = new UUID(0, 1);
+  private static final UUID TOKEN = new UUID(0, 2);
   private static final AuthenticationContext CONTEXT = AuthenticationContext.of("a".repeat(64));
   private static final Duration WAIT = Duration.ofSeconds(2);
   private static final String RECEIPT = "0123456789ABCDEFGHJKMNPQRS";
@@ -487,9 +537,9 @@ class WebBusinessWireClientsTest {
   }
 
   private static byte[] header(String type, boolean request, String code, UUID id, String context) {
-    int i = index(type),
-        data = request ? REQUEST[i] : RESPONSE[i],
-        record = request ? 0 : RECORD[i];
+    int i = index(type);
+    int data = request ? REQUEST[i] : RESPONSE[i];
+    int record = request ? 0 : RECORD[i];
     var b = new byte[256 + data];
     Arrays.fill(b, (byte) ' ');
     put(b, 0, 8, "SCHBNK01");

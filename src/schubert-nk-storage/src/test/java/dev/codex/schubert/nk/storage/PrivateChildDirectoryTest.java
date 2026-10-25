@@ -1,11 +1,29 @@
 package dev.codex.schubert.nk.storage;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.lang.reflect.*;
-import java.nio.file.*;
-import java.util.*;
-import java.util.concurrent.*;
+import java.lang.reflect.InvocationHandler;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Proxy;
+import java.nio.file.Files;
+import java.nio.file.LinkOption;
+import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
 import org.junit.jupiter.api.io.TempDir;
@@ -152,8 +170,8 @@ final class PrivateChildDirectoryTest {
       for (int primaryKind = 0; primaryKind < 4; primaryKind++)
         for (int closeKind = 0; closeKind < 5; closeKind++) {
           try (var f = new Fixture(temporary)) {
-            Throwable primary = fault(primaryKind),
-                secondary = closeKind == 4 ? primary : fault(closeKind);
+            Throwable primary = fault(primaryKind);
+            Throwable secondary = closeKind == 4 ? primary : fault(closeKind);
             f.faults.put(point, primary);
             f.faults.put("close", secondary);
             if (primaryKind == 0 && (closeKind == 0 || closeKind == 4))
@@ -266,7 +284,8 @@ final class PrivateChildDirectoryTest {
     final List<String> events = Collections.synchronizedList(new ArrayList<>());
     final Map<String, Throwable> faults = new ConcurrentHashMap<>();
     int rootFd = -1;
-    boolean tracking, unsupported;
+    boolean tracking;
+    boolean unsupported;
 
     Fixture(Path temporary) throws Exception {
       path =

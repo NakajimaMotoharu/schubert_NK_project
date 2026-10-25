@@ -1,12 +1,26 @@
 package dev.codex.schubert.nk.batch.platform;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotSame;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import dev.codex.schubert.nk.batch.repository.BatchRun;
 import java.nio.charset.StandardCharsets;
 import java.time.Instant;
-import java.util.*;
-import java.util.concurrent.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.IdentityHashMap;
+import java.util.List;
+import java.util.Set;
+import java.util.UUID;
+import java.util.concurrent.Callable;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -57,7 +71,8 @@ final class InspectorRunEnvironmentTest {
                 + "NK_INSPECTOR_RUN_ID=00000000-0000-0000-0000-00000000005e\n"))
       reject(RUN, bytes(wrong));
     for (int bit = 0; bit < 128; bit++) {
-      long high = ID.getMostSignificantBits(), low = ID.getLeastSignificantBits();
+      long high = ID.getMostSignificantBits();
+      long low = ID.getLeastSignificantBits();
       if (bit < 64) high ^= 1L << bit;
       else low ^= 1L << (bit - 64);
       reject(new BatchRun(new UUID(high, low), RUN.cutoff()), literal);
@@ -87,8 +102,8 @@ final class InspectorRunEnvironmentTest {
         () -> InspectorRunEnvironment.requireMatches(null, bytes(GOLDEN)));
     assertThrows(
         NullPointerException.class, () -> InspectorRunEnvironment.requireMatches(RUN, null));
-    byte[] first = InspectorRunEnvironment.encode(RUN),
-        second = InspectorRunEnvironment.encode(RUN);
+    byte[] first = InspectorRunEnvironment.encode(RUN);
+    byte[] second = InspectorRunEnvironment.encode(RUN);
     assertNotSame(first, second);
     first[0] = 0;
     assertArrayEquals(bytes(GOLDEN), second);

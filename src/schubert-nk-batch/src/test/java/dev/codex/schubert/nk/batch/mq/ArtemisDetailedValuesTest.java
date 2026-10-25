@@ -1,9 +1,13 @@
 package dev.codex.schubert.nk.batch.mq;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.lang.reflect.Proxy;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 import org.apache.activemq.artemis.api.core.client.ClientSession;
 import org.junit.jupiter.api.Test;

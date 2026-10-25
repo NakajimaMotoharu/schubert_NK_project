@@ -1,11 +1,23 @@
 package dev.codex.schubert.nk.batch.platform;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertNotSame;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import dev.codex.schubert.nk.bootstrap.ChildStartupContext;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
@@ -459,8 +471,14 @@ final class MorningCaddyReadinessTest {
   static final class Fixture implements MorningCaddyReadiness.Io {
     Map<String, String> manager = values();
     ChildStartupContext.Observed actor = ACTOR;
-    Set<String> before = Set.of("12345"), after = Set.of("12345");
-    int status = 200, sockets, guards, failGuard, calls, failIo;
+    Set<String> before = Set.of("12345");
+    Set<String> after = Set.of("12345");
+    int status = 200;
+    int sockets;
+    int guards;
+    int failGuard;
+    int calls;
+    int failIo;
     final List<String> events = new ArrayList<>();
 
     void guard() throws IOException {

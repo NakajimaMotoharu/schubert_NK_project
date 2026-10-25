@@ -1,9 +1,18 @@
 package dev.codex.schubert.nk.api.maintenance;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.util.*;
-import java.util.concurrent.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HexFormat;
+import java.util.concurrent.Callable;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
 
@@ -112,7 +121,8 @@ final class InspectorCredentialAccessTest {
     assertThrows(
         NullPointerException.class, () -> policy.requireDirectory(040500, UID, 1, true, null));
     for (boolean directory : new boolean[] {false, true}) {
-      byte[] acl = golden(UID, directory), before = acl.clone();
+      byte[] acl = golden(UID, directory);
+      byte[] before = acl.clone();
       check(directory, acl);
       assertArrayEquals(before, acl);
       Arrays.fill(acl, (byte) 0);
@@ -145,7 +155,8 @@ final class InspectorCredentialAccessTest {
 
   @Test
   void errorsAreFixedAndNonMutating() {
-    byte[] wrong = golden(1001, false), before = wrong.clone();
+    byte[] wrong = golden(1001, false);
+    byte[] before = wrong.clone();
     invalid(() -> policy.requireAesFile(0100440, 0, 1, 54, true, wrong));
     assertArrayEquals(before, wrong);
     invalid(() -> policy.requireDirectory(040550, 0, 1, true, wrong));

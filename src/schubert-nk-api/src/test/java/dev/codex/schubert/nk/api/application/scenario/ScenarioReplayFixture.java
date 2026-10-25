@@ -1,20 +1,54 @@
 package dev.codex.schubert.nk.api.application.scenario;
 
-import static dev.codex.schubert.nk.api.application.scenario.ScenarioRequestFixture.*;
+import static dev.codex.schubert.nk.api.application.scenario.ScenarioRequestFixture.message;
+import static dev.codex.schubert.nk.api.application.scenario.ScenarioRequestFixture.put;
+import static dev.codex.schubert.nk.api.application.scenario.ScenarioRequestFixture.search;
+import static dev.codex.schubert.nk.api.application.scenario.ScenarioRequestFixture.spaces;
 
 import dev.codex.schubert.nk.api.idempotency.EncryptedResponseSnapshot;
-import dev.codex.schubert.nk.protocol.header.*;
-import dev.codex.schubert.nk.protocol.layout.*;
+import dev.codex.schubert.nk.protocol.header.AuthenticationContext;
+import dev.codex.schubert.nk.protocol.header.CommonHeader;
+import dev.codex.schubert.nk.protocol.header.InteractionKind;
+import dev.codex.schubert.nk.protocol.header.MessageKind;
+import dev.codex.schubert.nk.protocol.layout.FixedPayload;
+import dev.codex.schubert.nk.protocol.layout.LayoutId;
+import dev.codex.schubert.nk.protocol.layout.PayloadData;
+import dev.codex.schubert.nk.protocol.layout.PayloadRecord;
+import dev.codex.schubert.nk.protocol.layout.TypedPayloadValues;
+import dev.codex.schubert.nk.protocol.layout.WireMessage;
 import dev.codex.schubert.nk.protocol.layout.common.PagedResponseData;
-import dev.codex.schubert.nk.protocol.layout.scenario.*;
-import dev.codex.schubert.nk.protocol.layout.semantic.*;
-import java.io.*;
+import dev.codex.schubert.nk.protocol.layout.scenario.GameListResponseData;
+import dev.codex.schubert.nk.protocol.layout.scenario.RouteListResponseData;
+import dev.codex.schubert.nk.protocol.layout.scenario.ScenarioDetailResponseData;
+import dev.codex.schubert.nk.protocol.layout.scenario.ScenarioEntryRecord;
+import dev.codex.schubert.nk.protocol.layout.scenario.ScenarioFileListResponseData;
+import dev.codex.schubert.nk.protocol.layout.scenario.SpeakerListResponseData;
+import dev.codex.schubert.nk.protocol.layout.semantic.DeliveryMode;
+import dev.codex.schubert.nk.protocol.layout.semantic.DisplayPath;
+import dev.codex.schubert.nk.protocol.layout.semantic.EntryId;
+import dev.codex.schubert.nk.protocol.layout.semantic.EntryType;
+import dev.codex.schubert.nk.protocol.layout.semantic.GameCode;
+import dev.codex.schubert.nk.protocol.layout.semantic.RelativePath;
+import dev.codex.schubert.nk.protocol.layout.semantic.ScriptFileId;
+import dev.codex.schubert.nk.protocol.layout.semantic.Sha256Hex;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
-import java.util.*;
-import java.util.zip.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Locale;
+import java.util.Optional;
+import java.util.UUID;
+import java.util.zip.Deflater;
+import java.util.zip.DeflaterOutputStream;
+import java.util.zip.InflaterInputStream;
 import javax.crypto.Cipher;
-import javax.crypto.spec.*;
+import javax.crypto.spec.GCMParameterSpec;
+import javax.crypto.spec.SecretKeySpec;
 
 /** PT-SCN-009-S01..S05: UI232/234 offsets and SS352 LP/AES oracle, no production codec. */
 final class ScenarioReplayFixture {

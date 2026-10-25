@@ -1,6 +1,9 @@
 package dev.codex.schubert.nk.web.bootstrap;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import dev.codex.schubert.nk.storage.NonSecretConfigSource;
 import dev.codex.schubert.nk.storage.ServiceConfigFiles;

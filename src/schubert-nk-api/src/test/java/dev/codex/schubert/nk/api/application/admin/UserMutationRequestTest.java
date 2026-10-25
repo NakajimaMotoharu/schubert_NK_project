@@ -1,28 +1,56 @@
 package dev.codex.schubert.nk.api.application.admin;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import dev.codex.schubert.nk.api.domain.Role;
 import dev.codex.schubert.nk.api.error.TemporaryInfrastructureException;
-import dev.codex.schubert.nk.api.idempotency.*;
+import dev.codex.schubert.nk.api.idempotency.FingerprintKeyRing;
 import dev.codex.schubert.nk.api.logging.ApiLogDatabaseFixture;
-import dev.codex.schubert.nk.api.security.*;
+import dev.codex.schubert.nk.api.security.AdminCommandAuthenticator;
 import dev.codex.schubert.nk.api.security.AdminCommandAuthenticator.Mutation;
+import dev.codex.schubert.nk.api.security.AuthSessionRevocationService;
+import dev.codex.schubert.nk.api.security.AuthenticatedActor;
+import dev.codex.schubert.nk.api.security.ContextHash;
+import dev.codex.schubert.nk.api.security.PasswordHasher;
 import dev.codex.schubert.nk.protocol.codec.PermanentProtocolException;
-import dev.codex.schubert.nk.protocol.header.*;
-import dev.codex.schubert.nk.protocol.layout.*;
+import dev.codex.schubert.nk.protocol.header.AuthenticationContext;
+import dev.codex.schubert.nk.protocol.header.CommonHeader;
+import dev.codex.schubert.nk.protocol.header.InteractionKind;
+import dev.codex.schubert.nk.protocol.header.MessageKind;
+import dev.codex.schubert.nk.protocol.header.ResultCode;
+import dev.codex.schubert.nk.protocol.layout.FixedPayload;
+import dev.codex.schubert.nk.protocol.layout.LayoutId;
+import dev.codex.schubert.nk.protocol.layout.WireMessage;
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
 import java.security.MessageDigest;
-import java.sql.*;
 import java.time.Instant;
-import java.util.*;
-import java.util.concurrent.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.HexFormat;
+import java.util.List;
+import java.util.Locale;
+import java.util.Optional;
+import java.util.OptionalLong;
+import java.util.Set;
+import java.util.UUID;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
 import org.junit.jupiter.api.io.TempDir;
 
@@ -32,7 +60,8 @@ class UserMutationRequestTest {
   static ApiLogDatabaseFixture database;
   static final Instant NOW = Instant.parse("2026-09-08T00:01:00Z");
   static final AuthenticatedActor ACTOR = new AuthenticatedActor(1, "u1", Role.ADMIN);
-  static final UUID TOKEN = new UUID(60, 1), MESSAGE = new UUID(70, 1);
+  static final UUID TOKEN = new UUID(60, 1);
+  static final UUID MESSAGE = new UUID(70, 1);
   static final String PASSWORD = "Synthetic-12";
   static final List<String> LAYOUTS =
       List.of("UCRREQ01", "USTREQ01", "URLREQ01", "UPWREQ01", "ULKREQ01");
@@ -403,7 +432,8 @@ class UserMutationRequestTest {
             pool.submit(
                 () -> {
                   String layout = LAYOUTS.get(number % 5);
-                  String name = "new" + number, password = "Synthetic-" + number + "-value";
+                  String name = "new" + number;
+                  String password = "Synthetic-" + number + "-value";
                   long target = number + 1;
                   boolean flag = number % 2 == 0;
                   var actor = new AuthenticatedActor(number + 1, "actor" + number, Role.ADMIN);
@@ -563,8 +593,8 @@ class UserMutationRequestTest {
         };
     byte[] data = new byte[size];
     Arrays.fill(data, (byte) 32);
-    String target = String.format(Locale.ROOT, "%012d", id),
-        v = String.format(Locale.ROOT, "%09d", version);
+    String target = String.format(Locale.ROOT, "%012d", id);
+    String v = String.format(Locale.ROOT, "%09d", version);
     switch (layout) {
       case "UCRREQ01" -> {
         put(data, 0, username);

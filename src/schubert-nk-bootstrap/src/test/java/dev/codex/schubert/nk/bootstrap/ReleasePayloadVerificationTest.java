@@ -1,18 +1,44 @@
 package dev.codex.schubert.nk.bootstrap;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import dev.codex.schubert.nk.storage.*;
-import java.io.*;
+import dev.codex.schubert.nk.storage.InodeSecurityCalls;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.nio.ByteBuffer;
 import java.nio.channels.SeekableByteChannel;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.*;
+import java.nio.file.DirectoryStream;
+import java.nio.file.Files;
+import java.nio.file.LinkOption;
+import java.nio.file.Path;
 import java.nio.file.attribute.PosixFilePermissions;
 import java.security.MessageDigest;
-import java.util.*;
-import java.util.concurrent.*;
-import java.util.zip.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.HexFormat;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.TreeMap;
+import java.util.concurrent.CyclicBarrier;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipFile;
+import java.util.zip.ZipOutputStream;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
@@ -294,17 +320,32 @@ final class ReleasePayloadVerificationTest {
   }
 
   final class Fixture implements StartupReleaseManifest.Io, InodeSecurityCalls {
-    final Path opt, release;
+    final Path opt;
+    final Path release;
     final StartupReleaseManifestTest.Calls calls = new StartupReleaseManifestTest.Calls();
     final StartupReleaseManifest.NioIo nio = new StartupReleaseManifest.NioIo();
     final ReleaseInventoryTest.Fixture literal = new ReleaseInventoryTest.Fixture();
     final TreeMap<String, byte[]> payload = new TreeMap<>();
     ReleaseApproval approval;
-    boolean readonly = true, nullNames, nullArchive, failNames, failArchive;
-    String channelFault = "", namesFault = "", archiveFault = "", metadataFault = "";
-    int channelFaultReached, channelCloses, namesFaultReached, namesCloses;
+    boolean readonly = true;
+    boolean nullNames;
+    boolean nullArchive;
+    boolean failNames;
+    boolean failArchive;
+    String channelFault = "";
+    String namesFault = "";
+    String archiveFault = "";
+    String metadataFault = "";
+    int channelFaultReached;
+    int channelCloses;
+    int namesFaultReached;
+    int namesCloses;
     int channelPositiveReads;
-    int archiveFaultReached, archiveCloses, archiveStreamCloses, metadataFaultReached, versionOpens;
+    int archiveFaultReached;
+    int archiveCloses;
+    int archiveStreamCloses;
+    int metadataFaultReached;
+    int versionOpens;
 
     Fixture(String name) throws Exception {
       opt = Files.createDirectories(temporary.resolve(name).resolve("opt"));
@@ -411,7 +452,8 @@ final class ReleasePayloadVerificationTest {
         return null;
       }
       return new SeekableByteChannel() {
-        int reads, sizes;
+        int reads;
+        int sizes;
 
         public int read(ByteBuffer buffer) throws IOException {
           reads++;
@@ -813,7 +855,8 @@ final class ReleasePayloadVerificationTest {
     assertFalse(
         Files.exists(candidate.opt.resolve("schubert-nk/current"), LinkOption.NOFOLLOW_LINKS));
     candidate.released();
-    int candidateOpens = candidate.calls.opened, candidateCloses = candidate.calls.closed;
+    int candidateOpens = candidate.calls.opened;
+    int candidateCloses = candidate.calls.closed;
     assertThrows(IOException.class, () -> candidate.subject().verify(candidate.approval));
     candidate.released();
     assertThrows(NullPointerException.class, () -> candidate.subject().verifyCandidate(null));
@@ -854,7 +897,8 @@ final class ReleasePayloadVerificationTest {
     var normal = new Fixture("counts");
     normal.subject().verify(normal.approval);
     normal.released();
-    int opened = normal.calls.opened, closed = normal.calls.closed;
+    int opened = normal.calls.opened;
+    int closed = normal.calls.closed;
     for (int i = 1; i <= opened; i++) {
       var f = new Fixture("open-" + i);
       f.calls.failOpenAt = i;

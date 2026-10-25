@@ -1,13 +1,23 @@
 package dev.codex.schubert.nk.api.file;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import dev.codex.schubert.nk.api.file.InspectorCredentialLoaderTest.Fixture;
 import dev.codex.schubert.nk.api.file.InspectorCredentialLoaderTest.TestIo;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.*;
-import java.util.*;
-import java.util.concurrent.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.Callable;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 import java.util.function.Consumer;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
@@ -28,7 +38,8 @@ final class InspectorDatabaseCredentialLoaderTest {
         var io = new TestIo();
         io.maxRead = 4096;
         try (var value = f.loader(io).loadDatabasePassword()) {
-          char[] actual = value.copyPassword(), chars = new char[length];
+          char[] actual = value.copyPassword();
+          char[] chars = new char[length];
           Arrays.fill(chars, 'A');
           try {
             assertArrayEquals(chars, actual);

@@ -1,22 +1,46 @@
 package dev.codex.schubert.nk.batch.file;
 
-import static dev.codex.schubert.nk.batch.file.BackupArtifactFixture.*;
-import static org.junit.jupiter.api.Assertions.*;
+import static dev.codex.schubert.nk.batch.file.BackupArtifactFixture.DIR;
+import static dev.codex.schubert.nk.batch.file.BackupArtifactFixture.DUMP_HASH;
+import static dev.codex.schubert.nk.batch.file.BackupArtifactFixture.GID;
+import static dev.codex.schubert.nk.batch.file.BackupArtifactFixture.MANIFEST_HASH;
+import static dev.codex.schubert.nk.batch.file.BackupArtifactFixture.UID;
+import static dev.codex.schubert.nk.batch.file.BackupArtifactFixture.golden;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import dev.codex.schubert.nk.batch.backup.*;
+import dev.codex.schubert.nk.batch.backup.BackupManifest;
 import dev.codex.schubert.nk.batch.platform.CleanupWorkerRequest;
-import dev.codex.schubert.nk.batch.repository.*;
-import dev.codex.schubert.nk.storage.*;
-import java.io.*;
+import dev.codex.schubert.nk.batch.repository.BatchRun;
+import dev.codex.schubert.nk.batch.repository.BatchStep;
+import dev.codex.schubert.nk.batch.repository.BatchStepAttempt;
+import dev.codex.schubert.nk.storage.StorageIoException;
+import java.io.IOException;
+import java.io.UncheckedIOException;
 import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.*;
-import java.nio.file.attribute.*;
+import java.nio.file.DirectoryIteratorException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.attribute.FileTime;
+import java.nio.file.attribute.PosixFilePermissions;
 import java.security.NoSuchAlgorithmException;
-import java.time.*;
-import java.util.*;
-import java.util.concurrent.*;
-import java.util.concurrent.atomic.*;
+import java.time.Instant;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import java.util.UUID;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+import java.util.concurrent.atomic.AtomicInteger;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
@@ -623,7 +647,8 @@ final class BackupManifestReaderTest {
       }
     for (boolean hard : List.of(false, true))
       try (var f = fixture()) {
-        Path p = f.child.resolve("MANIFEST.json"), saved = f.child.resolve("saved");
+        Path p = f.child.resolve("MANIFEST.json");
+        Path saved = f.child.resolve("saved");
         Files.move(p, saved);
         if (hard) Files.createLink(p, saved);
         else Files.createSymbolicLink(p, Path.of("saved"));

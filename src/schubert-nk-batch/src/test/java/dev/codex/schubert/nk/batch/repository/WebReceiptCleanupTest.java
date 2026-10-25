@@ -1,11 +1,22 @@
 package dev.codex.schubert.nk.batch.repository;
 
-import static dev.codex.schubert.nk.batch.repository.CleanupStepFixture.*;
-import static org.junit.jupiter.api.Assertions.*;
+import static dev.codex.schubert.nk.batch.repository.CleanupStepFixture.attempt;
+import static dev.codex.schubert.nk.batch.repository.CleanupStepFixture.locked;
+import static dev.codex.schubert.nk.batch.repository.CleanupStepFixture.query;
+import static dev.codex.schubert.nk.batch.repository.CleanupStepFixture.reset;
+import static dev.codex.schubert.nk.batch.repository.CleanupStepFixture.sql;
+import static dev.codex.schubert.nk.batch.repository.CleanupStepFixture.totals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.nio.file.Path;
-import java.sql.*;
-import org.junit.jupiter.api.*;
+import java.sql.SQLException;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 /** QA048/SSC175; RCPT004, independent physical-orphan and SQL counter oracle. */

@@ -1,15 +1,32 @@
 package dev.codex.schubert.nk.web.view;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import dev.codex.schubert.nk.protocol.header.AuthenticationContext;
-import dev.codex.schubert.nk.protocol.layout.media.*;
-import dev.codex.schubert.nk.protocol.layout.semantic.*;
+import dev.codex.schubert.nk.protocol.layout.media.AnimationListResponseData;
+import dev.codex.schubert.nk.protocol.layout.media.AnimationMenuResponseData;
+import dev.codex.schubert.nk.protocol.layout.media.AnimationRecord;
+import dev.codex.schubert.nk.protocol.layout.semantic.AnimationCategory;
+import dev.codex.schubert.nk.protocol.layout.semantic.AnimationListCategory;
+import dev.codex.schubert.nk.protocol.layout.semantic.DisplayPath;
+import dev.codex.schubert.nk.protocol.layout.semantic.UserRole;
 import dev.codex.schubert.nk.web.session.SessionPrincipal;
 import java.beans.Introspector;
 import java.time.Instant;
-import java.util.*;
-import java.util.concurrent.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import java.util.Optional;
+import java.util.Set;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
 import org.jsoup.Jsoup;
 import org.junit.jupiter.api.Test;
 import org.thymeleaf.context.Context;

@@ -1,13 +1,19 @@
 package dev.codex.schubert.nk.batch.cleanup;
 
-import static dev.codex.schubert.nk.batch.repository.CleanupStepFixture.*;
-import static org.junit.jupiter.api.Assertions.*;
+import static dev.codex.schubert.nk.batch.repository.CleanupStepFixture.query;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import dev.codex.schubert.nk.batch.repository.BatchDatabaseFixture;
 import java.nio.file.Path;
-import java.sql.*;
+import java.sql.SQLDataException;
 import java.util.List;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 /** PT-BAT-MGUARD001..003, independent PG set_config projection/rollback oracle. SSC119. */

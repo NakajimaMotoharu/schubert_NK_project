@@ -1,18 +1,42 @@
 package dev.codex.schubert.nk.batch.file;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import dev.codex.schubert.nk.batch.repository.BatchRun;
-import dev.codex.schubert.nk.storage.*;
+import dev.codex.schubert.nk.storage.DirectoryCalls;
+import dev.codex.schubert.nk.storage.InodeSecurityCalls;
+import dev.codex.schubert.nk.storage.LinuxDirectoryCalls;
+import dev.codex.schubert.nk.storage.LinuxInodeSecurity;
+import dev.codex.schubert.nk.storage.StorageIoException;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Proxy;
 import java.nio.ByteBuffer;
 import java.nio.channels.SeekableByteChannel;
-import java.nio.file.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.time.Instant;
-import java.util.*;
-import java.util.concurrent.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.BiConsumer;
 import org.junit.jupiter.api.Test;
@@ -160,7 +184,9 @@ final class InspectorEnvironmentFilesTest {
                 new NullPointerException("synthetic compound"),
                 new AssertionError("synthetic compound"))) {
           try (var f = fixture()) {
-            int[] closes = {0}, injected = {0}, callbacks = {0};
+            int[] closes = {0};
+            int[] injected = {0};
+            int[] callbacks = {0};
 
             Throwable actual =
                 assertThrows(
@@ -537,17 +563,34 @@ final class InspectorEnvironmentFilesTest {
 
   private static final class Fixture
       implements AutoCloseable, InodeSecurityCalls, InspectorEnvironmentPublisher.Io {
-    final Path base, etc, config, runtime, app, maintenance, staticFile, target;
+    final Path base;
+    final Path etc;
+    final Path config;
+    final Path runtime;
+    final Path app;
+    final Path maintenance;
+    final Path staticFile;
+    final Path target;
     final DirectoryCalls calls;
     final InspectorEnvironmentFiles files;
     final InspectorEnvironmentPublisher.NioIo nativeIo = new InspectorEnvironmentPublisher.NioIo();
     final Set<Integer> live = ConcurrentHashMap.newKeySet();
     final Map<Long, String> originalRoles = new HashMap<>();
     final Map<String, Integer> counts = new ConcurrentHashMap<>();
-    long uid, group = 2000;
-    int readers, writers, callbacks, failAt = 1, hookAt = 1;
-    String fail = "", hookName = "", invalid = "", badRole = "";
-    boolean triggered, rawCloses, staticReadonly;
+    long uid;
+    long group = 2000;
+    int readers;
+    int writers;
+    int callbacks;
+    int failAt = 1;
+    int hookAt = 1;
+    String fail = "";
+    String hookName = "";
+    String invalid = "";
+    String badRole = "";
+    boolean triggered;
+    boolean rawCloses;
+    boolean staticReadonly;
     Action hook = () -> {};
     BiConsumer<String, Map<String, Object>> change = (role, values) -> {};
 

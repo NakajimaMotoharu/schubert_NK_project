@@ -1,14 +1,38 @@
 package dev.codex.schubert.nk.batch.platform;
 
-import static dev.codex.schubert.nk.batch.platform.InspectorUnitProbeFixture.*;
-import static dev.codex.schubert.nk.batch.platform.InspectorUnitSnapshotTest.*;
-import static org.junit.jupiter.api.Assertions.*;
+import static dev.codex.schubert.nk.batch.platform.InspectorUnitProbeFixture.Child;
+import static dev.codex.schubert.nk.batch.platform.InspectorUnitProbeFixture.Script;
+import static dev.codex.schubert.nk.batch.platform.InspectorUnitSnapshotTest.GOLDEN;
+import static dev.codex.schubert.nk.batch.platform.InspectorUnitSnapshotTest.ID;
+import static dev.codex.schubert.nk.batch.platform.InspectorUnitSnapshotTest.with;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.io.*;
+import java.io.FilterInputStream;
+import java.io.FilterOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.*;
-import java.util.*;
-import java.util.concurrent.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.OptionalInt;
+import java.util.Set;
+import java.util.UUID;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 import org.junit.jupiter.api.Test;
 
@@ -506,7 +530,8 @@ final class InspectorUnitProbeTest {
     }
     failed(StopGateFailure.COMMAND_FAILURE, nativeReader::readProcesses);
     failed(StopGateFailure.MALFORMED_STATE, () -> new InspectorUnitProbe().read());
-    AtomicInteger states = new AtomicInteger(), processes = new AtomicInteger();
+    AtomicInteger states = new AtomicInteger();
+    AtomicInteger processes = new AtomicInteger();
     var shared =
         new InspectorUnitProbe(
             new InspectorUnitProbe.Reader() {

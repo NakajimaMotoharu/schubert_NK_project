@@ -1,27 +1,64 @@
 package dev.codex.schubert.nk.web.revocation;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import dev.codex.schubert.nk.api.idempotency.FingerprintKeyRing;
 import dev.codex.schubert.nk.api.idempotency.ResponseSnapshotCodec;
 import dev.codex.schubert.nk.api.security.LogoutApplicationAssembly;
-import dev.codex.schubert.nk.protocol.codec.*;
-import dev.codex.schubert.nk.protocol.header.*;
+import dev.codex.schubert.nk.protocol.codec.ExpectedRoute;
+import dev.codex.schubert.nk.protocol.codec.FixedWidthDecoder;
+import dev.codex.schubert.nk.protocol.codec.TransportBodyType;
+import dev.codex.schubert.nk.protocol.codec.TransportMetadata;
+import dev.codex.schubert.nk.protocol.header.AuthenticationContext;
+import dev.codex.schubert.nk.protocol.header.InteractionKind;
+import dev.codex.schubert.nk.protocol.header.MessageKind;
 import dev.codex.schubert.nk.protocol.layout.LayoutId;
 import dev.codex.schubert.nk.web.logging.WebLogDatabaseFixture;
-import dev.codex.schubert.nk.web.messaging.*;
+import dev.codex.schubert.nk.web.messaging.JmsRequestReplyClient;
+import dev.codex.schubert.nk.web.messaging.LogoutWireClient;
+import dev.codex.schubert.nk.web.messaging.ReplyCorrelationRegistry;
 import jakarta.jms.JMSException;
-import java.lang.reflect.*;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.lang.reflect.Proxy;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
 import java.security.MessageDigest;
-import java.sql.*;
-import java.time.*;
-import java.util.*;
-import java.util.concurrent.*;
-import java.util.concurrent.atomic.*;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.time.Clock;
+import java.time.Duration;
+import java.time.Instant;
+import java.time.OffsetDateTime;
+import java.time.ZoneId;
+import java.time.ZoneOffset;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.HexFormat;
+import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicLong;
+import java.util.concurrent.atomic.AtomicReference;
 import javax.sql.DataSource;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 /** RERUN005: independent UI wire/SQL, real API participants; transport fixture, not VM/IT/ST. */
@@ -293,8 +330,8 @@ final class RevocationRetryCoordinatorTest {
       try (var f = new Fixture()) {
         f.enqueue(1);
         f.fault = "prepareStatement";
-        SQLException primary = new SQLException("private-primary-marker"),
-            peer = new SQLException("private-peer-marker");
+        SQLException primary = new SQLException("private-primary-marker");
+        SQLException peer = new SQLException("private-peer-marker");
         var fatal = new AssertionError("private-nested-fatal-marker");
         primary.addSuppressed(peer);
         peer.addSuppressed(primary);
@@ -441,7 +478,8 @@ final class RevocationRetryCoordinatorTest {
 
   private static final class Fixture implements AutoCloseable {
     final MutableClock clock = new MutableClock();
-    final AtomicInteger active = new AtomicInteger(), acquisitions = new AtomicInteger();
+    final AtomicInteger active = new AtomicInteger();
+    final AtomicInteger acquisitions = new AtomicInteger();
     final ThreadLocal<AtomicInteger> owned = ThreadLocal.withInitial(AtomicInteger::new);
     final RevocationPayloadCodec codec = new RevocationPayloadCodec("test", KEY, null, null);
     final FingerprintKeyRing fingerprints = new FingerprintKeyRing("f1", new byte[32], null, null);
@@ -452,14 +490,18 @@ final class RevocationRetryCoordinatorTest {
     final List<UUID> ids = Collections.synchronizedList(new ArrayList<>());
     final List<byte[]> sent = Collections.synchronizedList(new ArrayList<>());
     final AtomicLong sequence = new AtomicLong(100);
-    boolean realApi, loseReply, parallel;
+    boolean realApi;
+    boolean loseReply;
+    boolean parallel;
     String code = "0000";
     String expectedStamp = "20260908090005123";
     String replyFault = "";
     String fault = "";
     int faultAcquisition = 1;
     Error fatal;
-    Throwable primaryFault, rollbackFault, closeFault;
+    Throwable primaryFault;
+    Throwable rollbackFault;
+    Throwable closeFault;
     Runnable afterReply = () -> {};
     Runnable afterFirstClose = () -> {};
 

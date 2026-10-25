@@ -1,9 +1,19 @@
 package dev.codex.schubert.nk.api.security;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import dev.codex.schubert.nk.api.domain.Role;
-import dev.codex.schubert.nk.api.idempotency.*;
+import dev.codex.schubert.nk.api.idempotency.EncryptedResponseSnapshot;
+import dev.codex.schubert.nk.api.idempotency.InboxCompletion;
+import dev.codex.schubert.nk.api.idempotency.InboxCompletionState;
+import dev.codex.schubert.nk.api.idempotency.InboxResultReference;
+import dev.codex.schubert.nk.api.idempotency.ResponseSnapshotCodec;
+import dev.codex.schubert.nk.api.idempotency.ResponseSnapshotIdentity;
 import dev.codex.schubert.nk.api.logging.ApiLogDatabaseFixture;
 import dev.codex.schubert.nk.protocol.header.ResultCode;
 import java.lang.reflect.InvocationTargetException;
@@ -25,7 +35,10 @@ import java.util.Optional;
 import java.util.UUID;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
 import org.junit.jupiter.api.io.TempDir;
 
@@ -38,12 +51,13 @@ final class LoginReplayServiceTest {
   private static ContextHash hashes;
   private static LoginReplayService service;
   private static final Instant NOW = Instant.parse("2026-09-08T01:02:03.456789Z");
-  private static final UUID REQUEST = new UUID(0, 101),
-      RESPONSE = new UUID(0, 102),
-      REPLAY = new UUID(0, 103),
-      SESSION = new UUID(0, 104);
+  private static final UUID REQUEST = new UUID(0, 101);
+  private static final UUID RESPONSE = new UUID(0, 102);
+  private static final UUID REPLAY = new UUID(0, 103);
+  private static final UUID SESSION = new UUID(0, 104);
   private static final String RAW = "55".repeat(32);
-  private static final String FIRST_STAMP = "20260908100203456", LATER_STAMP = "20260909100203456";
+  private static final String FIRST_STAMP = "20260908100203456";
+  private static final String LATER_STAMP = "20260909100203456";
 
   @BeforeAll
   static void start() throws Exception {

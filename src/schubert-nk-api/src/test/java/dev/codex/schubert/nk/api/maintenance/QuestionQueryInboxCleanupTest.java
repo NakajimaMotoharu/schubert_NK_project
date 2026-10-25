@@ -1,22 +1,45 @@
 package dev.codex.schubert.nk.api.maintenance;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import dev.codex.schubert.nk.api.database.MigrationInventory;
-import dev.codex.schubert.nk.api.idempotency.*;
+import dev.codex.schubert.nk.api.idempotency.InboxCompletion;
+import dev.codex.schubert.nk.api.idempotency.InboxCompletionState;
+import dev.codex.schubert.nk.api.idempotency.InboxResultReference;
+import dev.codex.schubert.nk.api.idempotency.InboxResultReferenceType;
+import dev.codex.schubert.nk.api.idempotency.ResponseSnapshotIdentity;
 import dev.codex.schubert.nk.api.logging.ApiLogDatabaseFixture;
 import dev.codex.schubert.nk.api.messaging.outbound.SqlConnectionProvider;
 import dev.codex.schubert.nk.api.security.AuthContextCodec;
 import dev.codex.schubert.nk.api.security.ContextHash;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.security.MessageDigest;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.time.Instant;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.HexFormat;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import java.util.Optional;
+import java.util.Set;
+import java.util.UUID;
 import java.util.concurrent.Callable;
 import java.util.concurrent.Executors;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 /** PT-DB-INBOX-161..168; SS324 12.8/331 3.10/PG-D-139. Independent UI byte vectors. */
@@ -27,7 +50,8 @@ final class QuestionQueryInboxCleanupTest {
   private static final List<String> LAYOUTS =
       List.of("NTSRSP01", "NTDRSP01", "QSSRSP01", "QSDRSP01");
   private static final Instant TIME = Instant.parse("2026-09-09T00:00:00.123Z");
-  private static final String JST = "20260909090000123", RECEIPT = "0".repeat(25) + "1";
+  private static final String JST = "20260909090000123";
+  private static final String RECEIPT = "0".repeat(25) + "1";
   private static final UUID MESSAGE = new UUID(0, 101);
   private static final InspectionRun RUN =
       new InspectionRun(new UUID(0, 42), Instant.parse("2026-09-17T00:00:00.123Z"));
@@ -730,7 +754,8 @@ final class QuestionQueryInboxCleanupTest {
     byte[] wire = NonAuthenticationInboxInspectorTest.wire(layout, code, values, count);
     put(wire, 60, MESSAGE.toString());
     for (int i = 0; i < count; i++) {
-      int length = layout.equals("NTSRSP01") ? 624 : 672, base = 304 + i * length;
+      int length = layout.equals("NTSRSP01") ? 624 : 672;
+      int base = 304 + i * length;
       Arrays.fill(wire, base, base + length, (byte) ' ');
       put(wire, base, String.format(Locale.ROOT, "%012d", count - i));
       put(wire, base + 12, RECEIPT);

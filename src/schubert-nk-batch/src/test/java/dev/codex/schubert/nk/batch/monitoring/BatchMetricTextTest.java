@@ -1,6 +1,10 @@
 package dev.codex.schubert.nk.batch.monitoring;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import io.micrometer.core.instrument.Counter;
 import io.micrometer.core.instrument.Meter;
@@ -27,7 +31,8 @@ import org.junit.jupiter.api.Test;
 
 /** BATCHTEXT001..024/1777: literal vectors/borrowed memory providers only. */
 class BatchMetricTextTest {
-  private static final String C = "nk_batch_runs_total", G = "nk_file_transfer_files";
+  private static final String C = "nk_batch_runs_total";
+  private static final String G = "nk_file_transfer_files";
   private static final String C_HEADER =
       "# HELP nk_batch_runs_total Supplied Batch technical observation.\n# TYPE nk_batch_runs_total counter\n";
   private static final String G_HEADER =

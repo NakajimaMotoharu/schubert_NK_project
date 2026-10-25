@@ -1,16 +1,30 @@
 package dev.codex.schubert.nk.api.maintenance;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import dev.codex.schubert.nk.api.database.MigrationInventory;
 import dev.codex.schubert.nk.api.logging.ApiLogDatabaseFixture;
-import java.nio.file.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.security.MessageDigest;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.time.Instant;
-import java.util.*;
+import java.util.Arrays;
+import java.util.HexFormat;
+import java.util.List;
+import java.util.UUID;
 import org.flywaydb.core.Flyway;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 /** PT-DB-INBOX-073..080; SS331 3.8/341 7.3; PG-D-127. SQL capability, not AES proof. */
@@ -19,7 +33,9 @@ final class InboxInspectionProgressBoundaryTest {
   private static ApiLogDatabaseFixture db;
   private static String url;
   private static byte[] digest;
-  private static final UUID RUN = new UUID(0, 61), ONE = new UUID(0, 1), TWO = new UUID(0, 2);
+  private static final UUID RUN = new UUID(0, 61);
+  private static final UUID ONE = new UUID(0, 1);
+  private static final UUID TWO = new UUID(0, 2);
   private static final Instant CUTOFF = Instant.parse("2026-09-17T00:00:00Z");
   private static final String TABLE = "schubert.inbox_inspection_progress";
   private static final String OPEN = "schubert.maintenance_open_inbox_inspection";

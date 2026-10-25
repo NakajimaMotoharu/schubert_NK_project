@@ -1,10 +1,24 @@
 package dev.codex.schubert.nk.batch.platform;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.io.*;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.nio.charset.StandardCharsets;
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 import org.junit.jupiter.api.Test;
 
@@ -316,14 +330,21 @@ final class SystemctlStateSourceTest {
   }
 
   private static final class Child extends Process {
-    final ReadStream output, error = new ReadStream(new byte[0]);
+    final ReadStream output;
+    final ReadStream error = new ReadStream(new byte[0]);
     final WriteStream input = new WriteStream();
-    boolean completed = true, interrupted, alive = true;
+    boolean completed = true;
+    boolean interrupted;
+    boolean alive = true;
     boolean cleanupAlive;
-    Runnable waiting = () -> {}, ending = () -> {};
-    int code, destroyed, waits;
+    Runnable waiting = () -> {};
+    Runnable ending = () -> {};
+    int code;
+    int destroyed;
+    int waits;
     RuntimeException runtime;
-    String getFailure = "", nullGetter = "";
+    String getFailure = "";
+    String nullGetter = "";
     final IllegalStateException getterFailure =
         new IllegalStateException("synthetic getter failure");
 
@@ -395,8 +416,11 @@ final class SystemctlStateSourceTest {
 
   private static final class ReadStream extends InputStream {
     final ByteArrayInputStream bytes;
-    boolean failRead, failClose;
-    int closed, reads, maximumRequested;
+    boolean failRead;
+    boolean failClose;
+    int closed;
+    int reads;
+    int maximumRequested;
     byte[] delivered = new byte[0];
     Runnable ending = () -> {};
 

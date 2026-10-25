@@ -1,6 +1,11 @@
 package dev.codex.schubert.nk.batch.mq;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import dev.codex.schubert.nk.bootstrap.MaintenanceOwnerFrame;
 import java.io.IOException;
@@ -25,7 +30,8 @@ final class ArtemisManagementEncoderBoundaryTest {
                   throw new AssertionError(
                       "encoder must receive, not inspect, the borrowed message");
                 });
-    String resource = "PT_RESOURCE", operation = "PT_OPERATION";
+    String resource = "PT_RESOURCE";
+    String operation = "PT_OPERATION";
     Object[] arguments = {"PT_SELECTOR", 7L};
     var calls = new AtomicInteger();
     ArtemisManagementReadinessClient.encodeOperation(

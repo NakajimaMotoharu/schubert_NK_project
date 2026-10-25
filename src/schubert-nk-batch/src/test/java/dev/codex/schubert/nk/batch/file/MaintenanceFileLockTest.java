@@ -1,12 +1,38 @@
 package dev.codex.schubert.nk.batch.file;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import dev.codex.schubert.nk.storage.*;
+import dev.codex.schubert.nk.storage.DirectoryCalls;
+import dev.codex.schubert.nk.storage.InodeSecurityCalls;
+import dev.codex.schubert.nk.storage.LinuxDirectoryCalls;
+import dev.codex.schubert.nk.storage.LinuxFileLock;
+import dev.codex.schubert.nk.storage.LinuxInodeSecurity;
+import dev.codex.schubert.nk.storage.OwnedTransferDirectory;
+import dev.codex.schubert.nk.storage.StorageIoException;
 import java.io.IOException;
-import java.nio.file.*;
-import java.util.*;
-import java.util.concurrent.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.Set;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.CyclicBarrier;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.BiFunction;
 import org.junit.jupiter.api.Test;
@@ -297,7 +323,9 @@ final class MaintenanceFileLockTest {
                 new NullPointerException("synthetic compound"),
                 new AssertionError("synthetic compound"))) {
           var f = fixture();
-          int[] closes = {0}, injected = {0}, callbacks = {0};
+          int[] closes = {0};
+          int[] injected = {0};
+          int[] callbacks = {0};
 
           Throwable actual =
               assertThrows(
@@ -557,11 +585,15 @@ final class MaintenanceFileLockTest {
   }
 
   private static final class Fixture {
-    final Path runtime, app, file;
+    final Path runtime;
+    final Path app;
+    final Path file;
     final long runInode;
     final Calls calls = new Calls();
     long uid = 0;
-    String badRole = "", fault = "", type = "tmpfs";
+    String badRole = "";
+    String fault = "";
+    String type = "tmpfs";
     boolean readOnly;
     byte[] acl = new byte[0];
     BiFunction<String, Map<String, Object>, Map<String, Object>> change = (r, m) -> m;
@@ -644,10 +676,11 @@ final class MaintenanceFileLockTest {
 
   private static final class Calls implements DirectoryCalls {
     final DirectoryCalls real = LinuxDirectoryCalls.create();
-    final AtomicInteger opened = new AtomicInteger(),
-        closed = new AtomicInteger(),
-        outstanding = new AtomicInteger();
-    int openFailure, closeFailure;
+    final AtomicInteger opened = new AtomicInteger();
+    final AtomicInteger closed = new AtomicInteger();
+    final AtomicInteger outstanding = new AtomicInteger();
+    int openFailure;
+    int closeFailure;
     java.util.function.IntConsumer afterClose = count -> {};
     final Set<Integer> held = ConcurrentHashMap.newKeySet();
 

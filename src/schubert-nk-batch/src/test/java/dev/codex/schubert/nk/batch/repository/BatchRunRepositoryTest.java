@@ -1,14 +1,42 @@
 package dev.codex.schubert.nk.batch.repository;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.lang.reflect.*;
-import java.nio.file.*;
-import java.sql.*;
-import java.time.*;
-import java.util.*;
-import java.util.concurrent.*;
-import org.junit.jupiter.api.*;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.lang.reflect.Proxy;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.OffsetDateTime;
+import java.time.ZoneOffset;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Set;
+import java.util.TreeMap;
+import java.util.UUID;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 /** NK-BAT-001/OPS009/DAT009/UI251/SS331 8.3/332/341; SSC055/PG163; BAT138..153. */
@@ -19,7 +47,8 @@ final class BatchRunRepositoryTest {
       new BatchRun(
           UUID.fromString("12345678-9abc-def0-8123-456789abcdef"),
           Instant.parse("2026-09-12T15:00:00Z"));
-  static final Instant NOW = Instant.parse("2026-09-13T02:00:00Z"), END = NOW.plusSeconds(1);
+  static final Instant NOW = Instant.parse("2026-09-13T02:00:00Z");
+  static final Instant END = NOW.plusSeconds(1);
   static final BatchStep STEP = BatchStep.CLEAN_LOG;
   static final BatchStepResult SUCCESS =
       new BatchStepResult(BatchStepResult.Status.SUCCESS, 5, 3, 0, 9, BatchStepResult.Reason.NONE);
@@ -1147,13 +1176,22 @@ final class BatchRunRepositoryTest {
   }
 
   static final class Probe {
-    final Map<String, Integer> seen = new TreeMap<>(), failAt = new HashMap<>();
+    final Map<String, Integer> seen = new TreeMap<>();
+    final Map<String, Integer> failAt = new HashMap<>();
     final Map<String, Integer> scopedSeen = new TreeMap<>();
     final Map<String, Throwable> scopedFaults = new HashMap<>();
     int scopedInjected;
-    final Set<String> kinds = new HashSet<>(), projected = new HashSet<>();
-    String kind = "", anomaly = "", changeKind = "", interruptAt = "";
-    int changed, interruptPosition, failures, statements, rows;
+    final Set<String> kinds = new HashSet<>();
+    final Set<String> projected = new HashSet<>();
+    String kind = "";
+    String anomaly = "";
+    String changeKind = "";
+    String interruptAt = "";
+    int changed;
+    int interruptPosition;
+    int failures;
+    int statements;
+    int rows;
     Throwable runtime;
 
     void hit(String key) throws SQLException {
@@ -1182,7 +1220,8 @@ final class BatchRunRepositoryTest {
               (p, m, a) -> {
                 hit("connection." + m.getName());
                 if (m.getName().equals("prepareStatement")) {
-                  String sql = (String) a[0], k = classify(sql);
+                  String sql = (String) a[0];
+                  String k = classify(sql);
                   kinds.add(k);
                   if (k.equals(kind) && anomaly.equals("nullStatement")) return null;
                   var s = (PreparedStatement) invoke(c, m, a);

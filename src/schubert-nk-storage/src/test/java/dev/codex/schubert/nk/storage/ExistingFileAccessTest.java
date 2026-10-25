@@ -1,6 +1,13 @@
 package dev.codex.schubert.nk.storage;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
@@ -378,7 +385,9 @@ class ExistingFileAccessTest {
   private static final class FaultIo implements ExistingFileAccess.Io {
     final String fault;
     final List<SeekableByteChannel> channels = new ArrayList<>();
-    int attributes, opens, closes;
+    int attributes;
+    int opens;
+    int closes;
     Throwable closeFailure;
 
     FaultIo(String fault) {

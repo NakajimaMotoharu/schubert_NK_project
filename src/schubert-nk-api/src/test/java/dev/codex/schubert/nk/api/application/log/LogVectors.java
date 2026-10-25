@@ -1,34 +1,62 @@
 package dev.codex.schubert.nk.api.application.log;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 import dev.codex.schubert.nk.api.domain.Role;
-import dev.codex.schubert.nk.api.idempotency.*;
+import dev.codex.schubert.nk.api.idempotency.EncryptedResponseSnapshot;
+import dev.codex.schubert.nk.api.idempotency.FingerprintKeyRing;
+import dev.codex.schubert.nk.api.idempotency.InboxCompletion;
 import dev.codex.schubert.nk.api.security.AuthenticatedActor;
-import dev.codex.schubert.nk.protocol.header.*;
-import dev.codex.schubert.nk.protocol.layout.*;
+import dev.codex.schubert.nk.protocol.header.AuthenticationContext;
+import dev.codex.schubert.nk.protocol.header.CommonHeader;
+import dev.codex.schubert.nk.protocol.header.InteractionKind;
+import dev.codex.schubert.nk.protocol.header.MessageKind;
+import dev.codex.schubert.nk.protocol.layout.FixedPayload;
+import dev.codex.schubert.nk.protocol.layout.LayoutId;
+import dev.codex.schubert.nk.protocol.layout.PayloadRecord;
+import dev.codex.schubert.nk.protocol.layout.TypedPayloadValues;
+import dev.codex.schubert.nk.protocol.layout.WireMessage;
 import dev.codex.schubert.nk.protocol.layout.common.PagedResponseData;
 import dev.codex.schubert.nk.protocol.layout.log.LogRecord;
-import dev.codex.schubert.nk.protocol.layout.semantic.*;
-import java.io.*;
+import dev.codex.schubert.nk.protocol.layout.semantic.ElapsedMilliseconds;
+import dev.codex.schubert.nk.protocol.layout.semantic.HttpStatusCode;
+import dev.codex.schubert.nk.protocol.layout.semantic.LogId;
+import dev.codex.schubert.nk.protocol.layout.semantic.LogLevel;
+import dev.codex.schubert.nk.protocol.layout.semantic.LogType;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
 import java.text.Normalizer;
-import java.time.*;
+import java.time.Instant;
+import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
-import java.util.*;
-import java.util.zip.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Locale;
+import java.util.Optional;
+import java.util.UUID;
+import java.util.zip.Deflater;
+import java.util.zip.DeflaterOutputStream;
+import java.util.zip.InflaterInputStream;
 import javax.crypto.Cipher;
 import javax.crypto.Mac;
-import javax.crypto.spec.*;
+import javax.crypto.spec.GCMParameterSpec;
+import javax.crypto.spec.SecretKeySpec;
 
 /** Independent UI235 offsets and SS323/352 LP/JCE vectors; synthetic values only, PT061..066. */
 final class LogVectors {
   static final Instant NOW = Instant.parse("2026-09-08T00:00:00Z");
-  static final Instant COMPLETED = NOW.plusNanos(123456789), LATER = NOW.plusSeconds(3600);
-  static final UUID MESSAGE = new UUID(200, 1),
-      RESPONSE = new UUID(201, 1),
-      REPLY = new UUID(201, 2);
+  static final Instant COMPLETED = NOW.plusNanos(123456789);
+  static final Instant LATER = NOW.plusSeconds(3600);
+  static final UUID MESSAGE = new UUID(200, 1);
+  static final UUID RESPONSE = new UUID(201, 1);
+  static final UUID REPLY = new UUID(201, 2);
   static final AuthenticatedActor ADMIN = new AuthenticatedActor(1, "admin", Role.ADMIN);
   static final String[] NAMES = {
     "keyword", "logType", "action", "path", "level", "fromAt", "toAt", "page", "pageSize"

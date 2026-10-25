@@ -1,14 +1,28 @@
 package dev.codex.schubert.nk.web.form;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import dev.codex.schubert.nk.protocol.codec.PayloadCodec;
-import dev.codex.schubert.nk.protocol.layout.*;
+import dev.codex.schubert.nk.protocol.layout.LayoutId;
+import dev.codex.schubert.nk.protocol.layout.PayloadValues;
 import dev.codex.schubert.nk.protocol.layout.admin.UserCreateRequestData;
 import dev.codex.schubert.nk.protocol.layout.semantic.UserRole;
 import java.nio.charset.StandardCharsets;
-import java.util.*;
-import java.util.concurrent.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import java.util.UUID;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
 import org.junit.jupiter.api.Test;
 
 /** UI225/236 independent literals/372-byte oracle; PG-D345/016055/PT-USER-CREATE001..008. */
@@ -256,7 +270,8 @@ class UserCreateFormTest {
         results.add(
             executor.submit(
                 () -> {
-                  String name = "user" + n, password = "SyntheticPassword-" + n;
+                  String name = "user" + n;
+                  String password = "SyntheticPassword-" + n;
                   String token = String.format(Locale.ROOT, "12345678-1234-4234-8234-%012x", n);
                   var values = input();
                   values.put("username", List.of(name));

@@ -1,11 +1,19 @@
 package dev.codex.schubert.nk.batch.platform;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import dev.codex.schubert.nk.bootstrap.FixedServiceIdentity;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import org.junit.jupiter.api.Test;
 
 /** SSC164; explicit kernel/HTTP golden vectors independent of production serialization. */
@@ -33,15 +41,26 @@ final class MorningServiceReadinessTest {
           + "CapEff:\t0000000000000000\nCapBnd:\t0000000000000000\nCapAmb:\t0000000000000000\nNoNewPrivs:\t1\n";
 
   static final class Fixture implements MorningServiceReadiness.Io {
-    String status = STATUS,
-        command = "/usr/bin/java\0--enable-native-access=ALL-UNNAMED\0" + MAIN + "\0";
+    String status = STATUS;
+    String command =
+        "/usr/bin/java\u0000--enable-native-access=ALL-UNNAMED\u0000" + MAIN + "\u0000";
     MorningServiceReadiness.Response health =
         new MorningServiceReadiness.Response(200, "{\"status\":\"UP\"}");
     MorningServiceReadiness.Response info = new MorningServiceReadiness.Response(200, GOLDEN);
-    Set<String> before = Set.of("12345"), after = Set.of("12345");
-    int guards, statusReads, sockets, requests;
-    int failGuard, failIo;
-    boolean driftStatus, nullStatus, nullCommand, nullSockets, nullResponse, rawHighBitStatus;
+    Set<String> before = Set.of("12345");
+    Set<String> after = Set.of("12345");
+    int guards;
+    int statusReads;
+    int sockets;
+    int requests;
+    int failGuard;
+    int failIo;
+    boolean driftStatus;
+    boolean nullStatus;
+    boolean nullCommand;
+    boolean nullSockets;
+    boolean nullResponse;
+    boolean rawHighBitStatus;
 
     void guard() throws IOException {
       if (++guards == failGuard) throw new IOException("generation drift");

@@ -1,6 +1,10 @@
 package dev.codex.schubert.nk.web.bootstrap;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import dev.codex.schubert.nk.storage.ServiceCredentialId;
 import dev.codex.schubert.nk.web.logging.EncryptedWebLogPayload;
@@ -112,7 +116,8 @@ final class WebNativeCodecsTest {
 
   @Test
   void nkey001CopiesErasedButBorrowedCodecsSurviveUntilOwnerClose() {
-    byte[] sessionKey = bytes(1), logKey = bytes(65);
+    byte[] sessionKey = bytes(1);
+    byte[] logKey = bytes(65);
     var owner = WebNativeCodecs.create(new Source(sessionKey, logKey));
     assertArrayEquals(new byte[32], sessionKey);
     assertArrayEquals(new byte[32], logKey);
@@ -184,7 +189,8 @@ final class WebNativeCodecsTest {
 
   @Test
   void nkey003PurposeOrderAndVersionFailureNeverUseFallback() {
-    byte[] session = bytes(1), log = bytes(65);
+    byte[] session = bytes(1);
+    byte[] log = bytes(65);
     var source =
         new Source(session, log) {
           @Override

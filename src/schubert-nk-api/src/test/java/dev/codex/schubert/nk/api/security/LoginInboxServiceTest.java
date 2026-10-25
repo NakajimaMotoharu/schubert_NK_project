@@ -1,17 +1,35 @@
 package dev.codex.schubert.nk.api.security;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import dev.codex.schubert.nk.api.dispatch.ApiLogPathApplicationRuntime;
 import dev.codex.schubert.nk.api.dispatch.JdbcSyncRequestProcessor;
 import dev.codex.schubert.nk.api.domain.Role;
 import dev.codex.schubert.nk.api.error.TemporaryInfrastructureException;
-import dev.codex.schubert.nk.api.idempotency.*;
+import dev.codex.schubert.nk.api.idempotency.CanonicalField;
+import dev.codex.schubert.nk.api.idempotency.FingerprintKeyRing;
+import dev.codex.schubert.nk.api.idempotency.JdbcInboxCoordinator;
+import dev.codex.schubert.nk.api.idempotency.OperationFingerprint;
+import dev.codex.schubert.nk.api.idempotency.ResponseSnapshotCodec;
 import dev.codex.schubert.nk.api.logging.ApiLogDatabaseFixture;
 import dev.codex.schubert.nk.api.messaging.inbound.SyncRequestListener;
 import dev.codex.schubert.nk.protocol.codec.PermanentProtocolException;
-import dev.codex.schubert.nk.protocol.header.*;
-import dev.codex.schubert.nk.protocol.layout.*;
+import dev.codex.schubert.nk.protocol.header.AuthenticationContext;
+import dev.codex.schubert.nk.protocol.header.CommonHeader;
+import dev.codex.schubert.nk.protocol.header.InteractionKind;
+import dev.codex.schubert.nk.protocol.header.MessageKind;
+import dev.codex.schubert.nk.protocol.layout.FixedPayload;
+import dev.codex.schubert.nk.protocol.layout.LayoutId;
+import dev.codex.schubert.nk.protocol.layout.WireMessage;
 import dev.codex.schubert.nk.protocol.transport.BrokerTopology;
 import jakarta.jms.BytesMessage;
 import jakarta.jms.DeliveryMode;
@@ -36,7 +54,15 @@ import java.time.Clock;
 import java.time.Instant;
 import java.time.ZoneOffset;
 import java.time.temporal.ChronoUnit;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.HexFormat;
+import java.util.List;
+import java.util.Locale;
+import java.util.Optional;
+import java.util.Set;
+import java.util.UUID;
 import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -52,7 +78,10 @@ import org.apache.activemq.artemis.core.deployers.impl.FileConfigurationParser;
 import org.apache.activemq.artemis.core.server.embedded.EmbeddedActiveMQ;
 import org.apache.activemq.artemis.jms.client.ActiveMQConnectionFactory;
 import org.apache.activemq.artemis.jms.client.ActiveMQQueue;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
 import org.junit.jupiter.api.io.TempDir;
 
@@ -67,9 +96,11 @@ final class LoginInboxServiceTest {
   private static AuthSessionService sessions;
   private static String fixtureHash;
   private static final Instant NOW = Instant.parse("2026-09-08T01:02:03.456789Z");
-  private static final UUID REQUEST = new UUID(0, 101), SESSION = new UUID(0, 104);
+  private static final UUID REQUEST = new UUID(0, 101);
+  private static final UUID SESSION = new UUID(0, 104);
   private static final String PASSWORD = "synthetic-password";
-  private static final String FIRST_STAMP = "20260908100203456", LATER_STAMP = "20260908100303456";
+  private static final String FIRST_STAMP = "20260908100203456";
+  private static final String LATER_STAMP = "20260908100303456";
   private final AtomicInteger passwordChecks = new AtomicInteger();
   private final AtomicReference<char[]> observedPassword = new AtomicReference<>();
   private final AtomicLong ids = new AtomicLong(1000);
@@ -464,7 +495,8 @@ final class LoginInboxServiceTest {
     try (var executor = Executors.newFixedThreadPool(16)) {
       for (int i = 0; i < 100; i++)
         futures.add(executor.submit(() -> call(service, input, NOW.minusSeconds(1))));
-      int initial = 0, replay = 0;
+      int initial = 0;
+      int replay = 0;
       Set<UUID> responseIds = new HashSet<>();
       for (var future : futures) {
         byte[] body = future.get();
@@ -659,7 +691,8 @@ final class LoginInboxServiceTest {
     for (boolean valid : new boolean[] {true, false}) {
       seed();
       String password = valid ? PASSWORD : "synthetic-wrong";
-      String initial = valid ? "0000" : "0101", repeated = valid ? "0200" : "0101";
+      String initial = valid ? "0000" : "0101";
+      String repeated = valid ? "0200" : "0101";
       var connection = database.api();
       var processor =
           new JdbcSyncRequestProcessor(

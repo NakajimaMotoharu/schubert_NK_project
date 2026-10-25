@@ -1,14 +1,34 @@
 package dev.codex.schubert.nk.batch.repository;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.lang.reflect.*;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.lang.reflect.Proxy;
 import java.nio.file.Path;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.time.Instant;
-import java.util.*;
-import java.util.concurrent.*;
-import org.junit.jupiter.api.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.UUID;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 /** NK-BAT-001; DAT-009/OPS-009/UI251/SS311/331 3.12/332/343; SSC055/PG159; BAT082..089. */
@@ -61,7 +81,9 @@ final class RunReferenceRepositoryTest {
   void referenceValueInvariants() {
     for (int mask = 0; mask < 8; mask++)
       for (boolean consistent : List.of(false, true)) {
-        boolean history = (mask & 1) != 0, inbox = (mask & 2) != 0, log = (mask & 4) != 0;
+        boolean history = (mask & 1) != 0;
+        boolean inbox = (mask & 2) != 0;
+        boolean log = (mask & 4) != 0;
         if (mask == 0 && !consistent) {
           assertThrows(
               IllegalArgumentException.class, () -> new RunReferences(history, inbox, log, false));
@@ -398,11 +420,15 @@ final class RunReferenceRepositoryTest {
   }
 
   static final class Probe {
-    final Map<String, Integer> seen = new HashMap<>(), failAt = new HashMap<>();
+    final Map<String, Integer> seen = new HashMap<>();
+    final Map<String, Integer> failAt = new HashMap<>();
     final Map<String, Throwable> thrown = new HashMap<>();
-    String anomaly = "", interruptAt = "";
+    String anomaly = "";
+    String interruptAt = "";
     RuntimeException runtime;
-    int failures, statements, rows;
+    int failures;
+    int statements;
+    int rows;
 
     Connection wrap(Connection connection) {
       return (Connection)

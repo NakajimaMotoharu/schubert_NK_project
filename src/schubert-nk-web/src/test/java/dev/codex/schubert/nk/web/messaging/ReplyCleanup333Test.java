@@ -1,6 +1,9 @@
 package dev.codex.schubert.nk.web.messaging;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import jakarta.jms.JMSConsumer;
 import jakarta.jms.JMSContext;
@@ -114,9 +117,13 @@ final class ReplyCleanup333Test {
 
   private static final class Fixture {
     final List<String> order = new ArrayList<>();
-    final Throwable primary, closing;
+    final Throwable primary;
+    final Throwable closing;
     final JMSContext context;
-    int opens, starts, closes, signals;
+    int opens;
+    int starts;
+    int closes;
+    int signals;
 
     Fixture(Throwable primary, Throwable closing) {
       this.primary = primary;

@@ -1,6 +1,11 @@
 package dev.codex.schubert.nk.web.storage;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import dev.codex.schubert.nk.protocol.file.LargeResultDescriptor;
 import dev.codex.schubert.nk.storage.DirectoryCalls;
@@ -86,7 +91,8 @@ class LargeResultReaderTest {
   @Test
   void rd05NullClosedAndWrongOwnershipModeAndSizeAreDeniedWithoutRepair() throws Exception {
     var descriptor = prepare();
-    Path day = root.resolve("20260908"), file = day.resolve(ScenarioFileFixture.ID + ".ready");
+    Path day = root.resolve("20260908");
+    Path file = day.resolve(ScenarioFileFixture.ID + ".ready");
     var calls = new ReadOnlyCalls();
     var parent = OwnedTransferDirectory.open(calls, root);
     try (parent) {
@@ -131,7 +137,8 @@ class LargeResultReaderTest {
   void rd05SymlinkHardLinkDirectoryMissingAndUnlinkedHeldInodeAreDeniedAndNeverDeleted()
       throws Exception {
     var descriptor = prepare();
-    Path day = root.resolve("20260908"), file = day.resolve(ScenarioFileFixture.ID + ".ready");
+    Path day = root.resolve("20260908");
+    Path file = day.resolve(ScenarioFileFixture.ID + ".ready");
     var calls = new ReadOnlyCalls();
     try (var parent = OwnedTransferDirectory.open(calls, root)) {
       var reader = new LargeResultReader(parent, identity());
@@ -229,10 +236,11 @@ class LargeResultReaderTest {
 
   private static final class ReadOnlyCalls implements DirectoryCalls {
     final DirectoryCalls delegate = LinuxDirectoryCalls.create();
-    final Set<Integer> live = ConcurrentHashMap.newKeySet(),
-        entries = ConcurrentHashMap.newKeySet(),
-        dates = ConcurrentHashMap.newKeySet();
-    boolean failEntryClose, failDateClose;
+    final Set<Integer> live = ConcurrentHashMap.newKeySet();
+    final Set<Integer> entries = ConcurrentHashMap.newKeySet();
+    final Set<Integer> dates = ConcurrentHashMap.newKeySet();
+    boolean failEntryClose;
+    boolean failDateClose;
     Runnable afterEntry = () -> {};
 
     @Override
@@ -262,7 +270,8 @@ class LargeResultReaderTest {
     @Override
     public void close(int fd) throws StorageIoException {
       assertTrue(live.remove(fd));
-      boolean entry = entries.remove(fd), date = dates.remove(fd);
+      boolean entry = entries.remove(fd);
+      boolean date = dates.remove(fd);
       delegate.close(fd);
       if (entry && failEntryClose || date && failDateClose) {
         failEntryClose = false;

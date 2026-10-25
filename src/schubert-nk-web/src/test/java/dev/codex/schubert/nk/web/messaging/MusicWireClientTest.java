@@ -1,20 +1,51 @@
 package dev.codex.schubert.nk.web.messaging;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import dev.codex.schubert.nk.protocol.header.*;
-import dev.codex.schubert.nk.protocol.layout.*;
-import dev.codex.schubert.nk.protocol.layout.media.*;
-import dev.codex.schubert.nk.protocol.layout.semantic.*;
+import dev.codex.schubert.nk.protocol.header.AuthenticationContext;
+import dev.codex.schubert.nk.protocol.header.ResultCode;
+import dev.codex.schubert.nk.protocol.layout.LayoutId;
+import dev.codex.schubert.nk.protocol.layout.PayloadData;
+import dev.codex.schubert.nk.protocol.layout.TypedPayloadValues;
+import dev.codex.schubert.nk.protocol.layout.media.AnimationMenuRequestData;
+import dev.codex.schubert.nk.protocol.layout.media.MusicCategoryRecord;
+import dev.codex.schubert.nk.protocol.layout.media.MusicCategoryRequestData;
+import dev.codex.schubert.nk.protocol.layout.media.MusicCategoryResponseData;
+import dev.codex.schubert.nk.protocol.layout.media.MusicDescriptorRequestData;
+import dev.codex.schubert.nk.protocol.layout.media.MusicSectionRecord;
+import dev.codex.schubert.nk.protocol.layout.media.MusicSectionRequestData;
+import dev.codex.schubert.nk.protocol.layout.media.MusicSectionResponseData;
+import dev.codex.schubert.nk.protocol.layout.media.MusicTrackRecord;
+import dev.codex.schubert.nk.protocol.layout.media.MusicTrackRequestData;
+import dev.codex.schubert.nk.protocol.layout.media.MusicTrackResponseData;
+import dev.codex.schubert.nk.protocol.layout.semantic.ContentDisposition;
+import dev.codex.schubert.nk.protocol.layout.semantic.PairRole;
 import dev.codex.schubert.nk.web.messaging.ProtectedReadWireException.Reason;
 import jakarta.jms.JMSException;
 import jakarta.jms.JMSRuntimeException;
 import java.nio.charset.StandardCharsets;
-import java.time.*;
-import java.util.*;
-import java.util.concurrent.*;
+import java.time.Clock;
+import java.time.Duration;
+import java.time.Instant;
+import java.time.ZoneOffset;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Locale;
+import java.util.Optional;
+import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicLong;
-import java.util.function.*;
+import java.util.function.BiFunction;
+import java.util.function.Consumer;
 import org.junit.jupiter.api.Test;
 
 /** PG210/PT-WEB254..261/FUN007/AUT/MQ/UI232,235/SS311,312,321,323,352. */
@@ -342,8 +373,8 @@ class MusicWireClientTest {
   }
 
   private static byte[] response(String type, int n, String code, UUID id, String context) {
-    int data = type.equals("MTR") ? 16 : 8,
-        record = type.equals("MCT") ? 72 : type.equals("MCS") ? 136 : 1312;
+    int data = type.equals("MTR") ? 16 : 8;
+    int record = type.equals("MCT") ? 72 : type.equals("MCS") ? 136 : 1312;
     var b = header(type + "RSP01", data, record, n, code, id, context);
     number(b, 256, type.equals("MTR") ? 9 : 6, n);
     for (int i = 0; i < n; i++) {

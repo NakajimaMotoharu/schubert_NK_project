@@ -1,7 +1,13 @@
 package dev.codex.schubert.nk.api.application.scenario;
 
-import static dev.codex.schubert.nk.api.application.scenario.ScenarioRequestFixture.*;
-import static org.junit.jupiter.api.Assertions.*;
+import static dev.codex.schubert.nk.api.application.scenario.ScenarioRequestFixture.message;
+import static dev.codex.schubert.nk.api.application.scenario.ScenarioRequestFixture.put;
+import static dev.codex.schubert.nk.api.application.scenario.ScenarioRequestFixture.search;
+import static dev.codex.schubert.nk.api.application.scenario.ScenarioRequestFixture.spaces;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import dev.codex.schubert.nk.api.domain.Role;
 import dev.codex.schubert.nk.api.idempotency.CanonicalRequest;

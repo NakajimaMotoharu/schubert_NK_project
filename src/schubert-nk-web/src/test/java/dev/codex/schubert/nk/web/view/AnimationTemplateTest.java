@@ -1,22 +1,41 @@
 package dev.codex.schubert.nk.web.view;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import dev.codex.schubert.nk.protocol.header.AuthenticationContext;
-import dev.codex.schubert.nk.protocol.layout.media.*;
-import dev.codex.schubert.nk.protocol.layout.semantic.*;
+import dev.codex.schubert.nk.protocol.layout.media.AnimationListResponseData;
+import dev.codex.schubert.nk.protocol.layout.media.AnimationMenuResponseData;
+import dev.codex.schubert.nk.protocol.layout.media.AnimationRecord;
+import dev.codex.schubert.nk.protocol.layout.semantic.AnimationCategory;
+import dev.codex.schubert.nk.protocol.layout.semantic.AnimationListCategory;
+import dev.codex.schubert.nk.protocol.layout.semantic.DisplayPath;
+import dev.codex.schubert.nk.protocol.layout.semantic.UserRole;
 import dev.codex.schubert.nk.web.config.WebMvcConfiguration;
 import dev.codex.schubert.nk.web.session.SessionPrincipal;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.time.Instant;
-import java.util.*;
-import java.util.concurrent.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import java.util.Optional;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.junit.jupiter.api.Test;
-import org.springframework.mock.web.*;
-import org.springframework.security.web.csrf.*;
+import org.springframework.mock.web.MockHttpServletRequest;
+import org.springframework.mock.web.MockHttpServletResponse;
+import org.springframework.mock.web.MockServletContext;
+import org.springframework.security.web.csrf.CsrfToken;
+import org.springframework.security.web.csrf.DefaultCsrfToken;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
 import org.springframework.web.servlet.DispatcherServlet;
 import org.thymeleaf.spring6.view.ThymeleafViewResolver;
@@ -334,7 +353,8 @@ class AnimationTemplateTest {
         tasks.add(
             executor.submit(
                 () -> {
-                  String username = "reader" + n, token = "public-csrf-" + n;
+                  String username = "reader" + n;
+                  String token = "public-csrf-" + n;
                   if (n % 2 == 0) {
                     var menu =
                         AnimationMenuViewModel.from(

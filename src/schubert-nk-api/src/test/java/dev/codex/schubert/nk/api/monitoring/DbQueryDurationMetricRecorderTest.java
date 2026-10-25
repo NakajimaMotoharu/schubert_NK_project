@@ -388,7 +388,9 @@ class DbQueryDurationMetricRecorderTest {
         var otherRegistry = new Registry();
         var executor = Executors.newFixedThreadPool(8)) {
       var recorder = new DbQueryDurationMetricRecorder(registry, "DEBUG");
-      Map<String, Long> counts = new HashMap<>(), sums = new HashMap<>(), maxima = new HashMap<>();
+      Map<String, Long> counts = new HashMap<>();
+      Map<String, Long> sums = new HashMap<>();
+      Map<String, Long> maxima = new HashMap<>();
       var tasks = new ArrayList<Callable<Void>>();
       for (int index = 0; index < 64; index++) {
         var query = QUERIES.get(index % 2);

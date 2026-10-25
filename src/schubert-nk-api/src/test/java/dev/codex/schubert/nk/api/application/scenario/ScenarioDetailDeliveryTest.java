@@ -1,6 +1,11 @@
 package dev.codex.schubert.nk.api.application.scenario;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import dev.codex.schubert.nk.api.persistence.ScenarioDetailSnapshot;
 import dev.codex.schubert.nk.protocol.codec.PayloadCodec;
@@ -8,7 +13,12 @@ import dev.codex.schubert.nk.protocol.file.LargeResultDescriptor;
 import dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalog;
 import dev.codex.schubert.nk.protocol.layout.scenario.ScenarioDetailResponseData;
 import dev.codex.schubert.nk.protocol.layout.scenario.ScenarioEntryRecord;
-import dev.codex.schubert.nk.protocol.layout.semantic.*;
+import dev.codex.schubert.nk.protocol.layout.semantic.DeliveryMode;
+import dev.codex.schubert.nk.protocol.layout.semantic.DisplayPath;
+import dev.codex.schubert.nk.protocol.layout.semantic.EntryId;
+import dev.codex.schubert.nk.protocol.layout.semantic.EntryType;
+import dev.codex.schubert.nk.protocol.layout.semantic.GameCode;
+import dev.codex.schubert.nk.protocol.layout.semantic.ScriptFileId;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.time.Instant;

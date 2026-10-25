@@ -1,6 +1,10 @@
 package dev.codex.schubert.nk.api.storage;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import dev.codex.schubert.nk.protocol.layout.scenario.ScenarioEntryRecord;
 import dev.codex.schubert.nk.protocol.layout.semantic.EntryId;
@@ -206,7 +210,8 @@ class ScenarioRecordStreamTest {
     final FileChannel actual;
     final int mode;
     boolean forced;
-    int writes, maximumBuffer;
+    int writes;
+    int maximumBuffer;
 
     FaultChannel(Path path, int mode) throws IOException {
       this.mode = mode;

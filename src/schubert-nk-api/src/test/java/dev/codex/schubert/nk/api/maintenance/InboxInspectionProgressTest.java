@@ -1,17 +1,37 @@
 package dev.codex.schubert.nk.api.maintenance;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import dev.codex.schubert.nk.api.idempotency.*;
+import dev.codex.schubert.nk.api.idempotency.InboxCompletionState;
+import dev.codex.schubert.nk.api.idempotency.InboxResultReference;
+import dev.codex.schubert.nk.api.idempotency.InboxResultReferenceType;
+import dev.codex.schubert.nk.api.idempotency.ResponseSnapshotIdentity;
 import dev.codex.schubert.nk.api.logging.ApiLogDatabaseFixture;
 import dev.codex.schubert.nk.api.messaging.outbound.SqlConnectionProvider;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.time.Instant;
-import java.util.*;
-import java.util.concurrent.*;
-import org.junit.jupiter.api.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.Set;
+import java.util.UUID;
+import java.util.concurrent.Callable;
+import java.util.concurrent.Executors;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 /** PT-DB-INBOX-081..088; SS324 12.6/331 3.8; PG-D-128; independent wire/JCE and real SQL. */
@@ -22,8 +42,8 @@ final class InboxInspectionProgressTest {
   private static final Instant TIME = Instant.parse("2026-09-09T00:00:00.123Z");
   private static final InspectionRun RUN =
       new InspectionRun(new UUID(0, 71), Instant.parse("2026-09-17T00:00:00.123Z"));
-  private static final String OPEN = "maintenance_open_inbox_inspection",
-      SAVE = "maintenance_record_inbox_inspection";
+  private static final String OPEN = "maintenance_open_inbox_inspection";
+  private static final String SAVE = "maintenance_record_inbox_inspection";
   private static final String TABLE = "schubert.inbox_inspection_progress";
   private static final InboxResultReference NONE = InboxResultReference.none();
 
@@ -513,7 +533,8 @@ final class InboxInspectionProgressTest {
       Map<String, String> overrides)
       throws Exception {
     UUID message = id(sequence);
-    boolean login = layout.equals("LGNRSP01"), mutation = layout.equals("UCRRSP01");
+    boolean login = layout.equals("LGNRSP01");
+    boolean mutation = layout.equals("UCRRSP01");
     var identity =
         login
             ? ResponseSnapshotIdentity.anonymous(message, layout, "001")

@@ -1,14 +1,30 @@
 package dev.codex.schubert.nk.web.form;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import dev.codex.schubert.nk.protocol.codec.PayloadCodec;
-import dev.codex.schubert.nk.protocol.layout.*;
+import dev.codex.schubert.nk.protocol.layout.LayoutId;
+import dev.codex.schubert.nk.protocol.layout.PayloadData;
+import dev.codex.schubert.nk.protocol.layout.PayloadValues;
 import dev.codex.schubert.nk.protocol.layout.admin.PasswordResetRequestData;
 import java.nio.charset.StandardCharsets;
-import java.util.*;
-import java.util.concurrent.*;
-import java.util.function.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import java.util.Set;
+import java.util.concurrent.Callable;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
+import java.util.function.BooleanSupplier;
+import java.util.function.Supplier;
 import org.junit.jupiter.api.Test;
 
 /** UI225236/SS313314 independent literal offsets; PG-D353/016069/CHANGE001..016. */
@@ -449,8 +465,8 @@ class UserMutationFormTest {
         final int index = i;
         tasks.add(
             () -> {
-              String op = OPERATIONS.get(index % 4),
-                  token = String.format(Locale.ROOT, "12345678-1234-4234-8234-%012d", index);
+              String op = OPERATIONS.get(index % 4);
+              String token = String.format(Locale.ROOT, "12345678-1234-4234-8234-%012d", index);
               var p = input(op, index);
               p.put("operation_token", List.of(token));
               p.put("expected_version", List.of(Integer.toString(index)));

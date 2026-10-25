@@ -3,8 +3,14 @@ package dev.codex.schubert.nk.api.security;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
-import java.sql.*;
-import java.util.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /** Real JDBC delegation with per-operation fault points and observed lock order. No secret logs. */
 final class AdminAuthFixture {
@@ -17,10 +23,16 @@ final class AdminAuthFixture {
   Before before = sql -> {};
   final List<String> statements = new ArrayList<>();
   final Map<String, Object> fields = new HashMap<>();
-  String method = "none", match = "";
-  boolean empty, duplicate, nullNumber, nullText, reverseIds;
+  String method = "none";
+  String match = "";
+  boolean empty;
+  boolean duplicate;
+  boolean nullNumber;
+  boolean nullText;
+  boolean reverseIds;
   Long ownerOverride;
-  int resultsClosed, statementsClosed;
+  int resultsClosed;
+  int statementsClosed;
 
   Connection wrap(Connection real) {
     return (Connection)

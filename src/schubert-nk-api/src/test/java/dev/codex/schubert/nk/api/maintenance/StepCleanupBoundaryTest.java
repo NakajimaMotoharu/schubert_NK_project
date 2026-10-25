@@ -1,15 +1,29 @@
 package dev.codex.schubert.nk.api.maintenance;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import dev.codex.schubert.nk.api.database.MigrationInventory;
 import dev.codex.schubert.nk.api.logging.ApiLogDatabaseFixture;
-import java.nio.file.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.security.MessageDigest;
-import java.sql.*;
-import java.util.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Types;
+import java.util.ArrayList;
+import java.util.HexFormat;
+import java.util.List;
+import java.util.Map;
 import org.flywaydb.core.Flyway;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 /** NK-DAT-001/OPS009/DAT009/UI251/SS331 3.14/332/341; SSC057/PG164; DB259..266. */
@@ -18,7 +32,8 @@ final class StepCleanupBoundaryTest {
   static ApiLogDatabaseFixture db;
   static String url;
   static final String RUN = "12345678-9abc-def0-8123-456789abcdef";
-  static final String CUT = "2026-09-12T15:00:00Z", START = "2026-09-13T02:00:00Z";
+  static final String CUT = "2026-09-12T15:00:00Z";
+  static final String START = "2026-09-13T02:00:00Z";
   static final String FN = "schubert.maintenance_execute_cleanup_step";
   static final String SIG = FN + "(uuid,timestamptz,bigint,integer,timestamptz,text,integer)";
   static final List<String> KINDS =
@@ -68,11 +83,12 @@ final class StepCleanupBoundaryTest {
     StringBuilder trace = new StringBuilder();
     try (var c = locked();
         var admin = db.admin()) {
-      int[] targets = {1, 1, 3, 2, 1, 1, 1}, totals = {1, 1, 3, 2, 1, 2, 3};
+      int[] targets = {1, 1, 3, 2, 1, 1, 1};
+      int[] totals = {1, 1, 3, 2, 1, 2, 3};
       for (int i = 0; i < KINDS.size(); i++) {
-        String kind = KINDS.get(i),
-            expected =
-                targets[i] + "|" + targets[i] + "|0|" + totals[i] + "|" + totals[i] + "|false|OK";
+        String kind = KINDS.get(i);
+        String expected =
+            targets[i] + "|" + targets[i] + "|0|" + totals[i] + "|" + totals[i] + "|false|OK";
         String actual = call(c, kind, 1000);
         assertEquals(expected, actual, kind);
         trace.append(kind).append('=').append(actual).append('\n');
@@ -252,7 +268,8 @@ final class StepCleanupBoundaryTest {
       "id=1", "id=2", "true", "true", "true", "id=1", "id=1", "id=1", "true", "true"
     };
     for (int i = 0; i < TABLES.size(); i++) {
-      String table = TABLES.get(i), kind = kinds[i];
+      String table = TABLES.get(i);
+      String kind = kinds[i];
       try (var c = locked();
           var writer = db.admin();
           var admin = db.admin()) {

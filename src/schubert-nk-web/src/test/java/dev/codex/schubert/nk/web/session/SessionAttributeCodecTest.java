@@ -1,23 +1,34 @@
 package dev.codex.schubert.nk.web.session;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import dev.codex.schubert.nk.protocol.header.AuthenticationContext;
 import dev.codex.schubert.nk.protocol.layout.semantic.UserRole;
 import dev.codex.schubert.nk.web.security.SavedRequestTarget;
 import java.nio.charset.StandardCharsets;
 import java.time.Instant;
-import java.util.*;
-import java.util.concurrent.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Locale;
+import java.util.Optional;
+import java.util.UUID;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
 
 /** Hand-written SSC038 JSON and explicit field oracles. NK-WEB-001/PT-WEB-009..015. */
 class SessionAttributeCodecTest {
   static final SessionAttributeCodec CODEC = new SessionAttributeCodec();
-  static final String TIME = "2026-09-08T00:00:00Z",
-      CONTEXT = "b".repeat(64),
-      CSRF = "c".repeat(64);
+  static final String TIME = "2026-09-08T00:00:00Z";
+  static final String CONTEXT = "b".repeat(64);
+  static final String CSRF = "c".repeat(64);
   static final Instant NOW = Instant.parse(TIME);
   static final String ANONYMOUS = "{\"formatVersion\":1,\"operationTokens\":[]}";
 
@@ -202,7 +213,8 @@ class SessionAttributeCodecTest {
                 + "]".repeat(100)
                 + "]}")) invalid(text);
     String maximum = ANONYMOUS + " ".repeat(16384 - bytes(ANONYMOUS).length);
-    byte[] input = bytes(maximum), copy = input.clone();
+    byte[] input = bytes(maximum);
+    byte[] copy = input.clone();
     assertEquals(16384, input.length);
     assertTrue(CODEC.decode(input).principal().isEmpty());
     assertArrayEquals(copy, input);
@@ -211,7 +223,9 @@ class SessionAttributeCodecTest {
 
   @Test
   void web013UnicodeSavedTargetsAndTokenPurposesPreserveMeaning() {
-    String username = "é".repeat(32), csrf = "_".repeat(128), target = "/q?x=" + "あ".repeat(681);
+    String username = "\u00e9".repeat(32);
+    String csrf = "_".repeat(128);
+    String target = "/q?x=" + "\u3042".repeat(681);
     var value = attributes(true, username, UserRole.ADMIN, csrf, target, 10);
     String expected = json(true, username, "ADMIN", csrf, target, 10);
     byte[] actual = CODEC.encode(value);
@@ -309,7 +323,8 @@ class SessionAttributeCodecTest {
         futures.add(
             pool.submit(
                 () -> {
-                  String name = "reader" + n, target = "/logs?q=日本語" + n;
+                  String name = "reader" + n;
+                  String target = "/logs?q=\u65e5\u672c\u8a9e" + n;
                   String expected = json(true, name, "ADMIN", CSRF, target, n % 11);
                   check(
                       CODEC.decode(bytes(expected)),

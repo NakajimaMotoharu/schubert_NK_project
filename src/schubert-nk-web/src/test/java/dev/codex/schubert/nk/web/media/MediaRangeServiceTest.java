@@ -1,6 +1,11 @@
 package dev.codex.schubert.nk.web.media;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import dev.codex.schubert.nk.protocol.file.ContentDisposition;
 import dev.codex.schubert.nk.protocol.file.MediaDescriptor;
@@ -62,7 +67,8 @@ class MediaRangeServiceTest {
               new String[] {"bytes=0-", "0", "1048576"},
               new String[] {"BYTES= 2-4 ,bogus", "2", "5"},
               new String[] {"bytes=2097153-9999999", "2097153", "2097155"})) {
-        int first = Integer.parseInt(vector[1]), end = Integer.parseInt(vector[2]);
+        int first = Integer.parseInt(vector[1]);
+        int end = Integer.parseInt(vector[2]);
         expect(
             deliver(service, inline, Optional.of(vector[0]), false),
             206,
@@ -332,7 +338,8 @@ class MediaRangeServiceTest {
   void med032OneHundredCallsHaveIndependentPositionsAndHeaders() throws Exception {
     try (var held = OwnedTransferDirectory.open(LinuxDirectoryCalls.create(), root);
         var executor = Executors.newFixedThreadPool(10)) {
-      AtomicInteger opens = new AtomicInteger(), closes = new AtomicInteger();
+      AtomicInteger opens = new AtomicInteger();
+      AtomicInteger closes = new AtomicInteger();
       var real = new DescriptorFileResolver(held, identity);
       var service =
           new MediaRangeService(
@@ -438,7 +445,11 @@ class MediaRangeServiceTest {
     final String fault;
     final ByteArrayOutputStream output = new ByteArrayOutputStream();
     Map<String, String> headers = Map.of();
-    int status, begins, bodyCalls, closes, writes;
+    int status;
+    int begins;
+    int bodyCalls;
+    int closes;
+    int writes;
 
     FakeResponse(String fault) {
       this.fault = fault;

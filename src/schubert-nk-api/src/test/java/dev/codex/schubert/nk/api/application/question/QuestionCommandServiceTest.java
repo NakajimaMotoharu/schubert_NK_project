@@ -1,36 +1,59 @@
 package dev.codex.schubert.nk.api.application.question;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import dev.codex.schubert.nk.api.domain.Role;
 import dev.codex.schubert.nk.api.error.TemporaryInfrastructureException;
 import dev.codex.schubert.nk.api.logging.ApiLogDatabaseFixture;
 import dev.codex.schubert.nk.api.messaging.inbound.DeliveryMetadata;
-import dev.codex.schubert.nk.api.messaging.outbound.*;
+import dev.codex.schubert.nk.api.messaging.outbound.JdbcOutboxRepository;
+import dev.codex.schubert.nk.api.messaging.outbound.OutboxDispatcher;
+import dev.codex.schubert.nk.api.messaging.outbound.OutboxJmsSender;
+import dev.codex.schubert.nk.api.messaging.outbound.OwnedOutboxDispatcher;
 import dev.codex.schubert.nk.api.security.AuthenticatedActor;
 import dev.codex.schubert.nk.protocol.codec.HeaderCodec;
 import dev.codex.schubert.nk.protocol.header.ResultCode;
-import dev.codex.schubert.nk.protocol.layout.*;
+import dev.codex.schubert.nk.protocol.layout.FixedPayload;
+import dev.codex.schubert.nk.protocol.layout.WireMessage;
 import dev.codex.schubert.nk.protocol.layout.semantic.NotificationState;
 import jakarta.jms.JMSContext;
 import java.lang.reflect.Proxy;
 import java.nio.file.Path;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.time.Instant;
-import java.util.*;
-import java.util.concurrent.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
+import java.util.OptionalLong;
+import java.util.Set;
+import java.util.UUID;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 import java.util.concurrent.atomic.AtomicInteger;
 import org.apache.activemq.artemis.jms.client.ActiveMQConnectionFactory;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 /** Literal DB expected states/triples; borrowed transaction and real row-lock competition. */
 final class QuestionCommandServiceTest {
   @TempDir static Path root;
   static ApiLogDatabaseFixture db;
-  static final AuthenticatedActor USER = new AuthenticatedActor(1, "u1", Role.USER),
-      ADMIN = new AuthenticatedActor(1, "u1", Role.ADMIN),
-      OTHER = new AuthenticatedActor(2, "u2", Role.USER);
+  static final AuthenticatedActor USER = new AuthenticatedActor(1, "u1", Role.USER);
+  static final AuthenticatedActor ADMIN = new AuthenticatedActor(1, "u1", Role.ADMIN);
+  static final AuthenticatedActor OTHER = new AuthenticatedActor(2, "u2", Role.USER);
   static final Instant AT = Instant.parse("2026-10-01T00:00:01.123456789Z");
   static final QuestionCommandMetadata META =
       new QuestionCommandMetadata(new UUID(710, 1), new UUID(710, 2), AT);

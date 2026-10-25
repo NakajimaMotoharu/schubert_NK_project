@@ -1,17 +1,33 @@
 package dev.codex.schubert.nk.web.view;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import dev.codex.schubert.nk.protocol.header.AuthenticationContext;
 import dev.codex.schubert.nk.protocol.layout.common.PagedResponseData;
 import dev.codex.schubert.nk.protocol.layout.log.LogRecord;
-import dev.codex.schubert.nk.protocol.layout.semantic.*;
+import dev.codex.schubert.nk.protocol.layout.semantic.ElapsedMilliseconds;
+import dev.codex.schubert.nk.protocol.layout.semantic.HttpStatusCode;
+import dev.codex.schubert.nk.protocol.layout.semantic.LogId;
+import dev.codex.schubert.nk.protocol.layout.semantic.LogLevel;
+import dev.codex.schubert.nk.protocol.layout.semantic.LogType;
+import dev.codex.schubert.nk.protocol.layout.semantic.UserRole;
 import dev.codex.schubert.nk.web.session.SessionPrincipal;
 import java.beans.Introspector;
 import java.lang.reflect.Modifier;
 import java.time.Instant;
-import java.util.*;
-import java.util.concurrent.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Locale;
+import java.util.Optional;
+import java.util.Set;
+import java.util.UUID;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
 import org.jsoup.Jsoup;
 import org.junit.jupiter.api.Test;
 import org.thymeleaf.context.Context;
@@ -21,9 +37,9 @@ import org.thymeleaf.templateresolver.StringTemplateResolver;
 /** PG212/PT-WEB262..269/FUN008/AUT/MON/UI225,235/SS311,313,323,352. */
 class LogSearchResultsViewModelTest {
   private static final Instant TIME = Instant.parse("2026-09-20T01:02:03.004Z");
-  private static final UUID REQUEST = new UUID(0, 1),
-      MESSAGE = new UUID(0, 2),
-      CORRELATION = new UUID(0, 3);
+  private static final UUID REQUEST = new UUID(0, 1);
+  private static final UUID MESSAGE = new UUID(0, 2);
+  private static final UUID CORRELATION = new UUID(0, 3);
 
   private static SessionPrincipal actor(String name, UserRole role) {
     return new SessionPrincipal(name, role, AuthenticationContext.of("a".repeat(64)), TIME);

@@ -1,11 +1,21 @@
 package dev.codex.schubert.nk.api.maintenance;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.nio.charset.StandardCharsets;
-import java.nio.file.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.attribute.PosixFilePermissions;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.HexFormat;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -218,7 +228,8 @@ final class InspectorDeploymentTest {
 
   @Test
   void previousProfiles() throws Exception {
-    String context = "api-context-aes-previous", response = "api-inbox-response-aes-previous";
+    String context = "api-context-aes-previous";
+    String response = "api-inbox-response-aes-previous";
     for (var selection :
         List.of(
             List.<String>of(), List.of(context), List.of(response), List.of(context, response))) {
@@ -293,7 +304,8 @@ final class InspectorDeploymentTest {
 
   private Path fake(String receipt, int exit) throws Exception {
     var directory = Files.createTempDirectory(root, "fake-");
-    Path output = directory.resolve("public-receipt.txt"), executable = directory.resolve("java");
+    Path output = directory.resolve("public-receipt.txt");
+    Path executable = directory.resolve("java");
     Files.writeString(output, receipt);
     Files.writeString(executable, "#!/bin/sh\n/bin/cat '" + output + "'\nexit " + exit + "\n");
     Files.setPosixFilePermissions(executable, PosixFilePermissions.fromString("rwx------"));
@@ -324,8 +336,8 @@ final class InspectorDeploymentTest {
   }
 
   private Result execute(List<String> command, Map<String, String> environment) throws Exception {
-    Path output = Files.createTempFile(root, "out-", ".txt"),
-        error = Files.createTempFile(root, "err-", ".txt");
+    Path output = Files.createTempFile(root, "out-", ".txt");
+    Path error = Files.createTempFile(root, "err-", ".txt");
     var builder = new ProcessBuilder(command);
     builder.environment().clear();
     builder.environment().putAll(environment);

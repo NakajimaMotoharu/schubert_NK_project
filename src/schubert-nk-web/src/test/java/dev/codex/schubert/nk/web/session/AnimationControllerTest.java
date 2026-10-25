@@ -1,37 +1,72 @@
 package dev.codex.schubert.nk.web.session;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.head;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 
 import dev.codex.schubert.nk.protocol.header.AuthenticationContext;
 import dev.codex.schubert.nk.protocol.layout.semantic.UserRole;
-import dev.codex.schubert.nk.web.config.*;
+import dev.codex.schubert.nk.web.config.AnimationMvcConfiguration;
 import dev.codex.schubert.nk.web.controller.AnimationController;
 import dev.codex.schubert.nk.web.logging.WebLogDatabaseFixture;
-import dev.codex.schubert.nk.web.messaging.*;
-import dev.codex.schubert.nk.web.security.*;
-import dev.codex.schubert.nk.web.view.*;
-import jakarta.servlet.http.*;
+import dev.codex.schubert.nk.web.messaging.AnimationWireClient;
+import dev.codex.schubert.nk.web.messaging.JmsRequestReplyClient;
+import dev.codex.schubert.nk.web.messaging.ReplyCorrelationRegistry;
+import dev.codex.schubert.nk.web.security.ApiSessionInvalidHandler;
+import dev.codex.schubert.nk.web.view.AnimationListViewModel;
+import dev.codex.schubert.nk.web.view.AnimationMenuViewModel;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.security.Principal;
-import java.time.*;
-import java.util.*;
-import java.util.concurrent.*;
+import java.time.Clock;
+import java.time.Duration;
+import java.time.Instant;
+import java.time.ZoneOffset;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Locale;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.Set;
+import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
-import java.util.function.*;
+import java.util.function.BiFunction;
 import org.jsoup.Jsoup;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
-import org.springframework.mock.web.*;
+import org.springframework.mock.web.MockHttpServletRequest;
+import org.springframework.mock.web.MockHttpServletResponse;
+import org.springframework.mock.web.MockServletContext;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.web.csrf.*;
-import org.springframework.test.web.servlet.*;
+import org.springframework.security.web.csrf.CsrfToken;
+import org.springframework.security.web.csrf.DefaultCsrfToken;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import org.springframework.ui.*;
+import org.springframework.ui.ExtendedModelMap;
+import org.springframework.ui.Model;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
 
 /** NK-WEB002/FUN006/AUT/TST/UI223,235/SS313,314,323/PG207/PT-SCR054..065. */
@@ -605,8 +640,8 @@ class AnimationControllerTest {
   private static final class Fixture implements AutoCloseable {
     final ApiSessionInvalidTest.Harness security = new ApiSessionInvalidTest.Harness(db);
     final AtomicInteger ids = new AtomicInteger();
-    final List<byte[]> requests = new CopyOnWriteArrayList<>(),
-        buffers = new CopyOnWriteArrayList<>();
+    final List<byte[]> requests = new CopyOnWriteArrayList<>();
+    final List<byte[]> buffers = new CopyOnWriteArrayList<>();
     final Set<UUID> correlations = ConcurrentHashMap.newKeySet();
     volatile int count = 2;
     volatile String code = "0000";
@@ -666,7 +701,8 @@ class AnimationControllerTest {
 
   // UI232/235 independent byte offsets; no production codec/mapper for fixtures.
   private static byte[] response(String type, int n, String code, UUID id, String context) {
-    boolean menu = type.equals("ANM"), success = code.equals("0000") || code.equals("0200");
+    boolean menu = type.equals("ANM");
+    boolean success = code.equals("0000") || code.equals("0200");
     int count = menu || !success ? 0 : n;
     var b =
         header(

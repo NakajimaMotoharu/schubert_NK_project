@@ -1,11 +1,26 @@
 package dev.codex.schubert.nk.web.form;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import dev.codex.schubert.nk.protocol.layout.semantic.*;
-import dev.codex.schubert.nk.web.form.ScenarioSearchForm.*;
-import java.util.*;
-import java.util.concurrent.*;
+import dev.codex.schubert.nk.protocol.layout.semantic.EntryType;
+import dev.codex.schubert.nk.protocol.layout.semantic.GameCode;
+import dev.codex.schubert.nk.protocol.layout.semantic.VoiceCondition;
+import dev.codex.schubert.nk.web.form.ScenarioSearchForm.Code;
+import dev.codex.schubert.nk.web.form.ScenarioSearchForm.Field;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
 import org.junit.jupiter.api.Test;
 
 /** Independent UI/SS literals, PG199/SSC072/015012/PT-WEB214..221. */

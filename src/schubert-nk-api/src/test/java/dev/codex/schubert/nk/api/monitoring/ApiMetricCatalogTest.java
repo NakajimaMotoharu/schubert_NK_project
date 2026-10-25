@@ -20,15 +20,15 @@ import org.junit.jupiter.api.Test;
 
 /** APICAT001..014/1773: expected domains are SS literals and an independent route fixture. */
 class ApiMetricCatalogTest {
-  private static final String POOL = "nk_db_pool_connections",
-      ROWS = "nk_outbox_rows",
-      AGE = "nk_outbox_oldest_seconds",
-      INBOX = "nk_inbox_replays_total",
-      OP = "nk_operation_token_mismatch_total",
-      RED = "nk_mq_redeliveries_total",
-      MQ = "nk_mq_messages_total",
-      DB = "nk_db_query_duration_seconds",
-      MQD = "nk_mq_processing_duration_seconds";
+  private static final String POOL = "nk_db_pool_connections";
+  private static final String ROWS = "nk_outbox_rows";
+  private static final String AGE = "nk_outbox_oldest_seconds";
+  private static final String INBOX = "nk_inbox_replays_total";
+  private static final String OP = "nk_operation_token_mismatch_total";
+  private static final String RED = "nk_mq_redeliveries_total";
+  private static final String MQ = "nk_mq_messages_total";
+  private static final String DB = "nk_db_query_duration_seconds";
+  private static final String MQD = "nk_mq_processing_duration_seconds";
   private static final List<String> LAYOUTS =
       List.of(
           "LGNREQ01",

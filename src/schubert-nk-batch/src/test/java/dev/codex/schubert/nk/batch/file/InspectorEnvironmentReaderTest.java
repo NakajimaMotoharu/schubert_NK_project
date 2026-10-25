@@ -1,20 +1,43 @@
 package dev.codex.schubert.nk.batch.file;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import dev.codex.schubert.nk.batch.repository.BatchRun;
-import dev.codex.schubert.nk.storage.*;
+import dev.codex.schubert.nk.storage.DirectoryCalls;
+import dev.codex.schubert.nk.storage.InodeSecurityCalls;
+import dev.codex.schubert.nk.storage.LinuxDirectoryCalls;
+import dev.codex.schubert.nk.storage.OwnedTransferDirectory;
+import dev.codex.schubert.nk.storage.StorageIoException;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Proxy;
 import java.nio.ByteBuffer;
 import java.nio.channels.SeekableByteChannel;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.attribute.FileTime;
 import java.time.Instant;
-import java.util.*;
-import java.util.concurrent.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import java.util.Set;
+import java.util.StringJoiner;
+import java.util.UUID;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.BiConsumer;
 import org.junit.jupiter.api.Test;
@@ -480,19 +503,32 @@ final class InspectorEnvironmentReaderTest {
 
   private static final class Fixture
       implements AutoCloseable, InspectorEnvironmentReader.Io, InodeSecurityCalls {
-    final Path directory, file;
+    final Path directory;
+    final Path file;
     final boolean runtime;
     final OwnedTransferDirectory root;
     final InspectorEnvironmentReader.NioIo real = new InspectorEnvironmentReader.NioIo();
     final Map<String, AtomicInteger> counts = new ConcurrentHashMap<>();
     final Set<Integer> entries = ConcurrentHashMap.newKeySet();
     final AtomicInteger channels = new AtomicInteger();
-    long uid = 0, group = 2000;
-    String badRole = "*", filesystem;
+    long uid = 0;
+    long group = 2000;
+    String badRole = "*";
+    String filesystem;
     byte[] acl = new byte[0];
-    boolean readonly, nullAttributes, nullChannel, failCloses, lateInterrupt, rawClose;
-    String fail = "", readBehavior = "normal";
-    int failAt = 1, sizeDelta, endSizeDelta, readLimit = Integer.MAX_VALUE, maximumBuffer;
+    boolean readonly;
+    boolean nullAttributes;
+    boolean nullChannel;
+    boolean failCloses;
+    boolean lateInterrupt;
+    boolean rawClose;
+    String fail = "";
+    String readBehavior = "normal";
+    int failAt = 1;
+    int sizeDelta;
+    int endSizeDelta;
+    int readLimit = Integer.MAX_VALUE;
+    int maximumBuffer;
     BiConsumer<String, Map<String, Object>> change = (role, values) -> {};
     Action afterRead = () -> {};
     BiConsumer<String, Integer> compound = (name, count) -> {};
@@ -615,7 +651,8 @@ final class InspectorEnvironmentReaderTest {
           compoundBuffers.add(target.array());
           point("read");
           maximumBuffer = Math.max(maximumBuffer, target.capacity());
-          int start = target.position(), remaining = target.remaining();
+          int start = target.position();
+          int remaining = target.remaining();
           switch (readBehavior) {
             case "zero":
               return 0;

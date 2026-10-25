@@ -1,7 +1,13 @@
 package dev.codex.schubert.nk.api.file;
 
-import static dev.codex.schubert.nk.api.file.AssetChecksumManifestTest.*;
-import static org.junit.jupiter.api.Assertions.*;
+import static dev.codex.schubert.nk.api.file.AssetChecksumManifestTest.ABC_SHA;
+import static dev.codex.schubert.nk.api.file.AssetChecksumManifestTest.FORMATS;
+import static dev.codex.schubert.nk.api.file.AssetChecksumManifestTest.descriptor;
+import static dev.codex.schubert.nk.api.file.AssetChecksumManifestTest.music;
+import static dev.codex.schubert.nk.api.file.AssetChecksumManifestTest.reject;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -41,7 +47,8 @@ class HeldMediaFileInspectorTest {
       assertThrows(
           NullPointerException.class, () -> new HeldMediaFileInspector(f.held, f.identity, null));
       var inspector = new HeldMediaFileInspector(f.held, f.identity, manifest);
-      int beforeDirectories = f.calls.directoryOpens, beforeEntries = f.calls.entryOpens;
+      int beforeDirectories = f.calls.directoryOpens;
+      int beforeEntries = f.calls.entryOpens;
       assertThrows(NullPointerException.class, () -> inspector.verify(null));
       reject(() -> inspector.verify(music("music/missing.ogg", ABC_SHA, 3)));
       for (int i = 0; i < 64; i++) {

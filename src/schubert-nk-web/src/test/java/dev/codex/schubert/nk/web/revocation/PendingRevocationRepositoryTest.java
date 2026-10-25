@@ -1,14 +1,33 @@
 package dev.codex.schubert.nk.web.revocation;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import dev.codex.schubert.nk.web.logging.WebLogDatabaseFixture;
-import java.lang.reflect.*;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.lang.reflect.Proxy;
 import java.nio.file.Path;
-import java.sql.*;
-import java.time.*;
-import java.util.*;
-import org.junit.jupiter.api.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLDataException;
+import java.sql.SQLException;
+import java.time.DateTimeException;
+import java.time.Instant;
+import java.time.OffsetDateTime;
+import java.util.List;
+import java.util.UUID;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 /** RERUN004/QA050: isolated PG, independent literal SQL/time/lease oracle, no remote calls. */
@@ -16,7 +35,8 @@ final class PendingRevocationRepositoryTest {
   private static final Instant NOW = Instant.parse("2026-09-08T00:00:00.123456Z");
   private static final EncryptedRevocationPayload PAYLOAD =
       new EncryptedRevocationPayload("test", new byte[101]);
-  private static final UUID OWNER = new UUID(0, 101), SECOND = new UUID(0, 102);
+  private static final UUID OWNER = new UUID(0, 101);
+  private static final UUID SECOND = new UUID(0, 102);
   private static final PendingRevocationRepository REPO = new PendingRevocationRepository();
   private static WebLogDatabaseFixture db;
 
@@ -182,7 +202,8 @@ final class PendingRevocationRepositoryTest {
   @Test
   void rerun004dSelfLeaseCasRollbackAndExpiredOwnerNeverDeletes() throws Exception {
     enqueue(1, null);
-    Instant at = NOW.plusSeconds(5), until = at.plusSeconds(10);
+    Instant at = NOW.plusSeconds(5);
+    Instant until = at.plusSeconds(10);
     ClaimedRevocation old;
     try (var c = db.transaction()) {
       old = REPO.claim(c, OWNER, at, until, 1).getFirst();

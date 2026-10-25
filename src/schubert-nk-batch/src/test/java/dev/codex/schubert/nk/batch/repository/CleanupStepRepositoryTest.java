@@ -1,14 +1,41 @@
 package dev.codex.schubert.nk.batch.repository;
 
-import static dev.codex.schubert.nk.batch.repository.CleanupStepFixture.*;
-import static org.junit.jupiter.api.Assertions.*;
+import static dev.codex.schubert.nk.batch.repository.CleanupStepFixture.COLS;
+import static dev.codex.schubert.nk.batch.repository.CleanupStepFixture.KINDS;
+import static dev.codex.schubert.nk.batch.repository.CleanupStepFixture.Probe;
+import static dev.codex.schubert.nk.batch.repository.CleanupStepFixture.RUN;
+import static dev.codex.schubert.nk.batch.repository.CleanupStepFixture.START;
+import static dev.codex.schubert.nk.batch.repository.CleanupStepFixture.attempt;
+import static dev.codex.schubert.nk.batch.repository.CleanupStepFixture.locked;
+import static dev.codex.schubert.nk.batch.repository.CleanupStepFixture.query;
+import static dev.codex.schubert.nk.batch.repository.CleanupStepFixture.repositoryInventory;
+import static dev.codex.schubert.nk.batch.repository.CleanupStepFixture.reset;
+import static dev.codex.schubert.nk.batch.repository.CleanupStepFixture.sql;
+import static dev.codex.schubert.nk.batch.repository.CleanupStepFixture.totals;
+import static dev.codex.schubert.nk.batch.repository.CleanupStepFixture.trace;
+import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.nio.file.Path;
-import java.sql.*;
-import java.time.*;
-import java.util.*;
-import java.util.concurrent.*;
-import org.junit.jupiter.api.*;
+import java.sql.Connection;
+import java.time.Instant;
+import java.time.OffsetDateTime;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.TreeSet;
+import java.util.UUID;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 /** NK-BAT-001/OPS009/DAT009/UI251/SS331 3.14/332/341; SSC057/PG164; BAT162..169. */
@@ -33,7 +60,8 @@ final class CleanupStepRepositoryTest {
 
   @Test
   void actualSevenKindsAndStepTotals() throws Exception {
-    long[] deltas = {1, 1, 3, 2, 1, 1, 1}, totals = {1, 1, 3, 2, 1, 2, 3};
+    long[] deltas = {1, 1, 3, 2, 1, 1, 1};
+    long[] totals = {1, 1, 3, 2, 1, 2, 3};
     StringBuilder trace = new StringBuilder();
     try (var c = locked(db, false)) {
       var repo = new CleanupStepRepository(c);

@@ -1,6 +1,11 @@
 package dev.codex.schubert.nk.web.logging;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.google.gson.JsonParser;
 import jakarta.jms.JMSException;
@@ -155,10 +160,18 @@ final class LocalAuditGraph331Test {
     final List<String> events = new ArrayList<>();
     final WebLogPayloadCodec codec =
         new WebLogPayloadCodec("public-fixture", new byte[32], null, null);
-    @Nullable RuntimeException logFailure, signalFailure;
-    @Nullable Error directLog, directSignal;
-    boolean enabled = true, duringCheck;
-    int checks, logs, signals, db, identifiers, unexpected;
+    @Nullable RuntimeException logFailure;
+    @Nullable RuntimeException signalFailure;
+    @Nullable Error directLog;
+    @Nullable Error directSignal;
+    boolean enabled = true;
+    boolean duringCheck;
+    int checks;
+    int logs;
+    int signals;
+    int db;
+    int identifiers;
+    int unexpected;
     String message = "";
 
     @Nullable Throwable execute() {

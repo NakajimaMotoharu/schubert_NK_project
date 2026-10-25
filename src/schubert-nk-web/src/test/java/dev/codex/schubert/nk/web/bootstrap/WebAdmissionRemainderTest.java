@@ -1,14 +1,25 @@
 package dev.codex.schubert.nk.web.bootstrap;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import dev.codex.schubert.nk.storage.*;
+import dev.codex.schubert.nk.storage.NonSecretConfigSource;
+import dev.codex.schubert.nk.storage.ServiceConfigFiles;
+import dev.codex.schubert.nk.storage.StorageIoException;
 import java.io.IOException;
 import java.lang.management.ManagementFactory;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.*;
-import java.security.*;
-import java.util.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.security.MessageDigest;
+import java.security.Security;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HexFormat;
+import java.util.List;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 import org.junit.jupiter.api.Test;
@@ -118,8 +129,8 @@ final class WebAdmissionRemainderTest {
         .forEach(command::add);
     command.addAll(
         List.of("-cp", System.getProperty("java.class.path"), Probe.class.getName(), mode));
-    Path out = Files.createTempFile(temporary, "probe-", ".out"),
-        err = Files.createTempFile(temporary, "probe-", ".err");
+    Path out = Files.createTempFile(temporary, "probe-", ".out");
+    Path err = Files.createTempFile(temporary, "probe-", ".err");
     var builder =
         new ProcessBuilder(command).redirectOutput(out.toFile()).redirectError(err.toFile());
     builder.environment().clear();

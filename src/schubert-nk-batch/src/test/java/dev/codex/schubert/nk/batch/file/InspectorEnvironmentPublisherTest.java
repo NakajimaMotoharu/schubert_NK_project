@@ -1,21 +1,45 @@
 package dev.codex.schubert.nk.batch.file;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import dev.codex.schubert.nk.batch.file.EnvironmentInodePolicy.Metadata;
 import dev.codex.schubert.nk.batch.file.EnvironmentInodePolicy.Snapshot;
 import dev.codex.schubert.nk.batch.repository.BatchRun;
-import dev.codex.schubert.nk.storage.*;
+import dev.codex.schubert.nk.storage.DirectoryCalls;
+import dev.codex.schubert.nk.storage.InodeSecurityCalls;
+import dev.codex.schubert.nk.storage.LinuxDirectoryCalls;
+import dev.codex.schubert.nk.storage.LinuxInodeSecurity;
+import dev.codex.schubert.nk.storage.OwnedTransferDirectory;
+import dev.codex.schubert.nk.storage.StorageIoException;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Proxy;
 import java.nio.ByteBuffer;
 import java.nio.channels.SeekableByteChannel;
-import java.nio.file.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.attribute.FileTime;
 import java.time.Instant;
-import java.util.*;
-import java.util.concurrent.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
 import java.util.function.BiConsumer;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
@@ -684,17 +708,29 @@ final class InspectorEnvironmentPublisherTest {
 
   private static final class Fixture
       implements AutoCloseable, InspectorEnvironmentPublisher.Io, InodeSecurityCalls {
-    final Path directory, target, part;
+    final Path directory;
+    final Path target;
+    final Path part;
     final OwnedTransferDirectory root;
     final InspectorEnvironmentPublisher publisher;
     final InspectorEnvironmentPublisher.NioIo nativeIo = new InspectorEnvironmentPublisher.NioIo();
     final Map<String, Integer> counts = new ConcurrentHashMap<>();
     final Set<Integer> entries = ConcurrentHashMap.newKeySet();
-    int writers, readers;
-    String fail = "", hookName = "", invalid = "", badRole = "", writeBehavior = "normal";
-    int failAt = 1, hookAt = 1, badSizeAt, writeLimit = Integer.MAX_VALUE;
+    int writers;
+    int readers;
+    String fail = "";
+    String hookName = "";
+    String invalid = "";
+    String badRole = "";
+    String writeBehavior = "normal";
+    int failAt = 1;
+    int hookAt = 1;
+    int badSizeAt;
+    int writeLimit = Integer.MAX_VALUE;
     long uid;
-    boolean nullWriter, rawRead, rawClose;
+    boolean nullWriter;
+    boolean rawRead;
+    boolean rawClose;
     StorageIoException.Reason reason = StorageIoException.Reason.UNAVAILABLE;
     BiConsumer<String, Map<String, Object>> change = (role, values) -> {};
     Action hook = () -> {};
@@ -848,7 +884,8 @@ final class InspectorEnvironmentPublisherTest {
         public int write(ByteBuffer source) throws IOException {
           compoundBuffers.add(source.array());
           point("write");
-          int start = source.position(), remaining = source.remaining();
+          int start = source.position();
+          int remaining = source.remaining();
           if (writeBehavior.equals("zero")) return 0;
           if (writeBehavior.equals("negative")) return -1;
           if (writeBehavior.equals("overflow")) return remaining + 1;

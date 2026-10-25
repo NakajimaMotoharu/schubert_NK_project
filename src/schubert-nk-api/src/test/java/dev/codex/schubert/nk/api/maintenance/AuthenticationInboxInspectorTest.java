@@ -1,10 +1,20 @@
 package dev.codex.schubert.nk.api.maintenance;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import dev.codex.schubert.nk.api.idempotency.*;
+import dev.codex.schubert.nk.api.idempotency.EncryptedResponseSnapshot;
+import dev.codex.schubert.nk.api.idempotency.InboxCompletion;
+import dev.codex.schubert.nk.api.idempotency.InboxCompletionState;
+import dev.codex.schubert.nk.api.idempotency.InboxResultReference;
+import dev.codex.schubert.nk.api.idempotency.ResponseSnapshotCodec;
+import dev.codex.schubert.nk.api.idempotency.ResponseSnapshotIdentity;
 import dev.codex.schubert.nk.api.logging.ApiLogDatabaseFixture;
-import dev.codex.schubert.nk.api.security.*;
+import dev.codex.schubert.nk.api.security.AuthContextCodec;
+import dev.codex.schubert.nk.api.security.ContextHash;
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.lang.reflect.InvocationTargetException;
@@ -17,7 +27,12 @@ import java.security.SecureRandom;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.time.Instant;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HexFormat;
+import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 import java.util.concurrent.Callable;
 import java.util.concurrent.Executors;
 import java.util.zip.Deflater;
@@ -25,7 +40,10 @@ import java.util.zip.DeflaterOutputStream;
 import javax.crypto.Cipher;
 import javax.crypto.spec.GCMParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 /** PT-DB-INBOX-009..016. Independent wire/AAD/JCE and SQL fixtures, no Production capture. */
@@ -33,7 +51,8 @@ final class AuthenticationInboxInspectorTest {
   @TempDir static Path root;
   private static ApiLogDatabaseFixture db;
   private static final Instant TIME = Instant.parse("2026-09-09T00:00:00.123Z");
-  private static final UUID REQUEST = new UUID(0, 101), SESSION = new UUID(0, 104);
+  private static final UUID REQUEST = new UUID(0, 101);
+  private static final UUID SESSION = new UUID(0, 104);
   private static final ResponseSnapshotIdentity LOGIN =
       ResponseSnapshotIdentity.anonymous(REQUEST, "LGNRSP01", "001");
   private static final ResponseSnapshotIdentity LOGOUT =
@@ -429,7 +448,8 @@ final class AuthenticationInboxInspectorTest {
 
   // Shared independent wire/JCE input fixture for limited-role SQL PT017..024.
   static final class Fixture implements AutoCloseable {
-    final byte[] key = random(32), contextKey = random(32);
+    final byte[] key = random(32);
+    final byte[] contextKey = random(32);
     final String raw = HexFormat.of().formatHex(random(32));
     final ResponseSnapshotCodec snapshots = new ResponseSnapshotCodec("s1", key, null, null);
     final AuthContextCodec contexts = new AuthContextCodec("a1", contextKey, null, null);
@@ -467,8 +487,8 @@ final class AuthenticationInboxInspectorTest {
     }
 
     byte[] wire(ResponseSnapshotIdentity id, String code) {
-      boolean login = id.responseLayoutId().equals("LGNRSP01"),
-          success = code.equals("0000") || code.equals("0200");
+      boolean login = id.responseLayoutId().equals("LGNRSP01");
+      boolean success = code.equals("0000") || code.equals("0200");
       byte[] bytes = new byte[login ? 688 : 280];
       Arrays.fill(bytes, (byte) ' ');
       put(bytes, 0, "SCHBNK01001" + id.responseLayoutId() + "001SS");

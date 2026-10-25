@@ -3,7 +3,10 @@ package dev.codex.schubert.nk.api.maintenance;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -12,11 +15,20 @@ import java.util.Map;
  */
 final class MaintenanceJdbcProbe {
   final Map<String, Integer> faultOccurrences = new HashMap<>();
-  String selectedSql = "maintenance_next_inbox", fault = "none";
+  String selectedSql = "maintenance_next_inbox";
+  String fault = "none";
   String runtimeColumn = "none";
   String lastSqlState = "unobserved";
-  boolean empty, duplicate, commitAfter, fresh = true;
-  int commits, closes, rollbacks, saves, deletes, selectedStatements;
+  boolean empty;
+  boolean duplicate;
+  boolean commitAfter;
+  boolean fresh = true;
+  int commits;
+  int closes;
+  int rollbacks;
+  int saves;
+  int deletes;
+  int selectedStatements;
   final Map<String, Object> columns = new HashMap<>();
   Hook beforeDelete = c -> {};
   Runnable afterClose = () -> {};

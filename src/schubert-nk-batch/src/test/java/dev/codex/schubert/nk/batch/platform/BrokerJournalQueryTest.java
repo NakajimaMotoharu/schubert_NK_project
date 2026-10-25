@@ -1,9 +1,20 @@
 package dev.codex.schubert.nk.batch.platform;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.io.*;
-import java.util.*;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InterruptedIOException;
+import java.io.OutputStream;
+import java.util.Arrays;
+import java.util.List;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 import org.junit.jupiter.api.Test;
@@ -154,12 +165,20 @@ final class BrokerJournalQueryTest {
 
   private static final class Child extends Process {
     private final byte[] bytes;
-    private int stdoutClosed, stdinClosed, stderrClosed, exit;
-    private boolean completed = true, alive = true, destroyed, interrupt, closeFailure;
+    private int stdoutClosed;
+    private int stdinClosed;
+    private int stderrClosed;
+    private int exit;
+    private boolean completed = true;
+    private boolean alive = true;
+    private boolean destroyed;
+    private boolean interrupt;
+    private boolean closeFailure;
     private Throwable readFailure;
     private long waitBound;
     private TimeUnit waitUnit;
-    private long waitDelayNanos, readDelayNanos;
+    private long waitDelayNanos;
+    private long readDelayNanos;
     private final CountDownLatch drainStarted = new CountDownLatch(1);
     private final CountDownLatch drainFinished = new CountDownLatch(1);
 

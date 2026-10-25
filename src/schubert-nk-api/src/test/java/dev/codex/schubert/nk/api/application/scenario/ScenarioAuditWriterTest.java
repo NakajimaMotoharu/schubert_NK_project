@@ -1,20 +1,44 @@
 package dev.codex.schubert.nk.api.application.scenario;
 
-import static dev.codex.schubert.nk.api.application.scenario.ScenarioRequestFixture.*;
-import static org.junit.jupiter.api.Assertions.*;
+import static dev.codex.schubert.nk.api.application.scenario.ScenarioRequestFixture.message;
+import static dev.codex.schubert.nk.api.application.scenario.ScenarioRequestFixture.put;
+import static dev.codex.schubert.nk.api.application.scenario.ScenarioRequestFixture.search;
+import static dev.codex.schubert.nk.api.application.scenario.ScenarioRequestFixture.spaces;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import com.google.gson.JsonParser;
 import dev.codex.schubert.nk.api.domain.Role;
 import dev.codex.schubert.nk.api.security.AuthenticatedActor;
-import dev.codex.schubert.nk.protocol.layout.*;
+import dev.codex.schubert.nk.protocol.layout.LayoutId;
+import dev.codex.schubert.nk.protocol.layout.TypedPayloadValues;
 import dev.codex.schubert.nk.protocol.layout.common.PagedResponseData;
-import dev.codex.schubert.nk.protocol.layout.scenario.*;
-import dev.codex.schubert.nk.protocol.layout.semantic.*;
+import dev.codex.schubert.nk.protocol.layout.scenario.ScenarioDetailResponseData;
+import dev.codex.schubert.nk.protocol.layout.scenario.ScenarioEntryRecord;
+import dev.codex.schubert.nk.protocol.layout.semantic.DeliveryMode;
+import dev.codex.schubert.nk.protocol.layout.semantic.DisplayPath;
+import dev.codex.schubert.nk.protocol.layout.semantic.EntryId;
+import dev.codex.schubert.nk.protocol.layout.semantic.EntryType;
+import dev.codex.schubert.nk.protocol.layout.semantic.GameCode;
+import dev.codex.schubert.nk.protocol.layout.semantic.RelativePath;
+import dev.codex.schubert.nk.protocol.layout.semantic.ScriptFileId;
+import dev.codex.schubert.nk.protocol.layout.semantic.Sha256Hex;
 import java.lang.reflect.Proxy;
 import java.nio.charset.StandardCharsets;
-import java.sql.*;
-import java.time.*;
-import java.util.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.time.Instant;
+import java.time.ZoneOffset;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.Set;
+import java.util.UUID;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -187,7 +211,10 @@ final class ScenarioAuditWriterTest {
     final Map<Integer, Object> bindings = new HashMap<>();
     final String fault;
     final int changed;
-    int prepare, execute, close, faultReached;
+    int prepare;
+    int execute;
+    int close;
+    int faultReached;
 
     Jdbc(String fault, int changed) {
       this.fault = fault;

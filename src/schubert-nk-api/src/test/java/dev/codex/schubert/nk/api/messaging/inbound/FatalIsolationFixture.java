@@ -1,6 +1,6 @@
 package dev.codex.schubert.nk.api.messaging.inbound;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import jakarta.jms.JMSConsumer;
 import jakarta.jms.JMSContext;

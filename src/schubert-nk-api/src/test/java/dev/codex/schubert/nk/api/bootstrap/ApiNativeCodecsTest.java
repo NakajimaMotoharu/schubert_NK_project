@@ -1,6 +1,9 @@
 package dev.codex.schubert.nk.api.bootstrap;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import dev.codex.schubert.nk.api.idempotency.CanonicalRequest;
 import dev.codex.schubert.nk.api.security.AuthContextIdentity;
@@ -9,7 +12,10 @@ import dev.codex.schubert.nk.storage.ServiceCredentialId;
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
 import java.nio.charset.StandardCharsets;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.UUID;
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
 import org.junit.jupiter.api.Test;
@@ -55,7 +61,11 @@ final class ApiNativeCodecsTest {
 
   static final class Keys implements ApiNativeCodecs.KeySource {
     final List<byte[]> copies = new ArrayList<>();
-    int failRead = -1, failVersion = -1, nullRead = -1, badLength = -1, same = -1;
+    int failRead = -1;
+    int failVersion = -1;
+    int nullRead = -1;
+    int badLength = -1;
+    int same = -1;
     boolean fatal;
 
     public byte[] copyKey(ServiceCredentialId id) {

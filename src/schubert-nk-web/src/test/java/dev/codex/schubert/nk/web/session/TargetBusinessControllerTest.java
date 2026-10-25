@@ -1,36 +1,76 @@
 package dev.codex.schubert.nk.web.session;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import dev.codex.schubert.nk.api.application.question.*;
-import dev.codex.schubert.nk.api.idempotency.*;
+import dev.codex.schubert.nk.api.application.question.QuestionCommandService;
+import dev.codex.schubert.nk.api.application.question.QuestionMutationApplicationService;
+import dev.codex.schubert.nk.api.application.question.QuestionQueryApplicationService;
+import dev.codex.schubert.nk.api.application.question.QuestionQueryReplayService;
+import dev.codex.schubert.nk.api.idempotency.FingerprintKeyRing;
+import dev.codex.schubert.nk.api.idempotency.JdbcInboxCoordinator;
+import dev.codex.schubert.nk.api.idempotency.ResponseSnapshotCodec;
 import dev.codex.schubert.nk.api.persistence.QuestionQueryRepository;
-import dev.codex.schubert.nk.api.security.*;
-import dev.codex.schubert.nk.protocol.codec.*;
-import dev.codex.schubert.nk.protocol.header.*;
+import dev.codex.schubert.nk.api.security.AuthenticationContextVerifier;
+import dev.codex.schubert.nk.api.security.ContextHash;
+import dev.codex.schubert.nk.protocol.codec.ExpectedRoute;
+import dev.codex.schubert.nk.protocol.codec.FixedWidthDecoder;
+import dev.codex.schubert.nk.protocol.codec.TransportBodyType;
+import dev.codex.schubert.nk.protocol.codec.TransportMetadata;
 import dev.codex.schubert.nk.protocol.header.AuthenticationContext;
+import dev.codex.schubert.nk.protocol.header.InteractionKind;
+import dev.codex.schubert.nk.protocol.header.MessageKind;
 import dev.codex.schubert.nk.protocol.layout.LayoutId;
 import dev.codex.schubert.nk.protocol.layout.semantic.UserRole;
-import dev.codex.schubert.nk.web.controller.*;
+import dev.codex.schubert.nk.web.controller.NotificationController;
+import dev.codex.schubert.nk.web.controller.QuestionController;
 import dev.codex.schubert.nk.web.logging.WebLogDatabaseFixture;
-import dev.codex.schubert.nk.web.messaging.*;
+import dev.codex.schubert.nk.web.messaging.JmsRequestReplyClient;
+import dev.codex.schubert.nk.web.messaging.JmsRequestSender;
+import dev.codex.schubert.nk.web.messaging.NotificationWireClient;
+import dev.codex.schubert.nk.web.messaging.QuestionWireClient;
+import dev.codex.schubert.nk.web.messaging.ReplyCorrelationRegistry;
 import dev.codex.schubert.nk.web.receipt.ReceiptReferenceRepository;
-import dev.codex.schubert.nk.web.view.*;
+import dev.codex.schubert.nk.web.view.NotificationDetailViewModel;
+import dev.codex.schubert.nk.web.view.QuestionDetailViewModel;
 import java.io.IOException;
 import java.lang.reflect.Proxy;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
 import java.security.MessageDigest;
-import java.sql.*;
-import java.time.*;
-import java.util.*;
-import java.util.concurrent.*;
+import java.time.Clock;
+import java.time.Duration;
+import java.time.Instant;
+import java.time.ZoneOffset;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HexFormat;
+import java.util.List;
+import java.util.Locale;
+import java.util.Optional;
+import java.util.Set;
+import java.util.UUID;
+import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.function.BiFunction;
 import javax.sql.DataSource;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
-import org.springframework.mock.web.*;
+import org.springframework.mock.web.MockHttpServletRequest;
+import org.springframework.mock.web.MockHttpServletResponse;
+import org.springframework.mock.web.MockHttpSession;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.ui.ExtendedModelMap;
 import org.springframework.util.LinkedMultiValueMap;
@@ -835,16 +875,21 @@ class TargetBusinessControllerTest {
   static final class Fixture implements AutoCloseable {
     final ApiSessionInvalidTest.Harness security = new ApiSessionInvalidTest.Harness(db);
     final WebSessionSnapshot session;
-    final AtomicLong tokenIds = new AtomicLong(), messages = new AtomicLong();
+    final AtomicLong tokenIds = new AtomicLong();
+    final AtomicLong messages = new AtomicLong();
     final SessionOperationTokenLifecycle tokens;
     final JmsRequestReplyClient wire =
         new JmsRequestReplyClient(new ReplyCorrelationRegistry(), CLOCK, 12);
-    final List<byte[]> sent = new CopyOnWriteArrayList<>(), buffers = new CopyOnWriteArrayList<>();
+    final List<byte[]> sent = new CopyOnWriteArrayList<>();
+    final List<byte[]> buffers = new CopyOnWriteArrayList<>();
     final NotificationWireClient notificationClient;
     final QuestionWireClient questionClient;
     final NotificationController notifications;
     final QuestionController questions;
-    String code = "0000", state = "RECEIVED", question = "question", owner = "reader";
+    String code = "0000";
+    String state = "RECEIVED";
+    String question = "question";
+    String owner = "reader";
     BiFunction<UUID, byte[], byte[]> responder = this::reply;
 
     Fixture() throws Exception {
@@ -930,8 +975,8 @@ class TargetBusinessControllerTest {
 
     byte[] reply(UUID id, byte[] request) {
       String layout = ascii(request, 11, 8);
-      boolean notification = layout.startsWith("NT"),
-          read = layout.equals("NTDREQ01") || layout.equals("QSDREQ01");
+      boolean notification = layout.startsWith("NT");
+      boolean read = layout.equals("NTDREQ01") || layout.equals("QSDREQ01");
       int size = read ? (notification ? 8896 : 8352) : (notification ? 32 : 24);
       byte[] result = header(layout.replace("REQ", "RSP"), size, id, true, read ? "0000" : code);
       if (read && notification) {

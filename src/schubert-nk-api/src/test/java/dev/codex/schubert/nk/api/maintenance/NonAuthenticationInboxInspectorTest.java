@@ -1,8 +1,16 @@
 package dev.codex.schubert.nk.api.maintenance;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import dev.codex.schubert.nk.api.idempotency.*;
+import dev.codex.schubert.nk.api.idempotency.EncryptedResponseSnapshot;
+import dev.codex.schubert.nk.api.idempotency.InboxCompletion;
+import dev.codex.schubert.nk.api.idempotency.InboxCompletionState;
+import dev.codex.schubert.nk.api.idempotency.InboxResultReference;
+import dev.codex.schubert.nk.api.idempotency.InboxResultReferenceType;
+import dev.codex.schubert.nk.api.idempotency.ResponseSnapshotIdentity;
 import dev.codex.schubert.nk.api.logging.ApiLogDatabaseFixture;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Proxy;
@@ -10,12 +18,25 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.security.SecureRandom;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.time.Instant;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.HexFormat;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import java.util.Optional;
+import java.util.Set;
+import java.util.UUID;
 import java.util.concurrent.Callable;
 import java.util.concurrent.Executors;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 /**
@@ -24,7 +45,8 @@ import org.junit.jupiter.api.io.TempDir;
 final class NonAuthenticationInboxInspectorTest {
   @TempDir static Path root;
   private static ApiLogDatabaseFixture db;
-  private static final UUID MESSAGE = new UUID(0, 1), FILE = new UUID(0, 3);
+  private static final UUID MESSAGE = new UUID(0, 1);
+  private static final UUID FILE = new UUID(0, 3);
   private static final Instant TIME = Instant.parse("2026-09-09T00:00:00.123Z");
   private static final List<String> LAYOUTS =
       List.of(
@@ -480,7 +502,8 @@ final class NonAuthenticationInboxInspectorTest {
     var fields = tsv(fixtures.resolve("fields-ui234-236.tsv"));
     String[] dimension =
         dimensions.stream().filter(d -> d[0].equals(layout)).findFirst().orElseThrow();
-    int dataSize = Integer.parseInt(dimension[3]), recordSize = Integer.parseInt(dimension[4]);
+    int dataSize = Integer.parseInt(dimension[3]);
+    int recordSize = Integer.parseInt(dimension[4]);
     byte[] bytes = new byte[256 + dataSize + count * recordSize];
     Arrays.fill(bytes, (byte) ' ');
     put(bytes, 0, "SCHBNK01001" + layout + "001SS");
@@ -601,7 +624,8 @@ final class NonAuthenticationInboxInspectorTest {
       List<String[]> fields) {
     for (var field : fields) {
       if (!field[0].equals(layout) || !field[1].equals(area)) continue;
-      int start = base + Integer.parseInt(field[3]) - 1, length = Integer.parseInt(field[4]);
+      int start = base + Integer.parseInt(field[3]) - 1;
+      int length = Integer.parseInt(field[4]);
       String value = values.getOrDefault(field[2], "");
       boolean numeric = field[5].equals("N") || (field[5].equals("B") && !errorProfile);
       if (numeric) value = "0".repeat(length - value.length()) + value;

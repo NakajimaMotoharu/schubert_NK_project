@@ -2,15 +2,28 @@ package dev.codex.schubert.nk.batch.cleanup;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import java.lang.reflect.*;
-import java.sql.*;
-import java.util.*;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.lang.reflect.Proxy;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Objects;
 
 /** Public JDBC fault/projection seam; actual resources close before injected close failures. */
 final class HandoffJdbcProbe {
-  final Map<String, Integer> seen = new HashMap<>(), failAt = new HashMap<>();
+  final Map<String, Integer> seen = new HashMap<>();
+  final Map<String, Integer> failAt = new HashMap<>();
   final Map<Integer, String> anomalies = new HashMap<>();
-  int queries, failures, openedStatements, closedStatements, openedRows, closedRows;
+  int queries;
+  int failures;
+  int openedStatements;
+  int closedStatements;
+  int openedRows;
+  int closedRows;
 
   Connection wrap(Connection connection) {
     return (Connection)

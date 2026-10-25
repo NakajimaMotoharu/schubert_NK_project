@@ -217,9 +217,9 @@ class MqProcessingDurationMetricRecorderTest {
     var auxiliary = new java.util.HashSet<String>();
     for (var meter : registry.getMeters()) {
       var id = meter.getId();
-      String layout = id.getTag("layout"),
-          outcome = id.getTag("outcome"),
-          pair = layout + "/" + outcome;
+      String layout = id.getTag("layout");
+      String outcome = id.getTag("outcome");
+      String pair = layout + "/" + outcome;
       assertTrue(expectedPairs.contains(pair));
       assertEquals(flow(layout), id.getTag("flow"));
       if (id.getName().equals("nk_mq_processing_duration_seconds")) {

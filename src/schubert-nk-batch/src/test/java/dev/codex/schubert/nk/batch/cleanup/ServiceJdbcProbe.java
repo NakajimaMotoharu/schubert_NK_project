@@ -1,17 +1,33 @@
 package dev.codex.schubert.nk.batch.cleanup;
 
-import java.lang.reflect.*;
-import java.sql.*;
-import java.util.*;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.lang.reflect.Proxy;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Set;
 
 /** Public JDBC calls only; deterministic failure timing, never private implementation access. */
 final class ServiceJdbcProbe {
-  final Map<String, Integer> failAt = new HashMap<>(), seen = new HashMap<>();
+  final Map<String, Integer> failAt = new HashMap<>();
+  final Map<String, Integer> seen = new HashMap<>();
   final Map<String, Throwable> thrown = new HashMap<>();
   final Map<String, Object> columns = new HashMap<>();
-  final Set<String> empty = new HashSet<>(), duplicate = new HashSet<>();
+  final Set<String> empty = new HashSet<>();
+  final Set<String> duplicate = new HashSet<>();
   String runtimeAt = "none";
-  int commits, rollbacks, restores, closes, failures, prepared;
+  int commits;
+  int rollbacks;
+  int restores;
+  int closes;
+  int failures;
+  int prepared;
   Hook afterCommit = count -> {};
 
   @FunctionalInterface

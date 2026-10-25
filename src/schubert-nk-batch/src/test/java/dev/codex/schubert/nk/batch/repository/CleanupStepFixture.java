@@ -1,12 +1,30 @@
 package dev.codex.schubert.nk.batch.repository;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.lang.reflect.*;
-import java.nio.file.*;
-import java.sql.*;
-import java.time.*;
-import java.util.*;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.lang.reflect.Proxy;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.time.Instant;
+import java.time.OffsetDateTime;
+import java.time.ZoneOffset;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.TreeMap;
+import java.util.TreeSet;
+import java.util.UUID;
 
 /** Independent public PG164 JDBC fixture/oracle, SS331 3.14; BAT162..177. No deployed data. */
 public final class CleanupStepFixture {
@@ -138,9 +156,15 @@ public final class CleanupStepFixture {
     public final List<Map<Integer, Object>> cleanupBinds = new ArrayList<>();
     public final List<Long> deletedCounts = new ArrayList<>();
     public final Set<String> columns = new TreeSet<>();
-    public Hook before = (k, n) -> {}, after = (k, n) -> {};
+    public Hook before = (k, n) -> {};
+    public Hook after = (k, n) -> {};
     public String anomaly = "";
-    public int badRefs, failures, rows, statements, cleanupQueries, refsQueries;
+    public int badRefs;
+    public int failures;
+    public int rows;
+    public int statements;
+    public int cleanupQueries;
+    public int refsQueries;
 
     public void fail(String key, int... positions) {
       var s = new HashSet<Integer>();
@@ -173,7 +197,8 @@ public final class CleanupStepFixture {
               Connection.class.getClassLoader(),
               new Class<?>[] {Connection.class},
               (p, m, a) -> {
-                String name = m.getName(), key = "connection." + name;
+                String name = m.getName();
+                String key = "connection." + name;
                 hit(key);
                 assertTrue(
                     Set.of(
@@ -216,7 +241,8 @@ public final class CleanupStepFixture {
               PreparedStatement.class.getClassLoader(),
               new Class<?>[] {PreparedStatement.class},
               (p, m, a) -> {
-                String name = m.getName(), key = "statement." + name;
+                String name = m.getName();
+                String key = "statement." + name;
                 if (name.equals("close")) {
                   Object v = invoke(s, m, a);
                   statements--;
@@ -256,7 +282,8 @@ public final class CleanupStepFixture {
               ResultSet.class.getClassLoader(),
               new Class<?>[] {ResultSet.class},
               (p, m, a) -> {
-                String name = m.getName(), key = "row." + name;
+                String name = m.getName();
+                String key = "row." + name;
                 if (name.equals("close")) {
                   Object v = invoke(r, m, a);
                   rows--;

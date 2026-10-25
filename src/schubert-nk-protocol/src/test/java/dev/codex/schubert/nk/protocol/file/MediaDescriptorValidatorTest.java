@@ -169,7 +169,9 @@ class MediaDescriptorValidatorTest {
     };
     for (String[] pair : pairs) {
       var type = MediaType.valueOf(pair[0]);
-      String prefix = pair[1], extension = pair[2], mime = pair[3];
+      String prefix = pair[1];
+      String extension = pair[2];
+      String mime = pair[3];
       var valid =
           media(
               type,

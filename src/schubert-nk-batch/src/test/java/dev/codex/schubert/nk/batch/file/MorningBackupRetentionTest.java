@@ -1,17 +1,49 @@
 package dev.codex.schubert.nk.batch.file;
 
-import static dev.codex.schubert.nk.batch.file.BackupArtifactFixture.*;
-import static org.junit.jupiter.api.Assertions.*;
+import static dev.codex.schubert.nk.batch.file.BackupArtifactFixture.CONFIG_HASH;
+import static dev.codex.schubert.nk.batch.file.BackupArtifactFixture.CREDS_HASH;
+import static dev.codex.schubert.nk.batch.file.BackupArtifactFixture.DIR;
+import static dev.codex.schubert.nk.batch.file.BackupArtifactFixture.DUMP_HASH;
+import static dev.codex.schubert.nk.batch.file.BackupArtifactFixture.GID;
+import static dev.codex.schubert.nk.batch.file.BackupArtifactFixture.NAMES;
+import static dev.codex.schubert.nk.batch.file.BackupArtifactFixture.UID;
+import static dev.codex.schubert.nk.batch.file.BackupArtifactFixture.golden;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import dev.codex.schubert.nk.batch.backup.*;
-import dev.codex.schubert.nk.batch.repository.*;
-import dev.codex.schubert.nk.storage.*;
-import java.io.*;
+import dev.codex.schubert.nk.batch.backup.BackupFileDigest;
+import dev.codex.schubert.nk.batch.backup.BackupManifest;
+import dev.codex.schubert.nk.batch.repository.BatchRun;
+import dev.codex.schubert.nk.batch.repository.MaintenanceActivation;
+import dev.codex.schubert.nk.batch.repository.MorningDatabaseSession;
+import dev.codex.schubert.nk.storage.DirectoryCalls;
+import dev.codex.schubert.nk.storage.LinuxDirectoryCalls;
+import dev.codex.schubert.nk.storage.OwnedTransferDirectory;
+import dev.codex.schubert.nk.storage.StorageIoException;
+import java.io.IOException;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.*;
-import java.time.*;
-import java.util.*;
-import java.util.concurrent.*;
+import java.nio.file.Files;
+import java.nio.file.LinkOption;
+import java.nio.file.Path;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.Set;
+import java.util.TreeMap;
+import java.util.UUID;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
@@ -152,10 +184,10 @@ final class MorningBackupRetentionTest {
         var root = OwnedTransferDirectory.open(LinuxDirectoryCalls.create(), f.parent)) {
       var names = generations(f, 7);
       String notSuccessful = names.getFirst();
-      String malformed = oldName(9),
-          symbolic = oldName(10),
-          corrupt = oldName(11),
-          empty = oldName(12);
+      String malformed = oldName(9);
+      String symbolic = oldName(10);
+      String corrupt = oldName(11);
+      String empty = oldName(12);
       cloneGeneration(f, 9);
       Files.writeString(f.parent.resolve(malformed).resolve("MANIFEST.json"), "{}\n");
       Files.createSymbolicLink(f.parent.resolve(symbolic), f.child);

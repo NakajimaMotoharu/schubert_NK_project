@@ -1,11 +1,17 @@
 package dev.codex.schubert.nk.batch.mq;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import dev.codex.schubert.nk.batch.repository.BatchRun;
 import java.lang.reflect.Proxy;
 import java.time.Instant;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Consumer;
 import org.apache.activemq.artemis.api.core.client.ClientMessage;
@@ -142,7 +148,8 @@ final class ArtemisUnknownBoundaryTest {
       var calls = new AtomicInteger();
       var consumers = new ArrayList<Consumer<ClientSession>>();
       for (int position = 0; position < 5; position++) {
-        int stage = position, failing = selected;
+        int stage = position;
+        int failing = selected;
         consumers.add(
             s -> {
               calls.incrementAndGet();

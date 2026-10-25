@@ -1,28 +1,52 @@
 package dev.codex.schubert.nk.api.application.admin;
 
 import static dev.codex.schubert.nk.api.application.admin.UserMutationRequestTest.put;
-import static dev.codex.schubert.nk.api.application.admin.UserQueryRequestTest.*;
-import static org.junit.jupiter.api.Assertions.*;
+import static dev.codex.schubert.nk.api.application.admin.UserQueryRequestTest.ADMIN;
+import static dev.codex.schubert.nk.api.application.admin.UserQueryRequestTest.MESSAGE;
+import static dev.codex.schubert.nk.api.application.admin.UserQueryRequestTest.NOW;
+import static dev.codex.schubert.nk.api.application.admin.UserQueryRequestTest.detail;
+import static dev.codex.schubert.nk.api.application.admin.UserQueryRequestTest.detailResponse;
+import static dev.codex.schubert.nk.api.application.admin.UserQueryRequestTest.list;
+import static dev.codex.schubert.nk.api.application.admin.UserQueryRequestTest.page;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import dev.codex.schubert.nk.api.domain.Role;
 import dev.codex.schubert.nk.api.error.TemporaryInfrastructureException;
-import dev.codex.schubert.nk.api.idempotency.*;
+import dev.codex.schubert.nk.api.idempotency.EncryptedResponseSnapshot;
+import dev.codex.schubert.nk.api.idempotency.InboxCompletion;
+import dev.codex.schubert.nk.api.idempotency.InboxCompletionState;
+import dev.codex.schubert.nk.api.idempotency.InboxResultReference;
+import dev.codex.schubert.nk.api.idempotency.InboxResultReferenceType;
+import dev.codex.schubert.nk.api.idempotency.ResponseSnapshotCodec;
 import dev.codex.schubert.nk.api.security.AuthenticatedActor;
-import dev.codex.schubert.nk.protocol.header.*;
-import dev.codex.schubert.nk.protocol.layout.*;
+import dev.codex.schubert.nk.protocol.header.ResultCode;
 import java.time.Instant;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
-import java.util.*;
-import java.util.concurrent.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import java.util.Optional;
+import java.util.UUID;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
 
 /** Independent UI232/236 wire vectors and JCE envelope; PT-ADM-044..047. */
 class UserQueryReplayServiceTest {
-  static final UUID RESPONSE = new UUID(101, 1), REPLY = new UUID(101, 2);
-  static final Instant COMPLETED = NOW.plusNanos(123456789), LATER = NOW.plusSeconds(3600);
+  static final UUID RESPONSE = new UUID(101, 1);
+  static final UUID REPLY = new UUID(101, 2);
+  static final Instant COMPLETED = NOW.plusNanos(123456789);
+  static final Instant LATER = NOW.plusSeconds(3600);
 
   @Test
   void adm044FrozenListAndDetailRebuildExactFreshReplies() throws Exception {
@@ -380,7 +404,8 @@ class UserQueryReplayServiceTest {
                           : list("u", null, null, 1, new UUID(100, n));
                   int count = n % 2 == 0 ? 0 : n % 51;
                   var values = n % 2 == 0 ? detailResponse(n, true) : page(count, count, 1, 50);
-                  UUID responseId = new UUID(101, n), replyId = new UUID(102, n);
+                  UUID responseId = new UUID(101, n);
+                  UUID replyId = new UUID(102, n);
                   var saved = service.captureSuccess(request, actor, values, responseId, COMPLETED);
                   var snapshot = service.read(request, actor, saved);
                   assertArrayEquals(
@@ -451,10 +476,11 @@ class UserQueryReplayServiceTest {
       int page,
       long target,
       boolean optional) {
-    boolean detail = request.detailRequest(), success = code.equals("0000") || code.equals("0200");
-    int dataLength = detail ? 320 : 48,
-        recordLength = detail ? 0 : 168,
-        records = success ? count : 0;
+    boolean detail = request.detailRequest();
+    boolean success = code.equals("0000") || code.equals("0200");
+    int dataLength = detail ? 320 : 48;
+    int recordLength = detail ? 0 : 168;
+    int records = success ? count : 0;
     byte[] bytes = new byte[256 + dataLength + recordLength * records];
     Arrays.fill(bytes, (byte) 32);
     put(bytes, 0, "SCHBNK01001");

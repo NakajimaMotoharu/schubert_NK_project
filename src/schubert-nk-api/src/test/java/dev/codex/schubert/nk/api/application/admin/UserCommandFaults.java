@@ -3,7 +3,10 @@ package dev.codex.schubert.nk.api.application.admin;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -11,9 +14,13 @@ import java.util.Map;
  * Public JDBC boundary faults over real PG; SQL and values never emitted to evidence. PT-ADM-020.
  */
 final class UserCommandFaults {
-  String sqlPart = "select id,username", fault = "none", sqlState = "08006";
-  int occurrence = 1, matched;
-  boolean empty, duplicate;
+  String sqlPart = "select id,username";
+  String fault = "none";
+  String sqlState = "08006";
+  int occurrence = 1;
+  int matched;
+  boolean empty;
+  boolean duplicate;
   Integer updateCount;
   final Map<String, Object> columns = new HashMap<>();
   Hook beforeUpdate = c -> {};
@@ -62,7 +69,8 @@ final class UserCommandFaults {
 
   private ResultSet rows(ResultSet r) {
     int[] row = {0};
-    boolean[] replaced = {false}, wasNull = {false};
+    boolean[] replaced = {false};
+    boolean[] wasNull = {false};
     return (ResultSet)
         Proxy.newProxyInstance(
             ResultSet.class.getClassLoader(),

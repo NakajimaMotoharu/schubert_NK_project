@@ -1,21 +1,47 @@
 package dev.codex.schubert.nk.web.messaging;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import dev.codex.schubert.nk.protocol.header.*;
-import dev.codex.schubert.nk.protocol.layout.*;
-import dev.codex.schubert.nk.protocol.layout.media.*;
+import dev.codex.schubert.nk.protocol.header.AuthenticationContext;
+import dev.codex.schubert.nk.protocol.header.ResultCode;
+import dev.codex.schubert.nk.protocol.layout.LayoutId;
+import dev.codex.schubert.nk.protocol.layout.TypedPayloadValues;
+import dev.codex.schubert.nk.protocol.layout.media.AnimationListRequestData;
+import dev.codex.schubert.nk.protocol.layout.media.AnimationListResponseData;
+import dev.codex.schubert.nk.protocol.layout.media.AnimationMenuRequestData;
+import dev.codex.schubert.nk.protocol.layout.media.AnimationMenuResponseData;
+import dev.codex.schubert.nk.protocol.layout.media.AnimationRecord;
+import dev.codex.schubert.nk.protocol.layout.media.VideoDescriptorRequestData;
 import dev.codex.schubert.nk.protocol.layout.scenario.GameListRequestData;
-import dev.codex.schubert.nk.protocol.layout.semantic.*;
+import dev.codex.schubert.nk.protocol.layout.semantic.AnimationCategory;
+import dev.codex.schubert.nk.protocol.layout.semantic.AnimationListCategory;
+import dev.codex.schubert.nk.protocol.layout.semantic.DisplayPath;
 import dev.codex.schubert.nk.web.messaging.ProtectedReadWireException.Reason;
 import jakarta.jms.JMSException;
 import jakarta.jms.JMSRuntimeException;
 import java.nio.charset.StandardCharsets;
-import java.time.*;
-import java.util.*;
-import java.util.concurrent.*;
+import java.time.Clock;
+import java.time.Duration;
+import java.time.Instant;
+import java.time.ZoneOffset;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Locale;
+import java.util.Optional;
+import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicLong;
-import java.util.function.*;
+import java.util.function.BiFunction;
+import java.util.function.Consumer;
 import org.junit.jupiter.api.Test;
 
 /** PG-D-206/PT-WEB238..245; FUN media/AUT/MQ/TST; UI232/235; SS311/312/321/322/323/352. */

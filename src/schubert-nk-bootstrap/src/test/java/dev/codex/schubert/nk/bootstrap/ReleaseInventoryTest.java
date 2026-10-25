@@ -1,11 +1,22 @@
 package dev.codex.schubert.nk.bootstrap;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
-import java.util.*;
-import java.util.concurrent.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import java.util.TreeMap;
+import java.util.concurrent.CyclicBarrier;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
 import org.junit.jupiter.api.Test;
 
 /** Literal test-only JSON builder; no production serialization/DB/file observation for expected. */
@@ -34,7 +45,8 @@ final class ReleaseInventoryTest {
   }
 
   static final class Fixture {
-    final TreeMap<String, String> files = new TreeMap<>(), deps = new TreeMap<>();
+    final TreeMap<String, String> files = new TreeMap<>();
+    final TreeMap<String, String> deps = new TreeMap<>();
     final List<String> migrations = new ArrayList<>(List.of(SCHEMA, SQL));
     String schema = "001";
 
@@ -367,7 +379,8 @@ final class ReleaseInventoryTest {
 
   @Test
   void bomProfile013DefensiveInputAndCollections() throws Exception {
-    byte[] input = bytes(golden()), saved = input.clone();
+    byte[] input = bytes(golden());
+    byte[] saved = input.clone();
     var value = ReleaseInventory.parse(input);
     assertArrayEquals(saved, input);
     Arrays.fill(input, (byte) 0);
@@ -395,9 +408,9 @@ final class ReleaseInventoryTest {
     for (int count : List.of(512, 513)) {
       var f = new Fixture();
       for (int i = f.deps.size(); i < count; i++) {
-        String n = String.format(Locale.ROOT, "%04d", i),
-            path = "api/lib/x" + n + ".jar",
-            c = "z:x" + n + ":1";
+        String n = String.format(Locale.ROOT, "%04d", i);
+        String path = "api/lib/x" + n + ".jar";
+        String c = "z:x" + n + ":1";
         f.files.put(path, artifact(path, "16", SHA));
         f.deps.put(c, dependency(c, List.of(path)));
       }
@@ -407,9 +420,9 @@ final class ReleaseInventoryTest {
     }
     var f = new Fixture();
     for (int i = 2; i <= 999; i++) {
-      String v = String.format(Locale.ROOT, "%03d", i),
-          script = "V" + v + "__m.sql",
-          path = "db/migration/" + script;
+      String v = String.format(Locale.ROOT, "%03d", i);
+      String script = "V" + v + "__m.sql";
+      String path = "db/migration/" + script;
       f.files.put(path, artifact(path, "0", SHA));
       f.migrations.add(
           "{\"installedRank\":"

@@ -1,6 +1,11 @@
 package dev.codex.schubert.nk.api.application.question;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import dev.codex.schubert.nk.api.domain.Role;
 import dev.codex.schubert.nk.api.logging.ApiLogDatabaseFixture;
@@ -8,26 +13,44 @@ import dev.codex.schubert.nk.api.persistence.QuestionQueryException;
 import dev.codex.schubert.nk.api.persistence.QuestionQueryRepository;
 import dev.codex.schubert.nk.api.security.AuthenticatedActor;
 import dev.codex.schubert.nk.protocol.header.ResultCode;
-import dev.codex.schubert.nk.protocol.layout.*;
 import dev.codex.schubert.nk.protocol.layout.common.PagedResponseData;
-import dev.codex.schubert.nk.protocol.layout.question.*;
-import dev.codex.schubert.nk.protocol.layout.semantic.*;
+import dev.codex.schubert.nk.protocol.layout.question.NotificationDetailRequestData;
+import dev.codex.schubert.nk.protocol.layout.question.NotificationDetailResponseData;
+import dev.codex.schubert.nk.protocol.layout.question.NotificationRecord;
+import dev.codex.schubert.nk.protocol.layout.question.NotificationSearchRequestData;
+import dev.codex.schubert.nk.protocol.layout.question.QuestionDetailRequestData;
+import dev.codex.schubert.nk.protocol.layout.question.QuestionDetailResponseData;
+import dev.codex.schubert.nk.protocol.layout.question.QuestionSearchRequestData;
+import dev.codex.schubert.nk.protocol.layout.question.QuestionSummaryRecord;
+import dev.codex.schubert.nk.protocol.layout.semantic.AnswerState;
+import dev.codex.schubert.nk.protocol.layout.semantic.NotificationId;
+import dev.codex.schubert.nk.protocol.layout.semantic.NotificationState;
+import dev.codex.schubert.nk.protocol.layout.semantic.NotificationType;
+import dev.codex.schubert.nk.protocol.layout.semantic.QuestionId;
 import java.lang.reflect.Proxy;
 import java.nio.file.Path;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.time.Instant;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Optional;
 import java.util.concurrent.atomic.AtomicInteger;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 /** PT-QRY001..004/NTF001..004; literal SQL fixtures, typed expected values, no expected codec. */
 final class QuestionQueryRepositoryTest {
   @TempDir static Path root;
   static ApiLogDatabaseFixture db;
-  static final AuthenticatedActor USER = new AuthenticatedActor(1, "u1", Role.USER),
-      ADMIN = new AuthenticatedActor(1, "u1", Role.ADMIN),
-      OTHER = new AuthenticatedActor(2, "u2", Role.USER);
+  static final AuthenticatedActor USER = new AuthenticatedActor(1, "u1", Role.USER);
+  static final AuthenticatedActor ADMIN = new AuthenticatedActor(1, "u1", Role.ADMIN);
+  static final AuthenticatedActor OTHER = new AuthenticatedActor(2, "u2", Role.USER);
   final QuestionQueryRepository repository = new QuestionQueryRepository();
 
   @BeforeAll

@@ -1,10 +1,19 @@
 package dev.codex.schubert.nk.bootstrap;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -30,14 +39,19 @@ final class ChildBrokerTest {
   }
 
   static class Fixture implements ChildStartupContext.Io {
-    String manager = UNIT,
-        status = STATUS,
-        boot = BOOT + "\n",
-        cgroup = "0::/system.slice/artemis.service\n";
+    String manager = UNIT;
+    String status = STATUS;
+    String boot = BOOT + "\n";
+    String cgroup = "0::/system.slice/artemis.service\n";
     String state = "S";
     long rootUid = 0;
-    boolean managerDrift, kernelDrift, uidDrift;
-    int reads, ticks, kernelReads, statusReads;
+    boolean managerDrift;
+    boolean kernelDrift;
+    boolean uidDrift;
+    int reads;
+    int ticks;
+    int kernelReads;
+    int statusReads;
     final List<byte[]> owned = new ArrayList<>();
 
     public long pid() {

@@ -1,6 +1,11 @@
 package dev.codex.schubert.nk.web.logging;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import dev.codex.schubert.nk.web.messaging.ArtemisRequestSender;
 import jakarta.jms.BytesMessage;
@@ -201,12 +206,25 @@ final class JmsSecondary330Test {
   private static final UUID ID = UUID.fromString("00000000-0000-0000-0000-000000000001");
 
   private static final class Fixture {
-    @Nullable Throwable mode, stage, commit, rollback, closing;
+    @Nullable Throwable mode;
+    @Nullable Throwable stage;
+    @Nullable Throwable commit;
+    @Nullable Throwable rollback;
+    @Nullable Throwable closing;
     @Nullable byte[] written;
-    @Nullable String correlation, message, layout, version;
+    @Nullable String correlation;
+    @Nullable String message;
+    @Nullable String layout;
+    @Nullable String version;
     long ttl;
     int delivery;
-    int opens, writes, sends, commits, rollbacks, closes, unexpected;
+    int opens;
+    int writes;
+    int sends;
+    int commits;
+    int rollbacks;
+    int closes;
+    int unexpected;
 
     @Nullable Throwable log() {
       var codec = new WebLogPayloadCodec("public-fixture", new byte[32], null, null);

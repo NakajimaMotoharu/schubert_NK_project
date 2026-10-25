@@ -1,11 +1,21 @@
 package dev.codex.schubert.nk.batch.platform;
 
 import static dev.codex.schubert.nk.batch.platform.InspectorUnitSnapshotTest.GOLDEN;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
-import java.io.*;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.nio.charset.StandardCharsets;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 import java.util.function.BiConsumer;
 
@@ -18,7 +28,10 @@ final class InspectorUnitProbeFixture {
     final List<byte[]> delivered = new ArrayList<>();
     List<String> states = List.of(GOLDEN, GOLDEN);
     byte[] processes = "a(sus) 0\n".getBytes(StandardCharsets.US_ASCII);
-    int stateAt, failAt, nullAt, interruptAt;
+    int stateAt;
+    int failAt;
+    int nullAt;
+    int interruptAt;
     RuntimeException runtime;
 
     private byte[] next(String type, byte[] bytes) throws IOException {
@@ -52,16 +65,20 @@ final class InspectorUnitProbeFixture {
   }
 
   static final class Child extends Process {
-    final ReadStream output, error;
+    final ReadStream output;
+    final ReadStream error;
     final WriteStream input;
     final Map<String, Integer> counts = new LinkedHashMap<>();
     final List<String> order = new ArrayList<>();
     final Set<String> ioFailures = new HashSet<>();
     BiConsumer<String, Integer> hook = (name, count) -> {};
-    boolean completed = true, waitInterrupt, alive = true;
+    boolean completed = true;
+    boolean waitInterrupt;
+    boolean alive = true;
     long waitSeconds = 5;
     String missing = "";
-    int code, destroyed;
+    int code;
+    int destroyed;
     byte[] delivered = new byte[0];
 
     Child(byte[] bytes) {
@@ -151,7 +168,8 @@ final class InspectorUnitProbeFixture {
     final class ReadStream extends InputStream {
       final String name;
       final byte[] bytes;
-      int closed, maximum;
+      int closed;
+      int maximum;
       boolean nullRead;
 
       ReadStream(String name, byte[] bytes) {

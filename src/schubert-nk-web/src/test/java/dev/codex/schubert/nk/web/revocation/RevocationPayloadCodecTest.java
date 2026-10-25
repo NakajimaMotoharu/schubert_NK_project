@@ -1,6 +1,12 @@
 package dev.codex.schubert.nk.web.revocation;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import dev.codex.schubert.nk.protocol.header.AuthenticationContext;
 import java.io.ByteArrayOutputStream;
@@ -10,8 +16,16 @@ import java.security.ProviderException;
 import java.security.SecureRandom;
 import java.security.Security;
 import java.time.Instant;
-import java.util.*;
-import java.util.concurrent.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.HexFormat;
+import java.util.List;
+import java.util.UUID;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
 import javax.crypto.Cipher;
 import javax.crypto.spec.GCMParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
@@ -33,7 +47,8 @@ final class RevocationPayloadCodecTest {
 
   @Test
   void rerun003aIndependentGoldenAndDefensiveCopies() throws Exception {
-    byte[] caller = KEY.clone(), previous = OLD.clone();
+    byte[] caller = KEY.clone();
+    byte[] previous = OLD.clone();
     var random = new FixedRandom();
     try (var codec = new RevocationPayloadCodec("v2", caller, "v1", previous, random)) {
       Arrays.fill(caller, (byte) 0);

@@ -1,19 +1,52 @@
 package dev.codex.schubert.nk.batch.file;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import dev.codex.schubert.nk.batch.platform.CleanupWorkerRequest;
-import dev.codex.schubert.nk.batch.repository.*;
-import dev.codex.schubert.nk.storage.*;
+import dev.codex.schubert.nk.batch.repository.BatchRun;
+import dev.codex.schubert.nk.batch.repository.MaintenanceActivation;
+import dev.codex.schubert.nk.batch.repository.MaintenanceCompletion;
+import dev.codex.schubert.nk.batch.repository.MaintenanceRunState;
+import dev.codex.schubert.nk.storage.DirectoryCalls;
+import dev.codex.schubert.nk.storage.InodeSecurityCalls;
+import dev.codex.schubert.nk.storage.LinuxDirectoryCalls;
+import dev.codex.schubert.nk.storage.StorageIoException;
 import java.io.IOException;
-import java.lang.reflect.*;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Proxy;
 import java.nio.ByteBuffer;
 import java.nio.channels.SeekableByteChannel;
-import java.nio.file.*;
+import java.nio.file.DirectoryIteratorException;
+import java.nio.file.DirectoryStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.attribute.FileTime;
 import java.time.Instant;
-import java.util.*;
-import java.util.concurrent.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import java.util.Optional;
+import java.util.Set;
+import java.util.TreeMap;
+import java.util.TreeSet;
+import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.BiConsumer;
 import org.junit.jupiter.api.Test;
@@ -39,7 +72,8 @@ final class MaintenanceRunFilesTest {
           + "\n2026-09-12T04:05:06.123456Z\n"
           + ACT_ID
           + "\n2026-09-12T05:06:07.234567Z\n";
-  private static final String DONE0 = DONE_PREFIX + "0\n", DONE10 = DONE_PREFIX + "10\n";
+  private static final String DONE0 = DONE_PREFIX + "0\n";
+  private static final String DONE10 = DONE_PREFIX + "10\n";
   @TempDir Path temporary;
 
   /**
@@ -1293,7 +1327,9 @@ final class MaintenanceRunFilesTest {
                 new NullPointerException("synthetic compound"),
                 new AssertionError("synthetic compound"))) {
           try (var f = fixture()) {
-            int[] closes = {0}, injected = {0}, callbacks = {0};
+            int[] closes = {0};
+            int[] injected = {0};
+            int[] callbacks = {0};
             var retained =
                 new java.util.concurrent.atomic.AtomicReference<MaintenanceRunFiles.Session>();
             Throwable actual =
@@ -1334,7 +1370,8 @@ final class MaintenanceRunFilesTest {
               new NullPointerException("synthetic compound"),
               new AssertionError("synthetic compound")))
         try (var f = fixture()) {
-          int[] injected = {0}, bodies = {0};
+          int[] injected = {0};
+          int[] bodies = {0};
           f.on(
               "namesIterator",
               1,
@@ -1535,7 +1572,17 @@ final class MaintenanceRunFilesTest {
   }
 
   private static Map<String, Integer> inventory(Fixture f, String operation) {
-    int attrs, roots, entries, readers, writers, creates, writes, syncs, unlinks, next, has;
+    int attrs;
+    int roots;
+    int entries;
+    int readers;
+    int writers;
+    int creates;
+    int writes;
+    int syncs;
+    int unlinks;
+    int next;
+    int has;
     switch (operation) {
       case "start" -> {
         attrs = 171;
@@ -1651,7 +1698,13 @@ final class MaintenanceRunFilesTest {
   }
 
   static final class Fixture implements AutoCloseable, InodeSecurityCalls, MaintenanceRunFiles.Io {
-    final Path base, varPath, lib, app, maintenance, runs, attempts;
+    final Path base;
+    final Path varPath;
+    final Path lib;
+    final Path app;
+    final Path maintenance;
+    final Path runs;
+    final Path attempts;
     final DirectoryCalls calls;
     final MaintenanceRunFiles files;
     final MaintenanceRunFiles.NioIo nativeIo = new MaintenanceRunFiles.NioIo();
@@ -1660,9 +1713,21 @@ final class MaintenanceRunFilesTest {
     final Map<String, Integer> counts = new ConcurrentHashMap<>();
     final List<String> syncTargets = Collections.synchronizedList(new ArrayList<>());
     long uid;
-    int readers, writers, listings, failAt = 1, hookAt = 1, partSequence;
-    String fail = "", hookName = "", invalid = "", badRole = "", listingFault = "";
-    boolean triggered, rawCloses, nullPart, overfillReader;
+    int readers;
+    int writers;
+    int listings;
+    int failAt = 1;
+    int hookAt = 1;
+    int partSequence;
+    String fail = "";
+    String hookName = "";
+    String invalid = "";
+    String badRole = "";
+    String listingFault = "";
+    boolean triggered;
+    boolean rawCloses;
+    boolean nullPart;
+    boolean overfillReader;
     RuntimeException runtimeFailure;
     Action hook = () -> {};
     BiConsumer<String, Map<String, Object>> change = (role, values) -> {};

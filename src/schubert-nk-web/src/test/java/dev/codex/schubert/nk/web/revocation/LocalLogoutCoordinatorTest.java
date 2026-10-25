@@ -1,27 +1,61 @@
 package dev.codex.schubert.nk.web.revocation;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import dev.codex.schubert.nk.protocol.header.AuthenticationContext;
 import dev.codex.schubert.nk.protocol.layout.semantic.UserRole;
 import dev.codex.schubert.nk.web.logging.WebLogDatabaseFixture;
-import dev.codex.schubert.nk.web.messaging.*;
-import dev.codex.schubert.nk.web.session.*;
+import dev.codex.schubert.nk.web.messaging.JmsRequestReplyClient;
+import dev.codex.schubert.nk.web.messaging.LogoutWireClient;
+import dev.codex.schubert.nk.web.messaging.ReplyCorrelationRegistry;
+import dev.codex.schubert.nk.web.session.EncryptedWebSessionRepository;
+import dev.codex.schubert.nk.web.session.SessionPayloadCodec;
+import dev.codex.schubert.nk.web.session.SessionPrincipal;
+import dev.codex.schubert.nk.web.session.SessionStoreException;
+import dev.codex.schubert.nk.web.session.WebSessionId;
 import jakarta.jms.JMSException;
-import java.io.*;
-import java.lang.reflect.*;
+import java.io.ByteArrayOutputStream;
+import java.io.DataOutputStream;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.lang.reflect.Proxy;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
 import java.security.MessageDigest;
-import java.sql.*;
-import java.time.*;
-import java.util.*;
-import java.util.concurrent.*;
-import java.util.concurrent.atomic.*;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.time.Clock;
+import java.time.Duration;
+import java.time.Instant;
+import java.time.OffsetDateTime;
+import java.time.ZoneId;
+import java.time.ZoneOffset;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.HexFormat;
+import java.util.List;
+import java.util.UUID;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicLong;
 import javax.crypto.Cipher;
-import javax.crypto.spec.*;
+import javax.crypto.spec.GCMParameterSpec;
+import javax.crypto.spec.SecretKeySpec;
 import javax.sql.DataSource;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 /** RERUN006A..G: literal UI/independent JCA/SQL; borrowed local DB/key owners, not native. */
@@ -420,17 +454,22 @@ final class LocalLogoutCoordinatorTest {
         new RevocationPayloadCodec("revoke", new byte[32], null, null);
     final JmsRequestReplyClient replies =
         new JmsRequestReplyClient(new ReplyCorrelationRegistry(), clock, 12);
-    final AtomicInteger active = new AtomicInteger(), acquisitions = new AtomicInteger();
+    final AtomicInteger active = new AtomicInteger();
+    final AtomicInteger acquisitions = new AtomicInteger();
     final ThreadLocal<AtomicInteger> owned = ThreadLocal.withInitial(AtomicInteger::new);
     final List<UUID> ids = Collections.synchronizedList(new ArrayList<>());
     final List<byte[]> bodies = Collections.synchronizedList(new ArrayList<>());
     final AtomicLong sequence = new AtomicLong(100);
     final EncryptedWebSessionRepository sessions =
         new EncryptedWebSessionRepository(source(), sessionCodec, clock);
-    String code = "0000", mode = "", fault = "";
+    String code = "0000";
+    String mode = "";
+    String fault = "";
     boolean always;
-    Error wireFatal, closeFatal;
-    Throwable primaryFault, rollbackFault;
+    Error wireFatal;
+    Error closeFatal;
+    Throwable primaryFault;
+    Throwable rollbackFault;
     int fatalIndex = 1;
 
     WebSessionId authenticated() {

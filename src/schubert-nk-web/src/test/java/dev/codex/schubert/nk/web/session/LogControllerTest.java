@@ -1,36 +1,66 @@
 package dev.codex.schubert.nk.web.session;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.head;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 
 import dev.codex.schubert.nk.protocol.header.AuthenticationContext;
 import dev.codex.schubert.nk.protocol.layout.semantic.UserRole;
 import dev.codex.schubert.nk.web.config.LogMvcConfiguration;
 import dev.codex.schubert.nk.web.controller.LogController;
 import dev.codex.schubert.nk.web.logging.WebLogDatabaseFixture;
-import dev.codex.schubert.nk.web.messaging.*;
+import dev.codex.schubert.nk.web.messaging.JmsRequestReplyClient;
+import dev.codex.schubert.nk.web.messaging.LogSearchWireClient;
+import dev.codex.schubert.nk.web.messaging.ReplyCorrelationRegistry;
 import dev.codex.schubert.nk.web.security.ApiSessionInvalidHandler;
 import dev.codex.schubert.nk.web.view.LogSearchViewModel;
 import jakarta.jms.JMSRuntimeException;
-import jakarta.servlet.http.*;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.*;
-import java.time.*;
-import java.util.*;
-import java.util.concurrent.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.time.Clock;
+import java.time.Duration;
+import java.time.Instant;
+import java.time.ZoneOffset;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Locale;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.UUID;
+import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.function.BiFunction;
 import org.jsoup.Jsoup;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
-import org.springframework.mock.web.*;
+import org.springframework.mock.web.MockHttpServletRequest;
+import org.springframework.mock.web.MockHttpServletResponse;
+import org.springframework.mock.web.MockServletContext;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.web.csrf.*;
+import org.springframework.security.web.csrf.CsrfToken;
+import org.springframework.security.web.csrf.DefaultCsrfToken;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import org.springframework.ui.*;
+import org.springframework.ui.ExtendedModelMap;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
 
@@ -560,12 +590,14 @@ class LogControllerTest {
   private static final class Fixture implements AutoCloseable {
     final ApiSessionInvalidTest.Harness security = new ApiSessionInvalidTest.Harness(db);
     final AtomicLong ids = new AtomicLong();
-    final List<byte[]> requests = new CopyOnWriteArrayList<>(),
-        buffers = new CopyOnWriteArrayList<>();
+    final List<byte[]> requests = new CopyOnWriteArrayList<>();
+    final List<byte[]> buffers = new CopyOnWriteArrayList<>();
     final JmsRequestReplyClient wire =
         new JmsRequestReplyClient(new ReplyCorrelationRegistry(), CLOCK, 12);
-    volatile int count = 1, total = 1;
-    volatile String code = "0000", message = "public synthetic log";
+    volatile int count = 1;
+    volatile int total = 1;
+    volatile String code = "0000";
+    volatile String message = "public synthetic log";
     volatile BiFunction<UUID, byte[], byte[]> responder = this::standard;
     final LogSearchWireClient client =
         new LogSearchWireClient(

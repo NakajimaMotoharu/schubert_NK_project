@@ -1,6 +1,7 @@
 package dev.codex.schubert.nk.web.media;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import dev.codex.schubert.nk.protocol.file.ContentDisposition;
 import dev.codex.schubert.nk.protocol.file.MediaDescriptor;

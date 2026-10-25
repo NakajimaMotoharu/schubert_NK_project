@@ -1,10 +1,21 @@
 package dev.codex.schubert.nk.bootstrap;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertNotSame;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
-import java.util.*;
+import java.util.ArrayDeque;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.concurrent.atomic.AtomicReference;
 import org.junit.jupiter.api.Test;
 
@@ -55,7 +66,8 @@ final class SystemManagerObservationTest {
   void managerown002UnconfirmedPostCloseObservationRetainsPendingAndNeverCreatesAgain() {
     var delegate = new Session();
     var failure = new IllegalStateException("synthetic close observation");
-    int[] creates = {0}, checks = {0};
+    int[] creates = {0};
+    int[] checks = {0};
     var session =
         new SystemManagerObservation.Session() {
           public void start(SystemManagerObservation.Budget budget) throws IOException {
@@ -128,13 +140,15 @@ final class SystemManagerObservationTest {
                 "/system.slice/schubert-nk-api.service",
                 "ExecMainStartTimestampMonotonic",
                 "3000000"));
-    SystemManagerObservation.Owner first = new SystemManagerObservation.Owner(1, 0, ":1.7"),
-        second = first;
+    SystemManagerObservation.Owner first = new SystemManagerObservation.Owner(1, 0, ":1.7");
+    SystemManagerObservation.Owner second = first;
     int ownerReads;
     SystemManagerObservation.Service expectedService = SystemManagerObservation.Service.API;
-    boolean closed, failClose;
+    boolean closed;
+    boolean failClose;
     String fault = "";
-    boolean fatal, runtime;
+    boolean fatal;
+    boolean runtime;
 
     void at(String at) throws IOException {
       events.add(at);

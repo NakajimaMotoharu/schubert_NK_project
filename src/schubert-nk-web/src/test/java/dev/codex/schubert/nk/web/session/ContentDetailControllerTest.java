@@ -1,34 +1,82 @@
 package dev.codex.schubert.nk.web.session;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 
 import dev.codex.schubert.nk.protocol.header.AuthenticationContext;
-import dev.codex.schubert.nk.protocol.layout.media.*;
-import dev.codex.schubert.nk.protocol.layout.semantic.*;
-import dev.codex.schubert.nk.storage.*;
-import dev.codex.schubert.nk.web.config.*;
+import dev.codex.schubert.nk.protocol.layout.media.MusicTrackRecord;
+import dev.codex.schubert.nk.protocol.layout.media.MusicTrackResponseData;
+import dev.codex.schubert.nk.protocol.layout.media.VideoDescriptorResponseData;
+import dev.codex.schubert.nk.protocol.layout.semantic.ContentDisposition;
+import dev.codex.schubert.nk.protocol.layout.semantic.DisplayPath;
+import dev.codex.schubert.nk.protocol.layout.semantic.MediaMimeType;
+import dev.codex.schubert.nk.protocol.layout.semantic.PairRole;
+import dev.codex.schubert.nk.protocol.layout.semantic.RelativePath;
+import dev.codex.schubert.nk.protocol.layout.semantic.Sha256Hex;
+import dev.codex.schubert.nk.protocol.layout.semantic.UserRole;
+import dev.codex.schubert.nk.protocol.layout.semantic.VideoCategory;
+import dev.codex.schubert.nk.storage.LinuxDirectoryCalls;
+import dev.codex.schubert.nk.storage.OwnedTransferDirectory;
+import dev.codex.schubert.nk.storage.StorageIdentity;
+import dev.codex.schubert.nk.storage.StorageIoException;
+import dev.codex.schubert.nk.web.config.ContentDetailMvcConfiguration;
 import dev.codex.schubert.nk.web.controller.ContentDetailController;
 import dev.codex.schubert.nk.web.logging.WebLogDatabaseFixture;
-import dev.codex.schubert.nk.web.messaging.*;
-import dev.codex.schubert.nk.web.security.*;
+import dev.codex.schubert.nk.web.messaging.JmsRequestReplyClient;
+import dev.codex.schubert.nk.web.messaging.JmsRequestSender;
+import dev.codex.schubert.nk.web.messaging.MediaDescriptorWireClient;
+import dev.codex.schubert.nk.web.messaging.MusicWireClient;
+import dev.codex.schubert.nk.web.messaging.ReplyCorrelationRegistry;
+import dev.codex.schubert.nk.web.messaging.ScenarioWireClient;
+import dev.codex.schubert.nk.web.security.ApiSessionInvalidHandler;
 import dev.codex.schubert.nk.web.storage.LargeResultReader;
-import dev.codex.schubert.nk.web.view.*;
-import jakarta.servlet.http.*;
+import dev.codex.schubert.nk.web.view.AnimationWatchViewModel;
+import dev.codex.schubert.nk.web.view.MusicTrackViewModel;
+import dev.codex.schubert.nk.web.view.ScenarioDetailViewModel;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.*;
-import java.nio.file.attribute.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.attribute.PosixFileAttributes;
+import java.nio.file.attribute.PosixFilePermissions;
 import java.security.MessageDigest;
-import java.time.*;
-import java.util.*;
-import java.util.concurrent.*;
+import java.time.Clock;
+import java.time.Duration;
+import java.time.Instant;
+import java.time.ZoneOffset;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HexFormat;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import java.util.Optional;
+import java.util.Set;
+import java.util.UUID;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 import org.jsoup.Jsoup;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
-import org.springframework.mock.web.*;
+import org.springframework.mock.web.MockHttpServletRequest;
+import org.springframework.mock.web.MockHttpServletResponse;
+import org.springframework.mock.web.MockServletContext;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.web.csrf.*;
+import org.springframework.security.web.csrf.CsrfToken;
+import org.springframework.security.web.csrf.DefaultCsrfToken;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.ui.ExtendedModelMap;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
@@ -651,15 +699,18 @@ class ContentDetailControllerTest {
 
   private final class Fixture implements AutoCloseable {
     final ApiSessionInvalidTest.Harness security = new ApiSessionInvalidTest.Harness(db);
-    final AtomicInteger ids = new AtomicInteger(), sent = new AtomicInteger();
+    final AtomicInteger ids = new AtomicInteger();
+    final AtomicInteger sent = new AtomicInteger();
     final Set<UUID> messages = ConcurrentHashMap.newKeySet();
     final List<byte[]> buffers = new CopyOnWriteArrayList<>();
-    volatile String code = "0000",
-        category = "OPENING",
-        hash = "a".repeat(64),
-        videoPath = "video/v.mp4";
+    volatile String code = "0000";
+    volatile String category = "OPENING";
+    volatile String hash = "a".repeat(64);
+    volatile String videoPath = "video/v.mp4";
     volatile int count = 1;
-    volatile boolean file, wrongId, badContext;
+    volatile boolean file;
+    volatile boolean wrongId;
+    volatile boolean badContext;
     volatile List<MusicTrackRecord> pairRecords = List.of();
     final JmsRequestReplyClient wire =
         new JmsRequestReplyClient(new ReplyCorrelationRegistry(), CLOCK, 12);
@@ -798,8 +849,8 @@ class ContentDetailControllerTest {
         }
       } else {
         number(b, 256, 9, records);
-        String cat = new String(q, 256, 64, StandardCharsets.UTF_8).stripTrailing(),
-            sec = new String(q, 320, 128, StandardCharsets.UTF_8).stripTrailing();
+        String cat = new String(q, 256, 64, StandardCharsets.UTF_8).stripTrailing();
+        String sec = new String(q, 320, 128, StandardCharsets.UTF_8).stripTrailing();
         for (int n = 0; n < records; n++) {
           int o = 272 + n * 1312;
           put(b, o, "track" + (n + 1));

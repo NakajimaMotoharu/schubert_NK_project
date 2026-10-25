@@ -1,13 +1,25 @@
 package dev.codex.schubert.nk.batch.platform;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import dev.codex.schubert.nk.storage.*;
-import java.io.*;
-import java.lang.reflect.*;
+import dev.codex.schubert.nk.storage.DirectoryCalls;
+import dev.codex.schubert.nk.storage.LinuxInodeSecurity;
+import dev.codex.schubert.nk.storage.StorageIoException;
+import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Proxy;
 import java.nio.charset.StandardCharsets;
-import java.util.*;
-import java.util.concurrent.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.concurrent.Callable;
+import java.util.concurrent.Executors;
 import org.junit.jupiter.api.Test;
 
 /** PT-OPS-MTERM001..008; public literal ports, never synthetic root authorization. */
@@ -32,8 +44,13 @@ final class MaintenanceUnitTerminationTest {
     String name = "schubert-nk-backup.service";
     String state = COLD;
     String processes = "a(sus) 0\n";
-    int reads, processReads;
-    boolean drift, nullState, nullProcesses, wrongUnit, emptyPresentGroup;
+    int reads;
+    int processReads;
+    boolean drift;
+    boolean nullState;
+    boolean nullProcesses;
+    boolean wrongUnit;
+    boolean emptyPresentGroup;
 
     public MaintenanceStopSnapshot read() throws IOException {
       reads++;

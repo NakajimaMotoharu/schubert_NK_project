@@ -1,11 +1,18 @@
 package dev.codex.schubert.nk.batch.platform;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HexFormat;
+import java.util.List;
 import org.junit.jupiter.api.Test;
 
 /** SSC131 ISSSTOP001..004: independent full closed generation/anchor/byte oracle. */
@@ -44,10 +51,13 @@ final class MorningPreviousBrokerTest {
   }
 
   static final class Fixture implements MorningPreviousBroker.Query {
-    String last = STOP, start = START, full = FULL;
+    String last = STOP;
+    String start = START;
+    String full = FULL;
     String bootHex = "11111111111141118111111111111111";
     int calls;
-    boolean drift, nullBytes;
+    boolean drift;
+    boolean nullBytes;
     final List<byte[]> delivered = new ArrayList<>();
     Throwable failure;
 

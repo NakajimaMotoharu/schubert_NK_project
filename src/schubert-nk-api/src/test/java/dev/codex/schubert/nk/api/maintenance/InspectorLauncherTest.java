@@ -1,14 +1,29 @@
 package dev.codex.schubert.nk.api.maintenance;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import dev.codex.schubert.nk.api.file.InspectorCredentialException;
-import java.io.*;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.PrintStream;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.security.NoSuchAlgorithmException;
-import java.util.*;
-import java.util.concurrent.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.Set;
+import java.util.UUID;
+import java.util.concurrent.Callable;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
@@ -240,8 +255,8 @@ final class InspectorLauncherTest {
       command.addAll(args);
       var builder = new ProcessBuilder(command);
       builder.environment().clear();
-      Path output = Files.createTempFile(root, "stdout-", ".txt"),
-          error = Files.createTempFile(root, "stderr-", ".txt");
+      Path output = Files.createTempFile(root, "stdout-", ".txt");
+      Path error = Files.createTempFile(root, "stderr-", ".txt");
       builder.redirectOutput(output.toFile()).redirectError(error.toFile());
       var process = builder.start();
       try {

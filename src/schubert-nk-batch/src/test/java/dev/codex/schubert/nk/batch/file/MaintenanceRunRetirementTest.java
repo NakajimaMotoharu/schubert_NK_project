@@ -1,21 +1,63 @@
 package dev.codex.schubert.nk.batch.file;
 
-import static dev.codex.schubert.nk.batch.file.MaintenanceRetirementRecordsTest.*;
-import static dev.codex.schubert.nk.batch.file.MaintenanceRunFiles.RetirementResult.*;
-import static org.junit.jupiter.api.Assertions.*;
+import static dev.codex.schubert.nk.batch.file.MaintenanceRetirementRecordsTest.ACT;
+import static dev.codex.schubert.nk.batch.file.MaintenanceRetirementRecordsTest.ANCHOR;
+import static dev.codex.schubert.nk.batch.file.MaintenanceRetirementRecordsTest.BEGIN;
+import static dev.codex.schubert.nk.batch.file.MaintenanceRetirementRecordsTest.CUTOFF;
+import static dev.codex.schubert.nk.batch.file.MaintenanceRetirementRecordsTest.DONE;
+import static dev.codex.schubert.nk.batch.file.MaintenanceRetirementRecordsTest.END;
+import static dev.codex.schubert.nk.batch.file.MaintenanceRetirementRecordsTest.HASH;
+import static dev.codex.schubert.nk.batch.file.MaintenanceRetirementRecordsTest.ID;
+import static dev.codex.schubert.nk.batch.file.MaintenanceRetirementRecordsTest.MARKER;
+import static dev.codex.schubert.nk.batch.file.MaintenanceRetirementRecordsTest.NOW;
+import static dev.codex.schubert.nk.batch.file.MaintenanceRetirementRecordsTest.RUN;
+import static dev.codex.schubert.nk.batch.file.MaintenanceRetirementRecordsTest.ascii;
+import static dev.codex.schubert.nk.batch.file.MaintenanceRetirementRecordsTest.trace;
+import static dev.codex.schubert.nk.batch.file.MaintenanceRunFiles.RetirementResult.ABSENT;
+import static dev.codex.schubert.nk.batch.file.MaintenanceRunFiles.RetirementResult.PROTECTED;
+import static dev.codex.schubert.nk.batch.file.MaintenanceRunFiles.RetirementResult.RETIRED;
+import static dev.codex.schubert.nk.batch.file.MaintenanceRunFiles.RetirementResult.TOO_YOUNG;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import dev.codex.schubert.nk.batch.repository.*;
-import dev.codex.schubert.nk.storage.*;
+import dev.codex.schubert.nk.batch.repository.BatchDatabaseFixture;
+import dev.codex.schubert.nk.batch.repository.BatchRepositoryException;
+import dev.codex.schubert.nk.batch.repository.BatchRun;
+import dev.codex.schubert.nk.batch.repository.RunReferenceRepository;
+import dev.codex.schubert.nk.storage.StorageIoException;
 import java.io.IOException;
-import java.lang.reflect.*;
-import java.nio.file.*;
-import java.security.*;
-import java.sql.*;
-import java.time.*;
-import java.util.*;
-import java.util.concurrent.*;
-import java.util.concurrent.atomic.*;
-import org.junit.jupiter.api.*;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Proxy;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.security.NoSuchAlgorithmException;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.time.Instant;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Set;
+import java.util.TreeMap;
+import java.util.TreeSet;
+import java.util.UUID;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
+import java.util.concurrent.atomic.AtomicReference;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
 import org.junit.jupiter.api.io.TempDir;
 
@@ -254,10 +296,11 @@ final class MaintenanceRunRetirementTest {
         selected.removeAll(expected.keySet());
         if (phases.isEmpty() || !phases.getLast().equals(selected)) phases.add(selected);
       }
-      String run = "runs/" + ID + ".run", begin = "attempts/" + ACT + ".begin";
-      String done = "attempts/" + ACT + ".done",
-          plan = "attempts/" + ACT + ".plan",
-          marker = ID + ".retire";
+      String run = "runs/" + ID + ".run";
+      String begin = "attempts/" + ACT + ".begin";
+      String done = "attempts/" + ACT + ".done";
+      String plan = "attempts/" + ACT + ".plan";
+      String marker = ID + ".retire";
       assertEquals(
           List.of(
               Set.of(run, begin, done),
@@ -669,7 +712,8 @@ final class MaintenanceRunRetirementTest {
         var executor = Executors.newFixedThreadPool(2)) {
       seed(f);
       AtomicReference<MaintenanceRunFiles.Session> saved = new AtomicReference<>();
-      CountDownLatch entered = new CountDownLatch(1), release = new CountDownLatch(1);
+      CountDownLatch entered = new CountDownLatch(1);
+      CountDownLatch release = new CountDownLatch(1);
       CountDownLatch competing = new CountDownLatch(1);
       f.on(
           "namesOpen",

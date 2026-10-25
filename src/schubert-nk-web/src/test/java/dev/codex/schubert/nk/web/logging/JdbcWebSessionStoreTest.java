@@ -1,17 +1,43 @@
 package dev.codex.schubert.nk.web.logging;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import dev.codex.schubert.nk.web.session.*;
+import dev.codex.schubert.nk.web.session.EncryptedSessionPayload;
+import dev.codex.schubert.nk.web.session.JdbcWebSessionStore;
+import dev.codex.schubert.nk.web.session.SessionPayloadIdentity;
+import dev.codex.schubert.nk.web.session.SessionStoreException;
+import dev.codex.schubert.nk.web.session.WebSessionRow;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Proxy;
 import java.nio.file.Path;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLDataException;
+import java.sql.SQLException;
 import java.time.Instant;
 import java.time.ZoneOffset;
-import java.util.*;
-import java.util.concurrent.*;
-import org.junit.jupiter.api.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import java.util.Objects;
+import java.util.UUID;
+import java.util.concurrent.Callable;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 /**
@@ -695,13 +721,20 @@ class JdbcWebSessionStoreTest {
 
   /** Intercepts only public JDBC calls, never production/private fields. */
   private static final class Fault {
-    String failure = "", nullResource = "", runtimeFailure = "";
+    String failure = "";
+    String nullResource = "";
+    String runtimeFailure = "";
     Error fatalClose;
     Error fatalStatementClose;
     Throwable resultCloseFault;
     Integer count;
-    boolean duplicate, hit, columnHit, runtimeHit;
-    int statementsClosed, resultsClosed, nextCalls;
+    boolean duplicate;
+    boolean hit;
+    boolean columnHit;
+    boolean runtimeHit;
+    int statementsClosed;
+    int resultsClosed;
+    int nextCalls;
     final Map<String, Integer> seen = new HashMap<>();
     final Map<String, Object> columns = new HashMap<>();
     final List<String> sql = new ArrayList<>();

@@ -1,6 +1,10 @@
 package dev.codex.schubert.nk.batch.file;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import dev.codex.schubert.nk.batch.backup.BackupManifest;
 import dev.codex.schubert.nk.batch.platform.CleanupWorkerRequest;
@@ -46,7 +50,10 @@ final class CleanupPreflightTest {
 
   private static final class Case {
     final List<String> events = new ArrayList<>();
-    int requestReads, originalReads, gates, databaseReads;
+    int requestReads;
+    int originalReads;
+    int gates;
+    int databaseReads;
     String fail = "";
     CleanupWorkerRequest secondRequest = request();
     MaintenanceActivation secondOriginal = activation();

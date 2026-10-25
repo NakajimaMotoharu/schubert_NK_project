@@ -1,17 +1,33 @@
 package dev.codex.schubert.nk.batch.file;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import dev.codex.schubert.nk.storage.*;
+import dev.codex.schubert.nk.storage.DirectoryCalls;
+import dev.codex.schubert.nk.storage.InodeSecurityCalls;
+import dev.codex.schubert.nk.storage.LinuxDirectoryCalls;
+import dev.codex.schubert.nk.storage.OwnedTransferDirectory;
+import dev.codex.schubert.nk.storage.StorageIoException;
 import java.io.IOException;
-import java.lang.reflect.*;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Proxy;
 import java.nio.ByteBuffer;
 import java.nio.channels.SeekableByteChannel;
-import java.nio.file.*;
+import java.nio.file.DirectoryIteratorException;
+import java.nio.file.DirectoryStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.attribute.PosixFilePermissions;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.function.*;
+import java.util.function.BiConsumer;
 
 /** Writer-only fixture; real FD/IO, public bytes, synthetic UID. BAT242..257/SS341 6.8. */
 final class BackupPublicationFixture
@@ -20,8 +36,10 @@ final class BackupPublicationFixture
         BackupBundlePublisher.Io,
         InodeSecurityCalls {
   static final UUID PART = UUID.fromString("11111111-2222-4333-8444-555555555555");
-  static final long UID = 2000, GID = 2001;
-  final Path parent, child;
+  static final long UID = 2000;
+  static final long GID = 2001;
+  final Path parent;
+  final Path child;
   final OwnedTransferDirectory root;
   final DirectoryCalls calls;
   final InspectorEnvironmentPublisher.NioIo nativeIo = new InspectorEnvironmentPublisher.NioIo();
@@ -31,14 +49,22 @@ final class BackupPublicationFixture
   final Map<String, Throwable> faults = new HashMap<>();
   final List<String> events = Collections.synchronizedList(new ArrayList<>());
   final int rootFd;
-  int channels, streams, faultAt, position;
+  int channels;
+  int streams;
+  int faultAt;
+  int position;
   boolean bundle;
-  long effective = 0, time = 100;
+  long effective = 0;
+  long time = 100;
   int chunk = Integer.MAX_VALUE;
   volatile boolean track = true;
-  boolean nullMap, nullWriter, nullReader, readonly;
+  boolean nullMap;
+  boolean nullWriter;
+  boolean nullReader;
+  boolean readonly;
   byte[] acl = new byte[0];
-  String writeMode = "", readMode = "";
+  String writeMode = "";
+  String readMode = "";
   String copyFilesystem = "tmpfs";
   String changedSize = "";
   BiConsumer<String, Integer> hook = (name, n) -> {};

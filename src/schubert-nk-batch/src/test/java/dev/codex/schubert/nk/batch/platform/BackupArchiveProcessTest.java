@@ -1,12 +1,40 @@
 package dev.codex.schubert.nk.batch.platform;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import dev.codex.schubert.nk.storage.*;
-import java.io.*;
-import java.nio.file.*;
-import java.util.*;
-import java.util.concurrent.*;
+import dev.codex.schubert.nk.storage.InodeSecurityCalls;
+import dev.codex.schubert.nk.storage.LinuxDirectoryCalls;
+import dev.codex.schubert.nk.storage.OwnedTransferDirectory;
+import dev.codex.schubert.nk.storage.StorageIoException;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.AbstractList;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.concurrent.Callable;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.CyclicBarrier;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 import org.junit.jupiter.api.Test;
@@ -24,12 +52,16 @@ final class BackupArchiveProcessTest {
 
   private static final class TerminalVector extends Process {
     final int index;
-    final char stop, hold;
+    final char stop;
+    final char hold;
     final Throwable failure;
     final List<String> events;
-    final String termEvent, confirmEvent;
+    final String termEvent;
+    final String confirmEvent;
     final CyclicBarrier barrier;
-    boolean alive = true, stopped, observed;
+    boolean alive = true;
+    boolean stopped;
+    boolean observed;
 
     TerminalVector(
         int index,
@@ -309,9 +341,9 @@ final class BackupArchiveProcessTest {
     }
   }
 
-  private static final Path DIR = Path.of("/proc/self/fd/101"),
-      OUT = Path.of("/proc/self/fd/102"),
-      KEY = Path.of("/proc/self/fd/103");
+  private static final Path DIR = Path.of("/proc/self/fd/101");
+  private static final Path OUT = Path.of("/proc/self/fd/102");
+  private static final Path KEY = Path.of("/proc/self/fd/103");
   @TempDir Path temporary;
 
   private static String child(int fd) {
@@ -755,8 +787,8 @@ final class BackupArchiveProcessTest {
 
   @Test
   void actualNativePublicTarAndBuilder() throws Exception {
-    Path source = Files.createDirectory(temporary.resolve("source")),
-        destination = Files.createDirectory(temporary.resolve("destination"));
+    Path source = Files.createDirectory(temporary.resolve("source"));
+    Path destination = Files.createDirectory(temporary.resolve("destination"));
     Files.writeString(source.resolve("public.txt"), "PUBLIC_BACKUP_FIXTURE\n");
     Path archive = Files.createFile(destination.resolve("config.tar"));
     var security = new Fixture();
@@ -918,12 +950,15 @@ final class BackupArchiveProcessTest {
     int badProcess;
     boolean beforeTimeout;
     boolean stubborn;
-    boolean holdInterrupt, interruptOnHoldFault;
-    boolean holdEmptyWait, exitOnHoldFault;
+    boolean holdInterrupt;
+    boolean interruptOnHoldFault;
+    boolean holdEmptyWait;
+    boolean exitOnHoldFault;
     final List<Throwable> holdFaults = new ArrayList<>();
     final CountDownLatch terminalHoldEntered = new CountDownLatch(1);
     final CountDownLatch terminalRelease = new CountDownLatch(1);
-    RuntimeException unknown, cleanupUnknown;
+    RuntimeException unknown;
+    RuntimeException cleanupUnknown;
 
     long clock() {
       int at = ticks.getAndIncrement();
@@ -989,8 +1024,14 @@ final class BackupArchiveProcessTest {
     final Fixture fixture;
     final int index;
     final ByteArrayOutputStream received = new ByteArrayOutputStream();
-    int outAcquired, inAcquired, errAcquired, outClosed, inputClosed, errClosed;
-    volatile boolean alive = true, destroyed;
+    int outAcquired;
+    int inAcquired;
+    int errAcquired;
+    int outClosed;
+    int inputClosed;
+    int errClosed;
+    volatile boolean alive = true;
+    volatile boolean destroyed;
     int terminalWaits;
 
     FakeProcess(Fixture f, int index) {

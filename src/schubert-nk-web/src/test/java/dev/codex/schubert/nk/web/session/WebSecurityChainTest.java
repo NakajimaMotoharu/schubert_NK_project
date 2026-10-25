@@ -1,21 +1,46 @@
 package dev.codex.schubert.nk.web.session;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNotSame;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import dev.codex.schubert.nk.web.logging.WebLogDatabaseFixture;
 import dev.codex.schubert.nk.web.logging.WebSecurityAudit;
-import dev.codex.schubert.nk.web.security.*;
+import dev.codex.schubert.nk.web.security.WebRequestContext;
+import dev.codex.schubert.nk.web.security.WebSecurityFilterFactory;
 import dev.codex.schubert.nk.web.session.EmbeddedWebSecurityTest.Server;
 import jakarta.servlet.http.HttpServletRequest;
-import java.net.http.*;
-import java.nio.file.*;
-import java.time.*;
-import java.util.*;
-import java.util.concurrent.*;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.time.Duration;
+import java.time.Instant;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.Set;
+import java.util.UUID;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
-import org.springframework.mock.web.*;
+import org.springframework.mock.web.MockFilterConfig;
+import org.springframework.mock.web.MockHttpServletRequest;
+import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.security.core.context.SecurityContextHolder;
 
 /**
@@ -281,7 +306,8 @@ class WebSecurityChainTest {
             () -> {
               var page = server.send("GET", "/login", null, null, true);
               assertEquals(200, page.statusCode());
-              String anonymous = cookie(page), csrf = page.body().substring(6);
+              String anonymous = cookie(page);
+              String csrf = page.body().substring(6);
               var login =
                   server.send(
                       "POST",

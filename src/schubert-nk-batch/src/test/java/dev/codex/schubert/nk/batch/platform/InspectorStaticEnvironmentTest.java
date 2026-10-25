@@ -1,10 +1,20 @@
 package dev.codex.schubert.nk.batch.platform;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.nio.charset.StandardCharsets;
-import java.util.*;
-import java.util.concurrent.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Locale;
+import java.util.StringJoiner;
+import java.util.concurrent.Callable;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 import org.junit.jupiter.api.Test;
 
 /** SS343 literal source grammar and independent boundary construction; PT-OPS-CFG-001..006. */
@@ -132,7 +142,8 @@ final class InspectorStaticEnvironmentTest {
 
   @Test
   void concurrentValidation() throws Exception {
-    byte[] golden = bytes(GOLDEN), bad = config(URL, "v1,v1");
+    byte[] golden = bytes(GOLDEN);
+    byte[] bad = config(URL, "v1,v1");
     try (var pool = Executors.newFixedThreadPool(8)) {
       List<Callable<Integer>> work = new ArrayList<>();
       for (int i = 0; i < 64; i++)

@@ -1,18 +1,31 @@
 package dev.codex.schubert.nk.api.maintenance;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import dev.codex.schubert.nk.api.database.MigrationInventory;
-import dev.codex.schubert.nk.api.idempotency.*;
+import dev.codex.schubert.nk.api.idempotency.InboxResultReference;
+import dev.codex.schubert.nk.api.idempotency.ResponseSnapshotIdentity;
 import dev.codex.schubert.nk.api.logging.ApiLogDatabaseFixture;
 import java.nio.file.Path;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.time.Instant;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 import org.flywaydb.core.Flyway;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 /** PT-DB-INBOX-017..024; independent SQLSTATE/catalog/row and lock postconditions for V008. */
@@ -21,7 +34,8 @@ final class InboxInspectionBoundaryTest {
   private static ApiLogDatabaseFixture db;
   private static String url;
   private static final String ROLE = "schubert_inbox_inspector";
-  private static final UUID RUN = new UUID(0, 42), SESSION = new UUID(0, 104);
+  private static final UUID RUN = new UUID(0, 42);
+  private static final UUID SESSION = new UUID(0, 104);
   private static final Instant CUTOFF = Instant.parse("2026-09-09T00:00:00.123Z");
   private static final String CALL =
       "select message_id from schubert.maintenance_next_auth_inbox('"

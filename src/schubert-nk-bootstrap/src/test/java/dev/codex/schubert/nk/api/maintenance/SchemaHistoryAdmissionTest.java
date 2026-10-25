@@ -1,12 +1,28 @@
 package dev.codex.schubert.nk.api.maintenance;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotSame;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import dev.codex.schubert.nk.api.bootstrap.SchemaHistoryAdmission;
 import dev.codex.schubert.nk.api.bootstrap.SchemaHistoryAdmission.Row;
 import java.lang.reflect.Proxy;
-import java.sql.*;
-import java.util.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
 import java.util.concurrent.Executors;
 import org.junit.jupiter.api.Test;
 
@@ -197,7 +213,9 @@ final class SchemaHistoryAdmissionTest {
       for (int row = 0; row < 4; row++)
         for (int statement = 0; statement < 4; statement++) {
           var probe = new Probe();
-          Throwable primary = fault(body), rowFault = fault(row), statementFault = fault(statement);
+          Throwable primary = fault(body);
+          Throwable rowFault = fault(row);
+          Throwable statementFault = fault(statement);
           if (primary != null) probe.faults.put("next", primary);
           if (rowFault != null) probe.faults.put("rowClose", rowFault);
           if (statementFault != null) probe.faults.put("statementClose", statementFault);
@@ -333,8 +351,11 @@ final class SchemaHistoryAdmissionTest {
     final List<Map<String, Object>> rows;
     final Map<String, Throwable> faults = new HashMap<>();
     final int[] closed = new int[3];
-    boolean nullStatement, nullRows, interruptAtEnd;
-    int index = -1, timeout;
+    boolean nullStatement;
+    boolean nullRows;
+    boolean interruptAtEnd;
+    int index = -1;
+    int timeout;
     String sql;
 
     Probe() {

@@ -1,6 +1,11 @@
 package dev.codex.schubert.nk.api.messaging.inbound;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import jakarta.jms.JMSConsumer;
 import jakarta.jms.JMSContext;
@@ -175,11 +180,15 @@ final class ConsumerCleanup333Test {
 
   private static final class Fixture {
     final int kind;
-    final Throwable startupFailure, notificationFailure;
+    final Throwable startupFailure;
+    final Throwable notificationFailure;
     final Throwable[] closeFaults;
     final int[] closeCounts;
     final List<Integer> closeOrder = new ArrayList<>();
-    int opens, starts, signals, business;
+    int opens;
+    int starts;
+    int signals;
+    int business;
 
     Fixture(int kind, Throwable startupFailure, Throwable notificationFailure) {
       this.kind = kind;

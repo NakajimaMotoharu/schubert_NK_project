@@ -1,19 +1,48 @@
 package dev.codex.schubert.nk.batch.file;
 
-import static dev.codex.schubert.nk.batch.file.BackupArtifactFixture.*;
-import static org.junit.jupiter.api.Assertions.*;
+import static dev.codex.schubert.nk.batch.file.BackupArtifactFixture.DIR;
+import static dev.codex.schubert.nk.batch.file.BackupArtifactFixture.GID;
+import static dev.codex.schubert.nk.batch.file.BackupArtifactFixture.MANIFEST_HASH;
+import static dev.codex.schubert.nk.batch.file.BackupArtifactFixture.UID;
+import static org.junit.jupiter.api.Assertions.assertAll;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import dev.codex.schubert.nk.batch.backup.BackupCommitService;
-import dev.codex.schubert.nk.batch.repository.*;
+import dev.codex.schubert.nk.batch.repository.BatchDatabaseFixture;
+import dev.codex.schubert.nk.batch.repository.BatchRepositoryException;
+import dev.codex.schubert.nk.batch.repository.BatchStepAttempt;
 import dev.codex.schubert.nk.storage.StorageIoException;
-import java.nio.file.*;
-import java.sql.*;
-import java.time.*;
-import java.util.*;
-import java.util.concurrent.*;
-import java.util.concurrent.atomic.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.time.Instant;
+import java.time.OffsetDateTime;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicReference;
 import java.util.function.Supplier;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
 import org.junit.jupiter.api.io.TempDir;
 
@@ -521,7 +550,8 @@ final class BackupBundleCompletionTest {
         var other = db.open("schubert_batch");
         var pool = Executors.newFixedThreadPool(2)) {
       List<Long> threads = Collections.synchronizedList(new ArrayList<>());
-      CountDownLatch entered = new CountDownLatch(1), release = new CountDownLatch(1);
+      CountDownLatch entered = new CountDownLatch(1);
+      CountDownLatch release = new CountDownLatch(1);
       f.hook =
           (name, n) -> {
             threads.add(Thread.currentThread().threadId());

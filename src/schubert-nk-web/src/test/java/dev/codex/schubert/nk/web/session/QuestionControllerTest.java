@@ -1,43 +1,85 @@
 package dev.codex.schubert.nk.web.session;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.head;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 
 import dev.codex.schubert.nk.protocol.header.AuthenticationContext;
-import dev.codex.schubert.nk.protocol.layout.*;
 import dev.codex.schubert.nk.protocol.layout.common.PagedResponseData;
-import dev.codex.schubert.nk.protocol.layout.question.*;
-import dev.codex.schubert.nk.protocol.layout.semantic.*;
+import dev.codex.schubert.nk.protocol.layout.question.QuestionDetailResponseData;
+import dev.codex.schubert.nk.protocol.layout.question.QuestionSummaryRecord;
+import dev.codex.schubert.nk.protocol.layout.semantic.AnswerState;
+import dev.codex.schubert.nk.protocol.layout.semantic.QuestionId;
+import dev.codex.schubert.nk.protocol.layout.semantic.UserRole;
 import dev.codex.schubert.nk.web.config.QuestionAcceptanceMvcConfiguration;
 import dev.codex.schubert.nk.web.config.QuestionMvcConfiguration;
 import dev.codex.schubert.nk.web.controller.QuestionController;
 import dev.codex.schubert.nk.web.form.QuestionSearchForm;
 import dev.codex.schubert.nk.web.form.QuestionSubmitForm;
 import dev.codex.schubert.nk.web.logging.WebLogDatabaseFixture;
-import dev.codex.schubert.nk.web.messaging.*;
-import dev.codex.schubert.nk.web.receipt.*;
+import dev.codex.schubert.nk.web.messaging.JmsRequestReplyClient;
+import dev.codex.schubert.nk.web.messaging.QuestionWireClient;
+import dev.codex.schubert.nk.web.messaging.ReplyCorrelationRegistry;
+import dev.codex.schubert.nk.web.receipt.ReceiptReference;
+import dev.codex.schubert.nk.web.receipt.ReceiptReferenceRepository;
 import dev.codex.schubert.nk.web.security.ApiSessionInvalidHandler;
-import dev.codex.schubert.nk.web.view.*;
+import dev.codex.schubert.nk.web.view.QuestionAcceptedViewModel;
+import dev.codex.schubert.nk.web.view.QuestionDetailViewModel;
+import dev.codex.schubert.nk.web.view.QuestionListViewModel;
+import dev.codex.schubert.nk.web.view.QuestionSubmitViewModel;
 import jakarta.jms.JMSRuntimeException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Proxy;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.time.*;
-import java.util.*;
-import java.util.concurrent.*;
+import java.time.Clock;
+import java.time.Duration;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneOffset;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import java.util.Optional;
+import java.util.UUID;
+import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.function.BiFunction;
 import javax.sql.DataSource;
 import org.jsoup.Jsoup;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
-import org.springframework.mock.web.*;
+import org.springframework.mock.web.MockHttpServletRequest;
+import org.springframework.mock.web.MockHttpServletResponse;
+import org.springframework.mock.web.MockHttpSession;
+import org.springframework.mock.web.MockServletContext;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.web.csrf.*;
+import org.springframework.security.web.csrf.CsrfToken;
+import org.springframework.security.web.csrf.DefaultCsrfToken;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.ui.ExtendedModelMap;
 import org.springframework.util.LinkedMultiValueMap;
@@ -47,8 +89,8 @@ import org.springframework.web.context.support.AnnotationConfigWebApplicationCon
 class QuestionControllerTest {
   private static final Clock CLOCK =
       Clock.fixed(Instant.parse("2026-10-03T00:00:00Z"), ZoneOffset.UTC);
-  private static final Instant SUBMITTED = Instant.parse("2026-10-02T23:58:00Z"),
-      ANSWERED = Instant.parse("2026-10-02T23:59:00Z");
+  private static final Instant SUBMITTED = Instant.parse("2026-10-02T23:58:00Z");
+  private static final Instant ANSWERED = Instant.parse("2026-10-02T23:59:00Z");
   private static final String RECEIPT = "0123456789ABCDEFGHJKMNPQRS";
   private static WebLogDatabaseFixture db;
   @TempDir Path root;
@@ -1806,7 +1848,8 @@ class QuestionControllerTest {
             new EncryptedWebSessionRepository(ownedSource, security.f.codec, security.f.clock),
             security.f.clock,
             () -> new UUID(9, tokenIds.incrementAndGet()));
-    volatile boolean failReceipt, verifyNoTransaction;
+    volatile boolean failReceipt;
+    volatile boolean verifyNoTransaction;
     volatile Runnable afterReply = () -> {};
     final ReceiptReferenceRepository receipts =
         new ReceiptReferenceRepository(
@@ -1820,12 +1863,17 @@ class QuestionControllerTest {
                       if (failReceipt) throw new SQLException("synthetic receipt failure");
                       return ownedSource.getConnection();
                     })));
-    final List<byte[]> requests = new CopyOnWriteArrayList<>(),
-        buffers = new CopyOnWriteArrayList<>();
+    final List<byte[]> requests = new CopyOnWriteArrayList<>();
+    final List<byte[]> buffers = new CopyOnWriteArrayList<>();
     final JmsRequestReplyClient wire =
         new JmsRequestReplyClient(new ReplyCorrelationRegistry(), CLOCK, 12);
-    volatile String code = "0000", state = "", summary = "question", answer = "", owner = "reader";
-    volatile int count = 1, total = 1;
+    volatile String code = "0000";
+    volatile String state = "";
+    volatile String summary = "question";
+    volatile String answer = "";
+    volatile String owner = "reader";
+    volatile int count = 1;
+    volatile int total = 1;
     volatile long replyId;
     volatile BiFunction<UUID, byte[], byte[]> responder = this::standard;
     final QuestionWireClient client =
@@ -1874,8 +1922,8 @@ class QuestionControllerTest {
 
     byte[] standard(UUID id, byte[] request) {
       if (ascii(request, 11, 8).equals("QSBREQ01")) return submitReply(id, request);
-      boolean detail = ascii(request, 11, 8).equals("QSDREQ01"),
-          success = code.equals("0000") || code.equals("0200");
+      boolean detail = ascii(request, 11, 8).equals("QSDREQ01");
+      boolean success = code.equals("0000") || code.equals("0200");
       String selected = detail ? "" : text(request, 576, 12);
       String normalState = state.isEmpty() ? (selected.isEmpty() ? "UNANSWERED" : selected) : state;
       int page =

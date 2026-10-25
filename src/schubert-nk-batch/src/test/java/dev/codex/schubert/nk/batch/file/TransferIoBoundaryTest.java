@@ -1,16 +1,33 @@
 package dev.codex.schubert.nk.batch.file;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import dev.codex.schubert.nk.batch.repository.BatchStepResult;
-import dev.codex.schubert.nk.storage.*;
+import dev.codex.schubert.nk.storage.DirectoryCalls;
+import dev.codex.schubert.nk.storage.LinuxDirectoryCalls;
+import dev.codex.schubert.nk.storage.LinuxInodeSecurity;
+import dev.codex.schubert.nk.storage.OwnedTransferDirectory;
 import java.io.IOException;
-import java.lang.reflect.*;
-import java.nio.file.*;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Proxy;
+import java.nio.file.DirectoryIteratorException;
+import java.nio.file.DirectoryStream;
+import java.nio.file.Files;
+import java.nio.file.LinkOption;
+import java.nio.file.Path;
 import java.nio.file.attribute.FileTime;
 import java.nio.file.attribute.PosixFilePermissions;
 import java.time.Instant;
-import java.util.*;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.function.BiConsumer;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
@@ -184,13 +201,21 @@ final class TransferIoBoundaryTest {
   }
 
   private static final class Fixture implements AutoCloseable, TransferCleanup.Io {
-    final Path path, date, file;
+    final Path path;
+    final Path date;
+    final Path file;
     final OwnedTransferDirectory root;
     final TransferCleanup.NioIo nio = new TransferCleanup.NioIo();
     final Set<Integer> descriptors = new HashSet<>();
     final Map<String, Integer> observations = new HashMap<>();
-    final long uid, gid;
-    int openedStreams, closedStreams, unlinks, removes, guards, faultsInjected;
+    final long uid;
+    final long gid;
+    int openedStreams;
+    int closedStreams;
+    int unlinks;
+    int removes;
+    int guards;
+    int faultsInjected;
     String fault = "";
     boolean nonRemoving;
     BiConsumer<String, Map<String, Object>> transform = (role, values) -> {};

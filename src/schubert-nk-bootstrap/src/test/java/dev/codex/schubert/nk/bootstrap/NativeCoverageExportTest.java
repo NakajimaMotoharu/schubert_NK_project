@@ -1,16 +1,41 @@
 package dev.codex.schubert.nk.bootstrap;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import dev.codex.schubert.nk.storage.*;
+import dev.codex.schubert.nk.storage.DirectoryCalls;
+import dev.codex.schubert.nk.storage.InodeSecurityCalls;
+import dev.codex.schubert.nk.storage.LinuxDirectoryCalls;
+import dev.codex.schubert.nk.storage.LinuxInodeSecurity;
+import dev.codex.schubert.nk.storage.OwnedTransferDirectory;
+import dev.codex.schubert.nk.storage.ServiceConfigFiles;
+import dev.codex.schubert.nk.storage.StorageIoException;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.MappedByteBuffer;
-import java.nio.channels.*;
+import java.nio.channels.FileChannel;
+import java.nio.channels.FileLock;
+import java.nio.channels.ReadableByteChannel;
+import java.nio.channels.WritableByteChannel;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardOpenOption;
 import java.nio.file.attribute.PosixFilePermissions;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.Set;
 import org.jspecify.annotations.Nullable;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
@@ -633,7 +658,8 @@ final class NativeCoverageExportTest {
   private static final class FaultChannel extends FileChannel {
     final FileChannel delegate;
     final String fault;
-    int reads, sizes;
+    int reads;
+    int sizes;
 
     FaultChannel(FileChannel delegate, String fault) {
       this.delegate = delegate;
@@ -751,12 +777,20 @@ final class NativeCoverageExportTest {
   }
 
   private static final class Fixture implements NativeCoveragePrivateFile.Io {
-    final Path run, service, parent, target;
+    final Path run;
+    final Path service;
+    final Path parent;
+    final Path target;
     final Role role;
     final Calls calls;
     final Map<String, Integer> visits = new HashMap<>();
     String fault = "";
-    int invocations, cgroups, resolvers, snapshots, uidReads, sizeReads;
+    int invocations;
+    int cgroups;
+    int resolvers;
+    int snapshots;
+    int uidReads;
+    int sizeReads;
 
     Fixture(Path run, Role role) throws IOException {
       this.run = run;
@@ -860,7 +894,8 @@ final class NativeCoverageExportTest {
     public ChildStartupContext.Observed ordinary() throws IOException {
       fail("ordinary");
       snapshots++;
-      int initial = 0, finalField = 0;
+      int initial = 0;
+      int finalField = 0;
       for (int i = 1; i <= 9; i++) {
         if (snapshots == 1 && fault.equals("ordinary#" + i)) initial = i;
         if (snapshots == 2 && fault.equals("ordinary-final#" + i)) finalField = i;
@@ -945,7 +980,8 @@ final class NativeCoverageExportTest {
     final Fixture fixture;
     final Set<Integer> live = new HashSet<>();
     final Map<String, Integer> closes = new HashMap<>();
-    int creates, syncs;
+    int creates;
+    int syncs;
 
     Calls(Fixture fixture) {
       this.fixture = fixture;

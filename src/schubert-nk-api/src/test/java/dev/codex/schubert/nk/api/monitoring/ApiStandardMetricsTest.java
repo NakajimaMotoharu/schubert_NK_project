@@ -1,6 +1,12 @@
 package dev.codex.schubert.nk.api.monitoring;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNotSame;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import io.micrometer.core.instrument.MockClock;
 import io.micrometer.core.instrument.binder.jvm.JvmGcMetrics;
@@ -20,7 +26,8 @@ class ApiStandardMetricsTest {
 
   private static final class Registry extends SimpleMeterRegistry implements AutoCloseable {
     final List<String> events;
-    final AtomicInteger reads = new AtomicInteger(), closes = new AtomicInteger();
+    final AtomicInteger reads = new AtomicInteger();
+    final AtomicInteger closes = new AtomicInteger();
 
     Registry() {
       this(new ArrayList<>());

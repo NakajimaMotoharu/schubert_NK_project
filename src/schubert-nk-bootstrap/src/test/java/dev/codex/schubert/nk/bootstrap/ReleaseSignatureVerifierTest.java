@@ -1,11 +1,22 @@
 package dev.codex.schubert.nk.bootstrap;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.IOException;
 import java.security.GeneralSecurityException;
-import java.util.*;
-import java.util.concurrent.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HexFormat;
+import java.util.List;
+import java.util.concurrent.CyclicBarrier;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicReference;
 import org.junit.jupiter.api.Test;
 
@@ -75,7 +86,9 @@ final class ReleaseSignatureVerifierTest {
 
   @Test
   void sign005SnapshotAndErasedOwnedBuffers() throws Exception {
-    byte[] inputKey = hex(PREFIX + PUBLIC1), message = hex("72"), signature = hex(SIGN2);
+    byte[] inputKey = hex(PREFIX + PUBLIC1);
+    byte[] message = hex("72");
+    byte[] signature = hex(SIGN2);
     var retained = new AtomicReference<List<byte[]>>();
     var subject =
         new ReleaseSignatureVerifier(

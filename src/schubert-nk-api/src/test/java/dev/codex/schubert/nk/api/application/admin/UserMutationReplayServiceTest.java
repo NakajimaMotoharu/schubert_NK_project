@@ -1,13 +1,31 @@
 package dev.codex.schubert.nk.api.application.admin;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import dev.codex.schubert.nk.api.domain.Role;
 import dev.codex.schubert.nk.api.error.TemporaryInfrastructureException;
-import dev.codex.schubert.nk.api.idempotency.*;
+import dev.codex.schubert.nk.api.idempotency.BoundInboxExecution;
+import dev.codex.schubert.nk.api.idempotency.EncryptedResponseSnapshot;
+import dev.codex.schubert.nk.api.idempotency.InboxCompletion;
+import dev.codex.schubert.nk.api.idempotency.InboxCompletionState;
+import dev.codex.schubert.nk.api.idempotency.InboxExecution;
+import dev.codex.schubert.nk.api.idempotency.InboxResultReference;
+import dev.codex.schubert.nk.api.idempotency.InboxResultReferenceType;
+import dev.codex.schubert.nk.api.idempotency.ResponseSnapshotCodec;
 import dev.codex.schubert.nk.api.security.AuthenticatedActor;
-import dev.codex.schubert.nk.protocol.header.*;
-import dev.codex.schubert.nk.protocol.layout.*;
+import dev.codex.schubert.nk.protocol.header.AuthenticationContext;
+import dev.codex.schubert.nk.protocol.header.CommonHeader;
+import dev.codex.schubert.nk.protocol.header.InteractionKind;
+import dev.codex.schubert.nk.protocol.header.MessageKind;
+import dev.codex.schubert.nk.protocol.header.ResultCode;
+import dev.codex.schubert.nk.protocol.layout.FixedPayload;
+import dev.codex.schubert.nk.protocol.layout.LayoutId;
+import dev.codex.schubert.nk.protocol.layout.WireMessage;
 import dev.codex.schubert.nk.protocol.layout.admin.UserMutationResponseData;
 import dev.codex.schubert.nk.protocol.layout.semantic.UserId;
 import java.io.ByteArrayOutputStream;
@@ -17,7 +35,14 @@ import java.nio.charset.StandardCharsets;
 import java.time.Instant;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
+import java.util.Optional;
+import java.util.UUID;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 import java.util.zip.Deflater;
@@ -32,15 +57,16 @@ import org.junit.jupiter.api.function.Executable;
 final class UserMutationReplayServiceTest {
   private static final List<String> LAYOUTS =
       List.of("UCRREQ01", "USTREQ01", "URLREQ01", "UPWREQ01", "ULKREQ01");
-  private static final UUID SOURCE = new UUID(80, 1),
-      RETRY = new UUID(80, 2),
-      RESPONSE = new UUID(80, 3),
-      REPLY = new UUID(80, 4),
-      TOKEN = new UUID(80, 5);
-  private static final Instant NOW = Instant.parse("2026-09-08T03:04:05.123456789Z"),
-      LATER = NOW.plusSeconds(3600);
+  private static final UUID SOURCE = new UUID(80, 1);
+  private static final UUID RETRY = new UUID(80, 2);
+  private static final UUID RESPONSE = new UUID(80, 3);
+  private static final UUID REPLY = new UUID(80, 4);
+  private static final UUID TOKEN = new UUID(80, 5);
+  private static final Instant NOW = Instant.parse("2026-09-08T03:04:05.123456789Z");
+  private static final Instant LATER = NOW.plusSeconds(3600);
   private static final AuthenticatedActor ADMIN = new AuthenticatedActor(1, "admin", Role.ADMIN);
-  private static final String CONTEXT = "b".repeat(64), NEW_CONTEXT = "c".repeat(64);
+  private static final String CONTEXT = "b".repeat(64);
+  private static final String NEW_CONTEXT = "c".repeat(64);
 
   @Test
   void adm028FiveLayoutsFreezeOriginalResultVersionAndFreshHeaders() throws Exception {
@@ -450,9 +476,9 @@ final class UserMutationReplayServiceTest {
                 () -> {
                   String layout = LAYOUTS.get(n % 5);
                   var actor = new AuthenticatedActor(n + 1, "admin" + n, Role.ADMIN);
-                  UUID source = new UUID(81, n),
-                      retry = new UUID(82, n),
-                      response = new UUID(83, n);
+                  UUID source = new UUID(81, n);
+                  UUID retry = new UUID(82, n);
+                  UUID response = new UUID(83, n);
                   long version = layout.equals("UCRREQ01") ? 0 : n + 1;
                   try (var original = request(layout, n + 3, n, true, source, CONTEXT);
                       var current = request(layout, n + 3, n, true, retry, NEW_CONTEXT)) {

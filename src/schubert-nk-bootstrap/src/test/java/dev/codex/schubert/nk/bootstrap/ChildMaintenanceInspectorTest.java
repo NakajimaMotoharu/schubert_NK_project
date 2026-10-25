@@ -1,10 +1,17 @@
 package dev.codex.schubert.nk.bootstrap;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 import org.junit.jupiter.api.Test;
 
 /** SSC119/018-289 CINSPECT001..004: independent manager and two actual actor vectors. */
@@ -122,7 +129,9 @@ final class ChildMaintenanceInspectorTest {
 
   private static final class Fixture implements ChildStartupContext.Io {
     String fault = "";
-    int managerReads, childReads, wrapperReads;
+    int managerReads;
+    int childReads;
+    int wrapperReads;
     final List<byte[]> owned = new ArrayList<>();
     final IllegalStateException unknown = new IllegalStateException("private unknown");
 

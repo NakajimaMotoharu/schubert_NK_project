@@ -1,10 +1,25 @@
 package dev.codex.schubert.nk.batch.platform;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import java.io.*;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.nio.charset.StandardCharsets;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.concurrent.TimeUnit;
 import org.junit.jupiter.api.Test;
 
@@ -427,10 +442,14 @@ final class RootStartupContextTest {
   }
 
   static class Fixture implements RootStartupContext.Io {
-    long uid = 0, pid = 42;
-    String fs = "proc", exe = "/usr/lib/systemd/systemd", boot = BOOT, inv = INV;
-    String own = RootStartupContextTest.stat(42, "12345"),
-        init = RootStartupContextTest.stat(1, "5");
+    long uid = 0;
+    long pid = 42;
+    String fs = "proc";
+    String exe = "/usr/lib/systemd/systemd";
+    String boot = BOOT;
+    String inv = INV;
+    String own = RootStartupContextTest.stat(42, "12345");
+    String init = RootStartupContextTest.stat(1, "5");
     String group = "0::/system.slice/schubert-nk-api.service\n";
     String unit = RootStartupContextTest.unit(RootStartupContext.Service.API);
     int reads;

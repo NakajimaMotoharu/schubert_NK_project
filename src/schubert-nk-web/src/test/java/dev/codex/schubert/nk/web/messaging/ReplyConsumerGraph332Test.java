@@ -1,6 +1,11 @@
 package dev.codex.schubert.nk.web.messaging;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import jakarta.jms.BytesMessage;
 import jakarta.jms.JMSConsumer;
@@ -134,11 +139,11 @@ final class ReplyConsumerGraph332Test {
   }
 
   private static final class Fixture implements AutoCloseable {
-    final AtomicInteger reads = new AtomicInteger(),
-        rollbacks = new AtomicInteger(),
-        commits = new AtomicInteger(),
-        signals = new AtomicInteger(),
-        closes = new AtomicInteger();
+    final AtomicInteger reads = new AtomicInteger();
+    final AtomicInteger rollbacks = new AtomicInteger();
+    final AtomicInteger commits = new AtomicInteger();
+    final AtomicInteger signals = new AtomicInteger();
+    final AtomicInteger closes = new AtomicInteger();
     final AtomicReference<MessageListener> listener = new AtomicReference<>();
     final JMSContext context;
     final BytesMessage message;

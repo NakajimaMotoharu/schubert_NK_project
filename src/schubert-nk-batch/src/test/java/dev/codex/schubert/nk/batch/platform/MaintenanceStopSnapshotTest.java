@@ -1,10 +1,20 @@
 package dev.codex.schubert.nk.batch.platform;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.nio.charset.StandardCharsets;
-import java.util.*;
-import java.util.concurrent.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.Callable;
+import java.util.concurrent.Executors;
 import org.junit.jupiter.api.Test;
 
 /** MSTOP001..007: independent 12field literal, not genuine root/kernel or stop acceptance. */
@@ -36,7 +46,8 @@ final class MaintenanceStopSnapshotTest {
   }
 
   private static void rejected(String value) {
-    byte[] input = bytes(value), expected = input.clone();
+    byte[] input = bytes(value);
+    byte[] expected = input.clone();
     StopGateException failure =
         assertThrows(
             StopGateException.class,
@@ -92,7 +103,8 @@ final class MaintenanceStopSnapshotTest {
     rejected("");
     for (int position = 0; position < COLD.length(); position++) {
       for (int value : List.of(0, 13, 127, 128, 255)) {
-        byte[] input = bytes(COLD), original;
+        byte[] input = bytes(COLD);
+        byte[] original;
         input[position] = (byte) value;
         original = input.clone();
         assertThrows(

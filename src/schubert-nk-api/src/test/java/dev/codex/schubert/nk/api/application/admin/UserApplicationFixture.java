@@ -1,24 +1,41 @@
 package dev.codex.schubert.nk.api.application.admin;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import dev.codex.schubert.nk.api.idempotency.FingerprintKeyRing;
 import dev.codex.schubert.nk.api.idempotency.JdbcInboxCoordinator;
 import dev.codex.schubert.nk.api.idempotency.ResponseSnapshotCodec;
 import dev.codex.schubert.nk.api.logging.ApiLogDatabaseFixture;
-import dev.codex.schubert.nk.api.security.*;
-import dev.codex.schubert.nk.protocol.header.*;
-import dev.codex.schubert.nk.protocol.layout.*;
+import dev.codex.schubert.nk.api.security.AdminCommandAuthenticator;
+import dev.codex.schubert.nk.api.security.AuthSessionRevocationService;
+import dev.codex.schubert.nk.api.security.ContextHash;
+import dev.codex.schubert.nk.api.security.PasswordHasher;
+import dev.codex.schubert.nk.protocol.header.AuthenticationContext;
+import dev.codex.schubert.nk.protocol.header.CommonHeader;
+import dev.codex.schubert.nk.protocol.header.InteractionKind;
+import dev.codex.schubert.nk.protocol.header.MessageKind;
+import dev.codex.schubert.nk.protocol.layout.FixedPayload;
+import dev.codex.schubert.nk.protocol.layout.LayoutId;
+import dev.codex.schubert.nk.protocol.layout.WireMessage;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.time.Clock;
 import java.time.Instant;
 import java.time.ZoneOffset;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HexFormat;
+import java.util.List;
+import java.util.Locale;
+import java.util.Optional;
+import java.util.UUID;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Supplier;
 import javax.sql.DataSource;
@@ -26,16 +43,17 @@ import javax.sql.DataSource;
 /** Actual isolated PostgreSQL plus public JDBC boundary fault injection. PT-ADM-033..039. */
 final class UserApplicationFixture implements AutoCloseable {
   static final Instant NOW = Instant.parse("2026-09-08T00:01:00Z");
-  static final UUID MESSAGE = new UUID(90, 1), TOKEN = new UUID(90, 2);
+  static final UUID MESSAGE = new UUID(90, 1);
+  static final UUID TOKEN = new UUID(90, 2);
   static final String PASSWORD = "Synthetic-Password-12";
   final ApiLogDatabaseFixture db;
   final FingerprintKeyRing fingerprints = new FingerprintKeyRing("test", new byte[32], null, null);
   final ResponseSnapshotCodec snapshots =
       new ResponseSnapshotCodec("test", new byte[32], null, null);
-  final AtomicInteger ids = new AtomicInteger(),
-      live = new AtomicInteger(),
-      commits = new AtomicInteger(),
-      rollbacks = new AtomicInteger();
+  final AtomicInteger ids = new AtomicInteger();
+  final AtomicInteger live = new AtomicInteger();
+  final AtomicInteger commits = new AtomicInteger();
+  final AtomicInteger rollbacks = new AtomicInteger();
   final AdminCommandAuthenticator authentication;
   final UserCommandService commands;
   final JdbcInboxCoordinator inbox = new JdbcInboxCoordinator(fingerprints);

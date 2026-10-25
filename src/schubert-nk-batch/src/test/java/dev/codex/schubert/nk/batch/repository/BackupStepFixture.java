@@ -1,13 +1,34 @@
 package dev.codex.schubert.nk.batch.repository;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import dev.codex.schubert.nk.batch.backup.*;
-import java.lang.reflect.*;
-import java.nio.file.*;
-import java.sql.*;
-import java.time.*;
-import java.util.*;
+import dev.codex.schubert.nk.batch.backup.BackupFileDigest;
+import dev.codex.schubert.nk.batch.backup.BackupManifest;
+import dev.codex.schubert.nk.batch.backup.BackupVersions;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.lang.reflect.Proxy;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.time.Instant;
+import java.time.OffsetDateTime;
+import java.time.ZoneOffset;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.TreeMap;
+import java.util.TreeSet;
+import java.util.UUID;
 import org.junit.jupiter.api.function.Executable;
 
 /** Independent public JDBC/SQL oracle for PG168, BAT210..225. No deployed data. */
@@ -139,7 +160,9 @@ public final class BackupStepFixture {
   /** Derived from SS331/341 fixed JDBC projection, not the production call recording. */
   public static Map<String, Integer> inventory(boolean fresh, boolean service) {
     var r = new TreeMap<String, Integer>();
-    int refs = fresh ? 8 : 2, pairs = fresh ? 2 : 1, updates = fresh ? 2 : 0;
+    int refs = fresh ? 8 : 2;
+    int pairs = fresh ? 2 : 1;
+    int updates = fresh ? 2 : 0;
     r.put("connection.getAutoCommit", refs + (service ? 1 : 0));
     r.put("connection.isReadOnly", refs + (service ? 1 : 0));
     r.put("connection.getTransactionIsolation", refs + (service ? 1 : 0));
@@ -218,9 +241,14 @@ public final class BackupStepFixture {
     public int compoundInjected;
     public final Map<Integer, Map<String, Object>> override = new HashMap<>();
     public final Set<String> columns = new TreeSet<>();
-    public Hook before = (k, n) -> {}, after = (k, n) -> {};
+    public Hook before = (k, n) -> {};
+    public Hook after = (k, n) -> {};
     public String anomaly = "";
-    public int rows, statements, hits, pairSequence, badReferences;
+    public int rows;
+    public int statements;
+    public int hits;
+    public int pairSequence;
+    public int badReferences;
     public int overrideSequence; // 0 means every pair query.
 
     public void fail(String key, int... positions) {
@@ -253,7 +281,8 @@ public final class BackupStepFixture {
               Connection.class.getClassLoader(),
               new Class<?>[] {Connection.class},
               (p, m, a) -> {
-                String name = m.getName(), key = "connection." + name;
+                String name = m.getName();
+                String key = "connection." + name;
                 assertTrue(
                     Set.of(
                             "getAutoCommit",
@@ -299,7 +328,8 @@ public final class BackupStepFixture {
               PreparedStatement.class.getClassLoader(),
               new Class<?>[] {PreparedStatement.class},
               (p, m, a) -> {
-                String name = m.getName(), key = kind + ".statement." + name;
+                String name = m.getName();
+                String key = kind + ".statement." + name;
                 if (name.equals("close")) {
                   Object r = invoke(s, m, a);
                   statements--;
@@ -337,7 +367,8 @@ public final class BackupStepFixture {
               ResultSet.class.getClassLoader(),
               new Class<?>[] {ResultSet.class},
               (p, m, a) -> {
-                String name = m.getName(), key = kind + ".row." + name;
+                String name = m.getName();
+                String key = kind + ".row." + name;
                 if (name.equals("close")) {
                   Object r = invoke(row, m, a);
                   rows--;

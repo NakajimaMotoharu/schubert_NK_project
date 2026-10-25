@@ -1,6 +1,11 @@
 package dev.codex.schubert.nk.api.storage;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import dev.codex.schubert.nk.storage.DirectoryCalls;
 import dev.codex.schubert.nk.storage.LinuxDirectoryCalls;
@@ -138,7 +143,8 @@ class TransferStartupProbeTest {
   void p02ExistingPartReadyAndUnexpectedSecondPartAreNeverDeletedAsProbeOwnership()
       throws Exception {
     for (String suffix : new String[] {"part", "ready"}) {
-      Path root = root("existing-" + suffix), day = day(root);
+      Path root = root("existing-" + suffix);
+      Path day = day(root);
       Path existing = day.resolve(ID + "." + suffix);
       Files.write(existing, new byte[] {9}, StandardOpenOption.CREATE_NEW);
       mode(existing, "rw-r-----");
@@ -157,7 +163,8 @@ class TransferStartupProbeTest {
       assertTrue(calls.live.isEmpty());
       noArtifactHandles(root);
     }
-    Path root = root("foreign-second"), day = day(root);
+    Path root = root("foreign-second");
+    Path day = day(root);
     var identity = identity(root);
     var calls = new Calls(root, Fault.FOREIGN_SECOND_PART);
     try (var held = OwnedTransferDirectory.open(calls, root)) {
@@ -194,7 +201,8 @@ class TransferStartupProbeTest {
           Fault.CLEANUP_SYNC,
           Fault.DAY_CLOSE
         }) {
-      Path root = root(fault.name()), day = day(root);
+      Path root = root(fault.name());
+      Path day = day(root);
       var identity = identity(root);
       var calls = new Calls(root, fault);
       var io = new FaultIo(identity, day, fault);
@@ -222,7 +230,8 @@ class TransferStartupProbeTest {
           Fault.READY_CLEANUP_CLOSE,
           Fault.READY_DELETE
         }) {
-      Path root = root(fault.name()), day = day(root);
+      Path root = root(fault.name());
+      Path day = day(root);
       var identity = identity(root);
       var calls = new Calls(root, fault);
       var io = new FaultIo(identity, day, fault);
@@ -417,7 +426,12 @@ class TransferStartupProbeTest {
     final Set<Integer> live = new HashSet<>();
     final Map<Integer, String> kinds = new HashMap<>();
     final List<String> createdNames = new ArrayList<>();
-    int creates, publishes, collisions, unlinks, syncs, readyOpens;
+    int creates;
+    int publishes;
+    int collisions;
+    int unlinks;
+    int syncs;
+    int readyOpens;
 
     Calls(Path root, Fault fault) {
       this.root = root;

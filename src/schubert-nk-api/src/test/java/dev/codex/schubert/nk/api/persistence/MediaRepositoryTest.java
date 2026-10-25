@@ -1,14 +1,27 @@
 package dev.codex.schubert.nk.api.persistence;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import dev.codex.schubert.nk.api.domain.Role;
 import dev.codex.schubert.nk.api.logging.ApiLogDatabaseFixture;
 import dev.codex.schubert.nk.api.security.AuthenticatedActor;
 import dev.codex.schubert.nk.protocol.codec.PayloadCodec;
 import dev.codex.schubert.nk.protocol.header.ResultCode;
-import dev.codex.schubert.nk.protocol.layout.*;
-import dev.codex.schubert.nk.protocol.layout.media.*;
+import dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalog;
+import dev.codex.schubert.nk.protocol.layout.TypedPayloadValues;
+import dev.codex.schubert.nk.protocol.layout.media.AnimationListRequestData;
+import dev.codex.schubert.nk.protocol.layout.media.AnimationMenuResponseData;
+import dev.codex.schubert.nk.protocol.layout.media.AudioDescriptorRequestData;
+import dev.codex.schubert.nk.protocol.layout.media.MusicDescriptorRequestData;
+import dev.codex.schubert.nk.protocol.layout.media.MusicSectionRequestData;
+import dev.codex.schubert.nk.protocol.layout.media.MusicTrackRequestData;
+import dev.codex.schubert.nk.protocol.layout.media.VideoDescriptorRequestData;
 import dev.codex.schubert.nk.protocol.layout.semantic.AnimationListCategory;
 import dev.codex.schubert.nk.protocol.layout.semantic.AudioId;
 import dev.codex.schubert.nk.protocol.layout.semantic.ContentDisposition;
@@ -16,11 +29,22 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Proxy;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
-import java.sql.*;
-import java.util.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Locale;
+import java.util.Objects;
+import java.util.Optional;
 import java.util.concurrent.Callable;
 import java.util.concurrent.Executors;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 /** PT-MED-008..014; real production DDL/grants, synthetic master and independent UI235 bytes. */
@@ -170,7 +194,9 @@ class MediaRepositoryTest {
     };
     for (int i = 0; i < formats.length; i++) {
       int id = 100 + i;
-      String suffix = formats[i][0], mime = formats[i][1], logical = "music-" + i;
+      String suffix = formats[i][0];
+      String mime = formats[i][1];
+      String logical = "music-" + i;
       asset(id, "MUSIC", logical, "Track", "BGM", "ゲーム", null, null, "N", i + 1);
       sql(
           "update schubert.media_assets set storage_relative_path='music/"

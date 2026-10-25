@@ -1,6 +1,13 @@
 package dev.codex.schubert.nk.api.security;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import dev.codex.schubert.nk.api.domain.Role;
 import dev.codex.schubert.nk.api.logging.ApiLogDatabaseFixture;
@@ -118,7 +125,8 @@ final class AuthenticationServiceTest {
         "insert into"
             + " schubert.login_ip_attempts(client_address,failed_count,window_started_at,updated_at)"
             + " values('127.0.0.1',2,'2026-09-07T23:59:00Z','2026-09-07T23:59:00Z')");
-    UUID message = UUID.randomUUID(), correlation = UUID.randomUUID();
+    UUID message = UUID.randomUUID();
+    UUID correlation = UUID.randomUUID();
     try (Connection connection = database.transaction()) {
       char[] password = password();
       var accepted =
@@ -232,7 +240,8 @@ final class AuthenticationServiceTest {
   @Test
   void unicodeKeyMigrationAcceptsNinetySixBytesButAuditsTheSixtyFourByteDisplay() throws Exception {
     // PT-AUT-NAME-004: independent literals, old CHECK reproduction, append-only V007, real Login.
-    String display = "\u0130".repeat(32), comparison = "i\u0307".repeat(32);
+    String display = "\u0130".repeat(32);
+    String comparison = "i\u0307".repeat(32);
     try (Connection c = database.admin();
         var s = c.createStatement()) {
       c.setAutoCommit(false);
@@ -511,7 +520,8 @@ final class AuthenticationServiceTest {
         failures.add(
             executor.submit(
                 () -> call(service, "login-user", "synthetic-wrong".toCharArray(), NOW)));
-      int invalid = 0, locked = 0;
+      int invalid = 0;
+      int locked = 0;
       for (var result : failures) {
         if (result.get().resultCode() == ResultCode.AUTHENTICATION_FAILED) invalid++;
         else if (result.get().resultCode() == ResultCode.LOCKED) locked++;

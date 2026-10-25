@@ -1,16 +1,35 @@
 package dev.codex.schubert.nk.batch.file;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNotSame;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import dev.codex.schubert.nk.batch.repository.*;
-import dev.codex.schubert.nk.storage.*;
+import dev.codex.schubert.nk.batch.repository.BatchRun;
+import dev.codex.schubert.nk.batch.repository.MaintenanceRetirement;
+import dev.codex.schubert.nk.storage.OwnedTransferDirectory;
+import dev.codex.schubert.nk.storage.StorageIoException;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.security.MessageDigest;
 import java.time.Instant;
-import java.util.*;
-import java.util.concurrent.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HexFormat;
+import java.util.IdentityHashMap;
+import java.util.List;
+import java.util.Locale;
+import java.util.Set;
+import java.util.UUID;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
@@ -65,7 +84,8 @@ final class MaintenanceRetirementRecordsTest {
 
   @Test
   void temporalAndCountInvariants() {
-    Instant ended = Instant.parse(END), now = Instant.parse(NOW);
+    Instant ended = Instant.parse(END);
+    Instant now = Instant.parse(NOW);
     for (Instant invalid :
         List.of(
             RUN.cutoff().minusNanos(1000),
@@ -113,7 +133,8 @@ final class MaintenanceRetirementRecordsTest {
 
   @Test
   void nullAndOwnership() throws Exception {
-    Instant end = Instant.parse(END), now = Instant.parse(NOW);
+    Instant end = Instant.parse(END);
+    Instant now = Instant.parse(NOW);
     assertThrows(
         NullPointerException.class, () -> new MaintenanceRetirement(null, end, now, 1, HASH));
     assertThrows(
@@ -124,8 +145,8 @@ final class MaintenanceRetirementRecordsTest {
         NullPointerException.class, () -> new MaintenanceRetirement(RUN, end, now, 1, null));
     assertThrows(NullPointerException.class, () -> MaintenanceRecords.retirement(null));
     assertThrows(NullPointerException.class, () -> MaintenanceRecords.readRetirement(null));
-    byte[] first = MaintenanceRecords.retirement(value()),
-        second = MaintenanceRecords.retirement(value());
+    byte[] first = MaintenanceRecords.retirement(value());
+    byte[] second = MaintenanceRecords.retirement(value());
     assertNotSame(first, second);
     first[0] = 0;
     assertArrayEquals(ascii(MARKER), second);
@@ -183,7 +204,8 @@ final class MaintenanceRetirementRecordsTest {
     try (var f = new MaintenanceRunFilesTest.Fixture(temporary);
         var root = OwnedTransferDirectory.open(f.calls, f.maintenance)) {
       var records = new DurableRecordFiles(root, f, f);
-      String name = ID + ".retire", literal = MARKER.replace("\n1\n", "\n2147483647\n");
+      String name = ID + ".retire";
+      String literal = MARKER.replace("\n1\n", "\n2147483647\n");
       byte[] expected = ascii(literal);
       records.publish(name, expected, new UUID(1, 1));
       assertArrayEquals(expected, Files.readAllBytes(f.maintenance.resolve(name)));

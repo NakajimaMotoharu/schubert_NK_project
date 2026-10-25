@@ -1,11 +1,20 @@
 package dev.codex.schubert.nk.bootstrap;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.time.Instant;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 import org.junit.jupiter.api.Test;
 
 /** SSC119/BUG356: independent manager/kernel parent vectors, no root authority from claims. */
@@ -205,10 +214,12 @@ class ChildMaintenanceParentTest {
     String fault = "";
     String groups = "0";
     boolean missingGroups;
-    boolean swappedOrder, orderDrift;
+    boolean swappedOrder;
+    boolean orderDrift;
     final IllegalStateException unknown = new IllegalStateException("PRIVATE unknown");
     final List<byte[]> owned = new ArrayList<>();
-    int units, stats;
+    int units;
+    int stats;
 
     public long pid() {
       return 200;

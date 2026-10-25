@@ -1,6 +1,9 @@
 package dev.codex.schubert.nk.web.security;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import dev.codex.schubert.nk.web.logging.WebSecurityAudit;
 import jakarta.servlet.http.HttpServletRequestWrapper;

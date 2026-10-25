@@ -1,12 +1,24 @@
 package dev.codex.schubert.nk.bootstrap;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import dev.codex.schubert.nk.storage.*;
+import dev.codex.schubert.nk.storage.LinuxStartupAdmission;
+import dev.codex.schubert.nk.storage.ServiceConfigFiles;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
-import java.util.*;
-import java.util.concurrent.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 import org.junit.jupiter.api.Test;
 
 /** PT-OPS-STARTADMIT-001..008. Independent literal packet; callback factory ordering, not R2. */
@@ -68,7 +80,9 @@ final class ServiceStartupAdmissionTest {
       implements ServiceStartupAdmission.DescriptorGate, ServiceStartupAdmission.Observation {
     final List<String> order = new ArrayList<>();
     Map<String, String> env = ENV;
-    String proof = GOLDEN, release = "b".repeat(64), config = "c".repeat(64);
+    String proof = GOLDEN;
+    String release = "b".repeat(64);
+    String config = "c".repeat(64);
     ServiceConfigFiles.Service service = ServiceConfigFiles.Service.API;
     LinuxStartupAdmission.Identity admission = new LinuxStartupAdmission.Identity(128, 123, 456);
     ChildStartupContext.Observed self =
@@ -82,11 +96,16 @@ final class ServiceStartupAdmissionTest {
             "0::/system.slice/schubert-nk-api.service\n",
             true,
             true);
-    boolean gateFails, closeFails, changed;
+    boolean gateFails;
+    boolean closeFails;
+    boolean changed;
     String ioFault = "";
     RuntimeException unknown;
     Throwable readyFault;
-    int captures, factories, releases, finalCloses;
+    int captures;
+    int factories;
+    int releases;
+    int finalCloses;
 
     ServiceStartupAdmission subject() {
       return new ServiceStartupAdmission(service, env, config, this, this);

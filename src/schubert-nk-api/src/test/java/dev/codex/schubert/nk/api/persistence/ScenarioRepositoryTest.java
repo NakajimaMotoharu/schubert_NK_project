@@ -1,6 +1,11 @@
 package dev.codex.schubert.nk.api.persistence;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import dev.codex.schubert.nk.api.application.scenario.ScenarioQuerySnapshot;
 import dev.codex.schubert.nk.api.application.scenario.ScenarioRequest;
@@ -10,18 +15,50 @@ import dev.codex.schubert.nk.api.logging.ApiLogDatabaseFixture;
 import dev.codex.schubert.nk.api.security.AuthenticatedActor;
 import dev.codex.schubert.nk.protocol.codec.PayloadCodec;
 import dev.codex.schubert.nk.protocol.header.ResultCode;
-import dev.codex.schubert.nk.protocol.layout.*;
-import dev.codex.schubert.nk.protocol.layout.scenario.*;
-import dev.codex.schubert.nk.protocol.layout.semantic.*;
+import dev.codex.schubert.nk.protocol.layout.FieldValueSet;
+import dev.codex.schubert.nk.protocol.layout.FixedPayload;
+import dev.codex.schubert.nk.protocol.layout.LayoutId;
+import dev.codex.schubert.nk.protocol.layout.PayloadSemanticValidator;
+import dev.codex.schubert.nk.protocol.layout.PayloadTypeCatalog;
+import dev.codex.schubert.nk.protocol.layout.PayloadValues;
+import dev.codex.schubert.nk.protocol.layout.TypedPayloadValues;
+import dev.codex.schubert.nk.protocol.layout.scenario.RouteListRequestData;
+import dev.codex.schubert.nk.protocol.layout.scenario.RouteRecord;
+import dev.codex.schubert.nk.protocol.layout.scenario.ScenarioDetailRequestData;
+import dev.codex.schubert.nk.protocol.layout.scenario.ScenarioDetailResponseData;
+import dev.codex.schubert.nk.protocol.layout.scenario.ScenarioEntryRecord;
+import dev.codex.schubert.nk.protocol.layout.scenario.ScenarioFileListRequestData;
+import dev.codex.schubert.nk.protocol.layout.scenario.ScenarioSearchRecord;
+import dev.codex.schubert.nk.protocol.layout.scenario.ScenarioSearchRequestData;
+import dev.codex.schubert.nk.protocol.layout.scenario.SpeakerListRequestData;
+import dev.codex.schubert.nk.protocol.layout.semantic.AudioId;
+import dev.codex.schubert.nk.protocol.layout.semantic.DeliveryMode;
+import dev.codex.schubert.nk.protocol.layout.semantic.DisplayPath;
+import dev.codex.schubert.nk.protocol.layout.semantic.EntryType;
+import dev.codex.schubert.nk.protocol.layout.semantic.GameCode;
+import dev.codex.schubert.nk.protocol.layout.semantic.ScriptFileId;
+import dev.codex.schubert.nk.protocol.layout.semantic.VoiceCondition;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
-import java.sql.*;
-import java.util.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.Locale;
+import java.util.Optional;
 import java.util.concurrent.atomic.AtomicInteger;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 /**
@@ -33,7 +70,8 @@ final class ScenarioRepositoryTest {
   private static final ScenarioRepository REPOSITORY = new ScenarioRepository();
   private static final AuthenticatedActor USER = new AuthenticatedActor(7, "reader", Role.USER);
   private static final AuthenticatedActor ADMIN = new AuthenticatedActor(8, "admin", Role.ADMIN);
-  private static final GameCode G1 = GameCode.NUKITASHI_1, G2 = GameCode.NUKITASHI_2;
+  private static final GameCode G1 = GameCode.NUKITASHI_1;
+  private static final GameCode G2 = GameCode.NUKITASHI_2;
 
   @BeforeAll
   static void start() throws Exception {
@@ -343,9 +381,10 @@ final class ScenarioRepositoryTest {
           """
               .formatted(count));
       for (int requested : new int[] {1, 2, 999999}) {
-        int pages = Math.max(1, (count + 99) / 100), effective = Math.min(requested, pages);
-        long first = count == 0 ? 0 : (effective - 1) * 100L + 1,
-            last = Math.min(effective * 100L, count);
+        int pages = Math.max(1, (count + 99) / 100);
+        int effective = Math.min(requested, pages);
+        long first = count == 0 ? 0 : (effective - 1) * 100L + 1;
+        long last = Math.min(effective * 100L, count);
         try (Connection c = read()) {
           AtomicInteger statements = new AtomicInteger();
           Connection spy =

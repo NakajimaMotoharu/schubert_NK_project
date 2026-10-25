@@ -1,6 +1,12 @@
 package dev.codex.schubert.nk.web.session;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import dev.codex.schubert.nk.protocol.header.AuthenticationContext;
 import dev.codex.schubert.nk.protocol.layout.semantic.UserRole;
@@ -17,17 +23,40 @@ import java.security.MessageDigest;
 import java.security.ProviderException;
 import java.security.SecureRandom;
 import java.security.Security;
-import java.sql.*;
-import java.time.*;
-import java.util.*;
-import java.util.concurrent.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.time.Clock;
+import java.time.Instant;
+import java.time.ZoneId;
+import java.time.ZoneOffset;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Base64;
+import java.util.HashSet;
+import java.util.HexFormat;
+import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.Set;
+import java.util.UUID;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicLong;
 import javax.crypto.Cipher;
 import javax.crypto.spec.GCMParameterSpec;
 import javax.crypto.spec.SecretKeySpec;
 import javax.sql.DataSource;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 /**
@@ -801,14 +830,20 @@ class EncryptedWebSessionRepositoryTest {
     final MutableClock clock = new MutableClock();
     final SequenceRandom random = new SequenceRandom();
     final AtomicLong ids = new AtomicLong();
-    final AtomicInteger live = new AtomicInteger(),
-        commits = new AtomicInteger(),
-        rollbacks = new AtomicInteger();
+    final AtomicInteger live = new AtomicInteger();
+    final AtomicInteger commits = new AtomicInteger();
+    final AtomicInteger rollbacks = new AtomicInteger();
     final ConcurrentMap<Thread, Integer> threadLive = new ConcurrentHashMap<>();
-    volatile String failure = "", runtimeFailure = "";
+    volatile String failure = "";
+    volatile String runtimeFailure = "";
     String nullColumn = "";
-    Integer deleteCount, updateCount;
-    boolean nullConnection, hit, rollbackFailure, rollbackHit, runtimeHit;
+    Integer deleteCount;
+    Integer updateCount;
+    boolean nullConnection;
+    boolean hit;
+    boolean rollbackFailure;
+    boolean rollbackHit;
+    boolean runtimeHit;
     final DataSource source =
         DataSource.class.cast(
             Proxy.newProxyInstance(

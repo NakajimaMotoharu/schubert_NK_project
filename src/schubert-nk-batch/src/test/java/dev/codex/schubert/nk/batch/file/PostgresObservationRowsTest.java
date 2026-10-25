@@ -1,6 +1,8 @@
 package dev.codex.schubert.nk.batch.file;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import dev.codex.schubert.nk.api.bootstrap.SchemaHistoryAdmission;
 import dev.codex.schubert.nk.batch.platform.RootReleaseAdmission;
@@ -23,7 +25,8 @@ import org.junit.jupiter.api.Test;
 
 /** SS343SSC129; PG-D508; PT-OPS-PG-ROWS-001. Serialization only, never DB/admission/issuer IO. */
 final class PostgresObservationRowsTest {
-  private static final String MORNING = "1".repeat(32), BROKER = "2".repeat(32);
+  private static final String MORNING = "1".repeat(32);
+  private static final String BROKER = "2".repeat(32);
   private static final StartupPermitRecords.Epoch EPOCH =
       new StartupPermitRecords.Epoch(
           StartupPermitRecords.State.INVALID,

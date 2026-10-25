@@ -1,6 +1,11 @@
 package dev.codex.schubert.nk.api.storage;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import dev.codex.schubert.nk.api.error.CapacityExceededException;
 import dev.codex.schubert.nk.storage.DirectoryCalls;
@@ -34,7 +39,8 @@ class TransferUsageScannerTest {
   void u01LiteralSizesAcrossDatesAndReplacedRootInitializeCapacityWithoutWriting()
       throws Exception {
     Path root = directory(fixture.resolve("root"));
-    Path first = directory(root.resolve("20260907")), second = directory(root.resolve("20260908"));
+    Path first = directory(root.resolve("20260907"));
+    Path second = directory(root.resolve("20260908"));
     directory(root.resolve("20260909"));
     file(first, 1, "part", 0);
     file(first, 2, "part", 1);
@@ -137,7 +143,8 @@ class TransferUsageScannerTest {
 
   @Test
   void u02HeldMetadataRejectsWrongModesLinksAndInvalidReadySizeWithoutDeleting() throws Exception {
-    Path root = directory(fixture.resolve("root")), day = directory(root.resolve("20260908"));
+    Path root = directory(fixture.resolve("root"));
+    Path day = directory(root.resolve("20260908"));
     Path ready = file(day, 1, "ready", 4800);
     var calls = new ReadCalls();
     try (var held = OwnedTransferDirectory.open(calls, root)) {
@@ -177,7 +184,8 @@ class TransferUsageScannerTest {
   @Test
   void u03EnumerationOpenIteratorCloseAndNativeCloseFaultsNeverReturnPartialUsage()
       throws Exception {
-    Path root = directory(fixture.resolve("root")), day = directory(root.resolve("20260908"));
+    Path root = directory(fixture.resolve("root"));
+    Path day = directory(root.resolve("20260908"));
     file(day, 1, "part", 1);
     var calls = new ReadCalls();
     try (var held = OwnedTransferDirectory.open(calls, root)) {
@@ -207,7 +215,8 @@ class TransferUsageScannerTest {
   @Test
   void u03RetainedDateSurvivesReplacementDuringEnumerationWithoutFollowingTheNewSymlink()
       throws Exception {
-    Path root = directory(fixture.resolve("root")), day = directory(root.resolve("20260908"));
+    Path root = directory(fixture.resolve("root"));
+    Path day = directory(root.resolve("20260908"));
     file(day, 1, "part", 1);
     Path outside = directory(fixture.resolve("outside"));
     file(outside, 2, "ready", 4800);
@@ -267,7 +276,9 @@ class TransferUsageScannerTest {
   private static final class FaultEntries implements TransferUsageScanner.DirectoryEntries {
     final int target;
     final String kind;
-    int calls, opened, closed;
+    int calls;
+    int opened;
+    int closed;
 
     FaultEntries(int target, String kind) {
       this.target = target;
@@ -328,7 +339,8 @@ class TransferUsageScannerTest {
 
   private static final class ReadCalls implements DirectoryCalls {
     final DirectoryCalls delegate = LinuxDirectoryCalls.create();
-    final Set<Integer> live = new HashSet<>(), dates = new HashSet<>();
+    final Set<Integer> live = new HashSet<>();
+    final Set<Integer> dates = new HashSet<>();
     boolean failDateClose;
 
     @Override

@@ -1,42 +1,69 @@
 package dev.codex.schubert.nk.api.application.media;
 
-import static dev.codex.schubert.nk.api.application.media.MediaReplayFixture.*;
-import static dev.codex.schubert.nk.api.application.media.MediaRequestFixture.*;
-import static org.junit.jupiter.api.Assertions.*;
+import static dev.codex.schubert.nk.api.application.media.MediaReplayFixture.SHA;
+import static dev.codex.schubert.nk.api.application.media.MediaReplayFixture.codec;
+import static dev.codex.schubert.nk.api.application.media.MediaReplayFixture.key;
+import static dev.codex.schubert.nk.api.application.media.MediaReplayFixture.maximum;
+import static dev.codex.schubert.nk.api.application.media.MediaReplayFixture.wire;
+import static dev.codex.schubert.nk.api.application.media.MediaRequestFixture.data;
+import static dev.codex.schubert.nk.api.application.media.MediaRequestFixture.message;
+import static dev.codex.schubert.nk.api.application.media.MediaRequestFixture.put;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import dev.codex.schubert.nk.api.file.MediaFileInspector;
-import dev.codex.schubert.nk.api.idempotency.*;
+import dev.codex.schubert.nk.api.idempotency.FingerprintKeyRing;
+import dev.codex.schubert.nk.api.idempotency.JdbcInboxCoordinator;
+import dev.codex.schubert.nk.api.idempotency.ResponseSnapshotCodec;
 import dev.codex.schubert.nk.api.logging.ApiLogDatabaseFixture;
 import dev.codex.schubert.nk.api.persistence.MediaRepository;
 import dev.codex.schubert.nk.api.security.AuthenticationContextVerifier;
 import dev.codex.schubert.nk.api.security.ContextHash;
-import dev.codex.schubert.nk.protocol.layout.*;
+import dev.codex.schubert.nk.protocol.layout.FixedPayload;
+import dev.codex.schubert.nk.protocol.layout.WireMessage;
 import java.io.IOException;
-import java.lang.reflect.*;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.lang.reflect.Proxy;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
-import java.sql.*;
-import java.time.*;
-import java.util.*;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.time.Clock;
+import java.time.Instant;
+import java.time.ZoneId;
+import java.time.ZoneOffset;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HexFormat;
+import java.util.List;
+import java.util.UUID;
 import java.util.concurrent.CopyOnWriteArrayList;
-import java.util.concurrent.atomic.*;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicLong;
+import java.util.concurrent.atomic.AtomicReference;
 import javax.sql.DataSource;
 
 /** Real PG roles/transactions, independent SQL postconditions and UI232/235 expected bytes. */
 final class MediaStageFixture implements AutoCloseable {
   static final Instant NOW = Instant.parse("2026-09-08T00:01:00Z");
   final ApiLogDatabaseFixture database;
-  final AtomicInteger live = new AtomicInteger(),
-      opens = new AtomicInteger(),
-      inspections = new AtomicInteger();
+  final AtomicInteger live = new AtomicInteger();
+  final AtomicInteger opens = new AtomicInteger();
+  final AtomicInteger inspections = new AtomicInteger();
   final AtomicLong ids = new AtomicLong();
   final AtomicInteger clockCalls = new AtomicInteger();
   final AtomicReference<Instant> now = new AtomicReference<>(NOW);
   final List<Boolean> modes = new CopyOnWriteArrayList<>();
-  int faultConnection = 1, clockFaultAt, identifierFaultAt;
+  int faultConnection = 1;
+  int clockFaultAt;
+  int identifierFaultAt;
   String fault = "none";
-  boolean nullClock, nullIdentifier;
-  Action beforeOpen = () -> {}, duringFile = () -> {};
+  boolean nullClock;
+  boolean nullIdentifier;
+  Action beforeOpen = () -> {};
+  Action duringFile = () -> {};
   MediaFileInspector physical = descriptor -> {};
   final FingerprintKeyRing keys = new FingerprintKeyRing("fp1", key(), null, null);
   final ResponseSnapshotCodec snapshots = codec();
@@ -285,7 +312,8 @@ final class MediaStageFixture implements AutoCloseable {
     boolean video = prefix.equals("ANM") || prefix.equals("ANL");
     String category = video ? "'MAIN'" : prefix.equals("MCT") ? "'分類'||i" : "'BGM'";
     String section = video ? "NULL" : prefix.equals("MCS") ? "'区分'||i" : "'ゲーム'";
-    String pathRoot = video ? "video/" : "music/", suffix = video ? ".mp4" : ".ogg";
+    String pathRoot = video ? "video/" : "music/";
+    String suffix = video ? ".mp4" : ".ogg";
     sql(
         "insert into schubert.media_assets(id,logical_id,media_type,title,category,section,storage_relative_path,display_path,file_name,byte_size,sha256,mime_type,pair_role,display_order,created_at) select i,'id-'||i,'"
             + (video ? "VIDEO" : "MUSIC")

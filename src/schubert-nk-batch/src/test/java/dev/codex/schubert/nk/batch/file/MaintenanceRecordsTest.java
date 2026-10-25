@@ -1,6 +1,11 @@
 package dev.codex.schubert.nk.batch.file;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNotSame;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import dev.codex.schubert.nk.batch.repository.BatchRun;
 import dev.codex.schubert.nk.batch.repository.MaintenanceActivation;
@@ -12,8 +17,15 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.time.Instant;
 import java.time.LocalDate;
-import java.util.*;
-import java.util.concurrent.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Locale;
+import java.util.UUID;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
 
@@ -217,7 +229,9 @@ final class MaintenanceRecordsTest {
 
   @Test
   void ownershipAndRedaction() throws Exception {
-    byte[] anchor = ascii(ANCHOR), activation = ascii(ACTIVATION), done = ascii(DONE + "0\n");
+    byte[] anchor = ascii(ANCHOR);
+    byte[] activation = ascii(ACTIVATION);
+    byte[] done = ascii(DONE + "0\n");
     var readRun = MaintenanceRecords.readAnchor(anchor);
     var readActive = MaintenanceRecords.readActivation(activation);
     var readDone = MaintenanceRecords.readCompletion(done);
@@ -230,7 +244,8 @@ final class MaintenanceRecordsTest {
     assertEquals(RUN, readRun);
     assertEquals(ACTIVE, readActive);
     assertEquals(Instant.parse(END), readDone.endedAt());
-    byte[] first = MaintenanceRecords.anchor(RUN), second = MaintenanceRecords.anchor(RUN);
+    byte[] first = MaintenanceRecords.anchor(RUN);
+    byte[] second = MaintenanceRecords.anchor(RUN);
     assertNotSame(first, second);
     first[0] = 'X';
     assertArrayEquals(ascii(ANCHOR), second);

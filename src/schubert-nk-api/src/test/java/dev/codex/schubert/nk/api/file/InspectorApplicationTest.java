@@ -1,20 +1,42 @@
 package dev.codex.schubert.nk.api.file;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import dev.codex.schubert.nk.api.file.InspectorCredentialLoaderTest.Fixture;
 import dev.codex.schubert.nk.api.file.InspectorCredentialLoaderTest.TestIo;
 import dev.codex.schubert.nk.api.file.InspectorCredentialLoaderTest.TestSecurity;
 import dev.codex.schubert.nk.api.logging.ApiLogDatabaseFixture;
-import dev.codex.schubert.nk.api.maintenance.*;
-import dev.codex.schubert.nk.storage.*;
+import dev.codex.schubert.nk.api.maintenance.InspectionExecution;
+import dev.codex.schubert.nk.api.maintenance.InspectionProgress;
+import dev.codex.schubert.nk.api.maintenance.InspectionRun;
+import dev.codex.schubert.nk.api.maintenance.InspectorSettings;
+import dev.codex.schubert.nk.storage.DirectoryCalls;
+import dev.codex.schubert.nk.storage.LinuxDirectoryCalls;
+import dev.codex.schubert.nk.storage.OwnedTransferDirectory;
+import dev.codex.schubert.nk.storage.StorageIoException;
 import java.io.IOException;
-import java.nio.file.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.sql.SQLException;
 import java.time.Instant;
-import java.util.*;
-import java.util.concurrent.*;
-import org.junit.jupiter.api.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Optional;
+import java.util.Set;
+import java.util.UUID;
+import java.util.concurrent.Callable;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 /** PT-DB-INBOX-212..220: real file/native/JDBC composition, explicitly synthetic OS admission. */
@@ -422,9 +444,11 @@ final class InspectorApplicationTest {
 
   private static final class Calls implements DirectoryCalls {
     final DirectoryCalls actual = LinuxDirectoryCalls.create();
-    final Set<Integer> live = new HashSet<>(), finals = new HashSet<>();
+    final Set<Integer> live = new HashSet<>();
+    final Set<Integer> finals = new HashSet<>();
     final String leaf;
-    boolean failOpen, failFinalClose;
+    boolean failOpen;
+    boolean failFinalClose;
     int finalCloses;
 
     Calls(Path root) {

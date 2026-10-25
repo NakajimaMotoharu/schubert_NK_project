@@ -1,35 +1,69 @@
 package dev.codex.schubert.nk.api.application.question;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import dev.codex.schubert.nk.api.error.TemporaryInfrastructureException;
-import dev.codex.schubert.nk.api.idempotency.*;
+import dev.codex.schubert.nk.api.idempotency.FingerprintKeyRing;
+import dev.codex.schubert.nk.api.idempotency.JdbcInboxCoordinator;
+import dev.codex.schubert.nk.api.idempotency.ResponseSnapshotCodec;
+import dev.codex.schubert.nk.api.idempotency.ResultBoundResponseSnapshotCodec;
 import dev.codex.schubert.nk.api.logging.ApiLogDatabaseFixture;
-import dev.codex.schubert.nk.api.messaging.outbound.*;
-import dev.codex.schubert.nk.api.security.*;
+import dev.codex.schubert.nk.api.messaging.outbound.JdbcOutboxRepository;
+import dev.codex.schubert.nk.api.messaging.outbound.OutboxDispatcher;
+import dev.codex.schubert.nk.api.messaging.outbound.OutboxJmsSender;
+import dev.codex.schubert.nk.api.messaging.outbound.OwnedOutboxDispatcher;
+import dev.codex.schubert.nk.api.security.AuthenticationContextVerifier;
+import dev.codex.schubert.nk.api.security.ContextHash;
 import dev.codex.schubert.nk.protocol.codec.PermanentProtocolException;
-import dev.codex.schubert.nk.protocol.header.*;
-import dev.codex.schubert.nk.protocol.layout.*;
+import dev.codex.schubert.nk.protocol.header.AuthenticationContext;
+import dev.codex.schubert.nk.protocol.header.CommonHeader;
+import dev.codex.schubert.nk.protocol.header.InteractionKind;
+import dev.codex.schubert.nk.protocol.header.MessageKind;
+import dev.codex.schubert.nk.protocol.layout.FixedPayload;
+import dev.codex.schubert.nk.protocol.layout.LayoutId;
+import dev.codex.schubert.nk.protocol.layout.WireMessage;
 import jakarta.jms.BytesMessage;
 import jakarta.jms.DeliveryMode;
 import jakarta.jms.JMSContext;
-import java.lang.reflect.*;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.lang.reflect.Proxy;
 import java.nio.charset.StandardCharsets;
-import java.nio.file.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.security.MessageDigest;
-import java.sql.*;
-import java.time.*;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.time.Clock;
+import java.time.Instant;
+import java.time.ZoneId;
+import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
-import java.util.*;
-import java.util.concurrent.*;
-import java.util.concurrent.atomic.*;
+import java.util.Arrays;
+import java.util.HexFormat;
+import java.util.List;
+import java.util.Locale;
+import java.util.Objects;
+import java.util.Optional;
+import java.util.UUID;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicLong;
 import javax.sql.DataSource;
 import org.apache.activemq.artemis.core.config.Configuration;
 import org.apache.activemq.artemis.core.deployers.impl.FileConfigurationParser;
 import org.apache.activemq.artemis.core.server.embedded.EmbeddedActiveMQ;
 import org.apache.activemq.artemis.jms.client.ActiveMQConnectionFactory;
 import org.apache.activemq.artemis.jms.client.ActiveMQQueue;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 /** Real PG18 and Artemis, literal UI236 offsets; no production-generated expected wire. */
@@ -37,8 +71,10 @@ class QuestionSubmissionServiceTest {
   @TempDir static Path root;
   static ApiLogDatabaseFixture db;
   static final Instant NOW = Instant.parse("2026-10-01T00:00:00.123456Z");
-  static final UUID M0 = new UUID(701, 1), TOKEN = new UUID(702, 1);
-  static final String RECEIPT = "0".repeat(26), CONTEXT = "b".repeat(64);
+  static final UUID M0 = new UUID(701, 1);
+  static final UUID TOKEN = new UUID(702, 1);
+  static final String RECEIPT = "0".repeat(26);
+  static final String CONTEXT = "b".repeat(64);
 
   @BeforeAll
   static void start() throws Exception {
@@ -386,7 +422,8 @@ class QuestionSubmissionServiceTest {
 
   static final class Fixture implements AutoCloseable {
     final ApiLogDatabaseFixture database;
-    final AtomicInteger live = new AtomicInteger(), ids = new AtomicInteger();
+    final AtomicInteger live = new AtomicInteger();
+    final AtomicInteger ids = new AtomicInteger();
     final AtomicLong nanos = new AtomicLong();
     long nanoStep;
     final Clock clock = Clock.fixed(NOW, ZoneOffset.UTC);
@@ -395,7 +432,8 @@ class QuestionSubmissionServiceTest {
     final ResponseSnapshotCodec snapshots =
         new ResponseSnapshotCodec("test", new byte[32], null, null);
     QuestionReceiptIdGenerator receipts = new QuestionReceiptIdGenerator(bound -> 0);
-    String fault = "none", prepareFault = "none";
+    String fault = "none";
+    String prepareFault = "none";
     Runnable signal = () -> {};
     final DataSource source;
     final QuestionSubmissionService service;

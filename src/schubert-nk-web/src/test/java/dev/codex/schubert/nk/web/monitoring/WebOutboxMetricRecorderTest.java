@@ -308,7 +308,9 @@ class WebOutboxMetricRecorderTest {
       var oracle = new IdentityHashMap<Observation, long[]>();
       var tasks = new ArrayList<Callable<Void>>();
       for (int i = 1; i <= 64; i++) {
-        long p = i, s = i + 1L, e = i + 2L;
+        long p = i;
+        long s = i + 1L;
+        long e = i + 2L;
         var sample =
             new Observation(
                 p, s, e, Duration.ofSeconds(p), Duration.ofSeconds(s), Duration.ofSeconds(e));

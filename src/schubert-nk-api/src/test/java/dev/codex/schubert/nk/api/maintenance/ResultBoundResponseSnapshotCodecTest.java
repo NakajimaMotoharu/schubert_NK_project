@@ -1,14 +1,33 @@
 package dev.codex.schubert.nk.api.maintenance;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import dev.codex.schubert.nk.api.idempotency.*;
-import java.io.*;
+import dev.codex.schubert.nk.api.idempotency.EncryptedResponseSnapshot;
+import dev.codex.schubert.nk.api.idempotency.InboxCompletionState;
+import dev.codex.schubert.nk.api.idempotency.InboxResultReference;
+import dev.codex.schubert.nk.api.idempotency.InboxResultReferenceType;
+import dev.codex.schubert.nk.api.idempotency.ResponseSnapshotCodec;
+import dev.codex.schubert.nk.api.idempotency.ResponseSnapshotException;
+import dev.codex.schubert.nk.api.idempotency.ResponseSnapshotIdentity;
+import dev.codex.schubert.nk.api.idempotency.ResultBoundResponseSnapshotCodec;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.charset.StandardCharsets;
 import java.security.SecureRandom;
 import java.time.Instant;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HexFormat;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 import java.util.concurrent.Callable;
 import java.util.concurrent.Executors;
 import java.util.zip.InflaterInputStream;
@@ -20,7 +39,8 @@ import org.junit.jupiter.api.Test;
 /** PT-DB-INBOX-169..176; SS352 11.2.1/SSC-052/PG-D-140; no real credential or business DB. */
 final class ResultBoundResponseSnapshotCodecTest {
   private static final List<String> ROUTES = List.of("QSBRSP01", "NTCRSP01", "QDLRSP01");
-  private static final UUID MESSAGE = new UUID(0, 1), TOKEN = new UUID(0, 5);
+  private static final UUID MESSAGE = new UUID(0, 1);
+  private static final UUID TOKEN = new UUID(0, 5);
   private static final Instant TIME = Instant.parse("2026-09-09T00:00:00.123Z");
 
   @Test
@@ -30,7 +50,8 @@ final class ResultBoundResponseSnapshotCodecTest {
       for (String route : ROUTES)
         for (long target : new long[] {1, 999_999_999_999L})
           for (UUID token : List.of(new UUID(0, 0), new UUID(-1, -1))) {
-            byte[] wire = wire(route, 42), expected = plain(route, target, token, wire);
+            byte[] wire = wire(route, 42);
+            byte[] expected = plain(route, target, token, wire);
             var encrypted = codec.encrypt(id(route), ref(route, target), token, wire);
             assertArrayEquals(expected, independentDecrypt(f.key, id(route), encrypted));
             var independentlySaved = saved(f, id(route), expected);
@@ -105,7 +126,8 @@ final class ResultBoundResponseSnapshotCodecTest {
     try (var f = new InboxResponseInspectorTest.Fixture()) {
       var codec = new ResultBoundResponseSnapshotCodec(f.codec);
       for (String route : ROUTES) {
-        byte[] wire = wire(route, 3), original = plain(route, 9, TOKEN, wire);
+        byte[] wire = wire(route, 3);
+        byte[] original = plain(route, 9, TOKEN, wire);
         for (int position = 0; position < 35; position++) {
           byte[] changed = original.clone();
           changed[position] ^= 1;
@@ -210,7 +232,8 @@ final class ResultBoundResponseSnapshotCodecTest {
     try (var f = new InboxResponseInspectorTest.Fixture()) {
       var codec = new ResultBoundResponseSnapshotCodec(f.codec);
       String route = "NTCRSP01";
-      byte[] input = wire(route, 6), before = input.clone();
+      byte[] input = wire(route, 6);
+      byte[] before = input.clone();
       var snapshot = codec.encrypt(id(route), ref(route, 9), TOKEN, input);
       assertArrayEquals(before, input);
       byte[] first = codec.decrypt(id(route), ref(route, 9), TOKEN, snapshot);

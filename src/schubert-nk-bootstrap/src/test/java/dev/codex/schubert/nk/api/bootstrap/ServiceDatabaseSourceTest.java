@@ -1,6 +1,12 @@
 package dev.codex.schubert.nk.api.bootstrap;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import dev.codex.schubert.nk.api.logging.ApiLogDatabaseFixture;
 import dev.codex.schubert.nk.storage.ServiceConfigFiles;
@@ -78,7 +84,8 @@ final class ServiceDatabaseSourceTest {
 
   @Test
   void opsDbsource002EveryPhysicalPoolConnectionIsAdmitted() throws Exception {
-    AtomicInteger created = new AtomicInteger(), admitted = new AtomicInteger();
+    AtomicInteger created = new AtomicInteger();
+    AtomicInteger admitted = new AtomicInteger();
     AtomicReference<Properties> supplied = new AtomicReference<>();
     var connector =
         (ServiceDatabaseSource.Connector)

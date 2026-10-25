@@ -1,34 +1,77 @@
 package dev.codex.schubert.nk.api.application.question;
 
-import static dev.codex.schubert.nk.api.application.question.QuestionSubmissionServiceTest.*;
-import static org.junit.jupiter.api.Assertions.*;
+import static dev.codex.schubert.nk.api.application.question.QuestionSubmissionServiceTest.CONTEXT;
+import static dev.codex.schubert.nk.api.application.question.QuestionSubmissionServiceTest.Fixture;
+import static dev.codex.schubert.nk.api.application.question.QuestionSubmissionServiceTest.M0;
+import static dev.codex.schubert.nk.api.application.question.QuestionSubmissionServiceTest.NOW;
+import static dev.codex.schubert.nk.api.application.question.QuestionSubmissionServiceTest.RECEIPT;
+import static dev.codex.schubert.nk.api.application.question.QuestionSubmissionServiceTest.TOKEN;
+import static dev.codex.schubert.nk.api.application.question.QuestionSubmissionServiceTest.broker;
+import static dev.codex.schubert.nk.api.application.question.QuestionSubmissionServiceTest.invoke;
+import static dev.codex.schubert.nk.api.application.question.QuestionSubmissionServiceTest.request;
+import static dev.codex.schubert.nk.api.application.question.QuestionSubmissionServiceTest.response;
+import static dev.codex.schubert.nk.api.application.question.QuestionSubmissionServiceTest.work;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import dev.codex.schubert.nk.api.error.TemporaryInfrastructureException;
 import dev.codex.schubert.nk.api.logging.ApiLogDatabaseFixture;
-import dev.codex.schubert.nk.api.messaging.inbound.*;
-import dev.codex.schubert.nk.api.messaging.outbound.*;
-import dev.codex.schubert.nk.protocol.codec.*;
-import dev.codex.schubert.nk.protocol.layout.*;
+import dev.codex.schubert.nk.api.messaging.inbound.DeliveryMetadata;
+import dev.codex.schubert.nk.api.messaging.inbound.QuestionWorkListener;
+import dev.codex.schubert.nk.api.messaging.outbound.JdbcOutboxRepository;
+import dev.codex.schubert.nk.api.messaging.outbound.OutboxDispatcher;
+import dev.codex.schubert.nk.api.messaging.outbound.OutboxJmsSender;
+import dev.codex.schubert.nk.api.messaging.outbound.OwnedOutboxDispatcher;
+import dev.codex.schubert.nk.protocol.codec.HeaderCodec;
+import dev.codex.schubert.nk.protocol.codec.PermanentProtocolException;
+import dev.codex.schubert.nk.protocol.layout.FixedPayload;
+import dev.codex.schubert.nk.protocol.layout.WireMessage;
 import jakarta.jms.BytesMessage;
 import jakarta.jms.JMSContext;
 import java.lang.reflect.Proxy;
 import java.nio.file.Path;
-import java.sql.*;
-import java.time.*;
-import java.util.*;
-import java.util.concurrent.*;
-import java.util.concurrent.atomic.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.time.Clock;
+import java.time.Instant;
+import java.time.ZoneId;
+import java.time.ZoneOffset;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.UUID;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicInteger;
 import javax.sql.DataSource;
 import org.apache.activemq.artemis.jms.client.ActiveMQConnectionFactory;
 import org.apache.activemq.artemis.jms.client.ActiveMQQueue;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 /** AWORK001..006: real PG18 and JMS, independently literal QWK/SQL; not Linux IT/ST. */
 class QuestionWorkerServiceTest {
   @TempDir static Path databaseRoot;
   static ApiLogDatabaseFixture database;
-  static final UUID W = new UUID(700, 1), D = new UUID(900, 1);
+  static final UUID W = new UUID(700, 1);
+  static final UUID D = new UUID(900, 1);
 
   @BeforeAll
   static void start() throws Exception {
@@ -410,7 +453,8 @@ class QuestionWorkerServiceTest {
           h.signal = owned::wake;
           worker.process(event(), delivery(5));
           Set<String> transports = new HashSet<>();
-          int application = 0, brokerOnly = 0;
+          int application = 0;
+          int brokerOnly = 0;
           for (int copy = 0; copy < 2; copy++) {
             BytesMessage physical = (BytesMessage) dlq.receive(2000);
             assertNotNull(physical);

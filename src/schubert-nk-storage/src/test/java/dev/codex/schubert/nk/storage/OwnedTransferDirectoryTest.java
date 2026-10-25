@@ -1,6 +1,13 @@
 package dev.codex.schubert.nk.storage;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
@@ -667,9 +674,9 @@ class OwnedTransferDirectoryTest {
     try (var parent = OwnedTransferDirectory.open(calls, root);
         var executor = Executors.newFixedThreadPool(2)) {
       var child = parent.openDate(DATE);
-      CountDownLatch entered = new CountDownLatch(1),
-          release = new CountDownLatch(1),
-          closing = new CountDownLatch(1);
+      CountDownLatch entered = new CountDownLatch(1);
+      CountDownLatch release = new CountDownLatch(1);
+      CountDownLatch closing = new CountDownLatch(1);
       AtomicBoolean closed = new AtomicBoolean();
       var file =
           executor.submit(
@@ -824,8 +831,12 @@ class OwnedTransferDirectoryTest {
     final DirectoryCalls delegate = LinuxDirectoryCalls.create();
     final Set<Integer> live = new HashSet<>();
     int closes;
-    boolean failClose, failCreate, failSync, readOnly;
-    Throwable openFailure, closeFailure;
+    boolean failClose;
+    boolean failCreate;
+    boolean failSync;
+    boolean readOnly;
+    Throwable openFailure;
+    Throwable closeFailure;
 
     @Override
     public int openRoot() throws StorageIoException {

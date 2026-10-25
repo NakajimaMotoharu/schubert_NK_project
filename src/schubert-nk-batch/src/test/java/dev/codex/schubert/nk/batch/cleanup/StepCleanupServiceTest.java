@@ -1,16 +1,47 @@
 package dev.codex.schubert.nk.batch.cleanup;
 
-import static dev.codex.schubert.nk.batch.repository.CleanupStepFixture.*;
-import static org.junit.jupiter.api.Assertions.*;
+import static dev.codex.schubert.nk.batch.repository.CleanupStepFixture.KINDS;
+import static dev.codex.schubert.nk.batch.repository.CleanupStepFixture.Probe;
+import static dev.codex.schubert.nk.batch.repository.CleanupStepFixture.RUN;
+import static dev.codex.schubert.nk.batch.repository.CleanupStepFixture.START;
+import static dev.codex.schubert.nk.batch.repository.CleanupStepFixture.attempt;
+import static dev.codex.schubert.nk.batch.repository.CleanupStepFixture.locked;
+import static dev.codex.schubert.nk.batch.repository.CleanupStepFixture.query;
+import static dev.codex.schubert.nk.batch.repository.CleanupStepFixture.repositoryInventory;
+import static dev.codex.schubert.nk.batch.repository.CleanupStepFixture.reset;
+import static dev.codex.schubert.nk.batch.repository.CleanupStepFixture.sql;
+import static dev.codex.schubert.nk.batch.repository.CleanupStepFixture.totals;
+import static dev.codex.schubert.nk.batch.repository.CleanupStepFixture.trace;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import dev.codex.schubert.nk.batch.repository.*;
+import dev.codex.schubert.nk.batch.repository.BatchDatabaseFixture;
+import dev.codex.schubert.nk.batch.repository.BatchRepositoryException;
+import dev.codex.schubert.nk.batch.repository.BatchStep;
+import dev.codex.schubert.nk.batch.repository.BatchStepAttempt;
+import dev.codex.schubert.nk.batch.repository.CleanupCounts;
+import dev.codex.schubert.nk.batch.repository.CleanupKind;
 import java.nio.file.Path;
-import java.sql.*;
-import java.util.*;
-import java.util.concurrent.*;
-import java.util.concurrent.atomic.*;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.TreeMap;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.LongSupplier;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 /** NK-BAT-001/OPS009/DAT009/UI251/SS331 3.14/332/341; SSC057/PG164; BAT170..177. */
@@ -152,7 +183,8 @@ final class StepCleanupServiceTest {
 
   @Test
   void allKindsCompleteAndPersistedCounts() throws Exception {
-    long[] delta = {1, 1, 3, 2, 1, 1, 1}, total = {1, 1, 3, 2, 1, 2, 3};
+    long[] delta = {1, 1, 3, 2, 1, 1, 1};
+    long[] total = {1, 1, 3, 2, 1, 2, 3};
     try (var c = locked(db, true);
         var admin = db.admin()) {
       for (int i = 0; i < KINDS.size(); i++) {

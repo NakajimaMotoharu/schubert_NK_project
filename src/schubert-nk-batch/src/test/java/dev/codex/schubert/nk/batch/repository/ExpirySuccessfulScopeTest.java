@@ -1,6 +1,13 @@
 package dev.codex.schubert.nk.batch.repository;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -131,13 +138,15 @@ final class ExpirySuccessfulScopeTest {
   void exp4956012CompoundFailuresMatchActualJavaTwrForAllTwelvePairs() {
     for (int body = 0; body < 4; body++) {
       for (int close : new int[] {0, 2, 3}) {
-        Throwable primary = failure(body), secondary = failure(close);
+        Throwable primary = failure(body);
+        Throwable secondary = failure(close);
         assertSame(
             primary,
             assertThrows(
                 Throwable.class, () -> using(() -> failClose(secondary), () -> failBody(primary))));
         assertArrayEquals(new Throwable[] {secondary}, primary.getSuppressed());
-        Throwable referencePrimary = failure(body), referenceSecondary = failure(close);
+        Throwable referencePrimary = failure(body);
+        Throwable referenceSecondary = failure(close);
         assertSame(
             referencePrimary,
             assertThrows(

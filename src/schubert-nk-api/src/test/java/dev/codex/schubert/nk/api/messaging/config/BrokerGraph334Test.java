@@ -1,6 +1,11 @@
 package dev.codex.schubert.nk.api.messaging.config;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import jakarta.jms.ConnectionFactory;
 import java.lang.reflect.Proxy;
@@ -30,9 +35,13 @@ final class BrokerGraph334Test {
 
   private static Throwable observeOpen(Throwable fault, boolean supplierFailure, int profile) {
     var copy = new char[] {'P', 'T'};
-    int[] reads = {0}, creates = new int[3], closes = new int[3];
-    int[] arities = new int[3], unexpected = {0};
-    Object[] roles = new Object[3], modes = new Object[3];
+    int[] reads = {0};
+    int[] creates = new int[3];
+    int[] closes = new int[3];
+    int[] arities = new int[3];
+    int[] unexpected = {0};
+    Object[] roles = new Object[3];
+    Object[] modes = new Object[3];
     var order = new ArrayList<Integer>();
     ConnectionFactory[] factories = new ConnectionFactory[3];
     for (int i = 0; i < 3; i++) {
@@ -120,7 +129,8 @@ final class BrokerGraph334Test {
   }
 
   private static Throwable observeClose(Throwable first, Throwable second) {
-    int[] closes = new int[3], reads = {0};
+    int[] closes = new int[3];
+    int[] reads = {0};
     var order = new ArrayList<Integer>();
     Throwable[] faults = {null, second, first};
     var owner =
@@ -183,8 +193,8 @@ final class BrokerGraph334Test {
     assertSame(same, partial(same, same, same));
     assertEquals(0, same.getSuppressed().length);
     for (int edge = 0; edge < 4; edge++) {
-      Error first = new AssertionError("first reverse close"),
-          second = new AssertionError("later close");
+      Error first = new AssertionError("first reverse close");
+      Error second = new AssertionError("later close");
       Throwable observed = partial(new NoSuppRuntime(), graph(edge, first), graph(edge, second));
       assertTrue(observed == first, "FACT334003 unretained graph after reverse partial close");
     }

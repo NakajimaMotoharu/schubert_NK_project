@@ -1,6 +1,10 @@
 package dev.codex.schubert.nk.api.messaging.outbound;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import jakarta.jms.BytesMessage;
 import jakarta.jms.JMSContext;
@@ -132,7 +136,13 @@ final class OutboxSecondary330Test {
     @Nullable Throwable commit;
     @Nullable Throwable rollback;
     @Nullable Throwable closing;
-    int opens, writes, sends, commits, rollbacks, closes, unexpected;
+    int opens;
+    int writes;
+    int sends;
+    int commits;
+    int rollbacks;
+    int closes;
+    int unexpected;
 
     @Nullable Throwable send() {
       try {
