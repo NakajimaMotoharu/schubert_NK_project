@@ -57,6 +57,7 @@ class UserQueryApplicationServiceTest {
             UserQueryRequestTest.check(
                 UserQueryRequest.decode(message),
                 UserQueryRequestTest.ADMIN,
+                detail ? "UDTREQ01" : "USRREQ01",
                 detail ? List.of("3") : Arrays.asList(null, null, null, "1", "50"));
         assertEquals(
             HexFormat.of().formatHex(independent),

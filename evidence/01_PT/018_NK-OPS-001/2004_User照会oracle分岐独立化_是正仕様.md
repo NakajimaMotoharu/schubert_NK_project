@@ -1,5 +1,7 @@
 # User照会oracle分岐独立化・是正仕様
 
+追補：元569f候補のPG9900はAPI testCompileで真正1、共有helperの外部UserQueryApplicationServiceTest一caller更新漏れ（BUG1778/YKT1529）。元四callに加え当一callerも入力fixtureのdetail boolからliteral layoutを渡す。元manifest/Sourceを保全、新sourceで必要compileを完走する。五callerは二Test class内に存在し、四ADM methodの記録と別sourceの成功へ算術加算しない。
+
 2026-10-26、群G13_USER_QUERY_EXPECTED_SELECTOR_REPAIR_V1/.5-2-5pp cap10、BUG1777/YKT1528/2003、変更担当G13.07/既主費用P01001保持。Test-only変更でProduction Main/外部wire/RD/UI/SS/fixture/依存/POMは不変更。
 
 ADM040のUSR/UDT callは期待layoutをliteral USRREQ01/UDTREQ01、ADM043の二callは入力nの偶奇から独立に選ぶexpectedLayoutを渡す。checkはその引数からSS323§9.4のlayout/field名/typeを選び、Production detailRequest()は期待値を生成するselectorではなく独立expectedDetailに対するassertEqualsのactualにだけ使う。元Mac/LP/NULL/field値・所有buffer不変assertionは保持する。
