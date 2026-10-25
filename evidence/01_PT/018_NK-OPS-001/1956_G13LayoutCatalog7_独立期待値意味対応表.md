@@ -18,4 +18,4 @@
 
 現在sourceのRegistry標準宣言64とCATALOG_TSV389を、固定文法の静的source literal比較で独立TSVへ結ぶ。Java initializer/constructor、Production parser/codec、JUnitは実行しない。未知構文・escapeは推測解釈せず失敗させる。これは実行PTの代替PASSではなく、expectedがProduction生成でないことと現sourceのliteral対応の追加根拠である。
 
-関連は既Program001の六family/十method-family関係。family全体/全branch/四counter100/新Test ID/正式受入への加算0。SS323 named-typesはfixtureのbyte再認証だけで全named mapperの意味確認は未実施。1953のHeader enum wire値対応を参照するが再計上0。新規製品障害は本読取範囲では確認なし、未確認を非該当や成功へ変換しない。
+関連は既Program001の六family/十一method-family関係（BUG1753：旧手計算十を訂正、元commit2cbeaa247保持）。family全体/全branch/四counter100/新Test ID/正式受入への加算0。SS323 named-typesはfixtureのbyte再認証だけで全named mapperの意味確認は未実施。1953のHeader enum wire値対応を参照するが再計上0。新規製品障害は本読取範囲では確認なし、未確認を非該当や成功へ変換しない。

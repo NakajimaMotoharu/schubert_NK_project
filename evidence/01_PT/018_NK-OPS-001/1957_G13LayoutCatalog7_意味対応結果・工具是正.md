@@ -1,0 +1,11 @@
+# Layout7意味対応結果・工具是正
+
+1955開始群2189、現source64446不変更、.5/3/8pp cap10を維持。1956の7method→既6family/11関係を現source/保存normal/既5622宣言/descriptor/独立仕様行へ結合した。原canonical五文書/TSV三件は元3284と現在byte一致。旧純粋fixture根拠のみ参照し、旧a9のsourceQualified/PT/native/coverageは転用0。現Mainの64Registry宣言は閉じた構文、389field textblockはTAB以外のescape拒否により独立TSVへ静的比較した。Production initializer/parser/encoder/JUnit/外部jobは実行0。
+
+成功原PG9628-layout7-oracle-trace-v2/manifest.json SHA-256 `d494ae30c275cca595f8df366176ddb05276f64d37d47289683b6e95e56ff2db`。別PG9630-layout7-oracle-post-v1/manifest.json `981969b50240efaa0f2b7378362c7b80c490ed2aa0e747c8eff21573312a665f`、いずれもPython CLI実終了0・pyflakes指摘0。postは元仕様行/現byte/宣言と固定関係集合/欠落・重複二反例を照合、親の意味レビューを別人レビューや実行PTと主張しない。六Main source/二Test/三fixtureの現normal byteを照合。layout正常比較は全業務codec/mapper/全branch受入を意味せず、SS323型対応はfixture再認証のみ。
+
+BUG1753/YKT1504：初回「10関係」assertは実際11に一致せず実終了1、成功manifestなし。元producer/1956/部分出力はcommit2cbeaa247で修正前保存。行別総和2+1+1+2+2+1+2と固定関係集合を独立確認し、新専用v2へ是正。1950/9610は44method/44関係、1953/9618は8method/9関係を保存JSONから再集計し非該当、元成功工具/PT再実行0。工具scope検証済・fix commit具体化待ち、製品障害や正式増分へ転用0。
+
+手戻り：公開scanの最初の二CLI組立はROOT属性誤指定、次は-cが正規entrypointでないため既guardが拒否し出力なし。実ファイルwrapper9629で正規provenanceを保存し9file/三format pattern指摘0。guardを緩和/偽装0。post初回は旧9610の異なるschemaを同形式と想定してKeyError/出力前終了1、既保存行のexistingTestIdを明示検証する分岐へ訂正し、新対象本体/PTは再実行0。以上は工具構築/手戻り、元計画消化にしない。
+
+fresh09:46:51UTC used7/残93/reset1793513544/secondarynull、開始6→7は共有丸め差1ppでPGPT専有費とはしない。実N/T/配賦/工数null、usage cursor b76b3af010fff9c157866abd10b82ea38f88c5ce18ae979d3960ec1d65c6367e。実PT/新ID/Main/coverage/受入増分0、正式1964/53・17/190/QA051final・全actualHOLD・全current audit1HOLD/G07残4493不変。QA053は共有可否回答のみ、具体操作名等を追加照会済み・非blocking。通常commit後も次の許可済みPG/PTへ継続。

@@ -9,7 +9,7 @@ from host_tool_invocation import capture, verify
 
 ROOT = data.ROOT
 BASE = data.BASE
-OUT = BASE / 'PG9628-layout7-oracle-trace-v1'
+OUT = BASE / 'PG9628-layout7-oracle-trace-v2'
 DOCS = ROOT / 'evidence/01_PT/018_NK-OPS-001'
 REVIEW = DOCS / '1956_G13LayoutCatalog7_独立期待値意味対応表.md'
 ORACLE = ROOT / 'evidence/01_PT/001_NK-PRO-001/001_NK-PRO-001_単体テスト仕様書.md'
@@ -115,7 +115,7 @@ def main():
         currentRegistryLiteralTuples=64, currentFieldLiteralRows=389, productTestsExecuted=0,
         newTestIds=0, newMain=0, coverage=None, newAccepted=0, formalUpdated=False, effortPercent=None,
         wholeG13Accepted=False, whole451Accepted=False, productionParserOrInitializerExecuted=False)
-    assert result['methodFamilyRelations'] == 10
+    assert result['methodFamilyRelations'] == 11
     data.write(OUT / 'manifest.json', result)
     print(json.dumps(dict(actualExit=0, methods=7, registryLiterals=64, fieldLiterals=389, productTestsExecuted=0)))
     print('manifestSha256=' + data.sha((OUT / 'manifest.json').read_bytes()))
