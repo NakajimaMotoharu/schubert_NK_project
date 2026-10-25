@@ -2,7 +2,7 @@
 import re
 import struct
 
-SYMBOL=re.compile(r'[A-Za-z0-9_/$]+')
+SYMBOL=re.compile(r'[A-Za-z0-9_/$-]+')
 
 def read(raw):
     at=0
@@ -85,18 +85,24 @@ def source_closure(direct,edges,unresolved):
     raise ValueError('finite monotone source graph must converge')
 
 def vectors():
-    def fixture(target_tag=7,duplicate_source=False,trailer=b''):
+    def fixture(target_tag=7,duplicate_source=False,trailer=b'',target='p/Target'):
         constants=[]
         def utf(value):
             raw=value.encode();constants.append(b'\1'+struct.pack('>H',len(raw))+raw);return len(constants)
         def single(tag,index):constants.append(bytes([tag])+struct.pack('>H',index));return len(constants)
         identity=single(7,utf('p/Fixture'));source_name=utf('SourceFile');source=utf('Fixture.java')
-        single(target_tag,utf('p/Target'))
+        single(target_tag,utf(target))
         attrs=struct.pack('>HIH',source_name,2,source)
         header=b'\xca\xfe\xba\xbe'+struct.pack('>HHH',0,69,len(constants)+1)+b''.join(constants)
         return header+struct.pack('>HHHHHHH',0,identity,0,0,0,0,2 if duplicate_source else 1)+attrs+(attrs if duplicate_source else b'')+trailer
     assert 'p/Target' in read(fixture())['references']
     assert 'p/Target' not in read(fixture(8))['references']
+    assert 'p/package-info' in read(fixture(target='p/package-info'))['references']
+    assert 'p/package-info' not in read(fixture(8,target='p/package-info'))['references']
+    assert 'p/Target' in read(fixture(target='[[Lp/Target;'))['references']
+    assert read(fixture(target='[[I'))['references']==['p/Fixture']
+    assert read(fixture(target='java/lang/reflect/Method'))['reflectiveOrDynamicLookup'] is True
+    assert read(fixture(target='java/lang/invoke/MethodHandles$Lookup'))['reflectiveOrDynamicLookup'] is False
     for raw in (fixture()[:-1],fixture(duplicate_source=True),fixture(trailer=b'x'),b'bad'):
         try:read(raw)
         except ValueError:pass
@@ -107,4 +113,4 @@ def vectors():
     assert owners['a']==owners['b']==owners['d']=={'WBS-P001-01'} and owners['c']=={'WBS-P001-01','WBS-P002-01'}
     unknown['a']={'MISSING'};owners,held=source_closure(direct,edges,unknown)
     assert all(held[key]=={'MISSING'} for key in direct)
-    return 8
+    return 14
