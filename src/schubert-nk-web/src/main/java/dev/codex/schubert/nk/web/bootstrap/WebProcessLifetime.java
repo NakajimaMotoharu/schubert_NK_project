@@ -87,6 +87,7 @@ final class WebProcessLifetime implements AutoCloseable {
             Runtime.getRuntime().removeShutdownHook(hook);
           } catch (IllegalStateException shutdownInProgress) {
             /* Exact hook already waiting. */
+            return; // The existing finally notifies the held owner before leaving this scope.
           }
         }
       } finally {

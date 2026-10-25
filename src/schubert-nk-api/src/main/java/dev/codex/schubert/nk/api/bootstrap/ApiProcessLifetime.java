@@ -26,7 +26,7 @@ final class ApiProcessLifetime implements AutoCloseable {
   private final Thread owner = Thread.currentThread();
   private final Thread hook = new Thread(this::shutdown, "api-stop-owner");
   private final ApiStopBudget stopBudget;
-  private volatile boolean installed;
+  private final AtomicBoolean installed = new AtomicBoolean();
 
   ApiProcessLifetime() {
     this(System::nanoTime);
@@ -39,7 +39,7 @@ final class ApiProcessLifetime implements AutoCloseable {
 
   void install() {
     Runtime.getRuntime().addShutdownHook(hook);
-    installed = true;
+    installed.set(true);
   }
 
   boolean stopping() {
@@ -130,12 +130,12 @@ final class ApiProcessLifetime implements AutoCloseable {
     // Invoked only after all admitted scopes have returned/unwound, including failed cleanup.
     try {
       stop();
-      if (installed) {
-        installed = false;
+      if (installed.getAndSet(false)) {
         try {
           Runtime.getRuntime().removeShutdownHook(hook);
         } catch (IllegalStateException shutdownInProgress) {
           // VM already waits on this exact hook; notification follows this final owner action.
+          return; // Terminal close still passes through the one owner notification in finally.
         }
       }
     } finally {
