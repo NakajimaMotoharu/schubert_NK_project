@@ -1,0 +1,8 @@
+"""Bounded current trace and WBS metadata delta only, not full G07 acceptance."""
+from pathlib import Path
+import pg6990_recovery_public_scan as scan
+
+if __name__ == '__main__':
+    scan.BEFORE = 'aba4a202b267a1dc7c84393b0fd4a0b37073dab8'
+    scan.OUT = Path(__file__).resolve().parents[2] / 'evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG9886-nonce-trace-public-delta-v1'
+    scan.main()
