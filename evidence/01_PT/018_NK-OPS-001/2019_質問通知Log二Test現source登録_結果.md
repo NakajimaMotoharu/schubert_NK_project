@@ -1,0 +1,11 @@
+# 質問通知・Log二Test現source登録結果
+
+2026-10-26 07:31 JST、群2277/G13_QUERY_PAIR_TRACE_V1、開始.25/1/3pp cap10、code source bba24d15923831a17e5464328b70fdb950fb2fcf、保存HEAD43e3b27d82cfdbd25c4fcd4beb0cd4ad4c21945f/dev-foundation。追加製品PT/外部操作0。
+
+PG10004-query-pair-trace-v1 SHA e60fb8cf887388730ea66f1f511c45f11e64be1e29c44d80e22fc838d8335ebd、旧9982の971行を全field不変で保持、新QuestionQueryPlainContractTest/LogPlainContractTest二pathを追加。原941でQuestionQueryRequestは主担当/費用P01301、LogRequestはP01809（DAO P01004は関連であり移管しない）。Main hash/当spec2015-16/10000を根拠とし、新Test各八ID/同source9998の16/2共有runを束縛。各rowはprogramMethodCount8/sharedRunReferenceNotAdditive=true、両参照を足して32実績へ増やさない。旧Core/Boundaryの70165/7c等runtime/source/history/担当/費用は不変。
+
+現在Java1800中1798登録（Main965全件、Test833/835）、unknown二fileはBorrowedJdbcFatal329Test/TargetBusinessControllerTestで不変。rows973/newLogicalCandidates965は担当登録件数であり元leaf受入ではない。PG10006-query-pair-registry-check-v1 SHA f724f88c9770aedc916f1c3e023a0daac44f46baef99c2527e3fe70ba49eecad、旧owner/新cost/hash/unknown/runtime新ID倍増/source付替/Question費用誤移管/共有run重複/受入偽装の九metadata反例を独立contractで拒否。
+
+485はcurrent二sectionの現参照/件数と前回current overlayだけ更新、486はinventorySha256だけ変更。PG10008-query-pair-trace-post-v1 SHA c4b5d5639e3dd9af62b1e36e1774fe45a655e4429db1a2538d1a1944a69ad1c2、inventory rawSHA2461e0c77d5b35790e206fd2a89b3600a1541864bd6731c46074bc3c384cd90a、原941/歴史943/原予算・受入/全旧参照を保持。WBS所定before/after actual1/current physical candidate exact Git/worktree scopeのHOLDは維持、旧資格候補を当sourceへ再束縛して隠さない。限定metadata結果0を全G13/451合格にしない。
+
+開始23→fresh23 used/reset1793513544、共有丸め0≠専有費0。usage13a960c0/N-T配賦工数null、元見積・改訂残・群凍結値を保持。正式1964/53・17/190・QA051final/全安全HOLD不変。新二Testの16PT/coverage/staticは2017-18の前群成果であり本群へ再計上しない。次保存push後、pure既存Testのoracle/静的負債の具体的未完を後続索引/現sourceから選定し、独立PG/PTを継続する。
