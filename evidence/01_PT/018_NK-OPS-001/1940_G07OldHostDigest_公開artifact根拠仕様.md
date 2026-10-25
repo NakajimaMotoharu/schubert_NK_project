@@ -1,0 +1,11 @@
+# G07 保存済み旧正常host Main artifactの公開根拠
+
+2026-10-25 17:10 JST、G07_OLD_HOST_MAIN_CLASS_DIGEST_V1。主WBS-G07、開始見積り.5/2/6pp・cap10、08:09:15UTC使用4/残96/reset1793513544/secondarynull。原予実/個別受入/モデル/451/安全HOLD不変更。
+
+1939で歴史scanの未分類4550が残る。旧正常compile PG8122の保存六Jarは存在し、manifest SHA75ca9dd88ce045dc0acdbdd878e9382a30584a1da34fb8d37bc04d2ca4d4a53b、artifact source e196d0816c8a4920696d4f601f8b4cf97e9e8b48は現Production64446の祖先と確認した。未実行の新buildや旧PTの再確認は行わない。922 Main sourceの固定inputHash、旧snapshot byte、当Git sourceの限定blobを結合する。全祖先blob走査は行わない。
+
+正常8122/snapshot/src/各module/targetのcanonical regular Jarだけを読取る。Python ClassFile parserと別JDK Class-File APIを工具として使い、class identity/SourceFile/実byte digestを照合し、source pathの922集合を原manifestと一致させる。非class entryを根拠未確認のままJar全体の公開証明へ使わず、今回はclass digestのみ追加する。私有raw/native artifact/DB/鍵/VM/サービス/Root/ネットワーク/intent/permitへアクセスしない。
+
+原8379 tupleから9564の3829更新をCounterで差し引いた4550だけを対象とする。旧公開proof＋9564実class registryを既知proofとして保持し、新8122実class digestを最低一つ含み、全exact captureの公開根拠がそろうfindingだけを追記する。同一hashの既知proofは置き換えず、multiplicity/path/rule/range/inputShaを保持。候補本文/候補だけのhash/contextを新保存しない。未再構築1rangeやunknown混在は未分類を保持する。
+
+独立postは別capture抽出、JDK metadata全一致、Git限定source blobの独立hash確認、元tuple Counterと保存不変式、手書きproof集合vector/metadata反例を確認する。工具JVMのみ自己所有・有限実行としtarget class load/init/実行0。試験/coverage/正式受入の転用0、actualSecretCount/coverage/工数率null、正式1964/53・17/190・QA051final・全actualHOLDは維持。成果が0なら0として保存し根拠なく拡大しない。通常保存後は別の許可済み独立PGPTへ進み、現在窓残10%以下/取得不能等の正規条件まで継続する。

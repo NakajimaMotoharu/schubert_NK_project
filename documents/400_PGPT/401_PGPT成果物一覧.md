@@ -1,5 +1,7 @@
 # PGPT成果物一覧・進捗
 
+2026-10-25 17:12最新：1941/PG-D659、旧正常host1799class/922sourceを当時の公開Gitへ結合し歴史scan根拠を更に57追加、公開根拠35593/40086・残4493。旧source成功を現sourceへ転用せず、現在G07/正式/実PT/coverage増分0、1964-53/17-190/工数null/全actualHOLD不変。通常保存後も独立PGPTへ継続。
+
 2026-10-25 17:08最新：1939/PG-D658、正常host1843Main class/965source由来を別実装で確認し、固定歴史scanの公開根拠済み31707→35536（+3829）、未分類8379→4550。現source secret gate/実PT/coverage/正式受入の増分ではない。file担当1781/1789/残8、正式1964-53/個別17-190/工数null/QA051final/全actualHOLD保持。fresh残96で次の独立PGPTへ継続。
 
 2026-10-25 16:11最新：1937/PG-D657、横断2Test classの既存23methodを26case family/34関係へ初期対応、構文7vector/JDK parse-onlyと保存classのJUnit annotation/宣言/原Main7担当を独立照合。file登録1781/1789/残8は不変、method対応という別の実績であり新試験数/実行PT/coverage/正式受入へ加算0。正式1964-53/17-190/工数null・全current audit実1HOLD/全actualHOLD保持、fresh残97で必要な当source通常PT等へ継続、現在窓残10以下/取得不能等で保全。
