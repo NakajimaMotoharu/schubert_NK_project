@@ -1,0 +1,15 @@
+# G13 Header七method＋独立golden一methodの現在期待値対応
+
+2026-10-25、G13_HEADER8_ORACLE_REVIEW_V1、主G13.07、関連P001-01/P002-03の共有費再配賦0。最新fresh09:11:08UTC使用6/残94/reset1793513544/secondarynull、開始見積.5/2/6pp・cap10。候補選定/資料閲覧を先行し、この仕様で見積りを凍結してから工具を作成・実行する。前群END5→今回観測6の共有差1は群間/他chat混在の未配賦観測であり、前群又は本群の専有費へ付替えない。
+
+現在64446のHeaderModelTest七methodとMessageCodecTest.headerEncodingMatchesIndependentUi232GoldenVectorを対象にする。これらの名前はOBSOWN等の番号token方式に合わないが、既001/104/108とProgram002仕様の明示method/期待値が存在する。現Header Test SHA6a29064559dd7b27dfc56fc5384d1539bbbb0155ec522e7dd14b7c55a519b238、MessageCodec Test SHA3d0429f446ab0c655dddb4a71bb3a887d5ae3b34dd4411b699079a92896ec917。
+
+旧a9からはheader四value型/enumとHeader Testが変化しており、旧108等のsource合格を転記しない。現在の五header型/CommonHeader及び補完HeaderCodecの責任を原9386/current registryから照合し、全5622宣言の現在位置/descriptor/hashへ結合する。Production/旧baseline/元PT仕様本文/期待値変更0、動的試験/build/全回帰の確認再演0。
+
+origin/main8b91944dfのUI232§2/3/5/7、SS322§2/4/7、既Program001のH01/H02/H03と104のHDR3266-001/002、Program002 H01を期待値正本とする。七methodのtyped null/構造不正/enum name-wire全literal/context redaction/百万byte算術と、別test-side ASCII builderによる256byte/17field goldenを区別して点検する。HeaderBuilderがProduction識別子定数を入力に用いる部分だけで識別子正当性を認定せず、goldenの固定SCHBNK01/offset/spaceを補完根拠にする。
+
+成果は八methodと既TestID/spec行/独立期待値の現在静的対応。H01等は複数methodのfamilyであり、一methodだけでfamily全体を受入せず、golden一件はLogin Qのfield配置の根拠で全Q/S/E/全layout網羅を主張しない。内部参照nullの即時NPE preconditionと外部wire不正の型付き例外を分離する。再送/DB/JMS/並行処理固有の業務は他ownerへ残し、immutable型の対象外を試験済みへ換算しない。
+
+親の意味レビューを明示matrixへ保存、工具は期待値文書/現source/行境界/現compiled byte/責任/別算術・golden offset根拠を検証する。validator反例は製品PTへ加算0、レビューを拒否PTの代替PASSへ変更0。旧PT/coverage/正式受入を再認証せず、現在source/runtime未知はそのままHOLD。正式1964-53/17-190/工数null/QA051final/G07残4493/全current audit1HOLD/全actualHOLD・保全物不変。
+
+現在窓残10以下/取得不能等の正規条件まで継続し、通常小群/commit/報告/PMO待ちで停止しない。
