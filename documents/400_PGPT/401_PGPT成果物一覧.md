@@ -1,5 +1,7 @@
 # PGPT成果物一覧・進捗
 
+2026-10-25最新：1894/1895/source64446不変更、G13.07明示不足の製造4pathだけを既SSC295/元Program責任へ対応。9312原→9313 literal golden四/metadata反例十、旧256/元941/歴史943と費用保持。Java登録1081→1085/main961→965（全965）/test120不変更・未登録test704。path登録完了を全method/要件trace・動作/451受入へ転用0、製品PT/新ID/Main/coverage/正式増分0。元90下限87/不明2/正確null・保全2、fresh照合で短い不足通常PT又は品質へ継続。
+
 2026-10-25最新：1892/1893/source64446不変更、G13.07の現Java1789pathについて既登録1081/未登録708を測定（main961/965・test120/824）。原9304→独立Git tree/blob9305・8metadata反例で分母を照合。元941/歴史943/限定256の対応を変更せず、未知owner/costはnull・不足pathを明示。path登録状況は工数完成率/試験未実行数/全trace受入ではない。新ID/Main/coverage/正式増分0、879一意・正式1964-53/QA051final/実VM等HOLD保持。元90下限87/不明2/正確null・80大型抑制、次も下限＋cap＋保全2<=90の短工程のみ。
 
 2026-10-25最新：1890/1891/source64446不変更、G07既存NO_EXACT_CAPTURE一件の報告行をpublic source blob hash metadataとして独立証明一、vendor binary/tag二rule一致/8反例を確認。ただし実capture/断片境界は未確定、追加誤検出認定0・未分類8,379/secret数null/全G07未受入を保持、元全scan/製品PT再演0。新ID/Main/正式/工数率増分0、879一意/新Main42/必要既存7・QA051final/HOLD、元90下限87/不明2/正確null・80大型抑制/保全2で短い許可品質へ継続。
