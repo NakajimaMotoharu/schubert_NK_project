@@ -1,0 +1,7 @@
+# User照会二Test・現source束縛仕様
+
+2026-10-26、G13_USER_QUERY_CHANGED_TEST_BINDING_V1/.25-1-3pp cap10、current source4c94a7d4665e4f3c27a7d39fb2b427bec663d903。既PG9880/source21d登録1794/1796・969source rows・UNKNOWN二fileと原941logical/943historicalを保持する。変更二Testのpathは新規ではなく、hash/当2005・PG9912の静的根拠だけを更新する。canonicalOwner/canonicalCostOwnerは既WBS-P010-01、G13.07は変更記録担当で費用移管0。
+
+PG9916新registryは元969行の全fieldを保持し、二Testのshaのみ現正常9908 inputへ置換、元sha/registry/sourceと当静的proofを別のchangedTestBindingsに保存する。旧Main二bindings/各ownershipStatus・未知2・予算/受入変更0。独立postで全元row比較/物理1796とregistered1794/新path0・不正owner/cost/hash/範囲/動的昇格を検査する。製品Test/JVM/JCE/thread/DB/Root/Graph9/鍵close/VM/秘密物を操作しない既公開source/hash metadata作業。
+
+485は二つのcurrent sectionのみ当registry/source/proofへ更新し旧current参照を履歴として保持、486はinventoryの現byte SHAだけ更新。481/484と原budget/acceptance semanticsを不変更とし、所定WBS before/after監査の真正結果を保存する。current physical candidate guardのHOLDをPASSへ書換えない。これはtrace hashの更新で、製品PT/coverage/native/正式認定/個別受入/工数率の増分0。二Testの動的未実行DB依存HOLD、QA051final・全安全HOLDは不変。
