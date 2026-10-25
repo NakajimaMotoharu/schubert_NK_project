@@ -1,5 +1,7 @@
 # PGPT成果物一覧・進捗
 
+2026-10-25 18:02最新：1951/PG-D663、OBSOWN44の現在method/fixtureと既仕様・独立期待値を静的意味レビュー、別metadata検証10反例。859候補のうち44を精査した別実績で、実PT/coverage/正式増分ではない。BUG1752工具scope限定close・元失敗保全、正式1964-53/17-190/工数null/全actualHOLD不変。通常保存後も独立PGPT継続。
+
 2026-10-25 17:47最新：1948/PG-D662、全5622methodに対する既存仕様行一意候補859（明示source参照44/global815）を別実装照合。BUG1752により初回docref3618/候補445行を是正・旧失敗保持、意味的oracle/PT/coverage/正式資格へ加点0。候補未確定4763は当保守的方式の未joinであり既存oracle不存在ではない。正式1964-53/17-190/工数null/全actualHOLD保持、通常保存後も独立PGPT継続。
 
 2026-10-25 17:29最新：1945/PG-D661、824Test source/1910保存classに対し通常@Test宣言5622を独立全exact対応（不一致0）、別RepeatedTest一宣言未資格。TestID/oracleをこれから結ぶtrace用分母であり、5622試験実行/PASSの意味ではない。新PT/coverage/正式増分0、file責任1781/1789/残8・正式1964-53/17-190/工数null/全actualHOLD保持。通常保存後も独立PGPT継続。

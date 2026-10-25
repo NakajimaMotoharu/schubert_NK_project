@@ -1,0 +1,1742 @@
+[
+  {
+    "bodySha256": "7a42d5faf7c3f09c354798e6b5454f709772d708a565fddf59fed76b9228bb86",
+    "canonicalOwner": "WBS-P018-09",
+    "compiledDescriptor": "()V",
+    "costOwner": "WBS-G13.07",
+    "endLine": 227,
+    "existingTestId": "OBSOWN001",
+    "independentOracle": {
+      "line": 21,
+      "originalIndependentExpectedBasis": "NPE\u5883\u754c\u62d2\u5426\u3001starter/DB factory0",
+      "originalInputAndOperation": "pump/failure/nano/starter/signal\u5404null\u3067construct",
+      "path": "evidence/01_PT/018_NK-OPS-001/1864_APIObservationOwnedWorker_\u88fd\u9020\u30fb\u5358\u4f53\u4ed5\u69d8.md",
+      "rowSha256": "84384b917767dba00e4dd55ea73f28e7c1351a77cdbb9a48159f187a40637263",
+      "sha256": "b8d5702298999c0ca86c24604563be259f8c570e209913fdcc786570d11cb935"
+    },
+    "methodDeclarationKey": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/OwnedApiObservationWorkerTest.java#dev.codex.schubert.nk.api.monitoring.OwnedApiObservationWorkerTest#obsOwn001/0@202",
+    "newTestIdInvented": false,
+    "oldSourcePtTransferred": false,
+    "parentReview": {
+      "applicability": "null/\u53d6\u5f97\u524d",
+      "line": 7,
+      "path": "evidence/01_PT/018_NK-OPS-001/1950_G13ObservationWorker44_\u72ec\u7acb\u671f\u5f85\u5024\u610f\u5473\u5bfe\u5fdc\u8868.md",
+      "reviewedAssertionOrFixtureRelation": "\u4e94null port\u306eNPE\u3001factoryReads=0/starts=0\u3002\u672a\u53d6\u5f97\u306eport\u3092expected\u751f\u6210\u3078\u5229\u7528\u3057\u306a\u3044",
+      "reviewedMainPaths": [
+        "constructor"
+      ],
+      "rowSha256": "187122367a0abf870e03d89dfd8f2c2d402b06701dc59b502a6151706a128192",
+      "sha256": "5f472d934a5338733d368bdfad1d76b683d4b979a82bfc9625fb988b6b7138d1"
+    },
+    "physicalTestClassSha256": "cc135f1c5e93c0cb5e813cc2e7bfce064a161f7ff61565ae7abff8ccb0c39878",
+    "productExecuted": false,
+    "referenceAdditionalBudgetPp": 0,
+    "reviewDoesNotProveEveryFaultCombination": true,
+    "reviewStatus": "STATIC_METHOD_ORACLE_RELATION_REVIEWED_NOT_DYNAMIC_PT",
+    "sourcePath": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/OwnedApiObservationWorkerTest.java",
+    "sourceSha256": "a19890fcd82eaafdeed5eb1520687a1d04d6ca44dc9aeb6d24d1c3b2b6b8fa0a",
+    "startLine": 202,
+    "whole451Accepted": false
+  },
+  {
+    "bodySha256": "63b994fe43020768d2a7cbc42b845a184e9426685e9afb08e213a51d6cb4ef5b",
+    "canonicalOwner": "WBS-P018-09",
+    "compiledDescriptor": "()V",
+    "costOwner": "WBS-G13.07",
+    "endLine": 238,
+    "existingTestId": "OBSOWN002",
+    "independentOracle": {
+      "line": 22,
+      "originalIndependentExpectedBasis": "\u5168port\u672a\u8aad\u30fb\u672a\u8d77\u52d5\u3001await null\u62d2\u5426",
+      "originalInputAndOperation": "\u6b63\u898fports\u3067construct\u3001await\u306bnull",
+      "path": "evidence/01_PT/018_NK-OPS-001/1864_APIObservationOwnedWorker_\u88fd\u9020\u30fb\u5358\u4f53\u4ed5\u69d8.md",
+      "rowSha256": "c71e2133f4d3a6f7f048ede6a5a8c3b6e1b9fa5fea67d1d08f0687b3e466d0f4",
+      "sha256": "b8d5702298999c0ca86c24604563be259f8c570e209913fdcc786570d11cb935"
+    },
+    "methodDeclarationKey": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/OwnedApiObservationWorkerTest.java#dev.codex.schubert.nk.api.monitoring.OwnedApiObservationWorkerTest#obsOwn002/0@229",
+    "newTestIdInvented": false,
+    "oldSourcePtTransferred": false,
+    "parentReview": {
+      "applicability": "null/\u672a\u8d77\u52d5",
+      "line": 8,
+      "path": "evidence/01_PT/018_NK-OPS-001/1950_G13ObservationWorker44_\u72ec\u7acb\u671f\u5f85\u5024\u610f\u5473\u5bfe\u5fdc\u8868.md",
+      "reviewedAssertionOrFixtureRelation": "starts/clockReads/factoryReads=0\u30fbactor=null\u3001await null\u62d2\u5426\u3002\u5358\u306bThread NEW\u3092\u8cc7\u6e90\u5b8c\u4e86\u8a3c\u62e0\u306b\u3057\u306a\u3044",
+      "reviewedMainPaths": [
+        "constructor",
+        "awaitStopped"
+      ],
+      "rowSha256": "970d34b019808f5fa8113047c7ee4c0872392af0bd70ecc7ae06fe25e01270f1",
+      "sha256": "5f472d934a5338733d368bdfad1d76b683d4b979a82bfc9625fb988b6b7138d1"
+    },
+    "physicalTestClassSha256": "cc135f1c5e93c0cb5e813cc2e7bfce064a161f7ff61565ae7abff8ccb0c39878",
+    "productExecuted": false,
+    "referenceAdditionalBudgetPp": 0,
+    "reviewDoesNotProveEveryFaultCombination": true,
+    "reviewStatus": "STATIC_METHOD_ORACLE_RELATION_REVIEWED_NOT_DYNAMIC_PT",
+    "sourcePath": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/OwnedApiObservationWorkerTest.java",
+    "sourceSha256": "a19890fcd82eaafdeed5eb1520687a1d04d6ca44dc9aeb6d24d1c3b2b6b8fa0a",
+    "startLine": 229,
+    "whole451Accepted": false
+  },
+  {
+    "bodySha256": "02cbdc26965fc266e4e57e3fd26b93be3d8f5b6c98277805955771c11d6d7901",
+    "canonicalOwner": "WBS-P018-09",
+    "compiledDescriptor": "()V",
+    "costOwner": "WBS-G13.07",
+    "endLine": 264,
+    "existingTestId": "OBSOWN003",
+    "independentOracle": {
+      "line": 23,
+      "originalIndependentExpectedBasis": "\u56fa\u5b9athread\u540d/\u975edaemon\u3001\u53d6\u5f97/rollback/close\u54041\u3001\u771fThread\u7d42\u7aef\u30fb\u6b20\u6e2c",
+      "originalInputAndOperation": "\u516c\u958bconstructor\u2192SQL fixture\u4fdd\u6301\u4e2dstop\u2192release/await",
+      "path": "evidence/01_PT/018_NK-OPS-001/1864_APIObservationOwnedWorker_\u88fd\u9020\u30fb\u5358\u4f53\u4ed5\u69d8.md",
+      "rowSha256": "02091b02e4f90eff0b9a3e9b5b0716957cbdd0d0a28cd8b0857eca1bcd7d6ec1",
+      "sha256": "b8d5702298999c0ca86c24604563be259f8c570e209913fdcc786570d11cb935"
+    },
+    "methodDeclarationKey": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/OwnedApiObservationWorkerTest.java#dev.codex.schubert.nk.api.monitoring.OwnedApiObservationWorkerTest#obsOwn003/0@240",
+    "newTestIdInvented": false,
+    "oldSourcePtTransferred": false,
+    "parentReview": {
+      "applicability": "\u6b63\u5e38/\u5b8c\u4e86",
+      "line": 9,
+      "path": "evidence/01_PT/018_NK-OPS-001/1950_G13ObservationWorker44_\u72ec\u7acb\u671f\u5f85\u5024\u610f\u5473\u5bfe\u5fdc\u8868.md",
+      "reviewedAssertionOrFixtureRelation": "\u56fa\u5b9athread\u540d/daemon=false\u3001close\u5f8calive=false\u3001\u72ec\u7acbcalls\u3067open/rollback/close=1\u3001pump\u6b20\u6e2c",
+      "reviewedMainPaths": [
+        "constructor",
+        "start",
+        "requestStop",
+        "awaitStopped"
+      ],
+      "rowSha256": "6778238e534ba67042ab91eddb89dafcc218c87ae8772d623beffc72cb5e7fd0",
+      "sha256": "5f472d934a5338733d368bdfad1d76b683d4b979a82bfc9625fb988b6b7138d1"
+    },
+    "physicalTestClassSha256": "cc135f1c5e93c0cb5e813cc2e7bfce064a161f7ff61565ae7abff8ccb0c39878",
+    "productExecuted": false,
+    "referenceAdditionalBudgetPp": 0,
+    "reviewDoesNotProveEveryFaultCombination": true,
+    "reviewStatus": "STATIC_METHOD_ORACLE_RELATION_REVIEWED_NOT_DYNAMIC_PT",
+    "sourcePath": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/OwnedApiObservationWorkerTest.java",
+    "sourceSha256": "a19890fcd82eaafdeed5eb1520687a1d04d6ca44dc9aeb6d24d1c3b2b6b8fa0a",
+    "startLine": 240,
+    "whole451Accepted": false
+  },
+  {
+    "bodySha256": "ebf073f48e1559eca6ea2931eed2f843f856c58b5794f09bfebd8186f8b601e8",
+    "canonicalOwner": "WBS-P018-09",
+    "compiledDescriptor": "()V",
+    "costOwner": "WBS-G13.07",
+    "endLine": 274,
+    "existingTestId": "OBSOWN004",
+    "independentOracle": {
+      "line": 24,
+      "originalIndependentExpectedBasis": "IllegalState\u3001\u5b9fstarter1",
+      "originalInputAndOperation": "start\u5f8c\u3082\u3046\u4e00\u5ea6start",
+      "path": "evidence/01_PT/018_NK-OPS-001/1864_APIObservationOwnedWorker_\u88fd\u9020\u30fb\u5358\u4f53\u4ed5\u69d8.md",
+      "rowSha256": "04014c8950dd0bafac6f244742aa1df17c441ffef1d9b416e88074b73918aed3",
+      "sha256": "b8d5702298999c0ca86c24604563be259f8c570e209913fdcc786570d11cb935"
+    },
+    "methodDeclarationKey": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/OwnedApiObservationWorkerTest.java#dev.codex.schubert.nk.api.monitoring.OwnedApiObservationWorkerTest#obsOwn004/0@266",
+    "newTestIdInvented": false,
+    "oldSourcePtTransferred": false,
+    "parentReview": {
+      "applicability": "\u91cd\u8907",
+      "line": 10,
+      "path": "evidence/01_PT/018_NK-OPS-001/1950_G13ObservationWorker44_\u72ec\u7acb\u671f\u5f85\u5024\u610f\u5473\u5bfe\u5fdc\u8868.md",
+      "reviewedAssertionOrFixtureRelation": "\u4e8c\u56de\u76eeIllegalStateException\u3001\u6ce8\u5165starter\u547c\u51fa\u30571\u3001\u5143worker\u3060\u3051\u56de\u53ce",
+      "reviewedMainPaths": [
+        "start",
+        "awaitStopped"
+      ],
+      "rowSha256": "5af35e888e8d02bcbd332a9b94311f3cc544fde1cdc1b5096aa5b31159f72f68",
+      "sha256": "5f472d934a5338733d368bdfad1d76b683d4b979a82bfc9625fb988b6b7138d1"
+    },
+    "physicalTestClassSha256": "cc135f1c5e93c0cb5e813cc2e7bfce064a161f7ff61565ae7abff8ccb0c39878",
+    "productExecuted": false,
+    "referenceAdditionalBudgetPp": 0,
+    "reviewDoesNotProveEveryFaultCombination": true,
+    "reviewStatus": "STATIC_METHOD_ORACLE_RELATION_REVIEWED_NOT_DYNAMIC_PT",
+    "sourcePath": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/OwnedApiObservationWorkerTest.java",
+    "sourceSha256": "a19890fcd82eaafdeed5eb1520687a1d04d6ca44dc9aeb6d24d1c3b2b6b8fa0a",
+    "startLine": 266,
+    "whole451Accepted": false
+  },
+  {
+    "bodySha256": "2b92eb912871f56a0614d628b909ad098e67845eeb5752c97378f2dbcce41f74",
+    "canonicalOwner": "WBS-P018-09",
+    "compiledDescriptor": "()V",
+    "costOwner": "WBS-G13.07",
+    "endLine": 287,
+    "existingTestId": "OBSOWN005",
+    "independentOracle": {
+      "line": 25,
+      "originalIndependentExpectedBasis": "start\u62d2\u5426\u3001budget\u672a\u8aad/Thread0",
+      "originalInputAndOperation": "start\u524dstop\u2192start/await",
+      "path": "evidence/01_PT/018_NK-OPS-001/1864_APIObservationOwnedWorker_\u88fd\u9020\u30fb\u5358\u4f53\u4ed5\u69d8.md",
+      "rowSha256": "04aff2aac87f13c6a08dddfea0e2cc2058b27f20b47dd33aeebee3758e58c8b8",
+      "sha256": "b8d5702298999c0ca86c24604563be259f8c570e209913fdcc786570d11cb935"
+    },
+    "methodDeclarationKey": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/OwnedApiObservationWorkerTest.java#dev.codex.schubert.nk.api.monitoring.OwnedApiObservationWorkerTest#obsOwn005/0@276",
+    "newTestIdInvented": false,
+    "oldSourcePtTransferred": false,
+    "parentReview": {
+      "applicability": "\u9806\u5e8f/\u672a\u8d77\u52d5",
+      "line": 11,
+      "path": "evidence/01_PT/018_NK-OPS-001/1950_G13ObservationWorker44_\u72ec\u7acb\u671f\u5f85\u5024\u610f\u5473\u5bfe\u5fdc\u8868.md",
+      "reviewedAssertionOrFixtureRelation": "start\u62d2\u5426\u3001\u672a\u8d77\u52d5budget supplier\u3092\u8aad\u3080\u3068AssertionError\u3001starts=0",
+      "reviewedMainPaths": [
+        "requestStop",
+        "start",
+        "awaitStopped"
+      ],
+      "rowSha256": "8bd8262e6708d458e8387b5b526a45257b01bfe5e3dea471bba11d6e152c6f0f",
+      "sha256": "5f472d934a5338733d368bdfad1d76b683d4b979a82bfc9625fb988b6b7138d1"
+    },
+    "physicalTestClassSha256": "cc135f1c5e93c0cb5e813cc2e7bfce064a161f7ff61565ae7abff8ccb0c39878",
+    "productExecuted": false,
+    "referenceAdditionalBudgetPp": 0,
+    "reviewDoesNotProveEveryFaultCombination": true,
+    "reviewStatus": "STATIC_METHOD_ORACLE_RELATION_REVIEWED_NOT_DYNAMIC_PT",
+    "sourcePath": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/OwnedApiObservationWorkerTest.java",
+    "sourceSha256": "a19890fcd82eaafdeed5eb1520687a1d04d6ca44dc9aeb6d24d1c3b2b6b8fa0a",
+    "startLine": 276,
+    "whole451Accepted": false
+  },
+  {
+    "bodySha256": "8cfb39f9c78f6a19cecb85cfa998a51ae726577a101da86e89e878643540c28c",
+    "canonicalOwner": "WBS-P018-09",
+    "compiledDescriptor": "()V",
+    "costOwner": "WBS-G13.07",
+    "endLine": 302,
+    "existingTestId": "OBSOWN006",
+    "independentOracle": {
+      "line": 26,
+      "originalIndependentExpectedBasis": "\u540cinstance\u3001\u518dstart\u4e0d\u53ef\u3001\u672a\u8d77\u52d5\u8cc7\u6e90\u306e\u5f8c\u6761\u4ef6",
+      "originalInputAndOperation": "\u540c\u671fstarter\u306eRTE",
+      "path": "evidence/01_PT/018_NK-OPS-001/1864_APIObservationOwnedWorker_\u88fd\u9020\u30fb\u5358\u4f53\u4ed5\u69d8.md",
+      "rowSha256": "5eb72090ac75db60a4f7ef76bdf8125c6713d3740c6b9aca114f8cb92c006bf5",
+      "sha256": "b8d5702298999c0ca86c24604563be259f8c570e209913fdcc786570d11cb935"
+    },
+    "methodDeclarationKey": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/OwnedApiObservationWorkerTest.java#dev.codex.schubert.nk.api.monitoring.OwnedApiObservationWorkerTest#obsOwn006/0@289",
+    "newTestIdInvented": false,
+    "oldSourcePtTransferred": false,
+    "parentReview": {
+      "applicability": "\u4f8b\u5916/\u518d\u5b9f\u884c\u62d2\u5426",
+      "line": 12,
+      "path": "evidence/01_PT/018_NK-OPS-001/1950_G13ObservationWorker44_\u72ec\u7acb\u671f\u5f85\u5024\u610f\u5473\u5bfe\u5fdc\u8868.md",
+      "reviewedAssertionOrFixtureRelation": "\u56fa\u5b9astarter RTE\u306e\u540c\u4e00\u6027\u30fb\u518dstart\u62d2\u5426\u30fb\u672a\u8d77\u52d5budget\u672a\u8aad/factory0",
+      "reviewedMainPaths": [
+        "start",
+        "awaitStopped"
+      ],
+      "rowSha256": "39f9249c2de7207914b3ac320d55b6f2a07fe0583adc59799b7d133758090002",
+      "sha256": "5f472d934a5338733d368bdfad1d76b683d4b979a82bfc9625fb988b6b7138d1"
+    },
+    "physicalTestClassSha256": "cc135f1c5e93c0cb5e813cc2e7bfce064a161f7ff61565ae7abff8ccb0c39878",
+    "productExecuted": false,
+    "referenceAdditionalBudgetPp": 0,
+    "reviewDoesNotProveEveryFaultCombination": true,
+    "reviewStatus": "STATIC_METHOD_ORACLE_RELATION_REVIEWED_NOT_DYNAMIC_PT",
+    "sourcePath": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/OwnedApiObservationWorkerTest.java",
+    "sourceSha256": "a19890fcd82eaafdeed5eb1520687a1d04d6ca44dc9aeb6d24d1c3b2b6b8fa0a",
+    "startLine": 289,
+    "whole451Accepted": false
+  },
+  {
+    "bodySha256": "0cba1cce124ab0f62583c5c41989dcc613f55f3c2f5689b4d84274c7946f3906",
+    "canonicalOwner": "WBS-P018-09",
+    "compiledDescriptor": "()V",
+    "costOwner": "WBS-G13.07",
+    "endLine": 316,
+    "existingTestId": "OBSOWN007",
+    "independentOracle": {
+      "line": 27,
+      "originalIndependentExpectedBasis": "\u540cError\u3001factory0\u3001\u672a\u8d77\u52d5\u3092\u5b89\u5168\u56de\u53ce",
+      "originalInputAndOperation": "\u540c\u671fstarter\u306eError",
+      "path": "evidence/01_PT/018_NK-OPS-001/1864_APIObservationOwnedWorker_\u88fd\u9020\u30fb\u5358\u4f53\u4ed5\u69d8.md",
+      "rowSha256": "dc70fe56529fd920d62225c05395648623252b6c3e4fff988f45b3071563852f",
+      "sha256": "b8d5702298999c0ca86c24604563be259f8c570e209913fdcc786570d11cb935"
+    },
+    "methodDeclarationKey": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/OwnedApiObservationWorkerTest.java#dev.codex.schubert.nk.api.monitoring.OwnedApiObservationWorkerTest#obsOwn007/0@304",
+    "newTestIdInvented": false,
+    "oldSourcePtTransferred": false,
+    "parentReview": {
+      "applicability": "fatal",
+      "line": 13,
+      "path": "evidence/01_PT/018_NK-OPS-001/1950_G13ObservationWorker44_\u72ec\u7acb\u671f\u5f85\u5024\u610f\u5473\u5bfe\u5fdc\u8868.md",
+      "reviewedAssertionOrFixtureRelation": "\u56fa\u5b9astarter Error\u540c\u4e00\u6027\u30fb\u672a\u8d77\u52d5budget\u672a\u8aad/factory0\u3001fixture\u56de\u53ce\u306fowner\u6b63\u5e38\u5316\u3068\u5206\u96e2",
+      "reviewedMainPaths": [
+        "start",
+        "awaitStopped"
+      ],
+      "rowSha256": "b7ac8ffbbe1023ddd60b914054e3b2be6ac2d7d8070c036dddc1b6dfcf916ad6",
+      "sha256": "5f472d934a5338733d368bdfad1d76b683d4b979a82bfc9625fb988b6b7138d1"
+    },
+    "physicalTestClassSha256": "cc135f1c5e93c0cb5e813cc2e7bfce064a161f7ff61565ae7abff8ccb0c39878",
+    "productExecuted": false,
+    "referenceAdditionalBudgetPp": 0,
+    "reviewDoesNotProveEveryFaultCombination": true,
+    "reviewStatus": "STATIC_METHOD_ORACLE_RELATION_REVIEWED_NOT_DYNAMIC_PT",
+    "sourcePath": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/OwnedApiObservationWorkerTest.java",
+    "sourceSha256": "a19890fcd82eaafdeed5eb1520687a1d04d6ca44dc9aeb6d24d1c3b2b6b8fa0a",
+    "startLine": 304,
+    "whole451Accepted": false
+  },
+  {
+    "bodySha256": "e3c02c5f7f7f9f76edca0604fe0705f432b78545e2185fdd14aee8e997664f0c",
+    "canonicalOwner": "WBS-P018-09",
+    "compiledDescriptor": "()V",
+    "costOwner": "WBS-G13.07",
+    "endLine": 329,
+    "existingTestId": "OBSOWN008",
+    "independentOracle": {
+      "line": 28,
+      "originalIndependentExpectedBasis": "start\u5931\u6557\u3001DB0\u3001\u6210\u529f\u8d77\u52d5\u3078\u8aad\u66ff\u306a\u3057",
+      "originalInputAndOperation": "starter\u304cNEW\u306e\u307e\u307ereturn",
+      "path": "evidence/01_PT/018_NK-OPS-001/1864_APIObservationOwnedWorker_\u88fd\u9020\u30fb\u5358\u4f53\u4ed5\u69d8.md",
+      "rowSha256": "ad63e0468e6d16891090d3ce0a398816bf42f4ff926227f20eec9dd8bea7bf72",
+      "sha256": "b8d5702298999c0ca86c24604563be259f8c570e209913fdcc786570d11cb935"
+    },
+    "methodDeclarationKey": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/OwnedApiObservationWorkerTest.java#dev.codex.schubert.nk.api.monitoring.OwnedApiObservationWorkerTest#obsOwn008/0@318",
+    "newTestIdInvented": false,
+    "oldSourcePtTransferred": false,
+    "parentReview": {
+      "applicability": "\u5883\u754c/\u507d\u6210\u529f\u62d2\u5426",
+      "line": 14,
+      "path": "evidence/01_PT/018_NK-OPS-001/1950_G13ObservationWorker44_\u72ec\u7acb\u671f\u5f85\u5024\u610f\u5473\u5bfe\u5fdc\u8868.md",
+      "reviewedAssertionOrFixtureRelation": "fake starter NEW\u5e30\u9084\u3092IllegalState\u62d2\u5426\u3001budget/DB0\u3002\u672a\u8d77\u52d5\u304c\u6210\u529fstart\u3067\u306f\u306a\u3044",
+      "reviewedMainPaths": [
+        "start",
+        "awaitStopped"
+      ],
+      "rowSha256": "822da2391ae490d7a2a318a114f6f94f9a06c9956273c00f20acd6c5256bee3b",
+      "sha256": "5f472d934a5338733d368bdfad1d76b683d4b979a82bfc9625fb988b6b7138d1"
+    },
+    "physicalTestClassSha256": "cc135f1c5e93c0cb5e813cc2e7bfce064a161f7ff61565ae7abff8ccb0c39878",
+    "productExecuted": false,
+    "referenceAdditionalBudgetPp": 0,
+    "reviewDoesNotProveEveryFaultCombination": true,
+    "reviewStatus": "STATIC_METHOD_ORACLE_RELATION_REVIEWED_NOT_DYNAMIC_PT",
+    "sourcePath": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/OwnedApiObservationWorkerTest.java",
+    "sourceSha256": "a19890fcd82eaafdeed5eb1520687a1d04d6ca44dc9aeb6d24d1c3b2b6b8fa0a",
+    "startLine": 318,
+    "whole451Accepted": false
+  },
+  {
+    "bodySha256": "f3a7df262e5d00dc8f4708eda106920ac56b20013eb75ba4b787b662cad7fff0",
+    "canonicalOwner": "WBS-P018-09",
+    "compiledDescriptor": "()V",
+    "costOwner": "WBS-G13.07",
+    "endLine": 345,
+    "existingTestId": "OBSOWN009",
+    "independentOracle": {
+      "line": 29,
+      "originalIndependentExpectedBasis": "\u5143RTE\u4fdd\u6301\u3001\u9032\u884cSQL\u3092stop/drain\u30fb\u4e00\u56declose",
+      "originalInputAndOperation": "\u5b9fThread.start\u76f4\u5f8c\u306bstarter\u304cRTE",
+      "path": "evidence/01_PT/018_NK-OPS-001/1864_APIObservationOwnedWorker_\u88fd\u9020\u30fb\u5358\u4f53\u4ed5\u69d8.md",
+      "rowSha256": "2527eec54ad701724ed74872030368333f5052fdeb6db6808c127d585edd22fd",
+      "sha256": "b8d5702298999c0ca86c24604563be259f8c570e209913fdcc786570d11cb935"
+    },
+    "methodDeclarationKey": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/OwnedApiObservationWorkerTest.java#dev.codex.schubert.nk.api.monitoring.OwnedApiObservationWorkerTest#obsOwn009/0@331",
+    "newTestIdInvented": false,
+    "oldSourcePtTransferred": false,
+    "parentReview": {
+      "applicability": "partial start",
+      "line": 15,
+      "path": "evidence/01_PT/018_NK-OPS-001/1950_G13ObservationWorker44_\u72ec\u7acb\u671f\u5f85\u5024\u610f\u5473\u5bfe\u5fdc\u8868.md",
+      "reviewedAssertionOrFixtureRelation": "\u771fstart\u5f8c\u306e\u5143RTE\u540c\u4e00\u6027\u3001SQL\u4fdd\u6301latch\u89e3\u653e\u5f8c\u306balive=false/cleanup(1,1)",
+      "reviewedMainPaths": [
+        "start",
+        "requestStop",
+        "awaitStopped"
+      ],
+      "rowSha256": "8f4ddfcbccce6103905f1c2ceb084bd937ad5e7910699c12a7af6238aa5032fe",
+      "sha256": "5f472d934a5338733d368bdfad1d76b683d4b979a82bfc9625fb988b6b7138d1"
+    },
+    "physicalTestClassSha256": "cc135f1c5e93c0cb5e813cc2e7bfce064a161f7ff61565ae7abff8ccb0c39878",
+    "productExecuted": false,
+    "referenceAdditionalBudgetPp": 0,
+    "reviewDoesNotProveEveryFaultCombination": true,
+    "reviewStatus": "STATIC_METHOD_ORACLE_RELATION_REVIEWED_NOT_DYNAMIC_PT",
+    "sourcePath": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/OwnedApiObservationWorkerTest.java",
+    "sourceSha256": "a19890fcd82eaafdeed5eb1520687a1d04d6ca44dc9aeb6d24d1c3b2b6b8fa0a",
+    "startLine": 331,
+    "whole451Accepted": false
+  },
+  {
+    "bodySha256": "531dbcc2a23cb92dd272aaafcc6248a135697c63daea463841cc600e9e1cbf64",
+    "canonicalOwner": "WBS-P018-09",
+    "compiledDescriptor": "()V",
+    "costOwner": "WBS-G13.07",
+    "endLine": 359,
+    "existingTestId": "OBSOWN010",
+    "independentOracle": {
+      "line": 30,
+      "originalIndependentExpectedBasis": "\u5143checked\u901a\u77e5\u3001worker\u5272\u8fbcflag\u5fa9\u5143\u3001\u7d42\u7aef",
+      "originalInputAndOperation": "signal await\u304c\u672a\u77e5InterruptedException",
+      "path": "evidence/01_PT/018_NK-OPS-001/1864_APIObservationOwnedWorker_\u88fd\u9020\u30fb\u5358\u4f53\u4ed5\u69d8.md",
+      "rowSha256": "11c73df12fa2c7ece7936defc7fcf2906b68aefb3562fa07269a3712ba599831",
+      "sha256": "b8d5702298999c0ca86c24604563be259f8c570e209913fdcc786570d11cb935"
+    },
+    "methodDeclarationKey": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/OwnedApiObservationWorkerTest.java#dev.codex.schubert.nk.api.monitoring.OwnedApiObservationWorkerTest#obsOwn010/0@347",
+    "newTestIdInvented": false,
+    "oldSourcePtTransferred": false,
+    "parentReview": {
+      "applicability": "\u672a\u77e5\u5272\u8fbc",
+      "line": 16,
+      "path": "evidence/01_PT/018_NK-OPS-001/1950_G13ObservationWorker44_\u72ec\u7acb\u671f\u5f85\u5024\u610f\u5473\u5bfe\u5fdc\u8868.md",
+      "reviewedAssertionOrFixtureRelation": "\u56fa\u5b9aInterruptedException\u3092failure queue\u3067same\u3001\u901a\u77e5\u6642IRQ=true\u3001uncaught=null",
+      "reviewedMainPaths": [
+        "run",
+        "awaitStopped"
+      ],
+      "rowSha256": "66e8d92978b8a0f672cce4b137ebdc2506a6e0bd9ab1eea805b45a22f0e6a1ab",
+      "sha256": "5f472d934a5338733d368bdfad1d76b683d4b979a82bfc9625fb988b6b7138d1"
+    },
+    "physicalTestClassSha256": "cc135f1c5e93c0cb5e813cc2e7bfce064a161f7ff61565ae7abff8ccb0c39878",
+    "productExecuted": false,
+    "referenceAdditionalBudgetPp": 0,
+    "reviewDoesNotProveEveryFaultCombination": true,
+    "reviewStatus": "STATIC_METHOD_ORACLE_RELATION_REVIEWED_NOT_DYNAMIC_PT",
+    "sourcePath": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/OwnedApiObservationWorkerTest.java",
+    "sourceSha256": "a19890fcd82eaafdeed5eb1520687a1d04d6ca44dc9aeb6d24d1c3b2b6b8fa0a",
+    "startLine": 347,
+    "whole451Accepted": false
+  },
+  {
+    "bodySha256": "9f10f3f3fa3ecfc7eb699692524f04fef88d65ccf6d03e655e042401d85bb0e0",
+    "canonicalOwner": "WBS-P018-09",
+    "compiledDescriptor": "()V",
+    "costOwner": "WBS-G13.07",
+    "endLine": 381,
+    "existingTestId": "OBSOWN011",
+    "independentOracle": {
+      "line": 31,
+      "originalIndependentExpectedBasis": "\u6b21fresh\u89b3\u6e2c2\u56de\u76ee\u3001fatal\u901a\u77e50\u3001\u5404conn\u4e00\u56decleanup",
+      "originalInputAndOperation": "\u4e00\u56de\u76eeSQL\u4f8b\u5916\u3001fixture nano\u309215\u79d2\u3078\u9032\u3081\u518dtick",
+      "path": "evidence/01_PT/018_NK-OPS-001/1864_APIObservationOwnedWorker_\u88fd\u9020\u30fb\u5358\u4f53\u4ed5\u69d8.md",
+      "rowSha256": "e17895b3b11207a5fdc77dd0f6bd5badacbafe299c3e0fb5b7379fd2131617ac",
+      "sha256": "b8d5702298999c0ca86c24604563be259f8c570e209913fdcc786570d11cb935"
+    },
+    "methodDeclarationKey": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/OwnedApiObservationWorkerTest.java#dev.codex.schubert.nk.api.monitoring.OwnedApiObservationWorkerTest#obsOwn011/0@361",
+    "newTestIdInvented": false,
+    "oldSourcePtTransferred": false,
+    "parentReview": {
+      "applicability": "\u4e00\u6642\u4f8b\u5916/\u6b21tick",
+      "line": 17,
+      "path": "evidence/01_PT/018_NK-OPS-001/1950_G13ObservationWorker44_\u72ec\u7acb\u671f\u5f85\u5024\u610f\u5473\u5bfe\u5fdc\u8868.md",
+      "reviewedAssertionOrFixtureRelation": "first SQLException\u5f8cfake nano\u309215\u79d2\u3078\u9032\u3081\u3001factoryReads=2/failure\u7a7a\u3001\u5404fixture cleanup(1,1)",
+      "reviewedMainPaths": [
+        "run",
+        "awaitStopped"
+      ],
+      "rowSha256": "458b0dd81ca6b43fe96e84bed95f22d0a2a085378050015802ecb19bda6e117f",
+      "sha256": "5f472d934a5338733d368bdfad1d76b683d4b979a82bfc9625fb988b6b7138d1"
+    },
+    "physicalTestClassSha256": "cc135f1c5e93c0cb5e813cc2e7bfce064a161f7ff61565ae7abff8ccb0c39878",
+    "productExecuted": false,
+    "referenceAdditionalBudgetPp": 0,
+    "reviewDoesNotProveEveryFaultCombination": true,
+    "reviewStatus": "STATIC_METHOD_ORACLE_RELATION_REVIEWED_NOT_DYNAMIC_PT",
+    "sourcePath": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/OwnedApiObservationWorkerTest.java",
+    "sourceSha256": "a19890fcd82eaafdeed5eb1520687a1d04d6ca44dc9aeb6d24d1c3b2b6b8fa0a",
+    "startLine": 361,
+    "whole451Accepted": false
+  },
+  {
+    "bodySha256": "69123d4640ee940c37a29d582e5b5d32021bd547dc13fa67bc87ab66c6fda019",
+    "canonicalOwner": "WBS-P018-09",
+    "compiledDescriptor": "()V",
+    "costOwner": "WBS-G13.07",
+    "endLine": 395,
+    "existingTestId": "OBSOWN012",
+    "independentOracle": {
+      "line": 32,
+      "originalIndependentExpectedBasis": "\u540cError\u901a\u77e5/uncaught\u3001SQL\u3092\u6b63\u5e38\u4e00\u6642\u6271\u3044\u3057\u306a\u3044",
+      "originalInputAndOperation": "SQL graph cause\u306bError",
+      "path": "evidence/01_PT/018_NK-OPS-001/1864_APIObservationOwnedWorker_\u88fd\u9020\u30fb\u5358\u4f53\u4ed5\u69d8.md",
+      "rowSha256": "8132b6bd0e4d025d011a105e6fa615f9e0ad1e2011f002d0c9b24b82e967ecd1",
+      "sha256": "b8d5702298999c0ca86c24604563be259f8c570e209913fdcc786570d11cb935"
+    },
+    "methodDeclarationKey": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/OwnedApiObservationWorkerTest.java#dev.codex.schubert.nk.api.monitoring.OwnedApiObservationWorkerTest#obsOwn012/0@383",
+    "newTestIdInvented": false,
+    "oldSourcePtTransferred": false,
+    "parentReview": {
+      "applicability": "graph fatal",
+      "line": 18,
+      "path": "evidence/01_PT/018_NK-OPS-001/1950_G13ObservationWorker44_\u72ec\u7acb\u671f\u5f85\u5024\u610f\u5473\u5bfe\u5fdc\u8868.md",
+      "reviewedAssertionOrFixtureRelation": "SQLException\u306e\u56fa\u5b9acause Error\u304cfailure/uncaught\u306esame\u3001SQL\u3092\u6b63\u5e38\u4e00\u6642\u6271\u3044\u3057\u306a\u3044",
+      "reviewedMainPaths": [
+        "run",
+        "awaitStopped"
+      ],
+      "rowSha256": "a79761454dfc56552a80f0c4f6562c52b5f0f46f7ad35ea53155c87b09fbb8a1",
+      "sha256": "5f472d934a5338733d368bdfad1d76b683d4b979a82bfc9625fb988b6b7138d1"
+    },
+    "physicalTestClassSha256": "cc135f1c5e93c0cb5e813cc2e7bfce064a161f7ff61565ae7abff8ccb0c39878",
+    "productExecuted": false,
+    "referenceAdditionalBudgetPp": 0,
+    "reviewDoesNotProveEveryFaultCombination": true,
+    "reviewStatus": "STATIC_METHOD_ORACLE_RELATION_REVIEWED_NOT_DYNAMIC_PT",
+    "sourcePath": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/OwnedApiObservationWorkerTest.java",
+    "sourceSha256": "a19890fcd82eaafdeed5eb1520687a1d04d6ca44dc9aeb6d24d1c3b2b6b8fa0a",
+    "startLine": 383,
+    "whole451Accepted": false
+  },
+  {
+    "bodySha256": "596690e657d4d98bd14fb16dfc8bb973023c6307a322cbbf40fff7f8bff6ddc4",
+    "canonicalOwner": "WBS-P018-09",
+    "compiledDescriptor": "()V",
+    "costOwner": "WBS-G13.07",
+    "endLine": 401,
+    "existingTestId": "OBSOWN013",
+    "independentOracle": {
+      "line": 33,
+      "originalIndependentExpectedBasis": "\u5143RTE\u901a\u77e5/uncaught\u3001\u9589\u9396\u78ba\u8a8d\u5f8c\u7d42\u7aef",
+      "originalInputAndOperation": "query RTE",
+      "path": "evidence/01_PT/018_NK-OPS-001/1864_APIObservationOwnedWorker_\u88fd\u9020\u30fb\u5358\u4f53\u4ed5\u69d8.md",
+      "rowSha256": "4a04347e9c0868af6f37d4181c13c63de5fc6e7b3e941975692e4a8be2063f60",
+      "sha256": "b8d5702298999c0ca86c24604563be259f8c570e209913fdcc786570d11cb935"
+    },
+    "methodDeclarationKey": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/OwnedApiObservationWorkerTest.java#dev.codex.schubert.nk.api.monitoring.OwnedApiObservationWorkerTest#obsOwn013/0@397",
+    "newTestIdInvented": false,
+    "oldSourcePtTransferred": false,
+    "parentReview": {
+      "applicability": "Runtime",
+      "line": 19,
+      "path": "evidence/01_PT/018_NK-OPS-001/1950_G13ObservationWorker44_\u72ec\u7acb\u671f\u5f85\u5024\u610f\u5473\u5bfe\u5fdc\u8868.md",
+      "reviewedAssertionOrFixtureRelation": "asynchronous helper\u3067\u5143query RTE\u3092failure/uncaught\u306esame\u3001pump\u7a7a/quiescent",
+      "reviewedMainPaths": [
+        "run"
+      ],
+      "rowSha256": "eabde9e4dd1a9b4ebf0a8cbfe6d75cf64c24e0a8052a0bf8a4baba4cd17d182a",
+      "sha256": "5f472d934a5338733d368bdfad1d76b683d4b979a82bfc9625fb988b6b7138d1"
+    },
+    "physicalTestClassSha256": "cc135f1c5e93c0cb5e813cc2e7bfce064a161f7ff61565ae7abff8ccb0c39878",
+    "productExecuted": false,
+    "referenceAdditionalBudgetPp": 0,
+    "reviewDoesNotProveEveryFaultCombination": true,
+    "reviewStatus": "STATIC_METHOD_ORACLE_RELATION_REVIEWED_NOT_DYNAMIC_PT",
+    "sourcePath": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/OwnedApiObservationWorkerTest.java",
+    "sourceSha256": "a19890fcd82eaafdeed5eb1520687a1d04d6ca44dc9aeb6d24d1c3b2b6b8fa0a",
+    "startLine": 397,
+    "whole451Accepted": false
+  },
+  {
+    "bodySha256": "0136a2337a54c2a8d688e6fc93d7687e9d7910bc10dbec3748a03da3584889a0",
+    "canonicalOwner": "WBS-P018-09",
+    "compiledDescriptor": "()V",
+    "costOwner": "WBS-G13.07",
+    "endLine": 407,
+    "existingTestId": "OBSOWN014",
+    "independentOracle": {
+      "line": 34,
+      "originalIndependentExpectedBasis": "\u5143Error\u901a\u77e5/uncaught\u3001\u9589\u9396\u78ba\u8a8d\u5f8c\u7d42\u7aef",
+      "originalInputAndOperation": "query Error",
+      "path": "evidence/01_PT/018_NK-OPS-001/1864_APIObservationOwnedWorker_\u88fd\u9020\u30fb\u5358\u4f53\u4ed5\u69d8.md",
+      "rowSha256": "e21b5b45c5ae126ced1ef9665340f7e6b26eb995a73878eaa3f96683771c2ab6",
+      "sha256": "b8d5702298999c0ca86c24604563be259f8c570e209913fdcc786570d11cb935"
+    },
+    "methodDeclarationKey": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/OwnedApiObservationWorkerTest.java#dev.codex.schubert.nk.api.monitoring.OwnedApiObservationWorkerTest#obsOwn014/0@403",
+    "newTestIdInvented": false,
+    "oldSourcePtTransferred": false,
+    "parentReview": {
+      "applicability": "Error",
+      "line": 20,
+      "path": "evidence/01_PT/018_NK-OPS-001/1950_G13ObservationWorker44_\u72ec\u7acb\u671f\u5f85\u5024\u610f\u5473\u5bfe\u5fdc\u8868.md",
+      "reviewedAssertionOrFixtureRelation": "\u540chelper\u3067\u5143query Error\u3092same\u3001\u6b20\u6e2c/quiescent\u3002\u5b9fVM\u969c\u5bb3\u8010\u6027\u306f\u8a8d\u5b9a\u3057\u306a\u3044",
+      "reviewedMainPaths": [
+        "run"
+      ],
+      "rowSha256": "62ff03382d7857fe0c5dd0a35502ab96b1a5d2eca3b3a7c7c4a6390550734d4f",
+      "sha256": "5f472d934a5338733d368bdfad1d76b683d4b979a82bfc9625fb988b6b7138d1"
+    },
+    "physicalTestClassSha256": "cc135f1c5e93c0cb5e813cc2e7bfce064a161f7ff61565ae7abff8ccb0c39878",
+    "productExecuted": false,
+    "referenceAdditionalBudgetPp": 0,
+    "reviewDoesNotProveEveryFaultCombination": true,
+    "reviewStatus": "STATIC_METHOD_ORACLE_RELATION_REVIEWED_NOT_DYNAMIC_PT",
+    "sourcePath": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/OwnedApiObservationWorkerTest.java",
+    "sourceSha256": "a19890fcd82eaafdeed5eb1520687a1d04d6ca44dc9aeb6d24d1c3b2b6b8fa0a",
+    "startLine": 403,
+    "whole451Accepted": false
+  },
+  {
+    "bodySha256": "d55f8a87aea71fd7e59619ea2cdd2295590593ecb4b297a0e1a9c33584ec522a",
+    "canonicalOwner": "WBS-P018-09",
+    "compiledDescriptor": "()V",
+    "costOwner": "WBS-G13.07",
+    "endLine": 413,
+    "existingTestId": "OBSOWN015",
+    "independentOracle": {
+      "line": 35,
+      "originalIndependentExpectedBasis": "\u5143primary\u7dad\u6301\u3001secondary\u4e00\u4ef6\u3092\u540cgraph\u3078\u4fdd\u6301",
+      "originalInputAndOperation": "query RTE\uff0b\u901a\u77e5RTE",
+      "path": "evidence/01_PT/018_NK-OPS-001/1864_APIObservationOwnedWorker_\u88fd\u9020\u30fb\u5358\u4f53\u4ed5\u69d8.md",
+      "rowSha256": "f4ea6aed861e74fb0c6ad7e9b5b7ff0d234d50251f72b7a4078d88e057053838",
+      "sha256": "b8d5702298999c0ca86c24604563be259f8c570e209913fdcc786570d11cb935"
+    },
+    "methodDeclarationKey": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/OwnedApiObservationWorkerTest.java#dev.codex.schubert.nk.api.monitoring.OwnedApiObservationWorkerTest#obsOwn015/0@409",
+    "newTestIdInvented": false,
+    "oldSourcePtTransferred": false,
+    "parentReview": {
+      "applicability": "\u4e8c\u6b21\u4f8b\u5916",
+      "line": 21,
+      "path": "evidence/01_PT/018_NK-OPS-001/1950_G13ObservationWorker44_\u72ec\u7acb\u671f\u5f85\u5024\u610f\u5473\u5bfe\u5fdc\u8868.md",
+      "reviewedAssertionOrFixtureRelation": "helper\u306e\u5143query RTE\u540c\u4e00\u6027\u3068\u56fa\u5b9anotification RTE\u4e00\u4ef6\u306esuppressed\u914d\u5217",
+      "reviewedMainPaths": [
+        "run"
+      ],
+      "rowSha256": "6d924bf7367a7917c62c5c161f92e096e8033a6ede99ccd8e52900ff0f0cc127",
+      "sha256": "5f472d934a5338733d368bdfad1d76b683d4b979a82bfc9625fb988b6b7138d1"
+    },
+    "physicalTestClassSha256": "cc135f1c5e93c0cb5e813cc2e7bfce064a161f7ff61565ae7abff8ccb0c39878",
+    "productExecuted": false,
+    "referenceAdditionalBudgetPp": 0,
+    "reviewDoesNotProveEveryFaultCombination": true,
+    "reviewStatus": "STATIC_METHOD_ORACLE_RELATION_REVIEWED_NOT_DYNAMIC_PT",
+    "sourcePath": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/OwnedApiObservationWorkerTest.java",
+    "sourceSha256": "a19890fcd82eaafdeed5eb1520687a1d04d6ca44dc9aeb6d24d1c3b2b6b8fa0a",
+    "startLine": 409,
+    "whole451Accepted": false
+  },
+  {
+    "bodySha256": "9490ddb4b4b5b40cce3158097b56b0e9440c1f6ec3b624b895de343637e85a58",
+    "canonicalOwner": "WBS-P018-09",
+    "compiledDescriptor": "()V",
+    "costOwner": "WBS-G13.07",
+    "endLine": 420,
+    "existingTestId": "OBSOWN016",
+    "independentOracle": {
+      "line": 36,
+      "originalIndependentExpectedBasis": "\u540csecondary Error\u512a\u5148\u3001\u5143graph\u4fdd\u6301",
+      "originalInputAndOperation": "query RTE\uff0b\u901a\u77e5Error",
+      "path": "evidence/01_PT/018_NK-OPS-001/1864_APIObservationOwnedWorker_\u88fd\u9020\u30fb\u5358\u4f53\u4ed5\u69d8.md",
+      "rowSha256": "007ff0bd57690298b892500f70c2f70d22aaec53eae92699a905c15ae29c0144",
+      "sha256": "b8d5702298999c0ca86c24604563be259f8c570e209913fdcc786570d11cb935"
+    },
+    "methodDeclarationKey": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/OwnedApiObservationWorkerTest.java#dev.codex.schubert.nk.api.monitoring.OwnedApiObservationWorkerTest#obsOwn016/0@415",
+    "newTestIdInvented": false,
+    "oldSourcePtTransferred": false,
+    "parentReview": {
+      "applicability": "\u4e8c\u6b21fatal",
+      "line": 22,
+      "path": "evidence/01_PT/018_NK-OPS-001/1950_G13ObservationWorker44_\u72ec\u7acb\u671f\u5f85\u5024\u610f\u5473\u5bfe\u5fdc\u8868.md",
+      "reviewedAssertionOrFixtureRelation": "notification Error\u306euncaught\u512a\u5148\u3001\u5143primary\u3078\u306e\u540csecondary\u914d\u5217\u4fdd\u6301",
+      "reviewedMainPaths": [
+        "run"
+      ],
+      "rowSha256": "78aa0c150c4d29fea3d2aac6e5c628bddac08e0d1de0f2af34f2e92ff1296c84",
+      "sha256": "5f472d934a5338733d368bdfad1d76b683d4b979a82bfc9625fb988b6b7138d1"
+    },
+    "physicalTestClassSha256": "cc135f1c5e93c0cb5e813cc2e7bfce064a161f7ff61565ae7abff8ccb0c39878",
+    "productExecuted": false,
+    "referenceAdditionalBudgetPp": 0,
+    "reviewDoesNotProveEveryFaultCombination": true,
+    "reviewStatus": "STATIC_METHOD_ORACLE_RELATION_REVIEWED_NOT_DYNAMIC_PT",
+    "sourcePath": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/OwnedApiObservationWorkerTest.java",
+    "sourceSha256": "a19890fcd82eaafdeed5eb1520687a1d04d6ca44dc9aeb6d24d1c3b2b6b8fa0a",
+    "startLine": 415,
+    "whole451Accepted": false
+  },
+  {
+    "bodySha256": "84b1ed10274254aa495ab777f968125c71a53bc10b5b8393c27799e9edcf850f",
+    "canonicalOwner": "WBS-P018-09",
+    "compiledDescriptor": "()V",
+    "costOwner": "WBS-G13.07",
+    "endLine": 437,
+    "existingTestId": "OBSOWN017",
+    "independentOracle": {
+      "line": 37,
+      "originalIndependentExpectedBasis": "\u5143\u5272\u8fbc\u306bsecondary\u4fdd\u6301\u3001RTE\u975e\u6b63\u5e38\u7d42\u7aef",
+      "originalInputAndOperation": "\u672a\u77e5\u5272\u8fbc\uff0b\u901a\u77e5RTE",
+      "path": "evidence/01_PT/018_NK-OPS-001/1864_APIObservationOwnedWorker_\u88fd\u9020\u30fb\u5358\u4f53\u4ed5\u69d8.md",
+      "rowSha256": "336325f7d35e9ec68716dc89235ca505ac59dd3d2a555d9ecf7fa9f0c4ab5628",
+      "sha256": "b8d5702298999c0ca86c24604563be259f8c570e209913fdcc786570d11cb935"
+    },
+    "methodDeclarationKey": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/OwnedApiObservationWorkerTest.java#dev.codex.schubert.nk.api.monitoring.OwnedApiObservationWorkerTest#obsOwn017/0@422",
+    "newTestIdInvented": false,
+    "oldSourcePtTransferred": false,
+    "parentReview": {
+      "applicability": "\u5272\u8fbc/\u4e8c\u6b21\u4f8b\u5916",
+      "line": 23,
+      "path": "evidence/01_PT/018_NK-OPS-001/1950_G13ObservationWorker44_\u72ec\u7acb\u671f\u5f85\u5024\u610f\u5473\u5bfe\u5fdc\u8868.md",
+      "reviewedAssertionOrFixtureRelation": "\u56fa\u5b9aIRQ primary\u306equeue\u540c\u4e00\u6027/IRQ\u4fdd\u6301\u3001notification RTE\u304cuncaught\u30fbsuppressed",
+      "reviewedMainPaths": [
+        "run"
+      ],
+      "rowSha256": "edb1c0e2dc9f88d73680f28c4eda1f49aca24aebdeecc698597c6c74f4d46bc3",
+      "sha256": "5f472d934a5338733d368bdfad1d76b683d4b979a82bfc9625fb988b6b7138d1"
+    },
+    "physicalTestClassSha256": "cc135f1c5e93c0cb5e813cc2e7bfce064a161f7ff61565ae7abff8ccb0c39878",
+    "productExecuted": false,
+    "referenceAdditionalBudgetPp": 0,
+    "reviewDoesNotProveEveryFaultCombination": true,
+    "reviewStatus": "STATIC_METHOD_ORACLE_RELATION_REVIEWED_NOT_DYNAMIC_PT",
+    "sourcePath": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/OwnedApiObservationWorkerTest.java",
+    "sourceSha256": "a19890fcd82eaafdeed5eb1520687a1d04d6ca44dc9aeb6d24d1c3b2b6b8fa0a",
+    "startLine": 422,
+    "whole451Accepted": false
+  },
+  {
+    "bodySha256": "56f4969d734c18fa8813f425526ca4e39b386b79852a37479eeecf476a7c024f",
+    "canonicalOwner": "WBS-P018-09",
+    "compiledDescriptor": "()V",
+    "costOwner": "WBS-G13.07",
+    "endLine": 452,
+    "existingTestId": "OBSOWN018",
+    "independentOracle": {
+      "line": 38,
+      "originalIndependentExpectedBasis": "\u540cError\u975e\u6b63\u5e38\u7d42\u7aef\u3001secondary graph\u4fdd\u6301",
+      "originalInputAndOperation": "\u672a\u77e5\u5272\u8fbc\uff0b\u901a\u77e5Error",
+      "path": "evidence/01_PT/018_NK-OPS-001/1864_APIObservationOwnedWorker_\u88fd\u9020\u30fb\u5358\u4f53\u4ed5\u69d8.md",
+      "rowSha256": "085e173a513ec5d5f7bd1fb098fa28189d01bacd33f88d5d4408702100835d87",
+      "sha256": "b8d5702298999c0ca86c24604563be259f8c570e209913fdcc786570d11cb935"
+    },
+    "methodDeclarationKey": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/OwnedApiObservationWorkerTest.java#dev.codex.schubert.nk.api.monitoring.OwnedApiObservationWorkerTest#obsOwn018/0@439",
+    "newTestIdInvented": false,
+    "oldSourcePtTransferred": false,
+    "parentReview": {
+      "applicability": "\u5272\u8fbc/\u4e8c\u6b21fatal",
+      "line": 24,
+      "path": "evidence/01_PT/018_NK-OPS-001/1950_G13ObservationWorker44_\u72ec\u7acb\u671f\u5f85\u5024\u610f\u5473\u5bfe\u5fdc\u8868.md",
+      "reviewedAssertionOrFixtureRelation": "notification Error\u304cuncaught\u3001\u5143IRQ\u306esuppressed\u306b\u540cError\u3002\u5171\u901a\u901a\u77e5\u7d4c\u8def\u306f010/017\u3068\u4f75\u8aad",
+      "reviewedMainPaths": [
+        "run"
+      ],
+      "rowSha256": "7054b26b4f358fed41cf673dc69ae9d3376825bfee3d58bb7bbebc6e36e1ae8d",
+      "sha256": "5f472d934a5338733d368bdfad1d76b683d4b979a82bfc9625fb988b6b7138d1"
+    },
+    "physicalTestClassSha256": "cc135f1c5e93c0cb5e813cc2e7bfce064a161f7ff61565ae7abff8ccb0c39878",
+    "productExecuted": false,
+    "referenceAdditionalBudgetPp": 0,
+    "reviewDoesNotProveEveryFaultCombination": true,
+    "reviewStatus": "STATIC_METHOD_ORACLE_RELATION_REVIEWED_NOT_DYNAMIC_PT",
+    "sourcePath": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/OwnedApiObservationWorkerTest.java",
+    "sourceSha256": "a19890fcd82eaafdeed5eb1520687a1d04d6ca44dc9aeb6d24d1c3b2b6b8fa0a",
+    "startLine": 439,
+    "whole451Accepted": false
+  },
+  {
+    "bodySha256": "c51cbfd150fa4d4a277fa3a726b4a47097cae07a93e858ed3abda96c53859f00",
+    "canonicalOwner": "WBS-P018-09",
+    "compiledDescriptor": "()V",
+    "costOwner": "WBS-G13.07",
+    "endLine": 465,
+    "existingTestId": "OBSOWN019",
+    "independentOracle": {
+      "line": 39,
+      "originalIndependentExpectedBasis": "\u672a\u77e5\u969c\u5bb3\u901a\u77e50\u3001\u5143stop\u5f8c\u6761\u4ef6\u30fb\u5272\u8fbc\u51e6\u7406",
+      "originalInputAndOperation": "stop\u8981\u6c42\u5f8c\u306esignal\u5272\u8fbc",
+      "path": "evidence/01_PT/018_NK-OPS-001/1864_APIObservationOwnedWorker_\u88fd\u9020\u30fb\u5358\u4f53\u4ed5\u69d8.md",
+      "rowSha256": "88d3cb288192feb43426bea1ccebae63f7a0d0ba84e3c88ab15110ba3924cd7a",
+      "sha256": "b8d5702298999c0ca86c24604563be259f8c570e209913fdcc786570d11cb935"
+    },
+    "methodDeclarationKey": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/OwnedApiObservationWorkerTest.java#dev.codex.schubert.nk.api.monitoring.OwnedApiObservationWorkerTest#obsOwn019/0@454",
+    "newTestIdInvented": false,
+    "oldSourcePtTransferred": false,
+    "parentReview": {
+      "applicability": "stop\u7af6\u5408",
+      "line": 25,
+      "path": "evidence/01_PT/018_NK-OPS-001/1950_G13ObservationWorker44_\u72ec\u7acb\u671f\u5f85\u5024\u610f\u5473\u5bfe\u5fdc\u8868.md",
+      "reviewedAssertionOrFixtureRelation": "beforeWait\u3067stop\u5f8c\u306eIRQ\u306ffailure\u7a7a/uncaught=null\u3001\u672a\u77e5\u5272\u8fbc\u3068\u533a\u5225",
+      "reviewedMainPaths": [
+        "run",
+        "requestStop"
+      ],
+      "rowSha256": "f1d80a43b181dca8b4d3d43105c7023bd0d37f0b67682521fb53d43e138e24e5",
+      "sha256": "5f472d934a5338733d368bdfad1d76b683d4b979a82bfc9625fb988b6b7138d1"
+    },
+    "physicalTestClassSha256": "cc135f1c5e93c0cb5e813cc2e7bfce064a161f7ff61565ae7abff8ccb0c39878",
+    "productExecuted": false,
+    "referenceAdditionalBudgetPp": 0,
+    "reviewDoesNotProveEveryFaultCombination": true,
+    "reviewStatus": "STATIC_METHOD_ORACLE_RELATION_REVIEWED_NOT_DYNAMIC_PT",
+    "sourcePath": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/OwnedApiObservationWorkerTest.java",
+    "sourceSha256": "a19890fcd82eaafdeed5eb1520687a1d04d6ca44dc9aeb6d24d1c3b2b6b8fa0a",
+    "startLine": 454,
+    "whole451Accepted": false
+  },
+  {
+    "bodySha256": "17ee524679062008c89c5dba46ac06599e074ecaea6219463056fa4e068fb442",
+    "canonicalOwner": "WBS-P018-09",
+    "compiledDescriptor": "()V",
+    "costOwner": "WBS-G13.07",
+    "endLine": 475,
+    "existingTestId": "OBSOWN020",
+    "independentOracle": {
+      "line": 40,
+      "originalIndependentExpectedBasis": "\u540cThread\u7d42\u7aef\uff0bpump quiescence\u53cc\u65b9",
+      "originalInputAndOperation": "idle worker\u3078stop/await",
+      "path": "evidence/01_PT/018_NK-OPS-001/1864_APIObservationOwnedWorker_\u88fd\u9020\u30fb\u5358\u4f53\u4ed5\u69d8.md",
+      "rowSha256": "5fb027cb50bd27656c99dd9d1a661fb0097572079211d2c4aba042f699a04054",
+      "sha256": "b8d5702298999c0ca86c24604563be259f8c570e209913fdcc786570d11cb935"
+    },
+    "methodDeclarationKey": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/OwnedApiObservationWorkerTest.java#dev.codex.schubert.nk.api.monitoring.OwnedApiObservationWorkerTest#obsOwn020/0@467",
+    "newTestIdInvented": false,
+    "oldSourcePtTransferred": false,
+    "parentReview": {
+      "applicability": "\u5b8c\u4e86\u4e8c\u6761\u4ef6",
+      "line": 26,
+      "path": "evidence/01_PT/018_NK-OPS-001/1950_G13ObservationWorker44_\u72ec\u7acb\u671f\u5f85\u5024\u610f\u5473\u5bfe\u5fdc\u8868.md",
+      "reviewedAssertionOrFixtureRelation": "\u81ea\u5df1worker alive=false\u3068pump.quiescent=true\u3092\u5225\u3005\u306b\u8981\u6c42",
+      "reviewedMainPaths": [
+        "requestStop",
+        "awaitStopped"
+      ],
+      "rowSha256": "ed3e751003005ac7f168934057f7ea1cb3110383b77ac994d9057cf27bc8e491",
+      "sha256": "5f472d934a5338733d368bdfad1d76b683d4b979a82bfc9625fb988b6b7138d1"
+    },
+    "physicalTestClassSha256": "cc135f1c5e93c0cb5e813cc2e7bfce064a161f7ff61565ae7abff8ccb0c39878",
+    "productExecuted": false,
+    "referenceAdditionalBudgetPp": 0,
+    "reviewDoesNotProveEveryFaultCombination": true,
+    "reviewStatus": "STATIC_METHOD_ORACLE_RELATION_REVIEWED_NOT_DYNAMIC_PT",
+    "sourcePath": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/OwnedApiObservationWorkerTest.java",
+    "sourceSha256": "a19890fcd82eaafdeed5eb1520687a1d04d6ca44dc9aeb6d24d1c3b2b6b8fa0a",
+    "startLine": 467,
+    "whole451Accepted": false
+  },
+  {
+    "bodySha256": "9cbce273e63cb17fb49c29a764845594b926f16e07f20b6192f831b61cc2ef03",
+    "canonicalOwner": "WBS-P018-09",
+    "compiledDescriptor": "()V",
+    "costOwner": "WBS-G13.07",
+    "endLine": 490,
+    "existingTestId": "OBSOWN021",
+    "independentOracle": {
+      "line": 41,
+      "originalIndependentExpectedBasis": "\u4fdd\u6301\u4e2dquiescent=false\u3001cleanup\u5f8c\u3060\u3051\u6b63\u5e38await",
+      "originalInputAndOperation": "SQL fixture\u4fdd\u6301\u4e2dstop\u2192release",
+      "path": "evidence/01_PT/018_NK-OPS-001/1864_APIObservationOwnedWorker_\u88fd\u9020\u30fb\u5358\u4f53\u4ed5\u69d8.md",
+      "rowSha256": "c88871390a83251143b80ea6dddb00fc2a75bc0b0d4d48e2681e7aa53714ae57",
+      "sha256": "b8d5702298999c0ca86c24604563be259f8c570e209913fdcc786570d11cb935"
+    },
+    "methodDeclarationKey": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/OwnedApiObservationWorkerTest.java#dev.codex.schubert.nk.api.monitoring.OwnedApiObservationWorkerTest#obsOwn021/0@477",
+    "newTestIdInvented": false,
+    "oldSourcePtTransferred": false,
+    "parentReview": {
+      "applicability": "\u4e26\u884c/\u4fdd\u7559",
+      "line": 27,
+      "path": "evidence/01_PT/018_NK-OPS-001/1950_G13ObservationWorker44_\u72ec\u7acb\u671f\u5f85\u5024\u610f\u5473\u5bfe\u5fdc\u8868.md",
+      "reviewedAssertionOrFixtureRelation": "SQL\u4fdd\u6301\u4e2dquiescent=false\u3001\u89e3\u653e\u5f8ctrue\u3068cleanup(1,1)\u3001TWR\u306e\u81ea\u5df1thread\u56de\u53ce",
+      "reviewedMainPaths": [
+        "requestStop",
+        "awaitStopped"
+      ],
+      "rowSha256": "a38d08c58952205a2ea4964c88eedc29f402e18f1062225217c01ff0abf490eb",
+      "sha256": "5f472d934a5338733d368bdfad1d76b683d4b979a82bfc9625fb988b6b7138d1"
+    },
+    "physicalTestClassSha256": "cc135f1c5e93c0cb5e813cc2e7bfce064a161f7ff61565ae7abff8ccb0c39878",
+    "productExecuted": false,
+    "referenceAdditionalBudgetPp": 0,
+    "reviewDoesNotProveEveryFaultCombination": true,
+    "reviewStatus": "STATIC_METHOD_ORACLE_RELATION_REVIEWED_NOT_DYNAMIC_PT",
+    "sourcePath": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/OwnedApiObservationWorkerTest.java",
+    "sourceSha256": "a19890fcd82eaafdeed5eb1520687a1d04d6ca44dc9aeb6d24d1c3b2b6b8fa0a",
+    "startLine": 477,
+    "whole451Accepted": false
+  },
+  {
+    "bodySha256": "919d608354c022258e49ada5bd07013a75cba1d69e6e345cf2c1e88e8253c342",
+    "canonicalOwner": "WBS-P018-09",
+    "compiledDescriptor": "()V",
+    "costOwner": "WBS-G13.07",
+    "endLine": 507,
+    "existingTestId": "OBSOWN022",
+    "independentOracle": {
+      "line": 42,
+      "originalIndependentExpectedBasis": "worker\u7d42\u4e86\u3060\u3051\u3067\u306f\u4e0d\u8db3\u3001await IOException\u30fbpump\u975equiescent",
+      "originalInputAndOperation": "conn close\u304c\u4e0d\u78ba\u5b9a\u3001\u6709\u9650diagnostic return",
+      "path": "evidence/01_PT/018_NK-OPS-001/1864_APIObservationOwnedWorker_\u88fd\u9020\u30fb\u5358\u4f53\u4ed5\u69d8.md",
+      "rowSha256": "3b00650ff3ce8ca82815689c7144bd5167fbf60a5ad68c29f5a70242bb394316",
+      "sha256": "b8d5702298999c0ca86c24604563be259f8c570e209913fdcc786570d11cb935"
+    },
+    "methodDeclarationKey": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/OwnedApiObservationWorkerTest.java#dev.codex.schubert.nk.api.monitoring.OwnedApiObservationWorkerTest#obsOwn022/0@492",
+    "newTestIdInvented": false,
+    "oldSourcePtTransferred": false,
+    "parentReview": {
+      "applicability": "UNKNOWN",
+      "line": 28,
+      "path": "evidence/01_PT/018_NK-OPS-001/1950_G13ObservationWorker44_\u72ec\u7acb\u671f\u5f85\u5024\u610f\u5473\u5bfe\u5fdc\u8868.md",
+      "reviewedAssertionOrFixtureRelation": "fake connection close SQL\u5931\u6557\u306fIOException/\u975equiescent/\u6b20\u6e2c\u3001Thread\u7d42\u7aef\u3060\u3051\u3067\u6210\u529f\u3057\u306a\u3044",
+      "reviewedMainPaths": [
+        "run",
+        "awaitStopped"
+      ],
+      "rowSha256": "31ef81382f847766d77a74c17f334f785e80d509cfdd8813e07c6eeab3e9587c",
+      "sha256": "5f472d934a5338733d368bdfad1d76b683d4b979a82bfc9625fb988b6b7138d1"
+    },
+    "physicalTestClassSha256": "cc135f1c5e93c0cb5e813cc2e7bfce064a161f7ff61565ae7abff8ccb0c39878",
+    "productExecuted": false,
+    "referenceAdditionalBudgetPp": 0,
+    "reviewDoesNotProveEveryFaultCombination": true,
+    "reviewStatus": "STATIC_METHOD_ORACLE_RELATION_REVIEWED_NOT_DYNAMIC_PT",
+    "sourcePath": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/OwnedApiObservationWorkerTest.java",
+    "sourceSha256": "a19890fcd82eaafdeed5eb1520687a1d04d6ca44dc9aeb6d24d1c3b2b6b8fa0a",
+    "startLine": 492,
+    "whole451Accepted": false
+  },
+  {
+    "bodySha256": "004da369cc2157c77b9f9f03857d0b903bc5d407812a2c3b1f5ed408fbcf0b70",
+    "canonicalOwner": "WBS-P018-09",
+    "compiledDescriptor": "()V",
+    "costOwner": "WBS-G13.07",
+    "endLine": 520,
+    "existingTestId": "OBSOWN023",
+    "independentOracle": {
+      "line": 43,
+      "originalIndependentExpectedBasis": "\u5f85\u6a5f\u6210\u529f0\u3001UNKNOWN/\u540cworker\u4fdd\u6301",
+      "originalInputAndOperation": "SQL\u9032\u884c\u4e2d\u3001\u521d\u56de\u6b8b\u4e88\u7b970",
+      "path": "evidence/01_PT/018_NK-OPS-001/1864_APIObservationOwnedWorker_\u88fd\u9020\u30fb\u5358\u4f53\u4ed5\u69d8.md",
+      "rowSha256": "c4cc2f5048f30a5a5e99aaac2c548767e68fd64bebbdd3ddf6affa5c4e4e6aa4",
+      "sha256": "b8d5702298999c0ca86c24604563be259f8c570e209913fdcc786570d11cb935"
+    },
+    "methodDeclarationKey": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/OwnedApiObservationWorkerTest.java#dev.codex.schubert.nk.api.monitoring.OwnedApiObservationWorkerTest#obsOwn023/0@509",
+    "newTestIdInvented": false,
+    "oldSourcePtTransferred": false,
+    "parentReview": {
+      "applicability": "\u96f6/UNKNOWN",
+      "line": 29,
+      "path": "evidence/01_PT/018_NK-OPS-001/1950_G13ObservationWorker44_\u72ec\u7acb\u671f\u5f85\u5024\u610f\u5473\u5bfe\u5fdc\u8868.md",
+      "reviewedAssertionOrFixtureRelation": "\u521d\u56debudget0\u3067IOException\u3001worker alive/\u975equiescent\u306e\u307e\u307efixture\u3060\u3051\u89e3\u653e",
+      "reviewedMainPaths": [
+        "awaitStopped"
+      ],
+      "rowSha256": "2bc9168505a378e6c2602c05fba139ff49db3276b1937e71e1ac8a781cb4b10d",
+      "sha256": "5f472d934a5338733d368bdfad1d76b683d4b979a82bfc9625fb988b6b7138d1"
+    },
+    "physicalTestClassSha256": "cc135f1c5e93c0cb5e813cc2e7bfce064a161f7ff61565ae7abff8ccb0c39878",
+    "productExecuted": false,
+    "referenceAdditionalBudgetPp": 0,
+    "reviewDoesNotProveEveryFaultCombination": true,
+    "reviewStatus": "STATIC_METHOD_ORACLE_RELATION_REVIEWED_NOT_DYNAMIC_PT",
+    "sourcePath": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/OwnedApiObservationWorkerTest.java",
+    "sourceSha256": "a19890fcd82eaafdeed5eb1520687a1d04d6ca44dc9aeb6d24d1c3b2b6b8fa0a",
+    "startLine": 509,
+    "whole451Accepted": false
+  },
+  {
+    "bodySha256": "6b15448e53e0c7571309384ba6d39bf99c044facf7e7954c8bb212516d339b33",
+    "canonicalOwner": "WBS-P018-09",
+    "compiledDescriptor": "()V",
+    "costOwner": "WBS-G13.07",
+    "endLine": 542,
+    "existingTestId": "OBSOWN024",
+    "independentOracle": {
+      "line": 44,
+      "originalIndependentExpectedBasis": "\u521d\u56de\u4e00\u8aad\u30fbclock\u672a\u8aad\u3067IOException\u3001\u8ca0\u5024wrap\u306b\u3088\u308b\u5ef6\u95770",
+      "originalInputAndOperation": "\u521d\u56de-1/Long.MIN_VALUE\u3001\u4ee5\u5f8cLong.MAX_VALUE",
+      "path": "evidence/01_PT/018_NK-OPS-001/1864_APIObservationOwnedWorker_\u88fd\u9020\u30fb\u5358\u4f53\u4ed5\u69d8.md",
+      "rowSha256": "f7d5e85cd86f2a7e3f34fa8d51c627055cb050fd4a848aa4e00a85bc4ad051fc",
+      "sha256": "b8d5702298999c0ca86c24604563be259f8c570e209913fdcc786570d11cb935"
+    },
+    "methodDeclarationKey": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/OwnedApiObservationWorkerTest.java#dev.codex.schubert.nk.api.monitoring.OwnedApiObservationWorkerTest#obsOwn024/0@522",
+    "newTestIdInvented": false,
+    "oldSourcePtTransferred": false,
+    "parentReview": {
+      "applicability": "\u8ca0/overflow\u9632\u6b62",
+      "line": 30,
+      "path": "evidence/01_PT/018_NK-OPS-001/1950_G13ObservationWorker44_\u72ec\u7acb\u671f\u5f85\u5024\u610f\u5473\u5bfe\u5fdc\u8868.md",
+      "reviewedAssertionOrFixtureRelation": "-1/MIN\u2192\u5f8c\u7d9aMAX\u306e\u56fa\u5b9a\u5165\u529b\u3001budget\u8aad\u53d61\u3001clock\u3092\u8aad\u3080\u3068AssertionError",
+      "reviewedMainPaths": [
+        "awaitStopped"
+      ],
+      "rowSha256": "006f04374d5c0cfbe0bdd353c5066be410e957c0eb4fcff5d8fc80f9c2651a14",
+      "sha256": "5f472d934a5338733d368bdfad1d76b683d4b979a82bfc9625fb988b6b7138d1"
+    },
+    "physicalTestClassSha256": "cc135f1c5e93c0cb5e813cc2e7bfce064a161f7ff61565ae7abff8ccb0c39878",
+    "productExecuted": false,
+    "referenceAdditionalBudgetPp": 0,
+    "reviewDoesNotProveEveryFaultCombination": true,
+    "reviewStatus": "STATIC_METHOD_ORACLE_RELATION_REVIEWED_NOT_DYNAMIC_PT",
+    "sourcePath": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/OwnedApiObservationWorkerTest.java",
+    "sourceSha256": "a19890fcd82eaafdeed5eb1520687a1d04d6ca44dc9aeb6d24d1c3b2b6b8fa0a",
+    "startLine": 522,
+    "whole451Accepted": false
+  },
+  {
+    "bodySha256": "ee9708add617e414a7b37ccc0e047c030d00b210ad1a536672c0d8fcf3cd858c",
+    "canonicalOwner": "WBS-P018-09",
+    "compiledDescriptor": "()V",
+    "costOwner": "WBS-G13.07",
+    "endLine": 566,
+    "existingTestId": "OBSOWN025",
+    "independentOracle": {
+      "line": 45,
+      "originalIndependentExpectedBasis": "\u6b8b1ms\u4e00\u56dejoin\u304ctimeout\u2192\u5373UNKNOWN\u3002clock/budget\u54042\u8aad\u3001\u8ffd\u52a0loop\u3067\u6b63\u5e38\u53160\uff08BUG1734\u6839\u62e0\u8a02\u6b63\uff09",
+      "originalInputAndOperation": "\u521d\u56de2ms\u3001\u7d4c\u904e1ms\u3001\u4ee5\u5f8c\u4e88\u7b9750\u79d2",
+      "path": "evidence/01_PT/018_NK-OPS-001/1864_APIObservationOwnedWorker_\u88fd\u9020\u30fb\u5358\u4f53\u4ed5\u69d8.md",
+      "rowSha256": "595425670297bce6a98a1fdba868a1531e9a72a273e28bced499c08d40304c55",
+      "sha256": "b8d5702298999c0ca86c24604563be259f8c570e209913fdcc786570d11cb935"
+    },
+    "methodDeclarationKey": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/OwnedApiObservationWorkerTest.java#dev.codex.schubert.nk.api.monitoring.OwnedApiObservationWorkerTest#obsOwn025/0@544",
+    "newTestIdInvented": false,
+    "oldSourcePtTransferred": false,
+    "parentReview": {
+      "applicability": "\u4e0a\u9650\u66f4\u65b0\u62d2\u5426",
+      "line": 31,
+      "path": "evidence/01_PT/018_NK-OPS-001/1950_G13ObservationWorker44_\u72ec\u7acb\u671f\u5f85\u5024\u610f\u5473\u5bfe\u5fdc\u8868.md",
+      "reviewedAssertionOrFixtureRelation": "\u72ec\u7acb2ms-1ms=\u6b8b1ms\u3001\u4ee5\u5f8c50\u79d2\u3067\u3082\u4e00\u56dejoin timeout\u3001clock/budget\u54042\u8aad\u30fbalive\u7dad\u6301",
+      "reviewedMainPaths": [
+        "awaitStopped"
+      ],
+      "rowSha256": "5cff4d000c81c1e917eadccf20e42fb5820216306888606138f896becda03475",
+      "sha256": "5f472d934a5338733d368bdfad1d76b683d4b979a82bfc9625fb988b6b7138d1"
+    },
+    "physicalTestClassSha256": "cc135f1c5e93c0cb5e813cc2e7bfce064a161f7ff61565ae7abff8ccb0c39878",
+    "productExecuted": false,
+    "referenceAdditionalBudgetPp": 0,
+    "reviewDoesNotProveEveryFaultCombination": true,
+    "reviewStatus": "STATIC_METHOD_ORACLE_RELATION_REVIEWED_NOT_DYNAMIC_PT",
+    "sourcePath": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/OwnedApiObservationWorkerTest.java",
+    "sourceSha256": "a19890fcd82eaafdeed5eb1520687a1d04d6ca44dc9aeb6d24d1c3b2b6b8fa0a",
+    "startLine": 544,
+    "whole451Accepted": false
+  },
+  {
+    "bodySha256": "399caeef17b15d06627598a6bc75f813db9be52b55836c6c44fd25c8fd587375",
+    "canonicalOwner": "WBS-P018-09",
+    "compiledDescriptor": "()V",
+    "costOwner": "WBS-G13.07",
+    "endLine": 580,
+    "existingTestId": "OBSOWN026",
+    "independentOracle": {
+      "line": 46,
+      "originalIndependentExpectedBasis": "\u56fa\u5b9aIOException\u30fbUNKNOWN\u3001\u5ef6\u95770",
+      "originalInputAndOperation": "stop clock 1\u21920\u9006\u884c",
+      "path": "evidence/01_PT/018_NK-OPS-001/1864_APIObservationOwnedWorker_\u88fd\u9020\u30fb\u5358\u4f53\u4ed5\u69d8.md",
+      "rowSha256": "c79f104fbda91356f1260387a13be4bb70978b66c0c604fedc9454eaae6d8cab",
+      "sha256": "b8d5702298999c0ca86c24604563be259f8c570e209913fdcc786570d11cb935"
+    },
+    "methodDeclarationKey": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/OwnedApiObservationWorkerTest.java#dev.codex.schubert.nk.api.monitoring.OwnedApiObservationWorkerTest#obsOwn026/0@568",
+    "newTestIdInvented": false,
+    "oldSourcePtTransferred": false,
+    "parentReview": {
+      "applicability": "\u9006\u884c",
+      "line": 32,
+      "path": "evidence/01_PT/018_NK-OPS-001/1950_G13ObservationWorker44_\u72ec\u7acb\u671f\u5f85\u5024\u610f\u5473\u5bfe\u5fdc\u8868.md",
+      "reviewedAssertionOrFixtureRelation": "\u56fa\u5b9a\u6642\u8a081\u21920\u306e\u9006\u884c\u3092IOException\u3001\u5143budget5\u79d2\u3092\u5ef6\u9577\u3057\u306a\u3044",
+      "reviewedMainPaths": [
+        "awaitStopped"
+      ],
+      "rowSha256": "f9768b1075416439fb727539374d68c64a6b2c17c3743af4bac49e0885ff47cf",
+      "sha256": "5f472d934a5338733d368bdfad1d76b683d4b979a82bfc9625fb988b6b7138d1"
+    },
+    "physicalTestClassSha256": "cc135f1c5e93c0cb5e813cc2e7bfce064a161f7ff61565ae7abff8ccb0c39878",
+    "productExecuted": false,
+    "referenceAdditionalBudgetPp": 0,
+    "reviewDoesNotProveEveryFaultCombination": true,
+    "reviewStatus": "STATIC_METHOD_ORACLE_RELATION_REVIEWED_NOT_DYNAMIC_PT",
+    "sourcePath": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/OwnedApiObservationWorkerTest.java",
+    "sourceSha256": "a19890fcd82eaafdeed5eb1520687a1d04d6ca44dc9aeb6d24d1c3b2b6b8fa0a",
+    "startLine": 568,
+    "whole451Accepted": false
+  },
+  {
+    "bodySha256": "09730121c11182f939b3f5bc111acf9f36b7d41bf51bc10d810bee243b0a6998",
+    "canonicalOwner": "WBS-P018-09",
+    "compiledDescriptor": "()V",
+    "costOwner": "WBS-G13.07",
+    "endLine": 600,
+    "existingTestId": "OBSOWN027",
+    "independentOracle": {
+      "line": 47,
+      "originalIndependentExpectedBasis": "\u540cinstance\u30fb\u505c\u6b62\u8981\u6c42/UNKNOWN\u7dad\u6301",
+      "originalInputAndOperation": "remaining port RTE",
+      "path": "evidence/01_PT/018_NK-OPS-001/1864_APIObservationOwnedWorker_\u88fd\u9020\u30fb\u5358\u4f53\u4ed5\u69d8.md",
+      "rowSha256": "a660880051e7654983098b902181a8fe99d973feef58156d09616e839b12eb4f",
+      "sha256": "b8d5702298999c0ca86c24604563be259f8c570e209913fdcc786570d11cb935"
+    },
+    "methodDeclarationKey": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/OwnedApiObservationWorkerTest.java#dev.codex.schubert.nk.api.monitoring.OwnedApiObservationWorkerTest#obsOwn027/0@582",
+    "newTestIdInvented": false,
+    "oldSourcePtTransferred": false,
+    "parentReview": {
+      "applicability": "budget\u4f8b\u5916",
+      "line": 33,
+      "path": "evidence/01_PT/018_NK-OPS-001/1950_G13ObservationWorker44_\u72ec\u7acb\u671f\u5f85\u5024\u610f\u5473\u5bfe\u5fdc\u8868.md",
+      "reviewedAssertionOrFixtureRelation": "remaining supplier\u56fa\u5b9aRTE\u306eassertSame\u3001query\u306ffixture finally\u89e3\u653e",
+      "reviewedMainPaths": [
+        "awaitStopped"
+      ],
+      "rowSha256": "23bcbf3e55d5a0552ce9d075ff7c87a2e9e3006ef4c8b4856b1f8e3bf9d21c5f",
+      "sha256": "5f472d934a5338733d368bdfad1d76b683d4b979a82bfc9625fb988b6b7138d1"
+    },
+    "physicalTestClassSha256": "cc135f1c5e93c0cb5e813cc2e7bfce064a161f7ff61565ae7abff8ccb0c39878",
+    "productExecuted": false,
+    "referenceAdditionalBudgetPp": 0,
+    "reviewDoesNotProveEveryFaultCombination": true,
+    "reviewStatus": "STATIC_METHOD_ORACLE_RELATION_REVIEWED_NOT_DYNAMIC_PT",
+    "sourcePath": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/OwnedApiObservationWorkerTest.java",
+    "sourceSha256": "a19890fcd82eaafdeed5eb1520687a1d04d6ca44dc9aeb6d24d1c3b2b6b8fa0a",
+    "startLine": 582,
+    "whole451Accepted": false
+  },
+  {
+    "bodySha256": "f6a0bd5a4ecd23356f434824807af6d7119240576509af108bb084bb0223930a",
+    "canonicalOwner": "WBS-P018-09",
+    "compiledDescriptor": "()V",
+    "costOwner": "WBS-G13.07",
+    "endLine": 620,
+    "existingTestId": "OBSOWN028",
+    "independentOracle": {
+      "line": 48,
+      "originalIndependentExpectedBasis": "\u540cError\u30fb\u505c\u6b62\u8981\u6c42/UNKNOWN\u7dad\u6301",
+      "originalInputAndOperation": "remaining port Error",
+      "path": "evidence/01_PT/018_NK-OPS-001/1864_APIObservationOwnedWorker_\u88fd\u9020\u30fb\u5358\u4f53\u4ed5\u69d8.md",
+      "rowSha256": "91107b3d3c83fb4e4f071853fbcdeadf3c3fe095b616897307470b1833110632",
+      "sha256": "b8d5702298999c0ca86c24604563be259f8c570e209913fdcc786570d11cb935"
+    },
+    "methodDeclarationKey": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/OwnedApiObservationWorkerTest.java#dev.codex.schubert.nk.api.monitoring.OwnedApiObservationWorkerTest#obsOwn028/0@602",
+    "newTestIdInvented": false,
+    "oldSourcePtTransferred": false,
+    "parentReview": {
+      "applicability": "budget fatal",
+      "line": 34,
+      "path": "evidence/01_PT/018_NK-OPS-001/1950_G13ObservationWorker44_\u72ec\u7acb\u671f\u5f85\u5024\u610f\u5473\u5bfe\u5fdc\u8868.md",
+      "reviewedAssertionOrFixtureRelation": "remaining supplier\u56fa\u5b9aError\u306eassertSame\u3001\u6b63\u5e38\u5b8c\u4e86\u3078\u5909\u63db\u3057\u306a\u3044",
+      "reviewedMainPaths": [
+        "awaitStopped"
+      ],
+      "rowSha256": "ae9f56e9b1b671e31a2d2e3b07beeeffdf2aa2745adc26ba528cb890fde35df2",
+      "sha256": "5f472d934a5338733d368bdfad1d76b683d4b979a82bfc9625fb988b6b7138d1"
+    },
+    "physicalTestClassSha256": "cc135f1c5e93c0cb5e813cc2e7bfce064a161f7ff61565ae7abff8ccb0c39878",
+    "productExecuted": false,
+    "referenceAdditionalBudgetPp": 0,
+    "reviewDoesNotProveEveryFaultCombination": true,
+    "reviewStatus": "STATIC_METHOD_ORACLE_RELATION_REVIEWED_NOT_DYNAMIC_PT",
+    "sourcePath": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/OwnedApiObservationWorkerTest.java",
+    "sourceSha256": "a19890fcd82eaafdeed5eb1520687a1d04d6ca44dc9aeb6d24d1c3b2b6b8fa0a",
+    "startLine": 602,
+    "whole451Accepted": false
+  },
+  {
+    "bodySha256": "607a8b6787a0754147304fbffbd0e5436a3575f00d803820f5084c1f1e17e638",
+    "canonicalOwner": "WBS-P018-09",
+    "compiledDescriptor": "()V",
+    "costOwner": "WBS-G13.07",
+    "endLine": 640,
+    "existingTestId": "OBSOWN029",
+    "independentOracle": {
+      "line": 49,
+      "originalIndependentExpectedBasis": "\u540cinstance\u30fbUNKNOWN\u7dad\u6301",
+      "originalInputAndOperation": "stop nano port RTE",
+      "path": "evidence/01_PT/018_NK-OPS-001/1864_APIObservationOwnedWorker_\u88fd\u9020\u30fb\u5358\u4f53\u4ed5\u69d8.md",
+      "rowSha256": "e8f0862800d6e1febb688f5405b9846da9ecf3c3e35063c510db41e681ed135a",
+      "sha256": "b8d5702298999c0ca86c24604563be259f8c570e209913fdcc786570d11cb935"
+    },
+    "methodDeclarationKey": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/OwnedApiObservationWorkerTest.java#dev.codex.schubert.nk.api.monitoring.OwnedApiObservationWorkerTest#obsOwn029/0@622",
+    "newTestIdInvented": false,
+    "oldSourcePtTransferred": false,
+    "parentReview": {
+      "applicability": "clock\u4f8b\u5916",
+      "line": 35,
+      "path": "evidence/01_PT/018_NK-OPS-001/1950_G13ObservationWorker44_\u72ec\u7acb\u671f\u5f85\u5024\u610f\u5473\u5bfe\u5fdc\u8868.md",
+      "reviewedAssertionOrFixtureRelation": "stop nano supplier\u56fa\u5b9aRTE\u306eassertSame\u3001\u6240\u6709frame\u306e\u7d50\u679c\u3068fixture\u56de\u53ce\u3092\u5206\u96e2",
+      "reviewedMainPaths": [
+        "awaitStopped"
+      ],
+      "rowSha256": "a5abad4122a29039f0d8f8aec6894c501414a0ed47d19378eccf98c650d34479",
+      "sha256": "5f472d934a5338733d368bdfad1d76b683d4b979a82bfc9625fb988b6b7138d1"
+    },
+    "physicalTestClassSha256": "cc135f1c5e93c0cb5e813cc2e7bfce064a161f7ff61565ae7abff8ccb0c39878",
+    "productExecuted": false,
+    "referenceAdditionalBudgetPp": 0,
+    "reviewDoesNotProveEveryFaultCombination": true,
+    "reviewStatus": "STATIC_METHOD_ORACLE_RELATION_REVIEWED_NOT_DYNAMIC_PT",
+    "sourcePath": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/OwnedApiObservationWorkerTest.java",
+    "sourceSha256": "a19890fcd82eaafdeed5eb1520687a1d04d6ca44dc9aeb6d24d1c3b2b6b8fa0a",
+    "startLine": 622,
+    "whole451Accepted": false
+  },
+  {
+    "bodySha256": "e27c1959f55c9695e020706368c19ca03c953d458402bc2946dba3fcc0870695",
+    "canonicalOwner": "WBS-P018-09",
+    "compiledDescriptor": "()V",
+    "costOwner": "WBS-G13.07",
+    "endLine": 660,
+    "existingTestId": "OBSOWN030",
+    "independentOracle": {
+      "line": 50,
+      "originalIndependentExpectedBasis": "\u540cError\u30fbUNKNOWN\u7dad\u6301",
+      "originalInputAndOperation": "stop nano port Error",
+      "path": "evidence/01_PT/018_NK-OPS-001/1864_APIObservationOwnedWorker_\u88fd\u9020\u30fb\u5358\u4f53\u4ed5\u69d8.md",
+      "rowSha256": "34767b4ede4e990f27b5fd139d3c9a9cc5fcebf74a3b287710256e547a7414b1",
+      "sha256": "b8d5702298999c0ca86c24604563be259f8c570e209913fdcc786570d11cb935"
+    },
+    "methodDeclarationKey": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/OwnedApiObservationWorkerTest.java#dev.codex.schubert.nk.api.monitoring.OwnedApiObservationWorkerTest#obsOwn030/0@642",
+    "newTestIdInvented": false,
+    "oldSourcePtTransferred": false,
+    "parentReview": {
+      "applicability": "clock fatal",
+      "line": 36,
+      "path": "evidence/01_PT/018_NK-OPS-001/1950_G13ObservationWorker44_\u72ec\u7acb\u671f\u5f85\u5024\u610f\u5473\u5bfe\u5fdc\u8868.md",
+      "reviewedAssertionOrFixtureRelation": "stop nano supplier\u56fa\u5b9aError\u306eassertSame",
+      "reviewedMainPaths": [
+        "awaitStopped"
+      ],
+      "rowSha256": "b48e9e3f47b49bdcec30c17d69e5d861ae9bcd8e92c815a5da837ed864bae199",
+      "sha256": "5f472d934a5338733d368bdfad1d76b683d4b979a82bfc9625fb988b6b7138d1"
+    },
+    "physicalTestClassSha256": "cc135f1c5e93c0cb5e813cc2e7bfce064a161f7ff61565ae7abff8ccb0c39878",
+    "productExecuted": false,
+    "referenceAdditionalBudgetPp": 0,
+    "reviewDoesNotProveEveryFaultCombination": true,
+    "reviewStatus": "STATIC_METHOD_ORACLE_RELATION_REVIEWED_NOT_DYNAMIC_PT",
+    "sourcePath": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/OwnedApiObservationWorkerTest.java",
+    "sourceSha256": "a19890fcd82eaafdeed5eb1520687a1d04d6ca44dc9aeb6d24d1c3b2b6b8fa0a",
+    "startLine": 642,
+    "whole451Accepted": false
+  },
+  {
+    "bodySha256": "49eb3105d3117a29f546eb529bda26d7518ab3b4539351f33642903cc90214d5",
+    "canonicalOwner": "WBS-P018-09",
+    "compiledDescriptor": "()V",
+    "costOwner": "WBS-G13.07",
+    "endLine": 691,
+    "existingTestId": "OBSOWN031",
+    "independentOracle": {
+      "line": 51,
+      "originalIndependentExpectedBasis": "\u5143\u4e88\u7b97\u3067\u5b8c\u4e86\u3057caller\u5272\u8fbcflag\u5fa9\u5143",
+      "originalInputAndOperation": "\u79c1\u6709\u5f85\u6a5fcaller\u5272\u8fbc\u3001\u7b2c\u4e09budget\u8aad\u5f8c\u306bSQL\u89e3\u653e",
+      "path": "evidence/01_PT/018_NK-OPS-001/1864_APIObservationOwnedWorker_\u88fd\u9020\u30fb\u5358\u4f53\u4ed5\u69d8.md",
+      "rowSha256": "5977ad86ec1e2b29e460b6c5d4923eadd3d3c57f070f43f2fb5568f5438e88b6",
+      "sha256": "b8d5702298999c0ca86c24604563be259f8c570e209913fdcc786570d11cb935"
+    },
+    "methodDeclarationKey": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/OwnedApiObservationWorkerTest.java#dev.codex.schubert.nk.api.monitoring.OwnedApiObservationWorkerTest#obsOwn031/0@662",
+    "newTestIdInvented": false,
+    "oldSourcePtTransferred": false,
+    "parentReview": {
+      "applicability": "\u5272\u8fbc/\u540c\u4e88\u7b97",
+      "line": 37,
+      "path": "evidence/01_PT/018_NK-OPS-001/1950_G13ObservationWorker44_\u72ec\u7acb\u671f\u5f85\u5024\u610f\u5473\u5bfe\u5fdc\u8868.md",
+      "reviewedAssertionOrFixtureRelation": "\u79c1\u6709waiter\u3092\u65e2\u5272\u8fbc\u306b\u3057\u7b2c\u4e09budget\u8aad\u53d6latch\u5f8cSQL\u89e3\u653e\u3001\u7d50\u679ctrue/IRQ\u5fa9\u5143\u3001budgetReads>=3",
+      "reviewedMainPaths": [
+        "awaitStopped"
+      ],
+      "rowSha256": "c793eccc7364148a954e1e4de8250eac0e5dec25442c311de5206b86e6011c4c",
+      "sha256": "5f472d934a5338733d368bdfad1d76b683d4b979a82bfc9625fb988b6b7138d1"
+    },
+    "physicalTestClassSha256": "cc135f1c5e93c0cb5e813cc2e7bfce064a161f7ff61565ae7abff8ccb0c39878",
+    "productExecuted": false,
+    "referenceAdditionalBudgetPp": 0,
+    "reviewDoesNotProveEveryFaultCombination": true,
+    "reviewStatus": "STATIC_METHOD_ORACLE_RELATION_REVIEWED_NOT_DYNAMIC_PT",
+    "sourcePath": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/OwnedApiObservationWorkerTest.java",
+    "sourceSha256": "a19890fcd82eaafdeed5eb1520687a1d04d6ca44dc9aeb6d24d1c3b2b6b8fa0a",
+    "startLine": 662,
+    "whole451Accepted": false
+  },
+  {
+    "bodySha256": "ea8d110d4bf631f552ae74f28682d21c464e7221f82b895c1bd468a4cde4e691",
+    "canonicalOwner": "WBS-P018-09",
+    "compiledDescriptor": "()V",
+    "costOwner": "WBS-G13.07",
+    "endLine": 718,
+    "existingTestId": "OBSOWN032",
+    "independentOracle": {
+      "line": 52,
+      "originalIndependentExpectedBasis": "IOException\u3068\u5272\u8fbcflag\u53cc\u65b9\u7dad\u6301",
+      "originalInputAndOperation": "\u79c1\u6709\u5f85\u6a5fcaller\u5272\u8fbc\uff0b\u5143\u4e88\u7b97\u6e80\u4e86",
+      "path": "evidence/01_PT/018_NK-OPS-001/1864_APIObservationOwnedWorker_\u88fd\u9020\u30fb\u5358\u4f53\u4ed5\u69d8.md",
+      "rowSha256": "2b74942710578106e8752cd7dbbd32451544491f15ed02c01435f5bf6ef28e31",
+      "sha256": "b8d5702298999c0ca86c24604563be259f8c570e209913fdcc786570d11cb935"
+    },
+    "methodDeclarationKey": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/OwnedApiObservationWorkerTest.java#dev.codex.schubert.nk.api.monitoring.OwnedApiObservationWorkerTest#obsOwn032/0@693",
+    "newTestIdInvented": false,
+    "oldSourcePtTransferred": false,
+    "parentReview": {
+      "applicability": "\u5272\u8fbc/\u671f\u9650",
+      "line": 38,
+      "path": "evidence/01_PT/018_NK-OPS-001/1950_G13ObservationWorker44_\u72ec\u7acb\u671f\u5f85\u5024\u610f\u5473\u5bfe\u5fdc\u8868.md",
+      "reviewedAssertionOrFixtureRelation": "\u79c1\u6709waiter\u65e2IRQ\uff0b\u56fa\u5b9a2ms\u6e80\u4e86\u3001IOException\u3068IRQ\u5fa9\u5143\u3092\u540c\u6642\u8981\u6c42",
+      "reviewedMainPaths": [
+        "awaitStopped"
+      ],
+      "rowSha256": "f3f22d0965d6ebd1de7df65f796874ef5329fe3a794b7c6ce7b6c0f3c4f1c192",
+      "sha256": "5f472d934a5338733d368bdfad1d76b683d4b979a82bfc9625fb988b6b7138d1"
+    },
+    "physicalTestClassSha256": "cc135f1c5e93c0cb5e813cc2e7bfce064a161f7ff61565ae7abff8ccb0c39878",
+    "productExecuted": false,
+    "referenceAdditionalBudgetPp": 0,
+    "reviewDoesNotProveEveryFaultCombination": true,
+    "reviewStatus": "STATIC_METHOD_ORACLE_RELATION_REVIEWED_NOT_DYNAMIC_PT",
+    "sourcePath": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/OwnedApiObservationWorkerTest.java",
+    "sourceSha256": "a19890fcd82eaafdeed5eb1520687a1d04d6ca44dc9aeb6d24d1c3b2b6b8fa0a",
+    "startLine": 693,
+    "whole451Accepted": false
+  },
+  {
+    "bodySha256": "21a2cd7f5354a7796d9965764c5376d3208a3ce5eaeae258eafe6759aded9440",
+    "canonicalOwner": "WBS-P018-09",
+    "compiledDescriptor": "()V",
+    "costOwner": "WBS-G13.07",
+    "endLine": 745,
+    "existingTestId": "OBSOWN033",
+    "independentOracle": {
+      "line": 53,
+      "originalIndependentExpectedBasis": "starting\u3092\u898b\u3066timeout UNKNOWN\u3001Thread\u672a\u751f\u5b58\u3060\u3051\u3067\u6210\u529f0",
+      "originalInputAndOperation": "starter\u547c\u51fa\u3057\u4fdd\u6301\u4e2d\uff08Thread NEW\uff09\u3001\u77ed\u4e88\u7b97",
+      "path": "evidence/01_PT/018_NK-OPS-001/1864_APIObservationOwnedWorker_\u88fd\u9020\u30fb\u5358\u4f53\u4ed5\u69d8.md",
+      "rowSha256": "6bb7f79b7d5503cc0efe78907572ae43c7175e1065f55d8639f6d3d3e99d95ab",
+      "sha256": "b8d5702298999c0ca86c24604563be259f8c570e209913fdcc786570d11cb935"
+    },
+    "methodDeclarationKey": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/OwnedApiObservationWorkerTest.java#dev.codex.schubert.nk.api.monitoring.OwnedApiObservationWorkerTest#obsOwn033/0@720",
+    "newTestIdInvented": false,
+    "oldSourcePtTransferred": false,
+    "parentReview": {
+      "applicability": "start\u7af6\u5408/UNKNOWN",
+      "line": 39,
+      "path": "evidence/01_PT/018_NK-OPS-001/1950_G13ObservationWorker44_\u72ec\u7acb\u671f\u5f85\u5024\u610f\u5473\u5bfe\u5fdc\u8868.md",
+      "reviewedAssertionOrFixtureRelation": "starter\u4fdd\u6301\u4e2dstate NEW\u3060\u304cstarting\u672a\u5b8c\u3001\u77edbudget\u3067IOException\u3001\u89e3\u653e\u5f8cDB0",
+      "reviewedMainPaths": [
+        "start",
+        "awaitStopped"
+      ],
+      "rowSha256": "64425c602a33bc5f932913810c4f85afe3e891e12b20349fe75542ac1bdc2d2f",
+      "sha256": "5f472d934a5338733d368bdfad1d76b683d4b979a82bfc9625fb988b6b7138d1"
+    },
+    "physicalTestClassSha256": "cc135f1c5e93c0cb5e813cc2e7bfce064a161f7ff61565ae7abff8ccb0c39878",
+    "productExecuted": false,
+    "referenceAdditionalBudgetPp": 0,
+    "reviewDoesNotProveEveryFaultCombination": true,
+    "reviewStatus": "STATIC_METHOD_ORACLE_RELATION_REVIEWED_NOT_DYNAMIC_PT",
+    "sourcePath": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/OwnedApiObservationWorkerTest.java",
+    "sourceSha256": "a19890fcd82eaafdeed5eb1520687a1d04d6ca44dc9aeb6d24d1c3b2b6b8fa0a",
+    "startLine": 720,
+    "whole451Accepted": false
+  },
+  {
+    "bodySha256": "79631dd19b17beda24d5e16222d56103bcf0276162982267792dc26c5a51d3b3",
+    "canonicalOwner": "WBS-P018-09",
+    "compiledDescriptor": "()V",
+    "costOwner": "WBS-G13.07",
+    "endLine": 782,
+    "existingTestId": "OBSOWN034",
+    "independentOracle": {
+      "line": 54,
+      "originalIndependentExpectedBasis": "start\u547c\u51fa\u3057\u5e30\u9084\u3068Thread\u7d42\u7aef\u53cc\u65b9\u307e\u3067\u5f85\u3064\u3001stop\u5f8cDB0",
+      "originalInputAndOperation": "\u540cstarter\u4fdd\u6301\u4e2d\u3001\u65e7\u6b8b\u4e88\u7b97\u5185\u306b\u89e3\u653e",
+      "path": "evidence/01_PT/018_NK-OPS-001/1864_APIObservationOwnedWorker_\u88fd\u9020\u30fb\u5358\u4f53\u4ed5\u69d8.md",
+      "rowSha256": "dc7262fdd09a8d6af05fe394f99e21b61b4c8358a2562004d353f8c0e6d70f41",
+      "sha256": "b8d5702298999c0ca86c24604563be259f8c570e209913fdcc786570d11cb935"
+    },
+    "methodDeclarationKey": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/OwnedApiObservationWorkerTest.java#dev.codex.schubert.nk.api.monitoring.OwnedApiObservationWorkerTest#obsOwn034/0@747",
+    "newTestIdInvented": false,
+    "oldSourcePtTransferred": false,
+    "parentReview": {
+      "applicability": "start\u7af6\u5408/\u5b8c\u4e86",
+      "line": 40,
+      "path": "evidence/01_PT/018_NK-OPS-001/1950_G13ObservationWorker44_\u72ec\u7acb\u671f\u5f85\u5024\u610f\u5473\u5bfe\u5fdc\u8868.md",
+      "reviewedAssertionOrFixtureRelation": "\u72ec\u7acblatch\u3067start\u5e30\u9084/worker\u505c\u6b62\u53cc\u65b9\u3092\u5f85\u3064Future\u3001DB0\u30025\u79d2\u306ffixture\u6b8b\u4e88\u7b97\u3067Unit\u671f\u9650\u3067\u306a\u3044",
+      "reviewedMainPaths": [
+        "start",
+        "awaitStopped"
+      ],
+      "rowSha256": "03e59c658bddefa91e34eea6e4ca719f0596c3565309419a62c9338941994220",
+      "sha256": "5f472d934a5338733d368bdfad1d76b683d4b979a82bfc9625fb988b6b7138d1"
+    },
+    "physicalTestClassSha256": "cc135f1c5e93c0cb5e813cc2e7bfce064a161f7ff61565ae7abff8ccb0c39878",
+    "productExecuted": false,
+    "referenceAdditionalBudgetPp": 0,
+    "reviewDoesNotProveEveryFaultCombination": true,
+    "reviewStatus": "STATIC_METHOD_ORACLE_RELATION_REVIEWED_NOT_DYNAMIC_PT",
+    "sourcePath": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/OwnedApiObservationWorkerTest.java",
+    "sourceSha256": "a19890fcd82eaafdeed5eb1520687a1d04d6ca44dc9aeb6d24d1c3b2b6b8fa0a",
+    "startLine": 747,
+    "whole451Accepted": false
+  },
+  {
+    "bodySha256": "8683e01a41789cf1ca62251d390f8547cb9871d1876f490be65254a5717c430e",
+    "canonicalOwner": "WBS-P018-09",
+    "compiledDescriptor": "()V",
+    "costOwner": "WBS-G13.07",
+    "endLine": 799,
+    "existingTestId": "OBSOWN035",
+    "independentOracle": {
+      "line": 55,
+      "originalIndependentExpectedBasis": "\u81ea\u5df1join\u62d2\u5426\u30fbUNKNOWN\u6c38\u4e45\u7dad\u6301\u3001fixture\u79c1\u6709handle\u3067\u56de\u53ce",
+      "originalInputAndOperation": "worker\u81ea\u8eab\u304b\u3089awaitStopped",
+      "path": "evidence/01_PT/018_NK-OPS-001/1864_APIObservationOwnedWorker_\u88fd\u9020\u30fb\u5358\u4f53\u4ed5\u69d8.md",
+      "rowSha256": "63efaee4bee8e14893e436225e581a0f6236527cee21aac6373fdc1a187ef385",
+      "sha256": "b8d5702298999c0ca86c24604563be259f8c570e209913fdcc786570d11cb935"
+    },
+    "methodDeclarationKey": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/OwnedApiObservationWorkerTest.java#dev.codex.schubert.nk.api.monitoring.OwnedApiObservationWorkerTest#obsOwn035/0@784",
+    "newTestIdInvented": false,
+    "oldSourcePtTransferred": false,
+    "parentReview": {
+      "applicability": "\u81ea\u5df1join/UNKNOWN",
+      "line": 41,
+      "path": "evidence/01_PT/018_NK-OPS-001/1950_G13ObservationWorker44_\u72ec\u7acb\u671f\u5f85\u5024\u610f\u5473\u5bfe\u5fdc\u8868.md",
+      "reviewedAssertionOrFixtureRelation": "worker\u81ea\u8eab\u306eawait\u306fIOException\u3001\u79c1\u6709handle\u3067join\u3057\u3066\u3082owner\u518dawait\u306fIOException",
+      "reviewedMainPaths": [
+        "run",
+        "awaitStopped"
+      ],
+      "rowSha256": "f061d4ca6999dc2ad1ea46104f3b8ebbbdaad91a24faf6347e19a432927055e5",
+      "sha256": "5f472d934a5338733d368bdfad1d76b683d4b979a82bfc9625fb988b6b7138d1"
+    },
+    "physicalTestClassSha256": "cc135f1c5e93c0cb5e813cc2e7bfce064a161f7ff61565ae7abff8ccb0c39878",
+    "productExecuted": false,
+    "referenceAdditionalBudgetPp": 0,
+    "reviewDoesNotProveEveryFaultCombination": true,
+    "reviewStatus": "STATIC_METHOD_ORACLE_RELATION_REVIEWED_NOT_DYNAMIC_PT",
+    "sourcePath": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/OwnedApiObservationWorkerTest.java",
+    "sourceSha256": "a19890fcd82eaafdeed5eb1520687a1d04d6ca44dc9aeb6d24d1c3b2b6b8fa0a",
+    "startLine": 784,
+    "whole451Accepted": false
+  },
+  {
+    "bodySha256": "6ca1b0bf77f35fbd5cee2d19e3fa2900cc44f6a6df829598c9dd2ea545805b02",
+    "canonicalOwner": "WBS-P018-09",
+    "compiledDescriptor": "()V",
+    "costOwner": "WBS-G13.07",
+    "endLine": 809,
+    "existingTestId": "OBSOWN036",
+    "independentOracle": {
+      "line": 56,
+      "originalIndependentExpectedBasis": "signal\u901a\u77e5\u4e00\u56de\u3060\u3051\u3001\u8cc7\u6e90\u518d\u64cd\u4f5c0",
+      "originalInputAndOperation": "\u91cd\u8907stop/\u672a\u8d77\u52d5await",
+      "path": "evidence/01_PT/018_NK-OPS-001/1864_APIObservationOwnedWorker_\u88fd\u9020\u30fb\u5358\u4f53\u4ed5\u69d8.md",
+      "rowSha256": "0f5cd9465c9f59f992b5c2886cf340c9033ecdeb735169471795d1b1c9b5a3cb",
+      "sha256": "b8d5702298999c0ca86c24604563be259f8c570e209913fdcc786570d11cb935"
+    },
+    "methodDeclarationKey": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/OwnedApiObservationWorkerTest.java#dev.codex.schubert.nk.api.monitoring.OwnedApiObservationWorkerTest#obsOwn036/0@801",
+    "newTestIdInvented": false,
+    "oldSourcePtTransferred": false,
+    "parentReview": {
+      "applicability": "\u51aa\u7b49/\u672a\u8d77\u52d5",
+      "line": 42,
+      "path": "evidence/01_PT/018_NK-OPS-001/1950_G13ObservationWorker44_\u72ec\u7acb\u671f\u5f85\u5024\u610f\u5473\u5bfe\u5fdc\u8868.md",
+      "reviewedAssertionOrFixtureRelation": "\u672a\u8d77\u52d5\u4e8c\u91cdstop\u3067\u3082signal.releases=1\u3001budget0\u304c\u7121\u671f\u9650wait\u306b\u306a\u3089\u306a\u3044",
+      "reviewedMainPaths": [
+        "requestStop",
+        "awaitStopped"
+      ],
+      "rowSha256": "58aa502d8c7880ee418db17c84978c0652b4cb85d2edefa4459fce9d394324a5",
+      "sha256": "5f472d934a5338733d368bdfad1d76b683d4b979a82bfc9625fb988b6b7138d1"
+    },
+    "physicalTestClassSha256": "cc135f1c5e93c0cb5e813cc2e7bfce064a161f7ff61565ae7abff8ccb0c39878",
+    "productExecuted": false,
+    "referenceAdditionalBudgetPp": 0,
+    "reviewDoesNotProveEveryFaultCombination": true,
+    "reviewStatus": "STATIC_METHOD_ORACLE_RELATION_REVIEWED_NOT_DYNAMIC_PT",
+    "sourcePath": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/OwnedApiObservationWorkerTest.java",
+    "sourceSha256": "a19890fcd82eaafdeed5eb1520687a1d04d6ca44dc9aeb6d24d1c3b2b6b8fa0a",
+    "startLine": 801,
+    "whole451Accepted": false
+  },
+  {
+    "bodySha256": "bdba2e95ab3df56143580d9df900a0c1ab43422d4cda22bfbb9dee99eb385573",
+    "canonicalOwner": "WBS-P018-09",
+    "compiledDescriptor": "()V",
+    "costOwner": "WBS-G13.07",
+    "endLine": 822,
+    "existingTestId": "OBSOWN037",
+    "independentOracle": {
+      "line": 57,
+      "originalIndependentExpectedBasis": "budget\u518d\u53d6\u5f970\u3001\u540cowner\u9589\u9396\u78ba\u8a8d",
+      "originalInputAndOperation": "\u771fThread\u7d42\u7aef\u5f8c\u306e\u518dawait",
+      "path": "evidence/01_PT/018_NK-OPS-001/1864_APIObservationOwnedWorker_\u88fd\u9020\u30fb\u5358\u4f53\u4ed5\u69d8.md",
+      "rowSha256": "737a910b5a266a77579bac48a71dd0d0a0df3067ce89889dac25bb65c33a1f70",
+      "sha256": "b8d5702298999c0ca86c24604563be259f8c570e209913fdcc786570d11cb935"
+    },
+    "methodDeclarationKey": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/OwnedApiObservationWorkerTest.java#dev.codex.schubert.nk.api.monitoring.OwnedApiObservationWorkerTest#obsOwn037/0@811",
+    "newTestIdInvented": false,
+    "oldSourcePtTransferred": false,
+    "parentReview": {
+      "applicability": "\u6b63\u5e38\u518d\u78ba\u8a8d",
+      "line": 43,
+      "path": "evidence/01_PT/018_NK-OPS-001/1950_G13ObservationWorker44_\u72ec\u7acb\u671f\u5f85\u5024\u610f\u5473\u5bfe\u5fdc\u8868.md",
+      "reviewedAssertionOrFixtureRelation": "\u771fThread\u505c\u6b62\u5f8c\u518dawait\u306fbudget supplier\u672a\u8aad\u3001alive=false\u3002\u6700\u521d\u306e\u6b63\u5e38\u78ba\u8a8d\u3092\u524d\u63d0\u306b\u3059\u308b",
+      "reviewedMainPaths": [
+        "awaitStopped"
+      ],
+      "rowSha256": "1c9a59f7d6d4792e5ed0dcd1ea830257e26e1c60f22b0f9edaaac26a83f1fbcf",
+      "sha256": "5f472d934a5338733d368bdfad1d76b683d4b979a82bfc9625fb988b6b7138d1"
+    },
+    "physicalTestClassSha256": "cc135f1c5e93c0cb5e813cc2e7bfce064a161f7ff61565ae7abff8ccb0c39878",
+    "productExecuted": false,
+    "referenceAdditionalBudgetPp": 0,
+    "reviewDoesNotProveEveryFaultCombination": true,
+    "reviewStatus": "STATIC_METHOD_ORACLE_RELATION_REVIEWED_NOT_DYNAMIC_PT",
+    "sourcePath": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/OwnedApiObservationWorkerTest.java",
+    "sourceSha256": "a19890fcd82eaafdeed5eb1520687a1d04d6ca44dc9aeb6d24d1c3b2b6b8fa0a",
+    "startLine": 811,
+    "whole451Accepted": false
+  },
+  {
+    "bodySha256": "fabf1f95d0afaff7c0bc58a3d638fae0041570e9995b4419303bf985b8df1323",
+    "canonicalOwner": "WBS-P018-09",
+    "compiledDescriptor": "()V",
+    "costOwner": "WBS-G13.07",
+    "endLine": 842,
+    "existingTestId": "OBSOWN038",
+    "independentOracle": {
+      "line": 58,
+      "originalIndependentExpectedBasis": "UNKNOWN\u306fIOException\u306e\u307e\u307e\u3001\u518d\u4e88\u7b97/\u81ea\u52d5\u6b63\u5e38\u53160",
+      "originalInputAndOperation": "timeout\u5f8c\u306bfixture\u3067Thread\u3092\u7d42\u7aef\u3057\u518dawait",
+      "path": "evidence/01_PT/018_NK-OPS-001/1864_APIObservationOwnedWorker_\u88fd\u9020\u30fb\u5358\u4f53\u4ed5\u69d8.md",
+      "rowSha256": "44b1133d53f7cdf2f245ca8a3946898edf6cac505aae1046b2085bfa580e8d48",
+      "sha256": "b8d5702298999c0ca86c24604563be259f8c570e209913fdcc786570d11cb935"
+    },
+    "methodDeclarationKey": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/OwnedApiObservationWorkerTest.java#dev.codex.schubert.nk.api.monitoring.OwnedApiObservationWorkerTest#obsOwn038/0@824",
+    "newTestIdInvented": false,
+    "oldSourcePtTransferred": false,
+    "parentReview": {
+      "applicability": "UNKNOWN\u975e\u6b63\u5e38\u5316",
+      "line": 44,
+      "path": "evidence/01_PT/018_NK-OPS-001/1950_G13ObservationWorker44_\u72ec\u7acb\u671f\u5f85\u5024\u610f\u5473\u5bfe\u5fdc\u8868.md",
+      "reviewedAssertionOrFixtureRelation": "timeout\u5f8c\u306e\u79c1\u6709Thread\u7d42\u7aef\u3092\u78ba\u8a8d\u3057\u3066\u3082owner\u518dawait\u306fIOException/budget\u672a\u8aad",
+      "reviewedMainPaths": [
+        "awaitStopped"
+      ],
+      "rowSha256": "465ab9ae88db4e66f6b4d509845b4343db4c44e6d8d7f6f7129da8a2972233be",
+      "sha256": "5f472d934a5338733d368bdfad1d76b683d4b979a82bfc9625fb988b6b7138d1"
+    },
+    "physicalTestClassSha256": "cc135f1c5e93c0cb5e813cc2e7bfce064a161f7ff61565ae7abff8ccb0c39878",
+    "productExecuted": false,
+    "referenceAdditionalBudgetPp": 0,
+    "reviewDoesNotProveEveryFaultCombination": true,
+    "reviewStatus": "STATIC_METHOD_ORACLE_RELATION_REVIEWED_NOT_DYNAMIC_PT",
+    "sourcePath": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/OwnedApiObservationWorkerTest.java",
+    "sourceSha256": "a19890fcd82eaafdeed5eb1520687a1d04d6ca44dc9aeb6d24d1c3b2b6b8fa0a",
+    "startLine": 824,
+    "whole451Accepted": false
+  },
+  {
+    "bodySha256": "9c373d2fe601360a0c295ee87ec4eaaf7955d12cd0fa7b1650ec2800e20f053a",
+    "canonicalOwner": "WBS-P018-09",
+    "compiledDescriptor": "()V",
+    "costOwner": "WBS-G13.07",
+    "endLine": 855,
+    "existingTestId": "OBSOWN039",
+    "independentOracle": {
+      "line": 59,
+      "originalIndependentExpectedBasis": "NPE\u3092\u901a\u77e5/\u975e\u6b63\u5e38\u7d42\u7aef\u3001DB0",
+      "originalInputAndOperation": "resource-free factory\u304cnull\u8fd4\u5374",
+      "path": "evidence/01_PT/018_NK-OPS-001/1864_APIObservationOwnedWorker_\u88fd\u9020\u30fb\u5358\u4f53\u4ed5\u69d8.md",
+      "rowSha256": "e015dc23bc0744446b65daefa100e1dfe574f7cdc77e35374d3332d9ab254001",
+      "sha256": "b8d5702298999c0ca86c24604563be259f8c570e209913fdcc786570d11cb935"
+    },
+    "methodDeclarationKey": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/OwnedApiObservationWorkerTest.java#dev.codex.schubert.nk.api.monitoring.OwnedApiObservationWorkerTest#obsOwn039/0@844",
+    "newTestIdInvented": false,
+    "oldSourcePtTransferred": false,
+    "parentReview": {
+      "applicability": "null/\u7570\u5e38\u901a\u77e5",
+      "line": 45,
+      "path": "evidence/01_PT/018_NK-OPS-001/1950_G13ObservationWorker44_\u72ec\u7acb\u671f\u5f85\u5024\u610f\u5473\u5bfe\u5fdc\u8868.md",
+      "reviewedAssertionOrFixtureRelation": "resource-free factory\u304cnull\u306a\u3089NPE\u3092failure/uncaught same\u3067\u901a\u77e5\u3001fixture\u53d6\u5f97\u7a7a",
+      "reviewedMainPaths": [
+        "run"
+      ],
+      "rowSha256": "a6182267bd9d6b7297dff9ad7f077c4635e206088d2aceea5950de9c10a7edaf",
+      "sha256": "5f472d934a5338733d368bdfad1d76b683d4b979a82bfc9625fb988b6b7138d1"
+    },
+    "physicalTestClassSha256": "cc135f1c5e93c0cb5e813cc2e7bfce064a161f7ff61565ae7abff8ccb0c39878",
+    "productExecuted": false,
+    "referenceAdditionalBudgetPp": 0,
+    "reviewDoesNotProveEveryFaultCombination": true,
+    "reviewStatus": "STATIC_METHOD_ORACLE_RELATION_REVIEWED_NOT_DYNAMIC_PT",
+    "sourcePath": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/OwnedApiObservationWorkerTest.java",
+    "sourceSha256": "a19890fcd82eaafdeed5eb1520687a1d04d6ca44dc9aeb6d24d1c3b2b6b8fa0a",
+    "startLine": 844,
+    "whole451Accepted": false
+  },
+  {
+    "bodySha256": "49060c929642801a241d5d4b9bca817777f9ca2b52066dc0fe3557ea2b957942",
+    "canonicalOwner": "WBS-P018-09",
+    "compiledDescriptor": "()V",
+    "costOwner": "WBS-G13.07",
+    "endLine": 869,
+    "existingTestId": "OBSOWN040",
+    "independentOracle": {
+      "line": 60,
+      "originalIndependentExpectedBasis": "\u540cprimary\u901a\u77e5/uncaught\u3001factory0",
+      "originalInputAndOperation": "pump nano RTE",
+      "path": "evidence/01_PT/018_NK-OPS-001/1864_APIObservationOwnedWorker_\u88fd\u9020\u30fb\u5358\u4f53\u4ed5\u69d8.md",
+      "rowSha256": "1e8c6fb814c7cfbf48c0176cd96fd30c8c112f7ddcfd52395ba75f986761c3c6",
+      "sha256": "b8d5702298999c0ca86c24604563be259f8c570e209913fdcc786570d11cb935"
+    },
+    "methodDeclarationKey": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/OwnedApiObservationWorkerTest.java#dev.codex.schubert.nk.api.monitoring.OwnedApiObservationWorkerTest#obsOwn040/0@857",
+    "newTestIdInvented": false,
+    "oldSourcePtTransferred": false,
+    "parentReview": {
+      "applicability": "\u53d6\u5f97\u524dRTE",
+      "line": 46,
+      "path": "evidence/01_PT/018_NK-OPS-001/1950_G13ObservationWorker44_\u72ec\u7acb\u671f\u5f85\u5024\u610f\u5473\u5bfe\u5fdc\u8868.md",
+      "reviewedAssertionOrFixtureRelation": "pump nano\u56fa\u5b9aRTE\u304cfailure/uncaught same\u3001factoryReads=0",
+      "reviewedMainPaths": [
+        "run"
+      ],
+      "rowSha256": "b20a55d3347ff491622b1b9230199c7b2334645c036279f9c68a51e7d936724b",
+      "sha256": "5f472d934a5338733d368bdfad1d76b683d4b979a82bfc9625fb988b6b7138d1"
+    },
+    "physicalTestClassSha256": "cc135f1c5e93c0cb5e813cc2e7bfce064a161f7ff61565ae7abff8ccb0c39878",
+    "productExecuted": false,
+    "referenceAdditionalBudgetPp": 0,
+    "reviewDoesNotProveEveryFaultCombination": true,
+    "reviewStatus": "STATIC_METHOD_ORACLE_RELATION_REVIEWED_NOT_DYNAMIC_PT",
+    "sourcePath": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/OwnedApiObservationWorkerTest.java",
+    "sourceSha256": "a19890fcd82eaafdeed5eb1520687a1d04d6ca44dc9aeb6d24d1c3b2b6b8fa0a",
+    "startLine": 857,
+    "whole451Accepted": false
+  },
+  {
+    "bodySha256": "b91937366a78e2b1a68c2065ee875ef01ea34a53f3aeff7c906c85ca8b38c911",
+    "canonicalOwner": "WBS-P018-09",
+    "compiledDescriptor": "()V",
+    "costOwner": "WBS-G13.07",
+    "endLine": 883,
+    "existingTestId": "OBSOWN041",
+    "independentOracle": {
+      "line": 61,
+      "originalIndependentExpectedBasis": "\u540cfatal\u901a\u77e5/uncaught\u3001factory0",
+      "originalInputAndOperation": "pump nano Error",
+      "path": "evidence/01_PT/018_NK-OPS-001/1864_APIObservationOwnedWorker_\u88fd\u9020\u30fb\u5358\u4f53\u4ed5\u69d8.md",
+      "rowSha256": "0cc467072c256a6b96462d84f0149e782b683a1b2c60bb7e7e3f67119a1aed8d",
+      "sha256": "b8d5702298999c0ca86c24604563be259f8c570e209913fdcc786570d11cb935"
+    },
+    "methodDeclarationKey": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/OwnedApiObservationWorkerTest.java#dev.codex.schubert.nk.api.monitoring.OwnedApiObservationWorkerTest#obsOwn041/0@871",
+    "newTestIdInvented": false,
+    "oldSourcePtTransferred": false,
+    "parentReview": {
+      "applicability": "\u53d6\u5f97\u524dfatal",
+      "line": 47,
+      "path": "evidence/01_PT/018_NK-OPS-001/1950_G13ObservationWorker44_\u72ec\u7acb\u671f\u5f85\u5024\u610f\u5473\u5bfe\u5fdc\u8868.md",
+      "reviewedAssertionOrFixtureRelation": "pump nano\u56fa\u5b9aError\u304cfailure/uncaught same\u3001factoryReads=0",
+      "reviewedMainPaths": [
+        "run"
+      ],
+      "rowSha256": "f352b524541e53454231befc7c0c53113e2c35ec5911ccd7b25aacf438f16b2b",
+      "sha256": "5f472d934a5338733d368bdfad1d76b683d4b979a82bfc9625fb988b6b7138d1"
+    },
+    "physicalTestClassSha256": "cc135f1c5e93c0cb5e813cc2e7bfce064a161f7ff61565ae7abff8ccb0c39878",
+    "productExecuted": false,
+    "referenceAdditionalBudgetPp": 0,
+    "reviewDoesNotProveEveryFaultCombination": true,
+    "reviewStatus": "STATIC_METHOD_ORACLE_RELATION_REVIEWED_NOT_DYNAMIC_PT",
+    "sourcePath": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/OwnedApiObservationWorkerTest.java",
+    "sourceSha256": "a19890fcd82eaafdeed5eb1520687a1d04d6ca44dc9aeb6d24d1c3b2b6b8fa0a",
+    "startLine": 871,
+    "whole451Accepted": false
+  },
+  {
+    "bodySha256": "a752a1a0ad3cb8ce89818de2af3e346674d2b79c5757aa03656970b4ba46e218",
+    "canonicalOwner": "WBS-P018-09",
+    "compiledDescriptor": "()V",
+    "costOwner": "WBS-G13.07",
+    "endLine": 905,
+    "existingTestId": "OBSOWN042",
+    "independentOracle": {
+      "line": 62,
+      "originalIndependentExpectedBasis": "\u540cfailure\u53c8\u306fIllegalState\u3067\u975e\u6b63\u5e38\u3001\u8aa4\u901a\u77e5\u3092\u901a\u5e38tick\u3078\u8aad\u66ff0\uff08BUG1734\u8ffd\u52a0vector\uff09",
+      "originalInputAndOperation": "signal RTE/Error\u53ca\u3073stop\u306a\u3057\u901a\u77e5",
+      "path": "evidence/01_PT/018_NK-OPS-001/1864_APIObservationOwnedWorker_\u88fd\u9020\u30fb\u5358\u4f53\u4ed5\u69d8.md",
+      "rowSha256": "09bffbd9b1cab93756f3fea0481076315cae1c1936d24d5f212db720a4eaa9d7",
+      "sha256": "b8d5702298999c0ca86c24604563be259f8c570e209913fdcc786570d11cb935"
+    },
+    "methodDeclarationKey": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/OwnedApiObservationWorkerTest.java#dev.codex.schubert.nk.api.monitoring.OwnedApiObservationWorkerTest#obsOwn042/0@885",
+    "newTestIdInvented": false,
+    "oldSourcePtTransferred": false,
+    "parentReview": {
+      "applicability": "\u901a\u77e5\u7570\u5e38",
+      "line": 48,
+      "path": "evidence/01_PT/018_NK-OPS-001/1950_G13ObservationWorker44_\u72ec\u7acb\u671f\u5f85\u5024\u610f\u5473\u5bfe\u5fdc\u8868.md",
+      "reviewedAssertionOrFixtureRelation": "signal RTE/Error\u306f\u5143same\u3001stop\u306a\u3057signal\u306fIllegalState/failure same\u3001\u901a\u5e38tick\u3078\u8aad\u66ff0",
+      "reviewedMainPaths": [
+        "run"
+      ],
+      "rowSha256": "b6ea4fe7249bc6ad42246b03ccdd60487d0f6ede4e23d6eec8043c02f40bfceb",
+      "sha256": "5f472d934a5338733d368bdfad1d76b683d4b979a82bfc9625fb988b6b7138d1"
+    },
+    "physicalTestClassSha256": "cc135f1c5e93c0cb5e813cc2e7bfce064a161f7ff61565ae7abff8ccb0c39878",
+    "productExecuted": false,
+    "referenceAdditionalBudgetPp": 0,
+    "reviewDoesNotProveEveryFaultCombination": true,
+    "reviewStatus": "STATIC_METHOD_ORACLE_RELATION_REVIEWED_NOT_DYNAMIC_PT",
+    "sourcePath": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/OwnedApiObservationWorkerTest.java",
+    "sourceSha256": "a19890fcd82eaafdeed5eb1520687a1d04d6ca44dc9aeb6d24d1c3b2b6b8fa0a",
+    "startLine": 885,
+    "whole451Accepted": false
+  },
+  {
+    "bodySha256": "7e7913ca79c822469c0e9c3e806663f296aeaf907d806a0f9dfd805338cc5124",
+    "canonicalOwner": "WBS-P018-09",
+    "compiledDescriptor": "()V",
+    "costOwner": "WBS-G13.07",
+    "endLine": 923,
+    "existingTestId": "OBSOWN043",
+    "independentOracle": {
+      "line": 63,
+      "originalIndependentExpectedBasis": "\u540cfailure\u30fb\u6c38\u4e45UNKNOWN\u3001\u5f8c\u7d9aawait\u518d\u8a66\u884c0",
+      "originalInputAndOperation": "stop signal release RTE/Error",
+      "path": "evidence/01_PT/018_NK-OPS-001/1864_APIObservationOwnedWorker_\u88fd\u9020\u30fb\u5358\u4f53\u4ed5\u69d8.md",
+      "rowSha256": "43eb321a4ff119dc92f4c37811b3b5b160c9f984b2e0822832073b604618bc92",
+      "sha256": "b8d5702298999c0ca86c24604563be259f8c570e209913fdcc786570d11cb935"
+    },
+    "methodDeclarationKey": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/OwnedApiObservationWorkerTest.java#dev.codex.schubert.nk.api.monitoring.OwnedApiObservationWorkerTest#obsOwn043/0@907",
+    "newTestIdInvented": false,
+    "oldSourcePtTransferred": false,
+    "parentReview": {
+      "applicability": "\u6c38\u4e45UNKNOWN",
+      "line": 49,
+      "path": "evidence/01_PT/018_NK-OPS-001/1950_G13ObservationWorker44_\u72ec\u7acb\u671f\u5f85\u5024\u610f\u5473\u5bfe\u5fdc\u8868.md",
+      "reviewedAssertionOrFixtureRelation": "stop signal\u306e\u56fa\u5b9aRTE/Error same\u3001\u305d\u306e\u5f8c\u518dawait\u306fIOException/\u6b8bbudget\u672a\u8aad",
+      "reviewedMainPaths": [
+        "requestStop",
+        "awaitStopped"
+      ],
+      "rowSha256": "9c02a97a607f2ac281c36de222b097c1d38b7b5f1da1e6480ab1074fe69e62e9",
+      "sha256": "5f472d934a5338733d368bdfad1d76b683d4b979a82bfc9625fb988b6b7138d1"
+    },
+    "physicalTestClassSha256": "cc135f1c5e93c0cb5e813cc2e7bfce064a161f7ff61565ae7abff8ccb0c39878",
+    "productExecuted": false,
+    "referenceAdditionalBudgetPp": 0,
+    "reviewDoesNotProveEveryFaultCombination": true,
+    "reviewStatus": "STATIC_METHOD_ORACLE_RELATION_REVIEWED_NOT_DYNAMIC_PT",
+    "sourcePath": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/OwnedApiObservationWorkerTest.java",
+    "sourceSha256": "a19890fcd82eaafdeed5eb1520687a1d04d6ca44dc9aeb6d24d1c3b2b6b8fa0a",
+    "startLine": 907,
+    "whole451Accepted": false
+  },
+  {
+    "bodySha256": "d207d59d65173fe91c330d43b0528aba313f4fdc735c44f559113290ffe72b6d",
+    "canonicalOwner": "WBS-P018-09",
+    "compiledDescriptor": "()V",
+    "costOwner": "WBS-G13.07",
+    "endLine": 939,
+    "existingTestId": "OBSOWN044",
+    "independentOracle": {
+      "line": 64,
+      "originalIndependentExpectedBasis": "IllegalState\u975e\u6b63\u5e38\u901a\u77e5\u3001DB\u518d\u53d6\u5f97/\u518d\u51e6\u74060",
+      "originalInputAndOperation": "factory\u304c\u4f7f\u7528\u6e08\u4e00\u56deowner\u3092\u8fd4\u5374",
+      "path": "evidence/01_PT/018_NK-OPS-001/1864_APIObservationOwnedWorker_\u88fd\u9020\u30fb\u5358\u4f53\u4ed5\u69d8.md",
+      "rowSha256": "fbb2aea144c40a496488da273a152930f4725c12fac25a65f05b6e2e4b7e3957",
+      "sha256": "b8d5702298999c0ca86c24604563be259f8c570e209913fdcc786570d11cb935"
+    },
+    "methodDeclarationKey": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/OwnedApiObservationWorkerTest.java#dev.codex.schubert.nk.api.monitoring.OwnedApiObservationWorkerTest#obsOwn044/0@925",
+    "newTestIdInvented": false,
+    "oldSourcePtTransferred": false,
+    "parentReview": {
+      "applicability": "\u4e00\u56deowner/\u91cd\u8907\u62d2\u5426",
+      "line": 50,
+      "path": "evidence/01_PT/018_NK-OPS-001/1950_G13ObservationWorker44_\u72ec\u7acb\u671f\u5f85\u5024\u610f\u5473\u5bfe\u5fdc\u8868.md",
+      "reviewedAssertionOrFixtureRelation": "\u4f7f\u7528\u6e08\u307f\u4e00\u56deattempt\u3092\u8fd4\u3059factory\u306fIllegalState\u306efailure/uncaught same\u3001row cleanup(1,1)\u306e\u307e\u307e",
+      "reviewedMainPaths": [
+        "run"
+      ],
+      "rowSha256": "384ab814a962720bb23d25189d98d87568eaaae75626037ada488560af0fd69c",
+      "sha256": "5f472d934a5338733d368bdfad1d76b683d4b979a82bfc9625fb988b6b7138d1"
+    },
+    "physicalTestClassSha256": "cc135f1c5e93c0cb5e813cc2e7bfce064a161f7ff61565ae7abff8ccb0c39878",
+    "productExecuted": false,
+    "referenceAdditionalBudgetPp": 0,
+    "reviewDoesNotProveEveryFaultCombination": true,
+    "reviewStatus": "STATIC_METHOD_ORACLE_RELATION_REVIEWED_NOT_DYNAMIC_PT",
+    "sourcePath": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/OwnedApiObservationWorkerTest.java",
+    "sourceSha256": "a19890fcd82eaafdeed5eb1520687a1d04d6ca44dc9aeb6d24d1c3b2b6b8fa0a",
+    "startLine": 925,
+    "whole451Accepted": false
+  }
+]

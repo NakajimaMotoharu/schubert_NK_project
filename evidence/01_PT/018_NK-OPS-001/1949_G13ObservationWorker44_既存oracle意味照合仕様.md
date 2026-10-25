@@ -1,0 +1,11 @@
+# G13 API観測worker44 method・既存期待値の意味照合
+
+2026-10-25 17:52 JST、G13_OBSERVATION_WORKER44_ORACLE_REVIEW_V1、主G13.07/参照P018-09追加費0。開始08:52:17UTC used5/残95/reset1793513544/secondarynull、見積.5/3/8pp/cap10。Production64446不変更、859行候補のうちsource明示仕様番号を持つ44は全てOwnedApiObservationWorkerTest→1864へ一意対応した。当44を既source Test/fixture/Production methodと既期待値の意味まで点検し、識別子一致だけの候補から区別する。
+
+固定入力：1864仕様 SHA b8d5702298999c0ca86c24604563be259f8c570e209913fdcc786570d11cb935、Main SHA8bd8e156ff5038f7e5783865523913e2a0cf6188d674de05c9892ccecc6b0bbf、Test SHA a19890fcd82eaafdeed5eb1520687a1d04d6ca44dc9aeb6d24d1c3b2b6b8fa0a。現在9592全method/compiled annotation対応と9602/9604v2を参照、既9134等の別source成功を現在PT/coverageへ移さない。1865は過去の実行/失敗是正/未完条件としてだけ参照し、再実行しない。
+
+各OBSOWN001～044について、method位置・source hash・既Test ID・仕様行hash、期待値の根拠（literal/独立clock/fixture state/counter/identity）、実assertion/入力port、正常/境界/異常/null/並行/再送の適用性、cleanup/UNKNOWN・既source/runtime未認定を明示する。Test helper/共有Harnessは必要部分を読み、expectedをProduction methodへ循環させていないか、非実行をpassと解釈していないかを確認する。将来の未指定fault組合せや実VM健全性の保証まで付加しない。
+
+成果は現在sourceのmethod→既TestID→既仕様/独立oracleへの静的意味対応。元仕様のliteralやTest本文を都合で修正しない。仕様違反を確認した場合は修正前BUG/YKT等を起票し、現在群と新しい不備/手戻りを分離する。意味が確定しない項目は保留して数える。自作validatorの独立反例は製品PTへ加算しない。target/Compiler/JUnit/Thread/DB/Root/VM/native/私有raw/鍵/配備/拒否操作は実行0、レビューを実資源所有/停止後条件へ変換しない。
+
+実行PT/新ID/Main/coverage/正式増分0、正式1964-53/17-190/工数null/QA051final/G07残4493/全current WBS audit1HOLD/全actualHOLD保持。BUG1752/YKT1503はfix35d37b18b3b51f8ed6cb6715d218baa71dfd9d5c/origin一致・1948の全対象是正/元失敗/21vector/8反例を確認して工具scope限定CLOSEDへ具体化する。通常小群/commit/PMO返信待ちでは止めず、fresh現在窓残10以下等の保全条件まで継続する。
