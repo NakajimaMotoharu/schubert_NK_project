@@ -1,5 +1,7 @@
 # PGPT成果物一覧・進捗
 
+2026-10-25最新：1882/1883/source64446a9f8、Web同owner private lock/IRQ区間表現を最小是正。新1＋必要3=4/1成功・normal六0/CS-SB0、raw PMD8は個別role/identity判定、全1843・旧1842同byte/254owner/五arch0。whole Web L30/58M7/10C1/1B6/14で四100/Program PT未完、BUG1743/YKT1493-94はSTATIC_FIXED_PT_HOLD（実Hook/UNKNOWN未実行）。技術879一意=856四100部品ID/42Main＋部分23、正式1964-53/原190新受入0/工数null・actualHOLD不変更。元90下限85/不明2/正確null・80大型抑制、通常継続。
+
 2026-10-25最新：1880/1881/source600b966ba、API atomic owner claim/両Life既知停止catch明示returnを最小是正。新Web3＋必要11=14/3成功・normal六0/CS-SB0、全1843/旧1841同byte/254owner/五arch0。実合計L66/125M16/29C2/3B14/28で四100/Program PT未完、raw PMD18未分類・追加IRQ empty等によりYKT1493 OPEN。技術878一意=856四100部品ID/42Main＋部分22、正式1964-53/原190新受入0/工数null・actualHOLD維持。元90下限85/不明2/正確null・80大型抑制、次短工程/必要検証・保全へ。
 
 2026-10-25最新：1876/1877/source3641d0f49はtestだけ追加・全1843Main同byte。新APIOBSBOOT009一件だけでMain factory→DEBUG自己worker/fake RO結果→SDK表示→既Life release/接続cleanup/Pool非closeを確認。全Main実counter L14/176M6/34C1/1B0/18で四100/Program PT未完、252owner/旧251対応保持。BUG1741/YKT1492 reader session流用の元失敗/新V2成功・旧session拒否を分離保存。技術875一意（856四100部品ID/42Main＋部分19）/正式1964-53/原190新受入0/工数null、元90下限84/不明2/正確null・80大型抑制、全actualHOLD維持。
