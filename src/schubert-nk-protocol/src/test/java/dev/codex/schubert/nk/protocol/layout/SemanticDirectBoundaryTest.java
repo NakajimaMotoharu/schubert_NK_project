@@ -13,6 +13,7 @@ import org.junit.jupiter.api.Test;
  */
 final class SemanticDirectBoundaryTest {
   private static final String USERNAME = "FixtureOwner";
+  private static final String LOG_REQUEST = "LGSREQ01";
   private static final String START = "20260101000000000";
   private static final String METHOD = "HTTP method";
   private static final String QUESTION = "質問本文";
@@ -42,21 +43,21 @@ final class SemanticDirectBoundaryTest {
 
   @Test
   void sem002InclusiveDateLimitsAndOneSidedFilters() {
-    assertDoesNotThrow(() -> validate(dates("LGSREQ01", text(START), text("20260201000000000"))));
+    assertDoesNotThrow(() -> validate(dates(LOG_REQUEST, text(START), text("20260201000000000"))));
     assertThrows(
         LayoutValidationException.class,
-        () -> validate(dates("LGSREQ01", text(START), text("20260201000000001"))));
+        () -> validate(dates(LOG_REQUEST, text(START), text("20260201000000001"))));
     assertThrows(
         LayoutValidationException.class,
-        () -> validate(dates("LGSREQ01", text("20260201000000000"), text(START))));
+        () -> validate(dates(LOG_REQUEST, text("20260201000000000"), text(START))));
     assertDoesNotThrow(() -> validate(dates("NTSREQ01", text(START), text("20270102000000000"))));
     assertThrows(
         LayoutValidationException.class,
         () -> validate(dates("NTSREQ01", text(START), text("20270102000000001"))));
     assertDoesNotThrow(
-        () -> validate(dates("LGSREQ01", FieldValue.Unset.INSTANCE, FieldValue.Unset.INSTANCE)));
-    assertDoesNotThrow(() -> validate(dates("LGSREQ01", text(START), FieldValue.Unset.INSTANCE)));
-    assertDoesNotThrow(() -> validate(dates("LGSREQ01", FieldValue.Unset.INSTANCE, text(START))));
+        () -> validate(dates(LOG_REQUEST, FieldValue.Unset.INSTANCE, FieldValue.Unset.INSTANCE)));
+    assertDoesNotThrow(() -> validate(dates(LOG_REQUEST, text(START), FieldValue.Unset.INSTANCE)));
+    assertDoesNotThrow(() -> validate(dates(LOG_REQUEST, FieldValue.Unset.INSTANCE, text(START))));
   }
 
   @Test
@@ -85,7 +86,7 @@ final class SemanticDirectBoundaryTest {
   }
 
   private static TypedPayloadValues dates(String layout, FieldValue from, FieldValue to) {
-    boolean log = layout.equals("LGSREQ01");
+    boolean log = layout.equals(LOG_REQUEST);
     return values(
         layout,
         Map.of(
