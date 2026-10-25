@@ -1,5 +1,7 @@
 # PGPT成果物一覧・進捗
 
+2026-10-25 17:47最新：1948/PG-D662、全5622methodに対する既存仕様行一意候補859（明示source参照44/global815）を別実装照合。BUG1752により初回docref3618/候補445行を是正・旧失敗保持、意味的oracle/PT/coverage/正式資格へ加点0。候補未確定4763は当保守的方式の未joinであり既存oracle不存在ではない。正式1964-53/17-190/工数null/全actualHOLD保持、通常保存後も独立PGPT継続。
+
 2026-10-25 17:29最新：1945/PG-D661、824Test source/1910保存classに対し通常@Test宣言5622を独立全exact対応（不一致0）、別RepeatedTest一宣言未資格。TestID/oracleをこれから結ぶtrace用分母であり、5622試験実行/PASSの意味ではない。新PT/coverage/正式増分0、file責任1781/1789/残8・正式1964-53/17-190/工数null/全actualHOLD保持。通常保存後も独立PGPT継続。
 
 2026-10-25 17:18最新：1943/PG-D660、changed Web close→待機中の未登録自己所有threadの必要回帰1件/1suite成功・独立source/XML/CRC照合。新ID0、当run全class L26/58 M5/10 C1/1 B3/14・四100=false。実hook/native/UNKNOWN/全PT/451は未受入のまま、正式1964-53/17-190/工数null/全actualHOLD保持。file担当1781/1789/G07残4493不変、通常保存後も独立PGPT継続。
