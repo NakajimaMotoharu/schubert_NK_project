@@ -1,5 +1,7 @@
 # Module・Program一覧
 
+2026-10-25追加trace：NK-OPS-001/PG-D389・639後続/1888-89/source64446不変更、ApiProcessMain.applicationReadiness/runtimeReadiness→既PT-OPS-API-HEALTH001～003、RD171/UI252/SS342・owner/costP018-05/関連P018-06追加0。9284実3/1→9286全Main三class L8/176M4/34C1/1B10/18（metadata interface自然0含む/四100未完）→9288原6a721ba7 same1843/256owner・7反例/再build等0。Main object/admission/HTTP/native/全451はHOLD未受入。
+
 2026-10-25追加trace：NK-OPS-001/PG-D412・640後続/1886-87/source64446不変更、ApiProcessLifetime.committedFailureHandler/fail/stop/await→既ApiCommittedFatalBindingTest fatalBinding001/002、RD171/UI252/SS321342・owner/costP018-05/関連P018-06追加0。9272実2/1→9274全Life L27/68M9/19C1/2B4/14（未網羅/$1未実行保持）→9276v2原05bb33c3 same1843/255owner・8反例/再build等0。新ID/Main追加0、実JMS/DLQ/Main/Hook/native/全451未受入HOLD、tool反例是正/原v1未資格1887。
 
 2026-10-25追加trace：NK-OPS-001/PG-D640後続/1884-85/source64446不変更、ApiProcessLifetime.guardSync/guardEvent二overload/checkRunning/await/shutdown→既PT-OPS-API-READY004/005を当source2/1で資格。RD171/UI252/SS312321342、owner/costP018-05/関連P018-06追加0。9262全二class L51/68M15/19C2/2B10/14・$1既存一class全missed0/branch自然0、9264原6c467096 same1843/254owner・7反例/再build等0。新ID/Main追加0、実install/Hook/native/全451はHOLD未完。
