@@ -1,0 +1,37 @@
+{
+  "schemaVersion": 1,
+  "status": "STATIC_PT_DESIGN_REVIEW_COMPLETE",
+  "sourceCommit": "21d7c30425e7aa9ce435e808035a94fa4d75c93b",
+  "headAtReview": "8c2af892704b355fc5ae83be273756fcaf73a62a",
+  "branch": "dev-foundation",
+  "groupStartEvent": "PGPT-20261008-2256",
+  "groupStartEstimatePp": {"low": 0.25, "base": 1, "high": 3},
+  "actualExit": null,
+  "executionStatus": "NO_PRODUCT_OR_TEST_EXECUTION",
+  "failedTurn": "01a1737c-d6fd-75d0-932b-49fe6a09b029",
+  "refusalScope": "SUBOPERATION_UNRESOLVED_HOLD",
+  "report": "evidence/01_PT/018_NK-OPS-001/2000_Snapshot鍵使用・close並行_静的PT設計レビュー.md",
+  "inputSha256": {
+    "SS324": "2bc99fd66ca1121a1ab4ae44e97aab96b52d4cf4c8145f6a425f89c7b07ce774",
+    "SS352": "d77617872d91f83af55e12520279d48c7c5385b85b09e4377ef81ed03b1aad03",
+    "SS343": "d8be70ce4c170df7939f7803723bb021c99ba40a72819f9b5d861731425332b2",
+    "ResponseSnapshotCodec.java": "bde8b74bd7b18d33bfbcd52d0a83a015e2b8badfca4821d06c48587166abedb6",
+    "ResponseSnapshotCodecTest.java": "e3599816867e51871714a40e24518f3d52d74fa81a09bf3ce9cb9713f81f0f70",
+    "ResponseSnapshotNonceFailureTest.java": "b754c08d4b25039e22327fe56959a3eac7a080126f6b68dfbe02aa4cf7fe4434"
+  },
+  "plannedTests": {
+    "PT-IDEM-KEYLIFE001": "NOT_IMPLEMENTED_NOT_EXECUTED_HOLD",
+    "PT-IDEM-KEYLIFE002": "NOT_IMPLEMENTED_NOT_EXECUTED_HOLD"
+  },
+  "finding": "SS343 requires consumers stopped before codec close; concurrent in-flight close waiting is an additional unadopted proposal. Caller drain correctness remains unverified.",
+  "bug": {"BUG1775": "STATIC_CANDIDATE_NOT_CONFIRMED", "YKT1526": "NOT_PERFORMED_HOLD"},
+  "productionChanges": 0,
+  "newTestMethods": 0,
+  "executedTests": 0,
+  "coverage": null,
+  "formalAcceptanceDelta": 0,
+  "effortCompletionRate": null,
+  "externalOwnership": "UNOBSERVED_HOLD",
+  "heldWipPreserved": ["tools/quality/architecture/SnapshotKeyCloseWitness.java", "tools/quality/pg9892_snapshot_key_close_witness.py"],
+  "nextIndependentCandidate": "G07 public enum symbol metadata preselection; requires separate scope and dependency review before start"
+}
