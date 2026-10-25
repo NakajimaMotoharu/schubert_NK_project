@@ -1,5 +1,9 @@
 # PGPT成果物一覧・進捗
 
+2026-10-25 12:22最新：1900/1901/source64446不変更、storage残10path（Test8/helper2）の責任候補を追加し29/29source対応、全Java1114/1789/test149/824・未登録675/限定289。9334原→9336独立golden10/16反例、製品PT実行/正式増分0。BUG1746/YKT1497の485/486 hashを同期・9338metadata8反例/元semantic保持、全WBSの旧資格対current scope guard実1はHOLDを保持。fresh残37/現窓残10停止・群cap10に訂正済み、旧累計90/小capは不使用。879新ID/42Main・正式1964-53/17-190/工数null/安全HOLDを維持して通常PG/PTへ継続。
+
+2026-10-25 12:09再開：1899/477/478先頭の利用者訂正により、旧累計90/下限＋保存2停止を失効しfresh現在窓の残10%以下/取得不能へ統一。途中reset後も現在残量で判定し過去累計を差し引かず、旧cap1等/80大型抑制は適用しない。一群上限10pp・事前凍結・全品質/HOLDと費用比較履歴を維持。fresh残37%、HEAD e14af6f8d/source64446/既証跡を保全してstorage残10又はprotocol責任対応等から独立PG/PTを継続する。
+
 2026-10-25保全停止：1896/1897/source64446不変更、storage直接companion Test19pathを元Main責任へexact対応、9320原→9321固定仕様golden19/metadata反例25・旧260保持。登録1104/1789（main965/965・test139/824/未登録685）、直近所有候補+23/限定表279。新製品PT/coverage/正式受入増分0、879一意新ID/42新Main・正式1964-53/原190新受入0/工数null/QA051final/HOLD維持。fresh63残37、元90捕捉下限88/不明区間2/正確null＋保存buffer2の保全停止（週次残10到達ではない）。新規群を開始せず1898/456/460・証跡/差分/cursor/次commandを保存し正規pushへ。
 
 2026-10-25最新：1894/1895/source64446不変更、G13.07明示不足の製造4pathだけを既SSC295/元Program責任へ対応。9312原→9313 literal golden四/metadata反例十、旧256/元941/歴史943と費用保持。Java登録1081→1085/main961→965（全965）/test120不変更・未登録test704。path登録完了を全method/要件trace・動作/451受入へ転用0、製品PT/新ID/Main/coverage/正式増分0。元90下限87/不明2/正確null・保全2、fresh照合で短い不足通常PT又は品質へ継続。

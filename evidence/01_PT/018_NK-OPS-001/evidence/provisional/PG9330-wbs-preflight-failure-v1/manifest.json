@@ -1,0 +1,20 @@
+{
+  "actualExit": 1,
+  "source": "64446a9f8901084a4ad7eba1f66ae975eb2bbdea",
+  "head": "e14af6f8db69ff877a3af9065d4ad55845c4e1f2",
+  "command": ["python3", "-B", "tools/quality/wbs_progress_audit.py"],
+  "environment": {"PYTHONPATH":"tools/quality:tools/quality/vm/050_s1:/home/mini/codex/project1/work/toolchain/pyflakes-3.4.0/runtime"},
+  "failure": "ValueError: inventory hash mismatch",
+  "failurePoint": "wbs_progress_audit.verify snapshot.inventorySha256 == digest(inventory)",
+  "inventoryActualSha256": "c9baf136ab6766956fb0a82f0293f0a6fe913c960b07b80e4b2fa3e506aec21c",
+  "snapshotExpectedInventorySha256": "a067663b97b1abcc883d43e4a413e0af504f7c4ec01cbbe030a8d648455d436c",
+  "snapshotOriginalSha256": "6352a4c8b2bd730d3ed07ce7c8c5b726d0e752cb65b2ee05fa1ecfe2a65c0a12",
+  "bug": "BUG-1746",
+  "ykt": "YKT-1497",
+  "productTestsExecuted": 0,
+  "formalUpdated": false,
+  "coverage": null,
+  "timestampExactNotCaptured": true,
+  "observationIntervalJST": "after12:12_group_start_before_defect_registration",
+  "originalFailurePreservedNotNormalized": true
+}
