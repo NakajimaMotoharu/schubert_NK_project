@@ -1,5 +1,7 @@
 # PGPT成果物一覧・進捗
 
+2026-10-25最新：1890/1891/source64446不変更、G07既存NO_EXACT_CAPTURE一件の報告行をpublic source blob hash metadataとして独立証明一、vendor binary/tag二rule一致/8反例を確認。ただし実capture/断片境界は未確定、追加誤検出認定0・未分類8,379/secret数null/全G07未受入を保持、元全scan/製品PT再演0。新ID/Main/正式/工数率増分0、879一意/新Main42/必要既存7・QA051final/HOLD、元90下限87/不明2/正確null・80大型抑制/保全2で短い許可品質へ継続。
+
 2026-10-25最新：1888/1889/source64446不変更、既純readiness3/1成功・独立真理値12行/短絡/毎回状態/null/元例外保持を確認。全Main実L8/176M4/34C1/1B10/18で未網羅、他exec合算0、same1843/256owner/7反例・再build/static/arch0。新ID/Main追加0、879一意/新Main42・既存inner資格一と必要既存7を別計数。正式1964-53/原190新受入0/工数null/actualHOLD・元90下限86/不明2/正確null・80大型抑制を維持し通常継続。
 
 2026-10-25最新：1886/1887/source64446不変更、既fatal callback2/1を当source資格化、同ownerだけ非成功/null payload fail-closed/固定IOにpayload無しを確認。全Life L27/68M9/19C1/2B4/14・$1当exec未実行を保持、他exec合算0。same-source build/static/arch再演0、255owner（既254保持＋Test候補一）、新ID/Main追加0・879一意/新Main42/既存inner資格一と必要既存4を別計数。BUG1745/YKT1496反例shapeを元v1保全/V2 positive→cost一field拒否で工具scope close。正式1964-53/原190新受入0/工数null/actualHOLD、元90下限86・不明2/正確null・80大型抑制を維持して通常継続。
