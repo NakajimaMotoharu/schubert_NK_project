@@ -7,7 +7,7 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 import org.junit.jupiter.api.Test;
 
-/** 1880/WLCLOSE001..003: uninstalled lifetime only; no native hook, process, Main or provider. */
+/** 1880/1882 WLCLOSE001..004: uninstalled owner only; no native hook, process, Main or provider. */
 final class WebLifetimeOrdinaryCloseTest {
   @Test
   void wlClose001() {
@@ -49,6 +49,26 @@ final class WebLifetimeOrdinaryCloseTest {
           .get(5, TimeUnit.SECONDS);
       assertTrue(lifetime.stopping());
       lifetime.await(() -> fail("already stopped owner does not poll"));
+    } finally {
+      lifetime.close();
+    }
+  }
+
+  @Test
+  void wlClose004() throws Exception {
+    var lifetime = new WebProcessLifetime();
+    try (var executor = Executors.newSingleThreadExecutor()) {
+      synchronized (lifetime) {
+        assertTrue(
+            executor
+                .submit(
+                    () -> {
+                      lifetime.close();
+                      return Boolean.TRUE;
+                    })
+                .get(5, TimeUnit.SECONDS));
+      }
+      assertTrue(lifetime.stopping());
     } finally {
       lifetime.close();
     }

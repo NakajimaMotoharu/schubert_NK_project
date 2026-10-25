@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.Objects;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.locks.ReentrantLock;
 import java.util.function.BooleanSupplier;
 import org.jspecify.annotations.NullMarked;
 
@@ -14,7 +15,7 @@ import org.jspecify.annotations.NullMarked;
  */
 @NullMarked
 final class WebProcessLifetime implements AutoCloseable {
-  private final Object stateLock = new Object();
+  private final ReentrantLock stateLock = new ReentrantLock();
   private final AtomicBoolean retainedStopping = new AtomicBoolean();
   private final AtomicBoolean failed = new AtomicBoolean();
   private final CountDownLatch finished = new CountDownLatch(1);
@@ -23,10 +24,13 @@ final class WebProcessLifetime implements AutoCloseable {
   private boolean installed;
 
   void install() {
-    synchronized (stateLock) {
+    stateLock.lock();
+    try {
       if (installed) throw new IllegalStateException("Web stop owner already installed");
       Runtime.getRuntime().addShutdownHook(hook);
       installed = true;
+    } finally {
+      stateLock.unlock();
     }
   }
 
@@ -78,7 +82,8 @@ final class WebProcessLifetime implements AutoCloseable {
   /** Only called after every admitted owner scope confirmed cleanup. */
   @Override
   public void close() {
-    synchronized (stateLock) {
+    stateLock.lock();
+    try {
       stop();
       try {
         if (installed) {
@@ -93,6 +98,8 @@ final class WebProcessLifetime implements AutoCloseable {
       } finally {
         finished.countDown();
       }
+    } finally {
+      stateLock.unlock();
     }
   }
 
@@ -107,6 +114,7 @@ final class WebProcessLifetime implements AutoCloseable {
       Thread.sleep(1000);
     } catch (InterruptedException notification) {
       /* Still unconfirmed; caller retains the exact outer resources and failure frame. */
+      return; // End this interval only; retainUnknown always starts another held interval.
     }
   }
 }
