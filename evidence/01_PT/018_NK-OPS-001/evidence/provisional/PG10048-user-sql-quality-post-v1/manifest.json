@@ -1,0 +1,128 @@
+{
+  "actualExit": 0,
+  "addedTestClasses": [
+    [
+      "api",
+      "dev/codex/schubert/nk/api/application/admin/UserQuerySqlContractTest$Call.class"
+    ],
+    [
+      "api",
+      "dev/codex/schubert/nk/api/application/admin/UserQuerySqlContractTest$Jdbc.class"
+    ],
+    [
+      "api",
+      "dev/codex/schubert/nk/api/application/admin/UserQuerySqlContractTest.class"
+    ]
+  ],
+  "checkstyleFindings": 0,
+  "currentJavaPaths": 1801,
+  "currentMainPaths": 965,
+  "currentPtManifestSha256": "a7d6c23e71cc2da5463bba8d88a64a9188ad47c859badfb098aab287882daf4c",
+  "currentSourceTests": 16,
+  "currentTestPaths": 836,
+  "effortPercent": null,
+  "forbiddenProductProbeHits": 0,
+  "formalUpdated": false,
+  "individualApplicability": [
+    {
+      "line": 282,
+      "reason": "standalone host public JDK-interface proxy; not a JavaEE managed component",
+      "rule": "UseProperClassLoader",
+      "status": "NON_APPLICABLE_CONTEXT"
+    },
+    {
+      "line": 290,
+      "reason": "one fixture per sequential test, confined callback map; no thread/executor/parallel stream",
+      "rule": "UseConcurrentHashMap",
+      "status": "NON_APPLICABLE_CONTEXT"
+    }
+  ],
+  "invocation": {
+    "actualPythonCommand": [
+      "python3",
+      "-B",
+      "tools/quality/pg10048_user_sql_quality_post.py"
+    ],
+    "arbitraryArgumentsRecorded": false,
+    "entrypointPath": "tools/quality/pg10048_user_sql_quality_post.py",
+    "entrypointSha256": "ae927efd064f76d8f041a3e7b4f4349cf6890cd23e0fab07d26d1ca9628219c5",
+    "helperPath": "tools/quality/host_tool_invocation.py",
+    "helperSha256": "85d616a3db4ff47f4c95ae2e0dd57954bc2b09f28b8f2a685b986e5621545c46",
+    "libraryPath": "tools/quality/pg10048_user_sql_quality_post.py",
+    "librarySha256": "ae927efd064f76d8f041a3e7b4f4349cf6890cd23e0fab07d26d1ca9628219c5",
+    "loadedProjectPythonSources": {
+      "tools/quality/g07_host_class_provenance_inputs.py": "a676cb3e4145177c3c243722d737592ce7d44c3f29cfe4f670662ef7651f046b",
+      "tools/quality/host_tool_invocation.py": "85d616a3db4ff47f4c95ae2e0dd57954bc2b09f28b8f2a685b986e5621545c46",
+      "tools/quality/pg10048_user_sql_quality_post.py": "ae927efd064f76d8f041a3e7b4f4349cf6890cd23e0fab07d26d1ca9628219c5",
+      "tools/quality/pg9906_user_query_oracle_source_post.py": "4f9bdaa17eea78a720c0f25b8af906f3f045fda590c8fea2a8868229403a98fa",
+      "tools/quality/pg9978_plain_core_quality_post.py": "c99cc753c6335c9f41e3eafe6a97c17521503739ba2cf80659b542a445dd48fa",
+      "tools/quality/public_java_digest_provenance.py": "dd47f8735a61ce849995633c3290a6ad047842ef3263829ce359db413778f7a0"
+    },
+    "provenance": "OBSERVED_SYS_ARGV_AND_ORIG_ARGV_NOT_RECONSTRUCTED"
+  },
+  "mainClassesUnchanged": 1843,
+  "newAccepted": 0,
+  "newTestIds": 8,
+  "oldExecUnion": false,
+  "precommitStaticSourceWasNull": true,
+  "previousTestClassesUnchanged": 1922,
+  "productTestsReexecuted": 0,
+  "rawPmdFindings": 2,
+  "rawStaticExit": 1,
+  "relatedRegressionMethods": 8,
+  "remaining": "Repository exceptional/invalid-row branches and actual PostgreSQL contracts unexecuted; F03/451/native/CHR and QA051 held",
+  "source": "dac963b29f62c0da68ca9d71f61db986a02d28a1",
+  "staticSourceHashesExactlyMatchCommittedCompilation": true,
+  "suites": 3,
+  "suppressionsAdded": false,
+  "testClasses": 1925,
+  "units": {
+    "dev/codex/schubert/nk/api/application/admin/UserQueryRequest": {
+      "classCrc64": "f28d7f65ed5a0732",
+      "counterApplicability": "FOUR100_MEASURED_APPLICABLE",
+      "counters": {
+        "BRANCH": {
+          "covered": 18,
+          "missed": 0
+        },
+        "CLASS": {
+          "covered": 1,
+          "missed": 0
+        },
+        "LINE": {
+          "covered": 62,
+          "missed": 0
+        },
+        "METHOD": {
+          "covered": 13,
+          "missed": 0
+        }
+      },
+      "four100": true
+    },
+    "dev/codex/schubert/nk/api/persistence/UserQueryRepository": {
+      "classCrc64": "5359746fb8c80761",
+      "counterApplicability": "MISSED_COUNTERS",
+      "counters": {
+        "BRANCH": {
+          "covered": 32,
+          "missed": 20
+        },
+        "CLASS": {
+          "covered": 1,
+          "missed": 0
+        },
+        "LINE": {
+          "covered": 125,
+          "missed": 9
+        },
+        "METHOD": {
+          "covered": 17,
+          "missed": 1
+        }
+      },
+      "four100": false
+    }
+  },
+  "whole451Accepted": false
+}
