@@ -8,7 +8,7 @@
 |---|---|---|
 |backup/BackupManifestFixture.java|WBS-P017-05|独立manifest fixture、BAT178..193、BackupManifest/Versions、digest03関連保持|
 |backup/BackupManifestValuesTest.java|WBS-P017-05|manifest値/時刻/不変性、UI251/SS341343、BAT178..185|
-|repository/BackupStepFixture.java|WBS-P017-06|BackupStepRepositoryの独立14-column JDBC/SQL oracle、PG168/BAT210..225|
+|repository/BackupStepFixture.java|WBS-P017-05|manifest()が直接生成するBackupManifest/Versionsがprimary。利用先Repository06と区別、PG168/BAT210..225のSQL oracle関連を保持|
 |repository/BackupTerminalObservationTest.java|WBS-P017-01|MorningDatabaseSession.BackupObservationのterminal組/保持/欠落、SSC134/ISSCOMP001..003|
 |repository/BatchStepValuesTest.java|WBS-P017-02|BatchRun/Step/Result値を中心とするcatalog、BAT130..137、attempt12関連保持|
 |repository/CleanupStepFixture.java|WBS-P017-07|CleanupStepRepository独立fixture、SS3313.14/BAT162..177|
