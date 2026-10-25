@@ -1,0 +1,41 @@
+{
+  "actual": "inner guard accepted canonical reserialization hash",
+  "actualExit": 1,
+  "actualExternalOperations": 0,
+  "actualFilesMutated": false,
+  "actualInventorySha256": "e75b5cf6f150f224a322112a5f8f41d9bdcd79a611c1fd26aa52162bb6a83166",
+  "actualMetadataWasCorrect": true,
+  "bug": "BUG1766",
+  "defectReproduced": true,
+  "expected": "reject non-original-byte hash",
+  "formalUpdated": false,
+  "horizontalReview": "YKT1517",
+  "hypotheticalInventorySha256": "f2141d758d73abf4e941a67a2c6116feb04d59366b2795bd0e84a668d6a39e0e",
+  "invocation": {
+    "actualPythonCommand": [
+      "python3",
+      "-B",
+      "tools/quality/pg9837_snapshot_hash_guard_witness.py"
+    ],
+    "arbitraryArgumentsRecorded": false,
+    "entrypointPath": "tools/quality/pg9837_snapshot_hash_guard_witness.py",
+    "entrypointSha256": "90aec5f860e64dcdfbd6f177c545fc83ecbee4ccb477f1d77e25b17d3c79d092",
+    "helperPath": "tools/quality/host_tool_invocation.py",
+    "helperSha256": "85d616a3db4ff47f4c95ae2e0dd57954bc2b09f28b8f2a685b986e5621545c46",
+    "libraryPath": "tools/quality/pg9837_snapshot_hash_guard_witness.py",
+    "librarySha256": "90aec5f860e64dcdfbd6f177c545fc83ecbee4ccb477f1d77e25b17d3c79d092",
+    "loadedProjectPythonSources": {
+      "tools/quality/g07_host_class_provenance_inputs.py": "a676cb3e4145177c3c243722d737592ce7d44c3f29cfe4f670662ef7651f046b",
+      "tools/quality/host_tool_invocation.py": "85d616a3db4ff47f4c95ae2e0dd57954bc2b09f28b8f2a685b986e5621545c46",
+      "tools/quality/pg9338_wbs_reference_metadata_post.py": "b22695112e45b6e10acb18c493f2a48d67336f71680b715398c67f4a436edf29",
+      "tools/quality/pg9837_snapshot_hash_guard_witness.py": "90aec5f860e64dcdfbd6f177c545fc83ecbee4ccb477f1d77e25b17d3c79d092",
+      "tools/quality/pg9838_shared_probe_snapshot_post.py": "896dedbc7afea80ac050f394c110311f0a7d339eaefc73208e8b7b41b357fe21"
+    },
+    "provenance": "OBSERVED_SYS_ARGV_AND_ORIG_ARGV_NOT_RECONSTRUCTED"
+  },
+  "newAccepted": 0,
+  "originalHelperSha256": "896dedbc7afea80ac050f394c110311f0a7d339eaefc73208e8b7b41b357fe21",
+  "outerStrictBoundaryNotBypassed": true,
+  "productTestsExecuted": 0,
+  "source": "8ba82083ec65abc6373b8454576dcbaee7d3e621"
+}

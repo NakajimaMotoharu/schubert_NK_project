@@ -14,6 +14,18 @@ def proposed_owner(path):
     parts=PurePosixPath(path)
     require(not parts.is_absolute() and '..' not in parts.parts and path.startswith('src/'),'bounded source namespace')
     if '.private.' in parts.name: return None
+    # PG-D673/1985: these six resource-free *definitions* are shared oracle support,
+    # not the executable business Tests or their business source/cost ownership.
+    # Execution of their delegated JDBC/thread callbacks is never authorized here.
+    if path in {
+        'src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/admin/UserCommandFaults.java',
+        'src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/log/LogJdbcFaults.java',
+        'src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/persistence/UserQueryFaults.java',
+        'src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/cleanup/ServiceJdbcProbe.java',
+        'src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/maintenance/MaintenanceJdbcProbe.java',
+        'src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/bootstrap/CallerMonitorProbe.java',
+    }:
+        return ('WBS-G03','G03_PGD673_1985_EXACT_SHARED_ORACLE_SUPPORT_NOT_BUSINESS_TEST_OWNER')
     if path.startswith('src/deployment/monitoring/'):
         return ('WBS-C07','C07_SS351_MONITORING_CONFIGURATION')
     if re.fullmatch(r'src/schubert-nk-(api|web|batch)/src/(main|test)/java/dev/codex/schubert/nk/\1/monitoring/(?:[A-Za-z_][A-Za-z0-9_]*/)*[^/]+\.java',path):
