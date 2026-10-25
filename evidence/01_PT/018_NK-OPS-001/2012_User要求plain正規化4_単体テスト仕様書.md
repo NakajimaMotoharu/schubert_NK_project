@@ -1,5 +1,7 @@
 # User要求plain正規化四・単体テスト仕様
 
+PG9964/source1aeの初回は8/2中7成功1失敗・actual1。BUG1783/YKT1534を修正前起票。core003のlogin layoutはcontext absent規約と衝突し対象decodeへ未到達だったため、通常unknown layoutの固定ZZZREQ01へ修正する。製品・期待例外・承認仕様は不変更、新sourceで同8件の必要回帰を実施し、初回失敗とexec/XMLを別保全する。
+
 静的先行：PG9958/source=null/base35b・固定新Test hash e72a1e7ebe0ea647e11929e095f03ba2bf5eb0aa025467015a4df3e2c8679bd9、元正常Main/他入力不変。CS0/PMDraw1/processing0/真正1、manifest bbbd2c34b9b97d2c3628a3be2ed847bb4cd4b5364cabf2d211a0e0ba59cb2c2d。指摘は67行のcanonical.fields().get(index)というborrowed fieldで、外側try-with CanonicalRequestが全fieldを解放するため個別非該当（close実行による寿命試験ではなく既source所有契約の静的確認）。raw値を0へ変更/抑制しない。source固定後に当byte/compilerとの対応を確認する。
 
 2026-10-26、P010_PLAIN_CANONICAL_CORE_V1、開始1/3/8pp cap10・used22残78/reset1793513544。NK-ADM-001/WBS-P010-01、UI236§3/5・SS323§9.4/324§3、451。MainはUserQueryRequest、関連CanonicalRequest/Fieldの既公開sourceを読取り、String/List/UTF8/NFC/配列cloneとcleanupだけで、鍵/HMAC/JCE/provider/外部依存を持たないことを確認した。Production Main/外部仕様不変更、新Testのみ。

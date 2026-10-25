@@ -84,7 +84,8 @@ class UserQueryCanonicalCoreTest {
   void core003RedactedMetadataAndInvalidDecodeStayBounded() {
     var request = UserQueryRequest.decode(wire(SEARCH_LAYOUT, searchBytes(true)));
     assertEquals("UserQueryRequest[REDACTED]", request.toString());
-    var unsupported = wire("LGNREQ01", searchBytes(false));
+    // Unknown ordinary layout: unlike Login, it permits the normal present context.
+    var unsupported = wire("ZZZREQ01", searchBytes(false));
     var failure =
         assertThrows(PermanentProtocolException.class, () -> UserQueryRequest.decode(unsupported));
     assertEquals("user query request is invalid", failure.getMessage());
