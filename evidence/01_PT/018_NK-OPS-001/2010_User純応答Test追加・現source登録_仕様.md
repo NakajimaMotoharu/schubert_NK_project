@@ -1,0 +1,7 @@
+# User純応答Test追加と現source登録・仕様
+
+2026-10-26、G13_PURE_QUERY_TEST_CURRENT_REGISTRY_V1/.25-1-3pp cap10、source35b059820f010ddca25cba5b6d496a65a99e8887、開始used22残78/reset1793513544。新UserQueryResponseBoundaryTest一path/四IDとUserQueryRequestTest/LogRequestTestの現hashを追加・更新する。現在1797/Main965/Test832、旧9916は1794/1796/969rows。期待は登録1795/1797、sourceRows970、UNKNOWN二file保持で、受入/実行PT/工数率の増分0。
+
+原941のUserQueryRequest主担当/費用はP01001、LogRequest主担当/費用と既LogRequestTestはP01809、LogQueryRepositoryはP01004。**P01004はLog検索DAOの関連であってLog試験の既主担当を置換しない。** 新Testは対応Main/UI236/SS323/2008の明示根拠でP01001へ登録する。原owner/cost/969全旧field（当二sha以外）・Main二binding・原941/943/予算/受入/共通oracle六/25consumer等を保持し、changeOwner G13.07からcanonical担当を推定しない。
+
+新rowの実行証拠は7c/9936-38の当四PTとして別sourceを記録、現35bの新実行成功を推定しない。35b/9944compile0・9946静的byte束縛と当Test source/class同byteは別根拠。PG9950/独立postは全旧行と新row/十metadata負例等を照合し、485二current section＋旧参照保全、486はinventory現rawSHAだけ更新する。所定WBS before/after auditの実1/HOLDを保持、metadata合格と全WBS合格を分離。工具は既公開source/manifest/byte/hashだけ、製品/DB/JCE/thread/VM/Root/Graph9/鍵close/私有rawの新実行0。正常現source/static/root承認済qualityは不変更。
