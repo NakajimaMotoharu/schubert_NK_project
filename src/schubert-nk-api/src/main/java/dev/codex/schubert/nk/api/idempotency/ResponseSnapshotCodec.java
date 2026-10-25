@@ -81,8 +81,9 @@ public final class ResponseSnapshotCodec implements AutoCloseable {
     byte[] aad = identity.aad(ENVELOPE_FORMAT_VERSION, currentVersion);
     byte[] encrypted = null;
     byte[] stored = null;
-    secureRandom.nextBytes(nonce);
     try {
+      // The provider can fail before Cipher acquisition; owned buffers still need erasure.
+      secureRandom.nextBytes(nonce);
       Cipher cipher = Cipher.getInstance("AES/GCM/NoPadding");
       cipher.init(
           Cipher.ENCRYPT_MODE,
