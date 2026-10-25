@@ -1,0 +1,2323 @@
+{
+  "api:dev/codex/schubert/nk/api/application/admin/UserApplicationFixture": {
+    "className": "dev/codex/schubert/nk/api/application/admin/UserApplicationFixture",
+    "classSha256": "fa465228ae1adbe90f527aacb8ebc93db14b4194e6e14e69b0eabedc758e95ee",
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/admin/UserApplicationFixture.java",
+    "projectClassReferences": [
+      "dev/codex/schubert/nk/api/application/admin/UserApplicationFixture",
+      "dev/codex/schubert/nk/api/application/admin/UserCommandFaults",
+      "dev/codex/schubert/nk/api/application/admin/UserCommandService",
+      "dev/codex/schubert/nk/api/application/admin/UserMutationApplicationService",
+      "dev/codex/schubert/nk/api/application/admin/UserMutationReplayService",
+      "dev/codex/schubert/nk/api/application/admin/UserMutationReplayServiceTest",
+      "dev/codex/schubert/nk/api/application/admin/UserMutationRequestTest",
+      "dev/codex/schubert/nk/api/idempotency/FingerprintKeyRing",
+      "dev/codex/schubert/nk/api/idempotency/JdbcInboxCoordinator",
+      "dev/codex/schubert/nk/api/idempotency/ResponseSnapshotCodec",
+      "dev/codex/schubert/nk/api/logging/ApiLogDatabaseFixture",
+      "dev/codex/schubert/nk/api/security/AdminCommandAuthenticator",
+      "dev/codex/schubert/nk/api/security/AuthSessionRevocationService",
+      "dev/codex/schubert/nk/api/security/ContextHash",
+      "dev/codex/schubert/nk/api/security/PasswordHasher",
+      "dev/codex/schubert/nk/protocol/header/AuthenticationContext",
+      "dev/codex/schubert/nk/protocol/header/CommonHeader",
+      "dev/codex/schubert/nk/protocol/header/InteractionKind",
+      "dev/codex/schubert/nk/protocol/header/MessageKind",
+      "dev/codex/schubert/nk/protocol/layout/FixedPayload",
+      "dev/codex/schubert/nk/protocol/layout/LayoutId",
+      "dev/codex/schubert/nk/protocol/layout/WireMessage"
+    ],
+    "reflectionOrDynamicLookup": true,
+    "sourceFile": "UserApplicationFixture.java"
+  },
+  "api:dev/codex/schubert/nk/api/application/admin/UserCommandFaults": {
+    "className": "dev/codex/schubert/nk/api/application/admin/UserCommandFaults",
+    "classSha256": "1f9480e36443294990b341987e6a6aa146d0a31d8dab7d6775e665bb12eb651e",
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/admin/UserCommandFaults.java",
+    "projectClassReferences": [
+      "dev/codex/schubert/nk/api/application/admin/UserCommandFaults",
+      "dev/codex/schubert/nk/api/application/admin/UserCommandFaults$Hook"
+    ],
+    "reflectionOrDynamicLookup": true,
+    "sourceFile": "UserCommandFaults.java"
+  },
+  "api:dev/codex/schubert/nk/api/application/admin/UserCommandFaults$Hook": {
+    "className": "dev/codex/schubert/nk/api/application/admin/UserCommandFaults$Hook",
+    "classSha256": "7d86057db2d871f76ea1ee8108342707999e90844c61e1be3af249033008d17e",
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/admin/UserCommandFaults.java",
+    "projectClassReferences": [
+      "dev/codex/schubert/nk/api/application/admin/UserCommandFaults",
+      "dev/codex/schubert/nk/api/application/admin/UserCommandFaults$Hook"
+    ],
+    "reflectionOrDynamicLookup": false,
+    "sourceFile": "UserCommandFaults.java"
+  },
+  "api:dev/codex/schubert/nk/api/application/admin/UserCommandServiceTest": {
+    "className": "dev/codex/schubert/nk/api/application/admin/UserCommandServiceTest",
+    "classSha256": "2278cffac1294735f04ab927de4e2b30a269b782706bed3e3be9ad60dadd8b69",
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/admin/UserCommandServiceTest.java",
+    "projectClassReferences": [
+      "dev/codex/schubert/nk/api/application/admin/UserCommandFaults",
+      "dev/codex/schubert/nk/api/application/admin/UserCommandFaults$Hook",
+      "dev/codex/schubert/nk/api/application/admin/UserCommandMetadata",
+      "dev/codex/schubert/nk/api/application/admin/UserCommandService",
+      "dev/codex/schubert/nk/api/application/admin/UserCommandService$PasswordEncoding",
+      "dev/codex/schubert/nk/api/application/admin/UserCommandServiceTest",
+      "dev/codex/schubert/nk/api/application/admin/UserCommandServiceTest$Command",
+      "dev/codex/schubert/nk/api/application/admin/UserMutationResult",
+      "dev/codex/schubert/nk/api/domain/Role",
+      "dev/codex/schubert/nk/api/error/TemporaryInfrastructureException",
+      "dev/codex/schubert/nk/api/logging/ApiLogDatabaseFixture",
+      "dev/codex/schubert/nk/api/security/AdminCommandAuthenticator",
+      "dev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation",
+      "dev/codex/schubert/nk/api/security/AuthSessionRevocationService",
+      "dev/codex/schubert/nk/api/security/AuthenticatedActor",
+      "dev/codex/schubert/nk/api/security/AuthenticationContextException",
+      "dev/codex/schubert/nk/api/security/AuthenticationInfrastructureException",
+      "dev/codex/schubert/nk/api/security/AuthorizationException",
+      "dev/codex/schubert/nk/api/security/ContextHash",
+      "dev/codex/schubert/nk/api/security/PasswordHasher",
+      "dev/codex/schubert/nk/protocol/codec/PayloadCodec",
+      "dev/codex/schubert/nk/protocol/header/AuthenticationContext",
+      "dev/codex/schubert/nk/protocol/header/ResultCode",
+      "dev/codex/schubert/nk/protocol/layout/FixedPayload",
+      "dev/codex/schubert/nk/protocol/layout/LayoutId",
+      "dev/codex/schubert/nk/protocol/layout/PayloadData",
+      "dev/codex/schubert/nk/protocol/layout/PayloadTypeCatalog",
+      "dev/codex/schubert/nk/protocol/layout/TypedPayloadValues",
+      "dev/codex/schubert/nk/protocol/layout/admin/UserMutationResponseData",
+      "dev/codex/schubert/nk/protocol/layout/semantic/UserId",
+      "dev/codex/schubert/nk/protocol/layout/semantic/UserRole"
+    ],
+    "reflectionOrDynamicLookup": false,
+    "sourceFile": "UserCommandServiceTest.java"
+  },
+  "api:dev/codex/schubert/nk/api/application/admin/UserCommandServiceTest$Command": {
+    "className": "dev/codex/schubert/nk/api/application/admin/UserCommandServiceTest$Command",
+    "classSha256": "b6ed3b8529716dc7ba96fadd0e6cf33f75fca392208d633bfd60796252f525f0",
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/admin/UserCommandServiceTest.java",
+    "projectClassReferences": [
+      "dev/codex/schubert/nk/api/application/admin/UserCommandServiceTest",
+      "dev/codex/schubert/nk/api/application/admin/UserCommandServiceTest$Command"
+    ],
+    "reflectionOrDynamicLookup": false,
+    "sourceFile": "UserCommandServiceTest.java"
+  },
+  "api:dev/codex/schubert/nk/api/application/admin/UserMutationReplayServiceTest": {
+    "className": "dev/codex/schubert/nk/api/application/admin/UserMutationReplayServiceTest",
+    "classSha256": "c016445946b6fa034f09734c3fb2cb2df11e57fbf4ab27d5ed9fa196e9d2104a",
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/admin/UserMutationReplayServiceTest.java",
+    "projectClassReferences": [
+      "dev/codex/schubert/nk/api/application/admin/UserMutationReplayService",
+      "dev/codex/schubert/nk/api/application/admin/UserMutationReplayService$Snapshot",
+      "dev/codex/schubert/nk/api/application/admin/UserMutationReplayServiceTest",
+      "dev/codex/schubert/nk/api/application/admin/UserMutationRequest",
+      "dev/codex/schubert/nk/api/application/admin/UserMutationRequestTest",
+      "dev/codex/schubert/nk/api/application/admin/UserMutationResult",
+      "dev/codex/schubert/nk/api/domain/Role",
+      "dev/codex/schubert/nk/api/error/TemporaryInfrastructureException",
+      "dev/codex/schubert/nk/api/idempotency/BoundInboxExecution",
+      "dev/codex/schubert/nk/api/idempotency/EncryptedResponseSnapshot",
+      "dev/codex/schubert/nk/api/idempotency/InboxCompletion",
+      "dev/codex/schubert/nk/api/idempotency/InboxCompletionState",
+      "dev/codex/schubert/nk/api/idempotency/InboxExecution",
+      "dev/codex/schubert/nk/api/idempotency/InboxResultReference",
+      "dev/codex/schubert/nk/api/idempotency/InboxResultReferenceType",
+      "dev/codex/schubert/nk/api/idempotency/ResponseSnapshotCodec",
+      "dev/codex/schubert/nk/api/security/AuthenticatedActor",
+      "dev/codex/schubert/nk/protocol/header/AuthenticationContext",
+      "dev/codex/schubert/nk/protocol/header/CommonHeader",
+      "dev/codex/schubert/nk/protocol/header/InteractionKind",
+      "dev/codex/schubert/nk/protocol/header/MessageKind",
+      "dev/codex/schubert/nk/protocol/header/ResultCode",
+      "dev/codex/schubert/nk/protocol/layout/FixedPayload",
+      "dev/codex/schubert/nk/protocol/layout/LayoutId",
+      "dev/codex/schubert/nk/protocol/layout/WireMessage",
+      "dev/codex/schubert/nk/protocol/layout/admin/UserMutationResponseData",
+      "dev/codex/schubert/nk/protocol/layout/semantic/UserId"
+    ],
+    "reflectionOrDynamicLookup": false,
+    "sourceFile": "UserMutationReplayServiceTest.java"
+  },
+  "api:dev/codex/schubert/nk/api/application/admin/UserMutationRequestTest": {
+    "className": "dev/codex/schubert/nk/api/application/admin/UserMutationRequestTest",
+    "classSha256": "431c16d52a367cb5b2bfdb60051bb0b6ea94f914ecf45513ee094f7e6271f993",
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/admin/UserMutationRequestTest.java",
+    "projectClassReferences": [
+      "dev/codex/schubert/nk/api/application/admin/UserCommandMetadata",
+      "dev/codex/schubert/nk/api/application/admin/UserCommandService",
+      "dev/codex/schubert/nk/api/application/admin/UserCommandServiceTest",
+      "dev/codex/schubert/nk/api/application/admin/UserMutationRequest",
+      "dev/codex/schubert/nk/api/application/admin/UserMutationRequestTest",
+      "dev/codex/schubert/nk/api/application/admin/UserMutationRequestTest$Field",
+      "dev/codex/schubert/nk/api/application/admin/UserMutationResult",
+      "dev/codex/schubert/nk/api/domain/Role",
+      "dev/codex/schubert/nk/api/error/TemporaryInfrastructureException",
+      "dev/codex/schubert/nk/api/idempotency/CanonicalField",
+      "dev/codex/schubert/nk/api/idempotency/CanonicalRequest",
+      "dev/codex/schubert/nk/api/idempotency/Fingerprint",
+      "dev/codex/schubert/nk/api/idempotency/FingerprintKeyRing",
+      "dev/codex/schubert/nk/api/logging/ApiLogDatabaseFixture",
+      "dev/codex/schubert/nk/api/security/AdminCommandAuthenticator",
+      "dev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation",
+      "dev/codex/schubert/nk/api/security/AuthSessionRevocationService",
+      "dev/codex/schubert/nk/api/security/AuthenticatedActor",
+      "dev/codex/schubert/nk/api/security/ContextHash",
+      "dev/codex/schubert/nk/api/security/PasswordHasher",
+      "dev/codex/schubert/nk/protocol/codec/PermanentProtocolException",
+      "dev/codex/schubert/nk/protocol/header/AuthenticationContext",
+      "dev/codex/schubert/nk/protocol/header/CommonHeader",
+      "dev/codex/schubert/nk/protocol/header/InteractionKind",
+      "dev/codex/schubert/nk/protocol/header/MessageKind",
+      "dev/codex/schubert/nk/protocol/header/ResultCode",
+      "dev/codex/schubert/nk/protocol/layout/FixedPayload",
+      "dev/codex/schubert/nk/protocol/layout/LayoutId",
+      "dev/codex/schubert/nk/protocol/layout/WireMessage",
+      "dev/codex/schubert/nk/protocol/layout/admin/UserMutationResponseData",
+      "dev/codex/schubert/nk/protocol/layout/semantic/UserId"
+    ],
+    "reflectionOrDynamicLookup": true,
+    "sourceFile": "UserMutationRequestTest.java"
+  },
+  "api:dev/codex/schubert/nk/api/application/admin/UserMutationRequestTest$Field": {
+    "className": "dev/codex/schubert/nk/api/application/admin/UserMutationRequestTest$Field",
+    "classSha256": "5ef18b08c9caee006e8803954863bed5f1c7d9cdddef973dd182544c3d0637b7",
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/admin/UserMutationRequestTest.java",
+    "projectClassReferences": [
+      "dev/codex/schubert/nk/api/application/admin/UserMutationRequestTest",
+      "dev/codex/schubert/nk/api/application/admin/UserMutationRequestTest$Field"
+    ],
+    "reflectionOrDynamicLookup": false,
+    "sourceFile": "UserMutationRequestTest.java"
+  },
+  "api:dev/codex/schubert/nk/api/application/log/LogVectors": {
+    "className": "dev/codex/schubert/nk/api/application/log/LogVectors",
+    "classSha256": "e66b80f28b80c2d2e5a7dc2ef79d5b54198fb1383d20fab2788d1592cbfb8c77",
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/log/LogVectors.java",
+    "projectClassReferences": [
+      "dev/codex/schubert/nk/api/application/log/LogRequest",
+      "dev/codex/schubert/nk/api/application/log/LogVectors",
+      "dev/codex/schubert/nk/api/domain/Role",
+      "dev/codex/schubert/nk/api/idempotency/CanonicalField",
+      "dev/codex/schubert/nk/api/idempotency/CanonicalRequest",
+      "dev/codex/schubert/nk/api/idempotency/EncryptedResponseSnapshot",
+      "dev/codex/schubert/nk/api/idempotency/Fingerprint",
+      "dev/codex/schubert/nk/api/idempotency/FingerprintKeyRing",
+      "dev/codex/schubert/nk/api/idempotency/InboxCompletion",
+      "dev/codex/schubert/nk/api/security/AuthenticatedActor",
+      "dev/codex/schubert/nk/protocol/header/AuthenticationContext",
+      "dev/codex/schubert/nk/protocol/header/CommonHeader",
+      "dev/codex/schubert/nk/protocol/header/InteractionKind",
+      "dev/codex/schubert/nk/protocol/header/MessageKind",
+      "dev/codex/schubert/nk/protocol/layout/FixedPayload",
+      "dev/codex/schubert/nk/protocol/layout/LayoutId",
+      "dev/codex/schubert/nk/protocol/layout/TypedPayloadValues",
+      "dev/codex/schubert/nk/protocol/layout/WireMessage",
+      "dev/codex/schubert/nk/protocol/layout/common/PagedResponseData",
+      "dev/codex/schubert/nk/protocol/layout/log/LogRecord",
+      "dev/codex/schubert/nk/protocol/layout/semantic/ElapsedMilliseconds",
+      "dev/codex/schubert/nk/protocol/layout/semantic/HttpStatusCode",
+      "dev/codex/schubert/nk/protocol/layout/semantic/LogId",
+      "dev/codex/schubert/nk/protocol/layout/semantic/LogLevel",
+      "dev/codex/schubert/nk/protocol/layout/semantic/LogType"
+    ],
+    "reflectionOrDynamicLookup": false,
+    "sourceFile": "LogVectors.java"
+  },
+  "api:dev/codex/schubert/nk/api/application/media/MediaReplayFixture": {
+    "className": "dev/codex/schubert/nk/api/application/media/MediaReplayFixture",
+    "classSha256": "77468d982a27a1309a06ed9971b95c1b3a979ddaa2241328d66906d56650dc0f",
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/media/MediaReplayFixture.java",
+    "projectClassReferences": [
+      "dev/codex/schubert/nk/api/application/media/MediaReplayFixture",
+      "dev/codex/schubert/nk/api/application/media/MediaRequest",
+      "dev/codex/schubert/nk/api/application/media/MediaRequestFixture",
+      "dev/codex/schubert/nk/api/idempotency/EncryptedResponseSnapshot",
+      "dev/codex/schubert/nk/api/idempotency/InboxCompletion",
+      "dev/codex/schubert/nk/api/idempotency/InboxResultReference",
+      "dev/codex/schubert/nk/api/idempotency/ResponseSnapshotCodec",
+      "dev/codex/schubert/nk/protocol/codec/PayloadCodec",
+      "dev/codex/schubert/nk/protocol/header/AuthenticationContext",
+      "dev/codex/schubert/nk/protocol/header/CommonHeader",
+      "dev/codex/schubert/nk/protocol/header/InteractionKind",
+      "dev/codex/schubert/nk/protocol/header/MessageKind",
+      "dev/codex/schubert/nk/protocol/layout/FixedPayload",
+      "dev/codex/schubert/nk/protocol/layout/LayoutId",
+      "dev/codex/schubert/nk/protocol/layout/PayloadTypeCatalog",
+      "dev/codex/schubert/nk/protocol/layout/WireMessage"
+    ],
+    "reflectionOrDynamicLookup": false,
+    "sourceFile": "MediaReplayFixture.java"
+  },
+  "api:dev/codex/schubert/nk/api/application/media/MediaRequestFixture": {
+    "className": "dev/codex/schubert/nk/api/application/media/MediaRequestFixture",
+    "classSha256": "d7d7b6e14c116467239fda6c8652fdcea8967dc3fd213e8c2e426b0e209a2141",
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/media/MediaRequestFixture.java",
+    "projectClassReferences": [
+      "dev/codex/schubert/nk/api/application/media/MediaRequestFixture",
+      "dev/codex/schubert/nk/protocol/header/AuthenticationContext",
+      "dev/codex/schubert/nk/protocol/header/CommonHeader",
+      "dev/codex/schubert/nk/protocol/header/InteractionKind",
+      "dev/codex/schubert/nk/protocol/header/MessageKind",
+      "dev/codex/schubert/nk/protocol/layout/FixedPayload",
+      "dev/codex/schubert/nk/protocol/layout/LayoutId",
+      "dev/codex/schubert/nk/protocol/layout/WireMessage"
+    ],
+    "reflectionOrDynamicLookup": false,
+    "sourceFile": "MediaRequestFixture.java"
+  },
+  "api:dev/codex/schubert/nk/api/application/media/MediaStageFixture": {
+    "className": "dev/codex/schubert/nk/api/application/media/MediaStageFixture",
+    "classSha256": "460238430ffcba0fe3c3aaddf8fead680d22231d890fa285ce4cc2ff8715e682",
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/media/MediaStageFixture.java",
+    "projectClassReferences": [
+      "dev/codex/schubert/nk/api/application/media/MediaApplicationService",
+      "dev/codex/schubert/nk/api/application/media/MediaReplayFixture",
+      "dev/codex/schubert/nk/api/application/media/MediaReplayService",
+      "dev/codex/schubert/nk/api/application/media/MediaRequest",
+      "dev/codex/schubert/nk/api/application/media/MediaRequestFixture",
+      "dev/codex/schubert/nk/api/application/media/MediaStageFixture",
+      "dev/codex/schubert/nk/api/application/media/MediaStageFixture$1",
+      "dev/codex/schubert/nk/api/application/media/MediaStageFixture$Action",
+      "dev/codex/schubert/nk/api/file/MediaFileInspector",
+      "dev/codex/schubert/nk/api/idempotency/FingerprintKeyRing",
+      "dev/codex/schubert/nk/api/idempotency/JdbcInboxCoordinator",
+      "dev/codex/schubert/nk/api/idempotency/ResponseSnapshotCodec",
+      "dev/codex/schubert/nk/api/logging/ApiLogDatabaseFixture",
+      "dev/codex/schubert/nk/api/persistence/MediaRepository",
+      "dev/codex/schubert/nk/api/security/AuthenticationContextVerifier",
+      "dev/codex/schubert/nk/api/security/ContextHash",
+      "dev/codex/schubert/nk/protocol/header/AuthenticationContext",
+      "dev/codex/schubert/nk/protocol/header/CommonHeader",
+      "dev/codex/schubert/nk/protocol/layout/LayoutId",
+      "dev/codex/schubert/nk/protocol/layout/WireMessage"
+    ],
+    "reflectionOrDynamicLookup": true,
+    "sourceFile": "MediaStageFixture.java"
+  },
+  "api:dev/codex/schubert/nk/api/application/media/MediaStageFixture$1": {
+    "className": "dev/codex/schubert/nk/api/application/media/MediaStageFixture$1",
+    "classSha256": "41e2807099d03a1da5385331194e5e3d96ec96fbcbdbd0cd4859f162639c02bc",
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/media/MediaStageFixture.java",
+    "projectClassReferences": [
+      "dev/codex/schubert/nk/api/application/media/MediaStageFixture",
+      "dev/codex/schubert/nk/api/application/media/MediaStageFixture$1"
+    ],
+    "reflectionOrDynamicLookup": false,
+    "sourceFile": "MediaStageFixture.java"
+  },
+  "api:dev/codex/schubert/nk/api/application/media/MediaStageFixture$Action": {
+    "className": "dev/codex/schubert/nk/api/application/media/MediaStageFixture$Action",
+    "classSha256": "1cbac0e80c7a7a82f6db9d90e395e41471c15ba6f71a75602ca70cdc989ddfac",
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/media/MediaStageFixture.java",
+    "projectClassReferences": [
+      "dev/codex/schubert/nk/api/application/media/MediaStageFixture",
+      "dev/codex/schubert/nk/api/application/media/MediaStageFixture$Action"
+    ],
+    "reflectionOrDynamicLookup": false,
+    "sourceFile": "MediaStageFixture.java"
+  },
+  "api:dev/codex/schubert/nk/api/application/question/QuestionProviderFailureGraph329Test": {
+    "className": "dev/codex/schubert/nk/api/application/question/QuestionProviderFailureGraph329Test",
+    "classSha256": "c5e55009448b2d87b860d7527b3c1ae9ba21148d4f21f22d2364eadf6b924340",
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/question/QuestionProviderFailureGraph329Test.java",
+    "projectClassReferences": [
+      "dev/codex/schubert/nk/api/application/question/AnswerBusinessException",
+      "dev/codex/schubert/nk/api/application/question/QuestionProviderFailureGraph329Test",
+      "dev/codex/schubert/nk/api/application/question/QuestionSubmissionService",
+      "dev/codex/schubert/nk/api/application/question/QuestionSubmissionServiceTest",
+      "dev/codex/schubert/nk/api/application/question/QuestionSubmissionServiceTest$Fixture",
+      "dev/codex/schubert/nk/api/application/question/QuestionWorkerService",
+      "dev/codex/schubert/nk/api/application/question/QuestionWorkerServiceTest",
+      "dev/codex/schubert/nk/api/logging/ApiLogDatabaseFixture",
+      "dev/codex/schubert/nk/protocol/layout/WireMessage"
+    ],
+    "reflectionOrDynamicLookup": false,
+    "sourceFile": "QuestionProviderFailureGraph329Test.java"
+  },
+  "api:dev/codex/schubert/nk/api/application/question/QuestionQueryRepositoryTest": {
+    "className": "dev/codex/schubert/nk/api/application/question/QuestionQueryRepositoryTest",
+    "classSha256": "a92d9aa1549e2fc96c8303e61d397897c181494eb0c85bac49e90fa48fd7c5d0",
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/question/QuestionQueryRepositoryTest.java",
+    "projectClassReferences": [
+      "dev/codex/schubert/nk/api/application/question/QuestionQueryRepositoryTest",
+      "dev/codex/schubert/nk/api/application/question/QuestionQueryRequest",
+      "dev/codex/schubert/nk/api/application/question/QuestionQueryRequestTest",
+      "dev/codex/schubert/nk/api/application/question/QuestionSubmissionServiceTest",
+      "dev/codex/schubert/nk/api/application/question/QuestionSubmissionServiceTest$Fixture",
+      "dev/codex/schubert/nk/api/domain/Role",
+      "dev/codex/schubert/nk/api/logging/ApiLogDatabaseFixture",
+      "dev/codex/schubert/nk/api/persistence/QuestionQueryException",
+      "dev/codex/schubert/nk/api/persistence/QuestionQueryRepository",
+      "dev/codex/schubert/nk/api/security/AuthenticatedActor",
+      "dev/codex/schubert/nk/protocol/header/ResultCode",
+      "dev/codex/schubert/nk/protocol/layout/LayoutId",
+      "dev/codex/schubert/nk/protocol/layout/PayloadRecord",
+      "dev/codex/schubert/nk/protocol/layout/TypedPayloadValues",
+      "dev/codex/schubert/nk/protocol/layout/common/PagedResponseData",
+      "dev/codex/schubert/nk/protocol/layout/question/NotificationDetailRequestData",
+      "dev/codex/schubert/nk/protocol/layout/question/NotificationDetailResponseData",
+      "dev/codex/schubert/nk/protocol/layout/question/NotificationRecord",
+      "dev/codex/schubert/nk/protocol/layout/question/NotificationSearchRequestData",
+      "dev/codex/schubert/nk/protocol/layout/question/QuestionDetailRequestData",
+      "dev/codex/schubert/nk/protocol/layout/question/QuestionDetailResponseData",
+      "dev/codex/schubert/nk/protocol/layout/question/QuestionSearchRequestData",
+      "dev/codex/schubert/nk/protocol/layout/question/QuestionSummaryRecord",
+      "dev/codex/schubert/nk/protocol/layout/semantic/AnswerState",
+      "dev/codex/schubert/nk/protocol/layout/semantic/NotificationId",
+      "dev/codex/schubert/nk/protocol/layout/semantic/NotificationState",
+      "dev/codex/schubert/nk/protocol/layout/semantic/NotificationType",
+      "dev/codex/schubert/nk/protocol/layout/semantic/QuestionId"
+    ],
+    "reflectionOrDynamicLookup": true,
+    "sourceFile": "QuestionQueryRepositoryTest.java"
+  },
+  "api:dev/codex/schubert/nk/api/application/question/QuestionQueryRequestTest": {
+    "className": "dev/codex/schubert/nk/api/application/question/QuestionQueryRequestTest",
+    "classSha256": "77f8bf97e92702cf9498116939483b86ac92e61380c2bd594d4d2e7a771b7c84",
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/question/QuestionQueryRequestTest.java",
+    "projectClassReferences": [
+      "dev/codex/schubert/nk/api/application/question/QuestionQueryRequest",
+      "dev/codex/schubert/nk/api/application/question/QuestionQueryRequestTest",
+      "dev/codex/schubert/nk/api/domain/Role",
+      "dev/codex/schubert/nk/api/idempotency/CanonicalField",
+      "dev/codex/schubert/nk/api/idempotency/CanonicalRequest",
+      "dev/codex/schubert/nk/api/idempotency/Fingerprint",
+      "dev/codex/schubert/nk/api/idempotency/FingerprintKeyRing",
+      "dev/codex/schubert/nk/api/security/AuthenticatedActor",
+      "dev/codex/schubert/nk/protocol/codec/PermanentProtocolException",
+      "dev/codex/schubert/nk/protocol/header/AuthenticationContext",
+      "dev/codex/schubert/nk/protocol/header/CommonHeader",
+      "dev/codex/schubert/nk/protocol/header/InteractionKind",
+      "dev/codex/schubert/nk/protocol/header/MessageKind",
+      "dev/codex/schubert/nk/protocol/layout/FixedPayload",
+      "dev/codex/schubert/nk/protocol/layout/LayoutId",
+      "dev/codex/schubert/nk/protocol/layout/TypedPayloadValues",
+      "dev/codex/schubert/nk/protocol/layout/WireMessage",
+      "dev/codex/schubert/nk/protocol/layout/common/PagedResponseData"
+    ],
+    "reflectionOrDynamicLookup": false,
+    "sourceFile": "QuestionQueryRequestTest.java"
+  },
+  "api:dev/codex/schubert/nk/api/application/question/QuestionSubmissionBoundaryRemainderTest": {
+    "className": "dev/codex/schubert/nk/api/application/question/QuestionSubmissionBoundaryRemainderTest",
+    "classSha256": "c6de109bbf3272f8b77d2a87be14cd0139449b8a1006397c89969fa52a03b217",
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/question/QuestionSubmissionBoundaryRemainderTest.java",
+    "projectClassReferences": [
+      "dev/codex/schubert/nk/api/application/question/QuestionSubmissionBoundaryRemainderTest",
+      "dev/codex/schubert/nk/api/application/question/QuestionSubmissionBoundaryRemainderTest$AfterConnection",
+      "dev/codex/schubert/nk/api/application/question/QuestionSubmissionBoundaryRemainderTest$Boundary",
+      "dev/codex/schubert/nk/api/application/question/QuestionSubmissionBoundaryRemainderTest$SqlHook",
+      "dev/codex/schubert/nk/api/application/question/QuestionSubmissionService",
+      "dev/codex/schubert/nk/api/application/question/QuestionSubmissionServiceTest",
+      "dev/codex/schubert/nk/api/application/question/QuestionSubmissionServiceTest$Fixture",
+      "dev/codex/schubert/nk/api/error/TemporaryInfrastructureException",
+      "dev/codex/schubert/nk/api/idempotency/EncryptedResponseSnapshot",
+      "dev/codex/schubert/nk/api/idempotency/InboxBoundaryFailureFixture",
+      "dev/codex/schubert/nk/api/idempotency/InboxResultReference",
+      "dev/codex/schubert/nk/api/idempotency/InboxResultReferenceType",
+      "dev/codex/schubert/nk/api/idempotency/ResponseSnapshotIdentity",
+      "dev/codex/schubert/nk/api/idempotency/ResultBoundResponseSnapshotCodec",
+      "dev/codex/schubert/nk/api/logging/ApiLogDatabaseFixture",
+      "dev/codex/schubert/nk/protocol/codec/PermanentProtocolException",
+      "dev/codex/schubert/nk/protocol/layout/FixedPayload",
+      "dev/codex/schubert/nk/protocol/layout/WireMessage"
+    ],
+    "reflectionOrDynamicLookup": true,
+    "sourceFile": "QuestionSubmissionBoundaryRemainderTest.java"
+  },
+  "api:dev/codex/schubert/nk/api/application/question/QuestionSubmissionBoundaryRemainderTest$AfterConnection": {
+    "className": "dev/codex/schubert/nk/api/application/question/QuestionSubmissionBoundaryRemainderTest$AfterConnection",
+    "classSha256": "198d66cb665321927cbe2e2b065e787b46c393110ccb2b5514838247ba072bb3",
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/question/QuestionSubmissionBoundaryRemainderTest.java",
+    "projectClassReferences": [
+      "dev/codex/schubert/nk/api/application/question/QuestionSubmissionBoundaryRemainderTest",
+      "dev/codex/schubert/nk/api/application/question/QuestionSubmissionBoundaryRemainderTest$AfterConnection"
+    ],
+    "reflectionOrDynamicLookup": false,
+    "sourceFile": "QuestionSubmissionBoundaryRemainderTest.java"
+  },
+  "api:dev/codex/schubert/nk/api/application/question/QuestionSubmissionBoundaryRemainderTest$Boundary": {
+    "className": "dev/codex/schubert/nk/api/application/question/QuestionSubmissionBoundaryRemainderTest$Boundary",
+    "classSha256": "371459b7c0595748ea08a035b24c3512b2394f878003197c4259c517f29659b8",
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/question/QuestionSubmissionBoundaryRemainderTest.java",
+    "projectClassReferences": [
+      "dev/codex/schubert/nk/api/application/question/QuestionSubmissionBoundaryRemainderTest",
+      "dev/codex/schubert/nk/api/application/question/QuestionSubmissionBoundaryRemainderTest$AfterConnection",
+      "dev/codex/schubert/nk/api/application/question/QuestionSubmissionBoundaryRemainderTest$Boundary",
+      "dev/codex/schubert/nk/api/application/question/QuestionSubmissionBoundaryRemainderTest$SqlHook",
+      "dev/codex/schubert/nk/api/application/question/QuestionSubmissionService",
+      "dev/codex/schubert/nk/api/application/question/QuestionSubmissionServiceTest",
+      "dev/codex/schubert/nk/api/application/question/QuestionSubmissionServiceTest$Fixture",
+      "dev/codex/schubert/nk/api/idempotency/JdbcInboxCoordinator",
+      "dev/codex/schubert/nk/api/idempotency/ResultBoundResponseSnapshotCodec",
+      "dev/codex/schubert/nk/api/security/AuthenticationContextVerifier",
+      "dev/codex/schubert/nk/api/security/ContextHash"
+    ],
+    "reflectionOrDynamicLookup": true,
+    "sourceFile": "QuestionSubmissionBoundaryRemainderTest.java"
+  },
+  "api:dev/codex/schubert/nk/api/application/question/QuestionSubmissionBoundaryRemainderTest$SqlHook": {
+    "className": "dev/codex/schubert/nk/api/application/question/QuestionSubmissionBoundaryRemainderTest$SqlHook",
+    "classSha256": "87f51228b09cee49cbdb8b2dbd8554311d20d3d596b2787aa3ad14ae85058254",
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/question/QuestionSubmissionBoundaryRemainderTest.java",
+    "projectClassReferences": [
+      "dev/codex/schubert/nk/api/application/question/QuestionSubmissionBoundaryRemainderTest",
+      "dev/codex/schubert/nk/api/application/question/QuestionSubmissionBoundaryRemainderTest$SqlHook"
+    ],
+    "reflectionOrDynamicLookup": false,
+    "sourceFile": "QuestionSubmissionBoundaryRemainderTest.java"
+  },
+  "api:dev/codex/schubert/nk/api/application/question/QuestionSubmissionServiceTest": {
+    "className": "dev/codex/schubert/nk/api/application/question/QuestionSubmissionServiceTest",
+    "classSha256": "1c7114fb14275dcf34a6b22a981af5764ee4ba12ab8ec080124a3cdd0e34bc89",
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/question/QuestionSubmissionServiceTest.java",
+    "projectClassReferences": [
+      "dev/codex/schubert/nk/api/application/question/QuestionReceiptIdGenerator",
+      "dev/codex/schubert/nk/api/application/question/QuestionSubmissionService",
+      "dev/codex/schubert/nk/api/application/question/QuestionSubmissionServiceTest",
+      "dev/codex/schubert/nk/api/application/question/QuestionSubmissionServiceTest$Fixture",
+      "dev/codex/schubert/nk/api/error/TemporaryInfrastructureException",
+      "dev/codex/schubert/nk/api/idempotency/JdbcInboxCoordinator",
+      "dev/codex/schubert/nk/api/idempotency/ResultBoundResponseSnapshotCodec",
+      "dev/codex/schubert/nk/api/logging/ApiLogDatabaseFixture",
+      "dev/codex/schubert/nk/api/messaging/outbound/JdbcOutboxRepository",
+      "dev/codex/schubert/nk/api/messaging/outbound/OutboxDispatcher",
+      "dev/codex/schubert/nk/api/messaging/outbound/OutboxJmsSender",
+      "dev/codex/schubert/nk/api/messaging/outbound/OwnedOutboxDispatcher",
+      "dev/codex/schubert/nk/api/security/AuthenticationContextVerifier",
+      "dev/codex/schubert/nk/api/security/ContextHash",
+      "dev/codex/schubert/nk/protocol/codec/PermanentProtocolException",
+      "dev/codex/schubert/nk/protocol/header/AuthenticationContext",
+      "dev/codex/schubert/nk/protocol/header/CommonHeader",
+      "dev/codex/schubert/nk/protocol/header/InteractionKind",
+      "dev/codex/schubert/nk/protocol/header/MessageKind",
+      "dev/codex/schubert/nk/protocol/layout/FixedPayload",
+      "dev/codex/schubert/nk/protocol/layout/LayoutId",
+      "dev/codex/schubert/nk/protocol/layout/WireMessage"
+    ],
+    "reflectionOrDynamicLookup": true,
+    "sourceFile": "QuestionSubmissionServiceTest.java"
+  },
+  "api:dev/codex/schubert/nk/api/application/question/QuestionSubmissionServiceTest$Fixture": {
+    "className": "dev/codex/schubert/nk/api/application/question/QuestionSubmissionServiceTest$Fixture",
+    "classSha256": "35b19b21a0888ddc42fc679b49d2bfa4234eea50088a94d2c0ceb141693dc527",
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/question/QuestionSubmissionServiceTest.java",
+    "projectClassReferences": [
+      "dev/codex/schubert/nk/api/application/question/QuestionReceiptIdGenerator",
+      "dev/codex/schubert/nk/api/application/question/QuestionSubmissionService",
+      "dev/codex/schubert/nk/api/application/question/QuestionSubmissionServiceTest",
+      "dev/codex/schubert/nk/api/application/question/QuestionSubmissionServiceTest$Fixture",
+      "dev/codex/schubert/nk/api/idempotency/FingerprintKeyRing",
+      "dev/codex/schubert/nk/api/idempotency/JdbcInboxCoordinator",
+      "dev/codex/schubert/nk/api/idempotency/ResponseSnapshotCodec",
+      "dev/codex/schubert/nk/api/idempotency/ResultBoundResponseSnapshotCodec",
+      "dev/codex/schubert/nk/api/logging/ApiLogDatabaseFixture",
+      "dev/codex/schubert/nk/api/security/AuthenticationContextVerifier",
+      "dev/codex/schubert/nk/api/security/ContextHash"
+    ],
+    "reflectionOrDynamicLookup": true,
+    "sourceFile": "QuestionSubmissionServiceTest.java"
+  },
+  "api:dev/codex/schubert/nk/api/application/question/QuestionWorkerServiceTest": {
+    "className": "dev/codex/schubert/nk/api/application/question/QuestionWorkerServiceTest",
+    "classSha256": "26d8f36398ac9d662fbc593c0e8c4c02cebfa388de96b885bf5aa02a51b8152f",
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/question/QuestionWorkerServiceTest.java",
+    "projectClassReferences": [
+      "dev/codex/schubert/nk/api/application/question/AnswerBusinessException",
+      "dev/codex/schubert/nk/api/application/question/AnswerResult",
+      "dev/codex/schubert/nk/api/application/question/QuestionSubmissionService",
+      "dev/codex/schubert/nk/api/application/question/QuestionSubmissionServiceTest",
+      "dev/codex/schubert/nk/api/application/question/QuestionSubmissionServiceTest$Fixture",
+      "dev/codex/schubert/nk/api/application/question/QuestionWorkerService",
+      "dev/codex/schubert/nk/api/application/question/QuestionWorkerServiceTest",
+      "dev/codex/schubert/nk/api/application/question/QuestionWorkerServiceTest$1",
+      "dev/codex/schubert/nk/api/application/question/StubAnswerProvider",
+      "dev/codex/schubert/nk/api/error/TemporaryInfrastructureException",
+      "dev/codex/schubert/nk/api/logging/ApiLogDatabaseFixture",
+      "dev/codex/schubert/nk/api/messaging/inbound/DeliveryMetadata",
+      "dev/codex/schubert/nk/api/messaging/inbound/QuestionWorkListener",
+      "dev/codex/schubert/nk/api/messaging/outbound/JdbcOutboxRepository",
+      "dev/codex/schubert/nk/api/messaging/outbound/OutboxDispatcher",
+      "dev/codex/schubert/nk/api/messaging/outbound/OutboxJmsSender",
+      "dev/codex/schubert/nk/api/messaging/outbound/OwnedOutboxDispatcher",
+      "dev/codex/schubert/nk/protocol/codec/HeaderCodec",
+      "dev/codex/schubert/nk/protocol/codec/PermanentProtocolException",
+      "dev/codex/schubert/nk/protocol/header/CommonHeader",
+      "dev/codex/schubert/nk/protocol/layout/FixedPayload",
+      "dev/codex/schubert/nk/protocol/layout/WireMessage"
+    ],
+    "reflectionOrDynamicLookup": true,
+    "sourceFile": "QuestionWorkerServiceTest.java"
+  },
+  "api:dev/codex/schubert/nk/api/application/question/QuestionWorkerServiceTest$1": {
+    "className": "dev/codex/schubert/nk/api/application/question/QuestionWorkerServiceTest$1",
+    "classSha256": "c67d0ef8784fe83e621d2739325904d54b73a77c2e6bdf15dac155b14cbd0830",
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/question/QuestionWorkerServiceTest.java",
+    "projectClassReferences": [
+      "dev/codex/schubert/nk/api/application/question/QuestionSubmissionServiceTest",
+      "dev/codex/schubert/nk/api/application/question/QuestionWorkerServiceTest",
+      "dev/codex/schubert/nk/api/application/question/QuestionWorkerServiceTest$1"
+    ],
+    "reflectionOrDynamicLookup": false,
+    "sourceFile": "QuestionWorkerServiceTest.java"
+  },
+  "api:dev/codex/schubert/nk/api/application/scenario/ScenarioMessageGuardTest": {
+    "className": "dev/codex/schubert/nk/api/application/scenario/ScenarioMessageGuardTest",
+    "classSha256": "c21fb79f803e7d7969357d2b91f908c9df4874006613b764e7c6763d0118d18a",
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/scenario/ScenarioMessageGuardTest.java",
+    "projectClassReferences": [
+      "dev/codex/schubert/nk/api/application/scenario/ScenarioMessageGuardTest",
+      "dev/codex/schubert/nk/api/error/TemporaryInfrastructureException",
+      "dev/codex/schubert/nk/api/idempotency/MessageStageGuard"
+    ],
+    "reflectionOrDynamicLookup": false,
+    "sourceFile": "ScenarioMessageGuardTest.java"
+  },
+  "api:dev/codex/schubert/nk/api/application/scenario/ScenarioReplayFixture": {
+    "className": "dev/codex/schubert/nk/api/application/scenario/ScenarioReplayFixture",
+    "classSha256": "2622747ab875ac8580090bcdbac50d2475ff501f07a940e2a455c05ff95f4ddd",
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/scenario/ScenarioReplayFixture.java",
+    "projectClassReferences": [
+      "dev/codex/schubert/nk/api/application/scenario/ScenarioReplayFixture",
+      "dev/codex/schubert/nk/api/application/scenario/ScenarioRequest",
+      "dev/codex/schubert/nk/api/application/scenario/ScenarioRequestFixture",
+      "dev/codex/schubert/nk/api/idempotency/EncryptedResponseSnapshot",
+      "dev/codex/schubert/nk/protocol/header/AuthenticationContext",
+      "dev/codex/schubert/nk/protocol/header/CommonHeader",
+      "dev/codex/schubert/nk/protocol/header/InteractionKind",
+      "dev/codex/schubert/nk/protocol/header/MessageKind",
+      "dev/codex/schubert/nk/protocol/layout/FixedPayload",
+      "dev/codex/schubert/nk/protocol/layout/LayoutId",
+      "dev/codex/schubert/nk/protocol/layout/PayloadData",
+      "dev/codex/schubert/nk/protocol/layout/TypedPayloadValues",
+      "dev/codex/schubert/nk/protocol/layout/WireMessage",
+      "dev/codex/schubert/nk/protocol/layout/common/PagedResponseData",
+      "dev/codex/schubert/nk/protocol/layout/scenario/GameListResponseData",
+      "dev/codex/schubert/nk/protocol/layout/scenario/RouteListResponseData",
+      "dev/codex/schubert/nk/protocol/layout/scenario/ScenarioDetailResponseData",
+      "dev/codex/schubert/nk/protocol/layout/scenario/ScenarioEntryRecord",
+      "dev/codex/schubert/nk/protocol/layout/scenario/ScenarioFileListResponseData",
+      "dev/codex/schubert/nk/protocol/layout/scenario/SpeakerListResponseData",
+      "dev/codex/schubert/nk/protocol/layout/semantic/DeliveryMode",
+      "dev/codex/schubert/nk/protocol/layout/semantic/DisplayPath",
+      "dev/codex/schubert/nk/protocol/layout/semantic/EntryId",
+      "dev/codex/schubert/nk/protocol/layout/semantic/EntryType",
+      "dev/codex/schubert/nk/protocol/layout/semantic/GameCode",
+      "dev/codex/schubert/nk/protocol/layout/semantic/RelativePath",
+      "dev/codex/schubert/nk/protocol/layout/semantic/ScriptFileId",
+      "dev/codex/schubert/nk/protocol/layout/semantic/Sha256Hex"
+    ],
+    "reflectionOrDynamicLookup": false,
+    "sourceFile": "ScenarioReplayFixture.java"
+  },
+  "api:dev/codex/schubert/nk/api/application/scenario/ScenarioRequestFixture": {
+    "className": "dev/codex/schubert/nk/api/application/scenario/ScenarioRequestFixture",
+    "classSha256": "5088463bbc1e62baa86836d67d8ea6c77b28a3c70f2396c091b14b924a0d90cd",
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/scenario/ScenarioRequestFixture.java",
+    "projectClassReferences": [
+      "dev/codex/schubert/nk/api/application/scenario/ScenarioRequestFixture",
+      "dev/codex/schubert/nk/protocol/header/AuthenticationContext",
+      "dev/codex/schubert/nk/protocol/header/CommonHeader",
+      "dev/codex/schubert/nk/protocol/header/InteractionKind",
+      "dev/codex/schubert/nk/protocol/header/MessageKind",
+      "dev/codex/schubert/nk/protocol/layout/FixedPayload",
+      "dev/codex/schubert/nk/protocol/layout/LayoutId",
+      "dev/codex/schubert/nk/protocol/layout/WireMessage"
+    ],
+    "reflectionOrDynamicLookup": false,
+    "sourceFile": "ScenarioRequestFixture.java"
+  },
+  "api:dev/codex/schubert/nk/api/bootstrap/ApiAdmittedConfigurationTest": {
+    "className": "dev/codex/schubert/nk/api/bootstrap/ApiAdmittedConfigurationTest",
+    "classSha256": "73bd7c7f0b9d90b6def06d8df786974b08e5222b607c8e7839bad35b7bd933f7",
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/bootstrap/ApiAdmittedConfigurationTest.java",
+    "projectClassReferences": [
+      "dev/codex/schubert/nk/api/bootstrap/ApiAdmittedConfigurationTest",
+      "dev/codex/schubert/nk/api/bootstrap/ApiProcessMain",
+      "dev/codex/schubert/nk/api/bootstrap/ApiProcessMain$ConfigurationLoad",
+      "dev/codex/schubert/nk/api/bootstrap/ApiStartupInputs",
+      "dev/codex/schubert/nk/api/bootstrap/ApiStartupInputs$Values",
+      "dev/codex/schubert/nk/bootstrap/ServiceStartupAdmission",
+      "dev/codex/schubert/nk/bootstrap/ServiceStartupAdmission$Configuration",
+      "dev/codex/schubert/nk/storage/ServiceConfigFiles",
+      "dev/codex/schubert/nk/storage/ServiceConfigFiles$Contents",
+      "dev/codex/schubert/nk/storage/ServiceConfigFiles$Service",
+      "dev/codex/schubert/nk/storage/StorageIoException"
+    ],
+    "reflectionOrDynamicLookup": false,
+    "sourceFile": "ApiAdmittedConfigurationTest.java"
+  },
+  "api:dev/codex/schubert/nk/api/bootstrap/ApiManagementBindTest": {
+    "className": "dev/codex/schubert/nk/api/bootstrap/ApiManagementBindTest",
+    "classSha256": "b823a86dbec97a2ba8a3a359c75b7fbc8baf664001a85ee2b5a8fcf232eab40c",
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/bootstrap/ApiManagementBindTest.java",
+    "projectClassReferences": [
+      "dev/codex/schubert/nk/api/bootstrap/ApiManagementBindTest",
+      "dev/codex/schubert/nk/api/bootstrap/ApiManagementBindTest$1",
+      "dev/codex/schubert/nk/api/bootstrap/ApiManagementBindTest$2",
+      "dev/codex/schubert/nk/api/bootstrap/ApiManagementBindTest$Driver",
+      "dev/codex/schubert/nk/api/bootstrap/ApiManagementBindTest$Driver$1",
+      "dev/codex/schubert/nk/api/bootstrap/ApiManagementBindTest$SetupFailureServer",
+      "dev/codex/schubert/nk/api/bootstrap/ApiManagementBindTest$StartupDriver",
+      "dev/codex/schubert/nk/api/bootstrap/ApiManagementBindTest$StartupDriver$1",
+      "dev/codex/schubert/nk/api/bootstrap/ApiManagementServer",
+      "dev/codex/schubert/nk/api/bootstrap/ApiManagementServer$Factory",
+      "dev/codex/schubert/nk/api/bootstrap/ApiManagementStopTest",
+      "dev/codex/schubert/nk/api/bootstrap/ApiManagementStopTest$StopFailureServer",
+      "dev/codex/schubert/nk/api/file/OwnedRetentionProcess",
+      "dev/codex/schubert/nk/bootstrap/ServiceStartupAdmission",
+      "dev/codex/schubert/nk/bootstrap/ServiceStartupAdmission$Ready"
+    ],
+    "reflectionOrDynamicLookup": false,
+    "sourceFile": "ApiManagementBindTest.java"
+  },
+  "api:dev/codex/schubert/nk/api/bootstrap/ApiManagementBindTest$1": {
+    "className": "dev/codex/schubert/nk/api/bootstrap/ApiManagementBindTest$1",
+    "classSha256": "85b9723190e1b6982c603d751e98bdbac4653fe739a065714ca98411b854bdcc",
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/bootstrap/ApiManagementBindTest.java",
+    "projectClassReferences": [
+      "dev/codex/schubert/nk/api/bootstrap/ApiManagementBindTest",
+      "dev/codex/schubert/nk/api/bootstrap/ApiManagementBindTest$1",
+      "dev/codex/schubert/nk/api/bootstrap/ApiManagementStopTest",
+      "dev/codex/schubert/nk/api/bootstrap/ApiManagementStopTest$StopFailureServer"
+    ],
+    "reflectionOrDynamicLookup": false,
+    "sourceFile": "ApiManagementBindTest.java"
+  },
+  "api:dev/codex/schubert/nk/api/bootstrap/ApiManagementBindTest$2": {
+    "className": "dev/codex/schubert/nk/api/bootstrap/ApiManagementBindTest$2",
+    "classSha256": "fa0618d444f6df2a992e9283019ce2a7ab7826fc02d1f66ecb071c0267852863",
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/bootstrap/ApiManagementBindTest.java",
+    "projectClassReferences": [
+      "dev/codex/schubert/nk/api/bootstrap/ApiManagementBindTest",
+      "dev/codex/schubert/nk/api/bootstrap/ApiManagementBindTest$2",
+      "dev/codex/schubert/nk/api/bootstrap/ApiManagementStopTest",
+      "dev/codex/schubert/nk/api/bootstrap/ApiManagementStopTest$StopFailureServer"
+    ],
+    "reflectionOrDynamicLookup": false,
+    "sourceFile": "ApiManagementBindTest.java"
+  },
+  "api:dev/codex/schubert/nk/api/bootstrap/ApiManagementBindTest$Driver": {
+    "className": "dev/codex/schubert/nk/api/bootstrap/ApiManagementBindTest$Driver",
+    "classSha256": "743a86988c7df5addb83b2362fa5b149ea0e4bf097b0c1014f9558894c93ffec",
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/bootstrap/ApiManagementBindTest.java",
+    "projectClassReferences": [
+      "dev/codex/schubert/nk/api/bootstrap/ApiManagementBindTest",
+      "dev/codex/schubert/nk/api/bootstrap/ApiManagementBindTest$Driver",
+      "dev/codex/schubert/nk/api/bootstrap/ApiManagementBindTest$Driver$1",
+      "dev/codex/schubert/nk/api/bootstrap/ApiManagementServer",
+      "dev/codex/schubert/nk/api/bootstrap/ApiManagementServer$Factory",
+      "dev/codex/schubert/nk/api/file/OwnedRetentionProcess",
+      "dev/codex/schubert/nk/api/file/ServiceProcessResources",
+      "dev/codex/schubert/nk/storage/ResourceScope",
+      "dev/codex/schubert/nk/storage/ResourceScope$Acquire",
+      "dev/codex/schubert/nk/storage/ResourceScope$OwnedAction",
+      "dev/codex/schubert/nk/storage/ResourceScope$Release"
+    ],
+    "reflectionOrDynamicLookup": false,
+    "sourceFile": "ApiManagementBindTest.java"
+  },
+  "api:dev/codex/schubert/nk/api/bootstrap/ApiManagementBindTest$Driver$1": {
+    "className": "dev/codex/schubert/nk/api/bootstrap/ApiManagementBindTest$Driver$1",
+    "classSha256": "a564a091e6bfc18f73b356a3c00ee7827edc97748baaa0895d6fb6740927bb4d",
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/bootstrap/ApiManagementBindTest.java",
+    "projectClassReferences": [
+      "dev/codex/schubert/nk/api/bootstrap/ApiManagementBindTest",
+      "dev/codex/schubert/nk/api/bootstrap/ApiManagementBindTest$Driver",
+      "dev/codex/schubert/nk/api/bootstrap/ApiManagementBindTest$Driver$1",
+      "dev/codex/schubert/nk/api/bootstrap/ApiManagementBindTest$SetupFailureServer"
+    ],
+    "reflectionOrDynamicLookup": false,
+    "sourceFile": "ApiManagementBindTest.java"
+  },
+  "api:dev/codex/schubert/nk/api/bootstrap/ApiManagementBindTest$SetupFailureServer": {
+    "className": "dev/codex/schubert/nk/api/bootstrap/ApiManagementBindTest$SetupFailureServer",
+    "classSha256": "aff7fea3621b26e896a035a190a4134414dd6d1eb4a9a273dab66b745812e738",
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/bootstrap/ApiManagementBindTest.java",
+    "projectClassReferences": [
+      "dev/codex/schubert/nk/api/bootstrap/ApiManagementBindTest",
+      "dev/codex/schubert/nk/api/bootstrap/ApiManagementBindTest$SetupFailureServer",
+      "dev/codex/schubert/nk/api/bootstrap/ApiManagementStopTest",
+      "dev/codex/schubert/nk/api/bootstrap/ApiManagementStopTest$StopFailureServer"
+    ],
+    "reflectionOrDynamicLookup": false,
+    "sourceFile": "ApiManagementBindTest.java"
+  },
+  "api:dev/codex/schubert/nk/api/bootstrap/ApiManagementBindTest$StartupDriver": {
+    "className": "dev/codex/schubert/nk/api/bootstrap/ApiManagementBindTest$StartupDriver",
+    "classSha256": "796c3fc2465eeb47e41f88d785542a9e5b1ce704f78c848ffdcc396c6a38e340",
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/bootstrap/ApiManagementBindTest.java",
+    "projectClassReferences": [
+      "dev/codex/schubert/nk/api/bootstrap/ApiManagementBindTest",
+      "dev/codex/schubert/nk/api/bootstrap/ApiManagementBindTest$StartupDriver",
+      "dev/codex/schubert/nk/api/bootstrap/ApiManagementBindTest$StartupDriver$1",
+      "dev/codex/schubert/nk/api/bootstrap/ApiManagementServer",
+      "dev/codex/schubert/nk/api/bootstrap/ApiManagementServer$Factory",
+      "dev/codex/schubert/nk/api/file/OwnedRetentionProcess",
+      "dev/codex/schubert/nk/api/file/ServiceProcessResources",
+      "dev/codex/schubert/nk/storage/ResourceScope",
+      "dev/codex/schubert/nk/storage/ResourceScope$Acquire",
+      "dev/codex/schubert/nk/storage/ResourceScope$OwnedAction",
+      "dev/codex/schubert/nk/storage/ResourceScope$Release"
+    ],
+    "reflectionOrDynamicLookup": false,
+    "sourceFile": "ApiManagementBindTest.java"
+  },
+  "api:dev/codex/schubert/nk/api/bootstrap/ApiManagementBindTest$StartupDriver$1": {
+    "className": "dev/codex/schubert/nk/api/bootstrap/ApiManagementBindTest$StartupDriver$1",
+    "classSha256": "ac0ca5c6e73e13fa0f3cfaf15a0e42185b9ea5a6337cf18cbcb85e3eac88168f",
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/bootstrap/ApiManagementBindTest.java",
+    "projectClassReferences": [
+      "dev/codex/schubert/nk/api/bootstrap/ApiManagementBindTest",
+      "dev/codex/schubert/nk/api/bootstrap/ApiManagementBindTest$SetupFailureServer",
+      "dev/codex/schubert/nk/api/bootstrap/ApiManagementBindTest$StartupDriver",
+      "dev/codex/schubert/nk/api/bootstrap/ApiManagementBindTest$StartupDriver$1"
+    ],
+    "reflectionOrDynamicLookup": false,
+    "sourceFile": "ApiManagementBindTest.java"
+  },
+  "api:dev/codex/schubert/nk/api/bootstrap/ApiManagementDefaultBindTest": {
+    "className": "dev/codex/schubert/nk/api/bootstrap/ApiManagementDefaultBindTest",
+    "classSha256": "f35b1f37f23dc1fb3740f7ad8999f72bd85df8eaa04841d2b9112336aec7b89f",
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/bootstrap/ApiManagementDefaultBindTest.java",
+    "projectClassReferences": [
+      "dev/codex/schubert/nk/api/bootstrap/ApiManagementDefaultBindTest",
+      "dev/codex/schubert/nk/api/bootstrap/ApiManagementServer",
+      "dev/codex/schubert/nk/bootstrap/ServiceStartupAdmission",
+      "dev/codex/schubert/nk/bootstrap/ServiceStartupAdmission$Ready"
+    ],
+    "reflectionOrDynamicLookup": false,
+    "sourceFile": "ApiManagementDefaultBindTest.java"
+  },
+  "api:dev/codex/schubert/nk/api/bootstrap/ApiManagementStopTest": {
+    "className": "dev/codex/schubert/nk/api/bootstrap/ApiManagementStopTest",
+    "classSha256": "38dc64d3e3ecb6265d253a6de5773f32f839e058ee19a25d15d0bb2097392a65",
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/bootstrap/ApiManagementStopTest.java",
+    "projectClassReferences": [
+      "dev/codex/schubert/nk/api/bootstrap/ApiManagementServer",
+      "dev/codex/schubert/nk/api/bootstrap/ApiManagementServer$Factory",
+      "dev/codex/schubert/nk/api/bootstrap/ApiManagementStopTest",
+      "dev/codex/schubert/nk/api/bootstrap/ApiManagementStopTest$StopFailureServer",
+      "dev/codex/schubert/nk/bootstrap/ServiceStartupAdmission",
+      "dev/codex/schubert/nk/bootstrap/ServiceStartupAdmission$Ready"
+    ],
+    "reflectionOrDynamicLookup": false,
+    "sourceFile": "ApiManagementStopTest.java"
+  },
+  "api:dev/codex/schubert/nk/api/bootstrap/ApiManagementStopTest$StopFailureServer": {
+    "className": "dev/codex/schubert/nk/api/bootstrap/ApiManagementStopTest$StopFailureServer",
+    "classSha256": "37b2e56aba4626960f1f31564aa75c34c4f23cc580d3bb74834706975d75b82f",
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/bootstrap/ApiManagementStopTest.java",
+    "projectClassReferences": [
+      "dev/codex/schubert/nk/api/bootstrap/ApiManagementStopTest",
+      "dev/codex/schubert/nk/api/bootstrap/ApiManagementStopTest$StopFailureServer"
+    ],
+    "reflectionOrDynamicLookup": false,
+    "sourceFile": "ApiManagementStopTest.java"
+  },
+  "api:dev/codex/schubert/nk/api/database/MigrationInventory": {
+    "className": "dev/codex/schubert/nk/api/database/MigrationInventory",
+    "classSha256": "79a23c9fb2d55753494f893b9a072bca68d8e014bafb2fc773c2b0c2e884e5ed",
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/database/MigrationInventory.java",
+    "projectClassReferences": [
+      "dev/codex/schubert/nk/api/database/MigrationInventory"
+    ],
+    "reflectionOrDynamicLookup": false,
+    "sourceFile": "MigrationInventory.java"
+  },
+  "api:dev/codex/schubert/nk/api/file/ApiBrokerContextsCredentialTest": {
+    "className": "dev/codex/schubert/nk/api/file/ApiBrokerContextsCredentialTest",
+    "classSha256": "7a25f77531deafc068953aec91e1a7a3d498c3d8bf454103539ce12e5a9c3248",
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/file/ApiBrokerContextsCredentialTest.java",
+    "projectClassReferences": [
+      "dev/codex/schubert/nk/api/file/ApiBrokerContextsCredentialTest",
+      "dev/codex/schubert/nk/api/file/InspectorCredentialLoader",
+      "dev/codex/schubert/nk/api/file/InspectorCredentialLoader$Io",
+      "dev/codex/schubert/nk/api/file/InspectorCredentialLoaderTest",
+      "dev/codex/schubert/nk/api/file/InspectorCredentialLoaderTest$Fixture",
+      "dev/codex/schubert/nk/api/file/InspectorCredentialLoaderTest$TestIo",
+      "dev/codex/schubert/nk/api/file/InspectorCredentialLoaderTest$TestSecurity",
+      "dev/codex/schubert/nk/api/file/ServiceCredentialReader",
+      "dev/codex/schubert/nk/api/file/ServiceCredentialSet",
+      "dev/codex/schubert/nk/api/file/ServiceCredentialSetTest",
+      "dev/codex/schubert/nk/api/messaging/config/ApiBrokerContexts",
+      "dev/codex/schubert/nk/storage/ServiceConfigFiles",
+      "dev/codex/schubert/nk/storage/ServiceConfigFiles$Service"
+    ],
+    "reflectionOrDynamicLookup": false,
+    "sourceFile": "ApiBrokerContextsCredentialTest.java"
+  },
+  "api:dev/codex/schubert/nk/api/file/AssetChecksumManifestTest": {
+    "className": "dev/codex/schubert/nk/api/file/AssetChecksumManifestTest",
+    "classSha256": "ed287b6d11eb39dd44c38e6b739a9287ac54fe47156c2235abf9b8761303f6d7",
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/file/AssetChecksumManifestTest.java",
+    "projectClassReferences": [
+      "dev/codex/schubert/nk/api/file/AssetChecksumManifest",
+      "dev/codex/schubert/nk/api/file/AssetChecksumManifestTest",
+      "dev/codex/schubert/nk/api/file/AssetChecksumManifestTest$Source",
+      "dev/codex/schubert/nk/api/file/MediaIntegrityException",
+      "dev/codex/schubert/nk/protocol/file/ContentDisposition",
+      "dev/codex/schubert/nk/protocol/file/MediaDescriptor",
+      "dev/codex/schubert/nk/protocol/file/MediaType"
+    ],
+    "reflectionOrDynamicLookup": false,
+    "sourceFile": "AssetChecksumManifestTest.java"
+  },
+  "api:dev/codex/schubert/nk/api/file/AssetChecksumManifestTest$Source": {
+    "className": "dev/codex/schubert/nk/api/file/AssetChecksumManifestTest$Source",
+    "classSha256": "8fbe5d0535f1892fbadf070a0eddd8bf1486d073001954cec750afa9281a84c5",
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/file/AssetChecksumManifestTest.java",
+    "projectClassReferences": [
+      "dev/codex/schubert/nk/api/file/AssetChecksumManifestTest",
+      "dev/codex/schubert/nk/api/file/AssetChecksumManifestTest$Source"
+    ],
+    "reflectionOrDynamicLookup": false,
+    "sourceFile": "AssetChecksumManifestTest.java"
+  },
+  "api:dev/codex/schubert/nk/api/file/InspectorOwnerContractTest": {
+    "className": "dev/codex/schubert/nk/api/file/InspectorOwnerContractTest",
+    "classSha256": "952f2c0e1bd35748709e252e2291bf069170e600d10a0d6e7ba7d1ad4e2980f3",
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/file/InspectorOwnerContractTest.java",
+    "projectClassReferences": [
+      "dev/codex/schubert/nk/api/file/InspectorApplication",
+      "dev/codex/schubert/nk/api/file/InspectorApplication$InspectorProbe",
+      "dev/codex/schubert/nk/api/file/InspectorApplication$OwnedOperation",
+      "dev/codex/schubert/nk/api/file/InspectorOwnerContractTest",
+      "dev/codex/schubert/nk/api/maintenance/InspectionExecution",
+      "dev/codex/schubert/nk/api/maintenance/InspectionExecution$Status",
+      "dev/codex/schubert/nk/api/maintenance/InspectionProgress",
+      "dev/codex/schubert/nk/api/maintenance/InspectionRun",
+      "dev/codex/schubert/nk/bootstrap/MaintenanceOwnerFrame",
+      "dev/codex/schubert/nk/bootstrap/MaintenanceOwnerFrame$Guard",
+      "dev/codex/schubert/nk/bootstrap/MaintenanceOwnerFrame$Parent"
+    ],
+    "reflectionOrDynamicLookup": false,
+    "sourceFile": "InspectorOwnerContractTest.java"
+  },
+  "api:dev/codex/schubert/nk/api/file/MediaAssetFixture": {
+    "className": "dev/codex/schubert/nk/api/file/MediaAssetFixture",
+    "classSha256": "ffec7d336f19750a147cd214a9db325c59583be0c2c9f09bd3191bc8c3a76483",
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/file/MediaAssetFixture.java",
+    "projectClassReferences": [
+      "dev/codex/schubert/nk/api/file/AssetChecksumManifestTest",
+      "dev/codex/schubert/nk/api/file/MediaAssetFixture",
+      "dev/codex/schubert/nk/api/file/MediaAssetFixture$Calls",
+      "dev/codex/schubert/nk/storage/OwnedTransferDirectory",
+      "dev/codex/schubert/nk/storage/OwnedTransferDirectory$FileOperation",
+      "dev/codex/schubert/nk/storage/StorageIdentity"
+    ],
+    "reflectionOrDynamicLookup": false,
+    "sourceFile": "MediaAssetFixture.java"
+  },
+  "api:dev/codex/schubert/nk/api/file/MediaAssetFixture$Calls": {
+    "className": "dev/codex/schubert/nk/api/file/MediaAssetFixture$Calls",
+    "classSha256": "b81070b0ea005e759b8c014094cb088ca26b04c40f869c1129afe91aa2858c2e",
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/file/MediaAssetFixture.java",
+    "projectClassReferences": [
+      "dev/codex/schubert/nk/api/file/MediaAssetFixture",
+      "dev/codex/schubert/nk/api/file/MediaAssetFixture$Calls",
+      "dev/codex/schubert/nk/storage/DirectoryCalls",
+      "dev/codex/schubert/nk/storage/LinuxDirectoryCalls",
+      "dev/codex/schubert/nk/storage/StorageIoException",
+      "dev/codex/schubert/nk/storage/StorageIoException$Reason"
+    ],
+    "reflectionOrDynamicLookup": false,
+    "sourceFile": "MediaAssetFixture.java"
+  },
+  "api:dev/codex/schubert/nk/api/idempotency/InboxBoundaryFailureFixture": {
+    "className": "dev/codex/schubert/nk/api/idempotency/InboxBoundaryFailureFixture",
+    "classSha256": "d1718b1de55cf5fecf68fa05787c138a1f1f1e4a1378ee4ec797a93ac97d898f",
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/idempotency/InboxBoundaryFailureFixture.java",
+    "projectClassReferences": [
+      "dev/codex/schubert/nk/api/idempotency/InboxBoundaryFailureFixture",
+      "dev/codex/schubert/nk/api/idempotency/InboxException",
+      "dev/codex/schubert/nk/api/idempotency/InboxException$Reason"
+    ],
+    "reflectionOrDynamicLookup": false,
+    "sourceFile": "InboxBoundaryFailureFixture.java"
+  },
+  "api:dev/codex/schubert/nk/api/maintenance/AuthenticationInboxCleanupTest": {
+    "className": "dev/codex/schubert/nk/api/maintenance/AuthenticationInboxCleanupTest",
+    "classSha256": "596ba2232ca958a7337872fa0415ac90b269f35ff6f05441c258cd3ec67f9d79",
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/maintenance/AuthenticationInboxCleanupTest.java",
+    "projectClassReferences": [
+      "dev/codex/schubert/nk/api/idempotency/EncryptedResponseSnapshot",
+      "dev/codex/schubert/nk/api/idempotency/InboxCompletion",
+      "dev/codex/schubert/nk/api/idempotency/InboxResultReference",
+      "dev/codex/schubert/nk/api/idempotency/ResponseSnapshotCodec",
+      "dev/codex/schubert/nk/api/idempotency/ResponseSnapshotIdentity",
+      "dev/codex/schubert/nk/api/logging/ApiLogDatabaseFixture",
+      "dev/codex/schubert/nk/api/maintenance/AuthenticationInboxCleanupTest",
+      "dev/codex/schubert/nk/api/maintenance/AuthenticationInboxInspector",
+      "dev/codex/schubert/nk/api/maintenance/AuthenticationInboxInspectorTest",
+      "dev/codex/schubert/nk/api/maintenance/AuthenticationInboxInspectorTest$Fixture",
+      "dev/codex/schubert/nk/api/maintenance/InboxCleanup",
+      "dev/codex/schubert/nk/api/maintenance/InboxMaintenanceException",
+      "dev/codex/schubert/nk/api/maintenance/InspectionRun",
+      "dev/codex/schubert/nk/api/maintenance/InspectionStep",
+      "dev/codex/schubert/nk/api/maintenance/InspectionStep$Outcome",
+      "dev/codex/schubert/nk/api/maintenance/MaintenanceJdbcProbe",
+      "dev/codex/schubert/nk/api/maintenance/MaintenanceJdbcProbe$Hook",
+      "dev/codex/schubert/nk/api/maintenance/NonAuthenticationInboxInspector",
+      "dev/codex/schubert/nk/api/security/AuthContextCodec",
+      "dev/codex/schubert/nk/api/security/ContextHash",
+      "dev/codex/schubert/nk/bootstrap/MaintenanceOwnerFrame",
+      "dev/codex/schubert/nk/bootstrap/MaintenanceOwnerFrame$Guard"
+    ],
+    "reflectionOrDynamicLookup": false,
+    "sourceFile": "AuthenticationInboxCleanupTest.java"
+  },
+  "api:dev/codex/schubert/nk/api/maintenance/AuthenticationInboxInspectorTest": {
+    "className": "dev/codex/schubert/nk/api/maintenance/AuthenticationInboxInspectorTest",
+    "classSha256": "73384cd262f5a06f58c6d6a639a9bbc5537ceccc1b061a7630fe2c893dffccec",
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/maintenance/AuthenticationInboxInspectorTest.java",
+    "projectClassReferences": [
+      "dev/codex/schubert/nk/api/idempotency/EncryptedResponseSnapshot",
+      "dev/codex/schubert/nk/api/idempotency/InboxCompletion",
+      "dev/codex/schubert/nk/api/idempotency/InboxCompletionState",
+      "dev/codex/schubert/nk/api/idempotency/InboxResultReference",
+      "dev/codex/schubert/nk/api/idempotency/ResponseSnapshotCodec",
+      "dev/codex/schubert/nk/api/idempotency/ResponseSnapshotIdentity",
+      "dev/codex/schubert/nk/api/logging/ApiLogDatabaseFixture",
+      "dev/codex/schubert/nk/api/maintenance/AuthenticationInboxInspector",
+      "dev/codex/schubert/nk/api/maintenance/AuthenticationInboxInspectorTest",
+      "dev/codex/schubert/nk/api/maintenance/AuthenticationInboxInspectorTest$Fixture",
+      "dev/codex/schubert/nk/api/security/AuthContextCodec",
+      "dev/codex/schubert/nk/api/security/ContextHash"
+    ],
+    "reflectionOrDynamicLookup": true,
+    "sourceFile": "AuthenticationInboxInspectorTest.java"
+  },
+  "api:dev/codex/schubert/nk/api/maintenance/AuthenticationInboxInspectorTest$Fixture": {
+    "className": "dev/codex/schubert/nk/api/maintenance/AuthenticationInboxInspectorTest$Fixture",
+    "classSha256": "cf0e82ced020bd2f985f52114393313b1cbbfe404c3952621fbee537d3539cf6",
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/maintenance/AuthenticationInboxInspectorTest.java",
+    "projectClassReferences": [
+      "dev/codex/schubert/nk/api/idempotency/EncryptedResponseSnapshot",
+      "dev/codex/schubert/nk/api/idempotency/InboxCompletion",
+      "dev/codex/schubert/nk/api/idempotency/InboxCompletionState",
+      "dev/codex/schubert/nk/api/idempotency/InboxResultReference",
+      "dev/codex/schubert/nk/api/idempotency/ResponseSnapshotCodec",
+      "dev/codex/schubert/nk/api/idempotency/ResponseSnapshotIdentity",
+      "dev/codex/schubert/nk/api/maintenance/AuthenticationInboxInspector",
+      "dev/codex/schubert/nk/api/maintenance/AuthenticationInboxInspectorTest",
+      "dev/codex/schubert/nk/api/maintenance/AuthenticationInboxInspectorTest$Fixture",
+      "dev/codex/schubert/nk/api/security/AuthContextCodec",
+      "dev/codex/schubert/nk/api/security/ContextHash"
+    ],
+    "reflectionOrDynamicLookup": false,
+    "sourceFile": "AuthenticationInboxInspectorTest.java"
+  },
+  "api:dev/codex/schubert/nk/api/maintenance/InboxCleanupNonAuthenticationTest": {
+    "className": "dev/codex/schubert/nk/api/maintenance/InboxCleanupNonAuthenticationTest",
+    "classSha256": "86b074eda8e125d9c8974c4f16593637e47751a49113283f40b115e2479ae671",
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/maintenance/InboxCleanupNonAuthenticationTest.java",
+    "projectClassReferences": [
+      "dev/codex/schubert/nk/api/idempotency/EncryptedResponseSnapshot",
+      "dev/codex/schubert/nk/api/idempotency/InboxCompletion",
+      "dev/codex/schubert/nk/api/idempotency/InboxCompletionState",
+      "dev/codex/schubert/nk/api/idempotency/InboxResultReference",
+      "dev/codex/schubert/nk/api/idempotency/InboxResultReferenceType",
+      "dev/codex/schubert/nk/api/idempotency/ResponseSnapshotCodec",
+      "dev/codex/schubert/nk/api/idempotency/ResponseSnapshotIdentity",
+      "dev/codex/schubert/nk/api/logging/ApiLogDatabaseFixture",
+      "dev/codex/schubert/nk/api/maintenance/InboxCleanup",
+      "dev/codex/schubert/nk/api/maintenance/InboxCleanupNonAuthenticationTest",
+      "dev/codex/schubert/nk/api/maintenance/InboxCleanupNonAuthenticationTest$Fixture",
+      "dev/codex/schubert/nk/api/maintenance/InboxMaintenanceException",
+      "dev/codex/schubert/nk/api/maintenance/InboxResponseInspector",
+      "dev/codex/schubert/nk/api/maintenance/InboxResponseInspectorTest",
+      "dev/codex/schubert/nk/api/maintenance/InboxResponseInspectorTest$Fixture",
+      "dev/codex/schubert/nk/api/maintenance/InspectionRun",
+      "dev/codex/schubert/nk/api/maintenance/InspectionStep",
+      "dev/codex/schubert/nk/api/maintenance/InspectionStep$Outcome",
+      "dev/codex/schubert/nk/api/maintenance/MaintenanceJdbcProbe",
+      "dev/codex/schubert/nk/api/maintenance/MaintenanceJdbcProbe$Hook",
+      "dev/codex/schubert/nk/api/maintenance/NonAuthenticationInboxInspector",
+      "dev/codex/schubert/nk/api/maintenance/NonAuthenticationInboxInspectorTest"
+    ],
+    "reflectionOrDynamicLookup": false,
+    "sourceFile": "InboxCleanupNonAuthenticationTest.java"
+  },
+  "api:dev/codex/schubert/nk/api/maintenance/InboxCleanupNonAuthenticationTest$Fixture": {
+    "className": "dev/codex/schubert/nk/api/maintenance/InboxCleanupNonAuthenticationTest$Fixture",
+    "classSha256": "636ef5889af7c37dd5c35918300e5749ea0ffb86b89e99c6afc6d9a7649419ac",
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/maintenance/InboxCleanupNonAuthenticationTest.java",
+    "projectClassReferences": [
+      "dev/codex/schubert/nk/api/maintenance/AuthenticationInboxInspector",
+      "dev/codex/schubert/nk/api/maintenance/InboxCleanup",
+      "dev/codex/schubert/nk/api/maintenance/InboxCleanupNonAuthenticationTest",
+      "dev/codex/schubert/nk/api/maintenance/InboxCleanupNonAuthenticationTest$Fixture",
+      "dev/codex/schubert/nk/api/maintenance/InboxResponseInspectorTest",
+      "dev/codex/schubert/nk/api/maintenance/InboxResponseInspectorTest$Fixture",
+      "dev/codex/schubert/nk/api/maintenance/NonAuthenticationInboxInspector",
+      "dev/codex/schubert/nk/api/security/AuthContextCodec",
+      "dev/codex/schubert/nk/api/security/ContextHash"
+    ],
+    "reflectionOrDynamicLookup": false,
+    "sourceFile": "InboxCleanupNonAuthenticationTest.java"
+  },
+  "api:dev/codex/schubert/nk/api/maintenance/InboxDeletionBoundaryTest": {
+    "className": "dev/codex/schubert/nk/api/maintenance/InboxDeletionBoundaryTest",
+    "classSha256": "edba353d3bd7da8bae1541abdf102ee72819bff2caf21dc7a8c52e19e0646cd4",
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/maintenance/InboxDeletionBoundaryTest.java",
+    "projectClassReferences": [
+      "dev/codex/schubert/nk/api/database/MigrationInventory",
+      "dev/codex/schubert/nk/api/logging/ApiLogDatabaseFixture",
+      "dev/codex/schubert/nk/api/maintenance/AuthenticationInboxInspectorTest",
+      "dev/codex/schubert/nk/api/maintenance/AuthenticationInboxInspectorTest$Fixture",
+      "dev/codex/schubert/nk/api/maintenance/InboxDeletionBoundaryTest"
+    ],
+    "reflectionOrDynamicLookup": false,
+    "sourceFile": "InboxDeletionBoundaryTest.java"
+  },
+  "api:dev/codex/schubert/nk/api/maintenance/InboxInspectionBoundaryTest": {
+    "className": "dev/codex/schubert/nk/api/maintenance/InboxInspectionBoundaryTest",
+    "classSha256": "f9e8b2b229f9da5d7e02f69aa93778b41524bb4e48681a7896797f138ec9df39",
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/maintenance/InboxInspectionBoundaryTest.java",
+    "projectClassReferences": [
+      "dev/codex/schubert/nk/api/database/MigrationInventory",
+      "dev/codex/schubert/nk/api/idempotency/EncryptedResponseSnapshot",
+      "dev/codex/schubert/nk/api/idempotency/InboxCompletion",
+      "dev/codex/schubert/nk/api/idempotency/InboxResultReference",
+      "dev/codex/schubert/nk/api/idempotency/ResponseSnapshotIdentity",
+      "dev/codex/schubert/nk/api/logging/ApiLogDatabaseFixture",
+      "dev/codex/schubert/nk/api/maintenance/AuthenticationInboxInspector",
+      "dev/codex/schubert/nk/api/maintenance/AuthenticationInboxInspectorTest",
+      "dev/codex/schubert/nk/api/maintenance/AuthenticationInboxInspectorTest$Fixture",
+      "dev/codex/schubert/nk/api/maintenance/InboxInspectionBoundaryTest"
+    ],
+    "reflectionOrDynamicLookup": false,
+    "sourceFile": "InboxInspectionBoundaryTest.java"
+  },
+  "api:dev/codex/schubert/nk/api/maintenance/InboxInspectionProgressTest": {
+    "className": "dev/codex/schubert/nk/api/maintenance/InboxInspectionProgressTest",
+    "classSha256": "2cb46c6963fa18d81e9e434edc4e632b4c3accc37020ed14aeecd59bb4b5c5f7",
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/maintenance/InboxInspectionProgressTest.java",
+    "projectClassReferences": [
+      "dev/codex/schubert/nk/api/idempotency/EncryptedResponseSnapshot",
+      "dev/codex/schubert/nk/api/idempotency/InboxCompletion",
+      "dev/codex/schubert/nk/api/idempotency/InboxCompletionState",
+      "dev/codex/schubert/nk/api/idempotency/InboxResultReference",
+      "dev/codex/schubert/nk/api/idempotency/InboxResultReferenceType",
+      "dev/codex/schubert/nk/api/idempotency/ResponseSnapshotCodec",
+      "dev/codex/schubert/nk/api/idempotency/ResponseSnapshotIdentity",
+      "dev/codex/schubert/nk/api/logging/ApiLogDatabaseFixture",
+      "dev/codex/schubert/nk/api/maintenance/AuthenticationInboxInspectorTest",
+      "dev/codex/schubert/nk/api/maintenance/AuthenticationInboxInspectorTest$Fixture",
+      "dev/codex/schubert/nk/api/maintenance/InboxCleanup",
+      "dev/codex/schubert/nk/api/maintenance/InboxInspectionProgressTest",
+      "dev/codex/schubert/nk/api/maintenance/InboxInspectionProgressTest$Fixture",
+      "dev/codex/schubert/nk/api/maintenance/InboxMaintenanceException",
+      "dev/codex/schubert/nk/api/maintenance/InboxResponseInspector",
+      "dev/codex/schubert/nk/api/maintenance/InspectionProgress",
+      "dev/codex/schubert/nk/api/maintenance/InspectionRun",
+      "dev/codex/schubert/nk/api/maintenance/MaintenanceJdbcProbe",
+      "dev/codex/schubert/nk/api/maintenance/MaintenanceJdbcProbe$Hook",
+      "dev/codex/schubert/nk/api/maintenance/NonAuthenticationInboxInspectorTest"
+    ],
+    "reflectionOrDynamicLookup": false,
+    "sourceFile": "InboxInspectionProgressTest.java"
+  },
+  "api:dev/codex/schubert/nk/api/maintenance/InboxInspectionProgressTest$Fixture": {
+    "className": "dev/codex/schubert/nk/api/maintenance/InboxInspectionProgressTest$Fixture",
+    "classSha256": "64113f2ca125bd6b19de9d18bab4d3596059b62627525f926d3a7aabe72f18b0",
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/maintenance/InboxInspectionProgressTest.java",
+    "projectClassReferences": [
+      "dev/codex/schubert/nk/api/maintenance/AuthenticationInboxInspectorTest",
+      "dev/codex/schubert/nk/api/maintenance/AuthenticationInboxInspectorTest$Fixture",
+      "dev/codex/schubert/nk/api/maintenance/InboxCleanup",
+      "dev/codex/schubert/nk/api/maintenance/InboxInspectionProgressTest",
+      "dev/codex/schubert/nk/api/maintenance/InboxInspectionProgressTest$Fixture",
+      "dev/codex/schubert/nk/api/maintenance/MaintenanceJdbcProbe",
+      "dev/codex/schubert/nk/api/maintenance/NonAuthenticationInboxInspector"
+    ],
+    "reflectionOrDynamicLookup": false,
+    "sourceFile": "InboxInspectionProgressTest.java"
+  },
+  "api:dev/codex/schubert/nk/api/maintenance/InboxResponseInspectorTest": {
+    "className": "dev/codex/schubert/nk/api/maintenance/InboxResponseInspectorTest",
+    "classSha256": "ffd4df9e68eddb4a65c267816dad261d206ad18e9e05f87bcf806269ce0924c4",
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/maintenance/InboxResponseInspectorTest.java",
+    "projectClassReferences": [
+      "dev/codex/schubert/nk/api/idempotency/EncryptedResponseSnapshot",
+      "dev/codex/schubert/nk/api/idempotency/InboxCompletion",
+      "dev/codex/schubert/nk/api/idempotency/InboxCompletionState",
+      "dev/codex/schubert/nk/api/idempotency/InboxResultReference",
+      "dev/codex/schubert/nk/api/idempotency/InboxResultReferenceType",
+      "dev/codex/schubert/nk/api/idempotency/ResponseSnapshotCodec",
+      "dev/codex/schubert/nk/api/idempotency/ResponseSnapshotIdentity",
+      "dev/codex/schubert/nk/api/maintenance/InboxResponseInspector",
+      "dev/codex/schubert/nk/api/maintenance/InboxResponseInspectorTest",
+      "dev/codex/schubert/nk/api/maintenance/InboxResponseInspectorTest$Fixture"
+    ],
+    "reflectionOrDynamicLookup": false,
+    "sourceFile": "InboxResponseInspectorTest.java"
+  },
+  "api:dev/codex/schubert/nk/api/maintenance/InboxResponseInspectorTest$Fixture": {
+    "className": "dev/codex/schubert/nk/api/maintenance/InboxResponseInspectorTest$Fixture",
+    "classSha256": "8b63922785c381bfe1ff5aeb7a9d4887ac7a22c1bcd91b3d5c494afa631ebbbd",
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/maintenance/InboxResponseInspectorTest.java",
+    "projectClassReferences": [
+      "dev/codex/schubert/nk/api/idempotency/EncryptedResponseSnapshot",
+      "dev/codex/schubert/nk/api/idempotency/InboxCompletion",
+      "dev/codex/schubert/nk/api/idempotency/InboxCompletionState",
+      "dev/codex/schubert/nk/api/idempotency/InboxResultReference",
+      "dev/codex/schubert/nk/api/idempotency/ResponseSnapshotCodec",
+      "dev/codex/schubert/nk/api/idempotency/ResponseSnapshotIdentity",
+      "dev/codex/schubert/nk/api/maintenance/InboxResponseInspector",
+      "dev/codex/schubert/nk/api/maintenance/InboxResponseInspectorTest",
+      "dev/codex/schubert/nk/api/maintenance/InboxResponseInspectorTest$Fixture"
+    ],
+    "reflectionOrDynamicLookup": false,
+    "sourceFile": "InboxResponseInspectorTest.java"
+  },
+  "api:dev/codex/schubert/nk/api/maintenance/InspectorFailureGraph329Test": {
+    "className": "dev/codex/schubert/nk/api/maintenance/InspectorFailureGraph329Test",
+    "classSha256": "edd3e17541663fef8740176a1913df87d7778af5b5fa6243846b02126bdc669b",
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/maintenance/InspectorFailureGraph329Test.java",
+    "projectClassReferences": [
+      "dev/codex/schubert/nk/api/idempotency/InboxCompletionState",
+      "dev/codex/schubert/nk/api/idempotency/InboxResultReference",
+      "dev/codex/schubert/nk/api/idempotency/ResponseSnapshotIdentity",
+      "dev/codex/schubert/nk/api/maintenance/AuthenticationInboxInspector",
+      "dev/codex/schubert/nk/api/maintenance/AuthenticationInboxInspectorTest",
+      "dev/codex/schubert/nk/api/maintenance/AuthenticationInboxInspectorTest$Fixture",
+      "dev/codex/schubert/nk/api/maintenance/InboxResponseInspectorTest",
+      "dev/codex/schubert/nk/api/maintenance/InboxResponseInspectorTest$Fixture",
+      "dev/codex/schubert/nk/api/maintenance/InspectorDatabaseConnections",
+      "dev/codex/schubert/nk/api/maintenance/InspectorDatabaseConnections$Connector",
+      "dev/codex/schubert/nk/api/maintenance/InspectorDbCredential",
+      "dev/codex/schubert/nk/api/maintenance/InspectorFailureGraph329Test",
+      "dev/codex/schubert/nk/api/maintenance/InspectorFailureGraph329Test$Factory",
+      "dev/codex/schubert/nk/api/maintenance/InspectorFailureGraph329Test$Inspection",
+      "dev/codex/schubert/nk/api/maintenance/InspectorFailureGraph329Test$ProviderAction",
+      "dev/codex/schubert/nk/api/maintenance/NonAuthenticationInboxInspector",
+      "dev/codex/schubert/nk/api/maintenance/NonAuthenticationInboxInspectorTest",
+      "dev/codex/schubert/nk/api/maintenance/QuestionMutationInboxInspector",
+      "dev/codex/schubert/nk/api/maintenance/QuestionMutationInboxInspectorTest",
+      "dev/codex/schubert/nk/api/maintenance/QuestionMutationInboxInspectorTest$Fixture"
+    ],
+    "reflectionOrDynamicLookup": true,
+    "sourceFile": "InspectorFailureGraph329Test.java"
+  },
+  "api:dev/codex/schubert/nk/api/maintenance/InspectorFailureGraph329Test$Factory": {
+    "className": "dev/codex/schubert/nk/api/maintenance/InspectorFailureGraph329Test$Factory",
+    "classSha256": "b53e2a2308dcc521d12f18baf0ccf69f15dd9a223fb46b748362d862a2d72724",
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/maintenance/InspectorFailureGraph329Test.java",
+    "projectClassReferences": [
+      "dev/codex/schubert/nk/api/maintenance/InspectorFailureGraph329Test",
+      "dev/codex/schubert/nk/api/maintenance/InspectorFailureGraph329Test$Factory"
+    ],
+    "reflectionOrDynamicLookup": true,
+    "sourceFile": "InspectorFailureGraph329Test.java"
+  },
+  "api:dev/codex/schubert/nk/api/maintenance/InspectorFailureGraph329Test$Inspection": {
+    "className": "dev/codex/schubert/nk/api/maintenance/InspectorFailureGraph329Test$Inspection",
+    "classSha256": "b64b68fee7fa4f52f90e4b4185e5d0601b1c2a1ab9e17fd24a6a7e7ab56f43d9",
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/maintenance/InspectorFailureGraph329Test.java",
+    "projectClassReferences": [
+      "dev/codex/schubert/nk/api/maintenance/InspectorFailureGraph329Test",
+      "dev/codex/schubert/nk/api/maintenance/InspectorFailureGraph329Test$Inspection"
+    ],
+    "reflectionOrDynamicLookup": false,
+    "sourceFile": "InspectorFailureGraph329Test.java"
+  },
+  "api:dev/codex/schubert/nk/api/maintenance/InspectorFailureGraph329Test$ProviderAction": {
+    "className": "dev/codex/schubert/nk/api/maintenance/InspectorFailureGraph329Test$ProviderAction",
+    "classSha256": "29b7faecdec4e6fa7819b31ba8f7f6f632d0944ac011ba6cb244267c025eb7c2",
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/maintenance/InspectorFailureGraph329Test.java",
+    "projectClassReferences": [
+      "dev/codex/schubert/nk/api/maintenance/InspectorFailureGraph329Test",
+      "dev/codex/schubert/nk/api/maintenance/InspectorFailureGraph329Test$ProviderAction"
+    ],
+    "reflectionOrDynamicLookup": false,
+    "sourceFile": "InspectorFailureGraph329Test.java"
+  },
+  "api:dev/codex/schubert/nk/api/maintenance/NonAuthenticationInboxInspectorTest": {
+    "className": "dev/codex/schubert/nk/api/maintenance/NonAuthenticationInboxInspectorTest",
+    "classSha256": "579eaccd08f0514ce191944d65064210f5ce1e6c52b0f9d5e2de23f659027b9a",
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/maintenance/NonAuthenticationInboxInspectorTest.java",
+    "projectClassReferences": [
+      "dev/codex/schubert/nk/api/idempotency/EncryptedResponseSnapshot",
+      "dev/codex/schubert/nk/api/idempotency/InboxCompletion",
+      "dev/codex/schubert/nk/api/idempotency/InboxCompletionState",
+      "dev/codex/schubert/nk/api/idempotency/InboxResultReference",
+      "dev/codex/schubert/nk/api/idempotency/InboxResultReferenceType",
+      "dev/codex/schubert/nk/api/idempotency/ResponseSnapshotCodec",
+      "dev/codex/schubert/nk/api/idempotency/ResponseSnapshotIdentity",
+      "dev/codex/schubert/nk/api/logging/ApiLogDatabaseFixture",
+      "dev/codex/schubert/nk/api/maintenance/InboxResponseInspector",
+      "dev/codex/schubert/nk/api/maintenance/InboxResponseInspectorTest",
+      "dev/codex/schubert/nk/api/maintenance/InboxResponseInspectorTest$Fixture",
+      "dev/codex/schubert/nk/api/maintenance/MaintenanceJdbcProbe",
+      "dev/codex/schubert/nk/api/maintenance/NonAuthenticationInboxInspector",
+      "dev/codex/schubert/nk/api/maintenance/NonAuthenticationInboxInspectorTest"
+    ],
+    "reflectionOrDynamicLookup": true,
+    "sourceFile": "NonAuthenticationInboxInspectorTest.java"
+  },
+  "api:dev/codex/schubert/nk/api/maintenance/QuestionMutationInboxInspectorTest": {
+    "className": "dev/codex/schubert/nk/api/maintenance/QuestionMutationInboxInspectorTest",
+    "classSha256": "018b06e507dbcffaf65590a48ffed16c7bf759b73f3488db950ee07aa758f0e3",
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/maintenance/QuestionMutationInboxInspectorTest.java",
+    "projectClassReferences": [
+      "dev/codex/schubert/nk/api/database/MigrationInventory",
+      "dev/codex/schubert/nk/api/idempotency/EncryptedResponseSnapshot",
+      "dev/codex/schubert/nk/api/idempotency/InboxCompletion",
+      "dev/codex/schubert/nk/api/idempotency/InboxCompletionState",
+      "dev/codex/schubert/nk/api/idempotency/InboxResultReference",
+      "dev/codex/schubert/nk/api/idempotency/InboxResultReferenceType",
+      "dev/codex/schubert/nk/api/idempotency/ResponseSnapshotCodec",
+      "dev/codex/schubert/nk/api/idempotency/ResponseSnapshotIdentity",
+      "dev/codex/schubert/nk/api/logging/ApiLogDatabaseFixture",
+      "dev/codex/schubert/nk/api/maintenance/InboxCleanup",
+      "dev/codex/schubert/nk/api/maintenance/InboxMaintenanceException",
+      "dev/codex/schubert/nk/api/maintenance/InboxResponseInspectorTest",
+      "dev/codex/schubert/nk/api/maintenance/InboxResponseInspectorTest$Fixture",
+      "dev/codex/schubert/nk/api/maintenance/InspectionProgress",
+      "dev/codex/schubert/nk/api/maintenance/InspectionRun",
+      "dev/codex/schubert/nk/api/maintenance/InspectionStep",
+      "dev/codex/schubert/nk/api/maintenance/InspectionStep$Outcome",
+      "dev/codex/schubert/nk/api/maintenance/MaintenanceJdbcProbe",
+      "dev/codex/schubert/nk/api/maintenance/NonAuthenticationInboxInspectorTest",
+      "dev/codex/schubert/nk/api/maintenance/QuestionMutationInboxInspector",
+      "dev/codex/schubert/nk/api/maintenance/QuestionMutationInboxInspectorTest",
+      "dev/codex/schubert/nk/api/maintenance/QuestionMutationInboxInspectorTest$Fixture"
+    ],
+    "reflectionOrDynamicLookup": false,
+    "sourceFile": "QuestionMutationInboxInspectorTest.java"
+  },
+  "api:dev/codex/schubert/nk/api/maintenance/QuestionMutationInboxInspectorTest$Fixture": {
+    "className": "dev/codex/schubert/nk/api/maintenance/QuestionMutationInboxInspectorTest$Fixture",
+    "classSha256": "e8ac1d9d6eb403c3fae310409117bc8b8bf1fa7d03a5ad64a0c9f5e2a83fc514",
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/maintenance/QuestionMutationInboxInspectorTest.java",
+    "projectClassReferences": [
+      "dev/codex/schubert/nk/api/maintenance/AuthenticationInboxInspector",
+      "dev/codex/schubert/nk/api/maintenance/InboxCleanup",
+      "dev/codex/schubert/nk/api/maintenance/InboxResponseInspectorTest",
+      "dev/codex/schubert/nk/api/maintenance/InboxResponseInspectorTest$Fixture",
+      "dev/codex/schubert/nk/api/maintenance/NonAuthenticationInboxInspector",
+      "dev/codex/schubert/nk/api/maintenance/QuestionMutationInboxInspector",
+      "dev/codex/schubert/nk/api/maintenance/QuestionMutationInboxInspectorTest",
+      "dev/codex/schubert/nk/api/maintenance/QuestionMutationInboxInspectorTest$Fixture",
+      "dev/codex/schubert/nk/api/security/AuthContextCodec",
+      "dev/codex/schubert/nk/api/security/ContextHash"
+    ],
+    "reflectionOrDynamicLookup": false,
+    "sourceFile": "QuestionMutationInboxInspectorTest.java"
+  },
+  "api:dev/codex/schubert/nk/api/maintenance/QuestionQueryInboxCleanupTest": {
+    "className": "dev/codex/schubert/nk/api/maintenance/QuestionQueryInboxCleanupTest",
+    "classSha256": "684d02933968ee177ca4318c4e47530fe7d7da80b71c1b761a27f8cf689669e9",
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/maintenance/QuestionQueryInboxCleanupTest.java",
+    "projectClassReferences": [
+      "dev/codex/schubert/nk/api/database/MigrationInventory",
+      "dev/codex/schubert/nk/api/domain/Role",
+      "dev/codex/schubert/nk/api/idempotency/EncryptedResponseSnapshot",
+      "dev/codex/schubert/nk/api/idempotency/InboxCompletion",
+      "dev/codex/schubert/nk/api/idempotency/InboxCompletionState",
+      "dev/codex/schubert/nk/api/idempotency/InboxResultReference",
+      "dev/codex/schubert/nk/api/idempotency/InboxResultReferenceType",
+      "dev/codex/schubert/nk/api/idempotency/ResponseSnapshotIdentity",
+      "dev/codex/schubert/nk/api/logging/ApiLogDatabaseFixture",
+      "dev/codex/schubert/nk/api/maintenance/InboxCleanup",
+      "dev/codex/schubert/nk/api/maintenance/InboxMaintenanceException",
+      "dev/codex/schubert/nk/api/maintenance/InboxResponseInspector",
+      "dev/codex/schubert/nk/api/maintenance/InboxResponseInspectorTest",
+      "dev/codex/schubert/nk/api/maintenance/InboxResponseInspectorTest$Fixture",
+      "dev/codex/schubert/nk/api/maintenance/InspectionProgress",
+      "dev/codex/schubert/nk/api/maintenance/InspectionRun",
+      "dev/codex/schubert/nk/api/maintenance/InspectionStep",
+      "dev/codex/schubert/nk/api/maintenance/InspectionStep$Outcome",
+      "dev/codex/schubert/nk/api/maintenance/MaintenanceJdbcProbe",
+      "dev/codex/schubert/nk/api/maintenance/NonAuthenticationInboxInspector",
+      "dev/codex/schubert/nk/api/maintenance/NonAuthenticationInboxInspectorTest",
+      "dev/codex/schubert/nk/api/maintenance/QuestionQueryInboxCleanupTest",
+      "dev/codex/schubert/nk/api/maintenance/QuestionQueryInboxCleanupTest$Fixture"
+    ],
+    "reflectionOrDynamicLookup": false,
+    "sourceFile": "QuestionQueryInboxCleanupTest.java"
+  },
+  "api:dev/codex/schubert/nk/api/maintenance/QuestionQueryInboxCleanupTest$Fixture": {
+    "className": "dev/codex/schubert/nk/api/maintenance/QuestionQueryInboxCleanupTest$Fixture",
+    "classSha256": "8cc78bd136cc2ea1e87c85f3c33f6d0da1733290207a8ba12af25974d809848d",
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/maintenance/QuestionQueryInboxCleanupTest.java",
+    "projectClassReferences": [
+      "dev/codex/schubert/nk/api/maintenance/AuthenticationInboxInspector",
+      "dev/codex/schubert/nk/api/maintenance/InboxCleanup",
+      "dev/codex/schubert/nk/api/maintenance/InboxResponseInspectorTest",
+      "dev/codex/schubert/nk/api/maintenance/InboxResponseInspectorTest$Fixture",
+      "dev/codex/schubert/nk/api/maintenance/NonAuthenticationInboxInspector",
+      "dev/codex/schubert/nk/api/maintenance/QuestionQueryInboxCleanupTest",
+      "dev/codex/schubert/nk/api/maintenance/QuestionQueryInboxCleanupTest$Fixture",
+      "dev/codex/schubert/nk/api/security/AuthContextCodec",
+      "dev/codex/schubert/nk/api/security/ContextHash"
+    ],
+    "reflectionOrDynamicLookup": false,
+    "sourceFile": "QuestionQueryInboxCleanupTest.java"
+  },
+  "api:dev/codex/schubert/nk/api/maintenance/ResultBoundResponseSnapshotCodecTest": {
+    "className": "dev/codex/schubert/nk/api/maintenance/ResultBoundResponseSnapshotCodecTest",
+    "classSha256": "dafaee7326570abbc4d8e9fd8e4322ddc8f5f408df9a37456769bee07d94195e",
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/maintenance/ResultBoundResponseSnapshotCodecTest.java",
+    "projectClassReferences": [
+      "dev/codex/schubert/nk/api/idempotency/EncryptedResponseSnapshot",
+      "dev/codex/schubert/nk/api/idempotency/InboxCompletion",
+      "dev/codex/schubert/nk/api/idempotency/InboxCompletionState",
+      "dev/codex/schubert/nk/api/idempotency/InboxResultReference",
+      "dev/codex/schubert/nk/api/idempotency/InboxResultReferenceType",
+      "dev/codex/schubert/nk/api/idempotency/ResponseSnapshotCodec",
+      "dev/codex/schubert/nk/api/idempotency/ResponseSnapshotException",
+      "dev/codex/schubert/nk/api/idempotency/ResponseSnapshotException$Reason",
+      "dev/codex/schubert/nk/api/idempotency/ResponseSnapshotIdentity",
+      "dev/codex/schubert/nk/api/idempotency/ResultBoundResponseSnapshotCodec",
+      "dev/codex/schubert/nk/api/maintenance/InboxResponseInspectorTest",
+      "dev/codex/schubert/nk/api/maintenance/InboxResponseInspectorTest$Fixture",
+      "dev/codex/schubert/nk/api/maintenance/ResultBoundResponseSnapshotCodecTest"
+    ],
+    "reflectionOrDynamicLookup": false,
+    "sourceFile": "ResultBoundResponseSnapshotCodecTest.java"
+  },
+  "api:dev/codex/schubert/nk/api/messaging/config/ArtemisFileJournalTest": {
+    "className": "dev/codex/schubert/nk/api/messaging/config/ArtemisFileJournalTest",
+    "classSha256": "e0d4bdaf3209ff5e6a7f0c504f8cba6da6bf7deb16dac713a95caf6e7fe325bd",
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/config/ArtemisFileJournalTest.java",
+    "projectClassReferences": [
+      "dev/codex/schubert/nk/api/messaging/config/ArtemisFileJournalTest",
+      "dev/codex/schubert/nk/api/messaging/guard/GuardedJmsMessage",
+      "dev/codex/schubert/nk/api/messaging/guard/JmsMessageGuard",
+      "dev/codex/schubert/nk/api/messaging/outbound/FatalDlqMessageWriter",
+      "dev/codex/schubert/nk/api/messaging/outbound/FatalDlqMetadata",
+      "dev/codex/schubert/nk/api/messaging/outbound/FatalDlqMetadata$DetectedBy",
+      "dev/codex/schubert/nk/protocol/codec/ExpectedRoute",
+      "dev/codex/schubert/nk/protocol/codec/TransportBodyType",
+      "dev/codex/schubert/nk/protocol/codec/TransportMetadata",
+      "dev/codex/schubert/nk/protocol/header/InteractionKind",
+      "dev/codex/schubert/nk/protocol/header/MessageKind",
+      "dev/codex/schubert/nk/protocol/layout/LayoutId"
+    ],
+    "reflectionOrDynamicLookup": false,
+    "sourceFile": "ArtemisFileJournalTest.java"
+  },
+  "api:dev/codex/schubert/nk/api/security/AuthenticationJdbcBoundary329Test": {
+    "className": "dev/codex/schubert/nk/api/security/AuthenticationJdbcBoundary329Test",
+    "classSha256": "17030ac576e243ca585d129b6871d86c2b912bed9813fdd37e4945bfa5a40f3d",
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/AuthenticationJdbcBoundary329Test.java",
+    "projectClassReferences": [
+      "dev/codex/schubert/nk/api/security/AuthContextCodec",
+      "dev/codex/schubert/nk/api/security/AuthSessionService",
+      "dev/codex/schubert/nk/api/security/AuthenticationInfrastructureException",
+      "dev/codex/schubert/nk/api/security/AuthenticationJdbcBoundary329Test",
+      "dev/codex/schubert/nk/api/security/AuthenticationJdbcBoundary329Test$Fixture",
+      "dev/codex/schubert/nk/api/security/AuthenticationService",
+      "dev/codex/schubert/nk/api/security/ContextHash",
+      "dev/codex/schubert/nk/api/security/LockedLoginAttempt",
+      "dev/codex/schubert/nk/api/security/LoginAttemptKind",
+      "dev/codex/schubert/nk/api/security/LoginAttemptRepository",
+      "dev/codex/schubert/nk/api/security/LoginAttemptState",
+      "dev/codex/schubert/nk/api/security/LoginAuditWriter"
+    ],
+    "reflectionOrDynamicLookup": false,
+    "sourceFile": "AuthenticationJdbcBoundary329Test.java"
+  },
+  "api:dev/codex/schubert/nk/api/security/AuthenticationJdbcBoundary329Test$Fixture": {
+    "className": "dev/codex/schubert/nk/api/security/AuthenticationJdbcBoundary329Test$Fixture",
+    "classSha256": "7fa7822574a756247f5507e9fd055c0d98f2b40afcedbd0eaee09c4f8883f1e0",
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/AuthenticationJdbcBoundary329Test.java",
+    "projectClassReferences": [
+      "dev/codex/schubert/nk/api/security/AuthenticationJdbcBoundary329Test",
+      "dev/codex/schubert/nk/api/security/AuthenticationJdbcBoundary329Test$Fixture"
+    ],
+    "reflectionOrDynamicLookup": true,
+    "sourceFile": "AuthenticationJdbcBoundary329Test.java"
+  },
+  "api:dev/codex/schubert/nk/api/security/EnumValueCatalogCompatibilityTest": {
+    "className": "dev/codex/schubert/nk/api/security/EnumValueCatalogCompatibilityTest",
+    "classSha256": "670e2d4f4bcbe2072fd90add2865e042e89d0ba680acfee89de6a3e85de135dd",
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/EnumValueCatalogCompatibilityTest.java",
+    "projectClassReferences": [
+      "dev/codex/schubert/nk/api/messaging/config/ArtemisConnectionFactoryProvider",
+      "dev/codex/schubert/nk/api/messaging/config/ArtemisConnectionFactoryProvider$ConsumerProfile",
+      "dev/codex/schubert/nk/api/messaging/outbound/OutboxDestination",
+      "dev/codex/schubert/nk/api/security/EnumValueCatalogCompatibilityTest",
+      "dev/codex/schubert/nk/api/security/LoginAttemptKind"
+    ],
+    "reflectionOrDynamicLookup": false,
+    "sourceFile": "EnumValueCatalogCompatibilityTest.java"
+  },
+  "api:dev/codex/schubert/nk/api/security/ExceptionValueContractTest": {
+    "className": "dev/codex/schubert/nk/api/security/ExceptionValueContractTest",
+    "classSha256": "3c996f852e2784365d0dace9a9b605d852c7417c92030e0751845f3aa57b58b3",
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/ExceptionValueContractTest.java",
+    "projectClassReferences": [
+      "dev/codex/schubert/nk/api/security/AuthContextCryptoException",
+      "dev/codex/schubert/nk/api/security/AuthContextCryptoException$Reason",
+      "dev/codex/schubert/nk/api/security/AuthorizationException",
+      "dev/codex/schubert/nk/api/security/ExceptionValueContractTest",
+      "dev/codex/schubert/nk/protocol/header/ResultCode"
+    ],
+    "reflectionOrDynamicLookup": false,
+    "sourceFile": "ExceptionValueContractTest.java"
+  },
+  "api:dev/codex/schubert/nk/api/storage/ApiPreparationOwnerTest": {
+    "className": "dev/codex/schubert/nk/api/storage/ApiPreparationOwnerTest",
+    "classSha256": "803be74712e65d0241e93b5c13bcfe968ec23b1498df5eaf837e5e26e9bc87f9",
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/storage/ApiPreparationOwnerTest.java",
+    "projectClassReferences": [
+      "dev/codex/schubert/nk/api/messaging/outbound/JdbcOutboxRepository",
+      "dev/codex/schubert/nk/api/messaging/outbound/OutboxDispatcher",
+      "dev/codex/schubert/nk/api/messaging/outbound/OutboxJmsSender",
+      "dev/codex/schubert/nk/api/messaging/outbound/OwnedOutboxDispatcher",
+      "dev/codex/schubert/nk/api/storage/ApiApplicationPreparation",
+      "dev/codex/schubert/nk/api/storage/ApiApplicationPreparation$Operation",
+      "dev/codex/schubert/nk/api/storage/ApiPreparationOwnerTest",
+      "dev/codex/schubert/nk/storage/ResourceScope",
+      "dev/codex/schubert/nk/storage/ResourceScope$OwnedAction",
+      "dev/codex/schubert/nk/storage/StorageIoException",
+      "dev/codex/schubert/nk/storage/StorageIoException$Reason"
+    ],
+    "reflectionOrDynamicLookup": false,
+    "sourceFile": "ApiPreparationOwnerTest.java"
+  },
+  "api:dev/codex/schubert/nk/api/storage/RealScenarioFileFixture": {
+    "className": "dev/codex/schubert/nk/api/storage/RealScenarioFileFixture",
+    "classSha256": "0f76bd970a7ee69a101fa3528b63870d88b0e54af76b16d73e76e864b58551cd",
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/storage/RealScenarioFileFixture.java",
+    "projectClassReferences": [
+      "dev/codex/schubert/nk/api/storage/RealScenarioFileFixture",
+      "dev/codex/schubert/nk/api/storage/RealScenarioFileFixture$Ext4",
+      "dev/codex/schubert/nk/api/storage/ScenarioFileWriter",
+      "dev/codex/schubert/nk/api/storage/ScenarioReadyFileInspector",
+      "dev/codex/schubert/nk/api/storage/TransferCapacity",
+      "dev/codex/schubert/nk/storage/LinuxDirectoryCalls",
+      "dev/codex/schubert/nk/storage/OwnedTransferDirectory",
+      "dev/codex/schubert/nk/storage/StorageIdentity"
+    ],
+    "reflectionOrDynamicLookup": false,
+    "sourceFile": "RealScenarioFileFixture.java"
+  },
+  "api:dev/codex/schubert/nk/api/storage/RealScenarioFileFixture$Ext4": {
+    "className": "dev/codex/schubert/nk/api/storage/RealScenarioFileFixture$Ext4",
+    "classSha256": "580af0f228e0387f7eeb25e658b14f8caae31e471c23c3b85dc953a1cfec99af",
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/storage/RealScenarioFileFixture.java",
+    "projectClassReferences": [
+      "dev/codex/schubert/nk/api/storage/RealScenarioFileFixture",
+      "dev/codex/schubert/nk/api/storage/RealScenarioFileFixture$Ext4"
+    ],
+    "reflectionOrDynamicLookup": false,
+    "sourceFile": "RealScenarioFileFixture.java"
+  },
+  "bootstrap:dev/codex/schubert/nk/api/file/InspectorCredentialLoaderTest": {
+    "className": "dev/codex/schubert/nk/api/file/InspectorCredentialLoaderTest",
+    "classSha256": "6b5c7fdf5c901b330db15bcf5a5d0e3af8933a27656dfa6b439dea65fa862f21",
+    "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/file/InspectorCredentialLoaderTest.java",
+    "projectClassReferences": [
+      "dev/codex/schubert/nk/api/file/AesCredentialFile",
+      "dev/codex/schubert/nk/api/file/InspectorCredentialException",
+      "dev/codex/schubert/nk/api/file/InspectorCredentialLoader",
+      "dev/codex/schubert/nk/api/file/InspectorCredentialLoader$Io",
+      "dev/codex/schubert/nk/api/file/InspectorCredentialLoaderTest",
+      "dev/codex/schubert/nk/api/file/InspectorCredentialLoaderTest$EntryCloseProbe",
+      "dev/codex/schubert/nk/api/file/InspectorCredentialLoaderTest$Fixture",
+      "dev/codex/schubert/nk/api/file/InspectorCredentialLoaderTest$Hook",
+      "dev/codex/schubert/nk/api/file/InspectorCredentialLoaderTest$TestIo",
+      "dev/codex/schubert/nk/api/file/InspectorCredentialLoaderTest$TestIo$1",
+      "dev/codex/schubert/nk/api/file/InspectorCredentialLoaderTest$TestSecurity",
+      "dev/codex/schubert/nk/api/maintenance/InspectorAesCredential",
+      "dev/codex/schubert/nk/storage/LinuxInodeSecurity",
+      "dev/codex/schubert/nk/storage/OwnedTransferDirectory",
+      "dev/codex/schubert/nk/storage/OwnedTransferDirectory$FileOperation"
+    ],
+    "reflectionOrDynamicLookup": false,
+    "sourceFile": "InspectorCredentialLoaderTest.java"
+  },
+  "bootstrap:dev/codex/schubert/nk/api/file/InspectorCredentialLoaderTest$EntryCloseProbe": {
+    "className": "dev/codex/schubert/nk/api/file/InspectorCredentialLoaderTest$EntryCloseProbe",
+    "classSha256": "5ec55b310ddcab9fe3c27c9f6217724f1f02dd75807e9fba1a4d00766c75eb97",
+    "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/file/InspectorCredentialLoaderTest.java",
+    "projectClassReferences": [
+      "dev/codex/schubert/nk/api/file/InspectorCredentialLoaderTest",
+      "dev/codex/schubert/nk/api/file/InspectorCredentialLoaderTest$EntryCloseProbe",
+      "dev/codex/schubert/nk/storage/DirectoryCalls",
+      "dev/codex/schubert/nk/storage/LinuxDirectoryCalls",
+      "dev/codex/schubert/nk/storage/StorageIoException",
+      "dev/codex/schubert/nk/storage/StorageIoException$Reason"
+    ],
+    "reflectionOrDynamicLookup": false,
+    "sourceFile": "InspectorCredentialLoaderTest.java"
+  },
+  "bootstrap:dev/codex/schubert/nk/api/file/InspectorCredentialLoaderTest$Fixture": {
+    "className": "dev/codex/schubert/nk/api/file/InspectorCredentialLoaderTest$Fixture",
+    "classSha256": "868709d48c8d782eb210f0cf629dbde4f81c1365af805bc9f710f8785c798aef",
+    "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/file/InspectorCredentialLoaderTest.java",
+    "projectClassReferences": [
+      "dev/codex/schubert/nk/api/file/AesCredentialFile",
+      "dev/codex/schubert/nk/api/file/InspectorCredentialLoader",
+      "dev/codex/schubert/nk/api/file/InspectorCredentialLoader$Io",
+      "dev/codex/schubert/nk/api/file/InspectorCredentialLoaderTest",
+      "dev/codex/schubert/nk/api/file/InspectorCredentialLoaderTest$EntryCloseProbe",
+      "dev/codex/schubert/nk/api/file/InspectorCredentialLoaderTest$Fixture",
+      "dev/codex/schubert/nk/api/file/InspectorCredentialLoaderTest$TestIo",
+      "dev/codex/schubert/nk/api/file/InspectorCredentialLoaderTest$TestSecurity",
+      "dev/codex/schubert/nk/storage/OwnedTransferDirectory",
+      "dev/codex/schubert/nk/storage/StorageIoException"
+    ],
+    "reflectionOrDynamicLookup": false,
+    "sourceFile": "InspectorCredentialLoaderTest.java"
+  },
+  "bootstrap:dev/codex/schubert/nk/api/file/InspectorCredentialLoaderTest$Hook": {
+    "className": "dev/codex/schubert/nk/api/file/InspectorCredentialLoaderTest$Hook",
+    "classSha256": "b7a4a97bc5d8c975159be1bbce339bc734af6942fb79423e5c781c7608f1ee2b",
+    "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/file/InspectorCredentialLoaderTest.java",
+    "projectClassReferences": [
+      "dev/codex/schubert/nk/api/file/InspectorCredentialLoaderTest",
+      "dev/codex/schubert/nk/api/file/InspectorCredentialLoaderTest$Hook"
+    ],
+    "reflectionOrDynamicLookup": false,
+    "sourceFile": "InspectorCredentialLoaderTest.java"
+  },
+  "bootstrap:dev/codex/schubert/nk/api/file/InspectorCredentialLoaderTest$TestIo": {
+    "className": "dev/codex/schubert/nk/api/file/InspectorCredentialLoaderTest$TestIo",
+    "classSha256": "1901155d1c6bb128222c2e3922d3d978ea837d2859d37667643e05dc7ff80acc",
+    "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/file/InspectorCredentialLoaderTest.java",
+    "projectClassReferences": [
+      "dev/codex/schubert/nk/api/file/InspectorCredentialLoader",
+      "dev/codex/schubert/nk/api/file/InspectorCredentialLoader$Io",
+      "dev/codex/schubert/nk/api/file/InspectorCredentialLoader$NioIo",
+      "dev/codex/schubert/nk/api/file/InspectorCredentialLoaderTest",
+      "dev/codex/schubert/nk/api/file/InspectorCredentialLoaderTest$Hook",
+      "dev/codex/schubert/nk/api/file/InspectorCredentialLoaderTest$TestIo",
+      "dev/codex/schubert/nk/api/file/InspectorCredentialLoaderTest$TestIo$1"
+    ],
+    "reflectionOrDynamicLookup": false,
+    "sourceFile": "InspectorCredentialLoaderTest.java"
+  },
+  "bootstrap:dev/codex/schubert/nk/api/file/InspectorCredentialLoaderTest$TestIo$1": {
+    "className": "dev/codex/schubert/nk/api/file/InspectorCredentialLoaderTest$TestIo$1",
+    "classSha256": "5a86659273ebe51afbb332b260c0f547253f4cc20d470ad8c7823b193480deb7",
+    "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/file/InspectorCredentialLoaderTest.java",
+    "projectClassReferences": [
+      "dev/codex/schubert/nk/api/file/InspectorCredentialLoaderTest",
+      "dev/codex/schubert/nk/api/file/InspectorCredentialLoaderTest$Hook",
+      "dev/codex/schubert/nk/api/file/InspectorCredentialLoaderTest$TestIo",
+      "dev/codex/schubert/nk/api/file/InspectorCredentialLoaderTest$TestIo$1"
+    ],
+    "reflectionOrDynamicLookup": false,
+    "sourceFile": "InspectorCredentialLoaderTest.java"
+  },
+  "bootstrap:dev/codex/schubert/nk/api/file/InspectorCredentialLoaderTest$TestSecurity": {
+    "className": "dev/codex/schubert/nk/api/file/InspectorCredentialLoaderTest$TestSecurity",
+    "classSha256": "cab031ee501e6047fa04f122694a135ba690667dde52677b891239c73b8a87c7",
+    "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/file/InspectorCredentialLoaderTest.java",
+    "projectClassReferences": [
+      "dev/codex/schubert/nk/api/file/InspectorCredentialLoaderTest",
+      "dev/codex/schubert/nk/api/file/InspectorCredentialLoaderTest$TestIo",
+      "dev/codex/schubert/nk/api/file/InspectorCredentialLoaderTest$TestSecurity",
+      "dev/codex/schubert/nk/storage/InodeSecurityCalls",
+      "dev/codex/schubert/nk/storage/StorageIoException",
+      "dev/codex/schubert/nk/storage/StorageIoException$Reason"
+    ],
+    "reflectionOrDynamicLookup": false,
+    "sourceFile": "InspectorCredentialLoaderTest.java"
+  },
+  "bootstrap:dev/codex/schubert/nk/api/file/OwnedRetentionProcess": {
+    "className": "dev/codex/schubert/nk/api/file/OwnedRetentionProcess",
+    "classSha256": "e10518f3f40653e739ab4fda2c75ad9dfcf7656cb9d857a9f3abc0e79867272a",
+    "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/file/OwnedRetentionProcess.java",
+    "projectClassReferences": [
+      "dev/codex/schubert/nk/api/file/OwnedRetentionProcess"
+    ],
+    "reflectionOrDynamicLookup": false,
+    "sourceFile": "OwnedRetentionProcess.java"
+  },
+  "bootstrap:dev/codex/schubert/nk/api/file/ServiceCredentialSetTest": {
+    "className": "dev/codex/schubert/nk/api/file/ServiceCredentialSetTest",
+    "classSha256": "825b7f6931b2712be5ad1a3a3531f426168b855d4e2170f99f9afded6bebe85a",
+    "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/file/ServiceCredentialSetTest.java",
+    "projectClassReferences": [
+      "dev/codex/schubert/nk/api/file/InspectorCredentialLoader",
+      "dev/codex/schubert/nk/api/file/InspectorCredentialLoader$Io",
+      "dev/codex/schubert/nk/api/file/InspectorCredentialLoaderTest",
+      "dev/codex/schubert/nk/api/file/InspectorCredentialLoaderTest$Fixture",
+      "dev/codex/schubert/nk/api/file/InspectorCredentialLoaderTest$TestIo",
+      "dev/codex/schubert/nk/api/file/InspectorCredentialLoaderTest$TestSecurity",
+      "dev/codex/schubert/nk/api/file/ServiceCredentialException",
+      "dev/codex/schubert/nk/api/file/ServiceCredentialReader",
+      "dev/codex/schubert/nk/api/file/ServiceCredentialSet",
+      "dev/codex/schubert/nk/api/file/ServiceCredentialSetTest",
+      "dev/codex/schubert/nk/storage/ServiceConfigFiles",
+      "dev/codex/schubert/nk/storage/ServiceConfigFiles$Service",
+      "dev/codex/schubert/nk/storage/ServiceCredentialId",
+      "dev/codex/schubert/nk/storage/ServiceCredentialId$Kind"
+    ],
+    "reflectionOrDynamicLookup": false,
+    "sourceFile": "ServiceCredentialSetTest.java"
+  },
+  "bootstrap:dev/codex/schubert/nk/api/logging/ApiLogDatabaseFixture": {
+    "className": "dev/codex/schubert/nk/api/logging/ApiLogDatabaseFixture",
+    "classSha256": "ebe8c47da4f9fa90534023f4e696807ed55602edd9b55344df63812706c62ac7",
+    "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/logging/ApiLogDatabaseFixture.java",
+    "projectClassReferences": [
+      "dev/codex/schubert/nk/api/logging/ApiLogDatabaseFixture"
+    ],
+    "reflectionOrDynamicLookup": false,
+    "sourceFile": "ApiLogDatabaseFixture.java"
+  },
+  "bootstrap:dev/codex/schubert/nk/api/maintenance/MaintenanceJdbcProbe": {
+    "className": "dev/codex/schubert/nk/api/maintenance/MaintenanceJdbcProbe",
+    "classSha256": "4e628eeef860bbf14c0e5edbad2eacd1ba0fee46ed6ef533cd5a29292939c688",
+    "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/maintenance/MaintenanceJdbcProbe.java",
+    "projectClassReferences": [
+      "dev/codex/schubert/nk/api/maintenance/MaintenanceJdbcProbe",
+      "dev/codex/schubert/nk/api/maintenance/MaintenanceJdbcProbe$Hook"
+    ],
+    "reflectionOrDynamicLookup": true,
+    "sourceFile": "MaintenanceJdbcProbe.java"
+  },
+  "bootstrap:dev/codex/schubert/nk/api/maintenance/MaintenanceJdbcProbe$Hook": {
+    "className": "dev/codex/schubert/nk/api/maintenance/MaintenanceJdbcProbe$Hook",
+    "classSha256": "595fbcac6591826df2fc76b4fb078337294a3dd6c85cf19e6dd141dc5490065c",
+    "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/maintenance/MaintenanceJdbcProbe.java",
+    "projectClassReferences": [
+      "dev/codex/schubert/nk/api/maintenance/MaintenanceJdbcProbe",
+      "dev/codex/schubert/nk/api/maintenance/MaintenanceJdbcProbe$Hook"
+    ],
+    "reflectionOrDynamicLookup": false,
+    "sourceFile": "MaintenanceJdbcProbe.java"
+  },
+  "web:dev/codex/schubert/nk/web/logging/JmsSecondary330Test": {
+    "className": "dev/codex/schubert/nk/web/logging/JmsSecondary330Test",
+    "classSha256": "5f5d16565142c8513c57d6adfb8d2b17c5edcbb481071771450380a1973dda10",
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/JmsSecondary330Test.java",
+    "projectClassReferences": [
+      "dev/codex/schubert/nk/web/logging/JmsSecondary330Test",
+      "dev/codex/schubert/nk/web/logging/JmsSecondary330Test$Call",
+      "dev/codex/schubert/nk/web/logging/JmsSecondary330Test$Fixture",
+      "dev/codex/schubert/nk/web/logging/JmsSecondary330Test$NoSuppression",
+      "dev/codex/schubert/nk/web/logging/WebLogDispatcher",
+      "dev/codex/schubert/nk/web/logging/WebLogSendException"
+    ],
+    "reflectionOrDynamicLookup": true,
+    "sourceFile": "JmsSecondary330Test.java"
+  },
+  "web:dev/codex/schubert/nk/web/logging/JmsSecondary330Test$Call": {
+    "className": "dev/codex/schubert/nk/web/logging/JmsSecondary330Test$Call",
+    "classSha256": "fe3687fc9df28099e02803293aaa1fb45d6e091d8bcc64b46fc6f2c9f63f5cf6",
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/JmsSecondary330Test.java",
+    "projectClassReferences": [
+      "dev/codex/schubert/nk/web/logging/JmsSecondary330Test",
+      "dev/codex/schubert/nk/web/logging/JmsSecondary330Test$Call"
+    ],
+    "reflectionOrDynamicLookup": false,
+    "sourceFile": "JmsSecondary330Test.java"
+  },
+  "web:dev/codex/schubert/nk/web/logging/JmsSecondary330Test$Fixture": {
+    "className": "dev/codex/schubert/nk/web/logging/JmsSecondary330Test$Fixture",
+    "classSha256": "d1313e245fb684462dfc8b00826c9f1ade5f0fa387cacbc2742216ed9c4048a3",
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/JmsSecondary330Test.java",
+    "projectClassReferences": [
+      "dev/codex/schubert/nk/web/logging/ClaimedWebLog",
+      "dev/codex/schubert/nk/web/logging/JmsSecondary330Test",
+      "dev/codex/schubert/nk/web/logging/JmsSecondary330Test$Call",
+      "dev/codex/schubert/nk/web/logging/JmsSecondary330Test$Fixture",
+      "dev/codex/schubert/nk/web/logging/WebLogMessageSender",
+      "dev/codex/schubert/nk/web/logging/WebLogPayloadCodec",
+      "dev/codex/schubert/nk/web/logging/WebLogPayloadCodecTest",
+      "dev/codex/schubert/nk/web/logging/WebLogPayloadIdentity",
+      "dev/codex/schubert/nk/web/messaging/ArtemisRequestSender"
+    ],
+    "reflectionOrDynamicLookup": false,
+    "sourceFile": "JmsSecondary330Test.java"
+  },
+  "web:dev/codex/schubert/nk/web/logging/JmsSecondary330Test$NoSuppression": {
+    "className": "dev/codex/schubert/nk/web/logging/JmsSecondary330Test$NoSuppression",
+    "classSha256": "7fd077b25de2f2e3758f0cd9274d1ad1598ee8f11edf10d0b22c89b1efe97b50",
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/JmsSecondary330Test.java",
+    "projectClassReferences": [
+      "dev/codex/schubert/nk/web/logging/JmsSecondary330Test",
+      "dev/codex/schubert/nk/web/logging/JmsSecondary330Test$NoSuppression"
+    ],
+    "reflectionOrDynamicLookup": false,
+    "sourceFile": "JmsSecondary330Test.java"
+  },
+  "web:dev/codex/schubert/nk/web/logging/LocalAuditGraph331Test": {
+    "className": "dev/codex/schubert/nk/web/logging/LocalAuditGraph331Test",
+    "classSha256": "7224b1d9e039209a082321d719245e8d2cfb369f92e5c9db81ef4e55bb32c996",
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/LocalAuditGraph331Test.java",
+    "projectClassReferences": [
+      "dev/codex/schubert/nk/web/logging/LocalAuditGraph331Test",
+      "dev/codex/schubert/nk/web/logging/LocalAuditGraph331Test$Fixture"
+    ],
+    "reflectionOrDynamicLookup": false,
+    "sourceFile": "LocalAuditGraph331Test.java"
+  },
+  "web:dev/codex/schubert/nk/web/logging/LocalAuditGraph331Test$Fixture": {
+    "className": "dev/codex/schubert/nk/web/logging/LocalAuditGraph331Test$Fixture",
+    "classSha256": "a0438f7eb0c154c06ddae55bb9afac4eaa35e67d0b73090dca91af92c349dfc5",
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/LocalAuditGraph331Test.java",
+    "projectClassReferences": [
+      "dev/codex/schubert/nk/web/logging/LocalAuditGraph331Test",
+      "dev/codex/schubert/nk/web/logging/LocalAuditGraph331Test$Fixture",
+      "dev/codex/schubert/nk/web/logging/WebLogOutboxRepository",
+      "dev/codex/schubert/nk/web/logging/WebLogPayloadCodec",
+      "dev/codex/schubert/nk/web/logging/WebRequestLogProducer"
+    ],
+    "reflectionOrDynamicLookup": true,
+    "sourceFile": "LocalAuditGraph331Test.java"
+  },
+  "web:dev/codex/schubert/nk/web/logging/RequestProjectionFailureGraph329Test": {
+    "className": "dev/codex/schubert/nk/web/logging/RequestProjectionFailureGraph329Test",
+    "classSha256": "44ab189a0bdd39c57ec84f4ef25b1f25d72a4a3fd8b40701fd2b756bc187c68f",
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/RequestProjectionFailureGraph329Test.java",
+    "projectClassReferences": [
+      "dev/codex/schubert/nk/web/logging/RequestProjectionFailureGraph329Test",
+      "dev/codex/schubert/nk/web/logging/RequestProjectionFailureGraph329Test$NoSuppression",
+      "dev/codex/schubert/nk/web/logging/WebRequestLogProducer",
+      "dev/codex/schubert/nk/web/logging/WebRequestLogProducerTest",
+      "dev/codex/schubert/nk/web/logging/WebRequestLogProducerTest$Entry",
+      "dev/codex/schubert/nk/web/logging/WebRequestLogProducerTest$Fixture",
+      "dev/codex/schubert/nk/web/logging/WebRequestLogProducerTest$OpenConnection",
+      "dev/codex/schubert/nk/web/logging/WebRequestLogProducerTest$RecordingLogger",
+      "dev/codex/schubert/nk/web/logging/WebRequestTrace",
+      "dev/codex/schubert/nk/web/logging/WebRequestTraceTest"
+    ],
+    "reflectionOrDynamicLookup": true,
+    "sourceFile": "RequestProjectionFailureGraph329Test.java"
+  },
+  "web:dev/codex/schubert/nk/web/logging/RequestProjectionFailureGraph329Test$NoSuppression": {
+    "className": "dev/codex/schubert/nk/web/logging/RequestProjectionFailureGraph329Test$NoSuppression",
+    "classSha256": "91e3f5ba000202e3f65fe321a9bcfaa8d6061bc83ca63df84d44a59d7d144741",
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/RequestProjectionFailureGraph329Test.java",
+    "projectClassReferences": [
+      "dev/codex/schubert/nk/web/logging/RequestProjectionFailureGraph329Test",
+      "dev/codex/schubert/nk/web/logging/RequestProjectionFailureGraph329Test$NoSuppression"
+    ],
+    "reflectionOrDynamicLookup": false,
+    "sourceFile": "RequestProjectionFailureGraph329Test.java"
+  },
+  "web:dev/codex/schubert/nk/web/logging/WebApiLogReplayIntegrationTest": {
+    "className": "dev/codex/schubert/nk/web/logging/WebApiLogReplayIntegrationTest",
+    "classSha256": "773c339edfb503a3f69004101d5b32a03cd29f16405aba744138a744debffc6b",
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/WebApiLogReplayIntegrationTest.java",
+    "projectClassReferences": [
+      "dev/codex/schubert/nk/api/logging/WebLogIngestService",
+      "dev/codex/schubert/nk/api/messaging/inbound/WebLogConsumers",
+      "dev/codex/schubert/nk/api/messaging/inbound/WebLogListener",
+      "dev/codex/schubert/nk/web/logging/WebApiLogReplayIntegrationTest",
+      "dev/codex/schubert/nk/web/logging/WebApiLogReplayIntegrationTest$1",
+      "dev/codex/schubert/nk/web/logging/WebApiLogReplayIntegrationTest$SqlConnection",
+      "dev/codex/schubert/nk/web/logging/WebLogDatabaseFixture",
+      "dev/codex/schubert/nk/web/logging/WebLogDispatcher",
+      "dev/codex/schubert/nk/web/logging/WebLogDispatcher$Report",
+      "dev/codex/schubert/nk/web/logging/WebLogMessageSender",
+      "dev/codex/schubert/nk/web/logging/WebLogMessageSenderTest",
+      "dev/codex/schubert/nk/web/logging/WebLogOutboxRepository",
+      "dev/codex/schubert/nk/web/logging/WebLogPayloadCodec",
+      "dev/codex/schubert/nk/web/logging/WebLogPayloadCodecTest",
+      "dev/codex/schubert/nk/web/logging/WebLogPayloadIdentity",
+      "dev/codex/schubert/nk/web/logging/WebLogReplayWorker",
+      "dev/codex/schubert/nk/web/logging/WebRequestLogProducer",
+      "dev/codex/schubert/nk/web/logging/WebRequestLogProducerTest",
+      "dev/codex/schubert/nk/web/logging/WebRequestLogProducerTest$Fixture",
+      "dev/codex/schubert/nk/web/logging/WebRequestTrace",
+      "dev/codex/schubert/nk/web/logging/WebRequestTraceTest"
+    ],
+    "reflectionOrDynamicLookup": true,
+    "sourceFile": "WebApiLogReplayIntegrationTest.java"
+  },
+  "web:dev/codex/schubert/nk/web/logging/WebApiLogReplayIntegrationTest$1": {
+    "className": "dev/codex/schubert/nk/web/logging/WebApiLogReplayIntegrationTest$1",
+    "classSha256": "9cd63d0a1ee8ba7ed646650174cd55e9045d6d30dc7f107ce246d6ba3d56a5ae",
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/WebApiLogReplayIntegrationTest.java",
+    "projectClassReferences": [
+      "dev/codex/schubert/nk/web/logging/WebApiLogReplayIntegrationTest",
+      "dev/codex/schubert/nk/web/logging/WebApiLogReplayIntegrationTest$1"
+    ],
+    "reflectionOrDynamicLookup": false,
+    "sourceFile": "WebApiLogReplayIntegrationTest.java"
+  },
+  "web:dev/codex/schubert/nk/web/logging/WebApiLogReplayIntegrationTest$SqlConnection": {
+    "className": "dev/codex/schubert/nk/web/logging/WebApiLogReplayIntegrationTest$SqlConnection",
+    "classSha256": "ebc03f9c4e1e3327f9fd36805decf03a88587bbfab781a62971a3bb6b6368416",
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/WebApiLogReplayIntegrationTest.java",
+    "projectClassReferences": [
+      "dev/codex/schubert/nk/web/logging/WebApiLogReplayIntegrationTest",
+      "dev/codex/schubert/nk/web/logging/WebApiLogReplayIntegrationTest$SqlConnection"
+    ],
+    "reflectionOrDynamicLookup": false,
+    "sourceFile": "WebApiLogReplayIntegrationTest.java"
+  },
+  "web:dev/codex/schubert/nk/web/logging/WebAuditSinkContractTest": {
+    "className": "dev/codex/schubert/nk/web/logging/WebAuditSinkContractTest",
+    "classSha256": "9ef69fc706d284a535fbd047c50d7cf8a6a6b0044bfe5e9e7a8fa7da7874eabd",
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/WebAuditSinkContractTest.java",
+    "projectClassReferences": [
+      "dev/codex/schubert/nk/web/logging/WebAuditSinkContractTest",
+      "dev/codex/schubert/nk/web/logging/WebAuditSinkContractTest$Fixture",
+      "dev/codex/schubert/nk/web/logging/WebAuditSinkContractTest$Sink",
+      "dev/codex/schubert/nk/web/logging/WebRequestLogProducer",
+      "dev/codex/schubert/nk/web/logging/WebRequestTraceTest"
+    ],
+    "reflectionOrDynamicLookup": false,
+    "sourceFile": "WebAuditSinkContractTest.java"
+  },
+  "web:dev/codex/schubert/nk/web/logging/WebAuditSinkContractTest$Fixture": {
+    "className": "dev/codex/schubert/nk/web/logging/WebAuditSinkContractTest$Fixture",
+    "classSha256": "5a38dac3a0084f1cc4c60dc3cb74beb5337aab2d9be363519699638c044f285f",
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/WebAuditSinkContractTest.java",
+    "projectClassReferences": [
+      "dev/codex/schubert/nk/web/logging/WebAuditSinkContractTest",
+      "dev/codex/schubert/nk/web/logging/WebAuditSinkContractTest$Fixture",
+      "dev/codex/schubert/nk/web/logging/WebLogOutboxRepository",
+      "dev/codex/schubert/nk/web/logging/WebLogPayloadCodec",
+      "dev/codex/schubert/nk/web/logging/WebRequestLogProducer",
+      "dev/codex/schubert/nk/web/logging/WebRequestLogProducerTest",
+      "dev/codex/schubert/nk/web/logging/WebRequestLogProducerTest$OpenConnection"
+    ],
+    "reflectionOrDynamicLookup": false,
+    "sourceFile": "WebAuditSinkContractTest.java"
+  },
+  "web:dev/codex/schubert/nk/web/logging/WebAuditSinkContractTest$Sink": {
+    "className": "dev/codex/schubert/nk/web/logging/WebAuditSinkContractTest$Sink",
+    "classSha256": "67b2e09bf8c51df3424d2e96b8b5f41dee555b8a77fdd4e0a04d91958b781a0e",
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/WebAuditSinkContractTest.java",
+    "projectClassReferences": [
+      "dev/codex/schubert/nk/web/logging/WebAuditSinkContractTest",
+      "dev/codex/schubert/nk/web/logging/WebAuditSinkContractTest$Sink"
+    ],
+    "reflectionOrDynamicLookup": false,
+    "sourceFile": "WebAuditSinkContractTest.java"
+  },
+  "web:dev/codex/schubert/nk/web/logging/WebLogDatabaseFixture": {
+    "className": "dev/codex/schubert/nk/web/logging/WebLogDatabaseFixture",
+    "classSha256": "11d69ec9d50945d734032546fedd87cce2e3a2f6da50b5920bd96ebbcd4599ab",
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/WebLogDatabaseFixture.java",
+    "projectClassReferences": [
+      "dev/codex/schubert/nk/web/logging/WebLogDatabaseFixture"
+    ],
+    "reflectionOrDynamicLookup": false,
+    "sourceFile": "WebLogDatabaseFixture.java"
+  },
+  "web:dev/codex/schubert/nk/web/logging/WebLogMessageSenderTest": {
+    "className": "dev/codex/schubert/nk/web/logging/WebLogMessageSenderTest",
+    "classSha256": "a26e400e629a3f19d10afc3dc9b41a7f1415d23cc6a513f32d32c3bf4e3eefcb",
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/WebLogMessageSenderTest.java",
+    "projectClassReferences": [
+      "dev/codex/schubert/nk/web/logging/ClaimedWebLog",
+      "dev/codex/schubert/nk/web/logging/EncryptedWebLogPayload",
+      "dev/codex/schubert/nk/web/logging/WebLogMessageSender",
+      "dev/codex/schubert/nk/web/logging/WebLogMessageSenderTest",
+      "dev/codex/schubert/nk/web/logging/WebLogPayloadCodec",
+      "dev/codex/schubert/nk/web/logging/WebLogPayloadCodecTest",
+      "dev/codex/schubert/nk/web/logging/WebLogPayloadException",
+      "dev/codex/schubert/nk/web/logging/WebLogPayloadIdentity",
+      "dev/codex/schubert/nk/web/logging/WebLogSendException"
+    ],
+    "reflectionOrDynamicLookup": true,
+    "sourceFile": "WebLogMessageSenderTest.java"
+  },
+  "web:dev/codex/schubert/nk/web/logging/WebLogPayloadCodecTest": {
+    "className": "dev/codex/schubert/nk/web/logging/WebLogPayloadCodecTest",
+    "classSha256": "781a06aec6d9f56d4b262a14425ad9e3ad5263a817652cb908e75d6e7f214a69",
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/WebLogPayloadCodecTest.java",
+    "projectClassReferences": [
+      "dev/codex/schubert/nk/web/logging/EncryptedWebLogPayload",
+      "dev/codex/schubert/nk/web/logging/WebLogPayloadCodec",
+      "dev/codex/schubert/nk/web/logging/WebLogPayloadCodecTest",
+      "dev/codex/schubert/nk/web/logging/WebLogPayloadCodecTest$FixedNonceRandom",
+      "dev/codex/schubert/nk/web/logging/WebLogPayloadCodecTest$ThrowingCheck",
+      "dev/codex/schubert/nk/web/logging/WebLogPayloadException",
+      "dev/codex/schubert/nk/web/logging/WebLogPayloadException$Reason",
+      "dev/codex/schubert/nk/web/logging/WebLogPayloadIdentity"
+    ],
+    "reflectionOrDynamicLookup": false,
+    "sourceFile": "WebLogPayloadCodecTest.java"
+  },
+  "web:dev/codex/schubert/nk/web/logging/WebLogPayloadCodecTest$FixedNonceRandom": {
+    "className": "dev/codex/schubert/nk/web/logging/WebLogPayloadCodecTest$FixedNonceRandom",
+    "classSha256": "0055a3e18495ec07870caef9ee2729aa377e2d952f071f09cd8882431659a38b",
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/WebLogPayloadCodecTest.java",
+    "projectClassReferences": [
+      "dev/codex/schubert/nk/web/logging/WebLogPayloadCodecTest",
+      "dev/codex/schubert/nk/web/logging/WebLogPayloadCodecTest$FixedNonceRandom"
+    ],
+    "reflectionOrDynamicLookup": false,
+    "sourceFile": "WebLogPayloadCodecTest.java"
+  },
+  "web:dev/codex/schubert/nk/web/logging/WebLogPayloadCodecTest$ThrowingCheck": {
+    "className": "dev/codex/schubert/nk/web/logging/WebLogPayloadCodecTest$ThrowingCheck",
+    "classSha256": "79b78a5a7907757b8e49834dd8a510be5290933ec08907da0d0720fa4d63f7cb",
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/WebLogPayloadCodecTest.java",
+    "projectClassReferences": [
+      "dev/codex/schubert/nk/web/logging/WebLogPayloadCodecTest",
+      "dev/codex/schubert/nk/web/logging/WebLogPayloadCodecTest$ThrowingCheck"
+    ],
+    "reflectionOrDynamicLookup": false,
+    "sourceFile": "WebLogPayloadCodecTest.java"
+  },
+  "web:dev/codex/schubert/nk/web/logging/WebOwnedAttachment329Test": {
+    "className": "dev/codex/schubert/nk/web/logging/WebOwnedAttachment329Test",
+    "classSha256": "6ec560ecd483cb82915bd6ab78be7b97c1bd6c3bb4191067257710114dac8701",
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/WebOwnedAttachment329Test.java",
+    "projectClassReferences": [
+      "dev/codex/schubert/nk/web/logging/WebOwnedAttachment329Test",
+      "dev/codex/schubert/nk/web/logging/WebOwnedAttachment329Test$Fixture",
+      "dev/codex/schubert/nk/web/logging/WebOwnedAttachment329Test$NoSuppression",
+      "dev/codex/schubert/nk/web/revocation/RevocationRetryException"
+    ],
+    "reflectionOrDynamicLookup": false,
+    "sourceFile": "WebOwnedAttachment329Test.java"
+  },
+  "web:dev/codex/schubert/nk/web/logging/WebOwnedAttachment329Test$Fixture": {
+    "className": "dev/codex/schubert/nk/web/logging/WebOwnedAttachment329Test$Fixture",
+    "classSha256": "9b2a6d5977d2859dbf1d151ed81110af4a0a9a241adcf6c9ba922d7df35a2348",
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/WebOwnedAttachment329Test.java",
+    "projectClassReferences": [
+      "dev/codex/schubert/nk/web/logging/WebLogDispatcher",
+      "dev/codex/schubert/nk/web/logging/WebLogDispatcher$Report",
+      "dev/codex/schubert/nk/web/logging/WebLogMessageSender",
+      "dev/codex/schubert/nk/web/logging/WebLogOutboxRepository",
+      "dev/codex/schubert/nk/web/logging/WebLogPayloadCodec",
+      "dev/codex/schubert/nk/web/logging/WebOwnedAttachment329Test",
+      "dev/codex/schubert/nk/web/logging/WebOwnedAttachment329Test$Fixture",
+      "dev/codex/schubert/nk/web/messaging/JmsRequestReplyClient",
+      "dev/codex/schubert/nk/web/messaging/LogoutWireClient",
+      "dev/codex/schubert/nk/web/revocation/RevocationPayloadCodec",
+      "dev/codex/schubert/nk/web/revocation/RevocationRetryCoordinator",
+      "dev/codex/schubert/nk/web/revocation/RevocationRetryCoordinator$Outcome"
+    ],
+    "reflectionOrDynamicLookup": true,
+    "sourceFile": "WebOwnedAttachment329Test.java"
+  },
+  "web:dev/codex/schubert/nk/web/logging/WebOwnedAttachment329Test$NoSuppression": {
+    "className": "dev/codex/schubert/nk/web/logging/WebOwnedAttachment329Test$NoSuppression",
+    "classSha256": "cec6c63d52837a221bbb6b39d1b9cb4f0651cb1822888862234ed75ffe25767d",
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/WebOwnedAttachment329Test.java",
+    "projectClassReferences": [
+      "dev/codex/schubert/nk/web/logging/WebOwnedAttachment329Test",
+      "dev/codex/schubert/nk/web/logging/WebOwnedAttachment329Test$NoSuppression"
+    ],
+    "reflectionOrDynamicLookup": false,
+    "sourceFile": "WebOwnedAttachment329Test.java"
+  },
+  "web:dev/codex/schubert/nk/web/logging/WebRequestLogProducerTest": {
+    "className": "dev/codex/schubert/nk/web/logging/WebRequestLogProducerTest",
+    "classSha256": "fce345275bf2d6b7af98c6d16b191868fcdb997206cab54809f972c8b59f06b8",
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/WebRequestLogProducerTest.java",
+    "projectClassReferences": [
+      "dev/codex/schubert/nk/protocol/header/AuthenticationContext",
+      "dev/codex/schubert/nk/protocol/layout/semantic/UserRole",
+      "dev/codex/schubert/nk/web/logging/WebLogDatabaseFixture",
+      "dev/codex/schubert/nk/web/logging/WebLogOutboxRepository",
+      "dev/codex/schubert/nk/web/logging/WebLogPayloadCodec",
+      "dev/codex/schubert/nk/web/logging/WebRequestLogProducer",
+      "dev/codex/schubert/nk/web/logging/WebRequestLogProducerTest",
+      "dev/codex/schubert/nk/web/logging/WebRequestLogProducerTest$1",
+      "dev/codex/schubert/nk/web/logging/WebRequestLogProducerTest$Entry",
+      "dev/codex/schubert/nk/web/logging/WebRequestLogProducerTest$Fixture",
+      "dev/codex/schubert/nk/web/logging/WebRequestLogProducerTest$OpenConnection",
+      "dev/codex/schubert/nk/web/logging/WebRequestLogProducerTest$RecordingLogger",
+      "dev/codex/schubert/nk/web/logging/WebRequestLogProducerTest$ZeroNonce",
+      "dev/codex/schubert/nk/web/logging/WebRequestTrace",
+      "dev/codex/schubert/nk/web/logging/WebRequestTraceTest",
+      "dev/codex/schubert/nk/web/session/SessionPrincipal"
+    ],
+    "reflectionOrDynamicLookup": true,
+    "sourceFile": "WebRequestLogProducerTest.java"
+  },
+  "web:dev/codex/schubert/nk/web/logging/WebRequestLogProducerTest$1": {
+    "className": "dev/codex/schubert/nk/web/logging/WebRequestLogProducerTest$1",
+    "classSha256": "4f3402d56176cbe40792eab3650afa3d4da4ef634f07c79f463a57495bc5a397",
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/WebRequestLogProducerTest.java",
+    "projectClassReferences": [
+      "dev/codex/schubert/nk/web/logging/WebRequestLogProducerTest",
+      "dev/codex/schubert/nk/web/logging/WebRequestLogProducerTest$1"
+    ],
+    "reflectionOrDynamicLookup": false,
+    "sourceFile": "WebRequestLogProducerTest.java"
+  },
+  "web:dev/codex/schubert/nk/web/logging/WebRequestLogProducerTest$Entry": {
+    "className": "dev/codex/schubert/nk/web/logging/WebRequestLogProducerTest$Entry",
+    "classSha256": "8ba48d694f28cbe6772536e6e86772355d78f349f3fa47a4b299ae8470d730c5",
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/WebRequestLogProducerTest.java",
+    "projectClassReferences": [
+      "dev/codex/schubert/nk/web/logging/WebRequestLogProducerTest",
+      "dev/codex/schubert/nk/web/logging/WebRequestLogProducerTest$Entry"
+    ],
+    "reflectionOrDynamicLookup": false,
+    "sourceFile": "WebRequestLogProducerTest.java"
+  },
+  "web:dev/codex/schubert/nk/web/logging/WebRequestLogProducerTest$Fixture": {
+    "className": "dev/codex/schubert/nk/web/logging/WebRequestLogProducerTest$Fixture",
+    "classSha256": "652ee330c6b15bcc77245bddb5ee28dba7d34e8a3ed25e289619a86d826b0a22",
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/WebRequestLogProducerTest.java",
+    "projectClassReferences": [
+      "dev/codex/schubert/nk/web/logging/WebLogOutboxRepository",
+      "dev/codex/schubert/nk/web/logging/WebLogPayloadCodec",
+      "dev/codex/schubert/nk/web/logging/WebRequestLogProducer",
+      "dev/codex/schubert/nk/web/logging/WebRequestLogProducerTest",
+      "dev/codex/schubert/nk/web/logging/WebRequestLogProducerTest$Fixture",
+      "dev/codex/schubert/nk/web/logging/WebRequestLogProducerTest$RecordingLogger",
+      "dev/codex/schubert/nk/web/logging/WebRequestLogProducerTest$ZeroNonce"
+    ],
+    "reflectionOrDynamicLookup": false,
+    "sourceFile": "WebRequestLogProducerTest.java"
+  },
+  "web:dev/codex/schubert/nk/web/logging/WebRequestLogProducerTest$OpenConnection": {
+    "className": "dev/codex/schubert/nk/web/logging/WebRequestLogProducerTest$OpenConnection",
+    "classSha256": "118d1ddf958f5c9fee41f30da4940243fe6f9ecf82455de8815f52cb356474ec",
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/WebRequestLogProducerTest.java",
+    "projectClassReferences": [
+      "dev/codex/schubert/nk/web/logging/WebRequestLogProducerTest",
+      "dev/codex/schubert/nk/web/logging/WebRequestLogProducerTest$OpenConnection"
+    ],
+    "reflectionOrDynamicLookup": false,
+    "sourceFile": "WebRequestLogProducerTest.java"
+  },
+  "web:dev/codex/schubert/nk/web/logging/WebRequestLogProducerTest$RecordingLogger": {
+    "className": "dev/codex/schubert/nk/web/logging/WebRequestLogProducerTest$RecordingLogger",
+    "classSha256": "eb3d28b1d0539111547d01a730888a67d730ca6bb0e7911ee86fd37815c0abc8",
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/WebRequestLogProducerTest.java",
+    "projectClassReferences": [
+      "dev/codex/schubert/nk/web/logging/WebRequestLogProducerTest",
+      "dev/codex/schubert/nk/web/logging/WebRequestLogProducerTest$Entry",
+      "dev/codex/schubert/nk/web/logging/WebRequestLogProducerTest$RecordingLogger"
+    ],
+    "reflectionOrDynamicLookup": false,
+    "sourceFile": "WebRequestLogProducerTest.java"
+  },
+  "web:dev/codex/schubert/nk/web/logging/WebRequestLogProducerTest$ZeroNonce": {
+    "className": "dev/codex/schubert/nk/web/logging/WebRequestLogProducerTest$ZeroNonce",
+    "classSha256": "b7e20ca91edea0d0fd3e5a392f6e0da7dfa208689c16dfbc3f68d9df3a36826d",
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/WebRequestLogProducerTest.java",
+    "projectClassReferences": [
+      "dev/codex/schubert/nk/web/logging/WebRequestLogProducerTest",
+      "dev/codex/schubert/nk/web/logging/WebRequestLogProducerTest$ZeroNonce"
+    ],
+    "reflectionOrDynamicLookup": false,
+    "sourceFile": "WebRequestLogProducerTest.java"
+  },
+  "web:dev/codex/schubert/nk/web/logging/WebRequestTraceTest": {
+    "className": "dev/codex/schubert/nk/web/logging/WebRequestTraceTest",
+    "classSha256": "6200ffa43f379a3f90e1fd4859955555505dcc6231078bd371c22f7310601d62",
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/WebRequestTraceTest.java",
+    "projectClassReferences": [
+      "dev/codex/schubert/nk/protocol/header/AuthenticationContext",
+      "dev/codex/schubert/nk/protocol/layout/semantic/UserRole",
+      "dev/codex/schubert/nk/web/config/RequestLogMvcConfiguration",
+      "dev/codex/schubert/nk/web/logging/WebRequestRouteInterceptor",
+      "dev/codex/schubert/nk/web/logging/WebRequestTrace",
+      "dev/codex/schubert/nk/web/logging/WebRequestTrace$Scope",
+      "dev/codex/schubert/nk/web/logging/WebRequestTraceTest",
+      "dev/codex/schubert/nk/web/logging/WebRequestTraceTest$1",
+      "dev/codex/schubert/nk/web/logging/WebSecurityAudit",
+      "dev/codex/schubert/nk/web/security/CaddyClientAddressResolver",
+      "dev/codex/schubert/nk/web/security/CaddyTransportContextFilter",
+      "dev/codex/schubert/nk/web/security/LoginClientAddress",
+      "dev/codex/schubert/nk/web/security/WebRequestContext",
+      "dev/codex/schubert/nk/web/session/SessionPrincipal",
+      "dev/codex/schubert/nk/web/view/TopBarViewModel"
+    ],
+    "reflectionOrDynamicLookup": false,
+    "sourceFile": "WebRequestTraceTest.java"
+  },
+  "web:dev/codex/schubert/nk/web/logging/WebRequestTraceTest$1": {
+    "className": "dev/codex/schubert/nk/web/logging/WebRequestTraceTest$1",
+    "classSha256": "0594e3dcbee7205762a1e0b7f984bc7b748abf32ad05331073ba82129f02cdc0",
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/WebRequestTraceTest.java",
+    "projectClassReferences": [
+      "dev/codex/schubert/nk/web/logging/WebRequestTraceTest",
+      "dev/codex/schubert/nk/web/logging/WebRequestTraceTest$1"
+    ],
+    "reflectionOrDynamicLookup": false,
+    "sourceFile": "WebRequestTraceTest.java"
+  },
+  "web:dev/codex/schubert/nk/web/messaging/ExceptionValueContractTest": {
+    "className": "dev/codex/schubert/nk/web/messaging/ExceptionValueContractTest",
+    "classSha256": "8b86bfa55aae1f48138ed82adea79fdb726b72ac9289ff1f99f23ac16c34fffa",
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/ExceptionValueContractTest.java",
+    "projectClassReferences": [
+      "dev/codex/schubert/nk/web/messaging/ExceptionValueContractTest",
+      "dev/codex/schubert/nk/web/messaging/JmsRequestReplyException",
+      "dev/codex/schubert/nk/web/messaging/JmsRequestReplyException$Reason",
+      "dev/codex/schubert/nk/web/messaging/ProtectedReadWireException",
+      "dev/codex/schubert/nk/web/messaging/ProtectedReadWireException$Reason",
+      "dev/codex/schubert/nk/web/messaging/ScenarioWireException",
+      "dev/codex/schubert/nk/web/messaging/ScenarioWireException$Reason"
+    ],
+    "reflectionOrDynamicLookup": false,
+    "sourceFile": "ExceptionValueContractTest.java"
+  },
+  "web:dev/codex/schubert/nk/web/messaging/ReplyIsolationPrimaryContractTest": {
+    "className": "dev/codex/schubert/nk/web/messaging/ReplyIsolationPrimaryContractTest",
+    "classSha256": "1b74fd995902c8fd7671e740c7482f9a156194818aca4cfc3c1c0c1308291289",
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/ReplyIsolationPrimaryContractTest.java",
+    "projectClassReferences": [
+      "dev/codex/schubert/nk/protocol/codec/PermanentProtocolException",
+      "dev/codex/schubert/nk/protocol/transport/FailedJmsIsolationException",
+      "dev/codex/schubert/nk/web/messaging/ArtemisReplyConsumer",
+      "dev/codex/schubert/nk/web/messaging/ReplyIsolationPrimaryContractTest",
+      "dev/codex/schubert/nk/web/messaging/ReplyIsolationPrimaryContractTest$Fixture"
+    ],
+    "reflectionOrDynamicLookup": false,
+    "sourceFile": "ReplyIsolationPrimaryContractTest.java"
+  },
+  "web:dev/codex/schubert/nk/web/messaging/ReplyIsolationPrimaryContractTest$Fixture": {
+    "className": "dev/codex/schubert/nk/web/messaging/ReplyIsolationPrimaryContractTest$Fixture",
+    "classSha256": "c2c831882089c7f51de8089c3cf4b5ea47c39f18f885a26be5dc6dea024f3eb7",
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/ReplyIsolationPrimaryContractTest.java",
+    "projectClassReferences": [
+      "dev/codex/schubert/nk/web/messaging/ArtemisReplyConsumer",
+      "dev/codex/schubert/nk/web/messaging/ArtemisReplyDlqSender",
+      "dev/codex/schubert/nk/web/messaging/JmsReplyDecoder",
+      "dev/codex/schubert/nk/web/messaging/JmsRequestReplyClient",
+      "dev/codex/schubert/nk/web/messaging/ReplyCorrelationRegistry",
+      "dev/codex/schubert/nk/web/messaging/ReplyIsolationPrimaryContractTest",
+      "dev/codex/schubert/nk/web/messaging/ReplyIsolationPrimaryContractTest$Fixture"
+    ],
+    "reflectionOrDynamicLookup": true,
+    "sourceFile": "ReplyIsolationPrimaryContractTest.java"
+  },
+  "web:dev/codex/schubert/nk/web/messaging/WebBrokerFactoryOwnershipTest": {
+    "className": "dev/codex/schubert/nk/web/messaging/WebBrokerFactoryOwnershipTest",
+    "classSha256": "63cd259701dbbcff90ff19815e9b8f3c66389cd3e5a0615f0303f46c61c35b84",
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/WebBrokerFactoryOwnershipTest.java",
+    "projectClassReferences": [
+      "dev/codex/schubert/nk/web/messaging/WebBrokerContexts",
+      "dev/codex/schubert/nk/web/messaging/WebBrokerFactoryOwnershipTest",
+      "dev/codex/schubert/nk/web/messaging/WebBrokerFactoryOwnershipTest$ProbeFactory"
+    ],
+    "reflectionOrDynamicLookup": false,
+    "sourceFile": "WebBrokerFactoryOwnershipTest.java"
+  },
+  "web:dev/codex/schubert/nk/web/messaging/WebBrokerFactoryOwnershipTest$ProbeFactory": {
+    "className": "dev/codex/schubert/nk/web/messaging/WebBrokerFactoryOwnershipTest$ProbeFactory",
+    "classSha256": "4961f8cf9ed73dcca9695867fd5f6a4f42ae1fdcade76209c0d31e92d4ad7ae3",
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/WebBrokerFactoryOwnershipTest.java",
+    "projectClassReferences": [
+      "dev/codex/schubert/nk/web/messaging/WebBrokerFactoryOwnershipTest",
+      "dev/codex/schubert/nk/web/messaging/WebBrokerFactoryOwnershipTest$ProbeFactory"
+    ],
+    "reflectionOrDynamicLookup": false,
+    "sourceFile": "WebBrokerFactoryOwnershipTest.java"
+  },
+  "web:dev/codex/schubert/nk/web/messaging/WebBusinessWireClientsTest": {
+    "className": "dev/codex/schubert/nk/web/messaging/WebBusinessWireClientsTest",
+    "classSha256": "bd0961cdaaf1db2a2275367d943ebb115236cd0e5955602f077c9e30bf100957",
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/WebBusinessWireClientsTest.java",
+    "projectClassReferences": [
+      "dev/codex/schubert/nk/protocol/header/AuthenticationContext",
+      "dev/codex/schubert/nk/protocol/header/ResultCode",
+      "dev/codex/schubert/nk/protocol/layout/LayoutId",
+      "dev/codex/schubert/nk/protocol/layout/TypedPayloadValues",
+      "dev/codex/schubert/nk/protocol/layout/admin/PasswordResetRequestData",
+      "dev/codex/schubert/nk/protocol/layout/admin/UserCreateRequestData",
+      "dev/codex/schubert/nk/protocol/layout/admin/UserDetailRequestData",
+      "dev/codex/schubert/nk/protocol/layout/admin/UserMutationResponseData",
+      "dev/codex/schubert/nk/protocol/layout/admin/UserRoleRequestData",
+      "dev/codex/schubert/nk/protocol/layout/admin/UserSearchRequestData",
+      "dev/codex/schubert/nk/protocol/layout/admin/UserStatusRequestData",
+      "dev/codex/schubert/nk/protocol/layout/admin/UserUnlockRequestData",
+      "dev/codex/schubert/nk/protocol/layout/auth/LogoutRequestData",
+      "dev/codex/schubert/nk/protocol/layout/auth/LogoutResponseData",
+      "dev/codex/schubert/nk/protocol/layout/media/AudioDescriptorRequestData",
+      "dev/codex/schubert/nk/protocol/layout/media/MusicDescriptorRequestData",
+      "dev/codex/schubert/nk/protocol/layout/media/VideoDescriptorRequestData",
+      "dev/codex/schubert/nk/protocol/layout/question/NotificationCancelRequestData",
+      "dev/codex/schubert/nk/protocol/layout/question/NotificationCancelResponseData",
+      "dev/codex/schubert/nk/protocol/layout/question/NotificationDetailRequestData",
+      "dev/codex/schubert/nk/protocol/layout/question/NotificationSearchRequestData",
+      "dev/codex/schubert/nk/protocol/layout/question/QuestionDeleteRequestData",
+      "dev/codex/schubert/nk/protocol/layout/question/QuestionDeleteResponseData",
+      "dev/codex/schubert/nk/protocol/layout/question/QuestionDetailRequestData",
+      "dev/codex/schubert/nk/protocol/layout/question/QuestionSearchRequestData",
+      "dev/codex/schubert/nk/protocol/layout/question/QuestionSubmitRequestData",
+      "dev/codex/schubert/nk/protocol/layout/question/QuestionSubmitResponseData",
+      "dev/codex/schubert/nk/protocol/layout/semantic/AudioId",
+      "dev/codex/schubert/nk/protocol/layout/semantic/ContentDisposition",
+      "dev/codex/schubert/nk/protocol/layout/semantic/NotificationId",
+      "dev/codex/schubert/nk/protocol/layout/semantic/NotificationState",
+      "dev/codex/schubert/nk/protocol/layout/semantic/QuestionId",
+      "dev/codex/schubert/nk/protocol/layout/semantic/UserId",
+      "dev/codex/schubert/nk/protocol/layout/semantic/UserRole",
+      "dev/codex/schubert/nk/web/messaging/JmsRequestReplyClient",
+      "dev/codex/schubert/nk/web/messaging/JmsRequestSender",
+      "dev/codex/schubert/nk/web/messaging/LogoutWireClient",
+      "dev/codex/schubert/nk/web/messaging/MediaDescriptorWireClient",
+      "dev/codex/schubert/nk/web/messaging/NotificationWireClient",
+      "dev/codex/schubert/nk/web/messaging/ProtectedReadWireClient",
+      "dev/codex/schubert/nk/web/messaging/ProtectedReadWireClient$Result",
+      "dev/codex/schubert/nk/web/messaging/ProtectedReadWireException",
+      "dev/codex/schubert/nk/web/messaging/ProtectedReadWireException$Reason",
+      "dev/codex/schubert/nk/web/messaging/QuestionWireClient",
+      "dev/codex/schubert/nk/web/messaging/ReplyCorrelationRegistry",
+      "dev/codex/schubert/nk/web/messaging/UserAdministrationWireClient",
+      "dev/codex/schubert/nk/web/messaging/WebBusinessWireClientsTest",
+      "dev/codex/schubert/nk/web/messaging/WebBusinessWireClientsTest$Fixture"
+    ],
+    "reflectionOrDynamicLookup": false,
+    "sourceFile": "WebBusinessWireClientsTest.java"
+  },
+  "web:dev/codex/schubert/nk/web/messaging/WebBusinessWireClientsTest$Fixture": {
+    "className": "dev/codex/schubert/nk/web/messaging/WebBusinessWireClientsTest$Fixture",
+    "classSha256": "d4128064028ec73344d448d72805abe2a203677928bee07334d9e5a2967ab254",
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/WebBusinessWireClientsTest.java",
+    "projectClassReferences": [
+      "dev/codex/schubert/nk/protocol/header/AuthenticationContext",
+      "dev/codex/schubert/nk/web/messaging/JmsRequestReplyClient",
+      "dev/codex/schubert/nk/web/messaging/ProtectedReadWireClient",
+      "dev/codex/schubert/nk/web/messaging/ProtectedReadWireClient$Result",
+      "dev/codex/schubert/nk/web/messaging/ReplyCorrelationRegistry",
+      "dev/codex/schubert/nk/web/messaging/WebBusinessWireClientsTest",
+      "dev/codex/schubert/nk/web/messaging/WebBusinessWireClientsTest$Fixture"
+    ],
+    "reflectionOrDynamicLookup": false,
+    "sourceFile": "WebBusinessWireClientsTest.java"
+  },
+  "web:dev/codex/schubert/nk/web/messaging/WebFactoryNativeRetentionTest": {
+    "className": "dev/codex/schubert/nk/web/messaging/WebFactoryNativeRetentionTest",
+    "classSha256": "e85766ae886c79e23c6039ce94b72aa9a77c8bd0e59137e30959f2ae7d80407e",
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/WebFactoryNativeRetentionTest.java",
+    "projectClassReferences": [
+      "dev/codex/schubert/nk/api/file/OwnedRetentionProcess",
+      "dev/codex/schubert/nk/web/messaging/WebBrokerContexts",
+      "dev/codex/schubert/nk/web/messaging/WebBrokerFactoryOwnershipTest",
+      "dev/codex/schubert/nk/web/messaging/WebBrokerFactoryOwnershipTest$ProbeFactory",
+      "dev/codex/schubert/nk/web/messaging/WebFactoryNativeRetentionTest",
+      "dev/codex/schubert/nk/web/messaging/WebFactoryNativeRetentionTest$Driver",
+      "dev/codex/schubert/nk/web/messaging/WebFactoryNativeRetentionTest$FaultFactory"
+    ],
+    "reflectionOrDynamicLookup": false,
+    "sourceFile": "WebFactoryNativeRetentionTest.java"
+  },
+  "web:dev/codex/schubert/nk/web/messaging/WebFactoryNativeRetentionTest$Driver": {
+    "className": "dev/codex/schubert/nk/web/messaging/WebFactoryNativeRetentionTest$Driver",
+    "classSha256": "731eb533002cbe88fe4391f70f12e863729e40cec8a984736e05c67c86a5893e",
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/WebFactoryNativeRetentionTest.java",
+    "projectClassReferences": [
+      "dev/codex/schubert/nk/api/file/OwnedRetentionProcess",
+      "dev/codex/schubert/nk/api/file/ServiceProcessResources",
+      "dev/codex/schubert/nk/web/messaging/WebBrokerContexts",
+      "dev/codex/schubert/nk/web/messaging/WebFactoryNativeRetentionTest",
+      "dev/codex/schubert/nk/web/messaging/WebFactoryNativeRetentionTest$Driver",
+      "dev/codex/schubert/nk/web/messaging/WebFactoryNativeRetentionTest$FaultFactory"
+    ],
+    "reflectionOrDynamicLookup": false,
+    "sourceFile": "WebFactoryNativeRetentionTest.java"
+  },
+  "web:dev/codex/schubert/nk/web/messaging/WebFactoryNativeRetentionTest$FaultFactory": {
+    "className": "dev/codex/schubert/nk/web/messaging/WebFactoryNativeRetentionTest$FaultFactory",
+    "classSha256": "b03794834e9fe8f1f03253d9fb1814db5480aedabe088fbbf679b04b541e03dc",
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/WebFactoryNativeRetentionTest.java",
+    "projectClassReferences": [
+      "dev/codex/schubert/nk/web/messaging/WebBrokerFactoryOwnershipTest",
+      "dev/codex/schubert/nk/web/messaging/WebBrokerFactoryOwnershipTest$ProbeFactory",
+      "dev/codex/schubert/nk/web/messaging/WebFactoryNativeRetentionTest",
+      "dev/codex/schubert/nk/web/messaging/WebFactoryNativeRetentionTest$FaultFactory"
+    ],
+    "reflectionOrDynamicLookup": false,
+    "sourceFile": "WebFactoryNativeRetentionTest.java"
+  }
+}
