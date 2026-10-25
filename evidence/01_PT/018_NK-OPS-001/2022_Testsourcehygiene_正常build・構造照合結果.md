@@ -1,5 +1,7 @@
 # Test source hygiene・正常buildと構造照合結果
 
+工具lint補足：全新Pythonのpyflakes確認時、10020 patch exporterの未使用Path import一件を検出（製品Main/Test/候補/正常buildの欠陥ではない）。f976保存後に当一行だけ除去し、既manifestの元工具hash/原lint1は履歴として保持、emit/候補/build/PTの確認再演はしない。新lint結果と当工具hashは次保存単位へ記録する。
+
 2026-10-26 08:04 JST、2020仕様/2021候補・反映/群2279/WBS-F03、source5012c53265d8d8d789ea2a3edf0b63fa45853a6a/dev-foundation/origin一致。Main最終21d、不変。Test641sourceの機械是正を当sourceへ束縛し、832TestのCheckstyle raw2705→0を確認。**製品PT0、coverage未実行、元WBS新受入0**、正式1964/53・17/190・工数null・QA051final/全安全HOLDを維持。
 
 ## 正常buildと独立後条件

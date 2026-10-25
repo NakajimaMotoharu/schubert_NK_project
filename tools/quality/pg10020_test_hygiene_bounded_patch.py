@@ -1,7 +1,6 @@
 """Bounded mechanical diff export only, using qualified immutable original/candidate copies."""
 import difflib
 import json
-from pathlib import Path
 import sys
 import g07_host_class_provenance_inputs as data
 
