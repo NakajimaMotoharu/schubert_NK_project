@@ -1,0 +1,13 @@
+# Protocol全module・当source単体テスト仕様
+
+2026-10-25、sourcefd3d04df5710ca28f0e34f919cbc103e569a607b、主WBS-G01（module全counter資格）、群PROTOCOL_FULL_MODULE102_176_V1、開始1/4/9pp/cap10、fresh used10/残90/reset1793513544、実N/T/配賦/工数null。過去の共通製造費/関連Program主担当を変更/再配賦しない。Program001/002の原仕様・Scenario4800byte/Media descriptor・JMS topology/例外値の元TestID/関連SS311/321～323/333/351に従う。全4222/全六moduleの成功確認再演ではなく、変更後Protocol moduleの単一run品質gateに必要な有限回帰。
+
+scope：全22 Test source classの全102通常@Test method。旧source64446の宣言inventory96method/20fileは、当sourceのTest class/source byte同一の宣言根拠だけ再利用し、動的成功は移さない。新PAGE3/SEM3の明示methodを追加し、current normal9694の実Test class/sourceへ照合する。@Disabled/Parameterized/Repeated/TestFactory/Nestedなしを事前source読取で確認、AST/JDK旧固定宣言で引数0。全Test methodのclass/method/source/hashをPG9720のfrozen catalogへ保存し、JUnitはその102のみ明示selectする。期待件数102/22、F/E/S/aborted/container failure0。新ID0（今回の6IDは先行群で追加済み）。
+
+安全判定PT_DEFAULT：Protocol moduleのdependencyはJSpecify/JUnitだけ。Testの外部作用候補を点検し、資源は公開classpath TSV5件、memory byte streams、自己所有8-thread poolのtry-with-resourcesだけ。LargeResult codecは自己byte stream/故障port、Media/pathは値型文字列、JMS topology/rollback/isolation Testはimmutable enum/Throwable identity/nullだけでJMS接続・再送・回収ではない。Enum serializationは独立grammarの自己合成enum bytesに限定しuntrusted dataを読まない。公開constructor/reflectionは既69型oracleのみ、private reflectionなし。実VM/Root/cohort/native/DB/Backup/鍵/配備/intent/permit/HTTP/JMS/認証/権限変更/RuntimeHook/System.exit/子業務processなし。安全HOLDの試し実行/境界探索ではない。
+
+独立oracle：UI233 header/layout固定offset、UI234～236 fields389と64layout golden TSV、固定4800byte Scenario、手書きerror/topology/例外identity/日付/enum/name/range、既原PT仕様を保持。golden hashをProduction methodから生成しない。Resourceだけのfixture/input shapingとexpectedを分け、roundtripだけを全要件のoracleにしない。公開fixtureはnamed-accessors-independent/named-types-ss323/layouts-ui233/fields-ui234-236/payload-golden-ui234-236の全5TSVをgit/source/normal targetへhash束縛する。先行scopeの75class四100は比較履歴のみでexec合算0。
+
+source/Main/Test/config不変更のためnormal9694/NullAway/lint/format/新Test static9700/同byte Main静的9702を参照し、無意味な再build/static0。PG9720は全input/source/Test class/fixtureをfrozen manifestに束縛、PG9722はnormalのread-only Main jar/Test classes/外部Junit依存を使用し自己new-only directory/XML/execへ有限実行。既normal target/source/class/jarを更新しない。PG9724は元source/run/session/終端/XML・全Protocol jar物理176class inventory/CRC/未実行も含む全四counterを独立に測定、report自体は製品classをloadしない。0/0非実行metadata classは明示し、除外globや未網羅隠蔽を行わない。
+
+module四100/全PTが成立しても全source/全451/正式1964PT-53scope/17-190受入/CHR/native/IT-ST完了ではない。現sourceの全method oracle/全WBS監査/legacy静的適用性/QA051final/全actualHOLDは残条件に保持。試験実装違反は修正前915、共通影響916、new group内の追加発見/手戻り/再認証と元計画成果を分離する。通常module達成/保存だけで止めず、適用窓残10以下又は取得不能等の正規停止条件まで残PGPTへ継続する。
