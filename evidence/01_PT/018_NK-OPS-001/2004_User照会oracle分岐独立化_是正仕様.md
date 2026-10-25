@@ -1,0 +1,9 @@
+# User照会oracle分岐独立化・是正仕様
+
+2026-10-26、群G13_USER_QUERY_EXPECTED_SELECTOR_REPAIR_V1/.5-2-5pp cap10、BUG1777/YKT1528/2003、変更担当G13.07/既主費用P01001保持。Test-only変更でProduction Main/外部wire/RD/UI/SS/fixture/依存/POMは不変更。
+
+ADM040のUSR/UDT callは期待layoutをliteral USRREQ01/UDTREQ01、ADM043の二callは入力nの偶奇から独立に選ぶexpectedLayoutを渡す。checkはその引数からSS323§9.4のlayout/field名/typeを選び、Production detailRequest()は期待値を生成するselectorではなく独立expectedDetailに対するassertEqualsのactualにだけ使う。元Mac/LP/NULL/field値・所有buffer不変assertionは保持する。
+
+検証はsource固定後のJava25通常六module compile/package・test-compile（PT0）と、変更Testのformat/PMD/CSの真正結果、純source/宣言/byte差分/四callsite・期待値由来の独立確認。compiler/annotation processorが実DBやTestを実行しない既normal契約を使用する。実JVM Test/JUnit/JCE/worker/DB/VM/Graph9/鍵close witnessは起動せず、ADM040..043を動的成功としない。compileは鍵close拒否の再試行/再現ではなく、既DB付きTestの通常構文/型確認である。
+
+終了条件は期待selector三箇所の排除/四callsiteの入力由来・他query comparator非該当・元Main/fixtureの全byte保持・当Testのcompiler/static結果と未実行範囲の保存。全451/正式受入/coverage閉鎖ではない。準備失敗/未実行/既source成功を合格へ加算せず、静的指摘を抑制して0を作らない。ADM042の広いRuntimeException assertionは本変更に混ぜず、2003の未是正候補として保持する。未許可の実DB/JCE等をこの是正のために起動しない。

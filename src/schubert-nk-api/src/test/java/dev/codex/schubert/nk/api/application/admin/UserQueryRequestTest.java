@@ -49,14 +49,18 @@ class UserQueryRequestTest {
         for (String state : Arrays.asList(null, "ACTIVE", "DISABLED", "LOCKED"))
           for (int page : new int[] {1, 999999}) {
             var request = list(prefix, role, state, page, MESSAGE);
-            check(request, ADMIN, Arrays.asList(prefix, role, state, Integer.toString(page), "50"));
+            check(
+                request,
+                ADMIN,
+                "USRREQ01",
+                Arrays.asList(prefix, role, state, Integer.toString(page), "50"));
             assertFalse(request.detailRequest());
             assertEquals("USRRSP01", request.responseLayoutId().value());
             assertEquals("UserQueryRequest[REDACTED]", request.toString());
           }
     for (long target : new long[] {1, 999999999999L}) {
       var request = detail(target, MESSAGE);
-      check(request, ADMIN, List.of(Long.toString(target)));
+      check(request, ADMIN, "UDTREQ01", List.of(Long.toString(target)));
       assertTrue(request.detailRequest());
       assertEquals("UDTRSP01", request.responseLayoutId().value());
     }
@@ -274,7 +278,8 @@ class UserQueryRequestTest {
                       n % 2 == 0
                           ? List.of(Integer.toString(n))
                           : Arrays.asList("u" + n, null, "ACTIVE", Integer.toString(n), "50");
-                  check(request, actor, expected);
+                  String expectedLayout = n % 2 == 0 ? "UDTREQ01" : "USRREQ01";
+                  check(request, actor, expectedLayout, expected);
                   var first = request.canonical(actor);
                   try (var second = request.canonical(actor);
                       var keys = UserMutationRequestTest.keys()) {
@@ -284,7 +289,7 @@ class UserQueryRequestTest {
                       if (field.value() != null)
                         assertArrayEquals(new byte[field.value().length], field.value());
                     assertArrayEquals(before, keys.calculate(second).digest());
-                    check(request, actor, expected);
+                    check(request, actor, expectedLayout, expected);
                   } finally {
                     first.close();
                   }
@@ -370,13 +375,21 @@ class UserQueryRequestTest {
     assertNull(e.getCause());
   }
 
-  static byte[] check(UserQueryRequest request, AuthenticatedActor actor, List<String> expected)
+  static byte[] check(
+      UserQueryRequest request,
+      AuthenticatedActor actor,
+      String expectedLayout,
+      List<String> expected)
       throws Exception {
+    // BUG1777: derive oracle metadata from the input fixture, never from the SUT branch.
+    assertTrue(Set.of("USRREQ01", "UDTREQ01").contains(expectedLayout));
+    boolean expectedDetail = expectedLayout.equals("UDTREQ01");
+    assertEquals(expectedDetail, request.detailRequest());
     try (var canonical = request.canonical(actor);
         var keys = UserMutationRequestTest.keys()) {
-      String layout = request.detailRequest() ? "UDTREQ01" : "USRREQ01";
+      String layout = expectedLayout;
       var names =
-          request.detailRequest()
+          expectedDetail
               ? List.of("userId")
               : List.of("usernamePrefix", "role", "state", "page", "pageSize");
       assertEquals(Long.toString(actor.userId()), canonical.ownerScope());
@@ -392,7 +405,7 @@ class UserQueryRequestTest {
           UserMutationRequestTest.lp(out, value);
         out.writeInt(expected.size());
         for (int i = 0; i < expected.size(); i++) {
-          String type = request.detailRequest() || i >= 3 ? "N1" : "X1";
+          String type = expectedDetail || i >= 3 ? "N1" : "X1";
           var actual = canonical.fields().get(i);
           assertEquals(names.get(i), actual.name());
           assertEquals(type, actual.typeVersion());
