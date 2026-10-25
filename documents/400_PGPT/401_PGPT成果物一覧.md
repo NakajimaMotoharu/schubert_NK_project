@@ -1,5 +1,7 @@
 # PGPT成果物一覧・進捗
 
+2026-10-25保全停止：1896/1897/source64446不変更、storage直接companion Test19pathを元Main責任へexact対応、9320原→9321固定仕様golden19/metadata反例25・旧260保持。登録1104/1789（main965/965・test139/824/未登録685）、直近所有候補+23/限定表279。新製品PT/coverage/正式受入増分0、879一意新ID/42新Main・正式1964-53/原190新受入0/工数null/QA051final/HOLD維持。fresh63残37、元90捕捉下限88/不明区間2/正確null＋保存buffer2の保全停止（週次残10到達ではない）。新規群を開始せず1898/456/460・証跡/差分/cursor/次commandを保存し正規pushへ。
+
 2026-10-25最新：1894/1895/source64446不変更、G13.07明示不足の製造4pathだけを既SSC295/元Program責任へ対応。9312原→9313 literal golden四/metadata反例十、旧256/元941/歴史943と費用保持。Java登録1081→1085/main961→965（全965）/test120不変更・未登録test704。path登録完了を全method/要件trace・動作/451受入へ転用0、製品PT/新ID/Main/coverage/正式増分0。元90下限87/不明2/正確null・保全2、fresh照合で短い不足通常PT又は品質へ継続。
 
 2026-10-25最新：1892/1893/source64446不変更、G13.07の現Java1789pathについて既登録1081/未登録708を測定（main961/965・test120/824）。原9304→独立Git tree/blob9305・8metadata反例で分母を照合。元941/歴史943/限定256の対応を変更せず、未知owner/costはnull・不足pathを明示。path登録状況は工数完成率/試験未実行数/全trace受入ではない。新ID/Main/coverage/正式増分0、879一意・正式1964-53/QA051final/実VM等HOLD保持。元90下限87/不明2/正確null・80大型抑制、次も下限＋cap＋保全2<=90の短工程のみ。
