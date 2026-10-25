@@ -1,5 +1,7 @@
 # PGPT成果物一覧・進捗
 
+2026-10-25 15:36最新：1929/PG-D653、Bootstrap/共有checkpoint17source責任補完、Java1727/1789/Main965/965/Test762/824・残62/限定902。直近四群+95source（19+22+37+17）、13:30比較点1449から278source。全method/要件/oracle/TestID/実行PT/coverage/正式受入の増分ではない。正式1964-53/17-190/工数null・全current audit実1HOLD/全actualHOLD保持、fresh残99で通常継続・現在窓残10以下/取得不能等で保全。
+
 2026-10-25 15:32最新：1927/PG-D652、Batch file37source責任を補完、Java1710/1789/Main965/965/Test745/824・残79/限定885。直近三群の増分78source（19+22+37）、13:30比較点1449から261source。全method/要件/oracle/TestID/実行PT・coverage・正式受入の増分ではなく、正式1964-53/17-190/工数null・全current audit実1HOLD/全actualHOLD維持。fresh残99で通常継続、現在窓残10以下/取得不能等のみ保全停止。
 
 2026-10-25 15:29最新：1925/PG-D651、Batch platform22sourceの主関連責任を独立補完、Java1673/1789/Main965/965/Test708/824・残116/限定848。13:30比較点1449から224source、当群22source増だが製品PT/coverage/正式受入増分0。正式1964-53/17-190/工数null・全current audit実1HOLD/全actualHOLD保持。前群BUG1751/YKT1502はfixf63190509/origin一致で工具scope限定close、元失敗証拠保全。fresh残99・通常継続、現窓残10以下/取得不能等のみ保全停止。
