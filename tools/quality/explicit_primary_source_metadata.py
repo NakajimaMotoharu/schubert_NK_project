@@ -131,7 +131,8 @@ def run(library,out,slot,primary_table,prior_name,prior_sha,unique_only):
     value=dict(actualExit=0,source=SOURCE,timeUTC=dt.datetime.now(dt.timezone.utc).isoformat(),invocation=invocation,
       graphManifestSha256=sha(graph_raw),normalManifestSha256=sha(normal_path.read_bytes()),priorManifestSha256=prior_sha,
       frozenPrimaryOwners=primary_table,sourceSelectionVectors=selection_vector_count,candidates=len(catalog),verifiedClosureSources=len(closure),independentClassMetadata=len(independent),
-      independentMainSourceFiles=len(main_sources),uniqueKnownMainResponsibilityOnly=unique_only,receipts=receipts,
+      independentMainClassDeclarations=len(main_sources),independentUniqueMainSourceFiles=len({row['path'] for row in main_sources.values()}),
+      uniqueKnownMainResponsibilityOnly=unique_only,receipts=receipts,
       candidatesSha256=sha((out/'candidates.json').read_bytes()),classProofsSha256=sha((out/'class-proofs.json').read_bytes()),
       mainProofsSha256=sha((out/'main-source-proofs.json').read_bytes()),runtimeUncertaintyPreserved=True,
       targetCompile=0,targetRuntimeClassLoading=0,productTestsExecuted=0,newAccepted=0,newTestIds=0,newMain=0,coverage=None,formalUpdated=False,effortPercent=None)
