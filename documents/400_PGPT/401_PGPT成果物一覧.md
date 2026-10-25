@@ -1,5 +1,7 @@
 # PGPT成果物一覧・進捗
 
+2026-10-25最新：1872/1873/source6c271f74d、Lifeに最初停止予算/remaining供給を実装し新10methodだけ普通fixture成功、normal六0/CS-SB0・PMD9中legacy2未分類。全二class実coverage L35/67M9/19C1/2B8/14でProgram PT未完・四100未受入を明示。既856ID/42Main四100部品と今回部分成功10を分離（技術一意ID計866）、全1843/二物理差・250owner/五arch0。元90/捕捉下限83・不明2/正確null・80大型抑制を維持、正式1964-53/原190新受入0/工数null・QA051final/G078379/actualHOLD不変更。次短い許可工程/必要検証・保全へ。
+
 2026-10-25最新：1870/1871/sourceecfcbf9f6、API-local初回通知の60秒予算を新18/1で確認、全一MainL24M5C1B12四100/CS-SB0・PMD2個別判断/全1843・248owner/五arch0。clock失敗/逆行/期限後sticky0・signed wrap・同時begin一回、resource/TERM操作0。技術856新ID/42Main（＋18/1）/config静的5、正式1964-53/原190新受入0/工数nullを区別。元共有90の捕捉下限82/不明2/正確null・80大型群抑制を適用、次は短いLife供給接続PG/PT/保全。actual/native/全451/QA051final/G078379は未受入HOLD。
 
 2026-10-25最新：1868/1869/sourcecb91bc2ec、caller-held API観測/SDK assemblyを新26/1で検証、全一MainL58M7C1B20四100/CS-SB0・PMD4個別判断/全1842・246owner・五arch0。STD worker/SQLなし、DEBUG fake readonly→SDK供給とworker終端前SDK解放禁止・UNKNOWN永久保持を確認。技術Java838ID/41Main（＋26/1）/config静的5、正式1964PT/53scope・原190新受入0/工数nullを区別。元失敗/工具修正/横展開1869、現Mainの既stop budget供給・actual/native/全451/QA051final/G078379は未受入HOLD、次同経路の許可PG/PTへ継続。
