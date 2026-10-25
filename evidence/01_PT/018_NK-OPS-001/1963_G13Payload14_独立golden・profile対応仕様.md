@@ -1,0 +1,7 @@
+# Payload十四methodの独立golden/profile対応
+
+2026-10-25、G13_PAYLOAD14_ORACLE_REVIEW_V1、主G13.07。開始.5/3/8pp/cap10。HEAD2a139d5effc7d3c894372bad02270fc8b7a93d32/origin一致clean、現Production64446不変更、fresh09:58:54UTC used7残93/reset1793513544。開始前選定としてPayloadGoldenVectorTest全体/AuthenticationErrorProfileTest冒頭・既005/3292の存在を確認した分はpreflightであり、開始値を遡及して変更しない。
+
+PayloadCodecTest八/GoldenVector三/AuthenticationErrorProfile三の現sourceを既Program002 P/E familyとAUTHERR仕様へ対応する。roundtripと全64の独立hash、min/max入力生成とexpected、承認0106/0107例外とその他profile、型/null/redaction/immutable、14反復/8threadの意味を分ける。既005/3292の純粋golden証拠はcurrent正本/fixtureのbyte一致範囲だけ参照し、旧PT/coverage/sourceQualifiedを移さない。既toolを読む前にmainを実行しない。
+
+具体成果は十四行の意味表と既宣言/source/独立仕様行/固定byte根拠の結合。metadata読取だけで製品PT/全branch/全Program/正式受入を増やさない。元protocol無変更の確認だけのPT再演0、必要な変更後451条件は維持する。既成功/失敗/Current/stash/原本と全actualHOLDを保持、VM/Root/native/DB/鍵/intent/permit/配備/拒否対象未特定の試し実行0。通常群/QA返信待ちで停止せずfresh現窓残10以下等まで継続する。
