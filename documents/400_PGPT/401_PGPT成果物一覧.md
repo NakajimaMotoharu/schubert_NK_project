@@ -1,5 +1,7 @@
 # PGPT成果物一覧・進捗
 
+2026-10-25 15:12最新：1921/PG-D649/source64446不変更、共有Web画面/form/view22を実Mainの原担当/関連へ明示し、closure31/Test105class/Main238class宣言=221unique source・独立表/9-8反例/22近傍/旧785保持。Java1632/1789/Main965/965/Test667/824・残157/限定807、13:30比較点からsource183補完。実PT/coverage/正式増分0・正式1964-53/17-190/工数null/QA051final/全actualHOLD/全current audit実1HOLDを保持。active中にfresh使用68→0/marker変化を観測、原因/正確時刻/跨窓消費はnullで分離保存。現在残100から過去窓分を引かず通常継続し、窓変化をHOLD解除/券消費や無指示再開にしない。
+
 2026-10-25 14:31最新：1906..1915/source64446不変更、13:30保存比較点からsource担当を117補完（継承2＋複合47＋protocol主関連10＋反射source25＋resource33）、Java1566/1789/Main965/965/Test601/824・残223/限定741。最新1915は54 unique artifact/42Test class・原所有/hash/独立literal仕様/9-10反例/33近傍、実行PT/coverage/正式増分0。単位誤labelは9413/event2148で旧96class=63unique/Main63class=49uniqueへ追記訂正・元値保全。正式1964-53/17-190/工数null/QA051final/全actualHOLDと全current audit実1HOLD/BUG1746を維持。fresh残34・現在窓残10停止/旧累計抑制なし、通常小群/PMO待ちで停止しない。
 
 2026-10-25 13:30最新：1904/1905/PG-D643/source64446不変更、型構文だけでは未確定だった55sourceの限定静的compile/96class→ASM/JDK参照・実Main SourceFileで55候補を全確認。Java登録1394→1449/1789/test429→484/824・未登録340/限定624、旧569/元941943と費用保持。動的PT/新製品ID/Main/coverage/正式増分0、全WBS current scope guard実1HOLD・正式1964-53/17-190/工数null/QA051final等維持。fresh残35・現在窓残10停止で通常継続、旧累計90抑制/小cap失効。
