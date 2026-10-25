@@ -104,11 +104,14 @@ class UserQueryResponseBoundaryTest {
     var wrongLayout = page(new PagedResponseData(1, 50, 0, 1, 0, 0), List.of());
     var wrongType =
         new TypedPayloadValues(new LayoutId(SEARCH_RESPONSE), correct.data(), List.of());
+    var wrongDetailType =
+        new TypedPayloadValues(new LayoutId(DETAIL_RESPONSE), wrongLayout.data(), List.of());
     assertDoesNotThrow(() -> detail.validateResponse(correct));
     assertThrows(IllegalArgumentException.class, () -> detail.validateResponse(wrongTarget));
     assertThrows(IllegalArgumentException.class, () -> detail.validateResponse(wrongLayout));
     assertThrows(IllegalArgumentException.class, () -> search.validateResponse(correct));
     assertThrows(IllegalArgumentException.class, () -> search.validateResponse(wrongType));
+    assertThrows(IllegalArgumentException.class, () -> detail.validateResponse(wrongDetailType));
   }
 
   private static byte[] searchBytes() {
