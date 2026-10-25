@@ -19,6 +19,27 @@ def sha(raw):return hashlib.sha256(raw).hexdigest()
 def write(path,value):
     with path.open('x') as stream:json.dump(value,stream,sort_keys=True,indent=2);stream.write('\n')
 
+def exact_selection(originals,known,primary_table):
+    if not primary_table or any(not path.startswith('src/schubert-nk-') or '/src/test/java/' not in path or not path.endswith('.java') for path in primary_table):
+        raise ValueError('full module-qualified source keys required')
+    selected=[row for row in originals if row['path'] not in known and row['path'] in primary_table]
+    if len(selected)!=len(primary_table) or {row['path'] for row in selected}!=set(primary_table):
+        raise ValueError('one exact original source per frozen module-qualified key required')
+    return selected
+
+def selection_vectors():
+    api='src/schubert-nk-api/src/test/java/p/BrokerGraph334Test.java'
+    web='src/schubert-nk-web/src/test/java/p/BrokerGraph334Test.java'
+    rows=[dict(path=api),dict(path=web)]
+    assert exact_selection(rows,set(),{web:'WBS-P005-02'})==[dict(path=web)]
+    for originals,known,table in ((rows,set(),{'BrokerGraph334Test':'WBS-P005-02'}),
+      ([rows[0]],set(),{web:'WBS-P005-02'}),([rows[1],rows[1]],set(),{web:'WBS-P005-02'}),
+      (rows,{web},{web:'WBS-P005-02'})):
+        try:exact_selection(originals,known,table)
+        except ValueError:pass
+        else:raise AssertionError('ambiguous/missing/known source key accepted')
+    return 5
+
 def run(library,out,slot,primary_table,prior_name,prior_sha,unique_only):
     invocation=capture(library);assert not out.exists() and not slot.exists()
     graph_dir=BASE/'PG9386-composite-reference-graph-v3'
@@ -33,11 +54,11 @@ def run(library,out,slot,primary_table,prior_name,prior_sha,unique_only):
     prior_raw=(BASE/prior_name).read_bytes();assert sha(prior_raw)==prior_sha
     prior=json.loads(prior_raw);assert prior['source']==SOURCE and prior['actualExit']==0
     known={row['path'] for row in prior['sourceRows']}
-    selected=[row for row in originals if row['path'] not in known and Path(row['path']).stem in primary_table]
-    assert len(selected)==len(primary_table) and {Path(row['path']).stem for row in selected}==set(primary_table)
+    selection_vector_count=selection_vectors()
+    selected=exact_selection(originals,known,primary_table)
     selected_by_path={row['path']:row for row in selected}
     for row in selected:
-        owner=primary_table[Path(row['path']).stem]
+        owner=primary_table[row['path']]
         assert owner in row['mainOwners']
         if unique_only:assert row['mainOwners']==[owner] and row['unresolvedReasons']==['REFLECTION_OR_DYNAMIC_CLASS_RESOLUTION']
     by_source=defaultdict(list);by_class=defaultdict(set)
@@ -102,14 +123,14 @@ def run(library,out,slot,primary_table,prior_name,prior_sha,unique_only):
             main_sources[name]=dict(path=path,owner=mains[name]['owner'],sha256=hashes[path])
     catalog=[]
     for original in sorted(selected,key=lambda row:row['path']):
-        path=original['path'];owner=primary_table[Path(path).stem]
+        path=original['path'];owner=primary_table[path]
         catalog.append(dict(path=path,sha256=hashes[path],owner=owner,costOwner=owner,relatedOwners=sorted(set(original['mainOwners'])-{owner}),
           originalReferenceOwners=original['mainOwners'],unresolvedRuntimeReasons=original['unresolvedReasons'],targetRuntimeAccepted=False,
           basis='FROZEN_LITERAL_SOURCE_PRIMARY_AND_RELATED_SCOPES_RUNTIME_UNCERTAINTY_RETAINED_NOT_PT'))
     verify(invocation);out.mkdir();write(out/'candidates.json',catalog);write(out/'class-proofs.json',independent);write(out/'main-source-proofs.json',main_sources)
     value=dict(actualExit=0,source=SOURCE,timeUTC=dt.datetime.now(dt.timezone.utc).isoformat(),invocation=invocation,
       graphManifestSha256=sha(graph_raw),normalManifestSha256=sha(normal_path.read_bytes()),priorManifestSha256=prior_sha,
-      frozenPrimaryOwners=primary_table,candidates=len(catalog),verifiedClosureSources=len(closure),independentClassMetadata=len(independent),
+      frozenPrimaryOwners=primary_table,sourceSelectionVectors=selection_vector_count,candidates=len(catalog),verifiedClosureSources=len(closure),independentClassMetadata=len(independent),
       independentMainSourceFiles=len(main_sources),uniqueKnownMainResponsibilityOnly=unique_only,receipts=receipts,
       candidatesSha256=sha((out/'candidates.json').read_bytes()),classProofsSha256=sha((out/'class-proofs.json').read_bytes()),
       mainProofsSha256=sha((out/'main-source-proofs.json').read_bytes()),runtimeUncertaintyPreserved=True,
