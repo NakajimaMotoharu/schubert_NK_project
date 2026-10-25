@@ -1,0 +1,101 @@
+{
+  "actualExit": 0,
+  "actualNativeActions": 0,
+  "actualRegistered": 0,
+  "actualVmActions": 0,
+  "allowedOwnerFamiliesBoundToActualMainSourceFile": true,
+  "begin": {
+    "asmJarPath": "/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm/9.10.1/asm-9.10.1.jar",
+    "asmJarSha256": "ed825d10ab1399c8c0cb669e688cf0c8c82629b4c8399b58352b68e92ca10fcb",
+    "classCatalogSha256": "9a68d75f899ce160475285610471ff53831cba7c0870eda88cae78237d25d021",
+    "compileManifestSha256": "1e6283063e08ae26c4abe5b9cd2d4eb4fce69a45365c4aae14b996641f61d751",
+    "environment": {
+      "LANG": "C.UTF-8",
+      "PATH": "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin:/usr/bin:/bin"
+    },
+    "helperPath": "tools/quality/architecture/StaticCompanionBytecodeAudit.java",
+    "helperSha256": "a6d7196d799c0dd56811780f1a7e8e0bd3c493e9b75eb743ea8b392d46bd959c",
+    "invocation": {
+      "actualPythonCommand": [
+        "python3",
+        "-B",
+        "tools/quality/pg9362_static_companion_asm_probe.py"
+      ],
+      "arbitraryArgumentsRecorded": false,
+      "entrypointPath": "tools/quality/pg9362_static_companion_asm_probe.py",
+      "entrypointSha256": "e99723dd392f55864b637819d390a7f21cce2769a6c9538f410776692cfe9786",
+      "helperPath": "tools/quality/host_tool_invocation.py",
+      "helperSha256": "85d616a3db4ff47f4c95ae2e0dd57954bc2b09f28b8f2a685b986e5621545c46",
+      "libraryPath": "tools/quality/pg9362_static_companion_asm_probe.py",
+      "librarySha256": "e99723dd392f55864b637819d390a7f21cce2769a6c9538f410776692cfe9786",
+      "loadedProjectPythonSources": {
+        "tools/quality/host_tool_invocation.py": "85d616a3db4ff47f4c95ae2e0dd57954bc2b09f28b8f2a685b986e5621545c46",
+        "tools/quality/pg9362_static_companion_asm_probe.py": "e99723dd392f55864b637819d390a7f21cce2769a6c9538f410776692cfe9786"
+      },
+      "provenance": "OBSERVED_SYS_ARGV_AND_ORIG_ARGV_NOT_RECONSTRUCTED"
+    },
+    "javapManifestSha256": "a6cc01273a2d12b966524fdf7366ec90f9650d4826b5fcffc944cb1e115a65b6",
+    "source": "64446a9f8901084a4ad7eba1f66ae975eb2bbdea",
+    "targetRuntimeClasspathEntries": 0
+  },
+  "bytecodeFixtureVectors": 10,
+  "classProofs": 96,
+  "confirmedCandidates": 55,
+  "confirmedSha256": "7f330ff0019011d31582fa98506ebdaa84c78afb891e156200110ef60fa03b03",
+  "coverage": null,
+  "effortPercent": null,
+  "formalUpdated": false,
+  "newAccepted": 0,
+  "newMain": 0,
+  "newTestIds": 0,
+  "productTestsExecuted": 0,
+  "proofsSha256": "ac28d0b06367774e74cec3d0745d752dbcc78f8fdcffdfa12a5dbfd7aa5157f1",
+  "rawLiteralValuesPublished": false,
+  "source": "64446a9f8901084a4ad7eba1f66ae975eb2bbdea",
+  "sourceFiles": 55,
+  "stages": [
+    {
+      "actualExit": 0,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+        "--release",
+        "25",
+        "-proc:none",
+        "-Xlint:all",
+        "-Werror",
+        "-cp",
+        "/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm/9.10.1/asm-9.10.1.jar",
+        "-d",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg9362-static-companion-asm-v1/helper-classes",
+        "/home/mini/codex/project1/work/pgpt-foundation/tools/quality/architecture/StaticCompanionBytecodeAudit.java"
+      ],
+      "endUTC": "2026-10-25T04:18:05.403286+00:00",
+      "startUTC": "2026-10-25T04:18:04.787008+00:00",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "timedOut": false
+    },
+    {
+      "actualExit": 0,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-cp",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg9362-static-companion-asm-v1/helper-classes:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm/9.10.1/asm-9.10.1.jar",
+        "StaticCompanionBytecodeAudit",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg9358-static-companion-compile55-v1/fresh-test-classes",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg9362-static-companion-asm-v1/class-catalog.tsv"
+      ],
+      "endUTC": "2026-10-25T04:18:05.518643+00:00",
+      "startUTC": "2026-10-25T04:18:05.403817+00:00",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSha256": "d779cf6838ed26e8595a9dbbf9a8b6af611cfc64f19dce882087d09a3332d903",
+      "timedOut": false
+    }
+  ],
+  "targetRuntimeClassLoading": 0,
+  "targetRuntimeInvocation": 0,
+  "unconfirmedCandidates": 0,
+  "unconfirmedSha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+  "whole451Accepted": false,
+  "wholeG13Accepted": false
+}

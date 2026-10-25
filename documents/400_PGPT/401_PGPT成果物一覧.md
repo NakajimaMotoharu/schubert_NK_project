@@ -1,5 +1,7 @@
 # PGPT成果物一覧・進捗
 
+2026-10-25 13:30最新：1904/1905/PG-D643/source64446不変更、型構文だけでは未確定だった55sourceの限定静的compile/96class→ASM/JDK参照・実Main SourceFileで55候補を全確認。Java登録1394→1449/1789/test429→484/824・未登録340/限定624、旧569/元941943と費用保持。動的PT/新製品ID/Main/coverage/正式増分0、全WBS current scope guard実1HOLD・正式1964-53/17-190/工数null/QA051final等維持。fresh残35・現在窓残10停止で通常継続、旧累計90抑制/小cap失効。
+
 2026-10-25 12:47最新：1902/1903/PG-D642/source64446不変更、未登録675からexact companion337を二種AST解析、280所有候補を全件独立確認/登録（API97/batch92/bootstrap20/protocol5/Web66）。全Java登録1114→1394/1789/test149→429/824・未登録395、元941/943/旧289保持。工具16/13vector・4golden/6owner反例/280近傍不変/6binding反例、製品PT実行/coverage/正式増分0。全WBSの旧資格対current guard実1HOLD、正式1964-53/17-190/工数null/879新ID42Main・全actualHOLDを保持。fresh残36/現窓残10停止で通常継続、旧累計90抑制・小cap不使用。
 
 2026-10-25 12:22最新：1900/1901/source64446不変更、storage残10path（Test8/helper2）の責任候補を追加し29/29source対応、全Java1114/1789/test149/824・未登録675/限定289。9334原→9336独立golden10/16反例、製品PT実行/正式増分0。BUG1746/YKT1497の485/486 hashを同期・9338metadata8反例/元semantic保持、全WBSの旧資格対current scope guard実1はHOLDを保持。fresh残37/現窓残10停止・群cap10に訂正済み、旧累計90/小capは不使用。879新ID/42Main・正式1964-53/17-190/工数null/安全HOLDを維持して通常PG/PTへ継続。
