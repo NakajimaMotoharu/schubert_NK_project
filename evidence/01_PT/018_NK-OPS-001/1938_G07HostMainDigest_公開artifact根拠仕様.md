@@ -1,0 +1,27 @@
+# G07 正常host Main class digestによる既存残件の公開根拠
+
+2026-10-25 16:43 JST、G07_HOST_MAIN_CLASS_DIGEST_V1、Production64446不変更、開始.5/2/6pp/cap10。fresh07:41:55UTC使用3/残97/reset1793513544/secondarynull。現在窓残10以下/取得不能等で保全、旧累計80/90停止なし。主担当WBS-G07、G13等へ費用を再加算しない。
+
+対象はPG8968の固定歴史scan（sourcefb9fce、content05d73）の未分類8379件。原40086finding、PG8980/8990/9000/9002の原結果・31707公開根拠済みを保持し、既対象だけを追記分類する。Production/新tree全体のsecret gate合格ではない。現source64446の正常host compile9246/graph9386のMain1843 classを公開artifact registryへ追加し、全exact captureが旧公開proof又は新actual Main class digestに結合し、少なくとも一つ新根拠を必要とするfindingだけを分類候補とする。
+
+## 固定入力・許可scope
+
+- 正常compile9246原989d9e912a0a6531ad8a2417467ddca6d37a292d6582206fb696b324c600ee46、graph9386v3原3b092052e7724400870c72d7d92a163e5fdbe9c536eebe2bfe38403d3c187b15。
+- scan8968原f8e16b697c1c509791c6674bb17661c54e8685c0f04425bed8bf7ea86a94a739、prior8980原fe4175077735018f5b500306e09c7300917a814c53196a2378e1b1e887b6f5ae、token9000原c3216ab47b1ebe8a9da9c6587b1784b99b89a46390e1f0c61c80154dcc9f1847、post9002原3af5c448f053d77bac336122f4f7372e7bffa41aacea24052456f07c06f7a177。
+- public normal snapshot内6Main Jarだけを読取り、Jar hash、全1843entryの実class SHA256・SourceFile/class identity・965sourceのnormal/snapshot/current/Git差分0を照合する。VM/native artifact・私有raw/provider log・DB/Backup/鍵/credential実体・他filesystemは読まない。正常host classのdigestをnative起動/実測counterの成功へ転用しない。
+- 入力のGit管理された公開native計測manifestは既存scanの固定textとしてのみ参照する。そのmanifestが指すnative実体/exec/私有rawログや現在VM/所有状態にはアクセスしない。工具用JDK/既存pinned設定・公開証跡以外へ対象を広げない。
+- Producerは既ClassFile byte parser、独立postはJDK25 Class-File APIを工具JVM内で使用し、対象classをload/init/executeせず1843registryを再構築する。Jarはnormal snapshot配下/regular/new-only出力を強制、target JVM/DB/Root/Unit/配備/遠隔操作0。
+
+## 判定・独立反証
+
+原findingのpath/rule/startLine/endLine/inputSha256と重複個数を固定。既 ancestor658/token1581の追記をCounterで差し引き、残8379を再認証する。旧公開blob/ancestor/SQL-catch token proofをhash付きで参照し、ancestor全blob hash/元scan/PTを再演しない。新proofは実host Main class SHA256にJar entry/normal Jar hash/SourceFile/source hash/Git sourceを結合したものだけ。候補値・候補だけのhash・context本文を保存しない。
+
+既default rule/configは不変更。元report範囲内にexact captureを再構築でき、全captureの公開artifact根拠がそろう場合だけFALSE_POSITIVEへ追記する。混在unknown/空capture/位置不一致・未支持line separatorは未分類を保持する。別sourceの動的成功や「tests配下だから安全」等の推測は使わない。既9296/9297の一range未解決を無条件closeしない。
+
+独立postは別byte parser/JDK APIのregistry全1843一致、reported rangeからの別capture抽出と全proof集合、元8379のtuple Counter、分類件数/remainingの保存不変式を確認する。手書きsynthetic public digest vector、unknown混在/空/重複/byte/SourceFile/source owner/context/実行捏造等のnegativeを行う。actualSecretCountは未確定nullを維持、全G07/451/正式1964-53/17-190/工数null/QA051final/全actualHOLDは受入にしない。
+
+## 着手前選定と非実行
+
+BorrowedJdbcFatal329の9件はrepository/error/protocol/test sourceが原資格e7から64446まで不変とGit差分で確認したため、451に従い成功確認目的の再実行をしない。元4222・旧個別成功の新source再加算0。SDK15のmetadata digest照合は全8379に対し新分類候補0で、artifact実体を新読取りしていない。初期SDK path guard一回は新規SDKの承認保存場所をm2だけと誤仮定して変更/実体読取前に停止、公開metadataの保存場所を確認しただけで権限/アクセス経路変更・安全拒否迂回なし。これは選定手戻りで新受入/費用0とはしない（専有費不明null）。
+
+先頭256件の形状だけではHEX64が254、公開Current Main class metadataと全capture一致候補32。これは全8379の分類結果ではない。上記独立根拠がそろった分だけ実計上する。通常報告/commit/PMO返信待ちで停止せず、保存後も残分類/trace/必要PGPTへ継続する。
