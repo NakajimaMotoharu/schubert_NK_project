@@ -1,5 +1,7 @@
 # PGPT成果物一覧・進捗
 
+2026-10-25最新：1886/1887/source64446不変更、既fatal callback2/1を当source資格化、同ownerだけ非成功/null payload fail-closed/固定IOにpayload無しを確認。全Life L27/68M9/19C1/2B4/14・$1当exec未実行を保持、他exec合算0。same-source build/static/arch再演0、255owner（既254保持＋Test候補一）、新ID/Main追加0・879一意/新Main42/既存inner資格一と必要既存4を別計数。BUG1745/YKT1496反例shapeを元v1保全/V2 positive→cost一field拒否で工具scope close。正式1964-53/原190新受入0/工数null/actualHOLD、元90下限86・不明2/正確null・80大型抑制を維持して通常継続。
+
 2026-10-25最新：1884/1885/source64446不変更、未確認だった当API通常guard/健康境界の既READY004/005だけ2/1成功。既sourceのnormal六/全1843同byte・254owner照合で再build/static/arch0、全Life L51/68M15/19C2/2B10/14で未網羅保持。既存$1一classはL7M3C1全missed0/branch自然0を新execで確認、新ID/新Mainを増やさず一意879/新Main42・必要既存2/既存inner限定資格一を別計数。正式1964-53/原190新受入0/工数null/実Hook等HOLD不変更、元90下限85/不明2/正確null・80大型抑制で通常継続。
 
 2026-10-25最新：1882/1883/source64446a9f8、Web同owner private lock/IRQ区間表現を最小是正。新1＋必要3=4/1成功・normal六0/CS-SB0、raw PMD8は個別role/identity判定、全1843・旧1842同byte/254owner/五arch0。whole Web L30/58M7/10C1/1B6/14で四100/Program PT未完、BUG1743/YKT1493-94はSTATIC_FIXED_PT_HOLD（実Hook/UNKNOWN未実行）。技術879一意=856四100部品ID/42Main＋部分23、正式1964-53/原190新受入0/工数null・actualHOLD不変更。元90下限85/不明2/正確null・80大型抑制、通常継続。
