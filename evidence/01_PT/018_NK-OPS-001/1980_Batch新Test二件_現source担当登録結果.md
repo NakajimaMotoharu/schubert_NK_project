@@ -1,0 +1,17 @@
+# Batch新Test二件・現source担当登録結果
+
+2026-10-26 00:37 JST、CURRENT_BATCH_BOUNDARY_TRACE_OVERLAY_V1/event2230、source58913ab374ef54d138fa3fad8c80cccd03d87c10。主G13.07・開始.25/1/3pp/cap10は凍結。目的は1978/1979の新Test二件・四IDを原Main owner/costへ結ぶこと。製品PT/coverage/新IDを再計上する工程ではない。
+
+PG9806-batch-current-source-registration-v1/manifest.json原0c9d2e5dc36b66b318e5351ee2e9e2463aab23a20c3cc2cd9917e60ae98af470は旧959 sourceRows全fieldを保持して二行追加。BatchRunValueBoundaryTestはBatchRun/MaintenanceActivationの原P01702、CleanupValueBoundaryTestはCleanupCounts/CleanupKindの原P01707へ明示対応し、変更担当G13.07やTest内件数の多数決を主/費用ownerへ使わない。四method/Test ID/仕様1978/当20品質post9802を参照し、原941行/原cost/旧run/予算は変更0。既ReportのcurrentModifiedLogicalBindings一件もshaと旧証拠pointerを保持して、新sourceの新動的受入へ昇格しない。
+
+PG9808-batch-current-snapshot-post-v1/manifest.json原d5fbad6cdfb55076e788eeeca5fc0bd272f92b2629a8ec95a61337e66973217aは、原941/歴史943/481484予算・受入/486全semantic保持、485の二incremental sectionと486 inventorySha256再束縛だけを独立確認。旧959＋新2=961行、現Java1794/Main965/Test829、登録1786/Main965/Test821、未確定8は元と同じ。六registry反例（owner/cost/hash/accepted/missing/duplicate、各新行への変異）と五snapshot反例を確認した。全G13/正式受入を登録率から推定しない。
+
+所定全WBS監査は前後とも真正exit1/ValueError: current physical candidate exact Git/worktree scope。新sourceを旧資格候補へ再束縛して隠さずHOLDを保持、metadata post0を全監査PASSへ変換0。今回20成功/12class四100/新4IDは前群2228の成果であり再加算0、当群はsource責任二件の限定補完だけ。
+
+## 利用枠転記の訂正（BUG1763/YKT1514）
+
+原2230は直前fresh応答used14/残86にもかかわらずcallerが旧13/87 literalを使ったため、原記録を不変更で保存し2231 CHECKPOINTへquotaBeforeだけ一回追記訂正した。新対象処理開始前に915/916へ起票。以後はget_usage_limitsの返却JSONからquota snapshotを生成し、保存したbeforeとfresh endをそのままwriter JSONへ渡す。修正観測14/86は15:28:10UTCにも再照会し、当群終了fresh15:36:55UTCも14/86/reset1793513544。旧2229の13/87は当時15:20:19UTCの真正点なので上書きしない。間の共有+1ppを当群/PGPT専有へ割り振らず、不明値を埋めない。開始見積.25/1/3/原予実/v3/v4/v5不変更。
+
+BUG1763/YKT1514は原2230/一回2231/JSON応答由来のstart/end・旧点非該当を確認済み、当保存commit待ちの計測工具scope。製品不具合・PT失敗・coverage変更ではない。正しいbaseline14→14の共有丸め差0≠専有費0、N/T/PGPT・PMO配賦/工数null、usage116d672457c45f345bc3edcad5593eee34a8166432e4e75f01f8070e7f1ecc05。
+
+正式1964-53/17-190/工数null/QA051final/全actualHOLD・G07歴史4493・Protocol生成4/未到達16probeは維持。Graph9は1975/9778静的文書完了・動的未実行HOLD、元9772/9774/9776再演0。新normal/Test/Root/VM/DB/JMS/鍵/permit/外部process操作0、元有限metadata CLIは終端0、外部所有は未観測HOLD。次は公開差分/通常保存push後、独立Web HTTP route-label/value又は別DTOの既後続資料・source/Test/許可/副作用を確認し、具体的に許可された通常PG/PTへ継続する。現在未確定の実接続/Graph9を改名して再開せず、通常登録/commitで停止しない。
