@@ -1,4 +1,10 @@
-# NK-PRO-002 ページ境界・実行結果（静的gate是正中）
+# NK-PRO-002 ページ境界・実行結果（限定3件・独立照合済み）
+
+2026-10-25追記：静的v2 manifest `evidence/provisional/PG9666-pagination-static-v2/manifest.json` SHA-256 `41807eb5d29a989424939246359f8eb7f9162bd03c7fbc4d1f2bd8932546de08`、独立trace/quality post v2 `evidence/provisional/PG9668-pagination-trace-quality-post-v2/manifest.json` SHA-256 `9db0e573444f6fd72649fd68efcddfe8e6d15eedb1e0d2069efbb9d7525bd445` は各実終了0。原静的v1のMissingClass18と終了1を保持し、全六moduleへ現1843Main class/六current jar/外部依存のhashを指定して再解析し、各BugInstance/MissingClass/Error0を別XML照合した。新Test PMD/Checkstyle各0は同sourceの原v1内の成功subcheckのみ参照し、v1全体を成功へ変換しない。
+
+追加postは新3methodのJDK parse-only AST/normal class annotation/descriptor/引数0/仕様ID/実XMLとの一致、旧1910Test class不変＋追加1class、Main965/Test825/Java1790、元Mainの原主担当/費用担当P002-02を確認した。通常Test宣言5625は旧5622＋新3であり実行済み件数ではない。485原941artifactと9546追加候補だけのsourceRowsを混同したpost v1はassert終了1・成功manifestなしで保持（BUG1755/YKT1506）。v2は原正本から担当取得、現Main byteは別current hashへ束縛し、欠落/重複/owner誤り/cost誤り四反例も確認。初回unused importの実行前lintとpost lookup失敗は工具手戻りとして別記、製品試験失敗ではない。
+
+BUG1754/YKT1505・BUG1755/YKT1506は工具scope検証済み、修正commitのremote照合待ち。新3試験成功/1suite、四counter未達、正式1964PT/53scope・17/190・工数null、旧64446全監査HOLD/新3154全監査未実行は不変。QA053は利用者から「通知はもう存在しない」と回答受領、情報照会を終了し拒否対象未特定/HOLDは保持。以下は原実行時の記録で、現在状態は本追記を優先する。
 
 対象source3154be39380de4771111f859ffb8315420274b0a、branch dev-foundation、主WBS-P002-02、群2199・開始.5/2/5pp cap10。006の新PAGE001～003は正常compile後に専用JUnitで実行し三成功/一suite、failed/error/skipped/aborted0を独立照合した。PG9660六module compile/packageは終了0/実PT0、未実行の旧全回帰をPASSへ算入0。
 
