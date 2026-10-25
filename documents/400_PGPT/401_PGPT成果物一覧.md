@@ -1,5 +1,7 @@
 # PGPT成果物一覧・進捗
 
+2026-10-25 15:47最新：1933/PG-D655、Main CPなしfixture5の全利用先同一責任を全1910Test bytesで独立確認、Java1774/1789/Main965/965/Test809/824・残15/限定949。直近六群+142source（19+22+37+17+42+5）、13:30比較点1449から325source。source責任候補であり全method/要件/oracle/TestID/実PT/coverage/正式受入の増分ではない。正式1964-53/17-190/工数null・全current audit実1HOLD/全actualHOLD保持、fresh残98で通常継続・現在窓残10以下/取得不能等で保全。
+
 2026-10-25 15:40最新：1931/PG-D654、API/Web42source責任補完、Java1769/1789/Main965/965/Test804/824・残20/限定944。直近五群+137source（19+22+37+17+42）、13:30比較点1449から320source。全method/要件/oracle/TestID/実行PT/coverage/正式受入の増分ではない。正式1964-53/17-190/工数null・全current audit実1HOLD/全actualHOLD保持、fresh残99で通常継続・現窓残10以下/取得不能等で保全。
 
 2026-10-25 15:36最新：1929/PG-D653、Bootstrap/共有checkpoint17source責任補完、Java1727/1789/Main965/965/Test762/824・残62/限定902。直近四群+95source（19+22+37+17）、13:30比較点1449から278source。全method/要件/oracle/TestID/実行PT/coverage/正式受入の増分ではない。正式1964-53/17-190/工数null・全current audit実1HOLD/全actualHOLD保持、fresh残99で通常継続・現在窓残10以下/取得不能等で保全。
