@@ -1,7 +1,22 @@
 package dev.codex.schubert.nk.api.application.log;
 
-import static dev.codex.schubert.nk.api.application.log.LogVectors.*;
-import static org.junit.jupiter.api.Assertions.*;
+import static dev.codex.schubert.nk.api.application.log.LogVectors.ADMIN;
+import static dev.codex.schubert.nk.api.application.log.LogVectors.MESSAGE;
+import static dev.codex.schubert.nk.api.application.log.LogVectors.NOW;
+import static dev.codex.schubert.nk.api.application.log.LogVectors.check;
+import static dev.codex.schubert.nk.api.application.log.LogVectors.data;
+import static dev.codex.schubert.nk.api.application.log.LogVectors.emptyFilters;
+import static dev.codex.schubert.nk.api.application.log.LogVectors.message;
+import static dev.codex.schubert.nk.api.application.log.LogVectors.page;
+import static dev.codex.schubert.nk.api.application.log.LogVectors.put;
+import static dev.codex.schubert.nk.api.application.log.LogVectors.request;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import dev.codex.schubert.nk.api.domain.Role;
 import dev.codex.schubert.nk.api.idempotency.FingerprintKeyRing;
@@ -9,18 +24,35 @@ import dev.codex.schubert.nk.api.logging.ApiLogDatabaseFixture;
 import dev.codex.schubert.nk.api.persistence.LogQueryRepository;
 import dev.codex.schubert.nk.api.security.AuthenticatedActor;
 import dev.codex.schubert.nk.protocol.codec.PermanentProtocolException;
-import dev.codex.schubert.nk.protocol.header.*;
-import dev.codex.schubert.nk.protocol.layout.*;
+import dev.codex.schubert.nk.protocol.header.AuthenticationContext;
+import dev.codex.schubert.nk.protocol.header.CommonHeader;
+import dev.codex.schubert.nk.protocol.header.InteractionKind;
+import dev.codex.schubert.nk.protocol.header.MessageKind;
+import dev.codex.schubert.nk.protocol.header.ResultCode;
+import dev.codex.schubert.nk.protocol.layout.FixedPayload;
+import dev.codex.schubert.nk.protocol.layout.LayoutId;
+import dev.codex.schubert.nk.protocol.layout.TypedPayloadValues;
+import dev.codex.schubert.nk.protocol.layout.WireMessage;
 import dev.codex.schubert.nk.protocol.layout.common.PagedResponseData;
-import dev.codex.schubert.nk.protocol.layout.log.*;
+import dev.codex.schubert.nk.protocol.layout.log.LogRecord;
+import dev.codex.schubert.nk.protocol.layout.log.LogSearchRequestData;
 import java.nio.file.Path;
-import java.util.*;
-import java.util.concurrent.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.UUID;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 /** UI235 and SSC037 independent input/LP/SQL expectations, PT-ADM-061..063. */
 class LogRequestTest {
+  // Test-local UI235 literal, independent of all Production layout constants.
+  private static final String SEARCH_LAYOUT = "LGSREQ01";
   @TempDir Path root;
 
   @Test
@@ -42,7 +74,7 @@ class LogRequestTest {
       expected.set(0, java.text.Normalizer.normalize(keyword, java.text.Normalizer.Form.NFC));
       check(request(fields, 1, MESSAGE), ADMIN, expected, 1);
     }
-    var wire = message("LGSREQ01", data(emptyFilters(), 1), MESSAGE);
+    var wire = message(SEARCH_LAYOUT, data(emptyFilters(), 1), MESSAGE);
     var decoded = LogRequest.decode(wire);
     assertSame(wire.header(), decoded.header());
     assertEquals("LGSRSP01", decoded.responseLayoutId().value());
@@ -70,7 +102,7 @@ class LogRequestTest {
             "000000000001".getBytes(java.nio.charset.StandardCharsets.US_ASCII),
             MESSAGE));
     for (byte[] bytes : List.of(new byte[655], new byte[657], new byte[656]))
-      invalid(message("LGSREQ01", bytes, MESSAGE));
+      invalid(message(SEARCH_LAYOUT, bytes, MESSAGE));
     for (var change :
         Map.of(
                 256,
@@ -88,7 +120,7 @@ class LogRequestTest {
             .entrySet()) {
       byte[] bytes = data(emptyFilters(), 1);
       put(bytes, change.getKey(), change.getValue());
-      invalid(message("LGSREQ01", bytes, MESSAGE));
+      invalid(message(SEARCH_LAYOUT, bytes, MESSAGE));
     }
     for (var dates :
         List.of(
@@ -97,7 +129,7 @@ class LogRequestTest {
       var fields = new ArrayList<>(emptyFilters());
       fields.set(5, dates.get(0));
       fields.set(6, dates.get(1));
-      invalid(message("LGSREQ01", data(fields, 1), MESSAGE));
+      invalid(message(SEARCH_LAYOUT, data(fields, 1), MESSAGE));
     }
     for (int mode = 0; mode < 3; mode++) {
       int records = mode == 2 ? 1 : 0;
@@ -105,7 +137,7 @@ class LogRequestTest {
           new CommonHeader(
               "SCHBNK01",
               1,
-              new LayoutId("LGSREQ01"),
+              new LayoutId(SEARCH_LAYOUT),
               1,
               mode == 0 ? MessageKind.RESPONSE : MessageKind.REQUEST,
               mode == 1 ? InteractionKind.ASYNC_ACCEPTANCE : InteractionKind.SYNCHRONOUS,
