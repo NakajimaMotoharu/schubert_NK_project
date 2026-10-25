@@ -2,9 +2,13 @@ package dev.codex.schubert.nk.api.bootstrap;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import dev.codex.schubert.nk.api.monitoring.ApiFactoryObservationFixture;
 import java.io.IOException;
 import java.lang.reflect.Proxy;
+import java.time.Duration;
+import java.time.Instant;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicLong;
 import javax.sql.DataSource;
@@ -202,5 +206,53 @@ final class ApiProcessObservationFactoryTest {
       }
     }
     assertEquals(0, opens.get());
+  }
+
+  @Test
+  void apiObsBoot009() throws Exception {
+    var fixture = ApiFactoryObservationFixture.create();
+    var lifetime = new ApiProcessLifetime(() -> 0);
+    var observations = ApiProcessMain.prepareObservations("DEBUG", fixture.pool(), lifetime);
+    try {
+      observations.initialize();
+      long deadline = System.nanoTime() + TimeUnit.SECONDS.toNanos(10);
+      String body;
+      do {
+        body = observations.metrics().render(true);
+        if (body.contains("nk_outbox_rows{status=\"PENDING\",store=\"API\"} 3.0")) break;
+        assertTrue(deadline - System.nanoTime() > 0, "own fake producer publication bound");
+        Thread.sleep(1);
+      } while (true);
+      for (String line :
+          List.of(
+              "nk_outbox_rows{status=\"PENDING\",store=\"API\"} 3.0",
+              "nk_outbox_rows{status=\"SENT\",store=\"API\"} 5.0",
+              "nk_outbox_rows{status=\"ERROR\",store=\"API\"} 7.0"))
+        assertTrue(body.lines().anyMatch(line::equals));
+      double elapsed = Duration.between(fixture.created(), Instant.now()).toNanos() / 1e9;
+      for (var entry : java.util.Map.of("PENDING", 2, "SENT", 4, "ERROR", 6).entrySet()) {
+        String prefix =
+            "nk_outbox_oldest_seconds{status=\"" + entry.getKey() + "\",store=\"API\"} ";
+        double actual =
+            Double.parseDouble(
+                body.lines()
+                    .filter(line -> line.startsWith(prefix))
+                    .findFirst()
+                    .orElseThrow()
+                    .substring(prefix.length()));
+        assertTrue(Double.isFinite(actual));
+        assertTrue(actual >= entry.getValue() && actual <= entry.getValue() + elapsed + 0.001);
+      }
+      assertFalse(lifetime.stopping());
+      ApiProcessMain.closeObservations(observations, lifetime);
+      assertTrue(lifetime.stopping());
+      assertEquals(60_000_000_000L, lifetime.remainingStopNanos());
+      assertThrows(IllegalStateException.class, () -> observations.metrics().render(true));
+      fixture.assertReleased();
+    } finally {
+      observations.close();
+      lifetime.close();
+      fixture.dispose();
+    }
   }
 }
