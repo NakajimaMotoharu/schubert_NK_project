@@ -1,5 +1,7 @@
 # Module・Program一覧
 
+2026-10-25追加trace：NK-OPS-001/PG-D640後続/1884-85/source64446不変更、ApiProcessLifetime.guardSync/guardEvent二overload/checkRunning/await/shutdown→既PT-OPS-API-READY004/005を当source2/1で資格。RD171/UI252/SS312321342、owner/costP018-05/関連P018-06追加0。9262全二class L51/68M15/19C2/2B10/14・$1既存一class全missed0/branch自然0、9264原6c467096 same1843/254owner・7反例/再build等0。新ID/Main追加0、実install/Hook/native/全451はHOLD未完。
+
 2026-10-25追加trace：NK-OPS-001/NK-WEB-002・PG-D641/1882-83/source64446a9f8、WebProcessLifetime stateLock/install/close/holdUnknownInterval→WLCLOSE001～004（新004/必要旧3）。owner/costP018-06・参照P018-05追加0、RD171/UI252/SS313342351。9246通常六→9248実4/1→9250全一Main L30/58M7/10C1/1B6/14（四100未完）→9252全1843/旧1842同byte・254owner/五arch0/raw8個別判定。実Hook/UNKNOWN分岐・native/全451HOLD、台帳STATIC_FIXED_PT_HOLDと1883へ対応。
 
 2026-10-25追加trace：NK-OPS-001/PG-D640/1880-81/source600b966ba、ApiProcessLifetime installed/install/close→必要LIFEBUDGET10＋APIOBSBOOT009、WebProcessLifetime close→新WLCLOSE001～003。RD171/UI252/SS312313342351、原API ownerP018-05/WebP018-06を維持、groupchangeP018-05/関連追加0。9232 normal六→9234実14/3→9236全二source unit L66/125M16/29C2/3B14/28（四100未完）→9238全1843/二差・254owner/五arch0。原Hook/TERM/nativeは未実行HOLD、raw18未分類/横展開追加残1881。
