@@ -1,24 +1,51 @@
 package dev.codex.schubert.nk.api.application.admin;
 
 import static dev.codex.schubert.nk.api.application.admin.UserMutationRequestTest.put;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import dev.codex.schubert.nk.api.domain.Role;
-import dev.codex.schubert.nk.api.idempotency.*;
 import dev.codex.schubert.nk.api.persistence.UserQueryRepository;
-import dev.codex.schubert.nk.api.security.*;
-import dev.codex.schubert.nk.protocol.codec.*;
-import dev.codex.schubert.nk.protocol.header.*;
-import dev.codex.schubert.nk.protocol.layout.*;
-import dev.codex.schubert.nk.protocol.layout.admin.*;
+import dev.codex.schubert.nk.api.security.AuthenticatedActor;
+import dev.codex.schubert.nk.api.security.AuthorizationException;
+import dev.codex.schubert.nk.protocol.codec.PermanentProtocolException;
+import dev.codex.schubert.nk.protocol.header.AuthenticationContext;
+import dev.codex.schubert.nk.protocol.header.CommonHeader;
+import dev.codex.schubert.nk.protocol.header.InteractionKind;
+import dev.codex.schubert.nk.protocol.header.MessageKind;
+import dev.codex.schubert.nk.protocol.header.ResultCode;
+import dev.codex.schubert.nk.protocol.layout.FixedPayload;
+import dev.codex.schubert.nk.protocol.layout.LayoutId;
+import dev.codex.schubert.nk.protocol.layout.LayoutValidationException;
+import dev.codex.schubert.nk.protocol.layout.PayloadRecord;
+import dev.codex.schubert.nk.protocol.layout.TypedPayloadValues;
+import dev.codex.schubert.nk.protocol.layout.WireMessage;
+import dev.codex.schubert.nk.protocol.layout.admin.UserDetailResponseData;
+import dev.codex.schubert.nk.protocol.layout.admin.UserRecord;
 import dev.codex.schubert.nk.protocol.layout.common.PagedResponseData;
-import dev.codex.schubert.nk.protocol.layout.semantic.*;
-import java.io.*;
+import dev.codex.schubert.nk.protocol.layout.semantic.UserId;
+import dev.codex.schubert.nk.protocol.layout.semantic.UserRole;
+import dev.codex.schubert.nk.protocol.layout.semantic.UserState;
+import java.io.ByteArrayOutputStream;
+import java.io.DataOutputStream;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
 import java.time.Instant;
-import java.util.*;
-import java.util.concurrent.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Locale;
+import java.util.Optional;
+import java.util.Set;
+import java.util.UUID;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
 import org.junit.jupiter.api.Test;
@@ -26,6 +53,10 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** UI236 literal request bytes and SS323 §9.4 independent LP oracle. PT-ADM-040..043. */
 class UserQueryRequestTest {
+  // Independent SS323/UI236 fixture literals, never aliases of Production constants.
+  private static final String SEARCH_LAYOUT = "USRREQ01";
+  private static final String DETAIL_LAYOUT = "UDTREQ01";
+  private static final String ACTIVE_STATE = "ACTIVE";
   static final Instant NOW = Instant.parse("2026-09-08T00:01:00Z");
   static final AuthenticatedActor ADMIN = new AuthenticatedActor(1, "u1", Role.ADMIN);
   static final UUID MESSAGE = new UUID(100, 1);
@@ -46,13 +77,13 @@ class UserQueryRequestTest {
   void adm040DecodeAndCanonicalKeepAllOriginalQueryFields() throws Exception {
     for (String prefix : Arrays.asList(null, "équipe", " A_%\\'", "NEW", "new", "é".repeat(32)))
       for (String role : Arrays.asList(null, "USER", "ADMIN"))
-        for (String state : Arrays.asList(null, "ACTIVE", "DISABLED", "LOCKED"))
+        for (String state : Arrays.asList(null, ACTIVE_STATE, "DISABLED", "LOCKED"))
           for (int page : new int[] {1, 999999}) {
             var request = list(prefix, role, state, page, MESSAGE);
             check(
                 request,
                 ADMIN,
-                "USRREQ01",
+                SEARCH_LAYOUT,
                 Arrays.asList(prefix, role, state, Integer.toString(page), "50"));
             assertFalse(request.detailRequest());
             assertEquals("USRRSP01", request.responseLayoutId().value());
@@ -60,12 +91,12 @@ class UserQueryRequestTest {
           }
     for (long target : new long[] {1, 999999999999L}) {
       var request = detail(target, MESSAGE);
-      check(request, ADMIN, "UDTREQ01", List.of(Long.toString(target)));
+      check(request, ADMIN, DETAIL_LAYOUT, List.of(Long.toString(target)));
       assertTrue(request.detailRequest());
       assertEquals("UDTRSP01", request.responseLayoutId().value());
     }
     var input =
-        UserMutationRequestTest.message("USRREQ01", listData("new", null, null, 1), MESSAGE);
+        UserMutationRequestTest.message(SEARCH_LAYOUT, listData("new", null, null, 1), MESSAGE);
     var original = UserQueryRequest.decode(input);
     assertSame(input.header(), original.header());
     try (var a = original.canonical(ADMIN);
@@ -101,7 +132,7 @@ class UserQueryRequestTest {
         try (var c = f.db.transaction()) {
           c.setReadOnly(true);
           var response =
-              list(" U", role, "ACTIVE", 1, MESSAGE).query(repo, c, ADMIN, NOW).orElseThrow();
+              list(" U", role, ACTIVE_STATE, 1, MESSAGE).query(repo, c, ADMIN, NOW).orElseThrow();
           assertEquals(
               role.equals("ADMIN") ? List.of(1L, 2L) : List.of(3L),
               response.records().stream().map(r -> ((UserRecord) r).userId().value()).toList());
@@ -142,12 +173,13 @@ class UserQueryRequestTest {
     for (int mode = 0; mode < 3; mode++) {
       var kind = mode == 0 ? MessageKind.RESPONSE : MessageKind.REQUEST;
       var interaction = mode == 1 ? InteractionKind.ASYNC_ACCEPTANCE : InteractionKind.SYNCHRONOUS;
-      int recordLength = mode == 2 ? 1 : 0, recordCount = mode == 2 ? 1 : 0;
+      int recordLength = mode == 2 ? 1 : 0;
+      int recordCount = mode == 2 ? 1 : 0;
       var header =
           new CommonHeader(
               "SCHBNK01",
               1,
-              new LayoutId("USRREQ01"),
+              new LayoutId(SEARCH_LAYOUT),
               1,
               kind,
               interaction,
@@ -175,7 +207,7 @@ class UserQueryRequestTest {
             new CommonHeader(
                 "SCHBNK01",
                 1,
-                new LayoutId("USRREQ01"),
+                new LayoutId(SEARCH_LAYOUT),
                 2,
                 MessageKind.REQUEST,
                 InteractionKind.SYNCHRONOUS,
@@ -195,19 +227,19 @@ class UserQueryRequestTest {
             listData(null, null, null, 0),
             listData(null, "ROOT", null, 1),
             listData(null, null, "UNKNOWN", 1)))
-      invalid(UserMutationRequestTest.message("USRREQ01", data, MESSAGE));
+      invalid(UserMutationRequestTest.message(SEARCH_LAYOUT, data, MESSAGE));
     byte[] size = listData(null, null, null, 1);
     put(size, 83, "049");
-    invalid(UserMutationRequestTest.message("USRREQ01", size, MESSAGE));
+    invalid(UserMutationRequestTest.message(SEARCH_LAYOUT, size, MESSAGE));
     byte[] reserved = listData(null, null, null, 1);
     reserved[95] = 'X';
-    invalid(UserMutationRequestTest.message("USRREQ01", reserved, MESSAGE));
+    invalid(UserMutationRequestTest.message(SEARCH_LAYOUT, reserved, MESSAGE));
     byte[] malformed = listData(null, null, null, 1);
     malformed[0] = (byte) 0xff;
-    invalid(UserMutationRequestTest.message("USRREQ01", malformed, MESSAGE));
+    invalid(UserMutationRequestTest.message(SEARCH_LAYOUT, malformed, MESSAGE));
     invalid(
         UserMutationRequestTest.message(
-            "UDTREQ01", "000000000000".getBytes(StandardCharsets.US_ASCII), MESSAGE));
+            DETAIL_LAYOUT, "000000000000".getBytes(StandardCharsets.US_ASCII), MESSAGE));
     invalid(
         UserMutationRequestTest.message(
             "ULKREQ01",
@@ -273,12 +305,12 @@ class UserQueryRequestTest {
                   var request =
                       n % 2 == 0
                           ? detail(n, new UUID(100, n))
-                          : list("u" + n, null, "ACTIVE", n, new UUID(100, n));
+                          : list("u" + n, null, ACTIVE_STATE, n, new UUID(100, n));
                   var expected =
                       n % 2 == 0
                           ? List.of(Integer.toString(n))
-                          : Arrays.asList("u" + n, null, "ACTIVE", Integer.toString(n), "50");
-                  String expectedLayout = n % 2 == 0 ? "UDTREQ01" : "USRREQ01";
+                          : Arrays.asList("u" + n, null, ACTIVE_STATE, Integer.toString(n), "50");
+                  String expectedLayout = n % 2 == 0 ? DETAIL_LAYOUT : SEARCH_LAYOUT;
                   check(request, actor, expectedLayout, expected);
                   var first = request.canonical(actor);
                   try (var second = request.canonical(actor);
@@ -302,13 +334,14 @@ class UserQueryRequestTest {
 
   static UserQueryRequest list(String prefix, String role, String state, int page, UUID message) {
     return UserQueryRequest.decode(
-        UserMutationRequestTest.message("USRREQ01", listData(prefix, role, state, page), message));
+        UserMutationRequestTest.message(
+            SEARCH_LAYOUT, listData(prefix, role, state, page), message));
   }
 
   static UserQueryRequest detail(long id, UUID message) {
     return UserQueryRequest.decode(
         UserMutationRequestTest.message(
-            "UDTREQ01",
+            DETAIL_LAYOUT,
             String.format(Locale.ROOT, "%012d", id).getBytes(StandardCharsets.US_ASCII),
             message));
   }
@@ -382,8 +415,8 @@ class UserQueryRequestTest {
       List<String> expected)
       throws Exception {
     // BUG1777: derive oracle metadata from the input fixture, never from the SUT branch.
-    assertTrue(Set.of("USRREQ01", "UDTREQ01").contains(expectedLayout));
-    boolean expectedDetail = expectedLayout.equals("UDTREQ01");
+    assertTrue(Set.of(SEARCH_LAYOUT, DETAIL_LAYOUT).contains(expectedLayout));
+    boolean expectedDetail = expectedLayout.equals(DETAIL_LAYOUT);
     assertEquals(expectedDetail, request.detailRequest());
     try (var canonical = request.canonical(actor);
         var keys = UserMutationRequestTest.keys()) {

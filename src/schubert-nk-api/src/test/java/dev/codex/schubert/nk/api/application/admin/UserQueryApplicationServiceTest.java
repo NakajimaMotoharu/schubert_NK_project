@@ -1,26 +1,65 @@
 package dev.codex.schubert.nk.api.application.admin;
 
 import static dev.codex.schubert.nk.api.application.admin.UserMutationRequestTest.put;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import dev.codex.schubert.nk.api.error.TemporaryInfrastructureException;
-import dev.codex.schubert.nk.api.idempotency.*;
+import dev.codex.schubert.nk.api.idempotency.EncryptedResponseSnapshot;
+import dev.codex.schubert.nk.api.idempotency.InboxCompletion;
+import dev.codex.schubert.nk.api.idempotency.InboxCompletionState;
+import dev.codex.schubert.nk.api.idempotency.InboxResultReference;
 import dev.codex.schubert.nk.api.logging.ApiLogDatabaseFixture;
 import dev.codex.schubert.nk.api.persistence.UserQueryRepository;
-import dev.codex.schubert.nk.api.security.*;
+import dev.codex.schubert.nk.api.security.AuthenticationContextVerifier;
+import dev.codex.schubert.nk.api.security.ContextHash;
 import dev.codex.schubert.nk.protocol.codec.PermanentProtocolException;
-import dev.codex.schubert.nk.protocol.header.*;
-import dev.codex.schubert.nk.protocol.layout.*;
+import dev.codex.schubert.nk.protocol.header.AuthenticationContext;
+import dev.codex.schubert.nk.protocol.header.CommonHeader;
+import dev.codex.schubert.nk.protocol.header.InteractionKind;
+import dev.codex.schubert.nk.protocol.header.MessageKind;
+import dev.codex.schubert.nk.protocol.layout.FixedPayload;
+import dev.codex.schubert.nk.protocol.layout.LayoutId;
+import dev.codex.schubert.nk.protocol.layout.WireMessage;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
-import java.sql.*;
-import java.time.*;
-import java.util.*;
-import org.junit.jupiter.api.*;
+import java.sql.SQLException;
+import java.time.Clock;
+import java.time.Instant;
+import java.time.ZoneId;
+import java.time.ZoneOffset;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HexFormat;
+import java.util.List;
+import java.util.Locale;
+import java.util.Optional;
+import java.util.Set;
+import java.util.UUID;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
 /** Actual PG/Flyway and independent full wire/SQL assertions, PG-D-089/PT-ADM-048..054. */
 class UserQueryApplicationServiceTest {
+  // Independent wire/SQL/fault fixture literals; do not derive from Production results.
+  private static final String SEARCH_LAYOUT = "USRREQ01";
+  private static final String SUCCESS_RESULT = "0000";
+  private static final String SYSTEM_ERROR_RESULT = "0200";
+  private static final String FORBIDDEN_RESULT = "0103";
+  private static final String NO_FAULT = "none";
+  private static final String DATABASE_FAULT_POINT = "database";
+  private static final String INBOX_COUNT_SQL = "select count(*) from schubert.request_inbox";
+  private static final int FIRST_AUTH_COMMIT = 1;
+  private static final int QUERY_RESULT_COMMIT = 2;
+  private static final int REPLAY_AUTH_COMMIT = 3;
   @TempDir static Path root;
   static ApiLogDatabaseFixture database;
   static final Instant NOW = UserQueryRequestTest.NOW;
@@ -44,20 +83,24 @@ class UserQueryApplicationServiceTest {
         var service = service(f);
         var message = input(detail, 3, null, MESSAGE, 1);
         assertArrayEquals(
-            expected(message, "0000", 2, detail ? 0 : 3, detail ? 3 : 0), service.process(message));
+            expected(message, SUCCESS_RESULT, 2, detail ? 0 : 3, detail ? 3 : 0),
+            service.process(message));
         assertEquals(2, f.commits.get());
         assertEquals(0, f.live.get());
-        assertEquals(1, f.scalar("select count(*) from schubert.request_inbox"));
+        assertEquals(1, f.scalar(INBOX_COUNT_SQL));
         assertEquals(
             1,
             f.scalar(
-                "select count(*) from schubert.request_inbox where owner_user_id=1 and operation_token is null and result_ref_type='NONE' and processing_state='COMPLETED' and expires_at=completed_at+interval '24 hours'"));
+                "select count(*) from schubert.request_inbox where owner_user_id=1 and"
+                    + " operation_token is null and result_ref_type='NONE' and"
+                    + " processing_state='COMPLETED' and expires_at=completed_at+interval '24"
+                    + " hours'"));
         assertEquals(0, f.scalar("select sum(version) from schubert.app_users"));
         byte[] independent =
             UserQueryRequestTest.check(
                 UserQueryRequest.decode(message),
                 UserQueryRequestTest.ADMIN,
-                detail ? "UDTREQ01" : "USRREQ01",
+                detail ? "UDTREQ01" : SEARCH_LAYOUT,
                 detail ? List.of("3") : Arrays.asList(null, null, null, "1", "50"));
         assertEquals(
             HexFormat.of().formatHex(independent),
@@ -65,13 +108,15 @@ class UserQueryApplicationServiceTest {
         Arrays.fill(independent, (byte) 0);
         var saved = completion(f);
         assertArrayEquals(
-            expected(message, "0000", 1, detail ? 0 : 3, detail ? 3 : 0),
+            expected(message, SUCCESS_RESULT, 1, detail ? 0 : 3, detail ? 3 : 0),
             UserMutationReplayServiceTest.decrypt(saved, MESSAGE, 1));
         var metadata = f.inboxMetadata();
         f.sql(
-            "update schubert.app_users set username='Changed',username_key='changed',version=99 where id=3");
+            "update schubert.app_users set username='Changed',username_key='changed',version=99"
+                + " where id=3");
         assertArrayEquals(
-            expected(message, "0200", 3, detail ? 0 : 3, detail ? 3 : 0), service.process(message));
+            expected(message, SYSTEM_ERROR_RESULT, 3, detail ? 0 : 3, detail ? 3 : 0),
+            service.process(message));
         assertEquals(metadata, f.inboxMetadata());
         assertEquals(4, f.commits.get());
         assertEquals(
@@ -82,7 +127,9 @@ class UserQueryApplicationServiceTest {
       var absent = input(true, 99, null, MESSAGE, 1);
       assertArrayEquals(expected(absent, "0104", 2, 0, 0), service.process(absent));
       f.sql(
-          "insert into schubert.app_users(id,username,username_key,password_hash,role,status,password_changed_at,created_at,updated_at) values(99,'u99','u99','synthetic-unusable','USER','ACTIVE','2026-09-08T00:01:00Z','2026-09-08T00:01:00Z','2026-09-08T00:01:00Z')");
+          "insert into"
+              + " schubert.app_users(id,username,username_key,password_hash,role,status,password_changed_at,created_at,updated_at)"
+              + " values(99,'u99','u99','synthetic-unusable','USER','ACTIVE','2026-09-08T00:01:00Z','2026-09-08T00:01:00Z','2026-09-08T00:01:00Z')");
       assertArrayEquals(expected(absent, "0104", 3, 0, 0), service.process(absent));
       seed(f);
       var capacity = input(false, 0, null, MESSAGE, 1);
@@ -96,7 +143,8 @@ class UserQueryApplicationServiceTest {
       assertEquals(
           1,
           f.scalar(
-              "select count(*) from schubert.request_inbox where processing_state='ERROR' and expires_at=completed_at+interval '24 hours'"));
+              "select count(*) from schubert.request_inbox where processing_state='ERROR' and"
+                  + " expires_at=completed_at+interval '24 hours'"));
     }
   }
 
@@ -106,18 +154,21 @@ class UserQueryApplicationServiceTest {
       for (int context : new int[] {3, 99}) {
         seed(f);
         var request = input(false, 0, null, MESSAGE, context);
-        String code = context == 3 ? "0103" : "0102";
+        String code = context == 3 ? FORBIDDEN_RESULT : "0102";
         assertArrayEquals(expected(request, code, 1, 0, 0), service(f).process(request));
-        assertEquals(0, f.scalar("select count(*) from schubert.request_inbox"));
+        assertEquals(0, f.scalar(INBOX_COUNT_SQL));
         assertEquals(
             1,
             f.scalar(
-                "select count(*) from schubert.app_logs where action='AUTHORIZATION_DENIED' and actor_user_id "
+                "select count(*) from schubert.app_logs where action='AUTHORIZATION_DENIED' and"
+                    + " actor_user_id "
                     + (context == 3 ? "=3" : "is null")));
       }
       for (String change :
           List.of(
-              "update schubert.auth_sessions set revoked=true,revoked_at='2026-09-08T00:01:00Z',revoke_reason='ADMIN' where user_id=1",
+              "update schubert.auth_sessions set"
+                  + " revoked=true,revoked_at='2026-09-08T00:01:00Z',revoke_reason='ADMIN' where"
+                  + " user_id=1",
               "update schubert.auth_sessions set expires_at='2026-09-08T00:01:00Z' where user_id=1",
               "update schubert.app_users set status='DISABLED' where id=1",
               "update schubert.app_users set role='USER' where id=1",
@@ -125,7 +176,7 @@ class UserQueryApplicationServiceTest {
         seed(f);
         f.afterCommit =
             () -> {
-              if (f.commits.get() == 1)
+              if (f.commits.get() == FIRST_AUTH_COMMIT)
                 try {
                   f.sql(change);
                 } catch (SQLException failure) {
@@ -133,9 +184,9 @@ class UserQueryApplicationServiceTest {
                 }
             };
         var request = input(false, 0, null, MESSAGE, 1);
-        String code = change.contains("role='USER'") ? "0103" : "0102";
+        String code = change.contains("role='USER'") ? FORBIDDEN_RESULT : "0102";
         assertArrayEquals(expected(request, code, 1, 0, 0), service(f).process(request));
-        assertEquals(0, f.scalar("select count(*) from schubert.request_inbox"));
+        assertEquals(0, f.scalar(INBOX_COUNT_SQL));
         assertEquals(
             1,
             f.scalar("select count(*) from schubert.app_logs where action='AUTHORIZATION_DENIED'"));
@@ -146,7 +197,7 @@ class UserQueryApplicationServiceTest {
         if (!missing) f.sql("update schubert.app_users set role='USER' where id=1");
         f.afterCommit =
             () -> {
-              if (f.commits.get() == 1)
+              if (f.commits.get() == FIRST_AUTH_COMMIT)
                 try {
                   if (missing) f.session(1, 99);
                   else f.sql("update schubert.app_users set role='ADMIN' where id=1");
@@ -155,13 +206,14 @@ class UserQueryApplicationServiceTest {
                 }
             };
         var request = input(false, 0, null, MESSAGE, missing ? 99 : 1);
-        String code = missing ? "0102" : "0103";
+        String code = missing ? "0102" : FORBIDDEN_RESULT;
         assertArrayEquals(expected(request, code, 1, 0, 0), service(f).process(request));
         assertEquals(0, f.inboxCount());
         assertEquals(
             1,
             f.scalar(
-                "select count(*) from schubert.app_logs where action='AUTHORIZATION_DENIED' and actor_user_id "
+                "select count(*) from schubert.app_logs where action='AUTHORIZATION_DENIED' and"
+                    + " actor_user_id "
                     + (missing ? "is null" : "=1")));
         f.afterCommit = () -> {};
       }
@@ -171,7 +223,7 @@ class UserQueryApplicationServiceTest {
       assertThrows(
           PermanentProtocolException.class,
           () -> service.process(input(false, 0, "different", MESSAGE, 1)));
-      assertEquals(1, f.scalar("select count(*) from schubert.request_inbox"));
+      assertEquals(1, f.scalar(INBOX_COUNT_SQL));
       assertEquals(
           1, f.scalar("select count(*) from schubert.app_logs where action='PROTOCOL_REJECTED'"));
     }
@@ -232,7 +284,7 @@ class UserQueryApplicationServiceTest {
                 return new UUID(101, id);
               });
       var request = input(false, 0, null, MESSAGE, 1);
-      assertArrayEquals(expected(request, "0000", 2, 3, 0), tracked.process(request));
+      assertArrayEquals(expected(request, SUCCESS_RESULT, 2, 3, 0), tracked.process(request));
       seed(f);
       byte[] random =
           UserApplicationAssembly.queries(f.source, f.fingerprints, f.snapshots, clock)
@@ -247,13 +299,13 @@ class UserQueryApplicationServiceTest {
         assertThrows(NullPointerException.class, missing);
       UUID response = UUID.fromString(new String(random, 24, 36, StandardCharsets.US_ASCII));
       assertEquals(4, response.version());
-      byte[] expected = expected(request, "0000", 2, 3, 0);
+      byte[] expected = expected(request, SUCCESS_RESULT, 2, 3, 0);
       put(expected, 24, response.toString());
       assertArrayEquals(expected, random);
       seed(f);
       f.sql("update schubert.app_users set username=E'u3\\n' where id=3");
       var denied = input(false, 0, "synthetic-private-search", MESSAGE, 3);
-      assertArrayEquals(expected(denied, "0103", 1, 0, 0), service(f).process(denied));
+      assertArrayEquals(expected(denied, FORBIDDEN_RESULT, 1, 0, 0), service(f).process(denied));
       assertEquals("u3 ", f.text("select actor_username from schubert.app_logs"));
       assertEquals("WARN", f.text("select level from schubert.app_logs"));
       assertEquals("SECURITY", f.text("select category from schubert.app_logs"));
@@ -263,7 +315,7 @@ class UserQueryApplicationServiceTest {
           Set.of("layout", "reason", "targetType", "outcome", "actorRole", "step"), json.keySet());
       assertFalse(details.contains("synthetic-private-search"));
       // YKT-060: denial audit retains independent UI236 route/type, not only a request ID.
-      assertEquals("USRREQ01", json.get("layout").getAsString());
+      assertEquals(SEARCH_LAYOUT, json.get("layout").getAsString());
       assertEquals("USER", json.get("targetType").getAsString());
       assertEquals("USER", json.get("actorRole").getAsString());
       assertTrue(details.getBytes(StandardCharsets.UTF_8).length <= 1024);
@@ -281,12 +333,12 @@ class UserQueryApplicationServiceTest {
           if (finalStage)
             f.afterCommit =
                 () -> {
-                  if (f.commits.get() == 1) f.connectionFault = fault;
+                  if (f.commits.get() == FIRST_AUTH_COMMIT) f.connectionFault = fault;
                 };
           else f.connectionFault = fault;
           deny(() -> service(f).process(request));
           assertEquals(0, f.live.get());
-          f.connectionFault = "none";
+          f.connectionFault = NO_FAULT;
           f.afterCommit = () -> {};
           assertEquals(0, f.inboxCount());
         }
@@ -315,7 +367,7 @@ class UserQueryApplicationServiceTest {
         var fault = new UserCommandFaults();
         fault.sqlPart = "update schubert.request_inbox";
         fault.updateCount = 0;
-        fault.fault = close ? "statementClose" : "none";
+        fault.fault = close ? "statementClose" : NO_FAULT;
         f.sqlFault = fault;
         deny(() -> service(f).process(request));
         assertEquals(0, f.inboxCount());
@@ -398,13 +450,14 @@ class UserQueryApplicationServiceTest {
       seed(f);
       f.afterCommit =
           () -> {
-            if (f.commits.get() == 2) f.connectionFault = "close";
+            if (f.commits.get() == QUERY_RESULT_COMMIT) f.connectionFault = "close";
           };
       deny(() -> service(f).process(request));
       assertEquals(1, f.inboxCount());
       f.afterCommit = () -> {};
-      f.connectionFault = "none";
-      assertArrayEquals(expected(request, "0200", 2, 3, 0), service(f).process(request));
+      f.connectionFault = NO_FAULT;
+      assertArrayEquals(
+          expected(request, SYSTEM_ERROR_RESULT, 2, 3, 0), service(f).process(request));
       seed(f);
       f.fingerprints.close();
       deny(() -> service(f).process(request));
@@ -437,9 +490,9 @@ class UserQueryApplicationServiceTest {
                           input(false, 0, null, distinct ? new UUID(110, n + 1) : MESSAGE, 1);
                       byte[] actual = service.process(request);
                       String code = new String(actual, 208, 4, StandardCharsets.US_ASCII);
-                      if (code.equals("0000")) initial.incrementAndGet();
+                      if (code.equals(SUCCESS_RESULT)) initial.incrementAndGet();
                       else {
-                        assertEquals("0200", code);
+                        assertEquals(SYSTEM_ERROR_RESULT, code);
                         repeated.incrementAndGet();
                       }
                       byte[] expected = expected(request, code, 1, 3, 0);
@@ -478,7 +531,7 @@ class UserQueryApplicationServiceTest {
                       try {
                         byte[] actual = service.process(request);
                         assertTrue(
-                            List.of("0000", "0200")
+                            List.of(SUCCESS_RESULT, SYSTEM_ERROR_RESULT)
                                 .contains(new String(actual, 208, 4, StandardCharsets.US_ASCII)));
                         success.incrementAndGet();
                       } catch (PermanentProtocolException rejected) {
@@ -501,7 +554,8 @@ class UserQueryApplicationServiceTest {
       var request = input(false, 0, null, MESSAGE, 1);
       service(f).process(request);
       f.sql(
-          "update schubert.request_inbox set processing_state='PROCESSING',completed_at=null,result_ref_type=null,response_layout_id=null,response_version=null,response_body_encrypted=null,response_key_version=null");
+          "update schubert.request_inbox set"
+              + " processing_state='PROCESSING',completed_at=null,result_ref_type=null,response_layout_id=null,response_version=null,response_body_encrypted=null,response_key_version=null");
       deny(() -> service(f).process(request));
       assertEquals(1, f.inboxCount());
     }
@@ -514,8 +568,10 @@ class UserQueryApplicationServiceTest {
       for (String change :
           List.of(
               "delete from schubert.request_inbox",
-              "update schubert.request_inbox set response_body_encrypted=set_byte(response_body_encrypted,30,1-get_byte(response_body_encrypted,30)%2)",
-              "update schubert.request_inbox set completed_at=completed_at+interval '1 millisecond'",
+              "update schubert.request_inbox set"
+                  + " response_body_encrypted=set_byte(response_body_encrypted,30,1-get_byte(response_body_encrypted,30)%2)",
+              "update schubert.request_inbox set completed_at=completed_at+interval '1"
+                  + " millisecond'",
               "update schubert.request_inbox set response_key_version='gone'",
               "update schubert.request_inbox set request_fingerprint_hmac=repeat('0',64)")) {
         seed(f);
@@ -523,7 +579,7 @@ class UserQueryApplicationServiceTest {
         service.process(request);
         f.afterCommit =
             () -> {
-              if (f.commits.get() == 3)
+              if (f.commits.get() == REPLAY_AUTH_COMMIT)
                 try (var c = f.db.admin();
                     var s = c.createStatement()) {
                   s.executeUpdate(change);
@@ -542,7 +598,8 @@ class UserQueryApplicationServiceTest {
           List.of(
               "update schubert.request_inbox set response_key_version='gone'",
               "update schubert.request_inbox set fingerprint_key_version='gone'",
-              "update schubert.request_inbox set response_body_encrypted=set_byte(response_body_encrypted,30,1-get_byte(response_body_encrypted,30)%2)")) {
+              "update schubert.request_inbox set"
+                  + " response_body_encrypted=set_byte(response_body_encrypted,30,1-get_byte(response_body_encrypted,30)%2)")) {
         seed(f);
         service(f).process(request);
         f.sql(change);
@@ -594,14 +651,14 @@ class UserQueryApplicationServiceTest {
         var requests = receiver.createConsumer(requestQueue);
         var replies = observer.createConsumer(replyQueue);
         var dlq = observer.createConsumer(dlqQueue)) {
-      for (String point : List.of("createProducer", "commit", "database"))
+      for (String point : List.of("createProducer", "commit", DATABASE_FAULT_POINT))
         try (var f = new UserApplicationFixture(database)) {
           seed(f);
           var request = input(false, 0, null, MESSAGE, 1);
           var listener =
               new dev.codex.schubert.nk.api.messaging.inbound.SyncRequestListener(
                   service(f), Clock.fixed(NOW, ZoneOffset.UTC));
-          if (point.equals("database")) f.connectionFault = "open";
+          if (point.equals(DATABASE_FAULT_POINT)) f.connectionFault = "open";
           var failing =
               (jakarta.jms.JMSContext)
                   java.lang.reflect.Proxy.newProxyInstance(
@@ -618,19 +675,24 @@ class UserQueryApplicationServiceTest {
           UserMutationApplicationServiceTest.send(producer, requestQueue, request);
           var first = requests.receive(5000);
           assertNotNull(first);
-          if (point.equals("database")) deny(() -> listener.onMessage(failing, first));
+          if (point.equals(DATABASE_FAULT_POINT)) deny(() -> listener.onMessage(failing, first));
           else
             assertThrows(
                 jakarta.jms.JMSRuntimeException.class, () -> listener.onMessage(failing, first));
           assertNull(replies.receive(250));
-          assertEquals(point.equals("database") ? 0 : 1, f.inboxCount());
-          f.connectionFault = "none";
+          assertEquals(point.equals(DATABASE_FAULT_POINT) ? 0 : 1, f.inboxCount());
+          f.connectionFault = NO_FAULT;
           var retry = requests.receive(5000);
           assertNotNull(retry);
           assertEquals(2, retry.getIntProperty("JMSXDeliveryCount"));
           listener.onMessage(receiver, retry);
           assertArrayEquals(
-              expected(request, point.equals("database") ? "0000" : "0200", f.ids.get(), 3, 0),
+              expected(
+                  request,
+                  point.equals(DATABASE_FAULT_POINT) ? SUCCESS_RESULT : SYSTEM_ERROR_RESULT,
+                  f.ids.get(),
+                  3,
+                  0),
               brokerBody(replies.receive(5000)));
           var frozen = f.inboxMetadata();
           f.sql(
@@ -640,7 +702,8 @@ class UserQueryApplicationServiceTest {
           assertNotNull(duplicate);
           listener.onMessage(receiver, duplicate);
           assertArrayEquals(
-              expected(request, "0200", f.ids.get(), 3, 0), brokerBody(replies.receive(5000)));
+              expected(request, SYSTEM_ERROR_RESULT, f.ids.get(), 3, 0),
+              brokerBody(replies.receive(5000)));
           assertEquals(frozen, f.inboxMetadata());
           UserMutationApplicationServiceTest.send(
               producer, requestQueue, input(false, 0, "changed", MESSAGE, 1));
@@ -699,7 +762,8 @@ class UserQueryApplicationServiceTest {
   static void seed(UserApplicationFixture f) throws Exception {
     f.seed();
     f.sql(
-        "update schubert.app_users set password_changed_at='2026-09-08T00:01:00Z',created_at='2026-09-08T00:01:00Z',updated_at='2026-09-08T00:01:00Z'");
+        "update schubert.app_users set"
+            + " password_changed_at='2026-09-08T00:01:00Z',created_at='2026-09-08T00:01:00Z',updated_at='2026-09-08T00:01:00Z'");
   }
 
   static WireMessage<FixedPayload> input(
@@ -712,7 +776,7 @@ class UserQueryApplicationServiceTest {
         new CommonHeader(
             "SCHBNK01",
             1,
-            new LayoutId(detail ? "UDTREQ01" : "USRREQ01"),
+            new LayoutId(detail ? "UDTREQ01" : SEARCH_LAYOUT),
             1,
             MessageKind.REQUEST,
             InteractionKind.SYNCHRONOUS,
@@ -743,8 +807,8 @@ class UserQueryApplicationServiceTest {
             target,
             false);
     put(expected, 113, message.header().authenticationContext().orElseThrow().wireValue());
-    if (code.equals("0000") || code.equals("0200")) {
-      if (message.header().layoutId().value().equals("USRREQ01")) {
+    if (code.equals(SUCCESS_RESULT) || code.equals(SYSTEM_ERROR_RESULT)) {
+      if (message.header().layoutId().value().equals(SEARCH_LAYOUT)) {
         for (int i = 0; i < Math.min(2, count); i++) put(expected, 304 + i * 168 + 76, "ADMIN");
       } else put(expected, 430, "001");
     }
@@ -756,7 +820,9 @@ class UserQueryApplicationServiceTest {
         var s = c.createStatement();
         var r =
             s.executeQuery(
-                "select processing_state,response_layout_id,response_version,response_body_encrypted,response_key_version,completed_at from schubert.request_inbox")) {
+                "select"
+                    + " processing_state,response_layout_id,response_version,response_body_encrypted,response_key_version,completed_at"
+                    + " from schubert.request_inbox")) {
       assertTrue(r.next());
       var completion =
           new InboxCompletion(

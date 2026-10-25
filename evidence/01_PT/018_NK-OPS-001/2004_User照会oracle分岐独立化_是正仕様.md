@@ -1,5 +1,7 @@
 # User照会oracle分岐独立化・是正仕様
 
+静的品質追補：PG9902原30PMD/21CSは保持し、BUG1779/YKT1530を修正前起票。二Testのwildcard20/複数宣言1を明示import/宣言分離へ、重複literal10は各Test内の独立固定literal constantへ機械的集約する（Production constant参照なし）。oracle構造検査は当Testの既承認literal宣言を独立照合して展開し、固定値/field順/type/元fixture値・assertionを維持する。意図的NULL故障注入や自己fixture/借用資源のPMDは原source/ownershipを個別に分類し、真の問題がなければ動作変更・抑制でraw0にしない。旧同source成功の確認再演はせず、変更後に必要なcompile/staticを新sourceで行う。
+
 追補：元569f候補のPG9900はAPI testCompileで真正1、共有helperの外部UserQueryApplicationServiceTest一caller更新漏れ（BUG1778/YKT1529）。元四callに加え当一callerも入力fixtureのdetail boolからliteral layoutを渡す。元manifest/Sourceを保全、新sourceで必要compileを完走する。五callerは二Test class内に存在し、四ADM methodの記録と別sourceの成功へ算術加算しない。
 
 2026-10-26、群G13_USER_QUERY_EXPECTED_SELECTOR_REPAIR_V1/.5-2-5pp cap10、BUG1777/YKT1528/2003、変更担当G13.07/既主費用P01001保持。Test-only変更でProduction Main/外部wire/RD/UI/SS/fixture/依存/POMは不変更。
