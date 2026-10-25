@@ -266,7 +266,7 @@ class UserQueryRequestTest {
         () -> list(null, null, null, 2, MESSAGE).validateResponse(page(1, 51, 1, 50)));
     for (var wrong :
         List.of(page(0, 0, 0, 50), page(0, 0, 1, 49), page(1, 0, 1, 50), page(0, 1, 1, 50)))
-      assertThrows(RuntimeException.class, () -> list.validateResponse(wrong));
+      assertThrows(IllegalArgumentException.class, () -> list.validateResponse(wrong));
     try (var f = new UserApplicationFixture(database)) {
       f.seed();
       var repo = new UserQueryRepository();

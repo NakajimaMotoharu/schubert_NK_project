@@ -171,7 +171,9 @@ class LogRequestTest {
       try (var admin = db.admin();
           var sql = admin.createStatement()) {
         sql.executeUpdate(
-            "insert into schubert.app_logs(logged_at,service,category,level,action,message,details) values ('2026-09-08T00:00:00Z','API','SECURITY','WARN','Exact','É_%', '{}'::jsonb)");
+            "insert into schubert.app_logs(logged_at,service,category,level,action,message,details)"
+                + " values ('2026-09-08T00:00:00Z','API','SECURITY','WARN','Exact','É_%',"
+                + " '{}'::jsonb)");
       }
       try (var c = db.transaction()) {
         c.setReadOnly(true);
@@ -202,10 +204,14 @@ class LogRequestTest {
         c.commit();
       }
       try (var c = db.api()) {
-        assertThrows(RuntimeException.class, () -> request.query(repo, c, ADMIN));
+        assertThrows(
+            dev.codex.schubert.nk.api.persistence.LogQueryException.class,
+            () -> request.query(repo, c, ADMIN));
       }
       try (var c = db.transaction()) {
-        assertThrows(RuntimeException.class, () -> request.query(repo, c, ADMIN));
+        assertThrows(
+            dev.codex.schubert.nk.api.persistence.LogQueryException.class,
+            () -> request.query(repo, c, ADMIN));
       }
       try (var c = db.api();
           var sql = c.createStatement();
