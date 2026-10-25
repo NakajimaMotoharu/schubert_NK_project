@@ -1,5 +1,7 @@
 # PGPT成果物一覧・進捗
 
+2026-10-25最新：1874/1875/source9f7a32156、Mainに保持済み観測assembly/既Life remainingを接続し新8/1成功。正常六0/CS-SB0・PMD2個別適用性判定、全1843・旧1842同byte/251owner/五arch0。全Main実counter L12/176 M4/34 C1/1 B0/18でProgram PT/四100未完、actual/native等HOLD。技術一意874=既856四100部品ID/42Main＋部分18、正式1964-53/原190新受入0/工数nullを分離。共有59残41、元90捕捉下限84/不明2/正確null・80大型抑制、次短工程/必要検証・保全へ継続。
+
 2026-10-25最新：1872/1873/source6c271f74d、Lifeに最初停止予算/remaining供給を実装し新10methodだけ普通fixture成功、normal六0/CS-SB0・PMD9中legacy2未分類。全二class実coverage L35/67M9/19C1/2B8/14でProgram PT未完・四100未受入を明示。既856ID/42Main四100部品と今回部分成功10を分離（技術一意ID計866）、全1843/二物理差・250owner/五arch0。元90/捕捉下限83・不明2/正確null・80大型抑制を維持、正式1964-53/原190新受入0/工数null・QA051final/G078379/actualHOLD不変更。次短い許可工程/必要検証・保全へ。
 
 2026-10-25最新：1870/1871/sourceecfcbf9f6、API-local初回通知の60秒予算を新18/1で確認、全一MainL24M5C1B12四100/CS-SB0・PMD2個別判断/全1843・248owner/五arch0。clock失敗/逆行/期限後sticky0・signed wrap・同時begin一回、resource/TERM操作0。技術856新ID/42Main（＋18/1）/config静的5、正式1964-53/原190新受入0/工数nullを区別。元共有90の捕捉下限82/不明2/正確null・80大型群抑制を適用、次は短いLife供給接続PG/PT/保全。actual/native/全451/QA051final/G078379は未受入HOLD。

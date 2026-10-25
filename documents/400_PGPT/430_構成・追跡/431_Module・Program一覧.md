@@ -1,5 +1,7 @@
 # Module・Program一覧
 
+2026-10-25追加trace：NK-OPS-001/PG-D639/1874-75、ApiProcessMain prepareObservations/closeObservations/startNative assembly→APIOBSBOOT001～008、RD171/UI252/SS311342343351、source9f7a32156、canonical/costP018-05・参照P018-09追加0。9196 normal六→9198新8→9200全Main実L12/176M4/34C1/1B0/18（四100未完）→9202全1843/旧1842同byte・251owner/五arch0。実業務continuation token列保持。actual startup/producer/native/全451未受入HOLD。
+
 2026-10-25追加trace：NK-OPS-001/PG-D638/1872-73、ApiProcessLifetime ctor/stop/fail/remainingStopNanos/close→LIFEBUDGET001～010だけmethod選択、owner/costP018-05・P018-09参照追加0。RD171/UI252/SS312321342351、source6c271f74d。9182v2正常六→9184原25e78d19実10→9186原d852e44b全二class実L35/67M9/19C1/2B8/14（四100=false）→9188原40935dee全1843・旧1841byte/inner debug差・250owner/五arch0。旧Test/他新9本文保持、旧guard/hook/TERM未実行・PMD legacy2未分類/Program PT未完を維持、全451/actualは未受入HOLD。
 
 2026-10-25追加trace：NK-OPS-001/PG-D637/1870-71、bootstrap.ApiStopBudget ctor/begin/remainingNanos/time→APISTOP001～018、owner/costWBS-P018-05・P018-09参照追加0。RD171/UI252/SS342351、sourceecfcbf9f6。9168 normal六→9170原3c87169a新18/1→9172原cf2f8da6全一MainL24M5C1B12四100/CS-SB0・PMD2個別根拠→9174v2原ebdbb146全1843・旧1842同byte/248owner/五arch0/17反例。旧246canonical mapping保持・新2pathだけ明示rule、unknownは推定assign0。現Life/Mainへの供給・actual/native/全451は別未受入HOLD。
