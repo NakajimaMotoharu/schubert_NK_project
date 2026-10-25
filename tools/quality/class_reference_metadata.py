@@ -44,6 +44,7 @@ def read(raw):
         if not SYMBOL.fullmatch(value):raise ValueError('bounded class symbol required')
         return value
     u2();identity=class_name(u2());super_class=u2()
+    if identity is None:raise ValueError('non-array class identity required')
     if super_class:class_name(super_class)
     for _ in range(u2()):class_name(u2())
     def attributes(number,top=False):
@@ -67,7 +68,7 @@ def read(raw):
             owner,name_type=value;declaring=class_name(owner);name,_=item(name_type,12)
             if declaring=='java/lang/Class' and utf(name) in ('forName','getMethod','getDeclaredMethod','getDeclaredMethods','getConstructor','getDeclaredConstructor','getField','getDeclaredField'):
                 reflective=True
-            if declaring.startswith(('java/lang/invoke/MethodHandles','java/lang/invoke/MethodHandle')) and utf(name).startswith(('lookup','privateLookup','find','unreflect','invoke')):
+            if declaring is not None and declaring.startswith(('java/lang/invoke/MethodHandles','java/lang/invoke/MethodHandle')) and utf(name).startswith(('lookup','privateLookup','find','unreflect','invoke')):
                 reflective=True
     return dict(className=identity,sourceFile=sources[0],references=sorted(references),reflectiveOrDynamicLookup=reflective)
 
@@ -85,13 +86,17 @@ def source_closure(direct,edges,unresolved):
     raise ValueError('finite monotone source graph must converge')
 
 def vectors():
-    def fixture(target_tag=7,duplicate_source=False,trailer=b'',target='p/Target'):
+    def fixture(target_tag=7,duplicate_source=False,trailer=b'',target='p/Target',member=False,method='clone'):
         constants=[]
         def utf(value):
             raw=value.encode();constants.append(b'\1'+struct.pack('>H',len(raw))+raw);return len(constants)
         def single(tag,index):constants.append(bytes([tag])+struct.pack('>H',index));return len(constants)
         identity=single(7,utf('p/Fixture'));source_name=utf('SourceFile');source=utf('Fixture.java')
-        single(target_tag,utf(target))
+        target_index=single(target_tag,utf(target))
+        if member:
+            name=utf(method);desc=utf('()Ljava/lang/Object;')
+            constants.append(b'\x0c'+struct.pack('>HH',name,desc));name_type=len(constants)
+            constants.append(b'\x0a'+struct.pack('>HH',target_index,name_type))
         attrs=struct.pack('>HIH',source_name,2,source)
         header=b'\xca\xfe\xba\xbe'+struct.pack('>HHH',0,69,len(constants)+1)+b''.join(constants)
         return header+struct.pack('>HHHHHHH',0,identity,0,0,0,0,2 if duplicate_source else 1)+attrs+(attrs if duplicate_source else b'')+trailer
@@ -103,6 +108,10 @@ def vectors():
     assert read(fixture(target='[[I'))['references']==['p/Fixture']
     assert read(fixture(target='java/lang/reflect/Method'))['reflectiveOrDynamicLookup'] is True
     assert read(fixture(target='java/lang/invoke/MethodHandles$Lookup'))['reflectiveOrDynamicLookup'] is False
+    assert read(fixture(target='[I',member=True))['reflectiveOrDynamicLookup'] is False
+    assert 'p/Target' in read(fixture(target='[Lp/Target;',member=True))['references']
+    assert read(fixture(target='java/lang/Class',member=True,method='forName'))['reflectiveOrDynamicLookup'] is True
+    assert read(fixture(target='java/lang/Class',member=True,method='getName'))['reflectiveOrDynamicLookup'] is False
     for raw in (fixture()[:-1],fixture(duplicate_source=True),fixture(trailer=b'x'),b'bad'):
         try:read(raw)
         except ValueError:pass
@@ -113,4 +122,4 @@ def vectors():
     assert owners['a']==owners['b']==owners['d']=={'WBS-P001-01'} and owners['c']=={'WBS-P001-01','WBS-P002-01'}
     unknown['a']={'MISSING'};owners,held=source_closure(direct,edges,unknown)
     assert all(held[key]=={'MISSING'} for key in direct)
-    return 14
+    return 18
