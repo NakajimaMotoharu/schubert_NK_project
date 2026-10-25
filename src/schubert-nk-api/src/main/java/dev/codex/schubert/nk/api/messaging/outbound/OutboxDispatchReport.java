@@ -7,7 +7,7 @@ public record OutboxDispatchReport(int claimed, int sent, int failed, int leaseL
         || sent < 0
         || failed < 0
         || leaseLost < 0
-        || claimed != sent + failed + leaseLost) {
+        || claimed != (long) sent + failed + leaseLost) {
       throw new IllegalArgumentException("outbox dispatch counters are inconsistent");
     }
   }

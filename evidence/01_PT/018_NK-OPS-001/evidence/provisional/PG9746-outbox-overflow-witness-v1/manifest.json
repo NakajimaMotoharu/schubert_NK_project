@@ -1,0 +1,73 @@
+{
+  "actualExit": 1,
+  "bug": "BUG-1760",
+  "defectReproduced": true,
+  "expectedPreFixWitnessExit": 1,
+  "externalActions": 0,
+  "formalUpdated": false,
+  "helperSha256": "dbcf4a1bb2434dbf0f632e41beb37bc969db575e23f8ee46636715ece18c6a38",
+  "invocation": {
+    "actualPythonCommand": [
+      "python3",
+      "-B",
+      "tools/quality/pg9746_outbox_overflow_witness.py"
+    ],
+    "arbitraryArgumentsRecorded": false,
+    "entrypointPath": "tools/quality/pg9746_outbox_overflow_witness.py",
+    "entrypointSha256": "b489ea99d1acede19458c9c05f4dddd4d9dc7360b956257ac73cb2197ee87070",
+    "helperPath": "tools/quality/host_tool_invocation.py",
+    "helperSha256": "85d616a3db4ff47f4c95ae2e0dd57954bc2b09f28b8f2a685b986e5621545c46",
+    "libraryPath": "tools/quality/pg9746_outbox_overflow_witness.py",
+    "librarySha256": "b489ea99d1acede19458c9c05f4dddd4d9dc7360b956257ac73cb2197ee87070",
+    "loadedProjectPythonSources": {
+      "tools/quality/g07_host_class_provenance_inputs.py": "a676cb3e4145177c3c243722d737592ce7d44c3f29cfe4f670662ef7651f046b",
+      "tools/quality/host_tool_invocation.py": "85d616a3db4ff47f4c95ae2e0dd57954bc2b09f28b8f2a685b986e5621545c46",
+      "tools/quality/pg9346_direct_companion_jdk_post.py": "40814dffc4f33b120a67f06bfff62080921bc479ef575457dc81e992488b65bb",
+      "tools/quality/pg9746_outbox_overflow_witness.py": "b489ea99d1acede19458c9c05f4dddd4d9dc7360b956257ac73cb2197ee87070"
+    },
+    "provenance": "OBSERVED_SYS_ARGV_AND_ORIG_ARGV_NOT_RECONSTRUCTED"
+  },
+  "jarPath": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg9694-semantic-direct-fixed-six-compile-v1/snapshot/src/schubert-nk-api/target/schubert-nk-api-0.1.0-SNAPSHOT.jar",
+  "jarSha256": "558dba0bda9f02a769d183aaf81c6504ea3c8bf3370293fab8764d4dc30d7d95",
+  "newAccepted": 0,
+  "normalManifestSha256": "7d2e18f86d2bc9e5c61473da8b8924aa7c6668bf8903541d5502902d2dac1d7a",
+  "productPtPassCount": 0,
+  "source": "fd3d04df5710ca28f0e34f919cbc103e569a607b",
+  "stages": [
+    {
+      "actualExit": 0,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+        "--release",
+        "25",
+        "-proc:none",
+        "-Xlint:all",
+        "-Werror",
+        "-cp",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg9694-semantic-direct-fixed-six-compile-v1/snapshot/src/schubert-nk-api/target/schubert-nk-api-0.1.0-SNAPSHOT.jar",
+        "-d",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg9746-outbox-overflow-witness-v1/reader",
+        "/home/mini/codex/project1/work/pgpt-foundation/tools/quality/architecture/OutboxReportOverflowWitness.java"
+      ],
+      "endUTC": "2026-10-25T12:55:36.889304+00:00",
+      "startUTC": "2026-10-25T12:55:36.424025+00:00",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "timedOut": false
+    },
+    {
+      "actualExit": 1,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-cp",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg9746-outbox-overflow-witness-v1/reader:/home/mini/codex/project1/work/pgpt-runs/PG379/pg9694-semantic-direct-fixed-six-compile-v1/snapshot/src/schubert-nk-api/target/schubert-nk-api-0.1.0-SNAPSHOT.jar",
+        "OutboxReportOverflowWitness"
+      ],
+      "endUTC": "2026-10-25T12:55:36.922296+00:00",
+      "startUTC": "2026-10-25T12:55:36.889770+00:00",
+      "stderrSha256": "e668dbd63b3fe4a2a71e1d3f29451b2ecc15add48e11c9eba2fbde872cc51298",
+      "stdoutSha256": "ef52989b864c7b9b1efb5d1e39485219924ebed0c0bb40a0030d6275633331e4",
+      "timedOut": false
+    }
+  ]
+}
