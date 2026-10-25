@@ -1,0 +1,159 @@
+{
+  "actualExit": 0,
+  "actualSelectedSuites": 4,
+  "actualSelectedTests": 20,
+  "allMainClassesUnchanged": 1843,
+  "changedSourceHashes": {
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/BatchRunValueBoundaryTest.java": "9285d0ce208cf45f55f4d2c5a740e59573ef1b984d99c2ef6e41dd311462382a",
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/CleanupValueBoundaryTest.java": "cb48cfbd5ae24de7bfc4f483aba7226402f0a4443602a26ebc4fb8b675c4ed16"
+  },
+  "currentOwnerRegistryUpdated": false,
+  "currentTestClasses": 1915,
+  "ddlSourceHashes": {
+    "src/schubert-nk-api/src/main/resources/db/migration/V005__gin_functions_views_and_grants.sql": "daf64a15c753cea106b593e6da944db08f7b13c94d3f2aa4ec6626fcd8b56ff9",
+    "src/schubert-nk-api/src/main/resources/db/migration/V012__durable_inbox_inspection_progress.sql": "21e4c781a4b4c1a18240d8e47fae5bc2d11593d7b4ad05590ed10a67ebcb9411",
+    "src/schubert-nk-api/src/main/resources/db/migration/V014__durable_log_cleanup_progress.sql": "d2ba884de86c59c5815559aaf17a83b7a0546fcc7f9f48649dd744d127270229",
+    "src/schubert-nk-api/src/main/resources/db/migration/V026__web_receipt_references.sql": "a24ce25ccc80cde118f39734ef40fd3da9ab2ab61a368119aeae64f98b86fedb"
+  },
+  "effortPercent": null,
+  "externalRuntimeOperations": 0,
+  "formalUpdated": false,
+  "fullBatchModuleAccepted": false,
+  "graph9Operations": 0,
+  "independentDdlNames": [
+    "schubert.maintenance_cleanup_notifications",
+    "schubert.maintenance_cleanup_questions",
+    "schubert.maintenance_cleanup_sessions",
+    "schubert.maintenance_cleanup_message_stores",
+    "schubert.maintenance_cleanup_logs",
+    "schubert.maintenance_cleanup_web_receipt_references",
+    "schubert.maintenance_cleanup_batch_runs",
+    "schubert.maintenance_cleanup_inbox_progress",
+    "schubert.maintenance_cleanup_log_progress"
+  ],
+  "invocation": {
+    "actualPythonCommand": [
+      "python3",
+      "-B",
+      "tools/quality/pg9802_batch_boundary_quality_post.py"
+    ],
+    "arbitraryArgumentsRecorded": false,
+    "entrypointPath": "tools/quality/pg9802_batch_boundary_quality_post.py",
+    "entrypointSha256": "a5aa561a9492ec1e937add3017a77fa31c3fd9831618e61e15c1b3a3fe156566",
+    "helperPath": "tools/quality/host_tool_invocation.py",
+    "helperSha256": "85d616a3db4ff47f4c95ae2e0dd57954bc2b09f28b8f2a685b986e5621545c46",
+    "libraryPath": "tools/quality/pg9802_batch_boundary_quality_post.py",
+    "librarySha256": "a5aa561a9492ec1e937add3017a77fa31c3fd9831618e61e15c1b3a3fe156566",
+    "loadedProjectPythonSources": {
+      "tools/quality/g07_host_class_provenance_inputs.py": "a676cb3e4145177c3c243722d737592ce7d44c3f29cfe4f670662ef7651f046b",
+      "tools/quality/host_tool_invocation.py": "85d616a3db4ff47f4c95ae2e0dd57954bc2b09f28b8f2a685b986e5621545c46",
+      "tools/quality/pg9802_batch_boundary_quality_post.py": "a5aa561a9492ec1e937add3017a77fa31c3fd9831618e61e15c1b3a3fe156566"
+    },
+    "provenance": "OBSERVED_SYS_ARGV_AND_ORIG_ARGV_NOT_RECONSTRUCTED"
+  },
+  "javaPaths": 1794,
+  "mainPaths": 965,
+  "mainStaticOriginalRun": "PG9788-batch-value-static-v1",
+  "mainStaticOriginalSource": "e598a81bb4200b4e4930278b31479ff927aa025f",
+  "mainStaticProofSha256": "1c5b60cd8a2d302db816568e1ac1b0b3d56dd9f82146c6e6653d94b49af03470",
+  "mainStaticResultNotRerunOnCurrentSource": true,
+  "newAccepted": 0,
+  "newTestIds": 4,
+  "newTestSources": [
+    {
+      "canonicalCostOwner": "WBS-P017-02",
+      "canonicalOwner": "WBS-P017-02",
+      "currentOwnerRegistryUpdated": false,
+      "methodTestIds": {
+        "activationNullsValueAccessorsAndFixedDiagnostic": "PT-BAT-RUNVALUE002",
+        "cutoffBoundsNullsAndFixedRunDiagnostic": "PT-BAT-RUNVALUE001"
+      },
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/BatchRunValueBoundaryTest.java",
+      "sha256": "9285d0ce208cf45f55f4d2c5a740e59573ef1b984d99c2ef6e41dd311462382a"
+    },
+    {
+      "canonicalCostOwner": "WBS-P017-07",
+      "canonicalOwner": "WBS-P017-07",
+      "currentOwnerRegistryUpdated": false,
+      "methodTestIds": {
+        "cleanupMetadataMatchesIndependentDdlNamesAndChunkLimits": "PT-BAT-CLEANVALUE002",
+        "countsAcceptExactBoundsAndRejectEachInconsistentComponent": "PT-BAT-CLEANVALUE001"
+      },
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/CleanupValueBoundaryTest.java",
+      "sha256": "cb48cfbd5ae24de7bfc4f483aba7226402f0a4443602a26ebc4fb8b675c4ed16"
+    }
+  ],
+  "oldDynamicResultsTransferred": false,
+  "oldExecUnion": false,
+  "oldTestClassBytesUnchanged": true,
+  "oldTestClasses": 1913,
+  "physicalSelectedMainClasses": 12,
+  "productTestsExecutedByPost": 0,
+  "proofManifestHashes": {
+    "PG9796-batch-boundary-host-v1": "07de2e9687c0c97d7e5ddf99590e60c60124418750e6fcd23ba5ee9be21fcd4b",
+    "PG9798-batch-boundary-post-v1": "a87b3769564811857af87bf65851732994369b6860da7193acc31bfd56a74c47",
+    "PG9800-batch-new-test-static-v1": "c600b440e197fb54e721924a640a3035581fb60ddb4da08de53f678a44d8f25f"
+  },
+  "selectedCoverage": {
+    "BRANCH": {
+      "covered": 136,
+      "missed": 0
+    },
+    "CLASS": {
+      "covered": 12,
+      "missed": 0
+    },
+    "LINE": {
+      "covered": 160,
+      "missed": 0
+    },
+    "METHOD": {
+      "covered": 36,
+      "missed": 0
+    }
+  },
+  "selectedFourCounter100": true,
+  "source": "58913ab374ef54d138fa3fad8c80cccd03d87c10",
+  "sqlExecuted": 0,
+  "testPaths": 829,
+  "unchangedClassResourceManifestAndExternalTypeBytesOnly": true,
+  "whole451Accepted": false,
+  "wholeSixMainJarUncompressedEntriesIdentical": {
+    "api": {
+      "currentJarSha256": "b0edb59277ec40054f6e513d110aba4a353a80d394989895c3a754ccb42670e0",
+      "entries": 499,
+      "entryHashMapSha256": "bd6ca1f208221b2aa3f00ecde2ea847db28ee3d8460824b1c8e45175521bb1c4",
+      "oldJarSha256": "b10238648135db9efd01acfb1bd9eb536ee4cd96a32b0d666c271aa63256a105"
+    },
+    "batch": {
+      "currentJarSha256": "2ae52e0f528c502649ebbbfe7b6b797019a7832c9ba4a0f9ab1359af1937fb51",
+      "entries": 648,
+      "entryHashMapSha256": "83e67fbbff907d3816e12eb17e17da9e1953c6d44e74bd5bb8039a32715c048c",
+      "oldJarSha256": "55c76c03ebfad524b72231d6d84fc1f6e603012f75e7d659fd06206b53577bd8"
+    },
+    "bootstrap": {
+      "currentJarSha256": "9eba9bba93340ff01668ccf9b56ae603398ada76e2a7a2d944e44a242a1f2d8c",
+      "entries": 120,
+      "entryHashMapSha256": "e39de0788bf456ed0f01477d227454bfde5f117370a9a6b08c54899c771878c8",
+      "oldJarSha256": "d4e9c819ff44369bc47353cb2d5a19cd54fc40f8310fa22a8cf86adb23e3e8c5"
+    },
+    "protocol": {
+      "currentJarSha256": "df75f1fed42b8bcb9a2c2cc056e4fb0a2226aea4afb1e46c68ae61887e94de92",
+      "entries": 179,
+      "entryHashMapSha256": "862e787ceb14bf9d4f56312473dde004cc393c06c63e92fdeb11906f09469fd6",
+      "oldJarSha256": "86443497041160bab5295a971fc5db4dbd974296f8e9554c92380f0e735d71a8"
+    },
+    "storage": {
+      "currentJarSha256": "645496275dca686c4bf2101abeb0a4681aed66a134053865b2b54bba83823c92",
+      "entries": 83,
+      "entryHashMapSha256": "79cc75a43b3f0334de25b2c6abb1f188a0690a2378352dff059dba550a289b04",
+      "oldJarSha256": "1bd9d5ae6f8eea7869bc5f14667308143ad27cd30030927e7af68ba298f87927"
+    },
+    "web": {
+      "currentJarSha256": "78414a4f1a4bb9778f114d408f42d1cf4f9461d165209cd32d798b5ae52a7970",
+      "entries": 393,
+      "entryHashMapSha256": "75469775db9d6c5a0239f9ef8416b64f23970c3440404335da7f60c2552d9ff8",
+      "oldJarSha256": "bdb2d936782d05407f278d4e795520391c58a39f457effbc0c1109691d01b66c"
+    }
+  }
+}
