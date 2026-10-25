@@ -1,5 +1,7 @@
 # Module・Program一覧
 
+2026-10-25追加trace：NK-OPS-001/PG-D639補完/1876-77、ApiProcessMain静的factory/release→APIOBSBOOT009だけ、source3641d0f49/test bridge canonicalP018-09/primaryP018-05・追加費0。9210通常六0→9212新1/1→9214v2実全三class L14/176M6/34C1/1B0/18（四100未完）→9216全1843同byte/252owner/旧8本文保持。fixtureのdefault Hikari/全取得overrideで実pool/DB0、元成功再演0。BUG1741/YKT1492当reader scope是正、actual/native/全451HOLD。
+
 2026-10-25追加trace：NK-OPS-001/PG-D639/1874-75、ApiProcessMain prepareObservations/closeObservations/startNative assembly→APIOBSBOOT001～008、RD171/UI252/SS311342343351、source9f7a32156、canonical/costP018-05・参照P018-09追加0。9196 normal六→9198新8→9200全Main実L12/176M4/34C1/1B0/18（四100未完）→9202全1843/旧1842同byte・251owner/五arch0。実業務continuation token列保持。actual startup/producer/native/全451未受入HOLD。
 
 2026-10-25追加trace：NK-OPS-001/PG-D638/1872-73、ApiProcessLifetime ctor/stop/fail/remainingStopNanos/close→LIFEBUDGET001～010だけmethod選択、owner/costP018-05・P018-09参照追加0。RD171/UI252/SS312321342351、source6c271f74d。9182v2正常六→9184原25e78d19実10→9186原d852e44b全二class実L35/67M9/19C1/2B8/14（四100=false）→9188原40935dee全1843・旧1841byte/inner debug差・250owner/五arch0。旧Test/他新9本文保持、旧guard/hook/TERM未実行・PMD legacy2未分類/Program PT未完を維持、全451/actualは未受入HOLD。
