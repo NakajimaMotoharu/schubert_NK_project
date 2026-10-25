@@ -1,0 +1,7 @@
+# G07公開Test class digest候補選定
+
+2026-10-25、G07_TEST_CLASS_DIGEST_PREFLIGHT_V1、主WBS-G07。HEADaa9c374ae534adadfb90f522d149cebb9ef9dfab/origin一致clean、Production64446不変更。fresh09:49:32UTC used7残93/reset1793513544/secondarynull。開始.25/1/3pp、cap10、当群は選定のみで新artifact全体資格へ拡張しない。
+
+既G07残4493に、既公開9386の1910Test class metadataのdigestが現れるかを限定照合する。対象は元固定scanの公開tracked blobと公開manifestのみ。各findingの全exact captureに対し既確定公開proofと候補digestの集合閉包を確認し、physical classを未確認の候補は誤検出認定しない。候補数が0又は効果小なら拡張せず別許可PGPTへ移る。元scan/全回帰/PT/署名/VM/native/私有raw/鍵/DB/ネットワーク操作0。新scannerや拒否境界探索ではない。
+
+成果は候補finding数/全capture根拠成立見込み/未分類維持と次群選択根拠。新候補値そのものを保存せず公開既metadataへの参照だけ記録する。重複findingの元multiplicityと旧分類を保持し、元scan sourcefb9/content05d73と現在64446は別。正式1964/53・17/190/coverage/工数null/QA051final/actualHOLDは変更しない。原予実/元群費用/既cursorを保持し、開始値後付け0、現窓残10以下等以外の小群停止なし。
