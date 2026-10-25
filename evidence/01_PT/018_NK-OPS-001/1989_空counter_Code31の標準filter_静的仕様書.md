@@ -1,0 +1,9 @@
+# 空counter・Code31の標準filter静的仕様
+
+2026-10-26、WBS-G01/群2244、開始.5/2/5pp cap10。1988で確定した原空counterのCodeあり31class（synthetic19、private空record6、private空constructor6）だけの未完機構説明。1383のutility空constructor限定説明は参照し再演せず、本31の同class/全methodの説明ではないため別scopeとする。Protocol4の原16probe表も再実行せず参照し、今回は全31のfilter instruction範囲との対応を確認する。
+
+source8ba82083/normal9812、全31は9848v2/9850の完全表と当class hashで固定。製品classは実行classpathへ置かず、ASMでbytecodeをdataとしてparseして固定JaCoCo0.8.15の公開Filters.allへ渡す。IFilterContextは原flags/name/super/source/annotations/Record属性のmetadataだけ、出力はignore命令範囲の集合。target定義/初期化/メソッド呼出し、新agent/exec採取、新製品PT/compile/実Root/VM/DB/JMS/HTTP/鍵/permit/配備0。新除外設定・policy overrideなし。
+
+期待は31classのCodeありmethod全49を保持し、filter前後の実opcode命令数を明示すること。欠落/未知・merge/branch置換があれば説明未確定として止め、counter0や到達不能へ正規化しない。別JDK javapの原method/descriptor/実命令と固定filter bytecodeを照合し、synthetic clinit、private noarg constructor、record object methodsを機構別に説明する。rawcounter/未到達probeを変更せず、独立説明を実測coverageや生成除外承認にしない。
+
+全G01/451、正式1964-53/17-190/工数null/QA051final/全actualHOLD/Graph9動的/G074493/全WBS監査は別未完。許可済みの静的品質確認であり、拒否操作を探る試し実行でも製品PTの代替免除でもない。元費用/原計画・source差を保持し、工具手戻りを別記する。

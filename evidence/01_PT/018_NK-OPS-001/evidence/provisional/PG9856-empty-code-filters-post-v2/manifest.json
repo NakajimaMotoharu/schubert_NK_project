@@ -1,0 +1,133 @@
+{
+  "actualExit": 0,
+  "claimRejectionVectors": [
+    "missing-method",
+    "false-zero-code",
+    "missing-ignore",
+    "wrong-jdk-opcode",
+    "wrong-super",
+    "exemption-approved",
+    "raw-rewritten",
+    "coverage-promoted"
+  ],
+  "classes": 31,
+  "codeMethods": 49,
+  "effortPercent": null,
+  "exclusionReviewApprovalGranted": false,
+  "formalUpdated": false,
+  "historicalSuccessTransferred": false,
+  "independentMethodMechanismsSha256": "ab9cab4922381e83b5ff2ba7734cdbcbf9d632303a219c35b3c2f405ca03e202",
+  "invocation": {
+    "actualPythonCommand": [
+      "python3",
+      "-B",
+      "tools/quality/pg9856_empty_code_filters_post_v2.py"
+    ],
+    "arbitraryArgumentsRecorded": false,
+    "entrypointPath": "tools/quality/pg9856_empty_code_filters_post_v2.py",
+    "entrypointSha256": "ad1da5b627de2fbc6cad7a1730570034ceec8ebd92d70735dd7f1a393540a4b0",
+    "helperPath": "tools/quality/host_tool_invocation.py",
+    "helperSha256": "85d616a3db4ff47f4c95ae2e0dd57954bc2b09f28b8f2a685b986e5621545c46",
+    "libraryPath": "tools/quality/pg9856_empty_code_filters_post_v2.py",
+    "librarySha256": "ad1da5b627de2fbc6cad7a1730570034ceec8ebd92d70735dd7f1a393540a4b0",
+    "loadedProjectPythonSources": {
+      "tools/quality/g07_host_class_provenance_inputs.py": "a676cb3e4145177c3c243722d737592ce7d44c3f29cfe4f670662ef7651f046b",
+      "tools/quality/host_tool_invocation.py": "85d616a3db4ff47f4c95ae2e0dd57954bc2b09f28b8f2a685b986e5621545c46",
+      "tools/quality/pg9856_empty_code_filters_post_v2.py": "ad1da5b627de2fbc6cad7a1730570034ceec8ebd92d70735dd7f1a393540a4b0"
+    },
+    "provenance": "OBSERVED_SYS_ARGV_AND_ORIG_ARGV_NOT_RECONSTRUCTED"
+  },
+  "javapClasspathIsInputDataNotExecutableTargetClasspath": true,
+  "measuredCoverageComputed": false,
+  "mechanismMethodCounts": {
+    "PrivateEmptyNoArgConstructorFilter": 12,
+    "RecordsFilter": 18,
+    "SyntheticClassFilter": 19
+  },
+  "newAccepted": 0,
+  "newExclusionSettings": false,
+  "newJdkStages": [],
+  "originalDisassemblySha256": "a39e7c5a5d4c6a14a0235713b615e09c03389e0ad194051ad0328baffa297452",
+  "originalOpcodes": 794,
+  "originalPostFailure": {
+    "actualExit": 1,
+    "diagnostic": "quoted ()V display marker assumption rejected",
+    "sourceSha256": "b7b4c51304f140582ed0f5855cbd1cb281074cbc04cd4db5a4bdf545741216d4"
+  },
+  "pinnedFilterBytecodeSha256": "bd6039999e5bb43b4f10bff1d0050fdff32006e60a29bab1c01b4398a69ace8a",
+  "primaryManifestSha256": "e7bd95804e49ae9a47e1d3422d7af901c2bfaff0278141913919bc6152aed548",
+  "productTestsExecuted": 0,
+  "rawMissedProbesRewritten": false,
+  "reusedOriginalJdkStages": [
+    {
+      "actualExit": 0,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javap",
+        "-c",
+        "-p",
+        "-s",
+        "-classpath",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg9812-cleanup-values-six-compile-v1/snapshot/src/schubert-nk-api/target/schubert-nk-api-0.1.0-SNAPSHOT.jar:/home/mini/codex/project1/work/pgpt-runs/PG379/pg9812-cleanup-values-six-compile-v1/snapshot/src/schubert-nk-batch/target/schubert-nk-batch-0.1.0-SNAPSHOT.jar:/home/mini/codex/project1/work/pgpt-runs/PG379/pg9812-cleanup-values-six-compile-v1/snapshot/src/schubert-nk-bootstrap/target/schubert-nk-bootstrap-0.1.0-SNAPSHOT.jar:/home/mini/codex/project1/work/pgpt-runs/PG379/pg9812-cleanup-values-six-compile-v1/snapshot/src/schubert-nk-protocol/target/schubert-nk-protocol-0.1.0-SNAPSHOT.jar:/home/mini/codex/project1/work/pgpt-runs/PG379/pg9812-cleanup-values-six-compile-v1/snapshot/src/schubert-nk-storage/target/schubert-nk-storage-0.1.0-SNAPSHOT.jar:/home/mini/codex/project1/work/pgpt-runs/PG379/pg9812-cleanup-values-six-compile-v1/snapshot/src/schubert-nk-web/target/schubert-nk-web-0.1.0-SNAPSHOT.jar",
+        "dev.codex.schubert.nk.api.application.admin.UserAuditWriter$1",
+        "dev.codex.schubert.nk.api.application.admin.UserMutationApplicationService$InvalidMessage",
+        "dev.codex.schubert.nk.api.application.admin.UserMutationRequest$1",
+        "dev.codex.schubert.nk.api.application.admin.UserQueryApplicationService$InvalidMessage",
+        "dev.codex.schubert.nk.api.application.log.LogQueryApplicationService$InvalidMessage",
+        "dev.codex.schubert.nk.api.application.media.MediaApplicationService$AccessRejected",
+        "dev.codex.schubert.nk.api.application.question.QuestionMutationApplicationService$InvalidMessage",
+        "dev.codex.schubert.nk.api.application.question.QuestionQueryApplicationService$InvalidMessage",
+        "dev.codex.schubert.nk.api.application.question.QuestionSubmissionService$InvalidMessage",
+        "dev.codex.schubert.nk.api.application.scenario.ScenarioApplicationService$AccessRejected",
+        "dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseAdmission$1",
+        "dev.codex.schubert.nk.api.messaging.outbound.OutboxJmsSender$1",
+        "dev.codex.schubert.nk.api.storage.ScenarioFileWriter$Attempt",
+        "dev.codex.schubert.nk.api.storage.TransferStartupProbe$Ownership",
+        "dev.codex.schubert.nk.batch.file.RootServiceLauncher$1",
+        "dev.codex.schubert.nk.batch.file.StartupLaunchFiles$1",
+        "dev.codex.schubert.nk.batch.platform.MorningBackupUnitCycle$Unresolved",
+        "dev.codex.schubert.nk.batch.platform.MorningServiceReadiness$1",
+        "dev.codex.schubert.nk.batch.repository.CleanupRepository$1",
+        "dev.codex.schubert.nk.bootstrap.FixedServiceExecArguments$1",
+        "dev.codex.schubert.nk.protocol.codec.PayloadCodec$1",
+        "dev.codex.schubert.nk.protocol.file.MediaDescriptorValidator$1",
+        "dev.codex.schubert.nk.protocol.layout.FieldDefinition$1",
+        "dev.codex.schubert.nk.protocol.layout.LayoutFieldCatalog$1",
+        "dev.codex.schubert.nk.storage.ServiceCredentialId$1",
+        "dev.codex.schubert.nk.web.error.WebResultMapper$1",
+        "dev.codex.schubert.nk.web.session.JdbcWebSessionStore$InvalidStoredRow",
+        "dev.codex.schubert.nk.web.view.AnimationWatchViewModel$1",
+        "dev.codex.schubert.nk.web.view.NotificationDetailViewModel$1",
+        "dev.codex.schubert.nk.web.view.NotificationListViewModel$1",
+        "dev.codex.schubert.nk.web.view.QuestionDetailViewModel$1"
+      ],
+      "endUTC": "2026-10-25T18:26:29.633866+00:00",
+      "startUTC": "2026-10-25T18:26:29.016932+00:00",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSha256": "a39e7c5a5d4c6a14a0235713b615e09c03389e0ad194051ad0328baffa297452",
+      "timedOut": false
+    },
+    {
+      "actualExit": 0,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javap",
+        "-c",
+        "-p",
+        "-classpath",
+        "/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.core/0.8.15/org.jacoco.core-0.8.15.jar",
+        "org.jacoco.core.internal.analysis.filter.SyntheticClassFilter",
+        "org.jacoco.core.internal.analysis.filter.PrivateEmptyNoArgConstructorFilter",
+        "org.jacoco.core.internal.analysis.filter.RecordsFilter"
+      ],
+      "endUTC": "2026-10-25T18:26:29.952424+00:00",
+      "startUTC": "2026-10-25T18:26:29.634335+00:00",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSha256": "bd6039999e5bb43b4f10bff1d0050fdff32006e60a29bab1c01b4398a69ace8a",
+      "timedOut": false
+    }
+  ],
+  "source": "8ba82083ec65abc6373b8454576dcbaee7d3e621",
+  "standardFilterRemainingOpcodes": 0,
+  "targetDefinedOrInitialized": false,
+  "whole451Accepted": false,
+  "wholeG01Accepted": false
+}

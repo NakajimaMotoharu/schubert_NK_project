@@ -1,0 +1,1262 @@
+Compiled from "UserAuditWriter.java"
+class dev.codex.schubert.nk.api.application.admin.UserAuditWriter$1 {
+  static final int[] $SwitchMap$dev$codex$schubert$nk$api$security$AdminCommandAuthenticator$Mutation;
+    descriptor: [I
+
+  static {};
+    descriptor: ()V
+    Code:
+         0: invokestatic  #1                  // Method dev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation.values:()[Ldev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation;
+         3: arraylength
+         4: newarray       int
+         6: putstatic     #7                  // Field $SwitchMap$dev$codex$schubert$nk$api$security$AdminCommandAuthenticator$Mutation:[I
+         9: getstatic     #7                  // Field $SwitchMap$dev$codex$schubert$nk$api$security$AdminCommandAuthenticator$Mutation:[I
+        12: getstatic     #13                 // Field dev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation.CREATE:Ldev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation;
+        15: invokevirtual #17                 // Method dev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation.ordinal:()I
+        18: iconst_1
+        19: iastore
+        20: goto          24
+        23: astore_0
+        24: getstatic     #7                  // Field $SwitchMap$dev$codex$schubert$nk$api$security$AdminCommandAuthenticator$Mutation:[I
+        27: getstatic     #23                 // Field dev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation.ENABLE:Ldev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation;
+        30: invokevirtual #17                 // Method dev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation.ordinal:()I
+        33: iconst_2
+        34: iastore
+        35: goto          39
+        38: astore_0
+        39: getstatic     #7                  // Field $SwitchMap$dev$codex$schubert$nk$api$security$AdminCommandAuthenticator$Mutation:[I
+        42: getstatic     #26                 // Field dev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation.DISABLE:Ldev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation;
+        45: invokevirtual #17                 // Method dev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation.ordinal:()I
+        48: iconst_3
+        49: iastore
+        50: goto          54
+        53: astore_0
+        54: getstatic     #7                  // Field $SwitchMap$dev$codex$schubert$nk$api$security$AdminCommandAuthenticator$Mutation:[I
+        57: getstatic     #29                 // Field dev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation.PROMOTE:Ldev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation;
+        60: invokevirtual #17                 // Method dev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation.ordinal:()I
+        63: iconst_4
+        64: iastore
+        65: goto          69
+        68: astore_0
+        69: getstatic     #7                  // Field $SwitchMap$dev$codex$schubert$nk$api$security$AdminCommandAuthenticator$Mutation:[I
+        72: getstatic     #32                 // Field dev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation.DEMOTE:Ldev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation;
+        75: invokevirtual #17                 // Method dev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation.ordinal:()I
+        78: iconst_5
+        79: iastore
+        80: goto          84
+        83: astore_0
+        84: getstatic     #7                  // Field $SwitchMap$dev$codex$schubert$nk$api$security$AdminCommandAuthenticator$Mutation:[I
+        87: getstatic     #35                 // Field dev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation.RESET_PASSWORD:Ldev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation;
+        90: invokevirtual #17                 // Method dev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation.ordinal:()I
+        93: bipush        6
+        95: iastore
+        96: goto          100
+        99: astore_0
+       100: getstatic     #7                  // Field $SwitchMap$dev$codex$schubert$nk$api$security$AdminCommandAuthenticator$Mutation:[I
+       103: getstatic     #38                 // Field dev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation.UNLOCK:Ldev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation;
+       106: invokevirtual #17                 // Method dev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation.ordinal:()I
+       109: bipush        7
+       111: iastore
+       112: goto          116
+       115: astore_0
+       116: return
+      Exception table:
+         from    to  target type
+             9    20    23   Class java/lang/NoSuchFieldError
+            24    35    38   Class java/lang/NoSuchFieldError
+            39    50    53   Class java/lang/NoSuchFieldError
+            54    65    68   Class java/lang/NoSuchFieldError
+            69    80    83   Class java/lang/NoSuchFieldError
+            84    96    99   Class java/lang/NoSuchFieldError
+           100   112   115   Class java/lang/NoSuchFieldError
+}
+Compiled from "UserMutationApplicationService.java"
+final class dev.codex.schubert.nk.api.application.admin.UserMutationApplicationService$InvalidMessage extends java.lang.Record implements dev.codex.schubert.nk.api.application.admin.UserMutationApplicationService$Outcome {
+  private dev.codex.schubert.nk.api.application.admin.UserMutationApplicationService$InvalidMessage();
+    descriptor: ()V
+    Code:
+         0: aload_0
+         1: invokespecial #1                  // Method java/lang/Record."<init>":()V
+         4: return
+
+  public final java.lang.String toString();
+    descriptor: ()Ljava/lang/String;
+    Code:
+         0: aload_0
+         1: invokedynamic #7,  0              // InvokeDynamic #0:toString:(Ldev/codex/schubert/nk/api/application/admin/UserMutationApplicationService$InvalidMessage;)Ljava/lang/String;
+         6: areturn
+
+  public final int hashCode();
+    descriptor: ()I
+    Code:
+         0: aload_0
+         1: invokedynamic #11,  0             // InvokeDynamic #0:hashCode:(Ldev/codex/schubert/nk/api/application/admin/UserMutationApplicationService$InvalidMessage;)I
+         6: ireturn
+
+  public final boolean equals(java.lang.Object);
+    descriptor: (Ljava/lang/Object;)Z
+    Code:
+         0: aload_0
+         1: aload_1
+         2: invokedynamic #15,  0             // InvokeDynamic #0:equals:(Ldev/codex/schubert/nk/api/application/admin/UserMutationApplicationService$InvalidMessage;Ljava/lang/Object;)Z
+         7: ireturn
+}
+Compiled from "UserMutationRequest.java"
+class dev.codex.schubert.nk.api.application.admin.UserMutationRequest$1 {
+  static final int[] $SwitchMap$dev$codex$schubert$nk$api$security$AdminCommandAuthenticator$Mutation;
+    descriptor: [I
+
+  static {};
+    descriptor: ()V
+    Code:
+         0: invokestatic  #1                  // Method dev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation.values:()[Ldev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation;
+         3: arraylength
+         4: newarray       int
+         6: putstatic     #7                  // Field $SwitchMap$dev$codex$schubert$nk$api$security$AdminCommandAuthenticator$Mutation:[I
+         9: getstatic     #7                  // Field $SwitchMap$dev$codex$schubert$nk$api$security$AdminCommandAuthenticator$Mutation:[I
+        12: getstatic     #13                 // Field dev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation.CREATE:Ldev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation;
+        15: invokevirtual #17                 // Method dev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation.ordinal:()I
+        18: iconst_1
+        19: iastore
+        20: goto          24
+        23: astore_0
+        24: getstatic     #7                  // Field $SwitchMap$dev$codex$schubert$nk$api$security$AdminCommandAuthenticator$Mutation:[I
+        27: getstatic     #23                 // Field dev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation.ENABLE:Ldev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation;
+        30: invokevirtual #17                 // Method dev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation.ordinal:()I
+        33: iconst_2
+        34: iastore
+        35: goto          39
+        38: astore_0
+        39: getstatic     #7                  // Field $SwitchMap$dev$codex$schubert$nk$api$security$AdminCommandAuthenticator$Mutation:[I
+        42: getstatic     #26                 // Field dev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation.DISABLE:Ldev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation;
+        45: invokevirtual #17                 // Method dev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation.ordinal:()I
+        48: iconst_3
+        49: iastore
+        50: goto          54
+        53: astore_0
+        54: getstatic     #7                  // Field $SwitchMap$dev$codex$schubert$nk$api$security$AdminCommandAuthenticator$Mutation:[I
+        57: getstatic     #29                 // Field dev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation.PROMOTE:Ldev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation;
+        60: invokevirtual #17                 // Method dev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation.ordinal:()I
+        63: iconst_4
+        64: iastore
+        65: goto          69
+        68: astore_0
+        69: getstatic     #7                  // Field $SwitchMap$dev$codex$schubert$nk$api$security$AdminCommandAuthenticator$Mutation:[I
+        72: getstatic     #32                 // Field dev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation.DEMOTE:Ldev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation;
+        75: invokevirtual #17                 // Method dev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation.ordinal:()I
+        78: iconst_5
+        79: iastore
+        80: goto          84
+        83: astore_0
+        84: getstatic     #7                  // Field $SwitchMap$dev$codex$schubert$nk$api$security$AdminCommandAuthenticator$Mutation:[I
+        87: getstatic     #35                 // Field dev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation.RESET_PASSWORD:Ldev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation;
+        90: invokevirtual #17                 // Method dev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation.ordinal:()I
+        93: bipush        6
+        95: iastore
+        96: goto          100
+        99: astore_0
+       100: getstatic     #7                  // Field $SwitchMap$dev$codex$schubert$nk$api$security$AdminCommandAuthenticator$Mutation:[I
+       103: getstatic     #38                 // Field dev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation.UNLOCK:Ldev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation;
+       106: invokevirtual #17                 // Method dev/codex/schubert/nk/api/security/AdminCommandAuthenticator$Mutation.ordinal:()I
+       109: bipush        7
+       111: iastore
+       112: goto          116
+       115: astore_0
+       116: return
+      Exception table:
+         from    to  target type
+             9    20    23   Class java/lang/NoSuchFieldError
+            24    35    38   Class java/lang/NoSuchFieldError
+            39    50    53   Class java/lang/NoSuchFieldError
+            54    65    68   Class java/lang/NoSuchFieldError
+            69    80    83   Class java/lang/NoSuchFieldError
+            84    96    99   Class java/lang/NoSuchFieldError
+           100   112   115   Class java/lang/NoSuchFieldError
+}
+Compiled from "UserQueryApplicationService.java"
+final class dev.codex.schubert.nk.api.application.admin.UserQueryApplicationService$InvalidMessage extends java.lang.Record implements dev.codex.schubert.nk.api.application.admin.UserQueryApplicationService$Outcome {
+  private dev.codex.schubert.nk.api.application.admin.UserQueryApplicationService$InvalidMessage();
+    descriptor: ()V
+    Code:
+         0: aload_0
+         1: invokespecial #1                  // Method java/lang/Record."<init>":()V
+         4: return
+
+  public final java.lang.String toString();
+    descriptor: ()Ljava/lang/String;
+    Code:
+         0: aload_0
+         1: invokedynamic #7,  0              // InvokeDynamic #0:toString:(Ldev/codex/schubert/nk/api/application/admin/UserQueryApplicationService$InvalidMessage;)Ljava/lang/String;
+         6: areturn
+
+  public final int hashCode();
+    descriptor: ()I
+    Code:
+         0: aload_0
+         1: invokedynamic #11,  0             // InvokeDynamic #0:hashCode:(Ldev/codex/schubert/nk/api/application/admin/UserQueryApplicationService$InvalidMessage;)I
+         6: ireturn
+
+  public final boolean equals(java.lang.Object);
+    descriptor: (Ljava/lang/Object;)Z
+    Code:
+         0: aload_0
+         1: aload_1
+         2: invokedynamic #15,  0             // InvokeDynamic #0:equals:(Ldev/codex/schubert/nk/api/application/admin/UserQueryApplicationService$InvalidMessage;Ljava/lang/Object;)Z
+         7: ireturn
+}
+Compiled from "LogQueryApplicationService.java"
+final class dev.codex.schubert.nk.api.application.log.LogQueryApplicationService$InvalidMessage extends java.lang.Record implements dev.codex.schubert.nk.api.application.log.LogQueryApplicationService$Outcome {
+  private dev.codex.schubert.nk.api.application.log.LogQueryApplicationService$InvalidMessage();
+    descriptor: ()V
+    Code:
+         0: aload_0
+         1: invokespecial #1                  // Method java/lang/Record."<init>":()V
+         4: return
+
+  public final java.lang.String toString();
+    descriptor: ()Ljava/lang/String;
+    Code:
+         0: aload_0
+         1: invokedynamic #7,  0              // InvokeDynamic #0:toString:(Ldev/codex/schubert/nk/api/application/log/LogQueryApplicationService$InvalidMessage;)Ljava/lang/String;
+         6: areturn
+
+  public final int hashCode();
+    descriptor: ()I
+    Code:
+         0: aload_0
+         1: invokedynamic #11,  0             // InvokeDynamic #0:hashCode:(Ldev/codex/schubert/nk/api/application/log/LogQueryApplicationService$InvalidMessage;)I
+         6: ireturn
+
+  public final boolean equals(java.lang.Object);
+    descriptor: (Ljava/lang/Object;)Z
+    Code:
+         0: aload_0
+         1: aload_1
+         2: invokedynamic #15,  0             // InvokeDynamic #0:equals:(Ldev/codex/schubert/nk/api/application/log/LogQueryApplicationService$InvalidMessage;Ljava/lang/Object;)Z
+         7: ireturn
+}
+Compiled from "MediaApplicationService.java"
+final class dev.codex.schubert.nk.api.application.media.MediaApplicationService$AccessRejected extends java.lang.RuntimeException {
+  private static final long serialVersionUID;
+    descriptor: J
+
+  private dev.codex.schubert.nk.api.application.media.MediaApplicationService$AccessRejected();
+    descriptor: ()V
+    Code:
+         0: aload_0
+         1: invokespecial #1                  // Method java/lang/RuntimeException."<init>":()V
+         4: return
+}
+Compiled from "QuestionMutationApplicationService.java"
+final class dev.codex.schubert.nk.api.application.question.QuestionMutationApplicationService$InvalidMessage extends java.lang.Record implements dev.codex.schubert.nk.api.application.question.QuestionMutationApplicationService$Outcome {
+  private dev.codex.schubert.nk.api.application.question.QuestionMutationApplicationService$InvalidMessage();
+    descriptor: ()V
+    Code:
+         0: aload_0
+         1: invokespecial #1                  // Method java/lang/Record."<init>":()V
+         4: return
+
+  public final java.lang.String toString();
+    descriptor: ()Ljava/lang/String;
+    Code:
+         0: aload_0
+         1: invokedynamic #7,  0              // InvokeDynamic #0:toString:(Ldev/codex/schubert/nk/api/application/question/QuestionMutationApplicationService$InvalidMessage;)Ljava/lang/String;
+         6: areturn
+
+  public final int hashCode();
+    descriptor: ()I
+    Code:
+         0: aload_0
+         1: invokedynamic #11,  0             // InvokeDynamic #0:hashCode:(Ldev/codex/schubert/nk/api/application/question/QuestionMutationApplicationService$InvalidMessage;)I
+         6: ireturn
+
+  public final boolean equals(java.lang.Object);
+    descriptor: (Ljava/lang/Object;)Z
+    Code:
+         0: aload_0
+         1: aload_1
+         2: invokedynamic #15,  0             // InvokeDynamic #0:equals:(Ldev/codex/schubert/nk/api/application/question/QuestionMutationApplicationService$InvalidMessage;Ljava/lang/Object;)Z
+         7: ireturn
+}
+Compiled from "QuestionQueryApplicationService.java"
+final class dev.codex.schubert.nk.api.application.question.QuestionQueryApplicationService$InvalidMessage extends java.lang.Record implements dev.codex.schubert.nk.api.application.question.QuestionQueryApplicationService$Outcome {
+  private dev.codex.schubert.nk.api.application.question.QuestionQueryApplicationService$InvalidMessage();
+    descriptor: ()V
+    Code:
+         0: aload_0
+         1: invokespecial #1                  // Method java/lang/Record."<init>":()V
+         4: return
+
+  public final java.lang.String toString();
+    descriptor: ()Ljava/lang/String;
+    Code:
+         0: aload_0
+         1: invokedynamic #7,  0              // InvokeDynamic #0:toString:(Ldev/codex/schubert/nk/api/application/question/QuestionQueryApplicationService$InvalidMessage;)Ljava/lang/String;
+         6: areturn
+
+  public final int hashCode();
+    descriptor: ()I
+    Code:
+         0: aload_0
+         1: invokedynamic #11,  0             // InvokeDynamic #0:hashCode:(Ldev/codex/schubert/nk/api/application/question/QuestionQueryApplicationService$InvalidMessage;)I
+         6: ireturn
+
+  public final boolean equals(java.lang.Object);
+    descriptor: (Ljava/lang/Object;)Z
+    Code:
+         0: aload_0
+         1: aload_1
+         2: invokedynamic #15,  0             // InvokeDynamic #0:equals:(Ldev/codex/schubert/nk/api/application/question/QuestionQueryApplicationService$InvalidMessage;Ljava/lang/Object;)Z
+         7: ireturn
+}
+Compiled from "QuestionSubmissionService.java"
+final class dev.codex.schubert.nk.api.application.question.QuestionSubmissionService$InvalidMessage extends java.lang.Record implements dev.codex.schubert.nk.api.application.question.QuestionSubmissionService$Outcome {
+  private dev.codex.schubert.nk.api.application.question.QuestionSubmissionService$InvalidMessage();
+    descriptor: ()V
+    Code:
+         0: aload_0
+         1: invokespecial #1                  // Method java/lang/Record."<init>":()V
+         4: return
+
+  public final java.lang.String toString();
+    descriptor: ()Ljava/lang/String;
+    Code:
+         0: aload_0
+         1: invokedynamic #7,  0              // InvokeDynamic #0:toString:(Ldev/codex/schubert/nk/api/application/question/QuestionSubmissionService$InvalidMessage;)Ljava/lang/String;
+         6: areturn
+
+  public final int hashCode();
+    descriptor: ()I
+    Code:
+         0: aload_0
+         1: invokedynamic #11,  0             // InvokeDynamic #0:hashCode:(Ldev/codex/schubert/nk/api/application/question/QuestionSubmissionService$InvalidMessage;)I
+         6: ireturn
+
+  public final boolean equals(java.lang.Object);
+    descriptor: (Ljava/lang/Object;)Z
+    Code:
+         0: aload_0
+         1: aload_1
+         2: invokedynamic #15,  0             // InvokeDynamic #0:equals:(Ldev/codex/schubert/nk/api/application/question/QuestionSubmissionService$InvalidMessage;Ljava/lang/Object;)Z
+         7: ireturn
+}
+Compiled from "ScenarioApplicationService.java"
+final class dev.codex.schubert.nk.api.application.scenario.ScenarioApplicationService$AccessRejected extends java.lang.RuntimeException {
+  private static final long serialVersionUID;
+    descriptor: J
+
+  private dev.codex.schubert.nk.api.application.scenario.ScenarioApplicationService$AccessRejected();
+    descriptor: ()V
+    Code:
+         0: aload_0
+         1: invokespecial #1                  // Method java/lang/RuntimeException."<init>":()V
+         4: return
+}
+Compiled from "ServiceDatabaseAdmission.java"
+class dev.codex.schubert.nk.api.bootstrap.ServiceDatabaseAdmission$1 {
+  static final int[] $SwitchMap$dev$codex$schubert$nk$storage$ServiceConfigFiles$Service;
+    descriptor: [I
+
+  static {};
+    descriptor: ()V
+    Code:
+         0: invokestatic  #1                  // Method dev/codex/schubert/nk/storage/ServiceConfigFiles$Service.values:()[Ldev/codex/schubert/nk/storage/ServiceConfigFiles$Service;
+         3: arraylength
+         4: newarray       int
+         6: putstatic     #7                  // Field $SwitchMap$dev$codex$schubert$nk$storage$ServiceConfigFiles$Service:[I
+         9: getstatic     #7                  // Field $SwitchMap$dev$codex$schubert$nk$storage$ServiceConfigFiles$Service:[I
+        12: getstatic     #13                 // Field dev/codex/schubert/nk/storage/ServiceConfigFiles$Service.API:Ldev/codex/schubert/nk/storage/ServiceConfigFiles$Service;
+        15: invokevirtual #17                 // Method dev/codex/schubert/nk/storage/ServiceConfigFiles$Service.ordinal:()I
+        18: iconst_1
+        19: iastore
+        20: goto          24
+        23: astore_0
+        24: getstatic     #7                  // Field $SwitchMap$dev$codex$schubert$nk$storage$ServiceConfigFiles$Service:[I
+        27: getstatic     #23                 // Field dev/codex/schubert/nk/storage/ServiceConfigFiles$Service.WEB:Ldev/codex/schubert/nk/storage/ServiceConfigFiles$Service;
+        30: invokevirtual #17                 // Method dev/codex/schubert/nk/storage/ServiceConfigFiles$Service.ordinal:()I
+        33: iconst_2
+        34: iastore
+        35: goto          39
+        38: astore_0
+        39: return
+      Exception table:
+         from    to  target type
+             9    20    23   Class java/lang/NoSuchFieldError
+            24    35    38   Class java/lang/NoSuchFieldError
+}
+Compiled from "OutboxJmsSender.java"
+class dev.codex.schubert.nk.api.messaging.outbound.OutboxJmsSender$1 {
+  static final int[] $SwitchMap$dev$codex$schubert$nk$api$messaging$outbound$OutboxDestination;
+    descriptor: [I
+
+  static {};
+    descriptor: ()V
+    Code:
+         0: invokestatic  #1                  // Method dev/codex/schubert/nk/api/messaging/outbound/OutboxDestination.values:()[Ldev/codex/schubert/nk/api/messaging/outbound/OutboxDestination;
+         3: arraylength
+         4: newarray       int
+         6: putstatic     #7                  // Field $SwitchMap$dev$codex$schubert$nk$api$messaging$outbound$OutboxDestination:[I
+         9: getstatic     #7                  // Field $SwitchMap$dev$codex$schubert$nk$api$messaging$outbound$OutboxDestination:[I
+        12: getstatic     #13                 // Field dev/codex/schubert/nk/api/messaging/outbound/OutboxDestination.ASYNC_WORK:Ldev/codex/schubert/nk/api/messaging/outbound/OutboxDestination;
+        15: invokevirtual #17                 // Method dev/codex/schubert/nk/api/messaging/outbound/OutboxDestination.ordinal:()I
+        18: iconst_1
+        19: iastore
+        20: goto          24
+        23: astore_0
+        24: getstatic     #7                  // Field $SwitchMap$dev$codex$schubert$nk$api$messaging$outbound$OutboxDestination:[I
+        27: getstatic     #23                 // Field dev/codex/schubert/nk/api/messaging/outbound/OutboxDestination.DLQ:Ldev/codex/schubert/nk/api/messaging/outbound/OutboxDestination;
+        30: invokevirtual #17                 // Method dev/codex/schubert/nk/api/messaging/outbound/OutboxDestination.ordinal:()I
+        33: iconst_2
+        34: iastore
+        35: goto          39
+        38: astore_0
+        39: return
+      Exception table:
+         from    to  target type
+             9    20    23   Class java/lang/NoSuchFieldError
+            24    35    38   Class java/lang/NoSuchFieldError
+}
+Compiled from "ScenarioFileWriter.java"
+final class dev.codex.schubert.nk.api.storage.ScenarioFileWriter$Attempt {
+  boolean created;
+    descriptor: Z
+
+  boolean published;
+    descriptor: Z
+
+  private dev.codex.schubert.nk.api.storage.ScenarioFileWriter$Attempt();
+    descriptor: ()V
+    Code:
+         0: aload_0
+         1: invokespecial #1                  // Method java/lang/Object."<init>":()V
+         4: return
+}
+Compiled from "TransferStartupProbe.java"
+final class dev.codex.schubert.nk.api.storage.TransferStartupProbe$Ownership {
+  private boolean part;
+    descriptor: Z
+
+  private boolean ready;
+    descriptor: Z
+
+  private dev.codex.schubert.nk.api.storage.TransferStartupProbe$Ownership();
+    descriptor: ()V
+    Code:
+         0: aload_0
+         1: invokespecial #1                  // Method java/lang/Object."<init>":()V
+         4: return
+}
+Compiled from "RootServiceLauncher.java"
+class dev.codex.schubert.nk.batch.file.RootServiceLauncher$1 {
+  static final int[] $SwitchMap$dev$codex$schubert$nk$storage$ServiceConfigFiles$Service;
+    descriptor: [I
+
+  static {};
+    descriptor: ()V
+    Code:
+         0: invokestatic  #1                  // Method dev/codex/schubert/nk/storage/ServiceConfigFiles$Service.values:()[Ldev/codex/schubert/nk/storage/ServiceConfigFiles$Service;
+         3: arraylength
+         4: newarray       int
+         6: putstatic     #7                  // Field $SwitchMap$dev$codex$schubert$nk$storage$ServiceConfigFiles$Service:[I
+         9: getstatic     #7                  // Field $SwitchMap$dev$codex$schubert$nk$storage$ServiceConfigFiles$Service:[I
+        12: getstatic     #13                 // Field dev/codex/schubert/nk/storage/ServiceConfigFiles$Service.WEB:Ldev/codex/schubert/nk/storage/ServiceConfigFiles$Service;
+        15: invokevirtual #17                 // Method dev/codex/schubert/nk/storage/ServiceConfigFiles$Service.ordinal:()I
+        18: iconst_1
+        19: iastore
+        20: goto          24
+        23: astore_0
+        24: getstatic     #7                  // Field $SwitchMap$dev$codex$schubert$nk$storage$ServiceConfigFiles$Service:[I
+        27: getstatic     #23                 // Field dev/codex/schubert/nk/storage/ServiceConfigFiles$Service.API:Ldev/codex/schubert/nk/storage/ServiceConfigFiles$Service;
+        30: invokevirtual #17                 // Method dev/codex/schubert/nk/storage/ServiceConfigFiles$Service.ordinal:()I
+        33: iconst_2
+        34: iastore
+        35: goto          39
+        38: astore_0
+        39: return
+      Exception table:
+         from    to  target type
+             9    20    23   Class java/lang/NoSuchFieldError
+            24    35    38   Class java/lang/NoSuchFieldError
+}
+Compiled from "StartupLaunchFiles.java"
+class dev.codex.schubert.nk.batch.file.StartupLaunchFiles$1 {
+  static final int[] $SwitchMap$dev$codex$schubert$nk$storage$ServiceConfigFiles$Service;
+    descriptor: [I
+
+  static {};
+    descriptor: ()V
+    Code:
+         0: invokestatic  #1                  // Method dev/codex/schubert/nk/storage/ServiceConfigFiles$Service.values:()[Ldev/codex/schubert/nk/storage/ServiceConfigFiles$Service;
+         3: arraylength
+         4: newarray       int
+         6: putstatic     #7                  // Field $SwitchMap$dev$codex$schubert$nk$storage$ServiceConfigFiles$Service:[I
+         9: getstatic     #7                  // Field $SwitchMap$dev$codex$schubert$nk$storage$ServiceConfigFiles$Service:[I
+        12: getstatic     #13                 // Field dev/codex/schubert/nk/storage/ServiceConfigFiles$Service.API:Ldev/codex/schubert/nk/storage/ServiceConfigFiles$Service;
+        15: invokevirtual #17                 // Method dev/codex/schubert/nk/storage/ServiceConfigFiles$Service.ordinal:()I
+        18: iconst_1
+        19: iastore
+        20: goto          24
+        23: astore_0
+        24: getstatic     #7                  // Field $SwitchMap$dev$codex$schubert$nk$storage$ServiceConfigFiles$Service:[I
+        27: getstatic     #23                 // Field dev/codex/schubert/nk/storage/ServiceConfigFiles$Service.WEB:Ldev/codex/schubert/nk/storage/ServiceConfigFiles$Service;
+        30: invokevirtual #17                 // Method dev/codex/schubert/nk/storage/ServiceConfigFiles$Service.ordinal:()I
+        33: iconst_2
+        34: iastore
+        35: goto          39
+        38: astore_0
+        39: return
+      Exception table:
+         from    to  target type
+             9    20    23   Class java/lang/NoSuchFieldError
+            24    35    38   Class java/lang/NoSuchFieldError
+}
+Compiled from "MorningBackupUnitCycle.java"
+final class dev.codex.schubert.nk.batch.platform.MorningBackupUnitCycle$Unresolved extends java.lang.RuntimeException {
+  private static final long serialVersionUID;
+    descriptor: J
+
+  private dev.codex.schubert.nk.batch.platform.MorningBackupUnitCycle$Unresolved();
+    descriptor: ()V
+    Code:
+         0: aload_0
+         1: invokespecial #1                  // Method java/lang/RuntimeException."<init>":()V
+         4: return
+}
+Compiled from "MorningServiceReadiness.java"
+class dev.codex.schubert.nk.batch.platform.MorningServiceReadiness$1 {
+  static final int[] $SwitchMap$dev$codex$schubert$nk$batch$platform$RootStartupContext$Service;
+    descriptor: [I
+
+  static {};
+    descriptor: ()V
+    Code:
+         0: invokestatic  #1                  // Method dev/codex/schubert/nk/batch/platform/RootStartupContext$Service.values:()[Ldev/codex/schubert/nk/batch/platform/RootStartupContext$Service;
+         3: arraylength
+         4: newarray       int
+         6: putstatic     #7                  // Field $SwitchMap$dev$codex$schubert$nk$batch$platform$RootStartupContext$Service:[I
+         9: getstatic     #7                  // Field $SwitchMap$dev$codex$schubert$nk$batch$platform$RootStartupContext$Service:[I
+        12: getstatic     #13                 // Field dev/codex/schubert/nk/batch/platform/RootStartupContext$Service.API:Ldev/codex/schubert/nk/batch/platform/RootStartupContext$Service;
+        15: invokevirtual #17                 // Method dev/codex/schubert/nk/batch/platform/RootStartupContext$Service.ordinal:()I
+        18: iconst_1
+        19: iastore
+        20: goto          24
+        23: astore_0
+        24: getstatic     #7                  // Field $SwitchMap$dev$codex$schubert$nk$batch$platform$RootStartupContext$Service:[I
+        27: getstatic     #23                 // Field dev/codex/schubert/nk/batch/platform/RootStartupContext$Service.WEB:Ldev/codex/schubert/nk/batch/platform/RootStartupContext$Service;
+        30: invokevirtual #17                 // Method dev/codex/schubert/nk/batch/platform/RootStartupContext$Service.ordinal:()I
+        33: iconst_2
+        34: iastore
+        35: goto          39
+        38: astore_0
+        39: return
+      Exception table:
+         from    to  target type
+             9    20    23   Class java/lang/NoSuchFieldError
+            24    35    38   Class java/lang/NoSuchFieldError
+}
+Compiled from "CleanupRepository.java"
+class dev.codex.schubert.nk.batch.repository.CleanupRepository$1 {
+  static final int[] $SwitchMap$dev$codex$schubert$nk$batch$repository$CleanupKind;
+    descriptor: [I
+
+  static {};
+    descriptor: ()V
+    Code:
+         0: invokestatic  #1                  // Method dev/codex/schubert/nk/batch/repository/CleanupKind.values:()[Ldev/codex/schubert/nk/batch/repository/CleanupKind;
+         3: arraylength
+         4: newarray       int
+         6: putstatic     #7                  // Field $SwitchMap$dev$codex$schubert$nk$batch$repository$CleanupKind:[I
+         9: getstatic     #7                  // Field $SwitchMap$dev$codex$schubert$nk$batch$repository$CleanupKind:[I
+        12: getstatic     #13                 // Field dev/codex/schubert/nk/batch/repository/CleanupKind.NOTIFICATIONS:Ldev/codex/schubert/nk/batch/repository/CleanupKind;
+        15: invokevirtual #17                 // Method dev/codex/schubert/nk/batch/repository/CleanupKind.ordinal:()I
+        18: iconst_1
+        19: iastore
+        20: goto          24
+        23: astore_0
+        24: getstatic     #7                  // Field $SwitchMap$dev$codex$schubert$nk$batch$repository$CleanupKind:[I
+        27: getstatic     #23                 // Field dev/codex/schubert/nk/batch/repository/CleanupKind.QUESTIONS:Ldev/codex/schubert/nk/batch/repository/CleanupKind;
+        30: invokevirtual #17                 // Method dev/codex/schubert/nk/batch/repository/CleanupKind.ordinal:()I
+        33: iconst_2
+        34: iastore
+        35: goto          39
+        38: astore_0
+        39: getstatic     #7                  // Field $SwitchMap$dev$codex$schubert$nk$batch$repository$CleanupKind:[I
+        42: getstatic     #26                 // Field dev/codex/schubert/nk/batch/repository/CleanupKind.SESSIONS:Ldev/codex/schubert/nk/batch/repository/CleanupKind;
+        45: invokevirtual #17                 // Method dev/codex/schubert/nk/batch/repository/CleanupKind.ordinal:()I
+        48: iconst_3
+        49: iastore
+        50: goto          54
+        53: astore_0
+        54: getstatic     #7                  // Field $SwitchMap$dev$codex$schubert$nk$batch$repository$CleanupKind:[I
+        57: getstatic     #29                 // Field dev/codex/schubert/nk/batch/repository/CleanupKind.OUTBOX:Ldev/codex/schubert/nk/batch/repository/CleanupKind;
+        60: invokevirtual #17                 // Method dev/codex/schubert/nk/batch/repository/CleanupKind.ordinal:()I
+        63: iconst_4
+        64: iastore
+        65: goto          69
+        68: astore_0
+        69: getstatic     #7                  // Field $SwitchMap$dev$codex$schubert$nk$batch$repository$CleanupKind:[I
+        72: getstatic     #32                 // Field dev/codex/schubert/nk/batch/repository/CleanupKind.LOGS:Ldev/codex/schubert/nk/batch/repository/CleanupKind;
+        75: invokevirtual #17                 // Method dev/codex/schubert/nk/batch/repository/CleanupKind.ordinal:()I
+        78: iconst_5
+        79: iastore
+        80: goto          84
+        83: astore_0
+        84: getstatic     #7                  // Field $SwitchMap$dev$codex$schubert$nk$batch$repository$CleanupKind:[I
+        87: getstatic     #35                 // Field dev/codex/schubert/nk/batch/repository/CleanupKind.WEB_RECEIPTS:Ldev/codex/schubert/nk/batch/repository/CleanupKind;
+        90: invokevirtual #17                 // Method dev/codex/schubert/nk/batch/repository/CleanupKind.ordinal:()I
+        93: bipush        6
+        95: iastore
+        96: goto          100
+        99: astore_0
+       100: getstatic     #7                  // Field $SwitchMap$dev$codex$schubert$nk$batch$repository$CleanupKind:[I
+       103: getstatic     #38                 // Field dev/codex/schubert/nk/batch/repository/CleanupKind.BATCH_RUNS:Ldev/codex/schubert/nk/batch/repository/CleanupKind;
+       106: invokevirtual #17                 // Method dev/codex/schubert/nk/batch/repository/CleanupKind.ordinal:()I
+       109: bipush        7
+       111: iastore
+       112: goto          116
+       115: astore_0
+       116: getstatic     #7                  // Field $SwitchMap$dev$codex$schubert$nk$batch$repository$CleanupKind:[I
+       119: getstatic     #41                 // Field dev/codex/schubert/nk/batch/repository/CleanupKind.INBOX_PROGRESS:Ldev/codex/schubert/nk/batch/repository/CleanupKind;
+       122: invokevirtual #17                 // Method dev/codex/schubert/nk/batch/repository/CleanupKind.ordinal:()I
+       125: bipush        8
+       127: iastore
+       128: goto          132
+       131: astore_0
+       132: getstatic     #7                  // Field $SwitchMap$dev$codex$schubert$nk$batch$repository$CleanupKind:[I
+       135: getstatic     #44                 // Field dev/codex/schubert/nk/batch/repository/CleanupKind.LOG_PROGRESS:Ldev/codex/schubert/nk/batch/repository/CleanupKind;
+       138: invokevirtual #17                 // Method dev/codex/schubert/nk/batch/repository/CleanupKind.ordinal:()I
+       141: bipush        9
+       143: iastore
+       144: goto          148
+       147: astore_0
+       148: return
+      Exception table:
+         from    to  target type
+             9    20    23   Class java/lang/NoSuchFieldError
+            24    35    38   Class java/lang/NoSuchFieldError
+            39    50    53   Class java/lang/NoSuchFieldError
+            54    65    68   Class java/lang/NoSuchFieldError
+            69    80    83   Class java/lang/NoSuchFieldError
+            84    96    99   Class java/lang/NoSuchFieldError
+           100   112   115   Class java/lang/NoSuchFieldError
+           116   128   131   Class java/lang/NoSuchFieldError
+           132   144   147   Class java/lang/NoSuchFieldError
+}
+Compiled from "FixedServiceExecArguments.java"
+class dev.codex.schubert.nk.bootstrap.FixedServiceExecArguments$1 {
+  static final int[] $SwitchMap$dev$codex$schubert$nk$storage$ServiceConfigFiles$Service;
+    descriptor: [I
+
+  static {};
+    descriptor: ()V
+    Code:
+         0: invokestatic  #1                  // Method dev/codex/schubert/nk/storage/ServiceConfigFiles$Service.values:()[Ldev/codex/schubert/nk/storage/ServiceConfigFiles$Service;
+         3: arraylength
+         4: newarray       int
+         6: putstatic     #7                  // Field $SwitchMap$dev$codex$schubert$nk$storage$ServiceConfigFiles$Service:[I
+         9: getstatic     #7                  // Field $SwitchMap$dev$codex$schubert$nk$storage$ServiceConfigFiles$Service:[I
+        12: getstatic     #13                 // Field dev/codex/schubert/nk/storage/ServiceConfigFiles$Service.WEB:Ldev/codex/schubert/nk/storage/ServiceConfigFiles$Service;
+        15: invokevirtual #17                 // Method dev/codex/schubert/nk/storage/ServiceConfigFiles$Service.ordinal:()I
+        18: iconst_1
+        19: iastore
+        20: goto          24
+        23: astore_0
+        24: getstatic     #7                  // Field $SwitchMap$dev$codex$schubert$nk$storage$ServiceConfigFiles$Service:[I
+        27: getstatic     #23                 // Field dev/codex/schubert/nk/storage/ServiceConfigFiles$Service.API:Ldev/codex/schubert/nk/storage/ServiceConfigFiles$Service;
+        30: invokevirtual #17                 // Method dev/codex/schubert/nk/storage/ServiceConfigFiles$Service.ordinal:()I
+        33: iconst_2
+        34: iastore
+        35: goto          39
+        38: astore_0
+        39: return
+      Exception table:
+         from    to  target type
+             9    20    23   Class java/lang/NoSuchFieldError
+            24    35    38   Class java/lang/NoSuchFieldError
+}
+Compiled from "PayloadCodec.java"
+class dev.codex.schubert.nk.protocol.codec.PayloadCodec$1 {
+  static final int[] $SwitchMap$dev$codex$schubert$nk$protocol$layout$WireType;
+    descriptor: [I
+
+  static {};
+    descriptor: ()V
+    Code:
+         0: invokestatic  #1                  // Method dev/codex/schubert/nk/protocol/layout/WireType.values:()[Ldev/codex/schubert/nk/protocol/layout/WireType;
+         3: arraylength
+         4: newarray       int
+         6: putstatic     #7                  // Field $SwitchMap$dev$codex$schubert$nk$protocol$layout$WireType:[I
+         9: getstatic     #7                  // Field $SwitchMap$dev$codex$schubert$nk$protocol$layout$WireType:[I
+        12: getstatic     #13                 // Field dev/codex/schubert/nk/protocol/layout/WireType.TEXT:Ldev/codex/schubert/nk/protocol/layout/WireType;
+        15: invokevirtual #17                 // Method dev/codex/schubert/nk/protocol/layout/WireType.ordinal:()I
+        18: iconst_1
+        19: iastore
+        20: goto          24
+        23: astore_0
+        24: getstatic     #7                  // Field $SwitchMap$dev$codex$schubert$nk$protocol$layout$WireType:[I
+        27: getstatic     #23                 // Field dev/codex/schubert/nk/protocol/layout/WireType.NUMERIC:Ldev/codex/schubert/nk/protocol/layout/WireType;
+        30: invokevirtual #17                 // Method dev/codex/schubert/nk/protocol/layout/WireType.ordinal:()I
+        33: iconst_2
+        34: iastore
+        35: goto          39
+        38: astore_0
+        39: getstatic     #7                  // Field $SwitchMap$dev$codex$schubert$nk$protocol$layout$WireType:[I
+        42: getstatic     #26                 // Field dev/codex/schubert/nk/protocol/layout/WireType.BOOLEAN:Ldev/codex/schubert/nk/protocol/layout/WireType;
+        45: invokevirtual #17                 // Method dev/codex/schubert/nk/protocol/layout/WireType.ordinal:()I
+        48: iconst_3
+        49: iastore
+        50: goto          54
+        53: astore_0
+        54: return
+      Exception table:
+         from    to  target type
+             9    20    23   Class java/lang/NoSuchFieldError
+            24    35    38   Class java/lang/NoSuchFieldError
+            39    50    53   Class java/lang/NoSuchFieldError
+}
+Compiled from "MediaDescriptorValidator.java"
+class dev.codex.schubert.nk.protocol.file.MediaDescriptorValidator$1 {
+  static final int[] $SwitchMap$dev$codex$schubert$nk$protocol$file$MediaType;
+    descriptor: [I
+
+  static {};
+    descriptor: ()V
+    Code:
+         0: invokestatic  #1                  // Method dev/codex/schubert/nk/protocol/file/MediaType.values:()[Ldev/codex/schubert/nk/protocol/file/MediaType;
+         3: arraylength
+         4: newarray       int
+         6: putstatic     #7                  // Field $SwitchMap$dev$codex$schubert$nk$protocol$file$MediaType:[I
+         9: getstatic     #7                  // Field $SwitchMap$dev$codex$schubert$nk$protocol$file$MediaType:[I
+        12: getstatic     #13                 // Field dev/codex/schubert/nk/protocol/file/MediaType.AUDIO:Ldev/codex/schubert/nk/protocol/file/MediaType;
+        15: invokevirtual #17                 // Method dev/codex/schubert/nk/protocol/file/MediaType.ordinal:()I
+        18: iconst_1
+        19: iastore
+        20: goto          24
+        23: astore_0
+        24: getstatic     #7                  // Field $SwitchMap$dev$codex$schubert$nk$protocol$file$MediaType:[I
+        27: getstatic     #23                 // Field dev/codex/schubert/nk/protocol/file/MediaType.VIDEO:Ldev/codex/schubert/nk/protocol/file/MediaType;
+        30: invokevirtual #17                 // Method dev/codex/schubert/nk/protocol/file/MediaType.ordinal:()I
+        33: iconst_2
+        34: iastore
+        35: goto          39
+        38: astore_0
+        39: getstatic     #7                  // Field $SwitchMap$dev$codex$schubert$nk$protocol$file$MediaType:[I
+        42: getstatic     #26                 // Field dev/codex/schubert/nk/protocol/file/MediaType.MUSIC:Ldev/codex/schubert/nk/protocol/file/MediaType;
+        45: invokevirtual #17                 // Method dev/codex/schubert/nk/protocol/file/MediaType.ordinal:()I
+        48: iconst_3
+        49: iastore
+        50: goto          54
+        53: astore_0
+        54: return
+      Exception table:
+         from    to  target type
+             9    20    23   Class java/lang/NoSuchFieldError
+            24    35    38   Class java/lang/NoSuchFieldError
+            39    50    53   Class java/lang/NoSuchFieldError
+}
+Compiled from "FieldDefinition.java"
+class dev.codex.schubert.nk.protocol.layout.FieldDefinition$1 {
+  static final int[] $SwitchMap$dev$codex$schubert$nk$protocol$layout$WireType;
+    descriptor: [I
+
+  static {};
+    descriptor: ()V
+    Code:
+         0: invokestatic  #1                  // Method dev/codex/schubert/nk/protocol/layout/WireType.values:()[Ldev/codex/schubert/nk/protocol/layout/WireType;
+         3: arraylength
+         4: newarray       int
+         6: putstatic     #7                  // Field $SwitchMap$dev$codex$schubert$nk$protocol$layout$WireType:[I
+         9: getstatic     #7                  // Field $SwitchMap$dev$codex$schubert$nk$protocol$layout$WireType:[I
+        12: getstatic     #13                 // Field dev/codex/schubert/nk/protocol/layout/WireType.TEXT:Ldev/codex/schubert/nk/protocol/layout/WireType;
+        15: invokevirtual #17                 // Method dev/codex/schubert/nk/protocol/layout/WireType.ordinal:()I
+        18: iconst_1
+        19: iastore
+        20: goto          24
+        23: astore_0
+        24: getstatic     #7                  // Field $SwitchMap$dev$codex$schubert$nk$protocol$layout$WireType:[I
+        27: getstatic     #23                 // Field dev/codex/schubert/nk/protocol/layout/WireType.NUMERIC:Ldev/codex/schubert/nk/protocol/layout/WireType;
+        30: invokevirtual #17                 // Method dev/codex/schubert/nk/protocol/layout/WireType.ordinal:()I
+        33: iconst_2
+        34: iastore
+        35: goto          39
+        38: astore_0
+        39: getstatic     #7                  // Field $SwitchMap$dev$codex$schubert$nk$protocol$layout$WireType:[I
+        42: getstatic     #26                 // Field dev/codex/schubert/nk/protocol/layout/WireType.BOOLEAN:Ldev/codex/schubert/nk/protocol/layout/WireType;
+        45: invokevirtual #17                 // Method dev/codex/schubert/nk/protocol/layout/WireType.ordinal:()I
+        48: iconst_3
+        49: iastore
+        50: goto          54
+        53: astore_0
+        54: return
+      Exception table:
+         from    to  target type
+             9    20    23   Class java/lang/NoSuchFieldError
+            24    35    38   Class java/lang/NoSuchFieldError
+            39    50    53   Class java/lang/NoSuchFieldError
+}
+Compiled from "LayoutFieldCatalog.java"
+class dev.codex.schubert.nk.protocol.layout.LayoutFieldCatalog$1 {
+  static final int[] $SwitchMap$dev$codex$schubert$nk$protocol$layout$WireType;
+    descriptor: [I
+
+  static final int[] $SwitchMap$dev$codex$schubert$nk$protocol$layout$Presence;
+    descriptor: [I
+
+  static {};
+    descriptor: ()V
+    Code:
+         0: invokestatic  #1                  // Method dev/codex/schubert/nk/protocol/layout/Presence.values:()[Ldev/codex/schubert/nk/protocol/layout/Presence;
+         3: arraylength
+         4: newarray       int
+         6: putstatic     #7                  // Field $SwitchMap$dev$codex$schubert$nk$protocol$layout$Presence:[I
+         9: getstatic     #7                  // Field $SwitchMap$dev$codex$schubert$nk$protocol$layout$Presence:[I
+        12: getstatic     #13                 // Field dev/codex/schubert/nk/protocol/layout/Presence.MANDATORY:Ldev/codex/schubert/nk/protocol/layout/Presence;
+        15: invokevirtual #17                 // Method dev/codex/schubert/nk/protocol/layout/Presence.ordinal:()I
+        18: iconst_1
+        19: iastore
+        20: goto          24
+        23: astore_0
+        24: getstatic     #7                  // Field $SwitchMap$dev$codex$schubert$nk$protocol$layout$Presence:[I
+        27: getstatic     #23                 // Field dev/codex/schubert/nk/protocol/layout/Presence.CONDITIONAL:Ldev/codex/schubert/nk/protocol/layout/Presence;
+        30: invokevirtual #17                 // Method dev/codex/schubert/nk/protocol/layout/Presence.ordinal:()I
+        33: iconst_2
+        34: iastore
+        35: goto          39
+        38: astore_0
+        39: getstatic     #7                  // Field $SwitchMap$dev$codex$schubert$nk$protocol$layout$Presence:[I
+        42: getstatic     #26                 // Field dev/codex/schubert/nk/protocol/layout/Presence.OPTIONAL:Ldev/codex/schubert/nk/protocol/layout/Presence;
+        45: invokevirtual #17                 // Method dev/codex/schubert/nk/protocol/layout/Presence.ordinal:()I
+        48: iconst_3
+        49: iastore
+        50: goto          54
+        53: astore_0
+        54: getstatic     #7                  // Field $SwitchMap$dev$codex$schubert$nk$protocol$layout$Presence:[I
+        57: getstatic     #29                 // Field dev/codex/schubert/nk/protocol/layout/Presence.FIXED:Ldev/codex/schubert/nk/protocol/layout/Presence;
+        60: invokevirtual #17                 // Method dev/codex/schubert/nk/protocol/layout/Presence.ordinal:()I
+        63: iconst_4
+        64: iastore
+        65: goto          69
+        68: astore_0
+        69: invokestatic  #32                 // Method dev/codex/schubert/nk/protocol/layout/WireType.values:()[Ldev/codex/schubert/nk/protocol/layout/WireType;
+        72: arraylength
+        73: newarray       int
+        75: putstatic     #37                 // Field $SwitchMap$dev$codex$schubert$nk$protocol$layout$WireType:[I
+        78: getstatic     #37                 // Field $SwitchMap$dev$codex$schubert$nk$protocol$layout$WireType:[I
+        81: getstatic     #40                 // Field dev/codex/schubert/nk/protocol/layout/WireType.TEXT:Ldev/codex/schubert/nk/protocol/layout/WireType;
+        84: invokevirtual #44                 // Method dev/codex/schubert/nk/protocol/layout/WireType.ordinal:()I
+        87: iconst_1
+        88: iastore
+        89: goto          93
+        92: astore_0
+        93: getstatic     #37                 // Field $SwitchMap$dev$codex$schubert$nk$protocol$layout$WireType:[I
+        96: getstatic     #45                 // Field dev/codex/schubert/nk/protocol/layout/WireType.NUMERIC:Ldev/codex/schubert/nk/protocol/layout/WireType;
+        99: invokevirtual #44                 // Method dev/codex/schubert/nk/protocol/layout/WireType.ordinal:()I
+       102: iconst_2
+       103: iastore
+       104: goto          108
+       107: astore_0
+       108: getstatic     #37                 // Field $SwitchMap$dev$codex$schubert$nk$protocol$layout$WireType:[I
+       111: getstatic     #48                 // Field dev/codex/schubert/nk/protocol/layout/WireType.BOOLEAN:Ldev/codex/schubert/nk/protocol/layout/WireType;
+       114: invokevirtual #44                 // Method dev/codex/schubert/nk/protocol/layout/WireType.ordinal:()I
+       117: iconst_3
+       118: iastore
+       119: goto          123
+       122: astore_0
+       123: return
+      Exception table:
+         from    to  target type
+             9    20    23   Class java/lang/NoSuchFieldError
+            24    35    38   Class java/lang/NoSuchFieldError
+            39    50    53   Class java/lang/NoSuchFieldError
+            54    65    68   Class java/lang/NoSuchFieldError
+            78    89    92   Class java/lang/NoSuchFieldError
+            93   104   107   Class java/lang/NoSuchFieldError
+           108   119   122   Class java/lang/NoSuchFieldError
+}
+Compiled from "ServiceCredentialId.java"
+class dev.codex.schubert.nk.storage.ServiceCredentialId$1 {
+  static final int[] $SwitchMap$dev$codex$schubert$nk$storage$ServiceConfigFiles$Service;
+    descriptor: [I
+
+  static {};
+    descriptor: ()V
+    Code:
+         0: invokestatic  #1                  // Method dev/codex/schubert/nk/storage/ServiceConfigFiles$Service.values:()[Ldev/codex/schubert/nk/storage/ServiceConfigFiles$Service;
+         3: arraylength
+         4: newarray       int
+         6: putstatic     #7                  // Field $SwitchMap$dev$codex$schubert$nk$storage$ServiceConfigFiles$Service:[I
+         9: getstatic     #7                  // Field $SwitchMap$dev$codex$schubert$nk$storage$ServiceConfigFiles$Service:[I
+        12: getstatic     #13                 // Field dev/codex/schubert/nk/storage/ServiceConfigFiles$Service.API:Ldev/codex/schubert/nk/storage/ServiceConfigFiles$Service;
+        15: invokevirtual #17                 // Method dev/codex/schubert/nk/storage/ServiceConfigFiles$Service.ordinal:()I
+        18: iconst_1
+        19: iastore
+        20: goto          24
+        23: astore_0
+        24: getstatic     #7                  // Field $SwitchMap$dev$codex$schubert$nk$storage$ServiceConfigFiles$Service:[I
+        27: getstatic     #23                 // Field dev/codex/schubert/nk/storage/ServiceConfigFiles$Service.WEB:Ldev/codex/schubert/nk/storage/ServiceConfigFiles$Service;
+        30: invokevirtual #17                 // Method dev/codex/schubert/nk/storage/ServiceConfigFiles$Service.ordinal:()I
+        33: iconst_2
+        34: iastore
+        35: goto          39
+        38: astore_0
+        39: return
+      Exception table:
+         from    to  target type
+             9    20    23   Class java/lang/NoSuchFieldError
+            24    35    38   Class java/lang/NoSuchFieldError
+}
+Compiled from "WebResultMapper.java"
+class dev.codex.schubert.nk.web.error.WebResultMapper$1 {
+  static final int[] $SwitchMap$dev$codex$schubert$nk$protocol$header$ResultCode;
+    descriptor: [I
+
+  static {};
+    descriptor: ()V
+    Code:
+         0: invokestatic  #1                  // Method dev/codex/schubert/nk/protocol/header/ResultCode.values:()[Ldev/codex/schubert/nk/protocol/header/ResultCode;
+         3: arraylength
+         4: newarray       int
+         6: putstatic     #7                  // Field $SwitchMap$dev$codex$schubert$nk$protocol$header$ResultCode:[I
+         9: getstatic     #7                  // Field $SwitchMap$dev$codex$schubert$nk$protocol$header$ResultCode:[I
+        12: getstatic     #13                 // Field dev/codex/schubert/nk/protocol/header/ResultCode.SUCCESS:Ldev/codex/schubert/nk/protocol/header/ResultCode;
+        15: invokevirtual #17                 // Method dev/codex/schubert/nk/protocol/header/ResultCode.ordinal:()I
+        18: iconst_1
+        19: iastore
+        20: goto          24
+        23: astore_0
+        24: getstatic     #7                  // Field $SwitchMap$dev$codex$schubert$nk$protocol$header$ResultCode:[I
+        27: getstatic     #23                 // Field dev/codex/schubert/nk/protocol/header/ResultCode.IDEMPOTENT_SUCCESS:Ldev/codex/schubert/nk/protocol/header/ResultCode;
+        30: invokevirtual #17                 // Method dev/codex/schubert/nk/protocol/header/ResultCode.ordinal:()I
+        33: iconst_2
+        34: iastore
+        35: goto          39
+        38: astore_0
+        39: getstatic     #7                  // Field $SwitchMap$dev$codex$schubert$nk$protocol$header$ResultCode:[I
+        42: getstatic     #26                 // Field dev/codex/schubert/nk/protocol/header/ResultCode.VALIDATION_ERROR:Ldev/codex/schubert/nk/protocol/header/ResultCode;
+        45: invokevirtual #17                 // Method dev/codex/schubert/nk/protocol/header/ResultCode.ordinal:()I
+        48: iconst_3
+        49: iastore
+        50: goto          54
+        53: astore_0
+        54: getstatic     #7                  // Field $SwitchMap$dev$codex$schubert$nk$protocol$header$ResultCode:[I
+        57: getstatic     #29                 // Field dev/codex/schubert/nk/protocol/header/ResultCode.AUTHENTICATION_FAILED:Ldev/codex/schubert/nk/protocol/header/ResultCode;
+        60: invokevirtual #17                 // Method dev/codex/schubert/nk/protocol/header/ResultCode.ordinal:()I
+        63: iconst_4
+        64: iastore
+        65: goto          69
+        68: astore_0
+        69: getstatic     #7                  // Field $SwitchMap$dev$codex$schubert$nk$protocol$header$ResultCode:[I
+        72: getstatic     #32                 // Field dev/codex/schubert/nk/protocol/header/ResultCode.SESSION_INVALID:Ldev/codex/schubert/nk/protocol/header/ResultCode;
+        75: invokevirtual #17                 // Method dev/codex/schubert/nk/protocol/header/ResultCode.ordinal:()I
+        78: iconst_5
+        79: iastore
+        80: goto          84
+        83: astore_0
+        84: getstatic     #7                  // Field $SwitchMap$dev$codex$schubert$nk$protocol$header$ResultCode:[I
+        87: getstatic     #35                 // Field dev/codex/schubert/nk/protocol/header/ResultCode.FORBIDDEN:Ldev/codex/schubert/nk/protocol/header/ResultCode;
+        90: invokevirtual #17                 // Method dev/codex/schubert/nk/protocol/header/ResultCode.ordinal:()I
+        93: bipush        6
+        95: iastore
+        96: goto          100
+        99: astore_0
+       100: getstatic     #7                  // Field $SwitchMap$dev$codex$schubert$nk$protocol$header$ResultCode:[I
+       103: getstatic     #38                 // Field dev/codex/schubert/nk/protocol/header/ResultCode.NOT_FOUND:Ldev/codex/schubert/nk/protocol/header/ResultCode;
+       106: invokevirtual #17                 // Method dev/codex/schubert/nk/protocol/header/ResultCode.ordinal:()I
+       109: bipush        7
+       111: iastore
+       112: goto          116
+       115: astore_0
+       116: getstatic     #7                  // Field $SwitchMap$dev$codex$schubert$nk$protocol$header$ResultCode:[I
+       119: getstatic     #41                 // Field dev/codex/schubert/nk/protocol/header/ResultCode.CONFLICT:Ldev/codex/schubert/nk/protocol/header/ResultCode;
+       122: invokevirtual #17                 // Method dev/codex/schubert/nk/protocol/header/ResultCode.ordinal:()I
+       125: bipush        8
+       127: iastore
+       128: goto          132
+       131: astore_0
+       132: getstatic     #7                  // Field $SwitchMap$dev$codex$schubert$nk$protocol$header$ResultCode:[I
+       135: getstatic     #44                 // Field dev/codex/schubert/nk/protocol/header/ResultCode.NOT_CANCELLABLE:Ldev/codex/schubert/nk/protocol/header/ResultCode;
+       138: invokevirtual #17                 // Method dev/codex/schubert/nk/protocol/header/ResultCode.ordinal:()I
+       141: bipush        9
+       143: iastore
+       144: goto          148
+       147: astore_0
+       148: getstatic     #7                  // Field $SwitchMap$dev$codex$schubert$nk$protocol$header$ResultCode:[I
+       151: getstatic     #47                 // Field dev/codex/schubert/nk/protocol/header/ResultCode.LOCKED:Ldev/codex/schubert/nk/protocol/header/ResultCode;
+       154: invokevirtual #17                 // Method dev/codex/schubert/nk/protocol/header/ResultCode.ordinal:()I
+       157: bipush        10
+       159: iastore
+       160: goto          164
+       163: astore_0
+       164: getstatic     #7                  // Field $SwitchMap$dev$codex$schubert$nk$protocol$header$ResultCode:[I
+       167: getstatic     #50                 // Field dev/codex/schubert/nk/protocol/header/ResultCode.TEMPORARY_FAILURE:Ldev/codex/schubert/nk/protocol/header/ResultCode;
+       170: invokevirtual #17                 // Method dev/codex/schubert/nk/protocol/header/ResultCode.ordinal:()I
+       173: bipush        11
+       175: iastore
+       176: goto          180
+       179: astore_0
+       180: getstatic     #7                  // Field $SwitchMap$dev$codex$schubert$nk$protocol$header$ResultCode:[I
+       183: getstatic     #53                 // Field dev/codex/schubert/nk/protocol/header/ResultCode.RESOURCE_LIMIT:Ldev/codex/schubert/nk/protocol/header/ResultCode;
+       186: invokevirtual #17                 // Method dev/codex/schubert/nk/protocol/header/ResultCode.ordinal:()I
+       189: bipush        12
+       191: iastore
+       192: goto          196
+       195: astore_0
+       196: return
+      Exception table:
+         from    to  target type
+             9    20    23   Class java/lang/NoSuchFieldError
+            24    35    38   Class java/lang/NoSuchFieldError
+            39    50    53   Class java/lang/NoSuchFieldError
+            54    65    68   Class java/lang/NoSuchFieldError
+            69    80    83   Class java/lang/NoSuchFieldError
+            84    96    99   Class java/lang/NoSuchFieldError
+           100   112   115   Class java/lang/NoSuchFieldError
+           116   128   131   Class java/lang/NoSuchFieldError
+           132   144   147   Class java/lang/NoSuchFieldError
+           148   160   163   Class java/lang/NoSuchFieldError
+           164   176   179   Class java/lang/NoSuchFieldError
+           180   192   195   Class java/lang/NoSuchFieldError
+}
+Compiled from "JdbcWebSessionStore.java"
+final class dev.codex.schubert.nk.web.session.JdbcWebSessionStore$InvalidStoredRow extends java.lang.RuntimeException {
+  private static final long serialVersionUID;
+    descriptor: J
+
+  private dev.codex.schubert.nk.web.session.JdbcWebSessionStore$InvalidStoredRow();
+    descriptor: ()V
+    Code:
+         0: aload_0
+         1: invokespecial #1                  // Method java/lang/RuntimeException."<init>":()V
+         4: return
+}
+Compiled from "AnimationWatchViewModel.java"
+class dev.codex.schubert.nk.web.view.AnimationWatchViewModel$1 {
+  static final int[] $SwitchMap$dev$codex$schubert$nk$protocol$layout$semantic$VideoCategory;
+    descriptor: [I
+
+  static {};
+    descriptor: ()V
+    Code:
+         0: invokestatic  #1                  // Method dev/codex/schubert/nk/protocol/layout/semantic/VideoCategory.values:()[Ldev/codex/schubert/nk/protocol/layout/semantic/VideoCategory;
+         3: arraylength
+         4: newarray       int
+         6: putstatic     #7                  // Field $SwitchMap$dev$codex$schubert$nk$protocol$layout$semantic$VideoCategory:[I
+         9: getstatic     #7                  // Field $SwitchMap$dev$codex$schubert$nk$protocol$layout$semantic$VideoCategory:[I
+        12: getstatic     #13                 // Field dev/codex/schubert/nk/protocol/layout/semantic/VideoCategory.MAIN:Ldev/codex/schubert/nk/protocol/layout/semantic/VideoCategory;
+        15: invokevirtual #17                 // Method dev/codex/schubert/nk/protocol/layout/semantic/VideoCategory.ordinal:()I
+        18: iconst_1
+        19: iastore
+        20: goto          24
+        23: astore_0
+        24: getstatic     #7                  // Field $SwitchMap$dev$codex$schubert$nk$protocol$layout$semantic$VideoCategory:[I
+        27: getstatic     #23                 // Field dev/codex/schubert/nk/protocol/layout/semantic/VideoCategory.SUBTRACK:Ldev/codex/schubert/nk/protocol/layout/semantic/VideoCategory;
+        30: invokevirtual #17                 // Method dev/codex/schubert/nk/protocol/layout/semantic/VideoCategory.ordinal:()I
+        33: iconst_2
+        34: iastore
+        35: goto          39
+        38: astore_0
+        39: getstatic     #7                  // Field $SwitchMap$dev$codex$schubert$nk$protocol$layout$semantic$VideoCategory:[I
+        42: getstatic     #26                 // Field dev/codex/schubert/nk/protocol/layout/semantic/VideoCategory.OVA:Ldev/codex/schubert/nk/protocol/layout/semantic/VideoCategory;
+        45: invokevirtual #17                 // Method dev/codex/schubert/nk/protocol/layout/semantic/VideoCategory.ordinal:()I
+        48: iconst_3
+        49: iastore
+        50: goto          54
+        53: astore_0
+        54: getstatic     #7                  // Field $SwitchMap$dev$codex$schubert$nk$protocol$layout$semantic$VideoCategory:[I
+        57: getstatic     #29                 // Field dev/codex/schubert/nk/protocol/layout/semantic/VideoCategory.OPENING:Ldev/codex/schubert/nk/protocol/layout/semantic/VideoCategory;
+        60: invokevirtual #17                 // Method dev/codex/schubert/nk/protocol/layout/semantic/VideoCategory.ordinal:()I
+        63: iconst_4
+        64: iastore
+        65: goto          69
+        68: astore_0
+        69: return
+      Exception table:
+         from    to  target type
+             9    20    23   Class java/lang/NoSuchFieldError
+            24    35    38   Class java/lang/NoSuchFieldError
+            39    50    53   Class java/lang/NoSuchFieldError
+            54    65    68   Class java/lang/NoSuchFieldError
+}
+Compiled from "NotificationDetailViewModel.java"
+class dev.codex.schubert.nk.web.view.NotificationDetailViewModel$1 {
+  static final int[] $SwitchMap$dev$codex$schubert$nk$protocol$layout$semantic$NotificationState;
+    descriptor: [I
+
+  static {};
+    descriptor: ()V
+    Code:
+         0: invokestatic  #1                  // Method dev/codex/schubert/nk/protocol/layout/semantic/NotificationState.values:()[Ldev/codex/schubert/nk/protocol/layout/semantic/NotificationState;
+         3: arraylength
+         4: newarray       int
+         6: putstatic     #7                  // Field $SwitchMap$dev$codex$schubert$nk$protocol$layout$semantic$NotificationState:[I
+         9: getstatic     #7                  // Field $SwitchMap$dev$codex$schubert$nk$protocol$layout$semantic$NotificationState:[I
+        12: getstatic     #13                 // Field dev/codex/schubert/nk/protocol/layout/semantic/NotificationState.RECEIVED:Ldev/codex/schubert/nk/protocol/layout/semantic/NotificationState;
+        15: invokevirtual #17                 // Method dev/codex/schubert/nk/protocol/layout/semantic/NotificationState.ordinal:()I
+        18: iconst_1
+        19: iastore
+        20: goto          24
+        23: astore_0
+        24: getstatic     #7                  // Field $SwitchMap$dev$codex$schubert$nk$protocol$layout$semantic$NotificationState:[I
+        27: getstatic     #23                 // Field dev/codex/schubert/nk/protocol/layout/semantic/NotificationState.PROCESSING:Ldev/codex/schubert/nk/protocol/layout/semantic/NotificationState;
+        30: invokevirtual #17                 // Method dev/codex/schubert/nk/protocol/layout/semantic/NotificationState.ordinal:()I
+        33: iconst_2
+        34: iastore
+        35: goto          39
+        38: astore_0
+        39: getstatic     #7                  // Field $SwitchMap$dev$codex$schubert$nk$protocol$layout$semantic$NotificationState:[I
+        42: getstatic     #26                 // Field dev/codex/schubert/nk/protocol/layout/semantic/NotificationState.COMPLETED:Ldev/codex/schubert/nk/protocol/layout/semantic/NotificationState;
+        45: invokevirtual #17                 // Method dev/codex/schubert/nk/protocol/layout/semantic/NotificationState.ordinal:()I
+        48: iconst_3
+        49: iastore
+        50: goto          54
+        53: astore_0
+        54: getstatic     #7                  // Field $SwitchMap$dev$codex$schubert$nk$protocol$layout$semantic$NotificationState:[I
+        57: getstatic     #29                 // Field dev/codex/schubert/nk/protocol/layout/semantic/NotificationState.ERROR:Ldev/codex/schubert/nk/protocol/layout/semantic/NotificationState;
+        60: invokevirtual #17                 // Method dev/codex/schubert/nk/protocol/layout/semantic/NotificationState.ordinal:()I
+        63: iconst_4
+        64: iastore
+        65: goto          69
+        68: astore_0
+        69: getstatic     #7                  // Field $SwitchMap$dev$codex$schubert$nk$protocol$layout$semantic$NotificationState:[I
+        72: getstatic     #32                 // Field dev/codex/schubert/nk/protocol/layout/semantic/NotificationState.CANCELLED:Ldev/codex/schubert/nk/protocol/layout/semantic/NotificationState;
+        75: invokevirtual #17                 // Method dev/codex/schubert/nk/protocol/layout/semantic/NotificationState.ordinal:()I
+        78: iconst_5
+        79: iastore
+        80: goto          84
+        83: astore_0
+        84: return
+      Exception table:
+         from    to  target type
+             9    20    23   Class java/lang/NoSuchFieldError
+            24    35    38   Class java/lang/NoSuchFieldError
+            39    50    53   Class java/lang/NoSuchFieldError
+            54    65    68   Class java/lang/NoSuchFieldError
+            69    80    83   Class java/lang/NoSuchFieldError
+}
+Compiled from "NotificationListViewModel.java"
+class dev.codex.schubert.nk.web.view.NotificationListViewModel$1 {
+  static final int[] $SwitchMap$dev$codex$schubert$nk$protocol$layout$semantic$NotificationState;
+    descriptor: [I
+
+  static final int[] $SwitchMap$dev$codex$schubert$nk$protocol$layout$semantic$NotificationType;
+    descriptor: [I
+
+  static {};
+    descriptor: ()V
+    Code:
+         0: invokestatic  #1                  // Method dev/codex/schubert/nk/protocol/layout/semantic/NotificationType.values:()[Ldev/codex/schubert/nk/protocol/layout/semantic/NotificationType;
+         3: arraylength
+         4: newarray       int
+         6: putstatic     #7                  // Field $SwitchMap$dev$codex$schubert$nk$protocol$layout$semantic$NotificationType:[I
+         9: getstatic     #7                  // Field $SwitchMap$dev$codex$schubert$nk$protocol$layout$semantic$NotificationType:[I
+        12: getstatic     #13                 // Field dev/codex/schubert/nk/protocol/layout/semantic/NotificationType.ACCEPTED:Ldev/codex/schubert/nk/protocol/layout/semantic/NotificationType;
+        15: invokevirtual #17                 // Method dev/codex/schubert/nk/protocol/layout/semantic/NotificationType.ordinal:()I
+        18: iconst_1
+        19: iastore
+        20: goto          24
+        23: astore_0
+        24: getstatic     #7                  // Field $SwitchMap$dev$codex$schubert$nk$protocol$layout$semantic$NotificationType:[I
+        27: getstatic     #23                 // Field dev/codex/schubert/nk/protocol/layout/semantic/NotificationType.COMPLETED:Ldev/codex/schubert/nk/protocol/layout/semantic/NotificationType;
+        30: invokevirtual #17                 // Method dev/codex/schubert/nk/protocol/layout/semantic/NotificationType.ordinal:()I
+        33: iconst_2
+        34: iastore
+        35: goto          39
+        38: astore_0
+        39: getstatic     #7                  // Field $SwitchMap$dev$codex$schubert$nk$protocol$layout$semantic$NotificationType:[I
+        42: getstatic     #26                 // Field dev/codex/schubert/nk/protocol/layout/semantic/NotificationType.ERROR:Ldev/codex/schubert/nk/protocol/layout/semantic/NotificationType;
+        45: invokevirtual #17                 // Method dev/codex/schubert/nk/protocol/layout/semantic/NotificationType.ordinal:()I
+        48: iconst_3
+        49: iastore
+        50: goto          54
+        53: astore_0
+        54: invokestatic  #29                 // Method dev/codex/schubert/nk/protocol/layout/semantic/NotificationState.values:()[Ldev/codex/schubert/nk/protocol/layout/semantic/NotificationState;
+        57: arraylength
+        58: newarray       int
+        60: putstatic     #34                 // Field $SwitchMap$dev$codex$schubert$nk$protocol$layout$semantic$NotificationState:[I
+        63: getstatic     #34                 // Field $SwitchMap$dev$codex$schubert$nk$protocol$layout$semantic$NotificationState:[I
+        66: getstatic     #37                 // Field dev/codex/schubert/nk/protocol/layout/semantic/NotificationState.RECEIVED:Ldev/codex/schubert/nk/protocol/layout/semantic/NotificationState;
+        69: invokevirtual #41                 // Method dev/codex/schubert/nk/protocol/layout/semantic/NotificationState.ordinal:()I
+        72: iconst_1
+        73: iastore
+        74: goto          78
+        77: astore_0
+        78: getstatic     #34                 // Field $SwitchMap$dev$codex$schubert$nk$protocol$layout$semantic$NotificationState:[I
+        81: getstatic     #42                 // Field dev/codex/schubert/nk/protocol/layout/semantic/NotificationState.PROCESSING:Ldev/codex/schubert/nk/protocol/layout/semantic/NotificationState;
+        84: invokevirtual #41                 // Method dev/codex/schubert/nk/protocol/layout/semantic/NotificationState.ordinal:()I
+        87: iconst_2
+        88: iastore
+        89: goto          93
+        92: astore_0
+        93: getstatic     #34                 // Field $SwitchMap$dev$codex$schubert$nk$protocol$layout$semantic$NotificationState:[I
+        96: getstatic     #45                 // Field dev/codex/schubert/nk/protocol/layout/semantic/NotificationState.CANCELLED:Ldev/codex/schubert/nk/protocol/layout/semantic/NotificationState;
+        99: invokevirtual #41                 // Method dev/codex/schubert/nk/protocol/layout/semantic/NotificationState.ordinal:()I
+       102: iconst_3
+       103: iastore
+       104: goto          108
+       107: astore_0
+       108: getstatic     #34                 // Field $SwitchMap$dev$codex$schubert$nk$protocol$layout$semantic$NotificationState:[I
+       111: getstatic     #48                 // Field dev/codex/schubert/nk/protocol/layout/semantic/NotificationState.COMPLETED:Ldev/codex/schubert/nk/protocol/layout/semantic/NotificationState;
+       114: invokevirtual #41                 // Method dev/codex/schubert/nk/protocol/layout/semantic/NotificationState.ordinal:()I
+       117: iconst_4
+       118: iastore
+       119: goto          123
+       122: astore_0
+       123: getstatic     #34                 // Field $SwitchMap$dev$codex$schubert$nk$protocol$layout$semantic$NotificationState:[I
+       126: getstatic     #50                 // Field dev/codex/schubert/nk/protocol/layout/semantic/NotificationState.ERROR:Ldev/codex/schubert/nk/protocol/layout/semantic/NotificationState;
+       129: invokevirtual #41                 // Method dev/codex/schubert/nk/protocol/layout/semantic/NotificationState.ordinal:()I
+       132: iconst_5
+       133: iastore
+       134: goto          138
+       137: astore_0
+       138: return
+      Exception table:
+         from    to  target type
+             9    20    23   Class java/lang/NoSuchFieldError
+            24    35    38   Class java/lang/NoSuchFieldError
+            39    50    53   Class java/lang/NoSuchFieldError
+            63    74    77   Class java/lang/NoSuchFieldError
+            78    89    92   Class java/lang/NoSuchFieldError
+            93   104   107   Class java/lang/NoSuchFieldError
+           108   119   122   Class java/lang/NoSuchFieldError
+           123   134   137   Class java/lang/NoSuchFieldError
+}
+Compiled from "QuestionDetailViewModel.java"
+class dev.codex.schubert.nk.web.view.QuestionDetailViewModel$1 {
+  static final int[] $SwitchMap$dev$codex$schubert$nk$protocol$layout$semantic$AnswerState;
+    descriptor: [I
+
+  static {};
+    descriptor: ()V
+    Code:
+         0: invokestatic  #1                  // Method dev/codex/schubert/nk/protocol/layout/semantic/AnswerState.values:()[Ldev/codex/schubert/nk/protocol/layout/semantic/AnswerState;
+         3: arraylength
+         4: newarray       int
+         6: putstatic     #7                  // Field $SwitchMap$dev$codex$schubert$nk$protocol$layout$semantic$AnswerState:[I
+         9: getstatic     #7                  // Field $SwitchMap$dev$codex$schubert$nk$protocol$layout$semantic$AnswerState:[I
+        12: getstatic     #13                 // Field dev/codex/schubert/nk/protocol/layout/semantic/AnswerState.ANSWERED:Ldev/codex/schubert/nk/protocol/layout/semantic/AnswerState;
+        15: invokevirtual #17                 // Method dev/codex/schubert/nk/protocol/layout/semantic/AnswerState.ordinal:()I
+        18: iconst_1
+        19: iastore
+        20: goto          24
+        23: astore_0
+        24: getstatic     #7                  // Field $SwitchMap$dev$codex$schubert$nk$protocol$layout$semantic$AnswerState:[I
+        27: getstatic     #23                 // Field dev/codex/schubert/nk/protocol/layout/semantic/AnswerState.UNANSWERED:Ldev/codex/schubert/nk/protocol/layout/semantic/AnswerState;
+        30: invokevirtual #17                 // Method dev/codex/schubert/nk/protocol/layout/semantic/AnswerState.ordinal:()I
+        33: iconst_2
+        34: iastore
+        35: goto          39
+        38: astore_0
+        39: getstatic     #7                  // Field $SwitchMap$dev$codex$schubert$nk$protocol$layout$semantic$AnswerState:[I
+        42: getstatic     #26                 // Field dev/codex/schubert/nk/protocol/layout/semantic/AnswerState.ERROR:Ldev/codex/schubert/nk/protocol/layout/semantic/AnswerState;
+        45: invokevirtual #17                 // Method dev/codex/schubert/nk/protocol/layout/semantic/AnswerState.ordinal:()I
+        48: iconst_3
+        49: iastore
+        50: goto          54
+        53: astore_0
+        54: return
+      Exception table:
+         from    to  target type
+             9    20    23   Class java/lang/NoSuchFieldError
+            24    35    38   Class java/lang/NoSuchFieldError
+            39    50    53   Class java/lang/NoSuchFieldError
+}

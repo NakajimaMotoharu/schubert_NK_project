@@ -1,0 +1,121 @@
+Compiled from "SyntheticClassFilter.java"
+final class org.jacoco.core.internal.analysis.filter.SyntheticClassFilter implements org.jacoco.core.internal.analysis.filter.IFilter {
+  org.jacoco.core.internal.analysis.filter.SyntheticClassFilter();
+    Code:
+         0: aload_0
+         1: invokespecial #1                  // Method java/lang/Object."<init>":()V
+         4: return
+
+  public void filter(org.objectweb.asm.tree.MethodNode, org.jacoco.core.internal.analysis.filter.IFilterContext, org.jacoco.core.internal.analysis.filter.IFilterOutput);
+    Code:
+         0: aload_2
+         1: invokeinterface #2,  1            // InterfaceMethod org/jacoco/core/internal/analysis/filter/IFilterContext.getClassAccess:()I
+         6: sipush        4096
+         9: iand
+        10: ifne          14
+        13: return
+        14: aload_3
+        15: aload_1
+        16: getfield      #3                  // Field org/objectweb/asm/tree/MethodNode.instructions:Lorg/objectweb/asm/tree/InsnList;
+        19: invokevirtual #4                  // Method org/objectweb/asm/tree/InsnList.getFirst:()Lorg/objectweb/asm/tree/AbstractInsnNode;
+        22: aload_1
+        23: getfield      #3                  // Field org/objectweb/asm/tree/MethodNode.instructions:Lorg/objectweb/asm/tree/InsnList;
+        26: invokevirtual #5                  // Method org/objectweb/asm/tree/InsnList.getLast:()Lorg/objectweb/asm/tree/AbstractInsnNode;
+        29: invokeinterface #6,  3            // InterfaceMethod org/jacoco/core/internal/analysis/filter/IFilterOutput.ignore:(Lorg/objectweb/asm/tree/AbstractInsnNode;Lorg/objectweb/asm/tree/AbstractInsnNode;)V
+        34: return
+}
+Compiled from "PrivateEmptyNoArgConstructorFilter.java"
+final class org.jacoco.core.internal.analysis.filter.PrivateEmptyNoArgConstructorFilter implements org.jacoco.core.internal.analysis.filter.IFilter {
+  private static final java.lang.String CONSTRUCTOR_NAME;
+
+  private static final java.lang.String CONSTRUCTOR_DESC;
+
+  org.jacoco.core.internal.analysis.filter.PrivateEmptyNoArgConstructorFilter();
+    Code:
+         0: aload_0
+         1: invokespecial #1                  // Method java/lang/Object."<init>":()V
+         4: return
+
+  public void filter(org.objectweb.asm.tree.MethodNode, org.jacoco.core.internal.analysis.filter.IFilterContext, org.jacoco.core.internal.analysis.filter.IFilterOutput);
+    Code:
+         0: aload_1
+         1: getfield      #2                  // Field org/objectweb/asm/tree/MethodNode.access:I
+         4: iconst_2
+         5: iand
+         6: ifeq          74
+         9: ldc           #3                  // String <init>
+        11: aload_1
+        12: getfield      #4                  // Field org/objectweb/asm/tree/MethodNode.name:Ljava/lang/String;
+        15: invokevirtual #5                  // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+        18: ifeq          74
+        21: ldc           #6                  // String ()V
+        23: aload_1
+        24: getfield      #7                  // Field org/objectweb/asm/tree/MethodNode.desc:Ljava/lang/String;
+        27: invokevirtual #5                  // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+        30: ifeq          74
+        33: new           #8                  // class org/jacoco/core/internal/analysis/filter/PrivateEmptyNoArgConstructorFilter$Matcher
+        36: dup
+        37: aconst_null
+        38: invokespecial #9                  // Method org/jacoco/core/internal/analysis/filter/PrivateEmptyNoArgConstructorFilter$Matcher."<init>":(Lorg/jacoco/core/internal/analysis/filter/PrivateEmptyNoArgConstructorFilter$1;)V
+        41: aload_1
+        42: aload_2
+        43: invokeinterface #10,  1           // InterfaceMethod org/jacoco/core/internal/analysis/filter/IFilterContext.getSuperClassName:()Ljava/lang/String;
+        48: invokestatic  #11                 // Method org/jacoco/core/internal/analysis/filter/PrivateEmptyNoArgConstructorFilter$Matcher.access$100:(Lorg/jacoco/core/internal/analysis/filter/PrivateEmptyNoArgConstructorFilter$Matcher;Lorg/objectweb/asm/tree/MethodNode;Ljava/lang/String;)Z
+        51: ifeq          74
+        54: aload_3
+        55: aload_1
+        56: getfield      #12                 // Field org/objectweb/asm/tree/MethodNode.instructions:Lorg/objectweb/asm/tree/InsnList;
+        59: invokevirtual #13                 // Method org/objectweb/asm/tree/InsnList.getFirst:()Lorg/objectweb/asm/tree/AbstractInsnNode;
+        62: aload_1
+        63: getfield      #12                 // Field org/objectweb/asm/tree/MethodNode.instructions:Lorg/objectweb/asm/tree/InsnList;
+        66: invokevirtual #14                 // Method org/objectweb/asm/tree/InsnList.getLast:()Lorg/objectweb/asm/tree/AbstractInsnNode;
+        69: invokeinterface #15,  3           // InterfaceMethod org/jacoco/core/internal/analysis/filter/IFilterOutput.ignore:(Lorg/objectweb/asm/tree/AbstractInsnNode;Lorg/objectweb/asm/tree/AbstractInsnNode;)V
+        74: return
+}
+Compiled from "RecordsFilter.java"
+final class org.jacoco.core.internal.analysis.filter.RecordsFilter implements org.jacoco.core.internal.analysis.filter.IFilter {
+  org.jacoco.core.internal.analysis.filter.RecordsFilter();
+    Code:
+         0: aload_0
+         1: invokespecial #1                  // Method java/lang/Object."<init>":()V
+         4: return
+
+  public void filter(org.objectweb.asm.tree.MethodNode, org.jacoco.core.internal.analysis.filter.IFilterContext, org.jacoco.core.internal.analysis.filter.IFilterOutput);
+    Code:
+         0: ldc           #2                  // String java/lang/Record
+         2: aload_2
+         3: invokeinterface #3,  1            // InterfaceMethod org/jacoco/core/internal/analysis/filter/IFilterContext.getSuperClassName:()Ljava/lang/String;
+         8: invokevirtual #4                  // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+        11: ifne          15
+        14: return
+        15: new           #5                  // class org/jacoco/core/internal/analysis/filter/RecordsFilter$Matcher
+        18: dup
+        19: aconst_null
+        20: invokespecial #6                  // Method org/jacoco/core/internal/analysis/filter/RecordsFilter$Matcher."<init>":(Lorg/jacoco/core/internal/analysis/filter/RecordsFilter$1;)V
+        23: astore        4
+        25: aload         4
+        27: aload_1
+        28: invokevirtual #7                  // Method org/jacoco/core/internal/analysis/filter/RecordsFilter$Matcher.isEquals:(Lorg/objectweb/asm/tree/MethodNode;)Z
+        31: ifne          61
+        34: aload         4
+        36: aload_1
+        37: invokevirtual #8                  // Method org/jacoco/core/internal/analysis/filter/RecordsFilter$Matcher.isHashCode:(Lorg/objectweb/asm/tree/MethodNode;)Z
+        40: ifne          61
+        43: aload         4
+        45: aload_1
+        46: invokevirtual #9                  // Method org/jacoco/core/internal/analysis/filter/RecordsFilter$Matcher.isToString:(Lorg/objectweb/asm/tree/MethodNode;)Z
+        49: ifne          61
+        52: aload         4
+        54: aload_1
+        55: invokevirtual #10                 // Method org/jacoco/core/internal/analysis/filter/RecordsFilter$Matcher.isFieldAccessor:(Lorg/objectweb/asm/tree/MethodNode;)Z
+        58: ifeq          81
+        61: aload_3
+        62: aload_1
+        63: getfield      #11                 // Field org/objectweb/asm/tree/MethodNode.instructions:Lorg/objectweb/asm/tree/InsnList;
+        66: invokevirtual #12                 // Method org/objectweb/asm/tree/InsnList.getFirst:()Lorg/objectweb/asm/tree/AbstractInsnNode;
+        69: aload_1
+        70: getfield      #11                 // Field org/objectweb/asm/tree/MethodNode.instructions:Lorg/objectweb/asm/tree/InsnList;
+        73: invokevirtual #13                 // Method org/objectweb/asm/tree/InsnList.getLast:()Lorg/objectweb/asm/tree/AbstractInsnNode;
+        76: invokeinterface #14,  3           // InterfaceMethod org/jacoco/core/internal/analysis/filter/IFilterOutput.ignore:(Lorg/objectweb/asm/tree/AbstractInsnNode;Lorg/objectweb/asm/tree/AbstractInsnNode;)V
+        81: return
+}
