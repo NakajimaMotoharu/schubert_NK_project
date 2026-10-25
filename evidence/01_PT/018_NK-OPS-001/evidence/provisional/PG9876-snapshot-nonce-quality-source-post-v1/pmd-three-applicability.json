@@ -1,0 +1,52 @@
+[
+  {
+    "begincolumn": "47",
+    "beginline": "57",
+    "class": "ResponseSnapshotCodec",
+    "classification": "FALSE_POSITIVE_RUNTIME_INPUT_LABEL_NOT_KEY_MATERIAL",
+    "endcolumn": "59",
+    "endline": "57",
+    "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_security.html#hardcodedcryptokey",
+    "message": "Do not use hard coded encryption keys",
+    "method": "ResponseSnapshotCodec",
+    "package": "dev.codex.schubert.nk.api.idempotency",
+    "priority": "3",
+    "rawFindingRetained": true,
+    "rule": "HardCodedCryptoKey",
+    "ruleset": "Security"
+  },
+  {
+    "begincolumn": "14",
+    "beginline": "206",
+    "class": "ResponseSnapshotCodec",
+    "classification": "FALSE_POSITIVE_EXPLICIT_END_FINALLY_NO_SCRATCH_ACQUISITION_GAP",
+    "endcolumn": "22",
+    "endline": "206",
+    "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#closeresource",
+    "message": "Ensure that resources like this Deflater object are closed after use",
+    "method": "compress",
+    "package": "dev.codex.schubert.nk.api.idempotency",
+    "priority": "3",
+    "rawFindingRetained": true,
+    "rule": "CloseResource",
+    "ruleset": "Error Prone",
+    "variable": "deflater"
+  },
+  {
+    "begincolumn": "14",
+    "beginline": "224",
+    "class": "ResponseSnapshotCodec",
+    "classification": "FALSE_POSITIVE_EXPLICIT_END_FINALLY_NO_SCRATCH_ACQUISITION_GAP",
+    "endcolumn": "22",
+    "endline": "224",
+    "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#closeresource",
+    "message": "Ensure that resources like this Inflater object are closed after use",
+    "method": "decompress",
+    "package": "dev.codex.schubert.nk.api.idempotency",
+    "priority": "3",
+    "rawFindingRetained": true,
+    "rule": "CloseResource",
+    "ruleset": "Error Prone",
+    "variable": "inflater"
+  }
+]

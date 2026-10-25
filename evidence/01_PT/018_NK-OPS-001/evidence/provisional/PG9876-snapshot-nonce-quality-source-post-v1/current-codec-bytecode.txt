@@ -1,0 +1,812 @@
+Compiled from "ResponseSnapshotCodec.java"
+public final class dev.codex.schubert.nk.api.idempotency.ResponseSnapshotCodec implements java.lang.AutoCloseable {
+  public static final int MAXIMUM_PLAINTEXT_BYTES;
+
+  private static final byte[] ENVELOPE_MAGIC;
+
+  private static final byte ENVELOPE_FORMAT_VERSION;
+
+  private static final int AES_KEY_BYTES;
+
+  private static final int NONCE_BYTES;
+
+  private static final int GCM_TAG_BYTES;
+
+  private static final int GCM_TAG_BITS;
+
+  private static final int ENVELOPE_FIXED_BYTES;
+
+  private static final int MINIMUM_ENVELOPE_BYTES;
+
+  private static final int BUFFER_BYTES;
+
+  private final java.lang.String currentVersion;
+
+  private final byte[] currentKey;
+
+  private final java.lang.String previousVersion;
+
+  private final byte[] previousKey;
+
+  private final java.security.SecureRandom secureRandom;
+
+  private boolean closed;
+
+  public dev.codex.schubert.nk.api.idempotency.ResponseSnapshotCodec(java.lang.String, byte[], java.lang.String, byte[]);
+    Code:
+         0: aload_0
+         1: aload_1
+         2: aload_2
+         3: aload_3
+         4: aload         4
+         6: new           #1                  // class java/security/SecureRandom
+         9: dup
+        10: invokespecial #3                  // Method java/security/SecureRandom."<init>":()V
+        13: invokespecial #7                  // Method "<init>":(Ljava/lang/String;[BLjava/lang/String;[BLjava/security/SecureRandom;)V
+        16: return
+
+  dev.codex.schubert.nk.api.idempotency.ResponseSnapshotCodec(java.lang.String, byte[], java.lang.String, byte[], java.security.SecureRandom);
+    Code:
+         0: aload_0
+         1: invokespecial #12                 // Method java/lang/Object."<init>":()V
+         4: aload_0
+         5: aload_1
+         6: ldc           #15                 // String currentVersion
+         8: invokestatic  #17                 // Method validateVersion:(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+        11: putfield      #21                 // Field currentVersion:Ljava/lang/String;
+        14: aload_0
+        15: aload_2
+        16: ldc           #24                 // String currentKey
+        18: invokestatic  #26                 // Method validateKey:([BLjava/lang/String;)[B
+        21: putfield      #30                 // Field currentKey:[B
+        24: aload_3
+        25: ifnonnull     32
+        28: iconst_1
+        29: goto          33
+        32: iconst_0
+        33: aload         4
+        35: ifnonnull     42
+        38: iconst_1
+        39: goto          43
+        42: iconst_0
+        43: if_icmpeq     56
+        46: new           #33                 // class java/lang/IllegalArgumentException
+        49: dup
+        50: ldc           #35                 // String previous response key version and key must be paired
+        52: invokespecial #37                 // Method java/lang/IllegalArgumentException."<init>":(Ljava/lang/String;)V
+        55: athrow
+        56: aload_0
+        57: aload_3
+        58: ifnonnull     65
+        61: aconst_null
+        62: goto          71
+        65: aload_3
+        66: ldc           #40                 // String previousVersion
+        68: invokestatic  #17                 // Method validateVersion:(Ljava/lang/String;Ljava/lang/String;)Ljava/lang/String;
+        71: putfield      #42                 // Field previousVersion:Ljava/lang/String;
+        74: aload_0
+        75: aload         4
+        77: ifnonnull     84
+        80: aconst_null
+        81: goto          91
+        84: aload         4
+        86: ldc           #44                 // String previousKey
+        88: invokestatic  #26                 // Method validateKey:([BLjava/lang/String;)[B
+        91: putfield      #46                 // Field previousKey:[B
+        94: aload_0
+        95: getfield      #21                 // Field currentVersion:Ljava/lang/String;
+        98: aload_0
+        99: getfield      #42                 // Field previousVersion:Ljava/lang/String;
+       102: invokevirtual #48                 // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+       105: ifeq          118
+       108: new           #33                 // class java/lang/IllegalArgumentException
+       111: dup
+       112: ldc           #54                 // String response key versions must be distinct
+       114: invokespecial #37                 // Method java/lang/IllegalArgumentException."<init>":(Ljava/lang/String;)V
+       117: athrow
+       118: aload_0
+       119: aload         5
+       121: ldc           #56                 // String secureRandom
+       123: invokestatic  #58                 // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+       126: checkcast     #1                  // class java/security/SecureRandom
+       129: putfield      #64                 // Field secureRandom:Ljava/security/SecureRandom;
+       132: return
+
+  public dev.codex.schubert.nk.api.idempotency.EncryptedResponseSnapshot encrypt(dev.codex.schubert.nk.api.idempotency.ResponseSnapshotIdentity, byte[]);
+    Code:
+         0: aload_0
+         1: invokevirtual #67                 // Method ensureOpen:()V
+         4: aload_1
+         5: ldc           #70                 // String identity
+         7: invokestatic  #58                 // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+        10: pop
+        11: aload_2
+        12: ldc           #72                 // String plaintext
+        14: invokestatic  #58                 // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+        17: pop
+        18: aload_2
+        19: arraylength
+        20: ldc           #74                 // int 1000000
+        22: if_icmple     35
+        25: new           #33                 // class java/lang/IllegalArgumentException
+        28: dup
+        29: ldc           #75                 // String response snapshot plaintext exceeds 1000000 bytes
+        31: invokespecial #37                 // Method java/lang/IllegalArgumentException."<init>":(Ljava/lang/String;)V
+        34: athrow
+        35: aload_2
+        36: invokestatic  #77                 // Method compress:([B)[B
+        39: astore_3
+        40: bipush        12
+        42: newarray       byte
+        44: astore        4
+        46: aload_0
+        47: getfield      #21                 // Field currentVersion:Ljava/lang/String;
+        50: getstatic     #81                 // Field java/nio/charset/StandardCharsets.US_ASCII:Ljava/nio/charset/Charset;
+        53: invokevirtual #87                 // Method java/lang/String.getBytes:(Ljava/nio/charset/Charset;)[B
+        56: astore        5
+        58: aload_1
+        59: iconst_1
+        60: aload_0
+        61: getfield      #21                 // Field currentVersion:Ljava/lang/String;
+        64: invokevirtual #91                 // Method dev/codex/schubert/nk/api/idempotency/ResponseSnapshotIdentity.aad:(BLjava/lang/String;)[B
+        67: astore        6
+        69: aconst_null
+        70: astore        7
+        72: aconst_null
+        73: astore        8
+        75: aload_0
+        76: getfield      #64                 // Field secureRandom:Ljava/security/SecureRandom;
+        79: aload         4
+        81: invokevirtual #97                 // Method java/security/SecureRandom.nextBytes:([B)V
+        84: ldc           #101                // String AES/GCM/NoPadding
+        86: invokestatic  #103                // Method javax/crypto/Cipher.getInstance:(Ljava/lang/String;)Ljavax/crypto/Cipher;
+        89: astore        9
+        91: aload         9
+        93: iconst_1
+        94: new           #109                // class javax/crypto/spec/SecretKeySpec
+        97: dup
+        98: aload_0
+        99: getfield      #30                 // Field currentKey:[B
+       102: ldc           #111                // String AES
+       104: invokespecial #113                // Method javax/crypto/spec/SecretKeySpec."<init>":([BLjava/lang/String;)V
+       107: new           #116                // class javax/crypto/spec/GCMParameterSpec
+       110: dup
+       111: sipush        128
+       114: aload         4
+       116: invokespecial #118                // Method javax/crypto/spec/GCMParameterSpec."<init>":(I[B)V
+       119: invokevirtual #121                // Method javax/crypto/Cipher.init:(ILjava/security/Key;Ljava/security/spec/AlgorithmParameterSpec;)V
+       122: aload         9
+       124: aload         6
+       126: invokevirtual #125                // Method javax/crypto/Cipher.updateAAD:([B)V
+       129: aload         9
+       131: aload_3
+       132: invokevirtual #128                // Method javax/crypto/Cipher.doFinal:([B)[B
+       135: astore        7
+       137: getstatic     #131                // Field ENVELOPE_FIXED_BYTES:I
+       140: aload         5
+       142: arraylength
+       143: iadd
+       144: aload         7
+       146: arraylength
+       147: iadd
+       148: invokestatic  #135                // Method java/nio/ByteBuffer.allocate:(I)Ljava/nio/ByteBuffer;
+       151: getstatic     #141                // Field ENVELOPE_MAGIC:[B
+       154: invokevirtual #144                // Method java/nio/ByteBuffer.put:([B)Ljava/nio/ByteBuffer;
+       157: iconst_1
+       158: invokevirtual #148                // Method java/nio/ByteBuffer.put:(B)Ljava/nio/ByteBuffer;
+       161: aload         5
+       163: arraylength
+       164: i2b
+       165: invokevirtual #148                // Method java/nio/ByteBuffer.put:(B)Ljava/nio/ByteBuffer;
+       168: aload         5
+       170: invokevirtual #144                // Method java/nio/ByteBuffer.put:([B)Ljava/nio/ByteBuffer;
+       173: aload         4
+       175: invokevirtual #144                // Method java/nio/ByteBuffer.put:([B)Ljava/nio/ByteBuffer;
+       178: aload         7
+       180: invokevirtual #144                // Method java/nio/ByteBuffer.put:([B)Ljava/nio/ByteBuffer;
+       183: invokevirtual #151                // Method java/nio/ByteBuffer.array:()[B
+       186: astore        8
+       188: new           #155                // class dev/codex/schubert/nk/api/idempotency/EncryptedResponseSnapshot
+       191: dup
+       192: aload_0
+       193: getfield      #21                 // Field currentVersion:Ljava/lang/String;
+       196: aload         8
+       198: invokespecial #157                // Method dev/codex/schubert/nk/api/idempotency/EncryptedResponseSnapshot."<init>":(Ljava/lang/String;[B)V
+       201: astore        10
+       203: aload_3
+       204: iconst_0
+       205: invokestatic  #160                // Method java/util/Arrays.fill:([BB)V
+       208: aload         4
+       210: iconst_0
+       211: invokestatic  #160                // Method java/util/Arrays.fill:([BB)V
+       214: aload         6
+       216: iconst_0
+       217: invokestatic  #160                // Method java/util/Arrays.fill:([BB)V
+       220: aload         7
+       222: ifnull        231
+       225: aload         7
+       227: iconst_0
+       228: invokestatic  #160                // Method java/util/Arrays.fill:([BB)V
+       231: aload         8
+       233: ifnull        242
+       236: aload         8
+       238: iconst_0
+       239: invokestatic  #160                // Method java/util/Arrays.fill:([BB)V
+       242: aload         10
+       244: areturn
+       245: astore        9
+       247: new           #168                // class dev/codex/schubert/nk/api/idempotency/ResponseSnapshotException
+       250: dup
+       251: getstatic     #170                // Field dev/codex/schubert/nk/api/idempotency/ResponseSnapshotException$Reason.CRYPTO_UNAVAILABLE:Ldev/codex/schubert/nk/api/idempotency/ResponseSnapshotException$Reason;
+       254: ldc           #176                // String response snapshot encryption is unavailable
+       256: aload         9
+       258: invokespecial #178                // Method dev/codex/schubert/nk/api/idempotency/ResponseSnapshotException."<init>":(Ldev/codex/schubert/nk/api/idempotency/ResponseSnapshotException$Reason;Ljava/lang/String;Ljava/lang/Throwable;)V
+       261: athrow
+       262: astore        11
+       264: aload_3
+       265: iconst_0
+       266: invokestatic  #160                // Method java/util/Arrays.fill:([BB)V
+       269: aload         4
+       271: iconst_0
+       272: invokestatic  #160                // Method java/util/Arrays.fill:([BB)V
+       275: aload         6
+       277: iconst_0
+       278: invokestatic  #160                // Method java/util/Arrays.fill:([BB)V
+       281: aload         7
+       283: ifnull        292
+       286: aload         7
+       288: iconst_0
+       289: invokestatic  #160                // Method java/util/Arrays.fill:([BB)V
+       292: aload         8
+       294: ifnull        303
+       297: aload         8
+       299: iconst_0
+       300: invokestatic  #160                // Method java/util/Arrays.fill:([BB)V
+       303: aload         11
+       305: athrow
+      Exception table:
+         from    to  target type
+            75   203   245   Class java/security/GeneralSecurityException
+            75   203   262   any
+           245   264   262   any
+
+  public byte[] decrypt(dev.codex.schubert.nk.api.idempotency.ResponseSnapshotIdentity, dev.codex.schubert.nk.api.idempotency.EncryptedResponseSnapshot);
+    Code:
+         0: aload_0
+         1: invokevirtual #67                 // Method ensureOpen:()V
+         4: aload_1
+         5: ldc           #70                 // String identity
+         7: invokestatic  #58                 // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+        10: pop
+        11: aload_2
+        12: ldc           #181                // String snapshot
+        14: invokestatic  #58                 // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+        17: pop
+        18: aload_2
+        19: invokevirtual #183                // Method dev/codex/schubert/nk/api/idempotency/EncryptedResponseSnapshot.ciphertext:()[B
+        22: astore_3
+        23: aconst_null
+        24: astore        4
+        26: aconst_null
+        27: astore        5
+        29: aconst_null
+        30: astore        6
+        32: aconst_null
+        33: astore        7
+        35: aload_3
+        36: arraylength
+        37: getstatic     #186                // Field MINIMUM_ENVELOPE_BYTES:I
+        40: if_icmplt     63
+        43: aload_3
+        44: iconst_0
+        45: getstatic     #141                // Field ENVELOPE_MAGIC:[B
+        48: arraylength
+        49: getstatic     #141                // Field ENVELOPE_MAGIC:[B
+        52: iconst_0
+        53: getstatic     #141                // Field ENVELOPE_MAGIC:[B
+        56: arraylength
+        57: invokestatic  #189                // Method java/util/Arrays.equals:([BII[BII)Z
+        60: ifne          70
+        63: ldc           #192                // String response snapshot envelope is invalid
+        65: aconst_null
+        66: invokestatic  #194                // Method invalidSnapshot:(Ljava/lang/String;Ljava/lang/Throwable;)Ldev/codex/schubert/nk/api/idempotency/ResponseSnapshotException;
+        69: athrow
+        70: aload_3
+        71: getstatic     #141                // Field ENVELOPE_MAGIC:[B
+        74: arraylength
+        75: baload
+        76: iconst_1
+        77: if_icmpeq     87
+        80: ldc           #198                // String response snapshot format version is invalid
+        82: aconst_null
+        83: invokestatic  #194                // Method invalidSnapshot:(Ljava/lang/String;Ljava/lang/Throwable;)Ldev/codex/schubert/nk/api/idempotency/ResponseSnapshotException;
+        86: athrow
+        87: aload_3
+        88: getstatic     #141                // Field ENVELOPE_MAGIC:[B
+        91: arraylength
+        92: iconst_1
+        93: iadd
+        94: baload
+        95: invokestatic  #200                // Method java/lang/Byte.toUnsignedInt:(B)I
+        98: istore        8
+       100: getstatic     #141                // Field ENVELOPE_MAGIC:[B
+       103: arraylength
+       104: iconst_2
+       105: iadd
+       106: iload         8
+       108: iadd
+       109: istore        9
+       111: iload         9
+       113: bipush        12
+       115: iadd
+       116: istore        10
+       118: iload         8
+       120: iconst_1
+       121: if_icmplt     141
+       124: iload         8
+       126: bipush        16
+       128: if_icmpgt     141
+       131: aload_3
+       132: arraylength
+       133: iload         10
+       135: bipush        16
+       137: iadd
+       138: if_icmpge     148
+       141: ldc           #206                // String response snapshot envelope length is invalid
+       143: aconst_null
+       144: invokestatic  #194                // Method invalidSnapshot:(Ljava/lang/String;Ljava/lang/Throwable;)Ldev/codex/schubert/nk/api/idempotency/ResponseSnapshotException;
+       147: athrow
+       148: new           #49                 // class java/lang/String
+       151: dup
+       152: aload_3
+       153: getstatic     #141                // Field ENVELOPE_MAGIC:[B
+       156: arraylength
+       157: iconst_2
+       158: iadd
+       159: iload         8
+       161: getstatic     #81                 // Field java/nio/charset/StandardCharsets.US_ASCII:Ljava/nio/charset/Charset;
+       164: invokespecial #208                // Method java/lang/String."<init>":([BIILjava/nio/charset/Charset;)V
+       167: astore        11
+       169: aload         11
+       171: ldc           #211                // String [A-Za-z0-9][A-Za-z0-9._-]{0,15}
+       173: invokevirtual #213                // Method java/lang/String.matches:(Ljava/lang/String;)Z
+       176: ifeq          191
+       179: aload_2
+       180: invokevirtual #217                // Method dev/codex/schubert/nk/api/idempotency/EncryptedResponseSnapshot.keyVersion:()Ljava/lang/String;
+       183: aload         11
+       185: invokevirtual #48                 // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+       188: ifne          198
+       191: ldc           #221                // String response snapshot key version is invalid
+       193: aconst_null
+       194: invokestatic  #194                // Method invalidSnapshot:(Ljava/lang/String;Ljava/lang/Throwable;)Ldev/codex/schubert/nk/api/idempotency/ResponseSnapshotException;
+       197: athrow
+       198: aload_0
+       199: aload         11
+       201: invokevirtual #223                // Method selectKey:(Ljava/lang/String;)Ljava/util/Optional;
+       204: invokedynamic #227,  0            // InvokeDynamic #0:get:()Ljava/util/function/Supplier;
+       209: invokevirtual #231                // Method java/util/Optional.orElseThrow:(Ljava/util/function/Supplier;)Ljava/lang/Object;
+       212: checkcast     #237                // class "[B"
+       215: astore        12
+       217: aload_3
+       218: iload         9
+       220: iload         10
+       222: invokestatic  #238                // Method java/util/Arrays.copyOfRange:([BII)[B
+       225: astore        4
+       227: aload_3
+       228: iload         10
+       230: aload_3
+       231: arraylength
+       232: invokestatic  #238                // Method java/util/Arrays.copyOfRange:([BII)[B
+       235: astore        5
+       237: aload_1
+       238: iconst_1
+       239: aload         11
+       241: invokevirtual #91                 // Method dev/codex/schubert/nk/api/idempotency/ResponseSnapshotIdentity.aad:(BLjava/lang/String;)[B
+       244: astore        6
+       246: ldc           #101                // String AES/GCM/NoPadding
+       248: invokestatic  #103                // Method javax/crypto/Cipher.getInstance:(Ljava/lang/String;)Ljavax/crypto/Cipher;
+       251: astore        13
+       253: aload         13
+       255: iconst_2
+       256: new           #109                // class javax/crypto/spec/SecretKeySpec
+       259: dup
+       260: aload         12
+       262: ldc           #111                // String AES
+       264: invokespecial #113                // Method javax/crypto/spec/SecretKeySpec."<init>":([BLjava/lang/String;)V
+       267: new           #116                // class javax/crypto/spec/GCMParameterSpec
+       270: dup
+       271: sipush        128
+       274: aload         4
+       276: invokespecial #118                // Method javax/crypto/spec/GCMParameterSpec."<init>":(I[B)V
+       279: invokevirtual #121                // Method javax/crypto/Cipher.init:(ILjava/security/Key;Ljava/security/spec/AlgorithmParameterSpec;)V
+       282: aload         13
+       284: aload         6
+       286: invokevirtual #125                // Method javax/crypto/Cipher.updateAAD:([B)V
+       289: aload         13
+       291: aload         5
+       293: invokevirtual #128                // Method javax/crypto/Cipher.doFinal:([B)[B
+       296: astore        7
+       298: aload         7
+       300: invokestatic  #242                // Method decompress:([B)[B
+       303: astore        14
+       305: aload_3
+       306: iconst_0
+       307: invokestatic  #160                // Method java/util/Arrays.fill:([BB)V
+       310: aload         4
+       312: ifnull        321
+       315: aload         4
+       317: iconst_0
+       318: invokestatic  #160                // Method java/util/Arrays.fill:([BB)V
+       321: aload         5
+       323: ifnull        332
+       326: aload         5
+       328: iconst_0
+       329: invokestatic  #160                // Method java/util/Arrays.fill:([BB)V
+       332: aload         6
+       334: ifnull        343
+       337: aload         6
+       339: iconst_0
+       340: invokestatic  #160                // Method java/util/Arrays.fill:([BB)V
+       343: aload         7
+       345: ifnull        354
+       348: aload         7
+       350: iconst_0
+       351: invokestatic  #160                // Method java/util/Arrays.fill:([BB)V
+       354: aload         14
+       356: areturn
+       357: astore        8
+       359: new           #168                // class dev/codex/schubert/nk/api/idempotency/ResponseSnapshotException
+       362: dup
+       363: getstatic     #245                // Field dev/codex/schubert/nk/api/idempotency/ResponseSnapshotException$Reason.SNAPSHOT_INVALID:Ldev/codex/schubert/nk/api/idempotency/ResponseSnapshotException$Reason;
+       366: ldc           #248                // String response snapshot authentication failed
+       368: aload         8
+       370: invokespecial #178                // Method dev/codex/schubert/nk/api/idempotency/ResponseSnapshotException."<init>":(Ldev/codex/schubert/nk/api/idempotency/ResponseSnapshotException$Reason;Ljava/lang/String;Ljava/lang/Throwable;)V
+       373: athrow
+       374: astore        15
+       376: aload_3
+       377: iconst_0
+       378: invokestatic  #160                // Method java/util/Arrays.fill:([BB)V
+       381: aload         4
+       383: ifnull        392
+       386: aload         4
+       388: iconst_0
+       389: invokestatic  #160                // Method java/util/Arrays.fill:([BB)V
+       392: aload         5
+       394: ifnull        403
+       397: aload         5
+       399: iconst_0
+       400: invokestatic  #160                // Method java/util/Arrays.fill:([BB)V
+       403: aload         6
+       405: ifnull        414
+       408: aload         6
+       410: iconst_0
+       411: invokestatic  #160                // Method java/util/Arrays.fill:([BB)V
+       414: aload         7
+       416: ifnull        425
+       419: aload         7
+       421: iconst_0
+       422: invokestatic  #160                // Method java/util/Arrays.fill:([BB)V
+       425: aload         15
+       427: athrow
+      Exception table:
+         from    to  target type
+            35   305   357   Class java/security/GeneralSecurityException
+            35   305   374   any
+           357   376   374   any
+
+  private java.util.Optional<byte[]> selectKey(java.lang.String);
+    Code:
+         0: aload_0
+         1: getfield      #21                 // Field currentVersion:Ljava/lang/String;
+         4: aload_1
+         5: invokevirtual #48                 // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+         8: ifeq          19
+        11: aload_0
+        12: getfield      #30                 // Field currentKey:[B
+        15: invokestatic  #250                // Method java/util/Optional.of:(Ljava/lang/Object;)Ljava/util/Optional;
+        18: areturn
+        19: aload_0
+        20: getfield      #42                 // Field previousVersion:Ljava/lang/String;
+        23: ifnull        53
+        26: aload_0
+        27: getfield      #42                 // Field previousVersion:Ljava/lang/String;
+        30: aload_1
+        31: invokevirtual #48                 // Method java/lang/String.equals:(Ljava/lang/Object;)Z
+        34: ifeq          53
+        37: aload_0
+        38: getfield      #46                 // Field previousKey:[B
+        41: ldc           #254                // String paired previous key
+        43: invokestatic  #58                 // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+        46: checkcast     #237                // class "[B"
+        49: invokestatic  #250                // Method java/util/Optional.of:(Ljava/lang/Object;)Ljava/util/Optional;
+        52: areturn
+        53: invokestatic  #256                // Method java/util/Optional.empty:()Ljava/util/Optional;
+        56: areturn
+
+  private static byte[] compress(byte[]);
+    Code:
+         0: sipush        8192
+         3: newarray       byte
+         5: astore_1
+         6: new           #260                // class java/util/zip/Deflater
+         9: dup
+        10: iconst_3
+        11: invokespecial #262                // Method java/util/zip/Deflater."<init>":(I)V
+        14: astore_2
+        15: new           #265                // class dev/codex/schubert/nk/api/idempotency/WipingByteArrayOutputStream
+        18: dup
+        19: invokespecial #267                // Method dev/codex/schubert/nk/api/idempotency/WipingByteArrayOutputStream."<init>":()V
+        22: astore_3
+        23: aload_2
+        24: aload_0
+        25: invokevirtual #268                // Method java/util/zip/Deflater.setInput:([B)V
+        28: aload_2
+        29: invokevirtual #271                // Method java/util/zip/Deflater.finish:()V
+        32: aload_2
+        33: invokevirtual #274                // Method java/util/zip/Deflater.finished:()Z
+        36: ifne          57
+        39: aload_2
+        40: aload_1
+        41: invokevirtual #278                // Method java/util/zip/Deflater.deflate:([B)I
+        44: istore        4
+        46: aload_3
+        47: aload_1
+        48: iconst_0
+        49: iload         4
+        51: invokevirtual #282                // Method dev/codex/schubert/nk/api/idempotency/WipingByteArrayOutputStream.write:([BII)V
+        54: goto          32
+        57: aload_3
+        58: invokevirtual #286                // Method dev/codex/schubert/nk/api/idempotency/WipingByteArrayOutputStream.toByteArray:()[B
+        61: astore        4
+        63: aload_3
+        64: invokevirtual #289                // Method dev/codex/schubert/nk/api/idempotency/WipingByteArrayOutputStream.close:()V
+        67: aload_1
+        68: iconst_0
+        69: invokestatic  #160                // Method java/util/Arrays.fill:([BB)V
+        72: aload_2
+        73: invokevirtual #292                // Method java/util/zip/Deflater.end:()V
+        76: aload         4
+        78: areturn
+        79: astore        4
+        81: aload_3
+        82: invokevirtual #289                // Method dev/codex/schubert/nk/api/idempotency/WipingByteArrayOutputStream.close:()V
+        85: goto          97
+        88: astore        5
+        90: aload         4
+        92: aload         5
+        94: invokevirtual #297                // Method java/lang/Throwable.addSuppressed:(Ljava/lang/Throwable;)V
+        97: aload         4
+        99: athrow
+       100: astore        6
+       102: aload_1
+       103: iconst_0
+       104: invokestatic  #160                // Method java/util/Arrays.fill:([BB)V
+       107: aload_2
+       108: invokevirtual #292                // Method java/util/zip/Deflater.end:()V
+       111: aload         6
+       113: athrow
+      Exception table:
+         from    to  target type
+            23    63    79   Class java/lang/Throwable
+            81    85    88   Class java/lang/Throwable
+            15    67   100   any
+            79   102   100   any
+
+  private static byte[] decompress(byte[]);
+    Code:
+         0: sipush        8192
+         3: newarray       byte
+         5: astore_1
+         6: new           #301                // class java/util/zip/Inflater
+         9: dup
+        10: invokespecial #303                // Method java/util/zip/Inflater."<init>":()V
+        13: astore_2
+        14: new           #265                // class dev/codex/schubert/nk/api/idempotency/WipingByteArrayOutputStream
+        17: dup
+        18: invokespecial #267                // Method dev/codex/schubert/nk/api/idempotency/WipingByteArrayOutputStream."<init>":()V
+        21: astore_3
+        22: aload_2
+        23: aload_0
+        24: invokevirtual #304                // Method java/util/zip/Inflater.setInput:([B)V
+        27: aload_2
+        28: invokevirtual #305                // Method java/util/zip/Inflater.finished:()Z
+        31: ifne          94
+        34: aload_2
+        35: aload_1
+        36: invokevirtual #306                // Method java/util/zip/Inflater.inflate:([B)I
+        39: istore        4
+        41: iload         4
+        43: ifne          64
+        46: aload_2
+        47: invokevirtual #305                // Method java/util/zip/Inflater.finished:()Z
+        50: ifeq          56
+        53: goto          94
+        56: ldc_w         #309                // String response snapshot compression stream is incomplete
+        59: aconst_null
+        60: invokestatic  #194                // Method invalidSnapshot:(Ljava/lang/String;Ljava/lang/Throwable;)Ldev/codex/schubert/nk/api/idempotency/ResponseSnapshotException;
+        63: athrow
+        64: aload_3
+        65: invokevirtual #311                // Method dev/codex/schubert/nk/api/idempotency/WipingByteArrayOutputStream.size:()I
+        68: ldc           #74                 // int 1000000
+        70: iload         4
+        72: isub
+        73: if_icmple     83
+        76: ldc           #75                 // String response snapshot plaintext exceeds 1000000 bytes
+        78: aconst_null
+        79: invokestatic  #194                // Method invalidSnapshot:(Ljava/lang/String;Ljava/lang/Throwable;)Ldev/codex/schubert/nk/api/idempotency/ResponseSnapshotException;
+        82: athrow
+        83: aload_3
+        84: aload_1
+        85: iconst_0
+        86: iload         4
+        88: invokevirtual #282                // Method dev/codex/schubert/nk/api/idempotency/WipingByteArrayOutputStream.write:([BII)V
+        91: goto          27
+        94: aload_2
+        95: invokevirtual #315                // Method java/util/zip/Inflater.getRemaining:()I
+        98: ifeq          109
+       101: ldc_w         #318                // String response snapshot contains trailing compressed data
+       104: aconst_null
+       105: invokestatic  #194                // Method invalidSnapshot:(Ljava/lang/String;Ljava/lang/Throwable;)Ldev/codex/schubert/nk/api/idempotency/ResponseSnapshotException;
+       108: athrow
+       109: aload_3
+       110: invokevirtual #286                // Method dev/codex/schubert/nk/api/idempotency/WipingByteArrayOutputStream.toByteArray:()[B
+       113: astore        4
+       115: aload_3
+       116: invokevirtual #289                // Method dev/codex/schubert/nk/api/idempotency/WipingByteArrayOutputStream.close:()V
+       119: aload_1
+       120: iconst_0
+       121: invokestatic  #160                // Method java/util/Arrays.fill:([BB)V
+       124: aload_2
+       125: invokevirtual #320                // Method java/util/zip/Inflater.end:()V
+       128: aload         4
+       130: areturn
+       131: astore        4
+       133: aload_3
+       134: invokevirtual #289                // Method dev/codex/schubert/nk/api/idempotency/WipingByteArrayOutputStream.close:()V
+       137: goto          149
+       140: astore        5
+       142: aload         4
+       144: aload         5
+       146: invokevirtual #297                // Method java/lang/Throwable.addSuppressed:(Ljava/lang/Throwable;)V
+       149: aload         4
+       151: athrow
+       152: astore_3
+       153: ldc_w         #323                // String response snapshot compression stream is invalid
+       156: aload_3
+       157: invokestatic  #194                // Method invalidSnapshot:(Ljava/lang/String;Ljava/lang/Throwable;)Ldev/codex/schubert/nk/api/idempotency/ResponseSnapshotException;
+       160: athrow
+       161: astore        6
+       163: aload_1
+       164: iconst_0
+       165: invokestatic  #160                // Method java/util/Arrays.fill:([BB)V
+       168: aload_2
+       169: invokevirtual #320                // Method java/util/zip/Inflater.end:()V
+       172: aload         6
+       174: athrow
+      Exception table:
+         from    to  target type
+            22   115   131   Class java/lang/Throwable
+           133   137   140   Class java/lang/Throwable
+            14   119   152   Class java/util/zip/DataFormatException
+           131   152   152   Class java/util/zip/DataFormatException
+            14   119   161   any
+           131   163   161   any
+
+  private static dev.codex.schubert.nk.api.idempotency.ResponseSnapshotException invalidSnapshot(java.lang.String, java.lang.Throwable);
+    Code:
+         0: aload_1
+         1: ifnonnull     18
+         4: new           #168                // class dev/codex/schubert/nk/api/idempotency/ResponseSnapshotException
+         7: dup
+         8: getstatic     #245                // Field dev/codex/schubert/nk/api/idempotency/ResponseSnapshotException$Reason.SNAPSHOT_INVALID:Ldev/codex/schubert/nk/api/idempotency/ResponseSnapshotException$Reason;
+        11: aload_0
+        12: invokespecial #325                // Method dev/codex/schubert/nk/api/idempotency/ResponseSnapshotException."<init>":(Ldev/codex/schubert/nk/api/idempotency/ResponseSnapshotException$Reason;Ljava/lang/String;)V
+        15: goto          30
+        18: new           #168                // class dev/codex/schubert/nk/api/idempotency/ResponseSnapshotException
+        21: dup
+        22: getstatic     #245                // Field dev/codex/schubert/nk/api/idempotency/ResponseSnapshotException$Reason.SNAPSHOT_INVALID:Ldev/codex/schubert/nk/api/idempotency/ResponseSnapshotException$Reason;
+        25: aload_0
+        26: aload_1
+        27: invokespecial #178                // Method dev/codex/schubert/nk/api/idempotency/ResponseSnapshotException."<init>":(Ldev/codex/schubert/nk/api/idempotency/ResponseSnapshotException$Reason;Ljava/lang/String;Ljava/lang/Throwable;)V
+        30: areturn
+
+  public void close();
+    Code:
+         0: aload_0
+         1: getfield      #30                 // Field currentKey:[B
+         4: iconst_0
+         5: invokestatic  #160                // Method java/util/Arrays.fill:([BB)V
+         8: aload_0
+         9: getfield      #46                 // Field previousKey:[B
+        12: ifnull        23
+        15: aload_0
+        16: getfield      #46                 // Field previousKey:[B
+        19: iconst_0
+        20: invokestatic  #160                // Method java/util/Arrays.fill:([BB)V
+        23: aload_0
+        24: iconst_1
+        25: putfield      #328                // Field closed:Z
+        28: return
+
+  private void ensureOpen();
+    Code:
+         0: aload_0
+         1: getfield      #328                // Field closed:Z
+         4: ifeq          18
+         7: new           #332                // class java/lang/IllegalStateException
+        10: dup
+        11: ldc_w         #334                // String response snapshot codec is closed
+        14: invokespecial #336                // Method java/lang/IllegalStateException."<init>":(Ljava/lang/String;)V
+        17: athrow
+        18: return
+
+  private static java.lang.String validateVersion(java.lang.String, java.lang.String);
+    Code:
+         0: aload_0
+         1: aload_1
+         2: invokestatic  #58                 // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+         5: pop
+         6: aload_0
+         7: ldc           #211                // String [A-Za-z0-9][A-Za-z0-9._-]{0,15}
+         9: invokevirtual #213                // Method java/lang/String.matches:(Ljava/lang/String;)Z
+        12: ifne          29
+        15: new           #33                 // class java/lang/IllegalArgumentException
+        18: dup
+        19: aload_1
+        20: invokedynamic #337,  0            // InvokeDynamic #1:makeConcatWithConstants:(Ljava/lang/String;)Ljava/lang/String;
+        25: invokespecial #37                 // Method java/lang/IllegalArgumentException."<init>":(Ljava/lang/String;)V
+        28: athrow
+        29: aload_0
+        30: areturn
+
+  private static byte[] validateKey(byte[], java.lang.String);
+    Code:
+         0: aload_0
+         1: aload_1
+         2: invokestatic  #58                 // Method java/util/Objects.requireNonNull:(Ljava/lang/Object;Ljava/lang/String;)Ljava/lang/Object;
+         5: pop
+         6: aload_0
+         7: arraylength
+         8: bipush        32
+        10: if_icmpeq     27
+        13: new           #33                 // class java/lang/IllegalArgumentException
+        16: dup
+        17: aload_1
+        18: invokedynamic #341,  0            // InvokeDynamic #2:makeConcatWithConstants:(Ljava/lang/String;)Ljava/lang/String;
+        23: invokespecial #37                 // Method java/lang/IllegalArgumentException."<init>":(Ljava/lang/String;)V
+        26: athrow
+        27: aload_0
+        28: invokevirtual #342                // Method "[B".clone:()Ljava/lang/Object;
+        31: checkcast     #237                // class "[B"
+        34: areturn
+
+  private static dev.codex.schubert.nk.api.idempotency.ResponseSnapshotException lambda$decrypt$0();
+    Code:
+         0: new           #168                // class dev/codex/schubert/nk/api/idempotency/ResponseSnapshotException
+         3: dup
+         4: getstatic     #346                // Field dev/codex/schubert/nk/api/idempotency/ResponseSnapshotException$Reason.KEY_UNAVAILABLE:Ldev/codex/schubert/nk/api/idempotency/ResponseSnapshotException$Reason;
+         7: ldc_w         #349                // String response snapshot key version is unavailable
+        10: invokespecial #325                // Method dev/codex/schubert/nk/api/idempotency/ResponseSnapshotException."<init>":(Ldev/codex/schubert/nk/api/idempotency/ResponseSnapshotException$Reason;Ljava/lang/String;)V
+        13: areturn
+
+  static {};
+    Code:
+         0: ldc_w         #351                // String NKENC1
+         3: getstatic     #81                 // Field java/nio/charset/StandardCharsets.US_ASCII:Ljava/nio/charset/Charset;
+         6: invokevirtual #87                 // Method java/lang/String.getBytes:(Ljava/nio/charset/Charset;)[B
+         9: putstatic     #141                // Field ENVELOPE_MAGIC:[B
+        12: getstatic     #141                // Field ENVELOPE_MAGIC:[B
+        15: arraylength
+        16: iconst_2
+        17: iadd
+        18: bipush        12
+        20: iadd
+        21: putstatic     #131                // Field ENVELOPE_FIXED_BYTES:I
+        24: getstatic     #131                // Field ENVELOPE_FIXED_BYTES:I
+        27: iconst_1
+        28: iadd
+        29: bipush        16
+        31: iadd
+        32: putstatic     #186                // Field MINIMUM_ENVELOPE_BYTES:I
+        35: return
+}
