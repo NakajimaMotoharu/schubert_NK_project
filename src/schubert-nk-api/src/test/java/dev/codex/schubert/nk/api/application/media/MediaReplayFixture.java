@@ -44,8 +44,25 @@ import javax.crypto.spec.SecretKeySpec;
 
 /** UI232/235 byte offsets and independent SS352 JCE/AAD oracle. No expected production codec. */
 final class MediaReplayFixture {
+  private static final String FIXTURE_AUDIO_PREFIX = "AUD";
+  private static final String FIXTURE_ANIMATION_PREFIX = "ANL";
+  private static final String FIXTURE_VIDEO_PREFIX = "VID";
+  private static final String FIXTURE_CATEGORY_PREFIX = "MCT";
+  private static final String FIXTURE_SECTION_PREFIX = "MCS";
+  private static final String FIXTURE_TRACK_PREFIX = "MTR";
+  private static final String FIXTURE_MUSIC_PREFIX = "MED";
+  private static final String FIXTURE_KEY_VERSION = "fixture";
+
   static final List<String> LAYOUTS =
-      List.of("AUD", "ANM", "ANL", "VID", "MCT", "MCS", "MTR", "MED");
+      List.of(
+          FIXTURE_AUDIO_PREFIX,
+          "ANM",
+          FIXTURE_ANIMATION_PREFIX,
+          FIXTURE_VIDEO_PREFIX,
+          FIXTURE_CATEGORY_PREFIX,
+          FIXTURE_SECTION_PREFIX,
+          FIXTURE_TRACK_PREFIX,
+          FIXTURE_MUSIC_PREFIX);
   static final UUID RESPONSE = UUID.fromString("00000000-0000-4000-8000-000000000001");
   static final UUID NEXT = UUID.fromString("00000000-0000-4000-8000-000000000002");
   static final Instant COMPLETED = Instant.parse("2026-09-08T00:00:01.123456789Z");
@@ -56,8 +73,8 @@ final class MediaReplayFixture {
 
   static MediaRequest request(String prefix, String mode) {
     byte[] data = data(prefix + "REQ01");
-    if (prefix.equals("AUD")) put(data, 12, mode);
-    if (prefix.equals("MED")) put(data, 64, mode);
+    if (prefix.equals(FIXTURE_AUDIO_PREFIX)) put(data, 12, mode);
+    if (prefix.equals(FIXTURE_MUSIC_PREFIX)) put(data, 64, mode);
     return MediaRequest.decode(message(prefix + "REQ01", data));
   }
 
@@ -87,20 +104,20 @@ final class MediaReplayFixture {
 
   static int maximum(String prefix) {
     return switch (prefix) {
-      case "ANL" -> 50;
-      case "MCT" -> 20;
-      case "MCS" -> 100;
-      case "MTR" -> 200;
+      case FIXTURE_ANIMATION_PREFIX -> 50;
+      case FIXTURE_CATEGORY_PREFIX -> 20;
+      case FIXTURE_SECTION_PREFIX -> 100;
+      case FIXTURE_TRACK_PREFIX -> 200;
       default -> 0;
     };
   }
 
   static int recordLength(String prefix) {
     return switch (prefix) {
-      case "ANL" -> 928;
-      case "MCT" -> 72;
-      case "MCS" -> 136;
-      case "MTR" -> 1312;
+      case FIXTURE_ANIMATION_PREFIX -> 928;
+      case FIXTURE_CATEGORY_PREFIX -> 72;
+      case FIXTURE_SECTION_PREFIX -> 136;
+      case FIXTURE_TRACK_PREFIX -> 1312;
       default -> 0;
     };
   }
@@ -110,19 +127,25 @@ final class MediaReplayFixture {
     byte[] result =
         field(
             switch (prefix) {
-              case "AUD", "MED" -> 1024;
-              case "VID" -> 1808;
-              case "ANM", "MTR" -> 16;
+              case FIXTURE_AUDIO_PREFIX, FIXTURE_MUSIC_PREFIX -> 1024;
+              case FIXTURE_VIDEO_PREFIX -> 1808;
+              case "ANM", FIXTURE_TRACK_PREFIX -> 16;
               default -> 8;
             },
             0,
             "");
-    if (List.of("AUD", "VID", "MED").contains(prefix)) {
+    if (List.of(FIXTURE_AUDIO_PREFIX, FIXTURE_VIDEO_PREFIX, FIXTURE_MUSIC_PREFIX)
+        .contains(prefix)) {
       put(result, 832, "000000000000");
       if (!error) {
         String root =
-            prefix.equals("AUD") ? "scenario/" : prefix.equals("VID") ? "video/" : "music/";
-        String id = prefix.equals("AUD") ? "700" : prefix.equals("VID") ? "opening" : "music-0";
+            prefix.equals(FIXTURE_AUDIO_PREFIX)
+                ? "scenario/"
+                : prefix.equals(FIXTURE_VIDEO_PREFIX) ? "video/" : "music/";
+        String id =
+            prefix.equals(FIXTURE_AUDIO_PREFIX)
+                ? "700"
+                : prefix.equals(FIXTURE_VIDEO_PREFIX) ? "opening" : "music-0";
         put(result, 0, id);
         put(result, 64, root + "合成." + extension);
         put(result, 576, "表示." + extension);
@@ -141,7 +164,7 @@ final class MediaReplayFixture {
               default -> throw new AssertionError(extension);
             });
         put(result, 972, mode);
-        if (prefix.equals("VID")) {
+        if (prefix.equals(FIXTURE_VIDEO_PREFIX)) {
           put(result, 1024, "動画");
           put(result, 1280, "OPENING");
           put(result, 1296, "表示/動画.mp4");
@@ -149,7 +172,7 @@ final class MediaReplayFixture {
       }
       // BUG-043: UI232 §5.1 gives B=space on error; the opening byte is not an N field.
     } else if (prefix.equals("ANM")) put(result, 0, error ? "000000 000" : "0150041020");
-    else number(result, 0, prefix.equals("MTR") ? 9 : 6, error ? 0 : count);
+    else number(result, 0, prefix.equals(FIXTURE_TRACK_PREFIX) ? 9 : 6, error ? 0 : count);
     return result;
   }
 
@@ -158,7 +181,7 @@ final class MediaReplayFixture {
     for (int i = 0; i < count; i++) {
       byte[] r = field(recordLength(prefix), 0, "");
       switch (prefix) {
-        case "ANL" -> {
+        case FIXTURE_ANIMATION_PREFIX -> {
           put(r, 0, "video-" + i);
           put(r, 64, "動画" + i);
           put(r, 320, "MAIN");
@@ -166,15 +189,15 @@ final class MediaReplayFixture {
           number(r, 848, 12, 3);
           number(r, 924, 4, i);
         }
-        case "MCT" -> {
+        case FIXTURE_CATEGORY_PREFIX -> {
           put(r, 0, "分類" + i);
           number(r, 64, 6, i + 1);
         }
-        case "MCS" -> {
+        case FIXTURE_SECTION_PREFIX -> {
           put(r, 0, "区分" + i);
           number(r, 128, 6, i + 1);
         }
-        case "MTR" -> {
+        case FIXTURE_TRACK_PREFIX -> {
           put(r, 0, "track-" + i);
           put(r, 64, "曲" + i);
           put(r, 320, "BGM");
@@ -247,7 +270,7 @@ final class MediaReplayFixture {
   }
 
   static ResponseSnapshotCodec codec() {
-    return new ResponseSnapshotCodec("fixture", key(), null, null);
+    return new ResponseSnapshotCodec(FIXTURE_KEY_VERSION, key(), null, null);
   }
 
   static EncryptedResponseSnapshot encrypt(MediaRequest request, byte[] body) throws Exception {
@@ -268,10 +291,10 @@ final class MediaReplayFixture {
     result.write("NKENC1".getBytes(StandardCharsets.US_ASCII));
     result.write(1);
     result.write(7);
-    result.write("fixture".getBytes(StandardCharsets.US_ASCII));
+    result.write(FIXTURE_KEY_VERSION.getBytes(StandardCharsets.US_ASCII));
     result.write(nonce);
     result.write(cipher.doFinal(compressed.toByteArray()));
-    return new EncryptedResponseSnapshot("fixture", result.toByteArray());
+    return new EncryptedResponseSnapshot(FIXTURE_KEY_VERSION, result.toByteArray());
   }
 
   static byte[] decrypt(MediaRequest request, EncryptedResponseSnapshot snapshot) throws Exception {
@@ -283,7 +306,7 @@ final class MediaReplayFixture {
     assertEquals(7, buffer.get());
     byte[] version = new byte[7];
     buffer.get(version);
-    assertArrayEquals("fixture".getBytes(StandardCharsets.US_ASCII), version);
+    assertArrayEquals(FIXTURE_KEY_VERSION.getBytes(StandardCharsets.US_ASCII), version);
     byte[] nonce = new byte[12];
     buffer.get(nonce);
     byte[] ciphertext = new byte[buffer.remaining()];
@@ -311,7 +334,7 @@ final class MediaReplayFixture {
                   .putLong(id.getLeastSignificantBits())
                   .array(),
               new byte[] {1},
-              "fixture".getBytes(StandardCharsets.US_ASCII),
+              FIXTURE_KEY_VERSION.getBytes(StandardCharsets.US_ASCII),
               request
                   .header()
                   .layoutId()

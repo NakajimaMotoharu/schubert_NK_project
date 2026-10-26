@@ -45,6 +45,15 @@ import org.junit.jupiter.api.function.Executable;
 
 /** Independent fixed bytes and AES-AAD; no DB/file/current-auth claim. PT-MED-050..054. */
 class MediaReplayServiceTest {
+  private static final String FIXTURE_MUSIC_PREFIX = "MED";
+  private static final String FIXTURE_OGG_EXTENSION = "ogg";
+  private static final String FIXTURE_VIDEO_PREFIX = "VID";
+  private static final String FIXTURE_AUDIO_PREFIX = "AUD";
+  private static final String FIXTURE_CAPTURE_STAMP = "20260908090001123";
+  private static final String FIXTURE_REPLAY_STAMP = "20260908090002789";
+  private static final String FIXTURE_REPLAY_CODE = "0200";
+  private static final String FIXTURE_LAYOUT_VERSION = "001";
+
   private static final AuthenticatedActor ACTOR = new AuthenticatedActor(101, "reader", Role.USER);
   private static final AuthenticatedActor OTHER = new AuthenticatedActor(102, "other", Role.ADMIN);
 
@@ -55,11 +64,13 @@ class MediaReplayServiceTest {
       for (String prefix : LAYOUTS) {
         for (int count : maximum(prefix) == 0 ? List.of(0) : List.of(0, 1, maximum(prefix))) {
           for (String extension :
-              prefix.equals("MED")
-                  ? List.of("m4a", "mp3", "ogg", "wav", "flac")
-                  : List.of(prefix.equals("VID") ? "mp4" : "ogg")) {
+              prefix.equals(FIXTURE_MUSIC_PREFIX)
+                  ? List.of("m4a", "mp3", FIXTURE_OGG_EXTENSION, "wav", "flac")
+                  : List.of(prefix.equals(FIXTURE_VIDEO_PREFIX) ? "mp4" : FIXTURE_OGG_EXTENSION)) {
             for (String mode :
-                List.of("AUD", "MED").contains(prefix) ? List.of("I", "A") : List.of("I")) {
+                List.of(FIXTURE_AUDIO_PREFIX, FIXTURE_MUSIC_PREFIX).contains(prefix)
+                    ? List.of("I", "A")
+                    : List.of("I")) {
               var request = request(prefix, mode);
               var response = typed(prefix, count, extension, mode);
               var completion =
@@ -72,7 +83,7 @@ class MediaReplayServiceTest {
                       prefix,
                       request.header().messageId(),
                       RESPONSE,
-                      "20260908090001123",
+                      FIXTURE_CAPTURE_STAMP,
                       "b".repeat(64),
                       "0000",
                       count,
@@ -82,7 +93,9 @@ class MediaReplayServiceTest {
               var saved = service.read(request, ACTOR, completion);
               assertEquals(ResultCode.SUCCESS, saved.resultCode());
               assertEquals(
-                  List.of("AUD", "VID", "MED").contains(prefix), saved.descriptor().isPresent());
+                  List.of(FIXTURE_AUDIO_PREFIX, FIXTURE_VIDEO_PREFIX, FIXTURE_MUSIC_PREFIX)
+                      .contains(prefix),
+                  saved.descriptor().isPresent());
               assertEquals("MediaSnapshot[REDACTED]", saved.toString());
               if (saved.descriptor().isPresent()) {
                 assertEquals(3, saved.descriptor().orElseThrow().byteLength());
@@ -94,25 +107,25 @@ class MediaReplayServiceTest {
                         prefix,
                         request.header().messageId(),
                         NEXT,
-                        "20260908090002789",
+                        FIXTURE_REPLAY_STAMP,
                         "b".repeat(64),
-                        replay ? "0200" : "0000",
+                        replay ? FIXTURE_REPLAY_CODE : "0000",
                         count,
                         extension,
                         mode),
                     service.reply(saved, request, ACTOR, NEXT, SENT, replay));
               byte[] currentData = data(prefix + "REQ01");
-              if (prefix.equals("AUD")) put(currentData, 12, mode);
-              if (prefix.equals("MED")) put(currentData, 64, mode);
+              if (prefix.equals(FIXTURE_AUDIO_PREFIX)) put(currentData, 12, mode);
+              if (prefix.equals(FIXTURE_MUSIC_PREFIX)) put(currentData, 64, mode);
               var current = rebound(request, currentData, "d".repeat(64));
               assertArrayEquals(
                   wire(
                       prefix,
                       current.header().messageId(),
                       NEXT,
-                      "20260908090002789",
+                      FIXTURE_REPLAY_STAMP,
                       "d".repeat(64),
-                      "0200",
+                      FIXTURE_REPLAY_CODE,
                       count,
                       extension,
                       mode),
@@ -134,7 +147,8 @@ class MediaReplayServiceTest {
           boolean persistent =
               code == ResultCode.RESOURCE_LIMIT
                   || (code == ResultCode.NOT_FOUND
-                      && List.of("AUD", "VID", "MED").contains(prefix));
+                      && List.of(FIXTURE_AUDIO_PREFIX, FIXTURE_VIDEO_PREFIX, FIXTURE_MUSIC_PREFIX)
+                          .contains(prefix));
           if (persistent) {
             var completion = service.captureFailure(request, ACTOR, code, RESPONSE, COMPLETED);
             assertEquals(InboxCompletionState.ERROR, completion.state());
@@ -145,11 +159,11 @@ class MediaReplayServiceTest {
                     prefix,
                     request.header().messageId(),
                     RESPONSE,
-                    "20260908090001123",
+                    FIXTURE_CAPTURE_STAMP,
                     "b".repeat(64),
                     literal,
                     0,
-                    "ogg",
+                    FIXTURE_OGG_EXTENSION,
                     "A"),
                 decrypt(request, completion.responseSnapshot().orElseThrow()));
             var saved = service.read(request, ACTOR, completion);
@@ -162,11 +176,11 @@ class MediaReplayServiceTest {
                         prefix,
                         request.header().messageId(),
                         RESPONSE,
-                        "20260908090001123",
+                        FIXTURE_CAPTURE_STAMP,
                         "b".repeat(64),
                         literal,
                         0,
-                        "ogg",
+                        FIXTURE_OGG_EXTENSION,
                         "A");
                 assertEquals(32, bad[262]);
                 put(bad, 262, nonFiller);
@@ -180,11 +194,11 @@ class MediaReplayServiceTest {
                       prefix,
                       request.header().messageId(),
                       NEXT,
-                      "20260908090002789",
+                      FIXTURE_REPLAY_STAMP,
                       "b".repeat(64),
                       literal,
                       0,
-                      "ogg",
+                      FIXTURE_OGG_EXTENSION,
                       "A"),
                   service.reply(saved, request, ACTOR, NEXT, SENT, replay));
           } else reject(() -> service.captureFailure(request, ACTOR, code, RESPONSE, COMPLETED));
@@ -203,11 +217,11 @@ class MediaReplayServiceTest {
                     prefix,
                     request.header().messageId(),
                     NEXT,
-                    "20260908090002789",
+                    FIXTURE_REPLAY_STAMP,
                     "b".repeat(64),
                     literal,
                     0,
-                    "ogg",
+                    FIXTURE_OGG_EXTENSION,
                     "A"),
                 service.failure(request, code, NEXT, SENT));
           } else reject(() -> service.failure(request, code, NEXT, SENT));
@@ -221,8 +235,8 @@ class MediaReplayServiceTest {
     try (var codec = codec()) {
       var service = new MediaReplayService(codec);
       for (String prefix : LAYOUTS) {
-        String extension = prefix.equals("VID") ? "mp4" : "ogg";
-        String mode = prefix.equals("VID") ? "I" : "A";
+        String extension = prefix.equals(FIXTURE_VIDEO_PREFIX) ? "mp4" : FIXTURE_OGG_EXTENSION;
+        String mode = prefix.equals(FIXTURE_VIDEO_PREFIX) ? "I" : "A";
         var request = request(prefix, mode);
         int count = maximum(prefix) > 0 ? 1 : 0;
         byte[] good =
@@ -230,7 +244,7 @@ class MediaReplayServiceTest {
                 prefix,
                 request.header().messageId(),
                 RESPONSE,
-                "20260908090001123",
+                FIXTURE_CAPTURE_STAMP,
                 "b".repeat(64),
                 "0000",
                 count,
@@ -254,7 +268,7 @@ class MediaReplayServiceTest {
           {187, "999999"},
           {193, "999999"},
           {199, "000000256"},
-          {208, "0200"},
+          {208, FIXTURE_REPLAY_CODE},
           {212, "X"}
         };
         for (Object[] mutation : mutations) {
@@ -278,7 +292,7 @@ class MediaReplayServiceTest {
                 prefix,
                 request.header().messageId(),
                 RESPONSE,
-                "20260908090001123",
+                FIXTURE_CAPTURE_STAMP,
                 "b".repeat(64),
                 "9001",
                 0,
@@ -297,14 +311,14 @@ class MediaReplayServiceTest {
                     completion.state(),
                     InboxResultReference.numeric(InboxResultReferenceType.USER, 101),
                     completion.responseLayoutId(),
-                    "001",
+                    FIXTURE_LAYOUT_VERSION,
                     completion.responseSnapshot(),
                     completion.completedAt()),
                 new InboxCompletion(
                     completion.state(),
                     completion.resultReference(),
                     "LGNRSP01",
-                    "001",
+                    FIXTURE_LAYOUT_VERSION,
                     completion.responseSnapshot(),
                     completion.completedAt()),
                 new InboxCompletion(
@@ -318,7 +332,7 @@ class MediaReplayServiceTest {
                     completion.state(),
                     completion.resultReference(),
                     completion.responseLayoutId(),
-                    "001",
+                    FIXTURE_LAYOUT_VERSION,
                     Optional.empty(),
                     completion.completedAt()))) reject(() -> service.read(request, ACTOR, corrupt));
         byte[] ciphertext = completion.responseSnapshot().orElseThrow().ciphertext();
@@ -333,12 +347,13 @@ class MediaReplayServiceTest {
                   completion.state(),
                   completion.resultReference(),
                   completion.responseLayoutId(),
-                  "001",
+                  FIXTURE_LAYOUT_VERSION,
                   Optional.of(encrypted),
                   completion.completedAt());
           reject(() -> service.read(request, ACTOR, corrupt));
         }
-        if (List.of("AUD", "VID", "MED").contains(prefix)) {
+        if (List.of(FIXTURE_AUDIO_PREFIX, FIXTURE_VIDEO_PREFIX, FIXTURE_MUSIC_PREFIX)
+            .contains(prefix)) {
           for (Object[] mutation :
               new Object[][] {
                 {0, "different"},
@@ -355,13 +370,13 @@ class MediaReplayServiceTest {
             reject(() -> service.read(request, ACTOR, corrupt));
           }
           byte[] changed = data(prefix + "REQ01");
-          put(changed, 0, prefix.equals("AUD") ? "000000000701" : "changed");
+          put(changed, 0, prefix.equals(FIXTURE_AUDIO_PREFIX) ? "000000000701" : "changed");
           var otherId = rebound(request, changed, "b".repeat(64));
           reject(() -> service.read(otherId, ACTOR, completion));
           reject(() -> service.reply(saved, otherId, ACTOR, NEXT, SENT, true));
-          if (!prefix.equals("VID")) {
+          if (!prefix.equals(FIXTURE_VIDEO_PREFIX)) {
             byte[] changedMode = data(prefix + "REQ01");
-            put(changedMode, prefix.equals("AUD") ? 12 : 64, "I");
+            put(changedMode, prefix.equals(FIXTURE_AUDIO_PREFIX) ? 12 : 64, "I");
             var otherMode = rebound(request, changedMode, "b".repeat(64));
             reject(() -> service.read(otherMode, ACTOR, completion));
           }
@@ -380,8 +395,8 @@ class MediaReplayServiceTest {
     assertThrows(NullPointerException.class, () -> new MediaReplayService(null));
     try (var codec = codec()) {
       var service = new MediaReplayService(codec);
-      var request = request("MED", "A");
-      var response = typed("MED", 0, "ogg", "A");
+      var request = request(FIXTURE_MUSIC_PREFIX, "A");
+      var response = typed(FIXTURE_MUSIC_PREFIX, 0, FIXTURE_OGG_EXTENSION, "A");
       var completion = service.captureSuccess(request, ACTOR, response, RESPONSE, COMPLETED);
       var saved = service.read(request, ACTOR, completion);
       for (Executable nullCase :
@@ -414,11 +429,19 @@ class MediaReplayServiceTest {
       reject(
           () ->
               service.captureSuccess(
-                  request, ACTOR, typed("ANM", 0, "ogg", "I"), RESPONSE, COMPLETED));
+                  request,
+                  ACTOR,
+                  typed("ANM", 0, FIXTURE_OGG_EXTENSION, "I"),
+                  RESPONSE,
+                  COMPLETED));
       reject(
           () ->
               service.captureSuccess(
-                  request, ACTOR, typed("MED", 0, "ogg", "I"), RESPONSE, COMPLETED));
+                  request,
+                  ACTOR,
+                  typed(FIXTURE_MUSIC_PREFIX, 0, FIXTURE_OGG_EXTENSION, "I"),
+                  RESPONSE,
+                  COMPLETED));
       for (Instant invalid : List.of(Instant.MIN, Instant.MAX)) {
         reject(() -> service.captureSuccess(request, ACTOR, response, RESPONSE, invalid));
         reject(
@@ -429,16 +452,24 @@ class MediaReplayServiceTest {
     }
     var closedCodec = codec();
     var closedService = new MediaReplayService(closedCodec);
-    var request = request("MED", "A");
+    var request = request(FIXTURE_MUSIC_PREFIX, "A");
     var completion =
         closedService.captureSuccess(
-            request, ACTOR, typed("MED", 0, "ogg", "A"), RESPONSE, COMPLETED);
+            request,
+            ACTOR,
+            typed(FIXTURE_MUSIC_PREFIX, 0, FIXTURE_OGG_EXTENSION, "A"),
+            RESPONSE,
+            COMPLETED);
     closedCodec.close();
     reject(() -> closedService.read(request, ACTOR, completion));
     reject(
         () ->
             closedService.captureSuccess(
-                request, ACTOR, typed("MED", 0, "ogg", "A"), RESPONSE, COMPLETED));
+                request,
+                ACTOR,
+                typed(FIXTURE_MUSIC_PREFIX, 0, FIXTURE_OGG_EXTENSION, "A"),
+                RESPONSE,
+                COMPLETED));
     reject(
         () ->
             closedService.captureFailure(
@@ -454,29 +485,33 @@ class MediaReplayServiceTest {
       for (int i = 0; i < 100; i++)
         tasks.add(
             () -> {
-              var request = request("MED", "A");
+              var request = request(FIXTURE_MUSIC_PREFIX, "A");
               var completion =
                   service.captureSuccess(
-                      request, ACTOR, typed("MED", 0, "ogg", "A"), RESPONSE, COMPLETED);
+                      request,
+                      ACTOR,
+                      typed(FIXTURE_MUSIC_PREFIX, 0, FIXTURE_OGG_EXTENSION, "A"),
+                      RESPONSE,
+                      COMPLETED);
               byte[] exposed = completion.responseSnapshot().orElseThrow().ciphertext();
               Arrays.fill(exposed, (byte) 0);
               var saved = service.read(request, ACTOR, completion);
               byte[] expected =
                   wire(
-                      "MED",
+                      FIXTURE_MUSIC_PREFIX,
                       request.header().messageId(),
                       NEXT,
-                      "20260908090002789",
+                      FIXTURE_REPLAY_STAMP,
                       "b".repeat(64),
-                      "0200",
+                      FIXTURE_REPLAY_CODE,
                       0,
-                      "ogg",
+                      FIXTURE_OGG_EXTENSION,
                       "A");
               byte[] actual = service.reply(saved, request, ACTOR, NEXT, SENT, true);
               assertArrayEquals(expected, actual);
               Arrays.fill(actual, (byte) '!');
               assertArrayEquals(expected, service.reply(saved, request, ACTOR, NEXT, SENT, true));
-              reject(() -> service.read(request("MED", "A"), ACTOR, completion));
+              reject(() -> service.read(request(FIXTURE_MUSIC_PREFIX, "A"), ACTOR, completion));
               return true;
             });
       for (var result : pool.invokeAll(tasks)) assertTrue(result.get());

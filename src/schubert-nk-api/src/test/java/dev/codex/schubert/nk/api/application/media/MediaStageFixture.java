@@ -47,6 +47,8 @@ import javax.sql.DataSource;
 
 /** Real PG roles/transactions, independent SQL postconditions and UI232/235 expected bytes. */
 final class MediaStageFixture implements AutoCloseable {
+  private static final String FIXTURE_INSERT_PREFIX = "insert into";
+
   static final Instant NOW = Instant.parse("2026-09-08T00:01:00Z");
   final ApiLogDatabaseFixture database;
   final AtomicInteger live = new AtomicInteger();
@@ -214,7 +216,7 @@ final class MediaStageFixture implements AutoCloseable {
     sql("delete from schubert.auth_sessions");
     sql("delete from schubert.app_users");
     sql(
-        "insert into"
+        FIXTURE_INSERT_PREFIX
             + " schubert.app_users(id,username,username_key,password_hash,role,status,password_changed_at,created_at,updated_at)"
             + " select"
             + " id,'owner'||id,'key'||id,'unusable-fixture-hash','USER','ACTIVE','2026-09-08Z','2026-09-08Z','2026-09-08Z'"
@@ -222,7 +224,7 @@ final class MediaStageFixture implements AutoCloseable {
     session("b", 1, 101);
     sql("insert into schubert.games values(1,'NUKITASHI1','One',1,'2026-09-08Z')");
     sql(
-        "insert into"
+        FIXTURE_INSERT_PREFIX
             + " schubert.audio_files(id,game_id,storage_relative_path,display_path,file_name,basename,audio_role,byte_size,sha256,created_at)"
             + " values(700,1,'scenario/合成.ogg','表示/a.ogg','表示.ogg','700','voice',3,'"
             + SHA
@@ -277,7 +279,7 @@ final class MediaStageFixture implements AutoCloseable {
     try (var c = database.admin();
         var s =
             c.prepareStatement(
-                "insert into"
+                FIXTURE_INSERT_PREFIX
                     + " schubert.media_assets(id,logical_id,media_type,title,category,section,storage_relative_path,display_path,file_name,byte_size,sha256,mime_type,pair_role,display_order,created_at)"
                     + " values(?,?,?,?,?,?,?,?,?,3,?,?,?,1,'2026-09-08Z')")) {
       s.setInt(1, id);
@@ -303,7 +305,7 @@ final class MediaStageFixture implements AutoCloseable {
                 MessageDigest.getInstance("SHA-256")
                     .digest(raw.repeat(64).getBytes(StandardCharsets.US_ASCII)));
     sql(
-        "insert into"
+        FIXTURE_INSERT_PREFIX
             + " schubert.auth_sessions(id,user_id,context_hash,context_ciphertext,key_version,issued_at,last_accessed_at,expires_at,client_address,created_message_id)"
             + " values('"
             + new UUID(0, id)
@@ -325,7 +327,7 @@ final class MediaStageFixture implements AutoCloseable {
     String pathRoot = video ? "video/" : "music/";
     String suffix = video ? ".mp4" : ".ogg";
     sql(
-        "insert into"
+        FIXTURE_INSERT_PREFIX
             + " schubert.media_assets(id,logical_id,media_type,title,category,section,storage_relative_path,display_path,file_name,byte_size,sha256,mime_type,pair_role,display_order,created_at)"
             + " select i,'id-'||i,'"
             + (video ? "VIDEO" : "MUSIC")
