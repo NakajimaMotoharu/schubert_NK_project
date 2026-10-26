@@ -1,0 +1,11 @@
+# 横断二Test・現source宣言と担当保留の照合結果
+
+2135/群2493、source f24d1649e170e46aafb59a37b9750c602206364c、dev-foundation。新製品変更・PT実行0。既1936/1937の23method/26family/34関係は新規成果へ加算しない。
+
+公開証跡はevidence/provisional/PG10940-cross-owner-current-declarations-v1（manifest SHA d9c12d311bfb7d7aa8168aff6f131c003b5b53d7de5eb2a1c7196eda05f945bc）、PG10942-cross-owner-current-post-v1（7b5554ab2ce77772e15a7f1665c1a64194da979710f0f3f20d7f4f519e3dc7f4）。actual0/0、独立13metadata反例。pyflakes0後、2135記載commandを実行し、実tool/source/旧hash/現hash/原導入commit/七Main原担当・current SHAを保存。
+
+旧9554 source64446から二Testのbyteは変更されているが、現10892固定inputと実@Test直後の9/14引数なしvoid宣言・既存family/業務担当/Main担当対応は一致した。旧行番号を現source位置と偽らずhistoricalDeclarationLinesへ分離。AST/callee/全assertionの資格・現bytecode同一を証明したものではない。旧PT/coverage/native成功を現sourceへ移植0。
+
+1431の群費用P00405はJDBC transaction境界の作業費であり、User/Scenario/Media/Log/Question五業務に跨るBorrowed Testのfile primary根拠ではない。016083は通知取消と質問削除の合同仕様であり、Target Testを一方のscreenだけへ割り当てる根拠ではない。原Main担当と業務screen担当の相違も保持。従ってfile primary/cost UNKNOWN二、登録1808/1810不変。便宜的な担当確定・費用移転・Test分割はしない。今回不足は外部承認待ちでなく、二fileを単一主担当に確定する原ルールが存在しないという内部trace制約として記録する。
+
+原481/484/485/486 byte・全現source input不変、製品実行/外部操作/保留工具へのアクセス0。正式1964PT/53scope・17/190・工数null・QA051final・全安全HOLD・全F03/G13/451未受入を維持。fresh共有22→22の丸め差0は専有消費0を意味せずN/T・割当費null、usage eb197ff8。着手前1/3/7 cap10は不変。通常小群で止めず、次の独立・有限fixtureによる必要PG/PT候補を選定する。
