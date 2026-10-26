@@ -1,0 +1,9 @@
+# 2113 Graph Test三import限定PG・型静的仕様
+
+event2459相当のF03_GRAPH_TEST_IMPORT_ONLY_PG_V1、開始1/3/7pp cap10。BUG1861/YKT1612先行、base source370/Main21d、10688/10690の全Checkstyle三が対象。ApiStartupGraph330Test/TemporaryFailureGraph329Test/WebStartupGraph330TestのAssertions.*を使用六memberの明示static importへ変更する。原Graph9の動的HOLDと1975/9778の静的文書状態は不変更、元九PTの実行/別fixture/harnessは行わない。
+
+PG10694は原正常10632 snapshotと現sourceを照合し、三importの差と全本文token不変/他input保持、使用六member集合を確認する。欠落import/異なるassert/実処理変更のmetadata反例を実行するが、製品やfixtureは実行しない。sourceをcommit固定後、既存正常工具の新規専用SLOTで六module package/testCompile（skipTests）を行い、旧sourceの実PT成功を転用しない。全体回帰やnativeは起動しない。
+
+当三sourceだけの固定PMD/Checkstyleと独立XML/source/必要class metadata/traceを確認する。普通の命名/型/静的検査であり、元graph九PTの静的名義再演ではない。全Main/他Testは不変、変更対象のclass byte差はdebug/行情報か真のcode差かを区別し、長さ一致だけで命令同値としない。source本文不変と型成功を先に保証、byte証明範囲を過大表現しない。
+
+TestID F03-IMPORT-001～004：source差/欠落反例/型compile/静的とtrace。動的正常・異常・境界・null/例外cycle・並行の実行は元NOT_EXECUTED_HOLD、coverage null。静的適用残0と全F03/451は別。正式1964-53/17-190/工数null/QA051final維持、各command/環境/source/hash/exit/時刻をmanifestへ、工具/製品障害は修正前台帳へ。通常小群完了では停止しない。
