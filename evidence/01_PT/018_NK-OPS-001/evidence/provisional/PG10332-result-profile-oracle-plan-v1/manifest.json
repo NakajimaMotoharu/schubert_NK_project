@@ -1,0 +1,41 @@
+{
+  "actualExit": 0,
+  "bug": "BUG-1817",
+  "exactTokenRestorationBeforeFormatting": true,
+  "externalActions": 0,
+  "formalUpdated": false,
+  "independentSpecification": "UI232 sections5/7; only0000 and0200 use success fields",
+  "newAccepted": 0,
+  "predicate": "(code == ResultCode.SUCCESS || code == ResultCode.IDEMPOTENT_SUCCESS)",
+  "productTestsExecuted": 0,
+  "replacementCount": 12,
+  "source": "8788668513552ce50862797cb700d2b7a4162ac1",
+  "sourceChanges": {
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/admin/UserCommandServiceTest.java": {
+      "beforeSha256": "5899c8c3399caeebcdb3d65c8c276d6bad8aac67ca7d20bf1c9e1637531c1f35",
+      "plannedSha256": "ac02633c48759998abc20a00729e999922aa681d952b8a7aa2b6d8ed616e2a2f",
+      "replacementCount": 1
+    },
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/admin/UserMutationReplayServiceTest.java": {
+      "beforeSha256": "78c6dae445d2c1b69e0cb0483e7d39bf926b8f63f44804385f7578ebe72fb2bc",
+      "plannedSha256": "5c82c7c09777909fdad5b7fa27d95736e9b3b95002508c72746360c58a10fd39",
+      "replacementCount": 1
+    },
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/question/QuestionMutationApplicationServiceTest.java": {
+      "beforeSha256": "873b9fef0dac3934e36019bce151ca38ced9aff7527a0e18d6367cbd9660a950",
+      "plannedSha256": "a6594435981524102d29e55bc725f0c263b849d36217eb8b19868b9495193cb3",
+      "replacementCount": 1
+    },
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/question/QuestionMutationReplayServiceTest.java": {
+      "beforeSha256": "e8022743193b89e46ad45b4a18722da17d2b168d32f33e80e60a26264c2ae2fa",
+      "plannedSha256": "563bb13181a2d1f8bbbaf63cad5d902e5fbef94ed63645ba5519f05f65b62fe1",
+      "replacementCount": 8
+    },
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/SessionOperationTokenLifecycleTest.java": {
+      "beforeSha256": "0dbabe2ca03b3b2fe8b9bd564fe4e65f1085b2e000ad543a683e239c43dd0298",
+      "plannedSha256": "198e625a7e778d93076768cbb39542702b1f4da6c60e14912720a1c9d0363da3",
+      "replacementCount": 1
+    }
+  },
+  "ykt": "YKT-1568"
+}
