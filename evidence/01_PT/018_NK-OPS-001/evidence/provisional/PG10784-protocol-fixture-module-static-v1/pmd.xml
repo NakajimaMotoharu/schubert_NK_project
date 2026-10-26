@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pmd xmlns="http://pmd.sourceforge.net/report/2.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pmd.sourceforge.net/report/2.0.0 https://pmd.github.io/schema/report_2_0_0.xsd" version="7.28.0" timestamp="2026-10-27T03:57:31.241">
+<file name="/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/PayloadCodec.java">
+<violation beginline="169" endline="169" begincolumn="29" endcolumn="59" rule="UseConcurrentHashMap" ruleset="Multithreading" package="dev.codex.schubert.nk.protocol.codec" class="PayloadCodec" method="decodeArea" variable="values" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap" priority="3">
+If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation
+</violation>
+</file>
+<file name="/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/transport/FailedJmsIsolationException.java">
+<violation beginline="22" endline="22" begincolumn="9" endcolumn="35" rule="CompareObjectsWithEquals" ruleset="Error Prone" package="dev.codex.schubert.nk.protocol.transport" class="FailedJmsIsolationException" method="FailedJmsIsolationException" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#compareobjectswithequals" priority="3">
+Use equals() to compare object references.
+</violation>
+</file>
+<file name="/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/transport/UnconfirmedJmsRollbackException.java">
+<violation beginline="18" endline="18" begincolumn="9" endcolumn="35" rule="CompareObjectsWithEquals" ruleset="Error Prone" package="dev.codex.schubert.nk.protocol.transport" class="UnconfirmedJmsRollbackException" method="UnconfirmedJmsRollbackException" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#compareobjectswithequals" priority="3">
+Use equals() to compare object references.
+</violation>
+</file>
+<file name="/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/PayloadGoldenVectorTest.java">
+<violation beginline="141" endline="141" begincolumn="25" endcolumn="56" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.protocol.codec" class="PayloadGoldenVectorTest" method="sharedCodecProducesIdenticalBytesUnderConcurrentUse" variable="executor" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="145" endline="150" begincolumn="13" endcolumn="19" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.protocol.codec" class="PayloadGoldenVectorTest" method="sharedCodecProducesIdenticalBytesUnderConcurrentUse" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="194" endline="194" begincolumn="25" endcolumn="51" rule="AssignmentInOperand" ruleset="Error Prone" package="dev.codex.schubert.nk.protocol.codec" class="PayloadGoldenVectorTest" method="readGoldenHashes" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#assignmentinoperand" priority="3">
+Avoid assignment to line in operand
+</violation>
+</file>
+<file name="/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/file/LargeResultRecordCodecTest.java">
+<violation beginline="157" endline="157" begincolumn="26" endcolumn="32" rule="CloseResource" ruleset="Error Prone" package="dev.codex.schubert.nk.protocol.file" class="LargeResultRecordCodecTest" method="acceptsTheDocumentedTenThousandRecordFortyEightMillionByteMaximum" variable="output" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#closeresource" priority="3">
+Ensure that resources like this CountingOutputStream object are closed after use
+</violation>
+<violation beginline="202" endline="202" begincolumn="18" endcolumn="24" rule="CloseResource" ruleset="Error Prone" package="dev.codex.schubert.nk.protocol.file" class="LargeResultRecordCodecTest" method="writeRejectsNullCountLengthAndIoFailure" variable="broken" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#closeresource" priority="3">
+Ensure that resources like this OutputStream object are closed after use
+</violation>
+<violation beginline="239" endline="239" begincolumn="17" endcolumn="23" rule="CloseResource" ruleset="Error Prone" package="dev.codex.schubert.nk.protocol.file" class="LargeResultRecordCodecTest" method="decodeRejectsTruncationExtraHashAndIoFailure" variable="broken" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#closeresource" priority="3">
+Ensure that resources like this InputStream object are closed after use
+</violation>
+<violation beginline="252" endline="252" begincolumn="17" endcolumn="28" rule="CloseResource" ruleset="Error Prone" package="dev.codex.schubert.nk.protocol.file" class="LargeResultRecordCodecTest" method="decodeRejectsTruncationExtraHashAndIoFailure" variable="zeroThenEof" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#closeresource" priority="3">
+Ensure that resources like this InputStream object are closed after use
+</violation>
+<violation beginline="304" endline="304" begincolumn="14" endcolumn="23" rule="AvoidCatchingGenericException" ruleset="Error Prone" package="dev.codex.schubert.nk.protocol.file" class="LargeResultRecordCodecTest" method="hash" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidcatchinggenericexception" priority="3">
+Avoid catching Exception in try-catch block
+</violation>
+<violation beginline="316" endline="316" begincolumn="14" endcolumn="23" rule="AvoidCatchingGenericException" ruleset="Error Prone" package="dev.codex.schubert.nk.protocol.file" class="LargeResultRecordCodecTest" method="repeatedHash" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidcatchinggenericexception" priority="3">
+Avoid catching Exception in try-catch block
+</violation>
+<violation beginline="378" endline="378" begincolumn="69" endcolumn="77" rule="AssignmentInOperand" ruleset="Error Prone" package="dev.codex.schubert.nk.protocol.file" class="LargeResultRecordCodecTest.ChunkedInputStream" method="read" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#assignmentinoperand" priority="3">
+Avoid assignment to offset in operand
+</violation>
+</file>
+<file name="/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/header/HeaderModelTest.java">
+<violation beginline="426" endline="426" begincolumn="20" endcolumn="28" rule="AvoidFieldNameMatchingMethodName" ruleset="Error Prone" package="dev.codex.schubert.nk.protocol.header" class="HeaderModelTest.HeaderBuilder" variable="protocol" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidfieldnamematchingmethodname" priority="3">
+Field protocol has the same name as a method
+</violation>
+<violation beginline="427" endline="427" begincolumn="17" endcolumn="30" rule="AvoidFieldNameMatchingMethodName" ruleset="Error Prone" package="dev.codex.schubert.nk.protocol.header" class="HeaderModelTest.HeaderBuilder" variable="headerVersion" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidfieldnamematchingmethodname" priority="3">
+Field headerVersion has the same name as a method
+</violation>
+<violation beginline="428" endline="428" begincolumn="20" endcolumn="28" rule="AvoidFieldNameMatchingMethodName" ruleset="Error Prone" package="dev.codex.schubert.nk.protocol.header" class="HeaderModelTest.HeaderBuilder" variable="layoutId" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidfieldnamematchingmethodname" priority="3">
+Field layoutId has the same name as a method
+</violation>
+<violation beginline="429" endline="429" begincolumn="17" endcolumn="30" rule="AvoidFieldNameMatchingMethodName" ruleset="Error Prone" package="dev.codex.schubert.nk.protocol.header" class="HeaderModelTest.HeaderBuilder" variable="layoutVersion" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidfieldnamematchingmethodname" priority="3">
+Field layoutVersion has the same name as a method
+</violation>
+<violation beginline="430" endline="430" begincolumn="25" endcolumn="29" rule="AvoidFieldNameMatchingMethodName" ruleset="Error Prone" package="dev.codex.schubert.nk.protocol.header" class="HeaderModelTest.HeaderBuilder" variable="kind" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidfieldnamematchingmethodname" priority="3">
+Field kind has the same name as a method
+</violation>
+<violation beginline="431" endline="431" begincolumn="29" endcolumn="40" rule="AvoidFieldNameMatchingMethodName" ruleset="Error Prone" package="dev.codex.schubert.nk.protocol.header" class="HeaderModelTest.HeaderBuilder" variable="interaction" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidfieldnamematchingmethodname" priority="3">
+Field interaction has the same name as a method
+</violation>
+<violation beginline="432" endline="432" begincolumn="18" endcolumn="31" rule="AvoidFieldNameMatchingMethodName" ruleset="Error Prone" package="dev.codex.schubert.nk.protocol.header" class="HeaderModelTest.HeaderBuilder" variable="correlationId" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidfieldnamematchingmethodname" priority="3">
+Field correlationId has the same name as a method
+</violation>
+<violation beginline="433" endline="433" begincolumn="21" endcolumn="27" rule="AvoidFieldNameMatchingMethodName" ruleset="Error Prone" package="dev.codex.schubert.nk.protocol.header" class="HeaderModelTest.HeaderBuilder" variable="sentAt" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidfieldnamematchingmethodname" priority="3">
+Field sentAt has the same name as a method
+</violation>
+<violation beginline="434" endline="434" begincolumn="45" endcolumn="52" rule="AvoidFieldNameMatchingMethodName" ruleset="Error Prone" package="dev.codex.schubert.nk.protocol.header" class="HeaderModelTest.HeaderBuilder" variable="context" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidfieldnamematchingmethodname" priority="3">
+Field context has the same name as a method
+</violation>
+<violation beginline="435" endline="435" begincolumn="17" endcolumn="29" rule="AvoidFieldNameMatchingMethodName" ruleset="Error Prone" package="dev.codex.schubert.nk.protocol.header" class="HeaderModelTest.HeaderBuilder" variable="headerLength" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidfieldnamematchingmethodname" priority="3">
+Field headerLength has the same name as a method
+</violation>
+<violation beginline="436" endline="436" begincolumn="17" endcolumn="27" rule="AvoidFieldNameMatchingMethodName" ruleset="Error Prone" package="dev.codex.schubert.nk.protocol.header" class="HeaderModelTest.HeaderBuilder" variable="dataLength" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidfieldnamematchingmethodname" priority="3">
+Field dataLength has the same name as a method
+</violation>
+<violation beginline="437" endline="437" begincolumn="17" endcolumn="29" rule="AvoidFieldNameMatchingMethodName" ruleset="Error Prone" package="dev.codex.schubert.nk.protocol.header" class="HeaderModelTest.HeaderBuilder" variable="recordLength" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidfieldnamematchingmethodname" priority="3">
+Field recordLength has the same name as a method
+</violation>
+<violation beginline="438" endline="438" begincolumn="17" endcolumn="28" rule="AvoidFieldNameMatchingMethodName" ruleset="Error Prone" package="dev.codex.schubert.nk.protocol.header" class="HeaderModelTest.HeaderBuilder" variable="recordCount" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidfieldnamematchingmethodname" priority="3">
+Field recordCount has the same name as a method
+</violation>
+<violation beginline="439" endline="439" begincolumn="17" endcolumn="28" rule="AvoidFieldNameMatchingMethodName" ruleset="Error Prone" package="dev.codex.schubert.nk.protocol.header" class="HeaderModelTest.HeaderBuilder" variable="totalLength" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidfieldnamematchingmethodname" priority="3">
+Field totalLength has the same name as a method
+</violation>
+<violation beginline="440" endline="440" begincolumn="34" endcolumn="40" rule="AvoidFieldNameMatchingMethodName" ruleset="Error Prone" package="dev.codex.schubert.nk.protocol.header" class="HeaderModelTest.HeaderBuilder" variable="result" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidfieldnamematchingmethodname" priority="3">
+Field result has the same name as a method
+</violation>
+</file>
+<file name="/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/IndependentNamedFieldOracle.java">
+<violation beginline="84" endline="84" begincolumn="25" endcolumn="58" rule="UseConcurrentHashMap" ruleset="Multithreading" package="dev.codex.schubert.nk.protocol.layout" class="IndependentNamedFieldOracle" method="verifyAll" variable="accessors" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap" priority="3">
+If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation
+</violation>
+<violation beginline="89" endline="89" begincolumn="30" endcolumn="53" rule="UseConcurrentHashMap" ruleset="Multithreading" package="dev.codex.schubert.nk.protocol.layout" class="IndependentNamedFieldOracle" method="verifyAll" variable="areas" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap" priority="3">
+If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation
+</violation>
+<violation beginline="97" endline="97" begincolumn="30" endcolumn="56" rule="UseConcurrentHashMap" ruleset="Multithreading" package="dev.codex.schubert.nk.protocol.layout" class="IndependentNamedFieldOracle" method="verifyAll" variable="reviewed" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap" priority="3">
+If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation
+</violation>
+<violation beginline="157" endline="157" begincolumn="56" endcolumn="63" rule="AssignmentInOperand" ruleset="Error Prone" package="dev.codex.schubert.nk.protocol.layout" class="IndependentNamedFieldOracle" method="verifyType" variable="wire" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#assignmentinoperand" priority="3">
+Avoid assignment to index in operand
+</violation>
+<violation beginline="182" endline="182" begincolumn="18" endcolumn="22" rule="NullAssignment" ruleset="Error Prone" package="dev.codex.schubert.nk.protocol.layout" class="IndependentNamedFieldOracle" method="verifyType" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#nullassignment" priority="3">
+Assigning an Object to null is a code smell.  Consider refactoring.
+</violation>
+<violation beginline="189" endline="189" begincolumn="33" endcolumn="68" rule="UseConcurrentHashMap" ruleset="Multithreading" package="dev.codex.schubert.nk.protocol.layout" class="IndependentNamedFieldOracle" method="verifyType" variable="absent" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap" priority="3">
+If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation
+</violation>
+<violation beginline="257" endline="257" begincolumn="27" endcolumn="29" rule="AvoidLiteralsInIfCondition" ruleset="Error Prone" package="dev.codex.schubert.nk.protocol.layout" class="IndependentNamedFieldOracle" method="scalarType" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidliteralsinifcondition" priority="3">
+Avoid using literals such as 17 in if statements
+</violation>
+<violation beginline="259" endline="259" begincolumn="27" endcolumn="29" rule="AvoidLiteralsInIfCondition" ruleset="Error Prone" package="dev.codex.schubert.nk.protocol.layout" class="IndependentNamedFieldOracle" method="scalarType" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidliteralsinifcondition" priority="3">
+Avoid using literals such as 36 in if statements
+</violation>
+</file>
+<file name="/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/PayloadTypeCatalogTest.java">
+<violation beginline="54" endline="54" begincolumn="25" endcolumn="51" rule="AssignmentInOperand" ruleset="Error Prone" package="dev.codex.schubert.nk.protocol.layout" class="PayloadTypeCatalogTest" method="explicitCatalogMatchesIndependentSs323NamedTypeFixture" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#assignmentinoperand" priority="3">
+Avoid assignment to line in operand
+</violation>
+<violation beginline="337" endline="337" begincolumn="27" endcolumn="29" rule="AvoidLiteralsInIfCondition" ruleset="Error Prone" package="dev.codex.schubert.nk.protocol.layout" class="PayloadTypeCatalogTest" method="minimumText" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidliteralsinifcondition" priority="3">
+Avoid using literals such as 36 in if statements
+</violation>
+</file>
+</pmd>
