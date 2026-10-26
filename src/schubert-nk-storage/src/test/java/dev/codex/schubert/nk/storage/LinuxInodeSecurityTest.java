@@ -29,6 +29,10 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** PT-DB-INBOX-121..128; public temporary metadata only, independent Linux UAPI golden. */
 final class LinuxInodeSecurityTest {
+  private static final String PUBLIC_ENTRY = "public";
+  private static final String LINUX_OS = "Linux";
+  private static final String AMD64_ARCH = "amd64";
+  private static final int ENODATA_ERRNO = 61;
   private static final Path CAPABILITY = Path.of("/proc/self/fd/7");
   private static final long ERRNO =
       Linker.Option.captureStateLayout().byteOffset(MemoryLayout.PathElement.groupElement("errno"));
@@ -40,17 +44,17 @@ final class LinuxInodeSecurityTest {
     assertEquals(
         Integer.toUnsignedLong((Integer) Files.getAttribute(root, "unix:uid")),
         nativeCalls.effectiveUid());
-    Path file = Files.write(root.resolve("public"), new byte[] {7});
+    Path file = Files.write(root.resolve(PUBLIC_ENTRY), new byte[] {7});
     try (var held = OwnedTransferDirectory.open(LinuxDirectoryCalls.create(), root)) {
       held.atExistingEntryHandle(
-          "public",
+          PUBLIC_ENTRY,
           path -> {
             assertArrayEquals(new byte[0], nativeCalls.accessAcl(path, 44));
             return true;
           });
       setAcl(file, 12345);
       held.atExistingEntryHandle(
-          "public",
+          PUBLIC_ENTRY,
           path -> {
             byte[] first = nativeCalls.accessAcl(path, 44);
             assertArrayEquals(golden(12345), first);
@@ -76,7 +80,7 @@ final class LinuxInodeSecurityTest {
     for (long flag : new long[] {0, 1, 2, 3, 0x80000000L, Long.MIN_VALUE, -1}) {
       var calls =
           new LinuxInodeSecurity(
-              noAcl(61),
+              noAcl(ENODATA_ERRNO),
               (state, path, value) -> {
                 assertEquals(112, value.byteSize());
                 assertEquals("/proc/self/fd/7", path.getString(0));
@@ -89,13 +93,13 @@ final class LinuxInodeSecurityTest {
     for (int result : new int[] {-1, 1, Integer.MIN_VALUE})
       failure(
           () ->
-              new LinuxInodeSecurity(noAcl(61), (s, p, v) -> result, () -> 1000)
+              new LinuxInodeSecurity(noAcl(ENODATA_ERRNO), (s, p, v) -> result, () -> 1000)
                   .readOnlyFilesystem(CAPABILITY));
   }
 
   @Test
   void heldElfCapabilityAbsenceRequiresExactEnodataAndNativeHeldFile() throws Exception {
-    for (int errno : new int[] {61, 95, 1, 5, 34}) {
+    for (int errno : new int[] {ENODATA_ERRNO, 95, 1, 5, 34}) {
       var calls =
           new LinuxInodeSecurity(
               (state, path, name, value, limit) -> {
@@ -106,7 +110,7 @@ final class LinuxInodeSecurityTest {
               },
               (s, p, v) -> 0,
               () -> 0);
-      if (errno == 61) calls.requireNoFileCapabilities(CAPABILITY);
+      if (errno == ENODATA_ERRNO) calls.requireNoFileCapabilities(CAPABILITY);
       else failure(() -> calls.requireNoFileCapabilities(CAPABILITY));
     }
     for (int returned : new int[] {0, 1, 24, 25, -2}) {
@@ -151,9 +155,9 @@ final class LinuxInodeSecurityTest {
           () ->
               new LinuxInodeSecurity((s, p, n, v, l) -> size, (s, p, v) -> 0, () -> 0)
                   .accessAcl(CAPABILITY, 44));
-    for (int errno : new int[] {0, 1, 2, 5, 9, 13, 34, 61, 95, Integer.MAX_VALUE}) {
+    for (int errno : new int[] {0, 1, 2, 5, 9, 13, 34, ENODATA_ERRNO, 95, Integer.MAX_VALUE}) {
       var calls = new LinuxInodeSecurity(noAcl(errno), (s, p, v) -> 0, () -> 0);
-      if (errno == 61 || errno == 95)
+      if (errno == ENODATA_ERRNO || errno == 95)
         assertArrayEquals(new byte[0], calls.accessAcl(CAPABILITY, 44));
       else failure(() -> calls.accessAcl(CAPABILITY, 44));
     }
@@ -161,7 +165,7 @@ final class LinuxInodeSecurityTest {
 
   @Test
   void canonicalCapabilityAndBounds() throws Exception {
-    var calls = new LinuxInodeSecurity(noAcl(61), (s, p, v) -> 0, () -> 0);
+    var calls = new LinuxInodeSecurity(noAcl(ENODATA_ERRNO), (s, p, v) -> 0, () -> 0);
     for (String name :
         List.of(
             "",
@@ -198,40 +202,41 @@ final class LinuxInodeSecurityTest {
   }
 
   @Test
-  void platformAndSymbolAdmission() {
+  void platformAndSymbolAdmission() throws java.io.IOException {
+    long expectedUid = Integer.toUnsignedLong((Integer) Files.getAttribute(root, "unix:uid"));
+    assertEquals(expectedUid, LinuxInodeSecurity.create().effectiveUid());
     SymbolLookup real = Linker.nativeLinker().defaultLookup();
-    for (String arch : List.of("amd64", "x86_64", "aarch64"))
-      assertEquals(
-          LinuxInodeSecurity.create().effectiveUid(),
-          LinuxInodeSecurity.create("Linux", arch, real).effectiveUid());
+    for (String arch : List.of(AMD64_ARCH, "x86_64", "aarch64"))
+      assertEquals(expectedUid, LinuxInodeSecurity.create(LINUX_OS, arch, real).effectiveUid());
     for (String os : List.of("", "Windows", "linux", "Mac OS X"))
-      platformFailure(() -> LinuxInodeSecurity.create(os, "amd64", real));
+      platformFailure(() -> LinuxInodeSecurity.create(os, AMD64_ARCH, real));
     for (String arch : List.of("", "x86", "arm", "sparc"))
-      platformFailure(() -> LinuxInodeSecurity.create("Linux", arch, real));
+      platformFailure(() -> LinuxInodeSecurity.create(LINUX_OS, arch, real));
     for (String missing : List.of("gnu_get_libc_version", "getxattr", "statvfs", "geteuid"))
       platformFailure(
           () ->
               LinuxInodeSecurity.create(
-                  "Linux",
-                  "amd64",
+                  LINUX_OS,
+                  AMD64_ARCH,
                   name -> name.equals(missing) ? Optional.empty() : real.find(name)));
-    assertThrows(NullPointerException.class, () -> LinuxInodeSecurity.create(null, "amd64", real));
-    assertThrows(NullPointerException.class, () -> LinuxInodeSecurity.create("Linux", null, real));
     assertThrows(
-        NullPointerException.class, () -> LinuxInodeSecurity.create("Linux", "amd64", null));
+        NullPointerException.class, () -> LinuxInodeSecurity.create(null, AMD64_ARCH, real));
+    assertThrows(NullPointerException.class, () -> LinuxInodeSecurity.create(LINUX_OS, null, real));
+    assertThrows(
+        NullPointerException.class, () -> LinuxInodeSecurity.create(LINUX_OS, AMD64_ARCH, null));
   }
 
   @Test
   void heldInodeSurvivesReplacement() throws Exception {
     var calls = LinuxInodeSecurity.create();
-    Path original = Files.write(root.resolve("public"), new byte[] {1});
+    Path original = Files.write(root.resolve(PUBLIC_ENTRY), new byte[] {1});
     Path replacement = Files.write(root.resolve("replacement"), new byte[] {2});
     setAcl(original, 12345);
     setAcl(replacement, 12346);
     var closedCapability = new AtomicReference<Path>();
     try (var held = OwnedTransferDirectory.open(LinuxDirectoryCalls.create(), root)) {
       held.atExistingEntryHandle(
-          "public",
+          PUBLIC_ENTRY,
           path -> {
             assertArrayEquals(golden(12345), calls.accessAcl(path, 44));
             Files.move(original, root.resolve("retired"));
@@ -243,7 +248,7 @@ final class LinuxInodeSecurityTest {
           });
       failure(() -> calls.accessAcl(closedCapability.get(), 44));
       held.atExistingEntryHandle(
-          "public",
+          PUBLIC_ENTRY,
           path -> {
             assertArrayEquals(golden(12346), calls.accessAcl(path, 44));
             return true;
@@ -255,7 +260,7 @@ final class LinuxInodeSecurityTest {
   void concurrentReadsStayIndependent() throws Exception {
     var calls = LinuxInodeSecurity.create();
     var directories = LinuxDirectoryCalls.create();
-    Path file = Files.write(root.resolve("public"), new byte[] {1});
+    Path file = Files.write(root.resolve(PUBLIC_ENTRY), new byte[] {1});
     setAcl(file, 12345);
     long expectedUid = Integer.toUnsignedLong((Integer) Files.getAttribute(root, "unix:uid"));
     boolean readonly = Files.getFileStore(root).isReadOnly();
@@ -266,7 +271,7 @@ final class LinuxInodeSecurityTest {
             () -> {
               try (var held = OwnedTransferDirectory.open(directories, root)) {
                 return held.atExistingEntryHandle(
-                    "public",
+                    PUBLIC_ENTRY,
                     path -> {
                       assertArrayEquals(golden(12345), calls.accessAcl(path, 44));
                       assertEquals(readonly, calls.readOnlyFilesystem(path));
@@ -284,10 +289,12 @@ final class LinuxInodeSecurityTest {
     LinuxInodeSecurity.StatvfsCall stat = (s, p, v) -> 0;
     assertThrows(NullPointerException.class, () -> new LinuxInodeSecurity(null, stat, () -> 0));
     assertThrows(
-        NullPointerException.class, () -> new LinuxInodeSecurity(noAcl(61), null, () -> 0));
-    assertThrows(NullPointerException.class, () -> new LinuxInodeSecurity(noAcl(61), stat, null));
+        NullPointerException.class,
+        () -> new LinuxInodeSecurity(noAcl(ENODATA_ERRNO), null, () -> 0));
+    assertThrows(
+        NullPointerException.class, () -> new LinuxInodeSecurity(noAcl(ENODATA_ERRNO), stat, null));
     for (int uid : new int[] {0, 1, 1000, Integer.MAX_VALUE, Integer.MIN_VALUE, -2, -1}) {
-      InodeSecurityCalls calls = new LinuxInodeSecurity(noAcl(61), stat, () -> uid);
+      InodeSecurityCalls calls = new LinuxInodeSecurity(noAcl(ENODATA_ERRNO), stat, () -> uid);
       assertEquals(uid & 0xffff_ffffL, calls.effectiveUid());
     }
     InodeSecurityCalls real = LinuxInodeSecurity.create();
