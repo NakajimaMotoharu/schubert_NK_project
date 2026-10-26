@@ -181,7 +181,12 @@ class SessionAccessFailureTest {
         assertEquals("ROLE", event.getAsJsonObject("details").get("reason").getAsString());
         assertEquals("/**", event.getAsJsonObject("details").get("route").getAsString());
         assertEquals("reader", event.get("actorUsername").getAsString());
-        assertEquals(role.wireValue(), event.get("actorRole").getAsString());
+        assertEquals(
+            switch (role) {
+              case USER -> "USER";
+              case ADMIN -> "ADMIN";
+            },
+            event.get("actorRole").getAsString());
         assertFalse(event.toString().contains("private"));
       }
       SecurityContextHolder.clearContext();

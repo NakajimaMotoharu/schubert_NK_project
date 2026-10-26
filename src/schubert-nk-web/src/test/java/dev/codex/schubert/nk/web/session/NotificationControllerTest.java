@@ -172,7 +172,12 @@ class NotificationControllerTest {
               assertEquals("受付通知", row.get("type"));
               assertEquals("2024-01-01 00:00:00", row.get("submittedAt"));
             }
-            assertEquals(role.wireValue(), page.getTopBar().getRole());
+            assertEquals(
+                switch (role) {
+                  case USER -> "USER";
+                  case ADMIN -> "ADMIN";
+                },
+                page.getTopBar().getRole());
             byte[] expected = new byte[320];
             Arrays.fill(expected, (byte) ' ');
             put(expected, 0, 8, "SCHBNK01");
@@ -856,7 +861,12 @@ class NotificationControllerTest {
             var page = assertInstanceOf(NotificationDetailViewModel.class, model.get("page"));
             assertEquals(target, page.getValues().get("id"));
             assertEquals(state, page.getValues().get("state"));
-            assertEquals(role.wireValue(), page.getTopBar().getRole());
+            assertEquals(
+                switch (role) {
+                  case USER -> "USER";
+                  case ADMIN -> "ADMIN";
+                },
+                page.getTopBar().getRole());
             byte[] expected = new byte[268];
             Arrays.fill(expected, (byte) ' ');
             put(expected, 0, 8, "SCHBNK01");

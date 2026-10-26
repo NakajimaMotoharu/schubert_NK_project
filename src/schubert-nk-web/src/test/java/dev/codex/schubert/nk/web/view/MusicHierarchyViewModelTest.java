@@ -71,7 +71,12 @@ class MusicHierarchyViewModelTest {
           MusicCategoryViewModel.from(actor(role), new MusicCategoryResponseData(3), categories());
       assertEquals(129, m.getTrackCount());
       assertEquals("reader", m.getTopBar().getUsername());
-      assertEquals(role.wireValue(), m.getTopBar().getRole());
+      assertEquals(
+          switch (role) {
+            case USER -> "USER";
+            case ADMIN -> "ADMIN";
+          },
+          m.getTopBar().getRole());
       assertEquals(
           List.of("曲", "BGM", "その他"),
           m.getCategories().stream().map(MusicCategoryViewModel.Card::getName).toList());
@@ -91,7 +96,12 @@ class MusicHierarchyViewModelTest {
           MusicSectionViewModel.from(actor(role), "曲", new MusicSectionResponseData(3), sections());
       assertEquals("曲", m.getCategory());
       assertEquals(29, m.getTrackCount());
-      assertEquals(role.wireValue(), m.getTopBar().getRole());
+      assertEquals(
+          switch (role) {
+            case USER -> "USER";
+            case ADMIN -> "ADMIN";
+          },
+          m.getTopBar().getRole());
       assertEquals(
           List.of("ゲーム", "アニメ", "キャラクターソング"),
           m.getSections().stream().map(MusicSectionViewModel.Card::getName).toList());
@@ -257,7 +267,11 @@ class MusicHierarchyViewModelTest {
     var dom =
         Jsoup.parse(
             engine.process(
-                "<div><span th:text='${category.topBar.username}'></span><a id='c' th:href='${category.categories[0].href}' th:text='${category.categories[0].name}'></a><a id='s' th:href='${section.sections[0].href}' th:text='${section.sections[0].name}'></a></div>",
+                "<div><span th:text='${category.topBar.username}'></span><a id='c'"
+                    + " th:href='${category.categories[0].href}'"
+                    + " th:text='${category.categories[0].name}'></a><a id='s'"
+                    + " th:href='${section.sections[0].href}'"
+                    + " th:text='${section.sections[0].name}'></a></div>",
                 context));
     assertEquals("<b>&", dom.select("span").text());
     assertEquals("<b>&", dom.select("#c").text());

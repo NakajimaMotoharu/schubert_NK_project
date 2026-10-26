@@ -136,7 +136,12 @@ class ScenarioControllerTest {
               assertEquals("NUKITASHI", page.getGames().getFirst().getTitle());
               assertEquals("/scenarios/NUKITASHI1", page.getGames().getFirst().getHref());
             }
-            assertEquals(role.wireValue(), page.getTopBar().getRole());
+            assertEquals(
+                switch (role) {
+                  case USER -> "USER";
+                  case ADMIN -> "ADMIN";
+                },
+                page.getTopBar().getRole());
             assertEquals(200, response.getStatus());
             assertEquals(before + 1, f.sent.get());
             f.erased();
@@ -446,7 +451,12 @@ class ScenarioControllerTest {
                   : type.equals("RTE") ? "NUKITASHI1 Routes" : "NUKITASHI1 01: 共通ルート",
               dom.title());
           assertEquals("reader", dom.select(".login-user").text());
-          assertEquals(role.wireValue(), dom.select(".login-role").text());
+          assertEquals(
+              switch (role) {
+                case USER -> "USER";
+                case ADMIN -> "ADMIN";
+              },
+              dom.select(".login-role").text());
           assertEquals(1, dom.select("a[href='/']").size());
           assertEquals(1, dom.select("a[href='/notifications']").size());
           assertEquals(1, dom.select("a[href='/search']").size());
@@ -541,7 +551,13 @@ class ScenarioControllerTest {
       Files.createDirectories(directory);
       Files.writeString(
           directory.resolve("PT-SCR-012.txt"),
-          "cases=CHR-S05|CHR-S06\nfixture=public-synthetic\ngames=2\nroutes=2\nfiles=2\norderAndText=PASS\nactualNkGate=false\n",
+          "cases=CHR-S05|CHR-S06\n"
+              + "fixture=public-synthetic\n"
+              + "games=2\n"
+              + "routes=2\n"
+              + "files=2\n"
+              + "orderAndText=PASS\n"
+              + "actualNkGate=false\n",
           StandardCharsets.US_ASCII);
     }
   }

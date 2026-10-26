@@ -247,7 +247,12 @@ class UserCommandServiceTest {
           3,
           1,
           ResultCode.SUCCESS);
-      assertUser(FIXTURE_ROLE_COLUMN, role.wireValue());
+      assertUser(
+          FIXTURE_ROLE_COLUMN,
+          switch (role) {
+            case USER -> "USER";
+            case ADMIN -> "ADMIN";
+          });
       assertEquals(
           1,
           count(

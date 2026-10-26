@@ -148,11 +148,21 @@ class AnimationControllerTest {
                 assertEquals(4, page.getOvaCount());
                 assertTrue(page.isOpeningPresent());
                 assertEquals(20, page.getTotalCount());
-                assertEquals(role.wireValue(), page.getTopBar().getRole());
+                assertEquals(
+                    switch (role) {
+                      case USER -> "USER";
+                      case ADMIN -> "ADMIN";
+                    },
+                    page.getTopBar().getRole());
               } else {
                 var page = assertInstanceOf(AnimationListViewModel.class, model.get("page"));
                 assertEquals(count, page.getTotalCount());
-                assertEquals(role.wireValue(), page.getTopBar().getRole());
+                assertEquals(
+                    switch (role) {
+                      case USER -> "USER";
+                      case ADMIN -> "ADMIN";
+                    },
+                    page.getTopBar().getRole());
                 assertEquals(path.endsWith("main") ? "main" : "ova", page.getSection());
               }
               assertEquals(before + 1, f.requests.size());
@@ -601,7 +611,12 @@ class AnimationControllerTest {
       Files.createDirectories(directory);
       Files.writeString(
           directory.resolve("PT-SCR-065.txt"),
-          "screens=SCR008|SCR009\nfixture=public-synthetic\nroutes=3\nmenuCards=3\nlistRecords=2\nactualNkGate=false\n",
+          "screens=SCR008|SCR009\n"
+              + "fixture=public-synthetic\n"
+              + "routes=3\n"
+              + "menuCards=3\n"
+              + "listRecords=2\n"
+              + "actualNkGate=false\n",
           StandardCharsets.US_ASCII);
       f.erased();
     }

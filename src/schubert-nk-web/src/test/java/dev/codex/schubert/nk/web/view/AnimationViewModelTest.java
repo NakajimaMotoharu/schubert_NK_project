@@ -85,7 +85,12 @@ class AnimationViewModelTest {
         assertEquals(v[2] == 1, m.isOpeningPresent());
         assertEquals(v[3], m.getTotalCount());
         assertEquals("reader", m.getTopBar().getUsername());
-        assertEquals(role.wireValue(), m.getTopBar().getRole());
+        assertEquals(
+            switch (role) {
+              case USER -> "USER";
+              case ADMIN -> "ADMIN";
+            },
+            m.getTopBar().getRole());
         assertEquals("AnimationMenuViewModel[REDACTED]", m.toString());
       }
     for (var data :
@@ -300,7 +305,10 @@ class AnimationViewModelTest {
     var dom =
         Jsoup.parse(
             engine.process(
-                "<h1 th:text=\"\u0024{page.topBar.username}\"></h1><p th:text=\"\u0024{page.videos[0].title}\"></p><span th:text=\"\u0024{page.videos[0].displayPath}\"></span><a th:href=\"\u0024{page.videos[0].href}\">open</a>",
+                "<h1 th:text=\"\u0024{page.topBar.username}\"></h1><p"
+                    + " th:text=\"\u0024{page.videos[0].title}\"></p><span"
+                    + " th:text=\"\u0024{page.videos[0].displayPath}\"></span><a"
+                    + " th:href=\"\u0024{page.videos[0].href}\">open</a>",
                 new Context(Locale.ROOT, Map.of("page", m))));
     assertEquals(text, dom.select("h1").text());
     assertEquals(text, dom.select("p").text());

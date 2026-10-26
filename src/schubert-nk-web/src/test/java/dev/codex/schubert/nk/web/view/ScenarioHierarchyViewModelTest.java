@@ -68,7 +68,12 @@ class ScenarioHierarchyViewModelTest {
     for (var role : UserRole.values()) {
       var page = GameListViewModel.from(actor(role), games());
       assertEquals("reader", page.getTopBar().getUsername());
-      assertEquals(role.wireValue(), page.getTopBar().getRole());
+      assertEquals(
+          switch (role) {
+            case USER -> "USER";
+            case ADMIN -> "ADMIN";
+          },
+          page.getTopBar().getRole());
       assertEquals(
           List.of("NUKITASHI1", "NUKITASHI2"),
           page.getGames().stream().map(GameListViewModel.Card::getCode).toList());

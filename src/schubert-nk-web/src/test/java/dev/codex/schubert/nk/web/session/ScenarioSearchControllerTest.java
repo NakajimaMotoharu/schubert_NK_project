@@ -143,7 +143,12 @@ class ScenarioSearchControllerTest {
               assertEquals(200, response.getStatus());
               assertEquals(Set.of("page"), model.keySet());
               var page = assertInstanceOf(ScenarioSearchViewModel.class, model.get("page"));
-              assertEquals(role.wireValue(), page.getTopBar().getRole());
+              assertEquals(
+                  switch (role) {
+                    case USER -> "USER";
+                    case ADMIN -> "ADMIN";
+                  },
+                  page.getTopBar().getRole());
               assertEquals(count, page.getResults().orElseThrow().getRows().size());
               assertEquals(List.of("NUKITASHI1", "NUKITASHI2"), page.getGames());
               assertEquals(List.of("話者", "別話者"), page.getSpeakers());
@@ -583,7 +588,13 @@ class ScenarioSearchControllerTest {
       Files.createDirectories(directory);
       Files.writeString(
           directory.resolve("PT-SCR-045.txt"),
-          "screen=SCR003\nfixture=public-synthetic\nrequestOrder=SRC|GAM|SPK\nresults=2\nrepresentativeAudio=1\nempty=PASS\nactualNkGate=false\n",
+          "screen=SCR003\n"
+              + "fixture=public-synthetic\n"
+              + "requestOrder=SRC|GAM|SPK\n"
+              + "results=2\n"
+              + "representativeAudio=1\n"
+              + "empty=PASS\n"
+              + "actualNkGate=false\n",
           StandardCharsets.US_ASCII);
       f.erased();
     }

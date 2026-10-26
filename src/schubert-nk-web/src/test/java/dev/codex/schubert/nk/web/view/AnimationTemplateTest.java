@@ -127,7 +127,12 @@ class AnimationTemplateTest {
           assertEquals(
               List.of("/", "/notifications", "/scenarios", "/search"),
               dom.select(".nav-links a").eachAttr("href"));
-          assertEquals(role.wireValue(), dom.select(".login-role").text());
+          assertEquals(
+              switch (role) {
+                case USER -> "USER";
+                case ADMIN -> "ADMIN";
+              },
+              dom.select(".login-role").text());
           common(dom, "reader", "public-csrf");
         }
     }
@@ -323,13 +328,19 @@ class AnimationTemplateTest {
       assertTrue(end > start);
       String block = css.substring(start, end);
       String[] rules = {
-        ".animation-page .animation-main-link, .animation-page .subtrack-link { color: #1f6feb; text-decoration: none; font-weight: 700; }",
-        ".animation-page .animation-main-link:hover .scenario-title, .animation-page .subtrack-link:hover { text-decoration: underline; }",
+        ".animation-page .animation-main-link, .animation-page .subtrack-link { color: #1f6feb;"
+            + " text-decoration: none; font-weight: 700; }",
+        ".animation-page .animation-main-link:hover .scenario-title, .animation-page"
+            + " .subtrack-link:hover { text-decoration: underline; }",
         ".animation-page .animation-list .scenario-title { font-size: 17px; }",
-        ".animation-page .animation-row { grid-template-columns: minmax(0, 1fr) 110px; align-items: center; gap: 14px; }",
-        ".animation-page .animation-main-link { display: grid; gap: 7px; min-width: 0; color: inherit; }",
-        ".animation-page .subtrack-link, .animation-page .subtrack-placeholder { display: inline-grid; place-items: center; min-height: 34px; }",
-        ".animation-page .subtrack-link { border: 1px solid #c9ced6; border-radius: 6px; background: #fff; font-size: 12px; }",
+        ".animation-page .animation-row { grid-template-columns: minmax(0, 1fr) 110px; align-items:"
+            + " center; gap: 14px; }",
+        ".animation-page .animation-main-link { display: grid; gap: 7px; min-width: 0; color:"
+            + " inherit; }",
+        ".animation-page .subtrack-link, .animation-page .subtrack-placeholder { display:"
+            + " inline-grid; place-items: center; min-height: 34px; }",
+        ".animation-page .subtrack-link { border: 1px solid #c9ced6; border-radius: 6px;"
+            + " background: #fff; font-size: 12px; }",
         "@media (max-width: 900px) {",
         ".animation-page .animation-row { grid-template-columns: minmax(0, 1fr) 94px; }"
       };
@@ -382,7 +393,11 @@ class AnimationTemplateTest {
       Files.createDirectories(directory);
       Files.writeString(
           directory.resolve("PT-SCR-053.txt"),
-          "templates=animation|animation-list\nfixture=public-synthetic\nconcurrentRenders=64\nmaximumRecords=50\nactualNkGate=false\n",
+          "templates=animation|animation-list\n"
+              + "fixture=public-synthetic\n"
+              + "concurrentRenders=64\n"
+              + "maximumRecords=50\n"
+              + "actualNkGate=false\n",
           StandardCharsets.US_ASCII);
     }
   }

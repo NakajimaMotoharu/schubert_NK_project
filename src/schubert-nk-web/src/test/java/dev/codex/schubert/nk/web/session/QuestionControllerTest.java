@@ -316,7 +316,12 @@ class QuestionControllerTest {
             assertEquals(count, page.getRows().size());
             assertEquals(count, page.getRows().stream().map(r -> r.get("id")).distinct().count());
             assertEquals(role == UserRole.ADMIN, page.getFilters().isAdmin());
-            assertEquals(role.wireValue(), page.getTopBar().getRole());
+            assertEquals(
+                switch (role) {
+                  case USER -> "USER";
+                  case ADMIN -> "ADMIN";
+                },
+                page.getTopBar().getRole());
             for (var row : page.getRows()) {
               assertEquals(state, row.get("state"));
               assertEquals(

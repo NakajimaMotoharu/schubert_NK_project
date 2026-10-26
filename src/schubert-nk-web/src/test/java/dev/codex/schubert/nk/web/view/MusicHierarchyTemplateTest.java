@@ -112,7 +112,12 @@ class MusicHierarchyTemplateTest {
         assertEquals(
             List.of("/scenarios", "/search", "/animation"),
             dom.select("nav[aria-label=Musicナビゲーション] a").eachAttr("href"));
-        assertEquals(role.wireValue(), dom.select(".login-role").text());
+        assertEquals(
+            switch (role) {
+              case USER -> "USER";
+              case ADMIN -> "ADMIN";
+            },
+            dom.select(".login-role").text());
         common(dom, "reader", "public-csrf");
       }
     }
@@ -144,7 +149,12 @@ class MusicHierarchyTemplateTest {
         assertEquals(
             List.of("/music", "/search"),
             dom.select("nav[aria-label=Musicナビゲーション] a").eachAttr("href"));
-        assertEquals(role.wireValue(), dom.select(".login-role").text());
+        assertEquals(
+            switch (role) {
+              case USER -> "USER";
+              case ADMIN -> "ADMIN";
+            },
+            dom.select(".login-role").text());
         common(dom, "reader", "public-csrf");
       }
     }
@@ -228,8 +238,11 @@ class MusicHierarchyTemplateTest {
       var css = Files.readString(Path.of("src/main/resources/static/css/schubert.css"));
       for (var rule :
           List.of(
-              ".menu-grid { display: grid; grid-template-columns: repeat(2, minmax(220px, 1fr)); gap: 14px; }",
-              ".menu-item { display: grid; gap: 8px; min-height: 132px; align-content: center; padding: 20px; background: #ffffff; border: 1px solid #dde1e6; border-radius: 8px; color: inherit; text-decoration: none; }",
+              ".menu-grid { display: grid; grid-template-columns: repeat(2, minmax(220px, 1fr));"
+                  + " gap: 14px; }",
+              ".menu-item { display: grid; gap: 8px; min-height: 132px; align-content: center;"
+                  + " padding: 20px; background: #ffffff; border: 1px solid #dde1e6; border-radius:"
+                  + " 8px; color: inherit; text-decoration: none; }",
               ".menu-item strong { font-size: 22px; }",
               ".menu-item span { color: #5f6368; line-height: 1.5; }",
               "@media (max-width: 900px)",
@@ -292,7 +305,12 @@ class MusicHierarchyTemplateTest {
       Files.createDirectories(directory);
       Files.writeString(
           directory.resolve("PT-SCR-071.txt"),
-          "templates=music|music-sections\nfixture=public-synthetic\nconcurrentRenders=64\nmaximumCategories=20\nmaximumSections=100\nactualNkGate=false\n",
+          "templates=music|music-sections\n"
+              + "fixture=public-synthetic\n"
+              + "concurrentRenders=64\n"
+              + "maximumCategories=20\n"
+              + "maximumSections=100\n"
+              + "actualNkGate=false\n",
           StandardCharsets.US_ASCII);
     }
   }

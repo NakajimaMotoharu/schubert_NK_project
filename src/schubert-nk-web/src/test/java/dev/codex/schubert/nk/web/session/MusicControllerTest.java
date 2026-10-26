@@ -152,7 +152,12 @@ class MusicControllerTest {
                 assertEquals(n * (n + 1) / 2, page.getTrackCount());
                 bar = page.getTopBar();
               }
-              assertEquals(role.wireValue(), bar.getRole());
+              assertEquals(
+                  switch (role) {
+                    case USER -> "USER";
+                    case ADMIN -> "ADMIN";
+                  },
+                  bar.getRole());
               assertEquals(before + 1, f.requests.size());
               var b = f.requests.getLast();
               assertEquals(path.equals("/music") ? 256 : 320, b.length);
@@ -611,7 +616,12 @@ class MusicControllerTest {
       Files.createDirectories(directory);
       Files.writeString(
           directory.resolve("PT-SCR-083.txt"),
-          "screens=SCR011|SCR012\nfixture=public-synthetic\nroutes=2\ncategories=2\nsections=2\nactualNkGate=false\n",
+          "screens=SCR011|SCR012\n"
+              + "fixture=public-synthetic\n"
+              + "routes=2\n"
+              + "categories=2\n"
+              + "sections=2\n"
+              + "actualNkGate=false\n",
           StandardCharsets.US_ASCII);
       f.erased();
     }
