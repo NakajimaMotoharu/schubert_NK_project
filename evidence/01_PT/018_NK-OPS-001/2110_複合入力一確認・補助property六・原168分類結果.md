@@ -1,0 +1,13 @@
+# 2110 複合入力一確認・補助property六・原168分類結果
+
+2026-10-27 01:55 JST、2109/event2455、.5/2/5pp cap10、source370/Main21d変更0。PG10682-composite-callback-origins-v1 manifest `25cdcfc878ee4ecd5ef06193f77c65411e52a9cc7dd7c55bd3e075552bff9e61` actual0、PG10684-composite-callback-origins-post-v1 manifest `c90f76edee69783fbf2da2eeb2305b8c1fede592035d5b215d373986a396561c` actual0。
+
+MorningDatabaseSession.mdb590Scenariosのexpected一は、呼出側mode0..4/seed37..41とindex0、scenario=seed*6、2010-01-01+scenario日からのbegan/UUID/run/priorRun/priorId、固定SUCCESS列/件数/bytes17/時差から作るTest fixture。literalHandle/literalAuditへ観測DB値やProduction query結果を代入していないことを確認。recordのgettersは値保持constructorの固定入力を取り出すだけであり、Production計算を期待値へ流用しない。modeによって異常拒否が先に生じ得るため、五入力vectorを五試験成功とは呼ばない。
+
+独立postは元二AST raw span/hash/entry index、source行範囲と22source anchor、追加BatchStepAttemptの値保持constructorを照合。Python標準datetimeによる五有限fixture入力metadata（2010-08-11/17/23/29、09-04 UTC）を明示日付と比較し、期待sourceへのactual factory置換/異なるhandle/非連続tokenの三反例を確認。DBへ接続・SQL実行・raw保全物アクセス0。
+
+WebNative.verifyOwnのexpected入力はFixture所有AtomicInteger由来のordinalであり、業務実値から生成したものではない。ただしatDirectoryが渡すのは保持descriptorの/proc/self/fd参照で、配置pathの公開ではない。source上のtransfer/assetsキー分岐とidentity呼出順を確認しただけで、当assertがpath-owner対応や実NSS所有を検証したとしない。新しいpath比較や実環境ハーネスを作らず、CALLBACK_ORDINAL_SUPPLEMENTAL_PROPERTY_NOT_PATH_OWNER_ORACLEへ限定分類する。元path-owner内容oracle未証明は残す。
+
+原168＝出典確認160（前159＋今回一）、既是正二（新修正0）、補助property六（旧五＋ordinal一）。入力出典の未分類0であり、全oracle未確認0の意味ではない。内訳の分母/元費用を変えず、正式受入1964PT/53scope・17/190・工数null・QA051final・全安全HOLDを維持する。製品classload/compile/PT/新coverage/外部操作0、coverage null、工具新規失敗0。command/時刻/環境/source/hash/exitは両manifest、origin-reviews/source-evidence/supplemental-contracts/finite-fixture-input-vectorsへ保存。
+
+共有used13→14/reset1793599188は共有丸め1pp、PGPT専有費/N/T null、usage45f565eaacb7c5c76ec830f318dd7870734c75895f1dbeb9096a8e2d340a9e3b。群開始後に取得したfresh14/残86を別観測として保持し、開始13を上書きしない。原168分類を全G03受入に拡張せず、保存・限定障害状態追補後にWBSと最新静的未解消の具体scopeから次の独立PG/PTを選ぶ。通常小群/commit終了0。
