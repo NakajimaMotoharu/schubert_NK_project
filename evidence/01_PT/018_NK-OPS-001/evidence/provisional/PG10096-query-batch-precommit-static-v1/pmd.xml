@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pmd xmlns="http://pmd.sourceforge.net/report/2.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pmd.sourceforge.net/report/2.0.0 https://pmd.github.io/schema/report_2_0_0.xsd" version="7.28.0" timestamp="2026-10-26T09:17:39.409">
+<file name="/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/admin/UserQuerySqlContractTest.java">
+<violation beginline="308" endline="308" begincolumn="13" endcolumn="60" rule="UseProperClassLoader" ruleset="Error Prone" package="dev.codex.schubert.nk.api.application.admin" class="UserQuerySqlContractTest" method="proxy" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader" priority="3">
+In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.
+</violation>
+<violation beginline="316" endline="316" begincolumn="40" endcolumn="68" rule="UseConcurrentHashMap" ruleset="Multithreading" package="dev.codex.schubert.nk.api.application.admin" class="UserQuerySqlContractTest.Jdbc" variable="parameters" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap" priority="3">
+If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation
+</violation>
+</file>
+<file name="/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/log/LogSqlContractTest.java">
+<violation beginline="181" endline="181" begincolumn="13" endcolumn="20" rule="AvoidDuplicateLiterals" ruleset="Error Prone" package="dev.codex.schubert.nk.api.application.log" class="LogSqlContractTest" method="sql005FinalPageClampHasExactHundredRowBoundaries" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidduplicateliterals" priority="3">
+The String literal "total" appears 4 times in this file; the first occurrence is on line 181
+</violation>
+<violation beginline="365" endline="365" begincolumn="13" endcolumn="54" rule="UseProperClassLoader" ruleset="Error Prone" package="dev.codex.schubert.nk.api.application.log" class="LogSqlContractTest" method="proxy" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader" priority="3">
+In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.
+</violation>
+<violation beginline="373" endline="373" begincolumn="40" endcolumn="68" rule="UseConcurrentHashMap" ruleset="Multithreading" package="dev.codex.schubert.nk.api.application.log" class="LogSqlContractTest.Jdbc" variable="parameters" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap" priority="3">
+If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation
+</violation>
+</file>
+<file name="/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/question/QuestionSqlContractTest.java">
+<violation beginline="368" endline="368" begincolumn="15" endcolumn="22" rule="AvoidDuplicateLiterals" ruleset="Error Prone" package="dev.codex.schubert.nk.api.application.question" class="QuestionSqlContractTest" method="sql010FullQuestionPagePreservesFiftyUnansweredRows" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidduplicateliterals" priority="3">
+The String literal "total" appears 4 times in this file; the first occurrence is on line 368
+</violation>
+<violation beginline="457" endline="457" begincolumn="13" endcolumn="59" rule="UseProperClassLoader" ruleset="Error Prone" package="dev.codex.schubert.nk.api.application.question" class="QuestionSqlContractTest" method="proxy" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader" priority="3">
+In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.
+</violation>
+<violation beginline="465" endline="465" begincolumn="50" endcolumn="78" rule="UseConcurrentHashMap" ruleset="Multithreading" package="dev.codex.schubert.nk.api.application.question" class="QuestionSqlContractTest.Jdbc" variable="parameters" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap" priority="3">
+If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation
+</violation>
+</file>
+</pmd>
