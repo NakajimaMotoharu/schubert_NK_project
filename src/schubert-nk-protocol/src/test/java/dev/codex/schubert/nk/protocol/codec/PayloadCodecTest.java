@@ -30,6 +30,14 @@ import java.util.Map;
 import org.junit.jupiter.api.Test;
 
 class PayloadCodecTest {
+  private static final String UPDATED_STATE = "更新後状態";
+  private static final String USERNAME_FIELD = "Username";
+  private static final String LOOPBACK_ADDRESS = "127.0.0.1";
+  private static final String LOGIN_REQUEST = "LGNREQ01";
+  private static final String GAME_RESPONSE = "GAMRSP01";
+  private static final String LOGOUT_REQUEST = "LOGREQ01";
+  private static final String SAFE_FIELD = "safeName";
+
   @Test
   void allSixtyFourLayoutsRoundTripMinimumSuccessValues() {
     PayloadCodec codec = PayloadCodec.standard();
@@ -85,7 +93,10 @@ class PayloadCodecTest {
             layoutId,
             new FieldValueSet(
                 Map.of(
-                    "更新後状態", new FieldValue.Text("PROCESSING"), "取消日時", FieldValue.Unset.INSTANCE)),
+                    UPDATED_STATE,
+                    new FieldValue.Text("PROCESSING"),
+                    "取消日時",
+                    FieldValue.Unset.INSTANCE)),
             List.of());
 
     FixedPayload encoded = codec.encode(conflict, ResultCode.NOT_CANCELLABLE);
@@ -100,7 +111,11 @@ class PayloadCodecTest {
           new PayloadValues(
               layoutId,
               new FieldValueSet(
-                  Map.of("更新後状態", new FieldValue.Text(state), "取消日時", FieldValue.Unset.INSTANCE)),
+                  Map.of(
+                      UPDATED_STATE,
+                      new FieldValue.Text(state),
+                      "取消日時",
+                      FieldValue.Unset.INSTANCE)),
               List.of());
       FixedPayload statePayload = codec.encode(stateValue, ResultCode.NOT_CANCELLABLE);
       // UI236 section10.2: independent 12-byte status, 17-byte absent time, 3 spaces.
@@ -144,8 +159,10 @@ class PayloadCodecTest {
             layoutId,
             new FieldValueSet(
                 Map.of(
-                    "更新後状態", new FieldValue.Text("CANCELLED"),
-                    "取消日時", new FieldValue.Text("20260902123456789"))),
+                    UPDATED_STATE,
+                    new FieldValue.Text("CANCELLED"),
+                    "取消日時",
+                    new FieldValue.Text("20260902123456789"))),
             List.of());
     assertEquals(
         success,
@@ -156,8 +173,7 @@ class PayloadCodecTest {
             ResultCode.SUCCESS));
 
     // UI236 section10.2: literal wire, not an encoder-generated expected value.
-    byte[] cancelledGolden =
-        "CANCELLED   20260902123456789   ".getBytes(StandardCharsets.US_ASCII);
+    byte[] cancelledGolden = "CANCELLED   20260902123456789   ".getBytes(StandardCharsets.US_ASCII);
     for (ResultCode code : List.of(ResultCode.SUCCESS, ResultCode.IDEMPOTENT_SUCCESS)) {
       assertArrayEquals(cancelledGolden, codec.encode(success, code).copyData());
       assertEquals(success, codec.decode(layoutId, cancelledGolden, List.of(), code));
@@ -178,7 +194,7 @@ class PayloadCodecTest {
             codec.encode(
                 new PayloadValues(
                     layoutId,
-                    new FieldValueSet(Map.of("更新後状態", new FieldValue.Text("RECEIVED"))),
+                    new FieldValueSet(Map.of(UPDATED_STATE, new FieldValue.Text("RECEIVED"))),
                     List.of()),
                 ResultCode.NOT_CANCELLABLE));
     for (String invalid : List.of("RECEIVED", "CANCELLED", "UNKNOWN")) {
@@ -203,18 +219,21 @@ class PayloadCodecTest {
     FieldValueSet login =
         new FieldValueSet(
             Map.of(
-                "Username", new FieldValue.Text("user"),
-                "Password", new FieldValue.Text("PublicTestPassword"),
-                "Client address", new FieldValue.Text("127.0.0.1")));
+                USERNAME_FIELD,
+                new FieldValue.Text("user"),
+                "Password",
+                new FieldValue.Text("PublicTestPassword"),
+                "Client address",
+                new FieldValue.Text(LOOPBACK_ADDRESS)));
     byte[] loginData =
         codec
-            .encode(new PayloadValues(new LayoutId("LGNREQ01"), login, List.of()), false)
+            .encode(new PayloadValues(new LayoutId(LOGIN_REQUEST), login, List.of()), false)
             .copyData();
     byte[] expected = new byte[384];
     Arrays.fill(expected, (byte) ' ');
     System.arraycopy("user".getBytes(StandardCharsets.UTF_8), 0, expected, 0, 4);
     System.arraycopy("PublicTestPassword".getBytes(StandardCharsets.UTF_8), 0, expected, 64, 18);
-    System.arraycopy("127.0.0.1".getBytes(StandardCharsets.US_ASCII), 0, expected, 320, 9);
+    System.arraycopy(LOOPBACK_ADDRESS.getBytes(StandardCharsets.US_ASCII), 0, expected, 320, 9);
     assertArrayEquals(expected, loginData);
 
     LayoutFields event = LayoutFieldCatalog.standard().require("WLGEVT01");
@@ -239,7 +258,7 @@ class PayloadCodecTest {
         () ->
             codec.encode(
                 new PayloadValues(
-                    new LayoutId("LGNREQ01"),
+                    new LayoutId(LOGIN_REQUEST),
                     new FieldValueSet(Map.of("Unknown", new FieldValue.Text("x"))),
                     List.of()),
                 false));
@@ -248,7 +267,7 @@ class PayloadCodecTest {
         () ->
             codec.encode(
                 new PayloadValues(
-                    new LayoutId("LGNREQ01"),
+                    new LayoutId(LOGIN_REQUEST),
                     new FieldValueSet(Map.of("Reserved", new FieldValue.Text("x"))),
                     List.of()),
                 false));
@@ -256,26 +275,29 @@ class PayloadCodecTest {
         MessageEncodingException.class,
         () ->
             codec.encode(
-                new PayloadValues(new LayoutId("LGNREQ01"), FieldValueSet.empty(), List.of()),
+                new PayloadValues(new LayoutId(LOGIN_REQUEST), FieldValueSet.empty(), List.of()),
                 false));
     assertThrows(
         MessageEncodingException.class,
         () ->
             codec.encode(
                 new PayloadValues(
-                    new LayoutId("LGNREQ01"),
+                    new LayoutId(LOGIN_REQUEST),
                     new FieldValueSet(
                         Map.of(
-                            "Username", FieldValue.Unset.INSTANCE,
-                            "Password", new FieldValue.Text("p"),
-                            "Client address", new FieldValue.Text("127.0.0.1"))),
+                            USERNAME_FIELD,
+                            FieldValue.Unset.INSTANCE,
+                            "Password",
+                            new FieldValue.Text("p"),
+                            "Client address",
+                            new FieldValue.Text(LOOPBACK_ADDRESS))),
                     List.of()),
                 false));
-    assertWrongType(codec, "LGNREQ01", "Username", new FieldValue.Numeric(1));
-    assertWrongType(codec, "GAMRSP01", "Total count", new FieldValue.Text("1"));
+    assertWrongType(codec, LOGIN_REQUEST, USERNAME_FIELD, new FieldValue.Numeric(1));
+    assertWrongType(codec, GAME_RESPONSE, "Total count", new FieldValue.Text("1"));
     assertWrongType(codec, "ANMRSP01", "Opening有無", new FieldValue.Text("1"));
 
-    LayoutFields game = LayoutFieldCatalog.standard().require("GAMRSP01");
+    LayoutFields game = LayoutFieldCatalog.standard().require(GAME_RESPONSE);
     FieldValueSet gameRecord = minimumValues(game.recordFields());
     assertThrows(
         MessageEncodingException.class,
@@ -318,21 +340,21 @@ class PayloadCodecTest {
         NullPointerException.class, () -> codec.decode(null, new byte[0], List.of(), false));
     assertThrows(
         NullPointerException.class,
-        () -> codec.decode(new LayoutId("LOGREQ01"), null, List.of(), false));
+        () -> codec.decode(new LayoutId(LOGOUT_REQUEST), null, List.of(), false));
     assertThrows(
         NullPointerException.class,
-        () -> codec.decode(new LayoutId("LOGREQ01"), new byte[0], null, false));
+        () -> codec.decode(new LayoutId(LOGOUT_REQUEST), new byte[0], null, false));
     assertThrows(
         PermanentProtocolException.class,
-        () -> codec.decode(new LayoutId("LGNREQ01"), new byte[383], List.of(), false));
+        () -> codec.decode(new LayoutId(LOGIN_REQUEST), new byte[383], List.of(), false));
     assertThrows(
         PermanentProtocolException.class,
-        () -> codec.decode(new LayoutId("GAMRSP01"), new byte[9], List.of(new byte[272]), true));
+        () -> codec.decode(new LayoutId(GAME_RESPONSE), new byte[9], List.of(new byte[272]), true));
     assertThrows(
         PermanentProtocolException.class,
         () ->
             codec.decode(
-                new LayoutId("GAMRSP01"),
+                new LayoutId(GAME_RESPONSE),
                 new byte[9],
                 Collections.nCopies(11, new byte[272]),
                 false));
@@ -340,7 +362,7 @@ class PayloadCodecTest {
         NullPointerException.class,
         () ->
             codec.decode(
-                new LayoutId("GAMRSP01"),
+                new LayoutId(GAME_RESPONSE),
                 "000000000".getBytes(StandardCharsets.US_ASCII),
                 Arrays.asList((byte[]) null),
                 false));
@@ -348,7 +370,7 @@ class PayloadCodecTest {
         PermanentProtocolException.class,
         () ->
             codec.decode(
-                new LayoutId("GAMRSP01"),
+                new LayoutId(GAME_RESPONSE),
                 "000000000".getBytes(StandardCharsets.US_ASCII),
                 List.of(new byte[271]),
                 false));
@@ -357,19 +379,22 @@ class PayloadCodecTest {
         codec
             .encode(
                 new PayloadValues(
-                    new LayoutId("LGNREQ01"),
+                    new LayoutId(LOGIN_REQUEST),
                     new FieldValueSet(
                         Map.of(
-                            "Username", new FieldValue.Text("user"),
-                            "Password", new FieldValue.Text("p"),
-                            "Client address", new FieldValue.Text("127.0.0.1"))),
+                            USERNAME_FIELD,
+                            new FieldValue.Text("user"),
+                            "Password",
+                            new FieldValue.Text("p"),
+                            "Client address",
+                            new FieldValue.Text(LOOPBACK_ADDRESS))),
                     List.of()),
                 false)
             .copyData();
     login[365] = 'X';
     assertThrows(
         PermanentProtocolException.class,
-        () -> codec.decode(new LayoutId("LGNREQ01"), login, List.of(), false));
+        () -> codec.decode(new LayoutId(LOGIN_REQUEST), login, List.of(), false));
 
     LayoutFields event = LayoutFieldCatalog.standard().require("WLGEVT01");
     byte[] eventData =
@@ -405,33 +430,33 @@ class PayloadCodecTest {
     assertThrows(NullPointerException.class, () -> new FieldValueSet(nullValue));
     assertThrows(LayoutValidationException.class, () -> new FieldValueSet(Map.of(" ", secret)));
 
-    FieldValueSet values = new FieldValueSet(Map.of("safeName", secret));
+    FieldValueSet values = new FieldValueSet(Map.of(SAFE_FIELD, secret));
     assertEquals(1, values.size());
-    assertSame(secret, values.getOrUnset("safeName"));
+    assertSame(secret, values.getOrUnset(SAFE_FIELD));
     assertSame(FieldValue.Unset.INSTANCE, values.getOrUnset("missing"));
     assertThrows(NullPointerException.class, () -> values.getOrUnset(null));
     assertThrows(UnsupportedOperationException.class, () -> values.names().clear());
-    assertTrue(values.toString().contains("safeName"));
+    assertTrue(values.toString().contains(SAFE_FIELD));
     assertFalse(values.toString().contains(secret.value()));
     assertEquals(values, values);
-    assertEquals(values, new FieldValueSet(Map.of("safeName", secret)));
+    assertEquals(values, new FieldValueSet(Map.of(SAFE_FIELD, secret)));
     assertNotEquals(values, FieldValueSet.empty());
     assertNotEquals(values, "not-values");
-    assertEquals(values.hashCode(), new FieldValueSet(Map.of("safeName", secret)).hashCode());
+    assertEquals(values.hashCode(), new FieldValueSet(Map.of(SAFE_FIELD, secret)).hashCode());
 
     assertThrows(NullPointerException.class, () -> new PayloadValues(null, values, List.of()));
     assertThrows(
         NullPointerException.class,
-        () -> new PayloadValues(new LayoutId("LOGREQ01"), null, List.of()));
+        () -> new PayloadValues(new LayoutId(LOGOUT_REQUEST), null, List.of()));
     assertThrows(
         NullPointerException.class,
-        () -> new PayloadValues(new LayoutId("LOGREQ01"), values, null));
+        () -> new PayloadValues(new LayoutId(LOGOUT_REQUEST), values, null));
     ArrayList<FieldValueSet> nullRecord = new ArrayList<>();
     nullRecord.add(null);
     assertThrows(
         NullPointerException.class,
-        () -> new PayloadValues(new LayoutId("LOGREQ01"), values, nullRecord));
-    PayloadValues payload = new PayloadValues(new LayoutId("LOGREQ01"), values, List.of());
+        () -> new PayloadValues(new LayoutId(LOGOUT_REQUEST), values, nullRecord));
+    PayloadValues payload = new PayloadValues(new LayoutId(LOGOUT_REQUEST), values, List.of());
     assertThrows(UnsupportedOperationException.class, () -> payload.records().clear());
     assertFalse(payload.toString().contains(secret.value()));
   }
