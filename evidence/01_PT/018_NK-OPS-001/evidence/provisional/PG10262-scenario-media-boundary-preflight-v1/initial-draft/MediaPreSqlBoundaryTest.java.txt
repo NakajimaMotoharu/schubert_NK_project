@@ -1,0 +1,159 @@
+package dev.codex.schubert.nk.api.persistence;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
+import dev.codex.schubert.nk.api.security.AuthenticatedActor;
+import dev.codex.schubert.nk.api.security.Role;
+import dev.codex.schubert.nk.protocol.codec.FieldEncodingException;
+import dev.codex.schubert.nk.protocol.layout.media.AnimationListRequestData;
+import dev.codex.schubert.nk.protocol.layout.media.AudioDescriptorRequestData;
+import dev.codex.schubert.nk.protocol.layout.media.MusicDescriptorRequestData;
+import dev.codex.schubert.nk.protocol.layout.media.MusicSectionRequestData;
+import dev.codex.schubert.nk.protocol.layout.media.MusicTrackRequestData;
+import dev.codex.schubert.nk.protocol.layout.media.VideoDescriptorRequestData;
+import dev.codex.schubert.nk.protocol.layout.semantic.AnimationListCategory;
+import dev.codex.schubert.nk.protocol.layout.semantic.AudioId;
+import dev.codex.schubert.nk.protocol.layout.semantic.ContentDisposition;
+import java.lang.reflect.Proxy;
+import java.sql.Connection;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.function.BiConsumer;
+import org.junit.jupiter.api.Test;
+
+/** NK-MED-001; FUN005/006/007/AUT001; UI223/235; SS312/332/333; MED003/2044. */
+final class MediaPreSqlBoundaryTest {
+  private static final AuthenticatedActor ACTOR =
+      new AuthenticatedActor(7, "PublicBoundaryActor", Role.USER);
+  private static final String CATEGORY = "category";
+  private static final String SECTION = "section";
+  private final MediaRepository repository = new MediaRepository();
+
+  @Test
+  void medPre001AudioNullBeforeSql() { // PT-MED-PRE001
+    var request = new AudioDescriptorRequestData(new AudioId(7), ContentDisposition.INLINE);
+    boundary((c, a) -> repository.audioMetadata(c, a, request));
+    missingRequest((c, a) -> repository.audioMetadata(c, a, null));
+  }
+
+  @Test
+  void medPre002MusicMetadataNullBeforeSql() { // PT-MED-PRE002
+    var request = new MusicDescriptorRequestData("track-7", ContentDisposition.INLINE);
+    boundary((c, a) -> repository.musicMetadata(c, a, request));
+    missingRequest((c, a) -> repository.musicMetadata(c, a, null));
+  }
+
+  @Test
+  void medPre003VideoMetadataNullBeforeSql() { // PT-MED-PRE003
+    var request = new VideoDescriptorRequestData("video-7");
+    boundary((c, a) -> repository.videoMetadata(c, a, request));
+    missingRequest((c, a) -> repository.videoMetadata(c, a, null));
+  }
+
+  @Test
+  void medPre004AnimationMenuNullBeforeSql() { // PT-MED-PRE004
+    boundary(repository::animationMenu);
+  }
+
+  @Test
+  void medPre005AnimationListNullBeforeSql() { // PT-MED-PRE005
+    var request = new AnimationListRequestData(AnimationListCategory.MAIN);
+    boundary((c, a) -> repository.animationList(c, a, request));
+    missingRequest((c, a) -> repository.animationList(c, a, null));
+  }
+
+  @Test
+  void medPre006MusicCategoriesNullBeforeSql() { // PT-MED-PRE006
+    boundary(repository::musicCategories);
+  }
+
+  @Test
+  void medPre007MusicSectionsNullBeforeSql() { // PT-MED-PRE007
+    var request = new MusicSectionRequestData(CATEGORY);
+    boundary((c, a) -> repository.musicSections(c, a, request));
+    missingRequest((c, a) -> repository.musicSections(c, a, null));
+  }
+
+  @Test
+  void medPre008MusicTracksNullBeforeSql() { // PT-MED-PRE008
+    var request = new MusicTrackRequestData(CATEGORY, SECTION);
+    boundary((c, a) -> repository.musicTracks(c, a, request));
+    missingRequest((c, a) -> repository.musicTracks(c, a, null));
+  }
+
+  @Test
+  void medPre009Track65BytesBeforeSql() { // PT-MED-PRE009
+    var request = new MusicDescriptorRequestData("x".repeat(65), ContentDisposition.INLINE);
+    oversize((c, a) -> repository.musicMetadata(c, a, request));
+  }
+
+  @Test
+  void medPre010Video65BytesBeforeSql() { // PT-MED-PRE010
+    var request = new VideoDescriptorRequestData("x".repeat(65));
+    oversize((c, a) -> repository.videoMetadata(c, a, request));
+  }
+
+  @Test
+  void medPre011SectionCategory65BytesBeforeSql() { // PT-MED-PRE011
+    var request = new MusicSectionRequestData("x".repeat(65));
+    oversize((c, a) -> repository.musicSections(c, a, request));
+  }
+
+  @Test
+  void medPre012TrackCategory65BytesBeforeSql() { // PT-MED-PRE012
+    var request = new MusicTrackRequestData("x".repeat(65), SECTION);
+    oversize((c, a) -> repository.musicTracks(c, a, request));
+  }
+
+  @Test
+  void medPre013TrackSection129BytesBeforeSql() { // PT-MED-PRE013
+    var request = new MusicTrackRequestData(CATEGORY, "x".repeat(129));
+    oversize((c, a) -> repository.musicTracks(c, a, request));
+  }
+
+  private static void boundary(BiConsumer<Connection, AuthenticatedActor> call) {
+    var fixture = new NoSql();
+    Connection port = fixture.port();
+    assertEquals(
+        "connection",
+        assertThrows(NullPointerException.class, () -> call.accept(null, ACTOR)).getMessage());
+    assertEquals(
+        "actor",
+        assertThrows(NullPointerException.class, () -> call.accept(port, null)).getMessage());
+    fixture.untouched();
+  }
+
+  private static void missingRequest(BiConsumer<Connection, AuthenticatedActor> call) {
+    var fixture = new NoSql();
+    assertEquals(
+        "request",
+        assertThrows(NullPointerException.class, () -> call.accept(fixture.port(), ACTOR))
+            .getMessage());
+    fixture.untouched();
+  }
+
+  private static void oversize(BiConsumer<Connection, AuthenticatedActor> call) {
+    var fixture = new NoSql();
+    assertThrows(FieldEncodingException.class, () -> call.accept(fixture.port(), ACTOR));
+    fixture.untouched();
+  }
+
+  private static final class NoSql {
+    private final AtomicInteger calls = new AtomicInteger();
+
+    Connection port() {
+      return (Connection)
+          Proxy.newProxyInstance(
+              Connection.class.getClassLoader(),
+              new Class<?>[] {Connection.class},
+              (proxy, method, args) -> {
+                calls.incrementAndGet();
+                throw new AssertionError("unexpected JDBC access");
+              });
+    }
+
+    void untouched() {
+      assertEquals(0, calls.get());
+    }
+  }
+}
