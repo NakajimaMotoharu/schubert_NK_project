@@ -52,7 +52,7 @@ class UserQueryApplicationServiceTest {
   // Independent wire/SQL/fault fixture literals; do not derive from Production results.
   private static final String SEARCH_LAYOUT = "USRREQ01";
   private static final String SUCCESS_RESULT = "0000";
-  private static final String SYSTEM_ERROR_RESULT = "0200";
+  private static final String IDEMPOTENT_RESULT = "0200";
   private static final String FORBIDDEN_RESULT = "0103";
   private static final String NO_FAULT = "none";
   private static final String DATABASE_FAULT_POINT = "database";
@@ -115,7 +115,7 @@ class UserQueryApplicationServiceTest {
             "update schubert.app_users set username='Changed',username_key='changed',version=99"
                 + " where id=3");
         assertArrayEquals(
-            expected(message, SYSTEM_ERROR_RESULT, 3, detail ? 0 : 3, detail ? 3 : 0),
+            expected(message, IDEMPOTENT_RESULT, 3, detail ? 0 : 3, detail ? 3 : 0),
             service.process(message));
         assertEquals(metadata, f.inboxMetadata());
         assertEquals(4, f.commits.get());
@@ -456,8 +456,7 @@ class UserQueryApplicationServiceTest {
       assertEquals(1, f.inboxCount());
       f.afterCommit = () -> {};
       f.connectionFault = NO_FAULT;
-      assertArrayEquals(
-          expected(request, SYSTEM_ERROR_RESULT, 2, 3, 0), service(f).process(request));
+      assertArrayEquals(expected(request, IDEMPOTENT_RESULT, 2, 3, 0), service(f).process(request));
       seed(f);
       f.fingerprints.close();
       deny(() -> service(f).process(request));
@@ -492,7 +491,7 @@ class UserQueryApplicationServiceTest {
                       String code = new String(actual, 208, 4, StandardCharsets.US_ASCII);
                       if (code.equals(SUCCESS_RESULT)) initial.incrementAndGet();
                       else {
-                        assertEquals(SYSTEM_ERROR_RESULT, code);
+                        assertEquals(IDEMPOTENT_RESULT, code);
                         repeated.incrementAndGet();
                       }
                       byte[] expected = expected(request, code, 1, 3, 0);
@@ -531,7 +530,7 @@ class UserQueryApplicationServiceTest {
                       try {
                         byte[] actual = service.process(request);
                         assertTrue(
-                            List.of(SUCCESS_RESULT, SYSTEM_ERROR_RESULT)
+                            List.of(SUCCESS_RESULT, IDEMPOTENT_RESULT)
                                 .contains(new String(actual, 208, 4, StandardCharsets.US_ASCII)));
                         success.incrementAndGet();
                       } catch (PermanentProtocolException rejected) {
@@ -689,7 +688,7 @@ class UserQueryApplicationServiceTest {
           assertArrayEquals(
               expected(
                   request,
-                  point.equals(DATABASE_FAULT_POINT) ? SUCCESS_RESULT : SYSTEM_ERROR_RESULT,
+                  point.equals(DATABASE_FAULT_POINT) ? SUCCESS_RESULT : IDEMPOTENT_RESULT,
                   f.ids.get(),
                   3,
                   0),
@@ -702,7 +701,7 @@ class UserQueryApplicationServiceTest {
           assertNotNull(duplicate);
           listener.onMessage(receiver, duplicate);
           assertArrayEquals(
-              expected(request, SYSTEM_ERROR_RESULT, f.ids.get(), 3, 0),
+              expected(request, IDEMPOTENT_RESULT, f.ids.get(), 3, 0),
               brokerBody(replies.receive(5000)));
           assertEquals(frozen, f.inboxMetadata());
           UserMutationApplicationServiceTest.send(
@@ -809,7 +808,7 @@ class UserQueryApplicationServiceTest {
             target,
             false);
     put(expected, 113, message.header().authenticationContext().orElseThrow().wireValue());
-    if (code.equals(SUCCESS_RESULT) || code.equals(SYSTEM_ERROR_RESULT)) {
+    if (code.equals(SUCCESS_RESULT) || code.equals(IDEMPOTENT_RESULT)) {
       if (message.header().layoutId().value().equals(SEARCH_LAYOUT)) {
         for (int i = 0; i < Math.min(2, count); i++) put(expected, 304 + i * 168 + 76, "ADMIN");
       } else put(expected, 430, "001");

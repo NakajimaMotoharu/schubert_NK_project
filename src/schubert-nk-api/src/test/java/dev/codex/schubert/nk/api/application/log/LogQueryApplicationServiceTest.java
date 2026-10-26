@@ -50,6 +50,9 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** Actual PG/Flyway and independent full wire/SQL assertions, PG-D-092/PT-ADM-067..073. */
 class LogQueryApplicationServiceTest {
+  private static final int FIXTURE_FIRST_COMMIT_ORDINAL = 1;
+  private static final int FIXTURE_SECOND_COMMIT_ORDINAL = 2;
+  private static final int FIXTURE_THIRD_COMMIT_ORDINAL = 3;
   private static final String FIXTURE_RESULT_SUCCESS = "0000";
   private static final String FIXTURE_RESULT_IDEMPOTENT_SUCCESS = "0200";
   private static final String FIXTURE_RESULT_FORBIDDEN = "0103";
@@ -196,7 +199,7 @@ class LogQueryApplicationServiceTest {
         seed(f);
         f.afterCommit =
             () -> {
-              if (f.commits.get() == 1)
+              if (f.commits.get() == FIXTURE_FIRST_COMMIT_ORDINAL)
                 try {
                   f.sql(change);
                 } catch (SQLException failure) {
@@ -217,7 +220,7 @@ class LogQueryApplicationServiceTest {
         if (!missing) f.sql("update schubert.app_users set role='USER' where id=1");
         f.afterCommit =
             () -> {
-              if (f.commits.get() == 1)
+              if (f.commits.get() == FIXTURE_FIRST_COMMIT_ORDINAL)
                 try {
                   if (missing) f.session(1, 99);
                   else f.sql("update schubert.app_users set role='ADMIN' where id=1");
@@ -355,7 +358,7 @@ class LogQueryApplicationServiceTest {
           if (finalStage)
             f.afterCommit =
                 () -> {
-                  if (f.commits.get() == 1) f.connectionFault = fault;
+                  if (f.commits.get() == FIXTURE_FIRST_COMMIT_ORDINAL) f.connectionFault = fault;
                 };
           else f.connectionFault = fault;
           deny(() -> service(f).process(request));
@@ -472,7 +475,7 @@ class LogQueryApplicationServiceTest {
       seed(f);
       f.afterCommit =
           () -> {
-            if (f.commits.get() == 2) f.connectionFault = "close";
+            if (f.commits.get() == FIXTURE_SECOND_COMMIT_ORDINAL) f.connectionFault = "close";
           };
       deny(() -> service(f).process(request));
       assertEquals(1, f.inboxCount());
@@ -598,7 +601,7 @@ class LogQueryApplicationServiceTest {
         service.process(request);
         f.afterCommit =
             () -> {
-              if (f.commits.get() == 3)
+              if (f.commits.get() == FIXTURE_THIRD_COMMIT_ORDINAL)
                 try (var c = f.db.admin();
                     var s = c.createStatement()) {
                   s.executeUpdate(change);
