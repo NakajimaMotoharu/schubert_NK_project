@@ -1,0 +1,518 @@
+{
+  "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/admin/UserQuerySqlContractTest.java": {
+    "definitions": [
+      {
+        "initializer": "\"u3\"",
+        "line": 65,
+        "name": "USERNAME",
+        "sha256": "27b847abe0f61b7a15f96cfe2fafdae8078e4ade2f846510027c92dafa7f8b45",
+        "text": "String USERNAME = \"u3\";"
+      },
+      {
+        "initializer": "Instant.parse(\"2026-01-01T00:00:00Z\")",
+        "line": 61,
+        "name": "CREATED",
+        "sha256": "0e10f1e0567589be3c7faeb2f787cde710cb5bfa4765ecb6858fe5935e83b570",
+        "text": "Instant CREATED = Instant.parse(\"2026-01-01T00:00:00Z\");"
+      },
+      {
+        "initializer": "Instant.parse(\"2026-09-01T00:00:00Z\")",
+        "line": 62,
+        "name": "UPDATED",
+        "sha256": "e393db319bcc84aa21ee0d94eaf64f54ea67f9f1f6b6b3a65e8cb811bdff9ce6",
+        "text": "Instant UPDATED = Instant.parse(\"2026-09-01T00:00:00Z\");"
+      },
+      {
+        "initializer": "Instant.parse(\"2026-09-07T00:00:00.123Z\")",
+        "line": 63,
+        "name": "LAST_LOGIN",
+        "sha256": "fcaa9fe3c2eb660ab2a9a6959e8d045547e2104f4170087cdd1ecc31c3e4c946",
+        "text": "Instant LAST_LOGIN = Instant.parse(\"2026-09-07T00:00:00.123Z\");"
+      },
+      {
+        "initializer": "Instant.parse(\"2026-09-09T00:00:00.456Z\")",
+        "line": 64,
+        "name": "LOCKED_UNTIL",
+        "sha256": "0b11d0254ebbb67cbaaa44b91579e4a37898f5304e467379a6ac37ffad3e6c3d",
+        "text": "Instant LOCKED_UNTIL = Instant.parse(\"2026-09-09T00:00:00.456Z\");"
+      }
+    ],
+    "fragments": [],
+    "sourceSha256": "7c08ce9b15f707354b77a02537dafa95d3c21c2976d522ca9c8b436ea2492bb9"
+  },
+  "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/question/QuestionSqlContractTest.java": {
+    "definitions": [
+      {
+        "initializer": "\"00000000000000000000000001\"",
+        "line": 63,
+        "name": "RECEIPT",
+        "sha256": "1445176e294e75dcf43182d4f7dafedff162237c841522e2ccf2144f50e22597",
+        "text": "String RECEIPT = \"00000000000000000000000001\";"
+      },
+      {
+        "initializer": "\"unit7\"",
+        "line": 64,
+        "name": "USERNAME",
+        "sha256": "8db1dbe7fd17d9918d47489df1a363565babcf06fbefbe76edc53f3773aa4a21",
+        "text": "String USERNAME = \"unit7\";"
+      },
+      {
+        "initializer": "\"answer\"",
+        "line": 65,
+        "name": "ANSWER",
+        "sha256": "c896d3cb51aab58e68522932164095ba4fbe263f041a759a5d316ea1111fddf2",
+        "text": "String ANSWER = \"answer\";"
+      },
+      {
+        "initializer": "\"\ud83d\ude00\".repeat(100)",
+        "line": 66,
+        "name": "SUMMARY",
+        "sha256": "d360add9e54ffd068890fa27c6c3dc814fca3f3399372f18406a4181c094083e",
+        "text": "String SUMMARY = \"\ud83d\ude00\".repeat(100);"
+      },
+      {
+        "initializer": "SUMMARY + \"tail\"",
+        "line": 67,
+        "name": "BODY",
+        "sha256": "c86e45f040747f6ff596b05b0a09230c1346679dd01655ec497452b12939e665",
+        "text": "String BODY = SUMMARY + \"tail\";"
+      },
+      {
+        "initializer": "Instant.parse(\"2026-10-01T00:00:00.123Z\")",
+        "line": 73,
+        "name": "NOW",
+        "sha256": "d58c0cad36884121458b7b4b2cee8ab87dae477c48cc60e26a3cd7b934bc59db",
+        "text": "Instant NOW = Instant.parse(\"2026-10-01T00:00:00.123Z\");"
+      },
+      {
+        "initializer": "Instant.parse(\"2026-10-01T00:00:01.123Z\")",
+        "line": 74,
+        "name": "ANSWERED",
+        "sha256": "cfd12ab4501c6a193f229353840c7a3f9f3bfeb77c7f7faa9e9e760ca9ecc709",
+        "text": "Instant ANSWERED = Instant.parse(\"2026-10-01T00:00:01.123Z\");"
+      },
+      {
+        "initializer": "new AuthenticatedActor(7, USERNAME, Role.USER)",
+        "line": 77,
+        "name": "USER",
+        "sha256": "57048c8246f80f2d6e00069e96a0676762722b81ba59cef31358407dc1a49cff",
+        "text": "AuthenticatedActor USER = new AuthenticatedActor(7, USERNAME, Role.USER);"
+      },
+      {
+        "initializer": "new AuthenticatedActor(8, \"admin8\", Role.ADMIN)",
+        "line": 78,
+        "name": "ADMIN",
+        "sha256": "772d1530b14ac3d942e9627c5cc6d6ef0e8360a7e219aa6f40b912989dbe59ba",
+        "text": "AuthenticatedActor ADMIN = new AuthenticatedActor(8, \"admin8\", Role.ADMIN);"
+      }
+    ],
+    "fragments": [
+      "for (var actor : List.of(USER, ADMIN))",
+      "for (boolean deleted : List.of(false, true))"
+    ],
+    "sourceSha256": "091d86412f47c06d63eb91df04eabd1e1bab46ec5721cb0ebd7fafd333e8f576"
+  },
+  "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/file/InspectorApplicationTest.java": {
+    "definitions": [
+      {
+        "initializer": "new InspectionRun(new UUID(0, 42), Instant.parse(\"2026-09-17T00:00:00.123Z\"))",
+        "line": 48,
+        "name": "RUN",
+        "sha256": "cbafa212bff167c78524e32e81b40f0fc525abdeb053503e8e12c301f7455c3b",
+        "text": "InspectionRun RUN =\n      new InspectionRun(new UUID(0, 42), Instant.parse(\"2026-09-17T00:00:00.123Z\"));"
+      }
+    ],
+    "fragments": [],
+    "sourceSha256": "43271304eb88d38bbed35ce50f91b961f87904c13d431a01e923a478f9d31013"
+  },
+  "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/maintenance/AuthenticationInboxCleanupTest.java": {
+    "definitions": [
+      {
+        "initializer": "new UUID(0, 101)",
+        "line": 44,
+        "name": "MESSAGE",
+        "sha256": "84d58d84aca834d5aea4109baa7fa9cfc09ce390774efcfcfa59d0b33c418c09",
+        "text": "UUID MESSAGE = new UUID(0, 101);"
+      }
+    ],
+    "fragments": [],
+    "sourceSha256": "5dc645106eb8fcd9e3efaacc2a373151b9dfa8429bfe4f94e4d43abd70876101"
+  },
+  "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/maintenance/InboxCleanupNonAuthenticationTest.java": {
+    "definitions": [],
+    "fragments": [],
+    "sourceSha256": "b6bc34635c0cd0caef650368a40085bc04a9d733a74733442715012627456e4a"
+  },
+  "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/maintenance/InspectionRunExecutorTest.java": {
+    "definitions": [
+      {
+        "initializer": "new InspectionRun(new UUID(0, 91), Instant.parse(\"2026-09-17T00:00:00Z\"))",
+        "line": 44,
+        "name": "RUN",
+        "sha256": "8b0fa151100f9875e0bb7016b3817c29ef6005f970ba8385df56cd17c1aa16e0",
+        "text": "InspectionRun RUN =\n      new InspectionRun(new UUID(0, 91), Instant.parse(\"2026-09-17T00:00:00Z\"));"
+      }
+    ],
+    "fragments": [
+      "private static InspectionProgress progress(long count, long held, boolean complete) { return new InspectionProgress(RUN,count == 0 ? Optional.empty() : Optional.of(new UUID(0, count)),count,count - held,held,complete); }"
+    ],
+    "sourceSha256": "d048f4b6b0c529fc32ffc001c4a0cddcc2de3dcbde54145cbabea59983dfd4d9"
+  },
+  "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/maintenance/QuestionQueryInboxCleanupTest.java": {
+    "definitions": [
+      {
+        "initializer": "new UUID(0, 101)",
+        "line": 55,
+        "name": "MESSAGE",
+        "sha256": "84d58d84aca834d5aea4109baa7fa9cfc09ce390774efcfcfa59d0b33c418c09",
+        "text": "UUID MESSAGE = new UUID(0, 101);"
+      },
+      {
+        "initializer": "new InspectionRun(new UUID(0, 42), Instant.parse(\"2026-09-17T00:00:00.123Z\"))",
+        "line": 56,
+        "name": "RUN",
+        "sha256": "cbafa212bff167c78524e32e81b40f0fc525abdeb053503e8e12c301f7455c3b",
+        "text": "InspectionRun RUN =\n      new InspectionRun(new UUID(0, 42), Instant.parse(\"2026-09-17T00:00:00.123Z\"));"
+      }
+    ],
+    "fragments": [],
+    "sourceSha256": "d5151c5d1b593bd1ba9f46a1bb220c158574542da87b7f7a9104a13384d0dda3"
+  },
+  "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/MaintenanceRetirementRecordsTest.java": {
+    "definitions": [
+      {
+        "initializer": "\"2025-01-01T00:00:00.000000Z\"",
+        "line": 40,
+        "name": "CUTOFF",
+        "sha256": "7e5358aeaafce99519a83c6303b0382ab7902399b326cc42a3124d4e4211d91d",
+        "text": "String CUTOFF = \"2025-01-01T00:00:00.000000Z\";"
+      }
+    ],
+    "fragments": [],
+    "sourceSha256": "680348f0247b48e907299fd037342b08bc706e1f722f90a26ae44e5fe666ddbd"
+  },
+  "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/MaintenanceRunFilesTest.java": {
+    "definitions": [
+      {
+        "initializer": "\"12345678-9abc-def0-8123-456789abcdef\"",
+        "line": 58,
+        "name": "RUN_ID",
+        "sha256": "995ee4f2af3b85ab4461b723070b6a6f63c311fc6a8851b8420c778b1d87aced",
+        "text": "String RUN_ID = \"12345678-9abc-def0-8123-456789abcdef\";"
+      },
+      {
+        "initializer": "\"fedcba98-7654-3210-8fed-cba987654321\"",
+        "line": 59,
+        "name": "ACT_ID",
+        "sha256": "0e105d16be35847e22be48cf4271f3d335a985367906951c263f59a75a4762f1",
+        "text": "String ACT_ID = \"fedcba98-7654-3210-8fed-cba987654321\";"
+      },
+      {
+        "initializer": "new BatchRun(UUID.fromString(RUN_ID), Instant.parse(\"2026-09-12T04:05:06.123456Z\"))",
+        "line": 62,
+        "name": "RUN",
+        "sha256": "ffd2ce1ac77427a832cdd2e2b0fd7c4ba190f30886c432f51897e26403ee3da0",
+        "text": "BatchRun RUN =\n      new BatchRun(UUID.fromString(RUN_ID), Instant.parse(\"2026-09-12T04:05:06.123456Z\"));"
+      },
+      {
+        "initializer": "new MaintenanceActivation(RUN, UUID.fromString(ACT_ID))",
+        "line": 64,
+        "name": "ACTIVATION",
+        "sha256": "4b5c3f41b520fe15bb005f52af3590b2ceb745f4f9c8d7166a4b8f8ddcdb6e26",
+        "text": "MaintenanceActivation ACTIVATION =\n      new MaintenanceActivation(RUN, UUID.fromString(ACT_ID));"
+      },
+      {
+        "initializer": "new MaintenanceCompletion(\n                    ACTIVATION,\n                    Instant.parse(\"2026-09-12T05:06:07.234567Z\"),\n                    MaintenanceCompletion.Outcome.SUCCESS)",
+        "line": 89,
+        "name": "done",
+        "sha256": "86f129cf9ab7e456d548f81e4444e46e64029e19129569f452aeccd396eee91f",
+        "text": "var done =\n                new MaintenanceCompletion(\n                    ACTIVATION,\n                    Instant.parse(\"2026-09-12T05:06:07.234567Z\"),\n                    MaintenanceCompletion.Outcome.SUCCESS);"
+      },
+      {
+        "initializer": "completion(MaintenanceCompletion.Outcome.SUCCESS)",
+        "line": 123,
+        "name": "done",
+        "sha256": "c8c5eafbf01e4d523ec79f9990c01b220da4c09083fa7b82904c46c542ea0eef",
+        "text": "var done = completion(MaintenanceCompletion.Outcome.SUCCESS);"
+      },
+      {
+        "initializer": "new MaintenanceCompletion(\n              activation,\n              Instant.parse(\"2026-09-12T07:00:00Z\"),\n              MaintenanceCompletion.Outcome.WARNING)",
+        "line": 172,
+        "name": "done",
+        "sha256": "3a140bea2c1500e080afbcad26398010193b25d7daffd41427c1a3f892556119",
+        "text": "var done =\n          new MaintenanceCompletion(\n              activation,\n              Instant.parse(\"2026-09-12T07:00:00Z\"),\n              MaintenanceCompletion.Outcome.WARNING);"
+      },
+      {
+        "initializer": "completion(MaintenanceCompletion.Outcome.SUCCESS)",
+        "line": 215,
+        "name": "done",
+        "sha256": "c8c5eafbf01e4d523ec79f9990c01b220da4c09083fa7b82904c46c542ea0eef",
+        "text": "var done = completion(MaintenanceCompletion.Outcome.SUCCESS);"
+      },
+      {
+        "initializer": "completion(MaintenanceCompletion.Outcome.SUCCESS)",
+        "line": 242,
+        "name": "done",
+        "sha256": "c8c5eafbf01e4d523ec79f9990c01b220da4c09083fa7b82904c46c542ea0eef",
+        "text": "var done = completion(MaintenanceCompletion.Outcome.SUCCESS);"
+      },
+      {
+        "initializer": "new MaintenanceCompletion(\n                ACTIVATION,\n                Instant.parse(\"2026-09-12T07:00:00Z\"),\n                MaintenanceCompletion.Outcome.WARNING)",
+        "line": 430,
+        "name": "done",
+        "sha256": "45957a5a44347c03cc73c3e02a8e74aafd3df615db1fb45d959c0d97781018fa",
+        "text": "var done =\n            new MaintenanceCompletion(\n                ACTIVATION,\n                Instant.parse(\"2026-09-12T07:00:00Z\"),\n                MaintenanceCompletion.Outcome.WARNING);"
+      }
+    ],
+    "fragments": [
+      "assertEquals(done, s.complete(done));",
+      "assertEquals(DONE0, Files.readString(f.attempts.resolve(ACT_ID + \".done\")));"
+    ],
+    "sourceSha256": "8c9ee992e068ba004c3d7ab0a55ee1d9cf5284db0d1c8eba61da3272fe5f10c1"
+  },
+  "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/MaintenanceRunRetirementTest.java": {
+    "definitions": [
+      {
+        "initializer": "\"00000000-0000-0000-0000-000000000001\"",
+        "line": 66,
+        "name": "OTHER",
+        "sha256": "27f709f53877f4b6694a7a907f08fecce56a0d4c84b09164fdcfbcfd7c29855e",
+        "text": "String OTHER = \"00000000-0000-0000-0000-000000000001\";"
+      }
+    ],
+    "fragments": [],
+    "sourceSha256": "eb1d7a3dd54720c148428b3dd8e3da691d3753f23c1a0763fdc07ac54ef3c2de"
+  },
+  "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/MorningCurrentInvalidationTest.java": {
+    "definitions": [
+      {
+        "initializer": "UUID.fromString(\"00000000-0000-0000-0000-000000000344\")",
+        "line": 25,
+        "name": "BOOT",
+        "sha256": "009a90fc8f4f29ea2c4ec141b63bbf6fd5ddf9a03863110879236665a1eb4c4f",
+        "text": "UUID BOOT = UUID.fromString(\"00000000-0000-0000-0000-000000000344\");"
+      },
+      {
+        "initializer": "UUID.fromString(\"00000000-0000-0000-0000-000000000345\")",
+        "line": 26,
+        "name": "EPOCH",
+        "sha256": "39e779cb4bf30a7f231186f0b2ba3de7a12234fd8e4de73d53e27e63f9ddcd7c",
+        "text": "UUID EPOCH = UUID.fromString(\"00000000-0000-0000-0000-000000000345\");"
+      },
+      {
+        "initializer": "UUID.fromString(\"00000000-0000-0000-0000-000000000346\")",
+        "line": 27,
+        "name": "RUN",
+        "sha256": "9be17535887cf74b9ab3a945b9edbd6e375295895bc7ceccdbe9586ee6c921d4",
+        "text": "UUID RUN = UUID.fromString(\"00000000-0000-0000-0000-000000000346\");"
+      },
+      {
+        "initializer": "UUID.fromString(\"00000000-0000-0000-0000-000000000347\")",
+        "line": 28,
+        "name": "ACTIVE",
+        "sha256": "0662abb86c0956cca97186ff9d41d956ded7d683af9ff68ab1f6dd04fa664aeb",
+        "text": "UUID ACTIVE = UUID.fromString(\"00000000-0000-0000-0000-000000000347\");"
+      },
+      {
+        "initializer": "new MaintenanceActivation(new BatchRun(RUN, Instant.parse(\"2026-09-28T05:00:00Z\")), ACTIVE)",
+        "line": 29,
+        "name": "ACTIVATION",
+        "sha256": "48831d523b8a67b8b1f92c8f7dee00ad830d8ae26bc18dd1c795d3e5aa4f291b",
+        "text": "MaintenanceActivation ACTIVATION =\n      new MaintenanceActivation(new BatchRun(RUN, Instant.parse(\"2026-09-28T05:00:00Z\")), ACTIVE);"
+      }
+    ],
+    "fragments": [],
+    "sourceSha256": "b0459ad68a0d7442d1229147c5c2fdd4223abdcba3c74d4612695c2de2de04f3"
+  },
+  "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/MorningNewRunAdmissionTest.java": {
+    "definitions": [
+      {
+        "initializer": "UUID.fromString(\"00000000-0000-0000-0000-000000000341\")",
+        "line": 35,
+        "name": "RUN",
+        "sha256": "19540f37c4bd09c60c8ec50469a6d39f439a53659a8867ab14e0c1a9bbdab375",
+        "text": "UUID RUN = UUID.fromString(\"00000000-0000-0000-0000-000000000341\");"
+      },
+      {
+        "initializer": "UUID.fromString(\"00000000-0000-0000-0000-000000000342\")",
+        "line": 36,
+        "name": "ACTIVATION",
+        "sha256": "8245fa9856bd7a5d7bf627c62b8a5cd780918dd12419b999e770f51ddfd85c15",
+        "text": "UUID ACTIVATION = UUID.fromString(\"00000000-0000-0000-0000-000000000342\");"
+      }
+    ],
+    "fragments": [],
+    "sourceSha256": "7a029100df30fc22530d77305e9c61ab345b54ff609c14c764288f37c988e4a2"
+  },
+  "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/MorningOriginalCompletionTest.java": {
+    "definitions": [
+      {
+        "initializer": "UUID.fromString(\"00000000-0000-0000-0000-000000000454\")",
+        "line": 122,
+        "name": "id",
+        "sha256": "9c87d1a447be27131cc5bd7e131c54098e301ef7e3b5def2ad366f810127f679",
+        "text": "var id = UUID.fromString(\"00000000-0000-0000-0000-000000000454\");"
+      },
+      {
+        "initializer": "UUID.fromString(\"00000000-0000-0000-0000-000000000454\")",
+        "line": 147,
+        "name": "id",
+        "sha256": "9c87d1a447be27131cc5bd7e131c54098e301ef7e3b5def2ad366f810127f679",
+        "text": "var id = UUID.fromString(\"00000000-0000-0000-0000-000000000454\");"
+      },
+      {
+        "initializer": "UUID.fromString(\"00000000-0000-0000-0000-000000000454\")",
+        "line": 183,
+        "name": "id",
+        "sha256": "9c87d1a447be27131cc5bd7e131c54098e301ef7e3b5def2ad366f810127f679",
+        "text": "var id = UUID.fromString(\"00000000-0000-0000-0000-000000000454\");"
+      },
+      {
+        "initializer": "UUID.fromString(\"00000000-0000-0000-0000-000000000454\")",
+        "line": 212,
+        "name": "id",
+        "sha256": "9c87d1a447be27131cc5bd7e131c54098e301ef7e3b5def2ad366f810127f679",
+        "text": "var id = UUID.fromString(\"00000000-0000-0000-0000-000000000454\");"
+      }
+    ],
+    "fragments": [],
+    "sourceSha256": "f60089a05285631986ac20f2507859f954bdb8bca665f97c5cecb89c8447ef6f"
+  },
+  "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/BackupHealthMonitorTest.java": {
+    "definitions": [],
+    "fragments": [
+      "var event = sample(",
+      "assertSame(event, populated.event().orElseThrow());"
+    ],
+    "sourceSha256": "a54886a5e8b89c053f78624335d827611e80c76e5f97fdc7d2788b9e8c68dd8a"
+  },
+  "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/DlqHealthMonitorTest.java": {
+    "definitions": [],
+    "fragments": [
+      "var event = sample(",
+      "assertSame(event, populated.event().orElseThrow());"
+    ],
+    "sourceSha256": "4941eb30c932379b9500eb49c47b965ff988cb6e5b618ea292b071e6d309adea"
+  },
+  "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/IntegrityHealthMonitorTest.java": {
+    "definitions": [],
+    "fragments": [
+      "var event = sample(",
+      "assertSame(event, populated.event().orElseThrow());"
+    ],
+    "sourceSha256": "ea7d1c41a39f2f2cb7e25cc3c7f2bfc61c79fe6c1b110dd5f92f733cbd52a587"
+  },
+  "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/MonitoringPolicyEngineTest.java": {
+    "definitions": [
+      {
+        "initializer": "Instant.parse(\"2026-10-23T00:00:00Z\")",
+        "line": 27,
+        "name": "TIME",
+        "sha256": "6c0ad9dbe97801146536ccead2156e6e302f2c4885973b5051e3eccde4bce2d1",
+        "text": "Instant TIME = Instant.parse(\"2026-10-23T00:00:00Z\");"
+      }
+    ],
+    "fragments": [],
+    "sourceSha256": "64b3ee74b7b5f66464594169332d5806ec7f77436c2797fe76607bcc7d6562d9"
+  },
+  "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/RestartHealthMonitorTest.java": {
+    "definitions": [],
+    "fragments": [
+      "var event = sample(",
+      "assertSame(event, populated.event().orElseThrow());"
+    ],
+    "sourceSha256": "be1d1480750f935ca66ac8c793599bbeeaf10f4dceb0b3a9d9990269786c8a8e"
+  },
+  "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/RootStartupContextTest.java": {
+    "definitions": [
+      {
+        "initializer": "\"11111111-1111-1111-1111-111111111111\\n\"",
+        "line": 422,
+        "name": "BOOT",
+        "sha256": "1684319ed7d628a9e956db872f7d14306fe8943386410b3bb56cffdad5b491c0",
+        "text": "String BOOT = \"11111111-1111-1111-1111-111111111111\\n\";"
+      },
+      {
+        "initializer": "\"1\".repeat(32)",
+        "line": 423,
+        "name": "INV",
+        "sha256": "f145388b52290e7f9d7c63a15ce7156368b314fe251afb574012bff11b8cbad2",
+        "text": "String INV = \"1\".repeat(32);"
+      }
+    ],
+    "fragments": [
+      "BOOT.trim()"
+    ],
+    "sourceSha256": "64536e7c73e6043911b3bd86d23791961a6358e012203fdf71611c50702e8824"
+  },
+  "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/MorningDatabaseSessionTest.java": {
+    "definitions": [],
+    "fragments": [],
+    "sourceSha256": "d5bf2431a9bd74b7bf91b9ede7bec18ec7699dacce5b68c168b8c0a40f2b706d"
+  },
+  "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/MorningExpirySessionTest.java": {
+    "definitions": [
+      {
+        "initializer": "Instant.parse(\"2026-09-13T02:00:00Z\")",
+        "line": 49,
+        "name": "NOW",
+        "sha256": "21af8eabdb7f1e2af9c1d7dfa1fd5ae1b0eb07ddb390ffdcfb7c4ff4516bb885",
+        "text": "Instant NOW = Instant.parse(\"2026-09-13T02:00:00Z\");"
+      }
+    ],
+    "fragments": [
+      "NOW.plusSeconds(15)"
+    ],
+    "sourceSha256": "d369e330da0db14270b3acf54e3bbf64f44cbe0de55607d372c9efd2d2e996f9"
+  },
+  "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/RunReferenceRepositoryTest.java": {
+    "definitions": [],
+    "fragments": [
+      "for (int mask = 0; mask < 8; mask++)",
+      "for (boolean consistent : List.of(false, true))",
+      "boolean history = (mask & 1) != 0;",
+      "boolean inbox = (mask & 2) != 0;",
+      "boolean log = (mask & 4) != 0;",
+      "assertEquals(history, value.hasBatchHistory());",
+      "assertEquals(inbox, value.hasInboxProgress());",
+      "assertEquals(log, value.hasLogProgress());",
+      "assertEquals(consistent, value.identityConsistent());",
+      "assertEquals(mask != 0, value.anyReference());"
+    ],
+    "sourceSha256": "561de3a2711d834979857b13a327ee826c9c23dcbe020a478f9531f8cfac0773"
+  },
+  "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/bootstrap/TerminalNativeCoverageProfileTest.java": {
+    "definitions": [],
+    "fragments": [
+      "for (var service : ServiceConfigFiles.Service.values())"
+    ],
+    "sourceSha256": "b2affbb852edcdbe1eb1a1af61ecf515c2d7bae9a32ace877b03f8f010cbbfc7"
+  },
+  "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/LogSearchWireClientTest.java": {
+    "definitions": [],
+    "fragments": [
+      "for (boolean optional : List.of(false, true))"
+    ],
+    "sourceSha256": "b18a2e706f61be3980301bc82ed73879858ef2dfa38ef0e84486cb4628fcdc98"
+  },
+  "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/receipt/ReceiptReferenceRepositoryTest.java": {
+    "definitions": [
+      {
+        "initializer": "\"00000000000000000000000001\"",
+        "line": 29,
+        "name": "ID",
+        "sha256": "78501de1bc4d943e537af2bc119d8185c5d6d31692716c4ecda9933080bac156",
+        "text": "String ID = \"00000000000000000000000001\";"
+      },
+      {
+        "initializer": "Instant.parse(\"2026-10-04T00:00:00.123Z\")",
+        "line": 30,
+        "name": "TIME",
+        "sha256": "29a4a8fd5d3e6053125be1c4d81233921133946ebe1cfdf8aa6bd37bdf1161c4",
+        "text": "Instant TIME = Instant.parse(\"2026-10-04T00:00:00.123Z\");"
+      }
+    ],
+    "fragments": [],
+    "sourceSha256": "21807c9377145120abe4b11dfa89663083041ce15a7ce522e9972bedf7a0b6e0"
+  }
+}

@@ -1,0 +1,11 @@
+# 2107 残期待入力46・Fixtureと補助property分離仕様
+
+群G03_REMAINING_CONSTRUCTOR_INPUT_ORIGINS_V1/event2453、着手前1/3/7共有pp、cap10。主担当WBS-G03.01、source370fd74f6/Main21d7c304不変。元168/前119確認/既是正2/未確認47を固定し、PG10670のmethod等46だけを今回対象とする。callback一は別保留のまま。PG10632正常snapshot入力SHAと元AST四keyを使い、元費用・受入条件・正式1964PT/53scope・17/190・工数nullを維持する。
+
+対象のTest source定義、有限loop、Test内progress helper、JDK immutable値操作、元値保持constructorを読取確認する。比較対象の実値からexpectedを再計算しない。40箇所の固定入力候補、四Evaluationのopaque event identity、同値hash補助property一、複合DB fixture一を区別する。内容を検証しないidentity/hash propertyを独立業務oracleとして認定しない。複合DB fixtureのliteralという変数名だけでは独立性を認定しない。
+
+TestIDは元path/method/expected開始line/expression SHAで一意に保持。正常・境界は明示literal/enum/finite control、nullは元constructor契約、並行/再送/例外/資源後条件は元caseの未実行/HOLDを維持する。sourceレビューからその実行成功を推定しない。DB/Backup/鍵/VM/Root/NSS/HTTP/JMS/実processの調査・起動・新fixture実行・拒否試行は含まない。
+
+PG10676は元46の参照hash/実source SHA/独立入力定義を保存するmetadata工具、PG10678は別raw spanと固定期待宣言・分類境界の反証で独立点検する。前置pyflakes実exit0を確認した場合のみ本体を実行する。両工具は製品classload/compile/PTを実行しない。新coverageはnull。結果・環境・command/exit・source/path/hash・未証明範囲を公開manifestへ記録する。
+
+合格の意味はmetadata/source束縛の整合のみ。全case、実業務処理、coverage100、F03/G03/451、WBS全受入の代替ではない。実装済みの仕様違反を発見した場合は915/916へ修正前起票する。既に是正した二期待値を新修正として再加算しない。群終了後も通常停止条件に該当しなければ後続の独立PG/PTへ進む。

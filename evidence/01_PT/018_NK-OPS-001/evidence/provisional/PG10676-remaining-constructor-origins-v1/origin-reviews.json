@@ -1,0 +1,692 @@
+[
+  {
+    "expression": "new UserRecord(\n            new UserId(3),\n            USERNAME,\n            UserRole.USER,\n            UserState.ACTIVE,\n            Optional.empty(),\n            Optional.of(LAST_LOGIN),\n            CREATED,\n            UPDATED,\n            4)",
+    "key": {
+      "expectedExpressionSha256": "db907dfb24bbbf41193a848c64cb845fd14d2daa1cd3372e0b40d91002ac12cd",
+      "line": 115,
+      "method": "sql003OneMappedRowKeepsTypedColumnsAndMillisecondProjection",
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/admin/UserQuerySqlContractTest.java"
+    },
+    "priorJdkEntrySha256": "e045cfa76d95539a3d116a71682bbd910bec6184a76fb9a7c5d68aafbab3205f",
+    "priorJdkIndex": 0,
+    "productTestsExecuted": 0,
+    "sourceSha256": "7c08ce9b15f707354b77a02537dafa95d3c21c2976d522ca9c8b436ea2492bb9",
+    "status": "FIXTURE_HELPER_JDK_INPUTS_STATIC_REVIEWED",
+    "wholeCaseFixtureQualified": false
+  },
+  {
+    "expression": "new UserDetailResponseData(\n            new UserId(3),\n            USERNAME,\n            UserRole.USER,\n            UserState.ACTIVE,\n            Optional.empty(),\n            Optional.of(LAST_LOGIN),\n            Instant.parse(\"2026-08-31T00:00:00.123Z\"),\n            CREATED,\n            UPDATED,\n            2,\n            4,\n            \"SYSTEM\",\n            \"operator\")",
+    "key": {
+      "expectedExpressionSha256": "65b301c9a8f0257e74b801f440859cd30af42cd74b52a5b039aa4e225201b81a",
+      "line": 154,
+      "method": "sql005DetailProjectsTwoActiveSessionsWithoutSelectingCredentials",
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/admin/UserQuerySqlContractTest.java"
+    },
+    "priorJdkEntrySha256": "3eb8e4fd4d7179f733bf701edc41a91566c000d663a1be795b93d9d00fdc3ef3",
+    "priorJdkIndex": 1,
+    "productTestsExecuted": 0,
+    "sourceSha256": "7c08ce9b15f707354b77a02537dafa95d3c21c2976d522ca9c8b436ea2492bb9",
+    "status": "FIXTURE_HELPER_JDK_INPUTS_STATIC_REVIEWED",
+    "wholeCaseFixtureQualified": false
+  },
+  {
+    "expression": "new UserRecord(\n            new UserId(3),\n            USERNAME,\n            UserRole.USER,\n            UserState.LOCKED,\n            Optional.of(LOCKED_UNTIL),\n            Optional.empty(),\n            CREATED,\n            UPDATED,\n            4)",
+    "key": {
+      "expectedExpressionSha256": "9148479e00b883bde9b441adc80361ae251a3e94cbbd0dd1e922ee14230d29f5",
+      "line": 183,
+      "method": "sql006LockedProjectionPreservesOptionalTimeAndAbsentLastLogin",
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/admin/UserQuerySqlContractTest.java"
+    },
+    "priorJdkEntrySha256": "c8a4d786424a5507eac07234d615e5c8cf88b3c2a231bb86b2831812c69d994d",
+    "priorJdkIndex": 2,
+    "productTestsExecuted": 0,
+    "sourceSha256": "7c08ce9b15f707354b77a02537dafa95d3c21c2976d522ca9c8b436ea2492bb9",
+    "status": "FIXTURE_HELPER_JDK_INPUTS_STATIC_REVIEWED",
+    "wholeCaseFixtureQualified": false
+  },
+  {
+    "expression": "List.of(\n            new QuestionSummaryRecord(\n                new QuestionId(3),\n                RECEIPT,\n                USERNAME,\n                SUMMARY,\n                AnswerState.ANSWERED,\n                NOW,\n                Optional.of(ANSWERED)))",
+    "key": {
+      "expectedExpressionSha256": "0773393f0fa1e8d0a4e7dbd0f336e20645908c20ce61ef4983af864fe13caeec",
+      "line": 144,
+      "method": "sql003QuestionSummaryCountsCodePointsNotUtf16Units",
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/question/QuestionSqlContractTest.java"
+    },
+    "priorJdkEntrySha256": "71e642f16f91cceb3bd5a555af93ea3f6738e81f6159e8dce3eb3baee2748e67",
+    "priorJdkIndex": 3,
+    "productTestsExecuted": 0,
+    "sourceSha256": "091d86412f47c06d63eb91df04eabd1e1bab46ec5721cb0ebd7fafd333e8f576",
+    "status": "FIXTURE_HELPER_JDK_INPUTS_STATIC_REVIEWED",
+    "wholeCaseFixtureQualified": false
+  },
+  {
+    "expression": "new QuestionDetailResponseData(\n                  new QuestionId(3),\n                  RECEIPT,\n                  USERNAME,\n                  actor == ADMIN ? AnswerState.ANSWERED : AnswerState.UNANSWERED,\n                  BODY,\n                  actor == ADMIN ? Optional.of(ANSWER) : Optional.empty(),\n                  NOW,\n                  actor == ADMIN ? Optional.of(ANSWERED) : Optional.empty())",
+    "key": {
+      "expectedExpressionSha256": "23bfbbaef359f43208f2af74a8641ef3bc7507fa1f95249892adfb124711eba9",
+      "line": 172,
+      "method": "sql004QuestionDetailBindsTargetAndOwnerAndKeepsFullText",
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/question/QuestionSqlContractTest.java"
+    },
+    "priorJdkEntrySha256": "e30a0327631dbf1ff2df0dbcb43114dfad586211e369b3114ef65d0255839d69",
+    "priorJdkIndex": 4,
+    "productTestsExecuted": 0,
+    "sourceSha256": "091d86412f47c06d63eb91df04eabd1e1bab46ec5721cb0ebd7fafd333e8f576",
+    "status": "FIXTURE_HELPER_JDK_INPUTS_STATIC_REVIEWED",
+    "wholeCaseFixtureQualified": false
+  },
+  {
+    "expression": "List.of(\n              new NotificationRecord(\n                  new NotificationId(3),\n                  RECEIPT,\n                  NotificationType.ACCEPTED,\n                  NotificationState.RECEIVED,\n                  NOW,\n                  NOW,\n                  deleted ? \"\u524a\u9664\u6e08\u307f\" : SUMMARY,\n                  deleted))",
+    "key": {
+      "expectedExpressionSha256": "7ebb921eb7240fc32ba82a96d1fdaeae281eff833fb6bb0e9ab099f182ea1854",
+      "line": 227,
+      "method": "sql006NotificationRowsPreserveDeletedLabelAndOwnerScope",
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/question/QuestionSqlContractTest.java"
+    },
+    "priorJdkEntrySha256": "d538ddb2a05ac29bdbb3d101d87287728dfb7ce7ff03d36fb3ebc8b90192fbfd",
+    "priorJdkIndex": 5,
+    "productTestsExecuted": 0,
+    "sourceSha256": "091d86412f47c06d63eb91df04eabd1e1bab46ec5721cb0ebd7fafd333e8f576",
+    "status": "FIXTURE_HELPER_JDK_INPUTS_STATIC_REVIEWED",
+    "wholeCaseFixtureQualified": false
+  },
+  {
+    "expression": "new InspectionProgress(RUN, Optional.empty(), 0, 0, 0, true)",
+    "key": {
+      "expectedExpressionSha256": "609c912d4c62db47d9feb7804ca94ac4783686107cbfcda37096abbb9eed599f",
+      "line": 93,
+      "method": "successAndResume",
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/file/InspectorApplicationTest.java"
+    },
+    "priorJdkEntrySha256": "2fe1e5368cd6ecfaa5851cfe480d2aea9f123dbf07149c61a58158554eb10f91",
+    "priorJdkIndex": 6,
+    "productTestsExecuted": 0,
+    "sourceSha256": "43271304eb88d38bbed35ce50f91b961f87904c13d431a01e923a478f9d31013",
+    "status": "FIXTURE_HELPER_JDK_INPUTS_STATIC_REVIEWED",
+    "wholeCaseFixtureQualified": false
+  },
+  {
+    "expression": "new InspectionProgress(RUN, Optional.of(new UUID(0, 100)), 1, 0, 1, true)",
+    "key": {
+      "expectedExpressionSha256": "a5e0301b6304e815010e3de587be8ee9beaaa7e35c61598436c7a6c330709b00",
+      "line": 124,
+      "method": "protectedResult",
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/file/InspectorApplicationTest.java"
+    },
+    "priorJdkEntrySha256": "0ad5728c691709ac882da256fbec995d761d97b1b90cfc14592efdb20f3a09a1",
+    "priorJdkIndex": 7,
+    "productTestsExecuted": 0,
+    "sourceSha256": "43271304eb88d38bbed35ce50f91b961f87904c13d431a01e923a478f9d31013",
+    "status": "FIXTURE_HELPER_JDK_INPUTS_STATIC_REVIEWED",
+    "wholeCaseFixtureQualified": false
+  },
+  {
+    "expression": "new InspectionProgress(RUN, Optional.empty(), 0, 0, 0, true)",
+    "key": {
+      "expectedExpressionSha256": "609c912d4c62db47d9feb7804ca94ac4783686107cbfcda37096abbb9eed599f",
+      "line": 194,
+      "method": "app925001GuardIoFailurePrecedesAllCredentialAndDatabaseIo",
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/file/InspectorApplicationTest.java"
+    },
+    "priorJdkEntrySha256": "a45ebf5813976164edce9d987532ee537cae325f2e10cead7ee2664dc53823b9",
+    "priorJdkIndex": 8,
+    "productTestsExecuted": 0,
+    "sourceSha256": "43271304eb88d38bbed35ce50f91b961f87904c13d431a01e923a478f9d31013",
+    "status": "FIXTURE_HELPER_JDK_INPUTS_STATIC_REVIEWED",
+    "wholeCaseFixtureQualified": false
+  },
+  {
+    "expression": "new InspectionProgress(RUN, Optional.empty(), 0, 0, 0, true)",
+    "key": {
+      "expectedExpressionSha256": "609c912d4c62db47d9feb7804ca94ac4783686107cbfcda37096abbb9eed599f",
+      "line": 200,
+      "method": "app925001GuardIoFailurePrecedesAllCredentialAndDatabaseIo",
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/file/InspectorApplicationTest.java"
+    },
+    "priorJdkEntrySha256": "f9431c564cd5bbaf8417ee58f9a2bbf25a3eb63aa5cc7b1bae3294dc724370a8",
+    "priorJdkIndex": 9,
+    "productTestsExecuted": 0,
+    "sourceSha256": "43271304eb88d38bbed35ce50f91b961f87904c13d431a01e923a478f9d31013",
+    "status": "FIXTURE_HELPER_JDK_INPUTS_STATIC_REVIEWED",
+    "wholeCaseFixtureQualified": false
+  },
+  {
+    "expression": "new InspectionStep(InspectionStep.Outcome.DELETED, Optional.of(MESSAGE))",
+    "key": {
+      "expectedExpressionSha256": "d55da8643cbab1d8f2b8c3134ab7a9a67a0a47bc001670cc6e5d1f8a5954c0c9",
+      "line": 96,
+      "method": "validAuthRowsDeleteAtomically",
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/maintenance/AuthenticationInboxCleanupTest.java"
+    },
+    "priorJdkEntrySha256": "46d52fa6169617e4788390fe1228cbbe96529ddef1d2053e9120df9be582500f",
+    "priorJdkIndex": 10,
+    "productTestsExecuted": 0,
+    "sourceSha256": "5dc645106eb8fcd9e3efaacc2a373151b9dfa8429bfe4f94e4d43abd70876101",
+    "status": "FIXTURE_HELPER_JDK_INPUTS_STATIC_REVIEWED",
+    "wholeCaseFixtureQualified": false
+  },
+  {
+    "expression": "new InspectionStep(InspectionStep.Outcome.END, Optional.empty())",
+    "key": {
+      "expectedExpressionSha256": "636009343a739bce0d8d6a2966f342a73e584b1c99fec578ecdf34b7ad0cf5cf",
+      "line": 101,
+      "method": "validAuthRowsDeleteAtomically",
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/maintenance/AuthenticationInboxCleanupTest.java"
+    },
+    "priorJdkEntrySha256": "3c2bf8d2a7f2288e3969dafc2fec9559e9243bb0e4e9c68cc3ee097adacc21e7",
+    "priorJdkIndex": 11,
+    "productTestsExecuted": 0,
+    "sourceSha256": "5dc645106eb8fcd9e3efaacc2a373151b9dfa8429bfe4f94e4d43abd70876101",
+    "status": "FIXTURE_HELPER_JDK_INPUTS_STATIC_REVIEWED",
+    "wholeCaseFixtureQualified": false
+  },
+  {
+    "expression": "new InspectionStep(InspectionStep.Outcome.DELETED, Optional.of(new UUID(0, 101)))",
+    "key": {
+      "expectedExpressionSha256": "612586545cf485788aed2e090731cddf8cace7a4f24257c7f7b035489a5a3faf",
+      "line": 129,
+      "method": "validQueriesAndMutationsDeleteAtomically",
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/maintenance/InboxCleanupNonAuthenticationTest.java"
+    },
+    "priorJdkEntrySha256": "9633b207b7fa8e85f92a47b50a5ce970e1d9d978a775dc860229bd5ca5a2f2ef",
+    "priorJdkIndex": 12,
+    "productTestsExecuted": 0,
+    "sourceSha256": "b6bc34635c0cd0caef650368a40085bc04a9d733a74733442715012627456e4a",
+    "status": "FIXTURE_HELPER_JDK_INPUTS_STATIC_REVIEWED",
+    "wholeCaseFixtureQualified": false
+  },
+  {
+    "expression": "new InspectionStep(InspectionStep.Outcome.END, Optional.empty())",
+    "key": {
+      "expectedExpressionSha256": "636009343a739bce0d8d6a2966f342a73e584b1c99fec578ecdf34b7ad0cf5cf",
+      "line": 261,
+      "method": "mixedCursorsNeverSkipUnverifiedRows",
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/maintenance/InboxCleanupNonAuthenticationTest.java"
+    },
+    "priorJdkEntrySha256": "7682029633e54cd15ed359089ac19bf3c7bda039341163d0e02af15dda76dd61",
+    "priorJdkIndex": 13,
+    "productTestsExecuted": 0,
+    "sourceSha256": "b6bc34635c0cd0caef650368a40085bc04a9d733a74733442715012627456e4a",
+    "status": "FIXTURE_HELPER_JDK_INPUTS_STATIC_REVIEWED",
+    "wholeCaseFixtureQualified": false
+  },
+  {
+    "expression": "new InspectionStep(InspectionStep.Outcome.END, Optional.empty())",
+    "key": {
+      "expectedExpressionSha256": "636009343a739bce0d8d6a2966f342a73e584b1c99fec578ecdf34b7ad0cf5cf",
+      "line": 484,
+      "method": "outcomesAndSideEffectsRemainBounded",
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/maintenance/InboxCleanupNonAuthenticationTest.java"
+    },
+    "priorJdkEntrySha256": "eb6ebf9cdcae56f4c16667749dd20fbd212664cf27fded45e7ba4dab37db538c",
+    "priorJdkIndex": 14,
+    "productTestsExecuted": 0,
+    "sourceSha256": "b6bc34635c0cd0caef650368a40085bc04a9d733a74733442715012627456e4a",
+    "status": "FIXTURE_HELPER_JDK_INPUTS_STATIC_REVIEWED",
+    "wholeCaseFixtureQualified": false
+  },
+  {
+    "expression": "new InspectionStep(InspectionStep.Outcome.PROTECTED, Optional.of(new UUID(0, 101)))",
+    "key": {
+      "expectedExpressionSha256": "755073c40825ff4f9d001d93081122fca0e8f3dcf352f42c300b424cccb9180e",
+      "line": 500,
+      "method": "protectedRow",
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/maintenance/InboxCleanupNonAuthenticationTest.java"
+    },
+    "priorJdkEntrySha256": "a88b8865ce574af8c68293835179f60d3a9f018a16852a23073b5a4da738b74b",
+    "priorJdkIndex": 15,
+    "productTestsExecuted": 0,
+    "sourceSha256": "b6bc34635c0cd0caef650368a40085bc04a9d733a74733442715012627456e4a",
+    "status": "FIXTURE_HELPER_JDK_INPUTS_STATIC_REVIEWED",
+    "wholeCaseFixtureQualified": false
+  },
+  {
+    "expression": "new InspectionExecution(SUCCESS, Optional.of(progress(0, 0, true)))",
+    "key": {
+      "expectedExpressionSha256": "9381717c9d75e4dc78c6f09731acb5f70c291c15d26c993af411040e43b7109e",
+      "line": 91,
+      "method": "own001ParentCheckSuccessAndLossHaveIndependentSqlPostconditions",
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/maintenance/InspectionRunExecutorTest.java"
+    },
+    "priorJdkEntrySha256": "b0b58e9976f1a3e257239096449eb921646b746d51333c1cdd5a74d3d408beca",
+    "priorJdkIndex": 16,
+    "productTestsExecuted": 0,
+    "sourceSha256": "d048f4b6b0c529fc32ffc001c4a0cddcc2de3dcbde54145cbabea59983dfd4d9",
+    "status": "FIXTURE_HELPER_JDK_INPUTS_STATIC_REVIEWED",
+    "wholeCaseFixtureQualified": false
+  },
+  {
+    "expression": "new InspectionExecution(TIME_LIMIT, Optional.empty())",
+    "key": {
+      "expectedExpressionSha256": "7286d54dd63bb4f8c8d3d5b751996846daedf258da2e5894977312a290afe7b4",
+      "line": 109,
+      "method": "own001ParentCheckSuccessAndLossHaveIndependentSqlPostconditions",
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/maintenance/InspectionRunExecutorTest.java"
+    },
+    "priorJdkEntrySha256": "b9bf9b9083b16dc8956fa396b179e5f79ba33029c9366e9de8d1640d8a61370e",
+    "priorJdkIndex": 17,
+    "productTestsExecuted": 0,
+    "sourceSha256": "d048f4b6b0c529fc32ffc001c4a0cddcc2de3dcbde54145cbabea59983dfd4d9",
+    "status": "FIXTURE_HELPER_JDK_INPUTS_STATIC_REVIEWED",
+    "wholeCaseFixtureQualified": false
+  },
+  {
+    "expression": "new InspectionExecution(SUCCESS, Optional.of(progress(0, 0, true)))",
+    "key": {
+      "expectedExpressionSha256": "9381717c9d75e4dc78c6f09731acb5f70c291c15d26c993af411040e43b7109e",
+      "line": 125,
+      "method": "emptyAndCompletedRunsSucceed",
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/maintenance/InspectionRunExecutorTest.java"
+    },
+    "priorJdkEntrySha256": "a3ade4a0c63e7f18fa50d70a355007430594f0fac5816bf10605a872082d3268",
+    "priorJdkIndex": 18,
+    "productTestsExecuted": 0,
+    "sourceSha256": "d048f4b6b0c529fc32ffc001c4a0cddcc2de3dcbde54145cbabea59983dfd4d9",
+    "status": "FIXTURE_HELPER_JDK_INPUTS_STATIC_REVIEWED",
+    "wholeCaseFixtureQualified": false
+  },
+  {
+    "expression": "new InspectionExecution(WARNING, Optional.of(progress(2, 2, true)))",
+    "key": {
+      "expectedExpressionSha256": "a0cf68fd871c122c665d6996b56eccad53e7f4edc18cfc178c757296e6de0f87",
+      "line": 155,
+      "method": "protectedRowsEndWithWarning",
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/maintenance/InspectionRunExecutorTest.java"
+    },
+    "priorJdkEntrySha256": "e56eb1b9a96075503e3d32db11759aeed70acf48e3123329b605347702148adb",
+    "priorJdkIndex": 19,
+    "productTestsExecuted": 0,
+    "sourceSha256": "d048f4b6b0c529fc32ffc001c4a0cddcc2de3dcbde54145cbabea59983dfd4d9",
+    "status": "FIXTURE_HELPER_JDK_INPUTS_STATIC_REVIEWED",
+    "wholeCaseFixtureQualified": false
+  },
+  {
+    "expression": "new InspectionExecution(TIME_LIMIT, Optional.empty())",
+    "key": {
+      "expectedExpressionSha256": "7286d54dd63bb4f8c8d3d5b751996846daedf258da2e5894977312a290afe7b4",
+      "line": 190,
+      "method": "deadlineAndClockBoundaries",
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/maintenance/InspectionRunExecutorTest.java"
+    },
+    "priorJdkEntrySha256": "2ae1f374bc85dbcee1c4b6773515075ace5abaefa7c944a291574e23c20bc7ae",
+    "priorJdkIndex": 20,
+    "productTestsExecuted": 0,
+    "sourceSha256": "d048f4b6b0c529fc32ffc001c4a0cddcc2de3dcbde54145cbabea59983dfd4d9",
+    "status": "FIXTURE_HELPER_JDK_INPUTS_STATIC_REVIEWED",
+    "wholeCaseFixtureQualified": false
+  },
+  {
+    "expression": "new InspectionExecution(INTERRUPTED, Optional.empty())",
+    "key": {
+      "expectedExpressionSha256": "7b59131b8c294300789112f76c430feb7f87a3625769805fef2784f3868b0374",
+      "line": 250,
+      "method": "interruptionRemainsVisible",
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/maintenance/InspectionRunExecutorTest.java"
+    },
+    "priorJdkEntrySha256": "f1de5b8c408d3f81867edbfd0d321e02927de1cf82c945531f0bed2e5a8a98ab",
+    "priorJdkIndex": 21,
+    "productTestsExecuted": 0,
+    "sourceSha256": "d048f4b6b0c529fc32ffc001c4a0cddcc2de3dcbde54145cbabea59983dfd4d9",
+    "status": "FIXTURE_HELPER_JDK_INPUTS_STATIC_REVIEWED",
+    "wholeCaseFixtureQualified": false
+  },
+  {
+    "expression": "new InspectionExecution(STORAGE_FAILURE, Optional.empty())",
+    "key": {
+      "expectedExpressionSha256": "a9cf85f817247a8544bd3be1aca3489345abc7f242095c19b538ee3980d076c9",
+      "line": 285,
+      "method": "storageFailurePreservesLastConfirmedOnly",
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/maintenance/InspectionRunExecutorTest.java"
+    },
+    "priorJdkEntrySha256": "456c1034c28618ff155a55b0e3f0ac1af64e8d10859501510ef21adcb489b090",
+    "priorJdkIndex": 22,
+    "productTestsExecuted": 0,
+    "sourceSha256": "d048f4b6b0c529fc32ffc001c4a0cddcc2de3dcbde54145cbabea59983dfd4d9",
+    "status": "FIXTURE_HELPER_JDK_INPUTS_STATIC_REVIEWED",
+    "wholeCaseFixtureQualified": false
+  },
+  {
+    "expression": "new InspectionProgress(RUN, Optional.of(MESSAGE), 1, 1, 0, true)",
+    "key": {
+      "expectedExpressionSha256": "9641a379ab8cb37ec6c81680e1ce5f4431cf533c7cd83c8dd9c84ed9a93e1aec",
+      "line": 528,
+      "method": "failuresRollbackAndResume",
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/maintenance/QuestionQueryInboxCleanupTest.java"
+    },
+    "priorJdkEntrySha256": "e7e6a77ce9692282398dfcb62afe7bfcf89628eb495ab7570a8eeeadf8a7c869",
+    "priorJdkIndex": 23,
+    "productTestsExecuted": 0,
+    "sourceSha256": "d5151c5d1b593bd1ba9f46a1bb220c158574542da87b7f7a9104a13384d0dda3",
+    "status": "FIXTURE_HELPER_JDK_INPUTS_STATIC_REVIEWED",
+    "wholeCaseFixtureQualified": false
+  },
+  {
+    "expression": "new InspectionProgress(RUN, Optional.of(new UUID(0, 105)), 5, 3, 2, false)",
+    "key": {
+      "expectedExpressionSha256": "294747e88fb0a439429b6aa20461ed7903552740bb48dba4810930ceb93eba08",
+      "line": 586,
+      "method": "concurrentAndDurableMixedRuns",
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/maintenance/QuestionQueryInboxCleanupTest.java"
+    },
+    "priorJdkEntrySha256": "c12b4bdd9374aa65e7969a3b1025d4eb06022656257d7c1a9aec8fd6798ef621",
+    "priorJdkIndex": 24,
+    "productTestsExecuted": 0,
+    "sourceSha256": "d5151c5d1b593bd1ba9f46a1bb220c158574542da87b7f7a9104a13384d0dda3",
+    "status": "FIXTURE_HELPER_JDK_INPUTS_STATIC_REVIEWED",
+    "wholeCaseFixtureQualified": false
+  },
+  {
+    "expression": "new InspectionProgress(RUN, Optional.of(new UUID(0, 111)), 11, 4, 7, true)",
+    "key": {
+      "expectedExpressionSha256": "81acd90892fa4173ea534825edc3211809574c2e751071ffe5612ae42687da2d",
+      "line": 588,
+      "method": "concurrentAndDurableMixedRuns",
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/maintenance/QuestionQueryInboxCleanupTest.java"
+    },
+    "priorJdkEntrySha256": "dfa90b52a70d300b46386949992521e65d05aa32c16393ae8484b2ec6c81c84b",
+    "priorJdkIndex": 25,
+    "productTestsExecuted": 0,
+    "sourceSha256": "d5151c5d1b593bd1ba9f46a1bb220c158574542da87b7f7a9104a13384d0dda3",
+    "status": "FIXTURE_HELPER_JDK_INPUTS_STATIC_REVIEWED",
+    "wholeCaseFixtureQualified": false
+  },
+  {
+    "expression": "new MaintenanceRunFiles.StartupOriginal(ACTIVATION, Optional.of(done))",
+    "key": {
+      "expectedExpressionSha256": "1b8a103d5e52d9216a214f7e57a67fc3d015788c2971e86dda1caefed6744952",
+      "line": 96,
+      "method": "doneAfterRealSessionRetainsTypedDataReferenceButRejectsPendingCapability",
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/MaintenanceRunFilesTest.java"
+    },
+    "priorJdkEntrySha256": "88e6ef6833be5f21a26755c6c48dd2d6e5b13a33874382f9910b2183797c1197",
+    "priorJdkIndex": 28,
+    "productTestsExecuted": 0,
+    "sourceSha256": "8c9ee992e068ba004c3d7ab0a55ee1d9cf5284db0d1c8eba61da3272fe5f10c1",
+    "status": "FIXTURE_HELPER_JDK_INPUTS_STATIC_REVIEWED",
+    "wholeCaseFixtureQualified": false
+  },
+  {
+    "expression": "List.of(new BatchRun(UUID.fromString(OTHER), Instant.parse(CUTOFF)))",
+    "key": {
+      "expectedExpressionSha256": "842a5430b77ce904496f8bcd50424ea20af5107687a2e5b72502e1f98721c367",
+      "line": 129,
+      "method": "candidatesAndProtectedRuns",
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/MaintenanceRunRetirementTest.java"
+    },
+    "priorJdkEntrySha256": "db8ca06f60063895e501cac2952041b414ecfda78e76009d6563007f9a401b5b",
+    "priorJdkIndex": 29,
+    "productTestsExecuted": 0,
+    "sourceSha256": "eb1d7a3dd54720c148428b3dd8e3da691d3753f23c1a0763fdc07ac54ef3c2de",
+    "status": "FIXTURE_HELPER_JDK_INPUTS_STATIC_REVIEWED",
+    "wholeCaseFixtureQualified": false
+  },
+  {
+    "expression": "new Epoch(State.INVALID, BOOT, EPOCH, ACTIVATION, Optional.empty())",
+    "key": {
+      "expectedExpressionSha256": "d4675071ebd97c0925e205ed70134844d8fa3467eb3561f791c4301c81f4842a",
+      "line": 67,
+      "method": "minvalid001DurableSameRunInvalidBeforeReturningToParent",
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/MorningCurrentInvalidationTest.java"
+    },
+    "priorJdkEntrySha256": "faa274f666d07bdc41a195c97f59bde441e60b32af92d2abc5743ba14c1eb09c",
+    "priorJdkIndex": 30,
+    "productTestsExecuted": 0,
+    "sourceSha256": "b0459ad68a0d7442d1229147c5c2fdd4223abdcba3c74d4612695c2de2de04f3",
+    "status": "FIXTURE_HELPER_JDK_INPUTS_STATIC_REVIEWED",
+    "wholeCaseFixtureQualified": false
+  },
+  {
+    "expression": "new MaintenanceActivation(\n                                  new BatchRun(RUN, Instant.parse(\"2026-09-28T05:00:00.123456Z\")),\n                                  ACTIVATION)",
+    "key": {
+      "expectedExpressionSha256": "27f77852973fb16c1311f7535e056d979859a1ef818c63a52948fd01d93a4e7c",
+      "line": 128,
+      "method": "verify",
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/MorningNewRunAdmissionTest.java"
+    },
+    "priorJdkEntrySha256": "c7ba8c825707418ba602e75aca3eb54393ddbc02a9d8eb997eb00e346f26cbf8",
+    "priorJdkIndex": 31,
+    "productTestsExecuted": 0,
+    "sourceSha256": "7a029100df30fc22530d77305e9c61ab345b54ff609c14c764288f37c988e4a2",
+    "status": "FIXTURE_HELPER_JDK_INPUTS_STATIC_REVIEWED",
+    "wholeCaseFixtureQualified": false
+  },
+  {
+    "expression": "new BatchRun(id, Instant.parse(\"2026-10-04T08:00:00Z\"))",
+    "key": {
+      "expectedExpressionSha256": "8afae0611a84d0ee97b7c912e18b4462938bd601148b5704f8821f5165f37fed",
+      "line": 131,
+      "method": "completedLookupSwitchesToTypedDataOnlyForPublishedAndExistingWarning",
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/MorningOriginalCompletionTest.java"
+    },
+    "priorJdkEntrySha256": "1f0464c0930a2885c4c53c4eaab402118dda92e4c8191d8be5280b935c422f75",
+    "priorJdkIndex": 32,
+    "productTestsExecuted": 0,
+    "sourceSha256": "f60089a05285631986ac20f2507859f954bdb8bca665f97c5cecb89c8447ef6f",
+    "status": "FIXTURE_HELPER_JDK_INPUTS_STATIC_REVIEWED",
+    "wholeCaseFixtureQualified": false
+  },
+  {
+    "expression": "new BatchRun(id, Instant.parse(\"2026-10-04T08:00:00Z\"))",
+    "key": {
+      "expectedExpressionSha256": "8afae0611a84d0ee97b7c912e18b4462938bd601148b5704f8821f5165f37fed",
+      "line": 186,
+      "method": "rlook200002RetainedLookupCannotEscapeOriginalOwnerThreadOrLifetime",
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/MorningOriginalCompletionTest.java"
+    },
+    "priorJdkEntrySha256": "deddd59b5a33a8e16fe0d453eaf998b1b74e4baa9f51cf5fa1bc916201e77fff",
+    "priorJdkIndex": 33,
+    "productTestsExecuted": 0,
+    "sourceSha256": "f60089a05285631986ac20f2507859f954bdb8bca665f97c5cecb89c8447ef6f",
+    "status": "FIXTURE_HELPER_JDK_INPUTS_STATIC_REVIEWED",
+    "wholeCaseFixtureQualified": false
+  },
+  {
+    "expression": "new Evaluation(true, true, Optional.of(event))",
+    "key": {
+      "expectedExpressionSha256": "1c5aa5e0aab4b0e935621a146e7255b7c653c2872aae8792b8955c5229c70946",
+      "line": 267,
+      "method": "backupMon008EvaluationGeneratedContractUsesIndependentIdentityAndBooleanOracles",
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/BackupHealthMonitorTest.java"
+    },
+    "priorJdkEntrySha256": "f661acac86d18012996ad357bad0a05f37a5eadf4bd88e744496917db0fcf41f",
+    "priorJdkIndex": 36,
+    "productTestsExecuted": 0,
+    "sourceSha256": "a54886a5e8b89c053f78624335d827611e80c76e5f97fdc7d2788b9e8c68dd8a",
+    "status": "OPAQUE_EVENT_IDENTITY_ONLY_NOT_CONTENT_ORACLE",
+    "wholeCaseFixtureQualified": false
+  },
+  {
+    "expression": "new Evaluation(true, Optional.of(event))",
+    "key": {
+      "expectedExpressionSha256": "d67bd61cc9e38e87f2edae6df4924c29314357f10cf86b2f521f5d3ca085f82b",
+      "line": 237,
+      "method": "dlqMon008EvaluationGeneratedContractsUseIndependentBooleanAndIdentityOracles",
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/DlqHealthMonitorTest.java"
+    },
+    "priorJdkEntrySha256": "c29623c9b95da78154c5b6687eb89e7ffd7659d2da92f2053b80c8dfc9321a03",
+    "priorJdkIndex": 38,
+    "productTestsExecuted": 0,
+    "sourceSha256": "4941eb30c932379b9500eb49c47b965ff988cb6e5b618ea292b071e6d309adea",
+    "status": "OPAQUE_EVENT_IDENTITY_ONLY_NOT_CONTENT_ORACLE",
+    "wholeCaseFixtureQualified": false
+  },
+  {
+    "expression": "new Evaluation(true, Optional.of(event))",
+    "key": {
+      "expectedExpressionSha256": "d67bd61cc9e38e87f2edae6df4924c29314357f10cf86b2f521f5d3ca085f82b",
+      "line": 186,
+      "method": "integrityMon008GeneratedEvaluationUsesIndependentBooleanAndIdentityOracles",
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/IntegrityHealthMonitorTest.java"
+    },
+    "priorJdkEntrySha256": "e9556d3b15ee676f0ca95904ac457be30a5d0e6c7e307c186d61b81c119a12ad",
+    "priorJdkIndex": 40,
+    "productTestsExecuted": 0,
+    "sourceSha256": "ea7d1c41a39f2f2cb7e25cc3c7f2bfc61c79fe6c1b110dd5f92f733cbd52a587",
+    "status": "OPAQUE_EVENT_IDENTITY_ONLY_NOT_CONTENT_ORACLE",
+    "wholeCaseFixtureQualified": false
+  },
+  {
+    "expression": "new ObservationContext(CauseClearance.UNCONFIRMED, TIME, Duration.ofSeconds(1))",
+    "key": {
+      "expectedExpressionSha256": "1872ef48a43e820f931df994036289777d01c16cb9328d845b22837f6d90d9bb",
+      "line": 99,
+      "method": "monPipe001ObservationContextInvariantsAndImmutableValues",
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/MonitoringPolicyEngineTest.java"
+    },
+    "priorJdkEntrySha256": "95fe45a30f054ddb4f12cbda04a785c00e3d38060e142a1f61423dbb4ceea96d",
+    "priorJdkIndex": 41,
+    "productTestsExecuted": 0,
+    "sourceSha256": "64b3ee74b7b5f66464594169332d5806ec7f77436c2797fe76607bcc7d6562d9",
+    "status": "FIXTURE_HELPER_JDK_INPUTS_STATIC_REVIEWED",
+    "wholeCaseFixtureQualified": false
+  },
+  {
+    "expression": "new Evaluation(true, true, Optional.of(event))",
+    "key": {
+      "expectedExpressionSha256": "1c5aa5e0aab4b0e935621a146e7255b7c653c2872aae8792b8955c5229c70946",
+      "line": 268,
+      "method": "restartMon008GeneratedEvaluationContractsUseIndependentBooleanAndIdentityOracles",
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/RestartHealthMonitorTest.java"
+    },
+    "priorJdkEntrySha256": "7b816765ef4ce11a2117f4b15dc2b96bbcc8f9b7d5dfd05bf0c602a9e1bb96e0",
+    "priorJdkIndex": 43,
+    "productTestsExecuted": 0,
+    "sourceSha256": "be1d1480750f935ca66ac8c793599bbeeaf10f4dceb0b3a9d9990269786c8a8e",
+    "status": "OPAQUE_EVENT_IDENTITY_ONLY_NOT_CONTENT_ORACLE",
+    "wholeCaseFixtureQualified": false
+  },
+  {
+    "expression": "new RootStartupContext.Snapshot(\n            RootStartupContext.Service.API,\n            BOOT.trim(),\n            INV,\n            42,\n            12345,\n            5,\n            \"/system.slice/schubert-nk-api.service\")",
+    "key": {
+      "expectedExpressionSha256": "0cda4691766563ca217c7c3775cb5f69f9f5a2dd30a12858035f96a7020c9dc8",
+      "line": 621,
+      "method": "rootctx001LiteralContextAndTwoObservations",
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/RootStartupContextTest.java"
+    },
+    "priorJdkEntrySha256": "723265a12abc96954c2d215b0bd0f162dbdf2a7570bc23a9da5ff6db05997d94",
+    "priorJdkIndex": 47,
+    "productTestsExecuted": 0,
+    "sourceSha256": "64536e7c73e6043911b3bd86d23791961a6358e012203fdf71611c50702e8824",
+    "status": "FIXTURE_HELPER_JDK_INPUTS_STATIC_REVIEWED",
+    "wholeCaseFixtureQualified": false
+  },
+  {
+    "expression": "Optional.of(new ExpiryAuditRepository.Prior(literalHandle, literalAudit))",
+    "key": {
+      "expectedExpressionSha256": "97121426e4a5fcfea304cbf99b624f44ebacb9e0515af1718dd76cc305473b0e",
+      "line": 3746,
+      "method": "mdb590Scenarios",
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/MorningDatabaseSessionTest.java"
+    },
+    "priorJdkEntrySha256": "b4d1816a59948f530ba58319fa265f53772e6c50092a89f624690980064c0fd6",
+    "priorJdkIndex": 48,
+    "productTestsExecuted": 0,
+    "sourceSha256": "d5bf2431a9bd74b7bf91b9ede7bec18ec7699dacce5b68c168b8c0a40f2b706d",
+    "status": "COMPOSITE_DB_FIXTURE_INPUT_ORIGIN_PENDING",
+    "wholeCaseFixtureQualified": false
+  },
+  {
+    "expression": "new ExpiryAuditRepository.Snapshot(\n                        \"SUCCESS\",\n                        Instant.parse(\"2026-09-05T15:00:00Z\"),\n                        3L,\n                        1L,\n                        2,\n                        2,\n                        0,\n                        200,\n                        NOW.plusSeconds(15),\n                        null,\n                        null)",
+    "key": {
+      "expectedExpressionSha256": "8124d8364905b786b6b339f2da25319e46bd4599f47e45f612a709ad679a19c1",
+      "line": 785,
+      "method": "actualFreshThenNormalSkipKeepOriginalAuditAndEachHandoffIsOneShot",
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/MorningExpirySessionTest.java"
+    },
+    "priorJdkEntrySha256": "13ad6ec4d69467afbf130e78fc3fe2536d63c54bf0177accf89159dda7427b9d",
+    "priorJdkIndex": 49,
+    "productTestsExecuted": 0,
+    "sourceSha256": "d369e330da0db14270b3acf54e3bbf64f44cbe0de55607d372c9efd2d2e996f9",
+    "status": "FIXTURE_HELPER_JDK_INPUTS_STATIC_REVIEWED",
+    "wholeCaseFixtureQualified": false
+  },
+  {
+    "expression": "new RunReferences(history, inbox, log, consistent).hashCode()",
+    "key": {
+      "expectedExpressionSha256": "3fc63049d10ef340e9e3f7922db47064990731c57e89e9d2b3a0d0bdf91440a2",
+      "line": 99,
+      "method": "referenceValueInvariants",
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/RunReferenceRepositoryTest.java"
+    },
+    "priorJdkEntrySha256": "e39d8133d09a65c217c6ba7ae0489ef4d3627c7fb306fd0c3d89bc60b78d2f75",
+    "priorJdkIndex": 50,
+    "productTestsExecuted": 0,
+    "sourceSha256": "561de3a2711d834979857b13a327ee826c9c23dcbe020a478f9531f8cfac0773",
+    "status": "EQUAL_VALUE_HASH_SUPPLEMENTAL_PROPERTY_NOT_NUMERIC_ORACLE",
+    "wholeCaseFixtureQualified": false
+  },
+  {
+    "expression": "service == ServiceConfigFiles.Service.API\n                ? new FixedServiceIdentity.Value(999, 981, List.of(980L, 981L, 982L, 986L))\n                : new FixedServiceIdentity.Value(998, 980, List.of(980L, 982L, 986L))",
+    "key": {
+      "expectedExpressionSha256": "43672623173bd28cfd4171fe0e51494eef789197f903c1607ab767c560456972",
+      "line": 138,
+      "method": "nc196003ClosedNssMappingAndOldFourDirectoriesRemainExact",
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/bootstrap/TerminalNativeCoverageProfileTest.java"
+    },
+    "priorJdkEntrySha256": "616789a21fee4d3f7d243070d77968389fcaa307fee24b348ee396ac23b5de1f",
+    "priorJdkIndex": 61,
+    "productTestsExecuted": 0,
+    "sourceSha256": "b2affbb852edcdbe1eb1a1af61ecf515c2d7bae9a32ace877b03f8f010cbbfc7",
+    "status": "FIXTURE_HELPER_JDK_INPUTS_STATIC_REVIEWED",
+    "wholeCaseFixtureQualified": false
+  },
+  {
+    "expression": "optional ? Optional.of(new HttpStatusCode(200)) : Optional.empty()",
+    "key": {
+      "expectedExpressionSha256": "6b279a25103f7b4a3d0c5146f6c498d0cb2a354920ce72d1906e61f9298f83b6",
+      "line": 143,
+      "method": "web271SuccessProfiles",
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/LogSearchWireClientTest.java"
+    },
+    "priorJdkEntrySha256": "6ee62bf2780fa3e4a71606118ba198111701162ef58a9b4f22c1b694cbd152c1",
+    "priorJdkIndex": 62,
+    "productTestsExecuted": 0,
+    "sourceSha256": "b18a2e706f61be3980301bc82ed73879858ef2dfa38ef0e84486cb4628fcdc98",
+    "status": "FIXTURE_HELPER_JDK_INPUTS_STATIC_REVIEWED",
+    "wholeCaseFixtureQualified": false
+  },
+  {
+    "expression": "optional ? Optional.of(new ElapsedMilliseconds(123)) : Optional.empty()",
+    "key": {
+      "expectedExpressionSha256": "d4ac08c07ea39d874c3d1fcc41ef05c609301e7006910449425ff2cd55d8df89",
+      "line": 145,
+      "method": "web271SuccessProfiles",
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/LogSearchWireClientTest.java"
+    },
+    "priorJdkEntrySha256": "e66e5255a59fb55afd6bc4c85e42ee5ceb7ac6164e187a56c0d9d5b4ec739ba3",
+    "priorJdkIndex": 63,
+    "productTestsExecuted": 0,
+    "sourceSha256": "b18a2e706f61be3980301bc82ed73879858ef2dfa38ef0e84486cb4628fcdc98",
+    "status": "FIXTURE_HELPER_JDK_INPUTS_STATIC_REVIEWED",
+    "wholeCaseFixtureQualified": false
+  },
+  {
+    "expression": "Optional.of(new ReceiptReference(ID, 7, TIME))",
+    "key": {
+      "expectedExpressionSha256": "2a70ebe96b940d43660a540128c651d47a1d1e5a0a7daf46b2f10bf53fe89f27",
+      "line": 92,
+      "method": "rcpt002IndependentPersistedTupleIdempotenceAndConflict",
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/receipt/ReceiptReferenceRepositoryTest.java"
+    },
+    "priorJdkEntrySha256": "0f8c7807fd3a38386f381ca5b4f285ceeded0815ee61cd159d52e4eb22461332",
+    "priorJdkIndex": 64,
+    "productTestsExecuted": 0,
+    "sourceSha256": "21807c9377145120abe4b11dfa89663083041ce15a7ce522e9972bedf7a0b6e0",
+    "status": "FIXTURE_HELPER_JDK_INPUTS_STATIC_REVIEWED",
+    "wholeCaseFixtureQualified": false
+  },
+  {
+    "expression": "Optional.of(new ReceiptReference(ID, 7, TIME))",
+    "key": {
+      "expectedExpressionSha256": "2a70ebe96b940d43660a540128c651d47a1d1e5a0a7daf46b2f10bf53fe89f27",
+      "line": 182,
+      "method": "rcpt005HundredParallelSameTupleDoesNotOverwrite",
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/receipt/ReceiptReferenceRepositoryTest.java"
+    },
+    "priorJdkEntrySha256": "bdfa742b96367dab8323972be0564f14453d0a7d27874d32f571a7719a24eb05",
+    "priorJdkIndex": 65,
+    "productTestsExecuted": 0,
+    "sourceSha256": "21807c9377145120abe4b11dfa89663083041ce15a7ce522e9972bedf7a0b6e0",
+    "status": "FIXTURE_HELPER_JDK_INPUTS_STATIC_REVIEWED",
+    "wholeCaseFixtureQualified": false
+  }
+]
