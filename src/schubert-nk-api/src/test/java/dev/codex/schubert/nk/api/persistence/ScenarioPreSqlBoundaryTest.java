@@ -40,14 +40,14 @@ final class ScenarioPreSqlBoundaryTest {
 
   @Test
   void scnPre003RoutesNullBeforeSql() { // PT-SCN-PRE003
-    var request = new RouteListRequestData(GameCode.NUKITASHI1);
+    var request = new RouteListRequestData(GameCode.NUKITASHI_1);
     boundary((c, a) -> repository.routes(c, a, request));
     missingRequest((c, a) -> repository.routes(c, a, null));
   }
 
   @Test
   void scnPre004FilesNullBeforeSql() { // PT-SCN-PRE004
-    var request = new ScenarioFileListRequestData(GameCode.NUKITASHI1, 1);
+    var request = new ScenarioFileListRequestData(GameCode.NUKITASHI_1, 1);
     boundary((c, a) -> repository.files(c, a, request));
     missingRequest((c, a) -> repository.files(c, a, null));
   }
