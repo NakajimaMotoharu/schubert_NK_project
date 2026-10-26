@@ -21,15 +21,20 @@ import org.junit.jupiter.api.Test;
 
 /** UI234 §3 byte offsets, independently assembled; PT-CODEC-AUTHERR-001, BUG-023. */
 final class AuthenticationErrorProfileTest {
+  private static final String LOGIN_RESPONSE_LAYOUT = "LGNRSP01";
+  private static final String RETRY_AFTER_FIELD = "Retry after秒";
+  private static final String USER_MESSAGE_FIELD = "利用者message";
+
   @Test
   void loginLockAndFailurePreserveOnlyApprovedErrorFields() {
     var values =
         new PayloadValues(
-            new LayoutId("LGNRSP01"),
+            new LayoutId(LOGIN_RESPONSE_LAYOUT),
             new FieldValueSet(
                 Map.of(
-                    "Retry after秒", new FieldValue.Numeric(900),
-                    "利用者message", new FieldValue.Text("ログイン試行回数が上限に達しました。15分ほど待ってから再度お試しください。"))),
+                    RETRY_AFTER_FIELD, new FieldValue.Numeric(900),
+                    USER_MESSAGE_FIELD,
+                        new FieldValue.Text("ログイン試行回数が上限に達しました。15分ほど待ってから再度お試しください。"))),
             List.of());
     byte[] expected = new byte[432];
     Arrays.fill(expected, (byte) ' ');
@@ -40,14 +45,14 @@ final class AuthenticationErrorProfileTest {
         expected, PayloadCodec.standard().encode(values, ResultCode.LOCKED).copyData());
     var decoded =
         PayloadCodec.standard()
-            .decode(new LayoutId("LGNRSP01"), expected, List.of(), ResultCode.LOCKED);
-    assertEquals(new FieldValue.Numeric(900), decoded.data().getOrUnset("Retry after秒"));
+            .decode(new LayoutId(LOGIN_RESPONSE_LAYOUT), expected, List.of(), ResultCode.LOCKED);
+    assertEquals(new FieldValue.Numeric(900), decoded.data().getOrUnset(RETRY_AFTER_FIELD));
     assertEquals(
         new FieldValue.Text("ログイン試行回数が上限に達しました。15分ほど待ってから再度お試しください。"),
-        decoded.data().getOrUnset("利用者message"));
+        decoded.data().getOrUnset(USER_MESSAGE_FIELD));
     for (int retry : new int[] {0, 1, 900}) {
       var data = new LinkedHashMap<String, FieldValue>();
-      data.put("Retry after秒", new FieldValue.Numeric(retry));
+      data.put(RETRY_AFTER_FIELD, new FieldValue.Numeric(retry));
       data.put("Username", new FieldValue.Text("synthetic-identity-canary"));
       data.put("認証context ID", new FieldValue.Text("e".repeat(64)));
       data.put("残り試行回数", new FieldValue.Numeric(5));
@@ -55,24 +60,25 @@ final class AuthenticationErrorProfileTest {
       assertArrayEquals(golden, encode(data, ResultCode.LOCKED));
       var read =
           PayloadCodec.standard()
-              .decode(new LayoutId("LGNRSP01"), golden, List.of(), ResultCode.LOCKED);
-      assertEquals(new FieldValue.Numeric(retry), read.data().getOrUnset("Retry after秒"));
+              .decode(new LayoutId(LOGIN_RESPONSE_LAYOUT), golden, List.of(), ResultCode.LOCKED);
+      assertEquals(new FieldValue.Numeric(retry), read.data().getOrUnset(RETRY_AFTER_FIELD));
       for (String field :
-          List.of("Username", "Role", "認証context ID", "発行日時", "期限日時", "残り試行回数", "利用者message"))
+          List.of("Username", "Role", "認証context ID", "発行日時", "期限日時", "残り試行回数", USER_MESSAGE_FIELD))
         assertSame(FieldValue.Unset.INSTANCE, read.data().getOrUnset(field));
     }
     String failure = "ユーザー名またはパスワードが正しくありません。";
     assertArrayEquals(
         loginGolden(0, failure),
         encode(
-            Map.of("利用者message", new FieldValue.Text(failure)), ResultCode.AUTHENTICATION_FAILED));
+            Map.of(USER_MESSAGE_FIELD, new FieldValue.Text(failure)),
+            ResultCode.AUTHENTICATION_FAILED));
     assertArrayEquals(
         loginGolden(0, failure),
         encode(
             Map.of(
-                "Retry after秒",
+                RETRY_AFTER_FIELD,
                 new FieldValue.Numeric(0),
-                "利用者message",
+                USER_MESSAGE_FIELD,
                 new FieldValue.Text(failure)),
             ResultCode.TEMPORARY_FAILURE));
   }
@@ -87,24 +93,25 @@ final class AuthenticationErrorProfileTest {
             FieldValue.Unset.INSTANCE))
       assertThrows(
           MessageEncodingException.class,
-          () -> encode(Map.of("Retry after秒", retry), ResultCode.LOCKED));
+          () -> encode(Map.of(RETRY_AFTER_FIELD, retry), ResultCode.LOCKED));
     for (FieldValue retry : List.of(new FieldValue.Numeric(1), new FieldValue.Text("0")))
       assertThrows(
           MessageEncodingException.class,
-          () -> encode(Map.of("Retry after秒", retry), ResultCode.AUTHENTICATION_FAILED));
+          () -> encode(Map.of(RETRY_AFTER_FIELD, retry), ResultCode.AUTHENTICATION_FAILED));
     for (String invalid : List.of("x".repeat(257), "bad\nmessage", "trailing "))
       assertThrows(
           FieldEncodingException.class,
           () ->
               encode(
-                  Map.of("利用者message", new FieldValue.Text(invalid)),
+                  Map.of(USER_MESSAGE_FIELD, new FieldValue.Text(invalid)),
                   ResultCode.AUTHENTICATION_FAILED));
     assertThrows(NullPointerException.class, () -> new FieldValue.Text(null));
     assertThrows(
         MessageEncodingException.class,
         () ->
             encode(
-                Map.of("利用者message", new FieldValue.Numeric(1)), ResultCode.AUTHENTICATION_FAILED));
+                Map.of(USER_MESSAGE_FIELD, new FieldValue.Numeric(1)),
+                ResultCode.AUTHENTICATION_FAILED));
     String max = "あ".repeat(85) + "x";
     byte[] golden = loginGolden(900, max);
     assertEquals(256, max.getBytes(StandardCharsets.UTF_8).length);
@@ -112,17 +119,17 @@ final class AuthenticationErrorProfileTest {
         golden,
         encode(
             Map.of(
-                "Retry after秒",
+                RETRY_AFTER_FIELD,
                 new FieldValue.Numeric(900),
-                "利用者message",
+                USER_MESSAGE_FIELD,
                 new FieldValue.Text(max)),
             ResultCode.LOCKED));
     assertEquals(
         new FieldValue.Text(max),
         PayloadCodec.standard()
-            .decode(new LayoutId("LGNRSP01"), golden, List.of(), ResultCode.LOCKED)
+            .decode(new LayoutId(LOGIN_RESPONSE_LAYOUT), golden, List.of(), ResultCode.LOCKED)
             .data()
-            .getOrUnset("利用者message"));
+            .getOrUnset(USER_MESSAGE_FIELD));
     for (int offset : new int[] {0, 64, 69, 133, 150, 173}) {
       byte[] bad = loginGolden(900, "");
       bad[offset] = '1';
@@ -130,27 +137,28 @@ final class AuthenticationErrorProfileTest {
           PermanentProtocolException.class,
           () ->
               PayloadCodec.standard()
-                  .decode(new LayoutId("LGNRSP01"), bad, List.of(), ResultCode.LOCKED));
+                  .decode(new LayoutId(LOGIN_RESPONSE_LAYOUT), bad, List.of(), ResultCode.LOCKED));
     }
     for (byte[] bad : List.of(loginGolden(901, ""), loginGolden(0, "bad\nmessage")))
       assertThrows(
           PermanentProtocolException.class,
           () ->
               PayloadCodec.standard()
-                  .decode(new LayoutId("LGNRSP01"), bad, List.of(), ResultCode.LOCKED));
+                  .decode(new LayoutId(LOGIN_RESPONSE_LAYOUT), bad, List.of(), ResultCode.LOCKED));
     byte[] badDigit = loginGolden(900, "");
     badDigit[167] = '-';
     assertThrows(
         PermanentProtocolException.class,
         () ->
             PayloadCodec.standard()
-                .decode(new LayoutId("LGNRSP01"), badDigit, List.of(), ResultCode.LOCKED));
+                .decode(
+                    new LayoutId(LOGIN_RESPONSE_LAYOUT), badDigit, List.of(), ResultCode.LOCKED));
     assertThrows(
         PermanentProtocolException.class,
         () ->
             PayloadCodec.standard()
                 .decode(
-                    new LayoutId("LGNRSP01"),
+                    new LayoutId(LOGIN_RESPONSE_LAYOUT),
                     loginGolden(1, ""),
                     List.of(),
                     ResultCode.AUTHENTICATION_FAILED));
@@ -182,9 +190,9 @@ final class AuthenticationErrorProfileTest {
           }
           if (field[6].equals("F")) assertEquals("Reserved", field[2]);
         }
-        if (layout.id().value().equals("LGNRSP01")) {
-          fields.put("利用者message", new FieldValue.Text("安全な利用者message"));
-          if (code == ResultCode.LOCKED) fields.put("Retry after秒", new FieldValue.Numeric(900));
+        if (layout.id().value().equals(LOGIN_RESPONSE_LAYOUT)) {
+          fields.put(USER_MESSAGE_FIELD, new FieldValue.Text("安全な利用者message"));
+          if (code == ResultCode.LOCKED) fields.put(RETRY_AFTER_FIELD, new FieldValue.Numeric(900));
           expected = loginGolden(code == ResultCode.LOCKED ? 900 : 0, "安全な利用者message");
         }
         if (layout.id().value().equals("NTCRSP01") && code == ResultCode.NOT_CANCELLABLE) {
@@ -207,7 +215,9 @@ final class AuthenticationErrorProfileTest {
   private static byte[] encode(Map<String, FieldValue> data, ResultCode code) {
     return PayloadCodec.standard()
         .encode(
-            new PayloadValues(new LayoutId("LGNRSP01"), new FieldValueSet(data), List.of()), code)
+            new PayloadValues(
+                new LayoutId(LOGIN_RESPONSE_LAYOUT), new FieldValueSet(data), List.of()),
+            code)
         .copyData();
   }
 

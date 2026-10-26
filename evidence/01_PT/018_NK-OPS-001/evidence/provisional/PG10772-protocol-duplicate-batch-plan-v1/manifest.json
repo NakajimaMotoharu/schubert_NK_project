@@ -1,0 +1,476 @@
+{
+  "actualExit": 0,
+  "allMainAndOtherInputBytesPreserved": true,
+  "constantsAdded": 59,
+  "coverage": null,
+  "effortPercent": null,
+  "externalActions": 0,
+  "formalUpdated": false,
+  "independentInversePending": true,
+  "invocation": {
+    "actualPythonCommand": [
+      "python3",
+      "-B",
+      "tools/quality/pg10772_protocol_duplicate_batch_plan.py"
+    ],
+    "arbitraryArgumentsRecorded": false,
+    "entrypointPath": "tools/quality/pg10772_protocol_duplicate_batch_plan.py",
+    "entrypointSha256": "fd474201326defea8a42b3b19c4896929f01f380aaa8d3d4f964729662ca871d",
+    "helperPath": "tools/quality/host_tool_invocation.py",
+    "helperSha256": "85d616a3db4ff47f4c95ae2e0dd57954bc2b09f28b8f2a685b986e5621545c46",
+    "libraryPath": "tools/quality/pg10772_protocol_duplicate_batch_plan.py",
+    "librarySha256": "fd474201326defea8a42b3b19c4896929f01f380aaa8d3d4f964729662ca871d",
+    "loadedProjectPythonSources": {
+      "tools/quality/classfile_code_metadata.py": "2227e1e8df1ff91b606f094c7ee64366023273ca740d4d47126ed0928190e2f0",
+      "tools/quality/g07_host_class_provenance_inputs.py": "a676cb3e4145177c3c243722d737592ce7d44c3f29cfe4f670662ef7651f046b",
+      "tools/quality/host_tool_invocation.py": "85d616a3db4ff47f4c95ae2e0dd57954bc2b09f28b8f2a685b986e5621545c46",
+      "tools/quality/pg10130_uid_oracle_preflight.py": "e80cb1d6d45d4e4c0cdb3cb792e0638119d936403de5c3e141429d338485758a",
+      "tools/quality/pg10332_result_profile_oracle_plan.py": "82c9b4f57dd517c1dbee639dbf4955c316beb89216cb9a8a66e78e0b9a322ad4",
+      "tools/quality/pg10339_result_profile_oracle_post_v2.py": "42f86287f5236d2ef1a2e10f54f5b0634e799a4e866b15eaf6738336a4ebabb0",
+      "tools/quality/pg10392_role_literal_plan.py": "e1af98abd59175d867d29b07a73d7b2e4c7112754603d1805ec0bfc4d9465ce8",
+      "tools/quality/pg10398_role_view_preflight.py": "31709d50a345f3e0843fa62ae0b4c6849885503eb3d81555b6bcc9605b486d56",
+      "tools/quality/pg10772_protocol_duplicate_batch_plan.py": "fd474201326defea8a42b3b19c4896929f01f380aaa8d3d4f964729662ca871d",
+      "tools/quality/pg9906_user_query_oracle_source_post.py": "4f9bdaa17eea78a720c0f25b8af906f3f045fda590c8fea2a8868229403a98fa",
+      "tools/quality/pg9978_plain_core_quality_post.py": "c99cc753c6335c9f41e3eafe6a97c17521503739ba2cf80659b542a445dd48fa",
+      "tools/quality/public_java_digest_provenance.py": "dd47f8735a61ce849995633c3290a6ad047842ef3263829ce359db413778f7a0"
+    },
+    "provenance": "OBSERVED_SYS_ARGV_AND_ORIG_ARGV_NOT_RECONSTRUCTED"
+  },
+  "newAccepted": 0,
+  "productTestsExecuted": 0,
+  "referencesReplaced": 494,
+  "sourceBefore": "1f20074cdfd20e13527525ed8d0e57faff28e276",
+  "sourceChanges": [
+    {
+      "beforeSha256": "175604fda8b23abba25f70182bc19ff762107ea7503aebc52481313089c5ea8f",
+      "constants": [
+        {
+          "id": "PMD-06786",
+          "literal": "\"LGNRSP01\"",
+          "name": "LOGIN_RESPONSE_LAYOUT",
+          "references": 10
+        },
+        {
+          "id": "PMD-06787",
+          "literal": "\"Retry after\u79d2\"",
+          "name": "RETRY_AFTER_FIELD",
+          "references": 9
+        },
+        {
+          "id": "PMD-06788",
+          "literal": "\"\u5229\u7528\u8005message\"",
+          "name": "USER_MESSAGE_FIELD",
+          "references": 10
+        }
+      ],
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/AuthenticationErrorProfileTest.java",
+      "sha256": "8275f059a84f9cd446164816184f86a480f9e093fd73371a386d52c119f78503"
+    },
+    {
+      "beforeSha256": "2b91af4850a098efa6f74466655a702fd750b8bd1cff30e2001aacae981bdcf1",
+      "constants": [
+        {
+          "id": "PMD-06794",
+          "literal": "\"test\"",
+          "name": "IO_FAILURE_MESSAGE",
+          "references": 4
+        }
+      ],
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/file/LargeResultRecordCodecTest.java",
+      "sha256": "50c529e4a9e384ae1cf31fc40f09fb66d35bdbbc378ddbc5ab0a373827e2346d"
+    },
+    {
+      "beforeSha256": "443bb9ae78c6653f77d9ad04f1d5b1d39c05fd025c625ed36facc04504010954",
+      "constants": [
+        {
+          "id": "PMD-06800",
+          "literal": "\"audio/ogg\"",
+          "name": "AUDIO_OGG_MIME",
+          "references": 8
+        },
+        {
+          "id": "PMD-06801",
+          "literal": "\"video/mp4\"",
+          "name": "VIDEO_MP4_MIME",
+          "references": 24
+        },
+        {
+          "id": "PMD-06802",
+          "literal": "\"audio/mpeg\"",
+          "name": "AUDIO_MPEG_MIME",
+          "references": 7
+        },
+        {
+          "id": "PMD-06803",
+          "literal": "\"media-1\"",
+          "name": "MEDIA_ID_TEXT",
+          "references": 18
+        },
+        {
+          "id": "PMD-06804",
+          "literal": "\"MUSIC\"",
+          "name": "MUSIC_KIND_TEXT",
+          "references": 11
+        },
+        {
+          "id": "PMD-06805",
+          "literal": "\".ogg\"",
+          "name": "OGG_EXTENSION",
+          "references": 5
+        },
+        {
+          "id": "PMD-06806",
+          "literal": "\".mp4\"",
+          "name": "MP4_EXTENSION",
+          "references": 5
+        },
+        {
+          "id": "PMD-06807",
+          "literal": "\"music/\"",
+          "name": "MUSIC_DIRECTORY_PREFIX",
+          "references": 10
+        },
+        {
+          "id": "PMD-06808",
+          "literal": "\"stored\"",
+          "name": "STORED_LABEL",
+          "references": 4
+        },
+        {
+          "id": "PMD-06809",
+          "literal": "\"video/a.mp4\"",
+          "name": "VIDEO_RELATIVE_PATH",
+          "references": 18
+        },
+        {
+          "id": "PMD-06810",
+          "literal": "\"a.mp4\"",
+          "name": "VIDEO_FILE_NAME",
+          "references": 19
+        }
+      ],
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/file/MediaDescriptorValidatorTest.java",
+      "sha256": "7df357f47510a022593f6711e8f964aa94bfb59cabc13212bc46c83200681676"
+    },
+    {
+      "beforeSha256": "6a29064559dd7b27dfc56fc5384d1539bbbb0155ec522e7dd14b7c55a519b238",
+      "constants": [
+        {
+          "id": "PMD-06811",
+          "literal": "\"false\"",
+          "name": "FALSE_TEXT",
+          "references": 10
+        },
+        {
+          "id": "PMD-06812",
+          "literal": "\"LOGREQ01\"",
+          "name": "LOG_REQUEST_LAYOUT",
+          "references": 10
+        },
+        {
+          "id": "PMD-06813",
+          "literal": "\"GAMRSP01\"",
+          "name": "GAME_RESPONSE_LAYOUT",
+          "references": 6
+        }
+      ],
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/header/HeaderModelTest.java",
+      "sha256": "b83850d1db095c0d376219f92ef5d0b9ef196675c6933c7581f4f7d5eb5a10be"
+    },
+    {
+      "beforeSha256": "07fc5676b09e783d736829799ef58127eb9a6e464da20c948e1cbdceea8ca877",
+      "constants": [
+        {
+          "id": "PMD-06837",
+          "literal": "\"LGNREQ01\"",
+          "name": "LOGIN_REQUEST_LAYOUT",
+          "references": 14
+        },
+        {
+          "id": "PMD-06838",
+          "literal": "\"DATA\"",
+          "name": "DATA_AREA_TEXT",
+          "references": 13
+        },
+        {
+          "id": "PMD-06839",
+          "literal": "\"Name\"",
+          "name": "FIELD_NAME_TEXT",
+          "references": 13
+        },
+        {
+          "id": "PMD-06840",
+          "literal": "\"rule\"",
+          "name": "FIELD_RULE_TEXT",
+          "references": 12
+        }
+      ],
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/LayoutFieldCatalogTest.java",
+      "sha256": "d9a6360c22a811b3e3b454ec8ca5639d4f10c64831f7ebb895a6096420972b50"
+    },
+    {
+      "beforeSha256": "fd8d2a40a6e267bdd8e0c018a4ae3ec929c99b742316f79f1e2183c3cf441192",
+      "constants": [
+        {
+          "id": "PMD-06841",
+          "literal": "\"LGNREQ01\"",
+          "name": "LOGIN_REQUEST_LAYOUT",
+          "references": 5
+        },
+        {
+          "id": "PMD-06842",
+          "literal": "\"ABCREQ01\"",
+          "name": "CUSTOM_REQUEST_LAYOUT",
+          "references": 13
+        },
+        {
+          "id": "PMD-06843",
+          "literal": "\"ABCRSP01\"",
+          "name": "CUSTOM_RESPONSE_LAYOUT",
+          "references": 6
+        },
+        {
+          "id": "PMD-06844",
+          "literal": "\"name\"",
+          "name": "SAMPLE_FIELD_NAME",
+          "references": 9
+        },
+        {
+          "id": "PMD-06845",
+          "literal": "\"rule\"",
+          "name": "FIELD_RULE_TEXT",
+          "references": 8
+        }
+      ],
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/LayoutMetadataTest.java",
+      "sha256": "9c08ea3f8978d5be0afe01cec2248724c032685b63796bb1755bc1896c9ba61c"
+    },
+    {
+      "beforeSha256": "6a736c2fb5a1c09f440846ce0a5ac82c19f1f657776b5cc7a289e4e07c61f0de",
+      "constants": [
+        {
+          "id": "PMD-06846",
+          "literal": "\"SRCRSP01\"",
+          "name": "SCENARIO_SEARCH_RESPONSE_LAYOUT",
+          "references": 16
+        },
+        {
+          "id": "PMD-06847",
+          "literal": "\"Audio ID\"",
+          "name": "AUDIO_ID_FIELD",
+          "references": 8
+        },
+        {
+          "id": "PMD-06848",
+          "literal": "\"Audio display path\"",
+          "name": "AUDIO_DISPLAY_PATH_FIELD",
+          "references": 6
+        },
+        {
+          "id": "PMD-06849",
+          "literal": "\"File byte\u9577\"",
+          "name": "FILE_BYTE_LENGTH_FIELD",
+          "references": 8
+        },
+        {
+          "id": "PMD-06850",
+          "literal": "\"File record\u4ef6\u6570\"",
+          "name": "FILE_RECORD_COUNT_FIELD",
+          "references": 4
+        },
+        {
+          "id": "PMD-06851",
+          "literal": "\"Entry sequence\"",
+          "name": "ENTRY_SEQUENCE_FIELD",
+          "references": 4
+        },
+        {
+          "id": "PMD-06852",
+          "literal": "\"Audio sequence\"",
+          "name": "AUDIO_SEQUENCE_FIELD",
+          "references": 7
+        },
+        {
+          "id": "PMD-06853",
+          "literal": "\"LGNREQ01\"",
+          "name": "LOGIN_REQUEST_LAYOUT",
+          "references": 5
+        },
+        {
+          "id": "PMD-06854",
+          "literal": "\"Username\"",
+          "name": "USERNAME_FIELD",
+          "references": 6
+        },
+        {
+          "id": "PMD-06855",
+          "literal": "\"LGNRSP01\"",
+          "name": "LOGIN_RESPONSE_LAYOUT",
+          "references": 9
+        },
+        {
+          "id": "PMD-06856",
+          "literal": "\"UCRREQ01\"",
+          "name": "USER_CREATE_REQUEST_LAYOUT",
+          "references": 6
+        },
+        {
+          "id": "PMD-06857",
+          "literal": "\"Initial Password\"",
+          "name": "INITIAL_PASSWORD_FIELD",
+          "references": 5
+        },
+        {
+          "id": "PMD-06858",
+          "literal": "\"LGSREQ01\"",
+          "name": "LOG_SEARCH_REQUEST_LAYOUT",
+          "references": 4
+        },
+        {
+          "id": "PMD-06859",
+          "literal": "\"From\u65e5\u6642\"",
+          "name": "FROM_TIME_FIELD",
+          "references": 4
+        },
+        {
+          "id": "PMD-06860",
+          "literal": "\"To\u65e5\u6642\"",
+          "name": "TO_TIME_FIELD",
+          "references": 4
+        },
+        {
+          "id": "PMD-06861",
+          "literal": "\"NTDRSP01\"",
+          "name": "NOTIFICATION_DETAIL_RESPONSE_LAYOUT",
+          "references": 4
+        },
+        {
+          "id": "PMD-06862",
+          "literal": "\"\u51e6\u7406\u958b\u59cb\u65e5\u6642\"",
+          "name": "PROCESSING_STARTED_FIELD",
+          "references": 6
+        },
+        {
+          "id": "PMD-06863",
+          "literal": "\"\u5185\u90e8\u72b6\u614b\"",
+          "name": "INTERNAL_STATE_FIELD",
+          "references": 6
+        },
+        {
+          "id": "PMD-06864",
+          "literal": "\"COMPLETED\"",
+          "name": "COMPLETED_STATE_TEXT",
+          "references": 4
+        },
+        {
+          "id": "PMD-06865",
+          "literal": "\"\u901a\u77e5\u533a\u5206\"",
+          "name": "NOTIFICATION_KIND_FIELD",
+          "references": 4
+        },
+        {
+          "id": "PMD-06866",
+          "literal": "\"\u8cea\u554f\u524a\u9664\u6e08\u307f\"",
+          "name": "QUESTION_DELETED_FIELD",
+          "references": 4
+        },
+        {
+          "id": "PMD-06867",
+          "literal": "\"\u8cea\u554f\u672c\u6587\"",
+          "name": "QUESTION_TEXT_FIELD",
+          "references": 5
+        },
+        {
+          "id": "PMD-06868",
+          "literal": "\"\u56de\u7b54\u672c\u6587\"",
+          "name": "ANSWER_TEXT_FIELD",
+          "references": 5
+        },
+        {
+          "id": "PMD-06869",
+          "literal": "\"\u56de\u7b54\u65e5\u6642\"",
+          "name": "ANSWER_TIME_FIELD",
+          "references": 4
+        },
+        {
+          "id": "PMD-06870",
+          "literal": "\"\u53d7\u4ed8ID\"",
+          "name": "RECEIPT_ID_FIELD",
+          "references": 4
+        },
+        {
+          "id": "PMD-06871",
+          "literal": "\"INVALID\"",
+          "name": "INVALID_TEXT",
+          "references": 4
+        }
+      ],
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/PayloadSemanticValidatorTest.java",
+      "sha256": "da558bad2dcdfa0475095f2388628d6341818418bce89fd1ab820c539db78822"
+    },
+    {
+      "beforeSha256": "aef8ab3f5a2958b63af8cd6bc30d90e05bb65a2452f528e8e68a0f2547043e7b",
+      "constants": [
+        {
+          "id": "PMD-06873",
+          "literal": "\"value\"",
+          "name": "VALUE_FIELD_NAME",
+          "references": 13
+        },
+        {
+          "id": "PMD-06874",
+          "literal": "\"safe\"",
+          "name": "SAFE_TEXT",
+          "references": 6
+        }
+      ],
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/PayloadTypeCatalogTest.java",
+      "sha256": "933ba3a6e9956103f82602cd6c8516ab2ecb01bed42430922d1adb1c2f31bd98"
+    },
+    {
+      "beforeSha256": "69fa7ca47c745e98428046e49ebc018d09c8076a6b18b49a094f3c3d8d3f90af",
+      "constants": [
+        {
+          "id": "PMD-06886",
+          "literal": "\"ERROR=ERROR\"",
+          "name": "ERROR_ENUM_TEXT",
+          "references": 4
+        },
+        {
+          "id": "PMD-06887",
+          "literal": "\"value\"",
+          "name": "VALUE_FIELD_NAME",
+          "references": 36
+        }
+      ],
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/semantic/ProtocolSemanticTypeTest.java",
+      "sha256": "bcf4ec32fbcb1171bc5113f42d8e2ae9d6c8d2f80d986e6b0111a2855abff67d"
+    },
+    {
+      "beforeSha256": "9bc9ab7b9e9ddf800debe6865dcd0e7b2fcd62cde9332f6c6441487c0d2ed48e",
+      "constants": [
+        {
+          "id": "PMD-06888",
+          "literal": "\"9999-12-31T14:59:59.999Z\"",
+          "name": "MAXIMUM_INSTANT_TEXT",
+          "references": 4
+        }
+      ],
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/time/JstWireTimestampTest.java",
+      "sha256": "04a51f5709a8d0e394bfd64e409ca14a1d1eb65ff13e68960e3516500eefa9fb"
+    },
+    {
+      "beforeSha256": "773af1b3762da35234f54d434c389c0b195fc267ddfaee817e845f3bcf038f3f",
+      "constants": [
+        {
+          "id": "PMD-06889",
+          "literal": "\"synthetic protocol\"",
+          "name": "PROTOCOL_FAILURE_MESSAGE",
+          "references": 4
+        }
+      ],
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/transport/FailedJmsIsolationExceptionTest.java",
+      "sha256": "603bc35433ee7f322db0fcec935a40d02b35f52ab788ddba991a4d797cf30971"
+    }
+  ]
+}

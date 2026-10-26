@@ -22,6 +22,9 @@ import java.util.Set;
 import org.junit.jupiter.api.Test;
 
 class PayloadTypeCatalogTest {
+  private static final String VALUE_FIELD_NAME = "value";
+  private static final String SAFE_TEXT = "safe";
+
   @Test
   void allNamedTypesHaveIndependentDirectionalFieldMeaning() throws Exception {
     IndependentNamedFieldOracle.verifyAll();
@@ -174,29 +177,37 @@ class PayloadTypeCatalogTest {
 
   @Test
   void typedModelsAndHelpersRejectNullMissingAndWrongKinds() {
-    FieldValueSet text = new FieldValueSet(Map.of("value", new FieldValue.Text("safe")));
-    FieldValueSet numeric = new FieldValueSet(Map.of("value", new FieldValue.Numeric(7)));
-    FieldValueSet flag = new FieldValueSet(Map.of("value", new FieldValue.Flag(true)));
-    assertEquals("safe", TypedFieldValues.requiredText(text, "value").value());
-    assertEquals(7, TypedFieldValues.requiredNumeric(numeric, "value").value());
-    assertTrue(TypedFieldValues.requiredFlag(flag, "value").value());
-    assertEquals(Optional.empty(), TypedFieldValues.optionalText(FieldValueSet.empty(), "value"));
+    FieldValueSet text =
+        new FieldValueSet(Map.of(VALUE_FIELD_NAME, new FieldValue.Text(SAFE_TEXT)));
+    FieldValueSet numeric = new FieldValueSet(Map.of(VALUE_FIELD_NAME, new FieldValue.Numeric(7)));
+    FieldValueSet flag = new FieldValueSet(Map.of(VALUE_FIELD_NAME, new FieldValue.Flag(true)));
+    assertEquals(SAFE_TEXT, TypedFieldValues.requiredText(text, VALUE_FIELD_NAME).value());
+    assertEquals(7, TypedFieldValues.requiredNumeric(numeric, VALUE_FIELD_NAME).value());
+    assertTrue(TypedFieldValues.requiredFlag(flag, VALUE_FIELD_NAME).value());
     assertEquals(
-        Optional.of(new FieldValue.Text("safe")), TypedFieldValues.optionalText(text, "value"));
+        Optional.empty(), TypedFieldValues.optionalText(FieldValueSet.empty(), VALUE_FIELD_NAME));
+    assertEquals(
+        Optional.of(new FieldValue.Text(SAFE_TEXT)),
+        TypedFieldValues.optionalText(text, VALUE_FIELD_NAME));
     assertSame(FieldValue.Unset.INSTANCE, TypedFieldValues.orUnset(Optional.empty()));
     assertEquals(
-        new FieldValue.Text("safe"),
-        TypedFieldValues.orUnset(Optional.of(new FieldValue.Text("safe"))));
+        new FieldValue.Text(SAFE_TEXT),
+        TypedFieldValues.orUnset(Optional.of(new FieldValue.Text(SAFE_TEXT))));
 
     assertThrows(
-        LayoutValidationException.class, () -> TypedFieldValues.requiredText(numeric, "value"));
+        LayoutValidationException.class,
+        () -> TypedFieldValues.requiredText(numeric, VALUE_FIELD_NAME));
     assertThrows(
-        LayoutValidationException.class, () -> TypedFieldValues.requiredNumeric(flag, "value"));
+        LayoutValidationException.class,
+        () -> TypedFieldValues.requiredNumeric(flag, VALUE_FIELD_NAME));
     assertThrows(
-        LayoutValidationException.class, () -> TypedFieldValues.requiredFlag(text, "value"));
+        LayoutValidationException.class,
+        () -> TypedFieldValues.requiredFlag(text, VALUE_FIELD_NAME));
     assertThrows(
-        LayoutValidationException.class, () -> TypedFieldValues.optionalText(numeric, "value"));
-    assertThrows(NullPointerException.class, () -> TypedFieldValues.requiredText(null, "value"));
+        LayoutValidationException.class,
+        () -> TypedFieldValues.optionalText(numeric, VALUE_FIELD_NAME));
+    assertThrows(
+        NullPointerException.class, () -> TypedFieldValues.requiredText(null, VALUE_FIELD_NAME));
     assertThrows(NullPointerException.class, () -> TypedFieldValues.requiredText(text, null));
     assertThrows(NullPointerException.class, () -> TypedFieldValues.orUnset(null));
     assertThrows(NullPointerException.class, () -> TypedFieldValues.requireEmpty(null));
@@ -349,7 +360,7 @@ class PayloadTypeCatalogTest {
       case "HTTP method" -> "GET";
       case "Path" -> "/safe";
       case "Category" -> field.semanticRule().replace("`", "").startsWith("MAIN/") ? "MAIN" : "A";
-      default -> layoutId.equals("WLGEVT01") && field.name().equals("Message") ? "safe" : "A";
+      default -> layoutId.equals("WLGEVT01") && field.name().equals("Message") ? SAFE_TEXT : "A";
     };
   }
 }

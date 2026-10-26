@@ -16,6 +16,9 @@ import java.util.UUID;
 import org.junit.jupiter.api.Test;
 
 class HeaderModelTest {
+  private static final String FALSE_TEXT = "false";
+  private static final String LOG_REQUEST_LAYOUT = "LOGREQ01";
+  private static final String GAME_RESPONSE_LAYOUT = "GAMRSP01";
   private static final UUID MESSAGE_ID = UUID.fromString("123e4567-e89b-12d3-a456-426614174000");
   private static final UUID OTHER_ID = UUID.fromString("223e4567-e89b-12d3-a456-426614174000");
   private static final Instant SENT_AT = Instant.parse("2026-09-02T03:34:56.789Z");
@@ -62,17 +65,17 @@ class HeaderModelTest {
     // Production values/wireValue are actuals only, never the expected allowlist.
     String[][] approved = {
       {"SUCCESS", "0000", "true"},
-      {"VALIDATION_ERROR", "0100", "false"},
-      {"AUTHENTICATION_FAILED", "0101", "false"},
-      {"SESSION_INVALID", "0102", "false"},
-      {"FORBIDDEN", "0103", "false"},
-      {"NOT_FOUND", "0104", "false"},
-      {"CONFLICT", "0105", "false"},
-      {"LOCKED", "0106", "false"},
-      {"NOT_CANCELLABLE", "0107", "false"},
+      {"VALIDATION_ERROR", "0100", FALSE_TEXT},
+      {"AUTHENTICATION_FAILED", "0101", FALSE_TEXT},
+      {"SESSION_INVALID", "0102", FALSE_TEXT},
+      {"FORBIDDEN", "0103", FALSE_TEXT},
+      {"NOT_FOUND", "0104", FALSE_TEXT},
+      {"CONFLICT", "0105", FALSE_TEXT},
+      {"LOCKED", "0106", FALSE_TEXT},
+      {"NOT_CANCELLABLE", "0107", FALSE_TEXT},
       {"IDEMPOTENT_SUCCESS", "0200", "true"},
-      {"TEMPORARY_FAILURE", "9000", "false"},
-      {"RESOURCE_LIMIT", "9001", "false"}
+      {"TEMPORARY_FAILURE", "9000", FALSE_TEXT},
+      {"RESOURCE_LIMIT", "9001", FALSE_TEXT}
     };
     assertEquals(12, ResultCode.values().length);
     for (String[] row : approved) {
@@ -129,7 +132,7 @@ class HeaderModelTest {
             Optional.of(ResultCode.SUCCESS));
     CommonHeader ordinaryRequest =
         header(
-            "LOGREQ01",
+            LOG_REQUEST_LAYOUT,
             MessageKind.REQUEST,
             InteractionKind.SYNCHRONOUS,
             0,
@@ -139,7 +142,7 @@ class HeaderModelTest {
             Optional.empty());
     CommonHeader ordinaryResponse =
         header(
-            "GAMRSP01",
+            GAME_RESPONSE_LAYOUT,
             MessageKind.RESPONSE,
             InteractionKind.SYNCHRONOUS,
             9,
@@ -149,7 +152,7 @@ class HeaderModelTest {
             Optional.of(ResultCode.IDEMPOTENT_SUCCESS));
     CommonHeader errorResponse =
         header(
-            "GAMRSP01",
+            GAME_RESPONSE_LAYOUT,
             MessageKind.RESPONSE,
             InteractionKind.SYNCHRONOUS,
             9,
@@ -170,9 +173,9 @@ class HeaderModelTest {
 
     loginRequest.validateAgainst(LayoutRegistry.standard().require("LGNREQ01", 1));
     loginResponse.validateAgainst(LayoutRegistry.standard().require("LGNRSP01", 1));
-    ordinaryRequest.validateAgainst(LayoutRegistry.standard().require("LOGREQ01", 1));
-    ordinaryResponse.validateAgainst(LayoutRegistry.standard().require("GAMRSP01", 1));
-    errorResponse.validateAgainst(LayoutRegistry.standard().require("GAMRSP01", 1));
+    ordinaryRequest.validateAgainst(LayoutRegistry.standard().require(LOG_REQUEST_LAYOUT, 1));
+    ordinaryResponse.validateAgainst(LayoutRegistry.standard().require(GAME_RESPONSE_LAYOUT, 1));
+    errorResponse.validateAgainst(LayoutRegistry.standard().require(GAME_RESPONSE_LAYOUT, 1));
     event.validateAgainst(LayoutRegistry.standard().require("WLGEVT01", 1));
     assertEquals(537, ordinaryResponse.totalLength());
     assertTrue(ordinaryRequest.toString().contains("authenticationContext=REDACTED"));
@@ -231,7 +234,7 @@ class HeaderModelTest {
   void headerValidateAgainstRejectsEachMetadataMismatch() {
     CommonHeader header =
         header(
-            "LOGREQ01",
+            LOG_REQUEST_LAYOUT,
             MessageKind.REQUEST,
             InteractionKind.SYNCHRONOUS,
             0,
@@ -253,7 +256,7 @@ class HeaderModelTest {
     assertMismatch(
         header,
         new LayoutDefinition(
-            new LayoutId("LOGREQ01"),
+            new LayoutId(LOG_REQUEST_LAYOUT),
             1,
             MessageKind.RESPONSE,
             InteractionKind.SYNCHRONOUS,
@@ -263,7 +266,7 @@ class HeaderModelTest {
     assertMismatch(
         header,
         new LayoutDefinition(
-            new LayoutId("LOGREQ01"),
+            new LayoutId(LOG_REQUEST_LAYOUT),
             1,
             MessageKind.REQUEST,
             InteractionKind.ASYNC_ACCEPTANCE,
@@ -273,7 +276,7 @@ class HeaderModelTest {
     assertMismatch(
         header,
         new LayoutDefinition(
-            new LayoutId("LOGREQ01"),
+            new LayoutId(LOG_REQUEST_LAYOUT),
             1,
             MessageKind.REQUEST,
             InteractionKind.SYNCHRONOUS,
@@ -283,7 +286,7 @@ class HeaderModelTest {
     assertMismatch(
         header,
         new LayoutDefinition(
-            new LayoutId("LOGREQ01"),
+            new LayoutId(LOG_REQUEST_LAYOUT),
             1,
             MessageKind.REQUEST,
             InteractionKind.SYNCHRONOUS,
@@ -292,7 +295,7 @@ class HeaderModelTest {
             1));
     CommonHeader response =
         header(
-            "GAMRSP01",
+            GAME_RESPONSE_LAYOUT,
             MessageKind.RESPONSE,
             InteractionKind.SYNCHRONOUS,
             9,
@@ -303,7 +306,7 @@ class HeaderModelTest {
     assertMismatch(
         response,
         new LayoutDefinition(
-            new LayoutId("GAMRSP01"),
+            new LayoutId(GAME_RESPONSE_LAYOUT),
             1,
             MessageKind.RESPONSE,
             InteractionKind.SYNCHRONOUS,
@@ -337,7 +340,7 @@ class HeaderModelTest {
       assertEquals(fields[position], failure.getMessage());
     }
     CommonHeader valid = headerWithMissingReference(-1);
-    assertEquals("LOGREQ01", valid.layoutId().value());
+    assertEquals(LOG_REQUEST_LAYOUT, valid.layoutId().value());
     assertEquals(256, valid.totalLength());
     assertEquals(MESSAGE_ID, valid.correlationId());
   }
@@ -366,7 +369,7 @@ class HeaderModelTest {
     return new CommonHeader(
         missing == 0 ? null : "SCHBNK01",
         1,
-        missing == 1 ? null : new LayoutId("LOGREQ01"),
+        missing == 1 ? null : new LayoutId(LOG_REQUEST_LAYOUT),
         1,
         missing == 2 ? null : MessageKind.REQUEST,
         missing == 3 ? null : InteractionKind.SYNCHRONOUS,
@@ -422,7 +425,7 @@ class HeaderModelTest {
   private static final class HeaderBuilder {
     private String protocol = CommonHeader.PROTOCOL_IDENTIFIER;
     private int headerVersion = 1;
-    private String layoutId = "LOGREQ01";
+    private String layoutId = LOG_REQUEST_LAYOUT;
     private int layoutVersion = 1;
     private MessageKind kind = MessageKind.REQUEST;
     private InteractionKind interaction = InteractionKind.SYNCHRONOUS;

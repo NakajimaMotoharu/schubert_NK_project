@@ -14,6 +14,11 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 class LayoutFieldCatalogTest {
+  private static final String LOGIN_REQUEST_LAYOUT = "LGNREQ01";
+  private static final String DATA_AREA_TEXT = "DATA";
+  private static final String FIELD_NAME_TEXT = "Name";
+  private static final String FIELD_RULE_TEXT = "rule";
+
   @Test
   void catalogMatchesIndependentUi234To236Fixture() throws Exception {
     String fixture = fixture();
@@ -31,7 +36,7 @@ class LayoutFieldCatalogTest {
         catalog.all().stream()
             .filter(fields -> fields.dataFields().isEmpty() && fields.recordFields().isEmpty())
             .count());
-    assertEquals("LGNREQ01", catalog.require("LGNREQ01").id().value());
+    assertEquals(LOGIN_REQUEST_LAYOUT, catalog.require(LOGIN_REQUEST_LAYOUT).id().value());
     assertEquals("WLGEVT01", catalog.require(new LayoutId("WLGEVT01")).id().value());
     assertThrows(UnsupportedLayoutException.class, () -> catalog.require("ZZZREQ01"));
     assertThrows(NullPointerException.class, () -> catalog.require((String) null));
@@ -82,69 +87,185 @@ class LayoutFieldCatalogTest {
         UnsupportedLayoutException.class,
         () ->
             LayoutFieldCatalog.parse(
-                row("ZZZREQ01", "DATA", "Name", "1", "1", "X", "M", "rule"), registry));
-    assertThrows(
-        LayoutValidationException.class,
-        () ->
-            LayoutFieldCatalog.parse(
-                row("LGNREQ01", "HEADER", "Name", "1", "1", "X", "M", "rule"), registry));
-    assertThrows(
-        LayoutValidationException.class,
-        () ->
-            LayoutFieldCatalog.parse(
-                row("LGNREQ01", "DATA", "Name", "1", "1", "Z", "M", "rule"), registry));
-    assertThrows(
-        LayoutValidationException.class,
-        () ->
-            LayoutFieldCatalog.parse(
-                row("LGNREQ01", "DATA", "Name", "1", "1", "X", "Z", "rule"), registry));
-    assertThrows(
-        LayoutValidationException.class,
-        () ->
-            LayoutFieldCatalog.parse(
-                row("LGNREQ01", "DATA", "Name", "1", "384", "X", "F", "fixed"), registry));
-    assertThrows(
-        LayoutValidationException.class,
-        () ->
-            LayoutFieldCatalog.parse(
-                row("WLGEVT01", "DATA", "Other", "1", "2080", "X", "F", "fixed"), registry));
-    assertThrows(
-        LayoutValidationException.class,
-        () ->
-            LayoutFieldCatalog.parse(
-                row("LGNREQ01", "DATA", "Name", "x", "1", "X", "M", "rule"), registry));
-    assertThrows(
-        LayoutValidationException.class,
-        () ->
-            LayoutFieldCatalog.parse(
-                row("LGNREQ01", "DATA", "Name", "0", "1", "X", "M", "rule"), registry));
-    assertThrows(
-        LayoutValidationException.class,
-        () ->
-            LayoutFieldCatalog.parse(
-                row("LGNREQ01", "DATA", "Name", "1", "-1", "X", "M", "rule"), registry));
-    assertThrows(
-        LayoutValidationException.class,
-        () ->
-            LayoutFieldCatalog.parse(
-                row("LGNREQ01", "DATA", "", "1", "384", "X", "M", "rule"), registry));
-    assertThrows(
-        LayoutValidationException.class,
-        () ->
-            LayoutFieldCatalog.parse(
-                row("LGNREQ01", "DATA", "Name", "1", "384", "X", "M", " "), registry));
-    assertThrows(
-        LayoutValidationException.class,
-        () ->
-            LayoutFieldCatalog.parse(
-                row("LGNREQ01", "DATA", "Name", "1", "64", "X", "M", "rule")
-                    + row("LGNREQ01", "DATA", "Name", "65", "320", "X", "M", "rule"),
+                row(
+                    "ZZZREQ01",
+                    DATA_AREA_TEXT,
+                    FIELD_NAME_TEXT,
+                    "1",
+                    "1",
+                    "X",
+                    "M",
+                    FIELD_RULE_TEXT),
                 registry));
     assertThrows(
         LayoutValidationException.class,
         () ->
             LayoutFieldCatalog.parse(
-                row("LGNREQ01", "DATA", "Name", "2", "383", "X", "M", "rule"), registry));
+                row(
+                    LOGIN_REQUEST_LAYOUT,
+                    "HEADER",
+                    FIELD_NAME_TEXT,
+                    "1",
+                    "1",
+                    "X",
+                    "M",
+                    FIELD_RULE_TEXT),
+                registry));
+    assertThrows(
+        LayoutValidationException.class,
+        () ->
+            LayoutFieldCatalog.parse(
+                row(
+                    LOGIN_REQUEST_LAYOUT,
+                    DATA_AREA_TEXT,
+                    FIELD_NAME_TEXT,
+                    "1",
+                    "1",
+                    "Z",
+                    "M",
+                    FIELD_RULE_TEXT),
+                registry));
+    assertThrows(
+        LayoutValidationException.class,
+        () ->
+            LayoutFieldCatalog.parse(
+                row(
+                    LOGIN_REQUEST_LAYOUT,
+                    DATA_AREA_TEXT,
+                    FIELD_NAME_TEXT,
+                    "1",
+                    "1",
+                    "X",
+                    "Z",
+                    FIELD_RULE_TEXT),
+                registry));
+    assertThrows(
+        LayoutValidationException.class,
+        () ->
+            LayoutFieldCatalog.parse(
+                row(
+                    LOGIN_REQUEST_LAYOUT,
+                    DATA_AREA_TEXT,
+                    FIELD_NAME_TEXT,
+                    "1",
+                    "384",
+                    "X",
+                    "F",
+                    "fixed"),
+                registry));
+    assertThrows(
+        LayoutValidationException.class,
+        () ->
+            LayoutFieldCatalog.parse(
+                row("WLGEVT01", DATA_AREA_TEXT, "Other", "1", "2080", "X", "F", "fixed"),
+                registry));
+    assertThrows(
+        LayoutValidationException.class,
+        () ->
+            LayoutFieldCatalog.parse(
+                row(
+                    LOGIN_REQUEST_LAYOUT,
+                    DATA_AREA_TEXT,
+                    FIELD_NAME_TEXT,
+                    "x",
+                    "1",
+                    "X",
+                    "M",
+                    FIELD_RULE_TEXT),
+                registry));
+    assertThrows(
+        LayoutValidationException.class,
+        () ->
+            LayoutFieldCatalog.parse(
+                row(
+                    LOGIN_REQUEST_LAYOUT,
+                    DATA_AREA_TEXT,
+                    FIELD_NAME_TEXT,
+                    "0",
+                    "1",
+                    "X",
+                    "M",
+                    FIELD_RULE_TEXT),
+                registry));
+    assertThrows(
+        LayoutValidationException.class,
+        () ->
+            LayoutFieldCatalog.parse(
+                row(
+                    LOGIN_REQUEST_LAYOUT,
+                    DATA_AREA_TEXT,
+                    FIELD_NAME_TEXT,
+                    "1",
+                    "-1",
+                    "X",
+                    "M",
+                    FIELD_RULE_TEXT),
+                registry));
+    assertThrows(
+        LayoutValidationException.class,
+        () ->
+            LayoutFieldCatalog.parse(
+                row(
+                    LOGIN_REQUEST_LAYOUT,
+                    DATA_AREA_TEXT,
+                    "",
+                    "1",
+                    "384",
+                    "X",
+                    "M",
+                    FIELD_RULE_TEXT),
+                registry));
+    assertThrows(
+        LayoutValidationException.class,
+        () ->
+            LayoutFieldCatalog.parse(
+                row(
+                    LOGIN_REQUEST_LAYOUT,
+                    DATA_AREA_TEXT,
+                    FIELD_NAME_TEXT,
+                    "1",
+                    "384",
+                    "X",
+                    "M",
+                    " "),
+                registry));
+    assertThrows(
+        LayoutValidationException.class,
+        () ->
+            LayoutFieldCatalog.parse(
+                row(
+                        LOGIN_REQUEST_LAYOUT,
+                        DATA_AREA_TEXT,
+                        FIELD_NAME_TEXT,
+                        "1",
+                        "64",
+                        "X",
+                        "M",
+                        FIELD_RULE_TEXT)
+                    + row(
+                        LOGIN_REQUEST_LAYOUT,
+                        DATA_AREA_TEXT,
+                        FIELD_NAME_TEXT,
+                        "65",
+                        "320",
+                        "X",
+                        "M",
+                        FIELD_RULE_TEXT),
+                registry));
+    assertThrows(
+        LayoutValidationException.class,
+        () ->
+            LayoutFieldCatalog.parse(
+                row(
+                    LOGIN_REQUEST_LAYOUT,
+                    DATA_AREA_TEXT,
+                    FIELD_NAME_TEXT,
+                    "2",
+                    "383",
+                    "X",
+                    "M",
+                    FIELD_RULE_TEXT),
+                registry));
   }
 
   @Test
@@ -203,13 +324,13 @@ class LayoutFieldCatalogTest {
   private static FieldDefinition<String> field(FieldArea area, int start, int length) {
     return new FieldDefinition<>(
         area,
-        "Name",
+        FIELD_NAME_TEXT,
         start,
         length,
         WireType.TEXT,
         Presence.MANDATORY,
         Padding.SPACE_RIGHT,
         String.class,
-        "rule");
+        FIELD_RULE_TEXT);
   }
 }

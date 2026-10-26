@@ -11,16 +11,18 @@ import org.junit.jupiter.api.Test;
 
 /** SS322§11; PG-D442/BUG1494/YKT1254; PT-JMS-ISO009..012, literal/null/identity only. */
 final class FailedJmsIsolationExceptionTest {
+  private static final String PROTOCOL_FAILURE_MESSAGE = "synthetic protocol";
+
   @Test
   void iso009PrimaryAndProtocolAreRequired() {
-    var protocol = new PermanentProtocolException("synthetic protocol");
+    var protocol = new PermanentProtocolException(PROTOCOL_FAILURE_MESSAGE);
     assertThrows(NullPointerException.class, () -> new FailedJmsIsolationException(null, protocol));
     assertThrows(NullPointerException.class, () -> new FailedJmsIsolationException(protocol, null));
   }
 
   @Test
   void iso010SameNodeIsRetainedWithoutSelfSuppression() {
-    var protocol = new PermanentProtocolException("synthetic protocol");
+    var protocol = new PermanentProtocolException(PROTOCOL_FAILURE_MESSAGE);
     var observed = new FailedJmsIsolationException(protocol, protocol);
     assertSame(protocol, observed.getCause());
     assertEquals(0, observed.getSuppressed().length);
@@ -31,7 +33,7 @@ final class FailedJmsIsolationExceptionTest {
   @Test
   void iso011EqualsTrueDoesNotHideDistinctProtocolIdentity() {
     var primary = new EqualFailure();
-    var protocol = new PermanentProtocolException("synthetic protocol");
+    var protocol = new PermanentProtocolException(PROTOCOL_FAILURE_MESSAGE);
     assertEquals(primary, protocol);
     assertNotSame(primary, protocol);
     var observed = new FailedJmsIsolationException(primary, protocol);
@@ -42,7 +44,7 @@ final class FailedJmsIsolationExceptionTest {
   @Test
   void iso012DisabledPrimarySuppressionCannotHideProtocol() {
     var primary = new SuppressionDisabledFailure();
-    var protocol = new PermanentProtocolException("synthetic protocol");
+    var protocol = new PermanentProtocolException(PROTOCOL_FAILURE_MESSAGE);
     var observed = new FailedJmsIsolationException(primary, protocol);
     assertSame(primary, observed.getCause());
     assertEquals(0, primary.getSuppressed().length);

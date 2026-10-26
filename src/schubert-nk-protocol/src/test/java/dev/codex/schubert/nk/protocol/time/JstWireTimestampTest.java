@@ -25,6 +25,8 @@ import java.util.UUID;
 import org.junit.jupiter.api.Test;
 
 class JstWireTimestampTest {
+  private static final String MAXIMUM_INSTANT_TEXT = "9999-12-31T14:59:59.999Z";
+
   /** PT-PRO-003-T03: strict seventeen digits, not formatter's signed/expanded uuuu output. */
   @Test
   void bug037ExpandedYearsAndUnrepresentableInstantsAreRejected() {
@@ -42,8 +44,7 @@ class JstWireTimestampTest {
     Instant minimum = LocalDateTime.of(0, 1, 1, 0, 0).atZone(ZoneId.of("Asia/Tokyo")).toInstant();
     assertEquals("00000101000000000", JstWireTimestamp.format(minimum));
     assertEquals(minimum, JstWireTimestamp.parse("00000101000000000"));
-    assertEquals(
-        "99991231235959999", JstWireTimestamp.format(Instant.parse("9999-12-31T14:59:59.999Z")));
+    assertEquals("99991231235959999", JstWireTimestamp.format(Instant.parse(MAXIMUM_INSTANT_TEXT)));
     assertThrows(
         IllegalArgumentException.class, () -> JstWireTimestamp.parse("+100000101090000000"));
     assertThrows(
@@ -60,13 +61,12 @@ class JstWireTimestampTest {
       assertInstanceOf(IllegalArgumentException.class, failure.getCause());
       assertNull(failure.getCause().getCause());
     }
-    byte[] encoded =
-        HeaderCodec.standard().encode(header(Instant.parse("9999-12-31T14:59:59.999Z")));
+    byte[] encoded = HeaderCodec.standard().encode(header(Instant.parse(MAXIMUM_INSTANT_TEXT)));
     assertEquals(256, encoded.length);
     assertEquals("99991231235959999", new String(encoded, 96, 17, StandardCharsets.US_ASCII));
     assertEquals("c".repeat(64), new String(encoded, 113, 64, StandardCharsets.US_ASCII));
     assertEquals(
-        Instant.parse("9999-12-31T14:59:59.999Z"), HeaderCodec.standard().peek(encoded).sentAt());
+        Instant.parse(MAXIMUM_INSTANT_TEXT), HeaderCodec.standard().peek(encoded).sentAt());
   }
 
   /** PT-PRO-003-T05/YKT-033: required numeric and optional text DATA share the same rejection. */
@@ -78,7 +78,7 @@ class JstWireTimestampTest {
           IllegalArgumentException.class,
           () -> TypedFieldValues.optionalInstantValue(Optional.of(invalid)));
     }
-    Instant maximum = Instant.parse("9999-12-31T14:59:59.999Z");
+    Instant maximum = Instant.parse(MAXIMUM_INSTANT_TEXT);
     assertEquals(new FieldValue.Numeric(99991231235959999L), TypedFieldValues.instant(maximum));
     assertEquals(
         new FieldValue.Text("99991231235959999"),

@@ -22,6 +22,7 @@ import java.util.UUID;
 import org.junit.jupiter.api.Test;
 
 class LargeResultRecordCodecTest {
+  private static final String IO_FAILURE_MESSAGE = "test";
   private static final UUID FILE_ID = UUID.fromString("123e4567-e89b-12d3-a456-426614174000");
   private static final String PATH = "20260902/123e4567-e89b-12d3-a456-426614174000.ready";
 
@@ -202,12 +203,12 @@ class LargeResultRecordCodecTest {
         new OutputStream() {
           @Override
           public void write(int value) throws IOException {
-            throw new IOException("test");
+            throw new IOException(IO_FAILURE_MESSAGE);
           }
 
           @Override
           public void write(byte[] value) throws IOException {
-            throw new IOException("test");
+            throw new IOException(IO_FAILURE_MESSAGE);
           }
         };
     assertThrows(
@@ -239,12 +240,12 @@ class LargeResultRecordCodecTest {
         new InputStream() {
           @Override
           public int read() throws IOException {
-            throw new IOException("test");
+            throw new IOException(IO_FAILURE_MESSAGE);
           }
 
           @Override
           public int read(byte[] value, int offset, int length) throws IOException {
-            throw new IOException("test");
+            throw new IOException(IO_FAILURE_MESSAGE);
           }
         };
     assertThrows(LargeResultIoException.class, () -> LargeResultRecordCodec.decode(broken, valid));

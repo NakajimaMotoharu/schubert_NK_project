@@ -10,6 +10,17 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 class MediaDescriptorValidatorTest {
+  private static final String AUDIO_OGG_MIME = "audio/ogg";
+  private static final String VIDEO_MP4_MIME = "video/mp4";
+  private static final String AUDIO_MPEG_MIME = "audio/mpeg";
+  private static final String MEDIA_ID_TEXT = "media-1";
+  private static final String MUSIC_KIND_TEXT = "MUSIC";
+  private static final String OGG_EXTENSION = ".ogg";
+  private static final String MP4_EXTENSION = ".mp4";
+  private static final String MUSIC_DIRECTORY_PREFIX = "music/";
+  private static final String STORED_LABEL = "stored";
+  private static final String VIDEO_RELATIVE_PATH = "video/a.mp4";
+  private static final String VIDEO_FILE_NAME = "a.mp4";
   private static final String HASH = "0".repeat(64);
 
   @Test
@@ -20,13 +31,13 @@ class MediaDescriptorValidatorTest {
                 MediaType.AUDIO,
                 "scenario/game/audio/sample.ogg",
                 "sample.ogg",
-                "audio/ogg",
+                AUDIO_OGG_MIME,
                 ContentDisposition.INLINE),
             media(
                 MediaType.VIDEO,
                 "video/main/sample.mp4",
                 "sample.mp4",
-                "video/mp4",
+                VIDEO_MP4_MIME,
                 ContentDisposition.INLINE),
             media(
                 MediaType.MUSIC,
@@ -38,13 +49,13 @@ class MediaDescriptorValidatorTest {
                 MediaType.MUSIC,
                 "music/sample.mp3",
                 "sample.mp3",
-                "audio/mpeg",
+                AUDIO_MPEG_MIME,
                 ContentDisposition.ATTACHMENT),
             media(
                 MediaType.MUSIC,
                 "music/sample.ogg",
                 "sample.ogg",
-                "audio/ogg",
+                AUDIO_OGG_MIME,
                 ContentDisposition.INLINE),
             media(
                 MediaType.MUSIC,
@@ -61,19 +72,19 @@ class MediaDescriptorValidatorTest {
     assertEquals(7, descriptors.size());
     MediaDescriptor descriptor = descriptors.getFirst();
     assertEquals(MediaType.AUDIO, descriptor.mediaType());
-    assertEquals("media-1", descriptor.logicalId());
+    assertEquals(MEDIA_ID_TEXT, descriptor.logicalId());
     assertEquals("scenario/game/audio/sample.ogg", descriptor.storageRelativePath());
     assertEquals("sample.ogg", descriptor.fileName());
     assertEquals(1, descriptor.byteLength());
     assertEquals(HASH, descriptor.sha256());
-    assertEquals("audio/ogg", descriptor.mimeType());
+    assertEquals(AUDIO_OGG_MIME, descriptor.mimeType());
     assertEquals(ContentDisposition.INLINE, descriptor.disposition());
     assertTrue(descriptor.toString().contains("storageRelativePath=REDACTED"));
     assertFalse(descriptor.toString().contains(descriptor.storageRelativePath()));
     MediaDescriptorValidator.validate(descriptor);
     assertThrows(NullPointerException.class, () -> MediaDescriptorValidator.validate(null));
     assertEquals(3, MediaType.values().length);
-    assertEquals(MediaType.MUSIC, MediaType.valueOf("MUSIC"));
+    assertEquals(MediaType.MUSIC, MediaType.valueOf(MUSIC_KIND_TEXT));
   }
 
   @Test
@@ -91,13 +102,13 @@ class MediaDescriptorValidatorTest {
   @Test
   void utf8MaximumFieldsAndN12UseIndependentCanonicalBoundaries() {
     String[][] pairs = {
-      {"AUDIO", "scenario/", ".ogg", "audio/ogg"},
-      {"VIDEO", "video/", ".mp4", "video/mp4"},
-      {"MUSIC", "music/", ".m4a", "audio/mp4"},
-      {"MUSIC", "music/", ".mp3", "audio/mpeg"},
-      {"MUSIC", "music/", ".ogg", "audio/ogg"},
-      {"MUSIC", "music/", ".wav", "audio/wav"},
-      {"MUSIC", "music/", ".flac", "audio/flac"}
+      {"AUDIO", "scenario/", OGG_EXTENSION, AUDIO_OGG_MIME},
+      {"VIDEO", "video/", MP4_EXTENSION, VIDEO_MP4_MIME},
+      {MUSIC_KIND_TEXT, MUSIC_DIRECTORY_PREFIX, ".m4a", "audio/mp4"},
+      {MUSIC_KIND_TEXT, MUSIC_DIRECTORY_PREFIX, ".mp3", AUDIO_MPEG_MIME},
+      {MUSIC_KIND_TEXT, MUSIC_DIRECTORY_PREFIX, OGG_EXTENSION, AUDIO_OGG_MIME},
+      {MUSIC_KIND_TEXT, MUSIC_DIRECTORY_PREFIX, ".wav", "audio/wav"},
+      {MUSIC_KIND_TEXT, MUSIC_DIRECTORY_PREFIX, ".flac", "audio/flac"}
     };
     for (String[] pair : pairs) {
       var type = MediaType.valueOf(pair[0]);
@@ -159,13 +170,13 @@ class MediaDescriptorValidatorTest {
   @Test
   void bug040StorageExtensionCannotBeHiddenByDisplayMetadata() {
     String[][] pairs = {
-      {"AUDIO", "scenario/", ".ogg", "audio/ogg"},
-      {"VIDEO", "video/", ".mp4", "video/mp4"},
-      {"MUSIC", "music/", ".m4a", "audio/mp4"},
-      {"MUSIC", "music/", ".mp3", "audio/mpeg"},
-      {"MUSIC", "music/", ".ogg", "audio/ogg"},
-      {"MUSIC", "music/", ".wav", "audio/wav"},
-      {"MUSIC", "music/", ".flac", "audio/flac"}
+      {"AUDIO", "scenario/", OGG_EXTENSION, AUDIO_OGG_MIME},
+      {"VIDEO", "video/", MP4_EXTENSION, VIDEO_MP4_MIME},
+      {MUSIC_KIND_TEXT, MUSIC_DIRECTORY_PREFIX, ".m4a", "audio/mp4"},
+      {MUSIC_KIND_TEXT, MUSIC_DIRECTORY_PREFIX, ".mp3", AUDIO_MPEG_MIME},
+      {MUSIC_KIND_TEXT, MUSIC_DIRECTORY_PREFIX, OGG_EXTENSION, AUDIO_OGG_MIME},
+      {MUSIC_KIND_TEXT, MUSIC_DIRECTORY_PREFIX, ".wav", "audio/wav"},
+      {MUSIC_KIND_TEXT, MUSIC_DIRECTORY_PREFIX, ".flac", "audio/flac"}
     };
     for (String[] pair : pairs) {
       var type = MediaType.valueOf(pair[0]);
@@ -175,18 +186,18 @@ class MediaDescriptorValidatorTest {
       var valid =
           media(
               type,
-              prefix + "stored" + extension,
+              prefix + STORED_LABEL + extension,
               "表示名" + extension,
               mime,
               ContentDisposition.INLINE);
-      assertEquals(prefix + "stored" + extension, valid.storageRelativePath());
+      assertEquals(prefix + STORED_LABEL + extension, valid.storageRelativePath());
       assertEquals("表示名" + extension, valid.fileName());
       for (String badExtension :
           List.of(
               "",
               ".bin",
               extension.toUpperCase(java.util.Locale.ROOT),
-              extension.equals(".mp4") ? ".ogg" : ".mp4",
+              extension.equals(MP4_EXTENSION) ? OGG_EXTENSION : MP4_EXTENSION,
               extension + ".bin")) {
         var failure =
             assertThrows(
@@ -194,11 +205,11 @@ class MediaDescriptorValidatorTest {
                 () ->
                     media(
                         type,
-                        prefix + "stored" + badExtension,
+                        prefix + STORED_LABEL + badExtension,
                         "表示名" + extension,
                         mime,
                         ContentDisposition.INLINE));
-        assertFalse(failure.getMessage().contains("stored"));
+        assertFalse(failure.getMessage().contains(STORED_LABEL));
         assertEquals(null, failure.getCause());
         assertEquals(0, failure.getSuppressed().length);
       }
@@ -209,48 +220,48 @@ class MediaDescriptorValidatorTest {
   void rejectsNonCanonicalTextPathsNamesSizesAndHashes() {
     assertInvalid(
         "",
-        "video/a.mp4",
-        "a.mp4",
+        VIDEO_RELATIVE_PATH,
+        VIDEO_FILE_NAME,
         1,
         HASH,
-        "video/mp4",
+        VIDEO_MP4_MIME,
         MediaType.VIDEO,
         ContentDisposition.INLINE);
     assertInvalid(
         "e\u0301",
-        "video/a.mp4",
-        "a.mp4",
+        VIDEO_RELATIVE_PATH,
+        VIDEO_FILE_NAME,
         1,
         HASH,
-        "video/mp4",
+        VIDEO_MP4_MIME,
         MediaType.VIDEO,
         ContentDisposition.INLINE);
     assertInvalid(
         "あ".repeat(22),
-        "video/a.mp4",
-        "a.mp4",
+        VIDEO_RELATIVE_PATH,
+        VIDEO_FILE_NAME,
         1,
         HASH,
-        "video/mp4",
+        VIDEO_MP4_MIME,
         MediaType.VIDEO,
         ContentDisposition.INLINE);
     assertInvalid(
         "id ",
-        "video/a.mp4",
-        "a.mp4",
+        VIDEO_RELATIVE_PATH,
+        VIDEO_FILE_NAME,
         1,
         HASH,
-        "video/mp4",
+        VIDEO_MP4_MIME,
         MediaType.VIDEO,
         ContentDisposition.INLINE);
     for (String logicalId : new String[] {"id\r", "id\n", "id\t", "id\0"}) {
       assertInvalid(
           logicalId,
-          "video/a.mp4",
-          "a.mp4",
+          VIDEO_RELATIVE_PATH,
+          VIDEO_FILE_NAME,
           1,
           HASH,
-          "video/mp4",
+          VIDEO_MP4_MIME,
           MediaType.VIDEO,
           ContentDisposition.INLINE);
     }
@@ -261,80 +272,80 @@ class MediaDescriptorValidatorTest {
           "video/./a.mp4", "video/../a.mp4", "music/a.mp4", "video/a.mp4 "
         }) {
       assertInvalid(
-          "media-1",
+          MEDIA_ID_TEXT,
           path,
-          "a.mp4",
+          VIDEO_FILE_NAME,
           1,
           HASH,
-          "video/mp4",
+          VIDEO_MP4_MIME,
           MediaType.VIDEO,
           ContentDisposition.INLINE);
     }
     assertInvalid(
-        "media-1",
-        "video/" + "あ".repeat(170) + ".mp4",
-        "a.mp4",
+        MEDIA_ID_TEXT,
+        "video/" + "あ".repeat(170) + MP4_EXTENSION,
+        VIDEO_FILE_NAME,
         1,
         HASH,
-        "video/mp4",
+        VIDEO_MP4_MIME,
         MediaType.VIDEO,
         ContentDisposition.INLINE);
     assertInvalid(
-        "media-1",
+        MEDIA_ID_TEXT,
         "video/a\u0001.mp4",
-        "a.mp4",
+        VIDEO_FILE_NAME,
         1,
         HASH,
-        "video/mp4",
+        VIDEO_MP4_MIME,
         MediaType.VIDEO,
         ContentDisposition.INLINE);
 
     for (String name :
         new String[] {"a/b.mp4", "a\\b.mp4", "a\"b.mp4", "a'b.mp4", "a\u0001.mp4", "a.mp4 "}) {
       assertInvalid(
-          "media-1",
-          "video/a.mp4",
+          MEDIA_ID_TEXT,
+          VIDEO_RELATIVE_PATH,
           name,
           1,
           HASH,
-          "video/mp4",
+          VIDEO_MP4_MIME,
           MediaType.VIDEO,
           ContentDisposition.INLINE);
     }
     assertInvalid(
-        "media-1",
-        "video/a.mp4",
+        MEDIA_ID_TEXT,
+        VIDEO_RELATIVE_PATH,
         "あ".repeat(86),
         1,
         HASH,
-        "video/mp4",
+        VIDEO_MP4_MIME,
         MediaType.VIDEO,
         ContentDisposition.INLINE);
     assertInvalid(
-        "media-1",
-        "video/a.mp4",
-        "a.mp4",
+        MEDIA_ID_TEXT,
+        VIDEO_RELATIVE_PATH,
+        VIDEO_FILE_NAME,
         0,
         HASH,
-        "video/mp4",
+        VIDEO_MP4_MIME,
         MediaType.VIDEO,
         ContentDisposition.INLINE);
     assertInvalid(
-        "media-1",
-        "video/a.mp4",
-        "a.mp4",
+        MEDIA_ID_TEXT,
+        VIDEO_RELATIVE_PATH,
+        VIDEO_FILE_NAME,
         1_000_000_000_000L,
         HASH,
-        "video/mp4",
+        VIDEO_MP4_MIME,
         MediaType.VIDEO,
         ContentDisposition.INLINE);
     assertInvalid(
-        "media-1",
-        "video/a.mp4",
-        "a.mp4",
+        MEDIA_ID_TEXT,
+        VIDEO_RELATIVE_PATH,
+        VIDEO_FILE_NAME,
         1,
         "A".repeat(64),
-        "video/mp4",
+        VIDEO_MP4_MIME,
         MediaType.VIDEO,
         ContentDisposition.INLINE);
   }
@@ -342,75 +353,75 @@ class MediaDescriptorValidatorTest {
   @Test
   void rejectsEveryMimeCrossProductAndVideoAttachment() {
     assertInvalid(
-        "media-1",
+        MEDIA_ID_TEXT,
         "scenario/game/audio/a.mp3",
         "a.mp3",
         1,
         HASH,
-        "audio/mpeg",
+        AUDIO_MPEG_MIME,
         MediaType.AUDIO,
         ContentDisposition.INLINE);
     assertInvalid(
-        "media-1",
+        MEDIA_ID_TEXT,
         "scenario/game/audio/a.ogg",
         "a.ogg",
         1,
         HASH,
-        "audio/mpeg",
+        AUDIO_MPEG_MIME,
         MediaType.AUDIO,
         ContentDisposition.INLINE);
     assertInvalid(
-        "media-1",
+        MEDIA_ID_TEXT,
         "video/a.m4v",
         "a.m4v",
         1,
         HASH,
-        "video/mp4",
+        VIDEO_MP4_MIME,
         MediaType.VIDEO,
         ContentDisposition.INLINE);
     assertInvalid(
-        "media-1",
-        "video/a.mp4",
-        "a.mp4",
+        MEDIA_ID_TEXT,
+        VIDEO_RELATIVE_PATH,
+        VIDEO_FILE_NAME,
         1,
         HASH,
         "application/octet-stream",
         MediaType.VIDEO,
         ContentDisposition.INLINE);
     assertInvalid(
-        "media-1",
-        "video/a.mp4",
-        "a.mp4",
+        MEDIA_ID_TEXT,
+        VIDEO_RELATIVE_PATH,
+        VIDEO_FILE_NAME,
         1,
         HASH,
-        "video/mp4",
+        VIDEO_MP4_MIME,
         MediaType.VIDEO,
         ContentDisposition.ATTACHMENT);
     assertInvalid(
-        "media-1",
+        MEDIA_ID_TEXT,
         "music/a.MP3",
         "a.MP3",
         1,
         HASH,
-        "audio/mpeg",
+        AUDIO_MPEG_MIME,
         MediaType.MUSIC,
         ContentDisposition.INLINE);
     assertInvalid(
-        "media-1",
+        MEDIA_ID_TEXT,
         "music/a",
         "a",
         1,
         HASH,
-        "audio/mpeg",
+        AUDIO_MPEG_MIME,
         MediaType.MUSIC,
         ContentDisposition.INLINE);
     assertInvalid(
-        "media-1",
+        MEDIA_ID_TEXT,
         "music/a.mp3",
         "a.mp3",
         1,
         HASH,
-        "audio/ogg",
+        AUDIO_OGG_MIME,
         MediaType.MUSIC,
         ContentDisposition.INLINE);
   }
@@ -423,11 +434,11 @@ class MediaDescriptorValidatorTest {
             new MediaDescriptor(
                 null,
                 "id",
-                "video/a.mp4",
-                "a.mp4",
+                VIDEO_RELATIVE_PATH,
+                VIDEO_FILE_NAME,
                 1,
                 HASH,
-                "video/mp4",
+                VIDEO_MP4_MIME,
                 ContentDisposition.INLINE));
     assertThrows(
         NullPointerException.class,
@@ -435,23 +446,11 @@ class MediaDescriptorValidatorTest {
             new MediaDescriptor(
                 MediaType.VIDEO,
                 null,
-                "video/a.mp4",
-                "a.mp4",
+                VIDEO_RELATIVE_PATH,
+                VIDEO_FILE_NAME,
                 1,
                 HASH,
-                "video/mp4",
-                ContentDisposition.INLINE));
-    assertThrows(
-        NullPointerException.class,
-        () ->
-            new MediaDescriptor(
-                MediaType.VIDEO,
-                "id",
-                null,
-                "a.mp4",
-                1,
-                HASH,
-                "video/mp4",
+                VIDEO_MP4_MIME,
                 ContentDisposition.INLINE));
     assertThrows(
         NullPointerException.class,
@@ -459,11 +458,11 @@ class MediaDescriptorValidatorTest {
             new MediaDescriptor(
                 MediaType.VIDEO,
                 "id",
-                "video/a.mp4",
                 null,
+                VIDEO_FILE_NAME,
                 1,
                 HASH,
-                "video/mp4",
+                VIDEO_MP4_MIME,
                 ContentDisposition.INLINE));
     assertThrows(
         NullPointerException.class,
@@ -471,11 +470,11 @@ class MediaDescriptorValidatorTest {
             new MediaDescriptor(
                 MediaType.VIDEO,
                 "id",
-                "video/a.mp4",
-                "a.mp4",
-                1,
+                VIDEO_RELATIVE_PATH,
                 null,
-                "video/mp4",
+                1,
+                HASH,
+                VIDEO_MP4_MIME,
                 ContentDisposition.INLINE));
     assertThrows(
         NullPointerException.class,
@@ -483,8 +482,20 @@ class MediaDescriptorValidatorTest {
             new MediaDescriptor(
                 MediaType.VIDEO,
                 "id",
-                "video/a.mp4",
-                "a.mp4",
+                VIDEO_RELATIVE_PATH,
+                VIDEO_FILE_NAME,
+                1,
+                null,
+                VIDEO_MP4_MIME,
+                ContentDisposition.INLINE));
+    assertThrows(
+        NullPointerException.class,
+        () ->
+            new MediaDescriptor(
+                MediaType.VIDEO,
+                "id",
+                VIDEO_RELATIVE_PATH,
+                VIDEO_FILE_NAME,
                 1,
                 HASH,
                 null,
@@ -493,12 +504,19 @@ class MediaDescriptorValidatorTest {
         NullPointerException.class,
         () ->
             new MediaDescriptor(
-                MediaType.VIDEO, "id", "video/a.mp4", "a.mp4", 1, HASH, "video/mp4", null));
+                MediaType.VIDEO,
+                "id",
+                VIDEO_RELATIVE_PATH,
+                VIDEO_FILE_NAME,
+                1,
+                HASH,
+                VIDEO_MP4_MIME,
+                null));
   }
 
   private static MediaDescriptor media(
       MediaType type, String path, String fileName, String mime, ContentDisposition disposition) {
-    return new MediaDescriptor(type, "media-1", path, fileName, 1, HASH, mime, disposition);
+    return new MediaDescriptor(type, MEDIA_ID_TEXT, path, fileName, 1, HASH, mime, disposition);
   }
 
   private static void assertInvalid(

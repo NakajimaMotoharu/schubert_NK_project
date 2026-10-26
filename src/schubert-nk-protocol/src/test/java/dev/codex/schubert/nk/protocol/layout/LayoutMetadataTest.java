@@ -14,6 +14,12 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 
 class LayoutMetadataTest {
+  private static final String LOGIN_REQUEST_LAYOUT = "LGNREQ01";
+  private static final String CUSTOM_REQUEST_LAYOUT = "ABCREQ01";
+  private static final String CUSTOM_RESPONSE_LAYOUT = "ABCRSP01";
+  private static final String SAMPLE_FIELD_NAME = "name";
+  private static final String FIELD_RULE_TEXT = "rule";
+
   @Test
   void registryMatchesIndependentUi233Catalog() throws Exception {
     List<String> expected;
@@ -42,11 +48,15 @@ class LayoutMetadataTest {
 
     assertEquals(64, actual.size());
     assertEquals(expected, actual);
-    assertEquals("LGNREQ01", LayoutRegistry.standard().require("LGNREQ01", 1).id().value());
     assertEquals(
-        "LGNREQ01", LayoutRegistry.standard().require(new LayoutId("LGNREQ01"), 1).id().value());
+        LOGIN_REQUEST_LAYOUT,
+        LayoutRegistry.standard().require(LOGIN_REQUEST_LAYOUT, 1).id().value());
+    assertEquals(
+        LOGIN_REQUEST_LAYOUT,
+        LayoutRegistry.standard().require(new LayoutId(LOGIN_REQUEST_LAYOUT), 1).id().value());
     assertThrows(
-        UnsupportedLayoutException.class, () -> LayoutRegistry.standard().require("LGNREQ01", 2));
+        UnsupportedLayoutException.class,
+        () -> LayoutRegistry.standard().require(LOGIN_REQUEST_LAYOUT, 2));
     assertThrows(
         NullPointerException.class, () -> LayoutRegistry.standard().require((String) null, 1));
     assertThrows(
@@ -58,7 +68,7 @@ class LayoutMetadataTest {
   @Test
   void registryRejectsEmptyNullDuplicateAndKindMismatches() {
     LayoutDefinition request =
-        d("ABCREQ01", MessageKind.REQUEST, InteractionKind.SYNCHRONOUS, 0, 0, 0);
+        d(CUSTOM_REQUEST_LAYOUT, MessageKind.REQUEST, InteractionKind.SYNCHRONOUS, 0, 0, 0);
     assertThrows(NullPointerException.class, () -> LayoutRegistry.validateDefinitions(null));
     assertThrows(
         LayoutValidationException.class, () -> LayoutRegistry.validateDefinitions(List.of()));
@@ -74,12 +84,25 @@ class LayoutMetadataTest {
         () ->
             LayoutRegistry.validateDefinitions(
                 List.of(
-                    d("ABCREQ01", MessageKind.RESPONSE, InteractionKind.SYNCHRONOUS, 0, 0, 0))));
+                    d(
+                        CUSTOM_REQUEST_LAYOUT,
+                        MessageKind.RESPONSE,
+                        InteractionKind.SYNCHRONOUS,
+                        0,
+                        0,
+                        0))));
     assertThrows(
         LayoutValidationException.class,
         () ->
             LayoutRegistry.validateDefinitions(
-                List.of(d("ABCRSP01", MessageKind.REQUEST, InteractionKind.SYNCHRONOUS, 0, 0, 0))));
+                List.of(
+                    d(
+                        CUSTOM_RESPONSE_LAYOUT,
+                        MessageKind.REQUEST,
+                        InteractionKind.SYNCHRONOUS,
+                        0,
+                        0,
+                        0))));
     assertThrows(
         LayoutValidationException.class,
         () ->
@@ -97,7 +120,7 @@ class LayoutMetadataTest {
             LayoutRegistry.validateDefinitions(
                 List.of(
                     d(
-                        "ABCREQ01",
+                        CUSTOM_REQUEST_LAYOUT,
                         MessageKind.REQUEST,
                         InteractionKind.ASYNC_ACCEPTANCE,
                         0,
@@ -115,7 +138,7 @@ class LayoutMetadataTest {
   @Test
   void layoutDefinitionChecksEveryLengthAndKindInvariant() {
     LayoutDefinition definition =
-        d("ABCRSP01", MessageKind.RESPONSE, InteractionKind.SYNCHRONOUS, 8, 10, 2);
+        d(CUSTOM_RESPONSE_LAYOUT, MessageKind.RESPONSE, InteractionKind.SYNCHRONOUS, 8, 10, 2);
     assertEquals(284, definition.maximumTotalLength());
     assertEquals(264, definition.totalLengthFor(0));
     assertEquals(274, definition.totalLengthFor(1));
@@ -126,7 +149,7 @@ class LayoutMetadataTest {
         LayoutValidationException.class,
         () ->
             new LayoutDefinition(
-                new LayoutId("ABCREQ01"),
+                new LayoutId(CUSTOM_REQUEST_LAYOUT),
                 2,
                 MessageKind.REQUEST,
                 InteractionKind.SYNCHRONOUS,
@@ -137,7 +160,7 @@ class LayoutMetadataTest {
         LayoutValidationException.class,
         () ->
             new LayoutDefinition(
-                new LayoutId("ABCREQ01"),
+                new LayoutId(CUSTOM_REQUEST_LAYOUT),
                 1,
                 MessageKind.REQUEST,
                 InteractionKind.SYNCHRONOUS,
@@ -148,7 +171,7 @@ class LayoutMetadataTest {
         LayoutValidationException.class,
         () ->
             new LayoutDefinition(
-                new LayoutId("ABCREQ01"),
+                new LayoutId(CUSTOM_REQUEST_LAYOUT),
                 1,
                 MessageKind.REQUEST,
                 InteractionKind.SYNCHRONOUS,
@@ -159,7 +182,7 @@ class LayoutMetadataTest {
         LayoutValidationException.class,
         () ->
             new LayoutDefinition(
-                new LayoutId("ABCRSP01"),
+                new LayoutId(CUSTOM_RESPONSE_LAYOUT),
                 1,
                 MessageKind.RESPONSE,
                 InteractionKind.SYNCHRONOUS,
@@ -170,7 +193,7 @@ class LayoutMetadataTest {
         LayoutValidationException.class,
         () ->
             new LayoutDefinition(
-                new LayoutId("ABCRSP01"),
+                new LayoutId(CUSTOM_RESPONSE_LAYOUT),
                 1,
                 MessageKind.RESPONSE,
                 InteractionKind.SYNCHRONOUS,
@@ -181,7 +204,7 @@ class LayoutMetadataTest {
         LayoutValidationException.class,
         () ->
             new LayoutDefinition(
-                new LayoutId("ABCREQ01"),
+                new LayoutId(CUSTOM_REQUEST_LAYOUT),
                 1,
                 MessageKind.REQUEST,
                 InteractionKind.SYNCHRONOUS,
@@ -192,7 +215,7 @@ class LayoutMetadataTest {
         LayoutValidationException.class,
         () ->
             new LayoutDefinition(
-                new LayoutId("ABCRSP01"),
+                new LayoutId(CUSTOM_RESPONSE_LAYOUT),
                 1,
                 MessageKind.RESPONSE,
                 InteractionKind.SYNCHRONOUS,
@@ -203,7 +226,7 @@ class LayoutMetadataTest {
         LayoutValidationException.class,
         () ->
             new LayoutDefinition(
-                new LayoutId("ABCREQ01"),
+                new LayoutId(CUSTOM_REQUEST_LAYOUT),
                 1,
                 MessageKind.REQUEST,
                 InteractionKind.SYNCHRONOUS,
@@ -226,7 +249,7 @@ class LayoutMetadataTest {
         LayoutValidationException.class,
         () ->
             new LayoutDefinition(
-                new LayoutId("ABCREQ01"),
+                new LayoutId(CUSTOM_REQUEST_LAYOUT),
                 1,
                 MessageKind.REQUEST,
                 InteractionKind.INTERNAL,
@@ -247,19 +270,26 @@ class LayoutMetadataTest {
         NullPointerException.class,
         () ->
             new LayoutDefinition(
-                new LayoutId("ABCREQ01"), 1, null, InteractionKind.SYNCHRONOUS, 0, 0, 0));
+                new LayoutId(CUSTOM_REQUEST_LAYOUT),
+                1,
+                null,
+                InteractionKind.SYNCHRONOUS,
+                0,
+                0,
+                0));
     assertThrows(
         NullPointerException.class,
         () ->
-            new LayoutDefinition(new LayoutId("ABCREQ01"), 1, MessageKind.REQUEST, null, 0, 0, 0));
+            new LayoutDefinition(
+                new LayoutId(CUSTOM_REQUEST_LAYOUT), 1, MessageKind.REQUEST, null, 0, 0, 0));
   }
 
   @Test
   void layoutIdAndFieldDefinitionAreStrictAndOneBased() {
-    LayoutId first = new LayoutId("ABCREQ01");
-    LayoutId second = new LayoutId("ABCRSP01");
+    LayoutId first = new LayoutId(CUSTOM_REQUEST_LAYOUT);
+    LayoutId second = new LayoutId(CUSTOM_RESPONSE_LAYOUT);
     assertTrue(first.compareTo(second) < 0);
-    assertEquals("ABCREQ01", first.toString());
+    assertEquals(CUSTOM_REQUEST_LAYOUT, first.toString());
     assertThrows(NullPointerException.class, () -> first.compareTo(null));
     assertThrows(NullPointerException.class, () -> new LayoutId(null));
     assertThrows(LayoutValidationException.class, () -> new LayoutId("short"));
@@ -268,7 +298,7 @@ class LayoutMetadataTest {
     FieldDefinition<String> text =
         new FieldDefinition<>(
             FieldArea.DATA,
-            "name",
+            SAMPLE_FIELD_NAME,
             1,
             8,
             WireType.TEXT,
@@ -307,25 +337,32 @@ class LayoutMetadataTest {
     assertEquals(3, Padding.values().length);
     assertThrows(
         LayoutValidationException.class,
-        () -> field("", 1, 1, WireType.TEXT, Padding.SPACE_RIGHT, "rule"));
+        () -> field("", 1, 1, WireType.TEXT, Padding.SPACE_RIGHT, FIELD_RULE_TEXT));
     assertThrows(
         LayoutValidationException.class,
-        () -> field("name", 1, 1, WireType.TEXT, Padding.SPACE_RIGHT, " "));
+        () -> field(SAMPLE_FIELD_NAME, 1, 1, WireType.TEXT, Padding.SPACE_RIGHT, " "));
     assertThrows(
         LayoutValidationException.class,
-        () -> field("name", 0, 1, WireType.TEXT, Padding.SPACE_RIGHT, "rule"));
+        () -> field(SAMPLE_FIELD_NAME, 0, 1, WireType.TEXT, Padding.SPACE_RIGHT, FIELD_RULE_TEXT));
     assertThrows(
         LayoutValidationException.class,
-        () -> field("name", 1, 0, WireType.TEXT, Padding.SPACE_RIGHT, "rule"));
+        () -> field(SAMPLE_FIELD_NAME, 1, 0, WireType.TEXT, Padding.SPACE_RIGHT, FIELD_RULE_TEXT));
     assertThrows(
         LayoutValidationException.class,
-        () -> field("name", Integer.MAX_VALUE, 2, WireType.TEXT, Padding.SPACE_RIGHT, "rule"));
+        () ->
+            field(
+                SAMPLE_FIELD_NAME,
+                Integer.MAX_VALUE,
+                2,
+                WireType.TEXT,
+                Padding.SPACE_RIGHT,
+                FIELD_RULE_TEXT));
     assertThrows(
         LayoutValidationException.class,
         () ->
             new FieldDefinition<>(
                 FieldArea.DATA,
-                "name",
+                SAMPLE_FIELD_NAME,
                 1,
                 99,
                 1,
@@ -333,16 +370,17 @@ class LayoutMetadataTest {
                 Presence.FIXED,
                 Padding.SPACE_RIGHT,
                 String.class,
-                "rule"));
+                FIELD_RULE_TEXT));
     assertThrows(
         LayoutValidationException.class,
-        () -> field("name", 1, 1, WireType.TEXT, Padding.NONE, "rule"));
+        () -> field(SAMPLE_FIELD_NAME, 1, 1, WireType.TEXT, Padding.NONE, FIELD_RULE_TEXT));
     assertThrows(
         LayoutValidationException.class,
-        () -> field("name", 1, 1, WireType.NUMERIC, Padding.NONE, "rule"));
+        () -> field(SAMPLE_FIELD_NAME, 1, 1, WireType.NUMERIC, Padding.NONE, FIELD_RULE_TEXT));
     assertThrows(
         LayoutValidationException.class,
-        () -> field("name", 1, 1, WireType.BOOLEAN, Padding.SPACE_RIGHT, "rule"));
+        () ->
+            field(SAMPLE_FIELD_NAME, 1, 1, WireType.BOOLEAN, Padding.SPACE_RIGHT, FIELD_RULE_TEXT));
     assertThrows(
         NullPointerException.class,
         () ->
