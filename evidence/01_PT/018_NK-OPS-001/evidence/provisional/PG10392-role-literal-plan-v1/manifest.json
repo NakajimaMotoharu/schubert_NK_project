@@ -1,0 +1,99 @@
+{
+  "actualExit": 0,
+  "bug": "BUG-1825",
+  "externalActions": 0,
+  "formalUpdated": false,
+  "invocation": {
+    "actualPythonCommand": [
+      "python3",
+      "-B",
+      "tools/quality/pg10392_role_literal_plan.py"
+    ],
+    "arbitraryArgumentsRecorded": false,
+    "entrypointPath": "tools/quality/pg10392_role_literal_plan.py",
+    "entrypointSha256": "e1af98abd59175d867d29b07a73d7b2e4c7112754603d1805ec0bfc4d9465ce8",
+    "helperPath": "tools/quality/host_tool_invocation.py",
+    "helperSha256": "85d616a3db4ff47f4c95ae2e0dd57954bc2b09f28b8f2a685b986e5621545c46",
+    "libraryPath": "tools/quality/pg10392_role_literal_plan.py",
+    "librarySha256": "e1af98abd59175d867d29b07a73d7b2e4c7112754603d1805ec0bfc4d9465ce8",
+    "loadedProjectPythonSources": {
+      "tools/quality/g07_host_class_provenance_inputs.py": "a676cb3e4145177c3c243722d737592ce7d44c3f29cfe4f670662ef7651f046b",
+      "tools/quality/host_tool_invocation.py": "85d616a3db4ff47f4c95ae2e0dd57954bc2b09f28b8f2a685b986e5621545c46",
+      "tools/quality/pg10392_role_literal_plan.py": "e1af98abd59175d867d29b07a73d7b2e4c7112754603d1805ec0bfc4d9465ce8"
+    },
+    "provenance": "OBSERVED_SYS_ARGV_AND_ORIG_ARGV_NOT_RECONSTRUCTED"
+  },
+  "newAccepted": 0,
+  "productTestsExecuted": 0,
+  "replacement": "switch (role) { case USER -> \"USER\"; case ADMIN -> \"ADMIN\"; }",
+  "replacements": 18,
+  "source": "3d9f1d9fd395e8cb9456b0a540e1f29bcb87876e",
+  "sourceChanges": {
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/admin/UserCommandServiceTest.java": {
+      "afterUnformattedSha256": "b4334ca2ae64c19ba0ae139ed1c142d2ebb576274dca05ae6be1a1d00b060ff7",
+      "beforeSha256": "c61bd22c5b8cf5c778f3834ea6099b5daa8b1e4592874345d55008b309202486",
+      "replacements": 1
+    },
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/AnimationControllerTest.java": {
+      "afterUnformattedSha256": "881552c72eda0f12d942a451836578935856f6a02ea73a2b561fdaf450c6dacb",
+      "beforeSha256": "0dfe08011dbbf4d212fb7914c24726d79da555f5f7da520ffaabac6c592da659",
+      "replacements": 2
+    },
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/MusicControllerTest.java": {
+      "afterUnformattedSha256": "8ded73c0efbcc88652739081afb526192ec4945a202371ee09c13ff6ca160134",
+      "beforeSha256": "1874597b07364a279425af0dd12067d2f9c1e82820eb29a3ac4cd09af8da3044",
+      "replacements": 1
+    },
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/NotificationControllerTest.java": {
+      "afterUnformattedSha256": "2e0a88c784091dc084e7943b6a521c2c930afa365ba2af0506cbb185aaee32b0",
+      "beforeSha256": "aa2984aea6b2188741fe6f8b4b87ab37a93210a2ea3595ae46bef277751f00a3",
+      "replacements": 2
+    },
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/QuestionControllerTest.java": {
+      "afterUnformattedSha256": "07f096d1e412ec2cf530fc70707909c71d930b64fe15154e1a56a138e83fd18a",
+      "beforeSha256": "ca4099d0e8019758e3a6b9fbbbaa9e114e04891372db7af4403ad9cdd2df6987",
+      "replacements": 1
+    },
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/ScenarioControllerTest.java": {
+      "afterUnformattedSha256": "0a231fd4e434bc915e229557ed5ca14dca4644eea602636a50dc2c114f3a2c31",
+      "beforeSha256": "80e594a84914b04a9828c55b76cca0c1a6df18a4fcc698719a4d9380f06a2d8d",
+      "replacements": 2
+    },
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/ScenarioSearchControllerTest.java": {
+      "afterUnformattedSha256": "3c9b9327259f742bd1ec84f09d65e56978432332d017a04cc11f281359b671ba",
+      "beforeSha256": "8a05475d93352f97a7d94f4c5d0031f15b41722f429e3ccedcda38ba550b759b",
+      "replacements": 1
+    },
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/SessionAccessFailureTest.java": {
+      "afterUnformattedSha256": "72ce242f935ed1c8fa16825d14d4013b41306229cc1b6de4b2c4e1bc0a75e697",
+      "beforeSha256": "c068e00b02d442f9a12b4e6cc93494b0b8bcb569c4428bb390b2129175670db8",
+      "replacements": 1
+    },
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/AnimationTemplateTest.java": {
+      "afterUnformattedSha256": "3dc6daee81d1e28ef058cb02e1478329ccad263694e9224820622696506c373b",
+      "beforeSha256": "c42731f1b080d128729435d1fb0da12df2a388b93b814613c6734a938dce1ef1",
+      "replacements": 1
+    },
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/AnimationViewModelTest.java": {
+      "afterUnformattedSha256": "f66da3b47a9f2a5bbd9ccb30d458af23c25c60ee7cd2c9f8c037f8d4f0933b3c",
+      "beforeSha256": "bf855cffce96b1e15039d424c87940ba17c636a54debcf7083cc1b250a9ee4a1",
+      "replacements": 1
+    },
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/MusicHierarchyTemplateTest.java": {
+      "afterUnformattedSha256": "63209307ed187c90623c224f547bbc255a450787aad9cb19057620f08232e19f",
+      "beforeSha256": "1b866c716399bfce97ad895df01c0c8bd045828cf5500c23c510996bc8db6eab",
+      "replacements": 2
+    },
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/MusicHierarchyViewModelTest.java": {
+      "afterUnformattedSha256": "45afc5b81154cd3b10e4f3868ab2fa08d528ae34cb413f44f3af5e200ebc6a00",
+      "beforeSha256": "18d11784dc613a8769ff3f5eb7ccf5616a5089cda708afbd11d94dc3ba3eef68",
+      "replacements": 2
+    },
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/ScenarioHierarchyViewModelTest.java": {
+      "afterUnformattedSha256": "7642d31d8de4d9d736e55ebacf0174565898fcf0dc18f9e71551afb5862c7c79",
+      "beforeSha256": "f7e23f58886f6b58b51f2c41f12602a5010d7c5aaf33b4912b5009a4bac964bb",
+      "replacements": 1
+    }
+  },
+  "ykt": "YKT-1576"
+}
