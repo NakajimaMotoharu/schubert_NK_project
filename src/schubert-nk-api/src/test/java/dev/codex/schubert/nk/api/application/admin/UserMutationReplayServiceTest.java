@@ -193,12 +193,12 @@ final class UserMutationReplayServiceTest {
               assertEquals(InboxCompletionState.ERROR, saved.state());
               assertEquals(InboxResultReference.none(), saved.resultReference());
               assertArrayEquals(
-                  wire(layout, SOURCE, RESPONSE, NOW, CONTEXT, code.wireValue(), 0, 0),
+                  wire(layout, SOURCE, RESPONSE, NOW, CONTEXT, oracleResultCode(code), 0, 0),
                   decrypt(saved, SOURCE, 1));
               for (boolean replay : List.of(false, true)) {
                 var snapshot = service.read(request, ADMIN, bound(SOURCE, saved, replay));
                 assertArrayEquals(
-                    wire(layout, SOURCE, REPLY, LATER, CONTEXT, code.wireValue(), 0, 0),
+                    wire(layout, SOURCE, REPLY, LATER, CONTEXT, oracleResultCode(code), 0, 0),
                     service.reply(snapshot, request, ADMIN, REPLY, LATER));
               }
             } else if (List.of(ResultCode.NOT_FOUND, ResultCode.VALIDATION_ERROR).contains(code)) {
@@ -209,12 +209,13 @@ final class UserMutationReplayServiceTest {
             }
             if (definite || transientError)
               assertArrayEquals(
-                  wire(layout, SOURCE, REPLY, LATER, CONTEXT, code.wireValue(), 0, 0),
+                  wire(layout, SOURCE, REPLY, LATER, CONTEXT, oracleResultCode(code), 0, 0),
                   service.failure(request, code, REPLY, LATER));
             else deny(() -> service.failure(request, code, REPLY, LATER));
             if (!definite
                 && !(code == ResultCode.SUCCESS || code == ResultCode.IDEMPOTENT_SUCCESS)) {
-              byte[] body = wire(layout, SOURCE, RESPONSE, NOW, CONTEXT, code.wireValue(), 0, 0);
+              byte[] body =
+                  wire(layout, SOURCE, RESPONSE, NOW, CONTEXT, oracleResultCode(code), 0, 0);
               var invalid =
                   stored(
                       layout,
@@ -739,5 +740,23 @@ final class UserMutationReplayServiceTest {
         new java.util.zip.InflaterInputStream(new java.io.ByteArrayInputStream(compressed))) {
       return inflater.readAllBytes();
     }
+  }
+
+  /** UI232 section7 literal oracle; never call Production wireValue. */
+  private static String oracleResultCode(ResultCode code) {
+    return switch (code) {
+      case SUCCESS -> "0000";
+      case VALIDATION_ERROR -> "0100";
+      case AUTHENTICATION_FAILED -> "0101";
+      case SESSION_INVALID -> "0102";
+      case FORBIDDEN -> "0103";
+      case NOT_FOUND -> "0104";
+      case CONFLICT -> "0105";
+      case LOCKED -> "0106";
+      case NOT_CANCELLABLE -> "0107";
+      case IDEMPOTENT_SUCCESS -> "0200";
+      case TEMPORARY_FAILURE -> "9000";
+      case RESOURCE_LIMIT -> "9001";
+    };
   }
 }

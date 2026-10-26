@@ -47,6 +47,12 @@ import org.junit.jupiter.api.function.Executable;
 
 /** Independent UI235 full wire and SS352 authenticated encryption, PT-ADM-064..066. */
 class LogReplayServiceTest {
+  private static final String FIXTURE_LOG_RESPONSE = "LGSRSP01";
+  private static final String FIXTURE_LAYOUT_VERSION = "001";
+  private static final String FIXTURE_SUCCESS_CODE = "0000";
+  private static final String FIXTURE_REPLAY_CODE = "0200";
+  private static final String FIXTURE_RESOURCE_CODE = "9001";
+
   @Test
   void adm064FrozenRecordsAndCapacityRebuildExactReplies() throws Exception {
     try (var keys = keys()) {
@@ -58,23 +64,31 @@ class LogReplayServiceTest {
           var completion = service.captureSuccess(request, ADMIN, response, RESPONSE, COMPLETED);
           assertEquals(InboxCompletionState.COMPLETED, completion.state());
           assertEquals(InboxResultReference.none(), completion.resultReference());
-          assertEquals("LGSRSP01", completion.responseLayoutId());
-          assertEquals("001", completion.responseVersion());
+          assertEquals(FIXTURE_LOG_RESPONSE, completion.responseLayoutId());
+          assertEquals(FIXTURE_LAYOUT_VERSION, completion.responseVersion());
           assertEquals(COMPLETED.truncatedTo(ChronoUnit.MICROS), completion.completedAt());
           assertArrayEquals(
-              wire(MESSAGE, RESPONSE, COMPLETED, "0000", count, count, 1, optional),
+              wire(MESSAGE, RESPONSE, COMPLETED, FIXTURE_SUCCESS_CODE, count, count, 1, optional),
               decrypt(completion, MESSAGE, 1));
           var snapshot = service.read(request, ADMIN, completion);
           assertEquals("LogSnapshot[REDACTED]", snapshot.toString());
           for (boolean replay : List.of(false, true))
             assertArrayEquals(
-                wire(MESSAGE, REPLY, LATER, replay ? "0200" : "0000", count, count, 1, optional),
+                wire(
+                    MESSAGE,
+                    REPLY,
+                    LATER,
+                    replay ? FIXTURE_REPLAY_CODE : FIXTURE_SUCCESS_CODE,
+                    count,
+                    count,
+                    1,
+                    optional),
                 service.reply(snapshot, request, ADMIN, REPLY, LATER, replay));
         }
       var last = request(999999);
       var saved = service.captureSuccess(last, ADMIN, page(1, 101, 2, true), RESPONSE, COMPLETED);
       assertArrayEquals(
-          wire(MESSAGE, REPLY, LATER, "0200", 1, 101, 2, true),
+          wire(MESSAGE, REPLY, LATER, FIXTURE_REPLAY_CODE, 1, 101, 2, true),
           service.reply(service.read(last, ADMIN, saved), last, ADMIN, REPLY, LATER, true));
       var request = request(1);
       var capacity =
@@ -82,11 +96,11 @@ class LogReplayServiceTest {
       assertEquals(InboxCompletionState.ERROR, capacity.state());
       assertEquals(InboxResultReference.none(), capacity.resultReference());
       assertArrayEquals(
-          wire(MESSAGE, RESPONSE, COMPLETED, "9001", 0, 0, 1, false),
+          wire(MESSAGE, RESPONSE, COMPLETED, FIXTURE_RESOURCE_CODE, 0, 0, 1, false),
           decrypt(capacity, MESSAGE, 1));
       for (boolean replay : List.of(false, true))
         assertArrayEquals(
-            wire(MESSAGE, REPLY, LATER, "9001", 0, 0, 1, false),
+            wire(MESSAGE, REPLY, LATER, FIXTURE_RESOURCE_CODE, 0, 0, 1, false),
             service.reply(
                 service.read(request, ADMIN, capacity), request, ADMIN, REPLY, LATER, replay));
       for (var code : ResultCode.values()) {
@@ -97,7 +111,7 @@ class LogReplayServiceTest {
                 ResultCode.RESOURCE_LIMIT)
             .contains(code))
           assertArrayEquals(
-              wire(MESSAGE, REPLY, LATER, code.wireValue(), 0, 0, 1, false),
+              wire(MESSAGE, REPLY, LATER, oracleResultCode(code), 0, 0, 1, false),
               service.failure(request, code, REPLY, LATER));
         else deny(() -> service.failure(request, code, REPLY, LATER));
         if (code != ResultCode.RESOURCE_LIMIT)
@@ -162,7 +176,7 @@ class LogReplayServiceTest {
       deny(() -> service.reply(snapshot, request(1), ADMIN, REPLY, LATER, true));
       deny(
           () -> service.captureSuccess(request, ADMIN, page(1, 101, 2, true), RESPONSE, COMPLETED));
-      byte[] valid = wire(MESSAGE, RESPONSE, COMPLETED, "0000", 1, 1, 1, true);
+      byte[] valid = wire(MESSAGE, RESPONSE, COMPLETED, FIXTURE_SUCCESS_CODE, 1, 1, 1, true);
       for (var edit :
           Map.ofEntries(
                   Map.entry(0, "BADMAGIC"),
@@ -172,7 +186,7 @@ class LogReplayServiceTest {
                   Map.entry(60, new UUID(200, 2).toString()),
                   Map.entry(96, time(NOW)),
                   Map.entry(193, "000002"),
-                  Map.entry(208, "0200"),
+                  Map.entry(208, FIXTURE_REPLAY_CODE),
                   Map.entry(212, "x"),
                   Map.entry(256, "000002"),
                   Map.entry(262, "099"),
@@ -200,13 +214,13 @@ class LogReplayServiceTest {
       for (var state : InboxCompletionState.values())
         if (state != InboxCompletionState.COMPLETED)
           deny(() -> service.read(request, ADMIN, stored(valid, state, COMPLETED)));
-      for (String code : List.of("0102", "0103", "0104", "9000", "0200")) {
+      for (String code : List.of("0102", "0103", "0104", "9000", FIXTURE_REPLAY_CODE)) {
         byte[] body = wire(MESSAGE, RESPONSE, COMPLETED, code, 0, 0, 1, false);
         deny(
             () ->
                 service.read(request, ADMIN, stored(body, InboxCompletionState.ERROR, COMPLETED)));
       }
-      byte[] error = wire(MESSAGE, RESPONSE, COMPLETED, "9001", 0, 0, 1, false);
+      byte[] error = wire(MESSAGE, RESPONSE, COMPLETED, FIXTURE_RESOURCE_CODE, 0, 0, 1, false);
       deny(
           () ->
               service.read(
@@ -215,9 +229,9 @@ class LogReplayServiceTest {
       deny(
           () -> service.read(request, ADMIN, stored(error, InboxCompletionState.ERROR, COMPLETED)));
       deny(() -> service.read(request, ADMIN, stored(valid, InboxCompletionState.COMPLETED, NOW)));
-      for (String layout : List.of("USRRSP01", "LGSRSP01"))
-        for (String version : List.of("001", "002"))
-          if (!layout.equals("LGSRSP01") || !version.equals("001"))
+      for (String layout : List.of("USRRSP01", FIXTURE_LOG_RESPONSE))
+        for (String version : List.of(FIXTURE_LAYOUT_VERSION, "002"))
+          if (!layout.equals(FIXTURE_LOG_RESPONSE) || !version.equals(FIXTURE_LAYOUT_VERSION))
             deny(
                 () ->
                     service.read(
@@ -239,7 +253,7 @@ class LogReplayServiceTest {
                       saved.state(),
                       InboxResultReference.numeric(InboxResultReferenceType.USER, 1),
                       saved.responseLayoutId(),
-                      "001",
+                      FIXTURE_LAYOUT_VERSION,
                       saved.responseSnapshot(),
                       saved.completedAt())));
       deny(
@@ -251,7 +265,7 @@ class LogReplayServiceTest {
                       saved.state(),
                       saved.resultReference(),
                       saved.responseLayoutId(),
-                      "001",
+                      FIXTURE_LAYOUT_VERSION,
                       Optional.empty(),
                       saved.completedAt())));
       byte[] corrupt = saved.responseSnapshot().orElseThrow().ciphertext();
@@ -261,8 +275,8 @@ class LogReplayServiceTest {
               new EncryptedResponseSnapshot("test", corrupt),
               new EncryptedResponseSnapshot(
                   "gone", saved.responseSnapshot().orElseThrow().ciphertext()),
-              encrypt(valid, new UUID(200, 2), 1, "LGSRSP01"),
-              encrypt(valid, MESSAGE, 2, "LGSRSP01"),
+              encrypt(valid, new UUID(200, 2), 1, FIXTURE_LOG_RESPONSE),
+              encrypt(valid, MESSAGE, 2, FIXTURE_LOG_RESPONSE),
               encrypt(valid, MESSAGE, 1, "USRRSP01")))
         deny(
             () ->
@@ -273,12 +287,12 @@ class LogReplayServiceTest {
                         saved.state(),
                         saved.resultReference(),
                         saved.responseLayoutId(),
-                        "001",
+                        FIXTURE_LAYOUT_VERSION,
                         Optional.of(encrypted),
                         saved.completedAt())));
       var historical = Instant.parse("1800-01-01T00:00:00Z");
       assertArrayEquals(
-          wire(MESSAGE, REPLY, historical, "0200", 1, 1, 1, true),
+          wire(MESSAGE, REPLY, historical, FIXTURE_REPLAY_CODE, 1, 1, 1, true),
           service.reply(snapshot, request, ADMIN, REPLY, historical, true));
       for (var invalid :
           List.of(
@@ -299,7 +313,7 @@ class LogReplayServiceTest {
                   request, ADMIN, ResultCode.RESOURCE_LIMIT, RESPONSE, COMPLETED));
       deny(() -> service.read(request, ADMIN, saved));
       assertArrayEquals(
-          wire(MESSAGE, REPLY, LATER, "0200", 1, 1, 1, true),
+          wire(MESSAGE, REPLY, LATER, FIXTURE_REPLAY_CODE, 1, 1, 1, true),
           service.reply(snapshot, request, ADMIN, REPLY, LATER, true));
     } finally {
       keys.close();
@@ -326,10 +340,10 @@ class LogReplayServiceTest {
                   var saved =
                       service.captureSuccess(request, actor, response, responseId, COMPLETED);
                   assertArrayEquals(
-                      wire(id, responseId, COMPLETED, "0000", n, n, 1, n % 2 == 0),
+                      wire(id, responseId, COMPLETED, FIXTURE_SUCCESS_CODE, n, n, 1, n % 2 == 0),
                       decrypt(saved, id, n));
                   assertArrayEquals(
-                      wire(id, replyId, LATER, "0200", n, n, 1, n % 2 == 0),
+                      wire(id, replyId, LATER, FIXTURE_REPLAY_CODE, n, n, 1, n % 2 == 0),
                       service.reply(
                           service.read(request, actor, saved),
                           request,
@@ -353,9 +367,9 @@ class LogReplayServiceTest {
     return new InboxCompletion(
         state,
         InboxResultReference.none(),
-        "LGSRSP01",
-        "001",
-        Optional.of(encrypt(body, MESSAGE, 1, "LGSRSP01")),
+        FIXTURE_LOG_RESPONSE,
+        FIXTURE_LAYOUT_VERSION,
+        Optional.of(encrypt(body, MESSAGE, 1, FIXTURE_LOG_RESPONSE)),
         time.truncatedTo(ChronoUnit.MICROS));
   }
 
@@ -364,5 +378,23 @@ class LogReplayServiceTest {
     assertNull(e.getCause());
     assertEquals(0, e.getSuppressed().length);
     assertEquals("request transaction is unavailable", e.getMessage());
+  }
+
+  /** UI232 section7 literal oracle; never call Production wireValue. */
+  private static String oracleResultCode(ResultCode code) {
+    return switch (code) {
+      case SUCCESS -> FIXTURE_SUCCESS_CODE;
+      case VALIDATION_ERROR -> "0100";
+      case AUTHENTICATION_FAILED -> "0101";
+      case SESSION_INVALID -> "0102";
+      case FORBIDDEN -> "0103";
+      case NOT_FOUND -> "0104";
+      case CONFLICT -> "0105";
+      case LOCKED -> "0106";
+      case NOT_CANCELLABLE -> "0107";
+      case IDEMPOTENT_SUCCESS -> FIXTURE_REPLAY_CODE;
+      case TEMPORARY_FAILURE -> "9000";
+      case RESOURCE_LIMIT -> FIXTURE_RESOURCE_CODE;
+    };
   }
 }

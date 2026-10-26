@@ -566,7 +566,7 @@ final class QuestionMutationReplayServiceTest {
             + String.format(Locale.ROOT, "%06d", len)
             + "000000000000"
             + String.format(Locale.ROOT, "%09d", 256 + len));
-    QuestionQueryRequestTest.put(b, 208, code.wireValue());
+    QuestionQueryRequestTest.put(b, 208, oracleResultCode(code));
     if (cancel) {
       if ((code == ResultCode.SUCCESS || code == ResultCode.IDEMPOTENT_SUCCESS)) {
         QuestionQueryRequestTest.put(b, 256, "CANCELLED");
@@ -582,5 +582,23 @@ final class QuestionMutationReplayServiceTest {
               : "0".repeat(17));
     }
     return b;
+  }
+
+  /** UI232 section7 literal oracle; never call Production wireValue. */
+  private static String oracleResultCode(ResultCode code) {
+    return switch (code) {
+      case SUCCESS -> "0000";
+      case VALIDATION_ERROR -> "0100";
+      case AUTHENTICATION_FAILED -> "0101";
+      case SESSION_INVALID -> "0102";
+      case FORBIDDEN -> "0103";
+      case NOT_FOUND -> "0104";
+      case CONFLICT -> "0105";
+      case LOCKED -> "0106";
+      case NOT_CANCELLABLE -> "0107";
+      case IDEMPOTENT_SUCCESS -> "0200";
+      case TEMPORARY_FAILURE -> "9000";
+      case RESOURCE_LIMIT -> "9001";
+    };
   }
 }

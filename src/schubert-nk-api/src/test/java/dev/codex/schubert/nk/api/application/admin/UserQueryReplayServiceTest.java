@@ -161,7 +161,7 @@ class UserQueryReplayServiceTest {
                     MESSAGE,
                     RESPONSE,
                     COMPLETED,
-                    code.wireValue(),
+                    oracleResultCode(code),
                     0,
                     0,
                     0,
@@ -175,7 +175,7 @@ class UserQueryReplayServiceTest {
                       MESSAGE,
                       REPLY,
                       LATER,
-                      code.wireValue(),
+                      oracleResultCode(code),
                       0,
                       0,
                       0,
@@ -196,7 +196,7 @@ class UserQueryReplayServiceTest {
                     MESSAGE,
                     REPLY,
                     LATER,
-                    code.wireValue(),
+                    oracleResultCode(code),
                     0,
                     0,
                     0,
@@ -211,7 +211,7 @@ class UserQueryReplayServiceTest {
                     MESSAGE,
                     RESPONSE,
                     COMPLETED,
-                    code.wireValue(),
+                    oracleResultCode(code),
                     0,
                     0,
                     1,
@@ -592,5 +592,23 @@ class UserQueryReplayServiceTest {
     return DateTimeFormatter.ofPattern("uuuuMMddHHmmssSSS", Locale.ROOT)
         .withZone(ZoneId.of("Asia/Tokyo"))
         .format(instant);
+  }
+
+  /** UI232 section7 literal oracle; never call Production wireValue. */
+  private static String oracleResultCode(ResultCode code) {
+    return switch (code) {
+      case SUCCESS -> "0000";
+      case VALIDATION_ERROR -> "0100";
+      case AUTHENTICATION_FAILED -> "0101";
+      case SESSION_INVALID -> "0102";
+      case FORBIDDEN -> "0103";
+      case NOT_FOUND -> "0104";
+      case CONFLICT -> "0105";
+      case LOCKED -> "0106";
+      case NOT_CANCELLABLE -> "0107";
+      case IDEMPOTENT_SUCCESS -> "0200";
+      case TEMPORARY_FAILURE -> "9000";
+      case RESOURCE_LIMIT -> "9001";
+    };
   }
 }

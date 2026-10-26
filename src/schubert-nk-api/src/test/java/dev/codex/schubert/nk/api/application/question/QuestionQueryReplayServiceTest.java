@@ -140,10 +140,10 @@ final class QuestionQueryReplayServiceTest {
                   frame(
                       request,
                       actor.role(),
-                      wire(layout, RESPONSE, COMPLETED, code.wireValue(), 0)),
+                      wire(layout, RESPONSE, COMPLETED, oracleResultCode(code), 0)),
                   decrypt(saved, MESSAGE, 1));
               assertArrayEquals(
-                  wire(layout, REPLY, LATER, code.wireValue(), 0),
+                  wire(layout, REPLY, LATER, oracleResultCode(code), 0),
                   service.reply(
                       service.read(request, actor, saved), request, actor, REPLY, LATER, true));
             }
@@ -156,7 +156,7 @@ final class QuestionQueryReplayServiceTest {
                       ResultCode.TEMPORARY_FAILURE)
                   .contains(code))
             assertArrayEquals(
-                wire(layout, REPLY, LATER, code.wireValue(), 0),
+                wire(layout, REPLY, LATER, oracleResultCode(code), 0),
                 service.failure(request, code, REPLY, LATER));
           else deny(() -> service.failure(request, code, REPLY, LATER));
         }
@@ -583,5 +583,23 @@ final class QuestionQueryReplayServiceTest {
         new java.util.zip.InflaterInputStream(new java.io.ByteArrayInputStream(compressed))) {
       return inflater.readAllBytes();
     }
+  }
+
+  /** UI232 section7 literal oracle; never call Production wireValue. */
+  private static String oracleResultCode(ResultCode code) {
+    return switch (code) {
+      case SUCCESS -> "0000";
+      case VALIDATION_ERROR -> "0100";
+      case AUTHENTICATION_FAILED -> "0101";
+      case SESSION_INVALID -> "0102";
+      case FORBIDDEN -> "0103";
+      case NOT_FOUND -> "0104";
+      case CONFLICT -> "0105";
+      case LOCKED -> "0106";
+      case NOT_CANCELLABLE -> "0107";
+      case IDEMPOTENT_SUCCESS -> "0200";
+      case TEMPORARY_FAILURE -> "9000";
+      case RESOURCE_LIMIT -> "9001";
+    };
   }
 }

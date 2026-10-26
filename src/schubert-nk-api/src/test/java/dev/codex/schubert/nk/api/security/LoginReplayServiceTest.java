@@ -44,6 +44,11 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** PT-AUT-REPLAY-001..005. Independent UI232/234 byte vectors and real limited-role PostgreSQL. */
 final class LoginReplayServiceTest {
+  private static final String FIXTURE_LOGIN_RESPONSE = "LGNRSP01";
+  private static final String FIXTURE_LAYOUT_VERSION = "001";
+  private static final String FIXTURE_SUCCESS_CODE = "0000";
+  private static final String FIXTURE_REPLAY_CODE = "0200";
+
   @TempDir static Path root;
   private static ApiLogDatabaseFixture database;
   private static AuthContextCodec contexts;
@@ -83,8 +88,9 @@ final class LoginReplayServiceTest {
       s.execute("delete from schubert.auth_sessions");
       s.execute("delete from schubert.app_users");
       s.execute(
-          "insert into schubert.app_users(id,username,username_key,password_hash,role,status,"
-              + "password_changed_at,created_at,updated_at) values(7,'利用者','利用者','synthetic-unused',"
+          "insert into"
+              + " schubert.app_users(id,username,username_key,password_hash,role,status,password_changed_at,created_at,updated_at)"
+              + " values(7,'利用者','利用者','synthetic-unused',"
               + "'USER','ACTIVE','2026-09-08','2026-09-08','2026-09-08')");
     }
   }
@@ -99,28 +105,30 @@ final class LoginReplayServiceTest {
       assertEquals(InboxCompletionState.COMPLETED, stored.state());
       assertEquals(InboxResultReference.authSession(SESSION), stored.resultReference());
       assertEquals(NOW, stored.completedAt());
-      assertEquals("LGNRSP01", stored.responseLayoutId());
-      assertEquals("001", stored.responseVersion());
+      assertEquals(FIXTURE_LOGIN_RESPONSE, stored.responseLayoutId());
+      assertEquals(FIXTURE_LAYOUT_VERSION, stored.responseVersion());
       byte[] original = snapshots.decrypt(identity(), stored.responseSnapshot().orElseThrow());
-      assertArrayEquals(golden(role, "0000", RESPONSE, FIRST_STAMP, 0), original);
+      assertArrayEquals(golden(role, FIXTURE_SUCCESS_CODE, RESPONSE, FIRST_STAMP, 0), original);
       assertFalse(stored.toString().contains(RAW));
       assertFalse(stored.responseSnapshot().orElseThrow().toString().contains(RAW));
       try (Connection c = database.transaction()) {
         assertArrayEquals(
-            golden(role, "0000", REPLAY, LATER_STAMP, 0),
+            golden(role, FIXTURE_SUCCESS_CODE, REPLAY, LATER_STAMP, 0),
             service.restore(c, stored, REQUEST, REPLAY, NOW.plusSeconds(86400), false));
         assertArrayEquals(
-            golden(role, "0200", REPLAY, LATER_STAMP, 0),
+            golden(role, FIXTURE_REPLAY_CODE, REPLAY, LATER_STAMP, 0),
             service.restore(c, stored, REQUEST, REPLAY, NOW.plusSeconds(86400), true));
         try (var s = c.createStatement()) {
           s.execute(
               "update schubert.app_users set username='Changed',role='ADMIN',status='DISABLED'");
           s.execute(
-              "update schubert.auth_sessions set last_accessed_at=issued_at+interval '1 hour',"
-                  + "expires_at=issued_at+interval '9 hours',revoked=true,revoked_at=issued_at+interval '2 hours',revoke_reason='ADMIN'");
+              "update schubert.auth_sessions set last_accessed_at=issued_at+interval '1"
+                  + " hour',expires_at=issued_at+interval '9"
+                  + " hours',revoked=true,revoked_at=issued_at+interval '2"
+                  + " hours',revoke_reason='ADMIN'");
         }
         assertArrayEquals(
-            golden(role, "0200", REPLAY, LATER_STAMP, 0),
+            golden(role, FIXTURE_REPLAY_CODE, REPLAY, LATER_STAMP, 0),
             service.restore(c, stored, REQUEST, REPLAY, NOW.plusSeconds(86400), true));
         c.rollback();
       }
@@ -136,12 +144,12 @@ final class LoginReplayServiceTest {
       assertEquals(InboxCompletionState.ERROR, stored.state());
       assertEquals(InboxResultReference.none(), stored.resultReference());
       assertArrayEquals(
-          golden(Role.USER, code.wireValue(), RESPONSE, FIRST_STAMP, retry),
+          golden(Role.USER, oracleResultCode(code), RESPONSE, FIRST_STAMP, retry),
           snapshots.decrypt(identity(), stored.responseSnapshot().orElseThrow()));
       try (Connection c = database.transaction()) {
         for (boolean replay : new boolean[] {false, true}) {
           assertArrayEquals(
-              golden(Role.USER, code.wireValue(), REPLAY, LATER_STAMP, retry),
+              golden(Role.USER, oracleResultCode(code), REPLAY, LATER_STAMP, retry),
               service.restore(c, stored, REQUEST, REPLAY, NOW.plusSeconds(86400), replay));
         }
         try (var s = c.createStatement();
@@ -163,24 +171,24 @@ final class LoginReplayServiceTest {
             stored,
             InboxCompletionState.ERROR,
             stored.resultReference(),
-            "LGNRSP01",
-            "001",
+            FIXTURE_LOGIN_RESPONSE,
+            FIXTURE_LAYOUT_VERSION,
             stored.responseSnapshot()));
     bad.add(
         copy(
             stored,
             stored.state(),
             InboxResultReference.none(),
-            "LGNRSP01",
-            "001",
+            FIXTURE_LOGIN_RESPONSE,
+            FIXTURE_LAYOUT_VERSION,
             stored.responseSnapshot()));
     bad.add(
         copy(
             stored,
             stored.state(),
             InboxResultReference.authSession(new UUID(0, 999)),
-            "LGNRSP01",
-            "001",
+            FIXTURE_LOGIN_RESPONSE,
+            FIXTURE_LAYOUT_VERSION,
             stored.responseSnapshot()));
     bad.add(
         copy(
@@ -188,19 +196,24 @@ final class LoginReplayServiceTest {
             stored.state(),
             stored.resultReference(),
             "LOGRSP01",
-            "001",
+            FIXTURE_LAYOUT_VERSION,
             stored.responseSnapshot()));
     bad.add(
         copy(
             stored,
             stored.state(),
             stored.resultReference(),
-            "LGNRSP01",
+            FIXTURE_LOGIN_RESPONSE,
             "002",
             stored.responseSnapshot()));
     bad.add(
         copy(
-            stored, stored.state(), stored.resultReference(), "LGNRSP01", "001", Optional.empty()));
+            stored,
+            stored.state(),
+            stored.resultReference(),
+            FIXTURE_LOGIN_RESPONSE,
+            FIXTURE_LAYOUT_VERSION,
+            Optional.empty()));
     var error =
         service.capture(new LoginResult.Failure(ResultCode.LOCKED, 900), REQUEST, RESPONSE, NOW);
     bad.add(
@@ -208,16 +221,16 @@ final class LoginReplayServiceTest {
             error,
             InboxCompletionState.COMPLETED,
             error.resultReference(),
-            "LGNRSP01",
-            "001",
+            FIXTURE_LOGIN_RESPONSE,
+            FIXTURE_LAYOUT_VERSION,
             error.responseSnapshot()));
     bad.add(
         copy(
             error,
             error.state(),
             stored.resultReference(),
-            "LGNRSP01",
-            "001",
+            FIXTURE_LOGIN_RESPONSE,
+            FIXTURE_LAYOUT_VERSION,
             error.responseSnapshot()));
     byte[] cipher = stored.responseSnapshot().orElseThrow().ciphertext();
     bad.add(
@@ -225,8 +238,8 @@ final class LoginReplayServiceTest {
             stored,
             stored.state(),
             stored.resultReference(),
-            "LGNRSP01",
-            "001",
+            FIXTURE_LOGIN_RESPONSE,
+            FIXTURE_LAYOUT_VERSION,
             Optional.of(new EncryptedResponseSnapshot("unknown", cipher))));
     cipher[cipher.length - 1] ^= 1;
     bad.add(
@@ -234,8 +247,8 @@ final class LoginReplayServiceTest {
             stored,
             stored.state(),
             stored.resultReference(),
-            "LGNRSP01",
-            "001",
+            FIXTURE_LOGIN_RESPONSE,
+            FIXTURE_LAYOUT_VERSION,
             Optional.of(new EncryptedResponseSnapshot("s1", cipher))));
     try (Connection c = database.transaction()) {
       for (var item : bad) rejected(() -> service.restore(c, item, REQUEST, REPLAY, NOW, true));
@@ -243,7 +256,7 @@ final class LoginReplayServiceTest {
       c.rollback();
     }
     List<byte[]> corrupt = new ArrayList<>();
-    byte[] good = golden(Role.USER, "0000", RESPONSE, FIRST_STAMP, 0);
+    byte[] good = golden(Role.USER, FIXTURE_SUCCESS_CODE, RESPONSE, FIRST_STAMP, 0);
     corrupt.add(new byte[0]);
     corrupt.add(Arrays.copyOf(good, 687));
     corrupt.add(Arrays.copyOf(good, 689));
@@ -251,7 +264,7 @@ final class LoginReplayServiceTest {
         List.of(
             new String[] {"0", "INVALID!"},
             new String[] {"60", REPLAY.toString()},
-            new String[] {"208", "0200"},
+            new String[] {"208", FIXTURE_REPLAY_CODE},
             new String[] {"208", "9000"},
             new String[] {"320", "OTHER"},
             new String[] {"325", "66".repeat(32)},
@@ -276,8 +289,8 @@ final class LoginReplayServiceTest {
               stored,
               stored.state(),
               stored.resultReference(),
-              "LGNRSP01",
-              "001",
+              FIXTURE_LOGIN_RESPONSE,
+              FIXTURE_LAYOUT_VERSION,
               Optional.of(snapshots.encrypt(identity(), body)));
       try (Connection c = database.transaction()) {
         rejected(() -> service.restore(c, item, REQUEST, REPLAY, NOW, true));
@@ -292,8 +305,8 @@ final class LoginReplayServiceTest {
             error,
             error.state(),
             error.resultReference(),
-            "LGNRSP01",
-            "001",
+            FIXTURE_LOGIN_RESPONSE,
+            FIXTURE_LAYOUT_VERSION,
             Optional.of(snapshots.encrypt(identity(), wrongCode)));
     try (Connection c = database.transaction()) {
       rejected(() -> service.restore(c, item, REQUEST, REPLAY, NOW, true));
@@ -405,7 +418,8 @@ final class LoginReplayServiceTest {
       }
       for (int i = 0; i < futures.size(); i++)
         assertArrayEquals(
-            golden(Role.USER, "0200", new UUID(0, 1000 + i), LATER_STAMP, 0), futures.get(i).get());
+            golden(Role.USER, FIXTURE_REPLAY_CODE, new UUID(0, 1000 + i), LATER_STAMP, 0),
+            futures.get(i).get());
     }
     try (var wrong = new AuthContextCodec("a1", snapshotKey(), null, null);
         Connection c = database.transaction()) {
@@ -439,8 +453,8 @@ final class LoginReplayServiceTest {
         var s = c.createStatement();
         var row =
             s.executeQuery(
-                "select issued_at,last_accessed_at,expires_at,revoked,(select count(*) from schubert.app_logs) logs"
-                    + " from schubert.auth_sessions")) {
+                "select issued_at,last_accessed_at,expires_at,revoked,(select count(*) from"
+                    + " schubert.app_logs) logs from schubert.auth_sessions")) {
       assertTrue(row.next());
       assertEquals(NOW, row.getObject(1, java.time.OffsetDateTime.class).toInstant());
       assertEquals(NOW, row.getObject(2, java.time.OffsetDateTime.class).toInstant());
@@ -458,9 +472,9 @@ final class LoginReplayServiceTest {
     Arrays.fill(body, (byte) ' ');
     // UI232 §3 fields 1..6: response=S, synchronous=S (BUG-026/YKT-023).
     put(body, 0, "SCHBNK01");
-    put(body, 8, "001");
-    put(body, 11, "LGNRSP01");
-    put(body, 19, "001");
+    put(body, 8, FIXTURE_LAYOUT_VERSION);
+    put(body, 11, FIXTURE_LOGIN_RESPONSE);
+    put(body, 19, FIXTURE_LAYOUT_VERSION);
     put(body, 22, "S");
     put(body, 23, "S");
     put(body, 24, responseId.toString());
@@ -473,7 +487,7 @@ final class LoginReplayServiceTest {
     put(body, 199, "000000688");
     put(body, 208, code);
     put(body, 423, retry == 0 ? "000000000" : retry == 1 ? "000001000" : "000900000");
-    if (code.equals("0000") || code.equals("0200")) {
+    if (code.equals(FIXTURE_SUCCESS_CODE) || code.equals(FIXTURE_REPLAY_CODE)) {
       put(body, 256, "利用者");
       put(body, 320, role == Role.ADMIN ? "ADMIN" : "USER");
       put(body, 325, RAW);
@@ -502,7 +516,8 @@ final class LoginReplayServiceTest {
   }
 
   private static ResponseSnapshotIdentity identity() {
-    return ResponseSnapshotIdentity.anonymous(REQUEST, "LGNRSP01", "001");
+    return ResponseSnapshotIdentity.anonymous(
+        REQUEST, FIXTURE_LOGIN_RESPONSE, FIXTURE_LAYOUT_VERSION);
   }
 
   private static InboxCompletion copy(
@@ -573,5 +588,23 @@ final class LoginReplayServiceTest {
     } catch (InvocationTargetException failure) {
       throw failure.getCause();
     }
+  }
+
+  /** UI232 section7 literal oracle; never call Production wireValue. */
+  private static String oracleResultCode(ResultCode code) {
+    return switch (code) {
+      case SUCCESS -> FIXTURE_SUCCESS_CODE;
+      case VALIDATION_ERROR -> "0100";
+      case AUTHENTICATION_FAILED -> "0101";
+      case SESSION_INVALID -> "0102";
+      case FORBIDDEN -> "0103";
+      case NOT_FOUND -> "0104";
+      case CONFLICT -> "0105";
+      case LOCKED -> "0106";
+      case NOT_CANCELLABLE -> "0107";
+      case IDEMPOTENT_SUCCESS -> FIXTURE_REPLAY_CODE;
+      case TEMPORARY_FAILURE -> "9000";
+      case RESOURCE_LIMIT -> "9001";
+    };
   }
 }
