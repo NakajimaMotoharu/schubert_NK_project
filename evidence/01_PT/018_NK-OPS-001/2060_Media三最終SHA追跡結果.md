@@ -1,0 +1,17 @@
+# Media三最終SHA追跡結果
+
+G13.07、source3d9f1d9fd395e8cb9456b0a540e1f29bcb87876e、原registry PG10352/sourceb120からMedia三最終Test source SHAだけを更新する。MediaReplayFixture/MediaStageFixtureの原owner/costはP009-01、MediaReplayServiceTestはP009-02。983行中他980行の全field、原logical941/歴史physical943、候補975、UNKNOWN二、元費用・歴史runtimeを保持する。新path0・元実PT/coverageの新source転用0。
+
+当根拠はMED005～007、10380の元全文token/UUID/全assertion保持・17同値定数・raw静的四文脈/抑制0・正常六compile0/PT0・全Main不変で、元業務PTはNOT_EXECUTED_HOLD/coverage未測定。source086の10372 proofは別sourceの先行是正根拠として明示参照し、新sourceで実行したPTへ変換しない。
+
+PG10384は現在Java1810/登録1808/Main965全/Test843-845/UNKNOWN二/legacy749を実導出し、485 current二sectionと486 inventory hashだけを更新する。PG10386は別metadata postで元担当/費用/旧runtime/source/誤coverage/誤受入等10変異拒否、所定WBS auditの前後実1/HOLDと原lastError不変を照合する。registry/source自体の整合確認を全G13又は個別WBS受入にしない。実結果/hashはmanifestを正とし、実行前の本段落だけで成功としない。
+
+正式1964PT/53scope、個別17/190、工数null、QA051 final/全安全HOLDを維持。次は元工具を保存commitへ固定したうえで限定unused import是正、続いて残る直接method oracle起源を具体文脈へ照合し独立PG/PTを継続する。
+
+## 実結果
+
+PG10384 manifest548178c53d57f1caeed9dab38d2ca643f38b645c8cc2fed3d8bfe9e5e2e7f33e、PG10386 manifest1dcb54f0a160ef9845584b351898a86c7dc5add2180186f2ea404d5b9487b305、各actual0。983行中三SHAだけ更新、他980全field/原owner-cost/runtimeと既Query/ResultProfile binding保持、新path0。現1810/1808/UNKNOWN二/legacy749不変。10metadata拒否、所定audit前後実1/lastError不変、全G13未受入。
+
+初回emitは出力上限20000で切詰められ、完全patchガードにより適用されなかった。続くpostは未適用文書を正しく拒否しexit1/OUTなし。event2377へ記録し、完全patch50000取得・適用成功後だけpostを実行して上記actual0。元source/製品PTの失敗/合格には換算しない。
+
+作業順の補足：補助工具unused import三は既存の保存qualified toolの軽微なstyle指摘として未解決保全する。今すぐ元工具byteを変更して過去hashとの照合を複雑にする作業は優先せず、元commit ee137から復元可能な履歴を保持する。今後の新工具は実行前の限定pyflakesを行い、残oracle/独立通常PGPTを優先する。品質条件や正式0判定を緩和したものではない。
