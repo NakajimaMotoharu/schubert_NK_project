@@ -14,10 +14,13 @@ import org.junit.jupiter.api.Timeout;
 /** NK-MSG-002; SS312/324/354; SSC329/BUG1592; PT-TEMP-GRAPH329001..003, no I/O. */
 @Timeout(value = 5, threadMode = Timeout.ThreadMode.SEPARATE_THREAD)
 final class TemporaryFailureGraph329Test {
+  private static final String PUBLIC_ROOT_DIAGNOSTIC = "PUBLIC root";
+  private static final String PUBLIC_NEXT_DIAGNOSTIC = "PUBLIC next";
+
   @Test
   void temporary329001MixedCyclesTerminateAndLateFatalRetainsIdentityWithoutMutation() {
-    var root = new SQLException("PUBLIC root");
-    var next = new SQLException("PUBLIC next");
+    var root = new SQLException(PUBLIC_ROOT_DIAGNOSTIC);
+    var next = new SQLException(PUBLIC_NEXT_DIAGNOSTIC);
     var alias = new IllegalStateException("PUBLIC alias", root);
     root.initCause(alias);
     root.addSuppressed(next);
@@ -42,28 +45,28 @@ final class TemporaryFailureGraph329Test {
     var direct = new AssertionError("PUBLIC direct");
     var cause = new AssertionError("PUBLIC cause");
     var suppressed = new AssertionError("PUBLIC suppressed");
-    var next = new AssertionError("PUBLIC next");
+    var next = new AssertionError(PUBLIC_NEXT_DIAGNOSTIC);
     direct.initCause(cause);
     assertSame(
         direct,
         assertThrows(
             AssertionError.class, () -> TemporaryInfrastructureException.preserveFatal(direct)));
-    var root = new SQLException("PUBLIC root", cause);
+    var root = new SQLException(PUBLIC_ROOT_DIAGNOSTIC, cause);
     root.addSuppressed(suppressed);
-    root.setNextException(new SQLException("PUBLIC next", next));
+    root.setNextException(new SQLException(PUBLIC_NEXT_DIAGNOSTIC, next));
     assertSame(
         cause,
         assertThrows(
             AssertionError.class, () -> TemporaryInfrastructureException.preserveFatal(root)));
-    var noCause = new SQLException("PUBLIC root");
+    var noCause = new SQLException(PUBLIC_ROOT_DIAGNOSTIC);
     noCause.addSuppressed(suppressed);
-    noCause.setNextException(new SQLException("PUBLIC next", next));
+    noCause.setNextException(new SQLException(PUBLIC_NEXT_DIAGNOSTIC, next));
     assertSame(
         suppressed,
         assertThrows(
             AssertionError.class, () -> TemporaryInfrastructureException.preserveFatal(noCause)));
-    var onlyNext = new SQLException("PUBLIC root");
-    onlyNext.setNextException(new SQLException("PUBLIC next", next));
+    var onlyNext = new SQLException(PUBLIC_ROOT_DIAGNOSTIC);
+    onlyNext.setNextException(new SQLException(PUBLIC_NEXT_DIAGNOSTIC, next));
     assertSame(
         next,
         assertThrows(

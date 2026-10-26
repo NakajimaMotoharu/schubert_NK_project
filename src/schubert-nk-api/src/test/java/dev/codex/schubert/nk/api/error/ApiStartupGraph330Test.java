@@ -16,6 +16,8 @@ import org.junit.jupiter.api.Timeout;
 /** SS312/342/354; SSC330/BUG1593/YKT1346; PT-API-STARTUP-GRAPH330001..003; pure graph only. */
 @Timeout(value = 5, threadMode = Timeout.ThreadMode.SEPARATE_THREAD)
 final class ApiStartupGraph330Test {
+  private static final String PUBLIC_DIAGNOSTIC = "PUBLIC";
+
   @Test
   void startup330001LinkedSqlNextFatalAndMixedCyclesRetainIdentityWithoutMutation() {
     var fatal = new AssertionError("PUBLIC fatal");
@@ -77,11 +79,11 @@ final class ApiStartupGraph330Test {
         assertThrows(
             AssertionError.class, () -> TemporaryInfrastructureException.preserveFatal(noCause)));
     assertDoesNotThrow(
-        () -> TemporaryInfrastructureException.preserveFatal(new JMSException("PUBLIC")));
+        () -> TemporaryInfrastructureException.preserveFatal(new JMSException(PUBLIC_DIAGNOSTIC)));
     assertDoesNotThrow(
-        () -> TemporaryInfrastructureException.preserveFatal(new SQLException("PUBLIC")));
+        () -> TemporaryInfrastructureException.preserveFatal(new SQLException(PUBLIC_DIAGNOSTIC)));
     assertDoesNotThrow(
-        () -> TemporaryInfrastructureException.preserveFatal(new Throwable("PUBLIC")));
+        () -> TemporaryInfrastructureException.preserveFatal(new Throwable(PUBLIC_DIAGNOSTIC)));
     assertThrows(
         NullPointerException.class, () -> TemporaryInfrastructureException.preserveFatal(null));
     var catalog = new TemporaryInfrastructureException();
@@ -135,7 +137,7 @@ final class ApiStartupGraph330Test {
     private static final long serialVersionUID = 1L;
 
     DisabledRuntime(@Nullable Throwable cause) {
-      super("PUBLIC", cause, false, false);
+      super(PUBLIC_DIAGNOSTIC, cause, false, false);
     }
   }
 
@@ -143,7 +145,7 @@ final class ApiStartupGraph330Test {
     private static final long serialVersionUID = 1L;
 
     DisabledError() {
-      super("PUBLIC", null, false, false);
+      super(PUBLIC_DIAGNOSTIC, null, false, false);
     }
   }
 }

@@ -16,6 +16,8 @@ import org.junit.jupiter.api.Timeout;
 /** SS312/342/354; SSC330/BUG1593/YKT1346; PT-WEB-STARTUP-GRAPH330001..003; pure graph only. */
 @Timeout(value = 5, threadMode = Timeout.ThreadMode.SEPARATE_THREAD)
 final class WebStartupGraph330Test {
+  private static final String PUBLIC_DIAGNOSTIC = "PUBLIC";
+
   @Test
   void startup330001LinkedSqlNextFatalAndMixedCyclesRetainIdentityWithoutMutation() {
     var fatal = new AssertionError("PUBLIC fatal");
@@ -68,11 +70,13 @@ final class WebStartupGraph330Test {
     assertSame(
         suppressed,
         assertThrows(AssertionError.class, () -> WebStartupException.preserveFatal(noCause)));
-    assertDoesNotThrow(() -> WebStartupException.preserveFatal(new JMSException("PUBLIC")));
-    assertDoesNotThrow(() -> WebStartupException.preserveFatal(new SQLException("PUBLIC")));
-    assertDoesNotThrow(() -> WebStartupException.preserveFatal(new Throwable("PUBLIC")));
+    assertDoesNotThrow(
+        () -> WebStartupException.preserveFatal(new JMSException(PUBLIC_DIAGNOSTIC)));
+    assertDoesNotThrow(
+        () -> WebStartupException.preserveFatal(new SQLException(PUBLIC_DIAGNOSTIC)));
+    assertDoesNotThrow(() -> WebStartupException.preserveFatal(new Throwable(PUBLIC_DIAGNOSTIC)));
     assertThrows(NullPointerException.class, () -> WebStartupException.preserveFatal(null));
-    var catalog = new WebStartupException("PUBLIC");
+    var catalog = new WebStartupException(PUBLIC_DIAGNOSTIC);
     assertEquals("PUBLIC is unavailable", catalog.getMessage());
     assertNull(catalog.getCause());
     assertEquals(0, catalog.getSuppressed().length);
@@ -120,7 +124,7 @@ final class WebStartupGraph330Test {
     private static final long serialVersionUID = 1L;
 
     DisabledRuntime(@Nullable Throwable cause) {
-      super("PUBLIC", cause, false, false);
+      super(PUBLIC_DIAGNOSTIC, cause, false, false);
     }
   }
 
@@ -128,7 +132,7 @@ final class WebStartupGraph330Test {
     private static final long serialVersionUID = 1L;
 
     DisabledError() {
-      super("PUBLIC", null, false, false);
+      super(PUBLIC_DIAGNOSTIC, null, false, false);
     }
   }
 }
