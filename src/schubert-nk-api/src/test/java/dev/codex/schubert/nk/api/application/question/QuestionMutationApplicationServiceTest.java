@@ -46,6 +46,13 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** Current DB/Inbox/ref/crypto, independent wire and seven-day no-rewrite postconditions. */
 final class QuestionMutationApplicationServiceTest {
+  private static final String FIXTURE_MISSING_CASE = "missing";
+  private static final String FIXTURE_NOOP_CASE = "noop";
+  private static final String FIXTURE_CAPACITY_CASE = "capacity";
+  private static final String FIXTURE_STATE_COLUMN = "state";
+  private static final String FIXTURE_KEY_FAULT = "key";
+  private static final String FIXTURE_COMPLETE_CLOSE_FAULT = "complete-close";
+
   @TempDir static Path root;
   static ApiLogDatabaseFixture db;
 
@@ -139,28 +146,29 @@ final class QuestionMutationApplicationServiceTest {
   @Test
   void qry040DefiniteErrorsOriginalNoopTimeCapacityAuditAndCurrentOwnerScope() throws Exception {
     for (boolean cancel : List.of(false, true))
-      for (String kind : List.of("missing", "other", "noop", "capacity")) {
+      for (String kind :
+          List.of(FIXTURE_MISSING_CASE, "other", FIXTURE_NOOP_CASE, FIXTURE_CAPACITY_CASE)) {
         try (var f = QuestionQueryRepositoryTest.fixture(db)) {
           long id =
               switch (kind) {
-                case "missing" -> 999;
+                case FIXTURE_MISSING_CASE -> 999;
                 case "other" -> 52;
-                case "noop" -> cancel ? 1 : 5;
+                case FIXTURE_NOOP_CASE -> cancel ? 1 : 5;
                 default -> 8;
               };
-          if (kind.equals("capacity"))
+          if (kind.equals(FIXTURE_CAPACITY_CASE))
             f.sql(
                 "update schubert."
                     + (cancel ? "async_jobs" : "questions")
                     + " set version=999999999 where id=8");
           var code =
               switch (kind) {
-                case "missing", "other" -> ResultCode.NOT_FOUND;
-                case "noop" -> ResultCode.IDEMPOTENT_SUCCESS;
+                case FIXTURE_MISSING_CASE, "other" -> ResultCode.NOT_FOUND;
+                case FIXTURE_NOOP_CASE -> ResultCode.IDEMPOTENT_SUCCESS;
                 default -> ResultCode.RESOURCE_LIMIT;
               };
           Instant operation =
-              kind.equals("noop")
+              kind.equals(FIXTURE_NOOP_CASE)
                   ? Instant.parse(
                       cancel ? "2026-10-01T00:00:00.124456Z" : "2026-10-01T00:00:00.130456Z")
                   : AT;
@@ -178,7 +186,7 @@ final class QuestionMutationApplicationServiceTest {
                 f.scalar(
                     "select count(*) from schubert.request_inbox where processing_state='ERROR' and"
                         + " result_ref_type='NONE'"));
-          if (kind.equals("capacity")) {
+          if (kind.equals(FIXTURE_CAPACITY_CASE)) {
             assertEquals(
                 1,
                 f.scalar(
@@ -239,10 +247,10 @@ final class QuestionMutationApplicationServiceTest {
           assertEquals(0, f.live.get());
         }
       }
-    for (String code : List.of("success", "capacity"))
+    for (String code : List.of("success", FIXTURE_CAPACITY_CASE))
       try (var f = QuestionQueryRepositoryTest.fixture(db)) {
         f.sql("update schubert.app_users set role='ADMIN' where id=1");
-        if (code.equals("capacity"))
+        if (code.equals(FIXTURE_CAPACITY_CASE))
           f.sql("update schubert.questions set version=999999999 where id=52");
         var app = service(f);
         assertArrayEquals(
@@ -337,7 +345,7 @@ final class QuestionMutationApplicationServiceTest {
                       + (cancel ? "QUESTION_CANCELLED" : "QUESTION_DELETE_MARKED")
                       + "'"));
         }
-    for (String change : List.of("cipher", "state", "missing-key", "processing"))
+    for (String change : List.of("cipher", FIXTURE_STATE_COLUMN, "missing-key", "processing"))
       try (var f = QuestionQueryRepositoryTest.fixture(db)) {
         var app = service(f);
         app.process(message(false, 3, M, TOKEN));
@@ -346,7 +354,7 @@ final class QuestionMutationApplicationServiceTest {
               f.sql(
                   "update schubert.request_inbox set"
                       + " response_body_encrypted=decode(repeat('00',29),'hex')");
-          case "state" ->
+          case FIXTURE_STATE_COLUMN ->
               f.sql(
                   "update schubert.questions set deleted_at='2026-10-01T00:00:01.999999Z' where"
                       + " id=3");
@@ -497,8 +505,8 @@ final class QuestionMutationApplicationServiceTest {
               default -> "insert into schubert.app_logs";
             };
         String fault =
-            mode.endsWith("missing")
-                ? "missing"
+            mode.endsWith(FIXTURE_MISSING_CASE)
+                ? FIXTURE_MISSING_CASE
                 : mode.equals("audit-zero") ? "zero-update" : "duplicate";
         var hit = new AtomicInteger();
         DataSource source =
@@ -522,7 +530,7 @@ final class QuestionMutationApplicationServiceTest {
                 f.snapshots,
                 Clock.fixed(AT, ZoneOffset.UTC),
                 () -> new UUID(712, f.ids.incrementAndGet()));
-        if (mode.endsWith("missing"))
+        if (mode.endsWith(FIXTURE_MISSING_CASE))
           assertArrayEquals(
               expected(cancel, NEXT, 3, ResultCode.NOT_FOUND, AT),
               guarded.process(message(cancel, id, NEXT, TOKEN)));
@@ -541,16 +549,18 @@ final class QuestionMutationApplicationServiceTest {
   @Test
   void qry048UnavailableHmacAndStateCorruptCloseSuppressionAreInfrastructureNotConflict()
       throws Exception {
-    for (String mode : List.of("key", "state", "state-close", "complete-close"))
+    for (String mode :
+        List.of(
+            FIXTURE_KEY_FAULT, FIXTURE_STATE_COLUMN, "state-close", FIXTURE_COMPLETE_CLOSE_FAULT))
       try (var f = QuestionQueryRepositoryTest.fixture(db)) {
         var app = service(f);
         app.process(message(false, 3, M, TOKEN));
-        if (mode.equals("key"))
+        if (mode.equals(FIXTURE_KEY_FAULT))
           f.sql("update schubert.request_inbox set fingerprint_key_version='missing'");
         String saved = metadata(f);
         var hit = new AtomicInteger();
         DataSource source =
-            mode.equals("key")
+            mode.equals(FIXTURE_KEY_FAULT)
                 ? f.source
                 : (DataSource)
                     Proxy.newProxyInstance(
@@ -559,13 +569,15 @@ final class QuestionMutationApplicationServiceTest {
                         (p, m, a) ->
                             QuestionCommandServiceTest.shape(
                                 (Connection) QuestionSubmissionServiceTest.invoke(f.source, m, a),
-                                mode.equals("complete-close")
+                                mode.equals(FIXTURE_COMPLETE_CLOSE_FAULT)
                                     ? "update schubert.request_inbox set processing_state="
                                     : "from schubert.request_inbox where message_id=?",
                                 "processing_state",
-                                mode.equals("complete-close")
+                                mode.equals(FIXTURE_COMPLETE_CLOSE_FAULT)
                                     ? "zero-update-close"
-                                    : mode.equals("state") ? "unknown" : "unknown-close",
+                                    : mode.equals(FIXTURE_STATE_COLUMN)
+                                        ? "unknown"
+                                        : "unknown-close",
                                 hit));
         var guarded =
             new QuestionMutationApplicationService(
@@ -581,13 +593,13 @@ final class QuestionMutationApplicationServiceTest {
                 TemporaryInfrastructureException.class,
                 () ->
                     guarded.process(
-                        mode.equals("complete-close")
+                        mode.equals(FIXTURE_COMPLETE_CLOSE_FAULT)
                             ? message(false, 6, NEXT, new UUID(711, 9))
                             : message(false, 3, M, TOKEN)),
                 mode);
         assertNull(error.getCause());
         assertEquals(0, error.getSuppressed().length);
-        if (!mode.equals("key")) assertTrue(hit.get() > 0, mode);
+        if (!mode.equals(FIXTURE_KEY_FAULT)) assertTrue(hit.get() > 0, mode);
         assertEquals(saved, metadata(f));
         assertEquals(0, f.live.get());
       }

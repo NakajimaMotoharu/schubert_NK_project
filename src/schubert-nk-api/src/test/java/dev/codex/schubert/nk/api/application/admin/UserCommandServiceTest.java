@@ -63,6 +63,19 @@ import org.junit.jupiter.api.io.TempDir;
  * Real PostgreSQL/production grants; independent SQL/JCA oracles. SS312/332/351; PT-ADM-014..023.
  */
 class UserCommandServiceTest {
+  private static final String FIXTURE_ROLE_COLUMN = "role";
+  private static final String FIXTURE_ACTIVE_STATE = "ACTIVE";
+  private static final String FIXTURE_STATUS_COLUMN = "status";
+  private static final String FIXTURE_VERSION_COLUMN = "version";
+  private static final String FIXTURE_FAILED_COUNT_COLUMN = "failed_count";
+  private static final String FIXTURE_COUNT_COLUMN = "count";
+  private static final String FIXTURE_ACTIVE_ADMINS_SQL =
+      "select count(*) from schubert.app_users where role='ADMIN' and status='ACTIVE'";
+  private static final String FIXTURE_INSERT_USERS_PREFIX = "insert into schubert.app_users";
+  private static final String FIXTURE_UPDATE_USERS_PREFIX = "update schubert.app_users";
+  private static final String FIXTURE_NEW_USERNAME = "new";
+  private static final String FIXTURE_INSERT_PREFIX = "insert into";
+
   @TempDir static Path root;
   static ApiLogDatabaseFixture database;
   static final Instant NOW = Instant.parse("2026-09-08T00:01:00Z");
@@ -125,10 +138,11 @@ class UserCommandServiceTest {
           assertTrue(r.next());
           assertEquals(names[i].trim(), r.getString("username"));
           assertEquals(names[i].trim().toLowerCase(Locale.ROOT), r.getString("username_key"));
-          assertEquals(i % 2 == 0 ? "USER" : "ADMIN", r.getString("role"));
-          assertEquals(i != 3 ? "ACTIVE" : "DISABLED", r.getString("status"));
-          assertEquals(0, r.getLong("version"));
-          assertEquals(0, r.getInt("failed_count"));
+          assertEquals(i % 2 == 0 ? "USER" : "ADMIN", r.getString(FIXTURE_ROLE_COLUMN));
+          assertEquals(
+              i != 3 ? FIXTURE_ACTIVE_STATE : "DISABLED", r.getString(FIXTURE_STATUS_COLUMN));
+          assertEquals(0, r.getLong(FIXTURE_VERSION_COLUMN));
+          assertEquals(0, r.getInt(FIXTURE_FAILED_COUNT_COLUMN));
           for (String column : List.of("created_at", "updated_at", "password_changed_at"))
             assertEquals(NOW, r.getObject(column, java.time.OffsetDateTime.class).toInstant());
           assertEquals(1, r.getLong("created_by"));
@@ -154,8 +168,8 @@ class UserCommandServiceTest {
               OptionalLong.of(3),
               (c, a) -> service.changeStatus(c, a, TARGET, enabled, 0, META));
       success(result, 3, 1, ResultCode.SUCCESS);
-      assertUser("status", enabled ? "ACTIVE" : "DISABLED");
-      assertUser("version", "1");
+      assertUser(FIXTURE_STATUS_COLUMN, enabled ? FIXTURE_ACTIVE_STATE : "DISABLED");
+      assertUser(FIXTURE_VERSION_COLUMN, "1");
       assertEquals(
           3,
           count(
@@ -208,7 +222,7 @@ class UserCommandServiceTest {
       var actor = authentication.verify(c, CONTEXT, Mutation.DEMOTE, OptionalLong.of(2), NOW);
       var fault = new UserCommandFaults();
       fault.sqlPart = "select count(*)";
-      fault.columns.put("count", 1L);
+      fault.columns.put(FIXTURE_COUNT_COLUMN, 1L);
       denied(
           service.changeRole(fault.wrap(c), actor, new UserId(2), UserRole.USER, 0, META),
           ResultCode.CONFLICT);
@@ -230,7 +244,7 @@ class UserCommandServiceTest {
           3,
           1,
           ResultCode.SUCCESS);
-      assertUser("role", role.wireValue());
+      assertUser(FIXTURE_ROLE_COLUMN, role.wireValue());
       assertEquals(
           1,
           count(
@@ -250,8 +264,7 @@ class UserCommandServiceTest {
             OptionalLong.of(1),
             (c, a) -> service.changeStatus(c, a, new UserId(1), false, 0, META)),
         ResultCode.CONFLICT);
-    assertEquals(
-        3, count("select count(*) from schubert.app_users where role='ADMIN' and status='ACTIVE'"));
+    assertEquals(3, count(FIXTURE_ACTIVE_ADMINS_SQL));
     success(
         run(
             Mutation.DEMOTE,
@@ -260,8 +273,7 @@ class UserCommandServiceTest {
         2,
         1,
         ResultCode.SUCCESS);
-    assertEquals(
-        2, count("select count(*) from schubert.app_users where role='ADMIN' and status='ACTIVE'"));
+    assertEquals(2, count(FIXTURE_ACTIVE_ADMINS_SQL));
     sql("update schubert.app_users set status='DISABLED' where id=4");
     success(
         run(
@@ -271,8 +283,7 @@ class UserCommandServiceTest {
         4,
         1,
         ResultCode.SUCCESS);
-    assertEquals(
-        1, count("select count(*) from schubert.app_users where role='ADMIN' and status='ACTIVE'"));
+    assertEquals(1, count(FIXTURE_ACTIVE_ADMINS_SQL));
   }
 
   @Test
@@ -294,7 +305,7 @@ class UserCommandServiceTest {
     erased(input);
     independentHash(
         value("select password_hash from schubert.app_users where id=3"), "é".repeat(12));
-    assertUser("failed_count", "5");
+    assertUser(FIXTURE_FAILED_COUNT_COLUMN, "5");
     assertEquals(
         1,
         count(
@@ -349,14 +360,14 @@ class UserCommandServiceTest {
         boolean active = lock.contains("00.000001");
         if (active && version == 999_999_999) {
           denied(result, ResultCode.RESOURCE_LIMIT);
-          assertUser("failed_count", "5");
+          assertUser(FIXTURE_FAILED_COUNT_COLUMN, "5");
         } else {
           success(
               result,
               3,
               active ? version + 1 : version,
               active ? ResultCode.SUCCESS : ResultCode.IDEMPOTENT_SUCCESS);
-          assertUser("failed_count", active ? "0" : "5");
+          assertUser(FIXTURE_FAILED_COUNT_COLUMN, active ? "0" : "5");
         }
         assertEquals(0, count("select count(*) from schubert.auth_sessions where revoked"));
         if (active && version == 0)
@@ -440,7 +451,7 @@ class UserCommandServiceTest {
   void adm020SqlRevocationAndAuditFailuresRollbackTogether() throws Exception {
     for (Long id : Arrays.asList(null, 0L, 1_000_000_000_000L)) {
       var fault = new UserCommandFaults();
-      fault.sqlPart = "insert into schubert.app_users";
+      fault.sqlPart = FIXTURE_INSERT_USERS_PREFIX;
       fault.columns.put("id", id);
       rollbackFault(fault, true);
     }
@@ -462,7 +473,7 @@ class UserCommandServiceTest {
       erased(password);
     }
     var createdDuplicate = new UserCommandFaults();
-    createdDuplicate.sqlPart = "insert into schubert.app_users";
+    createdDuplicate.sqlPart = FIXTURE_INSERT_USERS_PREFIX;
     createdDuplicate.duplicate = true;
     rollbackFault(createdDuplicate, true);
     for (int invalid = 0; invalid < 5; invalid++) {
@@ -471,9 +482,9 @@ class UserCommandServiceTest {
       switch (invalid) {
         case 0 -> fault.empty = true;
         case 1 -> fault.duplicate = true;
-        case 2 -> fault.columns.put("count", null);
-        case 3 -> fault.columns.put("count", -1L);
-        case 4 -> fault.columns.put("count", 0L);
+        case 2 -> fault.columns.put(FIXTURE_COUNT_COLUMN, null);
+        case 3 -> fault.columns.put(FIXTURE_COUNT_COLUMN, -1L);
+        case 4 -> fault.columns.put(FIXTURE_COUNT_COLUMN, 0L);
         default -> throw new AssertionError();
       }
       rollbackFault(fault, false);
@@ -488,7 +499,7 @@ class UserCommandServiceTest {
         s.execute("select setval('schubert.app_users_id_seq',999999999999,true)");
       }
       var fault = new UserCommandFaults();
-      fault.sqlPart = "insert into schubert.app_users";
+      fault.sqlPart = FIXTURE_INSERT_USERS_PREFIX;
       fault.fault = point;
       rollbackFault(fault, true);
       try (var c = database.admin();
@@ -499,7 +510,7 @@ class UserCommandServiceTest {
     for (String sql :
         List.of(
             "select id,username",
-            "update schubert.app_users",
+            FIXTURE_UPDATE_USERS_PREFIX,
             "update schubert.auth_sessions",
             "insert into schubert.app_logs")) {
       for (String point :
@@ -542,7 +553,7 @@ class UserCommandServiceTest {
             "resultClose",
             "statementClose")) {
       var fault = new UserCommandFaults();
-      fault.sqlPart = "insert into schubert.app_users";
+      fault.sqlPart = FIXTURE_INSERT_USERS_PREFIX;
       fault.fault = point;
       rollbackFault(fault, true);
     }
@@ -554,7 +565,14 @@ class UserCommandServiceTest {
       fault.fault = "executeUpdate";
       rollbackFault(fault, false);
     }
-    for (String column : List.of("id", "username", "role", "status", "version", "failed_count")) {
+    for (String column :
+        List.of(
+            "id",
+            "username",
+            FIXTURE_ROLE_COLUMN,
+            FIXTURE_STATUS_COLUMN,
+            FIXTURE_VERSION_COLUMN,
+            FIXTURE_FAILED_COUNT_COLUMN)) {
       var fault = new UserCommandFaults();
       fault.columns.put(column, null);
       rollbackFault(fault, false);
@@ -563,13 +581,13 @@ class UserCommandServiceTest {
         Map.<String, List<Object>>of(
                 "id",
                 List.of(0L, 4L),
-                "role",
+                FIXTURE_ROLE_COLUMN,
                 List.of("UNKNOWN"),
-                "status",
+                FIXTURE_STATUS_COLUMN,
                 List.of("UNKNOWN"),
-                "version",
+                FIXTURE_VERSION_COLUMN,
                 List.of(-1L, 1_000_000_000L),
-                "failed_count",
+                FIXTURE_FAILED_COUNT_COLUMN,
                 List.of(-1L, 6L))
             .entrySet()) {
       for (Object value : entry.getValue()) {
@@ -583,7 +601,7 @@ class UserCommandServiceTest {
     rollbackFault(duplicate, false);
     for (int changed : new int[] {0, 2}) {
       var fault = new UserCommandFaults();
-      fault.sqlPart = "update schubert.app_users";
+      fault.sqlPart = FIXTURE_UPDATE_USERS_PREFIX;
       fault.updateCount = changed;
       rollbackFault(fault, false);
     }
@@ -601,7 +619,7 @@ class UserCommandServiceTest {
       rollbackFault(missing, create);
       var wrongVersion = new UserCommandFaults();
       wrongVersion.occurrence = create ? 1 : 2;
-      wrongVersion.columns.put("version", 2L);
+      wrongVersion.columns.put(FIXTURE_VERSION_COLUMN, 2L);
       rollbackFault(wrongVersion, create);
     }
     // Conditional-update zero after a real provider-side version movement remains definite
@@ -609,7 +627,7 @@ class UserCommandServiceTest {
     try (var c = database.transaction()) {
       authentication.verify(c, CONTEXT, Mutation.ENABLE, OptionalLong.of(3), NOW);
       var fault = new UserCommandFaults();
-      fault.sqlPart = "update schubert.app_users";
+      fault.sqlPart = FIXTURE_UPDATE_USERS_PREFIX;
       fault.updateCount = 0;
       fault.beforeUpdate =
           connection -> {
@@ -621,11 +639,11 @@ class UserCommandServiceTest {
           service.changeStatus(fault.wrap(c), ADMIN, TARGET, true, 0, META), ResultCode.CONFLICT);
       c.rollback();
     }
-    assertUser("version", "0");
+    assertUser(FIXTURE_VERSION_COLUMN, "0");
     try (var c = database.transaction()) {
       authentication.verify(c, CONTEXT, Mutation.ENABLE, OptionalLong.of(3), NOW);
       var update = new UserCommandFaults();
-      update.sqlPart = "update schubert.app_users";
+      update.sqlPart = FIXTURE_UPDATE_USERS_PREFIX;
       update.updateCount = 0;
       var missing = new UserCommandFaults();
       missing.occurrence = 2;
@@ -658,7 +676,7 @@ class UserCommandServiceTest {
     try (var c = database.transaction()) {
       for (Executable call :
           List.<Executable>of(
-              () -> service.create(c, ADMIN, "new", null, UserRole.USER, true, META),
+              () -> service.create(c, ADMIN, FIXTURE_NEW_USERNAME, null, UserRole.USER, true, META),
               () -> service.resetPassword(c, ADMIN, TARGET, null, 0, META),
               () -> service.changeStatus(null, ADMIN, TARGET, true, 0, META),
               () -> service.changeStatus(c, null, TARGET, true, 0, META),
@@ -689,7 +707,7 @@ class UserCommandServiceTest {
                 service.create(
                     at == 0 ? null : c,
                     at == 1 ? null : ADMIN,
-                    at == 2 ? null : "new",
+                    at == 2 ? null : FIXTURE_NEW_USERNAME,
                     password,
                     at == 3 ? null : UserRole.USER,
                     true,
@@ -743,7 +761,9 @@ class UserCommandServiceTest {
         try (var c = database.transaction()) {
           infrastructure(
               () -> {
-                if (create) broken.create(c, ADMIN, "new", password, UserRole.USER, true, META);
+                if (create)
+                  broken.create(
+                      c, ADMIN, FIXTURE_NEW_USERNAME, password, UserRole.USER, true, META);
                 else broken.resetPassword(c, ADMIN, TARGET, password, 0, META);
               });
           c.rollback();
@@ -786,7 +806,7 @@ class UserCommandServiceTest {
       assertEquals(1, success);
       assertEquals(99, conflict);
     }
-    assertUser("version", "1");
+    assertUser(FIXTURE_VERSION_COLUMN, "1");
     assertEquals(102, count("select count(*) from schubert.app_logs"));
     seed();
     try (var pool = Executors.newFixedThreadPool(2)) {
@@ -822,11 +842,10 @@ class UserCommandServiceTest {
       assertEquals(1, Collections.frequency(results, "0000"));
       assertEquals(1, Collections.frequency(results, "DENIED"));
     }
-    assertEquals(
-        2, count("select count(*) from schubert.app_users where role='ADMIN' and status='ACTIVE'"));
+    assertEquals(2, count(FIXTURE_ACTIVE_ADMINS_SQL));
     seed();
     sql(
-        "insert into"
+        FIXTURE_INSERT_PREFIX
             + " schubert.app_users(id,username,username_key,password_hash,role,status,password_changed_at,created_at,updated_at)"
             + " select"
             + " i,'u'||i,'u'||i,'unusable-test-hash','USER','ACTIVE','2026-09-08T00:00:00Z','2026-09-08T00:00:00Z','2026-09-08T00:00:00Z'"
@@ -925,10 +944,17 @@ class UserCommandServiceTest {
         for (String state : List.of("before", "after")) {
           var fields = details.getAsJsonObject(state);
           assertEquals(
-              Set.of("role", "status", "version", "failedCount", "locked"), fields.keySet());
-          assertEquals("USER", fields.get("role").getAsString());
-          assertEquals("ACTIVE", fields.get("status").getAsString());
-          assertEquals(state.equals("before") ? 0 : 1, fields.get("version").getAsLong());
+              Set.of(
+                  FIXTURE_ROLE_COLUMN,
+                  FIXTURE_STATUS_COLUMN,
+                  FIXTURE_VERSION_COLUMN,
+                  "failedCount",
+                  "locked"),
+              fields.keySet());
+          assertEquals("USER", fields.get(FIXTURE_ROLE_COLUMN).getAsString());
+          assertEquals(FIXTURE_ACTIVE_STATE, fields.get(FIXTURE_STATUS_COLUMN).getAsString());
+          assertEquals(
+              state.equals("before") ? 0 : 1, fields.get(FIXTURE_VERSION_COLUMN).getAsLong());
           assertEquals(0, fields.get("failedCount").getAsInt());
           assertFalse(fields.get("locked").getAsBoolean());
         }
@@ -959,15 +985,16 @@ class UserCommandServiceTest {
       infrastructure(
           () -> {
             if (create)
-              service.create(fault.wrap(c), ADMIN, "new", password, UserRole.USER, true, META);
+              service.create(
+                  fault.wrap(c), ADMIN, FIXTURE_NEW_USERNAME, password, UserRole.USER, true, META);
             else service.changeStatus(fault.wrap(c), ADMIN, TARGET, false, 0, META);
           });
       if (create) erased(password);
       c.rollback();
       assertFalse(c.isClosed());
     }
-    assertUser("status", "ACTIVE");
-    assertUser("version", "0");
+    assertUser(FIXTURE_STATUS_COLUMN, FIXTURE_ACTIVE_STATE);
+    assertUser(FIXTURE_VERSION_COLUMN, "0");
     assertEquals(4, count("select count(*) from schubert.app_users"));
     assertEquals(0, count("select count(*) from schubert.auth_sessions where revoked"));
     assertEquals(0, count("select count(*) from schubert.app_logs"));
@@ -1056,7 +1083,7 @@ class UserCommandServiceTest {
       s.execute("truncate schubert.app_users restart identity cascade");
     }
     sql(
-        "insert into"
+        FIXTURE_INSERT_PREFIX
             + " schubert.app_users(id,username,username_key,password_hash,role,status,password_changed_at,created_at,updated_at)"
             + " select i,'u'||i,'u'||i,'unusable-test-hash',case when i=3 then 'USER' else 'ADMIN'"
             + " end,'ACTIVE','2026-09-08T00:00:00Z','2026-09-08T00:00:00Z','2026-09-08T00:00:00Z'"
@@ -1068,7 +1095,7 @@ class UserCommandServiceTest {
     try (var c = database.api();
         var s =
             c.prepareStatement(
-                "insert into"
+                FIXTURE_INSERT_PREFIX
                     + " schubert.auth_sessions(id,user_id,context_hash,context_ciphertext,key_version,issued_at,last_accessed_at,expires_at,client_address,created_message_id)"
                     + " values(?,?,?,decode(repeat('00',29),'hex'),'test','2026-09-08T00:00:00Z','2026-09-08T00:00:00Z','2026-09-08T08:00:00Z','127.0.0.1',?)")) {
       for (int id = 1; id <= 4; id++) {
@@ -1089,7 +1116,7 @@ class UserCommandServiceTest {
 
   static void extraSessions() throws Exception {
     sql(
-        "insert into"
+        FIXTURE_INSERT_PREFIX
             + " schubert.auth_sessions(id,user_id,context_hash,context_ciphertext,key_version,issued_at,last_accessed_at,expires_at,client_address,created_message_id,revoked,revoked_at,revoke_reason)"
             + " select"
             + " ('00000000-0000-0000-0000-'||lpad(i::text,12,'0'))::uuid,3,lpad(i::text,64,'0'),decode(repeat('00',29),'hex'),'test','2026-09-08T00:00:00Z','2026-09-08T00:00:00Z',case"

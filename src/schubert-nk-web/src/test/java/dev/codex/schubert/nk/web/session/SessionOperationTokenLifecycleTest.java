@@ -32,6 +32,12 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** QA049/PG-D356/UI226/SS314; TOKV207208 real JDBC and literal order/time/count oracle. */
 class SessionOperationTokenLifecycleTest {
+  private static final String FIXTURE_SUBMIT_REQUEST = "QSBREQ01";
+  private static final String FIXTURE_STATE_REQUEST = "USTREQ01";
+  private static final String FIXTURE_ROLE_REQUEST = "URLREQ01";
+  private static final String FIXTURE_CONNECTION_CLOSE = "connection.close";
+  private static final String FIXTURE_CANCEL_REQUEST = "NTCREQ01";
+
   static final Instant NOW = Instant.parse("2026-10-04T00:00:00Z");
   static WebLogDatabaseFixture db;
 
@@ -61,7 +67,7 @@ class SessionOperationTokenLifecycleTest {
   static List<SessionOperationToken> pending(int count) {
     var result = new ArrayList<SessionOperationToken>();
     for (int n = 1; n <= count; n++)
-      result.add(new SessionOperationToken("QSBREQ01", new UUID(0, n), NOW));
+      result.add(new SessionOperationToken(FIXTURE_SUBMIT_REQUEST, new UUID(0, n), NOW));
     return result;
   }
 
@@ -82,7 +88,9 @@ class SessionOperationTokenLifecycleTest {
           f.repository.mutate(session.sessionId(), current -> tokens(current, original));
           var calls = new AtomicInteger();
           var lifecycle = service(f, calls);
-          var purposes = List.of("USTREQ01", "URLREQ01", "UPWREQ01", "ULKREQ01").subList(0, count);
+          var purposes =
+              List.of(FIXTURE_STATE_REQUEST, FIXTURE_ROLE_REQUEST, "UPWREQ01", "ULKREQ01")
+                  .subList(0, count);
           if (before + count <= 10) {
             var issued = lifecycle.issueForForms(session.sessionId(), purposes);
             assertEquals(purposes, issued.stream().map(SessionOperationToken::purpose).toList());
@@ -129,7 +137,10 @@ class SessionOperationTokenLifecycleTest {
             };
         original.add(
             new SessionOperationToken(
-                "QSBREQ01", new UUID(0, n), NOW, Optional.of(NOW.plusSeconds(seconds))));
+                FIXTURE_SUBMIT_REQUEST,
+                new UUID(0, n),
+                NOW,
+                Optional.of(NOW.plusSeconds(seconds))));
       }
       f.repository.mutate(session.sessionId(), current -> tokens(current, original));
       f.clock.value = NOW.plusSeconds(5);
@@ -137,7 +148,8 @@ class SessionOperationTokenLifecycleTest {
       var issued =
           service(f, calls)
               .issueForForms(
-                  session.sessionId(), List.of("USTREQ01", "URLREQ01", "UPWREQ01", "ULKREQ01"));
+                  session.sessionId(),
+                  List.of(FIXTURE_STATE_REQUEST, FIXTURE_ROLE_REQUEST, "UPWREQ01", "ULKREQ01"));
       assertEquals(
           List.of(101L, 102L, 103L, 104L),
           issued.stream().map(t -> t.token().getLeastSignificantBits()).toList());
@@ -172,14 +184,16 @@ class SessionOperationTokenLifecycleTest {
                 () -> new UUID(0, calls.incrementAndGet() == 1 ? 101 : duplicate));
         assertThrows(
             SessionStoreException.class,
-            () -> lifecycle.issueForForms(session.sessionId(), List.of("USTREQ01", "URLREQ01")));
+            () ->
+                lifecycle.issueForForms(
+                    session.sessionId(), List.of(FIXTURE_STATE_REQUEST, FIXTURE_ROLE_REQUEST)));
         assertEquals(2, calls.get());
         assertEquals(
             original,
             f.repository.find(session.sessionId()).orElseThrow().attributes().operationTokens());
         assertEquals(0, f.live.get());
       }
-    for (String failure : List.of("connection.commit", "connection.close"))
+    for (String failure : List.of("connection.commit", FIXTURE_CONNECTION_CLOSE))
       try (var f = new Fixture(db)) {
         reset();
         f.clock.value = NOW;
@@ -190,11 +204,12 @@ class SessionOperationTokenLifecycleTest {
             SessionStoreException.class,
             () ->
                 service(f, calls)
-                    .issueForForms(session.sessionId(), List.of("USTREQ01", "URLREQ01")));
+                    .issueForForms(
+                        session.sessionId(), List.of(FIXTURE_STATE_REQUEST, FIXTURE_ROLE_REQUEST)));
         assertTrue(f.hit);
         f.failure = "";
         assertEquals(
-            failure.equals("connection.close") ? 2 : 0,
+            failure.equals(FIXTURE_CONNECTION_CLOSE) ? 2 : 0,
             f.repository
                 .find(session.sessionId())
                 .orElseThrow()
@@ -218,7 +233,8 @@ class SessionOperationTokenLifecycleTest {
           jobs.add(
               () -> {
                 try {
-                  lifecycle.issueForForms(session.sessionId(), List.of("USTREQ01", "URLREQ01"));
+                  lifecycle.issueForForms(
+                      session.sessionId(), List.of(FIXTURE_STATE_REQUEST, FIXTURE_ROLE_REQUEST));
                   return true;
                 } catch (OperationTokenConflictException capacity) {
                   return false;
@@ -258,16 +274,21 @@ class SessionOperationTokenLifecycleTest {
           () -> lifecycle.issueForForms(session.sessionId(), List.of()));
       assertThrows(
           IllegalArgumentException.class,
-          () -> lifecycle.issueForForms(session.sessionId(), Collections.nCopies(11, "USTREQ01")));
+          () ->
+              lifecycle.issueForForms(
+                  session.sessionId(), Collections.nCopies(11, FIXTURE_STATE_REQUEST)));
       assertThrows(
           IllegalArgumentException.class,
           () -> lifecycle.issueForForms(session.sessionId(), List.of("UNKNOWN")));
       assertThrows(
-          NullPointerException.class, () -> lifecycle.issueForForms(null, List.of("USTREQ01")));
+          NullPointerException.class,
+          () -> lifecycle.issueForForms(null, List.of(FIXTURE_STATE_REQUEST)));
       f.repository.invalidate(session.sessionId());
       assertThrows(
           OperationTokenConflictException.class,
-          () -> lifecycle.issueForForms(session.sessionId(), List.of("USTREQ01", "URLREQ01")));
+          () ->
+              lifecycle.issueForForms(
+                  session.sessionId(), List.of(FIXTURE_STATE_REQUEST, FIXTURE_ROLE_REQUEST)));
       assertEquals(0, calls.get());
       assertEquals(0, f.live.get());
     }
@@ -280,22 +301,28 @@ class SessionOperationTokenLifecycleTest {
       var session = f.repository.create();
       var calls = new AtomicInteger();
       var lifecycle = service(f, calls);
-      var issued = lifecycle.issue(session.sessionId(), "QSBREQ01");
+      var issued = lifecycle.issue(session.sessionId(), FIXTURE_SUBMIT_REQUEST);
       assertEquals(new UUID(0, 101), issued.token());
       assertEquals(NOW, issued.issuedAt());
       assertEquals(Optional.empty(), issued.completedAt());
-      assertEquals(issued, lifecycle.require(session.sessionId(), "QSBREQ01", issued.token()));
+      assertEquals(
+          issued, lifecycle.require(session.sessionId(), FIXTURE_SUBMIT_REQUEST, issued.token()));
       f.clock.value = NOW.plusSeconds(1);
       var completed =
           lifecycle.completeVerified(
-              session.sessionId(), "QSBREQ01", issued.token(), ResultCode.SUCCESS);
+              session.sessionId(), FIXTURE_SUBMIT_REQUEST, issued.token(), ResultCode.SUCCESS);
       assertEquals(Optional.of(NOW.plusSeconds(1)), completed.completedAt());
       f.clock.value = NOW.plusSeconds(2);
       assertEquals(
           completed,
           lifecycle.completeVerified(
-              session.sessionId(), "QSBREQ01", issued.token(), ResultCode.IDEMPOTENT_SUCCESS));
-      assertEquals(completed, lifecycle.require(session.sessionId(), "QSBREQ01", issued.token()));
+              session.sessionId(),
+              FIXTURE_SUBMIT_REQUEST,
+              issued.token(),
+              ResultCode.IDEMPOTENT_SUCCESS));
+      assertEquals(
+          completed,
+          lifecycle.require(session.sessionId(), FIXTURE_SUBMIT_REQUEST, issued.token()));
       assertEquals(1, calls.get());
       assertEquals(0, f.live.get());
       for (var code : ResultCode.values())
@@ -304,17 +331,20 @@ class SessionOperationTokenLifecycleTest {
               IllegalArgumentException.class,
               () ->
                   lifecycle.completeVerified(
-                      session.sessionId(), "QSBREQ01", issued.token(), code));
-      var second = lifecycle.issue(session.sessionId(), "NTCREQ01");
+                      session.sessionId(), FIXTURE_SUBMIT_REQUEST, issued.token(), code));
+      var second = lifecycle.issue(session.sessionId(), FIXTURE_CANCEL_REQUEST);
       assertEquals(
           Optional.of(NOW.plusSeconds(2)),
           lifecycle
               .completeVerified(
-                  session.sessionId(), "NTCREQ01", second.token(), ResultCode.IDEMPOTENT_SUCCESS)
+                  session.sessionId(),
+                  FIXTURE_CANCEL_REQUEST,
+                  second.token(),
+                  ResultCode.IDEMPOTENT_SUCCESS)
               .completedAt());
       assertThrows(
           OperationTokenConflictException.class,
-          () -> lifecycle.require(session.sessionId(), "NTCREQ01", issued.token()));
+          () -> lifecycle.require(session.sessionId(), FIXTURE_CANCEL_REQUEST, issued.token()));
       try (var c = db.web();
           var s = c.createStatement();
           var rows =
@@ -341,7 +371,7 @@ class SessionOperationTokenLifecycleTest {
       var rejected =
           assertThrows(
               OperationTokenConflictException.class,
-              () -> lifecycle.issue(session.sessionId(), "QSBREQ01"));
+              () -> lifecycle.issue(session.sessionId(), FIXTURE_SUBMIT_REQUEST));
       assertEquals(409, rejected.httpStatus());
       assertEquals(0, calls.get());
       assertEquals(
@@ -350,15 +380,15 @@ class SessionOperationTokenLifecycleTest {
       values.set(
           0,
           new SessionOperationToken(
-              "QSBREQ01", new UUID(0, 1), NOW, Optional.of(NOW.plusSeconds(2))));
+              FIXTURE_SUBMIT_REQUEST, new UUID(0, 1), NOW, Optional.of(NOW.plusSeconds(2))));
       values.set(
           2,
           new SessionOperationToken(
-              "QSBREQ01", new UUID(0, 3), NOW, Optional.of(NOW.plusSeconds(1))));
+              FIXTURE_SUBMIT_REQUEST, new UUID(0, 3), NOW, Optional.of(NOW.plusSeconds(1))));
       values.set(
           4,
           new SessionOperationToken(
-              "QSBREQ01", new UUID(0, 5), NOW, Optional.of(NOW.plusSeconds(1))));
+              FIXTURE_SUBMIT_REQUEST, new UUID(0, 5), NOW, Optional.of(NOW.plusSeconds(1))));
       f.repository.mutate(session.sessionId(), current -> tokens(current, values));
       f.clock.value = NOW.plusSeconds(3);
       var retiredCollision =
@@ -397,12 +427,12 @@ class SessionOperationTokenLifecycleTest {
               .toList());
       assertThrows(
           OperationTokenConflictException.class,
-          () -> lifecycle.require(session.sessionId(), "QSBREQ01", new UUID(0, 3)));
+          () -> lifecycle.require(session.sessionId(), FIXTURE_SUBMIT_REQUEST, new UUID(0, 3)));
       assertThrows(
           OperationTokenConflictException.class,
           () ->
               lifecycle.completeVerified(
-                  session.sessionId(), "QSBREQ01", new UUID(0, 3), ResultCode.SUCCESS));
+                  session.sessionId(), FIXTURE_SUBMIT_REQUEST, new UUID(0, 3), ResultCode.SUCCESS));
       assertEquals(1, calls.get());
     }
   }
@@ -415,14 +445,17 @@ class SessionOperationTokenLifecycleTest {
       var session = f.repository.create();
       var calls = new AtomicInteger();
       var lifecycle = service(f, calls);
-      var issued = lifecycle.issue(session.sessionId(), "QSBREQ01");
+      var issued = lifecycle.issue(session.sessionId(), FIXTURE_SUBMIT_REQUEST);
       f.clock.value = NOW.plusSeconds(1);
       var jobs = new ArrayList<Callable<SessionOperationToken>>();
       for (int n = 0; n < 100; n++)
         jobs.add(
             () ->
                 lifecycle.completeVerified(
-                    session.sessionId(), "QSBREQ01", issued.token(), ResultCode.SUCCESS));
+                    session.sessionId(),
+                    FIXTURE_SUBMIT_REQUEST,
+                    issued.token(),
+                    ResultCode.SUCCESS));
       for (var future : pool.invokeAll(jobs))
         assertEquals(
             Optional.of(NOW.plusSeconds(1)), future.get(30, TimeUnit.SECONDS).completedAt());
@@ -447,7 +480,7 @@ class SessionOperationTokenLifecycleTest {
         jobs.add(
             () -> {
               try {
-                return Optional.of(lifecycle.issue(session.sessionId(), "QSBREQ01"));
+                return Optional.of(lifecycle.issue(session.sessionId(), FIXTURE_SUBMIT_REQUEST));
               } catch (OperationTokenConflictException capacity) {
                 assertEquals(409, capacity.httpStatus());
                 return Optional.empty();
@@ -501,21 +534,21 @@ class SessionOperationTokenLifecycleTest {
       f.repository.invalidate(session.sessionId());
       assertThrows(
           OperationTokenConflictException.class,
-          () -> lifecycle.issue(session.sessionId(), "QSBREQ01"));
+          () -> lifecycle.issue(session.sessionId(), FIXTURE_SUBMIT_REQUEST));
       assertThrows(
           OperationTokenConflictException.class,
-          () -> lifecycle.require(session.sessionId(), "QSBREQ01", new UUID(0, 1)));
+          () -> lifecycle.require(session.sessionId(), FIXTURE_SUBMIT_REQUEST, new UUID(0, 1)));
       assertThrows(
           OperationTokenConflictException.class,
           () ->
               lifecycle.completeVerified(
-                  session.sessionId(), "QSBREQ01", new UUID(0, 1), ResultCode.SUCCESS));
+                  session.sessionId(), FIXTURE_SUBMIT_REQUEST, new UUID(0, 1), ResultCode.SUCCESS));
       assertEquals(0, calls.get());
       var expiring = f.repository.create();
       f.clock.value = NOW.plusSeconds(28800);
       assertThrows(
           OperationTokenConflictException.class,
-          () -> lifecycle.issue(expiring.sessionId(), "QSBREQ01"));
+          () -> lifecycle.issue(expiring.sessionId(), FIXTURE_SUBMIT_REQUEST));
       assertEquals(0, calls.get());
       try (var c = db.web();
           var s = c.createStatement();
@@ -525,24 +558,29 @@ class SessionOperationTokenLifecycleTest {
         assertEquals(0, rows.getInt(1));
       }
     }
-    for (String fault : List.of("connection.commit", "connection.close"))
+    for (String fault : List.of("connection.commit", FIXTURE_CONNECTION_CLOSE))
       try (var f = new Fixture(db)) {
         f.clock.value = NOW;
         var session = f.repository.create();
         var lifecycle = service(f, new AtomicInteger());
-        var issued = lifecycle.issue(session.sessionId(), "QSBREQ01");
+        var issued = lifecycle.issue(session.sessionId(), FIXTURE_SUBMIT_REQUEST);
         f.clock.value = NOW.plusSeconds(1);
         f.failure = fault;
         assertThrows(
             SessionStoreException.class,
             () ->
                 lifecycle.completeVerified(
-                    session.sessionId(), "QSBREQ01", issued.token(), ResultCode.SUCCESS));
+                    session.sessionId(),
+                    FIXTURE_SUBMIT_REQUEST,
+                    issued.token(),
+                    ResultCode.SUCCESS));
         assertTrue(f.hit);
         f.failure = "";
-        var reread = lifecycle.require(session.sessionId(), "QSBREQ01", issued.token());
+        var reread = lifecycle.require(session.sessionId(), FIXTURE_SUBMIT_REQUEST, issued.token());
         assertEquals(
-            fault.equals("connection.close") ? Optional.of(NOW.plusSeconds(1)) : Optional.empty(),
+            fault.equals(FIXTURE_CONNECTION_CLOSE)
+                ? Optional.of(NOW.plusSeconds(1))
+                : Optional.empty(),
             reread.completedAt());
         assertEquals(0, f.live.get());
         f.repository.invalidate(session.sessionId());
@@ -568,38 +606,45 @@ class SessionOperationTokenLifecycleTest {
       assertThrows(NullPointerException.class, () -> lifecycle.issue(session.sessionId(), null));
       assertThrows(
           NullPointerException.class,
-          () -> lifecycle.require(session.sessionId(), "QSBREQ01", null));
-      assertThrows(
-          NullPointerException.class, () -> lifecycle.require(null, "QSBREQ01", new UUID(0, 1)));
+          () -> lifecycle.require(session.sessionId(), FIXTURE_SUBMIT_REQUEST, null));
       assertThrows(
           NullPointerException.class,
-          () -> lifecycle.completeVerified(session.sessionId(), "QSBREQ01", new UUID(0, 1), null));
+          () -> lifecycle.require(null, FIXTURE_SUBMIT_REQUEST, new UUID(0, 1)));
+      assertThrows(
+          NullPointerException.class,
+          () ->
+              lifecycle.completeVerified(
+                  session.sessionId(), FIXTURE_SUBMIT_REQUEST, new UUID(0, 1), null));
       assertThrows(
           OperationTokenConflictException.class,
           () ->
               lifecycle.completeVerified(
-                  session.sessionId(), "QSBREQ01", new UUID(0, 1), ResultCode.SUCCESS));
+                  session.sessionId(), FIXTURE_SUBMIT_REQUEST, new UUID(0, 1), ResultCode.SUCCESS));
       assertEquals(0, calls.get());
-      var issued = lifecycle.issue(session.sessionId(), "QSBREQ01");
+      var issued = lifecycle.issue(session.sessionId(), FIXTURE_SUBMIT_REQUEST);
       var duplicate = new SessionOperationTokenLifecycle(f.repository, f.clock, issued::token);
       assertThrows(
-          SessionStoreException.class, () -> duplicate.issue(session.sessionId(), "NTCREQ01"));
+          SessionStoreException.class,
+          () -> duplicate.issue(session.sessionId(), FIXTURE_CANCEL_REQUEST));
       var nullId = new SessionOperationTokenLifecycle(f.repository, f.clock, () -> null);
       assertThrows(
-          SessionStoreException.class, () -> nullId.issue(session.sessionId(), "QSBREQ01"));
+          SessionStoreException.class,
+          () -> nullId.issue(session.sessionId(), FIXTURE_SUBMIT_REQUEST));
       f.clock.value = null;
       assertThrows(
-          SessionStoreException.class, () -> lifecycle.issue(session.sessionId(), "QSBREQ01"));
+          SessionStoreException.class,
+          () -> lifecycle.issue(session.sessionId(), FIXTURE_SUBMIT_REQUEST));
       f.clock.value = NOW.minusNanos(1);
       assertThrows(
           SessionStoreException.class,
           () ->
               lifecycle.completeVerified(
-                  session.sessionId(), "QSBREQ01", issued.token(), ResultCode.SUCCESS));
+                  session.sessionId(), FIXTURE_SUBMIT_REQUEST, issued.token(), ResultCode.SUCCESS));
       f.clock.value = NOW;
       var defaultService =
           new SessionOperationTokenLifecycle(f.repository, Clock.fixed(NOW, ZoneOffset.UTC));
-      assertEquals(NOW, defaultService.issue(session.sessionId(), "NTCREQ01").issuedAt());
+      assertEquals(
+          NOW, defaultService.issue(session.sessionId(), FIXTURE_CANCEL_REQUEST).issuedAt());
       assertEquals(
           2,
           f.repository

@@ -55,8 +55,22 @@ import org.junit.jupiter.api.function.Executable;
 
 /** UI232/236 independent wire offsets and SS352 JCE envelope. PG-D-086/PT-ADM-028..032. */
 final class UserMutationReplayServiceTest {
+  private static final String FIXTURE_CREATE_REQUEST = "UCRREQ01";
+  private static final String FIXTURE_STATE_REQUEST = "USTREQ01";
+  private static final String FIXTURE_UNLOCK_REQUEST = "ULKREQ01";
+  private static final String FIXTURE_SUCCESS_CODE = "0000";
+  private static final String FIXTURE_REPLAY_CODE = "0200";
+  private static final String FIXTURE_LAYOUT_VERSION = "001";
+  private static final String FIXTURE_STATE_RESPONSE = "USTRSP01";
+  private static final String FIXTURE_KEY_ID = "test";
+
   private static final List<String> LAYOUTS =
-      List.of("UCRREQ01", "USTREQ01", "URLREQ01", "UPWREQ01", "ULKREQ01");
+      List.of(
+          FIXTURE_CREATE_REQUEST,
+          FIXTURE_STATE_REQUEST,
+          "URLREQ01",
+          "UPWREQ01",
+          FIXTURE_UNLOCK_REQUEST);
   private static final UUID SOURCE = new UUID(80, 1);
   private static final UUID RETRY = new UUID(80, 2);
   private static final UUID RESPONSE = new UUID(80, 3);
@@ -75,7 +89,7 @@ final class UserMutationReplayServiceTest {
       for (String layout : LAYOUTS)
         for (boolean flag : List.of(false, true))
           for (long expected : new long[] {0, 9, 999_999_998L}) {
-            long version = layout.equals("UCRREQ01") ? 0 : expected + 1;
+            long version = layout.equals(FIXTURE_CREATE_REQUEST) ? 0 : expected + 1;
             for (long target : new long[] {3, 999_999_999_999L})
               try (var original = request(layout, target, expected, flag, SOURCE, CONTEXT);
                   var retry = request(layout, target, expected, flag, RETRY, NEW_CONTEXT)) {
@@ -88,11 +102,27 @@ final class UserMutationReplayServiceTest {
                 assertEquals(
                     NOW.truncatedTo(java.time.temporal.ChronoUnit.MICROS), saved.completedAt());
                 assertArrayEquals(
-                    wire(layout, SOURCE, RESPONSE, NOW, CONTEXT, "0000", target, version),
+                    wire(
+                        layout,
+                        SOURCE,
+                        RESPONSE,
+                        NOW,
+                        CONTEXT,
+                        FIXTURE_SUCCESS_CODE,
+                        target,
+                        version),
                     decrypt(saved, SOURCE, 1));
                 var first = service.read(original, ADMIN, bound(SOURCE, saved, false));
                 assertArrayEquals(
-                    wire(layout, SOURCE, REPLY, LATER, CONTEXT, "0000", target, version),
+                    wire(
+                        layout,
+                        SOURCE,
+                        REPLY,
+                        LATER,
+                        CONTEXT,
+                        FIXTURE_SUCCESS_CODE,
+                        target,
+                        version),
                     service.reply(first, original, ADMIN, REPLY, LATER));
                 for (var current : List.of(original, retry)) {
                   var replay = service.read(current, ADMIN, bound(SOURCE, saved, true));
@@ -103,7 +133,7 @@ final class UserMutationReplayServiceTest {
                           REPLY,
                           LATER,
                           current == original ? CONTEXT : NEW_CONTEXT,
-                          "0200",
+                          FIXTURE_REPLAY_CODE,
                           target,
                           version),
                       service.reply(replay, current, ADMIN, REPLY, LATER));
@@ -112,7 +142,7 @@ final class UserMutationReplayServiceTest {
               }
           }
       for (long version : new long[] {0, 999_999_999L})
-        try (var request = request("ULKREQ01", 3, version, true, SOURCE, CONTEXT)) {
+        try (var request = request(FIXTURE_UNLOCK_REQUEST, 3, version, true, SOURCE, CONTEXT)) {
           var saved =
               service.capture(
                   request,
@@ -123,7 +153,15 @@ final class UserMutationReplayServiceTest {
           for (boolean replay : List.of(false, true)) {
             var snapshot = service.read(request, ADMIN, bound(SOURCE, saved, replay));
             assertArrayEquals(
-                wire("ULKREQ01", SOURCE, REPLY, LATER, CONTEXT, "0200", 3, version),
+                wire(
+                    FIXTURE_UNLOCK_REQUEST,
+                    SOURCE,
+                    REPLY,
+                    LATER,
+                    CONTEXT,
+                    FIXTURE_REPLAY_CODE,
+                    3,
+                    version),
                 service.reply(snapshot, request, ADMIN, REPLY, LATER));
           }
         }
@@ -140,9 +178,9 @@ final class UserMutationReplayServiceTest {
             boolean definite =
                 code == ResultCode.CONFLICT
                     || code == ResultCode.RESOURCE_LIMIT
-                    || (code == ResultCode.NOT_FOUND && !layout.equals("UCRREQ01"))
+                    || (code == ResultCode.NOT_FOUND && !layout.equals(FIXTURE_CREATE_REQUEST))
                     || (code == ResultCode.VALIDATION_ERROR
-                        && List.of("UCRREQ01", "UPWREQ01").contains(layout));
+                        && List.of(FIXTURE_CREATE_REQUEST, "UPWREQ01").contains(layout));
             boolean transientError =
                 List.of(
                         ResultCode.SESSION_INVALID,
@@ -196,12 +234,13 @@ final class UserMutationReplayServiceTest {
   @Test
   void adm030TamperedEncryptedRowsReferencesAndBodiesNeverReplay() throws Exception {
     try (var keys = keys();
-        var request = request("USTREQ01", 3, 7, true, RETRY, NEW_CONTEXT)) {
+        var request = request(FIXTURE_STATE_REQUEST, 3, 7, true, RETRY, NEW_CONTEXT)) {
       var service = new UserMutationReplayService(keys);
-      byte[] valid = wire("USTREQ01", SOURCE, RESPONSE, NOW, CONTEXT, "0000", 3, 8);
+      byte[] valid =
+          wire(FIXTURE_STATE_REQUEST, SOURCE, RESPONSE, NOW, CONTEXT, FIXTURE_SUCCESS_CODE, 3, 8);
       var saved =
           stored(
-              "USTREQ01",
+              FIXTURE_STATE_REQUEST,
               SOURCE,
               1,
               valid,
@@ -210,7 +249,7 @@ final class UserMutationReplayServiceTest {
               NOW.truncatedTo(java.time.temporal.ChronoUnit.MICROS));
       var read = service.read(request, ADMIN, bound(SOURCE, saved, true));
       assertArrayEquals(
-          wire("USTREQ01", RETRY, REPLY, LATER, NEW_CONTEXT, "0200", 3, 8),
+          wire(FIXTURE_STATE_REQUEST, RETRY, REPLY, LATER, NEW_CONTEXT, FIXTURE_REPLAY_CODE, 3, 8),
           service.reply(read, request, ADMIN, REPLY, LATER));
       deny(() -> service.read(request, ADMIN, bound(RETRY, saved, true)));
       deny(() -> service.read(request, ADMIN, bound(SOURCE, saved, false)));
@@ -225,14 +264,14 @@ final class UserMutationReplayServiceTest {
               change(
                   saved,
                   "URLRSP01",
-                  "001",
+                  FIXTURE_LAYOUT_VERSION,
                   saved.state(),
                   saved.resultReference(),
                   saved.responseSnapshot(),
                   saved.completedAt()),
               change(
                   saved,
-                  "USTRSP01",
+                  FIXTURE_STATE_RESPONSE,
                   "002",
                   saved.state(),
                   saved.resultReference(),
@@ -240,48 +279,48 @@ final class UserMutationReplayServiceTest {
                   saved.completedAt()),
               change(
                   saved,
-                  "USTRSP01",
-                  "001",
+                  FIXTURE_STATE_RESPONSE,
+                  FIXTURE_LAYOUT_VERSION,
                   InboxCompletionState.ERROR,
                   saved.resultReference(),
                   saved.responseSnapshot(),
                   saved.completedAt()),
               change(
                   saved,
-                  "USTRSP01",
-                  "001",
+                  FIXTURE_STATE_RESPONSE,
+                  FIXTURE_LAYOUT_VERSION,
                   saved.state(),
                   InboxResultReference.none(),
                   saved.responseSnapshot(),
                   saved.completedAt()),
               change(
                   saved,
-                  "USTRSP01",
-                  "001",
+                  FIXTURE_STATE_RESPONSE,
+                  FIXTURE_LAYOUT_VERSION,
                   saved.state(),
                   InboxResultReference.numeric(InboxResultReferenceType.QUESTION, 3),
                   saved.responseSnapshot(),
                   saved.completedAt()),
               change(
                   saved,
-                  "USTRSP01",
-                  "001",
+                  FIXTURE_STATE_RESPONSE,
+                  FIXTURE_LAYOUT_VERSION,
                   saved.state(),
                   InboxResultReference.numeric(InboxResultReferenceType.USER, 4),
                   saved.responseSnapshot(),
                   saved.completedAt()),
               change(
                   saved,
-                  "USTRSP01",
-                  "001",
+                  FIXTURE_STATE_RESPONSE,
+                  FIXTURE_LAYOUT_VERSION,
                   saved.state(),
                   saved.resultReference(),
                   Optional.empty(),
                   saved.completedAt()),
               change(
                   saved,
-                  "USTRSP01",
-                  "001",
+                  FIXTURE_STATE_RESPONSE,
+                  FIXTURE_LAYOUT_VERSION,
                   saved.state(),
                   saved.resultReference(),
                   Optional.of(
@@ -290,8 +329,8 @@ final class UserMutationReplayServiceTest {
                   saved.completedAt()),
               change(
                   saved,
-                  "USTRSP01",
-                  "001",
+                  FIXTURE_STATE_RESPONSE,
+                  FIXTURE_LAYOUT_VERSION,
                   saved.state(),
                   saved.resultReference(),
                   saved.responseSnapshot(),
@@ -302,11 +341,11 @@ final class UserMutationReplayServiceTest {
       var corrupt =
           change(
               saved,
-              "USTRSP01",
-              "001",
+              FIXTURE_STATE_RESPONSE,
+              FIXTURE_LAYOUT_VERSION,
               saved.state(),
               saved.resultReference(),
-              Optional.of(new EncryptedResponseSnapshot("test", ciphertext)),
+              Optional.of(new EncryptedResponseSnapshot(FIXTURE_KEY_ID, ciphertext)),
               saved.completedAt());
       deny(() -> service.read(request, ADMIN, bound(SOURCE, corrupt, true)));
       var mutations = new ArrayList<byte[]>();
@@ -335,11 +374,12 @@ final class UserMutationReplayServiceTest {
         put(changed, field.getKey(), field.getValue());
         mutations.add(changed);
       }
-      mutations.add(wire("USTREQ01", SOURCE, RESPONSE, NOW, CONTEXT, "0200", 3, 7));
+      mutations.add(
+          wire(FIXTURE_STATE_REQUEST, SOURCE, RESPONSE, NOW, CONTEXT, FIXTURE_REPLAY_CODE, 3, 7));
       for (byte[] changed : mutations) {
         var row =
             stored(
-                "USTREQ01",
+                FIXTURE_STATE_REQUEST,
                 SOURCE,
                 1,
                 changed,
@@ -348,11 +388,11 @@ final class UserMutationReplayServiceTest {
                 saved.completedAt());
         deny(() -> service.read(request, ADMIN, bound(SOURCE, row, true)));
       }
-      byte[] error = wire("USTREQ01", SOURCE, RESPONSE, NOW, CONTEXT, "0105", 0, 0);
+      byte[] error = wire(FIXTURE_STATE_REQUEST, SOURCE, RESPONSE, NOW, CONTEXT, "0105", 0, 0);
       put(error, 256, "000000000003");
       var invalidFiller =
           stored(
-              "USTREQ01",
+              FIXTURE_STATE_REQUEST,
               SOURCE,
               1,
               error,
@@ -360,10 +400,11 @@ final class UserMutationReplayServiceTest {
               InboxResultReference.none(),
               saved.completedAt());
       deny(() -> service.read(request, ADMIN, bound(SOURCE, invalidFiller, true)));
-      byte[] wrongErrorState = wire("USTREQ01", SOURCE, RESPONSE, NOW, CONTEXT, "0105", 0, 0);
+      byte[] wrongErrorState =
+          wire(FIXTURE_STATE_REQUEST, SOURCE, RESPONSE, NOW, CONTEXT, "0105", 0, 0);
       var invalidState =
           stored(
-              "USTREQ01",
+              FIXTURE_STATE_REQUEST,
               SOURCE,
               1,
               wrongErrorState,
@@ -377,7 +418,7 @@ final class UserMutationReplayServiceTest {
   @Test
   void adm031NullClosedAndCrossRequestScopesFailWithoutSecrets() throws Exception {
     var keys = keys();
-    var request = request("USTREQ01", 3, 7, true, SOURCE, CONTEXT);
+    var request = request(FIXTURE_STATE_REQUEST, 3, 7, true, SOURCE, CONTEXT);
     try {
       var service = new UserMutationReplayService(keys);
       var result = success(3, 8, ResultCode.SUCCESS);
@@ -413,7 +454,7 @@ final class UserMutationReplayServiceTest {
           () ->
               service.reply(
                   snapshot, request, new AuthenticatedActor(2, "other", Role.ADMIN), REPLY, LATER));
-      try (var other = request("USTREQ01", 3, 7, true, SOURCE, CONTEXT)) {
+      try (var other = request(FIXTURE_STATE_REQUEST, 3, 7, true, SOURCE, CONTEXT)) {
         deny(() -> service.reply(snapshot, other, ADMIN, REPLY, LATER));
       }
       for (var bad :
@@ -422,9 +463,9 @@ final class UserMutationReplayServiceTest {
               success(3, 7, ResultCode.SUCCESS),
               success(3, 7, ResultCode.IDEMPOTENT_SUCCESS)))
         deny(() -> service.capture(request, ADMIN, bad, RESPONSE, NOW));
-      try (var create = request("UCRREQ01", 3, 0, true, SOURCE, CONTEXT);
-          var unlock = request("ULKREQ01", 3, 7, true, SOURCE, CONTEXT);
-          var maximum = request("USTREQ01", 3, 999_999_999L, true, SOURCE, CONTEXT)) {
+      try (var create = request(FIXTURE_CREATE_REQUEST, 3, 0, true, SOURCE, CONTEXT);
+          var unlock = request(FIXTURE_UNLOCK_REQUEST, 3, 7, true, SOURCE, CONTEXT);
+          var maximum = request(FIXTURE_STATE_REQUEST, 3, 999_999_999L, true, SOURCE, CONTEXT)) {
         deny(
             () -> service.capture(create, ADMIN, success(3, 1, ResultCode.SUCCESS), RESPONSE, NOW));
         deny(
@@ -450,7 +491,7 @@ final class UserMutationReplayServiceTest {
       deny(() -> service.read(request, ADMIN, bound));
       // Reply owns verified result, not keys; closing keys must not turn it into a DB reread.
       assertArrayEquals(
-          wire("USTREQ01", SOURCE, REPLY, LATER, CONTEXT, "0000", 3, 8),
+          wire(FIXTURE_STATE_REQUEST, SOURCE, REPLY, LATER, CONTEXT, FIXTURE_SUCCESS_CODE, 3, 8),
           service.reply(snapshot, request, ADMIN, REPLY, LATER));
       request.close();
       assertThrows(IllegalStateException.class, request::expectedVersion);
@@ -480,7 +521,7 @@ final class UserMutationReplayServiceTest {
                   UUID source = new UUID(81, n);
                   UUID retry = new UUID(82, n);
                   UUID response = new UUID(83, n);
-                  long version = layout.equals("UCRREQ01") ? 0 : n + 1;
+                  long version = layout.equals(FIXTURE_CREATE_REQUEST) ? 0 : n + 1;
                   try (var original = request(layout, n + 3, n, true, source, CONTEXT);
                       var current = request(layout, n + 3, n, true, retry, NEW_CONTEXT)) {
                     var saved =
@@ -492,7 +533,15 @@ final class UserMutationReplayServiceTest {
                             NOW);
                     var snapshot = service.read(current, actor, bound(source, saved, true));
                     assertArrayEquals(
-                        wire(layout, retry, response, LATER, NEW_CONTEXT, "0200", n + 3, version),
+                        wire(
+                            layout,
+                            retry,
+                            response,
+                            LATER,
+                            NEW_CONTEXT,
+                            FIXTURE_REPLAY_CODE,
+                            n + 3,
+                            version),
                         service.reply(snapshot, current, actor, response, LATER));
                     return response;
                   }
@@ -505,7 +554,7 @@ final class UserMutationReplayServiceTest {
   }
 
   private static ResponseSnapshotCodec keys() {
-    return new ResponseSnapshotCodec("test", new byte[32], null, null);
+    return new ResponseSnapshotCodec(FIXTURE_KEY_ID, new byte[32], null, null);
   }
 
   private static UserMutationRequest request(
@@ -579,7 +628,7 @@ final class UserMutationReplayServiceTest {
         state,
         ref,
         layout.replace("REQ", "RSP"),
-        "001",
+        FIXTURE_LAYOUT_VERSION,
         Optional.of(encrypt(body, source, owner, layout.replace("REQ", "RSP"))),
         time);
   }
@@ -630,9 +679,9 @@ final class UserMutationReplayServiceTest {
                   .putLong(source.getLeastSignificantBits())
                   .array(),
               new byte[] {1},
-              "test".getBytes(StandardCharsets.US_ASCII),
+              FIXTURE_KEY_ID.getBytes(StandardCharsets.US_ASCII),
               layout.getBytes(StandardCharsets.US_ASCII),
-              "001".getBytes(StandardCharsets.US_ASCII),
+              FIXTURE_LAYOUT_VERSION.getBytes(StandardCharsets.US_ASCII),
               ByteBuffer.allocate(8).putLong(owner).array())) {
         out.writeInt(field.length);
         out.write(field);
@@ -660,12 +709,12 @@ final class UserMutationReplayServiceTest {
     cipher.updateAAD(aad(source, owner, layout));
     byte[] encrypted = cipher.doFinal(output.toByteArray());
     return new EncryptedResponseSnapshot(
-        "test",
+        FIXTURE_KEY_ID,
         ByteBuffer.allocate(24 + encrypted.length)
             .put("NKENC1".getBytes(StandardCharsets.US_ASCII))
             .put((byte) 1)
             .put((byte) 4)
-            .put("test".getBytes(StandardCharsets.US_ASCII))
+            .put(FIXTURE_KEY_ID.getBytes(StandardCharsets.US_ASCII))
             .put(nonce)
             .put(encrypted)
             .array());
@@ -678,7 +727,7 @@ final class UserMutationReplayServiceTest {
     assertEquals(1, stored[6]);
     assertEquals(4, stored[7]);
     assertArrayEquals(
-        "test".getBytes(StandardCharsets.US_ASCII), Arrays.copyOfRange(stored, 8, 12));
+        FIXTURE_KEY_ID.getBytes(StandardCharsets.US_ASCII), Arrays.copyOfRange(stored, 8, 12));
     var cipher = Cipher.getInstance("AES/GCM/NoPadding");
     cipher.init(
         Cipher.DECRYPT_MODE,

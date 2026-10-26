@@ -49,6 +49,12 @@ import org.junit.jupiter.api.Test;
 
 /** UI236 literal wire and SS324 LP/JCE/NKREF1 independent oracles; no expected codec. */
 final class QuestionMutationReplayServiceTest {
+  private static final String FIXTURE_CANCEL_RESPONSE = "NTCRSP01";
+  private static final String FIXTURE_DELETE_RESPONSE = "QDLRSP01";
+  private static final String FIXTURE_LAYOUT_VERSION = "001";
+  private static final String FIXTURE_KEY_ID = "test";
+  private static final String FIXTURE_LAYOUT_FIELD = "layout";
+
   static final UUID M = new UUID(711, 1);
   static final UUID R = new UUID(711, 2);
   static final UUID NEXT = new UUID(711, 3);
@@ -68,7 +74,9 @@ final class QuestionMutationReplayServiceTest {
         assertEquals(id, request.targetId());
         assertEquals(TOKEN, request.operationToken());
         assertEquals(cancel, request.cancellation());
-        assertEquals(cancel ? "NTCRSP01" : "QDLRSP01", request.responseLayoutId().value());
+        assertEquals(
+            cancel ? FIXTURE_CANCEL_RESPONSE : FIXTURE_DELETE_RESPONSE,
+            request.responseLayoutId().value());
         assertEquals("QuestionMutationRequest[REDACTED]", request.toString());
         var bytes = new ByteArrayOutputStream();
         try (var out = new DataOutputStream(bytes)) {
@@ -77,7 +85,7 @@ final class QuestionMutationReplayServiceTest {
               List.of(
                   "1",
                   cancel ? "NTCREQ01" : "QDLREQ01",
-                  "001",
+                  FIXTURE_LAYOUT_VERSION,
                   (cancel ? "NOTIFICATION:" : "QUESTION:") + id)) lp(out, s);
           out.writeInt(1);
           lp(out, cancel ? "notificationId" : "questionId");
@@ -86,7 +94,7 @@ final class QuestionMutationReplayServiceTest {
         }
         var mac = Mac.getInstance("HmacSHA256");
         mac.init(new SecretKeySpec(new byte[32], "HmacSHA256"));
-        try (var keys = new FingerprintKeyRing("test", new byte[32], null, null);
+        try (var keys = new FingerprintKeyRing(FIXTURE_KEY_ID, new byte[32], null, null);
             var canonical = request.canonical(USER);
             var admin = request.canonical(ADMIN);
             var another =
@@ -111,7 +119,7 @@ final class QuestionMutationReplayServiceTest {
 
   @Test
   void qry037AllFrozenProfilesNkrefIndependentJceAndReplyBytes() throws Exception {
-    try (var keys = new ResponseSnapshotCodec("test", new byte[32], null, null)) {
+    try (var keys = new ResponseSnapshotCodec(FIXTURE_KEY_ID, new byte[32], null, null)) {
       var service = new QuestionMutationReplayService(keys);
       for (boolean cancel : List.of(false, true)) {
         var request = QuestionMutationRequest.decode(message(cancel, 3, M, TOKEN));
@@ -205,7 +213,7 @@ final class QuestionMutationReplayServiceTest {
 
   @Test
   void qry038AuthenticatedMetadataCorruptionAndClosedSnapshotCannotGrantScope() throws Exception {
-    try (var keys = new ResponseSnapshotCodec("test", new byte[32], null, null)) {
+    try (var keys = new ResponseSnapshotCodec(FIXTURE_KEY_ID, new byte[32], null, null)) {
       var service = new QuestionMutationReplayService(keys);
       for (boolean cancel : List.of(false, true)) {
         var request = QuestionMutationRequest.decode(message(cancel, 3, M, TOKEN));
@@ -232,15 +240,16 @@ final class QuestionMutationReplayServiceTest {
                     request,
                     USER,
                     new BoundInboxExecution(NEXT, InboxExecution.executed(completion))));
-        for (String error : List.of("layout", "version", "missing", "time", "reference", "state")) {
+        for (String error :
+            List.of(FIXTURE_LAYOUT_FIELD, "version", "missing", "time", "reference", "state")) {
           var changed =
               new InboxCompletion(
                   error.equals("state") ? InboxCompletionState.ERROR : completion.state(),
                   error.equals("reference")
                       ? InboxResultReference.none()
                       : completion.resultReference(),
-                  error.equals("layout") ? "USDRSP01" : completion.responseLayoutId(),
-                  error.equals("version") ? "002" : "001",
+                  error.equals(FIXTURE_LAYOUT_FIELD) ? "USDRSP01" : completion.responseLayoutId(),
+                  error.equals("version") ? "002" : FIXTURE_LAYOUT_VERSION,
                   error.equals("missing") ? Optional.empty() : completion.responseSnapshot(),
                   error.equals("time") ? AT.plusSeconds(1) : AT);
           assertThrows(
@@ -257,8 +266,8 @@ final class QuestionMutationReplayServiceTest {
                 completion.state(),
                 completion.resultReference(),
                 completion.responseLayoutId(),
-                "001",
-                Optional.of(new EncryptedResponseSnapshot("test", copied)),
+                FIXTURE_LAYOUT_VERSION,
+                Optional.of(new EncryptedResponseSnapshot(FIXTURE_KEY_ID, copied)),
                 AT);
         assertThrows(
             TemporaryInfrastructureException.class,
@@ -365,7 +374,8 @@ final class QuestionMutationReplayServiceTest {
         () ->
             new QuestionMutationRequest.Result(
                 ResultCode.NOT_CANCELLABLE,
-                new PayloadValues(new LayoutId("QDLRSP01"), FieldValueSet.empty(), List.of()),
+                new PayloadValues(
+                    new LayoutId(FIXTURE_DELETE_RESPONSE), FieldValueSet.empty(), List.of()),
                 InboxResultReference.none()));
     for (var state :
         List.of(
@@ -376,7 +386,7 @@ final class QuestionMutationReplayServiceTest {
               new QuestionMutationRequest.Result(
                   ResultCode.SUCCESS,
                   new PayloadValues(
-                      new LayoutId("NTCRSP01"),
+                      new LayoutId(FIXTURE_CANCEL_RESPONSE),
                       new NotificationCancelResponseData(state, Optional.empty()).fields(),
                       List.of()),
                   InboxResultReference.numeric(InboxResultReferenceType.JOB, 7)));
@@ -397,7 +407,7 @@ final class QuestionMutationReplayServiceTest {
           new QuestionMutationRequest.Result(
               ResultCode.NOT_CANCELLABLE,
               new PayloadValues(
-                  new LayoutId("NTCRSP01"),
+                  new LayoutId(FIXTURE_CANCEL_RESPONSE),
                   new NotificationCancelResponseData(
                           Optional.of(
                               time ? NotificationState.PROCESSING : NotificationState.CANCELLED),
@@ -407,9 +417,9 @@ final class QuestionMutationReplayServiceTest {
               InboxResultReference.none());
       assertThrows(IllegalArgumentException.class, () -> cancel.validate(bad));
     }
-    try (var keys = new ResponseSnapshotCodec("test", new byte[32], null, null)) {
+    try (var keys = new ResponseSnapshotCodec(FIXTURE_KEY_ID, new byte[32], null, null)) {
       var service = new QuestionMutationReplayService(keys);
-      for (String point : List.of("kind", "layout", "success-error", "code")) {
+      for (String point : List.of("kind", FIXTURE_LAYOUT_FIELD, "success-error", "code")) {
         byte[] malformed =
             wire(
                 false,
@@ -421,14 +431,16 @@ final class QuestionMutationReplayServiceTest {
                     : point.equals("code") ? ResultCode.SESSION_INVALID : ResultCode.NOT_FOUND,
                 AT);
         if (point.equals("kind")) QuestionQueryRequestTest.put(malformed, 22, "R");
-        if (point.equals("layout")) QuestionQueryRequestTest.put(malformed, 11, "LOGRSP01");
-        var encrypted = QuestionQueryReplayServiceTest.encrypt(malformed, M, 1, "QDLRSP01");
+        if (point.equals(FIXTURE_LAYOUT_FIELD))
+          QuestionQueryRequestTest.put(malformed, 11, "LOGRSP01");
+        var encrypted =
+            QuestionQueryReplayServiceTest.encrypt(malformed, M, 1, FIXTURE_DELETE_RESPONSE);
         var completion =
             new InboxCompletion(
                 InboxCompletionState.ERROR,
                 InboxResultReference.none(),
-                "QDLRSP01",
-                "001",
+                FIXTURE_DELETE_RESPONSE,
+                FIXTURE_LAYOUT_VERSION,
                 Optional.of(encrypted),
                 AT);
         assertThrows(
@@ -519,7 +531,10 @@ final class QuestionMutationReplayServiceTest {
               : FieldValueSet.empty();
     return new QuestionMutationRequest.Result(
         code,
-        new PayloadValues(new LayoutId(cancel ? "NTCRSP01" : "QDLRSP01"), fields, List.of()),
+        new PayloadValues(
+            new LayoutId(cancel ? FIXTURE_CANCEL_RESPONSE : FIXTURE_DELETE_RESPONSE),
+            fields,
+            List.of()),
         (code == ResultCode.SUCCESS || code == ResultCode.IDEMPOTENT_SUCCESS)
             ? InboxResultReference.numeric(
                 cancel ? InboxResultReferenceType.JOB : InboxResultReferenceType.QUESTION,
@@ -538,7 +553,7 @@ final class QuestionMutationReplayServiceTest {
     byte[] b = new byte[256 + len];
     Arrays.fill(b, (byte) 32);
     QuestionQueryRequestTest.put(b, 0, "SCHBNK01001");
-    QuestionQueryRequestTest.put(b, 11, cancel ? "NTCRSP01" : "QDLRSP01");
+    QuestionQueryRequestTest.put(b, 11, cancel ? FIXTURE_CANCEL_RESPONSE : FIXTURE_DELETE_RESPONSE);
     QuestionQueryRequestTest.put(b, 19, "001SS");
     QuestionQueryRequestTest.put(b, 24, response.toString());
     QuestionQueryRequestTest.put(b, 60, source.toString());
