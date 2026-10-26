@@ -76,7 +76,7 @@ final class QuestionQueryReplayServiceTest {
             var request = QuestionQueryRequest.decode(message(layout, data(layout, false)));
             var saved =
                 service.captureSuccess(request, actor, values(request, count), RESPONSE, COMPLETED);
-            byte[] expected = wire(request, RESPONSE, COMPLETED, "0000", count);
+            byte[] expected = wire(layout, RESPONSE, COMPLETED, "0000", count);
             assertArrayEquals(frame(request, actor.role(), expected), decrypt(saved, MESSAGE, 1));
             assertEquals(InboxResultReference.none(), saved.resultReference());
             assertEquals(COMPLETED.truncatedTo(ChronoUnit.MICROS), saved.completedAt());
@@ -86,7 +86,7 @@ final class QuestionQueryReplayServiceTest {
               assertEquals("QuestionQuerySnapshot[REDACTED]", snapshot.toString());
               assertTrue(snapshot.scopeAllowed(actor));
               assertArrayEquals(
-                  wire(request, REPLY, LATER, replay ? "0200" : "0000", count),
+                  wire(layout, REPLY, LATER, replay ? "0200" : "0000", count),
                   service.reply(snapshot, request, actor, REPLY, LATER, replay));
               assertTrue(snapshot.scopeAllowed(ADMIN));
               boolean permitted = !request.questionScope() || actor.role() == Role.USER;
@@ -95,7 +95,7 @@ final class QuestionQueryReplayServiceTest {
                 deny(() -> service.reply(snapshot, request, USER, REPLY, LATER, true));
               else
                 assertArrayEquals(
-                    wire(request, REPLY, LATER, "0200", count),
+                    wire(layout, REPLY, LATER, "0200", count),
                     service.reply(snapshot, request, USER, REPLY, LATER, true));
               assertFalse(snapshot.scopeAllowed(new AuthenticatedActor(2, "u2", Role.ADMIN)));
               deny(
@@ -132,10 +132,10 @@ final class QuestionQueryReplayServiceTest {
                   frame(
                       request,
                       actor.role(),
-                      wire(request, RESPONSE, COMPLETED, code.wireValue(), 0)),
+                      wire(layout, RESPONSE, COMPLETED, code.wireValue(), 0)),
                   decrypt(saved, MESSAGE, 1));
               assertArrayEquals(
-                  wire(request, REPLY, LATER, code.wireValue(), 0),
+                  wire(layout, REPLY, LATER, code.wireValue(), 0),
                   service.reply(
                       service.read(request, actor, saved), request, actor, REPLY, LATER, true));
             }
@@ -148,7 +148,7 @@ final class QuestionQueryReplayServiceTest {
                       ResultCode.TEMPORARY_FAILURE)
                   .contains(code))
             assertArrayEquals(
-                wire(request, REPLY, LATER, code.wireValue(), 0),
+                wire(layout, REPLY, LATER, code.wireValue(), 0),
                 service.failure(request, code, REPLY, LATER));
           else deny(() -> service.failure(request, code, REPLY, LATER));
         }
@@ -162,7 +162,7 @@ final class QuestionQueryReplayServiceTest {
       var service = new QuestionQueryReplayService(keys);
       for (String layout : List.of("QSSREQ01", "QSDREQ01", "NTSREQ01", "NTDREQ01")) {
         var request = QuestionQueryRequest.decode(message(layout, data(layout, false)));
-        byte[] expected = wire(request, RESPONSE, COMPLETED, "0000", 1);
+        byte[] expected = wire(layout, RESPONSE, COMPLETED, "0000", 1);
         var saved =
             stored(request, frame(request, Role.ADMIN, expected), InboxCompletionState.COMPLETED);
         service.read(request, ADMIN, saved);
@@ -417,7 +417,7 @@ final class QuestionQueryReplayServiceTest {
       deny(() -> service.captureFailure(request, USER, ResultCode.NOT_FOUND, RESPONSE, COMPLETED));
       deny(() -> service.read(request, USER, saved));
       assertArrayEquals(
-          wire(request, REPLY, LATER, "0200", 0),
+          wire("QSDREQ01", REPLY, LATER, "0200", 0),
           service.reply(snapshot, request, USER, REPLY, LATER, true));
     } finally {
       keys.close();
@@ -451,7 +451,7 @@ final class QuestionQueryReplayServiceTest {
     try (var keys = new ResponseSnapshotCodec("test", new byte[32], null, null)) {
       var service = new QuestionQueryReplayService(keys);
       var saved = service.captureSuccess(request, USER, response, RESPONSE, COMPLETED);
-      byte[] expected = wire(request, RESPONSE, COMPLETED, "0000", 0);
+      byte[] expected = wire("NTDREQ01", RESPONSE, COMPLETED, "0000", 0);
       put(expected, 256, "000000000001");
       Arrays.fill(expected, 9124, 9136, (byte) 32);
       put(expected, 9124, "1");
@@ -465,78 +465,9 @@ final class QuestionQueryReplayServiceTest {
     }
   }
 
-  /** Literal whole wire: UI236 independent offsets, no production codec for expected. */
-  static byte[] wire(
-      QuestionQueryRequest request, UUID response, Instant at, String code, int count) {
-    boolean success = code.equals("0000") || code.equals("0200");
-    boolean detail = request.detailRequest();
-    boolean question = request.questionScope();
-    int dataLength = detail ? (question ? 8352 : 8896) : 48;
-    int recordLength = detail ? 0 : (question ? 672 : 624);
-    int records = success && !detail ? count : 0;
-    byte[] b = new byte[256 + dataLength + recordLength * records];
-    Arrays.fill(b, (byte) 32);
-    put(b, 0, "SCHBNK01001");
-    put(b, 11, request.responseLayoutId().value());
-    put(b, 19, "001SS");
-    put(b, 24, response.toString());
-    put(b, 60, MESSAGE.toString());
-    put(b, 96, time(at));
-    put(b, 113, "b".repeat(64));
-    put(
-        b,
-        177,
-        String.format(
-            Locale.ROOT, "0256%06d%06d%06d%09d", dataLength, recordLength, records, b.length));
-    put(b, 208, code);
-    if (!detail) {
-      put(
-          b,
-          256,
-          success
-              ? String.format(
-                  Locale.ROOT, "000001050%09d000001%09d%09d", count, count == 0 ? 0 : 1, count)
-              : "0".repeat(42));
-      if (records > 0) {
-        put(b, 304, "999999999999");
-        put(b, 316, "0".repeat(26));
-        if (question) {
-          put(b, 342, "u1");
-          put(b, 406, "question");
-          put(b, 918, "UNANSWERED");
-          put(b, 930, time(NOW));
-        } else {
-          put(b, 342, "ACCEPTED");
-          put(b, 354, "RECEIVED");
-          put(b, 366, time(NOW));
-          put(b, 383, time(NOW));
-          put(b, 400, "question");
-          put(b, 912, "0");
-        }
-      }
-    } else {
-      put(b, 256, success ? "999999999999" : "0".repeat(12));
-      if (question) {
-        put(b, 8562, success ? time(NOW) : "0".repeat(17));
-        if (success) {
-          put(b, 268, "0".repeat(26));
-          put(b, 294, "u1");
-          put(b, 358, "UNANSWERED");
-          put(b, 370, "question");
-        }
-      } else {
-        put(b, 318, success ? time(NOW) : "0".repeat(17));
-        if (success) put(b, 403, "0");
-        if (success) {
-          put(b, 268, "0".repeat(26));
-          put(b, 294, "ACCEPTED");
-          put(b, 306, "RECEIVED");
-          put(b, 404, "question");
-          put(b, 9124, "999999999999");
-        }
-      }
-    }
-    return b;
+  /** UI236 profile comes from the Test input, not a Production request decoder. */
+  static byte[] wire(String layout, UUID response, Instant at, String code, int count) {
+    return QuestionQueryWireOracle.wire(layout, MESSAGE, response, at, NOW, code, count);
   }
 
   static String time(Instant at) {

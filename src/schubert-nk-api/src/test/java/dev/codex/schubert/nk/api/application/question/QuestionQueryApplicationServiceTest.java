@@ -73,10 +73,13 @@ final class QuestionQueryApplicationServiceTest {
         assertEquals(
             1,
             f.scalar(
-                "select count(*) from schubert.request_inbox where processing_state='COMPLETED' and operation_token is null and result_ref_type='NONE' and expires_at=completed_at+interval '24 hours'"));
+                "select count(*) from schubert.request_inbox where processing_state='COMPLETED' and"
+                    + " operation_token is null and result_ref_type='NONE' and"
+                    + " expires_at=completed_at+interval '24 hours'"));
         String old = metadata(f);
         f.sql(
-            "update schubert.questions set body='changed independently',version=version+1 where id=3");
+            "update schubert.questions set body='changed independently',version=version+1 where"
+                + " id=3");
         assertArrayEquals(expected(layout, "0200", 3), service.process(input));
         assertEquals(old, metadata(f));
         assertEquals(
@@ -159,7 +162,9 @@ final class QuestionQueryApplicationServiceTest {
   void qry021LatestRevokedOrChangedOwnerIsNonstoredAndValidationCannotAuthorize() throws Exception {
     for (String sql :
         List.of(
-            "update schubert.auth_sessions set revoked=true,revoked_at='2026-10-01T00:00:00.123456Z',revoke_reason='ADMIN' where user_id=1",
+            "update schubert.auth_sessions set"
+                + " revoked=true,revoked_at='2026-10-01T00:00:00.123456Z',revoke_reason='ADMIN'"
+                + " where user_id=1",
             "update schubert.app_users set status='DISABLED' where id=1",
             "update schubert.auth_sessions set user_id=2 where user_id=1"))
       try (var f = QuestionQueryRepositoryTest.fixture(db)) {
@@ -314,7 +319,8 @@ final class QuestionQueryApplicationServiceTest {
     for (String change :
         List.of(
             "delete from schubert.request_inbox",
-            "update schubert.request_inbox set response_body_encrypted=set_byte(response_body_encrypted,30,1-get_byte(response_body_encrypted,30)%2)",
+            "update schubert.request_inbox set"
+                + " response_body_encrypted=set_byte(response_body_encrypted,30,1-get_byte(response_body_encrypted,30)%2)",
             "update schubert.request_inbox set completed_at=completed_at+interval '1 millisecond'",
             "update schubert.request_inbox set response_key_version='gone'",
             "update schubert.request_inbox set fingerprint_key_version='gone'",
@@ -336,7 +342,8 @@ final class QuestionQueryApplicationServiceTest {
     for (String change :
         List.of(
             "update schubert.request_inbox set fingerprint_key_version='gone'",
-            "update schubert.request_inbox set processing_state='PROCESSING',completed_at=null,result_ref_type=null,response_layout_id=null,response_version=null,response_body_encrypted=null,response_key_version=null"))
+            "update schubert.request_inbox set"
+                + " processing_state='PROCESSING',completed_at=null,result_ref_type=null,response_layout_id=null,response_version=null,response_body_encrypted=null,response_key_version=null"))
       try (var f = QuestionQueryRepositoryTest.fixture(db)) {
         service(f, f.source).process(input("QSSREQ01"));
         f.sql(change);
@@ -488,7 +495,8 @@ final class QuestionQueryApplicationServiceTest {
         var s = c.createStatement();
         var r =
             s.executeQuery(
-                "select response_body_encrypted,response_key_version,completed_at from schubert.request_inbox")) {
+                "select response_body_encrypted,response_key_version,completed_at from"
+                    + " schubert.request_inbox")) {
       assertTrue(r.next());
       return new InboxCompletion(
           InboxCompletionState.COMPLETED,
@@ -501,11 +509,16 @@ final class QuestionQueryApplicationServiceTest {
   }
 
   static byte[] expected(String layout, String code, int response) {
-    var request = QuestionQueryRequest.decode(input(layout));
     boolean success = code.equals("0000") || code.equals("0200");
     byte[] b =
-        QuestionQueryReplayServiceTest.wire(
-            request, new UUID(101, response), STAMP, code, layout.equals("NTSREQ01") ? 1 : 0);
+        QuestionQueryWireOracle.wire(
+            layout,
+            MESSAGE,
+            new UUID(101, response),
+            STAMP,
+            QuestionQueryRequestTest.NOW,
+            code,
+            layout.equals("NTSREQ01") ? 1 : 0);
     if (!success) return b;
     String body = "😀".repeat(101) + "alpha%_\\";
     if (layout.equals("QSDREQ01")) {
