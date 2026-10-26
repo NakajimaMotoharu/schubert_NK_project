@@ -1,0 +1,21 @@
+# 2086 残constructor168式の型・source位置束縛結果
+
+2026-10-26、G03.01、群2427開始1/3/7週次枠pp cap10、sourcec91916e8f/正常10558。原10252のconstructor候補から、既128 carrier/104 JDK/既直接helper文脈を四key（path/method/期待式line/hash）で除いた現SHA不変の168式/65sourceを対象とする。constructor使用だけで欠陥/独立性PASSと判定しない。
+
+## 実施・根拠
+
+既正常snapshotにある当65sourceのouter/明示nested class168個をSourceFile/hashで固定し、JDK25 ClassFile API readerがconstructorのowner/descriptor/method/debug行だけを読み取った。readerだけをjavac --release25 -proc:none -Xlint:all -Werrorでcompileし、runtime classpathはreader出力のみ。target classはclasspathに置かず、ロード/初期化/reflective invoke/consumer body実行0。JDK型APIは導入済みJDK25.0.4のjavapで確認した。通常PTや実操作の代替実行ではない。
+
+PG10580 manifest `a9e61e1889b9f51469f28112da46f5df80e47769a679b723f6739896c2bafc8c` actual0、既class168/constructor invoke metadata3523を読み、期待式内の型出現180について厳密期待式行範囲では137が一意、43は保守的未解決とした。これらは型出現数で、式168やclass168という別の数と混同しない。
+
+PG10582 manifest `5d591abfbe83b4d81b5086ceb6081fa04cb4d2e6492225b0938c30b5e198eaa1` actual0。同じreader stdoutの原hashを参照し**readerを再実行しない**。複数行assertionではcompiler debug行が期待式ではなく呼出先頭行になる例を原sourceと照合（UserIdは期待式115/呼出114、HttpByteRange Fullは期待式22/呼出21）。元assertion token位置から期待式末尾までの実範囲へ追加結合し、180全型出現のownerを一意化。原137/43判定は旧fieldとして保持し、行を根拠なく±1へ拡大していない。誤行/誤hashのmetadata二反例。
+
+ownerは64種類。Main61 owner/55 source、JDK UUID一、Test-local Progress/Result二。各Mainは当正常jarのclass hashとMain source SHAへ結合。名前だけで別のProgress/Resultを選ばず、当method（またはそのcompiler lambda）/source範囲/compiled ownerで同定した。Test-local二とJDKはMainに仮登録しない。MainSourceFileの存在/hashは型束縛であり、そのconstructor/引数の正当性を認定したものではない。
+
+## 未確認・次工程
+
+constructorのfield変換/検証/所有copy、入力・expectedの由来は未確認。先行読取したAuthenticatedActor/AuthContextIdentity/UserRecord/UserDetailResponseDataは検証のみでparameter再代入なし。FixedServiceIdentity.Valueのgroups=List.copyOfは順序/要素を保つ所有copyなので、再代入だけを一律「期待値計算」としない。ほか55sourceの本文確認と個別期待式は次群で分割し、変換でexpectedがSUTと共通になる実不足だけ先行起票する。
+
+BUG1845/YKT1596：新Python10580の未使用re一（原SHA769f7dbd1ddb80cf6cd6f695bc10b4854e4d0b6b9cc6f0f76880d52a0471e338）/10582の未使用json一（原SHA1815a36c5489932c639ea2525baec0c18d469a2c29686f9200e2af2280a16b7f）を前置pyflakesが検出。各main/OUT生成前に終了1、修正前登録・不要importを除いて前置0後だけ本体実行した。製品失敗・安全拒否とせず、同群tool手戻りとして原結果/費用を保持する。
+
+実commandは各同番号Python工具とmanifest stagesに固定。Javaは新readerだけのcompile/実行で、target compilation/classloading/PT/DB/VM/Root/鍵/permit/intent/業務再送等は全0。source/class/reader/input list/dependency/開始終了/exit/hashは各manifestへ。状態STATIC_TYPE_AND_SOURCE_BINDING_COMPLETE_NOT_ORACLE_OR_PT_PASS。正式1964/53・個別17/190・工数null・QA051final/全安全HOLD不変。
