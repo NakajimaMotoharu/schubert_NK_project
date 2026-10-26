@@ -1,5 +1,7 @@
 # 質問照会Testの19重複literal是正
 
+2026-10-26追記訂正（BUG1821/2055/PG10349）：下記の108はassert prefix字句数であり、実assertion呼出し数は未計測null。元全token/全assertionの保持証明、元PT未実行/HOLD、正式件数は不変更。原記述/manifestを保持し、本訂正を優先する。
+
 2026-10-26 14:23 JST、BUG1812/YKT1563、群2349→2350/F03（原P01401/P01403関連0）、開始1/3/6 cap10。対象はQuestionQueryApplicationServiceTest12定数とQuestionQueryReplayServiceTest7定数。所定PMDの既19duplicate指摘を、同じString literalのcompile-time定数化だけで是正した。元108assertion/全@Test/業務fixture/SQL/期待電文を変更しない。
 
 source4c975c3eb1d8d5540805fae642b80d0d5e781c12、Production Main21d7c304不変。Java25/Maven3.9.12/PMD7.28.0/Checkstyle14.3.0/GJF1.36.1は010同環境。実command=tools/qualityの下表pg10298/10300/10302/10304各Python工具、PYTHONPATHと全stage command/tool/source/version/hashはmanifestに保存。

@@ -1,0 +1,89 @@
+{
+  "actualExit": 0,
+  "bug": "BUG-1819",
+  "constantCount": 35,
+  "exactTokenRestorationBeforeFormatting": true,
+  "externalActions": 0,
+  "formalUpdated": false,
+  "newAccepted": 0,
+  "productTestsExecuted": 0,
+  "source": "2e1ee53459a9cca85a4b821c72901073903a78e3",
+  "sourceChanges": {
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/admin/UserCommandServiceTest.java": {
+      "beforeSha256": "0c03d4b1684798c5bbd3340c1ae57d424665ca07eed016f72b2605efd496541f",
+      "constantCount": 11,
+      "constants": {
+        "FIXTURE_ACTIVE_ADMINS_SQL": "\"select count(*) from schubert.app_users where role='ADMIN' and status='ACTIVE'\"",
+        "FIXTURE_ACTIVE_STATE": "\"ACTIVE\"",
+        "FIXTURE_COUNT_COLUMN": "\"count\"",
+        "FIXTURE_FAILED_COUNT_COLUMN": "\"failed_count\"",
+        "FIXTURE_INSERT_PREFIX": "\"insert into\"",
+        "FIXTURE_INSERT_USERS_PREFIX": "\"insert into schubert.app_users\"",
+        "FIXTURE_NEW_USERNAME": "\"new\"",
+        "FIXTURE_ROLE_COLUMN": "\"role\"",
+        "FIXTURE_STATUS_COLUMN": "\"status\"",
+        "FIXTURE_UPDATE_USERS_PREFIX": "\"update schubert.app_users\"",
+        "FIXTURE_VERSION_COLUMN": "\"version\""
+      },
+      "literalReferenceCount": 57,
+      "plannedSha256": "7db334425ec551af3ef928213b1e9a4fd7ca9cd118c52d159a62d3d65e8b09c6"
+    },
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/admin/UserMutationReplayServiceTest.java": {
+      "beforeSha256": "d01203f660b3f6d005ba3ef8525051a4703bba5742e178a797805d12da92328d",
+      "constantCount": 8,
+      "constants": {
+        "FIXTURE_CREATE_REQUEST": "\"UCRREQ01\"",
+        "FIXTURE_KEY_ID": "\"test\"",
+        "FIXTURE_LAYOUT_VERSION": "\"001\"",
+        "FIXTURE_REPLAY_CODE": "\"0200\"",
+        "FIXTURE_STATE_REQUEST": "\"USTREQ01\"",
+        "FIXTURE_STATE_RESPONSE": "\"USTRSP01\"",
+        "FIXTURE_SUCCESS_CODE": "\"0000\"",
+        "FIXTURE_UNLOCK_REQUEST": "\"ULKREQ01\""
+      },
+      "literalReferenceCount": 60,
+      "plannedSha256": "babbaccfce59f14d55879d1f0a23ece7b668524833dc89543b1f4aa79632408b"
+    },
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/question/QuestionMutationApplicationServiceTest.java": {
+      "beforeSha256": "9412480ec5a1a850a818d5a4c8e5729ac6a82846863d9c7560668633a94b8757",
+      "constantCount": 6,
+      "constants": {
+        "FIXTURE_CAPACITY_CASE": "\"capacity\"",
+        "FIXTURE_COMPLETE_CLOSE_FAULT": "\"complete-close\"",
+        "FIXTURE_KEY_FAULT": "\"key\"",
+        "FIXTURE_MISSING_CASE": "\"missing\"",
+        "FIXTURE_NOOP_CASE": "\"noop\"",
+        "FIXTURE_STATE_COLUMN": "\"state\""
+      },
+      "literalReferenceCount": 27,
+      "plannedSha256": "56d50c50bc65d5bfaab6d8dc79582d1460562c5d7cb55ce7ce44ff6e90390997"
+    },
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/question/QuestionMutationReplayServiceTest.java": {
+      "beforeSha256": "af29b73398b909d5922f475bf4d516375433c7fc56806a5c344506a5ae1d5fdd",
+      "constantCount": 5,
+      "constants": {
+        "FIXTURE_CANCEL_RESPONSE": "\"NTCRSP01\"",
+        "FIXTURE_DELETE_RESPONSE": "\"QDLRSP01\"",
+        "FIXTURE_KEY_ID": "\"test\"",
+        "FIXTURE_LAYOUT_FIELD": "\"layout\"",
+        "FIXTURE_LAYOUT_VERSION": "\"001\""
+      },
+      "literalReferenceCount": 24,
+      "plannedSha256": "6f1938b5fda85eb0c6fa4ab453d9cd77f96678bfcb6c15b79234a1148a44f4e7"
+    },
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/SessionOperationTokenLifecycleTest.java": {
+      "beforeSha256": "d262d7c4ec1b5fbc21cdef7784aad82a169192423c7da2d7ce8571812c7845f7",
+      "constantCount": 5,
+      "constants": {
+        "FIXTURE_CANCEL_REQUEST": "\"NTCREQ01\"",
+        "FIXTURE_CONNECTION_CLOSE": "\"connection.close\"",
+        "FIXTURE_ROLE_REQUEST": "\"URLREQ01\"",
+        "FIXTURE_STATE_REQUEST": "\"USTREQ01\"",
+        "FIXTURE_SUBMIT_REQUEST": "\"QSBREQ01\""
+      },
+      "literalReferenceCount": 55,
+      "plannedSha256": "5d6babd1ecb7229fb7ee00437bcedb773f69368844580deca657887c1a1bcf30"
+    }
+  },
+  "ykt": "YKT-1570"
+}

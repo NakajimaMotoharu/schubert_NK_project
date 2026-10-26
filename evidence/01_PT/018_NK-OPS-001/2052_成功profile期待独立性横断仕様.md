@@ -1,5 +1,7 @@
 # 成功profile期待・fixture分類の独立化
 
+2026-10-26追記訂正（BUG1821/2055/PG10349）：下記416はassert prefix字句数（import/helper名等を含む）で、実assertion呼出し数は未計測null。保持条件は元全token/全assertionの保持であり、件数を416と仮定しない。原値/元開始見積りは履歴保持、製品PT/正式受入へ変更なし。
+
 2026-10-26、BUG1817/YKT1568、G03.01。関連UI232 §§5/7、各既存programのRD/UI/SS・原PT仕様/Test IDを保持する。本仕様は横断的なTest oracle是正の補足で、元program別PTの期待結果や未実施状態を上書きしない。
 
 |source|原canonical owner/cost|対象呼出し数|対象|

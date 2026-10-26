@@ -1,5 +1,7 @@
 # 質問照会expected独立性・限定結果
 
+2026-10-26追記訂正（BUG1821/2055/PG10349）：下記の108・75/33はassert prefix字句数で、import/helper名等を含みassertion呼出し数ではない。実呼出し数は未計測null。元全token/全assertion保持の根拠、元PT未実行/HOLDと正式件数は不変更。原記述/manifest値は履歴として保持し、本訂正を優先する。
+
 2026-10-26 14:11 JST、source21228608b9defca3eb6fac7e0485f28a56925246（Production Main21d7c304不変更）。009仕様/PG-D678/BUG1811・1812・1813/YKT1562～64。実行環境Linux7.0.0-38-generic amd64、JDK25.0.4+7/Maven3.9.12/PMD7.28.0/Checkstyle14.3.0/GJF1.36.1、詳細command・各stage終了・source/tool/dependency hashは下記manifest。
 
 公開manifestは `evidence/01_PT/018_NK-OPS-001/evidence/provisional/` 下。下表のpathはその相対名。

@@ -1,0 +1,236 @@
+[
+  {
+    "disposition": "NOT_APPLICABLE_TO_THIS_EXACT_TEST_CONTEXT",
+    "exactSourceLine": "try (var pool = Executors.newFixedThreadPool(10)) {",
+    "line": 785,
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/admin/UserCommandServiceTest.java",
+    "reason": "Standalone JUnit concurrency fixture, not Production JavaEE application thread creation; no runtime/liveness certification.",
+    "rule": "DoNotUseThreads",
+    "sourceSha256": "c61bd22c5b8cf5c778f3834ea6099b5daa8b1e4592874345d55008b309202486"
+  },
+  {
+    "disposition": "NOT_APPLICABLE_TO_THIS_EXACT_TEST_CONTEXT",
+    "exactSourceLine": "pool.submit(",
+    "line": 790,
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/admin/UserCommandServiceTest.java",
+    "reason": "Standalone JUnit concurrency fixture, not Production JavaEE application thread creation; no runtime/liveness certification.",
+    "rule": "DoNotUseThreads",
+    "sourceSha256": "c61bd22c5b8cf5c778f3834ea6099b5daa8b1e4592874345d55008b309202486"
+  },
+  {
+    "disposition": "NOT_APPLICABLE_TO_THIS_EXACT_TEST_CONTEXT",
+    "exactSourceLine": "try (var pool = Executors.newFixedThreadPool(2)) {",
+    "line": 816,
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/admin/UserCommandServiceTest.java",
+    "reason": "Standalone JUnit concurrency fixture, not Production JavaEE application thread creation; no runtime/liveness certification.",
+    "rule": "DoNotUseThreads",
+    "sourceSha256": "c61bd22c5b8cf5c778f3834ea6099b5daa8b1e4592874345d55008b309202486"
+  },
+  {
+    "disposition": "NOT_APPLICABLE_TO_THIS_EXACT_TEST_CONTEXT",
+    "exactSourceLine": "pool.submit(",
+    "line": 821,
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/admin/UserCommandServiceTest.java",
+    "reason": "Standalone JUnit concurrency fixture, not Production JavaEE application thread creation; no runtime/liveness certification.",
+    "rule": "DoNotUseThreads",
+    "sourceSha256": "c61bd22c5b8cf5c778f3834ea6099b5daa8b1e4592874345d55008b309202486"
+  },
+  {
+    "disposition": "NOT_APPLICABLE_TO_THIS_EXACT_TEST_CONTEXT",
+    "exactSourceLine": "try (var pool = Executors.newFixedThreadPool(10)) {",
+    "line": 857,
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/admin/UserCommandServiceTest.java",
+    "reason": "Standalone JUnit concurrency fixture, not Production JavaEE application thread creation; no runtime/liveness certification.",
+    "rule": "DoNotUseThreads",
+    "sourceSha256": "c61bd22c5b8cf5c778f3834ea6099b5daa8b1e4592874345d55008b309202486"
+  },
+  {
+    "disposition": "NOT_APPLICABLE_TO_THIS_EXACT_TEST_CONTEXT",
+    "exactSourceLine": "pool.submit(",
+    "line": 862,
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/admin/UserCommandServiceTest.java",
+    "reason": "Standalone JUnit concurrency fixture, not Production JavaEE application thread creation; no runtime/liveness certification.",
+    "rule": "DoNotUseThreads",
+    "sourceSha256": "c61bd22c5b8cf5c778f3834ea6099b5daa8b1e4592874345d55008b309202486"
+  },
+  {
+    "disposition": "NOT_APPLICABLE_TO_THIS_EXACT_TEST_CONTEXT",
+    "exactSourceLine": "for (var current : List.of(original, retry)) {",
+    "line": 127,
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/admin/UserMutationReplayServiceTest.java",
+    "reason": "Borrowed aliases of original/retry both lexically owned by enclosing try-with; do not close the aliases independently.",
+    "rule": "CloseResource",
+    "sourceSha256": "383df7e330b7f3fec6113bcec5321e6af989afafe86ed3e72d32da788cdaf934"
+  },
+  {
+    "disposition": "NOT_APPLICABLE_TO_THIS_EXACT_TEST_CONTEXT",
+    "exactSourceLine": "current == original ? CONTEXT : NEW_CONTEXT,",
+    "line": 135,
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/admin/UserMutationReplayServiceTest.java",
+    "reason": "Intentional Test input identity selects original vs retry context, not value equality.",
+    "rule": "CompareObjectsWithEquals",
+    "sourceSha256": "383df7e330b7f3fec6113bcec5321e6af989afafe86ed3e72d32da788cdaf934"
+  },
+  {
+    "disposition": "NOT_APPLICABLE_TO_THIS_EXACT_TEST_CONTEXT",
+    "exactSourceLine": "var workers = Executors.newFixedThreadPool(10)) {",
+    "line": 511,
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/admin/UserMutationReplayServiceTest.java",
+    "reason": "Standalone JUnit concurrency fixture, not Production JavaEE application thread creation; no runtime/liveness certification.",
+    "rule": "DoNotUseThreads",
+    "sourceSha256": "383df7e330b7f3fec6113bcec5321e6af989afafe86ed3e72d32da788cdaf934"
+  },
+  {
+    "disposition": "NOT_APPLICABLE_TO_THIS_EXACT_TEST_CONTEXT",
+    "exactSourceLine": "workers.submit(",
+    "line": 517,
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/admin/UserMutationReplayServiceTest.java",
+    "reason": "Standalone JUnit concurrency fixture, not Production JavaEE application thread creation; no runtime/liveness certification.",
+    "rule": "DoNotUseThreads",
+    "sourceSha256": "383df7e330b7f3fec6113bcec5321e6af989afafe86ed3e72d32da788cdaf934"
+  },
+  {
+    "disposition": "NOT_APPLICABLE_TO_THIS_EXACT_TEST_CONTEXT",
+    "exactSourceLine": "var pool = Executors.newFixedThreadPool(2)) {",
+    "line": 381,
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/question/QuestionMutationApplicationServiceTest.java",
+    "reason": "Standalone JUnit concurrency fixture, not Production JavaEE application thread creation; no runtime/liveness certification.",
+    "rule": "DoNotUseThreads",
+    "sourceSha256": "8008628fbad391cb0f10516086d59a19cdc8953c9cb9dc84a659170abd82f078"
+  },
+  {
+    "disposition": "NOT_APPLICABLE_TO_THIS_EXACT_TEST_CONTEXT",
+    "exactSourceLine": "pool.submit(",
+    "line": 385,
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/question/QuestionMutationApplicationServiceTest.java",
+    "reason": "Standalone JUnit concurrency fixture, not Production JavaEE application thread creation; no runtime/liveness certification.",
+    "rule": "DoNotUseThreads",
+    "sourceSha256": "8008628fbad391cb0f10516086d59a19cdc8953c9cb9dc84a659170abd82f078"
+  },
+  {
+    "disposition": "NOT_APPLICABLE_TO_THIS_EXACT_TEST_CONTEXT",
+    "exactSourceLine": "pool.submit(",
+    "line": 391,
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/question/QuestionMutationApplicationServiceTest.java",
+    "reason": "Standalone JUnit concurrency fixture, not Production JavaEE application thread creation; no runtime/liveness certification.",
+    "rule": "DoNotUseThreads",
+    "sourceSha256": "8008628fbad391cb0f10516086d59a19cdc8953c9cb9dc84a659170abd82f078"
+  },
+  {
+    "disposition": "NOT_APPLICABLE_TO_THIS_EXACT_TEST_CONTEXT",
+    "exactSourceLine": "args[i] = null;",
+    "line": 445,
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/question/QuestionMutationApplicationServiceTest.java",
+    "reason": "Deliberate constructor/null-clock negative Test fixture, not Production nullable state introduced by this change.",
+    "rule": "NullAssignment",
+    "sourceSha256": "8008628fbad391cb0f10516086d59a19cdc8953c9cb9dc84a659170abd82f078"
+  },
+  {
+    "disposition": "NOT_APPLICABLE_TO_THIS_EXACT_TEST_CONTEXT",
+    "exactSourceLine": "DataSource.class.getClassLoader(),",
+    "line": 515,
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/question/QuestionMutationApplicationServiceTest.java",
+    "reason": "Standalone Test exact interface Proxy loader, not JavaEE container loading.",
+    "rule": "UseProperClassLoader",
+    "sourceSha256": "8008628fbad391cb0f10516086d59a19cdc8953c9cb9dc84a659170abd82f078"
+  },
+  {
+    "disposition": "NOT_APPLICABLE_TO_THIS_EXACT_TEST_CONTEXT",
+    "exactSourceLine": "DataSource.class.getClassLoader(),",
+    "line": 567,
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/question/QuestionMutationApplicationServiceTest.java",
+    "reason": "Standalone Test exact interface Proxy loader, not JavaEE container loading.",
+    "rule": "UseProperClassLoader",
+    "sourceSha256": "8008628fbad391cb0f10516086d59a19cdc8953c9cb9dc84a659170abd82f078"
+  },
+  {
+    "disposition": "NOT_APPLICABLE_TO_THIS_EXACT_TEST_CONTEXT",
+    "exactSourceLine": "args[i] = null;",
+    "line": 461,
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/question/QuestionMutationReplayServiceTest.java",
+    "reason": "Deliberate constructor/null-clock negative Test fixture, not Production nullable state introduced by this change.",
+    "rule": "NullAssignment",
+    "sourceSha256": "a4dc298cc9d0706cda97868a465833720554f0183461d86fda8e4adeae170df0"
+  },
+  {
+    "disposition": "NOT_APPLICABLE_TO_THIS_EXACT_TEST_CONTEXT",
+    "exactSourceLine": "args[i] = null;",
+    "line": 486,
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/question/QuestionMutationReplayServiceTest.java",
+    "reason": "Deliberate constructor/null-clock negative Test fixture, not Production nullable state introduced by this change.",
+    "rule": "NullAssignment",
+    "sourceSha256": "a4dc298cc9d0706cda97868a465833720554f0183461d86fda8e4adeae170df0"
+  },
+  {
+    "disposition": "NOT_APPLICABLE_TO_THIS_EXACT_TEST_CONTEXT",
+    "exactSourceLine": "args[i] = null;",
+    "line": 500,
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/question/QuestionMutationReplayServiceTest.java",
+    "reason": "Deliberate constructor/null-clock negative Test fixture, not Production nullable state introduced by this change.",
+    "rule": "NullAssignment",
+    "sourceSha256": "a4dc298cc9d0706cda97868a465833720554f0183461d86fda8e4adeae170df0"
+  },
+  {
+    "disposition": "NOT_APPLICABLE_TO_THIS_EXACT_TEST_CONTEXT",
+    "exactSourceLine": "try (var executor = Executors.newFixedThreadPool(8)) {",
+    "line": 232,
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/SessionOperationTokenLifecycleTest.java",
+    "reason": "Standalone JUnit concurrency fixture, not Production JavaEE application thread creation; no runtime/liveness certification.",
+    "rule": "DoNotUseThreads",
+    "sourceSha256": "cfe40ad77f9b1d9cc24d33f85eef07d4df0fc02f1af0b77b73670586d05503f8"
+  },
+  {
+    "disposition": "NOT_APPLICABLE_TO_THIS_EXACT_TEST_CONTEXT",
+    "exactSourceLine": "for (var result : executor.invokeAll(jobs, 30, TimeUnit.SECONDS)) {",
+    "line": 246,
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/SessionOperationTokenLifecycleTest.java",
+    "reason": "Standalone JUnit concurrency fixture, not Production JavaEE application thread creation; no runtime/liveness certification.",
+    "rule": "DoNotUseThreads",
+    "sourceSha256": "cfe40ad77f9b1d9cc24d33f85eef07d4df0fc02f1af0b77b73670586d05503f8"
+  },
+  {
+    "disposition": "NOT_APPLICABLE_TO_THIS_EXACT_TEST_CONTEXT",
+    "exactSourceLine": "var pool = Executors.newFixedThreadPool(10)) {",
+    "line": 445,
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/SessionOperationTokenLifecycleTest.java",
+    "reason": "Standalone JUnit concurrency fixture, not Production JavaEE application thread creation; no runtime/liveness certification.",
+    "rule": "DoNotUseThreads",
+    "sourceSha256": "cfe40ad77f9b1d9cc24d33f85eef07d4df0fc02f1af0b77b73670586d05503f8"
+  },
+  {
+    "disposition": "NOT_APPLICABLE_TO_THIS_EXACT_TEST_CONTEXT",
+    "exactSourceLine": "for (var future : pool.invokeAll(jobs))",
+    "line": 461,
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/SessionOperationTokenLifecycleTest.java",
+    "reason": "Standalone JUnit concurrency fixture, not Production JavaEE application thread creation; no runtime/liveness certification.",
+    "rule": "DoNotUseThreads",
+    "sourceSha256": "cfe40ad77f9b1d9cc24d33f85eef07d4df0fc02f1af0b77b73670586d05503f8"
+  },
+  {
+    "disposition": "NOT_APPLICABLE_TO_THIS_EXACT_TEST_CONTEXT",
+    "exactSourceLine": "var pool = Executors.newFixedThreadPool(10)) {",
+    "line": 475,
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/SessionOperationTokenLifecycleTest.java",
+    "reason": "Standalone JUnit concurrency fixture, not Production JavaEE application thread creation; no runtime/liveness certification.",
+    "rule": "DoNotUseThreads",
+    "sourceSha256": "cfe40ad77f9b1d9cc24d33f85eef07d4df0fc02f1af0b77b73670586d05503f8"
+  },
+  {
+    "disposition": "NOT_APPLICABLE_TO_THIS_EXACT_TEST_CONTEXT",
+    "exactSourceLine": "for (var future : pool.invokeAll(jobs)) {",
+    "line": 493,
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/SessionOperationTokenLifecycleTest.java",
+    "reason": "Standalone JUnit concurrency fixture, not Production JavaEE application thread creation; no runtime/liveness certification.",
+    "rule": "DoNotUseThreads",
+    "sourceSha256": "cfe40ad77f9b1d9cc24d33f85eef07d4df0fc02f1af0b77b73670586d05503f8"
+  },
+  {
+    "disposition": "NOT_APPLICABLE_TO_THIS_EXACT_TEST_CONTEXT",
+    "exactSourceLine": "f.clock.value = null;",
+    "line": 635,
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/SessionOperationTokenLifecycleTest.java",
+    "reason": "Deliberate constructor/null-clock negative Test fixture, not Production nullable state introduced by this change.",
+    "rule": "NullAssignment",
+    "sourceSha256": "cfe40ad77f9b1d9cc24d33f85eef07d4df0fc02f1af0b77b73670586d05503f8"
+  }
+]

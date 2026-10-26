@@ -1,5 +1,7 @@
 # 成功profile期待・fixture独立化の限定結果
 
+2026-10-26追記訂正（BUG1821/2055/PG10349）：下記416はassert prefix字句数で、実assertion呼出し数は未計測null。元全token/全assertion保持は有効、元PT未実行/HOLD・正式件数不変更。原tool/manifestは不変で、本訂正を優先する。
+
 2026-10-26 15:04 JST、source2e1ee53459a9cca85a4b821c72901073903a78e3、Main21d7c304不変。2052仕様/BUG1817～1818・YKT1568～1569、群2359→2360/G03.01・開始1/3/8 cap10。元五担当/費用保持、製品PTは実行しない。
 
 公開pathは `evidence/01_PT/018_NK-OPS-001/evidence/provisional/` 下。Linux7.0.0-38-generic amd64/JDK25.0.4/Maven3.9.12/PMD7.28.0/Checkstyle14.3.0/GJF1.36.1、詳細version/command/tool/source/stage終了hashは各manifest。
