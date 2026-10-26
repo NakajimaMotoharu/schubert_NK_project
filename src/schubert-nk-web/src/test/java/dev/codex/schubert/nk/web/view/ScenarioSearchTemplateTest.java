@@ -318,7 +318,8 @@ class ScenarioSearchTemplateTest {
           assertEquals(range, nav.children().get(1).text());
           assertEquals("前の100件", nav.children().first().text());
           assertEquals("次の100件", nav.children().last().text());
-          if (p > 1) assertEquals(prefix + (p - 1), nav.children().first().attr(HREF_ATTRIBUTE));
+          if (p > FIRST_PAGE)
+            assertEquals(prefix + (p - 1), nav.children().first().attr(HREF_ATTRIBUTE));
           else assertEquals("span", nav.children().first().tagName());
           if ((p == FIRST_PAGE && total > PAGE_SIZE_BOUNDARY) || p == MIDDLE_PAGE)
             assertEquals(prefix + (p + 1), nav.children().last().attr(HREF_ATTRIBUTE));
