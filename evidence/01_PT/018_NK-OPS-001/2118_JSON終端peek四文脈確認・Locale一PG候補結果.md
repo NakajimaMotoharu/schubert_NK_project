@@ -1,0 +1,15 @@
+# 2118 JSON終端peek四文脈確認・Locale一PG候補結果
+
+2026-10-27 02:33 JST、2117/event2463、.5/2/5pp cap10、source682/Main21d変更0。PG10726-json-peek-locale-context-v1 manifest `412995d03337a68d8e8b2ab5f1462bfb429e4bb362d2e11c73444b8438bb6726` actual0、PG10728独立 `70e22adc7e81148a55b503af4a233ba475a07bf710c7731ae5e344635ff31628` actual0。
+
+原10690 indexのPMD00135/03056/06189/07451（RequestLogDetails.normalize/BrokerJournalEvidence.fields/ReleaseInventory.parse/SessionAttributeCodec.decode）四UnusedReturnValueと、PMD06882（SemanticFieldValueTest line129）一Localeを実source/path/line/SHA/正常10714 inputへ結合した。各Mainで実Gson JsonReaderを一つのSTRICT指定で生成し、root endObject後のpeekを省略せず呼ぶ。戻値利用ではなく、末尾データの検査・IOException発生が目的である。
+
+固定Gson2.14.0 jar SHA `2cbd119bf1961c28788310963dc80ba65f58cdeec1dd139c8bdb1240faa2c36f` を現dependencyと実bytesで確認し、JsonReader.class hashを保存。既PG-D416/417の同JAR bytecode：NONEMPTY_DOCUMENTでEOFならEND_DOCUMENT、非whitespace追加tokenはcheckLenientに進みSTRICTでは拒否、という契約に対応する。既Pg2498の17library vector/sourceと判断抜粋は歴史根拠として参照するだけで再実行・Production PT/新source成功へ加算0。途中の読取専用javap確認もlibrary classfile読取でありJsonReader/製品実行ではない。
+
+独立postは四Mainの所定行、生成→一STRICT→root完了→peekの順序、pinned dependency/既判断抜粋/SHA、対応四Testにある独立trailing object/bool/comment fixtureをsource限定照合。LENIENT/別jar/root未完/peek省略の四metadata反例を確認した。四指摘は具体文脈でNOT_APPLICABLE_PURE_UNUSED_RESULT_RULE_TO_REQUIRED_STRICT_VALIDATION_EFFECTと分類し、raw XML/指摘を削除・抑制せず保持する。戻値を無意味に代入する修正や冗長な到達不能false分岐の追加は行わない。全ケースの動的資格・全F03/451合格は未認定。
+
+Locale一は固定lowercase UUIDをtoUpperCase()で不正入力にするTest-only規約事項。hex文字にLocale起因の失敗を観測した事実はなく、Production挙動の不具合と誇張しない。明示uppercase UUID golden inputへ置き換えるPGを別群で予定し、変更した純粋Protocol Testの実PT/独立期待値・安全性を確認する。元Graph/VM/DB/鍵等のHOLDは別扱いで解除しない。
+
+10726 unused jsonは既BUG1854/YKT1605の追加scopeへ修正前追補、前置1で本体未発行/OUT0を保持。元工具SHA7b333803f08c9b414ac982bbcb8aab9fe22d616fb675717aac71f65d8b83d041、不要import削除・前置0後に初回本体と独立postを実施、製品障害へ重複換算0。command/時刻/環境/source/hash/exitは両manifest・context/library-reference/Test-source-referenceに保存。
+
+共有used15→15/reset1793599188の丸め0≠専有費0、N/T/専有費null、usage49750fcbbaf995ba474e09acd6559b791faded5e052037e535fd525d20fe3271。製品/fixture/library契約実行0・新PT0/coverage null、正式1964PT/53scope・17/190・工数null・QA051final・全安全HOLD/未読保証不明1847不変更。次公開保存push/限定状態追補→Locale一の先行BUG/YKTと別PG/PT群、通常小区切りで停止しない。
