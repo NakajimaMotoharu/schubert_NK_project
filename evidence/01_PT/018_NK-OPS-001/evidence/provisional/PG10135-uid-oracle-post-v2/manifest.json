@@ -1,0 +1,268 @@
+{
+  "actualExit": 0,
+  "correctedExistingTestId": "PT-DB-INBOX-125",
+  "coverageScope": "COMPLETE_LINUX_INODE_SECURITY_SOURCE_FOUR_PHYSICAL_CLASSES_LIMITED_PT125_ONLY",
+  "coverageUnion": false,
+  "effortPercent": null,
+  "execSha256": "2da57f55c02f06fcae7244f04b8e4672fa06685b782cebeb0871ca79dcac0d12",
+  "expectedSuites": 1,
+  "expectedTests": 1,
+  "forbiddenProductProbeHits": 0,
+  "formalUpdated": false,
+  "helperSha256": "d6f2b33eda8c27136c53d7dc4afabc62f17a256bad1c938bc23d17d6ca4c6586",
+  "historicalSuccessTransferred": false,
+  "hostManifestSha256": "433218f7037381741438e2c68b845c5758e2e5bb539a003d84542031907f7880",
+  "invocation": {
+    "actualPythonCommand": [
+      "python3",
+      "-B",
+      "tools/quality/pg10135_uid_oracle_post_v2.py"
+    ],
+    "arbitraryArgumentsRecorded": false,
+    "entrypointPath": "tools/quality/pg10135_uid_oracle_post_v2.py",
+    "entrypointSha256": "2bbb1e4416431cb1cf3db36b6cbc3d0bb1faa059c694fded35db51b9376eea83",
+    "helperPath": "tools/quality/host_tool_invocation.py",
+    "helperSha256": "85d616a3db4ff47f4c95ae2e0dd57954bc2b09f28b8f2a685b986e5621545c46",
+    "libraryPath": "tools/quality/pg10135_uid_oracle_post_v2.py",
+    "librarySha256": "2bbb1e4416431cb1cf3db36b6cbc3d0bb1faa059c694fded35db51b9376eea83",
+    "loadedProjectPythonSources": {
+      "tools/quality/class_counter_applicability.py": "fd4b7f89931943dd6db8244fdc50de464de2b9d8c568dc3a2ee36887e89c7366",
+      "tools/quality/coverage_session_schema.py": "adab5be5a8d549ed307d34a156acf9ece45dd59364321f8a6e1900899a2f9c6e",
+      "tools/quality/g07_host_class_provenance_inputs.py": "a676cb3e4145177c3c243722d737592ce7d44c3f29cfe4f670662ef7651f046b",
+      "tools/quality/host_tool_invocation.py": "85d616a3db4ff47f4c95ae2e0dd57954bc2b09f28b8f2a685b986e5621545c46",
+      "tools/quality/pg10135_uid_oracle_post_v2.py": "2bbb1e4416431cb1cf3db36b6cbc3d0bb1faa059c694fded35db51b9376eea83",
+      "tools/quality/pg9346_direct_companion_jdk_post.py": "40814dffc4f33b120a67f06bfff62080921bc479ef575457dc81e992488b65bb"
+    },
+    "provenance": "OBSERVED_SYS_ARGV_AND_ORIG_ARGV_NOT_RECONSTRUCTED"
+  },
+  "libraryHashes": {
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.core/0.8.15/org.jacoco.core-0.8.15.jar": "ade1e0fdb4cd80d8537b57c6edb70a1360c47fdc518c20c65314517479bc4d0d",
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-commons/9.10.1/asm-commons-9.10.1.jar": "6d0abefb7cbf972ea16edb37ec14835372505063a45f976ab7ea889ed9497895",
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-tree/9.10.1/asm-tree-9.10.1.jar": "3dfb0d5b6a106cd40b5b250e39935fbf2f927f4477546a5369a3ac609cf0506b",
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm/9.10.1/asm-9.10.1.jar": "ed825d10ab1399c8c0cb669e688cf0c8c82629b4c8399b58352b68e92ca10fcb"
+  },
+  "nativeCohortQualified": false,
+  "newAccepted": 0,
+  "newTestIds": 0,
+  "onlyOneTestAndNoOtherNativeMethodsExecuted": true,
+  "ownedTemporaryAfterEmpty": true,
+  "physicalMainClasses": {
+    "dev/codex/schubert/nk/storage/LinuxInodeSecurity$GetXattrCall.class": "c885bd2892511ffc4e136dea8599ec4678792527a65902d5428ae61bfb82bd16",
+    "dev/codex/schubert/nk/storage/LinuxInodeSecurity$StatvfsCall.class": "bf2a46faefa4e85c09424c81692200c4414bbd23ba1bb30bca9062bdabf89be5",
+    "dev/codex/schubert/nk/storage/LinuxInodeSecurity$UidCall.class": "3d845454e22f0c492cf734c8e6962bd00923aa6035c59987d1a49f2b80b7607b",
+    "dev/codex/schubert/nk/storage/LinuxInodeSecurity.class": "e9d21aac349408c18c6eb4152b7324f51bf89540a5e1931d906d376076a7ef94"
+  },
+  "session": {
+    "endMillis": 1792977199291,
+    "sessionId": "PG10132-UID-ORACLE",
+    "startMillis": 1792977198663
+  },
+  "sessionSchemaVectors": 7,
+  "source": "d17f122d2026b804be626bf7a3b76912923bd240",
+  "stages": [
+    {
+      "actualExit": 0,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+        "--release",
+        "25",
+        "-proc:none",
+        "-Xlint:all",
+        "-Werror",
+        "-cp",
+        "/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.core/0.8.15/org.jacoco.core-0.8.15.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm/9.10.1/asm-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-tree/9.10.1/asm-tree-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-commons/9.10.1/asm-commons-9.10.1.jar",
+        "-d",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg10135-uid-oracle-post-v2/reader",
+        "/home/mini/codex/project1/work/pgpt-foundation/tools/quality/architecture/UidOracleCoverageMeasureV2.java"
+      ],
+      "endUTC": "2026-10-26T01:22:52.158699+00:00",
+      "startUTC": "2026-10-26T01:22:50.990574+00:00",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "timedOut": false
+    },
+    {
+      "actualExit": 0,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-cp",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg10135-uid-oracle-post-v2/reader:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.core/0.8.15/org.jacoco.core-0.8.15.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm/9.10.1/asm-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-tree/9.10.1/asm-tree-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-commons/9.10.1/asm-commons-9.10.1.jar",
+        "UidOracleCoverageMeasureV2",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg10132-uid-oracle-host-v1/jacoco.exec",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg10135-uid-oracle-post-v2/complete-codec",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg10128-uid-oracle-six-compile-v1/snapshot/src/schubert-nk-storage/target/test-classes/dev/codex/schubert/nk/storage/LinuxInodeSecurityTest.class"
+      ],
+      "endUTC": "2026-10-26T01:22:52.323573+00:00",
+      "startUTC": "2026-10-26T01:22:52.159039+00:00",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSha256": "3d7fa4c4c830faaf0f430ee81f4e7d6a705d0720627180eda3db95941cfdf420",
+      "timedOut": false
+    }
+  ],
+  "suites": 1,
+  "summaryTests": 1,
+  "targetUnitsFour100": false,
+  "testMethodExecutionCounters": {
+    "aclReturnAndErrnoBoundaries": {
+      "coveredInstructions": 0,
+      "coveredMethods": 0
+    },
+    "actualAclAndUid": {
+      "coveredInstructions": 0,
+      "coveredMethods": 0
+    },
+    "canonicalCapabilityAndBounds": {
+      "coveredInstructions": 0,
+      "coveredMethods": 0
+    },
+    "concurrentReadsStayIndependent": {
+      "coveredInstructions": 0,
+      "coveredMethods": 0
+    },
+    "filesystemFlagsAndFailures": {
+      "coveredInstructions": 0,
+      "coveredMethods": 0
+    },
+    "heldElfCapabilityAbsenceRequiresExactEnodataAndNativeHeldFile": {
+      "coveredInstructions": 0,
+      "coveredMethods": 0
+    },
+    "heldInodeSurvivesReplacement": {
+      "coveredInstructions": 0,
+      "coveredMethods": 0
+    },
+    "interfacesAndRedaction": {
+      "coveredInstructions": 0,
+      "coveredMethods": 0
+    },
+    "platformAndSymbolAdmission": {
+      "coveredInstructions": 110,
+      "coveredMethods": 1
+    }
+  },
+  "tests": 1,
+  "units": {
+    "dev/codex/schubert/nk/storage/LinuxInodeSecurity": {
+      "classCrc64": "9c747bb4a32c8770",
+      "counterApplicability": "MISSED_COUNTERS",
+      "counters": {
+        "BRANCH": {
+          "covered": 6,
+          "missed": 26
+        },
+        "CLASS": {
+          "covered": 1,
+          "missed": 0
+        },
+        "LINE": {
+          "covered": 35,
+          "missed": 39
+        },
+        "METHOD": {
+          "covered": 7,
+          "missed": 6
+        }
+      },
+      "four100": false
+    },
+    "dev/codex/schubert/nk/storage/LinuxInodeSecurity$GetXattrCall": {
+      "classCrc64": "7ed3ac9f8fbf364c",
+      "counterApplicability": "NO_COUNTERS_NOT_A_MEASURED_PASS",
+      "counters": {
+        "BRANCH": {
+          "covered": 0,
+          "missed": 0
+        },
+        "CLASS": {
+          "covered": 0,
+          "missed": 0
+        },
+        "LINE": {
+          "covered": 0,
+          "missed": 0
+        },
+        "METHOD": {
+          "covered": 0,
+          "missed": 0
+        }
+      },
+      "four100": false
+    },
+    "dev/codex/schubert/nk/storage/LinuxInodeSecurity$StatvfsCall": {
+      "classCrc64": "d026851bfa8e3738",
+      "counterApplicability": "NO_COUNTERS_NOT_A_MEASURED_PASS",
+      "counters": {
+        "BRANCH": {
+          "covered": 0,
+          "missed": 0
+        },
+        "CLASS": {
+          "covered": 0,
+          "missed": 0
+        },
+        "LINE": {
+          "covered": 0,
+          "missed": 0
+        },
+        "METHOD": {
+          "covered": 0,
+          "missed": 0
+        }
+      },
+      "four100": false
+    },
+    "dev/codex/schubert/nk/storage/LinuxInodeSecurity$UidCall": {
+      "classCrc64": "f3c537524a966539",
+      "counterApplicability": "NO_COUNTERS_NOT_A_MEASURED_PASS",
+      "counters": {
+        "BRANCH": {
+          "covered": 0,
+          "missed": 0
+        },
+        "CLASS": {
+          "covered": 0,
+          "missed": 0
+        },
+        "LINE": {
+          "covered": 0,
+          "missed": 0
+        },
+        "METHOD": {
+          "covered": 0,
+          "missed": 0
+        }
+      },
+      "four100": false
+    }
+  },
+  "unselectedNativeMethods": {
+    "accessAcl": {
+      "coveredInstructions": 0,
+      "coveredMethods": 0
+    },
+    "capability": {
+      "coveredInstructions": 0,
+      "coveredMethods": 0
+    },
+    "failure": {
+      "coveredInstructions": 0,
+      "coveredMethods": 0
+    },
+    "readAcl": {
+      "coveredInstructions": 0,
+      "coveredMethods": 0
+    },
+    "readOnlyFilesystem": {
+      "coveredInstructions": 0,
+      "coveredMethods": 0
+    },
+    "requireNoFileCapabilities": {
+      "coveredInstructions": 0,
+      "coveredMethods": 0
+    }
+  },
+  "whole451Accepted": false,
+  "xmlHashes": {
+    "TEST-dev.codex.schubert.nk.storage.LinuxInodeSecurityTest.xml": "876165d9fc52d1fd12cff72c14124bbd0cb0c5414f853c0a50de7c15af4913ca"
+  }
+}
