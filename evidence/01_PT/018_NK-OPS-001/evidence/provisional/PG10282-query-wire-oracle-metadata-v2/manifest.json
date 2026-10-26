@@ -1,0 +1,251 @@
+{
+  "actualExit": 0,
+  "bug": "BUG-1811",
+  "classpath": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg10282-query-wire-oracle-metadata-v2/reader",
+  "coverageMeasured": false,
+  "effortPercent": null,
+  "externalActions": 0,
+  "formalUpdated": false,
+  "invocation": {
+    "actualPythonCommand": [
+      "python3",
+      "-B",
+      "tools/quality/pg10282_query_wire_oracle_metadata_v2.py"
+    ],
+    "arbitraryArgumentsRecorded": false,
+    "entrypointPath": "tools/quality/pg10282_query_wire_oracle_metadata_v2.py",
+    "entrypointSha256": "aa8c87532a9c9e49c057e599efa13407697abc86ad3b22c1ee84d80ad63b029b",
+    "helperPath": "tools/quality/host_tool_invocation.py",
+    "helperSha256": "85d616a3db4ff47f4c95ae2e0dd57954bc2b09f28b8f2a685b986e5621545c46",
+    "libraryPath": "tools/quality/pg10282_query_wire_oracle_metadata_v2.py",
+    "librarySha256": "aa8c87532a9c9e49c057e599efa13407697abc86ad3b22c1ee84d80ad63b029b",
+    "loadedProjectPythonSources": {
+      "tools/quality/g07_host_class_provenance_inputs.py": "a676cb3e4145177c3c243722d737592ce7d44c3f29cfe4f670662ef7651f046b",
+      "tools/quality/host_tool_invocation.py": "85d616a3db4ff47f4c95ae2e0dd57954bc2b09f28b8f2a685b986e5621545c46",
+      "tools/quality/pg10282_query_wire_oracle_metadata_v2.py": "aa8c87532a9c9e49c057e599efa13407697abc86ad3b22c1ee84d80ad63b029b",
+      "tools/quality/pg9346_direct_companion_jdk_post.py": "40814dffc4f33b120a67f06bfff62080921bc479ef575457dc81e992488b65bb"
+    },
+    "provenance": "OBSERVED_SYS_ARGV_AND_ORIG_ARGV_NOT_RECONSTRUCTED"
+  },
+  "metadataNegativeVectors": 5,
+  "metadataVectors": 24,
+  "mutationIsolationChecked": true,
+  "newAccepted": 0,
+  "originalProductTestsExecuted": 0,
+  "productionClassesAvailable": false,
+  "qualification": "DECLARED_TEST_HELPER_METADATA_NOT_PRODUCT_PT",
+  "source": null,
+  "sourceHashes": {
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/question/QuestionQueryWireOracle.java": "a6fc181fbcfafea42ad7d1e300c977ddee3bd88054781238573eb3cd915d9aa4",
+    "tools/quality/architecture/QuestionQueryWireOracleMetadata.java": "2cb7b80c8cd7e0a5fa350c18d23e79ab07b7e0cc78fb7dcd52c4d2bfd5b331f8"
+  },
+  "stages": [
+    {
+      "actualExit": 0,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+        "--release",
+        "25",
+        "-proc:none",
+        "-Xlint:all",
+        "-Werror",
+        "-d",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg10282-query-wire-oracle-metadata-v2/reader",
+        "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/question/QuestionQueryWireOracle.java",
+        "/home/mini/codex/project1/work/pgpt-foundation/tools/quality/architecture/QuestionQueryWireOracleMetadata.java"
+      ],
+      "endUTC": "2026-10-26T05:08:45.040334+00:00",
+      "startUTC": "2026-10-26T05:08:43.411605+00:00",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "timedOut": false
+    },
+    {
+      "actualExit": 0,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-cp",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg10282-query-wire-oracle-metadata-v2/reader",
+        "dev.codex.schubert.nk.api.application.question.QuestionQueryWireOracleMetadata",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg10282-query-wire-oracle-metadata-v2/vectors.tsv"
+      ],
+      "endUTC": "2026-10-26T05:08:45.207180+00:00",
+      "startUTC": "2026-10-26T05:08:45.041295+00:00",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSha256": "ed76f89760a78517b78a32736537bd93a4b6e787f9580dc5775a5a34b723ae58",
+      "timedOut": false
+    }
+  ],
+  "vectorSha256": "c78198fcf1509ccd90b5d1a09e87de8c20b2f2a6d867f2d2052e2db8bad81ad1",
+  "vectors": [
+    {
+      "code": "0000",
+      "count": 0,
+      "layout": "QSSREQ01",
+      "length": 304,
+      "sha256": "5c6ca988a87631b72e34ea5d08ce19e6c1c75021b51eefa68a48049888c71364"
+    },
+    {
+      "code": "0000",
+      "count": 1,
+      "layout": "QSSREQ01",
+      "length": 976,
+      "sha256": "f01be3cc3661f09bba151a79cb60a9f90a01591928e3c45ed9b32c2f82e926ea"
+    },
+    {
+      "code": "0200",
+      "count": 0,
+      "layout": "QSSREQ01",
+      "length": 304,
+      "sha256": "bfd05fa0941926b2344c2537e01b04188c2f0ae0d26f0c45eda9eac11a744b06"
+    },
+    {
+      "code": "0200",
+      "count": 1,
+      "layout": "QSSREQ01",
+      "length": 976,
+      "sha256": "47bb81964959de0aad00c26c93a5e233daaab359e879610ce85309b12bd39a83"
+    },
+    {
+      "code": "0104",
+      "count": 0,
+      "layout": "QSSREQ01",
+      "length": 304,
+      "sha256": "0b68f3dee26171f6f38b9e848808702f9de839f73d2c010dca1e5c6dfedf9a68"
+    },
+    {
+      "code": "0104",
+      "count": 1,
+      "layout": "QSSREQ01",
+      "length": 304,
+      "sha256": "0b68f3dee26171f6f38b9e848808702f9de839f73d2c010dca1e5c6dfedf9a68"
+    },
+    {
+      "code": "0000",
+      "count": 0,
+      "layout": "QSDREQ01",
+      "length": 8608,
+      "sha256": "f8fa64de392d4ec2303b0653cb7a2444fedc7123042d3197a62bd83558b2b35c"
+    },
+    {
+      "code": "0000",
+      "count": 1,
+      "layout": "QSDREQ01",
+      "length": 8608,
+      "sha256": "f8fa64de392d4ec2303b0653cb7a2444fedc7123042d3197a62bd83558b2b35c"
+    },
+    {
+      "code": "0200",
+      "count": 0,
+      "layout": "QSDREQ01",
+      "length": 8608,
+      "sha256": "4cb89ded747c7f3ac10a130a250ddfb3991863bfe0e03aa0cfa0d08992c0f49b"
+    },
+    {
+      "code": "0200",
+      "count": 1,
+      "layout": "QSDREQ01",
+      "length": 8608,
+      "sha256": "4cb89ded747c7f3ac10a130a250ddfb3991863bfe0e03aa0cfa0d08992c0f49b"
+    },
+    {
+      "code": "0104",
+      "count": 0,
+      "layout": "QSDREQ01",
+      "length": 8608,
+      "sha256": "b1adabfbee5fec197ac4888323a4025e8c1a5d41239a02261e1a87964077cbaf"
+    },
+    {
+      "code": "0104",
+      "count": 1,
+      "layout": "QSDREQ01",
+      "length": 8608,
+      "sha256": "b1adabfbee5fec197ac4888323a4025e8c1a5d41239a02261e1a87964077cbaf"
+    },
+    {
+      "code": "0000",
+      "count": 0,
+      "layout": "NTSREQ01",
+      "length": 304,
+      "sha256": "f2d126d552e65bcbdcd76b33986e2d9c48934f9aff47a2d47a101482bf6c4811"
+    },
+    {
+      "code": "0000",
+      "count": 1,
+      "layout": "NTSREQ01",
+      "length": 928,
+      "sha256": "45ab0f43296a15b28c266363c7515400d7bd4066c826b6c060c1ccef5f649cc0"
+    },
+    {
+      "code": "0200",
+      "count": 0,
+      "layout": "NTSREQ01",
+      "length": 304,
+      "sha256": "e7712642e8b54a292afd418d01f02fb0657d5f9a77b38349e9cefa92c6583c7c"
+    },
+    {
+      "code": "0200",
+      "count": 1,
+      "layout": "NTSREQ01",
+      "length": 928,
+      "sha256": "23c747e4b5e8f255873a95952a0f59de4c8a5a8b5aff6798b634a5f1d116f2f4"
+    },
+    {
+      "code": "0104",
+      "count": 0,
+      "layout": "NTSREQ01",
+      "length": 304,
+      "sha256": "96d2359ec23dcb359c76b206f81f69ae3722eab8be50757769261c2b2f73aba8"
+    },
+    {
+      "code": "0104",
+      "count": 1,
+      "layout": "NTSREQ01",
+      "length": 304,
+      "sha256": "96d2359ec23dcb359c76b206f81f69ae3722eab8be50757769261c2b2f73aba8"
+    },
+    {
+      "code": "0000",
+      "count": 0,
+      "layout": "NTDREQ01",
+      "length": 9152,
+      "sha256": "26da40e2bccd069e962e0c447f39b18081b2072631cb7e8928068ccb169cbbc1"
+    },
+    {
+      "code": "0000",
+      "count": 1,
+      "layout": "NTDREQ01",
+      "length": 9152,
+      "sha256": "26da40e2bccd069e962e0c447f39b18081b2072631cb7e8928068ccb169cbbc1"
+    },
+    {
+      "code": "0200",
+      "count": 0,
+      "layout": "NTDREQ01",
+      "length": 9152,
+      "sha256": "28974682e96120f9faf511a4c82351e409fa1b0c9b094feda6fb5adc844e05b0"
+    },
+    {
+      "code": "0200",
+      "count": 1,
+      "layout": "NTDREQ01",
+      "length": 9152,
+      "sha256": "28974682e96120f9faf511a4c82351e409fa1b0c9b094feda6fb5adc844e05b0"
+    },
+    {
+      "code": "0104",
+      "count": 0,
+      "layout": "NTDREQ01",
+      "length": 9152,
+      "sha256": "ba127ccbac15941e671907e5bc6d858b37d6c8c4dcac3fd4166042dbb24539e5"
+    },
+    {
+      "code": "0104",
+      "count": 1,
+      "layout": "NTDREQ01",
+      "length": 9152,
+      "sha256": "ba127ccbac15941e671907e5bc6d858b37d6c8c4dcac3fd4166042dbb24539e5"
+    }
+  ],
+  "ykt": "YKT-1562"
+}
