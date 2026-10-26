@@ -796,10 +796,12 @@ class UserQueryApplicationServiceTest {
   static byte[] expected(
       WireMessage<FixedPayload> message, String code, int response, int count, long target) {
     byte[] expected =
-        UserQueryReplayServiceTest.wire(
-            UserQueryRequest.decode(message),
+        UserQueryWireOracle.wire(
+            message.header().layoutId().value(),
+            message.header().messageId(),
             new UUID(101, response),
             NOW,
+            UserQueryRequestTest.NOW,
             code,
             count,
             count,

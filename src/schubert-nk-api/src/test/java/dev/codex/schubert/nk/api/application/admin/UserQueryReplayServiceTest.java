@@ -43,6 +43,12 @@ import org.junit.jupiter.api.function.Executable;
 
 /** Independent UI232/236 wire vectors and JCE envelope; PT-ADM-044..047. */
 class UserQueryReplayServiceTest {
+  private static final String SEARCH_LAYOUT = "USRREQ01";
+  private static final String SUCCESS_CODE = "0000";
+  private static final String REPLAY_CODE = "0200";
+  private static final String DETAIL_LAYOUT = "UDTREQ01";
+  private static final String LAYOUT_VERSION = "001";
+
   static final UUID RESPONSE = new UUID(101, 1);
   static final UUID REPLY = new UUID(101, 2);
   static final Instant COMPLETED = NOW.plusNanos(123456789);
@@ -61,10 +67,30 @@ class UserQueryReplayServiceTest {
             request,
             saved,
             ADMIN,
-            wire(request, RESPONSE, COMPLETED, "0000", count, count, 1, 0, false));
+            wire(
+                SEARCH_LAYOUT,
+                MESSAGE,
+                RESPONSE,
+                COMPLETED,
+                SUCCESS_CODE,
+                count,
+                count,
+                1,
+                0,
+                false));
         for (boolean replay : List.of(false, true))
           assertArrayEquals(
-              wire(request, REPLY, LATER, replay ? "0200" : "0000", count, count, 1, 0, false),
+              wire(
+                  SEARCH_LAYOUT,
+                  MESSAGE,
+                  REPLY,
+                  LATER,
+                  replay ? REPLAY_CODE : SUCCESS_CODE,
+                  count,
+                  count,
+                  1,
+                  0,
+                  false),
               service.reply(
                   service.read(request, ADMIN, saved), request, ADMIN, REPLY, LATER, replay));
       }
@@ -79,10 +105,30 @@ class UserQueryReplayServiceTest {
               request,
               saved,
               ADMIN,
-              wire(request, RESPONSE, COMPLETED, "0000", 0, 0, 0, target, optional));
+              wire(
+                  DETAIL_LAYOUT,
+                  MESSAGE,
+                  RESPONSE,
+                  COMPLETED,
+                  SUCCESS_CODE,
+                  0,
+                  0,
+                  0,
+                  target,
+                  optional));
           for (boolean replay : List.of(false, true))
             assertArrayEquals(
-                wire(request, REPLY, LATER, replay ? "0200" : "0000", 0, 0, 0, target, optional),
+                wire(
+                    DETAIL_LAYOUT,
+                    MESSAGE,
+                    REPLY,
+                    LATER,
+                    replay ? REPLAY_CODE : SUCCESS_CODE,
+                    0,
+                    0,
+                    0,
+                    target,
+                    optional),
                 service.reply(
                     service.read(request, ADMIN, saved), request, ADMIN, REPLY, LATER, replay));
         }
@@ -91,7 +137,7 @@ class UserQueryReplayServiceTest {
       var old = service.captureSuccess(request, ADMIN, page(1, 1, 1, 50), RESPONSE, COMPLETED);
       service.captureSuccess(request, ADMIN, page(50, 50, 1, 50), RESPONSE, COMPLETED);
       assertArrayEquals(
-          wire(request, REPLY, LATER, "0200", 1, 1, 1, 0, false),
+          wire(SEARCH_LAYOUT, MESSAGE, REPLY, LATER, REPLAY_CODE, 1, 1, 1, 0, false),
           service.reply(service.read(request, ADMIN, old), request, ADMIN, REPLY, LATER, true));
     }
   }
@@ -100,22 +146,41 @@ class UserQueryReplayServiceTest {
   void adm045ErrorsAndAuthenticatedCorruptSnapshotsFailClosed() throws Exception {
     try (var keys = keys()) {
       var service = new UserQueryReplayService(keys);
-      for (var request : List.of(list(null, null, null, 1, MESSAGE), detail(3, MESSAGE))) {
+      for (boolean detail : List.of(false, true)) {
+        var request = detail ? detail(3, MESSAGE) : list(null, null, null, 1, MESSAGE);
         for (var code : ResultCode.values()) {
           boolean definite =
-              request.detailRequest()
-                  ? code == ResultCode.NOT_FOUND
-                  : code == ResultCode.RESOURCE_LIMIT;
+              detail ? code == ResultCode.NOT_FOUND : code == ResultCode.RESOURCE_LIMIT;
           if (definite) {
             var saved = service.captureFailure(request, ADMIN, code, RESPONSE, COMPLETED);
             assertEquals(InboxCompletionState.ERROR, saved.state());
             assertEquals(InboxResultReference.none(), saved.resultReference());
             assertArrayEquals(
-                wire(request, RESPONSE, COMPLETED, code.wireValue(), 0, 0, 0, 0, false),
+                wire(
+                    detail ? DETAIL_LAYOUT : SEARCH_LAYOUT,
+                    MESSAGE,
+                    RESPONSE,
+                    COMPLETED,
+                    code.wireValue(),
+                    0,
+                    0,
+                    0,
+                    0,
+                    false),
                 UserMutationReplayServiceTest.decrypt(saved, MESSAGE, 1));
             for (boolean replay : List.of(false, true))
               assertArrayEquals(
-                  wire(request, REPLY, LATER, code.wireValue(), 0, 0, 0, 0, false),
+                  wire(
+                      detail ? DETAIL_LAYOUT : SEARCH_LAYOUT,
+                      MESSAGE,
+                      REPLY,
+                      LATER,
+                      code.wireValue(),
+                      0,
+                      0,
+                      0,
+                      0,
+                      false),
                   service.reply(
                       service.read(request, ADMIN, saved), request, ADMIN, REPLY, LATER, replay));
           } else deny(() -> service.captureFailure(request, ADMIN, code, RESPONSE, COMPLETED));
@@ -126,11 +191,32 @@ class UserQueryReplayServiceTest {
                       ResultCode.TEMPORARY_FAILURE)
                   .contains(code))
             assertArrayEquals(
-                wire(request, REPLY, LATER, code.wireValue(), 0, 0, 0, 0, false),
+                wire(
+                    detail ? DETAIL_LAYOUT : SEARCH_LAYOUT,
+                    MESSAGE,
+                    REPLY,
+                    LATER,
+                    code.wireValue(),
+                    0,
+                    0,
+                    0,
+                    0,
+                    false),
                 service.failure(request, code, REPLY, LATER));
           else deny(() -> service.failure(request, code, REPLY, LATER));
           if (!definite && code != ResultCode.SUCCESS) {
-            byte[] body = wire(request, RESPONSE, COMPLETED, code.wireValue(), 0, 0, 1, 3, false);
+            byte[] body =
+                wire(
+                    detail ? DETAIL_LAYOUT : SEARCH_LAYOUT,
+                    MESSAGE,
+                    RESPONSE,
+                    COMPLETED,
+                    code.wireValue(),
+                    0,
+                    0,
+                    1,
+                    3,
+                    false);
             deny(
                 () ->
                     service.read(
@@ -141,11 +227,12 @@ class UserQueryReplayServiceTest {
         }
         byte[] valid =
             wire(
-                request,
+                detail ? DETAIL_LAYOUT : SEARCH_LAYOUT,
+                MESSAGE,
                 RESPONSE,
                 COMPLETED,
-                "0000",
-                request.detailRequest() ? 0 : 1,
+                SUCCESS_CODE,
+                detail ? 0 : 1,
                 1,
                 1,
                 3,
@@ -157,8 +244,8 @@ class UserQueryReplayServiceTest {
                 new InboxCompletion(
                     saved.state(),
                     saved.resultReference(),
-                    request.detailRequest() ? "USRRSP01" : "UDTRSP01",
-                    "001",
+                    detail ? "USRRSP01" : "UDTRSP01",
+                    LAYOUT_VERSION,
                     saved.responseSnapshot(),
                     saved.completedAt()),
                 new InboxCompletion(
@@ -172,32 +259,32 @@ class UserQueryReplayServiceTest {
                     saved.state(),
                     InboxResultReference.numeric(InboxResultReferenceType.USER, 3),
                     saved.responseLayoutId(),
-                    "001",
+                    LAYOUT_VERSION,
                     saved.responseSnapshot(),
                     saved.completedAt()),
                 new InboxCompletion(
                     saved.state(),
                     saved.resultReference(),
                     saved.responseLayoutId(),
-                    "001",
+                    LAYOUT_VERSION,
                     Optional.empty(),
                     saved.completedAt()),
                 new InboxCompletion(
                     InboxCompletionState.ERROR,
                     saved.resultReference(),
                     saved.responseLayoutId(),
-                    "001",
+                    LAYOUT_VERSION,
                     saved.responseSnapshot(),
                     saved.completedAt()),
                 new InboxCompletion(
                     saved.state(),
                     saved.resultReference(),
                     saved.responseLayoutId(),
-                    "001",
+                    LAYOUT_VERSION,
                     saved.responseSnapshot(),
                     saved.completedAt().plusMillis(1))))
           deny(() -> service.read(request, ADMIN, bad));
-        var deniedCode = request.detailRequest() ? ResultCode.NOT_FOUND : ResultCode.RESOURCE_LIMIT;
+        var deniedCode = detail ? ResultCode.NOT_FOUND : ResultCode.RESOURCE_LIMIT;
         var denied = service.captureFailure(request, ADMIN, deniedCode, RESPONSE, COMPLETED);
         deny(
             () ->
@@ -208,7 +295,7 @@ class UserQueryReplayServiceTest {
                         InboxCompletionState.COMPLETED,
                         denied.resultReference(),
                         denied.responseLayoutId(),
-                        "001",
+                        LAYOUT_VERSION,
                         denied.responseSnapshot(),
                         denied.completedAt())));
         for (var edit :
@@ -216,7 +303,7 @@ class UserQueryReplayServiceTest {
                     0,
                     "BROKEN00",
                     11,
-                    request.detailRequest() ? "USRRSP01" : "UDTRSP01",
+                    detail ? "USRRSP01" : "UDTRSP01",
                     19,
                     "002",
                     22,
@@ -232,7 +319,7 @@ class UserQueryReplayServiceTest {
                     199,
                     "000000001",
                     208,
-                    "0200")
+                    REPLAY_CODE)
                 .entrySet()) {
           byte[] body = valid.clone();
           put(body, edit.getKey(), edit.getValue());
@@ -245,7 +332,7 @@ class UserQueryReplayServiceTest {
                       stored(request, body, InboxCompletionState.COMPLETED, COMPLETED)));
         }
         byte[] wrongTarget = valid.clone();
-        put(wrongTarget, 256, request.detailRequest() ? "000000000004" : "000002");
+        put(wrongTarget, 256, detail ? "000000000004" : "000002");
         deny(
             () ->
                 service.read(
@@ -260,7 +347,7 @@ class UserQueryReplayServiceTest {
                       request,
                       ADMIN,
                       stored(request, wrongLength, InboxCompletionState.COMPLETED, COMPLETED)));
-        if (!request.detailRequest()) {
+        if (!detail) {
           for (var edit :
               Map.of(
                       262,
@@ -304,7 +391,7 @@ class UserQueryReplayServiceTest {
                           saved.state(),
                           saved.resultReference(),
                           saved.responseLayoutId(),
-                          "001",
+                          LAYOUT_VERSION,
                           Optional.of(encrypted),
                           saved.completedAt())));
         }
@@ -363,7 +450,7 @@ class UserQueryReplayServiceTest {
                   request, ADMIN, detailResponse(4, false), RESPONSE, COMPLETED));
       var historical = Instant.parse("1800-01-01T00:00:00Z");
       assertArrayEquals(
-          wire(request, REPLY, historical, "0200", 0, 0, 0, 3, false),
+          wire(DETAIL_LAYOUT, MESSAGE, REPLY, historical, REPLAY_CODE, 0, 0, 0, 3, false),
           service.reply(snapshot, request, ADMIN, REPLY, historical, true));
       for (Instant invalid :
           List.of(
@@ -378,7 +465,7 @@ class UserQueryReplayServiceTest {
       deny(() -> service.captureFailure(request, ADMIN, ResultCode.NOT_FOUND, RESPONSE, COMPLETED));
       deny(() -> service.read(request, ADMIN, saved));
       assertArrayEquals(
-          wire(request, REPLY, LATER, "0200", 0, 0, 0, 3, false),
+          wire(DETAIL_LAYOUT, MESSAGE, REPLY, LATER, REPLAY_CODE, 0, 0, 0, 3, false),
           service.reply(snapshot, request, ADMIN, REPLY, LATER, true));
       assertEquals("UserQuerySnapshot[REDACTED]", snapshot.toString());
     } finally {
@@ -409,11 +496,31 @@ class UserQueryReplayServiceTest {
                   var saved = service.captureSuccess(request, actor, values, responseId, COMPLETED);
                   var snapshot = service.read(request, actor, saved);
                   assertArrayEquals(
-                      wire(request, responseId, COMPLETED, "0000", count, count, 1, n, true),
+                      wire(
+                          n % 2 == 0 ? DETAIL_LAYOUT : SEARCH_LAYOUT,
+                          new UUID(100, n),
+                          responseId,
+                          COMPLETED,
+                          SUCCESS_CODE,
+                          count,
+                          count,
+                          1,
+                          n,
+                          true),
                       UserMutationReplayServiceTest.decrypt(
                           saved, request.header().messageId(), n));
                   assertArrayEquals(
-                      wire(request, replyId, LATER, "0200", count, count, 1, n, true),
+                      wire(
+                          n % 2 == 0 ? DETAIL_LAYOUT : SEARCH_LAYOUT,
+                          new UUID(100, n),
+                          replyId,
+                          LATER,
+                          REPLAY_CODE,
+                          count,
+                          count,
+                          1,
+                          n,
+                          true),
                       service.reply(snapshot, request, actor, replyId, LATER, true));
                   return null;
                 }));
@@ -440,7 +547,7 @@ class UserQueryReplayServiceTest {
         state,
         InboxResultReference.none(),
         request.responseLayoutId().value(),
-        "001",
+        LAYOUT_VERSION,
         Optional.of(
             UserMutationReplayServiceTest.encrypt(
                 body, request.header().messageId(), 1, request.responseLayoutId().value())),
@@ -457,7 +564,7 @@ class UserQueryReplayServiceTest {
     assertEquals(InboxCompletionState.COMPLETED, saved.state());
     assertEquals(InboxResultReference.none(), saved.resultReference());
     assertEquals(request.responseLayoutId().value(), saved.responseLayoutId());
-    assertEquals("001", saved.responseVersion());
+    assertEquals(LAYOUT_VERSION, saved.responseVersion());
     assertEquals(COMPLETED.truncatedTo(ChronoUnit.MICROS), saved.completedAt());
     assertArrayEquals(
         expected,
@@ -467,78 +574,18 @@ class UserQueryReplayServiceTest {
 
   /** Literal UI236 DATA/RECORD offsets, no production codec or field catalog used for expected. */
   static byte[] wire(
-      UserQueryRequest request,
+      String layout,
+      UUID request,
       UUID response,
-      Instant time,
+      Instant at,
       String code,
       int count,
       long total,
       int page,
       long target,
       boolean optional) {
-    boolean detail = request.detailRequest();
-    boolean success = code.equals("0000") || code.equals("0200");
-    int dataLength = detail ? 320 : 48;
-    int recordLength = detail ? 0 : 168;
-    int records = success ? count : 0;
-    byte[] bytes = new byte[256 + dataLength + recordLength * records];
-    Arrays.fill(bytes, (byte) 32);
-    put(bytes, 0, "SCHBNK01001");
-    put(bytes, 11, detail ? "UDTRSP01" : "USRRSP01");
-    put(bytes, 19, "001SS");
-    put(bytes, 24, response.toString());
-    put(bytes, 60, request.header().messageId().toString());
-    put(bytes, 96, time(time));
-    put(bytes, 113, "b".repeat(64));
-    put(
-        bytes,
-        177,
-        String.format(
-            Locale.ROOT, "0256%06d%06d%06d%09d", dataLength, recordLength, records, bytes.length));
-    put(bytes, 208, code);
-    if (detail) {
-      put(bytes, 256, String.format(Locale.ROOT, "%012d", success ? target : 0));
-      for (int offset : new int[] {379, 396, 413})
-        put(bytes, offset, success ? time(NOW) : "0".repeat(17));
-      put(bytes, 430, success && optional ? "002" : "000");
-      put(bytes, 433, "000000000");
-      if (success) {
-        put(bytes, 268, "u" + target);
-        put(bytes, 332, "USER");
-        put(bytes, 337, "ACTIVE");
-        if (optional) {
-          put(bytes, 345, time(NOW));
-          put(bytes, 362, time(NOW));
-        }
-        put(bytes, 442, "SYSTEM");
-        put(bytes, 506, "SYSTEM");
-      }
-    } else {
-      if (success)
-        put(
-            bytes,
-            256,
-            String.format(
-                Locale.ROOT,
-                "%06d050%09d%06d%09d%09d",
-                page,
-                total,
-                Math.max(1, (total + 49) / 50),
-                total == 0 ? 0 : (page - 1L) * 50 + 1,
-                Math.min(page * 50L, total)));
-      else put(bytes, 256, "0".repeat(42));
-      for (int i = 1; i <= records; i++) {
-        int offset = 304 + (i - 1) * 168;
-        put(bytes, offset, String.format(Locale.ROOT, "%012d", i));
-        put(bytes, offset + 12, "u" + i);
-        put(bytes, offset + 76, "USER");
-        put(bytes, offset + 81, "ACTIVE");
-        put(bytes, offset + 123, time(NOW));
-        put(bytes, offset + 140, time(NOW));
-        put(bytes, offset + 157, "000000000");
-      }
-    }
-    return bytes;
+    return UserQueryWireOracle.wire(
+        layout, request, response, at, NOW, code, count, total, page, target, optional);
   }
 
   static String time(Instant instant) {
