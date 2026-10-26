@@ -745,7 +745,7 @@ class UserQueryApplicationServiceTest {
     var error = assertThrows(TemporaryInfrastructureException.class, action);
     assertNull(error.getCause());
     assertEquals(0, error.getSuppressed().length);
-    assertEquals(new TemporaryInfrastructureException().getMessage(), error.getMessage());
+    assertEquals("request transaction is unavailable", error.getMessage());
   }
 
   static UserQueryApplicationService service(UserApplicationFixture f) throws Exception {

@@ -537,7 +537,7 @@ class UserQueryReplayServiceTest {
     var e = assertThrows(TemporaryInfrastructureException.class, action);
     assertNull(e.getCause());
     assertEquals(0, e.getSuppressed().length);
-    assertEquals(new TemporaryInfrastructureException().getMessage(), e.getMessage());
+    assertEquals("request transaction is unavailable", e.getMessage());
   }
 
   static InboxCompletion stored(

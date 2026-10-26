@@ -598,6 +598,6 @@ final class CleanupStepRepositoryTest {
   static void redacted(BatchRepositoryException e) {
     assertNull(e.getCause());
     assertEquals(0, e.getSuppressed().length);
-    assertEquals(new BatchRepositoryException().getMessage(), e.getMessage());
+    assertEquals("batch repository operation failed", e.getMessage());
   }
 }
