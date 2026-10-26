@@ -82,7 +82,7 @@ class AnimationControllerTest {
   private static final String FIXTURE_HTTP_GET = "GET";
   private static final String FIXTURE_FAILURE_MESSAGE = "synthetic";
   private static final String EXPECTED_HREF_ATTRIBUTE = "href";
-  private static final String FIXTURE_WIRE_TIMESTAMP = "ANM";
+  private static final String FIXTURE_MENU_TYPE_CODE = "ANM";
   private static final int FIXTURE_THROW_MODE = 3;
   private static final int FIXTURE_CORRELATION_MISMATCH_MODE = 1;
 
@@ -697,8 +697,8 @@ class AnimationControllerTest {
               buffers.add(b);
               requests.add(b.clone());
               String type = ascii(b, 11, 3);
-              assertTrue(type.equals(FIXTURE_WIRE_TIMESTAMP) || type.equals("ANL"));
-              assertEquals(type.equals(FIXTURE_WIRE_TIMESTAMP) ? 256 : 272, b.length);
+              assertTrue(type.equals(FIXTURE_MENU_TYPE_CODE) || type.equals("ANL"));
+              assertEquals(type.equals(FIXTURE_MENU_TYPE_CODE) ? 256 : 272, b.length);
               assertEquals("Q", ascii(b, 22, 1));
               assertEquals("S", ascii(b, 23, 1));
               assertEquals(id.toString(), ascii(b, 24, 36));
@@ -721,8 +721,8 @@ class AnimationControllerTest {
 
     byte[] standard(UUID id, byte[] b) {
       return response(
-          ascii(b, 11, 3).equals(FIXTURE_WIRE_TIMESTAMP)
-              ? FIXTURE_WIRE_TIMESTAMP
+          ascii(b, 11, 3).equals(FIXTURE_MENU_TYPE_CODE)
+              ? FIXTURE_MENU_TYPE_CODE
               : ascii(b, 256, 16).strip(),
           count,
           code,
@@ -744,7 +744,7 @@ class AnimationControllerTest {
 
   // UI232/235 independent byte offsets; no production codec/mapper for fixtures.
   private static byte[] response(String type, int n, String code, UUID id, String context) {
-    boolean menu = type.equals(FIXTURE_WIRE_TIMESTAMP);
+    boolean menu = type.equals(FIXTURE_MENU_TYPE_CODE);
     boolean success = code.equals(FIXTURE_SUCCESS_CODE) || code.equals("0200");
     int count = menu || !success ? 0 : n;
     var b =
