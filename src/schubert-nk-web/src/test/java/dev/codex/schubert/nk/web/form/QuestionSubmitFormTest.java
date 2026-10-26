@@ -1,6 +1,7 @@
 package dev.codex.schubert.nk.web.form;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -213,8 +214,8 @@ class QuestionSubmitFormTest {
     try (var first = QuestionSubmitForm.bind(input("質問"))) {
       var request = first.toRequest();
       var display = first.displayValues();
-      first.close();
-      first.close();
+      assertDoesNotThrow(first::close);
+      assertDoesNotThrow(first::close);
       var failure = assertThrows(IllegalStateException.class, first::toRequest);
       assertEquals("question submit form is closed", failure.getMessage());
       assertThrows(IllegalStateException.class, first::operationToken);
@@ -227,7 +228,7 @@ class QuestionSubmitFormTest {
       }
     }
     try (var invalid = QuestionSubmitForm.bind(input(""))) {
-      invalid.close();
+      assertDoesNotThrow(invalid::close);
       assertThrows(IllegalStateException.class, invalid::toRequest);
     }
   }

@@ -1,6 +1,7 @@
 package dev.codex.schubert.nk.web.form;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNull;
@@ -265,8 +266,8 @@ class UserCreateFormTest {
       assertFalse(form.displayValues().toString().contains(TOKEN));
       assertFalse(form.getIssues().toString().contains(PASSWORD));
       assertEquals("UserCreateRequestData[REDACTED]", form.toRequest().toString());
-      form.close();
-      form.close();
+      assertDoesNotThrow(form::close);
+      assertDoesNotThrow(form::close);
       var failure = assertThrows(IllegalStateException.class, form::toRequest);
       assertEquals("user create form is closed", failure.getMessage());
       assertEquals(SYNTHETIC_USERNAME, form.displayValues().get(USERNAME_FIELD));
@@ -316,7 +317,7 @@ class UserCreateFormTest {
           form.displayValues());
       assertFalse(form.toString().contains("SecretCanary"));
       assertThrows(IllegalArgumentException.class, form::toRequest);
-      form.close();
+      assertDoesNotThrow(form::close);
       assertThrows(IllegalStateException.class, form::toRequest);
     }
   }
