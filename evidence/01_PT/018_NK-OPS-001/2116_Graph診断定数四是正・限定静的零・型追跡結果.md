@@ -1,0 +1,17 @@
+# 2116 Graph診断定数四是正・限定静的零・型追跡結果
+
+2026-10-27 02:23 JST、2115/event2461、1/3/7pp cap10、BUG1862/YKT1613。source `68278a0402137b8f27c3714d6d3c00848ccf0f49`、Main21d7c304不変。Api/WebのPUBLIC各五/六、TemporaryのPUBLIC root四/next五、計四定数・20完全String tokenだけ同値化。コメントや部分一致、非対象のPUBLIC root/next等は不変更。
+
+整形前PG10710 aa8639779d3b21fa0dec02c0896143818f691c2c48269a8aa9f9ee60c0356ec5 actual0はその時点のsource証跡として保持。GJF1.36.1 dry-runはWeb一の行折返しを指摘/exit1、当一fileを整形→当三dry-run0。整形後PG10711 `43acb8f26d836d7027efd7d5fa0e9567df4dcd1d10c12cd390efc31fd9679439` actual0・九metadata反例・他input不変へ別固定し、旧preformat成功を別sourceへ流用しない。10712公開delta0後にsourceをcommit固定した。
+
+PG10714六正常 `b24ac5ef1f85b9ed935e0772ef04040acbd12b78f573a88aa4d9420ae4995676` actual0、六jar/package/testCompile、PT0/UNRUN_NOT_PASS。PG10716限定静的 `9bc20c08a83b293bb25c83998ebae4b332d273c42e6e975ad966283bc260a4fd` actual0、PMD4→0/Checkstyle0/処理error0、元rule/抑制変更0。
+
+PG10718独立 `aa1f09b770b565258ed2e62bb21c5fda0fa0bcbf59769a5c1a0991e0ffc6f423` actual0、四定数の宣言除去＋identifierを元literalへ逆展開し全token一致・六metadata反例、Main1843/他Test1955class byte不変、差分七classは対象三SourceFileだけ/全Test1962。変更七classの命令個別同値までを証明したとはしない。
+
+元10690全index9409から変更三sourceの旧PMD四/CS三を分離し、残9402の各source SHAは現source入力と一致することを確認した。現subsetは両scanner0なのでsource-bound差分indexは残9402となるが、これは全1810を現sourceで再実行した測定や全F03合格ではない。元9406PMD/CS三の全体run・全XML/indexをそのまま保持し、sourceFindingDeltaを別artifactへ保存した。未分類9402を実障害数へ換算しない。
+
+PG10720 trace `cc645c20ccb16bef1056943876663b5903cf3400e5c1f97c6ad9a8c19a01cf92` /PG10722独立 `659f4d7966e23487bf8a068c5f12d9012eeeead45f9bb099345c0ed405847355` actual0。三source SHA/他980全field保持、原主責・費用・unknown二・旧runtime・前Graph import binding保持。八反例・所定audit前後1同HOLD、新sourceへ旧実PTを移植0。
+
+各manifestにcommand/時刻/OS/JDK/tool/環境/source/hash/exit、専用host SLOTへ各段recordを保存。own10714 exec25610/10716 exec61674/全post真正終端0、工具新規障害0。元Graph9動的HOLD、製品/Test/DB/VM/Root/native/外部実操作0、新PT0/coverage null。正式1964PT/53scope・17/190・工数null・QA051final・未読保証不明1847/全安全HOLD不変更。
+
+共有used14→15/reset1793599188は共有丸め1pp、PGPT専有費/N/T null。次公開保存push/限定障害状態追補後、全indexの具体残件（JsonReader.peek未使用戻値四のsource文脈、protocol TestのLocale指定一等）を許可/依存・既成功と照合し、独立PG/PTへ進む。通常小群/commitで停止しない。
