@@ -1,0 +1,38 @@
+[
+  {
+    "disposition": "NOT_APPLICABLE_IN_EXACT_TEST_CONTEXT",
+    "line": 482,
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/media/MediaReplayServiceTest.java",
+    "reason": "Standalone JUnit worker fixture, lexically try-with owned, not a JavaEE application thread; no runtime ownership qualification.",
+    "rule": "DoNotUseThreads",
+    "sha256": "d9a9d34234e9a729bc9861b6b55dc3b6114c7748eed516c7f9c4cd8ef05cadeb",
+    "sourceLine": "var pool = Executors.newFixedThreadPool(10)) {"
+  },
+  {
+    "disposition": "NOT_APPLICABLE_IN_EXACT_TEST_CONTEXT",
+    "line": 517,
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/media/MediaReplayServiceTest.java",
+    "reason": "Standalone JUnit worker fixture, lexically try-with owned, not a JavaEE application thread; no runtime ownership qualification.",
+    "rule": "DoNotUseThreads",
+    "sha256": "d9a9d34234e9a729bc9861b6b55dc3b6114c7748eed516c7f9c4cd8ef05cadeb",
+    "sourceLine": "for (var result : pool.invokeAll(tasks)) assertTrue(result.get());"
+  },
+  {
+    "disposition": "NOT_APPLICABLE_IN_EXACT_TEST_CONTEXT",
+    "line": 106,
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/media/MediaStageFixture.java",
+    "reason": "Standalone Test fixed JDBC interface Proxy loader, not JavaEE container class loading; no DB/fixture execution.",
+    "rule": "UseProperClassLoader",
+    "sha256": "5a4bc7a98de050ca752a2c412e74bb1d890f8912ee1192115f59d98fd599df33",
+    "sourceLine": "DataSource.class.getClassLoader(),"
+  },
+  {
+    "disposition": "NOT_APPLICABLE_IN_EXACT_TEST_CONTEXT",
+    "line": 120,
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/media/MediaStageFixture.java",
+    "reason": "Standalone Test fixed JDBC interface Proxy loader, not JavaEE container class loading; no DB/fixture execution.",
+    "rule": "UseProperClassLoader",
+    "sha256": "5a4bc7a98de050ca752a2c412e74bb1d890f8912ee1192115f59d98fd599df33",
+    "sourceLine": "Connection.class.getClassLoader(),"
+  }
+]
