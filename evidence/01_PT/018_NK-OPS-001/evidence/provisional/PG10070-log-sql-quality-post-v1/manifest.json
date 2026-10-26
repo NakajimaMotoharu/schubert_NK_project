@@ -1,0 +1,128 @@
+{
+  "actualExit": 0,
+  "addedTestClasses": [
+    [
+      "api",
+      "dev/codex/schubert/nk/api/application/log/LogSqlContractTest$Call.class"
+    ],
+    [
+      "api",
+      "dev/codex/schubert/nk/api/application/log/LogSqlContractTest$Jdbc.class"
+    ],
+    [
+      "api",
+      "dev/codex/schubert/nk/api/application/log/LogSqlContractTest.class"
+    ]
+  ],
+  "checkstyleFindings": 0,
+  "currentJavaPaths": 1802,
+  "currentMainPaths": 965,
+  "currentPtManifestSha256": "f909af4a8703b53aeef2903f23968393a88cfbff0efb713e231d90338f7ba8b2",
+  "currentSourceTests": 16,
+  "currentTestPaths": 837,
+  "effortPercent": null,
+  "forbiddenProductProbeHits": 0,
+  "formalUpdated": false,
+  "individualApplicability": [
+    {
+      "line": 343,
+      "reason": "standalone host public JDK-interface proxy; not a JavaEE managed component",
+      "rule": "UseProperClassLoader",
+      "status": "NON_APPLICABLE_CONTEXT"
+    },
+    {
+      "line": 351,
+      "reason": "one fixture per sequential test, confined callback map; no thread/executor/parallel stream",
+      "rule": "UseConcurrentHashMap",
+      "status": "NON_APPLICABLE_CONTEXT"
+    }
+  ],
+  "invocation": {
+    "actualPythonCommand": [
+      "python3",
+      "-B",
+      "tools/quality/pg10070_log_sql_quality_post.py"
+    ],
+    "arbitraryArgumentsRecorded": false,
+    "entrypointPath": "tools/quality/pg10070_log_sql_quality_post.py",
+    "entrypointSha256": "1232c6c8e703267f953902cd80bcdb8a5ed1279b5a3f0a0f12de49692bfeb9e5",
+    "helperPath": "tools/quality/host_tool_invocation.py",
+    "helperSha256": "85d616a3db4ff47f4c95ae2e0dd57954bc2b09f28b8f2a685b986e5621545c46",
+    "libraryPath": "tools/quality/pg10070_log_sql_quality_post.py",
+    "librarySha256": "1232c6c8e703267f953902cd80bcdb8a5ed1279b5a3f0a0f12de49692bfeb9e5",
+    "loadedProjectPythonSources": {
+      "tools/quality/g07_host_class_provenance_inputs.py": "a676cb3e4145177c3c243722d737592ce7d44c3f29cfe4f670662ef7651f046b",
+      "tools/quality/host_tool_invocation.py": "85d616a3db4ff47f4c95ae2e0dd57954bc2b09f28b8f2a685b986e5621545c46",
+      "tools/quality/pg10070_log_sql_quality_post.py": "1232c6c8e703267f953902cd80bcdb8a5ed1279b5a3f0a0f12de49692bfeb9e5",
+      "tools/quality/pg9906_user_query_oracle_source_post.py": "4f9bdaa17eea78a720c0f25b8af906f3f045fda590c8fea2a8868229403a98fa",
+      "tools/quality/pg9978_plain_core_quality_post.py": "c99cc753c6335c9f41e3eafe6a97c17521503739ba2cf80659b542a445dd48fa",
+      "tools/quality/public_java_digest_provenance.py": "dd47f8735a61ce849995633c3290a6ad047842ef3263829ce359db413778f7a0"
+    },
+    "provenance": "OBSERVED_SYS_ARGV_AND_ORIG_ARGV_NOT_RECONSTRUCTED"
+  },
+  "mainClassesUnchanged": 1843,
+  "newAccepted": 0,
+  "newTestIds": 8,
+  "oldExecUnion": false,
+  "precommitStaticSourceWasNull": true,
+  "previousTestClassesUnchanged": 1925,
+  "productTestsReexecuted": 0,
+  "rawPmdFindings": 2,
+  "rawStaticExit": 1,
+  "relatedRegressionMethods": 8,
+  "remaining": "Repository exceptional/invalid-row branches and actual PostgreSQL contracts unexecuted; F03/451/native/CHR and QA051 held",
+  "source": "6cd6ae7efc495f17e1ebb79291f26c7a90f99dc7",
+  "staticSourceHashesExactlyMatchCommittedCompilation": true,
+  "suites": 2,
+  "suppressionsAdded": false,
+  "testClasses": 1928,
+  "units": {
+    "dev/codex/schubert/nk/api/application/log/LogRequest": {
+      "classCrc64": "1500f98217023781",
+      "counterApplicability": "FOUR100_MEASURED_APPLICABLE",
+      "counters": {
+        "BRANCH": {
+          "covered": 6,
+          "missed": 0
+        },
+        "CLASS": {
+          "covered": 1,
+          "missed": 0
+        },
+        "LINE": {
+          "covered": 46,
+          "missed": 0
+        },
+        "METHOD": {
+          "covered": 12,
+          "missed": 0
+        }
+      },
+      "four100": true
+    },
+    "dev/codex/schubert/nk/api/persistence/LogQueryRepository": {
+      "classCrc64": "ec477a734fc7a06f",
+      "counterApplicability": "MISSED_COUNTERS",
+      "counters": {
+        "BRANCH": {
+          "covered": 22,
+          "missed": 16
+        },
+        "CLASS": {
+          "covered": 1,
+          "missed": 0
+        },
+        "LINE": {
+          "covered": 107,
+          "missed": 6
+        },
+        "METHOD": {
+          "covered": 18,
+          "missed": 0
+        }
+      },
+      "four100": false
+    }
+  },
+  "whole451Accepted": false
+}
