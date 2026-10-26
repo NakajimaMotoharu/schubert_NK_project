@@ -1,0 +1,15 @@
+# Role/Code19最終SHA・選択source数追跡結果
+
+G13.07、sourceb8234ad5a1403e944acaf8e13f1e5f07a22309bd。現registry PG10384/source3d9fからrole13＋code六の19最終SHAだけを更新し、983行中他964全field/元owner/cost/旧runtime/既bindingを保持する。新path0、候補975/Java1810/登録1808/UNKNOWN二/legacy749は実導出で維持する。原logical941/歴史physical943や費用/正式受入の母数を書換しない。
+
+role oracle metadataは10398/sourceb98の13source/18期待/26反例、実行fragmentは10400/10402/sourceb98の四method/三class/XML三。元casesのclass→source対応から三選択/10未選択を導出し、sourceb823で新たに四PT実行したとしない。code oracle metadataは10416/sourceb823の六source15依存除去/72entry/87反例・元PT0/HOLD。元行の歴史runtimeにどちらの新proofも上書きしない。
+
+BUG1828/YKT1579：WEB033/途中報告の未選択9sourceは13−3=10へ追記訂正済み。10420/10422でmethodとsourceを別fieldにし、誤選択四/未選択九・全13実行・role runtimeを新global sourceへ付替える変異も拒否する。元XML/hash/四PT/三suite/開始費/正式数は不変更。
+
+10420 manifestでsource/hash/根拠/担当を束縛し、485 current二sectionと486 inventory hashだけ変更。10422は独立metadata postと所定WBS auditの前後actual1/HOLD・同lastErrorを照合する。実結果/hashはmanifestを正とし、予告本文だけで合格にしない。全G13/451受入0、正式1964PT/53scope、個別17/190、工数null、QA051 final/全安全HOLD不変更。
+
+次は残る非共有direct method/identifier/constructorの未点検期待起源と既後続成果を照合し、独立通常PG/PT又は具体的source不足だけを優先する。既成功の確認再演やDB/鍵/Root等HOLDの別fixture迂回はしない。
+
+## 実結果
+
+10420 manifest81fc5567bfe107396df12f1ce7b82b50fce0e93dd29731655cb29f2db457e2da、10422 manifest731492d096f1a106cd3df2eddb5e5306eade056f5a2e7f85c9cfe0fec0ce2d69、各actual0。19SHAだけ変更/他964全field保持、新path0/候補975/1810-1808/UNKNOWN二/legacy749維持。role四method/三選択source/10未選択sourceは実casesから導出し、count四/全13・未選択九・新source/成功転用を含む15metadata変異を拒否。所定audit前後actual1/同lastError保持、全G13未受入。sourceb98の四PTをsourceb823へ再割当していない。
