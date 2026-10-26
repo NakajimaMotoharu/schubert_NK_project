@@ -60,6 +60,14 @@ import org.junit.jupiter.api.Test;
 
 /** UI236 literal wire/SSC157 prefix and independent JCE; PT-QRY013..017/NTF010. */
 final class QuestionQueryReplayServiceTest {
+  private static final String KEY_FIXTURE_ID = "test";
+  private static final String QSD_REQUEST = "QSDREQ01";
+  private static final String NTD_REQUEST = "NTDREQ01";
+  private static final String SUCCESS_CODE = "0000";
+  private static final String REPLAY_CODE = "0200";
+  private static final String LAYOUT_VERSION = "001";
+  private static final String QUESTION_TEXT = "question";
+
   static final UUID RESPONSE = new UUID(101, 1);
   static final UUID REPLY = new UUID(101, 2);
   static final Instant COMPLETED = NOW.plusNanos(123456789);
@@ -68,15 +76,15 @@ final class QuestionQueryReplayServiceTest {
 
   @Test
   void qry013FrozenFourRoutesScopeAndRepliesMatchIndependentWholeBytes() throws Exception {
-    try (var keys = new ResponseSnapshotCodec("test", new byte[32], null, null)) {
+    try (var keys = new ResponseSnapshotCodec(KEY_FIXTURE_ID, new byte[32], null, null)) {
       var service = new QuestionQueryReplayService(keys);
-      for (String layout : List.of("QSSREQ01", "QSDREQ01", "NTSREQ01", "NTDREQ01"))
+      for (String layout : List.of("QSSREQ01", QSD_REQUEST, "NTSREQ01", NTD_REQUEST))
         for (var actor : List.of(USER, ADMIN))
           for (int count : new int[] {0, 1}) {
             var request = QuestionQueryRequest.decode(message(layout, data(layout, false)));
             var saved =
                 service.captureSuccess(request, actor, values(request, count), RESPONSE, COMPLETED);
-            byte[] expected = wire(layout, RESPONSE, COMPLETED, "0000", count);
+            byte[] expected = wire(layout, RESPONSE, COMPLETED, SUCCESS_CODE, count);
             assertArrayEquals(frame(request, actor.role(), expected), decrypt(saved, MESSAGE, 1));
             assertEquals(InboxResultReference.none(), saved.resultReference());
             assertEquals(COMPLETED.truncatedTo(ChronoUnit.MICROS), saved.completedAt());
@@ -86,7 +94,7 @@ final class QuestionQueryReplayServiceTest {
               assertEquals("QuestionQuerySnapshot[REDACTED]", snapshot.toString());
               assertTrue(snapshot.scopeAllowed(actor));
               assertArrayEquals(
-                  wire(layout, REPLY, LATER, replay ? "0200" : "0000", count),
+                  wire(layout, REPLY, LATER, replay ? REPLAY_CODE : SUCCESS_CODE, count),
                   service.reply(snapshot, request, actor, REPLY, LATER, replay));
               assertTrue(snapshot.scopeAllowed(ADMIN));
               boolean permitted = !request.questionScope() || actor.role() == Role.USER;
@@ -95,7 +103,7 @@ final class QuestionQueryReplayServiceTest {
                 deny(() -> service.reply(snapshot, request, USER, REPLY, LATER, true));
               else
                 assertArrayEquals(
-                    wire(layout, REPLY, LATER, "0200", count),
+                    wire(layout, REPLY, LATER, REPLAY_CODE, count),
                     service.reply(snapshot, request, USER, REPLY, LATER, true));
               assertFalse(snapshot.scopeAllowed(new AuthenticatedActor(2, "u2", Role.ADMIN)));
               deny(
@@ -115,9 +123,9 @@ final class QuestionQueryReplayServiceTest {
 
   @Test
   void qry014DefiniteErrorsRetainScopeAndNonstoredDenialsHaveIndependentFiller() throws Exception {
-    try (var keys = new ResponseSnapshotCodec("test", new byte[32], null, null)) {
+    try (var keys = new ResponseSnapshotCodec(KEY_FIXTURE_ID, new byte[32], null, null)) {
       var service = new QuestionQueryReplayService(keys);
-      for (String layout : List.of("QSSREQ01", "QSDREQ01", "NTSREQ01", "NTDREQ01")) {
+      for (String layout : List.of("QSSREQ01", QSD_REQUEST, "NTSREQ01", NTD_REQUEST)) {
         var request = QuestionQueryRequest.decode(message(layout, data(layout, false)));
         for (var code : ResultCode.values()) {
           boolean persistent =
@@ -158,11 +166,11 @@ final class QuestionQueryReplayServiceTest {
 
   @Test
   void qry015LegacyMalformedEncryptedAndMetadataCannotGrantReplay() throws Exception {
-    try (var keys = new ResponseSnapshotCodec("test", new byte[32], null, null)) {
+    try (var keys = new ResponseSnapshotCodec(KEY_FIXTURE_ID, new byte[32], null, null)) {
       var service = new QuestionQueryReplayService(keys);
-      for (String layout : List.of("QSSREQ01", "QSDREQ01", "NTSREQ01", "NTDREQ01")) {
+      for (String layout : List.of("QSSREQ01", QSD_REQUEST, "NTSREQ01", NTD_REQUEST)) {
         var request = QuestionQueryRequest.decode(message(layout, data(layout, false)));
-        byte[] expected = wire(layout, RESPONSE, COMPLETED, "0000", 1);
+        byte[] expected = wire(layout, RESPONSE, COMPLETED, SUCCESS_CODE, 1);
         var saved =
             stored(request, frame(request, Role.ADMIN, expected), InboxCompletionState.COMPLETED);
         service.read(request, ADMIN, saved);
@@ -212,7 +220,7 @@ final class QuestionQueryReplayServiceTest {
                     saved.state(),
                     saved.resultReference(),
                     "USRRSP01",
-                    "001",
+                    LAYOUT_VERSION,
                     saved.responseSnapshot(),
                     saved.completedAt()),
                 new InboxCompletion(
@@ -226,28 +234,28 @@ final class QuestionQueryReplayServiceTest {
                     saved.state(),
                     InboxResultReference.numeric(InboxResultReferenceType.QUESTION, 1),
                     saved.responseLayoutId(),
-                    "001",
+                    LAYOUT_VERSION,
                     saved.responseSnapshot(),
                     saved.completedAt()),
                 new InboxCompletion(
                     saved.state(),
                     saved.resultReference(),
                     saved.responseLayoutId(),
-                    "001",
+                    LAYOUT_VERSION,
                     Optional.empty(),
                     saved.completedAt()),
                 new InboxCompletion(
                     InboxCompletionState.ERROR,
                     saved.resultReference(),
                     saved.responseLayoutId(),
-                    "001",
+                    LAYOUT_VERSION,
                     saved.responseSnapshot(),
                     saved.completedAt()),
                 new InboxCompletion(
                     saved.state(),
                     saved.resultReference(),
                     saved.responseLayoutId(),
-                    "001",
+                    LAYOUT_VERSION,
                     saved.responseSnapshot(),
                     saved.completedAt().plusMillis(1))))
           deny(() -> service.read(request, ADMIN, bad));
@@ -255,7 +263,7 @@ final class QuestionQueryReplayServiceTest {
         corrupt[corrupt.length - 1] ^= 1;
         for (var encrypted :
             List.of(
-                new EncryptedResponseSnapshot("test", corrupt),
+                new EncryptedResponseSnapshot(KEY_FIXTURE_ID, corrupt),
                 new EncryptedResponseSnapshot(
                     "gone", saved.responseSnapshot().orElseThrow().ciphertext()),
                 encrypt(
@@ -268,7 +276,7 @@ final class QuestionQueryReplayServiceTest {
                   saved.state(),
                   saved.resultReference(),
                   saved.responseLayoutId(),
-                  "001",
+                  LAYOUT_VERSION,
                   Optional.of(encrypted),
                   saved.completedAt());
           deny(() -> service.read(request, ADMIN, bad));
@@ -289,7 +297,7 @@ final class QuestionQueryReplayServiceTest {
                         InboxCompletionState.COMPLETED,
                         denied.resultReference(),
                         denied.responseLayoutId(),
-                        "001",
+                        LAYOUT_VERSION,
                         denied.responseSnapshot(),
                         denied.completedAt())));
       }
@@ -306,7 +314,7 @@ final class QuestionQueryReplayServiceTest {
               "0".repeat(26),
               "u1",
               AnswerState.UNANSWERED,
-              "question",
+              QUESTION_TEXT,
               Optional.empty(),
               NOW,
               Optional.empty()),
@@ -325,7 +333,7 @@ final class QuestionQueryReplayServiceTest {
               Optional.empty(),
               Optional.empty(),
               false,
-              Optional.of("question"),
+              Optional.of(QUESTION_TEXT),
               Optional.empty(),
               Optional.empty(),
               Optional.empty(),
@@ -340,7 +348,7 @@ final class QuestionQueryReplayServiceTest {
                         new QuestionId(ID),
                         "0".repeat(26),
                         "u1",
-                        "question",
+                        QUESTION_TEXT,
                         AnswerState.UNANSWERED,
                         NOW,
                         Optional.empty()))
@@ -352,7 +360,7 @@ final class QuestionQueryReplayServiceTest {
                         NotificationState.RECEIVED,
                         NOW,
                         NOW,
-                        "question",
+                        QUESTION_TEXT,
                         false));
     return new TypedPayloadValues(
         new LayoutId(layout),
@@ -363,10 +371,10 @@ final class QuestionQueryReplayServiceTest {
   @Test
   void qry016PublicNullContractsInvalidTimesAndClosedKeysFailWithoutSecretDiagnostics()
       throws Exception {
-    var keys = new ResponseSnapshotCodec("test", new byte[32], null, null);
+    var keys = new ResponseSnapshotCodec(KEY_FIXTURE_ID, new byte[32], null, null);
     try {
       var service = new QuestionQueryReplayService(keys);
-      var request = QuestionQueryRequest.decode(message("QSDREQ01", data("QSDREQ01", false)));
+      var request = QuestionQueryRequest.decode(message(QSD_REQUEST, data(QSD_REQUEST, false)));
       var response = values(request, 0);
       var saved = service.captureSuccess(request, USER, response, RESPONSE, COMPLETED);
       var snapshot = service.read(request, USER, saved);
@@ -398,7 +406,8 @@ final class QuestionQueryReplayServiceTest {
               () -> service.failure(request, ResultCode.NOT_FOUND, null, LATER),
               () -> service.failure(request, ResultCode.NOT_FOUND, REPLY, null)))
         assertThrows(NullPointerException.class, action);
-      var otherRequest = QuestionQueryRequest.decode(message("QSDREQ01", data("QSDREQ01", false)));
+      var otherRequest =
+          QuestionQueryRequest.decode(message(QSD_REQUEST, data(QSD_REQUEST, false)));
       deny(() -> service.reply(snapshot, otherRequest, USER, REPLY, LATER, true));
       var bad =
           new TypedPayloadValues(
@@ -417,7 +426,7 @@ final class QuestionQueryReplayServiceTest {
       deny(() -> service.captureFailure(request, USER, ResultCode.NOT_FOUND, RESPONSE, COMPLETED));
       deny(() -> service.read(request, USER, saved));
       assertArrayEquals(
-          wire("QSDREQ01", REPLY, LATER, "0200", 0),
+          wire(QSD_REQUEST, REPLY, LATER, REPLAY_CODE, 0),
           service.reply(snapshot, request, USER, REPLY, LATER, true));
     } finally {
       keys.close();
@@ -427,7 +436,7 @@ final class QuestionQueryReplayServiceTest {
   @Test
   void qry017OptionalIdMinimumUsesXLeftPaddingNotNumericZeroPadding() throws Exception {
     byte[] data = "000000000001".getBytes(StandardCharsets.US_ASCII);
-    var request = QuestionQueryRequest.decode(message("NTDREQ01", data));
+    var request = QuestionQueryRequest.decode(message(NTD_REQUEST, data));
     var response =
         new TypedPayloadValues(
             new LayoutId("NTDRSP01"),
@@ -442,23 +451,23 @@ final class QuestionQueryReplayServiceTest {
                 Optional.empty(),
                 Optional.empty(),
                 false,
-                Optional.of("question"),
+                Optional.of(QUESTION_TEXT),
                 Optional.empty(),
                 Optional.empty(),
                 Optional.empty(),
                 Optional.of(new QuestionId(1))),
             List.of());
-    try (var keys = new ResponseSnapshotCodec("test", new byte[32], null, null)) {
+    try (var keys = new ResponseSnapshotCodec(KEY_FIXTURE_ID, new byte[32], null, null)) {
       var service = new QuestionQueryReplayService(keys);
       var saved = service.captureSuccess(request, USER, response, RESPONSE, COMPLETED);
-      byte[] expected = wire("NTDREQ01", RESPONSE, COMPLETED, "0000", 0);
+      byte[] expected = wire(NTD_REQUEST, RESPONSE, COMPLETED, SUCCESS_CODE, 0);
       put(expected, 256, "000000000001");
       Arrays.fill(expected, 9124, 9136, (byte) 32);
       put(expected, 9124, "1");
       assertArrayEquals(expected, decrypt(saved, MESSAGE, 1));
       put(expected, 24, REPLY.toString());
       put(expected, 96, time(LATER));
-      put(expected, 208, "0200");
+      put(expected, 208, REPLAY_CODE);
       assertArrayEquals(
           expected,
           service.reply(service.read(request, USER, saved), request, USER, REPLY, LATER, true));
@@ -491,7 +500,7 @@ final class QuestionQueryReplayServiceTest {
         state,
         InboxResultReference.none(),
         request.responseLayoutId().value(),
-        "001",
+        LAYOUT_VERSION,
         Optional.of(encrypt(plain, MESSAGE, 1, request.responseLayoutId().value())),
         COMPLETED.truncatedTo(ChronoUnit.MICROS));
   }
@@ -514,9 +523,9 @@ final class QuestionQueryReplayServiceTest {
                   .putLong(source.getLeastSignificantBits())
                   .array(),
               new byte[] {1},
-              "test".getBytes(StandardCharsets.US_ASCII),
+              KEY_FIXTURE_ID.getBytes(StandardCharsets.US_ASCII),
               layout.getBytes(StandardCharsets.US_ASCII),
-              "001".getBytes(StandardCharsets.US_ASCII),
+              LAYOUT_VERSION.getBytes(StandardCharsets.US_ASCII),
               ByteBuffer.allocate(8).putLong(owner).array())) {
         out.writeInt(field.length);
         out.write(field);
@@ -544,12 +553,12 @@ final class QuestionQueryReplayServiceTest {
     cipher.updateAAD(aad(source, owner, layout));
     byte[] encrypted = cipher.doFinal(output.toByteArray());
     return new EncryptedResponseSnapshot(
-        "test",
+        KEY_FIXTURE_ID,
         ByteBuffer.allocate(24 + encrypted.length)
             .put("NKENC1".getBytes(StandardCharsets.US_ASCII))
             .put((byte) 1)
             .put((byte) 4)
-            .put("test".getBytes(StandardCharsets.US_ASCII))
+            .put(KEY_FIXTURE_ID.getBytes(StandardCharsets.US_ASCII))
             .put(nonce)
             .put(encrypted)
             .array());
@@ -562,7 +571,7 @@ final class QuestionQueryReplayServiceTest {
     assertEquals(1, stored[6]);
     assertEquals(4, stored[7]);
     assertArrayEquals(
-        "test".getBytes(StandardCharsets.US_ASCII), Arrays.copyOfRange(stored, 8, 12));
+        KEY_FIXTURE_ID.getBytes(StandardCharsets.US_ASCII), Arrays.copyOfRange(stored, 8, 12));
     var cipher = Cipher.getInstance("AES/GCM/NoPadding");
     cipher.init(
         Cipher.DECRYPT_MODE,

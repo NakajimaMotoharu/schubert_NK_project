@@ -47,6 +47,21 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** PT-QRY018..024/NTF011; independent SQL, literal whole wire and read/write/race hooks. */
 final class QuestionQueryApplicationServiceTest {
+  private static final String QSS_REQUEST = "QSSREQ01";
+  private static final String QSD_REQUEST = "QSDREQ01";
+  private static final String NTS_REQUEST = "NTSREQ01";
+  private static final String SUCCESS_CODE = "0000";
+  private static final String PROMOTE_USER_SQL =
+      "update schubert.app_users set role='ADMIN' where id=1";
+  private static final String DEMOTE_USER_SQL =
+      "update schubert.app_users set role='USER' where id=1";
+  private static final String FORBIDDEN_CODE = "0103";
+  private static final String NOT_FOUND_CODE = "0104";
+  private static final String INBOX_COUNT_SQL = "select count(*) from schubert.request_inbox";
+  private static final String CLOSE_METHOD = "close";
+  private static final String COUNT_METHOD = "count";
+  private static final String ROLLBACK_METHOD = "rollback";
+
   @TempDir static Path root;
   static ApiLogDatabaseFixture db;
   static final Instant STAMP = QuestionSubmissionServiceTest.NOW;
@@ -64,11 +79,11 @@ final class QuestionQueryApplicationServiceTest {
   @Test
   void qry018AllRoutesCommitFrozenResultsAndIndependentWireWithTwentyFourHourRetention()
       throws Exception {
-    for (String layout : List.of("QSSREQ01", "QSDREQ01", "NTSREQ01", "NTDREQ01"))
+    for (String layout : List.of(QSS_REQUEST, QSD_REQUEST, NTS_REQUEST, "NTDREQ01"))
       try (var f = QuestionQueryRepositoryTest.fixture(db)) {
         var service = service(f, f.source);
         var input = input(layout);
-        assertArrayEquals(expected(layout, "0000", 2), service.process(input));
+        assertArrayEquals(expected(layout, SUCCESS_CODE, 2), service.process(input));
         assertEquals(0, f.live.get());
         assertEquals(
             1,
@@ -90,33 +105,32 @@ final class QuestionQueryApplicationServiceTest {
 
   @Test
   void qry019AdminSnapshotCannotLeakToUserIncludingEmptyPageAndNewStage() throws Exception {
-    for (String layout : List.of("QSSREQ01", "QSDREQ01")) {
+    for (String layout : List.of(QSS_REQUEST, QSD_REQUEST)) {
       try (var f = QuestionQueryRepositoryTest.fixture(db)) {
-        f.sql("update schubert.app_users set role='ADMIN' where id=1");
+        f.sql(PROMOTE_USER_SQL);
         var input = input(layout);
         var service = service(f, f.source);
-        assertArrayEquals(expected(layout, "0000", 2), service.process(input));
+        assertArrayEquals(expected(layout, SUCCESS_CODE, 2), service.process(input));
         String before = metadata(f);
-        f.sql("update schubert.app_users set role='USER' where id=1");
+        f.sql(DEMOTE_USER_SQL);
         assertArrayEquals(
-            expected(layout, layout.equals("QSSREQ01") ? "0103" : "0104", 3),
+            expected(layout, layout.equals(QSS_REQUEST) ? FORBIDDEN_CODE : NOT_FOUND_CODE, 3),
             service.process(input));
         assertEquals(before, metadata(f));
         assertEquals(
             1,
             f.scalar(
                 "select count(*) from schubert.app_logs where category='SECURITY' and action='"
-                    + (layout.equals("QSSREQ01") ? "AUTHORIZATION_DENIED" : "OWNER_SCOPE_DENIED")
+                    + (layout.equals(QSS_REQUEST) ? "AUTHORIZATION_DENIED" : "OWNER_SCOPE_DENIED")
                     + "'"));
       }
       try (var f = QuestionQueryRepositoryTest.fixture(db)) {
-        f.sql("update schubert.app_users set role='ADMIN' where id=1");
-        var source =
-            afterRead(f, () -> f.sql("update schubert.app_users set role='USER' where id=1"));
+        f.sql(PROMOTE_USER_SQL);
+        var source = afterRead(f, () -> f.sql(DEMOTE_USER_SQL));
         assertArrayEquals(
-            expected(layout, layout.equals("QSSREQ01") ? "0103" : "0104", 1),
+            expected(layout, layout.equals(QSS_REQUEST) ? FORBIDDEN_CODE : NOT_FOUND_CODE, 1),
             service(f, source).process(input(layout)));
-        assertEquals(0, f.scalar("select count(*) from schubert.request_inbox"));
+        assertEquals(0, f.scalar(INBOX_COUNT_SQL));
       }
     }
   }
@@ -124,15 +138,14 @@ final class QuestionQueryApplicationServiceTest {
   @Test
   void qry020NarrowUserStageStaysUserAndFinalInboxWinnerIsRechecked() throws Exception {
     try (var f = QuestionQueryRepositoryTest.fixture(db)) {
-      var source =
-          afterRead(f, () -> f.sql("update schubert.app_users set role='ADMIN' where id=1"));
+      var source = afterRead(f, () -> f.sql(PROMOTE_USER_SQL));
       assertArrayEquals(
-          expected("QSSREQ01", "0000", 2), service(f, source).process(input("QSSREQ01")));
+          expected(QSS_REQUEST, SUCCESS_CODE, 2), service(f, source).process(input(QSS_REQUEST)));
       byte[] plain = QuestionQueryReplayServiceTest.decrypt(completion(f), MESSAGE, 1);
       assertArrayEquals(HexFormat.of().parseHex("4e4b515259310055"), Arrays.copyOf(plain, 8));
       Arrays.fill(plain, (byte) 0);
     }
-    for (String layout : List.of("QSSREQ01", "QSDREQ01"))
+    for (String layout : List.of(QSS_REQUEST, QSD_REQUEST))
       try (var f = QuestionQueryRepositoryTest.fixture(db)) {
         var competitor = service(f, f.source);
         String[] winningMetadata = {""};
@@ -140,17 +153,17 @@ final class QuestionQueryApplicationServiceTest {
             afterRead(
                 f,
                 () -> {
-                  f.sql("update schubert.app_users set role='ADMIN' where id=1");
+                  f.sql(PROMOTE_USER_SQL);
                   competitor.process(input(layout));
                   try {
                     winningMetadata[0] = metadata(f);
                   } catch (Exception e) {
                     throw new AssertionError(e);
                   }
-                  f.sql("update schubert.app_users set role='USER' where id=1");
+                  f.sql(DEMOTE_USER_SQL);
                 });
         assertArrayEquals(
-            expected(layout, layout.equals("QSSREQ01") ? "0103" : "0104", 3),
+            expected(layout, layout.equals(QSS_REQUEST) ? FORBIDDEN_CODE : NOT_FOUND_CODE, 3),
             service(f, source).process(input(layout)));
         assertEquals(winningMetadata[0], metadata(f));
         assertEquals(
@@ -170,19 +183,19 @@ final class QuestionQueryApplicationServiceTest {
       try (var f = QuestionQueryRepositoryTest.fixture(db)) {
         var source = afterRead(f, () -> f.sql(sql));
         assertArrayEquals(
-            expected("QSSREQ01", "0102", 1), service(f, source).process(input("QSSREQ01")));
-        assertEquals(0, f.scalar("select count(*) from schubert.request_inbox"));
+            expected(QSS_REQUEST, "0102", 1), service(f, source).process(input(QSS_REQUEST)));
+        assertEquals(0, f.scalar(INBOX_COUNT_SQL));
         assertEquals(
             1,
             f.scalar("select count(*) from schubert.app_logs where action='AUTHORIZATION_DENIED'"));
       }
     try (var f = QuestionQueryRepositoryTest.fixture(db)) {
-      byte[] bytes = data("QSSREQ01", false);
+      byte[] bytes = data(QSS_REQUEST, false);
       put(bytes, 256, "u1");
       assertArrayEquals(
-          expected("QSSREQ01", "0100", 1),
-          service(f, f.source).process(message("QSSREQ01", bytes)));
-      assertEquals(0, f.scalar("select count(*) from schubert.request_inbox"));
+          expected(QSS_REQUEST, "0100", 1),
+          service(f, f.source).process(message(QSS_REQUEST, bytes)));
+      assertEquals(0, f.scalar(INBOX_COUNT_SQL));
     }
   }
 
@@ -190,26 +203,27 @@ final class QuestionQueryApplicationServiceTest {
   void qry022MismatchAndDatabaseFailuresNeverReturnSuccessOrModifySavedResult() throws Exception {
     try (var f = QuestionQueryRepositoryTest.fixture(db)) {
       var service = service(f, f.source);
-      service.process(input("QSSREQ01"));
+      service.process(input(QSS_REQUEST));
       String before = metadata(f);
-      byte[] changed = data("QSSREQ01", false);
+      byte[] changed = data(QSS_REQUEST, false);
       put(changed, 0, "different");
       assertThrows(
-          PermanentProtocolException.class, () -> service.process(message("QSSREQ01", changed)));
+          PermanentProtocolException.class, () -> service.process(message(QSS_REQUEST, changed)));
       assertEquals(before, metadata(f));
       assertEquals(
           1, f.scalar("select count(*) from schubert.app_logs where action='PROTOCOL_REJECTED'"));
-      f.sql("update schubert.app_users set role='ADMIN' where id=1");
-      service.process(input("QSSREQ01"));
+      f.sql(PROMOTE_USER_SQL);
+      service.process(input(QSS_REQUEST));
       assertEquals(before, metadata(f));
     }
-    for (String fault : List.of("open", "null", "setAutoCommit", "setReadOnly", "commit", "close"))
+    for (String fault :
+        List.of("open", "null", "setAutoCommit", "setReadOnly", "commit", CLOSE_METHOD))
       try (var f = QuestionQueryRepositoryTest.fixture(db)) {
         f.fault = fault;
         var service = service(f, f.source);
         var error =
             assertThrows(
-                TemporaryInfrastructureException.class, () -> service.process(input("QSSREQ01")));
+                TemporaryInfrastructureException.class, () -> service.process(input(QSS_REQUEST)));
         assertNull(error.getCause());
         assertEquals(0, error.getSuppressed().length);
         assertEquals(0, f.live.get());
@@ -258,16 +272,16 @@ final class QuestionQueryApplicationServiceTest {
           new QuestionQueryApplicationService(
               f.source, authentication, repository, inbox, responses, clock);
       assertThrows(NullPointerException.class, () -> service.process(null));
-      byte[] actual = service.process(input("QSSREQ01"));
+      byte[] actual = service.process(input(QSS_REQUEST));
       assertArrayEquals(
-          Arrays.copyOfRange(expected("QSSREQ01", "0000", 2), 256, 304),
+          Arrays.copyOfRange(expected(QSS_REQUEST, SUCCESS_CODE, 2), 256, 304),
           Arrays.copyOfRange(actual, 256, 304));
-      assertEquals("0000", new String(actual, 208, 4, StandardCharsets.US_ASCII));
+      assertEquals(SUCCESS_CODE, new String(actual, 208, 4, StandardCharsets.US_ASCII));
       assertEquals(MESSAGE.toString(), new String(actual, 60, 36, StandardCharsets.US_ASCII));
       UUID first = UUID.fromString(new String(actual, 24, 36, StandardCharsets.US_ASCII));
       assertNotEquals(new UUID(0, 0), first);
       String saved = metadata(f);
-      byte[] replay = service.process(input("QSSREQ01"));
+      byte[] replay = service.process(input(QSS_REQUEST));
       assertEquals("0200", new String(replay, 208, 4, StandardCharsets.US_ASCII));
       assertNotEquals(
           first, UUID.fromString(new String(replay, 24, 36, StandardCharsets.US_ASCII)));
@@ -279,28 +293,28 @@ final class QuestionQueryApplicationServiceTest {
 
   @Test
   void qry023DefiniteFailureCapacityAndInitialInvalidContextKeepOriginalRows() throws Exception {
-    for (String layout : List.of("QSDREQ01", "NTDREQ01"))
+    for (String layout : List.of(QSD_REQUEST, "NTDREQ01"))
       try (var f = QuestionQueryRepositoryTest.fixture(db)) {
         byte[] bytes = data(layout, false);
         var absent = message(layout, bytes);
         var service = service(f, f.source);
-        assertArrayEquals(expected(layout, "0104", 2), service.process(absent));
+        assertArrayEquals(expected(layout, NOT_FOUND_CODE, 2), service.process(absent));
         String saved = metadata(f);
-        assertArrayEquals(expected(layout, "0104", 3), service.process(absent));
+        assertArrayEquals(expected(layout, NOT_FOUND_CODE, 3), service.process(absent));
         assertEquals(saved, metadata(f));
         assertEquals(
             1,
             f.scalar("select count(*) from schubert.request_inbox where processing_state='ERROR'"));
       }
-    for (String layout : List.of("QSSREQ01", "NTSREQ01"))
+    for (String layout : List.of(QSS_REQUEST, NTS_REQUEST))
       try (var f = QuestionQueryRepositoryTest.fixture(db)) {
-        f.sql("update schubert.app_users set role='ADMIN' where id=1");
+        f.sql(PROMOTE_USER_SQL);
         var limited = mappedSource(f, c -> QuestionQueryRepositoryTest.fault(c, "total-cap"));
         assertArrayEquals(expected(layout, "9001", 2), service(f, limited).process(input(layout)));
         String saved = metadata(f);
-        f.sql("update schubert.app_users set role='USER' where id=1");
+        f.sql(DEMOTE_USER_SQL);
         assertArrayEquals(
-            expected(layout, layout.equals("QSSREQ01") ? "0103" : "9001", 3),
+            expected(layout, layout.equals(QSS_REQUEST) ? FORBIDDEN_CODE : "9001", 3),
             service(f, f.source).process(input(layout)));
         assertEquals(saved, metadata(f));
       }
@@ -309,8 +323,8 @@ final class QuestionQueryApplicationServiceTest {
       var source =
           afterRead(f, () -> f.sql("update schubert.app_users set status='ACTIVE' where id=1"));
       assertArrayEquals(
-          expected("QSSREQ01", "0102", 1), service(f, source).process(input("QSSREQ01")));
-      assertEquals(0, f.scalar("select count(*) from schubert.request_inbox"));
+          expected(QSS_REQUEST, "0102", 1), service(f, source).process(input(QSS_REQUEST)));
+      assertEquals(0, f.scalar(INBOX_COUNT_SQL));
     }
   }
 
@@ -326,17 +340,15 @@ final class QuestionQueryApplicationServiceTest {
             "update schubert.request_inbox set fingerprint_key_version='gone'",
             "update schubert.request_inbox set request_fingerprint_hmac=repeat('0',64)"))
       try (var f = QuestionQueryRepositoryTest.fixture(db)) {
-        service(f, f.source).process(input("QSSREQ01"));
+        service(f, f.source).process(input(QSS_REQUEST));
         var source = afterRead(f, () -> f.sql(change));
         var service = service(f, source);
         if (change.contains("fingerprint_hmac"))
-          assertThrows(PermanentProtocolException.class, () -> service.process(input("QSSREQ01")));
+          assertThrows(PermanentProtocolException.class, () -> service.process(input(QSS_REQUEST)));
         else
           assertThrows(
-              TemporaryInfrastructureException.class, () -> service.process(input("QSSREQ01")));
-        assertEquals(
-            change.startsWith("delete") ? 0 : 1,
-            f.scalar("select count(*) from schubert.request_inbox"));
+              TemporaryInfrastructureException.class, () -> service.process(input(QSS_REQUEST)));
+        assertEquals(change.startsWith("delete") ? 0 : 1, f.scalar(INBOX_COUNT_SQL));
         assertEquals(0, f.live.get());
       }
     for (String change :
@@ -345,12 +357,12 @@ final class QuestionQueryApplicationServiceTest {
             "update schubert.request_inbox set"
                 + " processing_state='PROCESSING',completed_at=null,result_ref_type=null,response_layout_id=null,response_version=null,response_body_encrypted=null,response_key_version=null"))
       try (var f = QuestionQueryRepositoryTest.fixture(db)) {
-        service(f, f.source).process(input("QSSREQ01"));
+        service(f, f.source).process(input(QSS_REQUEST));
         f.sql(change);
         var service = service(f, f.source);
         assertThrows(
-            TemporaryInfrastructureException.class, () -> service.process(input("QSSREQ01")));
-        assertEquals(1, f.scalar("select count(*) from schubert.request_inbox"));
+            TemporaryInfrastructureException.class, () -> service.process(input(QSS_REQUEST)));
+        assertEquals(1, f.scalar(INBOX_COUNT_SQL));
       }
   }
 
@@ -362,32 +374,34 @@ final class QuestionQueryApplicationServiceTest {
             "with projected as",
             "insert into schubert.request_inbox",
             "update schubert.request_inbox"))
-      for (String mode : List.of("execute", "close", "count", "count-close", "rollback")) {
-        if (part.equals("with projected as") && mode.startsWith("count")) continue;
+      for (String mode :
+          List.of("execute", CLOSE_METHOD, COUNT_METHOD, "count-close", ROLLBACK_METHOD)) {
+        if (part.equals("with projected as") && mode.startsWith(COUNT_METHOD)) continue;
         try (var f = QuestionQueryRepositoryTest.fixture(db)) {
           var source = sqlFault(f, part, mode);
           var service = service(f, source);
           assertThrows(
               TemporaryInfrastructureException.class,
-              () -> service.process(input("QSSREQ01")),
+              () -> service.process(input(QSS_REQUEST)),
               part + ":" + mode);
           assertEquals(0, f.live.get());
-          assertEquals(0, f.scalar("select count(*) from schubert.request_inbox"));
+          assertEquals(0, f.scalar(INBOX_COUNT_SQL));
         }
       }
-    for (String mode : List.of("execute", "close", "count", "rollback"))
+    for (String mode : List.of("execute", CLOSE_METHOD, COUNT_METHOD, ROLLBACK_METHOD))
       try (var f = QuestionQueryRepositoryTest.fixture(db)) {
-        f.sql("update schubert.app_users set role='ADMIN' where id=1");
-        service(f, f.source).process(input("QSSREQ01"));
+        f.sql(PROMOTE_USER_SQL);
+        service(f, f.source).process(input(QSS_REQUEST));
         String saved = metadata(f);
-        f.sql("update schubert.app_users set role='USER' where id=1");
+        f.sql(DEMOTE_USER_SQL);
         var service = service(f, sqlFault(f, "insert into schubert.app_logs", mode));
         assertThrows(
-            TemporaryInfrastructureException.class, () -> service.process(input("QSSREQ01")));
+            TemporaryInfrastructureException.class, () -> service.process(input(QSS_REQUEST)));
         assertEquals(saved, metadata(f));
         assertEquals(0, f.scalar("select count(*) from schubert.app_logs"));
       }
-    for (String fault : List.of("open", "null", "setAutoCommit", "setReadOnly", "commit", "close"))
+    for (String fault :
+        List.of("open", "null", "setAutoCommit", "setReadOnly", "commit", CLOSE_METHOD))
       try (var f = QuestionQueryRepositoryTest.fixture(db)) {
         var opens = new AtomicInteger();
         var source =
@@ -401,12 +415,11 @@ final class QuestionQueryApplicationServiceTest {
                     });
         var service = service(f, source);
         assertThrows(
-            TemporaryInfrastructureException.class, () -> service.process(input("QSSREQ01")));
+            TemporaryInfrastructureException.class, () -> service.process(input(QSS_REQUEST)));
         assertEquals(0, f.live.get());
         // commit/close uncertainty must never be represented by a successful wire.
         assertEquals(2, opens.get());
-        assertEquals(
-            fault.equals("close") ? 1 : 0, f.scalar("select count(*) from schubert.request_inbox"));
+        assertEquals(fault.equals(CLOSE_METHOD) ? 1 : 0, f.scalar(INBOX_COUNT_SQL));
       }
   }
 
@@ -430,7 +443,7 @@ final class QuestionQueryApplicationServiceTest {
                     Connection.class.getClassLoader(),
                     new Class<?>[] {Connection.class},
                     (p, m, a) -> {
-                      if (m.getName().equals("rollback") && mode.equals("rollback"))
+                      if (m.getName().equals(ROLLBACK_METHOD) && mode.equals(ROLLBACK_METHOD))
                         throw new java.sql.SQLException("synthetic rollback failure");
                       if (!m.getName().equals("prepareStatement")
                           || !a[0].toString().contains(part))
@@ -442,12 +455,12 @@ final class QuestionQueryApplicationServiceTest {
                           (sp, sm, sa) -> {
                             if ((sm.getName().equals("executeQuery")
                                     || sm.getName().equals("executeUpdate"))
-                                && (mode.equals("execute") || mode.equals("rollback")))
+                                && (mode.equals("execute") || mode.equals(ROLLBACK_METHOD)))
                               throw new java.sql.SQLException("synthetic statement failure");
-                            if (sm.getName().equals("executeUpdate") && mode.startsWith("count"))
-                              return 0;
+                            if (sm.getName().equals("executeUpdate")
+                                && mode.startsWith(COUNT_METHOD)) return 0;
                             Object actual = QuestionSubmissionServiceTest.invoke(statement, sm, sa);
-                            if (sm.getName().equals("close") && mode.contains("close"))
+                            if (sm.getName().equals(CLOSE_METHOD) && mode.contains(CLOSE_METHOD))
                               throw new java.sql.SQLException("synthetic statement close failure");
                             return actual;
                           });
@@ -475,8 +488,8 @@ final class QuestionQueryApplicationServiceTest {
 
   static WireMessage<FixedPayload> input(String layout) {
     byte[] bytes = data(layout, false);
-    if (layout.equals("QSSREQ01")) put(bytes, 0, "missing-literal");
-    if (layout.equals("NTSREQ01")) put(bytes, 0, "ERROR");
+    if (layout.equals(QSS_REQUEST)) put(bytes, 0, "missing-literal");
+    if (layout.equals(NTS_REQUEST)) put(bytes, 0, "ERROR");
     if (layout.contains("DREQ")) put(bytes, 0, "000000000003");
     return message(layout, bytes);
   }
@@ -509,7 +522,7 @@ final class QuestionQueryApplicationServiceTest {
   }
 
   static byte[] expected(String layout, String code, int response) {
-    boolean success = code.equals("0000") || code.equals("0200");
+    boolean success = code.equals(SUCCESS_CODE) || code.equals("0200");
     byte[] b =
         QuestionQueryWireOracle.wire(
             layout,
@@ -518,10 +531,10 @@ final class QuestionQueryApplicationServiceTest {
             STAMP,
             QuestionQueryRequestTest.NOW,
             code,
-            layout.equals("NTSREQ01") ? 1 : 0);
+            layout.equals(NTS_REQUEST) ? 1 : 0);
     if (!success) return b;
     String body = "😀".repeat(101) + "alpha%_\\";
-    if (layout.equals("QSDREQ01")) {
+    if (layout.equals(QSD_REQUEST)) {
       Arrays.fill(b, 256, b.length, (byte) 32);
       put(b, 256, "000000000003");
       put(b, 268, "0".repeat(25) + "3");
@@ -542,7 +555,7 @@ final class QuestionQueryApplicationServiceTest {
       put(b, 403, "0");
       put(b, 404, body);
       put(b, 9124, "3");
-    } else if (layout.equals("NTSREQ01")) {
+    } else if (layout.equals(NTS_REQUEST)) {
       Arrays.fill(b, 304, b.length, (byte) 32);
       put(b, 304, "000000000004");
       put(b, 316, "0".repeat(25) + "4");
