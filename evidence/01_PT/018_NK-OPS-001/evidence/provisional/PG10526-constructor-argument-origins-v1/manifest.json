@@ -1,0 +1,137 @@
+{
+  "actualExit": 0,
+  "consumerSources": 10,
+  "contexts": {
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/log/LogSqlContractTest.java": {
+      "reviewedFragments": [
+        "private static final int PAGE_SIZE = 100;"
+      ],
+      "sha256": "e364cbaac8b3438dd07fb904938b13bb70673ee43836da55d4c788208335eddf"
+    },
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/persistence/LogQueryRepositoryTest.java": {
+      "reviewedFragments": [
+        "new int[] {0, 1, 100, 101, 201}",
+        "new int[] {1, 2, 3, 999999}",
+        "int pages = Math.max(1, (total + 99) / 100);",
+        "int page = Math.min(requested, pages);"
+      ],
+      "sha256": "08b7b9a0071246e07a664339b33f26e6503a0d3c0490ec04f6b113ced1b82dc4"
+    },
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/persistence/UserQueryRepositoryTest.java": {
+      "reviewedFragments": [
+        "new int[] {0, 1, 50, 51, 101}",
+        "int pages = Math.max(1, (count + 49) / 50);",
+        "assertPage(actual, page, count, pages, first, last);",
+        "assertPage(value, 1, 49_999_950, 999999, 1, 50);",
+        "assertPage(result, 2, 51, 2, 51, 51);"
+      ],
+      "sha256": "7ea61e1463b3fbd0e7e9bdd4508fe5bb82a0a6d40fabc53cf724757b034f456b"
+    },
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/cleanup/InspectionAttemptTest.java": {
+      "reviewedFragments": [
+        "List.of(value(7, 7, 0, true), value(7, 3, 4, true))",
+        "int code = after.counts().skipped() == 0 ? 0 : 10;",
+        "int index = i;",
+        "new CleanupCounts(index + 9, index + 5, 4)",
+        "new CleanupCounts(i + 4, i + 3, 1)",
+        "new CleanupCounts(i + 9, i + 5, 4)",
+        "Long.MAX_VALUE"
+      ],
+      "sha256": "f80fec36648c7a4934626d1f7820dedfa731d2fc79962108265ea41cb7d16780"
+    },
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/cleanup/LogCleanupValueContractTest.java": {
+      "reviewedFragments": [
+        "new CleanupCounts(Long.MAX_VALUE, Long.MAX_VALUE, 0)"
+      ],
+      "sha256": "dbaba0cc274785efc8a6e33168d5e51bab85eb1ab1b7e5efa4699e2522e3432b"
+    },
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/cleanup/StepCleanupServiceTest.java": {
+      "reviewedFragments": [
+        "long[] delta = {1, 1, 3, 2, 1, 1, 1};",
+        "long[] total = {1, 1, 3, 2, 1, 2, 3};",
+        "new CleanupCounts(Long.MAX_VALUE, Long.MAX_VALUE, 0)"
+      ],
+      "sha256": "b95adfd16e509b66436235042504fe49ada4fb43e3f4a3910b13bc2ccdbc27c7"
+    },
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/CleanupStepRepositoryTest.java": {
+      "reviewedFragments": [
+        "long[] deltas = {1, 1, 3, 2, 1, 1, 1};",
+        "long[] totals = {1, 1, 3, 2, 1, 2, 3};"
+      ],
+      "sha256": "9532b99e19ba074d3c5bface60c46b7599f6ddd19261fc09a10a8a8ec5d1aef7"
+    },
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/CleanupStepValuesTest.java": {
+      "reviewedFragments": [
+        "for (int i = 0; i < 64; i++)",
+        "int n = i;",
+        "new CleanupCounts(n, n, 0)",
+        "Optional.of(new CleanupCounts(100 - i, 100 - i, 0))"
+      ],
+      "sha256": "d5ab77a33a9c23ad1db89624f736f8a76d6a796194794b649d2884705de99fdd"
+    },
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/InspectionSummaryRepositoryTest.java": {
+      "reviewedFragments": [
+        "new InspectionSummary(RUN, new CleanupCounts(0, 0, 0), false)",
+        "new InspectionSummary(RUN, new CleanupCounts(5, 2, 3), false)",
+        "new InspectionSummary(RUN, new CleanupCounts(5, 2, 3), true)",
+        "var expected = new BatchRun(RUN.id(), Instant.parse(literal));"
+      ],
+      "sha256": "ac325396dec008ec6cc76160f0aa039b7abd4f3e0d8b58d145d5ac689846113e"
+    },
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/MorningExpirySessionTest.java": {
+      "reviewedFragments": [
+        "for (int attempt = 1; attempt <= 2; attempt++)",
+        "final int current = attempt;"
+      ],
+      "sha256": "d369e330da0db14270b3acf54e3bbf64f44cbe0de55607d372c9efd2d2e996f9"
+    }
+  },
+  "effortPercent": null,
+  "expectedArgumentsUseSutOutput": false,
+  "externalActions": 0,
+  "formalUpdated": false,
+  "fullCaseRequirementsAndFixtureCorrectnessAccepted": false,
+  "invocation": {
+    "actualPythonCommand": [
+      "python3",
+      "-B",
+      "tools/quality/pg10526_constructor_argument_origins.py"
+    ],
+    "arbitraryArgumentsRecorded": false,
+    "entrypointPath": "tools/quality/pg10526_constructor_argument_origins.py",
+    "entrypointSha256": "c4808670dfd2a829af861c3eecd5f7857d4971a7246ea7af89f25595a6603d68",
+    "helperPath": "tools/quality/host_tool_invocation.py",
+    "helperSha256": "85d616a3db4ff47f4c95ae2e0dd57954bc2b09f28b8f2a685b986e5621545c46",
+    "libraryPath": "tools/quality/pg10526_constructor_argument_origins.py",
+    "librarySha256": "c4808670dfd2a829af861c3eecd5f7857d4971a7246ea7af89f25595a6603d68",
+    "loadedProjectPythonSources": {
+      "tools/quality/g07_host_class_provenance_inputs.py": "a676cb3e4145177c3c243722d737592ce7d44c3f29cfe4f670662ef7651f046b",
+      "tools/quality/host_tool_invocation.py": "85d616a3db4ff47f4c95ae2e0dd57954bc2b09f28b8f2a685b986e5621545c46",
+      "tools/quality/pg10526_constructor_argument_origins.py": "c4808670dfd2a829af861c3eecd5f7857d4971a7246ea7af89f25595a6603d68"
+    },
+    "provenance": "OBSERVED_SYS_ARGV_AND_ORIG_ARGV_NOT_RECONSTRUCTED"
+  },
+  "metadataNegativeVectors": 3,
+  "nestedInputCarriers": {
+    "BatchRun": {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRun.java",
+      "review": "VALIDATION_ONLY_NO_COMPONENT_REASSIGNMENT_OR_SUT_OUTPUT_CONVERSION",
+      "sha256": "c440d3e16da86b7814cf8fbd6247e48c1ab4cd6de2da3a114a38c308ae3c7ce4"
+    },
+    "InspectionSummary": {
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/InspectionSummary.java",
+      "review": "VALIDATION_ONLY_NO_COMPONENT_REASSIGNMENT_OR_SUT_OUTPUT_CONVERSION",
+      "sha256": "0af03ae228a8efec00535de709a528dfc9692cb2a51c4c2a4a0e0fb79cde12aa"
+    }
+  },
+  "newAccepted": 0,
+  "original128ManifestRewritten": false,
+  "productTestsExecuted": 0,
+  "provenanceScope": "EXACT_UNCHANGED_SOURCE_SELECTED_EXPRESSIONS_ONLY",
+  "rowsSha256": "5f021a0ba72bcd9b9051aeb77f2a018ae66935e2fea10ed36b51068deeac77e0",
+  "source": "6612747b7a5492e5c49647d85cfc2dcbe6d75c9f",
+  "targetClassLoading": 0,
+  "targetCompilation": 0,
+  "variableSyntaxSitesReviewed": 28,
+  "wholeG03Accepted": false
+}
