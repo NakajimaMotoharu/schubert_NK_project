@@ -1,0 +1,17 @@
+# 2100 Qualified型修飾候補77の固定入力二十六・残五十一結果
+
+2026-10-27 00:32 JST、2099仕様/群2445開始.25/1/3pp cap10、source370/Main21d不変更。前2098で保守的に残したnamed77は型修飾名/enum/fixture/SUT変数等の候補集合であり、変数77と断定しない。
+
+PG10652-qualified-constructor-inputs-v1 manifest `fbbf406acd3b6361fe5f27fb1636da77b16a817015e27cd9b43c807171ea9983` actual0。new直後の、元ASTが型束縛したconstructor headだけを除くことで、qualified型名を入力の変数と混同しないよう精密化した。数値suffixは連続字面だけを許しstandalone Lは残す。26箇所は数値/String/boolean/nullのみ、実ownerのMain record constructorは値保持・現source SHA/正常10632入力不変。残51はnamed pending、method66は別の未確認を保持。
+
+26の内訳はTransferUsageScanner.Usage三、TransferCleanup.Outcome五、MaintenanceUnitTermination.KernelDirectory一、MorningServiceReadiness.Response一、ExpiryAuditRepository.Snapshot一、SystemManagerObservation.Owner一、NativeCoveragePrivateFile.Identity二、WebLogDispatcher.Report十、HttpByteRangeParser.Partial一、ArtemisExpiryPurgeClient.Observation一。これらのTest名にnative/削除/graph/JMS等があっても、今回はexpected式のsourceだけであり、元case/fixture/製品methodを一切実行していない。
+
+独立PG10654-qualified-constructor-inputs-post-v1 manifest `5b062623d06a9da951698a6799b0d7932be86da19e9382a29c2a821a351fafc9` actual0。主lexerのhead除外手順を再利用せず、元raw AST span77をsource行/hashで照合し、String/char/numeric literalと既型headだけをraw文法で検査した。全77の元entry index/元entry semantic SHA/四key保持を確認、new T(T)の引数T、standalone L、qualified head、数値1L、外側型と同名の入力Oという五metadata vectorで混同を防止した。
+
+BUG1857/YKT1608：起草時はsuffix処理前の25/52をguardと文書へ残し、実際はExpiry Observationの固定1790121600000Lが追加され26/51、assert1/OUT前。原工具SHA2b83655c488f95a50da8727e859ab3339de1f110d963bca4587fd2eec4334756/元失敗を保持、独立raw文法で追加一を含む全26を確認し、元77内の分割だけ訂正。scope/元見積/費用/以前の23を増減する変更ではない。
+
+原168全体の現在地：固定入力49（以前23＋今回26）、既BUG1846で是正済み二（新修正として加算0）、未確認117（named51/method66）。固定入力の由来と値保持constructorの部分レビューであり、全fixture/SS oracle・DB/Root後条件・動的PTの合格を意味しない。各path/method/line/hash/owner/constructor本文参照は同directory qualified-input-reviews.jsonへ保存した。
+
+command/環境/Python/時刻/actual exit/source/hashは両manifest、前置pyflakes0の明示分岐後だけ本体実行。製品classload/compile/PT/新coverage/実VM/DB/鍵/Root等外部操作0、coverage null、全正式1964-53/17-190/工数null/QA051final/安全HOLD不変更。共有used12→12/reset1793599188の丸め0は専有費0でなく、N/T/専有費null、usagec98792f72a1fa25354a7d50ad7bfa727c941403f2f647036e30c182f01ed2507。
+
+次は残51の直接enum memberと実入力変数/fixture定数をSource型/定義・元constructorと対応させ、値の出典だけを限定レビューする。識別子名を型名に一括置換したり、同名だから未確認引数を除外したりせず、実不足があれば修正前台帳からPGへ。通常小区切り/commitで停止しない。
