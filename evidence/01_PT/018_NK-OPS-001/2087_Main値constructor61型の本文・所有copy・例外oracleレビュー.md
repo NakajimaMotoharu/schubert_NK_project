@@ -1,0 +1,25 @@
+# 2087 Main値constructor61型の本文・所有copy・例外oracleレビュー
+
+2026-10-26、G03.01、群2429開始1/3/7週次枠pp cap10、sourcec919/正常10558不変更。2086/10582で実ownerを同定したMain61型/55sourceについて、record header/compact constructor本文を全件読取し、型解決とconstructorの役割を分けた。Main値を実際に構築したり、Test/fixture/DB/Root等を実行していない。
+
+PG10588 manifest `7ac388609456e216a0f9be08e02855d2fa691ff8089a1a46eb745b0d38c9866f` actual0。全55 source SHAは元compiled owner bindingと同一。component名をheaderから取り、local変数（bytes/progress/roots/left/right等）への代入をrecord component変更と誤認しない。記録した本文位置/hash/分類はconstructor sourceのレビューであり、全expected引数やcase fixtureの正当性の自動判定ではない。
+
+|分類|型数|読取した処理・限界|
+|検証のみ・component再代入なし|52|null/範囲/相関/日時精度/固定pattern/Pathの絶対・正規化済・非重複等。ActorのUTF-8 byte数はlocal計算だけ。InspectionExecutionのprogress、StorageRootLayoutのrootsもlocalで、入力componentの正規化/再計算ではない。別fields()/from()/AAD/業務処理の正しさとは別|
+|暗黙record canonical constructor|6|BackupHealthMonitor.Completion、ArtemisExpiryPurgeClient.Observation/Result、MaintenanceUnitTermination.KernelDirectory、ExpiryAuditRepository.Snapshot、NativeCoveragePrivateFile.Identity。利用者定義変換なし。raw observation/Nullable項目/consumer側検証があり、無条件の妥当性・NPE排除・実環境成功を認定しない|
+|検証＋値を保つ所有copy|1|FixedServiceIdentity.Valueのgroups=List.copyOf(groups)。要素/順序を保って不変化しuid/gid/group昇順・範囲を検査。NSS/default NativeQueryや実所有解決を呼ばず、当nested recordの本文だけ。copyを値計算や正規化と混同しない|
+|非record例外・値oracleとは別|2|TemporaryInfrastructureException/BatchRepositoryExceptionのconstructorは固定super message。getMessage()をexpected生成へ呼ぶ使い方は独立性不足として後述の四箇所を起票|
+
+record59型にcustom record equalsのsource定義はない。component計算/正規化代入、増減、mutable collection操作を誤って検証のみと認定しないmetadata四反例（=0、++、clear、normalize代入）を確認し、唯一のList.copyOf正例と区別した。これはProductionの正常/異常/null/例外/競合の実PTではない。
+
+補助validatorはIdValue.validate、TypedFieldValues.requireUnsignedRange、StorageIdentity.validate、StartupPermitRecords.nonzero/hash/requireValue、BatchStepAttempt.time、ReceiptReference.requireReceiptId、各invalid()を必要箇所読取。固定値/primitive/String/immutable時間・UUIDの検証・固定例外生成で、constructor componentへ変換値を戻さないことを確認した。Path/collection等の任意provider callbackの無条件安全性や、Mainその他メソッドの実測をこの読取から推論しない。
+
+## 発見・横展開
+
+原168式にはMain例外のnew/getMessageをexpectedとする二箇所があった。全Test sourceの横断で既変更SHAの二箇所も見つかり、**BUG1846/YKT1597の対象は計四**：LogQueryApplicationServiceTest.deny、UserQueryApplicationServiceTest.deny、UserQueryReplayServiceTest.deny、CleanupStepRepositoryTest.redacted。PG-D680で内部安全診断のliteral二文面を独立PT契約へ固定し、expected生成だけを是正する。
+
+広めのnew Exception/Error/getMessage検索の他六matchは非該当。ReceiptReferenceRepositoryTest一はliteral expected/new例外message actual、CleanupBackupAdmissionTest五はliteral expected/入れ子fixture例外を投げたassertThrows結果message actual。grepの範囲誤認による変更や同HOLD試験の実行を行わない。固定診断の期待値を変えるためにProduction classを呼ぶ四箇所だけが今回の新欠陥である。
+
+元動的TestのDB/JMS/鍵/故障graph・cohort条件はHOLD、別ハーネスで迂回しない。次のPG群で四expectedをliteral化し、許可済みsource/static/正常compile/独立token・全Main/非対象Test byte・traceを確認する。これを実行PT PASS/coverage/PT免除/正式受入へ換算しない。59recordの引数由来・全case fixture/要求/TestID joinは残件であり、constructor本文の分類だけで全oracleを認定しない。
+
+新Production変更0/新PT0/新WBS受入0、正式1964/53・個別17/190・工数null・QA051final/全安全HOLD不変。実commandは同番号Python工具/manifestに保存、前置pyflakes0。Tool自身のmetadata分類反例は製品PTに加算しない。
