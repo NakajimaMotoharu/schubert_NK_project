@@ -1,0 +1,11 @@
+# 2134 API readonly owner既判断残十三exact結合結果
+
+2026-10-27、2133/群2491、sourcef24d1649e170e46aafb59a37b9750c602206364c/Main21d、branch dev-foundation。10934原69b5240316368ec534dd837ca1b95b9b8f2cd36af1a87775b165e1e6a780350f、10936独立e5143c2f99ecab9185dee9068c14233e2f2eae2de075a423faf13c3e628b4f12、actual0/0・九metadata反例。pathはevidence/provisional/PG10934-api-ro-prior-context13-v1/とPG10936-api-ro-prior-context-post-v1/、実command/時刻/source/tool/hash/全原ID・座標/reasonはmanifestとcontexts.jsonへ保存した。
+
+旧9095 manifest64157d79/e87ab6ecのApiReadOnlyObservationAttempt.java全byteが現fe7fbb7dと同一であることをGit旧sourceと現sourceで独立確認。十四rowのうち既2130のNullAssignment PMD00346一を除外し、残十三（generic multi-catch型別十・単Connection二alias二・private lock一）をraw全属性/message/reasonへ一意に結合した。型別row十を十の別logic障害とはしない。
+
+旧理由は、取得済Connectionをmode設定前にretainedへ捕捉し、必要rollback/close後に同じprimary/fatal graphを戻す契約、失敗cleanupは同一frame保持、private final lockで一attemptを直列化しstatusはnonblockingという範囲。新理由/許容件数・抑制・解析scope除外を捏造しない。旧32PT/当一Main四100はe87 sourceの歴史であり、新実行/現source成功へ転記0。
+
+全十三SOURCE_REBOUND_CURRENT_WHOLE_PENDING/currentWholeCaseRefs空・coverage null、PT実行免除0。新Main/Test/製品PT・解析再実行/DB/JMS/Root/VM/owner release/credential操作0。raw9248不変、参照2711→2724/current whole pending31→44/今回一覧の未参照6537→6524。未参照を真の障害/未review数にせずactualViolationCount null、全F03/451未受入を保持する。
+
+開始0.5/1.5/4pp cap10固定、fresh共有21→22の観測1ppは全chat共有で専有費ではなくN/T・割当費null、usage6279490b。元計画/旧判断再利用/新sourceの形式境界を分離し、見積減額を完成率へ変換0。正式1964-53/17-190/工数null/QA051final・全安全HOLD/未読保証不明1847維持。次はG13未登録二Testの原仕様/導入履歴からprimary owner/費用ownerを証拠で確定できるか調査し、根拠なきUNKNOWN解消は行わない。
