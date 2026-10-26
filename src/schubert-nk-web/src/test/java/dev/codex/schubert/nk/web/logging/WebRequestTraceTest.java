@@ -177,6 +177,15 @@ final class WebRequestTraceTest {
         .doFilter(request, new MockHttpServletResponse(), (req, res) -> {});
     assertEquals(trace.requestId(), WebRequestContext.require(request).requestId());
     assertEquals("203.0.113.7", WebRequestContext.require(request).clientAddress().value());
+    assertEquals("WebRequestContext[REDACTED]", WebRequestContext.require(request).toString());
+    request.removeAttribute(WebRequestContext.class.getName() + ".requestId");
+    assertEquals(
+        new UUID(0, 3),
+        WebRequestContext.identify(
+            request,
+            () -> {
+              throw new AssertionError("unexpected request identity allocation");
+            }));
     var other = new MockHttpServletRequest();
     trace(other, 4);
     other.setAttribute(WebRequestTrace.class.getName(), trace);
@@ -312,6 +321,17 @@ final class WebRequestTraceTest {
 
   @Test
   void req006AllNullAndMistypedMetadataAreRejected() {
+    assertThrows(
+        IllegalStateException.class, () -> WebRequestContext.require(new MockHttpServletRequest()));
+    assertThrows(NullPointerException.class, () -> WebRequestContext.require(null));
+    var mistypedContext = new MockHttpServletRequest();
+    mistypedContext.setAttribute(WebRequestContext.class.getName(), "not-context");
+    var contextFailure =
+        assertThrows(
+            IllegalStateException.class, () -> WebRequestContext.existing(mistypedContext));
+    assertEquals("web request context is unavailable", contextFailure.getMessage());
+    assertNull(contextFailure.getCause());
+    assertEquals(0, contextFailure.getSuppressed().length);
     var request = new MockHttpServletRequest();
     assertThrows(NullPointerException.class, () -> WebRequestTrace.ensure(null, UUID::randomUUID));
     assertThrows(NullPointerException.class, () -> WebRequestTrace.ensure(request, null));
