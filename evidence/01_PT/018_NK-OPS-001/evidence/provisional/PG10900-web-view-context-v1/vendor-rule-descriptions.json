@@ -1,0 +1,10 @@
+{
+  "DoNotUseThreads": {
+    "description": "The J2EE specification explicitly forbids the use of threads. Threads are resources, that should be managed and monitored by the J2EE server.\nIf the application creates threads on its own or uses own custom thread pools, then these threads are not managed, which could lead to resource exhaustion.\nAlso, EJBs might be moved between machines in a cluster and only managed resources can be moved along.",
+    "resource": "category/java/multithreading.xml"
+  },
+  "UseConcurrentHashMap": {
+    "description": "Since Java5 brought a new implementation of the Map designed for multi-threaded access, you can\nperform efficient map reads without blocking other threads.",
+    "resource": "category/java/multithreading.xml"
+  }
+}
