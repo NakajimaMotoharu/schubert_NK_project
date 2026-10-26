@@ -16,4 +16,6 @@ F/E/S/aborted/flaky/not-runを合格へ算入せず、元XML/exit/source/全依�
 
 読取中の追加具体化：ScenarioDetailTemplateTest.detail024は正常snapshot Web moduleのtarget/scenario-screen-traces/PT-SCR-024.txtへpublic synthetic固定ASCII traceを作成する。原本/元tree/実VM/実業務fileではなく、新規専用snapshot内の当試験所有出力である。実行前に全trace出力先/parentが同snapshot内・symlinkなし・未存在を固定し、他に書込みがあれば未確認のまま起動しない。元Testのtrace処理を削除/別fixture化せず、終了後に実file/byte/hashと元期待固定文字列を照合する。各templateの他のFiles操作も全call site/固定pathを事前確認する。relative pathのcwdは当snapshotのWeb module、元treeへの書込み0を維持する。
 
+全八Test読取後の追加確認：ScenarioSearchTemplateTest.search033も同じ専用target内のPT-SCR-033.txtへ固定public-synthetic traceを作成する。出力は024/033の二fileだけ、親pathのsymlink/既存traceがないことを起動前確認する。Files.readStringはlogs.html、log-search-validation.js、search-speaker-submit.js、schubert.cssの固定snapshot resourceに限る。ブラウザJSは実行しない。明示MVCのLogin/Menu/Error bean構築は読取り済みでDB/実socket/業務assemblyを作成せず、handler登録を実接続成功へ換算しない。
+
 実日時/OS/JDK/tool/branch/source/command/exit/入力・expected/actual/XML/coverage・関連BUGとhashを107結果/manifestへ保存。全安全HOLD/未読保証不明1847/保留二file/原本DB/Backup/鍵/stash/Current baselineを保全。fresh残10%以下又は取得不能で保全し、それ以外は通常小群/commit/PMO待ちで停止しない。
