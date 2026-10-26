@@ -48,6 +48,7 @@ import org.thymeleaf.spring6.view.ThymeleafViewResolver;
 
 /** PG216/016019/PT-SCR084..091. Actual resolver with independent DOM literals. */
 class LogSearchTemplateTest {
+  private static final int PAGE_SIZE_BOUNDARY = 100;
   private static final String SEARCH_ACTION_TEXT = "search";
   private static final String SEARCH_PATH = "/search";
   private static final String READER_USERNAME = "reader";
@@ -271,7 +272,8 @@ class LogSearchTemplateTest {
             assertEquals("span", nav.children().getFirst().tagName());
             assertEquals(
                 "1 - " + Math.min(total, 100) + " / " + total, nav.selectFirst("div").text());
-            if (total > 100) assertEquals(prefix + "2", nav.selectFirst("a").attr(HREF_ATTRIBUTE));
+            if (total > PAGE_SIZE_BOUNDARY)
+              assertEquals(prefix + "2", nav.selectFirst("a").attr(HREF_ATTRIBUTE));
             else assertTrue(nav.select("a").isEmpty());
           }
         }
