@@ -35,9 +35,12 @@ import org.thymeleaf.templateresolver.StringTemplateResolver;
 
 /** NK-WEB001/SCR008,009/FUN006/UI223,235/SS313,323/PG204/PT-WEB230..237. */
 class AnimationViewModelTest {
+  private static final String FIXTURE_READER = "reader";
+  private static final String FIXTURE_MAIN_SECTION = "main";
+
   private static SessionPrincipal actor(UserRole role) {
     return new SessionPrincipal(
-        "reader",
+        FIXTURE_READER,
         role,
         AuthenticationContext.of("a".repeat(64)),
         Instant.parse("2026-09-19T00:00:00Z"));
@@ -84,7 +87,7 @@ class AnimationViewModelTest {
         assertEquals(v[1], m.getOvaCount());
         assertEquals(v[2] == 1, m.isOpeningPresent());
         assertEquals(v[3], m.getTotalCount());
-        assertEquals("reader", m.getTopBar().getUsername());
+        assertEquals(FIXTURE_READER, m.getTopBar().getUsername());
         assertEquals(
             switch (role) {
               case USER -> "USER";
@@ -107,7 +110,7 @@ class AnimationViewModelTest {
   void web231MainGrouping() {
     var m = list(AnimationListCategory.MAIN, main());
     assertEquals("メインパート一覧", m.getTitle());
-    assertEquals("main", m.getSection());
+    assertEquals(FIXTURE_MAIN_SECTION, m.getSection());
     assertEquals(5, m.getTotalCount());
     assertEquals(
         List.of("title-main-a", "title-main-b", "title-main-c"),
@@ -171,8 +174,8 @@ class AnimationViewModelTest {
 
   @Test
   void web233RejectInconsistentGroups() {
-    var main = record("main", AnimationCategory.MAIN, Optional.empty(), 1);
-    var sub = record("sub", AnimationCategory.SUBTRACK, Optional.of("main"), 2);
+    var main = record(FIXTURE_MAIN_SECTION, AnimationCategory.MAIN, Optional.empty(), 1);
+    var sub = record("sub", AnimationCategory.SUBTRACK, Optional.of(FIXTURE_MAIN_SECTION), 2);
     var ova = record("ova", AnimationCategory.OVA, Optional.empty(), 1);
     for (var records :
         List.of(
@@ -180,12 +183,15 @@ class AnimationViewModelTest {
             List.of(main, main),
             List.of(sub),
             List.of(record("sub", AnimationCategory.SUBTRACK, Optional.empty(), 1)),
-            List.of(record("main", AnimationCategory.MAIN, Optional.of("parent"), 1)),
-            List.of(main, sub, record("sub2", AnimationCategory.SUBTRACK, Optional.of("main"), 3)),
+            List.of(record(FIXTURE_MAIN_SECTION, AnimationCategory.MAIN, Optional.of("parent"), 1)),
+            List.of(
+                main,
+                sub,
+                record("sub2", AnimationCategory.SUBTRACK, Optional.of(FIXTURE_MAIN_SECTION), 3)),
             List.of(main, sub, record("sub2", AnimationCategory.SUBTRACK, Optional.of("sub"), 3)),
             List.of(
                 new AnimationRecord(
-                    "main",
+                    FIXTURE_MAIN_SECTION,
                     "title",
                     AnimationCategory.MAIN,
                     DisplayPath.of("video/a.mp4"),
@@ -202,7 +208,8 @@ class AnimationViewModelTest {
         () ->
             list(
                 AnimationListCategory.OVA,
-                List.of(record("ova", AnimationCategory.OVA, Optional.of("main"), 1))));
+                List.of(
+                    record("ova", AnimationCategory.OVA, Optional.of(FIXTURE_MAIN_SECTION), 1))));
     for (String id : List.of("", ".", "..")) {
       var r =
           new AnimationRecord(
@@ -328,7 +335,7 @@ class AnimationViewModelTest {
                 () -> {
                   var actor =
                       new SessionPrincipal(
-                          "reader" + n,
+                          FIXTURE_READER + n,
                           UserRole.USER,
                           AuthenticationContext.of(String.format(Locale.ROOT, "%064x", n + 1)),
                           actor(UserRole.USER).loginAt());
@@ -336,14 +343,14 @@ class AnimationViewModelTest {
                       AnimationMenuViewModel.from(
                           actor, new AnimationMenuResponseData(n, 0, false, n));
                   assertEquals(n, menu.getTotalCount());
-                  assertEquals("reader" + n, menu.getTopBar().getUsername());
+                  assertEquals(FIXTURE_READER + n, menu.getTopBar().getUsername());
                   var m =
                       AnimationListViewModel.from(
                           actor,
                           AnimationListCategory.MAIN,
                           new AnimationListResponseData(5),
                           main());
-                  assertEquals("reader" + n, m.getTopBar().getUsername());
+                  assertEquals(FIXTURE_READER + n, m.getTopBar().getUsername());
                   assertEquals(
                       "/animation/videos/sub-a",
                       m.getRows().getFirst().getSubtrack().orElseThrow().getHref());

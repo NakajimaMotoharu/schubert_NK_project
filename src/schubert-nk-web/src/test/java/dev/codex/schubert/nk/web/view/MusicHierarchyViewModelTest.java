@@ -32,9 +32,18 @@ import org.thymeleaf.templateresolver.StringTemplateResolver;
 
 /** SCR011/012/FUN007/UI223,235/SS313,323,352/PG208/PT-WEB246..253. */
 class MusicHierarchyViewModelTest {
+  private static final String FIXTURE_READER = "reader";
+  private static final String FIXTURE_BGM = "BGM";
+  private static final String FIXTURE_GAME_SECTION = "ゲーム";
+  private static final String EXPECTED_TRACK_COUNT_PROPERTY = "trackCount";
+  private static final String EXPECTED_HREF_PROPERTY = "href";
+  private static final String FIXTURE_ESCAPED_TEXT = "<b>&";
+  private static final int EXPECTED_CATEGORY_LIMIT = 20;
+  private static final int EXPECTED_SECTION_LIMIT = 100;
+
   private static SessionPrincipal actor(UserRole role) {
     return new SessionPrincipal(
-        "reader",
+        FIXTURE_READER,
         role,
         AuthenticationContext.of("a".repeat(64)),
         Instant.parse("2026-09-19T00:00:00Z"));
@@ -43,13 +52,13 @@ class MusicHierarchyViewModelTest {
   private static List<MusicCategoryRecord> categories() {
     return List.of(
         new MusicCategoryRecord("曲", 29),
-        new MusicCategoryRecord("BGM", 99),
+        new MusicCategoryRecord(FIXTURE_BGM, 99),
         new MusicCategoryRecord("その他", 1));
   }
 
   private static List<MusicSectionRecord> sections() {
     return List.of(
-        new MusicSectionRecord("ゲーム", 10),
+        new MusicSectionRecord(FIXTURE_GAME_SECTION, 10),
         new MusicSectionRecord("アニメ", 15),
         new MusicSectionRecord("キャラクターソング", 4));
   }
@@ -70,7 +79,7 @@ class MusicHierarchyViewModelTest {
       var m =
           MusicCategoryViewModel.from(actor(role), new MusicCategoryResponseData(3), categories());
       assertEquals(129, m.getTrackCount());
-      assertEquals("reader", m.getTopBar().getUsername());
+      assertEquals(FIXTURE_READER, m.getTopBar().getUsername());
       assertEquals(
           switch (role) {
             case USER -> "USER";
@@ -78,7 +87,7 @@ class MusicHierarchyViewModelTest {
           },
           m.getTopBar().getRole());
       assertEquals(
-          List.of("曲", "BGM", "その他"),
+          List.of("曲", FIXTURE_BGM, "その他"),
           m.getCategories().stream().map(MusicCategoryViewModel.Card::getName).toList());
       assertEquals(
           List.of(29, 99, 1),
@@ -103,7 +112,7 @@ class MusicHierarchyViewModelTest {
           },
           m.getTopBar().getRole());
       assertEquals(
-          List.of("ゲーム", "アニメ", "キャラクターソング"),
+          List.of(FIXTURE_GAME_SECTION, "アニメ", "キャラクターソング"),
           m.getSections().stream().map(MusicSectionViewModel.Card::getName).toList());
       assertEquals(
           List.of(10, 15, 4),
@@ -118,7 +127,8 @@ class MusicHierarchyViewModelTest {
     for (int n : new int[] {0, 1, 20, 21}) {
       var r = new ArrayList<MusicCategoryRecord>();
       for (int i = 0; i < n; i++) r.add(new MusicCategoryRecord("cat" + i, 999999));
-      if (n > 20) assertThrows(IllegalArgumentException.class, () -> categories(r));
+      if (n > EXPECTED_CATEGORY_LIMIT)
+        assertThrows(IllegalArgumentException.class, () -> categories(r));
       else {
         var m = categories(r);
         assertEquals(n, m.getCategories().size());
@@ -128,9 +138,10 @@ class MusicHierarchyViewModelTest {
     for (int n : new int[] {0, 1, 100, 101}) {
       var r = new ArrayList<MusicSectionRecord>();
       for (int i = 0; i < n; i++) r.add(new MusicSectionRecord("section" + i, 999999));
-      if (n > 100) assertThrows(IllegalArgumentException.class, () -> sections("BGM", r));
+      if (n > EXPECTED_SECTION_LIMIT)
+        assertThrows(IllegalArgumentException.class, () -> sections(FIXTURE_BGM, r));
       else {
-        var m = sections("BGM", r);
+        var m = sections(FIXTURE_BGM, r);
         assertEquals(n, m.getSections().size());
         assertEquals(n * 999999, m.getTrackCount());
       }
@@ -144,7 +155,7 @@ class MusicHierarchyViewModelTest {
         IllegalArgumentException.class,
         () ->
             MusicSectionViewModel.from(
-                actor(UserRole.USER), "BGM", new MusicSectionResponseData(1), List.of()));
+                actor(UserRole.USER), FIXTURE_BGM, new MusicSectionResponseData(1), List.of()));
   }
 
   @Test
@@ -153,12 +164,17 @@ class MusicHierarchyViewModelTest {
         IllegalArgumentException.class,
         () ->
             categories(
-                List.of(new MusicCategoryRecord("BGM", 1), new MusicCategoryRecord("BGM", 2))));
+                List.of(
+                    new MusicCategoryRecord(FIXTURE_BGM, 1),
+                    new MusicCategoryRecord(FIXTURE_BGM, 2))));
     assertThrows(
         IllegalArgumentException.class,
         () ->
             sections(
-                "曲", List.of(new MusicSectionRecord("ゲーム", 1), new MusicSectionRecord("ゲーム", 2))));
+                "曲",
+                List.of(
+                    new MusicSectionRecord(FIXTURE_GAME_SECTION, 1),
+                    new MusicSectionRecord(FIXTURE_GAME_SECTION, 2))));
     for (var bad : List.of("", ".", "..")) {
       assertThrows(
           IllegalArgumentException.class,
@@ -197,18 +213,20 @@ class MusicHierarchyViewModelTest {
         NullPointerException.class,
         () -> MusicCategoryViewModel.from(actor, cd, Arrays.asList((MusicCategoryRecord) null)));
     assertThrows(
-        NullPointerException.class, () -> MusicSectionViewModel.from(null, "BGM", sd, List.of()));
+        NullPointerException.class,
+        () -> MusicSectionViewModel.from(null, FIXTURE_BGM, sd, List.of()));
     assertThrows(
         NullPointerException.class, () -> MusicSectionViewModel.from(actor, null, sd, List.of()));
     assertThrows(
         NullPointerException.class,
-        () -> MusicSectionViewModel.from(actor, "BGM", null, List.of()));
+        () -> MusicSectionViewModel.from(actor, FIXTURE_BGM, null, List.of()));
     assertThrows(
-        NullPointerException.class, () -> MusicSectionViewModel.from(actor, "BGM", sd, null));
+        NullPointerException.class, () -> MusicSectionViewModel.from(actor, FIXTURE_BGM, sd, null));
     assertThrows(
         NullPointerException.class,
         () ->
-            MusicSectionViewModel.from(actor, "BGM", sd, Arrays.asList((MusicSectionRecord) null)));
+            MusicSectionViewModel.from(
+                actor, FIXTURE_BGM, sd, Arrays.asList((MusicSectionRecord) null)));
     var a = new ArrayList<>(categories());
     var b = new ArrayList<>(sections());
     var c = categories(a);
@@ -225,10 +243,14 @@ class MusicHierarchyViewModelTest {
   void web251ClosedBeansAndRedaction() throws Exception {
     var c = categories(categories());
     var s = sections("曲", sections());
-    properties(c, Set.of("topBar", "categories", "trackCount"));
-    properties(s, Set.of("topBar", "category", "sections", "trackCount"));
-    properties(c.getCategories().getFirst(), Set.of("name", "href", "trackCount"));
-    properties(s.getSections().getFirst(), Set.of("name", "href", "trackCount"));
+    properties(c, Set.of("topBar", "categories", EXPECTED_TRACK_COUNT_PROPERTY));
+    properties(s, Set.of("topBar", "category", "sections", EXPECTED_TRACK_COUNT_PROPERTY));
+    properties(
+        c.getCategories().getFirst(),
+        Set.of("name", EXPECTED_HREF_PROPERTY, EXPECTED_TRACK_COUNT_PROPERTY));
+    properties(
+        s.getSections().getFirst(),
+        Set.of("name", EXPECTED_HREF_PROPERTY, EXPECTED_TRACK_COUNT_PROPERTY));
     assertEquals("MusicCategoryViewModel[REDACTED]", c.toString());
     assertEquals("MusicSectionViewModel[REDACTED]", s.toString());
     assertEquals("MusicCategoryCard[REDACTED]", c.getCategories().getFirst().toString());
@@ -249,16 +271,21 @@ class MusicHierarchyViewModelTest {
   void web252SyntheticHtmlEscaping() {
     var p =
         new SessionPrincipal(
-            "<b>&",
+            FIXTURE_ESCAPED_TEXT,
             UserRole.USER,
             actor(UserRole.USER).authenticationContext(),
             actor(UserRole.USER).loginAt());
     var c =
         MusicCategoryViewModel.from(
-            p, new MusicCategoryResponseData(1), List.of(new MusicCategoryRecord("<b>&", 1)));
+            p,
+            new MusicCategoryResponseData(1),
+            List.of(new MusicCategoryRecord(FIXTURE_ESCAPED_TEXT, 1)));
     var s =
         MusicSectionViewModel.from(
-            p, "<b>&", new MusicSectionResponseData(1), List.of(new MusicSectionRecord("<b>&", 1)));
+            p,
+            FIXTURE_ESCAPED_TEXT,
+            new MusicSectionResponseData(1),
+            List.of(new MusicSectionRecord(FIXTURE_ESCAPED_TEXT, 1)));
     var resolver = new StringTemplateResolver();
     resolver.setTemplateMode("HTML");
     var engine = new SpringTemplateEngine();
@@ -273,11 +300,11 @@ class MusicHierarchyViewModelTest {
                     + " th:href='${section.sections[0].href}'"
                     + " th:text='${section.sections[0].name}'></a></div>",
                 context));
-    assertEquals("<b>&", dom.select("span").text());
-    assertEquals("<b>&", dom.select("#c").text());
-    assertEquals("<b>&", dom.select("#s").text());
-    assertEquals("/music/%3Cb%3E%26", dom.select("#c").attr("href"));
-    assertEquals("/music/%3Cb%3E%26/%3Cb%3E%26", dom.select("#s").attr("href"));
+    assertEquals(FIXTURE_ESCAPED_TEXT, dom.select("span").text());
+    assertEquals(FIXTURE_ESCAPED_TEXT, dom.select("#c").text());
+    assertEquals(FIXTURE_ESCAPED_TEXT, dom.select("#s").text());
+    assertEquals("/music/%3Cb%3E%26", dom.select("#c").attr(EXPECTED_HREF_PROPERTY));
+    assertEquals("/music/%3Cb%3E%26/%3Cb%3E%26", dom.select("#s").attr(EXPECTED_HREF_PROPERTY));
     assertTrue(dom.select("b,script").isEmpty());
     assertFalse(dom.html().contains("a".repeat(64)));
   }
@@ -295,7 +322,7 @@ class MusicHierarchyViewModelTest {
                 () -> {
                   var p =
                       new SessionPrincipal(
-                          "reader" + n,
+                          FIXTURE_READER + n,
                           UserRole.USER,
                           actor(UserRole.USER).authenticationContext(),
                           actor(UserRole.USER).loginAt());
@@ -303,8 +330,8 @@ class MusicHierarchyViewModelTest {
                   var s =
                       MusicSectionViewModel.from(
                           p, "category" + n, new MusicSectionResponseData(3), sections);
-                  assertEquals("reader" + n, c.getTopBar().getUsername());
-                  assertEquals("reader" + n, s.getTopBar().getUsername());
+                  assertEquals(FIXTURE_READER + n, c.getTopBar().getUsername());
+                  assertEquals(FIXTURE_READER + n, s.getTopBar().getUsername());
                   assertEquals(129, c.getTrackCount());
                   assertEquals(29, s.getTrackCount());
                   assertEquals(

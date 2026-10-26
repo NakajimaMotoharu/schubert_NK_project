@@ -35,6 +35,11 @@ import org.thymeleaf.templateresolver.StringTemplateResolver;
 
 /** Independent literals; NK-WEB-001/FUN004/UI223,234/SS313/PG193/PT-WEB-182..193;015006. */
 class ScenarioHierarchyViewModelTest {
+  private static final String FIXTURE_FIRST_GAME_TITLE = "NUKITASHI";
+  private static final String FIXTURE_SECOND_GAME_TITLE = "NUKITASHI2";
+  private static final String FIXTURE_UNCLASSIFIED_ROUTE = "未分類";
+  private static final String FIXTURE_COMMON_ROUTE = "共通ルート";
+
   private static SessionPrincipal actor(UserRole role) {
     return new SessionPrincipal(
         "reader",
@@ -45,15 +50,15 @@ class ScenarioHierarchyViewModelTest {
 
   private static List<GameRecord> games() {
     return List.of(
-        new GameRecord(GameCode.NUKITASHI_1, "NUKITASHI", 1),
-        new GameRecord(GameCode.NUKITASHI_2, "NUKITASHI2", 2));
+        new GameRecord(GameCode.NUKITASHI_1, FIXTURE_FIRST_GAME_TITLE, 1),
+        new GameRecord(GameCode.NUKITASHI_2, FIXTURE_SECOND_GAME_TITLE, 2));
   }
 
   private static List<RouteRecord> routes() {
     return List.of(
-        new RouteRecord(0, "未分類", 1),
-        new RouteRecord(1, "共通ルート", 7),
-        new RouteRecord(99, "未分類", 999999));
+        new RouteRecord(0, FIXTURE_UNCLASSIFIED_ROUTE, 1),
+        new RouteRecord(1, FIXTURE_COMMON_ROUTE, 7),
+        new RouteRecord(99, FIXTURE_UNCLASSIFIED_ROUTE, 999999));
   }
 
   private static List<ScenarioFileRecord> files() {
@@ -75,10 +80,10 @@ class ScenarioHierarchyViewModelTest {
           },
           page.getTopBar().getRole());
       assertEquals(
-          List.of("NUKITASHI1", "NUKITASHI2"),
+          List.of("NUKITASHI1", FIXTURE_SECOND_GAME_TITLE),
           page.getGames().stream().map(GameListViewModel.Card::getCode).toList());
       assertEquals(
-          List.of("NUKITASHI", "NUKITASHI2"),
+          List.of(FIXTURE_FIRST_GAME_TITLE, FIXTURE_SECOND_GAME_TITLE),
           page.getGames().stream().map(GameListViewModel.Card::getTitle).toList());
       assertEquals(
           List.of("/scenarios/NUKITASHI1", "/scenarios/NUKITASHI2"),
@@ -90,7 +95,7 @@ class ScenarioHierarchyViewModelTest {
   void web183RouteDisplay() {
     for (var game : GameCode.values()) {
       var page = RouteListViewModel.from(actor(UserRole.USER), game, routes());
-      String literal = game == GameCode.NUKITASHI_1 ? "NUKITASHI1" : "NUKITASHI2";
+      String literal = game == GameCode.NUKITASHI_1 ? "NUKITASHI1" : FIXTURE_SECOND_GAME_TITLE;
       assertEquals(literal, page.getGame());
       assertEquals("/scenarios", page.getUpHref());
       assertEquals("reader", page.getTopBar().getUsername());
@@ -98,7 +103,7 @@ class ScenarioHierarchyViewModelTest {
           List.of("00", "01", "99"),
           page.getRoutes().stream().map(RouteListViewModel.Card::getPrefix).toList());
       assertEquals(
-          List.of("未分類", "共通ルート", "未分類"),
+          List.of(FIXTURE_UNCLASSIFIED_ROUTE, FIXTURE_COMMON_ROUTE, FIXTURE_UNCLASSIFIED_ROUTE),
           page.getRoutes().stream().map(RouteListViewModel.Card::getRouteName).toList());
       assertEquals(
           List.of("00: 未分類", "01: 共通ルート", "99: 未分類"),
@@ -119,11 +124,11 @@ class ScenarioHierarchyViewModelTest {
   void web184FileDisplay() {
     var page =
         ScenarioFileListViewModel.from(
-            actor(UserRole.ADMIN), GameCode.NUKITASHI_2, 1, "共通ルート", files());
+            actor(UserRole.ADMIN), GameCode.NUKITASHI_2, 1, FIXTURE_COMMON_ROUTE, files());
     assertEquals("ADMIN", page.getTopBar().getRole());
-    assertEquals("NUKITASHI2", page.getGame());
+    assertEquals(FIXTURE_SECOND_GAME_TITLE, page.getGame());
     assertEquals("01", page.getPrefix());
-    assertEquals("共通ルート", page.getRouteName());
+    assertEquals(FIXTURE_COMMON_ROUTE, page.getRouteName());
     assertEquals("01: 共通ルート", page.getTitle());
     assertEquals("/scenarios/NUKITASHI2", page.getUpHref());
     assertEquals(
@@ -179,16 +184,28 @@ class ScenarioHierarchyViewModelTest {
           "invalid route prefix",
           () ->
               ScenarioFileListViewModel.from(
-                  actor(UserRole.USER), GameCode.NUKITASHI_1, prefix, "未分類", List.of()));
+                  actor(UserRole.USER),
+                  GameCode.NUKITASHI_1,
+                  prefix,
+                  FIXTURE_UNCLASSIFIED_ROUTE,
+                  List.of()));
     assertEquals(
         "00",
         ScenarioFileListViewModel.from(
-                actor(UserRole.USER), GameCode.NUKITASHI_1, 0, "未分類", List.of())
+                actor(UserRole.USER),
+                GameCode.NUKITASHI_1,
+                0,
+                FIXTURE_UNCLASSIFIED_ROUTE,
+                List.of())
             .getPrefix());
     assertEquals(
         "99",
         ScenarioFileListViewModel.from(
-                actor(UserRole.USER), GameCode.NUKITASHI_1, 99, "未分類", List.of())
+                actor(UserRole.USER),
+                GameCode.NUKITASHI_1,
+                99,
+                FIXTURE_UNCLASSIFIED_ROUTE,
+                List.of())
             .getPrefix());
   }
 
@@ -201,7 +218,7 @@ class ScenarioHierarchyViewModelTest {
     var fs = new ArrayList<>(files());
     var a = GameListViewModel.from(p, gs);
     var b = RouteListViewModel.from(p, g, rs);
-    var c = ScenarioFileListViewModel.from(p, g, 1, "共通ルート", fs);
+    var c = ScenarioFileListViewModel.from(p, g, 1, FIXTURE_COMMON_ROUTE, fs);
     gs.clear();
     rs.clear();
     fs.clear();
@@ -219,7 +236,7 @@ class ScenarioHierarchyViewModelTest {
     var g = GameCode.NUKITASHI_1;
     closed(GameListViewModel.from(p, games()));
     closed(RouteListViewModel.from(p, g, routes()));
-    closed(ScenarioFileListViewModel.from(p, g, 1, "共通ルート", files()));
+    closed(ScenarioFileListViewModel.from(p, g, 1, FIXTURE_COMMON_ROUTE, files()));
   }
 
   @Test
@@ -270,14 +287,15 @@ class ScenarioHierarchyViewModelTest {
                   var p = actor(UserRole.USER);
                   var g = GameCode.NUKITASHI_1;
                   assertEquals(
-                      "NUKITASHI",
+                      FIXTURE_FIRST_GAME_TITLE,
                       GameListViewModel.from(p, games()).getGames().getFirst().getTitle());
                   assertEquals(
                       "01: 共通ルート",
                       RouteListViewModel.from(p, g, routes()).getRoutes().get(1).getTitle());
                   assertEquals(
                       String.format(Locale.ROOT, "%02d", n),
-                      ScenarioFileListViewModel.from(p, g, n, "未分類", files()).getPrefix());
+                      ScenarioFileListViewModel.from(p, g, n, FIXTURE_UNCLASSIFIED_ROUTE, files())
+                          .getPrefix());
                 }));
       }
       for (var task : tasks) task.get(10, TimeUnit.SECONDS);
@@ -322,7 +340,7 @@ class ScenarioHierarchyViewModelTest {
     var p = actor(UserRole.USER);
     var g = GameCode.NUKITASHI_1;
     assertEquals(
-        List.of("NUKITASHI2", "NUKITASHI"),
+        List.of(FIXTURE_SECOND_GAME_TITLE, FIXTURE_FIRST_GAME_TITLE),
         GameListViewModel.from(p, games().reversed()).getGames().stream()
             .map(GameListViewModel.Card::getTitle)
             .toList());
