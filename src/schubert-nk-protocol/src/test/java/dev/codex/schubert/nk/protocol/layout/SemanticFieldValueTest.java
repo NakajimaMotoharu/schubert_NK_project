@@ -20,6 +20,7 @@ class SemanticFieldValueTest {
   private static final String HEX_A = "a".repeat(64);
   private static final String HEX_B = "b".repeat(64);
   private static final String UUID_TEXT = "123e4567-e89b-12d3-a456-426614174000";
+  private static final String UUID_UPPERCASE_TEXT = "123E4567-E89B-12D3-A456-426614174000";
   private static final UUID UUID_VALUE = UUID.fromString(UUID_TEXT);
   private static final String WIRE_TIME = "20260902123456789";
   private static final Instant INSTANT = Instant.parse("2026-09-02T03:34:56.789Z");
@@ -126,7 +127,7 @@ class SemanticFieldValueTest {
     assertSemanticFailure(
         () ->
             TypedFieldValues.requiredUuid(
-                fields(new FieldValue.Text(UUID_TEXT.toUpperCase())), "value"));
+                fields(new FieldValue.Text(UUID_UPPERCASE_TEXT)), "value"));
     assertSemanticFailure(
         () -> TypedFieldValues.optionalUuid(fields(new FieldValue.Text("invalid")), "value"));
     assertSemanticFailure(
