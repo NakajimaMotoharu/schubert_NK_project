@@ -1,0 +1,381 @@
+{
+  "actualExit": 0,
+  "bug": "BUG-1814",
+  "classpath": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg10316-user-query-oracle-metadata-v1/reader",
+  "coverageMeasured": false,
+  "effortPercent": null,
+  "externalActions": 0,
+  "formalUpdated": false,
+  "invocation": {
+    "actualPythonCommand": [
+      "python3",
+      "-B",
+      "tools/quality/pg10316_user_query_oracle_metadata.py"
+    ],
+    "arbitraryArgumentsRecorded": false,
+    "entrypointPath": "tools/quality/pg10316_user_query_oracle_metadata.py",
+    "entrypointSha256": "1252abef0c2621e065a3103d9da408b1f86c9027a98d8e090c9f534fce9bbb57",
+    "helperPath": "tools/quality/host_tool_invocation.py",
+    "helperSha256": "85d616a3db4ff47f4c95ae2e0dd57954bc2b09f28b8f2a685b986e5621545c46",
+    "libraryPath": "tools/quality/pg10316_user_query_oracle_metadata.py",
+    "librarySha256": "1252abef0c2621e065a3103d9da408b1f86c9027a98d8e090c9f534fce9bbb57",
+    "loadedProjectPythonSources": {
+      "tools/quality/g07_host_class_provenance_inputs.py": "a676cb3e4145177c3c243722d737592ce7d44c3f29cfe4f670662ef7651f046b",
+      "tools/quality/host_tool_invocation.py": "85d616a3db4ff47f4c95ae2e0dd57954bc2b09f28b8f2a685b986e5621545c46",
+      "tools/quality/pg10278_query_wire_oracle_metadata.py": "e2093b1552baef839e4ddf991458d3fbe809df3896b128cb05f4a077c53ff975",
+      "tools/quality/pg10316_user_query_oracle_metadata.py": "1252abef0c2621e065a3103d9da408b1f86c9027a98d8e090c9f534fce9bbb57",
+      "tools/quality/pg9346_direct_companion_jdk_post.py": "40814dffc4f33b120a67f06bfff62080921bc479ef575457dc81e992488b65bb"
+    },
+    "provenance": "OBSERVED_SYS_ARGV_AND_ORIG_ARGV_NOT_RECONSTRUCTED"
+  },
+  "metadataNegativeVectors": 3,
+  "metadataVectors": 27,
+  "mutationIsolationChecked": true,
+  "newAccepted": 0,
+  "originalProductTestsExecuted": 0,
+  "productionClassesAvailable": false,
+  "qualification": "DECLARED_TEST_HELPER_METADATA_NOT_PRODUCT_PT",
+  "source": null,
+  "sourceHashes": {
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/admin/UserQueryWireOracle.java": "745dd85eaf9d43f0324c23be2b074084e29c273f8bdf19a821fc82962ca4d379",
+    "tools/quality/architecture/UserQueryWireOracleMetadata.java": "e0330c28ded6c677d58087bd0a5890d04f6260317dfa248a25b72449e5eea204"
+  },
+  "stages": [
+    {
+      "actualExit": 0,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+        "--release",
+        "25",
+        "-proc:none",
+        "-Xlint:all",
+        "-Werror",
+        "-d",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg10316-user-query-oracle-metadata-v1/reader",
+        "/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/admin/UserQueryWireOracle.java",
+        "/home/mini/codex/project1/work/pgpt-foundation/tools/quality/architecture/UserQueryWireOracleMetadata.java"
+      ],
+      "endUTC": "2026-10-26T05:33:58.991500+00:00",
+      "startUTC": "2026-10-26T05:33:57.672485+00:00",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "timedOut": false
+    },
+    {
+      "actualExit": 0,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-cp",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg10316-user-query-oracle-metadata-v1/reader",
+        "dev.codex.schubert.nk.api.application.admin.UserQueryWireOracleMetadata",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg10316-user-query-oracle-metadata-v1/vectors.tsv"
+      ],
+      "endUTC": "2026-10-26T05:33:59.207320+00:00",
+      "startUTC": "2026-10-26T05:33:58.992075+00:00",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSha256": "15288029a2a777a6942bc5469047daea3eba9735d34d62bd8636a6829417ee6b",
+      "timedOut": false
+    }
+  ],
+  "vectorSha256": "302b42e8c70205990f275cfbf3d19ad301f7a029f350865c56b4a0179f9f4300",
+  "vectors": [
+    {
+      "code": "0000",
+      "count": 0,
+      "layout": "USRREQ01",
+      "length": 304,
+      "optional": false,
+      "page": 1,
+      "sha256": "adeb83df66686f54f41bf94deacfd0f9b7d9391e897355c29b67df3da0227cf2",
+      "target": 0,
+      "total": 0
+    },
+    {
+      "code": "0200",
+      "count": 0,
+      "layout": "USRREQ01",
+      "length": 304,
+      "optional": false,
+      "page": 1,
+      "sha256": "36a07ea129d829697a8a3db2234540ff10f3bc3a91dc9bd7900c12e9eda37767",
+      "target": 0,
+      "total": 0
+    },
+    {
+      "code": "0104",
+      "count": 0,
+      "layout": "USRREQ01",
+      "length": 304,
+      "optional": false,
+      "page": 1,
+      "sha256": "4c0c1c188de0fc1515ee2cbc7ae6daed1e604233291b2297cefae37064ddf348",
+      "target": 0,
+      "total": 0
+    },
+    {
+      "code": "0000",
+      "count": 1,
+      "layout": "USRREQ01",
+      "length": 472,
+      "optional": false,
+      "page": 1,
+      "sha256": "4b436a18fb8101e2ad2cf157700bcef9d59c11123a692dbe83f12160130f5868",
+      "target": 0,
+      "total": 1
+    },
+    {
+      "code": "0200",
+      "count": 1,
+      "layout": "USRREQ01",
+      "length": 472,
+      "optional": false,
+      "page": 1,
+      "sha256": "3a513f6b47d46977b82bc15e979160ff8ff4c8fd5373caa357b4d383f56acde5",
+      "target": 0,
+      "total": 1
+    },
+    {
+      "code": "0104",
+      "count": 1,
+      "layout": "USRREQ01",
+      "length": 304,
+      "optional": false,
+      "page": 1,
+      "sha256": "4c0c1c188de0fc1515ee2cbc7ae6daed1e604233291b2297cefae37064ddf348",
+      "target": 0,
+      "total": 1
+    },
+    {
+      "code": "0000",
+      "count": 50,
+      "layout": "USRREQ01",
+      "length": 8704,
+      "optional": false,
+      "page": 1,
+      "sha256": "b84d5b40d8103a9a50868765606292f0de81e424037f24c5b429cb016dfd2d38",
+      "target": 0,
+      "total": 50
+    },
+    {
+      "code": "0200",
+      "count": 50,
+      "layout": "USRREQ01",
+      "length": 8704,
+      "optional": false,
+      "page": 1,
+      "sha256": "7b1ab30c117b9ba46a6469033a4f25782c5aac29bdc82d223c34564e6e84305d",
+      "target": 0,
+      "total": 50
+    },
+    {
+      "code": "0104",
+      "count": 50,
+      "layout": "USRREQ01",
+      "length": 304,
+      "optional": false,
+      "page": 1,
+      "sha256": "4c0c1c188de0fc1515ee2cbc7ae6daed1e604233291b2297cefae37064ddf348",
+      "target": 0,
+      "total": 50
+    },
+    {
+      "code": "0000",
+      "count": 1,
+      "layout": "USRREQ01",
+      "length": 472,
+      "optional": false,
+      "page": 2,
+      "sha256": "d8d468713549bf1fb7c4c78c1195b781220dde665f46a3aaabfc02277a171ac3",
+      "target": 0,
+      "total": 51
+    },
+    {
+      "code": "0200",
+      "count": 1,
+      "layout": "USRREQ01",
+      "length": 472,
+      "optional": false,
+      "page": 2,
+      "sha256": "721c356f4725575ed6d4c8241f6ce1d05275b9024bfb2ec8fb771b55a437282f",
+      "target": 0,
+      "total": 51
+    },
+    {
+      "code": "0104",
+      "count": 1,
+      "layout": "USRREQ01",
+      "length": 304,
+      "optional": false,
+      "page": 2,
+      "sha256": "4c0c1c188de0fc1515ee2cbc7ae6daed1e604233291b2297cefae37064ddf348",
+      "target": 0,
+      "total": 51
+    },
+    {
+      "code": "0000",
+      "count": 50,
+      "layout": "USRREQ01",
+      "length": 8704,
+      "optional": false,
+      "page": 999999,
+      "sha256": "fc0128de074ad55bd9fcafdb8e2de8d194c4d5ecb0f9aea5b5e1046fde53eb72",
+      "target": 0,
+      "total": 49999950
+    },
+    {
+      "code": "0200",
+      "count": 50,
+      "layout": "USRREQ01",
+      "length": 8704,
+      "optional": false,
+      "page": 999999,
+      "sha256": "97a5627145f72614c25f10d134bb9da617c123dd97b90e8dd4dbb98954019ae0",
+      "target": 0,
+      "total": 49999950
+    },
+    {
+      "code": "0104",
+      "count": 50,
+      "layout": "USRREQ01",
+      "length": 304,
+      "optional": false,
+      "page": 999999,
+      "sha256": "4c0c1c188de0fc1515ee2cbc7ae6daed1e604233291b2297cefae37064ddf348",
+      "target": 0,
+      "total": 49999950
+    },
+    {
+      "code": "0000",
+      "count": 0,
+      "layout": "UDTREQ01",
+      "length": 576,
+      "optional": false,
+      "page": 0,
+      "sha256": "c0963d2408778c8abf400c4cda97966cce9bc6795f4ca6dd6c6747a0f50cf996",
+      "target": 1,
+      "total": 0
+    },
+    {
+      "code": "0200",
+      "count": 0,
+      "layout": "UDTREQ01",
+      "length": 576,
+      "optional": false,
+      "page": 0,
+      "sha256": "014c955d4c1cd98dbfb3033d1a73146521b31e35d9c1d1bd723863d36d36ec25",
+      "target": 1,
+      "total": 0
+    },
+    {
+      "code": "0104",
+      "count": 0,
+      "layout": "UDTREQ01",
+      "length": 576,
+      "optional": false,
+      "page": 0,
+      "sha256": "51c6a5356bda6a2ace1fe209d098fabac196bee8f11d67aaf201df9efe3153f3",
+      "target": 1,
+      "total": 0
+    },
+    {
+      "code": "0000",
+      "count": 0,
+      "layout": "UDTREQ01",
+      "length": 576,
+      "optional": true,
+      "page": 0,
+      "sha256": "827ebeb352c9844749f688062cee738a7632bba6c7b812140b8828a60155f9a0",
+      "target": 1,
+      "total": 0
+    },
+    {
+      "code": "0200",
+      "count": 0,
+      "layout": "UDTREQ01",
+      "length": 576,
+      "optional": true,
+      "page": 0,
+      "sha256": "194d55cb71e8ef65164ee2f94ad655098ddc497fc6b5a99c0d77dc380d12a8cf",
+      "target": 1,
+      "total": 0
+    },
+    {
+      "code": "0104",
+      "count": 0,
+      "layout": "UDTREQ01",
+      "length": 576,
+      "optional": true,
+      "page": 0,
+      "sha256": "51c6a5356bda6a2ace1fe209d098fabac196bee8f11d67aaf201df9efe3153f3",
+      "target": 1,
+      "total": 0
+    },
+    {
+      "code": "0000",
+      "count": 0,
+      "layout": "UDTREQ01",
+      "length": 576,
+      "optional": false,
+      "page": 0,
+      "sha256": "ae1e299c36ccc9b6bbbcdc09ade115166cb34fb252599cc3999b1c73a7f98248",
+      "target": 999999999999,
+      "total": 0
+    },
+    {
+      "code": "0200",
+      "count": 0,
+      "layout": "UDTREQ01",
+      "length": 576,
+      "optional": false,
+      "page": 0,
+      "sha256": "175d09843a9c438e39efdc9949e68745c526e92a78bbed88313fc1b991f304eb",
+      "target": 999999999999,
+      "total": 0
+    },
+    {
+      "code": "0104",
+      "count": 0,
+      "layout": "UDTREQ01",
+      "length": 576,
+      "optional": false,
+      "page": 0,
+      "sha256": "51c6a5356bda6a2ace1fe209d098fabac196bee8f11d67aaf201df9efe3153f3",
+      "target": 999999999999,
+      "total": 0
+    },
+    {
+      "code": "0000",
+      "count": 0,
+      "layout": "UDTREQ01",
+      "length": 576,
+      "optional": true,
+      "page": 0,
+      "sha256": "59c7ca82c510ea36dec356506c79065f79174d2c15c894201af8fa7936a93aea",
+      "target": 999999999999,
+      "total": 0
+    },
+    {
+      "code": "0200",
+      "count": 0,
+      "layout": "UDTREQ01",
+      "length": 576,
+      "optional": true,
+      "page": 0,
+      "sha256": "c2d3d2732228b9b04977e09c0ad9528f80b389c13a5282fb8a0a86806f17d51b",
+      "target": 999999999999,
+      "total": 0
+    },
+    {
+      "code": "0104",
+      "count": 0,
+      "layout": "UDTREQ01",
+      "length": 576,
+      "optional": true,
+      "page": 0,
+      "sha256": "51c6a5356bda6a2ace1fe209d098fabac196bee8f11d67aaf201df9efe3153f3",
+      "target": 999999999999,
+      "total": 0
+    }
+  ],
+  "ykt": "YKT-1565"
+}
