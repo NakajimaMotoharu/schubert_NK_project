@@ -32,6 +32,8 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** QA049/PG-D356/UI226/SS314; TOKV207208 real JDBC and literal order/time/count oracle. */
 class SessionOperationTokenLifecycleTest {
+  private static final int EXPECTED_PENDING_TOKEN_CAPACITY = 10;
+
   private static final String FIXTURE_SUBMIT_REQUEST = "QSBREQ01";
   private static final String FIXTURE_STATE_REQUEST = "USTREQ01";
   private static final String FIXTURE_ROLE_REQUEST = "URLREQ01";
@@ -78,7 +80,7 @@ class SessionOperationTokenLifecycleTest {
 
   @Test
   void tokv209aExactCapacityNeverPartiallyPublishesOrGeneratesUuid() throws Exception {
-    for (int before = 0; before <= 10; before++)
+    for (int before = 0; before <= EXPECTED_PENDING_TOKEN_CAPACITY; before++)
       for (int count = 1; count <= 4; count++)
         try (var f = new Fixture(db)) {
           reset(); // BUG640: fixed identity/nonce fixture requires independent subcase rows.
@@ -91,7 +93,7 @@ class SessionOperationTokenLifecycleTest {
           var purposes =
               List.of(FIXTURE_STATE_REQUEST, FIXTURE_ROLE_REQUEST, "UPWREQ01", "ULKREQ01")
                   .subList(0, count);
-          if (before + count <= 10) {
+          if (before + count <= EXPECTED_PENDING_TOKEN_CAPACITY) {
             var issued = lifecycle.issueForForms(session.sessionId(), purposes);
             assertEquals(purposes, issued.stream().map(SessionOperationToken::purpose).toList());
             assertEquals(count, calls.get());

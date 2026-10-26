@@ -63,6 +63,9 @@ import org.junit.jupiter.api.io.TempDir;
  * Real PostgreSQL/production grants; independent SQL/JCA oracles. SS312/332/351; PT-ADM-014..023.
  */
 class UserCommandServiceTest {
+  private static final int FIXTURE_UNKNOWN_HASH_MODE = 1;
+  private static final int FIXTURE_ARGUMENT_FAILURE_MODE = 2;
+
   private static final String FIXTURE_ROLE_COLUMN = "role";
   private static final String FIXTURE_ACTIVE_STATE = "ACTIVE";
   private static final String FIXTURE_STATUS_COLUMN = "status";
@@ -751,8 +754,9 @@ class UserCommandServiceTest {
               password -> {
                 captured.add(password);
                 if (choice == 0) return null;
-                if (choice == 1) return "unknown-hash";
-                if (choice == 2) throw new IllegalArgumentException("synthetic encoder marker");
+                if (choice == FIXTURE_UNKNOWN_HASH_MODE) return "unknown-hash";
+                if (choice == FIXTURE_ARGUMENT_FAILURE_MODE)
+                  throw new IllegalArgumentException("synthetic encoder marker");
                 throw new IllegalStateException("synthetic encoder marker");
               },
               revocations);
