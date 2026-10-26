@@ -214,11 +214,17 @@ final class MediaStageFixture implements AutoCloseable {
     sql("delete from schubert.auth_sessions");
     sql("delete from schubert.app_users");
     sql(
-        "insert into schubert.app_users(id,username,username_key,password_hash,role,status,password_changed_at,created_at,updated_at) select id,'owner'||id,'key'||id,'unusable-fixture-hash','USER','ACTIVE','2026-09-08Z','2026-09-08Z','2026-09-08Z' from (values(101),(102)) t(id)");
+        "insert into"
+            + " schubert.app_users(id,username,username_key,password_hash,role,status,password_changed_at,created_at,updated_at)"
+            + " select"
+            + " id,'owner'||id,'key'||id,'unusable-fixture-hash','USER','ACTIVE','2026-09-08Z','2026-09-08Z','2026-09-08Z'"
+            + " from (values(101),(102)) t(id)");
     session("b", 1, 101);
     sql("insert into schubert.games values(1,'NUKITASHI1','One',1,'2026-09-08Z')");
     sql(
-        "insert into schubert.audio_files(id,game_id,storage_relative_path,display_path,file_name,basename,audio_role,byte_size,sha256,created_at) values(700,1,'scenario/合成.ogg','表示/a.ogg','表示.ogg','700','voice',3,'"
+        "insert into"
+            + " schubert.audio_files(id,game_id,storage_relative_path,display_path,file_name,basename,audio_role,byte_size,sha256,created_at)"
+            + " values(700,1,'scenario/合成.ogg','表示/a.ogg','表示.ogg','700','voice',3,'"
             + SHA
             + "','2026-09-08Z')");
     asset(
@@ -271,7 +277,9 @@ final class MediaStageFixture implements AutoCloseable {
     try (var c = database.admin();
         var s =
             c.prepareStatement(
-                "insert into schubert.media_assets(id,logical_id,media_type,title,category,section,storage_relative_path,display_path,file_name,byte_size,sha256,mime_type,pair_role,display_order,created_at) values(?,?,?,?,?,?,?,?,?,3,?,?,?,1,'2026-09-08Z')")) {
+                "insert into"
+                    + " schubert.media_assets(id,logical_id,media_type,title,category,section,storage_relative_path,display_path,file_name,byte_size,sha256,mime_type,pair_role,display_order,created_at)"
+                    + " values(?,?,?,?,?,?,?,?,?,3,?,?,?,1,'2026-09-08Z')")) {
       s.setInt(1, id);
       s.setString(2, logical);
       s.setString(3, type);
@@ -295,7 +303,9 @@ final class MediaStageFixture implements AutoCloseable {
                 MessageDigest.getInstance("SHA-256")
                     .digest(raw.repeat(64).getBytes(StandardCharsets.US_ASCII)));
     sql(
-        "insert into schubert.auth_sessions(id,user_id,context_hash,context_ciphertext,key_version,issued_at,last_accessed_at,expires_at,client_address,created_message_id) values('"
+        "insert into"
+            + " schubert.auth_sessions(id,user_id,context_hash,context_ciphertext,key_version,issued_at,last_accessed_at,expires_at,client_address,created_message_id)"
+            + " values('"
             + new UUID(0, id)
             + "',"
             + owner
@@ -315,7 +325,9 @@ final class MediaStageFixture implements AutoCloseable {
     String pathRoot = video ? "video/" : "music/";
     String suffix = video ? ".mp4" : ".ogg";
     sql(
-        "insert into schubert.media_assets(id,logical_id,media_type,title,category,section,storage_relative_path,display_path,file_name,byte_size,sha256,mime_type,pair_role,display_order,created_at) select i,'id-'||i,'"
+        "insert into"
+            + " schubert.media_assets(id,logical_id,media_type,title,category,section,storage_relative_path,display_path,file_name,byte_size,sha256,mime_type,pair_role,display_order,created_at)"
+            + " select i,'id-'||i,'"
             + (video ? "VIDEO" : "MUSIC")
             + "','title',"
             + category
@@ -356,7 +368,9 @@ final class MediaStageFixture implements AutoCloseable {
     try (var c = database.api();
         var s =
             c.prepareStatement(
-                "select processing_state,result_ref_type,created_at,completed_at,expires_at,encode(response_body_encrypted,'hex'),response_key_version from schubert.request_inbox where message_id=?")) {
+                "select"
+                    + " processing_state,result_ref_type,created_at,completed_at,expires_at,encode(response_body_encrypted,'hex'),response_key_version"
+                    + " from schubert.request_inbox where message_id=?")) {
       s.setObject(1, request.header().messageId());
       try (var row = s.executeQuery()) {
         List<String> result = new ArrayList<>();
@@ -387,7 +401,7 @@ final class MediaStageFixture implements AutoCloseable {
     byte[] expected =
         wire(
             prefix,
-            MediaRequest.decode(request),
+            request.header().messageId(),
             new UUID(0, responseId),
             now.get().equals(NOW.plusSeconds(20)) ? "20260908090120000" : "20260908090100000",
             request.header().authenticationContext().orElseThrow().wireValue(),

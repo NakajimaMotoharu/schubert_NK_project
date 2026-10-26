@@ -70,7 +70,7 @@ class MediaReplayServiceTest {
               assertArrayEquals(
                   wire(
                       prefix,
-                      request,
+                      request.header().messageId(),
                       RESPONSE,
                       "20260908090001123",
                       "b".repeat(64),
@@ -92,7 +92,7 @@ class MediaReplayServiceTest {
                 assertArrayEquals(
                     wire(
                         prefix,
-                        request,
+                        request.header().messageId(),
                         NEXT,
                         "20260908090002789",
                         "b".repeat(64),
@@ -108,7 +108,7 @@ class MediaReplayServiceTest {
               assertArrayEquals(
                   wire(
                       prefix,
-                      current,
+                      current.header().messageId(),
                       NEXT,
                       "20260908090002789",
                       "d".repeat(64),
@@ -143,7 +143,7 @@ class MediaReplayServiceTest {
             assertArrayEquals(
                 wire(
                     prefix,
-                    request,
+                    request.header().messageId(),
                     RESPONSE,
                     "20260908090001123",
                     "b".repeat(64),
@@ -160,7 +160,7 @@ class MediaReplayServiceTest {
                 byte[] bad =
                     wire(
                         prefix,
-                        request,
+                        request.header().messageId(),
                         RESPONSE,
                         "20260908090001123",
                         "b".repeat(64),
@@ -178,7 +178,7 @@ class MediaReplayServiceTest {
               assertArrayEquals(
                   wire(
                       prefix,
-                      request,
+                      request.header().messageId(),
                       NEXT,
                       "20260908090002789",
                       "b".repeat(64),
@@ -201,7 +201,7 @@ class MediaReplayServiceTest {
             assertArrayEquals(
                 wire(
                     prefix,
-                    request,
+                    request.header().messageId(),
                     NEXT,
                     "20260908090002789",
                     "b".repeat(64),
@@ -228,7 +228,7 @@ class MediaReplayServiceTest {
         byte[] good =
             wire(
                 prefix,
-                request,
+                request.header().messageId(),
                 RESPONSE,
                 "20260908090001123",
                 "b".repeat(64),
@@ -276,7 +276,7 @@ class MediaReplayServiceTest {
         byte[] error =
             wire(
                 prefix,
-                request,
+                request.header().messageId(),
                 RESPONSE,
                 "20260908090001123",
                 "b".repeat(64),
@@ -464,7 +464,7 @@ class MediaReplayServiceTest {
               byte[] expected =
                   wire(
                       "MED",
-                      request,
+                      request.header().messageId(),
                       NEXT,
                       "20260908090002789",
                       "b".repeat(64),

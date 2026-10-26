@@ -204,7 +204,7 @@ final class MediaReplayFixture {
 
   static byte[] wire(
       String prefix,
-      MediaRequest request,
+      UUID correlation,
       UUID response,
       String timestamp,
       String context,
@@ -218,7 +218,7 @@ final class MediaReplayFixture {
     byte[] body = field(256 + data.length + records.size() * recordLength(prefix), 0, "");
     put(body, 0, "SCHBNK01001" + prefix + "RSP01001SS");
     put(body, 24, response.toString());
-    put(body, 60, request.header().messageId().toString());
+    put(body, 60, correlation.toString());
     put(body, 96, timestamp);
     put(body, 113, context);
     number(body, 177, 4, 256);
