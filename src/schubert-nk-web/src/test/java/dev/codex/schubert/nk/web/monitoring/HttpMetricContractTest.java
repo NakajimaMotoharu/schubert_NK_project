@@ -27,9 +27,23 @@ import org.junit.jupiter.api.Test;
 
 /** SS351 literal metadata and independent35 route fixture, not a real provider. Spec1570. */
 class HttpMetricContractTest {
+  private static final String SERVICE_LABEL = "service";
+  private static final String WEB_SERVICE_VALUE = "WEB";
+  private static final String ROUTE_LABEL = "route";
+  private static final String METHOD_LABEL = "method";
+  private static final String STATUS_CLASS_LABEL = "status_class";
+  private static final String HTTP_GET_VALUE = "GET";
   private final HttpMetricContract contract = new HttpMetricContract();
   private static final Map<String, String> UNKNOWN =
-      Map.of("service", "WEB", "route", "/**", "method", "OTHER", "status_class", "2xx");
+      Map.of(
+          SERVICE_LABEL,
+          WEB_SERVICE_VALUE,
+          ROUTE_LABEL,
+          "/**",
+          METHOD_LABEL,
+          "OTHER",
+          STATUS_CLASS_LABEL,
+          "2xx");
 
   private static List<String> routes() throws Exception {
     try (var reader =
@@ -48,10 +62,11 @@ class HttpMetricContractTest {
     assertEquals("nk_http_requests_total", Metric.REQUESTS.externalName());
     assertEquals("counter", Metric.REQUESTS.type());
     assertEquals(
-        Set.of("service", "route", "method", "status_class"), Metric.REQUESTS.labelNames());
+        Set.of(SERVICE_LABEL, ROUTE_LABEL, METHOD_LABEL, STATUS_CLASS_LABEL),
+        Metric.REQUESTS.labelNames());
     assertEquals("nk_http_request_duration_seconds", Metric.DURATION.externalName());
     assertEquals("histogram", Metric.DURATION.type());
-    assertEquals(Set.of("service", "route"), Metric.DURATION.labelNames());
+    assertEquals(Set.of(SERVICE_LABEL, ROUTE_LABEL), Metric.DURATION.labelNames());
     assertEquals(Metric.REQUESTS, Metric.parse("nk_http_requests_total"));
     assertEquals(Metric.DURATION, Metric.parse("nk_http_request_duration_seconds"));
     assertFalse(contract.detailedMetricsEnabled("STANDARD"));
@@ -78,7 +93,16 @@ class HttpMetricContractTest {
     assertEquals(35, routes.size());
     assertEquals(routes, contract.routeTemplates());
     String[] methods = {
-      "GET", "HEAD", "POST", "PUT", "PATCH", "DELETE", "OPTIONS", "TRACE", "CONNECT", "OTHER"
+      HTTP_GET_VALUE,
+      "HEAD",
+      "POST",
+      "PUT",
+      "PATCH",
+      "DELETE",
+      "OPTIONS",
+      "TRACE",
+      "CONNECT",
+      "OTHER"
     };
     int[] statuses = {101, 201, 301, 401, 501};
     String[] classes = {"1xx", "2xx", "3xx", "4xx", "5xx"};
@@ -93,16 +117,18 @@ class HttpMetricContractTest {
           assertEquals(classes[index], labels.status().label());
           assertEquals(
               Map.of(
-                  "service",
-                  "WEB",
-                  "route",
+                  SERVICE_LABEL,
+                  WEB_SERVICE_VALUE,
+                  ROUTE_LABEL,
                   route,
-                  "method",
+                  METHOD_LABEL,
                   method,
-                  "status_class",
+                  STATUS_CLASS_LABEL,
                   classes[index]),
               labels.requestLabels());
-          assertEquals(Map.of("service", "WEB", "route", route), labels.durationLabels());
+          assertEquals(
+              Map.of(SERVICE_LABEL, WEB_SERVICE_VALUE, ROUTE_LABEL, route),
+              labels.durationLabels());
           requestKeys.add(labels.requestLabels());
           durationKeys.add(labels.durationLabels());
         }
@@ -154,7 +180,7 @@ class HttpMetricContractTest {
               .getMessage());
     assertThrows(NullPointerException.class, () -> Route.parse(null));
     assertThrows(NullPointerException.class, () -> Method.parse(null));
-    assertThrows(NullPointerException.class, () -> contract.labels(null, "GET", 200));
+    assertThrows(NullPointerException.class, () -> contract.labels(null, HTTP_GET_VALUE, 200));
     assertThrows(NullPointerException.class, () -> contract.labels("/", null, 200));
     assertThrows(NullPointerException.class, () -> new Labels(null, Method.GET, Status.SUCCESS));
     assertThrows(NullPointerException.class, () -> new Labels(Route.ROOT, null, Status.SUCCESS));
@@ -162,10 +188,12 @@ class HttpMetricContractTest {
     for (int status : new int[] {-1, 99, 600, Integer.MAX_VALUE})
       assertEquals(
           "invalid HTTP status",
-          assertThrows(IllegalArgumentException.class, () -> contract.labels("/", "GET", status))
+          assertThrows(
+                  IllegalArgumentException.class,
+                  () -> contract.labels("/", HTTP_GET_VALUE, status))
               .getMessage());
-    assertEquals(Status.INFORMATIONAL, contract.labels("/", "GET", 100).status());
-    assertEquals(Status.SERVER_ERROR, contract.labels("/", "GET", 599).status());
+    assertEquals(Status.INFORMATIONAL, contract.labels("/", HTTP_GET_VALUE, 100).status());
+    assertEquals(Status.SERVER_ERROR, contract.labels("/", HTTP_GET_VALUE, 599).status());
   }
 
   @Test
@@ -180,7 +208,15 @@ class HttpMetricContractTest {
     assertThrows(
         UnsupportedOperationException.class, () -> contract.routeTemplates().set(0, "opaque"));
     assertEquals(
-        Map.of("service", "WEB", "route", "/login", "method", "POST", "status_class", "3xx"),
+        Map.of(
+            SERVICE_LABEL,
+            WEB_SERVICE_VALUE,
+            ROUTE_LABEL,
+            "/login",
+            METHOD_LABEL,
+            "POST",
+            STATUS_CLASS_LABEL,
+            "3xx"),
         labels.requestLabels());
     assertEquals(35, contract.routeTemplates().size());
   }

@@ -33,6 +33,10 @@ import org.junit.jupiter.api.Test;
  * Full wire bytes are assembled from UI232/235 offsets, not a production encoder. PT-MED-037..040.
  */
 class MediaResponseDecoderTest {
+  private static final String SUCCESS_RESULT_CODE = "0000";
+  private static final String OGG_AUDIO_MIME = "audio/ogg";
+  private static final String MUSIC_OGG_PATH = "music/a.ogg";
+  private static final String MUSIC_TYPE_NAME = "MUSIC";
   private static final String HASH = "0123456789abcdef".repeat(4);
 
   @Test
@@ -40,7 +44,7 @@ class MediaResponseDecoderTest {
     for (String[] format : formats()) {
       MediaType type = MediaType.valueOf(format[0]);
       for (String mode : type == MediaType.VIDEO ? List.of("I") : List.of("I", "A")) {
-        for (String code : List.of("0000", "0200")) {
+        for (String code : List.of(SUCCESS_RESULT_CODE, "0200")) {
           for (long size : new long[] {1, 999_999_999_999L}) {
             String id = type == MediaType.AUDIO ? "999999999999" : "論理é";
             var request = request(type, id, mode);
@@ -50,7 +54,9 @@ class MediaResponseDecoderTest {
             byte[] before = body.clone();
             var result = MediaResponseDecoder.decode(request, body);
             assertEquals(
-                code.equals("0000") ? ResultCode.SUCCESS : ResultCode.IDEMPOTENT_SUCCESS,
+                code.equals(SUCCESS_RESULT_CODE)
+                    ? ResultCode.SUCCESS
+                    : ResultCode.IDEMPOTENT_SUCCESS,
                 result.resultCode());
             var descriptor = result.descriptor().orElseThrow();
             assertEquals(type, descriptor.mediaType());
@@ -123,8 +129,8 @@ class MediaResponseDecoderTest {
     byte[] body =
         reply(
             request,
-            media(MediaType.AUDIO, "7", "scenario/a.ogg", "a.ogg", 3, "audio/ogg", "I"),
-            "0000");
+            media(MediaType.AUDIO, "7", "scenario/a.ogg", "a.ogg", 3, OGG_AUDIO_MIME, "I"),
+            SUCCESS_RESULT_CODE);
     assertThrows(NullPointerException.class, () -> MediaResponseDecoder.decode(null, body));
     assertThrows(NullPointerException.class, () -> MediaResponseDecoder.decode(request, null));
     for (int length : new int[] {0, 255, 2065, body.length - 1, body.length + 1})
@@ -159,7 +165,7 @@ class MediaResponseDecoderTest {
     for (String[] mutation :
         List.of(
             new String[] {"0", "8"},
-            new String[] {"64", "music/a.ogg"},
+            new String[] {"64", MUSIC_OGG_PATH},
             new String[] {"576", "a.mp3"},
             new String[] {"832", "000000000000"},
             new String[] {"844", "G"},
@@ -184,9 +190,9 @@ class MediaResponseDecoderTest {
                 "scenario/" + "a".repeat(252) + ".ogg",
                 "a.ogg",
                 3,
-                "audio/ogg",
+                OGG_AUDIO_MIME,
                 "I"),
-            "0000"));
+            SUCCESS_RESULT_CODE));
     reject(wireRequest("ANMREQ01", new byte[0]), body);
     reject(wireRequest("ZZZREQ01", new byte[0]), body);
     reject(wireRequest("AUDREQ01", spaces(16)), body);
@@ -200,7 +206,7 @@ class MediaResponseDecoderTest {
             new String[] {"1296", "/outside.mp4"})) {
       byte[] changed = validVideo.clone();
       put(changed, Integer.parseInt(mutation[0]), mutation[1]);
-      reject(video, reply(video, changed, "0000"));
+      reject(video, reply(video, changed, SUCCESS_RESULT_CODE));
     }
   }
 
@@ -217,14 +223,21 @@ class MediaResponseDecoderTest {
                   byte[] body =
                       reply(
                           request,
-                          media(MediaType.MUSIC, id, "music/a.ogg", "音源.ogg", 3, "audio/ogg", "A"),
+                          media(
+                              MediaType.MUSIC,
+                              id,
+                              MUSIC_OGG_PATH,
+                              "音源.ogg",
+                              3,
+                              OGG_AUDIO_MIME,
+                              "A"),
                           "0200");
                   var result = MediaResponseDecoder.decode(request, body);
                   reject(request(MediaType.MUSIC, id, "A"), body);
                   Arrays.fill(body, (byte) 0);
                   assertEquals(id, result.descriptor().orElseThrow().logicalId());
                   assertEquals(
-                      "music/a.ogg", result.descriptor().orElseThrow().storageRelativePath());
+                      MUSIC_OGG_PATH, result.descriptor().orElseThrow().storageRelativePath());
                   assertEquals(ResultCode.IDEMPOTENT_SUCCESS, result.resultCode());
                   return true;
                 }));
@@ -235,13 +248,13 @@ class MediaResponseDecoderTest {
 
   private static List<String[]> formats() {
     return List.of(
-        new String[] {"AUDIO", "scenario/a.ogg", "audio/ogg"},
+        new String[] {"AUDIO", "scenario/a.ogg", OGG_AUDIO_MIME},
         new String[] {"VIDEO", "video/a.mp4", "video/mp4"},
-        new String[] {"MUSIC", "music/a.m4a", "audio/mp4"},
-        new String[] {"MUSIC", "music/a.mp3", "audio/mpeg"},
-        new String[] {"MUSIC", "music/a.ogg", "audio/ogg"},
-        new String[] {"MUSIC", "music/a.wav", "audio/wav"},
-        new String[] {"MUSIC", "music/a.flac", "audio/flac"});
+        new String[] {MUSIC_TYPE_NAME, "music/a.m4a", "audio/mp4"},
+        new String[] {MUSIC_TYPE_NAME, "music/a.mp3", "audio/mpeg"},
+        new String[] {MUSIC_TYPE_NAME, MUSIC_OGG_PATH, OGG_AUDIO_MIME},
+        new String[] {MUSIC_TYPE_NAME, "music/a.wav", "audio/wav"},
+        new String[] {MUSIC_TYPE_NAME, "music/a.flac", "audio/flac"});
   }
 
   private static WireMessage<FixedPayload> request(MediaType type, String id, String mode) {
