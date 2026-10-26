@@ -1,0 +1,24 @@
+# Protocol直接期待値95site・文脈レビュー結果
+
+2026-10-26、仕様2029、source d17f122d2026b804be626bf7a3b76912923bd240、索引の14sourceは旧ddと同hash。95siteの親source文脈レビューを以下へ記録する。これは静的レビューであり95件の製品PTではない。新障害0はこの直接call文脈だけであり、全独立oracle合格の宣言ではない。
+
+|Test/helper source|site数|独立根拠・補助propertyの限界|
+|---|---:|---|
+|AuthenticationErrorProfileTest|3|loginGoldenは固定432byte/offset167・176とJDK format/UTF8で独立構築、Map expectedはTest作成。layouts/fields TSVからエラーbyteを独立構築。製品encodeをexpected生成へ呼ばない。|
+|FieldCodecTest|11|固定Unicode literalのJDK UTF8、Optional/OptionalLongの固定値・empty。NFCは明示c3a9 byte、未知値は固定負例。|
+|MessageCodecTest|1|Optional.of(CONTEXT)は入力値保存契約。wire全体は別methodの固定256byte/UI232 offsetで比較。これ一siteのみでwire正当としない。|
+|PayloadCodecTest|6|三長さ/countはregistryと入力recordsの整合property、長さの独立仕様はLayoutMetadataTest/layouts-ui233.tsvに別存在。二byte期待は固定ASCII literal。hashCode一件は等価Mapの契約で、任意のhash値やwire oracleではない。|
+|PayloadGoldenVectorTest|6|五hash期待は固定golden TSVから読むrecord accessor。maximumTotalLengthはregistry整合propertyであり独立長さ判定ではない。固定layouts TSV/別metadata testを必要証拠として参照。入力境界をProductionから生成しても固定golden hashは変更しない。|
+|LargeResultRecordCodecTest|2|record helperは固定4800byteのArrays.fill、hash helperはJCA SHA256。二record9600byteを独立連結しwriteのhashと比較。descriptorへ入力したhashの保存比較は補助property。|
+|HeaderModelTest|5|UI232のTest内literal表charAt/Boolean.parseBoolean、固定64文字context。hashCodeは別instanceの等価契約であり外部数値の期待ではない。|
+|IndependentNamedFieldOracle|12|getter名はnamed-accessors独立TSV、field名/shapeはfields TSV、型名はnamed-types TSV。TIME.plusMillis/number/JDK parseはTest入力から計算。FieldValue.valueはTest作成のliteral保持carrierで製品mapper出力ではない。keySetもTest入力集合。Production factoryはactual入力の組立に限り、独立wire expectedへ逆流しない。|
+|PayloadTypeCatalogTest|4|二型比較はdecode/catalog整合property、独立型名は別64行named-types TSV・IndependentNamedFieldOracleで確認。Optional二件はTest固定literal/empty。型比較だけで独立wire oracleとしない。|
+|SemanticFieldValueTest|23|14 optional siteは固定literal/Instant/UUID及び固定wireのwrapper入力、残9は同値/非同値/hashCode property。正規化は別固定é文字列、wireは別固定HEX/path/textへ比較しておりpropertyを唯一の期待値にしない。|
+|ProtocolSemanticTypeTest|10|九Optional固定値/empty、wireValue expected一件はenumValueが入力enumを保持する補助property。全enum wireは同sourceのapprovedEnumNamesWireValuesAndConversionMatchIndependentDesignTablesの独立literal表で別検査。getter値だけから仕様許容集合を生成しない。|
+|EnumWireCompatibilityTest|1|ByteArrayOutputStream expectedは固定Java serial grammar hexと明示class/name文字列から構築、Production serializerを呼ばず、actual ObjectOutputStreamと比較。実行は今回なし。|
+|JstWireTimestampTest|4|固定ISO Instant.parse/JDK string repeatと明示JST17桁文字列。1582年LMTも独立literal、製品format出力をparse期待へ戻さない。|
+|BrokerTopologyTest|7|Test-local Vector六行のliteral address/bodylimit/TTL、record accessorは製品enum getterではない。queue/FQQNは独立address連結、TTL>0は固定値の式。|
+
+独立性の反証点検：layout getter/roundtrip/equal hash/type lookup/enum getterは同一系統の共通誤りを単独で排除できない。上記は「補助property」として分離し、固定fixture/literal検査の当source/run合格は今回実行していないため未実証のまま残す。Testの期待値生成helperにProduction codecを呼ぶ箇所はこの95siteの範囲では認めず、入力carrier/factoryと出力oracleを区別した。既UID1794のような独立補強不足を新規発見した場合は別起票する。
+
+10146は位置/hash/件数・固定fixture/補助sourceを照合したmetadata-only証跡。TestID/method/branch/要求/実行evidenceの全forward/reverse join、変数経由expected202、Storage直接114、constructor50、未測定coverage/native/全451は未完。全G03を閉じず、正式1964PT/53scope・17/190・工数null/QA051 final保持。command `python3 -B tools/quality/pg10146_protocol_expected_context.py`、実終了とmanifest hashは後記。新製品実行0/外部操作0、元成功の再演0。
