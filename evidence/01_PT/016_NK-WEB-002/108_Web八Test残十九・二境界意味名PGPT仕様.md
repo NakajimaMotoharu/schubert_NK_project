@@ -1,5 +1,7 @@
 # 108 Web八Test残十九・二境界意味名PGPT仕様
 
+追補2026-10-27：10870中間実18によりcompound ifの全operand不足を確認。修正前に1882/1633へ追記し、最終はLog PAGE_SIZE100一参照/Scenario MIDDLE_PAGE2二参照/FIRST_PAGE1一参照/PAGE_SIZE100一参照、四定数/五参照で元token不変を確認する。旧sourcecfの16PTは保持し、最終sourceで追加変更ScenarioTest原八methodだけ必要実行する。旧16成功を最終source16へ合算しない。
+
 2026-10-27、群2481、F03、開始1/3/7pp cap10固定。原10852の19指摘を保持し、IfLiteral二をBUG1882/YKT1633先行でTest-local境界名へ同値PG、THREAD16/ConcurrentMap一は現source/旧ID/vendor J2EE又は局所共有範囲を照合して具体判断する。Main・assert/画面oracle・入力値は変えず、原owner/費用を維持。
 
 対象LogSearchTemplateTest.log086Paginationのtotal>100一箇所をPAGE_SIZE_BOUNDARY=100へ、ScenarioSearchTemplateTest.search028PaginationAndEmptyのp==2二箇所をMIDDLE_PAGE=2へ。独立逆展開は宣言を除去し、実identifierを元数値token列へ戻して全token比較する。誤値/宣言欠落/annotation変更の六反例をmetadata内で拒否、実Test disable0。

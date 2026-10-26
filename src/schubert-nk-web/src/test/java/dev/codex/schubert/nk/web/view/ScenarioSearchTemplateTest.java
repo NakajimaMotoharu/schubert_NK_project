@@ -56,6 +56,8 @@ import org.thymeleaf.spring6.view.ThymeleafViewResolver;
 /** Actual templates/resource mapping, independent Current literals; PG202/016007/PT-SCR026..033. */
 class ScenarioSearchTemplateTest {
   private static final int MIDDLE_PAGE = 2;
+  private static final int FIRST_PAGE = 1;
+  private static final int PAGE_SIZE_BOUNDARY = 100;
   private static final String READER_USERNAME = "reader";
   private static final String PAGE_KEY = "page";
   private static final String GAME_FIELD_NAME = "game";
@@ -318,7 +320,7 @@ class ScenarioSearchTemplateTest {
           assertEquals("次の100件", nav.children().last().text());
           if (p > 1) assertEquals(prefix + (p - 1), nav.children().first().attr(HREF_ATTRIBUTE));
           else assertEquals("span", nav.children().first().tagName());
-          if ((p == 1 && total > 100) || p == MIDDLE_PAGE)
+          if ((p == FIRST_PAGE && total > PAGE_SIZE_BOUNDARY) || p == MIDDLE_PAGE)
             assertEquals(prefix + (p + 1), nav.children().last().attr(HREF_ATTRIBUTE));
           else assertEquals("span", nav.children().last().tagName());
         }
