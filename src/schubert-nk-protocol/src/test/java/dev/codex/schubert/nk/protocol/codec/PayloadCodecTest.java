@@ -103,6 +103,15 @@ class PayloadCodecTest {
                   Map.of("更新後状態", new FieldValue.Text(state), "取消日時", FieldValue.Unset.INSTANCE)),
               List.of());
       FixedPayload statePayload = codec.encode(stateValue, ResultCode.NOT_CANCELLABLE);
+      // UI236 section10.2: independent 12-byte status, 17-byte absent time, 3 spaces.
+      byte[] conflictGolden = new byte[32];
+      Arrays.fill(conflictGolden, (byte) ' ');
+      byte[] stateBytes = state.getBytes(StandardCharsets.US_ASCII);
+      System.arraycopy(stateBytes, 0, conflictGolden, 0, stateBytes.length);
+      assertArrayEquals(conflictGolden, statePayload.copyData());
+      assertEquals(
+          stateValue,
+          codec.decode(layoutId, conflictGolden, List.of(), ResultCode.NOT_CANCELLABLE));
       assertEquals(
           stateValue,
           codec.decode(layoutId, statePayload.copyData(), List.of(), ResultCode.NOT_CANCELLABLE));
@@ -145,6 +154,14 @@ class PayloadCodecTest {
             codec.encode(success, ResultCode.SUCCESS).copyData(),
             List.of(),
             ResultCode.SUCCESS));
+
+    // UI236 section10.2: literal wire, not an encoder-generated expected value.
+    byte[] cancelledGolden =
+        "CANCELLED   20260902123456789   ".getBytes(StandardCharsets.US_ASCII);
+    for (ResultCode code : List.of(ResultCode.SUCCESS, ResultCode.IDEMPOTENT_SUCCESS)) {
+      assertArrayEquals(cancelledGolden, codec.encode(success, code).copyData());
+      assertEquals(success, codec.decode(layoutId, cancelledGolden, List.of(), code));
+    }
 
     assertThrows(NullPointerException.class, () -> codec.encode(conflict, (ResultCode) null));
     assertThrows(
