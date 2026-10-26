@@ -25,6 +25,7 @@ import dev.codex.schubert.nk.protocol.layout.question.NotificationRecord;
 import dev.codex.schubert.nk.protocol.layout.question.QuestionDetailResponseData;
 import dev.codex.schubert.nk.protocol.layout.question.QuestionSummaryRecord;
 import dev.codex.schubert.nk.protocol.layout.semantic.AnswerState;
+import dev.codex.schubert.nk.protocol.layout.semantic.NotificationErrorCode;
 import dev.codex.schubert.nk.protocol.layout.semantic.NotificationId;
 import dev.codex.schubert.nk.protocol.layout.semantic.NotificationState;
 import dev.codex.schubert.nk.protocol.layout.semantic.NotificationType;
@@ -50,6 +51,7 @@ import org.junit.jupiter.api.Test;
  * NK-QRY-001/NK-NTF-001/UI236/SS332; PT-QRY-SQL001..008; QRY003. No backend or SQL fault injection.
  */
 class QuestionSqlContractTest {
+  private static final String COLUMN_TOTAL = "total";
   private static final String ANSWERED_STATE = "ANSWERED";
   private static final String COMPLETED_STATE = "COMPLETED";
   private static final String RECEIVED_STATE = "RECEIVED";
@@ -299,6 +301,96 @@ class QuestionSqlContractTest {
     assertTrue(jdbc.closed.isEmpty());
   }
 
+  @Test
+  void sql009ValidProcessingCancelledAndFiveErrorCodesRemainTypedData() {
+    var wires =
+        List.of(
+            "PROCESS_FAILED",
+            "SYSTEM_UNAVAIL",
+            "RESOURCE_LIMIT",
+            "DATA_INTEGRITY",
+            "PROTOCOL_ERROR");
+    var codes =
+        List.of(
+            NotificationErrorCode.PROCESS_FAILED,
+            NotificationErrorCode.SYSTEM_UNAVAILABLE,
+            NotificationErrorCode.RESOURCE_LIMIT,
+            NotificationErrorCode.DATA_INTEGRITY,
+            NotificationErrorCode.PROTOCOL_ERROR);
+    for (int variant = 0; variant < 7; variant++) {
+      boolean error = variant >= 2;
+      boolean cancelled = variant == 1;
+      var row = noticeRow(false, false);
+      row.put("notification_type", error ? "ERROR" : "ACCEPTED");
+      row.put("state", error ? "ERROR" : cancelled ? "CANCELLED" : "PROCESSING");
+      row.put("started_at", cancelled ? null : OffsetDateTime.parse(ROW_SUBMITTED_AT));
+      row.put("error_at", error ? TO : null);
+      row.put("cancelled_at", cancelled ? TO : null);
+      row.put("error_code", error ? wires.get(variant - 2) : null);
+      row.put("error_message", error ? "temporarily unavailable" : null);
+      row.put("updated_at", cancelled || error ? TO : OffsetDateTime.parse(ROW_SUBMITTED_AT));
+      var jdbc = new Jdbc(List.of(row));
+      var request = detail(NTD);
+      var value =
+          request.query(new QuestionQueryRepository(), jdbc.connection(), ADMIN).orElseThrow();
+      var expected =
+          new NotificationDetailResponseData(
+              new NotificationId(3),
+              RECEIPT,
+              error ? NotificationType.ERROR : NotificationType.ACCEPTED,
+              error
+                  ? NotificationState.ERROR
+                  : cancelled ? NotificationState.CANCELLED : NotificationState.PROCESSING,
+              NOW,
+              cancelled ? Optional.empty() : Optional.of(NOW),
+              Optional.empty(),
+              error ? Optional.of(ANSWERED) : Optional.empty(),
+              cancelled ? Optional.of(ANSWERED) : Optional.empty(),
+              false,
+              Optional.of(BODY),
+              Optional.empty(),
+              error ? Optional.of(codes.get(variant - 2)) : Optional.empty(),
+              error ? Optional.of("temporarily unavailable") : Optional.empty(),
+              Optional.of(new QuestionId(3)));
+      assertEquals(expected, value.data());
+      assertDoesNotThrow(() -> request.validateResponse(value));
+      jdbc.assertBinds(List.of(3L, 8L));
+      jdbc.assertReleased();
+    }
+  }
+
+  @Test
+  void sql010FullQuestionPagePreservesFiftyUnansweredRows() {
+    var rows = new ArrayList<Map<String, @Nullable Object>>();
+    var expected = new ArrayList<QuestionSummaryRecord>();
+    for (long id = 50; id >= 1; id--) {
+      var row = questionRow(false);
+      String receipt = "0".repeat(24) + (id < 10 ? "0" + id : Long.toString(id));
+      row.put(COLUMN_TOTAL, 50L);
+      row.put("id", id);
+      row.put("receipt_id", receipt);
+      rows.add(row);
+      expected.add(
+          new QuestionSummaryRecord(
+              new QuestionId(id),
+              receipt,
+              USERNAME,
+              SUMMARY,
+              AnswerState.UNANSWERED,
+              NOW,
+              Optional.empty()));
+    }
+    var jdbc = new Jdbc(rows);
+    var request = search(QSS, 0);
+    var value = request.query(new QuestionQueryRepository(), jdbc.connection(), USER).orElseThrow();
+    assertEquals(new PagedResponseData(1, 50, 50, 1, 1, 50), value.data());
+    assertEquals(expected, value.records());
+    assertDoesNotThrow(() -> request.validateResponse(value));
+    assertEquals(7L, jdbc.parameters.get(1));
+    pageSql(jdbc.sql, true);
+    jdbc.assertReleased();
+  }
+
   private static void pageSql(String sql, boolean question) {
     assertTrue(sql.contains("filtered as materialized"));
     assertTrue(sql.contains("totals as (select count(*) as total from filtered)"));
@@ -312,7 +404,7 @@ class QuestionSqlContractTest {
 
   private static Map<String, @Nullable Object> emptyRow() {
     var row = new HashMap<String, @Nullable Object>();
-    row.put("total", 0L);
+    row.put(COLUMN_TOTAL, 0L);
     row.put("pages", 1L);
     row.put("effective", 1L);
     row.put("id", null);
@@ -321,7 +413,7 @@ class QuestionSqlContractTest {
 
   private static Map<String, @Nullable Object> questionRow(boolean answered) {
     var row = emptyRow();
-    row.put("total", 1L);
+    row.put(COLUMN_TOTAL, 1L);
     row.put("id", 3L);
     row.put("receipt_id", RECEIPT);
     row.put("username", USERNAME);
@@ -335,7 +427,7 @@ class QuestionSqlContractTest {
 
   private static Map<String, @Nullable Object> noticeRow(boolean deleted, boolean completed) {
     var row = emptyRow();
-    row.put("total", 1L);
+    row.put(COLUMN_TOTAL, 1L);
     row.put("id", 3L);
     row.put("receipt_id", RECEIPT);
     row.put("notification_type", completed ? COMPLETED_STATE : "ACCEPTED");

@@ -49,6 +49,7 @@ import org.junit.jupiter.api.Test;
 
 /** NK-ADM-001/UI235/SS323332; PT-LOG-SQL001..008; spec079. Public JDBC interfaces, no backend. */
 class LogSqlContractTest {
+  private static final String COLUMN_TOTAL = "total";
   private static final String SEARCH_LAYOUT = "LGSREQ01";
   private static final String RESPONSE_LAYOUT = "LGSRSP01";
   private static final String CATEGORY = "SECURITY";
@@ -178,7 +179,7 @@ class LogSqlContractTest {
   @Test
   void sql005FinalPageClampHasExactHundredRowBoundaries() {
     var row = logRow(false);
-    row.put("total", 101L);
+    row.put(COLUMN_TOTAL, 101L);
     row.put("pages", 2L);
     row.put("effective", 2L);
     row.put("id", 101L);
@@ -248,6 +249,28 @@ class LogSqlContractTest {
     assertTrue(jdbc.closed.isEmpty());
   }
 
+  @Test
+  void sql009FullHundredRowPageKeepsDescendingIds() {
+    var rows = new ArrayList<Map<String, @Nullable Object>>();
+    var expected = new ArrayList<LogRecord>();
+    for (long id = 100; id >= 1; id--) {
+      var row = logRow(false);
+      row.put(COLUMN_TOTAL, 100L);
+      row.put("id", id);
+      rows.add(row);
+      expected.add(expectedRecord(false, id));
+    }
+    var jdbc = new Jdbc(rows);
+    var request = request(0, LAST_PAGE);
+    var result = request.query(new LogQueryRepository(), jdbc.connection(), ADMIN);
+    assertEquals(new PagedResponseData(1, PAGE_SIZE, 100, 1, 1, 100), result.data());
+    assertEquals(expected, result.records());
+    assertDoesNotThrow(() -> request.validateResponse(result));
+    assertEquals(Map.of(1, LAST_PAGE), jdbc.parameters);
+    commonSql(jdbc.sql);
+    jdbc.assertReleased();
+  }
+
   private static LogSearchRequestData typed(
       int page, int size, Optional<Instant> from, Optional<Instant> to) {
     return new LogSearchRequestData(
@@ -303,7 +326,7 @@ class LogSqlContractTest {
 
   private static Map<String, @Nullable Object> emptyRow() {
     var row = new HashMap<String, @Nullable Object>();
-    row.put("total", 0L);
+    row.put(COLUMN_TOTAL, 0L);
     row.put("pages", 1L);
     row.put("effective", 1L);
     row.put("id", null);
@@ -312,7 +335,7 @@ class LogSqlContractTest {
 
   private static Map<String, @Nullable Object> logRow(boolean full) {
     var row = emptyRow();
-    row.put("total", 1L);
+    row.put(COLUMN_TOTAL, 1L);
     row.put("id", 3L);
     row.put("logged_at", OffsetDateTime.parse("2026-10-01T00:00:00.123456Z"));
     row.put("category", CATEGORY);

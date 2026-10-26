@@ -48,6 +48,7 @@ import org.junit.jupiter.api.Test;
  * proxies only; no driver, DB, error-graph fault injection or private reflection.
  */
 class UserQuerySqlContractTest {
+  private static final String COLUMN_TOTAL = "total";
   private static final String ROLE_USER = "USER";
   private static final String STATE_ACTIVE = "ACTIVE";
   private static final String STATE_LOCKED = "LOCKED";
@@ -224,6 +225,32 @@ class UserQuerySqlContractTest {
     assertTrue(jdbc.closed.isEmpty());
   }
 
+  @Test
+  void sql009FullPagePreservesAllFiftyRowsAndRequestedPage() {
+    var rows = new ArrayList<Map<String, @Nullable Object>>();
+    var expected = new ArrayList<Long>();
+    for (long id = 1; id <= 50; id++) {
+      var row = userRow(false);
+      row.put(COLUMN_TOTAL, 50L);
+      row.put("id", id);
+      row.put("username", "u" + (100 + id));
+      rows.add(row);
+      expected.add(id);
+    }
+    var jdbc = new Jdbc(rows);
+    var request = search("", "", "", "999999");
+    var result =
+        request.query(new UserQueryRepository(), jdbc.connection(), ADMIN, NOW).orElseThrow();
+    assertEquals(new PagedResponseData(1, 50, 50, 1, 1, 50), result.data());
+    assertEquals(
+        expected,
+        result.records().stream().map(row -> ((UserRecord) row).userId().value()).toList());
+    assertEquals(Map.of(1, UTC_NOW, 2, 999999), jdbc.parameters);
+    assertDoesNotThrow(() -> request.validateResponse(result));
+    searchSql(jdbc.sql);
+    jdbc.assertReleased();
+  }
+
   private static void searchSql(String sql) {
     assertTrue(sql.contains("filtered as materialized"));
     assertTrue(sql.contains("count(*) as total"));
@@ -249,7 +276,7 @@ class UserQuerySqlContractTest {
 
   private static Map<String, @Nullable Object> emptyRow() {
     var row = new HashMap<String, @Nullable Object>();
-    row.put("total", 0L);
+    row.put(COLUMN_TOTAL, 0L);
     row.put("pages", 1L);
     row.put("effective", 1L);
     row.put("id", null);
@@ -258,7 +285,7 @@ class UserQuerySqlContractTest {
 
   private static Map<String, @Nullable Object> userRow(boolean locked) {
     var row = emptyRow();
-    row.put("total", 1L);
+    row.put(COLUMN_TOTAL, 1L);
     row.put("id", 3L);
     row.put("username", USERNAME);
     row.put("role", ROLE_USER);
