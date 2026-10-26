@@ -174,7 +174,8 @@ final class UserMutationReplayServiceTest {
                   wire(layout, SOURCE, REPLY, LATER, CONTEXT, code.wireValue(), 0, 0),
                   service.failure(request, code, REPLY, LATER));
             else deny(() -> service.failure(request, code, REPLY, LATER));
-            if (!definite && !code.usesSuccessProfile()) {
+            if (!definite
+                && !(code == ResultCode.SUCCESS || code == ResultCode.IDEMPOTENT_SUCCESS)) {
               byte[] body = wire(layout, SOURCE, RESPONSE, NOW, CONTEXT, code.wireValue(), 0, 0);
               var invalid =
                   stored(

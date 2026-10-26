@@ -299,7 +299,7 @@ class SessionOperationTokenLifecycleTest {
       assertEquals(1, calls.get());
       assertEquals(0, f.live.get());
       for (var code : ResultCode.values())
-        if (!code.usesSuccessProfile())
+        if (!(code == ResultCode.SUCCESS || code == ResultCode.IDEMPOTENT_SUCCESS))
           assertThrows(
               IllegalArgumentException.class,
               () ->
@@ -319,7 +319,8 @@ class SessionOperationTokenLifecycleTest {
           var s = c.createStatement();
           var rows =
               s.executeQuery(
-                  "select count(*),min(version),max(version) from schubert_web_session.web_http_sessions")) {
+                  "select count(*),min(version),max(version) from"
+                      + " schubert_web_session.web_http_sessions")) {
         assertTrue(rows.next());
         assertEquals(1, rows.getInt(1));
         assertEquals(8, rows.getInt(2));

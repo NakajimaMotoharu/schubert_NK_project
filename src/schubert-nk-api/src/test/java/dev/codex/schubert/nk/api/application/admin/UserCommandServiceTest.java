@@ -159,13 +159,15 @@ class UserCommandServiceTest {
       assertEquals(
           3,
           count(
-              "select count(*) from schubert.auth_sessions where user_id=3 and revoked and revoked_at='2026-09-08T00:01:00Z' and revoke_reason='"
+              "select count(*) from schubert.auth_sessions where user_id=3 and revoked and"
+                  + " revoked_at='2026-09-08T00:01:00Z' and revoke_reason='"
                   + (enabled ? "ADMIN" : "DISABLED")
                   + "'"));
       assertEquals(
           1,
           count(
-              "select count(*) from schubert.auth_sessions where user_id=3 and revoke_reason='LOGOUT' and revoked_at='2026-09-08T00:00:30Z'"));
+              "select count(*) from schubert.auth_sessions where user_id=3 and"
+                  + " revoke_reason='LOGOUT' and revoked_at='2026-09-08T00:00:30Z'"));
       assertEquals(
           3, count("select count(*) from schubert.app_logs where action='SESSION_REVOKED'"));
       assertEquals(
@@ -232,7 +234,8 @@ class UserCommandServiceTest {
       assertEquals(
           1,
           count(
-              "select count(*) from schubert.auth_sessions where user_id=3 and revoked and revoke_reason='ADMIN'"));
+              "select count(*) from schubert.auth_sessions where user_id=3 and revoked and"
+                  + " revoke_reason='ADMIN'"));
     }
     seed();
     denied(
@@ -276,7 +279,9 @@ class UserCommandServiceTest {
   void adm017PasswordResetConsumesSecretsAndRevokesEverySession() throws Exception {
     extraSessions();
     sql(
-        "update schubert.app_users set username='é-user',username_key='é-user',failed_count=5,failure_window_started_at='2026-09-08T00:00:00Z',locked_until='2026-09-08T00:02:00Z' where id=3");
+        "update schubert.app_users set"
+            + " username='é-user',username_key='é-user',failed_count=5,failure_window_started_at='2026-09-08T00:00:00Z',locked_until='2026-09-08T00:02:00Z'"
+            + " where id=3");
     char[] input = "e\u0301".repeat(12).toCharArray();
     success(
         run(
@@ -293,15 +298,19 @@ class UserCommandServiceTest {
     assertEquals(
         1,
         count(
-            "select count(*) from schubert.app_users where id=3 and locked_until='2026-09-08T00:02:00Z' and password_changed_at='2026-09-08T00:01:00Z'"));
+            "select count(*) from schubert.app_users where id=3 and"
+                + " locked_until='2026-09-08T00:02:00Z' and"
+                + " password_changed_at='2026-09-08T00:01:00Z'"));
     assertEquals(
         3,
         count(
-            "select count(*) from schubert.auth_sessions where user_id=3 and revoke_reason='PASSWORD_RESET'"));
+            "select count(*) from schubert.auth_sessions where user_id=3 and"
+                + " revoke_reason='PASSWORD_RESET'"));
     assertEquals(
         1,
         count(
-            "select count(*) from schubert.app_logs where action='USER_PASSWORD_RESET' and category='SECURITY'"));
+            "select count(*) from schubert.app_logs where action='USER_PASSWORD_RESET' and"
+                + " category='SECURITY'"));
     char[] own = PASSWORD.toCharArray();
     success(
         run(
@@ -354,7 +363,8 @@ class UserCommandServiceTest {
           assertEquals(
               1,
               count(
-                  "select count(*) from schubert.app_users where id=3 and failure_window_started_at is null and locked_until is null"));
+                  "select count(*) from schubert.app_users where id=3 and failure_window_started_at"
+                      + " is null and locked_until is null"));
       }
     }
     denied(
@@ -397,7 +407,8 @@ class UserCommandServiceTest {
     assertEquals(
         3,
         count(
-            "select count(*) from schubert.app_logs where action='USER_CREATED' and details->>'outcome'='DENIED' and details->>'resultCode'='0105'"));
+            "select count(*) from schubert.app_logs where action='USER_CREATED' and"
+                + " details->>'outcome'='DENIED' and details->>'resultCode'='0105'"));
     for (String name : List.of("", " ", "é", "bad/name", "a".repeat(65), "line\nname")) {
       char[] input = PASSWORD.toCharArray();
       denied(
@@ -815,7 +826,11 @@ class UserCommandServiceTest {
         2, count("select count(*) from schubert.app_users where role='ADMIN' and status='ACTIVE'"));
     seed();
     sql(
-        "insert into schubert.app_users(id,username,username_key,password_hash,role,status,password_changed_at,created_at,updated_at) select i,'u'||i,'u'||i,'unusable-test-hash','USER','ACTIVE','2026-09-08T00:00:00Z','2026-09-08T00:00:00Z','2026-09-08T00:00:00Z' from generate_series(10,109)i");
+        "insert into"
+            + " schubert.app_users(id,username,username_key,password_hash,role,status,password_changed_at,created_at,updated_at)"
+            + " select"
+            + " i,'u'||i,'u'||i,'unusable-test-hash','USER','ACTIVE','2026-09-08T00:00:00Z','2026-09-08T00:00:00Z','2026-09-08T00:00:00Z'"
+            + " from generate_series(10,109)i");
     try (var pool = Executors.newFixedThreadPool(10)) {
       List<Future<UserMutationResult>> jobs = new ArrayList<>();
       for (long id = 10; id < 110; id++) {
@@ -861,7 +876,7 @@ class UserCommandServiceTest {
         NOW,
         new UserCommandMetadata(META.messageId(), META.correlationId(), NOW.plusNanos(999)).at());
     for (ResultCode code : ResultCode.values()) {
-      if (code.usesSuccessProfile()) {
+      if ((code == ResultCode.SUCCESS || code == ResultCode.IDEMPOTENT_SUCCESS)) {
         assertThrows(
             IllegalArgumentException.class, () -> new UserMutationResult(code, Optional.empty()));
         assertEquals(code, new UserMutationResult(code, result.data()).resultCode());
@@ -886,7 +901,8 @@ class UserCommandServiceTest {
         var s = c.createStatement();
         var r =
             s.executeQuery(
-                "select * from schubert.app_logs where action='USER_STATUS_CHANGED' order by category")) {
+                "select * from schubert.app_logs where action='USER_STATUS_CHANGED' order by"
+                    + " category")) {
       for (String category : List.of("ACTION", "SECURITY")) {
         assertTrue(r.next());
         assertEquals(category, r.getString("category"));
@@ -1040,7 +1056,11 @@ class UserCommandServiceTest {
       s.execute("truncate schubert.app_users restart identity cascade");
     }
     sql(
-        "insert into schubert.app_users(id,username,username_key,password_hash,role,status,password_changed_at,created_at,updated_at) select i,'u'||i,'u'||i,'unusable-test-hash',case when i=3 then 'USER' else 'ADMIN' end,'ACTIVE','2026-09-08T00:00:00Z','2026-09-08T00:00:00Z','2026-09-08T00:00:00Z' from generate_series(1,4)i");
+        "insert into"
+            + " schubert.app_users(id,username,username_key,password_hash,role,status,password_changed_at,created_at,updated_at)"
+            + " select i,'u'||i,'u'||i,'unusable-test-hash',case when i=3 then 'USER' else 'ADMIN'"
+            + " end,'ACTIVE','2026-09-08T00:00:00Z','2026-09-08T00:00:00Z','2026-09-08T00:00:00Z'"
+            + " from generate_series(1,4)i");
     try (var c = database.admin();
         var s = c.createStatement()) {
       s.execute("select setval('schubert.app_users_id_seq',4,true)");
@@ -1048,7 +1068,9 @@ class UserCommandServiceTest {
     try (var c = database.api();
         var s =
             c.prepareStatement(
-                "insert into schubert.auth_sessions(id,user_id,context_hash,context_ciphertext,key_version,issued_at,last_accessed_at,expires_at,client_address,created_message_id) values(?,?,?,decode(repeat('00',29),'hex'),'test','2026-09-08T00:00:00Z','2026-09-08T00:00:00Z','2026-09-08T08:00:00Z','127.0.0.1',?)")) {
+                "insert into"
+                    + " schubert.auth_sessions(id,user_id,context_hash,context_ciphertext,key_version,issued_at,last_accessed_at,expires_at,client_address,created_message_id)"
+                    + " values(?,?,?,decode(repeat('00',29),'hex'),'test','2026-09-08T00:00:00Z','2026-09-08T00:00:00Z','2026-09-08T08:00:00Z','127.0.0.1',?)")) {
       for (int id = 1; id <= 4; id++) {
         String raw = String.valueOf((char) ('a' + id)).repeat(64);
         s.setObject(1, new UUID(0, id));
@@ -1067,6 +1089,14 @@ class UserCommandServiceTest {
 
   static void extraSessions() throws Exception {
     sql(
-        "insert into schubert.auth_sessions(id,user_id,context_hash,context_ciphertext,key_version,issued_at,last_accessed_at,expires_at,client_address,created_message_id,revoked,revoked_at,revoke_reason) select ('00000000-0000-0000-0000-'||lpad(i::text,12,'0'))::uuid,3,lpad(i::text,64,'0'),decode(repeat('00',29),'hex'),'test','2026-09-08T00:00:00Z','2026-09-08T00:00:00Z',case when i=5 then '2026-09-08T00:00:01Z'::timestamptz else '2026-09-08T08:00:00Z'::timestamptz end,'127.0.0.1',('00000000-0000-0001-0000-'||lpad(i::text,12,'0'))::uuid,i=7,case when i=7 then '2026-09-08T00:00:30Z'::timestamptz end,case when i=7 then 'LOGOUT' end from generate_series(5,7)i");
+        "insert into"
+            + " schubert.auth_sessions(id,user_id,context_hash,context_ciphertext,key_version,issued_at,last_accessed_at,expires_at,client_address,created_message_id,revoked,revoked_at,revoke_reason)"
+            + " select"
+            + " ('00000000-0000-0000-0000-'||lpad(i::text,12,'0'))::uuid,3,lpad(i::text,64,'0'),decode(repeat('00',29),'hex'),'test','2026-09-08T00:00:00Z','2026-09-08T00:00:00Z',case"
+            + " when i=5 then '2026-09-08T00:00:01Z'::timestamptz else"
+            + " '2026-09-08T08:00:00Z'::timestamptz"
+            + " end,'127.0.0.1',('00000000-0000-0001-0000-'||lpad(i::text,12,'0'))::uuid,i=7,case"
+            + " when i=7 then '2026-09-08T00:00:30Z'::timestamptz end,case when i=7 then 'LOGOUT'"
+            + " end from generate_series(5,7)i");
   }
 }

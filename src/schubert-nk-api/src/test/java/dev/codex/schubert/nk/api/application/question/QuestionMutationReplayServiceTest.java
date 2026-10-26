@@ -135,7 +135,7 @@ final class QuestionMutationReplayServiceTest {
           assertEquals(AT, completion.completedAt());
           byte[] expected = wire(cancel, M, R, AT, code, AT);
           byte[] plaintext = QuestionQueryReplayServiceTest.decrypt(completion, M, 1);
-          if (code.usesSuccessProfile()) {
+          if ((code == ResultCode.SUCCESS || code == ResultCode.IDEMPOTENT_SUCCESS)) {
             byte[] prefix =
                 ByteBuffer.allocate(35)
                     .put("NKREF1".getBytes(StandardCharsets.US_ASCII))
@@ -174,7 +174,9 @@ final class QuestionMutationReplayServiceTest {
                     M,
                     NEXT,
                     LATER,
-                    replay && code.usesSuccessProfile() ? ResultCode.IDEMPOTENT_SUCCESS : code,
+                    replay && (code == ResultCode.SUCCESS || code == ResultCode.IDEMPOTENT_SUCCESS)
+                        ? ResultCode.IDEMPOTENT_SUCCESS
+                        : code,
                     AT),
                 service.reply(saved, request, ADMIN, NEXT, LATER));
           }
@@ -501,24 +503,24 @@ final class QuestionMutationReplayServiceTest {
     if (cancel)
       fields =
           new NotificationCancelResponseData(
-                  code.usesSuccessProfile()
+                  (code == ResultCode.SUCCESS || code == ResultCode.IDEMPOTENT_SUCCESS)
                       ? Optional.of(NotificationState.CANCELLED)
                       : code == ResultCode.NOT_CANCELLABLE
                           ? Optional.of(NotificationState.PROCESSING)
                           : Optional.empty(),
-                  code.usesSuccessProfile()
+                  (code == ResultCode.SUCCESS || code == ResultCode.IDEMPOTENT_SUCCESS)
                       ? Optional.of(at.truncatedTo(ChronoUnit.MILLIS))
                       : Optional.empty())
               .fields();
     else
       fields =
-          code.usesSuccessProfile()
+          (code == ResultCode.SUCCESS || code == ResultCode.IDEMPOTENT_SUCCESS)
               ? new QuestionDeleteResponseData(at.truncatedTo(ChronoUnit.MILLIS)).fields()
               : FieldValueSet.empty();
     return new QuestionMutationRequest.Result(
         code,
         new PayloadValues(new LayoutId(cancel ? "NTCRSP01" : "QDLRSP01"), fields, List.of()),
-        code.usesSuccessProfile()
+        (code == ResultCode.SUCCESS || code == ResultCode.IDEMPOTENT_SUCCESS)
             ? InboxResultReference.numeric(
                 cancel ? InboxResultReferenceType.JOB : InboxResultReferenceType.QUESTION,
                 cancel ? 7 : 3)
@@ -551,7 +553,7 @@ final class QuestionMutationReplayServiceTest {
             + String.format(Locale.ROOT, "%09d", 256 + len));
     QuestionQueryRequestTest.put(b, 208, code.wireValue());
     if (cancel) {
-      if (code.usesSuccessProfile()) {
+      if ((code == ResultCode.SUCCESS || code == ResultCode.IDEMPOTENT_SUCCESS)) {
         QuestionQueryRequestTest.put(b, 256, "CANCELLED");
         QuestionQueryRequestTest.put(b, 268, QuestionSubmissionServiceTest.date(operation));
       } else if (code == ResultCode.NOT_CANCELLABLE)
@@ -560,7 +562,7 @@ final class QuestionMutationReplayServiceTest {
       QuestionQueryRequestTest.put(
           b,
           256,
-          code.usesSuccessProfile()
+          (code == ResultCode.SUCCESS || code == ResultCode.IDEMPOTENT_SUCCESS)
               ? QuestionSubmissionServiceTest.date(operation)
               : "0".repeat(17));
     }

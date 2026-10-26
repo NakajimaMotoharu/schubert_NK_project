@@ -78,7 +78,8 @@ final class QuestionMutationApplicationServiceTest {
 
   static String metadata(QuestionSubmissionServiceTest.Fixture f) throws SQLException {
     return f.text(
-        "select md5(string_agg(row(i.*)::text,',' order by message_id)) from schubert.request_inbox i");
+        "select md5(string_agg(row(i.*)::text,',' order by message_id)) from schubert.request_inbox"
+            + " i");
   }
 
   @Test
@@ -94,7 +95,9 @@ final class QuestionMutationApplicationServiceTest {
         assertEquals(
             1,
             f.scalar(
-                "select count(*) from schubert.request_inbox where processing_state='COMPLETED' and expires_at=completed_at+interval '7 days' and completed_at='2026-10-01T00:00:01.123456Z' and result_ref_type='"
+                "select count(*) from schubert.request_inbox where processing_state='COMPLETED' and"
+                    + " expires_at=completed_at+interval '7 days' and"
+                    + " completed_at='2026-10-01T00:00:01.123456Z' and result_ref_type='"
                     + (cancel ? "JOB" : "QUESTION")
                     + "' and result_ref_id="
                     + id));
@@ -114,11 +117,13 @@ final class QuestionMutationApplicationServiceTest {
         assertEquals(
             2,
             f.scalar(
-                "select count(*) from schubert.app_logs where action='INBOX_REPLAYED' and category='MQ'"));
+                "select count(*) from schubert.app_logs where action='INBOX_REPLAYED' and"
+                    + " category='MQ'"));
         assertEquals(
             0,
             f.scalar(
-                "select count(*) from schubert.app_logs where details::text like '%question3%' or details::text like '%"
+                "select count(*) from schubert.app_logs where details::text like '%question3%' or"
+                    + " details::text like '%"
                     + TOKEN
                     + "%'"));
         if (cancel) {
@@ -167,20 +172,24 @@ final class QuestionMutationApplicationServiceTest {
               expected(cancel, NEXT, 3, code, operation),
               app.process(message(cancel, id, NEXT, TOKEN)));
           assertEquals(saved, metadata(f));
-          if (!code.usesSuccessProfile())
+          if (!(code == ResultCode.SUCCESS || code == ResultCode.IDEMPOTENT_SUCCESS))
             assertEquals(
                 1,
                 f.scalar(
-                    "select count(*) from schubert.request_inbox where processing_state='ERROR' and result_ref_type='NONE'"));
+                    "select count(*) from schubert.request_inbox where processing_state='ERROR' and"
+                        + " result_ref_type='NONE'"));
           if (kind.equals("capacity")) {
             assertEquals(
                 1,
                 f.scalar(
-                    "select count(*) from schubert.app_logs where action='RESOURCE_LIMIT_REACHED' and category='SYSTEM' and level='ERROR' and details->>'resource'='N9_VERSION' and details->>'errorCode'='9001'"));
+                    "select count(*) from schubert.app_logs where action='RESOURCE_LIMIT_REACHED'"
+                        + " and category='SYSTEM' and level='ERROR' and"
+                        + " details->>'resource'='N9_VERSION' and details->>'errorCode'='9001'"));
             assertEquals(
                 0,
                 f.scalar(
-                    "select count(*) from schubert.app_logs where action in('QUESTION_CANCELLED','QUESTION_DELETE_MARKED')"));
+                    "select count(*) from schubert.app_logs where action"
+                        + " in('QUESTION_CANCELLED','QUESTION_DELETE_MARKED')"));
           }
         }
       }
@@ -195,7 +204,8 @@ final class QuestionMutationApplicationServiceTest {
         assertEquals(
             1,
             f.scalar(
-                "select count(*) from schubert.request_inbox where processing_state='ERROR' and result_ref_type='NONE'"));
+                "select count(*) from schubert.request_inbox where processing_state='ERROR' and"
+                    + " result_ref_type='NONE'"));
       }
   }
 
@@ -213,7 +223,8 @@ final class QuestionMutationApplicationServiceTest {
           f.sql(
               switch (change) {
                 case "revoke" ->
-                    "update schubert.auth_sessions set revoked=true,revoked_at='2026-10-01T00:00:01Z'";
+                    "update schubert.auth_sessions set"
+                        + " revoked=true,revoked_at='2026-10-01T00:00:01Z'";
                 case "disable" -> "update schubert.app_users set status='DISABLED' where id=1";
                 default -> "update schubert.auth_sessions set user_id=2";
               });
@@ -251,7 +262,8 @@ final class QuestionMutationApplicationServiceTest {
         assertEquals(
             1,
             f.scalar(
-                "select count(*) from schubert.app_logs where action='OWNER_SCOPE_DENIED' and category='SECURITY'"));
+                "select count(*) from schubert.app_logs where action='OWNER_SCOPE_DENIED' and"
+                    + " category='SECURITY'"));
       }
     try (var f = QuestionQueryRepositoryTest.fixture(db)) {
       f.sql("update schubert.app_users set role='ADMIN' where id=1");
@@ -279,11 +291,13 @@ final class QuestionMutationApplicationServiceTest {
         assertEquals(
             1,
             f.scalar(
-                "select count(*) from schubert.app_logs where action='PROTOCOL_REJECTED' and category='MQ'"));
+                "select count(*) from schubert.app_logs where action='PROTOCOL_REJECTED' and"
+                    + " category='MQ'"));
         assertEquals(
             1,
             f.scalar(
-                "select count(*) from schubert.app_logs where action='AUTHORIZATION_DENIED' and category='SECURITY' and details->>'reason'='TOKEN_MISMATCH'"));
+                "select count(*) from schubert.app_logs where action='AUTHORIZATION_DENIED' and"
+                    + " category='SECURITY' and details->>'reason'='TOKEN_MISMATCH'"));
       }
   }
 
@@ -330,14 +344,17 @@ final class QuestionMutationApplicationServiceTest {
         switch (change) {
           case "cipher" ->
               f.sql(
-                  "update schubert.request_inbox set response_body_encrypted=decode(repeat('00',29),'hex')");
+                  "update schubert.request_inbox set"
+                      + " response_body_encrypted=decode(repeat('00',29),'hex')");
           case "state" ->
               f.sql(
-                  "update schubert.questions set deleted_at='2026-10-01T00:00:01.999999Z' where id=3");
+                  "update schubert.questions set deleted_at='2026-10-01T00:00:01.999999Z' where"
+                      + " id=3");
           case "missing-key" -> f.snapshots.close();
           case "processing" ->
               f.sql(
-                  "update schubert.request_inbox set processing_state='PROCESSING',result_ref_type=null,result_ref_id=null,result_ref_uuid=null,response_layout_id=null,response_version=null,response_body_encrypted=null,response_key_version=null,completed_at=null");
+                  "update schubert.request_inbox set"
+                      + " processing_state='PROCESSING',result_ref_type=null,result_ref_id=null,result_ref_uuid=null,response_layout_id=null,response_version=null,response_body_encrypted=null,response_key_version=null,completed_at=null");
         }
         String before = metadata(f);
         assertThrows(
