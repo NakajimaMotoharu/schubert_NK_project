@@ -1,0 +1,13 @@
+# SQL前境界三Testの原担当・実source追跡結果
+
+2026-10-26 12:40 JST、群G13_PRE_SQL_THREE_PATH_TRACE_V1/開始.25/1/3 cap10。製品再演0、現Test source d4ba0fcbe8855b9674413d395b46d2de7bb2ded9、全13/3の真正証拠はPG10208原69ad4f6834f20955c7bf1b76609c5960c3eab0dd2b0d3fa7f2ce54c93f9fb21b。
+
+PG10214-pre-sql-trace-v1/manifest.json SHA108ef62af63e0857508b7e64b3e2d9d510d10033ebed712772772da7bb7ff16fで、旧10180の976行を全field不変更、新三Test pathを追加して979行/論理候補971。User四ID=P01001、Log三=P01004、Question六=P01401、原Repository owner/costを941から確認し歴史SHAと現Main SHA/物理SHAを別fieldで保持。共同13件runは各rowでprogramMethodCount4/3/6とsharedRunReferenceNotAdditiveを明示し三倍計上しない。三Test SHA/spec/13IDを現在sourceの証拠へ結合、旧成功の再割当なし。
+
+現Java1806中登録1804、Main965/965・Test839/841、UNKNOWN二は保持。旧941/943、予算/受入/原owner/費用/各歴史runtime・既bindingを不変更。485のcurrent二sectionと486 inventorySha256だけ変更、post hashは循環参照回避null、post側で実raw hashを固定。
+
+PG10216-pre-sql-trace-post-v1/manifest.json SHA8e731295da0f9819471f195da2420a2fe4e8ae5e34f2cacc28e87841cbe829f3：独立post0、owner/cost/現Test hash/現Main hash/歴史Main hash/runtime source/件数/UNKNOWN/受入の九変異を拒否。所定WBS audit前後は実1/HOLDのままで、全G13を合格にしない。
+
+初回工具guard1はBUG1805/YKT1556。PG10213原74b1879b5cbb81678a01a83c68d19c0b33b6c7e4e1152bce2e7a45c437529f6cで元工具全文/hashと未変更の結果を保全。旧941 SHA=現Mainという誤前提をやめ、全三の歴史owner/sourceと現在normal/postを別々に結合した。patch取得出力の上限不足で初回emit未適用、その直後post guard1は正しく未適用を検出。完全patchをapply_patchで適用後にmetadata postだけ成功、製品/compile/JUnit/coverage再演0。
+
+開始eventの未登録workCategoryは追記前に拒否され、2320でnull/理由・元凍結見積を記録。費用N/T・PGPT配賦は不明null、共有33→33丸め0を費用0にしない。新WBS受入0/正式1964-53/既17-190/工数null/全HOLD不変。
