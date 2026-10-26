@@ -37,3 +37,7 @@ PG10134はJaCoCo不存在overload analyzeAll(byte[],String)で集計helper compi
 実command/開始終了日時/exit/stdout-stderr hash/固定input/expected/XML/JaCoCo依存は各manifest/公開receiptに記録。OS Linux amd64 7.0.0-38-generic、JDK25.0.4、Maven3.9.12、JUnit5.13.4/platform1.13.4、JaCoCo0.8.15/ASM9.10.1、PMD7.28/Checkstyle14.3。実行は固定source snapshotから `python3 -B tools/quality/pg10132_uid_oracle_host.py` が発行したmanifest内command。既成功の確認目的だけの再実行をしない。
 
 raw UID/鍵/credential/秘密session/DB結果は保存しない。JVM計測sessionは非秘密測定ID。実VM/Root/cohort/ACL/外部process/DB/鍵/保留witness二fileは不操作。全451/全coverage/native/CHRは未受入、正式1964PT/53scope・個別17/190・工数null/QA051 finalを維持。
+
+## 追跡・保存追補（10:33 JST）
+
+実装/証跡保存9645b151e/origin一致。10140 registry原59a924c4a3da6ce35c141b762425d8375d946c12bd3cbf5988106f09385616fe、10142 post原7e0175bcee58ca8369ae6ae412ba7a418c4990a487ecb62c276e21ee4cff7448。旧976 row中当一SHA/074と一method限定proofだけ追記、他975全field・担当費P00305/歴史runtime/UNKNOWN二件・原予算/受入不変、現1801/1803。七metadata反例は製品PTではない。485二current section/486 rawhashだけを変更し所定audit前後実1HOLDを保持。postへの参照hashは循環を避けnull、post自体が実485/486/registry hashを束縛する。原失敗/全受入未達を隠さない。
