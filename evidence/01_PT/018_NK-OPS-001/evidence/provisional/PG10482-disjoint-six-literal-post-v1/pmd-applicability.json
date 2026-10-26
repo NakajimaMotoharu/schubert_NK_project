@@ -1,0 +1,236 @@
+[
+  {
+    "disposition": "NOT_APPLICABLE_IN_EXACT_STANDALONE_TEST_CONTEXT",
+    "line": 792,
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/admin/UserCommandServiceTest.java",
+    "reason": "Owned standalone JUnit executor/submit, not JavaEE Production thread creation; dynamic qualification is separate.",
+    "rule": "DoNotUseThreads",
+    "sha256": "cc78b69029069f5720afa381c5c2a42622ea6e43ee245bccffa21026f7dac1ce",
+    "sourceLine": "try (var pool = Executors.newFixedThreadPool(10)) {"
+  },
+  {
+    "disposition": "NOT_APPLICABLE_IN_EXACT_STANDALONE_TEST_CONTEXT",
+    "line": 797,
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/admin/UserCommandServiceTest.java",
+    "reason": "Owned standalone JUnit executor/submit, not JavaEE Production thread creation; dynamic qualification is separate.",
+    "rule": "DoNotUseThreads",
+    "sha256": "cc78b69029069f5720afa381c5c2a42622ea6e43ee245bccffa21026f7dac1ce",
+    "sourceLine": "pool.submit("
+  },
+  {
+    "disposition": "NOT_APPLICABLE_IN_EXACT_STANDALONE_TEST_CONTEXT",
+    "line": 823,
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/admin/UserCommandServiceTest.java",
+    "reason": "Owned standalone JUnit executor/submit, not JavaEE Production thread creation; dynamic qualification is separate.",
+    "rule": "DoNotUseThreads",
+    "sha256": "cc78b69029069f5720afa381c5c2a42622ea6e43ee245bccffa21026f7dac1ce",
+    "sourceLine": "try (var pool = Executors.newFixedThreadPool(2)) {"
+  },
+  {
+    "disposition": "NOT_APPLICABLE_IN_EXACT_STANDALONE_TEST_CONTEXT",
+    "line": 828,
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/admin/UserCommandServiceTest.java",
+    "reason": "Owned standalone JUnit executor/submit, not JavaEE Production thread creation; dynamic qualification is separate.",
+    "rule": "DoNotUseThreads",
+    "sha256": "cc78b69029069f5720afa381c5c2a42622ea6e43ee245bccffa21026f7dac1ce",
+    "sourceLine": "pool.submit("
+  },
+  {
+    "disposition": "NOT_APPLICABLE_IN_EXACT_STANDALONE_TEST_CONTEXT",
+    "line": 864,
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/admin/UserCommandServiceTest.java",
+    "reason": "Owned standalone JUnit executor/submit, not JavaEE Production thread creation; dynamic qualification is separate.",
+    "rule": "DoNotUseThreads",
+    "sha256": "cc78b69029069f5720afa381c5c2a42622ea6e43ee245bccffa21026f7dac1ce",
+    "sourceLine": "try (var pool = Executors.newFixedThreadPool(10)) {"
+  },
+  {
+    "disposition": "NOT_APPLICABLE_IN_EXACT_STANDALONE_TEST_CONTEXT",
+    "line": 869,
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/admin/UserCommandServiceTest.java",
+    "reason": "Owned standalone JUnit executor/submit, not JavaEE Production thread creation; dynamic qualification is separate.",
+    "rule": "DoNotUseThreads",
+    "sha256": "cc78b69029069f5720afa381c5c2a42622ea6e43ee245bccffa21026f7dac1ce",
+    "sourceLine": "pool.submit("
+  },
+  {
+    "disposition": "NOT_APPLICABLE_IN_EXACT_STANDALONE_TEST_CONTEXT",
+    "line": 563,
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/AnimationControllerTest.java",
+    "reason": "Owned standalone JUnit executor/submit, not JavaEE Production thread creation; dynamic qualification is separate.",
+    "rule": "DoNotUseThreads",
+    "sha256": "07410f3c8de092e17147a39204dd01dc0c0ba4ac876f5691025142c138821149",
+    "sourceLine": "var pool = Executors.newFixedThreadPool(8)) {"
+  },
+  {
+    "disposition": "NOT_APPLICABLE_IN_EXACT_STANDALONE_TEST_CONTEXT",
+    "line": 568,
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/AnimationControllerTest.java",
+    "reason": "Owned standalone JUnit executor/submit, not JavaEE Production thread creation; dynamic qualification is separate.",
+    "rule": "DoNotUseThreads",
+    "sha256": "07410f3c8de092e17147a39204dd01dc0c0ba4ac876f5691025142c138821149",
+    "sourceLine": "pool.submit("
+  },
+  {
+    "disposition": "NEEDS_FIXTURE_PUBLICATION_REVIEW_DYNAMIC_UNQUALIFIED",
+    "line": 687,
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/AnimationControllerTest.java",
+    "reason": "Shared synthetic Fixture controls are unchanged; do not remove volatile or assert multi-field visibility/coherence without dedicated contextual evidence.",
+    "rule": "AvoidUsingVolatile",
+    "sha256": "07410f3c8de092e17147a39204dd01dc0c0ba4ac876f5691025142c138821149",
+    "sourceLine": "volatile int count = 2;"
+  },
+  {
+    "disposition": "NEEDS_FIXTURE_PUBLICATION_REVIEW_DYNAMIC_UNQUALIFIED",
+    "line": 688,
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/AnimationControllerTest.java",
+    "reason": "Shared synthetic Fixture controls are unchanged; do not remove volatile or assert multi-field visibility/coherence without dedicated contextual evidence.",
+    "rule": "AvoidUsingVolatile",
+    "sha256": "07410f3c8de092e17147a39204dd01dc0c0ba4ac876f5691025142c138821149",
+    "sourceLine": "volatile String code = FIXTURE_SUCCESS_CODE;"
+  },
+  {
+    "disposition": "NEEDS_FIXTURE_PUBLICATION_REVIEW_DYNAMIC_UNQUALIFIED",
+    "line": 689,
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/AnimationControllerTest.java",
+    "reason": "Shared synthetic Fixture controls are unchanged; do not remove volatile or assert multi-field visibility/coherence without dedicated contextual evidence.",
+    "rule": "AvoidUsingVolatile",
+    "sha256": "07410f3c8de092e17147a39204dd01dc0c0ba4ac876f5691025142c138821149",
+    "sourceLine": "volatile BiFunction<UUID, byte[], byte[]> responder = this::standard;"
+  },
+  {
+    "disposition": "NOT_APPLICABLE_IN_EXACT_STANDALONE_TEST_CONTEXT",
+    "line": 576,
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/MusicControllerTest.java",
+    "reason": "Owned standalone JUnit executor/submit, not JavaEE Production thread creation; dynamic qualification is separate.",
+    "rule": "DoNotUseThreads",
+    "sha256": "75966ac922fd19a134237bef7a74ddabe58d6a5dd9bafb146c80d5bdccdce556",
+    "sourceLine": "var pool = Executors.newFixedThreadPool(8)) {"
+  },
+  {
+    "disposition": "NOT_APPLICABLE_IN_EXACT_STANDALONE_TEST_CONTEXT",
+    "line": 581,
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/MusicControllerTest.java",
+    "reason": "Owned standalone JUnit executor/submit, not JavaEE Production thread creation; dynamic qualification is separate.",
+    "rule": "DoNotUseThreads",
+    "sha256": "75966ac922fd19a134237bef7a74ddabe58d6a5dd9bafb146c80d5bdccdce556",
+    "sourceLine": "pool.submit("
+  },
+  {
+    "disposition": "NEEDS_FIXTURE_PUBLICATION_REVIEW_DYNAMIC_UNQUALIFIED",
+    "line": 696,
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/MusicControllerTest.java",
+    "reason": "Shared synthetic Fixture controls are unchanged; do not remove volatile or assert multi-field visibility/coherence without dedicated contextual evidence.",
+    "rule": "AvoidUsingVolatile",
+    "sha256": "75966ac922fd19a134237bef7a74ddabe58d6a5dd9bafb146c80d5bdccdce556",
+    "sourceLine": "volatile int count = 2;"
+  },
+  {
+    "disposition": "NEEDS_FIXTURE_PUBLICATION_REVIEW_DYNAMIC_UNQUALIFIED",
+    "line": 697,
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/MusicControllerTest.java",
+    "reason": "Shared synthetic Fixture controls are unchanged; do not remove volatile or assert multi-field visibility/coherence without dedicated contextual evidence.",
+    "rule": "AvoidUsingVolatile",
+    "sha256": "75966ac922fd19a134237bef7a74ddabe58d6a5dd9bafb146c80d5bdccdce556",
+    "sourceLine": "volatile String code = FIXTURE_SUCCESS_CODE;"
+  },
+  {
+    "disposition": "NEEDS_FIXTURE_PUBLICATION_REVIEW_DYNAMIC_UNQUALIFIED",
+    "line": 698,
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/MusicControllerTest.java",
+    "reason": "Shared synthetic Fixture controls are unchanged; do not remove volatile or assert multi-field visibility/coherence without dedicated contextual evidence.",
+    "rule": "AvoidUsingVolatile",
+    "sha256": "75966ac922fd19a134237bef7a74ddabe58d6a5dd9bafb146c80d5bdccdce556",
+    "sourceLine": "volatile BiFunction<UUID, byte[], byte[]> responder = this::standard;"
+  },
+  {
+    "disposition": "NOT_APPLICABLE_IN_EXACT_STANDALONE_TEST_CONTEXT",
+    "line": 562,
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/ScenarioSearchControllerTest.java",
+    "reason": "Owned standalone JUnit executor/submit, not JavaEE Production thread creation; dynamic qualification is separate.",
+    "rule": "DoNotUseThreads",
+    "sha256": "d69b62b4b963d98833832eff172b439836917e8a104b39f62cd6b53de6f2acc3",
+    "sourceLine": "var executor = Executors.newFixedThreadPool(8)) {"
+  },
+  {
+    "disposition": "NOT_APPLICABLE_IN_EXACT_STANDALONE_TEST_CONTEXT",
+    "line": 567,
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/ScenarioSearchControllerTest.java",
+    "reason": "Owned standalone JUnit executor/submit, not JavaEE Production thread creation; dynamic qualification is separate.",
+    "rule": "DoNotUseThreads",
+    "sha256": "d69b62b4b963d98833832eff172b439836917e8a104b39f62cd6b53de6f2acc3",
+    "sourceLine": "executor.submit("
+  },
+  {
+    "disposition": "NEEDS_FIXTURE_PUBLICATION_REVIEW_DYNAMIC_UNQUALIFIED",
+    "line": 680,
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/ScenarioSearchControllerTest.java",
+    "reason": "Shared synthetic Fixture controls are unchanged; do not remove volatile or assert multi-field visibility/coherence without dedicated contextual evidence.",
+    "rule": "AvoidUsingVolatile",
+    "sha256": "d69b62b4b963d98833832eff172b439836917e8a104b39f62cd6b53de6f2acc3",
+    "sourceLine": "volatile int count = 2;"
+  },
+  {
+    "disposition": "NEEDS_FIXTURE_PUBLICATION_REVIEW_DYNAMIC_UNQUALIFIED",
+    "line": 681,
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/ScenarioSearchControllerTest.java",
+    "reason": "Shared synthetic Fixture controls are unchanged; do not remove volatile or assert multi-field visibility/coherence without dedicated contextual evidence.",
+    "rule": "AvoidUsingVolatile",
+    "sha256": "d69b62b4b963d98833832eff172b439836917e8a104b39f62cd6b53de6f2acc3",
+    "sourceLine": "volatile String code = FIXTURE_SUCCESS_CODE;"
+  },
+  {
+    "disposition": "NEEDS_FIXTURE_PUBLICATION_REVIEW_DYNAMIC_UNQUALIFIED",
+    "line": 682,
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/ScenarioSearchControllerTest.java",
+    "reason": "Shared synthetic Fixture controls are unchanged; do not remove volatile or assert multi-field visibility/coherence without dedicated contextual evidence.",
+    "rule": "AvoidUsingVolatile",
+    "sha256": "d69b62b4b963d98833832eff172b439836917e8a104b39f62cd6b53de6f2acc3",
+    "sourceLine": "volatile String failureStage = \"\";"
+  },
+  {
+    "disposition": "NEEDS_FIXTURE_PUBLICATION_REVIEW_DYNAMIC_UNQUALIFIED",
+    "line": 683,
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/ScenarioSearchControllerTest.java",
+    "reason": "Shared synthetic Fixture controls are unchanged; do not remove volatile or assert multi-field visibility/coherence without dedicated contextual evidence.",
+    "rule": "AvoidUsingVolatile",
+    "sha256": "d69b62b4b963d98833832eff172b439836917e8a104b39f62cd6b53de6f2acc3",
+    "sourceLine": "volatile BiFunction<UUID, byte[], byte[]> responder = this::standard;"
+  },
+  {
+    "disposition": "NOT_APPLICABLE_IN_EXACT_STANDALONE_TEST_CONTEXT",
+    "line": 390,
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/AnimationTemplateTest.java",
+    "reason": "Owned standalone JUnit executor/submit, not JavaEE Production thread creation; dynamic qualification is separate.",
+    "rule": "DoNotUseThreads",
+    "sha256": "44192f04a5d5d37df05e231be8fb60fcf6d1bb7b8eb43060dbc691e2e5926945",
+    "sourceLine": "var executor = Executors.newFixedThreadPool(8)) {"
+  },
+  {
+    "disposition": "NOT_APPLICABLE_IN_EXACT_STANDALONE_TEST_CONTEXT",
+    "line": 395,
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/AnimationTemplateTest.java",
+    "reason": "Owned standalone JUnit executor/submit, not JavaEE Production thread creation; dynamic qualification is separate.",
+    "rule": "DoNotUseThreads",
+    "sha256": "44192f04a5d5d37df05e231be8fb60fcf6d1bb7b8eb43060dbc691e2e5926945",
+    "sourceLine": "executor.submit("
+  },
+  {
+    "disposition": "NOT_APPLICABLE_IN_EXACT_STANDALONE_TEST_CONTEXT",
+    "line": 295,
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/MusicHierarchyTemplateTest.java",
+    "reason": "Owned standalone JUnit executor/submit, not JavaEE Production thread creation; dynamic qualification is separate.",
+    "rule": "DoNotUseThreads",
+    "sha256": "6469d3a588ea7ae9ba6cd7a93524e16ef2cd293631c58f0a24013b86e8d5502c",
+    "sourceLine": "var pool = Executors.newFixedThreadPool(8)) {"
+  },
+  {
+    "disposition": "NOT_APPLICABLE_IN_EXACT_STANDALONE_TEST_CONTEXT",
+    "line": 300,
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/view/MusicHierarchyTemplateTest.java",
+    "reason": "Owned standalone JUnit executor/submit, not JavaEE Production thread creation; dynamic qualification is separate.",
+    "rule": "DoNotUseThreads",
+    "sha256": "6469d3a588ea7ae9ba6cd7a93524e16ef2cd293631c58f0a24013b86e8d5502c",
+    "sourceLine": "pool.submit("
+  }
+]
