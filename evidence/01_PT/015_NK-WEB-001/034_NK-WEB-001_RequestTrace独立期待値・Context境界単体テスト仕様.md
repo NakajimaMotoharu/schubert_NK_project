@@ -1,0 +1,19 @@
+# NK-WEB-001 RequestTrace独立期待値・Context境界 単体テスト仕様
+
+Program NK-WEB-001、WebRequestTraceTestの既十ゼロ引数method、REQ004/006/007/008。RD FUN001/AUT004/MON004、UI222/226/235/252、SS312 §11・313/314/342/351/352。G13既source主責P006-03を保持し、本参照で費用/受入を二重計上しない。
+
+詳細仕様・個別入力/独立UUID/固定安全文面/例外型・null/並行/所有・終了後条件・予定command・実環境境界は[2081](../018_NK-OPS-001/2081_REQ008固定fallback独立期待値_単体テスト仕様.md)、[2083](../018_NK-OPS-001/2083_REQ006Context境界補完_単体テスト仕様.md)。2081のSS312節番号誤記は[2082](../018_NK-OPS-001/2082_REQ008独立期待値・同source十PT・完全五class測定結果.md)の§11訂正を優先する。
+
+|既Test ID|class/method（classは全てWebRequestTraceTest）|
+|REQ004:req004ActualInventoryAndEveryClosedRouteRejectUnknown|#req004ActualInventoryAndEveryClosedRouteRejectUnknown|
+|REQ004:req004ReceiptProjectionUsesRegisteredPatternAndNeverRawLocator|#req004ReceiptProjectionUsesRegisteredPatternAndNeverRawLocator|
+|REQ006:req006ServerIdentityIsStableAndDoesNotGrantTransport|#req006ServerIdentityIsStableAndDoesNotGrantTransport|
+|REQ007:req007ActorIsSafeDisplaySnapshotNotPrincipalAndMissingTraceIsNoOp|#req007ActorIsSafeDisplaySnapshotNotPrincipalAndMissingTraceIsNoOp|
+|REQ008:req008NestedScopesRestoreOnlyFirstBusinessMessageAndDoNotInherit|#req008NestedScopesRestoreOnlyFirstBusinessMessageAndDoNotInherit|
+|REQ008:req008HundredConcurrentRequestsDoNotCrossContaminate|#req008HundredConcurrentRequestsDoNotCrossContaminate|
+|REQ004:req004InterceptorAcceptsOnlyRegisteredStringAndNeverErrorOverwrite|#req004InterceptorAcceptsOnlyRegisteredStringAndNeverErrorOverwrite|
+|REQ006:req006AllNullAndMistypedMetadataAreRejected|#req006AllNullAndMistypedMetadataAreRejected|
+|REQ006:req006AllFourAttributeBoundariesRedactFrameworkFaults|#req006AllFourAttributeBoundariesRedactFrameworkFaults|
+|REQ008:req008OutOfOrderNestedCloseCannotPublishAClosedTrace|#req008OutOfOrderNestedCloseCannotPublishAClosedTrace|
+
+これらは既REQ/既methodの一意なcomposite表記であり、新しいJUnit methodや正式試験数の加算ではない。五完全Main（Trace/Scope/Context/RouteInterceptor/RequestLogMvcConfiguration）を同source/runで測定する。実Caddy/HTTP/DB/JMS/VM/Root/nativeや全451は別scope。skipped/未実行/旧source/合成coverageを合格へ算入しない。結果・対象source/環境/実command/exit/counter/BUG/hashは後続035および当公開manifestへ記録する。

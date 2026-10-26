@@ -1,0 +1,109 @@
+[
+  {
+    "disposition": "NOT_APPLICABLE_STANDALONE_TEST_OWNED_EXECUTOR_NOT_J2EE_PRODUCTION",
+    "finding": {
+      "begincolumn": "23",
+      "beginline": "247",
+      "class": "WebRequestTraceTest",
+      "endcolumn": "66",
+      "endline": "247",
+      "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "method": "req008NestedScopesRestoreOnlyFirstBusinessMessageAndDoNotInherit",
+      "package": "dev.codex.schubert.nk.web.logging",
+      "priority": "3",
+      "rule": "DoNotUseThreads",
+      "ruleset": "Multithreading",
+      "variable": "pool"
+    },
+    "limitation": "Static context only; actual concurrency results must come from selected run.",
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/WebRequestTraceTest.java",
+    "sourceLine": "try (var pool = Executors.newVirtualThreadPerTaskExecutor()) {",
+    "sourceSha256": "77a76f532dca84015b825dcb6e280a13e3b435a3dc07380efe81cd572ae44e19"
+  },
+  {
+    "disposition": "NOT_APPLICABLE_STANDALONE_TEST_OWNED_EXECUTOR_NOT_J2EE_PRODUCTION",
+    "finding": {
+      "begincolumn": "39",
+      "beginline": "248",
+      "class": "WebRequestTraceTest",
+      "endcolumn": "60",
+      "endline": "248",
+      "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "method": "req008NestedScopesRestoreOnlyFirstBusinessMessageAndDoNotInherit",
+      "package": "dev.codex.schubert.nk.web.logging",
+      "priority": "3",
+      "rule": "DoNotUseThreads",
+      "ruleset": "Multithreading"
+    },
+    "limitation": "Static context only; actual concurrency results must come from selected run.",
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/WebRequestTraceTest.java",
+    "sourceLine": "assertEquals(new UUID(2, 14), pool.submit(ids::get).get(5, TimeUnit.SECONDS));",
+    "sourceSha256": "77a76f532dca84015b825dcb6e280a13e3b435a3dc07380efe81cd572ae44e19"
+  },
+  {
+    "disposition": "NOT_APPLICABLE_STANDALONE_TEST_OWNED_EXECUTOR_NOT_J2EE_PRODUCTION",
+    "finding": {
+      "begincolumn": "17",
+      "beginline": "252",
+      "class": "WebRequestTraceTest",
+      "endcolumn": "27",
+      "endline": "256",
+      "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "method": "req008NestedScopesRestoreOnlyFirstBusinessMessageAndDoNotInherit",
+      "package": "dev.codex.schubert.nk.web.logging",
+      "priority": "3",
+      "rule": "DoNotUseThreads",
+      "ruleset": "Multithreading"
+    },
+    "limitation": "Static context only; actual concurrency results must come from selected run.",
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/WebRequestTraceTest.java",
+    "sourceLine": "pool.submit(",
+    "sourceSha256": "77a76f532dca84015b825dcb6e280a13e3b435a3dc07380efe81cd572ae44e19"
+  },
+  {
+    "disposition": "NOT_APPLICABLE_STANDALONE_TEST_OWNED_EXECUTOR_NOT_J2EE_PRODUCTION",
+    "finding": {
+      "begincolumn": "21",
+      "beginline": "272",
+      "class": "WebRequestTraceTest",
+      "endcolumn": "64",
+      "endline": "272",
+      "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "method": "req008HundredConcurrentRequestsDoNotCrossContaminate",
+      "package": "dev.codex.schubert.nk.web.logging",
+      "priority": "3",
+      "rule": "DoNotUseThreads",
+      "ruleset": "Multithreading",
+      "variable": "pool"
+    },
+    "limitation": "Static context only; actual concurrency results must come from selected run.",
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/WebRequestTraceTest.java",
+    "sourceLine": "try (var pool = Executors.newVirtualThreadPerTaskExecutor()) {",
+    "sourceSha256": "77a76f532dca84015b825dcb6e280a13e3b435a3dc07380efe81cd572ae44e19"
+  },
+  {
+    "disposition": "NOT_APPLICABLE_STANDALONE_TEST_OWNED_EXECUTOR_NOT_J2EE_PRODUCTION",
+    "finding": {
+      "begincolumn": "13",
+      "beginline": "277",
+      "class": "WebRequestTraceTest",
+      "endcolumn": "19",
+      "endline": "291",
+      "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+      "message": "To be compliant to J2EE, a webapp should not use any thread.",
+      "method": "req008HundredConcurrentRequestsDoNotCrossContaminate",
+      "package": "dev.codex.schubert.nk.web.logging",
+      "priority": "3",
+      "rule": "DoNotUseThreads",
+      "ruleset": "Multithreading"
+    },
+    "limitation": "Static context only; actual concurrency results must come from selected run.",
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/WebRequestTraceTest.java",
+    "sourceLine": "pool.submit(",
+    "sourceSha256": "77a76f532dca84015b825dcb6e280a13e3b435a3dc07380efe81cd572ae44e19"
+  }
+]
