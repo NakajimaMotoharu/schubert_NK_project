@@ -1,0 +1,143 @@
+{
+  "actualExit": 0,
+  "allMainAndOtherInputBytesPreserved": true,
+  "constantsAdded": 12,
+  "coverage": null,
+  "externalActions": 0,
+  "invocation": {
+    "actualPythonCommand": [
+      "python3",
+      "-B",
+      "tools/quality/pg11064_inbox_value_literal_plan.py"
+    ],
+    "arbitraryArgumentsRecorded": false,
+    "entrypointPath": "tools/quality/pg11064_inbox_value_literal_plan.py",
+    "entrypointSha256": "31b6bfe8ed6b83e6e9cf8eabd769ee80c61a6f562284a81d50433b7d8be63780",
+    "helperPath": "tools/quality/host_tool_invocation.py",
+    "helperSha256": "85d616a3db4ff47f4c95ae2e0dd57954bc2b09f28b8f2a685b986e5621545c46",
+    "libraryPath": "tools/quality/pg11064_inbox_value_literal_plan.py",
+    "librarySha256": "31b6bfe8ed6b83e6e9cf8eabd769ee80c61a6f562284a81d50433b7d8be63780",
+    "loadedProjectPythonSources": {
+      "tools/quality/classfile_code_metadata.py": "2227e1e8df1ff91b606f094c7ee64366023273ca740d4d47126ed0928190e2f0",
+      "tools/quality/g07_host_class_provenance_inputs.py": "a676cb3e4145177c3c243722d737592ce7d44c3f29cfe4f670662ef7651f046b",
+      "tools/quality/host_tool_invocation.py": "85d616a3db4ff47f4c95ae2e0dd57954bc2b09f28b8f2a685b986e5621545c46",
+      "tools/quality/pg10130_uid_oracle_preflight.py": "e80cb1d6d45d4e4c0cdb3cb792e0638119d936403de5c3e141429d338485758a",
+      "tools/quality/pg10332_result_profile_oracle_plan.py": "82c9b4f57dd517c1dbee639dbf4955c316beb89216cb9a8a66e78e0b9a322ad4",
+      "tools/quality/pg10339_result_profile_oracle_post_v2.py": "42f86287f5236d2ef1a2e10f54f5b0634e799a4e866b15eaf6738336a4ebabb0",
+      "tools/quality/pg10392_role_literal_plan.py": "e1af98abd59175d867d29b07a73d7b2e4c7112754603d1805ec0bfc4d9465ce8",
+      "tools/quality/pg10398_role_view_preflight.py": "31709d50a345f3e0843fa62ae0b4c6849885503eb3d81555b6bcc9605b486d56",
+      "tools/quality/pg10840_web_view_duplicate_plan.py": "f4ea4a6f7d59ed872cc7c3dbd07e8d48c45c59f67c339d82d6ff4f2eef0a9a46",
+      "tools/quality/pg11064_inbox_value_literal_plan.py": "31b6bfe8ed6b83e6e9cf8eabd769ee80c61a6f562284a81d50433b7d8be63780",
+      "tools/quality/pg9906_user_query_oracle_source_post.py": "4f9bdaa17eea78a720c0f25b8af906f3f045fda590c8fea2a8868229403a98fa",
+      "tools/quality/pg9978_plain_core_quality_post.py": "c99cc753c6335c9f41e3eafe6a97c17521503739ba2cf80659b542a445dd48fa",
+      "tools/quality/public_java_digest_provenance.py": "dd47f8735a61ce849995633c3290a6ad047842ef3263829ce359db413778f7a0"
+    },
+    "provenance": "OBSERVED_SYS_ARGV_AND_ORIG_ARGV_NOT_RECONSTRUCTED"
+  },
+  "newAccepted": 0,
+  "productTestsExecuted": 0,
+  "referencesReplaced": 89,
+  "sourceBefore": "9b255cbe300d1feffeeee076cfa5af318c9b1bb1",
+  "sourceChanges": [
+    {
+      "beforeSha256": "f245af9b5e87b06d7086a3194ed99fdf051721792b94500b45ffd31e48271488",
+      "constants": [
+        {
+          "id": "PMD-01048",
+          "literal": "\"001\"",
+          "name": "LAYOUT_VERSION",
+          "references": 16
+        },
+        {
+          "id": "PMD-01049",
+          "literal": "\"QSTREQ01\"",
+          "name": "QUESTION_REQUEST_LAYOUT",
+          "references": 5
+        },
+        {
+          "id": "PMD-01050",
+          "literal": "\"read\"",
+          "name": "READ_TARGET",
+          "references": 5
+        },
+        {
+          "id": "PMD-01053",
+          "literal": "\"QSTRSP01\"",
+          "name": "QUESTION_RESPONSE_LAYOUT",
+          "references": 7
+        }
+      ],
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/idempotency/InboxModelTest.java",
+      "sha256": "cb6d0786afca428545420bac297e7693adb942c4ce25e078d5b416b7446aee42"
+    },
+    {
+      "beforeSha256": "23b65596f3e6ecb493b65cd768315b89147e891fa3df61316be000c64de04590",
+      "constants": [
+        {
+          "id": "PMD-01090",
+          "literal": "\"QSTREQ01\"",
+          "name": "QUESTION_REQUEST_LAYOUT",
+          "references": 14
+        },
+        {
+          "id": "PMD-01091",
+          "literal": "\"001\"",
+          "name": "LAYOUT_VERSION",
+          "references": 14
+        },
+        {
+          "id": "PMD-01094",
+          "literal": "\"QUESTION:7\"",
+          "name": "QUESTION_SEVEN_TARGET",
+          "references": 4
+        }
+      ],
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/idempotency/OperationFingerprintTest.java",
+      "sha256": "5eb169d955d15c62eb1638ced72d940633b0e3883bd3a579ecbf7651f20b8f60"
+    },
+    {
+      "beforeSha256": "baf8a6329cd38ce98d608746ab08eb1d5638e45dd0eec3b3173c8ef9ecf77d5c",
+      "constants": [
+        {
+          "id": "PMD-01099",
+          "literal": "\"QSSRSP01\"",
+          "name": "QUESTION_LIST_RESPONSE_LAYOUT",
+          "references": 4
+        },
+        {
+          "id": "PMD-01100",
+          "literal": "\"001\"",
+          "name": "LAYOUT_VERSION",
+          "references": 5
+        }
+      ],
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/idempotency/QuestionQueryScopeFrameTest.java",
+      "sha256": "9a0872ab0b442ec299625c6ec33a6e1ef201d7a4258ce30128f4f2f30c31d7ca"
+    },
+    {
+      "beforeSha256": "5d9d8a322541752effd40ef6b09158435cb26c608869e4201a98c80b4e34b2d5",
+      "constants": [
+        {
+          "id": "PMD-01110",
+          "literal": "\"ANONYMOUS\"",
+          "name": "ANONYMOUS_OWNER",
+          "references": 5
+        },
+        {
+          "id": "PMD-01111",
+          "literal": "\"LGNREQ01\"",
+          "name": "LOGIN_REQUEST_LAYOUT",
+          "references": 5
+        },
+        {
+          "id": "PMD-01112",
+          "literal": "\"001\"",
+          "name": "LAYOUT_VERSION",
+          "references": 5
+        }
+      ],
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/idempotency/SecretBufferTest.java",
+      "sha256": "e48b193225950dfaa4dd7e5a941accb6b7e48a30179c7077cbf10c3ebc652ba9"
+    }
+  ]
+}

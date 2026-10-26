@@ -1,0 +1,104 @@
+{
+  "actualExit": 0,
+  "coverage": null,
+  "externalActions": 0,
+  "invocation": {
+    "actualPythonCommand": [
+      "python3",
+      "-B",
+      "tools/quality/pg11076_inbox_value_lifecycle_plan.py"
+    ],
+    "arbitraryArgumentsRecorded": false,
+    "entrypointPath": "tools/quality/pg11076_inbox_value_lifecycle_plan.py",
+    "entrypointSha256": "cabe4c17f137a6a77e88f6de0d0310b23be378ccb34fa8e416bfbd4a68620c92",
+    "helperPath": "tools/quality/host_tool_invocation.py",
+    "helperSha256": "85d616a3db4ff47f4c95ae2e0dd57954bc2b09f28b8f2a685b986e5621545c46",
+    "libraryPath": "tools/quality/pg11076_inbox_value_lifecycle_plan.py",
+    "librarySha256": "cabe4c17f137a6a77e88f6de0d0310b23be378ccb34fa8e416bfbd4a68620c92",
+    "loadedProjectPythonSources": {
+      "tools/quality/classfile_code_metadata.py": "2227e1e8df1ff91b606f094c7ee64366023273ca740d4d47126ed0928190e2f0",
+      "tools/quality/g07_host_class_provenance_inputs.py": "a676cb3e4145177c3c243722d737592ce7d44c3f29cfe4f670662ef7651f046b",
+      "tools/quality/host_tool_invocation.py": "85d616a3db4ff47f4c95ae2e0dd57954bc2b09f28b8f2a685b986e5621545c46",
+      "tools/quality/pg10130_uid_oracle_preflight.py": "e80cb1d6d45d4e4c0cdb3cb792e0638119d936403de5c3e141429d338485758a",
+      "tools/quality/pg10332_result_profile_oracle_plan.py": "82c9b4f57dd517c1dbee639dbf4955c316beb89216cb9a8a66e78e0b9a322ad4",
+      "tools/quality/pg10339_result_profile_oracle_post_v2.py": "42f86287f5236d2ef1a2e10f54f5b0634e799a4e866b15eaf6738336a4ebabb0",
+      "tools/quality/pg10392_role_literal_plan.py": "e1af98abd59175d867d29b07a73d7b2e4c7112754603d1805ec0bfc4d9465ce8",
+      "tools/quality/pg10398_role_view_preflight.py": "31709d50a345f3e0843fa62ae0b4c6849885503eb3d81555b6bcc9605b486d56",
+      "tools/quality/pg11076_inbox_value_lifecycle_plan.py": "cabe4c17f137a6a77e88f6de0d0310b23be378ccb34fa8e416bfbd4a68620c92",
+      "tools/quality/pg9906_user_query_oracle_source_post.py": "4f9bdaa17eea78a720c0f25b8af906f3f045fda590c8fea2a8868229403a98fa",
+      "tools/quality/pg9978_plain_core_quality_post.py": "c99cc753c6335c9f41e3eafe6a97c17521503739ba2cf80659b542a445dd48fa",
+      "tools/quality/public_java_digest_provenance.py": "dd47f8735a61ce849995633c3290a6ad047842ef3263829ce359db413778f7a0"
+    },
+    "provenance": "OBSERVED_SYS_ARGV_AND_ORIG_ARGV_NOT_RECONSTRUCTED"
+  },
+  "newAccepted": 0,
+  "normalCloseAssertionsAdded": 3,
+  "numericBoundaryReferences": 1,
+  "productTestsExecuted": 0,
+  "sourceBefore": "c869ff6b7394773e05aee09d0d4390fce1396d9e",
+  "sourceChanges": [
+    {
+      "beforeSha256": "cb6d0786afca428545420bac297e7693adb942c4ce25e078d5b416b7446aee42",
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/idempotency/InboxModelTest.java",
+      "sha256": "bbb307fa4195d225ec4b4f4b4f20a8e911ebbf1418f52d8373b545d990f82aaf",
+      "wrappers": [
+        {
+          "declarations": "CanonicalRequest login = canonical(\"ANONYMOUS\", \"LGNREQ01\", LAYOUT_VERSION, \"login\");\n    CanonicalRequest read = canonical(\"7\", QUESTION_REQUEST_LAYOUT, LAYOUT_VERSION, READ_TARGET);",
+          "method": "requestRejectsNullsScopeTokenOwnerAndTimeViolations",
+          "resources": 2
+        }
+      ]
+    },
+    {
+      "beforeSha256": "5eb169d955d15c62eb1638ced72d940633b0e3883bd3a579ecbf7651f20b8f60",
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/idempotency/OperationFingerprintTest.java",
+      "sha256": "6b76952a1d552a0d1a189c42c999435dc83439e94600a73f052f3a05b2069eeb",
+      "wrappers": [
+        {
+          "declarations": "CanonicalRequest request = goldenRequest();",
+          "method": "goldenCanonicalAndHmacMatchIndependentOpenSslVector",
+          "resources": 1
+        },
+        {
+          "declarations": "CanonicalRequest nfd =\n        new CanonicalRequest(\n            \"u\\u0308ser\",\n            QUESTION_REQUEST_LAYOUT,\n            LAYOUT_VERSION,\n            \"cafe\\u0301\",\n            List.of(new CanonicalField(\"value\", \"X1\", \"e\\u0301\".getBytes(StandardCharsets.UTF_8))));\n    CanonicalRequest nfc =\n        new CanonicalRequest(\n            \"\\u00fcser\",\n            QUESTION_REQUEST_LAYOUT,\n            LAYOUT_VERSION,\n            \"caf\\u00e9\",\n            List.of(new CanonicalField(\"value\", \"X1\", \"e\\u0301\".getBytes(StandardCharsets.UTF_8))));\n    CanonicalRequest nullValue =\n        new CanonicalRequest(\n            \"7\",\n            QUESTION_REQUEST_LAYOUT,\n            LAYOUT_VERSION,\n            QUESTION_SEVEN_TARGET,\n            List.of(new CanonicalField(\"v\", \"X1\", null)));\n    CanonicalRequest emptyValue =\n        new CanonicalRequest(\n            \"7\",\n            QUESTION_REQUEST_LAYOUT,\n            LAYOUT_VERSION,\n            QUESTION_SEVEN_TARGET,\n            List.of(new CanonicalField(\"v\", \"X1\", new byte[0])));",
+          "method": "nfcNormalizationAndNullEmptyDistinctionAreStable",
+          "resources": 4
+        },
+        {
+          "declarations": "CanonicalRequest request =\n        new CanonicalRequest(\n            \"7\", QUESTION_REQUEST_LAYOUT, LAYOUT_VERSION, QUESTION_SEVEN_TARGET, mutable);",
+          "method": "canonicalModelsDefensivelyCopyAndRedact",
+          "resources": 1
+        },
+        {
+          "declarations": "CanonicalField field = new CanonicalField(\"body\", \"X1\", secret);",
+          "method": "canonicalModelsDefensivelyCopyAndRedact",
+          "resources": 1
+        },
+        {
+          "declarations": "CanonicalRequest request = goldenRequest();",
+          "method": "invalidModelsAndFingerprintArgumentsAreRejected",
+          "resources": 1
+        }
+      ]
+    },
+    {
+      "beforeSha256": "e48b193225950dfaa4dd7e5a941accb6b7e48a30179c7077cbf10c3ebc652ba9",
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/idempotency/SecretBufferTest.java",
+      "sha256": "32743b02e36a6d15cc90d4510de108ccdc86f1ddb3e27920b2299b85566fbd32",
+      "wrappers": [
+        {
+          "declarations": "var stream = new Inspectable();",
+          "method": "supersededAndCurrentStreamStorageAreWipedAtGrowthResetAndClose",
+          "resources": 1
+        },
+        {
+          "declarations": "var value = new CanonicalField(\"password\", \"X1\", input);\n    var absent = new CanonicalField(\"absent\", \"X1\", null);\n    var empty = new CanonicalField(\"empty\", \"X1\", new byte[0]);\n    var request =\n        new CanonicalRequest(\n            ANONYMOUS_OWNER,\n            LOGIN_REQUEST_LAYOUT,\n            LAYOUT_VERSION,\n            \"LOGIN:synthetic\",\n            List.of(value, absent, empty));",
+          "method": "requestOwnerClosesEveryFieldWithoutModifyingCallerCopiesOrFingerprint",
+          "resources": 4
+        }
+      ]
+    }
+  ],
+  "twrOwnedDeclarations": 15,
+  "twrScopes": 8
+}
