@@ -67,6 +67,17 @@ import org.springframework.web.context.support.AnnotationConfigWebApplicationCon
 
 /** NK-WEB002/FUN003/AUT/TST/UI223,234/SS313,314,323/SSC072/PG203/PT-SCR034..045. */
 class ScenarioSearchControllerTest {
+  private static final String FIXTURE_SUCCESS_CODE = "0000";
+  private static final String EXPECTED_SECOND_GAME_CODE = "NUKITASHI2";
+  private static final String EXPECTED_PAGE_ATTRIBUTE = "page";
+  private static final String EXPECTED_SEARCH_VIEW = "search";
+  private static final String FIXTURE_SEARCH_PREFIX = "SRC";
+  private static final String FIXTURE_GAME_PREFIX = "GAM";
+  private static final String FIXTURE_SPEAKER_PREFIX = "SPK";
+  private static final String FIXTURE_INVALID_INPUT = "bad";
+  private static final String FIXTURE_HTTP_GET = "GET";
+  private static final String FIXTURE_SEARCH_PATH = "/search";
+
   private static WebLogDatabaseFixture db;
   @TempDir Path root;
   private static final Clock CLOCK =
@@ -113,7 +124,7 @@ class ScenarioSearchControllerTest {
   void search034SuccessAndWire() throws Exception {
     try (var f = new Fixture()) {
       for (var role : UserRole.values())
-        for (String code : List.of("0000", "0200"))
+        for (String code : List.of(FIXTURE_SUCCESS_CODE, "0200"))
           for (int count : new int[] {0, 1, 100}) {
             f.code = code;
             f.count = count;
@@ -124,7 +135,7 @@ class ScenarioSearchControllerTest {
                         "q",
                         "  e\u0301本文  ",
                         "game",
-                        "NUKITASHI2",
+                        EXPECTED_SECOND_GAME_CODE,
                         "speaker",
                         "話者",
                         "chapter",
@@ -133,16 +144,19 @@ class ScenarioSearchControllerTest {
                         "dialogue",
                         "voice",
                         "with",
-                        "page",
+                        EXPECTED_PAGE_ATTRIBUTE,
                         "0"))) {
               int before = f.requests.size();
               var model = new ExtendedModelMap();
               var response = new MockHttpServletResponse();
               assertEquals(
-                  "search", f.controller.search(input, actor(role), model, raw(), response));
+                  EXPECTED_SEARCH_VIEW,
+                  f.controller.search(input, actor(role), model, raw(), response));
               assertEquals(200, response.getStatus());
-              assertEquals(Set.of("page"), model.keySet());
-              var page = assertInstanceOf(ScenarioSearchViewModel.class, model.get("page"));
+              assertEquals(Set.of(EXPECTED_PAGE_ATTRIBUTE), model.keySet());
+              var page =
+                  assertInstanceOf(
+                      ScenarioSearchViewModel.class, model.get(EXPECTED_PAGE_ATTRIBUTE));
               assertEquals(
                   switch (role) {
                     case USER -> "USER";
@@ -150,15 +164,16 @@ class ScenarioSearchControllerTest {
                   },
                   page.getTopBar().getRole());
               assertEquals(count, page.getResults().orElseThrow().getRows().size());
-              assertEquals(List.of("NUKITASHI1", "NUKITASHI2"), page.getGames());
+              assertEquals(List.of("NUKITASHI1", EXPECTED_SECOND_GAME_CODE), page.getGames());
               assertEquals(List.of("話者", "別話者"), page.getSpeakers());
               var sent = f.requests.subList(before, before + 3);
               assertEquals(
-                  List.of("SRC", "GAM", "SPK"), sent.stream().map(b -> ascii(b, 11, 3)).toList());
+                  List.of(FIXTURE_SEARCH_PREFIX, FIXTURE_GAME_PREFIX, FIXTURE_SPEAKER_PREFIX),
+                  sent.stream().map(b -> ascii(b, 11, 3)).toList());
               byte[] expected = new byte[672];
               Arrays.fill(expected, (byte) ' ');
               put(expected, 0, 256, input.isEmpty() ? "" : "é本文");
-              put(expected, 256, 12, input.isEmpty() ? "" : "NUKITASHI2");
+              put(expected, 256, 12, input.isEmpty() ? "" : EXPECTED_SECOND_GAME_CODE);
               put(expected, 268, 128, input.isEmpty() ? "" : "話者");
               put(expected, 396, 256, input.isEmpty() ? "" : "章");
               put(expected, 652, 10, input.isEmpty() ? "" : "dialogue");
@@ -185,20 +200,22 @@ class ScenarioSearchControllerTest {
           List.of(
               params("q", "one", "q", "two"),
               params("unknown", "private"),
-              params("game", "bad"),
+              params("game", FIXTURE_INVALID_INPUT),
               params("speaker", "あ".repeat(43)),
               params("q", "a".repeat(257)),
               params("chapter", "a".repeat(257)),
-              params("entry_type", "bad"),
-              params("voice", "bad"),
-              params("page", "+1"),
+              params("entry_type", FIXTURE_INVALID_INPUT),
+              params("voice", FIXTURE_INVALID_INPUT),
+              params(EXPECTED_PAGE_ATTRIBUTE, "+1"),
               params("q", "\n"))) {
         var model = new ExtendedModelMap();
         var response = new MockHttpServletResponse();
         assertEquals(
-            "search", f.controller.search(input, actor(UserRole.USER), model, raw(), response));
+            EXPECTED_SEARCH_VIEW,
+            f.controller.search(input, actor(UserRole.USER), model, raw(), response));
         assertEquals(400, response.getStatus());
-        var page = assertInstanceOf(ScenarioSearchViewModel.class, model.get("page"));
+        var page =
+            assertInstanceOf(ScenarioSearchViewModel.class, model.get(EXPECTED_PAGE_ATTRIBUTE));
         assertFalse(page.getErrors().isEmpty());
         assertTrue(page.getResults().isEmpty());
         assertEquals(0, f.requests.size());
@@ -211,7 +228,8 @@ class ScenarioSearchControllerTest {
     try (var f = new Fixture()) {
       String[] codes = {"0100", "0101", "0103", "0104", "0105", "0106", "0107", "9000", "9001"};
       int[] statuses = {400, 401, 403, 404, 409, 429, 409, 503, 503};
-      for (String stage : List.of("SRC", "GAM", "SPK"))
+      for (String stage :
+          List.of(FIXTURE_SEARCH_PREFIX, FIXTURE_GAME_PREFIX, FIXTURE_SPEAKER_PREFIX))
         for (int i = 0; i < codes.length; i++) {
           f.failureStage = stage;
           f.code = codes[i];
@@ -221,7 +239,11 @@ class ScenarioSearchControllerTest {
           assertNull(f.controller.search(params(), actor(UserRole.USER), model, raw(), response));
           assertEquals(statuses[i], response.getStatus());
           assertTrue(model.isEmpty());
-          assertEquals(List.of("SRC", "GAM", "SPK").indexOf(stage) + 1, f.requests.size() - before);
+          assertEquals(
+              List.of(FIXTURE_SEARCH_PREFIX, FIXTURE_GAME_PREFIX, FIXTURE_SPEAKER_PREFIX)
+                      .indexOf(stage)
+                  + 1,
+              f.requests.size() - before);
           f.erased();
         }
     }
@@ -230,11 +252,12 @@ class ScenarioSearchControllerTest {
   @Test
   void search037SessionInvalidAtEveryStage() throws Exception {
     try (var f = new Fixture()) {
-      for (String stage : List.of("SRC", "GAM", "SPK")) {
+      for (String stage :
+          List.of(FIXTURE_SEARCH_PREFIX, FIXTURE_GAME_PREFIX, FIXTURE_SPEAKER_PREFIX)) {
         f.failureStage = stage;
         f.code = "0102";
         int before = f.requests.size();
-        var request = f.security.mock("GET", "/search");
+        var request = f.security.mock(FIXTURE_HTTP_GET, FIXTURE_SEARCH_PATH);
         var response = new MockHttpServletResponse();
         SecurityContextHolder.getContext()
             .setAuthentication(
@@ -247,7 +270,11 @@ class ScenarioSearchControllerTest {
         assertNull(SecurityContextHolder.getContext().getAuthentication());
         assertNull(request.getSession(false));
         assertTrue(model.isEmpty());
-        assertEquals(List.of("SRC", "GAM", "SPK").indexOf(stage) + 1, f.requests.size() - before);
+        assertEquals(
+            List.of(FIXTURE_SEARCH_PREFIX, FIXTURE_GAME_PREFIX, FIXTURE_SPEAKER_PREFIX)
+                    .indexOf(stage)
+                + 1,
+            f.requests.size() - before);
         f.erased();
       }
     }
@@ -256,7 +283,8 @@ class ScenarioSearchControllerTest {
   @Test
   void search038MalformedAndTransport() throws Exception {
     try (var f = new Fixture()) {
-      for (String stage : List.of("SRC", "GAM", "SPK"))
+      for (String stage :
+          List.of(FIXTURE_SEARCH_PREFIX, FIXTURE_GAME_PREFIX, FIXTURE_SPEAKER_PREFIX))
         for (boolean transport : new boolean[] {false, true}) {
           f.responder =
               (id, b) -> {
@@ -272,7 +300,11 @@ class ScenarioSearchControllerTest {
           assertNull(f.controller.search(params(), actor(UserRole.USER), model, raw(), response));
           assertEquals(503, response.getStatus());
           assertTrue(model.isEmpty());
-          assertEquals(List.of("SRC", "GAM", "SPK").indexOf(stage) + 1, f.requests.size() - before);
+          assertEquals(
+              List.of(FIXTURE_SEARCH_PREFIX, FIXTURE_GAME_PREFIX, FIXTURE_SPEAKER_PREFIX)
+                      .indexOf(stage)
+                  + 1,
+              f.requests.size() - before);
           f.erased();
         }
     }
@@ -286,7 +318,7 @@ class ScenarioSearchControllerTest {
         f.responder =
             (id, b) -> {
               byte[] result = f.standard(id, b);
-              if (!valid && ascii(b, 11, 3).equals("SRC")) {
+              if (!valid && ascii(b, 11, 3).equals(FIXTURE_SEARCH_PREFIX)) {
                 number(result, 256, 6, 2);
                 number(result, 265, 9, 101);
                 number(result, 274, 6, 2);
@@ -299,17 +331,17 @@ class ScenarioSearchControllerTest {
         var response = new MockHttpServletResponse();
         String view =
             f.controller.search(
-                params("page", valid ? "999999" : "1"),
+                params(EXPECTED_PAGE_ATTRIBUTE, valid ? "999999" : "1"),
                 actor(UserRole.USER),
                 model,
                 raw(),
                 response);
         if (valid) {
-          assertEquals("search", view);
+          assertEquals(EXPECTED_SEARCH_VIEW, view);
           assertEquals(200, response.getStatus());
           assertEquals(
               1,
-              ((ScenarioSearchViewModel) model.get("page"))
+              ((ScenarioSearchViewModel) model.get(EXPECTED_PAGE_ATTRIBUTE))
                   .getResults()
                   .orElseThrow()
                   .getPage()
@@ -348,7 +380,7 @@ class ScenarioSearchControllerTest {
               throw failure;
             }
           };
-      for (var input : List.of(params(), params("page", "bad")))
+      for (var input : List.of(params(), params(EXPECTED_PAGE_ATTRIBUTE, FIXTURE_INVALID_INPUT)))
         assertSame(
             failure,
             assertThrows(
@@ -362,7 +394,7 @@ class ScenarioSearchControllerTest {
           unknown,
           assertThrows(AssertionError.class, () -> f.controller.search(params(), p, m, r, s)));
       f.responder = f::standard;
-      f.failureStage = "SRC";
+      f.failureStage = FIXTURE_SEARCH_PREFIX;
       f.code = "9000";
       var io = new IOException("synthetic response failure");
       var brokenResponse =
@@ -392,16 +424,23 @@ class ScenarioSearchControllerTest {
           "schubert NK - 検索", Jsoup.parse(result.getResponse().getContentAsString()).title());
       int before = f.requests.size();
       var h =
-          mvc.perform(head("/search").principal(p).requestAttr(CsrfToken.class.getName(), csrf()))
+          mvc.perform(
+                  head(FIXTURE_SEARCH_PATH)
+                      .principal(p)
+                      .requestAttr(CsrfToken.class.getName(), csrf()))
               .andReturn();
       assertEquals(200, h.getResponse().getStatus());
       // BUG220: MockMvc observes rendering; real transport HEAD body suppression is SCR042.
-      assertEquals("search", Objects.requireNonNull(h.getModelAndView()).getViewName());
+      assertEquals(EXPECTED_SEARCH_VIEW, Objects.requireNonNull(h.getModelAndView()).getViewName());
       assertEquals("schubert NK - 検索", Jsoup.parse(h.getResponse().getContentAsString()).title());
       assertEquals(before + 3, f.requests.size());
       before = f.requests.size();
       assertEquals(
-          405, mvc.perform(post("/search").principal(p)).andReturn().getResponse().getStatus());
+          405,
+          mvc.perform(post(FIXTURE_SEARCH_PATH).principal(p))
+              .andReturn()
+              .getResponse()
+              .getStatus());
       assertEquals(before, f.requests.size());
       for (var builder :
           List.of(pageRequest(p).param("unknown", "x"), pageRequest(p).param("q", "a", "b"))) {
@@ -420,7 +459,7 @@ class ScenarioSearchControllerTest {
   void search042RealHttpSecurity() throws Exception {
     for (String role : List.of("USER", "ADMIN")) {
       reset();
-      var api = new SessionFormLoginTest.Api("0000", role, "0000", 0);
+      var api = new SessionFormLoginTest.Api(FIXTURE_SUCCESS_CODE, role, FIXTURE_SUCCESS_CODE, 0);
       try (var f = new Fixture();
           var server =
               new EmbeddedWebSecurityTest.Server(
@@ -431,11 +470,11 @@ class ScenarioSearchControllerTest {
                   true,
                   true,
                   (mvc, invalid) -> configure(mvc, f.client, invalid))) {
-        var anonymous = server.send("GET", "/search", null, null, true);
+        var anonymous = server.send(FIXTURE_HTTP_GET, FIXTURE_SEARCH_PATH, null, null, true);
         assertEquals(302, anonymous.statusCode());
         assertEquals("/login", anonymous.headers().firstValue("location").orElseThrow());
         assertEquals(0, f.requests.size());
-        var first = server.send("GET", "/login", null, null, true);
+        var first = server.send(FIXTURE_HTTP_GET, "/login", null, null, true);
         String initial = first.headers().firstValue("set-cookie").orElseThrow().split(";", 2)[0];
         var login =
             server.send(
@@ -446,7 +485,7 @@ class ScenarioSearchControllerTest {
                 true);
         assertEquals(302, login.statusCode());
         String cookie = login.headers().firstValue("set-cookie").orElseThrow().split(";", 2)[0];
-        var result = server.send("GET", "/search?q=hello", cookie, null, true);
+        var result = server.send(FIXTURE_HTTP_GET, "/search?q=hello", cookie, null, true);
         assertEquals(200, result.statusCode());
         var dom = Jsoup.parse(result.body());
         assertEquals(role, dom.select(".login-role").text());
@@ -462,17 +501,21 @@ class ScenarioSearchControllerTest {
         assertTrue(head.headers().firstValue("cache-control").orElseThrow().contains("no-store"));
         assertEquals(beforeHead + 3, f.requests.size());
         int before = f.requests.size();
-        assertEquals(400, server.send("GET", "/search?page=bad", cookie, null, true).statusCode());
+        assertEquals(
+            400,
+            server.send(FIXTURE_HTTP_GET, "/search?page=bad", cookie, null, true).statusCode());
         assertEquals(before, f.requests.size());
-        f.failureStage = "GAM";
+        f.failureStage = FIXTURE_GAME_PREFIX;
         f.code = "0102";
-        var expired = server.send("GET", "/search", cookie, null, true);
+        var expired = server.send(FIXTURE_HTTP_GET, FIXTURE_SEARCH_PATH, cookie, null, true);
         assertEquals(302, expired.statusCode());
         assertEquals(
             "/login?session-expired", expired.headers().firstValue("location").orElseThrow());
         assertTrue(expired.headers().firstValue("set-cookie").orElseThrow().contains("Max-Age=0"));
         assertEquals(before + 2, f.requests.size());
-        assertEquals(302, server.send("GET", "/search", cookie, null, true).statusCode());
+        assertEquals(
+            302,
+            server.send(FIXTURE_HTTP_GET, FIXTURE_SEARCH_PATH, cookie, null, true).statusCode());
         assertEquals(before + 2, f.requests.size());
         assertEquals(0, server.context.getManager().getActiveSessions());
         f.erased();
@@ -532,9 +575,9 @@ class ScenarioSearchControllerTest {
                   var model = new ExtendedModelMap();
                   var response = new MockHttpServletResponse();
                   assertEquals(
-                      "search",
+                      EXPECTED_SEARCH_VIEW,
                       f.controller.search(params("q", "query" + n), p, model, raw(), response));
-                  var page = (ScenarioSearchViewModel) model.get("page");
+                  var page = (ScenarioSearchViewModel) model.get(EXPECTED_PAGE_ATTRIBUTE);
                   assertEquals("reader" + n, page.getTopBar().getUsername());
                   assertEquals("query" + n, page.getFilters().getQ());
                   return null;
@@ -547,7 +590,8 @@ class ScenarioSearchControllerTest {
         String context = String.format(Locale.ROOT, "%064x", i + 1);
         var requests = f.requests.stream().filter(b -> ascii(b, 113, 64).equals(context)).toList();
         assertEquals(
-            List.of("SRC", "GAM", "SPK"), requests.stream().map(b -> ascii(b, 11, 3)).toList());
+            List.of(FIXTURE_SEARCH_PREFIX, FIXTURE_GAME_PREFIX, FIXTURE_SPEAKER_PREFIX),
+            requests.stream().map(b -> ascii(b, 11, 3)).toList());
         assertEquals(
             "query" + i,
             new String(requests.getFirst(), 256, 256, StandardCharsets.UTF_8).stripTrailing());
@@ -601,7 +645,7 @@ class ScenarioSearchControllerTest {
   }
 
   private static MockHttpServletRequest raw() {
-    var r = new MockHttpServletRequest("GET", "/search");
+    var r = new MockHttpServletRequest(FIXTURE_HTTP_GET, FIXTURE_SEARCH_PATH);
     r.setRemoteAddr("127.0.0.1");
     return r;
   }
@@ -612,7 +656,7 @@ class ScenarioSearchControllerTest {
 
   private static org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder
       pageRequest(SessionPrincipal p) {
-    return get("/search").principal(p).requestAttr(CsrfToken.class.getName(), csrf());
+    return get(FIXTURE_SEARCH_PATH).principal(p).requestAttr(CsrfToken.class.getName(), csrf());
   }
 
   private static void configure(
@@ -634,7 +678,7 @@ class ScenarioSearchControllerTest {
     final List<byte[]> buffers = new CopyOnWriteArrayList<>();
     final Set<UUID> correlations = ConcurrentHashMap.newKeySet();
     volatile int count = 2;
-    volatile String code = "0000";
+    volatile String code = FIXTURE_SUCCESS_CODE;
     volatile String failureStage = "";
     volatile BiFunction<UUID, byte[], byte[]> responder = this::standard;
     final JmsRequestReplyClient wire =
@@ -649,9 +693,9 @@ class ScenarioSearchControllerTest {
               String type = ascii(b, 11, 3);
               int length =
                   switch (type) {
-                    case "SRC" -> 672;
-                    case "GAM" -> 0;
-                    case "SPK" -> 12;
+                    case FIXTURE_SEARCH_PREFIX -> 672;
+                    case FIXTURE_GAME_PREFIX -> 0;
+                    case FIXTURE_SPEAKER_PREFIX -> 12;
                     default -> throw new AssertionError();
                   };
               assertEquals(256 + length, b.length);
@@ -677,7 +721,8 @@ class ScenarioSearchControllerTest {
 
     byte[] standard(UUID id, byte[] request) {
       String type = ascii(request, 11, 3);
-      String result = failureStage.isEmpty() || failureStage.equals(type) ? code : "0000";
+      String result =
+          failureStage.isEmpty() || failureStage.equals(type) ? code : FIXTURE_SUCCESS_CODE;
       return response(type, result, count, id, ascii(request, 113, 64));
     }
 
@@ -696,14 +741,14 @@ class ScenarioSearchControllerTest {
   // Independent UI232/234 byte positions. No Production encoder/mapper constructs expectations.
   private static byte[] response(
       String type, String code, int searchCount, UUID id, String context) {
-    boolean success = code.equals("0000") || code.equals("0200");
-    int count = success ? (type.equals("SRC") ? searchCount : 2) : 0;
-    int data = type.equals("SRC") ? 48 : 9;
+    boolean success = code.equals(FIXTURE_SUCCESS_CODE) || code.equals("0200");
+    int count = success ? (type.equals(FIXTURE_SEARCH_PREFIX) ? searchCount : 2) : 0;
+    int data = type.equals(FIXTURE_SEARCH_PREFIX) ? 48 : 9;
     int record =
         switch (type) {
-          case "SRC" -> 5584;
-          case "GAM" -> 272;
-          case "SPK" -> 152;
+          case FIXTURE_SEARCH_PREFIX -> 5584;
+          case FIXTURE_GAME_PREFIX -> 272;
+          case FIXTURE_SPEAKER_PREFIX -> 152;
           default -> throw new AssertionError();
         };
     byte[] b = new byte[256 + data + record * count];
@@ -724,7 +769,7 @@ class ScenarioSearchControllerTest {
     number(b, 193, 6, count);
     number(b, 199, 9, b.length);
     put(b, 208, 4, code);
-    if (type.equals("SRC")) {
+    if (type.equals(FIXTURE_SEARCH_PREFIX)) {
       number(b, 256, 6, success ? 1 : 0);
       number(b, 262, 3, success ? 100 : 0);
       number(b, 265, 9, count);
@@ -735,17 +780,17 @@ class ScenarioSearchControllerTest {
     for (int n = 0; n < count; n++) {
       int o = 256 + data + n * record;
       switch (type) {
-        case "GAM" -> {
-          put(b, o, 12, n == 0 ? "NUKITASHI1" : "NUKITASHI2");
-          put(b, o + 12, 256, n == 0 ? "NUKITASHI" : "NUKITASHI2");
+        case FIXTURE_GAME_PREFIX -> {
+          put(b, o, 12, n == 0 ? "NUKITASHI1" : EXPECTED_SECOND_GAME_CODE);
+          put(b, o + 12, 256, n == 0 ? "NUKITASHI" : EXPECTED_SECOND_GAME_CODE);
           number(b, o + 268, 3, n + 1);
         }
-        case "SPK" -> {
+        case FIXTURE_SPEAKER_PREFIX -> {
           number(b, o, 12, n + 1);
           put(b, o + 12, 128, n == 0 ? "話者" : "別話者");
           number(b, o + 140, 9, 20 - n);
         }
-        case "SRC" -> {
+        case FIXTURE_SEARCH_PREFIX -> {
           number(b, o, 12, n + 1);
           number(b, o + 12, 12, 7);
           put(b, o + 24, 12, "NUKITASHI1");

@@ -72,11 +72,24 @@ import org.springframework.web.context.support.AnnotationConfigWebApplicationCon
 
 /** NK-WEB002/FUN007/AUT/TST/UI223,235/SS313,314,323/PG211/PT-SCR072..083. */
 class MusicControllerTest {
+  private static final String FIXTURE_MENU_PATH = "/music";
+  private static final String FIXTURE_SUCCESS_CODE = "0000";
+  private static final String EXPECTED_SECTIONS_VIEW = "music-sections";
+  private static final String EXPECTED_PAGE_ATTRIBUTE = "page";
+  private static final String FIXTURE_HTTP_GET = "GET";
+  private static final String FIXTURE_FAILURE_MESSAGE = "synthetic";
+  private static final String FIXTURE_CATEGORY_PREFIX = "MCT";
+  private static final String FIXTURE_ESCAPED_TEXT = "<b>&";
+  private static final String EXPECTED_MENU_TITLE_SELECTOR = ".menu-item strong";
+  private static final String EXPECTED_MENU_ITEM_SELECTOR = ".menu-item";
+  private static final int FIXTURE_THROW_MODE = 3;
+  private static final int FIXTURE_CORRELATION_MISMATCH_MODE = 1;
+
   private static WebLogDatabaseFixture db;
   @TempDir Path root;
   private static final Clock CLOCK =
       Clock.fixed(Instant.parse("2026-09-20T00:00:00Z"), ZoneOffset.UTC);
-  private static final List<String> PATHS = List.of("/music", "/music/BGM");
+  private static final List<String> PATHS = List.of(FIXTURE_MENU_PATH, "/music/BGM");
 
   @BeforeAll
   static void start(@TempDir Path p) throws Exception {
@@ -117,7 +130,7 @@ class MusicControllerTest {
       HttpServletRequest r,
       HttpServletResponse s)
       throws IOException {
-    return path.equals("/music")
+    return path.equals(FIXTURE_MENU_PATH)
         ? c.categories(p, m, r, s)
         : c.sections(path.substring(7), p, m, r, s);
   }
@@ -126,7 +139,7 @@ class MusicControllerTest {
   void music072SuccessAndWire() throws Exception {
     try (var f = new Fixture()) {
       for (var role : UserRole.values())
-        for (var code : List.of("0000", "0200"))
+        for (var code : List.of(FIXTURE_SUCCESS_CODE, "0200"))
           for (int n : new int[] {1, 2})
             for (var path : PATHS) {
               f.code = code;
@@ -135,18 +148,20 @@ class MusicControllerTest {
               var m = new ExtendedModelMap();
               var s = new MockHttpServletResponse();
               assertEquals(
-                  path.equals("/music") ? "music" : "music-sections",
+                  path.equals(FIXTURE_MENU_PATH) ? "music" : EXPECTED_SECTIONS_VIEW,
                   call(f.controller, path, actor(role), m, raw(path), s));
               assertEquals(200, s.getStatus());
-              assertEquals(Set.of("page"), m.keySet());
+              assertEquals(Set.of(EXPECTED_PAGE_ATTRIBUTE), m.keySet());
               TopBarViewModel bar;
-              if (path.equals("/music")) {
-                var page = assertInstanceOf(MusicCategoryViewModel.class, m.get("page"));
+              if (path.equals(FIXTURE_MENU_PATH)) {
+                var page =
+                    assertInstanceOf(MusicCategoryViewModel.class, m.get(EXPECTED_PAGE_ATTRIBUTE));
                 assertEquals(n, page.getCategories().size());
                 assertEquals(n * (n + 1) / 2, page.getTrackCount());
                 bar = page.getTopBar();
               } else {
-                var page = assertInstanceOf(MusicSectionViewModel.class, m.get("page"));
+                var page =
+                    assertInstanceOf(MusicSectionViewModel.class, m.get(EXPECTED_PAGE_ATTRIBUTE));
                 assertEquals(n, page.getSections().size());
                 assertEquals("BGM", page.getCategory());
                 assertEquals(n * (n + 1) / 2, page.getTrackCount());
@@ -160,8 +175,9 @@ class MusicControllerTest {
                   bar.getRole());
               assertEquals(before + 1, f.requests.size());
               var b = f.requests.getLast();
-              assertEquals(path.equals("/music") ? 256 : 320, b.length);
-              if (!path.equals("/music")) assertEquals("BGM" + " ".repeat(61), ascii(b, 256, 64));
+              assertEquals(path.equals(FIXTURE_MENU_PATH) ? 256 : 320, b.length);
+              if (!path.equals(FIXTURE_MENU_PATH))
+                assertEquals("BGM" + " ".repeat(61), ascii(b, 256, 64));
               f.erased();
             }
     }
@@ -192,7 +208,7 @@ class MusicControllerTest {
     try (var f = new Fixture()) {
       f.code = "0102";
       for (var path : PATHS) {
-        var r = f.security.mock("GET", path);
+        var r = f.security.mock(FIXTURE_HTTP_GET, path);
         var s = new MockHttpServletResponse();
         var model = new ExtendedModelMap();
         SecurityContextHolder.getContext()
@@ -219,9 +235,11 @@ class MusicControllerTest {
           f.responder =
               (id, b) -> {
                 if (kind == 0) return new byte[4];
-                if (kind == 3) throw new IllegalStateException("synthetic");
+                if (kind == FIXTURE_THROW_MODE)
+                  throw new IllegalStateException(FIXTURE_FAILURE_MESSAGE);
                 var reply = f.standard(id, b);
-                if (kind == 1) put(reply, 60, 36, new UUID(0, 999).toString());
+                if (kind == FIXTURE_CORRELATION_MISMATCH_MODE)
+                  put(reply, 60, 36, new UUID(0, 999).toString());
                 else put(reply, 113, 64, "b".repeat(64));
                 return reply;
               };
@@ -244,7 +262,7 @@ class MusicControllerTest {
           f.responder =
               (id, b) -> {
                 var out = f.standard(id, b);
-                boolean menu = path.equals("/music");
+                boolean menu = path.equals(FIXTURE_MENU_PATH);
                 int width = menu ? 64 : 128;
                 int record = menu ? 72 : 136;
                 if (kind == 0) put(out, 264 + record, width, "name0");
@@ -273,7 +291,7 @@ class MusicControllerTest {
                   null,
                   actor(UserRole.USER),
                   new ExtendedModelMap(),
-                  raw("/music"),
+                  raw(FIXTURE_MENU_PATH),
                   new MockHttpServletResponse()));
       for (var path : PATHS) {
         var p = actor(UserRole.USER);
@@ -288,7 +306,7 @@ class MusicControllerTest {
         assertThrows(
             SessionStoreException.class, () -> call(f.controller, path, () -> "foreign", m, r, s));
         assertEquals(before, f.requests.size());
-        var failure = new IllegalArgumentException("synthetic");
+        var failure = new IllegalArgumentException(FIXTURE_FAILURE_MESSAGE);
         var broken =
             new ExtendedModelMap() {
               @Override
@@ -300,7 +318,7 @@ class MusicControllerTest {
             failure,
             assertThrows(
                 IllegalArgumentException.class, () -> call(f.controller, path, p, broken, r, s)));
-        var unknown = new AssertionError("synthetic");
+        var unknown = new AssertionError(FIXTURE_FAILURE_MESSAGE);
         f.responder =
             (id, b) -> {
               throw unknown;
@@ -310,7 +328,7 @@ class MusicControllerTest {
             assertThrows(AssertionError.class, () -> call(f.controller, path, p, m, r, s)));
         f.responder = f::standard;
         f.code = "9000";
-        var io = new IOException("synthetic");
+        var io = new IOException(FIXTURE_FAILURE_MESSAGE);
         var brokenResponse =
             new MockHttpServletResponse() {
               @Override
@@ -322,7 +340,7 @@ class MusicControllerTest {
             io,
             assertThrows(
                 IOException.class, () -> call(f.controller, path, p, m, r, brokenResponse)));
-        f.code = "0000";
+        f.code = FIXTURE_SUCCESS_CODE;
         f.erased();
       }
     }
@@ -337,7 +355,7 @@ class MusicControllerTest {
         var result = mvc.perform(pageRequest(path, actor(UserRole.USER))).andReturn();
         assertEquals(200, result.getResponse().getStatus());
         assertEquals(
-            path.equals("/music") ? "music" : "music-sections",
+            path.equals(FIXTURE_MENU_PATH) ? "music" : EXPECTED_SECTIONS_VIEW,
             Objects.requireNonNull(result.getModelAndView()).getViewName());
         var h =
             mvc.perform(
@@ -378,7 +396,8 @@ class MusicControllerTest {
               "\udc00")) {
         var s = new MockHttpServletResponse();
         var m = new ExtendedModelMap();
-        assertNull(f.controller.sections(value, actor(UserRole.USER), m, raw("/music"), s));
+        assertNull(
+            f.controller.sections(value, actor(UserRole.USER), m, raw(FIXTURE_MENU_PATH), s));
         assertEquals(400, s.getStatus());
         assertTrue(m.isEmpty());
       }
@@ -387,8 +406,8 @@ class MusicControllerTest {
         var s = new MockHttpServletResponse();
         var m = new ExtendedModelMap();
         assertEquals(
-            "music-sections",
-            f.controller.sections(value, actor(UserRole.USER), m, raw("/music"), s));
+            EXPECTED_SECTIONS_VIEW,
+            f.controller.sections(value, actor(UserRole.USER), m, raw(FIXTURE_MENU_PATH), s));
         assertEquals(200, s.getStatus());
         var expected = new byte[64];
         Arrays.fill(expected, (byte) ' ');
@@ -404,7 +423,7 @@ class MusicControllerTest {
   void music079RealHttpSecurity() throws Exception {
     for (String role : List.of("USER", "ADMIN")) {
       reset();
-      var api = new SessionFormLoginTest.Api("0000", role, "0000", 0);
+      var api = new SessionFormLoginTest.Api(FIXTURE_SUCCESS_CODE, role, FIXTURE_SUCCESS_CODE, 0);
       try (var f = new Fixture();
           var server =
               new EmbeddedWebSecurityTest.Server(
@@ -416,9 +435,9 @@ class MusicControllerTest {
                   true,
                   (mvc, invalid) -> configure(mvc, f.client, invalid))) {
         for (var path : PATHS)
-          assertEquals(302, server.send("GET", path, null, null, true).statusCode());
+          assertEquals(302, server.send(FIXTURE_HTTP_GET, path, null, null, true).statusCode());
         assertTrue(f.requests.isEmpty());
-        var first = server.send("GET", "/login", null, null, true);
+        var first = server.send(FIXTURE_HTTP_GET, "/login", null, null, true);
         String initial = first.headers().firstValue("set-cookie").orElseThrow().split(";", 2)[0];
         var login =
             server.send(
@@ -431,7 +450,7 @@ class MusicControllerTest {
         String cookie = login.headers().firstValue("set-cookie").orElseThrow().split(";", 2)[0];
         for (var path : PATHS) {
           int before = f.requests.size();
-          var result = server.send("GET", path, cookie, null, true);
+          var result = server.send(FIXTURE_HTTP_GET, path, cookie, null, true);
           assertEquals(200, result.statusCode());
           var dom = Jsoup.parse(result.body());
           assertEquals(role, dom.select(".login-role").text());
@@ -453,13 +472,14 @@ class MusicControllerTest {
         }
         f.code = "0102";
         int before = f.requests.size();
-        var expired = server.send("GET", "/music/BGM", cookie, null, true);
+        var expired = server.send(FIXTURE_HTTP_GET, "/music/BGM", cookie, null, true);
         assertEquals(302, expired.statusCode());
         assertEquals(
             "/login?session-expired", expired.headers().firstValue("location").orElseThrow());
         assertTrue(expired.headers().firstValue("set-cookie").orElseThrow().contains("Max-Age=0"));
         assertEquals(before + 1, f.requests.size());
-        assertEquals(302, server.send("GET", "/music", cookie, null, true).statusCode());
+        assertEquals(
+            302, server.send(FIXTURE_HTTP_GET, FIXTURE_MENU_PATH, cookie, null, true).statusCode());
         assertEquals(before + 1, f.requests.size());
         assertEquals(0, server.context.getManager().getActiveSessions());
         f.erased();
@@ -477,35 +497,42 @@ class MusicControllerTest {
       f.responder =
           (id, b) -> {
             var out = f.standard(id, b);
-            put(out, 264, ascii(b, 11, 3).equals("MCT") ? 64 : 128, "<b>&");
+            put(
+                out,
+                264,
+                ascii(b, 11, 3).equals(FIXTURE_CATEGORY_PREFIX) ? 64 : 128,
+                FIXTURE_ESCAPED_TEXT);
             return out;
           };
       for (var path : PATHS) {
         var p =
             new SessionPrincipal(
-                "<b>&",
+                FIXTURE_ESCAPED_TEXT,
                 UserRole.ADMIN,
                 actor(UserRole.USER).authenticationContext(),
                 actor(UserRole.USER).loginAt());
         var dom =
             Jsoup.parse(
                 mvc.perform(pageRequest(path, p)).andReturn().getResponse().getContentAsString());
-        assertEquals("<b>&", dom.select(".login-user").text());
-        assertEquals("<b>&", dom.select(".menu-item strong").text());
+        assertEquals(FIXTURE_ESCAPED_TEXT, dom.select(".login-user").text());
+        assertEquals(FIXTURE_ESCAPED_TEXT, dom.select(EXPECTED_MENU_TITLE_SELECTOR).text());
         assertEquals(
-            path.equals("/music") ? "/music/%3Cb%3E%26" : "/music/BGM/%3Cb%3E%26",
-            dom.select(".menu-item").attr("href"));
+            path.equals(FIXTURE_MENU_PATH) ? "/music/%3Cb%3E%26" : "/music/BGM/%3Cb%3E%26",
+            dom.select(EXPECTED_MENU_ITEM_SELECTOR).attr("href"));
         assertTrue(dom.select("b,img,script,[onerror],[onclick]").isEmpty());
         assertFalse(dom.outerHtml().contains("a".repeat(64)));
       }
       var m = new ExtendedModelMap();
       var s = new MockHttpServletResponse();
       assertEquals(
-          "music-sections",
+          EXPECTED_SECTIONS_VIEW,
           f.controller.sections("曲", actor(UserRole.USER), m, raw("/music/曲"), s));
       assertEquals(
           "/music/%E6%9B%B2/%3Cb%3E%26",
-          ((MusicSectionViewModel) m.get("page")).getSections().getFirst().getHref());
+          ((MusicSectionViewModel) m.get(EXPECTED_PAGE_ATTRIBUTE))
+              .getSections()
+              .getFirst()
+              .getHref());
       f.erased();
     }
   }
@@ -516,11 +543,11 @@ class MusicControllerTest {
         var context = f.mvc()) {
       var mvc = MockMvcBuilders.webAppContextSetup(context).build();
       f.count = 0;
-      var empty = mvc.perform(pageRequest("/music", actor(UserRole.USER))).andReturn();
+      var empty = mvc.perform(pageRequest(FIXTURE_MENU_PATH, actor(UserRole.USER))).andReturn();
       assertEquals(200, empty.getResponse().getStatus());
       var dom = Jsoup.parse(empty.getResponse().getContentAsString());
       assertEquals("0曲", dom.select(".subtitle").text());
-      assertTrue(dom.select(".menu-item").isEmpty());
+      assertTrue(dom.select(EXPECTED_MENU_ITEM_SELECTOR).isEmpty());
       assertEquals(
           404,
           mvc.perform(pageRequest("/music/unknown", actor(UserRole.USER)))
@@ -528,14 +555,16 @@ class MusicControllerTest {
               .getResponse()
               .getStatus());
       for (var path : PATHS) {
-        f.count = path.equals("/music") ? 20 : 100;
+        f.count = path.equals(FIXTURE_MENU_PATH) ? 20 : 100;
         var result = mvc.perform(pageRequest(path, actor(UserRole.USER))).andReturn();
         assertEquals(200, result.getResponse().getStatus());
         dom = Jsoup.parse(result.getResponse().getContentAsString());
-        assertEquals(f.count, dom.select(".menu-item").size());
-        assertEquals(path.equals("/music") ? "210曲" : "5050曲", dom.select(".subtitle").text());
-        assertEquals("name0", dom.select(".menu-item strong").getFirst().text());
-        assertEquals("name" + (f.count - 1), dom.select(".menu-item strong").getLast().text());
+        assertEquals(f.count, dom.select(EXPECTED_MENU_ITEM_SELECTOR).size());
+        assertEquals(
+            path.equals(FIXTURE_MENU_PATH) ? "210曲" : "5050曲", dom.select(".subtitle").text());
+        assertEquals("name0", dom.select(EXPECTED_MENU_TITLE_SELECTOR).getFirst().text());
+        assertEquals(
+            "name" + (f.count - 1), dom.select(EXPECTED_MENU_TITLE_SELECTOR).getLast().text());
       }
       f.erased();
     }
@@ -561,9 +590,9 @@ class MusicControllerTest {
                   var m = new ExtendedModelMap();
                   var s = new MockHttpServletResponse();
                   assertEquals(
-                      n % 2 == 0 ? "music" : "music-sections",
+                      n % 2 == 0 ? "music" : EXPECTED_SECTIONS_VIEW,
                       call(f.controller, path, p, m, raw(path), s));
-                  var page = m.get("page");
+                  var page = m.get(EXPECTED_PAGE_ATTRIBUTE);
                   var bar =
                       page instanceof MusicCategoryViewModel menu
                           ? menu.getTopBar()
@@ -598,18 +627,19 @@ class MusicControllerTest {
                     .andReturn()
                     .getResponse()
                     .getContentAsString());
-        assertEquals(path.equals("/music") ? "Music" : "BGM", dom.title());
-        assertEquals(List.of("name0", "name1"), dom.select(".menu-item strong").eachText());
+        assertEquals(path.equals(FIXTURE_MENU_PATH) ? "Music" : "BGM", dom.title());
+        assertEquals(
+            List.of("name0", "name1"), dom.select(EXPECTED_MENU_TITLE_SELECTOR).eachText());
         assertEquals("3曲", dom.select(".subtitle").text());
         assertEquals(
-            path.equals("/music")
+            path.equals(FIXTURE_MENU_PATH)
                 ? List.of("/music/name0", "/music/name1")
                 : List.of("/music/BGM/name0", "/music/BGM/name1"),
-            dom.select(".menu-item").eachAttr("href"));
+            dom.select(EXPECTED_MENU_ITEM_SELECTOR).eachAttr("href"));
         assertEquals(
-            path.equals("/music")
+            path.equals(FIXTURE_MENU_PATH)
                 ? List.of("/scenarios", "/search", "/animation")
-                : List.of("/music", "/search"),
+                : List.of(FIXTURE_MENU_PATH, "/search"),
             dom.select("nav[aria-label=Musicナビゲーション] a").eachAttr("href"));
       }
       var directory = Path.of("target/scenario-screen-traces");
@@ -628,7 +658,7 @@ class MusicControllerTest {
   }
 
   private static MockHttpServletRequest raw(String path) {
-    var r = new MockHttpServletRequest("GET", path);
+    var r = new MockHttpServletRequest(FIXTURE_HTTP_GET, path);
     r.setRemoteAddr("127.0.0.1");
     return r;
   }
@@ -664,7 +694,7 @@ class MusicControllerTest {
     final List<byte[]> buffers = new CopyOnWriteArrayList<>();
     final Set<UUID> correlations = ConcurrentHashMap.newKeySet();
     volatile int count = 2;
-    volatile String code = "0000";
+    volatile String code = FIXTURE_SUCCESS_CODE;
     volatile BiFunction<UUID, byte[], byte[]> responder = this::standard;
     final JmsRequestReplyClient wire =
         new JmsRequestReplyClient(new ReplyCorrelationRegistry(), CLOCK, 12);
@@ -676,8 +706,8 @@ class MusicControllerTest {
               buffers.add(b);
               requests.add(b.clone());
               String type = ascii(b, 11, 3);
-              assertTrue(type.equals("MCT") || type.equals("MCS"));
-              assertEquals(type.equals("MCT") ? 256 : 320, b.length);
+              assertTrue(type.equals(FIXTURE_CATEGORY_PREFIX) || type.equals("MCS"));
+              assertEquals(type.equals(FIXTURE_CATEGORY_PREFIX) ? 256 : 320, b.length);
               assertEquals("Q", ascii(b, 22, 1));
               assertEquals("S", ascii(b, 23, 1));
               assertEquals(id.toString(), ascii(b, 24, 36));
@@ -715,9 +745,9 @@ class MusicControllerTest {
   }
 
   private static byte[] response(String type, int n, String code, UUID id, String context) {
-    boolean success = code.equals("0000") || code.equals("0200");
+    boolean success = code.equals(FIXTURE_SUCCESS_CODE) || code.equals("0200");
     int count = success ? n : 0;
-    boolean category = type.equals("MCT");
+    boolean category = type.equals(FIXTURE_CATEGORY_PREFIX);
     int record = category ? 72 : 136;
     var b = header(type + "RSP01", 8, record, count, code, id, context);
     number(b, 256, 6, count);

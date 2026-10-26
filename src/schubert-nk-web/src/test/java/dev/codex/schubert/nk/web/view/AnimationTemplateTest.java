@@ -42,6 +42,14 @@ import org.thymeleaf.spring6.view.ThymeleafViewResolver;
 
 /** NK-WEB002/SCR008,009/FUN006/UI222,223,235/SS313/PG205/PT-SCR046..053. */
 class AnimationTemplateTest {
+  private static final String FIXTURE_READER = "reader";
+  private static final String EXPECTED_MENU_VIEW = "animation";
+  private static final String FIXTURE_PUBLIC_CSRF = "public-csrf";
+  private static final String EXPECTED_HREF_ATTRIBUTE = "href";
+  private static final String EXPECTED_LIST_VIEW = "animation-list";
+  private static final String EXPECTED_SUBTITLE_SELECTOR = ".subtitle";
+  private static final String EXPECTED_ANIMATION_ROW_SELECTOR = ".animation-row";
+
   private static SessionPrincipal actor(String name, UserRole role) {
     return new SessionPrincipal(
         name,
@@ -109,10 +117,10 @@ class AnimationTemplateTest {
         for (boolean populated : new boolean[] {false, true}) {
           var page =
               AnimationMenuViewModel.from(
-                  actor("reader", role),
+                  actor(FIXTURE_READER, role),
                   new AnimationMenuResponseData(
                       populated ? 15 : 0, populated ? 4 : 0, populated, populated ? 20 : 0));
-          var dom = render(c, "animation", page, "public-csrf");
+          var dom = render(c, EXPECTED_MENU_VIEW, page, FIXTURE_PUBLIC_CSRF);
           assertEquals("Animation", dom.title());
           assertEquals("Animation", dom.select("h1").text());
           assertEquals("ja", dom.select("html").attr("lang"));
@@ -123,17 +131,17 @@ class AnimationTemplateTest {
               dom.select(".menu-item span").eachText());
           assertEquals(
               List.of("/animation/main", "/animation/ova", "/animation/opening"),
-              dom.select(".menu-item").eachAttr("href"));
+              dom.select(".menu-item").eachAttr(EXPECTED_HREF_ATTRIBUTE));
           assertEquals(
               List.of("/", "/notifications", "/scenarios", "/search"),
-              dom.select(".nav-links a").eachAttr("href"));
+              dom.select(".nav-links a").eachAttr(EXPECTED_HREF_ATTRIBUTE));
           assertEquals(
               switch (role) {
                 case USER -> "USER";
                 case ADMIN -> "ADMIN";
               },
               dom.select(".login-role").text());
-          common(dom, "reader", "public-csrf");
+          common(dom, FIXTURE_READER, FIXTURE_PUBLIC_CSRF);
         }
     }
   }
@@ -144,23 +152,28 @@ class AnimationTemplateTest {
       var dom =
           render(
               c,
-              "animation-list",
-              list("reader", AnimationListCategory.MAIN, main()),
-              "public-csrf");
+              EXPECTED_LIST_VIEW,
+              list(FIXTURE_READER, AnimationListCategory.MAIN, main()),
+              FIXTURE_PUBLIC_CSRF);
       assertEquals("メインパート一覧", dom.title());
       assertEquals("メインパート一覧", dom.select("h1").text());
-      assertEquals("5本", dom.select(".subtitle").text());
-      assertEquals(3, dom.select(".animation-row").size());
+      assertEquals("5本", dom.select(EXPECTED_SUBTITLE_SELECTOR).text());
+      assertEquals(3, dom.select(EXPECTED_ANIMATION_ROW_SELECTOR).size());
       assertEquals(
           List.of("Title m1", "Title m2", "Title m3"), dom.select(".scenario-title").eachText());
       assertEquals(
           List.of("/animation/videos/m1", "/animation/videos/m2", "/animation/videos/m3"),
-          dom.select(".animation-main-link").eachAttr("href"));
+          dom.select(".animation-main-link").eachAttr(EXPECTED_HREF_ATTRIBUTE));
       assertEquals(
           List.of("/animation/videos/s1", "/animation/videos/s3"),
-          dom.select(".subtrack-link").eachAttr("href"));
+          dom.select(".subtrack-link").eachAttr(EXPECTED_HREF_ATTRIBUTE));
       assertEquals(List.of("SUBTRACK", "SUBTRACK"), dom.select(".subtrack-link").eachText());
-      assertEquals(1, dom.select(".animation-row").get(1).select(".subtrack-placeholder").size());
+      assertEquals(
+          1,
+          dom.select(EXPECTED_ANIMATION_ROW_SELECTOR)
+              .get(1)
+              .select(".subtrack-placeholder")
+              .size());
       assertEquals(
           List.of(
               "メインパート video/m1.mp4 1.0 MB",
@@ -169,8 +182,8 @@ class AnimationTemplateTest {
           dom.select(".scenario-meta").eachText());
       assertEquals(
           List.of("/", "/notifications", "/animation", "/search"),
-          dom.select(".nav-links a").eachAttr("href"));
-      common(dom, "reader", "public-csrf");
+          dom.select(".nav-links a").eachAttr(EXPECTED_HREF_ATTRIBUTE));
+      common(dom, FIXTURE_READER, FIXTURE_PUBLIC_CSRF);
     }
   }
 
@@ -186,11 +199,11 @@ class AnimationTemplateTest {
       var dom =
           render(
               c,
-              "animation-list",
-              list("reader", AnimationListCategory.OVA, records),
-              "public-csrf");
+              EXPECTED_LIST_VIEW,
+              list(FIXTURE_READER, AnimationListCategory.OVA, records),
+              FIXTURE_PUBLIC_CSRF);
       assertEquals("OVA一覧", dom.title());
-      assertEquals("4本", dom.select(".subtitle").text());
+      assertEquals("4本", dom.select(EXPECTED_SUBTITLE_SELECTOR).text());
       assertEquals(
           List.of("Title ova-hinami", "Title ova-humino", "Title ova-misaki", "Title ova-nanase"),
           dom.select(".scenario-title").eachText());
@@ -200,7 +213,7 @@ class AnimationTemplateTest {
               "/animation/videos/ova-humino",
               "/animation/videos/ova-misaki",
               "/animation/videos/ova-nanase"),
-          dom.select("a.scenario-link").eachAttr("href"));
+          dom.select("a.scenario-link").eachAttr(EXPECTED_HREF_ATTRIBUTE));
       assertEquals(
           List.of(
               "OVA video/ova-hinami.mp4 1.0 MB",
@@ -209,7 +222,7 @@ class AnimationTemplateTest {
               "OVA video/ova-nanase.mp4 4.0 MB"),
           dom.select(".scenario-meta").eachText());
       assertTrue(dom.select(".animation-row,.subtrack-link,.subtrack-placeholder").isEmpty());
-      common(dom, "reader", "public-csrf");
+      common(dom, FIXTURE_READER, FIXTURE_PUBLIC_CSRF);
     }
   }
 
@@ -217,8 +230,13 @@ class AnimationTemplateTest {
   void animation049EmptyAndMaximum() throws Exception {
     try (var c = context()) {
       for (var category : AnimationListCategory.values()) {
-        var empty = render(c, "animation-list", list("reader", category, List.of()), "public-csrf");
-        assertEquals("0本", empty.select(".subtitle").text());
+        var empty =
+            render(
+                c,
+                EXPECTED_LIST_VIEW,
+                list(FIXTURE_READER, category, List.of()),
+                FIXTURE_PUBLIC_CSRF);
+        assertEquals("0本", empty.select(EXPECTED_SUBTITLE_SELECTOR).text());
         assertEquals(1, empty.select("section.animation-list").size());
         assertTrue(empty.select("section.animation-list").text().isEmpty());
         assertFalse(empty.text().contains("該当するデータはありません"));
@@ -235,13 +253,23 @@ class AnimationTemplateTest {
                   i + 1,
                   i + 1));
         }
-        var dom = render(c, "animation-list", list("reader", category, records), "public-csrf");
-        assertEquals("50本", dom.select(".subtitle").text());
+        var dom =
+            render(
+                c,
+                EXPECTED_LIST_VIEW,
+                list(FIXTURE_READER, category, records),
+                FIXTURE_PUBLIC_CSRF);
+        assertEquals("50本", dom.select(EXPECTED_SUBTITLE_SELECTOR).text());
         assertEquals(50, dom.select("section a").size());
-        assertEquals("/animation/videos/v0", dom.select("section a").getFirst().attr("href"));
-        assertEquals("/animation/videos/v49", dom.select("section a").getLast().attr("href"));
         assertEquals(
-            category == AnimationListCategory.MAIN ? 25 : 0, dom.select(".animation-row").size());
+            "/animation/videos/v0",
+            dom.select("section a").getFirst().attr(EXPECTED_HREF_ATTRIBUTE));
+        assertEquals(
+            "/animation/videos/v49",
+            dom.select("section a").getLast().attr(EXPECTED_HREF_ATTRIBUTE));
+        assertEquals(
+            category == AnimationListCategory.MAIN ? 25 : 0,
+            dom.select(EXPECTED_ANIMATION_ROW_SELECTOR).size());
       }
     }
   }
@@ -256,9 +284,9 @@ class AnimationTemplateTest {
       var dom =
           render(
               c,
-              "animation-list",
-              list("reader", AnimationListCategory.OVA, records),
-              "public-csrf");
+              EXPECTED_LIST_VIEW,
+              list(FIXTURE_READER, AnimationListCategory.OVA, records),
+              FIXTURE_PUBLIC_CSRF);
       assertEquals(
           List.of("0.0 MB", "0.9 MB", "1.0 MB", "1.0 MB", "1.5 MB", "10.0 MB"),
           dom.select(".scenario-meta > span:last-child").eachText());
@@ -283,10 +311,10 @@ class AnimationTemplateTest {
       var list =
           AnimationListViewModel.from(
               p, AnimationListCategory.OVA, new AnimationListResponseData(1), List.of(record));
-      var a = render(c, "animation", menu, "public-csrf");
-      var b = render(c, "animation-list", list, "public-csrf");
+      var a = render(c, EXPECTED_MENU_VIEW, menu, FIXTURE_PUBLIC_CSRF);
+      var b = render(c, EXPECTED_LIST_VIEW, list, FIXTURE_PUBLIC_CSRF);
       for (var dom : List.of(a, b)) {
-        common(dom, text, "public-csrf");
+        common(dom, text, FIXTURE_PUBLIC_CSRF);
         assertTrue(dom.select("img,script,[onclick],[onerror],[onchange],[style]").isEmpty());
         assertFalse(dom.outerHtml().contains("a".repeat(64)));
       }
@@ -304,11 +332,13 @@ class AnimationTemplateTest {
       var dom =
           render(
               c,
-              "animation-list",
+              EXPECTED_LIST_VIEW,
               AnimationListViewModel.from(
                   p, AnimationListCategory.OVA, new AnimationListResponseData(1), List.of(special)),
-              "public-csrf");
-      assertEquals("/animation/videos/v%3Fx%26y", dom.select("a.scenario-link").attr("href"));
+              FIXTURE_PUBLIC_CSRF);
+      assertEquals(
+          "/animation/videos/v%3Fx%26y",
+          dom.select("a.scenario-link").attr(EXPECTED_HREF_ATTRIBUTE));
     }
   }
 
@@ -316,7 +346,7 @@ class AnimationTemplateTest {
   void animation052CssAndViewBoundary() throws Exception {
     try (var c = context()) {
       var resolver = c.getBean(ThymeleafViewResolver.class);
-      for (String name : List.of("animation", "animation-list"))
+      for (String name : List.of(EXPECTED_MENU_VIEW, EXPECTED_LIST_VIEW))
         assertNotNull(resolver.resolveViewName(name, Locale.JAPAN));
       for (String name :
           List.of("animation-private", "../animation", "redirect:https://invalid.example"))
@@ -364,26 +394,26 @@ class AnimationTemplateTest {
         tasks.add(
             executor.submit(
                 () -> {
-                  String username = "reader" + n;
+                  String username = FIXTURE_READER + n;
                   String token = "public-csrf-" + n;
                   if (n % 2 == 0) {
                     var menu =
                         AnimationMenuViewModel.from(
                             actor(username, UserRole.USER),
                             new AnimationMenuResponseData(n, 0, false, n));
-                    var dom = render(c, "animation", menu, token);
+                    var dom = render(c, EXPECTED_MENU_VIEW, menu, token);
                     common(dom, username, token);
                     assertEquals(n + "本の映像", dom.select(".menu-item span").getFirst().text());
                   } else {
                     var dom =
                         render(
                             c,
-                            "animation-list",
+                            EXPECTED_LIST_VIEW,
                             list(username, AnimationListCategory.MAIN, main()),
                             token);
                     common(dom, username, token);
-                    assertEquals("5本", dom.select(".subtitle").text());
-                    assertEquals(3, dom.select(".animation-row").size());
+                    assertEquals("5本", dom.select(EXPECTED_SUBTITLE_SELECTOR).text());
+                    assertEquals(3, dom.select(EXPECTED_ANIMATION_ROW_SELECTOR).size());
                   }
                   return null;
                 }));

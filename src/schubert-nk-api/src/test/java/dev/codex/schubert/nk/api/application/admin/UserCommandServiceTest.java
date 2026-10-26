@@ -63,6 +63,8 @@ import org.junit.jupiter.api.io.TempDir;
  * Real PostgreSQL/production grants; independent SQL/JCA oracles. SS312/332/351; PT-ADM-014..023.
  */
 class UserCommandServiceTest {
+  private static final String EXPECTED_ADMIN_ROLE = "ADMIN";
+
   private static final int FIXTURE_UNKNOWN_HASH_MODE = 1;
   private static final int FIXTURE_ARGUMENT_FAILURE_MODE = 2;
 
@@ -141,7 +143,7 @@ class UserCommandServiceTest {
           assertTrue(r.next());
           assertEquals(names[i].trim(), r.getString("username"));
           assertEquals(names[i].trim().toLowerCase(Locale.ROOT), r.getString("username_key"));
-          assertEquals(i % 2 == 0 ? "USER" : "ADMIN", r.getString(FIXTURE_ROLE_COLUMN));
+          assertEquals(i % 2 == 0 ? "USER" : EXPECTED_ADMIN_ROLE, r.getString(FIXTURE_ROLE_COLUMN));
           assertEquals(
               i != 3 ? FIXTURE_ACTIVE_STATE : "DISABLED", r.getString(FIXTURE_STATUS_COLUMN));
           assertEquals(0, r.getLong(FIXTURE_VERSION_COLUMN));
@@ -178,7 +180,7 @@ class UserCommandServiceTest {
           count(
               "select count(*) from schubert.auth_sessions where user_id=3 and revoked and"
                   + " revoked_at='2026-09-08T00:01:00Z' and revoke_reason='"
-                  + (enabled ? "ADMIN" : "DISABLED")
+                  + (enabled ? EXPECTED_ADMIN_ROLE : "DISABLED")
                   + "'"));
       assertEquals(
           1,
@@ -232,7 +234,7 @@ class UserCommandServiceTest {
       try (var s = c.createStatement();
           var r = s.executeQuery("select role,version from schubert.app_users where id=2")) {
         assertTrue(r.next());
-        assertEquals("ADMIN", r.getString(1));
+        assertEquals(EXPECTED_ADMIN_ROLE, r.getString(1));
         assertEquals(0, r.getLong(2));
       }
       c.rollback();
@@ -251,7 +253,7 @@ class UserCommandServiceTest {
           FIXTURE_ROLE_COLUMN,
           switch (role) {
             case USER -> "USER";
-            case ADMIN -> "ADMIN";
+            case ADMIN -> EXPECTED_ADMIN_ROLE;
           });
       assertEquals(
           1,

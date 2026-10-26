@@ -39,6 +39,17 @@ import org.thymeleaf.spring6.view.ThymeleafViewResolver;
 
 /** SCR011/012/FUN007/UI222,223,235/SS313,352/PG209/PT-SCR066..071. */
 class MusicHierarchyTemplateTest {
+  private static final String FIXTURE_READER = "reader";
+  private static final String FIXTURE_BGM = "BGM";
+  private static final String EXPECTED_MENU_VIEW = "music";
+  private static final String FIXTURE_PUBLIC_CSRF = "public-csrf";
+  private static final String EXPECTED_SUBTITLE_SELECTOR = ".subtitle";
+  private static final String EXPECTED_MENU_TITLE_SELECTOR = ".menu-item strong";
+  private static final String EXPECTED_MENU_ITEM_SELECTOR = ".menu-item";
+  private static final String EXPECTED_HREF_ATTRIBUTE = "href";
+  private static final String EXPECTED_SECTIONS_VIEW = "music-sections";
+  private static final String FIXTURE_CATEGORY_PREFIX = "cat";
+
   private static SessionPrincipal actor(String name, UserRole role) {
     return new SessionPrincipal(
         name,
@@ -93,32 +104,33 @@ class MusicHierarchyTemplateTest {
       for (var role : UserRole.values()) {
         var page =
             categories(
-                "reader",
+                FIXTURE_READER,
                 role,
                 List.of(
                     new MusicCategoryRecord("曲", 29),
-                    new MusicCategoryRecord("BGM", 99),
+                    new MusicCategoryRecord(FIXTURE_BGM, 99),
                     new MusicCategoryRecord("その他", 1)));
-        var dom = render(c, "music", page, "public-csrf");
+        var dom = render(c, EXPECTED_MENU_VIEW, page, FIXTURE_PUBLIC_CSRF);
         assertEquals("Music", dom.title());
         assertEquals("Music", dom.select("h1").text());
-        assertEquals("129曲", dom.select(".subtitle").text());
-        assertEquals(List.of("曲", "BGM", "その他"), dom.select(".menu-item strong").eachText());
+        assertEquals("129曲", dom.select(EXPECTED_SUBTITLE_SELECTOR).text());
+        assertEquals(
+            List.of("曲", FIXTURE_BGM, "その他"), dom.select(EXPECTED_MENU_TITLE_SELECTOR).eachText());
         assertEquals(
             List.of("分類を選択する", "分類を選択する", "分類を選択する"), dom.select(".menu-item span").eachText());
         assertEquals(
             List.of("/music/%E6%9B%B2", "/music/BGM", "/music/%E3%81%9D%E3%81%AE%E4%BB%96"),
-            dom.select(".menu-item").eachAttr("href"));
+            dom.select(EXPECTED_MENU_ITEM_SELECTOR).eachAttr(EXPECTED_HREF_ATTRIBUTE));
         assertEquals(
             List.of("/scenarios", "/search", "/animation"),
-            dom.select("nav[aria-label=Musicナビゲーション] a").eachAttr("href"));
+            dom.select("nav[aria-label=Musicナビゲーション] a").eachAttr(EXPECTED_HREF_ATTRIBUTE));
         assertEquals(
             switch (role) {
               case USER -> "USER";
               case ADMIN -> "ADMIN";
             },
             dom.select(".login-role").text());
-        common(dom, "reader", "public-csrf");
+        common(dom, FIXTURE_READER, FIXTURE_PUBLIC_CSRF);
       }
     }
   }
@@ -129,33 +141,34 @@ class MusicHierarchyTemplateTest {
       for (var role : UserRole.values()) {
         var page =
             sections(
-                "reader",
+                FIXTURE_READER,
                 role,
                 "曲",
                 List.of(
                     new MusicSectionRecord("ゲーム", 10),
                     new MusicSectionRecord("アニメ", 15),
                     new MusicSectionRecord("キャラクターソング", 4)));
-        var dom = render(c, "music-sections", page, "public-csrf");
+        var dom = render(c, EXPECTED_SECTIONS_VIEW, page, FIXTURE_PUBLIC_CSRF);
         assertEquals("曲", dom.title());
         assertEquals("曲", dom.select("h1").text());
-        assertEquals("29曲", dom.select(".subtitle").text());
+        assertEquals("29曲", dom.select(EXPECTED_SUBTITLE_SELECTOR).text());
         assertEquals(
-            List.of("ゲーム", "アニメ", "キャラクターソング"), dom.select(".menu-item strong").eachText());
+            List.of("ゲーム", "アニメ", "キャラクターソング"),
+            dom.select(EXPECTED_MENU_TITLE_SELECTOR).eachText());
         assertEquals(List.of("10曲", "15曲", "4曲"), dom.select(".menu-item span").eachText());
         assertEquals(
             "/music/%E6%9B%B2/%E3%82%B2%E3%83%BC%E3%83%A0",
-            dom.select(".menu-item").getFirst().attr("href"));
+            dom.select(EXPECTED_MENU_ITEM_SELECTOR).getFirst().attr(EXPECTED_HREF_ATTRIBUTE));
         assertEquals(
             List.of("/music", "/search"),
-            dom.select("nav[aria-label=Musicナビゲーション] a").eachAttr("href"));
+            dom.select("nav[aria-label=Musicナビゲーション] a").eachAttr(EXPECTED_HREF_ATTRIBUTE));
         assertEquals(
             switch (role) {
               case USER -> "USER";
               case ADMIN -> "ADMIN";
             },
             dom.select(".login-role").text());
-        common(dom, "reader", "public-csrf");
+        common(dom, FIXTURE_READER, FIXTURE_PUBLIC_CSRF);
       }
     }
   }
@@ -165,36 +178,54 @@ class MusicHierarchyTemplateTest {
     try (var c = context()) {
       for (var dom :
           List.of(
-              render(c, "music", categories("reader", UserRole.USER, List.of()), "public-csrf"),
               render(
                   c,
-                  "music-sections",
-                  sections("reader", UserRole.USER, "BGM", List.of()),
-                  "public-csrf"))) {
-        assertEquals("0曲", dom.select(".subtitle").text());
+                  EXPECTED_MENU_VIEW,
+                  categories(FIXTURE_READER, UserRole.USER, List.of()),
+                  FIXTURE_PUBLIC_CSRF),
+              render(
+                  c,
+                  EXPECTED_SECTIONS_VIEW,
+                  sections(FIXTURE_READER, UserRole.USER, FIXTURE_BGM, List.of()),
+                  FIXTURE_PUBLIC_CSRF))) {
+        assertEquals("0曲", dom.select(EXPECTED_SUBTITLE_SELECTOR).text());
         assertTrue(dom.select(".menu-grid").text().isEmpty());
         assertTrue(dom.select(".menu-item,.empty-results").isEmpty());
         assertFalse(dom.text().contains("該当するデータはありません"));
       }
       var categories = new ArrayList<MusicCategoryRecord>();
-      for (int i = 0; i < 20; i++) categories.add(new MusicCategoryRecord("cat" + i, 999999));
-      var a = render(c, "music", categories("reader", UserRole.USER, categories), "public-csrf");
-      assertEquals("19999980曲", a.select(".subtitle").text());
-      assertEquals(20, a.select(".menu-item").size());
-      assertEquals("/music/cat0", a.select(".menu-item").getFirst().attr("href"));
-      assertEquals("/music/cat19", a.select(".menu-item").getLast().attr("href"));
+      for (int i = 0; i < 20; i++)
+        categories.add(new MusicCategoryRecord(FIXTURE_CATEGORY_PREFIX + i, 999999));
+      var a =
+          render(
+              c,
+              EXPECTED_MENU_VIEW,
+              categories(FIXTURE_READER, UserRole.USER, categories),
+              FIXTURE_PUBLIC_CSRF);
+      assertEquals("19999980曲", a.select(EXPECTED_SUBTITLE_SELECTOR).text());
+      assertEquals(20, a.select(EXPECTED_MENU_ITEM_SELECTOR).size());
+      assertEquals(
+          "/music/cat0",
+          a.select(EXPECTED_MENU_ITEM_SELECTOR).getFirst().attr(EXPECTED_HREF_ATTRIBUTE));
+      assertEquals(
+          "/music/cat19",
+          a.select(EXPECTED_MENU_ITEM_SELECTOR).getLast().attr(EXPECTED_HREF_ATTRIBUTE));
       var sections = new ArrayList<MusicSectionRecord>();
       for (int i = 0; i < 100; i++) sections.add(new MusicSectionRecord("sec" + i, 999999));
       var b =
           render(
               c,
-              "music-sections",
-              sections("reader", UserRole.USER, "BGM", sections),
-              "public-csrf");
-      assertEquals("99999900曲", b.select(".subtitle").text());
-      assertEquals(100, b.select(".menu-item").size());
-      assertEquals("/music/BGM/sec0", b.select(".menu-item").getFirst().attr("href"));
-      assertEquals("/music/BGM/sec99", b.select(".menu-item").getLast().attr("href"));
+              EXPECTED_SECTIONS_VIEW,
+              sections(FIXTURE_READER, UserRole.USER, FIXTURE_BGM, sections),
+              FIXTURE_PUBLIC_CSRF);
+      assertEquals("99999900曲", b.select(EXPECTED_SUBTITLE_SELECTOR).text());
+      assertEquals(100, b.select(EXPECTED_MENU_ITEM_SELECTOR).size());
+      assertEquals(
+          "/music/BGM/sec0",
+          b.select(EXPECTED_MENU_ITEM_SELECTOR).getFirst().attr(EXPECTED_HREF_ATTRIBUTE));
+      assertEquals(
+          "/music/BGM/sec99",
+          b.select(EXPECTED_MENU_ITEM_SELECTOR).getLast().attr(EXPECTED_HREF_ATTRIBUTE));
     }
   }
 
@@ -205,25 +236,28 @@ class MusicHierarchyTemplateTest {
       var a =
           render(
               c,
-              "music",
+              EXPECTED_MENU_VIEW,
               categories(text, UserRole.ADMIN, List.of(new MusicCategoryRecord(text, 1))),
               "public<&csrf");
       var b =
           render(
               c,
-              "music-sections",
+              EXPECTED_SECTIONS_VIEW,
               sections(text, UserRole.ADMIN, text, List.of(new MusicSectionRecord(text, 1))),
               "public<&csrf");
       for (var dom : List.of(a, b)) {
         common(dom, text, "public<&csrf");
-        assertEquals(text, dom.select(".menu-item strong").text());
+        assertEquals(text, dom.select(EXPECTED_MENU_TITLE_SELECTOR).text());
         assertTrue(dom.select("b,img,script,[onerror],[onclick],[style]").isEmpty());
         assertFalse(dom.outerHtml().contains("a".repeat(64)));
       }
       assertEquals(text, b.title());
       assertEquals(text, b.select("h1").text());
-      assertEquals("/music/%3Cb%3E%26", a.select(".menu-item").attr("href"));
-      assertEquals("/music/%3Cb%3E%26/%3Cb%3E%26", b.select(".menu-item").attr("href"));
+      assertEquals(
+          "/music/%3Cb%3E%26", a.select(EXPECTED_MENU_ITEM_SELECTOR).attr(EXPECTED_HREF_ATTRIBUTE));
+      assertEquals(
+          "/music/%3Cb%3E%26/%3Cb%3E%26",
+          b.select(EXPECTED_MENU_ITEM_SELECTOR).attr(EXPECTED_HREF_ATTRIBUTE));
     }
   }
 
@@ -231,7 +265,7 @@ class MusicHierarchyTemplateTest {
   void music070CssAndViewBoundary() throws Exception {
     try (var c = context()) {
       var resolver = c.getBean(ThymeleafViewResolver.class);
-      for (var name : List.of("music", "music-sections"))
+      for (var name : List.of(EXPECTED_MENU_VIEW, EXPECTED_SECTIONS_VIEW))
         assertNotNull(resolver.resolveViewName(name, Locale.JAPAN));
       for (var name : List.of("music-private", "../music", "redirect:https://invalid.example"))
         assertNull(resolver.resolveViewName(name, Locale.JAPAN));
@@ -247,7 +281,7 @@ class MusicHierarchyTemplateTest {
               ".menu-item span { color: #5f6368; line-height: 1.5; }",
               "@media (max-width: 900px)",
               ".menu-grid { grid-template-columns: 1fr; }")) assertTrue(css.contains(rule), rule);
-      for (var name : List.of("music", "music-sections")) {
+      for (var name : List.of(EXPECTED_MENU_VIEW, EXPECTED_SECTIONS_VIEW)) {
         var html = Files.readString(Path.of("src/main/resources/templates/" + name + ".html"));
         assertFalse(html.contains("<script"));
         assertFalse(html.contains("<style"));
@@ -265,37 +299,42 @@ class MusicHierarchyTemplateTest {
         tasks.add(
             pool.submit(
                 () -> {
-                  String username = "reader" + n;
+                  String username = FIXTURE_READER + n;
                   String token = "public-csrf-" + n;
                   Document dom;
                   if (n % 2 == 0) {
                     dom =
                         render(
                             c,
-                            "music",
+                            EXPECTED_MENU_VIEW,
                             categories(
                                 username,
                                 UserRole.USER,
-                                List.of(new MusicCategoryRecord("cat" + n, n))),
+                                List.of(new MusicCategoryRecord(FIXTURE_CATEGORY_PREFIX + n, n))),
                             token);
-                    assertEquals("cat" + n, dom.select(".menu-item strong").text());
-                    assertEquals("/music/cat" + n, dom.select(".menu-item").attr("href"));
+                    assertEquals(
+                        FIXTURE_CATEGORY_PREFIX + n,
+                        dom.select(EXPECTED_MENU_TITLE_SELECTOR).text());
+                    assertEquals(
+                        "/music/cat" + n,
+                        dom.select(EXPECTED_MENU_ITEM_SELECTOR).attr(EXPECTED_HREF_ATTRIBUTE));
                   } else {
                     dom =
                         render(
                             c,
-                            "music-sections",
+                            EXPECTED_SECTIONS_VIEW,
                             sections(
                                 username,
                                 UserRole.ADMIN,
-                                "cat" + n,
+                                FIXTURE_CATEGORY_PREFIX + n,
                                 List.of(new MusicSectionRecord("sec" + n, n))),
                             token);
-                    assertEquals("sec" + n, dom.select(".menu-item strong").text());
+                    assertEquals("sec" + n, dom.select(EXPECTED_MENU_TITLE_SELECTOR).text());
                     assertEquals(
-                        "/music/cat" + n + "/sec" + n, dom.select(".menu-item").attr("href"));
+                        "/music/cat" + n + "/sec" + n,
+                        dom.select(EXPECTED_MENU_ITEM_SELECTOR).attr(EXPECTED_HREF_ATTRIBUTE));
                   }
-                  assertEquals(n + "曲", dom.select(".subtitle").text());
+                  assertEquals(n + "曲", dom.select(EXPECTED_SUBTITLE_SELECTOR).text());
                   common(dom, username, token);
                   return null;
                 }));
@@ -324,6 +363,7 @@ class MusicHierarchyTemplateTest {
     assertEquals(1, dom.select("a[href='/']").size());
     assertEquals(1, dom.select("a[href='/notifications']").size());
     assertEquals("ja", dom.select("html").attr("lang"));
-    assertEquals("/css/schubert.css", dom.select("link[rel=stylesheet]").attr("href"));
+    assertEquals(
+        "/css/schubert.css", dom.select("link[rel=stylesheet]").attr(EXPECTED_HREF_ATTRIBUTE));
   }
 }

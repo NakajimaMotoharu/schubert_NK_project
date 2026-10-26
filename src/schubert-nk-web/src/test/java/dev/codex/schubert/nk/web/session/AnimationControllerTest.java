@@ -71,12 +71,27 @@ import org.springframework.web.context.support.AnnotationConfigWebApplicationCon
 
 /** NK-WEB002/FUN006/AUT/TST/UI223,235/SS313,314,323/PG207/PT-SCR054..065. */
 class AnimationControllerTest {
+  private static final String FIXTURE_MENU_PATH = "/animation";
+  private static final String FIXTURE_MAIN_PATH = "/animation/main";
+  private static final String FIXTURE_OVA_PATH = "/animation/ova";
+  private static final String FIXTURE_SUCCESS_CODE = "0000";
+  private static final String EXPECTED_MENU_VIEW = "animation";
+  private static final String EXPECTED_LIST_VIEW = "animation-list";
+  private static final String EXPECTED_PAGE_ATTRIBUTE = "page";
+  private static final String FIXTURE_MAIN_SECTION = "main";
+  private static final String FIXTURE_HTTP_GET = "GET";
+  private static final String FIXTURE_FAILURE_MESSAGE = "synthetic";
+  private static final String EXPECTED_HREF_ATTRIBUTE = "href";
+  private static final String FIXTURE_WIRE_TIMESTAMP = "ANM";
+  private static final int FIXTURE_THROW_MODE = 3;
+  private static final int FIXTURE_CORRELATION_MISMATCH_MODE = 1;
+
   private static WebLogDatabaseFixture db;
   @TempDir Path root;
   private static final Clock CLOCK =
       Clock.fixed(Instant.parse("2026-09-20T00:00:00Z"), ZoneOffset.UTC);
   private static final List<String> PATHS =
-      List.of("/animation", "/animation/main", "/animation/ova");
+      List.of(FIXTURE_MENU_PATH, FIXTURE_MAIN_PATH, FIXTURE_OVA_PATH);
 
   @BeforeAll
   static void start(@TempDir Path p) throws Exception {
@@ -118,9 +133,9 @@ class AnimationControllerTest {
       HttpServletResponse s)
       throws IOException {
     return switch (path) {
-      case "/animation" -> c.menu(p, m, r, s);
-      case "/animation/main" -> c.main(p, m, r, s);
-      case "/animation/ova" -> c.ova(p, m, r, s);
+      case FIXTURE_MENU_PATH -> c.menu(p, m, r, s);
+      case FIXTURE_MAIN_PATH -> c.main(p, m, r, s);
+      case FIXTURE_OVA_PATH -> c.ova(p, m, r, s);
       default -> throw new AssertionError();
     };
   }
@@ -129,7 +144,7 @@ class AnimationControllerTest {
   void animation054SuccessAndWire() throws Exception {
     try (var f = new Fixture()) {
       for (var role : UserRole.values())
-        for (var code : List.of("0000", "0200"))
+        for (var code : List.of(FIXTURE_SUCCESS_CODE, "0200"))
           for (int count : new int[] {0, 1, 50})
             for (var path : PATHS) {
               f.code = code;
@@ -138,12 +153,14 @@ class AnimationControllerTest {
               var model = new ExtendedModelMap();
               var s = new MockHttpServletResponse();
               assertEquals(
-                  path.equals("/animation") ? "animation" : "animation-list",
+                  path.equals(FIXTURE_MENU_PATH) ? EXPECTED_MENU_VIEW : EXPECTED_LIST_VIEW,
                   call(f.controller, path, actor(role), model, raw(path), s));
               assertEquals(200, s.getStatus());
-              assertEquals(Set.of("page"), model.keySet());
-              if (path.equals("/animation")) {
-                var page = assertInstanceOf(AnimationMenuViewModel.class, model.get("page"));
+              assertEquals(Set.of(EXPECTED_PAGE_ATTRIBUTE), model.keySet());
+              if (path.equals(FIXTURE_MENU_PATH)) {
+                var page =
+                    assertInstanceOf(
+                        AnimationMenuViewModel.class, model.get(EXPECTED_PAGE_ATTRIBUTE));
                 assertEquals(15, page.getMainCount());
                 assertEquals(4, page.getOvaCount());
                 assertTrue(page.isOpeningPresent());
@@ -155,7 +172,9 @@ class AnimationControllerTest {
                     },
                     page.getTopBar().getRole());
               } else {
-                var page = assertInstanceOf(AnimationListViewModel.class, model.get("page"));
+                var page =
+                    assertInstanceOf(
+                        AnimationListViewModel.class, model.get(EXPECTED_PAGE_ATTRIBUTE));
                 assertEquals(count, page.getTotalCount());
                 assertEquals(
                     switch (role) {
@@ -163,14 +182,16 @@ class AnimationControllerTest {
                       case ADMIN -> "ADMIN";
                     },
                     page.getTopBar().getRole());
-                assertEquals(path.endsWith("main") ? "main" : "ova", page.getSection());
+                assertEquals(
+                    path.endsWith(FIXTURE_MAIN_SECTION) ? FIXTURE_MAIN_SECTION : "ova",
+                    page.getSection());
               }
               assertEquals(before + 1, f.requests.size());
               var sent = f.requests.getLast();
-              assertEquals(path.equals("/animation") ? 256 : 272, sent.length);
-              if (!path.equals("/animation"))
+              assertEquals(path.equals(FIXTURE_MENU_PATH) ? 256 : 272, sent.length);
+              if (!path.equals(FIXTURE_MENU_PATH))
                 assertEquals(
-                    path.endsWith("main") ? "MAIN            " : "OVA             ",
+                    path.endsWith(FIXTURE_MAIN_SECTION) ? "MAIN            " : "OVA             ",
                     ascii(sent, 256, 16));
               f.erased();
             }
@@ -202,7 +223,7 @@ class AnimationControllerTest {
     try (var f = new Fixture()) {
       f.code = "0102";
       for (var path : PATHS) {
-        var r = f.security.mock("GET", path);
+        var r = f.security.mock(FIXTURE_HTTP_GET, path);
         var s = new MockHttpServletResponse();
         var model = new ExtendedModelMap();
         SecurityContextHolder.getContext()
@@ -229,9 +250,11 @@ class AnimationControllerTest {
           f.responder =
               (id, b) -> {
                 if (kind == 0) return new byte[4];
-                if (kind == 3) throw new IllegalStateException("synthetic");
+                if (kind == FIXTURE_THROW_MODE)
+                  throw new IllegalStateException(FIXTURE_FAILURE_MESSAGE);
                 var reply = f.standard(id, b);
-                if (kind == 1) put(reply, 60, 36, new UUID(0, 999).toString());
+                if (kind == FIXTURE_CORRELATION_MISMATCH_MODE)
+                  put(reply, 60, 36, new UUID(0, 999).toString());
                 else put(reply, 113, 64, "b".repeat(64));
                 return reply;
               };
@@ -249,16 +272,17 @@ class AnimationControllerTest {
   void animation058ResponseBinding() throws Exception {
     try (var f = new Fixture()) {
       for (var path : PATHS)
-        for (int mode = 0; mode < (path.equals("/animation") ? 1 : 5); mode++) {
+        for (int mode = 0; mode < (path.equals(FIXTURE_MENU_PATH) ? 1 : 5); mode++) {
           final int kind = mode;
           f.responder =
               (id, b) -> {
                 var reply = f.standard(id, b);
-                if (path.equals("/animation")) put(reply, 263, 3, "021");
+                if (path.equals(FIXTURE_MENU_PATH)) put(reply, 263, 3, "021");
                 else
                   switch (kind) {
                     case 0 -> put(reply, 256, 6, "000003");
-                    case 1 -> put(reply, 584, 16, path.endsWith("main") ? "OVA" : "MAIN");
+                    case 1 ->
+                        put(reply, 584, 16, path.endsWith(FIXTURE_MAIN_SECTION) ? "OVA" : "MAIN");
                     case 2 -> put(reply, 1124, 64, "missing");
                     case 3 -> put(reply, 1192, 64, "video0");
                     case 4 -> put(reply, 1112, 12, "000000000000");
@@ -295,7 +319,7 @@ class AnimationControllerTest {
         assertThrows(
             SessionStoreException.class, () -> call(f.controller, path, () -> "foreign", m, r, s));
         assertEquals(before, f.requests.size());
-        var failure = new IllegalArgumentException("synthetic");
+        var failure = new IllegalArgumentException(FIXTURE_FAILURE_MESSAGE);
         var broken =
             new ExtendedModelMap() {
               @Override
@@ -307,7 +331,7 @@ class AnimationControllerTest {
             failure,
             assertThrows(
                 IllegalArgumentException.class, () -> call(f.controller, path, p, broken, r, s)));
-        var unknown = new AssertionError("synthetic");
+        var unknown = new AssertionError(FIXTURE_FAILURE_MESSAGE);
         f.responder =
             (id, b) -> {
               throw unknown;
@@ -317,7 +341,7 @@ class AnimationControllerTest {
             assertThrows(AssertionError.class, () -> call(f.controller, path, p, m, r, s)));
         f.responder = f::standard;
         f.code = "9000";
-        var io = new IOException("synthetic");
+        var io = new IOException(FIXTURE_FAILURE_MESSAGE);
         var brokenResponse =
             new MockHttpServletResponse() {
               @Override
@@ -329,7 +353,7 @@ class AnimationControllerTest {
             io,
             assertThrows(
                 IOException.class, () -> call(f.controller, path, p, m, r, brokenResponse)));
-        f.code = "0000";
+        f.code = FIXTURE_SUCCESS_CODE;
         f.erased();
       }
     }
@@ -344,7 +368,7 @@ class AnimationControllerTest {
         var result = mvc.perform(pageRequest(path, actor(UserRole.USER))).andReturn();
         assertEquals(200, result.getResponse().getStatus());
         assertEquals(
-            path.equals("/animation") ? "animation" : "animation-list",
+            path.equals(FIXTURE_MENU_PATH) ? EXPECTED_MENU_VIEW : EXPECTED_LIST_VIEW,
             Objects.requireNonNull(result.getModelAndView()).getViewName());
         var h =
             mvc.perform(
@@ -354,7 +378,7 @@ class AnimationControllerTest {
                 .andReturn();
         assertEquals(200, h.getResponse().getStatus());
         assertEquals(
-            path.equals("/animation") ? "animation" : "animation-list",
+            path.equals(FIXTURE_MENU_PATH) ? EXPECTED_MENU_VIEW : EXPECTED_LIST_VIEW,
             Objects.requireNonNull(h.getModelAndView()).getViewName());
         int before = f.requests.size();
         assertEquals(
@@ -382,7 +406,7 @@ class AnimationControllerTest {
   void animation061RealHttpSecurity() throws Exception {
     for (String role : List.of("USER", "ADMIN")) {
       reset();
-      var api = new SessionFormLoginTest.Api("0000", role, "0000", 0);
+      var api = new SessionFormLoginTest.Api(FIXTURE_SUCCESS_CODE, role, FIXTURE_SUCCESS_CODE, 0);
       try (var f = new Fixture();
           var server =
               new EmbeddedWebSecurityTest.Server(
@@ -394,9 +418,9 @@ class AnimationControllerTest {
                   true,
                   (mvc, invalid) -> configure(mvc, f.client, invalid))) {
         for (var path : PATHS)
-          assertEquals(302, server.send("GET", path, null, null, true).statusCode());
+          assertEquals(302, server.send(FIXTURE_HTTP_GET, path, null, null, true).statusCode());
         assertTrue(f.requests.isEmpty());
-        var first = server.send("GET", "/login", null, null, true);
+        var first = server.send(FIXTURE_HTTP_GET, "/login", null, null, true);
         String initial = first.headers().firstValue("set-cookie").orElseThrow().split(";", 2)[0];
         var login =
             server.send(
@@ -409,7 +433,7 @@ class AnimationControllerTest {
         String cookie = login.headers().firstValue("set-cookie").orElseThrow().split(";", 2)[0];
         for (var path : PATHS) {
           int before = f.requests.size();
-          var result = server.send("GET", path, cookie, null, true);
+          var result = server.send(FIXTURE_HTTP_GET, path, cookie, null, true);
           assertEquals(200, result.statusCode());
           var dom = Jsoup.parse(result.body());
           assertEquals(role, dom.select(".login-role").text());
@@ -431,13 +455,14 @@ class AnimationControllerTest {
         }
         f.code = "0102";
         int before = f.requests.size();
-        var expired = server.send("GET", "/animation/main", cookie, null, true);
+        var expired = server.send(FIXTURE_HTTP_GET, FIXTURE_MAIN_PATH, cookie, null, true);
         assertEquals(302, expired.statusCode());
         assertEquals(
             "/login?session-expired", expired.headers().firstValue("location").orElseThrow());
         assertTrue(expired.headers().firstValue("set-cookie").orElseThrow().contains("Max-Age=0"));
         assertEquals(before + 1, f.requests.size());
-        assertEquals(302, server.send("GET", "/animation/ova", cookie, null, true).statusCode());
+        assertEquals(
+            302, server.send(FIXTURE_HTTP_GET, FIXTURE_OVA_PATH, cookie, null, true).statusCode());
         assertEquals(before + 1, f.requests.size());
         assertEquals(0, server.context.getManager().getActiveSessions());
         f.erased();
@@ -468,7 +493,7 @@ class AnimationControllerTest {
       var result =
           MockMvcBuilders.webAppContextSetup(context)
               .build()
-              .perform(pageRequest("/animation/ova", p))
+              .perform(pageRequest(FIXTURE_OVA_PATH, p))
               .andReturn();
       assertEquals(200, result.getResponse().getStatus());
       var dom = Jsoup.parse(result.getResponse().getContentAsString());
@@ -476,7 +501,7 @@ class AnimationControllerTest {
       assertEquals(canary, dom.select(".scenario-title").first().text());
       assertEquals(
           "/animation/videos/video%20%3F%23%E6%97%A5%E6%9C%AC",
-          dom.select(".scenario-link").first().attr("href"));
+          dom.select(".scenario-link").first().attr(EXPECTED_HREF_ATTRIBUTE));
       assertTrue(dom.select("img,[onerror],script:not([src])").isEmpty());
       assertFalse(result.getResponse().getContentAsString().contains("a".repeat(64)));
       f.erased();
@@ -507,7 +532,7 @@ class AnimationControllerTest {
           };
       var dom =
           Jsoup.parse(
-              mvc.perform(pageRequest("/animation/main", actor(UserRole.USER)))
+              mvc.perform(pageRequest(FIXTURE_MAIN_PATH, actor(UserRole.USER)))
                   .andReturn()
                   .getResponse()
                   .getContentAsString());
@@ -515,13 +540,14 @@ class AnimationControllerTest {
       assertEquals(
           List.of("Title1", "Title2"),
           dom.select(".animation-main-link .scenario-title").eachText());
-      assertEquals("/animation/videos/video0", dom.select(".subtrack-link").attr("href"));
+      assertEquals(
+          "/animation/videos/video0", dom.select(".subtrack-link").attr(EXPECTED_HREF_ATTRIBUTE));
       assertEquals(1, dom.select(".subtrack-placeholder").size());
       f.responder = f::standard;
       f.count = 2;
       dom =
           Jsoup.parse(
-              mvc.perform(pageRequest("/animation/ova", actor(UserRole.USER)))
+              mvc.perform(pageRequest(FIXTURE_OVA_PATH, actor(UserRole.USER)))
                   .andReturn()
                   .getResponse()
                   .getContentAsString());
@@ -551,9 +577,9 @@ class AnimationControllerTest {
                   var m = new ExtendedModelMap();
                   var s = new MockHttpServletResponse();
                   assertEquals(
-                      n % 3 == 0 ? "animation" : "animation-list",
+                      n % 3 == 0 ? EXPECTED_MENU_VIEW : EXPECTED_LIST_VIEW,
                       call(f.controller, path, p, m, raw(path), s));
-                  var page = m.get("page");
+                  var page = m.get(EXPECTED_PAGE_ATTRIBUTE);
                   var bar =
                       page instanceof AnimationMenuViewModel menu
                           ? menu.getTopBar()
@@ -583,7 +609,7 @@ class AnimationControllerTest {
       var mvc = MockMvcBuilders.webAppContextSetup(context).build();
       var dom =
           Jsoup.parse(
-              mvc.perform(pageRequest("/animation", actor(UserRole.USER)))
+              mvc.perform(pageRequest(FIXTURE_MENU_PATH, actor(UserRole.USER)))
                   .andReturn()
                   .getResponse()
                   .getContentAsString());
@@ -592,8 +618,8 @@ class AnimationControllerTest {
       assertEquals(
           List.of("15本の映像", "4本の映像", "OP映像を再生する"), dom.select(".menu-item span").eachText());
       assertEquals(
-          List.of("/animation/main", "/animation/ova", "/animation/opening"),
-          dom.select(".menu-item").eachAttr("href"));
+          List.of(FIXTURE_MAIN_PATH, FIXTURE_OVA_PATH, "/animation/opening"),
+          dom.select(".menu-item").eachAttr(EXPECTED_HREF_ATTRIBUTE));
       for (var path : PATHS.subList(1, 3)) {
         dom =
             Jsoup.parse(
@@ -604,8 +630,8 @@ class AnimationControllerTest {
         assertEquals(List.of("Title0", "Title1"), dom.select(".scenario-title").eachText());
         assertEquals("2本", dom.select(".subtitle").text());
         assertEquals(
-            List.of("/animation", "/search"),
-            dom.select("nav[aria-label=Animationナビゲーション] a").eachAttr("href"));
+            List.of(FIXTURE_MENU_PATH, "/search"),
+            dom.select("nav[aria-label=Animationナビゲーション] a").eachAttr(EXPECTED_HREF_ATTRIBUTE));
       }
       Path directory = Path.of("target/scenario-screen-traces");
       Files.createDirectories(directory);
@@ -623,7 +649,7 @@ class AnimationControllerTest {
   }
 
   private static MockHttpServletRequest raw(String path) {
-    var r = new MockHttpServletRequest("GET", path);
+    var r = new MockHttpServletRequest(FIXTURE_HTTP_GET, path);
     r.setRemoteAddr("127.0.0.1");
     return r;
   }
@@ -659,7 +685,7 @@ class AnimationControllerTest {
     final List<byte[]> buffers = new CopyOnWriteArrayList<>();
     final Set<UUID> correlations = ConcurrentHashMap.newKeySet();
     volatile int count = 2;
-    volatile String code = "0000";
+    volatile String code = FIXTURE_SUCCESS_CODE;
     volatile BiFunction<UUID, byte[], byte[]> responder = this::standard;
     final JmsRequestReplyClient wire =
         new JmsRequestReplyClient(new ReplyCorrelationRegistry(), CLOCK, 12);
@@ -671,8 +697,8 @@ class AnimationControllerTest {
               buffers.add(b);
               requests.add(b.clone());
               String type = ascii(b, 11, 3);
-              assertTrue(type.equals("ANM") || type.equals("ANL"));
-              assertEquals(type.equals("ANM") ? 256 : 272, b.length);
+              assertTrue(type.equals(FIXTURE_WIRE_TIMESTAMP) || type.equals("ANL"));
+              assertEquals(type.equals(FIXTURE_WIRE_TIMESTAMP) ? 256 : 272, b.length);
               assertEquals("Q", ascii(b, 22, 1));
               assertEquals("S", ascii(b, 23, 1));
               assertEquals(id.toString(), ascii(b, 24, 36));
@@ -695,7 +721,9 @@ class AnimationControllerTest {
 
     byte[] standard(UUID id, byte[] b) {
       return response(
-          ascii(b, 11, 3).equals("ANM") ? "ANM" : ascii(b, 256, 16).strip(),
+          ascii(b, 11, 3).equals(FIXTURE_WIRE_TIMESTAMP)
+              ? FIXTURE_WIRE_TIMESTAMP
+              : ascii(b, 256, 16).strip(),
           count,
           code,
           id,
@@ -716,8 +744,8 @@ class AnimationControllerTest {
 
   // UI232/235 independent byte offsets; no production codec/mapper for fixtures.
   private static byte[] response(String type, int n, String code, UUID id, String context) {
-    boolean menu = type.equals("ANM");
-    boolean success = code.equals("0000") || code.equals("0200");
+    boolean menu = type.equals(FIXTURE_WIRE_TIMESTAMP);
+    boolean success = code.equals(FIXTURE_SUCCESS_CODE) || code.equals("0200");
     int count = menu || !success ? 0 : n;
     var b =
         header(
