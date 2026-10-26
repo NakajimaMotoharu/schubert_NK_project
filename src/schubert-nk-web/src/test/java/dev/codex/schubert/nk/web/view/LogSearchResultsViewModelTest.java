@@ -36,6 +36,8 @@ import org.thymeleaf.templateresolver.StringTemplateResolver;
 
 /** PG212/PT-WEB262..269/FUN008/AUT/MON/UI225,235/SS311,313,323,352. */
 class LogSearchResultsViewModelTest {
+  private static final String READER_USERNAME = "reader";
+  private static final String LOG_MESSAGE_TEXT = "message";
   private static final Instant TIME = Instant.parse("2026-09-20T01:02:03.004Z");
   private static final UUID REQUEST = new UUID(0, 1);
   private static final UUID MESSAGE = new UUID(0, 2);
@@ -46,7 +48,7 @@ class LogSearchResultsViewModelTest {
   }
 
   private static SessionPrincipal admin() {
-    return actor("reader", UserRole.ADMIN);
+    return actor(READER_USERNAME, UserRole.ADMIN);
   }
 
   private static <T> Optional<T> value(int mask, int bit, T value) {
@@ -82,9 +84,9 @@ class LogSearchResultsViewModelTest {
 
   @Test
   void web262CompleteRow() {
-    var p = model(record(999999999999L, TIME, 1023, "message"));
+    var p = model(record(999999999999L, TIME, 1023, LOG_MESSAGE_TEXT));
     var r = p.getRows().getFirst();
-    assertEquals("reader", p.getTopBar().getUsername());
+    assertEquals(READER_USERNAME, p.getTopBar().getUsername());
     assertEquals("ADMIN", p.getTopBar().getRole());
     assertEquals(1, p.getPage().getTotalCount());
     assertEquals(100, p.getPage().getPageSize());
@@ -93,7 +95,7 @@ class LogSearchResultsViewModelTest {
     assertEquals("REQUEST", r.getLogType());
     assertEquals("INFO", r.getLevel());
     assertEquals("search", r.getAction());
-    assertEquals("message", r.getMessage());
+    assertEquals(LOG_MESSAGE_TEXT, r.getMessage());
     assertEquals("00000000-0000-0000-0000-000000000001", r.getRequestId());
     assertEquals("00000000-0000-0000-0000-000000000002", r.getMessageId());
     assertEquals("00000000-0000-0000-0000-000000000003", r.getCorrelationId());
@@ -128,7 +130,7 @@ class LogSearchResultsViewModelTest {
       "{\"safe\":\"value\"}"
     };
     for (int mask = 0; mask < 1024; mask++) {
-      var r = model(record(1, TIME, mask, "message")).getRows().getFirst();
+      var r = model(record(1, TIME, mask, LOG_MESSAGE_TEXT)).getRows().getFirst();
       var actual =
           List.of(
               r.getAction(),
@@ -232,7 +234,9 @@ class LogSearchResultsViewModelTest {
         NullPointerException.class, () -> LogSearchResultsViewModel.from(admin(), one(), nullItem));
     assertThrows(
         IllegalArgumentException.class,
-        () -> LogSearchResultsViewModel.from(actor("reader", UserRole.USER), one(), List.of(r)));
+        () ->
+            LogSearchResultsViewModel.from(
+                actor(READER_USERNAME, UserRole.USER), one(), List.of(r)));
     var original = new ArrayList<>(List.of(r));
     var p = LogSearchResultsViewModel.from(admin(), one(), original);
     original.clear();
@@ -254,7 +258,7 @@ class LogSearchResultsViewModelTest {
             "logType",
             "level",
             "action",
-            "message",
+            LOG_MESSAGE_TEXT,
             "requestId",
             "messageId",
             "correlationId",
@@ -334,8 +338,8 @@ class LogSearchResultsViewModelTest {
                 () -> {
                   var p =
                       LogSearchResultsViewModel.from(
-                          actor("reader" + n, UserRole.ADMIN), one(), input);
-                  assertEquals("reader" + n, p.getTopBar().getUsername());
+                          actor(READER_USERNAME + n, UserRole.ADMIN), one(), input);
+                  assertEquals(READER_USERNAME + n, p.getTopBar().getUsername());
                   assertEquals("shared", p.getRows().getFirst().getMessage());
                   assertEquals(1, p.getPage().getTotalCount());
                   assertEquals(1, p.getRows().size());

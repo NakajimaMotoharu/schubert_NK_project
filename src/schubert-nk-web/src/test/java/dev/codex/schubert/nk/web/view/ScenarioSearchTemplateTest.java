@@ -55,6 +55,22 @@ import org.thymeleaf.spring6.view.ThymeleafViewResolver;
 
 /** Actual templates/resource mapping, independent Current literals; PG202/016007/PT-SCR026..033. */
 class ScenarioSearchTemplateTest {
+  private static final String READER_USERNAME = "reader";
+  private static final String PAGE_KEY = "page";
+  private static final String GAME_FIELD_NAME = "game";
+  private static final String SPEAKER_FIELD_NAME = "speaker";
+  private static final String CHAPTER_FIELD_NAME = "chapter";
+  private static final String ENTRY_TYPE_FIELD_NAME = "entry_type";
+  private static final String VOICE_FIELD_NAME = "voice";
+  private static final String HREF_ATTRIBUTE = "href";
+  private static final String QUERY_INPUT_SELECTOR = "input[name=q]";
+  private static final String VALUE_ATTRIBUTE = "value";
+  private static final String SPEAKER_OPTIONS_SELECTOR = "select[name=speaker] option";
+  private static final String RESULT_BODY_SELECTOR = ".result-body > p";
+  private static final String AUDIO_SELECTOR = "audio";
+  private static final String INVALID_INPUT_MESSAGE = "入力値を確認してください。";
+  private static final String SCRIPT_SELECTOR = "script";
+
   private static SessionPrincipal actor(String name, UserRole role) {
     return new SessionPrincipal(
         name, role, AuthenticationContext.of("a".repeat(64)), Instant.EPOCH);
@@ -121,7 +137,7 @@ class ScenarioSearchTemplateTest {
   }
 
   private static ScenarioSearchViewModel page(Map<String, String> fields, int page, int total) {
-    return page("reader", UserRole.USER, fields, page, total, rows(page, total));
+    return page(READER_USERNAME, UserRole.USER, fields, page, total, rows(page, total));
   }
 
   private static AnnotationConfigWebApplicationContext context() {
@@ -149,7 +165,7 @@ class ScenarioSearchTemplateTest {
     request.setAttribute(CsrfToken.class.getName(), new DefaultCsrfToken("unused", "_csrf", csrf));
     var response = new MockHttpServletResponse();
     response.setStatus(status);
-    view.render(Map.of("page", page), request, response);
+    view.render(Map.of(PAGE_KEY, page), request, response);
     assertEquals(status, response.getStatus());
     assertEquals("UTF-8", response.getCharacterEncoding());
     return Jsoup.parse(response.getContentAsString());
@@ -170,26 +186,27 @@ class ScenarioSearchTemplateTest {
               Map.of(
                   "q",
                   "本文",
-                  "game",
+                  GAME_FIELD_NAME,
                   first ? "NUKITASHI1" : "NUKITASHI2",
-                  "speaker",
+                  SPEAKER_FIELD_NAME,
                   first ? "甲" : "乙",
-                  "chapter",
+                  CHAPTER_FIELD_NAME,
                   "章",
-                  "entry_type",
+                  ENTRY_TYPE_FIELD_NAME,
                   first ? "dialogue" : "narration",
-                  "voice",
+                  VOICE_FIELD_NAME,
                   first ? "with" : "without");
           var dom =
-              render(context, page("reader", role, fields, 1, 1, List.of(row(1, false, "本文"))));
+              render(
+                  context, page(READER_USERNAME, role, fields, 1, 1, List.of(row(1, false, "本文"))));
           assertEquals("schubert NK - 検索", dom.title());
           assertEquals("schubert NK - 検索", dom.select("h1").text());
           assertEquals("ja", dom.select("html").attr("lang"));
-          assertEquals("reader", dom.select(".login-user").text());
+          assertEquals(READER_USERNAME, dom.select(".login-user").text());
           assertEquals(role.name(), dom.select(".login-role").text());
           assertEquals(
               List.of("/", "/notifications", "/scenarios"),
-              dom.select(".nav-links a").eachAttr("href"));
+              dom.select(".nav-links a").eachAttr(HREF_ATTRIBUTE));
           assertEquals(List.of("メニュー", "通知", "一覧"), dom.select(".nav-links a").eachText());
           assertEquals("1 results / page 1 of 1", dom.select(".count").text());
           var form = dom.selectFirst("form.filters");
@@ -199,19 +216,25 @@ class ScenarioSearchTemplateTest {
               List.of("本文", "ゲーム", "話者", "章タイトル", "形態", "音声"),
               form.select("label > span").eachText());
           assertEquals(
-              List.of("q", "game", "speaker", "chapter", "entry_type", "voice"),
+              List.of(
+                  "q",
+                  GAME_FIELD_NAME,
+                  SPEAKER_FIELD_NAME,
+                  CHAPTER_FIELD_NAME,
+                  ENTRY_TYPE_FIELD_NAME,
+                  VOICE_FIELD_NAME),
               form.select("input,select").eachAttr("name"));
-          assertEquals("本文", form.select("input[name=q]").attr("value"));
-          assertEquals("章", form.select("input[name=chapter]").attr("value"));
+          assertEquals("本文", form.select(QUERY_INPUT_SELECTOR).attr(VALUE_ATTRIBUTE));
+          assertEquals("章", form.select("input[name=chapter]").attr(VALUE_ATTRIBUTE));
           assertEquals(
               List.of("", "NUKITASHI2", "NUKITASHI1"),
-              form.select("select[name=game] option").eachAttr("value"));
-          assertEquals(
-              List.of("すべて", "乙", "甲"), form.select("select[name=speaker] option").eachText());
-          for (String field : List.of("game", "speaker", "entry_type", "voice"))
+              form.select("select[name=game] option").eachAttr(VALUE_ATTRIBUTE));
+          assertEquals(List.of("すべて", "乙", "甲"), form.select(SPEAKER_OPTIONS_SELECTOR).eachText());
+          for (String field :
+              List.of(GAME_FIELD_NAME, SPEAKER_FIELD_NAME, ENTRY_TYPE_FIELD_NAME, VOICE_FIELD_NAME))
             assertEquals(
                 fields.get(field),
-                form.select("select[name=" + field + "] option[selected]").attr("value"));
+                form.select("select[name=" + field + "] option[selected]").attr(VALUE_ATTRIBUTE));
           assertEquals(
               List.of("すべて", "セリフ", "ナレーション"),
               form.select("select[name=entry_type] option").eachText());
@@ -222,13 +245,15 @@ class ScenarioSearchTemplateTest {
           assertEquals("post", dom.select("form.logout-form").attr("method"));
           assertEquals("/logout", dom.select("form.logout-form").attr("action"));
           assertEquals(1, dom.select("input[name=_csrf]").size());
-          assertEquals("public-csrf", dom.select("input[name=_csrf]").attr("value"));
+          assertEquals("public-csrf", dom.select("input[name=_csrf]").attr(VALUE_ATTRIBUTE));
           assertEquals("検索", form.select("button[type=submit]").text());
           assertTrue(dom.select("#search-errors").hasAttr("hidden"));
         }
       var blank = render(context, page(Map.of(), 1, 0));
-      for (String field : List.of("game", "speaker", "entry_type", "voice"))
-        assertEquals("", blank.select("select[name=" + field + "] option[selected]").attr("value"));
+      for (String field :
+          List.of(GAME_FIELD_NAME, SPEAKER_FIELD_NAME, ENTRY_TYPE_FIELD_NAME, VOICE_FIELD_NAME))
+        assertEquals(
+            "", blank.select("select[name=" + field + "] option[selected]").attr(VALUE_ATTRIBUTE));
     }
   }
 
@@ -239,26 +264,26 @@ class ScenarioSearchTemplateTest {
           render(
               context,
               page(
-                  "reader",
+                  READER_USERNAME,
                   UserRole.USER,
                   Map.of(),
                   1,
                   2,
                   List.of(row(9, true, "最初<&>"), row(3, false, "最後"))));
       assertEquals(2, dom.select(".result").size());
-      assertEquals(List.of("最初<&>", "最後"), dom.select(".result-body > p").eachText());
+      assertEquals(List.of("最初<&>", "最後"), dom.select(RESULT_BODY_SELECTOR).eachText());
       assertEquals(
           "NUKITASHI1 章<&> セリフ 話者<img> 文章/23.txt:9 音声/71.ogg", dom.select(".meta").first().text());
       assertEquals("NUKITASHI1 ナレーション 文章/23.txt:3", dom.select(".meta").last().text());
       assertEquals(
           List.of("/scenarios/23#entry-9", "/scenarios/23#entry-3"),
-          dom.select(".scenario-open").eachAttr("href"));
+          dom.select(".scenario-open").eachAttr(HREF_ATTRIBUTE));
       assertEquals(List.of("開く", "開く"), dom.select(".scenario-open").eachText());
-      assertEquals(1, dom.select("audio").size());
-      assertEquals("/audio/71", dom.select("audio").attr("src"));
-      assertEquals("none", dom.select("audio").attr("preload"));
-      assertTrue(dom.select("audio").hasAttr("controls"));
-      assertEquals("/audio/71/download", dom.select(".download").attr("href"));
+      assertEquals(1, dom.select(AUDIO_SELECTOR).size());
+      assertEquals("/audio/71", dom.select(AUDIO_SELECTOR).attr("src"));
+      assertEquals("none", dom.select(AUDIO_SELECTOR).attr("preload"));
+      assertTrue(dom.select(AUDIO_SELECTOR).hasAttr("controls"));
+      assertEquals("/audio/71/download", dom.select(".download").attr(HREF_ATTRIBUTE));
       assertEquals("DL", dom.select(".download").text());
       assertTrue(dom.select(".result").last().select(".audio").isEmpty());
     }
@@ -275,7 +300,7 @@ class ScenarioSearchTemplateTest {
       for (int[] fixture : new int[][] {{1, 1}, {1, 100}, {1, 101}, {2, 201}, {3, 201}}) {
         int p = fixture[0];
         int total = fixture[1];
-        var dom = render(context, page(Map.of("page", "" + p), p, total));
+        var dom = render(context, page(Map.of(PAGE_KEY, "" + p), p, total));
         var navs = dom.select(".pagination");
         assertEquals(2, navs.size());
         assertEquals(
@@ -290,20 +315,20 @@ class ScenarioSearchTemplateTest {
           assertEquals(range, nav.children().get(1).text());
           assertEquals("前の100件", nav.children().first().text());
           assertEquals("次の100件", nav.children().last().text());
-          if (p > 1) assertEquals(prefix + (p - 1), nav.children().first().attr("href"));
+          if (p > 1) assertEquals(prefix + (p - 1), nav.children().first().attr(HREF_ATTRIBUTE));
           else assertEquals("span", nav.children().first().tagName());
           if ((p == 1 && total > 100) || p == 2)
-            assertEquals(prefix + (p + 1), nav.children().last().attr("href"));
+            assertEquals(prefix + (p + 1), nav.children().last().attr(HREF_ATTRIBUTE));
           else assertEquals("span", nav.children().last().tagName());
         }
         assertTrue(dom.select(".empty-results").isEmpty());
       }
-      var encoded = render(context, page(Map.of("q", "a &+", "page", "2"), 2, 201));
+      var encoded = render(context, page(Map.of("q", "a &+", PAGE_KEY, "2"), 2, 201));
       assertEquals(
           List.of(
               "/search?q=a%20%26%2B&game=&speaker=&chapter=&entry_type=&voice=&page=1",
               "/search?q=a%20%26%2B&game=&speaker=&chapter=&entry_type=&voice=&page=3"),
-          encoded.select(".pagination").first().select("a").eachAttr("href"));
+          encoded.select(".pagination").first().select("a").eachAttr(HREF_ATTRIBUTE));
     }
   }
 
@@ -315,24 +340,24 @@ class ScenarioSearchTemplateTest {
               Map.of(
                   "q",
                   "<q>".repeat(86),
-                  "game",
+                  GAME_FIELD_NAME,
                   "<game>",
-                  "speaker",
+                  SPEAKER_FIELD_NAME,
                   "s".repeat(129),
-                  "chapter",
+                  CHAPTER_FIELD_NAME,
                   "c".repeat(257),
-                  "entry_type",
+                  ENTRY_TYPE_FIELD_NAME,
                   "<type>",
-                  "voice",
+                  VOICE_FIELD_NAME,
                   "<voice>",
-                  "page",
+                  PAGE_KEY,
                   "+1",
                   "unknown-private-name",
                   "x"));
       var dom =
           render(
               context,
-              ScenarioSearchViewModel.invalid(actor("reader", UserRole.USER), invalid),
+              ScenarioSearchViewModel.invalid(actor(READER_USERNAME, UserRole.USER), invalid),
               "csrf",
               400);
       assertFalse(dom.select("#search-errors").hasAttr("hidden"));
@@ -352,28 +377,29 @@ class ScenarioSearchTemplateTest {
           List.of(
               "入力項目を確認してください。",
               "本文はUTF-8で256 byte以内にしてください。",
-              "入力値を確認してください。",
+              INVALID_INPUT_MESSAGE,
               "話者はUTF-8で128 byte以内にしてください。",
               "章タイトルはUTF-8で256 byte以内にしてください。",
-              "入力値を確認してください。",
-              "入力値を確認してください。",
-              "入力値を確認してください。"),
+              INVALID_INPUT_MESSAGE,
+              INVALID_INPUT_MESSAGE,
+              INVALID_INPUT_MESSAGE),
           dom.select("#search-errors li").eachText());
-      assertEquals("<q>".repeat(86), dom.select("input[name=q]").attr("value"));
+      assertEquals("<q>".repeat(86), dom.select(QUERY_INPUT_SELECTOR).attr(VALUE_ATTRIBUTE));
       for (var entry :
           Map.of(
-                  "game",
+                  GAME_FIELD_NAME,
                   "<game>",
-                  "speaker",
+                  SPEAKER_FIELD_NAME,
                   "s".repeat(129),
-                  "entry_type",
+                  ENTRY_TYPE_FIELD_NAME,
                   "<type>",
-                  "voice",
+                  VOICE_FIELD_NAME,
                   "<voice>")
               .entrySet())
         assertEquals(
             entry.getValue(),
-            dom.select("select[name=" + entry.getKey() + "] option[selected]").attr("value"));
+            dom.select("select[name=" + entry.getKey() + "] option[selected]")
+                .attr(VALUE_ATTRIBUTE));
       assertTrue(dom.select(".results,.count,.pagination,.empty-results").isEmpty());
       assertFalse(dom.outerHtml().contains("unknown-private-name"));
       assertTrue(dom.select("q,game,type,voice").isEmpty());
@@ -383,7 +409,7 @@ class ScenarioSearchTemplateTest {
               ScenarioSearchViewModel.invalid(actor("r", UserRole.USER), form(Map.of("q", "\n"))),
               "csrf",
               400);
-      assertEquals("", control.select("input[name=q]").attr("value"));
+      assertEquals("", control.select(QUERY_INPUT_SELECTOR).attr(VALUE_ATTRIBUTE));
       assertEquals("使用できない文字が含まれています。", control.select("#search-errors li").text());
     }
   }
@@ -394,27 +420,34 @@ class ScenarioSearchTemplateTest {
       var value =
           ScenarioSearchViewModel.success(
               actor("reader<img>", UserRole.ADMIN),
-              form(Map.of("q", "<script>&\"", "speaker", "<img>&", "chapter", "<iframe>")),
+              form(
+                  Map.of(
+                      "q",
+                      "<script>&\"",
+                      SPEAKER_FIELD_NAME,
+                      "<img>&",
+                      CHAPTER_FIELD_NAME,
+                      "<iframe>")),
               games(),
               List.of(new SpeakerRecord(new SpeakerId(1), "<img>&", 1)),
               data(1, 1),
               List.of(row(1, true, "<script>body&\"")));
       var dom = render(context, value);
       assertEquals("reader<img>", dom.select(".login-user").text());
-      assertEquals("<script>&\"", dom.select("input[name=q]").attr("value"));
-      assertEquals("<iframe>", dom.select("input[name=chapter]").attr("value"));
+      assertEquals("<script>&\"", dom.select(QUERY_INPUT_SELECTOR).attr(VALUE_ATTRIBUTE));
+      assertEquals("<iframe>", dom.select("input[name=chapter]").attr(VALUE_ATTRIBUTE));
       assertEquals("<img>&", dom.select("select[name=speaker] option[selected]").text());
-      assertEquals("<script>body&\"", dom.select(".result-body > p").text());
+      assertEquals("<script>body&\"", dom.select(RESULT_BODY_SELECTOR).text());
       assertTrue(dom.select("style,img,iframe,object,embed,[style]").isEmpty());
-      assertEquals(1, dom.select("script").size());
-      assertEquals("", dom.select("script").html());
-      assertEquals("/js/search-speaker-submit.js", dom.select("script").attr("src"));
-      assertTrue(dom.select("script").hasAttr("defer"));
+      assertEquals(1, dom.select(SCRIPT_SELECTOR).size());
+      assertEquals("", dom.select(SCRIPT_SELECTOR).html());
+      assertEquals("/js/search-speaker-submit.js", dom.select(SCRIPT_SELECTOR).attr("src"));
+      assertTrue(dom.select(SCRIPT_SELECTOR).hasAttr("defer"));
       for (var element : dom.getAllElements())
         for (var attribute : element.attributes()) {
           assertFalse(attribute.getKey().startsWith("on"));
           assertFalse(attribute.getKey().startsWith("data-"));
-          if (Set.of("href", "src", "action").contains(attribute.getKey())) {
+          if (Set.of(HREF_ATTRIBUTE, "src", "action").contains(attribute.getKey())) {
             assertTrue(attribute.getValue().startsWith("/"));
             assertFalse(attribute.getValue().startsWith("//"));
           }
@@ -443,12 +476,12 @@ class ScenarioSearchTemplateTest {
               actor("r", UserRole.USER), form(Map.of()), g, s, data(1, 100), rows(1, 100));
       var dom = render(context, value);
       assertEquals(100, dom.select(".result").size());
-      assertEquals("本文1", dom.select(".result-body > p").first().text());
-      assertEquals("本文100", dom.select(".result-body > p").last().text());
+      assertEquals("本文1", dom.select(RESULT_BODY_SELECTOR).first().text());
+      assertEquals("本文100", dom.select(RESULT_BODY_SELECTOR).last().text());
       assertEquals(11, dom.select("select[name=game] option").size());
-      assertEquals(501, dom.select("select[name=speaker] option").size());
-      assertEquals("speaker-0", dom.select("select[name=speaker] option").get(1).text());
-      assertEquals("speaker-499", dom.select("select[name=speaker] option").last().text());
+      assertEquals(501, dom.select(SPEAKER_OPTIONS_SELECTOR).size());
+      assertEquals("speaker-0", dom.select(SPEAKER_OPTIONS_SELECTOR).get(1).text());
+      assertEquals("speaker-499", dom.select(SPEAKER_OPTIONS_SELECTOR).last().text());
     }
   }
 
@@ -600,12 +633,14 @@ class ScenarioSearchTemplateTest {
                           200);
                   assertEquals("user-" + n, dom.select(".login-user").text());
                   assertEquals(n % 2 == 0 ? "ADMIN" : "USER", dom.select(".login-role").text());
-                  assertEquals("q-" + n, dom.select("input[name=q]").attr("value"));
-                  assertEquals("body-" + n, dom.select(".result-body > p").text());
+                  assertEquals("q-" + n, dom.select(QUERY_INPUT_SELECTOR).attr(VALUE_ATTRIBUTE));
+                  assertEquals("body-" + n, dom.select(RESULT_BODY_SELECTOR).text());
                   assertEquals(
-                      "csrf-" + n, dom.select("form.logout-form input[name=_csrf]").attr("value"));
+                      "csrf-" + n,
+                      dom.select("form.logout-form input[name=_csrf]").attr(VALUE_ATTRIBUTE));
                   assertEquals(
-                      "/scenarios/23#entry-" + n, dom.select(".scenario-open").attr("href"));
+                      "/scenarios/23#entry-" + n,
+                      dom.select(".scenario-open").attr(HREF_ATTRIBUTE));
                   return null;
                 }));
       }

@@ -36,6 +36,14 @@ import org.thymeleaf.templateresolver.StringTemplateResolver;
 
 /** PG215/015030/PT-WEB286..293. Independent literals, no production-generated expected. */
 class LogSearchViewModelTest {
+  private static final String PAGE_KEY = "page";
+  private static final String LOG_TYPE_FIELD_NAME = "log_type";
+  private static final String ACTION_FIELD_NAME = "action";
+  private static final String PATH_FIELD_NAME = "path";
+  private static final String LEVEL_FIELD_NAME = "level";
+  private static final String FROM_FIELD_NAME = "from";
+  private static final String INVALID_INPUT_MESSAGE = "入力値を確認してください。";
+
   private static SessionPrincipal actor(String name, UserRole role) {
     return new SessionPrincipal(
         name, role, AuthenticationContext.of("a".repeat(64)), Instant.EPOCH);
@@ -46,7 +54,7 @@ class LogSearchViewModelTest {
   }
 
   private static LogSearchForm form(String q, String page) {
-    return LogSearchForm.bind(Map.of("q", List.of(q), "page", List.of(page)));
+    return LogSearchForm.bind(Map.of("q", List.of(q), PAGE_KEY, List.of(page)));
   }
 
   private static LogRecord row(long id, String text) {
@@ -94,15 +102,15 @@ class LogSearchViewModelTest {
             Map.of(
                 "q",
                 List.of("本文"),
-                "log_type",
+                LOG_TYPE_FIELD_NAME,
                 List.of("MQ"),
-                "action",
+                ACTION_FIELD_NAME,
                 List.of("search"),
-                "path",
+                PATH_FIELD_NAME,
                 List.of("/search"),
-                "level",
+                LEVEL_FIELD_NAME,
                 List.of("WARN"),
-                "from",
+                FROM_FIELD_NAME,
                 List.of("2026-09-01T09:00"),
                 "to",
                 List.of("2026-09-20T10:02:03.120")));
@@ -162,19 +170,19 @@ class LogSearchViewModelTest {
             Map.of(
                 "q",
                 List.of("a +&=\"#%日本😀"),
-                "log_type",
+                LOG_TYPE_FIELD_NAME,
                 List.of("SYSTEM"),
-                "action",
+                ACTION_FIELD_NAME,
                 List.of("A&B"),
-                "path",
+                PATH_FIELD_NAME,
                 List.of("x/y?"),
-                "level",
+                LEVEL_FIELD_NAME,
                 List.of("ERROR"),
-                "from",
+                FROM_FIELD_NAME,
                 List.of("2026-09-01T09:00:00.001"),
                 "to",
                 List.of("2026-09-02T10:00"),
-                "page",
+                PAGE_KEY,
                 List.of("2")));
     String prefix =
         "/logs?q=a%20%2B%26%3D%22%23%25%E6%97%A5%E6%9C%AC%F0%9F%98%80"
@@ -208,37 +216,46 @@ class LogSearchViewModelTest {
             Map.of(
                 "q",
                 List.of("a".repeat(257)),
-                "log_type",
+                LOG_TYPE_FIELD_NAME,
                 List.of("wrong"),
-                "action",
+                ACTION_FIELD_NAME,
                 List.of("b".repeat(65)),
-                "path",
+                PATH_FIELD_NAME,
                 List.of("c".repeat(257)),
-                "level",
+                LEVEL_FIELD_NAME,
                 List.of("bad"),
-                "from",
+                FROM_FIELD_NAME,
                 List.of("bad"),
                 "to",
                 List.of("bad"),
-                "page",
+                PAGE_KEY,
                 List.of("+1"),
                 "unknown-private",
                 List.of("private")));
     var v = LogSearchViewModel.invalid(admin(), f);
     assertEquals(
-        List.of("form", "q", "log_type", "action", "path", "level", "from", "to", "page"),
+        List.of(
+            "form",
+            "q",
+            LOG_TYPE_FIELD_NAME,
+            ACTION_FIELD_NAME,
+            PATH_FIELD_NAME,
+            LEVEL_FIELD_NAME,
+            FROM_FIELD_NAME,
+            "to",
+            PAGE_KEY),
         v.getErrors().stream().map(LogSearchViewModel.FieldError::getName).toList());
     assertEquals(
         List.of(
             "入力項目を確認してください。",
             "メッセージはUTF-8で256 byte以内にしてください。",
-            "入力値を確認してください。",
+            INVALID_INPUT_MESSAGE,
             "アクションはUTF-8で64 byte以内にしてください。",
             "パスはUTF-8で256 byte以内にしてください。",
-            "入力値を確認してください。",
-            "入力値を確認してください。",
-            "入力値を確認してください。",
-            "入力値を確認してください。"),
+            INVALID_INPUT_MESSAGE,
+            INVALID_INPUT_MESSAGE,
+            INVALID_INPUT_MESSAGE,
+            INVALID_INPUT_MESSAGE),
         v.getErrors().stream().map(LogSearchViewModel.FieldError::getMessage).toList());
     assertEquals("a".repeat(257), v.getFilters().getQ());
     assertTrue(v.getResults().isEmpty());
@@ -252,7 +269,7 @@ class LogSearchViewModelTest {
             admin(),
             LogSearchForm.bind(
                 Map.of(
-                    "from",
+                    FROM_FIELD_NAME,
                     List.of("2026-09-01T00:00"),
                     "to",
                     List.of("2026-10-02T00:00:00.001"))));
@@ -308,7 +325,14 @@ class LogSearchViewModelTest {
         Set.of("topBar", "filters", "errors", "results", "previousHref", "nextHref"),
         properties(LogSearchViewModel.class));
     assertEquals(
-        Set.of("q", "logType", "action", "path", "level", "from", "to"),
+        Set.of(
+            "q",
+            "logType",
+            ACTION_FIELD_NAME,
+            PATH_FIELD_NAME,
+            LEVEL_FIELD_NAME,
+            FROM_FIELD_NAME,
+            "to"),
         properties(LogSearchViewModel.Filters.class));
     assertEquals(Set.of("name", "message"), properties(LogSearchViewModel.FieldError.class));
     String text = "<script>\"&'😀";

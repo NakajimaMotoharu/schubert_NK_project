@@ -42,13 +42,21 @@ import org.thymeleaf.templateresolver.StringTemplateResolver;
 
 /** Independent Current/UI/SS literal oracles; PG200/015014/PT-WEB222..229. */
 class ScenarioSearchViewModelTest {
+  private static final String PAGE_KEY = "page";
+  private static final String GAME_FIELD_NAME = "game";
+  private static final String SPEAKER_FIELD_NAME = "speaker";
+  private static final String CHAPTER_FIELD_NAME = "chapter";
+  private static final String ENTRY_TYPE_FIELD_NAME = "entry_type";
+  private static final String VOICE_FIELD_NAME = "voice";
+  private static final String INVALID_INPUT_MESSAGE = "入力値を確認してください。";
+
   private static SessionPrincipal actor(String name, UserRole role) {
     return new SessionPrincipal(
         name, role, AuthenticationContext.of("a".repeat(64)), Instant.EPOCH);
   }
 
   private static ScenarioSearchForm form(String q, String page) {
-    return ScenarioSearchForm.bind(Map.of("q", List.of(q), "page", List.of(page)));
+    return ScenarioSearchForm.bind(Map.of("q", List.of(q), PAGE_KEY, List.of(page)));
   }
 
   private static List<GameRecord> games() {
@@ -111,15 +119,15 @@ class ScenarioSearchViewModelTest {
               Map.of(
                   "q",
                   List.of("本文"),
-                  "game",
+                  GAME_FIELD_NAME,
                   List.of("NUKITASHI2"),
-                  "speaker",
+                  SPEAKER_FIELD_NAME,
                   List.of("乙"),
-                  "chapter",
+                  CHAPTER_FIELD_NAME,
                   List.of("章"),
-                  "entry_type",
+                  ENTRY_TYPE_FIELD_NAME,
                   List.of("dialogue"),
-                  "voice",
+                  VOICE_FIELD_NAME,
                   List.of("with")));
       var v =
           ScenarioSearchViewModel.success(
@@ -182,17 +190,17 @@ class ScenarioSearchViewModelTest {
             Map.of(
                 "q",
                 List.of("a +&=\"#%日本😀"),
-                "game",
+                GAME_FIELD_NAME,
                 List.of("NUKITASHI1"),
-                "speaker",
+                SPEAKER_FIELD_NAME,
                 List.of("A&B"),
-                "chapter",
+                CHAPTER_FIELD_NAME,
                 List.of("x/y?"),
-                "entry_type",
+                ENTRY_TYPE_FIELD_NAME,
                 List.of("narration"),
-                "voice",
+                VOICE_FIELD_NAME,
                 List.of("without"),
-                "page",
+                PAGE_KEY,
                 List.of("2")));
     var v = view(f, 2, 201);
     String prefix =
@@ -255,34 +263,42 @@ class ScenarioSearchViewModelTest {
             Map.of(
                 "q",
                 List.of("a".repeat(257)),
-                "speaker",
+                SPEAKER_FIELD_NAME,
                 List.of("b".repeat(129)),
-                "chapter",
+                CHAPTER_FIELD_NAME,
                 List.of("c".repeat(257)),
-                "game",
+                GAME_FIELD_NAME,
                 List.of("wrong"),
-                "entry_type",
+                ENTRY_TYPE_FIELD_NAME,
                 List.of("unknown"),
-                "voice",
+                VOICE_FIELD_NAME,
                 List.of("bad"),
-                "page",
+                PAGE_KEY,
                 List.of("+1"),
                 "unknown-private-name",
                 List.of("private")));
     var v = ScenarioSearchViewModel.invalid(actor("r", UserRole.ADMIN), f);
     assertEquals(
-        List.of("form", "q", "game", "speaker", "chapter", "entry_type", "voice", "page"),
+        List.of(
+            "form",
+            "q",
+            GAME_FIELD_NAME,
+            SPEAKER_FIELD_NAME,
+            CHAPTER_FIELD_NAME,
+            ENTRY_TYPE_FIELD_NAME,
+            VOICE_FIELD_NAME,
+            PAGE_KEY),
         v.getErrors().stream().map(ScenarioSearchViewModel.FieldError::getName).toList());
     assertEquals(
         List.of(
             "入力項目を確認してください。",
             "本文はUTF-8で256 byte以内にしてください。",
-            "入力値を確認してください。",
+            INVALID_INPUT_MESSAGE,
             "話者はUTF-8で128 byte以内にしてください。",
             "章タイトルはUTF-8で256 byte以内にしてください。",
-            "入力値を確認してください。",
-            "入力値を確認してください。",
-            "入力値を確認してください。"),
+            INVALID_INPUT_MESSAGE,
+            INVALID_INPUT_MESSAGE,
+            INVALID_INPUT_MESSAGE),
         v.getErrors().stream().map(ScenarioSearchViewModel.FieldError::getMessage).toList());
     assertEquals("a".repeat(257), v.getFilters().getQ());
     assertEquals(List.of("wrong"), v.getGames());
@@ -391,7 +407,13 @@ class ScenarioSearchViewModelTest {
             "nextHref"));
     beans(
         ScenarioSearchViewModel.Filters.class,
-        Set.of("q", "game", "speaker", "chapter", "entryType", "voice"));
+        Set.of(
+            "q",
+            GAME_FIELD_NAME,
+            SPEAKER_FIELD_NAME,
+            CHAPTER_FIELD_NAME,
+            "entryType",
+            VOICE_FIELD_NAME));
     beans(ScenarioSearchViewModel.FieldError.class, Set.of("name", "message"));
     var v = view(form("<script>&\"", "1"), 1, 101);
     assertEquals("ScenarioSearchViewModel[REDACTED]", v.toString());
@@ -401,7 +423,7 @@ class ScenarioSearchViewModelTest {
     var engine = new SpringTemplateEngine();
     engine.setTemplateResolver(new StringTemplateResolver());
     var context = new Context();
-    context.setVariable("page", v);
+    context.setVariable(PAGE_KEY, v);
     var doc =
         Jsoup.parse(
             engine.process(

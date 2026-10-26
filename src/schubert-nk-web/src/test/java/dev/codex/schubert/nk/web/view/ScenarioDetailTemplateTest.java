@@ -49,6 +49,16 @@ import org.thymeleaf.spring6.view.ThymeleafViewResolver;
 
 /** Production template PT, not a registered detail endpoint: UI223,234/SS313/PG196/SCR017..024. */
 class ScenarioDetailTemplateTest {
+  private static final String SCENARIO_BODY_TEXT = "本文<&>";
+  private static final String SCENARIO_CHAPTER_TITLE = "章<script>";
+  private static final String READER_USERNAME = "reader";
+  private static final String HREF_ATTRIBUTE = "href";
+  private static final String INPUT_SELECTOR = "input";
+  private static final String SYNTHETIC_CSRF_TEXT = "csrf";
+  private static final String SCRIPT_ENTRY_SELECTOR = ".script-entry";
+  private static final String SCRIPT_BODY_SELECTOR = ".script-entry > p";
+  private static final String AUDIO_SELECTOR = "audio";
+
   private static ScenarioEntryRecord entry(long id, int sequence, int audio, String body) {
     return new ScenarioEntryRecord(
         new EntryId(id),
@@ -67,8 +77,8 @@ class ScenarioDetailTemplateTest {
   private static List<ScenarioEntryRecord> entries() {
     return List.of(
         entry(9, 1, 0, "地の文"),
-        entry(3, 2, 1, "本文<&>"),
-        entry(3, 2, 2, "本文<&>"),
+        entry(3, 2, 1, SCENARIO_BODY_TEXT),
+        entry(3, 2, 2, SCENARIO_BODY_TEXT),
         entry(7, 3, 1, "最後"));
   }
 
@@ -84,7 +94,7 @@ class ScenarioDetailTemplateTest {
         new ScenarioDetailResponseData(
             new ScriptFileId(23),
             game,
-            "章<script>",
+            SCENARIO_CHAPTER_TITLE,
             DisplayPath.of("文章/01.txt"),
             previous ? Optional.of(new ScriptFileId(1)) : Optional.empty(),
             previous ? Optional.of("前章<&>") : Optional.empty(),
@@ -109,7 +119,7 @@ class ScenarioDetailTemplateTest {
   }
 
   private static ScenarioDetailViewModel page(List<ScenarioEntryRecord> records) {
-    return page("reader", UserRole.USER, GameCode.NUKITASHI_1, true, true, records);
+    return page(READER_USERNAME, UserRole.USER, GameCode.NUKITASHI_1, true, true, records);
   }
 
   private static AnnotationConfigWebApplicationContext context() {
@@ -151,28 +161,29 @@ class ScenarioDetailTemplateTest {
               Jsoup.parse(
                   render(
                       context,
-                      page("reader", role, game, false, false, entries()),
+                      page(READER_USERNAME, role, game, false, false, entries()),
                       "synthetic-csrf"));
           assertEquals("ja", dom.select("html").attr("lang"));
-          assertEquals("章<script>", dom.title());
-          assertEquals("章<script>", dom.select("h1").text());
+          assertEquals(SCENARIO_CHAPTER_TITLE, dom.title());
+          assertEquals(SCENARIO_CHAPTER_TITLE, dom.select("h1").text());
           assertEquals(
               (game == GameCode.NUKITASHI_1 ? "NUKITASHI1" : "NUKITASHI2") + " / 文章/01.txt",
               dom.select(".subtitle").text());
           assertEquals("schubert NK", dom.select(".brand").text());
-          assertEquals("reader", dom.select(".login-user").text());
+          assertEquals(READER_USERNAME, dom.select(".login-user").text());
           assertEquals(role == UserRole.USER ? "USER" : "ADMIN", dom.select(".login-role").text());
           assertEquals(
               List.of("/", "/notifications", "/scenarios", "/search"),
-              dom.select(".nav-links a").eachAttr("href"));
+              dom.select(".nav-links a").eachAttr(HREF_ATTRIBUTE));
           assertEquals(List.of("メニュー", "通知", "一覧", "検索"), dom.select(".nav-links a").eachText());
           assertEquals("post", dom.select("form.logout-form").attr("method"));
           assertEquals("/logout", dom.select("form").attr("action"));
-          assertEquals(1, dom.select("input").size());
-          assertEquals("hidden", dom.select("input").attr("type"));
-          assertEquals("_csrf", dom.select("input").attr("name"));
-          assertEquals("synthetic-csrf", dom.select("input").attr("value"));
-          assertEquals("/css/schubert.css", dom.select("link[rel=stylesheet]").attr("href"));
+          assertEquals(1, dom.select(INPUT_SELECTOR).size());
+          assertEquals("hidden", dom.select(INPUT_SELECTOR).attr("type"));
+          assertEquals("_csrf", dom.select(INPUT_SELECTOR).attr("name"));
+          assertEquals("synthetic-csrf", dom.select(INPUT_SELECTOR).attr("value"));
+          assertEquals(
+              "/css/schubert.css", dom.select("link[rel=stylesheet]").attr(HREF_ATTRIBUTE));
           assertEquals(1, dom.select("main.page.scenario-page").size());
         }
     }
@@ -188,8 +199,13 @@ class ScenarioDetailTemplateTest {
                   render(
                       context,
                       page(
-                          "reader", UserRole.USER, GameCode.NUKITASHI_1, previous, next, List.of()),
-                      "csrf"));
+                          READER_USERNAME,
+                          UserRole.USER,
+                          GameCode.NUKITASHI_1,
+                          previous,
+                          next,
+                          List.of()),
+                      SYNTHETIC_CSRF_TEXT));
           var navs = dom.select(".scenario-nav");
           assertEquals(2, navs.size());
           assertEquals(
@@ -201,8 +217,8 @@ class ScenarioDetailTemplateTest {
             assertEquals(next ? "次: 次章" : "次: なし", nav.child(1).text());
             assertEquals(previous ? "a" : "span", nav.child(0).tagName());
             assertEquals(next ? "a" : "span", nav.child(1).tagName());
-            assertEquals(previous ? "/scenarios/1" : "", nav.child(0).attr("href"));
-            assertEquals(next ? "/scenarios/999999999999" : "", nav.child(1).attr("href"));
+            assertEquals(previous ? "/scenarios/1" : "", nav.child(0).attr(HREF_ATTRIBUTE));
+            assertEquals(next ? "/scenarios/999999999999" : "", nav.child(1).attr(HREF_ATTRIBUTE));
           }
           assertTrue(navs.get(1).hasClass("bottom-nav"));
         }
@@ -212,10 +228,11 @@ class ScenarioDetailTemplateTest {
   @Test
   void detail019EntriesAndVoices() throws Exception {
     try (var context = context()) {
-      var dom = Jsoup.parse(render(context, page(entries()), "csrf"));
-      var articles = dom.select(".script-entry");
+      var dom = Jsoup.parse(render(context, page(entries()), SYNTHETIC_CSRF_TEXT));
+      var articles = dom.select(SCRIPT_ENTRY_SELECTOR);
       assertEquals(List.of("entry-9", "entry-3", "entry-7"), articles.eachAttr("id"));
-      assertEquals(List.of("地の文", "本文<&>", "最後"), dom.select(".script-entry > p").eachText());
+      assertEquals(
+          List.of("地の文", SCENARIO_BODY_TEXT, "最後"), dom.select(SCRIPT_BODY_SELECTOR).eachText());
       assertTrue(articles.get(0).hasClass("narration"));
       assertTrue(articles.get(1).hasClass("dialogue"));
       assertEquals(List.of("11"), articles.get(0).select(".line-meta span").eachText());
@@ -224,14 +241,14 @@ class ScenarioDetailTemplateTest {
       assertEquals(2, articles.get(1).select(".audio").size());
       assertEquals(
           List.of("/audio/3001", "/audio/3002", "/audio/7001"),
-          dom.select("audio").eachAttr("src"));
+          dom.select(AUDIO_SELECTOR).eachAttr("src"));
       assertEquals(
           List.of("/audio/3001/download", "/audio/3002/download", "/audio/7001/download"),
-          dom.select("a.download").eachAttr("href"));
+          dom.select("a.download").eachAttr(HREF_ATTRIBUTE));
       assertEquals(List.of("DL", "DL", "DL"), dom.select("a.download").eachText());
       assertEquals(
           List.of("音声/3-1.ogg", "音声/3-2.ogg", "音声/7-1.ogg"), dom.select(".audio span").eachText());
-      for (var audio : dom.select("audio")) {
+      for (var audio : dom.select(AUDIO_SELECTOR)) {
         assertTrue(audio.hasAttr("controls"));
         assertEquals("none", audio.attr("preload"));
       }
@@ -241,12 +258,12 @@ class ScenarioDetailTemplateTest {
   @Test
   void detail020EmptyScenario() throws Exception {
     try (var context = context()) {
-      var dom = Jsoup.parse(render(context, page(List.of()), "csrf"));
+      var dom = Jsoup.parse(render(context, page(List.of()), SYNTHETIC_CSRF_TEXT));
       assertEquals(1, dom.select(".script-body").size());
       assertEquals("", dom.select(".script-body").text());
       assertTrue(dom.select("article,audio,.empty").isEmpty());
       assertEquals(2, dom.select(".scenario-nav").size());
-      assertEquals("章<script>", dom.select("h1").text());
+      assertEquals(SCENARIO_CHAPTER_TITLE, dom.select("h1").text());
     }
   }
 
@@ -257,17 +274,17 @@ class ScenarioDetailTemplateTest {
           render(
               context,
               page("reader<img>", UserRole.ADMIN, GameCode.NUKITASHI_2, true, true, entries()),
-              "csrf");
+              SYNTHETIC_CSRF_TEXT);
       var dom = Jsoup.parse(html);
       assertEquals("reader<img>", dom.select(".login-user").text());
-      assertEquals("本文<&>", dom.select(".script-entry > p").get(1).text());
+      assertEquals(SCENARIO_BODY_TEXT, dom.select(SCRIPT_BODY_SELECTOR).get(1).text());
       assertEquals("話者<img>", dom.select(".line-meta span").get(2).text());
       assertTrue(dom.select("script,style,img,iframe,object,embed,[style]").isEmpty());
       for (var element : dom.getAllElements())
         for (var attribute : element.attributes()) {
           assertFalse(attribute.getKey().startsWith("on"));
           assertFalse(attribute.getKey().startsWith("data-"));
-          if (Set.of("href", "src", "action").contains(attribute.getKey())) {
+          if (Set.of(HREF_ATTRIBUTE, "src", "action").contains(attribute.getKey())) {
             assertTrue(attribute.getValue().startsWith("/"));
             assertFalse(attribute.getValue().startsWith("//"));
           }
@@ -288,18 +305,18 @@ class ScenarioDetailTemplateTest {
     try (var context = context()) {
       var records = new ArrayList<ScenarioEntryRecord>();
       for (int i = 1; i <= 10000; i++) records.add(entry(i, i, 0, "本文" + i));
-      var dom = Jsoup.parse(render(context, page(records), "csrf"));
-      assertEquals(10000, dom.select(".script-entry").size());
-      assertEquals("本文1", dom.select(".script-entry > p").first().text());
-      assertEquals("本文10000", dom.select(".script-entry > p").last().text());
-      assertEquals("entry-10000", dom.select(".script-entry").last().id());
+      var dom = Jsoup.parse(render(context, page(records), SYNTHETIC_CSRF_TEXT));
+      assertEquals(10000, dom.select(SCRIPT_ENTRY_SELECTOR).size());
+      assertEquals("本文1", dom.select(SCRIPT_BODY_SELECTOR).first().text());
+      assertEquals("本文10000", dom.select(SCRIPT_BODY_SELECTOR).last().text());
+      assertEquals("entry-10000", dom.select(SCRIPT_ENTRY_SELECTOR).last().id());
       records.clear();
       for (int i = 1; i <= 999; i++) records.add(entry(7, 1, i, "一つの本文"));
-      dom = Jsoup.parse(render(context, page(records), "csrf"));
-      assertEquals(1, dom.select(".script-entry > p").size());
-      assertEquals("一つの本文", dom.select(".script-entry > p").text());
-      assertEquals(999, dom.select("audio").size());
-      assertEquals("/audio/7999", dom.select("audio").last().attr("src"));
+      dom = Jsoup.parse(render(context, page(records), SYNTHETIC_CSRF_TEXT));
+      assertEquals(1, dom.select(SCRIPT_BODY_SELECTOR).size());
+      assertEquals("一つの本文", dom.select(SCRIPT_BODY_SELECTOR).text());
+      assertEquals(999, dom.select(AUDIO_SELECTOR).size());
+      assertEquals("/audio/7999", dom.select(AUDIO_SELECTOR).last().attr("src"));
     }
   }
 
@@ -334,7 +351,7 @@ class ScenarioDetailTemplateTest {
         ".script-body",
         "display: grid; gap: 6px; background: #fff; border: 1px solid #dde1e6; border-radius: 8px; padding: 12px;");
     declarations.put(
-        ".script-entry",
+        SCRIPT_ENTRY_SELECTOR,
         "display: grid; grid-template-columns: 92px minmax(0, 1fr) 220px; gap: 12px; padding: 7px 0; border-bottom: 1px solid #edf0f4;");
     declarations.put(".script-entry:last-child", "border-bottom: 0;");
     declarations.put(
@@ -380,19 +397,19 @@ class ScenarioDetailTemplateTest {
                         render(
                             context,
                             page(
-                                "reader" + n,
+                                READER_USERNAME + n,
                                 UserRole.USER,
                                 GameCode.NUKITASHI_1,
                                 false,
                                 false,
                                 List.of(entry(n + 1, 1, 0, "本文" + n))),
-                            "csrf" + n))));
+                            SYNTHETIC_CSRF_TEXT + n))));
       }
       for (int i = 0; i < 64; i++) {
         var dom = tasks.get(i).get(10, TimeUnit.SECONDS);
-        assertEquals("reader" + i, dom.select(".login-user").text());
-        assertEquals("本文" + i, dom.select(".script-entry > p").text());
-        assertEquals("csrf" + i, dom.select("input[name=_csrf]").attr("value"));
+        assertEquals(READER_USERNAME + i, dom.select(".login-user").text());
+        assertEquals("本文" + i, dom.select(SCRIPT_BODY_SELECTOR).text());
+        assertEquals(SYNTHETIC_CSRF_TEXT + i, dom.select("input[name=_csrf]").attr("value"));
       }
       Path root = Path.of("target/scenario-screen-traces");
       Files.createDirectories(root);

@@ -37,9 +37,12 @@ import org.thymeleaf.templateresolver.StringTemplateResolver;
 
 /** Independent literal oracles: PG198/FUN003/UI223,234/SS313/015010/PT-WEB206..213. */
 class ScenarioSearchResultsViewModelTest {
+  private static final String READER_USERNAME = "reader";
+  private static final String SCENARIO_BODY_TEXT = "本文<&>";
+
   private static SessionPrincipal actor(UserRole role) {
     return new SessionPrincipal(
-        "reader", role, AuthenticationContext.of("a".repeat(64)), Instant.EPOCH);
+        READER_USERNAME, role, AuthenticationContext.of("a".repeat(64)), Instant.EPOCH);
   }
 
   private static ScenarioSearchRecord record(long id, boolean voice) {
@@ -51,7 +54,7 @@ class ScenarioSearchResultsViewModelTest {
         voice ? EntryType.DIALOGUE : EntryType.NARRATION,
         GameCode.NUKITASHI_1,
         17,
-        "本文<&>");
+        SCENARIO_BODY_TEXT);
   }
 
   private static ScenarioSearchRecord record(
@@ -92,10 +95,10 @@ class ScenarioSearchResultsViewModelTest {
       for (var game : GameCode.values()) {
         var records =
             List.of(
-                record(9, true, true, true, EntryType.DIALOGUE, game, 17, "本文<&>"),
+                record(9, true, true, true, EntryType.DIALOGUE, game, 17, SCENARIO_BODY_TEXT),
                 record(3, false));
         var result = ScenarioSearchResultsViewModel.from(actor(role), data(2), records);
-        assertEquals("reader", result.getTopBar().getUsername());
+        assertEquals(READER_USERNAME, result.getTopBar().getUsername());
         assertEquals(role == UserRole.USER ? "USER" : "ADMIN", result.getTopBar().getRole());
         assertEquals(
             List.of(9L, 3L),
@@ -107,7 +110,7 @@ class ScenarioSearchResultsViewModelTest {
         assertEquals(17, row.getLineNumber());
         assertEquals("セリフ", row.getEntryTypeLabel());
         assertEquals("話者<img>", row.getSpeaker());
-        assertEquals("本文<&>", row.getBody());
+        assertEquals(SCENARIO_BODY_TEXT, row.getBody());
         assertEquals("文章/01.txt", row.getScriptDisplayPath());
         assertEquals("/scenarios/23#entry-9", row.getScenarioHref());
         var audio = row.getAudio().orElseThrow();
@@ -251,7 +254,7 @@ class ScenarioSearchResultsViewModelTest {
     var result = page(input);
     input.clear();
     assertEquals(1, result.getRows().size());
-    assertEquals("本文<&>", result.getRows().getFirst().getBody());
+    assertEquals(SCENARIO_BODY_TEXT, result.getRows().getFirst().getBody());
     assertThrows(UnsupportedOperationException.class, () -> result.getRows().clear());
   }
 
@@ -309,7 +312,7 @@ class ScenarioSearchResultsViewModelTest {
                 context));
     assertEquals("章<script>", dom.select("h2").first().text());
     assertEquals("話者<img>", dom.select("span").first().text());
-    assertEquals(List.of("本文<&>", "本文<&>"), dom.select("p").eachText());
+    assertEquals(List.of(SCENARIO_BODY_TEXT, SCENARIO_BODY_TEXT), dom.select("p").eachText());
     assertTrue(dom.select("script,img").isEmpty());
     assertEquals(
         List.of("/scenarios/23#entry-9", "/scenarios/23#entry-3"),
@@ -328,7 +331,7 @@ class ScenarioSearchResultsViewModelTest {
                 () ->
                     ScenarioSearchResultsViewModel.from(
                         new SessionPrincipal(
-                            "reader" + n,
+                            READER_USERNAME + n,
                             UserRole.USER,
                             AuthenticationContext.of("b".repeat(64)),
                             Instant.EPOCH),
@@ -346,7 +349,7 @@ class ScenarioSearchResultsViewModelTest {
       }
       for (int i = 0; i < 64; i++) {
         var result = tasks.get(i).get(10, TimeUnit.SECONDS);
-        assertEquals("reader" + i, result.getTopBar().getUsername());
+        assertEquals(READER_USERNAME + i, result.getTopBar().getUsername());
         assertEquals("本文" + i, result.getRows().getFirst().getBody());
         assertEquals(i + 1, result.getRows().getFirst().getEntryId());
       }

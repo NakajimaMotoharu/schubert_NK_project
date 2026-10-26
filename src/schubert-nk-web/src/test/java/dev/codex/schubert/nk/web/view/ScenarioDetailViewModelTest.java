@@ -41,9 +41,12 @@ import org.thymeleaf.templateresolver.StringTemplateResolver;
 
 /** Independent literals: PG195/UI223,234/SS313,333/015008/PT-WEB194..205. */
 class ScenarioDetailViewModelTest {
+  private static final String READER_USERNAME = "reader";
+  private static final String SCENARIO_BODY_TEXT = "本文<&>";
+
   private static SessionPrincipal actor() {
     return new SessionPrincipal(
-        "reader",
+        READER_USERNAME,
         UserRole.USER,
         AuthenticationContext.of("a".repeat(64)),
         Instant.parse("2026-09-20T00:00:00Z"));
@@ -101,8 +104,8 @@ class ScenarioDetailViewModelTest {
   private static List<ScenarioEntryRecord> records() {
     return List.of(
         entry(9, 1, 0, "地の文"),
-        entry(3, 2, 1, "本文<&>"),
-        entry(3, 2, 2, "本文<&>"),
+        entry(3, 2, 1, SCENARIO_BODY_TEXT),
+        entry(3, 2, 2, SCENARIO_BODY_TEXT),
         entry(7, 3, 1, "最後"));
   }
 
@@ -143,14 +146,14 @@ class ScenarioDetailViewModelTest {
                     base.fileRecordCount());
             var actor =
                 new SessionPrincipal(
-                    "reader", role, AuthenticationContext.of("a".repeat(64)), Instant.EPOCH);
+                    READER_USERNAME, role, AuthenticationContext.of("a".repeat(64)), Instant.EPOCH);
             var view = ScenarioDetailViewModel.from(actor, input, List.of());
             assertEquals(23, view.getId());
             assertEquals(
                 game == GameCode.NUKITASHI_1 ? "NUKITASHI1" : "NUKITASHI2", view.getGame());
             assertEquals("章<script>", view.getTitle());
             assertEquals("文章/01.txt", view.getDisplayPath());
-            assertEquals("reader", view.getTopBar().getUsername());
+            assertEquals(READER_USERNAME, view.getTopBar().getUsername());
             assertEquals(role == UserRole.USER ? "USER" : "ADMIN", view.getTopBar().getRole());
             assertEquals(before, view.getPrevious().isPresent());
             assertEquals(after, view.getNext().isPresent());
@@ -175,7 +178,7 @@ class ScenarioDetailViewModelTest {
     assertEquals(
         List.of(9L, 3L, 7L), entries.stream().map(ScenarioDetailViewModel.Entry::getId).toList());
     assertEquals(
-        List.of("地の文", "本文<&>", "最後"),
+        List.of("地の文", SCENARIO_BODY_TEXT, "最後"),
         entries.stream().map(ScenarioDetailViewModel.Entry::getBody).toList());
     assertEquals(
         List.of(1, 2, 3),
@@ -374,7 +377,7 @@ class ScenarioDetailViewModelTest {
     var dom = Jsoup.parse(html);
     assertEquals("章<script>", dom.selectFirst("h1").text());
     assertTrue(dom.select("script,img").isEmpty());
-    assertEquals(List.of("地の文", "本文<&>", "最後"), dom.select("article p").eachText());
+    assertEquals(List.of("地の文", SCENARIO_BODY_TEXT, "最後"), dom.select("article p").eachText());
     assertEquals(
         List.of("/audio/31", "/audio/32", "/audio/71"), dom.select("article a").eachAttr("href"));
     assertEquals(List.of("entry-9", "entry-3", "entry-7"), dom.select("article").eachAttr("id"));
@@ -391,7 +394,7 @@ class ScenarioDetailViewModelTest {
                 () ->
                     ScenarioDetailViewModel.from(
                         new SessionPrincipal(
-                            "reader" + n,
+                            READER_USERNAME + n,
                             UserRole.USER,
                             AuthenticationContext.of("b".repeat(64)),
                             Instant.EPOCH),
@@ -400,7 +403,7 @@ class ScenarioDetailViewModelTest {
       }
       for (int i = 0; i < 64; i++) {
         var result = tasks.get(i).get(10, TimeUnit.SECONDS);
-        assertEquals("reader" + i, result.getTopBar().getUsername());
+        assertEquals(READER_USERNAME + i, result.getTopBar().getUsername());
         assertEquals("本文" + i, result.getEntries().getFirst().getBody());
         assertEquals(i + 1, result.getEntries().getFirst().getId());
       }
