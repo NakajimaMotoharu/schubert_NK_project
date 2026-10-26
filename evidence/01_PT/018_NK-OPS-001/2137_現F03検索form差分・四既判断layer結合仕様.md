@@ -1,0 +1,13 @@
+# 現F03・検索form差分と四既判断layerの結合仕様
+
+WBS-F03、群CURRENT_F03_FORM_DELTA_AND_PRIOR_LAYERS_V1、開始0.5/2/5pp cap10、fresh共有使用22/残78/reset1793599188。source e7c2e2c89c41dcfced875a7fd480e6fc96da0ca6、Main21d不変。元10690/9409と10834/9305→10910/9248の歴史indexを保持し、既10916/22/28/34の38判断を再実行せず原ID・SHAへ結合する。
+
+TC2137-01：当10950/元10892の全1810Javaの差がform Test二だけ/他1808不変、両sourceの正常元run hashを固定。Main/contextの現SHA不変を確認し旧source/PTを現sourceへ再割当しない。
+
+TC2137-02：当10952 XML四warningの全非座標属性/messageを原二Testの17rowへ一意対応、行/columnは新実測へ保持し、原ID・raw SHAを保存。13 duplicateの消滅は当PG是正済みで再計上0。THREAD四は当10956の有限自己所有fixtureと16PT・元sourceの局所文脈へ差替え、旧THREAD参照との二重加算0。
+
+TC2137-03：四既判断layerの38IDは相互非重複かつ元indexに未参照で、Main現SHA/rule/原raw row一致。既runtime全sourceを当source成功へ移植せずcurrentWholePendingを保持する。前9248/参照2724/未参照6524からの数値を独立集合算で確認、未参照を真の障害数・未review数にしない。
+
+TC2137-04：10968は小deltaと既proof参照だけを保存（全9305rowコピー/解析/PT再演0）。10970独立postは原9409ID集合と各除去scope/原XML/各layerの集合・current入力から計数し、source偽装/ID欠落重複/原担当とは無関係な動的成功/旧exec移植/虚偽coverageを拒否する。派生集計合格を全F03/451/正式受入へ加算しない。
+
+commandはpyflakes成功後10968、次に10970。証跡はevidence/provisional同番号、branch/source/時刻/実command/hashと実終了をmanifestへ記録。全安全HOLD/保留二工具の未読保証不明1847/QA051final/正式1964-53/17-190/工数nullを維持する。通常小群・commitで停止せず残PG/PTへ継続。
