@@ -1,0 +1,18 @@
+{
+  "CompareObjectsWithEquals": {
+    "description": "Use `equals()` to compare object references; avoid comparing them with `==`.\n\nSince comparing objects with named constants is useful in some cases (eg, when\ndefining constants for sentinel values), the rule ignores comparisons against\nfields with all-caps name (eg `this == SENTINEL`), which is a common naming\nconvention for constant fields.\n\nYou may allow some types to be compared by reference by listing the exceptions\nin the `typesThatCompareByReference` property.",
+    "resource": "category/java/errorprone.xml"
+  },
+  "DoNotUseThreads": {
+    "description": "The J2EE specification explicitly forbids the use of threads. Threads are resources, that should be managed and monitored by the J2EE server.\nIf the application creates threads on its own or uses own custom thread pools, then these threads are not managed, which could lead to resource exhaustion.\nAlso, EJBs might be moved between machines in a cluster and only managed resources can be moved along.",
+    "resource": "category/java/multithreading.xml"
+  },
+  "NullAssignment": {
+    "description": "Assigning a \"null\" to a variable (outside of its declaration) is usually bad form.  Sometimes, this type\nof assignment is an indication that the programmer doesn't completely understand what is going on in the code.\n\nNOTE: This sort of assignment may used in some cases to dereference objects and encourage garbage collection.",
+    "resource": "category/java/errorprone.xml"
+  },
+  "UseConcurrentHashMap": {
+    "description": "Since Java5 brought a new implementation of the Map designed for multi-threaded access, you can\nperform efficient map reads without blocking other threads.",
+    "resource": "category/java/multithreading.xml"
+  }
+}

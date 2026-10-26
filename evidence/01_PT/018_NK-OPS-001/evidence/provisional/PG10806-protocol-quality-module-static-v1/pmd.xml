@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pmd xmlns="http://pmd.sourceforge.net/report/2.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pmd.sourceforge.net/report/2.0.0 https://pmd.github.io/schema/report_2_0_0.xsd" version="7.28.0" timestamp="2026-10-27T04:14:03.309">
+<file name="/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/PayloadCodec.java">
+<violation beginline="169" endline="169" begincolumn="29" endcolumn="59" rule="UseConcurrentHashMap" ruleset="Multithreading" package="dev.codex.schubert.nk.protocol.codec" class="PayloadCodec" method="decodeArea" variable="values" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap" priority="3">
+If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation
+</violation>
+</file>
+<file name="/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/transport/FailedJmsIsolationException.java">
+<violation beginline="22" endline="22" begincolumn="9" endcolumn="35" rule="CompareObjectsWithEquals" ruleset="Error Prone" package="dev.codex.schubert.nk.protocol.transport" class="FailedJmsIsolationException" method="FailedJmsIsolationException" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#compareobjectswithequals" priority="3">
+Use equals() to compare object references.
+</violation>
+</file>
+<file name="/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/transport/UnconfirmedJmsRollbackException.java">
+<violation beginline="18" endline="18" begincolumn="9" endcolumn="35" rule="CompareObjectsWithEquals" ruleset="Error Prone" package="dev.codex.schubert.nk.protocol.transport" class="UnconfirmedJmsRollbackException" method="UnconfirmedJmsRollbackException" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#compareobjectswithequals" priority="3">
+Use equals() to compare object references.
+</violation>
+</file>
+<file name="/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/PayloadGoldenVectorTest.java">
+<violation beginline="141" endline="141" begincolumn="25" endcolumn="56" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.protocol.codec" class="PayloadGoldenVectorTest" method="sharedCodecProducesIdenticalBytesUnderConcurrentUse" variable="executor" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="145" endline="150" begincolumn="13" endcolumn="19" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.protocol.codec" class="PayloadGoldenVectorTest" method="sharedCodecProducesIdenticalBytesUnderConcurrentUse" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+</file>
+<file name="/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/IndependentNamedFieldOracle.java">
+<violation beginline="86" endline="86" begincolumn="25" endcolumn="58" rule="UseConcurrentHashMap" ruleset="Multithreading" package="dev.codex.schubert.nk.protocol.layout" class="IndependentNamedFieldOracle" method="verifyAll" variable="accessors" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap" priority="3">
+If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation
+</violation>
+<violation beginline="91" endline="91" begincolumn="30" endcolumn="53" rule="UseConcurrentHashMap" ruleset="Multithreading" package="dev.codex.schubert.nk.protocol.layout" class="IndependentNamedFieldOracle" method="verifyAll" variable="areas" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap" priority="3">
+If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation
+</violation>
+<violation beginline="99" endline="99" begincolumn="30" endcolumn="56" rule="UseConcurrentHashMap" ruleset="Multithreading" package="dev.codex.schubert.nk.protocol.layout" class="IndependentNamedFieldOracle" method="verifyAll" variable="reviewed" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap" priority="3">
+If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation
+</violation>
+<violation beginline="185" endline="185" begincolumn="18" endcolumn="22" rule="NullAssignment" ruleset="Error Prone" package="dev.codex.schubert.nk.protocol.layout" class="IndependentNamedFieldOracle" method="verifyType" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#nullassignment" priority="3">
+Assigning an Object to null is a code smell.  Consider refactoring.
+</violation>
+<violation beginline="192" endline="192" begincolumn="33" endcolumn="68" rule="UseConcurrentHashMap" ruleset="Multithreading" package="dev.codex.schubert.nk.protocol.layout" class="IndependentNamedFieldOracle" method="verifyType" variable="absent" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap" priority="3">
+If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation
+</violation>
+</file>
+</pmd>
