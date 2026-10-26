@@ -423,115 +423,115 @@ class HeaderModelTest {
   }
 
   private static final class HeaderBuilder {
-    private String protocol = CommonHeader.PROTOCOL_IDENTIFIER;
-    private int headerVersion = 1;
-    private String layoutId = LOG_REQUEST_LAYOUT;
-    private int layoutVersion = 1;
-    private MessageKind kind = MessageKind.REQUEST;
-    private InteractionKind interaction = InteractionKind.SYNCHRONOUS;
-    private UUID correlationId = MESSAGE_ID;
-    private Instant sentAt = SENT_AT;
-    private Optional<AuthenticationContext> context = Optional.of(CONTEXT);
-    private int headerLength = 256;
-    private int dataLength;
-    private int recordLength;
-    private int recordCount;
-    private int totalLength = 256;
-    private Optional<ResultCode> result = Optional.empty();
+    private String protocolValue = CommonHeader.PROTOCOL_IDENTIFIER;
+    private int headerVersionValue = 1;
+    private String layoutIdValue = LOG_REQUEST_LAYOUT;
+    private int layoutVersionValue = 1;
+    private MessageKind kindValue = MessageKind.REQUEST;
+    private InteractionKind interactionValue = InteractionKind.SYNCHRONOUS;
+    private UUID correlationIdValue = MESSAGE_ID;
+    private Instant sentAtValue = SENT_AT;
+    private Optional<AuthenticationContext> contextValue = Optional.of(CONTEXT);
+    private int headerLengthValue = 256;
+    private int dataLengthValue;
+    private int recordLengthValue;
+    private int recordCountValue;
+    private int totalLengthValue = 256;
+    private Optional<ResultCode> resultValue = Optional.empty();
 
     HeaderBuilder protocol(String value) {
-      protocol = value;
+      protocolValue = value;
       return this;
     }
 
     HeaderBuilder headerVersion(int value) {
-      headerVersion = value;
+      headerVersionValue = value;
       return this;
     }
 
     HeaderBuilder layoutId(String value) {
-      layoutId = value;
+      layoutIdValue = value;
       return this;
     }
 
     HeaderBuilder layoutVersion(int value) {
-      layoutVersion = value;
+      layoutVersionValue = value;
       return this;
     }
 
     HeaderBuilder kind(MessageKind value) {
-      kind = value;
+      kindValue = value;
       return this;
     }
 
     HeaderBuilder interaction(InteractionKind value) {
-      interaction = value;
+      interactionValue = value;
       return this;
     }
 
     HeaderBuilder correlationId(UUID value) {
-      correlationId = value;
+      correlationIdValue = value;
       return this;
     }
 
     HeaderBuilder sentAt(Instant value) {
-      sentAt = value;
+      sentAtValue = value;
       return this;
     }
 
     HeaderBuilder context(Optional<AuthenticationContext> value) {
-      context = value;
+      contextValue = value;
       return this;
     }
 
     HeaderBuilder headerLength(int value) {
-      headerLength = value;
+      headerLengthValue = value;
       return this;
     }
 
     HeaderBuilder dataLength(int value) {
-      dataLength = value;
+      dataLengthValue = value;
       return this;
     }
 
     HeaderBuilder recordLength(int value) {
-      recordLength = value;
+      recordLengthValue = value;
       return this;
     }
 
     HeaderBuilder recordCount(int value) {
-      recordCount = value;
+      recordCountValue = value;
       return this;
     }
 
     HeaderBuilder totalLength(int value) {
-      totalLength = value;
+      totalLengthValue = value;
       return this;
     }
 
     HeaderBuilder result(Optional<ResultCode> value) {
-      result = value;
+      resultValue = value;
       return this;
     }
 
     CommonHeader build() {
       return new CommonHeader(
-          protocol,
-          headerVersion,
-          new LayoutId(layoutId),
-          layoutVersion,
-          kind,
-          interaction,
+          protocolValue,
+          headerVersionValue,
+          new LayoutId(layoutIdValue),
+          layoutVersionValue,
+          kindValue,
+          interactionValue,
           MESSAGE_ID,
-          correlationId,
-          sentAt,
-          context,
-          headerLength,
-          dataLength,
-          recordLength,
-          recordCount,
-          totalLength,
-          result);
+          correlationIdValue,
+          sentAtValue,
+          contextValue,
+          headerLengthValue,
+          dataLengthValue,
+          recordLengthValue,
+          recordCountValue,
+          totalLengthValue,
+          resultValue);
     }
   }
 }

@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HexFormat;
@@ -147,36 +148,37 @@ class LargeResultRecordCodecTest {
   }
 
   @Test
-  void acceptsTheDocumentedTenThousandRecordFortyEightMillionByteMaximum() {
+  void acceptsTheDocumentedTenThousandRecordFortyEightMillionByteMaximum() throws IOException {
     // UI237/SS333: independent fixed 4,800 * 10,000 = 48,000,000 byte contract (BUG1292).
     assertEquals(4_800, LargeResultDescriptor.RECORD_LENGTH);
     assertEquals(10_000, LargeResultDescriptor.MAXIMUM_RECORD_COUNT);
     assertEquals(48_000_000L, LargeResultDescriptor.MAXIMUM_BYTE_LENGTH);
     byte[] zeroRecord = new byte[4_800];
     String expectedHash = repeatedHash(zeroRecord, 10_000);
-    CountingOutputStream output = new CountingOutputStream();
-    LargeResultContent content =
-        assertDoesNotThrow(
-            () ->
-                LargeResultRecordCodec.write(
-                    output, java.util.Collections.nCopies(10_000, zeroRecord)));
-    assertEquals(48_000_000L, output.count);
-    assertEquals(48_000_000L, content.byteLength());
-    assertEquals(expectedHash, content.sha256());
+    try (CountingOutputStream output = new CountingOutputStream()) {
+      LargeResultContent content =
+          assertDoesNotThrow(
+              () ->
+                  LargeResultRecordCodec.write(
+                      output, java.util.Collections.nCopies(10_000, zeroRecord)));
+      assertEquals(48_000_000L, output.count);
+      assertEquals(48_000_000L, content.byteLength());
+      assertEquals(expectedHash, content.sha256());
 
-    LargeResultDescriptor descriptor =
-        assertDoesNotThrow(
-            () -> new LargeResultDescriptor(FILE_ID, PATH, 48_000_000L, expectedHash, 10_000));
-    List<byte[]> decoded =
-        assertDoesNotThrow(
-            () -> LargeResultRecordCodec.decode(new ZeroInputStream(48_000_000L), descriptor));
-    assertEquals(10_000, decoded.size());
-    assertArrayEquals(zeroRecord, decoded.getFirst());
-    assertArrayEquals(zeroRecord, decoded.getLast());
+      LargeResultDescriptor descriptor =
+          assertDoesNotThrow(
+              () -> new LargeResultDescriptor(FILE_ID, PATH, 48_000_000L, expectedHash, 10_000));
+      List<byte[]> decoded =
+          assertDoesNotThrow(
+              () -> LargeResultRecordCodec.decode(new ZeroInputStream(48_000_000L), descriptor));
+      assertEquals(10_000, decoded.size());
+      assertArrayEquals(zeroRecord, decoded.getFirst());
+      assertArrayEquals(zeroRecord, decoded.getLast());
+    }
   }
 
   @Test
-  void writeRejectsNullCountLengthAndIoFailure() {
+  void writeRejectsNullCountLengthAndIoFailure() throws IOException {
     byte[] valid = record((byte) 1);
     assertThrows(
         NullPointerException.class, () -> LargeResultRecordCodec.write(null, List.of(valid)));
@@ -199,7 +201,7 @@ class LargeResultRecordCodecTest {
     assertThrows(
         IllegalArgumentException.class,
         () -> LargeResultRecordCodec.write(new ByteArrayOutputStream(), List.of(new byte[4_799])));
-    OutputStream broken =
+    try (OutputStream broken =
         new OutputStream() {
           @Override
           public void write(int value) throws IOException {
@@ -210,13 +212,14 @@ class LargeResultRecordCodecTest {
           public void write(byte[] value) throws IOException {
             throw new IOException(IO_FAILURE_MESSAGE);
           }
-        };
-    assertThrows(
-        LargeResultIoException.class, () -> LargeResultRecordCodec.write(broken, List.of(valid)));
+        }) {
+      assertThrows(
+          LargeResultIoException.class, () -> LargeResultRecordCodec.write(broken, List.of(valid)));
+    }
   }
 
   @Test
-  void decodeRejectsTruncationExtraHashAndIoFailure() {
+  void decodeRejectsTruncationExtraHashAndIoFailure() throws IOException {
     byte[] record = record((byte) 3);
     LargeResultDescriptor valid = descriptor(1, hash(record));
     assertThrows(NullPointerException.class, () -> LargeResultRecordCodec.decode(null, valid));
@@ -236,7 +239,7 @@ class LargeResultRecordCodecTest {
     assertThrows(
         PermanentProtocolException.class,
         () -> LargeResultRecordCodec.decode(new ByteArrayInputStream(record), wrongHash));
-    InputStream broken =
+    try (InputStream broken =
         new InputStream() {
           @Override
           public int read() throws IOException {
@@ -247,24 +250,29 @@ class LargeResultRecordCodecTest {
           public int read(byte[] value, int offset, int length) throws IOException {
             throw new IOException(IO_FAILURE_MESSAGE);
           }
-        };
-    assertThrows(LargeResultIoException.class, () -> LargeResultRecordCodec.decode(broken, valid));
-    InputStream zeroThenEof =
-        new InputStream() {
-          @Override
-          public int read() {
-            return -1;
-          }
+        }) {
+      assertThrows(
+          LargeResultIoException.class, () -> LargeResultRecordCodec.decode(broken, valid));
+      try (InputStream zeroThenEof =
+          new InputStream() {
+            @Override
+            public int read() {
+              return -1;
+            }
 
-          @Override
-          public int read(byte[] value, int offset, int length) {
-            return 0;
-          }
-        };
-    assertThrows(
-        PermanentProtocolException.class, () -> LargeResultRecordCodec.decode(zeroThenEof, valid));
-    assertThrows(
-        IllegalStateException.class, () -> LargeResultRecordCodec.digestFor("not-an-algorithm"));
+            @Override
+            public int read(byte[] value, int offset, int length) {
+              return 0;
+            }
+          }) {
+        assertThrows(
+            PermanentProtocolException.class,
+            () -> LargeResultRecordCodec.decode(zeroThenEof, valid));
+        assertThrows(
+            IllegalStateException.class,
+            () -> LargeResultRecordCodec.digestFor("not-an-algorithm"));
+      }
+    }
   }
 
   @Test
@@ -301,7 +309,7 @@ class LargeResultRecordCodecTest {
   private static String hash(byte[] value) {
     try {
       return HexFormat.of().formatHex(MessageDigest.getInstance("SHA-256").digest(value));
-    } catch (Exception exception) {
+    } catch (NoSuchAlgorithmException exception) {
       throw new AssertionError(exception);
     }
   }
@@ -313,7 +321,7 @@ class LargeResultRecordCodecTest {
         digest.update(value);
       }
       return HexFormat.of().formatHex(digest.digest());
-    } catch (Exception exception) {
+    } catch (NoSuchAlgorithmException exception) {
       throw new AssertionError(exception);
     }
   }
@@ -375,7 +383,10 @@ class LargeResultRecordCodecTest {
 
     @Override
     public int read() {
-      return offset >= value.length ? -1 : Byte.toUnsignedInt(value[offset++]);
+      if (offset >= value.length) return -1;
+      int next = Byte.toUnsignedInt(value[offset]);
+      offset++;
+      return next;
     }
 
     @Override

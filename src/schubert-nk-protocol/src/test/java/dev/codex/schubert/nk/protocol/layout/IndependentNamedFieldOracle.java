@@ -33,6 +33,8 @@ import java.util.UUID;
  * values are not obtained from a Production method/generator.
  */
 final class IndependentNamedFieldOracle {
+  private static final int JST_WIRE_DIGITS = 17;
+  private static final int UUID_TEXT_LENGTH = 36;
   private static final String SEMANTIC = "dev.codex.schubert.nk.protocol.layout.semantic.";
   private static final Instant TIME = Instant.parse("2026-09-02T03:34:56Z");
   private static final DateTimeFormatter JST =
@@ -154,7 +156,8 @@ final class IndependentNamedFieldOracle {
         assertEquals(scalar, generic.getActualTypeArguments()[0], field.name());
         optionals++;
       }
-      FieldValue wire = independentWire(field, scalar, ++index);
+      index++;
+      FieldValue wire = independentWire(field, scalar, index);
       input.put(field.name(), wire);
       Object argument = independentInput(scalar, wire, index);
       arguments.add(field.optional() ? Optional.of(argument) : argument);
@@ -254,9 +257,9 @@ final class IndependentNamedFieldOracle {
     if (field.name().endsWith("relative path")) return Class.forName(SEMANTIC + "RelativePath");
     if (field.name().endsWith("display path") || field.name().equals("Display path"))
       return Class.forName(SEMANTIC + "DisplayPath");
-    if (field.length() == 17) return Instant.class;
+    if (field.length() == JST_WIRE_DIGITS) return Instant.class;
     if (field.wire().equals("N")) return field.length() <= 8 ? int.class : long.class;
-    if (field.length() == 36) return UUID.class;
+    if (field.length() == UUID_TEXT_LENGTH) return UUID.class;
     return String.class;
   }
 

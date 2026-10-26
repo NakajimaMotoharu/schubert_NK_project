@@ -22,6 +22,7 @@ import java.util.Set;
 import org.junit.jupiter.api.Test;
 
 class PayloadTypeCatalogTest {
+  private static final int UUID_TEXT_LENGTH = 36;
   private static final String VALUE_FIELD_NAME = "value";
   private static final String SAFE_TEXT = "safe";
 
@@ -51,7 +52,7 @@ class PayloadTypeCatalogTest {
                 Objects.requireNonNull(
                     getClass().getResourceAsStream("/protocol/named-types-ss323.tsv")),
                 StandardCharsets.UTF_8))) {
-      for (String line; (line = reader.readLine()) != null; ) {
+      for (String line = reader.readLine(); line != null; line = reader.readLine()) {
         if (line.startsWith("#")) {
           continue;
         }
@@ -334,7 +335,7 @@ class PayloadTypeCatalogTest {
     if (field.name().contains("SHA-256")) {
       return "a".repeat(64);
     }
-    if (field.length() == 36) {
+    if (field.length() == UUID_TEXT_LENGTH) {
       return "123e4567-e89b-12d3-a456-426614174000";
     }
     return switch (field.name()) {

@@ -191,7 +191,7 @@ class PayloadGoldenVectorTest {
                     PayloadGoldenVectorTest.class.getResourceAsStream(
                         "/protocol/payload-golden-ui234-236.tsv")),
                 StandardCharsets.UTF_8))) {
-      for (String line; (line = reader.readLine()) != null; ) {
+      for (String line = reader.readLine(); line != null; line = reader.readLine()) {
         if (line.startsWith("#")) {
           continue;
         }
