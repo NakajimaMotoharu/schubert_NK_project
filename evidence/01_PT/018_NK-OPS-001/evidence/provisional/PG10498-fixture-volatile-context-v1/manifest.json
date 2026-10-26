@@ -1,0 +1,59 @@
+{
+  "actualExit": 0,
+  "bug1837NamingIssueUnmodifiedAndOpen": true,
+  "contextsSha256": "609869aeb2dd98fed6b3e2adc968bb5beb2b02ab388066b8de23090ff5fb2433",
+  "controlFields": 10,
+  "currentContextuallyApplicableFindings": 0,
+  "currentPending": 0,
+  "effortPercent": null,
+  "externalActions": 0,
+  "formalUpdated": false,
+  "invocation": {
+    "actualPythonCommand": [
+      "python3",
+      "-B",
+      "tools/quality/pg10498_fixture_volatile_context.py"
+    ],
+    "arbitraryArgumentsRecorded": false,
+    "entrypointPath": "tools/quality/pg10498_fixture_volatile_context.py",
+    "entrypointSha256": "befe36febbe810a2cd3453eed419d956956c98ee327e0a9e9132a66f08a03a88",
+    "helperPath": "tools/quality/host_tool_invocation.py",
+    "helperSha256": "85d616a3db4ff47f4c95ae2e0dd57954bc2b09f28b8f2a685b986e5621545c46",
+    "libraryPath": "tools/quality/pg10498_fixture_volatile_context.py",
+    "librarySha256": "befe36febbe810a2cd3453eed419d956956c98ee327e0a9e9132a66f08a03a88",
+    "loadedProjectPythonSources": {
+      "tools/quality/g07_host_class_provenance_inputs.py": "a676cb3e4145177c3c243722d737592ce7d44c3f29cfe4f670662ef7651f046b",
+      "tools/quality/host_tool_invocation.py": "85d616a3db4ff47f4c95ae2e0dd57954bc2b09f28b8f2a685b986e5621545c46",
+      "tools/quality/pg10498_fixture_volatile_context.py": "befe36febbe810a2cd3453eed419d956956c98ee327e0a9e9132a66f08a03a88",
+      "tools/quality/public_java_digest_provenance.py": "dd47f8735a61ce849995633c3290a6ad047842ef3263829ce359db413778f7a0"
+    },
+    "provenance": "OBSERVED_SYS_ARGV_AND_ORIG_ARGV_NOT_RECONSTRUCTED"
+  },
+  "metadataNegativeVectors": [
+    "concurrent-control-write",
+    "read-modify-write",
+    "shared-fixture",
+    "self-mutation",
+    "nested-loss"
+  ],
+  "newAccepted": 0,
+  "originalDynamicPtStatus": "NOT_EXECUTED_HOLD",
+  "originalRawFindings": 26,
+  "previousPending": 10,
+  "productTestsExecuted": 0,
+  "rawSourceOrReportsChanged": false,
+  "source": "a82c44a678cce0ded7fda59cf84a2276ded51e30",
+  "sourceCount": 3,
+  "sourceHashes": {
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/AnimationControllerTest.java": "07410f3c8de092e17147a39204dd01dc0c0ba4ac876f5691025142c138821149",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/MusicControllerTest.java": "75966ac922fd19a134237bef7a74ddabe58d6a5dd9bafb146c80d5bdccdce556",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/ScenarioSearchControllerTest.java": "d69b62b4b963d98833832eff172b439836917e8a104b39f62cd6b53de6f2acc3"
+  },
+  "staticClassificationOnly": true,
+  "suppressionsAdded": false,
+  "targetClassLoading": 0,
+  "targetCompilation": 0,
+  "thread16PreviouslyContextual": true,
+  "whole451Accepted": false,
+  "wholeF03Accepted": false
+}

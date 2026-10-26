@@ -1,0 +1,503 @@
+[
+  {
+    "context": {
+      "concurrentControlWrites": 0,
+      "concurrentMethod": "animation064ConcurrentRequests",
+      "concurrentMethodStartLine": 560,
+      "controlFields": [
+        "code",
+        "count",
+        "responder"
+      ],
+      "disposition": "INTENTIONAL_INDIVIDUAL_TEST_CONTROL_PUBLICATION_NOT_PRODUCTION_SHARED_STATE",
+      "fixtureMethodControlWritesBeyondInitializers": 0,
+      "localFixturePerWritingMethod": true,
+      "readModifyWriteControls": 0,
+      "reflectionMutationPresent": false,
+      "scope": "Static individual-control visibility and read-only concurrency phase; no atomic aggregate transition is asserted and no dynamic execution/liveness certified.",
+      "writes": [
+        {
+          "field": "code",
+          "line": 150,
+          "method": "animation054SuccessAndWire",
+          "sourceLine": "f.code = code;"
+        },
+        {
+          "field": "count",
+          "line": 151,
+          "method": "animation054SuccessAndWire",
+          "sourceLine": "f.count = count;"
+        },
+        {
+          "field": "code",
+          "line": 208,
+          "method": "animation055ErrorMapping",
+          "sourceLine": "f.code = codes[i];"
+        },
+        {
+          "field": "code",
+          "line": 224,
+          "method": "animation056SessionInvalid",
+          "sourceLine": "f.code = \"0102\";"
+        },
+        {
+          "field": "responder",
+          "line": 250,
+          "method": "animation057MalformedAndTransport",
+          "sourceLine": "f.responder ="
+        },
+        {
+          "field": "responder",
+          "line": 277,
+          "method": "animation058ResponseBinding",
+          "sourceLine": "f.responder ="
+        },
+        {
+          "field": "responder",
+          "line": 335,
+          "method": "animation059NullAndUnknown",
+          "sourceLine": "f.responder ="
+        },
+        {
+          "field": "responder",
+          "line": 342,
+          "method": "animation059NullAndUnknown",
+          "sourceLine": "f.responder = f::standard;"
+        },
+        {
+          "field": "code",
+          "line": 343,
+          "method": "animation059NullAndUnknown",
+          "sourceLine": "f.code = \"9000\";"
+        },
+        {
+          "field": "code",
+          "line": 356,
+          "method": "animation059NullAndUnknown",
+          "sourceLine": "f.code = FIXTURE_SUCCESS_CODE;"
+        },
+        {
+          "field": "code",
+          "line": 456,
+          "method": "animation061RealHttpSecurity",
+          "sourceLine": "f.code = \"0102\";"
+        },
+        {
+          "field": "responder",
+          "line": 479,
+          "method": "animation062EscapingAndIsolation",
+          "sourceLine": "f.responder ="
+        },
+        {
+          "field": "count",
+          "line": 516,
+          "method": "animation063EmptyAndGrouping",
+          "sourceLine": "f.count = 0;"
+        },
+        {
+          "field": "count",
+          "line": 525,
+          "method": "animation063EmptyAndGrouping",
+          "sourceLine": "f.count = 3;"
+        },
+        {
+          "field": "responder",
+          "line": 526,
+          "method": "animation063EmptyAndGrouping",
+          "sourceLine": "f.responder ="
+        },
+        {
+          "field": "responder",
+          "line": 546,
+          "method": "animation063EmptyAndGrouping",
+          "sourceLine": "f.responder = f::standard;"
+        },
+        {
+          "field": "count",
+          "line": 547,
+          "method": "animation063EmptyAndGrouping",
+          "sourceLine": "f.count = 2;"
+        }
+      ]
+    },
+    "findings": [
+      {
+        "begincolumn": "18",
+        "beginline": "687",
+        "class": "AnimationControllerTest.Fixture",
+        "endcolumn": "23",
+        "endline": "687",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#avoidusingvolatile",
+        "message": "Use of modifier volatile is not recommended.",
+        "package": "dev.codex.schubert.nk.web.session",
+        "priority": "2",
+        "rule": "AvoidUsingVolatile",
+        "ruleset": "Multithreading",
+        "variable": "count"
+      },
+      {
+        "begincolumn": "21",
+        "beginline": "688",
+        "class": "AnimationControllerTest.Fixture",
+        "endcolumn": "25",
+        "endline": "688",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#avoidusingvolatile",
+        "message": "Use of modifier volatile is not recommended.",
+        "package": "dev.codex.schubert.nk.web.session",
+        "priority": "2",
+        "rule": "AvoidUsingVolatile",
+        "ruleset": "Multithreading",
+        "variable": "code"
+      },
+      {
+        "begincolumn": "47",
+        "beginline": "689",
+        "class": "AnimationControllerTest.Fixture",
+        "endcolumn": "56",
+        "endline": "689",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#avoidusingvolatile",
+        "message": "Use of modifier volatile is not recommended.",
+        "package": "dev.codex.schubert.nk.web.session",
+        "priority": "2",
+        "rule": "AvoidUsingVolatile",
+        "ruleset": "Multithreading",
+        "variable": "responder"
+      }
+    ],
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/AnimationControllerTest.java",
+    "sha256": "07410f3c8de092e17147a39204dd01dc0c0ba4ac876f5691025142c138821149"
+  },
+  {
+    "context": {
+      "concurrentControlWrites": 0,
+      "concurrentMethod": "music082ConcurrentRequests",
+      "concurrentMethodStartLine": 573,
+      "controlFields": [
+        "code",
+        "count",
+        "responder"
+      ],
+      "disposition": "INTENTIONAL_INDIVIDUAL_TEST_CONTROL_PUBLICATION_NOT_PRODUCTION_SHARED_STATE",
+      "fixtureMethodControlWritesBeyondInitializers": 0,
+      "localFixturePerWritingMethod": true,
+      "readModifyWriteControls": 0,
+      "reflectionMutationPresent": false,
+      "scope": "Static individual-control visibility and read-only concurrency phase; no atomic aggregate transition is asserted and no dynamic execution/liveness certified.",
+      "writes": [
+        {
+          "field": "code",
+          "line": 145,
+          "method": "music072SuccessAndWire",
+          "sourceLine": "f.code = code;"
+        },
+        {
+          "field": "count",
+          "line": 146,
+          "method": "music072SuccessAndWire",
+          "sourceLine": "f.count = n;"
+        },
+        {
+          "field": "code",
+          "line": 193,
+          "method": "music073ErrorMapping",
+          "sourceLine": "f.code = codes[i];"
+        },
+        {
+          "field": "code",
+          "line": 209,
+          "method": "music074SessionInvalid",
+          "sourceLine": "f.code = \"0102\";"
+        },
+        {
+          "field": "responder",
+          "line": 235,
+          "method": "music075MalformedAndTransport",
+          "sourceLine": "f.responder ="
+        },
+        {
+          "field": "responder",
+          "line": 262,
+          "method": "music076ResponseBinding",
+          "sourceLine": "f.responder ="
+        },
+        {
+          "field": "responder",
+          "line": 322,
+          "method": "music077NullAndUnknown",
+          "sourceLine": "f.responder ="
+        },
+        {
+          "field": "responder",
+          "line": 329,
+          "method": "music077NullAndUnknown",
+          "sourceLine": "f.responder = f::standard;"
+        },
+        {
+          "field": "code",
+          "line": 330,
+          "method": "music077NullAndUnknown",
+          "sourceLine": "f.code = \"9000\";"
+        },
+        {
+          "field": "code",
+          "line": 343,
+          "method": "music077NullAndUnknown",
+          "sourceLine": "f.code = FIXTURE_SUCCESS_CODE;"
+        },
+        {
+          "field": "code",
+          "line": 473,
+          "method": "music079RealHttpSecurity",
+          "sourceLine": "f.code = \"0102\";"
+        },
+        {
+          "field": "count",
+          "line": 496,
+          "method": "music080EscapingAndIsolation",
+          "sourceLine": "f.count = 1;"
+        },
+        {
+          "field": "responder",
+          "line": 497,
+          "method": "music080EscapingAndIsolation",
+          "sourceLine": "f.responder ="
+        },
+        {
+          "field": "count",
+          "line": 545,
+          "method": "music081EmptyAndMaximum",
+          "sourceLine": "f.count = 0;"
+        },
+        {
+          "field": "count",
+          "line": 558,
+          "method": "music081EmptyAndMaximum",
+          "sourceLine": "f.count = path.equals(FIXTURE_MENU_PATH) ? 20 : 100;"
+        }
+      ]
+    },
+    "findings": [
+      {
+        "begincolumn": "18",
+        "beginline": "696",
+        "class": "MusicControllerTest.Fixture",
+        "endcolumn": "23",
+        "endline": "696",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#avoidusingvolatile",
+        "message": "Use of modifier volatile is not recommended.",
+        "package": "dev.codex.schubert.nk.web.session",
+        "priority": "2",
+        "rule": "AvoidUsingVolatile",
+        "ruleset": "Multithreading",
+        "variable": "count"
+      },
+      {
+        "begincolumn": "21",
+        "beginline": "697",
+        "class": "MusicControllerTest.Fixture",
+        "endcolumn": "25",
+        "endline": "697",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#avoidusingvolatile",
+        "message": "Use of modifier volatile is not recommended.",
+        "package": "dev.codex.schubert.nk.web.session",
+        "priority": "2",
+        "rule": "AvoidUsingVolatile",
+        "ruleset": "Multithreading",
+        "variable": "code"
+      },
+      {
+        "begincolumn": "47",
+        "beginline": "698",
+        "class": "MusicControllerTest.Fixture",
+        "endcolumn": "56",
+        "endline": "698",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#avoidusingvolatile",
+        "message": "Use of modifier volatile is not recommended.",
+        "package": "dev.codex.schubert.nk.web.session",
+        "priority": "2",
+        "rule": "AvoidUsingVolatile",
+        "ruleset": "Multithreading",
+        "variable": "responder"
+      }
+    ],
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/MusicControllerTest.java",
+    "sha256": "75966ac922fd19a134237bef7a74ddabe58d6a5dd9bafb146c80d5bdccdce556"
+  },
+  {
+    "context": {
+      "concurrentControlWrites": 0,
+      "concurrentMethod": "search044ConcurrentRequests",
+      "concurrentMethodStartLine": 559,
+      "controlFields": [
+        "code",
+        "count",
+        "failureStage",
+        "responder"
+      ],
+      "disposition": "INTENTIONAL_INDIVIDUAL_TEST_CONTROL_PUBLICATION_NOT_PRODUCTION_SHARED_STATE",
+      "fixtureMethodControlWritesBeyondInitializers": 0,
+      "localFixturePerWritingMethod": true,
+      "readModifyWriteControls": 0,
+      "reflectionMutationPresent": false,
+      "scope": "Static individual-control visibility and read-only concurrency phase; no atomic aggregate transition is asserted and no dynamic execution/liveness certified.",
+      "writes": [
+        {
+          "field": "code",
+          "line": 129,
+          "method": "search034SuccessAndWire",
+          "sourceLine": "f.code = code;"
+        },
+        {
+          "field": "count",
+          "line": 130,
+          "method": "search034SuccessAndWire",
+          "sourceLine": "f.count = count;"
+        },
+        {
+          "field": "failureStage",
+          "line": 234,
+          "method": "search036ResultErrorsAtEveryStage",
+          "sourceLine": "f.failureStage = stage;"
+        },
+        {
+          "field": "code",
+          "line": 235,
+          "method": "search036ResultErrorsAtEveryStage",
+          "sourceLine": "f.code = codes[i];"
+        },
+        {
+          "field": "failureStage",
+          "line": 257,
+          "method": "search037SessionInvalidAtEveryStage",
+          "sourceLine": "f.failureStage = stage;"
+        },
+        {
+          "field": "code",
+          "line": 258,
+          "method": "search037SessionInvalidAtEveryStage",
+          "sourceLine": "f.code = \"0102\";"
+        },
+        {
+          "field": "responder",
+          "line": 289,
+          "method": "search038MalformedAndTransport",
+          "sourceLine": "f.responder ="
+        },
+        {
+          "field": "count",
+          "line": 316,
+          "method": "search039ResponseBinding",
+          "sourceLine": "f.count = 1;"
+        },
+        {
+          "field": "responder",
+          "line": 318,
+          "method": "search039ResponseBinding",
+          "sourceLine": "f.responder ="
+        },
+        {
+          "field": "responder",
+          "line": 389,
+          "method": "search040NullAndFailurePropagation",
+          "sourceLine": "f.responder ="
+        },
+        {
+          "field": "responder",
+          "line": 396,
+          "method": "search040NullAndFailurePropagation",
+          "sourceLine": "f.responder = f::standard;"
+        },
+        {
+          "field": "failureStage",
+          "line": 397,
+          "method": "search040NullAndFailurePropagation",
+          "sourceLine": "f.failureStage = FIXTURE_SEARCH_PREFIX;"
+        },
+        {
+          "field": "code",
+          "line": 398,
+          "method": "search040NullAndFailurePropagation",
+          "sourceLine": "f.code = \"9000\";"
+        },
+        {
+          "field": "failureStage",
+          "line": 508,
+          "method": "search042RealHttpSecurity",
+          "sourceLine": "f.failureStage = FIXTURE_GAME_PREFIX;"
+        },
+        {
+          "field": "code",
+          "line": 509,
+          "method": "search042RealHttpSecurity",
+          "sourceLine": "f.code = \"0102\";"
+        },
+        {
+          "field": "count",
+          "line": 622,
+          "method": "search045CompatibilityTrace",
+          "sourceLine": "f.count = 0;"
+        }
+      ]
+    },
+    "findings": [
+      {
+        "begincolumn": "18",
+        "beginline": "680",
+        "class": "ScenarioSearchControllerTest.Fixture",
+        "endcolumn": "23",
+        "endline": "680",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#avoidusingvolatile",
+        "message": "Use of modifier volatile is not recommended.",
+        "package": "dev.codex.schubert.nk.web.session",
+        "priority": "2",
+        "rule": "AvoidUsingVolatile",
+        "ruleset": "Multithreading",
+        "variable": "count"
+      },
+      {
+        "begincolumn": "21",
+        "beginline": "681",
+        "class": "ScenarioSearchControllerTest.Fixture",
+        "endcolumn": "25",
+        "endline": "681",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#avoidusingvolatile",
+        "message": "Use of modifier volatile is not recommended.",
+        "package": "dev.codex.schubert.nk.web.session",
+        "priority": "2",
+        "rule": "AvoidUsingVolatile",
+        "ruleset": "Multithreading",
+        "variable": "code"
+      },
+      {
+        "begincolumn": "21",
+        "beginline": "682",
+        "class": "ScenarioSearchControllerTest.Fixture",
+        "endcolumn": "33",
+        "endline": "682",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#avoidusingvolatile",
+        "message": "Use of modifier volatile is not recommended.",
+        "package": "dev.codex.schubert.nk.web.session",
+        "priority": "2",
+        "rule": "AvoidUsingVolatile",
+        "ruleset": "Multithreading",
+        "variable": "failureStage"
+      },
+      {
+        "begincolumn": "47",
+        "beginline": "683",
+        "class": "ScenarioSearchControllerTest.Fixture",
+        "endcolumn": "56",
+        "endline": "683",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#avoidusingvolatile",
+        "message": "Use of modifier volatile is not recommended.",
+        "package": "dev.codex.schubert.nk.web.session",
+        "priority": "2",
+        "rule": "AvoidUsingVolatile",
+        "ruleset": "Multithreading",
+        "variable": "responder"
+      }
+    ],
+    "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/ScenarioSearchControllerTest.java",
+    "sha256": "d69b62b4b963d98833832eff172b439836917e8a104b39f62cd6b53de6f2acc3"
+  }
+]
