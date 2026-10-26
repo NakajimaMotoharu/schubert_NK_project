@@ -1,0 +1,46 @@
+{
+  "actualExit": 0,
+  "architectureManifestSha256": "3ebea6b5e82692a68fe91af9552d8dc2206d67395c573ff46028d658cc4b612c",
+  "dispositionsSha256": "d6431b5d765961d7cc1874f5acc6fd8553ddf837e4650264ed58706f51b8f502",
+  "dynamicAuthorizationUnchanged": true,
+  "effortPercent": null,
+  "externalActions": 0,
+  "formalUpdated": false,
+  "historicalMainPremiseManifestSha256": "12669fc9fb3f225310894b08c430f38c07dd6ffd9f76a029c0a752cd967f6737",
+  "invocation": {
+    "actualPythonCommand": [
+      "python3",
+      "-B",
+      "tools/quality/pg10828_classloader_context.py"
+    ],
+    "arbitraryArgumentsRecorded": false,
+    "entrypointPath": "tools/quality/pg10828_classloader_context.py",
+    "entrypointSha256": "8f79f207b6e2e9936e84831a2e0d5df09c06d742b7c98cb433a3b42a24cb5433",
+    "helperPath": "tools/quality/host_tool_invocation.py",
+    "helperSha256": "85d616a3db4ff47f4c95ae2e0dd57954bc2b09f28b8f2a685b986e5621545c46",
+    "libraryPath": "tools/quality/pg10828_classloader_context.py",
+    "librarySha256": "8f79f207b6e2e9936e84831a2e0d5df09c06d742b7c98cb433a3b42a24cb5433",
+    "loadedProjectPythonSources": {
+      "tools/quality/g07_host_class_provenance_inputs.py": "a676cb3e4145177c3c243722d737592ce7d44c3f29cfe4f670662ef7651f046b",
+      "tools/quality/host_tool_invocation.py": "85d616a3db4ff47f4c95ae2e0dd57954bc2b09f28b8f2a685b986e5621545c46",
+      "tools/quality/pg10828_classloader_context.py": "8f79f207b6e2e9936e84831a2e0d5df09c06d742b7c98cb433a3b42a24cb5433"
+    },
+    "provenance": "OBSERVED_SYS_ARGV_AND_ORIG_ARGV_NOT_RECONSTRUCTED"
+  },
+  "judgement": "PG-D684",
+  "main": 1,
+  "newAccepted": 0,
+  "originalIndexSha256": "92b57b1840edb7258e1e180b06a2f69af94fae594f9c9c549a0378b439116966",
+  "productTestsExecuted": 0,
+  "rawClassLoaderFindings": 542,
+  "rawWarningsRemoved": 0,
+  "source": "e73e9558971a81d30d7f81f6ab0bc5d9662667d2",
+  "sourceChanged": false,
+  "sourceFiles": 206,
+  "suppressionsAdded": false,
+  "test": 541,
+  "vendorDescription": "In J2EE, the getClassLoader() method might not work as expected. Use\nThread.currentThread().getContextClassLoader() instead.",
+  "vendorJarSha256": "068b2b5fb276559c32d52e3675d297a458bf27fe181b675cee10555a55c131bd",
+  "vendorRuleResourceSha256": "38b7c3ff9c6d211100f92dd2695fc41a69c305068eeb0fb76b0a5cbeeb2862e5",
+  "wholeF03Accepted": false
+}
