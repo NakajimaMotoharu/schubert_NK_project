@@ -1,0 +1,20 @@
+# 2093 Query四Test残三十九の適用性・追加是正一覧
+
+2026-10-26、2092仕様、source95894757e2bd7f392262497ea620873430ccc5f1固定・Main21d変更0。PG10622-query-test-static-context-v1 manifest `606712ec61dc8240a3a46c13002001a0badd213255b427a681300e1c6c944db9` actual0、同directoryのjudgments.jsonへ元39全field/一意metadata ID/現source SHA/行span hash/具体根拠を保存。独立PG10624-query-test-static-context-post-v1 `52f29ad6d21fe887322b87140f7a3dcc1fa3d80712eacbeb34dd411ba7d5c4ba` actual0、原XML39行/全source span/補助二fixture hashを別経路で確認、四metadata改変反例を拒否した。
+
+|元rule|数|当source文脈の判断|
+|---|---:|---|
+|DoNotUseThreads|18|JUnitの専有刺激/並行試験でありProduction J2EE thread生成でない。User二/Log二/Replay一/Cleanup一の六executor宣言はtry所有、Future.getは5/20/30秒指定。Cleanupのinterrupt二phaseはfinallyでtest threadのinterruptを解除。実資源終了のlivenessは未実証|
+|NullAssignment|10|Log/User各五は故障injector解除。二fixtureともsqlFault==nullならactual、非null時だけwrapという明示契約。Productionの必須入力欠落やnullability全般の合格ではない|
+|AvoidCatchingGenericException|2|afterCommit Runnableからsession throws Exceptionを呼ぶTest bridge、catch後は即AssertionError(failure)で失敗を伝播。正常化/握潰しなし|
+|CloseResource|2|新providerを取得するのでなくreceiverへのProxy alias、実receiver/factory/consumerは外側try所有。aliasを別closeしてborrowed receiverを途中終了させない|
+|UseProperClassLoader|2|JMSContextの定義loaderへ同interfaceのfixture proxyを作る。J2EE container/ambient classloader探索ではない|
+|AvoidLiteralsInIfCondition|5|Logのcommit ordinal1三/2一/3一。BUG1853/YKT1604へ修正前起票、Test-local順序定数の追加は次PG群・現source未実装|
+
+従って**当39の文脈分類34非該当/5要是正/未分類0**。元PMD raw1・39/CS0/処理0は不変更、抑制追加0・全F03/全451未受入。Testなので無条件に除外せず、nullable reader/checked署名/borrowed owner/具体scopeを読取した。executor closeが将来の故障下でも有限終了すること、元DB/JMS/key/cohort/graphを動的に成立させたことは示していない。
+
+追加発見BUG1852/YKT1603：UserQueryApplicationServiceTestは0200をSYSTEM_ERROR_RESULTと誤命名。origin/main UI232§7の0200は保存済み結果の冪等成功、9000は一時障害。PG10612の入力inventoryにある全845 Test sourceのERROR/FAILURE名＋0200の宣言検索は当一fileだけ。値/実動作の誤りを観測したのでなく識別子の意味不整合。次PG群でidentifierだけIDEMPOTENT_RESULTへ、1853の三ordinal定数と合わせ一固定source・必要品質で検証する。
+
+工具手戻りBUG1854/YKT1605：10622初回unused json前置1の後にAPI戻値を明示評価せず本体を呼び、multi-resource tryのpool二番目を落とすcountがassert1/OUT0。元SHA6a7f23d31ba8ef045d565cc1299f350b59e7f45eb840ea4fcee5cd784c2e57bf保全、unused除去/六宣言countに是正。10624のunused json前置1（元SHA48d207892ac0e270773c8be526aef5e6c5a424b2b720882852daf81116bec816）はPG-D681の明示分岐で本体未発行を確認し、不要import除去→前置0後に初回postだけ実行。元失敗/制御是正の区別を保持する。
+
+全command/環境/真正exit/hashは上記manifest、補助source/元静的/正常baselineは各pinへ保存。新compile/製品PT/外部操作0、coverage null、元動的NOT_EXECUTED_HOLD/正式1964-53/個別17-190/工数null/QA051final不変。共有used11→11の丸め差0≠専有費0、N/T/専有費null、usage877c6b26aaa4cb4633351515acfc1cdaad7b712f79b0c670b971bd8fd43a3d5c。通常レビュー/commitで停止せず、保存後に前記二PG是正へ継続する。
