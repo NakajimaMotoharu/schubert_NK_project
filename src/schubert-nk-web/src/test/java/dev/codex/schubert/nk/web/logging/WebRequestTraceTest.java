@@ -39,12 +39,16 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 
 /** Independent UI/actual mapping inventory and thread ownership; REQ004006007008/BUG573574. */
 final class WebRequestTraceTest {
+  private static final String FIXTURE_LOGIN_ROUTE = "/login";
+  private static final String FIXTURE_ERROR_ROUTE = "/error";
+  private static final String FIXTURE_ATTRIBUTE_FAILURE = "synthetic-private-attribute-canary";
+
   private static final Set<String> ROUTES =
       Set.of(
           "/",
-          "/login",
+          FIXTURE_LOGIN_ROUTE,
           "/logout",
-          "/error",
+          FIXTURE_ERROR_ROUTE,
           "/search",
           "/logs",
           "/scenarios",
@@ -107,7 +111,7 @@ final class WebRequestTraceTest {
     for (String route : ROUTES) {
       var trace = trace(new MockHttpServletRequest(), 1);
       trace.captureRoute(route);
-      trace.captureRoute("/error");
+      trace.captureRoute(FIXTURE_ERROR_ROUTE);
       assertEquals(route, trace.route(), "first registered route must remain authoritative");
     }
     for (String unknown :
@@ -138,7 +142,7 @@ final class WebRequestTraceTest {
       assertTrue(interceptor.preHandle(request, new MockHttpServletResponse(), this));
       assertEquals(pattern, trace.route());
       assertFalse(trace.route().contains("canary"));
-      trace.captureRoute("/error");
+      trace.captureRoute(FIXTURE_ERROR_ROUTE);
       assertEquals(pattern, trace.route());
     }
   }
@@ -283,7 +287,7 @@ final class WebRequestTraceTest {
     var request = new MockHttpServletRequest();
     var response = new MockHttpServletResponse();
     assertTrue(interceptor.preHandle(request, response, this));
-    request.setAttribute(HandlerMapping.BEST_MATCHING_PATTERN_ATTRIBUTE, "/login");
+    request.setAttribute(HandlerMapping.BEST_MATCHING_PATTERN_ATTRIBUTE, FIXTURE_LOGIN_ROUTE);
     assertTrue(
         interceptor.preHandle(request, response, this)); // Legacy isolated assembly: no trace.
     var trace = trace(request, 9);
@@ -291,13 +295,13 @@ final class WebRequestTraceTest {
     interceptor.preHandle(request, response, this);
     assertEquals("/**", trace.route());
     request.setDispatcherType(DispatcherType.ERROR);
-    request.setAttribute(HandlerMapping.BEST_MATCHING_PATTERN_ATTRIBUTE, "/error");
+    request.setAttribute(HandlerMapping.BEST_MATCHING_PATTERN_ATTRIBUTE, FIXTURE_ERROR_ROUTE);
     interceptor.preHandle(request, response, this);
     assertEquals("/**", trace.route());
     request.setDispatcherType(DispatcherType.ASYNC);
-    request.setAttribute(HandlerMapping.BEST_MATCHING_PATTERN_ATTRIBUTE, "/login");
+    request.setAttribute(HandlerMapping.BEST_MATCHING_PATTERN_ATTRIBUTE, FIXTURE_LOGIN_ROUTE);
     interceptor.preHandle(request, response, this);
-    assertEquals("/login", trace.route());
+    assertEquals(FIXTURE_LOGIN_ROUTE, trace.route());
     var configuration = new RequestLogMvcConfiguration();
     configuration.addInterceptors(new InterceptorRegistry());
     assertThrows(NullPointerException.class, () -> configuration.addInterceptors(null));
@@ -345,9 +349,8 @@ final class WebRequestTraceTest {
                 @Override
                 public Object getAttribute(String name) {
                   if (!set && attribute.equals(name)) {
-                    if (state)
-                      throw new IllegalStateException("synthetic-private-attribute-canary");
-                    throw new IllegalArgumentException("synthetic-private-attribute-canary");
+                    if (state) throw new IllegalStateException(FIXTURE_ATTRIBUTE_FAILURE);
+                    throw new IllegalArgumentException(FIXTURE_ATTRIBUTE_FAILURE);
                   }
                   return super.getAttribute(name);
                 }
@@ -355,9 +358,8 @@ final class WebRequestTraceTest {
                 @Override
                 public void setAttribute(String name, Object value) {
                   if (set && attribute.equals(name)) {
-                    if (state)
-                      throw new IllegalStateException("synthetic-private-attribute-canary");
-                    throw new IllegalArgumentException("synthetic-private-attribute-canary");
+                    if (state) throw new IllegalStateException(FIXTURE_ATTRIBUTE_FAILURE);
+                    throw new IllegalArgumentException(FIXTURE_ATTRIBUTE_FAILURE);
                   }
                   super.setAttribute(name, value);
                 }
@@ -395,7 +397,7 @@ final class WebRequestTraceTest {
         outer.close();
       }
       WebRequestTrace.businessIdentifiers(() -> new UUID(9, 92)).get();
-      assertEquals(same ? new UUID(2, 91) : first.eventId(), first.correlationId());
+      assertEquals(same ? new UUID(2, 91) : new UUID(1, 90), first.correlationId());
       assertEquals(new UUID(2, 91), second.correlationId());
     }
   }
