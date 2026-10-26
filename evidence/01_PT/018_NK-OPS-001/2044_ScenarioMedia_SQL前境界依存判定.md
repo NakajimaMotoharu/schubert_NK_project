@@ -1,0 +1,11 @@
+# Scenario/MediaのSQL前境界・着手判定
+
+2026-10-26、assessment群2334・P00801主/P00901関連追加0・開始.25/1/3 cap10、source ddde。後続索引1936（両Repository原23methodの責任/ID対応）・1247（固定上限21）を確認し、既ScenarioRepositoryTest/MediaRepositoryTestのBeforeAll/BeforeEachが実PostgreSQLを使用することをsourceで確認。本新群で旧Test classを発見/実行せず、既DB成功の再演や新source流用をしない。
+
+Scenarioのgames/speakers/routes/files/search/detail計六entry。前四はrowsのconnection/actor non-nullがtryより前、request付き三entryは先頭request検査、search/detailは先頭三non-null。searchのNFC/trimとSRCREQ01 encode検証はtryより前。MediaのaudioMetadata/musicMetadata/videoMetadata/animationMenu/animationList/musicCategories/musicSections/musicTracks計八entry。request付き六entryはinputでnonnull/codec検査をqueryより前に行い、queryのconnection/actor non-nullもtryより前。payload/map/DTO constructorのpure値処理だけであり実認証をしない。
+
+PT_DEFAULTは新独立Test二classに限定：各entryでconnection/actorの単独null、request付き11entryのrequest単独null、Scenario検索の本文257/話者129/章257ASCIIbyte、MediaのTrack65/Video65/Category65二箇所/Section129をtry/JDBC前に拒否する計22method。幅はorigin/main UI234§7.1とUI235§6.1/8.1/9.1/10.1を独立正本として確認し、Production catalogから期待幅を作らない。DTO構築はassert前、Page1/size100・GameNUKITASHI1・固定ID7・公開actor/USER等は合成入力。
+
+JDK自己Connection Proxyは任意method呼出しで回数を増やしてAssertionError、実Connection/driver/DBを開かず、SQLException/RuntimeExceptionを注入しない。任意SQL誤到達でもAssertionErrorはMainのcatch列挙外なのでpreserveFatalへ送られない。通常期待はNPE/固定parameter名又はFieldEncodingException、各caseでJDBC0を要求し、独立postでNoSql guard lambda命令hit0/保留Main二probe0・全XML/CRC/単一sessionを照合する。rows/queryはnonnull境界も含むためmethod全体のprobe0とは偽らず、JDBC callback0とtry内専用helper0を分離する。
+
+HOLD：SQL/row/readonly/autocommit/close失敗、実DB、実file/media/inode/Root/VM/service、Graph9 Main二、鍵witness二file等。これらのcatchはpreserveFatalへ依存するため新入力fixtureや別routeで試行しない。正常SQL結果・表示順/検索条件・media descriptor/file配信の受入は本22では閉じない。全Main変更0、新source固定後の正常六compile/限定22/2・静的適用性・complete二Repository source四counter/原Test保持・traceを計画する。正式1964-53/既17-190/工数null/QA051final不変。
