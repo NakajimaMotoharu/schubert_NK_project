@@ -249,26 +249,28 @@ class UserCreateFormTest {
     var values = input();
     var passwords = new ArrayList<>(List.of(PASSWORD));
     values.put(PASSWORD_FIELD, passwords);
-    var form = UserCreateForm.bind(values);
-    passwords.set(0, "ChangedPassword123!");
-    values.clear();
-    assertEquals(PASSWORD, form.toRequest().initialPassword());
-    assertEquals(
-        Map.of(USERNAME_FIELD, SYNTHETIC_USERNAME, ROLE_FIELD, USER_ROLE_TEXT, ENABLED_FIELD, true),
-        form.displayValues());
-    assertThrows(UnsupportedOperationException.class, () -> form.displayValues().clear());
-    assertThrows(
-        UnsupportedOperationException.class, () -> form.getIssues().put("secret", PASSWORD));
-    assertEquals("UserCreateForm[REDACTED]", form.toString());
-    assertFalse(form.displayValues().toString().contains(PASSWORD));
-    assertFalse(form.displayValues().toString().contains(TOKEN));
-    assertFalse(form.getIssues().toString().contains(PASSWORD));
-    assertEquals("UserCreateRequestData[REDACTED]", form.toRequest().toString());
-    form.close();
-    form.close();
-    var failure = assertThrows(IllegalStateException.class, form::toRequest);
-    assertEquals("user create form is closed", failure.getMessage());
-    assertEquals(SYNTHETIC_USERNAME, form.displayValues().get(USERNAME_FIELD));
+    try (var form = UserCreateForm.bind(values)) {
+      passwords.set(0, "ChangedPassword123!");
+      values.clear();
+      assertEquals(PASSWORD, form.toRequest().initialPassword());
+      assertEquals(
+          Map.of(
+              USERNAME_FIELD, SYNTHETIC_USERNAME, ROLE_FIELD, USER_ROLE_TEXT, ENABLED_FIELD, true),
+          form.displayValues());
+      assertThrows(UnsupportedOperationException.class, () -> form.displayValues().clear());
+      assertThrows(
+          UnsupportedOperationException.class, () -> form.getIssues().put("secret", PASSWORD));
+      assertEquals("UserCreateForm[REDACTED]", form.toString());
+      assertFalse(form.displayValues().toString().contains(PASSWORD));
+      assertFalse(form.displayValues().toString().contains(TOKEN));
+      assertFalse(form.getIssues().toString().contains(PASSWORD));
+      assertEquals("UserCreateRequestData[REDACTED]", form.toRequest().toString());
+      form.close();
+      form.close();
+      var failure = assertThrows(IllegalStateException.class, form::toRequest);
+      assertEquals("user create form is closed", failure.getMessage());
+      assertEquals(SYNTHETIC_USERNAME, form.displayValues().get(USERNAME_FIELD));
+    }
   }
 
   @Test
@@ -306,14 +308,16 @@ class UserCreateFormTest {
   void create008InvalidSecretsRemainAbsentAndClosedInvalidCannotSend() {
     var values = input();
     values.put(PASSWORD_CONFIRMATION_FIELD, List.of("SecretCanaryDifferent123!"));
-    var form = UserCreateForm.bind(values);
-    assertEquals(Map.of(PASSWORD_CONFIRMATION_FIELD, "入力項目を確認してください。"), form.getIssues());
-    assertEquals(
-        Map.of(USERNAME_FIELD, SYNTHETIC_USERNAME, ROLE_FIELD, USER_ROLE_TEXT, ENABLED_FIELD, true),
-        form.displayValues());
-    assertFalse(form.toString().contains("SecretCanary"));
-    assertThrows(IllegalArgumentException.class, form::toRequest);
-    form.close();
-    assertThrows(IllegalStateException.class, form::toRequest);
+    try (var form = UserCreateForm.bind(values)) {
+      assertEquals(Map.of(PASSWORD_CONFIRMATION_FIELD, "入力項目を確認してください。"), form.getIssues());
+      assertEquals(
+          Map.of(
+              USERNAME_FIELD, SYNTHETIC_USERNAME, ROLE_FIELD, USER_ROLE_TEXT, ENABLED_FIELD, true),
+          form.displayValues());
+      assertFalse(form.toString().contains("SecretCanary"));
+      assertThrows(IllegalArgumentException.class, form::toRequest);
+      form.close();
+      assertThrows(IllegalStateException.class, form::toRequest);
+    }
   }
 }

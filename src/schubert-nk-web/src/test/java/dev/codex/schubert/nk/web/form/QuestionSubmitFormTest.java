@@ -72,6 +72,7 @@ class QuestionSubmitFormTest {
         assertTrue(form.isValid());
         assertEquals(expected, form.toRequest().questionText());
         assertEquals(UUID.fromString(TOKEN), form.toRequest().operationToken());
+        assertEquals(UUID.fromString(TOKEN), form.operationToken());
         assertEquals(Map.of(QUESTION_FIELD, expected), form.displayValues());
         assertArrayEquals(golden(expected, TOKEN), actual(form));
       }
@@ -209,23 +210,26 @@ class QuestionSubmitFormTest {
 
   @Test
   void qstForm007TerminalClosePreservesOtherOwners() {
-    var first = QuestionSubmitForm.bind(input("質問"));
-    var request = first.toRequest();
-    var display = first.displayValues();
-    first.close();
-    first.close();
-    var failure = assertThrows(IllegalStateException.class, first::toRequest);
-    assertEquals("question submit form is closed", failure.getMessage());
-    assertThrows(IllegalStateException.class, first::displayValues);
-    assertEquals("質問", request.questionText());
-    assertEquals(Map.of(QUESTION_FIELD, "質問"), display);
-    assertEquals("QuestionSubmitForm[REDACTED]", first.toString());
-    try (var other = QuestionSubmitForm.bind(input("other"))) {
-      assertEquals("other", other.toRequest().questionText());
+    try (var first = QuestionSubmitForm.bind(input("質問"))) {
+      var request = first.toRequest();
+      var display = first.displayValues();
+      first.close();
+      first.close();
+      var failure = assertThrows(IllegalStateException.class, first::toRequest);
+      assertEquals("question submit form is closed", failure.getMessage());
+      assertThrows(IllegalStateException.class, first::operationToken);
+      assertThrows(IllegalStateException.class, first::displayValues);
+      assertEquals("質問", request.questionText());
+      assertEquals(Map.of(QUESTION_FIELD, "質問"), display);
+      assertEquals("QuestionSubmitForm[REDACTED]", first.toString());
+      try (var other = QuestionSubmitForm.bind(input("other"))) {
+        assertEquals("other", other.toRequest().questionText());
+      }
     }
-    var invalid = QuestionSubmitForm.bind(input(""));
-    invalid.close();
-    assertThrows(IllegalStateException.class, invalid::toRequest);
+    try (var invalid = QuestionSubmitForm.bind(input(""))) {
+      invalid.close();
+      assertThrows(IllegalStateException.class, invalid::toRequest);
+    }
   }
 
   @Test
