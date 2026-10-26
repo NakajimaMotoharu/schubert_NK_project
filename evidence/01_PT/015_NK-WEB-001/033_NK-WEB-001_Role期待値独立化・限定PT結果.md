@@ -33,3 +33,7 @@
 残る9source/他Test method/元API DB・key等の試験は今回未実行。role是正のsource scopeと選択四PTだけを確認し、raw250/全F03/G03/451は未受入。正式1964PT/53scope、個別17/190、工数null、QA051 final/全安全HOLD不変更。元原本DB/Backup/鍵/native/stash/Scenario/Current baseline/held witness二fileに変更・アクセスなし。
 
 次はBUG1826/YKT1577のcode15期待・負例fixtureを一経路として独立化。role13最終SHAはその変更とbatch追跡し、当四PTのsource b98と元担当P016-04/08/11・歴史runtimeを保持し、新source全体の成功へ流用しない。
+
+## 追記訂正（BUG1828/YKT1579、2026-10-26）
+
+本文の「残る9source」は**残る10source**が正。変更13source−選択実行三source=10であり、四methodを四sourceと差し引いた誤り。原本文/commit024ec/元manifestを保持する。実四PT/三suite/三選択source、元XML・source hash・coverage・正式受入・開始費に変更はない。次traceでは実caseのclass→sourceを導出して誤数を拒否する。途中報告の同じ9sourceも訂正済み。

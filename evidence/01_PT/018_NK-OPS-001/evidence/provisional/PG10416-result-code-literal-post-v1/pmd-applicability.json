@@ -1,0 +1,155 @@
+[
+  {
+    "disposition": "NOT_APPLICABLE_IN_EXACT_TEST_CONTEXT",
+    "line": 127,
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/admin/UserMutationReplayServiceTest.java",
+    "reason": "Borrowed aliases original/retry are lexically owned by enclosing try-with; do not separately close aliases.",
+    "rule": "CloseResource",
+    "sha256": "f78cf30e14216f4a47d37e05bd101b33063273d306a55d73ae4611573cecdfad",
+    "sourceLine": "for (var current : List.of(original, retry)) {"
+  },
+  {
+    "disposition": "NOT_APPLICABLE_IN_EXACT_TEST_CONTEXT",
+    "line": 135,
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/admin/UserMutationReplayServiceTest.java",
+    "reason": "Test input object identity chooses the associated fixed context; value equality is not the intended property.",
+    "rule": "CompareObjectsWithEquals",
+    "sha256": "f78cf30e14216f4a47d37e05bd101b33063273d306a55d73ae4611573cecdfad",
+    "sourceLine": "current == original ? CONTEXT : NEW_CONTEXT,"
+  },
+  {
+    "disposition": "NOT_APPLICABLE_IN_EXACT_TEST_CONTEXT",
+    "line": 512,
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/admin/UserMutationReplayServiceTest.java",
+    "reason": "Standalone JUnit executor fixture, not Production JavaEE thread creation; no liveness or original Test execution certified.",
+    "rule": "DoNotUseThreads",
+    "sha256": "f78cf30e14216f4a47d37e05bd101b33063273d306a55d73ae4611573cecdfad",
+    "sourceLine": "var workers = Executors.newFixedThreadPool(10)) {"
+  },
+  {
+    "disposition": "NOT_APPLICABLE_IN_EXACT_TEST_CONTEXT",
+    "line": 518,
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/admin/UserMutationReplayServiceTest.java",
+    "reason": "Standalone JUnit executor fixture, not Production JavaEE thread creation; no liveness or original Test execution certified.",
+    "rule": "DoNotUseThreads",
+    "sha256": "f78cf30e14216f4a47d37e05bd101b33063273d306a55d73ae4611573cecdfad",
+    "sourceLine": "workers.submit("
+  },
+  {
+    "disposition": "NOT_APPLICABLE_IN_EXACT_TEST_CONTEXT",
+    "line": 479,
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/admin/UserQueryReplayServiceTest.java",
+    "reason": "Standalone JUnit executor fixture, not Production JavaEE thread creation; no liveness or original Test execution certified.",
+    "rule": "DoNotUseThreads",
+    "sha256": "6c986e0917728c9d695d286719d6a1fd7ab28af61927d2b6d3b070e1a684b7fc",
+    "sourceLine": "var pool = Executors.newFixedThreadPool(10)) {"
+  },
+  {
+    "disposition": "NOT_APPLICABLE_IN_EXACT_TEST_CONTEXT",
+    "line": 485,
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/admin/UserQueryReplayServiceTest.java",
+    "reason": "Standalone JUnit executor fixture, not Production JavaEE thread creation; no liveness or original Test execution certified.",
+    "rule": "DoNotUseThreads",
+    "sha256": "6c986e0917728c9d695d286719d6a1fd7ab28af61927d2b6d3b070e1a684b7fc",
+    "sourceLine": "pool.submit("
+  },
+  {
+    "disposition": "NOT_APPLICABLE_IN_EXACT_TEST_CONTEXT",
+    "line": 326,
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/log/LogReplayServiceTest.java",
+    "reason": "Standalone JUnit executor fixture, not Production JavaEE thread creation; no liveness or original Test execution certified.",
+    "rule": "DoNotUseThreads",
+    "sha256": "b8d8e1604bbbc717e43def2ce31dbfeb61d957eec24fbca083e877bbc0c04dc8",
+    "sourceLine": "var pool = Executors.newFixedThreadPool(10)) {"
+  },
+  {
+    "disposition": "NOT_APPLICABLE_IN_EXACT_TEST_CONTEXT",
+    "line": 332,
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/log/LogReplayServiceTest.java",
+    "reason": "Standalone JUnit executor fixture, not Production JavaEE thread creation; no liveness or original Test execution certified.",
+    "rule": "DoNotUseThreads",
+    "sha256": "b8d8e1604bbbc717e43def2ce31dbfeb61d957eec24fbca083e877bbc0c04dc8",
+    "sourceLine": "pool.submit("
+  },
+  {
+    "disposition": "NOT_APPLICABLE_IN_EXACT_TEST_CONTEXT",
+    "line": 461,
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/question/QuestionMutationReplayServiceTest.java",
+    "reason": "Deliberate null-parameter negative Test fixture, not nullable Production state introduced.",
+    "rule": "NullAssignment",
+    "sha256": "8b911b7acd2273f6b5e443dba2ada5c32125cd143d6407426b54566f41689880",
+    "sourceLine": "args[i] = null;"
+  },
+  {
+    "disposition": "NOT_APPLICABLE_IN_EXACT_TEST_CONTEXT",
+    "line": 486,
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/question/QuestionMutationReplayServiceTest.java",
+    "reason": "Deliberate null-parameter negative Test fixture, not nullable Production state introduced.",
+    "rule": "NullAssignment",
+    "sha256": "8b911b7acd2273f6b5e443dba2ada5c32125cd143d6407426b54566f41689880",
+    "sourceLine": "args[i] = null;"
+  },
+  {
+    "disposition": "NOT_APPLICABLE_IN_EXACT_TEST_CONTEXT",
+    "line": 500,
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/question/QuestionMutationReplayServiceTest.java",
+    "reason": "Deliberate null-parameter negative Test fixture, not nullable Production state introduced.",
+    "rule": "NullAssignment",
+    "sha256": "8b911b7acd2273f6b5e443dba2ada5c32125cd143d6407426b54566f41689880",
+    "sourceLine": "args[i] = null;"
+  },
+  {
+    "disposition": "NOT_APPLICABLE_IN_EXACT_TEST_CONTEXT",
+    "line": 387,
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/LoginReplayServiceTest.java",
+    "reason": "Explicitly closed Test codec intentionally retained for closed-resource negative assertions; no key-erasure/lifetime runtime witness executed.",
+    "rule": "CloseResource",
+    "sha256": "2e5d1196476f8c9e45dbb1a28832b29dff09575c8c4685af2bd078aab560f9a1",
+    "sourceLine": "var closed = new ResponseSnapshotCodec(\"s1\", snapshotKey(), null, null);"
+  },
+  {
+    "disposition": "NOT_APPLICABLE_IN_EXACT_TEST_CONTEXT",
+    "line": 403,
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/LoginReplayServiceTest.java",
+    "reason": "Standalone JUnit executor fixture, not Production JavaEE thread creation; no liveness or original Test execution certified.",
+    "rule": "DoNotUseThreads",
+    "sha256": "2e5d1196476f8c9e45dbb1a28832b29dff09575c8c4685af2bd078aab560f9a1",
+    "sourceLine": "var executor = Executors.newFixedThreadPool(16)) {"
+  },
+  {
+    "disposition": "NOT_APPLICABLE_IN_EXACT_TEST_CONTEXT",
+    "line": 409,
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/LoginReplayServiceTest.java",
+    "reason": "Standalone JUnit executor fixture, not Production JavaEE thread creation; no liveness or original Test execution certified.",
+    "rule": "DoNotUseThreads",
+    "sha256": "2e5d1196476f8c9e45dbb1a28832b29dff09575c8c4685af2bd078aab560f9a1",
+    "sourceLine": "executor.submit("
+  },
+  {
+    "disposition": "NOT_APPLICABLE_IN_EXACT_TEST_CONTEXT",
+    "line": 543,
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/LoginReplayServiceTest.java",
+    "reason": "Standalone fixed JDBC interface Proxy loader, not JavaEE container class loading; no actual connection invoked.",
+    "rule": "UseProperClassLoader",
+    "sha256": "2e5d1196476f8c9e45dbb1a28832b29dff09575c8c4685af2bd078aab560f9a1",
+    "sourceLine": "Connection.class.getClassLoader(),"
+  },
+  {
+    "disposition": "NOT_APPLICABLE_IN_EXACT_TEST_CONTEXT",
+    "line": 550,
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/LoginReplayServiceTest.java",
+    "reason": "Standalone fixed JDBC interface Proxy loader, not JavaEE container class loading; no actual connection invoked.",
+    "rule": "UseProperClassLoader",
+    "sha256": "2e5d1196476f8c9e45dbb1a28832b29dff09575c8c4685af2bd078aab560f9a1",
+    "sourceLine": "PreparedStatement.class.getClassLoader(),"
+  },
+  {
+    "disposition": "NOT_APPLICABLE_IN_EXACT_TEST_CONTEXT",
+    "line": 560,
+    "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/LoginReplayServiceTest.java",
+    "reason": "Standalone fixed JDBC interface Proxy loader, not JavaEE container class loading; no actual connection invoked.",
+    "rule": "UseProperClassLoader",
+    "sha256": "2e5d1196476f8c9e45dbb1a28832b29dff09575c8c4685af2bd078aab560f9a1",
+    "sourceLine": "ResultSet.class.getClassLoader(),"
+  }
+]
