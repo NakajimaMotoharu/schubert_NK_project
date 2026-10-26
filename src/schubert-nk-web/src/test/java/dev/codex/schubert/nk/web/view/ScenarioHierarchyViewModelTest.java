@@ -152,6 +152,7 @@ class ScenarioHierarchyViewModelTest {
   void web185NullBoundaries() {
     var p = actor(UserRole.USER);
     var g = GameCode.NUKITASHI_1;
+    assertThrows(NullPointerException.class, () -> TopBarViewModel.from(null));
     assertThrows(NullPointerException.class, () -> GameListViewModel.from(null, games()));
     assertThrows(NullPointerException.class, () -> GameListViewModel.from(p, null));
     assertThrows(
@@ -369,6 +370,7 @@ class ScenarioHierarchyViewModelTest {
     var a = GameListViewModel.from(p, games());
     var b = RouteListViewModel.from(p, g, routes());
     var c = ScenarioFileListViewModel.from(p, g, 1, "r", files());
+    assertEquals("TopBarViewModel[REDACTED]", a.getTopBar().toString());
     assertEquals("GameListViewModel[REDACTED]", a.toString());
     assertEquals("GameCard[REDACTED]", a.getGames().getFirst().toString());
     assertEquals("RouteListViewModel[REDACTED]", b.toString());

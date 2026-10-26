@@ -9,7 +9,7 @@ PG193/FUN004/SYS006/PER003/TST001～005、UI222/223§4/234§5・8・9、SS313§4
 | PT-WEB-182 | web182GameDisplay | USER/ADMIN、2game literal | code/title/href/topbarだけcopy、Current順とURL一致 |
 | PT-WEB-183 | web183RouteDisplay | 両game、prefix00/01/99、route名/件数 | ASCII2桁・指定名維持・game/prefix URL、上位/scenarios |
 | PT-WEB-184 | web184FileDisplay | prefix01/99、file ID1/999999999999 | title/display path/件数維持、数値IDの/scenarios URL、game上位link |
-| PT-WEB-185 | web185NullBoundaries | 各factoryの全引数null/collection null要素 | constructor/factory拒否、部分modelを返さない |
+| PT-WEB-185 | web185NullBoundaries | 各factoryの全引数null/collection null要素、共通TopBar.from直接null | constructor/factory拒否、部分modelを返さない |
 | PT-WEB-186 | web186PrefixBoundaries | -1/100/Integer端、0/99 | 範囲外固定例外、正常はASCII00/99 |
 | PT-WEB-187 | web187SnapshotOwnership | mutable list変更・結果list変更 | 入力変更非波及、結果list不変、DTO参照を保持しない |
 | PT-WEB-188 | web188ClosedBeanContract | getter introspection | topbar/primitive/String/closed Card listだけ、書込getterなし |
@@ -17,7 +17,7 @@ PG193/FUN004/SYS006/PER003/TST001～005、UI222/223§4/234§5・8・9、SS313§4
 | PT-WEB-190 | web190ConcurrentProjection | 独立100組/8thread | 各literalの値・順・URL一致、共有状態なし |
 | PT-WEB-191 | web191ListSizeBoundaries | 0/最大10・50・500/最大+1 | 空/最大を保持、超過固定例外。重複レコードはsemantic判定ではなく個数境界用fixture |
 | PT-WEB-192 | web192PreserveSourceOrder | 逆順title/route/file、未知route名literal | 並び替え/固定map再推測/非空title選択をしない。入力の検証責務はclient/facade |
-| PT-WEB-193 | web193RedactedDiagnostics | 全6class toString | 固定redacted、値を含まない |
+| PT-WEB-193 | web193RedactedDiagnostics | 階層6classと共通TopBarのtoString | 各固定redacted、TopBarViewModel[REDACTED]、値を含まない |
 
 期待値はUI223・234とCurrent templateの独立literalで定義する。数値URLやtitleをProduction factoryからexpected生成しない。上限はUI234の10/50/500、routeは2桁、file IDは12桁を使用。全line/method/class/branch100%、null negative/static、失敗/skip/flakyは不合格。合成DOMは画面互換やHTTP成功の証跡に算入しない。
 
