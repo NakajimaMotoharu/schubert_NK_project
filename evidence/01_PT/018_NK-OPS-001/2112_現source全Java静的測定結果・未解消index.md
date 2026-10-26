@@ -1,0 +1,15 @@
+# 2112 現source全Java静的測定結果・未解消index
+
+2026-10-27 02:03 JST、2111/event2457、2/4/8pp cap10、source370fd74f6/Main21d7c304固定。PG10688-current-global-static-v1 manifest `d91104d420967cd34c0d313919b86c7f1745577a1e1fe31d9343927d53dfe636`、静的gate actual1。PMD raw9406（Main1512/Test7894）、scanner exit4、processing error0。Checkstyle raw3（全TestのAvoidStarImport）、scanner exit3、processing error0。実非0を成功へ変更しない。
+
+独立PG10690-current-global-static-post-v1 manifest `465c7c64bc75923d275436c72656ddc5b537f2c15982a71a0b4681a19ef03627` metadata audit actual0/primaryStaticGateExit1。正常10632 input全1810（Main965/Test845、package-info37）・現worktree/snapshot/source-list/dependency/tool/rule hash、元XMLと全finding属性/座標を照合。XML/schema/非inventory source二反例、F03-CURRENT-SOURCE-001～004の測定証跡を保存した。全findingにraw順ID/sourceSHA/Main-Test/moduleを付けUNCLASSIFIED index化したが、全9409を仕様違反/障害とも非該当とも認定しない。
+
+上位PMD rule件数はAvoidDuplicateLiterals3059/DoNotUseThreads2125/AvoidCatchingGenericException851/CloseResource683/UseProperClassLoader542/AvoidUsingOctalValues435/AvoidLiteralsInIfCondition397等、全rule分布は独立manifest summary参照。Testを含む当全scope9406と旧Main限定2217等を、そのまま改善/悪化率として比較しない。既限定レビュー/是正済の箇所もrawへ残り得るので、source文脈・適用性・後続証跡を照合してから処置する。指摘抑制/品質緩和/coverage補填0。
+
+Checkstyle三箇所はApiStartupGraph330Test/TemporaryFailureGraph329Test/WebStartupGraph330Test各line3のJUnit Assertions.*。既graph九PTの動的HOLDは維持し、import宣言だけのPG是正/許可された型・静的・本文不変確認を後続別群へ。原Graph9/旧sourceの動的再演/新ハーネスは行わない。全静的成功とはせず、BUG/YKT修正前登録から進む。
+
+工具BUG1860/YKT1611は初期regexがpackage-info37を落として1773となり、件数guard assert1/解析/SLOT作成前。元工具SHA144efbe957f11badaf53f474c031df407b1f49d530f9cd68a810c76b9971b1f0を保持。package-infoだけを明示追加し、normal全Java集合/37一致、tools保留名・private・別suffixの三selector反例を確認した。元失敗を解析終了やPASSへ読み替えない。
+
+toolchainは既JDK25.0.4/PMD7.28.0-record1298/Checkstyle14.3.0、固定rule不変更。全command/OS環境/時刻/own child PID・親/exit/stdout-stderr hashはhost pg10688専用SLOTの各safe record、公開input/manifest/XML/indexのhashはmanifestを参照。own63102終了1は静的指摘による真正終端、PMD/Checkstyleの各段終了確認済。製品/Test起動/annotation processor/外部実操作0、新PT0/coverage null。正式1964PT/53scope・17/190・工数null・QA051final・全安全HOLD不変更。
+
+共有used14→14/reset1793599188の丸め0≠専有費0、N/T/専有費null、usagedf6d22efb65aeb0d467e608e95f47966d8bf0636520f98f9ed9b15845bf1be84。必要な当source全静的を一回だけ測定し、同じ全体を確認だけで再演しない。次は公開保存push後、import三の限定PG→subset静的/本文不変/必要六正常/追跡へ継続する。
