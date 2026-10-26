@@ -1,0 +1,94 @@
+{
+  "actualExit": 0,
+  "classCrc64": "f28d7f65ed5a0732",
+  "coverageQualification": "HISTORICAL_GAP_METADATA_ONLY_NOT_CURRENT_SOURCE_PT",
+  "effortPercent": null,
+  "externalActions": 0,
+  "formalUpdated": false,
+  "invocation": {
+    "actualPythonCommand": [
+      "python3",
+      "-B",
+      "tools/quality/pg10643_user_query_gap_metadata_post.py"
+    ],
+    "arbitraryArgumentsRecorded": false,
+    "entrypointPath": "tools/quality/pg10643_user_query_gap_metadata_post.py",
+    "entrypointSha256": "32ba769f7fda2fb7165c2120c7e82929e901f3830b2a3f074d8d58d28c324d15",
+    "helperPath": "tools/quality/host_tool_invocation.py",
+    "helperSha256": "85d616a3db4ff47f4c95ae2e0dd57954bc2b09f28b8f2a685b986e5621545c46",
+    "libraryPath": "tools/quality/pg10643_user_query_gap_metadata_post.py",
+    "librarySha256": "32ba769f7fda2fb7165c2120c7e82929e901f3830b2a3f074d8d58d28c324d15",
+    "loadedProjectPythonSources": {
+      "tools/quality/g07_host_class_provenance_inputs.py": "a676cb3e4145177c3c243722d737592ce7d44c3f29cfe4f670662ef7651f046b",
+      "tools/quality/host_tool_invocation.py": "85d616a3db4ff47f4c95ae2e0dd57954bc2b09f28b8f2a685b986e5621545c46",
+      "tools/quality/pg10643_user_query_gap_metadata_post.py": "32ba769f7fda2fb7165c2120c7e82929e901f3830b2a3f074d8d58d28c324d15"
+    },
+    "provenance": "OBSERVED_SYS_ARGV_AND_ORIG_ARGV_NOT_RECONSTRUCTED"
+  },
+  "metadataNegativeVectors": [
+    "crc",
+    "missing-row",
+    "counter"
+  ],
+  "methodLineSums": {
+    "covered": 56,
+    "missed": 8
+  },
+  "methodsSha256": "a27c11f51835b30a8682e45a207e3f7620f378750b3b5f8c662514f1e37c71ae",
+  "missingMethods": [
+    {
+      "counters": {
+        "BRANCH": {
+          "covered": 0,
+          "missed": 2
+        },
+        "CLASS": {
+          "covered": 0,
+          "missed": 0
+        },
+        "LINE": {
+          "covered": 0,
+          "missed": 8
+        },
+        "METHOD": {
+          "covered": 0,
+          "missed": 1
+        }
+      },
+      "descriptor": "(Ldev/codex/schubert/nk/api/persistence/UserQueryRepository;Ljava/sql/Connection;Ldev/codex/schubert/nk/api/security/AuthenticatedActor;Ljava/time/Instant;)Ljava/util/Optional;",
+      "method": "query"
+    }
+  ],
+  "newAccepted": 0,
+  "newMeasuredCoverage": false,
+  "nextDependency": "NORMAL_QUERY_REPOSITORY_CONNECTION_SQL_HOLD_NOT_A_NEW_PURE_GAP",
+  "oldRuntimeReassigned": false,
+  "originalClassCounters": {
+    "BRANCH": {
+      "covered": 16,
+      "missed": 2
+    },
+    "CLASS": {
+      "covered": 1,
+      "missed": 0
+    },
+    "LINE": {
+      "covered": 54,
+      "missed": 8
+    },
+    "METHOD": {
+      "covered": 12,
+      "missed": 1
+    }
+  },
+  "originalClassSha256": "cb9963c566e3035e879a266d4a9f96847bd586dcf43c7051b2fa447184689a93",
+  "originalExecSha256": "7d6ab6077f57eee0d593c3380bd02066680808b62433c005e799b77945d03cc5",
+  "originalManifestSha256": "7e37b3f71ef9716661798c908ec231c45a2883cbe0e97df55dbbee13c1a7fe5b",
+  "originalReaderStdoutSha256": "fdbffee251dc881d6309b9477ee0b3e79ef4d57e278de58a67aa0fe861d44ebc",
+  "originalToolSha256": "477c5c0153d5b652f644dc605557e5d19f63e4d6be5e03de230928b98fe2dfa6",
+  "productTestsExecuted": 0,
+  "readerReexecuted": false,
+  "source": "70165b0768a1fabd13371cc25a55978fcf3452ba",
+  "sourceLineOverlapNotSummedIntoClass": true,
+  "targetClassLoaded": false
+}

@@ -1,0 +1,13 @@
+# 2096 User要求の歴史的未網羅method照合・次群選定結果
+
+2026-10-27 00:00 JST、群2441開始.25/1/3pp cap10。現開発source370fd74f6/Main21dは変更していない。旧PG9972/9974・source70165b0768a1fabd13371cc25a55978fcf3452baの保存済みexec/classだけから詳細を読み、旧八PTを再実行せず、新sourceのcoverageへ転用していない。
+
+原9974はfull UserQueryRequest unit L54/62-M12/13-C1/1-B16/18、validateResponse単体L15/15-M1/1-B4/4。PG10642のJDK-only metadata helperは既exec/source class bytesをJaCoCoへ渡すだけで、target classをruntime classpathへ入れず初期化/製品method/製品PT実行0。compile/read各0後に後記集計assert1、元stdoutを保存した。
+
+PG10643-user-query-gap-metadata-post-v1 manifest `bf99ba9805bba9ea081e75dd1fdcf46483560dc6dbc821d8f5757f68373a8e3e` actual0。原9974 manifest `7e37b3f71ef9716661798c908ec231c45a2883cbe0e97df55dbbee13c1a7fe5b`、元exec SHA/単一class CRC f28d7f65ed5a0732・class SHAを再照合し、既reader stdout `fdbffee251dc881d6309b9477ee0b3e79ef4d57e278de58a67aa0fe861d44ebc`を再利用（reader再演0）。全13methodをmethods.jsonへ保存、三改変metadata反例を拒否した。
+
+**未網羅はqueryの一methodだけ、L8/0-M1/0-B2/0。他十二methodはmethod未網羅0。** header getterやcanonical両lambdaは既網羅であり、新しい不足としてTestを追加しない。queryの既純粋Testは全引数nullによる入口拒否のみで、repository/Connectionへ委譲する正常処理は元DB/SQL安全HOLD。全class100へ届かせるため同八成功を確認再演したり、新proxy/harnessで元DB処理を迂回したりしない。460の23:48記載の未網羅範囲はこの詳細で確認できた。
+
+BUG1855/YKT1606：原10642はmethod LINE coveredの単純和をclass unique LINE coveredと比較してassert1、元工具SHA477c5c0153d5b652f644dc605557e5d19f63e4d6be5e03de230928b98fe2dfa6保持。lambdaと外側methodはsource行が重なり、method別LINEをclassへ単純加算できない。10643はMETHOD/BRANCH加算だけ元classと照合し、LINEは元class集計を保持してmethod和と区別した。既stdoutを読んだだけで旧reader/旧PT/全回帰の再演0、原失敗を保存。
+
+この群の成果は既証跡の未網羅箇所の同定と、不要/保留再試行を避ける次群判断。再認証/計画選定であって新PG/PT受入ではない。全formal1964-53/17-190/工数null/QA051final/元HOLD不変、coverage新計上0・新source成功転用0。次は純粋protocol/値の別sourceを既後続成果と照合し、真の不足又は新観点がある許可済みPG/PTへ進む。共有used11→11/reset1793599188、実N/T/専有費null、usageaf4e76dda6075a2c65c119e129a924c43a991e5215f5c1de255146fd0ee1c0a8。
