@@ -1,0 +1,15 @@
+# 2114 Graph三import是正・静的型・本文byte範囲結果
+
+2026-10-27、2113/event2459、BUG1861/YKT1612、開始1/3/7pp cap10。source `0a7ff657115228d6cdde3820b5f2ae36ac7f3186`、Main21d7c304不変。三Graph TestのAssertions.*を使用六memberへ明示化しただけで、fixture/例外graph/assertion本文は変更していない。
+
+PG10694 plan `8dfb0086fc1ec0a4e2b7e7e06815134d96167ecbbf64cf8948a24288f588234c` actual0、全本文token/他input不変・九metadata反例。PG10698六正常 `7177fe941af4b6df2f2237112b0f3cc5eb9a82f21f8ef22c34eca6674eec1338` actual0、package/testCompile/六jar、PT0・UNRUN_NOT_PASS。初回工具import時のpyflakes runtime path欠落actual1/SLOT前は環境手戻りとして保持し、所定PYTHONPATH補完後の本体初回実行と区別する。Maven真正終了0/own75119終了0、元Graph9動的再演0。
+
+PG10700限定静的 `d1bfe5019a18274230909ba0a8ddb30779a9284d8ae51d50ecf0a299b60488a1` rawactual1、Checkstyle3→0、PMD元4→4/処理error0、rule/抑制変更0。残四は同三TestのPUBLIC/PUBLIC root/PUBLIC next重複literal。元global1810中の他1807はsource不変というsource継続性だけを記録し、新sourceで全1810を再実行したとしない。全PMD/全F03/451未合格を維持。
+
+PG10702独立 `1468fa937a37d3eadc5d20a97a9d4c28bf793b20c834c8a286152f004cf7f93e` actual0、JUnit importを別正規表現で除いた全本文token一致・三assert改変反例、全Main1843/他Test1955class byte不変・対象三SourceFile由来七classだけ変更/総1962。七classの命令を個別比較したものではなく、debug-only変更や全bytecode同値と過大認定しない。元PMD四の全属性・messageはimport増加のline+5だけを許し、他値/原ruleを保持したことを確認。
+
+PG10704 trace `759122c0cfc5197ae8ff7714b76d883056a11d87c809ea3fe6a2b02e253c3172` /PG10706独立 `a0c726f17ae2f2ceed390aff4c07feb9a7ec1dc20284b3e9fc172a88a834bfee` actual0。983行の三source SHAのみ/他980全field保持、1810Java/登録1808/UNKNOWN二を保持。原主責P01805/P01806・費用・旧runtime資格を変更せず、source-only Graph import binding/PT0/coverage nullを別記。所定WBS auditは前後actual1/同HOLD、八metadata改変拒否。新sourceへ旧PTを移植していない。
+
+独立post工具のunused jsonは既BUG1854/YKT1605新scopeへ修正前追補、前置pyflakes1で本体未発行/OUT0を保持。元工具SHA1c4062c06274dcc0be14c5b75218905cd191117bb9a80645809c353f090b2a2a、削除・前置0後に初回post実行0。元閉鎖scopeと新手戻りを区別する。全command/時刻/OS・JDK/tool/環境/source/hash/exitは各manifest/正常begin/段safe recordに保存。
+
+Graph9 PTはNOT_EXECUTED_HOLD、新PT0・coverage null、製品/DB/VM/Root/native/外部実操作0。正式1964PT/53scope・17/190・工数null・QA051final・未読保証不明1847/全安全HOLD不変更。利用枠used14→14/reset1793599188の共有丸め0≠専有費0、N/T/専有費null。次は公開保存push/限定状態追補後、四重複literalのPGを別着手前見積と先行BUG/YKTで実施する。通常小区切りで停止しない。
