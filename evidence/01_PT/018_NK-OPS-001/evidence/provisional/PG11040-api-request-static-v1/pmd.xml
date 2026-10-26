@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pmd xmlns="http://pmd.sourceforge.net/report/2.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pmd.sourceforge.net/report/2.0.0 https://pmd.github.io/schema/report_2_0_0.xsd" version="7.28.0" timestamp="2026-10-27T08:23:12.198">
+<file name="/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/media/MediaRequestTest.java">
+<violation beginline="144" endline="144" begincolumn="16" endcolumn="21" rule="CloseResource" ruleset="Error Prone" package="dev.codex.schubert.nk.api.application.media" class="MediaRequestTest" method="med035MalformedNullAndUnknownRequestsNeverReachQueries" variable="never" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#closeresource" priority="3">
+Ensure that resources like this Connection object are closed after use
+</violation>
+<violation beginline="147" endline="147" begincolumn="17" endcolumn="50" rule="UseProperClassLoader" ruleset="Error Prone" package="dev.codex.schubert.nk.api.application.media" class="MediaRequestTest" method="med035MalformedNullAndUnknownRequestsNeverReachQueries" variable="never" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader" priority="3">
+In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.
+</violation>
+<violation beginline="192" endline="192" begincolumn="17" endcolumn="23" rule="CloseResource" ruleset="Error Prone" package="dev.codex.schubert.nk.api.application.media" class="MediaRequestTest" method="check" variable="actual" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#closeresource" priority="3">
+Ensure that resources like this CanonicalField object are closed after use
+</violation>
+<violation beginline="205" endline="205" begincolumn="16" endcolumn="21" rule="CloseResource" ruleset="Error Prone" package="dev.codex.schubert.nk.api.application.media" class="MediaRequestTest" method="check" variable="field" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#closeresource" priority="3">
+Ensure that resources like this CanonicalField object are closed after use
+</violation>
+</file>
+<file name="/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/question/QuestionQueryRequestTest.java">
+<violation beginline="39" endline="39" begincolumn="21" endcolumn="28" rule="AvoidFieldNameMatchingMethodName" ruleset="Error Prone" package="dev.codex.schubert.nk.api.application.question" class="QuestionQueryRequestTest" variable="MESSAGE" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidfieldnamematchingmethodname" priority="3">
+Field MESSAGE has the same name as a method
+</violation>
+<violation beginline="109" endline="109" begincolumn="19" endcolumn="24" rule="CloseResource" ruleset="Error Prone" package="dev.codex.schubert.nk.api.application.question" class="QuestionQueryRequestTest" method="qry009CanonicalFieldsNullAndAllLayoutsUseIndependentJce" variable="field" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#closeresource" priority="3">
+Ensure that resources like this CanonicalField object are closed after use
+</violation>
+</file>
+<file name="/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/question/QuestionSubmitRequestTest.java">
+<violation beginline="230" endline="230" begincolumn="25" endcolumn="56" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.api.application.question" class="QuestionSubmitRequestTest" method="concurrentScopes" variable="executor" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="235" endline="249" begincolumn="13" endcolumn="19" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.api.application.question" class="QuestionSubmitRequestTest" method="concurrentScopes" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="255" endline="255" begincolumn="9" endcolumn="21" rule="AvoidSynchronizedStatement" ruleset="Multithreading" package="dev.codex.schubert.nk.api.application.question" class="QuestionSubmitRequestTest" method="concurrentScopes" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#avoidsynchronizedstatement" priority="3">
+Use ReentrantLock rather than synchronization
+</violation>
+<violation beginline="258" endline="258" begincolumn="15" endcolumn="71" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.api.application.question" class="QuestionSubmitRequestTest" method="concurrentScopes" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="262" endline="274" begincolumn="13" endcolumn="19" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.api.application.question" class="QuestionSubmitRequestTest" method="concurrentScopes" variable="read" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="276" endline="281" begincolumn="13" endcolumn="19" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.api.application.question" class="QuestionSubmitRequestTest" method="concurrentScopes" variable="close" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="382" endline="382" begincolumn="11" endcolumn="16" rule="CloseResource" ruleset="Error Prone" package="dev.codex.schubert.nk.api.application.question" class="QuestionSubmitRequestTest" method="check" variable="field" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#closeresource" priority="3">
+Ensure that resources like this CanonicalField object are closed after use
+</violation>
+</file>
+<file name="/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/scenario/ScenarioRequestTest.java">
+<violation beginline="162" endline="162" begincolumn="16" endcolumn="22" rule="CloseResource" ruleset="Error Prone" package="dev.codex.schubert.nk.api.application.scenario" class="ScenarioRequestTest" method="malformedNullAndOutcomeBoundariesNeverBecomeQueries" variable="unused" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#closeresource" priority="3">
+Ensure that resources like this Connection object are closed after use
+</violation>
+<violation beginline="165" endline="165" begincolumn="17" endcolumn="50" rule="UseProperClassLoader" ruleset="Error Prone" package="dev.codex.schubert.nk.api.application.scenario" class="ScenarioRequestTest" method="malformedNullAndOutcomeBoundariesNeverBecomeQueries" variable="unused" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader" priority="3">
+In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.
+</violation>
+<violation beginline="205" endline="205" begincolumn="15" endcolumn="21" rule="CloseResource" ruleset="Error Prone" package="dev.codex.schubert.nk.api.application.scenario" class="ScenarioRequestTest" method="check" variable="actual" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#closeresource" priority="3">
+Ensure that resources like this CanonicalField object are closed after use
+</violation>
+<violation beginline="216" endline="216" begincolumn="16" endcolumn="21" rule="CloseResource" ruleset="Error Prone" package="dev.codex.schubert.nk.api.application.scenario" class="ScenarioRequestTest" method="check" variable="field" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#closeresource" priority="3">
+Ensure that resources like this CanonicalField object are closed after use
+</violation>
+</file>
+</pmd>
