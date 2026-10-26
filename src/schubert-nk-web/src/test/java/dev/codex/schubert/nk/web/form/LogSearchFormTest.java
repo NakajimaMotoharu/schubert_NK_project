@@ -22,6 +22,15 @@ import org.junit.jupiter.api.Test;
 
 /** PG214/PT-WEB278..285/SSC073/UI222,225,235/SS313,352. */
 class LogSearchFormTest {
+  private static final String LOG_TYPE_FIELD = "log_type";
+  private static final String ACTION_FIELD = "action";
+  private static final String PATH_FIELD = "path";
+  private static final String LEVEL_FIELD = "level";
+  private static final String FROM_FIELD = "from";
+  private static final String PAGE_FIELD = "page";
+  private static final String RANGE_START_JST = "2026-09-01T09:00";
+  private static final String REDACTION_INPUT = "private-input";
+
   private static LogSearchForm form(String key, String value) {
     return LogSearchForm.bind(Map.of(key, List.of(value)));
   }
@@ -49,19 +58,19 @@ class LogSearchFormTest {
                 Map.of(
                     "q",
                     List.of(" e\u0301 "),
-                    "log_type",
+                    LOG_TYPE_FIELD,
                     List.of(" " + type + " "),
-                    "action",
+                    ACTION_FIELD,
                     List.of(" search "),
-                    "path",
+                    PATH_FIELD,
                     List.of(" /search "),
-                    "level",
+                    LEVEL_FIELD,
                     List.of(level),
-                    "from",
+                    FROM_FIELD,
                     List.of("2026-09-20T09:00"),
                     "to",
                     List.of("2026-09-20T10:00"),
-                    "page",
+                    PAGE_FIELD,
                     List.of("002")));
         assertTrue(full.isValid());
         var p = full.toRequest();
@@ -80,7 +89,7 @@ class LogSearchFormTest {
 
   @Test
   void web279TextAndBinding() {
-    for (var entry : Map.of("q", 256, "action", 64, "path", 256).entrySet()) {
+    for (var entry : Map.of("q", 256, ACTION_FIELD, 64, PATH_FIELD, 256).entrySet()) {
       int n = entry.getValue();
       assertTrue(form(entry.getKey(), "x".repeat(n)).isValid());
       assertTrue(form(entry.getKey(), "あ".repeat(n / 3) + "x".repeat(n % 3)).isValid());
@@ -92,7 +101,16 @@ class LogSearchFormTest {
           bad.getValues().get(Field.valueOf(entry.getKey().toUpperCase(Locale.ROOT))).length());
     }
     assertEquals(Code.BINDING, form("unknown", "x").getIssues().get(Field.FORM));
-    for (String key : List.of("q", "log_type", "action", "path", "level", "from", "to", "page")) {
+    for (String key :
+        List.of(
+            "q",
+            LOG_TYPE_FIELD,
+            ACTION_FIELD,
+            PATH_FIELD,
+            LEVEL_FIELD,
+            FROM_FIELD,
+            "to",
+            PAGE_FIELD)) {
       for (var list : List.<List<String>>of(List.of(), List.of("a", "b"))) {
         var f = LogSearchForm.bind(Map.of(key, list));
         assertFalse(f.isValid());
@@ -104,13 +122,31 @@ class LogSearchFormTest {
   @Test
   void web280Characters() {
     // BUG-225: surrounding whitespace must not erase the terminal-surrogate boundary.
-    for (String key : List.of("q", "log_type", "action", "path", "level", "from", "to", "page")) {
+    for (String key :
+        List.of(
+            "q",
+            LOG_TYPE_FIELD,
+            ACTION_FIELD,
+            PATH_FIELD,
+            LEVEL_FIELD,
+            FROM_FIELD,
+            "to",
+            PAGE_FIELD)) {
       var f = form(key, "\ud800");
       assertFalse(f.isValid());
       assertEquals(Code.CHARACTERS, f.getIssues().get(Field.valueOf(key.toUpperCase(Locale.ROOT))));
       assertTrue(f.getValues().get(Field.valueOf(key.toUpperCase(Locale.ROOT))).isEmpty());
     }
-    for (String key : List.of("q", "log_type", "action", "path", "level", "from", "to", "page"))
+    for (String key :
+        List.of(
+            "q",
+            LOG_TYPE_FIELD,
+            ACTION_FIELD,
+            PATH_FIELD,
+            LEVEL_FIELD,
+            FROM_FIELD,
+            "to",
+            PAGE_FIELD))
       for (String value : List.of("\r", "\n", "\t", "\0", "\ud800", "\ud800x", "\udc00")) {
         var f = form(key, " " + value + " ");
         assertFalse(f.isValid());
@@ -126,22 +162,22 @@ class LogSearchFormTest {
   @Test
   void web281PageAndEnums() {
     for (String value : List.of("", " ", "0", "-0", "-1", "-2147483648")) {
-      var f = form("page", value);
+      var f = form(PAGE_FIELD, value);
       assertTrue(f.isValid());
       assertEquals(1, f.getPage());
     }
-    assertEquals(999999, form("page", "999999").getPage());
-    assertEquals(1, form("page", "0001").getPage());
+    assertEquals(999999, form(PAGE_FIELD, "999999").getPage());
+    assertEquals(1, form(PAGE_FIELD, "0001").getPage());
     for (String value :
         List.of("+1", "1.0", "1e2", "１", "1000000", "2147483648", "-2147483649", "-", "x")) {
-      var f = form("page", value);
+      var f = form(PAGE_FIELD, value);
       assertEquals(Code.VALUE, f.getIssues().get(Field.PAGE));
       assertThrows(IllegalStateException.class, f::toRequest);
     }
     for (String value : List.of("request", "UNKNOWN"))
-      assertEquals(Code.VALUE, form("log_type", value).getIssues().get(Field.LOG_TYPE));
+      assertEquals(Code.VALUE, form(LOG_TYPE_FIELD, value).getIssues().get(Field.LOG_TYPE));
     for (String value : List.of("warn", "DEBUG"))
-      assertEquals(Code.VALUE, form("level", value).getIssues().get(Field.LEVEL));
+      assertEquals(Code.VALUE, form(LEVEL_FIELD, value).getIssues().get(Field.LEVEL));
   }
 
   @Test
@@ -157,12 +193,12 @@ class LogSearchFormTest {
             "0001-01-01T09:00", "0001-01-01T00:00:00Z",
             "9999-12-31T23:59:59.999", "9999-12-31T14:59:59.999Z");
     for (var entry : cases.entrySet())
-      for (String key : List.of("from", "to")) {
+      for (String key : List.of(FROM_FIELD, "to")) {
         var f = form(key, entry.getKey());
         assertTrue(f.isValid(), entry.getKey());
         assertEquals(
             Optional.of(Instant.parse(entry.getValue())),
-            key.equals("from") ? f.toRequest().fromAt() : f.toRequest().toAt());
+            key.equals(FROM_FIELD) ? f.toRequest().fromAt() : f.toRequest().toAt());
       }
     for (String text :
         List.of(
@@ -181,28 +217,29 @@ class LogSearchFormTest {
             "2026-9-20T00:00",
             "2026-09-20T00:00:00.",
             "+2026-09-20T00:00")) {
-      var f = form("from", text);
+      var f = form(FROM_FIELD, text);
       assertEquals(Code.VALUE, f.getIssues().get(Field.FROM), text);
       assertThrows(IllegalStateException.class, f::toRequest);
     }
-    assertTrue(form("from", " ").isValid());
+    assertTrue(form(FROM_FIELD, " ").isValid());
     assertTrue(form("to", "").toRequest().toAt().isEmpty());
   }
 
   @Test
   void web283DateRange() {
-    for (String to : List.of("2026-09-01T09:00", "2026-10-02T09:00")) {
-      var f = LogSearchForm.bind(Map.of("from", List.of("2026-09-01T09:00"), "to", List.of(to)));
+    for (String to : List.of(RANGE_START_JST, "2026-10-02T09:00")) {
+      var f = LogSearchForm.bind(Map.of(FROM_FIELD, List.of(RANGE_START_JST), "to", List.of(to)));
       assertTrue(f.isValid());
     }
     for (String to : List.of("2026-09-01T08:59:59.999", "2026-10-02T09:00:00.001")) {
-      var f = LogSearchForm.bind(Map.of("from", List.of("2026-09-01T09:00"), "to", List.of(to)));
+      var f = LogSearchForm.bind(Map.of(FROM_FIELD, List.of(RANGE_START_JST), "to", List.of(to)));
       assertEquals(Code.RANGE, f.getIssues().get(Field.TO));
       assertThrows(IllegalStateException.class, f::toRequest);
     }
-    var bad = LogSearchForm.bind(Map.of("from", List.of("bad"), "to", List.of("2026-09-01T09:00")));
+    var bad =
+        LogSearchForm.bind(Map.of(FROM_FIELD, List.of("bad"), "to", List.of(RANGE_START_JST)));
     assertEquals(Map.of(Field.FROM, Code.VALUE), bad.getIssues());
-    bad = LogSearchForm.bind(Map.of("from", List.of("2026-09-01T09:00"), "to", List.of("bad")));
+    bad = LogSearchForm.bind(Map.of(FROM_FIELD, List.of(RANGE_START_JST), "to", List.of("bad")));
     assertEquals(Map.of(Field.TO, Code.VALUE), bad.getIssues());
   }
 
@@ -218,26 +255,27 @@ class LogSearchFormTest {
     var nullItem = new ArrayList<String>();
     nullItem.add(null);
     assertThrows(NullPointerException.class, () -> LogSearchForm.bind(Map.of("q", nullItem)));
-    var list = new ArrayList<>(List.of("private-input"));
+    var list = new ArrayList<>(List.of(REDACTION_INPUT));
     var original = new HashMap<String, List<String>>();
     original.put("q", list);
     var f = LogSearchForm.bind(original);
     list.set(0, "changed");
     original.clear();
-    assertEquals("private-input", f.getValues().get(Field.Q));
-    assertEquals(Optional.of("private-input"), f.toRequest().keyword());
+    assertEquals(REDACTION_INPUT, f.getValues().get(Field.Q));
+    assertEquals(Optional.of(REDACTION_INPUT), f.toRequest().keyword());
     assertThrows(UnsupportedOperationException.class, () -> f.getValues().clear());
     assertThrows(UnsupportedOperationException.class, () -> f.getIssues().clear());
     assertEquals("LogSearchForm[REDACTED]", f.toString());
-    assertFalse(f.toString().contains("private-input"));
+    assertFalse(f.toString().contains(REDACTION_INPUT));
     var error =
-        assertThrows(IllegalStateException.class, () -> form("level", "private-input").toRequest());
+        assertThrows(
+            IllegalStateException.class, () -> form(LEVEL_FIELD, REDACTION_INPUT).toRequest());
     assertEquals("invalid log search form", error.getMessage());
   }
 
   @Test
   void web285ConcurrentBinding() throws Exception {
-    var shared = Map.of("level", List.of("WARN"));
+    var shared = Map.of(LEVEL_FIELD, List.of("WARN"));
     try (var pool = Executors.newFixedThreadPool(8)) {
       var futures = new ArrayList<Future<?>>();
       for (int i = 0; i < 64; i++) {
@@ -247,8 +285,8 @@ class LogSearchFormTest {
                 () -> {
                   var inputs = new HashMap<>(shared);
                   inputs.put("q", List.of("q" + n));
-                  inputs.put("page", List.of(Integer.toString(n + 1)));
-                  inputs.put("from", List.of("2026-09-20T09:00"));
+                  inputs.put(PAGE_FIELD, List.of(Integer.toString(n + 1)));
+                  inputs.put(FROM_FIELD, List.of("2026-09-20T09:00"));
                   var f = LogSearchForm.bind(inputs);
                   assertTrue(f.isValid());
                   assertEquals(Optional.of("q" + n), f.toRequest().keyword());
@@ -261,6 +299,6 @@ class LogSearchFormTest {
       }
       for (var future : futures) future.get(10, TimeUnit.SECONDS);
     }
-    assertEquals(Map.of("level", List.of("WARN")), shared);
+    assertEquals(Map.of(LEVEL_FIELD, List.of("WARN")), shared);
   }
 }

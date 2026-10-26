@@ -25,6 +25,12 @@ import org.junit.jupiter.api.Test;
 
 /** Independent UI/SS literals, PG199/SSC072/015012/PT-WEB214..221. */
 class ScenarioSearchFormTest {
+  private static final String GAME_FIELD = "game";
+  private static final String SPEAKER_FIELD = "speaker";
+  private static final String ENTRY_TYPE_FIELD = "entry_type";
+  private static final String VOICE_FIELD = "voice";
+  private static final String PAGE_FIELD = "page";
+
   private static ScenarioSearchForm one(String key, String value) {
     return ScenarioSearchForm.bind(Map.of(key, List.of(value)));
   }
@@ -57,17 +63,17 @@ class ScenarioSearchFormTest {
               Map.of(
                   "q",
                   List.of(" e\u0301 "),
-                  "game",
+                  GAME_FIELD,
                   List.of(index == 0 ? " NUKITASHI1 " : "NUKITASHI2"),
-                  "speaker",
+                  SPEAKER_FIELD,
                   List.of(" 話者 "),
                   "chapter",
                   List.of(" 章 "),
-                  "entry_type",
+                  ENTRY_TYPE_FIELD,
                   List.of(index == 0 ? "dialogue" : "narration"),
-                  "voice",
+                  VOICE_FIELD,
                   List.of(index == 0 ? "with" : "without"),
-                  "page",
+                  PAGE_FIELD,
                   List.of(" 12 ")));
       assertTrue(f.isValid());
       var r = f.toRequest();
@@ -91,8 +97,8 @@ class ScenarioSearchFormTest {
   @Test
   void web215ByteBoundaries() {
     for (var item :
-        Map.of("q", Field.Q, "speaker", Field.SPEAKER, "chapter", Field.CHAPTER).entrySet()) {
-      int limit = item.getKey().equals("speaker") ? 128 : 256;
+        Map.of("q", Field.Q, SPEAKER_FIELD, Field.SPEAKER, "chapter", Field.CHAPTER).entrySet()) {
+      int limit = item.getKey().equals(SPEAKER_FIELD) ? 128 : 256;
       for (int length : new int[] {limit - 1, limit}) {
         String input = "a".repeat(length);
         var f = one(item.getKey(), input);
@@ -115,12 +121,19 @@ class ScenarioSearchFormTest {
   void web216UnicodeAndEnums() {
     for (String bad : List.of("\r", "\n", "\t", "\u0000", "x\r", "\uD800", "\uD800x", "\uDC00")) {
       issue("q", bad, Field.Q, Code.CHARACTERS);
-      issue("game", bad, Field.GAME, Code.CHARACTERS);
-      issue("page", bad, Field.PAGE, Code.CHARACTERS);
+      issue(GAME_FIELD, bad, Field.GAME, Code.CHARACTERS);
+      issue(PAGE_FIELD, bad, Field.PAGE, Code.CHARACTERS);
     }
-    for (String key : List.of("game", "entry_type", "voice")) {
+    for (String key : List.of(GAME_FIELD, ENTRY_TYPE_FIELD, VOICE_FIELD)) {
       Field field =
-          Map.of("game", Field.GAME, "entry_type", Field.ENTRY_TYPE, "voice", Field.VOICE).get(key);
+          Map.of(
+                  GAME_FIELD,
+                  Field.GAME,
+                  ENTRY_TYPE_FIELD,
+                  Field.ENTRY_TYPE,
+                  VOICE_FIELD,
+                  Field.VOICE)
+              .get(key);
       issue(key, "unknown", field, Code.VALUE);
       issue(key, "Ａ", field, Code.VALUE);
     }
@@ -136,7 +149,9 @@ class ScenarioSearchFormTest {
       assertEquals(Map.of(Field.FORM, Code.BINDING), f.getIssues());
       assertThrows(IllegalStateException.class, f::toRequest);
     }
-    for (String name : List.of("q", "game", "speaker", "chapter", "entry_type", "voice", "page")) {
+    for (String name :
+        List.of(
+            "q", GAME_FIELD, SPEAKER_FIELD, "chapter", ENTRY_TYPE_FIELD, VOICE_FIELD, PAGE_FIELD)) {
       for (List<String> values : List.of(List.<String>of(), List.of("a", "b"))) {
         var f = ScenarioSearchForm.bind(Map.of(name, values));
         assertFalse(f.isValid());
@@ -170,7 +185,7 @@ class ScenarioSearchFormTest {
             2);
     valid.forEach(
         (input, expected) -> {
-          var f = one("page", input);
+          var f = one(PAGE_FIELD, input);
           assertTrue(f.isValid(), input);
           assertEquals(expected.intValue(), f.getPage());
           assertEquals(expected.intValue(), f.toRequest().page());
@@ -187,7 +202,7 @@ class ScenarioSearchFormTest {
             "1e2",
             "１",
             "1 2",
-            "9".repeat(300))) issue("page", bad, Field.PAGE, Code.VALUE);
+            "9".repeat(300))) issue(PAGE_FIELD, bad, Field.PAGE, Code.VALUE);
   }
 
   @Test
@@ -197,11 +212,11 @@ class ScenarioSearchFormTest {
             Map.of(
                 "q",
                 List.of("x".repeat(257)),
-                "game",
+                GAME_FIELD,
                 List.of("wrong"),
-                "voice",
+                VOICE_FIELD,
                 List.of("present"),
-                "page",
+                PAGE_FIELD,
                 List.of("+1"),
                 "owner",
                 List.of("secret")));
@@ -258,7 +273,7 @@ class ScenarioSearchFormTest {
                 () -> {
                   var f =
                       ScenarioSearchForm.bind(
-                          Map.of("q", List.of("body-" + n), "page", List.of("" + n)));
+                          Map.of("q", List.of("body-" + n), PAGE_FIELD, List.of("" + n)));
                   assertTrue(f.isValid());
                   assertEquals(Optional.of("body-" + n), f.toRequest().bodyKeyword());
                   assertEquals(n, f.toRequest().page());
