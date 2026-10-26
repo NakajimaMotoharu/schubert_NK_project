@@ -1,0 +1,11 @@
+# Header期待値是正・一Test source追跡
+
+2026-10-26 13:03 JST、群2328/G13.07開始.25/1/3 cap10。原MessageCodecTest=P00203担当費を保持、現source ddde23ca0304654d59608b434c647c87d58ae3b6/Test SHA65e12cc4b54b26c0730e868925a88bc0f335061113d3b77cb90f4a9e195f23caとPRO026/既H01一methodの当限定proof10232原4a1660819973d2a676f02d92db21ac52a246ff225bd0fc773e7438a641dd6166だけ追記。旧979中他978全field/原owner・費用/歴史runtimeを保持、登録1804/1806・Main965/Test839-841/UNKNOWN二・論理候補971を不変更。当HeaderCodec四100は未達、新ID/受入0。
+
+初回PG10242-header-oracle-trace-v1/manifest.json原c7e901d4bad6e58c28162af36967b127667410407751ea64e7866a75e6f9fc6aは前arrayのcountを2→1へ誤転記、BUG1808/YKT1559を485変更・独立post前に起票。原manifest/原工具hashを保持、PG10243-header-oracle-trace-v2原13346b8b4cdf5158d37cc4e61971af2fd41f0de32fc5f0a8a4d8b13bf0ec0077で前array実len2を導出。当新参照一件、前二件、前々一件を分離する。V2 prepare時工具もqualified-preparation-tool.pyへinvocation hash一致で保存し、後続post検証のsourceを区別した。
+
+PG10244-header-oracle-trace-post-v1原305a1ed5aac25782e30fc6fbc906fd2701a6897e91bbecc249fb6097c80b1713はpost実0、前件数0/1/3/nullを実guardで拒否し、他owner/cost/hash/runtime source/件数/追加ID/wholeClassの七変異も拒否（計11 metadata）。485 current二sectionと486 raw inventorySha256だけ変更、元941/943/予算/受入・旧bindingと全row保持。postのforward hashは循環回避null、postから実raw hashを束縛。全WBS所定audit前後は真正1/HOLDのまま、合格化しない。
+
+PG10238原990332c65d18cc538264d4b76eec8ffdfd209a5dbfd6885fac2118dadc545ba7/2039でStorage123/22source静的文脈点検も保存。新欠陥認定0、旧UID修正以外21source同byte、UIDは10136の旧token保存/現SHAに結合、動的PT転用0。原202identifier候補はPayload12＋Protocol67＋Storage123で点検、constructor50/全module・要求-TestID-branch-evidence joinは未完。
+
+製品/compile/JUnit/coverage再演0・外部操作0。fresh共有34→34丸め0≠専有費0、usage0f478908/N-T配賦null。正式1964-53/17-190/工数null/全HOLD/QA051final不変。
