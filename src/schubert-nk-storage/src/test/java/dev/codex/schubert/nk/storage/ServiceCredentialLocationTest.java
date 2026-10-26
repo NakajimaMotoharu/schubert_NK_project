@@ -62,12 +62,12 @@ final class ServiceCredentialLocationTest {
 
   @Test
   void opsCredloc005ConcurrentFreshMapsDoNotChangeSnapshot() throws Exception {
-    var value = ServiceCredentialLocation.read(Map.of(KEY, ROOT));
+    Path expected = Path.of(ROOT);
     try (var pool = Executors.newFixedThreadPool(8)) {
       var tasks = new java.util.ArrayList<java.util.concurrent.Future<Path>>();
       for (int i = 0; i < 32; i++)
         tasks.add(pool.submit(() -> ServiceCredentialLocation.read(Map.of(KEY, ROOT)).directory()));
-      for (var task : tasks) assertEquals(value.directory(), task.get());
+      for (var task : tasks) assertEquals(expected, task.get());
     }
   }
 
