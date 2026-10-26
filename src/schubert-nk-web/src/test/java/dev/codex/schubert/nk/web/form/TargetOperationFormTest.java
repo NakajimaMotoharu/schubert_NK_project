@@ -26,6 +26,11 @@ import org.junit.jupiter.api.Test;
 
 /** UI236 independent ID12+UUID36 golden; UI224/SS313314; PG-D368/PT-TARGET001..008. */
 class TargetOperationFormTest {
+  private static final String CANCEL_OPERATION = "CANCEL";
+  private static final String OPERATION_FIELD = "operation";
+  private static final String CONFIRM_FIELD = "confirm";
+  private static final String OPERATION_TOKEN_FIELD = "operation_token";
+  private static final String DELETE_OPERATION = "DELETE";
   private static final String TOKEN = "12345678-1234-4234-8234-123456789abc";
 
   private record Bound(
@@ -36,7 +41,7 @@ class TargetOperationFormTest {
       Supplier<PayloadData> request) {}
 
   private static Bound bind(String operation, long id, Map<String, List<String>> fields) {
-    if (operation.equals("CANCEL")) {
+    if (operation.equals(CANCEL_OPERATION)) {
       var form = CancelForm.bind(id, fields);
       return new Bound(form, form::isValid, form::getIssues, form::displayValues, form::toRequest);
     }
@@ -46,37 +51,37 @@ class TargetOperationFormTest {
 
   private static Map<String, List<String>> fields(String operation, String id) {
     var result = new LinkedHashMap<String, List<String>>();
-    result.put("operation", List.of(operation));
+    result.put(OPERATION_FIELD, List.of(operation));
     result.put("id", List.of(id));
-    result.put("confirm", List.of("true"));
-    result.put("operation_token", List.of(TOKEN));
+    result.put(CONFIRM_FIELD, List.of("true"));
+    result.put(OPERATION_TOKEN_FIELD, List.of(TOKEN));
     return result;
   }
 
   @Test
   void target001BothIndependentFortyEightByteGolden() {
-    for (String operation : List.of("CANCEL", "DELETE")) {
+    for (String operation : List.of(CANCEL_OPERATION, DELETE_OPERATION)) {
       var f = bind(operation, 42, fields(operation, "42"));
       assertTrue(f.valid.getAsBoolean());
       assertTrue(f.issues.get().isEmpty());
       var request = f.request.get();
-      var layout = new LayoutId(operation.equals("CANCEL") ? "NTCREQ01" : "QDLREQ01");
+      var layout = new LayoutId(operation.equals(CANCEL_OPERATION) ? "NTCREQ01" : "QDLREQ01");
       var encoded =
           PayloadCodec.standard()
               .encode(new PayloadValues(layout, request.fields(), List.of()), false);
       assertArrayEquals(
           ("000000000042" + TOKEN).getBytes(StandardCharsets.US_ASCII), encoded.copyData());
-      assertEquals(TOKEN, f.values.get().get("operation_token"));
+      assertEquals(TOKEN, f.values.get().get(OPERATION_TOKEN_FIELD));
       assertEquals(42L, f.values.get().get("id"));
-      assertEquals(operation, f.values.get().get("operation"));
-      assertEquals(true, f.values.get().get("confirm"));
+      assertEquals(operation, f.values.get().get(OPERATION_FIELD));
+      assertEquals(true, f.values.get().get(CONFIRM_FIELD));
       assertFalse(f.owner.toString().contains(TOKEN));
     }
   }
 
   @Test
   void target002PositiveN12BoundariesAndCanonicalTargetEquality() {
-    for (String operation : List.of("CANCEL", "DELETE")) {
+    for (String operation : List.of(CANCEL_OPERATION, DELETE_OPERATION)) {
       for (String id : List.of("1", "000000000001", "999999999999")) {
         long value = Long.parseLong(id);
         assertTrue(bind(operation, value, fields(operation, id)).valid.getAsBoolean());
@@ -95,8 +100,8 @@ class TargetOperationFormTest {
 
   @Test
   void target003EachRequiredFieldMissingNullEmptyMultipleAndNullElement() {
-    for (String operation : List.of("CANCEL", "DELETE")) {
-      for (String key : List.of("operation", "id", "confirm", "operation_token")) {
+    for (String operation : List.of(CANCEL_OPERATION, DELETE_OPERATION)) {
+      for (String key : List.of(OPERATION_FIELD, "id", CONFIRM_FIELD, OPERATION_TOKEN_FIELD)) {
         for (int variant = 0; variant < 5; variant++) {
           var p = fields(operation, "42");
           switch (variant) {
@@ -117,30 +122,34 @@ class TargetOperationFormTest {
 
   @Test
   void target004ClosedOperationConfirmationAndCanonicalUuid() {
-    for (String operation : List.of("CANCEL", "DELETE")) {
+    for (String operation : List.of(CANCEL_OPERATION, DELETE_OPERATION)) {
       for (String value :
-          List.of("", "UNKNOWN", "cancel", "DELETE".equals(operation) ? "CANCEL" : "DELETE")) {
+          List.of(
+              "",
+              "UNKNOWN",
+              "cancel",
+              DELETE_OPERATION.equals(operation) ? CANCEL_OPERATION : DELETE_OPERATION)) {
         var p = fields(operation, "42");
-        p.put("operation", List.of(value));
-        assertTrue(bind(operation, 42, p).issues.get().containsKey("operation"));
+        p.put(OPERATION_FIELD, List.of(value));
+        assertTrue(bind(operation, 42, p).issues.get().containsKey(OPERATION_FIELD));
       }
       for (String value : List.of("", "false", "on", "TRUE", " true")) {
         var p = fields(operation, "42");
-        p.put("confirm", List.of(value));
-        assertTrue(bind(operation, 42, p).issues.get().containsKey("confirm"));
+        p.put(CONFIRM_FIELD, List.of(value));
+        assertTrue(bind(operation, 42, p).issues.get().containsKey(CONFIRM_FIELD));
       }
       for (String value :
           List.of("", "bad", TOKEN.toUpperCase(Locale.ROOT), " " + TOKEN, TOKEN + " ")) {
         var p = fields(operation, "42");
-        p.put("operation_token", List.of(value));
-        assertTrue(bind(operation, 42, p).issues.get().containsKey("operation_token"));
+        p.put(OPERATION_TOKEN_FIELD, List.of(value));
+        assertTrue(bind(operation, 42, p).issues.get().containsKey(OPERATION_TOKEN_FIELD));
       }
     }
   }
 
   @Test
   void target005ClosedFieldsAndOnlyCsrfTransportAllowance() {
-    for (String operation : List.of("CANCEL", "DELETE")) {
+    for (String operation : List.of(CANCEL_OPERATION, DELETE_OPERATION)) {
       var p = fields(operation, "42");
       p.put("_csrf", List.of("synthetic"));
       assertTrue(bind(operation, 42, p).valid.getAsBoolean());
@@ -163,12 +172,12 @@ class TargetOperationFormTest {
 
   @Test
   void target007ClosedImmutableSnapshotsDoNotRetainMutableInput() {
-    for (String operation : List.of("CANCEL", "DELETE")) {
+    for (String operation : List.of(CANCEL_OPERATION, DELETE_OPERATION)) {
       var p = fields(operation, "42");
       var f = bind(operation, 42, p);
       p.clear();
       assertTrue(f.valid.getAsBoolean());
-      assertEquals(TOKEN, f.values.get().get("operation_token"));
+      assertEquals(TOKEN, f.values.get().get(OPERATION_TOKEN_FIELD));
       assertThrows(UnsupportedOperationException.class, () -> f.values.get().clear());
       assertThrows(UnsupportedOperationException.class, () -> f.issues.get().put("id", "bad"));
     }
@@ -179,13 +188,13 @@ class TargetOperationFormTest {
     var futures = new ArrayList<Future<?>>();
     try (var executor = Executors.newFixedThreadPool(8)) {
       for (int n = 0; n < 100; n++) {
-        String operation = n % 2 == 0 ? "CANCEL" : "DELETE";
+        String operation = n % 2 == 0 ? CANCEL_OPERATION : DELETE_OPERATION;
         futures.add(
             executor.submit(
                 () -> {
                   var f = bind(operation, 42, fields(operation, "42"));
                   assertTrue(f.valid.getAsBoolean());
-                  assertEquals(TOKEN, f.values.get().get("operation_token"));
+                  assertEquals(TOKEN, f.values.get().get(OPERATION_TOKEN_FIELD));
                 }));
       }
       for (var future : futures) future.get(5, TimeUnit.SECONDS);

@@ -25,10 +25,13 @@ import org.junit.jupiter.api.Test;
 
 /** UI224/236 independent 4144-byte oracle; PG-D351/016065/PT-QST-FORM001..008. */
 class QuestionSubmitFormTest {
+  private static final String QUESTION_FIELD = "question";
+  private static final String OPERATION_TOKEN_FIELD = "operation_token";
   private static final String TOKEN = "12345678-1234-4234-8234-123456789abc";
 
   private static Map<String, List<String>> input(String question) {
-    return new HashMap<>(Map.of("question", List.of(question), "operation_token", List.of(TOKEN)));
+    return new HashMap<>(
+        Map.of(QUESTION_FIELD, List.of(question), OPERATION_TOKEN_FIELD, List.of(TOKEN)));
   }
 
   private static byte[] golden(String question, String token) {
@@ -69,7 +72,7 @@ class QuestionSubmitFormTest {
         assertTrue(form.isValid());
         assertEquals(expected, form.toRequest().questionText());
         assertEquals(UUID.fromString(TOKEN), form.toRequest().operationToken());
-        assertEquals(Map.of("question", expected), form.displayValues());
+        assertEquals(Map.of(QUESTION_FIELD, expected), form.displayValues());
         assertArrayEquals(golden(expected, TOKEN), actual(form));
       }
     }
@@ -88,9 +91,9 @@ class QuestionSubmitFormTest {
     }
     for (String body :
         List.of("", "a".repeat(4097), "界".repeat(1366), "😀".repeat(1025), "é".repeat(2049)))
-      invalid("question", body);
+      invalid(QUESTION_FIELD, body);
     try (var form = QuestionSubmitForm.bind(input("a".repeat(4097)))) {
-      assertEquals("a".repeat(4097), form.displayValues().get("question"));
+      assertEquals("a".repeat(4097), form.displayValues().get(QUESTION_FIELD));
     }
   }
 
@@ -99,10 +102,10 @@ class QuestionSubmitFormTest {
     for (String body :
         List.of(
             " ", "x ", "x\r", "x\n", "x\t", "x\0", "x\u001f", "x\u007f", "x\u0085", "x\ud800",
-            "x\udfff")) invalid("question", body);
+            "x\udfff")) invalid(QUESTION_FIELD, body);
     for (String body : List.of("x\n", "\ud800", "\udfff"))
       try (var form = QuestionSubmitForm.bind(input(body))) {
-        assertEquals("", form.displayValues().get("question"));
+        assertEquals("", form.displayValues().get(QUESTION_FIELD));
       }
     for (String body : List.of(" x", "x\u00a0", "x\u3000", "\ue000", "😀"))
       try (var form = QuestionSubmitForm.bind(input(body))) {
@@ -121,14 +124,14 @@ class QuestionSubmitFormTest {
             TOKEN + " ",
             TOKEN.substring(1),
             TOKEN + "0",
-            "g" + TOKEN.substring(1))) invalid("operation_token", token);
+            "g" + TOKEN.substring(1))) invalid(OPERATION_TOKEN_FIELD, token);
     for (String token :
         List.of(
             TOKEN,
             "00000000-0000-0000-0000-000000000000",
             "ffffffff-ffff-ffff-ffff-ffffffffffff")) {
       var parameters = input("x");
-      parameters.put("operation_token", List.of(token));
+      parameters.put(OPERATION_TOKEN_FIELD, List.of(token));
       try (var form = QuestionSubmitForm.bind(parameters)) {
         assertTrue(form.isValid());
         assertEquals(UUID.fromString(token), form.toRequest().operationToken());
@@ -139,7 +142,7 @@ class QuestionSubmitFormTest {
 
   @Test
   void qstForm005ClosedBindingMissingDuplicateAndNullContracts() {
-    for (String field : List.of("question", "operation_token")) {
+    for (String field : List.of(QUESTION_FIELD, OPERATION_TOKEN_FIELD)) {
       var parameters = input("x");
       parameters.remove(field);
       try (var form = QuestionSubmitForm.bind(parameters)) {
@@ -176,7 +179,7 @@ class QuestionSubmitFormTest {
     parameters.put(null, List.of("x"));
     assertThrows(NullPointerException.class, () -> QuestionSubmitForm.bind(parameters));
     parameters.remove(null);
-    for (String field : List.of("question", "operation_token")) {
+    for (String field : List.of(QUESTION_FIELD, OPERATION_TOKEN_FIELD)) {
       var nullable = input("x");
       nullable.put(field, null);
       assertThrows(NullPointerException.class, () -> QuestionSubmitForm.bind(nullable));
@@ -189,18 +192,18 @@ class QuestionSubmitFormTest {
   void qstForm006ImmutableSnapshotsAndRedaction() {
     var body = new ArrayList<>(List.of("質問"));
     var parameters = input("unused");
-    parameters.put("question", body);
+    parameters.put(QUESTION_FIELD, body);
     try (var form = QuestionSubmitForm.bind(parameters)) {
       body.set(0, "changed");
       parameters.clear();
-      assertEquals(Map.of("question", "質問"), form.displayValues());
+      assertEquals(Map.of(QUESTION_FIELD, "質問"), form.displayValues());
       assertThrows(
           UnsupportedOperationException.class,
-          () -> form.displayValues().put("question", "change"));
+          () -> form.displayValues().put(QUESTION_FIELD, "change"));
       assertThrows(UnsupportedOperationException.class, () -> form.getIssues().put("x", "change"));
       assertEquals("QuestionSubmitForm[REDACTED]", form.toString());
       assertFalse(form.displayValues().toString().contains(TOKEN));
-      assertEquals(Set.of("question"), form.displayValues().keySet());
+      assertEquals(Set.of(QUESTION_FIELD), form.displayValues().keySet());
     }
   }
 
@@ -215,7 +218,7 @@ class QuestionSubmitFormTest {
     assertEquals("question submit form is closed", failure.getMessage());
     assertThrows(IllegalStateException.class, first::displayValues);
     assertEquals("質問", request.questionText());
-    assertEquals(Map.of("question", "質問"), display);
+    assertEquals(Map.of(QUESTION_FIELD, "質問"), display);
     assertEquals("QuestionSubmitForm[REDACTED]", first.toString());
     try (var other = QuestionSubmitForm.bind(input("other"))) {
       assertEquals("other", other.toRequest().questionText());
@@ -237,10 +240,10 @@ class QuestionSubmitFormTest {
                   String body = "question-" + index;
                   String token = String.format(Locale.ROOT, "12345678-1234-4234-8234-%012d", index);
                   var parameters = input(body);
-                  parameters.put("operation_token", List.of(token));
+                  parameters.put(OPERATION_TOKEN_FIELD, List.of(token));
                   try (var form = QuestionSubmitForm.bind(parameters)) {
                     assertTrue(form.isValid());
-                    assertEquals(body, form.displayValues().get("question"));
+                    assertEquals(body, form.displayValues().get(QUESTION_FIELD));
                     byte[] encoded = actual(form);
                     assertArrayEquals(golden(body, token), encoded);
                     return encoded;

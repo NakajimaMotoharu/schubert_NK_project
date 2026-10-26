@@ -27,21 +27,28 @@ import org.junit.jupiter.api.Test;
 
 /** UI225/236 independent literals/372-byte oracle; PG-D345/016055/PT-USER-CREATE001..008. */
 class UserCreateFormTest {
+  private static final String USERNAME_FIELD = "username";
+  private static final String SYNTHETIC_USERNAME = "user1";
+  private static final String PASSWORD_FIELD = "password";
+  private static final String PASSWORD_CONFIRMATION_FIELD = "password_confirmation";
+  private static final String ROLE_FIELD = "role";
+  private static final String USER_ROLE_TEXT = "USER";
+  private static final String ENABLED_FIELD = "enabled";
   private static final String TOKEN = "12345678-1234-4234-8234-123456789abc";
   private static final String PASSWORD = "TestPassword123!";
 
   private static Map<String, List<String>> input() {
     return new HashMap<>(
         Map.of(
-            "username",
-            List.of("user1"),
-            "password",
+            USERNAME_FIELD,
+            List.of(SYNTHETIC_USERNAME),
+            PASSWORD_FIELD,
             List.of(PASSWORD),
-            "password_confirmation",
+            PASSWORD_CONFIRMATION_FIELD,
             List.of(PASSWORD),
-            "role",
-            List.of("USER"),
-            "enabled",
+            ROLE_FIELD,
+            List.of(USER_ROLE_TEXT),
+            ENABLED_FIELD,
             List.of("true"),
             "operation_token",
             List.of(TOKEN)));
@@ -84,18 +91,19 @@ class UserCreateFormTest {
 
   @Test
   void create001IndependentWireAndClosedRoleEnabledValues() {
-    for (String role : List.of("USER", "ADMIN"))
+    for (String role : List.of(USER_ROLE_TEXT, "ADMIN"))
       for (boolean enabled : List.of(true, false)) {
         var values = input();
-        values.put("role", List.of(role));
-        values.put("enabled", List.of(Boolean.toString(enabled)));
+        values.put(ROLE_FIELD, List.of(role));
+        values.put(ENABLED_FIELD, List.of(Boolean.toString(enabled)));
         try (var form = UserCreateForm.bind(values)) {
           assertTrue(form.isValid());
           var request = form.toRequest();
           assertEquals(UserRole.valueOf(role), request.role());
           assertEquals(enabled, request.enabled());
           assertEquals(UUID.fromString(TOKEN), request.operationToken());
-          assertArrayEquals(golden("user1", PASSWORD, role, enabled, TOKEN), encode(request));
+          assertArrayEquals(
+              golden(SYNTHETIC_USERNAME, PASSWORD, role, enabled, TOKEN), encode(request));
         }
       }
   }
@@ -112,21 +120,22 @@ class UserCreateFormTest {
             " password123",
             "é".repeat(12))) {
       var values = input();
-      values.put("username", List.of("  USER._-01  "));
+      values.put(USERNAME_FIELD, List.of("  USER._-01  "));
       values.put(
-          "password", List.of(password.equals("é".repeat(12)) ? "e\u0301".repeat(12) : password));
-      values.put("password_confirmation", List.of(password));
+          PASSWORD_FIELD,
+          List.of(password.equals("é".repeat(12)) ? "e\u0301".repeat(12) : password));
+      values.put(PASSWORD_CONFIRMATION_FIELD, List.of(password));
       try (var form = UserCreateForm.bind(values)) {
         assertTrue(form.isValid());
-        assertEquals("USER._-01", form.displayValues().get("username"));
+        assertEquals("USER._-01", form.displayValues().get(USERNAME_FIELD));
         assertEquals(password, form.toRequest().initialPassword());
         assertArrayEquals(
-            golden("USER._-01", password, "USER", true, TOKEN), encode(form.toRequest()));
+            golden("USER._-01", password, USER_ROLE_TEXT, true, TOKEN), encode(form.toRequest()));
       }
     }
     for (String username : List.of("a", "a".repeat(64), ".", "-", "_", "A09._-")) {
       var values = input();
-      values.put("username", List.of(username));
+      values.put(USERNAME_FIELD, List.of(username));
       try (var form = UserCreateForm.bind(values)) {
         assertTrue(form.isValid());
         assertEquals(username, form.toRequest().username());
@@ -196,7 +205,7 @@ class UserCreateFormTest {
             "user name",
             "user\u0000name",
             "user\ud800name",
-            "user\udfffname")) invalid("username", username);
+            "user\udfffname")) invalid(USERNAME_FIELD, username);
     for (String password :
         List.of(
             "",
@@ -209,22 +218,22 @@ class UserCreateFormTest {
             "password123\u007f",
             "password123\u0085",
             "password123\ud800",
-            "password123\udfff")) invalid("password", password);
+            "password123\udfff")) invalid(PASSWORD_FIELD, password);
     var values = input();
-    values.put("username", List.of("TestPassword123"));
-    values.put("password", List.of("testpassword123"));
-    values.put("password_confirmation", List.of("testpassword123"));
+    values.put(USERNAME_FIELD, List.of("TestPassword123"));
+    values.put(PASSWORD_FIELD, List.of("testpassword123"));
+    values.put(PASSWORD_CONFIRMATION_FIELD, List.of("testpassword123"));
     try (var form = UserCreateForm.bind(values)) {
       assertFalse(form.isValid());
-      assertTrue(form.getIssues().containsKey("password"));
+      assertTrue(form.getIssues().containsKey(PASSWORD_FIELD));
     }
   }
 
   @Test
   void create005ConfirmationEnumFlagAndCanonicalToken() {
-    invalid("password_confirmation", "OtherPassword123!");
-    for (String role : List.of("", "user", "UNKNOWN", " USER")) invalid("role", role);
-    for (String enabled : List.of("", "TRUE", "1", "0", "false ")) invalid("enabled", enabled);
+    invalid(PASSWORD_CONFIRMATION_FIELD, "OtherPassword123!");
+    for (String role : List.of("", "user", "UNKNOWN", " USER")) invalid(ROLE_FIELD, role);
+    for (String enabled : List.of("", "TRUE", "1", "0", "false ")) invalid(ENABLED_FIELD, enabled);
     for (String token :
         List.of(
             "",
@@ -239,13 +248,14 @@ class UserCreateFormTest {
   void create006ImmutableProjectionAndSecretLifetime() {
     var values = input();
     var passwords = new ArrayList<>(List.of(PASSWORD));
-    values.put("password", passwords);
+    values.put(PASSWORD_FIELD, passwords);
     var form = UserCreateForm.bind(values);
     passwords.set(0, "ChangedPassword123!");
     values.clear();
     assertEquals(PASSWORD, form.toRequest().initialPassword());
     assertEquals(
-        Map.of("username", "user1", "role", "USER", "enabled", true), form.displayValues());
+        Map.of(USERNAME_FIELD, SYNTHETIC_USERNAME, ROLE_FIELD, USER_ROLE_TEXT, ENABLED_FIELD, true),
+        form.displayValues());
     assertThrows(UnsupportedOperationException.class, () -> form.displayValues().clear());
     assertThrows(
         UnsupportedOperationException.class, () -> form.getIssues().put("secret", PASSWORD));
@@ -258,7 +268,7 @@ class UserCreateFormTest {
     form.close();
     var failure = assertThrows(IllegalStateException.class, form::toRequest);
     assertEquals("user create form is closed", failure.getMessage());
-    assertEquals("user1", form.displayValues().get("username"));
+    assertEquals(SYNTHETIC_USERNAME, form.displayValues().get(USERNAME_FIELD));
   }
 
   @Test
@@ -274,14 +284,15 @@ class UserCreateFormTest {
                   String password = "SyntheticPassword-" + n;
                   String token = String.format(Locale.ROOT, "12345678-1234-4234-8234-%012x", n);
                   var values = input();
-                  values.put("username", List.of(name));
-                  values.put("password", List.of(password));
-                  values.put("password_confirmation", List.of(password));
+                  values.put(USERNAME_FIELD, List.of(name));
+                  values.put(PASSWORD_FIELD, List.of(password));
+                  values.put(PASSWORD_CONFIRMATION_FIELD, List.of(password));
                   values.put("operation_token", List.of(token));
                   try (var form = UserCreateForm.bind(values)) {
                     assertTrue(form.isValid());
                     assertArrayEquals(
-                        golden(name, password, "USER", true, token), encode(form.toRequest()));
+                        golden(name, password, USER_ROLE_TEXT, true, token),
+                        encode(form.toRequest()));
                     assertFalse(form.displayValues().toString().contains(password));
                   }
                   return null;
@@ -294,11 +305,12 @@ class UserCreateFormTest {
   @Test
   void create008InvalidSecretsRemainAbsentAndClosedInvalidCannotSend() {
     var values = input();
-    values.put("password_confirmation", List.of("SecretCanaryDifferent123!"));
+    values.put(PASSWORD_CONFIRMATION_FIELD, List.of("SecretCanaryDifferent123!"));
     var form = UserCreateForm.bind(values);
-    assertEquals(Map.of("password_confirmation", "入力項目を確認してください。"), form.getIssues());
+    assertEquals(Map.of(PASSWORD_CONFIRMATION_FIELD, "入力項目を確認してください。"), form.getIssues());
     assertEquals(
-        Map.of("username", "user1", "role", "USER", "enabled", true), form.displayValues());
+        Map.of(USERNAME_FIELD, SYNTHETIC_USERNAME, ROLE_FIELD, USER_ROLE_TEXT, ENABLED_FIELD, true),
+        form.displayValues());
     assertFalse(form.toString().contains("SecretCanary"));
     assertThrows(IllegalArgumentException.class, form::toRequest);
     form.close();

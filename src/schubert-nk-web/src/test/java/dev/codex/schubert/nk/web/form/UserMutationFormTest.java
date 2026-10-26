@@ -29,9 +29,23 @@ import org.junit.jupiter.api.Test;
 
 /** UI225236/SS313314 independent literal offsets; PG-D353/016069/CHANGE001..016. */
 class UserMutationFormTest {
+  private static final String STATUS_OPERATION = "STATUS";
+  private static final String ROLE_OPERATION = "ROLE";
+  private static final String PASSWORD_OPERATION = "PASSWORD";
+  private static final String UNLOCK_OPERATION = "UNLOCK";
+  private static final String EXPECTED_VERSION_FIELD = "expected_version";
+  private static final String TRUE_TEXT = "true";
+  private static final String OPERATION_TOKEN_FIELD = "operation_token";
+  private static final String ENABLED_FIELD = "enabled";
+  private static final String ROLE_FIELD = "role";
+  private static final String USER_ROLE_TEXT = "USER";
+  private static final String PASSWORD_FIELD = "password";
+  private static final String PASSWORD_CONFIRMATION_FIELD = "password_confirmation";
+  private static final String SYNTHETIC_TARGET_USERNAME = "target";
   private static final String TOKEN = "12345678-1234-4234-8234-123456789abc";
   private static final String PASSWORD = "TestPassword123!";
-  private static final List<String> OPERATIONS = List.of("STATUS", "ROLE", "PASSWORD", "UNLOCK");
+  private static final List<String> OPERATIONS =
+      List.of(STATUS_OPERATION, ROLE_OPERATION, PASSWORD_OPERATION, UNLOCK_OPERATION);
 
   private record Form(
       Object owner,
@@ -50,19 +64,19 @@ class UserMutationFormTest {
   private static Form bind(
       String operation, long id, String username, Map<String, List<String>> p) {
     return switch (operation) {
-      case "STATUS" -> {
+      case STATUS_OPERATION -> {
         var f = UserStatusForm.bind(id, p);
         yield new Form(f, f::close, f::isValid, f::getIssues, f::displayValues, f::toRequest);
       }
-      case "ROLE" -> {
+      case ROLE_OPERATION -> {
         var f = UserRoleForm.bind(id, p);
         yield new Form(f, f::close, f::isValid, f::getIssues, f::displayValues, f::toRequest);
       }
-      case "PASSWORD" -> {
+      case PASSWORD_OPERATION -> {
         var f = PasswordResetForm.bind(id, username, p);
         yield new Form(f, f::close, f::isValid, f::getIssues, f::displayValues, f::toRequest);
       }
-      case "UNLOCK" -> {
+      case UNLOCK_OPERATION -> {
         var f = UserUnlockForm.bind(id, p);
         yield new Form(f, f::close, f::isValid, f::getIssues, f::displayValues, f::toRequest);
       }
@@ -74,15 +88,15 @@ class UserMutationFormTest {
     var p = new HashMap<String, List<String>>();
     p.put("operation", List.of(operation));
     p.put("id", List.of(Long.toString(id)));
-    p.put("expected_version", List.of("7"));
-    p.put("confirm", List.of("true"));
-    p.put("operation_token", List.of(TOKEN));
+    p.put(EXPECTED_VERSION_FIELD, List.of("7"));
+    p.put("confirm", List.of(TRUE_TEXT));
+    p.put(OPERATION_TOKEN_FIELD, List.of(TOKEN));
     switch (operation) {
-      case "STATUS" -> p.put("enabled", List.of("true"));
-      case "ROLE" -> p.put("role", List.of("USER"));
-      case "PASSWORD" -> {
-        p.put("password", List.of(PASSWORD));
-        p.put("password_confirmation", List.of(PASSWORD));
+      case STATUS_OPERATION -> p.put(ENABLED_FIELD, List.of(TRUE_TEXT));
+      case ROLE_OPERATION -> p.put(ROLE_FIELD, List.of(USER_ROLE_TEXT));
+      case PASSWORD_OPERATION -> {
+        p.put(PASSWORD_FIELD, List.of(PASSWORD));
+        p.put(PASSWORD_CONFIRMATION_FIELD, List.of(PASSWORD));
       }
       default -> {}
     }
@@ -98,8 +112,8 @@ class UserMutationFormTest {
   private static byte[] golden(String op, long id, long version, String value, String token) {
     int size =
         switch (op) {
-          case "ROLE" -> 68;
-          case "PASSWORD" -> 324;
+          case ROLE_OPERATION -> 68;
+          case PASSWORD_OPERATION -> 324;
           default -> 60;
         };
     byte[] b = new byte[size];
@@ -107,15 +121,15 @@ class UserMutationFormTest {
     put(b, 0, String.format(Locale.ROOT, "%012d", id));
     int versionAt =
         switch (op) {
-          case "STATUS" -> {
-            b[12] = (byte) (value.equals("true") ? '1' : '0');
+          case STATUS_OPERATION -> {
+            b[12] = (byte) (value.equals(TRUE_TEXT) ? '1' : '0');
             yield 13;
           }
-          case "ROLE" -> {
+          case ROLE_OPERATION -> {
             put(b, 12, value);
             yield 17;
           }
-          case "PASSWORD" -> {
+          case PASSWORD_OPERATION -> {
             put(b, 12, value);
             yield 268;
           }
@@ -129,9 +143,9 @@ class UserMutationFormTest {
   private static byte[] wire(String operation, PayloadData data) {
     String layout =
         switch (operation) {
-          case "STATUS" -> "USTREQ01";
-          case "ROLE" -> "URLREQ01";
-          case "PASSWORD" -> "UPWREQ01";
+          case STATUS_OPERATION -> "USTREQ01";
+          case ROLE_OPERATION -> "URLREQ01";
+          case PASSWORD_OPERATION -> "UPWREQ01";
           default -> "ULKREQ01";
         };
     return PayloadCodec.standard()
@@ -142,7 +156,7 @@ class UserMutationFormTest {
   private static void invalid(String op, String field, String value) throws Exception {
     var p = input(op, 1);
     p.put(field, List.of(value));
-    try (var f = bind(op, 1, "target", p)) {
+    try (var f = bind(op, 1, SYNTHETIC_TARGET_USERNAME, p)) {
       assertFalse(f.valid.getAsBoolean(), op + "/" + field);
       assertEquals("入力項目を確認してください。", f.issues.get().get(field));
       assertEquals(
@@ -155,40 +169,41 @@ class UserMutationFormTest {
     for (long id : new long[] {1, 999999999999L})
       for (long version : new long[] {0, 999999999}) {
         var p = input(op, id);
-        p.put("expected_version", List.of(Long.toString(version)));
-        if (op.equals("STATUS")) p.put("enabled", List.of(value));
-        if (op.equals("ROLE")) p.put("role", List.of(value));
-        try (var f = bind(op, id, "target", p)) {
+        p.put(EXPECTED_VERSION_FIELD, List.of(Long.toString(version)));
+        if (op.equals(STATUS_OPERATION)) p.put(ENABLED_FIELD, List.of(value));
+        if (op.equals(ROLE_OPERATION)) p.put(ROLE_FIELD, List.of(value));
+        try (var f = bind(op, id, SYNTHETIC_TARGET_USERNAME, p)) {
           assertTrue(f.valid.getAsBoolean());
           assertArrayEquals(golden(op, id, version, value, TOKEN), wire(op, f.request.get()));
           assertEquals(id, f.display.get().get("id"));
-          assertEquals(version, f.display.get().get("expected_version"));
+          assertEquals(version, f.display.get().get(EXPECTED_VERSION_FIELD));
         }
       }
   }
 
   @Test
   void change001StatusGolden() throws Exception {
-    boundaries("STATUS", "true");
-    boundaries("STATUS", "false");
+    boundaries(STATUS_OPERATION, TRUE_TEXT);
+    boundaries(STATUS_OPERATION, "false");
   }
 
   @Test
   void change002RoleGolden() throws Exception {
-    boundaries("ROLE", "USER");
-    boundaries("ROLE", "ADMIN");
+    boundaries(ROLE_OPERATION, USER_ROLE_TEXT);
+    boundaries(ROLE_OPERATION, "ADMIN");
   }
 
   @Test
   void change003UnlockGolden() throws Exception {
-    boundaries("UNLOCK", "");
+    boundaries(UNLOCK_OPERATION, "");
   }
 
   @Test
   void change004PasswordGoldenAndNoSecretProjection() throws Exception {
-    boundaries("PASSWORD", PASSWORD);
-    try (var f = bind("PASSWORD", 1, "target", input("PASSWORD", 1))) {
-      assertEquals(Map.of("id", 1L, "expected_version", 7L), f.display.get());
+    boundaries(PASSWORD_OPERATION, PASSWORD);
+    try (var f =
+        bind(PASSWORD_OPERATION, 1, SYNTHETIC_TARGET_USERNAME, input(PASSWORD_OPERATION, 1))) {
+      assertEquals(Map.of("id", 1L, EXPECTED_VERSION_FIELD, 7L), f.display.get());
       assertEquals(PASSWORD, ((PasswordResetRequestData) f.request.get()).newPassword());
     }
   }
@@ -204,14 +219,14 @@ class UserMutationFormTest {
               "owner",
               "username",
               "authenticationContext",
-              "enabled",
-              "role",
-              "password",
-              "password_confirmation")) {
+              ENABLED_FIELD,
+              ROLE_FIELD,
+              PASSWORD_FIELD,
+              PASSWORD_CONFIRMATION_FIELD)) {
         var p = input(op, 1);
         if (p.containsKey(field)) continue;
         p.put(field, List.of("synthetic-secret-canary"));
-        try (var f = bind(op, 1, "target", p)) {
+        try (var f = bind(op, 1, SYNTHETIC_TARGET_USERNAME, p)) {
           assertFalse(f.valid.getAsBoolean());
           assertTrue(f.issues.get().containsKey("form"));
         }
@@ -219,22 +234,25 @@ class UserMutationFormTest {
     }
     assertThrows(
         IllegalArgumentException.class,
-        () -> UserMutationInput.bind("OTHER", 1, "", input("UNLOCK", 1)));
+        () -> UserMutationInput.bind("OTHER", 1, "", input(UNLOCK_OPERATION, 1)));
     assertThrows(
-        NullPointerException.class, () -> UserMutationInput.bind(null, 1, "", input("UNLOCK", 1)));
+        NullPointerException.class,
+        () -> UserMutationInput.bind(null, 1, "", input(UNLOCK_OPERATION, 1)));
   }
 
   @Test
   void change006PathAndHiddenIdentifier() throws Exception {
     for (String op : OPERATIONS) {
       for (long id : new long[] {0, -1, 1000000000000L, Long.MAX_VALUE})
-        assertThrows(IllegalArgumentException.class, () -> bind(op, id, "target", input(op, 1)));
+        assertThrows(
+            IllegalArgumentException.class,
+            () -> bind(op, id, SYNTHETIC_TARGET_USERNAME, input(op, 1)));
       for (String id :
           List.of("", "0", "2", "-1", "+1", "１", "1.0", "1 ", "1000000000000", "9".repeat(30)))
         invalid(op, "id", id);
       var p = input(op, 1);
       p.put("id", List.of("000000000001"));
-      try (var f = bind(op, 1, "target", p)) {
+      try (var f = bind(op, 1, SYNTHETIC_TARGET_USERNAME, p)) {
         assertTrue(f.valid.getAsBoolean());
         assertEquals(1L, f.display.get().get("id"));
       }
@@ -245,7 +263,7 @@ class UserMutationFormTest {
   void change007VersionSyntax() throws Exception {
     for (String op : OPERATIONS)
       for (String version : List.of("", "-1", "+1", "1000000000", "１", "1e1", "1 ", "9".repeat(30)))
-        invalid(op, "expected_version", version);
+        invalid(op, EXPECTED_VERSION_FIELD, version);
   }
 
   @Test
@@ -260,19 +278,19 @@ class UserMutationFormTest {
               "1-1-1-1-1",
               " " + TOKEN,
               TOKEN + " ",
-              "g" + TOKEN.substring(1))) invalid(op, "operation_token", token);
+              "g" + TOKEN.substring(1))) invalid(op, OPERATION_TOKEN_FIELD, token);
       for (String token :
           List.of("00000000-0000-0000-0000-000000000000", "ffffffff-ffff-ffff-ffff-ffffffffffff")) {
         var p = input(op, 1);
-        p.put("operation_token", List.of(token));
+        p.put(OPERATION_TOKEN_FIELD, List.of(token));
         String value =
             switch (op) {
-              case "STATUS" -> "true";
-              case "ROLE" -> "USER";
-              case "PASSWORD" -> PASSWORD;
+              case STATUS_OPERATION -> TRUE_TEXT;
+              case ROLE_OPERATION -> USER_ROLE_TEXT;
+              case PASSWORD_OPERATION -> PASSWORD;
               default -> "";
             };
-        try (var f = bind(op, 1, "target", p)) {
+        try (var f = bind(op, 1, SYNTHETIC_TARGET_USERNAME, p)) {
           assertTrue(f.valid.getAsBoolean());
           assertArrayEquals(golden(op, 1, 7, value, token), wire(op, f.request.get()));
         }
@@ -282,8 +300,10 @@ class UserMutationFormTest {
 
   @Test
   void change009ClosedRoleAndBoolean() throws Exception {
-    for (String flag : List.of("", "TRUE", "1", "0", "false ")) invalid("STATUS", "enabled", flag);
-    for (String role : List.of("", "user", "OTHER", "ADMIN ")) invalid("ROLE", "role", role);
+    for (String flag : List.of("", "TRUE", "1", "0", "false "))
+      invalid(STATUS_OPERATION, ENABLED_FIELD, flag);
+    for (String role : List.of("", "user", "OTHER", "ADMIN "))
+      invalid(ROLE_OPERATION, ROLE_FIELD, role);
   }
 
   @Test
@@ -298,13 +318,14 @@ class UserMutationFormTest {
             " password123",
             "é".repeat(12),
             "x\ue000".repeat(6))) {
-      var p = input("PASSWORD", 1);
-      p.put("password", List.of(value.equals("é".repeat(12)) ? "e\u0301".repeat(12) : value));
-      p.put("password_confirmation", List.of(value));
-      try (var f = bind("PASSWORD", 1, "target", p)) {
+      var p = input(PASSWORD_OPERATION, 1);
+      p.put(PASSWORD_FIELD, List.of(value.equals("é".repeat(12)) ? "e\u0301".repeat(12) : value));
+      p.put(PASSWORD_CONFIRMATION_FIELD, List.of(value));
+      try (var f = bind(PASSWORD_OPERATION, 1, SYNTHETIC_TARGET_USERNAME, p)) {
         assertTrue(f.valid.getAsBoolean());
         assertArrayEquals(
-            golden("PASSWORD", 1, 7, value, TOKEN), wire("PASSWORD", f.request.get()));
+            golden(PASSWORD_OPERATION, 1, 7, value, TOKEN),
+            wire(PASSWORD_OPERATION, f.request.get()));
       }
     }
   }
@@ -323,26 +344,28 @@ class UserMutationFormTest {
             "password123\u007f",
             "password123\u0085",
             "password123\ud800",
-            "password123\udfff")) invalid("PASSWORD", "password", value);
-    invalid("PASSWORD", "password_confirmation", "OtherPassword123!");
-    var p = input("PASSWORD", 1);
-    p.put("password", List.of("testpassword123"));
-    p.put("password_confirmation", List.of("testpassword123"));
-    try (var f = bind("PASSWORD", 1, " TestPassword123 ", p)) {
+            "password123\udfff")) invalid(PASSWORD_OPERATION, PASSWORD_FIELD, value);
+    invalid(PASSWORD_OPERATION, PASSWORD_CONFIRMATION_FIELD, "OtherPassword123!");
+    var p = input(PASSWORD_OPERATION, 1);
+    p.put(PASSWORD_FIELD, List.of("testpassword123"));
+    p.put(PASSWORD_CONFIRMATION_FIELD, List.of("testpassword123"));
+    try (var f = bind(PASSWORD_OPERATION, 1, " TestPassword123 ", p)) {
       assertFalse(f.valid.getAsBoolean());
-      assertTrue(f.issues.get().containsKey("password"));
+      assertTrue(f.issues.get().containsKey(PASSWORD_FIELD));
     }
-    p.put("password", List.of("é".repeat(12)));
-    p.put("password_confirmation", List.of("é".repeat(12)));
-    try (var f = bind("PASSWORD", 1, "e\u0301".repeat(12), p)) {
+    p.put(PASSWORD_FIELD, List.of("é".repeat(12)));
+    p.put(PASSWORD_CONFIRMATION_FIELD, List.of("é".repeat(12)));
+    try (var f = bind(PASSWORD_OPERATION, 1, "e\u0301".repeat(12), p)) {
       assertFalse(f.valid.getAsBoolean());
-      assertTrue(f.issues.get().containsKey("password"));
+      assertTrue(f.issues.get().containsKey(PASSWORD_FIELD));
     }
     assertThrows(
-        IllegalArgumentException.class, () -> PasswordResetForm.bind(1, " ", input("PASSWORD", 1)));
+        IllegalArgumentException.class,
+        () -> PasswordResetForm.bind(1, " ", input(PASSWORD_OPERATION, 1)));
     assertThrows(
-        NullPointerException.class, () -> PasswordResetForm.bind(1, null, input("PASSWORD", 1)));
-    try (var f = PasswordResetForm.bind(1, "現行利用者", input("PASSWORD", 1))) {
+        NullPointerException.class,
+        () -> PasswordResetForm.bind(1, null, input(PASSWORD_OPERATION, 1)));
+    try (var f = PasswordResetForm.bind(1, "現行利用者", input(PASSWORD_OPERATION, 1))) {
       assertTrue(f.isValid());
     }
   }
@@ -350,21 +373,22 @@ class UserMutationFormTest {
   @Test
   void change012NullMissingAndDuplicates() throws Exception {
     for (String op : OPERATIONS) {
-      assertThrows(NullPointerException.class, () -> bind(op, 1, "target", null));
+      assertThrows(NullPointerException.class, () -> bind(op, 1, SYNTHETIC_TARGET_USERNAME, null));
       var nullableKey = input(op, 1);
       nullableKey.put(null, List.of("x"));
-      assertThrows(NullPointerException.class, () -> bind(op, 1, "target", nullableKey));
+      assertThrows(
+          NullPointerException.class, () -> bind(op, 1, SYNTHETIC_TARGET_USERNAME, nullableKey));
       for (String field : input(op, 1).keySet()) {
         var missing = input(op, 1);
         missing.remove(field);
-        try (var f = bind(op, 1, "target", missing)) {
+        try (var f = bind(op, 1, SYNTHETIC_TARGET_USERNAME, missing)) {
           assertFalse(f.valid.getAsBoolean());
           assertTrue(f.issues.get().containsKey(field));
         }
         for (List<String> list : List.of(List.<String>of(), List.of("a", "b"))) {
           var p = input(op, 1);
           p.put(field, list);
-          try (var f = bind(op, 1, "target", p)) {
+          try (var f = bind(op, 1, SYNTHETIC_TARGET_USERNAME, p)) {
             assertFalse(f.valid.getAsBoolean());
             assertTrue(f.issues.get().containsKey(field));
             assertTrue(f.issues.get().containsKey("form"));
@@ -372,19 +396,19 @@ class UserMutationFormTest {
         }
         var p = input(op, 1);
         p.put(field, null);
-        assertThrows(NullPointerException.class, () -> bind(op, 1, "target", p));
+        assertThrows(NullPointerException.class, () -> bind(op, 1, SYNTHETIC_TARGET_USERNAME, p));
         p.put(field, Arrays.asList((String) null));
-        assertThrows(NullPointerException.class, () -> bind(op, 1, "target", p));
+        assertThrows(NullPointerException.class, () -> bind(op, 1, SYNTHETIC_TARGET_USERNAME, p));
       }
       for (String extra : List.of("_csrf", "unknown")) {
         var p = input(op, 1);
         p.put(extra, List.of("synthetic-csrf-canary"));
-        try (var f = bind(op, 1, "target", p)) {
+        try (var f = bind(op, 1, SYNTHETIC_TARGET_USERNAME, p)) {
           assertEquals(extra.equals("_csrf"), f.valid.getAsBoolean());
         }
         for (List<String> list : List.of(List.<String>of(), List.of("a", "b"))) {
           p.put(extra, list);
-          try (var f = bind(op, 1, "target", p)) {
+          try (var f = bind(op, 1, SYNTHETIC_TARGET_USERNAME, p)) {
             assertFalse(f.valid.getAsBoolean());
             assertTrue(f.issues.get().containsKey("form"));
           }
@@ -399,7 +423,7 @@ class UserMutationFormTest {
       var p = input(op, 1);
       var id = new ArrayList<>(List.of("1"));
       p.put("id", id);
-      try (var f = bind(op, 1, "target", p)) {
+      try (var f = bind(op, 1, SYNTHETIC_TARGET_USERNAME, p)) {
         id.set(0, "2");
         p.clear();
         assertTrue(f.valid.getAsBoolean());
@@ -411,7 +435,7 @@ class UserMutationFormTest {
         assertFalse(f.display.get().toString().contains(PASSWORD));
       }
     }
-    try (var raw = UserMutationInput.bind("UNLOCK", 1, "", input("UNLOCK", 1))) {
+    try (var raw = UserMutationInput.bind(UNLOCK_OPERATION, 1, "", input(UNLOCK_OPERATION, 1))) {
       assertEquals("UserMutationInput[REDACTED]", raw.toString());
     }
   }
@@ -420,8 +444,8 @@ class UserMutationFormTest {
   void change014TerminalCloseAndSeparateDto() throws Exception {
     for (String op : OPERATIONS) {
       var p = input(op, 1);
-      var f = bind(op, 1, "target", p);
-      try (var other = bind(op, 1, "target", p)) {
+      var f = bind(op, 1, SYNTHETIC_TARGET_USERNAME, p);
+      try (var other = bind(op, 1, SYNTHETIC_TARGET_USERNAME, p)) {
         var request = f.request.get();
         var original = wire(op, request);
         f.close();
@@ -439,12 +463,14 @@ class UserMutationFormTest {
       }
       var invalid = input(op, 1);
       invalid.put("confirm", List.of("false"));
-      try (var invalidForm = bind(op, 1, "target", invalid)) {
+      try (var invalidForm = bind(op, 1, SYNTHETIC_TARGET_USERNAME, invalid)) {
         assertThrows(IllegalArgumentException.class, invalidForm.request::get);
-        assertFalse(invalidForm.display.get().containsKey("password"));
+        assertFalse(invalidForm.display.get().containsKey(PASSWORD_FIELD));
       }
     }
-    var raw = UserMutationInput.bind("PASSWORD", 1, "target", input("PASSWORD", 1));
+    var raw =
+        UserMutationInput.bind(
+            PASSWORD_OPERATION, 1, SYNTHETIC_TARGET_USERNAME, input(PASSWORD_OPERATION, 1));
     try {
       assertEquals(PASSWORD, raw.password());
       raw.close();
@@ -452,7 +478,8 @@ class UserMutationFormTest {
     } finally {
       raw.close();
     }
-    try (var invalidRaw = UserMutationInput.bind("PASSWORD", 1, "target", Map.of())) {
+    try (var invalidRaw =
+        UserMutationInput.bind(PASSWORD_OPERATION, 1, SYNTHETIC_TARGET_USERNAME, Map.of())) {
       assertThrows(IllegalArgumentException.class, invalidRaw::password);
     }
   }
@@ -468,16 +495,16 @@ class UserMutationFormTest {
               String op = OPERATIONS.get(index % 4);
               String token = String.format(Locale.ROOT, "12345678-1234-4234-8234-%012d", index);
               var p = input(op, index);
-              p.put("operation_token", List.of(token));
-              p.put("expected_version", List.of(Integer.toString(index)));
+              p.put(OPERATION_TOKEN_FIELD, List.of(token));
+              p.put(EXPECTED_VERSION_FIELD, List.of(Integer.toString(index)));
               String value =
                   switch (op) {
-                    case "STATUS" -> "true";
-                    case "ROLE" -> "USER";
-                    case "PASSWORD" -> PASSWORD;
+                    case STATUS_OPERATION -> TRUE_TEXT;
+                    case ROLE_OPERATION -> USER_ROLE_TEXT;
+                    case PASSWORD_OPERATION -> PASSWORD;
                     default -> "";
                   };
-              try (var f = bind(op, index, "target", p)) {
+              try (var f = bind(op, index, SYNTHETIC_TARGET_USERNAME, p)) {
                 assertTrue(f.valid.getAsBoolean());
                 assertArrayEquals(
                     golden(op, index, index, value, token), wire(op, f.request.get()));
@@ -495,24 +522,24 @@ class UserMutationFormTest {
     // Here the form is only a typed wire boundary, never an authentication/authorization provider.
     for (String op : OPERATIONS) {
       var p = input(op, 1);
-      p.put("expected_version", List.of("0"));
-      try (var f = bind(op, 1, "target", p)) {
+      p.put(EXPECTED_VERSION_FIELD, List.of("0"));
+      try (var f = bind(op, 1, SYNTHETIC_TARGET_USERNAME, p)) {
         assertTrue(f.valid.getAsBoolean());
         var names = new HashSet<>(Set.of("User ID", "Expected version", "Operation token"));
         switch (op) {
-          case "STATUS" -> names.add("Enabled");
-          case "ROLE" -> names.add("New role");
-          case "PASSWORD" -> names.add("New Password");
+          case STATUS_OPERATION -> names.add("Enabled");
+          case ROLE_OPERATION -> names.add("New role");
+          case PASSWORD_OPERATION -> names.add("New Password");
           default -> {}
         }
         assertEquals(names, f.request.get().fields().names());
-        var display = new HashMap<String, Object>(Map.of("id", 1L, "expected_version", 0L));
-        if (op.equals("STATUS")) display.put("enabled", true);
-        if (op.equals("ROLE")) display.put("role", "USER");
+        var display = new HashMap<String, Object>(Map.of("id", 1L, EXPECTED_VERSION_FIELD, 0L));
+        if (op.equals(STATUS_OPERATION)) display.put(ENABLED_FIELD, true);
+        if (op.equals(ROLE_OPERATION)) display.put(ROLE_FIELD, USER_ROLE_TEXT);
         assertEquals(display, f.display.get());
       }
       p.put("role_context", List.of("ADMIN"));
-      try (var f = bind(op, 1, "target", p)) {
+      try (var f = bind(op, 1, SYNTHETIC_TARGET_USERNAME, p)) {
         assertFalse(f.valid.getAsBoolean());
         assertThrows(IllegalArgumentException.class, f.request::get);
       }
