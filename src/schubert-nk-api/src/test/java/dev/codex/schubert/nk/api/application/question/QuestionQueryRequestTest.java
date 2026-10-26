@@ -34,6 +34,8 @@ import org.junit.jupiter.api.Test;
 
 /** PT-QRY009..012/NTF009; UI236 offsets and SS324 independent LP/HMAC, no expected codec. */
 final class QuestionQueryRequestTest {
+  private static final String QUESTION_QUERY_LAYOUT = "QSSREQ01";
+  private static final String NOTIFICATION_QUERY_LAYOUT = "NTSREQ01";
   static final UUID MESSAGE = new UUID(100, 100);
   static final Instant NOW = Instant.parse("2026-10-01T00:00:01Z");
   static final AuthenticatedActor USER = new AuthenticatedActor(1, "u1", Role.USER);
@@ -41,20 +43,22 @@ final class QuestionQueryRequestTest {
 
   @Test
   void qry009CanonicalFieldsNullAndAllLayoutsUseIndependentJce() throws Exception {
-    for (String layout : List.of("QSSREQ01", "NTSREQ01", "QSDREQ01", "NTDREQ01")) {
+    for (String layout :
+        List.of(QUESTION_QUERY_LAYOUT, NOTIFICATION_QUERY_LAYOUT, "QSDREQ01", "NTDREQ01")) {
       for (boolean populated : List.of(false, true)) {
         var wire = message(layout, data(layout, populated));
         var request = QuestionQueryRequest.decode(wire);
         assertSame(wire.header(), request.header());
         assertEquals(layout.startsWith("QS"), request.questionScope());
         assertEquals(layout.contains("DREQ"), request.detailRequest());
-        assertEquals(layout.equals("QSSREQ01") && populated, request.usernameSpecified());
+        assertEquals(
+            layout.equals(QUESTION_QUERY_LAYOUT) && populated, request.usernameSpecified());
         assertEquals(layout.substring(0, 3) + "RSP01", request.responseLayoutId().value());
         assertEquals("QuestionQueryRequest[REDACTED]", request.toString());
         List<String> names;
         List<String> types;
         List<String> values;
-        if (layout.equals("QSSREQ01")) {
+        if (layout.equals(QUESTION_QUERY_LAYOUT)) {
           names =
               List.of(
                   "keyword",
@@ -74,7 +78,7 @@ final class QuestionQueryRequestTest {
                   populated ? "2026-10-01T00:00:01.123Z" : null,
                   "999999",
                   "50");
-        } else if (layout.equals("NTSREQ01")) {
+        } else if (layout.equals(NOTIFICATION_QUERY_LAYOUT)) {
           names = List.of("notificationType", "submittedFrom", "submittedTo", "page", "pageSize");
           types = List.of("X1", "T1", "T1", "N1", "N1");
           values =
@@ -131,7 +135,8 @@ final class QuestionQueryRequestTest {
   @Test
   void qry010MalformedNullAndRequestDependentPageAreRejected() {
     assertThrows(NullPointerException.class, () -> QuestionQueryRequest.decode(null));
-    for (String layout : List.of("QSSREQ01", "NTSREQ01", "QSDREQ01", "NTDREQ01")) {
+    for (String layout :
+        List.of(QUESTION_QUERY_LAYOUT, NOTIFICATION_QUERY_LAYOUT, "QSDREQ01", "NTDREQ01")) {
       var request = QuestionQueryRequest.decode(message(layout, data(layout, false)));
       assertThrows(NullPointerException.class, () -> request.canonical(null));
       assertThrows(NullPointerException.class, () -> request.validateResponse(null));
@@ -159,7 +164,7 @@ final class QuestionQueryRequestTest {
         () ->
             QuestionQueryRequest.decode(
                 message("UDTREQ01", "000000000001".getBytes(StandardCharsets.US_ASCII))));
-    for (String layout : List.of("QSSREQ01", "NTSREQ01")) {
+    for (String layout : List.of(QUESTION_QUERY_LAYOUT, NOTIFICATION_QUERY_LAYOUT)) {
       var request = QuestionQueryRequest.decode(message(layout, data(layout, false)));
       var response =
           new TypedPayloadValues(
@@ -200,9 +205,9 @@ final class QuestionQueryRequestTest {
 
   static byte[] data(String layout, boolean populated) {
     if (layout.contains("DREQ")) return "999999999999".getBytes(StandardCharsets.US_ASCII);
-    byte[] b = new byte[layout.equals("QSSREQ01") ? 384 : 64];
+    byte[] b = new byte[layout.equals(QUESTION_QUERY_LAYOUT) ? 384 : 64];
     Arrays.fill(b, (byte) 32);
-    if (layout.equals("QSSREQ01")) {
+    if (layout.equals(QUESTION_QUERY_LAYOUT)) {
       if (populated) {
         put(b, 0, "é_%\\");
         put(b, 256, "u1");

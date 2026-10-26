@@ -29,6 +29,9 @@ import org.junit.jupiter.api.Test;
 
 /** Independent UI235 bytes and SS323 §9.2 LP/HMAC fields. PT-MED-033..035; SSC-029. */
 class MediaRequestTest {
+  private static final String ANIMATION_MENU_LAYOUT = "ANMREQ01";
+  private static final String AUDIO_QUERY_LAYOUT = "AUDREQ01";
+  private static final String MUSIC_DESCRIPTOR_LAYOUT = "MEDREQ01";
   private static final AuthenticatedActor ACTOR = new AuthenticatedActor(101, "reader", Role.USER);
 
   private record Field(String name, String type, String value) {}
@@ -68,12 +71,12 @@ class MediaRequestTest {
 
   @Test
   void med034EightLayoutsHaveIndependentCanonicalFingerprints() throws Exception {
-    check("ANMREQ01", data("ANMREQ01"), List.of());
+    check(ANIMATION_MENU_LAYOUT, data(ANIMATION_MENU_LAYOUT), List.of());
     check("MCTREQ01", data("MCTREQ01"), List.of());
     for (String number : List.of("000000000001", "000000000700", "999999999999")) {
       for (String disposition : List.of("I", "A"))
         check(
-            "AUDREQ01",
+            AUDIO_QUERY_LAYOUT,
             field(16, 0, number + disposition),
             List.of(
                 new Field("audioId", "N1", Long.toString(Long.parseLong(number))),
@@ -87,7 +90,7 @@ class MediaRequestTest {
         byte[] music = field(72, 0, id);
         put(music, 64, disposition);
         check(
-            "MEDREQ01",
+            MUSIC_DESCRIPTOR_LAYOUT,
             music,
             List.of(new Field("trackId", "X1", id), new Field("disposition", "X1", disposition)));
       }
@@ -112,14 +115,14 @@ class MediaRequestTest {
       invalid(unknown, new byte[0]);
     for (String layout :
         List.of(
-            "AUDREQ01",
-            "ANMREQ01",
+            AUDIO_QUERY_LAYOUT,
+            ANIMATION_MENU_LAYOUT,
             "ANLREQ01",
             "VIDREQ01",
             "MCTREQ01",
             "MCSREQ01",
             "MTRREQ01",
-            "MEDREQ01")) {
+            MUSIC_DESCRIPTOR_LAYOUT)) {
       byte[] source = data(layout);
       invalid(layout, Arrays.copyOf(source, source.length + 1));
       if (source.length > 0) {
@@ -130,13 +133,13 @@ class MediaRequestTest {
       }
     }
     invalid("ANLREQ01", field(16, 0, "SUBTRACK"));
-    invalid("AUDREQ01", field(16, 0, "000000000000I"));
-    invalid("AUDREQ01", field(16, 0, "000000000001Z"));
+    invalid(AUDIO_QUERY_LAYOUT, field(16, 0, "000000000000I"));
+    invalid(AUDIO_QUERY_LAYOUT, field(16, 0, "000000000001Z"));
     invalid("VIDREQ01", field(64, 0, "e\u0301"));
-    byte[] reserved = data("MEDREQ01");
+    byte[] reserved = data(MUSIC_DESCRIPTOR_LAYOUT);
     reserved[71] = 'X';
-    invalid("MEDREQ01", reserved);
-    var request = MediaRequest.decode(message("ANMREQ01", new byte[0]));
+    invalid(MUSIC_DESCRIPTOR_LAYOUT, reserved);
+    var request = MediaRequest.decode(message(ANIMATION_MENU_LAYOUT, new byte[0]));
     assertThrows(NullPointerException.class, () -> request.canonical(null));
     Connection never =
         (Connection)

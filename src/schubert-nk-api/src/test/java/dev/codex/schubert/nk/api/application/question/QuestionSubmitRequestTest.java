@@ -44,15 +44,18 @@ import org.junit.jupiter.api.Test;
 
 /** Literal UI236 offsets and independent SS323 section9.6 LP/JCE oracle. PG189/SSC070. */
 final class QuestionSubmitRequestTest {
+  private static final int MAXIMUM_QUESTION_UTF8_BYTES = 4096;
+  private static final String PUBLIC_BODY_TEXT = "public";
+  private static final String QUESTION_SUBMIT_LAYOUT = "QSBREQ01";
   private static final UUID TOKEN = new UUID(60, 1);
-  private static final UUID MESSAGE = new UUID(70, 1);
+  private static final UUID MESSAGE_ID = new UUID(70, 1);
   private static final AuthenticatedActor ACTOR = new AuthenticatedActor(1, "fixture", Role.USER);
   private static final Instant NOW = Instant.parse("2026-09-20T00:00:00Z");
 
   @Test
   @DisplayName("PT-QST-SUB001 literal wire and independent canonical HMAC")
   void literalWireAndCanonical() throws Exception {
-    var wire = wire(data("公開fixture", TOKEN), MESSAGE);
+    var wire = wire(data("公開fixture", TOKEN), MESSAGE_ID);
     try (var request = QuestionSubmitRequest.decode(wire)) {
       assertSame(wire.header(), request.header());
       assertEquals(TOKEN, request.operationToken());
@@ -66,20 +69,20 @@ final class QuestionSubmitRequestTest {
   void byteAndUnicodeBoundaries() throws Exception {
     for (String value :
         List.of("a", "a".repeat(4096), "é".repeat(2048), "😀".repeat(1024), " A", "a　")) {
-      try (var request = QuestionSubmitRequest.decode(wire(data(value, TOKEN), MESSAGE))) {
+      try (var request = QuestionSubmitRequest.decode(wire(data(value, TOKEN), MESSAGE_ID))) {
         assertArrayEquals(value.toCharArray(), request.copyQuestion());
         check(request, ACTOR, value);
       }
     }
     for (String value : List.of("", "\r", "\n", "\t", "\0", "e\u0301"))
-      invalid(wire(data(value, TOKEN), MESSAGE));
+      invalid(wire(data(value, TOKEN), MESSAGE_ID));
     byte[] malformed = data("a", TOKEN);
     malformed[0] = (byte) 0xc3;
     malformed[1] = 0x28;
-    invalid(wire(malformed, MESSAGE));
-    invalid(wire(Arrays.copyOf(data("a".repeat(4096), TOKEN), 4145), MESSAGE));
+    invalid(wire(malformed, MESSAGE_ID));
+    invalid(wire(Arrays.copyOf(data("a".repeat(4096), TOKEN), 4145), MESSAGE_ID));
     // Fixed-width padding cannot retain a distinction between an input trailing space and padding.
-    try (var request = QuestionSubmitRequest.decode(wire(data("a ", TOKEN), MESSAGE))) {
+    try (var request = QuestionSubmitRequest.decode(wire(data("a ", TOKEN), MESSAGE_ID))) {
       assertArrayEquals(new char[] {'a'}, request.copyQuestion());
     }
   }
@@ -87,37 +90,59 @@ final class QuestionSubmitRequestTest {
   @Test
   @DisplayName("PT-QST-SUB003 protocol, reserved and token rejection")
   void protocolRejection() {
-    byte[] good = data("public", TOKEN);
-    invalid(message("LOGREQ01", 1, InteractionKind.ASYNC_ACCEPTANCE, good, 0, 0, MESSAGE, "b"));
+    byte[] good = data(PUBLIC_BODY_TEXT, TOKEN);
+    invalid(message("LOGREQ01", 1, InteractionKind.ASYNC_ACCEPTANCE, good, 0, 0, MESSAGE_ID, "b"));
     assertThrows(
         dev.codex.schubert.nk.protocol.layout.LayoutValidationException.class,
-        () -> message("QSBREQ01", 2, InteractionKind.ASYNC_ACCEPTANCE, good, 0, 0, MESSAGE, "b"));
+        () ->
+            message(
+                QUESTION_SUBMIT_LAYOUT,
+                2,
+                InteractionKind.ASYNC_ACCEPTANCE,
+                good,
+                0,
+                0,
+                MESSAGE_ID,
+                "b"));
     assertThrows(
         dev.codex.schubert.nk.protocol.layout.LayoutValidationException.class,
-        () -> message("QSBREQ01", 1, InteractionKind.INTERNAL, good, 0, 0, MESSAGE, "b"));
-    invalid(message("QSBREQ01", 1, InteractionKind.SYNCHRONOUS, good, 0, 0, MESSAGE, "b"));
-    invalid(wire(Arrays.copyOf(good, 4143), MESSAGE));
-    invalid(message("QSBREQ01", 1, InteractionKind.ASYNC_ACCEPTANCE, good, 1, 1, MESSAGE, "b"));
+        () ->
+            message(
+                QUESTION_SUBMIT_LAYOUT, 1, InteractionKind.INTERNAL, good, 0, 0, MESSAGE_ID, "b"));
+    invalid(
+        message(
+            QUESTION_SUBMIT_LAYOUT, 1, InteractionKind.SYNCHRONOUS, good, 0, 0, MESSAGE_ID, "b"));
+    invalid(wire(Arrays.copyOf(good, 4143), MESSAGE_ID));
+    invalid(
+        message(
+            QUESTION_SUBMIT_LAYOUT,
+            1,
+            InteractionKind.ASYNC_ACCEPTANCE,
+            good,
+            1,
+            1,
+            MESSAGE_ID,
+            "b"));
     for (int offset = 4132; offset < 4144; offset++) {
       byte[] changed = good.clone();
       changed[offset] = 'X';
-      invalid(wire(changed, MESSAGE));
+      invalid(wire(changed, MESSAGE_ID));
     }
     for (int offset : new int[] {4096, 4104, 4131}) {
       byte[] changed = good.clone();
       changed[offset] = 'Z';
-      invalid(wire(changed, MESSAGE));
+      invalid(wire(changed, MESSAGE_ID));
     }
   }
 
   @Test
   @DisplayName("PT-QST-SUB004 owner and body binding, metadata exclusion")
   void fingerprintBinding() throws Exception {
-    try (var first = QuestionSubmitRequest.decode(wire(data("same", TOKEN), MESSAGE));
+    try (var first = QuestionSubmitRequest.decode(wire(data("same", TOKEN), MESSAGE_ID));
         var second =
             QuestionSubmitRequest.decode(
                 message(
-                    "QSBREQ01",
+                    QUESTION_SUBMIT_LAYOUT,
                     1,
                     InteractionKind.ASYNC_ACCEPTANCE,
                     data("same", new UUID(60, 2)),
@@ -125,7 +150,7 @@ final class QuestionSubmitRequestTest {
                     0,
                     new UUID(70, 2),
                     "c"));
-        var changed = QuestionSubmitRequest.decode(wire(data("different", TOKEN), MESSAGE))) {
+        var changed = QuestionSubmitRequest.decode(wire(data("different", TOKEN), MESSAGE_ID))) {
       assertArrayEquals(hash(first, ACTOR), hash(second, ACTOR));
       assertFalse(Arrays.equals(hash(first, ACTOR), hash(changed, ACTOR)));
       assertFalse(
@@ -140,24 +165,24 @@ final class QuestionSubmitRequestTest {
   @Test
   @DisplayName("PT-QST-SUB005 independent buffers and terminal close")
   void ownershipAndClose() throws Exception {
-    byte[] bytes = data("public", TOKEN);
-    var request = QuestionSubmitRequest.decode(wire(bytes, MESSAGE));
+    byte[] bytes = data(PUBLIC_BODY_TEXT, TOKEN);
+    var request = QuestionSubmitRequest.decode(wire(bytes, MESSAGE_ID));
     try {
       Arrays.fill(bytes, (byte) 'Z');
       char[] copy = request.copyQuestion();
       Arrays.fill(copy, 'X');
-      assertArrayEquals("public".toCharArray(), request.copyQuestion());
+      assertArrayEquals(PUBLIC_BODY_TEXT.toCharArray(), request.copyQuestion());
       try (var first = request.canonical(ACTOR);
           var second = request.canonical(ACTOR)) {
         byte[] copied = first.fields().getFirst().value();
         assertNotNull(copied);
         Arrays.fill(copied, (byte) 'X');
         assertArrayEquals(
-            "public".getBytes(StandardCharsets.UTF_8), first.fields().getFirst().value());
+            PUBLIC_BODY_TEXT.getBytes(StandardCharsets.UTF_8), first.fields().getFirst().value());
         request.close();
         request.close();
         assertArrayEquals(
-            "public".getBytes(StandardCharsets.UTF_8), second.fields().getFirst().value());
+            PUBLIC_BODY_TEXT.getBytes(StandardCharsets.UTF_8), second.fields().getFirst().value());
       }
       for (org.junit.jupiter.api.function.Executable access :
           List.<org.junit.jupiter.api.function.Executable>of(
@@ -172,7 +197,8 @@ final class QuestionSubmitRequestTest {
     } finally {
       request.close();
     }
-    try (var fresh = QuestionSubmitRequest.decode(wire(data("public", TOKEN), MESSAGE))) {
+    try (var fresh =
+        QuestionSubmitRequest.decode(wire(data(PUBLIC_BODY_TEXT, TOKEN), MESSAGE_ID))) {
       CanonicalRequest canonical = fresh.canonical(ACTOR);
       try {
         canonical.close();
@@ -180,7 +206,7 @@ final class QuestionSubmitRequestTest {
       } finally {
         canonical.close();
       }
-      assertArrayEquals("public".toCharArray(), fresh.copyQuestion());
+      assertArrayEquals(PUBLIC_BODY_TEXT.toCharArray(), fresh.copyQuestion());
     }
   }
 
@@ -188,7 +214,7 @@ final class QuestionSubmitRequestTest {
   @DisplayName("PT-QST-SUB006 null contracts")
   void nullContracts() {
     assertThrows(NullPointerException.class, () -> QuestionSubmitRequest.decode(null));
-    var request = QuestionSubmitRequest.decode(wire(data("public", TOKEN), MESSAGE));
+    var request = QuestionSubmitRequest.decode(wire(data(PUBLIC_BODY_TEXT, TOKEN), MESSAGE_ID));
     try {
       assertThrows(NullPointerException.class, () -> request.canonical(null));
       request.close();
@@ -211,7 +237,7 @@ final class QuestionSubmitRequestTest {
                   String value = "public-" + index;
                   try (var request =
                       QuestionSubmitRequest.decode(
-                          wire(data(value, new UUID(60, index + 1)), MESSAGE))) {
+                          wire(data(value, new UUID(60, index + 1)), MESSAGE_ID))) {
                     check(request, ACTOR, value);
                     char[] copy = request.copyQuestion();
                     try {
@@ -224,7 +250,7 @@ final class QuestionSubmitRequestTest {
       }
       for (int i = 0; i < results.size(); i++)
         assertEquals("public-" + i, results.get(i).get(10, TimeUnit.SECONDS));
-      var shared = QuestionSubmitRequest.decode(wire(data("shared", TOKEN), MESSAGE));
+      var shared = QuestionSubmitRequest.decode(wire(data("shared", TOKEN), MESSAGE_ID));
       try {
         synchronized (shared) {
           assertEquals(
@@ -266,12 +292,13 @@ final class QuestionSubmitRequestTest {
   @Test
   @DisplayName("PT-QST-SUB008 redacted public evidence")
   void publicEvidenceAndRedaction() throws Exception {
-    try (var request = QuestionSubmitRequest.decode(wire(data("public", TOKEN), MESSAGE));
+    try (var request =
+            QuestionSubmitRequest.decode(wire(data(PUBLIC_BODY_TEXT, TOKEN), MESSAGE_ID));
         var canonical = request.canonical(ACTOR)) {
       assertEquals("QuestionSubmitRequest[REDACTED]", request.toString());
-      assertFalse(canonical.toString().contains("public"));
+      assertFalse(canonical.toString().contains(PUBLIC_BODY_TEXT));
       assertFalse(canonical.toString().contains(TOKEN.toString()));
-      check(request, ACTOR, "public");
+      check(request, ACTOR, PUBLIC_BODY_TEXT);
     }
     Path directory = Path.of("target/question-submit-traces");
     Files.createDirectories(directory);
@@ -284,7 +311,7 @@ final class QuestionSubmitRequestTest {
     byte[] bytes = new byte[4144];
     Arrays.fill(bytes, (byte) ' ');
     byte[] encoded = body.getBytes(StandardCharsets.UTF_8);
-    if (encoded.length > 4096) throw new AssertionError("fixture overflow");
+    if (encoded.length > MAXIMUM_QUESTION_UTF8_BYTES) throw new AssertionError("fixture overflow");
     System.arraycopy(encoded, 0, bytes, 0, encoded.length);
     byte[] id = token.toString().getBytes(StandardCharsets.US_ASCII);
     System.arraycopy(id, 0, bytes, 4096, 36);
@@ -292,7 +319,8 @@ final class QuestionSubmitRequestTest {
   }
 
   private static WireMessage<FixedPayload> wire(byte[] bytes, UUID id) {
-    return message("QSBREQ01", 1, InteractionKind.ASYNC_ACCEPTANCE, bytes, 0, 0, id, "b");
+    return message(
+        QUESTION_SUBMIT_LAYOUT, 1, InteractionKind.ASYNC_ACCEPTANCE, bytes, 0, 0, id, "b");
   }
 
   private static WireMessage<FixedPayload> message(
@@ -347,7 +375,7 @@ final class QuestionSubmitRequestTest {
       throws Exception {
     try (var canonical = request.canonical(actor)) {
       assertEquals(Long.toString(actor.userId()), canonical.ownerScope());
-      assertEquals("QSBREQ01", canonical.layoutId());
+      assertEquals(QUESTION_SUBMIT_LAYOUT, canonical.layoutId());
       assertEquals("001", canonical.layoutVersion());
       assertEquals("QUESTION:NEW", canonical.target());
       assertEquals(1, canonical.fields().size());
@@ -359,7 +387,8 @@ final class QuestionSubmitRequestTest {
     var bytes = new ByteArrayOutputStream();
     try (var output = new DataOutputStream(bytes)) {
       output.write("SCHUBERT-NK-OP1".getBytes(StandardCharsets.US_ASCII));
-      for (String value : List.of(Long.toString(actor.userId()), "QSBREQ01", "001", "QUESTION:NEW"))
+      for (String value :
+          List.of(Long.toString(actor.userId()), QUESTION_SUBMIT_LAYOUT, "001", "QUESTION:NEW"))
         lp(output, value);
       output.writeInt(1);
       lp(output, "question");

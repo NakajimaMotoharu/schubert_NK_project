@@ -28,6 +28,11 @@ import org.junit.jupiter.api.Test;
 
 /** PT-SCN-009-Q01..Q03: UI234 independent DATA and SS323 independent LP/HMAC oracles. */
 final class ScenarioRequestTest {
+  private static final String SPEAKER_QUERY_LAYOUT = "SPKREQ01";
+  private static final String GAME_CODE_FIELD = "gameCode";
+  private static final String GAME_ONE_CODE = "NUKITASHI1";
+  private static final String GAME_TWO_CODE = "NUKITASHI2";
+  private static final String SCENARIO_QUERY_LAYOUT = "SRCREQ01";
   private static final AuthenticatedActor ACTOR =
       new AuthenticatedActor(101, "request-reader", Role.USER);
 
@@ -36,35 +41,35 @@ final class ScenarioRequestTest {
   @Test
   void sixLayoutsHaveIndependentCanonicalVectors() throws Exception {
     check("GAMREQ01", new byte[0], List.of());
-    check("SPKREQ01", spaces(12), List.of(new Field("gameCode", "X1", null)));
+    check(SPEAKER_QUERY_LAYOUT, spaces(12), List.of(new Field(GAME_CODE_FIELD, "X1", null)));
     byte[] game = spaces(12);
-    put(game, 0, "NUKITASHI1");
-    check("SPKREQ01", game, List.of(new Field("gameCode", "X1", "NUKITASHI1")));
-    check("RTEREQ01", game, List.of(new Field("gameCode", "X1", "NUKITASHI1")));
+    put(game, 0, GAME_ONE_CODE);
+    check(SPEAKER_QUERY_LAYOUT, game, List.of(new Field(GAME_CODE_FIELD, "X1", GAME_ONE_CODE)));
+    check("RTEREQ01", game, List.of(new Field(GAME_CODE_FIELD, "X1", GAME_ONE_CODE)));
     byte[] files = spaces(14);
-    put(files, 0, "NUKITASHI2");
+    put(files, 0, GAME_TWO_CODE);
     put(files, 12, "01");
     check(
         "SCFREQ01",
         files,
-        List.of(new Field("gameCode", "X1", "NUKITASHI2"), new Field("prefix", "N1", "1")));
+        List.of(new Field(GAME_CODE_FIELD, "X1", GAME_TWO_CODE), new Field("prefix", "N1", "1")));
     check(
         "SCNREQ01",
         "000000000030".getBytes(StandardCharsets.US_ASCII),
         List.of(new Field("scriptFileId", "N1", "30")));
     byte[] search = search();
     put(search, 0, " Alpha%_é");
-    put(search, 256, "NUKITASHI1");
+    put(search, 256, GAME_ONE_CODE);
     put(search, 268, "話者");
     put(search, 396, "Chapter");
     put(search, 652, "dialogue");
     put(search, 662, "1");
     check(
-        "SRCREQ01",
+        SCENARIO_QUERY_LAYOUT,
         search,
         List.of(
             new Field("bodyKeyword", "X1", " Alpha%_é"),
-            new Field("gameCode", "X1", "NUKITASHI1"),
+            new Field(GAME_CODE_FIELD, "X1", GAME_ONE_CODE),
             new Field("speakerName", "X1", "話者"),
             new Field("chapterTitle", "X1", "Chapter"),
             new Field("entryType", "X1", "dialogue"),
@@ -76,11 +81,11 @@ final class ScenarioRequestTest {
   @Test
   void optionalAndNumericBoundariesPreserveFieldPresenceAndRequestValues() throws Exception {
     check(
-        "SRCREQ01",
+        SCENARIO_QUERY_LAYOUT,
         search(),
         List.of(
             new Field("bodyKeyword", "X1", null),
-            new Field("gameCode", "X1", null),
+            new Field(GAME_CODE_FIELD, "X1", null),
             new Field("speakerName", "X1", null),
             new Field("chapterTitle", "X1", null),
             new Field("entryType", "X1", null),
@@ -89,18 +94,18 @@ final class ScenarioRequestTest {
             new Field("pageSize", "N1", "100")));
     byte[] maximal = search();
     put(maximal, 0, "a".repeat(256));
-    put(maximal, 256, "NUKITASHI2");
+    put(maximal, 256, GAME_TWO_CODE);
     put(maximal, 268, "s".repeat(128));
     put(maximal, 396, "c".repeat(256));
     put(maximal, 652, "narration");
     put(maximal, 662, "0");
     put(maximal, 663, "999999");
     check(
-        "SRCREQ01",
+        SCENARIO_QUERY_LAYOUT,
         maximal,
         List.of(
             new Field("bodyKeyword", "X1", "a".repeat(256)),
-            new Field("gameCode", "X1", "NUKITASHI2"),
+            new Field(GAME_CODE_FIELD, "X1", GAME_TWO_CODE),
             new Field("speakerName", "X1", "s".repeat(128)),
             new Field("chapterTitle", "X1", "c".repeat(256)),
             new Field("entryType", "X1", "narration"),
@@ -109,13 +114,13 @@ final class ScenarioRequestTest {
             new Field("pageSize", "N1", "100")));
     for (String prefix : List.of("00", "99")) {
       byte[] data = spaces(14);
-      put(data, 0, "NUKITASHI1");
+      put(data, 0, GAME_ONE_CODE);
       put(data, 12, prefix);
       check(
           "SCFREQ01",
           data,
           List.of(
-              new Field("gameCode", "X1", "NUKITASHI1"),
+              new Field(GAME_CODE_FIELD, "X1", GAME_ONE_CODE),
               new Field("prefix", "N1", prefix.equals("00") ? "0" : "99")));
     }
     for (String id : List.of("000000000001", "999999999999")) {
@@ -131,25 +136,25 @@ final class ScenarioRequestTest {
     assertThrows(NullPointerException.class, () -> ScenarioRequest.decode(null));
     for (String layout : List.of("LOGREQ01", "ZZZREQ01")) invalid(layout, new byte[0]);
     invalid("GAMREQ01", spaces(1));
-    invalid("SPKREQ01", spaces(11));
-    invalid("SPKREQ01", spaces(13));
+    invalid(SPEAKER_QUERY_LAYOUT, spaces(11));
+    invalid(SPEAKER_QUERY_LAYOUT, spaces(13));
     for (String value : List.of("UNKNOWN", "e\u0301")) {
       byte[] data = spaces(12);
       put(data, 0, value);
-      invalid("SPKREQ01", data);
+      invalid(SPEAKER_QUERY_LAYOUT, data);
     }
     byte[] invalidUtf8 = spaces(12);
     invalidUtf8[0] = (byte) 0xc3;
-    invalid("SPKREQ01", invalidUtf8);
+    invalid(SPEAKER_QUERY_LAYOUT, invalidUtf8);
     invalid("RTEREQ01", spaces(12));
     byte[] nonNfcSearch = search();
     put(nonNfcSearch, 0, "e\u0301");
-    invalid("SRCREQ01", nonNfcSearch);
+    invalid(SCENARIO_QUERY_LAYOUT, nonNfcSearch);
     invalid("SCNREQ01", "000000000000".getBytes(StandardCharsets.US_ASCII));
     for (String tail : List.of("000000100", "000001099", "000001101")) {
       byte[] data = search();
       put(data, 663, tail);
-      invalid("SRCREQ01", data);
+      invalid(SCENARIO_QUERY_LAYOUT, data);
     }
     var request = ScenarioRequest.decode(message("GAMREQ01", new byte[0]));
     assertEquals("ScenarioRequest[REDACTED]", request.toString());
