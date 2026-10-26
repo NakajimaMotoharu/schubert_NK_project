@@ -1,6 +1,7 @@
 package dev.codex.schubert.nk.api.idempotency;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -11,37 +12,41 @@ import org.junit.jupiter.api.Test;
 
 /** PT-IDEM-WIPE-001..003; synthetic buffers only, no reflection or actual heap/credential dump. */
 final class SecretBufferTest {
+  private static final int MAXIMUM_FIXTURE_CAPACITY = 1_050_000;
   private static final String ANONYMOUS_OWNER = "ANONYMOUS";
   private static final String LOGIN_REQUEST_LAYOUT = "LGNREQ01";
   private static final String LAYOUT_VERSION = "001";
 
   @Test
   void supersededAndCurrentStreamStorageAreWipedAtGrowthResetAndClose() {
-    var stream = new Inspectable();
-    byte[] original = stream.storage();
-    byte[] fixture = new byte[8192];
-    Arrays.fill(fixture, (byte) 17);
-    stream.writeBytes(fixture);
-    assertArrayEquals(fixture, stream.toByteArray());
-    stream.write(18);
-    assertArrayEquals(new byte[original.length], original);
-    byte[] expanded = stream.storage();
-    byte[] expected = Arrays.copyOf(fixture, 8193);
-    expected[8192] = 18;
-    assertArrayEquals(expected, stream.toByteArray());
-    stream.reset();
-    assertArrayEquals(new byte[expanded.length], expanded);
-    assertEquals(0, stream.size());
-    stream.write(new byte[] {8, 9, 10, 11}, 1, 2);
-    assertArrayEquals(new byte[] {9, 10}, stream.toByteArray());
-    assertEquals("WipingByteArrayOutputStream[size=2, content=<redacted>]", stream.toString());
-    byte[] returnedCopy = stream.toByteArray();
-    stream.close();
-    stream.close();
-    assertArrayEquals(new byte[expanded.length], expanded);
-    assertArrayEquals(new byte[] {9, 10}, returnedCopy); // Explicit caller ownership, not an alias.
-    assertEquals(0, stream.size());
-    Arrays.fill(returnedCopy, (byte) 0);
+    try (var stream = new Inspectable()) {
+
+      byte[] original = stream.storage();
+      byte[] fixture = new byte[8192];
+      Arrays.fill(fixture, (byte) 17);
+      stream.writeBytes(fixture);
+      assertArrayEquals(fixture, stream.toByteArray());
+      stream.write(18);
+      assertArrayEquals(new byte[original.length], original);
+      byte[] expanded = stream.storage();
+      byte[] expected = Arrays.copyOf(fixture, 8193);
+      expected[8192] = 18;
+      assertArrayEquals(expected, stream.toByteArray());
+      stream.reset();
+      assertArrayEquals(new byte[expanded.length], expanded);
+      assertEquals(0, stream.size());
+      stream.write(new byte[] {8, 9, 10, 11}, 1, 2);
+      assertArrayEquals(new byte[] {9, 10}, stream.toByteArray());
+      assertEquals("WipingByteArrayOutputStream[size=2, content=<redacted>]", stream.toString());
+      byte[] returnedCopy = stream.toByteArray();
+      assertDoesNotThrow(stream::close);
+      assertDoesNotThrow(stream::close);
+      assertArrayEquals(new byte[expanded.length], expanded);
+      assertArrayEquals(
+          new byte[] {9, 10}, returnedCopy); // Explicit caller ownership, not an alias.
+      assertEquals(0, stream.size());
+      Arrays.fill(returnedCopy, (byte) 0);
+    }
   }
 
   @Test
@@ -57,7 +62,7 @@ final class SecretBufferTest {
         assertThrows(IndexOutOfBoundsException.class, () -> stream.write(new byte[1], -1, 1));
         assertThrows(IndexOutOfBoundsException.class, () -> stream.write(new byte[1], 0, 2));
         assertThrows(IllegalArgumentException.class, () -> stream.writeBytes(new byte[1_050_001]));
-        if (length == 1_050_000)
+        if (length == MAXIMUM_FIXTURE_CAPACITY)
           assertThrows(IllegalArgumentException.class, () -> stream.write(1));
         assertArrayEquals(fixture, stream.toByteArray());
       }
@@ -78,65 +83,67 @@ final class SecretBufferTest {
   @Test
   void requestOwnerClosesEveryFieldWithoutModifyingCallerCopiesOrFingerprint() throws Exception {
     byte[] input = {1, 2, 3};
-    var value = new CanonicalField("password", "X1", input);
-    var absent = new CanonicalField("absent", "X1", null);
-    var empty = new CanonicalField("empty", "X1", new byte[0]);
-    var request =
-        new CanonicalRequest(
-            ANONYMOUS_OWNER,
-            LOGIN_REQUEST_LAYOUT,
-            LAYOUT_VERSION,
-            "LOGIN:synthetic",
-            List.of(value, absent, empty));
-    byte[] copy = value.value();
-    byte[] expected = independentHmac();
-    assertArrayEquals(expected, OperationFingerprint.INSTANCE.calculate(request, new byte[32]));
-    try (request) {
-      assertArrayEquals(new byte[] {1, 2, 3}, value.value());
-    }
-    request.close();
-    assertArrayEquals(new byte[3], value.value());
-    assertArrayEquals(new byte[] {1, 2, 3}, input);
-    assertArrayEquals(new byte[] {1, 2, 3}, copy);
-    assertNull(absent.value());
-    assertArrayEquals(new byte[0], empty.value());
-    // This test's JCA/DataOutputStream oracle and the existing OpenSSL vector are independent.
-    Arrays.fill(copy, (byte) 0);
-    Arrays.fill(input, (byte) 0);
-    Arrays.fill(expected, (byte) 0);
-    var exceptionallyClosed = new CanonicalField("value", "X1", new byte[] {17});
-    assertThrows(
-        IllegalArgumentException.class,
-        () -> {
-          try (var invalid =
+    try (var value = new CanonicalField("password", "X1", input);
+        var absent = new CanonicalField("absent", "X1", null);
+        var empty = new CanonicalField("empty", "X1", new byte[0]);
+        var request =
+            new CanonicalRequest(
+                ANONYMOUS_OWNER,
+                LOGIN_REQUEST_LAYOUT,
+                LAYOUT_VERSION,
+                "LOGIN:synthetic",
+                List.of(value, absent, empty))) {
+
+      byte[] copy = value.value();
+      byte[] expected = independentHmac();
+      assertArrayEquals(expected, OperationFingerprint.INSTANCE.calculate(request, new byte[32]));
+      try (request) {
+        assertArrayEquals(new byte[] {1, 2, 3}, value.value());
+      }
+      assertDoesNotThrow(request::close);
+      assertArrayEquals(new byte[3], value.value());
+      assertArrayEquals(new byte[] {1, 2, 3}, input);
+      assertArrayEquals(new byte[] {1, 2, 3}, copy);
+      assertNull(absent.value());
+      assertArrayEquals(new byte[0], empty.value());
+      // This test's JCA/DataOutputStream oracle and the existing OpenSSL vector are independent.
+      Arrays.fill(copy, (byte) 0);
+      Arrays.fill(input, (byte) 0);
+      Arrays.fill(expected, (byte) 0);
+      var exceptionallyClosed = new CanonicalField("value", "X1", new byte[] {17});
+      assertThrows(
+          IllegalArgumentException.class,
+          () -> {
+            try (var invalid =
+                new CanonicalRequest(
+                    ANONYMOUS_OWNER,
+                    LOGIN_REQUEST_LAYOUT,
+                    LAYOUT_VERSION,
+                    "LOGIN:synthetic",
+                    List.of(exceptionallyClosed))) {
+              OperationFingerprint.INSTANCE.calculate(invalid, new byte[0]);
+            }
+          });
+      assertArrayEquals(new byte[1], exceptionallyClosed.value());
+      for (var large :
+          List.of(
               new CanonicalRequest(
                   ANONYMOUS_OWNER,
                   LOGIN_REQUEST_LAYOUT,
                   LAYOUT_VERSION,
-                  "LOGIN:synthetic",
-                  List.of(exceptionallyClosed))) {
-            OperationFingerprint.INSTANCE.calculate(invalid, new byte[0]);
-          }
-        });
-    assertArrayEquals(new byte[1], exceptionallyClosed.value());
-    for (var large :
-        List.of(
-            new CanonicalRequest(
-                ANONYMOUS_OWNER,
-                LOGIN_REQUEST_LAYOUT,
-                LAYOUT_VERSION,
-                "t".repeat(1_050_000),
-                List.of()),
-            new CanonicalRequest(
-                ANONYMOUS_OWNER,
-                LOGIN_REQUEST_LAYOUT,
-                LAYOUT_VERSION,
-                "t",
-                List.of(new CanonicalField("value", "X1", new byte[1_050_000]))))) {
-      try (large) {
-        assertThrows(
-            IllegalArgumentException.class,
-            () -> OperationFingerprint.INSTANCE.calculate(large, new byte[32]));
+                  "t".repeat(1_050_000),
+                  List.of()),
+              new CanonicalRequest(
+                  ANONYMOUS_OWNER,
+                  LOGIN_REQUEST_LAYOUT,
+                  LAYOUT_VERSION,
+                  "t",
+                  List.of(new CanonicalField("value", "X1", new byte[1_050_000]))))) {
+        try (large) {
+          assertThrows(
+              IllegalArgumentException.class,
+              () -> OperationFingerprint.INSTANCE.calculate(large, new byte[32]));
+        }
       }
     }
   }

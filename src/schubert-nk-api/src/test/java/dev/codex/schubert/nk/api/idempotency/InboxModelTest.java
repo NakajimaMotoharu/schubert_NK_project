@@ -63,125 +63,130 @@ class InboxModelTest {
 
   @Test
   void requestRejectsNullsScopeTokenOwnerAndTimeViolations() {
-    CanonicalRequest login = canonical("ANONYMOUS", "LGNREQ01", LAYOUT_VERSION, "login");
-    CanonicalRequest read = canonical("7", QUESTION_REQUEST_LAYOUT, LAYOUT_VERSION, READ_TARGET);
-    assertThrows(
-        NullPointerException.class,
-        () ->
-            new InboxRequest(
-                null,
-                CORRELATION,
-                OptionalLong.empty(),
-                Optional.empty(),
-                login,
-                RECEIVED,
-                EXPIRES));
-    assertThrows(
-        NullPointerException.class,
-        () ->
-            new InboxRequest(
-                MESSAGE, null, OptionalLong.empty(), Optional.empty(), login, RECEIVED, EXPIRES));
-    assertThrows(
-        NullPointerException.class,
-        () ->
-            new InboxRequest(
-                MESSAGE, CORRELATION, null, Optional.empty(), login, RECEIVED, EXPIRES));
-    assertThrows(
-        NullPointerException.class,
-        () ->
-            new InboxRequest(
-                MESSAGE, CORRELATION, OptionalLong.empty(), null, login, RECEIVED, EXPIRES));
-    assertThrows(
-        NullPointerException.class,
-        () ->
-            new InboxRequest(
-                MESSAGE,
-                CORRELATION,
-                OptionalLong.empty(),
-                Optional.empty(),
-                null,
-                RECEIVED,
-                EXPIRES));
-    assertThrows(
-        NullPointerException.class,
-        () ->
-            new InboxRequest(
-                MESSAGE,
-                CORRELATION,
-                OptionalLong.empty(),
-                Optional.empty(),
-                login,
-                null,
-                EXPIRES));
-    assertThrows(
-        NullPointerException.class,
-        () ->
-            new InboxRequest(
-                MESSAGE,
-                CORRELATION,
-                OptionalLong.empty(),
-                Optional.empty(),
-                login,
-                RECEIVED,
-                null));
-    assertThrows(
-        IllegalArgumentException.class, () -> request(OptionalLong.of(7), Optional.empty(), login));
-    assertThrows(
-        IllegalArgumentException.class,
-        () -> request(OptionalLong.empty(), Optional.empty(), read));
-    assertThrows(
-        IllegalArgumentException.class,
-        () ->
-            request(
-                OptionalLong.of(0),
-                Optional.empty(),
-                canonical("0", QUESTION_REQUEST_LAYOUT, LAYOUT_VERSION, READ_TARGET)));
-    assertThrows(
-        IllegalArgumentException.class,
-        () ->
-            request(
-                OptionalLong.of(1_000_000_000_000L),
-                Optional.empty(),
-                canonical("1000000000000", QUESTION_REQUEST_LAYOUT, LAYOUT_VERSION, READ_TARGET)));
-    assertThrows(
-        IllegalArgumentException.class,
-        () ->
-            request(
-                OptionalLong.of(7),
-                Optional.empty(),
-                canonical("8", QUESTION_REQUEST_LAYOUT, LAYOUT_VERSION, READ_TARGET)));
-    assertThrows(
-        IllegalArgumentException.class,
-        () ->
-            request(
-                OptionalLong.of(7),
-                Optional.empty(),
-                canonical("7", "QSBREQ01", LAYOUT_VERSION, "write")));
-    assertThrows(
-        IllegalArgumentException.class,
-        () -> request(OptionalLong.of(7), Optional.of(TOKEN), read));
-    assertThrows(
-        IllegalArgumentException.class,
-        () ->
-            new InboxRequest(
-                MESSAGE,
-                CORRELATION,
-                OptionalLong.empty(),
-                Optional.empty(),
-                login,
-                RECEIVED,
-                RECEIVED));
-    assertThrows(
-        IllegalArgumentException.class,
-        () ->
-            new InboxRequest(
-                MESSAGE,
-                CORRELATION,
-                OptionalLong.empty(),
-                Optional.empty(),
-                login,
-                EXPIRES,
-                RECEIVED));
+    try (CanonicalRequest login = canonical("ANONYMOUS", "LGNREQ01", LAYOUT_VERSION, "login");
+        CanonicalRequest read =
+            canonical("7", QUESTION_REQUEST_LAYOUT, LAYOUT_VERSION, READ_TARGET)) {
+
+      assertThrows(
+          NullPointerException.class,
+          () ->
+              new InboxRequest(
+                  null,
+                  CORRELATION,
+                  OptionalLong.empty(),
+                  Optional.empty(),
+                  login,
+                  RECEIVED,
+                  EXPIRES));
+      assertThrows(
+          NullPointerException.class,
+          () ->
+              new InboxRequest(
+                  MESSAGE, null, OptionalLong.empty(), Optional.empty(), login, RECEIVED, EXPIRES));
+      assertThrows(
+          NullPointerException.class,
+          () ->
+              new InboxRequest(
+                  MESSAGE, CORRELATION, null, Optional.empty(), login, RECEIVED, EXPIRES));
+      assertThrows(
+          NullPointerException.class,
+          () ->
+              new InboxRequest(
+                  MESSAGE, CORRELATION, OptionalLong.empty(), null, login, RECEIVED, EXPIRES));
+      assertThrows(
+          NullPointerException.class,
+          () ->
+              new InboxRequest(
+                  MESSAGE,
+                  CORRELATION,
+                  OptionalLong.empty(),
+                  Optional.empty(),
+                  null,
+                  RECEIVED,
+                  EXPIRES));
+      assertThrows(
+          NullPointerException.class,
+          () ->
+              new InboxRequest(
+                  MESSAGE,
+                  CORRELATION,
+                  OptionalLong.empty(),
+                  Optional.empty(),
+                  login,
+                  null,
+                  EXPIRES));
+      assertThrows(
+          NullPointerException.class,
+          () ->
+              new InboxRequest(
+                  MESSAGE,
+                  CORRELATION,
+                  OptionalLong.empty(),
+                  Optional.empty(),
+                  login,
+                  RECEIVED,
+                  null));
+      assertThrows(
+          IllegalArgumentException.class,
+          () -> request(OptionalLong.of(7), Optional.empty(), login));
+      assertThrows(
+          IllegalArgumentException.class,
+          () -> request(OptionalLong.empty(), Optional.empty(), read));
+      assertThrows(
+          IllegalArgumentException.class,
+          () ->
+              request(
+                  OptionalLong.of(0),
+                  Optional.empty(),
+                  canonical("0", QUESTION_REQUEST_LAYOUT, LAYOUT_VERSION, READ_TARGET)));
+      assertThrows(
+          IllegalArgumentException.class,
+          () ->
+              request(
+                  OptionalLong.of(1_000_000_000_000L),
+                  Optional.empty(),
+                  canonical(
+                      "1000000000000", QUESTION_REQUEST_LAYOUT, LAYOUT_VERSION, READ_TARGET)));
+      assertThrows(
+          IllegalArgumentException.class,
+          () ->
+              request(
+                  OptionalLong.of(7),
+                  Optional.empty(),
+                  canonical("8", QUESTION_REQUEST_LAYOUT, LAYOUT_VERSION, READ_TARGET)));
+      assertThrows(
+          IllegalArgumentException.class,
+          () ->
+              request(
+                  OptionalLong.of(7),
+                  Optional.empty(),
+                  canonical("7", "QSBREQ01", LAYOUT_VERSION, "write")));
+      assertThrows(
+          IllegalArgumentException.class,
+          () -> request(OptionalLong.of(7), Optional.of(TOKEN), read));
+      assertThrows(
+          IllegalArgumentException.class,
+          () ->
+              new InboxRequest(
+                  MESSAGE,
+                  CORRELATION,
+                  OptionalLong.empty(),
+                  Optional.empty(),
+                  login,
+                  RECEIVED,
+                  RECEIVED));
+      assertThrows(
+          IllegalArgumentException.class,
+          () ->
+              new InboxRequest(
+                  MESSAGE,
+                  CORRELATION,
+                  OptionalLong.empty(),
+                  Optional.empty(),
+                  login,
+                  EXPIRES,
+                  RECEIVED));
+    }
   }
 
   @Test
