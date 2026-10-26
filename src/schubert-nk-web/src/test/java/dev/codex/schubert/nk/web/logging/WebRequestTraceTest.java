@@ -39,6 +39,8 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 
 /** Independent UI/actual mapping inventory and thread ownership; REQ004006007008/BUG573574. */
 final class WebRequestTraceTest {
+  private static final String FIXTURE_REQUEST_ID_ATTRIBUTE_SUFFIX = ".requestId";
+
   private static final String FIXTURE_LOGIN_ROUTE = "/login";
   private static final String FIXTURE_ERROR_ROUTE = "/error";
   private static final String FIXTURE_ATTRIBUTE_FAILURE = "synthetic-private-attribute-canary";
@@ -178,7 +180,8 @@ final class WebRequestTraceTest {
     assertEquals(trace.requestId(), WebRequestContext.require(request).requestId());
     assertEquals("203.0.113.7", WebRequestContext.require(request).clientAddress().value());
     assertEquals("WebRequestContext[REDACTED]", WebRequestContext.require(request).toString());
-    request.removeAttribute(WebRequestContext.class.getName() + ".requestId");
+    request.removeAttribute(
+        WebRequestContext.class.getName() + FIXTURE_REQUEST_ID_ATTRIBUTE_SUFFIX);
     assertEquals(
         new UUID(0, 3),
         WebRequestContext.identify(
@@ -191,10 +194,12 @@ final class WebRequestTraceTest {
     other.setAttribute(WebRequestTrace.class.getName(), trace);
     assertThrows(
         IllegalStateException.class, () -> WebRequestTrace.ensure(other, UUID::randomUUID));
-    request.setAttribute(WebRequestContext.class.getName() + ".requestId", new UUID(0, 8));
+    request.setAttribute(
+        WebRequestContext.class.getName() + FIXTURE_REQUEST_ID_ATTRIBUTE_SUFFIX, new UUID(0, 8));
     assertThrows(
         IllegalStateException.class, () -> WebRequestTrace.ensure(request, UUID::randomUUID));
-    request.setAttribute(WebRequestContext.class.getName() + ".requestId", "bad-type");
+    request.setAttribute(
+        WebRequestContext.class.getName() + FIXTURE_REQUEST_ID_ATTRIBUTE_SUFFIX, "bad-type");
     assertThrows(
         IllegalStateException.class, () -> WebRequestContext.identify(request, UUID::randomUUID));
   }
@@ -361,7 +366,8 @@ final class WebRequestTraceTest {
   void req006AllFourAttributeBoundariesRedactFrameworkFaults() {
     for (String attribute :
         List.of(
-            WebRequestTrace.class.getName(), WebRequestContext.class.getName() + ".requestId")) {
+            WebRequestTrace.class.getName(),
+            WebRequestContext.class.getName() + FIXTURE_REQUEST_ID_ATTRIBUTE_SUFFIX)) {
       for (boolean set : List.of(false, true)) {
         for (boolean state : List.of(false, true)) {
           var request =
