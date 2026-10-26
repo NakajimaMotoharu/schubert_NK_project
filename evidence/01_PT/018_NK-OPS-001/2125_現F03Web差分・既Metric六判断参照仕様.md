@@ -1,0 +1,11 @@
+# 2125 現F03 Web差分・既Metric六判断参照仕様
+
+照合中の追加発見：Metric三は旧27f64751と現byteが一致するが、MonitoringModePolicyは旧c62937d7から現ea595118へ機能追加済みでwhole-file一致は成立しない。初回guard1/OUT前・工具SHA48e24dcd7fa22b0e2d7b212f121147064718b28a7cbeaa419d8fb07294129b73を保持。Mode三は旧判断の単純転用をせず、旧Git source/hashと現sourceからfinal primitive宣言・同型getter全文を独立に抽出比較し、実原findingの旧→現座標を明示してstatement限定再認証する。PG-D686、三exact-source reuse/三source変更再認証を分離し、全六は引き続きcurrent whole pending・旧PT転用0とする。
+
+2026-10-27、群2483、F03、開始1/3/7pp cap10固定。製品再実行/新PG/PMD全再実行0。元10834/10836のraw9305と全1810入力を不変保持し、現在f24d/10892への八Testだけのsource差分・新10894の原17指摘・10900の原ID文脈を追加deltaとして保存する。旧全indexを重複コピーせず、再構成に必要な親hash/置換path/原ID/実属性/入力deltaを束縛する。
+
+元Web八scopeの74→17/57ID消滅は107/109の既PG成果の集約で、新規修正又は新WBS受入に二重加算しない。他9231行・Main/source入力の不変を原ID/rowHashで確認し、未分類/保留を成功へ変えない。THREAD旧十六参照は現八sourceで10900の直接文脈へ置換し、Web Map一を追加する。既Protocol/JSON/ClassLoader等は同じsource bytesの文脈参照だけ保持し、元runtimeを当sourceへ再割当しない。
+
+次候補MetricContractのMain三duplicateは1544/7014/7016で既個別REQUIRED_CONTRACTと判定済みであり、新しい障害として起票・製品変更しない。同時に同7014のMonitoringModePolicy三getterを含む六rowを、原path/source SHA/rule/message/座標・判断文書へexact joinする。旧source13PTと独立26行TSV/SS351確認は歴史証拠であり、現wholeSourceの新PTではない。六rowはSOURCE_REBOUND_CURRENT_WHOLE_PENDING、priorDisposition/原source/旧証跡を明記し、全current品質へ自動認定しない。
+
+独立postは親index/hashから別の再構成で原ID/multiplicity/source集合/完全scope・XML・参照/状態を照合し、欠落/重複/誤source/hash/偽PASS/不正参照/旧成功転用をmetadata反例で拒否する。scope外の未参照は未review又は真の障害数と断定せず、actualViolationCount null/全F03・451未受入/正式1964-53/17-190/工数null・QA051final・全安全HOLDを維持する。実command/exit/hash/共有消費/元成果と再認証を2126結果へ分離して記録し、後続の実未解決へ継続する。

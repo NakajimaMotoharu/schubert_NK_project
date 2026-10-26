@@ -1,0 +1,15 @@
+# 2126 現F03 Web差分・既Metric六判断参照結果
+
+2026-10-27、2125/群2483、sourcef24d1649e170e46aafb59a37b9750c602206364c/Main21d、branch dev-foundation。原10834/10836の9305と全1810inputを保持し、元Web八scope74→現17のdeltaだけ保存した。新Main/Test変更/PMD再実行/PT/coverage/外部操作0。
+
+10910原manifest SHA7c283b56f26f3c73e1b198dee9c91000278b10961713c6de2766c728acf85d66、10912独立905b63c4916d87f9e036a9f1341fdc983faf051df3d466755f04fe2f9b0ab96d、actual0/0・独立九反例。path=evidence/provisional/PG10910-current-f03-web-metric-delta-v1/ とPG10912-current-f03-web-metric-post-v1/。原全indexを重複コピーせずdelta.jsonの親hash/置換八path/新17行/消滅57ID/input delta/既判断overlay六で再構成できる。実command/時刻/環境/終了/tool/source/hashはmanifest invocationに結合。
+
+原9305→現9248（Main1512/Test7736）、57ID消滅は107/109の既PG成果であり当群新修正0。原全9409からの既是正累計161、全current analyzerの再発行ではない。元入力1810中八WebTestだけ変化/他1802不変、Main変更0。新17は10900/10902へ直接結合し、旧THREAD十六の古いSHA参照はこのscopeの置換で取り除いた。旧Protocol/JSON/ClassLoader等は入力byte不変の文脈参照だけ保持、旧runtime再割当0。
+
+現9248中、判断参照2686/参照総数2688、具体非該当文脈参照2680、旧判断からのcurrent whole pending六、今回一覧で参照未結合6562。6562を未review/真の障害件数へ断定しない。actualViolationCount null、全F03/451未受入を維持する。
+
+MetricContract三は既1544/7014/7016のREQUIRED_CONTRACTと同Main SHA27f64751をexact再利用した。追加PG・新障害起票・六旧PTの再演0。MonitoringModePolicy三はsourceが旧c62937d7から現ea595118へ変化し、初回guard1/OUT前（工具SHA48e24dcd7fa22b0e2d7b212f121147064718b28a7cbeaa419d8fb07294129b73）。旧whole sourceを転用せずPG-D686により旧Git source/hashと現sourceのfinal primitive宣言・同型getter全文だけを別source文脈へ再認証した。三exact source reuse/三changed-source statement reviewを分離する。原manifestのpriorMetricContextReuseOnly=6は六旧判断候補の参照数で、六全file同一という意味ではない。10912の二ID配列で3/3を実証した。
+
+旧13PT source d3fa8d42・独立26行TSV/SS351の証跡は歴史のまま。fixture現SHA/最新origin/main8b91944dfの設計SHAを照合、元expected生成0。overlay六はいずれもSOURCE_REBOUND_CURRENT_WHOLE_PENDING/currentWholeCaseRefs空で、新sourceの動的成功・全品質へ認定しない。別のmode新機能の成功を当三getterレビューで証明しない。
+
+工具手戻り1854のunused json前置1は本体未発行→削除/前置0後初回metadata実行。source不一致guard1は追加発見として元失敗SHAを保持し、source変更の再認証とexact reuseを混同しない。原見積り/元計画消化/追加発見/再認証/工具費を分離。開始1/3/7pp cap10固定、fresh共有20→20の丸め差0は専有費0ではなく、N/T/専有費null。正式1964-53/17-190/工数null/QA051final・全安全HOLD/未読保証不明1847は不変更。次は現未結合の具体Main findingと既後続判断を照合し、必要PGと既レビューのsource再認証を分けて継続する。
