@@ -11,6 +11,10 @@ import org.junit.jupiter.api.Test;
 
 /** PT-IDEM-WIPE-001..003; synthetic buffers only, no reflection or actual heap/credential dump. */
 final class SecretBufferTest {
+  private static final String ANONYMOUS_OWNER = "ANONYMOUS";
+  private static final String LOGIN_REQUEST_LAYOUT = "LGNREQ01";
+  private static final String LAYOUT_VERSION = "001";
+
   @Test
   void supersededAndCurrentStreamStorageAreWipedAtGrowthResetAndClose() {
     var stream = new Inspectable();
@@ -79,7 +83,11 @@ final class SecretBufferTest {
     var empty = new CanonicalField("empty", "X1", new byte[0]);
     var request =
         new CanonicalRequest(
-            "ANONYMOUS", "LGNREQ01", "001", "LOGIN:synthetic", List.of(value, absent, empty));
+            ANONYMOUS_OWNER,
+            LOGIN_REQUEST_LAYOUT,
+            LAYOUT_VERSION,
+            "LOGIN:synthetic",
+            List.of(value, absent, empty));
     byte[] copy = value.value();
     byte[] expected = independentHmac();
     assertArrayEquals(expected, OperationFingerprint.INSTANCE.calculate(request, new byte[32]));
@@ -102,9 +110,9 @@ final class SecretBufferTest {
         () -> {
           try (var invalid =
               new CanonicalRequest(
-                  "ANONYMOUS",
-                  "LGNREQ01",
-                  "001",
+                  ANONYMOUS_OWNER,
+                  LOGIN_REQUEST_LAYOUT,
+                  LAYOUT_VERSION,
                   "LOGIN:synthetic",
                   List.of(exceptionallyClosed))) {
             OperationFingerprint.INSTANCE.calculate(invalid, new byte[0]);
@@ -113,11 +121,16 @@ final class SecretBufferTest {
     assertArrayEquals(new byte[1], exceptionallyClosed.value());
     for (var large :
         List.of(
-            new CanonicalRequest("ANONYMOUS", "LGNREQ01", "001", "t".repeat(1_050_000), List.of()),
             new CanonicalRequest(
-                "ANONYMOUS",
-                "LGNREQ01",
-                "001",
+                ANONYMOUS_OWNER,
+                LOGIN_REQUEST_LAYOUT,
+                LAYOUT_VERSION,
+                "t".repeat(1_050_000),
+                List.of()),
+            new CanonicalRequest(
+                ANONYMOUS_OWNER,
+                LOGIN_REQUEST_LAYOUT,
+                LAYOUT_VERSION,
                 "t",
                 List.of(new CanonicalField("value", "X1", new byte[1_050_000]))))) {
       try (large) {
@@ -132,7 +145,8 @@ final class SecretBufferTest {
     var buffer = new java.io.ByteArrayOutputStream();
     var out = new java.io.DataOutputStream(buffer);
     out.write("SCHUBERT-NK-OP1".getBytes(java.nio.charset.StandardCharsets.US_ASCII));
-    for (String text : new String[] {"ANONYMOUS", "LGNREQ01", "001", "LOGIN:synthetic"})
+    for (String text :
+        new String[] {ANONYMOUS_OWNER, LOGIN_REQUEST_LAYOUT, LAYOUT_VERSION, "LOGIN:synthetic"})
       lp(out, text);
     out.writeInt(3);
     lp(out, "password");

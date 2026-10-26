@@ -17,6 +17,9 @@ import org.junit.jupiter.api.Test;
 
 /** PT-IDEM-001/002 independent NKOP1 golden vectors and boundary cases. */
 class OperationFingerprintTest {
+  private static final String QUESTION_REQUEST_LAYOUT = "QSTREQ01";
+  private static final String LAYOUT_VERSION = "001";
+  private static final String QUESTION_SEVEN_TARGET = "QUESTION:7";
   private static final HexFormat HEX = HexFormat.of();
   private static final String GOLDEN_CANONICAL =
       "53434855424552542d4e4b2d4f5031"
@@ -52,26 +55,30 @@ class OperationFingerprintTest {
     CanonicalRequest nfd =
         new CanonicalRequest(
             "u\u0308ser",
-            "QSTREQ01",
-            "001",
+            QUESTION_REQUEST_LAYOUT,
+            LAYOUT_VERSION,
             "cafe\u0301",
             List.of(new CanonicalField("value", "X1", "e\u0301".getBytes(StandardCharsets.UTF_8))));
     CanonicalRequest nfc =
         new CanonicalRequest(
             "\u00fcser",
-            "QSTREQ01",
-            "001",
+            QUESTION_REQUEST_LAYOUT,
+            LAYOUT_VERSION,
             "caf\u00e9",
             List.of(new CanonicalField("value", "X1", "e\u0301".getBytes(StandardCharsets.UTF_8))));
     CanonicalRequest nullValue =
         new CanonicalRequest(
-            "7", "QSTREQ01", "001", "QUESTION:7", List.of(new CanonicalField("v", "X1", null)));
+            "7",
+            QUESTION_REQUEST_LAYOUT,
+            LAYOUT_VERSION,
+            QUESTION_SEVEN_TARGET,
+            List.of(new CanonicalField("v", "X1", null)));
     CanonicalRequest emptyValue =
         new CanonicalRequest(
             "7",
-            "QSTREQ01",
-            "001",
-            "QUESTION:7",
+            QUESTION_REQUEST_LAYOUT,
+            LAYOUT_VERSION,
+            QUESTION_SEVEN_TARGET,
             List.of(new CanonicalField("v", "X1", new byte[0])));
 
     assertArrayEquals(
@@ -92,7 +99,9 @@ class OperationFingerprintTest {
     first[1] = 9;
     ArrayList<CanonicalField> mutable = new ArrayList<>();
     mutable.add(field);
-    CanonicalRequest request = new CanonicalRequest("7", "QSTREQ01", "001", "QUESTION:7", mutable);
+    CanonicalRequest request =
+        new CanonicalRequest(
+            "7", QUESTION_REQUEST_LAYOUT, LAYOUT_VERSION, QUESTION_SEVEN_TARGET, mutable);
     mutable.clear();
 
     assertArrayEquals(new byte[] {1, 2, 3}, field.value());
@@ -109,34 +118,40 @@ class OperationFingerprintTest {
     assertThrows(IllegalArgumentException.class, () -> new CanonicalField("v", "?", null));
     assertThrows(
         NullPointerException.class,
-        () -> new CanonicalRequest(null, "QSTREQ01", "001", "t", List.of()));
+        () -> new CanonicalRequest(null, QUESTION_REQUEST_LAYOUT, LAYOUT_VERSION, "t", List.of()));
     assertThrows(
         IllegalArgumentException.class,
-        () -> new CanonicalRequest("", "QSTREQ01", "001", "t", List.of()));
+        () -> new CanonicalRequest("", QUESTION_REQUEST_LAYOUT, LAYOUT_VERSION, "t", List.of()));
     assertThrows(
         NullPointerException.class,
-        () -> new CanonicalRequest("7", "QSTREQ01", "001", null, List.of()));
+        () -> new CanonicalRequest("7", QUESTION_REQUEST_LAYOUT, LAYOUT_VERSION, null, List.of()));
     assertThrows(
         IllegalArgumentException.class,
-        () -> new CanonicalRequest("7", "QSTREQ01", "001", "", List.of()));
-    assertThrows(
-        NullPointerException.class, () -> new CanonicalRequest("7", null, "001", "t", List.of()));
+        () -> new CanonicalRequest("7", QUESTION_REQUEST_LAYOUT, LAYOUT_VERSION, "", List.of()));
     assertThrows(
         NullPointerException.class,
-        () -> new CanonicalRequest("7", "QSTREQ01", null, "t", List.of()));
+        () -> new CanonicalRequest("7", null, LAYOUT_VERSION, "t", List.of()));
+    assertThrows(
+        NullPointerException.class,
+        () -> new CanonicalRequest("7", QUESTION_REQUEST_LAYOUT, null, "t", List.of()));
     assertThrows(
         IllegalArgumentException.class,
-        () -> new CanonicalRequest("7", "short", "001", "t", List.of()));
+        () -> new CanonicalRequest("7", "short", LAYOUT_VERSION, "t", List.of()));
     assertThrows(
         IllegalArgumentException.class,
-        () -> new CanonicalRequest("7", "QSTREQ01", "v1", "t", List.of()));
+        () -> new CanonicalRequest("7", QUESTION_REQUEST_LAYOUT, "v1", "t", List.of()));
     assertThrows(
-        NullPointerException.class, () -> new CanonicalRequest("7", "QSTREQ01", "001", "t", null));
+        NullPointerException.class,
+        () -> new CanonicalRequest("7", QUESTION_REQUEST_LAYOUT, LAYOUT_VERSION, "t", null));
     assertThrows(
         NullPointerException.class,
         () ->
             new CanonicalRequest(
-                "7", "QSTREQ01", "001", "t", java.util.Arrays.asList((CanonicalField) null)));
+                "7",
+                QUESTION_REQUEST_LAYOUT,
+                LAYOUT_VERSION,
+                "t",
+                java.util.Arrays.asList((CanonicalField) null)));
 
     CanonicalRequest request = goldenRequest();
     assertThrows(
@@ -181,9 +196,9 @@ class OperationFingerprintTest {
   private static CanonicalRequest goldenRequest() {
     return new CanonicalRequest(
         "7",
-        "QSTREQ01",
-        "001",
-        "QUESTION:7",
+        QUESTION_REQUEST_LAYOUT,
+        LAYOUT_VERSION,
+        QUESTION_SEVEN_TARGET,
         List.of(
             new CanonicalField("title", "X1", null),
             new CanonicalField("body", "X1", new byte[0])));

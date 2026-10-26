@@ -12,6 +12,10 @@ import org.junit.jupiter.api.Test;
 
 /** PT-IDEM-004..006 boundary, null-contract and redaction tests for Inbox value objects. */
 class InboxModelTest {
+  private static final String LAYOUT_VERSION = "001";
+  private static final String QUESTION_REQUEST_LAYOUT = "QSTREQ01";
+  private static final String READ_TARGET = "read";
+  private static final String QUESTION_RESPONSE_LAYOUT = "QSTRSP01";
   private static final UUID MESSAGE = UUID.fromString("10000000-0000-0000-0000-000000000001");
   private static final UUID CORRELATION = UUID.fromString("20000000-0000-0000-0000-000000000001");
   private static final UUID TOKEN = UUID.fromString("30000000-0000-0000-0000-000000000001");
@@ -25,9 +29,12 @@ class InboxModelTest {
         request(
             OptionalLong.empty(),
             Optional.empty(),
-            canonical("ANONYMOUS", "LGNREQ01", "001", "login"));
+            canonical("ANONYMOUS", "LGNREQ01", LAYOUT_VERSION, "login"));
     InboxRequest read =
-        request(OptionalLong.of(7), Optional.empty(), canonical("7", "QSTREQ01", "001", "read"));
+        request(
+            OptionalLong.of(7),
+            Optional.empty(),
+            canonical("7", QUESTION_REQUEST_LAYOUT, LAYOUT_VERSION, READ_TARGET));
 
     assertEquals(OptionalLong.empty(), anonymous.ownerUserId());
     assertEquals(OptionalLong.of(7), read.ownerUserId());
@@ -43,7 +50,10 @@ class InboxModelTest {
             "QDLREQ01")) {
       assertEquals(
           Optional.of(TOKEN),
-          request(OptionalLong.of(7), Optional.of(TOKEN), canonical("7", layout, "001", "update"))
+          request(
+                  OptionalLong.of(7),
+                  Optional.of(TOKEN),
+                  canonical("7", layout, LAYOUT_VERSION, "update"))
               .operationToken());
     }
     assertEquals(
@@ -53,8 +63,8 @@ class InboxModelTest {
 
   @Test
   void requestRejectsNullsScopeTokenOwnerAndTimeViolations() {
-    CanonicalRequest login = canonical("ANONYMOUS", "LGNREQ01", "001", "login");
-    CanonicalRequest read = canonical("7", "QSTREQ01", "001", "read");
+    CanonicalRequest login = canonical("ANONYMOUS", "LGNREQ01", LAYOUT_VERSION, "login");
+    CanonicalRequest read = canonical("7", QUESTION_REQUEST_LAYOUT, LAYOUT_VERSION, READ_TARGET);
     assertThrows(
         NullPointerException.class,
         () ->
@@ -123,24 +133,30 @@ class InboxModelTest {
         IllegalArgumentException.class,
         () ->
             request(
-                OptionalLong.of(0), Optional.empty(), canonical("0", "QSTREQ01", "001", "read")));
+                OptionalLong.of(0),
+                Optional.empty(),
+                canonical("0", QUESTION_REQUEST_LAYOUT, LAYOUT_VERSION, READ_TARGET)));
     assertThrows(
         IllegalArgumentException.class,
         () ->
             request(
                 OptionalLong.of(1_000_000_000_000L),
                 Optional.empty(),
-                canonical("1000000000000", "QSTREQ01", "001", "read")));
+                canonical("1000000000000", QUESTION_REQUEST_LAYOUT, LAYOUT_VERSION, READ_TARGET)));
     assertThrows(
         IllegalArgumentException.class,
         () ->
             request(
-                OptionalLong.of(7), Optional.empty(), canonical("8", "QSTREQ01", "001", "read")));
+                OptionalLong.of(7),
+                Optional.empty(),
+                canonical("8", QUESTION_REQUEST_LAYOUT, LAYOUT_VERSION, READ_TARGET)));
     assertThrows(
         IllegalArgumentException.class,
         () ->
             request(
-                OptionalLong.of(7), Optional.empty(), canonical("7", "QSBREQ01", "001", "write")));
+                OptionalLong.of(7),
+                Optional.empty(),
+                canonical("7", "QSBREQ01", LAYOUT_VERSION, "write")));
     assertThrows(
         IllegalArgumentException.class,
         () -> request(OptionalLong.of(7), Optional.of(TOKEN), read));
@@ -239,35 +255,45 @@ class InboxModelTest {
         () -> new InboxExecution(InboxExecutionStatus.IN_PROGRESS, Optional.of(completion)));
 
     assertCompletionNull(
-        null, InboxResultReference.none(), "QSTRSP01", "001", Optional.empty(), RECEIVED);
-    assertCompletionNull(
-        InboxCompletionState.COMPLETED, null, "QSTRSP01", "001", Optional.empty(), RECEIVED);
+        null,
+        InboxResultReference.none(),
+        QUESTION_RESPONSE_LAYOUT,
+        LAYOUT_VERSION,
+        Optional.empty(),
+        RECEIVED);
     assertCompletionNull(
         InboxCompletionState.COMPLETED,
-        InboxResultReference.none(),
         null,
-        "001",
+        QUESTION_RESPONSE_LAYOUT,
+        LAYOUT_VERSION,
         Optional.empty(),
         RECEIVED);
     assertCompletionNull(
         InboxCompletionState.COMPLETED,
         InboxResultReference.none(),
-        "QSTRSP01",
+        null,
+        LAYOUT_VERSION,
+        Optional.empty(),
+        RECEIVED);
+    assertCompletionNull(
+        InboxCompletionState.COMPLETED,
+        InboxResultReference.none(),
+        QUESTION_RESPONSE_LAYOUT,
         null,
         Optional.empty(),
         RECEIVED);
     assertCompletionNull(
         InboxCompletionState.COMPLETED,
         InboxResultReference.none(),
-        "QSTRSP01",
-        "001",
+        QUESTION_RESPONSE_LAYOUT,
+        LAYOUT_VERSION,
         null,
         RECEIVED);
     assertCompletionNull(
         InboxCompletionState.COMPLETED,
         InboxResultReference.none(),
-        "QSTRSP01",
-        "001",
+        QUESTION_RESPONSE_LAYOUT,
+        LAYOUT_VERSION,
         Optional.empty(),
         null);
     assertThrows(
@@ -277,7 +303,7 @@ class InboxModelTest {
                 InboxCompletionState.COMPLETED,
                 InboxResultReference.none(),
                 "bad",
-                "001",
+                LAYOUT_VERSION,
                 Optional.empty(),
                 RECEIVED));
     assertThrows(
@@ -286,7 +312,7 @@ class InboxModelTest {
             new InboxCompletion(
                 InboxCompletionState.COMPLETED,
                 InboxResultReference.none(),
-                "QSTRSP01",
+                QUESTION_RESPONSE_LAYOUT,
                 "bad",
                 Optional.empty(),
                 RECEIVED));
@@ -315,7 +341,12 @@ class InboxModelTest {
 
   private static InboxCompletion completion(InboxCompletionState state) {
     return new InboxCompletion(
-        state, InboxResultReference.none(), "QSTRSP01", "001", Optional.empty(), RECEIVED);
+        state,
+        InboxResultReference.none(),
+        QUESTION_RESPONSE_LAYOUT,
+        LAYOUT_VERSION,
+        Optional.empty(),
+        RECEIVED);
   }
 
   private static void assertInvalidReference(

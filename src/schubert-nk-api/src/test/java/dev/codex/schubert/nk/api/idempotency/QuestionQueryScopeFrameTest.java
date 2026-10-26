@@ -13,6 +13,9 @@ import org.junit.jupiter.api.Test;
 
 /** PT-QRY-SCOPE-001/003; SSC157 independent eight-byte literals and caller ownership. */
 final class QuestionQueryScopeFrameTest {
+  private static final String QUESTION_LIST_RESPONSE_LAYOUT = "QSSRSP01";
+  private static final String LAYOUT_VERSION = "001";
+
   @Test
   void scope001LiteralFramesAndInspectionOnlyLegacyAreCallerOwned() {
     byte[] wire = new byte[256];
@@ -26,9 +29,9 @@ final class QuestionQueryScopeFrameTest {
       byte[] frame = QuestionQueryScopeFrame.wrap(role, wire);
       assertArrayEquals(expected, frame);
       assertEquals(role, QuestionQueryScopeFrame.capturedScope(frame));
-      for (String layout : new String[] {"QSSRSP01", "QSDRSP01"}) {
+      for (String layout : new String[] {QUESTION_LIST_RESPONSE_LAYOUT, "QSDRSP01"}) {
         byte[] inspected =
-            QuestionQueryScopeFrame.wireForInspection(identity(layout, "001"), frame);
+            QuestionQueryScopeFrame.wireForInspection(identity(layout, LAYOUT_VERSION), frame);
         assertArrayEquals(wire, inspected);
         inspected[0] = 0;
         assertEquals(' ', frame[8]);
@@ -38,7 +41,7 @@ final class QuestionQueryScopeFrameTest {
     }
     for (byte[] old : new byte[][] {wire, new byte[0], new byte[6]}) {
       byte[] inspected =
-          QuestionQueryScopeFrame.wireForInspection(identity("NTDRSP01", "001"), old);
+          QuestionQueryScopeFrame.wireForInspection(identity("NTDRSP01", LAYOUT_VERSION), old);
       assertArrayEquals(old, inspected);
       assertNotSame(old, inspected);
       assertThrows(
@@ -57,7 +60,9 @@ final class QuestionQueryScopeFrameTest {
         NullPointerException.class, () -> QuestionQueryScopeFrame.wireForInspection(null, frame));
     assertThrows(
         NullPointerException.class,
-        () -> QuestionQueryScopeFrame.wireForInspection(identity("QSSRSP01", "001"), null));
+        () ->
+            QuestionQueryScopeFrame.wireForInspection(
+                identity(QUESTION_LIST_RESPONSE_LAYOUT, LAYOUT_VERSION), null));
     assertThrows(
         IllegalArgumentException.class,
         () -> QuestionQueryScopeFrame.wrap(Role.USER, new byte[255]));
@@ -72,7 +77,9 @@ final class QuestionQueryScopeFrameTest {
         IllegalArgumentException.class, () -> QuestionQueryScopeFrame.capturedScope(unknown));
     assertThrows(
         IllegalArgumentException.class,
-        () -> QuestionQueryScopeFrame.wireForInspection(identity("QSSRSP01", "001"), unknown));
+        () ->
+            QuestionQueryScopeFrame.wireForInspection(
+                identity(QUESTION_LIST_RESPONSE_LAYOUT, LAYOUT_VERSION), unknown));
     byte[] magic = frame.clone();
     magic[0] = 'X';
     assertThrows(
@@ -80,10 +87,12 @@ final class QuestionQueryScopeFrameTest {
     for (String layout : new String[] {"NTSRSP01", "NTDRSP01", "USRRSP01"})
       assertThrows(
           IllegalArgumentException.class,
-          () -> QuestionQueryScopeFrame.wireForInspection(identity(layout, "001"), frame));
+          () -> QuestionQueryScopeFrame.wireForInspection(identity(layout, LAYOUT_VERSION), frame));
     assertThrows(
         IllegalArgumentException.class,
-        () -> QuestionQueryScopeFrame.wireForInspection(identity("QSSRSP01", "002"), frame));
+        () ->
+            QuestionQueryScopeFrame.wireForInspection(
+                identity(QUESTION_LIST_RESPONSE_LAYOUT, "002"), frame));
   }
 
   private static ResponseSnapshotIdentity identity(String layout, String version) {
