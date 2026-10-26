@@ -40,6 +40,12 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** NK-BAT-001/OPS009/DAT009/UI251/SS331 3.14/332/341; SSC057/PG164; BAT162..169. */
 final class CleanupStepRepositoryTest {
+  private static final String FIXTURE_STEP_TARGET_COUNT_COLUMN = "step_target_count";
+  private static final String FIXTURE_STEP_SUCCESS_COUNT_COLUMN = "step_success_count";
+  private static final String FIXTURE_QUESTION_TWO_COUNT_SQL =
+      "select count(*) from schubert.questions where id=2";
+  private static final String FIXTURE_ROW_CLOSE_FAULT_POINT = "row.close";
+
   @TempDir static Path root;
   static BatchDatabaseFixture db;
 
@@ -181,19 +187,19 @@ final class CleanupStepRepositoryTest {
                 1001L,
                 "deleted_count",
                 1001L,
-                "step_target_count",
+                FIXTURE_STEP_TARGET_COUNT_COLUMN,
                 1001L,
-                "step_success_count",
+                FIXTURE_STEP_SUCCESS_COUNT_COLUMN,
                 1001L),
             Map.of("deleted_count", 2L),
             Map.of("skipped_count", 1L),
             Map.of("reason_code", "UNKNOWN"),
-            Map.of("step_target_count", 0L, "step_success_count", 0L),
-            Map.of("step_target_count", -1L),
-            Map.of("step_success_count", 2L),
+            Map.of(FIXTURE_STEP_TARGET_COUNT_COLUMN, 0L, FIXTURE_STEP_SUCCESS_COUNT_COLUMN, 0L),
+            Map.of(FIXTURE_STEP_TARGET_COUNT_COLUMN, -1L),
+            Map.of(FIXTURE_STEP_SUCCESS_COUNT_COLUMN, 2L),
             Map.of("complete", true),
             Map.of("reason_code", "LOCK_BUSY"),
-            Map.of("step_target_count", 1L, "step_success_count", 0L));
+            Map.of(FIXTURE_STEP_TARGET_COUNT_COLUMN, 1L, FIXTURE_STEP_SUCCESS_COUNT_COLUMN, 0L));
     for (var override : corrupt)
       try (var c = locked(db, false)) {
         var p = new Probe();
@@ -255,7 +261,7 @@ final class CleanupStepRepositoryTest {
           assertFalse(c.getAutoCommit());
           c.rollback();
           try (var admin = db.admin()) {
-            assertEquals("1", query(admin, "select count(*) from schubert.questions where id=2"));
+            assertEquals("1", query(admin, FIXTURE_QUESTION_TWO_COUNT_SQL));
             assertEquals("RUNNING|0|0|0|0|true", totals(admin, 90011));
           }
           tried++;
@@ -265,7 +271,7 @@ final class CleanupStepRepositoryTest {
     for (int close : new int[] {1, 2, 3})
       try (var c = locked(db, false)) {
         var p = new Probe();
-        p.fail("row.close", close);
+        p.fail(FIXTURE_ROW_CLOSE_FAULT_POINT, close);
         p.fail("statement.close", close);
         redacted(
             assertThrows(
@@ -322,7 +328,8 @@ final class CleanupStepRepositoryTest {
       admin.setAutoCommit(true);
       sql(
           admin,
-          "create table public.pg164_repo_fk(id bigint references schubert.questions(id));insert into public.pg164_repo_fk values(2)");
+          "create table public.pg164_repo_fk(id bigint references schubert.questions(id));insert"
+              + " into public.pg164_repo_fk values(2)");
       try (var c = locked(db, false)) {
         var r =
             new CleanupStepRepository(c)
@@ -472,7 +479,8 @@ final class CleanupStepRepositoryTest {
       var p = new Probe();
       p.after =
           (k, n) -> {
-            if (k.equals("row.close") && n == 3) Thread.currentThread().interrupt();
+            if (k.equals(FIXTURE_ROW_CLOSE_FAULT_POINT) && n == 3)
+              Thread.currentThread().interrupt();
           };
       try {
         assertThrows(
@@ -497,7 +505,7 @@ final class CleanupStepRepositoryTest {
               ? new IllegalStateException("public same cleanup fixture")
               : new IllegalArgumentException("public provider fixture");
       p.cleanupFaults.put(compound ? "row.next" : "row.getObject", primary);
-      if (compound) p.cleanupFaults.put("row.close", primary);
+      if (compound) p.cleanupFaults.put(FIXTURE_ROW_CLOSE_FAULT_POINT, primary);
       try {
         assertSame(
             primary,
@@ -533,7 +541,7 @@ final class CleanupStepRepositoryTest {
         assertEquals(1, p.cleanupSeen.get("statement.close"));
         assertEquals(
             sample.body().equals("statement.executeQuery") && sample.primary() != null ? 0 : 1,
-            p.cleanupSeen.getOrDefault("row.close", 0));
+            p.cleanupSeen.getOrDefault(FIXTURE_ROW_CLOSE_FAULT_POINT, 0));
         p.closed();
         for (String key :
             List.of(
@@ -558,7 +566,7 @@ final class CleanupStepRepositoryTest {
           new CleanupStepRepository(first)
               .execute(attempt(CleanupKind.QUESTIONS), CleanupKind.QUESTIONS, 1);
       assertEquals(new CleanupCounts(1, 1, 0), r.counts());
-      assertEquals("1", query(admin, "select count(*) from schubert.questions where id=2"));
+      assertEquals("1", query(admin, FIXTURE_QUESTION_TWO_COUNT_SQL));
       assertEquals("RUNNING|0|0|0|0|true", totals(admin, 90011));
       try (var pool = Executors.newVirtualThreadPerTaskExecutor()) {
         var result =
@@ -580,11 +588,11 @@ final class CleanupStepRepositoryTest {
         assertEquals(Boolean.TRUE, result.get(5, TimeUnit.SECONDS));
       }
       first.rollback();
-      assertEquals("1", query(admin, "select count(*) from schubert.questions where id=2"));
+      assertEquals("1", query(admin, FIXTURE_QUESTION_TWO_COUNT_SQL));
       new CleanupStepRepository(first)
           .execute(attempt(CleanupKind.QUESTIONS), CleanupKind.QUESTIONS, 1);
       first.commit();
-      assertEquals("0", query(admin, "select count(*) from schubert.questions where id=2"));
+      assertEquals("0", query(admin, FIXTURE_QUESTION_TWO_COUNT_SQL));
       assertEquals("RUNNING|1|1|0|0|true", totals(admin, 90011));
       var end =
           new CleanupStepRepository(first)

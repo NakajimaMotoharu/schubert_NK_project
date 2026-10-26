@@ -50,6 +50,15 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** Actual PG/Flyway and independent full wire/SQL assertions, PG-D-092/PT-ADM-067..073. */
 class LogQueryApplicationServiceTest {
+  private static final String FIXTURE_RESULT_SUCCESS = "0000";
+  private static final String FIXTURE_RESULT_IDEMPOTENT_SUCCESS = "0200";
+  private static final String FIXTURE_RESULT_FORBIDDEN = "0103";
+  private static final String FIXTURE_INBOX_COUNT_SQL =
+      "select count(*) from schubert.request_inbox";
+  private static final String FIXTURE_NO_CONNECTION_FAULT = "none";
+  private static final String FIXTURE_IN_VM_BROKER_URL = "vm://0";
+  private static final String FIXTURE_DATABASE_FAULT_POINT = "database";
+
   @TempDir static Path root;
   static ApiLogDatabaseFixture database;
   static final Instant NOW = LogVectors.NOW.plusSeconds(60);
@@ -72,13 +81,17 @@ class LogQueryApplicationServiceTest {
         seed(f, count);
         var service = service(f);
         var message = input(null, MESSAGE, 1);
-        assertArrayEquals(expected(message, "0000", 2, count), service.process(message));
+        assertArrayEquals(
+            expected(message, FIXTURE_RESULT_SUCCESS, 2, count), service.process(message));
         assertEquals(2, f.commits.get());
         assertEquals(0, f.live.get());
         assertEquals(
             1,
             f.scalar(
-                "select count(*) from schubert.request_inbox where owner_user_id=1 and operation_token is null and result_ref_type='NONE' and processing_state='COMPLETED' and expires_at=completed_at+interval '24 hours'"));
+                "select count(*) from schubert.request_inbox where owner_user_id=1 and"
+                    + " operation_token is null and result_ref_type='NONE' and"
+                    + " processing_state='COMPLETED' and expires_at=completed_at+interval '24"
+                    + " hours'"));
         byte[] independent =
             LogVectors.check(
                 LogRequest.decode(message),
@@ -90,11 +103,16 @@ class LogQueryApplicationServiceTest {
             f.text("select request_fingerprint_hmac from schubert.request_inbox"));
         Arrays.fill(independent, (byte) 0);
         assertArrayEquals(
-            expected(message, "0000", 1, count), LogVectors.decrypt(completion(f), MESSAGE, 1));
+            expected(message, FIXTURE_RESULT_SUCCESS, 1, count),
+            LogVectors.decrypt(completion(f), MESSAGE, 1));
         var metadata = f.inboxMetadata();
         f.sql("update schubert.app_logs set message='Changed' where action='TEST'");
-        assertArrayEquals(expected(message, "0200", 3, count), service.process(message));
-        assertArrayEquals(expected(message, "0200", 4, count), service.process(message));
+        assertArrayEquals(
+            expected(message, FIXTURE_RESULT_IDEMPOTENT_SUCCESS, 3, count),
+            service.process(message));
+        assertArrayEquals(
+            expected(message, FIXTURE_RESULT_IDEMPOTENT_SUCCESS, 4, count),
+            service.process(message));
         assertEquals(metadata, f.inboxMetadata());
         assertEquals(
             2, f.scalar("select count(*) from schubert.app_logs where action='INBOX_REPLAYED'"));
@@ -106,8 +124,9 @@ class LogQueryApplicationServiceTest {
               input(null, MESSAGE, 1).header(),
               new FixedPayload(LogVectors.data(LogVectors.emptyFilters(), 1), 0, List.of()));
       var broadService = service(f);
-      assertArrayEquals(expected(broad, "0000", 2, 1), broadService.process(broad));
-      assertArrayEquals(expected(broad, "0200", 3, 1), broadService.process(broad));
+      assertArrayEquals(expected(broad, FIXTURE_RESULT_SUCCESS, 2, 1), broadService.process(broad));
+      assertArrayEquals(
+          expected(broad, FIXTURE_RESULT_IDEMPOTENT_SUCCESS, 3, 1), broadService.process(broad));
       // The replay audit is a newly visible Log, but cannot be appended to the frozen result.
       var fresh =
           new WireMessage<>(
@@ -121,15 +140,17 @@ class LogQueryApplicationServiceTest {
           "INBOX_REPLAYED",
           new String(freshBody, 357, 64, StandardCharsets.US_ASCII).stripTrailing());
       assertEquals("000000000001", new String(freshBody, 2392, 12, StandardCharsets.US_ASCII));
-      assertArrayEquals(expected(broad, "0200", 6, 1), broadService.process(broad));
+      assertArrayEquals(
+          expected(broad, FIXTURE_RESULT_IDEMPOTENT_SUCCESS, 6, 1), broadService.process(broad));
       seed(f, 101);
       var message = input(null, MESSAGE, 1, 999999);
-      byte[] last = expected(message, "0000", 2, 1);
+      byte[] last = expected(message, FIXTURE_RESULT_SUCCESS, 2, 1);
       LogVectors.put(last, 256, "000002100000000101000002000000101000000101");
       assertArrayEquals(last, service(f).process(message));
       seed(f);
       var filtered = input("message 1", MESSAGE, 1);
-      assertArrayEquals(expected(filtered, "0000", 2, 1), service(f).process(filtered));
+      assertArrayEquals(
+          expected(filtered, FIXTURE_RESULT_SUCCESS, 2, 1), service(f).process(filtered));
       seed(f);
       var capacity = input(null, MESSAGE, 1);
       var fault = new LogJdbcFaults();
@@ -142,7 +163,8 @@ class LogQueryApplicationServiceTest {
       assertEquals(
           1,
           f.scalar(
-              "select count(*) from schubert.request_inbox where processing_state='ERROR' and expires_at=completed_at+interval '24 hours'"));
+              "select count(*) from schubert.request_inbox where processing_state='ERROR' and"
+                  + " expires_at=completed_at+interval '24 hours'"));
     }
   }
 
@@ -152,18 +174,21 @@ class LogQueryApplicationServiceTest {
       for (int context : new int[] {3, 99}) {
         seed(f);
         var request = input(null, MESSAGE, context);
-        String code = context == 3 ? "0103" : "0102";
+        String code = context == 3 ? FIXTURE_RESULT_FORBIDDEN : "0102";
         assertArrayEquals(expected(request, code, 1, 0), service(f).process(request));
-        assertEquals(0, f.scalar("select count(*) from schubert.request_inbox"));
+        assertEquals(0, f.scalar(FIXTURE_INBOX_COUNT_SQL));
         assertEquals(
             1,
             f.scalar(
-                "select count(*) from schubert.app_logs where action='AUTHORIZATION_DENIED' and actor_user_id "
+                "select count(*) from schubert.app_logs where action='AUTHORIZATION_DENIED' and"
+                    + " actor_user_id "
                     + (context == 3 ? "=3" : "is null")));
       }
       for (String change :
           List.of(
-              "update schubert.auth_sessions set revoked=true,revoked_at='2026-09-08T00:01:00Z',revoke_reason='ADMIN' where user_id=1",
+              "update schubert.auth_sessions set"
+                  + " revoked=true,revoked_at='2026-09-08T00:01:00Z',revoke_reason='ADMIN' where"
+                  + " user_id=1",
               "update schubert.auth_sessions set expires_at='2026-09-08T00:01:00Z' where user_id=1",
               "update schubert.app_users set status='DISABLED' where id=1",
               "update schubert.app_users set role='USER' where id=1",
@@ -179,9 +204,9 @@ class LogQueryApplicationServiceTest {
                 }
             };
         var request = input(null, MESSAGE, 1);
-        String code = change.contains("role='USER'") ? "0103" : "0102";
+        String code = change.contains("role='USER'") ? FIXTURE_RESULT_FORBIDDEN : "0102";
         assertArrayEquals(expected(request, code, 1, 0), service(f).process(request));
-        assertEquals(0, f.scalar("select count(*) from schubert.request_inbox"));
+        assertEquals(0, f.scalar(FIXTURE_INBOX_COUNT_SQL));
         assertEquals(
             1,
             f.scalar("select count(*) from schubert.app_logs where action='AUTHORIZATION_DENIED'"));
@@ -201,13 +226,14 @@ class LogQueryApplicationServiceTest {
                 }
             };
         var request = input(null, MESSAGE, missing ? 99 : 1);
-        String code = missing ? "0102" : "0103";
+        String code = missing ? "0102" : FIXTURE_RESULT_FORBIDDEN;
         assertArrayEquals(expected(request, code, 1, 0), service(f).process(request));
         assertEquals(0, f.inboxCount());
         assertEquals(
             1,
             f.scalar(
-                "select count(*) from schubert.app_logs where action='AUTHORIZATION_DENIED' and actor_user_id "
+                "select count(*) from schubert.app_logs where action='AUTHORIZATION_DENIED' and"
+                    + " actor_user_id "
                     + (missing ? "is null" : "=1")));
         f.afterCommit = () -> {};
       }
@@ -216,7 +242,7 @@ class LogQueryApplicationServiceTest {
       service.process(input(null, MESSAGE, 1));
       assertThrows(
           PermanentProtocolException.class, () -> service.process(input("different", MESSAGE, 1)));
-      assertEquals(1, f.scalar("select count(*) from schubert.request_inbox"));
+      assertEquals(1, f.scalar(FIXTURE_INBOX_COUNT_SQL));
       assertEquals(
           1, f.scalar("select count(*) from schubert.app_logs where action='PROTOCOL_REJECTED'"));
     }
@@ -277,20 +303,21 @@ class LogQueryApplicationServiceTest {
                 return new UUID(101, id);
               });
       var request = input(null, MESSAGE, 1);
-      assertArrayEquals(expected(request, "0000", 2, 1), tracked.process(request));
+      assertArrayEquals(expected(request, FIXTURE_RESULT_SUCCESS, 2, 1), tracked.process(request));
       seed(f);
       byte[] random =
           new LogQueryApplicationService(f.source, auth, query, f.inbox, replay, clock)
               .process(request);
       UUID response = UUID.fromString(new String(random, 24, 36, StandardCharsets.US_ASCII));
       assertEquals(4, response.version());
-      byte[] expected = expected(request, "0000", 2, 1);
+      byte[] expected = expected(request, FIXTURE_RESULT_SUCCESS, 2, 1);
       put(expected, 24, response.toString());
       assertArrayEquals(expected, random);
       seed(f);
       f.sql("update schubert.app_users set username=E'u3\\n' where id=3");
       var denied = input("synthetic-private-search", MESSAGE, 3);
-      assertArrayEquals(expected(denied, "0103", 1, 0), service(f).process(denied));
+      assertArrayEquals(
+          expected(denied, FIXTURE_RESULT_FORBIDDEN, 1, 0), service(f).process(denied));
       assertEquals(
           "u3 ",
           f.text(
@@ -333,7 +360,7 @@ class LogQueryApplicationServiceTest {
           else f.connectionFault = fault;
           deny(() -> service(f).process(request));
           assertEquals(0, f.live.get());
-          f.connectionFault = "none";
+          f.connectionFault = FIXTURE_NO_CONNECTION_FAULT;
           f.afterCommit = () -> {};
           assertEquals(0, f.inboxCount());
         }
@@ -362,7 +389,7 @@ class LogQueryApplicationServiceTest {
         var fault = new LogJdbcFaults();
         fault.sqlPart = "update schubert.request_inbox";
         fault.updateCount = 0;
-        fault.fault = close ? "statementClose" : "none";
+        fault.fault = close ? "statementClose" : FIXTURE_NO_CONNECTION_FAULT;
         f.sqlFault = fault;
         deny(() -> service(f).process(request));
         assertEquals(0, f.inboxCount());
@@ -450,8 +477,9 @@ class LogQueryApplicationServiceTest {
       deny(() -> service(f).process(request));
       assertEquals(1, f.inboxCount());
       f.afterCommit = () -> {};
-      f.connectionFault = "none";
-      assertArrayEquals(expected(request, "0200", 2, 1), service(f).process(request));
+      f.connectionFault = FIXTURE_NO_CONNECTION_FAULT;
+      assertArrayEquals(
+          expected(request, FIXTURE_RESULT_IDEMPOTENT_SUCCESS, 2, 1), service(f).process(request));
       seed(f);
       f.fingerprints.close();
       deny(() -> service(f).process(request));
@@ -483,9 +511,9 @@ class LogQueryApplicationServiceTest {
                       var request = input(null, distinct ? new UUID(110, n + 1) : MESSAGE, 1);
                       byte[] actual = service.process(request);
                       String code = new String(actual, 208, 4, StandardCharsets.US_ASCII);
-                      if (code.equals("0000")) initial.incrementAndGet();
+                      if (code.equals(FIXTURE_RESULT_SUCCESS)) initial.incrementAndGet();
                       else {
-                        assertEquals("0200", code);
+                        assertEquals(FIXTURE_RESULT_IDEMPOTENT_SUCCESS, code);
                         repeated.incrementAndGet();
                       }
                       byte[] expected = expected(request, code, 1, 1);
@@ -522,7 +550,7 @@ class LogQueryApplicationServiceTest {
                       try {
                         byte[] actual = service.process(request);
                         assertTrue(
-                            List.of("0000", "0200")
+                            List.of(FIXTURE_RESULT_SUCCESS, FIXTURE_RESULT_IDEMPOTENT_SUCCESS)
                                 .contains(new String(actual, 208, 4, StandardCharsets.US_ASCII)));
                         success.incrementAndGet();
                       } catch (PermanentProtocolException rejected) {
@@ -545,7 +573,8 @@ class LogQueryApplicationServiceTest {
       var request = input(null, MESSAGE, 1);
       service(f).process(request);
       f.sql(
-          "update schubert.request_inbox set processing_state='PROCESSING',completed_at=null,result_ref_type=null,response_layout_id=null,response_version=null,response_body_encrypted=null,response_key_version=null");
+          "update schubert.request_inbox set"
+              + " processing_state='PROCESSING',completed_at=null,result_ref_type=null,response_layout_id=null,response_version=null,response_body_encrypted=null,response_key_version=null");
       deny(() -> service(f).process(request));
       assertEquals(1, f.inboxCount());
     }
@@ -558,8 +587,10 @@ class LogQueryApplicationServiceTest {
       for (String change :
           List.of(
               "delete from schubert.request_inbox",
-              "update schubert.request_inbox set response_body_encrypted=set_byte(response_body_encrypted,30,1-get_byte(response_body_encrypted,30)%2)",
-              "update schubert.request_inbox set completed_at=completed_at+interval '1 millisecond'",
+              "update schubert.request_inbox set"
+                  + " response_body_encrypted=set_byte(response_body_encrypted,30,1-get_byte(response_body_encrypted,30)%2)",
+              "update schubert.request_inbox set completed_at=completed_at+interval '1"
+                  + " millisecond'",
               "update schubert.request_inbox set response_key_version='gone'",
               "update schubert.request_inbox set request_fingerprint_hmac=repeat('0',64)")) {
         seed(f);
@@ -586,7 +617,8 @@ class LogQueryApplicationServiceTest {
           List.of(
               "update schubert.request_inbox set response_key_version='gone'",
               "update schubert.request_inbox set fingerprint_key_version='gone'",
-              "update schubert.request_inbox set response_body_encrypted=set_byte(response_body_encrypted,30,1-get_byte(response_body_encrypted,30)%2)")) {
+              "update schubert.request_inbox set"
+                  + " response_body_encrypted=set_byte(response_body_encrypted,30,1-get_byte(response_body_encrypted,30)%2)")) {
         seed(f);
         service(f).process(request);
         f.sql(change);
@@ -613,7 +645,7 @@ class LogQueryApplicationServiceTest {
         .setLargeMessagesDirectory(brokerRoot.resolve("large").toString())
         .setSecurityEnabled(false)
         .clearAcceptorConfigurations()
-        .addAcceptorConfiguration("component", "vm://0");
+        .addAcceptorConfiguration("component", FIXTURE_IN_VM_BROKER_URL);
     var broker =
         new org.apache.activemq.artemis.core.server.embedded.EmbeddedActiveMQ()
             .setConfiguration(configuration)
@@ -631,21 +663,22 @@ class LogQueryApplicationServiceTest {
             dev.codex.schubert.nk.protocol.transport.BrokerTopology.DEAD_LETTER
                 .fullyQualifiedQueue());
     try (var factory =
-            new org.apache.activemq.artemis.jms.client.ActiveMQConnectionFactory("vm://0");
+            new org.apache.activemq.artemis.jms.client.ActiveMQConnectionFactory(
+                FIXTURE_IN_VM_BROKER_URL);
         var producer = factory.createContext(jakarta.jms.JMSContext.AUTO_ACKNOWLEDGE);
         var receiver = factory.createContext(jakarta.jms.JMSContext.SESSION_TRANSACTED);
         var observer = factory.createContext(jakarta.jms.JMSContext.AUTO_ACKNOWLEDGE);
         var requests = receiver.createConsumer(requestQueue);
         var replies = observer.createConsumer(replyQueue);
         var dlq = observer.createConsumer(dlqQueue)) {
-      for (String point : List.of("createProducer", "commit", "database"))
+      for (String point : List.of("createProducer", "commit", FIXTURE_DATABASE_FAULT_POINT))
         try (var f = new LogApplicationFixture(database)) {
           seed(f);
           var request = input(null, MESSAGE, 1);
           var listener =
               new dev.codex.schubert.nk.api.messaging.inbound.SyncRequestListener(
                   service(f), Clock.fixed(NOW, ZoneOffset.UTC));
-          if (point.equals("database")) f.connectionFault = "open";
+          if (point.equals(FIXTURE_DATABASE_FAULT_POINT)) f.connectionFault = "open";
           var failing =
               (jakarta.jms.JMSContext)
                   java.lang.reflect.Proxy.newProxyInstance(
@@ -662,19 +695,26 @@ class LogQueryApplicationServiceTest {
           send(producer, requestQueue, request);
           var first = requests.receive(5000);
           assertNotNull(first);
-          if (point.equals("database")) deny(() -> listener.onMessage(failing, first));
+          if (point.equals(FIXTURE_DATABASE_FAULT_POINT))
+            deny(() -> listener.onMessage(failing, first));
           else
             assertThrows(
                 jakarta.jms.JMSRuntimeException.class, () -> listener.onMessage(failing, first));
           assertNull(replies.receive(250));
-          assertEquals(point.equals("database") ? 0 : 1, f.inboxCount());
-          f.connectionFault = "none";
+          assertEquals(point.equals(FIXTURE_DATABASE_FAULT_POINT) ? 0 : 1, f.inboxCount());
+          f.connectionFault = FIXTURE_NO_CONNECTION_FAULT;
           var retry = requests.receive(5000);
           assertNotNull(retry);
           assertEquals(2, retry.getIntProperty("JMSXDeliveryCount"));
           listener.onMessage(receiver, retry);
           assertArrayEquals(
-              expected(request, point.equals("database") ? "0000" : "0200", f.ids.get(), 1),
+              expected(
+                  request,
+                  point.equals(FIXTURE_DATABASE_FAULT_POINT)
+                      ? FIXTURE_RESULT_SUCCESS
+                      : FIXTURE_RESULT_IDEMPOTENT_SUCCESS,
+                  f.ids.get(),
+                  1),
               brokerBody(replies.receive(5000)));
           var frozen = f.inboxMetadata();
           f.sql("update schubert.app_logs set message='Changed' where action='TEST'");
@@ -683,7 +723,8 @@ class LogQueryApplicationServiceTest {
           assertNotNull(duplicate);
           listener.onMessage(receiver, duplicate);
           assertArrayEquals(
-              expected(request, "0200", f.ids.get(), 1), brokerBody(replies.receive(5000)));
+              expected(request, FIXTURE_RESULT_IDEMPOTENT_SUCCESS, f.ids.get(), 1),
+              brokerBody(replies.receive(5000)));
           assertEquals(frozen, f.inboxMetadata());
           send(producer, requestQueue, input("changed", MESSAGE, 1));
           var invalid = requests.receive(5000);
@@ -736,11 +777,12 @@ class LogQueryApplicationServiceTest {
               f.source, f.fingerprints, f.snapshots, Clock.fixed(NOW, ZoneOffset.UTC));
       var request = input(null, MESSAGE, 1);
       byte[] first = service.process(request);
-      assertEquals("0000", new String(first, 208, 4, StandardCharsets.US_ASCII));
-      assertEquals(1, f.scalar("select count(*) from schubert.request_inbox"));
+      assertEquals(FIXTURE_RESULT_SUCCESS, new String(first, 208, 4, StandardCharsets.US_ASCII));
+      assertEquals(1, f.scalar(FIXTURE_INBOX_COUNT_SQL));
       byte[] replay = service.process(request);
-      assertEquals("0200", new String(replay, 208, 4, StandardCharsets.US_ASCII));
-      assertEquals(1, f.scalar("select count(*) from schubert.request_inbox"));
+      assertEquals(
+          FIXTURE_RESULT_IDEMPOTENT_SUCCESS, new String(replay, 208, 4, StandardCharsets.US_ASCII));
+      assertEquals(1, f.scalar(FIXTURE_INBOX_COUNT_SQL));
       assertEquals(
           1, f.scalar("select count(*) from schubert.app_logs where action='INBOX_REPLAYED'"));
       var fixed = Clock.fixed(NOW, ZoneOffset.UTC);
@@ -775,7 +817,7 @@ class LogQueryApplicationServiceTest {
         .setLargeMessagesDirectory(brokerRoot.resolve("large").toString())
         .setSecurityEnabled(false)
         .clearAcceptorConfigurations()
-        .addAcceptorConfiguration("component", "vm://0");
+        .addAcceptorConfiguration("component", FIXTURE_IN_VM_BROKER_URL);
     var broker =
         new org.apache.activemq.artemis.core.server.embedded.EmbeddedActiveMQ()
             .setConfiguration(configuration)
@@ -783,7 +825,8 @@ class LogQueryApplicationServiceTest {
     try (var f = new LogApplicationFixture(database);
         var contexts = new AuthContextCodec("test", new byte[32], null, null);
         var factory =
-            new org.apache.activemq.artemis.jms.client.ActiveMQConnectionFactory("vm://0");
+            new org.apache.activemq.artemis.jms.client.ActiveMQConnectionFactory(
+                FIXTURE_IN_VM_BROKER_URL);
         var producer = factory.createContext(jakarta.jms.JMSContext.AUTO_ACKNOWLEDGE);
         var observer = factory.createContext(jakarta.jms.JMSContext.AUTO_ACKNOWLEDGE);
         var replies =
@@ -814,11 +857,13 @@ class LogQueryApplicationServiceTest {
         assertTrue(runtime.ready());
         send(producer, queue, request);
         byte[] first = brokerBody(replies.receive(5_000));
-        assertEquals("0000", new String(first, 208, 4, StandardCharsets.US_ASCII));
+        assertEquals(FIXTURE_RESULT_SUCCESS, new String(first, 208, 4, StandardCharsets.US_ASCII));
         send(producer, queue, request);
         byte[] replay = brokerBody(replies.receive(5_000));
-        assertEquals("0200", new String(replay, 208, 4, StandardCharsets.US_ASCII));
-        assertEquals(1, f.scalar("select count(*) from schubert.request_inbox"));
+        assertEquals(
+            FIXTURE_RESULT_IDEMPOTENT_SUCCESS,
+            new String(replay, 208, 4, StandardCharsets.US_ASCII));
+        assertEquals(1, f.scalar(FIXTURE_INBOX_COUNT_SQL));
         assertEquals(
             1, f.scalar("select count(*) from schubert.app_logs where action='INBOX_REPLAYED'"));
         assertEquals(0, terminal.get());
@@ -850,7 +895,11 @@ class LogQueryApplicationServiceTest {
       s.execute("truncate schubert.app_logs restart identity");
     }
     f.sql(
-        "insert into schubert.app_logs(logged_at,service,category,level,action,message,request_id,message_id,correlation_id,http_method,request_uri,status_code,duration_ms,remote_address,details) select '2026-09-08T00:00:00Z'::timestamptz,'API','ACTION','INFO','TEST','message '||i,'00000000-0000-0000-0000-000000000001'::uuid,'00000000-0000-0000-0000-000000000002'::uuid,'00000000-0000-0000-0000-000000000003'::uuid,'GET','/safe',200,0,'2001:db8::1'::inet,'{\"count\": 1}'::jsonb from generate_series(1,"
+        "insert into"
+            + " schubert.app_logs(logged_at,service,category,level,action,message,request_id,message_id,correlation_id,http_method,request_uri,status_code,duration_ms,remote_address,details)"
+            + " select '2026-09-08T00:00:00Z'::timestamptz,'API','ACTION','INFO','TEST','message"
+            + " '||i,'00000000-0000-0000-0000-000000000001'::uuid,'00000000-0000-0000-0000-000000000002'::uuid,'00000000-0000-0000-0000-000000000003'::uuid,'GET','/safe',200,0,'2001:db8::1'::inet,'{\"count\":"
+            + " 1}'::jsonb from generate_series(1,"
             + count
             + ")n(i)");
   }
@@ -896,7 +945,7 @@ class LogQueryApplicationServiceTest {
             true);
     put(expected, 113, message.header().authenticationContext().orElseThrow().wireValue());
     // SQL order is logged_at DESC,id DESC. Fixture time is equal, so reverse IDs/messages.
-    if (code.equals("0000") || code.equals("0200"))
+    if (code.equals(FIXTURE_RESULT_SUCCESS) || code.equals(FIXTURE_RESULT_IDEMPOTENT_SUCCESS))
       for (int i = 0; i < count; i++) {
         int offset = 304 + i * 2088;
         put(expected, offset, String.format(Locale.ROOT, "%012d", count - i));
@@ -948,7 +997,9 @@ class LogQueryApplicationServiceTest {
         var s = c.createStatement();
         var r =
             s.executeQuery(
-                "select processing_state,response_layout_id,response_version,response_body_encrypted,response_key_version,completed_at from schubert.request_inbox")) {
+                "select"
+                    + " processing_state,response_layout_id,response_version,response_body_encrypted,response_key_version,completed_at"
+                    + " from schubert.request_inbox")) {
       assertTrue(r.next());
       var completion =
           new InboxCompletion(
