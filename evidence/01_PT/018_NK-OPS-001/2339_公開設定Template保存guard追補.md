@@ -1,0 +1,7 @@
+# 公開設定Template保存guard追補
+
+2026-10-28、PG-D742/BUG1976YKT1724。旧PG12468-public scanは36c36b0139fdcdc019f14c958deb1a812506ab5c366d3882aa0fbe4bab1b0087/45file/三formatpattern0で成功。直後の一時stage guardはactual45/expected46として終了1、commit未発行。差一は先行source commit d6c01d3aのConfigurationTemplateContractTestで、scan基点1abからは変更だがHEADからは同値。余計なindex0、保持したindex45を破棄しない。元失敗は試験失敗やplatform拒否ではない。
+
+誤りは期待集合の基点混同であり、HEAD差分又は未追跡候補との積で修正する。scan候補のHEAD同値sourceを除外/scan外変更の非許可/余計なindex拒否をmetadata反例で確認する。台帳・411・本追補を含むfresh公開scan後にhash/対象集合を照合してcommitする。元PG12468を再発行・上書きせず、Product/normal/static成功再演0。別途発行されたpush session18536は真正0だがsource d6c01d3aまでだけ、証跡保存済みと報告しない。最終保存/pushは456へ追補。
+
+当群の工具不備は従前namespace1975に加え保存guard1976の計二件。2337/2338の一件という記録は記録時点の事実で、後続発見を本追補で訂正する。全F03/451/正式1964-53/17-190/工数null/各HOLDは不変。
