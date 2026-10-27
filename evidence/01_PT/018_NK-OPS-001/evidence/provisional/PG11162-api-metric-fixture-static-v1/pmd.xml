@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pmd xmlns="http://pmd.sourceforge.net/report/2.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pmd.sourceforge.net/report/2.0.0 https://pmd.github.io/schema/report_2_0_0.xsd" version="7.28.0" timestamp="2026-10-27T09:42:43.647">
+<file name="/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/DbQueryDurationMetricRecorderTest.java">
+<violation beginline="235" endline="235" begincolumn="31" endcolumn="55" rule="UseConcurrentHashMap" ruleset="Multithreading" package="dev.codex.schubert.nk.api.monitoring" class="DbQueryDurationMetricRecorderTest" method="dbTime002IndependentSecondsHistogramCdfAndTwoMaximumSamplesNeverLongWrap" variable="counts" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap" priority="3">
+If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation
+</violation>
+<violation beginline="398" endline="398" begincolumn="24" endcolumn="55" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.api.monitoring" class="DbQueryDurationMetricRecorderTest" method="dbTime007ConcurrentSampleCountSumAndMaximumUsePrecomputedIntegerInputs" variable="executor" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="400" endline="400" begincolumn="25" endcolumn="49" rule="UseConcurrentHashMap" ruleset="Multithreading" package="dev.codex.schubert.nk.api.monitoring" class="DbQueryDurationMetricRecorderTest" method="dbTime007ConcurrentSampleCountSumAndMaximumUsePrecomputedIntegerInputs" variable="counts" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap" priority="3">
+If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation
+</violation>
+<violation beginline="401" endline="401" begincolumn="25" endcolumn="47" rule="UseConcurrentHashMap" ruleset="Multithreading" package="dev.codex.schubert.nk.api.monitoring" class="DbQueryDurationMetricRecorderTest" method="dbTime007ConcurrentSampleCountSumAndMaximumUsePrecomputedIntegerInputs" variable="sums" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap" priority="3">
+If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation
+</violation>
+<violation beginline="402" endline="402" begincolumn="25" endcolumn="49" rule="UseConcurrentHashMap" ruleset="Multithreading" package="dev.codex.schubert.nk.api.monitoring" class="DbQueryDurationMetricRecorderTest" method="dbTime007ConcurrentSampleCountSumAndMaximumUsePrecomputedIntegerInputs" variable="maxima" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap" priority="3">
+If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation
+</violation>
+<violation beginline="418" endline="418" begincolumn="25" endcolumn="50" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.api.monitoring" class="DbQueryDurationMetricRecorderTest" method="dbTime007ConcurrentSampleCountSumAndMaximumUsePrecomputedIntegerInputs" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+</file>
+<file name="/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/InboxReplayMetricRecorderTest.java">
+<violation beginline="351" endline="351" begincolumn="23" endcolumn="54" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.api.monitoring" class="InboxReplayMetricRecorderTest" method="inboxMet007ConcurrentSuppliedEventsKeepExactCountsAndSeparateOwners" variable="pool" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="352" endline="352" begincolumn="27" endcolumn="48" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.api.monitoring" class="InboxReplayMetricRecorderTest" method="inboxMet007ConcurrentSuppliedEventsKeepExactCountsAndSeparateOwners" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+</file>
+<file name="/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/MqMessageMetricRecorderTest.java">
+<violation beginline="470" endline="470" begincolumn="24" endcolumn="55" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.api.monitoring" class="MqMessageMetricRecorderTest" method="mqEvent007ConcurrentCountsUsePrecomputedStageOwnerVectorsAndSeparateRegistry" variable="executor" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="492" endline="492" begincolumn="20" endcolumn="65" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.api.monitoring" class="MqMessageMetricRecorderTest" method="mqEvent007ConcurrentCountsUsePrecomputedStageOwnerVectorsAndSeparateRegistry" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+</file>
+<file name="/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/MqProcessingDurationMetricRecorderTest.java">
+<violation beginline="456" endline="456" begincolumn="24" endcolumn="55" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.api.monitoring" class="MqProcessingDurationMetricRecorderTest" method="mqTime007ConcurrentCountsSumsAndMaxUseIndependentIntegerVectorsAndSeparateLayoutOwners" variable="executor" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="482" endline="482" begincolumn="20" endcolumn="65" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.api.monitoring" class="MqProcessingDurationMetricRecorderTest" method="mqTime007ConcurrentCountsSumsAndMaxUseIndependentIntegerVectorsAndSeparateLayoutOwners" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+</file>
+</pmd>

@@ -1,0 +1,314 @@
+{
+  "actualExit": 0,
+  "allMainAndOtherInputsPreserved": true,
+  "allOriginalOracleTokensRestored": true,
+  "coverage": null,
+  "effortPercent": null,
+  "externalActions": 0,
+  "factoryCallConstants": 4,
+  "invocation": {
+    "actualPythonCommand": [
+      "/usr/bin/python3",
+      "-B",
+      "tools/quality/pg11156_api_metric_fixture_source_post.py"
+    ],
+    "arbitraryArgumentsRecorded": false,
+    "entrypointPath": "tools/quality/pg11156_api_metric_fixture_source_post.py",
+    "entrypointSha256": "171d857882cfc2398204e7d6a11f3382b3d79befec7fda52aed4556609062689",
+    "helperPath": "tools/quality/host_tool_invocation.py",
+    "helperSha256": "85d616a3db4ff47f4c95ae2e0dd57954bc2b09f28b8f2a685b986e5621545c46",
+    "libraryPath": "tools/quality/pg11156_api_metric_fixture_source_post.py",
+    "librarySha256": "171d857882cfc2398204e7d6a11f3382b3d79befec7fda52aed4556609062689",
+    "loadedProjectPythonSources": {
+      "tools/quality/classfile_code_metadata.py": "2227e1e8df1ff91b606f094c7ee64366023273ca740d4d47126ed0928190e2f0",
+      "tools/quality/g07_host_class_provenance_inputs.py": "a676cb3e4145177c3c243722d737592ce7d44c3f29cfe4f670662ef7651f046b",
+      "tools/quality/host_tool_invocation.py": "85d616a3db4ff47f4c95ae2e0dd57954bc2b09f28b8f2a685b986e5621545c46",
+      "tools/quality/pg10130_uid_oracle_preflight.py": "e80cb1d6d45d4e4c0cdb3cb792e0638119d936403de5c3e141429d338485758a",
+      "tools/quality/pg10332_result_profile_oracle_plan.py": "82c9b4f57dd517c1dbee639dbf4955c316beb89216cb9a8a66e78e0b9a322ad4",
+      "tools/quality/pg10339_result_profile_oracle_post_v2.py": "42f86287f5236d2ef1a2e10f54f5b0634e799a4e866b15eaf6738336a4ebabb0",
+      "tools/quality/pg10392_role_literal_plan.py": "e1af98abd59175d867d29b07a73d7b2e4c7112754603d1805ec0bfc4d9465ce8",
+      "tools/quality/pg10398_role_view_preflight.py": "31709d50a345f3e0843fa62ae0b4c6849885503eb3d81555b6bcc9605b486d56",
+      "tools/quality/pg11104_web_pure_value_source_post.py": "2713a232d4143cf94c39b865936368707d115c19649a469de35dfbd22ad70967",
+      "tools/quality/pg11156_api_metric_fixture_source_post.py": "171d857882cfc2398204e7d6a11f3382b3d79befec7fda52aed4556609062689",
+      "tools/quality/pg9906_user_query_oracle_source_post.py": "4f9bdaa17eea78a720c0f25b8af906f3f045fda590c8fea2a8868229403a98fa",
+      "tools/quality/pg9978_plain_core_quality_post.py": "c99cc753c6335c9f41e3eafe6a97c17521503739ba2cf80659b542a445dd48fa",
+      "tools/quality/public_java_digest_provenance.py": "dd47f8735a61ce849995633c3290a6ad047842ef3263829ce359db413778f7a0"
+    },
+    "provenance": "OBSERVED_SYS_ARGV_AND_ORIG_ARGV_NOT_RECONSTRUCTED"
+  },
+  "metadataNegativeVectors": 16,
+  "newAccepted": 0,
+  "planManifestSha256": "525b6cea91ae9f61937075c96298dddcce2a3a0abafda3b8628f9d658087292a",
+  "productTestsExecuted": 0,
+  "referencesReplaced": 291,
+  "sourceBefore": "497dea5e49082d063d1c41e5e17999a473db6c91",
+  "sourceChanges": [
+    {
+      "beforeSha256": "a729f3475cdf09d31534b3cecc38f243484b1d8402e930fe0c7b7cdb0e348287",
+      "constants": [
+        {
+          "id": "PMD-02160",
+          "literal": "\"nk_db_query_duration_seconds\"",
+          "name": "DB_DURATION_NAME",
+          "references": 4
+        },
+        {
+          "id": "PMD-02161",
+          "literal": "\"query_id\"",
+          "name": "QUERY_LABEL",
+          "references": 6
+        },
+        {
+          "id": "PMD-02162",
+          "literal": "\"outcome\"",
+          "name": "OUTCOME_LABEL",
+          "references": 6
+        },
+        {
+          "id": "PMD-02163",
+          "literal": "\"DEBUG\"",
+          "name": "DEBUG_MODE",
+          "references": 12
+        },
+        {
+          "id": "PMD-02164",
+          "literal": "\"ASYNC_JOB_STATE_COUNTS\"",
+          "name": "ASYNC_COUNT_QUERY",
+          "references": 14
+        },
+        {
+          "id": "PMD-02165",
+          "literal": "\"OUTBOX_STATUS_COUNTS_OLDEST\"",
+          "name": "OUTBOX_COUNT_QUERY",
+          "references": 4
+        },
+        {
+          "id": "PMD-02166",
+          "literal": "\"SUCCESS\"",
+          "name": "SUCCESS_OUTCOME",
+          "references": 12
+        },
+        {
+          "id": "PMD-02167",
+          "literal": "\"FAILURE\"",
+          "name": "FAILURE_OUTCOME",
+          "references": 6
+        }
+      ],
+      "factoryCallConstant": 2,
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/DbQueryDurationMetricRecorderTest.java",
+      "sha256": "ba5366f062bf5e07b646aed6fb71105ecff8466916c1b61ba0d3b66837ff2095"
+    },
+    {
+      "beforeSha256": "7e33c0c181e2a78f82fd2951bc7c5e84262f2f946e87d638db016788908f5376",
+      "constants": [
+        {
+          "id": "PMD-02178",
+          "literal": "\"LGNREQ01\"",
+          "name": "LOGIN_REQUEST_LAYOUT",
+          "references": 11
+        },
+        {
+          "id": "PMD-02179",
+          "literal": "\"QSBREQ01\"",
+          "name": "SUBMIT_REQUEST_LAYOUT",
+          "references": 6
+        },
+        {
+          "id": "PMD-02180",
+          "literal": "\"0000\"",
+          "name": "SUCCESS_CODE",
+          "references": 8
+        },
+        {
+          "id": "PMD-02181",
+          "literal": "\"0200\"",
+          "name": "IDEMPOTENT_CODE",
+          "references": 4
+        },
+        {
+          "id": "PMD-02183",
+          "literal": "\"nk_inbox_replays_total\"",
+          "name": "INBOX_REPLAY_NAME",
+          "references": 4
+        },
+        {
+          "id": "PMD-02184",
+          "literal": "\"layout\"",
+          "name": "LAYOUT_LABEL",
+          "references": 5
+        },
+        {
+          "id": "PMD-02185",
+          "literal": "\"result\"",
+          "name": "RESULT_LABEL",
+          "references": 5
+        },
+        {
+          "id": "PMD-02186",
+          "literal": "\"DEBUG\"",
+          "name": "DEBUG_MODE",
+          "references": 10
+        }
+      ],
+      "factoryCallConstant": 2,
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/InboxReplayMetricRecorderTest.java",
+      "sha256": "c24ce4a60d7c3b76a202d9676a379728b9964e894a1a1836de1c89b4e6adce70"
+    },
+    {
+      "beforeSha256": "698faf3f1bc5ead037dd8a287e4e82571d99ebd5ca72c7875b1bb681a63d636e",
+      "constants": [
+        {
+          "id": "PMD-02189",
+          "literal": "\"LGNREQ01\"",
+          "name": "LOGIN_REQUEST_LAYOUT",
+          "references": 20
+        },
+        {
+          "id": "PMD-02190",
+          "literal": "\"QWKREQ01\"",
+          "name": "QUESTION_WORK_LAYOUT",
+          "references": 5
+        },
+        {
+          "id": "PMD-02191",
+          "literal": "\"nk.sync.request\"",
+          "name": "SYNC_REQUEST_ADDRESS",
+          "references": 10
+        },
+        {
+          "id": "PMD-02192",
+          "literal": "\"SEND\"",
+          "name": "SEND_DIRECTION",
+          "references": 6
+        },
+        {
+          "id": "PMD-02193",
+          "literal": "\"RECEIVE\"",
+          "name": "RECEIVE_DIRECTION",
+          "references": 4
+        },
+        {
+          "id": "PMD-02194",
+          "literal": "\"SUCCESS\"",
+          "name": "SUCCESS_OUTCOME",
+          "references": 4
+        },
+        {
+          "id": "PMD-02196",
+          "literal": "\"nk_mq_messages_total\"",
+          "name": "MQ_EVENT_NAME",
+          "references": 4
+        },
+        {
+          "id": "PMD-02197",
+          "literal": "\"direction\"",
+          "name": "DIRECTION_LABEL",
+          "references": 5
+        },
+        {
+          "id": "PMD-02198",
+          "literal": "\"address\"",
+          "name": "ADDRESS_LABEL",
+          "references": 5
+        },
+        {
+          "id": "PMD-02199",
+          "literal": "\"layout\"",
+          "name": "LAYOUT_LABEL",
+          "references": 5
+        },
+        {
+          "id": "PMD-02200",
+          "literal": "\"outcome\"",
+          "name": "OUTCOME_LABEL",
+          "references": 5
+        },
+        {
+          "id": "PMD-02201",
+          "literal": "\"DEBUG\"",
+          "name": "DEBUG_MODE",
+          "references": 13
+        }
+      ],
+      "factoryCallConstant": 2,
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/MqMessageMetricRecorderTest.java",
+      "sha256": "d64aeac71299b98b2e1d7453bb54959760744f87d271a86ef64050a72f1bbf60"
+    },
+    {
+      "beforeSha256": "4f5251c4b2ebca3131f1cc79582a4d337cb768d70c45b6a1918d9a5b72d7c940",
+      "constants": [
+        {
+          "id": "PMD-02227",
+          "literal": "\"LGNREQ01\"",
+          "name": "LOGIN_REQUEST_LAYOUT",
+          "references": 16
+        },
+        {
+          "id": "PMD-02228",
+          "literal": "\"QSBREQ01\"",
+          "name": "SUBMIT_REQUEST_LAYOUT",
+          "references": 5
+        },
+        {
+          "id": "PMD-02229",
+          "literal": "\"QWKREQ01\"",
+          "name": "QUESTION_WORK_LAYOUT",
+          "references": 8
+        },
+        {
+          "id": "PMD-02230",
+          "literal": "\"WLGEVT01\"",
+          "name": "WEB_LOG_EVENT_LAYOUT",
+          "references": 6
+        },
+        {
+          "id": "PMD-02232",
+          "literal": "\"nk_mq_processing_duration_seconds\"",
+          "name": "MQ_DURATION_NAME",
+          "references": 4
+        },
+        {
+          "id": "PMD-02233",
+          "literal": "\"flow\"",
+          "name": "FLOW_LABEL",
+          "references": 6
+        },
+        {
+          "id": "PMD-02234",
+          "literal": "\"layout\"",
+          "name": "LAYOUT_LABEL",
+          "references": 6
+        },
+        {
+          "id": "PMD-02235",
+          "literal": "\"outcome\"",
+          "name": "OUTCOME_LABEL",
+          "references": 6
+        },
+        {
+          "id": "PMD-02236",
+          "literal": "\"DEBUG\"",
+          "name": "DEBUG_MODE",
+          "references": 14
+        },
+        {
+          "id": "PMD-02237",
+          "literal": "\"SUCCESS\"",
+          "name": "SUCCESS_OUTCOME",
+          "references": 10
+        },
+        {
+          "id": "PMD-02238",
+          "literal": "\"FAILURE\"",
+          "name": "FAILURE_OUTCOME",
+          "references": 7
+        }
+      ],
+      "factoryCallConstant": 2,
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/MqProcessingDurationMetricRecorderTest.java",
+      "sha256": "848417abf54e4e86fce28e4865573061a79ac0dd4ebe2fc3de6d1e95dfc7991e"
+    }
+  ],
+  "stringConstants": 39
+}
