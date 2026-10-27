@@ -221,44 +221,45 @@ class AlertThresholdsTest {
 
   @Test
   void threshold014ConcurrentStatelessEvaluations() throws Exception {
-    var executor = Executors.newFixedThreadPool(4);
-    var expected =
-        List.of(
-            Severity.WARNING,
-            Severity.WARNING,
-            Severity.WARNING,
-            Severity.WARNING,
-            Severity.WARNING,
-            Severity.WARNING,
-            Severity.WARNING,
-            Severity.WARNING,
-            Severity.WARNING,
-            Severity.WARNING,
-            Severity.WARNING,
-            Severity.CRITICAL);
-    try {
-      var tasks = new ArrayList<Callable<List<Severity>>>();
-      for (int index = 0; index < 64; index++)
-        tasks.add(
-            () ->
-                List.of(
-                    thresholds.filesystem(80, FIVE, ZERO),
-                    thresholds.transfer(3_500_000_000L, 0),
-                    thresholds.asyncQueue(1, 700, 1000),
-                    thresholds.webLog(1, FIVE),
-                    thresholds.dlq(1, false, false),
-                    thresholds.expiry(1000),
-                    thresholds.dbPool(80, FIVE, 0, 0),
-                    thresholds.jvmHeap(75, TEN, false),
-                    thresholds.syncP95(2.1, FIVE, ZERO),
-                    thresholds.backup(true, false, 1),
-                    thresholds.restarts(1, false),
-                    thresholds.integrity(1)));
-      for (var future : executor.invokeAll(tasks, 10, TimeUnit.SECONDS))
-        assertEquals(expected, future.get());
-    } finally {
-      executor.shutdownNow();
-      assertTrue(executor.awaitTermination(10, TimeUnit.SECONDS));
+    try (var executor = Executors.newFixedThreadPool(4)) {
+      var expected =
+          List.of(
+              Severity.WARNING,
+              Severity.WARNING,
+              Severity.WARNING,
+              Severity.WARNING,
+              Severity.WARNING,
+              Severity.WARNING,
+              Severity.WARNING,
+              Severity.WARNING,
+              Severity.WARNING,
+              Severity.WARNING,
+              Severity.WARNING,
+              Severity.CRITICAL);
+      try {
+        var tasks = new ArrayList<Callable<List<Severity>>>();
+        for (int index = 0; index < 64; index++)
+          tasks.add(
+              () ->
+                  List.of(
+                      thresholds.filesystem(80, FIVE, ZERO),
+                      thresholds.transfer(3_500_000_000L, 0),
+                      thresholds.asyncQueue(1, 700, 1000),
+                      thresholds.webLog(1, FIVE),
+                      thresholds.dlq(1, false, false),
+                      thresholds.expiry(1000),
+                      thresholds.dbPool(80, FIVE, 0, 0),
+                      thresholds.jvmHeap(75, TEN, false),
+                      thresholds.syncP95(2.1, FIVE, ZERO),
+                      thresholds.backup(true, false, 1),
+                      thresholds.restarts(1, false),
+                      thresholds.integrity(1)));
+        for (var future : executor.invokeAll(tasks, 10, TimeUnit.SECONDS))
+          assertEquals(expected, future.get());
+      } finally {
+        executor.shutdownNow();
+        assertTrue(executor.awaitTermination(10, TimeUnit.SECONDS));
+      }
     }
   }
 }

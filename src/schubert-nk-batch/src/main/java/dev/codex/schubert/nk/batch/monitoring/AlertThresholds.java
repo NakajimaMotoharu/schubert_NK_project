@@ -10,6 +10,7 @@ import java.util.Objects;
  * MON005..009/013; UI252 §6; SS351 §7; PG-D520/PT-OPS-THRESH-001..014.
  */
 public final class AlertThresholds {
+  private static final int MAX_PERCENTAGE = 100;
   private static final String INVALID = "invalid alert observation";
   private static final Duration ONE_MINUTE = Duration.ofMinutes(1);
   private static final Duration FIVE_MINUTES = Duration.ofMinutes(5);
@@ -114,7 +115,7 @@ public final class AlertThresholds {
 
   private static void percentage(double value) {
     nonnegativeFinite(value);
-    if (value > 100) throw new IllegalArgumentException(INVALID);
+    if (value > MAX_PERCENTAGE) throw new IllegalArgumentException(INVALID);
   }
 
   private static void duration(Duration value) {
