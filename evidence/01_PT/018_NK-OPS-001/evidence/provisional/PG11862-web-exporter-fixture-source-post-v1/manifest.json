@@ -1,0 +1,151 @@
+{
+  "actualExit": 0,
+  "allMainAndOtherInputsPreserved": true,
+  "allOriginalOracleTokensRestored": true,
+  "coverage": null,
+  "effortPercent": null,
+  "externalActions": 0,
+  "fieldBindingTokensRenamed": 3,
+  "invocation": {
+    "actualPythonCommand": [
+      "/usr/bin/python3",
+      "-B",
+      "tools/quality/pg11862_web_exporter_fixture_source_post.py"
+    ],
+    "arbitraryArgumentsRecorded": false,
+    "entrypointPath": "tools/quality/pg11862_web_exporter_fixture_source_post.py",
+    "entrypointSha256": "9ddaddfbb1c1f5ab96c0c70c7ee4d967fe8ce61725022016fbd091a3c61b7c7e",
+    "helperPath": "tools/quality/host_tool_invocation.py",
+    "helperSha256": "85d616a3db4ff47f4c95ae2e0dd57954bc2b09f28b8f2a685b986e5621545c46",
+    "libraryPath": "tools/quality/pg11862_web_exporter_fixture_source_post.py",
+    "librarySha256": "9ddaddfbb1c1f5ab96c0c70c7ee4d967fe8ce61725022016fbd091a3c61b7c7e",
+    "loadedProjectPythonSources": {
+      "tools/quality/classfile_code_metadata.py": "2227e1e8df1ff91b606f094c7ee64366023273ca740d4d47126ed0928190e2f0",
+      "tools/quality/g07_host_class_provenance_inputs.py": "a676cb3e4145177c3c243722d737592ce7d44c3f29cfe4f670662ef7651f046b",
+      "tools/quality/host_tool_invocation.py": "85d616a3db4ff47f4c95ae2e0dd57954bc2b09f28b8f2a685b986e5621545c46",
+      "tools/quality/pg10130_uid_oracle_preflight.py": "e80cb1d6d45d4e4c0cdb3cb792e0638119d936403de5c3e141429d338485758a",
+      "tools/quality/pg10332_result_profile_oracle_plan.py": "82c9b4f57dd517c1dbee639dbf4955c316beb89216cb9a8a66e78e0b9a322ad4",
+      "tools/quality/pg10339_result_profile_oracle_post_v2.py": "42f86287f5236d2ef1a2e10f54f5b0634e799a4e866b15eaf6738336a4ebabb0",
+      "tools/quality/pg10392_role_literal_plan.py": "e1af98abd59175d867d29b07a73d7b2e4c7112754603d1805ec0bfc4d9465ce8",
+      "tools/quality/pg10398_role_view_preflight.py": "31709d50a345f3e0843fa62ae0b4c6849885503eb3d81555b6bcc9605b486d56",
+      "tools/quality/pg11104_web_pure_value_source_post.py": "2713a232d4143cf94c39b865936368707d115c19649a469de35dfbd22ad70967",
+      "tools/quality/pg11208_web_supplied_metric_fixture_source_post.py": "a5c338662163cc2ce1e95606e62e1ed86d7ce276e5e2c001e0ff67cd8eca0199",
+      "tools/quality/pg11862_web_exporter_fixture_source_post.py": "9ddaddfbb1c1f5ab96c0c70c7ee4d967fe8ce61725022016fbd091a3c61b7c7e",
+      "tools/quality/pg9906_user_query_oracle_source_post.py": "4f9bdaa17eea78a720c0f25b8af906f3f045fda590c8fea2a8868229403a98fa",
+      "tools/quality/pg9978_plain_core_quality_post.py": "c99cc753c6335c9f41e3eafe6a97c17521503739ba2cf80659b542a445dd48fa",
+      "tools/quality/public_java_digest_provenance.py": "dd47f8735a61ce849995633c3290a6ad047842ef3263829ce359db413778f7a0"
+    },
+    "provenance": "OBSERVED_SYS_ARGV_AND_ORIG_ARGV_NOT_RECONSTRUCTED"
+  },
+  "metadataNegativeVectors": 34,
+  "newAccepted": 0,
+  "originalMethods": 48,
+  "planManifestSha256": "7ea994fe2c7b0005d833a1b97c04d2be517973c0ccaa7811a17f12b058ca7516",
+  "productTestsExecuted": 0,
+  "sourceBefore": "69d50093df9e655a39eadcd7a392646ff65bfbb0",
+  "sourceChanges": [
+    {
+      "beforeSha256": "69713e44b0422059bb2b74de04218a6443580a4f010b5317205169ee9d7679a1",
+      "constants": [
+        {
+          "id": "PMD-08356",
+          "kind": "STRING",
+          "literal": "\"service\"",
+          "name": "SERVICE_LABEL",
+          "references": 7
+        },
+        {
+          "id": "PMD-08357",
+          "kind": "STRING",
+          "literal": "\"route\"",
+          "name": "ROUTE_LABEL",
+          "references": 7
+        },
+        {
+          "id": "PMD-08358",
+          "kind": "STRING",
+          "literal": "\"WEB\"",
+          "name": "WEB_SERVICE",
+          "references": 4
+        },
+        {
+          "id": "PMD-08359",
+          "kind": "STRING",
+          "literal": "\"/login\"",
+          "name": "LOGIN_ROUTE",
+          "references": 14
+        },
+        {
+          "id": "PMD-08360",
+          "kind": "STRING",
+          "literal": "\"le=\\\"+Inf\\\"} 2\\n\"",
+          "name": "INFINITE_BUCKET_TWO",
+          "references": 4
+        }
+      ],
+      "fieldBindingTokensRenamed": 0,
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebDurationMetricExporterTest.java",
+      "sha256": "104ea8495b9ca104d8565a9ea20fd2765d5489abe479133dd9a642131814ffab"
+    },
+    {
+      "beforeSha256": "dc871dbe52639493cc95aec7398d0ee2d90be40cc9de3d5565a339744f8b0085",
+      "constants": [
+        {
+          "id": "PMD-08277",
+          "kind": "STRING",
+          "literal": "\"route\"",
+          "name": "ROUTE_LABEL",
+          "references": 8
+        },
+        {
+          "id": "PMD-08278",
+          "kind": "STRING",
+          "literal": "\"service\"",
+          "name": "SERVICE_LABEL",
+          "references": 7
+        },
+        {
+          "id": "PMD-08279",
+          "kind": "STRING",
+          "literal": "\"/login\"",
+          "name": "LOGIN_ROUTE",
+          "references": 14
+        }
+      ],
+      "fieldBindingTokensRenamed": 0,
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebCounterMetricExporterTest.java",
+      "sha256": "6528fc4e4b9cb3e14ebf1d5758486a2891dfb339b6ad645538134ca0e48aae97"
+    },
+    {
+      "beforeSha256": "61cd2e3940c9b518a4c6646e62cae0baff00ce22d33ad9cd831f89e23b73d5c6",
+      "constants": [
+        {
+          "id": "PMD-08361",
+          "kind": "STRING",
+          "literal": "\"state\"",
+          "name": "STATE_LABEL",
+          "references": 8
+        },
+        {
+          "id": "PMD-08362",
+          "kind": "STRING",
+          "literal": "\"service\"",
+          "name": "SERVICE_LABEL",
+          "references": 7
+        },
+        {
+          "id": "PMD-08364",
+          "kind": "STRING",
+          "literal": "\"active\"",
+          "name": "ACTIVE_STATE",
+          "references": 14
+        }
+      ],
+      "fieldBindingTokensRenamed": 3,
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebGaugeMetricExporterTest.java",
+      "sha256": "599204f98beb1b1bc85f1e8c5489d61a721cd7092eed9dbe5acd651024bed6a3"
+    }
+  ],
+  "stringConstants": 11,
+  "stringReferences": 94
+}
