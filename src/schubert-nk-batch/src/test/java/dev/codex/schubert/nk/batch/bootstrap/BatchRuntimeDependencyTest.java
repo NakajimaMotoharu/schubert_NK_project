@@ -13,6 +13,8 @@ import org.junit.jupiter.api.Test;
 
 /** PG239/PT-BAT-283; independent Batch process runtime dependency, not test classpath. */
 final class BatchRuntimeDependencyTest {
+  private static final String DEPENDENCY_END_TAG = "</dependency>";
+  private static final String COMPILE_SCOPE_NAME = "compile";
   private static final Pattern DEPENDENCY =
       Pattern.compile("<dependency>(.*?)</dependency>", Pattern.DOTALL);
 
@@ -23,7 +25,7 @@ final class BatchRuntimeDependencyTest {
             Path.of(System.getProperty("nk.pt.repository"), "src/schubert-nk-batch/pom.xml"));
     String block = postgresBlock(pom);
     assertRuntimeDriver(pom);
-    for (String scope : new String[] {"test", "compile", "system"}) {
+    for (String scope : new String[] {"test", COMPILE_SCOPE_NAME, "system"}) {
       assertThrows(
           AssertionError.class,
           () ->
@@ -64,8 +66,8 @@ final class BatchRuntimeDependencyTest {
     }
     for (String[] dependency :
         new String[][] {
-          {"dev.codex.schubert", "schubert-nk-bootstrap", "compile"},
-          {"org.flywaydb", "flyway-core", "compile"},
+          {"dev.codex.schubert", "schubert-nk-bootstrap", COMPILE_SCOPE_NAME},
+          {"org.flywaydb", "flyway-core", COMPILE_SCOPE_NAME},
           {"org.flywaydb", "flyway-database-postgresql", "runtime"}
         }) {
       String declared = dependencyBlock(pom, dependency[0], dependency[1]);
@@ -77,7 +79,7 @@ final class BatchRuntimeDependencyTest {
       String wrong =
           declared.contains("<scope>runtime</scope>")
               ? declared.replace("<scope>runtime</scope>", "<scope>test</scope>")
-              : declared.replace("</dependency>", "<scope>test</scope></dependency>");
+              : declared.replace(DEPENDENCY_END_TAG, "<scope>test</scope></dependency>");
       assertThrows(
           AssertionError.class, () -> assertStartupDependencies(pom.replace(declared, wrong)));
       if (dependency[2].equals("runtime")) {
@@ -94,6 +96,7 @@ final class BatchRuntimeDependencyTest {
 
   private static void assertStartupDependencies(String pom) {
     assertBootstrapTestFixtures(pom);
+    assertMonitoringDependencies(pom);
     var direct = new java.util.HashSet<String>();
     var blocks = DEPENDENCY.matcher(pom);
     while (blocks.find()) {
@@ -114,6 +117,8 @@ final class BatchRuntimeDependencyTest {
             "org.flywaydb:flyway-database-postgresql",
             "org.postgresql:postgresql",
             "org.apache.artemis:artemis-jakarta-client",
+            "io.micrometer:micrometer-core",
+            "io.micrometer:micrometer-registry-prometheus",
             "org.jspecify:jspecify",
             "com.github.spotbugs:spotbugs-annotations"),
         direct);
@@ -176,7 +181,7 @@ final class BatchRuntimeDependencyTest {
           fixture.replace("<type>test-jar</type>", "<type>jar</type>"),
           fixture.replace("<type>test-jar</type>", ""),
           fixture.replace("${project.version}", "0.0.0-foreign"),
-          fixture.replace("</dependency>", "<classifier>foreign</classifier></dependency>")
+          fixture.replace(DEPENDENCY_END_TAG, "<classifier>foreign</classifier></dependency>")
         }) {
       assertThrows(
           AssertionError.class,
@@ -205,6 +210,67 @@ final class BatchRuntimeDependencyTest {
       }
     }
     assertTrue(fixtures <= 1, "test-only fixture declaration cannot be duplicated");
+  }
+
+  /** PT-BAT-283C/BUG1970: SS351 and PG-D615 SDKs, not an arbitrary dependency whitelist. */
+  @Test
+  void bat283cApprovedMonitoringSdkCoordinatesRequireVersionCompileAndMainJar() {
+    String core =
+        "<dependency><groupId>io.micrometer</groupId><artifactId>micrometer-core</artifactId><version>1.17.1</version></dependency>";
+    String prometheus =
+        "<dependency><groupId>io.micrometer</groupId><artifactId>micrometer-registry-prometheus</artifactId><version>1.17.1</version></dependency>";
+    String fixture = core + prometheus;
+    assertMonitoringDependencies(fixture);
+    assertMonitoringDependencies(
+        fixture.replace(DEPENDENCY_END_TAG, "<scope>compile</scope><type>jar</type></dependency>"));
+    for (String declared : new String[] {core, prometheus}) {
+      assertThrows(
+          AssertionError.class, () -> assertMonitoringDependencies(fixture.replace(declared, "")));
+      assertThrows(
+          AssertionError.class,
+          () -> assertMonitoringDependencies(fixture.replace(declared, declared + declared)));
+      for (String scope : new String[] {"", "test", "runtime", "provided", "system"}) {
+        String wrong =
+            declared.replace(DEPENDENCY_END_TAG, "<scope>" + scope + "</scope></dependency>");
+        assertThrows(
+            AssertionError.class,
+            () -> assertMonitoringDependencies(fixture.replace(declared, wrong)));
+      }
+      for (String wrong :
+          new String[] {
+            declared.replace("1.17.1", "1.17.0"),
+            declared.replace("io.micrometer", "foreign.group"),
+            declared.replace(DEPENDENCY_END_TAG, "<type>pom</type></dependency>"),
+            declared.replace(DEPENDENCY_END_TAG, "<type></type></dependency>"),
+            declared.replace(DEPENDENCY_END_TAG, "<classifier>foreign</classifier></dependency>"),
+            declared.replace(
+                DEPENDENCY_END_TAG, "<scope>compile</scope><scope>compile</scope></dependency>"),
+            declared.replace(DEPENDENCY_END_TAG, "<type>jar</type><type>jar</type></dependency>")
+          }) {
+        assertThrows(
+            AssertionError.class,
+            () -> assertMonitoringDependencies(fixture.replace(declared, wrong)));
+      }
+    }
+    assertThrows(NullPointerException.class, () -> assertMonitoringDependencies(null));
+  }
+
+  private static void assertMonitoringDependencies(String pom) {
+    for (String artifact : new String[] {"micrometer-core", "micrometer-registry-prometheus"}) {
+      String declaration = dependencyBlock(pom, "io.micrometer", artifact);
+      assertTrue(declaration.contains("<version>1.17.1</version>"), "approved monitoring SDK");
+      var scope = Pattern.compile("<scope>([^<]*)</scope>").matcher(declaration);
+      if (scope.find()) {
+        assertEquals(COMPILE_SCOPE_NAME, scope.group(1));
+        assertFalse(scope.find(), "one compile scope");
+      }
+      var type = Pattern.compile("<type>([^<]*)</type>").matcher(declaration);
+      if (type.find()) {
+        assertEquals("jar", type.group(1));
+        assertFalse(type.find(), "one main jar type");
+      }
+      assertFalse(declaration.contains("<classifier>"), "monitoring SDK main jar");
+    }
   }
 
   private static String postgresBlock(String pom) {
