@@ -1,5 +1,7 @@
 # PGPT成果物一覧・進捗
 
+2026-10-28最新：2369/2370の事前metadata advisory・独立post、2371の共有73%点検を追加。直前2366/2367/2368はWriter五是正・原8/二suiteと二Main50L7M2C26B missed0の限定成果、save0bcd337960b46dd8c69928ba3246d79531931d51はremote一致。共有68→73区間は是正27だが個別受入増分0、正式1964-53/17-190/工数null/HOLD不変。次は独立Main/whole fixtureをまとめて通常PG/PTへ。
+
 2026-10-25 18:22最新：1954/PG-D664、非token名Header8の既TestID/独立期待値を静的意味対応、UI17field/256byte独立golden/別post10反例。実PT/coverage/正式増分0、全QSE/全layout未認定・旧source成功移植0。正式1964-53/17-190/工数null/全actualHOLD不変、通常保存後も独立PGPT継続。
 
 2026-10-25 18:02最新：1951/PG-D663、OBSOWN44の現在method/fixtureと既仕様・独立期待値を静的意味レビュー、別metadata検証10反例。859候補のうち44を精査した別実績で、実PT/coverage/正式増分ではない。BUG1752工具scope限定close・元失敗保全、正式1964-53/17-190/工数null/全actualHOLD不変。通常保存後も独立PGPT継続。
