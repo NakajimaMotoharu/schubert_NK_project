@@ -21,6 +21,8 @@ import org.thymeleaf.spring6.view.ThymeleafViewResolver;
 
 /** PG219/PT-SCR105..108; independent UI222/226/264 and SS313/355 Login oracle. */
 class LoginControllerTest {
+  private static final String USERNAME_INPUT_SELECTOR = "#login-username";
+  private static final String PASSWORD_INPUT_SELECTOR = "#login-password";
   private static final String CSRF = "safe-fixture-csrf";
 
   private static AnnotationConfigWebApplicationContext context() {
@@ -70,15 +72,15 @@ class LoginControllerTest {
       var document = getLogin(context, null);
       assertEquals("ユーザー名", document.selectFirst("label[for=login-username]").text());
       assertEquals("パスワード", document.selectFirst("label[for=login-password]").text());
-      assertEquals("username", document.selectFirst("#login-username").attr("name"));
-      assertEquals("username", document.selectFirst("#login-username").attr("autocomplete"));
-      assertTrue(document.selectFirst("#login-username").hasAttr("required"));
-      assertTrue(document.selectFirst("#login-username").hasAttr("autofocus"));
-      assertEquals("password", document.selectFirst("#login-password").attr("type"));
+      assertEquals("username", document.selectFirst(USERNAME_INPUT_SELECTOR).attr("name"));
+      assertEquals("username", document.selectFirst(USERNAME_INPUT_SELECTOR).attr("autocomplete"));
+      assertTrue(document.selectFirst(USERNAME_INPUT_SELECTOR).hasAttr("required"));
+      assertTrue(document.selectFirst(USERNAME_INPUT_SELECTOR).hasAttr("autofocus"));
+      assertEquals("password", document.selectFirst(PASSWORD_INPUT_SELECTOR).attr("type"));
       assertEquals(
-          "current-password", document.selectFirst("#login-password").attr("autocomplete"));
-      assertTrue(document.selectFirst("#login-password").hasAttr("required"));
-      assertEquals("", document.selectFirst("#login-password").val());
+          "current-password", document.selectFirst(PASSWORD_INPUT_SELECTOR).attr("autocomplete"));
+      assertTrue(document.selectFirst(PASSWORD_INPUT_SELECTOR).hasAttr("required"));
+      assertEquals("", document.selectFirst(PASSWORD_INPUT_SELECTOR).val());
       assertEquals("ログイン", document.selectFirst("form button").text());
     }
   }
@@ -93,7 +95,7 @@ class LoginControllerTest {
         var document = getLogin(context, parameters.get(i));
         var displayed = document.select(".login-message").eachText();
         assertEquals(i < messages.size() ? List.of(messages.get(i)) : List.of(), displayed);
-        assertEquals("", document.selectFirst("#login-password").val());
+        assertEquals("", document.selectFirst(PASSWORD_INPUT_SELECTOR).val());
       }
       assertTrue(getLogin(context, null).select(".login-message").isEmpty());
     }

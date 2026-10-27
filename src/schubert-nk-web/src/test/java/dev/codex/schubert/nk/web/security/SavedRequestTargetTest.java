@@ -15,6 +15,8 @@ import org.junit.jupiter.api.Test;
 
 /** Explicit URL bytes, no production normalization used for expected. PT-WEB-005..008. */
 class SavedRequestTargetTest {
+  private static final String GET_METHOD = "GET";
+
   @Test
   void web005SafeGetTargetsPreservePathAndQuery() {
     for (String value :
@@ -33,7 +35,7 @@ class SavedRequestTargetTest {
             "/search?q=a+b&x=%20",
             "/search?q=e\u0301",
             "/search?x=../&y=//external.test")) {
-      var target = SavedRequestTarget.fromGet("GET", value);
+      var target = SavedRequestTarget.fromGet(GET_METHOD, value);
       assertEquals(value, target.location());
       assertEquals("SavedRequestTarget[REDACTED]", target.toString());
     }
@@ -42,7 +44,7 @@ class SavedRequestTargetTest {
   @Test
   void web006ExternalMalformedAndStateChangingTargetsReject() {
     assertThrows(NullPointerException.class, () -> SavedRequestTarget.fromGet(null, "/"));
-    assertThrows(NullPointerException.class, () -> SavedRequestTarget.fromGet("GET", null));
+    assertThrows(NullPointerException.class, () -> SavedRequestTarget.fromGet(GET_METHOD, null));
     for (String method : List.of("POST", "PUT", "DELETE", "HEAD", "get", "")) invalid(method, "/");
     for (String value :
         List.of(
@@ -74,7 +76,7 @@ class SavedRequestTargetTest {
             "/%5cexternal",
             "/%2e%2e/path",
             "/path%",
-            "/path?bad=%GG")) invalid("GET", value);
+            "/path?bad=%GG")) invalid(GET_METHOD, value);
   }
 
   @Test
@@ -82,17 +84,17 @@ class SavedRequestTargetTest {
     for (int length : new int[] {2047, 2048}) {
       String value = "/q?x=" + "a".repeat(length - 5);
       assertEquals(length, value.getBytes(StandardCharsets.UTF_8).length);
-      assertEquals(value, SavedRequestTarget.fromGet("GET", value).location());
+      assertEquals(value, SavedRequestTarget.fromGet(GET_METHOD, value).location());
     }
     String unicode = "/q?x=" + "あ".repeat(681);
     assertEquals(2048, unicode.getBytes(StandardCharsets.UTF_8).length);
-    assertEquals(unicode, SavedRequestTarget.fromGet("GET", unicode).location());
-    invalid("GET", "/" + "a".repeat(2048));
-    invalid("GET", unicode + "a");
+    assertEquals(unicode, SavedRequestTarget.fromGet(GET_METHOD, unicode).location());
+    invalid(GET_METHOD, "/" + "a".repeat(2048));
+    invalid(GET_METHOD, unicode + "a");
     for (String value : List.of("/q?x=\ud800", "/q?x=\udc00", " /q", "/q ", "/q?x= "))
-      invalid("GET", value);
+      invalid(GET_METHOD, value);
     String pair = "/q?x=\ud83d\ude00";
-    assertEquals(pair, SavedRequestTarget.fromGet("GET", pair).location());
+    assertEquals(pair, SavedRequestTarget.fromGet(GET_METHOD, pair).location());
   }
 
   @Test
@@ -105,7 +107,7 @@ class SavedRequestTargetTest {
             pool.submit(
                 () -> {
                   String value = "/scenarios?q=日本語" + n + "&page=" + (n + 1);
-                  var target = SavedRequestTarget.fromGet("GET", value);
+                  var target = SavedRequestTarget.fromGet(GET_METHOD, value);
                   assertEquals(value, target.location());
                   assertFalse(target.toString().contains("日本語"));
                   assertEquals("SavedRequestTarget[REDACTED]", target.toString());

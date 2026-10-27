@@ -20,6 +20,8 @@ import org.springframework.mock.web.MockHttpServletResponse;
  * bind two request identities; no HTTP/session fallback.
  */
 final class WebRequestIdentityConsistencyTest {
+  private static final String REQUEST_ID_ATTRIBUTE_SUFFIX = ".requestId";
+
   @Test
   void contextSuppliesMissingInternalIdWithoutGeneratingAnother() {
     var request = new MockHttpServletRequest();
@@ -33,7 +35,9 @@ final class WebRequestIdentityConsistencyTest {
             () -> {
               throw new AssertionError("verified context is the only identity");
             }));
-    assertEquals(original, request.getAttribute(WebRequestContext.class.getName() + ".requestId"));
+    assertEquals(
+        original,
+        request.getAttribute(WebRequestContext.class.getName() + REQUEST_ID_ATTRIBUTE_SUFFIX));
     assertSame(context, WebRequestContext.require(request));
   }
 
@@ -79,7 +83,8 @@ final class WebRequestIdentityConsistencyTest {
       assertEquals(0, failure.getSuppressed().length);
       assertNull(underlying.getAttribute(WebRequestContext.class.getName()));
       assertEquals(
-          expected, underlying.getAttribute(WebRequestContext.class.getName() + ".requestId"));
+          expected,
+          underlying.getAttribute(WebRequestContext.class.getName() + REQUEST_ID_ATTRIBUTE_SUFFIX));
     }
   }
 
@@ -90,7 +95,7 @@ final class WebRequestIdentityConsistencyTest {
     var foreign = UUID.fromString("00000000-0000-4000-8000-000000000002");
     var context = new WebRequestContext(original, new LoginClientAddress("203.0.113.1"));
     request.setAttribute(WebRequestContext.class.getName(), context);
-    request.setAttribute(WebRequestContext.class.getName() + ".requestId", foreign);
+    request.setAttribute(WebRequestContext.class.getName() + REQUEST_ID_ATTRIBUTE_SUFFIX, foreign);
     var failure =
         assertThrows(
             IllegalStateException.class,
@@ -102,8 +107,10 @@ final class WebRequestIdentityConsistencyTest {
                     }));
     assertEquals("web request identity is unavailable", failure.getMessage());
     assertSame(context, WebRequestContext.require(request));
-    assertEquals(foreign, request.getAttribute(WebRequestContext.class.getName() + ".requestId"));
-    request.setAttribute(WebRequestContext.class.getName() + ".requestId", original);
+    assertEquals(
+        foreign,
+        request.getAttribute(WebRequestContext.class.getName() + REQUEST_ID_ATTRIBUTE_SUFFIX));
+    request.setAttribute(WebRequestContext.class.getName() + REQUEST_ID_ATTRIBUTE_SUFFIX, original);
     assertEquals(
         original,
         WebRequestContext.identify(

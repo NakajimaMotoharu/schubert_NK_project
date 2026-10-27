@@ -25,6 +25,11 @@ import org.springframework.mock.web.MockHttpServletResponse;
 
 /** NK-WEB-001/PT-WEB-091..094; UI222/226; SS313/342/352 §7.2; independent SS header oracle. */
 class WebSecurityHeaderTest {
+  private static final String LOGIN_PATH = "/login";
+  private static final String ERROR_OPERATION = "ERROR";
+  private static final String REDIRECT_OPERATION = "REDIRECT";
+  private static final String STREAM_OPERATION = "STREAM";
+  private static final String WRITER_OPERATION = "WRITER";
   private static final Map<String, String> EXPECTED =
       Map.of(
           "Content-Security-Policy",
@@ -42,7 +47,7 @@ class WebSecurityHeaderTest {
     for (String method : List.of("GET", "HEAD", "POST")) {
       for (String path :
           List.of(
-              "/login",
+              LOGIN_PATH,
               "/",
               "/questions",
               "/notifications",
@@ -76,8 +81,16 @@ class WebSecurityHeaderTest {
     var filter = new WebSecurityHeaderFilterFactory().create();
     for (String operation :
         List.of(
-            "RETURN", "ERROR", "REDIRECT", "FLUSH", "STREAM", "WRITER", "RESET", "SERVLET", "IO")) {
-      var request = new MockHttpServletRequest("GET", "/login");
+            "RETURN",
+            ERROR_OPERATION,
+            REDIRECT_OPERATION,
+            "FLUSH",
+            STREAM_OPERATION,
+            WRITER_OPERATION,
+            "RESET",
+            "SERVLET",
+            "IO")) {
+      var request = new MockHttpServletRequest("GET", LOGIN_PATH);
       var commits = new AtomicInteger();
       var response =
           new MockHttpServletResponse() {
@@ -141,14 +154,14 @@ class WebSecurityHeaderTest {
                       (r, s) -> {
                         var http = (HttpServletResponse) s;
                         switch (operation) {
-                          case "ERROR" -> http.sendError(403);
-                          case "REDIRECT" -> http.sendRedirect("/login");
+                          case ERROR_OPERATION -> http.sendError(403);
+                          case REDIRECT_OPERATION -> http.sendRedirect(LOGIN_PATH);
                           case "FLUSH" -> http.flushBuffer();
-                          case "STREAM" -> {
+                          case STREAM_OPERATION -> {
                             http.getOutputStream().write(65);
                             http.getOutputStream().close();
                           }
-                          case "WRITER" -> {
+                          case WRITER_OPERATION -> {
                             http.getWriter().write("A");
                             http.getWriter().close();
                           }
@@ -166,11 +179,18 @@ class WebSecurityHeaderTest {
       else if (operation.equals("IO")) assertThrows(IOException.class, run);
       else assertDoesNotThrow(run);
       exact(response);
-      if (Set.of("ERROR", "REDIRECT", "FLUSH", "STREAM", "WRITER", "RESET").contains(operation))
-        assertTrue(commits.get() > 0);
-      if (operation.equals("ERROR")) assertEquals(403, response.getStatus());
-      if (operation.equals("REDIRECT")) assertEquals("/login", response.getHeader("Location"));
-      if (operation.equals("STREAM") || operation.equals("WRITER"))
+      if (Set.of(
+              ERROR_OPERATION,
+              REDIRECT_OPERATION,
+              "FLUSH",
+              STREAM_OPERATION,
+              WRITER_OPERATION,
+              "RESET")
+          .contains(operation)) assertTrue(commits.get() > 0);
+      if (operation.equals(ERROR_OPERATION)) assertEquals(403, response.getStatus());
+      if (operation.equals(REDIRECT_OPERATION))
+        assertEquals(LOGIN_PATH, response.getHeader("Location"));
+      if (operation.equals(STREAM_OPERATION) || operation.equals(WRITER_OPERATION))
         assertEquals("A", response.getContentAsString());
       assertNull(request.getSession(false));
     }
