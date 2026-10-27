@@ -141,14 +141,14 @@ class WebMetricContextTest {
       customCreates.incrementAndGet();
       beforeCustom.ifPresent(Runnable::run);
       if (customAcquireFailure.isPresent()) return raise(customAcquireFailure.orElseThrow());
-      return nullCustom ? null : custom;
+      return nullCustom ? null : customRegistry;
     }
 
     private PrometheusMeterRegistry standard() {
       standardCreates.incrementAndGet();
       beforeStandard.ifPresent(Runnable::run);
       if (standardAcquireFailure.isPresent()) return raise(standardAcquireFailure.orElseThrow());
-      return nullStandard ? null : standard;
+      return nullStandard ? null : standardRegistry;
     }
 
     @Override
