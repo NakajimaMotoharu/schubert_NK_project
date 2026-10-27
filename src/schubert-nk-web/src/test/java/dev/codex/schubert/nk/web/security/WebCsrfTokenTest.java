@@ -22,6 +22,9 @@ import org.junit.jupiter.api.Test;
  * of the production formatter; no deployed token/secret is used.
  */
 class WebCsrfTokenTest {
+  private static final int MIN_TOKEN_LENGTH = 64;
+  private static final int MAX_TOKEN_LENGTH = 128;
+
   private static final String HEX =
       "000102030405060708090a0b0c0d0e0f101112131415161718191a1b1c1d1e1f";
   private static final String ALPHABET =
@@ -55,8 +58,8 @@ class WebCsrfTokenTest {
         different.setCharAt(position, expected.charAt(position) == 'Z' ? 'X' : 'Z');
         assertFalse(token.matches(different.toString()));
       }
-      if (length > 64) assertFalse(token.matches(expected.substring(0, length - 1)));
-      if (length < 128) assertFalse(token.matches(expected + "A"));
+      if (length > MIN_TOKEN_LENGTH) assertFalse(token.matches(expected.substring(0, length - 1)));
+      if (length < MAX_TOKEN_LENGTH) assertFalse(token.matches(expected + "A"));
     }
   }
 

@@ -18,12 +18,14 @@ import org.junit.jupiter.api.Test;
 
 /** PT-DB-INBOX-193..196: public encoding vectors, never credentials for an actual login. */
 final class InspectorDbCredentialTest {
+  private static final int MAX_INPUT_BYTES = 65536;
+
   @Test
   void validUtf8AndNewlines() {
     for (String value : List.of("A", " ASCII ", " あ\uD83D\uDE03e\u0301 ", "x".repeat(65536))) {
       for (String ending : List.of("", "\n", "\r\n")) {
         byte[] bytes = (value + ending).getBytes(StandardCharsets.UTF_8);
-        if (bytes.length > 65536) continue;
+        if (bytes.length > MAX_INPUT_BYTES) continue;
         try (var material = InspectorDbCredential.consume(bytes)) {
           assertArrayEquals(new byte[bytes.length], bytes);
           char[] actual = material.copyPassword();
