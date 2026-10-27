@@ -1,0 +1,144 @@
+{
+  "actualExit": 0,
+  "allMainAndOtherInputsPreserved": true,
+  "allOriginalOracleTokensRestored": true,
+  "comparisonReferences": 2,
+  "coverage": null,
+  "effortPercent": null,
+  "externalActions": 0,
+  "invocation": {
+    "actualPythonCommand": [
+      "/usr/bin/python3",
+      "-B",
+      "tools/quality/pg11832_mq_media_collector_value_source_post.py"
+    ],
+    "arbitraryArgumentsRecorded": false,
+    "entrypointPath": "tools/quality/pg11832_mq_media_collector_value_source_post.py",
+    "entrypointSha256": "77e25c1e1dea644884b91da7a8155b8f4f5996317879296eb019c7d68548e92b",
+    "helperPath": "tools/quality/host_tool_invocation.py",
+    "helperSha256": "85d616a3db4ff47f4c95ae2e0dd57954bc2b09f28b8f2a685b986e5621545c46",
+    "libraryPath": "tools/quality/pg11832_mq_media_collector_value_source_post.py",
+    "librarySha256": "77e25c1e1dea644884b91da7a8155b8f4f5996317879296eb019c7d68548e92b",
+    "loadedProjectPythonSources": {
+      "tools/quality/classfile_code_metadata.py": "2227e1e8df1ff91b606f094c7ee64366023273ca740d4d47126ed0928190e2f0",
+      "tools/quality/g07_host_class_provenance_inputs.py": "a676cb3e4145177c3c243722d737592ce7d44c3f29cfe4f670662ef7651f046b",
+      "tools/quality/host_tool_invocation.py": "85d616a3db4ff47f4c95ae2e0dd57954bc2b09f28b8f2a685b986e5621545c46",
+      "tools/quality/pg10130_uid_oracle_preflight.py": "e80cb1d6d45d4e4c0cdb3cb792e0638119d936403de5c3e141429d338485758a",
+      "tools/quality/pg10332_result_profile_oracle_plan.py": "82c9b4f57dd517c1dbee639dbf4955c316beb89216cb9a8a66e78e0b9a322ad4",
+      "tools/quality/pg10339_result_profile_oracle_post_v2.py": "42f86287f5236d2ef1a2e10f54f5b0634e799a4e866b15eaf6738336a4ebabb0",
+      "tools/quality/pg10392_role_literal_plan.py": "e1af98abd59175d867d29b07a73d7b2e4c7112754603d1805ec0bfc4d9465ce8",
+      "tools/quality/pg10398_role_view_preflight.py": "31709d50a345f3e0843fa62ae0b4c6849885503eb3d81555b6bcc9605b486d56",
+      "tools/quality/pg11104_web_pure_value_source_post.py": "2713a232d4143cf94c39b865936368707d115c19649a469de35dfbd22ad70967",
+      "tools/quality/pg11208_web_supplied_metric_fixture_source_post.py": "a5c338662163cc2ce1e95606e62e1ed86d7ce276e5e2c001e0ff67cd8eca0199",
+      "tools/quality/pg11832_mq_media_collector_value_source_post.py": "77e25c1e1dea644884b91da7a8155b8f4f5996317879296eb019c7d68548e92b",
+      "tools/quality/pg9906_user_query_oracle_source_post.py": "4f9bdaa17eea78a720c0f25b8af906f3f045fda590c8fea2a8868229403a98fa",
+      "tools/quality/pg9978_plain_core_quality_post.py": "c99cc753c6335c9f41e3eafe6a97c17521503739ba2cf80659b542a445dd48fa",
+      "tools/quality/public_java_digest_provenance.py": "dd47f8735a61ce849995633c3290a6ad047842ef3263829ce359db413778f7a0"
+    },
+    "provenance": "OBSERVED_SYS_ARGV_AND_ORIG_ARGV_NOT_RECONSTRUCTED"
+  },
+  "metadataNegativeVectors": 34,
+  "newAccepted": 0,
+  "orderConstants": 2,
+  "originalMethods": 16,
+  "planManifestSha256": "91285e0291b3636247a2e37209dbd6cd44064c6bec1cd82bd9aa448e428ad0ea",
+  "productTestsExecuted": 0,
+  "sourceBefore": "60f62bd5dffb11e9943fc7578d9bddf380f8003c",
+  "sourceChanges": [
+    {
+      "beforeSha256": "f41641ed37e5f5ddc7d4e8370fd5924b4fdfa84b79ddaa5250008e2cee0a4a66",
+      "constants": [
+        {
+          "id": "PMD-02204",
+          "kind": "STRING",
+          "literal": "\"nk.async.work\"",
+          "name": "ASYNC_ADDRESS",
+          "references": 9
+        },
+        {
+          "id": "PMD-02205",
+          "kind": "STRING",
+          "literal": "\"nk.web.log\"",
+          "name": "LOG_ADDRESS",
+          "references": 4
+        },
+        {
+          "id": "PMD-02206",
+          "kind": "STRING",
+          "literal": "\"nk_mq_queue_messages\"",
+          "name": "QUEUE_MESSAGES",
+          "references": 4
+        },
+        {
+          "id": "PMD-02208",
+          "kind": "STRING",
+          "literal": "\"DEBUG\"",
+          "name": "DEBUG_MODE",
+          "references": 10
+        },
+        {
+          "id": "PMD-02211",
+          "kind": "ORDER_INT",
+          "literal": "1",
+          "name": "FIRST_READ_ORDINAL",
+          "point": 12962,
+          "references": 1
+        }
+      ],
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/MqPressureMetricCollectorTest.java",
+      "sha256": "e427125e32b6b65234d2999587fd989f5a385fcb04c46be0948b0d01fd46ea5a"
+    },
+    {
+      "beforeSha256": "d408506eb7a064143030306c2c61d739b01370dc662ba4559e6c2869f819bc3f",
+      "constants": [
+        {
+          "id": "PMD-08251",
+          "kind": "STRING",
+          "literal": "\"nk_media_streams\"",
+          "name": "STREAMS_NAME",
+          "references": 4
+        },
+        {
+          "id": "PMD-08252",
+          "kind": "STRING",
+          "literal": "\"media_type\"",
+          "name": "MEDIA_LABEL",
+          "references": 5
+        },
+        {
+          "id": "PMD-08253",
+          "kind": "STRING",
+          "literal": "\"AUDIO\"",
+          "name": "AUDIO_TYPE",
+          "references": 13
+        },
+        {
+          "id": "PMD-08254",
+          "kind": "STRING",
+          "literal": "\"VIDEO\"",
+          "name": "VIDEO_TYPE",
+          "references": 7
+        },
+        {
+          "id": "PMD-08255",
+          "kind": "STRING",
+          "literal": "\"DEBUG\"",
+          "name": "DEBUG_MODE",
+          "references": 11
+        },
+        {
+          "id": "PMD-08258",
+          "kind": "ORDER_INT",
+          "literal": "2",
+          "name": "BLOCKED_READ_ORDINAL",
+          "point": 10544,
+          "references": 1
+        }
+      ],
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/MediaStreamsMetricCollectorTest.java",
+      "sha256": "a23aaa99c1586824701ebbb7335168a4d6d07a3edfbdde2fb1ec3bae53d5e93a"
+    }
+  ],
+  "stringConstants": 9,
+  "stringReferences": 67
+}
