@@ -20,6 +20,9 @@ import org.junit.jupiter.api.Test;
  * POOLCONN001..008: owned fake interface/SDK connection, no actual Hikari/DB/management activity.
  */
 class DbPoolMetricCollectorTest {
+  private static final String ACTIVE_STATE_LABEL = "active";
+  private static final String DEBUG_MONITORING_MODE = "DEBUG";
+
   private static final class Registry extends SimpleMeterRegistry implements AutoCloseable {
     @Override
     public void close() {
@@ -34,7 +37,7 @@ class DbPoolMetricCollectorTest {
   private static void unknown(Registry registry, DbPoolMetricCollector collector) {
     assertTrue(collector.snapshot().isEmpty());
     assertEquals(4, registry.getMeters().size());
-    for (String state : List.of("active", "idle", "pending", "max"))
+    for (String state : List.of(ACTIVE_STATE_LABEL, "idle", "pending", "max"))
       assertTrue(
           Double.isNaN(
               registry
@@ -47,7 +50,7 @@ class DbPoolMetricCollectorTest {
   @Test
   void poolConn001DebugPublishesCompleteBorrowedGetterValues() {
     try (var registry = new Registry()) {
-      var collector = collector(registry, "DEBUG");
+      var collector = collector(registry, DEBUG_MONITORING_MODE);
       unknown(registry, collector);
       var f = new Fixture();
       var actual = collector.collect(f.pool(), f.config()).orElseThrow();
@@ -58,7 +61,7 @@ class DbPoolMetricCollectorTest {
           3,
           registry
               .get("nk_db_pool_connections")
-              .tags("service", "API", "state", "active")
+              .tags("service", "API", "state", ACTIVE_STATE_LABEL)
               .gauge()
               .value());
       assertEquals(4, registry.getMeters().size());
@@ -68,7 +71,7 @@ class DbPoolMetricCollectorTest {
   @Test
   void poolConn002InvalidObservationClearsOldValuesAndTrueZeroRecovers() {
     try (var registry = new Registry()) {
-      var collector = collector(registry, "DEBUG");
+      var collector = collector(registry, DEBUG_MONITORING_MODE);
       var f = new Fixture();
       var original = collector.collect(f.pool(), f.config()).orElseThrow();
       var invalid = new Fixture();
@@ -86,7 +89,7 @@ class DbPoolMetricCollectorTest {
           0,
           registry
               .get("nk_db_pool_connections")
-              .tags("service", "API", "state", "active")
+              .tags("service", "API", "state", ACTIVE_STATE_LABEL)
               .gauge()
               .value());
       assertEquals(3, original.active());
@@ -109,7 +112,7 @@ class DbPoolMetricCollectorTest {
 
   @Test
   void poolConn003AllGetterFailuresBecomeUnknownAndKeepIdentityWithoutGraphWalk() {
-    for (String point : List.of("active", "idle", "pending", "max")) {
+    for (String point : List.of(ACTIVE_STATE_LABEL, "idle", "pending", "max")) {
       var cycle = new IllegalStateException("owned cycle first");
       var peer = new IllegalStateException("owned cycle peer");
       cycle.initCause(peer);
@@ -118,7 +121,7 @@ class DbPoolMetricCollectorTest {
           List.<Throwable>of(
               cycle, new UnformattableFailure(), new AssertionError("owned provider fixture"))) {
         try (var registry = new Registry()) {
-          var collector = collector(registry, "DEBUG");
+          var collector = collector(registry, DEBUG_MONITORING_MODE);
           var success = new Fixture();
           collector.collect(success.pool(), success.config());
           var f = new Fixture();
@@ -140,7 +143,7 @@ class DbPoolMetricCollectorTest {
     try (var registry = new Registry()) {
       var collector = collector(registry, "STANDARD");
       var f = new Fixture();
-      f.faults.put("active", new AssertionError("no standard getter"));
+      f.faults.put(ACTIVE_STATE_LABEL, new AssertionError("no standard getter"));
       assertTrue(collector.collect(f.pool(), f.config()).isEmpty());
       assertTrue(f.calls.isEmpty());
       assertTrue(collector.snapshot().isEmpty());
@@ -155,14 +158,17 @@ class DbPoolMetricCollectorTest {
   void poolConn005InvalidBoundariesCannotMutateOrEraseExistingSnapshot() {
     try (var registry = new Registry()) {
       assertThrows(
-          NullPointerException.class, () -> new DbPoolMetricCollector(null, registry, "DEBUG"));
+          NullPointerException.class,
+          () -> new DbPoolMetricCollector(null, registry, DEBUG_MONITORING_MODE));
       assertThrows(
           NullPointerException.class,
-          () -> new DbPoolMetricCollector(new DbPoolMetricObservation(), null, "DEBUG"));
+          () ->
+              new DbPoolMetricCollector(
+                  new DbPoolMetricObservation(), null, DEBUG_MONITORING_MODE));
       assertThrows(NullPointerException.class, () -> collector(registry, null));
       assertThrows(IllegalArgumentException.class, () -> collector(registry, "unknown-mode"));
       assertEquals(0, registry.getMeters().size());
-      var collector = collector(registry, "DEBUG");
+      var collector = collector(registry, DEBUG_MONITORING_MODE);
       var f = new Fixture();
       var actual = collector.collect(f.pool(), f.config()).orElseThrow();
       assertThrows(NullPointerException.class, () -> collector.collect(null, f.config()));
@@ -175,7 +181,7 @@ class DbPoolMetricCollectorTest {
   void poolConn006OneOwnerSerializesGettersThroughPublication() throws Exception {
     try (var registry = new Registry();
         var executor = Executors.newFixedThreadPool(2)) {
-      var collector = collector(registry, "DEBUG");
+      var collector = collector(registry, DEBUG_MONITORING_MODE);
       var first = new Fixture();
       first.active = 1;
       var second = new Fixture();
@@ -218,7 +224,7 @@ class DbPoolMetricCollectorTest {
   void poolConn007ParallelFakeSourcesHaveCompleteIndependentReturnedCounts() throws Exception {
     try (var registry = new Registry();
         var executor = Executors.newFixedThreadPool(8)) {
-      var collector = collector(registry, "DEBUG");
+      var collector = collector(registry, DEBUG_MONITORING_MODE);
       var tasks = new ArrayList<Callable<Long>>();
       for (int i = 0; i < 64; i++) {
         int active = i;
@@ -242,8 +248,8 @@ class DbPoolMetricCollectorTest {
   void poolConn008SeparateOwnersAndRepeatedCollectionCannotGrowSeriesOrControlPool() {
     try (var one = new Registry();
         var two = new Registry()) {
-      var first = collector(one, "DEBUG");
-      var second = collector(two, "DEBUG");
+      var first = collector(one, DEBUG_MONITORING_MODE);
+      var second = collector(two, DEBUG_MONITORING_MODE);
       var other = new Fixture();
       other.active = 111;
       second.collect(other.pool(), other.config());

@@ -22,6 +22,8 @@ import org.junit.jupiter.api.Test;
  * I/O.
  */
 class MonitoringRetentionConfigurationTest {
+  private static final String CONFIGURATION_DRIFT_CODE = "CONFIG_DRIFT";
+
   @Test
   void retConf001ExactApprovedDebugAndStandardConfigurationsPassWithoutMutation() {
     assertDoesNotThrow(
@@ -51,7 +53,7 @@ class MonitoringRetentionConfigurationTest {
             new RetentionConfiguration(15, 0),
             new RetentionConfiguration(0, 0))) {
       assertEquals(
-          "CONFIG_DRIFT",
+          CONFIGURATION_DRIFT_CODE,
           assertThrows(
                   IllegalStateException.class,
                   () -> MonitoringModePolicy.DEBUG.verifyObservedRetention(Optional.of(wrong)))
@@ -63,7 +65,7 @@ class MonitoringRetentionConfigurationTest {
   void retConf003MissingNeverBecomesValidStandardZeroAndNonzeroStandardIsDrift() {
     for (var policy : MonitoringModePolicy.values())
       assertEquals(
-          "CONFIG_DRIFT",
+          CONFIGURATION_DRIFT_CODE,
           assertThrows(
                   IllegalStateException.class,
                   () -> policy.verifyObservedRetention(Optional.empty()))
@@ -74,7 +76,7 @@ class MonitoringRetentionConfigurationTest {
             new RetentionConfiguration(0, 1),
             new RetentionConfiguration(15, 5_000_000_000L)))
       assertEquals(
-          "CONFIG_DRIFT",
+          CONFIGURATION_DRIFT_CODE,
           assertThrows(
                   IllegalStateException.class,
                   () -> MonitoringModePolicy.STANDARD.verifyObservedRetention(Optional.of(wrong)))
@@ -117,7 +119,7 @@ class MonitoringRetentionConfigurationTest {
               new RetentionConfiguration(Integer.MAX_VALUE, 5_000_000_000L),
               new RetentionConfiguration(15, Long.MAX_VALUE)))
         assertEquals(
-            "CONFIG_DRIFT",
+            CONFIGURATION_DRIFT_CODE,
             assertThrows(
                     IllegalStateException.class,
                     () -> policy.verifyObservedRetention(Optional.of(wrong)))

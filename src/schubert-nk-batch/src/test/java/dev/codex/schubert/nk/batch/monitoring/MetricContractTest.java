@@ -20,6 +20,8 @@ import org.junit.jupiter.api.Test;
 
 /** SS351 independently transcribed TSV and literals; PT-OPS-METRIC-001..006/spec1543. */
 class MetricContractTest {
+  private static final String INVALID_CONFIGURATION_CODE = "CONFIG_INVALID";
+
   private static List<List<String>> fixture() throws IOException {
     try (var stream =
         MetricContractTest.class.getResourceAsStream("/monitoring/metric-catalog.tsv")) {
@@ -60,7 +62,7 @@ class MetricContractTest {
             "nk_http_requests_total\n",
             "synthetic-private-canary")) {
       assertEquals(
-          "CONFIG_INVALID",
+          INVALID_CONFIGURATION_CODE,
           assertThrows(IllegalArgumentException.class, () -> MetricContract.parse(value))
               .getMessage());
     }
@@ -73,14 +75,14 @@ class MetricContractTest {
       var expected = Set.of(row.get(2).split(","));
       assertDoesNotThrow(() -> metric.verifyLabelNames(expected));
       assertEquals(
-          "CONFIG_INVALID",
+          INVALID_CONFIGURATION_CODE,
           assertThrows(IllegalArgumentException.class, () -> metric.verifyLabelNames(Set.of()))
               .getMessage());
       for (String key : expected) {
         var missing = new HashSet<>(expected);
         missing.remove(key);
         assertEquals(
-            "CONFIG_INVALID",
+            INVALID_CONFIGURATION_CODE,
             assertThrows(IllegalArgumentException.class, () -> metric.verifyLabelNames(missing))
                 .getMessage());
       }
@@ -100,7 +102,7 @@ class MetricContractTest {
         var invalid = new HashSet<>(expected);
         invalid.add(extra);
         assertEquals(
-            "CONFIG_INVALID",
+            INVALID_CONFIGURATION_CODE,
             assertThrows(IllegalArgumentException.class, () -> metric.verifyLabelNames(invalid))
                 .getMessage());
       }
