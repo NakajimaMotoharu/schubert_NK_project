@@ -16,6 +16,7 @@ import org.junit.jupiter.api.Test;
 
 /** Literal canonical labels, not production-generated expected values. SS341/351/spec1611. */
 class BatchMetricContractTest {
+  private static final String INVALID_CONFIG_CODE = "CONFIG_INVALID";
   static final String[] STEPS = {
     "BACKUP_DB",
     "BACKUP_CONFIG",
@@ -61,19 +62,19 @@ class BatchMetricContractTest {
     for (String value :
         List.of("", "SUCCESS ", "success", "MORNING", "RUNNING", "PT_SECRET_CANARY_ONLY")) {
       assertEquals(
-          "CONFIG_INVALID",
+          INVALID_CONFIG_CODE,
           assertThrows(IllegalArgumentException.class, () -> contract.step(value)).getMessage());
       assertEquals(
-          "CONFIG_INVALID",
+          INVALID_CONFIG_CODE,
           assertThrows(IllegalArgumentException.class, () -> contract.status(value)).getMessage());
     }
     for (int i = 0; i < 1000; i++) {
       String value = "PT_CANARY_ONLY_" + i;
       assertEquals(
-          "CONFIG_INVALID",
+          INVALID_CONFIG_CODE,
           assertThrows(IllegalArgumentException.class, () -> contract.step(value)).getMessage());
       assertEquals(
-          "CONFIG_INVALID",
+          INVALID_CONFIG_CODE,
           assertThrows(IllegalArgumentException.class, () -> contract.status(value)).getMessage());
     }
   }

@@ -25,8 +25,12 @@ import org.junit.jupiter.api.Test;
 
 /** Actual pinned SDK with owned registry, never business Batch, Root, DB or external exporter. */
 class BatchMetricRecorderTest {
-  private static final String RUNS = "nk_batch_runs_total";
-  private static final String LAST = "nk_batch_last_success_timestamp_seconds";
+  private static final String STEP_LABEL = "step";
+  private static final String DEBUG_MODE = "DEBUG";
+  private static final String SUCCESS_STATUS = "SUCCESS";
+  private static final String BACKUP_DB_STEP = "BACKUP_DB";
+  private static final String RUNS_METRIC_NAME = "nk_batch_runs_total";
+  private static final String LAST_METRIC_NAME = "nk_batch_last_success_timestamp_seconds";
   private static final Instant TEN = Instant.parse("1970-01-01T00:00:10.250000Z");
 
   private static final class UnformattableFailure extends IllegalStateException {
@@ -91,11 +95,15 @@ class BatchMetricRecorderTest {
   }
 
   private static double runs(OwnedRegistry registry, String step, String status) {
-    return registry.get(RUNS).tags("step", step, "status", status).counter().count();
+    return registry
+        .get(RUNS_METRIC_NAME)
+        .tags(STEP_LABEL, step, "status", status)
+        .counter()
+        .count();
   }
 
   private static double last(OwnedRegistry registry, String step) {
-    return registry.get(LAST).tag("step", step).gauge().value();
+    return registry.get(LAST_METRIC_NAME).tag(STEP_LABEL, step).gauge().value();
   }
 
   private static void shape(OwnedRegistry registry) {
@@ -110,12 +118,12 @@ class BatchMetricRecorderTest {
         registry.getMeters().stream().filter(m -> m.getId().getType() == Meter.Type.GAUGE).count());
     for (var meter : registry.getMeters()) {
       var id = meter.getId();
-      assertTrue(Set.of(RUNS, LAST).contains(id.getName()));
+      assertTrue(Set.of(RUNS_METRIC_NAME, LAST_METRIC_NAME).contains(id.getName()));
       assertEquals(
-          id.getName().equals(RUNS) ? Set.of("step", "status") : Set.of("step"),
+          id.getName().equals(RUNS_METRIC_NAME) ? Set.of(STEP_LABEL, "status") : Set.of(STEP_LABEL),
           id.getTags().stream().map(t -> t.getKey()).collect(Collectors.toSet()));
-      assertTrue(Set.of(BatchMetricContractTest.STEPS).contains(id.getTag("step")));
-      if (id.getName().equals(RUNS))
+      assertTrue(Set.of(BatchMetricContractTest.STEPS).contains(id.getTag(STEP_LABEL)));
+      if (id.getName().equals(RUNS_METRIC_NAME))
         assertTrue(Set.of(BatchMetricContractTest.STATUSES).contains(id.getTag("status")));
     }
   }
@@ -123,7 +131,7 @@ class BatchMetricRecorderTest {
   @Test
   void batchRec001ActualDebugRegistryHasFortyCountersAndTenUnknownSuccessGauges() {
     try (var registry = new OwnedRegistry()) {
-      var recorder = new BatchMetricRecorder(registry, "DEBUG");
+      var recorder = new BatchMetricRecorder(registry, DEBUG_MODE);
       assertTrue(recorder.detailedMetricsRequested());
       shape(registry);
       for (String step : BatchMetricContractTest.STEPS) {
@@ -139,14 +147,14 @@ class BatchMetricRecorderTest {
   @Test
   void batchRec002WholeIndependentMatrixCountsOnceAndOnlySuccessUpdatesTime() {
     try (var registry = new OwnedRegistry()) {
-      var recorder = new BatchMetricRecorder(registry, "DEBUG");
+      var recorder = new BatchMetricRecorder(registry, DEBUG_MODE);
       var contract = new BatchMetricContract();
       for (String step : BatchMetricContractTest.STEPS) {
         for (String status : BatchMetricContractTest.STATUSES)
           recorder.record(
               contract.step(step),
               contract.status(status),
-              status.equals("SUCCESS") ? TEN : Instant.ofEpochSecond(20));
+              status.equals(SUCCESS_STATUS) ? TEN : Instant.ofEpochSecond(20));
         assertEquals(10.25, last(registry, step), 0.0);
         for (String status : BatchMetricContractTest.STATUSES)
           assertEquals(1.0, runs(registry, step, status));
@@ -158,18 +166,18 @@ class BatchMetricRecorderTest {
   @Test
   void batchRec003LastSuccessIsMaximumNotLastCallAndNonSuccessCannotReplaceIt() {
     try (var registry = new OwnedRegistry()) {
-      var recorder = new BatchMetricRecorder(registry, "DEBUG");
+      var recorder = new BatchMetricRecorder(registry, DEBUG_MODE);
       recorder.record(Step.BACKUP_DB, Status.FAILED, Instant.ofEpochSecond(99));
-      assertTrue(Double.isNaN(last(registry, "BACKUP_DB")));
+      assertTrue(Double.isNaN(last(registry, BACKUP_DB_STEP)));
       recorder.record(Step.BACKUP_DB, Status.SUCCESS, TEN);
       recorder.record(Step.BACKUP_DB, Status.SUCCESS, Instant.ofEpochSecond(11, 500_000_000));
       recorder.record(Step.BACKUP_DB, Status.SUCCESS, TEN);
       recorder.record(Step.BACKUP_DB, Status.SUCCESS, Instant.ofEpochSecond(11, 500_000_000));
       recorder.record(Step.BACKUP_DB, Status.WARNING, Instant.ofEpochSecond(100));
       recorder.record(Step.BACKUP_DB, Status.SKIPPED, Instant.ofEpochSecond(101));
-      assertEquals(11.5, last(registry, "BACKUP_DB"), 0.0);
-      assertEquals(4.0, runs(registry, "BACKUP_DB", "SUCCESS"));
-      assertEquals(1.0, runs(registry, "BACKUP_DB", "FAILED"));
+      assertEquals(11.5, last(registry, BACKUP_DB_STEP), 0.0);
+      assertEquals(4.0, runs(registry, BACKUP_DB_STEP, SUCCESS_STATUS));
+      assertEquals(1.0, runs(registry, BACKUP_DB_STEP, "FAILED"));
     }
   }
 
@@ -200,7 +208,7 @@ class BatchMetricRecorderTest {
       assertThrows(
           IllegalArgumentException.class, () -> new BatchMetricRecorder(registry, "debug"));
       assertTrue(registry.getMeters().isEmpty());
-      var recorder = new BatchMetricRecorder(registry, "DEBUG");
+      var recorder = new BatchMetricRecorder(registry, DEBUG_MODE);
       for (Instant invalid :
           List.of(
               Instant.parse("0000-12-31T23:59:59Z"),
@@ -209,13 +217,13 @@ class BatchMetricRecorderTest {
         assertThrows(
             IllegalArgumentException.class,
             () -> recorder.record(Step.BACKUP_DB, Status.SUCCESS, invalid));
-      assertEquals(0.0, runs(registry, "BACKUP_DB", "SUCCESS"));
-      assertTrue(Double.isNaN(last(registry, "BACKUP_DB")));
+      assertEquals(0.0, runs(registry, BACKUP_DB_STEP, SUCCESS_STATUS));
+      assertTrue(Double.isNaN(last(registry, BACKUP_DB_STEP)));
       recorder.record(Step.BACKUP_DB, Status.SUCCESS, Instant.parse("0001-01-01T00:00:00Z"));
-      assertEquals(-62_135_596_800.0, last(registry, "BACKUP_DB"), 0.0);
+      assertEquals(-62_135_596_800.0, last(registry, BACKUP_DB_STEP), 0.0);
       recorder.record(Step.BACKUP_DB, Status.SUCCESS, Instant.parse("9999-12-31T23:59:59.999999Z"));
-      assertEquals(253_402_300_800.0, last(registry, "BACKUP_DB"), 0.0);
-      assertEquals(2.0, runs(registry, "BACKUP_DB", "SUCCESS"));
+      assertEquals(253_402_300_800.0, last(registry, BACKUP_DB_STEP), 0.0);
+      assertEquals(2.0, runs(registry, BACKUP_DB_STEP, SUCCESS_STATUS));
     }
   }
 
@@ -228,21 +236,21 @@ class BatchMetricRecorderTest {
             new AssertionError(),
             new OutOfMemoryError("synthetic-test-only-no-allocation"))) {
       try (var registry = new OwnedRegistry()) {
-        var recorder = new BatchMetricRecorder(registry, "DEBUG");
+        var recorder = new BatchMetricRecorder(registry, DEBUG_MODE);
         registry.failure = Optional.of(failure);
         assertSame(
             failure,
             assertThrows(
                 failure.getClass(), () -> recorder.record(Step.BACKUP_DB, Status.SUCCESS, TEN)));
         assertEquals(1, registry.attempts.get());
-        assertEquals(0.0, runs(registry, "BACKUP_DB", "SUCCESS"));
-        assertTrue(Double.isNaN(last(registry, "BACKUP_DB")));
+        assertEquals(0.0, runs(registry, BACKUP_DB_STEP, SUCCESS_STATUS));
+        assertTrue(Double.isNaN(last(registry, BACKUP_DB_STEP)));
         assertEquals(0, registry.closes.get());
         assertFalse(registry.isClosed());
         registry.failure = Optional.empty();
         recorder.record(Step.BACKUP_DB, Status.SUCCESS, TEN);
-        assertEquals(1.0, runs(registry, "BACKUP_DB", "SUCCESS"));
-        assertEquals(10.25, last(registry, "BACKUP_DB"), 0.0);
+        assertEquals(1.0, runs(registry, BACKUP_DB_STEP, SUCCESS_STATUS));
+        assertEquals(10.25, last(registry, BACKUP_DB_STEP), 0.0);
       }
     }
   }
@@ -251,7 +259,7 @@ class BatchMetricRecorderTest {
   void batchRec007SixtyFourParallelSuccessesKeepExactCountAndMaximumTime() throws Exception {
     try (var registry = new OwnedRegistry();
         var pool = Executors.newFixedThreadPool(8)) {
-      var recorder = new BatchMetricRecorder(registry, "DEBUG");
+      var recorder = new BatchMetricRecorder(registry, DEBUG_MODE);
       var jobs =
           java.util.stream.IntStream.range(0, 64)
               .<Callable<Boolean>>mapToObj(
@@ -263,7 +271,7 @@ class BatchMetricRecorderTest {
                       })
               .toList();
       for (var result : pool.invokeAll(jobs)) assertTrue(result.get());
-      assertEquals(64.0, runs(registry, "CLEAN_LOG", "SUCCESS"));
+      assertEquals(64.0, runs(registry, "CLEAN_LOG", SUCCESS_STATUS));
       assertEquals(64.0, last(registry, "CLEAN_LOG"), 0.0);
       shape(registry);
     }
@@ -277,18 +285,19 @@ class BatchMetricRecorderTest {
       failed.failRegistration = true;
       assertSame(
           failure,
-          assertThrows(UnformattableFailure.class, () -> new BatchMetricRecorder(failed, "DEBUG")));
+          assertThrows(
+              UnformattableFailure.class, () -> new BatchMetricRecorder(failed, DEBUG_MODE)));
       assertEquals(1, failed.attempts.get());
       assertEquals(0, failed.closes.get());
       assertFalse(failed.isClosed());
     }
     try (var first = new OwnedRegistry();
         var second = new OwnedRegistry()) {
-      var one = new BatchMetricRecorder(first, "DEBUG");
-      new BatchMetricRecorder(second, "DEBUG");
+      var one = new BatchMetricRecorder(first, DEBUG_MODE);
+      new BatchMetricRecorder(second, DEBUG_MODE);
       for (int i = 0; i < 1000; i++) one.record(Step.CLEAN_SESSION, Status.SUCCESS, TEN);
-      assertEquals(1000.0, runs(first, "CLEAN_SESSION", "SUCCESS"));
-      assertEquals(0.0, runs(second, "CLEAN_SESSION", "SUCCESS"));
+      assertEquals(1000.0, runs(first, "CLEAN_SESSION", SUCCESS_STATUS));
+      assertEquals(0.0, runs(second, "CLEAN_SESSION", SUCCESS_STATUS));
       assertTrue(Double.isNaN(last(second, "CLEAN_SESSION")));
       shape(first);
       shape(second);

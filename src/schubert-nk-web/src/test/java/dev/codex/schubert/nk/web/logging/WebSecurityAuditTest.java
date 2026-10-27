@@ -37,6 +37,7 @@ import org.junit.jupiter.api.Test;
 
 /** NK-WEB-001/PT-WEB-095..100; AUT-001..004/MON-004; UI226/252; SS314/351/352. */
 class WebSecurityAuditTest {
+  private static final int LOCKED_EVENT_INDEX = 2;
   private static final String READER_NAME = "reader";
   private static final String INFO_LEVEL = "INFO";
   private static final String DENIED_OUTCOME = "DENIED";
@@ -54,7 +55,7 @@ class WebSecurityAuditTest {
       Clock.fixed(Instant.parse("2026-09-09T00:00:00.123987Z"), ZoneOffset.ofHours(9));
   private static final UUID ID = UUID.fromString("00000000-0000-0000-0000-000000000123");
   private static final Optional<String> IP = Optional.of("203.0.113.1");
-  private static final Optional<SessionPrincipal> ACTOR =
+  private static final Optional<SessionPrincipal> AUDIT_PRINCIPAL =
       Optional.of(actor(READER_NAME, UserRole.USER));
 
   @Test
@@ -80,7 +81,7 @@ class WebSecurityAuditTest {
           ID,
           event,
           Optional.of("2001:db8::1"),
-          hasActor ? ACTOR : Optional.empty(),
+          hasActor ? AUDIT_PRINCIPAL : Optional.empty(),
           i == 2 ? 900 : 0,
           i >= 8 ? Route.LOGOUT : Route.LOGIN);
       var entry = logger.entries.get(i);
@@ -120,7 +121,7 @@ class WebSecurityAuditTest {
       var detailKeys = new HashSet<>(Set.of(REASON_FIELD, ROUTE_FIELD, TARGET_TYPE_FIELD));
       assertEquals("HTTP_REQUEST", details.get(TARGET_TYPE_FIELD).getAsString());
       assertEquals(i >= 8 ? "/logout" : "/login", details.get(ROUTE_FIELD).getAsString());
-      if (i == 2) {
+      if (i == LOCKED_EVENT_INDEX) {
         detailKeys.add(RETRY_SECONDS_FIELD);
         assertEquals(900, details.get(RETRY_SECONDS_FIELD).getAsInt());
       }
@@ -141,7 +142,7 @@ class WebSecurityAuditTest {
             .getAsInt());
     String[] routes = {"/login", "/logout", "/**", "/admin/users/**", "/logs"};
     for (int i = 0; i < Route.values().length; i++) {
-      audit.record(ID, Event.CSRF_DENIED, IP, ACTOR, 0, Route.values()[i]);
+      audit.record(ID, Event.CSRF_DENIED, IP, AUDIT_PRINCIPAL, 0, Route.values()[i]);
       assertEquals(
           routes[i],
           logger
@@ -189,7 +190,8 @@ class WebSecurityAuditTest {
         IllegalArgumentException.class,
         () -> audit.record(ID, Event.LOGIN_FAILED, IP, Optional.empty(), 0, Route.ALL_WEB));
     for (Event event : Event.values()) {
-      var selected = event == Event.LOGIN_SUCCEEDED ? ACTOR : Optional.<SessionPrincipal>empty();
+      var selected =
+          event == Event.LOGIN_SUCCEEDED ? AUDIT_PRINCIPAL : Optional.<SessionPrincipal>empty();
       for (int retry : new int[] {-1, 901})
         assertThrows(
             IllegalArgumentException.class,
@@ -205,9 +207,11 @@ class WebSecurityAuditTest {
     for (Event event :
         List.of(Event.LOGIN_FAILED, Event.LOGIN_LOCKED, Event.AUTHENTICATION_REQUIRED))
       assertThrows(
-          IllegalArgumentException.class, () -> audit.record(ID, event, IP, ACTOR, 0, Route.LOGIN));
+          IllegalArgumentException.class,
+          () -> audit.record(ID, event, IP, AUDIT_PRINCIPAL, 0, Route.LOGIN));
     for (Event event : List.of(Event.LOGIN_SUCCEEDED, Event.LOGIN_FAILED, Event.LOGIN_LOCKED)) {
-      var selected = event == Event.LOGIN_SUCCEEDED ? ACTOR : Optional.<SessionPrincipal>empty();
+      var selected =
+          event == Event.LOGIN_SUCCEEDED ? AUDIT_PRINCIPAL : Optional.<SessionPrincipal>empty();
       assertThrows(
           IllegalArgumentException.class,
           () -> audit.record(ID, event, Optional.empty(), selected, 0, Route.LOGIN));
@@ -218,9 +222,10 @@ class WebSecurityAuditTest {
           () -> audit.record(ID, event, IP, Optional.empty(), 0, Route.LOGOUT));
       assertThrows(
           IllegalArgumentException.class,
-          () -> audit.record(ID, event, Optional.empty(), ACTOR, 0, Route.LOGOUT));
+          () -> audit.record(ID, event, Optional.empty(), AUDIT_PRINCIPAL, 0, Route.LOGOUT));
       assertThrows(
-          IllegalArgumentException.class, () -> audit.record(ID, event, IP, ACTOR, 0, Route.LOGIN));
+          IllegalArgumentException.class,
+          () -> audit.record(ID, event, IP, AUDIT_PRINCIPAL, 0, Route.LOGIN));
     }
     for (String ip :
         List.of(
@@ -334,7 +339,7 @@ class WebSecurityAuditTest {
   void web099RepeatedEventsHaveNoMutableJsonOrPrincipalRetention() {
     var logger = new CapturingLogger();
     var audit = new WebSecurityAudit(logger, CLOCK, "a", "b");
-    audit.record(ID, Event.LOGIN_SUCCEEDED, IP, ACTOR, 0, Route.LOGIN);
+    audit.record(ID, Event.LOGIN_SUCCEEDED, IP, AUDIT_PRINCIPAL, 0, Route.LOGIN);
     String first = logger.entries.getFirst().text();
     audit.record(
         new UUID(0, 2), Event.CSRF_DENIED, Optional.empty(), Optional.empty(), 0, Route.LOGIN);
