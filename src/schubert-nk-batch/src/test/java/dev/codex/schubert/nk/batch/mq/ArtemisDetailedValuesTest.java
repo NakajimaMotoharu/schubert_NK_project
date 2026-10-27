@@ -14,11 +14,14 @@ import org.junit.jupiter.api.Test;
 
 /** SSC130/ISSBROKER001: actual values and query cardinality, not expected policy substitution. */
 final class ArtemisDetailedValuesTest {
+  private static final String PUBLIC_FIELD = "public";
+  private static final String FIELD_VALUE = "value";
+  private static final String ADDRESS_KEY = "address";
 
   @Test
   void detailedNestedDataHasNoMutableInputOrOutputAliases() {
-    var fields = new HashMap<>(Map.of("public", "value"));
-    var pairs = new HashMap<String, Map<String, String>>(Map.of("address", fields));
+    var fields = new HashMap<>(Map.of(PUBLIC_FIELD, FIELD_VALUE));
+    var pairs = new HashMap<String, Map<String, String>>(Map.of(ADDRESS_KEY, fields));
     var permissions = new HashMap<>(Map.of("send", true));
     var roles =
         new HashMap<String, Map<String, Map<String, Boolean>>>(
@@ -26,7 +29,7 @@ final class ArtemisDetailedValuesTest {
     var pressure =
         new HashMap<>(
             Map.of(
-                "address",
+                ADDRESS_KEY,
                 new ArtemisQueuePressureClient.Value(
                     1, 2, ArtemisQueuePressureClient.Pressure.NORMAL)));
     var result =
@@ -36,20 +39,20 @@ final class ArtemisDetailedValuesTest {
     permissions.clear();
     roles.clear();
     pressure.clear();
-    assertEquals(Map.of("address", Map.of("public", "value")), result.topology());
-    assertEquals(Map.of("address", Map.of("public", "value")), result.settings());
-    assertEquals(Map.of("public", "value"), result.broker());
-    assertEquals(Map.of("public", "value"), result.acceptor());
+    assertEquals(Map.of(ADDRESS_KEY, Map.of(PUBLIC_FIELD, FIELD_VALUE)), result.topology());
+    assertEquals(Map.of(ADDRESS_KEY, Map.of(PUBLIC_FIELD, FIELD_VALUE)), result.settings());
+    assertEquals(Map.of(PUBLIC_FIELD, FIELD_VALUE), result.broker());
+    assertEquals(Map.of(PUBLIC_FIELD, FIELD_VALUE), result.acceptor());
     assertEquals(Map.of("match", Map.of("role", Map.of("send", true))), result.roles());
     assertEquals(
         new ArtemisQueuePressureClient.Value(1, 2, ArtemisQueuePressureClient.Pressure.NORMAL),
-        result.pressure().get("address"));
+        result.pressure().get(ADDRESS_KEY));
     assertThrows(UnsupportedOperationException.class, () -> result.topology().clear());
     assertThrows(
-        UnsupportedOperationException.class, () -> result.topology().get("address").clear());
+        UnsupportedOperationException.class, () -> result.topology().get(ADDRESS_KEY).clear());
     assertThrows(UnsupportedOperationException.class, () -> result.settings().clear());
     assertThrows(
-        UnsupportedOperationException.class, () -> result.settings().get("address").clear());
+        UnsupportedOperationException.class, () -> result.settings().get(ADDRESS_KEY).clear());
     assertThrows(
         UnsupportedOperationException.class, () -> result.roles().get("match").get("role").clear());
     assertThrows(UnsupportedOperationException.class, () -> result.pressure().clear());

@@ -9,21 +9,40 @@ import org.junit.jupiter.api.Test;
 
 /** BUG1478/YKT1237; SS341/343; PT-F03-ENUM-OPS001: enum values only, never starts/stops Units. */
 final class EnumValueCatalogCompatibilityTest {
+  private static final String API_NAME = "API";
+  private static final String WEB_NAME = "WEB";
+  private static final String API_UNIT_NAME = "schubert-nk-api.service";
+  private static final String WEB_UNIT_NAME = "schubert-nk-web.service";
+  private static final String CLEANUP_NAME = "CLEANUP";
+  private static final String INSPECTOR_NAME = "INSPECTOR";
+  private static final String EXPIRY_NAME = "EXPIRY";
+  private static final String BACKUP_NAME = "BACKUP";
+  private static final String ARTEMIS_NAME = "ARTEMIS";
+
   @Test
   void ops001UnitAndStartTargetCatalogsKeepTheirApprovedLiterals() {
     assertEquals(
-        List.of("API", "WEB"), Arrays.stream(ApplicationUnit.values()).map(Enum::name).toList());
+        List.of(API_NAME, WEB_NAME),
+        Arrays.stream(ApplicationUnit.values()).map(Enum::name).toList());
     assertEquals(
-        List.of("schubert-nk-api.service", "schubert-nk-web.service"),
+        List.of(API_UNIT_NAME, WEB_UNIT_NAME),
         Arrays.stream(ApplicationUnit.values()).map(ApplicationUnit::serviceName).toList());
     assertEquals(
-        List.of("CADDY", "WEB", "API", "CLEANUP", "INSPECTOR", "EXPIRY", "BACKUP", "ARTEMIS"),
+        List.of(
+            "CADDY",
+            WEB_NAME,
+            API_NAME,
+            CLEANUP_NAME,
+            INSPECTOR_NAME,
+            EXPIRY_NAME,
+            BACKUP_NAME,
+            ARTEMIS_NAME),
         Arrays.stream(MaintenanceUnit.values()).map(Enum::name).toList());
     var maintenanceUnits =
         List.of(
             "caddy.service",
-            "schubert-nk-web.service",
-            "schubert-nk-api.service",
+            WEB_UNIT_NAME,
+            API_UNIT_NAME,
             "schubert-nk-cleanup.service",
             "schubert-nk-inbox-inspector.service",
             "schubert-nk-expiry-cleanup.service",
@@ -36,12 +55,12 @@ final class EnumValueCatalogCompatibilityTest {
         maintenanceUnits.stream().map(name -> "/system.slice/" + name).toList(),
         Arrays.stream(MaintenanceUnit.values()).map(MaintenanceUnit::controlGroup).toList());
     assertEquals(
-        List.of("API", "WEB", "MORNING", "CLEANUP", "EXPIRY"),
+        List.of(API_NAME, WEB_NAME, "MORNING", CLEANUP_NAME, EXPIRY_NAME),
         Arrays.stream(RootStartupContext.Service.values()).map(Enum::name).toList());
     assertEquals(
         List.of(
-            "schubert-nk-api.service",
-            "schubert-nk-web.service",
+            API_UNIT_NAME,
+            WEB_UNIT_NAME,
             "schubert-nk-morning-controller.service",
             "schubert-nk-cleanup.service",
             "schubert-nk-expiry-cleanup.service"),
@@ -49,7 +68,15 @@ final class EnumValueCatalogCompatibilityTest {
             .map(RootStartupContext.Service::unit)
             .toList());
     assertEquals(
-        List.of("INSPECTOR", "BACKUP", "CLEANUP", "EXPIRY", "ARTEMIS", "MORNING", "API", "WEB"),
+        List.of(
+            INSPECTOR_NAME,
+            BACKUP_NAME,
+            CLEANUP_NAME,
+            EXPIRY_NAME,
+            ARTEMIS_NAME,
+            "MORNING",
+            API_NAME,
+            WEB_NAME),
         Arrays.stream(InspectorUnitSnapshot.Target.values()).map(Enum::name).toList());
     assertEquals(
         List.of(
@@ -59,21 +86,21 @@ final class EnumValueCatalogCompatibilityTest {
             "schubert-nk-expiry-cleanup.service",
             "artemis.service",
             "schubert-nk-morning-controller.service",
-            "schubert-nk-api.service",
-            "schubert-nk-web.service"),
+            API_UNIT_NAME,
+            WEB_UNIT_NAME),
         Arrays.stream(InspectorUnitSnapshot.Target.values())
             .map(InspectorUnitSnapshot.Target::unit)
             .toList());
     assertEquals(
-        List.of("BACKUP", "CLEANUP", "INSPECTOR", "EXPIRY", "BROKER"),
+        List.of(BACKUP_NAME, CLEANUP_NAME, INSPECTOR_NAME, EXPIRY_NAME, "BROKER"),
         Arrays.stream(BackupUnitStartClient.Target.values()).map(Enum::name).toList());
     assertEquals(
-        List.of("BACKUP", "CLEANUP", "INSPECTOR", "EXPIRY", "ARTEMIS"),
+        List.of(BACKUP_NAME, CLEANUP_NAME, INSPECTOR_NAME, EXPIRY_NAME, ARTEMIS_NAME),
         Arrays.stream(BackupUnitStartClient.Target.values())
             .map(value -> value.unit().name())
             .toList());
     assertEquals(
-        List.of("BACKUP", "CLEANUP", "INSPECTOR", "EXPIRY", "ARTEMIS"),
+        List.of(BACKUP_NAME, CLEANUP_NAME, INSPECTOR_NAME, EXPIRY_NAME, ARTEMIS_NAME),
         Arrays.stream(BackupUnitStartClient.Target.values())
             .map(value -> value.observation().name())
             .toList());
