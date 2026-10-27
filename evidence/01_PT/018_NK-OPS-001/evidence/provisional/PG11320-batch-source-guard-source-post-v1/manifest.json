@@ -1,0 +1,68 @@
+{
+  "actualExit": 0,
+  "allMainAndOtherInputsPreserved": true,
+  "allOriginalOracleTokensRestored": true,
+  "coverage": null,
+  "effortPercent": null,
+  "executorTwr": 1,
+  "externalActions": 0,
+  "guardedMethods": [
+    "batchhost001StandardIsEntirelyLazyIncludingAfterClose",
+    "batchhost003UnboundScrapeNeverAcquires",
+    "batchhost004NullAndUnknownModesFailBeforeAcquisition",
+    "batchhost006FactoryRuntimeIdentityAndNoAutomaticRetry",
+    "batchhost007FactoryErrorIdentityIsNotNormalized",
+    "batchhost008NullFactoryResultIsNotSuccess",
+    "batchhost009ClosedCandidateIsRejectedAndRetainedUntilCallerClose",
+    "batchhost010PartialRegistryBeforeGcRemainsOwnedAfterFailure",
+    "batchhost011GcRetainedBeforeFatalAndClosedInReverseOrder",
+    "batchhost012FailedGcCloseKeepsRegistryAndExplicitRetryOwnership",
+    "batchhost013FailedRegistryCloseIsNotConfirmedAndCanBeExplicitlyRetried",
+    "batchhost014NullGcCallbackFailsWithoutImplicitRegistryClose",
+    "batchhost015SingleBindAndIdempotentClose",
+    "batchhost016CloseWaitsForOwnedScrapeAndThenRejectsNewScrapes"
+  ],
+  "invocation": {
+    "actualPythonCommand": [
+      "/usr/bin/python3",
+      "-B",
+      "tools/quality/pg11320_batch_source_guard_source_post.py"
+    ],
+    "arbitraryArgumentsRecorded": false,
+    "entrypointPath": "tools/quality/pg11320_batch_source_guard_source_post.py",
+    "entrypointSha256": "7dd2751d4f92f7445834c597f650f09afb1babaec2d57b2385fa61a0634e6813",
+    "helperPath": "tools/quality/host_tool_invocation.py",
+    "helperSha256": "85d616a3db4ff47f4c95ae2e0dd57954bc2b09f28b8f2a685b986e5621545c46",
+    "libraryPath": "tools/quality/pg11320_batch_source_guard_source_post.py",
+    "librarySha256": "7dd2751d4f92f7445834c597f650f09afb1babaec2d57b2385fa61a0634e6813",
+    "loadedProjectPythonSources": {
+      "tools/quality/classfile_code_metadata.py": "2227e1e8df1ff91b606f094c7ee64366023273ca740d4d47126ed0928190e2f0",
+      "tools/quality/g07_host_class_provenance_inputs.py": "a676cb3e4145177c3c243722d737592ce7d44c3f29cfe4f670662ef7651f046b",
+      "tools/quality/host_tool_invocation.py": "85d616a3db4ff47f4c95ae2e0dd57954bc2b09f28b8f2a685b986e5621545c46",
+      "tools/quality/pg10130_uid_oracle_preflight.py": "e80cb1d6d45d4e4c0cdb3cb792e0638119d936403de5c3e141429d338485758a",
+      "tools/quality/pg10332_result_profile_oracle_plan.py": "82c9b4f57dd517c1dbee639dbf4955c316beb89216cb9a8a66e78e0b9a322ad4",
+      "tools/quality/pg10339_result_profile_oracle_post_v2.py": "42f86287f5236d2ef1a2e10f54f5b0634e799a4e866b15eaf6738336a4ebabb0",
+      "tools/quality/pg10392_role_literal_plan.py": "e1af98abd59175d867d29b07a73d7b2e4c7112754603d1805ec0bfc4d9465ce8",
+      "tools/quality/pg10398_role_view_preflight.py": "31709d50a345f3e0843fa62ae0b4c6849885503eb3d81555b6bcc9605b486d56",
+      "tools/quality/pg11320_batch_source_guard_source_post.py": "7dd2751d4f92f7445834c597f650f09afb1babaec2d57b2385fa61a0634e6813",
+      "tools/quality/pg9906_user_query_oracle_source_post.py": "4f9bdaa17eea78a720c0f25b8af906f3f045fda590c8fea2a8868229403a98fa",
+      "tools/quality/pg9978_plain_core_quality_post.py": "c99cc753c6335c9f41e3eafe6a97c17521503739ba2cf80659b542a445dd48fa",
+      "tools/quality/public_java_digest_provenance.py": "dd47f8735a61ce849995633c3290a6ad047842ef3263829ce359db413778f7a0"
+    },
+    "provenance": "OBSERVED_SYS_ARGV_AND_ORIG_ARGV_NOT_RECONSTRUCTED"
+  },
+  "metadataNegativeVectors": 31,
+  "newAccepted": 0,
+  "originalCloseRetryAndDeadlineTokensRestored": true,
+  "ownerGuards": 14,
+  "planManifestSha256": "9e5ded873f7abbb9ee67331a1ab109899375b627c084739cfdf2270a00cc34b6",
+  "productTestsExecuted": 0,
+  "sourceBefore": "d431ad964355c4e5c602fcb94fe0182da6ae3a61",
+  "sourceChanges": [
+    {
+      "beforeSha256": "5346240b8a3500642cf23a5752a1626da12f2ba9944f8b9a4dfa92f532ba742a",
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/BatchStandardMetricSourceTest.java",
+      "sha256": "4b9330ecc92623e0a076424ae23ac6b6290a0d2a39b4e9c7aa91e8ff800b0326"
+    }
+  ]
+}
