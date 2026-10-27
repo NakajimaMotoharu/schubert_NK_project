@@ -1,0 +1,90 @@
+{
+  "actualExit": 0,
+  "allMainAndOtherInputsPreserved": true,
+  "allOriginalOracleTokensRestored": true,
+  "coverage": null,
+  "invocation": {
+    "actualPythonCommand": [
+      "/usr/bin/python3",
+      "-B",
+      "tools/quality/pg12474_enum_catalog_source_post.py"
+    ],
+    "arbitraryArgumentsRecorded": false,
+    "entrypointPath": "tools/quality/pg12474_enum_catalog_source_post.py",
+    "entrypointSha256": "29fb75dd2e80395d8ec31e4ecdf4a153af1edbf0e4c3b3046ebd33152cd9456e",
+    "helperPath": "tools/quality/host_tool_invocation.py",
+    "helperSha256": "85d616a3db4ff47f4c95ae2e0dd57954bc2b09f28b8f2a685b986e5621545c46",
+    "libraryPath": "tools/quality/pg12474_enum_catalog_source_post.py",
+    "librarySha256": "29fb75dd2e80395d8ec31e4ecdf4a153af1edbf0e4c3b3046ebd33152cd9456e",
+    "loadedProjectPythonSources": {
+      "tools/quality/g07_host_class_provenance_inputs.py": "a676cb3e4145177c3c243722d737592ce7d44c3f29cfe4f670662ef7651f046b",
+      "tools/quality/host_tool_invocation.py": "85d616a3db4ff47f4c95ae2e0dd57954bc2b09f28b8f2a685b986e5621545c46",
+      "tools/quality/pg12474_enum_catalog_source_post.py": "29fb75dd2e80395d8ec31e4ecdf4a153af1edbf0e4c3b3046ebd33152cd9456e",
+      "tools/quality/public_java_digest_provenance.py": "dd47f8735a61ce849995633c3290a6ad047842ef3263829ce359db413778f7a0"
+    },
+    "provenance": "OBSERVED_SYS_ARGV_AND_ORIG_ARGV_NOT_RECONSTRUCTED"
+  },
+  "metadataNegativeVectors": 16,
+  "newAccepted": 0,
+  "originalCatalog": [
+    {
+      "method": "sto001FixedCredentialCatalogKeepsNamesOwnersKindsAndOrdering",
+      "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/EnumValueCatalogCompatibilityTest.java"
+    },
+    {
+      "method": "bat001StepCleanupAndOutcomeCatalogsMatchIndependentTables",
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/EnumValueCatalogCompatibilityTest.java"
+    }
+  ],
+  "originalMethods": 2,
+  "originalRawTokens": 996,
+  "planManifestSha256": "c0fb1d72f54e07805f66fa6571c2850ae42ce91e69b1f70aa258a46dbac08762",
+  "productTestsExecuted": 0,
+  "sourceBefore": "d6c01d3aed6bd1b546b6f5989fe80705e6e1262f",
+  "sourceChanges": [
+    {
+      "beforeSha256": "118c1471ddfd6ba4e4487718f507aa52a7876cbfeb5d5ba490ecbf29a9c465b6",
+      "constants": [
+        {
+          "id": "PMD-06923",
+          "literal": "\"API\"",
+          "name": "API_NAME",
+          "references": 5
+        },
+        {
+          "id": "PMD-06924",
+          "literal": "\"WEB\"",
+          "name": "WEB_NAME",
+          "references": 5
+        },
+        {
+          "id": "PMD-06925",
+          "literal": "\"PASSWORD\"",
+          "name": "PASSWORD_KIND",
+          "references": 4
+        },
+        {
+          "id": "PMD-06926",
+          "literal": "\"KEY\"",
+          "name": "KEY_KIND",
+          "references": 6
+        }
+      ],
+      "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/EnumValueCatalogCompatibilityTest.java",
+      "sha256": "d5ca7770d0664831aae96eabf785d13195cc0695e6903c7ce01a31b0c1e7b61f"
+    },
+    {
+      "beforeSha256": "4a8207bcf1a3b3a02d11a651194a8bd8e2f35e923f63299d40798561275f9386",
+      "constants": [
+        {
+          "id": "PMD-05808",
+          "literal": "\"CLEAN_BATCH_RUN\"",
+          "name": "CLEAN_BATCH_RUN_NAME",
+          "references": 5
+        }
+      ],
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/EnumValueCatalogCompatibilityTest.java",
+      "sha256": "14222dbfc80a510098b3dc85497688f6a863e79a3b1d5722aa4fe2a40bde23a5"
+    }
+  ]
+}
