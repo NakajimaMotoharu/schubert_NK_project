@@ -28,6 +28,18 @@ import org.junit.jupiter.api.Test;
 
 /** MEDIABYTE001..008/1706; literal labels and independent supplied-byte oracle, no delivery. */
 class MediaBytesMetricRecorderTest {
+  private static final int FAILURE_FACTORY_CALL = 2;
+  private static final String MEDIA_BYTES_NAME = "nk_media_bytes_total";
+  private static final String MEDIA_TYPE_LABEL = "media_type";
+  private static final String MODE_LABEL = "mode";
+  private static final String STATUS_LABEL = "status";
+  private static final String AUDIO_TYPE_NAME = "AUDIO";
+  private static final String VIDEO_TYPE_NAME = "VIDEO";
+  private static final String MUSIC_TYPE_NAME = "MUSIC";
+  private static final String INLINE_MODE_NAME = "INLINE";
+  private static final String DOWNLOAD_MODE_NAME = "DOWNLOAD";
+  private static final String RANGE_MODE_NAME = "RANGE";
+  private static final String DEBUG_MODE = "DEBUG";
   private static final List<MediaType> TYPES =
       List.of(MediaType.AUDIO, MediaType.VIDEO, MediaType.MUSIC);
   private static final List<Mode> MODES = List.of(Mode.INLINE, Mode.DOWNLOAD, Mode.RANGE);
@@ -43,7 +55,7 @@ class MediaBytesMetricRecorderTest {
 
     @Override
     protected Counter newCounter(Meter.Id id) {
-      if (registrations.incrementAndGet() == 2) fail(registrationFailure);
+      if (registrations.incrementAndGet() == FAILURE_FACTORY_CALL) fail(registrationFailure);
       var delegate = super.newCounter(id);
       return new Counter() {
         @Override
@@ -97,8 +109,8 @@ class MediaBytesMetricRecorderTest {
 
   private static double count(Registry registry, String type, String mode, int status) {
     return registry
-        .get("nk_media_bytes_total")
-        .tags("media_type", type, "mode", mode, "status", Integer.toString(status))
+        .get(MEDIA_BYTES_NAME)
+        .tags(MEDIA_TYPE_LABEL, type, MODE_LABEL, mode, STATUS_LABEL, Integer.toString(status))
         .counter()
         .count();
   }
@@ -108,16 +120,21 @@ class MediaBytesMetricRecorderTest {
     var observed = new java.util.HashSet<String>();
     for (var meter : registry.getMeters()) {
       var id = meter.getId();
-      assertEquals("nk_media_bytes_total", id.getName());
+      assertEquals(MEDIA_BYTES_NAME, id.getName());
       assertEquals(Meter.Type.COUNTER, id.getType());
       assertEquals(
-          Set.of("media_type", "mode", "status"),
+          Set.of(MEDIA_TYPE_LABEL, MODE_LABEL, STATUS_LABEL),
           id.getTags().stream().map(t -> t.getKey()).collect(Collectors.toSet()));
-      observed.add(id.getTag("media_type") + "/" + id.getTag("mode") + "/" + id.getTag("status"));
+      observed.add(
+          id.getTag(MEDIA_TYPE_LABEL)
+              + "/"
+              + id.getTag(MODE_LABEL)
+              + "/"
+              + id.getTag(STATUS_LABEL));
     }
     var expected = new java.util.HashSet<String>();
-    for (String type : List.of("AUDIO", "VIDEO", "MUSIC"))
-      for (String mode : List.of("INLINE", "DOWNLOAD", "RANGE"))
+    for (String type : List.of(AUDIO_TYPE_NAME, VIDEO_TYPE_NAME, MUSIC_TYPE_NAME))
+      for (String mode : List.of(INLINE_MODE_NAME, DOWNLOAD_MODE_NAME, RANGE_MODE_NAME))
         for (int status : List.of(200, 206, 416, 503))
           expected.add(type + "/" + mode + "/" + status);
     assertEquals(expected, observed);
@@ -126,11 +143,11 @@ class MediaBytesMetricRecorderTest {
   @Test
   void mediaByte001ExactlyThirtySixCanonicalSeriesStartAtZero() {
     try (var registry = new Registry()) {
-      var recorder = new MediaBytesMetricRecorder(registry, "DEBUG");
+      var recorder = new MediaBytesMetricRecorder(registry, DEBUG_MODE);
       assertTrue(recorder.detailedMetricsRequested());
       shape(registry);
-      for (String type : List.of("AUDIO", "VIDEO", "MUSIC"))
-        for (String mode : List.of("INLINE", "DOWNLOAD", "RANGE"))
+      for (String type : List.of(AUDIO_TYPE_NAME, VIDEO_TYPE_NAME, MUSIC_TYPE_NAME))
+        for (String mode : List.of(INLINE_MODE_NAME, DOWNLOAD_MODE_NAME, RANGE_MODE_NAME))
           for (int status : STATUSES) assertEquals(0, count(registry, type, mode, status));
       assertEquals(36, registry.registrations.get());
       assertEquals(0, registry.increments.get());
@@ -141,7 +158,7 @@ class MediaBytesMetricRecorderTest {
   @Test
   void mediaByte002BytesNotEventsAndZeroMaximumOrOtherSeriesDoNotChangeCardinality() {
     try (var registry = new Registry()) {
-      var recorder = new MediaBytesMetricRecorder(registry, "DEBUG");
+      var recorder = new MediaBytesMetricRecorder(registry, DEBUG_MODE);
       for (var type : TYPES)
         for (var mode : MODES)
           for (int status : STATUSES) {
@@ -151,9 +168,9 @@ class MediaBytesMetricRecorderTest {
             assertEquals(3, count(registry, type.name(), mode.name(), status));
           }
       recorder.record(MediaType.MUSIC, Mode.DOWNLOAD, 200, Long.MAX_VALUE);
-      assertEquals(9.223372036854776E18, count(registry, "MUSIC", "DOWNLOAD", 200));
-      assertEquals(3, count(registry, "MUSIC", "INLINE", 200));
-      assertEquals(3, count(registry, "VIDEO", "RANGE", 206));
+      assertEquals(9.223372036854776E18, count(registry, MUSIC_TYPE_NAME, DOWNLOAD_MODE_NAME, 200));
+      assertEquals(3, count(registry, MUSIC_TYPE_NAME, INLINE_MODE_NAME, 200));
+      assertEquals(3, count(registry, VIDEO_TYPE_NAME, RANGE_MODE_NAME, 206));
       assertEquals(109, registry.increments.get());
       assertEquals(36, registry.registrations.get());
       shape(registry);
@@ -162,9 +179,9 @@ class MediaBytesMetricRecorderTest {
 
   @Test
   void mediaByte003ModesAreClosedAndGeneratedFactoriesHaveIndependentTypedContracts() {
-    assertEquals(Mode.INLINE, Mode.parse("INLINE"));
-    assertEquals(Mode.DOWNLOAD, Mode.parse("DOWNLOAD"));
-    assertEquals(Mode.RANGE, Mode.parse("RANGE"));
+    assertEquals(Mode.INLINE, Mode.parse(INLINE_MODE_NAME));
+    assertEquals(Mode.DOWNLOAD, Mode.parse(DOWNLOAD_MODE_NAME));
+    assertEquals(Mode.RANGE, Mode.parse(RANGE_MODE_NAME));
     for (String unknown : List.of("", "inline", "ATTACHMENT", "unknown-mode"))
       assertEquals(
           "invalid media byte mode",
@@ -174,9 +191,9 @@ class MediaBytesMetricRecorderTest {
     var mutable = Mode.values();
     mutable[0] = Mode.RANGE;
     assertArrayEquals(new Mode[] {Mode.INLINE, Mode.DOWNLOAD, Mode.RANGE}, Mode.values());
-    assertSame(Mode.INLINE, Mode.valueOf("INLINE"));
-    assertSame(Mode.DOWNLOAD, Mode.valueOf("DOWNLOAD"));
-    assertSame(Mode.RANGE, Mode.valueOf("RANGE"));
+    assertSame(Mode.INLINE, Mode.valueOf(INLINE_MODE_NAME));
+    assertSame(Mode.DOWNLOAD, Mode.valueOf(DOWNLOAD_MODE_NAME));
+    assertSame(Mode.RANGE, Mode.valueOf(RANGE_MODE_NAME));
     assertThrows(IllegalArgumentException.class, () -> Mode.valueOf("inline"));
     assertThrows(NullPointerException.class, () -> Mode.valueOf(null));
     assertEquals(List.of(200, 206, 416, 503), MediaBytesMetricRecorder.statuses());
@@ -187,7 +204,7 @@ class MediaBytesMetricRecorderTest {
 
   @Test
   void mediaByte004NullUnknownAndNegativeAreRejectedBeforeAnyIncrementInEitherMode() {
-    for (String monitoring : List.of("DEBUG", "STANDARD"))
+    for (String monitoring : List.of(DEBUG_MODE, "STANDARD"))
       try (var registry = new Registry()) {
         var recorder = new MediaBytesMetricRecorder(registry, monitoring);
         recorder.record(MediaType.AUDIO, Mode.INLINE, 200, 7);
@@ -218,9 +235,9 @@ class MediaBytesMetricRecorderTest {
               IllegalArgumentException.class,
               () -> recorder.record(MediaType.AUDIO, Mode.INLINE, 200, bytes));
         assertEquals(before, registry.increments.get());
-        if (monitoring.equals("DEBUG")) {
+        if (monitoring.equals(DEBUG_MODE)) {
           assertTrue(recorder.detailedMetricsRequested());
-          assertEquals(7, count(registry, "AUDIO", "INLINE", 200));
+          assertEquals(7, count(registry, AUDIO_TYPE_NAME, INLINE_MODE_NAME, 200));
           shape(registry);
         } else {
           assertFalse(recorder.detailedMetricsRequested());
@@ -233,7 +250,8 @@ class MediaBytesMetricRecorderTest {
         assertEquals(0, registry.closes.get());
       }
     try (var registry = new Registry()) {
-      assertThrows(NullPointerException.class, () -> new MediaBytesMetricRecorder(null, "DEBUG"));
+      assertThrows(
+          NullPointerException.class, () -> new MediaBytesMetricRecorder(null, DEBUG_MODE));
       assertThrows(NullPointerException.class, () -> new MediaBytesMetricRecorder(registry, null));
       for (String monitoring : List.of("", "debug", "unknown-mode"))
         assertEquals(
@@ -256,10 +274,10 @@ class MediaBytesMetricRecorderTest {
         assertSame(
             problem,
             assertThrows(
-                problem.getClass(), () -> new MediaBytesMetricRecorder(registry, "DEBUG")));
+                problem.getClass(), () -> new MediaBytesMetricRecorder(registry, DEBUG_MODE)));
         assertEquals(2, registry.registrations.get());
         assertEquals(1, registry.getMeters().size());
-        assertEquals(0, count(registry, "AUDIO", "INLINE", 200));
+        assertEquals(0, count(registry, AUDIO_TYPE_NAME, INLINE_MODE_NAME, 200));
         assertEquals(0, registry.increments.get());
         assertEquals(0, registry.closes.get());
       } finally {
@@ -276,7 +294,7 @@ class MediaBytesMetricRecorderTest {
       for (boolean after : List.of(false, true)) {
         var registry = new Registry();
         try {
-          var recorder = new MediaBytesMetricRecorder(registry, "DEBUG");
+          var recorder = new MediaBytesMetricRecorder(registry, DEBUG_MODE);
           registry.incrementFailure = Optional.of(problem);
           registry.failAfter = after;
           assertSame(
@@ -284,8 +302,8 @@ class MediaBytesMetricRecorderTest {
               assertThrows(
                   problem.getClass(), () -> recorder.record(MediaType.AUDIO, Mode.INLINE, 200, 3)));
           assertEquals(1, registry.increments.get());
-          assertEquals(after ? 3 : 0, count(registry, "AUDIO", "INLINE", 200));
-          assertEquals(0, count(registry, "VIDEO", "RANGE", 206));
+          assertEquals(after ? 3 : 0, count(registry, AUDIO_TYPE_NAME, INLINE_MODE_NAME, 200));
+          assertEquals(0, count(registry, VIDEO_TYPE_NAME, RANGE_MODE_NAME, 206));
           assertEquals(0, registry.closes.get());
           shape(registry);
         } finally {
@@ -301,7 +319,7 @@ class MediaBytesMetricRecorderTest {
     try (var registry = new Registry();
         var otherRegistry = new Registry();
         var executor = Executors.newFixedThreadPool(8)) {
-      var recorder = new MediaBytesMetricRecorder(registry, "DEBUG");
+      var recorder = new MediaBytesMetricRecorder(registry, DEBUG_MODE);
       Map<String, Long> expected = new HashMap<>();
       var tasks = new ArrayList<Callable<Void>>();
       for (int index = 0; index < 64; index++) {
@@ -326,11 +344,12 @@ class MediaBytesMetricRecorderTest {
                     .doubleValue(),
                 count(registry, type.name(), mode.name(), status));
       assertEquals(64, registry.increments.get());
-      var other = new MediaBytesMetricRecorder(otherRegistry, "DEBUG");
+      var other = new MediaBytesMetricRecorder(otherRegistry, DEBUG_MODE);
       other.record(MediaType.AUDIO, Mode.INLINE, 200, 7);
-      assertEquals(7, count(otherRegistry, "AUDIO", "INLINE", 200));
+      assertEquals(7, count(otherRegistry, AUDIO_TYPE_NAME, INLINE_MODE_NAME, 200));
       assertEquals(
-          expected.get("AUDIO/INLINE/200").doubleValue(), count(registry, "AUDIO", "INLINE", 200));
+          expected.get("AUDIO/INLINE/200").doubleValue(),
+          count(registry, AUDIO_TYPE_NAME, INLINE_MODE_NAME, 200));
       shape(registry);
       shape(otherRegistry);
     }
@@ -340,16 +359,28 @@ class MediaBytesMetricRecorderTest {
   void mediaByte008ForeignGaugeIsNeverReplacedOrClosed() {
     try (var registry = new Registry()) {
       var foreign =
-          Gauge.builder("nk_media_bytes_total", new AtomicInteger(7), AtomicInteger::get)
-              .tags("media_type", "AUDIO", "mode", "INLINE", "status", "200")
+          Gauge.builder(MEDIA_BYTES_NAME, new AtomicInteger(7), AtomicInteger::get)
+              .tags(
+                  MEDIA_TYPE_LABEL,
+                  AUDIO_TYPE_NAME,
+                  MODE_LABEL,
+                  INLINE_MODE_NAME,
+                  STATUS_LABEL,
+                  "200")
               .register(registry);
       assertThrows(
-          IllegalArgumentException.class, () -> new MediaBytesMetricRecorder(registry, "DEBUG"));
+          IllegalArgumentException.class, () -> new MediaBytesMetricRecorder(registry, DEBUG_MODE));
       assertSame(
           foreign,
           registry
-              .get("nk_media_bytes_total")
-              .tags("media_type", "AUDIO", "mode", "INLINE", "status", "200")
+              .get(MEDIA_BYTES_NAME)
+              .tags(
+                  MEDIA_TYPE_LABEL,
+                  AUDIO_TYPE_NAME,
+                  MODE_LABEL,
+                  INLINE_MODE_NAME,
+                  STATUS_LABEL,
+                  "200")
               .gauge());
       assertEquals(7, foreign.value());
       assertEquals(0, registry.closes.get());

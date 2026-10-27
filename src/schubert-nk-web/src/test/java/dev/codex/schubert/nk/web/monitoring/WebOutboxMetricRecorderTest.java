@@ -29,6 +29,16 @@ import org.junit.jupiter.api.Test;
 
 /** WEBOBXMET001..008/1721, fixed literals and owned SDK only, never real DB/query/clock. */
 class WebOutboxMetricRecorderTest {
+  private static final String STORE_LABEL = "store";
+  private static final String WEB_SERVICE_VALUE = "WEB";
+  private static final String STATUS_LABEL = "status";
+  private static final String OUTBOX_ROWS_NAME = "nk_outbox_rows";
+  private static final String OUTBOX_AGE_NAME = "nk_outbox_oldest_seconds";
+  private static final String PENDING_STATUS = "PENDING";
+  private static final String SENT_STATUS = "SENT";
+  private static final String ERROR_STATUS = "ERROR";
+  private static final String DEBUG_MODE = "DEBUG";
+
   static final class Registry extends SimpleMeterRegistry implements AutoCloseable {
     final AtomicInteger factories = new AtomicInteger();
     final AtomicInteger closes = new AtomicInteger();
@@ -66,12 +76,16 @@ class WebOutboxMetricRecorderTest {
   }
 
   static double gauge(Registry registry, String name, String status) {
-    return registry.get(name).tags("store", "WEB", "status", status).gauge().value();
+    return registry
+        .get(name)
+        .tags(STORE_LABEL, WEB_SERVICE_VALUE, STATUS_LABEL, status)
+        .gauge()
+        .value();
   }
 
   static void unknown(Registry registry) {
-    for (String name : List.of("nk_outbox_rows", "nk_outbox_oldest_seconds"))
-      for (String status : List.of("PENDING", "SENT", "ERROR"))
+    for (String name : List.of(OUTBOX_ROWS_NAME, OUTBOX_AGE_NAME))
+      for (String status : List.of(PENDING_STATUS, SENT_STATUS, ERROR_STATUS))
         assertTrue(Double.isNaN(gauge(registry, name, status)));
   }
 
@@ -83,18 +97,18 @@ class WebOutboxMetricRecorderTest {
       double pendingAge,
       double sentAge,
       double errorAge) {
-    assertEquals((double) pending, gauge(registry, "nk_outbox_rows", "PENDING"));
-    assertEquals((double) sent, gauge(registry, "nk_outbox_rows", "SENT"));
-    assertEquals((double) error, gauge(registry, "nk_outbox_rows", "ERROR"));
-    assertEquals(pendingAge, gauge(registry, "nk_outbox_oldest_seconds", "PENDING"));
-    assertEquals(sentAge, gauge(registry, "nk_outbox_oldest_seconds", "SENT"));
-    assertEquals(errorAge, gauge(registry, "nk_outbox_oldest_seconds", "ERROR"));
+    assertEquals((double) pending, gauge(registry, OUTBOX_ROWS_NAME, PENDING_STATUS));
+    assertEquals((double) sent, gauge(registry, OUTBOX_ROWS_NAME, SENT_STATUS));
+    assertEquals((double) error, gauge(registry, OUTBOX_ROWS_NAME, ERROR_STATUS));
+    assertEquals(pendingAge, gauge(registry, OUTBOX_AGE_NAME, PENDING_STATUS));
+    assertEquals(sentAge, gauge(registry, OUTBOX_AGE_NAME, SENT_STATUS));
+    assertEquals(errorAge, gauge(registry, OUTBOX_AGE_NAME, ERROR_STATUS));
   }
 
   @Test
   void webObxMet001OnlySixFixedWebStoreGaugesDistinguishUnknownAndCompleteKnownValues() {
     try (var registry = new Registry()) {
-      var metrics = new WebOutboxMetricRecorder(registry, "DEBUG");
+      var metrics = new WebOutboxMetricRecorder(registry, DEBUG_MODE);
       assertTrue(metrics.detailedMetricsRequested());
       assertTrue(metrics.snapshot().isEmpty());
       unknown(registry);
@@ -104,10 +118,10 @@ class WebOutboxMetricRecorderTest {
         var id = meter.getId();
         assertEquals(Meter.Type.GAUGE, id.getType());
         assertEquals(
-            Set.of("store", "status"),
+            Set.of(STORE_LABEL, STATUS_LABEL),
             id.getTags().stream().map(t -> t.getKey()).collect(Collectors.toSet()));
-        assertEquals("WEB", id.getTag("store"));
-        assertTrue(actual.add(id.getName() + "/" + id.getTag("status")));
+        assertEquals(WEB_SERVICE_VALUE, id.getTag(STORE_LABEL));
+        assertTrue(actual.add(id.getName() + "/" + id.getTag(STATUS_LABEL)));
       }
       assertEquals(
           Set.of(
@@ -171,22 +185,22 @@ class WebOutboxMetricRecorderTest {
       assertTrue(Double.isFinite(max.ageSeconds(status)));
     }
     try (var registry = new Registry()) {
-      var metrics = new WebOutboxMetricRecorder(registry, "DEBUG");
+      var metrics = new WebOutboxMetricRecorder(registry, DEBUG_MODE);
       metrics.record(max);
-      assertEquals(9.223372036854776E18, gauge(registry, "nk_outbox_rows", "PENDING"));
-      assertEquals(9.223372036854776E18, gauge(registry, "nk_outbox_oldest_seconds", "ERROR"));
+      assertEquals(9.223372036854776E18, gauge(registry, OUTBOX_ROWS_NAME, PENDING_STATUS));
+      assertEquals(9.223372036854776E18, gauge(registry, OUTBOX_AGE_NAME, ERROR_STATUS));
     }
   }
 
   @Test
   void webObxMet003ThreeTypedStatusesAndGeneratedFactoriesRejectUnknownAndDoNotAliasArrays() {
     assertArrayEquals(new Status[] {Status.PENDING, Status.SENT, Status.ERROR}, Status.values());
-    assertEquals(Status.PENDING, Status.parse("PENDING"));
-    assertEquals(Status.SENT, Status.parse("SENT"));
-    assertEquals(Status.ERROR, Status.parse("ERROR"));
-    assertEquals(Status.PENDING, Status.valueOf("PENDING"));
-    assertEquals(Status.SENT, Status.valueOf("SENT"));
-    assertEquals(Status.ERROR, Status.valueOf("ERROR"));
+    assertEquals(Status.PENDING, Status.parse(PENDING_STATUS));
+    assertEquals(Status.SENT, Status.parse(SENT_STATUS));
+    assertEquals(Status.ERROR, Status.parse(ERROR_STATUS));
+    assertEquals(Status.PENDING, Status.valueOf(PENDING_STATUS));
+    assertEquals(Status.SENT, Status.valueOf(SENT_STATUS));
+    assertEquals(Status.ERROR, Status.valueOf(ERROR_STATUS));
     var values = Status.values();
     values[0] = Status.ERROR;
     assertEquals(Status.PENDING, Status.values()[0]);
@@ -206,7 +220,7 @@ class WebOutboxMetricRecorderTest {
     assertThrows(NullPointerException.class, () -> sample.age(null));
     assertThrows(NullPointerException.class, () -> sample.ageSeconds(null));
     try (var registry = new Registry()) {
-      var metrics = new WebOutboxMetricRecorder(registry, "DEBUG");
+      var metrics = new WebOutboxMetricRecorder(registry, DEBUG_MODE);
       metrics.record(sample);
       assertThrows(NullPointerException.class, () -> metrics.record(null));
       assertSame(sample, metrics.snapshot().orElseThrow());
@@ -218,7 +232,7 @@ class WebOutboxMetricRecorderTest {
       values(registry, 0, 0, 0, 0, 0, 0);
     }
     try (var registry = new Registry()) {
-      assertThrows(NullPointerException.class, () -> new WebOutboxMetricRecorder(null, "DEBUG"));
+      assertThrows(NullPointerException.class, () -> new WebOutboxMetricRecorder(null, DEBUG_MODE));
       assertThrows(NullPointerException.class, () -> new WebOutboxMetricRecorder(registry, null));
       for (String mode : List.of("", "debug", "unknown"))
         assertEquals(
@@ -246,10 +260,11 @@ class WebOutboxMetricRecorderTest {
       try {
         assertSame(
             failure,
-            assertThrows(failure.getClass(), () -> new WebOutboxMetricRecorder(registry, "DEBUG")));
+            assertThrows(
+                failure.getClass(), () -> new WebOutboxMetricRecorder(registry, DEBUG_MODE)));
         assertEquals(2, registry.factories.get());
         assertEquals(1, registry.getMeters().size());
-        assertTrue(Double.isNaN(gauge(registry, "nk_outbox_rows", "PENDING")));
+        assertTrue(Double.isNaN(gauge(registry, OUTBOX_ROWS_NAME, PENDING_STATUS)));
         assertEquals(0, registry.closes.get());
       } finally {
         registry.close();
@@ -304,7 +319,7 @@ class WebOutboxMetricRecorderTest {
     try (var registry = new Registry();
         var other = new Registry();
         var pool = Executors.newFixedThreadPool(8)) {
-      var metrics = new WebOutboxMetricRecorder(registry, "DEBUG");
+      var metrics = new WebOutboxMetricRecorder(registry, DEBUG_MODE);
       var oracle = new IdentityHashMap<Observation, long[]>();
       var tasks = new ArrayList<Callable<Void>>();
       for (int i = 1; i <= 64; i++) {
@@ -327,7 +342,7 @@ class WebOutboxMetricRecorderTest {
       var expected = oracle.get(selected);
       values(
           registry, expected[0], expected[1], expected[2], expected[0], expected[1], expected[2]);
-      var independent = new WebOutboxMetricRecorder(other, "DEBUG");
+      var independent = new WebOutboxMetricRecorder(other, DEBUG_MODE);
       assertTrue(independent.snapshot().isEmpty());
       unknown(other);
       independent.record(
@@ -343,15 +358,18 @@ class WebOutboxMetricRecorderTest {
   void webObxMet008ForeignCounterCannotBeReplacedByGaugeOrClosed() {
     try (var registry = new Registry()) {
       var foreign =
-          Counter.builder("nk_outbox_rows")
-              .tags("store", "WEB", "status", "PENDING")
+          Counter.builder(OUTBOX_ROWS_NAME)
+              .tags(STORE_LABEL, WEB_SERVICE_VALUE, STATUS_LABEL, PENDING_STATUS)
               .register(registry);
       foreign.increment(7);
       assertThrows(
-          IllegalArgumentException.class, () -> new WebOutboxMetricRecorder(registry, "DEBUG"));
+          IllegalArgumentException.class, () -> new WebOutboxMetricRecorder(registry, DEBUG_MODE));
       assertSame(
           foreign,
-          registry.get("nk_outbox_rows").tags("store", "WEB", "status", "PENDING").counter());
+          registry
+              .get(OUTBOX_ROWS_NAME)
+              .tags(STORE_LABEL, WEB_SERVICE_VALUE, STATUS_LABEL, PENDING_STATUS)
+              .counter());
       assertEquals(7, foreign.count());
       assertEquals(0, registry.closes.get());
     }
