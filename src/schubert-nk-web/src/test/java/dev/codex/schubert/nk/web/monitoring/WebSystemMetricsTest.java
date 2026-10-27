@@ -24,6 +24,11 @@ import org.junit.jupiter.api.Test;
 
 /** WEBSYS001..014/1791: own JVM public observations and independent binder ports, no target IO. */
 class WebSystemMetricsTest {
+  private static final int FIRST_BINDER_ORDER = 1;
+  private static final String PROCESS_CPU_TIME = "process.cpu.time";
+  private static final String DEBUG_MODE = "DEBUG";
+  private static final String STANDARD_MODE = "STANDARD";
+  private static final String FAILURE_FIXTURE = "fixture";
   private final WebSystemMetrics installer = new WebSystemMetrics();
 
   private static class Registry extends SimpleMeterRegistry implements AutoCloseable {
@@ -64,7 +69,7 @@ class WebSystemMetricsTest {
             Set.of(
                 "system.cpu.count",
                 "process.cpu.usage",
-                "process.cpu.time",
+                PROCESS_CPU_TIME,
                 "process.files.open",
                 "process.files.max")));
     assertFalse(names.stream().anyMatch(n -> n.startsWith("nk_") || n.startsWith("jvm.")));
@@ -72,7 +77,7 @@ class WebSystemMetricsTest {
     assertEquals(
         Runtime.getRuntime().availableProcessors(), source.get("system.cpu.count").gauge().value());
     assertNotNull(source.get("process.cpu.usage").gauge());
-    assertTrue(source.get("process.cpu.time").functionCounter().count() >= 0);
+    assertTrue(source.get(PROCESS_CPU_TIME).functionCounter().count() >= 0);
     assertTrue(source.get("process.files.open").gauge().value() >= 0);
     var os =
         assertInstanceOf(
@@ -85,17 +90,17 @@ class WebSystemMetricsTest {
   @Test
   void websys001ActualStandardCpuFdAndIndependentCpuTimeBracket() {
     try (var source = new Registry()) {
-      installer.bind(source, "DEBUG");
+      installer.bind(source, DEBUG_MODE);
       namespaces(source);
       var os =
           assertInstanceOf(
               com.sun.management.OperatingSystemMXBean.class,
               ManagementFactory.getOperatingSystemMXBean());
       long before = os.getProcessCpuTime();
-      double actual = source.get("process.cpu.time").functionCounter().count();
+      double actual = source.get(PROCESS_CPU_TIME).functionCounter().count();
       long after = os.getProcessCpuTime();
       assertTrue(actual >= before && actual <= after);
-      assertEquals("ns", source.get("process.cpu.time").functionCounter().getId().getBaseUnit());
+      assertEquals("ns", source.get(PROCESS_CPU_TIME).functionCounter().getId().getBaseUnit());
       assertFalse(source.isClosed());
       assertEquals(0, source.closes.get());
     }
@@ -108,12 +113,12 @@ class WebSystemMetricsTest {
       source.reads.set(0);
       WebSystemMetrics.install(
           source,
-          "STANDARD",
+          STANDARD_MODE,
           () -> {
             calls.incrementAndGet();
             throw new AssertionError("not constructed");
           });
-      installer.bind(source, "STANDARD");
+      installer.bind(source, STANDARD_MODE);
       assertEquals(0, calls.get());
       assertEquals(0, source.reads.get());
       assertEquals(0, source.closes.get());
@@ -132,12 +137,12 @@ class WebSystemMetricsTest {
             actual -> {
               assertSame(source, actual);
               calls.add(order);
-              if (order == 1) binders.clear();
+              if (order == FIRST_BINDER_ORDER) binders.clear();
             });
       }
       WebSystemMetrics.install(
           source,
-          "DEBUG",
+          DEBUG_MODE,
           () -> {
             factories.incrementAndGet();
             return binders;
@@ -152,11 +157,11 @@ class WebSystemMetricsTest {
 
   @Test
   void websys004NullBoundariesRejectWithoutBinding() {
-    assertThrows(NullPointerException.class, () -> installer.bind(null, "STANDARD"));
+    assertThrows(NullPointerException.class, () -> installer.bind(null, STANDARD_MODE));
     try (var source = new Registry()) {
       assertThrows(NullPointerException.class, () -> installer.bind(source, null));
       assertThrows(
-          NullPointerException.class, () -> WebSystemMetrics.install(source, "DEBUG", null));
+          NullPointerException.class, () -> WebSystemMetrics.install(source, DEBUG_MODE, null));
       assertEquals(0, source.closes.get());
     }
   }
@@ -199,7 +204,7 @@ class WebSystemMetricsTest {
         () ->
             WebSystemMetrics.install(
                 source,
-                "DEBUG",
+                DEBUG_MODE,
                 () -> {
                   factories.incrementAndGet();
                   return two(
@@ -217,11 +222,13 @@ class WebSystemMetricsTest {
     try (var source = new Registry()) {
       var bound = new AtomicInteger();
       assertThrows(
-          NullPointerException.class, () -> WebSystemMetrics.install(source, "DEBUG", () -> null));
+          NullPointerException.class,
+          () -> WebSystemMetrics.install(source, DEBUG_MODE, () -> null));
       var list = new ArrayList<MeterBinder>(two(actual -> bound.incrementAndGet()));
       list.set(1, null);
       assertThrows(
-          NullPointerException.class, () -> WebSystemMetrics.install(source, "DEBUG", () -> list));
+          NullPointerException.class,
+          () -> WebSystemMetrics.install(source, DEBUG_MODE, () -> list));
       assertEquals(0, bound.get());
       assertFalse(source.isClosed());
     }
@@ -238,7 +245,7 @@ class WebSystemMetricsTest {
             "invalid system binder count",
             assertThrows(
                     IllegalArgumentException.class,
-                    () -> WebSystemMetrics.install(source, "DEBUG", () -> list))
+                    () -> WebSystemMetrics.install(source, DEBUG_MODE, () -> list))
                 .getMessage());
       }
       assertEquals(0, bound.get());
@@ -249,8 +256,8 @@ class WebSystemMetricsTest {
   @Test
   void websys009FactoryRuntimeAndErrorKeepIdentity() {
     try (var source = new Registry()) {
-      var failure = new IllegalStateException("fixture");
-      var fatal = new AssertionError("fixture");
+      var failure = new IllegalStateException(FAILURE_FIXTURE);
+      var fatal = new AssertionError(FAILURE_FIXTURE);
       assertSame(
           failure,
           assertThrows(
@@ -258,7 +265,7 @@ class WebSystemMetricsTest {
               () ->
                   WebSystemMetrics.install(
                       source,
-                      "DEBUG",
+                      DEBUG_MODE,
                       () -> {
                         throw failure;
                       })));
@@ -269,7 +276,7 @@ class WebSystemMetricsTest {
               () ->
                   WebSystemMetrics.install(
                       source,
-                      "DEBUG",
+                      DEBUG_MODE,
                       () -> {
                         throw fatal;
                       })));
@@ -285,7 +292,7 @@ class WebSystemMetricsTest {
       try (var source = new Registry()) {
         var events = new ArrayList<Integer>();
         var binders = new ArrayList<MeterBinder>();
-        var failure = new IllegalStateException("fixture");
+        var failure = new IllegalStateException(FAILURE_FIXTURE);
         for (int n = 0; n < 2; n++) {
           final int position = n;
           binders.add(
@@ -299,7 +306,7 @@ class WebSystemMetricsTest {
             failure,
             assertThrows(
                 IllegalStateException.class,
-                () -> WebSystemMetrics.install(source, "DEBUG", () -> binders)));
+                () -> WebSystemMetrics.install(source, DEBUG_MODE, () -> binders)));
         assertEquals(java.util.stream.IntStream.rangeClosed(0, failed).boxed().toList(), events);
         assertFalse(source.isClosed());
         assertEquals(0, source.closes.get());
@@ -314,7 +321,7 @@ class WebSystemMetricsTest {
       try (var source = new Registry()) {
         var events = new ArrayList<Integer>();
         var binders = new ArrayList<MeterBinder>();
-        var failure = new AssertionError("fixture");
+        var failure = new AssertionError(FAILURE_FIXTURE);
         for (int n = 0; n < 2; n++) {
           final int position = n;
           binders.add(
@@ -327,7 +334,7 @@ class WebSystemMetricsTest {
             failure,
             assertThrows(
                 AssertionError.class,
-                () -> WebSystemMetrics.install(source, "DEBUG", () -> binders)));
+                () -> WebSystemMetrics.install(source, DEBUG_MODE, () -> binders)));
         assertEquals(java.util.stream.IntStream.rangeClosed(0, failed).boxed().toList(), events);
         assertFalse(source.isClosed());
         assertEquals(0, source.closes.get());
@@ -344,7 +351,7 @@ class WebSystemMetricsTest {
     var factories = new AtomicInteger();
     WebSystemMetrics.install(
         source,
-        "STANDARD",
+        STANDARD_MODE,
         () -> {
           factories.incrementAndGet();
           return two(
@@ -352,7 +359,7 @@ class WebSystemMetricsTest {
                 throw new AssertionError("no binding");
               });
         });
-    installer.bind(source, "STANDARD");
+    installer.bind(source, STANDARD_MODE);
     assertEquals(0, factories.get());
     assertEquals(0, source.reads.get());
     assertEquals(closes, source.closes.get());
@@ -362,8 +369,8 @@ class WebSystemMetricsTest {
   void websys013SameInstanceUsesDistinctRegistryOwners() {
     var first = new Registry();
     try (var other = new Registry()) {
-      installer.bind(first, "DEBUG");
-      installer.bind(other, "DEBUG");
+      installer.bind(first, DEBUG_MODE);
+      installer.bind(other, DEBUG_MODE);
       namespaces(first);
       namespaces(other);
       assertFalse(first.getMeters().isEmpty());
@@ -390,7 +397,7 @@ class WebSystemMetricsTest {
                     var local = new AtomicInteger();
                     WebSystemMetrics.install(
                         source,
-                        "DEBUG",
+                        DEBUG_MODE,
                         () ->
                             two(
                                 actual -> {
