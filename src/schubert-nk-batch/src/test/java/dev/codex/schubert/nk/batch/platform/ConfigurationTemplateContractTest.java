@@ -20,18 +20,24 @@ import org.junit.jupiter.api.Test;
 
 /** Source text only, not runtime/render/permission proof. PT-OPS-CONFIG-SUP001..004/spec1556. */
 class ConfigurationTemplateContractTest {
+  private static final String COMMON_TEMPLATE = "common.yml.template";
+  private static final String API_TEMPLATE = "api.yml.template";
+  private static final String WEB_TEMPLATE = "web.yml.template";
+  private static final String BATCH_TEMPLATE = "batch.yml.template";
+  private static final String API_ENV_TEMPLATE = "api.env.template";
+  private static final String INSPECTOR_ENV_TEMPLATE = "inbox-inspector.env.template";
   private static final List<String> FILES =
       List.of(
-          "common.yml.template",
-          "api.yml.template",
-          "web.yml.template",
-          "batch.yml.template",
-          "api.env.template",
+          COMMON_TEMPLATE,
+          API_TEMPLATE,
+          WEB_TEMPLATE,
+          BATCH_TEMPLATE,
+          API_ENV_TEMPLATE,
           "web.env.template",
-          "inbox-inspector.env.template");
+          INSPECTOR_ENV_TEMPLATE);
   private static final Pattern SCALAR =
       Pattern.compile("^\"(nk\\.[a-z0-9.-]+)\": (?:\"([^\"\\\\]*)\"|([0-9]+))$");
-  private static final Map<String, String> BATCH =
+  private static final Map<String, String> BATCH_DEFAULTS =
       Map.ofEntries(
           Map.entry("nk.batch.zone", "Asia/Tokyo"),
           Map.entry("nk.batch.schedule", "05:00"),
@@ -142,13 +148,13 @@ class ConfigurationTemplateContractTest {
   }
 
   private static void batch(Map<String, String> files) {
-    exact(yaml(files.get("batch.yml.template")), BATCH);
+    exact(yaml(files.get(BATCH_TEMPLATE)), BATCH_DEFAULTS);
   }
 
   private static void cross(Map<String, String> files) {
-    exact(yaml(files.get("common.yml.template")), COMMON);
-    var api = yaml(files.get("api.yml.template"));
-    var web = yaml(files.get("web.yml.template"));
+    exact(yaml(files.get(COMMON_TEMPLATE)), COMMON);
+    var api = yaml(files.get(API_TEMPLATE));
+    var web = yaml(files.get(WEB_TEMPLATE));
     assertEquals(API_KEYS, api.keySet());
     assertEquals(WEB_KEYS, web.keySet());
     for (String key : API_KEYS) {
@@ -169,7 +175,7 @@ class ConfigurationTemplateContractTest {
     assertEquals(asset, quoted(web, "nk.web.storage.asset-root"));
     assertEquals(transfer, quoted(api, "nk.api.storage.transfer-root"));
     assertEquals(transfer, quoted(web, "nk.web.storage.transfer-root"));
-    String backup = quoted(yaml(files.get("batch.yml.template")), "nk.batch.backup-root");
+    String backup = quoted(yaml(files.get(BATCH_TEMPLATE)), "nk.batch.backup-root");
     var roots = List.of(Path.of(asset), Path.of(transfer), Path.of(backup));
     for (var root : roots) {
       assertTrue(root.isAbsolute());
@@ -181,11 +187,11 @@ class ConfigurationTemplateContractTest {
   }
 
   private static void env(Map<String, String> files) {
-    assertEquals(CONFIG_ENV, files.get("api.env.template"));
+    assertEquals(CONFIG_ENV, files.get(API_ENV_TEMPLATE));
     assertEquals(CONFIG_ENV, files.get("web.env.template"));
     assertEquals(
         INSPECTOR_ENV,
-        files.get("inbox-inspector.env.template"),
+        files.get(INSPECTOR_ENV_TEMPLATE),
         "source placeholders only, never runtime authority");
   }
 
@@ -221,45 +227,34 @@ class ConfigurationTemplateContractTest {
   @Test
   void configSup004IndependentSourceOracleMutationCanaries() throws IOException {
     var files = sources();
-    String batch = files.get("batch.yml.template");
+    String batch = files.get(BATCH_TEMPLATE);
     reject(
         files,
-        "batch.yml.template",
+        BATCH_TEMPLATE,
         batch.replace(
             "\"nk.batch.backup-generations\": \"7\"", "\"nk.batch.backup-generations\": \"6\""));
-    reject(
-        files, "batch.yml.template", batch + "\"nk.batch.secret\": \"SYNTHETIC_PUBLIC_CANARY\"\n");
-    reject(files, "batch.yml.template", batch + "\"nk.batch.zone\": \"Asia/Tokyo\"\n");
+    reject(files, BATCH_TEMPLATE, batch + "\"nk.batch.secret\": \"SYNTHETIC_PUBLIC_CANARY\"\n");
+    reject(files, BATCH_TEMPLATE, batch + "\"nk.batch.zone\": \"Asia/Tokyo\"\n");
     reject(
         files,
-        "batch.yml.template",
+        BATCH_TEMPLATE,
         batch.replace(
             "\"nk.batch.backup-generations\": \"7\"", "\"nk.batch.backup-generations\": 7"));
-    reject(files, "batch.yml.template", batch.replace("\"05:00\"", "\"04:00\""));
+    reject(files, BATCH_TEMPLATE, batch.replace("\"05:00\"", "\"04:00\""));
+    reject(files, COMMON_TEMPLATE, files.get(COMMON_TEMPLATE).replace("Asia/Tokyo", "UTC"));
+    reject(files, WEB_TEMPLATE, files.get(WEB_TEMPLATE).replace("/data/assets", "/data/transfer"));
+    reject(
+        files, API_TEMPLATE, files.get(API_TEMPLATE).replace("127.0.0.1:5432", "localhost:5432"));
     reject(
         files,
-        "common.yml.template",
-        files.get("common.yml.template").replace("Asia/Tokyo", "UTC"));
+        API_ENV_TEMPLATE,
+        files.get(API_ENV_TEMPLATE) + "JAVA_TOOL_OPTIONS=-Dsynthetic=true\n");
     reject(
         files,
-        "web.yml.template",
-        files.get("web.yml.template").replace("/data/assets", "/data/transfer"));
+        INSPECTOR_ENV_TEMPLATE,
+        files.get(INSPECTOR_ENV_TEMPLATE) + "NK_INSPECTOR_RUN_ID=UNSET\n");
     reject(
-        files,
-        "api.yml.template",
-        files.get("api.yml.template").replace("127.0.0.1:5432", "localhost:5432"));
-    reject(
-        files,
-        "api.env.template",
-        files.get("api.env.template") + "JAVA_TOOL_OPTIONS=-Dsynthetic=true\n");
-    reject(
-        files,
-        "inbox-inspector.env.template",
-        files.get("inbox-inspector.env.template") + "NK_INSPECTOR_RUN_ID=UNSET\n");
-    reject(
-        files,
-        "batch.yml.template",
-        batch.replace("/srv/schubert-nk/backup", "/srv/schubert-nk/data"));
+        files, BATCH_TEMPLATE, batch.replace("/srv/schubert-nk/backup", "/srv/schubert-nk/data"));
     assertThrows(NullPointerException.class, () -> yaml(null));
   }
 }
