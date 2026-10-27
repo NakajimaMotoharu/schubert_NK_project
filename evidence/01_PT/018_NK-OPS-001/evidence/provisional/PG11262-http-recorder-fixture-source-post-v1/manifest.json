@@ -1,0 +1,105 @@
+{
+  "actualExit": 0,
+  "allMainAndOtherInputsPreserved": true,
+  "allOriginalOracleTokensRestored": true,
+  "coverage": null,
+  "effortPercent": null,
+  "externalActions": 0,
+  "invocation": {
+    "actualPythonCommand": [
+      "/usr/bin/python3",
+      "-B",
+      "tools/quality/pg11262_http_recorder_fixture_source_post.py"
+    ],
+    "arbitraryArgumentsRecorded": false,
+    "entrypointPath": "tools/quality/pg11262_http_recorder_fixture_source_post.py",
+    "entrypointSha256": "3f3ee212095512cd69462ea349a7712dbb0605b92e1440f92229668c473b9fc8",
+    "helperPath": "tools/quality/host_tool_invocation.py",
+    "helperSha256": "85d616a3db4ff47f4c95ae2e0dd57954bc2b09f28b8f2a685b986e5621545c46",
+    "libraryPath": "tools/quality/pg11262_http_recorder_fixture_source_post.py",
+    "librarySha256": "3f3ee212095512cd69462ea349a7712dbb0605b92e1440f92229668c473b9fc8",
+    "loadedProjectPythonSources": {
+      "tools/quality/classfile_code_metadata.py": "2227e1e8df1ff91b606f094c7ee64366023273ca740d4d47126ed0928190e2f0",
+      "tools/quality/g07_host_class_provenance_inputs.py": "a676cb3e4145177c3c243722d737592ce7d44c3f29cfe4f670662ef7651f046b",
+      "tools/quality/host_tool_invocation.py": "85d616a3db4ff47f4c95ae2e0dd57954bc2b09f28b8f2a685b986e5621545c46",
+      "tools/quality/pg10130_uid_oracle_preflight.py": "e80cb1d6d45d4e4c0cdb3cb792e0638119d936403de5c3e141429d338485758a",
+      "tools/quality/pg10332_result_profile_oracle_plan.py": "82c9b4f57dd517c1dbee639dbf4955c316beb89216cb9a8a66e78e0b9a322ad4",
+      "tools/quality/pg10339_result_profile_oracle_post_v2.py": "42f86287f5236d2ef1a2e10f54f5b0634e799a4e866b15eaf6738336a4ebabb0",
+      "tools/quality/pg10392_role_literal_plan.py": "e1af98abd59175d867d29b07a73d7b2e4c7112754603d1805ec0bfc4d9465ce8",
+      "tools/quality/pg10398_role_view_preflight.py": "31709d50a345f3e0843fa62ae0b4c6849885503eb3d81555b6bcc9605b486d56",
+      "tools/quality/pg11104_web_pure_value_source_post.py": "2713a232d4143cf94c39b865936368707d115c19649a469de35dfbd22ad70967",
+      "tools/quality/pg11262_http_recorder_fixture_source_post.py": "3f3ee212095512cd69462ea349a7712dbb0605b92e1440f92229668c473b9fc8",
+      "tools/quality/pg9906_user_query_oracle_source_post.py": "4f9bdaa17eea78a720c0f25b8af906f3f045fda590c8fea2a8868229403a98fa",
+      "tools/quality/pg9978_plain_core_quality_post.py": "c99cc753c6335c9f41e3eafe6a97c17521503739ba2cf80659b542a445dd48fa",
+      "tools/quality/public_java_digest_provenance.py": "dd47f8735a61ce849995633c3290a6ad047842ef3263829ce359db413778f7a0"
+    },
+    "provenance": "OBSERVED_SYS_ARGV_AND_ORIG_ARGV_NOT_RECONSTRUCTED"
+  },
+  "metadataNegativeVectors": 6,
+  "newAccepted": 0,
+  "originalOwnerFinallyAndTimeoutsRestored": true,
+  "ownedExecutorTwr": 1,
+  "planManifestSha256": "ab8d59ebfbb8c0f5cca8ce3a7cd32f336a470a561c8dddc0b3138eca33920c07",
+  "privateFieldRename": "DURATION_TO_DURATION_METRIC",
+  "productTestsExecuted": 0,
+  "referencesReplaced": 71,
+  "sourceBefore": "ef86a244b2f528a2d60bd0f22a94a853ce3146ff",
+  "sourceChanges": [
+    {
+      "beforeSha256": "3badb0cfe93173a3a54d63546bd5de437a62f3a942f48c2dbc5b7552b0222bba",
+      "constants": [
+        {
+          "id": "PMD-08214",
+          "literal": "\"service\"",
+          "name": "SERVICE_LABEL",
+          "references": 6
+        },
+        {
+          "id": "PMD-08215",
+          "literal": "\"WEB\"",
+          "name": "WEB_SERVICE_NAME",
+          "references": 5
+        },
+        {
+          "id": "PMD-08216",
+          "literal": "\"route\"",
+          "name": "ROUTE_LABEL",
+          "references": 6
+        },
+        {
+          "id": "PMD-08217",
+          "literal": "\"/login\"",
+          "name": "LOGIN_PATH",
+          "references": 12
+        },
+        {
+          "id": "PMD-08218",
+          "literal": "\"GET\"",
+          "name": "GET_METHOD",
+          "references": 20
+        },
+        {
+          "id": "PMD-08219",
+          "literal": "\"DEBUG\"",
+          "name": "DEBUG_MODE",
+          "references": 9
+        },
+        {
+          "id": "PMD-08220",
+          "literal": "\"2xx\"",
+          "name": "SUCCESS_STATUS_LABEL",
+          "references": 6
+        },
+        {
+          "id": "PMD-08223",
+          "literal": "\"/search\"",
+          "name": "SEARCH_PATH",
+          "references": 7
+        }
+      ],
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/HttpMetricRecorderTest.java",
+      "sha256": "8168e79aabf6711644e77179ddc3741a7767a1c30080a5e2c6dedc6b5e2a987f"
+    }
+  ],
+  "stringConstants": 8
+}

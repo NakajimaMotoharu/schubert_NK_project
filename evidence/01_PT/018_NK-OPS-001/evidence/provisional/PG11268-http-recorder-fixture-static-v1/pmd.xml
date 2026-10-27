@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pmd xmlns="http://pmd.sourceforge.net/report/2.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pmd.sourceforge.net/report/2.0.0 https://pmd.github.io/schema/report_2_0_0.xsd" version="7.28.0" timestamp="2026-10-27T10:46:40.989">
+<file name="/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/HttpMetricRecorderTest.java">
+<violation beginline="133" endline="133" begincolumn="15" endcolumn="43" rule="UseProperClassLoader" ruleset="Error Prone" package="dev.codex.schubert.nk.web.monitoring" class="HttpMetricRecorderTest.FaultRegistry" method="newTimer" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader" priority="3">
+In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.
+</violation>
+<violation beginline="372" endline="372" begincolumn="27" endcolumn="58" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.web.monitoring" class="HttpMetricRecorderTest" method="httpRec007ConcurrentActualProviderCounts" variable="executor" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="381" endline="381" begincolumn="29" endcolumn="76" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.web.monitoring" class="HttpMetricRecorderTest" method="httpRec007ConcurrentActualProviderCounts" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="384" endline="384" begincolumn="11" endcolumn="33" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.web.monitoring" class="HttpMetricRecorderTest" method="httpRec007ConcurrentActualProviderCounts" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="385" endline="385" begincolumn="22" endcolumn="69" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.web.monitoring" class="HttpMetricRecorderTest" method="httpRec007ConcurrentActualProviderCounts" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="464" endline="464" begincolumn="29" endcolumn="53" rule="UseConcurrentHashMap" ruleset="Multithreading" package="dev.codex.schubert.nk.web.monitoring" class="HttpMetricRecorderTest" method="httpRec010ExtremeRangeOrdersNeverWrapCumulativeTimerOrLoseSmallBuckets" variable="counts" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap" priority="3">
+If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation
+</violation>
+</file>
+</pmd>
