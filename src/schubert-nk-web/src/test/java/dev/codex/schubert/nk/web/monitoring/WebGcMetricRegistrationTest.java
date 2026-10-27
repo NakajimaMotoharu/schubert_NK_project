@@ -53,6 +53,7 @@ class WebGcMetricRegistrationTest {
   private static final class Fake extends JvmGcMetrics {
     final AtomicInteger bindInvocations = new AtomicInteger();
     final AtomicInteger closeInvocations = new AtomicInteger();
+    boolean closeConfirmed;
     Consumer<MeterRegistry> onBindCallback = source -> {};
     Runnable onCloseCallback = () -> {};
 
@@ -66,8 +67,10 @@ class WebGcMetricRegistrationTest {
     }
 
     public void close() {
+      closeConfirmed = false;
       closeInvocations.incrementAndGet();
       onCloseCallback.run();
+      closeConfirmed = true;
     }
   }
 
@@ -135,32 +138,38 @@ class WebGcMetricRegistrationTest {
       var events = new ArrayList<String>();
       var owned = new ArrayList<JvmGcMetrics>();
       var resource = new Fake();
-      resource.onBindCallback =
-          actual -> {
-            assertSame(source, actual);
-            assertEquals(List.of(resource), owned);
-            events.add("BIND");
-          };
-      resource.onCloseCallback = () -> events.add("CLOSE");
-      WebGcMetricRegistration.install(
-          source,
-          "DEBUG",
-          value -> {
-            assertSame(resource, value);
-            events.add("OWNER");
-            return owned.add(value);
-          },
-          () -> {
-            events.add("FACTORY");
-            return resource;
-          });
-      assertEquals(List.of("FACTORY", "OWNER", "BIND"), events);
-      assertEquals(1, resource.bindInvocations.get());
-      assertEquals(0, resource.closeInvocations.get());
-      owned.forEach(JvmGcMetrics::close);
-      assertEquals(List.of("FACTORY", "OWNER", "BIND", "CLOSE"), events);
-      assertEquals(1, resource.closeInvocations.get());
-      assertFalse(source.isClosed());
+      try {
+
+        resource.onBindCallback =
+            actual -> {
+              assertSame(source, actual);
+              assertEquals(List.of(resource), owned);
+              events.add("BIND");
+            };
+        resource.onCloseCallback = () -> events.add("CLOSE");
+        WebGcMetricRegistration.install(
+            source,
+            "DEBUG",
+            value -> {
+              assertSame(resource, value);
+              events.add("OWNER");
+              return owned.add(value);
+            },
+            () -> {
+              events.add("FACTORY");
+              return resource;
+            });
+        assertEquals(List.of("FACTORY", "OWNER", "BIND"), events);
+        assertEquals(1, resource.bindInvocations.get());
+        assertEquals(0, resource.closeInvocations.get());
+        owned.forEach(JvmGcMetrics::close);
+        assertEquals(List.of("FACTORY", "OWNER", "BIND", "CLOSE"), events);
+        assertEquals(1, resource.closeInvocations.get());
+        assertFalse(source.isClosed());
+
+      } finally {
+        if (!resource.closeConfirmed) resource.close();
+      }
     }
   }
 
@@ -290,26 +299,32 @@ class WebGcMetricRegistrationTest {
   void webgc009OwnerRejectMeansNoBindOrImplicitClose() {
     try (var source = new Registry()) {
       var resource = new Fake();
-      var owners = new AtomicInteger();
-      assertEquals(
-          "GC binding owner unavailable",
-          assertThrows(
-                  IllegalStateException.class,
-                  () ->
-                      WebGcMetricRegistration.install(
-                          source,
-                          "DEBUG",
-                          value -> {
-                            assertSame(resource, value);
-                            owners.incrementAndGet();
-                            return false;
-                          },
-                          () -> resource))
-              .getMessage());
-      assertEquals(1, owners.get());
-      assertEquals(0, resource.bindInvocations.get());
-      assertEquals(0, resource.closeInvocations.get());
-      assertFalse(source.isClosed());
+      try {
+
+        var owners = new AtomicInteger();
+        assertEquals(
+            "GC binding owner unavailable",
+            assertThrows(
+                    IllegalStateException.class,
+                    () ->
+                        WebGcMetricRegistration.install(
+                            source,
+                            "DEBUG",
+                            value -> {
+                              assertSame(resource, value);
+                              owners.incrementAndGet();
+                              return false;
+                            },
+                            () -> resource))
+                .getMessage());
+        assertEquals(1, owners.get());
+        assertEquals(0, resource.bindInvocations.get());
+        assertEquals(0, resource.closeInvocations.get());
+        assertFalse(source.isClosed());
+
+      } finally {
+        if (!resource.closeConfirmed) resource.close();
+      }
     }
   }
 
@@ -319,16 +334,22 @@ class WebGcMetricRegistrationTest {
       for (Throwable failure :
           List.of(new IllegalStateException("fixture"), new AssertionError("fixture"))) {
         var resource = new Fake();
-        assertSame(
-            failure,
-            assertThrows(
-                failure.getClass(),
-                () ->
-                    WebGcMetricRegistration.install(
-                        source, "DEBUG", value -> fail(failure), () -> resource)));
-        assertEquals(0, resource.bindInvocations.get());
-        assertEquals(0, resource.closeInvocations.get());
-        assertFalse(source.isClosed());
+        try {
+
+          assertSame(
+              failure,
+              assertThrows(
+                  failure.getClass(),
+                  () ->
+                      WebGcMetricRegistration.install(
+                          source, "DEBUG", value -> fail(failure), () -> resource)));
+          assertEquals(0, resource.bindInvocations.get());
+          assertEquals(0, resource.closeInvocations.get());
+          assertFalse(source.isClosed());
+
+        } finally {
+          if (!resource.closeConfirmed) resource.close();
+        }
       }
     }
   }
@@ -339,26 +360,33 @@ class WebGcMetricRegistrationTest {
       for (Throwable failure :
           List.of(new IllegalStateException("fixture"), new AssertionError("fixture"))) {
         var resource = new Fake();
-        var owned = new ArrayList<JvmGcMetrics>();
-        resource.onBindCallback =
-            actual -> {
-              assertSame(source, actual);
-              assertEquals(List.of(resource), owned);
-              fail(failure);
-            };
-        assertSame(
-            failure,
-            assertThrows(
-                failure.getClass(),
-                () ->
-                    WebGcMetricRegistration.install(source, "DEBUG", owned::add, () -> resource)));
-        assertEquals(List.of(resource), owned);
-        assertEquals(1, resource.bindInvocations.get());
-        assertEquals(0, resource.closeInvocations.get());
-        owned.forEach(JvmGcMetrics::close);
-        assertEquals(1, resource.closeInvocations.get());
-        assertFalse(source.isClosed());
-        assertEquals(0, source.closeInvocations.get());
+        try {
+
+          var owned = new ArrayList<JvmGcMetrics>();
+          resource.onBindCallback =
+              actual -> {
+                assertSame(source, actual);
+                assertEquals(List.of(resource), owned);
+                fail(failure);
+              };
+          assertSame(
+              failure,
+              assertThrows(
+                  failure.getClass(),
+                  () ->
+                      WebGcMetricRegistration.install(
+                          source, "DEBUG", owned::add, () -> resource)));
+          assertEquals(List.of(resource), owned);
+          assertEquals(1, resource.bindInvocations.get());
+          assertEquals(0, resource.closeInvocations.get());
+          owned.forEach(JvmGcMetrics::close);
+          assertEquals(1, resource.closeInvocations.get());
+          assertFalse(source.isClosed());
+          assertEquals(0, source.closeInvocations.get());
+
+        } finally {
+          if (!resource.closeConfirmed) resource.close();
+        }
       }
     }
   }
@@ -368,22 +396,34 @@ class WebGcMetricRegistrationTest {
     try (var first = new Registry();
         var other = new Registry()) {
       var one = new Fake();
-      var two = new Fake();
-      var owners1 = new ArrayList<JvmGcMetrics>();
-      var owners2 = new ArrayList<JvmGcMetrics>();
-      one.onBindCallback = actual -> assertSame(first, actual);
-      two.onBindCallback = actual -> assertSame(other, actual);
-      WebGcMetricRegistration.install(first, "DEBUG", owners1::add, () -> one);
-      WebGcMetricRegistration.install(other, "DEBUG", owners2::add, () -> two);
-      assertEquals(List.of(one), owners1);
-      assertEquals(List.of(two), owners2);
-      owners1.forEach(JvmGcMetrics::close);
-      assertEquals(1, one.closeInvocations.get());
-      assertEquals(0, two.closeInvocations.get());
-      owners2.forEach(JvmGcMetrics::close);
-      assertEquals(1, two.closeInvocations.get());
-      assertFalse(first.isClosed());
-      assertFalse(other.isClosed());
+      try {
+
+        var two = new Fake();
+        try {
+
+          var owners1 = new ArrayList<JvmGcMetrics>();
+          var owners2 = new ArrayList<JvmGcMetrics>();
+          one.onBindCallback = actual -> assertSame(first, actual);
+          two.onBindCallback = actual -> assertSame(other, actual);
+          WebGcMetricRegistration.install(first, "DEBUG", owners1::add, () -> one);
+          WebGcMetricRegistration.install(other, "DEBUG", owners2::add, () -> two);
+          assertEquals(List.of(one), owners1);
+          assertEquals(List.of(two), owners2);
+          owners1.forEach(JvmGcMetrics::close);
+          assertEquals(1, one.closeInvocations.get());
+          assertEquals(0, two.closeInvocations.get());
+          owners2.forEach(JvmGcMetrics::close);
+          assertEquals(1, two.closeInvocations.get());
+          assertFalse(first.isClosed());
+          assertFalse(other.isClosed());
+
+        } finally {
+          if (!two.closeConfirmed) two.close();
+        }
+
+      } finally {
+        if (!one.closeConfirmed) one.close();
+      }
     }
   }
 
@@ -398,19 +438,25 @@ class WebGcMetricRegistrationTest {
                 () -> {
                   try (var source = new Registry()) {
                     var resource = new Fake();
-                    var owned = new ArrayList<JvmGcMetrics>();
-                    resource.onBindCallback =
-                        actual -> {
-                          assertSame(source, actual);
-                          assertEquals(List.of(resource), owned);
-                          total.incrementAndGet();
-                        };
-                    WebGcMetricRegistration.install(source, "DEBUG", owned::add, () -> resource);
-                    assertEquals(1, resource.bindInvocations.get());
-                    assertEquals(0, resource.closeInvocations.get());
-                    owned.forEach(JvmGcMetrics::close);
-                    assertEquals(1, resource.closeInvocations.get());
-                    assertFalse(source.isClosed());
+                    try {
+
+                      var owned = new ArrayList<JvmGcMetrics>();
+                      resource.onBindCallback =
+                          actual -> {
+                            assertSame(source, actual);
+                            assertEquals(List.of(resource), owned);
+                            total.incrementAndGet();
+                          };
+                      WebGcMetricRegistration.install(source, "DEBUG", owned::add, () -> resource);
+                      assertEquals(1, resource.bindInvocations.get());
+                      assertEquals(0, resource.closeInvocations.get());
+                      owned.forEach(JvmGcMetrics::close);
+                      assertEquals(1, resource.closeInvocations.get());
+                      assertFalse(source.isClosed());
+
+                    } finally {
+                      if (!resource.closeConfirmed) resource.close();
+                    }
                   }
                 }));
       for (var job : jobs) job.get(10, TimeUnit.SECONDS);
@@ -423,29 +469,75 @@ class WebGcMetricRegistrationTest {
     try (var source = new Registry()) {
       for (boolean throwsFailure : List.of(false, true)) {
         var resource = new Fake();
-        var owned = new ArrayList<JvmGcMetrics>();
-        var failure = new IllegalStateException("fixture");
-        var actual =
-            assertThrows(
-                IllegalStateException.class,
-                () ->
-                    WebGcMetricRegistration.install(
-                        source,
-                        "DEBUG",
-                        value -> {
-                          owned.add(value);
-                          if (throwsFailure) throw failure;
-                          return false;
-                        },
-                        () -> resource));
-        if (throwsFailure) assertSame(failure, actual);
-        else assertEquals("GC binding owner unavailable", actual.getMessage());
-        assertEquals(List.of(resource), owned);
-        assertEquals(0, resource.bindInvocations.get());
-        assertEquals(0, resource.closeInvocations.get());
-        owned.forEach(JvmGcMetrics::close);
-        assertEquals(1, resource.closeInvocations.get());
-        assertFalse(source.isClosed());
+        try {
+
+          var owned = new ArrayList<JvmGcMetrics>();
+          var failure = new IllegalStateException("fixture");
+          var actual =
+              assertThrows(
+                  IllegalStateException.class,
+                  () ->
+                      WebGcMetricRegistration.install(
+                          source,
+                          "DEBUG",
+                          value -> {
+                            owned.add(value);
+                            if (throwsFailure) throw failure;
+                            return false;
+                          },
+                          () -> resource));
+          if (throwsFailure) assertSame(failure, actual);
+          else assertEquals("GC binding owner unavailable", actual.getMessage());
+          assertEquals(List.of(resource), owned);
+          assertEquals(0, resource.bindInvocations.get());
+          assertEquals(0, resource.closeInvocations.get());
+          owned.forEach(JvmGcMetrics::close);
+          assertEquals(1, resource.closeInvocations.get());
+          assertFalse(source.isClosed());
+
+        } finally {
+          if (!resource.closeConfirmed) resource.close();
+        }
+      }
+    }
+  }
+
+  @Test
+  void webgc015ConfirmedFixtureCloseIsNotRepeatedByCleanupGuard() {
+    var resource = new Fake();
+    try {
+      assertFalse(resource.closeConfirmed);
+      resource.close();
+      assertTrue(resource.closeConfirmed);
+      if (!resource.closeConfirmed) resource.close();
+      assertEquals(1, resource.closeInvocations.get());
+    } finally {
+      if (!resource.closeConfirmed) resource.close();
+    }
+  }
+
+  @Test
+  void webgc016FailedFixtureCloseRemainsUnconfirmedUntilExplicitRetry() {
+    for (boolean priorSuccess : List.of(false, true)) {
+      for (Throwable failure :
+          List.of(
+              new IllegalStateException("cleanup runtime fixture"),
+              new AssertionError("cleanup fatal fixture"))) {
+        var resource = new Fake();
+        try {
+          if (priorSuccess) resource.close();
+          resource.onCloseCallback = () -> fail(failure);
+          assertSame(failure, assertThrows(failure.getClass(), resource::close));
+          assertFalse(resource.closeConfirmed);
+          assertEquals(priorSuccess ? 2 : 1, resource.closeInvocations.get());
+          resource.onCloseCallback = () -> {};
+          if (!resource.closeConfirmed) resource.close();
+          assertTrue(resource.closeConfirmed);
+          assertEquals(priorSuccess ? 3 : 2, resource.closeInvocations.get());
+        } finally {
+          resource.onCloseCallback = () -> {};
+          if (!resource.closeConfirmed) resource.close();
+        }
       }
     }
   }
