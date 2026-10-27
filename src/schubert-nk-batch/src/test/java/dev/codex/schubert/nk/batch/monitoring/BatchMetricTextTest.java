@@ -31,6 +31,12 @@ import org.junit.jupiter.api.Test;
 
 /** BATCHTEXT001..024/1777: literal vectors/borrowed memory providers only. */
 class BatchMetricTextTest {
+  private static final String SUFFIX_LABEL = "suffix";
+  private static final String PART_SUFFIX = ".part";
+  private static final String DEBUG_MODE = "DEBUG";
+  private static final String COUNTER_SAMPLE_LINE = "2.5\n";
+  private static final String STANDARD_MODE = "STANDARD";
+  private static final String FAILURE_FIXTURE = "fixture";
   private static final String C = "nk_batch_runs_total";
   private static final String G = "nk_file_transfer_files";
   private static final String C_HEADER =
@@ -83,7 +89,7 @@ class BatchMetricTextTest {
   }
 
   private static List<Tag> gt() {
-    return List.of(Tag.of("suffix", ".part"));
+    return List.of(Tag.of(SUFFIX_LABEL, PART_SUFFIX));
   }
 
   private static NoopCounter counter(double value) {
@@ -104,7 +110,7 @@ class BatchMetricTextTest {
 
   private String text(Meter... values) {
     try (var source = new Registry(values)) {
-      return formatter.scrape(source, "DEBUG");
+      return formatter.scrape(source, DEBUG_MODE);
     }
   }
 
@@ -126,7 +132,7 @@ class BatchMetricTextTest {
 
   @Test
   void batchtext001LiteralCounterGoldenAndNoDuplicateSuffix() {
-    assertEquals(C_HEADER + C_ROW + "2.5\n", text(counter(2.5)));
+    assertEquals(C_HEADER + C_ROW + COUNTER_SAMPLE_LINE, text(counter(2.5)));
   }
 
   @Test
@@ -218,7 +224,7 @@ class BatchMetricTextTest {
 
   @Test
   void batchtext008NullSourceModeAndUnknownModeFail() {
-    assertThrows(NullPointerException.class, () -> formatter.scrape(null, "STANDARD"));
+    assertThrows(NullPointerException.class, () -> formatter.scrape(null, STANDARD_MODE));
     try (var source = new Registry()) {
       assertThrows(NullPointerException.class, () -> formatter.scrape(source, null));
       for (String mode : List.of("", "debug", "DEBUG ", "UNKNOWN"))
@@ -230,10 +236,10 @@ class BatchMetricTextTest {
   void batchtext009NullListMeterIdentityAndNameFail() {
     try (var source = new Registry()) {
       source.meters = null;
-      assertThrows(NullPointerException.class, () -> formatter.scrape(source, "DEBUG"));
+      assertThrows(NullPointerException.class, () -> formatter.scrape(source, DEBUG_MODE));
     }
     try (var source = new Registry((Meter) null)) {
-      assertThrows(NullPointerException.class, () -> formatter.scrape(source, "DEBUG"));
+      assertThrows(NullPointerException.class, () -> formatter.scrape(source, DEBUG_MODE));
     }
     Counter missing =
         new Counter() {
@@ -256,7 +262,7 @@ class BatchMetricTextTest {
   @Test
   void batchtext010ClosedDomainRejectsArbitraryEscapingAndNonAsciiInputs() {
     for (String invalid : List.of("UNAPPROVED", "x\"y", "x\\y", "x\ny", "日本語")) {
-      var value = new NoopGauge(raw(G, List.of(Tag.of("suffix", invalid))));
+      var value = new NoopGauge(raw(G, List.of(Tag.of(SUFFIX_LABEL, invalid))));
       assertThrows(IllegalArgumentException.class, () -> text(value));
     }
   }
@@ -264,7 +270,9 @@ class BatchMetricTextTest {
   @Test
   void batchtext011MissingAndExtraLabelsFailBeforeReadingValue() {
     for (var tags :
-        List.of(List.<Tag>of(), List.of(Tag.of("suffix", ".part"), Tag.of("actor", "INVALID")))) {
+        List.of(
+            List.<Tag>of(),
+            List.of(Tag.of(SUFFIX_LABEL, PART_SUFFIX), Tag.of("actor", "INVALID")))) {
       var meter =
           new NoopGauge(raw(G, tags)) {
             public double value() {
@@ -277,14 +285,15 @@ class BatchMetricTextTest {
 
   @Test
   void batchtext012DuplicateAndNullTagContractsAreNotNormalized() {
-    var duplicates = List.of(Tag.of("suffix", ".part"), Tag.of("suffix", ".part"));
-    assertEquals(List.of("suffix", "suffix"), duplicates.stream().map(Tag::getKey).toList());
+    var duplicates = List.of(Tag.of(SUFFIX_LABEL, PART_SUFFIX), Tag.of(SUFFIX_LABEL, PART_SUFFIX));
+    assertEquals(
+        List.of(SUFFIX_LABEL, SUFFIX_LABEL), duplicates.stream().map(Tag::getKey).toList());
     assertThrows(IllegalArgumentException.class, () -> text(new NoopGauge(raw(G, duplicates))));
     assertThrows(NullPointerException.class, () -> text(new NoopGauge(raw(G, null))));
     var nullTags = new ArrayList<Tag>();
     nullTags.add(null);
     assertThrows(NullPointerException.class, () -> text(new NoopGauge(raw(G, nullTags))));
-    for (var invalid : List.of(tag(null, ".part"), tag("suffix", null)))
+    for (var invalid : List.of(tag(null, PART_SUFFIX), tag(SUFFIX_LABEL, null)))
       assertThrows(NullPointerException.class, () -> text(new NoopGauge(raw(G, List.of(invalid)))));
   }
 
@@ -300,7 +309,7 @@ class BatchMetricTextTest {
         };
     try (var source = new Registry(meter)) {
       source.reads.set(0);
-      assertEquals("", formatter.scrape(source, "STANDARD"));
+      assertEquals("", formatter.scrape(source, STANDARD_MODE));
       assertEquals(0, source.reads.get());
       assertEquals(0, values.get());
     }
@@ -310,13 +319,13 @@ class BatchMetricTextTest {
   void batchtext014BorrowedSourceClosedDebugFailsAndStandardDoesNotReopen() {
     var source = new Registry(counter(2.5));
     try {
-      assertEquals(C_HEADER + C_ROW + "2.5\n", formatter.scrape(source, "DEBUG"));
+      assertEquals(C_HEADER + C_ROW + COUNTER_SAMPLE_LINE, formatter.scrape(source, DEBUG_MODE));
       assertFalse(source.isClosed());
       source.close();
       source.reads.set(0);
-      assertEquals("", formatter.scrape(source, "STANDARD"));
+      assertEquals("", formatter.scrape(source, STANDARD_MODE));
       assertEquals(0, source.reads.get());
-      assertThrows(IllegalStateException.class, () -> formatter.scrape(source, "DEBUG"));
+      assertThrows(IllegalStateException.class, () -> formatter.scrape(source, DEBUG_MODE));
       assertTrue(source.isClosed());
     } finally {
       source.close();
@@ -325,7 +334,7 @@ class BatchMetricTextTest {
 
   @Test
   void batchtext015CounterRuntimeAndErrorIdentityRetained() {
-    var failure = new IllegalStateException("fixture");
+    var failure = new IllegalStateException(FAILURE_FIXTURE);
     var broken =
         new NoopCounter(raw(C, ct())) {
           public double count() {
@@ -333,7 +342,7 @@ class BatchMetricTextTest {
           }
         };
     assertSame(failure, assertThrows(IllegalStateException.class, () -> text(broken)));
-    var fatal = new AssertionError("fixture");
+    var fatal = new AssertionError(FAILURE_FIXTURE);
     var bad =
         new NoopCounter(raw(C, ct())) {
           public double count() {
@@ -345,7 +354,7 @@ class BatchMetricTextTest {
 
   @Test
   void batchtext016GaugeRuntimeAndErrorIdentityRetained() {
-    var failure = new IllegalStateException("fixture");
+    var failure = new IllegalStateException(FAILURE_FIXTURE);
     var broken =
         new NoopGauge(raw(G, gt())) {
           public double value() {
@@ -353,7 +362,7 @@ class BatchMetricTextTest {
           }
         };
     assertSame(failure, assertThrows(IllegalStateException.class, () -> text(broken)));
-    var fatal = new AssertionError("fixture");
+    var fatal = new AssertionError(FAILURE_FIXTURE);
     var bad =
         new NoopGauge(raw(G, gt())) {
           public double value() {
@@ -400,7 +409,9 @@ class BatchMetricTextTest {
                 return 3;
               }
             };
-    assertEquals(isCounter ? C_HEADER + C_ROW + "2.5\n" : G_HEADER + G_ROW + "3.0\n", text(meter));
+    assertEquals(
+        isCounter ? C_HEADER + C_ROW + COUNTER_SAMPLE_LINE : G_HEADER + G_ROW + "3.0\n",
+        text(meter));
     assertEquals(1, nameReads.get());
     assertEquals(1, tagsReads.get());
     assertEquals(1, valueReads.get());
@@ -421,7 +432,7 @@ class BatchMetricTextTest {
     var others =
         Map.of(
             "nk_batch_last_success_timestamp_seconds", List.of(Tag.of("step", "BACKUP_DB")),
-            "nk_file_transfer_bytes", List.of(Tag.of("suffix", ".ready")));
+            "nk_file_transfer_bytes", List.of(Tag.of(SUFFIX_LABEL, ".ready")));
     var meters = new ArrayList<Meter>();
     meters.add(counter(2.5));
     meters.add(gauge(3));
@@ -470,14 +481,14 @@ class BatchMetricTextTest {
     var later =
         new NoopCounter(raw(C, ct())) {
           public double count() {
-            throw new IllegalStateException("fixture");
+            throw new IllegalStateException(FAILURE_FIXTURE);
           }
         };
     var returned = new AtomicReference<Optional<String>>(Optional.empty());
     try (var source = new Registry(first, later)) {
       assertThrows(
           IllegalStateException.class,
-          () -> returned.set(Optional.of(formatter.scrape(source, "DEBUG"))));
+          () -> returned.set(Optional.of(formatter.scrape(source, DEBUG_MODE))));
       assertEquals(1, reads.get());
       assertTrue(returned.get().isEmpty());
       assertFalse(source.isClosed());
@@ -487,13 +498,13 @@ class BatchMetricTextTest {
   @Test
   void batchtext021OneMeterListReadAndSortedMultipleSeries() {
     var ready =
-        new NoopGauge(raw(G, List.of(Tag.of("suffix", ".ready")))) {
+        new NoopGauge(raw(G, List.of(Tag.of(SUFFIX_LABEL, ".ready")))) {
           public double value() {
             return 5;
           }
         };
     try (var source = new Registry(ready, gauge(3))) {
-      String text = formatter.scrape(source, "DEBUG");
+      String text = formatter.scrape(source, DEBUG_MODE);
       assertEquals(2, source.reads.get());
       assertEquals(G_HEADER + G_ROW + "3.0\nnk_file_transfer_files{suffix=\".ready\"} 5.0\n", text);
     }
@@ -510,9 +521,9 @@ class BatchMetricTextTest {
   void batchtext023OneFormatterDoesNotRetainPriorSourceOrFailure() {
     try (var first = new Registry(counter(2.5));
         var other = new Registry(gauge(3))) {
-      assertEquals(C_HEADER + C_ROW + "2.5\n", formatter.scrape(first, "DEBUG"));
-      assertEquals(G_HEADER + G_ROW + "3.0\n", formatter.scrape(other, "DEBUG"));
-      assertEquals(C_HEADER + C_ROW + "2.5\n", formatter.scrape(first, "DEBUG"));
+      assertEquals(C_HEADER + C_ROW + COUNTER_SAMPLE_LINE, formatter.scrape(first, DEBUG_MODE));
+      assertEquals(G_HEADER + G_ROW + "3.0\n", formatter.scrape(other, DEBUG_MODE));
+      assertEquals(C_HEADER + C_ROW + COUNTER_SAMPLE_LINE, formatter.scrape(first, DEBUG_MODE));
       assertFalse(first.isClosed());
       assertFalse(other.isClosed());
     }
@@ -526,7 +537,10 @@ class BatchMetricTextTest {
       for (int i = 0; i < 64; i++)
         jobs.add(
             workers.submit(
-                () -> assertEquals(C_HEADER + C_ROW + "2.5\n", formatter.scrape(source, "DEBUG"))));
+                () ->
+                    assertEquals(
+                        C_HEADER + C_ROW + COUNTER_SAMPLE_LINE,
+                        formatter.scrape(source, DEBUG_MODE))));
       for (var job : jobs) job.get(10, TimeUnit.SECONDS);
       assertFalse(source.isClosed());
     }
@@ -557,7 +571,7 @@ class BatchMetricTextTest {
 
   private static BatchStandardMetricSource fullOwner(FullProbe probe) {
     var owner = new BatchStandardMetricSource(() -> probe, (source, gc) -> {});
-    owner.bind("DEBUG");
+    owner.bind(DEBUG_MODE);
     return owner;
   }
 
@@ -567,7 +581,8 @@ class BatchMetricTextTest {
     try (var source = new Registry(counter(2.5));
         var standard = fullOwner(probe)) {
       assertEquals(
-          C_HEADER + C_ROW + "2.5\n" + FULL_STANDARD, formatter.scrape(source, "DEBUG", standard));
+          C_HEADER + C_ROW + COUNTER_SAMPLE_LINE + FULL_STANDARD,
+          formatter.scrape(source, DEBUG_MODE, standard));
       assertEquals(1, probe.scrapes.get());
       assertFalse(source.isClosed());
       assertFalse(probe.isClosed());
@@ -588,9 +603,9 @@ class BatchMetricTextTest {
               throw new AssertionError("STD cannot register");
             });
     try (var source = new Registry(counter(2.5))) {
-      assertEquals("", formatter.scrape(source, "STANDARD", standard));
+      assertEquals("", formatter.scrape(source, STANDARD_MODE, standard));
       standard.close();
-      assertEquals("", formatter.scrape(source, "STANDARD", standard));
+      assertEquals("", formatter.scrape(source, STANDARD_MODE, standard));
       assertEquals(0, source.reads.get());
       assertEquals(0, calls.get());
     } finally {
@@ -602,9 +617,11 @@ class BatchMetricTextTest {
   void batchfull003UnboundAndClosedStandardNeverReturnPartialCustom() {
     var standard = new BatchStandardMetricSource();
     try (var source = new Registry(counter(2.5))) {
-      assertThrows(IllegalStateException.class, () -> formatter.scrape(source, "DEBUG", standard));
+      assertThrows(
+          IllegalStateException.class, () -> formatter.scrape(source, DEBUG_MODE, standard));
       standard.close();
-      assertThrows(IllegalStateException.class, () -> formatter.scrape(source, "DEBUG", standard));
+      assertThrows(
+          IllegalStateException.class, () -> formatter.scrape(source, DEBUG_MODE, standard));
       assertFalse(source.isClosed());
     } finally {
       standard.close();
@@ -616,8 +633,8 @@ class BatchMetricTextTest {
     var probe = new FullProbe();
     try (var source = new Registry(counter(2.5));
         var standard = fullOwner(probe)) {
-      assertThrows(NullPointerException.class, () -> formatter.scrape(source, "DEBUG", null));
-      assertThrows(NullPointerException.class, () -> formatter.scrape(null, "DEBUG", standard));
+      assertThrows(NullPointerException.class, () -> formatter.scrape(source, DEBUG_MODE, null));
+      assertThrows(NullPointerException.class, () -> formatter.scrape(null, DEBUG_MODE, standard));
       assertThrows(NullPointerException.class, () -> formatter.scrape(source, null, standard));
       assertThrows(
           IllegalArgumentException.class, () -> formatter.scrape(source, "debug", standard));
@@ -642,7 +659,8 @@ class BatchMetricTextTest {
       assertSame(
           primary,
           assertThrows(
-              IllegalArgumentException.class, () -> formatter.scrape(source, "DEBUG", standard)));
+              IllegalArgumentException.class,
+              () -> formatter.scrape(source, DEBUG_MODE, standard)));
       assertEquals(0, probe.scrapes.get());
       assertFalse(probe.isClosed());
     }
@@ -663,7 +681,7 @@ class BatchMetricTextTest {
         var standard = fullOwner(probe)) {
       assertSame(
           primary,
-          assertThrows(AssertionError.class, () -> formatter.scrape(source, "DEBUG", standard)));
+          assertThrows(AssertionError.class, () -> formatter.scrape(source, DEBUG_MODE, standard)));
       assertEquals(0, probe.scrapes.get());
     }
   }
@@ -678,7 +696,7 @@ class BatchMetricTextTest {
       assertSame(
           primary,
           assertThrows(
-              IllegalStateException.class, () -> formatter.scrape(source, "DEBUG", standard)));
+              IllegalStateException.class, () -> formatter.scrape(source, DEBUG_MODE, standard)));
       assertEquals(1, probe.scrapes.get());
       assertFalse(source.isClosed());
       assertFalse(probe.isClosed());
@@ -694,7 +712,7 @@ class BatchMetricTextTest {
         var standard = fullOwner(probe)) {
       assertSame(
           primary,
-          assertThrows(AssertionError.class, () -> formatter.scrape(source, "DEBUG", standard)));
+          assertThrows(AssertionError.class, () -> formatter.scrape(source, DEBUG_MODE, standard)));
       assertEquals(1, probe.scrapes.get());
       assertFalse(source.isClosed());
       assertFalse(probe.isClosed());
@@ -707,7 +725,8 @@ class BatchMetricTextTest {
     probe.nullText = true;
     try (var source = new Registry(counter(2.5));
         var standard = fullOwner(probe)) {
-      assertThrows(NullPointerException.class, () -> formatter.scrape(source, "DEBUG", standard));
+      assertThrows(
+          NullPointerException.class, () -> formatter.scrape(source, DEBUG_MODE, standard));
       assertEquals(1, probe.scrapes.get());
       assertFalse(probe.isClosed());
     }
@@ -718,10 +737,11 @@ class BatchMetricTextTest {
     var probe = new FullProbe();
     try (var source = new Registry();
         var standard = fullOwner(probe)) {
-      assertEquals(FULL_STANDARD, formatter.scrape(source, "DEBUG", standard));
+      assertEquals(FULL_STANDARD, formatter.scrape(source, DEBUG_MODE, standard));
       source.meters = List.of(counter(1.5));
       assertEquals(
-          C_HEADER + C_ROW + "1.5\n" + FULL_STANDARD, formatter.scrape(source, "DEBUG", standard));
+          C_HEADER + C_ROW + "1.5\n" + FULL_STANDARD,
+          formatter.scrape(source, DEBUG_MODE, standard));
       assertEquals(2, probe.scrapes.get());
     }
   }
@@ -741,15 +761,15 @@ class BatchMetricTextTest {
                 for (int i = 0; i < 16; i++)
                   assertEquals(
                       C_HEADER + C_ROW + "1.5\n" + FULL_STANDARD,
-                      formatter.scrape(first, "DEBUG", firstStandard));
+                      formatter.scrape(first, DEBUG_MODE, firstStandard));
               });
       var secondJob =
           workers.submit(
               () -> {
                 for (int i = 0; i < 16; i++)
                   assertEquals(
-                      C_HEADER + C_ROW + "2.5\n" + FULL_STANDARD,
-                      formatter.scrape(second, "DEBUG", secondStandard));
+                      C_HEADER + C_ROW + COUNTER_SAMPLE_LINE + FULL_STANDARD,
+                      formatter.scrape(second, DEBUG_MODE, secondStandard));
               });
       firstJob.get(10, TimeUnit.SECONDS);
       secondJob.get(10, TimeUnit.SECONDS);
@@ -766,9 +786,9 @@ class BatchMetricTextTest {
   void batchfull012ActualStandardSdkUsesIndependentOwnJvmCpuOracle() {
     try (var source = new Registry(counter(2.5));
         var standard = new BatchStandardMetricSource()) {
-      standard.bind("DEBUG");
-      String text = formatter.scrape(source, "DEBUG", standard);
-      assertTrue(text.startsWith(C_HEADER + C_ROW + "2.5\n"));
+      standard.bind(DEBUG_MODE);
+      String text = formatter.scrape(source, DEBUG_MODE, standard);
+      assertTrue(text.startsWith(C_HEADER + C_ROW + COUNTER_SAMPLE_LINE));
       String cpu =
           "system_cpu_count{service=\"BATCH\"} "
               + (double) Runtime.getRuntime().availableProcessors();

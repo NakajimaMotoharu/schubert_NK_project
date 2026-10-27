@@ -26,6 +26,11 @@ import org.junit.jupiter.api.Test;
  * BATCHSYS001..014/1791: own JVM public observations and independent binder ports, no target IO.
  */
 class BatchSystemMetricsTest {
+  private static final int FIRST_BINDER_POSITION = 1;
+  private static final String PROCESS_CPU_TIME = "process.cpu.time";
+  private static final String DEBUG_MODE = "DEBUG";
+  private static final String STANDARD_MODE = "STANDARD";
+  private static final String FAILURE_FIXTURE = "fixture";
   private final BatchSystemMetrics installer = new BatchSystemMetrics();
 
   private static class Registry extends SimpleMeterRegistry implements AutoCloseable {
@@ -66,7 +71,7 @@ class BatchSystemMetricsTest {
             Set.of(
                 "system.cpu.count",
                 "process.cpu.usage",
-                "process.cpu.time",
+                PROCESS_CPU_TIME,
                 "process.files.open",
                 "process.files.max")));
     assertFalse(names.stream().anyMatch(n -> n.startsWith("nk_") || n.startsWith("jvm.")));
@@ -74,7 +79,7 @@ class BatchSystemMetricsTest {
     assertEquals(
         Runtime.getRuntime().availableProcessors(), source.get("system.cpu.count").gauge().value());
     assertNotNull(source.get("process.cpu.usage").gauge());
-    assertTrue(source.get("process.cpu.time").functionCounter().count() >= 0);
+    assertTrue(source.get(PROCESS_CPU_TIME).functionCounter().count() >= 0);
     assertTrue(source.get("process.files.open").gauge().value() >= 0);
     var os =
         assertInstanceOf(
@@ -87,17 +92,17 @@ class BatchSystemMetricsTest {
   @Test
   void batchsys001ActualStandardCpuFdAndIndependentCpuTimeBracket() {
     try (var source = new Registry()) {
-      installer.bind(source, "DEBUG");
+      installer.bind(source, DEBUG_MODE);
       namespaces(source);
       var os =
           assertInstanceOf(
               com.sun.management.OperatingSystemMXBean.class,
               ManagementFactory.getOperatingSystemMXBean());
       long before = os.getProcessCpuTime();
-      double actual = source.get("process.cpu.time").functionCounter().count();
+      double actual = source.get(PROCESS_CPU_TIME).functionCounter().count();
       long after = os.getProcessCpuTime();
       assertTrue(actual >= before && actual <= after);
-      assertEquals("ns", source.get("process.cpu.time").functionCounter().getId().getBaseUnit());
+      assertEquals("ns", source.get(PROCESS_CPU_TIME).functionCounter().getId().getBaseUnit());
       assertFalse(source.isClosed());
       assertEquals(0, source.closes.get());
     }
@@ -110,12 +115,12 @@ class BatchSystemMetricsTest {
       source.reads.set(0);
       BatchSystemMetrics.install(
           source,
-          "STANDARD",
+          STANDARD_MODE,
           () -> {
             calls.incrementAndGet();
             throw new AssertionError("not constructed");
           });
-      installer.bind(source, "STANDARD");
+      installer.bind(source, STANDARD_MODE);
       assertEquals(0, calls.get());
       assertEquals(0, source.reads.get());
       assertEquals(0, source.closes.get());
@@ -134,12 +139,12 @@ class BatchSystemMetricsTest {
             actual -> {
               assertSame(source, actual);
               calls.add(order);
-              if (order == 1) binders.clear();
+              if (order == FIRST_BINDER_POSITION) binders.clear();
             });
       }
       BatchSystemMetrics.install(
           source,
-          "DEBUG",
+          DEBUG_MODE,
           () -> {
             factories.incrementAndGet();
             return binders;
@@ -154,11 +159,11 @@ class BatchSystemMetricsTest {
 
   @Test
   void batchsys004NullBoundariesRejectWithoutBinding() {
-    assertThrows(NullPointerException.class, () -> installer.bind(null, "STANDARD"));
+    assertThrows(NullPointerException.class, () -> installer.bind(null, STANDARD_MODE));
     try (var source = new Registry()) {
       assertThrows(NullPointerException.class, () -> installer.bind(source, null));
       assertThrows(
-          NullPointerException.class, () -> BatchSystemMetrics.install(source, "DEBUG", null));
+          NullPointerException.class, () -> BatchSystemMetrics.install(source, DEBUG_MODE, null));
       assertEquals(0, source.closes.get());
     }
   }
@@ -201,7 +206,7 @@ class BatchSystemMetricsTest {
         () ->
             BatchSystemMetrics.install(
                 source,
-                "DEBUG",
+                DEBUG_MODE,
                 () -> {
                   factories.incrementAndGet();
                   return two(
@@ -220,12 +225,12 @@ class BatchSystemMetricsTest {
       var bound = new AtomicInteger();
       assertThrows(
           NullPointerException.class,
-          () -> BatchSystemMetrics.install(source, "DEBUG", () -> null));
+          () -> BatchSystemMetrics.install(source, DEBUG_MODE, () -> null));
       var list = new ArrayList<MeterBinder>(two(actual -> bound.incrementAndGet()));
       list.set(1, null);
       assertThrows(
           NullPointerException.class,
-          () -> BatchSystemMetrics.install(source, "DEBUG", () -> list));
+          () -> BatchSystemMetrics.install(source, DEBUG_MODE, () -> list));
       assertEquals(0, bound.get());
       assertFalse(source.isClosed());
     }
@@ -242,7 +247,7 @@ class BatchSystemMetricsTest {
             "invalid system binder count",
             assertThrows(
                     IllegalArgumentException.class,
-                    () -> BatchSystemMetrics.install(source, "DEBUG", () -> list))
+                    () -> BatchSystemMetrics.install(source, DEBUG_MODE, () -> list))
                 .getMessage());
       }
       assertEquals(0, bound.get());
@@ -253,8 +258,8 @@ class BatchSystemMetricsTest {
   @Test
   void batchsys009FactoryRuntimeAndErrorKeepIdentity() {
     try (var source = new Registry()) {
-      var failure = new IllegalStateException("fixture");
-      var fatal = new AssertionError("fixture");
+      var failure = new IllegalStateException(FAILURE_FIXTURE);
+      var fatal = new AssertionError(FAILURE_FIXTURE);
       assertSame(
           failure,
           assertThrows(
@@ -262,7 +267,7 @@ class BatchSystemMetricsTest {
               () ->
                   BatchSystemMetrics.install(
                       source,
-                      "DEBUG",
+                      DEBUG_MODE,
                       () -> {
                         throw failure;
                       })));
@@ -273,7 +278,7 @@ class BatchSystemMetricsTest {
               () ->
                   BatchSystemMetrics.install(
                       source,
-                      "DEBUG",
+                      DEBUG_MODE,
                       () -> {
                         throw fatal;
                       })));
@@ -289,7 +294,7 @@ class BatchSystemMetricsTest {
       try (var source = new Registry()) {
         var events = new ArrayList<Integer>();
         var binders = new ArrayList<MeterBinder>();
-        var failure = new IllegalStateException("fixture");
+        var failure = new IllegalStateException(FAILURE_FIXTURE);
         for (int n = 0; n < 2; n++) {
           final int position = n;
           binders.add(
@@ -303,7 +308,7 @@ class BatchSystemMetricsTest {
             failure,
             assertThrows(
                 IllegalStateException.class,
-                () -> BatchSystemMetrics.install(source, "DEBUG", () -> binders)));
+                () -> BatchSystemMetrics.install(source, DEBUG_MODE, () -> binders)));
         assertEquals(java.util.stream.IntStream.rangeClosed(0, failed).boxed().toList(), events);
         assertFalse(source.isClosed());
         assertEquals(0, source.closes.get());
@@ -318,7 +323,7 @@ class BatchSystemMetricsTest {
       try (var source = new Registry()) {
         var events = new ArrayList<Integer>();
         var binders = new ArrayList<MeterBinder>();
-        var failure = new AssertionError("fixture");
+        var failure = new AssertionError(FAILURE_FIXTURE);
         for (int n = 0; n < 2; n++) {
           final int position = n;
           binders.add(
@@ -331,7 +336,7 @@ class BatchSystemMetricsTest {
             failure,
             assertThrows(
                 AssertionError.class,
-                () -> BatchSystemMetrics.install(source, "DEBUG", () -> binders)));
+                () -> BatchSystemMetrics.install(source, DEBUG_MODE, () -> binders)));
         assertEquals(java.util.stream.IntStream.rangeClosed(0, failed).boxed().toList(), events);
         assertFalse(source.isClosed());
         assertEquals(0, source.closes.get());
@@ -348,7 +353,7 @@ class BatchSystemMetricsTest {
     var factories = new AtomicInteger();
     BatchSystemMetrics.install(
         source,
-        "STANDARD",
+        STANDARD_MODE,
         () -> {
           factories.incrementAndGet();
           return two(
@@ -356,7 +361,7 @@ class BatchSystemMetricsTest {
                 throw new AssertionError("no binding");
               });
         });
-    installer.bind(source, "STANDARD");
+    installer.bind(source, STANDARD_MODE);
     assertEquals(0, factories.get());
     assertEquals(0, source.reads.get());
     assertEquals(closes, source.closes.get());
@@ -366,8 +371,8 @@ class BatchSystemMetricsTest {
   void batchsys013SameInstanceUsesDistinctRegistryOwners() {
     var first = new Registry();
     try (var other = new Registry()) {
-      installer.bind(first, "DEBUG");
-      installer.bind(other, "DEBUG");
+      installer.bind(first, DEBUG_MODE);
+      installer.bind(other, DEBUG_MODE);
       namespaces(first);
       namespaces(other);
       assertFalse(first.getMeters().isEmpty());
@@ -394,7 +399,7 @@ class BatchSystemMetricsTest {
                     var local = new AtomicInteger();
                     BatchSystemMetrics.install(
                         source,
-                        "DEBUG",
+                        DEBUG_MODE,
                         () ->
                             two(
                                 actual -> {

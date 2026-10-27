@@ -24,6 +24,10 @@ import org.junit.jupiter.api.Test;
  * BATCHJVM001..014/1781: own JVM public observations and independent binder ports, no target IO.
  */
 class BatchJvmMetricsTest {
+  private static final int FIRST_BINDER_POSITION = 1;
+  private static final String DEBUG_MODE = "DEBUG";
+  private static final String STANDARD_MODE = "STANDARD";
+  private static final String FAILURE_FIXTURE = "fixture";
   private final BatchJvmMetrics installer = new BatchJvmMetrics();
 
   private static class Registry extends SimpleMeterRegistry implements AutoCloseable {
@@ -81,7 +85,7 @@ class BatchJvmMetricsTest {
   @Test
   void batchjvm001ActualFourStandardBindersWithIndependentRuntimeClock() {
     try (var source = new Registry()) {
-      installer.bind(source, "DEBUG");
+      installer.bind(source, DEBUG_MODE);
       namespaces(source);
       var runtime = ManagementFactory.getRuntimeMXBean();
       assertEquals(
@@ -104,12 +108,12 @@ class BatchJvmMetricsTest {
       source.reads.set(0);
       BatchJvmMetrics.install(
           source,
-          "STANDARD",
+          STANDARD_MODE,
           () -> {
             calls.incrementAndGet();
             throw new AssertionError("not constructed");
           });
-      installer.bind(source, "STANDARD");
+      installer.bind(source, STANDARD_MODE);
       assertEquals(0, calls.get());
       assertEquals(0, source.reads.get());
       assertEquals(0, source.closes.get());
@@ -128,12 +132,12 @@ class BatchJvmMetricsTest {
             actual -> {
               assertSame(source, actual);
               calls.add(order);
-              if (order == 1) binders.clear();
+              if (order == FIRST_BINDER_POSITION) binders.clear();
             });
       }
       BatchJvmMetrics.install(
           source,
-          "DEBUG",
+          DEBUG_MODE,
           () -> {
             factories.incrementAndGet();
             return binders;
@@ -148,11 +152,11 @@ class BatchJvmMetricsTest {
 
   @Test
   void batchjvm004NullBoundariesRejectWithoutBinding() {
-    assertThrows(NullPointerException.class, () -> installer.bind(null, "STANDARD"));
+    assertThrows(NullPointerException.class, () -> installer.bind(null, STANDARD_MODE));
     try (var source = new Registry()) {
       assertThrows(NullPointerException.class, () -> installer.bind(source, null));
       assertThrows(
-          NullPointerException.class, () -> BatchJvmMetrics.install(source, "DEBUG", null));
+          NullPointerException.class, () -> BatchJvmMetrics.install(source, DEBUG_MODE, null));
       assertEquals(0, source.closes.get());
     }
   }
@@ -195,7 +199,7 @@ class BatchJvmMetricsTest {
         () ->
             BatchJvmMetrics.install(
                 source,
-                "DEBUG",
+                DEBUG_MODE,
                 () -> {
                   factories.incrementAndGet();
                   return four(
@@ -213,11 +217,13 @@ class BatchJvmMetricsTest {
     try (var source = new Registry()) {
       var bound = new AtomicInteger();
       assertThrows(
-          NullPointerException.class, () -> BatchJvmMetrics.install(source, "DEBUG", () -> null));
+          NullPointerException.class,
+          () -> BatchJvmMetrics.install(source, DEBUG_MODE, () -> null));
       var list = new ArrayList<MeterBinder>(four(actual -> bound.incrementAndGet()));
       list.set(3, null);
       assertThrows(
-          NullPointerException.class, () -> BatchJvmMetrics.install(source, "DEBUG", () -> list));
+          NullPointerException.class,
+          () -> BatchJvmMetrics.install(source, DEBUG_MODE, () -> list));
       assertEquals(0, bound.get());
       assertFalse(source.isClosed());
     }
@@ -234,7 +240,7 @@ class BatchJvmMetricsTest {
             "invalid JVM binder count",
             assertThrows(
                     IllegalArgumentException.class,
-                    () -> BatchJvmMetrics.install(source, "DEBUG", () -> list))
+                    () -> BatchJvmMetrics.install(source, DEBUG_MODE, () -> list))
                 .getMessage());
       }
       assertEquals(0, bound.get());
@@ -245,8 +251,8 @@ class BatchJvmMetricsTest {
   @Test
   void batchjvm009FactoryRuntimeAndErrorKeepIdentity() {
     try (var source = new Registry()) {
-      var failure = new IllegalStateException("fixture");
-      var fatal = new AssertionError("fixture");
+      var failure = new IllegalStateException(FAILURE_FIXTURE);
+      var fatal = new AssertionError(FAILURE_FIXTURE);
       assertSame(
           failure,
           assertThrows(
@@ -254,7 +260,7 @@ class BatchJvmMetricsTest {
               () ->
                   BatchJvmMetrics.install(
                       source,
-                      "DEBUG",
+                      DEBUG_MODE,
                       () -> {
                         throw failure;
                       })));
@@ -265,7 +271,7 @@ class BatchJvmMetricsTest {
               () ->
                   BatchJvmMetrics.install(
                       source,
-                      "DEBUG",
+                      DEBUG_MODE,
                       () -> {
                         throw fatal;
                       })));
@@ -281,7 +287,7 @@ class BatchJvmMetricsTest {
       try (var source = new Registry()) {
         var events = new ArrayList<Integer>();
         var binders = new ArrayList<MeterBinder>();
-        var failure = new IllegalStateException("fixture");
+        var failure = new IllegalStateException(FAILURE_FIXTURE);
         for (int n = 0; n < 4; n++) {
           final int position = n;
           binders.add(
@@ -295,7 +301,7 @@ class BatchJvmMetricsTest {
             failure,
             assertThrows(
                 IllegalStateException.class,
-                () -> BatchJvmMetrics.install(source, "DEBUG", () -> binders)));
+                () -> BatchJvmMetrics.install(source, DEBUG_MODE, () -> binders)));
         assertEquals(java.util.stream.IntStream.rangeClosed(0, failed).boxed().toList(), events);
         assertFalse(source.isClosed());
         assertEquals(0, source.closes.get());
@@ -310,7 +316,7 @@ class BatchJvmMetricsTest {
       try (var source = new Registry()) {
         var events = new ArrayList<Integer>();
         var binders = new ArrayList<MeterBinder>();
-        var failure = new AssertionError("fixture");
+        var failure = new AssertionError(FAILURE_FIXTURE);
         for (int n = 0; n < 4; n++) {
           final int position = n;
           binders.add(
@@ -323,7 +329,7 @@ class BatchJvmMetricsTest {
             failure,
             assertThrows(
                 AssertionError.class,
-                () -> BatchJvmMetrics.install(source, "DEBUG", () -> binders)));
+                () -> BatchJvmMetrics.install(source, DEBUG_MODE, () -> binders)));
         assertEquals(java.util.stream.IntStream.rangeClosed(0, failed).boxed().toList(), events);
         assertFalse(source.isClosed());
         assertEquals(0, source.closes.get());
@@ -340,7 +346,7 @@ class BatchJvmMetricsTest {
     var factories = new AtomicInteger();
     BatchJvmMetrics.install(
         source,
-        "STANDARD",
+        STANDARD_MODE,
         () -> {
           factories.incrementAndGet();
           return four(
@@ -348,7 +354,7 @@ class BatchJvmMetricsTest {
                 throw new AssertionError("no binding");
               });
         });
-    installer.bind(source, "STANDARD");
+    installer.bind(source, STANDARD_MODE);
     assertEquals(0, factories.get());
     assertEquals(0, source.reads.get());
     assertEquals(closes, source.closes.get());
@@ -358,8 +364,8 @@ class BatchJvmMetricsTest {
   void batchjvm013SameInstanceUsesDistinctRegistryOwners() {
     var first = new Registry();
     try (var other = new Registry()) {
-      installer.bind(first, "DEBUG");
-      installer.bind(other, "DEBUG");
+      installer.bind(first, DEBUG_MODE);
+      installer.bind(other, DEBUG_MODE);
       namespaces(first);
       namespaces(other);
       assertFalse(first.getMeters().isEmpty());
@@ -386,7 +392,7 @@ class BatchJvmMetricsTest {
                     var local = new AtomicInteger();
                     BatchJvmMetrics.install(
                         source,
-                        "DEBUG",
+                        DEBUG_MODE,
                         () ->
                             four(
                                 actual -> {

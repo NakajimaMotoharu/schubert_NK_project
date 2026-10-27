@@ -24,6 +24,10 @@ import org.junit.jupiter.api.Test;
 
 /** BATCHGC001..014/1787: exact owner order/identity, fresh own SDK objects only, no forced GC. */
 class BatchGcMetricRegistrationTest {
+  private static final String DEBUG_MODE = "DEBUG";
+  private static final String STANDARD_MODE = "STANDARD";
+  private static final String UNEXPECTED_OWNER_ACCESS = "not own";
+  private static final String FAILURE_FIXTURE = "fixture";
   private final BatchGcMetricRegistration registration = new BatchGcMetricRegistration();
 
   private static class Registry extends SimpleMeterRegistry implements AutoCloseable {
@@ -81,7 +85,7 @@ class BatchGcMetricRegistrationTest {
     var owned = new ArrayList<JvmGcMetrics>();
     try (var source = new Registry()) {
       try {
-        registration.bind(source, "DEBUG", owned::add);
+        registration.bind(source, DEBUG_MODE, owned::add);
         assertEquals(1, owned.size());
         assertNotNull(owned.getFirst());
         assertFalse(source.getMeters().isEmpty());
@@ -107,10 +111,10 @@ class BatchGcMetricRegistrationTest {
       source.reads.set(0);
       BatchGcMetricRegistration.install(
           source,
-          "STANDARD",
+          STANDARD_MODE,
           resource -> {
             owners.incrementAndGet();
-            throw new AssertionError("not own");
+            throw new AssertionError(UNEXPECTED_OWNER_ACCESS);
           },
           () -> {
             factories.incrementAndGet();
@@ -118,9 +122,9 @@ class BatchGcMetricRegistrationTest {
           });
       registration.bind(
           source,
-          "STANDARD",
+          STANDARD_MODE,
           resource -> {
-            throw new AssertionError("not own");
+            throw new AssertionError(UNEXPECTED_OWNER_ACCESS);
           });
       assertEquals(0, factories.get());
       assertEquals(0, owners.get());
@@ -144,7 +148,7 @@ class BatchGcMetricRegistrationTest {
       resource.onCloseCallback = () -> events.add("CLOSE");
       BatchGcMetricRegistration.install(
           source,
-          "DEBUG",
+          DEBUG_MODE,
           value -> {
             assertSame(resource, value);
             events.add("OWNER");
@@ -167,14 +171,15 @@ class BatchGcMetricRegistrationTest {
   @Test
   void batchgc004NullBoundariesFailBeforeActivation() {
     assertThrows(
-        NullPointerException.class, () -> registration.bind(null, "STANDARD", resource -> true));
+        NullPointerException.class, () -> registration.bind(null, STANDARD_MODE, resource -> true));
     try (var source = new Registry()) {
       assertThrows(
           NullPointerException.class, () -> registration.bind(source, null, resource -> true));
-      assertThrows(NullPointerException.class, () -> registration.bind(source, "STANDARD", null));
+      assertThrows(
+          NullPointerException.class, () -> registration.bind(source, STANDARD_MODE, null));
       assertThrows(
           NullPointerException.class,
-          () -> BatchGcMetricRegistration.install(source, "DEBUG", resource -> true, null));
+          () -> BatchGcMetricRegistration.install(source, DEBUG_MODE, resource -> true, null));
       assertEquals(0, source.closeInvocations.get());
     }
   }
@@ -195,7 +200,7 @@ class BatchGcMetricRegistrationTest {
                             mode,
                             resource -> {
                               calls.incrementAndGet();
-                              throw new AssertionError("not own");
+                              throw new AssertionError(UNEXPECTED_OWNER_ACCESS);
                             },
                             () -> {
                               calls.incrementAndGet();
@@ -218,7 +223,7 @@ class BatchGcMetricRegistrationTest {
         () ->
             BatchGcMetricRegistration.install(
                 source,
-                "DEBUG",
+                DEBUG_MODE,
                 resource -> {
                   calls.incrementAndGet();
                   return true;
@@ -233,9 +238,9 @@ class BatchGcMetricRegistrationTest {
     source.reads.set(0);
     registration.bind(
         source,
-        "STANDARD",
+        STANDARD_MODE,
         resource -> {
-          throw new AssertionError("not own");
+          throw new AssertionError(UNEXPECTED_OWNER_ACCESS);
         });
     assertEquals(0, source.reads.get());
   }
@@ -249,7 +254,7 @@ class BatchGcMetricRegistrationTest {
           () ->
               BatchGcMetricRegistration.install(
                   source,
-                  "DEBUG",
+                  DEBUG_MODE,
                   resource -> {
                     calls.incrementAndGet();
                     return true;
@@ -264,7 +269,8 @@ class BatchGcMetricRegistrationTest {
   void batchgc008FactoryRuntimeAndErrorIdentityRetained() {
     try (var source = new Registry()) {
       for (Throwable failure :
-          List.of(new IllegalStateException("fixture"), new AssertionError("fixture"))) {
+          List.of(
+              new IllegalStateException(FAILURE_FIXTURE), new AssertionError(FAILURE_FIXTURE))) {
         var owners = new AtomicInteger();
         assertSame(
             failure,
@@ -273,7 +279,7 @@ class BatchGcMetricRegistrationTest {
                 () ->
                     BatchGcMetricRegistration.install(
                         source,
-                        "DEBUG",
+                        DEBUG_MODE,
                         resource -> {
                           owners.incrementAndGet();
                           return true;
@@ -298,7 +304,7 @@ class BatchGcMetricRegistrationTest {
                   () ->
                       BatchGcMetricRegistration.install(
                           source,
-                          "DEBUG",
+                          DEBUG_MODE,
                           value -> {
                             assertSame(resource, value);
                             owners.incrementAndGet();
@@ -317,7 +323,8 @@ class BatchGcMetricRegistrationTest {
   void batchgc010OwnerRuntimeAndErrorNeverActivateOrAutoClose() {
     try (var source = new Registry()) {
       for (Throwable failure :
-          List.of(new IllegalStateException("fixture"), new AssertionError("fixture"))) {
+          List.of(
+              new IllegalStateException(FAILURE_FIXTURE), new AssertionError(FAILURE_FIXTURE))) {
         var resource = new Fake();
         assertSame(
             failure,
@@ -325,7 +332,7 @@ class BatchGcMetricRegistrationTest {
                 failure.getClass(),
                 () ->
                     BatchGcMetricRegistration.install(
-                        source, "DEBUG", value -> fail(failure), () -> resource)));
+                        source, DEBUG_MODE, value -> fail(failure), () -> resource)));
         assertEquals(0, resource.bindInvocations.get());
         assertEquals(0, resource.closeInvocations.get());
         assertFalse(source.isClosed());
@@ -337,7 +344,8 @@ class BatchGcMetricRegistrationTest {
   void batchgc011BindFailureLeavesExactHandleInAcknowledgedOwner() {
     try (var source = new Registry()) {
       for (Throwable failure :
-          List.of(new IllegalStateException("fixture"), new AssertionError("fixture"))) {
+          List.of(
+              new IllegalStateException(FAILURE_FIXTURE), new AssertionError(FAILURE_FIXTURE))) {
         var resource = new Fake();
         var owned = new ArrayList<JvmGcMetrics>();
         resource.onBindCallback =
@@ -352,7 +360,7 @@ class BatchGcMetricRegistrationTest {
                 failure.getClass(),
                 () ->
                     BatchGcMetricRegistration.install(
-                        source, "DEBUG", owned::add, () -> resource)));
+                        source, DEBUG_MODE, owned::add, () -> resource)));
         assertEquals(List.of(resource), owned);
         assertEquals(1, resource.bindInvocations.get());
         assertEquals(0, resource.closeInvocations.get());
@@ -374,8 +382,8 @@ class BatchGcMetricRegistrationTest {
       var owners2 = new ArrayList<JvmGcMetrics>();
       one.onBindCallback = actual -> assertSame(first, actual);
       two.onBindCallback = actual -> assertSame(other, actual);
-      BatchGcMetricRegistration.install(first, "DEBUG", owners1::add, () -> one);
-      BatchGcMetricRegistration.install(other, "DEBUG", owners2::add, () -> two);
+      BatchGcMetricRegistration.install(first, DEBUG_MODE, owners1::add, () -> one);
+      BatchGcMetricRegistration.install(other, DEBUG_MODE, owners2::add, () -> two);
       assertEquals(List.of(one), owners1);
       assertEquals(List.of(two), owners2);
       owners1.forEach(JvmGcMetrics::close);
@@ -406,7 +414,8 @@ class BatchGcMetricRegistrationTest {
                           assertEquals(List.of(resource), owned);
                           total.incrementAndGet();
                         };
-                    BatchGcMetricRegistration.install(source, "DEBUG", owned::add, () -> resource);
+                    BatchGcMetricRegistration.install(
+                        source, DEBUG_MODE, owned::add, () -> resource);
                     assertEquals(1, resource.bindInvocations.get());
                     assertEquals(0, resource.closeInvocations.get());
                     owned.forEach(JvmGcMetrics::close);
@@ -425,14 +434,14 @@ class BatchGcMetricRegistrationTest {
       for (boolean throwsFailure : List.of(false, true)) {
         var resource = new Fake();
         var owned = new ArrayList<JvmGcMetrics>();
-        var failure = new IllegalStateException("fixture");
+        var failure = new IllegalStateException(FAILURE_FIXTURE);
         var actual =
             assertThrows(
                 IllegalStateException.class,
                 () ->
                     BatchGcMetricRegistration.install(
                         source,
-                        "DEBUG",
+                        DEBUG_MODE,
                         value -> {
                           owned.add(value);
                           if (throwsFailure) throw failure;
