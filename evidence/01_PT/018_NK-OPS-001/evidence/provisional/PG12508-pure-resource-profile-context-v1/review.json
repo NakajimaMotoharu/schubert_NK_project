@@ -1,0 +1,446 @@
+{
+  "rows": [
+    {
+      "attributes": {
+        "begincolumn": "25",
+        "beginline": "318",
+        "class": "FactoryResourceScopeTest",
+        "endcolumn": "56",
+        "endline": "318",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "method": "factory012NestedAndParallelScopesKeepIndependentOwnership",
+        "package": "dev.codex.schubert.nk.storage",
+        "priority": "3",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading",
+        "variable": "executor"
+      },
+      "controls": [
+        "Executors.newFixedThreadPool(2)",
+        "first.get()",
+        "second.get()",
+        "a.closed()",
+        "b.closed()",
+        "assertNotSame(a.token,b.token)"
+      ],
+      "currentCases": [
+        {
+          "className": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+          "method": "factory012NestedAndParallelScopesKeepIndependentOwnership",
+          "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/FactoryResourceScopeTest.java",
+          "sourceSha256": "2e27495ad5ee51548ca32ceed8e3c92819dfe73ee982fdd97fca4eb6d31d3c09"
+        }
+      ],
+      "currentWholeJoinPending": true,
+      "disposition": "CONTEXT_NOT_APPLICABLE",
+      "id": "PMD-06939",
+      "kind": "FINITE_OWNED_STANDALONE_RESOURCE_FIXTURE_WORKERS",
+      "newAccepted": 0,
+      "oldRuntimeReassigned": false,
+      "originalRowSha256": "85213652c9d955a6394ef93b84bbcf0ca9e54d99282b1834c1e9ce695bc05a9d",
+      "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/FactoryResourceScopeTest.java",
+      "productTestsExecutedByReview": 0,
+      "reason": "Original JavaSE JUnit owns one virtual executor/64 finite callbacks or two-worker pools/independent memory Tokens, all in TWR. Factory018 latch await10seconds restores interrupted flag before declared fixture IOException. Existing future.get has no per-call timeout; all submitted callbacks are bounded and the dedicated JVM has a distinct240second bound. Ownership/close counts and token identities are independent assertions. No J2EE application worker, actual IO/native/file/Root/DB/JMS/network/keys or real heap exhaustion.",
+      "rule": "DoNotUseThreads",
+      "scopeKind": "METHOD",
+      "scopeName": "factory012NestedAndParallelScopesKeepIndependentOwnership",
+      "scopeTokenSha256": "0ff90583a2449d6f7aacc4c4cf5dd9ca3281c1cba85f160e898c18f0d8cb94cc",
+      "source": "c099786934c864f31a6fb520184366c22c84f6ea",
+      "sourceSha256": "2e27495ad5ee51548ca32ceed8e3c92819dfe73ee982fdd97fca4eb6d31d3c09",
+      "sourceSpanSha256": "9bb4530d7d15c1a0fc8b12c6cf064977273b752194c1eb8f8a3beb1a5e42af46"
+    },
+    {
+      "attributes": {
+        "begincolumn": "19",
+        "beginline": "321",
+        "class": "FactoryResourceScopeTest",
+        "endcolumn": "59",
+        "endline": "321",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "method": "factory012NestedAndParallelScopesKeepIndependentOwnership",
+        "package": "dev.codex.schubert.nk.storage",
+        "priority": "3",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading",
+        "variable": "first"
+      },
+      "controls": [
+        "Executors.newFixedThreadPool(2)",
+        "first.get()",
+        "second.get()",
+        "a.closed()",
+        "b.closed()",
+        "assertNotSame(a.token,b.token)"
+      ],
+      "currentCases": [
+        {
+          "className": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+          "method": "factory012NestedAndParallelScopesKeepIndependentOwnership",
+          "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/FactoryResourceScopeTest.java",
+          "sourceSha256": "2e27495ad5ee51548ca32ceed8e3c92819dfe73ee982fdd97fca4eb6d31d3c09"
+        }
+      ],
+      "currentWholeJoinPending": true,
+      "disposition": "CONTEXT_NOT_APPLICABLE",
+      "id": "PMD-06940",
+      "kind": "FINITE_OWNED_STANDALONE_RESOURCE_FIXTURE_WORKERS",
+      "newAccepted": 0,
+      "oldRuntimeReassigned": false,
+      "originalRowSha256": "052aaa094fac160f78057aefb5cd2c4ad4b822c9b47ba783fe9302b2a01cdf81",
+      "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/FactoryResourceScopeTest.java",
+      "productTestsExecutedByReview": 0,
+      "reason": "Original JavaSE JUnit owns one virtual executor/64 finite callbacks or two-worker pools/independent memory Tokens, all in TWR. Factory018 latch await10seconds restores interrupted flag before declared fixture IOException. Existing future.get has no per-call timeout; all submitted callbacks are bounded and the dedicated JVM has a distinct240second bound. Ownership/close counts and token identities are independent assertions. No J2EE application worker, actual IO/native/file/Root/DB/JMS/network/keys or real heap exhaustion.",
+      "rule": "DoNotUseThreads",
+      "scopeKind": "METHOD",
+      "scopeName": "factory012NestedAndParallelScopesKeepIndependentOwnership",
+      "scopeTokenSha256": "0ff90583a2449d6f7aacc4c4cf5dd9ca3281c1cba85f160e898c18f0d8cb94cc",
+      "source": "c099786934c864f31a6fb520184366c22c84f6ea",
+      "sourceSha256": "2e27495ad5ee51548ca32ceed8e3c92819dfe73ee982fdd97fca4eb6d31d3c09",
+      "sourceSpanSha256": "4031bd52b72ed8f56de493bd72464204d2daf838ce618de32c402e6b55bf4e9d"
+    },
+    {
+      "attributes": {
+        "begincolumn": "20",
+        "beginline": "322",
+        "class": "FactoryResourceScopeTest",
+        "endcolumn": "60",
+        "endline": "322",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "method": "factory012NestedAndParallelScopesKeepIndependentOwnership",
+        "package": "dev.codex.schubert.nk.storage",
+        "priority": "3",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading",
+        "variable": "second"
+      },
+      "controls": [
+        "Executors.newFixedThreadPool(2)",
+        "first.get()",
+        "second.get()",
+        "a.closed()",
+        "b.closed()",
+        "assertNotSame(a.token,b.token)"
+      ],
+      "currentCases": [
+        {
+          "className": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+          "method": "factory012NestedAndParallelScopesKeepIndependentOwnership",
+          "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/FactoryResourceScopeTest.java",
+          "sourceSha256": "2e27495ad5ee51548ca32ceed8e3c92819dfe73ee982fdd97fca4eb6d31d3c09"
+        }
+      ],
+      "currentWholeJoinPending": true,
+      "disposition": "CONTEXT_NOT_APPLICABLE",
+      "id": "PMD-06941",
+      "kind": "FINITE_OWNED_STANDALONE_RESOURCE_FIXTURE_WORKERS",
+      "newAccepted": 0,
+      "oldRuntimeReassigned": false,
+      "originalRowSha256": "e58efedc7cadb8ce800c57dd6103744ebc2da65c25378dd28e76f0fd0fdeb2c3",
+      "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/FactoryResourceScopeTest.java",
+      "productTestsExecutedByReview": 0,
+      "reason": "Original JavaSE JUnit owns one virtual executor/64 finite callbacks or two-worker pools/independent memory Tokens, all in TWR. Factory018 latch await10seconds restores interrupted flag before declared fixture IOException. Existing future.get has no per-call timeout; all submitted callbacks are bounded and the dedicated JVM has a distinct240second bound. Ownership/close counts and token identities are independent assertions. No J2EE application worker, actual IO/native/file/Root/DB/JMS/network/keys or real heap exhaustion.",
+      "rule": "DoNotUseThreads",
+      "scopeKind": "METHOD",
+      "scopeName": "factory012NestedAndParallelScopesKeepIndependentOwnership",
+      "scopeTokenSha256": "0ff90583a2449d6f7aacc4c4cf5dd9ca3281c1cba85f160e898c18f0d8cb94cc",
+      "source": "c099786934c864f31a6fb520184366c22c84f6ea",
+      "sourceSha256": "2e27495ad5ee51548ca32ceed8e3c92819dfe73ee982fdd97fca4eb6d31d3c09",
+      "sourceSpanSha256": "27e7715632c78dd76980bfb3facafa2b324cd54ae23e454d7eca2c3dbffa427a"
+    },
+    {
+      "attributes": {
+        "begincolumn": "13",
+        "beginline": "563",
+        "class": "FactoryResourceScopeTest",
+        "endcolumn": "19",
+        "endline": "563",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "method": "factory018ParallelCompleteOwnersNeverShareTransferState",
+        "package": "dev.codex.schubert.nk.storage",
+        "priority": "3",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading"
+      },
+      "controls": [
+        "newCountDownLatch(2)",
+        "ready.await(10,TimeUnit.SECONDS)",
+        "Thread.currentThread().interrupt()",
+        "Executors.newFixedThreadPool(2)",
+        "first.get()",
+        "second.get()",
+        "assertEquals(0,closed.get())"
+      ],
+      "currentCases": [
+        {
+          "className": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+          "method": "factory018ParallelCompleteOwnersNeverShareTransferState",
+          "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/FactoryResourceScopeTest.java",
+          "sourceSha256": "2e27495ad5ee51548ca32ceed8e3c92819dfe73ee982fdd97fca4eb6d31d3c09"
+        }
+      ],
+      "currentWholeJoinPending": true,
+      "disposition": "CONTEXT_NOT_APPLICABLE",
+      "id": "PMD-06948",
+      "kind": "FINITE_OWNED_STANDALONE_RESOURCE_FIXTURE_WORKERS",
+      "newAccepted": 0,
+      "oldRuntimeReassigned": false,
+      "originalRowSha256": "26a1c400264efb82db744a51a05b41e1bc00be1253031045b294e3be6f1ae815",
+      "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/FactoryResourceScopeTest.java",
+      "productTestsExecutedByReview": 0,
+      "reason": "Original JavaSE JUnit owns one virtual executor/64 finite callbacks or two-worker pools/independent memory Tokens, all in TWR. Factory018 latch await10seconds restores interrupted flag before declared fixture IOException. Existing future.get has no per-call timeout; all submitted callbacks are bounded and the dedicated JVM has a distinct240second bound. Ownership/close counts and token identities are independent assertions. No J2EE application worker, actual IO/native/file/Root/DB/JMS/network/keys or real heap exhaustion.",
+      "rule": "DoNotUseThreads",
+      "scopeKind": "METHOD",
+      "scopeName": "factory018ParallelCompleteOwnersNeverShareTransferState",
+      "scopeTokenSha256": "70dc7455ca2c80d0ed76e36803d38ac53b8c75bf4f727e20cf30245f8de69a39",
+      "source": "c099786934c864f31a6fb520184366c22c84f6ea",
+      "sourceSha256": "2e27495ad5ee51548ca32ceed8e3c92819dfe73ee982fdd97fca4eb6d31d3c09",
+      "sourceSpanSha256": "736f808611188e23a260f73a3b3efd6f03ba06df04160342febfca117cd1eb51"
+    },
+    {
+      "attributes": {
+        "begincolumn": "25",
+        "beginline": "569",
+        "class": "FactoryResourceScopeTest",
+        "endcolumn": "56",
+        "endline": "569",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "method": "factory018ParallelCompleteOwnersNeverShareTransferState",
+        "package": "dev.codex.schubert.nk.storage",
+        "priority": "3",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading",
+        "variable": "executor"
+      },
+      "controls": [
+        "newCountDownLatch(2)",
+        "ready.await(10,TimeUnit.SECONDS)",
+        "Thread.currentThread().interrupt()",
+        "Executors.newFixedThreadPool(2)",
+        "first.get()",
+        "second.get()",
+        "assertEquals(0,closed.get())"
+      ],
+      "currentCases": [
+        {
+          "className": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+          "method": "factory018ParallelCompleteOwnersNeverShareTransferState",
+          "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/FactoryResourceScopeTest.java",
+          "sourceSha256": "2e27495ad5ee51548ca32ceed8e3c92819dfe73ee982fdd97fca4eb6d31d3c09"
+        }
+      ],
+      "currentWholeJoinPending": true,
+      "disposition": "CONTEXT_NOT_APPLICABLE",
+      "id": "PMD-06949",
+      "kind": "FINITE_OWNED_STANDALONE_RESOURCE_FIXTURE_WORKERS",
+      "newAccepted": 0,
+      "oldRuntimeReassigned": false,
+      "originalRowSha256": "d102494e2ff0d690a53f6b326d8a84654ccfcf3ce6faea93e40803f3c7efa2ed",
+      "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/FactoryResourceScopeTest.java",
+      "productTestsExecutedByReview": 0,
+      "reason": "Original JavaSE JUnit owns one virtual executor/64 finite callbacks or two-worker pools/independent memory Tokens, all in TWR. Factory018 latch await10seconds restores interrupted flag before declared fixture IOException. Existing future.get has no per-call timeout; all submitted callbacks are bounded and the dedicated JVM has a distinct240second bound. Ownership/close counts and token identities are independent assertions. No J2EE application worker, actual IO/native/file/Root/DB/JMS/network/keys or real heap exhaustion.",
+      "rule": "DoNotUseThreads",
+      "scopeKind": "METHOD",
+      "scopeName": "factory018ParallelCompleteOwnersNeverShareTransferState",
+      "scopeTokenSha256": "70dc7455ca2c80d0ed76e36803d38ac53b8c75bf4f727e20cf30245f8de69a39",
+      "source": "c099786934c864f31a6fb520184366c22c84f6ea",
+      "sourceSha256": "2e27495ad5ee51548ca32ceed8e3c92819dfe73ee982fdd97fca4eb6d31d3c09",
+      "sourceSpanSha256": "9bb4530d7d15c1a0fc8b12c6cf064977273b752194c1eb8f8a3beb1a5e42af46"
+    },
+    {
+      "attributes": {
+        "begincolumn": "11",
+        "beginline": "571",
+        "class": "FactoryResourceScopeTest",
+        "endcolumn": "33",
+        "endline": "580",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "method": "factory018ParallelCompleteOwnersNeverShareTransferState",
+        "package": "dev.codex.schubert.nk.storage",
+        "priority": "3",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading",
+        "variable": "first"
+      },
+      "controls": [
+        "newCountDownLatch(2)",
+        "ready.await(10,TimeUnit.SECONDS)",
+        "Thread.currentThread().interrupt()",
+        "Executors.newFixedThreadPool(2)",
+        "first.get()",
+        "second.get()",
+        "assertEquals(0,closed.get())"
+      ],
+      "currentCases": [
+        {
+          "className": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+          "method": "factory018ParallelCompleteOwnersNeverShareTransferState",
+          "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/FactoryResourceScopeTest.java",
+          "sourceSha256": "2e27495ad5ee51548ca32ceed8e3c92819dfe73ee982fdd97fca4eb6d31d3c09"
+        }
+      ],
+      "currentWholeJoinPending": true,
+      "disposition": "CONTEXT_NOT_APPLICABLE",
+      "id": "PMD-06950",
+      "kind": "FINITE_OWNED_STANDALONE_RESOURCE_FIXTURE_WORKERS",
+      "newAccepted": 0,
+      "oldRuntimeReassigned": false,
+      "originalRowSha256": "1f915d43438b87a08d26a3f43727190689a7486690a8ec4e39cbc8d19f745117",
+      "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/FactoryResourceScopeTest.java",
+      "productTestsExecutedByReview": 0,
+      "reason": "Original JavaSE JUnit owns one virtual executor/64 finite callbacks or two-worker pools/independent memory Tokens, all in TWR. Factory018 latch await10seconds restores interrupted flag before declared fixture IOException. Existing future.get has no per-call timeout; all submitted callbacks are bounded and the dedicated JVM has a distinct240second bound. Ownership/close counts and token identities are independent assertions. No J2EE application worker, actual IO/native/file/Root/DB/JMS/network/keys or real heap exhaustion.",
+      "rule": "DoNotUseThreads",
+      "scopeKind": "METHOD",
+      "scopeName": "factory018ParallelCompleteOwnersNeverShareTransferState",
+      "scopeTokenSha256": "70dc7455ca2c80d0ed76e36803d38ac53b8c75bf4f727e20cf30245f8de69a39",
+      "source": "c099786934c864f31a6fb520184366c22c84f6ea",
+      "sourceSha256": "2e27495ad5ee51548ca32ceed8e3c92819dfe73ee982fdd97fca4eb6d31d3c09",
+      "sourceSpanSha256": "c5f06d49b8976fed13ce618d74f16c507616011789193823e0b0fa067a87ecb1"
+    },
+    {
+      "attributes": {
+        "begincolumn": "11",
+        "beginline": "582",
+        "class": "FactoryResourceScopeTest",
+        "endcolumn": "33",
+        "endline": "591",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "method": "factory018ParallelCompleteOwnersNeverShareTransferState",
+        "package": "dev.codex.schubert.nk.storage",
+        "priority": "3",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading",
+        "variable": "second"
+      },
+      "controls": [
+        "newCountDownLatch(2)",
+        "ready.await(10,TimeUnit.SECONDS)",
+        "Thread.currentThread().interrupt()",
+        "Executors.newFixedThreadPool(2)",
+        "first.get()",
+        "second.get()",
+        "assertEquals(0,closed.get())"
+      ],
+      "currentCases": [
+        {
+          "className": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+          "method": "factory018ParallelCompleteOwnersNeverShareTransferState",
+          "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/FactoryResourceScopeTest.java",
+          "sourceSha256": "2e27495ad5ee51548ca32ceed8e3c92819dfe73ee982fdd97fca4eb6d31d3c09"
+        }
+      ],
+      "currentWholeJoinPending": true,
+      "disposition": "CONTEXT_NOT_APPLICABLE",
+      "id": "PMD-06951",
+      "kind": "FINITE_OWNED_STANDALONE_RESOURCE_FIXTURE_WORKERS",
+      "newAccepted": 0,
+      "oldRuntimeReassigned": false,
+      "originalRowSha256": "4a46fedd17c332300949da6d6251652d715814fdbceffd1e3b6737b9ee9b9014",
+      "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/FactoryResourceScopeTest.java",
+      "productTestsExecutedByReview": 0,
+      "reason": "Original JavaSE JUnit owns one virtual executor/64 finite callbacks or two-worker pools/independent memory Tokens, all in TWR. Factory018 latch await10seconds restores interrupted flag before declared fixture IOException. Existing future.get has no per-call timeout; all submitted callbacks are bounded and the dedicated JVM has a distinct240second bound. Ownership/close counts and token identities are independent assertions. No J2EE application worker, actual IO/native/file/Root/DB/JMS/network/keys or real heap exhaustion.",
+      "rule": "DoNotUseThreads",
+      "scopeKind": "METHOD",
+      "scopeName": "factory018ParallelCompleteOwnersNeverShareTransferState",
+      "scopeTokenSha256": "70dc7455ca2c80d0ed76e36803d38ac53b8c75bf4f727e20cf30245f8de69a39",
+      "source": "c099786934c864f31a6fb520184366c22c84f6ea",
+      "sourceSha256": "2e27495ad5ee51548ca32ceed8e3c92819dfe73ee982fdd97fca4eb6d31d3c09",
+      "sourceSpanSha256": "beb7207e83a326bee895b15c5cf77522f888c41c7fa5ea37f3c6739cca12df94"
+    },
+    {
+      "attributes": {
+        "begincolumn": "21",
+        "beginline": "246",
+        "class": "ResourceScopeTest",
+        "endcolumn": "64",
+        "endline": "246",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "method": "concurrentScopes",
+        "package": "dev.codex.schubert.nk.storage",
+        "priority": "3",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading",
+        "variable": "pool"
+      },
+      "controls": [
+        "Executors.newVirtualThreadPerTaskExecutor()",
+        "i<64",
+        "pool.submit(",
+        "futures.get(i).get()",
+        "assertEquals(64,closed.get())"
+      ],
+      "currentCases": [
+        {
+          "className": "dev.codex.schubert.nk.storage.ResourceScopeTest",
+          "method": "concurrentScopes",
+          "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/ResourceScopeTest.java",
+          "sourceSha256": "ff42c4f5e5188ea34d8dd6c113f745c92ed85b155b60ab2267f112e91e8e08d5"
+        }
+      ],
+      "currentWholeJoinPending": true,
+      "disposition": "CONTEXT_NOT_APPLICABLE",
+      "id": "PMD-07119",
+      "kind": "FINITE_OWNED_STANDALONE_RESOURCE_FIXTURE_WORKERS",
+      "newAccepted": 0,
+      "oldRuntimeReassigned": false,
+      "originalRowSha256": "33294888d2eded5b393d21ea78974f7961ae37d62f01b6b83b610b5d51dc6de4",
+      "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/ResourceScopeTest.java",
+      "productTestsExecutedByReview": 0,
+      "reason": "Original JavaSE JUnit owns one virtual executor/64 finite callbacks or two-worker pools/independent memory Tokens, all in TWR. Factory018 latch await10seconds restores interrupted flag before declared fixture IOException. Existing future.get has no per-call timeout; all submitted callbacks are bounded and the dedicated JVM has a distinct240second bound. Ownership/close counts and token identities are independent assertions. No J2EE application worker, actual IO/native/file/Root/DB/JMS/network/keys or real heap exhaustion.",
+      "rule": "DoNotUseThreads",
+      "scopeKind": "METHOD",
+      "scopeName": "concurrentScopes",
+      "scopeTokenSha256": "247a9c40b4b08ff112363b2cc6c0259929c64b9bd136ec9aaac59362f0d31416",
+      "source": "c099786934c864f31a6fb520184366c22c84f6ea",
+      "sourceSha256": "ff42c4f5e5188ea34d8dd6c113f745c92ed85b155b60ab2267f112e91e8e08d5",
+      "sourceSpanSha256": "7750eefbe06584df46471c6b7bb2c580f02353df15e9b6bb1326e7ea4ff1b7bf"
+    },
+    {
+      "attributes": {
+        "begincolumn": "13",
+        "beginline": "251",
+        "class": "ResourceScopeTest",
+        "endcolumn": "92",
+        "endline": "251",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "method": "concurrentScopes",
+        "package": "dev.codex.schubert.nk.storage",
+        "priority": "3",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading"
+      },
+      "controls": [
+        "Executors.newVirtualThreadPerTaskExecutor()",
+        "i<64",
+        "pool.submit(",
+        "futures.get(i).get()",
+        "assertEquals(64,closed.get())"
+      ],
+      "currentCases": [
+        {
+          "className": "dev.codex.schubert.nk.storage.ResourceScopeTest",
+          "method": "concurrentScopes",
+          "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/ResourceScopeTest.java",
+          "sourceSha256": "ff42c4f5e5188ea34d8dd6c113f745c92ed85b155b60ab2267f112e91e8e08d5"
+        }
+      ],
+      "currentWholeJoinPending": true,
+      "disposition": "CONTEXT_NOT_APPLICABLE",
+      "id": "PMD-07120",
+      "kind": "FINITE_OWNED_STANDALONE_RESOURCE_FIXTURE_WORKERS",
+      "newAccepted": 0,
+      "oldRuntimeReassigned": false,
+      "originalRowSha256": "48328cbfc02d61a487b1b0f7bb59419a8e72a72d3b7b5bd1577f8d4a3b77684f",
+      "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/ResourceScopeTest.java",
+      "productTestsExecutedByReview": 0,
+      "reason": "Original JavaSE JUnit owns one virtual executor/64 finite callbacks or two-worker pools/independent memory Tokens, all in TWR. Factory018 latch await10seconds restores interrupted flag before declared fixture IOException. Existing future.get has no per-call timeout; all submitted callbacks are bounded and the dedicated JVM has a distinct240second bound. Ownership/close counts and token identities are independent assertions. No J2EE application worker, actual IO/native/file/Root/DB/JMS/network/keys or real heap exhaustion.",
+      "rule": "DoNotUseThreads",
+      "scopeKind": "METHOD",
+      "scopeName": "concurrentScopes",
+      "scopeTokenSha256": "247a9c40b4b08ff112363b2cc6c0259929c64b9bd136ec9aaac59362f0d31416",
+      "source": "c099786934c864f31a6fb520184366c22c84f6ea",
+      "sourceSha256": "ff42c4f5e5188ea34d8dd6c113f745c92ed85b155b60ab2267f112e91e8e08d5",
+      "sourceSpanSha256": "f95a2d773232f5d248ba53a531eaa21a75fc7d217824028fd3cc8bef4a350aa7"
+    }
+  ],
+  "source": "c099786934c864f31a6fb520184366c22c84f6ea"
+}

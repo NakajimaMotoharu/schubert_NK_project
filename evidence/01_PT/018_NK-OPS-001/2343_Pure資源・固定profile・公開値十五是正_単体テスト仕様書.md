@@ -1,0 +1,15 @@
+# Pure資源・固定profile・公開値 十五是正 単体テスト仕様書
+
+2026-10-28、F03-PURERESOURCEPROFILE001/PG-D744/BUG1979YKT1727。開始見積3/7/10pp cap10、共有65残35/reset1793599188・短期非提供/券0、N/T・専有費null。主F03、原owner/costはtrace_owner_join/既承認983から別確認し推測配賦しない。元予測/正式1964-53/17-190/工数null/QA051final/HOLD不変。
+
+対象変更四Test：ResourceScopeTest8（RSCOPE001..008、SS333SSC063）、FactoryResourceScopeTest18（IOFACT001..018、SS333SSC308）、FixedNativeCoverageProfileTest5（NC193001..005、SS342343SSC193）、ObservationValueRedactionTest2（OBSDATA001002、SS321343SSC126130137）。ExceptionValueContractTest1（EXC005、SS333）を全ResourceScope/Main例外資格に必要な無変更companionとして加え、原34件/5suite一execで回帰する。旧1970/旧coverageを当sourceへ合算せず、成功確認だけの再演でなく四Test変更後の共通資源/値型の必要回帰。
+
+製造は八String48参照（Resource body4、Factory open10/close8/body6/PUBLIC_CLOSE6、profile API-5/-root5、公開値 public4）と七typed if一参照ずつ（char 'S'一、int1四・2一・3一）だけ同値定数化。原全method/helper/control/例外/並行/assertionをraw token逆と型・値・参照・無効Test・期待assertion反例で保持し、Main/上位仕様/独立期待値を変更しない。Production関数をexpected生成に使わない。
+
+PT_DEFAULT：五wholeTestと全helper全文、ResourceScope/StorageIoException/FixedNativeCoverageProfile/StorageRootLayout/ServiceConfigFiles、ArtemisStartupObservation全文と使用nested record constructor/getter/toStringを確認。Resourceは自己memory Token/list/atomic・有限64virtual task/二owner executorだけ、IO/Errorは明示fixture値で実取得/heap枯渇なし。Factory latch10秒、元future.getの局所無期限と全JVM240秒を区別する。profileは固定literal option/role/phase/invocationの文字列parse/不変値だけ、agent pathにファイルアクセスしない。公開値はServiceConfigFiles.Contents、RootReleaseAdmission.EffectiveConfigurations、RootServiceFacts.Facts、MorningBrokerExecution.Observations、BrokerJournalEvidence.Summary、ArtemisStartupObservation.EvidenceとStorageRootLayoutのデータconstructorだけ。nested型は外側Root/FFM/DB/credential初期化や業務処理を呼ばない。宣言中の外側メソッド全体の受入を意味しない。TerminalNativeCoverageProfileTestはfromCurrentTerminalJvm/captureを含み関連closure未認証なのでwholeTest対象外、部分抽出/新代替fixture無し。
+
+期待値：SS333の独立ownership/失敗勝者表・body→close/取得未成立body-close0・null未受理/nullable body・IO redaction固定message/reason/cause-suppressed無し・unknown identity/固定secondary・handoff3×4 winners SSRE/RRRR/EEEE と suppressed0000/0111/0111・並行state独立。SS343SSC193の四startup profile/Root→ordinaryのrole/invocation不変・不明/重複/拡張/大小字/長さ/null拒否・public agent path/hash固定literal/inputs alias遮断。公開値は入力identity/固定redacted toString/null契約・immutable map copy、実観測成功や権限を表さない。
+
+予定command：12496plan→patch/GJF→12498独立typed逆→四Test sourcecommit→12500六normal/PT0→12502原34/五suite一exec（新slot/空CWD240秒）→12504実static24→9→12506独立XML/CRC/全Main1843同byte・変更Test物理/Code-debug・complete storage80/bootstrap117/batch645/明示pureMain許可表外probe0・四counter→残九Threadのsource-method文脈/独立post→983四SHA/原owner-cost/全WBS同HOLD1/予算受入不変→current集合/完成結合/公開三format scan/exact保存push。source再認証/追加発見/手戻り/toolを別費用eventとし、群cap10で新群を追加しない。実scope外Mainヒット/失敗なら後続停止し先行台帳、成功を再演して穴埋めしない。
+
+全manifestはsource/branch/OS/JDK/tools/argv/時刻/exit/input/expected-actual/XML/execCRC/四counter/hash/BUGを記録。F/E/S/flaky/aborted/notrunは不合格、全artifact未達/自然分母0=N/A/defaultfilter/未検証methodを隠さない。旧exec合算/人工到達/除外追加0。実VM/Root/cohort/intent/permit/DB/Backup/鍵/actual native/保留二工具はHOLD、内容未読・stage外の二工具を維持。通常小群/commit/報告/PMO待ちでは停止しない。先行enum保存186ed0286/push92379真正0、fresh次区切りで再照会。

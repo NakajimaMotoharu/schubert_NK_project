@@ -1,0 +1,312 @@
+{
+  "actualExit": 0,
+  "additionalUnchangedCompanionMethods": 1,
+  "allMainAndOtherInputsPreserved": true,
+  "allOriginalOracleTokensRestored": true,
+  "coverage": null,
+  "expectedExecutedMethods": 34,
+  "invocation": {
+    "actualPythonCommand": [
+      "/usr/bin/python3",
+      "-B",
+      "tools/quality/pg12498_pure_resource_profile_source_post.py"
+    ],
+    "arbitraryArgumentsRecorded": false,
+    "entrypointPath": "tools/quality/pg12498_pure_resource_profile_source_post.py",
+    "entrypointSha256": "8cf5fc1a3b751e9d6180753c03799f306701e352e330693f803aaee54b338ea0",
+    "helperPath": "tools/quality/host_tool_invocation.py",
+    "helperSha256": "85d616a3db4ff47f4c95ae2e0dd57954bc2b09f28b8f2a685b986e5621545c46",
+    "libraryPath": "tools/quality/pg12498_pure_resource_profile_source_post.py",
+    "librarySha256": "8cf5fc1a3b751e9d6180753c03799f306701e352e330693f803aaee54b338ea0",
+    "loadedProjectPythonSources": {
+      "tools/quality/g07_host_class_provenance_inputs.py": "a676cb3e4145177c3c243722d737592ce7d44c3f29cfe4f670662ef7651f046b",
+      "tools/quality/host_tool_invocation.py": "85d616a3db4ff47f4c95ae2e0dd57954bc2b09f28b8f2a685b986e5621545c46",
+      "tools/quality/pg12498_pure_resource_profile_source_post.py": "8cf5fc1a3b751e9d6180753c03799f306701e352e330693f803aaee54b338ea0",
+      "tools/quality/public_java_digest_provenance.py": "dd47f8735a61ce849995633c3290a6ad047842ef3263829ce359db413778f7a0"
+    },
+    "provenance": "OBSERVED_SYS_ARGV_AND_ORIG_ARGV_NOT_RECONSTRUCTED"
+  },
+  "metadataNegativeVectors": 57,
+  "newAccepted": 0,
+  "originalCatalog": [
+    {
+      "method": "successfulOwnership",
+      "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/ResourceScopeTest.java"
+    },
+    {
+      "method": "knownIoFailures",
+      "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/ResourceScopeTest.java"
+    },
+    {
+      "method": "unknownBodyFailures",
+      "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/ResourceScopeTest.java"
+    },
+    {
+      "method": "knownBodyUnknownCleanup",
+      "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/ResourceScopeTest.java"
+    },
+    {
+      "method": "unknownCompoundFailures",
+      "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/ResourceScopeTest.java"
+    },
+    {
+      "method": "nullAndNullableContracts",
+      "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/ResourceScopeTest.java"
+    },
+    {
+      "method": "nestedScopes",
+      "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/ResourceScopeTest.java"
+    },
+    {
+      "method": "concurrentScopes",
+      "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/ResourceScopeTest.java"
+    },
+    {
+      "method": "factory001SuccessAndNullableBodyUseSameResourceOnce",
+      "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/FactoryResourceScopeTest.java"
+    },
+    {
+      "method": "factory002EveryNullPortFailsBeforeAcquire",
+      "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/FactoryResourceScopeTest.java"
+    },
+    {
+      "method": "factory003NullAcquisitionNeverEntersBodyOrRelease",
+      "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/FactoryResourceScopeTest.java"
+    },
+    {
+      "method": "factory004AllAcquisitionFailuresKeepIdentityWithoutRelease",
+      "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/FactoryResourceScopeTest.java"
+    },
+    {
+      "method": "factory005PortConstructionErrorsPrecedeAcquisition",
+      "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/FactoryResourceScopeTest.java"
+    },
+    {
+      "method": "factory006BodyIoReasonsAreRedactedAndExistingSuppressionIsNotExported",
+      "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/FactoryResourceScopeTest.java"
+    },
+    {
+      "method": "factory007BodyAndCloseIoAlwaysBecomeUnavailableWithoutRawSuppression",
+      "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/FactoryResourceScopeTest.java"
+    },
+    {
+      "method": "factory008UnknownCloseTakesPriorityOverBodyIo",
+      "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/FactoryResourceScopeTest.java"
+    },
+    {
+      "method": "factory009UnknownBodyKeepsIdentityAfterSuccessfulClose",
+      "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/FactoryResourceScopeTest.java"
+    },
+    {
+      "method": "factory010UnknownCompoundAndSelfFailureHaveSanitizedOrderedSuppression",
+      "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/FactoryResourceScopeTest.java"
+    },
+    {
+      "method": "factory011SuccessfulBodyCannotHideAnyCloseFailure",
+      "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/FactoryResourceScopeTest.java"
+    },
+    {
+      "method": "factory012NestedAndParallelScopesKeepIndependentOwnership",
+      "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/FactoryResourceScopeTest.java"
+    },
+    {
+      "method": "factory013CompleteOwnerTransfersWithoutClosingAndKeepsNarrowType",
+      "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/FactoryResourceScopeTest.java"
+    },
+    {
+      "method": "factory014HandoffPortsAndFactoryFailuresNeverAcceptAnOwner",
+      "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/FactoryResourceScopeTest.java"
+    },
+    {
+      "method": "factory015IncompleteAssemblyMatchesIndependentThreeByFourGolden",
+      "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/FactoryResourceScopeTest.java"
+    },
+    {
+      "method": "factory016NullCompleteOwnerIsReleasedWithSanitizedCompoundFailure",
+      "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/FactoryResourceScopeTest.java"
+    },
+    {
+      "method": "factory017RepeatedAndAlreadySuppressedFailuresKeepIndependentPriority",
+      "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/FactoryResourceScopeTest.java"
+    },
+    {
+      "method": "factory018ParallelCompleteOwnersNeverShareTransferState",
+      "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/FactoryResourceScopeTest.java"
+    },
+    {
+      "method": "nc193001DefaultAndUnrelatedHostAgentDoNotActivateOrReadInvocation",
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/bootstrap/FixedNativeCoverageProfileTest.java"
+    },
+    {
+      "method": "nc193002FourLiteralProfilesAndRootToOrdinaryPreserveSameRoleAndInvocation",
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/bootstrap/FixedNativeCoverageProfileTest.java"
+    },
+    {
+      "method": "nc193003MissingNullCollectionElementsAndUnknownInvocationAreRejectedWithoutNpe",
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/bootstrap/FixedNativeCoverageProfileTest.java"
+    },
+    {
+      "method": "nc193004ReservedUnknownDuplicateRolePhasePathAndOptionExpansionAreRejected",
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/bootstrap/FixedNativeCoverageProfileTest.java"
+    },
+    {
+      "method": "nc193005AgentPinAndImmutableOptionsAreIndependentFixedConstants",
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/bootstrap/FixedNativeCoverageProfileTest.java"
+    },
+    {
+      "method": "obsdata001FactsRetainPublicInputsButDiagnosticNeverRendersYamlOrBinding",
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/ObservationValueRedactionTest.java"
+    },
+    {
+      "method": "obsdata002BrokerWrapperRetainsImmutablePublicDataButDiagnosticHasNoNestedDetails",
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/ObservationValueRedactionTest.java"
+    }
+  ],
+  "originalMethods": 33,
+  "originalRawTokens": 7699,
+  "planManifestSha256": "2afc6237ad922fab24e622ab94b8c9886518bcd742ec76041eb54a1c49f42f14",
+  "productTestsExecuted": 0,
+  "sourceBefore": "6929166ee735effb5cae211e1f4cfe44f0b97a0a",
+  "sourceChanges": [
+    {
+      "beforeSha256": "5541d3bb6a4c6db8bdacadf65abf82935b268219547147f263bd2e85b3f61fa7",
+      "constants": [
+        {
+          "id": "PMD-07116",
+          "literal": "\"body\"",
+          "name": "BODY_EVENT",
+          "references": 4,
+          "type": "String"
+        },
+        {
+          "id": "PMD-07117",
+          "literal": "1",
+          "name": "CLOSE_FAILURE_MODE",
+          "originalStart": 2342,
+          "references": 1,
+          "type": "int"
+        },
+        {
+          "id": "PMD-07118",
+          "literal": "1",
+          "name": "SUCCESSFUL_BODY_MODE",
+          "originalStart": 2477,
+          "references": 1,
+          "type": "int"
+        }
+      ],
+      "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/ResourceScopeTest.java",
+      "sha256": "ff42c4f5e5188ea34d8dd6c113f745c92ed85b155b60ab2267f112e91e8e08d5"
+    },
+    {
+      "beforeSha256": "6cd8748fccf94554af92dab4a702917b0e4c05aa08cd1c1cf7079b165cddab5f",
+      "constants": [
+        {
+          "id": "PMD-06936",
+          "literal": "\"open\"",
+          "name": "OPEN_EVENT",
+          "references": 10,
+          "type": "String"
+        },
+        {
+          "id": "PMD-06937",
+          "literal": "\"close\"",
+          "name": "CLOSE_EVENT",
+          "references": 8,
+          "type": "String"
+        },
+        {
+          "id": "PMD-06938",
+          "literal": "\"body\"",
+          "name": "BODY_EVENT",
+          "references": 6,
+          "type": "String"
+        },
+        {
+          "id": "PMD-06942",
+          "literal": "\"PUBLIC_CLOSE\"",
+          "name": "PUBLIC_CLOSE_MARKER",
+          "references": 6,
+          "type": "String"
+        },
+        {
+          "id": "PMD-06943",
+          "literal": "'S'",
+          "name": "SANITIZED_IO_WINNER",
+          "originalStart": 15837,
+          "references": 1,
+          "type": "char"
+        },
+        {
+          "id": "PMD-06944",
+          "literal": "1",
+          "name": "ONE_SANITIZED_SUPPRESSION",
+          "originalStart": 16266,
+          "references": 1,
+          "type": "int"
+        },
+        {
+          "id": "PMD-06945",
+          "literal": "1",
+          "name": "IO_CLOSE_MODE",
+          "originalStart": 17183,
+          "references": 1,
+          "type": "int"
+        },
+        {
+          "id": "PMD-06946",
+          "literal": "2",
+          "name": "RUNTIME_CLOSE_MODE",
+          "originalStart": 17261,
+          "references": 1,
+          "type": "int"
+        },
+        {
+          "id": "PMD-06947",
+          "literal": "3",
+          "name": "ERROR_CLOSE_MODE",
+          "originalStart": 17349,
+          "references": 1,
+          "type": "int"
+        }
+      ],
+      "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/FactoryResourceScopeTest.java",
+      "sha256": "2e27495ad5ee51548ca32ceed8e3c92819dfe73ee982fdd97fca4eb6d31d3c09"
+    },
+    {
+      "beforeSha256": "02d37fef7aec841f17935f09b8539c33e7ceddbe87fae1c5cb8c3ba21a26d17f",
+      "constants": [
+        {
+          "id": "PMD-06499",
+          "literal": "\"API-\"",
+          "name": "API_ROLE_PREFIX",
+          "references": 5,
+          "type": "String"
+        },
+        {
+          "id": "PMD-06500",
+          "literal": "\"-root\"",
+          "name": "ROOT_PHASE_SUFFIX",
+          "references": 5,
+          "type": "String"
+        }
+      ],
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/bootstrap/FixedNativeCoverageProfileTest.java",
+      "sha256": "0896cf1e70a529ccb40d31e6a9d48b6298ea4694060de8a7a4eb0edabb7c1c88"
+    },
+    {
+      "beforeSha256": "829a6a86cfa77f331b4c574c73baa31259cadab9c321fe1064e370ce74709cad",
+      "constants": [
+        {
+          "id": "PMD-04444",
+          "literal": "\"public\"",
+          "name": "PUBLIC_FIELD",
+          "references": 4,
+          "type": "String"
+        }
+      ],
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/ObservationValueRedactionTest.java",
+      "sha256": "644e7f71d3e8dc2c79aafd1d860b8b98afa067ddf67fdd1a2088b726933cb5ce"
+    }
+  ]
+}
