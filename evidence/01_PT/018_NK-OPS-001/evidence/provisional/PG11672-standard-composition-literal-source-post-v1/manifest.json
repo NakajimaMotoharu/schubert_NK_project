@@ -1,0 +1,136 @@
+{
+  "actualExit": 0,
+  "allMainAndOtherInputsPreserved": true,
+  "allOriginalGuardAndDeadlineTokensRestored": true,
+  "allOriginalOracleTokensRestored": true,
+  "coverage": null,
+  "effortPercent": null,
+  "externalActions": 0,
+  "invocation": {
+    "actualPythonCommand": [
+      "/usr/bin/python3",
+      "-B",
+      "tools/quality/pg11672_standard_composition_literal_source_post.py"
+    ],
+    "arbitraryArgumentsRecorded": false,
+    "entrypointPath": "tools/quality/pg11672_standard_composition_literal_source_post.py",
+    "entrypointSha256": "7ec35b8638c7c4fdd7e4e9c8b1667c9420b7da6ade68e0e0045303639793a424",
+    "helperPath": "tools/quality/host_tool_invocation.py",
+    "helperSha256": "85d616a3db4ff47f4c95ae2e0dd57954bc2b09f28b8f2a685b986e5621545c46",
+    "libraryPath": "tools/quality/pg11672_standard_composition_literal_source_post.py",
+    "librarySha256": "7ec35b8638c7c4fdd7e4e9c8b1667c9420b7da6ade68e0e0045303639793a424",
+    "loadedProjectPythonSources": {
+      "tools/quality/classfile_code_metadata.py": "2227e1e8df1ff91b606f094c7ee64366023273ca740d4d47126ed0928190e2f0",
+      "tools/quality/g07_host_class_provenance_inputs.py": "a676cb3e4145177c3c243722d737592ce7d44c3f29cfe4f670662ef7651f046b",
+      "tools/quality/host_tool_invocation.py": "85d616a3db4ff47f4c95ae2e0dd57954bc2b09f28b8f2a685b986e5621545c46",
+      "tools/quality/pg10130_uid_oracle_preflight.py": "e80cb1d6d45d4e4c0cdb3cb792e0638119d936403de5c3e141429d338485758a",
+      "tools/quality/pg10332_result_profile_oracle_plan.py": "82c9b4f57dd517c1dbee639dbf4955c316beb89216cb9a8a66e78e0b9a322ad4",
+      "tools/quality/pg10339_result_profile_oracle_post_v2.py": "42f86287f5236d2ef1a2e10f54f5b0634e799a4e866b15eaf6738336a4ebabb0",
+      "tools/quality/pg10392_role_literal_plan.py": "e1af98abd59175d867d29b07a73d7b2e4c7112754603d1805ec0bfc4d9465ce8",
+      "tools/quality/pg10398_role_view_preflight.py": "31709d50a345f3e0843fa62ae0b4c6849885503eb3d81555b6bcc9605b486d56",
+      "tools/quality/pg11104_web_pure_value_source_post.py": "2713a232d4143cf94c39b865936368707d115c19649a469de35dfbd22ad70967",
+      "tools/quality/pg11208_web_supplied_metric_fixture_source_post.py": "a5c338662163cc2ce1e95606e62e1ed86d7ce276e5e2c001e0ff67cd8eca0199",
+      "tools/quality/pg11672_standard_composition_literal_source_post.py": "7ec35b8638c7c4fdd7e4e9c8b1667c9420b7da6ade68e0e0045303639793a424",
+      "tools/quality/pg9906_user_query_oracle_source_post.py": "4f9bdaa17eea78a720c0f25b8af906f3f045fda590c8fea2a8868229403a98fa",
+      "tools/quality/pg9978_plain_core_quality_post.py": "c99cc753c6335c9f41e3eafe6a97c17521503739ba2cf80659b542a445dd48fa",
+      "tools/quality/public_java_digest_provenance.py": "dd47f8735a61ce849995633c3290a6ad047842ef3263829ce359db413778f7a0"
+    },
+    "provenance": "OBSERVED_SYS_ARGV_AND_ORIG_ARGV_NOT_RECONSTRUCTED"
+  },
+  "metadataNegativeVectors": 28,
+  "newAccepted": 0,
+  "originalMethods": 26,
+  "planManifestSha256": "af6206742ae9e6e6f362b5a0d4695d137890ed373b2f9c4167781c974b982b3a",
+  "productTestsExecuted": 0,
+  "referencesReplaced": 76,
+  "sourceBefore": "b4810698856cc2ae7edabb899a47aad34ef52cc2",
+  "sourceChanges": [
+    {
+      "beforeSha256": "12c507c6a5709da58138e683308bfac801325f4e13682e7a9583c796f3a2838b",
+      "constants": [
+        {
+          "id": "PMD-02069",
+          "literal": "\"REGISTRY_CLOSE\"",
+          "name": "REGISTRY_CLOSE_EVENT",
+          "references": 6
+        },
+        {
+          "id": "PMD-02070",
+          "literal": "\"GC_CLOSE\"",
+          "name": "GC_CLOSE_EVENT",
+          "references": 6
+        },
+        {
+          "id": "PMD-02071",
+          "literal": "\"DEBUG\"",
+          "name": "DEBUG_MODE",
+          "references": 13
+        },
+        {
+          "id": "PMD-02072",
+          "literal": "\"not invoke\"",
+          "name": "UNEXPECTED_PHASE_ACCESS",
+          "references": 4
+        },
+        {
+          "id": "PMD-02073",
+          "literal": "\"STANDARD\"",
+          "name": "STANDARD_MODE",
+          "references": 5
+        },
+        {
+          "id": "PMD-02075",
+          "literal": "\"fixture\"",
+          "name": "FAILURE_FIXTURE",
+          "references": 4
+        }
+      ],
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiStandardMetricsTest.java",
+      "sha256": "e4f2bc1dcbcca9c7c2bb940ea829bb52d7a34de87a9905cd6962b05f55155919"
+    },
+    {
+      "beforeSha256": "14bd5e0f4661d8dfb3480864d214735b864318706391ba3b16db0380746fc619",
+      "constants": [
+        {
+          "id": "PMD-08551",
+          "literal": "\"REGISTRY_CLOSE\"",
+          "name": "REGISTRY_CLOSE_EVENT",
+          "references": 6
+        },
+        {
+          "id": "PMD-08552",
+          "literal": "\"GC_CLOSE\"",
+          "name": "GC_CLOSE_EVENT",
+          "references": 6
+        },
+        {
+          "id": "PMD-08553",
+          "literal": "\"DEBUG\"",
+          "name": "DEBUG_MODE",
+          "references": 13
+        },
+        {
+          "id": "PMD-08554",
+          "literal": "\"not invoke\"",
+          "name": "UNEXPECTED_PHASE_ACCESS",
+          "references": 4
+        },
+        {
+          "id": "PMD-08555",
+          "literal": "\"STANDARD\"",
+          "name": "STANDARD_MODE",
+          "references": 5
+        },
+        {
+          "id": "PMD-08557",
+          "literal": "\"fixture\"",
+          "name": "FAILURE_FIXTURE",
+          "references": 4
+        }
+      ],
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebStandardMetricsTest.java",
+      "sha256": "c67d3249e8a1ed355fd0d7d036361b36c7d016d816da8087a0c2d73a2d3355d6"
+    }
+  ],
+  "stringConstants": 12
+}
