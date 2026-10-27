@@ -52,7 +52,7 @@ class TransferContentVerifierTest {
   void w06ThreeByteReadsStayBoundedAndEveryDigestByteDifferenceIsRejected() throws Exception {
     byte[] golden = golden();
     var expected = expected(golden);
-    try (var input = new TestInput(golden, 0)) {
+    try (var input = new ChunkedInput(golden, 0)) {
       TransferContentVerifier.verify(input, expected);
       assertTrue(input.isOpen());
       assertEquals(4800, input.offset);
@@ -63,7 +63,7 @@ class TransferContentVerifierTest {
       byte[] modified = hash.clone();
       modified[position] ^= 1;
       var wrong = new LargeResultContent(1, 4800, HexFormat.of().formatHex(modified));
-      try (var input = new TestInput(golden, 0)) {
+      try (var input = new ChunkedInput(golden, 0)) {
         reject(() -> TransferContentVerifier.verify(input, wrong));
         assertTrue(input.isOpen());
         assertEquals(4800, input.offset);
@@ -76,27 +76,31 @@ class TransferContentVerifierTest {
     byte[] golden = golden();
     var expected = expected(golden);
     assertThrows(NullPointerException.class, () -> TransferContentVerifier.verify(null, expected));
-    try (var input = new TestInput(golden, 0)) {
+    try (var input = new ChunkedInput(golden, 0)) {
       assertThrows(NullPointerException.class, () -> TransferContentVerifier.verify(input, null));
       assertEquals(0, input.offset);
     }
     for (byte[] bytes :
         new byte[][] {new byte[0], Arrays.copyOf(golden, 4799), Arrays.copyOf(golden, 4801)}) {
-      try (var input = new TestInput(bytes, 0)) {
+      try (var input = new ChunkedInput(bytes, 0)) {
         reject(() -> TransferContentVerifier.verify(input, expected));
         assertTrue(input.isOpen());
       }
     }
     for (int mode = 1; mode <= 3; mode++) {
-      try (var input = new TestInput(golden, mode)) {
+      try (var input = new ChunkedInput(golden, mode)) {
         reject(() -> TransferContentVerifier.verify(input, expected));
         assertTrue(input.isOpen());
       }
     }
-    var closed = new TestInput(golden, 0);
-    closed.close();
-    reject(() -> TransferContentVerifier.verify(closed, expected));
-    assertFalse(closed.isOpen());
+    var closed = new ChunkedInput(golden, 0);
+    try {
+      closed.close();
+      reject(() -> TransferContentVerifier.verify(closed, expected));
+      assertFalse(closed.isOpen());
+    } finally {
+      closed.close();
+    }
   }
 
   private static byte[] golden() {
@@ -119,14 +123,16 @@ class TransferContentVerifierTest {
     assertEquals(0, failure.getSuppressed().length);
   }
 
-  private static final class TestInput implements ReadableByteChannel {
+  private static final class ChunkedInput implements ReadableByteChannel {
+    private static final int ZERO_PROGRESS_MODE = 1;
+
     final byte[] bytes;
     final int mode;
     int offset;
     int maximumBuffer;
     boolean open = true;
 
-    TestInput(byte[] bytes, int mode) {
+    ChunkedInput(byte[] bytes, int mode) {
       this.bytes = bytes;
       this.mode = mode;
     }
@@ -135,7 +141,7 @@ class TransferContentVerifierTest {
     public int read(ByteBuffer target) throws IOException {
       if (!open || mode == 2) throw new IOException("SYNTHETIC_PRIVATE_PATH");
       maximumBuffer = Math.max(maximumBuffer, target.remaining());
-      if (mode == 1) return 0;
+      if (mode == ZERO_PROGRESS_MODE) return 0;
       if (offset == bytes.length) return mode == 3 ? 0 : -1;
       int length = Math.min(3, Math.min(target.remaining(), bytes.length - offset));
       target.put(bytes, offset, length);
