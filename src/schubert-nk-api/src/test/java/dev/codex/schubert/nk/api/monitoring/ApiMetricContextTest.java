@@ -26,6 +26,8 @@ import org.junit.jupiter.api.Test;
 
 /** 1815 APIMCTX001..026: SDK ownership only, no external service or opaque data oracle. */
 class ApiMetricContextTest {
+  private static final String DEBUG_MODE = "DEBUG";
+  private static final String FIXTURE_BINDING = "binding";
   private static final String READY_ONE =
       "# TYPE schubert_nk_api_ready gauge\nschubert_nk_api_ready 1\n";
   private static final String READY_ZERO =
@@ -106,8 +108,8 @@ class ApiMetricContextTest {
 
   private static final class Harness<T> implements AutoCloseable {
     final List<String> order = new ArrayList<>();
-    final Custom custom = new Custom(order);
-    final Standard standard = new Standard(order);
+    final Custom customRegistry = new Custom(order);
+    final Standard standardRegistry = new Standard(order);
     final AtomicInteger customCreates = new AtomicInteger();
     final AtomicInteger standardCreates = new AtomicInteger();
     final AtomicInteger setups = new AtomicInteger();
@@ -150,14 +152,14 @@ class ApiMetricContextTest {
 
     @Override
     public void close() {
-      custom.onRead = Optional.empty();
-      custom.readFailure = Optional.empty();
-      custom.closeFailure = Optional.empty();
-      standard.closeFailure = Optional.empty();
+      customRegistry.onRead = Optional.empty();
+      customRegistry.readFailure = Optional.empty();
+      customRegistry.closeFailure = Optional.empty();
+      standardRegistry.closeFailure = Optional.empty();
       context.close();
       // Only unused fixture candidates remain owned by the fixture, never by the context.
-      if (!custom.isClosed()) custom.close();
-      if (!standard.isClosed()) standard.close();
+      if (!customRegistry.isClosed()) customRegistry.close();
+      if (!standardRegistry.isClosed()) standardRegistry.close();
     }
   }
 
@@ -186,7 +188,7 @@ class ApiMetricContextTest {
     var supplied = new AtomicReference<double[]>();
     try (var context =
         new ApiMetricContext<double[]>(
-            "DEBUG",
+            DEBUG_MODE,
             registry -> {
               double[] value = {7.5};
               supplied.set(value);
@@ -219,7 +221,7 @@ class ApiMetricContextTest {
 
   @Test
   void apimctx003UninitializedAndClosedBeforeInitNeverAcquire() {
-    try (var h = new Harness<String>("DEBUG", registry -> "binding")) {
+    try (var h = new Harness<String>(DEBUG_MODE, registry -> FIXTURE_BINDING)) {
       assertThrows(IllegalStateException.class, () -> h.context.render(true));
       assertThrows(IllegalStateException.class, h.context::bindings);
       h.context.close();
@@ -233,39 +235,43 @@ class ApiMetricContextTest {
   void apimctx004ModeNullAndUnknownFailBeforeSdkAcquisition() {
     assertThrows(
         NullPointerException.class,
-        () -> new ApiMetricContext<String>(null, registry -> "binding"));
+        () -> new ApiMetricContext<String>(null, registry -> FIXTURE_BINDING));
     assertEquals(
         "CONFIG_INVALID",
         assertThrows(
                 IllegalArgumentException.class,
-                () -> new ApiMetricContext<String>("unknown", registry -> "binding"))
+                () -> new ApiMetricContext<String>("unknown", registry -> FIXTURE_BINDING))
             .getMessage());
   }
 
   @Test
   void apimctx005ConstructorPortsAreNonNull() {
-    var standard = new ApiStandardMetricSource();
+    var standardRegistry = new ApiStandardMetricSource();
     try {
-      assertThrows(
-          NullPointerException.class,
-          () -> new ApiMetricContext<String>("DEBUG", null, SimpleMeterRegistry::new, standard));
-      assertThrows(
-          NullPointerException.class,
-          () -> new ApiMetricContext<String>("DEBUG", registry -> "binding", null, standard));
       assertThrows(
           NullPointerException.class,
           () ->
               new ApiMetricContext<String>(
-                  "DEBUG", registry -> "binding", SimpleMeterRegistry::new, null));
+                  DEBUG_MODE, null, SimpleMeterRegistry::new, standardRegistry));
+      assertThrows(
+          NullPointerException.class,
+          () ->
+              new ApiMetricContext<String>(
+                  DEBUG_MODE, registry -> FIXTURE_BINDING, null, standardRegistry));
+      assertThrows(
+          NullPointerException.class,
+          () ->
+              new ApiMetricContext<String>(
+                  DEBUG_MODE, registry -> FIXTURE_BINDING, SimpleMeterRegistry::new, null));
     } finally {
-      standard.close();
+      standardRegistry.close();
     }
   }
 
   @Test
   void apimctx006CustomFactoryRuntimePreservesIdentityAndOneAttempt() {
     var failure = new IllegalArgumentException("custom factory fixture");
-    try (var h = new Harness<String>("DEBUG", registry -> "binding")) {
+    try (var h = new Harness<String>(DEBUG_MODE, registry -> FIXTURE_BINDING)) {
       h.customAcquireFailure = Optional.of(failure);
       assertSame(failure, assertThrows(IllegalArgumentException.class, h.context::initialize));
       assertThrows(IllegalStateException.class, h.context::initialize);
@@ -280,7 +286,7 @@ class ApiMetricContextTest {
   @Test
   void apimctx007CustomFactoryErrorIsNeverNormalized() {
     var failure = new AssertionError("custom factory fatal fixture");
-    try (var h = new Harness<String>("DEBUG", registry -> "binding")) {
+    try (var h = new Harness<String>(DEBUG_MODE, registry -> FIXTURE_BINDING)) {
       h.customAcquireFailure = Optional.of(failure);
       assertSame(failure, assertThrows(AssertionError.class, h.context::initialize));
       assertEquals(0, h.standardCreates.get());
@@ -289,7 +295,7 @@ class ApiMetricContextTest {
 
   @Test
   void apimctx008NullCustomRegistryNeverBecomesSuccess() {
-    try (var h = new Harness<String>("DEBUG", registry -> "binding")) {
+    try (var h = new Harness<String>(DEBUG_MODE, registry -> FIXTURE_BINDING)) {
       h.nullCustom = true;
       assertThrows(NullPointerException.class, h.context::initialize);
       assertThrows(IllegalStateException.class, () -> h.context.render(true));
@@ -300,13 +306,13 @@ class ApiMetricContextTest {
 
   @Test
   void apimctx009ClosedCustomCandidateIsRetainedForExplicitCleanup() {
-    try (var h = new Harness<String>("DEBUG", registry -> "binding")) {
-      h.custom.close();
+    try (var h = new Harness<String>(DEBUG_MODE, registry -> FIXTURE_BINDING)) {
+      h.customRegistry.close();
       assertThrows(IllegalStateException.class, h.context::initialize);
-      assertEquals(1, h.custom.closes.get());
+      assertEquals(1, h.customRegistry.closes.get());
       assertEquals(0, h.setups.get());
       h.context.close();
-      assertEquals(2, h.custom.closes.get());
+      assertEquals(2, h.customRegistry.closes.get());
       assertEquals(0, h.standardCreates.get());
     }
   }
@@ -316,15 +322,15 @@ class ApiMetricContextTest {
     var failure = new IllegalArgumentException("setup fixture");
     try (var h =
         new Harness<String>(
-            "DEBUG",
+            DEBUG_MODE,
             registry -> {
               throw failure;
             })) {
       assertSame(failure, assertThrows(IllegalArgumentException.class, h.context::initialize));
-      assertFalse(h.custom.isClosed());
+      assertFalse(h.customRegistry.isClosed());
       assertEquals(0, h.standardCreates.get());
       h.context.close();
-      assertTrue(h.custom.isClosed());
+      assertTrue(h.customRegistry.isClosed());
     }
   }
 
@@ -333,21 +339,21 @@ class ApiMetricContextTest {
     var failure = new AssertionError("setup fatal fixture");
     try (var h =
         new Harness<String>(
-            "DEBUG",
+            DEBUG_MODE,
             registry -> {
               throw failure;
             })) {
       assertSame(failure, assertThrows(AssertionError.class, h.context::initialize));
-      assertFalse(h.custom.isClosed());
+      assertFalse(h.customRegistry.isClosed());
       assertEquals(0, h.standardCreates.get());
     }
   }
 
   @Test
   void apimctx012NullBindingIsRejectedBeforeStandard() {
-    try (var h = new Harness<String>("DEBUG", registry -> null)) {
+    try (var h = new Harness<String>(DEBUG_MODE, registry -> null)) {
       assertThrows(NullPointerException.class, h.context::initialize);
-      assertFalse(h.custom.isClosed());
+      assertFalse(h.customRegistry.isClosed());
       assertEquals(0, h.standardCreates.get());
     }
   }
@@ -355,34 +361,34 @@ class ApiMetricContextTest {
   @Test
   void apimctx013StandardFactoryRuntimeKeepsCustomAndBindingsUnpublished() {
     var failure = new IllegalArgumentException("standard factory fixture");
-    try (var h = new Harness<String>("DEBUG", registry -> "binding")) {
+    try (var h = new Harness<String>(DEBUG_MODE, registry -> FIXTURE_BINDING)) {
       h.standardAcquireFailure = Optional.of(failure);
       assertSame(failure, assertThrows(IllegalArgumentException.class, h.context::initialize));
       assertEquals(1, h.setups.get());
-      assertFalse(h.custom.isClosed());
+      assertFalse(h.customRegistry.isClosed());
       assertThrows(IllegalStateException.class, h.context::bindings);
       h.context.close();
-      assertTrue(h.custom.isClosed());
+      assertTrue(h.customRegistry.isClosed());
     }
   }
 
   @Test
   void apimctx014StandardFactoryErrorIsPrimary() {
     var failure = new AssertionError("standard factory fatal fixture");
-    try (var h = new Harness<String>("DEBUG", registry -> "binding")) {
+    try (var h = new Harness<String>(DEBUG_MODE, registry -> FIXTURE_BINDING)) {
       h.standardAcquireFailure = Optional.of(failure);
       assertSame(failure, assertThrows(AssertionError.class, h.context::initialize));
-      assertFalse(h.custom.isClosed());
+      assertFalse(h.customRegistry.isClosed());
       assertEquals(1, h.setups.get());
     }
   }
 
   @Test
   void apimctx015NullStandardFactoryResultRetainsCustom() {
-    try (var h = new Harness<String>("DEBUG", registry -> "binding")) {
+    try (var h = new Harness<String>(DEBUG_MODE, registry -> FIXTURE_BINDING)) {
       h.nullStandard = true;
       assertThrows(NullPointerException.class, h.context::initialize);
-      assertFalse(h.custom.isClosed());
+      assertFalse(h.customRegistry.isClosed());
       assertEquals(1, h.setups.get());
     }
   }
@@ -390,15 +396,15 @@ class ApiMetricContextTest {
   @Test
   void apimctx016StandardCloseFailureRetainsCustomAndDeniesNewAccess() {
     var failure = new IllegalStateException("standard close fixture");
-    try (var h = new Harness<String>("DEBUG", registry -> "binding")) {
+    try (var h = new Harness<String>(DEBUG_MODE, registry -> FIXTURE_BINDING)) {
       h.context.initialize();
-      h.standard.closeFailure = Optional.of(failure);
+      h.standardRegistry.closeFailure = Optional.of(failure);
       assertSame(failure, assertThrows(IllegalStateException.class, h.context::close));
-      assertFalse(h.custom.isClosed());
+      assertFalse(h.customRegistry.isClosed());
       assertEquals(List.of("S"), h.order);
       assertThrows(IllegalStateException.class, () -> h.context.render(true));
       assertThrows(IllegalStateException.class, h.context::bindings);
-      h.standard.closeFailure = Optional.empty();
+      h.standardRegistry.closeFailure = Optional.empty();
       h.context.close();
       assertEquals(List.of("S", "S", "C"), h.order);
     }
@@ -407,13 +413,13 @@ class ApiMetricContextTest {
   @Test
   void apimctx017CustomCloseFailureDoesNotRepeatConfirmedStandardClose() {
     var failure = new IllegalStateException("custom close fixture");
-    try (var h = new Harness<String>("DEBUG", registry -> "binding")) {
+    try (var h = new Harness<String>(DEBUG_MODE, registry -> FIXTURE_BINDING)) {
       h.context.initialize();
-      h.custom.closeFailure = Optional.of(failure);
+      h.customRegistry.closeFailure = Optional.of(failure);
       assertSame(failure, assertThrows(IllegalStateException.class, h.context::close));
-      assertTrue(h.standard.isClosed());
-      assertFalse(h.custom.isClosed());
-      h.custom.closeFailure = Optional.empty();
+      assertTrue(h.standardRegistry.isClosed());
+      assertFalse(h.customRegistry.isClosed());
+      h.customRegistry.closeFailure = Optional.empty();
       h.context.close();
       h.context.close();
       assertEquals(List.of("S", "C", "C"), h.order);
@@ -423,7 +429,7 @@ class ApiMetricContextTest {
   @Test
   void apimctx018CallerCapturePrecedesEverySdkFactory() {
     var captured = new AtomicReference<ApiMetricContext<String>>();
-    try (var h = new Harness<String>("DEBUG", registry -> "binding")) {
+    try (var h = new Harness<String>(DEBUG_MODE, registry -> FIXTURE_BINDING)) {
       assertEquals(0, h.customCreates.get());
       assertEquals(0, h.standardCreates.get());
       assertEquals(0, h.setups.get());
@@ -431,7 +437,7 @@ class ApiMetricContextTest {
       h.beforeStandard = Optional.of(() -> assertSame(h.context, captured.get()));
       captured.set(h.context);
       h.context.initialize();
-      assertEquals("binding", h.context.bindings().orElseThrow());
+      assertEquals(FIXTURE_BINDING, h.context.bindings().orElseThrow());
       assertEquals(1, h.customCreates.get());
       assertEquals(1, h.standardCreates.get());
     }
@@ -439,7 +445,7 @@ class ApiMetricContextTest {
 
   @Test
   void apimctx019SingleInitializeAndIdempotentClose() {
-    try (var h = new Harness<String>("DEBUG", registry -> "binding")) {
+    try (var h = new Harness<String>(DEBUG_MODE, registry -> FIXTURE_BINDING)) {
       h.context.initialize();
       assertEquals(READY_ONE + STANDARD, h.context.render(true));
       assertThrows(IllegalStateException.class, h.context::initialize);
@@ -457,14 +463,14 @@ class ApiMetricContextTest {
   @Test
   void apimctx020RenderFailureKeepsOwnerAndDoesNotReacquire() {
     var failure = new IllegalArgumentException("custom read fixture");
-    try (var h = new Harness<String>("DEBUG", registry -> "binding")) {
+    try (var h = new Harness<String>(DEBUG_MODE, registry -> FIXTURE_BINDING)) {
       h.context.initialize();
-      h.custom.readFailure = Optional.of(failure);
+      h.customRegistry.readFailure = Optional.of(failure);
       assertSame(
           failure, assertThrows(IllegalArgumentException.class, () -> h.context.render(true)));
-      assertEquals("binding", h.context.bindings().orElseThrow());
-      assertFalse(h.custom.isClosed());
-      h.custom.readFailure = Optional.empty();
+      assertEquals(FIXTURE_BINDING, h.context.bindings().orElseThrow());
+      assertFalse(h.customRegistry.isClosed());
+      h.customRegistry.readFailure = Optional.empty();
       assertEquals(READY_ZERO + STANDARD, h.context.render(false));
       assertEquals(1, h.customCreates.get());
       assertEquals(1, h.standardCreates.get());
@@ -475,89 +481,30 @@ class ApiMetricContextTest {
   void apimctx021ContendedCloseIsUnconfirmedWithoutFreeingInFlightSources() throws Exception {
     var entered = new CountDownLatch(1);
     var release = new CountDownLatch(1);
-    try (var h = new Harness<String>("DEBUG", registry -> "binding")) {
+    try (var h = new Harness<String>(DEBUG_MODE, registry -> FIXTURE_BINDING)) {
       h.context.initialize();
-      h.custom.onRead =
+      h.customRegistry.onRead =
           Optional.of(
               () -> {
                 entered.countDown();
                 await(release);
               });
-      var executor = Executors.newSingleThreadExecutor();
-      try {
-        var active = executor.submit(() -> h.context.render(true));
-        assertTrue(entered.await(30, TimeUnit.SECONDS));
-        assertEquals(
-            UNCONFIRMED, assertThrows(IllegalStateException.class, h.context::close).getMessage());
-        assertFalse(h.custom.isClosed());
-        assertFalse(h.standard.isClosed());
-        release.countDown();
-        assertEquals(READY_ONE + STANDARD, active.get(30, TimeUnit.SECONDS));
-        assertThrows(IllegalStateException.class, () -> h.context.render(true));
-        assertThrows(IllegalStateException.class, h.context::bindings);
-        h.custom.onRead = Optional.empty();
-        h.context.close();
-        assertEquals(List.of("S", "C"), h.order);
-      } finally {
-        release.countDown();
-        executor.shutdownNow();
-        assertTrue(executor.awaitTermination(30, TimeUnit.SECONDS));
-      }
-    }
-  }
-
-  @Test
-  void apimctx022StandardRenderRuntimeErrorAndNullKeepStructuralOwnership() {
-    try (var h = new Harness<String>("DEBUG", registry -> "binding")) {
-      h.context.initialize();
-      for (Throwable failure :
-          List.of(
-              new IllegalArgumentException("standard read"),
-              new AssertionError("standard fatal read"))) {
-        h.standard.readFailure = Optional.of(failure);
-        assertSame(failure, assertThrows(Throwable.class, () -> h.context.render(true)));
-        assertEquals("binding", h.context.bindings().orElseThrow());
-        assertFalse(h.standard.isClosed());
-        assertFalse(h.custom.isClosed());
-      }
-      h.standard.readFailure = Optional.empty();
-      h.standard.nullText = true;
-      assertThrows(NullPointerException.class, () -> h.context.render(true));
-      h.standard.nullText = false;
-      assertEquals(READY_ONE + STANDARD, h.context.render(true));
-      assertEquals(1, h.standardCreates.get());
-    }
-  }
-
-  @Test
-  void apimctx023StopDuringCustomFactoryOrSetupPreventsStandardAcquisition() throws Exception {
-    for (boolean duringFactory : List.of(true, false)) {
-      var entered = new CountDownLatch(1);
-      var release = new CountDownLatch(1);
-      try (var h = new Harness<String>("DEBUG", registry -> "binding")) {
-        Runnable pause =
-            () -> {
-              entered.countDown();
-              await(release);
-            };
-        if (duringFactory) h.beforeCustom = Optional.of(pause);
-        else h.beforeSetup = Optional.of(pause);
-        var executor = Executors.newSingleThreadExecutor();
+      try (var executor = Executors.newSingleThreadExecutor()) {
         try {
-          var init = executor.submit(h.context::initialize);
+          var active = executor.submit(() -> h.context.render(true));
           assertTrue(entered.await(30, TimeUnit.SECONDS));
           assertEquals(
               UNCONFIRMED,
               assertThrows(IllegalStateException.class, h.context::close).getMessage());
+          assertFalse(h.customRegistry.isClosed());
+          assertFalse(h.standardRegistry.isClosed());
           release.countDown();
-          var rejected =
-              assertThrows(ExecutionException.class, () -> init.get(30, TimeUnit.SECONDS));
-          assertEquals(IllegalStateException.class, rejected.getCause().getClass());
-          assertEquals(duringFactory ? 0 : 1, h.setups.get());
-          assertEquals(0, h.standardCreates.get());
-          assertFalse(h.custom.isClosed());
+          assertEquals(READY_ONE + STANDARD, active.get(30, TimeUnit.SECONDS));
+          assertThrows(IllegalStateException.class, () -> h.context.render(true));
+          assertThrows(IllegalStateException.class, h.context::bindings);
+          h.customRegistry.onRead = Optional.empty();
           h.context.close();
-          assertTrue(h.custom.isClosed());
+          assertEquals(List.of("S", "C"), h.order);
         } finally {
           release.countDown();
           executor.shutdownNow();
@@ -568,41 +515,106 @@ class ApiMetricContextTest {
   }
 
   @Test
+  void apimctx022StandardRenderRuntimeErrorAndNullKeepStructuralOwnership() {
+    try (var h = new Harness<String>(DEBUG_MODE, registry -> FIXTURE_BINDING)) {
+      h.context.initialize();
+      for (Throwable failure :
+          List.of(
+              new IllegalArgumentException("standard read"),
+              new AssertionError("standard fatal read"))) {
+        h.standardRegistry.readFailure = Optional.of(failure);
+        assertSame(failure, assertThrows(Throwable.class, () -> h.context.render(true)));
+        assertEquals(FIXTURE_BINDING, h.context.bindings().orElseThrow());
+        assertFalse(h.standardRegistry.isClosed());
+        assertFalse(h.customRegistry.isClosed());
+      }
+      h.standardRegistry.readFailure = Optional.empty();
+      h.standardRegistry.nullText = true;
+      assertThrows(NullPointerException.class, () -> h.context.render(true));
+      h.standardRegistry.nullText = false;
+      assertEquals(READY_ONE + STANDARD, h.context.render(true));
+      assertEquals(1, h.standardCreates.get());
+    }
+  }
+
+  @Test
+  void apimctx023StopDuringCustomFactoryOrSetupPreventsStandardAcquisition() throws Exception {
+    for (boolean duringFactory : List.of(true, false)) {
+      var entered = new CountDownLatch(1);
+      var release = new CountDownLatch(1);
+      try (var h = new Harness<String>(DEBUG_MODE, registry -> FIXTURE_BINDING)) {
+        Runnable pause =
+            () -> {
+              entered.countDown();
+              await(release);
+            };
+        if (duringFactory) h.beforeCustom = Optional.of(pause);
+        else h.beforeSetup = Optional.of(pause);
+        try (var executor = Executors.newSingleThreadExecutor()) {
+          try {
+            var init = executor.submit(h.context::initialize);
+            assertTrue(entered.await(30, TimeUnit.SECONDS));
+            assertEquals(
+                UNCONFIRMED,
+                assertThrows(IllegalStateException.class, h.context::close).getMessage());
+            release.countDown();
+            var rejected =
+                assertThrows(ExecutionException.class, () -> init.get(30, TimeUnit.SECONDS));
+            assertEquals(IllegalStateException.class, rejected.getCause().getClass());
+            assertEquals(duringFactory ? 0 : 1, h.setups.get());
+            assertEquals(0, h.standardCreates.get());
+            assertFalse(h.customRegistry.isClosed());
+            h.context.close();
+            assertTrue(h.customRegistry.isClosed());
+          } finally {
+            release.countDown();
+            executor.shutdownNow();
+            assertTrue(executor.awaitTermination(30, TimeUnit.SECONDS));
+          }
+        }
+      }
+    }
+  }
+
+  @Test
   void apimctx024StopDuringStandardAcquisitionKeepsBothOwnersUnconfirmed() throws Exception {
     var entered = new CountDownLatch(1);
     var release = new CountDownLatch(1);
-    try (var h = new Harness<String>("DEBUG", registry -> "binding")) {
+    try (var h = new Harness<String>(DEBUG_MODE, registry -> FIXTURE_BINDING)) {
       h.beforeStandard =
           Optional.of(
               () -> {
                 entered.countDown();
                 await(release);
               });
-      var executor = Executors.newSingleThreadExecutor();
-      try {
-        var init = executor.submit(h.context::initialize);
-        assertTrue(entered.await(30, TimeUnit.SECONDS));
-        assertEquals(
-            UNCONFIRMED, assertThrows(IllegalStateException.class, h.context::close).getMessage());
-        release.countDown();
-        var rejected = assertThrows(ExecutionException.class, () -> init.get(30, TimeUnit.SECONDS));
-        assertEquals(IllegalStateException.class, rejected.getCause().getClass());
-        assertFalse(h.standard.isClosed());
-        assertFalse(h.custom.isClosed());
-        assertThrows(IllegalStateException.class, h.context::bindings);
-        h.context.close();
-        assertEquals(List.of("S", "C"), h.order);
-      } finally {
-        release.countDown();
-        executor.shutdownNow();
-        assertTrue(executor.awaitTermination(30, TimeUnit.SECONDS));
+      try (var executor = Executors.newSingleThreadExecutor()) {
+        try {
+          var init = executor.submit(h.context::initialize);
+          assertTrue(entered.await(30, TimeUnit.SECONDS));
+          assertEquals(
+              UNCONFIRMED,
+              assertThrows(IllegalStateException.class, h.context::close).getMessage());
+          release.countDown();
+          var rejected =
+              assertThrows(ExecutionException.class, () -> init.get(30, TimeUnit.SECONDS));
+          assertEquals(IllegalStateException.class, rejected.getCause().getClass());
+          assertFalse(h.standardRegistry.isClosed());
+          assertFalse(h.customRegistry.isClosed());
+          assertThrows(IllegalStateException.class, h.context::bindings);
+          h.context.close();
+          assertEquals(List.of("S", "C"), h.order);
+        } finally {
+          release.countDown();
+          executor.shutdownNow();
+          assertTrue(executor.awaitTermination(30, TimeUnit.SECONDS));
+        }
       }
     }
   }
 
   @Test
   void apimctx025ReentrantSetupCloseCannotConfirmOrStartStandard() {
-    try (var h = new Harness<String>("DEBUG", registry -> "binding")) {
+    try (var h = new Harness<String>(DEBUG_MODE, registry -> FIXTURE_BINDING)) {
       h.beforeSetup =
           Optional.of(
               () ->
@@ -610,25 +622,25 @@ class ApiMetricContextTest {
                       UNCONFIRMED,
                       assertThrows(IllegalStateException.class, h.context::close).getMessage()));
       assertThrows(IllegalStateException.class, h.context::initialize);
-      assertFalse(h.custom.isClosed());
+      assertFalse(h.customRegistry.isClosed());
       assertEquals(0, h.standardCreates.get());
       h.context.close();
-      assertTrue(h.custom.isClosed());
+      assertTrue(h.customRegistry.isClosed());
     }
   }
 
   @Test
   void apimctx026ReentrantRenderClosePropagatesAndRetainsAllResources() {
-    try (var h = new Harness<String>("DEBUG", registry -> "binding")) {
+    try (var h = new Harness<String>(DEBUG_MODE, registry -> FIXTURE_BINDING)) {
       h.context.initialize();
-      h.custom.onRead = Optional.of(h.context::close);
+      h.customRegistry.onRead = Optional.of(h.context::close);
       assertEquals(
           UNCONFIRMED,
           assertThrows(IllegalStateException.class, () -> h.context.render(true)).getMessage());
-      assertFalse(h.custom.isClosed());
-      assertFalse(h.standard.isClosed());
-      assertEquals(0, h.standard.scrapes.get());
-      h.custom.onRead = Optional.empty();
+      assertFalse(h.customRegistry.isClosed());
+      assertFalse(h.standardRegistry.isClosed());
+      assertEquals(0, h.standardRegistry.scrapes.get());
+      h.customRegistry.onRead = Optional.empty();
       h.context.close();
       assertEquals(List.of("S", "C"), h.order);
     }
@@ -641,7 +653,7 @@ class ApiMetricContextTest {
     double[] value = {7.5};
     try (var context =
         new ApiMetricContext<double[]>(
-            "DEBUG",
+            DEBUG_MODE,
             registry -> {
               Gauge.builder("nk_db_pool_connections", value, state -> state[0])
                   .tags("service", "API", "state", "active")
@@ -698,10 +710,10 @@ class ApiMetricContextTest {
         NullPointerException.class,
         () ->
             new ApiMetricContext<String>(
-                "DEBUG",
+                DEBUG_MODE,
                 registry -> {
                   calls.incrementAndGet();
-                  return "binding";
+                  return FIXTURE_BINDING;
                 },
                 null));
     assertEquals(0, calls.get());
@@ -723,7 +735,7 @@ class ApiMetricContextTest {
     double[] value = {7.5};
     try (var context =
         new ApiMetricContext<double[]>(
-            "DEBUG",
+            DEBUG_MODE,
             registry -> {
               observed.set(registry);
               Gauge.builder("nk_db_pool_connections", value, state -> state[0])
@@ -758,13 +770,13 @@ class ApiMetricContextTest {
     var calls = new AtomicInteger();
     var context =
         new ApiMetricContext<String>(
-            "DEBUG",
+            DEBUG_MODE,
             registry -> {
               observed.set(registry);
-              return "binding";
+              return FIXTURE_BINDING;
             },
             binding -> {
-              assertEquals("binding", binding);
+              assertEquals(FIXTURE_BINDING, binding);
               calls.incrementAndGet();
               assertEquals(
                   UNCONFIRMED,
@@ -791,41 +803,43 @@ class ApiMetricContextTest {
     var observed = new AtomicReference<MeterRegistry>();
     var context =
         new ApiMetricContext<String>(
-            "DEBUG",
+            DEBUG_MODE,
             registry -> {
               observed.set(registry);
-              return "binding";
+              return FIXTURE_BINDING;
             },
             binding -> {
-              assertEquals("binding", binding);
+              assertEquals(FIXTURE_BINDING, binding);
               entered.countDown();
               await(proceed);
             });
-    var worker = Executors.newSingleThreadExecutor();
-    try {
-      context.initialize();
-      var future = worker.submit(() -> context.render(true));
+    try (var worker = Executors.newSingleThreadExecutor()) {
       try {
-        await(entered);
-        assertEquals(
-            UNCONFIRMED, assertThrows(IllegalStateException.class, context::close).getMessage());
+        context.initialize();
+        var future = worker.submit(() -> context.render(true));
+        try {
+          await(entered);
+          assertEquals(
+              UNCONFIRMED, assertThrows(IllegalStateException.class, context::close).getMessage());
+          assertFalse(observed.get().isClosed());
+        } finally {
+          proceed.countDown();
+        }
+        var failure =
+            assertThrows(ExecutionException.class, () -> future.get(30, TimeUnit.SECONDS));
+        assertEquals(IllegalStateException.class, failure.getCause().getClass());
+        assertThrows(IllegalStateException.class, context::bindings);
         assertFalse(observed.get().isClosed());
       } finally {
         proceed.countDown();
+        worker.shutdownNow();
+        try {
+          assertTrue(worker.awaitTermination(30, TimeUnit.SECONDS));
+        } finally {
+          context.close();
+        }
       }
-      var failure = assertThrows(ExecutionException.class, () -> future.get(30, TimeUnit.SECONDS));
-      assertEquals(IllegalStateException.class, failure.getCause().getClass());
-      assertThrows(IllegalStateException.class, context::bindings);
-      assertFalse(observed.get().isClosed());
-    } finally {
-      proceed.countDown();
-      worker.shutdownNow();
-      try {
-        assertTrue(worker.awaitTermination(30, TimeUnit.SECONDS));
-      } finally {
-        context.close();
-      }
+      assertTrue(observed.get().isClosed());
     }
-    assertTrue(observed.get().isClosed());
   }
 }
