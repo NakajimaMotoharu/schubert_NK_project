@@ -31,10 +31,20 @@ import org.junit.jupiter.api.Test;
  * changes.
  */
 class ProcessRestartMetricRecorderTest {
+  private static final int FAILURE_FACTORY_CALL = 2;
+  private static final String WEB_SERVICE_NAME = "WEB";
+  private static final String RESTART_COUNTER_NAME = "nk_process_restarts_total";
+  private static final String REASON_LABEL = "reason";
+  private static final String SERVICE_LABEL = "service";
+  private static final String NONZERO_EXIT_REASON = "NONZERO_EXIT";
+  private static final String SIGNAL_EXIT_REASON = "SIGNAL_EXIT";
+  private static final String OOM_REASON = "OOM";
+  private static final String UNKNOWN_REASON = "UNKNOWN";
+  private static final String DEBUG_MODE = "DEBUG";
   private static final List<Reason> REASONS =
       List.of(Reason.NONZERO_EXIT, Reason.SIGNAL_EXIT, Reason.OOM, Reason.UNKNOWN);
   private static final List<String> SERVICES =
-      List.of("WEB", "API", "BATCH", "BROKER", "DB", "CADDY");
+      List.of(WEB_SERVICE_NAME, "API", "BATCH", "BROKER", "DB", "CADDY");
 
   private static final class Registry extends SimpleMeterRegistry implements AutoCloseable {
     final AtomicInteger registrations = new AtomicInteger();
@@ -46,7 +56,7 @@ class ProcessRestartMetricRecorderTest {
 
     @Override
     protected Counter newCounter(Meter.Id id) {
-      if (registrations.incrementAndGet() == 2) fail(registrationFailure);
+      if (registrations.incrementAndGet() == FAILURE_FACTORY_CALL) fail(registrationFailure);
       var delegate = super.newCounter(id);
       return new Counter() {
         @Override
@@ -100,8 +110,8 @@ class ProcessRestartMetricRecorderTest {
 
   private static double count(Registry registry, String reason, String service) {
     return registry
-        .get("nk_process_restarts_total")
-        .tags("reason", reason, "service", service)
+        .get(RESTART_COUNTER_NAME)
+        .tags(REASON_LABEL, reason, SERVICE_LABEL, service)
         .counter()
         .count();
   }
@@ -111,15 +121,16 @@ class ProcessRestartMetricRecorderTest {
     var actual = new java.util.HashSet<String>();
     for (var meter : registry.getMeters()) {
       var id = meter.getId();
-      assertEquals("nk_process_restarts_total", id.getName());
+      assertEquals(RESTART_COUNTER_NAME, id.getName());
       assertEquals(Meter.Type.COUNTER, id.getType());
       assertEquals(
-          Set.of("reason", "service"),
+          Set.of(REASON_LABEL, SERVICE_LABEL),
           id.getTags().stream().map(t -> t.getKey()).collect(Collectors.toSet()));
-      actual.add(id.getTag("reason") + "/" + id.getTag("service"));
+      actual.add(id.getTag(REASON_LABEL) + "/" + id.getTag(SERVICE_LABEL));
     }
     var expected = new java.util.HashSet<String>();
-    for (String reason : List.of("NONZERO_EXIT", "SIGNAL_EXIT", "OOM", "UNKNOWN"))
+    for (String reason :
+        List.of(NONZERO_EXIT_REASON, SIGNAL_EXIT_REASON, OOM_REASON, UNKNOWN_REASON))
       for (String service : SERVICES) expected.add(reason + "/" + service);
     assertEquals(expected, actual);
   }
@@ -127,10 +138,11 @@ class ProcessRestartMetricRecorderTest {
   @Test
   void restartMetric001TwentyFourCanonicalServiceSeriesStartAtZero() {
     try (var registry = new Registry()) {
-      var recorder = new ProcessRestartMetricRecorder(registry, "DEBUG");
+      var recorder = new ProcessRestartMetricRecorder(registry, DEBUG_MODE);
       assertTrue(recorder.detailedMetricsRequested());
       shape(registry);
-      for (String reason : List.of("NONZERO_EXIT", "SIGNAL_EXIT", "OOM", "UNKNOWN"))
+      for (String reason :
+          List.of(NONZERO_EXIT_REASON, SIGNAL_EXIT_REASON, OOM_REASON, UNKNOWN_REASON))
         for (String service : SERVICES) assertEquals(0, count(registry, reason, service));
       assertEquals(24, registry.registrations.get());
       assertEquals(0, registry.increments.get());
@@ -141,7 +153,7 @@ class ProcessRestartMetricRecorderTest {
   @Test
   void restartMetric002EachSuppliedRestartIncrementsOnlyItsPairOnce() {
     try (var registry = new Registry()) {
-      var recorder = new ProcessRestartMetricRecorder(registry, "DEBUG");
+      var recorder = new ProcessRestartMetricRecorder(registry, DEBUG_MODE);
       for (var reason : REASONS)
         for (String name : SERVICES) {
           var service = Service.valueOf(name);
@@ -149,9 +161,9 @@ class ProcessRestartMetricRecorderTest {
           assertEquals(4, count(registry, reason.name(), name));
         }
       recorder.record(Reason.NONZERO_EXIT, Service.WEB);
-      assertEquals(5, count(registry, "NONZERO_EXIT", "WEB"));
-      assertEquals(4, count(registry, "SIGNAL_EXIT", "WEB"));
-      assertEquals(4, count(registry, "OOM", "CADDY"));
+      assertEquals(5, count(registry, NONZERO_EXIT_REASON, WEB_SERVICE_NAME));
+      assertEquals(4, count(registry, SIGNAL_EXIT_REASON, WEB_SERVICE_NAME));
+      assertEquals(4, count(registry, OOM_REASON, "CADDY"));
       assertEquals(97, registry.increments.get());
       assertEquals(24, registry.registrations.get());
       shape(registry);
@@ -160,10 +172,10 @@ class ProcessRestartMetricRecorderTest {
 
   @Test
   void restartMetric003ClosedReasonParserAndGeneratedFactoriesUseTypedLiteralOracles() {
-    assertEquals(Reason.NONZERO_EXIT, Reason.parse("NONZERO_EXIT"));
-    assertEquals(Reason.SIGNAL_EXIT, Reason.parse("SIGNAL_EXIT"));
-    assertEquals(Reason.OOM, Reason.parse("OOM"));
-    assertEquals(Reason.UNKNOWN, Reason.parse("UNKNOWN"));
+    assertEquals(Reason.NONZERO_EXIT, Reason.parse(NONZERO_EXIT_REASON));
+    assertEquals(Reason.SIGNAL_EXIT, Reason.parse(SIGNAL_EXIT_REASON));
+    assertEquals(Reason.OOM, Reason.parse(OOM_REASON));
+    assertEquals(Reason.UNKNOWN, Reason.parse(UNKNOWN_REASON));
     for (String input : List.of("", "nonzero_exit", "unknown-reason"))
       assertEquals(
           "invalid restart metric reason",
@@ -177,17 +189,17 @@ class ProcessRestartMetricRecorderTest {
     assertArrayEquals(
         new Reason[] {Reason.NONZERO_EXIT, Reason.SIGNAL_EXIT, Reason.OOM, Reason.UNKNOWN},
         Reason.values());
-    assertSame(Reason.NONZERO_EXIT, Reason.valueOf("NONZERO_EXIT"));
-    assertSame(Reason.SIGNAL_EXIT, Reason.valueOf("SIGNAL_EXIT"));
-    assertSame(Reason.OOM, Reason.valueOf("OOM"));
-    assertSame(Reason.UNKNOWN, Reason.valueOf("UNKNOWN"));
+    assertSame(Reason.NONZERO_EXIT, Reason.valueOf(NONZERO_EXIT_REASON));
+    assertSame(Reason.SIGNAL_EXIT, Reason.valueOf(SIGNAL_EXIT_REASON));
+    assertSame(Reason.OOM, Reason.valueOf(OOM_REASON));
+    assertSame(Reason.UNKNOWN, Reason.valueOf(UNKNOWN_REASON));
     assertThrows(IllegalArgumentException.class, () -> Reason.valueOf("nonzero_exit"));
     assertThrows(NullPointerException.class, () -> Reason.valueOf(null));
   }
 
   @Test
   void restartMetric004BothModesRejectNullAndStandardKeepsNoDetailedState() {
-    for (String mode : List.of("DEBUG", "STANDARD"))
+    for (String mode : List.of(DEBUG_MODE, "STANDARD"))
       try (var registry = new Registry()) {
         var recorder = new ProcessRestartMetricRecorder(registry, mode);
         recorder.record(Reason.NONZERO_EXIT, Service.WEB);
@@ -196,9 +208,9 @@ class ProcessRestartMetricRecorderTest {
         assertThrows(NullPointerException.class, () -> recorder.record(Reason.NONZERO_EXIT, null));
         assertEquals(before, registry.increments.get());
         assertEquals(0, registry.closes.get());
-        if (mode.equals("DEBUG")) {
+        if (mode.equals(DEBUG_MODE)) {
           assertTrue(recorder.detailedMetricsRequested());
-          assertEquals(1, count(registry, "NONZERO_EXIT", "WEB"));
+          assertEquals(1, count(registry, NONZERO_EXIT_REASON, WEB_SERVICE_NAME));
           shape(registry);
         } else {
           assertFalse(recorder.detailedMetricsRequested());
@@ -210,7 +222,7 @@ class ProcessRestartMetricRecorderTest {
       }
     try (var registry = new Registry()) {
       assertThrows(
-          NullPointerException.class, () -> new ProcessRestartMetricRecorder(null, "DEBUG"));
+          NullPointerException.class, () -> new ProcessRestartMetricRecorder(null, DEBUG_MODE));
       assertThrows(
           NullPointerException.class, () -> new ProcessRestartMetricRecorder(registry, null));
       for (String mode : List.of("", "debug", "unknown-mode"))
@@ -234,10 +246,10 @@ class ProcessRestartMetricRecorderTest {
         assertSame(
             problem,
             assertThrows(
-                problem.getClass(), () -> new ProcessRestartMetricRecorder(registry, "DEBUG")));
+                problem.getClass(), () -> new ProcessRestartMetricRecorder(registry, DEBUG_MODE)));
         assertEquals(2, registry.registrations.get());
         assertEquals(1, registry.getMeters().size());
-        assertEquals(0, count(registry, "NONZERO_EXIT", "WEB"));
+        assertEquals(0, count(registry, NONZERO_EXIT_REASON, WEB_SERVICE_NAME));
         assertEquals(0, registry.increments.get());
         assertEquals(0, registry.closes.get());
       } finally {
@@ -254,7 +266,7 @@ class ProcessRestartMetricRecorderTest {
       for (boolean after : List.of(false, true)) {
         var registry = new Registry();
         try {
-          var recorder = new ProcessRestartMetricRecorder(registry, "DEBUG");
+          var recorder = new ProcessRestartMetricRecorder(registry, DEBUG_MODE);
           registry.incrementFailure = Optional.of(problem);
           registry.failAfter = after;
           assertSame(
@@ -262,8 +274,8 @@ class ProcessRestartMetricRecorderTest {
               assertThrows(
                   problem.getClass(), () -> recorder.record(Reason.NONZERO_EXIT, Service.WEB)));
           assertEquals(1, registry.increments.get());
-          assertEquals(after ? 1 : 0, count(registry, "NONZERO_EXIT", "WEB"));
-          assertEquals(0, count(registry, "SIGNAL_EXIT", "WEB"));
+          assertEquals(after ? 1 : 0, count(registry, NONZERO_EXIT_REASON, WEB_SERVICE_NAME));
+          assertEquals(0, count(registry, SIGNAL_EXIT_REASON, WEB_SERVICE_NAME));
           assertEquals(0, registry.closes.get());
           shape(registry);
         } finally {
@@ -279,7 +291,7 @@ class ProcessRestartMetricRecorderTest {
     try (var registry = new Registry();
         var otherRegistry = new Registry();
         var executor = Executors.newFixedThreadPool(8)) {
-      var recorder = new ProcessRestartMetricRecorder(registry, "DEBUG");
+      var recorder = new ProcessRestartMetricRecorder(registry, DEBUG_MODE);
       Map<String, Integer> expected = new HashMap<>();
       var tasks = new ArrayList<Callable<Void>>();
       for (int i = 0; i < 64; i++) {
@@ -294,17 +306,19 @@ class ProcessRestartMetricRecorderTest {
             });
       }
       for (var result : executor.invokeAll(tasks)) result.get(5, TimeUnit.SECONDS);
-      for (String reason : List.of("NONZERO_EXIT", "SIGNAL_EXIT", "OOM", "UNKNOWN"))
+      for (String reason :
+          List.of(NONZERO_EXIT_REASON, SIGNAL_EXIT_REASON, OOM_REASON, UNKNOWN_REASON))
         for (String service : SERVICES)
           assertEquals(
               expected.getOrDefault(reason + "/" + service, 0).doubleValue(),
               count(registry, reason, service));
       assertEquals(64, registry.increments.get());
-      var other = new ProcessRestartMetricRecorder(otherRegistry, "DEBUG");
+      var other = new ProcessRestartMetricRecorder(otherRegistry, DEBUG_MODE);
       for (int i = 0; i < 7; i++) other.record(Reason.NONZERO_EXIT, Service.WEB);
-      assertEquals(7, count(otherRegistry, "NONZERO_EXIT", "WEB"));
+      assertEquals(7, count(otherRegistry, NONZERO_EXIT_REASON, WEB_SERVICE_NAME));
       assertEquals(
-          expected.get("NONZERO_EXIT/WEB").doubleValue(), count(registry, "NONZERO_EXIT", "WEB"));
+          expected.get("NONZERO_EXIT/WEB").doubleValue(),
+          count(registry, NONZERO_EXIT_REASON, WEB_SERVICE_NAME));
       shape(registry);
       shape(otherRegistry);
     }
@@ -314,17 +328,17 @@ class ProcessRestartMetricRecorderTest {
   void restartMetric008ForeignGaugeCannotBeReplacedOrClosed() {
     try (var registry = new Registry()) {
       var foreign =
-          Gauge.builder("nk_process_restarts_total", new AtomicInteger(7), AtomicInteger::get)
-              .tags("reason", "NONZERO_EXIT", "service", "WEB")
+          Gauge.builder(RESTART_COUNTER_NAME, new AtomicInteger(7), AtomicInteger::get)
+              .tags(REASON_LABEL, NONZERO_EXIT_REASON, SERVICE_LABEL, WEB_SERVICE_NAME)
               .register(registry);
       assertThrows(
           IllegalArgumentException.class,
-          () -> new ProcessRestartMetricRecorder(registry, "DEBUG"));
+          () -> new ProcessRestartMetricRecorder(registry, DEBUG_MODE));
       assertSame(
           foreign,
           registry
-              .get("nk_process_restarts_total")
-              .tags("reason", "NONZERO_EXIT", "service", "WEB")
+              .get(RESTART_COUNTER_NAME)
+              .tags(REASON_LABEL, NONZERO_EXIT_REASON, SERVICE_LABEL, WEB_SERVICE_NAME)
               .gauge());
       assertEquals(7, foreign.value());
       assertEquals(0, registry.closes.get());
