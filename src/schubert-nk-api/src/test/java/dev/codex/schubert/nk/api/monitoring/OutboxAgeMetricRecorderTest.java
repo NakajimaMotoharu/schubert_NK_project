@@ -25,6 +25,12 @@ import org.junit.jupiter.api.Test;
 
 /** OUTBOXAGE001..008/1660: supplied immutable durations and owned SDK only. */
 class OutboxAgeMetricRecorderTest {
+  private static final int FAILURE_REGISTRATION_ORDINAL = 2;
+  private static final String PENDING_STATUS = "PENDING";
+  private static final String SENT_STATUS = "SENT";
+  private static final String ERROR_STATUS = "ERROR";
+  private static final String DEBUG_MODE = "DEBUG";
+
   private static final class Registry extends SimpleMeterRegistry implements AutoCloseable {
     final AtomicInteger registrations = new AtomicInteger();
     final AtomicInteger closes = new AtomicInteger();
@@ -32,7 +38,7 @@ class OutboxAgeMetricRecorderTest {
 
     @Override
     protected <T> Gauge newGauge(Meter.Id id, T object, ToDoubleFunction<T> value) {
-      if (registrations.incrementAndGet() == 2 && failure.isPresent()) {
+      if (registrations.incrementAndGet() == FAILURE_REGISTRATION_ORDINAL && failure.isPresent()) {
         var problem = failure.orElseThrow();
         if (problem instanceof Error fatal) throw fatal;
         throw (RuntimeException) problem;
@@ -60,7 +66,7 @@ class OutboxAgeMetricRecorderTest {
       assertEquals("API", id.getTag("store"));
       statuses.add(id.getTag("status"));
     }
-    assertEquals(Set.of("PENDING", "SENT", "ERROR"), statuses);
+    assertEquals(Set.of(PENDING_STATUS, SENT_STATUS, ERROR_STATUS), statuses);
   }
 
   private static double gauge(Registry registry, String status) {
@@ -79,10 +85,10 @@ class OutboxAgeMetricRecorderTest {
   @Test
   void outboxAge001CanonicalUnknownSeriesDoNotClaimObservedZero() {
     try (var registry = new Registry()) {
-      var recorder = new OutboxAgeMetricRecorder(registry, "DEBUG");
+      var recorder = new OutboxAgeMetricRecorder(registry, DEBUG_MODE);
       assertTrue(recorder.detailedMetricsRequested());
       assertTrue(recorder.snapshot().isEmpty());
-      for (String status : List.of("PENDING", "SENT", "ERROR"))
+      for (String status : List.of(PENDING_STATUS, SENT_STATUS, ERROR_STATUS))
         assertTrue(Double.isNaN(gauge(registry, status)));
       shape(registry);
       assertEquals(0, registry.closes.get());
@@ -92,14 +98,14 @@ class OutboxAgeMetricRecorderTest {
   @Test
   void outboxAge002ExactFractionalSecondsAndSuppliedSnapshotAreIndependent() {
     try (var registry = new Registry()) {
-      var recorder = new OutboxAgeMetricRecorder(registry, "DEBUG");
+      var recorder = new OutboxAgeMetricRecorder(registry, DEBUG_MODE);
       var supplied =
           new Ages(Duration.ofMillis(1500), Duration.ofNanos(1), Duration.ofSeconds(300));
       recorder.record(supplied);
       assertSame(supplied, recorder.snapshot().orElseThrow());
-      assertEquals(1.5, gauge(registry, "PENDING"));
-      assertEquals(0.000000001, gauge(registry, "SENT"));
-      assertEquals(300, gauge(registry, "ERROR"));
+      assertEquals(1.5, gauge(registry, PENDING_STATUS));
+      assertEquals(0.000000001, gauge(registry, SENT_STATUS));
+      assertEquals(300, gauge(registry, ERROR_STATUS));
       assertEquals(Duration.ofMillis(1500), supplied.value(Status.PENDING));
       assertEquals(Duration.ofNanos(1), supplied.value(Status.SENT));
       assertEquals(Duration.ofSeconds(300), supplied.value(Status.ERROR));
@@ -110,19 +116,19 @@ class OutboxAgeMetricRecorderTest {
   @Test
   void outboxAge003ZeroMissingRecoveryAndMaximumDurationNeverOverflow() {
     try (var registry = new Registry()) {
-      var recorder = new OutboxAgeMetricRecorder(registry, "DEBUG");
+      var recorder = new OutboxAgeMetricRecorder(registry, DEBUG_MODE);
       var zero = ages(0, 0, 0);
       recorder.record(zero);
-      for (String status : List.of("PENDING", "SENT", "ERROR"))
+      for (String status : List.of(PENDING_STATUS, SENT_STATUS, ERROR_STATUS))
         assertEquals(0, gauge(registry, status));
       recorder.missing();
       assertTrue(recorder.snapshot().isEmpty());
-      for (String status : List.of("PENDING", "SENT", "ERROR"))
+      for (String status : List.of(PENDING_STATUS, SENT_STATUS, ERROR_STATUS))
         assertTrue(Double.isNaN(gauge(registry, status)));
       Duration maximum = Duration.ofSeconds(Long.MAX_VALUE, 999_999_999);
       var supplied = new Ages(maximum, maximum, maximum);
       recorder.record(supplied);
-      for (String status : List.of("PENDING", "SENT", "ERROR"))
+      for (String status : List.of(PENDING_STATUS, SENT_STATUS, ERROR_STATUS))
         assertEquals(0x1.0p63, gauge(registry, status));
       assertSame(maximum, supplied.pending());
       assertSame(maximum, supplied.sent());
@@ -159,7 +165,7 @@ class OutboxAgeMetricRecorderTest {
         () -> new Ages(zero, zero, Duration.ofSeconds(Long.MIN_VALUE)));
     assertThrows(NullPointerException.class, () -> ages(0, 0, 0).value(null));
     try (var registry = new Registry()) {
-      assertThrows(NullPointerException.class, () -> new OutboxAgeMetricRecorder(null, "DEBUG"));
+      assertThrows(NullPointerException.class, () -> new OutboxAgeMetricRecorder(null, DEBUG_MODE));
       assertThrows(NullPointerException.class, () -> new OutboxAgeMetricRecorder(registry, null));
       for (String mode : List.of("debug", "", "unknown-mode"))
         assertEquals(
@@ -169,7 +175,7 @@ class OutboxAgeMetricRecorderTest {
                     () -> new OutboxAgeMetricRecorder(registry, mode))
                 .getMessage());
       assertEquals(0, registry.registrations.get());
-      var recorder = new OutboxAgeMetricRecorder(registry, "DEBUG");
+      var recorder = new OutboxAgeMetricRecorder(registry, DEBUG_MODE);
       var saved = ages(1, 2, 3);
       recorder.record(saved);
       assertThrows(NullPointerException.class, () -> recorder.record(null));
@@ -181,7 +187,7 @@ class OutboxAgeMetricRecorderTest {
   void outboxAge006OneOwnerPublishesWholeImmutableSnapshotsConcurrently() throws Exception {
     try (var registry = new Registry();
         var executor = Executors.newFixedThreadPool(8)) {
-      var recorder = new OutboxAgeMetricRecorder(registry, "DEBUG");
+      var recorder = new OutboxAgeMetricRecorder(registry, DEBUG_MODE);
       var one = ages(1, 2, 3);
       var two = ages(4, 5, 6);
       recorder.record(one);
@@ -213,7 +219,8 @@ class OutboxAgeMetricRecorderTest {
         registry.failure = Optional.of(failure);
         assertSame(
             failure,
-            assertThrows(failure.getClass(), () -> new OutboxAgeMetricRecorder(registry, "DEBUG")));
+            assertThrows(
+                failure.getClass(), () -> new OutboxAgeMetricRecorder(registry, DEBUG_MODE)));
         assertEquals(2, registry.registrations.get());
         assertEquals(1, registry.getMeters().size());
         assertEquals(0, registry.closes.get());
@@ -243,15 +250,15 @@ class OutboxAgeMetricRecorderTest {
     assertEquals(Duration.ofSeconds(7), actual.error());
     try (var one = new Registry();
         var two = new Registry()) {
-      var first = new OutboxAgeMetricRecorder(one, "DEBUG");
-      var second = new OutboxAgeMetricRecorder(two, "DEBUG");
+      var first = new OutboxAgeMetricRecorder(one, DEBUG_MODE);
+      var second = new OutboxAgeMetricRecorder(two, DEBUG_MODE);
       second.record(ages(7, 0, 0));
       for (int i = 0; i < 1000; i++) {
         first.record(ages(i, 0, 0));
         if (i % 2 == 0) first.missing();
       }
-      assertEquals(999, gauge(one, "PENDING"));
-      assertEquals(7, gauge(two, "PENDING"));
+      assertEquals(999, gauge(one, PENDING_STATUS));
+      assertEquals(7, gauge(two, PENDING_STATUS));
       shape(one);
       shape(two);
       assertEquals(0, one.closes.get());

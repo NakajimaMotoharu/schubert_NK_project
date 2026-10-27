@@ -29,6 +29,8 @@ import org.junit.jupiter.api.Test;
 
 /** Independent five-state vectors, actual owned SDK and no business database or worker. */
 class AsyncJobMetricRecorderTest {
+  private static final int FAILURE_REGISTRATION_ORDINAL = 2;
+  private static final String DEBUG_MODE = "DEBUG";
   private static final String NAME = "nk_async_jobs";
   private static final String[] STATES = {
     "RECEIVED", "PROCESSING", "COMPLETED", "ERROR", "CANCELLED"
@@ -59,7 +61,7 @@ class AsyncJobMetricRecorderTest {
 
     @Override
     protected <T> Gauge newGauge(Meter.Id id, T object, ToDoubleFunction<T> value) {
-      if (calls.incrementAndGet() == 2 && failure.isPresent()) {
+      if (calls.incrementAndGet() == FAILURE_REGISTRATION_ORDINAL && failure.isPresent()) {
         Throwable problem = failure.orElseThrow();
         if (problem instanceof Error fatal) throw fatal;
         throw (RuntimeException) problem;
@@ -108,7 +110,7 @@ class AsyncJobMetricRecorderTest {
   @Test
   void asyncGauge001ActualDebugHasFiveCanonicalUnknownGaugesAndBorrowedOwner() {
     try (var registry = new Registry()) {
-      var recorder = new AsyncJobMetricRecorder(registry, "DEBUG");
+      var recorder = new AsyncJobMetricRecorder(registry, DEBUG_MODE);
       assertTrue(recorder.detailedMetricsRequested());
       assertTrue(recorder.snapshot().isEmpty());
       shape(registry);
@@ -128,7 +130,7 @@ class AsyncJobMetricRecorderTest {
   @Test
   void asyncGauge002LiteralCountsRemainImmutableAndUnknownNamesCannotBecomeLabels() {
     try (var registry = new Registry()) {
-      var recorder = new AsyncJobMetricRecorder(registry, "DEBUG");
+      var recorder = new AsyncJobMetricRecorder(registry, DEBUG_MODE);
       var input = new EnumMap<>(values(1, 2, 3, 4, 5));
       var snapshot = new Snapshot(input);
       recorder.record(snapshot);
@@ -161,7 +163,7 @@ class AsyncJobMetricRecorderTest {
   @Test
   void asyncGauge003TrueZeroAndMissingAreDistinctAndKnownValuesRecover() {
     try (var registry = new Registry()) {
-      var recorder = new AsyncJobMetricRecorder(registry, "DEBUG");
+      var recorder = new AsyncJobMetricRecorder(registry, DEBUG_MODE);
       recorder.record(new Snapshot(values(0, 0, 0, 0, 0)));
       for (String state : STATES) assertEquals(0.0, gauge(registry, state));
       assertEquals(0, recorder.snapshot().orElseThrow().totalJobs());
@@ -217,7 +219,7 @@ class AsyncJobMetricRecorderTest {
     var before = new Snapshot(valid);
     assertThrows(NullPointerException.class, () -> before.value(null));
     try (var registry = new Registry()) {
-      var recorder = new AsyncJobMetricRecorder(registry, "DEBUG");
+      var recorder = new AsyncJobMetricRecorder(registry, DEBUG_MODE);
       recorder.record(before);
       assertThrows(NullPointerException.class, () -> recorder.record(null));
       assertSame(before, recorder.snapshot().orElseThrow());
@@ -233,7 +235,7 @@ class AsyncJobMetricRecorderTest {
     assertEquals(Long.MAX_VALUE, maximum.value(State.CANCELLED));
     assertThrows(ArithmeticException.class, () -> new Snapshot(values(1, 0, 0, 0, Long.MAX_VALUE)));
     try (var registry = new Registry()) {
-      var recorder = new AsyncJobMetricRecorder(registry, "DEBUG");
+      var recorder = new AsyncJobMetricRecorder(registry, DEBUG_MODE);
       recorder.record(maximum);
       assertEquals(9_223_372_036_854_776_000.0, gauge(registry, "CANCELLED"), 0.0);
       for (String state : List.of("RECEIVED", "PROCESSING", "COMPLETED", "ERROR"))
@@ -246,7 +248,7 @@ class AsyncJobMetricRecorderTest {
       throws Exception {
     try (var registry = new Registry();
         var pool = Executors.newFixedThreadPool(8)) {
-      var recorder = new AsyncJobMetricRecorder(registry, "DEBUG");
+      var recorder = new AsyncJobMetricRecorder(registry, DEBUG_MODE);
       var first = new Snapshot(values(1, 2, 3, 4, 5));
       var second = new Snapshot(values(10, 20, 30, 40, 50));
       recorder.record(first);
@@ -283,7 +285,8 @@ class AsyncJobMetricRecorderTest {
         registry.failure = Optional.of(failure);
         assertSame(
             failure,
-            assertThrows(failure.getClass(), () -> new AsyncJobMetricRecorder(registry, "DEBUG")));
+            assertThrows(
+                failure.getClass(), () -> new AsyncJobMetricRecorder(registry, DEBUG_MODE)));
         assertEquals(2, registry.calls.get());
         assertEquals(1, registry.getMeters().size());
         assertEquals(0, registry.closes.get());
@@ -292,8 +295,8 @@ class AsyncJobMetricRecorderTest {
     }
     try (var first = new Registry();
         var second = new Registry()) {
-      var one = new AsyncJobMetricRecorder(first, "DEBUG");
-      var two = new AsyncJobMetricRecorder(second, "DEBUG");
+      var one = new AsyncJobMetricRecorder(first, DEBUG_MODE);
+      var two = new AsyncJobMetricRecorder(second, DEBUG_MODE);
       one.record(new Snapshot(values(1, 2, 3, 4, 5)));
       assertTrue(two.snapshot().isEmpty());
       for (String state : STATES) assertTrue(Double.isNaN(gauge(second, state)));

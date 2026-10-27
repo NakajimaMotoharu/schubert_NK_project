@@ -24,6 +24,13 @@ import org.junit.jupiter.api.Test;
 
 /** OUTBOXMET001..008: supplied counts and owned SDK only, no rows/DB/dispatcher/Root operations. */
 class OutboxRowsMetricRecorderTest {
+  private static final int FAILURE_REGISTRATION_ORDINAL = 2;
+  private static final String STORE_LABEL = "store";
+  private static final String PENDING_STATUS = "PENDING";
+  private static final String SENT_STATUS = "SENT";
+  private static final String ERROR_STATUS = "ERROR";
+  private static final String DEBUG_MODE = "DEBUG";
+
   private static final class Registry extends SimpleMeterRegistry implements AutoCloseable {
     final AtomicInteger registrations = new AtomicInteger();
     final AtomicInteger closes = new AtomicInteger();
@@ -31,7 +38,7 @@ class OutboxRowsMetricRecorderTest {
 
     @Override
     protected <T> Gauge newGauge(Meter.Id id, T object, ToDoubleFunction<T> value) {
-      if (registrations.incrementAndGet() == 2 && failure.isPresent()) {
+      if (registrations.incrementAndGet() == FAILURE_REGISTRATION_ORDINAL && failure.isPresent()) {
         var problem = failure.orElseThrow();
         if (problem instanceof Error fatal) throw fatal;
         throw (RuntimeException) problem;
@@ -54,27 +61,31 @@ class OutboxRowsMetricRecorderTest {
       assertEquals("nk_outbox_rows", id.getName());
       assertEquals(Meter.Type.GAUGE, id.getType());
       assertEquals(
-          Set.of("store", "status"),
+          Set.of(STORE_LABEL, "status"),
           id.getTags().stream().map(t -> t.getKey()).collect(Collectors.toSet()));
-      assertEquals("API", id.getTag("store"));
+      assertEquals("API", id.getTag(STORE_LABEL));
       statuses.add(id.getTag("status"));
     }
-    assertEquals(Set.of("PENDING", "SENT", "ERROR"), statuses);
+    assertEquals(Set.of(PENDING_STATUS, SENT_STATUS, ERROR_STATUS), statuses);
   }
 
   private static double gauge(Registry registry, String status) {
-    return registry.get("nk_outbox_rows").tags("store", "API", "status", status).gauge().value();
+    return registry
+        .get("nk_outbox_rows")
+        .tags(STORE_LABEL, "API", "status", status)
+        .gauge()
+        .value();
   }
 
   @Test
   void outboxMetric001DebugHasThreeCanonicalUnknownSeries() {
     try (var registry = new Registry()) {
-      var recorder = new OutboxRowsMetricRecorder(registry, "DEBUG");
+      var recorder = new OutboxRowsMetricRecorder(registry, DEBUG_MODE);
       assertTrue(recorder.detailedMetricsRequested());
       assertTrue(recorder.snapshot().isEmpty());
       shape(registry);
       assertEquals(3, Status.values().length);
-      for (String status : List.of("PENDING", "SENT", "ERROR")) {
+      for (String status : List.of(PENDING_STATUS, SENT_STATUS, ERROR_STATUS)) {
         assertEquals(status, OutboxRowsMetricRecorder.status(status).name());
         assertTrue(Double.isNaN(gauge(registry, status)));
       }
@@ -85,7 +96,7 @@ class OutboxRowsMetricRecorderTest {
   @Test
   void outboxMetric002LiteralCountValuesAndImmutableSnapshotMatchSdk() {
     try (var registry = new Registry()) {
-      var recorder = new OutboxRowsMetricRecorder(registry, "DEBUG");
+      var recorder = new OutboxRowsMetricRecorder(registry, DEBUG_MODE);
       var counts = new Counts(3, 5, 2);
       recorder.record(counts);
       assertSame(counts, recorder.snapshot().orElseThrow());
@@ -95,9 +106,9 @@ class OutboxRowsMetricRecorderTest {
       assertEquals(3, counts.value(Status.PENDING));
       assertEquals(5, counts.value(Status.SENT));
       assertEquals(2, counts.value(Status.ERROR));
-      assertEquals(3, gauge(registry, "PENDING"));
-      assertEquals(5, gauge(registry, "SENT"));
-      assertEquals(2, gauge(registry, "ERROR"));
+      assertEquals(3, gauge(registry, PENDING_STATUS));
+      assertEquals(5, gauge(registry, SENT_STATUS));
+      assertEquals(2, gauge(registry, ERROR_STATUS));
       shape(registry);
     }
   }
@@ -105,19 +116,19 @@ class OutboxRowsMetricRecorderTest {
   @Test
   void outboxMetric003TrueZeroAndMissingStayDistinctAndRecover() {
     try (var registry = new Registry()) {
-      var recorder = new OutboxRowsMetricRecorder(registry, "DEBUG");
+      var recorder = new OutboxRowsMetricRecorder(registry, DEBUG_MODE);
       var zero = new Counts(0, 0, 0);
       recorder.record(zero);
-      for (String status : List.of("PENDING", "SENT", "ERROR"))
+      for (String status : List.of(PENDING_STATUS, SENT_STATUS, ERROR_STATUS))
         assertEquals(0, gauge(registry, status));
       recorder.missing();
       assertTrue(recorder.snapshot().isEmpty());
-      for (String status : List.of("PENDING", "SENT", "ERROR"))
+      for (String status : List.of(PENDING_STATUS, SENT_STATUS, ERROR_STATUS))
         assertTrue(Double.isNaN(gauge(registry, status)));
       assertEquals(0, zero.pending());
       recorder.record(new Counts(1, 0, 0));
-      assertEquals(1, gauge(registry, "PENDING"));
-      assertEquals(0, gauge(registry, "SENT"));
+      assertEquals(1, gauge(registry, PENDING_STATUS));
+      assertEquals(0, gauge(registry, SENT_STATUS));
       shape(registry);
     }
   }
@@ -150,7 +161,8 @@ class OutboxRowsMetricRecorderTest {
                   IllegalArgumentException.class, () -> OutboxRowsMetricRecorder.status(status))
               .getMessage());
     try (var registry = new Registry()) {
-      assertThrows(NullPointerException.class, () -> new OutboxRowsMetricRecorder(null, "DEBUG"));
+      assertThrows(
+          NullPointerException.class, () -> new OutboxRowsMetricRecorder(null, DEBUG_MODE));
       assertThrows(NullPointerException.class, () -> new OutboxRowsMetricRecorder(registry, null));
       for (String mode : List.of("debug", "", "unknown-mode"))
         assertEquals(
@@ -160,11 +172,11 @@ class OutboxRowsMetricRecorderTest {
                     () -> new OutboxRowsMetricRecorder(registry, mode))
                 .getMessage());
       assertEquals(0, registry.registrations.get());
-      var recorder = new OutboxRowsMetricRecorder(registry, "DEBUG");
+      var recorder = new OutboxRowsMetricRecorder(registry, DEBUG_MODE);
       var maximum = new Counts(Long.MAX_VALUE, Long.MAX_VALUE, Long.MAX_VALUE);
       recorder.record(maximum);
       for (var status : Status.values()) assertEquals(Long.MAX_VALUE, maximum.value(status));
-      for (String status : List.of("PENDING", "SENT", "ERROR"))
+      for (String status : List.of(PENDING_STATUS, SENT_STATUS, ERROR_STATUS))
         assertEquals(0x1.0p63, gauge(registry, status));
       assertThrows(NullPointerException.class, () -> recorder.record(null));
       assertSame(maximum, recorder.snapshot().orElseThrow());
@@ -175,7 +187,7 @@ class OutboxRowsMetricRecorderTest {
   void outboxMetric006ParallelSnapshotsRemainCompleteAndImmutable() throws Exception {
     try (var registry = new Registry();
         var executor = Executors.newFixedThreadPool(8)) {
-      var recorder = new OutboxRowsMetricRecorder(registry, "DEBUG");
+      var recorder = new OutboxRowsMetricRecorder(registry, DEBUG_MODE);
       var one = new Counts(1, 2, 3);
       var two = new Counts(4, 5, 6);
       recorder.record(one);
@@ -208,11 +220,11 @@ class OutboxRowsMetricRecorderTest {
         assertSame(
             failure,
             assertThrows(
-                failure.getClass(), () -> new OutboxRowsMetricRecorder(registry, "DEBUG")));
+                failure.getClass(), () -> new OutboxRowsMetricRecorder(registry, DEBUG_MODE)));
         assertEquals(2, registry.registrations.get());
         assertEquals(1, registry.getMeters().size());
         assertEquals(0, registry.closes.get());
-        assertEquals("API", registry.getMeters().getFirst().getId().getTag("store"));
+        assertEquals("API", registry.getMeters().getFirst().getId().getTag(STORE_LABEL));
       } finally {
         registry.close();
       }
@@ -224,8 +236,8 @@ class OutboxRowsMetricRecorderTest {
   void outboxMetric008OwnersAndRepeatedValuesCannotShareOrGrowSeries() {
     try (var one = new Registry();
         var two = new Registry()) {
-      var first = new OutboxRowsMetricRecorder(one, "DEBUG");
-      var second = new OutboxRowsMetricRecorder(two, "DEBUG");
+      var first = new OutboxRowsMetricRecorder(one, DEBUG_MODE);
+      var second = new OutboxRowsMetricRecorder(two, DEBUG_MODE);
       second.record(new Counts(7, 0, 0));
       for (int i = 0; i < 1000; i++) {
         first.record(new Counts(i, 0, 0));
@@ -233,8 +245,8 @@ class OutboxRowsMetricRecorderTest {
       }
       assertEquals(999, first.snapshot().orElseThrow().pending());
       assertEquals(7, second.snapshot().orElseThrow().pending());
-      assertEquals(999, gauge(one, "PENDING"));
-      assertEquals(7, gauge(two, "PENDING"));
+      assertEquals(999, gauge(one, PENDING_STATUS));
+      assertEquals(7, gauge(two, PENDING_STATUS));
       shape(one);
       shape(two);
       assertEquals(0, one.closes.get());
