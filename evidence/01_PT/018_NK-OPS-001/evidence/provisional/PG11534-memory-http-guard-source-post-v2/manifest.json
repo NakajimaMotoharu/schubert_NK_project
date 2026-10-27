@@ -1,0 +1,118 @@
+{
+  "actualExit": 0,
+  "addedIndependentMethods": 2,
+  "allMainAndOtherInputsPreserved": true,
+  "allOriginalOracleTokensRestored": true,
+  "candidateGuards": 50,
+  "coverage": null,
+  "effortPercent": null,
+  "externalActions": 0,
+  "invocation": {
+    "actualPythonCommand": [
+      "/usr/bin/python3",
+      "-B",
+      "tools/quality/pg11534_memory_http_guard_source_post_v2.py"
+    ],
+    "arbitraryArgumentsRecorded": false,
+    "entrypointPath": "tools/quality/pg11534_memory_http_guard_source_post_v2.py",
+    "entrypointSha256": "6fce64f6b72c18a1f65083e68e8cecb587c57fda800d5ddb4b4b152be0c24ae0",
+    "helperPath": "tools/quality/host_tool_invocation.py",
+    "helperSha256": "85d616a3db4ff47f4c95ae2e0dd57954bc2b09f28b8f2a685b986e5621545c46",
+    "libraryPath": "tools/quality/pg11534_memory_http_guard_source_post_v2.py",
+    "librarySha256": "6fce64f6b72c18a1f65083e68e8cecb587c57fda800d5ddb4b4b152be0c24ae0",
+    "loadedProjectPythonSources": {
+      "tools/quality/classfile_code_metadata.py": "2227e1e8df1ff91b606f094c7ee64366023273ca740d4d47126ed0928190e2f0",
+      "tools/quality/g07_host_class_provenance_inputs.py": "a676cb3e4145177c3c243722d737592ce7d44c3f29cfe4f670662ef7651f046b",
+      "tools/quality/host_tool_invocation.py": "85d616a3db4ff47f4c95ae2e0dd57954bc2b09f28b8f2a685b986e5621545c46",
+      "tools/quality/pg10130_uid_oracle_preflight.py": "e80cb1d6d45d4e4c0cdb3cb792e0638119d936403de5c3e141429d338485758a",
+      "tools/quality/pg10332_result_profile_oracle_plan.py": "82c9b4f57dd517c1dbee639dbf4955c316beb89216cb9a8a66e78e0b9a322ad4",
+      "tools/quality/pg10339_result_profile_oracle_post_v2.py": "42f86287f5236d2ef1a2e10f54f5b0634e799a4e866b15eaf6738336a4ebabb0",
+      "tools/quality/pg10392_role_literal_plan.py": "e1af98abd59175d867d29b07a73d7b2e4c7112754603d1805ec0bfc4d9465ce8",
+      "tools/quality/pg10398_role_view_preflight.py": "31709d50a345f3e0843fa62ae0b4c6849885503eb3d81555b6bcc9605b486d56",
+      "tools/quality/pg11320_batch_source_guard_source_post.py": "7dd2751d4f92f7445834c597f650f09afb1babaec2d57b2385fa61a0634e6813",
+      "tools/quality/pg11378_full_payload_guard_source_post.py": "8e53b3878b28e4a25fee2d23cfdcd031081d256a424ff293879fb95945406a2b",
+      "tools/quality/pg11442_gc_fake_guard_source_post.py": "5bfeba67cde185e96cf0a719f107809c8f1a11a16c3175ece59aeaf8da619b65",
+      "tools/quality/pg11534_memory_http_guard_source_post_v2.py": "6fce64f6b72c18a1f65083e68e8cecb587c57fda800d5ddb4b4b152be0c24ae0",
+      "tools/quality/pg9906_user_query_oracle_source_post.py": "4f9bdaa17eea78a720c0f25b8af906f3f045fda590c8fea2a8868229403a98fa",
+      "tools/quality/pg9978_plain_core_quality_post.py": "c99cc753c6335c9f41e3eafe6a97c17521503739ba2cf80659b542a445dd48fa",
+      "tools/quality/public_java_digest_provenance.py": "dd47f8735a61ce849995633c3290a6ad047842ef3263829ce359db413778f7a0"
+    },
+    "provenance": "OBSERVED_SYS_ARGV_AND_ORIG_ARGV_NOT_RECONSTRUCTED"
+  },
+  "metadataNegativeVectors": 104,
+  "newAccepted": 0,
+  "originalMethods": 44,
+  "planManifestSha256": "98903e7ff842af1c41a400a12fbcbf0ab595e01b1579b6c30034efad1296640b",
+  "productTestsExecuted": 0,
+  "sourceBefore": "60d702bf8d83b6c4c8531397a7b770234fd9cf6e",
+  "sourceChanges": [
+    {
+      "addedMethods": [
+        "apimhttp023CallerFailureStillCleansOnceAndCompletedCloseIsNotRepeated"
+      ],
+      "beforeSha256": "efe955440d36cc221c968016335aa477e11b3dd29e4ca7c4d2b1aa82ebf2fc9b",
+      "candidateGuards": 25,
+      "originalMethods": [
+        "apimhttp001",
+        "apimhttp002",
+        "apimhttp003",
+        "apimhttp004",
+        "apimhttp005",
+        "apimhttp006",
+        "apimhttp007",
+        "apimhttp008",
+        "apimhttp009",
+        "apimhttp010",
+        "apimhttp011",
+        "apimhttp012",
+        "apimhttp013",
+        "apimhttp014",
+        "apimhttp015",
+        "apimhttp016",
+        "apimhttp017",
+        "apimhttp018",
+        "apimhttp019SampledBindingUpdatesActualHttpBodyWithoutLifecycleTransfer",
+        "apimhttp020TypedBorrowedPoolRefreshesIntoActualResponseWithoutControlOperations",
+        "apimhttp021DeferredFactoryReachesHttpWithoutReacquiringBorrowedReferences",
+        "apimhttp022ServiceDefaultSourceIsExplicitlyMissingAtHttpBoundary"
+      ],
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiMetricHttpHandlerTest.java",
+      "role": "api",
+      "sha256": "d7cfe85db31a7a981d86ed5fdbec576fe3071818c5cbabebcace4456f01dca62"
+    },
+    {
+      "addedMethods": [
+        "webmhttp023CallerFailureStillCleansOnceAndCompletedCloseIsNotRepeated"
+      ],
+      "beforeSha256": "4333afadfca50374f91d2efdf5300fcedc6716e94c3ad1e7edd6625173c6ee69",
+      "candidateGuards": 25,
+      "originalMethods": [
+        "webmhttp001",
+        "webmhttp002",
+        "webmhttp003",
+        "webmhttp004",
+        "webmhttp005",
+        "webmhttp006",
+        "webmhttp007",
+        "webmhttp008",
+        "webmhttp009",
+        "webmhttp010",
+        "webmhttp011",
+        "webmhttp012",
+        "webmhttp013",
+        "webmhttp014",
+        "webmhttp015",
+        "webmhttp016",
+        "webmhttp017",
+        "webmhttp018",
+        "webmhttp019SampledBindingUpdatesActualHttpBodyWithoutLifecycleTransfer",
+        "webmhttp020TypedBorrowedPoolRefreshesIntoActualResponseWithoutControlOperations",
+        "webmhttp021DeferredFactoryReachesHttpWithoutReacquiringBorrowedReferences",
+        "webmhttp022SharedServiceTerminalAndDatabaseReachActualResponseWithoutResamplingHttp"
+      ],
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebMetricHttpHandlerTest.java",
+      "role": "web",
+      "sha256": "7d17fde248dadb21fcdf2d855a06cbc88c9daab31f82e5170157391c90652a03"
+    }
+  ]
+}
