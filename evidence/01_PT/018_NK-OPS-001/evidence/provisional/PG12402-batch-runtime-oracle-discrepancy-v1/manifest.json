@@ -1,0 +1,77 @@
+{
+  "actualExit": 0,
+  "coverage": null,
+  "effortPercent": null,
+  "finding": "SOURCE_LEVEL_STALE_TEST_EXPECTATION_NOT_EXECUTED_TEST_FAILURE",
+  "formalUpdated": false,
+  "implementationDecision": {
+    "id": "PG-D615",
+    "path": "documents/400_PGPT/440_\u5224\u65ad/441_\u5b9f\u88c5\u5224\u65ad\u8a18\u9332.md",
+    "sectionSha256": "cae86d9af3fa7f0319d234f378ccddb9b810fb9d907f9554de0aa8fa1e8daf7b"
+  },
+  "independentlyApprovedCoordinates": [
+    "com.github.spotbugs:spotbugs-annotations",
+    "dev.codex.schubert:schubert-nk-bootstrap",
+    "dev.codex.schubert:schubert-nk-storage",
+    "io.micrometer:micrometer-core",
+    "io.micrometer:micrometer-registry-prometheus",
+    "org.apache.artemis:artemis-jakarta-client",
+    "org.flywaydb:flyway-core",
+    "org.flywaydb:flyway-database-postgresql",
+    "org.jspecify:jspecify",
+    "org.postgresql:postgresql"
+  ],
+  "invocation": {
+    "actualPythonCommand": [
+      "/usr/bin/python3",
+      "-B",
+      "tools/quality/pg12402_batch_runtime_oracle_discrepancy.py"
+    ],
+    "arbitraryArgumentsRecorded": false,
+    "entrypointPath": "tools/quality/pg12402_batch_runtime_oracle_discrepancy.py",
+    "entrypointSha256": "a1625882b02bdebe264e23e50b04fa771a519ab23e216eb3710208b000e93cc8",
+    "helperPath": "tools/quality/host_tool_invocation.py",
+    "helperSha256": "85d616a3db4ff47f4c95ae2e0dd57954bc2b09f28b8f2a685b986e5621545c46",
+    "libraryPath": "tools/quality/pg12402_batch_runtime_oracle_discrepancy.py",
+    "librarySha256": "a1625882b02bdebe264e23e50b04fa771a519ab23e216eb3710208b000e93cc8",
+    "loadedProjectPythonSources": {
+      "tools/quality/g07_host_class_provenance_inputs.py": "a676cb3e4145177c3c243722d737592ce7d44c3f29cfe4f670662ef7651f046b",
+      "tools/quality/host_tool_invocation.py": "85d616a3db4ff47f4c95ae2e0dd57954bc2b09f28b8f2a685b986e5621545c46",
+      "tools/quality/pg12402_batch_runtime_oracle_discrepancy.py": "a1625882b02bdebe264e23e50b04fa771a519ab23e216eb3710208b000e93cc8"
+    },
+    "provenance": "OBSERVED_SYS_ARGV_AND_ORIG_ARGV_NOT_RECONSTRUCTED"
+  },
+  "missingFromTest": [
+    "io.micrometer:micrometer-core",
+    "io.micrometer:micrometer-registry-prometheus"
+  ],
+  "newAccepted": 0,
+  "normalManifestSha256": "27e5dafc18e19fb5e29edd96958a5ba2f05da01611aa12b1ca8208735eb52b75",
+  "originalExpectedCoordinates": [
+    "com.github.spotbugs:spotbugs-annotations",
+    "dev.codex.schubert:schubert-nk-bootstrap",
+    "dev.codex.schubert:schubert-nk-storage",
+    "org.apache.artemis:artemis-jakarta-client",
+    "org.flywaydb:flyway-core",
+    "org.flywaydb:flyway-database-postgresql",
+    "org.jspecify:jspecify",
+    "org.postgresql:postgresql"
+  ],
+  "pomPath": "src/schubert-nk-batch/pom.xml",
+  "pomSha256": "64e9340a5bfe76246716e7d95888d0d2e30be046c06448d266f8fcf97e3cd495",
+  "productTestsExecuted": 0,
+  "source": "14198cb1878ec73319511ba1067133992d335e63",
+  "testPath": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/bootstrap/BatchRuntimeDependencyTest.java",
+  "testSha256": "ec144051a02af21676c7ca6adeaeed528e8970d01b6d7655ee484bbef0ba16cc",
+  "unapprovedProductionCoordinates": [],
+  "upperAuthorities": {
+    "documents/100_RD/170_\u904b\u7528\u30fb\u4fdd\u5b88\u8981\u4ef6/171_\u904b\u7528\u30fb\u76e3\u8996\u8981\u4ef6.md": {
+      "commit": "8b91944df5820535e23ba2469740f1c0aa94c447",
+      "sha256": "89c685c72b2c4314547fd2eb1a6daa8ba14a30ca0d28ecb102d3178cf86a7b87"
+    },
+    "documents/300_SS/350_\u904b\u7528\u30fb\u54c1\u8cea/351_Log\u30fbmetric\u30fbalert\u30fberror code\u8a2d\u8a08.md": {
+      "commit": "8b91944df5820535e23ba2469740f1c0aa94c447",
+      "sha256": "9da7c4e4f24740e031f37f984ec562d56e14ff098b1433af3ec55fe15bd195e6"
+    }
+  }
+}
