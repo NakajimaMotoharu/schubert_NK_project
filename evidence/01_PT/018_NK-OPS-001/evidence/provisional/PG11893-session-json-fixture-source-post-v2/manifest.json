@@ -1,0 +1,120 @@
+{
+  "actualExit": 0,
+  "allMainAndOtherInputsPreserved": true,
+  "allOriginalOracleTokensRestored": true,
+  "canonicalFoldOrRetokenizationUsed": false,
+  "comparisonReferences": 1,
+  "coverage": null,
+  "effortPercent": null,
+  "externalActions": 0,
+  "invocation": {
+    "actualPythonCommand": [
+      "/usr/bin/python3",
+      "-B",
+      "tools/quality/pg11893_session_json_fixture_source_post_v2.py"
+    ],
+    "arbitraryArgumentsRecorded": false,
+    "entrypointPath": "tools/quality/pg11893_session_json_fixture_source_post_v2.py",
+    "entrypointSha256": "31652fcf603ec089ef7f884567dc437845c5184a66d1008db87a21be9c9d60b5",
+    "helperPath": "tools/quality/host_tool_invocation.py",
+    "helperSha256": "85d616a3db4ff47f4c95ae2e0dd57954bc2b09f28b8f2a685b986e5621545c46",
+    "libraryPath": "tools/quality/pg11893_session_json_fixture_source_post_v2.py",
+    "librarySha256": "31652fcf603ec089ef7f884567dc437845c5184a66d1008db87a21be9c9d60b5",
+    "loadedProjectPythonSources": {
+      "tools/quality/classfile_code_metadata.py": "2227e1e8df1ff91b606f094c7ee64366023273ca740d4d47126ed0928190e2f0",
+      "tools/quality/g07_host_class_provenance_inputs.py": "a676cb3e4145177c3c243722d737592ce7d44c3f29cfe4f670662ef7651f046b",
+      "tools/quality/host_tool_invocation.py": "85d616a3db4ff47f4c95ae2e0dd57954bc2b09f28b8f2a685b986e5621545c46",
+      "tools/quality/pg10130_uid_oracle_preflight.py": "e80cb1d6d45d4e4c0cdb3cb792e0638119d936403de5c3e141429d338485758a",
+      "tools/quality/pg10332_result_profile_oracle_plan.py": "82c9b4f57dd517c1dbee639dbf4955c316beb89216cb9a8a66e78e0b9a322ad4",
+      "tools/quality/pg10339_result_profile_oracle_post_v2.py": "42f86287f5236d2ef1a2e10f54f5b0634e799a4e866b15eaf6738336a4ebabb0",
+      "tools/quality/pg10392_role_literal_plan.py": "e1af98abd59175d867d29b07a73d7b2e4c7112754603d1805ec0bfc4d9465ce8",
+      "tools/quality/pg10398_role_view_preflight.py": "31709d50a345f3e0843fa62ae0b4c6849885503eb3d81555b6bcc9605b486d56",
+      "tools/quality/pg11104_web_pure_value_source_post.py": "2713a232d4143cf94c39b865936368707d115c19649a469de35dfbd22ad70967",
+      "tools/quality/pg11893_session_json_fixture_source_post_v2.py": "31652fcf603ec089ef7f884567dc437845c5184a66d1008db87a21be9c9d60b5",
+      "tools/quality/pg9906_user_query_oracle_source_post.py": "4f9bdaa17eea78a720c0f25b8af906f3f045fda590c8fea2a8868229403a98fa",
+      "tools/quality/pg9978_plain_core_quality_post.py": "c99cc753c6335c9f41e3eafe6a97c17521503739ba2cf80659b542a445dd48fa",
+      "tools/quality/public_java_digest_provenance.py": "dd47f8735a61ce849995633c3290a6ad047842ef3263829ce359db413778f7a0"
+    },
+    "provenance": "OBSERVED_SYS_ARGV_AND_ORIG_ARGV_NOT_RECONSTRUCTED"
+  },
+  "metadataNegativeVectors": 20,
+  "newAccepted": 0,
+  "orderConstants": 1,
+  "originalMethods": 7,
+  "originalRawLiteralPlusLiteralPoints": 3,
+  "planManifestSha256": "a74a3356b751e8464e72b7e7f799cfb3c40ba87dd7806fbd7e8cef4c96d727b6",
+  "previousAttempt": {
+    "bodyExit": 1,
+    "entry": "tools/quality/pg11892_session_json_fixture_source_post.py",
+    "entrySha256": "53c26bc61a86c3f482f5cfe50d68f3b17ae2b93d2b4bed249d8f0f527d5d68fa",
+    "errorType": "ValueError",
+    "lintExit": 0,
+    "outputWritten": false,
+    "relatedBug": "BUG-1937"
+  },
+  "productTestsExecuted": 0,
+  "rawJavaTokensRestored": 3666,
+  "relatedUnchangedV2Methods": 5,
+  "sourceBefore": "06685adcf32c8583c80cb9c3e4d06d547ada486c",
+  "sourceChanges": [
+    {
+      "beforeSha256": "f941a9adbe3d16b2d593097f31ddb0de30b8f88003f2f8d2e10ac3f5a50c9db8",
+      "constants": [
+        {
+          "id": "PMD-09045",
+          "kind": "STRING",
+          "literal": "\"reader\"",
+          "name": "READER_NAME",
+          "references": 8
+        },
+        {
+          "id": "PMD-09046",
+          "kind": "STRING",
+          "literal": "\"QSBREQ01\"",
+          "name": "QUESTION_SUBMIT_PURPOSE",
+          "references": 8
+        },
+        {
+          "id": "PMD-09047",
+          "kind": "STRING",
+          "literal": "\"null\"",
+          "name": "NULL_JSON_LITERAL",
+          "references": 4
+        },
+        {
+          "id": "PMD-09048",
+          "kind": "STRING",
+          "literal": "\",\\\"\"",
+          "name": "FIELD_SEPARATOR",
+          "references": 4
+        },
+        {
+          "id": "PMD-09049",
+          "kind": "STRING",
+          "literal": "\"USER\"",
+          "name": "USER_ROLE",
+          "references": 4
+        },
+        {
+          "id": "PMD-09050",
+          "kind": "STRING",
+          "literal": "\"/logs\"",
+          "name": "LOGS_TARGET",
+          "references": 5
+        },
+        {
+          "id": "PMD-09053",
+          "kind": "ORDER_INT",
+          "literal": "1",
+          "name": "FIRST_TOKEN_INDEX",
+          "point": 16653,
+          "references": 1
+        }
+      ],
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/SessionAttributeCodecTest.java",
+      "sha256": "54c9a088ec519b70dd19ed4a6f88c2640c0fb5b410f12e16e554e2d0f9170b02"
+    }
+  ],
+  "stringConstants": 6,
+  "stringReferences": 33
+}
