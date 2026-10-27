@@ -21,6 +21,7 @@ import org.junit.jupiter.api.Test;
 
 /** 1825 APIPOOLB001..010: public typed getter fixtures only, no actual pool/DB. */
 final class ApiDbPoolMetricBindingTest {
+  private static final int FATAL_SUPPLIER_CASE = 1;
   private static final String ACTIVE_STATE = "active";
   private static final String POOL_METRIC_NAME = "nk_db_pool_connections";
   private static final String SERVICE_TAG = "service";
@@ -373,7 +374,7 @@ final class ApiDbPoolMetricBindingTest {
               () -> {
                 reads.incrementAndGet();
                 if (selected == 0) throw runtime;
-                if (selected == 1) throw fatal;
+                if (selected == FATAL_SUPPLIER_CASE) throw fatal;
                 return null;
               },
               () -> {
@@ -381,7 +382,7 @@ final class ApiDbPoolMetricBindingTest {
               })) {
         if (selected == 0)
           assertSame(runtime, assertThrows(IllegalStateException.class, context::initialize));
-        else if (selected == 1)
+        else if (selected == FATAL_SUPPLIER_CASE)
           assertSame(fatal, assertThrows(AssertionError.class, context::initialize));
         else assertThrows(NullPointerException.class, context::initialize);
         assertEquals(1, reads.get());
@@ -412,12 +413,12 @@ final class ApiDbPoolMetricBindingTest {
               () -> {
                 order.add(CONFIG_SUPPLIER);
                 if (selected == 0) throw runtime;
-                if (selected == 1) throw fatal;
+                if (selected == FATAL_SUPPLIER_CASE) throw fatal;
                 return null;
               })) {
         if (selected == 0)
           assertSame(runtime, assertThrows(IllegalArgumentException.class, context::initialize));
-        else if (selected == 1)
+        else if (selected == FATAL_SUPPLIER_CASE)
           assertSame(fatal, assertThrows(AssertionError.class, context::initialize));
         else assertThrows(NullPointerException.class, context::initialize);
         assertEquals(List.of(POOL_SUPPLIER, CONFIG_SUPPLIER), order);
