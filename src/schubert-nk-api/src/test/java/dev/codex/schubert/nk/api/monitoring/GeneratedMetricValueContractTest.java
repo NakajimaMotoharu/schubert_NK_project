@@ -11,6 +11,9 @@ import org.junit.jupiter.api.Test;
 
 /** GENMET001..008: compiler-generated value contracts, independent literals/JDK25 hash vectors. */
 class GeneratedMetricValueContractTest {
+  private static final String ERROR_STATE = "ERROR";
+  private static final String PENDING_STATE = "PENDING";
+
   @Test
   void genMetric001PoolRecordEqualityUsesEveryComponentAndRejectsNullAndOtherTypes() {
     var actual = new DbPoolMetricRecorder.Counts(3, 5, 2, 8);
@@ -85,7 +88,7 @@ class GeneratedMetricValueContractTest {
   @Test
   void genMetric005AsyncEnumGeneratedFactoriesAndDefensiveArrayAreClosed() {
     assertEquals(
-        List.of("RECEIVED", "PROCESSING", "COMPLETED", "ERROR", "CANCELLED"),
+        List.of("RECEIVED", "PROCESSING", "COMPLETED", ERROR_STATE, "CANCELLED"),
         Arrays.stream(AsyncJobMetricRecorder.State.values()).map(Enum::name).toList());
     assertEquals(
         AsyncJobMetricRecorder.State.RECEIVED, AsyncJobMetricRecorder.State.valueOf("RECEIVED"));
@@ -94,7 +97,8 @@ class GeneratedMetricValueContractTest {
         AsyncJobMetricRecorder.State.valueOf("PROCESSING"));
     assertEquals(
         AsyncJobMetricRecorder.State.COMPLETED, AsyncJobMetricRecorder.State.valueOf("COMPLETED"));
-    assertEquals(AsyncJobMetricRecorder.State.ERROR, AsyncJobMetricRecorder.State.valueOf("ERROR"));
+    assertEquals(
+        AsyncJobMetricRecorder.State.ERROR, AsyncJobMetricRecorder.State.valueOf(ERROR_STATE));
     assertEquals(
         AsyncJobMetricRecorder.State.CANCELLED, AsyncJobMetricRecorder.State.valueOf("CANCELLED"));
     assertThrows(
@@ -108,11 +112,12 @@ class GeneratedMetricValueContractTest {
   @Test
   void genMetric006PoolEnumGeneratedFactoriesAndDefensiveArrayAreClosed() {
     assertEquals(
-        List.of("ACTIVE", "IDLE", "PENDING", "MAX"),
+        List.of("ACTIVE", "IDLE", PENDING_STATE, "MAX"),
         Arrays.stream(DbPoolMetricRecorder.State.values()).map(Enum::name).toList());
     assertEquals(DbPoolMetricRecorder.State.ACTIVE, DbPoolMetricRecorder.State.valueOf("ACTIVE"));
     assertEquals(DbPoolMetricRecorder.State.IDLE, DbPoolMetricRecorder.State.valueOf("IDLE"));
-    assertEquals(DbPoolMetricRecorder.State.PENDING, DbPoolMetricRecorder.State.valueOf("PENDING"));
+    assertEquals(
+        DbPoolMetricRecorder.State.PENDING, DbPoolMetricRecorder.State.valueOf(PENDING_STATE));
     assertEquals(DbPoolMetricRecorder.State.MAX, DbPoolMetricRecorder.State.valueOf("MAX"));
     assertThrows(
         IllegalArgumentException.class, () -> DbPoolMetricRecorder.State.valueOf("active"));
@@ -174,15 +179,16 @@ class GeneratedMetricValueContractTest {
   @Test
   void genMetric008OutboxEnumGeneratedFactoriesAndDefensiveArrayAreClosed() {
     assertEquals(
-        List.of("PENDING", "SENT", "ERROR"),
+        List.of(PENDING_STATE, "SENT", ERROR_STATE),
         Arrays.stream(OutboxRowsMetricRecorder.Status.values()).map(Enum::name).toList());
     assertEquals(
         OutboxRowsMetricRecorder.Status.PENDING,
-        OutboxRowsMetricRecorder.Status.valueOf("PENDING"));
+        OutboxRowsMetricRecorder.Status.valueOf(PENDING_STATE));
     assertEquals(
         OutboxRowsMetricRecorder.Status.SENT, OutboxRowsMetricRecorder.Status.valueOf("SENT"));
     assertEquals(
-        OutboxRowsMetricRecorder.Status.ERROR, OutboxRowsMetricRecorder.Status.valueOf("ERROR"));
+        OutboxRowsMetricRecorder.Status.ERROR,
+        OutboxRowsMetricRecorder.Status.valueOf(ERROR_STATE));
     assertThrows(
         IllegalArgumentException.class, () -> OutboxRowsMetricRecorder.Status.valueOf("UNKNOWN"));
     assertThrows(NullPointerException.class, () -> OutboxRowsMetricRecorder.Status.valueOf(null));

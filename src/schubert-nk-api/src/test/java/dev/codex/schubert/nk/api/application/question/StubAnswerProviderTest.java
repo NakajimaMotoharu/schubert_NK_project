@@ -24,6 +24,8 @@ import org.junit.jupiter.api.Test;
 
 /** Independent clock/empty-answer vectors; PG190, SS312 section8.1, 012001. */
 class StubAnswerProviderTest {
+  private static final String PUBLIC_QUESTION = "public";
+  private static final String PUBLIC_ANSWER_BODY = "public body";
   private static final Instant NOW = Instant.parse("2026-09-20T00:00:00.123456789Z");
 
   @Test
@@ -82,23 +84,24 @@ class StubAnswerProviderTest {
                 () -> {
                   throw error;
                 }));
-    assertSame(runtime, assertThrows(IllegalStateException.class, () -> first.answer("public")));
-    assertSame(error, assertThrows(AssertionError.class, () -> second.answer("public")));
+    assertSame(
+        runtime, assertThrows(IllegalStateException.class, () -> first.answer(PUBLIC_QUESTION)));
+    assertSame(error, assertThrows(AssertionError.class, () -> second.answer(PUBLIC_QUESTION)));
     var missing = new StubAnswerProvider(clock(() -> null));
-    assertThrows(NullPointerException.class, () -> missing.answer("public"));
+    assertThrows(NullPointerException.class, () -> missing.answer(PUBLIC_QUESTION));
   }
 
   @Test
   @DisplayName("PT-ASY-STB004 value and redaction")
   void resultValueAndRedaction() {
-    var first = new AnswerResult("public body", NOW);
-    var same = new AnswerResult("public body", NOW);
-    assertEquals("public body", first.body());
+    var first = new AnswerResult(PUBLIC_ANSWER_BODY, NOW);
+    var same = new AnswerResult(PUBLIC_ANSWER_BODY, NOW);
+    assertEquals(PUBLIC_ANSWER_BODY, first.body());
     assertEquals(NOW, first.answeredAt());
     assertEquals(first, same);
     assertEquals(first.hashCode(), same.hashCode());
     assertNotEquals(first, new AnswerResult("", NOW));
-    assertNotEquals(first, new AnswerResult("public body", NOW.plusSeconds(1)));
+    assertNotEquals(first, new AnswerResult(PUBLIC_ANSWER_BODY, NOW.plusSeconds(1)));
     assertEquals("AnswerResult[REDACTED]", first.toString());
   }
 
@@ -112,7 +115,7 @@ class StubAnswerProviderTest {
     Set<Instant> actual = new HashSet<>();
     try (var executor = Executors.newFixedThreadPool(8)) {
       java.util.List<Callable<AnswerResult>> tasks = new java.util.ArrayList<>();
-      for (int i = 0; i < 64; i++) tasks.add(() -> provider.answer("public"));
+      for (int i = 0; i < 64; i++) tasks.add(() -> provider.answer(PUBLIC_QUESTION));
       for (var future : executor.invokeAll(tasks, 5, TimeUnit.SECONDS)) {
         AnswerResult answer = future.get();
         assertEquals("", answer.body());

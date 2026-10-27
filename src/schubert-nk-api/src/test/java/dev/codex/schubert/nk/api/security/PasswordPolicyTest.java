@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 
 /** PT-AUT-001; literal Unicode/byte/length oracles from UI226 and SS314, no production expected. */
 final class PasswordPolicyTest {
+  private static final String SYNTHETIC_USERNAME = "user";
   private final PasswordPolicy policy = new PasswordPolicy();
 
   @Test
@@ -30,7 +31,8 @@ final class PasswordPolicyTest {
         List.of("a".repeat(11), "a".repeat(129), "é".repeat(128) + "a", "a".repeat(257))) {
       char[] input = value.toCharArray();
       assertThrows(
-          IllegalArgumentException.class, () -> policy.normalizeForCreation(input, "user"));
+          IllegalArgumentException.class,
+          () -> policy.normalizeForCreation(input, SYNTHETIC_USERNAME));
       assertArrayEquals(new char[input.length], input);
     }
   }
@@ -39,10 +41,10 @@ final class PasswordPolicyTest {
   void nfcSupplementaryAndUsernameComparisonUseExplicitValues() {
     assertArrayEquals(
         "é".repeat(12).toCharArray(),
-        policy.normalizeForCreation("e\u0301".repeat(12).toCharArray(), "user"));
+        policy.normalizeForCreation("e\u0301".repeat(12).toCharArray(), SYNTHETIC_USERNAME));
     assertArrayEquals(
         "😀".repeat(12).toCharArray(),
-        policy.normalizeForCreation("😀".repeat(12).toCharArray(), "user"));
+        policy.normalizeForCreation("😀".repeat(12).toCharArray(), SYNTHETIC_USERNAME));
     for (String username : List.of("abcdefghijkl", "ABCDEFGHIJKL", " ABCDEFGHIJKL ")) {
       assertThrows(
           IllegalArgumentException.class,
@@ -54,7 +56,7 @@ final class PasswordPolicyTest {
     // SS314 does not require mixed character classes or a common-password list.
     assertArrayEquals(
         "1".repeat(12).toCharArray(),
-        policy.normalizeForCreation("1".repeat(12).toCharArray(), "user"));
+        policy.normalizeForCreation("1".repeat(12).toCharArray(), SYNTHETIC_USERNAME));
   }
 
   @Test
@@ -72,6 +74,7 @@ final class PasswordPolicyTest {
     assertThrows(NullPointerException.class, () -> policy.normalizeForCreation(input, null));
     assertArrayEquals(new char[input.length], input);
     assertThrows(NullPointerException.class, () -> policy.normalizeForLogin(null));
-    assertThrows(NullPointerException.class, () -> policy.normalizeForCreation(null, "user"));
+    assertThrows(
+        NullPointerException.class, () -> policy.normalizeForCreation(null, SYNTHETIC_USERNAME));
   }
 }
