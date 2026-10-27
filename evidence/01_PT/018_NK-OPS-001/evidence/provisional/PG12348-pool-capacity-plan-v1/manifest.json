@@ -1,0 +1,197 @@
+{
+  "actualExit": 0,
+  "allMainAndOtherInputsPreserved": true,
+  "coverage": null,
+  "invocation": {
+    "actualPythonCommand": [
+      "/usr/bin/python3",
+      "-B",
+      "tools/quality/pg12348_pool_capacity_plan.py"
+    ],
+    "arbitraryArgumentsRecorded": false,
+    "entrypointPath": "tools/quality/pg12348_pool_capacity_plan.py",
+    "entrypointSha256": "07fe4ad6110ccdfa47d3acc25b57e4bacb7f2d0963c2dcddd1af30f8985493bf",
+    "helperPath": "tools/quality/host_tool_invocation.py",
+    "helperSha256": "85d616a3db4ff47f4c95ae2e0dd57954bc2b09f28b8f2a685b986e5621545c46",
+    "libraryPath": "tools/quality/pg12348_pool_capacity_plan.py",
+    "librarySha256": "07fe4ad6110ccdfa47d3acc25b57e4bacb7f2d0963c2dcddd1af30f8985493bf",
+    "loadedProjectPythonSources": {
+      "tools/quality/classfile_code_metadata.py": "2227e1e8df1ff91b606f094c7ee64366023273ca740d4d47126ed0928190e2f0",
+      "tools/quality/g07_host_class_provenance_inputs.py": "a676cb3e4145177c3c243722d737592ce7d44c3f29cfe4f670662ef7651f046b",
+      "tools/quality/host_tool_invocation.py": "85d616a3db4ff47f4c95ae2e0dd57954bc2b09f28b8f2a685b986e5621545c46",
+      "tools/quality/pg10130_uid_oracle_preflight.py": "e80cb1d6d45d4e4c0cdb3cb792e0638119d936403de5c3e141429d338485758a",
+      "tools/quality/pg10332_result_profile_oracle_plan.py": "82c9b4f57dd517c1dbee639dbf4955c316beb89216cb9a8a66e78e0b9a322ad4",
+      "tools/quality/pg10339_result_profile_oracle_post_v2.py": "42f86287f5236d2ef1a2e10f54f5b0634e799a4e866b15eaf6738336a4ebabb0",
+      "tools/quality/pg10392_role_literal_plan.py": "e1af98abd59175d867d29b07a73d7b2e4c7112754603d1805ec0bfc4d9465ce8",
+      "tools/quality/pg10398_role_view_preflight.py": "31709d50a345f3e0843fa62ae0b4c6849885503eb3d81555b6bcc9605b486d56",
+      "tools/quality/pg10840_web_view_duplicate_plan.py": "f4ea4a6f7d59ed872cc7c3dbd07e8d48c45c59f67c339d82d6ff4f2eef0a9a46",
+      "tools/quality/pg12348_pool_capacity_plan.py": "07fe4ad6110ccdfa47d3acc25b57e4bacb7f2d0963c2dcddd1af30f8985493bf",
+      "tools/quality/pg9906_user_query_oracle_source_post.py": "4f9bdaa17eea78a720c0f25b8af906f3f045fda590c8fea2a8868229403a98fa",
+      "tools/quality/pg9978_plain_core_quality_post.py": "c99cc753c6335c9f41e3eafe6a97c17521503739ba2cf80659b542a445dd48fa",
+      "tools/quality/public_java_digest_provenance.py": "dd47f8735a61ce849995633c3290a6ad047842ef3263829ce359db413778f7a0"
+    },
+    "provenance": "OBSERVED_SYS_ARGV_AND_ORIG_ARGV_NOT_RECONSTRUCTED"
+  },
+  "newAccepted": 0,
+  "numericConstants": 11,
+  "numericReferences": 11,
+  "originalMethods": 29,
+  "productTestsExecuted": 0,
+  "rawDiagnosticsCorrected": 16,
+  "sourceBefore": "442441c83f73935eb2bd33cd40a7b9884eb7dfe3",
+  "sourceChanges": [
+    {
+      "beforeSha256": "6844dbc828fdd835bffbdb59b85792f7b5fc940a4b7bbc67b547a6b201592628",
+      "constants": [
+        {
+          "id": "PMD-02126",
+          "literal": "\"active\"",
+          "name": "ACTIVE_GETTER_POINT",
+          "references": 4,
+          "type": "String"
+        },
+        {
+          "id": "PMD-02129",
+          "literal": "1",
+          "name": "FAULT_IDLE_INDEX",
+          "originalStart": 3636,
+          "references": 1,
+          "type": "int"
+        },
+        {
+          "id": "PMD-02130",
+          "literal": "2",
+          "name": "FAULT_PENDING_INDEX",
+          "originalStart": 3671,
+          "references": 1,
+          "type": "int"
+        },
+        {
+          "id": "PMD-02131",
+          "literal": "3",
+          "name": "FAULT_NEGATIVE_MAXIMUM_INDEX",
+          "originalStart": 3709,
+          "references": 1,
+          "type": "int"
+        },
+        {
+          "id": "PMD-02132",
+          "literal": "4",
+          "name": "FAULT_ZERO_MAXIMUM_INDEX",
+          "originalStart": 3747,
+          "references": 1,
+          "type": "int"
+        }
+      ],
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/DbPoolMetricObservationTest.java",
+      "sha256": "13a68e4303e1870494f463ba6ef89e32d8807082594ccc11709f497668d5e14f"
+    },
+    {
+      "beforeSha256": "b97fd465e3526b4bdc9fc1251e9038cc63d74c0e50580dc211ad6c42bfb8fe63",
+      "constants": [
+        {
+          "id": "PMD-08336",
+          "literal": "\"active\"",
+          "name": "ACTIVE_GETTER_POINT",
+          "references": 4,
+          "type": "String"
+        },
+        {
+          "id": "PMD-08339",
+          "literal": "1",
+          "name": "FAULT_IDLE_INDEX",
+          "originalStart": 3678,
+          "references": 1,
+          "type": "int"
+        },
+        {
+          "id": "PMD-08340",
+          "literal": "2",
+          "name": "FAULT_PENDING_INDEX",
+          "originalStart": 3713,
+          "references": 1,
+          "type": "int"
+        },
+        {
+          "id": "PMD-08341",
+          "literal": "3",
+          "name": "FAULT_NEGATIVE_MAXIMUM_INDEX",
+          "originalStart": 3751,
+          "references": 1,
+          "type": "int"
+        },
+        {
+          "id": "PMD-08342",
+          "literal": "4",
+          "name": "FAULT_ZERO_MAXIMUM_INDEX",
+          "originalStart": 3789,
+          "references": 1,
+          "type": "int"
+        }
+      ],
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebDbPoolMetricObservationTest.java",
+      "sha256": "a23735273bf31a1c8b7c68737355364b19bc5d20e18ab3c422448de4016ed98b"
+    },
+    {
+      "beforeSha256": "207d6c59312f030b71601dfa1ee6a687279868870ebb8f86b31ecb3ab499e152",
+      "constants": [
+        {
+          "id": "PMD-02249",
+          "literal": "\"QDLREQ01\"",
+          "name": "DELETE_QUESTION_OPERATION",
+          "references": 4,
+          "type": "String"
+        },
+        {
+          "id": "PMD-02250",
+          "literal": "2",
+          "name": "FAILED_REGISTRATION_ORDINAL",
+          "originalStart": 2085,
+          "references": 1,
+          "type": "int"
+        },
+        {
+          "id": "PMD-02251",
+          "literal": "\"DEBUG\"",
+          "name": "DEBUG_MONITORING_MODE",
+          "references": 8,
+          "type": "String"
+        }
+      ],
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/OperationMismatchMetricRecorderTest.java",
+      "sha256": "9178a2a5c5f03d93bfc39d81e986f411ec9c188d385ebfbf2f62545134688cfd"
+    },
+    {
+      "beforeSha256": "f0e927227f61360d0ac636c4121395d667d2e6a206ecb1dd112fcf431b92be55",
+      "constants": [
+        {
+          "id": "PMD-02654",
+          "literal": "\"CRITICAL\"",
+          "name": "CRITICAL_CAPACITY_LEVEL",
+          "references": 4,
+          "type": "String"
+        },
+        {
+          "id": "PMD-02655",
+          "literal": "4_500_000_000L",
+          "name": "CRITICAL_BYTE_GATE",
+          "originalStart": 1403,
+          "references": 1,
+          "type": "long"
+        },
+        {
+          "id": "PMD-02656",
+          "literal": "9_000",
+          "name": "CRITICAL_FILE_GATE",
+          "originalStart": 1836,
+          "references": 1,
+          "type": "long"
+        }
+      ],
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/storage/TransferCapacityTest.java",
+      "sha256": "3eecc613cba54d6a14141b751c131e1360f82318c536f733e084d2abc3d08ea1"
+    }
+  ],
+  "stringConstants": 5,
+  "stringReferences": 24
+}
