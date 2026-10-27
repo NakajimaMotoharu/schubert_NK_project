@@ -1,5 +1,7 @@
 # PGPT成果物一覧・進捗
 
+2026-10-28追加：2373/2374/PG-D755、AlertThresholds Main上限名とTest TWRの二是正、当source af3f0f86の原14/一suite成功・Main66L21M1C102B全miss0、六compile0/SpotBugs0・PMD残Thread四のgate1を保持。raw8491/累計926、正式1964-53/17-190/工数null・全F03/451/HOLD不変。YKT1744 actualTransferCleanup候補はOPEN、通常PG/PTを継続。
+
 2026-10-28最新：2369/2370の事前metadata advisory・独立post、2371の共有73%点検を追加。直前2366/2367/2368はWriter五是正・原8/二suiteと二Main50L7M2C26B missed0の限定成果、save0bcd337960b46dd8c69928ba3246d79531931d51はremote一致。共有68→73区間は是正27だが個別受入増分0、正式1964-53/17-190/工数null/HOLD不変。次は独立Main/whole fixtureをまとめて通常PG/PTへ。
 
 2026-10-25 18:22最新：1954/PG-D664、非token名Header8の既TestID/独立期待値を静的意味対応、UI17field/256byte独立golden/別post10反例。実PT/coverage/正式増分0、全QSE/全layout未認定・旧source成功移植0。正式1964-53/17-190/工数null/全actualHOLD不変、通常保存後も独立PGPT継続。

@@ -1,0 +1,60 @@
+{
+  "actualExit": 0,
+  "allOtherInputsUnchanged": true,
+  "coverage": null,
+  "invocation": {
+    "actualPythonCommand": [
+      "/usr/bin/python3",
+      "-B",
+      "tools/quality/pg12716_alert_threshold_plan.py"
+    ],
+    "arbitraryArgumentsRecorded": false,
+    "entrypointPath": "tools/quality/pg12716_alert_threshold_plan.py",
+    "entrypointSha256": "ac532f646d4e253767f037456844ec1f92f4197760e56754ad4f933705ab6279",
+    "helperPath": "tools/quality/host_tool_invocation.py",
+    "helperSha256": "85d616a3db4ff47f4c95ae2e0dd57954bc2b09f28b8f2a685b986e5621545c46",
+    "libraryPath": "tools/quality/pg12716_alert_threshold_plan.py",
+    "librarySha256": "ac532f646d4e253767f037456844ec1f92f4197760e56754ad4f933705ab6279",
+    "loadedProjectPythonSources": {
+      "tools/quality/g07_host_class_provenance_inputs.py": "a676cb3e4145177c3c243722d737592ce7d44c3f29cfe4f670662ef7651f046b",
+      "tools/quality/host_tool_invocation.py": "85d616a3db4ff47f4c95ae2e0dd57954bc2b09f28b8f2a685b986e5621545c46",
+      "tools/quality/pg12716_alert_threshold_plan.py": "ac532f646d4e253767f037456844ec1f92f4197760e56754ad4f933705ab6279",
+      "tools/quality/public_java_digest_provenance.py": "dd47f8735a61ce849995633c3290a6ad047842ef3263829ce359db413778f7a0"
+    },
+    "provenance": "OBSERVED_SYS_ARGV_AND_ORIG_ARGV_NOT_RECONSTRUCTED"
+  },
+  "mainCorrections": 1,
+  "metadataNegativeVectors": 9,
+  "newAccepted": 0,
+  "nonVacuousNegativeLabels": [
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/AlertThresholds.java:MAX_PERCENTAGE = 100",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/AlertThresholds.java:if (value > MAX_PERCENTAGE)",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/AlertThresholds.java:return warning ?",
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/AlertThresholdsTest.java:index < 64",
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/AlertThresholdsTest.java:assertEquals(expected, future.get())",
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/AlertThresholdsTest.java:executor.shutdownNow();",
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/AlertThresholdsTest.java:awaitTermination(10,",
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/AlertThresholdsTest.java:thresholds.filesystem(100,",
+    "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/AlertThresholdsTest.java:@Test"
+  ],
+  "originalSuites": 1,
+  "originalTests": 14,
+  "productTestsExecuted": 0,
+  "sourceBefore": "e353b1f49a740a426031fdc199f7ce8b26081971",
+  "sourceChanges": [
+    {
+      "beforeSha256": "80c1e49c40172e538d4015739aac080e916608cdca0d4f386749263a05152ba3",
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/AlertThresholds.java",
+      "sha256": "6d1de8fc1244404c393f0564aadca13604473e23cc2aa1435db98e04d55e60e0"
+    },
+    {
+      "beforeSha256": "e61fe27395147a51fe937ee9647fad1ca46c1fe1172827803b940891b1e071d8",
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/AlertThresholdsTest.java",
+      "sha256": "1eb5325c675acfaf86c7d02c6b1815943c0d35dee68fd6ef0a65f48a7c067c27"
+    }
+  ],
+  "specificationPath": "evidence/01_PT/018_NK-OPS-001/2373_AlertThreshold\u4e0a\u9650\u547d\u540d\u30fb\u6240\u6709pool\u662f\u6b63_\u5358\u4f53\u30c6\u30b9\u30c8\u4ed5\u69d8\u66f8.md",
+  "specificationSha256": "3ce3511e6ce829971b66fa339c5847bfe5049ea7deb9660f4df0124b4ca768d5",
+  "testCorrections": 1,
+  "totalCorrections": 2
+}

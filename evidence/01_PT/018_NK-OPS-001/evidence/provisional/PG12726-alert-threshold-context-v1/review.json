@@ -1,0 +1,202 @@
+{
+  "rows": [
+    {
+      "attributes": {
+        "begincolumn": "25",
+        "beginline": "224",
+        "class": "AlertThresholdsTest",
+        "endcolumn": "56",
+        "endline": "224",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "method": "threshold014ConcurrentStatelessEvaluations",
+        "package": "dev.codex.schubert.nk.batch.monitoring",
+        "priority": "3",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading",
+        "variable": "executor"
+      },
+      "controls": [
+        "try(varexecutor=Executors.newFixedThreadPool(4))",
+        "index<64",
+        "executor.invokeAll(tasks,10,TimeUnit.SECONDS)",
+        "future.get()",
+        "executor.shutdownNow()",
+        "assertTrue(executor.awaitTermination(10,TimeUnit.SECONDS))",
+        "assertEquals(expected,future.get())"
+      ],
+      "currentCases": [
+        {
+          "className": "dev.codex.schubert.nk.batch.monitoring.AlertThresholdsTest",
+          "method": "threshold014ConcurrentStatelessEvaluations",
+          "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/AlertThresholdsTest.java",
+          "sourceSha256": "1eb5325c675acfaf86c7d02c6b1815943c0d35dee68fd6ef0a65f48a7c067c27"
+        }
+      ],
+      "currentWholeJoinPending": true,
+      "disposition": "CONTEXT_NOT_APPLICABLE",
+      "id": "PMD-04700",
+      "kind": "FINITE_OWNED_PURE_ALERT_THRESHOLD_WORKERS",
+      "newAccepted": 0,
+      "oldRuntimeReassigned": false,
+      "originalRowSha256": "80d773974e9d4e83f168186e437a7c4dafb93fdd765185c86da5fa8b979f1ebd",
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/AlertThresholdsTest.java",
+      "productTestsExecutedByReview": 0,
+      "reason": "Standalone JavaSE whole JUnit fixture owns four workers with64 finite pure numeric callbacks, independent SS literal expected values. TWR and original shutdownNow/awaitTermination10seconds remain. invokeAll has10second task bound; get and TWR close have no local deadline, distinct outer JVM240seconds. No application worker, collector, DB, FS, network, VM, Root, native, credential or authority operations. Four historical context references source-rebound only; raw4 retained.",
+      "rule": "DoNotUseThreads",
+      "scopeKind": "METHOD",
+      "scopeName": "threshold014ConcurrentStatelessEvaluations",
+      "scopeTokenSha256": "88336517578d189304fd3d6b36ae62ba1a224e6cc6b2394ba701260d1ab2ba01",
+      "source": "af3f0f86d295ed721f5c1b41670ef224eb1d49e3",
+      "sourceSha256": "1eb5325c675acfaf86c7d02c6b1815943c0d35dee68fd6ef0a65f48a7c067c27",
+      "sourceSpanSha256": "f93e1793cb7a139e55f0b0dcf12d1f4620721e0707876be38f521c37b77d4ba3"
+    },
+    {
+      "attributes": {
+        "begincolumn": "27",
+        "beginline": "257",
+        "class": "AlertThresholdsTest",
+        "endcolumn": "74",
+        "endline": "257",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "method": "threshold014ConcurrentStatelessEvaluations",
+        "package": "dev.codex.schubert.nk.batch.monitoring",
+        "priority": "3",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading"
+      },
+      "controls": [
+        "try(varexecutor=Executors.newFixedThreadPool(4))",
+        "index<64",
+        "executor.invokeAll(tasks,10,TimeUnit.SECONDS)",
+        "future.get()",
+        "executor.shutdownNow()",
+        "assertTrue(executor.awaitTermination(10,TimeUnit.SECONDS))",
+        "assertEquals(expected,future.get())"
+      ],
+      "currentCases": [
+        {
+          "className": "dev.codex.schubert.nk.batch.monitoring.AlertThresholdsTest",
+          "method": "threshold014ConcurrentStatelessEvaluations",
+          "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/AlertThresholdsTest.java",
+          "sourceSha256": "1eb5325c675acfaf86c7d02c6b1815943c0d35dee68fd6ef0a65f48a7c067c27"
+        }
+      ],
+      "currentWholeJoinPending": true,
+      "disposition": "CONTEXT_NOT_APPLICABLE",
+      "id": "PMD-04701",
+      "kind": "FINITE_OWNED_PURE_ALERT_THRESHOLD_WORKERS",
+      "newAccepted": 0,
+      "oldRuntimeReassigned": false,
+      "originalRowSha256": "70516dc2dbccfb40688f9fcb49ce9848a581aee2555fb05a96743dc9a57a68a1",
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/AlertThresholdsTest.java",
+      "productTestsExecutedByReview": 0,
+      "reason": "Standalone JavaSE whole JUnit fixture owns four workers with64 finite pure numeric callbacks, independent SS literal expected values. TWR and original shutdownNow/awaitTermination10seconds remain. invokeAll has10second task bound; get and TWR close have no local deadline, distinct outer JVM240seconds. No application worker, collector, DB, FS, network, VM, Root, native, credential or authority operations. Four historical context references source-rebound only; raw4 retained.",
+      "rule": "DoNotUseThreads",
+      "scopeKind": "METHOD",
+      "scopeName": "threshold014ConcurrentStatelessEvaluations",
+      "scopeTokenSha256": "88336517578d189304fd3d6b36ae62ba1a224e6cc6b2394ba701260d1ab2ba01",
+      "source": "af3f0f86d295ed721f5c1b41670ef224eb1d49e3",
+      "sourceSha256": "1eb5325c675acfaf86c7d02c6b1815943c0d35dee68fd6ef0a65f48a7c067c27",
+      "sourceSpanSha256": "bb5f092b2a814953257be1b5d7c5685f2e2686044ca0f02f162d351ab9ce9c95"
+    },
+    {
+      "attributes": {
+        "begincolumn": "9",
+        "beginline": "260",
+        "class": "AlertThresholdsTest",
+        "endcolumn": "31",
+        "endline": "260",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "method": "threshold014ConcurrentStatelessEvaluations",
+        "package": "dev.codex.schubert.nk.batch.monitoring",
+        "priority": "3",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading"
+      },
+      "controls": [
+        "try(varexecutor=Executors.newFixedThreadPool(4))",
+        "index<64",
+        "executor.invokeAll(tasks,10,TimeUnit.SECONDS)",
+        "future.get()",
+        "executor.shutdownNow()",
+        "assertTrue(executor.awaitTermination(10,TimeUnit.SECONDS))",
+        "assertEquals(expected,future.get())"
+      ],
+      "currentCases": [
+        {
+          "className": "dev.codex.schubert.nk.batch.monitoring.AlertThresholdsTest",
+          "method": "threshold014ConcurrentStatelessEvaluations",
+          "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/AlertThresholdsTest.java",
+          "sourceSha256": "1eb5325c675acfaf86c7d02c6b1815943c0d35dee68fd6ef0a65f48a7c067c27"
+        }
+      ],
+      "currentWholeJoinPending": true,
+      "disposition": "CONTEXT_NOT_APPLICABLE",
+      "id": "PMD-04702",
+      "kind": "FINITE_OWNED_PURE_ALERT_THRESHOLD_WORKERS",
+      "newAccepted": 0,
+      "oldRuntimeReassigned": false,
+      "originalRowSha256": "ac749ffb32ebe119db1cad71909e784a53df79dc162a97c49c8dd4892d5f1938",
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/AlertThresholdsTest.java",
+      "productTestsExecutedByReview": 0,
+      "reason": "Standalone JavaSE whole JUnit fixture owns four workers with64 finite pure numeric callbacks, independent SS literal expected values. TWR and original shutdownNow/awaitTermination10seconds remain. invokeAll has10second task bound; get and TWR close have no local deadline, distinct outer JVM240seconds. No application worker, collector, DB, FS, network, VM, Root, native, credential or authority operations. Four historical context references source-rebound only; raw4 retained.",
+      "rule": "DoNotUseThreads",
+      "scopeKind": "METHOD",
+      "scopeName": "threshold014ConcurrentStatelessEvaluations",
+      "scopeTokenSha256": "88336517578d189304fd3d6b36ae62ba1a224e6cc6b2394ba701260d1ab2ba01",
+      "source": "af3f0f86d295ed721f5c1b41670ef224eb1d49e3",
+      "sourceSha256": "1eb5325c675acfaf86c7d02c6b1815943c0d35dee68fd6ef0a65f48a7c067c27",
+      "sourceSpanSha256": "447cb134622833454dbcfd6b8edb9568b5b6bffacad735fc46be8baae7c7c49c"
+    },
+    {
+      "attributes": {
+        "begincolumn": "20",
+        "beginline": "261",
+        "class": "AlertThresholdsTest",
+        "endcolumn": "67",
+        "endline": "261",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "method": "threshold014ConcurrentStatelessEvaluations",
+        "package": "dev.codex.schubert.nk.batch.monitoring",
+        "priority": "3",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading"
+      },
+      "controls": [
+        "try(varexecutor=Executors.newFixedThreadPool(4))",
+        "index<64",
+        "executor.invokeAll(tasks,10,TimeUnit.SECONDS)",
+        "future.get()",
+        "executor.shutdownNow()",
+        "assertTrue(executor.awaitTermination(10,TimeUnit.SECONDS))",
+        "assertEquals(expected,future.get())"
+      ],
+      "currentCases": [
+        {
+          "className": "dev.codex.schubert.nk.batch.monitoring.AlertThresholdsTest",
+          "method": "threshold014ConcurrentStatelessEvaluations",
+          "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/AlertThresholdsTest.java",
+          "sourceSha256": "1eb5325c675acfaf86c7d02c6b1815943c0d35dee68fd6ef0a65f48a7c067c27"
+        }
+      ],
+      "currentWholeJoinPending": true,
+      "disposition": "CONTEXT_NOT_APPLICABLE",
+      "id": "PMD-04703",
+      "kind": "FINITE_OWNED_PURE_ALERT_THRESHOLD_WORKERS",
+      "newAccepted": 0,
+      "oldRuntimeReassigned": false,
+      "originalRowSha256": "7fe20871e525506ed9e3e107233f2fa4178e0341d0fcb5d7ea693728c3ad0a31",
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/AlertThresholdsTest.java",
+      "productTestsExecutedByReview": 0,
+      "reason": "Standalone JavaSE whole JUnit fixture owns four workers with64 finite pure numeric callbacks, independent SS literal expected values. TWR and original shutdownNow/awaitTermination10seconds remain. invokeAll has10second task bound; get and TWR close have no local deadline, distinct outer JVM240seconds. No application worker, collector, DB, FS, network, VM, Root, native, credential or authority operations. Four historical context references source-rebound only; raw4 retained.",
+      "rule": "DoNotUseThreads",
+      "scopeKind": "METHOD",
+      "scopeName": "threshold014ConcurrentStatelessEvaluations",
+      "scopeTokenSha256": "88336517578d189304fd3d6b36ae62ba1a224e6cc6b2394ba701260d1ab2ba01",
+      "source": "af3f0f86d295ed721f5c1b41670ef224eb1d49e3",
+      "sourceSha256": "1eb5325c675acfaf86c7d02c6b1815943c0d35dee68fd6ef0a65f48a7c067c27",
+      "sourceSpanSha256": "d541ae7bb57fcde19f69c441a68e1d8c3446a7babe941444ac301c72caad9cf7"
+    }
+  ],
+  "source": "af3f0f86d295ed721f5c1b41670ef224eb1d49e3"
+}
