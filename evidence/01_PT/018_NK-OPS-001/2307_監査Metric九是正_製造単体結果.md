@@ -1,0 +1,15 @@
+# 監査・Metric九是正・製造単体結果
+
+source4b5f6faa078be348132a6ece9140b0c1a31d7907/branch dev-foundation、仕様2306/BUG1956/YKT1705/PG-D730。2026-10-27/Linux7.0.0-38/JDK25.0.4/Maven3.9.12/JUnit5.13.4/Platform1.13.4/JaCoCo0.8.15/PMD7.28 record1298/Checkstyle14.3/GJF1.36.1、実command・終了code・依存hashは各公開manifest invocation/stages。主費F03、原owner/cost P00604/P01809・既予算・受入不変更/追加配賦0。
+
+12190plan ca016a660ab8d1b8cff676b69b3d4be922e9494a41f87ea9855c749c85870c43、12192独立raw逆 f61343ad316c1f233619fb776fc19f3007353700111d55c2942c539f6f5e1d0c actual0：五同値String40参照・三field全rename・if index一を元rawへ厳密逆、全19method/helper/匿名型・独立24異常合格。Main/全他入力不変、Production由来expected/期待値緩和0。
+
+12194正常六 971ee001e169f9fa05df627e0cd0789704518d952105c27328eabf86ebd4adff/session95737真正0/PT0、12196元19 5611da6fac4d7f4959d97882e2a0c297d5d9681fa7b29e3a8721f15373d75fc8/session3384真正0、三suite/F/E/S/abort0、単一exec PG12196-AUDITMETRIC-JP。監査六・recorder八・contract五全件実施、原100/64task/1000反復・型/件数/最大timestamp/借用registry所有・例外同一性・null/UTC/microsecond/独立JSON/canaryの期待は不変更。新規Product Test ID0、旧source成功の算術加算なし。
+
+12198実静的 a10133ca7dedd88083f8f39c8b96b0af1cde5ffc161655dc8feb3591b10d8255/session6590真正1、前現scope14→5（原scope27の十三是正は前sourceで計上済み/今回九だけ追加）。PMD残Thread四/monitor一、Checkstyle0/処理異常0。gate1を成功0へ変換しない。12101ではなく12201現context 12c21f28214a9869f24549a69d8fdf577b12316a0c31b6bc822cd6bcf94a2ee2/12203独立 f7b5d181661634f8cfff2aade0bbf30eefc7d22ae0942cfac58d529b64ca9e07 actual0、五現source-span/実case/八異常を照合。audit get10秒、metric getとinvokeAll局所無期限/有限64task、外側owned JVM240秒と実正常終端を区別し、局所timeoutありと偽記録しない。公開monitorを保持する独立oracleは置換しない。
+
+12200独立post 554698fe99408bc21057694826c982c3ab4d6eafe44629ae4cf9cdaf1c9e20fb/session4266真正0、XML/CRC/同一source/同一session・Main1843同byte・他Test1952同byte/三SourceFile十物理差を確認。直接Audit三89L11M3C52B、Metric四83L17M4C32B、同一exec七Main計172L28M7C84Bは全miss0。分母0のenum branchはN/A/default JaCoCo filtersのみ、人工到達/手動除外0。完全Web358=解析350＋非実行注釈8は101L9829miss/12M1800miss/4C316miss/57B3547miss、完全Batch645=解析644＋注釈1は136L18280miss/25M3180miss/7C406miss/38B8420missで全体未100%。旧exec/nativeとの合算0。
+
+実classloadはWeb logging/session・Batch monitoring・Protocolのレビュー済みdomain内、他Product/実PostgreSQL/Root等なし。これはowned host JVMの限定観測で、実VM/業務Batch/DB/Backup/Root/permit/配備の所有・終端・後条件の証拠ではない。12202trace b0a68a0a64aaf11d2b0abdd94814207edd67e9391e36f49354e254979e2d55be/12204独立 c0d5c5cfb9413d1b9f3fe5483fc9b7ca322a920803a2816cda01ee684762b74a actual0・983行三SHA/他980同一、原owner-cost/元予算/受入不変・監査前後HOLD1。工具新失敗/製品成功の確認再演0。
+
+各証跡はevidence/provisionalの当12190～12204 directory、個別実source/hash/command/終了codeはmanifestへ一意対応。scopeの九是正限定検証済み、集合結合/保存は次記録。正式1964/53・個別17/190・工数null/QA051final・全F03/451・全HOLD未更新。小群完了で停止せず次の許可PG/PTへ進む。
