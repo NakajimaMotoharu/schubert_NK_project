@@ -50,6 +50,13 @@ import org.junit.jupiter.api.Test;
 
 /** PG210/PT-WEB254..261/FUN007/AUT/MQ/UI232,235/SS311,312,321,323,352. */
 class MusicWireClientTest {
+  private static final String MUSIC_CATEGORY_KIND = "MCT";
+  private static final String MUSIC_SECTION_KIND = "MCS";
+  private static final String MUSIC_TRACK_KIND = "MTR";
+  private static final String GAME_SECTION = "ゲーム";
+  private static final String SUCCESS_CODE = "0000";
+  private static final String SYNTHETIC_FAILURE = "synthetic";
+  private static final String PAIR_KEY = "pair0";
   private static final Clock CLOCK =
       Clock.fixed(Instant.parse("2026-09-20T00:00:00Z"), ZoneOffset.UTC);
   private static final Duration WAIT = Duration.ofSeconds(2);
@@ -58,23 +65,25 @@ class MusicWireClientTest {
 
   @Test
   void web254Requests() {
-    for (String type : List.of("MCT", "MCS", "MTR")) {
+    for (String type : List.of(MUSIC_CATEGORY_KIND, MUSIC_SECTION_KIND, MUSIC_TRACK_KIND)) {
       var f = new Fixture();
       f.reply =
           (id, b) -> {
             var expected =
                 header(
                     type + "REQ01",
-                    type.equals("MCT") ? 0 : type.equals("MCS") ? 64 : 192,
+                    type.equals(MUSIC_CATEGORY_KIND)
+                        ? 0
+                        : type.equals(MUSIC_SECTION_KIND) ? 64 : 192,
                     0,
                     0,
                     "",
                     id,
                     CONTEXT.wireValue());
-            if (!type.equals("MCT")) put(expected, 256, 64, "曲");
-            if (type.equals("MTR")) put(expected, 320, 128, "ゲーム");
+            if (!type.equals(MUSIC_CATEGORY_KIND)) put(expected, 256, 64, "曲");
+            if (type.equals(MUSIC_TRACK_KIND)) put(expected, 320, 128, GAME_SECTION);
             assertArrayEquals(expected, b);
-            return response(type, 0, "0000", id, CONTEXT.wireValue());
+            return response(type, 0, SUCCESS_CODE, id, CONTEXT.wireValue());
           };
       assertEquals(ResultCode.SUCCESS, f.client.exchange(input(type), CONTEXT).resultCode());
       assertEquals(1, f.sent.size());
@@ -84,9 +93,14 @@ class MusicWireClientTest {
 
   @Test
   void web255SuccessProfiles() {
-    for (String type : List.of("MCT", "MCS", "MTR"))
-      for (int n : new int[] {0, 1, type.equals("MCT") ? 20 : type.equals("MCS") ? 100 : 200})
-        for (String code : List.of("0000", "0200")) {
+    for (String type : List.of(MUSIC_CATEGORY_KIND, MUSIC_SECTION_KIND, MUSIC_TRACK_KIND))
+      for (int n :
+          new int[] {
+            0,
+            1,
+            type.equals(MUSIC_CATEGORY_KIND) ? 20 : type.equals(MUSIC_SECTION_KIND) ? 100 : 200
+          })
+        for (String code : List.of(SUCCESS_CODE, "0200")) {
           var f = new Fixture();
           f.reply = (id, b) -> response(type, n, code, id, CONTEXT.wireValue());
           var result = f.client.exchange(input(type), CONTEXT);
@@ -94,17 +108,17 @@ class MusicWireClientTest {
           var p = result.payload().orElseThrow();
           assertEquals(type + "RSP01", p.layoutId().value());
           assertEquals(n, p.records().size());
-          if (type.equals("MCT"))
+          if (type.equals(MUSIC_CATEGORY_KIND))
             assertEquals(n, ((MusicCategoryResponseData) p.data()).totalCount());
-          else if (type.equals("MCS"))
+          else if (type.equals(MUSIC_SECTION_KIND))
             assertEquals(n, ((MusicSectionResponseData) p.data()).totalCount());
           else assertEquals(n, ((MusicTrackResponseData) p.data()).totalCount());
           for (int i = 0; i < n; i++) {
-            if (type.equals("MCT")) {
+            if (type.equals(MUSIC_CATEGORY_KIND)) {
               var v = (MusicCategoryRecord) p.records().get(i);
               assertEquals("分類" + i, v.category());
               assertEquals(i + 1, v.trackCount());
-            } else if (type.equals("MCS")) {
+            } else if (type.equals(MUSIC_SECTION_KIND)) {
               var v = (MusicSectionRecord) p.records().get(i);
               assertEquals("区分" + i, v.section());
               assertEquals(i + 1, v.trackCount());
@@ -113,7 +127,7 @@ class MusicWireClientTest {
               assertEquals("track" + i, v.trackId());
               assertEquals("曲名" + i, v.title());
               assertEquals("曲", v.category());
-              assertEquals("ゲーム", v.section());
+              assertEquals(GAME_SECTION, v.section());
               assertEquals("music/" + i + ".mp3", v.displayPath().wireValue());
               assertEquals(1024 + i, v.fileByteLength());
               assertEquals(i + 1, v.displayOrder());
@@ -127,7 +141,7 @@ class MusicWireClientTest {
 
   @Test
   void web256ErrorProfiles() {
-    for (String type : List.of("MCT", "MCS", "MTR"))
+    for (String type : List.of(MUSIC_CATEGORY_KIND, MUSIC_SECTION_KIND, MUSIC_TRACK_KIND))
       for (String code :
           List.of("0100", "0101", "0102", "0103", "0104", "0105", "0106", "0107", "9000", "9001")) {
         var f = new Fixture();
@@ -168,28 +182,29 @@ class MusicWireClientTest {
       var f = new Fixture();
       f.reply =
           (id, b) -> {
-            var out = response("MTR", 1, "0000", id, CONTEXT.wireValue());
+            var out = response(MUSIC_TRACK_KIND, 1, SUCCESS_CODE, id, CONTEXT.wireValue());
             change.accept(out);
             return out;
           };
-      rejected(Reason.INVALID_RESPONSE, () -> f.client.exchange(input("MTR"), CONTEXT));
+      rejected(Reason.INVALID_RESPONSE, () -> f.client.exchange(input(MUSIC_TRACK_KIND), CONTEXT));
       f.erased();
     }
     for (int length : new int[] {0, 255, 263, 262673}) {
       var f = new Fixture();
       f.reply = (id, b) -> new byte[length];
-      rejected(Reason.INVALID_RESPONSE, () -> f.client.exchange(input("MTR"), CONTEXT));
+      rejected(Reason.INVALID_RESPONSE, () -> f.client.exchange(input(MUSIC_TRACK_KIND), CONTEXT));
       f.erased();
     }
     var order = new Fixture();
     order.reply =
         (id, b) -> {
-          var out = response("MTR", 2, "0000", id, CONTEXT.wireValue());
+          var out = response(MUSIC_TRACK_KIND, 2, SUCCESS_CODE, id, CONTEXT.wireValue());
           number(out, 1565, 4, 2);
           number(out, 2877, 4, 1);
           return out;
         };
-    rejected(Reason.INVALID_RESPONSE, () -> order.client.exchange(input("MTR"), CONTEXT));
+    rejected(
+        Reason.INVALID_RESPONSE, () -> order.client.exchange(input(MUSIC_TRACK_KIND), CONTEXT));
     order.erased();
   }
 
@@ -212,7 +227,8 @@ class MusicWireClientTest {
     }
     assertTrue(f.sent.isEmpty());
     assertThrows(NullPointerException.class, () -> f.client.exchange(null, CONTEXT));
-    assertThrows(NullPointerException.class, () -> f.client.exchange(input("MCT"), null));
+    assertThrows(
+        NullPointerException.class, () -> f.client.exchange(input(MUSIC_CATEGORY_KIND), null));
     assertThrows(
         NullPointerException.class,
         () -> new MusicWireClient(null, f.sender, CLOCK, () -> ID, WAIT));
@@ -239,20 +255,20 @@ class MusicWireClientTest {
     for (JmsRequestSender sender :
         List.<JmsRequestSender>of(
             (id, b) -> {
-              throw new JMSException("synthetic");
+              throw new JMSException(SYNTHETIC_FAILURE);
             },
             (id, b) -> {
-              throw new JMSRuntimeException("synthetic");
+              throw new JMSRuntimeException(SYNTHETIC_FAILURE);
             },
             (id, b) -> {
-              throw new IllegalStateException("synthetic");
+              throw new IllegalStateException(SYNTHETIC_FAILURE);
             },
             (id, b) -> {})) {
       var client = new MusicWireClient(wire, sender, CLOCK, () -> ID, Duration.ofMillis(1));
-      rejected(Reason.UNAVAILABLE, () -> client.exchange(input("MCT"), CONTEXT));
+      rejected(Reason.UNAVAILABLE, () -> client.exchange(input(MUSIC_CATEGORY_KIND), CONTEXT));
       assertEquals(0, wire.pendingCount());
     }
-    var failure = new AssertionError("synthetic");
+    var failure = new AssertionError(SYNTHETIC_FAILURE);
     var client =
         new MusicWireClient(
             wire,
@@ -263,7 +279,9 @@ class MusicWireClientTest {
             () -> ID,
             WAIT);
     assertSame(
-        failure, assertThrows(AssertionError.class, () -> client.exchange(input("MCT"), CONTEXT)));
+        failure,
+        assertThrows(
+            AssertionError.class, () -> client.exchange(input(MUSIC_CATEGORY_KIND), CONTEXT)));
     assertEquals(0, wire.pendingCount());
     var sends = new AtomicLong();
     var badClock =
@@ -273,23 +291,23 @@ class MusicWireClientTest {
             Clock.fixed(Instant.MAX, ZoneOffset.UTC),
             () -> ID,
             WAIT);
-    rejected(Reason.UNAVAILABLE, () -> badClock.exchange(input("MCT"), CONTEXT));
+    rejected(Reason.UNAVAILABLE, () -> badClock.exchange(input(MUSIC_CATEGORY_KIND), CONTEXT));
     var badId =
         new MusicWireClient(
             wire,
             (id, b) -> sends.incrementAndGet(),
             CLOCK,
             () -> {
-              throw new IllegalStateException("synthetic");
+              throw new IllegalStateException(SYNTHETIC_FAILURE);
             },
             WAIT);
-    rejected(Reason.UNAVAILABLE, () -> badId.exchange(input("MCT"), CONTEXT));
+    rejected(Reason.UNAVAILABLE, () -> badId.exchange(input(MUSIC_CATEGORY_KIND), CONTEXT));
     assertEquals(0, sends.get());
     assertThrows(
         NullPointerException.class,
         () ->
             new MusicWireClient(wire, (id, b) -> {}, CLOCK, () -> null, WAIT)
-                .exchange(input("MCT"), CONTEXT));
+                .exchange(input(MUSIC_CATEGORY_KIND), CONTEXT));
   }
 
   @Test
@@ -303,7 +321,8 @@ class MusicWireClientTest {
             (id, b) -> {
               assertTrue(observed.add(id));
               assertTrue(
-                  wire.onReply(id, response(ascii(b, 11, 3), 0, "0000", id, ascii(b, 113, 64))));
+                  wire.onReply(
+                      id, response(ascii(b, 11, 3), 0, SUCCESS_CODE, id, ascii(b, 113, 64))));
             },
             CLOCK,
             () -> new UUID(0, ids.incrementAndGet()),
@@ -315,7 +334,8 @@ class MusicWireClientTest {
         futures.add(
             pool.submit(
                 () -> {
-                  String type = List.of("MCT", "MCS", "MTR").get(n % 3);
+                  String type =
+                      List.of(MUSIC_CATEGORY_KIND, MUSIC_SECTION_KIND, MUSIC_TRACK_KIND).get(n % 3);
                   var result =
                       client.exchange(
                           input(type),
@@ -333,22 +353,22 @@ class MusicWireClientTest {
   @Test
   void web261OwnershipAndDiagnostics() {
     var f = new Fixture();
-    var caller = response("MTR", 3, "0000", ID, CONTEXT.wireValue());
-    put(caller, 1308, 256, "pair0");
+    var caller = response(MUSIC_TRACK_KIND, 3, SUCCESS_CODE, ID, CONTEXT.wireValue());
+    put(caller, 1308, 256, PAIR_KEY);
     put(caller, 1564, 1, "M");
-    put(caller, 2620, 256, "pair0");
+    put(caller, 2620, 256, PAIR_KEY);
     put(caller, 2876, 1, "I");
     var original = caller.clone();
     f.reply = (id, b) -> caller;
-    var result = f.client.exchange(input("MTR"), CONTEXT);
+    var result = f.client.exchange(input(MUSIC_TRACK_KIND), CONTEXT);
     assertEquals("ProtectedReadResponse[REDACTED]", result.toString());
     var p = result.payload().orElseThrow();
     assertThrows(UnsupportedOperationException.class, () -> p.records().clear());
     assertFalse(p.toString().contains(CONTEXT.wireValue()));
     assertEquals(PairRole.MAIN, ((MusicTrackRecord) p.records().get(0)).pairRole());
     assertEquals(PairRole.INSTRUMENTAL, ((MusicTrackRecord) p.records().get(1)).pairRole());
-    assertEquals(Optional.of("pair0"), ((MusicTrackRecord) p.records().get(0)).pairKey());
-    assertEquals(Optional.of("pair0"), ((MusicTrackRecord) p.records().get(1)).pairKey());
+    assertEquals(Optional.of(PAIR_KEY), ((MusicTrackRecord) p.records().get(0)).pairKey());
+    assertEquals(Optional.of(PAIR_KEY), ((MusicTrackRecord) p.records().get(1)).pairKey());
     assertEquals(PairRole.NONE, ((MusicTrackRecord) p.records().get(2)).pairRole());
     assertArrayEquals(original, caller);
     Arrays.fill(caller, (byte) 0);
@@ -365,31 +385,32 @@ class MusicWireClientTest {
   private static TypedPayloadValues input(String type) {
     PayloadData data =
         switch (type) {
-          case "MCT" -> new MusicCategoryRequestData();
-          case "MCS" -> new MusicSectionRequestData("曲");
-          default -> new MusicTrackRequestData("曲", "ゲーム");
+          case MUSIC_CATEGORY_KIND -> new MusicCategoryRequestData();
+          case MUSIC_SECTION_KIND -> new MusicSectionRequestData("曲");
+          default -> new MusicTrackRequestData("曲", GAME_SECTION);
         };
     return new TypedPayloadValues(new LayoutId(type + "REQ01"), data, List.of());
   }
 
   private static byte[] response(String type, int n, String code, UUID id, String context) {
-    int data = type.equals("MTR") ? 16 : 8;
-    int record = type.equals("MCT") ? 72 : type.equals("MCS") ? 136 : 1312;
+    int data = type.equals(MUSIC_TRACK_KIND) ? 16 : 8;
+    int record =
+        type.equals(MUSIC_CATEGORY_KIND) ? 72 : type.equals(MUSIC_SECTION_KIND) ? 136 : 1312;
     var b = header(type + "RSP01", data, record, n, code, id, context);
-    number(b, 256, type.equals("MTR") ? 9 : 6, n);
+    number(b, 256, type.equals(MUSIC_TRACK_KIND) ? 9 : 6, n);
     for (int i = 0; i < n; i++) {
       int at = 256 + data + i * record;
-      if (type.equals("MCT")) {
+      if (type.equals(MUSIC_CATEGORY_KIND)) {
         put(b, at, 64, "分類" + i);
         number(b, at + 64, 6, i + 1);
-      } else if (type.equals("MCS")) {
+      } else if (type.equals(MUSIC_SECTION_KIND)) {
         put(b, at, 128, "区分" + i);
         number(b, at + 128, 6, i + 1);
       } else {
         put(b, at, 64, "track" + i);
         put(b, at + 64, 256, "曲名" + i);
         put(b, at + 320, 64, "曲");
-        put(b, at + 384, 128, "ゲーム");
+        put(b, at + 384, 128, GAME_SECTION);
         put(b, at + 512, 512, "music/" + i + ".mp3");
         number(b, at + 1024, 12, 1024 + i);
         put(b, at + 1292, 1, "N");
@@ -446,7 +467,7 @@ class MusicWireClientTest {
     assertEquals(reason, failure.reason());
     assertEquals("protected read exchange rejected", failure.getMessage());
     assertNull(failure.getCause());
-    failure.addSuppressed(new IllegalStateException("synthetic"));
+    failure.addSuppressed(new IllegalStateException(SYNTHETIC_FAILURE));
     assertEquals(0, failure.getSuppressed().length);
   }
 
@@ -455,7 +476,7 @@ class MusicWireClientTest {
         new JmsRequestReplyClient(new ReplyCorrelationRegistry(), CLOCK, 12);
     final List<byte[]> sent = new ArrayList<>();
     BiFunction<UUID, byte[], byte[]> reply =
-        (id, b) -> response("MCT", 0, "0000", id, CONTEXT.wireValue());
+        (id, b) -> response(MUSIC_CATEGORY_KIND, 0, SUCCESS_CODE, id, CONTEXT.wireValue());
     final JmsRequestSender sender =
         (id, b) -> {
           sent.add(b);

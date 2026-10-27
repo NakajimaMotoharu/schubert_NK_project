@@ -46,6 +46,11 @@ import org.junit.jupiter.api.Test;
 
 /** PG-D-206/PT-WEB238..245; FUN media/AUT/MQ/TST; UI232/235; SS311/312/321/322/323/352. */
 class AnimationWireClientTest {
+  private static final String ANIMATION_MENU_KIND = "ANM";
+  private static final String MAIN_ANIMATION_KIND = "MAIN";
+  private static final String OVA_ANIMATION_KIND = "OVA";
+  private static final String SUCCESS_CODE = "0000";
+  private static final String SYNTHETIC_FAILURE = "synthetic";
   private static final Clock CLOCK =
       Clock.fixed(Instant.parse("2026-09-20T00:00:00Z"), ZoneOffset.UTC);
   private static final Duration WAIT = Duration.ofSeconds(2);
@@ -54,22 +59,22 @@ class AnimationWireClientTest {
 
   @Test
   void web238AnimationRequests() {
-    for (String type : List.of("ANM", "MAIN", "OVA")) {
+    for (String type : List.of(ANIMATION_MENU_KIND, MAIN_ANIMATION_KIND, OVA_ANIMATION_KIND)) {
       var f = new Fixture();
       f.reply =
           (id, bytes) -> {
             var expected =
                 header(
-                    type.equals("ANM") ? "ANMREQ01" : "ANLREQ01",
-                    type.equals("ANM") ? 0 : 16,
+                    type.equals(ANIMATION_MENU_KIND) ? "ANMREQ01" : "ANLREQ01",
+                    type.equals(ANIMATION_MENU_KIND) ? 0 : 16,
                     0,
                     0,
                     "",
                     id,
                     CONTEXT.wireValue());
-            if (!type.equals("ANM")) put(expected, 256, 16, type);
+            if (!type.equals(ANIMATION_MENU_KIND)) put(expected, 256, 16, type);
             assertArrayEquals(expected, bytes);
-            return response(type, 0, "0000", id, CONTEXT.wireValue());
+            return response(type, 0, SUCCESS_CODE, id, CONTEXT.wireValue());
           };
       assertEquals(ResultCode.SUCCESS, f.client.exchange(input(type), CONTEXT).resultCode());
       assertEquals(1, f.sent.size());
@@ -79,15 +84,16 @@ class AnimationWireClientTest {
 
   @Test
   void web239SuccessProfiles() {
-    for (String type : List.of("ANM", "MAIN", "OVA")) {
-      for (int n : type.equals("ANM") ? new int[] {0, 15, 999} : new int[] {0, 1, 50}) {
-        for (String code : List.of("0000", "0200")) {
+    for (String type : List.of(ANIMATION_MENU_KIND, MAIN_ANIMATION_KIND, OVA_ANIMATION_KIND)) {
+      for (int n :
+          type.equals(ANIMATION_MENU_KIND) ? new int[] {0, 15, 999} : new int[] {0, 1, 50}) {
+        for (String code : List.of(SUCCESS_CODE, "0200")) {
           var f = new Fixture();
           f.reply = (id, bytes) -> response(type, n, code, id, CONTEXT.wireValue());
           var result = f.client.exchange(input(type), CONTEXT);
           assertEquals(code, result.resultCode().wireValue());
           var payload = result.payload().orElseThrow();
-          if (type.equals("ANM")) {
+          if (type.equals(ANIMATION_MENU_KIND)) {
             var data = (AnimationMenuResponseData) payload.data();
             assertEquals(n, data.mainSubtrackCount());
             assertEquals(0, data.ovaCount());
@@ -116,7 +122,7 @@ class AnimationWireClientTest {
 
   @Test
   void web240ErrorProfiles() {
-    for (String type : List.of("ANM", "MAIN", "OVA")) {
+    for (String type : List.of(ANIMATION_MENU_KIND, MAIN_ANIMATION_KIND, OVA_ANIMATION_KIND)) {
       for (String code :
           List.of("0100", "0101", "0102", "0103", "0104", "0105", "0106", "0107", "9000", "9001")) {
         var f = new Fixture();
@@ -154,17 +160,19 @@ class AnimationWireClientTest {
       var f = new Fixture();
       f.reply =
           (id, bytes) -> {
-            var body = response("MAIN", 1, "0000", id, CONTEXT.wireValue());
+            var body = response(MAIN_ANIMATION_KIND, 1, SUCCESS_CODE, id, CONTEXT.wireValue());
             change.accept(body);
             return body;
           };
-      rejected(Reason.INVALID_RESPONSE, () -> f.client.exchange(input("MAIN"), CONTEXT));
+      rejected(
+          Reason.INVALID_RESPONSE, () -> f.client.exchange(input(MAIN_ANIMATION_KIND), CONTEXT));
       f.erased();
     }
     for (int length : new int[] {0, 255, 263, 46665}) {
       var f = new Fixture();
       f.reply = (id, bytes) -> new byte[length];
-      rejected(Reason.INVALID_RESPONSE, () -> f.client.exchange(input("MAIN"), CONTEXT));
+      rejected(
+          Reason.INVALID_RESPONSE, () -> f.client.exchange(input(MAIN_ANIMATION_KIND), CONTEXT));
       f.erased();
     }
   }
@@ -197,11 +205,14 @@ class AnimationWireClientTest {
     var scenario = new ScenarioWireClient(f.wire, f.sender, CLOCK, () -> ID, WAIT);
     assertEquals(
         ScenarioWireException.Reason.INVALID_INPUT,
-        assertThrows(ScenarioWireException.class, () -> scenario.exchange(input("ANM"), CONTEXT))
+        assertThrows(
+                ScenarioWireException.class,
+                () -> scenario.exchange(input(ANIMATION_MENU_KIND), CONTEXT))
             .reason());
     assertTrue(f.sent.isEmpty());
     assertThrows(NullPointerException.class, () -> f.client.exchange(null, CONTEXT));
-    assertThrows(NullPointerException.class, () -> f.client.exchange(input("ANM"), null));
+    assertThrows(
+        NullPointerException.class, () -> f.client.exchange(input(ANIMATION_MENU_KIND), null));
     assertThrows(
         NullPointerException.class,
         () -> new AnimationWireClient(null, f.sender, CLOCK, () -> ID, WAIT));
@@ -234,20 +245,20 @@ class AnimationWireClientTest {
     for (JmsRequestSender sender :
         List.<JmsRequestSender>of(
             (id, b) -> {
-              throw new JMSException("synthetic");
+              throw new JMSException(SYNTHETIC_FAILURE);
             },
             (id, b) -> {
-              throw new JMSRuntimeException("synthetic");
+              throw new JMSRuntimeException(SYNTHETIC_FAILURE);
             },
             (id, b) -> {
-              throw new IllegalStateException("synthetic");
+              throw new IllegalStateException(SYNTHETIC_FAILURE);
             },
             (id, b) -> {})) {
       var client = new AnimationWireClient(wire, sender, CLOCK, () -> ID, Duration.ofMillis(1));
-      rejected(Reason.UNAVAILABLE, () -> client.exchange(input("ANM"), CONTEXT));
+      rejected(Reason.UNAVAILABLE, () -> client.exchange(input(ANIMATION_MENU_KIND), CONTEXT));
       assertEquals(0, wire.pendingCount());
     }
-    var failure = new AssertionError("synthetic");
+    var failure = new AssertionError(SYNTHETIC_FAILURE);
     var client =
         new AnimationWireClient(
             wire,
@@ -258,7 +269,9 @@ class AnimationWireClientTest {
             () -> ID,
             WAIT);
     assertSame(
-        failure, assertThrows(AssertionError.class, () -> client.exchange(input("ANM"), CONTEXT)));
+        failure,
+        assertThrows(
+            AssertionError.class, () -> client.exchange(input(ANIMATION_MENU_KIND), CONTEXT)));
     assertEquals(0, wire.pendingCount());
     var sends = new AtomicLong();
     var badClock =
@@ -268,23 +281,23 @@ class AnimationWireClientTest {
             Clock.fixed(Instant.MAX, ZoneOffset.UTC),
             () -> ID,
             WAIT);
-    rejected(Reason.UNAVAILABLE, () -> badClock.exchange(input("ANM"), CONTEXT));
+    rejected(Reason.UNAVAILABLE, () -> badClock.exchange(input(ANIMATION_MENU_KIND), CONTEXT));
     var badId =
         new AnimationWireClient(
             wire,
             (id, b) -> sends.incrementAndGet(),
             CLOCK,
             () -> {
-              throw new IllegalStateException("synthetic");
+              throw new IllegalStateException(SYNTHETIC_FAILURE);
             },
             WAIT);
-    rejected(Reason.UNAVAILABLE, () -> badId.exchange(input("ANM"), CONTEXT));
+    rejected(Reason.UNAVAILABLE, () -> badId.exchange(input(ANIMATION_MENU_KIND), CONTEXT));
     assertEquals(0, sends.get());
     assertThrows(
         NullPointerException.class,
         () ->
             new AnimationWireClient(wire, (id, b) -> {}, CLOCK, () -> null, WAIT)
-                .exchange(input("ANM"), CONTEXT));
+                .exchange(input(ANIMATION_MENU_KIND), CONTEXT));
   }
 
   @Test
@@ -297,8 +310,11 @@ class AnimationWireClientTest {
             wire,
             (id, b) -> {
               assertTrue(observed.add(id));
-              var type = ascii(b, 11, 8).equals("ANMREQ01") ? "ANM" : ascii(b, 256, 16).strip();
-              assertTrue(wire.onReply(id, response(type, 0, "0000", id, ascii(b, 113, 64))));
+              var type =
+                  ascii(b, 11, 8).equals("ANMREQ01")
+                      ? ANIMATION_MENU_KIND
+                      : ascii(b, 256, 16).strip();
+              assertTrue(wire.onReply(id, response(type, 0, SUCCESS_CODE, id, ascii(b, 113, 64))));
             },
             CLOCK,
             () -> new UUID(0, ids.incrementAndGet()),
@@ -312,7 +328,10 @@ class AnimationWireClientTest {
                 () -> {
                   var context =
                       AuthenticationContext.of(String.format(Locale.ROOT, "%064x", index + 1));
-                  var result = client.exchange(input(index % 2 == 0 ? "ANM" : "OVA"), context);
+                  var result =
+                      client.exchange(
+                          input(index % 2 == 0 ? ANIMATION_MENU_KIND : OVA_ANIMATION_KIND),
+                          context);
                   assertEquals(ResultCode.SUCCESS, result.resultCode());
                   assertEquals(
                       index % 2 == 0 ? "ANMRSP01" : "ANLRSP01",
@@ -328,12 +347,12 @@ class AnimationWireClientTest {
   @Test
   void web245OwnershipAndDiagnostics() {
     var f = new Fixture();
-    var callerResponse = response("MAIN", 1, "0000", ID, CONTEXT.wireValue());
+    var callerResponse = response(MAIN_ANIMATION_KIND, 1, SUCCESS_CODE, ID, CONTEXT.wireValue());
     put(callerResponse, 584, 16, "SUBTRACK");
     put(callerResponse, 1124, 64, "parent0");
     var original = callerResponse.clone();
     f.reply = (id, bytes) -> callerResponse;
-    var result = f.client.exchange(input("MAIN"), CONTEXT);
+    var result = f.client.exchange(input(MAIN_ANIMATION_KIND), CONTEXT);
     assertEquals("ProtectedReadResponse[REDACTED]", result.toString());
     var payload = result.payload().orElseThrow();
     assertThrows(UnsupportedOperationException.class, () -> payload.records().clear());
@@ -356,7 +375,7 @@ class AnimationWireClientTest {
   }
 
   private static TypedPayloadValues input(String type) {
-    return type.equals("ANM")
+    return type.equals(ANIMATION_MENU_KIND)
         ? new TypedPayloadValues(
             new LayoutId("ANMREQ01"), new AnimationMenuRequestData(), List.of())
         : new TypedPayloadValues(
@@ -366,8 +385,8 @@ class AnimationWireClientTest {
   }
 
   private static byte[] response(String type, int n, String code, UUID id, String context) {
-    boolean menu = type.equals("ANM");
-    boolean success = code.equals("0000") || code.equals("0200");
+    boolean menu = type.equals(ANIMATION_MENU_KIND);
+    boolean success = code.equals(SUCCESS_CODE) || code.equals("0200");
     var body =
         header(
             menu ? "ANMRSP01" : "ANLRSP01",
@@ -444,7 +463,7 @@ class AnimationWireClientTest {
     assertEquals(reason, failure.reason());
     assertEquals("protected read exchange rejected", failure.getMessage());
     assertNull(failure.getCause());
-    failure.addSuppressed(new IllegalStateException("synthetic"));
+    failure.addSuppressed(new IllegalStateException(SYNTHETIC_FAILURE));
     assertEquals(0, failure.getSuppressed().length);
   }
 
@@ -453,7 +472,7 @@ class AnimationWireClientTest {
         new JmsRequestReplyClient(new ReplyCorrelationRegistry(), CLOCK, 12);
     final List<byte[]> sent = new ArrayList<>();
     BiFunction<UUID, byte[], byte[]> reply =
-        (id, b) -> response("ANM", 0, "0000", id, CONTEXT.wireValue());
+        (id, b) -> response(ANIMATION_MENU_KIND, 0, SUCCESS_CODE, id, CONTEXT.wireValue());
     final JmsRequestSender sender =
         (id, b) -> {
           sent.add(b);

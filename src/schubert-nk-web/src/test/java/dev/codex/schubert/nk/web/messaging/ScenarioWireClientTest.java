@@ -62,12 +62,30 @@ import org.junit.jupiter.api.Test;
 
 /** NK-WEB-001/NK-SCN-001/PT-WEB-166..173; UI232/234; SS311/321/322/323/352; PG-D-118. */
 class ScenarioWireClientTest {
+  private static final String GAME_LIST_KIND = "GAM";
+  private static final String SPEAKER_LIST_KIND = "SPK";
+  private static final String SCENARIO_SEARCH_KIND = "SRC";
+  private static final String ROUTE_LIST_KIND = "RTE";
+  private static final String SCENARIO_FILE_KIND = "SCF";
+  private static final String SCENARIO_DETAIL_KIND = "SCN";
+  private static final String SUCCESS_CODE = "0000";
+  private static final String RESPONSE_LAYOUT_SUFFIX = "RSP01";
+  private static final String BODY_PREFIX = "body";
+  private static final String PRIVATE_FAILURE = "private";
+  private static final String GAME_WIRE_CODE = "NUKITASHI1";
   private static final Clock CLOCK =
       Clock.fixed(Instant.parse("2026-09-09T00:00:00.123987Z"), ZoneOffset.UTC);
   private static final Duration WAIT = Duration.ofSeconds(2);
   private static final UUID ID = new UUID(0, 1);
   private static final AuthenticationContext CONTEXT = AuthenticationContext.of("a".repeat(64));
-  private static final String[] TYPES = {"GAM", "SPK", "SRC", "RTE", "SCF", "SCN"};
+  private static final String[] TYPES = {
+    GAME_LIST_KIND,
+    SPEAKER_LIST_KIND,
+    SCENARIO_SEARCH_KIND,
+    ROUTE_LIST_KIND,
+    SCENARIO_FILE_KIND,
+    SCENARIO_DETAIL_KIND
+  };
   private static final int[] DATA = {9, 9, 48, 9, 88, 1728};
   private static final int[] RECORD = {272, 152, 5584, 72, 800, 4800};
   private static final int[] MAX = {10, 500, 100, 50, 500, 200};
@@ -80,12 +98,13 @@ class ScenarioWireClientTest {
       f.reply =
           (id, bytes) -> {
             assertArrayEquals(expected, bytes);
-            return response(type, 1, "0000", id, CONTEXT.wireValue());
+            return response(type, 1, SUCCESS_CODE, id, CONTEXT.wireValue());
           };
       var input = input(type);
       var result = f.client.exchange(input, CONTEXT);
       assertEquals(ResultCode.SUCCESS, result.resultCode());
-      assertEquals(type + "RSP01", result.payload().orElseThrow().layoutId().value());
+      assertEquals(
+          type + RESPONSE_LAYOUT_SUFFIX, result.payload().orElseThrow().layoutId().value());
       assertEquals(1, result.payload().orElseThrow().records().size());
       assertEquals(input(type), input);
       assertEquals(1, f.sent.size());
@@ -95,7 +114,7 @@ class ScenarioWireClientTest {
     f.reply =
         (id, bytes) -> {
           assertArrayEquals(spaces(12), Arrays.copyOfRange(bytes, 256, 268));
-          return response("SPK", 0, "0000", id, CONTEXT.wireValue());
+          return response(SPEAKER_LIST_KIND, 0, SUCCESS_CODE, id, CONTEXT.wireValue());
         };
     f.client.exchange(
         new TypedPayloadValues(
@@ -109,12 +128,12 @@ class ScenarioWireClientTest {
     for (int kind = 0; kind < TYPES.length; kind++) {
       String type = TYPES[kind];
       for (int n : new int[] {0, 1, MAX[kind]}) {
-        for (String code : List.of("0000", "0200")) {
+        for (String code : List.of(SUCCESS_CODE, "0200")) {
           var f = new Fixture();
           f.reply = (id, bytes) -> response(type, n, code, id, CONTEXT.wireValue());
           var result = f.client.exchange(input(type), CONTEXT);
           assertEquals(
-              code.equals("0000") ? ResultCode.SUCCESS : ResultCode.IDEMPOTENT_SUCCESS,
+              code.equals(SUCCESS_CODE) ? ResultCode.SUCCESS : ResultCode.IDEMPOTENT_SUCCESS,
               result.resultCode());
           var payload = result.payload().orElseThrow();
           assertEquals(n, payload.records().size());
@@ -126,32 +145,32 @@ class ScenarioWireClientTest {
           for (int index = 0; index < n; index++) {
             var record = payload.records().get(index);
             switch (type) {
-              case "GAM" -> {
+              case GAME_LIST_KIND -> {
                 var r = (GameRecord) record;
                 assertEquals(index + 1, r.displayOrder());
                 assertEquals("Game" + index, r.title());
               }
-              case "SPK" -> {
+              case SPEAKER_LIST_KIND -> {
                 var r = (SpeakerRecord) record;
                 assertEquals("Speaker" + index, r.speakerName());
               }
-              case "SRC" -> {
+              case SCENARIO_SEARCH_KIND -> {
                 var r = (ScenarioSearchRecord) record;
-                assertEquals("body" + index, r.bodyText());
+                assertEquals(BODY_PREFIX + index, r.bodyText());
               }
-              case "RTE" -> {
+              case ROUTE_LIST_KIND -> {
                 var r = (RouteRecord) record;
                 assertEquals(index + 1, r.prefix());
                 assertEquals("未分類", r.routeName());
               }
-              case "SCF" -> {
+              case SCENARIO_FILE_KIND -> {
                 var r = (ScenarioFileRecord) record;
                 assertEquals("Title" + index, r.displayTitle());
               }
-              case "SCN" -> {
+              case SCENARIO_DETAIL_KIND -> {
                 var r = (ScenarioEntryRecord) record;
                 assertEquals(index + 1, r.entrySequence());
-                assertEquals("body" + index, r.bodyText());
+                assertEquals(BODY_PREFIX + index, r.bodyText());
               }
               default -> fail("fixture type");
             }
@@ -163,7 +182,7 @@ class ScenarioWireClientTest {
     for (int n : new int[] {1, 201, 10000}) {
       var f = new Fixture();
       f.reply = (id, bytes) -> fileResponse(id, CONTEXT.wireValue(), n);
-      var result = f.client.exchange(input("SCN"), CONTEXT);
+      var result = f.client.exchange(input(SCENARIO_DETAIL_KIND), CONTEXT);
       var data = (ScenarioDetailResponseData) result.payload().orElseThrow().data();
       assertEquals(n, data.fileRecordCount());
       assertEquals(n * 4800L, data.fileByteLength());
@@ -225,34 +244,35 @@ class ScenarioWireClientTest {
       var f = new Fixture();
       f.reply =
           (id, bytes) -> {
-            var r = response("GAM", 1, "0000", id, CONTEXT.wireValue());
+            var r = response(GAME_LIST_KIND, 1, SUCCESS_CODE, id, CONTEXT.wireValue());
             change.accept(r);
             return r;
           };
-      rejected(Reason.INVALID_RESPONSE, () -> f.client.exchange(input("GAM"), CONTEXT));
+      rejected(Reason.INVALID_RESPONSE, () -> f.client.exchange(input(GAME_LIST_KIND), CONTEXT));
       f.erased();
     }
     for (int delta : new int[] {-1, 1}) {
       var f = new Fixture();
       f.reply =
           (id, bytes) -> {
-            var valid = response("GAM", 1, "0000", id, CONTEXT.wireValue());
+            var valid = response(GAME_LIST_KIND, 1, SUCCESS_CODE, id, CONTEXT.wireValue());
             return Arrays.copyOf(valid, valid.length + delta);
           };
-      rejected(Reason.INVALID_RESPONSE, () -> f.client.exchange(input("GAM"), CONTEXT));
+      rejected(Reason.INVALID_RESPONSE, () -> f.client.exchange(input(GAME_LIST_KIND), CONTEXT));
       f.erased();
     }
     var wrong = new Fixture();
-    wrong.reply = (id, bytes) -> response("SPK", 0, "0000", id, CONTEXT.wireValue());
-    rejected(Reason.INVALID_RESPONSE, () -> wrong.client.exchange(input("GAM"), CONTEXT));
+    wrong.reply =
+        (id, bytes) -> response(SPEAKER_LIST_KIND, 0, SUCCESS_CODE, id, CONTEXT.wireValue());
+    rejected(Reason.INVALID_RESPONSE, () -> wrong.client.exchange(input(GAME_LIST_KIND), CONTEXT));
     var order = new Fixture();
     order.reply =
         (id, bytes) -> {
-          var r = response("RTE", 2, "0000", id, CONTEXT.wireValue());
+          var r = response(ROUTE_LIST_KIND, 2, SUCCESS_CODE, id, CONTEXT.wireValue());
           put(r, 265 + 72, 2, "01");
           return r;
         };
-    rejected(Reason.INVALID_RESPONSE, () -> order.client.exchange(input("RTE"), CONTEXT));
+    rejected(Reason.INVALID_RESPONSE, () -> order.client.exchange(input(ROUTE_LIST_KIND), CONTEXT));
   }
 
   @Test
@@ -279,7 +299,7 @@ class ScenarioWireClientTest {
           () -> new ScenarioWireClient(f.wire, f.sender, CLOCK, () -> ID, bad));
     new ScenarioWireClient(f.wire, f.sender, CLOCK, () -> ID, Duration.ofNanos(1));
     assertThrows(NullPointerException.class, () -> f.client.exchange(null, CONTEXT));
-    assertThrows(NullPointerException.class, () -> f.client.exchange(input("GAM"), null));
+    assertThrows(NullPointerException.class, () -> f.client.exchange(input(GAME_LIST_KIND), null));
     assertThrows(NullPointerException.class, () -> new ScenarioWireException(null));
     var bad =
         List.of(
@@ -326,12 +346,12 @@ class ScenarioWireClientTest {
             f.sender,
             CLOCK,
             () -> {
-              throw new IllegalStateException("private");
+              throw new IllegalStateException(PRIVATE_FAILURE);
             },
             WAIT);
-    rejected(Reason.UNAVAILABLE, () -> failedId.exchange(input("GAM"), CONTEXT));
+    rejected(Reason.UNAVAILABLE, () -> failedId.exchange(input(GAME_LIST_KIND), CONTEXT));
     var nullId = new ScenarioWireClient(f.wire, f.sender, CLOCK, () -> null, WAIT);
-    assertThrows(NullPointerException.class, () -> nullId.exchange(input("GAM"), CONTEXT));
+    assertThrows(NullPointerException.class, () -> nullId.exchange(input(GAME_LIST_KIND), CONTEXT));
     for (Clock clock :
         List.of(
             Clock.fixed(Instant.MAX, ZoneOffset.UTC),
@@ -348,11 +368,11 @@ class ScenarioWireClientTest {
 
               @Override
               public Instant instant() {
-                throw new DateTimeException("private");
+                throw new DateTimeException(PRIVATE_FAILURE);
               }
             })) {
       var faulty = new ScenarioWireClient(f.wire, f.sender, clock, () -> ID, WAIT);
-      rejected(Reason.UNAVAILABLE, () -> faulty.exchange(input("GAM"), CONTEXT));
+      rejected(Reason.UNAVAILABLE, () -> faulty.exchange(input(GAME_LIST_KIND), CONTEXT));
     }
     assertTrue(f.sent.isEmpty());
   }
@@ -361,10 +381,10 @@ class ScenarioWireClientTest {
   void web171TransportFailuresDoNotRetryOrLeakPending() throws Exception {
     for (Exception exception :
         List.of(
-            new JMSException("private"),
-            new JMSRuntimeException("private"),
-            new IllegalArgumentException("private"),
-            new IllegalStateException("private"))) {
+            new JMSException(PRIVATE_FAILURE),
+            new JMSRuntimeException(PRIVATE_FAILURE),
+            new IllegalArgumentException(PRIVATE_FAILURE),
+            new IllegalStateException(PRIVATE_FAILURE))) {
       var f = new Fixture();
       var sender =
           new ScenarioWireClient(
@@ -377,7 +397,7 @@ class ScenarioWireClientTest {
               CLOCK,
               () -> ID,
               WAIT);
-      rejected(Reason.UNAVAILABLE, () -> sender.exchange(input("GAM"), CONTEXT));
+      rejected(Reason.UNAVAILABLE, () -> sender.exchange(input(GAME_LIST_KIND), CONTEXT));
       assertEquals(1, f.sent.size());
       f.erased();
     }
@@ -385,21 +405,22 @@ class ScenarioWireClientTest {
     var timeout =
         new ScenarioWireClient(
             f.wire, (id, bytes) -> f.sent.add(bytes), CLOCK, () -> ID, Duration.ofNanos(1));
-    rejected(Reason.UNAVAILABLE, () -> timeout.exchange(input("GAM"), CONTEXT));
-    assertFalse(f.wire.onReply(ID, response("GAM", 0, "0000", ID, CONTEXT.wireValue())));
+    rejected(Reason.UNAVAILABLE, () -> timeout.exchange(input(GAME_LIST_KIND), CONTEXT));
+    assertFalse(
+        f.wire.onReply(ID, response(GAME_LIST_KIND, 0, SUCCESS_CODE, ID, CONTEXT.wireValue())));
     f.erased();
     Thread.currentThread().interrupt();
     try {
       var interrupted =
           new ScenarioWireClient(
               f.wire, (id, bytes) -> f.sent.add(bytes), CLOCK, () -> new UUID(0, 2), WAIT);
-      rejected(Reason.UNAVAILABLE, () -> interrupted.exchange(input("GAM"), CONTEXT));
+      rejected(Reason.UNAVAILABLE, () -> interrupted.exchange(input(GAME_LIST_KIND), CONTEXT));
       assertTrue(Thread.currentThread().isInterrupted());
     } finally {
       Thread.interrupted();
     }
     f.erased();
-    var npe = new NullPointerException("private");
+    var npe = new NullPointerException(PRIVATE_FAILURE);
     var failedProvider =
         new ScenarioWireClient(
             f.wire,
@@ -413,7 +434,8 @@ class ScenarioWireClientTest {
     assertSame(
         npe,
         assertThrows(
-            NullPointerException.class, () -> failedProvider.exchange(input("GAM"), CONTEXT)));
+            NullPointerException.class,
+            () -> failedProvider.exchange(input(GAME_LIST_KIND), CONTEXT)));
     f.erased();
     var entered = new CountDownLatch(1);
     var release = new CountDownLatch(1);
@@ -431,16 +453,18 @@ class ScenarioWireClientTest {
                 Thread.currentThread().interrupt();
                 throw new IllegalStateException("fixture interrupted");
               }
-              assertTrue(wire.onReply(id, response("GAM", 0, "0000", id, CONTEXT.wireValue())));
+              assertTrue(
+                  wire.onReply(
+                      id, response(GAME_LIST_KIND, 0, SUCCESS_CODE, id, CONTEXT.wireValue())));
             },
             CLOCK,
             () -> ID,
             WAIT);
     try (var pool = Executors.newSingleThreadExecutor()) {
-      var first = pool.submit(() -> one.exchange(input("GAM"), CONTEXT));
+      var first = pool.submit(() -> one.exchange(input(GAME_LIST_KIND), CONTEXT));
       assertTrue(entered.await(5, TimeUnit.SECONDS));
       try {
-        rejected(Reason.UNAVAILABLE, () -> one.exchange(input("GAM"), CONTEXT));
+        rejected(Reason.UNAVAILABLE, () -> one.exchange(input(GAME_LIST_KIND), CONTEXT));
       } finally {
         release.countDown();
       }
@@ -468,7 +492,7 @@ class ScenarioWireClientTest {
               String type = ascii(bytes, 11, 3);
               assertArrayEquals(request(type, id, context), bytes);
               sent.add(bytes);
-              assertTrue(wire.onReply(id, response(type, 1, "0000", id, context)));
+              assertTrue(wire.onReply(id, response(type, 1, SUCCESS_CODE, id, context)));
             },
             CLOCK,
             () -> new UUID(0, ids.incrementAndGet()),
@@ -485,7 +509,9 @@ class ScenarioWireClientTest {
                   try {
                     String type = TYPES[index % 6];
                     var result = client.exchange(input(type), AuthenticationContext.of(context));
-                    assertEquals(type + "RSP01", result.payload().orElseThrow().layoutId().value());
+                    assertEquals(
+                        type + RESPONSE_LAYOUT_SUFFIX,
+                        result.payload().orElseThrow().layoutId().value());
                     assertEquals(1, result.payload().orElseThrow().records().size());
                   } finally {
                     active.remove();
@@ -513,13 +539,14 @@ class ScenarioWireClientTest {
         f.erased();
       }
       var f = new Fixture();
-      byte[] original = response(type, 1, "0000", ID, CONTEXT.wireValue());
+      byte[] original = response(type, 1, SUCCESS_CODE, ID, CONTEXT.wireValue());
       byte[] expected = original.clone();
       f.reply = (id, bytes) -> original;
       var result = f.client.exchange(input(type), CONTEXT);
       assertArrayEquals(expected, original);
       Arrays.fill(original, (byte) 0);
-      assertEquals(type + "RSP01", result.payload().orElseThrow().layoutId().value());
+      assertEquals(
+          type + RESPONSE_LAYOUT_SUFFIX, result.payload().orElseThrow().layoutId().value());
       assertEquals(1, result.payload().orElseThrow().records().size());
       f.erased();
     }
@@ -528,9 +555,9 @@ class ScenarioWireClientTest {
   private static TypedPayloadValues input(String type) {
     PayloadData data =
         switch (type) {
-          case "GAM" -> new GameListRequestData();
-          case "SPK" -> new SpeakerListRequestData(Optional.of(GameCode.NUKITASHI_1));
-          case "SRC" ->
+          case GAME_LIST_KIND -> new GameListRequestData();
+          case SPEAKER_LIST_KIND -> new SpeakerListRequestData(Optional.of(GameCode.NUKITASHI_1));
+          case SCENARIO_SEARCH_KIND ->
               new ScenarioSearchRequestData(
                   Optional.of("keyword"),
                   Optional.of(GameCode.NUKITASHI_1),
@@ -540,9 +567,9 @@ class ScenarioWireClientTest {
                   Optional.empty(),
                   1,
                   100);
-          case "RTE" -> new RouteListRequestData(GameCode.NUKITASHI_1);
-          case "SCF" -> new ScenarioFileListRequestData(GameCode.NUKITASHI_1, 1);
-          case "SCN" -> new ScenarioDetailRequestData(new ScriptFileId(1));
+          case ROUTE_LIST_KIND -> new RouteListRequestData(GameCode.NUKITASHI_1);
+          case SCENARIO_FILE_KIND -> new ScenarioFileListRequestData(GameCode.NUKITASHI_1, 1);
+          case SCENARIO_DETAIL_KIND -> new ScenarioDetailRequestData(new ScriptFileId(1));
           default -> throw new AssertionError("fixture type");
         };
     return new TypedPayloadValues(new LayoutId(type + "REQ01"), data, List.of());
@@ -551,23 +578,23 @@ class ScenarioWireClientTest {
   private static byte[] request(String type, UUID id, String context) {
     int length =
         switch (type) {
-          case "GAM" -> 0;
-          case "SPK", "RTE", "SCN" -> 12;
-          case "SCF" -> 14;
-          case "SRC" -> 672;
+          case GAME_LIST_KIND -> 0;
+          case SPEAKER_LIST_KIND, ROUTE_LIST_KIND, SCENARIO_DETAIL_KIND -> 12;
+          case SCENARIO_FILE_KIND -> 14;
+          case SCENARIO_SEARCH_KIND -> 672;
           default -> throw new AssertionError();
         };
     byte[] body = header(type + "REQ01", length, 0, 0, "", id, context);
     switch (type) {
-      case "SPK", "RTE" -> put(body, 256, 12, "NUKITASHI1");
-      case "SCF" -> {
-        put(body, 256, 12, "NUKITASHI1");
+      case SPEAKER_LIST_KIND, ROUTE_LIST_KIND -> put(body, 256, 12, GAME_WIRE_CODE);
+      case SCENARIO_FILE_KIND -> {
+        put(body, 256, 12, GAME_WIRE_CODE);
         number(body, 268, 2, 1);
       }
-      case "SCN" -> number(body, 256, 12, 1);
-      case "SRC" -> {
+      case SCENARIO_DETAIL_KIND -> number(body, 256, 12, 1);
+      case SCENARIO_SEARCH_KIND -> {
         put(body, 256, 256, "keyword");
-        put(body, 512, 12, "NUKITASHI1");
+        put(body, 512, 12, GAME_WIRE_CODE);
         put(body, 524, 128, "speaker");
         put(body, 652, 256, "chapter");
         number(body, 919, 6, 1);
@@ -582,11 +609,19 @@ class ScenarioWireClientTest {
       String type, int count, String code, UUID correlation, String context) {
     int kind = Arrays.asList(TYPES).indexOf(type);
     byte[] body =
-        header(type + "RSP01", DATA[kind], RECORD[kind], count, code, correlation, context);
-    boolean success = code.equals("0000") || code.equals("0200");
+        header(
+            type + RESPONSE_LAYOUT_SUFFIX,
+            DATA[kind],
+            RECORD[kind],
+            count,
+            code,
+            correlation,
+            context);
+    boolean success = code.equals(SUCCESS_CODE) || code.equals("0200");
     switch (type) {
-      case "GAM", "SPK", "RTE" -> number(body, 256, 9, success ? count : 0);
-      case "SRC" -> {
+      case GAME_LIST_KIND, SPEAKER_LIST_KIND, ROUTE_LIST_KIND ->
+          number(body, 256, 9, success ? count : 0);
+      case SCENARIO_SEARCH_KIND -> {
         number(body, 256, 6, success ? 1 : 0);
         number(body, 262, 3, success ? 100 : 0);
         number(body, 265, 9, success ? count : 0);
@@ -594,15 +629,15 @@ class ScenarioWireClientTest {
         number(body, 280, 9, success && count > 0 ? 1 : 0);
         number(body, 289, 9, success ? count : 0);
       }
-      case "SCF" -> {
-        put(body, 256, 12, success ? "NUKITASHI1" : "");
+      case SCENARIO_FILE_KIND -> {
+        put(body, 256, 12, success ? GAME_WIRE_CODE : "");
         number(body, 268, 2, success ? 1 : 0);
         put(body, 270, 64, success ? "共通ルート" : "");
         number(body, 334, 9, success ? count : 0);
       }
-      case "SCN" -> {
+      case SCENARIO_DETAIL_KIND -> {
         number(body, 256, 12, success ? 1 : 0);
-        put(body, 268, 12, success ? "NUKITASHI1" : "");
+        put(body, 268, 12, success ? GAME_WIRE_CODE : "");
         put(body, 280, 256, success ? "Title" : "");
         put(body, 536, 512, success ? "game/01.txt" : "");
         put(body, 1584, 1, success ? "I" : "");
@@ -615,43 +650,43 @@ class ScenarioWireClientTest {
     for (int n = 0; n < count; n++) {
       int offset = 256 + DATA[kind] + n * RECORD[kind];
       switch (type) {
-        case "GAM" -> {
-          put(body, offset, 12, "NUKITASHI1");
+        case GAME_LIST_KIND -> {
+          put(body, offset, 12, GAME_WIRE_CODE);
           put(body, offset + 12, 256, "Game" + n);
           number(body, offset + 268, 3, n + 1);
         }
-        case "SPK" -> {
+        case SPEAKER_LIST_KIND -> {
           number(body, offset, 12, n + 1);
           put(body, offset + 12, 128, "Speaker" + n);
           number(body, offset + 140, 9, 1000 - n);
         }
-        case "RTE" -> {
+        case ROUTE_LIST_KIND -> {
           number(body, offset, 2, n + 1);
           put(body, offset + 2, 64, "未分類");
           number(body, offset + 66, 6, 1);
         }
-        case "SCF" -> {
+        case SCENARIO_FILE_KIND -> {
           number(body, offset, 12, n + 1);
           put(body, offset + 12, 256, "Title" + n);
           put(body, offset + 268, 512, "game/" + n + ".txt");
           number(body, offset + 780, 6, n);
         }
-        case "SRC" -> {
+        case SCENARIO_SEARCH_KIND -> {
           number(body, offset, 12, n + 1);
           number(body, offset + 12, 12, 1);
-          put(body, offset + 24, 12, "NUKITASHI1");
+          put(body, offset + 24, 12, GAME_WIRE_CODE);
           number(body, offset + 292, 8, n + 1);
           put(body, offset + 300, 10, "narration");
-          put(body, offset + 438, 4096, "body" + n);
+          put(body, offset + 438, 4096, BODY_PREFIX + n);
           put(body, offset + 4534, 1, "0");
           put(body, offset + 4547, 512, "game/01.txt");
         }
-        case "SCN" -> {
+        case SCENARIO_DETAIL_KIND -> {
           number(body, offset, 12, n + 1);
           number(body, offset + 12, 6, n + 1);
           number(body, offset + 18, 8, n + 1);
           put(body, offset + 26, 10, "narration");
-          put(body, offset + 164, 4096, "body" + n);
+          put(body, offset + 164, 4096, BODY_PREFIX + n);
           number(body, offset + 4260, 3, 0);
         }
         default -> throw new AssertionError();
@@ -661,7 +696,7 @@ class ScenarioWireClientTest {
   }
 
   private static byte[] fileResponse(UUID id, String context, int n) {
-    var body = response("SCN", 0, "0000", id, context);
+    var body = response(SCENARIO_DETAIL_KIND, 0, SUCCESS_CODE, id, context);
     put(body, 1584, 1, "F");
     put(body, 1585, 36, new UUID(0, 9).toString());
     put(body, 1621, 256, "20260909/" + new UUID(0, 9) + ".ready");
@@ -733,7 +768,7 @@ class ScenarioWireClientTest {
     assertEquals("scenario exchange rejected", failure.getMessage());
     assertNull(failure.getCause());
     assertEquals(0, failure.getSuppressed().length);
-    failure.addSuppressed(new IllegalStateException("private"));
+    failure.addSuppressed(new IllegalStateException(PRIVATE_FAILURE));
     assertEquals(0, failure.getSuppressed().length);
   }
 
@@ -742,7 +777,7 @@ class ScenarioWireClientTest {
         new JmsRequestReplyClient(new ReplyCorrelationRegistry(), CLOCK, 12);
     final List<byte[]> sent = new ArrayList<>();
     BiFunction<UUID, byte[], byte[]> reply =
-        (id, bytes) -> response("GAM", 0, "0000", id, CONTEXT.wireValue());
+        (id, bytes) -> response(GAME_LIST_KIND, 0, SUCCESS_CODE, id, CONTEXT.wireValue());
     final JmsRequestSender sender =
         (id, bytes) -> {
           sent.add(bytes);
