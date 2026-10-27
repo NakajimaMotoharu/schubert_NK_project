@@ -30,8 +30,10 @@ import org.junit.jupiter.api.Test;
 
 /** SUMENC001..024/1753: literal independent snapshots, no application/SDK expected generator. */
 class ApiDurationMetricExporterTest {
+  private static final String OUTCOME_LABEL = "outcome";
+  private static final String SUCCESS_OUTCOME = "SUCCESS";
   private static final String NAME = "nk_fixture_duration_seconds";
-  private static final Map<String, Set<String>> SPACE = Map.of(NAME, Set.of("outcome"));
+  private static final Map<String, Set<String>> SPACE = Map.of(NAME, Set.of(OUTCOME_LABEL));
   private final ApiDurationMetricExporter exporter = new ApiDurationMetricExporter();
 
   private abstract static class FixtureWriter implements ExpositionFormatWriter {
@@ -91,7 +93,7 @@ class ApiDurationMetricExporterTest {
 
   private static Meter.Id id(String name, String value) {
     return new Meter.Id(
-        name, Tags.of("outcome", value), "seconds", "", Meter.Type.DISTRIBUTION_SUMMARY);
+        name, Tags.of(OUTCOME_LABEL, value), "seconds", "", Meter.Type.DISTRIBUTION_SUMMARY);
   }
 
   private static class CloseableRegistry extends SimpleMeterRegistry implements AutoCloseable {}
@@ -109,7 +111,7 @@ class ApiDurationMetricExporterTest {
   }
 
   private String text(HistogramSnapshot snapshot) {
-    try (var source = new Registry(new Summary(snapshot, id(NAME, "SUCCESS")))) {
+    try (var source = new Registry(new Summary(snapshot, id(NAME, SUCCESS_OUTCOME)))) {
       return exporter.scrape(source, SPACE);
     }
   }
@@ -156,12 +158,13 @@ class ApiDurationMetricExporterTest {
   void sumenc004FamiliesAndMultipleSeriesAreNotLost() {
     try (var source =
         new Registry(
-            new Summary(valid(), id(NAME, "SUCCESS")),
+            new Summary(valid(), id(NAME, SUCCESS_OUTCOME)),
             new Summary(valid(), id(NAME, "FAILURE")),
             new Summary(valid(), id("nk_other_seconds", "ONE")))) {
       String result =
           exporter.scrape(
-              source, Map.of(NAME, Set.of("outcome"), "nk_other_seconds", Set.of("outcome")));
+              source,
+              Map.of(NAME, Set.of(OUTCOME_LABEL), "nk_other_seconds", Set.of(OUTCOME_LABEL)));
       assertEquals(3, result.lines().filter(line -> line.contains("_sum{")).count());
       assertEquals(2, result.lines().filter(line -> line.startsWith("# TYPE")).count());
     }
@@ -181,14 +184,14 @@ class ApiDurationMetricExporterTest {
   @Test
   void sumenc006SelectedWrongMeterTypeFails() {
     try (var source = new CloseableRegistry()) {
-      source.counter(NAME, "outcome", "SUCCESS");
+      source.counter(NAME, OUTCOME_LABEL, SUCCESS_OUTCOME);
       assertThrows(IllegalArgumentException.class, () -> exporter.scrape(source, SPACE));
     }
   }
 
   @Test
   void sumenc007NamespaceAndLabelContractsRejectUnknownValues() {
-    try (var source = new Registry(new Summary(valid(), id(NAME, "SUCCESS")))) {
+    try (var source = new Registry(new Summary(valid(), id(NAME, SUCCESS_OUTCOME)))) {
       for (String name : List.of("", "nk_bad_total", "x_seconds", "nk_X_seconds"))
         assertThrows(
             IllegalArgumentException.class, () -> exporter.scrape(source, Map.of(name, Set.of())));
@@ -200,7 +203,7 @@ class ApiDurationMetricExporterTest {
           IllegalArgumentException.class, () -> exporter.scrape(source, Map.of(NAME, Set.of())));
       assertThrows(
           IllegalArgumentException.class,
-          () -> exporter.scrape(source, Map.of(NAME, Set.of("extra", "outcome"))));
+          () -> exporter.scrape(source, Map.of(NAME, Set.of("extra", OUTCOME_LABEL))));
     }
   }
 
@@ -282,7 +285,7 @@ class ApiDurationMetricExporterTest {
 
   @Test
   void sumenc017SnapshotIsTakenExactlyOnce() {
-    var summary = new Summary(valid(), id(NAME, "SUCCESS"));
+    var summary = new Summary(valid(), id(NAME, SUCCESS_OUTCOME));
     try (var source = new Registry(summary)) {
       assertTrue(exporter.scrape(source, SPACE).contains("_count{outcome=\"SUCCESS\"} 3\n"));
       assertEquals(1, summary.calls.get());
@@ -291,7 +294,7 @@ class ApiDurationMetricExporterTest {
 
   @Test
   void sumenc018BorrowedRegistryNeverClosedAndClosedInputRejected() {
-    var source = new Registry(new Summary(valid(), id(NAME, "SUCCESS")));
+    var source = new Registry(new Summary(valid(), id(NAME, SUCCESS_OUTCOME)));
     try {
       exporter.scrape(source, SPACE);
       assertFalse(source.isClosed());
@@ -305,7 +308,7 @@ class ApiDurationMetricExporterTest {
   void sumenc019ProviderRuntimeFailureIdentityIsPreserved() {
     var failure = new IllegalStateException("fixture");
     var summary =
-        new Summary(valid(), id(NAME, "SUCCESS")) {
+        new Summary(valid(), id(NAME, SUCCESS_OUTCOME)) {
           public HistogramSnapshot takeSnapshot() {
             throw failure;
           }
@@ -336,7 +339,7 @@ class ApiDurationMetricExporterTest {
     try (var source = new Registry(summary)) {
       assertTrue(exporter.scrape(source, map).contains("_count 3\n"));
       assertTrue(map.get(NAME).isEmpty());
-      labels.add("outcome");
+      labels.add(OUTCOME_LABEL);
       assertThrows(IllegalArgumentException.class, () -> exporter.scrape(source, map));
     }
   }
@@ -346,7 +349,8 @@ class ApiDurationMetricExporterTest {
     Meter.Id duplicate =
         new Meter.Id(NAME, Tags.empty(), "seconds", "", Meter.Type.DISTRIBUTION_SUMMARY) {
           public List<Tag> getTags() {
-            return List.of(Tag.of("outcome", "SUCCESS"), Tag.of("outcome", "FAILURE"));
+            return List.of(
+                Tag.of(OUTCOME_LABEL, SUCCESS_OUTCOME), Tag.of(OUTCOME_LABEL, "FAILURE"));
           }
         };
     try (var source = new Registry(new Summary(valid(), duplicate))) {
@@ -364,7 +368,7 @@ class ApiDurationMetricExporterTest {
             throw failure;
           }
         };
-    try (var source = new Registry(new Summary(valid(), id(NAME, "SUCCESS")))) {
+    try (var source = new Registry(new Summary(valid(), id(NAME, SUCCESS_OUTCOME)))) {
       var actual =
           assertThrows(
               UncheckedIOException.class,
@@ -384,7 +388,7 @@ class ApiDurationMetricExporterTest {
             throw failure;
           }
         };
-    try (var source = new Registry(new Summary(valid(), id(NAME, "SUCCESS")))) {
+    try (var source = new Registry(new Summary(valid(), id(NAME, SUCCESS_OUTCOME)))) {
       assertSame(
           failure,
           assertThrows(
