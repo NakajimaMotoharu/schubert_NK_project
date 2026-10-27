@@ -25,6 +25,14 @@ import org.junit.jupiter.api.Test;
 
 /** 1817 APIMHTTP001..016: memory exchanges only, independent literal/byte oracle. */
 final class ApiMetricHttpHandlerTest {
+  private static final String GET_METHOD = "GET";
+  private static final String READY_TRUE_SUFFIX = "1\n";
+  private static final String READY_FALSE_SUFFIX = "0\n";
+  private static final String DEBUG_MODE = "DEBUG";
+  private static final String CONTENT_TYPE_HEADER = "Content-Type";
+  private static final String NO_STORE_VALUE = "no-store";
+  private static final String CACHE_CONTROL_HEADER = "Cache-Control";
+  private static final String STANDARD_MODE = "STANDARD";
   private static final String PATH = "/actuator/prometheus";
   private static final String READY = "# TYPE schubert_nk_api_ready gauge\nschubert_nk_api_ready ";
   private static final String METRIC = "text/plain; version=0.0.4; charset=utf-8";
@@ -40,20 +48,20 @@ final class ApiMetricHttpHandlerTest {
                 calls.incrementAndGet();
                 return true;
               });
-      var exchange = new Exchange("GET", PATH);
+      var exchange = new Exchange(GET_METHOD, PATH);
       handler.handle(exchange);
-      response(exchange, 200, READY + "1\n", METRIC);
+      response(exchange, 200, READY + READY_TRUE_SUFFIX, METRIC);
       assertEquals(1, calls.get());
-      assertEquals(READY + "0\n", context.render(false));
+      assertEquals(READY + READY_FALSE_SUFFIX, context.render(false));
     }
   }
 
   @Test
   void apimhttp002() throws IOException {
     try (var context = standard()) {
-      var exchange = new Exchange("GET", PATH);
+      var exchange = new Exchange(GET_METHOD, PATH);
       new ApiMetricHttpHandler(context, () -> false).handle(exchange);
-      response(exchange, 200, READY + "0\n", METRIC);
+      response(exchange, 200, READY + READY_FALSE_SUFFIX, METRIC);
     }
   }
 
@@ -61,7 +69,7 @@ final class ApiMetricHttpHandlerTest {
   void apimhttp003() throws IOException {
     try (var context =
         new ApiMetricContext<>(
-            "DEBUG",
+            DEBUG_MODE,
             registry -> {
               var value = new double[] {7.5};
               Gauge.builder("nk_db_pool_connections", value, state -> state[0])
@@ -71,19 +79,19 @@ final class ApiMetricHttpHandlerTest {
             })) {
       context.initialize();
       var handler = new ApiMetricHttpHandler(context, () -> true);
-      var first = new Exchange("GET", PATH);
+      var first = new Exchange(GET_METHOD, PATH);
       handler.handle(first);
       String body = first.output.toString(StandardCharsets.UTF_8);
-      assertTrue(body.startsWith(READY + "1\n"));
+      assertTrue(body.startsWith(READY + READY_TRUE_SUFFIX));
       assertTrue(body.contains("nk_db_pool_connections{service=\"API\",state=\"active\"} 7.5\n"));
       assertTrue(body.contains("jvm_memory_used_bytes"));
       assertEquals(body.getBytes(StandardCharsets.UTF_8).length, first.length);
       assertEquals(200, first.status);
-      assertEquals(METRIC, first.headers.getFirst("Content-Type"));
-      assertEquals("no-store", first.headers.getFirst("Cache-Control"));
+      assertEquals(METRIC, first.headers.getFirst(CONTENT_TYPE_HEADER));
+      assertEquals(NO_STORE_VALUE, first.headers.getFirst(CACHE_CONTROL_HEADER));
       assertTrue(first.closed);
       context.bindings().orElseThrow()[0] = 9.5;
-      var second = new Exchange("GET", PATH);
+      var second = new Exchange(GET_METHOD, PATH);
       handler.handle(second);
       assertTrue(
           second
@@ -96,7 +104,7 @@ final class ApiMetricHttpHandlerTest {
 
   @Test
   void apimhttp004() throws IOException {
-    try (var context = new ApiMetricContext<>("STANDARD", registry -> "unused")) {
+    try (var context = new ApiMetricContext<>(STANDARD_MODE, registry -> "unused")) {
       var calls = new AtomicInteger();
       var handler =
           new ApiMetricHttpHandler(
@@ -112,13 +120,13 @@ final class ApiMetricHttpHandlerTest {
       }
       assertEquals(0, calls.get());
       context.initialize();
-      assertEquals(READY + "1\n", context.render(true));
+      assertEquals(READY + READY_TRUE_SUFFIX, context.render(true));
     }
   }
 
   @Test
   void apimhttp005() throws IOException {
-    try (var context = new ApiMetricContext<>("STANDARD", registry -> "unused")) {
+    try (var context = new ApiMetricContext<>(STANDARD_MODE, registry -> "unused")) {
       var calls = new AtomicInteger();
       var handler =
           new ApiMetricHttpHandler(
@@ -129,7 +137,7 @@ final class ApiMetricHttpHandlerTest {
               });
       for (String path :
           new String[] {"/actuator/prometheus/", "/actuator/%70rometheus", "/actuator/info"}) {
-        var exchange = new Exchange("GET", path);
+        var exchange = new Exchange(GET_METHOD, path);
         handler.handle(exchange);
         response(exchange, 404, "{}", "application/json; charset=utf-8");
       }
@@ -140,9 +148,9 @@ final class ApiMetricHttpHandlerTest {
   @Test
   void apimhttp006() throws IOException {
     try (var context = standard()) {
-      var exchange = new Exchange("GET", PATH + "?unused=public");
+      var exchange = new Exchange(GET_METHOD, PATH + "?unused=public");
       new ApiMetricHttpHandler(context, () -> true).handle(exchange);
-      response(exchange, 200, READY + "1\n", METRIC);
+      response(exchange, 200, READY + READY_TRUE_SUFFIX, METRIC);
     }
   }
 
@@ -153,19 +161,19 @@ final class ApiMetricHttpHandlerTest {
       assertThrows(NullPointerException.class, () -> new ApiMetricHttpHandler(context, null));
       var handler = new ApiMetricHttpHandler(context, () -> true);
       assertThrows(NullPointerException.class, () -> handler.handle(null));
-      assertEquals(READY + "1\n", context.render(true));
+      assertEquals(READY + READY_TRUE_SUFFIX, context.render(true));
     }
   }
 
   @Test
   void apimhttp008() {
-    try (var context = new ApiMetricContext<>("STANDARD", registry -> "unused")) {
-      var exchange = new Exchange("GET", PATH);
+    try (var context = new ApiMetricContext<>(STANDARD_MODE, registry -> "unused")) {
+      var exchange = new Exchange(GET_METHOD, PATH);
       var handler = new ApiMetricHttpHandler(context, () -> true);
       assertThrows(IllegalStateException.class, () -> handler.handle(exchange));
       unpublished(exchange);
       context.initialize();
-      assertEquals(READY + "0\n", context.render(false));
+      assertEquals(READY + READY_FALSE_SUFFIX, context.render(false));
     }
   }
 
@@ -173,7 +181,7 @@ final class ApiMetricHttpHandlerTest {
   void apimhttp009() {
     var context = standard();
     context.close();
-    var exchange = new Exchange("GET", PATH);
+    var exchange = new Exchange(GET_METHOD, PATH);
     assertThrows(
         IllegalStateException.class,
         () -> new ApiMetricHttpHandler(context, () -> true).handle(exchange));
@@ -184,7 +192,7 @@ final class ApiMetricHttpHandlerTest {
   void apimhttp010() {
     try (var context = standard()) {
       var failure = new IllegalStateException("fixed fixture");
-      var exchange = new Exchange("GET", PATH);
+      var exchange = new Exchange(GET_METHOD, PATH);
       var handler =
           new ApiMetricHttpHandler(
               context,
@@ -194,7 +202,7 @@ final class ApiMetricHttpHandlerTest {
       assertSame(
           failure, assertThrows(IllegalStateException.class, () -> handler.handle(exchange)));
       unpublished(exchange);
-      assertEquals(READY + "1\n", context.render(true));
+      assertEquals(READY + READY_TRUE_SUFFIX, context.render(true));
     }
   }
 
@@ -202,7 +210,7 @@ final class ApiMetricHttpHandlerTest {
   void apimhttp011() {
     try (var context = standard()) {
       var failure = new AssertionError("fixed fixture");
-      var exchange = new Exchange("GET", PATH);
+      var exchange = new Exchange(GET_METHOD, PATH);
       var handler =
           new ApiMetricHttpHandler(
               context,
@@ -211,7 +219,7 @@ final class ApiMetricHttpHandlerTest {
               });
       assertSame(failure, assertThrows(AssertionError.class, () -> handler.handle(exchange)));
       unpublished(exchange);
-      assertEquals(READY + "1\n", context.render(true));
+      assertEquals(READY + READY_TRUE_SUFFIX, context.render(true));
     }
   }
 
@@ -219,14 +227,14 @@ final class ApiMetricHttpHandlerTest {
   void apimhttp012() {
     try (var context = standard()) {
       var failure = new IOException("fixed headers");
-      var exchange = new Exchange("GET", PATH);
+      var exchange = new Exchange(GET_METHOD, PATH);
       exchange.headerFailure = failure;
       var handler = new ApiMetricHttpHandler(context, () -> true);
       assertSame(failure, assertThrows(IOException.class, () -> handler.handle(exchange)));
       assertEquals(1, exchange.headerCalls);
       assertTrue(exchange.closed);
       assertEquals(0, exchange.output.size());
-      assertEquals(READY + "1\n", context.render(true));
+      assertEquals(READY + READY_TRUE_SUFFIX, context.render(true));
     }
   }
 
@@ -234,14 +242,14 @@ final class ApiMetricHttpHandlerTest {
   void apimhttp013() {
     try (var context = standard()) {
       var failure = new IOException("fixed output");
-      var exchange = new Exchange("GET", PATH);
+      var exchange = new Exchange(GET_METHOD, PATH);
       exchange.bodyFailure = failure;
       var handler = new ApiMetricHttpHandler(context, () -> false);
       assertSame(failure, assertThrows(IOException.class, () -> handler.handle(exchange)));
       assertEquals(200, exchange.status);
       assertTrue(exchange.closed);
       assertEquals(0, exchange.output.size());
-      assertEquals(READY + "0\n", context.render(false));
+      assertEquals(READY + READY_FALSE_SUFFIX, context.render(false));
     }
   }
 
@@ -265,12 +273,12 @@ final class ApiMetricHttpHandlerTest {
       var next = new AtomicInteger();
       BooleanSupplier ready = () -> next.getAndIncrement() == 0;
       var handler = new ApiMetricHttpHandler(context, ready);
-      var first = new Exchange("GET", PATH);
-      var second = new Exchange("GET", PATH);
+      var first = new Exchange(GET_METHOD, PATH);
+      var second = new Exchange(GET_METHOD, PATH);
       handler.handle(first);
       handler.handle(second);
-      response(first, 200, READY + "1\n", METRIC);
-      response(second, 200, READY + "0\n", METRIC);
+      response(first, 200, READY + READY_TRUE_SUFFIX, METRIC);
+      response(second, 200, READY + READY_FALSE_SUFFIX, METRIC);
       assertEquals(2, next.get());
     }
   }
@@ -278,33 +286,34 @@ final class ApiMetricHttpHandlerTest {
   @Test
   void apimhttp016() throws IOException {
     try (var context = standard()) {
-      var exchange = new Exchange("GET", PATH);
-      exchange.headers.set("Content-Type", "stale");
-      exchange.headers.set("Cache-Control", "public");
+      var exchange = new Exchange(GET_METHOD, PATH);
+      exchange.headers.set(CONTENT_TYPE_HEADER, "stale");
+      exchange.headers.set(CACHE_CONTROL_HEADER, "public");
       new ApiMetricHttpHandler(context, () -> true).handle(exchange);
-      response(exchange, 200, READY + "1\n", METRIC);
-      assertEquals(1, exchange.headers.get("Content-Type").size());
-      assertEquals(1, exchange.headers.get("Cache-Control").size());
-      assertEquals(READY + "0\n", context.render(false));
+      response(exchange, 200, READY + READY_TRUE_SUFFIX, METRIC);
+      assertEquals(1, exchange.headers.get(CONTENT_TYPE_HEADER).size());
+      assertEquals(1, exchange.headers.get(CACHE_CONTROL_HEADER).size());
+      assertEquals(READY + READY_FALSE_SUFFIX, context.render(false));
     }
   }
 
   @Test
   void apimhttp017() throws IOException {
     try (var context = standard()) {
-      var exchange = new Exchange("GET", PATH);
+      var exchange = new Exchange(GET_METHOD, PATH);
       var handler = new ApiMetricHttpHandler(context, () -> true);
       handler.write(exchange);
       assertFalse(exchange.closed);
       assertEquals(0, exchange.closeCalls);
       assertEquals(200, exchange.status);
-      assertEquals(READY + "1\n", exchange.output.toString(StandardCharsets.UTF_8));
-      assertEquals((READY + "1\n").getBytes(StandardCharsets.UTF_8).length, exchange.length);
-      assertEquals(METRIC, exchange.headers.getFirst("Content-Type"));
-      assertEquals("no-store", exchange.headers.getFirst("Cache-Control"));
+      assertEquals(READY + READY_TRUE_SUFFIX, exchange.output.toString(StandardCharsets.UTF_8));
+      assertEquals(
+          (READY + READY_TRUE_SUFFIX).getBytes(StandardCharsets.UTF_8).length, exchange.length);
+      assertEquals(METRIC, exchange.headers.getFirst(CONTENT_TYPE_HEADER));
+      assertEquals(NO_STORE_VALUE, exchange.headers.getFirst(CACHE_CONTROL_HEADER));
       exchange.close();
-      response(exchange, 200, READY + "1\n", METRIC);
-      assertEquals(READY + "0\n", context.render(false));
+      response(exchange, 200, READY + READY_TRUE_SUFFIX, METRIC);
+      assertEquals(READY + READY_FALSE_SUFFIX, context.render(false));
       assertThrows(NullPointerException.class, () -> handler.write(null));
     }
   }
@@ -312,7 +321,7 @@ final class ApiMetricHttpHandlerTest {
   @Test
   void apimhttp018() {
     try (var context = standard()) {
-      var exchange = new Exchange("GET", PATH);
+      var exchange = new Exchange(GET_METHOD, PATH);
       var failure = new IllegalStateException("fixed borrowed write");
       var handler =
           new ApiMetricHttpHandler(
@@ -328,7 +337,7 @@ final class ApiMetricHttpHandlerTest {
       assertTrue(exchange.headers.isEmpty());
       exchange.close();
       assertEquals(1, exchange.closeCalls);
-      assertEquals(READY + "1\n", context.render(true));
+      assertEquals(READY + READY_TRUE_SUFFIX, context.render(true));
     }
   }
 
@@ -339,7 +348,7 @@ final class ApiMetricHttpHandlerTest {
     var readiness = new AtomicInteger();
     try (var context =
         new ApiMetricContext<double[]>(
-            "DEBUG",
+            DEBUG_MODE,
             registry -> {
               Gauge.builder("nk_db_pool_connections", value, state -> state[0])
                   .tags("service", "API", "state", "active")
@@ -353,14 +362,14 @@ final class ApiMetricHttpHandlerTest {
             })) {
       context.initialize();
       var handler = new ApiMetricHttpHandler(context, () -> readiness.getAndIncrement() == 0);
-      var first = new Exchange("GET", PATH);
-      var second = new Exchange("GET", PATH);
+      var first = new Exchange(GET_METHOD, PATH);
+      var second = new Exchange(GET_METHOD, PATH);
       handler.handle(first);
       handler.handle(second);
       String firstText = first.output.toString(StandardCharsets.UTF_8);
       String secondText = second.output.toString(StandardCharsets.UTF_8);
-      assertTrue(firstText.startsWith(READY + "1\n"));
-      assertTrue(secondText.startsWith(READY + "0\n"));
+      assertTrue(firstText.startsWith(READY + READY_TRUE_SUFFIX));
+      assertTrue(secondText.startsWith(READY + READY_FALSE_SUFFIX));
       assertTrue(
           firstText.contains("nk_db_pool_connections{service=\"API\",state=\"active\"} 9.5\n"));
       assertTrue(
@@ -369,8 +378,8 @@ final class ApiMetricHttpHandlerTest {
       assertEquals(200, second.status);
       assertEquals(firstText.getBytes(StandardCharsets.UTF_8).length, first.length);
       assertEquals(secondText.getBytes(StandardCharsets.UTF_8).length, second.length);
-      assertEquals(METRIC, first.headers.getFirst("Content-Type"));
-      assertEquals("no-store", second.headers.getFirst("Cache-Control"));
+      assertEquals(METRIC, first.headers.getFirst(CONTENT_TYPE_HEADER));
+      assertEquals(NO_STORE_VALUE, second.headers.getFirst(CACHE_CONTROL_HEADER));
       assertEquals(1, first.closeCalls);
       assertEquals(1, second.closeCalls);
       assertSame(value, context.bindings().orElseThrow());
@@ -390,27 +399,27 @@ final class ApiMetricHttpHandlerTest {
     f.maximum = 8;
     try (var context =
         new ApiMetricContext<ApiDbPoolMetricBinding>(
-            "DEBUG",
-            registry -> new ApiDbPoolMetricBinding(f.pool(), f.config(), registry, "DEBUG"),
+            DEBUG_MODE,
+            registry -> new ApiDbPoolMetricBinding(f.pool(), f.config(), registry, DEBUG_MODE),
             ApiDbPoolMetricBinding::refresh)) {
       context.initialize();
       assertTrue(f.calls.isEmpty());
       var handler = new ApiMetricHttpHandler(context, () -> true);
-      var first = new Exchange("GET", PATH);
+      var first = new Exchange(GET_METHOD, PATH);
       handler.handle(first);
       String body = first.output.toString(StandardCharsets.UTF_8);
-      assertTrue(body.startsWith(READY + "1\n"));
+      assertTrue(body.startsWith(READY + READY_TRUE_SUFFIX));
       assertTrue(body.contains("nk_db_pool_connections{service=\"API\",state=\"active\"} 3.0\n"));
       assertTrue(body.contains("nk_db_pool_connections{service=\"API\",state=\"max\"} 8.0\n"));
       assertEquals(200, first.status);
       assertEquals(body.getBytes(StandardCharsets.UTF_8).length, first.length);
-      assertEquals(METRIC, first.headers.getFirst("Content-Type"));
-      assertEquals("no-store", first.headers.getFirst("Cache-Control"));
+      assertEquals(METRIC, first.headers.getFirst(CONTENT_TYPE_HEADER));
+      assertEquals(NO_STORE_VALUE, first.headers.getFirst(CACHE_CONTROL_HEADER));
       assertEquals(1, first.closeCalls);
       f.complete();
       f.calls.clear();
       f.maximum = 0;
-      var missing = new Exchange("GET", PATH);
+      var missing = new Exchange(GET_METHOD, PATH);
       handler.handle(missing);
       String missingText = missing.output.toString(StandardCharsets.UTF_8);
       assertTrue(
@@ -435,7 +444,7 @@ final class ApiMetricHttpHandlerTest {
     var configReads = new AtomicInteger();
     try (var context =
         ApiDbPoolMetricBinding.prepareContext(
-            "DEBUG",
+            DEBUG_MODE,
             () -> {
               poolReads.incrementAndGet();
               return f.pool();
@@ -451,10 +460,10 @@ final class ApiMetricHttpHandlerTest {
       var handler = new ApiMetricHttpHandler(context, () -> true);
       for (int sample = 0; sample < 2; sample++) {
         f.active = sample == 0 ? 3 : 0;
-        var exchange = new Exchange("GET", PATH);
+        var exchange = new Exchange(GET_METHOD, PATH);
         handler.handle(exchange);
         String body = exchange.output.toString(StandardCharsets.UTF_8);
-        assertTrue(body.startsWith(READY + "1\n"));
+        assertTrue(body.startsWith(READY + READY_TRUE_SUFFIX));
         assertTrue(
             body.contains(
                 "nk_db_pool_connections{service=\"API\",state=\"active\"} "
@@ -463,8 +472,8 @@ final class ApiMetricHttpHandlerTest {
         assertTrue(body.contains("nk_db_pool_connections{service=\"API\",state=\"max\"} 8.0\n"));
         assertEquals(200, exchange.status);
         assertEquals(body.getBytes(StandardCharsets.UTF_8).length, exchange.length);
-        assertEquals(METRIC, exchange.headers.getFirst("Content-Type"));
-        assertEquals("no-store", exchange.headers.getFirst("Cache-Control"));
+        assertEquals(METRIC, exchange.headers.getFirst(CONTENT_TYPE_HEADER));
+        assertEquals(NO_STORE_VALUE, exchange.headers.getFirst(CACHE_CONTROL_HEADER));
         assertEquals(1, exchange.closeCalls);
         f.complete();
         f.calls.clear();
@@ -478,19 +487,19 @@ final class ApiMetricHttpHandlerTest {
   @Test
   void apimhttp022ServiceDefaultSourceIsExplicitlyMissingAtHttpBoundary() throws IOException {
     var f = new DbPoolMetricObservationTest.Fixture();
-    try (var context = ApiServiceMetricBinding.prepareContext("DEBUG", f::pool, f::config)) {
+    try (var context = ApiServiceMetricBinding.prepareContext(DEBUG_MODE, f::pool, f::config)) {
       context.initialize();
-      var exchange = new Exchange("GET", PATH);
+      var exchange = new Exchange(GET_METHOD, PATH);
       new ApiMetricHttpHandler(context, () -> true).handle(exchange);
       String body = exchange.output.toString(StandardCharsets.UTF_8);
-      assertTrue(body.startsWith(READY + "1\n"));
+      assertTrue(body.startsWith(READY + READY_TRUE_SUFFIX));
       assertTrue(body.contains("nk_outbox_rows{status=\"PENDING\",store=\"API\"} NaN\n"));
       assertTrue(body.contains("nk_outbox_oldest_seconds{status=\"ERROR\",store=\"API\"} NaN\n"));
       assertTrue(context.bindings().orElseThrow().snapshot().isEmpty());
       assertEquals(200, exchange.status);
       assertEquals(body.getBytes(StandardCharsets.UTF_8).length, exchange.length);
-      assertEquals(METRIC, exchange.headers.getFirst("Content-Type"));
-      assertEquals("no-store", exchange.headers.getFirst("Cache-Control"));
+      assertEquals(METRIC, exchange.headers.getFirst(CONTENT_TYPE_HEADER));
+      assertEquals(NO_STORE_VALUE, exchange.headers.getFirst(CACHE_CONTROL_HEADER));
       assertEquals(1, exchange.closeCalls);
       f.complete();
     }
@@ -499,7 +508,7 @@ final class ApiMetricHttpHandlerTest {
   private static ApiMetricContext<String> standard() {
     var context =
         new ApiMetricContext<String>(
-            "STANDARD",
+            STANDARD_MODE,
             registry -> {
               throw new AssertionError("STD setup");
             });
@@ -511,8 +520,8 @@ final class ApiMetricHttpHandlerTest {
     assertEquals(status, exchange.status);
     assertEquals(body, exchange.output.toString(StandardCharsets.UTF_8));
     assertEquals(body.getBytes(StandardCharsets.UTF_8).length, exchange.length);
-    assertEquals(type, exchange.headers.getFirst("Content-Type"));
-    assertEquals("no-store", exchange.headers.getFirst("Cache-Control"));
+    assertEquals(type, exchange.headers.getFirst(CONTENT_TYPE_HEADER));
+    assertEquals(NO_STORE_VALUE, exchange.headers.getFirst(CACHE_CONTROL_HEADER));
     assertEquals(1, exchange.headerCalls);
     assertTrue(exchange.closed);
     assertEquals(1, exchange.closeCalls);
