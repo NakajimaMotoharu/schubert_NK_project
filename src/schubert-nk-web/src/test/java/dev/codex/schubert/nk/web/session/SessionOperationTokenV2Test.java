@@ -18,6 +18,9 @@ import org.junit.jupiter.api.Test;
 
 /** QA049/PG-D356/UI226/SS314; TOKV201..205 independent literal v1/v2 oracle. */
 class SessionOperationTokenV2Test {
+  private static final String OPERATION_PURPOSE = "QSBREQ01";
+  private static final String TOKEN_ARRAY_END = "}]}";
+
   static final Instant ISSUED = Instant.parse("2026-10-04T00:00:00Z");
   static final UUID ID = UUID.fromString("00000000-0000-4000-8000-000000000001");
   static final String PREFIX =
@@ -39,11 +42,11 @@ class SessionOperationTokenV2Test {
 
   @Test
   void tokv201CompletionInvariantAndLegacyConstructor() {
-    var pending = new SessionOperationToken("QSBREQ01", ID, ISSUED);
+    var pending = new SessionOperationToken(OPERATION_PURPOSE, ID, ISSUED);
     assertEquals(Optional.empty(), pending.completedAt());
     for (Instant completed : List.of(ISSUED, ISSUED.plusNanos(1), ISSUED.plusSeconds(1))) {
-      var token = new SessionOperationToken("QSBREQ01", ID, ISSUED, Optional.of(completed));
-      assertEquals("QSBREQ01", token.purpose());
+      var token = new SessionOperationToken(OPERATION_PURPOSE, ID, ISSUED, Optional.of(completed));
+      assertEquals(OPERATION_PURPOSE, token.purpose());
       assertEquals(ID, token.token());
       assertEquals(ISSUED, token.issuedAt());
       assertEquals(Optional.of(completed), token.completedAt());
@@ -51,24 +54,27 @@ class SessionOperationTokenV2Test {
     }
     assertThrows(
         IllegalArgumentException.class,
-        () -> new SessionOperationToken("QSBREQ01", ID, ISSUED, Optional.of(ISSUED.minusNanos(1))));
+        () ->
+            new SessionOperationToken(
+                OPERATION_PURPOSE, ID, ISSUED, Optional.of(ISSUED.minusNanos(1))));
     assertThrows(
-        NullPointerException.class, () -> new SessionOperationToken("QSBREQ01", ID, ISSUED, null));
+        NullPointerException.class,
+        () -> new SessionOperationToken(OPERATION_PURPOSE, ID, ISSUED, null));
   }
 
   @Test
   void tokv202CurrentGoldenBytesAndCompletedTimes() {
     var codec = new SessionAttributeCodec();
     assertArrayEquals(
-        bytes(PREFIX + "}]}"),
-        codec.encode(attributes(new SessionOperationToken("QSBREQ01", ID, ISSUED))));
+        bytes(PREFIX + TOKEN_ARRAY_END),
+        codec.encode(attributes(new SessionOperationToken(OPERATION_PURPOSE, ID, ISSUED))));
     for (String literal :
         List.of("2026-10-04T00:00:00Z", "2026-10-04T00:00:00.000001Z", "2026-10-05T00:00:00Z")) {
       String expected = PREFIX + ",\"completedAt\":\"" + literal + "\"}]}";
       var value =
           attributes(
               new SessionOperationToken(
-                  "QSBREQ01", ID, ISSUED, Optional.of(Instant.parse(literal))));
+                  OPERATION_PURPOSE, ID, ISSUED, Optional.of(Instant.parse(literal))));
       assertArrayEquals(bytes(expected), codec.encode(value));
       assertEquals(
           Optional.of(Instant.parse(literal)),
@@ -79,10 +85,10 @@ class SessionOperationTokenV2Test {
   @Test
   void tokv203LegacyAndReorderedRootVersionRemainStrict() {
     var codec = new SessionAttributeCodec();
-    String legacy = PREFIX.replace("\"formatVersion\":2", "\"formatVersion\":1") + "}]}";
+    String legacy = PREFIX.replace("\"formatVersion\":2", "\"formatVersion\":1") + TOKEN_ARRAY_END;
     var value = codec.decode(bytes(legacy));
     assertEquals(Optional.empty(), value.operationTokens().getFirst().completedAt());
-    assertArrayEquals(bytes(PREFIX + "}]}"), codec.encode(value));
+    assertArrayEquals(bytes(PREFIX + TOKEN_ARRAY_END), codec.encode(value));
     String reversed =
         "{\"operationTokens\":[{\"completedAt\":\"2026-10-04T00:00:01Z\",\"issuedAt\":\"2026-10-04T00:00:00Z\",\"token\":\"00000000-0000-4000-8000-000000000001\",\"purpose\":\"QSBREQ01\"}],\"formatVersion\":2}";
     assertEquals(
@@ -107,7 +113,7 @@ class SessionOperationTokenV2Test {
             "\"2026-10-03T23:59:59.999999999Z\"",
             "\"2026-10-04T09:00:00+09:00\"",
             "\"2026-10-04T00:00:00.000Z\"",
-            "\"not-time\"")) invalid(PREFIX + ",\"completedAt\":" + value + "}]}");
+            "\"not-time\"")) invalid(PREFIX + ",\"completedAt\":" + value + TOKEN_ARRAY_END);
     invalid(
         PREFIX
             + ",\"completedAt\":\"2026-10-04T00:00:00Z\",\"completedAt\":\"2026-10-04T00:00:01Z\"}]}");
@@ -116,7 +122,9 @@ class SessionOperationTokenV2Test {
         PREFIX.replace(",\"issuedAt\":\"2026-10-04T00:00:00Z\"", "")
             + ",\"completedAt\":\"2026-10-04T00:00:00Z\"}]}");
     for (String version : List.of("0", "3", "2.0", "2e0", "\"2\"", "null"))
-      invalid((PREFIX + "}]}").replace("\"formatVersion\":2", "\"formatVersion\":" + version));
+      invalid(
+          (PREFIX + TOKEN_ARRAY_END)
+              .replace("\"formatVersion\":2", "\"formatVersion\":" + version));
   }
 
   @Test
@@ -129,7 +137,7 @@ class SessionOperationTokenV2Test {
       boolean completed = n % 2 == 0;
       tokens.add(
           new SessionOperationToken(
-              "QSBREQ01",
+              OPERATION_PURPOSE,
               id,
               ISSUED,
               completed ? Optional.of(ISSUED.plusSeconds(n)) : Optional.empty()));
@@ -150,8 +158,9 @@ class SessionOperationTokenV2Test {
         new SessionAttributes(Optional.empty(), Optional.empty(), Optional.empty(), tokens);
     assertArrayEquals(bytes(golden), codec.encode(attributes));
     assertEquals(tokens, codec.decode(bytes(golden)).operationTokens());
-    invalid(golden.replace("]}", "," + PREFIX.substring(PREFIX.indexOf("[{") + 1) + "}]}"));
-    tokens.add(new SessionOperationToken("QSBREQ01", new UUID(0, 11), ISSUED));
+    invalid(
+        golden.replace("]}", "," + PREFIX.substring(PREFIX.indexOf("[{") + 1) + TOKEN_ARRAY_END));
+    tokens.add(new SessionOperationToken(OPERATION_PURPOSE, new UUID(0, 11), ISSUED));
     assertThrows(
         IllegalArgumentException.class,
         () -> new SessionAttributes(Optional.empty(), Optional.empty(), Optional.empty(), tokens));

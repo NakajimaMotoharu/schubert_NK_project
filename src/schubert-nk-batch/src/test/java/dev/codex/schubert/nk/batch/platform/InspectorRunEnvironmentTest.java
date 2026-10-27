@@ -27,6 +27,8 @@ import org.junit.jupiter.api.Test;
  * Independent SS343 literal bytes, never production-generated expectations. PT-OPS-ENV-001..004.
  */
 final class InspectorRunEnvironmentTest {
+  private static final int UUID_WORD_BITS = 64;
+
   private static final UUID ID = UUID.fromString("00000000-0000-0000-0000-00000000005e");
   private static final BatchRun RUN = new BatchRun(ID, Instant.parse("2026-09-17T00:00:00Z"));
   private static final String GOLDEN =
@@ -73,7 +75,7 @@ final class InspectorRunEnvironmentTest {
     for (int bit = 0; bit < 128; bit++) {
       long high = ID.getMostSignificantBits();
       long low = ID.getLeastSignificantBits();
-      if (bit < 64) high ^= 1L << bit;
+      if (bit < UUID_WORD_BITS) high ^= 1L << bit;
       else low ^= 1L << (bit - 64);
       reject(new BatchRun(new UUID(high, low), RUN.cutoff()), literal);
     }
