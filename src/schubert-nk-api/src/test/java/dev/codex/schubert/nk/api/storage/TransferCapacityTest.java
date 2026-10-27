@@ -16,6 +16,10 @@ import org.junit.jupiter.api.Test;
 
 /** Decimal byte/explicit counter oracle, no physical capacity test claimed. PT-SCN-008-C01..C03. */
 class TransferCapacityTest {
+  private static final long CRITICAL_BYTE_GATE = 4_500_000_000L;
+  private static final long CRITICAL_FILE_GATE = 9_000;
+  private static final String CRITICAL_CAPACITY_LEVEL = "CRITICAL";
+
   @Test
   void c01EveryByteAndFileAlertBoundaryMatchesFixedThresholds() {
     for (long bytes :
@@ -31,18 +35,21 @@ class TransferCapacityTest {
         }) {
       var capacity = new TransferCapacity(bytes, 100);
       String expected =
-          bytes >= 4_500_000_000L ? "CRITICAL" : bytes >= 3_500_000_000L ? "WARNING" : "NORMAL";
+          bytes >= 4_500_000_000L
+              ? CRITICAL_CAPACITY_LEVEL
+              : bytes >= 3_500_000_000L ? "WARNING" : "NORMAL";
       assertEquals(bytes, capacity.snapshot().bytes());
       assertEquals(100, capacity.snapshot().files());
       assertEquals(expected, capacity.snapshot().level().name());
-      if (bytes >= 4_500_000_000L) assertCapacity(capacity);
+      if (bytes >= CRITICAL_BYTE_GATE) assertCapacity(capacity);
     }
     for (long files : new long[] {0, 4_999, 5_000, 5_001, 8_999, 9_000, 9_001, Long.MAX_VALUE}) {
       var capacity = new TransferCapacity(0, files);
-      String expected = files >= 9_000 ? "CRITICAL" : files >= 5_000 ? "WARNING" : "NORMAL";
+      String expected =
+          files >= 9_000 ? CRITICAL_CAPACITY_LEVEL : files >= 5_000 ? "WARNING" : "NORMAL";
       assertEquals(files, capacity.snapshot().files());
       assertEquals(expected, capacity.snapshot().level().name());
-      if (files >= 9_000) assertCapacity(capacity);
+      if (files >= CRITICAL_FILE_GATE) assertCapacity(capacity);
     }
     assertThrows(IllegalArgumentException.class, () -> new TransferCapacity(-1, 0));
     assertThrows(IllegalArgumentException.class, () -> new TransferCapacity(0, -1));
@@ -90,7 +97,7 @@ class TransferCapacityTest {
     var reservation = capacity.reserve(48_000_000);
     assertEquals(4_547_999_999L, capacity.snapshot().bytes());
     assertEquals(101, capacity.snapshot().files());
-    assertEquals("CRITICAL", capacity.snapshot().level().name());
+    assertEquals(CRITICAL_CAPACITY_LEVEL, capacity.snapshot().level().name());
     assertCapacity(capacity);
     reservation.close();
     assertEquals(4_499_999_999L, capacity.snapshot().bytes());
@@ -130,7 +137,7 @@ class TransferCapacityTest {
       }
       assertEquals(before.bytes() + 4800, capacity.snapshot().bytes());
       assertEquals(before.files() + 1, capacity.snapshot().files());
-      assertEquals("CRITICAL", capacity.snapshot().level().name());
+      assertEquals(CRITICAL_CAPACITY_LEVEL, capacity.snapshot().level().name());
     }
   }
 

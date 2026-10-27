@@ -22,6 +22,9 @@ import org.junit.jupiter.api.Test;
 
 /** OPMIS001..008: enum-only supplied observations and owned SDK, no real tokens/keys/HMAC/auth. */
 class OperationMismatchMetricRecorderTest {
+  private static final int FAILED_REGISTRATION_ORDINAL = 2;
+  private static final String DELETE_QUESTION_OPERATION = "QDLREQ01";
+  private static final String DEBUG_MONITORING_MODE = "DEBUG";
   private static final Set<String> OPERATIONS =
       Set.of(
           "UCRREQ01",
@@ -31,7 +34,7 @@ class OperationMismatchMetricRecorderTest {
           "ULKREQ01",
           "QSBREQ01",
           "NTCREQ01",
-          "QDLREQ01");
+          DELETE_QUESTION_OPERATION);
 
   private static final class Registry extends SimpleMeterRegistry implements AutoCloseable {
     final AtomicInteger registrations = new AtomicInteger();
@@ -51,7 +54,7 @@ class OperationMismatchMetricRecorderTest {
 
     @Override
     protected Counter newCounter(Meter.Id id) {
-      if (registrations.incrementAndGet() == 2) fail(registrationFailure);
+      if (registrations.incrementAndGet() == FAILED_REGISTRATION_ORDINAL) fail(registrationFailure);
       var actual = super.newCounter(id);
       return new Counter() {
         @Override
@@ -106,7 +109,7 @@ class OperationMismatchMetricRecorderTest {
   @Test
   void opMis001DebugHasExactlyEightCanonicalZeroCounters() {
     try (var registry = new Registry()) {
-      var recorder = new OperationMismatchMetricRecorder(registry, "DEBUG");
+      var recorder = new OperationMismatchMetricRecorder(registry, DEBUG_MONITORING_MODE);
       assertTrue(recorder.detailedMetricsRequested());
       assertEquals(
           OPERATIONS,
@@ -125,14 +128,19 @@ class OperationMismatchMetricRecorderTest {
   @Test
   void opMis002EachObservationIncrementsOnlyItsCanonicalCounterOnce() {
     try (var registry = new Registry()) {
-      var recorder = new OperationMismatchMetricRecorder(registry, "DEBUG");
+      var recorder = new OperationMismatchMetricRecorder(registry, DEBUG_MONITORING_MODE);
       for (var operation : Operation.values()) recorder.record(operation);
       recorder.record(Operation.UCRREQ01);
       assertEquals(2, count(registry, "UCRREQ01"));
       for (String operation :
           Set.of(
-              "USTREQ01", "URLREQ01", "UPWREQ01", "ULKREQ01", "QSBREQ01", "NTCREQ01", "QDLREQ01"))
-        assertEquals(1, count(registry, operation));
+              "USTREQ01",
+              "URLREQ01",
+              "UPWREQ01",
+              "ULKREQ01",
+              "QSBREQ01",
+              "NTCREQ01",
+              DELETE_QUESTION_OPERATION)) assertEquals(1, count(registry, operation));
       assertEquals(9, registry.increments.get());
       assertThrows(NullPointerException.class, () -> recorder.record(null));
       assertEquals(9, registry.increments.get());
@@ -157,7 +165,8 @@ class OperationMismatchMetricRecorderTest {
   void opMis004NullUnknownAndAliasedBoundariesCannotBecomeSeriesOrDiagnosticValues() {
     try (var registry = new Registry()) {
       assertThrows(
-          NullPointerException.class, () -> new OperationMismatchMetricRecorder(null, "DEBUG"));
+          NullPointerException.class,
+          () -> new OperationMismatchMetricRecorder(null, DEBUG_MONITORING_MODE));
       assertThrows(
           NullPointerException.class, () -> new OperationMismatchMetricRecorder(registry, null));
       assertThrows(
@@ -206,7 +215,8 @@ class OperationMismatchMetricRecorderTest {
         assertSame(
             failure,
             assertThrows(
-                failure.getClass(), () -> new OperationMismatchMetricRecorder(registry, "DEBUG")));
+                failure.getClass(),
+                () -> new OperationMismatchMetricRecorder(registry, DEBUG_MONITORING_MODE)));
         assertEquals(2, registry.registrations.get());
         assertEquals(1, registry.getMeters().size());
         assertEquals(0, registry.closes.get());
@@ -224,7 +234,7 @@ class OperationMismatchMetricRecorderTest {
           List.<Throwable>of(
               new UnformattableFailure(), new AssertionError("owned increment fixture"))) {
         try (var registry = new Registry()) {
-          var recorder = new OperationMismatchMetricRecorder(registry, "DEBUG");
+          var recorder = new OperationMismatchMetricRecorder(registry, DEBUG_MONITORING_MODE);
           if (after) registry.afterIncrement = Optional.of(failure);
           else registry.beforeIncrement = Optional.of(failure);
           assertSame(
@@ -241,7 +251,7 @@ class OperationMismatchMetricRecorderTest {
   void opMis007ParallelObservationsHaveExactCountsWithoutCardinalityGrowth() throws Exception {
     try (var registry = new Registry();
         var executor = Executors.newFixedThreadPool(8)) {
-      var recorder = new OperationMismatchMetricRecorder(registry, "DEBUG");
+      var recorder = new OperationMismatchMetricRecorder(registry, DEBUG_MONITORING_MODE);
       var tasks = new ArrayList<Callable<Boolean>>();
       for (int i = 0; i < 64; i++) {
         var operation = Operation.values()[i % 8];
@@ -262,12 +272,12 @@ class OperationMismatchMetricRecorderTest {
   void opMis008IndependentOwnersAndRepeatedObservationsDoNotShareCounts() {
     try (var one = new Registry();
         var two = new Registry()) {
-      var first = new OperationMismatchMetricRecorder(one, "DEBUG");
-      var second = new OperationMismatchMetricRecorder(two, "DEBUG");
+      var first = new OperationMismatchMetricRecorder(one, DEBUG_MONITORING_MODE);
+      var second = new OperationMismatchMetricRecorder(two, DEBUG_MONITORING_MODE);
       second.record(Operation.QDLREQ01);
       for (int i = 0; i < 1000; i++) first.record(Operation.QDLREQ01);
-      assertEquals(1000, count(one, "QDLREQ01"));
-      assertEquals(1, count(two, "QDLREQ01"));
+      assertEquals(1000, count(one, DELETE_QUESTION_OPERATION));
+      assertEquals(1, count(two, DELETE_QUESTION_OPERATION));
       assertEquals(0, count(one, "NTCREQ01"));
       shape(one);
       shape(two);
