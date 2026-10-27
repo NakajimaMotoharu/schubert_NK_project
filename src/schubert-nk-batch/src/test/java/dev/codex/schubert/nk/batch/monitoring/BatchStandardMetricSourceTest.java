@@ -35,13 +35,18 @@ class BatchStandardMetricSourceTest {
             (source, gc) -> {
               throw new AssertionError("unexpected registration");
             });
-    owner.bind(STANDARD_MODE);
-    assertEquals("", owner.scrape(STANDARD_MODE));
-    owner.close();
-    owner.bind(STANDARD_MODE);
-    assertEquals("", owner.scrape(STANDARD_MODE));
-    assertEquals(0, calls.get());
-    assertThrows(IllegalStateException.class, () -> owner.bind(DEBUG_MODE));
+    try {
+
+      owner.bind(STANDARD_MODE);
+      assertEquals("", owner.scrape(STANDARD_MODE));
+      owner.close();
+      owner.bind(STANDARD_MODE);
+      assertEquals("", owner.scrape(STANDARD_MODE));
+      assertEquals(0, calls.get());
+      assertThrows(IllegalStateException.class, () -> owner.bind(DEBUG_MODE));
+    } finally {
+      owner.close();
+    }
   }
 
   @Test
@@ -76,10 +81,15 @@ class BatchStandardMetricSourceTest {
               return new ProbeRegistry(new ArrayList<>());
             },
             (source, gc) -> {});
-    assertThrows(IllegalStateException.class, () -> owner.scrape(DEBUG_MODE));
-    assertEquals("", owner.scrape(STANDARD_MODE));
-    assertEquals(0, count.get());
-    owner.close();
+    try {
+
+      assertThrows(IllegalStateException.class, () -> owner.scrape(DEBUG_MODE));
+      assertEquals("", owner.scrape(STANDARD_MODE));
+      assertEquals(0, count.get());
+      owner.close();
+    } finally {
+      owner.close();
+    }
   }
 
   @Test
@@ -92,16 +102,21 @@ class BatchStandardMetricSourceTest {
               return new ProbeRegistry(new ArrayList<>());
             },
             (source, gc) -> {});
-    assertThrows(NullPointerException.class, () -> owner.bind(null));
-    assertThrows(NullPointerException.class, () -> owner.scrape(null));
-    assertEquals(
-        "CONFIG_INVALID",
-        assertThrows(IllegalArgumentException.class, () -> owner.bind("unknown")).getMessage());
-    assertEquals(
-        "CONFIG_INVALID",
-        assertThrows(IllegalArgumentException.class, () -> owner.scrape("")).getMessage());
-    assertEquals(0, count.get());
-    owner.close();
+    try {
+
+      assertThrows(NullPointerException.class, () -> owner.bind(null));
+      assertThrows(NullPointerException.class, () -> owner.scrape(null));
+      assertEquals(
+          "CONFIG_INVALID",
+          assertThrows(IllegalArgumentException.class, () -> owner.bind("unknown")).getMessage());
+      assertEquals(
+          "CONFIG_INVALID",
+          assertThrows(IllegalArgumentException.class, () -> owner.scrape("")).getMessage());
+      assertEquals(0, count.get());
+      owner.close();
+    } finally {
+      owner.close();
+    }
   }
 
   @Test
@@ -124,11 +139,17 @@ class BatchStandardMetricSourceTest {
               throw failure;
             },
             (source, gc) -> {});
-    assertSame(failure, assertThrows(IllegalArgumentException.class, () -> owner.bind(DEBUG_MODE)));
-    assertThrows(IllegalStateException.class, () -> owner.bind(DEBUG_MODE));
-    assertThrows(IllegalStateException.class, () -> owner.scrape(DEBUG_MODE));
-    assertEquals(1, calls.get());
-    owner.close();
+    try {
+
+      assertSame(
+          failure, assertThrows(IllegalArgumentException.class, () -> owner.bind(DEBUG_MODE)));
+      assertThrows(IllegalStateException.class, () -> owner.bind(DEBUG_MODE));
+      assertThrows(IllegalStateException.class, () -> owner.scrape(DEBUG_MODE));
+      assertEquals(1, calls.get());
+      owner.close();
+    } finally {
+      owner.close();
+    }
   }
 
   @Test
@@ -140,9 +161,14 @@ class BatchStandardMetricSourceTest {
               throw failure;
             },
             (source, gc) -> {});
-    assertSame(failure, assertThrows(AssertionError.class, () -> owner.bind(DEBUG_MODE)));
-    assertThrows(IllegalStateException.class, () -> owner.bind(DEBUG_MODE));
-    owner.close();
+    try {
+
+      assertSame(failure, assertThrows(AssertionError.class, () -> owner.bind(DEBUG_MODE)));
+      assertThrows(IllegalStateException.class, () -> owner.bind(DEBUG_MODE));
+      owner.close();
+    } finally {
+      owner.close();
+    }
   }
 
   @Test
@@ -153,9 +179,14 @@ class BatchStandardMetricSourceTest {
             (source, gc) -> {
               throw new AssertionError("unexpected registrar");
             });
-    assertThrows(NullPointerException.class, () -> owner.bind(DEBUG_MODE));
-    assertThrows(IllegalStateException.class, () -> owner.scrape(DEBUG_MODE));
-    owner.close();
+    try {
+
+      assertThrows(NullPointerException.class, () -> owner.bind(DEBUG_MODE));
+      assertThrows(IllegalStateException.class, () -> owner.scrape(DEBUG_MODE));
+      owner.close();
+    } finally {
+      owner.close();
+    }
   }
 
   @Test
@@ -168,10 +199,15 @@ class BatchStandardMetricSourceTest {
             (value, gc) -> {
               throw new AssertionError("unexpected registrar");
             });
-    assertThrows(IllegalStateException.class, () -> owner.bind(DEBUG_MODE));
-    assertEquals(1, source.closes);
-    owner.close();
-    assertEquals(2, source.closes);
+    try {
+
+      assertThrows(IllegalStateException.class, () -> owner.bind(DEBUG_MODE));
+      assertEquals(1, source.closes);
+      owner.close();
+      assertEquals(2, source.closes);
+    } finally {
+      owner.close();
+    }
   }
 
   @Test
@@ -184,11 +220,17 @@ class BatchStandardMetricSourceTest {
             (value, gc) -> {
               throw failure;
             });
-    assertSame(failure, assertThrows(IllegalArgumentException.class, () -> owner.bind(DEBUG_MODE)));
-    assertFalse(source.isClosed());
-    assertThrows(IllegalStateException.class, () -> owner.scrape(DEBUG_MODE));
-    owner.close();
-    assertEquals(1, source.closes);
+    try {
+
+      assertSame(
+          failure, assertThrows(IllegalArgumentException.class, () -> owner.bind(DEBUG_MODE)));
+      assertFalse(source.isClosed());
+      assertThrows(IllegalStateException.class, () -> owner.scrape(DEBUG_MODE));
+      owner.close();
+      assertEquals(1, source.closes);
+    } finally {
+      owner.close();
+    }
   }
 
   @Test
@@ -204,11 +246,16 @@ class BatchStandardMetricSourceTest {
               assertTrue(ack.test(gc));
               throw failure;
             });
-    assertSame(failure, assertThrows(AssertionError.class, () -> owner.bind(DEBUG_MODE)));
-    assertEquals(List.of(), order);
-    owner.close();
-    owner.close();
-    assertEquals(List.of("gc", "registry"), order);
+    try {
+
+      assertSame(failure, assertThrows(AssertionError.class, () -> owner.bind(DEBUG_MODE)));
+      assertEquals(List.of(), order);
+      owner.close();
+      owner.close();
+      assertEquals(List.of("gc", "registry"), order);
+    } finally {
+      owner.close();
+    }
   }
 
   @Test
@@ -220,15 +267,20 @@ class BatchStandardMetricSourceTest {
     gc.failure = Optional.of(failure);
     var owner =
         new BatchStandardMetricSource(() -> source, (value, ack) -> assertTrue(ack.test(gc)));
-    owner.bind(DEBUG_MODE);
-    assertSame(failure, assertThrows(IllegalStateException.class, owner::close));
-    assertThrows(IllegalStateException.class, () -> owner.scrape(DEBUG_MODE));
-    assertFalse(source.isClosed());
-    assertEquals(List.of("gc"), order);
-    gc.failure = Optional.empty();
-    owner.close();
-    assertEquals(List.of("gc", "gc", "registry"), order);
-    assertTrue(source.isClosed());
+    try {
+
+      owner.bind(DEBUG_MODE);
+      assertSame(failure, assertThrows(IllegalStateException.class, owner::close));
+      assertThrows(IllegalStateException.class, () -> owner.scrape(DEBUG_MODE));
+      assertFalse(source.isClosed());
+      assertEquals(List.of("gc"), order);
+      gc.failure = Optional.empty();
+      owner.close();
+      assertEquals(List.of("gc", "gc", "registry"), order);
+      assertTrue(source.isClosed());
+    } finally {
+      owner.close();
+    }
   }
 
   @Test
@@ -237,26 +289,36 @@ class BatchStandardMetricSourceTest {
     var failure = new IllegalStateException("registry close fixture");
     source.failure = Optional.of(failure);
     var owner = new BatchStandardMetricSource(() -> source, (value, ack) -> {});
-    owner.bind(DEBUG_MODE);
-    assertSame(failure, assertThrows(IllegalStateException.class, owner::close));
-    assertThrows(IllegalStateException.class, () -> owner.scrape(DEBUG_MODE));
-    assertFalse(source.isClosed());
-    source.failure = Optional.empty();
-    owner.close();
-    owner.close();
-    assertTrue(source.isClosed());
-    assertEquals(2, source.closes);
+    try {
+
+      owner.bind(DEBUG_MODE);
+      assertSame(failure, assertThrows(IllegalStateException.class, owner::close));
+      assertThrows(IllegalStateException.class, () -> owner.scrape(DEBUG_MODE));
+      assertFalse(source.isClosed());
+      source.failure = Optional.empty();
+      owner.close();
+      owner.close();
+      assertTrue(source.isClosed());
+      assertEquals(2, source.closes);
+    } finally {
+      owner.close();
+    }
   }
 
   @Test
   void batchhost014NullGcCallbackFailsWithoutImplicitRegistryClose() {
     var source = new ProbeRegistry(new ArrayList<>());
     var owner = new BatchStandardMetricSource(() -> source, (value, ack) -> ack.test(null));
-    assertThrows(NullPointerException.class, () -> owner.bind(DEBUG_MODE));
-    assertFalse(source.isClosed());
-    assertThrows(IllegalStateException.class, () -> owner.scrape(DEBUG_MODE));
-    owner.close();
-    assertTrue(source.isClosed());
+    try {
+
+      assertThrows(NullPointerException.class, () -> owner.bind(DEBUG_MODE));
+      assertFalse(source.isClosed());
+      assertThrows(IllegalStateException.class, () -> owner.scrape(DEBUG_MODE));
+      owner.close();
+      assertTrue(source.isClosed());
+    } finally {
+      owner.close();
+    }
   }
 
   @Test
@@ -265,14 +327,19 @@ class BatchStandardMetricSourceTest {
     var calls = new AtomicInteger();
     var owner =
         new BatchStandardMetricSource(() -> source, (value, ack) -> calls.incrementAndGet());
-    owner.bind(DEBUG_MODE);
-    assertEquals("standard", owner.scrape(DEBUG_MODE));
-    assertThrows(IllegalStateException.class, () -> owner.bind(DEBUG_MODE));
-    owner.bind(STANDARD_MODE);
-    owner.close();
-    owner.close();
-    assertEquals(1, calls.get());
-    assertEquals(1, source.closes);
+    try {
+
+      owner.bind(DEBUG_MODE);
+      assertEquals("standard", owner.scrape(DEBUG_MODE));
+      assertThrows(IllegalStateException.class, () -> owner.bind(DEBUG_MODE));
+      owner.bind(STANDARD_MODE);
+      owner.close();
+      owner.close();
+      assertEquals(1, calls.get());
+      assertEquals(1, source.closes);
+    } finally {
+      owner.close();
+    }
   }
 
   @Test
@@ -283,29 +350,35 @@ class BatchStandardMetricSourceTest {
     source.entered = Optional.of(entered);
     source.release = Optional.of(release);
     var owner = new BatchStandardMetricSource(() -> source, (value, ack) -> {});
-    owner.bind(DEBUG_MODE);
-    var executor = Executors.newFixedThreadPool(2);
     try {
-      var scrape = executor.submit(() -> owner.scrape(DEBUG_MODE));
-      assertTrue(entered.await(10, TimeUnit.SECONDS));
-      var attemptedClose = new CountDownLatch(1);
-      var close =
-          executor.submit(
-              () -> {
-                attemptedClose.countDown();
-                owner.close();
-              });
-      assertTrue(attemptedClose.await(10, TimeUnit.SECONDS));
-      assertFalse(source.isClosed());
-      release.countDown();
-      assertEquals("standard", scrape.get(10, TimeUnit.SECONDS));
-      close.get(10, TimeUnit.SECONDS);
-      assertTrue(source.isClosed());
-      assertThrows(IllegalStateException.class, () -> owner.scrape(DEBUG_MODE));
+
+      owner.bind(DEBUG_MODE);
+      try (var executor = Executors.newFixedThreadPool(2)) {
+        try {
+          var scrape = executor.submit(() -> owner.scrape(DEBUG_MODE));
+          assertTrue(entered.await(10, TimeUnit.SECONDS));
+          var attemptedClose = new CountDownLatch(1);
+          var close =
+              executor.submit(
+                  () -> {
+                    attemptedClose.countDown();
+                    owner.close();
+                  });
+          assertTrue(attemptedClose.await(10, TimeUnit.SECONDS));
+          assertFalse(source.isClosed());
+          release.countDown();
+          assertEquals("standard", scrape.get(10, TimeUnit.SECONDS));
+          close.get(10, TimeUnit.SECONDS);
+          assertTrue(source.isClosed());
+          assertThrows(IllegalStateException.class, () -> owner.scrape(DEBUG_MODE));
+        } finally {
+          release.countDown();
+          executor.shutdownNow();
+          assertTrue(executor.awaitTermination(10, TimeUnit.SECONDS));
+          owner.close();
+        }
+      }
     } finally {
-      release.countDown();
-      executor.shutdownNow();
-      assertTrue(executor.awaitTermination(10, TimeUnit.SECONDS));
       owner.close();
     }
   }
