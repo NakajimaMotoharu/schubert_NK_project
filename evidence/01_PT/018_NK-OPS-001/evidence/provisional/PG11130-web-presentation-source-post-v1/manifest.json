@@ -1,0 +1,128 @@
+{
+  "actualExit": 0,
+  "allMainAndOtherInputsPreserved": true,
+  "allOriginalOracleTokensRestored": true,
+  "constantsAdded": 9,
+  "coverage": null,
+  "effortPercent": null,
+  "externalActions": 0,
+  "invocation": {
+    "actualPythonCommand": [
+      "/usr/bin/python3",
+      "-B",
+      "tools/quality/pg11130_web_presentation_source_post.py"
+    ],
+    "arbitraryArgumentsRecorded": false,
+    "entrypointPath": "tools/quality/pg11130_web_presentation_source_post.py",
+    "entrypointSha256": "734f2349530e4bf0ed3f3b4cac4633528ab49330c23aaa400b34de047901ed99",
+    "helperPath": "tools/quality/host_tool_invocation.py",
+    "helperSha256": "85d616a3db4ff47f4c95ae2e0dd57954bc2b09f28b8f2a685b986e5621545c46",
+    "libraryPath": "tools/quality/pg11130_web_presentation_source_post.py",
+    "librarySha256": "734f2349530e4bf0ed3f3b4cac4633528ab49330c23aaa400b34de047901ed99",
+    "loadedProjectPythonSources": {
+      "tools/quality/classfile_code_metadata.py": "2227e1e8df1ff91b606f094c7ee64366023273ca740d4d47126ed0928190e2f0",
+      "tools/quality/g07_host_class_provenance_inputs.py": "a676cb3e4145177c3c243722d737592ce7d44c3f29cfe4f670662ef7651f046b",
+      "tools/quality/host_tool_invocation.py": "85d616a3db4ff47f4c95ae2e0dd57954bc2b09f28b8f2a685b986e5621545c46",
+      "tools/quality/pg10130_uid_oracle_preflight.py": "e80cb1d6d45d4e4c0cdb3cb792e0638119d936403de5c3e141429d338485758a",
+      "tools/quality/pg10332_result_profile_oracle_plan.py": "82c9b4f57dd517c1dbee639dbf4955c316beb89216cb9a8a66e78e0b9a322ad4",
+      "tools/quality/pg10339_result_profile_oracle_post_v2.py": "42f86287f5236d2ef1a2e10f54f5b0634e799a4e866b15eaf6738336a4ebabb0",
+      "tools/quality/pg10392_role_literal_plan.py": "e1af98abd59175d867d29b07a73d7b2e4c7112754603d1805ec0bfc4d9465ce8",
+      "tools/quality/pg10398_role_view_preflight.py": "31709d50a345f3e0843fa62ae0b4c6849885503eb3d81555b6bcc9605b486d56",
+      "tools/quality/pg11130_web_presentation_source_post.py": "734f2349530e4bf0ed3f3b4cac4633528ab49330c23aaa400b34de047901ed99",
+      "tools/quality/pg9906_user_query_oracle_source_post.py": "4f9bdaa17eea78a720c0f25b8af906f3f045fda590c8fea2a8868229403a98fa",
+      "tools/quality/pg9978_plain_core_quality_post.py": "c99cc753c6335c9f41e3eafe6a97c17521503739ba2cf80659b542a445dd48fa",
+      "tools/quality/public_java_digest_provenance.py": "dd47f8735a61ce849995633c3290a6ad047842ef3263829ce359db413778f7a0"
+    },
+    "provenance": "OBSERVED_SYS_ARGV_AND_ORIG_ARGV_NOT_RECONSTRUCTED"
+  },
+  "metadataNegativeVectors": 12,
+  "newAccepted": 0,
+  "planManifestSha256": "74d26591ad7a23dc45122158d1b8a4e1b5289f4aa86aba260d90b6262bea8d8f",
+  "productTestsExecuted": 0,
+  "referencesReplaced": 44,
+  "sourceBefore": "5fce2af667d8d5cdd9b67da9b02080b105848c28",
+  "sourceChanges": [
+    {
+      "beforeSha256": "a66833eecc7a1d633bce0fa52ba8ca71ed73f5fec6b858f8de248158732f251e",
+      "constants": [
+        {
+          "id": "PMD-07706",
+          "literal": "\"#login-username\"",
+          "name": "USERNAME_INPUT_SELECTOR",
+          "references": 4
+        },
+        {
+          "id": "PMD-07707",
+          "literal": "\"#login-password\"",
+          "name": "PASSWORD_INPUT_SELECTOR",
+          "references": 5
+        }
+      ],
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/controller/LoginControllerTest.java",
+      "sha256": "5255b728adf851b400649c9f0e9e107d9b8059df4e7a656cbbc6470c01e80a4d"
+    },
+    {
+      "beforeSha256": "ac8eb5f5bc668edac20e64bc6a7b42a6d938022db4a17e1041becdcc633773af",
+      "constants": [
+        {
+          "id": "PMD-08686",
+          "literal": "\"GET\"",
+          "name": "GET_METHOD",
+          "references": 10
+        }
+      ],
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/SavedRequestTargetTest.java",
+      "sha256": "55fd1ec36df80877e8181e80a53696b39282ef34007ea5b64d0fb19d2859d288"
+    },
+    {
+      "beforeSha256": "51673852978d9af185f00b64b26dcf6574c166609feb0177dd80e714ec52e243",
+      "constants": [
+        {
+          "id": "PMD-08706",
+          "literal": "\".requestId\"",
+          "name": "REQUEST_ID_ATTRIBUTE_SUFFIX",
+          "references": 5
+        }
+      ],
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/WebRequestIdentityConsistencyTest.java",
+      "sha256": "08d59588104456e4f6b20f35166c9b8e899ae12cb08031ff2bffd5a70f419864"
+    },
+    {
+      "beforeSha256": "20fb4628c791d9fb805b1e3257e9c8c3d4709e0b73ca57177a5e6e56aff9731c",
+      "constants": [
+        {
+          "id": "PMD-08707",
+          "literal": "\"/login\"",
+          "name": "LOGIN_PATH",
+          "references": 4
+        },
+        {
+          "id": "PMD-08708",
+          "literal": "\"ERROR\"",
+          "name": "ERROR_OPERATION",
+          "references": 4
+        },
+        {
+          "id": "PMD-08709",
+          "literal": "\"REDIRECT\"",
+          "name": "REDIRECT_OPERATION",
+          "references": 4
+        },
+        {
+          "id": "PMD-08710",
+          "literal": "\"STREAM\"",
+          "name": "STREAM_OPERATION",
+          "references": 4
+        },
+        {
+          "id": "PMD-08711",
+          "literal": "\"WRITER\"",
+          "name": "WRITER_OPERATION",
+          "references": 4
+        }
+      ],
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/WebSecurityHeaderTest.java",
+      "sha256": "bbf59e0422e5bb87be5a24cd59e3da555a9636658ace6126c45c87d667011d8c"
+    }
+  ]
+}
