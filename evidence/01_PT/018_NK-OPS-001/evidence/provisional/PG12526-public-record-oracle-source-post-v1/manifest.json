@@ -1,0 +1,63 @@
+{
+  "actualExit": 0,
+  "allMainAndOtherInputsPreserved": true,
+  "allOtherOriginalTokensRestored": true,
+  "approvedNewMethodTokenSha256": {
+    "diagnosticRoots": "e33c59ebe630dc0469864d417c07a5009aace75660720fc6c54fb818c71c9fcf",
+    "obsdata003ConfigurationAndJournalDiagnosticsHideIndependentPublicCanaries": "02979ab9f7220194df9218a2b53fe37ae1138885d725804832c94f1bce3a5680",
+    "obsdata004NonNullConfigurationValuesRejectEachMissingFieldBeforeOwnership": "0d9e580293068f4b9dc227d321fe43d08c64314bb4d8611848ca834f843922f5"
+  },
+  "coverage": null,
+  "expectedMethods": [
+    "obsdata001FactsRetainPublicInputsButDiagnosticNeverRendersYamlOrBinding",
+    "obsdata002BrokerWrapperRetainsImmutablePublicDataButDiagnosticHasNoNestedDetails",
+    "obsdata003ConfigurationAndJournalDiagnosticsHideIndependentPublicCanaries",
+    "obsdata004NonNullConfigurationValuesRejectEachMissingFieldBeforeOwnership"
+  ],
+  "goldenNegativeVectors": 3,
+  "independentGoldenSha256": "fe1c39e063927025f0514362cea38c1f679815f78f4aff006a875b54c00ed628",
+  "invocation": {
+    "actualPythonCommand": [
+      "/usr/bin/python3",
+      "-B",
+      "tools/quality/pg12526_public_record_oracle_source_post.py"
+    ],
+    "arbitraryArgumentsRecorded": false,
+    "entrypointPath": "tools/quality/pg12526_public_record_oracle_source_post.py",
+    "entrypointSha256": "0530434f2e71b0c9db9d8a73140f3ea8beb834be3e40a468fa954494423cb7ae",
+    "helperPath": "tools/quality/host_tool_invocation.py",
+    "helperSha256": "85d616a3db4ff47f4c95ae2e0dd57954bc2b09f28b8f2a685b986e5621545c46",
+    "libraryPath": "tools/quality/pg12526_public_record_oracle_source_post.py",
+    "librarySha256": "0530434f2e71b0c9db9d8a73140f3ea8beb834be3e40a468fa954494423cb7ae",
+    "loadedProjectPythonSources": {
+      "tools/quality/g07_host_class_provenance_inputs.py": "a676cb3e4145177c3c243722d737592ce7d44c3f29cfe4f670662ef7651f046b",
+      "tools/quality/host_tool_invocation.py": "85d616a3db4ff47f4c95ae2e0dd57954bc2b09f28b8f2a685b986e5621545c46",
+      "tools/quality/pg11370_source_constructor_owner_audit.py": "128afa8404d7746b9a5b41a5b3e9430744c24894705d20d25be8a38ccb853bca",
+      "tools/quality/pg12526_public_record_oracle_source_post.py": "0530434f2e71b0c9db9d8a73140f3ea8beb834be3e40a468fa954494423cb7ae",
+      "tools/quality/public_java_digest_provenance.py": "dd47f8735a61ce849995633c3290a6ad047842ef3263829ce359db413778f7a0"
+    },
+    "provenance": "OBSERVED_SYS_ARGV_AND_ORIG_ARGV_NOT_RECONSTRUCTED"
+  },
+  "metadataNegativeVectors": 16,
+  "newAccepted": 0,
+  "newMissingFieldVectors": 7,
+  "newTestIds": [
+    "PT-OPS-OBSDATA-003",
+    "PT-OPS-OBSDATA-004"
+  ],
+  "originalMethods": [
+    "obsdata001FactsRetainPublicInputsButDiagnosticNeverRendersYamlOrBinding",
+    "obsdata002BrokerWrapperRetainsImmutablePublicDataButDiagnosticHasNoNestedDetails"
+  ],
+  "planManifestSha256": "c6d8ebd9aaf16f7f0edd1c9db95359e9d96d4c49eb6d56520f4899d1bd17de28",
+  "productTestsExecuted": 0,
+  "sourceBefore": "c099786934c864f31a6fb520184366c22c84f6ea",
+  "sourceChanges": [
+    {
+      "beforeSha256": "644e7f71d3e8dc2c79aafd1d860b8b98afa067ddf67fdd1a2088b726933cb5ce",
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/ObservationValueRedactionTest.java",
+      "sha256": "b0659ff613078fd893ca30bf263b3d372d99dde987f5475a14f84c409a76ee77"
+    }
+  ],
+  "sourceMetadataNegativeVectors": 13
+}
