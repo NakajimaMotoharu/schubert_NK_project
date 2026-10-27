@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pmd xmlns="http://pmd.sourceforge.net/report/2.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pmd.sourceforge.net/report/2.0.0 https://pmd.github.io/schema/report_2_0_0.xsd" version="7.28.0" timestamp="2026-10-27T17:25:37.199">
+<file name="/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/AsyncJobMetricCollectorTest.java">
+<violation beginline="186" endline="186" begincolumn="13" endcolumn="46" rule="UseProperClassLoader" ruleset="Error Prone" package="dev.codex.schubert.nk.api.monitoring" class="AsyncJobMetricCollectorTest" method="gate" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader" priority="3">
+In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.
+</violation>
+<violation beginline="210" endline="210" begincolumn="20" endcolumn="51" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.api.monitoring" class="AsyncJobMetricCollectorTest" method="asyncConn006OwnerSerializesReadCloseAndPublication" variable="pool" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="219" endline="219" begincolumn="17" endcolumn="97" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.api.monitoring" class="AsyncJobMetricCollectorTest" method="asyncConn006OwnerSerializesReadCloseAndPublication" variable="one" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="223" endline="227" begincolumn="13" endcolumn="19" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.api.monitoring" class="AsyncJobMetricCollectorTest" method="asyncConn006OwnerSerializesReadCloseAndPublication" variable="two" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="247" endline="247" begincolumn="20" endcolumn="51" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.api.monitoring" class="AsyncJobMetricCollectorTest" method="asyncConn007ParallelCallersAndIndependentOwnersHaveNoCrossState" variable="pool" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="265" endline="265" begincolumn="20" endcolumn="41" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.api.monitoring" class="AsyncJobMetricCollectorTest" method="asyncConn007ParallelCallersAndIndependentOwnersHaveNoCrossState" variable="actual" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+</file>
+<file name="/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/OutboxMetricCollectorTest.java">
+<violation beginline="224" endline="224" begincolumn="13" endcolumn="46" rule="UseProperClassLoader" ruleset="Error Prone" package="dev.codex.schubert.nk.api.monitoring" class="OutboxMetricCollectorTest" method="gate" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader" priority="3">
+In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.
+</violation>
+<violation beginline="248" endline="248" begincolumn="20" endcolumn="51" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.api.monitoring" class="OutboxMetricCollectorTest" method="outboxConn006OneOwnerSerializesReadCloseAndBothPublications" variable="pool" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="258" endline="258" begincolumn="11" endcolumn="98" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.api.monitoring" class="OutboxMetricCollectorTest" method="outboxConn006OneOwnerSerializesReadCloseAndBothPublications" variable="one" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="262" endline="267" begincolumn="13" endcolumn="19" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.api.monitoring" class="OutboxMetricCollectorTest" method="outboxConn006OneOwnerSerializesReadCloseAndBothPublications" variable="two" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="288" endline="288" begincolumn="20" endcolumn="51" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.api.monitoring" class="OutboxMetricCollectorTest" method="outboxConn007ParallelCallersAndSeparateOwnersCannotCrossState" variable="pool" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="305" endline="305" begincolumn="21" endcolumn="42" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.api.monitoring" class="OutboxMetricCollectorTest" method="outboxConn007ParallelCallersAndSeparateOwnersCannotCrossState" variable="results" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+</file>
+</pmd>

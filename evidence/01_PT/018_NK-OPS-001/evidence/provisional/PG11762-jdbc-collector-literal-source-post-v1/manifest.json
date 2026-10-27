@@ -1,0 +1,143 @@
+{
+  "actualExit": 0,
+  "allMainAndOtherInputsPreserved": true,
+  "allOriginalOracleTokensRestored": true,
+  "coverage": null,
+  "effortPercent": null,
+  "externalActions": 0,
+  "extractedPrefixAssignments": 1,
+  "invocation": {
+    "actualPythonCommand": [
+      "/usr/bin/python3",
+      "-B",
+      "tools/quality/pg11762_jdbc_collector_literal_source_post.py"
+    ],
+    "arbitraryArgumentsRecorded": false,
+    "entrypointPath": "tools/quality/pg11762_jdbc_collector_literal_source_post.py",
+    "entrypointSha256": "6d35e7616af7756e074c66e8df0360462b7bb02f75ce20e12b13204632df4c7f",
+    "helperPath": "tools/quality/host_tool_invocation.py",
+    "helperSha256": "85d616a3db4ff47f4c95ae2e0dd57954bc2b09f28b8f2a685b986e5621545c46",
+    "libraryPath": "tools/quality/pg11762_jdbc_collector_literal_source_post.py",
+    "librarySha256": "6d35e7616af7756e074c66e8df0360462b7bb02f75ce20e12b13204632df4c7f",
+    "loadedProjectPythonSources": {
+      "tools/quality/classfile_code_metadata.py": "2227e1e8df1ff91b606f094c7ee64366023273ca740d4d47126ed0928190e2f0",
+      "tools/quality/g07_host_class_provenance_inputs.py": "a676cb3e4145177c3c243722d737592ce7d44c3f29cfe4f670662ef7651f046b",
+      "tools/quality/host_tool_invocation.py": "85d616a3db4ff47f4c95ae2e0dd57954bc2b09f28b8f2a685b986e5621545c46",
+      "tools/quality/pg10130_uid_oracle_preflight.py": "e80cb1d6d45d4e4c0cdb3cb792e0638119d936403de5c3e141429d338485758a",
+      "tools/quality/pg10332_result_profile_oracle_plan.py": "82c9b4f57dd517c1dbee639dbf4955c316beb89216cb9a8a66e78e0b9a322ad4",
+      "tools/quality/pg10339_result_profile_oracle_post_v2.py": "42f86287f5236d2ef1a2e10f54f5b0634e799a4e866b15eaf6738336a4ebabb0",
+      "tools/quality/pg10392_role_literal_plan.py": "e1af98abd59175d867d29b07a73d7b2e4c7112754603d1805ec0bfc4d9465ce8",
+      "tools/quality/pg10398_role_view_preflight.py": "31709d50a345f3e0843fa62ae0b4c6849885503eb3d81555b6bcc9605b486d56",
+      "tools/quality/pg11104_web_pure_value_source_post.py": "2713a232d4143cf94c39b865936368707d115c19649a469de35dfbd22ad70967",
+      "tools/quality/pg11762_jdbc_collector_literal_source_post.py": "6d35e7616af7756e074c66e8df0360462b7bb02f75ce20e12b13204632df4c7f",
+      "tools/quality/pg9906_user_query_oracle_source_post.py": "4f9bdaa17eea78a720c0f25b8af906f3f045fda590c8fea2a8868229403a98fa",
+      "tools/quality/pg9978_plain_core_quality_post.py": "c99cc753c6335c9f41e3eafe6a97c17521503739ba2cf80659b542a445dd48fa",
+      "tools/quality/public_java_digest_provenance.py": "dd47f8735a61ce849995633c3290a6ad047842ef3263829ce359db413778f7a0"
+    },
+    "provenance": "OBSERVED_SYS_ARGV_AND_ORIG_ARGV_NOT_RECONSTRUCTED"
+  },
+  "metadataNegativeVectors": 34,
+  "newAccepted": 0,
+  "originalMethods": 16,
+  "planManifestSha256": "18595a88e2013ad1724526cc3947fdc027958da2737ad23f83189549e53cb954",
+  "productTestsExecuted": 0,
+  "sourceBefore": "6c96b262e88d9863ffb1e883780a249eaa11be27",
+  "sourceChanges": [
+    {
+      "assignmentExtracted": true,
+      "beforeSha256": "017e9477962e5d88544371ebe2bc39e0ac324ecabdf84dacbd3330a4564f7811",
+      "constants": [
+        {
+          "id": "PMD-02099",
+          "literal": "\"RECEIVED\"",
+          "name": "RECEIVED_STATE",
+          "references": 8
+        },
+        {
+          "id": "PMD-02100",
+          "literal": "\"PROCESSING\"",
+          "name": "PROCESSING_STATE",
+          "references": 4
+        },
+        {
+          "id": "PMD-02101",
+          "literal": "\"COMPLETED\"",
+          "name": "COMPLETED_STATE",
+          "references": 6
+        },
+        {
+          "id": "PMD-02102",
+          "literal": "\"ERROR\"",
+          "name": "ERROR_VALUE",
+          "references": 9
+        },
+        {
+          "id": "PMD-02103",
+          "literal": "\"CANCELLED\"",
+          "name": "CANCELLED_STATE",
+          "references": 5
+        },
+        {
+          "id": "PMD-02104",
+          "literal": "\"state\"",
+          "name": "STATE_LABEL",
+          "references": 4
+        },
+        {
+          "id": "PMD-02105",
+          "literal": "\"DEBUG\"",
+          "name": "DEBUG_MODE",
+          "references": 10
+        }
+      ],
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/AsyncJobMetricCollectorTest.java",
+      "sha256": "e91c368880999ba74d2157210ecaa3c80f4388ee80a4d94f1862a0efc1c973ed"
+    },
+    {
+      "assignmentExtracted": false,
+      "beforeSha256": "8d8ad701907d0ad6a3247a7ae2d2a9943a2d6235f8ca94075691feb55e1c54be",
+      "constants": [
+        {
+          "id": "PMD-02262",
+          "literal": "\"nk_outbox_rows\"",
+          "name": "OUTBOX_ROWS_METRIC",
+          "references": 6
+        },
+        {
+          "id": "PMD-02263",
+          "literal": "\"nk_outbox_oldest_seconds\"",
+          "name": "OUTBOX_AGES_METRIC",
+          "references": 8
+        },
+        {
+          "id": "PMD-02264",
+          "literal": "\"PENDING\"",
+          "name": "PENDING_STATUS",
+          "references": 14
+        },
+        {
+          "id": "PMD-02265",
+          "literal": "\"SENT\"",
+          "name": "SENT_STATUS",
+          "references": 5
+        },
+        {
+          "id": "PMD-02266",
+          "literal": "\"ERROR\"",
+          "name": "ERROR_VALUE",
+          "references": 9
+        },
+        {
+          "id": "PMD-02267",
+          "literal": "\"DEBUG\"",
+          "name": "DEBUG_MODE",
+          "references": 10
+        }
+      ],
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/OutboxMetricCollectorTest.java",
+      "sha256": "2c7b20b6944018b912d5f6ad0419e069b93c4a1d704d3958609043464f9d0bb4"
+    }
+  ],
+  "stringConstants": 13,
+  "stringReferences": 98
+}
