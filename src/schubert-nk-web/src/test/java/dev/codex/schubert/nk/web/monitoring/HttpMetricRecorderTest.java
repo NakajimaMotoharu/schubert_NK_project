@@ -36,8 +36,16 @@ import org.junit.jupiter.api.Test;
 
 /** Actual owned Micrometer registry, fixed metadata/vectors and no HTTP/DB/target. Spec1573. */
 class HttpMetricRecorderTest {
+  private static final String SERVICE_LABEL = "service";
+  private static final String WEB_SERVICE_NAME = "WEB";
+  private static final String ROUTE_LABEL = "route";
+  private static final String LOGIN_PATH = "/login";
+  private static final String GET_METHOD = "GET";
+  private static final String DEBUG_MODE = "DEBUG";
+  private static final String SUCCESS_STATUS_LABEL = "2xx";
+  private static final String SEARCH_PATH = "/search";
   private static final String REQUESTS = "nk_http_requests_total";
-  private static final String DURATION = "nk_http_request_duration_seconds";
+  private static final String DURATION_METRIC = "nk_http_request_duration_seconds";
   private static final double[] BOUNDS = {
     50_000_000,
     100_000_000,
@@ -140,12 +148,23 @@ class HttpMetricRecorderTest {
       SimpleMeterRegistry registry, String route, String method, String status) {
     return registry
         .get(REQUESTS)
-        .tags("service", "WEB", "route", route, "method", method, "status_class", status)
+        .tags(
+            SERVICE_LABEL,
+            WEB_SERVICE_NAME,
+            ROUTE_LABEL,
+            route,
+            "method",
+            method,
+            "status_class",
+            status)
         .counter();
   }
 
   private static Timer duration(SimpleMeterRegistry registry, String route) {
-    return registry.get(DURATION).tags("service", "WEB", "route", route).timer();
+    return registry
+        .get(DURATION_METRIC)
+        .tags(SERVICE_LABEL, WEB_SERVICE_NAME, ROUTE_LABEL, route)
+        .timer();
   }
 
   private static List<String> routes() throws Exception {
@@ -180,12 +199,12 @@ class HttpMetricRecorderTest {
     var counts = new HashMap<String, Integer>();
     for (var meter : gauges) {
       var id = meter.getId();
-      assertEquals(DURATION + ".histogram", id.getName());
+      assertEquals(DURATION_METRIC + ".histogram", id.getName());
       assertEquals(
-          Set.of("service", "route", "le"),
+          Set.of(SERVICE_LABEL, ROUTE_LABEL, "le"),
           id.getTags().stream().map(t -> t.getKey()).collect(java.util.stream.Collectors.toSet()));
-      assertEquals("WEB", id.getTag("service"));
-      String route = Objects.requireNonNull(id.getTag("route"));
+      assertEquals(WEB_SERVICE_NAME, id.getTag(SERVICE_LABEL));
+      String route = Objects.requireNonNull(id.getTag(ROUTE_LABEL));
       double boundary = Double.parseDouble(Objects.requireNonNull(id.getTag("le")));
       assertTrue(Double.isFinite(boundary));
       byRoute.computeIfAbsent(route, ignored -> new HashSet<>()).add(boundary);
@@ -203,7 +222,7 @@ class HttpMetricRecorderTest {
     try (var registry = new InspectingRegistry()) {
       var recorder = new HttpMetricRecorder(registry, "STANDARD");
       assertFalse(recorder.detailedMetricsRequested());
-      recorder.record("/login", "GET", 200, 1_000_000_000);
+      recorder.record(LOGIN_PATH, GET_METHOD, 200, 1_000_000_000);
       assertTrue(registry.getMeters().isEmpty());
       assertEquals(0, registry.closes.get());
       assertFalse(registry.isClosed());
@@ -213,7 +232,7 @@ class HttpMetricRecorderTest {
   @Test
   void httpRec002ActualMeterNamesTagsAndNineSlos() throws Exception {
     try (var registry = new InspectingRegistry()) {
-      var recorder = new HttpMetricRecorder(registry, "DEBUG");
+      var recorder = new HttpMetricRecorder(registry, DEBUG_MODE);
       assertTrue(recorder.detailedMetricsRequested());
       assertRegistryShape(registry);
       assertEquals(
@@ -223,9 +242,9 @@ class HttpMetricRecorderTest {
               .count());
       assertEquals(35, registry.boundaries.size());
       for (var actual : registry.boundaries) assertArrayEquals(BOUNDS, actual, 0.0);
-      recorder.record("/login", "GET", 200, 1_000_000_000);
-      var counter = request(registry, "/login", "GET", "2xx");
-      var timer = duration(registry, "/login");
+      recorder.record(LOGIN_PATH, GET_METHOD, 200, 1_000_000_000);
+      var counter = request(registry, LOGIN_PATH, GET_METHOD, SUCCESS_STATUS_LABEL);
+      var timer = duration(registry, LOGIN_PATH);
       assertEquals(1.0, counter.count());
       assertEquals(1, timer.count());
       assertEquals(1.0, timer.totalTime(TimeUnit.SECONDS), 0.0);
@@ -242,12 +261,12 @@ class HttpMetricRecorderTest {
   @Test
   void httpRec003WholeIndependentMatrixHasExactCounts() throws Exception {
     try (var registry = new InspectingRegistry()) {
-      var recorder = new HttpMetricRecorder(registry, "DEBUG");
+      var recorder = new HttpMetricRecorder(registry, DEBUG_MODE);
       String[] methods = {
-        "GET", "HEAD", "POST", "PUT", "PATCH", "DELETE", "OPTIONS", "TRACE", "CONNECT", "OTHER"
+        GET_METHOD, "HEAD", "POST", "PUT", "PATCH", "DELETE", "OPTIONS", "TRACE", "CONNECT", "OTHER"
       };
       int[] statuses = {100, 200, 300, 400, 500};
-      String[] groups = {"1xx", "2xx", "3xx", "4xx", "5xx"};
+      String[] groups = {"1xx", SUCCESS_STATUS_LABEL, "3xx", "4xx", "5xx"};
       var routes = routes();
       assertEquals(35, routes.size());
       for (String route : routes)
@@ -267,14 +286,14 @@ class HttpMetricRecorderTest {
   @Test
   void httpRec004UnknownInputsCannotCreateSeries() throws Exception {
     try (var registry = new InspectingRegistry()) {
-      var recorder = new HttpMetricRecorder(registry, "DEBUG");
+      var recorder = new HttpMetricRecorder(registry, DEBUG_MODE);
       for (int index = 0; index < 10_000; index++)
         recorder.record(
             "/questions/" + index + "?actor=PT_FIXTURE_ONLY",
             "RAW_FIXTURE_" + index,
             200,
             1_000_000);
-      assertEquals(10_000.0, request(registry, "/**", "OTHER", "2xx").count());
+      assertEquals(10_000.0, request(registry, "/**", "OTHER", SUCCESS_STATUS_LABEL).count());
       assertEquals(10_000, duration(registry, "/**").count());
       assertRegistryShape(registry);
       for (var meter : registry.getMeters())
@@ -292,30 +311,31 @@ class HttpMetricRecorderTest {
       assertThrows(NullPointerException.class, () -> new HttpMetricRecorder(registry, null));
       assertThrows(IllegalArgumentException.class, () -> new HttpMetricRecorder(registry, "debug"));
       assertTrue(registry.getMeters().isEmpty());
-      var recorder = new HttpMetricRecorder(registry, "DEBUG");
-      assertThrows(NullPointerException.class, () -> recorder.record(null, "GET", 200, 1));
+      var recorder = new HttpMetricRecorder(registry, DEBUG_MODE);
+      assertThrows(NullPointerException.class, () -> recorder.record(null, GET_METHOD, 200, 1));
       assertThrows(NullPointerException.class, () -> recorder.record("/", null, 200, 1));
-      assertThrows(IllegalArgumentException.class, () -> recorder.record("/", "GET", 99, 1));
-      assertThrows(IllegalArgumentException.class, () -> recorder.record("/", "GET", 600, 1));
+      assertThrows(IllegalArgumentException.class, () -> recorder.record("/", GET_METHOD, 99, 1));
+      assertThrows(IllegalArgumentException.class, () -> recorder.record("/", GET_METHOD, 600, 1));
       assertEquals(
           "invalid HTTP elapsed time",
-          assertThrows(IllegalArgumentException.class, () -> recorder.record("/", "GET", 200, -1))
+          assertThrows(
+                  IllegalArgumentException.class, () -> recorder.record("/", GET_METHOD, 200, -1))
               .getMessage());
       assertEquals(0, duration(registry, "/").count());
-      recorder.record("/", "GET", 100, 0);
-      assertEquals(1.0, request(registry, "/", "GET", "1xx").count());
+      recorder.record("/", GET_METHOD, 100, 0);
+      assertEquals(1.0, request(registry, "/", GET_METHOD, "1xx").count());
       assertEquals(0.0, duration(registry, "/").totalTime(TimeUnit.NANOSECONDS));
-      recorder.record("/login", "GET", 599, Long.MAX_VALUE);
-      assertEquals(1.0, request(registry, "/login", "GET", "5xx").count());
-      assertEquals(1, duration(registry, "/login").count());
+      recorder.record(LOGIN_PATH, GET_METHOD, 599, Long.MAX_VALUE);
+      assertEquals(1.0, request(registry, LOGIN_PATH, GET_METHOD, "5xx").count());
+      assertEquals(1, duration(registry, LOGIN_PATH).count());
       assertEquals(
           9_223_372_036_854_776_000.0,
-          duration(registry, "/login").totalTime(TimeUnit.NANOSECONDS),
+          duration(registry, LOGIN_PATH).totalTime(TimeUnit.NANOSECONDS),
           1024.0);
     }
     try (var registry = new InspectingRegistry()) {
       var disabled = new HttpMetricRecorder(registry, "STANDARD");
-      assertThrows(IllegalArgumentException.class, () -> disabled.record("/", "GET", 200, -1));
+      assertThrows(IllegalArgumentException.class, () -> disabled.record("/", GET_METHOD, 200, -1));
       assertTrue(registry.getMeters().isEmpty());
     }
   }
@@ -328,15 +348,18 @@ class HttpMetricRecorderTest {
     for (Throwable failure : List.of(nested, new AssertionError("owned fixture fatal")))
       for (boolean counter : new boolean[] {false, true})
         try (var registry = new FaultRegistry(counter)) {
-          var recorder = new HttpMetricRecorder(registry, "DEBUG");
+          var recorder = new HttpMetricRecorder(registry, DEBUG_MODE);
           registry.arm(failure);
           Throwable actual =
               assertThrows(
-                  Throwable.class, () -> recorder.record("/login", "GET", 200, 1_000_000_000));
+                  Throwable.class,
+                  () -> recorder.record(LOGIN_PATH, GET_METHOD, 200, 1_000_000_000));
           assertSame(failure, actual);
           assertEquals(1, registry.attempts.get());
-          assertEquals(counter ? 0.0 : 1.0, request(registry, "/login", "GET", "2xx").count());
-          assertEquals(0, duration(registry, "/login").count());
+          assertEquals(
+              counter ? 0.0 : 1.0,
+              request(registry, LOGIN_PATH, GET_METHOD, SUCCESS_STATUS_LABEL).count());
+          assertEquals(0, duration(registry, LOGIN_PATH).count());
           assertEquals(0, registry.closes.get());
           assertFalse(registry.isClosed());
         }
@@ -345,24 +368,26 @@ class HttpMetricRecorderTest {
   @Test
   void httpRec007ConcurrentActualProviderCounts() throws Exception {
     try (var registry = new InspectingRegistry()) {
-      var recorder = new HttpMetricRecorder(registry, "DEBUG");
-      var executor = Executors.newFixedThreadPool(4);
-      try {
-        var tasks = new ArrayList<Callable<Boolean>>();
-        for (int index = 0; index < 64; index++)
-          tasks.add(
-              () -> {
-                recorder.record("/search", "GET", 200, 1_000_000_000);
-                return true;
-              });
-        for (var future : executor.invokeAll(tasks, 10, TimeUnit.SECONDS)) assertTrue(future.get());
-      } finally {
-        executor.shutdownNow();
-        assertTrue(executor.awaitTermination(10, TimeUnit.SECONDS));
+      var recorder = new HttpMetricRecorder(registry, DEBUG_MODE);
+      try (var executor = Executors.newFixedThreadPool(4)) {
+        try {
+          var tasks = new ArrayList<Callable<Boolean>>();
+          for (int index = 0; index < 64; index++)
+            tasks.add(
+                () -> {
+                  recorder.record(SEARCH_PATH, GET_METHOD, 200, 1_000_000_000);
+                  return true;
+                });
+          for (var future : executor.invokeAll(tasks, 10, TimeUnit.SECONDS))
+            assertTrue(future.get());
+        } finally {
+          executor.shutdownNow();
+          assertTrue(executor.awaitTermination(10, TimeUnit.SECONDS));
+        }
       }
-      assertEquals(64.0, request(registry, "/search", "GET", "2xx").count());
-      assertEquals(64, duration(registry, "/search").count());
-      assertEquals(64.0, duration(registry, "/search").totalTime(TimeUnit.SECONDS), 0.0);
+      assertEquals(64.0, request(registry, SEARCH_PATH, GET_METHOD, SUCCESS_STATUS_LABEL).count());
+      assertEquals(64, duration(registry, SEARCH_PATH).count());
+      assertEquals(64.0, duration(registry, SEARCH_PATH).totalTime(TimeUnit.SECONDS), 0.0);
     }
   }
 
@@ -372,8 +397,8 @@ class HttpMetricRecorderTest {
     try {
       var external = registry.counter("fixture.external");
       external.increment(7);
-      var recorder = new HttpMetricRecorder(registry, "DEBUG");
-      recorder.record("/login", "POST", 302, 1_000_000_000);
+      var recorder = new HttpMetricRecorder(registry, DEBUG_MODE);
+      recorder.record(LOGIN_PATH, "POST", 302, 1_000_000_000);
       assertEquals(7.0, external.count());
       assertSame(external, registry.get("fixture.external").counter());
       assertEquals(0, registry.closes.get());
@@ -390,15 +415,23 @@ class HttpMetricRecorderTest {
     for (boolean timer : new boolean[] {false, true})
       try (var registry = new InspectingRegistry()) {
         if (timer)
-          Gauge.builder(DURATION, () -> 1.0)
-              .tags("service", "WEB", "route", "/")
+          Gauge.builder(DURATION_METRIC, () -> 1.0)
+              .tags(SERVICE_LABEL, WEB_SERVICE_NAME, ROUTE_LABEL, "/")
               .register(registry);
         else
           Gauge.builder(REQUESTS, () -> 1.0)
-              .tags("service", "WEB", "route", "/", "method", "GET", "status_class", "1xx")
+              .tags(
+                  SERVICE_LABEL,
+                  WEB_SERVICE_NAME,
+                  ROUTE_LABEL,
+                  "/",
+                  "method",
+                  GET_METHOD,
+                  "status_class",
+                  "1xx")
               .register(registry);
         assertThrows(
-            IllegalArgumentException.class, () -> new HttpMetricRecorder(registry, "DEBUG"));
+            IllegalArgumentException.class, () -> new HttpMetricRecorder(registry, DEBUG_MODE));
         assertEquals(timer ? 1 : 11, registry.getMeters().size());
         assertFalse(registry.isClosed());
         assertEquals(0, registry.closes.get());
@@ -412,9 +445,9 @@ class HttpMetricRecorderTest {
             new long[] {0, 1, Long.MAX_VALUE, Long.MAX_VALUE, 1},
             new long[] {Long.MAX_VALUE, Long.MAX_VALUE, 1, 0, 1})) {
       try (var registry = new InspectingRegistry()) {
-        var recorder = new HttpMetricRecorder(registry, "DEBUG");
-        for (long value : values) recorder.record("/search", "GET", 200, value);
-        var metric = duration(registry, "/search");
+        var recorder = new HttpMetricRecorder(registry, DEBUG_MODE);
+        for (long value : values) recorder.record(SEARCH_PATH, GET_METHOD, 200, value);
+        var metric = duration(registry, SEARCH_PATH);
         // Only self-owned literal-fixture numbers; never HTTP values, exception text or
         // identifiers.
         System.out.println(
@@ -425,7 +458,7 @@ class HttpMetricRecorderTest {
                 + ";maxSeconds="
                 + metric.max(TimeUnit.SECONDS));
         assertEquals(5, metric.count());
-        assertEquals(5, request(registry, "/search", "GET", "2xx").count());
+        assertEquals(5, request(registry, SEARCH_PATH, GET_METHOD, SUCCESS_STATUS_LABEL).count());
         assertEquals(1.8446744073709553E10, metric.totalTime(TimeUnit.SECONDS));
         assertEquals(9.223372036854776E9, metric.max(TimeUnit.SECONDS));
         Map<Double, Double> counts = new HashMap<>();
