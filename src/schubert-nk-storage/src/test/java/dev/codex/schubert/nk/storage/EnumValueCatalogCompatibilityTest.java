@@ -10,6 +10,11 @@ import org.junit.jupiter.api.Test;
 
 /** BUG1478/YKT1237; SS342/343; PT-F03-ENUM-STO001: identifiers only, no credential access. */
 final class EnumValueCatalogCompatibilityTest {
+  private static final String API_NAME = "API";
+  private static final String WEB_NAME = "WEB";
+  private static final String PASSWORD_KIND = "PASSWORD";
+  private static final String KEY_KIND = "KEY";
+
   @Test
   void sto001FixedCredentialCatalogKeepsNamesOwnersKindsAndOrdering() {
     assertEquals(
@@ -39,20 +44,22 @@ final class EnumValueCatalogCompatibilityTest {
             "web-log-aes-current"),
         Arrays.stream(ServiceCredentialId.values()).map(ServiceCredentialId::fileName).toList());
     assertEquals(
-        List.of("API", "API", "API", "API", "API", "WEB", "WEB", "WEB", "WEB", "WEB"),
+        List.of(
+            API_NAME, API_NAME, API_NAME, API_NAME, API_NAME, WEB_NAME, WEB_NAME, WEB_NAME,
+            WEB_NAME, WEB_NAME),
         Arrays.stream(ServiceCredentialId.values()).map(value -> value.service().name()).toList());
     assertEquals(
         List.of(
-            "PASSWORD",
-            "PASSWORD",
-            "KEY",
-            "KEY",
-            "KEY",
-            "PASSWORD",
-            "PASSWORD",
-            "KEY",
-            "KEY",
-            "KEY"),
+            PASSWORD_KIND,
+            PASSWORD_KIND,
+            KEY_KIND,
+            KEY_KIND,
+            KEY_KIND,
+            PASSWORD_KIND,
+            PASSWORD_KIND,
+            KEY_KIND,
+            KEY_KIND,
+            KEY_KIND),
         Arrays.stream(ServiceCredentialId.values()).map(value -> value.kind().name()).toList());
     assertEquals(
         List.of(

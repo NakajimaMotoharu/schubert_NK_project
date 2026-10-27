@@ -9,6 +9,8 @@ import org.junit.jupiter.api.Test;
 
 /** BUG1478/YKT1237; SS331/332/341/343; PT-F03-ENUM-BAT001: no SQL or job execution. */
 final class EnumValueCatalogCompatibilityTest {
+  private static final String CLEAN_BATCH_RUN_NAME = "CLEAN_BATCH_RUN";
+
   @Test
   void bat001StepCleanupAndOutcomeCatalogsMatchIndependentTables() {
     assertEquals(
@@ -20,7 +22,7 @@ final class EnumValueCatalogCompatibilityTest {
             "CLEAN_SESSION",
             "CLEAN_INBOX_OUTBOX",
             "CLEAN_LOG",
-            "CLEAN_BATCH_RUN",
+            CLEAN_BATCH_RUN_NAME,
             "CLEAN_TRANSFER",
             "CLEAN_EXPIRY"),
         Arrays.stream(BatchStep.values()).map(Enum::name).toList());
@@ -61,10 +63,10 @@ final class EnumValueCatalogCompatibilityTest {
             "CLEAN_SESSION",
             "CLEAN_INBOX_OUTBOX",
             "CLEAN_LOG",
-            "CLEAN_BATCH_RUN",
-            "CLEAN_BATCH_RUN",
-            "CLEAN_BATCH_RUN",
-            "CLEAN_BATCH_RUN"),
+            CLEAN_BATCH_RUN_NAME,
+            CLEAN_BATCH_RUN_NAME,
+            CLEAN_BATCH_RUN_NAME,
+            CLEAN_BATCH_RUN_NAME),
         Arrays.stream(CleanupKind.values()).map(value -> value.step().name()).toList());
     assertEquals(
         List.of("SUCCESS", "WARNING"),
