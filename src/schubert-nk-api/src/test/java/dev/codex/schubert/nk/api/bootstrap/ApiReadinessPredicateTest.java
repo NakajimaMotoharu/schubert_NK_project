@@ -14,6 +14,11 @@ import org.junit.jupiter.api.Test;
 
 /** PT-OPS-API-HEALTH001..003: literal truth/ordered sampling oracle, not native admission. */
 final class ApiReadinessPredicateTest {
+  private static final String CONSUMER_GROUPS_STEP = "groups";
+  private static final String STOP_STEP = "stop";
+  private static final String OUTBOX_STEP = "outbox";
+  private static final String CONSUMERS_STEP = "consumers";
+
   @Test
   void health001LiteralTruthTablesAndShortCircuitOrder() {
     // Last value is the independently enumerated expected result, never a production calculation.
@@ -25,22 +30,22 @@ final class ApiReadinessPredicateTest {
     };
     List<List<String>> order =
         List.of(
-            List.of("groups"),
-            List.of("groups"),
-            List.of("groups"),
-            List.of("groups"),
-            List.of("groups", "stop", "outbox"),
-            List.of("groups", "stop", "outbox"),
-            List.of("groups", "stop"),
-            List.of("groups", "stop"));
+            List.of(CONSUMER_GROUPS_STEP),
+            List.of(CONSUMER_GROUPS_STEP),
+            List.of(CONSUMER_GROUPS_STEP),
+            List.of(CONSUMER_GROUPS_STEP),
+            List.of(CONSUMER_GROUPS_STEP, STOP_STEP, OUTBOX_STEP),
+            List.of(CONSUMER_GROUPS_STEP, STOP_STEP, OUTBOX_STEP),
+            List.of(CONSUMER_GROUPS_STEP, STOP_STEP),
+            List.of(CONSUMER_GROUPS_STEP, STOP_STEP));
     for (int i = 0; i < management.length; i++) {
       boolean[] row = management[i];
       var calls = new ArrayList<String>();
       var predicate =
           ApiProcessMain.applicationReadiness(
-              sample(calls, "groups", row[0]),
-              sample(calls, "stop", row[1]),
-              sample(calls, "outbox", row[2]));
+              sample(calls, CONSUMER_GROUPS_STEP, row[0]),
+              sample(calls, STOP_STEP, row[1]),
+              sample(calls, OUTBOX_STEP, row[2]));
       assertEquals(List.of(), calls, "factory performs no sampling");
       assertEquals(row[3], predicate.getAsBoolean());
       assertEquals(order.get(i), calls);
@@ -50,16 +55,16 @@ final class ApiReadinessPredicateTest {
     };
     List<List<String>> runtimeOrder =
         List.of(
-            List.of("consumers"),
-            List.of("consumers"),
-            List.of("consumers", "outbox"),
-            List.of("consumers", "outbox"));
+            List.of(CONSUMERS_STEP),
+            List.of(CONSUMERS_STEP),
+            List.of(CONSUMERS_STEP, OUTBOX_STEP),
+            List.of(CONSUMERS_STEP, OUTBOX_STEP));
     for (int i = 0; i < runtime.length; i++) {
       boolean[] row = runtime[i];
       var calls = new ArrayList<String>();
       var predicate =
           ApiProcessMain.runtimeReadiness(
-              sample(calls, "consumers", row[0]), sample(calls, "outbox", row[1]));
+              sample(calls, CONSUMERS_STEP, row[0]), sample(calls, OUTBOX_STEP, row[1]));
       assertEquals(List.of(), calls);
       assertEquals(row[2], predicate.getAsBoolean());
       assertEquals(runtimeOrder.get(i), calls);

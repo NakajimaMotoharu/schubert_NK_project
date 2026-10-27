@@ -12,6 +12,7 @@ import org.junit.jupiter.api.Test;
 
 /** PG238/PT-SCR-132; production POM runtime dependency, not the JUnit test classpath. */
 final class WebRuntimeDependencyTest {
+  private static final String RUNTIME_SCOPE_XML = "<scope>runtime</scope>";
   private static final Pattern DEPENDENCY =
       Pattern.compile("<dependency>(.*?)</dependency>", Pattern.DOTALL);
 
@@ -26,20 +27,18 @@ final class WebRuntimeDependencyTest {
         AssertionError.class,
         () ->
             assertRuntimeDriver(
-                pom.replace(
-                    block, block.replace("<scope>runtime</scope>", "<scope>test</scope>"))));
+                pom.replace(block, block.replace(RUNTIME_SCOPE_XML, "<scope>test</scope>"))));
     for (String scope : new String[] {"compile", "system"}) {
       assertThrows(
           AssertionError.class,
           () ->
               assertRuntimeDriver(
                   pom.replace(
-                      block,
-                      block.replace("<scope>runtime</scope>", "<scope>" + scope + "</scope>"))));
+                      block, block.replace(RUNTIME_SCOPE_XML, "<scope>" + scope + "</scope>"))));
     }
     assertThrows(
         AssertionError.class,
-        () -> assertRuntimeDriver(pom.replace(block, block.replace("<scope>runtime</scope>", ""))));
+        () -> assertRuntimeDriver(pom.replace(block, block.replace(RUNTIME_SCOPE_XML, ""))));
     assertThrows(
         AssertionError.class,
         () -> assertRuntimeDriver(pom.replace(block, block.replace("42.7.13", "42.7.12"))));
@@ -62,6 +61,6 @@ final class WebRuntimeDependencyTest {
   private static void assertRuntimeDriver(String pom) {
     String block = postgresBlock(pom);
     assertTrue(block.contains("<version>42.7.13</version>"), "SS-approved JDBC version");
-    assertTrue(block.contains("<scope>runtime</scope>"), "Web production runtime driver");
+    assertTrue(block.contains(RUNTIME_SCOPE_XML), "Web production runtime driver");
   }
 }
