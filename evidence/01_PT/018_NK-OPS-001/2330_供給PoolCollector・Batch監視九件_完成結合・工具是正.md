@@ -1,0 +1,9 @@
+# 供給PoolCollector・Batch監視九件 完成結合・工具是正追補
+
+2026-10-28 02:38 JST。2328/2329は固定済みのため上書きしない。完成結合PG12395-pool-batch-completion-v2/manifest.json SHA256 a7ffb9bb842d6c0a732875fa064202e1063218c1260f313563c321c687f62ca0、終了0。source14198cb1878ec73319511ba1067133992d335e63、原38・全Main1843同byte・十Test物理/Code/debug差分・単一exec/CRC・局所八Main132L33M8C30B miss0・全artifact未100・trace/残26を同source結合した。旧exec合算/製品試験再演0。
+
+2329の「新工具失敗0」はその時点までの結果であり、完成結合で一件の工具不備BUG1969/YKT1717を発見したため、群最終値は1と訂正する。旧12394 entry4ca5a0b3c1e53b98aed5e6d7de87201175592190edaa22fb35e3d5c3a6941cac/lint0/body1/OUT無しを保全。前normal path12352に旧12312のdigest96605de...を残した不整合でread_checkedが拒否した。新12395v2は正しい12352 digest5b954538...へ限定是正し、原38/build/staticの成功確認を再演していない。
+
+横展開は当群工具14ファイルの明示literal manifest参照29ペアをAST読取し実byte照合。保持すべき旧12394の一ペアだけ不一致、その他28は一致、全pinは64hex。変数又は動的参照はこの静的監査で解決したとせず、各既存entryの真正read_checked成功とsource結合を別根拠とする。Code/debug構造readerは3正常/4異常を検証。旧工具を書き換えず新v2/新OUTだけを使った。対象全ての修正又は非該当根拠をmanifestへ保存、単なる検索完了ではない。
+
+BUG1968/YKT1716は九同値定数/全五対象と原38/独立逆42・静的35→26・残文脈/集合の限定是正完了。BUG1969/YKT1717は工具一件の限定是正完了。実装commit14198cb18、証跡/文書保存commit・pushは456へ。現集合8558/累計859/Main1512-Test7046/refs3135/pending720/未参照5423/追加8保持、正式1964/53・17/190・工数null/QA051final/全F03-451未受入は不変。群開始2/5/8pp・cap10と原見積は固定、共有62残38・実token N/T/専有費nullを維持し、通常区切りで停止しない。

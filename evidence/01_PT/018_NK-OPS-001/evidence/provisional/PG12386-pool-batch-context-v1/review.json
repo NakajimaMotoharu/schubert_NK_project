@@ -1,0 +1,1249 @@
+{
+  "rows": [
+    {
+      "attributes": {
+        "begincolumn": "24",
+        "beginline": "183",
+        "class": "DbPoolMetricCollectorTest",
+        "endcolumn": "55",
+        "endline": "183",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "method": "poolConn006OneOwnerSerializesGettersThroughPublication",
+        "package": "dev.codex.schubert.nk.api.monitoring",
+        "priority": "3",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading",
+        "variable": "executor"
+      },
+      "controls": [
+        "Executors.newFixedThreadPool(2)",
+        "release.await(5,TimeUnit.SECONDS)",
+        "enteredSecond.await(100,TimeUnit.MILLISECONDS)",
+        "one.get(5,TimeUnit.SECONDS)",
+        "release.countDown()"
+      ],
+      "currentCases": [
+        {
+          "className": "dev.codex.schubert.nk.api.monitoring.DbPoolMetricCollectorTest",
+          "method": "poolConn006OneOwnerSerializesGettersThroughPublication",
+          "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/DbPoolMetricCollectorTest.java",
+          "sourceSha256": "440f20404376afcb7a29fef1f2bac01ac7ffea23d203e14c537cb685e9afdacd"
+        }
+      ],
+      "currentWholeJoinPending": true,
+      "disposition": "CONTEXT_NOT_APPLICABLE",
+      "id": "PMD-02120",
+      "kind": "FINITE_OWNED_STANDALONE_FIXTURE_WORKERS",
+      "newAccepted": 0,
+      "oldRuntimeReassigned": false,
+      "originalRowSha256": "46aaeefb94167e6dfadf44d1e716daaf73ef422af95403b1d4c3527abb4a2851",
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/DbPoolMetricCollectorTest.java",
+      "productTestsExecutedByReview": 0,
+      "reason": "Standalone JavaSE original JUnit owns finite2/4/8-worker pools and finite64-task workloads, with fake MXBean getters or supplied immutable values only. API collector, transfer, retention and catalog invokeAll/get preserve no local timeout; Web collector uses5-second deadlines. Publication latches5seconds, Web BLOCKED poll2seconds and100ms negative observation are original contract. TWR or catalog finally shutdownNow+awaitTermination10seconds closes caller pools. Actual normal JVM terminal and outer240seconds are distinct from those local bounds. No application/EJB worker, live pool/DB/JMX/network/VM/Root activity.",
+      "rule": "DoNotUseThreads",
+      "scopeKind": "METHOD",
+      "scopeName": "poolConn006OneOwnerSerializesGettersThroughPublication",
+      "scopeTokenSha256": "7e7e402656bc3ef6d4df8690f1db8a6c91b1c4a3529d5972f16615fc349b95f0",
+      "source": "14198cb1878ec73319511ba1067133992d335e63",
+      "sourceSha256": "440f20404376afcb7a29fef1f2bac01ac7ffea23d203e14c537cb685e9afdacd",
+      "sourceSpanSha256": "9bb4530d7d15c1a0fc8b12c6cf064977273b752194c1eb8f8a3beb1a5e42af46"
+    },
+    {
+      "attributes": {
+        "begincolumn": "17",
+        "beginline": "199",
+        "class": "DbPoolMetricCollectorTest",
+        "endcolumn": "87",
+        "endline": "199",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "method": "poolConn006OneOwnerSerializesGettersThroughPublication",
+        "package": "dev.codex.schubert.nk.api.monitoring",
+        "priority": "3",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading",
+        "variable": "one"
+      },
+      "controls": [
+        "Executors.newFixedThreadPool(2)",
+        "release.await(5,TimeUnit.SECONDS)",
+        "enteredSecond.await(100,TimeUnit.MILLISECONDS)",
+        "one.get(5,TimeUnit.SECONDS)",
+        "release.countDown()"
+      ],
+      "currentCases": [
+        {
+          "className": "dev.codex.schubert.nk.api.monitoring.DbPoolMetricCollectorTest",
+          "method": "poolConn006OneOwnerSerializesGettersThroughPublication",
+          "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/DbPoolMetricCollectorTest.java",
+          "sourceSha256": "440f20404376afcb7a29fef1f2bac01ac7ffea23d203e14c537cb685e9afdacd"
+        }
+      ],
+      "currentWholeJoinPending": true,
+      "disposition": "CONTEXT_NOT_APPLICABLE",
+      "id": "PMD-02121",
+      "kind": "FINITE_OWNED_STANDALONE_FIXTURE_WORKERS",
+      "newAccepted": 0,
+      "oldRuntimeReassigned": false,
+      "originalRowSha256": "ad0c1a602572ce2ff554c3473629d8f5d659df86b47002584dcef2905309db37",
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/DbPoolMetricCollectorTest.java",
+      "productTestsExecutedByReview": 0,
+      "reason": "Standalone JavaSE original JUnit owns finite2/4/8-worker pools and finite64-task workloads, with fake MXBean getters or supplied immutable values only. API collector, transfer, retention and catalog invokeAll/get preserve no local timeout; Web collector uses5-second deadlines. Publication latches5seconds, Web BLOCKED poll2seconds and100ms negative observation are original contract. TWR or catalog finally shutdownNow+awaitTermination10seconds closes caller pools. Actual normal JVM terminal and outer240seconds are distinct from those local bounds. No application/EJB worker, live pool/DB/JMX/network/VM/Root activity.",
+      "rule": "DoNotUseThreads",
+      "scopeKind": "METHOD",
+      "scopeName": "poolConn006OneOwnerSerializesGettersThroughPublication",
+      "scopeTokenSha256": "7e7e402656bc3ef6d4df8690f1db8a6c91b1c4a3529d5972f16615fc349b95f0",
+      "source": "14198cb1878ec73319511ba1067133992d335e63",
+      "sourceSha256": "440f20404376afcb7a29fef1f2bac01ac7ffea23d203e14c537cb685e9afdacd",
+      "sourceSpanSha256": "7bb8cf29d4ed6d4ec7c6ddd0827ae078d19b726d770c0a7fe8f80ca6156b60b1"
+    },
+    {
+      "attributes": {
+        "begincolumn": "13",
+        "beginline": "203",
+        "class": "DbPoolMetricCollectorTest",
+        "endcolumn": "19",
+        "endline": "207",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "method": "poolConn006OneOwnerSerializesGettersThroughPublication",
+        "package": "dev.codex.schubert.nk.api.monitoring",
+        "priority": "3",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading",
+        "variable": "two"
+      },
+      "controls": [
+        "Executors.newFixedThreadPool(2)",
+        "release.await(5,TimeUnit.SECONDS)",
+        "enteredSecond.await(100,TimeUnit.MILLISECONDS)",
+        "one.get(5,TimeUnit.SECONDS)",
+        "release.countDown()"
+      ],
+      "currentCases": [
+        {
+          "className": "dev.codex.schubert.nk.api.monitoring.DbPoolMetricCollectorTest",
+          "method": "poolConn006OneOwnerSerializesGettersThroughPublication",
+          "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/DbPoolMetricCollectorTest.java",
+          "sourceSha256": "440f20404376afcb7a29fef1f2bac01ac7ffea23d203e14c537cb685e9afdacd"
+        }
+      ],
+      "currentWholeJoinPending": true,
+      "disposition": "CONTEXT_NOT_APPLICABLE",
+      "id": "PMD-02122",
+      "kind": "FINITE_OWNED_STANDALONE_FIXTURE_WORKERS",
+      "newAccepted": 0,
+      "oldRuntimeReassigned": false,
+      "originalRowSha256": "e22b82fb3c5176160fc83d54b110ed635da8575fb8764f80b79e8913b167319a",
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/DbPoolMetricCollectorTest.java",
+      "productTestsExecutedByReview": 0,
+      "reason": "Standalone JavaSE original JUnit owns finite2/4/8-worker pools and finite64-task workloads, with fake MXBean getters or supplied immutable values only. API collector, transfer, retention and catalog invokeAll/get preserve no local timeout; Web collector uses5-second deadlines. Publication latches5seconds, Web BLOCKED poll2seconds and100ms negative observation are original contract. TWR or catalog finally shutdownNow+awaitTermination10seconds closes caller pools. Actual normal JVM terminal and outer240seconds are distinct from those local bounds. No application/EJB worker, live pool/DB/JMX/network/VM/Root activity.",
+      "rule": "DoNotUseThreads",
+      "scopeKind": "METHOD",
+      "scopeName": "poolConn006OneOwnerSerializesGettersThroughPublication",
+      "scopeTokenSha256": "7e7e402656bc3ef6d4df8690f1db8a6c91b1c4a3529d5972f16615fc349b95f0",
+      "source": "14198cb1878ec73319511ba1067133992d335e63",
+      "sourceSha256": "440f20404376afcb7a29fef1f2bac01ac7ffea23d203e14c537cb685e9afdacd",
+      "sourceSpanSha256": "0054ba1b2e9edbd38050f9d4b4a39eda483e51fa50453c7b28baa1100e3097e8"
+    },
+    {
+      "attributes": {
+        "begincolumn": "24",
+        "beginline": "226",
+        "class": "DbPoolMetricCollectorTest",
+        "endcolumn": "55",
+        "endline": "226",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "method": "poolConn007ParallelFakeSourcesHaveCompleteIndependentReturnedCounts",
+        "package": "dev.codex.schubert.nk.api.monitoring",
+        "priority": "3",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading",
+        "variable": "executor"
+      },
+      "controls": [
+        "Executors.newFixedThreadPool(8)",
+        "i<64",
+        "newFixture()",
+        "executor.invokeAll(tasks)",
+        "actual.get(i).get()"
+      ],
+      "currentCases": [
+        {
+          "className": "dev.codex.schubert.nk.api.monitoring.DbPoolMetricCollectorTest",
+          "method": "poolConn007ParallelFakeSourcesHaveCompleteIndependentReturnedCounts",
+          "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/DbPoolMetricCollectorTest.java",
+          "sourceSha256": "440f20404376afcb7a29fef1f2bac01ac7ffea23d203e14c537cb685e9afdacd"
+        }
+      ],
+      "currentWholeJoinPending": true,
+      "disposition": "CONTEXT_NOT_APPLICABLE",
+      "id": "PMD-02123",
+      "kind": "FINITE_OWNED_STANDALONE_FIXTURE_WORKERS",
+      "newAccepted": 0,
+      "oldRuntimeReassigned": false,
+      "originalRowSha256": "8bf530a51049e7957dba63d50a2b9c717d9c006d349d98c44053ac9003eb2fc5",
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/DbPoolMetricCollectorTest.java",
+      "productTestsExecutedByReview": 0,
+      "reason": "Standalone JavaSE original JUnit owns finite2/4/8-worker pools and finite64-task workloads, with fake MXBean getters or supplied immutable values only. API collector, transfer, retention and catalog invokeAll/get preserve no local timeout; Web collector uses5-second deadlines. Publication latches5seconds, Web BLOCKED poll2seconds and100ms negative observation are original contract. TWR or catalog finally shutdownNow+awaitTermination10seconds closes caller pools. Actual normal JVM terminal and outer240seconds are distinct from those local bounds. No application/EJB worker, live pool/DB/JMX/network/VM/Root activity.",
+      "rule": "DoNotUseThreads",
+      "scopeKind": "METHOD",
+      "scopeName": "poolConn007ParallelFakeSourcesHaveCompleteIndependentReturnedCounts",
+      "scopeTokenSha256": "f5c1892b9052a9152d8d16aa0848f174a08e8ce9693ea5ec8bd6421efde1ecbb",
+      "source": "14198cb1878ec73319511ba1067133992d335e63",
+      "sourceSha256": "440f20404376afcb7a29fef1f2bac01ac7ffea23d203e14c537cb685e9afdacd",
+      "sourceSpanSha256": "45a38a95e5b1914bc44b51b29e60fb4d5c93e0e1d3f6a314234d653392df5f14"
+    },
+    {
+      "attributes": {
+        "begincolumn": "20",
+        "beginline": "241",
+        "class": "DbPoolMetricCollectorTest",
+        "endcolumn": "45",
+        "endline": "241",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "method": "poolConn007ParallelFakeSourcesHaveCompleteIndependentReturnedCounts",
+        "package": "dev.codex.schubert.nk.api.monitoring",
+        "priority": "3",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading",
+        "variable": "actual"
+      },
+      "controls": [
+        "Executors.newFixedThreadPool(8)",
+        "i<64",
+        "newFixture()",
+        "executor.invokeAll(tasks)",
+        "actual.get(i).get()"
+      ],
+      "currentCases": [
+        {
+          "className": "dev.codex.schubert.nk.api.monitoring.DbPoolMetricCollectorTest",
+          "method": "poolConn007ParallelFakeSourcesHaveCompleteIndependentReturnedCounts",
+          "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/DbPoolMetricCollectorTest.java",
+          "sourceSha256": "440f20404376afcb7a29fef1f2bac01ac7ffea23d203e14c537cb685e9afdacd"
+        }
+      ],
+      "currentWholeJoinPending": true,
+      "disposition": "CONTEXT_NOT_APPLICABLE",
+      "id": "PMD-02124",
+      "kind": "FINITE_OWNED_STANDALONE_FIXTURE_WORKERS",
+      "newAccepted": 0,
+      "oldRuntimeReassigned": false,
+      "originalRowSha256": "33793ec876791a4fa661d268f7b2f3b0b3701e1aed1c7eb804150a38ae7fd0f8",
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/DbPoolMetricCollectorTest.java",
+      "productTestsExecutedByReview": 0,
+      "reason": "Standalone JavaSE original JUnit owns finite2/4/8-worker pools and finite64-task workloads, with fake MXBean getters or supplied immutable values only. API collector, transfer, retention and catalog invokeAll/get preserve no local timeout; Web collector uses5-second deadlines. Publication latches5seconds, Web BLOCKED poll2seconds and100ms negative observation are original contract. TWR or catalog finally shutdownNow+awaitTermination10seconds closes caller pools. Actual normal JVM terminal and outer240seconds are distinct from those local bounds. No application/EJB worker, live pool/DB/JMX/network/VM/Root activity.",
+      "rule": "DoNotUseThreads",
+      "scopeKind": "METHOD",
+      "scopeName": "poolConn007ParallelFakeSourcesHaveCompleteIndependentReturnedCounts",
+      "scopeTokenSha256": "f5c1892b9052a9152d8d16aa0848f174a08e8ce9693ea5ec8bd6421efde1ecbb",
+      "source": "14198cb1878ec73319511ba1067133992d335e63",
+      "sourceSha256": "440f20404376afcb7a29fef1f2bac01ac7ffea23d203e14c537cb685e9afdacd",
+      "sourceSpanSha256": "a5ab2ae1426d3080a98fe10bb62b6b40c157dcb7afcba19de7a9b6c4415f68fb"
+    },
+    {
+      "attributes": {
+        "begincolumn": "9",
+        "beginline": "138",
+        "class": "MetricContractTest",
+        "endcolumn": "17",
+        "endline": "138",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#closeresource",
+        "method": "metric006ConcurrentCallersObserveOnlyOriginalCatalog",
+        "package": "dev.codex.schubert.nk.batch.monitoring",
+        "priority": "3",
+        "rule": "CloseResource",
+        "ruleset": "Error Prone",
+        "variable": "executor"
+      },
+      "controls": [
+        "Executors.newFixedThreadPool(4)",
+        "index<64",
+        "executor.invokeAll(tasks)",
+        "future.get()",
+        "executor.shutdownNow()",
+        "executor.awaitTermination(10,TimeUnit.SECONDS)"
+      ],
+      "currentCases": [
+        {
+          "className": "dev.codex.schubert.nk.batch.monitoring.MetricContractTest",
+          "method": "metric006ConcurrentCallersObserveOnlyOriginalCatalog",
+          "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/MetricContractTest.java",
+          "sourceSha256": "29605f7776c85226dd130a55a06b7e9f17f6e7f8799915c7ec2ecab602c61f84"
+        }
+      ],
+      "currentWholeJoinPending": true,
+      "disposition": "CONTEXT_NOT_APPLICABLE",
+      "id": "PMD-04843",
+      "kind": "EXPLICIT_EXECUTOR_FINALLY_SHUTDOWN_ORACLE",
+      "newAccepted": 0,
+      "oldRuntimeReassigned": false,
+      "originalRowSha256": "a12e4a55413ddac55734cc15c9799574d8098cdcdeb1bf885745da050c273e9b",
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/MetricContractTest.java",
+      "productTestsExecutedByReview": 0,
+      "reason": "Original catalog fixture constructs one owned executor before try and closes it in unconditional finally using shutdownNow plus asserted awaitTermination10seconds. Every submitted callable only examines immutable enum metadata/approved TSV values. No production lifecycle ownership or handle is borrowed. Preserve explicit termination oracle; no suppressed diagnostics or application resource.",
+      "rule": "CloseResource",
+      "scopeKind": "METHOD",
+      "scopeName": "metric006ConcurrentCallersObserveOnlyOriginalCatalog",
+      "scopeTokenSha256": "24163ae1e29df8208c7768fa1ec4f2f69323ed4a012fdd0dc9bd5b1d23c43344",
+      "source": "14198cb1878ec73319511ba1067133992d335e63",
+      "sourceSha256": "29605f7776c85226dd130a55a06b7e9f17f6e7f8799915c7ec2ecab602c61f84",
+      "sourceSpanSha256": "edf3cf8d1dd8ebce547f8f702c4629bcbfda6812d4927dea122ffdbb91593abb"
+    },
+    {
+      "attributes": {
+        "begincolumn": "20",
+        "beginline": "138",
+        "class": "MetricContractTest",
+        "endcolumn": "51",
+        "endline": "138",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "method": "metric006ConcurrentCallersObserveOnlyOriginalCatalog",
+        "package": "dev.codex.schubert.nk.batch.monitoring",
+        "priority": "3",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading",
+        "variable": "executor"
+      },
+      "controls": [
+        "Executors.newFixedThreadPool(4)",
+        "index<64",
+        "executor.invokeAll(tasks)",
+        "future.get()",
+        "executor.shutdownNow()",
+        "executor.awaitTermination(10,TimeUnit.SECONDS)"
+      ],
+      "currentCases": [
+        {
+          "className": "dev.codex.schubert.nk.batch.monitoring.MetricContractTest",
+          "method": "metric006ConcurrentCallersObserveOnlyOriginalCatalog",
+          "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/MetricContractTest.java",
+          "sourceSha256": "29605f7776c85226dd130a55a06b7e9f17f6e7f8799915c7ec2ecab602c61f84"
+        }
+      ],
+      "currentWholeJoinPending": true,
+      "disposition": "CONTEXT_NOT_APPLICABLE",
+      "id": "PMD-04844",
+      "kind": "FINITE_OWNED_STANDALONE_FIXTURE_WORKERS",
+      "newAccepted": 0,
+      "oldRuntimeReassigned": false,
+      "originalRowSha256": "45387b2461f81ec920ac2ad727f3acd24e8c7727824865feee283a397b162ec4",
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/MetricContractTest.java",
+      "productTestsExecutedByReview": 0,
+      "reason": "Standalone JavaSE original JUnit owns finite2/4/8-worker pools and finite64-task workloads, with fake MXBean getters or supplied immutable values only. API collector, transfer, retention and catalog invokeAll/get preserve no local timeout; Web collector uses5-second deadlines. Publication latches5seconds, Web BLOCKED poll2seconds and100ms negative observation are original contract. TWR or catalog finally shutdownNow+awaitTermination10seconds closes caller pools. Actual normal JVM terminal and outer240seconds are distinct from those local bounds. No application/EJB worker, live pool/DB/JMX/network/VM/Root activity.",
+      "rule": "DoNotUseThreads",
+      "scopeKind": "METHOD",
+      "scopeName": "metric006ConcurrentCallersObserveOnlyOriginalCatalog",
+      "scopeTokenSha256": "24163ae1e29df8208c7768fa1ec4f2f69323ed4a012fdd0dc9bd5b1d23c43344",
+      "source": "14198cb1878ec73319511ba1067133992d335e63",
+      "sourceSha256": "29605f7776c85226dd130a55a06b7e9f17f6e7f8799915c7ec2ecab602c61f84",
+      "sourceSpanSha256": "5b7c1f03877642cfae0347e82d5dc676fd7ed1485934f4d76081ecec59a05524"
+    },
+    {
+      "attributes": {
+        "begincolumn": "25",
+        "beginline": "153",
+        "class": "MetricContractTest",
+        "endcolumn": "50",
+        "endline": "153",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "method": "metric006ConcurrentCallersObserveOnlyOriginalCatalog",
+        "package": "dev.codex.schubert.nk.batch.monitoring",
+        "priority": "3",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading"
+      },
+      "controls": [
+        "Executors.newFixedThreadPool(4)",
+        "index<64",
+        "executor.invokeAll(tasks)",
+        "future.get()",
+        "executor.shutdownNow()",
+        "executor.awaitTermination(10,TimeUnit.SECONDS)"
+      ],
+      "currentCases": [
+        {
+          "className": "dev.codex.schubert.nk.batch.monitoring.MetricContractTest",
+          "method": "metric006ConcurrentCallersObserveOnlyOriginalCatalog",
+          "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/MetricContractTest.java",
+          "sourceSha256": "29605f7776c85226dd130a55a06b7e9f17f6e7f8799915c7ec2ecab602c61f84"
+        }
+      ],
+      "currentWholeJoinPending": true,
+      "disposition": "CONTEXT_NOT_APPLICABLE",
+      "id": "PMD-04845",
+      "kind": "FINITE_OWNED_STANDALONE_FIXTURE_WORKERS",
+      "newAccepted": 0,
+      "oldRuntimeReassigned": false,
+      "originalRowSha256": "d966e601f43b1a47f27accb32b35c9721a768b034e91ceaccf7aa47f3ed2c274",
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/MetricContractTest.java",
+      "productTestsExecutedByReview": 0,
+      "reason": "Standalone JavaSE original JUnit owns finite2/4/8-worker pools and finite64-task workloads, with fake MXBean getters or supplied immutable values only. API collector, transfer, retention and catalog invokeAll/get preserve no local timeout; Web collector uses5-second deadlines. Publication latches5seconds, Web BLOCKED poll2seconds and100ms negative observation are original contract. TWR or catalog finally shutdownNow+awaitTermination10seconds closes caller pools. Actual normal JVM terminal and outer240seconds are distinct from those local bounds. No application/EJB worker, live pool/DB/JMX/network/VM/Root activity.",
+      "rule": "DoNotUseThreads",
+      "scopeKind": "METHOD",
+      "scopeName": "metric006ConcurrentCallersObserveOnlyOriginalCatalog",
+      "scopeTokenSha256": "24163ae1e29df8208c7768fa1ec4f2f69323ed4a012fdd0dc9bd5b1d23c43344",
+      "source": "14198cb1878ec73319511ba1067133992d335e63",
+      "sourceSha256": "29605f7776c85226dd130a55a06b7e9f17f6e7f8799915c7ec2ecab602c61f84",
+      "sourceSpanSha256": "9af25a128f8effbccd5f83bd239b1f00d33d2aec1c3032555507eedcec5d2eec"
+    },
+    {
+      "attributes": {
+        "begincolumn": "7",
+        "beginline": "155",
+        "class": "MetricContractTest",
+        "endcolumn": "29",
+        "endline": "155",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "method": "metric006ConcurrentCallersObserveOnlyOriginalCatalog",
+        "package": "dev.codex.schubert.nk.batch.monitoring",
+        "priority": "3",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading"
+      },
+      "controls": [
+        "Executors.newFixedThreadPool(4)",
+        "index<64",
+        "executor.invokeAll(tasks)",
+        "future.get()",
+        "executor.shutdownNow()",
+        "executor.awaitTermination(10,TimeUnit.SECONDS)"
+      ],
+      "currentCases": [
+        {
+          "className": "dev.codex.schubert.nk.batch.monitoring.MetricContractTest",
+          "method": "metric006ConcurrentCallersObserveOnlyOriginalCatalog",
+          "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/MetricContractTest.java",
+          "sourceSha256": "29605f7776c85226dd130a55a06b7e9f17f6e7f8799915c7ec2ecab602c61f84"
+        }
+      ],
+      "currentWholeJoinPending": true,
+      "disposition": "CONTEXT_NOT_APPLICABLE",
+      "id": "PMD-04846",
+      "kind": "FINITE_OWNED_STANDALONE_FIXTURE_WORKERS",
+      "newAccepted": 0,
+      "oldRuntimeReassigned": false,
+      "originalRowSha256": "88bba4210dd4292881f6bc353737d5a82f32e5a5e97bf1ca5b85b17d2aa5d4ab",
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/MetricContractTest.java",
+      "productTestsExecutedByReview": 0,
+      "reason": "Standalone JavaSE original JUnit owns finite2/4/8-worker pools and finite64-task workloads, with fake MXBean getters or supplied immutable values only. API collector, transfer, retention and catalog invokeAll/get preserve no local timeout; Web collector uses5-second deadlines. Publication latches5seconds, Web BLOCKED poll2seconds and100ms negative observation are original contract. TWR or catalog finally shutdownNow+awaitTermination10seconds closes caller pools. Actual normal JVM terminal and outer240seconds are distinct from those local bounds. No application/EJB worker, live pool/DB/JMX/network/VM/Root activity.",
+      "rule": "DoNotUseThreads",
+      "scopeKind": "METHOD",
+      "scopeName": "metric006ConcurrentCallersObserveOnlyOriginalCatalog",
+      "scopeTokenSha256": "24163ae1e29df8208c7768fa1ec4f2f69323ed4a012fdd0dc9bd5b1d23c43344",
+      "source": "14198cb1878ec73319511ba1067133992d335e63",
+      "sourceSha256": "29605f7776c85226dd130a55a06b7e9f17f6e7f8799915c7ec2ecab602c61f84",
+      "sourceSpanSha256": "447cb134622833454dbcfd6b8edb9568b5b6bffacad735fc46be8baae7c7c49c"
+    },
+    {
+      "attributes": {
+        "begincolumn": "18",
+        "beginline": "156",
+        "class": "MetricContractTest",
+        "endcolumn": "65",
+        "endline": "156",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "method": "metric006ConcurrentCallersObserveOnlyOriginalCatalog",
+        "package": "dev.codex.schubert.nk.batch.monitoring",
+        "priority": "3",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading"
+      },
+      "controls": [
+        "Executors.newFixedThreadPool(4)",
+        "index<64",
+        "executor.invokeAll(tasks)",
+        "future.get()",
+        "executor.shutdownNow()",
+        "executor.awaitTermination(10,TimeUnit.SECONDS)"
+      ],
+      "currentCases": [
+        {
+          "className": "dev.codex.schubert.nk.batch.monitoring.MetricContractTest",
+          "method": "metric006ConcurrentCallersObserveOnlyOriginalCatalog",
+          "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/MetricContractTest.java",
+          "sourceSha256": "29605f7776c85226dd130a55a06b7e9f17f6e7f8799915c7ec2ecab602c61f84"
+        }
+      ],
+      "currentWholeJoinPending": true,
+      "disposition": "CONTEXT_NOT_APPLICABLE",
+      "id": "PMD-04847",
+      "kind": "FINITE_OWNED_STANDALONE_FIXTURE_WORKERS",
+      "newAccepted": 0,
+      "oldRuntimeReassigned": false,
+      "originalRowSha256": "b1e569920491c3108f1db7792f16b43ba4ebd85fd93ed552d35c92a4d7181548",
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/MetricContractTest.java",
+      "productTestsExecutedByReview": 0,
+      "reason": "Standalone JavaSE original JUnit owns finite2/4/8-worker pools and finite64-task workloads, with fake MXBean getters or supplied immutable values only. API collector, transfer, retention and catalog invokeAll/get preserve no local timeout; Web collector uses5-second deadlines. Publication latches5seconds, Web BLOCKED poll2seconds and100ms negative observation are original contract. TWR or catalog finally shutdownNow+awaitTermination10seconds closes caller pools. Actual normal JVM terminal and outer240seconds are distinct from those local bounds. No application/EJB worker, live pool/DB/JMX/network/VM/Root activity.",
+      "rule": "DoNotUseThreads",
+      "scopeKind": "METHOD",
+      "scopeName": "metric006ConcurrentCallersObserveOnlyOriginalCatalog",
+      "scopeTokenSha256": "24163ae1e29df8208c7768fa1ec4f2f69323ed4a012fdd0dc9bd5b1d23c43344",
+      "source": "14198cb1878ec73319511ba1067133992d335e63",
+      "sourceSha256": "29605f7776c85226dd130a55a06b7e9f17f6e7f8799915c7ec2ecab602c61f84",
+      "sourceSpanSha256": "d541ae7bb57fcde19f69c441a68e1d8c3446a7babe941444ac301c72caad9cf7"
+    },
+    {
+      "attributes": {
+        "begincolumn": "25",
+        "beginline": "177",
+        "class": "MonitoringRetentionConfigurationTest",
+        "endcolumn": "56",
+        "endline": "177",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "method": "retConf007ParallelModeVerificationCannotMutateOrShareOtherModesConfiguration",
+        "package": "dev.codex.schubert.nk.batch.monitoring",
+        "priority": "3",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading",
+        "variable": "executor"
+      },
+      "controls": [
+        "Executors.newFixedThreadPool(8)",
+        "i<64",
+        "executor.invokeAll(tasks)",
+        "result.get()"
+      ],
+      "currentCases": [
+        {
+          "className": "dev.codex.schubert.nk.batch.monitoring.MonitoringRetentionConfigurationTest",
+          "method": "retConf007ParallelModeVerificationCannotMutateOrShareOtherModesConfiguration",
+          "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/MonitoringRetentionConfigurationTest.java",
+          "sourceSha256": "34c225d054f02940c9b2c9f8a7e1825f5c189389e089c9b40a0298dcc49bd8ab"
+        }
+      ],
+      "currentWholeJoinPending": true,
+      "disposition": "CONTEXT_NOT_APPLICABLE",
+      "id": "PMD-04869",
+      "kind": "FINITE_OWNED_STANDALONE_FIXTURE_WORKERS",
+      "newAccepted": 0,
+      "oldRuntimeReassigned": false,
+      "originalRowSha256": "c799a4067ab9056f20f33c073b82fcfed64704711081720a2dfa61479d737b40",
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/MonitoringRetentionConfigurationTest.java",
+      "productTestsExecutedByReview": 0,
+      "reason": "Standalone JavaSE original JUnit owns finite2/4/8-worker pools and finite64-task workloads, with fake MXBean getters or supplied immutable values only. API collector, transfer, retention and catalog invokeAll/get preserve no local timeout; Web collector uses5-second deadlines. Publication latches5seconds, Web BLOCKED poll2seconds and100ms negative observation are original contract. TWR or catalog finally shutdownNow+awaitTermination10seconds closes caller pools. Actual normal JVM terminal and outer240seconds are distinct from those local bounds. No application/EJB worker, live pool/DB/JMX/network/VM/Root activity.",
+      "rule": "DoNotUseThreads",
+      "scopeKind": "METHOD",
+      "scopeName": "retConf007ParallelModeVerificationCannotMutateOrShareOtherModesConfiguration",
+      "scopeTokenSha256": "636c17947d5f8791546bfe34a0accb9ea7fe90a46a8bab25822a67984649e50d",
+      "source": "14198cb1878ec73319511ba1067133992d335e63",
+      "sourceSha256": "34c225d054f02940c9b2c9f8a7e1825f5c189389e089c9b40a0298dcc49bd8ab",
+      "sourceSpanSha256": "45a38a95e5b1914bc44b51b29e60fb4d5c93e0e1d3f6a314234d653392df5f14"
+    },
+    {
+      "attributes": {
+        "begincolumn": "25",
+        "beginline": "178",
+        "class": "MonitoringRetentionConfigurationTest",
+        "endcolumn": "50",
+        "endline": "178",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "method": "retConf007ParallelModeVerificationCannotMutateOrShareOtherModesConfiguration",
+        "package": "dev.codex.schubert.nk.batch.monitoring",
+        "priority": "3",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading"
+      },
+      "controls": [
+        "Executors.newFixedThreadPool(8)",
+        "i<64",
+        "executor.invokeAll(tasks)",
+        "result.get()"
+      ],
+      "currentCases": [
+        {
+          "className": "dev.codex.schubert.nk.batch.monitoring.MonitoringRetentionConfigurationTest",
+          "method": "retConf007ParallelModeVerificationCannotMutateOrShareOtherModesConfiguration",
+          "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/MonitoringRetentionConfigurationTest.java",
+          "sourceSha256": "34c225d054f02940c9b2c9f8a7e1825f5c189389e089c9b40a0298dcc49bd8ab"
+        }
+      ],
+      "currentWholeJoinPending": true,
+      "disposition": "CONTEXT_NOT_APPLICABLE",
+      "id": "PMD-04870",
+      "kind": "FINITE_OWNED_STANDALONE_FIXTURE_WORKERS",
+      "newAccepted": 0,
+      "oldRuntimeReassigned": false,
+      "originalRowSha256": "6e3e21f8d7145a18a46dad0f0ab00ea71f714f00639b083145f0567a12aea4b0",
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/MonitoringRetentionConfigurationTest.java",
+      "productTestsExecutedByReview": 0,
+      "reason": "Standalone JavaSE original JUnit owns finite2/4/8-worker pools and finite64-task workloads, with fake MXBean getters or supplied immutable values only. API collector, transfer, retention and catalog invokeAll/get preserve no local timeout; Web collector uses5-second deadlines. Publication latches5seconds, Web BLOCKED poll2seconds and100ms negative observation are original contract. TWR or catalog finally shutdownNow+awaitTermination10seconds closes caller pools. Actual normal JVM terminal and outer240seconds are distinct from those local bounds. No application/EJB worker, live pool/DB/JMX/network/VM/Root activity.",
+      "rule": "DoNotUseThreads",
+      "scopeKind": "METHOD",
+      "scopeName": "retConf007ParallelModeVerificationCannotMutateOrShareOtherModesConfiguration",
+      "scopeTokenSha256": "636c17947d5f8791546bfe34a0accb9ea7fe90a46a8bab25822a67984649e50d",
+      "source": "14198cb1878ec73319511ba1067133992d335e63",
+      "sourceSha256": "34c225d054f02940c9b2c9f8a7e1825f5c189389e089c9b40a0298dcc49bd8ab",
+      "sourceSpanSha256": "9af25a128f8effbccd5f83bd239b1f00d33d2aec1c3032555507eedcec5d2eec"
+    },
+    {
+      "attributes": {
+        "begincolumn": "17",
+        "beginline": "193",
+        "class": "MonitoringRetentionConfigurationTest",
+        "endcolumn": "35",
+        "endline": "193",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#equalsnull",
+        "method": "retConf008GeneratedConfigurationUsesIndependentIntegerLongHashAndFixedTextOracles",
+        "package": "dev.codex.schubert.nk.batch.monitoring",
+        "priority": "1",
+        "rule": "EqualsNull",
+        "ruleset": "Error Prone"
+      },
+      "controls": [
+        "assertFalse(value.equals(null))",
+        "assertEquals(705033170,value.hashCode())",
+        "assertEquals(-31,newRetentionConfiguration(Integer.MAX_VALUE,Long.MAX_VALUE).hashCode())"
+      ],
+      "currentCases": [
+        {
+          "className": "dev.codex.schubert.nk.batch.monitoring.MonitoringRetentionConfigurationTest",
+          "method": "retConf008GeneratedConfigurationUsesIndependentIntegerLongHashAndFixedTextOracles",
+          "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/MonitoringRetentionConfigurationTest.java",
+          "sourceSha256": "34c225d054f02940c9b2c9f8a7e1825f5c189389e089c9b40a0298dcc49bd8ab"
+        }
+      ],
+      "currentWholeJoinPending": true,
+      "disposition": "CONTEXT_NOT_APPLICABLE",
+      "id": "PMD-04871",
+      "kind": "GENERATED_RECORD_NULL_EQUALS_CONTRACT",
+      "newAccepted": 0,
+      "oldRuntimeReassigned": false,
+      "originalRowSha256": "dc5fc5855f0002d9497b0a4063b6d97467f56730a74d4d15566a6d209e1b457f",
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/MonitoringRetentionConfigurationTest.java",
+      "productTestsExecutedByReview": 0,
+      "reason": "The original generated record equality contract must return false for null, wrong type and unequal fields, while fixed independent hash/text vectors are preserved. equals(null) intentionally tests generated equals rather than checking local reference nonnull. Replacing with identity/null expression removes that behavior check.",
+      "rule": "EqualsNull",
+      "scopeKind": "METHOD",
+      "scopeName": "retConf008GeneratedConfigurationUsesIndependentIntegerLongHashAndFixedTextOracles",
+      "scopeTokenSha256": "a99456f9b32efd77e3b36fea8ddc01ae70b852a7bb9ac87b52024150e5f1df74",
+      "source": "14198cb1878ec73319511ba1067133992d335e63",
+      "sourceSha256": "34c225d054f02940c9b2c9f8a7e1825f5c189389e089c9b40a0298dcc49bd8ab",
+      "sourceSpanSha256": "32c4f75fc6e2a0b66f40f098c34b13d0df9044406d27023ace6646a7d993a8b3"
+    },
+    {
+      "attributes": {
+        "begincolumn": "20",
+        "beginline": "202",
+        "class": "TransferMetricRecorderTest",
+        "endcolumn": "51",
+        "endline": "202",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "method": "transferMet007ConcurrentAtomicSnapshotNeverMixesCohortsOrChangesOldValues",
+        "package": "dev.codex.schubert.nk.batch.monitoring",
+        "priority": "3",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading",
+        "variable": "pool"
+      },
+      "controls": [
+        "Executors.newFixedThreadPool(8)",
+        "IntStream.range(0,64)",
+        "snapshot==first||snapshot==second",
+        "pool.invokeAll(jobs)",
+        "result.get()"
+      ],
+      "currentCases": [
+        {
+          "className": "dev.codex.schubert.nk.batch.monitoring.TransferMetricRecorderTest",
+          "method": "transferMet007ConcurrentAtomicSnapshotNeverMixesCohortsOrChangesOldValues",
+          "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/TransferMetricRecorderTest.java",
+          "sourceSha256": "9775f5889a8cc51f5de943c227e8f6dabb255f7f1a6a380d1fd12a0861d1e58e"
+        }
+      ],
+      "currentWholeJoinPending": true,
+      "disposition": "CONTEXT_NOT_APPLICABLE",
+      "id": "PMD-04913",
+      "kind": "FINITE_OWNED_STANDALONE_FIXTURE_WORKERS",
+      "newAccepted": 0,
+      "oldRuntimeReassigned": false,
+      "originalRowSha256": "9a5e0d4f9d4f41aba3424d3d10872b93a8f07c39d602f88275ea1b768dffb9ef",
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/TransferMetricRecorderTest.java",
+      "productTestsExecutedByReview": 0,
+      "reason": "Standalone JavaSE original JUnit owns finite2/4/8-worker pools and finite64-task workloads, with fake MXBean getters or supplied immutable values only. API collector, transfer, retention and catalog invokeAll/get preserve no local timeout; Web collector uses5-second deadlines. Publication latches5seconds, Web BLOCKED poll2seconds and100ms negative observation are original contract. TWR or catalog finally shutdownNow+awaitTermination10seconds closes caller pools. Actual normal JVM terminal and outer240seconds are distinct from those local bounds. No application/EJB worker, live pool/DB/JMX/network/VM/Root activity.",
+      "rule": "DoNotUseThreads",
+      "scopeKind": "METHOD",
+      "scopeName": "transferMet007ConcurrentAtomicSnapshotNeverMixesCohortsOrChangesOldValues",
+      "scopeTokenSha256": "10d749020afee2d9a84076693b456f2c1ef0076cc7208ccef0d64e02b9aa6a72",
+      "source": "14198cb1878ec73319511ba1067133992d335e63",
+      "sourceSha256": "9775f5889a8cc51f5de943c227e8f6dabb255f7f1a6a380d1fd12a0861d1e58e",
+      "sourceSpanSha256": "45a38a95e5b1914bc44b51b29e60fb4d5c93e0e1d3f6a314234d653392df5f14"
+    },
+    {
+      "attributes": {
+        "begincolumn": "32",
+        "beginline": "214",
+        "class": "TransferMetricRecorderTest",
+        "endcolumn": "49",
+        "endline": "214",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#compareobjectswithequals",
+        "method": "transferMet007ConcurrentAtomicSnapshotNeverMixesCohortsOrChangesOldValues",
+        "package": "dev.codex.schubert.nk.batch.monitoring",
+        "priority": "3",
+        "rule": "CompareObjectsWithEquals",
+        "ruleset": "Error Prone"
+      },
+      "controls": [
+        "Executors.newFixedThreadPool(8)",
+        "IntStream.range(0,64)",
+        "snapshot==first||snapshot==second",
+        "pool.invokeAll(jobs)",
+        "result.get()"
+      ],
+      "currentCases": [
+        {
+          "className": "dev.codex.schubert.nk.batch.monitoring.TransferMetricRecorderTest",
+          "method": "transferMet007ConcurrentAtomicSnapshotNeverMixesCohortsOrChangesOldValues",
+          "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/TransferMetricRecorderTest.java",
+          "sourceSha256": "9775f5889a8cc51f5de943c227e8f6dabb255f7f1a6a380d1fd12a0861d1e58e"
+        }
+      ],
+      "currentWholeJoinPending": true,
+      "disposition": "CONTEXT_NOT_APPLICABLE",
+      "id": "PMD-04914",
+      "kind": "ATOMIC_SNAPSHOT_REFERENCE_IDENTITY_ORACLE",
+      "newAccepted": 0,
+      "oldRuntimeReassigned": false,
+      "originalRowSha256": "ecc8475cb040e11592e3b914ca2e7ab50d058264daaf7bc35a993c7a58673565",
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/TransferMetricRecorderTest.java",
+      "productTestsExecutedByReview": 0,
+      "reason": "Two preconstructed immutable Usage instances are concurrently recorded. Snapshot must be exactly one original instance, never a reconstructed or mixed cohort. Reference identity is the observable ownership contract deliberately asserted; replacing with equals weakens that oracle. Old supplied objects and original fixed counts are independently checked after workers terminate.",
+      "rule": "CompareObjectsWithEquals",
+      "scopeKind": "METHOD",
+      "scopeName": "transferMet007ConcurrentAtomicSnapshotNeverMixesCohortsOrChangesOldValues",
+      "scopeTokenSha256": "10d749020afee2d9a84076693b456f2c1ef0076cc7208ccef0d64e02b9aa6a72",
+      "source": "14198cb1878ec73319511ba1067133992d335e63",
+      "sourceSha256": "9775f5889a8cc51f5de943c227e8f6dabb255f7f1a6a380d1fd12a0861d1e58e",
+      "sourceSpanSha256": "9c8ebc959db8d30b71020c39c00ed869123b8512fabeb36509e68ccc1bccd009"
+    },
+    {
+      "attributes": {
+        "begincolumn": "53",
+        "beginline": "214",
+        "class": "TransferMetricRecorderTest",
+        "endcolumn": "71",
+        "endline": "214",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#compareobjectswithequals",
+        "method": "transferMet007ConcurrentAtomicSnapshotNeverMixesCohortsOrChangesOldValues",
+        "package": "dev.codex.schubert.nk.batch.monitoring",
+        "priority": "3",
+        "rule": "CompareObjectsWithEquals",
+        "ruleset": "Error Prone"
+      },
+      "controls": [
+        "Executors.newFixedThreadPool(8)",
+        "IntStream.range(0,64)",
+        "snapshot==first||snapshot==second",
+        "pool.invokeAll(jobs)",
+        "result.get()"
+      ],
+      "currentCases": [
+        {
+          "className": "dev.codex.schubert.nk.batch.monitoring.TransferMetricRecorderTest",
+          "method": "transferMet007ConcurrentAtomicSnapshotNeverMixesCohortsOrChangesOldValues",
+          "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/TransferMetricRecorderTest.java",
+          "sourceSha256": "9775f5889a8cc51f5de943c227e8f6dabb255f7f1a6a380d1fd12a0861d1e58e"
+        }
+      ],
+      "currentWholeJoinPending": true,
+      "disposition": "CONTEXT_NOT_APPLICABLE",
+      "id": "PMD-04915",
+      "kind": "ATOMIC_SNAPSHOT_REFERENCE_IDENTITY_ORACLE",
+      "newAccepted": 0,
+      "oldRuntimeReassigned": false,
+      "originalRowSha256": "72b2bc7e79603808620c3ba0ff6ef1251046c4bfcd061f4337164d3b82d9464d",
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/TransferMetricRecorderTest.java",
+      "productTestsExecutedByReview": 0,
+      "reason": "Two preconstructed immutable Usage instances are concurrently recorded. Snapshot must be exactly one original instance, never a reconstructed or mixed cohort. Reference identity is the observable ownership contract deliberately asserted; replacing with equals weakens that oracle. Old supplied objects and original fixed counts are independently checked after workers terminate.",
+      "rule": "CompareObjectsWithEquals",
+      "scopeKind": "METHOD",
+      "scopeName": "transferMet007ConcurrentAtomicSnapshotNeverMixesCohortsOrChangesOldValues",
+      "scopeTokenSha256": "10d749020afee2d9a84076693b456f2c1ef0076cc7208ccef0d64e02b9aa6a72",
+      "source": "14198cb1878ec73319511ba1067133992d335e63",
+      "sourceSha256": "9775f5889a8cc51f5de943c227e8f6dabb255f7f1a6a380d1fd12a0861d1e58e",
+      "sourceSpanSha256": "707f5114bd902f0dba0246468f9714ed4855a420710e6940f02690319a3ffae2"
+    },
+    {
+      "attributes": {
+        "begincolumn": "25",
+        "beginline": "217",
+        "class": "TransferMetricRecorderTest",
+        "endcolumn": "45",
+        "endline": "217",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "method": "transferMet007ConcurrentAtomicSnapshotNeverMixesCohortsOrChangesOldValues",
+        "package": "dev.codex.schubert.nk.batch.monitoring",
+        "priority": "3",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading"
+      },
+      "controls": [
+        "Executors.newFixedThreadPool(8)",
+        "IntStream.range(0,64)",
+        "snapshot==first||snapshot==second",
+        "pool.invokeAll(jobs)",
+        "result.get()"
+      ],
+      "currentCases": [
+        {
+          "className": "dev.codex.schubert.nk.batch.monitoring.TransferMetricRecorderTest",
+          "method": "transferMet007ConcurrentAtomicSnapshotNeverMixesCohortsOrChangesOldValues",
+          "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/TransferMetricRecorderTest.java",
+          "sourceSha256": "9775f5889a8cc51f5de943c227e8f6dabb255f7f1a6a380d1fd12a0861d1e58e"
+        }
+      ],
+      "currentWholeJoinPending": true,
+      "disposition": "CONTEXT_NOT_APPLICABLE",
+      "id": "PMD-04916",
+      "kind": "FINITE_OWNED_STANDALONE_FIXTURE_WORKERS",
+      "newAccepted": 0,
+      "oldRuntimeReassigned": false,
+      "originalRowSha256": "24eb50d8dba2c2b7c6f35820cefefe3450115f869b4e104c16014cf5a14c3f2b",
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/TransferMetricRecorderTest.java",
+      "productTestsExecutedByReview": 0,
+      "reason": "Standalone JavaSE original JUnit owns finite2/4/8-worker pools and finite64-task workloads, with fake MXBean getters or supplied immutable values only. API collector, transfer, retention and catalog invokeAll/get preserve no local timeout; Web collector uses5-second deadlines. Publication latches5seconds, Web BLOCKED poll2seconds and100ms negative observation are original contract. TWR or catalog finally shutdownNow+awaitTermination10seconds closes caller pools. Actual normal JVM terminal and outer240seconds are distinct from those local bounds. No application/EJB worker, live pool/DB/JMX/network/VM/Root activity.",
+      "rule": "DoNotUseThreads",
+      "scopeKind": "METHOD",
+      "scopeName": "transferMet007ConcurrentAtomicSnapshotNeverMixesCohortsOrChangesOldValues",
+      "scopeTokenSha256": "10d749020afee2d9a84076693b456f2c1ef0076cc7208ccef0d64e02b9aa6a72",
+      "source": "14198cb1878ec73319511ba1067133992d335e63",
+      "sourceSha256": "9775f5889a8cc51f5de943c227e8f6dabb255f7f1a6a380d1fd12a0861d1e58e",
+      "sourceSpanSha256": "cf119bee31771d362b9bd975f19c2a8de10a683718deaa11cd1a5fe37683e51c"
+    },
+    {
+      "attributes": {
+        "begincolumn": "24",
+        "beginline": "185",
+        "class": "WebDbPoolMetricCollectorTest",
+        "endcolumn": "55",
+        "endline": "185",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "method": "webPoolConn006OneOwnerSerializesGettersThroughPublication",
+        "package": "dev.codex.schubert.nk.web.monitoring",
+        "priority": "3",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading",
+        "variable": "executor"
+      },
+      "controls": [
+        "Executors.newFixedThreadPool(2)",
+        "release.await(5,TimeUnit.SECONDS)",
+        "Thread.State.BLOCKED",
+        "TimeUnit.SECONDS.toNanos(2)",
+        "one.get(5,TimeUnit.SECONDS)",
+        "release.countDown()"
+      ],
+      "currentCases": [
+        {
+          "className": "dev.codex.schubert.nk.web.monitoring.WebDbPoolMetricCollectorTest",
+          "method": "webPoolConn006OneOwnerSerializesGettersThroughPublication",
+          "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebDbPoolMetricCollectorTest.java",
+          "sourceSha256": "bd3ce9b76065aa929036b629f5b1d9d1aec4ba0c773e965809dd398ff97b25f4"
+        }
+      ],
+      "currentWholeJoinPending": true,
+      "disposition": "CONTEXT_NOT_APPLICABLE",
+      "id": "PMD-08326",
+      "kind": "FINITE_OWNED_STANDALONE_FIXTURE_WORKERS",
+      "newAccepted": 0,
+      "oldRuntimeReassigned": false,
+      "originalRowSha256": "4bf06bde4171d31e63157af1751c31c7fc62c68e2a8f10517f4c484c8aaf9889",
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebDbPoolMetricCollectorTest.java",
+      "productTestsExecutedByReview": 0,
+      "reason": "Standalone JavaSE original JUnit owns finite2/4/8-worker pools and finite64-task workloads, with fake MXBean getters or supplied immutable values only. API collector, transfer, retention and catalog invokeAll/get preserve no local timeout; Web collector uses5-second deadlines. Publication latches5seconds, Web BLOCKED poll2seconds and100ms negative observation are original contract. TWR or catalog finally shutdownNow+awaitTermination10seconds closes caller pools. Actual normal JVM terminal and outer240seconds are distinct from those local bounds. No application/EJB worker, live pool/DB/JMX/network/VM/Root activity.",
+      "rule": "DoNotUseThreads",
+      "scopeKind": "METHOD",
+      "scopeName": "webPoolConn006OneOwnerSerializesGettersThroughPublication",
+      "scopeTokenSha256": "c4bdd5fb9aeed2324f8edb31bc87220fe7bed79261a8265479b921bcb2b975fe",
+      "source": "14198cb1878ec73319511ba1067133992d335e63",
+      "sourceSha256": "bd3ce9b76065aa929036b629f5b1d9d1aec4ba0c773e965809dd398ff97b25f4",
+      "sourceSpanSha256": "9bb4530d7d15c1a0fc8b12c6cf064977273b752194c1eb8f8a3beb1a5e42af46"
+    },
+    {
+      "attributes": {
+        "begincolumn": "46",
+        "beginline": "195",
+        "class": "WebDbPoolMetricCollectorTest",
+        "endcolumn": "52",
+        "endline": "195",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "method": "webPoolConn006OneOwnerSerializesGettersThroughPublication",
+        "package": "dev.codex.schubert.nk.web.monitoring",
+        "priority": "3",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading"
+      },
+      "controls": [
+        "Executors.newFixedThreadPool(2)",
+        "release.await(5,TimeUnit.SECONDS)",
+        "Thread.State.BLOCKED",
+        "TimeUnit.SECONDS.toNanos(2)",
+        "one.get(5,TimeUnit.SECONDS)",
+        "release.countDown()"
+      ],
+      "currentCases": [
+        {
+          "className": "dev.codex.schubert.nk.web.monitoring.WebDbPoolMetricCollectorTest",
+          "method": "webPoolConn006OneOwnerSerializesGettersThroughPublication",
+          "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebDbPoolMetricCollectorTest.java",
+          "sourceSha256": "bd3ce9b76065aa929036b629f5b1d9d1aec4ba0c773e965809dd398ff97b25f4"
+        }
+      ],
+      "currentWholeJoinPending": true,
+      "disposition": "CONTEXT_NOT_APPLICABLE",
+      "id": "PMD-08327",
+      "kind": "FINITE_OWNED_STANDALONE_FIXTURE_WORKERS",
+      "newAccepted": 0,
+      "oldRuntimeReassigned": false,
+      "originalRowSha256": "9ee3cf837b50caba89fd7d0f0488c9558a34925ee800462b102d892621b6f4e1",
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebDbPoolMetricCollectorTest.java",
+      "productTestsExecutedByReview": 0,
+      "reason": "Standalone JavaSE original JUnit owns finite2/4/8-worker pools and finite64-task workloads, with fake MXBean getters or supplied immutable values only. API collector, transfer, retention and catalog invokeAll/get preserve no local timeout; Web collector uses5-second deadlines. Publication latches5seconds, Web BLOCKED poll2seconds and100ms negative observation are original contract. TWR or catalog finally shutdownNow+awaitTermination10seconds closes caller pools. Actual normal JVM terminal and outer240seconds are distinct from those local bounds. No application/EJB worker, live pool/DB/JMX/network/VM/Root activity.",
+      "rule": "DoNotUseThreads",
+      "scopeKind": "METHOD",
+      "scopeName": "webPoolConn006OneOwnerSerializesGettersThroughPublication",
+      "scopeTokenSha256": "c4bdd5fb9aeed2324f8edb31bc87220fe7bed79261a8265479b921bcb2b975fe",
+      "source": "14198cb1878ec73319511ba1067133992d335e63",
+      "sourceSha256": "bd3ce9b76065aa929036b629f5b1d9d1aec4ba0c773e965809dd398ff97b25f4",
+      "sourceSpanSha256": "c7e0b84fbfefd28c7e95c9c7061c88abe11dd225ec2e0b7de1f9ae7583f0d1a0"
+    },
+    {
+      "attributes": {
+        "begincolumn": "17",
+        "beginline": "202",
+        "class": "WebDbPoolMetricCollectorTest",
+        "endcolumn": "87",
+        "endline": "202",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "method": "webPoolConn006OneOwnerSerializesGettersThroughPublication",
+        "package": "dev.codex.schubert.nk.web.monitoring",
+        "priority": "3",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading",
+        "variable": "one"
+      },
+      "controls": [
+        "Executors.newFixedThreadPool(2)",
+        "release.await(5,TimeUnit.SECONDS)",
+        "Thread.State.BLOCKED",
+        "TimeUnit.SECONDS.toNanos(2)",
+        "one.get(5,TimeUnit.SECONDS)",
+        "release.countDown()"
+      ],
+      "currentCases": [
+        {
+          "className": "dev.codex.schubert.nk.web.monitoring.WebDbPoolMetricCollectorTest",
+          "method": "webPoolConn006OneOwnerSerializesGettersThroughPublication",
+          "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebDbPoolMetricCollectorTest.java",
+          "sourceSha256": "bd3ce9b76065aa929036b629f5b1d9d1aec4ba0c773e965809dd398ff97b25f4"
+        }
+      ],
+      "currentWholeJoinPending": true,
+      "disposition": "CONTEXT_NOT_APPLICABLE",
+      "id": "PMD-08328",
+      "kind": "FINITE_OWNED_STANDALONE_FIXTURE_WORKERS",
+      "newAccepted": 0,
+      "oldRuntimeReassigned": false,
+      "originalRowSha256": "c36d283ce95c528f10fc3564b35ae292264d5ee438de183a43dbd4a49a69fe3f",
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebDbPoolMetricCollectorTest.java",
+      "productTestsExecutedByReview": 0,
+      "reason": "Standalone JavaSE original JUnit owns finite2/4/8-worker pools and finite64-task workloads, with fake MXBean getters or supplied immutable values only. API collector, transfer, retention and catalog invokeAll/get preserve no local timeout; Web collector uses5-second deadlines. Publication latches5seconds, Web BLOCKED poll2seconds and100ms negative observation are original contract. TWR or catalog finally shutdownNow+awaitTermination10seconds closes caller pools. Actual normal JVM terminal and outer240seconds are distinct from those local bounds. No application/EJB worker, live pool/DB/JMX/network/VM/Root activity.",
+      "rule": "DoNotUseThreads",
+      "scopeKind": "METHOD",
+      "scopeName": "webPoolConn006OneOwnerSerializesGettersThroughPublication",
+      "scopeTokenSha256": "c4bdd5fb9aeed2324f8edb31bc87220fe7bed79261a8265479b921bcb2b975fe",
+      "source": "14198cb1878ec73319511ba1067133992d335e63",
+      "sourceSha256": "bd3ce9b76065aa929036b629f5b1d9d1aec4ba0c773e965809dd398ff97b25f4",
+      "sourceSpanSha256": "7bb8cf29d4ed6d4ec7c6ddd0827ae078d19b726d770c0a7fe8f80ca6156b60b1"
+    },
+    {
+      "attributes": {
+        "begincolumn": "13",
+        "beginline": "206",
+        "class": "WebDbPoolMetricCollectorTest",
+        "endcolumn": "19",
+        "endline": "211",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "method": "webPoolConn006OneOwnerSerializesGettersThroughPublication",
+        "package": "dev.codex.schubert.nk.web.monitoring",
+        "priority": "3",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading",
+        "variable": "two"
+      },
+      "controls": [
+        "Executors.newFixedThreadPool(2)",
+        "release.await(5,TimeUnit.SECONDS)",
+        "Thread.State.BLOCKED",
+        "TimeUnit.SECONDS.toNanos(2)",
+        "one.get(5,TimeUnit.SECONDS)",
+        "release.countDown()"
+      ],
+      "currentCases": [
+        {
+          "className": "dev.codex.schubert.nk.web.monitoring.WebDbPoolMetricCollectorTest",
+          "method": "webPoolConn006OneOwnerSerializesGettersThroughPublication",
+          "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebDbPoolMetricCollectorTest.java",
+          "sourceSha256": "bd3ce9b76065aa929036b629f5b1d9d1aec4ba0c773e965809dd398ff97b25f4"
+        }
+      ],
+      "currentWholeJoinPending": true,
+      "disposition": "CONTEXT_NOT_APPLICABLE",
+      "id": "PMD-08329",
+      "kind": "FINITE_OWNED_STANDALONE_FIXTURE_WORKERS",
+      "newAccepted": 0,
+      "oldRuntimeReassigned": false,
+      "originalRowSha256": "e2ed8bbc492fb239b48b59f05416e5521d0ef757db2ec268fca25122aa2df422",
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebDbPoolMetricCollectorTest.java",
+      "productTestsExecutedByReview": 0,
+      "reason": "Standalone JavaSE original JUnit owns finite2/4/8-worker pools and finite64-task workloads, with fake MXBean getters or supplied immutable values only. API collector, transfer, retention and catalog invokeAll/get preserve no local timeout; Web collector uses5-second deadlines. Publication latches5seconds, Web BLOCKED poll2seconds and100ms negative observation are original contract. TWR or catalog finally shutdownNow+awaitTermination10seconds closes caller pools. Actual normal JVM terminal and outer240seconds are distinct from those local bounds. No application/EJB worker, live pool/DB/JMX/network/VM/Root activity.",
+      "rule": "DoNotUseThreads",
+      "scopeKind": "METHOD",
+      "scopeName": "webPoolConn006OneOwnerSerializesGettersThroughPublication",
+      "scopeTokenSha256": "c4bdd5fb9aeed2324f8edb31bc87220fe7bed79261a8265479b921bcb2b975fe",
+      "source": "14198cb1878ec73319511ba1067133992d335e63",
+      "sourceSha256": "bd3ce9b76065aa929036b629f5b1d9d1aec4ba0c773e965809dd398ff97b25f4",
+      "sourceSpanSha256": "cd39874bf99119aa76331b4d4b0eeeefbfeaa11df3c97dd475fe7392b2ee4ac3"
+    },
+    {
+      "attributes": {
+        "begincolumn": "36",
+        "beginline": "208",
+        "class": "WebDbPoolMetricCollectorTest",
+        "endcolumn": "42",
+        "endline": "208",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "method": "webPoolConn006OneOwnerSerializesGettersThroughPublication",
+        "package": "dev.codex.schubert.nk.web.monitoring",
+        "priority": "3",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading"
+      },
+      "controls": [
+        "Executors.newFixedThreadPool(2)",
+        "release.await(5,TimeUnit.SECONDS)",
+        "Thread.State.BLOCKED",
+        "TimeUnit.SECONDS.toNanos(2)",
+        "one.get(5,TimeUnit.SECONDS)",
+        "release.countDown()"
+      ],
+      "currentCases": [
+        {
+          "className": "dev.codex.schubert.nk.web.monitoring.WebDbPoolMetricCollectorTest",
+          "method": "webPoolConn006OneOwnerSerializesGettersThroughPublication",
+          "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebDbPoolMetricCollectorTest.java",
+          "sourceSha256": "bd3ce9b76065aa929036b629f5b1d9d1aec4ba0c773e965809dd398ff97b25f4"
+        }
+      ],
+      "currentWholeJoinPending": true,
+      "disposition": "CONTEXT_NOT_APPLICABLE",
+      "id": "PMD-08330",
+      "kind": "FINITE_OWNED_STANDALONE_FIXTURE_WORKERS",
+      "newAccepted": 0,
+      "oldRuntimeReassigned": false,
+      "originalRowSha256": "722dc539b16357b9b56c3ba299b3586d7d525b4953f313b26d9ae8f5e601af38",
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebDbPoolMetricCollectorTest.java",
+      "productTestsExecutedByReview": 0,
+      "reason": "Standalone JavaSE original JUnit owns finite2/4/8-worker pools and finite64-task workloads, with fake MXBean getters or supplied immutable values only. API collector, transfer, retention and catalog invokeAll/get preserve no local timeout; Web collector uses5-second deadlines. Publication latches5seconds, Web BLOCKED poll2seconds and100ms negative observation are original contract. TWR or catalog finally shutdownNow+awaitTermination10seconds closes caller pools. Actual normal JVM terminal and outer240seconds are distinct from those local bounds. No application/EJB worker, live pool/DB/JMX/network/VM/Root activity.",
+      "rule": "DoNotUseThreads",
+      "scopeKind": "METHOD",
+      "scopeName": "webPoolConn006OneOwnerSerializesGettersThroughPublication",
+      "scopeTokenSha256": "c4bdd5fb9aeed2324f8edb31bc87220fe7bed79261a8265479b921bcb2b975fe",
+      "source": "14198cb1878ec73319511ba1067133992d335e63",
+      "sourceSha256": "bd3ce9b76065aa929036b629f5b1d9d1aec4ba0c773e965809dd398ff97b25f4",
+      "sourceSpanSha256": "736f808611188e23a260f73a3b3efd6f03ba06df04160342febfca117cd1eb51"
+    },
+    {
+      "attributes": {
+        "begincolumn": "49",
+        "beginline": "214",
+        "class": "WebDbPoolMetricCollectorTest",
+        "endcolumn": "55",
+        "endline": "214",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "method": "webPoolConn006OneOwnerSerializesGettersThroughPublication",
+        "package": "dev.codex.schubert.nk.web.monitoring",
+        "priority": "3",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading"
+      },
+      "controls": [
+        "Executors.newFixedThreadPool(2)",
+        "release.await(5,TimeUnit.SECONDS)",
+        "Thread.State.BLOCKED",
+        "TimeUnit.SECONDS.toNanos(2)",
+        "one.get(5,TimeUnit.SECONDS)",
+        "release.countDown()"
+      ],
+      "currentCases": [
+        {
+          "className": "dev.codex.schubert.nk.web.monitoring.WebDbPoolMetricCollectorTest",
+          "method": "webPoolConn006OneOwnerSerializesGettersThroughPublication",
+          "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebDbPoolMetricCollectorTest.java",
+          "sourceSha256": "bd3ce9b76065aa929036b629f5b1d9d1aec4ba0c773e965809dd398ff97b25f4"
+        }
+      ],
+      "currentWholeJoinPending": true,
+      "disposition": "CONTEXT_NOT_APPLICABLE",
+      "id": "PMD-08331",
+      "kind": "FINITE_OWNED_STANDALONE_FIXTURE_WORKERS",
+      "newAccepted": 0,
+      "oldRuntimeReassigned": false,
+      "originalRowSha256": "8e631a80fd054ff286d709e7f866a4556da2d2c8954c5c7bc9604eacae98abfc",
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebDbPoolMetricCollectorTest.java",
+      "productTestsExecutedByReview": 0,
+      "reason": "Standalone JavaSE original JUnit owns finite2/4/8-worker pools and finite64-task workloads, with fake MXBean getters or supplied immutable values only. API collector, transfer, retention and catalog invokeAll/get preserve no local timeout; Web collector uses5-second deadlines. Publication latches5seconds, Web BLOCKED poll2seconds and100ms negative observation are original contract. TWR or catalog finally shutdownNow+awaitTermination10seconds closes caller pools. Actual normal JVM terminal and outer240seconds are distinct from those local bounds. No application/EJB worker, live pool/DB/JMX/network/VM/Root activity.",
+      "rule": "DoNotUseThreads",
+      "scopeKind": "METHOD",
+      "scopeName": "webPoolConn006OneOwnerSerializesGettersThroughPublication",
+      "scopeTokenSha256": "c4bdd5fb9aeed2324f8edb31bc87220fe7bed79261a8265479b921bcb2b975fe",
+      "source": "14198cb1878ec73319511ba1067133992d335e63",
+      "sourceSha256": "bd3ce9b76065aa929036b629f5b1d9d1aec4ba0c773e965809dd398ff97b25f4",
+      "sourceSpanSha256": "736f808611188e23a260f73a3b3efd6f03ba06df04160342febfca117cd1eb51"
+    },
+    {
+      "attributes": {
+        "begincolumn": "22",
+        "beginline": "216",
+        "class": "WebDbPoolMetricCollectorTest",
+        "endcolumn": "28",
+        "endline": "216",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "method": "webPoolConn006OneOwnerSerializesGettersThroughPublication",
+        "package": "dev.codex.schubert.nk.web.monitoring",
+        "priority": "3",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading"
+      },
+      "controls": [
+        "Executors.newFixedThreadPool(2)",
+        "release.await(5,TimeUnit.SECONDS)",
+        "Thread.State.BLOCKED",
+        "TimeUnit.SECONDS.toNanos(2)",
+        "one.get(5,TimeUnit.SECONDS)",
+        "release.countDown()"
+      ],
+      "currentCases": [
+        {
+          "className": "dev.codex.schubert.nk.web.monitoring.WebDbPoolMetricCollectorTest",
+          "method": "webPoolConn006OneOwnerSerializesGettersThroughPublication",
+          "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebDbPoolMetricCollectorTest.java",
+          "sourceSha256": "bd3ce9b76065aa929036b629f5b1d9d1aec4ba0c773e965809dd398ff97b25f4"
+        }
+      ],
+      "currentWholeJoinPending": true,
+      "disposition": "CONTEXT_NOT_APPLICABLE",
+      "id": "PMD-08332",
+      "kind": "FINITE_OWNED_STANDALONE_FIXTURE_WORKERS",
+      "newAccepted": 0,
+      "oldRuntimeReassigned": false,
+      "originalRowSha256": "e59ae514598a53cc4fa96a0a3c168b6c5216f5d4812afc232da6884f2415b78e",
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebDbPoolMetricCollectorTest.java",
+      "productTestsExecutedByReview": 0,
+      "reason": "Standalone JavaSE original JUnit owns finite2/4/8-worker pools and finite64-task workloads, with fake MXBean getters or supplied immutable values only. API collector, transfer, retention and catalog invokeAll/get preserve no local timeout; Web collector uses5-second deadlines. Publication latches5seconds, Web BLOCKED poll2seconds and100ms negative observation are original contract. TWR or catalog finally shutdownNow+awaitTermination10seconds closes caller pools. Actual normal JVM terminal and outer240seconds are distinct from those local bounds. No application/EJB worker, live pool/DB/JMX/network/VM/Root activity.",
+      "rule": "DoNotUseThreads",
+      "scopeKind": "METHOD",
+      "scopeName": "webPoolConn006OneOwnerSerializesGettersThroughPublication",
+      "scopeTokenSha256": "c4bdd5fb9aeed2324f8edb31bc87220fe7bed79261a8265479b921bcb2b975fe",
+      "source": "14198cb1878ec73319511ba1067133992d335e63",
+      "sourceSha256": "bd3ce9b76065aa929036b629f5b1d9d1aec4ba0c773e965809dd398ff97b25f4",
+      "sourceSpanSha256": "736f808611188e23a260f73a3b3efd6f03ba06df04160342febfca117cd1eb51"
+    },
+    {
+      "attributes": {
+        "begincolumn": "24",
+        "beginline": "234",
+        "class": "WebDbPoolMetricCollectorTest",
+        "endcolumn": "55",
+        "endline": "234",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "method": "webPoolConn007ParallelFakeSourcesHaveCompleteIndependentReturnedCounts",
+        "package": "dev.codex.schubert.nk.web.monitoring",
+        "priority": "3",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading",
+        "variable": "executor"
+      },
+      "controls": [
+        "Executors.newFixedThreadPool(8)",
+        "i<64",
+        "newFixture()",
+        "executor.invokeAll(tasks,5,TimeUnit.SECONDS)",
+        "actual.get(i).get(5,java.util.concurrent.TimeUnit.SECONDS)"
+      ],
+      "currentCases": [
+        {
+          "className": "dev.codex.schubert.nk.web.monitoring.WebDbPoolMetricCollectorTest",
+          "method": "webPoolConn007ParallelFakeSourcesHaveCompleteIndependentReturnedCounts",
+          "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebDbPoolMetricCollectorTest.java",
+          "sourceSha256": "bd3ce9b76065aa929036b629f5b1d9d1aec4ba0c773e965809dd398ff97b25f4"
+        }
+      ],
+      "currentWholeJoinPending": true,
+      "disposition": "CONTEXT_NOT_APPLICABLE",
+      "id": "PMD-08333",
+      "kind": "FINITE_OWNED_STANDALONE_FIXTURE_WORKERS",
+      "newAccepted": 0,
+      "oldRuntimeReassigned": false,
+      "originalRowSha256": "913bc83437083be13b524cb3056421ff39f3d43a09258bc4a4e43f0dbef6b107",
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebDbPoolMetricCollectorTest.java",
+      "productTestsExecutedByReview": 0,
+      "reason": "Standalone JavaSE original JUnit owns finite2/4/8-worker pools and finite64-task workloads, with fake MXBean getters or supplied immutable values only. API collector, transfer, retention and catalog invokeAll/get preserve no local timeout; Web collector uses5-second deadlines. Publication latches5seconds, Web BLOCKED poll2seconds and100ms negative observation are original contract. TWR or catalog finally shutdownNow+awaitTermination10seconds closes caller pools. Actual normal JVM terminal and outer240seconds are distinct from those local bounds. No application/EJB worker, live pool/DB/JMX/network/VM/Root activity.",
+      "rule": "DoNotUseThreads",
+      "scopeKind": "METHOD",
+      "scopeName": "webPoolConn007ParallelFakeSourcesHaveCompleteIndependentReturnedCounts",
+      "scopeTokenSha256": "b2dd88a3a6d6d9126d9cd9956ffaffbbbbe07752fe00991bdf79fe4a9bf04f2c",
+      "source": "14198cb1878ec73319511ba1067133992d335e63",
+      "sourceSha256": "bd3ce9b76065aa929036b629f5b1d9d1aec4ba0c773e965809dd398ff97b25f4",
+      "sourceSpanSha256": "45a38a95e5b1914bc44b51b29e60fb4d5c93e0e1d3f6a314234d653392df5f14"
+    },
+    {
+      "attributes": {
+        "begincolumn": "20",
+        "beginline": "249",
+        "class": "WebDbPoolMetricCollectorTest",
+        "endcolumn": "66",
+        "endline": "249",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "method": "webPoolConn007ParallelFakeSourcesHaveCompleteIndependentReturnedCounts",
+        "package": "dev.codex.schubert.nk.web.monitoring",
+        "priority": "3",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading",
+        "variable": "actual"
+      },
+      "controls": [
+        "Executors.newFixedThreadPool(8)",
+        "i<64",
+        "newFixture()",
+        "executor.invokeAll(tasks,5,TimeUnit.SECONDS)",
+        "actual.get(i).get(5,java.util.concurrent.TimeUnit.SECONDS)"
+      ],
+      "currentCases": [
+        {
+          "className": "dev.codex.schubert.nk.web.monitoring.WebDbPoolMetricCollectorTest",
+          "method": "webPoolConn007ParallelFakeSourcesHaveCompleteIndependentReturnedCounts",
+          "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebDbPoolMetricCollectorTest.java",
+          "sourceSha256": "bd3ce9b76065aa929036b629f5b1d9d1aec4ba0c773e965809dd398ff97b25f4"
+        }
+      ],
+      "currentWholeJoinPending": true,
+      "disposition": "CONTEXT_NOT_APPLICABLE",
+      "id": "PMD-08334",
+      "kind": "FINITE_OWNED_STANDALONE_FIXTURE_WORKERS",
+      "newAccepted": 0,
+      "oldRuntimeReassigned": false,
+      "originalRowSha256": "bd4a9901ed406bc8f0ae2f3f42d5718aed89a2496496da051f2e02b997ba6e25",
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebDbPoolMetricCollectorTest.java",
+      "productTestsExecutedByReview": 0,
+      "reason": "Standalone JavaSE original JUnit owns finite2/4/8-worker pools and finite64-task workloads, with fake MXBean getters or supplied immutable values only. API collector, transfer, retention and catalog invokeAll/get preserve no local timeout; Web collector uses5-second deadlines. Publication latches5seconds, Web BLOCKED poll2seconds and100ms negative observation are original contract. TWR or catalog finally shutdownNow+awaitTermination10seconds closes caller pools. Actual normal JVM terminal and outer240seconds are distinct from those local bounds. No application/EJB worker, live pool/DB/JMX/network/VM/Root activity.",
+      "rule": "DoNotUseThreads",
+      "scopeKind": "METHOD",
+      "scopeName": "webPoolConn007ParallelFakeSourcesHaveCompleteIndependentReturnedCounts",
+      "scopeTokenSha256": "b2dd88a3a6d6d9126d9cd9956ffaffbbbbe07752fe00991bdf79fe4a9bf04f2c",
+      "source": "14198cb1878ec73319511ba1067133992d335e63",
+      "sourceSha256": "bd3ce9b76065aa929036b629f5b1d9d1aec4ba0c773e965809dd398ff97b25f4",
+      "sourceSpanSha256": "a2ddbab7ccb1b19f57b5b447282f1e2d83bd384a50bfe32372f16c97414e0462"
+    }
+  ],
+  "source": "14198cb1878ec73319511ba1067133992d335e63"
+}

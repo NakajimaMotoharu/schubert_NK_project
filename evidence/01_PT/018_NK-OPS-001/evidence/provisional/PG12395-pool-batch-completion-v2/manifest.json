@@ -1,0 +1,683 @@
+{
+  "actual": {
+    "aborted": 0,
+    "errors": 0,
+    "failures": 0,
+    "newProductTestIds": 0,
+    "skipped": 0,
+    "suites": 5,
+    "tests": 38
+  },
+  "actualExit": 0,
+  "actualSecretCount": null,
+  "allMainClassesUnchanged": 1843,
+  "boundOriginalRuns": [
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG12378-pool-batch-six-compile-v1/manifest.json",
+      "sha256": "27e5dafc18e19fb5e29edd96958a5ba2f05da01611aa12b1ca8208735eb52b75",
+      "source": "14198cb1878ec73319511ba1067133992d335e63"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG12380-pool-batch-host-v1/manifest.json",
+      "sha256": "d12e56ad21684f4c31b690880763c69db7744be141228db54119ce0dcf71c12f",
+      "source": "14198cb1878ec73319511ba1067133992d335e63"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG12384-pool-batch-post-v1/manifest.json",
+      "sha256": "c89e090a9e054d00206a094b29c0e41694cd87e3433f81211e1ae0048791724d",
+      "source": "14198cb1878ec73319511ba1067133992d335e63"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG12386-pool-batch-context-v1/manifest.json",
+      "sha256": "f7c2f9ed8356a354b4c93755f783cff32d23c532a62129b7f1fcecf555e86a07",
+      "source": "14198cb1878ec73319511ba1067133992d335e63"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG12388-pool-batch-context-post-v1/manifest.json",
+      "sha256": "4add8469630e4c0325a7db3698013a3d0f1af78804526ae688e278d6185b8152",
+      "source": "14198cb1878ec73319511ba1067133992d335e63"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG12390-pool-batch-trace-v1/manifest.json",
+      "sha256": "b2481b73b8a2da895ef7e3eca042a82a8d0ca975bbab0eebd367da90770f63b8",
+      "source": "14198cb1878ec73319511ba1067133992d335e63"
+    },
+    {
+      "path": "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG12392-pool-batch-trace-post-v1/manifest.json",
+      "sha256": "000041dc9a01c10f2b008f35d191ff2dbaa40513967d4e89358c93af7a7e2495",
+      "source": "14198cb1878ec73319511ba1067133992d335e63"
+    }
+  ],
+  "codeDebugSha256": "895aefda29912f5b95fc46820a081ccafd7d669d457580e2d3574ca3b900f560",
+  "coreEightMainMeasuredCovered": {
+    "BRANCH": 30,
+    "CLASS": 8,
+    "LINE": 132,
+    "METHOD": 33
+  },
+  "defaultJacocoFilters": true,
+  "effortPercent": null,
+  "eligibilityClosureSourceHashes": {
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/DbPoolMetricCollector.java": "e62f5a2eda99539f59e540ca4d54e9d70d99d7c4c25b0d30e75a98801a295515",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/DbPoolMetricObservation.java": "9e3ef2251b559d4905787fe5ebf2154857e9190b03f54f0f26bb7363ddd78cfc",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/DbPoolMetricRecorder.java": "11a8f25926ef4727e019349b1965b97c456eb46f5f82d2697506610f12e4241c",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/MetricContract.java": "27f647517fc9bee05fdb31dc702bb10a3f4b7cd5c5c59932c55a7a9b7031a54a",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/MonitoringModePolicy.java": "ea59511801e91a94d5c509de18553699fc82b3ba40c608a380ae2db1e8ba3192",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/TransferMetricRecorder.java": "69ed366f5ae4f60315bacff13e904285f860c4e58953e0827a4396bdb14b2c29",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/WebDbPoolMetricCollector.java": "dc1b278e0d111128b2679b7943ae1cabe56ea55eb7cbdc0104503e2b99a46210",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/WebDbPoolMetricObservation.java": "327d739bd9ca972fe535baf86dfbe3d1e01a32f921f98c1a1114ab3ad302f021",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/WebDbPoolMetricRecorder.java": "059f2723ecf118084c7b192d28f5d86a9e6e91e4769195efaec7300b54891a24"
+  },
+  "explicitReferenceAudit": {
+    "directLiteralPairs": [
+      {
+        "actualSha256": "5b954538ef967b5ced149c9f0b4f3b11a15e88676e07c2ea56c22215e9a1e0b0",
+        "line": 33,
+        "matches": true,
+        "path": "PG12352-pool-capacity-six-compile-v1/manifest.json",
+        "pin": "5b954538ef967b5ced149c9f0b4f3b11a15e88676e07c2ea56c22215e9a1e0b0",
+        "tool": "pg12376_pool_batch_source_post.py"
+      },
+      {
+        "actualSha256": "adb98e35478e485d103b28109954ef8ae52fe13aacdfd9444b65feba77709739",
+        "line": 28,
+        "matches": true,
+        "path": "PG12376-pool-batch-source-post-v1/manifest.json",
+        "pin": "adb98e35478e485d103b28109954ef8ae52fe13aacdfd9444b65feba77709739",
+        "tool": "pg12380_pool_batch_host.py"
+      },
+      {
+        "actualSha256": "e73107802e5b4d7605add4d2255393c02df82bd4d202306c4300e9ba5967e557",
+        "line": 34,
+        "matches": true,
+        "path": "PG12374-pool-batch-plan-v1/manifest.json",
+        "pin": "e73107802e5b4d7605add4d2255393c02df82bd4d202306c4300e9ba5967e557",
+        "tool": "pg12380_pool_batch_host.py"
+      },
+      {
+        "actualSha256": "e73107802e5b4d7605add4d2255393c02df82bd4d202306c4300e9ba5967e557",
+        "line": 17,
+        "matches": true,
+        "path": "PG12374-pool-batch-plan-v1/manifest.json",
+        "pin": "e73107802e5b4d7605add4d2255393c02df82bd4d202306c4300e9ba5967e557",
+        "tool": "pg12380_pool_batch_host.py"
+      },
+      {
+        "actualSha256": "5bfb5e23af7295e2d163f7b8de21d2290c14ffb6eba8339e654ff4c56ae86492",
+        "line": 20,
+        "matches": true,
+        "path": "PG10736-protocol-uppercase-six-compile-v1/manifest.json",
+        "pin": "5bfb5e23af7295e2d163f7b8de21d2290c14ffb6eba8339e654ff4c56ae86492",
+        "tool": "pg12382_pool_batch_static.py"
+      },
+      {
+        "actualSha256": "e73107802e5b4d7605add4d2255393c02df82bd4d202306c4300e9ba5967e557",
+        "line": 24,
+        "matches": true,
+        "path": "PG12374-pool-batch-plan-v1/manifest.json",
+        "pin": "e73107802e5b4d7605add4d2255393c02df82bd4d202306c4300e9ba5967e557",
+        "tool": "pg12382_pool_batch_static.py"
+      },
+      {
+        "actualSha256": "d12e56ad21684f4c31b690880763c69db7744be141228db54119ce0dcf71c12f",
+        "line": 28,
+        "matches": true,
+        "path": "PG12380-pool-batch-host-v1/manifest.json",
+        "pin": "d12e56ad21684f4c31b690880763c69db7744be141228db54119ce0dcf71c12f",
+        "tool": "pg12382_pool_batch_static.py"
+      },
+      {
+        "actualSha256": "5b954538ef967b5ced149c9f0b4f3b11a15e88676e07c2ea56c22215e9a1e0b0",
+        "line": 39,
+        "matches": true,
+        "path": "PG12352-pool-capacity-six-compile-v1/manifest.json",
+        "pin": "5b954538ef967b5ced149c9f0b4f3b11a15e88676e07c2ea56c22215e9a1e0b0",
+        "tool": "pg12384_pool_batch_post.py"
+      },
+      {
+        "actualSha256": "d12e56ad21684f4c31b690880763c69db7744be141228db54119ce0dcf71c12f",
+        "line": 19,
+        "matches": true,
+        "path": "PG12380-pool-batch-host-v1/manifest.json",
+        "pin": "d12e56ad21684f4c31b690880763c69db7744be141228db54119ce0dcf71c12f",
+        "tool": "pg12388_pool_batch_context_post.py"
+      },
+      {
+        "actualSha256": "9a5e109ab907bb8a5019881127c7924dbc93246b9bcd0b959ef601fab95321f7",
+        "line": 22,
+        "matches": true,
+        "path": "PG12360-pool-capacity-trace-v1/manifest.json",
+        "pin": "9a5e109ab907bb8a5019881127c7924dbc93246b9bcd0b959ef601fab95321f7",
+        "tool": "pg12390_pool_batch_trace.py"
+      },
+      {
+        "actualSha256": "c89e090a9e054d00206a094b29c0e41694cd87e3433f81211e1ae0048791724d",
+        "line": 24,
+        "matches": true,
+        "path": "PG12384-pool-batch-post-v1/manifest.json",
+        "pin": "c89e090a9e054d00206a094b29c0e41694cd87e3433f81211e1ae0048791724d",
+        "tool": "pg12390_pool_batch_trace.py"
+      },
+      {
+        "actualSha256": "e73107802e5b4d7605add4d2255393c02df82bd4d202306c4300e9ba5967e557",
+        "line": 26,
+        "matches": true,
+        "path": "PG12374-pool-batch-plan-v1/manifest.json",
+        "pin": "e73107802e5b4d7605add4d2255393c02df82bd4d202306c4300e9ba5967e557",
+        "tool": "pg12390_pool_batch_trace.py"
+      },
+      {
+        "actualSha256": "27e5dafc18e19fb5e29edd96958a5ba2f05da01611aa12b1ca8208735eb52b75",
+        "line": 28,
+        "matches": true,
+        "path": "PG12378-pool-batch-six-compile-v1/manifest.json",
+        "pin": "27e5dafc18e19fb5e29edd96958a5ba2f05da01611aa12b1ca8208735eb52b75",
+        "tool": "pg12390_pool_batch_trace.py"
+      },
+      {
+        "actualSha256": "f7c2f9ed8356a354b4c93755f783cff32d23c532a62129b7f1fcecf555e86a07",
+        "line": 34,
+        "matches": true,
+        "path": "PG12386-pool-batch-context-v1/manifest.json",
+        "pin": "f7c2f9ed8356a354b4c93755f783cff32d23c532a62129b7f1fcecf555e86a07",
+        "tool": "pg12390_pool_batch_trace.py"
+      },
+      {
+        "actualSha256": "4add8469630e4c0325a7db3698013a3d0f1af78804526ae688e278d6185b8152",
+        "line": 35,
+        "matches": true,
+        "path": "PG12388-pool-batch-context-post-v1/manifest.json",
+        "pin": "4add8469630e4c0325a7db3698013a3d0f1af78804526ae688e278d6185b8152",
+        "tool": "pg12390_pool_batch_trace.py"
+      },
+      {
+        "actualSha256": "5b954538ef967b5ced149c9f0b4f3b11a15e88676e07c2ea56c22215e9a1e0b0",
+        "line": 22,
+        "matches": false,
+        "path": "PG12352-pool-capacity-six-compile-v1/manifest.json",
+        "pin": "96605de485f83a38656ca3d0f479f679f708193d263671784582acb088d4b88b",
+        "tool": "pg12394_pool_batch_completion.py"
+      },
+      {
+        "actualSha256": "ef847e28425796fadd1e804a7367c5f4fca93da901c84a8ea544838b0e277d5e",
+        "line": 40,
+        "matches": true,
+        "path": "PG12382-pool-batch-static-v1/manifest.json",
+        "pin": "ef847e28425796fadd1e804a7367c5f4fca93da901c84a8ea544838b0e277d5e",
+        "tool": "pg12394_pool_batch_completion.py"
+      },
+      {
+        "actualSha256": "adb98e35478e485d103b28109954ef8ae52fe13aacdfd9444b65feba77709739",
+        "line": 41,
+        "matches": true,
+        "path": "PG12376-pool-batch-source-post-v1/manifest.json",
+        "pin": "adb98e35478e485d103b28109954ef8ae52fe13aacdfd9444b65feba77709739",
+        "tool": "pg12394_pool_batch_completion.py"
+      },
+      {
+        "actualSha256": "27e5dafc18e19fb5e29edd96958a5ba2f05da01611aa12b1ca8208735eb52b75",
+        "line": 19,
+        "matches": true,
+        "path": "PG12378-pool-batch-six-compile-v1/manifest.json",
+        "pin": "27e5dafc18e19fb5e29edd96958a5ba2f05da01611aa12b1ca8208735eb52b75",
+        "tool": "pg12396_current_pool_batch_delta.py"
+      },
+      {
+        "actualSha256": "5b954538ef967b5ced149c9f0b4f3b11a15e88676e07c2ea56c22215e9a1e0b0",
+        "line": 19,
+        "matches": true,
+        "path": "PG12352-pool-capacity-six-compile-v1/manifest.json",
+        "pin": "5b954538ef967b5ced149c9f0b4f3b11a15e88676e07c2ea56c22215e9a1e0b0",
+        "tool": "pg12396_current_pool_batch_delta.py"
+      },
+      {
+        "actualSha256": "2792e46fb74856feff95d4a298a22967bbe894dc35a19c4171d6043bcb6685bd",
+        "line": 33,
+        "matches": true,
+        "path": "PG12304-current-api-value-delta-post-v1/manifest.json",
+        "pin": "2792e46fb74856feff95d4a298a22967bbe894dc35a19c4171d6043bcb6685bd",
+        "tool": "pg12398_current_pool_batch_delta_post.py"
+      },
+      {
+        "actualSha256": "6f3e0e8cddb256269a98696b0964414475d60b4e9b293f877ee0aaa8eebed3f0",
+        "line": 36,
+        "matches": true,
+        "path": "PG12331-current-readiness-dependency-delta-post-v2/manifest.json",
+        "pin": "6f3e0e8cddb256269a98696b0964414475d60b4e9b293f877ee0aaa8eebed3f0",
+        "tool": "pg12398_current_pool_batch_delta_post.py"
+      },
+      {
+        "actualSha256": "ef0537f204a8fcfad0e50918464abe66e8bff61322453dbb6b51bc0d482f3949",
+        "line": 39,
+        "matches": true,
+        "path": "PG12340-current-remaining-main-maps-delta-post-v1/manifest.json",
+        "pin": "ef0537f204a8fcfad0e50918464abe66e8bff61322453dbb6b51bc0d482f3949",
+        "tool": "pg12398_current_pool_batch_delta_post.py"
+      },
+      {
+        "actualSha256": "d1826fa2a05721e50637e95c7662f3fe105f148463de2197c40a37448a90f184",
+        "line": 42,
+        "matches": true,
+        "path": "PG12370-current-pool-capacity-delta-post-v1/manifest.json",
+        "pin": "d1826fa2a05721e50637e95c7662f3fe105f148463de2197c40a37448a90f184",
+        "tool": "pg12398_current_pool_batch_delta_post.py"
+      },
+      {
+        "actualSha256": "27e5dafc18e19fb5e29edd96958a5ba2f05da01611aa12b1ca8208735eb52b75",
+        "line": 44,
+        "matches": true,
+        "path": "PG12378-pool-batch-six-compile-v1/manifest.json",
+        "pin": "27e5dafc18e19fb5e29edd96958a5ba2f05da01611aa12b1ca8208735eb52b75",
+        "tool": "pg12398_current_pool_batch_delta_post.py"
+      },
+      {
+        "actualSha256": "5b954538ef967b5ced149c9f0b4f3b11a15e88676e07c2ea56c22215e9a1e0b0",
+        "line": 44,
+        "matches": true,
+        "path": "PG12352-pool-capacity-six-compile-v1/manifest.json",
+        "pin": "5b954538ef967b5ced149c9f0b4f3b11a15e88676e07c2ea56c22215e9a1e0b0",
+        "tool": "pg12398_current_pool_batch_delta_post.py"
+      },
+      {
+        "actualSha256": "5b954538ef967b5ced149c9f0b4f3b11a15e88676e07c2ea56c22215e9a1e0b0",
+        "line": 40,
+        "matches": true,
+        "path": "PG12352-pool-capacity-six-compile-v1/manifest.json",
+        "pin": "5b954538ef967b5ced149c9f0b4f3b11a15e88676e07c2ea56c22215e9a1e0b0",
+        "tool": "pg12395_pool_batch_completion_v2.py"
+      },
+      {
+        "actualSha256": "ef847e28425796fadd1e804a7367c5f4fca93da901c84a8ea544838b0e277d5e",
+        "line": 58,
+        "matches": true,
+        "path": "PG12382-pool-batch-static-v1/manifest.json",
+        "pin": "ef847e28425796fadd1e804a7367c5f4fca93da901c84a8ea544838b0e277d5e",
+        "tool": "pg12395_pool_batch_completion_v2.py"
+      },
+      {
+        "actualSha256": "adb98e35478e485d103b28109954ef8ae52fe13aacdfd9444b65feba77709739",
+        "line": 59,
+        "matches": true,
+        "path": "PG12376-pool-batch-source-post-v1/manifest.json",
+        "pin": "adb98e35478e485d103b28109954ef8ae52fe13aacdfd9444b65feba77709739",
+        "tool": "pg12395_pool_batch_completion_v2.py"
+      }
+    ],
+    "dynamicOrVariableReferences": "NOT_STATICALLY_RESOLVED; successful per-entry read_checked and source binding remain required",
+    "preservedKnownBadPairs": [
+      {
+        "actualSha256": "5b954538ef967b5ced149c9f0b4f3b11a15e88676e07c2ea56c22215e9a1e0b0",
+        "line": 22,
+        "matches": false,
+        "path": "PG12352-pool-capacity-six-compile-v1/manifest.json",
+        "pin": "96605de485f83a38656ca3d0f479f679f708193d263671784582acb088d4b88b",
+        "tool": "pg12394_pool_batch_completion.py"
+      }
+    ],
+    "productTestsExecuted": 0,
+    "sources": {
+      "tools/quality/pg12374_pool_batch_plan.py": "d4919c567209ef63c0b4cc6281ec1ed631415e59d27581a50033cb004c980fd8",
+      "tools/quality/pg12376_pool_batch_source_post.py": "8cc2aeebb7cbd21d366211c704ca86b2d71ec8ec5d2d11748cc9f5582a2296f8",
+      "tools/quality/pg12378_pool_batch_six_compile.py": "cbd44aabef9ae9d98b3c3b6cb4a49a614943364dd58356cc69e14a54580482dd",
+      "tools/quality/pg12380_pool_batch_host.py": "144b1296eab4df2b8ac5367efc15d05c29e7b1c00c30f7838accdaae5c669a93",
+      "tools/quality/pg12382_pool_batch_static.py": "f8bcb1c5f872782a48cf86af8628c17ae0b1692648bbf653446f0b47c1bdb7ec",
+      "tools/quality/pg12384_pool_batch_post.py": "0218ad724d75db514b5e7734acf045bf404c124467598656b0708c3d873163ae",
+      "tools/quality/pg12386_pool_batch_context.py": "7d39d7f41b633c87f5ffb008db7591160f47ff7d1315cbf5195bad02be693346",
+      "tools/quality/pg12388_pool_batch_context_post.py": "393ce8b052919a990cba528d7b742f32642c26d0e0306257eaa108dcdd92e714",
+      "tools/quality/pg12390_pool_batch_trace.py": "a24fc505e9eaa26f195fd1d071c07c638dcf31fd556f8afeeb8d1b78de8bb861",
+      "tools/quality/pg12392_pool_batch_trace_post.py": "0a048071d828bb74da639090a06fef996b7993eb4bbe2f05a2f8c62d7713beac",
+      "tools/quality/pg12394_pool_batch_completion.py": "4ca5a0b3c1e53b98aed5e6d7de87201175592190edaa22fb35e3d5c3a6941cac",
+      "tools/quality/pg12395_pool_batch_completion_v2.py": "062e0ffcc0207d9b651e53cd2633ef15a93c0225b1c0e1ecc5b910eff31827db",
+      "tools/quality/pg12396_current_pool_batch_delta.py": "54a654a680cb75872d0fd7da330c92f23a8b676a285df5db0131a99242e0f372",
+      "tools/quality/pg12398_current_pool_batch_delta_post.py": "e85e961e60d306ba8e123b948ed48498f283bad9308ebab1fe42b5ca4c77dc5d"
+    }
+  },
+  "externalActions": 0,
+  "formalUpdated": false,
+  "fullArtifactsCoverage100": false,
+  "hostOs": "Linux-7.0.0-38-generic-x86_64-with-glibc2.43",
+  "implementationDecision": "PG-D739",
+  "invocation": {
+    "actualPythonCommand": [
+      "/usr/bin/python3",
+      "-B",
+      "tools/quality/pg12395_pool_batch_completion_v2.py"
+    ],
+    "arbitraryArgumentsRecorded": false,
+    "entrypointPath": "tools/quality/pg12395_pool_batch_completion_v2.py",
+    "entrypointSha256": "062e0ffcc0207d9b651e53cd2633ef15a93c0225b1c0e1ecc5b910eff31827db",
+    "helperPath": "tools/quality/host_tool_invocation.py",
+    "helperSha256": "85d616a3db4ff47f4c95ae2e0dd57954bc2b09f28b8f2a685b986e5621545c46",
+    "libraryPath": "tools/quality/pg12395_pool_batch_completion_v2.py",
+    "librarySha256": "062e0ffcc0207d9b651e53cd2633ef15a93c0225b1c0e1ecc5b910eff31827db",
+    "loadedProjectPythonSources": {
+      "tools/quality/classfile_code_metadata.py": "2227e1e8df1ff91b606f094c7ee64366023273ca740d4d47126ed0928190e2f0",
+      "tools/quality/g07_host_class_provenance_inputs.py": "a676cb3e4145177c3c243722d737592ce7d44c3f29cfe4f670662ef7651f046b",
+      "tools/quality/host_tool_invocation.py": "85d616a3db4ff47f4c95ae2e0dd57954bc2b09f28b8f2a685b986e5621545c46",
+      "tools/quality/pg11929_storage_fixture_class_metadata.py": "2265f22222adac052ce7fe8802ad9a9eb029e7ac485bc1d8ad861bbb71bbdd76",
+      "tools/quality/pg12395_pool_batch_completion_v2.py": "062e0ffcc0207d9b651e53cd2633ef15a93c0225b1c0e1ecc5b910eff31827db",
+      "tools/quality/pg9906_user_query_oracle_source_post.py": "4f9bdaa17eea78a720c0f25b8af906f3f045fda590c8fea2a8868229403a98fa",
+      "tools/quality/pg9978_plain_core_quality_post.py": "c99cc753c6335c9f41e3eafe6a97c17521503739ba2cf80659b542a445dd48fa",
+      "tools/quality/public_java_digest_provenance.py": "dd47f8735a61ce849995633c3290a6ad047842ef3263829ce359db413778f7a0",
+      "tools/quality/source_evidence_binding.py": "ead24cf011439ba01baca5aa5dd2ed74ea3ea12fc70c95b3925e0fd3c247d1dc"
+    },
+    "provenance": "OBSERVED_SYS_ARGV_AND_ORIG_ARGV_NOT_RECONSTRUCTED"
+  },
+  "newAccepted": 0,
+  "noManualExclusions": true,
+  "numericConstants": 0,
+  "numericReferences": 0,
+  "otherTestClassesUnchanged": 1952,
+  "productTestsExecutedByCompletion": 0,
+  "rawDiagnosticsCorrected": 9,
+  "rawStatic": 26,
+  "rawStaticBefore": 35,
+  "rawStaticGateExit": 1,
+  "recordedUTC": "2026-10-27T17:37:49.979828+00:00",
+  "referencesReplaced": 73,
+  "relatedBugs": [
+    "BUG-1968"
+  ],
+  "relatedYkt": [
+    "YKT-1716"
+  ],
+  "resultPath": "evidence/01_PT/018_NK-OPS-001/2329_\u4f9b\u7d66PoolCollector\u30fbBatch\u76e3\u8996\u4e5d\u4ef6_\u88fd\u9020\u5358\u4f53\u7d50\u679c.md",
+  "resultSha256": "6782cbc0cfd43ca058a922a18bb55935568116eb1c88f25f5fed8fafa1b5d464",
+  "selectedMainMeasuredCounters": {
+    "api": {
+      "BRANCH": {
+        "covered": 22,
+        "missed": 17
+      },
+      "CLASS": {
+        "covered": 5,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 64,
+        "missed": 7
+      },
+      "METHOD": {
+        "covered": 17,
+        "missed": 1
+      }
+    },
+    "batch": {
+      "BRANCH": {
+        "covered": 39,
+        "missed": 2
+      },
+      "CLASS": {
+        "covered": 9,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 134,
+        "missed": 1
+      },
+      "METHOD": {
+        "covered": 37,
+        "missed": 0
+      }
+    },
+    "web": {
+      "BRANCH": {
+        "covered": 22,
+        "missed": 17
+      },
+      "CLASS": {
+        "covered": 5,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 64,
+        "missed": 7
+      },
+      "METHOD": {
+        "covered": 17,
+        "missed": 1
+      }
+    }
+  },
+  "source": "14198cb1878ec73319511ba1067133992d335e63",
+  "sourceChangeCommit": "14198cb1878ec73319511ba1067133992d335e63",
+  "sourceLocalContexts": 26,
+  "specificationPath": "evidence/01_PT/018_NK-OPS-001/2328_\u4f9b\u7d66PoolCollector\u30fbBatch\u76e3\u8996\u4e5d\u4ef6_\u5358\u4f53\u30c6\u30b9\u30c8\u4ed5\u69d8\u66f8.md",
+  "specificationSha256": "57c530f9a60962f6c1c7b302d602c24a145f0b5614d1b70af519dadd1ae7b9fd",
+  "stringConstants": 9,
+  "testClassesChanged": 10,
+  "tests": [
+    {
+      "className": "dev.codex.schubert.nk.api.monitoring.DbPoolMetricCollectorTest",
+      "method": "poolConn001DebugPublishesCompleteBorrowedGetterValues",
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/DbPoolMetricCollectorTest.java",
+      "sourceSha256": "440f20404376afcb7a29fef1f2bac01ac7ffea23d203e14c537cb685e9afdacd"
+    },
+    {
+      "className": "dev.codex.schubert.nk.api.monitoring.DbPoolMetricCollectorTest",
+      "method": "poolConn002InvalidObservationClearsOldValuesAndTrueZeroRecovers",
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/DbPoolMetricCollectorTest.java",
+      "sourceSha256": "440f20404376afcb7a29fef1f2bac01ac7ffea23d203e14c537cb685e9afdacd"
+    },
+    {
+      "className": "dev.codex.schubert.nk.api.monitoring.DbPoolMetricCollectorTest",
+      "method": "poolConn003AllGetterFailuresBecomeUnknownAndKeepIdentityWithoutGraphWalk",
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/DbPoolMetricCollectorTest.java",
+      "sourceSha256": "440f20404376afcb7a29fef1f2bac01ac7ffea23d203e14c537cb685e9afdacd"
+    },
+    {
+      "className": "dev.codex.schubert.nk.api.monitoring.DbPoolMetricCollectorTest",
+      "method": "poolConn004StandardNeverCallsEvenFailingGettersOrRetainsDetails",
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/DbPoolMetricCollectorTest.java",
+      "sourceSha256": "440f20404376afcb7a29fef1f2bac01ac7ffea23d203e14c537cb685e9afdacd"
+    },
+    {
+      "className": "dev.codex.schubert.nk.api.monitoring.DbPoolMetricCollectorTest",
+      "method": "poolConn005InvalidBoundariesCannotMutateOrEraseExistingSnapshot",
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/DbPoolMetricCollectorTest.java",
+      "sourceSha256": "440f20404376afcb7a29fef1f2bac01ac7ffea23d203e14c537cb685e9afdacd"
+    },
+    {
+      "className": "dev.codex.schubert.nk.api.monitoring.DbPoolMetricCollectorTest",
+      "method": "poolConn006OneOwnerSerializesGettersThroughPublication",
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/DbPoolMetricCollectorTest.java",
+      "sourceSha256": "440f20404376afcb7a29fef1f2bac01ac7ffea23d203e14c537cb685e9afdacd"
+    },
+    {
+      "className": "dev.codex.schubert.nk.api.monitoring.DbPoolMetricCollectorTest",
+      "method": "poolConn007ParallelFakeSourcesHaveCompleteIndependentReturnedCounts",
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/DbPoolMetricCollectorTest.java",
+      "sourceSha256": "440f20404376afcb7a29fef1f2bac01ac7ffea23d203e14c537cb685e9afdacd"
+    },
+    {
+      "className": "dev.codex.schubert.nk.api.monitoring.DbPoolMetricCollectorTest",
+      "method": "poolConn008SeparateOwnersAndRepeatedCollectionCannotGrowSeriesOrControlPool",
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/DbPoolMetricCollectorTest.java",
+      "sourceSha256": "440f20404376afcb7a29fef1f2bac01ac7ffea23d203e14c537cb685e9afdacd"
+    },
+    {
+      "className": "dev.codex.schubert.nk.batch.monitoring.MetricContractTest",
+      "method": "metric001CompleteIndependentCatalog",
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/MetricContractTest.java",
+      "sourceSha256": "29605f7776c85226dd130a55a06b7e9f17f6e7f8799915c7ec2ecab602c61f84"
+    },
+    {
+      "className": "dev.codex.schubert.nk.batch.monitoring.MetricContractTest",
+      "method": "metric002UnknownMissingAndAliasedNamesRejected",
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/MetricContractTest.java",
+      "sourceSha256": "29605f7776c85226dd130a55a06b7e9f17f6e7f8799915c7ec2ecab602c61f84"
+    },
+    {
+      "className": "dev.codex.schubert.nk.batch.monitoring.MetricContractTest",
+      "method": "metric003ExactLabelNamesNoImplicitOrSensitiveKeys",
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/MetricContractTest.java",
+      "sourceSha256": "29605f7776c85226dd130a55a06b7e9f17f6e7f8799915c7ec2ecab602c61f84"
+    },
+    {
+      "className": "dev.codex.schubert.nk.batch.monitoring.MetricContractTest",
+      "method": "metric004NoMutableStateExposureOrRetention",
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/MetricContractTest.java",
+      "sourceSha256": "29605f7776c85226dd130a55a06b7e9f17f6e7f8799915c7ec2ecab602c61f84"
+    },
+    {
+      "className": "dev.codex.schubert.nk.batch.monitoring.MetricContractTest",
+      "method": "metric005IndependentHttpBucketsAndImmutableResult",
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/MetricContractTest.java",
+      "sourceSha256": "29605f7776c85226dd130a55a06b7e9f17f6e7f8799915c7ec2ecab602c61f84"
+    },
+    {
+      "className": "dev.codex.schubert.nk.batch.monitoring.MetricContractTest",
+      "method": "metric006ConcurrentCallersObserveOnlyOriginalCatalog",
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/MetricContractTest.java",
+      "sourceSha256": "29605f7776c85226dd130a55a06b7e9f17f6e7f8799915c7ec2ecab602c61f84"
+    },
+    {
+      "className": "dev.codex.schubert.nk.batch.monitoring.MonitoringRetentionConfigurationTest",
+      "method": "retConf001ExactApprovedDebugAndStandardConfigurationsPassWithoutMutation",
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/MonitoringRetentionConfigurationTest.java",
+      "sourceSha256": "34c225d054f02940c9b2c9f8a7e1825f5c189389e089c9b40a0298dcc49bd8ab"
+    },
+    {
+      "className": "dev.codex.schubert.nk.batch.monitoring.MonitoringRetentionConfigurationTest",
+      "method": "retConf002DebugRejectsEachIndependentDayAndByteMismatchWithoutRounding",
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/MonitoringRetentionConfigurationTest.java",
+      "sourceSha256": "34c225d054f02940c9b2c9f8a7e1825f5c189389e089c9b40a0298dcc49bd8ab"
+    },
+    {
+      "className": "dev.codex.schubert.nk.batch.monitoring.MonitoringRetentionConfigurationTest",
+      "method": "retConf003MissingNeverBecomesValidStandardZeroAndNonzeroStandardIsDrift",
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/MonitoringRetentionConfigurationTest.java",
+      "sourceSha256": "34c225d054f02940c9b2c9f8a7e1825f5c189389e089c9b40a0298dcc49bd8ab"
+    },
+    {
+      "className": "dev.codex.schubert.nk.batch.monitoring.MonitoringRetentionConfigurationTest",
+      "method": "retConf004NegativeInvariantsAndNullOptionalAreRejectedNotUnknownSuccess",
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/MonitoringRetentionConfigurationTest.java",
+      "sourceSha256": "34c225d054f02940c9b2c9f8a7e1825f5c189389e089c9b40a0298dcc49bd8ab"
+    },
+    {
+      "className": "dev.codex.schubert.nk.batch.monitoring.MonitoringRetentionConfigurationTest",
+      "method": "retConf005MaximumValuesRemainExactAndCannotOverflowIntoApprovedLimits",
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/MonitoringRetentionConfigurationTest.java",
+      "sourceSha256": "34c225d054f02940c9b2c9f8a7e1825f5c189389e089c9b40a0298dcc49bd8ab"
+    },
+    {
+      "className": "dev.codex.schubert.nk.batch.monitoring.MonitoringRetentionConfigurationTest",
+      "method": "retConf006RetentionAndCompleteServiceObservationsRemainSeparateImmutableContracts",
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/MonitoringRetentionConfigurationTest.java",
+      "sourceSha256": "34c225d054f02940c9b2c9f8a7e1825f5c189389e089c9b40a0298dcc49bd8ab"
+    },
+    {
+      "className": "dev.codex.schubert.nk.batch.monitoring.MonitoringRetentionConfigurationTest",
+      "method": "retConf007ParallelModeVerificationCannotMutateOrShareOtherModesConfiguration",
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/MonitoringRetentionConfigurationTest.java",
+      "sourceSha256": "34c225d054f02940c9b2c9f8a7e1825f5c189389e089c9b40a0298dcc49bd8ab"
+    },
+    {
+      "className": "dev.codex.schubert.nk.batch.monitoring.MonitoringRetentionConfigurationTest",
+      "method": "retConf008GeneratedConfigurationUsesIndependentIntegerLongHashAndFixedTextOracles",
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/MonitoringRetentionConfigurationTest.java",
+      "sourceSha256": "34c225d054f02940c9b2c9f8a7e1825f5c189389e089c9b40a0298dcc49bd8ab"
+    },
+    {
+      "className": "dev.codex.schubert.nk.batch.monitoring.TransferMetricRecorderTest",
+      "method": "transferMet001ActualDebugHasFourClosedUnknownGaugesAndBorrowedRegistry",
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/TransferMetricRecorderTest.java",
+      "sourceSha256": "9775f5889a8cc51f5de943c227e8f6dabb255f7f1a6a380d1fd12a0861d1e58e"
+    },
+    {
+      "className": "dev.codex.schubert.nk.batch.monitoring.TransferMetricRecorderTest",
+      "method": "transferMet002LiteralCountsAndExactTotalsPreservePreviousSnapshot",
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/TransferMetricRecorderTest.java",
+      "sourceSha256": "9775f5889a8cc51f5de943c227e8f6dabb255f7f1a6a380d1fd12a0861d1e58e"
+    },
+    {
+      "className": "dev.codex.schubert.nk.batch.monitoring.TransferMetricRecorderTest",
+      "method": "transferMet003RealZeroAndMissingAreDifferentAndRecoveryUsesNewValues",
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/TransferMetricRecorderTest.java",
+      "sourceSha256": "9775f5889a8cc51f5de943c227e8f6dabb255f7f1a6a380d1fd12a0861d1e58e"
+    },
+    {
+      "className": "dev.codex.schubert.nk.batch.monitoring.TransferMetricRecorderTest",
+      "method": "transferMet004StandardDoesNotRegisterOrRetainDetailedValues",
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/TransferMetricRecorderTest.java",
+      "sourceSha256": "9775f5889a8cc51f5de943c227e8f6dabb255f7f1a6a380d1fd12a0861d1e58e"
+    },
+    {
+      "className": "dev.codex.schubert.nk.batch.monitoring.TransferMetricRecorderTest",
+      "method": "transferMet005NullNegativeAndOverflowInputsCannotMutateExistingSnapshot",
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/TransferMetricRecorderTest.java",
+      "sourceSha256": "9775f5889a8cc51f5de943c227e8f6dabb255f7f1a6a380d1fd12a0861d1e58e"
+    },
+    {
+      "className": "dev.codex.schubert.nk.batch.monitoring.TransferMetricRecorderTest",
+      "method": "transferMet006MaximumLongRemainsExactInSnapshotAndDoubleUsesGoldenRounding",
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/TransferMetricRecorderTest.java",
+      "sourceSha256": "9775f5889a8cc51f5de943c227e8f6dabb255f7f1a6a380d1fd12a0861d1e58e"
+    },
+    {
+      "className": "dev.codex.schubert.nk.batch.monitoring.TransferMetricRecorderTest",
+      "method": "transferMet007ConcurrentAtomicSnapshotNeverMixesCohortsOrChangesOldValues",
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/TransferMetricRecorderTest.java",
+      "sourceSha256": "9775f5889a8cc51f5de943c227e8f6dabb255f7f1a6a380d1fd12a0861d1e58e"
+    },
+    {
+      "className": "dev.codex.schubert.nk.batch.monitoring.TransferMetricRecorderTest",
+      "method": "transferMet008PartialRegistrationFailureAndSeparateOwnersKeepCallerOwnership",
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/TransferMetricRecorderTest.java",
+      "sourceSha256": "9775f5889a8cc51f5de943c227e8f6dabb255f7f1a6a380d1fd12a0861d1e58e"
+    },
+    {
+      "className": "dev.codex.schubert.nk.web.monitoring.WebDbPoolMetricCollectorTest",
+      "method": "webPoolConn001DebugPublishesCompleteBorrowedGetterValues",
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebDbPoolMetricCollectorTest.java",
+      "sourceSha256": "bd3ce9b76065aa929036b629f5b1d9d1aec4ba0c773e965809dd398ff97b25f4"
+    },
+    {
+      "className": "dev.codex.schubert.nk.web.monitoring.WebDbPoolMetricCollectorTest",
+      "method": "webPoolConn002InvalidObservationClearsOldValuesAndTrueZeroRecovers",
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebDbPoolMetricCollectorTest.java",
+      "sourceSha256": "bd3ce9b76065aa929036b629f5b1d9d1aec4ba0c773e965809dd398ff97b25f4"
+    },
+    {
+      "className": "dev.codex.schubert.nk.web.monitoring.WebDbPoolMetricCollectorTest",
+      "method": "webPoolConn003AllGetterFailuresBecomeUnknownAndKeepIdentityWithoutGraphWalk",
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebDbPoolMetricCollectorTest.java",
+      "sourceSha256": "bd3ce9b76065aa929036b629f5b1d9d1aec4ba0c773e965809dd398ff97b25f4"
+    },
+    {
+      "className": "dev.codex.schubert.nk.web.monitoring.WebDbPoolMetricCollectorTest",
+      "method": "webPoolConn004StandardNeverCallsEvenFailingGettersOrRetainsDetails",
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebDbPoolMetricCollectorTest.java",
+      "sourceSha256": "bd3ce9b76065aa929036b629f5b1d9d1aec4ba0c773e965809dd398ff97b25f4"
+    },
+    {
+      "className": "dev.codex.schubert.nk.web.monitoring.WebDbPoolMetricCollectorTest",
+      "method": "webPoolConn005InvalidBoundariesCannotMutateOrEraseExistingSnapshot",
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebDbPoolMetricCollectorTest.java",
+      "sourceSha256": "bd3ce9b76065aa929036b629f5b1d9d1aec4ba0c773e965809dd398ff97b25f4"
+    },
+    {
+      "className": "dev.codex.schubert.nk.web.monitoring.WebDbPoolMetricCollectorTest",
+      "method": "webPoolConn006OneOwnerSerializesGettersThroughPublication",
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebDbPoolMetricCollectorTest.java",
+      "sourceSha256": "bd3ce9b76065aa929036b629f5b1d9d1aec4ba0c773e965809dd398ff97b25f4"
+    },
+    {
+      "className": "dev.codex.schubert.nk.web.monitoring.WebDbPoolMetricCollectorTest",
+      "method": "webPoolConn007ParallelFakeSourcesHaveCompleteIndependentReturnedCounts",
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebDbPoolMetricCollectorTest.java",
+      "sourceSha256": "bd3ce9b76065aa929036b629f5b1d9d1aec4ba0c773e965809dd398ff97b25f4"
+    },
+    {
+      "className": "dev.codex.schubert.nk.web.monitoring.WebDbPoolMetricCollectorTest",
+      "method": "webPoolConn008SeparateOwnersAndRepeatedCollectionCannotGrowSeriesOrControlPool",
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebDbPoolMetricCollectorTest.java",
+      "sourceSha256": "bd3ce9b76065aa929036b629f5b1d9d1aec4ba0c773e965809dd398ff97b25f4"
+    }
+  ],
+  "unclassifiedRaw": 0,
+  "whole451Accepted": false,
+  "wholeF03Accepted": false,
+  "zeroBranchCountersAreNA": true
+}
