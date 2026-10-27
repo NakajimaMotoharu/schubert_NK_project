@@ -1,0 +1,11 @@
+# 2200 標準source owner横展開終了条件照合結果
+
+2199/群2560・source4aee5c4b7。11402 `87943dbb5a40401de2c19d722715bb61edc735156b4b34b0386f3e36e6e25ac3` /11404 `dd9a3348b235c2c8752138583be25b608636c2224e5cc4223e0687df672bb13d` actual0、十metadata反例拒否。sites.jsonに現74 constructor site/17参照file、helper全31callをpath/line/type/method/source SHA/token SHA/所有根拠で保存。
+
+core三Test51siteは取得直後finally45site/constructor null拒否六site、2190/2186の修正と現在hashを保持。Main context四はresource-free未bind ownerをcontextへ保持してから明示initialize、ContextTest Harness二/port-null finally二・Observation Fixture一は元保持/close経路へ対応、これら変更外fileは元audit hash同一。payload直接14site中三helperを未移転finallyへ是正、他11は元finally/TWRを独立全tokenで保持した。
+
+helper全31callは26 TWR資源initializer、二012の取得直後外側finally、三full013の閉候補拒否・追加close回数独立oracleへ全件対応。元11378逆全86/22反例と11386同source89/CRC/全1843Main・他Test1954同一/三SourceFile八物理差を結合し、新しい製品実行やcoverage測定は0。coreの旧実行結果を当sourceの新全体実行数/合成coverageに加算しない。
+
+BUG1908/1909/1910の全owner-guard対象（core owner42＋executor三、full helper三＋owner二＋executor四＝54 guard）はそれぞれ2186/2190/2196の是正/再試験を参照し、当scopeの全対象修正又は非該当・再発防止が揃った。YKT1659はSOURCE_OWNER_EXCEPTIONAL_GUARD_SCOPE_COMPLETE/2026-10-27。当scopeを外側の任意caller/SDK候補全資源・実worker停止/全F03/451の資格へ拡大しない。未分類resource/Comparable/duplicate・現raw8920・wholeSDK未認定は保持。
+
+新工具の最初のlintは未使用Path importによりbody前1/OUT生成前、除去後の初bodyがactual0。製品実行・既jobの再試行なし、成功へ正規化0。原.5/1.5/4cap10/開始使用34、実N/T/配賦費null・usageef8d3a57（12:33:05 NO_NEW_EXPLICIT_USAGE_RECORD）。正式1964-53/17-190/工数null/QA051final/全安全HOLD不変。次は独立fixture duplicate八等の通常PG/PTへ、通常群/commitで停止しない。
