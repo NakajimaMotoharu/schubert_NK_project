@@ -32,9 +32,19 @@ import org.springframework.security.web.firewall.StrictHttpFirewall;
 
 /** NK-WEB-001/PT-WEB-121..124; FUN-001..013/AUT-001..004; UI221/226; SS313/314/352; PG-D-111. */
 class WebAuthorizationFilterTest {
+  private static final String LOGIN_PATH = "/login";
+  private static final String ADMIN_USERS_PATH = "/admin/users";
+  private static final String SEARCH_PATH = "/search";
+  private static final String GET_METHOD = "GET";
+  private static final String HEAD_METHOD = "HEAD";
+  private static final String POST_METHOD = "POST";
+  private static final String ROLE_FIELD = "role";
+  private static final String ADMIN_ROLE = "ADMIN";
+  private static final String USER_ROLE = "USER";
+  private static final String READER_NAME = "reader";
   private static final List<String> PUBLIC =
       List.of(
-          "/login",
+          LOGIN_PATH,
           "/error",
           "/styles.css",
           "/favicon.ico",
@@ -45,7 +55,7 @@ class WebAuthorizationFilterTest {
       List.of(
           "/admin",
           "/admin/",
-          "/admin/users",
+          ADMIN_USERS_PATH,
           "/admin/users/new",
           "/admin/users/1/status",
           "/admin/users/1/role",
@@ -55,7 +65,7 @@ class WebAuthorizationFilterTest {
   private static final List<String> USER =
       List.of(
           "/",
-          "/search",
+          SEARCH_PATH,
           "/scenarios",
           "/scenarios/game",
           "/scenarios/game/file",
@@ -85,17 +95,18 @@ class WebAuthorizationFilterTest {
   @Test
   void web121OnlyExplicitPublicResourcesAreAnonymous() throws Exception {
     var filter = new WebAuthorizationFilterFactory().create();
-    for (String method : List.of("GET", "HEAD", "POST", "PUT", "PATCH", "DELETE", "OPTIONS")) {
+    for (String method :
+        List.of(GET_METHOD, HEAD_METHOD, POST_METHOD, "PUT", "PATCH", "DELETE", "OPTIONS")) {
       for (String path : PUBLIC) {
         SecurityContextHolder.clearContext();
         var request = request(method, path);
-        request.addHeader("role", "ADMIN");
-        request.addParameter("role", "ADMIN");
+        request.addHeader(ROLE_FIELD, ADMIN_ROLE);
+        request.addParameter(ROLE_FIELD, ADMIN_ROLE);
         // SS352 §3.1 explicit method table; the initial all-method oracle was BUG-072.
         boolean allowed =
-            path.equals("/login")
-                ? method.equals("GET") || method.equals("POST")
-                : method.equals("GET") || method.equals("HEAD");
+            path.equals(LOGIN_PATH)
+                ? method.equals(GET_METHOD) || method.equals(POST_METHOD)
+                : method.equals(GET_METHOD) || method.equals(HEAD_METHOD);
         if (allowed) assertEquals(1, invoke(filter, request));
         else
           assertThrows(
@@ -114,30 +125,31 @@ class WebAuthorizationFilterTest {
             "/favicon.ico/extra",
             "/static/styles.css",
             "/Login")) {
-      var request = request("GET", path);
-      request.addHeader("role", "ADMIN");
-      request.addParameter("role", "ADMIN");
+      var request = request(GET_METHOD, path);
+      request.addHeader(ROLE_FIELD, ADMIN_ROLE);
+      request.addParameter(ROLE_FIELD, ADMIN_ROLE);
       assertThrows(AuthenticationCredentialsNotFoundException.class, () -> invoke(filter, request));
     }
     SecurityContextHolder.getContext()
         .setAuthentication(
             new AnonymousAuthenticationToken(
                 "synthetic", "anonymous", List.of(new SimpleGrantedAuthority("ROLE_ANONYMOUS"))));
-    assertThrows(AccessDeniedException.class, () -> invoke(filter, request("GET", "/search")));
-    assertEquals(1, invoke(filter, request("GET", "/login")));
+    assertThrows(
+        AccessDeniedException.class, () -> invoke(filter, request(GET_METHOD, SEARCH_PATH)));
+    assertEquals(1, invoke(filter, request(GET_METHOD, LOGIN_PATH)));
   }
 
   @Test
   void web122RoleMatrixProtectsAdminAndLogs() throws Exception {
     var filter = new WebAuthorizationFilterFactory().create();
-    for (String role : List.of("USER", "ADMIN")) {
-      setRole(role, "reader");
-      for (String method : List.of("GET", "HEAD", "POST")) {
+    for (String role : List.of(USER_ROLE, ADMIN_ROLE)) {
+      setRole(role, READER_NAME);
+      for (String method : List.of(GET_METHOD, HEAD_METHOD, POST_METHOD)) {
         for (String path : ADMIN) {
           var request = request(method, path);
           request.setQueryString("role=ADMIN&path=/login");
-          request.addHeader("role", "ADMIN");
-          if (role.equals("USER"))
+          request.addHeader(ROLE_FIELD, ADMIN_ROLE);
+          if (role.equals(USER_ROLE))
             assertThrows(AccessDeniedException.class, () -> invoke(filter, request));
           else assertEquals(1, invoke(filter, request));
         }
@@ -149,18 +161,18 @@ class WebAuthorizationFilterTest {
     for (String path : ADMIN)
       assertThrows(
           AuthenticationCredentialsNotFoundException.class,
-          () -> invoke(filter, request("GET", path)));
+          () -> invoke(filter, request(GET_METHOD, path)));
     for (String path : USER)
       assertThrows(
           AuthenticationCredentialsNotFoundException.class,
-          () -> invoke(filter, request("GET", path)));
+          () -> invoke(filter, request(GET_METHOD, path)));
   }
 
   @Test
   void web123FirewallAndRedispatchCannotBypassRole() throws Exception {
     var filter = new WebAuthorizationFilterFactory().create();
     assertFalse(filter.isObserveOncePerRequest());
-    setRole("USER", "reader");
+    setRole(USER_ROLE, READER_NAME);
     for (String path :
         List.of(
             "/admin;v=1/users",
@@ -172,35 +184,38 @@ class WebAuthorizationFilterTest {
             "/admin%5cusers",
             "/admin/%25",
             "/logs%00")) {
-      assertThrows(RequestRejectedException.class, () -> invoke(filter, request("GET", path)));
+      assertThrows(RequestRejectedException.class, () -> invoke(filter, request(GET_METHOD, path)));
     }
-    assertThrows(RequestRejectedException.class, () -> invoke(filter, request("TRACE", "/login")));
+    assertThrows(
+        RequestRejectedException.class, () -> invoke(filter, request("TRACE", LOGIN_PATH)));
     for (String path : List.of("/%61dmin/users", "/%6cogs")) {
-      assertThrows(AccessDeniedException.class, () -> invoke(filter, request("GET", path)));
+      assertThrows(AccessDeniedException.class, () -> invoke(filter, request(GET_METHOD, path)));
     }
-    var request = request("GET", "/admin/users");
+    var request = request(GET_METHOD, ADMIN_USERS_PATH);
     for (DispatcherType dispatcher : DispatcherType.values()) {
       request.setDispatcherType(dispatcher);
-      setRole("USER", "reader");
+      setRole(USER_ROLE, READER_NAME);
       assertThrows(AccessDeniedException.class, () -> invoke(filter, request));
-      setRole("ADMIN", "administrator");
+      setRole(ADMIN_ROLE, "administrator");
       assertEquals(1, invoke(filter, request));
     }
-    setRole("USER", "reader");
-    var query = request("GET", "/search");
+    setRole(USER_ROLE, READER_NAME);
+    var query = request(GET_METHOD, SEARCH_PATH);
     query.setQueryString("path=/admin/users&role=ADMIN");
     assertEquals(1, invoke(filter, query));
     SecurityContextHolder.clearContext();
     for (DispatcherType dispatcher : DispatcherType.values()) {
-      for (String method : List.of("GET", "HEAD", "POST", "PUT", "PATCH", "DELETE", "OPTIONS")) {
+      for (String method :
+          List.of(GET_METHOD, HEAD_METHOD, POST_METHOD, "PUT", "PATCH", "DELETE", "OPTIONS")) {
         var error = request(method, "/error");
         error.setDispatcherType(dispatcher);
-        if (dispatcher == DispatcherType.ERROR || method.equals("GET") || method.equals("HEAD"))
-          assertEquals(1, invoke(filter, error));
+        if (dispatcher == DispatcherType.ERROR
+            || method.equals(GET_METHOD)
+            || method.equals(HEAD_METHOD)) assertEquals(1, invoke(filter, error));
         else
           assertThrows(
               AuthenticationCredentialsNotFoundException.class, () -> invoke(filter, error));
-        var secret = request(method, "/admin/users");
+        var secret = request(method, ADMIN_USERS_PATH);
         secret.setDispatcherType(dispatcher);
         assertThrows(
             AuthenticationCredentialsNotFoundException.class, () -> invoke(filter, secret));
@@ -222,14 +237,15 @@ class WebAuthorizationFilterTest {
             () -> {
               try {
                 assertNull(SecurityContextHolder.getContext().getAuthentication());
-                setRole(n % 2 == 0 ? "USER" : "ADMIN", "reader" + n);
-                var request = request("GET", "/admin/users");
+                setRole(n % 2 == 0 ? USER_ROLE : ADMIN_ROLE, READER_NAME + n);
+                var request = request(GET_METHOD, ADMIN_USERS_PATH);
                 if (n % 2 == 0)
                   assertThrows(AccessDeniedException.class, () -> invoke(filter, request));
                 else assertEquals(1, invoke(filter, request));
                 assertEquals(
-                    "reader" + n, SecurityContextHolder.getContext().getAuthentication().getName());
-                assertEquals(1, invoke(filter, request("GET", "/search")));
+                    READER_NAME + n,
+                    SecurityContextHolder.getContext().getAuthentication().getName());
+                assertEquals(1, invoke(filter, request(GET_METHOD, SEARCH_PATH)));
               } finally {
                 SecurityContextHolder.clearContext();
               }
