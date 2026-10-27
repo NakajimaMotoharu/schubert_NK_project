@@ -24,6 +24,10 @@ import org.junit.jupiter.api.Test;
 
 /** APIPAY001..013/1800: independent readiness/custom wire literals, supplier/source ownership. */
 class ApiCustomMetricPayloadTest {
+  private static final String DEBUG_MODE = "DEBUG";
+  private static final String STANDARD_MODE = "STANDARD";
+  private static final String UNEXPECTED_PROVIDER_MESSAGE = "not read";
+  private static final String FAILURE_FIXTURE_MESSAGE = "fixture";
   private static final String READY_ONE =
       "# TYPE schubert_nk_api_ready gauge\nschubert_nk_api_ready 1\n";
   private static final String READY_ZERO =
@@ -51,7 +55,7 @@ class ApiCustomMetricPayloadTest {
       try {
         return renderer.render(
             ready,
-            "DEBUG",
+            DEBUG_MODE,
             () -> {
               calls.incrementAndGet();
               return source;
@@ -100,10 +104,10 @@ class ApiCustomMetricPayloadTest {
         READY_ONE,
         payload.render(
             true,
-            "STANDARD",
+            STANDARD_MODE,
             () -> {
               calls.incrementAndGet();
-              throw new AssertionError("not read");
+              throw new AssertionError(UNEXPECTED_PROVIDER_MESSAGE);
             }));
     assertEquals(0, calls.get());
   }
@@ -114,9 +118,9 @@ class ApiCustomMetricPayloadTest {
         READY_ZERO,
         payload.render(
             false,
-            "STANDARD",
+            STANDARD_MODE,
             () -> {
-              throw new AssertionError("not read");
+              throw new AssertionError(UNEXPECTED_PROVIDER_MESSAGE);
             }));
   }
 
@@ -154,7 +158,7 @@ class ApiCustomMetricPayloadTest {
                           mode,
                           () -> {
                             calls.incrementAndGet();
-                            throw new AssertionError("not read");
+                            throw new AssertionError(UNEXPECTED_PROVIDER_MESSAGE);
                           }))
               .getMessage());
     assertEquals(0, calls.get());
@@ -162,7 +166,7 @@ class ApiCustomMetricPayloadTest {
 
   @Test
   void apipay006NullModeAndSupplierFailBeforeResolution() {
-    assertThrows(NullPointerException.class, () -> payload.render(true, "STANDARD", null));
+    assertThrows(NullPointerException.class, () -> payload.render(true, STANDARD_MODE, null));
     var calls = new AtomicInteger();
     assertThrows(
         NullPointerException.class,
@@ -172,7 +176,7 @@ class ApiCustomMetricPayloadTest {
                 null,
                 () -> {
                   calls.incrementAndGet();
-                  throw new AssertionError("not read");
+                  throw new AssertionError(UNEXPECTED_PROVIDER_MESSAGE);
                 }));
     assertEquals(0, calls.get());
   }
@@ -185,7 +189,7 @@ class ApiCustomMetricPayloadTest {
         () ->
             payload.render(
                 true,
-                "DEBUG",
+                DEBUG_MODE,
                 () -> {
                   calls.incrementAndGet();
                   return null;
@@ -196,11 +200,13 @@ class ApiCustomMetricPayloadTest {
   @Test
   void apipay008ProviderRuntimeAndErrorKeepIdentity() {
     for (Throwable failure :
-        List.of(new IllegalStateException("fixture"), new AssertionError("fixture")))
+        List.of(
+            new IllegalStateException(FAILURE_FIXTURE_MESSAGE),
+            new AssertionError(FAILURE_FIXTURE_MESSAGE)))
       assertSame(
           failure,
           assertThrows(
-              failure.getClass(), () -> payload.render(true, "DEBUG", () -> fail(failure))));
+              failure.getClass(), () -> payload.render(true, DEBUG_MODE, () -> fail(failure))));
   }
 
   @Test
@@ -208,7 +214,7 @@ class ApiCustomMetricPayloadTest {
     class Plain extends SimpleMeterRegistry implements AutoCloseable {}
     try (var source = new Plain()) {
       assertThrows(
-          IllegalArgumentException.class, () -> payload.render(true, "DEBUG", () -> source));
+          IllegalArgumentException.class, () -> payload.render(true, DEBUG_MODE, () -> source));
       assertFalse(source.isClosed());
     }
   }
@@ -216,11 +222,14 @@ class ApiCustomMetricPayloadTest {
   @Test
   void apipay010FormatterRuntimeAndErrorKeepBorrowedOwner() {
     for (Throwable failure :
-        List.of(new IllegalStateException("fixture"), new AssertionError("fixture"))) {
+        List.of(
+            new IllegalStateException(FAILURE_FIXTURE_MESSAGE),
+            new AssertionError(FAILURE_FIXTURE_MESSAGE))) {
       try (var source = new Broken(failure)) {
         assertSame(
             failure,
-            assertThrows(failure.getClass(), () -> payload.render(false, "DEBUG", () -> source)));
+            assertThrows(
+                failure.getClass(), () -> payload.render(false, DEBUG_MODE, () -> source)));
         assertEquals(0, source.closes.get());
         assertFalse(source.isClosed());
       }
@@ -231,7 +240,7 @@ class ApiCustomMetricPayloadTest {
   void apipay011ClosedSourceIsNotReopenedOrClosedAgain() {
     var source = new Borrowed();
     source.close();
-    assertThrows(IllegalStateException.class, () -> payload.render(true, "DEBUG", () -> source));
+    assertThrows(IllegalStateException.class, () -> payload.render(true, DEBUG_MODE, () -> source));
     assertEquals(1, source.closes.get());
     assertTrue(source.isClosed());
   }
@@ -309,7 +318,7 @@ class ApiCustomMetricPayloadTest {
     boolean transferred = false;
     try {
 
-      owner.bind("DEBUG");
+      owner.bind(DEBUG_MODE);
       transferred = true;
       return owner;
 
@@ -334,7 +343,7 @@ class ApiCustomMetricPayloadTest {
           READY_ONE,
           payload.render(
               true,
-              "STANDARD",
+              STANDARD_MODE,
               () -> {
                 calls.incrementAndGet();
                 throw new AssertionError("unexpected custom");
@@ -345,7 +354,7 @@ class ApiCustomMetricPayloadTest {
           READY_ZERO,
           payload.render(
               false,
-              "STANDARD",
+              STANDARD_MODE,
               () -> {
                 calls.incrementAndGet();
                 throw new AssertionError("unexpected custom");
@@ -365,7 +374,7 @@ class ApiCustomMetricPayloadTest {
         var standard = fullOwner(probe)) {
       assertEquals(
           READY_ZERO + CUSTOM + FULL_STANDARD,
-          payload.render(false, "DEBUG", () -> bundle.source, standard));
+          payload.render(false, DEBUG_MODE, () -> bundle.source, standard));
       assertEquals(1, probe.scrapes.get());
       assertFalse(bundle.source.isClosed());
       assertFalse(probe.isClosed());
@@ -373,8 +382,8 @@ class ApiCustomMetricPayloadTest {
     }
     try (var bundle = new Bundle();
         var standard = new ApiStandardMetricSource()) {
-      standard.bind("DEBUG");
-      String actual = payload.render(true, "DEBUG", () -> bundle.source, standard);
+      standard.bind(DEBUG_MODE);
+      String actual = payload.render(true, DEBUG_MODE, () -> bundle.source, standard);
       assertTrue(actual.startsWith(READY_ONE + CUSTOM));
       String expected =
           "system_cpu_count{service=\"API\"} "
@@ -398,7 +407,7 @@ class ApiCustomMetricPayloadTest {
           () ->
               payload.render(
                   true,
-                  "DEBUG",
+                  DEBUG_MODE,
                   () -> {
                     calls.incrementAndGet();
                     return bundle.source;
@@ -410,7 +419,7 @@ class ApiCustomMetricPayloadTest {
           () ->
               payload.render(
                   false,
-                  "DEBUG",
+                  DEBUG_MODE,
                   () -> {
                     calls.incrementAndGet();
                     return bundle.source;
@@ -434,8 +443,10 @@ class ApiCustomMetricPayloadTest {
           throw new AssertionError("unexpected provider");
         };
     try (var standard = fullOwner(probe)) {
-      assertThrows(NullPointerException.class, () -> payload.render(true, "DEBUG", source, null));
-      assertThrows(NullPointerException.class, () -> payload.render(true, "DEBUG", null, standard));
+      assertThrows(
+          NullPointerException.class, () -> payload.render(true, DEBUG_MODE, source, null));
+      assertThrows(
+          NullPointerException.class, () -> payload.render(true, DEBUG_MODE, null, standard));
       assertThrows(NullPointerException.class, () -> payload.render(true, null, source, standard));
       assertThrows(
           IllegalArgumentException.class, () -> payload.render(true, "unknown", source, standard));
@@ -457,7 +468,7 @@ class ApiCustomMetricPayloadTest {
               () ->
                   payload.render(
                       true,
-                      "DEBUG",
+                      DEBUG_MODE,
                       () -> {
                         throw failure;
                       },
@@ -480,7 +491,7 @@ class ApiCustomMetricPayloadTest {
               () ->
                   payload.render(
                       false,
-                      "DEBUG",
+                      DEBUG_MODE,
                       () -> {
                         throw failure;
                       },
@@ -500,7 +511,7 @@ class ApiCustomMetricPayloadTest {
           failure,
           assertThrows(
               IllegalStateException.class,
-              () -> payload.render(true, "DEBUG", () -> broken, standard)));
+              () -> payload.render(true, DEBUG_MODE, () -> broken, standard)));
       assertEquals(0, probe.scrapes.get());
       assertEquals(0, broken.closes.get());
       assertFalse(probe.isClosed());
@@ -518,7 +529,7 @@ class ApiCustomMetricPayloadTest {
           failure,
           assertThrows(
               IllegalArgumentException.class,
-              () -> payload.render(true, "DEBUG", () -> bundle.source, standard)));
+              () -> payload.render(true, DEBUG_MODE, () -> bundle.source, standard)));
       assertEquals(1, probe.scrapes.get());
       assertFalse(bundle.source.isClosed());
       assertFalse(probe.isClosed());
@@ -537,7 +548,7 @@ class ApiCustomMetricPayloadTest {
           failure,
           assertThrows(
               AssertionError.class,
-              () -> payload.render(false, "DEBUG", () -> bundle.source, standard)));
+              () -> payload.render(false, DEBUG_MODE, () -> bundle.source, standard)));
       assertEquals(1, probe.scrapes.get());
       assertFalse(bundle.source.isClosed());
       Reference.reachabilityFence(bundle);
@@ -552,7 +563,7 @@ class ApiCustomMetricPayloadTest {
         var standard = fullOwner(probe)) {
       assertThrows(
           NullPointerException.class,
-          () -> payload.render(true, "DEBUG", () -> bundle.source, standard));
+          () -> payload.render(true, DEBUG_MODE, () -> bundle.source, standard));
       assertEquals(1, probe.scrapes.get());
       assertFalse(bundle.source.isClosed());
       Reference.reachabilityFence(bundle);
@@ -563,7 +574,7 @@ class ApiCustomMetricPayloadTest {
   void apifull011ConcurrentFullScrapesKeepIndependentGoldenAndOwnership() throws Exception {
     try (var bundle = new Bundle();
         var standard = new ApiStandardMetricSource()) {
-      standard.bind("DEBUG");
+      standard.bind(DEBUG_MODE);
       String expected =
           "system_cpu_count{service=\"API\"} "
               + (double) Runtime.getRuntime().availableProcessors();
@@ -571,7 +582,7 @@ class ApiCustomMetricPayloadTest {
         try {
           var tasks = new ArrayList<java.util.concurrent.Callable<String>>();
           for (int index = 0; index < 64; index++)
-            tasks.add(() -> payload.render(true, "DEBUG", () -> bundle.source, standard));
+            tasks.add(() -> payload.render(true, DEBUG_MODE, () -> bundle.source, standard));
           for (var future : executor.invokeAll(tasks, 30, TimeUnit.SECONDS)) {
             String actual = future.get(30, TimeUnit.SECONDS);
             assertTrue(actual.startsWith(READY_ONE + CUSTOM));
@@ -601,7 +612,7 @@ class ApiCustomMetricPayloadTest {
                   () ->
                       payload.render(
                           true,
-                          "DEBUG",
+                          DEBUG_MODE,
                           () -> {
                             entered.countDown();
                             awaitFull(release);
