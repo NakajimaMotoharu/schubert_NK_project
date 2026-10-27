@@ -1,0 +1,44 @@
+{
+  "rows": [
+    {
+      "attributes": {
+        "begincolumn": "25",
+        "beginline": "279",
+        "class": "StorageAttributeGuardTest",
+        "endcolumn": "49",
+        "endline": "279",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap",
+        "method": "directory",
+        "package": "dev.codex.schubert.nk.storage",
+        "priority": "3",
+        "rule": "UseConcurrentHashMap",
+        "ruleset": "Multithreading",
+        "variable": "result"
+      },
+      "currentCase": {
+        "className": "dev.codex.schubert.nk.storage.StorageAttributeGuardTest",
+        "method": "a02DirectoryTypePermissionsOwnershipAndMissingAttributesFailClosed",
+        "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/StorageAttributeGuardTest.java",
+        "sourceSha256": "1c0dd9629f7225661dd682f967ec0ae35fd1c93928144ed9349849d6ea1676c3"
+      },
+      "currentWholeJoinPending": true,
+      "disposition": "REQUIRED_CONTRACT",
+      "id": "PMD-07166",
+      "kind": "REQUIRED_FRESH_NULL_CAPABLE_ATTRIBUTE_FIXTURE",
+      "method": "directory",
+      "methodTokenSha256": "2b4c3cd60df96dac5031b9ddab1abc35378827f1a47e9d069fe14299d46b8daa",
+      "newSourceReason": true,
+      "oldRuntimeReassigned": false,
+      "originalRowSha256": "1df9a01c63e73e33d35fcb55061099dc80aa4eff6bdded9f9ba4d7f2ec8c1ab4",
+      "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/StorageAttributeGuardTest.java",
+      "previousReferenceRetainedAsHistorical": false,
+      "productTestsExecutedByReview": 0,
+      "reason": "directory() allocates a fresh caller-owned HashMap for each independent attribute fixture. Tests deliberately put null and malformed typed values into it, then require StorageAttributeGuard to reject those values; ConcurrentHashMap would reject fixture construction instead and weaken the boundary oracle. The launcher fixes JUnit parallel execution false, the guard retains no map and this test has no workers or concurrent map access. This is not a production shared mutable map or runtime concurrency qualification.",
+      "rule": "UseConcurrentHashMap",
+      "source": "fd113e37b0783ae86d50696c9d3844e80b258d8a",
+      "sourceSha256": "1c0dd9629f7225661dd682f967ec0ae35fd1c93928144ed9349849d6ea1676c3",
+      "sourceSpanSha256": "af4a3e49b2ba31c359f0d4fb1f499200d4bb2674d196d446afe2241478d0ae22"
+    }
+  ],
+  "source": "fd113e37b0783ae86d50696c9d3844e80b258d8a"
+}

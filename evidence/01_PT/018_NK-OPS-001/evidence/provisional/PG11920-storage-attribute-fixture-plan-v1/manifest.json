@@ -1,0 +1,341 @@
+{
+  "actualExit": 0,
+  "allMainAndOtherInputsPreserved": true,
+  "boundConstants": 1,
+  "coverage": null,
+  "effortPercent": null,
+  "externalActions": 0,
+  "invocation": {
+    "actualPythonCommand": [
+      "/usr/bin/python3",
+      "-B",
+      "tools/quality/pg11920_storage_attribute_fixture_plan.py"
+    ],
+    "arbitraryArgumentsRecorded": false,
+    "entrypointPath": "tools/quality/pg11920_storage_attribute_fixture_plan.py",
+    "entrypointSha256": "a4bfb9bf72f41d1248107a5393be502251fecbcc55599c3bf6fdd1b10cf3c7ba",
+    "helperPath": "tools/quality/host_tool_invocation.py",
+    "helperSha256": "85d616a3db4ff47f4c95ae2e0dd57954bc2b09f28b8f2a685b986e5621545c46",
+    "libraryPath": "tools/quality/pg11920_storage_attribute_fixture_plan.py",
+    "librarySha256": "a4bfb9bf72f41d1248107a5393be502251fecbcc55599c3bf6fdd1b10cf3c7ba",
+    "loadedProjectPythonSources": {
+      "tools/quality/classfile_code_metadata.py": "2227e1e8df1ff91b606f094c7ee64366023273ca740d4d47126ed0928190e2f0",
+      "tools/quality/g07_host_class_provenance_inputs.py": "a676cb3e4145177c3c243722d737592ce7d44c3f29cfe4f670662ef7651f046b",
+      "tools/quality/host_tool_invocation.py": "85d616a3db4ff47f4c95ae2e0dd57954bc2b09f28b8f2a685b986e5621545c46",
+      "tools/quality/pg10130_uid_oracle_preflight.py": "e80cb1d6d45d4e4c0cdb3cb792e0638119d936403de5c3e141429d338485758a",
+      "tools/quality/pg10332_result_profile_oracle_plan.py": "82c9b4f57dd517c1dbee639dbf4955c316beb89216cb9a8a66e78e0b9a322ad4",
+      "tools/quality/pg10339_result_profile_oracle_post_v2.py": "42f86287f5236d2ef1a2e10f54f5b0634e799a4e866b15eaf6738336a4ebabb0",
+      "tools/quality/pg10392_role_literal_plan.py": "e1af98abd59175d867d29b07a73d7b2e4c7112754603d1805ec0bfc4d9465ce8",
+      "tools/quality/pg10398_role_view_preflight.py": "31709d50a345f3e0843fa62ae0b4c6849885503eb3d81555b6bcc9605b486d56",
+      "tools/quality/pg10840_web_view_duplicate_plan.py": "f4ea4a6f7d59ed872cc7c3dbd07e8d48c45c59f67c339d82d6ff4f2eef0a9a46",
+      "tools/quality/pg11920_storage_attribute_fixture_plan.py": "a4bfb9bf72f41d1248107a5393be502251fecbcc55599c3bf6fdd1b10cf3c7ba",
+      "tools/quality/pg9906_user_query_oracle_source_post.py": "4f9bdaa17eea78a720c0f25b8af906f3f045fda590c8fea2a8868229403a98fa",
+      "tools/quality/pg9978_plain_core_quality_post.py": "c99cc753c6335c9f41e3eafe6a97c17521503739ba2cf80659b542a445dd48fa",
+      "tools/quality/public_java_digest_provenance.py": "dd47f8735a61ce849995633c3290a6ad047842ef3263829ce359db413778f7a0"
+    },
+    "provenance": "OBSERVED_SYS_ARGV_AND_ORIG_ARGV_NOT_RECONSTRUCTED"
+  },
+  "modeLiteralPoints": 27,
+  "newAccepted": 0,
+  "originalMethods": 7,
+  "productTestsExecuted": 0,
+  "rawDiagnosticCorrectionsExpected": 33,
+  "sourceBefore": "264dc69591876147d76c19082cb69658cfe03dd8",
+  "sourceChanges": [
+    {
+      "beforeSha256": "192c2bbb113325344ca0ae6715f68e3e5885e7aebd4cbe3f210589e43047afe3",
+      "constants": [
+        {
+          "id": "PMD-07135",
+          "kind": "STRING",
+          "literal": "\"size\"",
+          "name": "SIZE_FIELD",
+          "references": 13
+        },
+        {
+          "id": "PMD-07137",
+          "kind": "STRING",
+          "literal": "\"owner\"",
+          "name": "OWNER_FIELD",
+          "references": 10
+        },
+        {
+          "id": "PMD-07138",
+          "kind": "STRING",
+          "literal": "\"group\"",
+          "name": "GROUP_FIELD",
+          "references": 10
+        },
+        {
+          "id": "PMD-07139",
+          "kind": "STRING",
+          "literal": "\"mode\"",
+          "name": "MODE_FIELD",
+          "references": 11
+        },
+        {
+          "id": "PMD-07140",
+          "kind": "STRING",
+          "literal": "\"nlink\"",
+          "name": "LINK_COUNT_FIELD",
+          "references": 11
+        },
+        {
+          "decimalValue": 16800,
+          "id": "PMD-07141",
+          "kind": "MODE",
+          "literal": "040640",
+          "point": 2994,
+          "references": 1,
+          "replacement": "0b100_000_110_100_000"
+        },
+        {
+          "decimalValue": 41376,
+          "id": "PMD-07142",
+          "kind": "MODE",
+          "literal": "0120640",
+          "point": 3002,
+          "references": 1,
+          "replacement": "0b001_010_000_110_100_000"
+        },
+        {
+          "decimalValue": 33188,
+          "id": "PMD-07143",
+          "kind": "MODE",
+          "literal": "0100644",
+          "point": 3011,
+          "references": 1,
+          "replacement": "0b001_000_000_110_100_100"
+        },
+        {
+          "decimalValue": 35232,
+          "id": "PMD-07144",
+          "kind": "MODE",
+          "literal": "0104640",
+          "point": 3020,
+          "references": 1,
+          "replacement": "0b001_000_100_110_100_000"
+        },
+        {
+          "decimalValue": 33184,
+          "id": "PMD-07145",
+          "kind": "MODE",
+          "literal": "0100640",
+          "point": 3167,
+          "references": 1,
+          "replacement": "0b001_000_000_110_100_000"
+        },
+        {
+          "decimalValue": 16832,
+          "id": "PMD-07146",
+          "kind": "MODE",
+          "literal": "040700",
+          "point": 7292,
+          "references": 1,
+          "replacement": "0b100_000_111_000_000"
+        },
+        {
+          "decimalValue": 16877,
+          "id": "PMD-07147",
+          "kind": "MODE",
+          "literal": "040755",
+          "point": 7300,
+          "references": 1,
+          "replacement": "0b100_000_111_101_101"
+        },
+        {
+          "decimalValue": 17896,
+          "id": "PMD-07148",
+          "kind": "MODE",
+          "literal": "042750",
+          "point": 7308,
+          "references": 1,
+          "replacement": "0b100_010_111_101_000"
+        },
+        {
+          "decimalValue": 17384,
+          "id": "PMD-07149",
+          "kind": "MODE",
+          "literal": "041750",
+          "point": 7316,
+          "references": 1,
+          "replacement": "0b100_001_111_101_000"
+        },
+        {
+          "decimalValue": 33256,
+          "id": "PMD-07150",
+          "kind": "MODE",
+          "literal": "0100750",
+          "point": 7324,
+          "references": 1,
+          "replacement": "0b001_000_000_111_101_000"
+        },
+        {
+          "decimalValue": 41448,
+          "id": "PMD-07151",
+          "kind": "MODE",
+          "literal": "0120750",
+          "point": 7333,
+          "references": 1,
+          "replacement": "0b001_010_000_111_101_000"
+        },
+        {
+          "decimalValue": 49640,
+          "id": "PMD-07152",
+          "kind": "MODE",
+          "literal": "0140750",
+          "point": 7342,
+          "references": 1,
+          "replacement": "0b001_100_000_111_101_000"
+        },
+        {
+          "decimalValue": 16872,
+          "id": "PMD-07153",
+          "kind": "MODE",
+          "literal": "040750",
+          "point": 7486,
+          "references": 1,
+          "replacement": "0b100_000_111_101_000"
+        },
+        {
+          "decimalValue": 33152,
+          "id": "PMD-07154",
+          "kind": "MODE",
+          "literal": "0100600",
+          "point": 9013,
+          "references": 1,
+          "replacement": "0b001_000_000_110_000_000"
+        },
+        {
+          "decimalValue": 33188,
+          "id": "PMD-07155",
+          "kind": "MODE",
+          "literal": "0100644",
+          "point": 9022,
+          "references": 1,
+          "replacement": "0b001_000_000_110_100_100"
+        },
+        {
+          "decimalValue": 35232,
+          "id": "PMD-07156",
+          "kind": "MODE",
+          "literal": "0104640",
+          "point": 9031,
+          "references": 1,
+          "replacement": "0b001_000_100_110_100_000"
+        },
+        {
+          "decimalValue": 34208,
+          "id": "PMD-07157",
+          "kind": "MODE",
+          "literal": "0102640",
+          "point": 9040,
+          "references": 1,
+          "replacement": "0b001_000_010_110_100_000"
+        },
+        {
+          "decimalValue": 33696,
+          "id": "PMD-07158",
+          "kind": "MODE",
+          "literal": "0101640",
+          "point": 9049,
+          "references": 1,
+          "replacement": "0b001_000_001_110_100_000"
+        },
+        {
+          "decimalValue": 16800,
+          "id": "PMD-07159",
+          "kind": "MODE",
+          "literal": "040640",
+          "point": 9058,
+          "references": 1,
+          "replacement": "0b100_000_110_100_000"
+        },
+        {
+          "decimalValue": 41376,
+          "id": "PMD-07160",
+          "kind": "MODE",
+          "literal": "0120640",
+          "point": 9066,
+          "references": 1,
+          "replacement": "0b001_010_000_110_100_000"
+        },
+        {
+          "decimalValue": 49568,
+          "id": "PMD-07161",
+          "kind": "MODE",
+          "literal": "0140640",
+          "point": 9075,
+          "references": 1,
+          "replacement": "0b001_100_000_110_100_000"
+        },
+        {
+          "decimalValue": 4512,
+          "id": "PMD-07162",
+          "kind": "MODE",
+          "literal": "010640",
+          "point": 9084,
+          "references": 1,
+          "replacement": "0b001_000_110_100_000"
+        },
+        {
+          "decimalValue": 24992,
+          "id": "PMD-07163",
+          "kind": "MODE",
+          "literal": "060640",
+          "point": 9092,
+          "references": 1,
+          "replacement": "0b110_000_110_100_000"
+        },
+        {
+          "decimalValue": 8608,
+          "id": "PMD-07164",
+          "kind": "MODE",
+          "literal": "020640",
+          "point": 9110,
+          "references": 1,
+          "replacement": "0b010_000_110_100_000"
+        },
+        {
+          "decimalValue": 33184,
+          "id": "PMD-07165",
+          "kind": "MODE",
+          "literal": "0100640",
+          "point": 9260,
+          "references": 1,
+          "replacement": "0b001_000_000_110_100_000"
+        },
+        {
+          "decimalValue": 16872,
+          "id": "PMD-07167",
+          "kind": "MODE",
+          "literal": "040750",
+          "point": 11722,
+          "references": 1,
+          "replacement": "0b100_000_111_101_000"
+        },
+        {
+          "decimalValue": 33184,
+          "id": "PMD-07168",
+          "kind": "MODE",
+          "literal": "0100640",
+          "point": 11898,
+          "references": 1,
+          "replacement": "0b001_000_000_110_100_000"
+        },
+        {
+          "id": "PMD-07136",
+          "kind": "BOUND",
+          "literal": "48_000_000",
+          "point": 1459,
+          "references": 1,
+          "replacement": "TRANSFER_LIMIT_BYTES"
+        }
+      ],
+      "path": "src/schubert-nk-storage/src/test/java/dev/codex/schubert/nk/storage/StorageAttributeGuardTest.java",
+      "sha256": "1c0dd9629f7225661dd682f967ec0ae35fd1c93928144ed9349849d6ea1676c3"
+    }
+  ],
+  "stringConstants": 5,
+  "stringReferences": 55
+}
