@@ -1,0 +1,152 @@
+{
+  "actualExit": 0,
+  "allMainAndOtherInputsPreserved": true,
+  "allOriginalOracleTokensRestored": true,
+  "coverage": null,
+  "invocation": {
+    "actualPythonCommand": [
+      "/usr/bin/python3",
+      "-B",
+      "tools/quality/pg11952_jms_proxy_fixture_source_post.py"
+    ],
+    "arbitraryArgumentsRecorded": false,
+    "entrypointPath": "tools/quality/pg11952_jms_proxy_fixture_source_post.py",
+    "entrypointSha256": "4c428771c85175c6a1231718ad391fa6a1918ac612be6f7509a8df887ddcc0ac",
+    "helperPath": "tools/quality/host_tool_invocation.py",
+    "helperSha256": "85d616a3db4ff47f4c95ae2e0dd57954bc2b09f28b8f2a685b986e5621545c46",
+    "libraryPath": "tools/quality/pg11952_jms_proxy_fixture_source_post.py",
+    "librarySha256": "4c428771c85175c6a1231718ad391fa6a1918ac612be6f7509a8df887ddcc0ac",
+    "loadedProjectPythonSources": {
+      "tools/quality/g07_host_class_provenance_inputs.py": "a676cb3e4145177c3c243722d737592ce7d44c3f29cfe4f670662ef7651f046b",
+      "tools/quality/host_tool_invocation.py": "85d616a3db4ff47f4c95ae2e0dd57954bc2b09f28b8f2a685b986e5621545c46",
+      "tools/quality/pg11952_jms_proxy_fixture_source_post.py": "4c428771c85175c6a1231718ad391fa6a1918ac612be6f7509a8df887ddcc0ac",
+      "tools/quality/public_java_digest_provenance.py": "dd47f8735a61ce849995633c3290a6ad047842ef3263829ce359db413778f7a0"
+    },
+    "provenance": "OBSERVED_SYS_ARGV_AND_ORIG_ARGV_NOT_RECONSTRUCTED"
+  },
+  "metadataNegativeVectors": 40,
+  "newAccepted": 0,
+  "originalMethods": 12,
+  "originalRawTokens": 4644,
+  "planManifestSha256": "2b369e6aac93aca17dc3685af29868996c0467c81a49e42be96bbbbbc44a315a",
+  "productTestsExecuted": 0,
+  "sourceBefore": "fd113e37b0783ae86d50696c9d3844e80b258d8a",
+  "sourceChanges": [
+    {
+      "beforeSha256": "08fd812420871b6e81f7c8b23f0ae301258798e599c4a861a1d7595262746e81",
+      "constants": [
+        {
+          "id": "PMD-01508",
+          "literal": "\"body\"",
+          "name": "BODY_FIELD",
+          "references": 4
+        },
+        {
+          "id": "PMD-01509",
+          "literal": "\"bodyLength\"",
+          "name": "BODY_LENGTH_FIELD",
+          "references": 5
+        },
+        {
+          "id": "PMD-01510",
+          "literal": "\"destination\"",
+          "name": "DESTINATION_FIELD",
+          "references": 11
+        },
+        {
+          "id": "PMD-01511",
+          "literal": "\"replyTo\"",
+          "name": "REPLY_TO_FIELD",
+          "references": 8
+        },
+        {
+          "id": "PMD-01512",
+          "literal": "\"jmsMessageId\"",
+          "name": "TRANSPORT_ID_FIELD",
+          "references": 4
+        },
+        {
+          "id": "PMD-01513",
+          "literal": "\"correlationId\"",
+          "name": "CORRELATION_FIELD",
+          "references": 4
+        },
+        {
+          "id": "PMD-01514",
+          "literal": "\"NKMessageID\"",
+          "name": "MESSAGE_ID_PROPERTY",
+          "references": 4
+        },
+        {
+          "id": "PMD-01515",
+          "literal": "\"expiration\"",
+          "name": "EXPIRATION_FIELD",
+          "references": 4
+        }
+      ],
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/guard/JmsMessageGuardTest.java",
+      "sha256": "b5fa080a349b1e84e4ed4c64bcf4e6556f7fe173a641f9765830f778b6bc1b0f"
+    },
+    {
+      "beforeSha256": "582db19f044eaa794609903751c13b361f52cd21c0f442894dcae57a5f221bd2",
+      "constants": [
+        {
+          "id": "PMD-08057",
+          "literal": "\"body\"",
+          "name": "BODY_FIELD",
+          "references": 11
+        },
+        {
+          "id": "PMD-08058",
+          "literal": "\"bodyLength\"",
+          "name": "BODY_LENGTH_FIELD",
+          "references": 7
+        },
+        {
+          "id": "PMD-08059",
+          "literal": "\"NKLayoutID\"",
+          "name": "LAYOUT_ID_PROPERTY",
+          "references": 6
+        },
+        {
+          "id": "PMD-08060",
+          "literal": "\"NKMessageID\"",
+          "name": "MESSAGE_ID_PROPERTY",
+          "references": 6
+        },
+        {
+          "id": "PMD-08061",
+          "literal": "\"destination\"",
+          "name": "DESTINATION_FIELD",
+          "references": 11
+        },
+        {
+          "id": "PMD-08062",
+          "literal": "\"jmsMessageId\"",
+          "name": "TRANSPORT_ID_FIELD",
+          "references": 4
+        },
+        {
+          "id": "PMD-08063",
+          "literal": "\"correlationId\"",
+          "name": "CORRELATION_FIELD",
+          "references": 5
+        },
+        {
+          "id": "PMD-08064",
+          "literal": "\"NKProtocolVersion\"",
+          "name": "VERSION_PROPERTY",
+          "references": 4
+        },
+        {
+          "id": "PMD-08065",
+          "literal": "\"expiration\"",
+          "name": "EXPIRATION_FIELD",
+          "references": 4
+        }
+      ],
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/JmsReplyDecoderTest.java",
+      "sha256": "4e57ec319666832fa7aaa8639bb44920c84969f13e59c8450706d63b9dcea05e"
+    }
+  ]
+}

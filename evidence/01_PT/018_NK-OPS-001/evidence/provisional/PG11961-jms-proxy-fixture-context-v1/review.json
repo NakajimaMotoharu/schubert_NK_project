@@ -1,0 +1,691 @@
+{
+  "rows": [
+    {
+      "attributes": {
+        "begincolumn": "25",
+        "beginline": "163",
+        "class": "JmsMessageGuardTest",
+        "endcolumn": "49",
+        "endline": "163",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap",
+        "method": "baseValues",
+        "package": "dev.codex.schubert.nk.api.messaging.guard",
+        "priority": "3",
+        "rule": "UseConcurrentHashMap",
+        "ruleset": "Multithreading",
+        "variable": "values"
+      },
+      "currentCases": [
+        {
+          "className": "dev.codex.schubert.nk.api.messaging.guard.JmsMessageGuardTest",
+          "method": "validBytesMessageProducesAnImmutableRedactedSnapshot",
+          "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/guard/JmsMessageGuardTest.java",
+          "sourceSha256": "b5fa080a349b1e84e4ed4c64bcf4e6556f7fe173a641f9765830f778b6bc1b0f"
+        },
+        {
+          "className": "dev.codex.schubert.nk.api.messaging.guard.JmsMessageGuardTest",
+          "method": "nullAndNonBytesMessagesAreDeniedBeforeBodyAccess",
+          "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/guard/JmsMessageGuardTest.java",
+          "sourceSha256": "b5fa080a349b1e84e4ed4c64bcf4e6556f7fe173a641f9765830f778b6bc1b0f"
+        },
+        {
+          "className": "dev.codex.schubert.nk.api.messaging.guard.JmsMessageGuardTest",
+          "method": "bodyLengthAndCopyAnomaliesAreDeniedBeforeAllocationUse",
+          "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/guard/JmsMessageGuardTest.java",
+          "sourceSha256": "b5fa080a349b1e84e4ed4c64bcf4e6556f7fe173a641f9765830f778b6bc1b0f"
+        },
+        {
+          "className": "dev.codex.schubert.nk.api.messaging.guard.JmsMessageGuardTest",
+          "method": "destinationMustBePermanentArtemisUnqualifiedAndExact",
+          "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/guard/JmsMessageGuardTest.java",
+          "sourceSha256": "b5fa080a349b1e84e4ed4c64bcf4e6556f7fe173a641f9765830f778b6bc1b0f"
+        },
+        {
+          "className": "dev.codex.schubert.nk.api.messaging.guard.JmsMessageGuardTest",
+          "method": "replyToMustMatchPresenceAndPermanentAllowlistedAddress",
+          "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/guard/JmsMessageGuardTest.java",
+          "sourceSha256": "b5fa080a349b1e84e4ed4c64bcf4e6556f7fe173a641f9765830f778b6bc1b0f"
+        },
+        {
+          "className": "dev.codex.schubert.nk.api.messaging.guard.JmsMessageGuardTest",
+          "method": "requiredHeadersAndPropertiesDenyNullBlankMissingAndMalformedValues",
+          "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/guard/JmsMessageGuardTest.java",
+          "sourceSha256": "b5fa080a349b1e84e4ed4c64bcf4e6556f7fe173a641f9765830f778b6bc1b0f"
+        }
+      ],
+      "currentWholeJoinPending": true,
+      "disposition": "REQUIRED_CONTRACT",
+      "id": "PMD-01516",
+      "method": "baseValues",
+      "methodTokenSha256": "e4eaddfbcc71175974e553c250fe6410b1f9ccabcb531133be49caa160b04404",
+      "newSourceReason": true,
+      "oldRuntimeReassigned": false,
+      "originalRowSha256": "e7b20145721ad2a61884244d7f9bb651b27425a2f590fa1828be752d57539fca",
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/guard/JmsMessageGuardTest.java",
+      "productTestsExecutedByReview": 0,
+      "reason": "Each baseValues/validReply/with/without creates a fresh caller-owned HashMap or copy. Missing and explicit null body/header/replyTo values are required negative fixtures. Proxy reads synchronously, no worker shares the map; ConcurrentHashMap rejects null before the SUT and alters this oracle. Not a production shared map.",
+      "rule": "UseConcurrentHashMap",
+      "source": "5672593199b6b4e9cbfcc9bc01b26bdcda87a638",
+      "sourceSha256": "b5fa080a349b1e84e4ed4c64bcf4e6556f7fe173a641f9765830f778b6bc1b0f",
+      "sourceSpanSha256": "15335aa62036fa96d2dec36c57d963ca57415fad508c643ce5ae7a33be22bbf1"
+    },
+    {
+      "attributes": {
+        "begincolumn": "25",
+        "beginline": "177",
+        "class": "JmsMessageGuardTest",
+        "endcolumn": "53",
+        "endline": "177",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap",
+        "method": "with",
+        "package": "dev.codex.schubert.nk.api.messaging.guard",
+        "priority": "3",
+        "rule": "UseConcurrentHashMap",
+        "ruleset": "Multithreading",
+        "variable": "copy"
+      },
+      "currentCases": [
+        {
+          "className": "dev.codex.schubert.nk.api.messaging.guard.JmsMessageGuardTest",
+          "method": "validBytesMessageProducesAnImmutableRedactedSnapshot",
+          "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/guard/JmsMessageGuardTest.java",
+          "sourceSha256": "b5fa080a349b1e84e4ed4c64bcf4e6556f7fe173a641f9765830f778b6bc1b0f"
+        },
+        {
+          "className": "dev.codex.schubert.nk.api.messaging.guard.JmsMessageGuardTest",
+          "method": "nullAndNonBytesMessagesAreDeniedBeforeBodyAccess",
+          "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/guard/JmsMessageGuardTest.java",
+          "sourceSha256": "b5fa080a349b1e84e4ed4c64bcf4e6556f7fe173a641f9765830f778b6bc1b0f"
+        },
+        {
+          "className": "dev.codex.schubert.nk.api.messaging.guard.JmsMessageGuardTest",
+          "method": "bodyLengthAndCopyAnomaliesAreDeniedBeforeAllocationUse",
+          "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/guard/JmsMessageGuardTest.java",
+          "sourceSha256": "b5fa080a349b1e84e4ed4c64bcf4e6556f7fe173a641f9765830f778b6bc1b0f"
+        },
+        {
+          "className": "dev.codex.schubert.nk.api.messaging.guard.JmsMessageGuardTest",
+          "method": "destinationMustBePermanentArtemisUnqualifiedAndExact",
+          "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/guard/JmsMessageGuardTest.java",
+          "sourceSha256": "b5fa080a349b1e84e4ed4c64bcf4e6556f7fe173a641f9765830f778b6bc1b0f"
+        },
+        {
+          "className": "dev.codex.schubert.nk.api.messaging.guard.JmsMessageGuardTest",
+          "method": "replyToMustMatchPresenceAndPermanentAllowlistedAddress",
+          "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/guard/JmsMessageGuardTest.java",
+          "sourceSha256": "b5fa080a349b1e84e4ed4c64bcf4e6556f7fe173a641f9765830f778b6bc1b0f"
+        },
+        {
+          "className": "dev.codex.schubert.nk.api.messaging.guard.JmsMessageGuardTest",
+          "method": "requiredHeadersAndPropertiesDenyNullBlankMissingAndMalformedValues",
+          "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/guard/JmsMessageGuardTest.java",
+          "sourceSha256": "b5fa080a349b1e84e4ed4c64bcf4e6556f7fe173a641f9765830f778b6bc1b0f"
+        }
+      ],
+      "currentWholeJoinPending": true,
+      "disposition": "REQUIRED_CONTRACT",
+      "id": "PMD-01517",
+      "method": "with",
+      "methodTokenSha256": "72a2ce41a9cdc74a8cd7c508a6f035038345046ac80d15d20283b65330de7a3f",
+      "newSourceReason": true,
+      "oldRuntimeReassigned": false,
+      "originalRowSha256": "a4e6b34bf75509464059ecd52bb5f57afa50862df23184a941803565cecd6afc",
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/guard/JmsMessageGuardTest.java",
+      "productTestsExecutedByReview": 0,
+      "reason": "Each baseValues/validReply/with/without creates a fresh caller-owned HashMap or copy. Missing and explicit null body/header/replyTo values are required negative fixtures. Proxy reads synchronously, no worker shares the map; ConcurrentHashMap rejects null before the SUT and alters this oracle. Not a production shared map.",
+      "rule": "UseConcurrentHashMap",
+      "source": "5672593199b6b4e9cbfcc9bc01b26bdcda87a638",
+      "sourceSha256": "b5fa080a349b1e84e4ed4c64bcf4e6556f7fe173a641f9765830f778b6bc1b0f",
+      "sourceSpanSha256": "479814f4a2ae0ee494bc622aa074c668c25ffebb470d4601d57d80e664091584"
+    },
+    {
+      "attributes": {
+        "begincolumn": "25",
+        "beginline": "183",
+        "class": "JmsMessageGuardTest",
+        "endcolumn": "53",
+        "endline": "183",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap",
+        "method": "without",
+        "package": "dev.codex.schubert.nk.api.messaging.guard",
+        "priority": "3",
+        "rule": "UseConcurrentHashMap",
+        "ruleset": "Multithreading",
+        "variable": "copy"
+      },
+      "currentCases": [
+        {
+          "className": "dev.codex.schubert.nk.api.messaging.guard.JmsMessageGuardTest",
+          "method": "validBytesMessageProducesAnImmutableRedactedSnapshot",
+          "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/guard/JmsMessageGuardTest.java",
+          "sourceSha256": "b5fa080a349b1e84e4ed4c64bcf4e6556f7fe173a641f9765830f778b6bc1b0f"
+        },
+        {
+          "className": "dev.codex.schubert.nk.api.messaging.guard.JmsMessageGuardTest",
+          "method": "nullAndNonBytesMessagesAreDeniedBeforeBodyAccess",
+          "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/guard/JmsMessageGuardTest.java",
+          "sourceSha256": "b5fa080a349b1e84e4ed4c64bcf4e6556f7fe173a641f9765830f778b6bc1b0f"
+        },
+        {
+          "className": "dev.codex.schubert.nk.api.messaging.guard.JmsMessageGuardTest",
+          "method": "bodyLengthAndCopyAnomaliesAreDeniedBeforeAllocationUse",
+          "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/guard/JmsMessageGuardTest.java",
+          "sourceSha256": "b5fa080a349b1e84e4ed4c64bcf4e6556f7fe173a641f9765830f778b6bc1b0f"
+        },
+        {
+          "className": "dev.codex.schubert.nk.api.messaging.guard.JmsMessageGuardTest",
+          "method": "destinationMustBePermanentArtemisUnqualifiedAndExact",
+          "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/guard/JmsMessageGuardTest.java",
+          "sourceSha256": "b5fa080a349b1e84e4ed4c64bcf4e6556f7fe173a641f9765830f778b6bc1b0f"
+        },
+        {
+          "className": "dev.codex.schubert.nk.api.messaging.guard.JmsMessageGuardTest",
+          "method": "replyToMustMatchPresenceAndPermanentAllowlistedAddress",
+          "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/guard/JmsMessageGuardTest.java",
+          "sourceSha256": "b5fa080a349b1e84e4ed4c64bcf4e6556f7fe173a641f9765830f778b6bc1b0f"
+        },
+        {
+          "className": "dev.codex.schubert.nk.api.messaging.guard.JmsMessageGuardTest",
+          "method": "requiredHeadersAndPropertiesDenyNullBlankMissingAndMalformedValues",
+          "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/guard/JmsMessageGuardTest.java",
+          "sourceSha256": "b5fa080a349b1e84e4ed4c64bcf4e6556f7fe173a641f9765830f778b6bc1b0f"
+        }
+      ],
+      "currentWholeJoinPending": true,
+      "disposition": "REQUIRED_CONTRACT",
+      "id": "PMD-01518",
+      "method": "without",
+      "methodTokenSha256": "1ce73c1310dc877df1000e98ab34dc795b7d0f7abaf4ed8b29a2cc624c4c0806",
+      "newSourceReason": true,
+      "oldRuntimeReassigned": false,
+      "originalRowSha256": "277972c2a435517468d32cc8f5067bfb9f4ac6e890e6729fd17d3afe1b5216b9",
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/guard/JmsMessageGuardTest.java",
+      "productTestsExecutedByReview": 0,
+      "reason": "Each baseValues/validReply/with/without creates a fresh caller-owned HashMap or copy. Missing and explicit null body/header/replyTo values are required negative fixtures. Proxy reads synchronously, no worker shares the map; ConcurrentHashMap rejects null before the SUT and alters this oracle. Not a production shared map.",
+      "rule": "UseConcurrentHashMap",
+      "source": "5672593199b6b4e9cbfcc9bc01b26bdcda87a638",
+      "sourceSha256": "b5fa080a349b1e84e4ed4c64bcf4e6556f7fe173a641f9765830f778b6bc1b0f",
+      "sourceSpanSha256": "479814f4a2ae0ee494bc622aa074c668c25ffebb470d4601d57d80e664091584"
+    },
+    {
+      "attributes": {
+        "begincolumn": "13",
+        "beginline": "200",
+        "class": "JmsMessageGuardTest",
+        "endcolumn": "34",
+        "endline": "200",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader",
+        "method": "proxy",
+        "package": "dev.codex.schubert.nk.api.messaging.guard",
+        "priority": "3",
+        "rule": "UseProperClassLoader",
+        "ruleset": "Error Prone"
+      },
+      "currentCases": [
+        {
+          "className": "dev.codex.schubert.nk.api.messaging.guard.JmsMessageGuardTest",
+          "method": "validBytesMessageProducesAnImmutableRedactedSnapshot",
+          "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/guard/JmsMessageGuardTest.java",
+          "sourceSha256": "b5fa080a349b1e84e4ed4c64bcf4e6556f7fe173a641f9765830f778b6bc1b0f"
+        },
+        {
+          "className": "dev.codex.schubert.nk.api.messaging.guard.JmsMessageGuardTest",
+          "method": "nullAndNonBytesMessagesAreDeniedBeforeBodyAccess",
+          "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/guard/JmsMessageGuardTest.java",
+          "sourceSha256": "b5fa080a349b1e84e4ed4c64bcf4e6556f7fe173a641f9765830f778b6bc1b0f"
+        },
+        {
+          "className": "dev.codex.schubert.nk.api.messaging.guard.JmsMessageGuardTest",
+          "method": "bodyLengthAndCopyAnomaliesAreDeniedBeforeAllocationUse",
+          "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/guard/JmsMessageGuardTest.java",
+          "sourceSha256": "b5fa080a349b1e84e4ed4c64bcf4e6556f7fe173a641f9765830f778b6bc1b0f"
+        },
+        {
+          "className": "dev.codex.schubert.nk.api.messaging.guard.JmsMessageGuardTest",
+          "method": "destinationMustBePermanentArtemisUnqualifiedAndExact",
+          "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/guard/JmsMessageGuardTest.java",
+          "sourceSha256": "b5fa080a349b1e84e4ed4c64bcf4e6556f7fe173a641f9765830f778b6bc1b0f"
+        },
+        {
+          "className": "dev.codex.schubert.nk.api.messaging.guard.JmsMessageGuardTest",
+          "method": "replyToMustMatchPresenceAndPermanentAllowlistedAddress",
+          "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/guard/JmsMessageGuardTest.java",
+          "sourceSha256": "b5fa080a349b1e84e4ed4c64bcf4e6556f7fe173a641f9765830f778b6bc1b0f"
+        },
+        {
+          "className": "dev.codex.schubert.nk.api.messaging.guard.JmsMessageGuardTest",
+          "method": "requiredHeadersAndPropertiesDenyNullBlankMissingAndMalformedValues",
+          "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/guard/JmsMessageGuardTest.java",
+          "sourceSha256": "b5fa080a349b1e84e4ed4c64bcf4e6556f7fe173a641f9765830f778b6bc1b0f"
+        }
+      ],
+      "currentWholeJoinPending": true,
+      "disposition": "REQUIRED_CONTRACT",
+      "id": "PMD-01519",
+      "method": "proxy",
+      "methodTokenSha256": "0d98b558fa58640e2e2d1c8255c88b4015c6fafef286f71ca18dda969f173dde",
+      "newSourceReason": true,
+      "oldRuntimeReassigned": false,
+      "originalRowSha256": "2dc05ed609ddaad361cd03e6187c9bd78d959a2b548df98bf7985c51f1e1d525",
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/guard/JmsMessageGuardTest.java",
+      "productTestsExecutedByReview": 0,
+      "reason": "Proxy defines exactly the caller-supplied BytesMessage/TextMessage interface and uses that same interface defining loader. It does not resolve context-selected services, J2EE lookup, arbitrary class names or network resources. Changing to unrelated context loader may not expose the interface identity; this is a finite local fixture, not container integration.",
+      "rule": "UseProperClassLoader",
+      "source": "5672593199b6b4e9cbfcc9bc01b26bdcda87a638",
+      "sourceSha256": "b5fa080a349b1e84e4ed4c64bcf4e6556f7fe173a641f9765830f778b6bc1b0f",
+      "sourceSpanSha256": "da8d8924b489a6c1aa450f4c448886e60eb6175650bdf421b50b5c8e51d391d6"
+    },
+    {
+      "attributes": {
+        "begincolumn": "24",
+        "beginline": "245",
+        "class": "JmsMessageGuardTest",
+        "endcolumn": "47",
+        "endline": "245",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#compareobjectswithequals",
+        "method": "proxy",
+        "package": "dev.codex.schubert.nk.api.messaging.guard",
+        "priority": "3",
+        "rule": "CompareObjectsWithEquals",
+        "ruleset": "Error Prone"
+      },
+      "currentCases": [
+        {
+          "className": "dev.codex.schubert.nk.api.messaging.guard.JmsMessageGuardTest",
+          "method": "validBytesMessageProducesAnImmutableRedactedSnapshot",
+          "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/guard/JmsMessageGuardTest.java",
+          "sourceSha256": "b5fa080a349b1e84e4ed4c64bcf4e6556f7fe173a641f9765830f778b6bc1b0f"
+        },
+        {
+          "className": "dev.codex.schubert.nk.api.messaging.guard.JmsMessageGuardTest",
+          "method": "nullAndNonBytesMessagesAreDeniedBeforeBodyAccess",
+          "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/guard/JmsMessageGuardTest.java",
+          "sourceSha256": "b5fa080a349b1e84e4ed4c64bcf4e6556f7fe173a641f9765830f778b6bc1b0f"
+        },
+        {
+          "className": "dev.codex.schubert.nk.api.messaging.guard.JmsMessageGuardTest",
+          "method": "bodyLengthAndCopyAnomaliesAreDeniedBeforeAllocationUse",
+          "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/guard/JmsMessageGuardTest.java",
+          "sourceSha256": "b5fa080a349b1e84e4ed4c64bcf4e6556f7fe173a641f9765830f778b6bc1b0f"
+        },
+        {
+          "className": "dev.codex.schubert.nk.api.messaging.guard.JmsMessageGuardTest",
+          "method": "destinationMustBePermanentArtemisUnqualifiedAndExact",
+          "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/guard/JmsMessageGuardTest.java",
+          "sourceSha256": "b5fa080a349b1e84e4ed4c64bcf4e6556f7fe173a641f9765830f778b6bc1b0f"
+        },
+        {
+          "className": "dev.codex.schubert.nk.api.messaging.guard.JmsMessageGuardTest",
+          "method": "replyToMustMatchPresenceAndPermanentAllowlistedAddress",
+          "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/guard/JmsMessageGuardTest.java",
+          "sourceSha256": "b5fa080a349b1e84e4ed4c64bcf4e6556f7fe173a641f9765830f778b6bc1b0f"
+        },
+        {
+          "className": "dev.codex.schubert.nk.api.messaging.guard.JmsMessageGuardTest",
+          "method": "requiredHeadersAndPropertiesDenyNullBlankMissingAndMalformedValues",
+          "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/guard/JmsMessageGuardTest.java",
+          "sourceSha256": "b5fa080a349b1e84e4ed4c64bcf4e6556f7fe173a641f9765830f778b6bc1b0f"
+        }
+      ],
+      "currentWholeJoinPending": true,
+      "disposition": "REQUIRED_CONTRACT",
+      "id": "PMD-01520",
+      "method": "proxy",
+      "methodTokenSha256": "0d98b558fa58640e2e2d1c8255c88b4015c6fafef286f71ca18dda969f173dde",
+      "newSourceReason": true,
+      "oldRuntimeReassigned": false,
+      "originalRowSha256": "a85c72185ef63fd6dd8e1be353f47cfdab537eda61eb5b5cfb15bcd40a8bb4ef",
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/guard/JmsMessageGuardTest.java",
+      "productTestsExecutedByReview": 0,
+      "reason": "The invocation handler implements the proxy equals(Object) method. ignored is that exact proxy instance, so identity implements reflexive reference equality. Calling ignored.equals would reenter this handler recursively, not compare field values; identityHashCode is paired with reference equality. No business object value equality is changed.",
+      "rule": "CompareObjectsWithEquals",
+      "source": "5672593199b6b4e9cbfcc9bc01b26bdcda87a638",
+      "sourceSha256": "b5fa080a349b1e84e4ed4c64bcf4e6556f7fe173a641f9765830f778b6bc1b0f",
+      "sourceSpanSha256": "fb728b25531a100f574862ad6eba871169099b4e88d8b771696ecf24bb18201f"
+    },
+    {
+      "attributes": {
+        "begincolumn": "25",
+        "beginline": "175",
+        "class": "JmsReplyDecoderTest",
+        "endcolumn": "49",
+        "endline": "175",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap",
+        "method": "validReply",
+        "package": "dev.codex.schubert.nk.web.messaging",
+        "priority": "3",
+        "rule": "UseConcurrentHashMap",
+        "ruleset": "Multithreading",
+        "variable": "values"
+      },
+      "currentCases": [
+        {
+          "className": "dev.codex.schubert.nk.web.messaging.JmsReplyDecoderTest",
+          "method": "acceptanceReplyUsesExactRegisteredAsyncProfile",
+          "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/JmsReplyDecoderTest.java",
+          "sourceSha256": "4e57ec319666832fa7aaa8639bb44920c84969f13e59c8450706d63b9dcea05e"
+        },
+        {
+          "className": "dev.codex.schubert.nk.web.messaging.JmsReplyDecoderTest",
+          "method": "validReplyProducesAnImmutableRedactedResult",
+          "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/JmsReplyDecoderTest.java",
+          "sourceSha256": "4e57ec319666832fa7aaa8639bb44920c84969f13e59c8450706d63b9dcea05e"
+        },
+        {
+          "className": "dev.codex.schubert.nk.web.messaging.JmsReplyDecoderTest",
+          "method": "nullTypeBodyLengthAndCopyAnomaliesAreRejected",
+          "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/JmsReplyDecoderTest.java",
+          "sourceSha256": "4e57ec319666832fa7aaa8639bb44920c84969f13e59c8450706d63b9dcea05e"
+        },
+        {
+          "className": "dev.codex.schubert.nk.web.messaging.JmsReplyDecoderTest",
+          "method": "destinationMustBeThePermanentApprovedAddressWithoutReplyTo",
+          "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/JmsReplyDecoderTest.java",
+          "sourceSha256": "4e57ec319666832fa7aaa8639bb44920c84969f13e59c8450706d63b9dcea05e"
+        },
+        {
+          "className": "dev.codex.schubert.nk.web.messaging.JmsReplyDecoderTest",
+          "method": "requiredHeadersPropertiesAndValuesDenyMissingBlankAndMalformedInputs",
+          "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/JmsReplyDecoderTest.java",
+          "sourceSha256": "4e57ec319666832fa7aaa8639bb44920c84969f13e59c8450706d63b9dcea05e"
+        },
+        {
+          "className": "dev.codex.schubert.nk.web.messaging.JmsReplyDecoderTest",
+          "method": "transportAndWireValuesMustExactlyMatchTheReplyHeaderAndRoute",
+          "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/JmsReplyDecoderTest.java",
+          "sourceSha256": "4e57ec319666832fa7aaa8639bb44920c84969f13e59c8450706d63b9dcea05e"
+        }
+      ],
+      "currentWholeJoinPending": true,
+      "disposition": "REQUIRED_CONTRACT",
+      "id": "PMD-08066",
+      "method": "validReply",
+      "methodTokenSha256": "a5d4ab0d81ea1a67c9307432604ff55f13ea01827b99bc9c629e0b7a49b6008d",
+      "newSourceReason": true,
+      "oldRuntimeReassigned": false,
+      "originalRowSha256": "676b971db2f8109ebf2572102ffa31d23a9cd2724577ed9ab8726f7df3e9f213",
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/JmsReplyDecoderTest.java",
+      "productTestsExecutedByReview": 0,
+      "reason": "Each baseValues/validReply/with/without creates a fresh caller-owned HashMap or copy. Missing and explicit null body/header/replyTo values are required negative fixtures. Proxy reads synchronously, no worker shares the map; ConcurrentHashMap rejects null before the SUT and alters this oracle. Not a production shared map.",
+      "rule": "UseConcurrentHashMap",
+      "source": "5672593199b6b4e9cbfcc9bc01b26bdcda87a638",
+      "sourceSha256": "4e57ec319666832fa7aaa8639bb44920c84969f13e59c8450706d63b9dcea05e",
+      "sourceSpanSha256": "15335aa62036fa96d2dec36c57d963ca57415fad508c643ce5ae7a33be22bbf1"
+    },
+    {
+      "attributes": {
+        "begincolumn": "25",
+        "beginline": "192",
+        "class": "JmsReplyDecoderTest",
+        "endcolumn": "53",
+        "endline": "192",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap",
+        "method": "with",
+        "package": "dev.codex.schubert.nk.web.messaging",
+        "priority": "3",
+        "rule": "UseConcurrentHashMap",
+        "ruleset": "Multithreading",
+        "variable": "copy"
+      },
+      "currentCases": [
+        {
+          "className": "dev.codex.schubert.nk.web.messaging.JmsReplyDecoderTest",
+          "method": "acceptanceReplyUsesExactRegisteredAsyncProfile",
+          "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/JmsReplyDecoderTest.java",
+          "sourceSha256": "4e57ec319666832fa7aaa8639bb44920c84969f13e59c8450706d63b9dcea05e"
+        },
+        {
+          "className": "dev.codex.schubert.nk.web.messaging.JmsReplyDecoderTest",
+          "method": "validReplyProducesAnImmutableRedactedResult",
+          "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/JmsReplyDecoderTest.java",
+          "sourceSha256": "4e57ec319666832fa7aaa8639bb44920c84969f13e59c8450706d63b9dcea05e"
+        },
+        {
+          "className": "dev.codex.schubert.nk.web.messaging.JmsReplyDecoderTest",
+          "method": "nullTypeBodyLengthAndCopyAnomaliesAreRejected",
+          "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/JmsReplyDecoderTest.java",
+          "sourceSha256": "4e57ec319666832fa7aaa8639bb44920c84969f13e59c8450706d63b9dcea05e"
+        },
+        {
+          "className": "dev.codex.schubert.nk.web.messaging.JmsReplyDecoderTest",
+          "method": "destinationMustBeThePermanentApprovedAddressWithoutReplyTo",
+          "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/JmsReplyDecoderTest.java",
+          "sourceSha256": "4e57ec319666832fa7aaa8639bb44920c84969f13e59c8450706d63b9dcea05e"
+        },
+        {
+          "className": "dev.codex.schubert.nk.web.messaging.JmsReplyDecoderTest",
+          "method": "requiredHeadersPropertiesAndValuesDenyMissingBlankAndMalformedInputs",
+          "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/JmsReplyDecoderTest.java",
+          "sourceSha256": "4e57ec319666832fa7aaa8639bb44920c84969f13e59c8450706d63b9dcea05e"
+        },
+        {
+          "className": "dev.codex.schubert.nk.web.messaging.JmsReplyDecoderTest",
+          "method": "transportAndWireValuesMustExactlyMatchTheReplyHeaderAndRoute",
+          "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/JmsReplyDecoderTest.java",
+          "sourceSha256": "4e57ec319666832fa7aaa8639bb44920c84969f13e59c8450706d63b9dcea05e"
+        }
+      ],
+      "currentWholeJoinPending": true,
+      "disposition": "REQUIRED_CONTRACT",
+      "id": "PMD-08067",
+      "method": "with",
+      "methodTokenSha256": "72a2ce41a9cdc74a8cd7c508a6f035038345046ac80d15d20283b65330de7a3f",
+      "newSourceReason": true,
+      "oldRuntimeReassigned": false,
+      "originalRowSha256": "967f878d0f5b382652b55f245f71375a58b7abf6d0b0566a4ad32cb9d3e86346",
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/JmsReplyDecoderTest.java",
+      "productTestsExecutedByReview": 0,
+      "reason": "Each baseValues/validReply/with/without creates a fresh caller-owned HashMap or copy. Missing and explicit null body/header/replyTo values are required negative fixtures. Proxy reads synchronously, no worker shares the map; ConcurrentHashMap rejects null before the SUT and alters this oracle. Not a production shared map.",
+      "rule": "UseConcurrentHashMap",
+      "source": "5672593199b6b4e9cbfcc9bc01b26bdcda87a638",
+      "sourceSha256": "4e57ec319666832fa7aaa8639bb44920c84969f13e59c8450706d63b9dcea05e",
+      "sourceSpanSha256": "479814f4a2ae0ee494bc622aa074c668c25ffebb470d4601d57d80e664091584"
+    },
+    {
+      "attributes": {
+        "begincolumn": "25",
+        "beginline": "198",
+        "class": "JmsReplyDecoderTest",
+        "endcolumn": "53",
+        "endline": "198",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap",
+        "method": "without",
+        "package": "dev.codex.schubert.nk.web.messaging",
+        "priority": "3",
+        "rule": "UseConcurrentHashMap",
+        "ruleset": "Multithreading",
+        "variable": "copy"
+      },
+      "currentCases": [
+        {
+          "className": "dev.codex.schubert.nk.web.messaging.JmsReplyDecoderTest",
+          "method": "acceptanceReplyUsesExactRegisteredAsyncProfile",
+          "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/JmsReplyDecoderTest.java",
+          "sourceSha256": "4e57ec319666832fa7aaa8639bb44920c84969f13e59c8450706d63b9dcea05e"
+        },
+        {
+          "className": "dev.codex.schubert.nk.web.messaging.JmsReplyDecoderTest",
+          "method": "validReplyProducesAnImmutableRedactedResult",
+          "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/JmsReplyDecoderTest.java",
+          "sourceSha256": "4e57ec319666832fa7aaa8639bb44920c84969f13e59c8450706d63b9dcea05e"
+        },
+        {
+          "className": "dev.codex.schubert.nk.web.messaging.JmsReplyDecoderTest",
+          "method": "nullTypeBodyLengthAndCopyAnomaliesAreRejected",
+          "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/JmsReplyDecoderTest.java",
+          "sourceSha256": "4e57ec319666832fa7aaa8639bb44920c84969f13e59c8450706d63b9dcea05e"
+        },
+        {
+          "className": "dev.codex.schubert.nk.web.messaging.JmsReplyDecoderTest",
+          "method": "destinationMustBeThePermanentApprovedAddressWithoutReplyTo",
+          "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/JmsReplyDecoderTest.java",
+          "sourceSha256": "4e57ec319666832fa7aaa8639bb44920c84969f13e59c8450706d63b9dcea05e"
+        },
+        {
+          "className": "dev.codex.schubert.nk.web.messaging.JmsReplyDecoderTest",
+          "method": "requiredHeadersPropertiesAndValuesDenyMissingBlankAndMalformedInputs",
+          "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/JmsReplyDecoderTest.java",
+          "sourceSha256": "4e57ec319666832fa7aaa8639bb44920c84969f13e59c8450706d63b9dcea05e"
+        },
+        {
+          "className": "dev.codex.schubert.nk.web.messaging.JmsReplyDecoderTest",
+          "method": "transportAndWireValuesMustExactlyMatchTheReplyHeaderAndRoute",
+          "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/JmsReplyDecoderTest.java",
+          "sourceSha256": "4e57ec319666832fa7aaa8639bb44920c84969f13e59c8450706d63b9dcea05e"
+        }
+      ],
+      "currentWholeJoinPending": true,
+      "disposition": "REQUIRED_CONTRACT",
+      "id": "PMD-08068",
+      "method": "without",
+      "methodTokenSha256": "1ce73c1310dc877df1000e98ab34dc795b7d0f7abaf4ed8b29a2cc624c4c0806",
+      "newSourceReason": true,
+      "oldRuntimeReassigned": false,
+      "originalRowSha256": "94542fe86cd620634159fe6e0dea43af9cbcebb60d303d33e0a6f8e066d942b6",
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/JmsReplyDecoderTest.java",
+      "productTestsExecutedByReview": 0,
+      "reason": "Each baseValues/validReply/with/without creates a fresh caller-owned HashMap or copy. Missing and explicit null body/header/replyTo values are required negative fixtures. Proxy reads synchronously, no worker shares the map; ConcurrentHashMap rejects null before the SUT and alters this oracle. Not a production shared map.",
+      "rule": "UseConcurrentHashMap",
+      "source": "5672593199b6b4e9cbfcc9bc01b26bdcda87a638",
+      "sourceSha256": "4e57ec319666832fa7aaa8639bb44920c84969f13e59c8450706d63b9dcea05e",
+      "sourceSpanSha256": "479814f4a2ae0ee494bc622aa074c668c25ffebb470d4601d57d80e664091584"
+    },
+    {
+      "attributes": {
+        "begincolumn": "13",
+        "beginline": "215",
+        "class": "JmsReplyDecoderTest",
+        "endcolumn": "34",
+        "endline": "215",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader",
+        "method": "proxy",
+        "package": "dev.codex.schubert.nk.web.messaging",
+        "priority": "3",
+        "rule": "UseProperClassLoader",
+        "ruleset": "Error Prone"
+      },
+      "currentCases": [
+        {
+          "className": "dev.codex.schubert.nk.web.messaging.JmsReplyDecoderTest",
+          "method": "acceptanceReplyUsesExactRegisteredAsyncProfile",
+          "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/JmsReplyDecoderTest.java",
+          "sourceSha256": "4e57ec319666832fa7aaa8639bb44920c84969f13e59c8450706d63b9dcea05e"
+        },
+        {
+          "className": "dev.codex.schubert.nk.web.messaging.JmsReplyDecoderTest",
+          "method": "validReplyProducesAnImmutableRedactedResult",
+          "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/JmsReplyDecoderTest.java",
+          "sourceSha256": "4e57ec319666832fa7aaa8639bb44920c84969f13e59c8450706d63b9dcea05e"
+        },
+        {
+          "className": "dev.codex.schubert.nk.web.messaging.JmsReplyDecoderTest",
+          "method": "nullTypeBodyLengthAndCopyAnomaliesAreRejected",
+          "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/JmsReplyDecoderTest.java",
+          "sourceSha256": "4e57ec319666832fa7aaa8639bb44920c84969f13e59c8450706d63b9dcea05e"
+        },
+        {
+          "className": "dev.codex.schubert.nk.web.messaging.JmsReplyDecoderTest",
+          "method": "destinationMustBeThePermanentApprovedAddressWithoutReplyTo",
+          "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/JmsReplyDecoderTest.java",
+          "sourceSha256": "4e57ec319666832fa7aaa8639bb44920c84969f13e59c8450706d63b9dcea05e"
+        },
+        {
+          "className": "dev.codex.schubert.nk.web.messaging.JmsReplyDecoderTest",
+          "method": "requiredHeadersPropertiesAndValuesDenyMissingBlankAndMalformedInputs",
+          "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/JmsReplyDecoderTest.java",
+          "sourceSha256": "4e57ec319666832fa7aaa8639bb44920c84969f13e59c8450706d63b9dcea05e"
+        },
+        {
+          "className": "dev.codex.schubert.nk.web.messaging.JmsReplyDecoderTest",
+          "method": "transportAndWireValuesMustExactlyMatchTheReplyHeaderAndRoute",
+          "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/JmsReplyDecoderTest.java",
+          "sourceSha256": "4e57ec319666832fa7aaa8639bb44920c84969f13e59c8450706d63b9dcea05e"
+        }
+      ],
+      "currentWholeJoinPending": true,
+      "disposition": "REQUIRED_CONTRACT",
+      "id": "PMD-08069",
+      "method": "proxy",
+      "methodTokenSha256": "023a2ecbe385aaecdb0923a56a45370e59304f80cc2c0a2ad7ea954ed0cf81f1",
+      "newSourceReason": true,
+      "oldRuntimeReassigned": false,
+      "originalRowSha256": "1ed568f0264297bc9658e1825f0c4a6bb3e73813d850dddff31c970fd0642902",
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/JmsReplyDecoderTest.java",
+      "productTestsExecutedByReview": 0,
+      "reason": "Proxy defines exactly the caller-supplied BytesMessage/TextMessage interface and uses that same interface defining loader. It does not resolve context-selected services, J2EE lookup, arbitrary class names or network resources. Changing to unrelated context loader may not expose the interface identity; this is a finite local fixture, not container integration.",
+      "rule": "UseProperClassLoader",
+      "source": "5672593199b6b4e9cbfcc9bc01b26bdcda87a638",
+      "sourceSha256": "4e57ec319666832fa7aaa8639bb44920c84969f13e59c8450706d63b9dcea05e",
+      "sourceSpanSha256": "da8d8924b489a6c1aa450f4c448886e60eb6175650bdf421b50b5c8e51d391d6"
+    },
+    {
+      "attributes": {
+        "begincolumn": "24",
+        "beginline": "257",
+        "class": "JmsReplyDecoderTest",
+        "endcolumn": "47",
+        "endline": "257",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#compareobjectswithequals",
+        "method": "proxy",
+        "package": "dev.codex.schubert.nk.web.messaging",
+        "priority": "3",
+        "rule": "CompareObjectsWithEquals",
+        "ruleset": "Error Prone"
+      },
+      "currentCases": [
+        {
+          "className": "dev.codex.schubert.nk.web.messaging.JmsReplyDecoderTest",
+          "method": "acceptanceReplyUsesExactRegisteredAsyncProfile",
+          "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/JmsReplyDecoderTest.java",
+          "sourceSha256": "4e57ec319666832fa7aaa8639bb44920c84969f13e59c8450706d63b9dcea05e"
+        },
+        {
+          "className": "dev.codex.schubert.nk.web.messaging.JmsReplyDecoderTest",
+          "method": "validReplyProducesAnImmutableRedactedResult",
+          "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/JmsReplyDecoderTest.java",
+          "sourceSha256": "4e57ec319666832fa7aaa8639bb44920c84969f13e59c8450706d63b9dcea05e"
+        },
+        {
+          "className": "dev.codex.schubert.nk.web.messaging.JmsReplyDecoderTest",
+          "method": "nullTypeBodyLengthAndCopyAnomaliesAreRejected",
+          "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/JmsReplyDecoderTest.java",
+          "sourceSha256": "4e57ec319666832fa7aaa8639bb44920c84969f13e59c8450706d63b9dcea05e"
+        },
+        {
+          "className": "dev.codex.schubert.nk.web.messaging.JmsReplyDecoderTest",
+          "method": "destinationMustBeThePermanentApprovedAddressWithoutReplyTo",
+          "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/JmsReplyDecoderTest.java",
+          "sourceSha256": "4e57ec319666832fa7aaa8639bb44920c84969f13e59c8450706d63b9dcea05e"
+        },
+        {
+          "className": "dev.codex.schubert.nk.web.messaging.JmsReplyDecoderTest",
+          "method": "requiredHeadersPropertiesAndValuesDenyMissingBlankAndMalformedInputs",
+          "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/JmsReplyDecoderTest.java",
+          "sourceSha256": "4e57ec319666832fa7aaa8639bb44920c84969f13e59c8450706d63b9dcea05e"
+        },
+        {
+          "className": "dev.codex.schubert.nk.web.messaging.JmsReplyDecoderTest",
+          "method": "transportAndWireValuesMustExactlyMatchTheReplyHeaderAndRoute",
+          "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/JmsReplyDecoderTest.java",
+          "sourceSha256": "4e57ec319666832fa7aaa8639bb44920c84969f13e59c8450706d63b9dcea05e"
+        }
+      ],
+      "currentWholeJoinPending": true,
+      "disposition": "REQUIRED_CONTRACT",
+      "id": "PMD-08070",
+      "method": "proxy",
+      "methodTokenSha256": "023a2ecbe385aaecdb0923a56a45370e59304f80cc2c0a2ad7ea954ed0cf81f1",
+      "newSourceReason": true,
+      "oldRuntimeReassigned": false,
+      "originalRowSha256": "e5021489ce249fb213f6c456a544f3c3493a3e72f5495ff829d3bae9a8ba098a",
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/JmsReplyDecoderTest.java",
+      "productTestsExecutedByReview": 0,
+      "reason": "The invocation handler implements the proxy equals(Object) method. ignored is that exact proxy instance, so identity implements reflexive reference equality. Calling ignored.equals would reenter this handler recursively, not compare field values; identityHashCode is paired with reference equality. No business object value equality is changed.",
+      "rule": "CompareObjectsWithEquals",
+      "source": "5672593199b6b4e9cbfcc9bc01b26bdcda87a638",
+      "sourceSha256": "4e57ec319666832fa7aaa8639bb44920c84969f13e59c8450706d63b9dcea05e",
+      "sourceSpanSha256": "fb728b25531a100f574862ad6eba871169099b4e88d8b771696ecf24bb18201f"
+    }
+  ],
+  "source": "5672593199b6b4e9cbfcc9bc01b26bdcda87a638"
+}
