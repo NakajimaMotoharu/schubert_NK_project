@@ -1,0 +1,2163 @@
+{
+  "rows": [
+    {
+      "attributes": {
+        "begincolumn": "7",
+        "beginline": "48",
+        "class": "ApiMetricContextTest",
+        "endcolumn": "13",
+        "endline": "48",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "method": "await",
+        "package": "dev.codex.schubert.nk.api.monitoring",
+        "priority": "3",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading"
+      },
+      "controls": [
+        "latch.await(30,TimeUnit.SECONDS)",
+        "catch(InterruptedExceptioninterrupted)",
+        "Thread.currentThread().interrupt()"
+      ],
+      "currentCases": [
+        {
+          "className": "dev.codex.schubert.nk.api.monitoring.ApiMetricContextTest",
+          "method": "apimctx021ContendedCloseIsUnconfirmedWithoutFreeingInFlightSources",
+          "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiMetricContextTest.java",
+          "sourceSha256": "db60cfb024597d31585f153972cb47f3e37a5ba12c8211d358b6c7a0d8bf936b"
+        },
+        {
+          "className": "dev.codex.schubert.nk.api.monitoring.ApiMetricContextTest",
+          "method": "apimctx023StopDuringCustomFactoryOrSetupPreventsStandardAcquisition",
+          "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiMetricContextTest.java",
+          "sourceSha256": "db60cfb024597d31585f153972cb47f3e37a5ba12c8211d358b6c7a0d8bf936b"
+        },
+        {
+          "className": "dev.codex.schubert.nk.api.monitoring.ApiMetricContextTest",
+          "method": "apimctx024StopDuringStandardAcquisitionKeepsBothOwnersUnconfirmed",
+          "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiMetricContextTest.java",
+          "sourceSha256": "db60cfb024597d31585f153972cb47f3e37a5ba12c8211d358b6c7a0d8bf936b"
+        },
+        {
+          "className": "dev.codex.schubert.nk.api.monitoring.ApiMetricContextTest",
+          "method": "apimctx033RefreshContendedStopRetainsUntilSamplerReturns",
+          "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiMetricContextTest.java",
+          "sourceSha256": "db60cfb024597d31585f153972cb47f3e37a5ba12c8211d358b6c7a0d8bf936b"
+        }
+      ],
+      "currentWholeJoinPending": true,
+      "disposition": "CONTEXT_NOT_APPLICABLE",
+      "id": "PMD-01893",
+      "kind": "PRIVATE_BOUNDED_LATCH_AND_INTERRUPT_STATUS_RESTORE_NOT_J2EE",
+      "newAccepted": 0,
+      "oldRuntimeReassigned": false,
+      "originalRowSha256": "e6cf9d6f088b8b607148d60196cba021924a55f1e5d2bfac3407735eb5c47f1d",
+      "ownerControls": [],
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiMetricContextTest.java",
+      "productTestsExecutedByReview": 0,
+      "reason": "Private helper waits on own finite latches, restores interrupt state on the current test thread only. Caller cases are current whole-fixture executions; the InterruptedException helper branch is not injected and fixture branch100 is not claimed. No application worker, target process or privileged operation.",
+      "rule": "DoNotUseThreads",
+      "scopeKind": "METHOD",
+      "scopeName": "await",
+      "scopeTokenSha256": "200552149744d9eed8122dbcc749739fff0d149ad427dbba8519c5c9ac6ec969",
+      "source": "f75d2fea05a98fe40d731d1a3046a64d20bbbb65",
+      "sourceSha256": "db60cfb024597d31585f153972cb47f3e37a5ba12c8211d358b6c7a0d8bf936b",
+      "sourceSpanSha256": "736f808611188e23a260f73a3b3efd6f03ba06df04160342febfca117cd1eb51"
+    },
+    {
+      "attributes": {
+        "begincolumn": "11",
+        "beginline": "126",
+        "class": "ApiMetricContextTest.Harness",
+        "endcolumn": "24",
+        "endline": "126",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#closeresource",
+        "method": "Harness",
+        "package": "dev.codex.schubert.nk.api.monitoring",
+        "priority": "3",
+        "rule": "CloseResource",
+        "ruleset": "Error Prone",
+        "variable": "standardOwner"
+      },
+      "controls": [
+        "varstandardOwner=newApiStandardMetricSource(this::standard,(registry,gc)->{});",
+        "context=newApiMetricContext<T>",
+        "this::custom,standardOwner"
+      ],
+      "currentCases": [
+        {
+          "className": "dev.codex.schubert.nk.api.monitoring.ApiMetricContextTest",
+          "method": "apimctx001StandardHandshakeReadsNoFactoryOrSetup",
+          "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiMetricContextTest.java",
+          "sourceSha256": "db60cfb024597d31585f153972cb47f3e37a5ba12c8211d358b6c7a0d8bf936b"
+        },
+        {
+          "className": "dev.codex.schubert.nk.api.monitoring.ApiMetricContextTest",
+          "method": "apimctx003UninitializedAndClosedBeforeInitNeverAcquire",
+          "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiMetricContextTest.java",
+          "sourceSha256": "db60cfb024597d31585f153972cb47f3e37a5ba12c8211d358b6c7a0d8bf936b"
+        },
+        {
+          "className": "dev.codex.schubert.nk.api.monitoring.ApiMetricContextTest",
+          "method": "apimctx006CustomFactoryRuntimePreservesIdentityAndOneAttempt",
+          "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiMetricContextTest.java",
+          "sourceSha256": "db60cfb024597d31585f153972cb47f3e37a5ba12c8211d358b6c7a0d8bf936b"
+        },
+        {
+          "className": "dev.codex.schubert.nk.api.monitoring.ApiMetricContextTest",
+          "method": "apimctx007CustomFactoryErrorIsNeverNormalized",
+          "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiMetricContextTest.java",
+          "sourceSha256": "db60cfb024597d31585f153972cb47f3e37a5ba12c8211d358b6c7a0d8bf936b"
+        },
+        {
+          "className": "dev.codex.schubert.nk.api.monitoring.ApiMetricContextTest",
+          "method": "apimctx008NullCustomRegistryNeverBecomesSuccess",
+          "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiMetricContextTest.java",
+          "sourceSha256": "db60cfb024597d31585f153972cb47f3e37a5ba12c8211d358b6c7a0d8bf936b"
+        },
+        {
+          "className": "dev.codex.schubert.nk.api.monitoring.ApiMetricContextTest",
+          "method": "apimctx009ClosedCustomCandidateIsRetainedForExplicitCleanup",
+          "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiMetricContextTest.java",
+          "sourceSha256": "db60cfb024597d31585f153972cb47f3e37a5ba12c8211d358b6c7a0d8bf936b"
+        },
+        {
+          "className": "dev.codex.schubert.nk.api.monitoring.ApiMetricContextTest",
+          "method": "apimctx010SetupRuntimeLeavesCustomOwnedAndStandardUnstarted",
+          "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiMetricContextTest.java",
+          "sourceSha256": "db60cfb024597d31585f153972cb47f3e37a5ba12c8211d358b6c7a0d8bf936b"
+        },
+        {
+          "className": "dev.codex.schubert.nk.api.monitoring.ApiMetricContextTest",
+          "method": "apimctx011SetupErrorPreservesIdentityAndPartialOwner",
+          "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiMetricContextTest.java",
+          "sourceSha256": "db60cfb024597d31585f153972cb47f3e37a5ba12c8211d358b6c7a0d8bf936b"
+        },
+        {
+          "className": "dev.codex.schubert.nk.api.monitoring.ApiMetricContextTest",
+          "method": "apimctx012NullBindingIsRejectedBeforeStandard",
+          "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiMetricContextTest.java",
+          "sourceSha256": "db60cfb024597d31585f153972cb47f3e37a5ba12c8211d358b6c7a0d8bf936b"
+        },
+        {
+          "className": "dev.codex.schubert.nk.api.monitoring.ApiMetricContextTest",
+          "method": "apimctx013StandardFactoryRuntimeKeepsCustomAndBindingsUnpublished",
+          "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiMetricContextTest.java",
+          "sourceSha256": "db60cfb024597d31585f153972cb47f3e37a5ba12c8211d358b6c7a0d8bf936b"
+        },
+        {
+          "className": "dev.codex.schubert.nk.api.monitoring.ApiMetricContextTest",
+          "method": "apimctx014StandardFactoryErrorIsPrimary",
+          "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiMetricContextTest.java",
+          "sourceSha256": "db60cfb024597d31585f153972cb47f3e37a5ba12c8211d358b6c7a0d8bf936b"
+        },
+        {
+          "className": "dev.codex.schubert.nk.api.monitoring.ApiMetricContextTest",
+          "method": "apimctx015NullStandardFactoryResultRetainsCustom",
+          "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiMetricContextTest.java",
+          "sourceSha256": "db60cfb024597d31585f153972cb47f3e37a5ba12c8211d358b6c7a0d8bf936b"
+        },
+        {
+          "className": "dev.codex.schubert.nk.api.monitoring.ApiMetricContextTest",
+          "method": "apimctx016StandardCloseFailureRetainsCustomAndDeniesNewAccess",
+          "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiMetricContextTest.java",
+          "sourceSha256": "db60cfb024597d31585f153972cb47f3e37a5ba12c8211d358b6c7a0d8bf936b"
+        },
+        {
+          "className": "dev.codex.schubert.nk.api.monitoring.ApiMetricContextTest",
+          "method": "apimctx017CustomCloseFailureDoesNotRepeatConfirmedStandardClose",
+          "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiMetricContextTest.java",
+          "sourceSha256": "db60cfb024597d31585f153972cb47f3e37a5ba12c8211d358b6c7a0d8bf936b"
+        },
+        {
+          "className": "dev.codex.schubert.nk.api.monitoring.ApiMetricContextTest",
+          "method": "apimctx018CallerCapturePrecedesEverySdkFactory",
+          "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiMetricContextTest.java",
+          "sourceSha256": "db60cfb024597d31585f153972cb47f3e37a5ba12c8211d358b6c7a0d8bf936b"
+        },
+        {
+          "className": "dev.codex.schubert.nk.api.monitoring.ApiMetricContextTest",
+          "method": "apimctx019SingleInitializeAndIdempotentClose",
+          "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiMetricContextTest.java",
+          "sourceSha256": "db60cfb024597d31585f153972cb47f3e37a5ba12c8211d358b6c7a0d8bf936b"
+        },
+        {
+          "className": "dev.codex.schubert.nk.api.monitoring.ApiMetricContextTest",
+          "method": "apimctx020RenderFailureKeepsOwnerAndDoesNotReacquire",
+          "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiMetricContextTest.java",
+          "sourceSha256": "db60cfb024597d31585f153972cb47f3e37a5ba12c8211d358b6c7a0d8bf936b"
+        },
+        {
+          "className": "dev.codex.schubert.nk.api.monitoring.ApiMetricContextTest",
+          "method": "apimctx021ContendedCloseIsUnconfirmedWithoutFreeingInFlightSources",
+          "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiMetricContextTest.java",
+          "sourceSha256": "db60cfb024597d31585f153972cb47f3e37a5ba12c8211d358b6c7a0d8bf936b"
+        },
+        {
+          "className": "dev.codex.schubert.nk.api.monitoring.ApiMetricContextTest",
+          "method": "apimctx022StandardRenderRuntimeErrorAndNullKeepStructuralOwnership",
+          "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiMetricContextTest.java",
+          "sourceSha256": "db60cfb024597d31585f153972cb47f3e37a5ba12c8211d358b6c7a0d8bf936b"
+        },
+        {
+          "className": "dev.codex.schubert.nk.api.monitoring.ApiMetricContextTest",
+          "method": "apimctx023StopDuringCustomFactoryOrSetupPreventsStandardAcquisition",
+          "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiMetricContextTest.java",
+          "sourceSha256": "db60cfb024597d31585f153972cb47f3e37a5ba12c8211d358b6c7a0d8bf936b"
+        },
+        {
+          "className": "dev.codex.schubert.nk.api.monitoring.ApiMetricContextTest",
+          "method": "apimctx024StopDuringStandardAcquisitionKeepsBothOwnersUnconfirmed",
+          "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiMetricContextTest.java",
+          "sourceSha256": "db60cfb024597d31585f153972cb47f3e37a5ba12c8211d358b6c7a0d8bf936b"
+        },
+        {
+          "className": "dev.codex.schubert.nk.api.monitoring.ApiMetricContextTest",
+          "method": "apimctx025ReentrantSetupCloseCannotConfirmOrStartStandard",
+          "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiMetricContextTest.java",
+          "sourceSha256": "db60cfb024597d31585f153972cb47f3e37a5ba12c8211d358b6c7a0d8bf936b"
+        },
+        {
+          "className": "dev.codex.schubert.nk.api.monitoring.ApiMetricContextTest",
+          "method": "apimctx026ReentrantRenderClosePropagatesAndRetainsAllResources",
+          "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiMetricContextTest.java",
+          "sourceSha256": "db60cfb024597d31585f153972cb47f3e37a5ba12c8211d358b6c7a0d8bf936b"
+        }
+      ],
+      "currentWholeJoinPending": true,
+      "disposition": "CONTEXT_NOT_APPLICABLE",
+      "id": "PMD-01896",
+      "kind": "UNBOUND_RESOURCE_FREE_OWNER_TRANSFERRED_TO_HARNESS_CONTEXT",
+      "newAccepted": 0,
+      "oldRuntimeReassigned": false,
+      "originalRowSha256": "494bfddd32c986d897c9014f82f655c79a59eeef6d370175ce478b00a053a811",
+      "ownerControls": [
+        "context.close();",
+        "if(!customRegistry.isClosed())customRegistry.close();",
+        "if(!standardRegistry.isClosed())standardRegistry.close();"
+      ],
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiMetricContextTest.java",
+      "productTestsExecutedByReview": 0,
+      "reason": "Private fixture uses only valid fixed modes. New StandardMetricSource constructor acquires no registry/GC; its ownership transfers into retained context before initialize. Harness owns and explicitly closes context and unused synthetic registries. Early TWR-close of the transferred alias would be wrong. No universal constructor-allocation/OOME cleanup guarantee or real application-owner qualification inferred.",
+      "rule": "CloseResource",
+      "scopeKind": "CONSTRUCTOR",
+      "scopeName": "Harness",
+      "scopeTokenSha256": "c54b9dd499f932d8e5f82f267c95546d041b00f7e12b0f8f356aae4ada99852f",
+      "source": "f75d2fea05a98fe40d731d1a3046a64d20bbbb65",
+      "sourceSha256": "db60cfb024597d31585f153972cb47f3e37a5ba12c8211d358b6c7a0d8bf936b",
+      "sourceSpanSha256": "1908b81cc872c372ce66bbecf0d89f49ea6b4bd9cd3b4e859de9cc20722482d5"
+    },
+    {
+      "attributes": {
+        "begincolumn": "27",
+        "beginline": "492",
+        "class": "ApiMetricContextTest",
+        "endcolumn": "62",
+        "endline": "492",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "method": "apimctx021ContendedCloseIsUnconfirmedWithoutFreeingInFlightSources",
+        "package": "dev.codex.schubert.nk.api.monitoring",
+        "priority": "3",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading",
+        "variable": "executor"
+      },
+      "controls": [
+        "try(varexecutor=Executors.newSingleThreadExecutor())",
+        "active.get(30,TimeUnit.SECONDS)",
+        "release.countDown()",
+        "executor.shutdownNow()",
+        "executor.awaitTermination(30,TimeUnit.SECONDS)"
+      ],
+      "currentCases": [
+        {
+          "className": "dev.codex.schubert.nk.api.monitoring.ApiMetricContextTest",
+          "method": "apimctx021ContendedCloseIsUnconfirmedWithoutFreeingInFlightSources",
+          "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiMetricContextTest.java",
+          "sourceSha256": "db60cfb024597d31585f153972cb47f3e37a5ba12c8211d358b6c7a0d8bf936b"
+        }
+      ],
+      "currentWholeJoinPending": true,
+      "disposition": "CONTEXT_NOT_APPLICABLE",
+      "id": "PMD-01900",
+      "kind": "OWNED_FINITE_STANDALONE_SDK_FIXTURE_WORKERS_NOT_J2EE",
+      "newAccepted": 0,
+      "oldRuntimeReassigned": false,
+      "originalRowSha256": "98664b90490b40eb0ab7af85a97feedc7e9acf48bac6aa7ae3c3178f474a053b",
+      "ownerControls": [],
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiMetricContextTest.java",
+      "productTestsExecutedByReview": 0,
+      "reason": "Standalone JUnit owns one worker per case (023 two sequential iterations). All task actions are local metadata/SDK context calls, release latch in original finally, shutdownNow and awaitTermination30seconds, Future.get30seconds. TWR close itself has no local absolute deadline, distinct outer JVM240seconds. Actual pass proves these fixtures only, not real service/VM/Root ownership or stop budget.",
+      "rule": "DoNotUseThreads",
+      "scopeKind": "METHOD",
+      "scopeName": "apimctx021ContendedCloseIsUnconfirmedWithoutFreeingInFlightSources",
+      "scopeTokenSha256": "a5db59ff434aa41e92816797973405f1f0b0bd75eb5da5b8a8569d095d91a385",
+      "source": "f75d2fea05a98fe40d731d1a3046a64d20bbbb65",
+      "sourceSha256": "db60cfb024597d31585f153972cb47f3e37a5ba12c8211d358b6c7a0d8bf936b",
+      "sourceSpanSha256": "fd6401f092076966a1eeecda70599980543ebe6a04a2f913279947e70f57cd2a"
+    },
+    {
+      "attributes": {
+        "begincolumn": "24",
+        "beginline": "494",
+        "class": "ApiMetricContextTest",
+        "endcolumn": "69",
+        "endline": "494",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "method": "apimctx021ContendedCloseIsUnconfirmedWithoutFreeingInFlightSources",
+        "package": "dev.codex.schubert.nk.api.monitoring",
+        "priority": "3",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading",
+        "variable": "active"
+      },
+      "controls": [
+        "try(varexecutor=Executors.newSingleThreadExecutor())",
+        "active.get(30,TimeUnit.SECONDS)",
+        "release.countDown()",
+        "executor.shutdownNow()",
+        "executor.awaitTermination(30,TimeUnit.SECONDS)"
+      ],
+      "currentCases": [
+        {
+          "className": "dev.codex.schubert.nk.api.monitoring.ApiMetricContextTest",
+          "method": "apimctx021ContendedCloseIsUnconfirmedWithoutFreeingInFlightSources",
+          "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiMetricContextTest.java",
+          "sourceSha256": "db60cfb024597d31585f153972cb47f3e37a5ba12c8211d358b6c7a0d8bf936b"
+        }
+      ],
+      "currentWholeJoinPending": true,
+      "disposition": "CONTEXT_NOT_APPLICABLE",
+      "id": "PMD-01901",
+      "kind": "OWNED_FINITE_STANDALONE_SDK_FIXTURE_WORKERS_NOT_J2EE",
+      "newAccepted": 0,
+      "oldRuntimeReassigned": false,
+      "originalRowSha256": "91613e5ede6a3135b711f2fbaa4ed1cee0f701bfb015e8ff43f522f3b4a18ea8",
+      "ownerControls": [],
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiMetricContextTest.java",
+      "productTestsExecutedByReview": 0,
+      "reason": "Standalone JUnit owns one worker per case (023 two sequential iterations). All task actions are local metadata/SDK context calls, release latch in original finally, shutdownNow and awaitTermination30seconds, Future.get30seconds. TWR close itself has no local absolute deadline, distinct outer JVM240seconds. Actual pass proves these fixtures only, not real service/VM/Root ownership or stop budget.",
+      "rule": "DoNotUseThreads",
+      "scopeKind": "METHOD",
+      "scopeName": "apimctx021ContendedCloseIsUnconfirmedWithoutFreeingInFlightSources",
+      "scopeTokenSha256": "a5db59ff434aa41e92816797973405f1f0b0bd75eb5da5b8a8569d095d91a385",
+      "source": "f75d2fea05a98fe40d731d1a3046a64d20bbbb65",
+      "sourceSha256": "db60cfb024597d31585f153972cb47f3e37a5ba12c8211d358b6c7a0d8bf936b",
+      "sourceSpanSha256": "b7e03c50c103efaa3aee2b1a576fc787f8c49b8e2c19eb2e50a0b2055bc226ac"
+    },
+    {
+      "attributes": {
+        "begincolumn": "11",
+        "beginline": "510",
+        "class": "ApiMetricContextTest",
+        "endcolumn": "33",
+        "endline": "510",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "method": "apimctx021ContendedCloseIsUnconfirmedWithoutFreeingInFlightSources",
+        "package": "dev.codex.schubert.nk.api.monitoring",
+        "priority": "3",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading"
+      },
+      "controls": [
+        "try(varexecutor=Executors.newSingleThreadExecutor())",
+        "active.get(30,TimeUnit.SECONDS)",
+        "release.countDown()",
+        "executor.shutdownNow()",
+        "executor.awaitTermination(30,TimeUnit.SECONDS)"
+      ],
+      "currentCases": [
+        {
+          "className": "dev.codex.schubert.nk.api.monitoring.ApiMetricContextTest",
+          "method": "apimctx021ContendedCloseIsUnconfirmedWithoutFreeingInFlightSources",
+          "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiMetricContextTest.java",
+          "sourceSha256": "db60cfb024597d31585f153972cb47f3e37a5ba12c8211d358b6c7a0d8bf936b"
+        }
+      ],
+      "currentWholeJoinPending": true,
+      "disposition": "CONTEXT_NOT_APPLICABLE",
+      "id": "PMD-01902",
+      "kind": "OWNED_FINITE_STANDALONE_SDK_FIXTURE_WORKERS_NOT_J2EE",
+      "newAccepted": 0,
+      "oldRuntimeReassigned": false,
+      "originalRowSha256": "a288612ed9cca68390900222744c20d6344056e1f2f2ec366ae38bf1044b7aa7",
+      "ownerControls": [],
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiMetricContextTest.java",
+      "productTestsExecutedByReview": 0,
+      "reason": "Standalone JUnit owns one worker per case (023 two sequential iterations). All task actions are local metadata/SDK context calls, release latch in original finally, shutdownNow and awaitTermination30seconds, Future.get30seconds. TWR close itself has no local absolute deadline, distinct outer JVM240seconds. Actual pass proves these fixtures only, not real service/VM/Root ownership or stop budget.",
+      "rule": "DoNotUseThreads",
+      "scopeKind": "METHOD",
+      "scopeName": "apimctx021ContendedCloseIsUnconfirmedWithoutFreeingInFlightSources",
+      "scopeTokenSha256": "a5db59ff434aa41e92816797973405f1f0b0bd75eb5da5b8a8569d095d91a385",
+      "source": "f75d2fea05a98fe40d731d1a3046a64d20bbbb65",
+      "sourceSha256": "db60cfb024597d31585f153972cb47f3e37a5ba12c8211d358b6c7a0d8bf936b",
+      "sourceSpanSha256": "447cb134622833454dbcfd6b8edb9568b5b6bffacad735fc46be8baae7c7c49c"
+    },
+    {
+      "attributes": {
+        "begincolumn": "22",
+        "beginline": "511",
+        "class": "ApiMetricContextTest",
+        "endcolumn": "69",
+        "endline": "511",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "method": "apimctx021ContendedCloseIsUnconfirmedWithoutFreeingInFlightSources",
+        "package": "dev.codex.schubert.nk.api.monitoring",
+        "priority": "3",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading"
+      },
+      "controls": [
+        "try(varexecutor=Executors.newSingleThreadExecutor())",
+        "active.get(30,TimeUnit.SECONDS)",
+        "release.countDown()",
+        "executor.shutdownNow()",
+        "executor.awaitTermination(30,TimeUnit.SECONDS)"
+      ],
+      "currentCases": [
+        {
+          "className": "dev.codex.schubert.nk.api.monitoring.ApiMetricContextTest",
+          "method": "apimctx021ContendedCloseIsUnconfirmedWithoutFreeingInFlightSources",
+          "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiMetricContextTest.java",
+          "sourceSha256": "db60cfb024597d31585f153972cb47f3e37a5ba12c8211d358b6c7a0d8bf936b"
+        }
+      ],
+      "currentWholeJoinPending": true,
+      "disposition": "CONTEXT_NOT_APPLICABLE",
+      "id": "PMD-01903",
+      "kind": "OWNED_FINITE_STANDALONE_SDK_FIXTURE_WORKERS_NOT_J2EE",
+      "newAccepted": 0,
+      "oldRuntimeReassigned": false,
+      "originalRowSha256": "3af783863e9480f5c23a897c5d0051b67c176efb58bc5ab891374c326df1775f",
+      "ownerControls": [],
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiMetricContextTest.java",
+      "productTestsExecutedByReview": 0,
+      "reason": "Standalone JUnit owns one worker per case (023 two sequential iterations). All task actions are local metadata/SDK context calls, release latch in original finally, shutdownNow and awaitTermination30seconds, Future.get30seconds. TWR close itself has no local absolute deadline, distinct outer JVM240seconds. Actual pass proves these fixtures only, not real service/VM/Root ownership or stop budget.",
+      "rule": "DoNotUseThreads",
+      "scopeKind": "METHOD",
+      "scopeName": "apimctx021ContendedCloseIsUnconfirmedWithoutFreeingInFlightSources",
+      "scopeTokenSha256": "a5db59ff434aa41e92816797973405f1f0b0bd75eb5da5b8a8569d095d91a385",
+      "source": "f75d2fea05a98fe40d731d1a3046a64d20bbbb65",
+      "sourceSha256": "db60cfb024597d31585f153972cb47f3e37a5ba12c8211d358b6c7a0d8bf936b",
+      "sourceSpanSha256": "f19510bb87c476a6142e8ab95cbb7c0e4d38263fe225a19e0c4712de24c80588"
+    },
+    {
+      "attributes": {
+        "begincolumn": "29",
+        "beginline": "553",
+        "class": "ApiMetricContextTest",
+        "endcolumn": "64",
+        "endline": "553",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "method": "apimctx023StopDuringCustomFactoryOrSetupPreventsStandardAcquisition",
+        "package": "dev.codex.schubert.nk.api.monitoring",
+        "priority": "3",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading",
+        "variable": "executor"
+      },
+      "controls": [
+        "try(varexecutor=Executors.newSingleThreadExecutor())",
+        "List.of(true,false)",
+        "init.get(30,TimeUnit.SECONDS)",
+        "release.countDown()",
+        "executor.shutdownNow()",
+        "executor.awaitTermination(30,TimeUnit.SECONDS)"
+      ],
+      "currentCases": [
+        {
+          "className": "dev.codex.schubert.nk.api.monitoring.ApiMetricContextTest",
+          "method": "apimctx023StopDuringCustomFactoryOrSetupPreventsStandardAcquisition",
+          "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiMetricContextTest.java",
+          "sourceSha256": "db60cfb024597d31585f153972cb47f3e37a5ba12c8211d358b6c7a0d8bf936b"
+        }
+      ],
+      "currentWholeJoinPending": true,
+      "disposition": "CONTEXT_NOT_APPLICABLE",
+      "id": "PMD-01905",
+      "kind": "OWNED_FINITE_STANDALONE_SDK_FIXTURE_WORKERS_NOT_J2EE",
+      "newAccepted": 0,
+      "oldRuntimeReassigned": false,
+      "originalRowSha256": "753385aa418ef4b67ef012985b6db9d7c69d9b6b53883533ed088c119cedb1c0",
+      "ownerControls": [],
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiMetricContextTest.java",
+      "productTestsExecutedByReview": 0,
+      "reason": "Standalone JUnit owns one worker per case (023 two sequential iterations). All task actions are local metadata/SDK context calls, release latch in original finally, shutdownNow and awaitTermination30seconds, Future.get30seconds. TWR close itself has no local absolute deadline, distinct outer JVM240seconds. Actual pass proves these fixtures only, not real service/VM/Root ownership or stop budget.",
+      "rule": "DoNotUseThreads",
+      "scopeKind": "METHOD",
+      "scopeName": "apimctx023StopDuringCustomFactoryOrSetupPreventsStandardAcquisition",
+      "scopeTokenSha256": "1ec53e2788ba58be4ddbdbb730adaca53a03caac316a230b2d960a5f1cee12c2",
+      "source": "f75d2fea05a98fe40d731d1a3046a64d20bbbb65",
+      "sourceSha256": "db60cfb024597d31585f153972cb47f3e37a5ba12c8211d358b6c7a0d8bf936b",
+      "sourceSpanSha256": "fd6401f092076966a1eeecda70599980543ebe6a04a2f913279947e70f57cd2a"
+    },
+    {
+      "attributes": {
+        "begincolumn": "24",
+        "beginline": "555",
+        "class": "ApiMetricContextTest",
+        "endcolumn": "62",
+        "endline": "555",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "method": "apimctx023StopDuringCustomFactoryOrSetupPreventsStandardAcquisition",
+        "package": "dev.codex.schubert.nk.api.monitoring",
+        "priority": "3",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading",
+        "variable": "init"
+      },
+      "controls": [
+        "try(varexecutor=Executors.newSingleThreadExecutor())",
+        "List.of(true,false)",
+        "init.get(30,TimeUnit.SECONDS)",
+        "release.countDown()",
+        "executor.shutdownNow()",
+        "executor.awaitTermination(30,TimeUnit.SECONDS)"
+      ],
+      "currentCases": [
+        {
+          "className": "dev.codex.schubert.nk.api.monitoring.ApiMetricContextTest",
+          "method": "apimctx023StopDuringCustomFactoryOrSetupPreventsStandardAcquisition",
+          "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiMetricContextTest.java",
+          "sourceSha256": "db60cfb024597d31585f153972cb47f3e37a5ba12c8211d358b6c7a0d8bf936b"
+        }
+      ],
+      "currentWholeJoinPending": true,
+      "disposition": "CONTEXT_NOT_APPLICABLE",
+      "id": "PMD-01906",
+      "kind": "OWNED_FINITE_STANDALONE_SDK_FIXTURE_WORKERS_NOT_J2EE",
+      "newAccepted": 0,
+      "oldRuntimeReassigned": false,
+      "originalRowSha256": "71dc85fb90f8aead6b714cb5fe0317f807b6f3939dde65aeaa3b6e7d3e39c951",
+      "ownerControls": [],
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiMetricContextTest.java",
+      "productTestsExecutedByReview": 0,
+      "reason": "Standalone JUnit owns one worker per case (023 two sequential iterations). All task actions are local metadata/SDK context calls, release latch in original finally, shutdownNow and awaitTermination30seconds, Future.get30seconds. TWR close itself has no local absolute deadline, distinct outer JVM240seconds. Actual pass proves these fixtures only, not real service/VM/Root ownership or stop budget.",
+      "rule": "DoNotUseThreads",
+      "scopeKind": "METHOD",
+      "scopeName": "apimctx023StopDuringCustomFactoryOrSetupPreventsStandardAcquisition",
+      "scopeTokenSha256": "1ec53e2788ba58be4ddbdbb730adaca53a03caac316a230b2d960a5f1cee12c2",
+      "source": "f75d2fea05a98fe40d731d1a3046a64d20bbbb65",
+      "sourceSha256": "db60cfb024597d31585f153972cb47f3e37a5ba12c8211d358b6c7a0d8bf936b",
+      "sourceSpanSha256": "1042ad497f557aa9edec5079e86a63691f59454aabf0989533e4635210550edf"
+    },
+    {
+      "attributes": {
+        "begincolumn": "13",
+        "beginline": "571",
+        "class": "ApiMetricContextTest",
+        "endcolumn": "35",
+        "endline": "571",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "method": "apimctx023StopDuringCustomFactoryOrSetupPreventsStandardAcquisition",
+        "package": "dev.codex.schubert.nk.api.monitoring",
+        "priority": "3",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading"
+      },
+      "controls": [
+        "try(varexecutor=Executors.newSingleThreadExecutor())",
+        "List.of(true,false)",
+        "init.get(30,TimeUnit.SECONDS)",
+        "release.countDown()",
+        "executor.shutdownNow()",
+        "executor.awaitTermination(30,TimeUnit.SECONDS)"
+      ],
+      "currentCases": [
+        {
+          "className": "dev.codex.schubert.nk.api.monitoring.ApiMetricContextTest",
+          "method": "apimctx023StopDuringCustomFactoryOrSetupPreventsStandardAcquisition",
+          "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiMetricContextTest.java",
+          "sourceSha256": "db60cfb024597d31585f153972cb47f3e37a5ba12c8211d358b6c7a0d8bf936b"
+        }
+      ],
+      "currentWholeJoinPending": true,
+      "disposition": "CONTEXT_NOT_APPLICABLE",
+      "id": "PMD-01907",
+      "kind": "OWNED_FINITE_STANDALONE_SDK_FIXTURE_WORKERS_NOT_J2EE",
+      "newAccepted": 0,
+      "oldRuntimeReassigned": false,
+      "originalRowSha256": "a6d82f73abe45b07157e7e4564b86f640bb8f8ab67820466537265c2f3205e67",
+      "ownerControls": [],
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiMetricContextTest.java",
+      "productTestsExecutedByReview": 0,
+      "reason": "Standalone JUnit owns one worker per case (023 two sequential iterations). All task actions are local metadata/SDK context calls, release latch in original finally, shutdownNow and awaitTermination30seconds, Future.get30seconds. TWR close itself has no local absolute deadline, distinct outer JVM240seconds. Actual pass proves these fixtures only, not real service/VM/Root ownership or stop budget.",
+      "rule": "DoNotUseThreads",
+      "scopeKind": "METHOD",
+      "scopeName": "apimctx023StopDuringCustomFactoryOrSetupPreventsStandardAcquisition",
+      "scopeTokenSha256": "1ec53e2788ba58be4ddbdbb730adaca53a03caac316a230b2d960a5f1cee12c2",
+      "source": "f75d2fea05a98fe40d731d1a3046a64d20bbbb65",
+      "sourceSha256": "db60cfb024597d31585f153972cb47f3e37a5ba12c8211d358b6c7a0d8bf936b",
+      "sourceSpanSha256": "447cb134622833454dbcfd6b8edb9568b5b6bffacad735fc46be8baae7c7c49c"
+    },
+    {
+      "attributes": {
+        "begincolumn": "24",
+        "beginline": "572",
+        "class": "ApiMetricContextTest",
+        "endcolumn": "71",
+        "endline": "572",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "method": "apimctx023StopDuringCustomFactoryOrSetupPreventsStandardAcquisition",
+        "package": "dev.codex.schubert.nk.api.monitoring",
+        "priority": "3",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading"
+      },
+      "controls": [
+        "try(varexecutor=Executors.newSingleThreadExecutor())",
+        "List.of(true,false)",
+        "init.get(30,TimeUnit.SECONDS)",
+        "release.countDown()",
+        "executor.shutdownNow()",
+        "executor.awaitTermination(30,TimeUnit.SECONDS)"
+      ],
+      "currentCases": [
+        {
+          "className": "dev.codex.schubert.nk.api.monitoring.ApiMetricContextTest",
+          "method": "apimctx023StopDuringCustomFactoryOrSetupPreventsStandardAcquisition",
+          "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiMetricContextTest.java",
+          "sourceSha256": "db60cfb024597d31585f153972cb47f3e37a5ba12c8211d358b6c7a0d8bf936b"
+        }
+      ],
+      "currentWholeJoinPending": true,
+      "disposition": "CONTEXT_NOT_APPLICABLE",
+      "id": "PMD-01908",
+      "kind": "OWNED_FINITE_STANDALONE_SDK_FIXTURE_WORKERS_NOT_J2EE",
+      "newAccepted": 0,
+      "oldRuntimeReassigned": false,
+      "originalRowSha256": "af2d8ab143446dda9d187c356d371fceb7995f7c0de3b91a1d1eadfb10edec75",
+      "ownerControls": [],
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiMetricContextTest.java",
+      "productTestsExecutedByReview": 0,
+      "reason": "Standalone JUnit owns one worker per case (023 two sequential iterations). All task actions are local metadata/SDK context calls, release latch in original finally, shutdownNow and awaitTermination30seconds, Future.get30seconds. TWR close itself has no local absolute deadline, distinct outer JVM240seconds. Actual pass proves these fixtures only, not real service/VM/Root ownership or stop budget.",
+      "rule": "DoNotUseThreads",
+      "scopeKind": "METHOD",
+      "scopeName": "apimctx023StopDuringCustomFactoryOrSetupPreventsStandardAcquisition",
+      "scopeTokenSha256": "1ec53e2788ba58be4ddbdbb730adaca53a03caac316a230b2d960a5f1cee12c2",
+      "source": "f75d2fea05a98fe40d731d1a3046a64d20bbbb65",
+      "sourceSha256": "db60cfb024597d31585f153972cb47f3e37a5ba12c8211d358b6c7a0d8bf936b",
+      "sourceSpanSha256": "f19510bb87c476a6142e8ab95cbb7c0e4d38263fe225a19e0c4712de24c80588"
+    },
+    {
+      "attributes": {
+        "begincolumn": "27",
+        "beginline": "590",
+        "class": "ApiMetricContextTest",
+        "endcolumn": "62",
+        "endline": "590",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "method": "apimctx024StopDuringStandardAcquisitionKeepsBothOwnersUnconfirmed",
+        "package": "dev.codex.schubert.nk.api.monitoring",
+        "priority": "3",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading",
+        "variable": "executor"
+      },
+      "controls": [
+        "try(varexecutor=Executors.newSingleThreadExecutor())",
+        "init.get(30,TimeUnit.SECONDS)",
+        "release.countDown()",
+        "executor.shutdownNow()",
+        "executor.awaitTermination(30,TimeUnit.SECONDS)"
+      ],
+      "currentCases": [
+        {
+          "className": "dev.codex.schubert.nk.api.monitoring.ApiMetricContextTest",
+          "method": "apimctx024StopDuringStandardAcquisitionKeepsBothOwnersUnconfirmed",
+          "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiMetricContextTest.java",
+          "sourceSha256": "db60cfb024597d31585f153972cb47f3e37a5ba12c8211d358b6c7a0d8bf936b"
+        }
+      ],
+      "currentWholeJoinPending": true,
+      "disposition": "CONTEXT_NOT_APPLICABLE",
+      "id": "PMD-01910",
+      "kind": "OWNED_FINITE_STANDALONE_SDK_FIXTURE_WORKERS_NOT_J2EE",
+      "newAccepted": 0,
+      "oldRuntimeReassigned": false,
+      "originalRowSha256": "d28a3edc8a8bebc4758365c64c1f9f0013441a452e80ea94907244fe53c56630",
+      "ownerControls": [],
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiMetricContextTest.java",
+      "productTestsExecutedByReview": 0,
+      "reason": "Standalone JUnit owns one worker per case (023 two sequential iterations). All task actions are local metadata/SDK context calls, release latch in original finally, shutdownNow and awaitTermination30seconds, Future.get30seconds. TWR close itself has no local absolute deadline, distinct outer JVM240seconds. Actual pass proves these fixtures only, not real service/VM/Root ownership or stop budget.",
+      "rule": "DoNotUseThreads",
+      "scopeKind": "METHOD",
+      "scopeName": "apimctx024StopDuringStandardAcquisitionKeepsBothOwnersUnconfirmed",
+      "scopeTokenSha256": "a854bee4f8130440e66cd4fddeb91a9814d452029a1483d9873cc3248f07f454",
+      "source": "f75d2fea05a98fe40d731d1a3046a64d20bbbb65",
+      "sourceSha256": "db60cfb024597d31585f153972cb47f3e37a5ba12c8211d358b6c7a0d8bf936b",
+      "sourceSpanSha256": "fd6401f092076966a1eeecda70599980543ebe6a04a2f913279947e70f57cd2a"
+    },
+    {
+      "attributes": {
+        "begincolumn": "22",
+        "beginline": "592",
+        "class": "ApiMetricContextTest",
+        "endcolumn": "60",
+        "endline": "592",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "method": "apimctx024StopDuringStandardAcquisitionKeepsBothOwnersUnconfirmed",
+        "package": "dev.codex.schubert.nk.api.monitoring",
+        "priority": "3",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading",
+        "variable": "init"
+      },
+      "controls": [
+        "try(varexecutor=Executors.newSingleThreadExecutor())",
+        "init.get(30,TimeUnit.SECONDS)",
+        "release.countDown()",
+        "executor.shutdownNow()",
+        "executor.awaitTermination(30,TimeUnit.SECONDS)"
+      ],
+      "currentCases": [
+        {
+          "className": "dev.codex.schubert.nk.api.monitoring.ApiMetricContextTest",
+          "method": "apimctx024StopDuringStandardAcquisitionKeepsBothOwnersUnconfirmed",
+          "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiMetricContextTest.java",
+          "sourceSha256": "db60cfb024597d31585f153972cb47f3e37a5ba12c8211d358b6c7a0d8bf936b"
+        }
+      ],
+      "currentWholeJoinPending": true,
+      "disposition": "CONTEXT_NOT_APPLICABLE",
+      "id": "PMD-01911",
+      "kind": "OWNED_FINITE_STANDALONE_SDK_FIXTURE_WORKERS_NOT_J2EE",
+      "newAccepted": 0,
+      "oldRuntimeReassigned": false,
+      "originalRowSha256": "62614871f2ca97730fbe8c260ae871cf2626e6cf3f5f86d29a9f66dbbb6fbc63",
+      "ownerControls": [],
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiMetricContextTest.java",
+      "productTestsExecutedByReview": 0,
+      "reason": "Standalone JUnit owns one worker per case (023 two sequential iterations). All task actions are local metadata/SDK context calls, release latch in original finally, shutdownNow and awaitTermination30seconds, Future.get30seconds. TWR close itself has no local absolute deadline, distinct outer JVM240seconds. Actual pass proves these fixtures only, not real service/VM/Root ownership or stop budget.",
+      "rule": "DoNotUseThreads",
+      "scopeKind": "METHOD",
+      "scopeName": "apimctx024StopDuringStandardAcquisitionKeepsBothOwnersUnconfirmed",
+      "scopeTokenSha256": "a854bee4f8130440e66cd4fddeb91a9814d452029a1483d9873cc3248f07f454",
+      "source": "f75d2fea05a98fe40d731d1a3046a64d20bbbb65",
+      "sourceSha256": "db60cfb024597d31585f153972cb47f3e37a5ba12c8211d358b6c7a0d8bf936b",
+      "sourceSpanSha256": "1042ad497f557aa9edec5079e86a63691f59454aabf0989533e4635210550edf"
+    },
+    {
+      "attributes": {
+        "begincolumn": "11",
+        "beginline": "608",
+        "class": "ApiMetricContextTest",
+        "endcolumn": "33",
+        "endline": "608",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "method": "apimctx024StopDuringStandardAcquisitionKeepsBothOwnersUnconfirmed",
+        "package": "dev.codex.schubert.nk.api.monitoring",
+        "priority": "3",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading"
+      },
+      "controls": [
+        "try(varexecutor=Executors.newSingleThreadExecutor())",
+        "init.get(30,TimeUnit.SECONDS)",
+        "release.countDown()",
+        "executor.shutdownNow()",
+        "executor.awaitTermination(30,TimeUnit.SECONDS)"
+      ],
+      "currentCases": [
+        {
+          "className": "dev.codex.schubert.nk.api.monitoring.ApiMetricContextTest",
+          "method": "apimctx024StopDuringStandardAcquisitionKeepsBothOwnersUnconfirmed",
+          "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiMetricContextTest.java",
+          "sourceSha256": "db60cfb024597d31585f153972cb47f3e37a5ba12c8211d358b6c7a0d8bf936b"
+        }
+      ],
+      "currentWholeJoinPending": true,
+      "disposition": "CONTEXT_NOT_APPLICABLE",
+      "id": "PMD-01912",
+      "kind": "OWNED_FINITE_STANDALONE_SDK_FIXTURE_WORKERS_NOT_J2EE",
+      "newAccepted": 0,
+      "oldRuntimeReassigned": false,
+      "originalRowSha256": "26c25eb33c10d4756937f5a4449bce0603bbfd7ffe119335dd6f4c577928b7d1",
+      "ownerControls": [],
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiMetricContextTest.java",
+      "productTestsExecutedByReview": 0,
+      "reason": "Standalone JUnit owns one worker per case (023 two sequential iterations). All task actions are local metadata/SDK context calls, release latch in original finally, shutdownNow and awaitTermination30seconds, Future.get30seconds. TWR close itself has no local absolute deadline, distinct outer JVM240seconds. Actual pass proves these fixtures only, not real service/VM/Root ownership or stop budget.",
+      "rule": "DoNotUseThreads",
+      "scopeKind": "METHOD",
+      "scopeName": "apimctx024StopDuringStandardAcquisitionKeepsBothOwnersUnconfirmed",
+      "scopeTokenSha256": "a854bee4f8130440e66cd4fddeb91a9814d452029a1483d9873cc3248f07f454",
+      "source": "f75d2fea05a98fe40d731d1a3046a64d20bbbb65",
+      "sourceSha256": "db60cfb024597d31585f153972cb47f3e37a5ba12c8211d358b6c7a0d8bf936b",
+      "sourceSpanSha256": "447cb134622833454dbcfd6b8edb9568b5b6bffacad735fc46be8baae7c7c49c"
+    },
+    {
+      "attributes": {
+        "begincolumn": "22",
+        "beginline": "609",
+        "class": "ApiMetricContextTest",
+        "endcolumn": "69",
+        "endline": "609",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "method": "apimctx024StopDuringStandardAcquisitionKeepsBothOwnersUnconfirmed",
+        "package": "dev.codex.schubert.nk.api.monitoring",
+        "priority": "3",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading"
+      },
+      "controls": [
+        "try(varexecutor=Executors.newSingleThreadExecutor())",
+        "init.get(30,TimeUnit.SECONDS)",
+        "release.countDown()",
+        "executor.shutdownNow()",
+        "executor.awaitTermination(30,TimeUnit.SECONDS)"
+      ],
+      "currentCases": [
+        {
+          "className": "dev.codex.schubert.nk.api.monitoring.ApiMetricContextTest",
+          "method": "apimctx024StopDuringStandardAcquisitionKeepsBothOwnersUnconfirmed",
+          "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiMetricContextTest.java",
+          "sourceSha256": "db60cfb024597d31585f153972cb47f3e37a5ba12c8211d358b6c7a0d8bf936b"
+        }
+      ],
+      "currentWholeJoinPending": true,
+      "disposition": "CONTEXT_NOT_APPLICABLE",
+      "id": "PMD-01913",
+      "kind": "OWNED_FINITE_STANDALONE_SDK_FIXTURE_WORKERS_NOT_J2EE",
+      "newAccepted": 0,
+      "oldRuntimeReassigned": false,
+      "originalRowSha256": "934d869d004167ca30ae612a0e22e18236c6b02252d000b5d211b92218c82327",
+      "ownerControls": [],
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiMetricContextTest.java",
+      "productTestsExecutedByReview": 0,
+      "reason": "Standalone JUnit owns one worker per case (023 two sequential iterations). All task actions are local metadata/SDK context calls, release latch in original finally, shutdownNow and awaitTermination30seconds, Future.get30seconds. TWR close itself has no local absolute deadline, distinct outer JVM240seconds. Actual pass proves these fixtures only, not real service/VM/Root ownership or stop budget.",
+      "rule": "DoNotUseThreads",
+      "scopeKind": "METHOD",
+      "scopeName": "apimctx024StopDuringStandardAcquisitionKeepsBothOwnersUnconfirmed",
+      "scopeTokenSha256": "a854bee4f8130440e66cd4fddeb91a9814d452029a1483d9873cc3248f07f454",
+      "source": "f75d2fea05a98fe40d731d1a3046a64d20bbbb65",
+      "sourceSha256": "db60cfb024597d31585f153972cb47f3e37a5ba12c8211d358b6c7a0d8bf936b",
+      "sourceSpanSha256": "f19510bb87c476a6142e8ab95cbb7c0e4d38263fe225a19e0c4712de24c80588"
+    },
+    {
+      "attributes": {
+        "begincolumn": "9",
+        "beginline": "771",
+        "class": "ApiMetricContextTest",
+        "endcolumn": "16",
+        "endline": "771",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#closeresource",
+        "method": "apimctx032RefreshReentrantStopCannotProduceDetailedSuccess",
+        "package": "dev.codex.schubert.nk.api.monitoring",
+        "priority": "3",
+        "rule": "CloseResource",
+        "ruleset": "Error Prone",
+        "variable": "context"
+      },
+      "controls": [
+        "context.initialize()",
+        "context.render(true)",
+        "finally{context.close();}",
+        "assertTrue(observed.get().isClosed())"
+      ],
+      "currentCases": [
+        {
+          "className": "dev.codex.schubert.nk.api.monitoring.ApiMetricContextTest",
+          "method": "apimctx032RefreshReentrantStopCannotProduceDetailedSuccess",
+          "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiMetricContextTest.java",
+          "sourceSha256": "db60cfb024597d31585f153972cb47f3e37a5ba12c8211d358b6c7a0d8bf936b"
+        }
+      ],
+      "currentWholeJoinPending": true,
+      "disposition": "CONTEXT_NOT_APPLICABLE",
+      "id": "PMD-01914",
+      "kind": "RESOURCE_FREE_CONTEXT_PUBLISHED_BEFORE_INIT_WITH_EXPLICIT_FINALLY_CLOSE",
+      "newAccepted": 0,
+      "oldRuntimeReassigned": false,
+      "originalRowSha256": "c42a8a731450a90ab67cd225df4277983fb7ab07ed5405b7613a44a5ed0447ce",
+      "ownerControls": [],
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiMetricContextTest.java",
+      "productTestsExecutedByReview": 0,
+      "reason": "Context construction/owner publication acquires no SDK. Actual initialization and intentional reentrant-stop negative call are inside explicit try/finally context.close, followed by independent registry-closed assertion. Early implicit close or removing finally would alter the ownership test. This does not authenticate real shutdown/native resources.",
+      "rule": "CloseResource",
+      "scopeKind": "METHOD",
+      "scopeName": "apimctx032RefreshReentrantStopCannotProduceDetailedSuccess",
+      "scopeTokenSha256": "71c77b29ed24bdd7be887393411fb5f84fff3cf52647d7e2b0515ebc5610a17b",
+      "source": "f75d2fea05a98fe40d731d1a3046a64d20bbbb65",
+      "sourceSha256": "db60cfb024597d31585f153972cb47f3e37a5ba12c8211d358b6c7a0d8bf936b",
+      "sourceSpanSha256": "69f9fd8d9342e70b53a7423168d662422b8ccf8bf6bb748340dd4a6a70394290"
+    },
+    {
+      "attributes": {
+        "begincolumn": "23",
+        "beginline": "816",
+        "class": "ApiMetricContextTest",
+        "endcolumn": "58",
+        "endline": "816",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "method": "apimctx033RefreshContendedStopRetainsUntilSamplerReturns",
+        "package": "dev.codex.schubert.nk.api.monitoring",
+        "priority": "3",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading",
+        "variable": "worker"
+      },
+      "controls": [
+        "try(varworker=Executors.newSingleThreadExecutor())",
+        "future.get(30,TimeUnit.SECONDS)",
+        "proceed.countDown()",
+        "worker.shutdownNow()",
+        "worker.awaitTermination(30,TimeUnit.SECONDS)",
+        "context.close()"
+      ],
+      "currentCases": [
+        {
+          "className": "dev.codex.schubert.nk.api.monitoring.ApiMetricContextTest",
+          "method": "apimctx033RefreshContendedStopRetainsUntilSamplerReturns",
+          "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiMetricContextTest.java",
+          "sourceSha256": "db60cfb024597d31585f153972cb47f3e37a5ba12c8211d358b6c7a0d8bf936b"
+        }
+      ],
+      "currentWholeJoinPending": true,
+      "disposition": "CONTEXT_NOT_APPLICABLE",
+      "id": "PMD-01916",
+      "kind": "OWNED_FINITE_STANDALONE_SDK_FIXTURE_WORKERS_NOT_J2EE",
+      "newAccepted": 0,
+      "oldRuntimeReassigned": false,
+      "originalRowSha256": "81734f3f9a1c3976747bbadc98ab408f0733760cdfbc7ce3feb951510179b64f",
+      "ownerControls": [],
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiMetricContextTest.java",
+      "productTestsExecutedByReview": 0,
+      "reason": "Standalone JUnit owns one worker per case (023 two sequential iterations). All task actions are local metadata/SDK context calls, release latch in original finally, shutdownNow and awaitTermination30seconds, Future.get30seconds. TWR close itself has no local absolute deadline, distinct outer JVM240seconds. Actual pass proves these fixtures only, not real service/VM/Root ownership or stop budget.",
+      "rule": "DoNotUseThreads",
+      "scopeKind": "METHOD",
+      "scopeName": "apimctx033RefreshContendedStopRetainsUntilSamplerReturns",
+      "scopeTokenSha256": "e241fb00218310d8f0b3f7f3975aeed0eea93f9df75df5340bb7398bb4c92de5",
+      "source": "f75d2fea05a98fe40d731d1a3046a64d20bbbb65",
+      "sourceSha256": "db60cfb024597d31585f153972cb47f3e37a5ba12c8211d358b6c7a0d8bf936b",
+      "sourceSpanSha256": "fd6401f092076966a1eeecda70599980543ebe6a04a2f913279947e70f57cd2a"
+    },
+    {
+      "attributes": {
+        "begincolumn": "22",
+        "beginline": "819",
+        "class": "ApiMetricContextTest",
+        "endcolumn": "63",
+        "endline": "819",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "method": "apimctx033RefreshContendedStopRetainsUntilSamplerReturns",
+        "package": "dev.codex.schubert.nk.api.monitoring",
+        "priority": "3",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading",
+        "variable": "future"
+      },
+      "controls": [
+        "try(varworker=Executors.newSingleThreadExecutor())",
+        "future.get(30,TimeUnit.SECONDS)",
+        "proceed.countDown()",
+        "worker.shutdownNow()",
+        "worker.awaitTermination(30,TimeUnit.SECONDS)",
+        "context.close()"
+      ],
+      "currentCases": [
+        {
+          "className": "dev.codex.schubert.nk.api.monitoring.ApiMetricContextTest",
+          "method": "apimctx033RefreshContendedStopRetainsUntilSamplerReturns",
+          "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiMetricContextTest.java",
+          "sourceSha256": "db60cfb024597d31585f153972cb47f3e37a5ba12c8211d358b6c7a0d8bf936b"
+        }
+      ],
+      "currentWholeJoinPending": true,
+      "disposition": "CONTEXT_NOT_APPLICABLE",
+      "id": "PMD-01917",
+      "kind": "OWNED_FINITE_STANDALONE_SDK_FIXTURE_WORKERS_NOT_J2EE",
+      "newAccepted": 0,
+      "oldRuntimeReassigned": false,
+      "originalRowSha256": "cc5c9e38ee7743feb0b5833b60eee977c78459afe263964761c82a24f5c6eeac",
+      "ownerControls": [],
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiMetricContextTest.java",
+      "productTestsExecutedByReview": 0,
+      "reason": "Standalone JUnit owns one worker per case (023 two sequential iterations). All task actions are local metadata/SDK context calls, release latch in original finally, shutdownNow and awaitTermination30seconds, Future.get30seconds. TWR close itself has no local absolute deadline, distinct outer JVM240seconds. Actual pass proves these fixtures only, not real service/VM/Root ownership or stop budget.",
+      "rule": "DoNotUseThreads",
+      "scopeKind": "METHOD",
+      "scopeName": "apimctx033RefreshContendedStopRetainsUntilSamplerReturns",
+      "scopeTokenSha256": "e241fb00218310d8f0b3f7f3975aeed0eea93f9df75df5340bb7398bb4c92de5",
+      "source": "f75d2fea05a98fe40d731d1a3046a64d20bbbb65",
+      "sourceSha256": "db60cfb024597d31585f153972cb47f3e37a5ba12c8211d358b6c7a0d8bf936b",
+      "sourceSpanSha256": "7352ed3a6c77de65491d54967a1af315d36e6a21f28293db4c3c74aa24cf5255"
+    },
+    {
+      "attributes": {
+        "begincolumn": "9",
+        "beginline": "835",
+        "class": "ApiMetricContextTest",
+        "endcolumn": "29",
+        "endline": "835",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "method": "apimctx033RefreshContendedStopRetainsUntilSamplerReturns",
+        "package": "dev.codex.schubert.nk.api.monitoring",
+        "priority": "3",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading"
+      },
+      "controls": [
+        "try(varworker=Executors.newSingleThreadExecutor())",
+        "future.get(30,TimeUnit.SECONDS)",
+        "proceed.countDown()",
+        "worker.shutdownNow()",
+        "worker.awaitTermination(30,TimeUnit.SECONDS)",
+        "context.close()"
+      ],
+      "currentCases": [
+        {
+          "className": "dev.codex.schubert.nk.api.monitoring.ApiMetricContextTest",
+          "method": "apimctx033RefreshContendedStopRetainsUntilSamplerReturns",
+          "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiMetricContextTest.java",
+          "sourceSha256": "db60cfb024597d31585f153972cb47f3e37a5ba12c8211d358b6c7a0d8bf936b"
+        }
+      ],
+      "currentWholeJoinPending": true,
+      "disposition": "CONTEXT_NOT_APPLICABLE",
+      "id": "PMD-01918",
+      "kind": "OWNED_FINITE_STANDALONE_SDK_FIXTURE_WORKERS_NOT_J2EE",
+      "newAccepted": 0,
+      "oldRuntimeReassigned": false,
+      "originalRowSha256": "b80ae1ad149b157cf45d9416f496324e8f0b644725db74ce2f54521f48eab775",
+      "ownerControls": [],
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiMetricContextTest.java",
+      "productTestsExecutedByReview": 0,
+      "reason": "Standalone JUnit owns one worker per case (023 two sequential iterations). All task actions are local metadata/SDK context calls, release latch in original finally, shutdownNow and awaitTermination30seconds, Future.get30seconds. TWR close itself has no local absolute deadline, distinct outer JVM240seconds. Actual pass proves these fixtures only, not real service/VM/Root ownership or stop budget.",
+      "rule": "DoNotUseThreads",
+      "scopeKind": "METHOD",
+      "scopeName": "apimctx033RefreshContendedStopRetainsUntilSamplerReturns",
+      "scopeTokenSha256": "e241fb00218310d8f0b3f7f3975aeed0eea93f9df75df5340bb7398bb4c92de5",
+      "source": "f75d2fea05a98fe40d731d1a3046a64d20bbbb65",
+      "sourceSha256": "db60cfb024597d31585f153972cb47f3e37a5ba12c8211d358b6c7a0d8bf936b",
+      "sourceSpanSha256": "5476119e4c522c7b04aa550a87a89e15936b0b06512ba99e10b8abf701215021"
+    },
+    {
+      "attributes": {
+        "begincolumn": "22",
+        "beginline": "837",
+        "class": "ApiMetricContextTest",
+        "endcolumn": "67",
+        "endline": "837",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "method": "apimctx033RefreshContendedStopRetainsUntilSamplerReturns",
+        "package": "dev.codex.schubert.nk.api.monitoring",
+        "priority": "3",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading"
+      },
+      "controls": [
+        "try(varworker=Executors.newSingleThreadExecutor())",
+        "future.get(30,TimeUnit.SECONDS)",
+        "proceed.countDown()",
+        "worker.shutdownNow()",
+        "worker.awaitTermination(30,TimeUnit.SECONDS)",
+        "context.close()"
+      ],
+      "currentCases": [
+        {
+          "className": "dev.codex.schubert.nk.api.monitoring.ApiMetricContextTest",
+          "method": "apimctx033RefreshContendedStopRetainsUntilSamplerReturns",
+          "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiMetricContextTest.java",
+          "sourceSha256": "db60cfb024597d31585f153972cb47f3e37a5ba12c8211d358b6c7a0d8bf936b"
+        }
+      ],
+      "currentWholeJoinPending": true,
+      "disposition": "CONTEXT_NOT_APPLICABLE",
+      "id": "PMD-01919",
+      "kind": "OWNED_FINITE_STANDALONE_SDK_FIXTURE_WORKERS_NOT_J2EE",
+      "newAccepted": 0,
+      "oldRuntimeReassigned": false,
+      "originalRowSha256": "7a434d8a1c914b310cfc2163e6b32ce8795104ea159be1814800f8b4b80e86ab",
+      "ownerControls": [],
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiMetricContextTest.java",
+      "productTestsExecutedByReview": 0,
+      "reason": "Standalone JUnit owns one worker per case (023 two sequential iterations). All task actions are local metadata/SDK context calls, release latch in original finally, shutdownNow and awaitTermination30seconds, Future.get30seconds. TWR close itself has no local absolute deadline, distinct outer JVM240seconds. Actual pass proves these fixtures only, not real service/VM/Root ownership or stop budget.",
+      "rule": "DoNotUseThreads",
+      "scopeKind": "METHOD",
+      "scopeName": "apimctx033RefreshContendedStopRetainsUntilSamplerReturns",
+      "scopeTokenSha256": "e241fb00218310d8f0b3f7f3975aeed0eea93f9df75df5340bb7398bb4c92de5",
+      "source": "f75d2fea05a98fe40d731d1a3046a64d20bbbb65",
+      "sourceSha256": "db60cfb024597d31585f153972cb47f3e37a5ba12c8211d358b6c7a0d8bf936b",
+      "sourceSpanSha256": "64d254d04d5e03682aae0a951d6228cee56ff69d69245bd68886353da9ef1601"
+    },
+    {
+      "attributes": {
+        "begincolumn": "7",
+        "beginline": "48",
+        "class": "WebMetricContextTest",
+        "endcolumn": "13",
+        "endline": "48",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "method": "await",
+        "package": "dev.codex.schubert.nk.web.monitoring",
+        "priority": "3",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading"
+      },
+      "controls": [
+        "latch.await(30,TimeUnit.SECONDS)",
+        "catch(InterruptedExceptioninterrupted)",
+        "Thread.currentThread().interrupt()"
+      ],
+      "currentCases": [
+        {
+          "className": "dev.codex.schubert.nk.web.monitoring.WebMetricContextTest",
+          "method": "webmctx021ContendedCloseIsUnconfirmedWithoutFreeingInFlightSources",
+          "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebMetricContextTest.java",
+          "sourceSha256": "5611b2a69cd9728890bddc6712d71f851c8d967c72dbaa45ff12e089f75dd545"
+        },
+        {
+          "className": "dev.codex.schubert.nk.web.monitoring.WebMetricContextTest",
+          "method": "webmctx023StopDuringCustomFactoryOrSetupPreventsStandardAcquisition",
+          "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebMetricContextTest.java",
+          "sourceSha256": "5611b2a69cd9728890bddc6712d71f851c8d967c72dbaa45ff12e089f75dd545"
+        },
+        {
+          "className": "dev.codex.schubert.nk.web.monitoring.WebMetricContextTest",
+          "method": "webmctx024StopDuringStandardAcquisitionKeepsBothOwnersUnconfirmed",
+          "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebMetricContextTest.java",
+          "sourceSha256": "5611b2a69cd9728890bddc6712d71f851c8d967c72dbaa45ff12e089f75dd545"
+        },
+        {
+          "className": "dev.codex.schubert.nk.web.monitoring.WebMetricContextTest",
+          "method": "webmctx033RefreshContendedStopRetainsUntilSamplerReturns",
+          "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebMetricContextTest.java",
+          "sourceSha256": "5611b2a69cd9728890bddc6712d71f851c8d967c72dbaa45ff12e089f75dd545"
+        }
+      ],
+      "currentWholeJoinPending": true,
+      "disposition": "CONTEXT_NOT_APPLICABLE",
+      "id": "PMD-08399",
+      "kind": "PRIVATE_BOUNDED_LATCH_AND_INTERRUPT_STATUS_RESTORE_NOT_J2EE",
+      "newAccepted": 0,
+      "oldRuntimeReassigned": false,
+      "originalRowSha256": "fc927bb6ed2005614dfd47a10eab417d98be84e3eee435139556dc8c649ba2fa",
+      "ownerControls": [],
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebMetricContextTest.java",
+      "productTestsExecutedByReview": 0,
+      "reason": "Private helper waits on own finite latches, restores interrupt state on the current test thread only. Caller cases are current whole-fixture executions; the InterruptedException helper branch is not injected and fixture branch100 is not claimed. No application worker, target process or privileged operation.",
+      "rule": "DoNotUseThreads",
+      "scopeKind": "METHOD",
+      "scopeName": "await",
+      "scopeTokenSha256": "200552149744d9eed8122dbcc749739fff0d149ad427dbba8519c5c9ac6ec969",
+      "source": "f75d2fea05a98fe40d731d1a3046a64d20bbbb65",
+      "sourceSha256": "5611b2a69cd9728890bddc6712d71f851c8d967c72dbaa45ff12e089f75dd545",
+      "sourceSpanSha256": "736f808611188e23a260f73a3b3efd6f03ba06df04160342febfca117cd1eb51"
+    },
+    {
+      "attributes": {
+        "begincolumn": "11",
+        "beginline": "127",
+        "class": "WebMetricContextTest.Harness",
+        "endcolumn": "24",
+        "endline": "127",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#closeresource",
+        "method": "Harness",
+        "package": "dev.codex.schubert.nk.web.monitoring",
+        "priority": "3",
+        "rule": "CloseResource",
+        "ruleset": "Error Prone",
+        "variable": "standardOwner"
+      },
+      "controls": [
+        "varstandardOwner=newWebStandardMetricSource(this::standard,(registry,gc)->{});",
+        "context=newWebMetricContext<T>",
+        "this::custom,standardOwner"
+      ],
+      "currentCases": [
+        {
+          "className": "dev.codex.schubert.nk.web.monitoring.WebMetricContextTest",
+          "method": "webmctx001StandardHandshakeReadsNoFactoryOrSetup",
+          "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebMetricContextTest.java",
+          "sourceSha256": "5611b2a69cd9728890bddc6712d71f851c8d967c72dbaa45ff12e089f75dd545"
+        },
+        {
+          "className": "dev.codex.schubert.nk.web.monitoring.WebMetricContextTest",
+          "method": "webmctx003UninitializedAndClosedBeforeInitNeverAcquire",
+          "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebMetricContextTest.java",
+          "sourceSha256": "5611b2a69cd9728890bddc6712d71f851c8d967c72dbaa45ff12e089f75dd545"
+        },
+        {
+          "className": "dev.codex.schubert.nk.web.monitoring.WebMetricContextTest",
+          "method": "webmctx006CustomFactoryRuntimePreservesIdentityAndOneAttempt",
+          "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebMetricContextTest.java",
+          "sourceSha256": "5611b2a69cd9728890bddc6712d71f851c8d967c72dbaa45ff12e089f75dd545"
+        },
+        {
+          "className": "dev.codex.schubert.nk.web.monitoring.WebMetricContextTest",
+          "method": "webmctx007CustomFactoryErrorIsNeverNormalized",
+          "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebMetricContextTest.java",
+          "sourceSha256": "5611b2a69cd9728890bddc6712d71f851c8d967c72dbaa45ff12e089f75dd545"
+        },
+        {
+          "className": "dev.codex.schubert.nk.web.monitoring.WebMetricContextTest",
+          "method": "webmctx008NullCustomRegistryNeverBecomesSuccess",
+          "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebMetricContextTest.java",
+          "sourceSha256": "5611b2a69cd9728890bddc6712d71f851c8d967c72dbaa45ff12e089f75dd545"
+        },
+        {
+          "className": "dev.codex.schubert.nk.web.monitoring.WebMetricContextTest",
+          "method": "webmctx009ClosedCustomCandidateIsRetainedForExplicitCleanup",
+          "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebMetricContextTest.java",
+          "sourceSha256": "5611b2a69cd9728890bddc6712d71f851c8d967c72dbaa45ff12e089f75dd545"
+        },
+        {
+          "className": "dev.codex.schubert.nk.web.monitoring.WebMetricContextTest",
+          "method": "webmctx010SetupRuntimeLeavesCustomOwnedAndStandardUnstarted",
+          "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebMetricContextTest.java",
+          "sourceSha256": "5611b2a69cd9728890bddc6712d71f851c8d967c72dbaa45ff12e089f75dd545"
+        },
+        {
+          "className": "dev.codex.schubert.nk.web.monitoring.WebMetricContextTest",
+          "method": "webmctx011SetupErrorPreservesIdentityAndPartialOwner",
+          "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebMetricContextTest.java",
+          "sourceSha256": "5611b2a69cd9728890bddc6712d71f851c8d967c72dbaa45ff12e089f75dd545"
+        },
+        {
+          "className": "dev.codex.schubert.nk.web.monitoring.WebMetricContextTest",
+          "method": "webmctx012NullBindingIsRejectedBeforeStandard",
+          "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebMetricContextTest.java",
+          "sourceSha256": "5611b2a69cd9728890bddc6712d71f851c8d967c72dbaa45ff12e089f75dd545"
+        },
+        {
+          "className": "dev.codex.schubert.nk.web.monitoring.WebMetricContextTest",
+          "method": "webmctx013StandardFactoryRuntimeKeepsCustomAndBindingsUnpublished",
+          "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebMetricContextTest.java",
+          "sourceSha256": "5611b2a69cd9728890bddc6712d71f851c8d967c72dbaa45ff12e089f75dd545"
+        },
+        {
+          "className": "dev.codex.schubert.nk.web.monitoring.WebMetricContextTest",
+          "method": "webmctx014StandardFactoryErrorIsPrimary",
+          "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebMetricContextTest.java",
+          "sourceSha256": "5611b2a69cd9728890bddc6712d71f851c8d967c72dbaa45ff12e089f75dd545"
+        },
+        {
+          "className": "dev.codex.schubert.nk.web.monitoring.WebMetricContextTest",
+          "method": "webmctx015NullStandardFactoryResultRetainsCustom",
+          "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebMetricContextTest.java",
+          "sourceSha256": "5611b2a69cd9728890bddc6712d71f851c8d967c72dbaa45ff12e089f75dd545"
+        },
+        {
+          "className": "dev.codex.schubert.nk.web.monitoring.WebMetricContextTest",
+          "method": "webmctx016StandardCloseFailureRetainsCustomAndDeniesNewAccess",
+          "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebMetricContextTest.java",
+          "sourceSha256": "5611b2a69cd9728890bddc6712d71f851c8d967c72dbaa45ff12e089f75dd545"
+        },
+        {
+          "className": "dev.codex.schubert.nk.web.monitoring.WebMetricContextTest",
+          "method": "webmctx017CustomCloseFailureDoesNotRepeatConfirmedStandardClose",
+          "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebMetricContextTest.java",
+          "sourceSha256": "5611b2a69cd9728890bddc6712d71f851c8d967c72dbaa45ff12e089f75dd545"
+        },
+        {
+          "className": "dev.codex.schubert.nk.web.monitoring.WebMetricContextTest",
+          "method": "webmctx018CallerCapturePrecedesEverySdkFactory",
+          "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebMetricContextTest.java",
+          "sourceSha256": "5611b2a69cd9728890bddc6712d71f851c8d967c72dbaa45ff12e089f75dd545"
+        },
+        {
+          "className": "dev.codex.schubert.nk.web.monitoring.WebMetricContextTest",
+          "method": "webmctx019SingleInitializeAndIdempotentClose",
+          "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebMetricContextTest.java",
+          "sourceSha256": "5611b2a69cd9728890bddc6712d71f851c8d967c72dbaa45ff12e089f75dd545"
+        },
+        {
+          "className": "dev.codex.schubert.nk.web.monitoring.WebMetricContextTest",
+          "method": "webmctx020RenderFailureKeepsOwnerAndDoesNotReacquire",
+          "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebMetricContextTest.java",
+          "sourceSha256": "5611b2a69cd9728890bddc6712d71f851c8d967c72dbaa45ff12e089f75dd545"
+        },
+        {
+          "className": "dev.codex.schubert.nk.web.monitoring.WebMetricContextTest",
+          "method": "webmctx021ContendedCloseIsUnconfirmedWithoutFreeingInFlightSources",
+          "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebMetricContextTest.java",
+          "sourceSha256": "5611b2a69cd9728890bddc6712d71f851c8d967c72dbaa45ff12e089f75dd545"
+        },
+        {
+          "className": "dev.codex.schubert.nk.web.monitoring.WebMetricContextTest",
+          "method": "webmctx022StandardRenderRuntimeErrorAndNullKeepStructuralOwnership",
+          "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebMetricContextTest.java",
+          "sourceSha256": "5611b2a69cd9728890bddc6712d71f851c8d967c72dbaa45ff12e089f75dd545"
+        },
+        {
+          "className": "dev.codex.schubert.nk.web.monitoring.WebMetricContextTest",
+          "method": "webmctx023StopDuringCustomFactoryOrSetupPreventsStandardAcquisition",
+          "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebMetricContextTest.java",
+          "sourceSha256": "5611b2a69cd9728890bddc6712d71f851c8d967c72dbaa45ff12e089f75dd545"
+        },
+        {
+          "className": "dev.codex.schubert.nk.web.monitoring.WebMetricContextTest",
+          "method": "webmctx024StopDuringStandardAcquisitionKeepsBothOwnersUnconfirmed",
+          "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebMetricContextTest.java",
+          "sourceSha256": "5611b2a69cd9728890bddc6712d71f851c8d967c72dbaa45ff12e089f75dd545"
+        },
+        {
+          "className": "dev.codex.schubert.nk.web.monitoring.WebMetricContextTest",
+          "method": "webmctx025ReentrantSetupCloseCannotConfirmOrStartStandard",
+          "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebMetricContextTest.java",
+          "sourceSha256": "5611b2a69cd9728890bddc6712d71f851c8d967c72dbaa45ff12e089f75dd545"
+        },
+        {
+          "className": "dev.codex.schubert.nk.web.monitoring.WebMetricContextTest",
+          "method": "webmctx026ReentrantRenderClosePropagatesAndRetainsAllResources",
+          "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebMetricContextTest.java",
+          "sourceSha256": "5611b2a69cd9728890bddc6712d71f851c8d967c72dbaa45ff12e089f75dd545"
+        }
+      ],
+      "currentWholeJoinPending": true,
+      "disposition": "CONTEXT_NOT_APPLICABLE",
+      "id": "PMD-08402",
+      "kind": "UNBOUND_RESOURCE_FREE_OWNER_TRANSFERRED_TO_HARNESS_CONTEXT",
+      "newAccepted": 0,
+      "oldRuntimeReassigned": false,
+      "originalRowSha256": "f24a124fe909f9d7a2ff9d71a973545637e2240211dd316a66808e9c17d074cb",
+      "ownerControls": [
+        "context.close();",
+        "if(!customRegistry.isClosed())customRegistry.close();",
+        "if(!standardRegistry.isClosed())standardRegistry.close();"
+      ],
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebMetricContextTest.java",
+      "productTestsExecutedByReview": 0,
+      "reason": "Private fixture uses only valid fixed modes. New StandardMetricSource constructor acquires no registry/GC; its ownership transfers into retained context before initialize. Harness owns and explicitly closes context and unused synthetic registries. Early TWR-close of the transferred alias would be wrong. No universal constructor-allocation/OOME cleanup guarantee or real application-owner qualification inferred.",
+      "rule": "CloseResource",
+      "scopeKind": "CONSTRUCTOR",
+      "scopeName": "Harness",
+      "scopeTokenSha256": "97a60c08fdc2989b8ce5d4f103b7fcbcbec07f327608142c73cd88ae05f31d3f",
+      "source": "f75d2fea05a98fe40d731d1a3046a64d20bbbb65",
+      "sourceSha256": "5611b2a69cd9728890bddc6712d71f851c8d967c72dbaa45ff12e089f75dd545",
+      "sourceSpanSha256": "1908b81cc872c372ce66bbecf0d89f49ea6b4bd9cd3b4e859de9cc20722482d5"
+    },
+    {
+      "attributes": {
+        "begincolumn": "27",
+        "beginline": "493",
+        "class": "WebMetricContextTest",
+        "endcolumn": "62",
+        "endline": "493",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "method": "webmctx021ContendedCloseIsUnconfirmedWithoutFreeingInFlightSources",
+        "package": "dev.codex.schubert.nk.web.monitoring",
+        "priority": "3",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading",
+        "variable": "executor"
+      },
+      "controls": [
+        "try(varexecutor=Executors.newSingleThreadExecutor())",
+        "active.get(30,TimeUnit.SECONDS)",
+        "release.countDown()",
+        "executor.shutdownNow()",
+        "executor.awaitTermination(30,TimeUnit.SECONDS)"
+      ],
+      "currentCases": [
+        {
+          "className": "dev.codex.schubert.nk.web.monitoring.WebMetricContextTest",
+          "method": "webmctx021ContendedCloseIsUnconfirmedWithoutFreeingInFlightSources",
+          "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebMetricContextTest.java",
+          "sourceSha256": "5611b2a69cd9728890bddc6712d71f851c8d967c72dbaa45ff12e089f75dd545"
+        }
+      ],
+      "currentWholeJoinPending": true,
+      "disposition": "CONTEXT_NOT_APPLICABLE",
+      "id": "PMD-08406",
+      "kind": "OWNED_FINITE_STANDALONE_SDK_FIXTURE_WORKERS_NOT_J2EE",
+      "newAccepted": 0,
+      "oldRuntimeReassigned": false,
+      "originalRowSha256": "2c297ce1296c5aca392ed3da491753a4d2baeb8f98495234ef6a0baf07f6d2a1",
+      "ownerControls": [],
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebMetricContextTest.java",
+      "productTestsExecutedByReview": 0,
+      "reason": "Standalone JUnit owns one worker per case (023 two sequential iterations). All task actions are local metadata/SDK context calls, release latch in original finally, shutdownNow and awaitTermination30seconds, Future.get30seconds. TWR close itself has no local absolute deadline, distinct outer JVM240seconds. Actual pass proves these fixtures only, not real service/VM/Root ownership or stop budget.",
+      "rule": "DoNotUseThreads",
+      "scopeKind": "METHOD",
+      "scopeName": "webmctx021ContendedCloseIsUnconfirmedWithoutFreeingInFlightSources",
+      "scopeTokenSha256": "6924a8090c98f027b474c4793f7b234d96a75c580e7be329523caf58fc46077f",
+      "source": "f75d2fea05a98fe40d731d1a3046a64d20bbbb65",
+      "sourceSha256": "5611b2a69cd9728890bddc6712d71f851c8d967c72dbaa45ff12e089f75dd545",
+      "sourceSpanSha256": "fd6401f092076966a1eeecda70599980543ebe6a04a2f913279947e70f57cd2a"
+    },
+    {
+      "attributes": {
+        "begincolumn": "24",
+        "beginline": "495",
+        "class": "WebMetricContextTest",
+        "endcolumn": "69",
+        "endline": "495",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "method": "webmctx021ContendedCloseIsUnconfirmedWithoutFreeingInFlightSources",
+        "package": "dev.codex.schubert.nk.web.monitoring",
+        "priority": "3",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading",
+        "variable": "active"
+      },
+      "controls": [
+        "try(varexecutor=Executors.newSingleThreadExecutor())",
+        "active.get(30,TimeUnit.SECONDS)",
+        "release.countDown()",
+        "executor.shutdownNow()",
+        "executor.awaitTermination(30,TimeUnit.SECONDS)"
+      ],
+      "currentCases": [
+        {
+          "className": "dev.codex.schubert.nk.web.monitoring.WebMetricContextTest",
+          "method": "webmctx021ContendedCloseIsUnconfirmedWithoutFreeingInFlightSources",
+          "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebMetricContextTest.java",
+          "sourceSha256": "5611b2a69cd9728890bddc6712d71f851c8d967c72dbaa45ff12e089f75dd545"
+        }
+      ],
+      "currentWholeJoinPending": true,
+      "disposition": "CONTEXT_NOT_APPLICABLE",
+      "id": "PMD-08407",
+      "kind": "OWNED_FINITE_STANDALONE_SDK_FIXTURE_WORKERS_NOT_J2EE",
+      "newAccepted": 0,
+      "oldRuntimeReassigned": false,
+      "originalRowSha256": "b5d6e2c8d01b42a7459210eeccdb9921b46df9239e4389a02fa240f7315c6e18",
+      "ownerControls": [],
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebMetricContextTest.java",
+      "productTestsExecutedByReview": 0,
+      "reason": "Standalone JUnit owns one worker per case (023 two sequential iterations). All task actions are local metadata/SDK context calls, release latch in original finally, shutdownNow and awaitTermination30seconds, Future.get30seconds. TWR close itself has no local absolute deadline, distinct outer JVM240seconds. Actual pass proves these fixtures only, not real service/VM/Root ownership or stop budget.",
+      "rule": "DoNotUseThreads",
+      "scopeKind": "METHOD",
+      "scopeName": "webmctx021ContendedCloseIsUnconfirmedWithoutFreeingInFlightSources",
+      "scopeTokenSha256": "6924a8090c98f027b474c4793f7b234d96a75c580e7be329523caf58fc46077f",
+      "source": "f75d2fea05a98fe40d731d1a3046a64d20bbbb65",
+      "sourceSha256": "5611b2a69cd9728890bddc6712d71f851c8d967c72dbaa45ff12e089f75dd545",
+      "sourceSpanSha256": "b7e03c50c103efaa3aee2b1a576fc787f8c49b8e2c19eb2e50a0b2055bc226ac"
+    },
+    {
+      "attributes": {
+        "begincolumn": "11",
+        "beginline": "511",
+        "class": "WebMetricContextTest",
+        "endcolumn": "33",
+        "endline": "511",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "method": "webmctx021ContendedCloseIsUnconfirmedWithoutFreeingInFlightSources",
+        "package": "dev.codex.schubert.nk.web.monitoring",
+        "priority": "3",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading"
+      },
+      "controls": [
+        "try(varexecutor=Executors.newSingleThreadExecutor())",
+        "active.get(30,TimeUnit.SECONDS)",
+        "release.countDown()",
+        "executor.shutdownNow()",
+        "executor.awaitTermination(30,TimeUnit.SECONDS)"
+      ],
+      "currentCases": [
+        {
+          "className": "dev.codex.schubert.nk.web.monitoring.WebMetricContextTest",
+          "method": "webmctx021ContendedCloseIsUnconfirmedWithoutFreeingInFlightSources",
+          "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebMetricContextTest.java",
+          "sourceSha256": "5611b2a69cd9728890bddc6712d71f851c8d967c72dbaa45ff12e089f75dd545"
+        }
+      ],
+      "currentWholeJoinPending": true,
+      "disposition": "CONTEXT_NOT_APPLICABLE",
+      "id": "PMD-08408",
+      "kind": "OWNED_FINITE_STANDALONE_SDK_FIXTURE_WORKERS_NOT_J2EE",
+      "newAccepted": 0,
+      "oldRuntimeReassigned": false,
+      "originalRowSha256": "b9ee21c9e40907cf37e7cb762ced5bac70cd736ff9f13369be33b8288ef41a91",
+      "ownerControls": [],
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebMetricContextTest.java",
+      "productTestsExecutedByReview": 0,
+      "reason": "Standalone JUnit owns one worker per case (023 two sequential iterations). All task actions are local metadata/SDK context calls, release latch in original finally, shutdownNow and awaitTermination30seconds, Future.get30seconds. TWR close itself has no local absolute deadline, distinct outer JVM240seconds. Actual pass proves these fixtures only, not real service/VM/Root ownership or stop budget.",
+      "rule": "DoNotUseThreads",
+      "scopeKind": "METHOD",
+      "scopeName": "webmctx021ContendedCloseIsUnconfirmedWithoutFreeingInFlightSources",
+      "scopeTokenSha256": "6924a8090c98f027b474c4793f7b234d96a75c580e7be329523caf58fc46077f",
+      "source": "f75d2fea05a98fe40d731d1a3046a64d20bbbb65",
+      "sourceSha256": "5611b2a69cd9728890bddc6712d71f851c8d967c72dbaa45ff12e089f75dd545",
+      "sourceSpanSha256": "447cb134622833454dbcfd6b8edb9568b5b6bffacad735fc46be8baae7c7c49c"
+    },
+    {
+      "attributes": {
+        "begincolumn": "22",
+        "beginline": "512",
+        "class": "WebMetricContextTest",
+        "endcolumn": "69",
+        "endline": "512",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "method": "webmctx021ContendedCloseIsUnconfirmedWithoutFreeingInFlightSources",
+        "package": "dev.codex.schubert.nk.web.monitoring",
+        "priority": "3",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading"
+      },
+      "controls": [
+        "try(varexecutor=Executors.newSingleThreadExecutor())",
+        "active.get(30,TimeUnit.SECONDS)",
+        "release.countDown()",
+        "executor.shutdownNow()",
+        "executor.awaitTermination(30,TimeUnit.SECONDS)"
+      ],
+      "currentCases": [
+        {
+          "className": "dev.codex.schubert.nk.web.monitoring.WebMetricContextTest",
+          "method": "webmctx021ContendedCloseIsUnconfirmedWithoutFreeingInFlightSources",
+          "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebMetricContextTest.java",
+          "sourceSha256": "5611b2a69cd9728890bddc6712d71f851c8d967c72dbaa45ff12e089f75dd545"
+        }
+      ],
+      "currentWholeJoinPending": true,
+      "disposition": "CONTEXT_NOT_APPLICABLE",
+      "id": "PMD-08409",
+      "kind": "OWNED_FINITE_STANDALONE_SDK_FIXTURE_WORKERS_NOT_J2EE",
+      "newAccepted": 0,
+      "oldRuntimeReassigned": false,
+      "originalRowSha256": "d8a77f456615e543773f94def26a0d44d7972341b492f776bf0cdf5488812609",
+      "ownerControls": [],
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebMetricContextTest.java",
+      "productTestsExecutedByReview": 0,
+      "reason": "Standalone JUnit owns one worker per case (023 two sequential iterations). All task actions are local metadata/SDK context calls, release latch in original finally, shutdownNow and awaitTermination30seconds, Future.get30seconds. TWR close itself has no local absolute deadline, distinct outer JVM240seconds. Actual pass proves these fixtures only, not real service/VM/Root ownership or stop budget.",
+      "rule": "DoNotUseThreads",
+      "scopeKind": "METHOD",
+      "scopeName": "webmctx021ContendedCloseIsUnconfirmedWithoutFreeingInFlightSources",
+      "scopeTokenSha256": "6924a8090c98f027b474c4793f7b234d96a75c580e7be329523caf58fc46077f",
+      "source": "f75d2fea05a98fe40d731d1a3046a64d20bbbb65",
+      "sourceSha256": "5611b2a69cd9728890bddc6712d71f851c8d967c72dbaa45ff12e089f75dd545",
+      "sourceSpanSha256": "f19510bb87c476a6142e8ab95cbb7c0e4d38263fe225a19e0c4712de24c80588"
+    },
+    {
+      "attributes": {
+        "begincolumn": "29",
+        "beginline": "554",
+        "class": "WebMetricContextTest",
+        "endcolumn": "64",
+        "endline": "554",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "method": "webmctx023StopDuringCustomFactoryOrSetupPreventsStandardAcquisition",
+        "package": "dev.codex.schubert.nk.web.monitoring",
+        "priority": "3",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading",
+        "variable": "executor"
+      },
+      "controls": [
+        "try(varexecutor=Executors.newSingleThreadExecutor())",
+        "List.of(true,false)",
+        "init.get(30,TimeUnit.SECONDS)",
+        "release.countDown()",
+        "executor.shutdownNow()",
+        "executor.awaitTermination(30,TimeUnit.SECONDS)"
+      ],
+      "currentCases": [
+        {
+          "className": "dev.codex.schubert.nk.web.monitoring.WebMetricContextTest",
+          "method": "webmctx023StopDuringCustomFactoryOrSetupPreventsStandardAcquisition",
+          "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebMetricContextTest.java",
+          "sourceSha256": "5611b2a69cd9728890bddc6712d71f851c8d967c72dbaa45ff12e089f75dd545"
+        }
+      ],
+      "currentWholeJoinPending": true,
+      "disposition": "CONTEXT_NOT_APPLICABLE",
+      "id": "PMD-08411",
+      "kind": "OWNED_FINITE_STANDALONE_SDK_FIXTURE_WORKERS_NOT_J2EE",
+      "newAccepted": 0,
+      "oldRuntimeReassigned": false,
+      "originalRowSha256": "8886f58a4ca7a90464cd029c7ee7b29f716f9263d05d632a6a14167f11c6fc5d",
+      "ownerControls": [],
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebMetricContextTest.java",
+      "productTestsExecutedByReview": 0,
+      "reason": "Standalone JUnit owns one worker per case (023 two sequential iterations). All task actions are local metadata/SDK context calls, release latch in original finally, shutdownNow and awaitTermination30seconds, Future.get30seconds. TWR close itself has no local absolute deadline, distinct outer JVM240seconds. Actual pass proves these fixtures only, not real service/VM/Root ownership or stop budget.",
+      "rule": "DoNotUseThreads",
+      "scopeKind": "METHOD",
+      "scopeName": "webmctx023StopDuringCustomFactoryOrSetupPreventsStandardAcquisition",
+      "scopeTokenSha256": "1d5495b03088ddef58e6542270fd12fdf1514a3b26860710e7a5600886b39828",
+      "source": "f75d2fea05a98fe40d731d1a3046a64d20bbbb65",
+      "sourceSha256": "5611b2a69cd9728890bddc6712d71f851c8d967c72dbaa45ff12e089f75dd545",
+      "sourceSpanSha256": "fd6401f092076966a1eeecda70599980543ebe6a04a2f913279947e70f57cd2a"
+    },
+    {
+      "attributes": {
+        "begincolumn": "24",
+        "beginline": "556",
+        "class": "WebMetricContextTest",
+        "endcolumn": "62",
+        "endline": "556",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "method": "webmctx023StopDuringCustomFactoryOrSetupPreventsStandardAcquisition",
+        "package": "dev.codex.schubert.nk.web.monitoring",
+        "priority": "3",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading",
+        "variable": "init"
+      },
+      "controls": [
+        "try(varexecutor=Executors.newSingleThreadExecutor())",
+        "List.of(true,false)",
+        "init.get(30,TimeUnit.SECONDS)",
+        "release.countDown()",
+        "executor.shutdownNow()",
+        "executor.awaitTermination(30,TimeUnit.SECONDS)"
+      ],
+      "currentCases": [
+        {
+          "className": "dev.codex.schubert.nk.web.monitoring.WebMetricContextTest",
+          "method": "webmctx023StopDuringCustomFactoryOrSetupPreventsStandardAcquisition",
+          "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebMetricContextTest.java",
+          "sourceSha256": "5611b2a69cd9728890bddc6712d71f851c8d967c72dbaa45ff12e089f75dd545"
+        }
+      ],
+      "currentWholeJoinPending": true,
+      "disposition": "CONTEXT_NOT_APPLICABLE",
+      "id": "PMD-08412",
+      "kind": "OWNED_FINITE_STANDALONE_SDK_FIXTURE_WORKERS_NOT_J2EE",
+      "newAccepted": 0,
+      "oldRuntimeReassigned": false,
+      "originalRowSha256": "e8c745024b9c525e5acc968728719eb5f437b6c0e390a9a59a1edf7cd06f1bc3",
+      "ownerControls": [],
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebMetricContextTest.java",
+      "productTestsExecutedByReview": 0,
+      "reason": "Standalone JUnit owns one worker per case (023 two sequential iterations). All task actions are local metadata/SDK context calls, release latch in original finally, shutdownNow and awaitTermination30seconds, Future.get30seconds. TWR close itself has no local absolute deadline, distinct outer JVM240seconds. Actual pass proves these fixtures only, not real service/VM/Root ownership or stop budget.",
+      "rule": "DoNotUseThreads",
+      "scopeKind": "METHOD",
+      "scopeName": "webmctx023StopDuringCustomFactoryOrSetupPreventsStandardAcquisition",
+      "scopeTokenSha256": "1d5495b03088ddef58e6542270fd12fdf1514a3b26860710e7a5600886b39828",
+      "source": "f75d2fea05a98fe40d731d1a3046a64d20bbbb65",
+      "sourceSha256": "5611b2a69cd9728890bddc6712d71f851c8d967c72dbaa45ff12e089f75dd545",
+      "sourceSpanSha256": "1042ad497f557aa9edec5079e86a63691f59454aabf0989533e4635210550edf"
+    },
+    {
+      "attributes": {
+        "begincolumn": "13",
+        "beginline": "572",
+        "class": "WebMetricContextTest",
+        "endcolumn": "35",
+        "endline": "572",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "method": "webmctx023StopDuringCustomFactoryOrSetupPreventsStandardAcquisition",
+        "package": "dev.codex.schubert.nk.web.monitoring",
+        "priority": "3",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading"
+      },
+      "controls": [
+        "try(varexecutor=Executors.newSingleThreadExecutor())",
+        "List.of(true,false)",
+        "init.get(30,TimeUnit.SECONDS)",
+        "release.countDown()",
+        "executor.shutdownNow()",
+        "executor.awaitTermination(30,TimeUnit.SECONDS)"
+      ],
+      "currentCases": [
+        {
+          "className": "dev.codex.schubert.nk.web.monitoring.WebMetricContextTest",
+          "method": "webmctx023StopDuringCustomFactoryOrSetupPreventsStandardAcquisition",
+          "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebMetricContextTest.java",
+          "sourceSha256": "5611b2a69cd9728890bddc6712d71f851c8d967c72dbaa45ff12e089f75dd545"
+        }
+      ],
+      "currentWholeJoinPending": true,
+      "disposition": "CONTEXT_NOT_APPLICABLE",
+      "id": "PMD-08413",
+      "kind": "OWNED_FINITE_STANDALONE_SDK_FIXTURE_WORKERS_NOT_J2EE",
+      "newAccepted": 0,
+      "oldRuntimeReassigned": false,
+      "originalRowSha256": "63ba3cb8753725906a717f3cdaa63da0db99d36c798c4c557339edeced920ccf",
+      "ownerControls": [],
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebMetricContextTest.java",
+      "productTestsExecutedByReview": 0,
+      "reason": "Standalone JUnit owns one worker per case (023 two sequential iterations). All task actions are local metadata/SDK context calls, release latch in original finally, shutdownNow and awaitTermination30seconds, Future.get30seconds. TWR close itself has no local absolute deadline, distinct outer JVM240seconds. Actual pass proves these fixtures only, not real service/VM/Root ownership or stop budget.",
+      "rule": "DoNotUseThreads",
+      "scopeKind": "METHOD",
+      "scopeName": "webmctx023StopDuringCustomFactoryOrSetupPreventsStandardAcquisition",
+      "scopeTokenSha256": "1d5495b03088ddef58e6542270fd12fdf1514a3b26860710e7a5600886b39828",
+      "source": "f75d2fea05a98fe40d731d1a3046a64d20bbbb65",
+      "sourceSha256": "5611b2a69cd9728890bddc6712d71f851c8d967c72dbaa45ff12e089f75dd545",
+      "sourceSpanSha256": "447cb134622833454dbcfd6b8edb9568b5b6bffacad735fc46be8baae7c7c49c"
+    },
+    {
+      "attributes": {
+        "begincolumn": "24",
+        "beginline": "573",
+        "class": "WebMetricContextTest",
+        "endcolumn": "71",
+        "endline": "573",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "method": "webmctx023StopDuringCustomFactoryOrSetupPreventsStandardAcquisition",
+        "package": "dev.codex.schubert.nk.web.monitoring",
+        "priority": "3",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading"
+      },
+      "controls": [
+        "try(varexecutor=Executors.newSingleThreadExecutor())",
+        "List.of(true,false)",
+        "init.get(30,TimeUnit.SECONDS)",
+        "release.countDown()",
+        "executor.shutdownNow()",
+        "executor.awaitTermination(30,TimeUnit.SECONDS)"
+      ],
+      "currentCases": [
+        {
+          "className": "dev.codex.schubert.nk.web.monitoring.WebMetricContextTest",
+          "method": "webmctx023StopDuringCustomFactoryOrSetupPreventsStandardAcquisition",
+          "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebMetricContextTest.java",
+          "sourceSha256": "5611b2a69cd9728890bddc6712d71f851c8d967c72dbaa45ff12e089f75dd545"
+        }
+      ],
+      "currentWholeJoinPending": true,
+      "disposition": "CONTEXT_NOT_APPLICABLE",
+      "id": "PMD-08414",
+      "kind": "OWNED_FINITE_STANDALONE_SDK_FIXTURE_WORKERS_NOT_J2EE",
+      "newAccepted": 0,
+      "oldRuntimeReassigned": false,
+      "originalRowSha256": "8c84474c940f9fc1a5b23d62c5bb2596c67835d1244c0b5b1a509f095ab6c033",
+      "ownerControls": [],
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebMetricContextTest.java",
+      "productTestsExecutedByReview": 0,
+      "reason": "Standalone JUnit owns one worker per case (023 two sequential iterations). All task actions are local metadata/SDK context calls, release latch in original finally, shutdownNow and awaitTermination30seconds, Future.get30seconds. TWR close itself has no local absolute deadline, distinct outer JVM240seconds. Actual pass proves these fixtures only, not real service/VM/Root ownership or stop budget.",
+      "rule": "DoNotUseThreads",
+      "scopeKind": "METHOD",
+      "scopeName": "webmctx023StopDuringCustomFactoryOrSetupPreventsStandardAcquisition",
+      "scopeTokenSha256": "1d5495b03088ddef58e6542270fd12fdf1514a3b26860710e7a5600886b39828",
+      "source": "f75d2fea05a98fe40d731d1a3046a64d20bbbb65",
+      "sourceSha256": "5611b2a69cd9728890bddc6712d71f851c8d967c72dbaa45ff12e089f75dd545",
+      "sourceSpanSha256": "f19510bb87c476a6142e8ab95cbb7c0e4d38263fe225a19e0c4712de24c80588"
+    },
+    {
+      "attributes": {
+        "begincolumn": "27",
+        "beginline": "591",
+        "class": "WebMetricContextTest",
+        "endcolumn": "62",
+        "endline": "591",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "method": "webmctx024StopDuringStandardAcquisitionKeepsBothOwnersUnconfirmed",
+        "package": "dev.codex.schubert.nk.web.monitoring",
+        "priority": "3",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading",
+        "variable": "executor"
+      },
+      "controls": [
+        "try(varexecutor=Executors.newSingleThreadExecutor())",
+        "init.get(30,TimeUnit.SECONDS)",
+        "release.countDown()",
+        "executor.shutdownNow()",
+        "executor.awaitTermination(30,TimeUnit.SECONDS)"
+      ],
+      "currentCases": [
+        {
+          "className": "dev.codex.schubert.nk.web.monitoring.WebMetricContextTest",
+          "method": "webmctx024StopDuringStandardAcquisitionKeepsBothOwnersUnconfirmed",
+          "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebMetricContextTest.java",
+          "sourceSha256": "5611b2a69cd9728890bddc6712d71f851c8d967c72dbaa45ff12e089f75dd545"
+        }
+      ],
+      "currentWholeJoinPending": true,
+      "disposition": "CONTEXT_NOT_APPLICABLE",
+      "id": "PMD-08416",
+      "kind": "OWNED_FINITE_STANDALONE_SDK_FIXTURE_WORKERS_NOT_J2EE",
+      "newAccepted": 0,
+      "oldRuntimeReassigned": false,
+      "originalRowSha256": "5efbb685617ee8b6dd7718f3fdb8cd5268149d06b272ca5767ae0e07c3a7c926",
+      "ownerControls": [],
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebMetricContextTest.java",
+      "productTestsExecutedByReview": 0,
+      "reason": "Standalone JUnit owns one worker per case (023 two sequential iterations). All task actions are local metadata/SDK context calls, release latch in original finally, shutdownNow and awaitTermination30seconds, Future.get30seconds. TWR close itself has no local absolute deadline, distinct outer JVM240seconds. Actual pass proves these fixtures only, not real service/VM/Root ownership or stop budget.",
+      "rule": "DoNotUseThreads",
+      "scopeKind": "METHOD",
+      "scopeName": "webmctx024StopDuringStandardAcquisitionKeepsBothOwnersUnconfirmed",
+      "scopeTokenSha256": "6664afb8dd8f29a9dec1881dee256e5d26d90a673f343be1488468e07da24598",
+      "source": "f75d2fea05a98fe40d731d1a3046a64d20bbbb65",
+      "sourceSha256": "5611b2a69cd9728890bddc6712d71f851c8d967c72dbaa45ff12e089f75dd545",
+      "sourceSpanSha256": "fd6401f092076966a1eeecda70599980543ebe6a04a2f913279947e70f57cd2a"
+    },
+    {
+      "attributes": {
+        "begincolumn": "22",
+        "beginline": "593",
+        "class": "WebMetricContextTest",
+        "endcolumn": "60",
+        "endline": "593",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "method": "webmctx024StopDuringStandardAcquisitionKeepsBothOwnersUnconfirmed",
+        "package": "dev.codex.schubert.nk.web.monitoring",
+        "priority": "3",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading",
+        "variable": "init"
+      },
+      "controls": [
+        "try(varexecutor=Executors.newSingleThreadExecutor())",
+        "init.get(30,TimeUnit.SECONDS)",
+        "release.countDown()",
+        "executor.shutdownNow()",
+        "executor.awaitTermination(30,TimeUnit.SECONDS)"
+      ],
+      "currentCases": [
+        {
+          "className": "dev.codex.schubert.nk.web.monitoring.WebMetricContextTest",
+          "method": "webmctx024StopDuringStandardAcquisitionKeepsBothOwnersUnconfirmed",
+          "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebMetricContextTest.java",
+          "sourceSha256": "5611b2a69cd9728890bddc6712d71f851c8d967c72dbaa45ff12e089f75dd545"
+        }
+      ],
+      "currentWholeJoinPending": true,
+      "disposition": "CONTEXT_NOT_APPLICABLE",
+      "id": "PMD-08417",
+      "kind": "OWNED_FINITE_STANDALONE_SDK_FIXTURE_WORKERS_NOT_J2EE",
+      "newAccepted": 0,
+      "oldRuntimeReassigned": false,
+      "originalRowSha256": "3a032e5d7c7c54b035f25882b677bad88893bd134036585f8286b52b1dee320b",
+      "ownerControls": [],
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebMetricContextTest.java",
+      "productTestsExecutedByReview": 0,
+      "reason": "Standalone JUnit owns one worker per case (023 two sequential iterations). All task actions are local metadata/SDK context calls, release latch in original finally, shutdownNow and awaitTermination30seconds, Future.get30seconds. TWR close itself has no local absolute deadline, distinct outer JVM240seconds. Actual pass proves these fixtures only, not real service/VM/Root ownership or stop budget.",
+      "rule": "DoNotUseThreads",
+      "scopeKind": "METHOD",
+      "scopeName": "webmctx024StopDuringStandardAcquisitionKeepsBothOwnersUnconfirmed",
+      "scopeTokenSha256": "6664afb8dd8f29a9dec1881dee256e5d26d90a673f343be1488468e07da24598",
+      "source": "f75d2fea05a98fe40d731d1a3046a64d20bbbb65",
+      "sourceSha256": "5611b2a69cd9728890bddc6712d71f851c8d967c72dbaa45ff12e089f75dd545",
+      "sourceSpanSha256": "1042ad497f557aa9edec5079e86a63691f59454aabf0989533e4635210550edf"
+    },
+    {
+      "attributes": {
+        "begincolumn": "11",
+        "beginline": "609",
+        "class": "WebMetricContextTest",
+        "endcolumn": "33",
+        "endline": "609",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "method": "webmctx024StopDuringStandardAcquisitionKeepsBothOwnersUnconfirmed",
+        "package": "dev.codex.schubert.nk.web.monitoring",
+        "priority": "3",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading"
+      },
+      "controls": [
+        "try(varexecutor=Executors.newSingleThreadExecutor())",
+        "init.get(30,TimeUnit.SECONDS)",
+        "release.countDown()",
+        "executor.shutdownNow()",
+        "executor.awaitTermination(30,TimeUnit.SECONDS)"
+      ],
+      "currentCases": [
+        {
+          "className": "dev.codex.schubert.nk.web.monitoring.WebMetricContextTest",
+          "method": "webmctx024StopDuringStandardAcquisitionKeepsBothOwnersUnconfirmed",
+          "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebMetricContextTest.java",
+          "sourceSha256": "5611b2a69cd9728890bddc6712d71f851c8d967c72dbaa45ff12e089f75dd545"
+        }
+      ],
+      "currentWholeJoinPending": true,
+      "disposition": "CONTEXT_NOT_APPLICABLE",
+      "id": "PMD-08418",
+      "kind": "OWNED_FINITE_STANDALONE_SDK_FIXTURE_WORKERS_NOT_J2EE",
+      "newAccepted": 0,
+      "oldRuntimeReassigned": false,
+      "originalRowSha256": "21351eb6810f727913e42d60cf754c3de3e5c6d1fd5597ef8a5535b030ba1c78",
+      "ownerControls": [],
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebMetricContextTest.java",
+      "productTestsExecutedByReview": 0,
+      "reason": "Standalone JUnit owns one worker per case (023 two sequential iterations). All task actions are local metadata/SDK context calls, release latch in original finally, shutdownNow and awaitTermination30seconds, Future.get30seconds. TWR close itself has no local absolute deadline, distinct outer JVM240seconds. Actual pass proves these fixtures only, not real service/VM/Root ownership or stop budget.",
+      "rule": "DoNotUseThreads",
+      "scopeKind": "METHOD",
+      "scopeName": "webmctx024StopDuringStandardAcquisitionKeepsBothOwnersUnconfirmed",
+      "scopeTokenSha256": "6664afb8dd8f29a9dec1881dee256e5d26d90a673f343be1488468e07da24598",
+      "source": "f75d2fea05a98fe40d731d1a3046a64d20bbbb65",
+      "sourceSha256": "5611b2a69cd9728890bddc6712d71f851c8d967c72dbaa45ff12e089f75dd545",
+      "sourceSpanSha256": "447cb134622833454dbcfd6b8edb9568b5b6bffacad735fc46be8baae7c7c49c"
+    },
+    {
+      "attributes": {
+        "begincolumn": "22",
+        "beginline": "610",
+        "class": "WebMetricContextTest",
+        "endcolumn": "69",
+        "endline": "610",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "method": "webmctx024StopDuringStandardAcquisitionKeepsBothOwnersUnconfirmed",
+        "package": "dev.codex.schubert.nk.web.monitoring",
+        "priority": "3",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading"
+      },
+      "controls": [
+        "try(varexecutor=Executors.newSingleThreadExecutor())",
+        "init.get(30,TimeUnit.SECONDS)",
+        "release.countDown()",
+        "executor.shutdownNow()",
+        "executor.awaitTermination(30,TimeUnit.SECONDS)"
+      ],
+      "currentCases": [
+        {
+          "className": "dev.codex.schubert.nk.web.monitoring.WebMetricContextTest",
+          "method": "webmctx024StopDuringStandardAcquisitionKeepsBothOwnersUnconfirmed",
+          "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebMetricContextTest.java",
+          "sourceSha256": "5611b2a69cd9728890bddc6712d71f851c8d967c72dbaa45ff12e089f75dd545"
+        }
+      ],
+      "currentWholeJoinPending": true,
+      "disposition": "CONTEXT_NOT_APPLICABLE",
+      "id": "PMD-08419",
+      "kind": "OWNED_FINITE_STANDALONE_SDK_FIXTURE_WORKERS_NOT_J2EE",
+      "newAccepted": 0,
+      "oldRuntimeReassigned": false,
+      "originalRowSha256": "d91df5490ef5a0d37a587ea0e5d1e6104e88dc060a7e02e62f85da41a72b459b",
+      "ownerControls": [],
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebMetricContextTest.java",
+      "productTestsExecutedByReview": 0,
+      "reason": "Standalone JUnit owns one worker per case (023 two sequential iterations). All task actions are local metadata/SDK context calls, release latch in original finally, shutdownNow and awaitTermination30seconds, Future.get30seconds. TWR close itself has no local absolute deadline, distinct outer JVM240seconds. Actual pass proves these fixtures only, not real service/VM/Root ownership or stop budget.",
+      "rule": "DoNotUseThreads",
+      "scopeKind": "METHOD",
+      "scopeName": "webmctx024StopDuringStandardAcquisitionKeepsBothOwnersUnconfirmed",
+      "scopeTokenSha256": "6664afb8dd8f29a9dec1881dee256e5d26d90a673f343be1488468e07da24598",
+      "source": "f75d2fea05a98fe40d731d1a3046a64d20bbbb65",
+      "sourceSha256": "5611b2a69cd9728890bddc6712d71f851c8d967c72dbaa45ff12e089f75dd545",
+      "sourceSpanSha256": "f19510bb87c476a6142e8ab95cbb7c0e4d38263fe225a19e0c4712de24c80588"
+    },
+    {
+      "attributes": {
+        "begincolumn": "9",
+        "beginline": "772",
+        "class": "WebMetricContextTest",
+        "endcolumn": "16",
+        "endline": "772",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#closeresource",
+        "method": "webmctx032RefreshReentrantStopCannotProduceDetailedSuccess",
+        "package": "dev.codex.schubert.nk.web.monitoring",
+        "priority": "3",
+        "rule": "CloseResource",
+        "ruleset": "Error Prone",
+        "variable": "context"
+      },
+      "controls": [
+        "context.initialize()",
+        "context.render(true)",
+        "finally{context.close();}",
+        "assertTrue(observed.get().isClosed())"
+      ],
+      "currentCases": [
+        {
+          "className": "dev.codex.schubert.nk.web.monitoring.WebMetricContextTest",
+          "method": "webmctx032RefreshReentrantStopCannotProduceDetailedSuccess",
+          "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebMetricContextTest.java",
+          "sourceSha256": "5611b2a69cd9728890bddc6712d71f851c8d967c72dbaa45ff12e089f75dd545"
+        }
+      ],
+      "currentWholeJoinPending": true,
+      "disposition": "CONTEXT_NOT_APPLICABLE",
+      "id": "PMD-08420",
+      "kind": "RESOURCE_FREE_CONTEXT_PUBLISHED_BEFORE_INIT_WITH_EXPLICIT_FINALLY_CLOSE",
+      "newAccepted": 0,
+      "oldRuntimeReassigned": false,
+      "originalRowSha256": "dd5403454ce2160babb32e62d0629c720a8a7e3cab3c5a50cfd78361bd8653e1",
+      "ownerControls": [],
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebMetricContextTest.java",
+      "productTestsExecutedByReview": 0,
+      "reason": "Context construction/owner publication acquires no SDK. Actual initialization and intentional reentrant-stop negative call are inside explicit try/finally context.close, followed by independent registry-closed assertion. Early implicit close or removing finally would alter the ownership test. This does not authenticate real shutdown/native resources.",
+      "rule": "CloseResource",
+      "scopeKind": "METHOD",
+      "scopeName": "webmctx032RefreshReentrantStopCannotProduceDetailedSuccess",
+      "scopeTokenSha256": "b8df2b637156181e5131c3d26c6aeedc37c043fdee624ba15bebe0b95f334ea4",
+      "source": "f75d2fea05a98fe40d731d1a3046a64d20bbbb65",
+      "sourceSha256": "5611b2a69cd9728890bddc6712d71f851c8d967c72dbaa45ff12e089f75dd545",
+      "sourceSpanSha256": "69f9fd8d9342e70b53a7423168d662422b8ccf8bf6bb748340dd4a6a70394290"
+    },
+    {
+      "attributes": {
+        "begincolumn": "23",
+        "beginline": "817",
+        "class": "WebMetricContextTest",
+        "endcolumn": "58",
+        "endline": "817",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "method": "webmctx033RefreshContendedStopRetainsUntilSamplerReturns",
+        "package": "dev.codex.schubert.nk.web.monitoring",
+        "priority": "3",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading",
+        "variable": "worker"
+      },
+      "controls": [
+        "try(varworker=Executors.newSingleThreadExecutor())",
+        "future.get(30,TimeUnit.SECONDS)",
+        "proceed.countDown()",
+        "worker.shutdownNow()",
+        "worker.awaitTermination(30,TimeUnit.SECONDS)",
+        "context.close()"
+      ],
+      "currentCases": [
+        {
+          "className": "dev.codex.schubert.nk.web.monitoring.WebMetricContextTest",
+          "method": "webmctx033RefreshContendedStopRetainsUntilSamplerReturns",
+          "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebMetricContextTest.java",
+          "sourceSha256": "5611b2a69cd9728890bddc6712d71f851c8d967c72dbaa45ff12e089f75dd545"
+        }
+      ],
+      "currentWholeJoinPending": true,
+      "disposition": "CONTEXT_NOT_APPLICABLE",
+      "id": "PMD-08422",
+      "kind": "OWNED_FINITE_STANDALONE_SDK_FIXTURE_WORKERS_NOT_J2EE",
+      "newAccepted": 0,
+      "oldRuntimeReassigned": false,
+      "originalRowSha256": "5855e777661cc0528d72d509c48c3b43256f9b7a7fa896f0115afe34c4c5f413",
+      "ownerControls": [],
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebMetricContextTest.java",
+      "productTestsExecutedByReview": 0,
+      "reason": "Standalone JUnit owns one worker per case (023 two sequential iterations). All task actions are local metadata/SDK context calls, release latch in original finally, shutdownNow and awaitTermination30seconds, Future.get30seconds. TWR close itself has no local absolute deadline, distinct outer JVM240seconds. Actual pass proves these fixtures only, not real service/VM/Root ownership or stop budget.",
+      "rule": "DoNotUseThreads",
+      "scopeKind": "METHOD",
+      "scopeName": "webmctx033RefreshContendedStopRetainsUntilSamplerReturns",
+      "scopeTokenSha256": "04d94ec493fa569379805c6d7e1a404d6cf9954d815647b8e6964ef2c10eaa4a",
+      "source": "f75d2fea05a98fe40d731d1a3046a64d20bbbb65",
+      "sourceSha256": "5611b2a69cd9728890bddc6712d71f851c8d967c72dbaa45ff12e089f75dd545",
+      "sourceSpanSha256": "fd6401f092076966a1eeecda70599980543ebe6a04a2f913279947e70f57cd2a"
+    },
+    {
+      "attributes": {
+        "begincolumn": "22",
+        "beginline": "820",
+        "class": "WebMetricContextTest",
+        "endcolumn": "63",
+        "endline": "820",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "method": "webmctx033RefreshContendedStopRetainsUntilSamplerReturns",
+        "package": "dev.codex.schubert.nk.web.monitoring",
+        "priority": "3",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading",
+        "variable": "future"
+      },
+      "controls": [
+        "try(varworker=Executors.newSingleThreadExecutor())",
+        "future.get(30,TimeUnit.SECONDS)",
+        "proceed.countDown()",
+        "worker.shutdownNow()",
+        "worker.awaitTermination(30,TimeUnit.SECONDS)",
+        "context.close()"
+      ],
+      "currentCases": [
+        {
+          "className": "dev.codex.schubert.nk.web.monitoring.WebMetricContextTest",
+          "method": "webmctx033RefreshContendedStopRetainsUntilSamplerReturns",
+          "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebMetricContextTest.java",
+          "sourceSha256": "5611b2a69cd9728890bddc6712d71f851c8d967c72dbaa45ff12e089f75dd545"
+        }
+      ],
+      "currentWholeJoinPending": true,
+      "disposition": "CONTEXT_NOT_APPLICABLE",
+      "id": "PMD-08423",
+      "kind": "OWNED_FINITE_STANDALONE_SDK_FIXTURE_WORKERS_NOT_J2EE",
+      "newAccepted": 0,
+      "oldRuntimeReassigned": false,
+      "originalRowSha256": "b74b45962df595463d0333cf80af40a20cb912b86c710547243721c4b477c5ed",
+      "ownerControls": [],
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebMetricContextTest.java",
+      "productTestsExecutedByReview": 0,
+      "reason": "Standalone JUnit owns one worker per case (023 two sequential iterations). All task actions are local metadata/SDK context calls, release latch in original finally, shutdownNow and awaitTermination30seconds, Future.get30seconds. TWR close itself has no local absolute deadline, distinct outer JVM240seconds. Actual pass proves these fixtures only, not real service/VM/Root ownership or stop budget.",
+      "rule": "DoNotUseThreads",
+      "scopeKind": "METHOD",
+      "scopeName": "webmctx033RefreshContendedStopRetainsUntilSamplerReturns",
+      "scopeTokenSha256": "04d94ec493fa569379805c6d7e1a404d6cf9954d815647b8e6964ef2c10eaa4a",
+      "source": "f75d2fea05a98fe40d731d1a3046a64d20bbbb65",
+      "sourceSha256": "5611b2a69cd9728890bddc6712d71f851c8d967c72dbaa45ff12e089f75dd545",
+      "sourceSpanSha256": "7352ed3a6c77de65491d54967a1af315d36e6a21f28293db4c3c74aa24cf5255"
+    },
+    {
+      "attributes": {
+        "begincolumn": "9",
+        "beginline": "836",
+        "class": "WebMetricContextTest",
+        "endcolumn": "29",
+        "endline": "836",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "method": "webmctx033RefreshContendedStopRetainsUntilSamplerReturns",
+        "package": "dev.codex.schubert.nk.web.monitoring",
+        "priority": "3",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading"
+      },
+      "controls": [
+        "try(varworker=Executors.newSingleThreadExecutor())",
+        "future.get(30,TimeUnit.SECONDS)",
+        "proceed.countDown()",
+        "worker.shutdownNow()",
+        "worker.awaitTermination(30,TimeUnit.SECONDS)",
+        "context.close()"
+      ],
+      "currentCases": [
+        {
+          "className": "dev.codex.schubert.nk.web.monitoring.WebMetricContextTest",
+          "method": "webmctx033RefreshContendedStopRetainsUntilSamplerReturns",
+          "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebMetricContextTest.java",
+          "sourceSha256": "5611b2a69cd9728890bddc6712d71f851c8d967c72dbaa45ff12e089f75dd545"
+        }
+      ],
+      "currentWholeJoinPending": true,
+      "disposition": "CONTEXT_NOT_APPLICABLE",
+      "id": "PMD-08424",
+      "kind": "OWNED_FINITE_STANDALONE_SDK_FIXTURE_WORKERS_NOT_J2EE",
+      "newAccepted": 0,
+      "oldRuntimeReassigned": false,
+      "originalRowSha256": "59e89d67ba23f9fdbc0111933868c92c7685723e11c572fd4b72edd5c52e5560",
+      "ownerControls": [],
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebMetricContextTest.java",
+      "productTestsExecutedByReview": 0,
+      "reason": "Standalone JUnit owns one worker per case (023 two sequential iterations). All task actions are local metadata/SDK context calls, release latch in original finally, shutdownNow and awaitTermination30seconds, Future.get30seconds. TWR close itself has no local absolute deadline, distinct outer JVM240seconds. Actual pass proves these fixtures only, not real service/VM/Root ownership or stop budget.",
+      "rule": "DoNotUseThreads",
+      "scopeKind": "METHOD",
+      "scopeName": "webmctx033RefreshContendedStopRetainsUntilSamplerReturns",
+      "scopeTokenSha256": "04d94ec493fa569379805c6d7e1a404d6cf9954d815647b8e6964ef2c10eaa4a",
+      "source": "f75d2fea05a98fe40d731d1a3046a64d20bbbb65",
+      "sourceSha256": "5611b2a69cd9728890bddc6712d71f851c8d967c72dbaa45ff12e089f75dd545",
+      "sourceSpanSha256": "5476119e4c522c7b04aa550a87a89e15936b0b06512ba99e10b8abf701215021"
+    },
+    {
+      "attributes": {
+        "begincolumn": "22",
+        "beginline": "838",
+        "class": "WebMetricContextTest",
+        "endcolumn": "67",
+        "endline": "838",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "method": "webmctx033RefreshContendedStopRetainsUntilSamplerReturns",
+        "package": "dev.codex.schubert.nk.web.monitoring",
+        "priority": "3",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading"
+      },
+      "controls": [
+        "try(varworker=Executors.newSingleThreadExecutor())",
+        "future.get(30,TimeUnit.SECONDS)",
+        "proceed.countDown()",
+        "worker.shutdownNow()",
+        "worker.awaitTermination(30,TimeUnit.SECONDS)",
+        "context.close()"
+      ],
+      "currentCases": [
+        {
+          "className": "dev.codex.schubert.nk.web.monitoring.WebMetricContextTest",
+          "method": "webmctx033RefreshContendedStopRetainsUntilSamplerReturns",
+          "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebMetricContextTest.java",
+          "sourceSha256": "5611b2a69cd9728890bddc6712d71f851c8d967c72dbaa45ff12e089f75dd545"
+        }
+      ],
+      "currentWholeJoinPending": true,
+      "disposition": "CONTEXT_NOT_APPLICABLE",
+      "id": "PMD-08425",
+      "kind": "OWNED_FINITE_STANDALONE_SDK_FIXTURE_WORKERS_NOT_J2EE",
+      "newAccepted": 0,
+      "oldRuntimeReassigned": false,
+      "originalRowSha256": "ecb9c3c0c77c40ddac5801fe88bcd85e744d8c91a9660e4eb30992900e710fd4",
+      "ownerControls": [],
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebMetricContextTest.java",
+      "productTestsExecutedByReview": 0,
+      "reason": "Standalone JUnit owns one worker per case (023 two sequential iterations). All task actions are local metadata/SDK context calls, release latch in original finally, shutdownNow and awaitTermination30seconds, Future.get30seconds. TWR close itself has no local absolute deadline, distinct outer JVM240seconds. Actual pass proves these fixtures only, not real service/VM/Root ownership or stop budget.",
+      "rule": "DoNotUseThreads",
+      "scopeKind": "METHOD",
+      "scopeName": "webmctx033RefreshContendedStopRetainsUntilSamplerReturns",
+      "scopeTokenSha256": "04d94ec493fa569379805c6d7e1a404d6cf9954d815647b8e6964ef2c10eaa4a",
+      "source": "f75d2fea05a98fe40d731d1a3046a64d20bbbb65",
+      "sourceSha256": "5611b2a69cd9728890bddc6712d71f851c8d967c72dbaa45ff12e089f75dd545",
+      "sourceSpanSha256": "64d254d04d5e03682aae0a951d6228cee56ff69d69245bd68886353da9ef1601"
+    }
+  ],
+  "source": "f75d2fea05a98fe40d731d1a3046a64d20bbbb65"
+}
