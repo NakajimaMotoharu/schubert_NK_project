@@ -1,0 +1,11 @@
+# Bundle/Collector Map七件・静的適用性レビュー
+
+F03-BUNDLEMAP001/PG-D733。開始save6f206b2e7d089099d88e0c51743bf7b43c0e5604/push6721真正0、fetch origin/main8b91944df同一/feature同HEAD確認。source d8a2b7952b321b75fe7fcc1c8d3acb287faca6ec、主F03・原参照P01705/P01802追加配賦0。着手前1/2/4週次pp・cap10、共有57残43/reset1793599188/短期非提供ordinaryAllowedtrue/券0、N/T専有費/工数null。二Main全文・生成callerの選定調査はGROUP_START前、正式source/caller/owner/span照合の開始と分け記録する。Source/上位変更なし/元見積不変更。
+
+対象PMD02774/02775 BackupArtifactVerifier.observePendingのsnapshots/observed、02776/02777 verifyAtの同名二Map（NK-BAT-001/BAK/BKO/UI251/SS341/343/SSC059/110/PG166/BAT194..209）。Mapはlock内の各operation callbackで作成。observePendingはmapを返さずimmutable digest値だけをPendingDigestsへ、verifyAtはBundleSnapshot compact constructorでfiles/contentsをMap.copyOf。各private callbackに可変参照を保持/返却させないこと、型付きmetadata/digest値と既存lock/finally境界を点検する。実observe/verify/removeRetained/force/IO/lockの取得は一切行わない。
+
+対象PMD06190/06191 ReleasePayloadVerification.jars/checksums fieldと06194 archive.sql local（NK-OPS-001/SYS002/004/OPS009/DAT009/UI212/251/253/SS343/SSC095/096）。field二Mapはlocal Mapとは異なるため、package-private final collectorの生成callerをSource全体から列挙し、StartupReleaseManifest.verify/verifyCandidateの二entrypointが各callbackでnew collector→即verifyし、collector自体/可変Mapを外へ返さないことを確認する。archive.sqlはJarValueへMap.copyOf、公開Contentsはinventoryから別のunmodifiable mapを作る。現Main caller以外の将来再利用を許可せずsource/caller hash変化時は再レビューとする。実release verification/archive/read/security/native/Root/candidate/配置/承認/署名等を起動せず、現在の所有/未使用権限の資格へ読み替えない。
+
+独立oracleは明示したJava alias/escape/constructorの不変化経路、原rowのid/span/variable/field-vs-method、caller二箇所と原owner/cost。Source/callerは正常12224入力と現byte一致を確認、原10690の当七Main行のbyteへ一致、callerには原finding行の存在を要求しない（findingなしとSourceなしを混同しない）。411のtrace_owner_joinを用い原artifactの論理owner/costとengineering review担当を分離し、歴史artifact SHAは現sourceの根拠へ流用しない。caller方式の不足/fieldをmethodとする偽装/別source/span/空理由/誤owner/実PT偽装等を独立negative metadataで拒否する。
+
+予定12260source七理由/12262独立post、現集合への七理由・owner/cost不変joinと公開保存。新ProductPT/build/静的本体/native0、source是正増分0/raw七保持・正式受入増分0。Ref増分を工数完成率にせず、正式1964/53・個別17/190・工数null/QA051final・全F03/451/HOLDを維持する。通常小群で停止せず次の独立PG/PTへ進む。
