@@ -552,6 +552,7 @@ class BatchMetricTextTest {
   private static final class FullProbe
       extends io.micrometer.prometheusmetrics.PrometheusMeterRegistry {
     final AtomicInteger scrapes = new AtomicInteger();
+    final AtomicInteger closes = new AtomicInteger();
     RuntimeException failure;
     Error fatal;
     boolean nullText;
@@ -567,12 +568,26 @@ class BatchMetricTextTest {
       if (fatal != null) throw fatal;
       return nullText ? null : FULL_STANDARD;
     }
+
+    @Override
+    public void close() {
+      closes.incrementAndGet();
+      super.close();
+    }
   }
 
   private static BatchStandardMetricSource fullOwner(FullProbe probe) {
     var owner = new BatchStandardMetricSource(() -> probe, (source, gc) -> {});
-    owner.bind(DEBUG_MODE);
-    return owner;
+    boolean transferred = false;
+    try {
+
+      owner.bind(DEBUG_MODE);
+      transferred = true;
+      return owner;
+
+    } finally {
+      if (!transferred) owner.close();
+    }
   }
 
   @Test
@@ -798,6 +813,22 @@ class BatchMetricTextTest {
       var types = text.lines().filter(line -> line.startsWith("# TYPE ")).toList();
       assertEquals(types.size(), types.stream().distinct().count());
       assertFalse(source.isClosed());
+    }
+  }
+
+  @Test
+  void batchfull013HelperReleasesRejectedCandidateBeforeReturningOwner() {
+    var probe = new FullProbe();
+    try {
+      probe.close();
+      assertEquals(1, probe.closes.get());
+      var failure = assertThrows(IllegalStateException.class, () -> fullOwner(probe));
+      assertEquals("standard metric registry closed", failure.getMessage());
+      assertEquals(2, probe.closes.get());
+      assertEquals(0, probe.scrapes.get());
+      assertTrue(probe.isClosed());
+    } finally {
+      probe.close();
     }
   }
 }

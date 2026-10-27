@@ -279,6 +279,7 @@ class WebCustomMetricPayloadTest {
   private static final class FullProbe
       extends io.micrometer.prometheusmetrics.PrometheusMeterRegistry {
     final AtomicInteger scrapes = new AtomicInteger();
+    final AtomicInteger closes = new AtomicInteger();
     java.util.Optional<Throwable> failure = java.util.Optional.empty();
     boolean nullText;
 
@@ -293,12 +294,26 @@ class WebCustomMetricPayloadTest {
       if (nullText) return null;
       return FULL_STANDARD;
     }
+
+    @Override
+    public void close() {
+      closes.incrementAndGet();
+      super.close();
+    }
   }
 
   private static WebStandardMetricSource fullOwner(FullProbe probe) {
     var owner = new WebStandardMetricSource(() -> probe, (source, gc) -> {});
-    owner.bind("DEBUG");
-    return owner;
+    boolean transferred = false;
+    try {
+
+      owner.bind("DEBUG");
+      transferred = true;
+      return owner;
+
+    } finally {
+      if (!transferred) owner.close();
+    }
   }
 
   @Test
@@ -550,20 +565,21 @@ class WebCustomMetricPayloadTest {
       String expected =
           "system_cpu_count{service=\"WEB\"} "
               + (double) Runtime.getRuntime().availableProcessors();
-      var executor = Executors.newFixedThreadPool(4);
-      try {
-        var tasks = new ArrayList<java.util.concurrent.Callable<String>>();
-        for (int index = 0; index < 64; index++)
-          tasks.add(() -> payload.render(true, "DEBUG", () -> bundle.source, standard));
-        for (var future : executor.invokeAll(tasks, 30, TimeUnit.SECONDS)) {
-          String actual = future.get(30, TimeUnit.SECONDS);
-          assertTrue(actual.startsWith(READY_ONE + CUSTOM));
-          assertTrue(actual.lines().anyMatch(expected::equals));
+      try (var executor = Executors.newFixedThreadPool(4)) {
+        try {
+          var tasks = new ArrayList<java.util.concurrent.Callable<String>>();
+          for (int index = 0; index < 64; index++)
+            tasks.add(() -> payload.render(true, "DEBUG", () -> bundle.source, standard));
+          for (var future : executor.invokeAll(tasks, 30, TimeUnit.SECONDS)) {
+            String actual = future.get(30, TimeUnit.SECONDS);
+            assertTrue(actual.startsWith(READY_ONE + CUSTOM));
+            assertTrue(actual.lines().anyMatch(expected::equals));
+          }
+          assertFalse(bundle.source.isClosed());
+        } finally {
+          executor.shutdownNow();
+          assertTrue(executor.awaitTermination(30, TimeUnit.SECONDS));
         }
-        assertFalse(bundle.source.isClosed());
-      } finally {
-        executor.shutdownNow();
-        assertTrue(executor.awaitTermination(30, TimeUnit.SECONDS));
       }
       Reference.reachabilityFence(bundle);
     }
@@ -575,35 +591,40 @@ class WebCustomMetricPayloadTest {
     var release = new java.util.concurrent.CountDownLatch(1);
     var probe = new FullProbe();
     var standard = fullOwner(probe);
-    var executor = Executors.newSingleThreadExecutor();
-    try (var bundle = new Bundle()) {
-      var future =
-          executor.submit(
-              () ->
-                  payload.render(
-                      true,
-                      "DEBUG",
-                      () -> {
-                        entered.countDown();
-                        awaitFull(release);
-                        return bundle.source;
-                      },
-                      standard));
-      assertTrue(entered.await(30, TimeUnit.SECONDS));
-      standard.close();
-      release.countDown();
-      var failure =
-          assertThrows(
-              java.util.concurrent.ExecutionException.class,
-              () -> future.get(30, TimeUnit.SECONDS));
-      assertInstanceOf(IllegalStateException.class, failure.getCause());
-      assertEquals(0, probe.scrapes.get());
-      assertFalse(bundle.source.isClosed());
-      Reference.reachabilityFence(bundle);
+    try {
+      try (var executor = Executors.newSingleThreadExecutor()) {
+        try (var bundle = new Bundle()) {
+          var future =
+              executor.submit(
+                  () ->
+                      payload.render(
+                          true,
+                          "DEBUG",
+                          () -> {
+                            entered.countDown();
+                            awaitFull(release);
+                            return bundle.source;
+                          },
+                          standard));
+          assertTrue(entered.await(30, TimeUnit.SECONDS));
+          standard.close();
+          release.countDown();
+          var failure =
+              assertThrows(
+                  java.util.concurrent.ExecutionException.class,
+                  () -> future.get(30, TimeUnit.SECONDS));
+          assertInstanceOf(IllegalStateException.class, failure.getCause());
+          assertEquals(0, probe.scrapes.get());
+          assertFalse(bundle.source.isClosed());
+          Reference.reachabilityFence(bundle);
+        } finally {
+          release.countDown();
+          executor.shutdownNow();
+          assertTrue(executor.awaitTermination(30, TimeUnit.SECONDS));
+          standard.close();
+        }
+      }
     } finally {
-      release.countDown();
-      executor.shutdownNow();
-      assertTrue(executor.awaitTermination(30, TimeUnit.SECONDS));
       standard.close();
     }
   }
@@ -614,6 +635,22 @@ class WebCustomMetricPayloadTest {
     } catch (InterruptedException interrupted) {
       Thread.currentThread().interrupt();
       throw new IllegalStateException("owned full fixture interrupted");
+    }
+  }
+
+  @Test
+  void webfull013HelperReleasesRejectedCandidateBeforeReturningOwner() {
+    var probe = new FullProbe();
+    try {
+      probe.close();
+      assertEquals(1, probe.closes.get());
+      var failure = assertThrows(IllegalStateException.class, () -> fullOwner(probe));
+      assertEquals("standard metric registry closed", failure.getMessage());
+      assertEquals(2, probe.closes.get());
+      assertEquals(0, probe.scrapes.get());
+      assertTrue(probe.isClosed());
+    } finally {
+      probe.close();
     }
   }
 }
