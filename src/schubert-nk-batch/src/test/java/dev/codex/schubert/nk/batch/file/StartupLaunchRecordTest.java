@@ -15,6 +15,8 @@ import org.junit.jupiter.api.Test;
 
 /** LAUNCH001..006: literal independent canonical frame, never Production-derived expected. */
 final class StartupLaunchRecordTest {
+  private static final String PARENT_PID_ASSIGNMENT = "pid=300";
+
   static final String GOLD =
       """
       NKLAUNCH1
@@ -65,10 +67,10 @@ final class StartupLaunchRecordTest {
       GOLD.replace("a".repeat(64), "a".repeat(63)),
       GOLD.replace("b".repeat(64), "B".repeat(64)),
       GOLD.replace("2".repeat(32), "0".repeat(32)),
-      GOLD.replace("pid=300", "pid=1"),
-      GOLD.replace("pid=300", "pid=2147483648"),
-      GOLD.replace("pid=300", "pid=0300"),
-      GOLD.replace("pid=300", "pid=+300"),
+      GOLD.replace(PARENT_PID_ASSIGNMENT, "pid=1"),
+      GOLD.replace(PARENT_PID_ASSIGNMENT, "pid=2147483648"),
+      GOLD.replace(PARENT_PID_ASSIGNMENT, "pid=0300"),
+      GOLD.replace(PARENT_PID_ASSIGNMENT, "pid=+300"),
       GOLD.replace("start_ticks=200", "start_ticks=0"),
       GOLD.replace("start_ticks=200", "start_ticks=9223372036854775808"),
       GOLD.replace("start_ticks=200", "start_ticks=x"),

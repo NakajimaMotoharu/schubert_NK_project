@@ -17,6 +17,8 @@ import org.junit.jupiter.api.Test;
 
 /** PT-OPS-BREQ001..008 fixed request codec; root/file/worker admission tested separately. */
 final class BackupWorkerRequestTest {
+  private static final String VERIFY_DUMP_SIZE_ASSIGNMENT = "dump_size=3";
+
   private static final UUID RUN = UUID.fromString("11111111-2222-4333-8444-555555555555");
   private static final Instant START = Instant.parse("2026-09-27T14:59:59.123456Z");
   private static final String GOLDEN =
@@ -50,10 +52,10 @@ final class BackupWorkerRequestTest {
         List.of(
             golden.replace("NKBACKUPVERIFY1", "NKBACKUP1"),
             GOLDEN.replace("NKBACKUP1", "NKBACKUPVERIFY1"),
-            golden.replace("dump_size=3", "dump_size=03"),
-            golden.replace("dump_size=3", "dump_size=0"),
-            golden.replace("dump_size=3", "dump_size=-1"),
-            golden.replace("dump_size=3", "dump_size=9223372036854775808"),
+            golden.replace(VERIFY_DUMP_SIZE_ASSIGNMENT, "dump_size=03"),
+            golden.replace(VERIFY_DUMP_SIZE_ASSIGNMENT, "dump_size=0"),
+            golden.replace(VERIFY_DUMP_SIZE_ASSIGNMENT, "dump_size=-1"),
+            golden.replace(VERIFY_DUMP_SIZE_ASSIGNMENT, "dump_size=9223372036854775808"),
             golden.replace("manifest_sha256=", "manifest="),
             golden.replace("dump_sha256=", "command="),
             golden.replace("dump_size=", "path="),
