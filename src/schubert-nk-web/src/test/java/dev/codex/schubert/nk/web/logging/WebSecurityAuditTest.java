@@ -37,28 +37,41 @@ import org.junit.jupiter.api.Test;
 
 /** NK-WEB-001/PT-WEB-095..100; AUT-001..004/MON-004; UI226/252; SS314/351/352. */
 class WebSecurityAuditTest {
+  private static final String READER_NAME = "reader";
+  private static final String INFO_LEVEL = "INFO";
+  private static final String DENIED_OUTCOME = "DENIED";
+  private static final String WARN_LEVEL = "WARN";
+  private static final String AUTHORIZATION_ACTION = "AUTHORIZATION_DENIED";
+  private static final String REMOTE_ADDRESS_FIELD = "remoteAddress";
+  private static final String DETAILS_FIELD = "details";
+  private static final String ACTOR_USERNAME_FIELD = "actorUsername";
+  private static final String ACTOR_ROLE_FIELD = "actorRole";
+  private static final String REASON_FIELD = "reason";
+  private static final String ROUTE_FIELD = "route";
+  private static final String TARGET_TYPE_FIELD = "targetType";
+  private static final String RETRY_SECONDS_FIELD = "retryAfterSeconds";
   private static final Clock CLOCK =
       Clock.fixed(Instant.parse("2026-09-09T00:00:00.123987Z"), ZoneOffset.ofHours(9));
   private static final UUID ID = UUID.fromString("00000000-0000-0000-0000-000000000123");
   private static final Optional<String> IP = Optional.of("203.0.113.1");
   private static final Optional<SessionPrincipal> ACTOR =
-      Optional.of(actor("reader", UserRole.USER));
+      Optional.of(actor(READER_NAME, UserRole.USER));
 
   @Test
   void web095AllSecurityEventsUseClosedIndependentJson() {
     var logger = new CapturingLogger();
     var audit = new WebSecurityAudit(logger, CLOCK, "1.2.3+build", "cfg-1");
     String[][] expected = {
-      {"LOGIN_SUCCEEDED", "AUTHENTICATED", "SUCCESS", "INFO"},
-      {"LOGIN_FAILED", "INVALID_CREDENTIALS", "DENIED", "WARN"},
-      {"LOGIN_LOCKED", "LOCKED", "DENIED", "WARN"},
-      {"AUTHORIZATION_DENIED", "CSRF", "DENIED", "WARN"},
-      {"AUTHORIZATION_DENIED", "ROLE", "DENIED", "WARN"},
-      {"AUTHORIZATION_DENIED", "PROXY", "DENIED", "WARN"},
-      {"AUTHORIZATION_DENIED", "UNAUTHENTICATED", "DENIED", "WARN"},
-      {"SESSION_EXPIRED", "API_SESSION_INVALID", "DENIED", "INFO"},
-      {"LOGOUT_SUCCEEDED", "REVOKED", "SUCCESS", "INFO"},
-      {"LOGOUT_REVOCATION_QUEUED", "RETRY_RETAINED", "SUCCESS", "INFO"}
+      {"LOGIN_SUCCEEDED", "AUTHENTICATED", "SUCCESS", INFO_LEVEL},
+      {"LOGIN_FAILED", "INVALID_CREDENTIALS", DENIED_OUTCOME, WARN_LEVEL},
+      {"LOGIN_LOCKED", "LOCKED", DENIED_OUTCOME, WARN_LEVEL},
+      {AUTHORIZATION_ACTION, "CSRF", DENIED_OUTCOME, WARN_LEVEL},
+      {AUTHORIZATION_ACTION, "ROLE", DENIED_OUTCOME, WARN_LEVEL},
+      {AUTHORIZATION_ACTION, "PROXY", DENIED_OUTCOME, WARN_LEVEL},
+      {AUTHORIZATION_ACTION, "UNAUTHENTICATED", DENIED_OUTCOME, WARN_LEVEL},
+      {"SESSION_EXPIRED", "API_SESSION_INVALID", DENIED_OUTCOME, INFO_LEVEL},
+      {"LOGOUT_SUCCEEDED", "REVOKED", "SUCCESS", INFO_LEVEL},
+      {"LOGOUT_REVOCATION_QUEUED", "RETRY_RETAINED", "SUCCESS", INFO_LEVEL}
     };
     for (int i = 0; i < Event.values().length; i++) {
       Event event = Event.values()[i];
@@ -84,9 +97,9 @@ class WebSecurityAuditTest {
                   "action",
                   "outcome",
                   "requestId",
-                  "remoteAddress",
-                  "details"));
-      if (hasActor) keys.addAll(Set.of("actorUsername", "actorRole"));
+                  REMOTE_ADDRESS_FIELD,
+                  DETAILS_FIELD));
+      if (hasActor) keys.addAll(Set.of(ACTOR_USERNAME_FIELD, ACTOR_ROLE_FIELD));
       assertEquals(keys, json.keySet());
       assertEquals("2026-09-09T00:00:00.123Z", json.get("timestamp").getAsString());
       assertEquals("WEB", json.get("service").getAsString());
@@ -94,25 +107,25 @@ class WebSecurityAuditTest {
       assertEquals("cfg-1", json.get("configVersion").getAsString());
       assertEquals("SECURITY", json.get("category").getAsString());
       assertEquals(ID.toString(), json.get("requestId").getAsString());
-      assertEquals("2001:db8:0:0:0:0:0:1", json.get("remoteAddress").getAsString());
+      assertEquals("2001:db8:0:0:0:0:0:1", json.get(REMOTE_ADDRESS_FIELD).getAsString());
       assertEquals(expected[i][0], json.get("action").getAsString());
       assertEquals(expected[i][2], json.get("outcome").getAsString());
       assertEquals(expected[i][3], json.get("level").getAsString());
       assertEquals(i == 0 || i >= 7 ? Level.INFO : Level.WARNING, entry.level());
       if (hasActor) {
-        assertEquals("reader", json.get("actorUsername").getAsString());
-        assertEquals("USER", json.get("actorRole").getAsString());
+        assertEquals(READER_NAME, json.get(ACTOR_USERNAME_FIELD).getAsString());
+        assertEquals("USER", json.get(ACTOR_ROLE_FIELD).getAsString());
       }
-      var details = json.getAsJsonObject("details");
-      var detailKeys = new HashSet<>(Set.of("reason", "route", "targetType"));
-      assertEquals("HTTP_REQUEST", details.get("targetType").getAsString());
-      assertEquals(i >= 8 ? "/logout" : "/login", details.get("route").getAsString());
+      var details = json.getAsJsonObject(DETAILS_FIELD);
+      var detailKeys = new HashSet<>(Set.of(REASON_FIELD, ROUTE_FIELD, TARGET_TYPE_FIELD));
+      assertEquals("HTTP_REQUEST", details.get(TARGET_TYPE_FIELD).getAsString());
+      assertEquals(i >= 8 ? "/logout" : "/login", details.get(ROUTE_FIELD).getAsString());
       if (i == 2) {
-        detailKeys.add("retryAfterSeconds");
-        assertEquals(900, details.get("retryAfterSeconds").getAsInt());
+        detailKeys.add(RETRY_SECONDS_FIELD);
+        assertEquals(900, details.get(RETRY_SECONDS_FIELD).getAsInt());
       }
       assertEquals(detailKeys, details.keySet());
-      assertEquals(expected[i][1], details.get("reason").getAsString());
+      assertEquals(expected[i][1], details.get(REASON_FIELD).getAsString());
       assertTrue(
           details.toString().getBytes(java.nio.charset.StandardCharsets.UTF_8).length < 1024);
     }
@@ -123,15 +136,21 @@ class WebSecurityAuditTest {
             .entries
             .getLast()
             .json()
-            .getAsJsonObject("details")
-            .get("retryAfterSeconds")
+            .getAsJsonObject(DETAILS_FIELD)
+            .get(RETRY_SECONDS_FIELD)
             .getAsInt());
     String[] routes = {"/login", "/logout", "/**", "/admin/users/**", "/logs"};
     for (int i = 0; i < Route.values().length; i++) {
       audit.record(ID, Event.CSRF_DENIED, IP, ACTOR, 0, Route.values()[i]);
       assertEquals(
           routes[i],
-          logger.entries.getLast().json().getAsJsonObject("details").get("route").getAsString());
+          logger
+              .entries
+              .getLast()
+              .json()
+              .getAsJsonObject(DETAILS_FIELD)
+              .get(ROUTE_FIELD)
+              .getAsString());
     }
   }
 
@@ -241,8 +260,8 @@ class WebSecurityAuditTest {
           0,
           Route.LOGIN);
       var entry = logger.entries.get(i);
-      assertEquals(expected[i], entry.json().get("actorUsername").getAsString());
-      assertEquals("ADMIN", entry.json().get("actorRole").getAsString());
+      assertEquals(expected[i], entry.json().get(ACTOR_USERNAME_FIELD).getAsString());
+      assertEquals("ADMIN", entry.json().get(ACTOR_ROLE_FIELD).getAsString());
       assertFalse(entry.text().contains("\n"));
       assertFalse(entry.text().contains("\r"));
       assertFalse(entry.text().contains("\u2028"));
@@ -259,7 +278,7 @@ class WebSecurityAuditTest {
               "1980-01-01")) assertFalse(entry.text().contains(denied));
     }
     audit.record(ID, Event.LOGIN_FAILED, IP, Optional.empty(), 0, Route.LOGIN);
-    assertFalse(logger.entries.getLast().json().has("actorUsername"));
+    assertFalse(logger.entries.getLast().json().has(ACTOR_USERNAME_FIELD));
   }
 
   @Test
@@ -321,13 +340,15 @@ class WebSecurityAuditTest {
         new UUID(0, 2), Event.CSRF_DENIED, Optional.empty(), Optional.empty(), 0, Route.LOGIN);
     assertEquals(first, logger.entries.getFirst().text());
     var second = logger.entries.getLast().json();
-    assertFalse(second.has("actorUsername"));
-    assertFalse(second.has("actorRole"));
-    assertFalse(second.has("remoteAddress"));
+    assertFalse(second.has(ACTOR_USERNAME_FIELD));
+    assertFalse(second.has(ACTOR_ROLE_FIELD));
+    assertFalse(second.has(REMOTE_ADDRESS_FIELD));
     assertEquals(
-        Set.of("reason", "route", "targetType"), second.getAsJsonObject("details").keySet());
-    assertEquals("HTTP_REQUEST", second.getAsJsonObject("details").get("targetType").getAsString());
-    assertEquals("CSRF", second.getAsJsonObject("details").get("reason").getAsString());
+        Set.of(REASON_FIELD, ROUTE_FIELD, TARGET_TYPE_FIELD),
+        second.getAsJsonObject(DETAILS_FIELD).keySet());
+    assertEquals(
+        "HTTP_REQUEST", second.getAsJsonObject(DETAILS_FIELD).get(TARGET_TYPE_FIELD).getAsString());
+    assertEquals("CSRF", second.getAsJsonObject(DETAILS_FIELD).get(REASON_FIELD).getAsString());
     second.addProperty("modified", true);
     assertFalse(logger.entries.getLast().json().has("modified"));
     audit.record(
@@ -337,7 +358,8 @@ class WebSecurityAuditTest {
         Optional.empty(),
         0,
         Route.LOGIN);
-    assertEquals("203.0.113.1", logger.entries.getLast().json().get("remoteAddress").getAsString());
+    assertEquals(
+        "203.0.113.1", logger.entries.getLast().json().get(REMOTE_ADDRESS_FIELD).getAsString());
   }
 
   @Test
@@ -356,7 +378,7 @@ class WebSecurityAuditTest {
                   success ? Event.LOGIN_SUCCEEDED : Event.LOGIN_LOCKED,
                   Optional.of("203.0.113." + number),
                   success
-                      ? Optional.of(actor("reader" + number, UserRole.ADMIN))
+                      ? Optional.of(actor(READER_NAME + number, UserRole.ADMIN))
                       : Optional.empty(),
                   success ? 0 : number,
                   Route.LOGIN);
@@ -374,14 +396,15 @@ class WebSecurityAuditTest {
       UUID id = UUID.fromString(json.get("requestId").getAsString());
       assertTrue(seen.add(id));
       long number = id.getLeastSignificantBits();
-      assertEquals("203.0.113." + number, json.get("remoteAddress").getAsString());
+      assertEquals("203.0.113." + number, json.get(REMOTE_ADDRESS_FIELD).getAsString());
       if (number % 2 == 0) {
-        assertEquals("reader" + number, json.get("actorUsername").getAsString());
-        assertEquals("ADMIN", json.get("actorRole").getAsString());
+        assertEquals(READER_NAME + number, json.get(ACTOR_USERNAME_FIELD).getAsString());
+        assertEquals("ADMIN", json.get(ACTOR_ROLE_FIELD).getAsString());
         assertEquals(Level.INFO, entry.level());
       } else {
-        assertFalse(json.has("actorUsername"));
-        assertEquals(number, json.getAsJsonObject("details").get("retryAfterSeconds").getAsLong());
+        assertFalse(json.has(ACTOR_USERNAME_FIELD));
+        assertEquals(
+            number, json.getAsJsonObject(DETAILS_FIELD).get(RETRY_SECONDS_FIELD).getAsLong());
         assertEquals(Level.WARNING, entry.level());
       }
       assertFalse(entry.text().contains("ab".repeat(32)));
