@@ -1,0 +1,190 @@
+{
+  "actualExit": 0,
+  "allMainAndOtherInputsPreserved": true,
+  "allOriginalGuardAndDeadlineTokensRestored": true,
+  "allOriginalOracleTokensRestored": true,
+  "coverage": null,
+  "effortPercent": null,
+  "externalActions": 0,
+  "invocation": {
+    "actualPythonCommand": [
+      "/usr/bin/python3",
+      "-B",
+      "tools/quality/pg11612_db_pool_binding_literal_source_post.py"
+    ],
+    "arbitraryArgumentsRecorded": false,
+    "entrypointPath": "tools/quality/pg11612_db_pool_binding_literal_source_post.py",
+    "entrypointSha256": "6b890a98fbee2356a271d59f75b20765d4016f3eb743776be55defa4ff7ea977",
+    "helperPath": "tools/quality/host_tool_invocation.py",
+    "helperSha256": "85d616a3db4ff47f4c95ae2e0dd57954bc2b09f28b8f2a685b986e5621545c46",
+    "libraryPath": "tools/quality/pg11612_db_pool_binding_literal_source_post.py",
+    "librarySha256": "6b890a98fbee2356a271d59f75b20765d4016f3eb743776be55defa4ff7ea977",
+    "loadedProjectPythonSources": {
+      "tools/quality/classfile_code_metadata.py": "2227e1e8df1ff91b606f094c7ee64366023273ca740d4d47126ed0928190e2f0",
+      "tools/quality/g07_host_class_provenance_inputs.py": "a676cb3e4145177c3c243722d737592ce7d44c3f29cfe4f670662ef7651f046b",
+      "tools/quality/host_tool_invocation.py": "85d616a3db4ff47f4c95ae2e0dd57954bc2b09f28b8f2a685b986e5621545c46",
+      "tools/quality/pg10130_uid_oracle_preflight.py": "e80cb1d6d45d4e4c0cdb3cb792e0638119d936403de5c3e141429d338485758a",
+      "tools/quality/pg10332_result_profile_oracle_plan.py": "82c9b4f57dd517c1dbee639dbf4955c316beb89216cb9a8a66e78e0b9a322ad4",
+      "tools/quality/pg10339_result_profile_oracle_post_v2.py": "42f86287f5236d2ef1a2e10f54f5b0634e799a4e866b15eaf6738336a4ebabb0",
+      "tools/quality/pg10392_role_literal_plan.py": "e1af98abd59175d867d29b07a73d7b2e4c7112754603d1805ec0bfc4d9465ce8",
+      "tools/quality/pg10398_role_view_preflight.py": "31709d50a345f3e0843fa62ae0b4c6849885503eb3d81555b6bcc9605b486d56",
+      "tools/quality/pg11104_web_pure_value_source_post.py": "2713a232d4143cf94c39b865936368707d115c19649a469de35dfbd22ad70967",
+      "tools/quality/pg11208_web_supplied_metric_fixture_source_post.py": "a5c338662163cc2ce1e95606e62e1ed86d7ce276e5e2c001e0ff67cd8eca0199",
+      "tools/quality/pg11612_db_pool_binding_literal_source_post.py": "6b890a98fbee2356a271d59f75b20765d4016f3eb743776be55defa4ff7ea977",
+      "tools/quality/pg9906_user_query_oracle_source_post.py": "4f9bdaa17eea78a720c0f25b8af906f3f045fda590c8fea2a8868229403a98fa",
+      "tools/quality/pg9978_plain_core_quality_post.py": "c99cc753c6335c9f41e3eafe6a97c17521503739ba2cf80659b542a445dd48fa",
+      "tools/quality/public_java_digest_provenance.py": "dd47f8735a61ce849995633c3290a6ad047842ef3263829ce359db413778f7a0"
+    },
+    "provenance": "OBSERVED_SYS_ARGV_AND_ORIG_ARGV_NOT_RECONSTRUCTED"
+  },
+  "metadataNegativeVectors": 46,
+  "newAccepted": 0,
+  "originalMethods": 30,
+  "planManifestSha256": "7c5ba5d7f286c28df61862de2b08cf15355846f1622d8d45803347d22957b2ae",
+  "productTestsExecuted": 0,
+  "referencesReplaced": 132,
+  "sourceBefore": "7f035ccfe89c46e8f4fae52099b1c0e4e890e66b",
+  "sourceChanges": [
+    {
+      "beforeSha256": "1bd3e2a86aa05602282020681bce2ba80b536d30196e3ebda5c19285d54ee38f",
+      "constants": [
+        {
+          "id": "PMD-01829",
+          "literal": "\"active\"",
+          "name": "ACTIVE_STATE",
+          "references": 10
+        },
+        {
+          "id": "PMD-01830",
+          "literal": "\"nk_db_pool_connections\"",
+          "name": "POOL_METRIC_NAME",
+          "references": 4
+        },
+        {
+          "id": "PMD-01831",
+          "literal": "\"service\"",
+          "name": "SERVICE_TAG",
+          "references": 4
+        },
+        {
+          "id": "PMD-01832",
+          "literal": "\"API\"",
+          "name": "SERVICE_VALUE",
+          "references": 4
+        },
+        {
+          "id": "PMD-01833",
+          "literal": "\"state\"",
+          "name": "STATE_TAG",
+          "references": 4
+        },
+        {
+          "id": "PMD-01834",
+          "literal": "\"DEBUG\"",
+          "name": "DEBUG_MODE",
+          "references": 17
+        },
+        {
+          "id": "PMD-01835",
+          "literal": "\"8.0\"",
+          "name": "EIGHT_VALUE",
+          "references": 4
+        },
+        {
+          "id": "PMD-01836",
+          "literal": "\"0.0\"",
+          "name": "ZERO_VALUE",
+          "references": 4
+        },
+        {
+          "id": "PMD-01837",
+          "literal": "\"pool\"",
+          "name": "POOL_SUPPLIER",
+          "references": 6
+        },
+        {
+          "id": "PMD-01838",
+          "literal": "\"config\"",
+          "name": "CONFIG_SUPPLIER",
+          "references": 6
+        }
+      ],
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiDbPoolMetricBindingTest.java",
+      "sha256": "bfbde4889e6d3624bffdcb37c1578fae72b867f2ad6fc8bec9db0cd3bee11c34"
+    },
+    {
+      "beforeSha256": "8c2b917f42e2d48bcdb85e5377fad791f135871a4960cd2c97ac553b7cca77fb",
+      "constants": [
+        {
+          "id": "PMD-08298",
+          "literal": "\"active\"",
+          "name": "ACTIVE_STATE",
+          "references": 10
+        },
+        {
+          "id": "PMD-08299",
+          "literal": "\"nk_db_pool_connections\"",
+          "name": "POOL_METRIC_NAME",
+          "references": 4
+        },
+        {
+          "id": "PMD-08300",
+          "literal": "\"service\"",
+          "name": "SERVICE_TAG",
+          "references": 4
+        },
+        {
+          "id": "PMD-08301",
+          "literal": "\"WEB\"",
+          "name": "SERVICE_VALUE",
+          "references": 4
+        },
+        {
+          "id": "PMD-08302",
+          "literal": "\"state\"",
+          "name": "STATE_TAG",
+          "references": 4
+        },
+        {
+          "id": "PMD-08303",
+          "literal": "\"DEBUG\"",
+          "name": "DEBUG_MODE",
+          "references": 17
+        },
+        {
+          "id": "PMD-08304",
+          "literal": "\"1.0\"",
+          "name": "ONE_VALUE",
+          "references": 4
+        },
+        {
+          "id": "PMD-08305",
+          "literal": "\"0.0\"",
+          "name": "ZERO_VALUE",
+          "references": 6
+        },
+        {
+          "id": "PMD-08306",
+          "literal": "\"2.0\"",
+          "name": "TWO_VALUE",
+          "references": 4
+        },
+        {
+          "id": "PMD-08307",
+          "literal": "\"pool\"",
+          "name": "POOL_SUPPLIER",
+          "references": 6
+        },
+        {
+          "id": "PMD-08308",
+          "literal": "\"config\"",
+          "name": "CONFIG_SUPPLIER",
+          "references": 6
+        }
+      ],
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebDbPoolMetricBindingTest.java",
+      "sha256": "b42dbb398244483e31ce625a75fb16f09a880c59bae62f75bda38ad80b73b558"
+    }
+  ],
+  "stringConstants": 21
+}
