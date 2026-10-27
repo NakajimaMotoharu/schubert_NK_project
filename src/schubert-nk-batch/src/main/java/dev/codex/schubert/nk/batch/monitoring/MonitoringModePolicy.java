@@ -32,14 +32,14 @@ public enum MonitoringModePolicy {
 
   private static final String DRIFT_CODE = "CONFIG_DRIFT";
 
-  private final boolean detailedMetricsEnabled;
-  private final int retentionDays;
-  private final long retentionBytes;
+  private final boolean configuredDetailMetrics;
+  private final int configuredRetentionDays;
+  private final long configuredRetentionBytes;
 
   MonitoringModePolicy(boolean detailedMetricsEnabled, int retentionDays, long retentionBytes) {
-    this.detailedMetricsEnabled = detailedMetricsEnabled;
-    this.retentionDays = retentionDays;
-    this.retentionBytes = retentionBytes;
+    this.configuredDetailMetrics = detailedMetricsEnabled;
+    this.configuredRetentionDays = retentionDays;
+    this.configuredRetentionBytes = retentionBytes;
   }
 
   /** Strict external value; malformed values are never echoed into a diagnostic. */
@@ -53,16 +53,16 @@ public enum MonitoringModePolicy {
   }
 
   public boolean detailedMetricsEnabled() {
-    return detailedMetricsEnabled;
+    return configuredDetailMetrics;
   }
 
   public int retentionDays() {
-    return retentionDays;
+    return configuredRetentionDays;
   }
 
   /** Decimal GB, not GiB. Zero disables only detailed metric retention. */
   public long retentionBytes() {
-    return retentionBytes;
+    return configuredRetentionBytes;
   }
 
   /**
@@ -75,7 +75,7 @@ public enum MonitoringModePolicy {
     if (!snapshot.keySet().equals(EnumSet.allOf(DetailService.class)))
       throw new IllegalStateException(DRIFT_CODE);
     for (boolean enabled : snapshot.values()) {
-      if (enabled != detailedMetricsEnabled) throw new IllegalStateException(DRIFT_CODE);
+      if (enabled != configuredDetailMetrics) throw new IllegalStateException(DRIFT_CODE);
     }
   }
 
@@ -84,7 +84,8 @@ public enum MonitoringModePolicy {
     Objects.requireNonNull(observed, "retention configuration observation");
     if (observed.isEmpty()) throw new IllegalStateException(DRIFT_CODE);
     var configuration = observed.orElseThrow();
-    if (configuration.days() != retentionDays || configuration.bytes() != retentionBytes)
+    if (configuration.days() != configuredRetentionDays
+        || configuration.bytes() != configuredRetentionBytes)
       throw new IllegalStateException(DRIFT_CODE);
   }
 }
