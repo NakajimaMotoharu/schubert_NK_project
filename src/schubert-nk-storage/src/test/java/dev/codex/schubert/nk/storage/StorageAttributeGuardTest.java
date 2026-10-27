@@ -21,6 +21,12 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** Independent Unix mode/attribute matrix and real synthetic files. PT-SCN-008-A01..A03. */
 class StorageAttributeGuardTest {
+  private static final int TRANSFER_LIMIT_BYTES = 48_000_000;
+  private static final String SIZE_FIELD = "size";
+  private static final String OWNER_FIELD = "owner";
+  private static final String GROUP_FIELD = "group";
+  private static final String MODE_FIELD = "mode";
+  private static final String LINK_COUNT_FIELD = "nlink";
   private static final StorageIdentity IDENTITY =
       new StorageIdentity("schubert-api", "schubert-web");
   @TempDir Path root;
@@ -29,10 +35,10 @@ class StorageAttributeGuardTest {
   void med020LargeAssetSizesKeepTransferLimitAndUnixGuards() throws Exception {
     Map<String, Object> attrs = file();
     for (long size : new long[] {1, 48_000_000, 48_000_001, 999_999_999_999L, Long.MAX_VALUE}) {
-      attrs.put("size", size);
+      attrs.put(SIZE_FIELD, size);
       StorageAttributeGuard.existingFile(attrs, IDENTITY, size);
       reject(() -> StorageAttributeGuard.existingFile(attrs, IDENTITY, size == 1 ? 2 : 1));
-      if (size > 48_000_000) {
+      if (size > TRANSFER_LIMIT_BYTES) {
         assertThrows(
             IllegalArgumentException.class,
             () -> StorageAttributeGuard.file(attrs, IDENTITY, size));
@@ -47,7 +53,7 @@ class StorageAttributeGuardTest {
         NullPointerException.class, () -> StorageAttributeGuard.existingFile(null, IDENTITY, 3));
     assertThrows(
         NullPointerException.class, () -> StorageAttributeGuard.existingFile(attrs, null, 3));
-    for (String key : List.of("owner", "group", "mode", "nlink", "size")) {
+    for (String key : List.of(OWNER_FIELD, GROUP_FIELD, MODE_FIELD, LINK_COUNT_FIELD, SIZE_FIELD)) {
       Map<String, Object> invalid = file();
       invalid.remove(key);
       reject(() -> StorageAttributeGuard.existingFile(invalid, IDENTITY, 3));
@@ -58,18 +64,24 @@ class StorageAttributeGuardTest {
     }
     // Typed but incorrect fields must not pass the shared guard either.
     Map<String, Object> wrong = file();
-    wrong.put("owner", (UserPrincipal) () -> "other");
+    wrong.put(OWNER_FIELD, (UserPrincipal) () -> "other");
     reject(() -> StorageAttributeGuard.existingFile(wrong, IDENTITY, 3));
-    wrong.put("owner", (UserPrincipal) IDENTITY::owner);
-    wrong.put("group", (GroupPrincipal) () -> "other");
+    wrong.put(OWNER_FIELD, (UserPrincipal) IDENTITY::owner);
+    wrong.put(GROUP_FIELD, (GroupPrincipal) () -> "other");
     reject(() -> StorageAttributeGuard.existingFile(wrong, IDENTITY, 3));
-    wrong.put("group", (GroupPrincipal) IDENTITY::group);
-    for (int mode : new int[] {040640, 0120640, 0100644, 0104640}) {
-      wrong.put("mode", mode);
+    wrong.put(GROUP_FIELD, (GroupPrincipal) IDENTITY::group);
+    for (int mode :
+        new int[] {
+          0b100_000_110_100_000,
+          0b001_010_000_110_100_000,
+          0b001_000_000_110_100_100,
+          0b001_000_100_110_100_000
+        }) {
+      wrong.put(MODE_FIELD, mode);
       reject(() -> StorageAttributeGuard.existingFile(wrong, IDENTITY, 3));
     }
-    wrong.put("mode", 0100640);
-    wrong.put("nlink", 2);
+    wrong.put(MODE_FIELD, 0b001_000_000_110_100_000);
+    wrong.put(LINK_COUNT_FIELD, 2);
     reject(() -> StorageAttributeGuard.existingFile(wrong, IDENTITY, 3));
   }
 
@@ -77,15 +89,15 @@ class StorageAttributeGuardTest {
   void u01SizeAccountingIncludesEmptyPartialPartsButReadyRequiresWholeRecords() throws Exception {
     Map<String, Object> attrs = file();
     for (long size : new long[] {0, 1, 4799, 4800, 48_000_000}) {
-      attrs.put("size", size);
+      attrs.put(SIZE_FIELD, size);
       assertEquals(size, StorageAttributeGuard.transferSize(attrs, IDENTITY, false));
     }
     for (long size : new long[] {4800, 9600, 48_000_000}) {
-      attrs.put("size", size);
+      attrs.put(SIZE_FIELD, size);
       assertEquals(size, StorageAttributeGuard.transferSize(attrs, IDENTITY, true));
     }
     for (long size : new long[] {0, 1, 4799, 4801, 47_999_999}) {
-      attrs.put("size", size);
+      attrs.put(SIZE_FIELD, size);
       reject(() -> StorageAttributeGuard.transferSize(attrs, IDENTITY, true));
     }
   }
@@ -98,13 +110,13 @@ class StorageAttributeGuardTest {
     assertThrows(
         NullPointerException.class, () -> StorageAttributeGuard.transferSize(file(), null, false));
     Map<String, Object> attrs = file();
-    attrs.remove("size");
+    attrs.remove(SIZE_FIELD);
     reject(() -> StorageAttributeGuard.transferSize(attrs, IDENTITY, false));
     for (Object invalid : new Object[] {null, "0", 0, -1L, 48_000_001L, Long.MAX_VALUE}) {
-      attrs.put("size", invalid);
+      attrs.put(SIZE_FIELD, invalid);
       reject(() -> StorageAttributeGuard.transferSize(attrs, IDENTITY, false));
     }
-    for (String name : List.of("owner", "group", "mode", "nlink")) {
+    for (String name : List.of(OWNER_FIELD, GROUP_FIELD, MODE_FIELD, LINK_COUNT_FIELD)) {
       Map<String, Object> invalid = file();
       invalid.remove(name);
       reject(() -> StorageAttributeGuard.transferSize(invalid, IDENTITY, false));
@@ -121,11 +133,11 @@ class StorageAttributeGuardTest {
     }
     for (String name :
         List.of("", " ", "Root", "1service", "a".repeat(33), "a/b", "a\0b", "a\nb", "利用者")) {
-      assertThrows(IllegalArgumentException.class, () -> new StorageIdentity(name, "group"));
-      assertThrows(IllegalArgumentException.class, () -> new StorageIdentity("owner", name));
+      assertThrows(IllegalArgumentException.class, () -> new StorageIdentity(name, GROUP_FIELD));
+      assertThrows(IllegalArgumentException.class, () -> new StorageIdentity(OWNER_FIELD, name));
     }
-    assertThrows(NullPointerException.class, () -> new StorageIdentity(null, "group"));
-    assertThrows(NullPointerException.class, () -> new StorageIdentity("owner", null));
+    assertThrows(NullPointerException.class, () -> new StorageIdentity(null, GROUP_FIELD));
+    assertThrows(NullPointerException.class, () -> new StorageIdentity(OWNER_FIELD, null));
     assertThrows(NullPointerException.class, () -> StorageAttributeGuard.directory(null, IDENTITY));
     assertThrows(
         NullPointerException.class, () -> StorageAttributeGuard.directory(directory(), null));
@@ -136,7 +148,7 @@ class StorageAttributeGuardTest {
   @Test
   void a02DirectoryTypePermissionsOwnershipAndMissingAttributesFailClosed() throws Exception {
     StorageAttributeGuard.directory(directory(), IDENTITY);
-    for (String name : List.of("owner", "group", "mode", "nlink")) {
+    for (String name : List.of(OWNER_FIELD, GROUP_FIELD, MODE_FIELD, LINK_COUNT_FIELD)) {
       Map<String, Object> missing = directory();
       missing.remove(name);
       reject(() -> StorageAttributeGuard.directory(missing, IDENTITY));
@@ -146,23 +158,33 @@ class StorageAttributeGuardTest {
       reject(() -> StorageAttributeGuard.directory(missing, IDENTITY));
     }
     Map<String, Object> attrs = directory();
-    attrs.put("owner", (UserPrincipal) () -> "different-owner");
+    attrs.put(OWNER_FIELD, (UserPrincipal) () -> "different-owner");
     reject(() -> StorageAttributeGuard.directory(attrs, IDENTITY));
-    attrs.put("owner", (UserPrincipal) IDENTITY::owner);
-    attrs.put("group", (GroupPrincipal) () -> "different-group");
+    attrs.put(OWNER_FIELD, (UserPrincipal) IDENTITY::owner);
+    attrs.put(GROUP_FIELD, (GroupPrincipal) () -> "different-group");
     reject(() -> StorageAttributeGuard.directory(attrs, IDENTITY));
-    attrs.put("group", (GroupPrincipal) IDENTITY::group);
-    for (int mode : new int[] {040700, 040755, 042750, 041750, 0100750, 0120750, 0140750, 0}) {
-      attrs.put("mode", mode);
+    attrs.put(GROUP_FIELD, (GroupPrincipal) IDENTITY::group);
+    for (int mode :
+        new int[] {
+          0b100_000_111_000_000,
+          0b100_000_111_101_101,
+          0b100_010_111_101_000,
+          0b100_001_111_101_000,
+          0b001_000_000_111_101_000,
+          0b001_010_000_111_101_000,
+          0b001_100_000_111_101_000,
+          0
+        }) {
+      attrs.put(MODE_FIELD, mode);
       reject(() -> StorageAttributeGuard.directory(attrs, IDENTITY));
     }
-    attrs.put("mode", 040750);
+    attrs.put(MODE_FIELD, 0b100_000_111_101_000);
     for (int count : new int[] {0, -1}) {
-      attrs.put("nlink", count);
+      attrs.put(LINK_COUNT_FIELD, count);
       reject(() -> StorageAttributeGuard.directory(attrs, IDENTITY));
     }
     for (int count : new int[] {1, 2, 10002}) {
-      attrs.put("nlink", count);
+      attrs.put(LINK_COUNT_FIELD, count);
       StorageAttributeGuard.directory(attrs, IDENTITY);
     }
   }
@@ -176,31 +198,41 @@ class StorageAttributeGuardTest {
           IllegalArgumentException.class, () -> StorageAttributeGuard.file(attrs, IDENTITY, size));
     }
     for (long size : new long[] {1, 3, 48_000_000L}) {
-      attrs.put("size", size);
+      attrs.put(SIZE_FIELD, size);
       StorageAttributeGuard.file(attrs, IDENTITY, size);
       reject(() -> StorageAttributeGuard.file(attrs, IDENTITY, size == 1 ? 2 : 1));
     }
-    attrs.put("size", 3); // Integer is not the Linux long size contract.
+    attrs.put(SIZE_FIELD, 3); // Integer is not the Linux long size contract.
     reject(() -> StorageAttributeGuard.file(attrs, IDENTITY, 3));
-    attrs.remove("size");
+    attrs.remove(SIZE_FIELD);
     reject(() -> StorageAttributeGuard.file(attrs, IDENTITY, 3));
-    attrs.put("size", null);
+    attrs.put(SIZE_FIELD, null);
     reject(() -> StorageAttributeGuard.file(attrs, IDENTITY, 3));
-    attrs.put("size", 3L);
+    attrs.put(SIZE_FIELD, 3L);
     for (int links : new int[] {0, -1, 2, Integer.MAX_VALUE}) {
-      attrs.put("nlink", links);
+      attrs.put(LINK_COUNT_FIELD, links);
       reject(() -> StorageAttributeGuard.file(attrs, IDENTITY, 3));
     }
-    attrs.put("nlink", 1);
+    attrs.put(LINK_COUNT_FIELD, 1);
     for (int mode :
         new int[] {
-          0100600, 0100644, 0104640, 0102640, 0101640, 040640, 0120640, 0140640, 010640, 060640,
-          020640, 0
+          0b001_000_000_110_000_000,
+          0b001_000_000_110_100_100,
+          0b001_000_100_110_100_000,
+          0b001_000_010_110_100_000,
+          0b001_000_001_110_100_000,
+          0b100_000_110_100_000,
+          0b001_010_000_110_100_000,
+          0b001_100_000_110_100_000,
+          0b001_000_110_100_000,
+          0b110_000_110_100_000,
+          0b010_000_110_100_000,
+          0
         }) {
-      attrs.put("mode", mode);
+      attrs.put(MODE_FIELD, mode);
       reject(() -> StorageAttributeGuard.file(attrs, IDENTITY, 3));
     }
-    attrs.put("mode", 0100640);
+    attrs.put(MODE_FIELD, 0b001_000_000_110_100_000);
     StorageAttributeGuard.file(attrs, IDENTITY, 3);
   }
 
@@ -229,7 +261,7 @@ class StorageAttributeGuardTest {
     Path link = Files.createSymbolicLink(root.resolve("symlink.ready"), regular);
     reject(() -> StorageAttributeGuard.file(attributes(link), expected, 3));
     Path hard = Files.createLink(root.resolve("hard.ready"), regular);
-    assertEquals(2, attributes(regular).get("nlink"));
+    assertEquals(2, attributes(regular).get(LINK_COUNT_FIELD));
     reject(() -> StorageAttributeGuard.file(attributes(regular), expected, 3));
     reject(() -> StorageAttributeGuard.file(attributes(hard), expected, 3));
     assertArrayEquals(new byte[] {1, 2, 3}, Files.readAllBytes(regular));
@@ -245,18 +277,18 @@ class StorageAttributeGuardTest {
 
   private static Map<String, Object> directory() {
     Map<String, Object> result = new HashMap<>();
-    result.put("owner", (UserPrincipal) IDENTITY::owner);
-    result.put("group", (GroupPrincipal) IDENTITY::group);
-    result.put("mode", 040750);
-    result.put("nlink", 2);
+    result.put(OWNER_FIELD, (UserPrincipal) IDENTITY::owner);
+    result.put(GROUP_FIELD, (GroupPrincipal) IDENTITY::group);
+    result.put(MODE_FIELD, 0b100_000_111_101_000);
+    result.put(LINK_COUNT_FIELD, 2);
     return result;
   }
 
   private static Map<String, Object> file() {
     Map<String, Object> result = directory();
-    result.put("mode", 0100640);
-    result.put("nlink", 1);
-    result.put("size", 3L);
+    result.put(MODE_FIELD, 0b001_000_000_110_100_000);
+    result.put(LINK_COUNT_FIELD, 1);
+    result.put(SIZE_FIELD, 3L);
     return result;
   }
 
