@@ -1,0 +1,221 @@
+{
+  "actualExit": 0,
+  "allMainAndOtherInputsPreserved": true,
+  "allOriginalGuardAndDeadlineTokensRestored": true,
+  "allOriginalOracleTokensRestored": true,
+  "comparisonReferences": 8,
+  "coverage": null,
+  "effortPercent": null,
+  "externalActions": 0,
+  "integerConstants": 2,
+  "invocation": {
+    "actualPythonCommand": [
+      "/usr/bin/python3",
+      "-B",
+      "tools/quality/pg11642_db_pool_binding_fatal_case_source_post.py"
+    ],
+    "arbitraryArgumentsRecorded": false,
+    "entrypointPath": "tools/quality/pg11642_db_pool_binding_fatal_case_source_post.py",
+    "entrypointSha256": "99502d9307e263fbac09c71b001b0eca31acb8c4a7393fadf2b5ffd7a052e2c6",
+    "helperPath": "tools/quality/host_tool_invocation.py",
+    "helperSha256": "85d616a3db4ff47f4c95ae2e0dd57954bc2b09f28b8f2a685b986e5621545c46",
+    "libraryPath": "tools/quality/pg11642_db_pool_binding_fatal_case_source_post.py",
+    "librarySha256": "99502d9307e263fbac09c71b001b0eca31acb8c4a7393fadf2b5ffd7a052e2c6",
+    "loadedProjectPythonSources": {
+      "tools/quality/classfile_code_metadata.py": "2227e1e8df1ff91b606f094c7ee64366023273ca740d4d47126ed0928190e2f0",
+      "tools/quality/g07_host_class_provenance_inputs.py": "a676cb3e4145177c3c243722d737592ce7d44c3f29cfe4f670662ef7651f046b",
+      "tools/quality/host_tool_invocation.py": "85d616a3db4ff47f4c95ae2e0dd57954bc2b09f28b8f2a685b986e5621545c46",
+      "tools/quality/pg10130_uid_oracle_preflight.py": "e80cb1d6d45d4e4c0cdb3cb792e0638119d936403de5c3e141429d338485758a",
+      "tools/quality/pg10332_result_profile_oracle_plan.py": "82c9b4f57dd517c1dbee639dbf4955c316beb89216cb9a8a66e78e0b9a322ad4",
+      "tools/quality/pg10339_result_profile_oracle_post_v2.py": "42f86287f5236d2ef1a2e10f54f5b0634e799a4e866b15eaf6738336a4ebabb0",
+      "tools/quality/pg10392_role_literal_plan.py": "e1af98abd59175d867d29b07a73d7b2e4c7112754603d1805ec0bfc4d9465ce8",
+      "tools/quality/pg10398_role_view_preflight.py": "31709d50a345f3e0843fa62ae0b4c6849885503eb3d81555b6bcc9605b486d56",
+      "tools/quality/pg11104_web_pure_value_source_post.py": "2713a232d4143cf94c39b865936368707d115c19649a469de35dfbd22ad70967",
+      "tools/quality/pg11642_db_pool_binding_fatal_case_source_post.py": "99502d9307e263fbac09c71b001b0eca31acb8c4a7393fadf2b5ffd7a052e2c6",
+      "tools/quality/pg9906_user_query_oracle_source_post.py": "4f9bdaa17eea78a720c0f25b8af906f3f045fda590c8fea2a8868229403a98fa",
+      "tools/quality/pg9978_plain_core_quality_post.py": "c99cc753c6335c9f41e3eafe6a97c17521503739ba2cf80659b542a445dd48fa",
+      "tools/quality/public_java_digest_provenance.py": "dd47f8735a61ce849995633c3290a6ad047842ef3263829ce359db413778f7a0"
+    },
+    "provenance": "OBSERVED_SYS_ARGV_AND_ORIG_ARGV_NOT_RECONSTRUCTED"
+  },
+  "metadataNegativeVectors": 16,
+  "newAccepted": 0,
+  "originalMethods": 30,
+  "planManifestSha256": "ba5be4b11c36cf931ed494b6d5765b3c64168f2781cc6fbebfe0e03fed15c86a",
+  "productTestsExecuted": 0,
+  "sourceBefore": "b2790ba78d8876c058dfcebf46e25805ac0bf56e",
+  "sourceChanges": [
+    {
+      "beforeSha256": "bfbde4889e6d3624bffdcb37c1578fae72b867f2ad6fc8bec9db0cd3bee11c34",
+      "literal": "1",
+      "name": "FATAL_SUPPLIER_CASE",
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiDbPoolMetricBindingTest.java",
+      "points": [
+        {
+          "attributes": {
+            "begincolumn": "33",
+            "beginline": "376",
+            "class": "ApiDbPoolMetricBindingTest",
+            "endcolumn": "34",
+            "endline": "376",
+            "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidliteralsinifcondition",
+            "method": "apipoolb014PoolSupplierFailureOrNullRetainsPartialOwnerAndNeverReadsConfiguration",
+            "package": "dev.codex.schubert.nk.api.monitoring",
+            "priority": "3",
+            "rule": "AvoidLiteralsInIfCondition",
+            "ruleset": "Error Prone"
+          },
+          "id": "PMD-01839",
+          "literal": "1",
+          "name": "FATAL_SUPPLIER_CASE",
+          "point": 13399
+        },
+        {
+          "attributes": {
+            "begincolumn": "30",
+            "beginline": "384",
+            "class": "ApiDbPoolMetricBindingTest",
+            "endcolumn": "31",
+            "endline": "384",
+            "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidliteralsinifcondition",
+            "method": "apipoolb014PoolSupplierFailureOrNullRetainsPartialOwnerAndNeverReadsConfiguration",
+            "package": "dev.codex.schubert.nk.api.monitoring",
+            "priority": "3",
+            "rule": "AvoidLiteralsInIfCondition",
+            "ruleset": "Error Prone"
+          },
+          "id": "PMD-01840",
+          "literal": "1",
+          "name": "FATAL_SUPPLIER_CASE",
+          "point": 13733
+        },
+        {
+          "attributes": {
+            "begincolumn": "33",
+            "beginline": "415",
+            "class": "ApiDbPoolMetricBindingTest",
+            "endcolumn": "34",
+            "endline": "415",
+            "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidliteralsinifcondition",
+            "method": "apipoolb015ConfigurationSupplierFailureOrNullPreservesPrimaryAndNeverReadsStatistics",
+            "package": "dev.codex.schubert.nk.api.monitoring",
+            "priority": "3",
+            "rule": "AvoidLiteralsInIfCondition",
+            "ruleset": "Error Prone"
+          },
+          "id": "PMD-01841",
+          "literal": "1",
+          "name": "FATAL_SUPPLIER_CASE",
+          "point": 15031
+        },
+        {
+          "attributes": {
+            "begincolumn": "30",
+            "beginline": "420",
+            "class": "ApiDbPoolMetricBindingTest",
+            "endcolumn": "31",
+            "endline": "420",
+            "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidliteralsinifcondition",
+            "method": "apipoolb015ConfigurationSupplierFailureOrNullPreservesPrimaryAndNeverReadsStatistics",
+            "package": "dev.codex.schubert.nk.api.monitoring",
+            "priority": "3",
+            "rule": "AvoidLiteralsInIfCondition",
+            "ruleset": "Error Prone"
+          },
+          "id": "PMD-01842",
+          "literal": "1",
+          "name": "FATAL_SUPPLIER_CASE",
+          "point": 15250
+        }
+      ],
+      "references": 4,
+      "sha256": "a9d17cbc75494262f879227f93345fedefe08da3a531bbdc1b320337c3e618fc"
+    },
+    {
+      "beforeSha256": "b42dbb398244483e31ce625a75fb16f09a880c59bae62f75bda38ad80b73b558",
+      "literal": "1",
+      "name": "FATAL_SUPPLIER_CASE",
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebDbPoolMetricBindingTest.java",
+      "points": [
+        {
+          "attributes": {
+            "begincolumn": "33",
+            "beginline": "377",
+            "class": "WebDbPoolMetricBindingTest",
+            "endcolumn": "34",
+            "endline": "377",
+            "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidliteralsinifcondition",
+            "method": "webpoolb014PoolSupplierFailureOrNullRetainsPartialOwnerAndNeverReadsConfiguration",
+            "package": "dev.codex.schubert.nk.web.monitoring",
+            "priority": "3",
+            "rule": "AvoidLiteralsInIfCondition",
+            "ruleset": "Error Prone"
+          },
+          "id": "PMD-08309",
+          "literal": "1",
+          "name": "FATAL_SUPPLIER_CASE",
+          "point": 13467
+        },
+        {
+          "attributes": {
+            "begincolumn": "30",
+            "beginline": "385",
+            "class": "WebDbPoolMetricBindingTest",
+            "endcolumn": "31",
+            "endline": "385",
+            "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidliteralsinifcondition",
+            "method": "webpoolb014PoolSupplierFailureOrNullRetainsPartialOwnerAndNeverReadsConfiguration",
+            "package": "dev.codex.schubert.nk.web.monitoring",
+            "priority": "3",
+            "rule": "AvoidLiteralsInIfCondition",
+            "ruleset": "Error Prone"
+          },
+          "id": "PMD-08310",
+          "literal": "1",
+          "name": "FATAL_SUPPLIER_CASE",
+          "point": 13801
+        },
+        {
+          "attributes": {
+            "begincolumn": "33",
+            "beginline": "416",
+            "class": "WebDbPoolMetricBindingTest",
+            "endcolumn": "34",
+            "endline": "416",
+            "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidliteralsinifcondition",
+            "method": "webpoolb015ConfigurationSupplierFailureOrNullPreservesPrimaryAndNeverReadsStatistics",
+            "package": "dev.codex.schubert.nk.web.monitoring",
+            "priority": "3",
+            "rule": "AvoidLiteralsInIfCondition",
+            "ruleset": "Error Prone"
+          },
+          "id": "PMD-08311",
+          "literal": "1",
+          "name": "FATAL_SUPPLIER_CASE",
+          "point": 15099
+        },
+        {
+          "attributes": {
+            "begincolumn": "30",
+            "beginline": "421",
+            "class": "WebDbPoolMetricBindingTest",
+            "endcolumn": "31",
+            "endline": "421",
+            "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidliteralsinifcondition",
+            "method": "webpoolb015ConfigurationSupplierFailureOrNullPreservesPrimaryAndNeverReadsStatistics",
+            "package": "dev.codex.schubert.nk.web.monitoring",
+            "priority": "3",
+            "rule": "AvoidLiteralsInIfCondition",
+            "ruleset": "Error Prone"
+          },
+          "id": "PMD-08312",
+          "literal": "1",
+          "name": "FATAL_SUPPLIER_CASE",
+          "point": 15318
+        }
+      ],
+      "references": 4,
+      "sha256": "08c7e9360f37ae80c349c72b1171dc362eba8ec692e76cfed84fbb7eeccdecbf"
+    }
+  ]
+}
