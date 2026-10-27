@@ -22,20 +22,28 @@ import org.junit.jupiter.api.Test;
 
 /** GAUGEENC001..016/1761: literal independent values and wire text, no reflection. */
 class WebGaugeMetricExporterTest {
+  private static final String STATE_LABEL = "state";
+  private static final String SERVICE_LABEL = "service";
+  private static final String ACTIVE_STATE = "active";
   private static final String NAME = "nk_db_pool_connections";
-  private static final Map<String, Set<String>> SPACE = Map.of(NAME, Set.of("state", "service"));
+  private static final Map<String, Set<String>> SPACE =
+      Map.of(NAME, Set.of(STATE_LABEL, SERVICE_LABEL));
   private final WebGaugeMetricExporter exporter = new WebGaugeMetricExporter();
 
   private static class FixedGauge implements Gauge {
-    final double value;
+    final double suppliedReading;
     final Meter.Id id;
     final AtomicInteger reads = new AtomicInteger();
 
     FixedGauge(double value, String state) {
-      this.value = value;
+      this.suppliedReading = value;
       id =
           new Meter.Id(
-              NAME, Tags.of("state", state, "service", "WEB"), "connections", "", Meter.Type.GAUGE);
+              NAME,
+              Tags.of(STATE_LABEL, state, SERVICE_LABEL, "WEB"),
+              "connections",
+              "",
+              Meter.Type.GAUGE);
     }
 
     public Meter.Id getId() {
@@ -44,7 +52,7 @@ class WebGaugeMetricExporterTest {
 
     public double value() {
       reads.incrementAndGet();
-      return value;
+      return suppliedReading;
     }
   }
 
@@ -63,7 +71,7 @@ class WebGaugeMetricExporterTest {
   private static class OrdinaryRegistry extends SimpleMeterRegistry implements AutoCloseable {}
 
   private String text(double value) {
-    try (var source = new Registry(new FixedGauge(value, "active"))) {
+    try (var source = new Registry(new FixedGauge(value, ACTIVE_STATE))) {
       return exporter.scrapeGauges(source, SPACE);
     }
   }
@@ -71,7 +79,8 @@ class WebGaugeMetricExporterTest {
   @Test
   void gaugeenc001LiteralGaugeNameAndFractionAreUnchanged() {
     assertEquals(
-        "# TYPE nk_db_pool_connections gauge\nnk_db_pool_connections{service=\"WEB\",state=\"active\"} 2.5\n",
+        "# TYPE nk_db_pool_connections gauge\n"
+            + "nk_db_pool_connections{service=\"WEB\",state=\"active\"} 2.5\n",
         text(2.5));
   }
 
@@ -94,7 +103,8 @@ class WebGaugeMetricExporterTest {
 
   @Test
   void gaugeenc004MultipleSeriesAndEscapingRetainMeaning() {
-    try (var source = new Registry(new FixedGauge(2, "active"), new FixedGauge(3, "a\"b\\c\nd"))) {
+    try (var source =
+        new Registry(new FixedGauge(2, ACTIVE_STATE), new FixedGauge(3, "a\"b\\c\nd"))) {
       String result = exporter.scrapeGauges(source, SPACE);
       assertEquals(3, result.lines().count());
       assertTrue(result.contains("state=\"a\\\"b\\\\c\\nd\""));
@@ -123,7 +133,7 @@ class WebGaugeMetricExporterTest {
   @Test
   void gaugeenc006NullContractsFailAtBoundary() {
     assertThrows(NullPointerException.class, () -> exporter.scrapeGauges(null, SPACE));
-    try (var source = new Registry(new FixedGauge(1, "active"))) {
+    try (var source = new Registry(new FixedGauge(1, ACTIVE_STATE))) {
       assertThrows(NullPointerException.class, () -> exporter.scrapeGauges(source, null));
       var invalid = new HashMap<String, Set<String>>();
       invalid.put(null, Set.of());
@@ -140,7 +150,7 @@ class WebGaugeMetricExporterTest {
 
   @Test
   void gaugeenc007InvalidNamesAndExactLabelSetsAreRejected() {
-    try (var source = new Registry(new FixedGauge(1, "active"))) {
+    try (var source = new Registry(new FixedGauge(1, ACTIVE_STATE))) {
       for (String name : List.of("nk_WRONG_seconds", "bad_total", "nk_BAD_total"))
         assertThrows(
             IllegalArgumentException.class,
@@ -149,8 +159,8 @@ class WebGaugeMetricExporterTest {
           List.of(
               Set.of("le"),
               Set.of("bad-key"),
-              Set.of("service"),
-              Set.of("service", "state", "extra")))
+              Set.of(SERVICE_LABEL),
+              Set.of(SERVICE_LABEL, STATE_LABEL, "extra")))
         assertThrows(
             IllegalArgumentException.class,
             () -> exporter.scrapeGauges(source, Map.of(NAME, keys)));
@@ -163,18 +173,20 @@ class WebGaugeMetricExporterTest {
         new Meter.Id(NAME, Tags.empty(), "", "", Meter.Type.GAUGE) {
           public List<Tag> getTags() {
             return List.of(
-                Tag.of("state", "active"), Tag.of("state", "idle"), Tag.of("service", "WEB"));
+                Tag.of(STATE_LABEL, ACTIVE_STATE),
+                Tag.of(STATE_LABEL, "idle"),
+                Tag.of(SERVICE_LABEL, "WEB"));
           }
         };
     var gauge =
-        new FixedGauge(1, "active") {
+        new FixedGauge(1, ACTIVE_STATE) {
           public Meter.Id getId() {
             return duplicatedId;
           }
         };
     assertSame(duplicatedId, gauge.getId());
     assertEquals(
-        List.of("state", "state", "service"),
+        List.of(STATE_LABEL, STATE_LABEL, SERVICE_LABEL),
         gauge.getId().getTags().stream().map(Tag::getKey).toList());
     try (var source = new Registry(gauge)) {
       assertThrows(IllegalArgumentException.class, () -> exporter.scrapeGauges(source, SPACE));
@@ -188,14 +200,14 @@ class WebGaugeMetricExporterTest {
       source.gauge("unselected", 42);
       assertEquals("", exporter.scrapeGauges(source, SPACE));
     }
-    try (var source = new Registry(new FixedGauge(1, "active"))) {
+    try (var source = new Registry(new FixedGauge(1, ACTIVE_STATE))) {
       assertEquals("", exporter.scrapeGauges(source, Map.of()));
     }
   }
 
   @Test
   void gaugeenc010BorrowedOwnerRemainsOpenAndClosedOwnerFails() {
-    var source = new Registry(new FixedGauge(1, "active"));
+    var source = new Registry(new FixedGauge(1, ACTIVE_STATE));
     try {
       exporter.scrapeGauges(source, SPACE);
       assertFalse(source.isClosed());
@@ -207,7 +219,7 @@ class WebGaugeMetricExporterTest {
 
   @Test
   void gaugeenc011ExactlyOneProviderRead() {
-    var gauge = new FixedGauge(7, "active");
+    var gauge = new FixedGauge(7, ACTIVE_STATE);
     try (var source = new Registry(gauge)) {
       assertTrue(exporter.scrapeGauges(source, SPACE).endsWith("} 7.0\n"));
       assertEquals(1, gauge.reads.get());
@@ -218,7 +230,7 @@ class WebGaugeMetricExporterTest {
   void gaugeenc012ProviderRuntimeFailureIdentityRetained() {
     var failure = new IllegalStateException("fixture");
     var gauge =
-        new FixedGauge(1, "active") {
+        new FixedGauge(1, ACTIVE_STATE) {
           public double value() {
             throw failure;
           }
@@ -235,7 +247,7 @@ class WebGaugeMetricExporterTest {
   void gaugeenc013ProviderErrorIsNotSuccess() {
     var failure = new AssertionError("fixture");
     var gauge =
-        new FixedGauge(1, "active") {
+        new FixedGauge(1, ACTIVE_STATE) {
           public double value() {
             throw failure;
           }
@@ -248,11 +260,11 @@ class WebGaugeMetricExporterTest {
 
   @Test
   void gaugeenc014NamespaceCopiesPrecedeProviderMutation() {
-    var keys = new HashSet<>(Set.of("state", "service"));
+    var keys = new HashSet<>(Set.of(STATE_LABEL, SERVICE_LABEL));
     var space = new HashMap<String, Set<String>>();
     space.put(NAME, keys);
     var gauge =
-        new FixedGauge(3, "active") {
+        new FixedGauge(3, ACTIVE_STATE) {
           public double value() {
             space.clear();
             keys.clear();
@@ -287,7 +299,7 @@ class WebGaugeMetricExporterTest {
             throw failure;
           }
         };
-    try (var source = new Registry(new FixedGauge(1, "active"))) {
+    try (var source = new Registry(new FixedGauge(1, ACTIVE_STATE))) {
       var actual =
           assertThrows(
               java.io.UncheckedIOException.class,
@@ -300,7 +312,7 @@ class WebGaugeMetricExporterTest {
 
   @Test
   void gaugeenc016InvalidConfigurationFailsBeforeProviderRead() {
-    var gauge = new FixedGauge(1, "active");
+    var gauge = new FixedGauge(1, ACTIVE_STATE);
     try (var source = new Registry(gauge)) {
       assertThrows(
           NullPointerException.class, () -> WebGaugeMetricExporter.encode(source, SPACE, null));

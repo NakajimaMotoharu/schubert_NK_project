@@ -26,8 +26,14 @@ import org.junit.jupiter.api.Test;
 
 /** TIMERENC001..016/1757: literal ns snapshots, independent wire values and no private access. */
 class WebDurationMetricExporterTest {
+  private static final String SERVICE_LABEL = "service";
+  private static final String ROUTE_LABEL = "route";
+  private static final String WEB_SERVICE = "WEB";
+  private static final String LOGIN_ROUTE = "/login";
+  private static final String INFINITE_BUCKET_TWO = "le=\"+Inf\"} 2\n";
   private static final String NAME = "nk_http_request_duration_seconds";
-  private static final Map<String, Set<String>> SPACE = Map.of(NAME, Set.of("service", "route"));
+  private static final Map<String, Set<String>> SPACE =
+      Map.of(NAME, Set.of(SERVICE_LABEL, ROUTE_LABEL));
   private final WebDurationMetricExporter exporter = new WebDurationMetricExporter();
 
   private static HistogramSnapshot snapshot(long count, double total, CountAtBucket... buckets) {
@@ -48,7 +54,11 @@ class WebDurationMetricExporterTest {
       this.snapshot = snapshot;
       id =
           new Meter.Id(
-              NAME, Tags.of("service", "WEB", "route", route), "seconds", "", Meter.Type.TIMER);
+              NAME,
+              Tags.of(SERVICE_LABEL, WEB_SERVICE, ROUTE_LABEL, route),
+              "seconds",
+              "",
+              Meter.Type.TIMER);
     }
 
     public Meter.Id getId() {
@@ -108,7 +118,7 @@ class WebDurationMetricExporterTest {
   private static class OrdinaryRegistry extends SimpleMeterRegistry implements AutoCloseable {}
 
   private String text(HistogramSnapshot snapshot) {
-    try (var source = new Registry(new FixedTimer(snapshot, "/login"))) {
+    try (var source = new Registry(new FixedTimer(snapshot, LOGIN_ROUTE))) {
       return exporter.scrapeTimers(source, SPACE);
     }
   }
@@ -123,7 +133,7 @@ class WebDurationMetricExporterTest {
     assertTrue(text.contains("# TYPE " + NAME + " histogram\n"));
     assertTrue(text.contains("le=\"0.05\"} 2\n"));
     assertTrue(text.contains("le=\"1.0\"} 2\n"));
-    assertTrue(text.contains("le=\"+Inf\"} 2\n"));
+    assertTrue(text.contains(INFINITE_BUCKET_TWO));
     assertTrue(text.contains("_sum{route=\"/login\",service=\"WEB\"} 0.050000001\n"));
     assertEquals(6, text.lines().count());
   }
@@ -135,7 +145,7 @@ class WebDurationMetricExporterTest {
             .contains("_sum{route=\"/login\",service=\"WEB\"} 1.0E-9\n"));
     String large = text(snapshot(2, 1.8446744073709552E19, new CountAtBucket(50_000_000.0, 0)));
     assertTrue(large.contains("_sum{route=\"/login\",service=\"WEB\"} 1.8446744073709553E10\n"));
-    assertTrue(large.contains("le=\"+Inf\"} 2\n"));
+    assertTrue(large.contains(INFINITE_BUCKET_TWO));
   }
 
   @Test
@@ -162,7 +172,7 @@ class WebDurationMetricExporterTest {
   @Test
   void timerenc004MultipleSeriesRetainLabelsAndEscaping() {
     try (var source =
-        new Registry(new FixedTimer(valid(), "/login"), new FixedTimer(valid(), "a\"b\\c\nd"))) {
+        new Registry(new FixedTimer(valid(), LOGIN_ROUTE), new FixedTimer(valid(), "a\"b\\c\nd"))) {
       String result = exporter.scrapeTimers(source, SPACE);
       assertEquals(2, result.lines().filter(line -> line.startsWith(NAME + "_sum{")).count());
       assertTrue(result.contains("route=\"a\\\"b\\\\c\\nd\""));
@@ -171,13 +181,13 @@ class WebDurationMetricExporterTest {
         new Meter.Id(NAME, Tags.empty(), "seconds", "", Meter.Type.TIMER) {
           public List<io.micrometer.core.instrument.Tag> getTags() {
             return List.of(
-                io.micrometer.core.instrument.Tag.of("route", "/login"),
-                io.micrometer.core.instrument.Tag.of("route", "/logout"),
-                io.micrometer.core.instrument.Tag.of("service", "WEB"));
+                io.micrometer.core.instrument.Tag.of(ROUTE_LABEL, LOGIN_ROUTE),
+                io.micrometer.core.instrument.Tag.of(ROUTE_LABEL, "/logout"),
+                io.micrometer.core.instrument.Tag.of(SERVICE_LABEL, WEB_SERVICE));
           }
         };
     var timer =
-        new FixedTimer(valid(), "/login") {
+        new FixedTimer(valid(), LOGIN_ROUTE) {
           public Meter.Id getId() {
             return duplicated;
           }
@@ -190,11 +200,11 @@ class WebDurationMetricExporterTest {
   @Test
   void timerenc005SummaryAndCounterCannotBecomeTimerByNaming() {
     try (var source = new OrdinaryRegistry()) {
-      source.summary(NAME, "service", "WEB", "route", "/login");
+      source.summary(NAME, SERVICE_LABEL, WEB_SERVICE, ROUTE_LABEL, LOGIN_ROUTE);
       assertThrows(IllegalArgumentException.class, () -> exporter.scrapeTimers(source, SPACE));
     }
     try (var source = new OrdinaryRegistry()) {
-      source.counter(NAME, "service", "WEB", "route", "/login");
+      source.counter(NAME, SERVICE_LABEL, WEB_SERVICE, ROUTE_LABEL, LOGIN_ROUTE);
       assertThrows(IllegalArgumentException.class, () -> exporter.scrapeTimers(source, SPACE));
     }
   }
@@ -202,7 +212,7 @@ class WebDurationMetricExporterTest {
   @Test
   void timerenc006NullRegistryNamespaceAndSnapshotFail() {
     assertThrows(NullPointerException.class, () -> exporter.scrapeTimers(null, SPACE));
-    try (var source = new Registry(new FixedTimer(valid(), "/login"))) {
+    try (var source = new Registry(new FixedTimer(valid(), LOGIN_ROUTE))) {
       assertThrows(NullPointerException.class, () -> exporter.scrapeTimers(source, null));
       var invalid = new HashMap<String, Set<String>>();
       invalid.put(null, Set.of());
@@ -223,7 +233,7 @@ class WebDurationMetricExporterTest {
             () -> exporter.scrapeTimers(source, Map.of(NAME, Set.of(key))));
       assertThrows(
           IllegalArgumentException.class,
-          () -> exporter.scrapeTimers(source, Map.of(NAME, Set.of("service"))));
+          () -> exporter.scrapeTimers(source, Map.of(NAME, Set.of(SERVICE_LABEL))));
     }
     assertThrows(NullPointerException.class, () -> text(null));
   }
@@ -262,7 +272,7 @@ class WebDurationMetricExporterTest {
       source.gauge("unselected", 42);
       assertEquals("", exporter.scrapeTimers(source, SPACE));
     }
-    try (var source = new Registry(new FixedTimer(valid(), "/login"))) {
+    try (var source = new Registry(new FixedTimer(valid(), LOGIN_ROUTE))) {
       assertEquals("", exporter.scrapeTimers(source, Map.of()));
     }
     assertTrue(
@@ -271,7 +281,7 @@ class WebDurationMetricExporterTest {
 
   @Test
   void timerenc011BorrowedOwnerNotClosedAndClosedRegistryRejected() {
-    var source = new Registry(new FixedTimer(valid(), "/login"));
+    var source = new Registry(new FixedTimer(valid(), LOGIN_ROUTE));
     try {
       exporter.scrapeTimers(source, SPACE);
       assertFalse(source.isClosed());
@@ -283,9 +293,9 @@ class WebDurationMetricExporterTest {
 
   @Test
   void timerenc012ExactlyOneAtomicSnapshotNoOtherTimerScalarReads() {
-    var timer = new FixedTimer(valid(), "/login");
+    var timer = new FixedTimer(valid(), LOGIN_ROUTE);
     try (var source = new Registry(timer)) {
-      assertTrue(exporter.scrapeTimers(source, SPACE).contains("le=\"+Inf\"} 2\n"));
+      assertTrue(exporter.scrapeTimers(source, SPACE).contains(INFINITE_BUCKET_TWO));
       assertEquals(1, timer.reads.get());
     }
   }
@@ -294,7 +304,7 @@ class WebDurationMetricExporterTest {
   void timerenc013RuntimeFailureIdentityAndOwnerAreRetained() {
     var failure = new IllegalStateException("fixture");
     var timer =
-        new FixedTimer(valid(), "/login") {
+        new FixedTimer(valid(), LOGIN_ROUTE) {
           public HistogramSnapshot takeSnapshot() {
             throw failure;
           }
@@ -311,7 +321,7 @@ class WebDurationMetricExporterTest {
   void timerenc014ProviderErrorIsNotCaughtAsSuccess() {
     var failure = new AssertionError("fixture");
     var timer =
-        new FixedTimer(valid(), "/login") {
+        new FixedTimer(valid(), LOGIN_ROUTE) {
           public HistogramSnapshot takeSnapshot() {
             throw failure;
           }
@@ -324,11 +334,11 @@ class WebDurationMetricExporterTest {
 
   @Test
   void timerenc015CallerNamespaceAndKeysAreCopiedBeforeProviderRead() {
-    var keys = new HashSet<>(Set.of("service", "route"));
+    var keys = new HashSet<>(Set.of(SERVICE_LABEL, ROUTE_LABEL));
     var space = new HashMap<String, Set<String>>();
     space.put(NAME, keys);
     var timer =
-        new FixedTimer(valid(), "/login") {
+        new FixedTimer(valid(), LOGIN_ROUTE) {
           public HistogramSnapshot takeSnapshot() {
             keys.clear();
             space.clear();
@@ -336,7 +346,7 @@ class WebDurationMetricExporterTest {
           }
         };
     try (var source = new Registry(timer)) {
-      assertTrue(exporter.scrapeTimers(source, space).contains("le=\"+Inf\"} 2\n"));
+      assertTrue(exporter.scrapeTimers(source, space).contains(INFINITE_BUCKET_TWO));
       assertTrue(space.isEmpty());
       assertTrue(keys.isEmpty());
     }
@@ -363,7 +373,7 @@ class WebDurationMetricExporterTest {
             throw failure;
           }
         };
-    try (var source = new Registry(new FixedTimer(valid(), "/login"))) {
+    try (var source = new Registry(new FixedTimer(valid(), LOGIN_ROUTE))) {
       var actual =
           assertThrows(
               java.io.UncheckedIOException.class,

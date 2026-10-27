@@ -22,8 +22,12 @@ import org.junit.jupiter.api.Test;
 
 /** COUNTENC001..016/1759: literal independent values and wire text, no reflection. */
 class WebCounterMetricExporterTest {
+  private static final String ROUTE_LABEL = "route";
+  private static final String SERVICE_LABEL = "service";
+  private static final String LOGIN_ROUTE = "/login";
   private static final String NAME = "nk_http_requests_total";
-  private static final Map<String, Set<String>> SPACE = Map.of(NAME, Set.of("route", "service"));
+  private static final Map<String, Set<String>> SPACE =
+      Map.of(NAME, Set.of(ROUTE_LABEL, SERVICE_LABEL));
   private final WebCounterMetricExporter exporter = new WebCounterMetricExporter();
 
   private static class FixedCounter implements Counter {
@@ -35,7 +39,11 @@ class WebCounterMetricExporterTest {
       this.value = value;
       id =
           new Meter.Id(
-              NAME, Tags.of("route", route, "service", "WEB"), "requests", "", Meter.Type.COUNTER);
+              NAME,
+              Tags.of(ROUTE_LABEL, route, SERVICE_LABEL, "WEB"),
+              "requests",
+              "",
+              Meter.Type.COUNTER);
     }
 
     public Meter.Id getId() {
@@ -67,7 +75,7 @@ class WebCounterMetricExporterTest {
   private static class OrdinaryRegistry extends SimpleMeterRegistry implements AutoCloseable {}
 
   private String text(double value) {
-    try (var source = new Registry(new FixedCounter(value, "/login"))) {
+    try (var source = new Registry(new FixedCounter(value, LOGIN_ROUTE))) {
       return exporter.scrapeCounters(source, SPACE);
     }
   }
@@ -75,7 +83,8 @@ class WebCounterMetricExporterTest {
   @Test
   void countenc001LiteralCounterNameAndFractionAreUnchanged() {
     assertEquals(
-        "# TYPE nk_http_requests_total counter\nnk_http_requests_total{route=\"/login\",service=\"WEB\"} 2.5\n",
+        "# TYPE nk_http_requests_total counter\n"
+            + "nk_http_requests_total{route=\"/login\",service=\"WEB\"} 2.5\n",
         text(2.5));
   }
 
@@ -97,7 +106,7 @@ class WebCounterMetricExporterTest {
   @Test
   void countenc004MultipleSeriesAndEscapingRetainMeaning() {
     try (var source =
-        new Registry(new FixedCounter(2, "/login"), new FixedCounter(3, "a\"b\\c\nd"))) {
+        new Registry(new FixedCounter(2, LOGIN_ROUTE), new FixedCounter(3, "a\"b\\c\nd"))) {
       String result = exporter.scrapeCounters(source, SPACE);
       assertEquals(3, result.lines().count());
       assertTrue(result.contains("route=\"a\\\"b\\\\c\\nd\""));
@@ -124,7 +133,7 @@ class WebCounterMetricExporterTest {
   @Test
   void countenc006NullContractsFailAtBoundary() {
     assertThrows(NullPointerException.class, () -> exporter.scrapeCounters(null, SPACE));
-    try (var source = new Registry(new FixedCounter(1, "/login"))) {
+    try (var source = new Registry(new FixedCounter(1, LOGIN_ROUTE))) {
       assertThrows(NullPointerException.class, () -> exporter.scrapeCounters(source, null));
       var invalid = new HashMap<String, Set<String>>();
       invalid.put(null, Set.of());
@@ -141,7 +150,7 @@ class WebCounterMetricExporterTest {
 
   @Test
   void countenc007InvalidNamesAndExactLabelSetsAreRejected() {
-    try (var source = new Registry(new FixedCounter(1, "/login"))) {
+    try (var source = new Registry(new FixedCounter(1, LOGIN_ROUTE))) {
       for (String name : List.of("nk_wrong_seconds", "bad_total", "nk_BAD_total"))
         assertThrows(
             IllegalArgumentException.class,
@@ -150,8 +159,8 @@ class WebCounterMetricExporterTest {
           List.of(
               Set.of("le"),
               Set.of("bad-key"),
-              Set.of("service"),
-              Set.of("service", "route", "extra")))
+              Set.of(SERVICE_LABEL),
+              Set.of(SERVICE_LABEL, ROUTE_LABEL, "extra")))
         assertThrows(
             IllegalArgumentException.class,
             () -> exporter.scrapeCounters(source, Map.of(NAME, keys)));
@@ -164,18 +173,20 @@ class WebCounterMetricExporterTest {
         new Meter.Id(NAME, Tags.empty(), "", "", Meter.Type.COUNTER) {
           public List<Tag> getTags() {
             return List.of(
-                Tag.of("route", "/login"), Tag.of("route", "/logout"), Tag.of("service", "WEB"));
+                Tag.of(ROUTE_LABEL, LOGIN_ROUTE),
+                Tag.of(ROUTE_LABEL, "/logout"),
+                Tag.of(SERVICE_LABEL, "WEB"));
           }
         };
     var counter =
-        new FixedCounter(1, "/login") {
+        new FixedCounter(1, LOGIN_ROUTE) {
           public Meter.Id getId() {
             return duplicatedId;
           }
         };
     assertSame(duplicatedId, counter.getId());
     assertEquals(
-        List.of("route", "route", "service"),
+        List.of(ROUTE_LABEL, ROUTE_LABEL, SERVICE_LABEL),
         counter.getId().getTags().stream().map(Tag::getKey).toList());
     try (var source = new Registry(counter)) {
       assertThrows(IllegalArgumentException.class, () -> exporter.scrapeCounters(source, SPACE));
@@ -189,14 +200,14 @@ class WebCounterMetricExporterTest {
       source.gauge("unselected", 42);
       assertEquals("", exporter.scrapeCounters(source, SPACE));
     }
-    try (var source = new Registry(new FixedCounter(1, "/login"))) {
+    try (var source = new Registry(new FixedCounter(1, LOGIN_ROUTE))) {
       assertEquals("", exporter.scrapeCounters(source, Map.of()));
     }
   }
 
   @Test
   void countenc010BorrowedOwnerRemainsOpenAndClosedOwnerFails() {
-    var source = new Registry(new FixedCounter(1, "/login"));
+    var source = new Registry(new FixedCounter(1, LOGIN_ROUTE));
     try {
       exporter.scrapeCounters(source, SPACE);
       assertFalse(source.isClosed());
@@ -208,7 +219,7 @@ class WebCounterMetricExporterTest {
 
   @Test
   void countenc011ExactlyOneProviderRead() {
-    var counter = new FixedCounter(7, "/login");
+    var counter = new FixedCounter(7, LOGIN_ROUTE);
     try (var source = new Registry(counter)) {
       assertTrue(exporter.scrapeCounters(source, SPACE).endsWith("} 7.0\n"));
       assertEquals(1, counter.reads.get());
@@ -219,7 +230,7 @@ class WebCounterMetricExporterTest {
   void countenc012ProviderRuntimeFailureIdentityRetained() {
     var failure = new IllegalStateException("fixture");
     var counter =
-        new FixedCounter(1, "/login") {
+        new FixedCounter(1, LOGIN_ROUTE) {
           public double count() {
             throw failure;
           }
@@ -236,7 +247,7 @@ class WebCounterMetricExporterTest {
   void countenc013ProviderErrorIsNotSuccess() {
     var failure = new AssertionError("fixture");
     var counter =
-        new FixedCounter(1, "/login") {
+        new FixedCounter(1, LOGIN_ROUTE) {
           public double count() {
             throw failure;
           }
@@ -250,11 +261,11 @@ class WebCounterMetricExporterTest {
 
   @Test
   void countenc014NamespaceCopiesPrecedeProviderMutation() {
-    var keys = new HashSet<>(Set.of("route", "service"));
+    var keys = new HashSet<>(Set.of(ROUTE_LABEL, SERVICE_LABEL));
     var space = new HashMap<String, Set<String>>();
     space.put(NAME, keys);
     var counter =
-        new FixedCounter(3, "/login") {
+        new FixedCounter(3, LOGIN_ROUTE) {
           public double count() {
             space.clear();
             keys.clear();
@@ -289,7 +300,7 @@ class WebCounterMetricExporterTest {
             throw failure;
           }
         };
-    try (var source = new Registry(new FixedCounter(1, "/login"))) {
+    try (var source = new Registry(new FixedCounter(1, LOGIN_ROUTE))) {
       var actual =
           assertThrows(
               java.io.UncheckedIOException.class,
@@ -302,7 +313,7 @@ class WebCounterMetricExporterTest {
 
   @Test
   void countenc016InvalidConfigurationFailsBeforeProviderRead() {
-    var counter = new FixedCounter(1, "/login");
+    var counter = new FixedCounter(1, LOGIN_ROUTE);
     try (var source = new Registry(counter)) {
       assertThrows(
           NullPointerException.class, () -> WebCounterMetricExporter.encode(source, SPACE, null));
