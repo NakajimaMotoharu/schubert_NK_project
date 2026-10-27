@@ -23,11 +23,17 @@ import org.junit.jupiter.api.Test;
 
 /** MQREDEL001..008/1695. Literal SS321/351 oracle, own SDK only; no JMS/broker/retry/wait. */
 class MqRedeliveryMetricRecorderTest {
+  private static final int FAILURE_REGISTRATION_ORDINAL = 2;
+  private static final String ASYNC_WORK_ADDRESS = "nk.async.work";
+  private static final String REDELIVERY_METRIC = "nk_mq_redeliveries_total";
+  private static final String QUEUE_LABEL = "queue";
+  private static final String DELIVERY_COUNT_LABEL = "delivery_count";
+  private static final String DEBUG_MODE = "DEBUG";
   private static final List<String> ADDRESSES =
       List.of(
           "nk.sync.request",
           "nk.sync.reply.web",
-          "nk.async.work",
+          ASYNC_WORK_ADDRESS,
           "nk.web.log",
           "nk.dead.letter",
           "nk.expiry");
@@ -50,7 +56,8 @@ class MqRedeliveryMetricRecorderTest {
 
     @Override
     protected Counter newCounter(Meter.Id id) {
-      if (registrations.incrementAndGet() == 2) fail(registrationFailure);
+      if (registrations.incrementAndGet() == FAILURE_REGISTRATION_ORDINAL)
+        fail(registrationFailure);
       var actual = super.newCounter(id);
       return new Counter() {
         @Override
@@ -96,9 +103,9 @@ class MqRedeliveryMetricRecorderTest {
 
   private static double count(Registry registry, String address, String delivery) {
     return registry
-        .get("nk_mq_redeliveries_total")
-        .tag("queue", address + ".q")
-        .tag("delivery_count", delivery)
+        .get(REDELIVERY_METRIC)
+        .tag(QUEUE_LABEL, address + ".q")
+        .tag(DELIVERY_COUNT_LABEL, delivery)
         .counter()
         .count();
   }
@@ -111,12 +118,12 @@ class MqRedeliveryMetricRecorderTest {
       for (String delivery : List.of("2", "3", "4")) expected.add(address + ".q:" + delivery);
     for (var meter : registry.getMeters()) {
       var id = meter.getId();
-      assertEquals("nk_mq_redeliveries_total", id.getName());
+      assertEquals(REDELIVERY_METRIC, id.getName());
       assertEquals(Meter.Type.COUNTER, id.getType());
       assertEquals(
-          Set.of("queue", "delivery_count"),
+          Set.of(QUEUE_LABEL, DELIVERY_COUNT_LABEL),
           id.getTags().stream().map(t -> t.getKey()).collect(Collectors.toSet()));
-      pairs.add(id.getTag("queue") + ":" + id.getTag("delivery_count"));
+      pairs.add(id.getTag(QUEUE_LABEL) + ":" + id.getTag(DELIVERY_COUNT_LABEL));
     }
     assertEquals(expected, pairs);
   }
@@ -124,7 +131,7 @@ class MqRedeliveryMetricRecorderTest {
   @Test
   void mqRedel001OnlySixApprovedQueuesAndThreeRedeliveryLabelsExistAtZero() {
     try (var registry = new Registry()) {
-      var recorder = new MqRedeliveryMetricRecorder(registry, "DEBUG");
+      var recorder = new MqRedeliveryMetricRecorder(registry, DEBUG_MODE);
       assertTrue(recorder.detailedMetricsRequested());
       shape(registry);
       for (String address : ADDRESSES)
@@ -139,7 +146,7 @@ class MqRedeliveryMetricRecorderTest {
   @Test
   void mqRedel002InitialDeliveryNeverCountsAndEachRedeliveryCountsExactlyOnce() {
     try (var registry = new Registry()) {
-      var recorder = new MqRedeliveryMetricRecorder(registry, "DEBUG");
+      var recorder = new MqRedeliveryMetricRecorder(registry, DEBUG_MODE);
       for (String address : ADDRESSES)
         recorder.recordDelivery(BrokerTopology.requireAddress(address), 1);
       assertEquals(0, registry.increments.get());
@@ -150,7 +157,7 @@ class MqRedeliveryMetricRecorderTest {
         for (String delivery : List.of("2", "3", "4"))
           assertEquals(1, count(registry, address, delivery));
       recorder.recordDelivery(BrokerTopology.ASYNC_WORK, 2);
-      assertEquals(2, count(registry, "nk.async.work", "2"));
+      assertEquals(2, count(registry, ASYNC_WORK_ADDRESS, "2"));
       assertEquals(19, registry.increments.get());
       shape(registry);
       assertEquals(18, registry.registrations.get());
@@ -175,7 +182,8 @@ class MqRedeliveryMetricRecorderTest {
   @Test
   void mqRedel004NullModeDestinationAndOutOfRangeCountsNeverMutateExistingCounters() {
     try (var registry = new Registry()) {
-      assertThrows(NullPointerException.class, () -> new MqRedeliveryMetricRecorder(null, "DEBUG"));
+      assertThrows(
+          NullPointerException.class, () -> new MqRedeliveryMetricRecorder(null, DEBUG_MODE));
       assertThrows(
           NullPointerException.class, () -> new MqRedeliveryMetricRecorder(registry, null));
       for (String mode : List.of("", "debug", "unknown-mode"))
@@ -187,7 +195,7 @@ class MqRedeliveryMetricRecorderTest {
                 .getMessage());
       assertEquals(0, registry.registrations.get());
     }
-    for (String mode : List.of("DEBUG", "STANDARD"))
+    for (String mode : List.of(DEBUG_MODE, "STANDARD"))
       try (var registry = new Registry()) {
         var recorder = new MqRedeliveryMetricRecorder(registry, mode);
         recorder.recordDelivery(BrokerTopology.ASYNC_WORK, 2);
@@ -196,9 +204,9 @@ class MqRedeliveryMetricRecorderTest {
           assertThrows(
               IllegalArgumentException.class,
               () -> recorder.recordDelivery(BrokerTopology.ASYNC_WORK, invalid));
-        if (mode.equals("DEBUG")) {
+        if (mode.equals(DEBUG_MODE)) {
           assertEquals(1, registry.increments.get());
-          assertEquals(1, count(registry, "nk.async.work", "2"));
+          assertEquals(1, count(registry, ASYNC_WORK_ADDRESS, "2"));
           shape(registry);
         } else {
           assertEquals(0, registry.increments.get());
@@ -218,7 +226,7 @@ class MqRedeliveryMetricRecorderTest {
         assertSame(
             problem,
             assertThrows(
-                problem.getClass(), () -> new MqRedeliveryMetricRecorder(registry, "DEBUG")));
+                problem.getClass(), () -> new MqRedeliveryMetricRecorder(registry, DEBUG_MODE)));
         assertEquals(2, registry.registrations.get());
         assertEquals(1, registry.getMeters().size());
         assertEquals(0, registry.closes.get());
@@ -238,7 +246,7 @@ class MqRedeliveryMetricRecorderTest {
           List.<Throwable>of(
               new UnformattableFailure(), new AssertionError("owned increment fixture"))) {
         try (var registry = new Registry()) {
-          var recorder = new MqRedeliveryMetricRecorder(registry, "DEBUG");
+          var recorder = new MqRedeliveryMetricRecorder(registry, DEBUG_MODE);
           if (after) registry.afterIncrement = Optional.of(problem);
           else registry.beforeIncrement = Optional.of(problem);
           assertSame(
@@ -258,8 +266,8 @@ class MqRedeliveryMetricRecorderTest {
   void mqRedel007ConcurrentSamePairAndSeparateOwnerHaveExactIndependentCounts() throws Exception {
     try (var registry = new Registry();
         var other = new Registry()) {
-      var recorder = new MqRedeliveryMetricRecorder(registry, "DEBUG");
-      var second = new MqRedeliveryMetricRecorder(other, "DEBUG");
+      var recorder = new MqRedeliveryMetricRecorder(registry, DEBUG_MODE);
+      var second = new MqRedeliveryMetricRecorder(other, DEBUG_MODE);
       second.recordDelivery(BrokerTopology.WEB_LOG, 4);
       var tasks = new ArrayList<Callable<String>>();
       for (int i = 0; i < 64; i++)
@@ -271,8 +279,8 @@ class MqRedeliveryMetricRecorderTest {
       try (var pool = Executors.newFixedThreadPool(8)) {
         for (var result : pool.invokeAll(tasks)) assertEquals("counted", result.get());
       }
-      assertEquals(64, count(registry, "nk.async.work", "3"));
-      assertEquals(0, count(other, "nk.async.work", "3"));
+      assertEquals(64, count(registry, ASYNC_WORK_ADDRESS, "3"));
+      assertEquals(0, count(other, ASYNC_WORK_ADDRESS, "3"));
       assertEquals(1, count(other, "nk.web.log", "4"));
       assertEquals(0, count(registry, "nk.web.log", "4"));
       assertEquals(64, registry.increments.get());
@@ -286,19 +294,20 @@ class MqRedeliveryMetricRecorderTest {
   void mqRedel008ForeignGaugeCannotBeReplacedOrCloseBorrowedRegistry() {
     try (var registry = new Registry()) {
       var foreign =
-          Gauge.builder("nk_mq_redeliveries_total", () -> 7d)
-              .tag("queue", "nk.sync.request.q")
-              .tag("delivery_count", "2")
+          Gauge.builder(REDELIVERY_METRIC, () -> 7d)
+              .tag(QUEUE_LABEL, "nk.sync.request.q")
+              .tag(DELIVERY_COUNT_LABEL, "2")
               .register(registry);
       assertThrows(
-          IllegalArgumentException.class, () -> new MqRedeliveryMetricRecorder(registry, "DEBUG"));
+          IllegalArgumentException.class,
+          () -> new MqRedeliveryMetricRecorder(registry, DEBUG_MODE));
       assertEquals(1, registry.getMeters().size());
       assertSame(
           foreign,
           registry
-              .get("nk_mq_redeliveries_total")
-              .tag("queue", "nk.sync.request.q")
-              .tag("delivery_count", "2")
+              .get(REDELIVERY_METRIC)
+              .tag(QUEUE_LABEL, "nk.sync.request.q")
+              .tag(DELIVERY_COUNT_LABEL, "2")
               .gauge());
       assertEquals(7, foreign.value());
       assertEquals(0, registry.closes.get());

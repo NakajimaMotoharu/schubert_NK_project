@@ -27,9 +27,15 @@ import org.junit.jupiter.api.Test;
 
 /** MQPRESS001..008/1693, literal SS321/351 oracle; only own SDK, no broker/JMS/management. */
 class MqPressureMetricRecorderTest {
+  private static final int FAILURE_REGISTRATION_ORDINAL = 2;
+  private static final String SYNC_REQUEST_ADDRESS = "nk.sync.request";
+  private static final String QUEUE_MESSAGES_METRIC = "nk_mq_queue_messages";
+  private static final String QUEUE_LABEL = "queue";
+  private static final String ADDRESS_LABEL = "address";
+  private static final String DEBUG_MODE = "DEBUG";
   private static final List<String> ADDRESSES =
       List.of(
-          "nk.sync.request",
+          SYNC_REQUEST_ADDRESS,
           "nk.sync.reply.web",
           "nk.async.work",
           "nk.web.log",
@@ -37,18 +43,18 @@ class MqPressureMetricRecorderTest {
           "nk.expiry");
   private static final Map<String, String> METRICS =
       Map.of(
-          "nk_mq_queue_messages",
-          "queue",
+          QUEUE_MESSAGES_METRIC,
+          QUEUE_LABEL,
           "nk_mq_queue_bytes",
-          "queue",
+          QUEUE_LABEL,
           "nk_mq_address_memory_bytes",
-          "address",
+          ADDRESS_LABEL,
           "nk_mq_address_paged_bytes",
-          "address",
+          ADDRESS_LABEL,
           "nk_mq_paging_active",
-          "address",
+          ADDRESS_LABEL,
           "nk_mq_page_files",
-          "address");
+          ADDRESS_LABEL);
 
   private static final class Registry extends SimpleMeterRegistry implements AutoCloseable {
     final AtomicInteger registrations = new AtomicInteger();
@@ -57,7 +63,7 @@ class MqPressureMetricRecorderTest {
 
     @Override
     protected <T> Gauge newGauge(Meter.Id id, T object, ToDoubleFunction<T> value) {
-      if (registrations.incrementAndGet() == 2 && failure.isPresent()) {
+      if (registrations.incrementAndGet() == FAILURE_REGISTRATION_ORDINAL && failure.isPresent()) {
         var problem = failure.orElseThrow();
         if (problem instanceof Error fatal) throw fatal;
         throw (RuntimeException) problem;
@@ -90,7 +96,7 @@ class MqPressureMetricRecorderTest {
     String label = METRICS.get(metric);
     return registry
         .get(metric)
-        .tag(label, label.equals("queue") ? address + ".q" : address)
+        .tag(label, label.equals(QUEUE_LABEL) ? address + ".q" : address)
         .gauge()
         .value();
   }
@@ -102,7 +108,9 @@ class MqPressureMetricRecorderTest {
     for (var metric : METRICS.entrySet())
       for (String address : ADDRESSES)
         expected.add(
-            metric.getKey() + ":" + (metric.getValue().equals("queue") ? address + ".q" : address));
+            metric.getKey()
+                + ":"
+                + (metric.getValue().equals(QUEUE_LABEL) ? address + ".q" : address));
     for (var meter : registry.getMeters()) {
       var id = meter.getId();
       assertEquals(Meter.Type.GAUGE, id.getType());
@@ -124,7 +132,7 @@ class MqPressureMetricRecorderTest {
       double paged,
       double paging,
       double files) {
-    assertEquals(messages, gauge(registry, "nk_mq_queue_messages", address));
+    assertEquals(messages, gauge(registry, QUEUE_MESSAGES_METRIC, address));
     assertEquals(bytes, gauge(registry, "nk_mq_queue_bytes", address));
     assertEquals(memory, gauge(registry, "nk_mq_address_memory_bytes", address));
     assertEquals(paged, gauge(registry, "nk_mq_address_paged_bytes", address));
@@ -135,7 +143,7 @@ class MqPressureMetricRecorderTest {
   @Test
   void mqPress001ExactlySixFamiliesAndSixApprovedDestinationPairsStartUnknown() {
     try (var registry = new Registry()) {
-      var recorder = new MqPressureMetricRecorder(registry, "DEBUG");
+      var recorder = new MqPressureMetricRecorder(registry, DEBUG_MODE);
       assertTrue(recorder.detailedMetricsRequested());
       shape(registry);
       assertEquals(36, registry.registrations.get());
@@ -151,7 +159,7 @@ class MqPressureMetricRecorderTest {
   @Test
   void mqPress002LiteralIndependentFieldsZeroAndMaximumHaveNoInventedSumOrCapacity() {
     try (var registry = new Registry()) {
-      var recorder = new MqPressureMetricRecorder(registry, "DEBUG");
+      var recorder = new MqPressureMetricRecorder(registry, DEBUG_MODE);
       for (String address : ADDRESSES) {
         var destination = BrokerTopology.requireAddress(address);
         var sample = new Snapshot(1, 2, 3, 4, true, 5);
@@ -188,7 +196,7 @@ class MqPressureMetricRecorderTest {
   @Test
   void mqPress003MissingIsNaNNotZeroAndCannotEraseOtherDestinationOrOldSnapshot() {
     try (var registry = new Registry()) {
-      var recorder = new MqPressureMetricRecorder(registry, "DEBUG");
+      var recorder = new MqPressureMetricRecorder(registry, DEBUG_MODE);
       var sample = new Snapshot(1, 2, 3, 4, true, 5);
       for (var destination : BrokerTopology.values()) recorder.record(destination, sample);
       var previous = recorder.snapshot(BrokerTopology.SYNC_REQUEST);
@@ -196,18 +204,19 @@ class MqPressureMetricRecorderTest {
       assertTrue(recorder.snapshot(BrokerTopology.SYNC_REQUEST).isEmpty());
       assertSame(sample, previous.orElseThrow());
       for (String metric : METRICS.keySet())
-        assertTrue(Double.isNaN(gauge(registry, metric, "nk.sync.request")));
+        assertTrue(Double.isNaN(gauge(registry, metric, SYNC_REQUEST_ADDRESS)));
       for (String address : ADDRESSES.subList(1, 6)) values(registry, address, 1, 2, 3, 4, 1, 5);
       recorder.missing(BrokerTopology.SYNC_REQUEST);
       recorder.record(BrokerTopology.SYNC_REQUEST, new Snapshot(0, 0, 0, 0, false, 0));
-      values(registry, "nk.sync.request", 0, 0, 0, 0, 0, 0);
+      values(registry, SYNC_REQUEST_ADDRESS, 0, 0, 0, 0, 0, 0);
     }
   }
 
   @Test
   void mqPress004StandardRetainsNothingAndConfigurationOrNegativeSamplesAreNotNormalized() {
     try (var registry = new Registry()) {
-      assertThrows(NullPointerException.class, () -> new MqPressureMetricRecorder(null, "DEBUG"));
+      assertThrows(
+          NullPointerException.class, () -> new MqPressureMetricRecorder(null, DEBUG_MODE));
       assertThrows(NullPointerException.class, () -> new MqPressureMetricRecorder(registry, null));
       for (String mode : List.of("", "debug", "unknown-mode"))
         assertEquals(
@@ -248,11 +257,11 @@ class MqPressureMetricRecorderTest {
         assertSame(
             problem,
             assertThrows(
-                problem.getClass(), () -> new MqPressureMetricRecorder(registry, "DEBUG")));
+                problem.getClass(), () -> new MqPressureMetricRecorder(registry, DEBUG_MODE)));
         assertEquals(2, registry.registrations.get());
         assertEquals(1, registry.getMeters().size());
         assertEquals(0, registry.closes.get());
-        assertTrue(Double.isNaN(gauge(registry, "nk_mq_queue_messages", "nk.sync.request")));
+        assertTrue(Double.isNaN(gauge(registry, QUEUE_MESSAGES_METRIC, SYNC_REQUEST_ADDRESS)));
       } finally {
         registry.close();
       }
@@ -260,16 +269,16 @@ class MqPressureMetricRecorderTest {
     }
     try (var registry = new Registry()) {
       var foreign =
-          Counter.builder("nk_mq_queue_messages")
-              .tag("queue", "nk.sync.request.q")
+          Counter.builder(QUEUE_MESSAGES_METRIC)
+              .tag(QUEUE_LABEL, "nk.sync.request.q")
               .register(registry);
       foreign.increment(7);
       assertThrows(
-          IllegalArgumentException.class, () -> new MqPressureMetricRecorder(registry, "DEBUG"));
+          IllegalArgumentException.class, () -> new MqPressureMetricRecorder(registry, DEBUG_MODE));
       assertEquals(1, registry.getMeters().size());
       assertSame(
           foreign,
-          registry.get("nk_mq_queue_messages").tag("queue", "nk.sync.request.q").counter());
+          registry.get(QUEUE_MESSAGES_METRIC).tag(QUEUE_LABEL, "nk.sync.request.q").counter());
       assertEquals(7, foreign.count());
       assertEquals(0, registry.closes.get());
     }
@@ -279,8 +288,8 @@ class MqPressureMetricRecorderTest {
   void mqPress006ConcurrentPublicationAndDifferentOwnersDoNotGrowOrShareState() throws Exception {
     try (var registry = new Registry();
         var other = new Registry()) {
-      var recorder = new MqPressureMetricRecorder(registry, "DEBUG");
-      var second = new MqPressureMetricRecorder(other, "DEBUG");
+      var recorder = new MqPressureMetricRecorder(registry, DEBUG_MODE);
+      var second = new MqPressureMetricRecorder(other, DEBUG_MODE);
       var separate = new Snapshot(7, 8, 9, 10, false, 11);
       second.record(BrokerTopology.ASYNC_WORK, separate);
       var supplied = new ArrayList<Snapshot>();
@@ -310,7 +319,7 @@ class MqPressureMetricRecorderTest {
 
   @Test
   void mqPress007NullBoundariesCannotClearPreviouslyAcceptedObservationInEitherMode() {
-    for (String mode : List.of("DEBUG", "STANDARD"))
+    for (String mode : List.of(DEBUG_MODE, "STANDARD"))
       try (var registry = new Registry()) {
         var recorder = new MqPressureMetricRecorder(registry, mode);
         var sample = new Snapshot(1, 2, 3, 4, true, 5);
@@ -349,7 +358,8 @@ class MqPressureMetricRecorderTest {
     assertEquals(30607576, collided.hashCode());
     assertNotEquals(value, collided);
     assertEquals(
-        "Snapshot[messages=1, queueBytes=2, addressMemoryBytes=3, addressPagedBytes=4, pagingActive=true, pageFiles=5]",
+        "Snapshot[messages=1, queueBytes=2, addressMemoryBytes=3, addressPagedBytes=4,"
+            + " pagingActive=true, pageFiles=5]",
         value.toString());
     assertEquals(1, value.messages());
     assertEquals(2, value.queueBytes());
