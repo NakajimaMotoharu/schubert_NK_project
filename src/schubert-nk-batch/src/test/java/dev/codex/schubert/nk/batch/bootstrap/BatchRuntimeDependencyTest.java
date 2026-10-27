@@ -13,6 +13,11 @@ import org.junit.jupiter.api.Test;
 
 /** PG239/PT-BAT-283; independent Batch process runtime dependency, not test classpath. */
 final class BatchRuntimeDependencyTest {
+  private static final String RUNTIME_SCOPE_ELEMENT = "<scope>runtime</scope>";
+  private static final String PROJECT_GROUP = "dev.codex.schubert";
+  private static final String BOOTSTRAP_ARTIFACT = "schubert-nk-bootstrap";
+  private static final String FLYWAY_GROUP = "org.flywaydb";
+  private static final String TEST_SCOPE_ELEMENT = "<scope>test</scope>";
   private static final String DEPENDENCY_END_TAG = "</dependency>";
   private static final String COMPILE_SCOPE_NAME = "compile";
   private static final Pattern DEPENDENCY =
@@ -32,11 +37,11 @@ final class BatchRuntimeDependencyTest {
               assertRuntimeDriver(
                   pom.replace(
                       block,
-                      block.replace("<scope>runtime</scope>", "<scope>" + scope + "</scope>"))));
+                      block.replace(RUNTIME_SCOPE_ELEMENT, "<scope>" + scope + "</scope>"))));
     }
     assertThrows(
         AssertionError.class,
-        () -> assertRuntimeDriver(pom.replace(block, block.replace("<scope>runtime</scope>", ""))));
+        () -> assertRuntimeDriver(pom.replace(block, block.replace(RUNTIME_SCOPE_ELEMENT, ""))));
     assertThrows(
         AssertionError.class,
         () -> assertRuntimeDriver(pom.replace(block, block.replace("42.7.13", "42.7.12"))));
@@ -66,9 +71,9 @@ final class BatchRuntimeDependencyTest {
     }
     for (String[] dependency :
         new String[][] {
-          {"dev.codex.schubert", "schubert-nk-bootstrap", COMPILE_SCOPE_NAME},
-          {"org.flywaydb", "flyway-core", COMPILE_SCOPE_NAME},
-          {"org.flywaydb", "flyway-database-postgresql", "runtime"}
+          {PROJECT_GROUP, BOOTSTRAP_ARTIFACT, COMPILE_SCOPE_NAME},
+          {FLYWAY_GROUP, "flyway-core", COMPILE_SCOPE_NAME},
+          {FLYWAY_GROUP, "flyway-database-postgresql", "runtime"}
         }) {
       String declared = dependencyBlock(pom, dependency[0], dependency[1]);
       assertThrows(
@@ -77,8 +82,8 @@ final class BatchRuntimeDependencyTest {
           AssertionError.class,
           () -> assertStartupDependencies(pom.replace(declared, declared + declared)));
       String wrong =
-          declared.contains("<scope>runtime</scope>")
-              ? declared.replace("<scope>runtime</scope>", "<scope>test</scope>")
+          declared.contains(RUNTIME_SCOPE_ELEMENT)
+              ? declared.replace(RUNTIME_SCOPE_ELEMENT, TEST_SCOPE_ELEMENT)
               : declared.replace(DEPENDENCY_END_TAG, "<scope>test</scope></dependency>");
       assertThrows(
           AssertionError.class, () -> assertStartupDependencies(pom.replace(declared, wrong)));
@@ -89,7 +94,7 @@ final class BatchRuntimeDependencyTest {
                 assertStartupDependencies(
                     pom.replace(
                         declared,
-                        declared.replace("<scope>runtime</scope>", "<scope>compile</scope>"))));
+                        declared.replace(RUNTIME_SCOPE_ELEMENT, "<scope>compile</scope>"))));
       }
     }
   }
@@ -101,7 +106,7 @@ final class BatchRuntimeDependencyTest {
     var blocks = DEPENDENCY.matcher(pom);
     while (blocks.find()) {
       String block = blocks.group();
-      if (!block.contains("<scope>test</scope>")) {
+      if (!block.contains(TEST_SCOPE_ELEMENT)) {
         var group = Pattern.compile("<groupId>([^<]+)</groupId>").matcher(block);
         var artifact = Pattern.compile("<artifactId>([^<]+)</artifactId>").matcher(block);
         assertTrue(group.find());
@@ -122,22 +127,19 @@ final class BatchRuntimeDependencyTest {
             "org.jspecify:jspecify",
             "com.github.spotbugs:spotbugs-annotations"),
         direct);
-    for (String artifact : new String[] {"schubert-nk-bootstrap", "flyway-core"}) {
+    for (String artifact : new String[] {BOOTSTRAP_ARTIFACT, "flyway-core"}) {
       String declared =
           dependencyBlock(
-              pom,
-              artifact.equals("schubert-nk-bootstrap") ? "dev.codex.schubert" : "org.flywaydb",
-              artifact);
+              pom, artifact.equals(BOOTSTRAP_ARTIFACT) ? PROJECT_GROUP : FLYWAY_GROUP, artifact);
       assertFalse(declared.contains("<scope>"), "SS311 default compile dependency");
       assertFalse(declared.contains("<type>"), "fixed startup uses the main library jar");
     }
-    String driver = dependencyBlock(pom, "org.flywaydb", "flyway-database-postgresql");
-    assertTrue(driver.contains("<scope>runtime</scope>"), "root Flyway PG adapter runtime");
+    String driver = dependencyBlock(pom, FLYWAY_GROUP, "flyway-database-postgresql");
+    assertTrue(driver.contains(RUNTIME_SCOPE_ELEMENT), "root Flyway PG adapter runtime");
     for (String forbidden :
         new String[] {"schubert-nk-api", "schubert-nk-web", "schubert-nk-protocol"}) {
       assertFalse(pom.contains("<artifactId>" + forbidden + "</artifactId>"));
-      assertThrows(
-          AssertionError.class, () -> dependencyBlock(pom, "dev.codex.schubert", forbidden));
+      assertThrows(AssertionError.class, () -> dependencyBlock(pom, PROJECT_GROUP, forbidden));
     }
   }
 
@@ -148,7 +150,7 @@ final class BatchRuntimeDependencyTest {
       String value = matcher.group();
       if (value.contains("<groupId>" + group + "</groupId>")
           && value.contains("<artifactId>" + artifact + "</artifactId>")
-          && !value.contains("<scope>test</scope>")) found.add(value);
+          && !value.contains(TEST_SCOPE_ELEMENT)) found.add(value);
     }
     assertEquals(1, found.size(), "one fixed root startup declaration");
     return found.getFirst();
@@ -161,23 +163,20 @@ final class BatchRuntimeDependencyTest {
         "<dependency><groupId>dev.codex.schubert</groupId><artifactId>schubert-nk-bootstrap</artifactId><version>${project.version}</version></dependency>";
     String fixture =
         "<dependency><groupId>dev.codex.schubert</groupId><artifactId>schubert-nk-bootstrap</artifactId><version>${project.version}</version><type>test-jar</type><scope>test</scope></dependency>";
-    assertEquals(
-        main, dependencyBlock(main + fixture, "dev.codex.schubert", "schubert-nk-bootstrap"));
+    assertEquals(main, dependencyBlock(main + fixture, PROJECT_GROUP, BOOTSTRAP_ARTIFACT));
     assertBootstrapTestFixtures(main + fixture);
     assertBootstrapTestFixtures(main);
     assertThrows(
-        AssertionError.class,
-        () -> dependencyBlock(fixture, "dev.codex.schubert", "schubert-nk-bootstrap"));
+        AssertionError.class, () -> dependencyBlock(fixture, PROJECT_GROUP, BOOTSTRAP_ARTIFACT));
     assertThrows(
         AssertionError.class,
-        () ->
-            dependencyBlock(main + main + fixture, "dev.codex.schubert", "schubert-nk-bootstrap"));
+        () -> dependencyBlock(main + main + fixture, PROJECT_GROUP, BOOTSTRAP_ARTIFACT));
     for (String wrong :
         new String[] {
           fixture + fixture,
-          fixture.replace("<scope>test</scope>", "<scope>runtime</scope>"),
-          fixture.replace("<scope>test</scope>", "<scope>compile</scope>"),
-          fixture.replace("<scope>test</scope>", ""),
+          fixture.replace(TEST_SCOPE_ELEMENT, RUNTIME_SCOPE_ELEMENT),
+          fixture.replace(TEST_SCOPE_ELEMENT, "<scope>compile</scope>"),
+          fixture.replace(TEST_SCOPE_ELEMENT, ""),
           fixture.replace("<type>test-jar</type>", "<type>jar</type>"),
           fixture.replace("<type>test-jar</type>", ""),
           fixture.replace("${project.version}", "0.0.0-foreign"),
@@ -186,8 +185,7 @@ final class BatchRuntimeDependencyTest {
       assertThrows(
           AssertionError.class,
           () -> {
-            assertEquals(
-                main, dependencyBlock(main + wrong, "dev.codex.schubert", "schubert-nk-bootstrap"));
+            assertEquals(main, dependencyBlock(main + wrong, PROJECT_GROUP, BOOTSTRAP_ARTIFACT));
             assertBootstrapTestFixtures(main + wrong);
           });
     }
@@ -200,7 +198,7 @@ final class BatchRuntimeDependencyTest {
       String block = matcher.group();
       if (block.contains("<groupId>dev.codex.schubert</groupId>")
           && block.contains("<artifactId>schubert-nk-bootstrap</artifactId>")
-          && block.contains("<scope>test</scope>")) {
+          && block.contains(TEST_SCOPE_ELEMENT)) {
         fixtures++;
         assertTrue(block.contains("<type>test-jar</type>"), "only the explicit test fixture jar");
         assertTrue(
@@ -288,6 +286,6 @@ final class BatchRuntimeDependencyTest {
   private static void assertRuntimeDriver(String pom) {
     String block = postgresBlock(pom);
     assertTrue(block.contains("<version>42.7.13</version>"), "SS-approved JDBC version");
-    assertTrue(block.contains("<scope>runtime</scope>"), "Batch production runtime driver");
+    assertTrue(block.contains(RUNTIME_SCOPE_ELEMENT), "Batch production runtime driver");
   }
 }
