@@ -21,6 +21,16 @@ import org.junit.jupiter.api.Test;
 
 /** PT-IOFACT-001..018 / SS333 SSC308: literal ownership/exception table, no old use oracle. */
 final class FactoryResourceScopeTest {
+  private static final char SANITIZED_IO_WINNER = 'S';
+  private static final int ONE_SANITIZED_SUPPRESSION = 1;
+  private static final int IO_CLOSE_MODE = 1;
+  private static final int RUNTIME_CLOSE_MODE = 2;
+  private static final int ERROR_CLOSE_MODE = 3;
+  private static final String OPEN_EVENT = "open";
+  private static final String CLOSE_EVENT = "close";
+  private static final String BODY_EVENT = "body";
+  private static final String PUBLIC_CLOSE_MARKER = "PUBLIC_CLOSE";
+
   @Test
   void factory001SuccessAndNullableBodyUseSameResourceOnce() throws Exception {
     for (boolean nullable : List.of(false, true)) {
@@ -30,23 +40,23 @@ final class FactoryResourceScopeTest {
       Object actual =
           ResourceScope.acquire(
               () -> {
-                order.add("open");
+                order.add(OPEN_EVENT);
                 token.live = true;
                 return token;
               },
               owned -> {
                 assertSame(token, owned);
-                order.add("close");
+                order.add(CLOSE_EVENT);
                 token.live = false;
               },
               owned -> {
                 assertSame(token, owned);
                 assertTrue(owned.live);
-                order.add("body");
+                order.add(BODY_EVENT);
                 return expected;
               });
       assertSame(expected, actual);
-      assertEquals(List.of("open", "body", "close"), order);
+      assertEquals(List.of(OPEN_EVENT, BODY_EVENT, CLOSE_EVENT), order);
       assertFalse(token.live);
     }
     assertEquals("narrow", narrowStorageType(new Token()));
@@ -83,15 +93,15 @@ final class FactoryResourceScopeTest {
         () ->
             ResourceScope.acquire(
                 () -> {
-                  order.add("open");
+                  order.add(OPEN_EVENT);
                   return null;
                 },
-                value -> order.add("close"),
+                value -> order.add(CLOSE_EVENT),
                 value -> {
-                  order.add("body");
+                  order.add(BODY_EVENT);
                   return "bad";
                 }));
-    assertEquals(List.of("open"), order);
+    assertEquals(List.of(OPEN_EVENT), order);
   }
 
   @Test
@@ -110,16 +120,16 @@ final class FactoryResourceScopeTest {
               () ->
                   ResourceScope.acquire(
                       () -> {
-                        order.add("open");
+                        order.add(OPEN_EVENT);
                         raise(failure);
                         return new Token();
                       },
-                      value -> order.add("close"),
+                      value -> order.add(CLOSE_EVENT),
                       value -> {
-                        order.add("body");
+                        order.add(BODY_EVENT);
                         return "bad";
                       })));
-      assertEquals(List.of("open"), order);
+      assertEquals(List.of(OPEN_EVENT), order);
     }
   }
 
@@ -414,9 +424,9 @@ final class FactoryResourceScopeTest {
         Throwable secondary =
             switch (close) {
               case 0 -> null;
-              case 1 -> new IOException("PUBLIC_CLOSE");
-              case 2 -> new IllegalArgumentException("PUBLIC_CLOSE");
-              default -> new LinkageError("PUBLIC_CLOSE");
+              case 1 -> new IOException(PUBLIC_CLOSE_MARKER);
+              case 2 -> new IllegalArgumentException(PUBLIC_CLOSE_MARKER);
+              default -> new LinkageError(PUBLIC_CLOSE_MARKER);
             };
         var token = new Token();
         var order = new ArrayList<String>();
@@ -426,13 +436,13 @@ final class FactoryResourceScopeTest {
                 () ->
                     ResourceScope.handoff(
                         () -> {
-                          order.add("open");
+                          order.add(OPEN_EVENT);
                           token.live = true;
                           return token;
                         },
                         owned -> {
                           assertSame(token, owned);
-                          order.add("close");
+                          order.add(CLOSE_EVENT);
                           token.live = false;
                           raise(secondary);
                         },
@@ -443,7 +453,7 @@ final class FactoryResourceScopeTest {
                           return owned;
                         }));
         char expected = winners[body].charAt(close);
-        if (expected == 'S')
+        if (expected == SANITIZED_IO_WINNER)
           fixed(
               assertInstanceOf(StorageIoException.class, actual),
               close == 0
@@ -451,11 +461,11 @@ final class FactoryResourceScopeTest {
                   : StorageIoException.Reason.UNAVAILABLE);
         else assertSame(body == 0 ? secondary : primary, actual);
         assertEquals(suppressed[body].charAt(close) - '0', actual.getSuppressed().length);
-        if (actual.getSuppressed().length == 1)
+        if (actual.getSuppressed().length == ONE_SANITIZED_SUPPRESSION)
           fixed(
               assertInstanceOf(StorageIoException.class, actual.getSuppressed()[0]),
               StorageIoException.Reason.UNAVAILABLE);
-        assertEquals(List.of("open", "assemble", "close"), order);
+        assertEquals(List.of(OPEN_EVENT, "assemble", CLOSE_EVENT), order);
         assertFalse(token.live);
       }
   }
@@ -477,9 +487,10 @@ final class FactoryResourceScopeTest {
                         assertSame(token, owned);
                         closed.incrementAndGet();
                         owned.live = false;
-                        if (mode == 1) throw new IOException("PUBLIC_CLOSE");
-                        if (mode == 2) throw new IllegalStateException("PUBLIC_CLOSE");
-                        if (mode == 3) throw new AssertionError("PUBLIC_CLOSE");
+                        if (mode == IO_CLOSE_MODE) throw new IOException(PUBLIC_CLOSE_MARKER);
+                        if (mode == RUNTIME_CLOSE_MODE)
+                          throw new IllegalStateException(PUBLIC_CLOSE_MARKER);
+                        if (mode == ERROR_CLOSE_MODE) throw new AssertionError(PUBLIC_CLOSE_MARKER);
                       },
                       owned -> null));
       assertEquals("complete resource owner", actual.getMessage());
@@ -638,13 +649,13 @@ final class FactoryResourceScopeTest {
         throws IOException {
       return ResourceScope.acquire(
           () -> {
-            order.add("open");
+            order.add(OPEN_EVENT);
             token.live = true;
             return token;
           },
           owned -> {
             assertSame(token, owned);
-            order.add("close");
+            order.add(CLOSE_EVENT);
             assertTrue(token.live);
             token.live = false;
             raise(secondary);
@@ -652,14 +663,14 @@ final class FactoryResourceScopeTest {
           owned -> {
             assertSame(token, owned);
             assertTrue(token.live);
-            order.add("body");
+            order.add(BODY_EVENT);
             raise(primary);
             return "result";
           });
     }
 
     void closed() {
-      assertEquals(List.of("open", "body", "close"), order);
+      assertEquals(List.of(OPEN_EVENT, BODY_EVENT, CLOSE_EVENT), order);
       assertFalse(token.live);
     }
   }

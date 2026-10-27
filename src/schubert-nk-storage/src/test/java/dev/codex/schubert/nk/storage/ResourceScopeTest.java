@@ -16,6 +16,10 @@ import org.junit.jupiter.api.Test;
 
 /** OPS009/FIL/UI237/251/SS333; SSC063/PG170; PT-OPS-RSCOPE001..008,018027. */
 final class ResourceScopeTest {
+  private static final int CLOSE_FAILURE_MODE = 1;
+  private static final int SUCCESSFUL_BODY_MODE = 1;
+  private static final String BODY_EVENT = "body";
+
   @Test
   void successfulOwnership() throws Exception {
     List<String> order = new ArrayList<>();
@@ -23,11 +27,11 @@ final class ResourceScopeTest {
         ResourceScope.use(
             () -> order.add("close"),
             () -> {
-              order.add("body");
+              order.add(BODY_EVENT);
               return 42;
             });
     assertEquals(42, result);
-    assertEquals(List.of("body", "close"), order);
+    assertEquals(List.of(BODY_EVENT, "close"), order);
   }
 
   @Test
@@ -62,10 +66,10 @@ final class ResourceScopeTest {
                   ResourceScope.use(
                       () -> {
                         closed.incrementAndGet();
-                        if (chosen == 1) throw new IOException("public close");
+                        if (chosen == CLOSE_FAILURE_MODE) throw new IOException("public close");
                       },
                       () -> {
-                        if (chosen == 1) return 42;
+                        if (chosen == SUCCESSFUL_BODY_MODE) return 42;
                         if (chosen == 0) throw new IOException("public body");
                         var primary = new StorageIoException(StorageIoException.Reason.MISSING);
                         primary.addSuppressed(
@@ -190,10 +194,10 @@ final class ResourceScopeTest {
                 ResourceScope.use(
                     () -> order.add("inner-close"),
                     () -> {
-                      order.add("body");
+                      order.add(BODY_EVENT);
                       return 42;
                     })));
-    assertEquals(List.of("body", "inner-close", "outer-close"), order);
+    assertEquals(List.of(BODY_EVENT, "inner-close", "outer-close"), order);
     for (Throwable primary : unknowns()) {
       AtomicInteger closed = new AtomicInteger();
       assertSame(

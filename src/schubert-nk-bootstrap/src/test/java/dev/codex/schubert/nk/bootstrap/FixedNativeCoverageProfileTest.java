@@ -11,6 +11,8 @@ import org.junit.jupiter.api.Test;
 
 /** Independent literal option/role/phase/invocation matrix; no production-generated expected. */
 final class FixedNativeCoverageProfileTest {
+  private static final String API_ROLE_PREFIX = "API-";
+  private static final String ROOT_PHASE_SUFFIX = "-root";
   private static final String INV = "1234567890abcdef1234567890abcdef";
   private static final String PREFIX =
       "-javaagent:/opt/pgpt-tools-pg390/jacoco-agent.jar=output=none,append=false,dumponexit=false,sessionid=";
@@ -55,7 +57,7 @@ final class FixedNativeCoverageProfileTest {
 
   @Test
   void nc193003MissingNullCollectionElementsAndUnknownInvocationAreRejectedWithoutNpe() {
-    String option = PREFIX + "API-" + INV + "-root";
+    String option = PREFIX + API_ROLE_PREFIX + INV + ROOT_PHASE_SUFFIX;
     assertThrows(
         IllegalArgumentException.class,
         () ->
@@ -93,11 +95,11 @@ final class FixedNativeCoverageProfileTest {
 
   @Test
   void nc193004ReservedUnknownDuplicateRolePhasePathAndOptionExpansionAreRejected() {
-    String valid = PREFIX + "API-" + INV + "-root";
+    String valid = PREFIX + API_ROLE_PREFIX + INV + ROOT_PHASE_SUFFIX;
     for (String wrong :
         List.of(
-            valid.replace("API-", "WEB-"),
-            valid.replace("-root", "-ordinary"),
+            valid.replace(API_ROLE_PREFIX, "WEB-"),
+            valid.replace(ROOT_PHASE_SUFFIX, "-ordinary"),
             valid.replace(INV, "a".repeat(32)),
             valid.replace("jacoco-agent.jar", "other.jar"),
             valid.replace("output=none", "output=file"),
@@ -131,12 +133,12 @@ final class FixedNativeCoverageProfileTest {
         "fb5b0036a0899ea97edfa0fc2c7985b55f3f7c5695028163e5e60d4f3cf6075d",
         FixedNativeCoverageProfile.AGENT_SHA256);
     var inputs = new java.util.ArrayList<String>();
-    inputs.add(PREFIX + "API-" + INV + "-root");
+    inputs.add(PREFIX + API_ROLE_PREFIX + INV + ROOT_PHASE_SUFFIX);
     var actual =
         FixedNativeCoverageProfile.parse(
                 ServiceConfigFiles.Service.API, FixedNativeCoverageProfile.Phase.ROOT, INV, inputs)
             .orElseThrow();
     inputs.clear();
-    assertEquals(PREFIX + "API-" + INV + "-root", actual.argument());
+    assertEquals(PREFIX + API_ROLE_PREFIX + INV + ROOT_PHASE_SUFFIX, actual.argument());
   }
 }

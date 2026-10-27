@@ -15,6 +15,8 @@ import org.junit.jupiter.api.Test;
 
 /** PT-OPS-OBSDATA-001/002: public value objects only; no real observation or authority. */
 final class ObservationValueRedactionTest {
+  private static final String PUBLIC_FIELD = "public";
+
   @Test
   void obsdata001FactsRetainPublicInputsButDiagnosticNeverRendersYamlOrBinding() {
     for (String marker : new String[] {"PUBLIC-DATA-A", "PUBLIC-DATA-B"}) {
@@ -46,8 +48,8 @@ final class ObservationValueRedactionTest {
     for (String marker : new String[] {"PUBLIC-DATA-A", "PUBLIC-DATA-B"}) {
       var evidence =
           new ArtemisStartupObservation.Evidence(
-              Map.of(marker, Map.of("public", "value")), Map.of("public", marker),
-              Map.of(marker, Map.of("public", "setting")), Map.of("public", marker),
+              Map.of(marker, Map.of(PUBLIC_FIELD, "value")), Map.of(PUBLIC_FIELD, marker),
+              Map.of(marker, Map.of(PUBLIC_FIELD, "setting")), Map.of(PUBLIC_FIELD, marker),
               Map.of(marker, Map.of("public-role", Map.of("read", true))), Map.of());
       var journal = new BrokerJournalEvidence.Summary(5, "c".repeat(64));
       var value = new MorningBrokerExecution.Observations(evidence, journal);
