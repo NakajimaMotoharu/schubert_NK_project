@@ -1,0 +1,140 @@
+{
+  "actualExit": 0,
+  "allMainAndOtherInputsPreserved": true,
+  "allOriginalOracleTokensRestored": true,
+  "coverage": null,
+  "invocation": {
+    "actualPythonCommand": [
+      "/usr/bin/python3",
+      "-B",
+      "tools/quality/pg12132_batch_value_fixture_source_post.py"
+    ],
+    "arbitraryArgumentsRecorded": false,
+    "entrypointPath": "tools/quality/pg12132_batch_value_fixture_source_post.py",
+    "entrypointSha256": "c9799db61bf06cd80edce8466a03d86d8af0c81d98f868e9d7e3f6b97517688e",
+    "helperPath": "tools/quality/host_tool_invocation.py",
+    "helperSha256": "85d616a3db4ff47f4c95ae2e0dd57954bc2b09f28b8f2a685b986e5621545c46",
+    "libraryPath": "tools/quality/pg12132_batch_value_fixture_source_post.py",
+    "librarySha256": "c9799db61bf06cd80edce8466a03d86d8af0c81d98f868e9d7e3f6b97517688e",
+    "loadedProjectPythonSources": {
+      "tools/quality/g07_host_class_provenance_inputs.py": "a676cb3e4145177c3c243722d737592ce7d44c3f29cfe4f670662ef7651f046b",
+      "tools/quality/host_tool_invocation.py": "85d616a3db4ff47f4c95ae2e0dd57954bc2b09f28b8f2a685b986e5621545c46",
+      "tools/quality/pg12132_batch_value_fixture_source_post.py": "c9799db61bf06cd80edce8466a03d86d8af0c81d98f868e9d7e3f6b97517688e",
+      "tools/quality/public_java_digest_provenance.py": "dd47f8735a61ce849995633c3290a6ad047842ef3263829ce359db413778f7a0"
+    },
+    "provenance": "OBSERVED_SYS_ARGV_AND_ORIG_ARGV_NOT_RECONSTRUCTED"
+  },
+  "metadataNegativeVectors": 30,
+  "newAccepted": 0,
+  "originalCatalog": [
+    {
+      "method": "ops001UnitAndStartTargetCatalogsKeepTheirApprovedLiterals",
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/EnumValueCatalogCompatibilityTest.java"
+    },
+    {
+      "method": "detailedNestedDataHasNoMutableInputOrOutputAliases",
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/mq/ArtemisDetailedValuesTest.java"
+    },
+    {
+      "method": "brokerFieldsComeFromElevenReadsAndMutableDiskNumberIsCapturedOnce",
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/mq/ArtemisDetailedValuesTest.java"
+    },
+    {
+      "method": "queueCountAndBytesAreNotLostAndRemainIndependentOfLaterFixtureChanges",
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/mq/ArtemisDetailedValuesTest.java"
+    }
+  ],
+  "originalMethods": 4,
+  "originalRawTokens": 2285,
+  "planManifestSha256": "e605ba4aa54692bb840093735ea245f6088f93bd9d702213dbe407101820098b",
+  "productTestsExecuted": 0,
+  "sourceBefore": "ee82637a750105243ddeac665c61d27a781e5cf1",
+  "sourceChanges": [
+    {
+      "beforeSha256": "4e0c8298e20ef86283acd126b2e1d36e4848b45a2921767616929de40a53573b",
+      "constants": [
+        {
+          "id": "PMD-05247",
+          "literal": "\"API\"",
+          "name": "API_NAME",
+          "references": 4
+        },
+        {
+          "id": "PMD-05248",
+          "literal": "\"WEB\"",
+          "name": "WEB_NAME",
+          "references": 4
+        },
+        {
+          "id": "PMD-05249",
+          "literal": "\"schubert-nk-api.service\"",
+          "name": "API_UNIT_NAME",
+          "references": 4
+        },
+        {
+          "id": "PMD-05250",
+          "literal": "\"schubert-nk-web.service\"",
+          "name": "WEB_UNIT_NAME",
+          "references": 4
+        },
+        {
+          "id": "PMD-05251",
+          "literal": "\"CLEANUP\"",
+          "name": "CLEANUP_NAME",
+          "references": 6
+        },
+        {
+          "id": "PMD-05252",
+          "literal": "\"INSPECTOR\"",
+          "name": "INSPECTOR_NAME",
+          "references": 5
+        },
+        {
+          "id": "PMD-05253",
+          "literal": "\"EXPIRY\"",
+          "name": "EXPIRY_NAME",
+          "references": 6
+        },
+        {
+          "id": "PMD-05254",
+          "literal": "\"BACKUP\"",
+          "name": "BACKUP_NAME",
+          "references": 5
+        },
+        {
+          "id": "PMD-05255",
+          "literal": "\"ARTEMIS\"",
+          "name": "ARTEMIS_NAME",
+          "references": 4
+        }
+      ],
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/EnumValueCatalogCompatibilityTest.java",
+      "sha256": "4455707c599e9fe7ca2265c2bd9f64ca8f81d6705a723dafdc938514cd323939"
+    },
+    {
+      "beforeSha256": "adcf5df2918f85d9e694a682c045cdc0799bb08731a53ce1f695ab458064aaac",
+      "constants": [
+        {
+          "id": "PMD-04939",
+          "literal": "\"public\"",
+          "name": "PUBLIC_FIELD",
+          "references": 5
+        },
+        {
+          "id": "PMD-04940",
+          "literal": "\"value\"",
+          "name": "FIELD_VALUE",
+          "references": 5
+        },
+        {
+          "id": "PMD-04941",
+          "literal": "\"address\"",
+          "name": "ADDRESS_KEY",
+          "references": 7
+        }
+      ],
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/mq/ArtemisDetailedValuesTest.java",
+      "sha256": "bd3c44e8c9f98f2461c386883e1d8f358c1d6e87c99876e7f397abec09293107"
+    }
+  ]
+}

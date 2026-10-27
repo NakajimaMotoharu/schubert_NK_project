@@ -1,0 +1,58 @@
+{
+  "rows": [
+    {
+      "associatedCurrentCases": [
+        {
+          "className": "dev.codex.schubert.nk.batch.mq.ArtemisDetailedValuesTest",
+          "method": "brokerFieldsComeFromElevenReadsAndMutableDiskNumberIsCapturedOnce",
+          "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/mq/ArtemisDetailedValuesTest.java",
+          "sourceSha256": "bd3c44e8c9f98f2461c386883e1d8f358c1d6e87c99876e7f397abec09293107"
+        },
+        {
+          "className": "dev.codex.schubert.nk.batch.mq.ArtemisDetailedValuesTest",
+          "method": "queueCountAndBytesAreNotLostAndRemainIndependentOfLaterFixtureChanges",
+          "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/mq/ArtemisDetailedValuesTest.java",
+          "sourceSha256": "bd3c44e8c9f98f2461c386883e1d8f358c1d6e87c99876e7f397abec09293107"
+        }
+      ],
+      "attributes": {
+        "begincolumn": "13",
+        "beginline": "64",
+        "class": "ArtemisDetailedValuesTest",
+        "endcolumn": "49",
+        "endline": "64",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader",
+        "method": "unused",
+        "package": "dev.codex.schubert.nk.batch.mq",
+        "priority": "3",
+        "rule": "UseProperClassLoader",
+        "ruleset": "Error Prone"
+      },
+      "currentCase": {
+        "className": "dev.codex.schubert.nk.batch.mq.ArtemisDetailedValuesTest",
+        "method": "brokerFieldsComeFromElevenReadsAndMutableDiskNumberIsCapturedOnce",
+        "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/mq/ArtemisDetailedValuesTest.java",
+        "sourceSha256": "bd3c44e8c9f98f2461c386883e1d8f358c1d6e87c99876e7f397abec09293107"
+      },
+      "currentWholeJoinPending": true,
+      "disposition": "REQUIRED_CONTRACT",
+      "helperMethod": "unused",
+      "id": "PMD-04942",
+      "kind": "BORROWED_INTERFACE_DEFINITION_LOADER",
+      "method": "unused",
+      "methodTokenSha256": "94acd92bfca52839bc02746f72a21e6770ecf695a0ed344b33acd15359b76689",
+      "newSourceReason": false,
+      "oldRuntimeReassigned": false,
+      "originalRowSha256": "9ecd35f34c7fb508286fbe8587891435af359ec541ca011e2dd0a7d403214e70",
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/mq/ArtemisDetailedValuesTest.java",
+      "previousReferenceRetainedAsHistorical": true,
+      "productTestsExecutedByReview": 0,
+      "reason": "The owned JavaSE fixture creates a proxy of the borrowed ClientSession interface using the loader that actually defines that interface. An arbitrary thread-context loader is not guaranteed to see the SDK type. The handler throws AssertionError on every invocation; the two actual tests use injected readers and never use a real Core session. This loader selects type visibility, not a connection, startup authority or production component. Source/current callers and zero query/outer operations are independently bound; raw warning is retained.",
+      "rule": "UseProperClassLoader",
+      "source": "8a229695c0ea503ebac8761993665242eeba0107",
+      "sourceSha256": "bd3c44e8c9f98f2461c386883e1d8f358c1d6e87c99876e7f397abec09293107",
+      "sourceSpanSha256": "ebeeee16732652ae2d04dd0ffc0af01db6f8346ae9ac213e86e85ba87bee3651"
+    }
+  ],
+  "source": "8a229695c0ea503ebac8761993665242eeba0107"
+}
