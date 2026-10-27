@@ -1,0 +1,294 @@
+{
+  "rows": [
+    {
+      "attributes": {
+        "begincolumn": "21",
+        "beginline": "82",
+        "class": "InspectorDbCredentialTest",
+        "endcolumn": "53",
+        "endline": "82",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "method": "concurrentOwnership",
+        "package": "dev.codex.schubert.nk.api.maintenance",
+        "priority": "3",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading",
+        "variable": "pool"
+      },
+      "controls": [
+        "try(varpool=Executors.newFixedThreadPool(12))",
+        "i<100",
+        "pool.invokeAll(work)",
+        "done.get(5,TimeUnit.SECONDS)",
+        "pool.submit(material::close)",
+        "closing.get(5,TimeUnit.SECONDS)"
+      ],
+      "currentCases": [
+        {
+          "className": "dev.codex.schubert.nk.api.maintenance.InspectorDbCredentialTest",
+          "method": "concurrentOwnership",
+          "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/maintenance/InspectorDbCredentialTest.java",
+          "sourceSha256": "8fce092a7e882fdc66773a7592716b8d4a9b8afc7aa1c19b34c5d96ef302e989"
+        }
+      ],
+      "currentWholeJoinPending": true,
+      "disposition": "CONTEXT_NOT_APPLICABLE",
+      "id": "PMD-06393",
+      "kind": "FINITE_OWNED_MEMORY_INPUT_CSRF_FIXTURE_WORKERS",
+      "newAccepted": 0,
+      "oldRuntimeReassigned": false,
+      "originalRowSha256": "7cef89194f5c01b9712229f8540fcf46984e00ee55f8a700d0a25069790d4497",
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/maintenance/InspectorDbCredentialTest.java",
+      "productTestsExecutedByReview": 0,
+      "reason": "Standalone JavaSE JUnit owns fixed12 or10 workers, each100 finite memory callbacks, TWR and finally erased synthetic buffers. Inspector get5seconds and CSRF get20seconds; invokeAll/TWR have no local timeout, distinct whole JVM bound240seconds. No application executor, real credentials, database, actual sessions, HTTP, Root, Unit, FFM, VM or network. Six historical context references are source-rebound, not new classifications; raw6 retained.",
+      "rule": "DoNotUseThreads",
+      "scopeKind": "METHOD",
+      "scopeName": "concurrentOwnership",
+      "scopeTokenSha256": "4413a397bf46deff79f0272378ee2449a53a201c5e91e90b7ff9cd5c7377a8c3",
+      "source": "915a8ed153b00d76a80164d36f9ce5b86d645046",
+      "sourceSha256": "8fce092a7e882fdc66773a7592716b8d4a9b8afc7aa1c19b34c5d96ef302e989",
+      "sourceSpanSha256": "bbe60476b44de49716587db252bc4e805bc4dacb4e380fba833a504589a7f74b"
+    },
+    {
+      "attributes": {
+        "begincolumn": "23",
+        "beginline": "95",
+        "class": "InspectorDbCredentialTest",
+        "endcolumn": "43",
+        "endline": "95",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "method": "concurrentOwnership",
+        "package": "dev.codex.schubert.nk.api.maintenance",
+        "priority": "3",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading"
+      },
+      "controls": [
+        "try(varpool=Executors.newFixedThreadPool(12))",
+        "i<100",
+        "pool.invokeAll(work)",
+        "done.get(5,TimeUnit.SECONDS)",
+        "pool.submit(material::close)",
+        "closing.get(5,TimeUnit.SECONDS)"
+      ],
+      "currentCases": [
+        {
+          "className": "dev.codex.schubert.nk.api.maintenance.InspectorDbCredentialTest",
+          "method": "concurrentOwnership",
+          "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/maintenance/InspectorDbCredentialTest.java",
+          "sourceSha256": "8fce092a7e882fdc66773a7592716b8d4a9b8afc7aa1c19b34c5d96ef302e989"
+        }
+      ],
+      "currentWholeJoinPending": true,
+      "disposition": "CONTEXT_NOT_APPLICABLE",
+      "id": "PMD-06394",
+      "kind": "FINITE_OWNED_MEMORY_INPUT_CSRF_FIXTURE_WORKERS",
+      "newAccepted": 0,
+      "oldRuntimeReassigned": false,
+      "originalRowSha256": "bb7a128ada327dbfaef004dff36c48eba7c9598f49f96a31d8d91400b366cdaa",
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/maintenance/InspectorDbCredentialTest.java",
+      "productTestsExecutedByReview": 0,
+      "reason": "Standalone JavaSE JUnit owns fixed12 or10 workers, each100 finite memory callbacks, TWR and finally erased synthetic buffers. Inspector get5seconds and CSRF get20seconds; invokeAll/TWR have no local timeout, distinct whole JVM bound240seconds. No application executor, real credentials, database, actual sessions, HTTP, Root, Unit, FFM, VM or network. Six historical context references are source-rebound, not new classifications; raw6 retained.",
+      "rule": "DoNotUseThreads",
+      "scopeKind": "METHOD",
+      "scopeName": "concurrentOwnership",
+      "scopeTokenSha256": "4413a397bf46deff79f0272378ee2449a53a201c5e91e90b7ff9cd5c7377a8c3",
+      "source": "915a8ed153b00d76a80164d36f9ce5b86d645046",
+      "sourceSha256": "8fce092a7e882fdc66773a7592716b8d4a9b8afc7aa1c19b34c5d96ef302e989",
+      "sourceSpanSha256": "59fbbb8d767576722ed8b44da37469042a39ab1d8ad9a430030e7edf4f388802"
+    },
+    {
+      "attributes": {
+        "begincolumn": "21",
+        "beginline": "112",
+        "class": "InspectorDbCredentialTest",
+        "endcolumn": "49",
+        "endline": "112",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "method": "concurrentOwnership",
+        "package": "dev.codex.schubert.nk.api.maintenance",
+        "priority": "3",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading",
+        "variable": "closing"
+      },
+      "controls": [
+        "try(varpool=Executors.newFixedThreadPool(12))",
+        "i<100",
+        "pool.invokeAll(work)",
+        "done.get(5,TimeUnit.SECONDS)",
+        "pool.submit(material::close)",
+        "closing.get(5,TimeUnit.SECONDS)"
+      ],
+      "currentCases": [
+        {
+          "className": "dev.codex.schubert.nk.api.maintenance.InspectorDbCredentialTest",
+          "method": "concurrentOwnership",
+          "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/maintenance/InspectorDbCredentialTest.java",
+          "sourceSha256": "8fce092a7e882fdc66773a7592716b8d4a9b8afc7aa1c19b34c5d96ef302e989"
+        }
+      ],
+      "currentWholeJoinPending": true,
+      "disposition": "CONTEXT_NOT_APPLICABLE",
+      "id": "PMD-06395",
+      "kind": "FINITE_OWNED_MEMORY_INPUT_CSRF_FIXTURE_WORKERS",
+      "newAccepted": 0,
+      "oldRuntimeReassigned": false,
+      "originalRowSha256": "a187f041efe5175a55a67e49d2db9b729ffae45ebbcc2a72960fe007001aa122",
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/maintenance/InspectorDbCredentialTest.java",
+      "productTestsExecutedByReview": 0,
+      "reason": "Standalone JavaSE JUnit owns fixed12 or10 workers, each100 finite memory callbacks, TWR and finally erased synthetic buffers. Inspector get5seconds and CSRF get20seconds; invokeAll/TWR have no local timeout, distinct whole JVM bound240seconds. No application executor, real credentials, database, actual sessions, HTTP, Root, Unit, FFM, VM or network. Six historical context references are source-rebound, not new classifications; raw6 retained.",
+      "rule": "DoNotUseThreads",
+      "scopeKind": "METHOD",
+      "scopeName": "concurrentOwnership",
+      "scopeTokenSha256": "4413a397bf46deff79f0272378ee2449a53a201c5e91e90b7ff9cd5c7377a8c3",
+      "source": "915a8ed153b00d76a80164d36f9ce5b86d645046",
+      "sourceSha256": "8fce092a7e882fdc66773a7592716b8d4a9b8afc7aa1c19b34c5d96ef302e989",
+      "sourceSpanSha256": "30659eefddb553d3548d96dfeeeb78660c401455b273364d6401438e45fed11d"
+    },
+    {
+      "attributes": {
+        "begincolumn": "23",
+        "beginline": "113",
+        "class": "InspectorDbCredentialTest",
+        "endcolumn": "43",
+        "endline": "113",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "method": "concurrentOwnership",
+        "package": "dev.codex.schubert.nk.api.maintenance",
+        "priority": "3",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading"
+      },
+      "controls": [
+        "try(varpool=Executors.newFixedThreadPool(12))",
+        "i<100",
+        "pool.invokeAll(work)",
+        "done.get(5,TimeUnit.SECONDS)",
+        "pool.submit(material::close)",
+        "closing.get(5,TimeUnit.SECONDS)"
+      ],
+      "currentCases": [
+        {
+          "className": "dev.codex.schubert.nk.api.maintenance.InspectorDbCredentialTest",
+          "method": "concurrentOwnership",
+          "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/maintenance/InspectorDbCredentialTest.java",
+          "sourceSha256": "8fce092a7e882fdc66773a7592716b8d4a9b8afc7aa1c19b34c5d96ef302e989"
+        }
+      ],
+      "currentWholeJoinPending": true,
+      "disposition": "CONTEXT_NOT_APPLICABLE",
+      "id": "PMD-06396",
+      "kind": "FINITE_OWNED_MEMORY_INPUT_CSRF_FIXTURE_WORKERS",
+      "newAccepted": 0,
+      "oldRuntimeReassigned": false,
+      "originalRowSha256": "37fa4855e8b5e7f81234701567fa3e6194eda8618f8f84e472dce78e2dea031d",
+      "path": "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/api/maintenance/InspectorDbCredentialTest.java",
+      "productTestsExecutedByReview": 0,
+      "reason": "Standalone JavaSE JUnit owns fixed12 or10 workers, each100 finite memory callbacks, TWR and finally erased synthetic buffers. Inspector get5seconds and CSRF get20seconds; invokeAll/TWR have no local timeout, distinct whole JVM bound240seconds. No application executor, real credentials, database, actual sessions, HTTP, Root, Unit, FFM, VM or network. Six historical context references are source-rebound, not new classifications; raw6 retained.",
+      "rule": "DoNotUseThreads",
+      "scopeKind": "METHOD",
+      "scopeName": "concurrentOwnership",
+      "scopeTokenSha256": "4413a397bf46deff79f0272378ee2449a53a201c5e91e90b7ff9cd5c7377a8c3",
+      "source": "915a8ed153b00d76a80164d36f9ce5b86d645046",
+      "sourceSha256": "8fce092a7e882fdc66773a7592716b8d4a9b8afc7aa1c19b34c5d96ef302e989",
+      "sourceSpanSha256": "59fbbb8d767576722ed8b44da37469042a39ab1d8ad9a430030e7edf4f388802"
+    },
+    {
+      "attributes": {
+        "begincolumn": "21",
+        "beginline": "98",
+        "class": "WebCsrfTokenTest",
+        "endcolumn": "53",
+        "endline": "98",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "method": "web035ConcurrentGenerationAndMatchingStayIndependent",
+        "package": "dev.codex.schubert.nk.web.security",
+        "priority": "3",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading",
+        "variable": "pool"
+      },
+      "controls": [
+        "try(varpool=Executors.newFixedThreadPool(10))",
+        "i<100",
+        "pool.invokeAll(jobs)",
+        "future.get(20,TimeUnit.SECONDS)",
+        "assertEquals(100,values.size())"
+      ],
+      "currentCases": [
+        {
+          "className": "dev.codex.schubert.nk.web.security.WebCsrfTokenTest",
+          "method": "web035ConcurrentGenerationAndMatchingStayIndependent",
+          "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/WebCsrfTokenTest.java",
+          "sourceSha256": "19e10719730067440dd2376f3c612e2a3cfaba9d890c4cb690b3cff65b134c5c"
+        }
+      ],
+      "currentWholeJoinPending": true,
+      "disposition": "CONTEXT_NOT_APPLICABLE",
+      "id": "PMD-08704",
+      "kind": "FINITE_OWNED_MEMORY_INPUT_CSRF_FIXTURE_WORKERS",
+      "newAccepted": 0,
+      "oldRuntimeReassigned": false,
+      "originalRowSha256": "b2022bf5c5cc92bc01e692929f32a8ae1f4df807e2f739a589b40ea62a4f6876",
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/WebCsrfTokenTest.java",
+      "productTestsExecutedByReview": 0,
+      "reason": "Standalone JavaSE JUnit owns fixed12 or10 workers, each100 finite memory callbacks, TWR and finally erased synthetic buffers. Inspector get5seconds and CSRF get20seconds; invokeAll/TWR have no local timeout, distinct whole JVM bound240seconds. No application executor, real credentials, database, actual sessions, HTTP, Root, Unit, FFM, VM or network. Six historical context references are source-rebound, not new classifications; raw6 retained.",
+      "rule": "DoNotUseThreads",
+      "scopeKind": "METHOD",
+      "scopeName": "web035ConcurrentGenerationAndMatchingStayIndependent",
+      "scopeTokenSha256": "1f614614345af03679c6464318597b666e493f840f1ec07606e2e544c20a07b3",
+      "source": "915a8ed153b00d76a80164d36f9ce5b86d645046",
+      "sourceSha256": "19e10719730067440dd2376f3c612e2a3cfaba9d890c4cb690b3cff65b134c5c",
+      "sourceSpanSha256": "0fa83ae08f5c4568e707b84248dd3d8e198e9127b2520f044b9a955feba1e164"
+    },
+    {
+      "attributes": {
+        "begincolumn": "25",
+        "beginline": "112",
+        "class": "WebCsrfTokenTest",
+        "endcolumn": "45",
+        "endline": "112",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "method": "web035ConcurrentGenerationAndMatchingStayIndependent",
+        "package": "dev.codex.schubert.nk.web.security",
+        "priority": "3",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading"
+      },
+      "controls": [
+        "try(varpool=Executors.newFixedThreadPool(10))",
+        "i<100",
+        "pool.invokeAll(jobs)",
+        "future.get(20,TimeUnit.SECONDS)",
+        "assertEquals(100,values.size())"
+      ],
+      "currentCases": [
+        {
+          "className": "dev.codex.schubert.nk.web.security.WebCsrfTokenTest",
+          "method": "web035ConcurrentGenerationAndMatchingStayIndependent",
+          "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/WebCsrfTokenTest.java",
+          "sourceSha256": "19e10719730067440dd2376f3c612e2a3cfaba9d890c4cb690b3cff65b134c5c"
+        }
+      ],
+      "currentWholeJoinPending": true,
+      "disposition": "CONTEXT_NOT_APPLICABLE",
+      "id": "PMD-08705",
+      "kind": "FINITE_OWNED_MEMORY_INPUT_CSRF_FIXTURE_WORKERS",
+      "newAccepted": 0,
+      "oldRuntimeReassigned": false,
+      "originalRowSha256": "3add7ca231124e1919b50833d8da88183adb33a6a162c20e56ec178c30326d40",
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/WebCsrfTokenTest.java",
+      "productTestsExecutedByReview": 0,
+      "reason": "Standalone JavaSE JUnit owns fixed12 or10 workers, each100 finite memory callbacks, TWR and finally erased synthetic buffers. Inspector get5seconds and CSRF get20seconds; invokeAll/TWR have no local timeout, distinct whole JVM bound240seconds. No application executor, real credentials, database, actual sessions, HTTP, Root, Unit, FFM, VM or network. Six historical context references are source-rebound, not new classifications; raw6 retained.",
+      "rule": "DoNotUseThreads",
+      "scopeKind": "METHOD",
+      "scopeName": "web035ConcurrentGenerationAndMatchingStayIndependent",
+      "scopeTokenSha256": "1f614614345af03679c6464318597b666e493f840f1ec07606e2e544c20a07b3",
+      "source": "915a8ed153b00d76a80164d36f9ce5b86d645046",
+      "sourceSha256": "19e10719730067440dd2376f3c612e2a3cfaba9d890c4cb690b3cff65b134c5c",
+      "sourceSpanSha256": "cf119bee31771d362b9bd975f19c2a8de10a683718deaa11cd1a5fe37683e51c"
+    }
+  ],
+  "source": "915a8ed153b00d76a80164d36f9ce5b86d645046"
+}
