@@ -1,0 +1,21 @@
+{
+  "actualExit": 1,
+  "source": "915a8ed153b00d76a80164d36f9ce5b86d645046",
+  "operatorHead": "20beb01c559801b27d7ee67801ceaeb21de2fc9f",
+  "observedCommand": ["env", "PYTHONPATH=tools/quality", "python3", "-B", "tools/quality/pg12640_run_session_plan.py", "--emit-patch"],
+  "entrySha256": "d70cbf703d5841e37d2ec5a954cf0af2b8ced7377896d1d490209ddf84391058",
+  "recordBasis": "Observed original exec exit1/AssertionError before patch output; no rerun, no independently persisted process manifest",
+  "exactFailureUTC": null,
+  "missingTimestampReason": "Original exec response did not include an absolute timestamp",
+  "failure": "intended: substring count for a complete String token differs from LEX token count",
+  "completeStringTokenCount": 6,
+  "substringCount": 10,
+  "patchApplied": false,
+  "productTestsExecuted": 0,
+  "normalBuildStartedByFailedEntry": false,
+  "relatedBug": "BUG1990",
+  "relatedYkt": "YKT1738",
+  "replacementEntry": "tools/quality/pg12641_run_session_plan_v2.py",
+  "newAccepted": 0,
+  "formalUpdated": false
+}

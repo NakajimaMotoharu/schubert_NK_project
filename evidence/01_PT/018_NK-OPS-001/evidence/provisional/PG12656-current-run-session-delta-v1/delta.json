@@ -1,0 +1,239 @@
+{
+  "actualViolationCount": null,
+  "addedFindingIds": [],
+  "contextPostNegativeVectors": 22,
+  "coverage": null,
+  "freshRows": [
+    {
+      "attributes": {
+        "begincolumn": "25",
+        "beginline": "119",
+        "class": "InspectorRunEnvironmentTest",
+        "endcolumn": "57",
+        "endline": "119",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "method": "concurrentUse",
+        "package": "dev.codex.schubert.nk.batch.platform",
+        "priority": "3",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading",
+        "variable": "executor"
+      },
+      "controls": [
+        "try(varexecutor=Executors.newFixedThreadPool(16))",
+        "i<64",
+        "executor.invokeAll(tasks)",
+        "result.get(5,TimeUnit.SECONDS)",
+        "assertTrue(identities.add(value))",
+        "assertEquals(64,identities.size())"
+      ],
+      "currentCases": [
+        {
+          "className": "dev.codex.schubert.nk.batch.platform.InspectorRunEnvironmentTest",
+          "method": "concurrentUse",
+          "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/InspectorRunEnvironmentTest.java",
+          "sourceSha256": "c894e2f65a3acc24624b5044b8a4cb10d5c24aab04546e5418b3c1f1db54bf04"
+        }
+      ],
+      "currentWholeJoinPending": true,
+      "disposition": "CONTEXT_NOT_APPLICABLE",
+      "id": "PMD-05279",
+      "kind": "FINITE_OWNED_RUN_SESSION_VALUE_FIXTURE_WORKERS",
+      "newAccepted": 0,
+      "oldRuntimeReassigned": false,
+      "originalRowSha256": "518d2689930f2fb8eb741e0db20b178718cac7faa50243195530b87cb14f4583",
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/InspectorRunEnvironmentTest.java",
+      "productTestsExecutedByReview": 0,
+      "reason": "Standalone JavaSE JUnit owns fixed16 run-byte workers with64 finite callbacks and fixed10 JSON workers with100 finite callbacks. TWR and get5/20seconds preserve error propagation; invokeAll/TWR have no local timeout, distinct whole JVM bound240seconds. Original independent public ASCII/JSON and per-task ownership assertions remain. No env mutation, real file, actual credential/session grant, DB, HTTP, Root, Unit, FFM, VM or network. Four historical references source-rebound, raw4 retained, no new classifications.",
+      "rule": "DoNotUseThreads",
+      "scopeKind": "METHOD",
+      "scopeName": "concurrentUse",
+      "scopeTokenSha256": "2e44e2125e7d86f9ae69a2fe676701afffa6ab73664049c94c4f8f3776647e9c",
+      "source": "917f2e755d4912e522b9893e55aa272fd8e80934",
+      "sourceSha256": "c894e2f65a3acc24624b5044b8a4cb10d5c24aab04546e5418b3c1f1db54bf04",
+      "sourceSpanSha256": "46512bd6bf5ddea3080e5e55a5e39306efe879c328507fea10da2adc09509d21"
+    },
+    {
+      "attributes": {
+        "begincolumn": "25",
+        "beginline": "128",
+        "class": "InspectorRunEnvironmentTest",
+        "endcolumn": "50",
+        "endline": "128",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "method": "concurrentUse",
+        "package": "dev.codex.schubert.nk.batch.platform",
+        "priority": "3",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading"
+      },
+      "controls": [
+        "try(varexecutor=Executors.newFixedThreadPool(16))",
+        "i<64",
+        "executor.invokeAll(tasks)",
+        "result.get(5,TimeUnit.SECONDS)",
+        "assertTrue(identities.add(value))",
+        "assertEquals(64,identities.size())"
+      ],
+      "currentCases": [
+        {
+          "className": "dev.codex.schubert.nk.batch.platform.InspectorRunEnvironmentTest",
+          "method": "concurrentUse",
+          "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/InspectorRunEnvironmentTest.java",
+          "sourceSha256": "c894e2f65a3acc24624b5044b8a4cb10d5c24aab04546e5418b3c1f1db54bf04"
+        }
+      ],
+      "currentWholeJoinPending": true,
+      "disposition": "CONTEXT_NOT_APPLICABLE",
+      "id": "PMD-05280",
+      "kind": "FINITE_OWNED_RUN_SESSION_VALUE_FIXTURE_WORKERS",
+      "newAccepted": 0,
+      "oldRuntimeReassigned": false,
+      "originalRowSha256": "308fd947f2bf000e2b8780c5cb057dddbf280571bfb34d7d5a97cd3f68c61e70",
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/InspectorRunEnvironmentTest.java",
+      "productTestsExecutedByReview": 0,
+      "reason": "Standalone JavaSE JUnit owns fixed16 run-byte workers with64 finite callbacks and fixed10 JSON workers with100 finite callbacks. TWR and get5/20seconds preserve error propagation; invokeAll/TWR have no local timeout, distinct whole JVM bound240seconds. Original independent public ASCII/JSON and per-task ownership assertions remain. No env mutation, real file, actual credential/session grant, DB, HTTP, Root, Unit, FFM, VM or network. Four historical references source-rebound, raw4 retained, no new classifications.",
+      "rule": "DoNotUseThreads",
+      "scopeKind": "METHOD",
+      "scopeName": "concurrentUse",
+      "scopeTokenSha256": "2e44e2125e7d86f9ae69a2fe676701afffa6ab73664049c94c4f8f3776647e9c",
+      "source": "917f2e755d4912e522b9893e55aa272fd8e80934",
+      "sourceSha256": "c894e2f65a3acc24624b5044b8a4cb10d5c24aab04546e5418b3c1f1db54bf04",
+      "sourceSpanSha256": "9af25a128f8effbccd5f83bd239b1f00d33d2aec1c3032555507eedcec5d2eec"
+    },
+    {
+      "attributes": {
+        "begincolumn": "21",
+        "beginline": "167",
+        "class": "SessionOperationTokenV2Test",
+        "endcolumn": "53",
+        "endline": "167",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "method": "tokv205MixedCapacityAndConcurrentIndependentLiterals",
+        "package": "dev.codex.schubert.nk.web.session",
+        "priority": "3",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading",
+        "variable": "pool"
+      },
+      "controls": [
+        "try(varpool=Executors.newFixedThreadPool(10))",
+        "n<100",
+        "pool.submit(",
+        "future.get(20,TimeUnit.SECONDS)",
+        "assertArrayEquals(bytes(golden),codec.encode(attributes))"
+      ],
+      "currentCases": [
+        {
+          "className": "dev.codex.schubert.nk.web.session.SessionOperationTokenV2Test",
+          "method": "tokv205MixedCapacityAndConcurrentIndependentLiterals",
+          "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/SessionOperationTokenV2Test.java",
+          "sourceSha256": "4a26d6e28fd142bbe6d18e406f6921225c743d7f81b94ce10e0296f08153047d"
+        }
+      ],
+      "currentWholeJoinPending": true,
+      "disposition": "CONTEXT_NOT_APPLICABLE",
+      "id": "PMD-09108",
+      "kind": "FINITE_OWNED_RUN_SESSION_VALUE_FIXTURE_WORKERS",
+      "newAccepted": 0,
+      "oldRuntimeReassigned": false,
+      "originalRowSha256": "75d8a8bcb983619a13fc3f59d476d3ee7bdcdb8fbe3a63ccc1726bc9de75cbd3",
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/SessionOperationTokenV2Test.java",
+      "productTestsExecutedByReview": 0,
+      "reason": "Standalone JavaSE JUnit owns fixed16 run-byte workers with64 finite callbacks and fixed10 JSON workers with100 finite callbacks. TWR and get5/20seconds preserve error propagation; invokeAll/TWR have no local timeout, distinct whole JVM bound240seconds. Original independent public ASCII/JSON and per-task ownership assertions remain. No env mutation, real file, actual credential/session grant, DB, HTTP, Root, Unit, FFM, VM or network. Four historical references source-rebound, raw4 retained, no new classifications.",
+      "rule": "DoNotUseThreads",
+      "scopeKind": "METHOD",
+      "scopeName": "tokv205MixedCapacityAndConcurrentIndependentLiterals",
+      "scopeTokenSha256": "e11bb7203db53e550579d26470fbaadc31c5231b6155966128d6cde438f74305",
+      "source": "917f2e755d4912e522b9893e55aa272fd8e80934",
+      "sourceSha256": "4a26d6e28fd142bbe6d18e406f6921225c743d7f81b94ce10e0296f08153047d",
+      "sourceSpanSha256": "0fa83ae08f5c4568e707b84248dd3d8e198e9127b2520f044b9a955feba1e164"
+    },
+    {
+      "attributes": {
+        "begincolumn": "13",
+        "beginline": "171",
+        "class": "SessionOperationTokenV2Test",
+        "endcolumn": "19",
+        "endline": "176",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "method": "tokv205MixedCapacityAndConcurrentIndependentLiterals",
+        "package": "dev.codex.schubert.nk.web.session",
+        "priority": "3",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading"
+      },
+      "controls": [
+        "try(varpool=Executors.newFixedThreadPool(10))",
+        "n<100",
+        "pool.submit(",
+        "future.get(20,TimeUnit.SECONDS)",
+        "assertArrayEquals(bytes(golden),codec.encode(attributes))"
+      ],
+      "currentCases": [
+        {
+          "className": "dev.codex.schubert.nk.web.session.SessionOperationTokenV2Test",
+          "method": "tokv205MixedCapacityAndConcurrentIndependentLiterals",
+          "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/SessionOperationTokenV2Test.java",
+          "sourceSha256": "4a26d6e28fd142bbe6d18e406f6921225c743d7f81b94ce10e0296f08153047d"
+        }
+      ],
+      "currentWholeJoinPending": true,
+      "disposition": "CONTEXT_NOT_APPLICABLE",
+      "id": "PMD-09109",
+      "kind": "FINITE_OWNED_RUN_SESSION_VALUE_FIXTURE_WORKERS",
+      "newAccepted": 0,
+      "oldRuntimeReassigned": false,
+      "originalRowSha256": "3a02ffb995ae26f4c4b723afcb608b7307cc05cad405e40c20d22974b79f273a",
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/SessionOperationTokenV2Test.java",
+      "productTestsExecutedByReview": 0,
+      "reason": "Standalone JavaSE JUnit owns fixed16 run-byte workers with64 finite callbacks and fixed10 JSON workers with100 finite callbacks. TWR and get5/20seconds preserve error propagation; invokeAll/TWR have no local timeout, distinct whole JVM bound240seconds. Original independent public ASCII/JSON and per-task ownership assertions remain. No env mutation, real file, actual credential/session grant, DB, HTTP, Root, Unit, FFM, VM or network. Four historical references source-rebound, raw4 retained, no new classifications.",
+      "rule": "DoNotUseThreads",
+      "scopeKind": "METHOD",
+      "scopeName": "tokv205MixedCapacityAndConcurrentIndependentLiterals",
+      "scopeTokenSha256": "e11bb7203db53e550579d26470fbaadc31c5231b6155966128d6cde438f74305",
+      "source": "917f2e755d4912e522b9893e55aa272fd8e80934",
+      "sourceSha256": "4a26d6e28fd142bbe6d18e406f6921225c743d7f81b94ce10e0296f08153047d",
+      "sourceSpanSha256": "0761d5a489c53d7ebf44db176dccf9e58dc9286255099a11979c5098f5fc6569"
+    }
+  ],
+  "joinedContextWarnings": 3175,
+  "mainRaw": 1506,
+  "newAccepted": 0,
+  "newClassificationIds": [],
+  "newContextClassifications": 0,
+  "newScopeFindings": 4,
+  "newSourceRebindings": 4,
+  "noCurrentReferenceInThisJoin": 5326,
+  "oldScopeFindings": 7,
+  "productTestsExecuted": 0,
+  "removedFindingIds": [
+    "PMD-05278",
+    "PMD-09106",
+    "PMD-09107"
+  ],
+  "retainedIntroducedFindings": [
+    "PMD-NEW-PG11448-001",
+    "PMD-NEW-PG11448-002",
+    "PMD-NEW-PG11448-003",
+    "PMD-NEW-PG11448-004",
+    "PMD-NEW-PG11448-005",
+    "PMD-NEW-PG11448-006",
+    "PMD-NEW-PG11540-001",
+    "PMD-NEW-PG11540-002"
+  ],
+  "source": "917f2e755d4912e522b9893e55aa272fd8e80934",
+  "sourceDerivedRaw": 8501,
+  "sourceReboundCurrentWholePending": 784,
+  "sourceReboundExistingContextIds": [
+    "PMD-05279",
+    "PMD-05280",
+    "PMD-09108",
+    "PMD-09109"
+  ],
+  "staticActualExit": 1,
+  "testRaw": 6995,
+  "totalPriorCorrections": 916,
+  "wholeCurrentAnalyzerReissued": false,
+  "wholeF03Accepted": false
+}
