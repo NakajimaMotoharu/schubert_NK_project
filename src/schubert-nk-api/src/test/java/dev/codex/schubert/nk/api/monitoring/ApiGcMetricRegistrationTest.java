@@ -24,6 +24,10 @@ import org.junit.jupiter.api.Test;
 
 /** APIGC001..014/1785: exact owner order/identity, fresh own SDK objects only, no forced GC. */
 class ApiGcMetricRegistrationTest {
+  private static final String DEBUG_MODE = "DEBUG";
+  private static final String STANDARD_MODE = "STANDARD";
+  private static final String UNEXPECTED_OWNER_MESSAGE = "not own";
+  private static final String FAILURE_FIXTURE_MESSAGE = "fixture";
   private final ApiGcMetricRegistration registration = new ApiGcMetricRegistration();
 
   private static class Registry extends SimpleMeterRegistry implements AutoCloseable {
@@ -84,7 +88,7 @@ class ApiGcMetricRegistrationTest {
     var owned = new ArrayList<JvmGcMetrics>();
     try (var source = new Registry()) {
       try {
-        registration.bind(source, "DEBUG", owned::add);
+        registration.bind(source, DEBUG_MODE, owned::add);
         assertEquals(1, owned.size());
         assertNotNull(owned.getFirst());
         assertFalse(source.getMeters().isEmpty());
@@ -110,10 +114,10 @@ class ApiGcMetricRegistrationTest {
       source.reads.set(0);
       ApiGcMetricRegistration.install(
           source,
-          "STANDARD",
+          STANDARD_MODE,
           resource -> {
             owners.incrementAndGet();
-            throw new AssertionError("not own");
+            throw new AssertionError(UNEXPECTED_OWNER_MESSAGE);
           },
           () -> {
             factories.incrementAndGet();
@@ -121,9 +125,9 @@ class ApiGcMetricRegistrationTest {
           });
       registration.bind(
           source,
-          "STANDARD",
+          STANDARD_MODE,
           resource -> {
-            throw new AssertionError("not own");
+            throw new AssertionError(UNEXPECTED_OWNER_MESSAGE);
           });
       assertEquals(0, factories.get());
       assertEquals(0, owners.get());
@@ -149,7 +153,7 @@ class ApiGcMetricRegistrationTest {
         resource.onCloseCallback = () -> events.add("CLOSE");
         ApiGcMetricRegistration.install(
             source,
-            "DEBUG",
+            DEBUG_MODE,
             value -> {
               assertSame(resource, value);
               events.add("OWNER");
@@ -176,14 +180,15 @@ class ApiGcMetricRegistrationTest {
   @Test
   void apigc004NullBoundariesFailBeforeActivation() {
     assertThrows(
-        NullPointerException.class, () -> registration.bind(null, "STANDARD", resource -> true));
+        NullPointerException.class, () -> registration.bind(null, STANDARD_MODE, resource -> true));
     try (var source = new Registry()) {
       assertThrows(
           NullPointerException.class, () -> registration.bind(source, null, resource -> true));
-      assertThrows(NullPointerException.class, () -> registration.bind(source, "STANDARD", null));
+      assertThrows(
+          NullPointerException.class, () -> registration.bind(source, STANDARD_MODE, null));
       assertThrows(
           NullPointerException.class,
-          () -> ApiGcMetricRegistration.install(source, "DEBUG", resource -> true, null));
+          () -> ApiGcMetricRegistration.install(source, DEBUG_MODE, resource -> true, null));
       assertEquals(0, source.closeInvocations.get());
     }
   }
@@ -204,7 +209,7 @@ class ApiGcMetricRegistrationTest {
                             mode,
                             resource -> {
                               calls.incrementAndGet();
-                              throw new AssertionError("not own");
+                              throw new AssertionError(UNEXPECTED_OWNER_MESSAGE);
                             },
                             () -> {
                               calls.incrementAndGet();
@@ -227,7 +232,7 @@ class ApiGcMetricRegistrationTest {
         () ->
             ApiGcMetricRegistration.install(
                 source,
-                "DEBUG",
+                DEBUG_MODE,
                 resource -> {
                   calls.incrementAndGet();
                   return true;
@@ -242,9 +247,9 @@ class ApiGcMetricRegistrationTest {
     source.reads.set(0);
     registration.bind(
         source,
-        "STANDARD",
+        STANDARD_MODE,
         resource -> {
-          throw new AssertionError("not own");
+          throw new AssertionError(UNEXPECTED_OWNER_MESSAGE);
         });
     assertEquals(0, source.reads.get());
   }
@@ -258,7 +263,7 @@ class ApiGcMetricRegistrationTest {
           () ->
               ApiGcMetricRegistration.install(
                   source,
-                  "DEBUG",
+                  DEBUG_MODE,
                   resource -> {
                     calls.incrementAndGet();
                     return true;
@@ -273,7 +278,9 @@ class ApiGcMetricRegistrationTest {
   void apigc008FactoryRuntimeAndErrorIdentityRetained() {
     try (var source = new Registry()) {
       for (Throwable failure :
-          List.of(new IllegalStateException("fixture"), new AssertionError("fixture"))) {
+          List.of(
+              new IllegalStateException(FAILURE_FIXTURE_MESSAGE),
+              new AssertionError(FAILURE_FIXTURE_MESSAGE))) {
         var owners = new AtomicInteger();
         assertSame(
             failure,
@@ -282,7 +289,7 @@ class ApiGcMetricRegistrationTest {
                 () ->
                     ApiGcMetricRegistration.install(
                         source,
-                        "DEBUG",
+                        DEBUG_MODE,
                         resource -> {
                           owners.incrementAndGet();
                           return true;
@@ -309,7 +316,7 @@ class ApiGcMetricRegistrationTest {
                     () ->
                         ApiGcMetricRegistration.install(
                             source,
-                            "DEBUG",
+                            DEBUG_MODE,
                             value -> {
                               assertSame(resource, value);
                               owners.incrementAndGet();
@@ -332,7 +339,9 @@ class ApiGcMetricRegistrationTest {
   void apigc010OwnerRuntimeAndErrorNeverActivateOrAutoClose() {
     try (var source = new Registry()) {
       for (Throwable failure :
-          List.of(new IllegalStateException("fixture"), new AssertionError("fixture"))) {
+          List.of(
+              new IllegalStateException(FAILURE_FIXTURE_MESSAGE),
+              new AssertionError(FAILURE_FIXTURE_MESSAGE))) {
         var resource = new Fake();
         try {
 
@@ -342,7 +351,7 @@ class ApiGcMetricRegistrationTest {
                   failure.getClass(),
                   () ->
                       ApiGcMetricRegistration.install(
-                          source, "DEBUG", value -> fail(failure), () -> resource)));
+                          source, DEBUG_MODE, value -> fail(failure), () -> resource)));
           assertEquals(0, resource.bindInvocations.get());
           assertEquals(0, resource.closeInvocations.get());
           assertFalse(source.isClosed());
@@ -358,7 +367,9 @@ class ApiGcMetricRegistrationTest {
   void apigc011BindFailureLeavesExactHandleInAcknowledgedOwner() {
     try (var source = new Registry()) {
       for (Throwable failure :
-          List.of(new IllegalStateException("fixture"), new AssertionError("fixture"))) {
+          List.of(
+              new IllegalStateException(FAILURE_FIXTURE_MESSAGE),
+              new AssertionError(FAILURE_FIXTURE_MESSAGE))) {
         var resource = new Fake();
         try {
 
@@ -375,7 +386,7 @@ class ApiGcMetricRegistrationTest {
                   failure.getClass(),
                   () ->
                       ApiGcMetricRegistration.install(
-                          source, "DEBUG", owned::add, () -> resource)));
+                          source, DEBUG_MODE, owned::add, () -> resource)));
           assertEquals(List.of(resource), owned);
           assertEquals(1, resource.bindInvocations.get());
           assertEquals(0, resource.closeInvocations.get());
@@ -405,8 +416,8 @@ class ApiGcMetricRegistrationTest {
           var owners2 = new ArrayList<JvmGcMetrics>();
           one.onBindCallback = actual -> assertSame(first, actual);
           two.onBindCallback = actual -> assertSame(other, actual);
-          ApiGcMetricRegistration.install(first, "DEBUG", owners1::add, () -> one);
-          ApiGcMetricRegistration.install(other, "DEBUG", owners2::add, () -> two);
+          ApiGcMetricRegistration.install(first, DEBUG_MODE, owners1::add, () -> one);
+          ApiGcMetricRegistration.install(other, DEBUG_MODE, owners2::add, () -> two);
           assertEquals(List.of(one), owners1);
           assertEquals(List.of(two), owners2);
           owners1.forEach(JvmGcMetrics::close);
@@ -447,7 +458,8 @@ class ApiGcMetricRegistrationTest {
                             assertEquals(List.of(resource), owned);
                             total.incrementAndGet();
                           };
-                      ApiGcMetricRegistration.install(source, "DEBUG", owned::add, () -> resource);
+                      ApiGcMetricRegistration.install(
+                          source, DEBUG_MODE, owned::add, () -> resource);
                       assertEquals(1, resource.bindInvocations.get());
                       assertEquals(0, resource.closeInvocations.get());
                       owned.forEach(JvmGcMetrics::close);
@@ -472,14 +484,14 @@ class ApiGcMetricRegistrationTest {
         try {
 
           var owned = new ArrayList<JvmGcMetrics>();
-          var failure = new IllegalStateException("fixture");
+          var failure = new IllegalStateException(FAILURE_FIXTURE_MESSAGE);
           var actual =
               assertThrows(
                   IllegalStateException.class,
                   () ->
                       ApiGcMetricRegistration.install(
                           source,
-                          "DEBUG",
+                          DEBUG_MODE,
                           value -> {
                             owned.add(value);
                             if (throwsFailure) throw failure;

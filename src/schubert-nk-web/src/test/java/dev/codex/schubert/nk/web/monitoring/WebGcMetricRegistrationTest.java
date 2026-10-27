@@ -24,6 +24,10 @@ import org.junit.jupiter.api.Test;
 
 /** WEBGC001..014/1787: exact owner order/identity, fresh own SDK objects only, no forced GC. */
 class WebGcMetricRegistrationTest {
+  private static final String DEBUG_MODE = "DEBUG";
+  private static final String STANDARD_MODE = "STANDARD";
+  private static final String UNEXPECTED_OWNER_MESSAGE = "not own";
+  private static final String FAILURE_FIXTURE_MESSAGE = "fixture";
   private final WebGcMetricRegistration registration = new WebGcMetricRegistration();
 
   private static class Registry extends SimpleMeterRegistry implements AutoCloseable {
@@ -84,7 +88,7 @@ class WebGcMetricRegistrationTest {
     var owned = new ArrayList<JvmGcMetrics>();
     try (var source = new Registry()) {
       try {
-        registration.bind(source, "DEBUG", owned::add);
+        registration.bind(source, DEBUG_MODE, owned::add);
         assertEquals(1, owned.size());
         assertNotNull(owned.getFirst());
         assertFalse(source.getMeters().isEmpty());
@@ -110,10 +114,10 @@ class WebGcMetricRegistrationTest {
       source.reads.set(0);
       WebGcMetricRegistration.install(
           source,
-          "STANDARD",
+          STANDARD_MODE,
           resource -> {
             owners.incrementAndGet();
-            throw new AssertionError("not own");
+            throw new AssertionError(UNEXPECTED_OWNER_MESSAGE);
           },
           () -> {
             factories.incrementAndGet();
@@ -121,9 +125,9 @@ class WebGcMetricRegistrationTest {
           });
       registration.bind(
           source,
-          "STANDARD",
+          STANDARD_MODE,
           resource -> {
-            throw new AssertionError("not own");
+            throw new AssertionError(UNEXPECTED_OWNER_MESSAGE);
           });
       assertEquals(0, factories.get());
       assertEquals(0, owners.get());
@@ -149,7 +153,7 @@ class WebGcMetricRegistrationTest {
         resource.onCloseCallback = () -> events.add("CLOSE");
         WebGcMetricRegistration.install(
             source,
-            "DEBUG",
+            DEBUG_MODE,
             value -> {
               assertSame(resource, value);
               events.add("OWNER");
@@ -176,14 +180,15 @@ class WebGcMetricRegistrationTest {
   @Test
   void webgc004NullBoundariesFailBeforeActivation() {
     assertThrows(
-        NullPointerException.class, () -> registration.bind(null, "STANDARD", resource -> true));
+        NullPointerException.class, () -> registration.bind(null, STANDARD_MODE, resource -> true));
     try (var source = new Registry()) {
       assertThrows(
           NullPointerException.class, () -> registration.bind(source, null, resource -> true));
-      assertThrows(NullPointerException.class, () -> registration.bind(source, "STANDARD", null));
+      assertThrows(
+          NullPointerException.class, () -> registration.bind(source, STANDARD_MODE, null));
       assertThrows(
           NullPointerException.class,
-          () -> WebGcMetricRegistration.install(source, "DEBUG", resource -> true, null));
+          () -> WebGcMetricRegistration.install(source, DEBUG_MODE, resource -> true, null));
       assertEquals(0, source.closeInvocations.get());
     }
   }
@@ -204,7 +209,7 @@ class WebGcMetricRegistrationTest {
                             mode,
                             resource -> {
                               calls.incrementAndGet();
-                              throw new AssertionError("not own");
+                              throw new AssertionError(UNEXPECTED_OWNER_MESSAGE);
                             },
                             () -> {
                               calls.incrementAndGet();
@@ -227,7 +232,7 @@ class WebGcMetricRegistrationTest {
         () ->
             WebGcMetricRegistration.install(
                 source,
-                "DEBUG",
+                DEBUG_MODE,
                 resource -> {
                   calls.incrementAndGet();
                   return true;
@@ -242,9 +247,9 @@ class WebGcMetricRegistrationTest {
     source.reads.set(0);
     registration.bind(
         source,
-        "STANDARD",
+        STANDARD_MODE,
         resource -> {
-          throw new AssertionError("not own");
+          throw new AssertionError(UNEXPECTED_OWNER_MESSAGE);
         });
     assertEquals(0, source.reads.get());
   }
@@ -258,7 +263,7 @@ class WebGcMetricRegistrationTest {
           () ->
               WebGcMetricRegistration.install(
                   source,
-                  "DEBUG",
+                  DEBUG_MODE,
                   resource -> {
                     calls.incrementAndGet();
                     return true;
@@ -273,7 +278,9 @@ class WebGcMetricRegistrationTest {
   void webgc008FactoryRuntimeAndErrorIdentityRetained() {
     try (var source = new Registry()) {
       for (Throwable failure :
-          List.of(new IllegalStateException("fixture"), new AssertionError("fixture"))) {
+          List.of(
+              new IllegalStateException(FAILURE_FIXTURE_MESSAGE),
+              new AssertionError(FAILURE_FIXTURE_MESSAGE))) {
         var owners = new AtomicInteger();
         assertSame(
             failure,
@@ -282,7 +289,7 @@ class WebGcMetricRegistrationTest {
                 () ->
                     WebGcMetricRegistration.install(
                         source,
-                        "DEBUG",
+                        DEBUG_MODE,
                         resource -> {
                           owners.incrementAndGet();
                           return true;
@@ -309,7 +316,7 @@ class WebGcMetricRegistrationTest {
                     () ->
                         WebGcMetricRegistration.install(
                             source,
-                            "DEBUG",
+                            DEBUG_MODE,
                             value -> {
                               assertSame(resource, value);
                               owners.incrementAndGet();
@@ -332,7 +339,9 @@ class WebGcMetricRegistrationTest {
   void webgc010OwnerRuntimeAndErrorNeverActivateOrAutoClose() {
     try (var source = new Registry()) {
       for (Throwable failure :
-          List.of(new IllegalStateException("fixture"), new AssertionError("fixture"))) {
+          List.of(
+              new IllegalStateException(FAILURE_FIXTURE_MESSAGE),
+              new AssertionError(FAILURE_FIXTURE_MESSAGE))) {
         var resource = new Fake();
         try {
 
@@ -342,7 +351,7 @@ class WebGcMetricRegistrationTest {
                   failure.getClass(),
                   () ->
                       WebGcMetricRegistration.install(
-                          source, "DEBUG", value -> fail(failure), () -> resource)));
+                          source, DEBUG_MODE, value -> fail(failure), () -> resource)));
           assertEquals(0, resource.bindInvocations.get());
           assertEquals(0, resource.closeInvocations.get());
           assertFalse(source.isClosed());
@@ -358,7 +367,9 @@ class WebGcMetricRegistrationTest {
   void webgc011BindFailureLeavesExactHandleInAcknowledgedOwner() {
     try (var source = new Registry()) {
       for (Throwable failure :
-          List.of(new IllegalStateException("fixture"), new AssertionError("fixture"))) {
+          List.of(
+              new IllegalStateException(FAILURE_FIXTURE_MESSAGE),
+              new AssertionError(FAILURE_FIXTURE_MESSAGE))) {
         var resource = new Fake();
         try {
 
@@ -375,7 +386,7 @@ class WebGcMetricRegistrationTest {
                   failure.getClass(),
                   () ->
                       WebGcMetricRegistration.install(
-                          source, "DEBUG", owned::add, () -> resource)));
+                          source, DEBUG_MODE, owned::add, () -> resource)));
           assertEquals(List.of(resource), owned);
           assertEquals(1, resource.bindInvocations.get());
           assertEquals(0, resource.closeInvocations.get());
@@ -405,8 +416,8 @@ class WebGcMetricRegistrationTest {
           var owners2 = new ArrayList<JvmGcMetrics>();
           one.onBindCallback = actual -> assertSame(first, actual);
           two.onBindCallback = actual -> assertSame(other, actual);
-          WebGcMetricRegistration.install(first, "DEBUG", owners1::add, () -> one);
-          WebGcMetricRegistration.install(other, "DEBUG", owners2::add, () -> two);
+          WebGcMetricRegistration.install(first, DEBUG_MODE, owners1::add, () -> one);
+          WebGcMetricRegistration.install(other, DEBUG_MODE, owners2::add, () -> two);
           assertEquals(List.of(one), owners1);
           assertEquals(List.of(two), owners2);
           owners1.forEach(JvmGcMetrics::close);
@@ -447,7 +458,8 @@ class WebGcMetricRegistrationTest {
                             assertEquals(List.of(resource), owned);
                             total.incrementAndGet();
                           };
-                      WebGcMetricRegistration.install(source, "DEBUG", owned::add, () -> resource);
+                      WebGcMetricRegistration.install(
+                          source, DEBUG_MODE, owned::add, () -> resource);
                       assertEquals(1, resource.bindInvocations.get());
                       assertEquals(0, resource.closeInvocations.get());
                       owned.forEach(JvmGcMetrics::close);
@@ -472,14 +484,14 @@ class WebGcMetricRegistrationTest {
         try {
 
           var owned = new ArrayList<JvmGcMetrics>();
-          var failure = new IllegalStateException("fixture");
+          var failure = new IllegalStateException(FAILURE_FIXTURE_MESSAGE);
           var actual =
               assertThrows(
                   IllegalStateException.class,
                   () ->
                       WebGcMetricRegistration.install(
                           source,
-                          "DEBUG",
+                          DEBUG_MODE,
                           value -> {
                             owned.add(value);
                             if (throwsFailure) throw failure;
