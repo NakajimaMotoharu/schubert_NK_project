@@ -1,0 +1,11 @@
+# 2194 標準source constructor caller所有照合結果
+
+2193/群2554、source d4b5507ba不変更。PG11370 `2439413972f4aab4204fb2267631528fa72276182cc973075383226caf1c3b8a`、11372 `62d37929e30ccea89145ea07a5a8c599c00f74edfc357727ba31fb7383e27555` actual0、八metadata反例拒否。source参照17file/直接constructor74site/実caller11file、新method reference0。全siteはsites.jsonへpath/line/type/method/source SHA/token SHA/実所有形状で対応。
+
+core三Test51=14新guard＋既002 finally＋005失敗二siteを各role確認し原成功は再演0。Main MetricContext二種×二roleはconstructor resource-freeの標準ownerをprivate fieldへ保持、initializeで初めてbind/partial保持・close標準→custom。ContextTest各Harness一は未bind ownerをcontextへ移転しHarness close/unused candidateを確認、各005はnull port oracleをfinallyで保全。Observation Fixture一はmetricsへ移転後ownerへ保持、fixtureのmetrics.closeへ対応した限定source事実であり、既1869のworker/DB条件や実経路を再認定しない。
+
+payload API/Web各五・Batch四の直接siteでは、通常callerは既TWR/finallyを持つが三fullOwner helperはbind後返却までfailure guardなし。API/Webfull012の二callerも返却owner→executor構築→tryの間にguardがない。BUG1910を修正前起票、helper三/outer owner二/executor TWR四の是正と独立新三testを次群へ分離。原正常成功を失敗へ変換せず、実SDK漏れを観測したとの主張0。YKT1659全体IN_PROGRESS、検索だけ全体完了0。
+
+初版監査工具SHA cfdc78b8はAPI/Web001を番号だけでTWRと仮定しassert拒否・actual1/OUT生成前、製品実行0。BUG1911/YKT1660先行起票後、実finally/TWR tokenへ是正（現11370工具128afa84）。11372は番号を無視する三形状golden＋未guard負例と全74site/八metadata反例を確認、当工具scope修正済。元失敗は本記録と工具履歴値に保持し、製品PTや新受入に加算しない。
+
+元見積.5/2/5 cap10/開始使用33→終了fresh33/reset1793599188・丸め共有0≠専有費0、実N/T/配賦費null。現raw8924/正式1964-53/17-190/工数null/QA051final/全安全HOLD維持、新製品試験・全解析・coverage再演0。次は同caller接続のBUG1910通常PG/PT、既全86＋新三ID・同source一exec/独立oracle/全物理artifact・原担当traceを閉じる。私有raw/VM/Root/外部資源/保留工具へのアクセス0。
