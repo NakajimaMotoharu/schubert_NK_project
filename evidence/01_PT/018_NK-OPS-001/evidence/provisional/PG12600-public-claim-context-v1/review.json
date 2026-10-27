@@ -1,0 +1,252 @@
+{
+  "rows": [
+    {
+      "attributes": {
+        "begincolumn": "25",
+        "beginline": "170",
+        "class": "BackupWorkerRequestTest",
+        "endcolumn": "56",
+        "endline": "170",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "method": "concurrentIndependentConsumption",
+        "package": "dev.codex.schubert.nk.batch.platform",
+        "priority": "3",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading",
+        "variable": "executor"
+      },
+      "controls": [
+        "try(varexecutor=Executors.newFixedThreadPool(4))",
+        "n<32",
+        "executor.invokeAll(tasks)",
+        "assertTrue(result.get())",
+        "BackupWorkerRequest.consume(input)",
+        "assertArrayEquals(newbyte[input.length],input)"
+      ],
+      "currentCases": [
+        {
+          "className": "dev.codex.schubert.nk.batch.platform.BackupWorkerRequestTest",
+          "method": "concurrentIndependentConsumption",
+          "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/BackupWorkerRequestTest.java",
+          "sourceSha256": "674c4ec473789c1db6026308e93b6922e4eae59c895b91c8e68c215c06fa39f1"
+        }
+      ],
+      "currentWholeJoinPending": true,
+      "disposition": "CONTEXT_NOT_APPLICABLE",
+      "id": "PMD-05172",
+      "kind": "FINITE_OWNED_STANDALONE_PUBLIC_CLAIM_FIXTURE_WORKERS",
+      "newAccepted": 0,
+      "oldRuntimeReassigned": false,
+      "originalRowSha256": "eb1741c3b9ad76a66f62a5fab88444ab5350cc21728dbb7419955021d6558b79",
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/BackupWorkerRequestTest.java",
+      "productTestsExecutedByReview": 0,
+      "reason": "Original JavaSE JUnit owns one fixed four-worker executor with32 finite public request byte callbacks or one virtual executor withtwo independent buffers, all in TWR. Original invokeAll/get have no per-call timeout; the owned whole JVM has a distinct240second bound. Golden byte, exact decode values and whole-buffer erasure assertions are independent. No J2EE application worker, Backup/Cleanup execution, actual Root/parent guard/authority/FFM/file/DB/JMS/network/key operation. Historical five reasons are source-rebound, not five new classifications.",
+      "rule": "DoNotUseThreads",
+      "scopeKind": "METHOD",
+      "scopeName": "concurrentIndependentConsumption",
+      "scopeTokenSha256": "091d222b51ddaf6ac28832cc20b3e1e5ce3fa59b9d37a65558a4455f4beaefb7",
+      "source": "4749755f2562bd4e51658d8083a61e210ad2c521",
+      "sourceSha256": "674c4ec473789c1db6026308e93b6922e4eae59c895b91c8e68c215c06fa39f1",
+      "sourceSpanSha256": "f93e1793cb7a139e55f0b0dcf12d1f4620721e0707876be38f521c37b77d4ba3"
+    },
+    {
+      "attributes": {
+        "begincolumn": "25",
+        "beginline": "180",
+        "class": "BackupWorkerRequestTest",
+        "endcolumn": "50",
+        "endline": "180",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "method": "concurrentIndependentConsumption",
+        "package": "dev.codex.schubert.nk.batch.platform",
+        "priority": "3",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading"
+      },
+      "controls": [
+        "try(varexecutor=Executors.newFixedThreadPool(4))",
+        "n<32",
+        "executor.invokeAll(tasks)",
+        "assertTrue(result.get())",
+        "BackupWorkerRequest.consume(input)",
+        "assertArrayEquals(newbyte[input.length],input)"
+      ],
+      "currentCases": [
+        {
+          "className": "dev.codex.schubert.nk.batch.platform.BackupWorkerRequestTest",
+          "method": "concurrentIndependentConsumption",
+          "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/BackupWorkerRequestTest.java",
+          "sourceSha256": "674c4ec473789c1db6026308e93b6922e4eae59c895b91c8e68c215c06fa39f1"
+        }
+      ],
+      "currentWholeJoinPending": true,
+      "disposition": "CONTEXT_NOT_APPLICABLE",
+      "id": "PMD-05173",
+      "kind": "FINITE_OWNED_STANDALONE_PUBLIC_CLAIM_FIXTURE_WORKERS",
+      "newAccepted": 0,
+      "oldRuntimeReassigned": false,
+      "originalRowSha256": "c7f3acb654d19dcffef1f971ed9384defc5eed070476213f2c078b6932eca8da",
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/BackupWorkerRequestTest.java",
+      "productTestsExecutedByReview": 0,
+      "reason": "Original JavaSE JUnit owns one fixed four-worker executor with32 finite public request byte callbacks or one virtual executor withtwo independent buffers, all in TWR. Original invokeAll/get have no per-call timeout; the owned whole JVM has a distinct240second bound. Golden byte, exact decode values and whole-buffer erasure assertions are independent. No J2EE application worker, Backup/Cleanup execution, actual Root/parent guard/authority/FFM/file/DB/JMS/network/key operation. Historical five reasons are source-rebound, not five new classifications.",
+      "rule": "DoNotUseThreads",
+      "scopeKind": "METHOD",
+      "scopeName": "concurrentIndependentConsumption",
+      "scopeTokenSha256": "091d222b51ddaf6ac28832cc20b3e1e5ce3fa59b9d37a65558a4455f4beaefb7",
+      "source": "4749755f2562bd4e51658d8083a61e210ad2c521",
+      "sourceSha256": "674c4ec473789c1db6026308e93b6922e4eae59c895b91c8e68c215c06fa39f1",
+      "sourceSpanSha256": "9af25a128f8effbccd5f83bd239b1f00d33d2aec1c3032555507eedcec5d2eec"
+    },
+    {
+      "attributes": {
+        "begincolumn": "24",
+        "beginline": "168",
+        "class": "CleanupWorkerRequestTest",
+        "endcolumn": "88",
+        "endline": "168",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "method": "creq007ConcurrentIndependentBuffersAndParserLevelReplay",
+        "package": "dev.codex.schubert.nk.batch.platform",
+        "priority": "3",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading",
+        "variable": "workers"
+      },
+      "controls": [
+        "try(varworkers=java.util.concurrent.Executors.newVirtualThreadPerTaskExecutor())",
+        "workers.submit(()->CleanupWorkerRequest.consume(first))",
+        "workers.submit(()->CleanupWorkerRequest.consume(second))",
+        "a.get()",
+        "b.get()",
+        "assertArrayEquals(newbyte[first.length],first)",
+        "assertArrayEquals(newbyte[second.length],second)"
+      ],
+      "currentCases": [
+        {
+          "className": "dev.codex.schubert.nk.batch.platform.CleanupWorkerRequestTest",
+          "method": "creq007ConcurrentIndependentBuffersAndParserLevelReplay",
+          "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/CleanupWorkerRequestTest.java",
+          "sourceSha256": "fd76996c84c1a75a7eb68ac5fb24e758e58c5fcfb69a1679cb0aa46efc6e5493"
+        }
+      ],
+      "currentWholeJoinPending": true,
+      "disposition": "CONTEXT_NOT_APPLICABLE",
+      "id": "PMD-05207",
+      "kind": "FINITE_OWNED_STANDALONE_PUBLIC_CLAIM_FIXTURE_WORKERS",
+      "newAccepted": 0,
+      "oldRuntimeReassigned": false,
+      "originalRowSha256": "8f99918a41a85506ff49f2845d9cc09380a540747e4226a0d6c0dba251ea6498",
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/CleanupWorkerRequestTest.java",
+      "productTestsExecutedByReview": 0,
+      "reason": "Original JavaSE JUnit owns one fixed four-worker executor with32 finite public request byte callbacks or one virtual executor withtwo independent buffers, all in TWR. Original invokeAll/get have no per-call timeout; the owned whole JVM has a distinct240second bound. Golden byte, exact decode values and whole-buffer erasure assertions are independent. No J2EE application worker, Backup/Cleanup execution, actual Root/parent guard/authority/FFM/file/DB/JMS/network/key operation. Historical five reasons are source-rebound, not five new classifications.",
+      "rule": "DoNotUseThreads",
+      "scopeKind": "METHOD",
+      "scopeName": "creq007ConcurrentIndependentBuffersAndParserLevelReplay",
+      "scopeTokenSha256": "74a6a0ac49a432f622417d11c65cba52b27c36f0f531dad964af7944c4df2c4a",
+      "source": "4749755f2562bd4e51658d8083a61e210ad2c521",
+      "sourceSha256": "fd76996c84c1a75a7eb68ac5fb24e758e58c5fcfb69a1679cb0aa46efc6e5493",
+      "sourceSpanSha256": "bb70d5b8d567f04855a3bbf50d16be901c8885fa02be2e6199deccc0955da25f"
+    },
+    {
+      "attributes": {
+        "begincolumn": "15",
+        "beginline": "169",
+        "class": "CleanupWorkerRequestTest",
+        "endcolumn": "72",
+        "endline": "169",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "method": "creq007ConcurrentIndependentBuffersAndParserLevelReplay",
+        "package": "dev.codex.schubert.nk.batch.platform",
+        "priority": "3",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading",
+        "variable": "a"
+      },
+      "controls": [
+        "try(varworkers=java.util.concurrent.Executors.newVirtualThreadPerTaskExecutor())",
+        "workers.submit(()->CleanupWorkerRequest.consume(first))",
+        "workers.submit(()->CleanupWorkerRequest.consume(second))",
+        "a.get()",
+        "b.get()",
+        "assertArrayEquals(newbyte[first.length],first)",
+        "assertArrayEquals(newbyte[second.length],second)"
+      ],
+      "currentCases": [
+        {
+          "className": "dev.codex.schubert.nk.batch.platform.CleanupWorkerRequestTest",
+          "method": "creq007ConcurrentIndependentBuffersAndParserLevelReplay",
+          "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/CleanupWorkerRequestTest.java",
+          "sourceSha256": "fd76996c84c1a75a7eb68ac5fb24e758e58c5fcfb69a1679cb0aa46efc6e5493"
+        }
+      ],
+      "currentWholeJoinPending": true,
+      "disposition": "CONTEXT_NOT_APPLICABLE",
+      "id": "PMD-05208",
+      "kind": "FINITE_OWNED_STANDALONE_PUBLIC_CLAIM_FIXTURE_WORKERS",
+      "newAccepted": 0,
+      "oldRuntimeReassigned": false,
+      "originalRowSha256": "ba029764eab933b0f9a8d27045120c46b7aa549b6458e880c3969ae505e98c46",
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/CleanupWorkerRequestTest.java",
+      "productTestsExecutedByReview": 0,
+      "reason": "Original JavaSE JUnit owns one fixed four-worker executor with32 finite public request byte callbacks or one virtual executor withtwo independent buffers, all in TWR. Original invokeAll/get have no per-call timeout; the owned whole JVM has a distinct240second bound. Golden byte, exact decode values and whole-buffer erasure assertions are independent. No J2EE application worker, Backup/Cleanup execution, actual Root/parent guard/authority/FFM/file/DB/JMS/network/key operation. Historical five reasons are source-rebound, not five new classifications.",
+      "rule": "DoNotUseThreads",
+      "scopeKind": "METHOD",
+      "scopeName": "creq007ConcurrentIndependentBuffersAndParserLevelReplay",
+      "scopeTokenSha256": "74a6a0ac49a432f622417d11c65cba52b27c36f0f531dad964af7944c4df2c4a",
+      "source": "4749755f2562bd4e51658d8083a61e210ad2c521",
+      "sourceSha256": "fd76996c84c1a75a7eb68ac5fb24e758e58c5fcfb69a1679cb0aa46efc6e5493",
+      "sourceSpanSha256": "5224b59c09fb3480fe2475a173d4531703865b137974a640546193446dc412f7"
+    },
+    {
+      "attributes": {
+        "begincolumn": "15",
+        "beginline": "170",
+        "class": "CleanupWorkerRequestTest",
+        "endcolumn": "73",
+        "endline": "170",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "method": "creq007ConcurrentIndependentBuffersAndParserLevelReplay",
+        "package": "dev.codex.schubert.nk.batch.platform",
+        "priority": "3",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading",
+        "variable": "b"
+      },
+      "controls": [
+        "try(varworkers=java.util.concurrent.Executors.newVirtualThreadPerTaskExecutor())",
+        "workers.submit(()->CleanupWorkerRequest.consume(first))",
+        "workers.submit(()->CleanupWorkerRequest.consume(second))",
+        "a.get()",
+        "b.get()",
+        "assertArrayEquals(newbyte[first.length],first)",
+        "assertArrayEquals(newbyte[second.length],second)"
+      ],
+      "currentCases": [
+        {
+          "className": "dev.codex.schubert.nk.batch.platform.CleanupWorkerRequestTest",
+          "method": "creq007ConcurrentIndependentBuffersAndParserLevelReplay",
+          "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/CleanupWorkerRequestTest.java",
+          "sourceSha256": "fd76996c84c1a75a7eb68ac5fb24e758e58c5fcfb69a1679cb0aa46efc6e5493"
+        }
+      ],
+      "currentWholeJoinPending": true,
+      "disposition": "CONTEXT_NOT_APPLICABLE",
+      "id": "PMD-05209",
+      "kind": "FINITE_OWNED_STANDALONE_PUBLIC_CLAIM_FIXTURE_WORKERS",
+      "newAccepted": 0,
+      "oldRuntimeReassigned": false,
+      "originalRowSha256": "0063cfb24a7ebb6072a6401f1009649ff0cd0c12bebd31cf54e1ad5c98c242fe",
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/CleanupWorkerRequestTest.java",
+      "productTestsExecutedByReview": 0,
+      "reason": "Original JavaSE JUnit owns one fixed four-worker executor with32 finite public request byte callbacks or one virtual executor withtwo independent buffers, all in TWR. Original invokeAll/get have no per-call timeout; the owned whole JVM has a distinct240second bound. Golden byte, exact decode values and whole-buffer erasure assertions are independent. No J2EE application worker, Backup/Cleanup execution, actual Root/parent guard/authority/FFM/file/DB/JMS/network/key operation. Historical five reasons are source-rebound, not five new classifications.",
+      "rule": "DoNotUseThreads",
+      "scopeKind": "METHOD",
+      "scopeName": "creq007ConcurrentIndependentBuffersAndParserLevelReplay",
+      "scopeTokenSha256": "74a6a0ac49a432f622417d11c65cba52b27c36f0f531dad964af7944c4df2c4a",
+      "source": "4749755f2562bd4e51658d8083a61e210ad2c521",
+      "sourceSha256": "fd76996c84c1a75a7eb68ac5fb24e758e58c5fcfb69a1679cb0aa46efc6e5493",
+      "sourceSpanSha256": "7568a09384720bb5a74471307aa523fc508e92bcb07208e3e95c533dd5dc7497"
+    }
+  ],
+  "source": "4749755f2562bd4e51658d8083a61e210ad2c521"
+}

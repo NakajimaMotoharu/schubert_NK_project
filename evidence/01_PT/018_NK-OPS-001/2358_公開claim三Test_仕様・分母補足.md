@@ -1,0 +1,7 @@
+# 公開claim三Test 仕様・分母補足
+
+2356/2357/PG-D749、2026-10-28。原planへ結合した2356は不変更、本補足も完成manifestへ実hashで結合する。適用JaCoCo0.8.15の既定record/enum生成method filterを変更せず、追加exclude・手動unreachable扱い0。recordの生成accessor/equals/hashCode/toString等が分母へ含まれるかは実measurementを正とし、分母0を100%へ換算しない。明示constructor/encode/consume/独自diagnostic/private invalid等は実測分母で検証する。
+
+今回の独立byte期待はLAUNCH/BREQ/CREQの手書きgolden、時刻/UUID/境界は固定literal、SHAは固定abc vectorである。CREQ001の二同値record間hashCode比較は等しいrecordのhash整合性という補助property確認であり、独立したhashアルゴリズム/暗号機能の固定vector検証へ算入しない。これだけで期待値の独立性やhash全品質を証明したとはしない。
+
+三Basic request physical Mainの99L14M3C88B全miss0は当3classだけ、Startupの2branch・BatchRunの1L1M・Frame/Parent/Expiry等の未測定/未到達を消さない。全同source artifact Batch645/Bootstrap117/Storage80も分母込みで記録し全体未達を保持する。Guardや実Root/nativeを除外するために新しいfixtureを作るのではなく、既独立whole三Testの当call closureだけを実行した。SourceMainは全1843同byteであり、旧sourceの成功/nativeを当sourceへ合算しない。
