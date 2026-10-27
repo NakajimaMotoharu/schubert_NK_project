@@ -22,6 +22,12 @@ import org.junit.jupiter.api.Test;
 
 /** APISTD001..013/1793: fixed phase order and owner lifetime, fresh own JVM only. */
 class ApiStandardMetricsTest {
+  private static final String REGISTRY_CLOSE_EVENT = "REGISTRY_CLOSE";
+  private static final String GC_CLOSE_EVENT = "GC_CLOSE";
+  private static final String DEBUG_MODE = "DEBUG";
+  private static final String UNEXPECTED_PHASE_ACCESS = "not invoke";
+  private static final String STANDARD_MODE = "STANDARD";
+  private static final String FAILURE_FIXTURE = "fixture";
   private final ApiStandardMetrics assembly = new ApiStandardMetrics();
 
   private static final class Registry extends SimpleMeterRegistry implements AutoCloseable {
@@ -49,7 +55,7 @@ class ApiStandardMetricsTest {
     }
 
     public void close() {
-      events.add("REGISTRY_CLOSE");
+      events.add(REGISTRY_CLOSE_EVENT);
       closes.incrementAndGet();
       super.close();
     }
@@ -69,7 +75,7 @@ class ApiStandardMetricsTest {
     }
 
     public void close() {
-      events.add("GC_CLOSE");
+      events.add(GC_CLOSE_EVENT);
       closes++;
       resources.forEach(JvmGcMetrics::close);
     }
@@ -87,7 +93,7 @@ class ApiStandardMetricsTest {
     var owner = new Owner(events);
     try (source;
         owner) {
-      assembly.bind(source, "DEBUG", owner::retain);
+      assembly.bind(source, DEBUG_MODE, owner::retain);
       assertEquals(1, owner.resources.size());
       assertEquals(0, owner.closes);
       assertEquals(0, source.closes.get());
@@ -99,7 +105,7 @@ class ApiStandardMetricsTest {
       for (var meter : source.getMeters()) assertEquals("API", meter.getId().getTag("service"));
       assertTrue(events.isEmpty());
     }
-    assertEquals(List.of("GC_CLOSE", "REGISTRY_CLOSE"), events);
+    assertEquals(List.of(GC_CLOSE_EVENT, REGISTRY_CLOSE_EVENT), events);
     assertEquals(1, owner.closes);
     assertEquals(1, source.closes.get());
   }
@@ -109,12 +115,12 @@ class ApiStandardMetricsTest {
     try (var source = new Registry()) {
       Runnable forbidden =
           () -> {
-            throw new AssertionError("not invoke");
+            throw new AssertionError(UNEXPECTED_PHASE_ACCESS);
           };
       source.reads.set(0);
       ApiStandardMetrics.install(
           source,
-          "STANDARD",
+          STANDARD_MODE,
           resource -> {
             throw new AssertionError("not own");
           },
@@ -123,7 +129,7 @@ class ApiStandardMetricsTest {
           forbidden);
       assembly.bind(
           source,
-          "STANDARD",
+          STANDARD_MODE,
           resource -> {
             throw new AssertionError("not own");
           });
@@ -138,7 +144,7 @@ class ApiStandardMetricsTest {
       var order = new ArrayList<String>();
       ApiStandardMetrics.install(
           source,
-          "DEBUG",
+          DEBUG_MODE,
           resource -> true,
           () -> order.add("JVM"),
           () -> order.add("SYSTEM"),
@@ -153,29 +159,29 @@ class ApiStandardMetricsTest {
   void apistd004AllNullBoundariesFailBeforeActions() {
     Runnable forbidden =
         () -> {
-          throw new AssertionError("not invoke");
+          throw new AssertionError(UNEXPECTED_PHASE_ACCESS);
         };
     assertThrows(
-        NullPointerException.class, () -> assembly.bind(null, "STANDARD", resource -> true));
+        NullPointerException.class, () -> assembly.bind(null, STANDARD_MODE, resource -> true));
     try (var source = new Registry()) {
       source.reads.set(0);
       assertThrows(NullPointerException.class, () -> assembly.bind(source, null, resource -> true));
-      assertThrows(NullPointerException.class, () -> assembly.bind(source, "STANDARD", null));
+      assertThrows(NullPointerException.class, () -> assembly.bind(source, STANDARD_MODE, null));
       assertThrows(
           NullPointerException.class,
           () ->
               ApiStandardMetrics.install(
-                  source, "DEBUG", resource -> true, null, forbidden, forbidden));
+                  source, DEBUG_MODE, resource -> true, null, forbidden, forbidden));
       assertThrows(
           NullPointerException.class,
           () ->
               ApiStandardMetrics.install(
-                  source, "DEBUG", resource -> true, forbidden, null, forbidden));
+                  source, DEBUG_MODE, resource -> true, forbidden, null, forbidden));
       assertThrows(
           NullPointerException.class,
           () ->
               ApiStandardMetrics.install(
-                  source, "DEBUG", resource -> true, forbidden, forbidden, null));
+                  source, DEBUG_MODE, resource -> true, forbidden, forbidden, null));
       assertEquals(0, source.reads.get());
       assertEquals(0, source.closes.get());
     }
@@ -186,7 +192,7 @@ class ApiStandardMetricsTest {
     try (var source = new Registry()) {
       Runnable forbidden =
           () -> {
-            throw new AssertionError("not invoke");
+            throw new AssertionError(UNEXPECTED_PHASE_ACCESS);
           };
       source.reads.set(0);
       for (String mode : List.of("", "debug", "DEBUG ", "UNKNOWN"))
@@ -208,26 +214,26 @@ class ApiStandardMetricsTest {
     source.close();
     Runnable forbidden =
         () -> {
-          throw new AssertionError("not invoke");
+          throw new AssertionError(UNEXPECTED_PHASE_ACCESS);
         };
     assertThrows(
         IllegalStateException.class,
         () ->
             ApiStandardMetrics.install(
-                source, "DEBUG", resource -> true, forbidden, forbidden, forbidden));
+                source, DEBUG_MODE, resource -> true, forbidden, forbidden, forbidden));
     assertThrows(
-        IllegalStateException.class, () -> assembly.bind(source, "DEBUG", resource -> true));
+        IllegalStateException.class, () -> assembly.bind(source, DEBUG_MODE, resource -> true));
     assertEquals(1, source.closes.get());
   }
 
   @Test
   void apistd007EachRuntimeFailureStopsOnlyLaterPhases() {
-    phaseFailures(new IllegalStateException("fixture"));
+    phaseFailures(new IllegalStateException(FAILURE_FIXTURE));
   }
 
   @Test
   void apistd008EachErrorKeepsIdentityWithoutCleanup() {
-    phaseFailures(new AssertionError("fixture"));
+    phaseFailures(new AssertionError(FAILURE_FIXTURE));
   }
 
   private void phaseFailures(Throwable failure) {
@@ -251,7 +257,7 @@ class ApiStandardMetricsTest {
                 () ->
                     ApiStandardMetrics.install(
                         source,
-                        "DEBUG",
+                        DEBUG_MODE,
                         resource -> true,
                         actions.get(0),
                         actions.get(1),
@@ -275,7 +281,7 @@ class ApiStandardMetricsTest {
                   () ->
                       assembly.bind(
                           source,
-                          "DEBUG",
+                          DEBUG_MODE,
                           resource -> {
                             owner.retain(resource);
                             return false;
@@ -288,13 +294,13 @@ class ApiStandardMetricsTest {
       assertEquals(0, owner.closes);
       assertEquals(0, source.closes.get());
     }
-    assertEquals(List.of("GC_CLOSE", "REGISTRY_CLOSE"), events);
+    assertEquals(List.of(GC_CLOSE_EVENT, REGISTRY_CLOSE_EVENT), events);
   }
 
   @Test
   void apistd010GcOwnerFailureIsNotNormalizedOrRetried() {
     for (Throwable failure :
-        List.of(new IllegalStateException("fixture"), new AssertionError("fixture"))) {
+        List.of(new IllegalStateException(FAILURE_FIXTURE), new AssertionError(FAILURE_FIXTURE))) {
       var events = new ArrayList<String>();
       try (var source = new Registry(events);
           var owner = new Owner(events)) {
@@ -305,7 +311,7 @@ class ApiStandardMetricsTest {
                 () ->
                     assembly.bind(
                         source,
-                        "DEBUG",
+                        DEBUG_MODE,
                         resource -> {
                           owner.retain(resource);
                           runFailure(failure);
@@ -315,7 +321,7 @@ class ApiStandardMetricsTest {
         assertEquals(0, owner.closes);
         assertFalse(source.isClosed());
       }
-      assertEquals(List.of("GC_CLOSE", "REGISTRY_CLOSE"), events);
+      assertEquals(List.of(GC_CLOSE_EVENT, REGISTRY_CLOSE_EVENT), events);
     }
   }
 
@@ -326,7 +332,7 @@ class ApiStandardMetricsTest {
     source.reads.set(0);
     assembly.bind(
         source,
-        "STANDARD",
+        STANDARD_MODE,
         resource -> {
           throw new AssertionError("not own");
         });
@@ -342,16 +348,16 @@ class ApiStandardMetricsTest {
         var one = new Owner(events1);
         var other = new Registry(events2);
         var two = new Owner(events2)) {
-      assembly.bind(first, "DEBUG", one::retain);
-      assembly.bind(other, "DEBUG", two::retain);
+      assembly.bind(first, DEBUG_MODE, one::retain);
+      assembly.bind(other, DEBUG_MODE, two::retain);
       assertEquals(1, one.resources.size());
       assertEquals(1, two.resources.size());
       assertNotSame(one.resources.getFirst(), two.resources.getFirst());
       assertFalse(first.isClosed());
       assertFalse(other.isClosed());
     }
-    assertEquals(List.of("GC_CLOSE", "REGISTRY_CLOSE"), events1);
-    assertEquals(List.of("GC_CLOSE", "REGISTRY_CLOSE"), events2);
+    assertEquals(List.of(GC_CLOSE_EVENT, REGISTRY_CLOSE_EVENT), events1);
+    assertEquals(List.of(GC_CLOSE_EVENT, REGISTRY_CLOSE_EVENT), events2);
   }
 
   @Test
@@ -371,7 +377,7 @@ class ApiStandardMetricsTest {
                           total.incrementAndGet();
                         };
                     ApiStandardMetrics.install(
-                        source, "DEBUG", resource -> true, action, action, action);
+                        source, DEBUG_MODE, resource -> true, action, action, action);
                     assertEquals(3, local.get());
                     assertFalse(source.isClosed());
                     assertEquals(0, source.closes.get());
