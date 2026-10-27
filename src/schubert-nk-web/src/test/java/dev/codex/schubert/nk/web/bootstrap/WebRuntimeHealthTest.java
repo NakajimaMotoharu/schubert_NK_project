@@ -14,6 +14,13 @@ import org.junit.jupiter.api.Test;
 
 /** SS313342352 / PT-OPS-NWEB-HEALTH001..004; literal independent conjunction/ordering. */
 final class WebRuntimeHealthTest {
+  private static final String OWNER_STEP = "owner";
+  private static final String STOP_STEP = "stop";
+  private static final String TERMINAL_STEP = "terminal";
+  private static final String REPLY_STEP = "reply";
+  private static final String LOG_STEP = "log";
+  private static final String RETRY_STEP = "retry";
+
   @Test
   void health001EveryRequiredConditionIndependentlyRefusesAndStopsAtItsPosition() {
     for (int rejected = 0; rejected < 10; rejected++) {
@@ -21,34 +28,34 @@ final class WebRuntimeHealthTest {
       int index = rejected;
       BooleanSupplier owner =
           () -> {
-            calls.add("owner");
+            calls.add(OWNER_STEP);
             return index == 0;
           };
       BooleanSupplier stop =
           () -> {
-            calls.add("stop");
+            calls.add(STOP_STEP);
             return index == 1;
           };
       BooleanSupplier terminal =
           () -> {
-            calls.add("terminal");
+            calls.add(TERMINAL_STEP);
             return index == 2;
           };
       Predicate<String> reply =
           value -> {
-            assertEquals("reply", value);
+            assertEquals(REPLY_STEP, value);
             calls.add(value);
             return index != 7;
           };
       Predicate<String> log =
           value -> {
-            assertEquals("log", value);
+            assertEquals(LOG_STEP, value);
             calls.add(value);
             return index != 8;
           };
       Predicate<String> retry =
           value -> {
-            assertEquals("retry", value);
+            assertEquals(RETRY_STEP, value);
             calls.add(value);
             return index != 9;
           };
@@ -57,21 +64,22 @@ final class WebRuntimeHealthTest {
               owner,
               stop,
               terminal,
-              index == 3 ? null : "reply",
-              index == 4 ? null : "log",
-              index == 5 ? null : "retry",
+              index == 3 ? null : REPLY_STEP,
+              index == 4 ? null : LOG_STEP,
+              index == 5 ? null : RETRY_STEP,
               index == 6 ? null : new Object(),
               reply,
               log,
               retry));
       List<String> expected =
           switch (index) {
-            case 0 -> List.of("owner");
-            case 1 -> List.of("owner", "stop");
-            case 2, 3, 4, 5, 6 -> List.of("owner", "stop", "terminal");
-            case 7 -> List.of("owner", "stop", "terminal", "reply");
-            case 8 -> List.of("owner", "stop", "terminal", "reply", "log");
-            default -> List.of("owner", "stop", "terminal", "reply", "log", "retry");
+            case 0 -> List.of(OWNER_STEP);
+            case 1 -> List.of(OWNER_STEP, STOP_STEP);
+            case 2, 3, 4, 5, 6 -> List.of(OWNER_STEP, STOP_STEP, TERMINAL_STEP);
+            case 7 -> List.of(OWNER_STEP, STOP_STEP, TERMINAL_STEP, REPLY_STEP);
+            case 8 -> List.of(OWNER_STEP, STOP_STEP, TERMINAL_STEP, REPLY_STEP, LOG_STEP);
+            default ->
+                List.of(OWNER_STEP, STOP_STEP, TERMINAL_STEP, REPLY_STEP, LOG_STEP, RETRY_STEP);
           };
       assertEquals(expected, calls, "literal rejection position " + index);
     }
@@ -83,20 +91,20 @@ final class WebRuntimeHealthTest {
     assertTrue(
         WebRuntimeHealth.healthy(
             () -> {
-              calls.add("owner");
+              calls.add(OWNER_STEP);
               return false;
             },
             () -> {
-              calls.add("stop");
+              calls.add(STOP_STEP);
               return false;
             },
             () -> {
-              calls.add("terminal");
+              calls.add(TERMINAL_STEP);
               return false;
             },
-            "reply",
-            "log",
-            "retry",
+            REPLY_STEP,
+            LOG_STEP,
+            RETRY_STEP,
             new Object(),
             value -> {
               calls.add(value);
@@ -110,7 +118,8 @@ final class WebRuntimeHealthTest {
               calls.add(value);
               return true;
             }));
-    assertEquals(List.of("owner", "stop", "terminal", "reply", "log", "retry"), calls);
+    assertEquals(
+        List.of(OWNER_STEP, STOP_STEP, TERMINAL_STEP, REPLY_STEP, LOG_STEP, RETRY_STEP), calls);
   }
 
   @Test
@@ -122,7 +131,8 @@ final class WebRuntimeHealthTest {
       Predicate<String> probe =
           value -> {
             calls.add(value);
-            if (value.equals(List.of("reply", "log", "retry").get(position))) throw primary;
+            if (value.equals(List.of(REPLY_STEP, LOG_STEP, RETRY_STEP).get(position)))
+              throw primary;
             return true;
           };
       assertSame(
@@ -134,14 +144,14 @@ final class WebRuntimeHealthTest {
                       () -> false,
                       () -> false,
                       () -> false,
-                      "reply",
-                      "log",
-                      "retry",
+                      REPLY_STEP,
+                      LOG_STEP,
+                      RETRY_STEP,
                       new Object(),
                       probe,
                       probe,
                       probe)));
-      assertEquals(List.of("reply", "log", "retry").subList(0, position + 1), calls);
+      assertEquals(List.of(REPLY_STEP, LOG_STEP, RETRY_STEP).subList(0, position + 1), calls);
     }
   }
 
@@ -167,9 +177,9 @@ final class WebRuntimeHealthTest {
                     },
                     unused,
                     unused,
-                    "reply",
-                    "log",
-                    "retry",
+                    REPLY_STEP,
+                    LOG_STEP,
+                    RETRY_STEP,
                     new Object(),
                     unusedProbe,
                     unusedProbe,

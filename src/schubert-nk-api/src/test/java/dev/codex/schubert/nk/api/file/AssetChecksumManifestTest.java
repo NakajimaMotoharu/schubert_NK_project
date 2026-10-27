@@ -22,16 +22,20 @@ import org.junit.jupiter.api.function.Executable;
 
 /** Independent literal sha256sum lines, never production-generated expected hashes. SS333/343. */
 class AssetChecksumManifestTest {
+  private static final String MUSIC_TYPE = "MUSIC";
+  private static final String MUSIC_PREFIX = "music/";
+  private static final String OGG_SUFFIX = ".ogg";
+  private static final String MUSIC_A_PATH = "music/a.ogg";
   static final String ABC_SHA = "ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad";
   static final List<String[]> FORMATS =
       List.of(
           new String[] {"AUDIO", "scenario/音声.ogg", "audio/ogg"},
           new String[] {"VIDEO", "video/動画.mp4", "video/mp4"},
-          new String[] {"MUSIC", "music/曲.m4a", "audio/mp4"},
-          new String[] {"MUSIC", "music/曲.mp3", "audio/mpeg"},
-          new String[] {"MUSIC", "music/曲.ogg", "audio/ogg"},
-          new String[] {"MUSIC", "music/曲.wav", "audio/wav"},
-          new String[] {"MUSIC", "music/曲.flac", "audio/flac"});
+          new String[] {MUSIC_TYPE, "music/曲.m4a", "audio/mp4"},
+          new String[] {MUSIC_TYPE, "music/曲.mp3", "audio/mpeg"},
+          new String[] {MUSIC_TYPE, "music/曲.ogg", "audio/ogg"},
+          new String[] {MUSIC_TYPE, "music/曲.wav", "audio/wav"},
+          new String[] {MUSIC_TYPE, "music/曲.flac", "audio/flac"});
 
   @Test
   void med041LiteralManifestsPreserveApprovedPathsAndHashes() throws Exception {
@@ -40,12 +44,12 @@ class AssetChecksumManifestTest {
     AssetChecksumManifest manifest = parse(lines.toString(), 7);
     assertEquals(7, manifest.entryCount());
     for (String[] format : FORMATS) manifest.requireMatches(descriptor(format));
-    String longest = "music/" + "a".repeat(250) + "/" + "b".repeat(251) + ".ogg";
+    String longest = MUSIC_PREFIX + "a".repeat(250) + "/" + "b".repeat(251) + OGG_SUFFIX;
     assertEquals(512, longest.getBytes(StandardCharsets.UTF_8).length);
     var boundary = parse(line(longest), 1);
     boundary.requireMatches(music(longest, ABC_SHA, 3));
     StringBuilder maximum = new StringBuilder();
-    for (int i = 0; i < 59_627; i++) maximum.append(line("music/" + i + ".ogg"));
+    for (int i = 0; i < 59_627; i++) maximum.append(line(MUSIC_PREFIX + i + OGG_SUFFIX));
     var inventory = parse(maximum.toString(), 59_627);
     assertEquals(59_627, inventory.entryCount());
     inventory.requireMatches(music("music/0.ogg", ABC_SHA, 3));
@@ -58,14 +62,14 @@ class AssetChecksumManifestTest {
     reject(() -> parse("あ".repeat(23) + "\n", 1));
     assertThrows(NullPointerException.class, () -> AssetChecksumManifest.read(null, 1));
     for (int count : new int[] {-1, 0, 59_628, Integer.MAX_VALUE}) {
-      try (var source = new Source(line("music/a.ogg").getBytes(StandardCharsets.UTF_8), 13)) {
+      try (var source = new Source(line(MUSIC_A_PATH).getBytes(StandardCharsets.UTF_8), 13)) {
         assertThrows(
             IllegalArgumentException.class, () -> AssetChecksumManifest.read(source, count));
         assertEquals(0, source.reads);
         assertTrue(source.isOpen());
       }
     }
-    String good = line("music/a.ogg");
+    String good = line(MUSIC_A_PATH);
     for (String invalid :
         List.of(
             "",
@@ -92,11 +96,11 @@ class AssetChecksumManifestTest {
             "music/./a.ogg",
             "music\\a.ogg",
             "music//a.ogg",
-            "music/",
+            MUSIC_PREFIX,
             "music/\u0000.ogg",
             "music/e\u0301.ogg",
-            "music/" + "a".repeat(252) + ".ogg",
-            "music/" + "a".repeat(250) + "/" + "b".repeat(252) + ".ogg")) {
+            MUSIC_PREFIX + "a".repeat(252) + OGG_SUFFIX,
+            MUSIC_PREFIX + "a".repeat(250) + "/" + "b".repeat(252) + OGG_SUFFIX)) {
       reject(() -> parse(line(path), 1));
     }
     reject(() -> parse(good, 2));
@@ -112,18 +116,18 @@ class AssetChecksumManifestTest {
 
   @Test
   void med043PartialReadsIoFailuresAndHashMismatchesRemainRedacted() throws Exception {
-    byte[] bytes = line("music/a.ogg").getBytes(StandardCharsets.UTF_8);
+    byte[] bytes = line(MUSIC_A_PATH).getBytes(StandardCharsets.UTF_8);
     for (int chunk : new int[] {1, 13, 65_536}) {
       try (var source = new Source(bytes, chunk)) {
         var manifest = AssetChecksumManifest.read(source, 1);
-        manifest.requireMatches(music("music/a.ogg", ABC_SHA, 3));
+        manifest.requireMatches(music(MUSIC_A_PATH, ABC_SHA, 3));
         assertTrue(source.isOpen());
         assertThrows(NullPointerException.class, () -> manifest.requireMatches(null));
         reject(() -> manifest.requireMatches(music("music/missing.ogg", ABC_SHA, 3)));
         for (int i = 0; i < 64; i++) {
           char[] hash = ABC_SHA.toCharArray();
           hash[i] = hash[i] == '0' ? '1' : '0';
-          reject(() -> manifest.requireMatches(music("music/a.ogg", new String(hash), 3)));
+          reject(() -> manifest.requireMatches(music(MUSIC_A_PATH, new String(hash), 3)));
         }
       }
     }
@@ -143,7 +147,7 @@ class AssetChecksumManifestTest {
 
   @Test
   void med044ConcurrentMatchesOwnImmutableInput() throws Exception {
-    byte[] bytes = line("music/a.ogg").getBytes(StandardCharsets.UTF_8);
+    byte[] bytes = line(MUSIC_A_PATH).getBytes(StandardCharsets.UTF_8);
     try (var source = new Source(bytes, 13)) {
       var manifest = AssetChecksumManifest.read(source, 1);
       Arrays.fill(bytes, (byte) '!');
@@ -153,8 +157,8 @@ class AssetChecksumManifestTest {
         for (int i = 0; i < 100; i++)
           tasks.add(
               () -> {
-                manifest.requireMatches(music("music/a.ogg", ABC_SHA, 3));
-                reject(() -> manifest.requireMatches(music("music/a.ogg", "0".repeat(64), 3)));
+                manifest.requireMatches(music(MUSIC_A_PATH, ABC_SHA, 3));
+                reject(() -> manifest.requireMatches(music(MUSIC_A_PATH, "0".repeat(64), 3)));
                 return manifest.entryCount() == 1;
               });
         for (var future : pool.invokeAll(tasks)) assertTrue(future.get());
@@ -212,7 +216,9 @@ class AssetChecksumManifestTest {
 
     @Override
     public int read(ByteBuffer output) throws IOException {
-      if (reads++ == failAfter) throw new IOException("SYNTHETIC_PRIVATE_INPUT");
+      int readAttempt = reads;
+      reads++;
+      if (readAttempt == failAfter) throw new IOException("SYNTHETIC_PRIVATE_INPUT");
       if (position == bytes.length) return -1;
       int length = Math.min(Math.min(output.remaining(), chunk), bytes.length - position);
       output.put(bytes, position, length);
