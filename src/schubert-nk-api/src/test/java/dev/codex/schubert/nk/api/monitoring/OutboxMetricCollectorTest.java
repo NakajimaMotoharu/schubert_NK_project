@@ -30,6 +30,12 @@ import org.junit.jupiter.api.Test;
 
 /** OUTBOXCONN001..008/1668: own JDBC/registry fixtures, not actual DB/runtime operations. */
 class OutboxMetricCollectorTest {
+  private static final String OUTBOX_ROWS_METRIC = "nk_outbox_rows";
+  private static final String OUTBOX_AGES_METRIC = "nk_outbox_oldest_seconds";
+  private static final String PENDING_STATUS = "PENDING";
+  private static final String SENT_STATUS = "SENT";
+  private static final String ERROR_VALUE = "ERROR";
+  private static final String DEBUG_MODE = "DEBUG";
   private static final Instant AS_OF = Instant.EPOCH;
 
   private static final class Registry extends SimpleMeterRegistry implements AutoCloseable {
@@ -65,17 +71,21 @@ class OutboxMetricCollectorTest {
   private static void missing(Registry registry, OutboxMetricCollector collector) {
     assertTrue(collector.snapshot().isEmpty());
     assertEquals(6, registry.getMeters().size());
-    for (String metric : List.of("nk_outbox_rows", "nk_outbox_oldest_seconds"))
-      for (String status : List.of("PENDING", "SENT", "ERROR"))
+    for (String metric : List.of(OUTBOX_ROWS_METRIC, OUTBOX_AGES_METRIC))
+      for (String status : List.of(PENDING_STATUS, SENT_STATUS, ERROR_VALUE))
         assertTrue(Double.isNaN(gauge(registry, metric, status)));
   }
 
   @Test
   void outboxConn001BothFamiliesPublishOnlyAfterAllSuccessfulClose() throws SQLException {
     try (var registry = new Registry()) {
-      var collector = collector(registry, "DEBUG");
+      var collector = collector(registry, DEBUG_MODE);
       missing(registry, collector);
-      var f = new Fixture(Row.row("PENDING", 3, 2), Row.row("SENT", 5, 4), Row.row("ERROR", 7, 6));
+      var f =
+          new Fixture(
+              Row.row(PENDING_STATUS, 3, 2),
+              Row.row(SENT_STATUS, 5, 4),
+              Row.row(ERROR_VALUE, 7, 6));
       f.beforeStatementClose = () -> missing(registry, collector);
       var actual = collector.collect(f.connection(), AS_OF).orElseThrow();
       f.complete();
@@ -84,12 +94,12 @@ class OutboxMetricCollectorTest {
       assertEquals(5, actual.counts().sent());
       assertEquals(7, actual.counts().error());
       assertEquals(Duration.ofSeconds(2), actual.ages().pending());
-      assertEquals(3, gauge(registry, "nk_outbox_rows", "PENDING"));
-      assertEquals(5, gauge(registry, "nk_outbox_rows", "SENT"));
-      assertEquals(7, gauge(registry, "nk_outbox_rows", "ERROR"));
-      assertEquals(2, gauge(registry, "nk_outbox_oldest_seconds", "PENDING"));
-      assertEquals(4, gauge(registry, "nk_outbox_oldest_seconds", "SENT"));
-      assertEquals(6, gauge(registry, "nk_outbox_oldest_seconds", "ERROR"));
+      assertEquals(3, gauge(registry, OUTBOX_ROWS_METRIC, PENDING_STATUS));
+      assertEquals(5, gauge(registry, OUTBOX_ROWS_METRIC, SENT_STATUS));
+      assertEquals(7, gauge(registry, OUTBOX_ROWS_METRIC, ERROR_VALUE));
+      assertEquals(2, gauge(registry, OUTBOX_AGES_METRIC, PENDING_STATUS));
+      assertEquals(4, gauge(registry, OUTBOX_AGES_METRIC, SENT_STATUS));
+      assertEquals(6, gauge(registry, OUTBOX_AGES_METRIC, ERROR_VALUE));
       assertEquals(0, registry.closes.get());
     }
   }
@@ -97,10 +107,10 @@ class OutboxMetricCollectorTest {
   @Test
   void outboxConn002FailureClearsBothFamiliesAndTrueEmptyQueryRecovers() throws SQLException {
     try (var registry = new Registry()) {
-      var collector = collector(registry, "DEBUG");
+      var collector = collector(registry, DEBUG_MODE);
       var old =
           collector
-              .collect(new Fixture(Row.row("PENDING", 9, 8)).connection(), AS_OF)
+              .collect(new Fixture(Row.row(PENDING_STATUS, 9, 8)).connection(), AS_OF)
               .orElseThrow();
       var f = new Fixture();
       var failure = new SQLException("owned observation failure");
@@ -117,8 +127,8 @@ class OutboxMetricCollectorTest {
       assertEquals(
           0, collector.collect(empty.connection(), AS_OF).orElseThrow().counts().pending());
       empty.complete();
-      for (String metric : List.of("nk_outbox_rows", "nk_outbox_oldest_seconds"))
-        for (String status : List.of("PENDING", "SENT", "ERROR"))
+      for (String metric : List.of(OUTBOX_ROWS_METRIC, OUTBOX_AGES_METRIC))
+        for (String status : List.of(PENDING_STATUS, SENT_STATUS, ERROR_VALUE))
           assertEquals(0, gauge(registry, metric, status));
     }
   }
@@ -147,9 +157,9 @@ class OutboxMetricCollectorTest {
               new IllegalStateException("owned fixture failure"),
               new AssertionError("owned fixture failure"))) {
         try (var registry = new Registry()) {
-          var collector = collector(registry, "DEBUG");
-          collector.collect(new Fixture(Row.row("PENDING", 9, 3)).connection(), AS_OF);
-          var f = new Fixture(Row.row("ERROR", 1, 2));
+          var collector = collector(registry, DEBUG_MODE);
+          collector.collect(new Fixture(Row.row(PENDING_STATUS, 9, 3)).connection(), AS_OF);
+          var f = new Fixture(Row.row(ERROR_VALUE, 1, 2));
           f.faults.put(point, failure);
           assertSame(
               failure,
@@ -166,7 +176,7 @@ class OutboxMetricCollectorTest {
   void outboxConn004StandardDoesNotReadRegisterOrRetainButChecksBoundaryNull() throws SQLException {
     try (var registry = new Registry()) {
       var collector = collector(registry, "STANDARD");
-      var f = new Fixture(Row.row("ERROR", 3, 4));
+      var f = new Fixture(Row.row(ERROR_VALUE, 3, 4));
       f.faults.put("autoCommit", new AssertionError("no detailed standard read"));
       assertTrue(collector.collect(f.connection(), AS_OF).isEmpty());
       assertTrue(collector.snapshot().isEmpty());
@@ -184,26 +194,26 @@ class OutboxMetricCollectorTest {
       throws SQLException {
     try (var registry = new Registry()) {
       assertThrows(
-          NullPointerException.class, () -> new OutboxMetricCollector(null, registry, "DEBUG"));
+          NullPointerException.class, () -> new OutboxMetricCollector(null, registry, DEBUG_MODE));
       assertThrows(
           NullPointerException.class,
-          () -> new OutboxMetricCollector(new OutboxObservationRepository(), null, "DEBUG"));
+          () -> new OutboxMetricCollector(new OutboxObservationRepository(), null, DEBUG_MODE));
       assertThrows(
           NullPointerException.class,
           () -> new OutboxMetricCollector(new OutboxObservationRepository(), registry, null));
       assertThrows(IllegalArgumentException.class, () -> collector(registry, "unknown-canary"));
       assertEquals(0, registry.getMeters().size());
-      var collector = collector(registry, "DEBUG");
+      var collector = collector(registry, DEBUG_MODE);
       var actual =
           collector
-              .collect(new Fixture(Row.row("PENDING", 3, 4)).connection(), AS_OF)
+              .collect(new Fixture(Row.row(PENDING_STATUS, 3, 4)).connection(), AS_OF)
               .orElseThrow();
       assertThrows(NullPointerException.class, () -> collector.collect(null, AS_OF));
       assertThrows(
           NullPointerException.class, () -> collector.collect(new Fixture().connection(), null));
       assertSame(actual, collector.snapshot().orElseThrow());
-      assertEquals(3, gauge(registry, "nk_outbox_rows", "PENDING"));
-      assertEquals(4, gauge(registry, "nk_outbox_oldest_seconds", "PENDING"));
+      assertEquals(3, gauge(registry, OUTBOX_ROWS_METRIC, PENDING_STATUS));
+      assertEquals(4, gauge(registry, OUTBOX_AGES_METRIC, PENDING_STATUS));
     }
   }
 
@@ -236,9 +246,9 @@ class OutboxMetricCollectorTest {
   void outboxConn006OneOwnerSerializesReadCloseAndBothPublications() throws Exception {
     try (var registry = new Registry();
         var pool = Executors.newFixedThreadPool(2)) {
-      var collector = collector(registry, "DEBUG");
-      var first = new Fixture(Row.row("PENDING", 1, 3));
-      var second = new Fixture(Row.row("PENDING", 2, 4));
+      var collector = collector(registry, DEBUG_MODE);
+      var first = new Fixture(Row.row(PENDING_STATUS, 1, 3));
+      var second = new Fixture(Row.row(PENDING_STATUS, 2, 4));
       var entered = new CountDownLatch(1);
       var release = new CountDownLatch(1);
       var secondCalled = new CountDownLatch(1);
@@ -262,7 +272,7 @@ class OutboxMetricCollectorTest {
         assertEquals(1, one.get(5, TimeUnit.SECONDS).orElseThrow().counts().pending());
         assertEquals(2, two.get(5, TimeUnit.SECONDS).orElseThrow().counts().pending());
         assertEquals(2, collector.snapshot().orElseThrow().counts().pending());
-        assertEquals(4, gauge(registry, "nk_outbox_oldest_seconds", "PENDING"));
+        assertEquals(4, gauge(registry, OUTBOX_AGES_METRIC, PENDING_STATUS));
         first.complete();
         second.complete();
       } finally {
@@ -276,15 +286,15 @@ class OutboxMetricCollectorTest {
     try (var registry = new Registry();
         var otherRegistry = new Registry();
         var pool = Executors.newFixedThreadPool(8)) {
-      var collector = collector(registry, "DEBUG");
-      var other = collector(otherRegistry, "DEBUG");
-      other.collect(new Fixture(Row.row("ERROR", 222, 333)).connection(), AS_OF);
+      var collector = collector(registry, DEBUG_MODE);
+      var other = collector(otherRegistry, DEBUG_MODE);
+      other.collect(new Fixture(Row.row(ERROR_VALUE, 222, 333)).connection(), AS_OF);
       var tasks = new ArrayList<Callable<Long>>();
       for (int owner = 1; owner <= 64; owner++) {
         long count = owner;
         tasks.add(
             () -> {
-              var f = new Fixture(Row.row("PENDING", count, count));
+              var f = new Fixture(Row.row(PENDING_STATUS, count, count));
               var actual = collector.collect(f.connection(), AS_OF).orElseThrow();
               assertEquals(count, actual.counts().pending());
               assertEquals(Duration.ofSeconds(count), actual.ages().pending());
@@ -295,7 +305,7 @@ class OutboxMetricCollectorTest {
       var results = pool.invokeAll(tasks);
       for (int i = 0; i < results.size(); i++) assertEquals(i + 1L, results.get(i).get());
       assertEquals(222, other.snapshot().orElseThrow().counts().error());
-      assertEquals(333, gauge(otherRegistry, "nk_outbox_oldest_seconds", "ERROR"));
+      assertEquals(333, gauge(otherRegistry, OUTBOX_AGES_METRIC, ERROR_VALUE));
       assertEquals(6, registry.getMeters().size());
       assertEquals(6, otherRegistry.getMeters().size());
     }
@@ -310,7 +320,8 @@ class OutboxMetricCollectorTest {
       var registry = new Registry();
       try {
         registry.failure = Optional.of(failure);
-        assertSame(failure, assertThrows(failure.getClass(), () -> collector(registry, "DEBUG")));
+        assertSame(
+            failure, assertThrows(failure.getClass(), () -> collector(registry, DEBUG_MODE)));
         assertEquals(4, registry.registrations.get());
         assertEquals(3, registry.getMeters().size());
         assertEquals(0, registry.closes.get());

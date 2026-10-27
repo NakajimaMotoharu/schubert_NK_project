@@ -24,6 +24,14 @@ import org.junit.jupiter.api.Test;
 
 /** ASYNCCONN001..008: owned JDBC doubles and SDK, not actual DB/runtime collection. */
 class AsyncJobMetricCollectorTest {
+  private static final String RECEIVED_STATE = "RECEIVED";
+  private static final String PROCESSING_STATE = "PROCESSING";
+  private static final String COMPLETED_STATE = "COMPLETED";
+  private static final String ERROR_VALUE = "ERROR";
+  private static final String CANCELLED_STATE = "CANCELLED";
+  private static final String STATE_LABEL = "state";
+  private static final String DEBUG_MODE = "DEBUG";
+
   private static final class Registry extends SimpleMeterRegistry implements AutoCloseable {
     @Override
     public void close() {
@@ -38,22 +46,24 @@ class AsyncJobMetricCollectorTest {
   private static void missing(SimpleMeterRegistry registry, AsyncJobMetricCollector collector) {
     assertTrue(collector.snapshot().isEmpty());
     assertEquals(5, registry.getMeters().size());
-    for (String state : List.of("RECEIVED", "PROCESSING", "COMPLETED", "ERROR", "CANCELLED"))
-      assertTrue(Double.isNaN(registry.get("nk_async_jobs").tag("state", state).gauge().value()));
+    for (String state :
+        List.of(RECEIVED_STATE, PROCESSING_STATE, COMPLETED_STATE, ERROR_VALUE, CANCELLED_STATE))
+      assertTrue(
+          Double.isNaN(registry.get("nk_async_jobs").tag(STATE_LABEL, state).gauge().value()));
   }
 
   @Test
   void asyncConn001DebugCollectPublishesOnlyAfterSuccessfulClose() throws SQLException {
     try (var registry = new Registry()) {
-      var collector = collector(registry, "DEBUG");
+      var collector = collector(registry, DEBUG_MODE);
       missing(registry, collector);
       var f =
           new Fixture(
-              Row.row("RECEIVED", 1),
-              Row.row("PROCESSING", 2),
-              Row.row("COMPLETED", 3),
-              Row.row("ERROR", 4),
-              Row.row("CANCELLED", 5));
+              Row.row(RECEIVED_STATE, 1),
+              Row.row(PROCESSING_STATE, 2),
+              Row.row(COMPLETED_STATE, 3),
+              Row.row(ERROR_VALUE, 4),
+              Row.row(CANCELLED_STATE, 5));
       f.beforeStatementClose = () -> missing(registry, collector);
       var result = collector.collect(f.connection()).orElseThrow();
       f.complete();
@@ -61,16 +71,20 @@ class AsyncJobMetricCollectorTest {
       assertEquals(15, result.totalJobs());
       assertEquals(5, registry.getMeters().size());
       int count = 0;
-      for (String state : List.of("RECEIVED", "PROCESSING", "COMPLETED", "ERROR", "CANCELLED"))
-        assertEquals(++count, registry.get("nk_async_jobs").tag("state", state).gauge().value());
+      for (String state :
+          List.of(
+              RECEIVED_STATE, PROCESSING_STATE, COMPLETED_STATE, ERROR_VALUE, CANCELLED_STATE)) {
+        ++count;
+        assertEquals(count, registry.get("nk_async_jobs").tag(STATE_LABEL, state).gauge().value());
+      }
     }
   }
 
   @Test
   void asyncConn002FailureClearsStaleSuccessAndTrueEmptyCanRecover() throws SQLException {
     try (var registry = new Registry()) {
-      var collector = collector(registry, "DEBUG");
-      var old = collector.collect(new Fixture(Row.row("ERROR", 4)).connection()).orElseThrow();
+      var collector = collector(registry, DEBUG_MODE);
+      var old = collector.collect(new Fixture(Row.row(ERROR_VALUE, 4)).connection()).orElseThrow();
       var f = new Fixture();
       var failure = new SQLException("owned query failure");
       f.faults.put("execute", failure);
@@ -83,8 +97,9 @@ class AsyncJobMetricCollectorTest {
       var empty = new Fixture();
       assertEquals(0, collector.collect(empty.connection()).orElseThrow().totalJobs());
       empty.complete();
-      for (String state : List.of("RECEIVED", "PROCESSING", "COMPLETED", "ERROR", "CANCELLED"))
-        assertEquals(0, registry.get("nk_async_jobs").tag("state", state).gauge().value());
+      for (String state :
+          List.of(RECEIVED_STATE, PROCESSING_STATE, COMPLETED_STATE, ERROR_VALUE, CANCELLED_STATE))
+        assertEquals(0, registry.get("nk_async_jobs").tag(STATE_LABEL, state).gauge().value());
     }
   }
 
@@ -99,7 +114,7 @@ class AsyncJobMetricCollectorTest {
             "timeout",
             "execute",
             "next",
-            "state",
+            STATE_LABEL,
             "count",
             "wasNull",
             "RSclose",
@@ -110,9 +125,9 @@ class AsyncJobMetricCollectorTest {
               new IllegalStateException("owned fixture failure"),
               new AssertionError("owned fixture failure"))) {
         try (var registry = new Registry()) {
-          var collector = collector(registry, "DEBUG");
-          collector.collect(new Fixture(Row.row("RECEIVED", 9)).connection());
-          var f = new Fixture(Row.row("COMPLETED", 1));
+          var collector = collector(registry, DEBUG_MODE);
+          collector.collect(new Fixture(Row.row(RECEIVED_STATE, 9)).connection());
+          var f = new Fixture(Row.row(COMPLETED_STATE, 1));
           f.faults.put(point, failure);
           assertSame(
               failure, assertThrows(failure.getClass(), () -> collector.collect(f.connection())));
@@ -128,7 +143,7 @@ class AsyncJobMetricCollectorTest {
   void asyncConn004StandardNeverReadsOrRegistersButRejectsNull() throws SQLException {
     try (var registry = new Registry()) {
       var collector = collector(registry, "STANDARD");
-      var f = new Fixture(Row.row("ERROR", 3));
+      var f = new Fixture(Row.row(ERROR_VALUE, 3));
       f.faults.put("autoCommit", new AssertionError("no standard detailed read"));
       assertTrue(collector.collect(f.connection()).isEmpty());
       assertTrue(collector.snapshot().isEmpty());
@@ -145,17 +160,19 @@ class AsyncJobMetricCollectorTest {
       throws SQLException {
     try (var registry = new Registry()) {
       assertThrows(
-          NullPointerException.class, () -> new AsyncJobMetricCollector(null, registry, "DEBUG"));
+          NullPointerException.class,
+          () -> new AsyncJobMetricCollector(null, registry, DEBUG_MODE));
       assertThrows(
           NullPointerException.class,
-          () -> new AsyncJobMetricCollector(new AsyncJobCountRepository(), null, "DEBUG"));
+          () -> new AsyncJobMetricCollector(new AsyncJobCountRepository(), null, DEBUG_MODE));
       assertThrows(
           NullPointerException.class,
           () -> new AsyncJobMetricCollector(new AsyncJobCountRepository(), registry, null));
       assertThrows(IllegalArgumentException.class, () -> collector(registry, "unknown-canary"));
       assertEquals(0, registry.getMeters().size());
-      var collector = collector(registry, "DEBUG");
-      var actual = collector.collect(new Fixture(Row.row("ERROR", 3)).connection()).orElseThrow();
+      var collector = collector(registry, DEBUG_MODE);
+      var actual =
+          collector.collect(new Fixture(Row.row(ERROR_VALUE, 3)).connection()).orElseThrow();
       assertThrows(NullPointerException.class, () -> collector.collect(null));
       assertSame(actual, collector.snapshot().orElseThrow());
       assertEquals(3, actual.value(State.ERROR));
@@ -191,9 +208,9 @@ class AsyncJobMetricCollectorTest {
   void asyncConn006OwnerSerializesReadCloseAndPublication() throws Exception {
     try (var registry = new Registry();
         var pool = Executors.newFixedThreadPool(2)) {
-      var collector = collector(registry, "DEBUG");
-      var first = new Fixture(Row.row("RECEIVED", 1));
-      var second = new Fixture(Row.row("RECEIVED", 2));
+      var collector = collector(registry, DEBUG_MODE);
+      var first = new Fixture(Row.row(RECEIVED_STATE, 1));
+      var second = new Fixture(Row.row(RECEIVED_STATE, 2));
       var entered = new CountDownLatch(1);
       var release = new CountDownLatch(1);
       var secondCalled = new CountDownLatch(1);
@@ -228,15 +245,15 @@ class AsyncJobMetricCollectorTest {
     try (var registry = new Registry();
         var otherRegistry = new Registry();
         var pool = Executors.newFixedThreadPool(8)) {
-      var collector = collector(registry, "DEBUG");
-      var other = collector(otherRegistry, "DEBUG");
-      other.collect(new Fixture(Row.row("CANCELLED", 222)).connection());
+      var collector = collector(registry, DEBUG_MODE);
+      var other = collector(otherRegistry, DEBUG_MODE);
+      other.collect(new Fixture(Row.row(CANCELLED_STATE, 222)).connection());
       var tasks = new ArrayList<Callable<Long>>();
       for (int owner = 0; owner < 64; owner++) {
         long count = owner;
         tasks.add(
             () -> {
-              var f = new Fixture(Row.row("RECEIVED", count), Row.row("ERROR", 2));
+              var f = new Fixture(Row.row(RECEIVED_STATE, count), Row.row(ERROR_VALUE, 2));
               var result = collector.collect(f.connection()).orElseThrow();
               assertEquals(count, result.value(State.RECEIVED));
               assertEquals(2, result.value(State.ERROR));
@@ -277,8 +294,8 @@ class AsyncJobMetricCollectorTest {
         List.<Throwable>of(
             cycle, new UnformattableFailure(), new AssertionError("owned fatal fixture"))) {
       try (var registry = new Registry()) {
-        var collector = collector(registry, "DEBUG");
-        var f = new Fixture(Row.row("ERROR", 1));
+        var collector = collector(registry, DEBUG_MODE);
+        var f = new Fixture(Row.row(ERROR_VALUE, 1));
         f.faults.put("count", failure);
         var close = new SQLException("owned close fixture");
         f.faults.put("PSclose", close);
@@ -290,7 +307,7 @@ class AsyncJobMetricCollectorTest {
         assertEquals(
             4,
             collector
-                .collect(new Fixture(Row.row("COMPLETED", 4)).connection())
+                .collect(new Fixture(Row.row(COMPLETED_STATE, 4)).connection())
                 .orElseThrow()
                 .totalJobs());
       }
