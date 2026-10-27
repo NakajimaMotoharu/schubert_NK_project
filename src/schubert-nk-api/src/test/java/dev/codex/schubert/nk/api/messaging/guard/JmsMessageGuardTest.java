@@ -25,6 +25,14 @@ import org.junit.jupiter.api.Test;
 
 /** PT-JMS-005/006 independent JMS boundary matrix without production codec or constants. */
 final class JmsMessageGuardTest {
+  private static final String BODY_FIELD = "body";
+  private static final String BODY_LENGTH_FIELD = "bodyLength";
+  private static final String DESTINATION_FIELD = "destination";
+  private static final String REPLY_TO_FIELD = "replyTo";
+  private static final String TRANSPORT_ID_FIELD = "jmsMessageId";
+  private static final String CORRELATION_FIELD = "correlationId";
+  private static final String MESSAGE_ID_PROPERTY = "NKMessageID";
+  private static final String EXPIRATION_FIELD = "expiration";
   private static final String MESSAGE_ID = "00000000-0000-0000-0000-000000000001";
   private static final String CORRELATION_ID = "00000000-0000-0000-0000-000000000002";
   private static final JmsMessageGuard GUARD = new JmsMessageGuard();
@@ -42,7 +50,7 @@ final class JmsMessageGuardTest {
   @Test
   void validBytesMessageProducesAnImmutableRedactedSnapshot() throws Exception {
     Map<String, Object> values = validRequest();
-    byte[] providerBody = (byte[]) values.get("body");
+    byte[] providerBody = (byte[]) values.get(BODY_FIELD);
     GuardedJmsMessage guarded = GUARD.read(bytesMessage(values), REQUEST_ROUTE);
     providerBody[0] = 9;
     byte[] returned = guarded.body();
@@ -67,93 +75,99 @@ final class JmsMessageGuardTest {
 
   @Test
   void bodyLengthAndCopyAnomaliesAreDeniedBeforeAllocationUse() {
-    assertRejected(with(validRequest(), "bodyLength", -1L), REQUEST_ROUTE);
+    assertRejected(with(validRequest(), BODY_LENGTH_FIELD, -1L), REQUEST_ROUTE);
     assertRejected(
-        with(validRequest(), "bodyLength", (long) LayoutDefinition.MAXIMUM_BODY_LENGTH + 1),
+        with(validRequest(), BODY_LENGTH_FIELD, (long) LayoutDefinition.MAXIMUM_BODY_LENGTH + 1),
         REQUEST_ROUTE);
-    assertRejected(with(validRequest(), "body", null), REQUEST_ROUTE);
-    assertRejected(with(validRequest(), "bodyLength", 2L), REQUEST_ROUTE);
+    assertRejected(with(validRequest(), BODY_FIELD, null), REQUEST_ROUTE);
+    assertRejected(with(validRequest(), BODY_LENGTH_FIELD, 2L), REQUEST_ROUTE);
   }
 
   @Test
   void destinationMustBePermanentArtemisUnqualifiedAndExact() throws Exception {
     Destination foreign = new Destination() {};
-    assertRejected(with(validRequest(), "destination", foreign), REQUEST_ROUTE);
+    assertRejected(with(validRequest(), DESTINATION_FIELD, foreign), REQUEST_ROUTE);
     assertRejected(
-        with(validRequest(), "destination", new ActiveMQTemporaryQueue()), REQUEST_ROUTE);
-    assertRejected(with(validRequest(), "destination", new ActiveMQQueue()), REQUEST_ROUTE);
-    assertRejected(with(validRequest(), "destination", new ActiveMQQueue(" ")), REQUEST_ROUTE);
+        with(validRequest(), DESTINATION_FIELD, new ActiveMQTemporaryQueue()), REQUEST_ROUTE);
+    assertRejected(with(validRequest(), DESTINATION_FIELD, new ActiveMQQueue()), REQUEST_ROUTE);
+    assertRejected(with(validRequest(), DESTINATION_FIELD, new ActiveMQQueue(" ")), REQUEST_ROUTE);
     Map<String, Object> qualified =
         with(
-            validRequest(), "destination", new ActiveMQQueue("nk.sync.request::nk.sync.request.q"));
+            validRequest(),
+            DESTINATION_FIELD,
+            new ActiveMQQueue("nk.sync.request::nk.sync.request.q"));
     assertEquals(
         "nk.sync.request",
         GUARD.read(bytesMessage(qualified), REQUEST_ROUTE).metadata().destinationAddress());
     assertRejected(
-        with(validRequest(), "destination", new ActiveMQQueue("nk.sync.request::unapproved.q")),
+        with(validRequest(), DESTINATION_FIELD, new ActiveMQQueue("nk.sync.request::unapproved.q")),
         REQUEST_ROUTE);
     assertRejected(
-        with(validRequest(), "destination", new ActiveMQQueue("::unapproved.q")), REQUEST_ROUTE);
+        with(validRequest(), DESTINATION_FIELD, new ActiveMQQueue("::unapproved.q")),
+        REQUEST_ROUTE);
     assertRejected(
-        with(validRequest(), "destination", new ActiveMQQueue("nk.async.work")), REQUEST_ROUTE);
+        with(validRequest(), DESTINATION_FIELD, new ActiveMQQueue("nk.async.work")), REQUEST_ROUTE);
   }
 
   @Test
   void replyToMustMatchPresenceAndPermanentAllowlistedAddress() throws Exception {
-    assertRejected(with(validRequest(), "replyTo", null), REQUEST_ROUTE);
-    assertRejected(with(validRequest(), "replyTo", new Destination() {}), REQUEST_ROUTE);
-    assertRejected(with(validRequest(), "replyTo", new ActiveMQTemporaryQueue()), REQUEST_ROUTE);
-    assertRejected(with(validRequest(), "replyTo", new ActiveMQQueue("nk.expiry")), REQUEST_ROUTE);
+    assertRejected(with(validRequest(), REPLY_TO_FIELD, null), REQUEST_ROUTE);
+    assertRejected(with(validRequest(), REPLY_TO_FIELD, new Destination() {}), REQUEST_ROUTE);
+    assertRejected(
+        with(validRequest(), REPLY_TO_FIELD, new ActiveMQTemporaryQueue()), REQUEST_ROUTE);
+    assertRejected(
+        with(validRequest(), REPLY_TO_FIELD, new ActiveMQQueue("nk.expiry")), REQUEST_ROUTE);
 
     Map<String, Object> event = validEvent();
     GuardedJmsMessage guarded = GUARD.read(bytesMessage(event), EVENT_ROUTE);
     assertEquals(Optional.empty(), guarded.metadata().replyToAddress());
-    assertRejected(with(event, "replyTo", new ActiveMQQueue("nk.sync.reply.web")), EVENT_ROUTE);
+    assertRejected(
+        with(event, REPLY_TO_FIELD, new ActiveMQQueue("nk.sync.reply.web")), EVENT_ROUTE);
   }
 
   @Test
   void requiredHeadersAndPropertiesDenyNullBlankMissingAndMalformedValues() {
-    assertRejected(with(validRequest(), "jmsMessageId", null), REQUEST_ROUTE);
-    assertRejected(with(validRequest(), "jmsMessageId", " "), REQUEST_ROUTE);
-    assertRejected(with(validRequest(), "correlationId", null), REQUEST_ROUTE);
-    assertRejected(with(validRequest(), "correlationId", "not-a-uuid"), REQUEST_ROUTE);
+    assertRejected(with(validRequest(), TRANSPORT_ID_FIELD, null), REQUEST_ROUTE);
+    assertRejected(with(validRequest(), TRANSPORT_ID_FIELD, " "), REQUEST_ROUTE);
+    assertRejected(with(validRequest(), CORRELATION_FIELD, null), REQUEST_ROUTE);
+    assertRejected(with(validRequest(), CORRELATION_FIELD, "not-a-uuid"), REQUEST_ROUTE);
     assertRejected(without(validRequest(), "JMSXDeliveryCount"), REQUEST_ROUTE);
     assertRejected(with(validRequest(), "JMSXDeliveryCount", 0), REQUEST_ROUTE);
-    assertRejected(without(validRequest(), "NKMessageID"), REQUEST_ROUTE);
-    assertRejected(with(validRequest(), "NKMessageID", " "), REQUEST_ROUTE);
-    assertRejected(with(validRequest(), "NKMessageID", "not-a-uuid"), REQUEST_ROUTE);
+    assertRejected(without(validRequest(), MESSAGE_ID_PROPERTY), REQUEST_ROUTE);
+    assertRejected(with(validRequest(), MESSAGE_ID_PROPERTY, " "), REQUEST_ROUTE);
+    assertRejected(with(validRequest(), MESSAGE_ID_PROPERTY, "not-a-uuid"), REQUEST_ROUTE);
     assertRejected(without(validRequest(), "NKLayoutID"), REQUEST_ROUTE);
     assertRejected(with(validRequest(), "NKLayoutID", "short"), REQUEST_ROUTE);
     assertRejected(without(validRequest(), "NKProtocolVersion"), REQUEST_ROUTE);
     assertRejected(with(validRequest(), "NKProtocolVersion", " "), REQUEST_ROUTE);
-    assertRejected(with(validRequest(), "expiration", -1L), REQUEST_ROUTE);
+    assertRejected(with(validRequest(), EXPIRATION_FIELD, -1L), REQUEST_ROUTE);
   }
 
   private static Map<String, Object> validRequest() {
     Map<String, Object> values = baseValues();
-    values.put("destination", new ActiveMQQueue("nk.sync.request"));
-    values.put("replyTo", new ActiveMQQueue("nk.sync.reply.web"));
-    values.put("expiration", 1_000L);
+    values.put(DESTINATION_FIELD, new ActiveMQQueue("nk.sync.request"));
+    values.put(REPLY_TO_FIELD, new ActiveMQQueue("nk.sync.reply.web"));
+    values.put(EXPIRATION_FIELD, 1_000L);
     return values;
   }
 
   private static Map<String, Object> validEvent() {
     Map<String, Object> values = baseValues();
-    values.put("destination", new ActiveMQQueue("nk.web.log"));
-    values.put("replyTo", null);
-    values.put("expiration", 0L);
+    values.put(DESTINATION_FIELD, new ActiveMQQueue("nk.web.log"));
+    values.put(REPLY_TO_FIELD, null);
+    values.put(EXPIRATION_FIELD, 0L);
     return values;
   }
 
   private static Map<String, Object> baseValues() {
     Map<String, Object> values = new HashMap<>();
-    values.put("body", new byte[] {1, 2, 3});
-    values.put("bodyLength", 3L);
-    values.put("jmsMessageId", "ID:provider-transport-id");
-    values.put("correlationId", CORRELATION_ID);
+    values.put(BODY_FIELD, new byte[] {1, 2, 3});
+    values.put(BODY_LENGTH_FIELD, 3L);
+    values.put(TRANSPORT_ID_FIELD, "ID:provider-transport-id");
+    values.put(CORRELATION_FIELD, CORRELATION_ID);
     values.put("deliveryMode", DeliveryMode.PERSISTENT);
     values.put("JMSXDeliveryCount", 1);
-    values.put("NKMessageID", MESSAGE_ID);
+    values.put(MESSAGE_ID_PROPERTY, MESSAGE_ID);
     values.put("NKLayoutID", "LOGREQ01");
     values.put("NKProtocolVersion", "001");
     return values;
@@ -188,26 +202,26 @@ final class JmsMessageGuardTest {
             (ignored, method, arguments) -> {
               String name = method.getName();
               if (name.equals("getBodyLength")) {
-                return values.get("bodyLength");
+                return values.get(BODY_LENGTH_FIELD);
               }
               if (name.equals("getBody")) {
-                byte[] body = (byte[]) values.get("body");
+                byte[] body = (byte[]) values.get(BODY_FIELD);
                 return body == null ? null : body.clone();
               }
               if (name.equals("getJMSDestination")) {
-                return values.get("destination");
+                return values.get(DESTINATION_FIELD);
               }
               if (name.equals("getJMSReplyTo")) {
-                return values.get("replyTo");
+                return values.get(REPLY_TO_FIELD);
               }
               if (name.equals("getJMSMessageID")) {
-                return values.get("jmsMessageId");
+                return values.get(TRANSPORT_ID_FIELD);
               }
               if (name.equals("getJMSCorrelationID")) {
-                return values.get("correlationId");
+                return values.get(CORRELATION_FIELD);
               }
               if (name.equals("getJMSExpiration")) {
-                return values.get("expiration");
+                return values.get(EXPIRATION_FIELD);
               }
               if (name.equals("getJMSDeliveryMode")) {
                 return values.get("deliveryMode");

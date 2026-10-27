@@ -23,6 +23,15 @@ import org.junit.jupiter.api.Test;
 
 /** PT-JMS-005/006 Web reply provider, metadata, route and wire negative matrix. */
 final class JmsReplyDecoderTest {
+  private static final String BODY_FIELD = "body";
+  private static final String BODY_LENGTH_FIELD = "bodyLength";
+  private static final String LAYOUT_ID_PROPERTY = "NKLayoutID";
+  private static final String MESSAGE_ID_PROPERTY = "NKMessageID";
+  private static final String DESTINATION_FIELD = "destination";
+  private static final String TRANSPORT_ID_FIELD = "jmsMessageId";
+  private static final String CORRELATION_FIELD = "correlationId";
+  private static final String VERSION_PROPERTY = "NKProtocolVersion";
+  private static final String EXPIRATION_FIELD = "expiration";
   private static final String REQUEST_ID = "00000000-0000-0000-0000-000000000001";
   private static final String RESPONSE_ID = "00000000-0000-0000-0000-000000000002";
   private static final JmsReplyDecoder DECODER = new JmsReplyDecoder();
@@ -40,31 +49,32 @@ final class JmsReplyDecoderTest {
     ascii(expected, 294, "20260903120000000");
     var valid =
         with(
-            with(with(validReply(), "body", expected), "bodyLength", 320L),
-            "NKLayoutID",
+            with(with(validReply(), BODY_FIELD, expected), BODY_LENGTH_FIELD, 320L),
+            LAYOUT_ID_PROPERTY,
             "QSBRSP01");
     assertArrayEquals(expected, DECODER.decode(bytesMessage(valid)).body());
     assertEquals(UUID.fromString(REQUEST_ID), DECODER.decode(bytesMessage(valid)).correlationId());
     for (char wrong : new char[] {'S', 'I'}) {
       byte[] invalid = expected.clone();
       invalid[23] = (byte) wrong;
-      assertRejected(bytesMessage(with(valid, "body", invalid)));
+      assertRejected(bytesMessage(with(valid, BODY_FIELD, invalid)));
     }
     byte[] requestKind = expected.clone();
     requestKind[22] = 'Q';
-    assertRejected(bytesMessage(with(valid, "body", requestKind)));
-    assertRejected(bytesMessage(with(valid, "NKLayoutID", "LOGRSP01")));
-    assertRejected(bytesMessage(with(valid, "NKMessageID", REQUEST_ID)));
-    assertRejected(bytesMessage(with(valid, "destination", new ActiveMQQueue("nk.async.work"))));
+    assertRejected(bytesMessage(with(valid, BODY_FIELD, requestKind)));
+    assertRejected(bytesMessage(with(valid, LAYOUT_ID_PROPERTY, "LOGRSP01")));
+    assertRejected(bytesMessage(with(valid, MESSAGE_ID_PROPERTY, REQUEST_ID)));
+    assertRejected(
+        bytesMessage(with(valid, DESTINATION_FIELD, new ActiveMQQueue("nk.async.work"))));
     byte[] wrongA = responseWire();
     wrongA[23] = 'A';
-    assertRejected(bytesMessage(with(validReply(), "body", wrongA)));
+    assertRejected(bytesMessage(with(validReply(), BODY_FIELD, wrongA)));
   }
 
   @Test
   void validReplyProducesAnImmutableRedactedResult() throws Exception {
     Map<String, Object> values = validReply();
-    byte[] providerBody = (byte[]) values.get("body");
+    byte[] providerBody = (byte[]) values.get(BODY_FIELD);
     ValidatedReply reply = DECODER.decode(bytesMessage(values));
     providerBody[0] = 9;
     byte[] returned = reply.body();
@@ -75,7 +85,7 @@ final class JmsReplyDecoderTest {
     assertTrue(reply.toString().contains("body=<redacted>"));
     // YKT-056: transport decoding preserves the common 0200 profile; only the domain decides grant.
     Map<String, Object> replayValues = validReply();
-    byte[] replayBody = (byte[]) replayValues.get("body");
+    byte[] replayBody = (byte[]) replayValues.get(BODY_FIELD);
     System.arraycopy("0200".getBytes(StandardCharsets.US_ASCII), 0, replayBody, 208, 4);
     assertArrayEquals(replayBody, DECODER.decode(bytesMessage(replayValues)).body());
     assertThrows(NullPointerException.class, () -> new ValidatedReply(null, new byte[0]));
@@ -87,26 +97,27 @@ final class JmsReplyDecoderTest {
   void nullTypeBodyLengthAndCopyAnomaliesAreRejected() {
     assertThrows(NullPointerException.class, () -> DECODER.decode(null));
     assertRejected(proxy(TextMessage.class, validReply()));
-    assertRejected(bytesMessage(with(validReply(), "bodyLength", -1L)));
-    assertRejected(bytesMessage(with(validReply(), "bodyLength", 1_000_001L)));
-    assertRejected(bytesMessage(with(validReply(), "body", null)));
-    assertRejected(bytesMessage(with(validReply(), "bodyLength", 279L)));
-    assertRejected(bytesMessage(with(validReply(), "body", new byte[255])));
+    assertRejected(bytesMessage(with(validReply(), BODY_LENGTH_FIELD, -1L)));
+    assertRejected(bytesMessage(with(validReply(), BODY_LENGTH_FIELD, 1_000_001L)));
+    assertRejected(bytesMessage(with(validReply(), BODY_FIELD, null)));
+    assertRejected(bytesMessage(with(validReply(), BODY_LENGTH_FIELD, 279L)));
+    assertRejected(bytesMessage(with(validReply(), BODY_FIELD, new byte[255])));
     assertRejected(
         bytesMessage(
             with(
-                with(validReply(), "body", Arrays.copyOf(responseWire(), 281)),
-                "bodyLength",
+                with(validReply(), BODY_FIELD, Arrays.copyOf(responseWire(), 281)),
+                BODY_LENGTH_FIELD,
                 281L)));
   }
 
   @Test
   void destinationMustBeThePermanentApprovedAddressWithoutReplyTo() throws Exception {
     Destination foreign = new Destination() {};
-    assertRejected(bytesMessage(with(validReply(), "destination", foreign)));
-    assertRejected(bytesMessage(with(validReply(), "destination", new ActiveMQTemporaryQueue())));
-    assertRejected(bytesMessage(with(validReply(), "destination", new ActiveMQQueue())));
-    assertRejected(bytesMessage(with(validReply(), "destination", new ActiveMQQueue(" "))));
+    assertRejected(bytesMessage(with(validReply(), DESTINATION_FIELD, foreign)));
+    assertRejected(
+        bytesMessage(with(validReply(), DESTINATION_FIELD, new ActiveMQTemporaryQueue())));
+    assertRejected(bytesMessage(with(validReply(), DESTINATION_FIELD, new ActiveMQQueue())));
+    assertRejected(bytesMessage(with(validReply(), DESTINATION_FIELD, new ActiveMQQueue(" "))));
     assertEquals(
         UUID.fromString(REQUEST_ID),
         DECODER
@@ -114,66 +125,66 @@ final class JmsReplyDecoderTest {
                 bytesMessage(
                     with(
                         validReply(),
-                        "destination",
+                        DESTINATION_FIELD,
                         new ActiveMQQueue("nk.sync.reply.web::nk.sync.reply.web.q"))))
             .correlationId());
     assertRejected(
         bytesMessage(
             with(
                 validReply(),
-                "destination",
+                DESTINATION_FIELD,
                 new ActiveMQQueue("nk.sync.reply.web::unapproved.q"))));
     assertRejected(
-        bytesMessage(with(validReply(), "destination", new ActiveMQQueue("::unapproved.q"))));
+        bytesMessage(with(validReply(), DESTINATION_FIELD, new ActiveMQQueue("::unapproved.q"))));
     assertRejected(
-        bytesMessage(with(validReply(), "destination", new ActiveMQQueue("nk.async.work"))));
+        bytesMessage(with(validReply(), DESTINATION_FIELD, new ActiveMQQueue("nk.async.work"))));
     assertRejected(
         bytesMessage(with(validReply(), "replyTo", new ActiveMQQueue("nk.sync.reply.web"))));
   }
 
   @Test
   void requiredHeadersPropertiesAndValuesDenyMissingBlankAndMalformedInputs() {
-    assertRejected(bytesMessage(with(validReply(), "jmsMessageId", null)));
-    assertRejected(bytesMessage(with(validReply(), "jmsMessageId", " ")));
-    assertRejected(bytesMessage(with(validReply(), "correlationId", null)));
-    assertRejected(bytesMessage(with(validReply(), "correlationId", "not-a-uuid")));
+    assertRejected(bytesMessage(with(validReply(), TRANSPORT_ID_FIELD, null)));
+    assertRejected(bytesMessage(with(validReply(), TRANSPORT_ID_FIELD, " ")));
+    assertRejected(bytesMessage(with(validReply(), CORRELATION_FIELD, null)));
+    assertRejected(bytesMessage(with(validReply(), CORRELATION_FIELD, "not-a-uuid")));
     assertRejected(bytesMessage(without(validReply(), "JMSXDeliveryCount")));
     assertRejected(bytesMessage(with(validReply(), "JMSXDeliveryCount", 0)));
-    assertRejected(bytesMessage(without(validReply(), "NKMessageID")));
-    assertRejected(bytesMessage(with(validReply(), "NKMessageID", " ")));
-    assertRejected(bytesMessage(with(validReply(), "NKMessageID", "not-a-uuid")));
-    assertRejected(bytesMessage(without(validReply(), "NKLayoutID")));
-    assertRejected(bytesMessage(with(validReply(), "NKLayoutID", "short")));
-    assertRejected(bytesMessage(without(validReply(), "NKProtocolVersion")));
-    assertRejected(bytesMessage(with(validReply(), "NKProtocolVersion", " ")));
-    assertRejected(bytesMessage(with(validReply(), "expiration", -1L)));
+    assertRejected(bytesMessage(without(validReply(), MESSAGE_ID_PROPERTY)));
+    assertRejected(bytesMessage(with(validReply(), MESSAGE_ID_PROPERTY, " ")));
+    assertRejected(bytesMessage(with(validReply(), MESSAGE_ID_PROPERTY, "not-a-uuid")));
+    assertRejected(bytesMessage(without(validReply(), LAYOUT_ID_PROPERTY)));
+    assertRejected(bytesMessage(with(validReply(), LAYOUT_ID_PROPERTY, "short")));
+    assertRejected(bytesMessage(without(validReply(), VERSION_PROPERTY)));
+    assertRejected(bytesMessage(with(validReply(), VERSION_PROPERTY, " ")));
+    assertRejected(bytesMessage(with(validReply(), EXPIRATION_FIELD, -1L)));
   }
 
   @Test
   void transportAndWireValuesMustExactlyMatchTheReplyHeaderAndRoute() {
     assertRejected(bytesMessage(with(validReply(), "deliveryMode", DeliveryMode.NON_PERSISTENT)));
-    assertRejected(bytesMessage(with(validReply(), "expiration", 0L)));
-    assertRejected(bytesMessage(with(validReply(), "NKProtocolVersion", "999")));
-    assertRejected(bytesMessage(with(validReply(), "NKMessageID", REQUEST_ID)));
-    assertRejected(bytesMessage(with(validReply(), "NKLayoutID", "LGNRSP01")));
-    assertRejected(bytesMessage(with(validReply(), "correlationId", RESPONSE_ID)));
+    assertRejected(bytesMessage(with(validReply(), EXPIRATION_FIELD, 0L)));
+    assertRejected(bytesMessage(with(validReply(), VERSION_PROPERTY, "999")));
+    assertRejected(bytesMessage(with(validReply(), MESSAGE_ID_PROPERTY, REQUEST_ID)));
+    assertRejected(bytesMessage(with(validReply(), LAYOUT_ID_PROPERTY, "LGNRSP01")));
+    assertRejected(bytesMessage(with(validReply(), CORRELATION_FIELD, RESPONSE_ID)));
   }
 
   private static Map<String, Object> validReply() {
     byte[] body = responseWire();
     Map<String, Object> values = new HashMap<>();
-    values.put("body", body);
-    values.put("bodyLength", (long) body.length);
-    values.put("destination", new ActiveMQQueue("nk.sync.reply.web"));
+    values.put(BODY_FIELD, body);
+    values.put(BODY_LENGTH_FIELD, (long) body.length);
+    values.put(DESTINATION_FIELD, new ActiveMQQueue("nk.sync.reply.web"));
     values.put("replyTo", null);
-    values.put("jmsMessageId", "ID:provider-transport-id");
-    values.put("correlationId", REQUEST_ID);
-    values.put("expiration", 1_000L);
+    values.put(TRANSPORT_ID_FIELD, "ID:provider-transport-id");
+    values.put(CORRELATION_FIELD, REQUEST_ID);
+    values.put(EXPIRATION_FIELD, 1_000L);
     values.put("deliveryMode", DeliveryMode.PERSISTENT);
     values.put("JMSXDeliveryCount", 1);
-    values.put("NKMessageID", RESPONSE_ID);
-    values.put("NKLayoutID", "LOGRSP01");
-    values.put("NKProtocolVersion", "001");
+    values.put(MESSAGE_ID_PROPERTY, RESPONSE_ID);
+    values.put(LAYOUT_ID_PROPERTY, "LOGRSP01");
+    values.put(VERSION_PROPERTY, "001");
     return values;
   }
 
@@ -206,26 +217,26 @@ final class JmsReplyDecoderTest {
             (ignored, method, arguments) -> {
               String name = method.getName();
               if (name.equals("getBodyLength")) {
-                return values.get("bodyLength");
+                return values.get(BODY_LENGTH_FIELD);
               }
               if (name.equals("getBody")) {
-                byte[] body = (byte[]) values.get("body");
+                byte[] body = (byte[]) values.get(BODY_FIELD);
                 return body == null ? null : body.clone();
               }
               if (name.equals("getJMSDestination")) {
-                return values.get("destination");
+                return values.get(DESTINATION_FIELD);
               }
               if (name.equals("getJMSReplyTo")) {
                 return values.get("replyTo");
               }
               if (name.equals("getJMSMessageID")) {
-                return values.get("jmsMessageId");
+                return values.get(TRANSPORT_ID_FIELD);
               }
               if (name.equals("getJMSCorrelationID")) {
-                return values.get("correlationId");
+                return values.get(CORRELATION_FIELD);
               }
               if (name.equals("getJMSExpiration")) {
-                return values.get("expiration");
+                return values.get(EXPIRATION_FIELD);
               }
               if (name.equals("getJMSDeliveryMode")) {
                 return values.get("deliveryMode");
