@@ -1,0 +1,152 @@
+{
+  "actualExit": 0,
+  "allMainAndOtherInputsPreserved": true,
+  "comparisonReferences": 2,
+  "coverage": null,
+  "effortPercent": null,
+  "externalActions": 0,
+  "invocation": {
+    "actualPythonCommand": [
+      "/usr/bin/python3",
+      "-B",
+      "tools/quality/pg11730_mq_recorder_literal_plan.py"
+    ],
+    "arbitraryArgumentsRecorded": false,
+    "entrypointPath": "tools/quality/pg11730_mq_recorder_literal_plan.py",
+    "entrypointSha256": "f029e0e4437584fd448323323c2fb29395c3536bdff18311ce847cbf37cebb3d",
+    "helperPath": "tools/quality/host_tool_invocation.py",
+    "helperSha256": "85d616a3db4ff47f4c95ae2e0dd57954bc2b09f28b8f2a685b986e5621545c46",
+    "libraryPath": "tools/quality/pg11730_mq_recorder_literal_plan.py",
+    "librarySha256": "f029e0e4437584fd448323323c2fb29395c3536bdff18311ce847cbf37cebb3d",
+    "loadedProjectPythonSources": {
+      "tools/quality/classfile_code_metadata.py": "2227e1e8df1ff91b606f094c7ee64366023273ca740d4d47126ed0928190e2f0",
+      "tools/quality/g07_host_class_provenance_inputs.py": "a676cb3e4145177c3c243722d737592ce7d44c3f29cfe4f670662ef7651f046b",
+      "tools/quality/host_tool_invocation.py": "85d616a3db4ff47f4c95ae2e0dd57954bc2b09f28b8f2a685b986e5621545c46",
+      "tools/quality/pg10130_uid_oracle_preflight.py": "e80cb1d6d45d4e4c0cdb3cb792e0638119d936403de5c3e141429d338485758a",
+      "tools/quality/pg10332_result_profile_oracle_plan.py": "82c9b4f57dd517c1dbee639dbf4955c316beb89216cb9a8a66e78e0b9a322ad4",
+      "tools/quality/pg10339_result_profile_oracle_post_v2.py": "42f86287f5236d2ef1a2e10f54f5b0634e799a4e866b15eaf6738336a4ebabb0",
+      "tools/quality/pg10392_role_literal_plan.py": "e1af98abd59175d867d29b07a73d7b2e4c7112754603d1805ec0bfc4d9465ce8",
+      "tools/quality/pg10398_role_view_preflight.py": "31709d50a345f3e0843fa62ae0b4c6849885503eb3d81555b6bcc9605b486d56",
+      "tools/quality/pg10840_web_view_duplicate_plan.py": "f4ea4a6f7d59ed872cc7c3dbd07e8d48c45c59f67c339d82d6ff4f2eef0a9a46",
+      "tools/quality/pg11730_mq_recorder_literal_plan.py": "f029e0e4437584fd448323323c2fb29395c3536bdff18311ce847cbf37cebb3d",
+      "tools/quality/pg9906_user_query_oracle_source_post.py": "4f9bdaa17eea78a720c0f25b8af906f3f045fda590c8fea2a8868229403a98fa",
+      "tools/quality/pg9978_plain_core_quality_post.py": "c99cc753c6335c9f41e3eafe6a97c17521503739ba2cf80659b542a445dd48fa",
+      "tools/quality/public_java_digest_provenance.py": "dd47f8735a61ce849995633c3290a6ad047842ef3263829ce359db413778f7a0"
+    },
+    "provenance": "OBSERVED_SYS_ARGV_AND_ORIG_ARGV_NOT_RECONSTRUCTED"
+  },
+  "newAccepted": 0,
+  "orderConstants": 2,
+  "originalMethods": 16,
+  "productTestsExecuted": 0,
+  "rawDiagnosticCorrectionsExpected": 11,
+  "sourceBefore": "eee3d32be87396f61f94e6013f4864330ceee4f3",
+  "sourceChanges": [
+    {
+      "beforeSha256": "11df396b39728eb25afdc922cf1d8b458e5a630fb18c87bd22918010157c9efa",
+      "constants": [
+        {
+          "id": "PMD-02219",
+          "kind": "STRING",
+          "literal": "\"nk.sync.request\"",
+          "name": "SYNC_REQUEST_ADDRESS",
+          "references": 4
+        },
+        {
+          "id": "PMD-02220",
+          "kind": "STRING",
+          "literal": "\"nk_mq_queue_messages\"",
+          "name": "QUEUE_MESSAGES_METRIC",
+          "references": 5
+        },
+        {
+          "id": "PMD-02221",
+          "kind": "STRING",
+          "literal": "\"queue\"",
+          "name": "QUEUE_LABEL",
+          "references": 6
+        },
+        {
+          "id": "PMD-02222",
+          "kind": "STRING",
+          "literal": "\"address\"",
+          "name": "ADDRESS_LABEL",
+          "references": 4
+        },
+        {
+          "id": "PMD-02223",
+          "kind": "STRING",
+          "literal": "\"DEBUG\"",
+          "name": "DEBUG_MODE",
+          "references": 9
+        },
+        {
+          "diagnosticPresent": false,
+          "id": null,
+          "kind": "ORDER_INT",
+          "literal": "2",
+          "name": "FAILURE_REGISTRATION_ORDINAL",
+          "point": 2280,
+          "references": 1,
+          "sourcePointId": "MqPressureMetricRecorderTest#secondRegistration"
+        }
+      ],
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/MqPressureMetricRecorderTest.java",
+      "sha256": "57603987ebe17531c44477797de3f021179ec27ccf9428ded76256fd571e8f99"
+    },
+    {
+      "beforeSha256": "e8eba8cdf72ccb97c357481acfc9f0fe71625eaba4d187a209fd7cace08b0832",
+      "constants": [
+        {
+          "id": "PMD-02241",
+          "kind": "STRING",
+          "literal": "\"nk.async.work\"",
+          "name": "ASYNC_WORK_ADDRESS",
+          "references": 5
+        },
+        {
+          "id": "PMD-02243",
+          "kind": "STRING",
+          "literal": "\"nk_mq_redeliveries_total\"",
+          "name": "REDELIVERY_METRIC",
+          "references": 4
+        },
+        {
+          "id": "PMD-02244",
+          "kind": "STRING",
+          "literal": "\"queue\"",
+          "name": "QUEUE_LABEL",
+          "references": 5
+        },
+        {
+          "id": "PMD-02245",
+          "kind": "STRING",
+          "literal": "\"delivery_count\"",
+          "name": "DELIVERY_COUNT_LABEL",
+          "references": 5
+        },
+        {
+          "id": "PMD-02246",
+          "kind": "STRING",
+          "literal": "\"DEBUG\"",
+          "name": "DEBUG_MODE",
+          "references": 10
+        },
+        {
+          "diagnosticPresent": true,
+          "id": "PMD-02242",
+          "kind": "ORDER_INT",
+          "literal": "2",
+          "name": "FAILURE_REGISTRATION_ORDINAL",
+          "point": 2083,
+          "references": 1,
+          "sourcePointId": "MqRedeliveryMetricRecorderTest#secondRegistration"
+        }
+      ],
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/MqRedeliveryMetricRecorderTest.java",
+      "sha256": "2df45629cb9f8af472a66723a168992afd7c2ad4854c2da8ba0df53ae3da28a0"
+    }
+  ],
+  "stringConstants": 10,
+  "stringReferences": 57
+}
