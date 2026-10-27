@@ -32,6 +32,15 @@ import org.junit.jupiter.api.Test;
 
 /** DBTIME001..008/1712; own clock/SDK and scalar durations only, never SQL or actual clocks. */
 class DbQueryDurationMetricRecorderTest {
+  private static final int FAILURE_FACTORY_CALL = 2;
+  private static final String DB_DURATION_NAME = "nk_db_query_duration_seconds";
+  private static final String QUERY_LABEL = "query_id";
+  private static final String OUTCOME_LABEL = "outcome";
+  private static final String DEBUG_MODE = "DEBUG";
+  private static final String ASYNC_COUNT_QUERY = "ASYNC_JOB_STATE_COUNTS";
+  private static final String OUTBOX_COUNT_QUERY = "OUTBOX_STATUS_COUNTS_OLDEST";
+  private static final String SUCCESS_OUTCOME = "SUCCESS";
+  private static final String FAILURE_OUTCOME = "FAILURE";
   private static final List<Query> QUERIES =
       List.of(Query.ASYNC_JOB_STATE_COUNTS, Query.OUTBOX_STATUS_COUNTS_OLDEST);
   private static final List<Outcome> OUTCOMES = List.of(Outcome.SUCCESS, Outcome.FAILURE);
@@ -65,7 +74,7 @@ class DbQueryDurationMetricRecorderTest {
     @Override
     protected DistributionSummary newDistributionSummary(
         Meter.Id id, DistributionStatisticConfig config, double scale) {
-      if (registrations.incrementAndGet() == 2) fail(factoryFailure);
+      if (registrations.incrementAndGet() == FAILURE_FACTORY_CALL) fail(factoryFailure);
       configurations.add(config);
       var delegate = ExactDurationMeterRegistry.exactDurationSummary(this, id, config, scale);
       return new DistributionSummary() {
@@ -135,8 +144,8 @@ class DbQueryDurationMetricRecorderTest {
 
   private static DistributionSummary summary(Registry registry, String query, String outcome) {
     return registry
-        .get("nk_db_query_duration_seconds")
-        .tags("query_id", query, "outcome", outcome)
+        .get(DB_DURATION_NAME)
+        .tags(QUERY_LABEL, query, OUTCOME_LABEL, outcome)
         .summary();
   }
 
@@ -157,13 +166,13 @@ class DbQueryDurationMetricRecorderTest {
     var auxiliary = new java.util.HashSet<String>();
     for (var meter : registry.getMeters()) {
       var id = meter.getId();
-      var pair = id.getTag("query_id") + "/" + id.getTag("outcome");
+      var pair = id.getTag(QUERY_LABEL) + "/" + id.getTag(OUTCOME_LABEL);
       assertTrue(pairs.contains(pair));
-      if (id.getName().equals("nk_db_query_duration_seconds")) {
+      if (id.getName().equals(DB_DURATION_NAME)) {
         assertEquals(Meter.Type.DISTRIBUTION_SUMMARY, id.getType());
         assertEquals("seconds", id.getBaseUnit());
         assertEquals(
-            Set.of("query_id", "outcome"),
+            Set.of(QUERY_LABEL, OUTCOME_LABEL),
             id.getTags().stream().map(t -> t.getKey()).collect(Collectors.toSet()));
         assertTrue(actual.add(pair));
       } else {
@@ -171,7 +180,7 @@ class DbQueryDurationMetricRecorderTest {
         assertEquals("nk_db_query_duration_seconds.histogram", id.getName());
         String label = "le";
         assertEquals(
-            Set.of("query_id", "outcome", label),
+            Set.of(QUERY_LABEL, OUTCOME_LABEL, label),
             id.getTags().stream().map(t -> t.getKey()).collect(Collectors.toSet()));
         assertTrue(auxiliary.add(pair + "/" + label + "/" + id.getTag(label)));
       }
@@ -188,7 +197,7 @@ class DbQueryDurationMetricRecorderTest {
   @Test
   void dbTime001ExactlyFourFixedSeriesRequestHistogramSecondsAndFiveObservationBuckets() {
     try (var registry = new Registry()) {
-      var recorder = new DbQueryDurationMetricRecorder(registry, "DEBUG");
+      var recorder = new DbQueryDurationMetricRecorder(registry, DEBUG_MODE);
       assertTrue(recorder.detailedMetricsRequested());
       shape(registry);
       assertEquals(4, registry.registrations.get());
@@ -200,8 +209,8 @@ class DbQueryDurationMetricRecorderTest {
         assertArrayEquals(
             new double[] {.001, .01, .1, 1., 1.5}, config.getServiceLevelObjectiveBoundaries());
       }
-      for (String query : List.of("ASYNC_JOB_STATE_COUNTS", "OUTBOX_STATUS_COUNTS_OLDEST"))
-        for (String outcome : List.of("SUCCESS", "FAILURE")) {
+      for (String query : List.of(ASYNC_COUNT_QUERY, OUTBOX_COUNT_QUERY))
+        for (String outcome : List.of(SUCCESS_OUTCOME, FAILURE_OUTCOME)) {
           var value = summary(registry, query, outcome);
           assertEquals(0, value.count());
           assertEquals(0, value.totalAmount());
@@ -214,7 +223,7 @@ class DbQueryDurationMetricRecorderTest {
   @Test
   void dbTime002IndependentSecondsHistogramCdfAndTwoMaximumSamplesNeverLongWrap() {
     try (var registry = new Registry()) {
-      var recorder = new DbQueryDurationMetricRecorder(registry, "DEBUG");
+      var recorder = new DbQueryDurationMetricRecorder(registry, DEBUG_MODE);
       for (var query : QUERIES)
         for (var outcome : OUTCOMES) {
           for (long ns : List.of(0L, 1L, 500000000L, 1500000000L))
@@ -235,9 +244,9 @@ class DbQueryDurationMetricRecorderTest {
       shape(registry);
     }
     try (var registry = new Registry()) {
-      var recorder = new DbQueryDurationMetricRecorder(registry, "DEBUG");
+      var recorder = new DbQueryDurationMetricRecorder(registry, DEBUG_MODE);
       recorder.record(Query.ASYNC_JOB_STATE_COUNTS, Outcome.SUCCESS, Long.MAX_VALUE);
-      var value = summary(registry, "ASYNC_JOB_STATE_COUNTS", "SUCCESS");
+      var value = summary(registry, ASYNC_COUNT_QUERY, SUCCESS_OUTCOME);
       assertEquals(1, value.count());
       assertEquals(9.223372036854776E9, value.totalAmount());
       recorder.record(Query.ASYNC_JOB_STATE_COUNTS, Outcome.SUCCESS, Long.MAX_VALUE);
@@ -245,16 +254,16 @@ class DbQueryDurationMetricRecorderTest {
       assertEquals(1.8446744073709553E10, value.totalAmount());
       assertTrue(Double.isFinite(value.totalAmount()));
       assertEquals(9.223372036854776E9, value.max());
-      assertEquals(0, summary(registry, "ASYNC_JOB_STATE_COUNTS", "FAILURE").count());
+      assertEquals(0, summary(registry, ASYNC_COUNT_QUERY, FAILURE_OUTCOME).count());
     }
   }
 
   @Test
   void dbTime003QueryAndOutcomeClosedParsersAndGeneratedFactoriesUseIndependentTypedConstants() {
-    assertSame(Query.ASYNC_JOB_STATE_COUNTS, Query.parse("ASYNC_JOB_STATE_COUNTS"));
-    assertSame(Query.OUTBOX_STATUS_COUNTS_OLDEST, Query.parse("OUTBOX_STATUS_COUNTS_OLDEST"));
-    assertSame(Outcome.SUCCESS, Outcome.parse("SUCCESS"));
-    assertSame(Outcome.FAILURE, Outcome.parse("FAILURE"));
+    assertSame(Query.ASYNC_JOB_STATE_COUNTS, Query.parse(ASYNC_COUNT_QUERY));
+    assertSame(Query.OUTBOX_STATUS_COUNTS_OLDEST, Query.parse(OUTBOX_COUNT_QUERY));
+    assertSame(Outcome.SUCCESS, Outcome.parse(SUCCESS_OUTCOME));
+    assertSame(Outcome.FAILURE, Outcome.parse(FAILURE_OUTCOME));
     for (String invalid : List.of("", "async_job_state_counts", "SELECT state FROM untrusted"))
       assertEquals(
           "invalid DB metric query",
@@ -275,10 +284,10 @@ class DbQueryDurationMetricRecorderTest {
     mutableOutcomes[0] = Outcome.FAILURE;
     assertArrayEquals(queries, Query.values());
     assertArrayEquals(outcomes, Outcome.values());
-    assertSame(Query.ASYNC_JOB_STATE_COUNTS, Query.valueOf("ASYNC_JOB_STATE_COUNTS"));
-    assertSame(Query.OUTBOX_STATUS_COUNTS_OLDEST, Query.valueOf("OUTBOX_STATUS_COUNTS_OLDEST"));
-    assertSame(Outcome.SUCCESS, Outcome.valueOf("SUCCESS"));
-    assertSame(Outcome.FAILURE, Outcome.valueOf("FAILURE"));
+    assertSame(Query.ASYNC_JOB_STATE_COUNTS, Query.valueOf(ASYNC_COUNT_QUERY));
+    assertSame(Query.OUTBOX_STATUS_COUNTS_OLDEST, Query.valueOf(OUTBOX_COUNT_QUERY));
+    assertSame(Outcome.SUCCESS, Outcome.valueOf(SUCCESS_OUTCOME));
+    assertSame(Outcome.FAILURE, Outcome.valueOf(FAILURE_OUTCOME));
     assertThrows(IllegalArgumentException.class, () -> Query.valueOf("unknown-query"));
     assertThrows(IllegalArgumentException.class, () -> Outcome.valueOf("unknown-outcome"));
     assertThrows(NullPointerException.class, () -> Query.valueOf(null));
@@ -287,7 +296,7 @@ class DbQueryDurationMetricRecorderTest {
 
   @Test
   void dbTime004NullNegativeAndUnknownModeNeverRecordAndStandardStoresNoDetailedSamples() {
-    for (String mode : List.of("DEBUG", "STANDARD"))
+    for (String mode : List.of(DEBUG_MODE, "STANDARD"))
       try (var registry = new Registry()) {
         var recorder = new DbQueryDurationMetricRecorder(registry, mode);
         recorder.record(Query.ASYNC_JOB_STATE_COUNTS, Outcome.SUCCESS, 250000000);
@@ -302,9 +311,9 @@ class DbQueryDurationMetricRecorderTest {
               () -> recorder.record(Query.ASYNC_JOB_STATE_COUNTS, Outcome.SUCCESS, invalid));
         assertEquals(before, registry.records.get());
         assertEquals(0, registry.closes.get());
-        if (mode.equals("DEBUG")) {
+        if (mode.equals(DEBUG_MODE)) {
           assertTrue(recorder.detailedMetricsRequested());
-          assertEquals(.25, summary(registry, "ASYNC_JOB_STATE_COUNTS", "SUCCESS").totalAmount());
+          assertEquals(.25, summary(registry, ASYNC_COUNT_QUERY, SUCCESS_OUTCOME).totalAmount());
           shape(registry);
         } else {
           assertFalse(recorder.detailedMetricsRequested());
@@ -316,7 +325,7 @@ class DbQueryDurationMetricRecorderTest {
       }
     try (var registry = new Registry()) {
       assertThrows(
-          NullPointerException.class, () -> new DbQueryDurationMetricRecorder(null, "DEBUG"));
+          NullPointerException.class, () -> new DbQueryDurationMetricRecorder(null, DEBUG_MODE));
       assertThrows(
           NullPointerException.class, () -> new DbQueryDurationMetricRecorder(registry, null));
       for (String mode : List.of("", "debug", "unknown-mode"))
@@ -340,10 +349,10 @@ class DbQueryDurationMetricRecorderTest {
         assertSame(
             problem,
             assertThrows(
-                problem.getClass(), () -> new DbQueryDurationMetricRecorder(registry, "DEBUG")));
+                problem.getClass(), () -> new DbQueryDurationMetricRecorder(registry, DEBUG_MODE)));
         assertEquals(2, registry.registrations.get());
         shape(registry, Set.of("ASYNC_JOB_STATE_COUNTS/SUCCESS"));
-        assertEquals(0, summary(registry, "ASYNC_JOB_STATE_COUNTS", "SUCCESS").count());
+        assertEquals(0, summary(registry, ASYNC_COUNT_QUERY, SUCCESS_OUTCOME).count());
         assertEquals(0, registry.records.get());
         assertEquals(0, registry.closes.get());
       } finally {
@@ -359,7 +368,7 @@ class DbQueryDurationMetricRecorderTest {
       for (boolean after : List.of(false, true)) {
         var registry = new Registry();
         try {
-          var recorder = new DbQueryDurationMetricRecorder(registry, "DEBUG");
+          var recorder = new DbQueryDurationMetricRecorder(registry, DEBUG_MODE);
           registry.recordFailure = Optional.of(problem);
           registry.failAfter = after;
           assertSame(
@@ -369,10 +378,10 @@ class DbQueryDurationMetricRecorderTest {
                   () ->
                       recorder.record(Query.ASYNC_JOB_STATE_COUNTS, Outcome.SUCCESS, 1500000000)));
           assertEquals(1, registry.records.get());
-          var value = summary(registry, "ASYNC_JOB_STATE_COUNTS", "SUCCESS");
+          var value = summary(registry, ASYNC_COUNT_QUERY, SUCCESS_OUTCOME);
           assertEquals(after ? 1 : 0, value.count());
           assertEquals(after ? 1.5 : 0, value.totalAmount());
-          assertEquals(0, summary(registry, "ASYNC_JOB_STATE_COUNTS", "FAILURE").count());
+          assertEquals(0, summary(registry, ASYNC_COUNT_QUERY, FAILURE_OUTCOME).count());
           assertEquals(0, registry.closes.get());
           shape(registry);
         } finally {
@@ -387,7 +396,7 @@ class DbQueryDurationMetricRecorderTest {
     try (var registry = new Registry();
         var otherRegistry = new Registry();
         var executor = Executors.newFixedThreadPool(8)) {
-      var recorder = new DbQueryDurationMetricRecorder(registry, "DEBUG");
+      var recorder = new DbQueryDurationMetricRecorder(registry, DEBUG_MODE);
       Map<String, Long> counts = new HashMap<>();
       Map<String, Long> sums = new HashMap<>();
       Map<String, Long> maxima = new HashMap<>();
@@ -407,8 +416,8 @@ class DbQueryDurationMetricRecorderTest {
             });
       }
       for (var result : executor.invokeAll(tasks)) result.get(5, TimeUnit.SECONDS);
-      for (String query : List.of("ASYNC_JOB_STATE_COUNTS", "OUTBOX_STATUS_COUNTS_OLDEST"))
-        for (String outcome : List.of("SUCCESS", "FAILURE")) {
+      for (String query : List.of(ASYNC_COUNT_QUERY, OUTBOX_COUNT_QUERY))
+        for (String outcome : List.of(SUCCESS_OUTCOME, FAILURE_OUTCOME)) {
           String key = query + "/" + outcome;
           var value = summary(registry, query, outcome);
           assertEquals(counts.get(key).longValue(), value.count());
@@ -416,12 +425,12 @@ class DbQueryDurationMetricRecorderTest {
           assertEquals(maxima.get(key) / 1000000000.0, value.max());
         }
       assertEquals(64, registry.records.get());
-      var other = new DbQueryDurationMetricRecorder(otherRegistry, "DEBUG");
+      var other = new DbQueryDurationMetricRecorder(otherRegistry, DEBUG_MODE);
       other.record(Query.ASYNC_JOB_STATE_COUNTS, Outcome.SUCCESS, 250000000);
-      assertEquals(.25, summary(otherRegistry, "ASYNC_JOB_STATE_COUNTS", "SUCCESS").totalAmount());
+      assertEquals(.25, summary(otherRegistry, ASYNC_COUNT_QUERY, SUCCESS_OUTCOME).totalAmount());
       assertEquals(
           sums.get("ASYNC_JOB_STATE_COUNTS/SUCCESS") / 1000000000.0,
-          summary(registry, "ASYNC_JOB_STATE_COUNTS", "SUCCESS").totalAmount(),
+          summary(registry, ASYNC_COUNT_QUERY, SUCCESS_OUTCOME).totalAmount(),
           1e-12);
       shape(registry);
       shape(otherRegistry);
@@ -432,18 +441,18 @@ class DbQueryDurationMetricRecorderTest {
   void dbTime008ForeignCounterCannotBeReplacedBySummaryOrClosed() {
     try (var registry = new Registry()) {
       var foreign =
-          Counter.builder("nk_db_query_duration_seconds")
-              .tags("query_id", "ASYNC_JOB_STATE_COUNTS", "outcome", "SUCCESS")
+          Counter.builder(DB_DURATION_NAME)
+              .tags(QUERY_LABEL, ASYNC_COUNT_QUERY, OUTCOME_LABEL, SUCCESS_OUTCOME)
               .register(registry);
       foreign.increment(7);
       assertThrows(
           IllegalArgumentException.class,
-          () -> new DbQueryDurationMetricRecorder(registry, "DEBUG"));
+          () -> new DbQueryDurationMetricRecorder(registry, DEBUG_MODE));
       assertSame(
           foreign,
           registry
-              .get("nk_db_query_duration_seconds")
-              .tags("query_id", "ASYNC_JOB_STATE_COUNTS", "outcome", "SUCCESS")
+              .get(DB_DURATION_NAME)
+              .tags(QUERY_LABEL, ASYNC_COUNT_QUERY, OUTCOME_LABEL, SUCCESS_OUTCOME)
               .counter());
       assertEquals(7, foreign.count());
       assertEquals(0, registry.closes.get());
@@ -459,7 +468,7 @@ class DbQueryDurationMetricRecorderTest {
       for (var query : QUERIES)
         for (var outcome : OUTCOMES)
           try (var registry = new Registry()) {
-            var recorder = new DbQueryDurationMetricRecorder(registry, "DEBUG");
+            var recorder = new DbQueryDurationMetricRecorder(registry, DEBUG_MODE);
             for (long ns : vector) recorder.record(query, outcome, ns);
             var value = summary(registry, query.name(), outcome.name());
             assertEquals(5, value.count());

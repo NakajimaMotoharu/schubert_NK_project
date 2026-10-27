@@ -30,9 +30,22 @@ import org.junit.jupiter.api.Test;
 
 /** MQEVENT001..008/1718; literal SS321/323 catalog and owned SDK, never JMS operations. */
 class MqMessageMetricRecorderTest {
+  private static final int FAILURE_FACTORY_CALL = 2;
+  private static final String LOGIN_REQUEST_LAYOUT = "LGNREQ01";
+  private static final String QUESTION_WORK_LAYOUT = "QWKREQ01";
+  private static final String SYNC_REQUEST_ADDRESS = "nk.sync.request";
+  private static final String SEND_DIRECTION = "SEND";
+  private static final String RECEIVE_DIRECTION = "RECEIVE";
+  private static final String SUCCESS_OUTCOME = "SUCCESS";
+  private static final String MQ_EVENT_NAME = "nk_mq_messages_total";
+  private static final String DIRECTION_LABEL = "direction";
+  private static final String ADDRESS_LABEL = "address";
+  private static final String LAYOUT_LABEL = "layout";
+  private static final String OUTCOME_LABEL = "outcome";
+  private static final String DEBUG_MODE = "DEBUG";
   private static final List<String> LAYOUTS =
       List.of(
-          "LGNREQ01",
+          LOGIN_REQUEST_LAYOUT,
           "LGNRSP01",
           "LOGREQ01",
           "LOGRSP01",
@@ -94,11 +107,11 @@ class MqMessageMetricRecorderTest {
           "QSDRSP01",
           "QDLREQ01",
           "QDLRSP01",
-          "QWKREQ01",
+          QUESTION_WORK_LAYOUT,
           "WLGEVT01");
   private static final List<String> ADDRESSES =
       List.of(
-          "nk.sync.request",
+          SYNC_REQUEST_ADDRESS,
           "nk.sync.reply.web",
           "nk.async.work",
           "nk.web.log",
@@ -114,9 +127,16 @@ class MqMessageMetricRecorderTest {
           Stage.RETRY,
           Stage.DLQ);
   private static final List<String> DIRECTIONS =
-      List.of("SEND", "SEND", "RECEIVE", "RECEIVE", "RECEIVE", "RECEIVE", "SEND");
+      List.of(
+          SEND_DIRECTION,
+          SEND_DIRECTION,
+          RECEIVE_DIRECTION,
+          RECEIVE_DIRECTION,
+          RECEIVE_DIRECTION,
+          RECEIVE_DIRECTION,
+          SEND_DIRECTION);
   private static final List<String> OUTCOMES =
-      List.of("SUCCESS", "FAILURE", "SUCCESS", "FAILURE", "ACK", "RETRY", "DLQ");
+      List.of(SUCCESS_OUTCOME, "FAILURE", SUCCESS_OUTCOME, "FAILURE", "ACK", "RETRY", "DLQ");
 
   private static final class Registry extends SimpleMeterRegistry implements AutoCloseable {
     final AtomicInteger factories = new AtomicInteger();
@@ -128,7 +148,7 @@ class MqMessageMetricRecorderTest {
 
     @Override
     protected Counter newCounter(Meter.Id id) {
-      if (factories.incrementAndGet() == 2) fail(factoryFailure);
+      if (factories.incrementAndGet() == FAILURE_FACTORY_CALL) fail(factoryFailure);
       var delegate = super.newCounter(id);
       return new Counter() {
         public Meter.Id getId() {
@@ -179,15 +199,15 @@ class MqMessageMetricRecorderTest {
 
   private static Counter counter(Registry registry, String layout, String address, int stage) {
     return registry
-        .get("nk_mq_messages_total")
+        .get(MQ_EVENT_NAME)
         .tags(
-            "direction",
+            DIRECTION_LABEL,
             DIRECTIONS.get(stage),
-            "address",
+            ADDRESS_LABEL,
             address,
-            "layout",
+            LAYOUT_LABEL,
             layout,
-            "outcome",
+            OUTCOME_LABEL,
             OUTCOMES.get(stage))
         .counter();
   }
@@ -200,7 +220,10 @@ class MqMessageMetricRecorderTest {
         for (String address : ADDRESSES) {
           var recorder =
               new MqMessageMetricRecorder(
-                  registry, "DEBUG", new LayoutId(layout), BrokerTopology.requireAddress(address));
+                  registry,
+                  DEBUG_MODE,
+                  new LayoutId(layout),
+                  BrokerTopology.requireAddress(address));
           assertTrue(recorder.detailedMetricsRequested());
           for (int i = 0; i < 7; i++) {
             expected.add(layout + "/" + address + "/" + DIRECTIONS.get(i) + "/" + OUTCOMES.get(i));
@@ -212,21 +235,21 @@ class MqMessageMetricRecorderTest {
       var actual = new java.util.HashSet<String>();
       for (var meter : registry.getMeters()) {
         var id = meter.getId();
-        assertEquals("nk_mq_messages_total", id.getName());
+        assertEquals(MQ_EVENT_NAME, id.getName());
         assertEquals(Meter.Type.COUNTER, id.getType());
         assertNull(id.getBaseUnit(), "fixed SS351 counter name must not gain a unit suffix");
         assertEquals(
-            Set.of("direction", "address", "layout", "outcome"),
+            Set.of(DIRECTION_LABEL, ADDRESS_LABEL, LAYOUT_LABEL, OUTCOME_LABEL),
             id.getTags().stream().map(t -> t.getKey()).collect(Collectors.toSet()));
         assertTrue(
             actual.add(
-                id.getTag("layout")
+                id.getTag(LAYOUT_LABEL)
                     + "/"
-                    + id.getTag("address")
+                    + id.getTag(ADDRESS_LABEL)
                     + "/"
-                    + id.getTag("direction")
+                    + id.getTag(DIRECTION_LABEL)
                     + "/"
-                    + id.getTag("outcome")));
+                    + id.getTag(OUTCOME_LABEL)));
       }
       assertEquals(expected, actual);
       assertEquals(2688, registry.factories.get());
@@ -240,17 +263,22 @@ class MqMessageMetricRecorderTest {
     try (var registry = new Registry()) {
       var active =
           new MqMessageMetricRecorder(
-              registry, "DEBUG", new LayoutId("LGNREQ01"), BrokerTopology.SYNC_REQUEST);
+              registry,
+              DEBUG_MODE,
+              new LayoutId(LOGIN_REQUEST_LAYOUT),
+              BrokerTopology.SYNC_REQUEST);
       new MqMessageMetricRecorder(
-          registry, "DEBUG", new LayoutId("LOGREQ01"), BrokerTopology.SYNC_REQUEST);
+          registry, DEBUG_MODE, new LayoutId("LOGREQ01"), BrokerTopology.SYNC_REQUEST);
       new MqMessageMetricRecorder(
-          registry, "DEBUG", new LayoutId("LGNREQ01"), BrokerTopology.DEAD_LETTER);
+          registry, DEBUG_MODE, new LayoutId(LOGIN_REQUEST_LAYOUT), BrokerTopology.DEAD_LETTER);
       for (var stage : STAGES) active.record(stage);
       for (int i = 0; i < 3; i++) active.record(Stage.SEND_FAILURE);
       for (int i = 0; i < 7; i++) {
-        assertEquals(i == 1 ? 4 : 1, counter(registry, "LGNREQ01", "nk.sync.request", i).count());
-        assertEquals(0, counter(registry, "LOGREQ01", "nk.sync.request", i).count());
-        assertEquals(0, counter(registry, "LGNREQ01", "nk.dead.letter", i).count());
+        assertEquals(
+            i == 1 ? 4 : 1,
+            counter(registry, LOGIN_REQUEST_LAYOUT, SYNC_REQUEST_ADDRESS, i).count());
+        assertEquals(0, counter(registry, "LOGREQ01", SYNC_REQUEST_ADDRESS, i).count());
+        assertEquals(0, counter(registry, LOGIN_REQUEST_LAYOUT, "nk.dead.letter", i).count());
       }
       assertEquals(10, registry.increments.get());
       assertEquals(0, registry.closes.get());
@@ -304,7 +332,7 @@ class MqMessageMetricRecorderTest {
     assertEquals(Stage.SEND_SUCCESS, Stage.values()[0]);
     assertThrows(NullPointerException.class, () -> Stage.parse(null));
     assertThrows(NullPointerException.class, () -> Stage.valueOf(null));
-    for (String value : List.of("", "ack", "unknown", "SEND"))
+    for (String value : List.of("", "ack", "unknown", SEND_DIRECTION))
       assertThrows(IllegalArgumentException.class, () -> Stage.parse(value));
     assertThrows(IllegalArgumentException.class, () -> Stage.valueOf("unknown"));
   }
@@ -316,19 +344,24 @@ class MqMessageMetricRecorderTest {
           NullPointerException.class,
           () ->
               new MqMessageMetricRecorder(
-                  null, "DEBUG", new LayoutId("LGNREQ01"), BrokerTopology.SYNC_REQUEST));
+                  null,
+                  DEBUG_MODE,
+                  new LayoutId(LOGIN_REQUEST_LAYOUT),
+                  BrokerTopology.SYNC_REQUEST));
       assertThrows(
           NullPointerException.class,
           () ->
               new MqMessageMetricRecorder(
-                  registry, null, new LayoutId("LGNREQ01"), BrokerTopology.SYNC_REQUEST));
-      for (String mode : List.of("DEBUG", "STANDARD")) {
+                  registry, null, new LayoutId(LOGIN_REQUEST_LAYOUT), BrokerTopology.SYNC_REQUEST));
+      for (String mode : List.of(DEBUG_MODE, "STANDARD")) {
         assertThrows(
             NullPointerException.class,
             () -> new MqMessageMetricRecorder(registry, mode, null, BrokerTopology.SYNC_REQUEST));
         assertThrows(
             NullPointerException.class,
-            () -> new MqMessageMetricRecorder(registry, mode, new LayoutId("LGNREQ01"), null));
+            () ->
+                new MqMessageMetricRecorder(
+                    registry, mode, new LayoutId(LOGIN_REQUEST_LAYOUT), null));
         assertThrows(
             UnsupportedLayoutException.class,
             () ->
@@ -342,11 +375,17 @@ class MqMessageMetricRecorderTest {
                     IllegalArgumentException.class,
                     () ->
                         new MqMessageMetricRecorder(
-                            registry, mode, new LayoutId("LGNREQ01"), BrokerTopology.SYNC_REQUEST))
+                            registry,
+                            mode,
+                            new LayoutId(LOGIN_REQUEST_LAYOUT),
+                            BrokerTopology.SYNC_REQUEST))
                 .getMessage());
       var standard =
           new MqMessageMetricRecorder(
-              registry, "STANDARD", new LayoutId("LGNREQ01"), BrokerTopology.SYNC_REQUEST);
+              registry,
+              "STANDARD",
+              new LayoutId(LOGIN_REQUEST_LAYOUT),
+              BrokerTopology.SYNC_REQUEST);
       assertFalse(standard.detailedMetricsRequested());
       for (var stage : STAGES) standard.record(stage);
       assertThrows(NullPointerException.class, () -> standard.record(null));
@@ -357,10 +396,13 @@ class MqMessageMetricRecorderTest {
     try (var registry = new Registry()) {
       var active =
           new MqMessageMetricRecorder(
-              registry, "DEBUG", new LayoutId("LGNREQ01"), BrokerTopology.SYNC_REQUEST);
+              registry,
+              DEBUG_MODE,
+              new LayoutId(LOGIN_REQUEST_LAYOUT),
+              BrokerTopology.SYNC_REQUEST);
       active.record(Stage.ACK);
       assertThrows(NullPointerException.class, () -> active.record(null));
-      assertEquals(1, counter(registry, "LGNREQ01", "nk.sync.request", 4).count());
+      assertEquals(1, counter(registry, LOGIN_REQUEST_LAYOUT, SYNC_REQUEST_ADDRESS, 4).count());
       assertEquals(1, registry.increments.get());
     }
   }
@@ -378,10 +420,13 @@ class MqMessageMetricRecorderTest {
                 problem.getClass(),
                 () ->
                     new MqMessageMetricRecorder(
-                        registry, "DEBUG", new LayoutId("LGNREQ01"), BrokerTopology.SYNC_REQUEST)));
+                        registry,
+                        DEBUG_MODE,
+                        new LayoutId(LOGIN_REQUEST_LAYOUT),
+                        BrokerTopology.SYNC_REQUEST)));
         assertEquals(2, registry.factories.get());
         assertEquals(1, registry.getMeters().size());
-        assertEquals(0, counter(registry, "LGNREQ01", "nk.sync.request", 0).count());
+        assertEquals(0, counter(registry, LOGIN_REQUEST_LAYOUT, SYNC_REQUEST_ADDRESS, 0).count());
         assertEquals(0, registry.increments.get());
         assertEquals(0, registry.closes.get());
       } finally {
@@ -399,14 +444,20 @@ class MqMessageMetricRecorderTest {
         try (var registry = new Registry()) {
           var active =
               new MqMessageMetricRecorder(
-                  registry, "DEBUG", new LayoutId("LGNREQ01"), BrokerTopology.SYNC_REQUEST);
+                  registry,
+                  DEBUG_MODE,
+                  new LayoutId(LOGIN_REQUEST_LAYOUT),
+                  BrokerTopology.SYNC_REQUEST);
           registry.incrementFailure = Optional.of(problem);
           registry.after = after;
           assertSame(problem, assertThrows(problem.getClass(), () -> active.record(Stage.RETRY)));
           assertEquals(1, registry.increments.get());
-          assertEquals(after ? 1 : 0, counter(registry, "LGNREQ01", "nk.sync.request", 5).count());
+          assertEquals(
+              after ? 1 : 0,
+              counter(registry, LOGIN_REQUEST_LAYOUT, SYNC_REQUEST_ADDRESS, 5).count());
           for (int i : List.of(0, 1, 2, 3, 4, 6))
-            assertEquals(0, counter(registry, "LGNREQ01", "nk.sync.request", i).count());
+            assertEquals(
+                0, counter(registry, LOGIN_REQUEST_LAYOUT, SYNC_REQUEST_ADDRESS, i).count());
           assertEquals(0, registry.closes.get());
         }
   }
@@ -419,10 +470,10 @@ class MqMessageMetricRecorderTest {
         var executor = Executors.newFixedThreadPool(8)) {
       var a =
           new MqMessageMetricRecorder(
-              registry, "DEBUG", new LayoutId("QSBREQ01"), BrokerTopology.SYNC_REQUEST);
+              registry, DEBUG_MODE, new LayoutId("QSBREQ01"), BrokerTopology.SYNC_REQUEST);
       var b =
           new MqMessageMetricRecorder(
-              registry, "DEBUG", new LayoutId("QWKREQ01"), BrokerTopology.ASYNC_WORK);
+              registry, DEBUG_MODE, new LayoutId(QUESTION_WORK_LAYOUT), BrokerTopology.ASYNC_WORK);
       var jobs = new ArrayList<Callable<Void>>();
       var expected = new HashMap<String, Long>();
       for (int i = 0; i < 64; i++) {
@@ -442,16 +493,16 @@ class MqMessageMetricRecorderTest {
       for (int i = 0; i < 7; i++) {
         assertEquals(
             expected.get("A/" + i).longValue(),
-            counter(registry, "QSBREQ01", "nk.sync.request", i).count());
+            counter(registry, "QSBREQ01", SYNC_REQUEST_ADDRESS, i).count());
         assertEquals(
             expected.get("B/" + i).longValue(),
-            counter(registry, "QWKREQ01", "nk.async.work", i).count());
+            counter(registry, QUESTION_WORK_LAYOUT, "nk.async.work", i).count());
       }
       var independent =
           new MqMessageMetricRecorder(
-              other, "DEBUG", new LayoutId("QWKREQ01"), BrokerTopology.ASYNC_WORK);
+              other, DEBUG_MODE, new LayoutId(QUESTION_WORK_LAYOUT), BrokerTopology.ASYNC_WORK);
       independent.record(Stage.DLQ);
-      assertEquals(1, counter(other, "QWKREQ01", "nk.async.work", 6).count());
+      assertEquals(1, counter(other, QUESTION_WORK_LAYOUT, "nk.async.work", 6).count());
       assertEquals(64, registry.increments.get());
     }
   }
@@ -460,35 +511,38 @@ class MqMessageMetricRecorderTest {
   void mqEvent008ForeignGaugeCannotBecomeCounterAndKeepsIdentityValueAndOwnership() {
     try (var registry = new Registry()) {
       var foreign =
-          Gauge.builder("nk_mq_messages_total", () -> 7)
+          Gauge.builder(MQ_EVENT_NAME, () -> 7)
               .tags(
-                  "direction",
-                  "SEND",
-                  "address",
-                  "nk.sync.request",
-                  "layout",
-                  "LGNREQ01",
-                  "outcome",
-                  "SUCCESS")
+                  DIRECTION_LABEL,
+                  SEND_DIRECTION,
+                  ADDRESS_LABEL,
+                  SYNC_REQUEST_ADDRESS,
+                  LAYOUT_LABEL,
+                  LOGIN_REQUEST_LAYOUT,
+                  OUTCOME_LABEL,
+                  SUCCESS_OUTCOME)
               .register(registry);
       assertThrows(
           IllegalArgumentException.class,
           () ->
               new MqMessageMetricRecorder(
-                  registry, "DEBUG", new LayoutId("LGNREQ01"), BrokerTopology.SYNC_REQUEST));
+                  registry,
+                  DEBUG_MODE,
+                  new LayoutId(LOGIN_REQUEST_LAYOUT),
+                  BrokerTopology.SYNC_REQUEST));
       assertSame(
           foreign,
           registry
-              .get("nk_mq_messages_total")
+              .get(MQ_EVENT_NAME)
               .tags(
-                  "direction",
-                  "SEND",
-                  "address",
-                  "nk.sync.request",
-                  "layout",
-                  "LGNREQ01",
-                  "outcome",
-                  "SUCCESS")
+                  DIRECTION_LABEL,
+                  SEND_DIRECTION,
+                  ADDRESS_LABEL,
+                  SYNC_REQUEST_ADDRESS,
+                  LAYOUT_LABEL,
+                  LOGIN_REQUEST_LAYOUT,
+                  OUTCOME_LABEL,
+                  SUCCESS_OUTCOME)
               .gauge());
       assertEquals(7, foreign.value());
       assertEquals(0, registry.closes.get());

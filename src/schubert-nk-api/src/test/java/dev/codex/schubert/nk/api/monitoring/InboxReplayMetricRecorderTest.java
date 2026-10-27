@@ -27,10 +27,19 @@ import org.junit.jupiter.api.Test;
  * INBOXMET001..008/1691, independent SS323 rows/SS351 codes, own SDK only, no replay/DB/JMS/Root.
  */
 class InboxReplayMetricRecorderTest {
+  private static final int FAILURE_FACTORY_CALL = 2;
+  private static final String LOGIN_REQUEST_LAYOUT = "LGNREQ01";
+  private static final String SUBMIT_REQUEST_LAYOUT = "QSBREQ01";
+  private static final String SUCCESS_CODE = "0000";
+  private static final String IDEMPOTENT_CODE = "0200";
+  private static final String INBOX_REPLAY_NAME = "nk_inbox_replays_total";
+  private static final String LAYOUT_LABEL = "layout";
+  private static final String RESULT_LABEL = "result";
+  private static final String DEBUG_MODE = "DEBUG";
   // Independent oracle copied from SS323 table rows, not LayoutRegistry/Production method output.
   private static final List<String> LAYOUTS =
       List.of(
-          "LGNREQ01",
+          LOGIN_REQUEST_LAYOUT,
           "LGNRSP01",
           "LOGREQ01",
           "LOGRSP01",
@@ -78,7 +87,7 @@ class InboxReplayMetricRecorderTest {
           "UPWRSP01",
           "ULKREQ01",
           "ULKRSP01",
-          "QSBREQ01",
+          SUBMIT_REQUEST_LAYOUT,
           "QSBRSP01",
           "NTSREQ01",
           "NTSRSP01",
@@ -96,7 +105,17 @@ class InboxReplayMetricRecorderTest {
           "WLGEVT01");
   private static final List<String> RESULTS =
       List.of(
-          "0000", "0100", "0101", "0102", "0103", "0104", "0105", "0106", "0107", "0200", "9000",
+          SUCCESS_CODE,
+          "0100",
+          "0101",
+          "0102",
+          "0103",
+          "0104",
+          "0105",
+          "0106",
+          "0107",
+          IDEMPOTENT_CODE,
+          "9000",
           "9001");
 
   private static final class Registry extends SimpleMeterRegistry implements AutoCloseable {
@@ -117,7 +136,7 @@ class InboxReplayMetricRecorderTest {
 
     @Override
     protected Counter newCounter(Meter.Id id) {
-      if (registrations.incrementAndGet() == 2) fail(registrationFailure);
+      if (registrations.incrementAndGet() == FAILURE_FACTORY_CALL) fail(registrationFailure);
       var actual = super.newCounter(id);
       return new Counter() {
         @Override
@@ -149,9 +168,9 @@ class InboxReplayMetricRecorderTest {
 
   private static double count(Registry registry, String layout, String result) {
     return registry
-        .get("nk_inbox_replays_total")
-        .tag("layout", layout)
-        .tag("result", result)
+        .get(INBOX_REPLAY_NAME)
+        .tag(LAYOUT_LABEL, layout)
+        .tag(RESULT_LABEL, result)
         .counter()
         .count();
   }
@@ -162,12 +181,12 @@ class InboxReplayMetricRecorderTest {
     assertEquals(768, registry.getMeters().size());
     var pairs = new java.util.HashSet<String>();
     for (var meter : registry.getMeters()) {
-      assertEquals("nk_inbox_replays_total", meter.getId().getName());
+      assertEquals(INBOX_REPLAY_NAME, meter.getId().getName());
       assertEquals(Meter.Type.COUNTER, meter.getId().getType());
       assertEquals(
-          Set.of("layout", "result"),
+          Set.of(LAYOUT_LABEL, RESULT_LABEL),
           meter.getId().getTags().stream().map(t -> t.getKey()).collect(Collectors.toSet()));
-      pairs.add(meter.getId().getTag("layout") + ":" + meter.getId().getTag("result"));
+      pairs.add(meter.getId().getTag(LAYOUT_LABEL) + ":" + meter.getId().getTag(RESULT_LABEL));
     }
     var expected = new java.util.HashSet<String>();
     for (String layout : LAYOUTS) for (String result : RESULTS) expected.add(layout + ":" + result);
@@ -177,7 +196,7 @@ class InboxReplayMetricRecorderTest {
   @Test
   void inboxMet001DebugRegistersOnlyAllApprovedLayoutResultPairsAtZero() {
     try (var registry = new Registry()) {
-      var recorder = new InboxReplayMetricRecorder(registry, "DEBUG");
+      var recorder = new InboxReplayMetricRecorder(registry, DEBUG_MODE);
       assertTrue(recorder.detailedMetricsRequested());
       shape(registry);
       for (String layout : LAYOUTS)
@@ -191,14 +210,14 @@ class InboxReplayMetricRecorderTest {
   @Test
   void inboxMet002EachSuppliedReplayIncrementsExactlyOnePairOnce() {
     try (var registry = new Registry()) {
-      var recorder = new InboxReplayMetricRecorder(registry, "DEBUG");
+      var recorder = new InboxReplayMetricRecorder(registry, DEBUG_MODE);
       for (String layout : LAYOUTS)
         for (String result : RESULTS)
           recorder.record(new LayoutId(layout), ResultCode.fromWire(result));
       for (String layout : LAYOUTS)
         for (String result : RESULTS) assertEquals(1, count(registry, layout, result));
-      recorder.record(new LayoutId("QSBREQ01"), ResultCode.IDEMPOTENT_SUCCESS);
-      assertEquals(2, count(registry, "QSBREQ01", "0200"));
+      recorder.record(new LayoutId(SUBMIT_REQUEST_LAYOUT), ResultCode.IDEMPOTENT_SUCCESS);
+      assertEquals(2, count(registry, SUBMIT_REQUEST_LAYOUT, IDEMPOTENT_CODE));
       assertEquals(769, registry.increments.get());
       shape(registry);
     }
@@ -222,7 +241,8 @@ class InboxReplayMetricRecorderTest {
   @Test
   void inboxMet004NullUnknownAndInvalidModeCannotCreateLabelsOrChangeCounters() {
     try (var registry = new Registry()) {
-      assertThrows(NullPointerException.class, () -> new InboxReplayMetricRecorder(null, "DEBUG"));
+      assertThrows(
+          NullPointerException.class, () -> new InboxReplayMetricRecorder(null, DEBUG_MODE));
       assertThrows(NullPointerException.class, () -> new InboxReplayMetricRecorder(registry, null));
       for (String mode : List.of("", "debug", "unknown-mode"))
         assertEquals(
@@ -233,19 +253,20 @@ class InboxReplayMetricRecorderTest {
                 .getMessage());
       assertEquals(0, registry.registrations.get());
     }
-    for (String mode : List.of("DEBUG", "STANDARD")) {
+    for (String mode : List.of(DEBUG_MODE, "STANDARD")) {
       try (var registry = new Registry()) {
         var recorder = new InboxReplayMetricRecorder(registry, mode);
         assertThrows(NullPointerException.class, () -> recorder.record(null, ResultCode.SUCCESS));
         assertThrows(
-            NullPointerException.class, () -> recorder.record(new LayoutId("LGNREQ01"), null));
+            NullPointerException.class,
+            () -> recorder.record(new LayoutId(LOGIN_REQUEST_LAYOUT), null));
         assertThrows(
             UnsupportedLayoutException.class,
             () -> recorder.record(new LayoutId("UNKNOWN1"), ResultCode.SUCCESS));
         assertEquals(0, registry.increments.get());
-        if (mode.equals("DEBUG")) {
+        if (mode.equals(DEBUG_MODE)) {
           shape(registry);
-          assertEquals(0, count(registry, "LGNREQ01", "0000"));
+          assertEquals(0, count(registry, LOGIN_REQUEST_LAYOUT, SUCCESS_CODE));
         } else assertEquals(0, registry.getMeters().size());
       }
     }
@@ -276,12 +297,12 @@ class InboxReplayMetricRecorderTest {
         assertSame(
             failure,
             assertThrows(
-                failure.getClass(), () -> new InboxReplayMetricRecorder(registry, "DEBUG")));
+                failure.getClass(), () -> new InboxReplayMetricRecorder(registry, DEBUG_MODE)));
         assertEquals(2, registry.registrations.get());
         assertEquals(1, registry.getMeters().size());
         assertEquals(0, registry.closes.get());
         assertEquals(0, registry.increments.get());
-        assertEquals(0, count(registry, "LGNREQ01", "0000"));
+        assertEquals(0, count(registry, LOGIN_REQUEST_LAYOUT, SUCCESS_CODE));
       } finally {
         registry.close();
       }
@@ -296,16 +317,16 @@ class InboxReplayMetricRecorderTest {
           List.<Throwable>of(
               new UnformattableFailure(), new AssertionError("owned increment fixture"))) {
         try (var registry = new Registry()) {
-          var recorder = new InboxReplayMetricRecorder(registry, "DEBUG");
+          var recorder = new InboxReplayMetricRecorder(registry, DEBUG_MODE);
           if (after) registry.afterIncrement = Optional.of(failure);
           else registry.beforeIncrement = Optional.of(failure);
           assertSame(
               failure,
               assertThrows(
                   failure.getClass(),
-                  () -> recorder.record(new LayoutId("LGNREQ01"), ResultCode.SUCCESS)));
+                  () -> recorder.record(new LayoutId(LOGIN_REQUEST_LAYOUT), ResultCode.SUCCESS)));
           assertEquals(1, registry.increments.get());
-          assertEquals(after ? 1 : 0, count(registry, "LGNREQ01", "0000"));
+          assertEquals(after ? 1 : 0, count(registry, LOGIN_REQUEST_LAYOUT, SUCCESS_CODE));
           assertEquals(768, registry.getMeters().size());
           assertEquals(0, registry.closes.get());
         }
@@ -317,23 +338,23 @@ class InboxReplayMetricRecorderTest {
   void inboxMet007ConcurrentSuppliedEventsKeepExactCountsAndSeparateOwners() throws Exception {
     try (var registry = new Registry();
         var other = new Registry()) {
-      var recorder = new InboxReplayMetricRecorder(registry, "DEBUG");
-      var second = new InboxReplayMetricRecorder(other, "DEBUG");
-      second.record(new LayoutId("LGNREQ01"), ResultCode.SUCCESS);
+      var recorder = new InboxReplayMetricRecorder(registry, DEBUG_MODE);
+      var second = new InboxReplayMetricRecorder(other, DEBUG_MODE);
+      second.record(new LayoutId(LOGIN_REQUEST_LAYOUT), ResultCode.SUCCESS);
       var tasks = new ArrayList<Callable<String>>();
       for (int i = 0; i < 64; i++)
         tasks.add(
             () -> {
-              recorder.record(new LayoutId("QSBREQ01"), ResultCode.IDEMPOTENT_SUCCESS);
+              recorder.record(new LayoutId(SUBMIT_REQUEST_LAYOUT), ResultCode.IDEMPOTENT_SUCCESS);
               return "recorded";
             });
       try (var pool = Executors.newFixedThreadPool(8)) {
         for (var result : pool.invokeAll(tasks)) assertEquals("recorded", result.get());
       }
-      assertEquals(64, count(registry, "QSBREQ01", "0200"));
-      assertEquals(0, count(registry, "LGNREQ01", "0000"));
-      assertEquals(1, count(other, "LGNREQ01", "0000"));
-      assertEquals(0, count(other, "QSBREQ01", "0200"));
+      assertEquals(64, count(registry, SUBMIT_REQUEST_LAYOUT, IDEMPOTENT_CODE));
+      assertEquals(0, count(registry, LOGIN_REQUEST_LAYOUT, SUCCESS_CODE));
+      assertEquals(1, count(other, LOGIN_REQUEST_LAYOUT, SUCCESS_CODE));
+      assertEquals(0, count(other, SUBMIT_REQUEST_LAYOUT, IDEMPOTENT_CODE));
       assertEquals(64, registry.increments.get());
       assertEquals(1, other.increments.get());
       shape(registry);
@@ -345,19 +366,20 @@ class InboxReplayMetricRecorderTest {
   void inboxMet008ForeignNamespaceTypeCollisionCannotReplaceOrCloseCallerMeter() {
     try (var registry = new Registry()) {
       var foreign =
-          Gauge.builder("nk_inbox_replays_total", () -> 7d)
-              .tag("layout", "LGNREQ01")
-              .tag("result", "0000")
+          Gauge.builder(INBOX_REPLAY_NAME, () -> 7d)
+              .tag(LAYOUT_LABEL, LOGIN_REQUEST_LAYOUT)
+              .tag(RESULT_LABEL, SUCCESS_CODE)
               .register(registry);
       assertThrows(
-          IllegalArgumentException.class, () -> new InboxReplayMetricRecorder(registry, "DEBUG"));
+          IllegalArgumentException.class,
+          () -> new InboxReplayMetricRecorder(registry, DEBUG_MODE));
       assertEquals(1, registry.getMeters().size());
       assertSame(
           foreign,
           registry
-              .get("nk_inbox_replays_total")
-              .tag("layout", "LGNREQ01")
-              .tag("result", "0000")
+              .get(INBOX_REPLAY_NAME)
+              .tag(LAYOUT_LABEL, LOGIN_REQUEST_LAYOUT)
+              .tag(RESULT_LABEL, SUCCESS_CODE)
               .gauge());
       assertEquals(7, foreign.value());
       assertEquals(0, registry.increments.get());

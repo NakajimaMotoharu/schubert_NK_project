@@ -31,10 +31,22 @@ import org.junit.jupiter.api.Test;
 
 /** MQTIME001..008/1716; independent SS323 literal rows, own SDK only, never JMS/clock authority. */
 class MqProcessingDurationMetricRecorderTest {
+  private static final int FAILURE_FACTORY_CALL = 2;
+  private static final String LOGIN_REQUEST_LAYOUT = "LGNREQ01";
+  private static final String SUBMIT_REQUEST_LAYOUT = "QSBREQ01";
+  private static final String QUESTION_WORK_LAYOUT = "QWKREQ01";
+  private static final String WEB_LOG_EVENT_LAYOUT = "WLGEVT01";
+  private static final String MQ_DURATION_NAME = "nk_mq_processing_duration_seconds";
+  private static final String FLOW_LABEL = "flow";
+  private static final String LAYOUT_LABEL = "layout";
+  private static final String OUTCOME_LABEL = "outcome";
+  private static final String DEBUG_MODE = "DEBUG";
+  private static final String SUCCESS_OUTCOME = "SUCCESS";
+  private static final String FAILURE_OUTCOME = "FAILURE";
   // Independent SS323 oracle inherited from existing hand-written test vectors, not Production.
   private static final List<String> LAYOUTS =
       List.of(
-          "LGNREQ01",
+          LOGIN_REQUEST_LAYOUT,
           "LGNRSP01",
           "LOGREQ01",
           "LOGRSP01",
@@ -82,7 +94,7 @@ class MqProcessingDurationMetricRecorderTest {
           "UPWRSP01",
           "ULKREQ01",
           "ULKRSP01",
-          "QSBREQ01",
+          SUBMIT_REQUEST_LAYOUT,
           "QSBRSP01",
           "NTSREQ01",
           "NTSRSP01",
@@ -96,8 +108,8 @@ class MqProcessingDurationMetricRecorderTest {
           "QSDRSP01",
           "QDLREQ01",
           "QDLRSP01",
-          "QWKREQ01",
-          "WLGEVT01");
+          QUESTION_WORK_LAYOUT,
+          WEB_LOG_EVENT_LAYOUT);
 
   private static final class Registry extends SimpleMeterRegistry
       implements AutoCloseable, ExactDurationSupport {
@@ -128,7 +140,7 @@ class MqProcessingDurationMetricRecorderTest {
     @Override
     protected DistributionSummary newDistributionSummary(
         Meter.Id id, DistributionStatisticConfig config, double scale) {
-      if (registrations.incrementAndGet() == 2) fail(factoryFailure);
+      if (registrations.incrementAndGet() == FAILURE_FACTORY_CALL) fail(factoryFailure);
       configurations.add(config);
       var delegate = ExactDurationMeterRegistry.exactDurationSummary(this, id, config, scale);
       return new DistributionSummary() {
@@ -198,16 +210,16 @@ class MqProcessingDurationMetricRecorderTest {
 
   private static String flow(String layout) {
     return switch (layout) {
-      case "QSBREQ01", "QSBRSP01" -> "ASYNC_ACCEPTANCE";
-      case "QWKREQ01", "WLGEVT01" -> "INTERNAL";
+      case SUBMIT_REQUEST_LAYOUT, "QSBRSP01" -> "ASYNC_ACCEPTANCE";
+      case QUESTION_WORK_LAYOUT, WEB_LOG_EVENT_LAYOUT -> "INTERNAL";
       default -> "SYNCHRONOUS";
     };
   }
 
   private static DistributionSummary summary(Registry registry, String layout, String outcome) {
     return registry
-        .get("nk_mq_processing_duration_seconds")
-        .tags("flow", flow(layout), "layout", layout, "outcome", outcome)
+        .get(MQ_DURATION_NAME)
+        .tags(FLOW_LABEL, flow(layout), LAYOUT_LABEL, layout, OUTCOME_LABEL, outcome)
         .summary();
   }
 
@@ -217,16 +229,16 @@ class MqProcessingDurationMetricRecorderTest {
     var auxiliary = new java.util.HashSet<String>();
     for (var meter : registry.getMeters()) {
       var id = meter.getId();
-      String layout = id.getTag("layout");
-      String outcome = id.getTag("outcome");
+      String layout = id.getTag(LAYOUT_LABEL);
+      String outcome = id.getTag(OUTCOME_LABEL);
       String pair = layout + "/" + outcome;
       assertTrue(expectedPairs.contains(pair));
-      assertEquals(flow(layout), id.getTag("flow"));
-      if (id.getName().equals("nk_mq_processing_duration_seconds")) {
+      assertEquals(flow(layout), id.getTag(FLOW_LABEL));
+      if (id.getName().equals(MQ_DURATION_NAME)) {
         assertEquals(Meter.Type.DISTRIBUTION_SUMMARY, id.getType());
         assertEquals("seconds", id.getBaseUnit());
         assertEquals(
-            Set.of("flow", "layout", "outcome"),
+            Set.of(FLOW_LABEL, LAYOUT_LABEL, OUTCOME_LABEL),
             id.getTags().stream().map(t -> t.getKey()).collect(Collectors.toSet()));
         assertTrue(primary.add(pair));
       } else {
@@ -234,7 +246,7 @@ class MqProcessingDurationMetricRecorderTest {
         String kind = "le";
         assertEquals("nk_mq_processing_duration_seconds.histogram", id.getName());
         assertEquals(
-            Set.of("flow", "layout", "outcome", kind),
+            Set.of(FLOW_LABEL, LAYOUT_LABEL, OUTCOME_LABEL, kind),
             id.getTags().stream().map(t -> t.getKey()).collect(Collectors.toSet()));
         assertTrue(auxiliary.add(pair + "/" + kind + "/" + id.getTag(kind)));
       }
@@ -254,9 +266,9 @@ class MqProcessingDurationMetricRecorderTest {
       var pairs = new java.util.HashSet<String>();
       for (String layout : LAYOUTS) {
         var recorder =
-            new MqProcessingDurationMetricRecorder(registry, "DEBUG", new LayoutId(layout));
+            new MqProcessingDurationMetricRecorder(registry, DEBUG_MODE, new LayoutId(layout));
         assertTrue(recorder.detailedMetricsRequested());
-        for (String outcome : List.of("SUCCESS", "FAILURE")) {
+        for (String outcome : List.of(SUCCESS_OUTCOME, FAILURE_OUTCOME)) {
           pairs.add(layout + "/" + outcome);
           assertEquals(0, summary(registry, layout, outcome).count());
           assertEquals(0, summary(registry, layout, outcome).totalAmount());
@@ -280,10 +292,11 @@ class MqProcessingDurationMetricRecorderTest {
   void mqTime002FractionalSecondsCdfAndTwoMaximumSamplesUseIndependentFixedVectors() {
     try (var registry = new Registry()) {
       var recorder =
-          new MqProcessingDurationMetricRecorder(registry, "DEBUG", new LayoutId("LGNREQ01"));
+          new MqProcessingDurationMetricRecorder(
+              registry, DEBUG_MODE, new LayoutId(LOGIN_REQUEST_LAYOUT));
       for (var outcome : List.of(Outcome.SUCCESS, Outcome.FAILURE)) {
         for (long ns : List.of(0L, 1L, 500000000L, 1500000000L)) recorder.record(outcome, ns);
-        var v = summary(registry, "LGNREQ01", outcome.name());
+        var v = summary(registry, LOGIN_REQUEST_LAYOUT, outcome.name());
         assertEquals(4, v.count());
         assertEquals(2.000000001, v.totalAmount(), 1e-15);
         assertEquals(1.5, v.max());
@@ -298,22 +311,23 @@ class MqProcessingDurationMetricRecorderTest {
     }
     try (var registry = new Registry()) {
       var recorder =
-          new MqProcessingDurationMetricRecorder(registry, "DEBUG", new LayoutId("WLGEVT01"));
+          new MqProcessingDurationMetricRecorder(
+              registry, DEBUG_MODE, new LayoutId(WEB_LOG_EVENT_LAYOUT));
       recorder.record(Outcome.SUCCESS, Long.MAX_VALUE);
       recorder.record(Outcome.SUCCESS, Long.MAX_VALUE);
-      var value = summary(registry, "WLGEVT01", "SUCCESS");
+      var value = summary(registry, WEB_LOG_EVENT_LAYOUT, SUCCESS_OUTCOME);
       assertEquals(2, value.count());
       assertEquals(1.8446744073709553E10, value.totalAmount());
       assertEquals(9.223372036854776E9, value.max());
       assertTrue(Double.isFinite(value.totalAmount()));
-      assertEquals(0, summary(registry, "WLGEVT01", "FAILURE").count());
+      assertEquals(0, summary(registry, WEB_LOG_EVENT_LAYOUT, FAILURE_OUTCOME).count());
     }
   }
 
   @Test
   void mqTime003ClosedOutcomeFactoriesAndUnknownLayoutCannotRegisterArbitraryNamespace() {
-    assertEquals(Outcome.SUCCESS, Outcome.parse("SUCCESS"));
-    assertEquals(Outcome.FAILURE, Outcome.parse("FAILURE"));
+    assertEquals(Outcome.SUCCESS, Outcome.parse(SUCCESS_OUTCOME));
+    assertEquals(Outcome.FAILURE, Outcome.parse(FAILURE_OUTCOME));
     assertThrows(NullPointerException.class, () -> Outcome.parse(null));
     for (String bad : List.of("", "success", "unknown"))
       assertThrows(IllegalArgumentException.class, () -> Outcome.parse(bad));
@@ -321,12 +335,12 @@ class MqProcessingDurationMetricRecorderTest {
     var values = Outcome.values();
     values[0] = Outcome.FAILURE;
     assertArrayEquals(new Outcome[] {Outcome.SUCCESS, Outcome.FAILURE}, Outcome.values());
-    assertEquals(Outcome.SUCCESS, Outcome.valueOf("SUCCESS"));
-    assertEquals(Outcome.FAILURE, Outcome.valueOf("FAILURE"));
+    assertEquals(Outcome.SUCCESS, Outcome.valueOf(SUCCESS_OUTCOME));
+    assertEquals(Outcome.FAILURE, Outcome.valueOf(FAILURE_OUTCOME));
     assertThrows(NullPointerException.class, () -> Outcome.valueOf(null));
     assertThrows(IllegalArgumentException.class, () -> Outcome.valueOf("UNKNOWN"));
     try (var registry = new Registry()) {
-      for (String mode : List.of("DEBUG", "STANDARD")) {
+      for (String mode : List.of(DEBUG_MODE, "STANDARD")) {
         assertThrows(
             NullPointerException.class,
             () -> new MqProcessingDurationMetricRecorder(registry, mode, null));
@@ -344,10 +358,14 @@ class MqProcessingDurationMetricRecorderTest {
     try (var registry = new Registry()) {
       assertThrows(
           NullPointerException.class,
-          () -> new MqProcessingDurationMetricRecorder(null, "DEBUG", new LayoutId("LGNREQ01")));
+          () ->
+              new MqProcessingDurationMetricRecorder(
+                  null, DEBUG_MODE, new LayoutId(LOGIN_REQUEST_LAYOUT)));
       assertThrows(
           NullPointerException.class,
-          () -> new MqProcessingDurationMetricRecorder(registry, null, new LayoutId("LGNREQ01")));
+          () ->
+              new MqProcessingDurationMetricRecorder(
+                  registry, null, new LayoutId(LOGIN_REQUEST_LAYOUT)));
       for (String mode : List.of("", "debug", "unknown"))
         assertEquals(
             "CONFIG_INVALID",
@@ -355,15 +373,16 @@ class MqProcessingDurationMetricRecorderTest {
                     IllegalArgumentException.class,
                     () ->
                         new MqProcessingDurationMetricRecorder(
-                            registry, mode, new LayoutId("LGNREQ01")))
+                            registry, mode, new LayoutId(LOGIN_REQUEST_LAYOUT)))
                 .getMessage());
       assertEquals(0, registry.registrations.get());
     }
-    for (String mode : List.of("DEBUG", "STANDARD"))
+    for (String mode : List.of(DEBUG_MODE, "STANDARD"))
       try (var registry = new Registry()) {
         var recorder =
-            new MqProcessingDurationMetricRecorder(registry, mode, new LayoutId("LGNREQ01"));
-        assertEquals(mode.equals("DEBUG"), recorder.detailedMetricsRequested());
+            new MqProcessingDurationMetricRecorder(
+                registry, mode, new LayoutId(LOGIN_REQUEST_LAYOUT));
+        assertEquals(mode.equals(DEBUG_MODE), recorder.detailedMetricsRequested());
         assertThrows(NullPointerException.class, () -> recorder.record(null, 0));
         for (var outcome : List.of(Outcome.SUCCESS, Outcome.FAILURE)) {
           for (long invalid : List.of(-1L, Long.MIN_VALUE))
@@ -393,7 +412,7 @@ class MqProcessingDurationMetricRecorderTest {
                 problem.getClass(),
                 () ->
                     new MqProcessingDurationMetricRecorder(
-                        registry, "DEBUG", new LayoutId("LGNREQ01"))));
+                        registry, DEBUG_MODE, new LayoutId(LOGIN_REQUEST_LAYOUT))));
         assertEquals(2, registry.registrations.get());
         shape(registry, Set.of("LGNREQ01/SUCCESS"));
         assertEquals(0, registry.records.get());
@@ -411,16 +430,20 @@ class MqProcessingDurationMetricRecorderTest {
       for (boolean after : List.of(false, true))
         try (var registry = new Registry()) {
           var recorder =
-              new MqProcessingDurationMetricRecorder(registry, "DEBUG", new LayoutId("LGNREQ01"));
+              new MqProcessingDurationMetricRecorder(
+                  registry, DEBUG_MODE, new LayoutId(LOGIN_REQUEST_LAYOUT));
           registry.recordFailure = Optional.of(problem);
           registry.failAfter = after;
           assertSame(
               problem,
               assertThrows(problem.getClass(), () -> recorder.record(Outcome.FAILURE, 500000000)));
           assertEquals(1, registry.records.get());
-          assertEquals(after ? 1 : 0, summary(registry, "LGNREQ01", "FAILURE").count());
-          assertEquals(after ? .5 : 0, summary(registry, "LGNREQ01", "FAILURE").totalAmount());
-          assertEquals(0, summary(registry, "LGNREQ01", "SUCCESS").count());
+          assertEquals(
+              after ? 1 : 0, summary(registry, LOGIN_REQUEST_LAYOUT, FAILURE_OUTCOME).count());
+          assertEquals(
+              after ? .5 : 0,
+              summary(registry, LOGIN_REQUEST_LAYOUT, FAILURE_OUTCOME).totalAmount());
+          assertEquals(0, summary(registry, LOGIN_REQUEST_LAYOUT, SUCCESS_OUTCOME).count());
           assertEquals(0, registry.closes.get());
         }
   }
@@ -431,14 +454,18 @@ class MqProcessingDurationMetricRecorderTest {
     try (var registry = new Registry();
         var other = new Registry();
         var executor = Executors.newFixedThreadPool(8)) {
-      var a = new MqProcessingDurationMetricRecorder(registry, "DEBUG", new LayoutId("QSBREQ01"));
-      var b = new MqProcessingDurationMetricRecorder(registry, "DEBUG", new LayoutId("QWKREQ01"));
+      var a =
+          new MqProcessingDurationMetricRecorder(
+              registry, DEBUG_MODE, new LayoutId(SUBMIT_REQUEST_LAYOUT));
+      var b =
+          new MqProcessingDurationMetricRecorder(
+              registry, DEBUG_MODE, new LayoutId(QUESTION_WORK_LAYOUT));
       var jobs = new ArrayList<Callable<Void>>();
       var sums = new HashMap<String, Long>();
       var counts = new HashMap<String, Long>();
       var max = new HashMap<String, Long>();
       for (int i = 0; i < 64; i++) {
-        String layout = i % 2 == 0 ? "QSBREQ01" : "QWKREQ01";
+        String layout = i % 2 == 0 ? SUBMIT_REQUEST_LAYOUT : QUESTION_WORK_LAYOUT;
         var target = i % 2 == 0 ? a : b;
         var outcome = (i / 2) % 2 == 0 ? Outcome.SUCCESS : Outcome.FAILURE;
         long ns = i * 1000000L;
@@ -453,18 +480,18 @@ class MqProcessingDurationMetricRecorderTest {
             });
       }
       for (var f : executor.invokeAll(jobs, 5, TimeUnit.SECONDS)) f.get(5, TimeUnit.SECONDS);
-      for (String layout : List.of("QSBREQ01", "QWKREQ01"))
-        for (String outcome : List.of("SUCCESS", "FAILURE")) {
+      for (String layout : List.of(SUBMIT_REQUEST_LAYOUT, QUESTION_WORK_LAYOUT))
+        for (String outcome : List.of(SUCCESS_OUTCOME, FAILURE_OUTCOME)) {
           var value = summary(registry, layout, outcome);
           String key = layout + "/" + outcome;
           assertEquals(counts.get(key).longValue(), value.count());
           assertEquals(sums.get(key) / 1e9, value.totalAmount(), 1e-12);
           assertEquals(max.get(key) / 1e9, value.max());
         }
-      new MqProcessingDurationMetricRecorder(other, "DEBUG", new LayoutId("QWKREQ01"))
+      new MqProcessingDurationMetricRecorder(other, DEBUG_MODE, new LayoutId(QUESTION_WORK_LAYOUT))
           .record(Outcome.SUCCESS, 250000000);
-      assertEquals(1, summary(other, "QWKREQ01", "SUCCESS").count());
-      assertEquals(.25, summary(other, "QWKREQ01", "SUCCESS").totalAmount());
+      assertEquals(1, summary(other, QUESTION_WORK_LAYOUT, SUCCESS_OUTCOME).count());
+      assertEquals(.25, summary(other, QUESTION_WORK_LAYOUT, SUCCESS_OUTCOME).totalAmount());
       assertEquals(64, registry.records.get());
     }
   }
@@ -473,19 +500,32 @@ class MqProcessingDurationMetricRecorderTest {
   void mqTime008ForeignCounterCannotBecomeSummaryOrBeClosed() {
     try (var registry = new Registry()) {
       var foreign =
-          Counter.builder("nk_mq_processing_duration_seconds")
-              .tags("flow", "SYNCHRONOUS", "layout", "LGNREQ01", "outcome", "SUCCESS")
+          Counter.builder(MQ_DURATION_NAME)
+              .tags(
+                  FLOW_LABEL,
+                  "SYNCHRONOUS",
+                  LAYOUT_LABEL,
+                  LOGIN_REQUEST_LAYOUT,
+                  OUTCOME_LABEL,
+                  SUCCESS_OUTCOME)
               .register(registry);
       foreign.increment(7);
       assertThrows(
           IllegalArgumentException.class,
           () ->
-              new MqProcessingDurationMetricRecorder(registry, "DEBUG", new LayoutId("LGNREQ01")));
+              new MqProcessingDurationMetricRecorder(
+                  registry, DEBUG_MODE, new LayoutId(LOGIN_REQUEST_LAYOUT)));
       assertSame(
           foreign,
           registry
-              .get("nk_mq_processing_duration_seconds")
-              .tags("flow", "SYNCHRONOUS", "layout", "LGNREQ01", "outcome", "SUCCESS")
+              .get(MQ_DURATION_NAME)
+              .tags(
+                  FLOW_LABEL,
+                  "SYNCHRONOUS",
+                  LAYOUT_LABEL,
+                  LOGIN_REQUEST_LAYOUT,
+                  OUTCOME_LABEL,
+                  SUCCESS_OUTCOME)
               .counter());
       assertEquals(7, foreign.count());
       assertEquals(0, registry.closes.get());
@@ -498,11 +538,11 @@ class MqProcessingDurationMetricRecorderTest {
         List.of(
             List.of(0L, 1L, Long.MAX_VALUE, Long.MAX_VALUE, 1L),
             List.of(Long.MAX_VALUE, Long.MAX_VALUE, 1L, 0L, 1L)))
-      for (String layout : List.of("LGNREQ01", "WLGEVT01"))
+      for (String layout : List.of(LOGIN_REQUEST_LAYOUT, WEB_LOG_EVENT_LAYOUT))
         for (var outcome : List.of(Outcome.SUCCESS, Outcome.FAILURE))
           try (var registry = new Registry()) {
             var recorder =
-                new MqProcessingDurationMetricRecorder(registry, "DEBUG", new LayoutId(layout));
+                new MqProcessingDurationMetricRecorder(registry, DEBUG_MODE, new LayoutId(layout));
             for (long ns : vector) recorder.record(outcome, ns);
             var value = summary(registry, layout, outcome.name());
             assertEquals(5, value.count());
