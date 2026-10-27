@@ -24,6 +24,13 @@ import org.junit.jupiter.api.Test;
 
 /** POOLMET001..008: supplied vectors and owned SDK only, no Hikari/DB/management activity. */
 class DbPoolMetricRecorderTest {
+  private static final String SERVICE_LABEL = "service";
+  private static final String ACTIVE_POOL_STATE = "active";
+  private static final String IDLE_POOL_STATE = "idle";
+  private static final String PENDING_POOL_STATE = "pending";
+  private static final String MAXIMUM_POOL_STATE = "max";
+  private static final String DEBUG_MODE = "DEBUG";
+
   private static final class Registry extends SimpleMeterRegistry implements AutoCloseable {
     final AtomicInteger registrations = new AtomicInteger();
     final AtomicInteger closes = new AtomicInteger();
@@ -54,18 +61,19 @@ class DbPoolMetricRecorderTest {
       assertEquals("nk_db_pool_connections", id.getName());
       assertEquals(Meter.Type.GAUGE, id.getType());
       assertEquals(
-          Set.of("service", "state"),
+          Set.of(SERVICE_LABEL, "state"),
           id.getTags().stream().map(t -> t.getKey()).collect(Collectors.toSet()));
-      assertEquals("API", id.getTag("service"));
+      assertEquals("API", id.getTag(SERVICE_LABEL));
       labels.add(id.getTag("state"));
     }
-    assertEquals(Set.of("active", "idle", "pending", "max"), labels);
+    assertEquals(
+        Set.of(ACTIVE_POOL_STATE, IDLE_POOL_STATE, PENDING_POOL_STATE, MAXIMUM_POOL_STATE), labels);
   }
 
   private static double gauge(Registry registry, String state) {
     return registry
         .get("nk_db_pool_connections")
-        .tags("service", "API", "state", state)
+        .tags(SERVICE_LABEL, "API", "state", state)
         .gauge()
         .value();
   }
@@ -73,12 +81,13 @@ class DbPoolMetricRecorderTest {
   @Test
   void poolMetric001DebugHasExactlyFourCanonicalUnknownSeries() {
     try (var registry = new Registry()) {
-      var recorder = new DbPoolMetricRecorder(registry, "DEBUG");
+      var recorder = new DbPoolMetricRecorder(registry, DEBUG_MODE);
       assertTrue(recorder.detailedMetricsRequested());
       assertTrue(recorder.snapshot().isEmpty());
       shape(registry);
       assertEquals(4, State.values().length);
-      for (String state : List.of("active", "idle", "pending", "max")) {
+      for (String state :
+          List.of(ACTIVE_POOL_STATE, IDLE_POOL_STATE, PENDING_POOL_STATE, MAXIMUM_POOL_STATE)) {
         assertEquals(state, DbPoolMetricRecorder.state(state).label());
         assertTrue(Double.isNaN(gauge(registry, state)));
       }
@@ -89,7 +98,7 @@ class DbPoolMetricRecorderTest {
   @Test
   void poolMetric002LiteralCountsAndIndependentGaugeValuesRemainExact() {
     try (var registry = new Registry()) {
-      var recorder = new DbPoolMetricRecorder(registry, "DEBUG");
+      var recorder = new DbPoolMetricRecorder(registry, DEBUG_MODE);
       var counts = new Counts(3, 5, 2, 8);
       recorder.record(counts);
       assertSame(counts, recorder.snapshot().orElseThrow());
@@ -101,10 +110,10 @@ class DbPoolMetricRecorderTest {
       assertEquals(5, counts.value(State.IDLE));
       assertEquals(2, counts.value(State.PENDING));
       assertEquals(8, counts.value(State.MAX));
-      assertEquals(3, gauge(registry, "active"));
-      assertEquals(5, gauge(registry, "idle"));
-      assertEquals(2, gauge(registry, "pending"));
-      assertEquals(8, gauge(registry, "max"));
+      assertEquals(3, gauge(registry, ACTIVE_POOL_STATE));
+      assertEquals(5, gauge(registry, IDLE_POOL_STATE));
+      assertEquals(2, gauge(registry, PENDING_POOL_STATE));
+      assertEquals(8, gauge(registry, MAXIMUM_POOL_STATE));
       shape(registry);
     }
   }
@@ -112,21 +121,22 @@ class DbPoolMetricRecorderTest {
   @Test
   void poolMetric003MissingAndTrueZeroAreDistinctAndRecoverable() {
     try (var registry = new Registry()) {
-      var recorder = new DbPoolMetricRecorder(registry, "DEBUG");
+      var recorder = new DbPoolMetricRecorder(registry, DEBUG_MODE);
       var zero = new Counts(0, 0, 0, 8);
       recorder.record(zero);
-      assertEquals(0, gauge(registry, "active"));
-      assertEquals(0, gauge(registry, "idle"));
-      assertEquals(0, gauge(registry, "pending"));
-      assertEquals(8, gauge(registry, "max"));
+      assertEquals(0, gauge(registry, ACTIVE_POOL_STATE));
+      assertEquals(0, gauge(registry, IDLE_POOL_STATE));
+      assertEquals(0, gauge(registry, PENDING_POOL_STATE));
+      assertEquals(8, gauge(registry, MAXIMUM_POOL_STATE));
       recorder.missing();
       assertTrue(recorder.snapshot().isEmpty());
-      for (String state : List.of("active", "idle", "pending", "max"))
+      for (String state :
+          List.of(ACTIVE_POOL_STATE, IDLE_POOL_STATE, PENDING_POOL_STATE, MAXIMUM_POOL_STATE))
         assertTrue(Double.isNaN(gauge(registry, state)));
       assertEquals(8, zero.maximum());
       recorder.record(new Counts(1, 0, 0, 1));
-      assertEquals(1, gauge(registry, "active"));
-      assertEquals(1, gauge(registry, "max"));
+      assertEquals(1, gauge(registry, ACTIVE_POOL_STATE));
+      assertEquals(1, gauge(registry, MAXIMUM_POOL_STATE));
       shape(registry);
     }
   }
@@ -142,7 +152,7 @@ class DbPoolMetricRecorderTest {
       assertEquals(0, registry.registrations.get());
       assertEquals(0, registry.getMeters().size());
       assertThrows(NullPointerException.class, () -> recorder.record(null));
-      assertThrows(NullPointerException.class, () -> new DbPoolMetricRecorder(null, "DEBUG"));
+      assertThrows(NullPointerException.class, () -> new DbPoolMetricRecorder(null, DEBUG_MODE));
       assertThrows(NullPointerException.class, () -> new DbPoolMetricRecorder(registry, null));
       for (String mode : List.of("", "debug", "unknown-canary"))
         assertEquals(
@@ -169,12 +179,13 @@ class DbPoolMetricRecorderTest {
           assertThrows(IllegalArgumentException.class, () -> DbPoolMetricRecorder.state(state))
               .getMessage());
     try (var registry = new Registry()) {
-      var recorder = new DbPoolMetricRecorder(registry, "DEBUG");
+      var recorder = new DbPoolMetricRecorder(registry, DEBUG_MODE);
       var maximum = new Counts(Long.MAX_VALUE, Long.MAX_VALUE, Long.MAX_VALUE, Long.MAX_VALUE);
       recorder.record(maximum);
       for (var state : State.values()) assertEquals(Long.MAX_VALUE, maximum.value(state));
       // IEEE754 rounds Long.MAX_VALUE to exactly 2^63, supplied long snapshot stays exact.
-      for (String state : List.of("active", "idle", "pending", "max"))
+      for (String state :
+          List.of(ACTIVE_POOL_STATE, IDLE_POOL_STATE, PENDING_POOL_STATE, MAXIMUM_POOL_STATE))
         assertEquals(0x1.0p63, gauge(registry, state));
       assertThrows(NullPointerException.class, () -> recorder.record(null));
       assertSame(maximum, recorder.snapshot().orElseThrow());
@@ -185,7 +196,7 @@ class DbPoolMetricRecorderTest {
   void poolMetric006ParallelUpdatesKeepWholeImmutableSnapshots() throws Exception {
     try (var registry = new Registry();
         var pool = Executors.newFixedThreadPool(8)) {
-      var recorder = new DbPoolMetricRecorder(registry, "DEBUG");
+      var recorder = new DbPoolMetricRecorder(registry, DEBUG_MODE);
       var first = new Counts(1, 2, 3, 8);
       var second = new Counts(4, 5, 6, 9);
       recorder.record(first);
@@ -217,11 +228,11 @@ class DbPoolMetricRecorderTest {
         registry.failure = Optional.of(failure);
         assertSame(
             failure,
-            assertThrows(failure.getClass(), () -> new DbPoolMetricRecorder(registry, "DEBUG")));
+            assertThrows(failure.getClass(), () -> new DbPoolMetricRecorder(registry, DEBUG_MODE)));
         assertEquals(2, registry.registrations.get());
         assertEquals(1, registry.getMeters().size());
         assertEquals(0, registry.closes.get());
-        assertEquals("API", registry.getMeters().getFirst().getId().getTag("service"));
+        assertEquals("API", registry.getMeters().getFirst().getId().getTag(SERVICE_LABEL));
       } finally {
         registry.close();
       }
@@ -233,8 +244,8 @@ class DbPoolMetricRecorderTest {
   void poolMetric008OwnersAndRepeatedObservationsCannotGrowLabelCardinality() {
     try (var one = new Registry();
         var two = new Registry()) {
-      var first = new DbPoolMetricRecorder(one, "DEBUG");
-      var second = new DbPoolMetricRecorder(two, "DEBUG");
+      var first = new DbPoolMetricRecorder(one, DEBUG_MODE);
+      var second = new DbPoolMetricRecorder(two, DEBUG_MODE);
       second.record(new Counts(7, 0, 0, 8));
       for (int i = 0; i < 1000; i++) {
         first.record(new Counts(i, 0, 0, 8));
@@ -242,8 +253,8 @@ class DbPoolMetricRecorderTest {
       }
       assertEquals(999, first.snapshot().orElseThrow().active());
       assertEquals(7, second.snapshot().orElseThrow().active());
-      assertEquals(999, gauge(one, "active"));
-      assertEquals(7, gauge(two, "active"));
+      assertEquals(999, gauge(one, ACTIVE_POOL_STATE));
+      assertEquals(7, gauge(two, ACTIVE_POOL_STATE));
       shape(one);
       shape(two);
     }

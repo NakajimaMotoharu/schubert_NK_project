@@ -33,10 +33,17 @@ import org.junit.jupiter.api.Test;
 
 /** SCALAR001..024/1771: literal vectors and public SDK stubs, no hidden source/clock/network. */
 class ApiScalarMetricExporterTest {
+  private static final String LAYOUT_LABEL = "layout";
+  private static final String RESULT_LABEL = "result";
+  private static final String STORE_LABEL = "store";
+  private static final String STATUS_LABEL = "status";
+  private static final String SUCCESS_RESULT_CODE = "0000";
+  private static final String API_SERVICE_VALUE = "API";
+  private static final String PROVIDER_FAILURE_MARKER = "fixture";
   private static final String C = "nk_inbox_replays_total";
   private static final String G = "nk_outbox_rows";
-  private static final Map<String, Set<String>> CS = Map.of(C, Set.of("layout", "result"));
-  private static final Map<String, Set<String>> GS = Map.of(G, Set.of("store", "status"));
+  private static final Map<String, Set<String>> CS = Map.of(C, Set.of(LAYOUT_LABEL, RESULT_LABEL));
+  private static final Map<String, Set<String>> GS = Map.of(G, Set.of(STORE_LABEL, STATUS_LABEL));
   private final ApiScalarMetricExporter exporter = new ApiScalarMetricExporter();
 
   private static final class Registry extends SimpleMeterRegistry implements AutoCloseable {
@@ -65,11 +72,12 @@ class ApiScalarMetricExporterTest {
   }
 
   private static Meter.Id cid() {
-    return raw(C, List.of(Tag.of("layout", "LGNREQ01"), Tag.of("result", "0000")));
+    return raw(
+        C, List.of(Tag.of(LAYOUT_LABEL, "LGNREQ01"), Tag.of(RESULT_LABEL, SUCCESS_RESULT_CODE)));
   }
 
   private static Meter.Id gid() {
-    return raw(G, List.of(Tag.of("store", "API"), Tag.of("status", "PENDING")));
+    return raw(G, List.of(Tag.of(STORE_LABEL, API_SERVICE_VALUE), Tag.of(STATUS_LABEL, "PENDING")));
   }
 
   private static Tag nullableTag(String capturedKey, String capturedValue) {
@@ -260,17 +268,18 @@ class ApiScalarMetricExporterTest {
             () -> exporter.scrapeCounters(source, Map.of(C, Set.of(key))));
       assertThrows(
           IllegalArgumentException.class,
-          () -> exporter.scrapeCounters(source, Map.of(C, Set.of("layout"))));
+          () -> exporter.scrapeCounters(source, Map.of(C, Set.of(LAYOUT_LABEL))));
       assertThrows(
           IllegalArgumentException.class,
-          () -> exporter.scrapeGauges(source, Map.of(G, Set.of("store", "status", "extra"))));
+          () ->
+              exporter.scrapeGauges(source, Map.of(G, Set.of(STORE_LABEL, STATUS_LABEL, "extra"))));
     }
     var nullTags = new ArrayList<Tag>();
     nullTags.add(null);
     try (var source = new Registry(new NoopGauge(raw(G, nullTags)))) {
       assertThrows(NullPointerException.class, () -> exporter.scrapeGauges(source, GS));
     }
-    for (var tag : List.of(nullableTag(null, "API"), nullableTag("store", null)))
+    for (var tag : List.of(nullableTag(null, API_SERVICE_VALUE), nullableTag(STORE_LABEL, null)))
       try (var source = new Registry(new NoopGauge(raw(G, List.of(tag))))) {
         assertThrows(NullPointerException.class, () -> exporter.scrapeGauges(source, GS));
       }
@@ -280,11 +289,13 @@ class ApiScalarMetricExporterTest {
   void scalar011DuplicateTagFixtureActuallyContainsDuplicate() {
     var tags =
         List.of(
-            Tag.of("layout", "LGNREQ01"), Tag.of("layout", "LGNRSP01"), Tag.of("result", "0000"));
+            Tag.of(LAYOUT_LABEL, "LGNREQ01"),
+            Tag.of(LAYOUT_LABEL, "LGNRSP01"),
+            Tag.of(RESULT_LABEL, SUCCESS_RESULT_CODE));
     var duplicateIdentity = raw(C, tags);
     assertSame(tags, duplicateIdentity.getTags());
     assertEquals(
-        List.of("layout", "layout", "result"),
+        List.of(LAYOUT_LABEL, LAYOUT_LABEL, RESULT_LABEL),
         duplicateIdentity.getTags().stream().map(Tag::getKey).toList());
     try (var source = new Registry(new NoopCounter(duplicateIdentity))) {
       assertThrows(IllegalArgumentException.class, () -> exporter.scrapeCounters(source, CS));
@@ -294,7 +305,11 @@ class ApiScalarMetricExporterTest {
   @Test
   void scalar012LiteralLabelEscapingRemainsLossless() {
     var encoded =
-        new NoopGauge(raw(G, List.of(Tag.of("store", "API"), Tag.of("status", "a\"b\\c\nd"))));
+        new NoopGauge(
+            raw(
+                G,
+                List.of(
+                    Tag.of(STORE_LABEL, API_SERVICE_VALUE), Tag.of(STATUS_LABEL, "a\"b\\c\nd"))));
     try (var source = new Registry(encoded)) {
       assertTrue(exporter.scrapeGauges(source, GS).contains("status=\"a\\\"b\\\\c\\nd\""));
     }
@@ -317,7 +332,7 @@ class ApiScalarMetricExporterTest {
 
   @Test
   void scalar014NamespaceDeepCopyPrecedesProviderMutation() {
-    var keys = new HashSet<>(Set.of("layout", "result"));
+    var keys = new HashSet<>(Set.of(LAYOUT_LABEL, RESULT_LABEL));
     var space = new HashMap<String, Set<String>>();
     space.put(C, keys);
     var first =
@@ -329,7 +344,11 @@ class ApiScalarMetricExporterTest {
           }
         };
     var second =
-        new NoopCounter(raw(C, List.of(Tag.of("layout", "LGNRSP01"), Tag.of("result", "0000")))) {
+        new NoopCounter(
+            raw(
+                C,
+                List.of(
+                    Tag.of(LAYOUT_LABEL, "LGNRSP01"), Tag.of(RESULT_LABEL, SUCCESS_RESULT_CODE)))) {
           public double count() {
             return 3;
           }
@@ -345,7 +364,7 @@ class ApiScalarMetricExporterTest {
 
   @Test
   void scalar015CounterRuntimeIdentityRetained() {
-    var failure = new IllegalStateException("fixture");
+    var failure = new IllegalStateException(PROVIDER_FAILURE_MARKER);
     var meter =
         new NoopCounter(cid()) {
           public double count() {
@@ -362,7 +381,7 @@ class ApiScalarMetricExporterTest {
 
   @Test
   void scalar016GaugeRuntimeIdentityRetained() {
-    var failure = new IllegalStateException("fixture");
+    var failure = new IllegalStateException(PROVIDER_FAILURE_MARKER);
     var meter =
         new NoopGauge(gid()) {
           public double value() {
@@ -378,7 +397,7 @@ class ApiScalarMetricExporterTest {
 
   @Test
   void scalar017CounterErrorIsNotSuccess() {
-    var failure = new AssertionError("fixture");
+    var failure = new AssertionError(PROVIDER_FAILURE_MARKER);
     var meter =
         new NoopCounter(cid()) {
           public double count() {
@@ -393,7 +412,7 @@ class ApiScalarMetricExporterTest {
 
   @Test
   void scalar018GaugeErrorIsNotSuccess() {
-    var failure = new AssertionError("fixture");
+    var failure = new AssertionError(PROVIDER_FAILURE_MARKER);
     var meter =
         new NoopGauge(gid()) {
           public double value() {
@@ -408,7 +427,7 @@ class ApiScalarMetricExporterTest {
 
   @Test
   void scalar019CounterCheckedIoCauseAndOwnerRetained() {
-    var failure = new IOException("fixture");
+    var failure = new IOException(PROVIDER_FAILURE_MARKER);
     try (var source = new Registry(counter(1))) {
       var actual =
           assertThrows(
@@ -422,7 +441,7 @@ class ApiScalarMetricExporterTest {
 
   @Test
   void scalar020GaugeCheckedIoCauseAndOwnerRetained() {
-    var failure = new IOException("fixture");
+    var failure = new IOException(PROVIDER_FAILURE_MARKER);
     try (var source = new Registry(gauge(1))) {
       var actual =
           assertThrows(
@@ -440,7 +459,11 @@ class ApiScalarMetricExporterTest {
     var values = new AtomicInteger();
     var meterIdentity =
         new Meter.Id(
-            C, Tags.of("layout", "LGNREQ01", "result", "0000"), "", "", Meter.Type.COUNTER) {
+            C,
+            Tags.of(LAYOUT_LABEL, "LGNREQ01", RESULT_LABEL, SUCCESS_RESULT_CODE),
+            "",
+            "",
+            Meter.Type.COUNTER) {
           public String getName() {
             return names.incrementAndGet() == 1 ? C : "nk_unapproved_total";
           }
@@ -467,7 +490,12 @@ class ApiScalarMetricExporterTest {
     var names = new AtomicInteger();
     var values = new AtomicInteger();
     var meterIdentity =
-        new Meter.Id(G, Tags.of("store", "API", "status", "PENDING"), "", "", Meter.Type.GAUGE) {
+        new Meter.Id(
+            G,
+            Tags.of(STORE_LABEL, API_SERVICE_VALUE, STATUS_LABEL, "PENDING"),
+            "",
+            "",
+            Meter.Type.GAUGE) {
           public String getName() {
             return names.incrementAndGet() == 1 ? G : "nk_unapproved";
           }
@@ -508,7 +536,8 @@ class ApiScalarMetricExporterTest {
       assertTrue(text.contains("operation=\"UCRREQ01\"} 3.0\n"));
     }
     var second =
-        new NoopGauge(raw(G, List.of(Tag.of("store", "API"), Tag.of("status", "SENT")))) {
+        new NoopGauge(
+            raw(G, List.of(Tag.of(STORE_LABEL, API_SERVICE_VALUE), Tag.of(STATUS_LABEL, "SENT")))) {
           public double value() {
             return 3;
           }
