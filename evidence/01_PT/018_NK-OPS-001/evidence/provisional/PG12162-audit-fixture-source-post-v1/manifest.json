@@ -1,0 +1,147 @@
+{
+  "actualExit": 0,
+  "allMainAndOtherInputsPreserved": true,
+  "allOriginalOracleTokensRestored": true,
+  "coverage": null,
+  "invocation": {
+    "actualPythonCommand": [
+      "/usr/bin/python3",
+      "-B",
+      "tools/quality/pg12162_audit_fixture_source_post.py"
+    ],
+    "arbitraryArgumentsRecorded": false,
+    "entrypointPath": "tools/quality/pg12162_audit_fixture_source_post.py",
+    "entrypointSha256": "cd99633ba513b47a1935ed8da6ebd8b962bd5d1eeb7f7cf4f2b6a51969e2c2a4",
+    "helperPath": "tools/quality/host_tool_invocation.py",
+    "helperSha256": "85d616a3db4ff47f4c95ae2e0dd57954bc2b09f28b8f2a685b986e5621545c46",
+    "libraryPath": "tools/quality/pg12162_audit_fixture_source_post.py",
+    "librarySha256": "cd99633ba513b47a1935ed8da6ebd8b962bd5d1eeb7f7cf4f2b6a51969e2c2a4",
+    "loadedProjectPythonSources": {
+      "tools/quality/g07_host_class_provenance_inputs.py": "a676cb3e4145177c3c243722d737592ce7d44c3f29cfe4f670662ef7651f046b",
+      "tools/quality/host_tool_invocation.py": "85d616a3db4ff47f4c95ae2e0dd57954bc2b09f28b8f2a685b986e5621545c46",
+      "tools/quality/pg12162_audit_fixture_source_post.py": "cd99633ba513b47a1935ed8da6ebd8b962bd5d1eeb7f7cf4f2b6a51969e2c2a4",
+      "tools/quality/public_java_digest_provenance.py": "dd47f8735a61ce849995633c3290a6ad047842ef3263829ce359db413778f7a0"
+    },
+    "provenance": "OBSERVED_SYS_ARGV_AND_ORIG_ARGV_NOT_RECONSTRUCTED"
+  },
+  "metadataNegativeVectors": 29,
+  "newAccepted": 0,
+  "originalCatalog": [
+    {
+      "method": "web095AllSecurityEventsUseClosedIndependentJson",
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/WebSecurityAuditTest.java"
+    },
+    {
+      "method": "web096InvalidEventMetadataNeverReachesLogger",
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/WebSecurityAuditTest.java"
+    },
+    {
+      "method": "web097UnicodeAndSecretCanariesRemainOutsideAudit",
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/WebSecurityAuditTest.java"
+    },
+    {
+      "method": "web098ClockAndLoggerFaultsNeverBecomeSuccessfulAudit",
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/WebSecurityAuditTest.java"
+    },
+    {
+      "method": "web099RepeatedEventsHaveNoMutableJsonOrPrincipalRetention",
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/WebSecurityAuditTest.java"
+    },
+    {
+      "method": "web100ConcurrentAuditEventsStayIndependent",
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/WebSecurityAuditTest.java"
+    }
+  ],
+  "originalMethods": 6,
+  "originalRawTokens": 3877,
+  "planManifestSha256": "6e3f48753d372925ee8fdb5e31f7a6c72442963500c5567bdeb3fd6b393ff84e",
+  "productTestsExecuted": 0,
+  "sourceBefore": "8a229695c0ea503ebac8761993665242eeba0107",
+  "sourceChanges": [
+    {
+      "beforeSha256": "625268ca63e49fe1172eb13d1efde34250c333cd7d94b0d4ff8395474f809719",
+      "constants": [
+        {
+          "id": "PMD-07940",
+          "literal": "\"reader\"",
+          "name": "READER_NAME",
+          "references": 4
+        },
+        {
+          "id": "PMD-07941",
+          "literal": "\"INFO\"",
+          "name": "INFO_LEVEL",
+          "references": 4
+        },
+        {
+          "id": "PMD-07942",
+          "literal": "\"DENIED\"",
+          "name": "DENIED_OUTCOME",
+          "references": 7
+        },
+        {
+          "id": "PMD-07943",
+          "literal": "\"WARN\"",
+          "name": "WARN_LEVEL",
+          "references": 6
+        },
+        {
+          "id": "PMD-07944",
+          "literal": "\"AUTHORIZATION_DENIED\"",
+          "name": "AUTHORIZATION_ACTION",
+          "references": 4
+        },
+        {
+          "id": "PMD-07945",
+          "literal": "\"remoteAddress\"",
+          "name": "REMOTE_ADDRESS_FIELD",
+          "references": 5
+        },
+        {
+          "id": "PMD-07946",
+          "literal": "\"details\"",
+          "name": "DETAILS_FIELD",
+          "references": 8
+        },
+        {
+          "id": "PMD-07947",
+          "literal": "\"actorUsername\"",
+          "name": "ACTOR_USERNAME_FIELD",
+          "references": 7
+        },
+        {
+          "id": "PMD-07948",
+          "literal": "\"actorRole\"",
+          "name": "ACTOR_ROLE_FIELD",
+          "references": 5
+        },
+        {
+          "id": "PMD-07949",
+          "literal": "\"reason\"",
+          "name": "REASON_FIELD",
+          "references": 4
+        },
+        {
+          "id": "PMD-07950",
+          "literal": "\"route\"",
+          "name": "ROUTE_FIELD",
+          "references": 4
+        },
+        {
+          "id": "PMD-07951",
+          "literal": "\"targetType\"",
+          "name": "TARGET_TYPE_FIELD",
+          "references": 4
+        },
+        {
+          "id": "PMD-07953",
+          "literal": "\"retryAfterSeconds\"",
+          "name": "RETRY_SECONDS_FIELD",
+          "references": 4
+        }
+      ],
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/WebSecurityAuditTest.java",
+      "sha256": "c103b5e2ee1a8b47aaa0fd15711d870e08c11480e357632f96653baa53249a32"
+    }
+  ]
+}

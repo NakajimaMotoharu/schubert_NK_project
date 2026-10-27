@@ -1,0 +1,120 @@
+{
+  "rows": [
+    {
+      "attributes": {
+        "begincolumn": "21",
+        "beginline": "369",
+        "class": "WebSecurityAuditTest",
+        "endcolumn": "52",
+        "endline": "369",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "method": "web100ConcurrentAuditEventsStayIndependent",
+        "package": "dev.codex.schubert.nk.web.logging",
+        "priority": "3",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading",
+        "variable": "pool"
+      },
+      "currentCase": {
+        "className": "dev.codex.schubert.nk.web.logging.WebSecurityAuditTest",
+        "method": "web100ConcurrentAuditEventsStayIndependent",
+        "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/WebSecurityAuditTest.java",
+        "sourceSha256": "c103b5e2ee1a8b47aaa0fd15711d870e08c11480e357632f96653baa53249a32"
+      },
+      "currentWholeJoinPending": true,
+      "disposition": "CONTEXT_NOT_APPLICABLE",
+      "id": "PMD-07954",
+      "kind": "OWN_AUDIT100_JAVASE_WORKERS",
+      "method": "web100ConcurrentAuditEventsStayIndependent",
+      "methodTokenSha256": "d9742bd5ce31756dba4b64d95c970c092da370ae532e6cefe9892fab5e0bd250",
+      "newSourceReason": false,
+      "oldRuntimeReassigned": false,
+      "originalRowSha256": "9daaa781da181ee8418f3a86008beeda100972c7273d33920595c4fc2463f63b",
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/WebSecurityAuditTest.java",
+      "previousReferenceRetainedAsHistorical": true,
+      "productTestsExecutedByReview": 0,
+      "reason": "A dedicated standalone JavaSE JUnit owns eight TWR workers and exactly100 in-memory audit events with injected clock/logger and independent JSON/actor/retry assertions. Future gets have10-second bounds; invokeAll itself is unbounded and the outer owned JVM has240-second timeout with actual normal terminal. There is no external HTTP, real authentication, DB, JMS or application-managed thread.",
+      "rule": "DoNotUseThreads",
+      "source": "92c80a593717465426a33bdf581bc7e94b1235f1",
+      "sourceSha256": "c103b5e2ee1a8b47aaa0fd15711d870e08c11480e357632f96653baa53249a32",
+      "sourceSpanSha256": "45a38a95e5b1914bc44b51b29e60fb4d5c93e0e1d3f6a314234d653392df5f14"
+    },
+    {
+      "attributes": {
+        "begincolumn": "7",
+        "beginline": "388",
+        "class": "WebSecurityAuditTest",
+        "endcolumn": "19",
+        "endline": "388",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#avoidsynchronizedstatement",
+        "method": "web100ConcurrentAuditEventsStayIndependent",
+        "package": "dev.codex.schubert.nk.web.logging",
+        "priority": "3",
+        "rule": "AvoidSynchronizedStatement",
+        "ruleset": "Multithreading"
+      },
+      "currentCase": {
+        "className": "dev.codex.schubert.nk.web.logging.WebSecurityAuditTest",
+        "method": "web100ConcurrentAuditEventsStayIndependent",
+        "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/WebSecurityAuditTest.java",
+        "sourceSha256": "c103b5e2ee1a8b47aaa0fd15711d870e08c11480e357632f96653baa53249a32"
+      },
+      "currentWholeJoinPending": true,
+      "disposition": "REQUIRED_CONTRACT",
+      "id": "PMD-07955",
+      "kind": "PUBLIC_AUDIT_MONITOR_INDEPENDENCE_ORACLE",
+      "method": "web100ConcurrentAuditEventsStayIndependent",
+      "methodTokenSha256": "d9742bd5ce31756dba4b64d95c970c092da370ae532e6cefe9892fab5e0bd250",
+      "newSourceReason": true,
+      "oldRuntimeReassigned": false,
+      "originalRowSha256": "ca31ae186b30932b9352913ab56da975852d3c45d1c167b258e9c6f6eaec5898",
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/WebSecurityAuditTest.java",
+      "previousReferenceRetainedAsHistorical": false,
+      "productTestsExecutedByReview": 0,
+      "reason": "The test thread deliberately holds the public audit monitor while other workers invoke the same audit instance. Their successful bounded completion is the independent oracle that the audit does not synchronize on this externally accessible monitor. Replacing it with another lock would remove the required test. The monitor covers finite test orchestration, not production shared-state synchronization; actual100 checks and the dedicated outer terminal are verified.",
+      "rule": "AvoidSynchronizedStatement",
+      "source": "92c80a593717465426a33bdf581bc7e94b1235f1",
+      "sourceSha256": "c103b5e2ee1a8b47aaa0fd15711d870e08c11480e357632f96653baa53249a32",
+      "sourceSpanSha256": "c666a36176076433b56d77b2fc43ea0a3e66f65e1c74d0b769997a0295b6300f"
+    },
+    {
+      "attributes": {
+        "begincolumn": "24",
+        "beginline": "389",
+        "class": "WebSecurityAuditTest",
+        "endcolumn": "44",
+        "endline": "389",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "method": "web100ConcurrentAuditEventsStayIndependent",
+        "package": "dev.codex.schubert.nk.web.logging",
+        "priority": "3",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading"
+      },
+      "currentCase": {
+        "className": "dev.codex.schubert.nk.web.logging.WebSecurityAuditTest",
+        "method": "web100ConcurrentAuditEventsStayIndependent",
+        "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/WebSecurityAuditTest.java",
+        "sourceSha256": "c103b5e2ee1a8b47aaa0fd15711d870e08c11480e357632f96653baa53249a32"
+      },
+      "currentWholeJoinPending": true,
+      "disposition": "CONTEXT_NOT_APPLICABLE",
+      "id": "PMD-07956",
+      "kind": "OWN_AUDIT100_JAVASE_WORKERS",
+      "method": "web100ConcurrentAuditEventsStayIndependent",
+      "methodTokenSha256": "d9742bd5ce31756dba4b64d95c970c092da370ae532e6cefe9892fab5e0bd250",
+      "newSourceReason": false,
+      "oldRuntimeReassigned": false,
+      "originalRowSha256": "d84960928a82707b8535f4eec4c1af730eb6cadbc43a108d48927ecd2e88ff55",
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/logging/WebSecurityAuditTest.java",
+      "previousReferenceRetainedAsHistorical": true,
+      "productTestsExecutedByReview": 0,
+      "reason": "A dedicated standalone JavaSE JUnit owns eight TWR workers and exactly100 in-memory audit events with injected clock/logger and independent JSON/actor/retry assertions. Future gets have10-second bounds; invokeAll itself is unbounded and the outer owned JVM has240-second timeout with actual normal terminal. There is no external HTTP, real authentication, DB, JMS or application-managed thread.",
+      "rule": "DoNotUseThreads",
+      "source": "92c80a593717465426a33bdf581bc7e94b1235f1",
+      "sourceSha256": "c103b5e2ee1a8b47aaa0fd15711d870e08c11480e357632f96653baa53249a32",
+      "sourceSpanSha256": "cf119bee31771d362b9bd975f19c2a8de10a683718deaa11cd1a5fe37683e51c"
+    }
+  ],
+  "source": "92c80a593717465426a33bdf581bc7e94b1235f1"
+}
