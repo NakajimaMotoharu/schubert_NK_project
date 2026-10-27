@@ -1,0 +1,75 @@
+"""Independent inverse of twelve fixed Inbox value fixture literals; all original oracle tokens retained."""
+from pathlib import Path
+import g07_host_class_provenance_inputs as data
+from host_tool_invocation import capture, verify
+from pg10398_role_view_preflight import canonical
+from pg10339_result_profile_oracle_post_v2 import folded
+
+OUT = data.BASE/'PG11182-api-catalog-scalar-pool-source-post-v1'
+
+
+def remove(tokens,pattern):
+    found = [i for i in range(len(tokens)-len(pattern)+1) if tokens[i:i+len(pattern)] == pattern]
+    if len(found) != 1:
+        raise ValueError('one exact same-value fixture declaration')
+    i = found[0]
+    del tokens[i:i+len(pattern)]
+
+
+def inverse(stem,before,after,rows):
+    tokens = canonical(after)
+    for row in rows:
+        remove(tokens,canonical('private static final String '+row['name']+' = '+row['literal']+';'))
+        if tokens.count(row['name']) != row['references']:
+            raise ValueError('all original fixed literal sites retained')
+        literal = canonical(row['literal'])
+        assert len(literal) == 1
+        tokens = [literal[0] if token == row['name'] else token for token in tokens]
+    if folded(tokens) != canonical(before):
+        raise ValueError('unrelated fixture/assertion/golden/callee changed')
+
+
+def main():
+    invocation = capture(Path(__file__))
+    assert not OUT.exists()
+    path = data.BASE/'PG11180-api-catalog-scalar-pool-literal-plan-v1/manifest.json'
+    plan = data.read_checked(path,'5bcfbb8bd0fd308a053026d152fd5282f312be1fe630212d5fa5dee04c793a9f')
+    normal = data.read_checked(data.BASE/'PG11158-api-metric-fixture-six-compile-v1/manifest.json',
+        '580ccce1abaccdd002433ac52eb674c755e3911a038669e0d65d6fafff78ae7c')
+    snapshot = Path(normal['jars']['protocol']['path']).parent.parent.parent.parent
+    changed = {r['path'] for r in plan['sourceChanges']}
+    assert len(changed) == 3 and plan['actualExit'] == 0 and plan['constantsAdded'] == 23
+    assert all(data.sha((data.ROOT/p).read_bytes()) == h for p,h in normal['begin']['inputHashes'].items() if p not in changed)
+    negatives = 0
+    for row in plan['sourceChanges']:
+        p = row['path']
+        stem = Path(p).stem
+        before,after = (snapshot/p).read_text(),(data.ROOT/p).read_text()
+        assert data.sha(before.encode()) == row['beforeSha256'] and data.sha(after.encode()) == row['sha256']
+        inverse(stem,before,after,row['constants'])
+        first = row['constants'][0]
+        declaration = 'private static final String '+first['name']+' = '+first['literal']+';'
+        bads = [after.replace(first['literal'],'"wrong-fixed-vector"',1),after.replace(declaration,'',1),after.replace('@Test','@Disabled',1)]
+        for bad in bads:
+            assert bad != after
+            try:
+                inverse(stem,before,bad,row['constants'])
+            except ValueError:
+                negatives += 1
+            else:
+                raise AssertionError('changed expected/case/boundary/identifier accepted')
+    assert negatives == 9
+    verify(invocation)
+    OUT.mkdir()
+    data.write(OUT/'manifest.json',dict(actualExit=0,invocation=invocation,sourceBefore=normal['source'],
+        planManifestSha256=data.sha(path.read_bytes()),sourceChanges=plan['sourceChanges'],constantsAdded=23,
+        referencesReplaced=plan['referencesReplaced'],
+        metadataNegativeVectors=negatives,allMainAndOtherInputsPreserved=True,allOriginalOracleTokensRestored=True,
+        productTestsExecuted=0,coverage=None,externalActions=0,newAccepted=0,effortPercent=None))
+    print(data.sha((OUT/'manifest.json').read_bytes()))
+
+
+if __name__ == '__main__':
+    main()
+
+
