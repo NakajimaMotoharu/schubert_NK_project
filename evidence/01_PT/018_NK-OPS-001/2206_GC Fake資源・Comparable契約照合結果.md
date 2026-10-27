@@ -1,0 +1,15 @@
+# 2206 GC Fake資源・Comparable契約照合結果
+
+2205/群2566/source2d733dbd8。11434 `609dc58ea0942b7b5de4412328233f5609c28dcba91406ed8489cfea6b93419f` /11436 `f0f43844636b1862964a1b12fa7f7376b1b7e54a5b3b7e9aae3cb05e90d41649` actual0/九metadata反例・foreign JUnit namespace負例拒否。Main/Test/SDKの公開源だけ、製品試験・解析・coverage・警告削除0。
+
+Batch元六はPMD-04716/04717/04718/04719/04720/04723、gc009/010/011/012のone/two/014。正常明示closeはあってもassert/setup/owner/bind失敗時のTest所有cleanup guardがなく、003/013の追加二も同原因。API/Webも各同じ八宣言、三role合計24をpath/line/method/source SHA/token SHAへ保存した。006はclosed-source境界の未呼出factory内返却式（元calls0 oracle）であり、実候補取得やactivation成功として数えない。
+
+三role全Testはアプリpackage一箇所/固有class-method/固定service・既mode診断/同値private定数展開以外で2956token同値。最初の読取用正規化案はapiを広く置換してJUnit apiまで一致しなくなることを検出し不採用、実source/試験は書換0。保存工具はアプリpackageだけに限定、11436のnamespace負例で再発を防ぐ。最初のlint未使用ET importもbody前拒否/OUT生成前、除去後初body actual0、製品実行の再試行ではない。
+
+固定SDK core SHA9ca47dfaを原8540 metadata（a50ecec9）と照合、constructor notification未登録/bindTo登録/close除去。FakeはbindTo/closeをcallback/countだけへoverrideしSDK activation0で、実リスナー漏れを観測したとはしない。一方Test logical resourceのcleanupは別契約であり、正常でも未closeの009010・失敗辺を含めBUG1913/YKT1662を修正前起票した。
+
+Comparable残一はBatchMetricTextTest.tagのnull-label専用poison：compareToはAssertionError(no provider sort)、BATCHTEXT012はnull key/valueにNPEを要求するので、Productionがprovider比較をすれば成功しない。Main BatchMetricLabelPolicyはnonnull key/valueをStringへ検証copyしTreeMap<String,String>だけを扱う。無意味なequals/hash追加をせず、DELIBERATE_POISON_NULL_LABEL_PROVIDER_CONTEXT_CURRENT_WHOLE_PENDINGとしてraw保持。これは全Comparable一般契約/全F03の免除ではない。
+
+次PG：三role各八の取得直後plain finally、close callback正常帰還後だけFake.closeConfirmed、未確認候補だけcleanupし既owner成功closeを二重発行しない。元各14/計42oracle/close順/期限を保持、新各二で確認済みskipとRuntime/Error失敗未確認/明示再cleanupを独立count/identityで実行する。Mainのowner false/throw/bind前ack・暗黙close0は変更しない。
+
+元.5/1.5/4cap10/使用34→34/同reset、共有丸め0≠専有費0・実N/T/配賦費null、usage23de1c74（12:58:20 NO_NEW_EXPLICIT_USAGE_RECORD）。現raw8912/正式1964-53/17-190/工数null/QA051final/全安全HOLDを保持し、通常監査/commitで停止せずBUG1913の通常PG/PTへ進む。
