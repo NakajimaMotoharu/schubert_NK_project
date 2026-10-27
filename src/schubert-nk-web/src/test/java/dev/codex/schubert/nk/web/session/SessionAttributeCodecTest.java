@@ -25,6 +25,13 @@ import org.junit.jupiter.api.function.Executable;
 
 /** Hand-written SSC038 JSON and explicit field oracles. NK-WEB-001/PT-WEB-009..015. */
 class SessionAttributeCodecTest {
+  private static final int FIRST_TOKEN_INDEX = 1;
+  private static final String READER_NAME = "reader";
+  private static final String QUESTION_SUBMIT_PURPOSE = "QSBREQ01";
+  private static final String NULL_JSON_LITERAL = "null";
+  private static final String FIELD_SEPARATOR = ",\"";
+  private static final String USER_ROLE = "USER";
+  private static final String LOGS_TARGET = "/logs";
   static final SessionAttributeCodec CODEC = new SessionAttributeCodec();
   static final String TIME = "2026-09-08T00:00:00Z";
   static final String CONTEXT = "b".repeat(64);
@@ -42,7 +49,7 @@ class SessionAttributeCodecTest {
               var attributes =
                   attributes(
                       authenticated,
-                      "reader",
+                      READER_NAME,
                       role,
                       csrf ? CSRF : null,
                       saved ? "/logs?page=2" : null,
@@ -50,7 +57,7 @@ class SessionAttributeCodecTest {
               String expected =
                   json(
                       authenticated,
-                      "reader",
+                      READER_NAME,
                       role.name(),
                       csrf ? CSRF : null,
                       saved ? "/logs?page=2" : null,
@@ -60,7 +67,7 @@ class SessionAttributeCodecTest {
               check(
                   decoded,
                   authenticated,
-                  "reader",
+                  READER_NAME,
                   role,
                   csrf ? CSRF : null,
                   saved ? "/logs?page=2" : null,
@@ -82,8 +89,8 @@ class SessionAttributeCodecTest {
             () -> new SessionPrincipal("u", UserRole.USER, null, NOW),
             () -> new SessionPrincipal("u", UserRole.USER, context, null),
             () -> new SessionOperationToken(null, new UUID(0, 1), NOW),
-            () -> new SessionOperationToken("QSBREQ01", null, NOW),
-            () -> new SessionOperationToken("QSBREQ01", new UUID(0, 1), null),
+            () -> new SessionOperationToken(QUESTION_SUBMIT_PURPOSE, null, NOW),
+            () -> new SessionOperationToken(QUESTION_SUBMIT_PURPOSE, new UUID(0, 1), null),
             () -> new SessionAttributes(null, Optional.empty(), Optional.empty(), List.of()),
             () -> new SessionAttributes(Optional.empty(), null, Optional.empty(), List.of()),
             () -> new SessionAttributes(Optional.empty(), Optional.empty(), null, List.of()),
@@ -144,31 +151,31 @@ class SessionAttributeCodecTest {
             "{\"formatVersion\":1}",
             "{\"operationTokens\":[]}",
             "[]",
-            "null",
+            NULL_JSON_LITERAL,
             "1",
             "true",
             "\"text\"",
             "{\"formatVersion\":1,\"formatVersion\":1,\"operationTokens\":[]}",
-            ANONYMOUS.replace("[]", "null"),
+            ANONYMOUS.replace("[]", NULL_JSON_LITERAL),
             ANONYMOUS.replace("[]", "{}"),
             ANONYMOUS.replace("[]", "[[]]"),
             ANONYMOUS.replace("[]", "[{\"purpose\":\"QSBREQ01\"}]"),
             ANONYMOUS.replace("[]", "[{\"purpose\":\"QSBREQ01\",\"purpose\":\"QSBREQ01\"}]"),
             ANONYMOUS.replace("[]", "[{\"class\":\"arbitrary.type\"}]"))) invalid(text);
     // QA049 permits integer v2; legacy v1 malformed/unknown versions still reject.
-    for (String version : List.of("0", "3", "1.0", "1e0", "\"1\"", "null", "true", "[]"))
+    for (String version : List.of("0", "3", "1.0", "1e0", "\"1\"", NULL_JSON_LITERAL, "true", "[]"))
       invalid(ANONYMOUS.replace(":1,", ":" + version + ","));
     for (String key :
         List.of("password", "class", "requestBody", "lastAccessedAt", "rawSessionId", "unknown"))
-      invalid(ANONYMOUS.replace("}", ",\"" + key + "\":\"private-marker\"}"));
+      invalid(ANONYMOUS.replace("}", FIELD_SEPARATOR + key + "\":\"private-marker\"}"));
     for (String key :
         List.of(
             "username", "role", "authenticationContext", "loginAt", "csrfToken", "savedRequest"))
-      for (String value : List.of("null", "1", "true", "[]", "{}"))
-        invalid(ANONYMOUS.replace("}", ",\"" + key + "\":" + value + "}"));
+      for (String value : List.of(NULL_JSON_LITERAL, "1", "true", "[]", "{}"))
+        invalid(ANONYMOUS.replace("}", FIELD_SEPARATOR + key + "\":" + value + "}"));
     for (String key : List.of("username", "role", "authenticationContext", "loginAt"))
       invalid("{\"formatVersion\":1,\"operationTokens\":[],\"" + key + "\":\"partial\"}");
-    String full = json(true, "reader", "USER", CSRF, "/logs", 1);
+    String full = json(true, READER_NAME, USER_ROLE, CSRF, LOGS_TARGET, 1);
     for (String key :
         List.of(
             "username",
@@ -178,11 +185,12 @@ class SessionAttributeCodecTest {
             "csrfToken",
             "savedRequest",
             "operationTokens"))
-      invalid(full.substring(0, full.length() - 1) + ",\"" + key + "\":null}");
+      invalid(full.substring(0, full.length() - 1) + FIELD_SEPARATOR + key + "\":null}");
     for (String field : List.of("purpose", "token", "issuedAt")) {
       String item = tokenJson(1);
       int start = item.indexOf("\"" + field + "\":");
-      String duplicate = item.substring(0, item.length() - 1) + ",\"" + field + "\":\"duplicate\"}";
+      String duplicate =
+          item.substring(0, item.length() - 1) + FIELD_SEPARATOR + field + "\":\"duplicate\"}";
       invalid(ANONYMOUS.replace("[]", "[" + duplicate + "]"));
       assertTrue(start >= 0);
     }
@@ -239,10 +247,11 @@ class SessionAttributeCodecTest {
             "URLREQ01",
             "UPWREQ01",
             "ULKREQ01",
-            "QSBREQ01",
+            QUESTION_SUBMIT_PURPOSE,
             "NTCREQ01",
             "QDLREQ01")) {
-      String text = json(false, "u", "USER", null, null, 1).replace("QSBREQ01", purpose);
+      String text =
+          json(false, "u", USER_ROLE, null, null, 1).replace(QUESTION_SUBMIT_PURPOSE, purpose);
       assertEquals(purpose, CODEC.decode(bytes(text)).operationTokens().getFirst().purpose());
       var single =
           new SessionAttributes(
@@ -254,11 +263,16 @@ class SessionAttributeCodecTest {
     }
     for (String name : List.of("a\"b", "a\\b", "日本語"))
       assertArrayEquals(
-          bytes(json(true, name, "USER", null, null, 0)),
+          bytes(json(true, name, USER_ROLE, null, null, 0)),
           CODEC.encode(attributes(true, name, UserRole.USER, null, null, 0)));
     var duplicate =
         ANONYMOUS.replace(
-            "[]", "[" + tokenJson(1) + "," + tokenJson(1).replace("QSBREQ01", "QDLREQ01") + "]");
+            "[]",
+            "["
+                + tokenJson(1)
+                + ","
+                + tokenJson(1).replace(QUESTION_SUBMIT_PURPOSE, "QDLREQ01")
+                + "]");
     invalid(duplicate);
     String eleven =
         ANONYMOUS.replace(
@@ -283,8 +297,8 @@ class SessionAttributeCodecTest {
             + ", \"authenticationContext\": "
             + quote(CONTEXT)
             + ", \"role\": \"ADMIN\", \"username\": \"reader\", \"formatVersion\": 1 } ";
-    check(CODEC.decode(bytes(reverse)), true, "reader", UserRole.ADMIN, CSRF, "/logs", 0);
-    String full = json(true, "reader", "USER", CSRF, "/logs", 1);
+    check(CODEC.decode(bytes(reverse)), true, READER_NAME, UserRole.ADMIN, CSRF, LOGS_TARGET, 0);
+    String full = json(true, READER_NAME, USER_ROLE, CSRF, LOGS_TARGET, 1);
     for (String bad :
         List.of(
             "private-marker",
@@ -301,12 +315,12 @@ class SessionAttributeCodecTest {
       invalid(full.replace("\"USER\"", quote(bad)));
     for (String bad : List.of("b".repeat(63), "B".repeat(64), "g".repeat(64)))
       invalid(full.replace(CONTEXT, bad));
-    invalid(full.replace("/logs", "https://external.test/"));
+    invalid(full.replace(LOGS_TARGET, "https://external.test/"));
     for (String path : List.of("/../logs", "/..", "/../../logs", "/./logs"))
-      invalid(full.replace("/logs", path));
-    invalid(full.replace("QSBREQ01", "LGSREQ01"));
+      invalid(full.replace(LOGS_TARGET, path));
+    invalid(full.replace(QUESTION_SUBMIT_PURPOSE, "LGSREQ01"));
     invalid(full.replace(CSRF, "c".repeat(63)));
-    invalid(full.replace("reader", "a".repeat(65)));
+    invalid(full.replace(READER_NAME, "a".repeat(65)));
     // Historical login time is valid data, not a current-authentication/expiry decision here.
     String historical = full.replace(TIME, "1800-01-01T00:00:00Z");
     assertEquals(
@@ -323,7 +337,7 @@ class SessionAttributeCodecTest {
         futures.add(
             pool.submit(
                 () -> {
-                  String name = "reader" + n;
+                  String name = READER_NAME + n;
                   String target = "/logs?q=\u65e5\u672c\u8a9e" + n;
                   String expected = json(true, name, "ADMIN", CSRF, target, n % 11);
                   check(
@@ -357,7 +371,7 @@ class SessionAttributeCodecTest {
 
   static List<SessionOperationToken> tokens(int count) {
     return java.util.stream.IntStream.rangeClosed(1, count)
-        .mapToObj(n -> new SessionOperationToken("QSBREQ01", new UUID(0, n), NOW))
+        .mapToObj(n -> new SessionOperationToken(QUESTION_SUBMIT_PURPOSE, new UUID(0, n), NOW))
         .toList();
   }
 
@@ -390,7 +404,7 @@ class SessionAttributeCodecTest {
     if (saved != null) s.append(",\"savedRequest\":").append(quote(saved));
     s.append(",\"operationTokens\":[");
     for (int i = 1; i <= count; i++) {
-      if (i > 1) s.append(',');
+      if (i > FIRST_TOKEN_INDEX) s.append(',');
       s.append(tokenJson(i));
     }
     return s.append("]}").toString();
@@ -418,7 +432,7 @@ class SessionAttributeCodecTest {
     assertEquals(count, actual.operationTokens().size());
     for (int i = 0; i < count; i++) {
       var token = actual.operationTokens().get(i);
-      assertEquals("QSBREQ01", token.purpose());
+      assertEquals(QUESTION_SUBMIT_PURPOSE, token.purpose());
       assertEquals(new UUID(0, i + 1), token.token());
       assertEquals(NOW, token.issuedAt());
     }
