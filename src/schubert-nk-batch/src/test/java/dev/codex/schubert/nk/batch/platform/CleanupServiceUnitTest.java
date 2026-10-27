@@ -11,6 +11,8 @@ import org.junit.jupiter.api.Test;
 
 /** SS341/342/343/SSC104/PG334; CUNIT001..003 static candidate only, not an installed Unit. */
 final class CleanupServiceUnitTest {
+  private static final String ROOT_ACCOUNT = "root";
+
   private static String unit() throws IOException {
     return Files.readString(
         Path.of(
@@ -27,8 +29,8 @@ final class CleanupServiceUnitTest {
   void cunit001FixedRootChildAndRealExecutable() throws Exception {
     String content = unit();
     exact(content, "Type", "oneshot");
-    exact(content, "User", "root");
-    exact(content, "Group", "root");
+    exact(content, "User", ROOT_ACCOUNT);
+    exact(content, "Group", ROOT_ACCOUNT);
     exact(content, "After", "postgresql.service schubert-nk-backup.service");
     exact(content, "Requires", "postgresql.service");
     assertEquals(
@@ -102,8 +104,8 @@ final class CleanupServiceUnitTest {
                 System.getProperty("nk.pt.repository"),
                 "src/deployment/systemd/schubert-nk-expiry-cleanup.service.template"));
     exact(content, "Type", "oneshot");
-    exact(content, "User", "root");
-    exact(content, "Group", "root");
+    exact(content, "User", ROOT_ACCOUNT);
+    exact(content, "Group", ROOT_ACCOUNT);
     exact(content, "After", "postgresql.service artemis.service");
     exact(content, "Requires", "postgresql.service artemis.service");
     exact(content, "CapabilityBoundingSet", "CAP_SYS_PTRACE CAP_DAC_OVERRIDE");

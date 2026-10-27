@@ -19,30 +19,38 @@ import org.junit.jupiter.api.Test;
 
 /** Public text only, never execute a directive. PT-OPS-UNIT-SUP001..005/spec1553. */
 class SupplementaryUnitTemplateTest {
+  private static final String DIRECTIVE_TRUE = "true";
+  private static final String SERVICE_SECTION = "Service";
+  private static final String STOP_TIMEOUT_KEY = "TimeoutStopSec";
+  private static final String THIRTY_SECONDS = "30s";
+  private static final String UNIT_SECTION = "Unit";
+  private static final String MINIMUM_HEAP_OPTION = "-Xms";
+  private static final String MAXIMUM_HEAP_OPTION = "-Xmx";
+
   private static final String BACKUP = "schubert-nk-backup.service.template";
   private static final String ADMIN = "schubert-nk-bootstrap-admin.service.template";
   private static final String START = "caddy.service.d/schubert-nk-startup-policy.conf";
   private static final String STOP = "caddy.service.d/schubert-nk-stop-policy.conf";
   private static final Map<String, String> HARDENING =
       Map.ofEntries(
-          Map.entry("NoNewPrivileges", "true"),
+          Map.entry("NoNewPrivileges", DIRECTIVE_TRUE),
           Map.entry("CapabilityBoundingSet", ""),
           Map.entry("AmbientCapabilities", ""),
           Map.entry("UMask", "0077"),
-          Map.entry("PrivateTmp", "true"),
-          Map.entry("PrivateDevices", "true"),
+          Map.entry("PrivateTmp", DIRECTIVE_TRUE),
+          Map.entry("PrivateDevices", DIRECTIVE_TRUE),
           Map.entry("ProtectSystem", "strict"),
-          Map.entry("ProtectHome", "true"),
-          Map.entry("ProtectKernelTunables", "true"),
-          Map.entry("ProtectKernelModules", "true"),
-          Map.entry("ProtectControlGroups", "true"),
-          Map.entry("ProtectKernelLogs", "true"),
-          Map.entry("ProtectClock", "true"),
-          Map.entry("ProtectHostname", "true"),
-          Map.entry("RestrictSUIDSGID", "true"),
-          Map.entry("LockPersonality", "true"),
-          Map.entry("RestrictNamespaces", "true"),
-          Map.entry("RestrictRealtime", "true"),
+          Map.entry("ProtectHome", DIRECTIVE_TRUE),
+          Map.entry("ProtectKernelTunables", DIRECTIVE_TRUE),
+          Map.entry("ProtectKernelModules", DIRECTIVE_TRUE),
+          Map.entry("ProtectControlGroups", DIRECTIVE_TRUE),
+          Map.entry("ProtectKernelLogs", DIRECTIVE_TRUE),
+          Map.entry("ProtectClock", DIRECTIVE_TRUE),
+          Map.entry("ProtectHostname", DIRECTIVE_TRUE),
+          Map.entry("RestrictSUIDSGID", DIRECTIVE_TRUE),
+          Map.entry("LockPersonality", DIRECTIVE_TRUE),
+          Map.entry("RestrictNamespaces", DIRECTIVE_TRUE),
+          Map.entry("RestrictRealtime", DIRECTIVE_TRUE),
           Map.entry("RestrictAddressFamilies", "AF_UNIX AF_INET AF_INET6"),
           Map.entry("StandardOutput", "journal"),
           Map.entry("StandardError", "journal"));
@@ -89,8 +97,8 @@ class SupplementaryUnitTemplateTest {
   private static Map<String, List<String>> expected(String name) {
     var m = new LinkedHashMap<String, List<String>>();
     if (name.equals(STOP)) {
-      put(m, "Service", "TimeoutStopSec", "30s");
-      put(m, "Service", "SendSIGKILL", "no");
+      put(m, SERVICE_SECTION, STOP_TIMEOUT_KEY, THIRTY_SECONDS);
+      put(m, SERVICE_SECTION, "SendSIGKILL", "no");
       return m;
     }
     if (name.equals(START)) {
@@ -101,8 +109,8 @@ class SupplementaryUnitTemplateTest {
                   Map.entry("SupplementaryGroups", ""),
                   Map.entry("Type", "notify"),
                   Map.entry("Restart", "no"),
-                  Map.entry("TimeoutStartSec", "30s"),
-                  Map.entry("TimeoutStopSec", "30s"),
+                  Map.entry("TimeoutStartSec", THIRTY_SECONDS),
+                  Map.entry(STOP_TIMEOUT_KEY, THIRTY_SECONDS),
                   Map.entry("SendSIGKILL", "no"),
                   Map.entry("KillMode", "control-group"),
                   Map.entry("NoNewPrivileges", "yes"),
@@ -110,10 +118,10 @@ class SupplementaryUnitTemplateTest {
                   Map.entry("AmbientCapabilities", ""),
                   Map.entry("UMask", "0027"),
                   Map.entry("ProtectSystem", "strict"),
-                  Map.entry("ProtectHome", "true"),
-                  Map.entry("PrivateTmp", "true"),
+                  Map.entry("ProtectHome", DIRECTIVE_TRUE),
+                  Map.entry("PrivateTmp", DIRECTIVE_TRUE),
                   Map.entry("ReadWritePaths", "/var/lib/caddy"))
-              .entrySet()) put(m, "Service", entry.getKey(), entry.getValue());
+              .entrySet()) put(m, SERVICE_SECTION, entry.getKey(), entry.getValue());
       m.put(
           "Service.ExecStartPre",
           List.of("", "/usr/bin/caddy validate --config /etc/caddy/Caddyfile"));
@@ -122,55 +130,59 @@ class SupplementaryUnitTemplateTest {
       return m;
     }
     assertTrue(name.equals(BACKUP) || name.equals(ADMIN), "only declared public source");
-    HARDENING.forEach((key, value) -> put(m, "Service", key, value));
-    put(m, "Unit", "Description", "@description");
-    put(m, "Unit", "After", "postgresql.service");
-    put(m, "Unit", "Requires", "postgresql.service");
-    put(m, "Service", "Type", "oneshot");
+    HARDENING.forEach((key, value) -> put(m, SERVICE_SECTION, key, value));
+    put(m, UNIT_SECTION, "Description", "@description");
+    put(m, UNIT_SECTION, "After", "postgresql.service");
+    put(m, UNIT_SECTION, "Requires", "postgresql.service");
+    put(m, SERVICE_SECTION, "Type", "oneshot");
     put(
         m,
-        "Service",
+        SERVICE_SECTION,
         "UnsetEnvironment",
         "JAVA_TOOL_OPTIONS JDK_JAVA_OPTIONS _JAVA_OPTIONS CLASSPATH LD_PRELOAD LD_LIBRARY_PATH");
-    put(m, "Service", "ExecStart", "@java-abi");
-    put(m, "Service", "Restart", "no");
-    put(m, "Service", "SendSIGKILL", "no");
-    put(m, "Service", "MemoryMax", "@resource-budget");
+    put(m, SERVICE_SECTION, "ExecStart", "@java-abi");
+    put(m, SERVICE_SECTION, "Restart", "no");
+    put(m, SERVICE_SECTION, "SendSIGKILL", "no");
+    put(m, SERVICE_SECTION, "MemoryMax", "@resource-budget");
     if (name.equals(BACKUP)) {
-      put(m, "Unit", "Before", "schubert-nk-api.service schubert-nk-web.service caddy.service");
-      put(m, "Service", "User", "schubert-backup");
-      put(m, "Service", "Group", "schubert-backup");
-      put(m, "Service", "SupplementaryGroups", "schubert");
-      put(m, "Service", "WorkingDirectory", "/opt/schubert-nk/current/operations");
+      put(
+          m,
+          UNIT_SECTION,
+          "Before",
+          "schubert-nk-api.service schubert-nk-web.service caddy.service");
+      put(m, SERVICE_SECTION, "User", "schubert-backup");
+      put(m, SERVICE_SECTION, "Group", "schubert-backup");
+      put(m, SERVICE_SECTION, "SupplementaryGroups", "schubert");
+      put(m, SERVICE_SECTION, "WorkingDirectory", "/opt/schubert-nk/current/operations");
       m.put(
           "Service.LoadCredential",
           List.of(
               "backup-request:/run/schubert-nk/backup-request/backup-request",
               "backup-pgpass:/etc/schubert-nk/credentials/backup-pgpass"));
-      put(m, "Service", "RemainAfterExit", "yes");
-      put(m, "Service", "TimeoutStartSec", "30min");
-      put(m, "Service", "TimeoutStopSec", "60s");
-      put(m, "Service", "KillMode", "control-group");
-      put(m, "Service", "RuntimeDirectory", "schubert-nk-backup");
-      put(m, "Service", "RuntimeDirectoryMode", "0700");
-      put(m, "Service", "RuntimeDirectoryPreserve", "yes");
-      put(m, "Service", "ReadWritePaths", "/srv/schubert-nk/backup");
-      put(m, "Service", "LimitNOFILE", "65536");
+      put(m, SERVICE_SECTION, "RemainAfterExit", "yes");
+      put(m, SERVICE_SECTION, "TimeoutStartSec", "30min");
+      put(m, SERVICE_SECTION, STOP_TIMEOUT_KEY, "60s");
+      put(m, SERVICE_SECTION, "KillMode", "control-group");
+      put(m, SERVICE_SECTION, "RuntimeDirectory", "schubert-nk-backup");
+      put(m, SERVICE_SECTION, "RuntimeDirectoryMode", "0700");
+      put(m, SERVICE_SECTION, "RuntimeDirectoryPreserve", "yes");
+      put(m, SERVICE_SECTION, "ReadWritePaths", "/srv/schubert-nk/backup");
+      put(m, SERVICE_SECTION, "LimitNOFILE", "65536");
     } else {
-      put(m, "Service", "User", "schubert-api");
-      put(m, "Service", "Group", "schubert-api");
-      put(m, "Service", "SupplementaryGroups", "schubert schubert-read schubert-web");
-      put(m, "Service", "WorkingDirectory", "/opt/schubert-nk/current/api");
-      put(m, "Service", "EnvironmentFile", "/etc/schubert-nk/api.env");
+      put(m, SERVICE_SECTION, "User", "schubert-api");
+      put(m, SERVICE_SECTION, "Group", "schubert-api");
+      put(m, SERVICE_SECTION, "SupplementaryGroups", "schubert schubert-read schubert-web");
+      put(m, SERVICE_SECTION, "WorkingDirectory", "/opt/schubert-nk/current/api");
+      put(m, SERVICE_SECTION, "EnvironmentFile", "/etc/schubert-nk/api.env");
       m.put(
           "Service.LoadCredential",
           List.of(
               "db-api:/etc/schubert-nk/credentials/db-api",
               "bootstrap-admin-username:/etc/schubert-nk/credentials/bootstrap-admin-username",
               "bootstrap-admin-password:/etc/schubert-nk/credentials/bootstrap-admin-password"));
-      put(m, "Service", "SuccessExitStatus", "20");
-      put(m, "Service", "TimeoutStartSec", "30s");
-      put(m, "Service", "TimeoutStopSec", "30s");
+      put(m, SERVICE_SECTION, "SuccessExitStatus", "20");
+      put(m, SERVICE_SECTION, "TimeoutStartSec", THIRTY_SECONDS);
+      put(m, SERVICE_SECTION, STOP_TIMEOUT_KEY, THIRTY_SECONDS);
     }
     return m;
   }
@@ -213,7 +225,7 @@ class SupplementaryUnitTemplateTest {
     for (String arg : args.subList(5, args.size() - 3)) {
       String key;
       String value;
-      if (arg.startsWith("-Xms") || arg.startsWith("-Xmx")) {
+      if (arg.startsWith(MINIMUM_HEAP_OPTION) || arg.startsWith(MAXIMUM_HEAP_OPTION)) {
         key = arg.substring(0, 4);
         value = arg.substring(4);
       } else {
@@ -227,22 +239,24 @@ class SupplementaryUnitTemplateTest {
     var expectedKeys =
         name.equals(BACKUP)
             ? java.util.Set.of(
-                "-Xms",
-                "-Xmx",
+                MINIMUM_HEAP_OPTION,
+                MAXIMUM_HEAP_OPTION,
                 "-XX:MaxDirectMemorySize",
                 "-XX:MaxMetaspaceSize",
                 "-XX:ReservedCodeCacheSize")
-            : java.util.Set.of("-Xmx");
+            : java.util.Set.of(MAXIMUM_HEAP_OPTION);
     assertEquals(expectedKeys, memory.keySet());
     long limit = positiveMiB(actual.get("Service.MemoryMax").getFirst(), 'M');
     assertTrue(
         limit <= (name.equals(BACKUP) ? 1536 : 2048), "within approved aggregate process budget");
-    long maximum = memory.get("-Xmx");
+    long maximum = memory.get(MAXIMUM_HEAP_OPTION);
     for (String key : expectedKeys) {
       assertTrue(memory.get(key) < limit);
-      if (!key.equals("-Xms") && !key.equals("-Xmx")) maximum += memory.get(key);
+      if (!key.equals(MINIMUM_HEAP_OPTION) && !key.equals(MAXIMUM_HEAP_OPTION))
+        maximum += memory.get(key);
     }
-    if (memory.containsKey("-Xms")) assertTrue(memory.get("-Xms") <= memory.get("-Xmx"));
+    if (memory.containsKey(MINIMUM_HEAP_OPTION))
+      assertTrue(memory.get(MINIMUM_HEAP_OPTION) <= memory.get(MAXIMUM_HEAP_OPTION));
     assertTrue(maximum < limit, "positive native headroom, no heap dump or arbitrary JVM option");
   }
 
@@ -250,7 +264,9 @@ class SupplementaryUnitTemplateTest {
     var actual = parse(text);
     var expected = expected(name);
     assertEquals(
-        name.equals(START) || name.equals(STOP) ? List.of("Service") : List.of("Unit", "Service"),
+        name.equals(START) || name.equals(STOP)
+            ? List.of(SERVICE_SECTION)
+            : List.of(UNIT_SECTION, SERVICE_SECTION),
         actual.sections());
     assertEquals(
         expected.keySet(),

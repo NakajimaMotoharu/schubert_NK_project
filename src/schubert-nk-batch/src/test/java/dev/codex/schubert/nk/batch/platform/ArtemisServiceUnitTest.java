@@ -10,6 +10,8 @@ import org.junit.jupiter.api.Test;
 
 /** SS321/341/342/343 and SSC103; independent literal unit contract, not a broker start claim. */
 final class ArtemisServiceUnitTest {
+  private static final String DIRECTIVE_TRUE = "true";
+
   private static String unit() throws IOException {
     return Files.readString(
         Path.of(System.getProperty("nk.pt.repository"), "src/deployment/systemd/artemis.service"));
@@ -79,13 +81,13 @@ final class ArtemisServiceUnitTest {
         "/var/lib/schubert-nk/artemis/data /var/lib/schubert-nk/artemis/log"
             + " /var/lib/schubert-nk/artemis/tmp /var/lib/schubert-nk/artemis/lock");
     exact(unit, "UMask", "0077");
-    exact(unit, "NoNewPrivileges", "true");
+    exact(unit, "NoNewPrivileges", DIRECTIVE_TRUE);
     exact(unit, "CapabilityBoundingSet", "");
     exact(unit, "AmbientCapabilities", "");
     exact(unit, "ProtectSystem", "strict");
-    exact(unit, "ProtectHome", "true");
-    exact(unit, "ProtectControlGroups", "true");
-    exact(unit, "PrivateTmp", "true");
+    exact(unit, "ProtectHome", DIRECTIVE_TRUE);
+    exact(unit, "ProtectControlGroups", DIRECTIVE_TRUE);
+    exact(unit, "PrivateTmp", DIRECTIVE_TRUE);
     exact(unit, "RestrictAddressFamilies", "AF_UNIX AF_INET AF_INET6");
     assertFalse(unit.contains("ExecStartPre="));
     assertFalse(unit.contains("ExecStopPost="));
