@@ -1,0 +1,13 @@
+# Main局所Map四件・照合結果
+
+source d8a2b7952b321b75fe7fcc1c8d3acb287faca6ec/save7edd5d08a6e590ecbc9dac493202ca552dd4e5a7、仕様2312/PG-D732。2026-10-28/Linux7.0.0-38/Python3.14.4、checked Python entryで12246/12248/12250/12252/12254/12255を各一回実行、実argv/helper/source/hash/終了codeは各公開manifest invocation。新製品・build・実静的・native実行0、Source/Test/上位変更0。
+
+12246 sourceレビュー 1481093beb6c7d9642959dcd0b4b956236fda824f2df97379cbaf5ec23d7948e、12248独立 6167dcf7e8671527f16ec20d4c6f0f2fe2b02257a9b404a03719bd588b900fb3 actual0。四Main全文と局所Map・private method・immutable境界、原row/current source-span/独立method brace解析・原owner/costを照合、14不正metadata（別source/kind・空理由・別span/method・根拠欠落・誤owner/歴史SHA・歴史を現SHAとする偽装・実PT参照消去/水増し・pending解除・旧成功移植・受入偽装）を全拒否。PMD00122/07323/03094/03111は四つとも呼出し毎の局所builder、前三は不変コピーへ、最後はprivate検査だけでMapを公開せず、共有可変状態ではないためコード維持と判断。raw四件は消去/抑制せず全体適用性判定待ち。
+
+Assetだけ同source既実12226/12230のmed044並行100とchecksum二66L9M2C36B miss0を参照する。これは確認再演/別source成功の転用ではない。他三に新PT/coverage資格を付与しない。StopPolicyにはNativeSource/create/systemctlがあるが当レビューから呼出し0。ソースのMap所有判断を実Unit状態/stop/Root/VM/kernel/DB/Backup/permit/鍵の観測・実行許可へ転用しない。
+
+12250集合 fb90f713360f60c7e10d089ce428ff2dd158a1e65bd3397b8aa3080cd9915738/12252独立 01cdb3a25fcda4dcc33543fc239c3e240db90c9a410d695233e9539b7f10845d actual0/八metadata反例。raw8597・累計820・追加8は不変、Main1512/Test7085、refs3103→3107/currentWhole pending649→653/未参照5490。source是正増分0・製品試験増分0・正式受入増分0、参照数を工数完成率と呼ばない。
+
+12254trace c1eef3be80bd2beb4f8239a2971ef17b31559d8b18df6d2e88edb23bfccb3d8c/12255独立 efea2e1572e8beadca76045f68fde87e3b5d6504b478745188ae2ee56fbab8da actual0。485二sectionへ限定参照だけ追加、既sourceRows983と原artifact/要求/owner/cost/予算/acceptanceは全不変、486はinventorySHAだけ更新、全WBS監査前後同HOLD1。Assetの歴史artifact SHA277695adと現503f89c2は区別し未解決の全trace認定を成功にしない。主F03/原参照P00903/P00904/P01804追加配賦0。
+
+公開証跡はevidence/provisionalのPG12246～12255各directory。新工具失敗0、正式1964/53・個別17/190・工数null・QA051final・全F03/451と全HOLD/原見積は不変更。保存commit/pushは456へ追補し、通常小群で停止せず次の独立PG/PTへ進む。
