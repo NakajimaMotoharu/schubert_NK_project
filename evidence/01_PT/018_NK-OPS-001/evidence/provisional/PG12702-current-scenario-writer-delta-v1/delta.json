@@ -1,0 +1,144 @@
+{
+  "actualViolationCount": null,
+  "addedFindingIds": [],
+  "contextPostNegativeVectors": 22,
+  "coverage": null,
+  "freshRows": [
+    {
+      "attributes": {
+        "begincolumn": "21",
+        "beginline": "63",
+        "class": "ScenarioRecordStreamTest",
+        "endcolumn": "52",
+        "endline": "63",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "method": "w04ImmutablePreparedRecordsSupportConcurrentIndependentChannels",
+        "package": "dev.codex.schubert.nk.api.storage",
+        "priority": "3",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading",
+        "variable": "pool"
+      },
+      "controls": [
+        "try(varpool=Executors.newFixedThreadPool(8))",
+        "i<16",
+        "pool.invokeAll(tasks)",
+        "result.get()",
+        "FileChannel.open(path,StandardOpenOption.CREATE_NEW,StandardOpenOption.WRITE)",
+        "assertEquals(independentFileCheck(path,3),actual)"
+      ],
+      "currentCases": [
+        {
+          "className": "dev.codex.schubert.nk.api.storage.ScenarioRecordStreamTest",
+          "method": "w04ImmutablePreparedRecordsSupportConcurrentIndependentChannels",
+          "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/storage/ScenarioRecordStreamTest.java",
+          "sourceSha256": "dab5445d8223665deb56954dc6b27e75898b06d34cea9e63da478c2e7ee2cd7a"
+        }
+      ],
+      "currentWholeJoinPending": true,
+      "disposition": "CONTEXT_NOT_APPLICABLE",
+      "id": "PMD-02647",
+      "kind": "FINITE_OWNED_SCENARIO_WRITER_FILE_FIXTURE_WORKERS",
+      "newAccepted": 0,
+      "oldRuntimeReassigned": false,
+      "originalRowSha256": "1864382e844a6690eea266d2c7ff2404817d3ae46dfee0ad53540574ce7c1e79",
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/storage/ScenarioRecordStreamTest.java",
+      "productTestsExecutedByReview": 0,
+      "reason": "Standalone JavaSE JUnit owns fixed8 workers with16 finite callbacks; each creates its own fresh file under the dedicated0700 TempDir, writes three synthetic records, compares every byte/independently accumulated hash and closes its own channel in TWR. The executor is TWR-owned; original invokeAll/get/TWR have no local timeout, distinct whole JVM240second bound. No J2EE application worker, existing storage/Root/VM/FFM/native/DB/HTTP/credential or authority operation. Two historical references are source-rebound, not new classifications; raw2 retained.",
+      "rule": "DoNotUseThreads",
+      "scopeKind": "METHOD",
+      "scopeName": "w04ImmutablePreparedRecordsSupportConcurrentIndependentChannels",
+      "scopeTokenSha256": "8c3d908777deb6f73e431218d6520153c91bf8f548fd47e2a63bf8a670b12ad9",
+      "source": "e353b1f49a740a426031fdc199f7ce8b26081971",
+      "sourceSha256": "dab5445d8223665deb56954dc6b27e75898b06d34cea9e63da478c2e7ee2cd7a",
+      "sourceSpanSha256": "45a38a95e5b1914bc44b51b29e60fb4d5c93e0e1d3f6a314234d653392df5f14"
+    },
+    {
+      "attributes": {
+        "begincolumn": "25",
+        "beginline": "78",
+        "class": "ScenarioRecordStreamTest",
+        "endcolumn": "46",
+        "endline": "78",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "method": "w04ImmutablePreparedRecordsSupportConcurrentIndependentChannels",
+        "package": "dev.codex.schubert.nk.api.storage",
+        "priority": "3",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading"
+      },
+      "controls": [
+        "try(varpool=Executors.newFixedThreadPool(8))",
+        "i<16",
+        "pool.invokeAll(tasks)",
+        "result.get()",
+        "FileChannel.open(path,StandardOpenOption.CREATE_NEW,StandardOpenOption.WRITE)",
+        "assertEquals(independentFileCheck(path,3),actual)"
+      ],
+      "currentCases": [
+        {
+          "className": "dev.codex.schubert.nk.api.storage.ScenarioRecordStreamTest",
+          "method": "w04ImmutablePreparedRecordsSupportConcurrentIndependentChannels",
+          "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/storage/ScenarioRecordStreamTest.java",
+          "sourceSha256": "dab5445d8223665deb56954dc6b27e75898b06d34cea9e63da478c2e7ee2cd7a"
+        }
+      ],
+      "currentWholeJoinPending": true,
+      "disposition": "CONTEXT_NOT_APPLICABLE",
+      "id": "PMD-02648",
+      "kind": "FINITE_OWNED_SCENARIO_WRITER_FILE_FIXTURE_WORKERS",
+      "newAccepted": 0,
+      "oldRuntimeReassigned": false,
+      "originalRowSha256": "9712b5f8ccd96c26bb774f75451fd373eef7a39f0ca1ab32d5b07f2abfed5911",
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/storage/ScenarioRecordStreamTest.java",
+      "productTestsExecutedByReview": 0,
+      "reason": "Standalone JavaSE JUnit owns fixed8 workers with16 finite callbacks; each creates its own fresh file under the dedicated0700 TempDir, writes three synthetic records, compares every byte/independently accumulated hash and closes its own channel in TWR. The executor is TWR-owned; original invokeAll/get/TWR have no local timeout, distinct whole JVM240second bound. No J2EE application worker, existing storage/Root/VM/FFM/native/DB/HTTP/credential or authority operation. Two historical references are source-rebound, not new classifications; raw2 retained.",
+      "rule": "DoNotUseThreads",
+      "scopeKind": "METHOD",
+      "scopeName": "w04ImmutablePreparedRecordsSupportConcurrentIndependentChannels",
+      "scopeTokenSha256": "8c3d908777deb6f73e431218d6520153c91bf8f548fd47e2a63bf8a670b12ad9",
+      "source": "e353b1f49a740a426031fdc199f7ce8b26081971",
+      "sourceSha256": "dab5445d8223665deb56954dc6b27e75898b06d34cea9e63da478c2e7ee2cd7a",
+      "sourceSpanSha256": "a3f12da32ada14321a8f3b7e8b7dbba23ba802f5ab6b151ae19b5e1e27fd4534"
+    }
+  ],
+  "joinedContextWarnings": 3175,
+  "mainRaw": 1506,
+  "newAccepted": 0,
+  "newClassificationIds": [],
+  "newContextClassifications": 0,
+  "newScopeFindings": 2,
+  "newSourceRebindings": 2,
+  "noCurrentReferenceInThisJoin": 5318,
+  "oldScopeFindings": 7,
+  "productTestsExecuted": 0,
+  "removedFindingIds": [
+    "PMD-02649",
+    "PMD-02650",
+    "PMD-02651",
+    "PMD-02652",
+    "PMD-02653"
+  ],
+  "retainedIntroducedFindings": [
+    "PMD-NEW-PG11448-001",
+    "PMD-NEW-PG11448-002",
+    "PMD-NEW-PG11448-003",
+    "PMD-NEW-PG11448-004",
+    "PMD-NEW-PG11448-005",
+    "PMD-NEW-PG11448-006",
+    "PMD-NEW-PG11540-001",
+    "PMD-NEW-PG11540-002"
+  ],
+  "source": "e353b1f49a740a426031fdc199f7ce8b26081971",
+  "sourceDerivedRaw": 8493,
+  "sourceReboundCurrentWholePending": 786,
+  "sourceReboundExistingContextIds": [
+    "PMD-02647",
+    "PMD-02648"
+  ],
+  "staticActualExit": 1,
+  "testRaw": 6987,
+  "totalPriorCorrections": 924,
+  "wholeCurrentAnalyzerReissued": false,
+  "wholeF03Accepted": false
+}

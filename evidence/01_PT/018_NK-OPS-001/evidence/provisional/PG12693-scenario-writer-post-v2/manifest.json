@@ -1,0 +1,370 @@
+{
+  "actualExit": 0,
+  "allMainClassesUnchanged": 1843,
+  "changedTestPhysical": 2,
+  "checkstyle": 0,
+  "directImportsBySource": {
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/storage/ScenarioRecordStream.java": [
+      "dev.codex.schubert.nk.protocol.codec.PayloadCodec",
+      "dev.codex.schubert.nk.protocol.file.LargeResultContent",
+      "dev.codex.schubert.nk.protocol.layout.LayoutId",
+      "dev.codex.schubert.nk.protocol.layout.PayloadSemanticValidator",
+      "dev.codex.schubert.nk.protocol.layout.scenario.ScenarioEntryRecord",
+      "dev.codex.schubert.nk.storage.StorageIoException"
+    ],
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/storage/TransferContentVerifier.java": [
+      "dev.codex.schubert.nk.protocol.file.LargeResultContent",
+      "dev.codex.schubert.nk.storage.StorageIoException"
+    ],
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/storage/ScenarioRecordStreamTest.java": [
+      "dev.codex.schubert.nk.protocol.layout.scenario.ScenarioEntryRecord",
+      "dev.codex.schubert.nk.protocol.layout.semantic.EntryId",
+      "dev.codex.schubert.nk.protocol.layout.semantic.EntryType",
+      "dev.codex.schubert.nk.storage.StorageIoException"
+    ],
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/storage/TransferContentVerifierTest.java": [
+      "dev.codex.schubert.nk.protocol.file.LargeResultContent",
+      "dev.codex.schubert.nk.storage.StorageIoException"
+    ],
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/FieldCodec.java": [],
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/FieldEncodingException.java": [],
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/MessageEncodingException.java": [],
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/PayloadCodec.java": [
+      "dev.codex.schubert.nk.protocol.header.ResultCode",
+      "dev.codex.schubert.nk.protocol.layout.FieldDefinition",
+      "dev.codex.schubert.nk.protocol.layout.FieldValue",
+      "dev.codex.schubert.nk.protocol.layout.FieldValueSet",
+      "dev.codex.schubert.nk.protocol.layout.FixedPayload",
+      "dev.codex.schubert.nk.protocol.layout.LayoutFieldCatalog",
+      "dev.codex.schubert.nk.protocol.layout.LayoutFields",
+      "dev.codex.schubert.nk.protocol.layout.LayoutId",
+      "dev.codex.schubert.nk.protocol.layout.LayoutValidationException",
+      "dev.codex.schubert.nk.protocol.layout.PayloadValues",
+      "dev.codex.schubert.nk.protocol.layout.Presence"
+    ],
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/PermanentProtocolException.java": [],
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/file/LargeResultContent.java": [],
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/file/LargeResultDescriptor.java": [],
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/header/AuthenticationContext.java": [],
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/header/InteractionKind.java": [],
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/header/MessageKind.java": [],
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/header/ResultCode.java": [],
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/FieldArea.java": [],
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/FieldDefinition.java": [],
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/FieldValue.java": [],
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/FieldValueSet.java": [],
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/FixedPayload.java": [],
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/LayoutDefinition.java": [
+      "dev.codex.schubert.nk.protocol.header.InteractionKind",
+      "dev.codex.schubert.nk.protocol.header.MessageKind"
+    ],
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/LayoutFieldCatalog.java": [],
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/LayoutFields.java": [],
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/LayoutId.java": [],
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/LayoutPayload.java": [],
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/LayoutRegistry.java": [
+      "dev.codex.schubert.nk.protocol.header.InteractionKind",
+      "dev.codex.schubert.nk.protocol.header.MessageKind"
+    ],
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/LayoutValidationException.java": [],
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/Padding.java": [],
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/PayloadData.java": [],
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/PayloadRecord.java": [],
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/PayloadSemanticValidator.java": [
+      "dev.codex.schubert.nk.protocol.time.JstWireTimestamp"
+    ],
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/PayloadValues.java": [],
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/Presence.java": [],
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/TypedFieldValues.java": [
+      "dev.codex.schubert.nk.protocol.header.AuthenticationContext",
+      "dev.codex.schubert.nk.protocol.layout.semantic.DisplayPath",
+      "dev.codex.schubert.nk.protocol.layout.semantic.ElapsedMilliseconds",
+      "dev.codex.schubert.nk.protocol.layout.semantic.HttpStatusCode",
+      "dev.codex.schubert.nk.protocol.layout.semantic.ProtocolId",
+      "dev.codex.schubert.nk.protocol.layout.semantic.RelativePath",
+      "dev.codex.schubert.nk.protocol.layout.semantic.Sha256Hex",
+      "dev.codex.schubert.nk.protocol.layout.semantic.WireEnum",
+      "dev.codex.schubert.nk.protocol.time.JstWireTimestamp"
+    ],
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/TypedPayloadValues.java": [],
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/UnsupportedLayoutException.java": [],
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/WireType.java": [],
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/scenario/ScenarioEntryRecord.java": [
+      "dev.codex.schubert.nk.protocol.layout.FieldValueSet",
+      "dev.codex.schubert.nk.protocol.layout.PayloadRecord",
+      "dev.codex.schubert.nk.protocol.layout.TypedFieldValues",
+      "dev.codex.schubert.nk.protocol.layout.semantic.AudioId",
+      "dev.codex.schubert.nk.protocol.layout.semantic.DisplayPath",
+      "dev.codex.schubert.nk.protocol.layout.semantic.EntryId",
+      "dev.codex.schubert.nk.protocol.layout.semantic.EntryType"
+    ],
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/semantic/AsyncJobId.java": [],
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/semantic/AudioId.java": [],
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/semantic/DisplayPath.java": [],
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/semantic/ElapsedMilliseconds.java": [],
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/semantic/EntryId.java": [],
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/semantic/EntryType.java": [],
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/semantic/HttpStatusCode.java": [],
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/semantic/IdValue.java": [],
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/semantic/LogId.java": [],
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/semantic/NotificationId.java": [],
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/semantic/PathSyntax.java": [],
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/semantic/ProtocolId.java": [],
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/semantic/QuestionId.java": [],
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/semantic/RelativePath.java": [],
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/semantic/ScriptFileId.java": [],
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/semantic/Sha256Hex.java": [],
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/semantic/SpeakerId.java": [],
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/semantic/UserId.java": [],
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/semantic/WireEnum.java": [],
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/time/JstWireTimestamp.java": [],
+    "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/StorageIoException.java": []
+  },
+  "directWriterVerifierClasses": {
+    "dev/codex/schubert/nk/api/storage/ScenarioRecordStream.class": {
+      "classCrc64": "91213cc34814b92f",
+      "counters": {
+        "BRANCH": {
+          "covered": 16,
+          "missed": 0
+        },
+        "CLASS": {
+          "covered": 1,
+          "missed": 0
+        },
+        "LINE": {
+          "covered": 30,
+          "missed": 0
+        },
+        "METHOD": {
+          "covered": 6,
+          "missed": 0
+        }
+      }
+    },
+    "dev/codex/schubert/nk/api/storage/TransferContentVerifier.class": {
+      "classCrc64": "2379894bf747a722",
+      "counters": {
+        "BRANCH": {
+          "covered": 10,
+          "missed": 0
+        },
+        "CLASS": {
+          "covered": 1,
+          "missed": 0
+        },
+        "LINE": {
+          "covered": 20,
+          "missed": 0
+        },
+        "METHOD": {
+          "covered": 1,
+          "missed": 0
+        }
+      }
+    },
+    "dev/codex/schubert/nk/protocol/file/LargeResultContent.class": {
+      "classCrc64": "cf3fb703c786090e",
+      "counters": {
+        "BRANCH": {
+          "covered": 4,
+          "missed": 4
+        },
+        "CLASS": {
+          "covered": 1,
+          "missed": 0
+        },
+        "LINE": {
+          "covered": 6,
+          "missed": 1
+        },
+        "METHOD": {
+          "covered": 2,
+          "missed": 0
+        }
+      }
+    },
+    "dev/codex/schubert/nk/storage/StorageIoException$Reason.class": {
+      "classCrc64": "37214ecd32efe326",
+      "counters": {
+        "BRANCH": {
+          "covered": 0,
+          "missed": 0
+        },
+        "CLASS": {
+          "covered": 1,
+          "missed": 0
+        },
+        "LINE": {
+          "covered": 4,
+          "missed": 0
+        },
+        "METHOD": {
+          "covered": 1,
+          "missed": 0
+        }
+      }
+    },
+    "dev/codex/schubert/nk/storage/StorageIoException.class": {
+      "classCrc64": "a9caaebc6a41c268",
+      "counters": {
+        "BRANCH": {
+          "covered": 0,
+          "missed": 0
+        },
+        "CLASS": {
+          "covered": 1,
+          "missed": 0
+        },
+        "LINE": {
+          "covered": 4,
+          "missed": 0
+        },
+        "METHOD": {
+          "covered": 2,
+          "missed": 0
+        }
+      }
+    }
+  },
+  "extraRecordClassDefinition": [
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg12686-scenario-writer-six-compile-v1/snapshot/src/schubert-nk-protocol/target/schubert-nk-protocol-0.1.0-SNAPSHOT.jar"
+  ],
+  "extraReviewedSourceHashes": {
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/scenario/ScenarioEntryRecord.java": "757cad4dfa3e68ff373cf9e3109a28273f627c8aff27d265e87bc3348f5f4d7c"
+  },
+  "forbiddenProbeHits": 0,
+  "formalUpdated": false,
+  "invocation": {
+    "actualPythonCommand": [
+      "/usr/bin/python3",
+      "-B",
+      "tools/quality/pg12693_scenario_writer_post_v2.py"
+    ],
+    "arbitraryArgumentsRecorded": false,
+    "entrypointPath": "tools/quality/pg12693_scenario_writer_post_v2.py",
+    "entrypointSha256": "12bb497693acd70e5769cebb84548d7ff196a4b6c17ee488147d26aa2fe68fd9",
+    "helperPath": "tools/quality/host_tool_invocation.py",
+    "helperSha256": "85d616a3db4ff47f4c95ae2e0dd57954bc2b09f28b8f2a685b986e5621545c46",
+    "libraryPath": "tools/quality/pg12693_scenario_writer_post_v2.py",
+    "librarySha256": "12bb497693acd70e5769cebb84548d7ff196a4b6c17ee488147d26aa2fe68fd9",
+    "loadedProjectPythonSources": {
+      "tools/quality/classfile_code_metadata.py": "2227e1e8df1ff91b606f094c7ee64366023273ca740d4d47126ed0928190e2f0",
+      "tools/quality/g07_host_class_provenance_inputs.py": "a676cb3e4145177c3c243722d737592ce7d44c3f29cfe4f670662ef7651f046b",
+      "tools/quality/host_tool_invocation.py": "85d616a3db4ff47f4c95ae2e0dd57954bc2b09f28b8f2a685b986e5621545c46",
+      "tools/quality/pg11929_storage_fixture_class_metadata.py": "2265f22222adac052ce7fe8802ad9a9eb029e7ac485bc1d8ad861bbb71bbdd76",
+      "tools/quality/pg12693_scenario_writer_post_v2.py": "12bb497693acd70e5769cebb84548d7ff196a4b6c17ee488147d26aa2fe68fd9",
+      "tools/quality/pg9346_direct_companion_jdk_post.py": "40814dffc4f33b120a67f06bfff62080921bc479ef575457dc81e992488b65bb",
+      "tools/quality/pg9906_user_query_oracle_source_post.py": "4f9bdaa17eea78a720c0f25b8af906f3f045fda590c8fea2a8868229403a98fa",
+      "tools/quality/pg9978_plain_core_quality_post.py": "c99cc753c6335c9f41e3eafe6a97c17521503739ba2cf80659b542a445dd48fa",
+      "tools/quality/public_java_digest_provenance.py": "dd47f8735a61ce849995633c3290a6ad047842ef3263829ce359db413778f7a0"
+    },
+    "provenance": "OBSERVED_SYS_ARGV_AND_ORIG_ARGV_NOT_RECONSTRUCTED"
+  },
+  "measurementSha256": "3beffb59ad97488aa8325b8a08a8a9b24d92b370f07b13c6a6939bf268cda3ee",
+  "newAccepted": 0,
+  "observedTestExecutions": 8,
+  "oldExecUnion": false,
+  "originalHostManifestSha256": "6c1805f0ee828d482aa89190460811c30514422beec074b2ff604214990caff8",
+  "otherTestPhysicalUnchanged": 1960,
+  "ownedTempIdentityUnchanged": true,
+  "ownedTempRootEmptyAfter": true,
+  "physicalTestMetadataSha256": "c1335bb909aca5f0e994615567daa5f6b3358f60aa55411eabce3ff9e215e9ee",
+  "productTestsExecutedByPost": 0,
+  "rawStatic": 2,
+  "rawStaticRules": [
+    "DoNotUseThreads"
+  ],
+  "source": "e353b1f49a740a426031fdc199f7ce8b26081971",
+  "stages": [
+    {
+      "actualExit": 0,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+        "--release",
+        "25",
+        "-proc:none",
+        "-Xlint:all",
+        "-Werror",
+        "-cp",
+        "/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.core/0.8.15/org.jacoco.core-0.8.15.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm/9.10.1/asm-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-tree/9.10.1/asm-tree-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-commons/9.10.1/asm-commons-9.10.1.jar",
+        "-d",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg12693-scenario-writer-post-v2/reader",
+        "/home/mini/codex/project1/work/pgpt-foundation/tools/quality/architecture/ScenarioWriterArtifactCoverageMeasureV2.java"
+      ],
+      "endUTC": "2026-10-27T22:37:18.295198+00:00",
+      "startUTC": "2026-10-27T22:37:17.528176+00:00",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "timedOut": false
+    },
+    {
+      "actualExit": 0,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-cp",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg12693-scenario-writer-post-v2/reader:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.core/0.8.15/org.jacoco.core-0.8.15.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm/9.10.1/asm-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-tree/9.10.1/asm-tree-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-commons/9.10.1/asm-commons-9.10.1.jar",
+        "ScenarioWriterArtifactCoverageMeasureV2",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg12688-scenario-writer-host-v1/jacoco.exec",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg12693-scenario-writer-post-v2/complete-api-main",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg12693-scenario-writer-post-v2/complete-api-catalog.txt",
+        "PG12688-SCENARIOWRITER-JP",
+        "api"
+      ],
+      "endUTC": "2026-10-27T22:37:18.752729+00:00",
+      "startUTC": "2026-10-27T22:37:18.337031+00:00",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSha256": "15a36159987b3789182e90cd58a3259cb7e7aa9f31078a74d18426f01d5b3fcf",
+      "timedOut": false
+    },
+    {
+      "actualExit": 0,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-cp",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg12693-scenario-writer-post-v2/reader:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.core/0.8.15/org.jacoco.core-0.8.15.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm/9.10.1/asm-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-tree/9.10.1/asm-tree-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-commons/9.10.1/asm-commons-9.10.1.jar",
+        "ScenarioWriterArtifactCoverageMeasureV2",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg12688-scenario-writer-host-v1/jacoco.exec",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg12693-scenario-writer-post-v2/complete-protocol-main",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg12693-scenario-writer-post-v2/complete-protocol-catalog.txt",
+        "PG12688-SCENARIOWRITER-JP",
+        "protocol"
+      ],
+      "endUTC": "2026-10-27T22:37:19.145328+00:00",
+      "startUTC": "2026-10-27T22:37:18.780033+00:00",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSha256": "8c0104d7c9b1d38009d1c2be0fb0d70960e7a90144939d84f1efcfe9d8bcddde",
+      "timedOut": false
+    },
+    {
+      "actualExit": 0,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-cp",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg12693-scenario-writer-post-v2/reader:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.core/0.8.15/org.jacoco.core-0.8.15.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm/9.10.1/asm-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-tree/9.10.1/asm-tree-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-commons/9.10.1/asm-commons-9.10.1.jar",
+        "ScenarioWriterArtifactCoverageMeasureV2",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg12688-scenario-writer-host-v1/jacoco.exec",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg12693-scenario-writer-post-v2/complete-storage-main",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg12693-scenario-writer-post-v2/complete-storage-catalog.txt",
+        "PG12688-SCENARIOWRITER-JP",
+        "storage"
+      ],
+      "endUTC": "2026-10-27T22:37:19.368128+00:00",
+      "startUTC": "2026-10-27T22:37:19.152812+00:00",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSha256": "661adf2f192f6712dc675b99b44aa82c64aa7f66baa2d97d76cd76030fb3133a",
+      "timedOut": false
+    }
+  ],
+  "staticActualExit": 1,
+  "suites": 2,
+  "tools": {
+    "/home/mini/codex/project1/work/pgpt-foundation/tools/quality/architecture/ScenarioWriterArtifactCoverageMeasureV2.java": "b2dc77fd788053c6ceaf368e4ea1aa695bb26b84599b74c1ebd0bab588da19ae",
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.core/0.8.15/org.jacoco.core-0.8.15.jar": "ade1e0fdb4cd80d8537b57c6edb70a1360c47fdc518c20c65314517479bc4d0d",
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-commons/9.10.1/asm-commons-9.10.1.jar": "6d0abefb7cbf972ea16edb37ec14835372505063a45f976ab7ea889ed9497895",
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-tree/9.10.1/asm-tree-9.10.1.jar": "3dfb0d5b6a106cd40b5b250e39935fbf2f927f4477546a5369a3ac609cf0506b",
+    "/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm/9.10.1/asm-9.10.1.jar": "ed825d10ab1399c8c0cb669e688cf0c8c82629b4c8399b58352b68e92ca10fcb"
+  },
+  "whole451Accepted": false,
+  "wholeArtifactsCoverage100": false
+}
