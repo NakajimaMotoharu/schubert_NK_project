@@ -1,0 +1,82 @@
+{
+  "rows": [
+    {
+      "attributes": {
+        "begincolumn": "21",
+        "beginline": "355",
+        "class": "WebBusinessWireClientsTest",
+        "endcolumn": "52",
+        "endline": "355",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "method": "wire008ConcurrentFacadesKeepRepliesAndContextsSeparate",
+        "package": "dev.codex.schubert.nk.web.messaging",
+        "priority": "3",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading",
+        "variable": "pool"
+      },
+      "currentCase": {
+        "className": "dev.codex.schubert.nk.web.messaging.WebBusinessWireClientsTest",
+        "method": "wire008ConcurrentFacadesKeepRepliesAndContextsSeparate",
+        "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/WebBusinessWireClientsTest.java",
+        "sourceSha256": "1c9362087c7228c208733c7a9ff787ba96476052b3f89e92a5f7bb8cb714135e"
+      },
+      "currentWholeJoinPending": true,
+      "disposition": "CONTEXT_NOT_APPLICABLE",
+      "id": "PMD-08198",
+      "kind": "OWN_FINITE180_WIRE_CALLBACK_TASKS",
+      "method": "wire008ConcurrentFacadesKeepRepliesAndContextsSeparate",
+      "methodTokenSha256": "549297913e39faaf6109b2350c9d81e66682c25ceef5a9b3b414700253e24cc4",
+      "newSourceReason": false,
+      "oldRuntimeReassigned": false,
+      "originalRowSha256": "09767ef3b0b32d4827015a12d388285885812b62dec0863d5831142963abb9ad",
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/WebBusinessWireClientsTest.java",
+      "previousReferenceRetainedAsHistorical": true,
+      "productTestsExecutedByReview": 0,
+      "reason": "The J2EE application-thread rule does not apply to this dedicated JavaSE JUnit fixture. Eight own TWR workers execute exactly180 finite in-memory callback exchanges and independent literal wire comparisons, with10-second Future bounds. Inputs are synthetic UUID/context/wire values; no authentication action, key, persistence or broker/network is used. This measures these current inputs/schedules, not all production schedules or service ownership.",
+      "rule": "DoNotUseThreads",
+      "source": "a2a44baa24d05392e4e483b051eb6b3fb070af60",
+      "sourceSha256": "1c9362087c7228c208733c7a9ff787ba96476052b3f89e92a5f7bb8cb714135e",
+      "sourceSpanSha256": "45a38a95e5b1914bc44b51b29e60fb4d5c93e0e1d3f6a314234d653392df5f14"
+    },
+    {
+      "attributes": {
+        "begincolumn": "13",
+        "beginline": "360",
+        "class": "WebBusinessWireClientsTest",
+        "endcolumn": "19",
+        "endline": "377",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "method": "wire008ConcurrentFacadesKeepRepliesAndContextsSeparate",
+        "package": "dev.codex.schubert.nk.web.messaging",
+        "priority": "3",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading"
+      },
+      "currentCase": {
+        "className": "dev.codex.schubert.nk.web.messaging.WebBusinessWireClientsTest",
+        "method": "wire008ConcurrentFacadesKeepRepliesAndContextsSeparate",
+        "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/WebBusinessWireClientsTest.java",
+        "sourceSha256": "1c9362087c7228c208733c7a9ff787ba96476052b3f89e92a5f7bb8cb714135e"
+      },
+      "currentWholeJoinPending": true,
+      "disposition": "CONTEXT_NOT_APPLICABLE",
+      "id": "PMD-08199",
+      "kind": "OWN_FINITE180_WIRE_CALLBACK_TASKS",
+      "method": "wire008ConcurrentFacadesKeepRepliesAndContextsSeparate",
+      "methodTokenSha256": "549297913e39faaf6109b2350c9d81e66682c25ceef5a9b3b414700253e24cc4",
+      "newSourceReason": false,
+      "oldRuntimeReassigned": false,
+      "originalRowSha256": "7f6b1f26dd6d0106879ea4e543549869cf4469f274c4c5ba9d0d3b1043cd64f9",
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/WebBusinessWireClientsTest.java",
+      "previousReferenceRetainedAsHistorical": true,
+      "productTestsExecutedByReview": 0,
+      "reason": "The J2EE application-thread rule does not apply to this dedicated JavaSE JUnit fixture. Eight own TWR workers execute exactly180 finite in-memory callback exchanges and independent literal wire comparisons, with10-second Future bounds. Inputs are synthetic UUID/context/wire values; no authentication action, key, persistence or broker/network is used. This measures these current inputs/schedules, not all production schedules or service ownership.",
+      "rule": "DoNotUseThreads",
+      "source": "a2a44baa24d05392e4e483b051eb6b3fb070af60",
+      "sourceSha256": "1c9362087c7228c208733c7a9ff787ba96476052b3f89e92a5f7bb8cb714135e",
+      "sourceSpanSha256": "46065c45db763f2d01b894a6474aee458d7dc61333fae32aa94878fa2bce6fa2"
+    }
+  ],
+  "source": "a2a44baa24d05392e4e483b051eb6b3fb070af60"
+}
