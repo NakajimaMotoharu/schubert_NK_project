@@ -1,0 +1,121 @@
+{
+  "actualExit": 0,
+  "allMainAndOtherInputsPreserved": true,
+  "allOriginalOracleTokensRestored": true,
+  "coverage": null,
+  "invocation": {
+    "actualPythonCommand": [
+      "/usr/bin/python3",
+      "-B",
+      "tools/quality/pg12102_authz_fixture_source_post.py"
+    ],
+    "arbitraryArgumentsRecorded": false,
+    "entrypointPath": "tools/quality/pg12102_authz_fixture_source_post.py",
+    "entrypointSha256": "7e0ae605d7e0b447eed99c802db481a8ef41f7b1f642c287f11e662769467817",
+    "helperPath": "tools/quality/host_tool_invocation.py",
+    "helperSha256": "85d616a3db4ff47f4c95ae2e0dd57954bc2b09f28b8f2a685b986e5621545c46",
+    "libraryPath": "tools/quality/pg12102_authz_fixture_source_post.py",
+    "librarySha256": "7e0ae605d7e0b447eed99c802db481a8ef41f7b1f642c287f11e662769467817",
+    "loadedProjectPythonSources": {
+      "tools/quality/g07_host_class_provenance_inputs.py": "a676cb3e4145177c3c243722d737592ce7d44c3f29cfe4f670662ef7651f046b",
+      "tools/quality/host_tool_invocation.py": "85d616a3db4ff47f4c95ae2e0dd57954bc2b09f28b8f2a685b986e5621545c46",
+      "tools/quality/pg12102_authz_fixture_source_post.py": "7e0ae605d7e0b447eed99c802db481a8ef41f7b1f642c287f11e662769467817",
+      "tools/quality/public_java_digest_provenance.py": "dd47f8735a61ce849995633c3290a6ad047842ef3263829ce359db413778f7a0"
+    },
+    "provenance": "OBSERVED_SYS_ARGV_AND_ORIG_ARGV_NOT_RECONSTRUCTED"
+  },
+  "metadataNegativeVectors": 24,
+  "newAccepted": 0,
+  "originalCatalog": [
+    {
+      "method": "web121OnlyExplicitPublicResourcesAreAnonymous",
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/WebAuthorizationFilterTest.java"
+    },
+    {
+      "method": "web122RoleMatrixProtectsAdminAndLogs",
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/WebAuthorizationFilterTest.java"
+    },
+    {
+      "method": "web123FirewallAndRedispatchCannotBypassRole",
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/WebAuthorizationFilterTest.java"
+    },
+    {
+      "method": "web124ConcurrentPoliciesHaveNoCrossRequestIdentity",
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/WebAuthorizationFilterTest.java"
+    }
+  ],
+  "originalMethods": 4,
+  "originalRawTokens": 1979,
+  "planManifestSha256": "df6edfac15c8e9a7a0fc31cc1af15ded727ab90db9c7de0c0cd993e09ecfd49c",
+  "productTestsExecuted": 0,
+  "sourceBefore": "977214e4409e70bcf7c38dfd34bbaa384fc14c9b",
+  "sourceChanges": [
+    {
+      "beforeSha256": "e039623168a49d50ec2dfcfdb41117f63c13b12c80de311c567172ce2079c22c",
+      "constants": [
+        {
+          "id": "PMD-08689",
+          "literal": "\"/login\"",
+          "name": "LOGIN_PATH",
+          "references": 4
+        },
+        {
+          "id": "PMD-08690",
+          "literal": "\"/admin/users\"",
+          "name": "ADMIN_USERS_PATH",
+          "references": 4
+        },
+        {
+          "id": "PMD-08691",
+          "literal": "\"/search\"",
+          "name": "SEARCH_PATH",
+          "references": 4
+        },
+        {
+          "id": "PMD-08692",
+          "literal": "\"GET\"",
+          "name": "GET_METHOD",
+          "references": 17
+        },
+        {
+          "id": "PMD-08693",
+          "literal": "\"HEAD\"",
+          "name": "HEAD_METHOD",
+          "references": 5
+        },
+        {
+          "id": "PMD-08694",
+          "literal": "\"POST\"",
+          "name": "POST_METHOD",
+          "references": 4
+        },
+        {
+          "id": "PMD-08695",
+          "literal": "\"role\"",
+          "name": "ROLE_FIELD",
+          "references": 5
+        },
+        {
+          "id": "PMD-08696",
+          "literal": "\"ADMIN\"",
+          "name": "ADMIN_ROLE",
+          "references": 8
+        },
+        {
+          "id": "PMD-08697",
+          "literal": "\"USER\"",
+          "name": "USER_ROLE",
+          "references": 6
+        },
+        {
+          "id": "PMD-08698",
+          "literal": "\"reader\"",
+          "name": "READER_NAME",
+          "references": 6
+        }
+      ],
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/WebAuthorizationFilterTest.java",
+      "sha256": "91341b7990bed75c6b6ae01960260f37d05df97e334d16b6432abbe7f30eb454"
+    }
+  ]
+}

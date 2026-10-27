@@ -1,0 +1,120 @@
+{
+  "rows": [
+    {
+      "attributes": {
+        "begincolumn": "21",
+        "beginline": "232",
+        "class": "WebAuthorizationFilterTest",
+        "endcolumn": "52",
+        "endline": "232",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "method": "web124ConcurrentPoliciesHaveNoCrossRequestIdentity",
+        "package": "dev.codex.schubert.nk.web.security",
+        "priority": "3",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading",
+        "variable": "pool"
+      },
+      "currentCase": {
+        "className": "dev.codex.schubert.nk.web.security.WebAuthorizationFilterTest",
+        "method": "web124ConcurrentPoliciesHaveNoCrossRequestIdentity",
+        "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/WebAuthorizationFilterTest.java",
+        "sourceSha256": "91341b7990bed75c6b6ae01960260f37d05df97e334d16b6432abbe7f30eb454"
+      },
+      "currentWholeJoinPending": true,
+      "disposition": "CONTEXT_NOT_APPLICABLE",
+      "id": "PMD-08699",
+      "kind": "OWN_MOCK100_JAVASE_WORKERS",
+      "method": "web124ConcurrentPoliciesHaveNoCrossRequestIdentity",
+      "methodTokenSha256": "4f88131d5c8a913a7493e74b5754dd4a5a56864a5fb2bd284710172ce6eb6096",
+      "newSourceReason": false,
+      "oldRuntimeReassigned": false,
+      "originalRowSha256": "a9b852d140592c638937c1bed8158ceeaca911b42c23c4d951507c487683e7ab",
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/WebAuthorizationFilterTest.java",
+      "previousReferenceRetainedAsHistorical": true,
+      "productTestsExecutedByReview": 0,
+      "reason": "A dedicated standalone JavaSE JUnit owns eight TWR workers and exactly100 in-memory MockServlet policy checks, checks identity separation, and clears SecurityContext in finally and the original AfterEach. Future gets have30-second bounds; invokeAll itself is unbounded and the outer owned JVM has240-second timeout with actual normal terminal. There is no external HTTP, authentication, DB, JMS or application-managed thread.",
+      "rule": "DoNotUseThreads",
+      "source": "ee82637a750105243ddeac665c61d27a781e5cf1",
+      "sourceSha256": "91341b7990bed75c6b6ae01960260f37d05df97e334d16b6432abbe7f30eb454",
+      "sourceSpanSha256": "45a38a95e5b1914bc44b51b29e60fb4d5c93e0e1d3f6a314234d653392df5f14"
+    },
+    {
+      "attributes": {
+        "begincolumn": "7",
+        "beginline": "257",
+        "class": "WebAuthorizationFilterTest",
+        "endcolumn": "19",
+        "endline": "257",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#avoidsynchronizedstatement",
+        "method": "web124ConcurrentPoliciesHaveNoCrossRequestIdentity",
+        "package": "dev.codex.schubert.nk.web.security",
+        "priority": "3",
+        "rule": "AvoidSynchronizedStatement",
+        "ruleset": "Multithreading"
+      },
+      "currentCase": {
+        "className": "dev.codex.schubert.nk.web.security.WebAuthorizationFilterTest",
+        "method": "web124ConcurrentPoliciesHaveNoCrossRequestIdentity",
+        "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/WebAuthorizationFilterTest.java",
+        "sourceSha256": "91341b7990bed75c6b6ae01960260f37d05df97e334d16b6432abbe7f30eb454"
+      },
+      "currentWholeJoinPending": true,
+      "disposition": "REQUIRED_CONTRACT",
+      "id": "PMD-08700",
+      "kind": "PUBLIC_FILTER_MONITOR_INDEPENDENCE_ORACLE",
+      "method": "web124ConcurrentPoliciesHaveNoCrossRequestIdentity",
+      "methodTokenSha256": "4f88131d5c8a913a7493e74b5754dd4a5a56864a5fb2bd284710172ce6eb6096",
+      "newSourceReason": true,
+      "oldRuntimeReassigned": false,
+      "originalRowSha256": "1160970feda74508dc0ee0f85fbd9c31fab1b2b063856e6b345a8cbbe697c82a",
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/WebAuthorizationFilterTest.java",
+      "previousReferenceRetainedAsHistorical": false,
+      "productTestsExecutedByReview": 0,
+      "reason": "The test thread deliberately holds the public filter monitor while other workers invoke the same filter. Their successful bounded completion is the independent oracle that production does not synchronize on this externally accessible monitor. Replacing it with another lock would remove the required test. The monitor covers finite test orchestration, not production shared-state synchronization; actual100 checks and the dedicated outer terminal are verified.",
+      "rule": "AvoidSynchronizedStatement",
+      "source": "ee82637a750105243ddeac665c61d27a781e5cf1",
+      "sourceSha256": "91341b7990bed75c6b6ae01960260f37d05df97e334d16b6432abbe7f30eb454",
+      "sourceSpanSha256": "c666a36176076433b56d77b2fc43ea0a3e66f65e1c74d0b769997a0295b6300f"
+    },
+    {
+      "attributes": {
+        "begincolumn": "27",
+        "beginline": "258",
+        "class": "WebAuthorizationFilterTest",
+        "endcolumn": "47",
+        "endline": "258",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "method": "web124ConcurrentPoliciesHaveNoCrossRequestIdentity",
+        "package": "dev.codex.schubert.nk.web.security",
+        "priority": "3",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading"
+      },
+      "currentCase": {
+        "className": "dev.codex.schubert.nk.web.security.WebAuthorizationFilterTest",
+        "method": "web124ConcurrentPoliciesHaveNoCrossRequestIdentity",
+        "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/WebAuthorizationFilterTest.java",
+        "sourceSha256": "91341b7990bed75c6b6ae01960260f37d05df97e334d16b6432abbe7f30eb454"
+      },
+      "currentWholeJoinPending": true,
+      "disposition": "CONTEXT_NOT_APPLICABLE",
+      "id": "PMD-08701",
+      "kind": "OWN_MOCK100_JAVASE_WORKERS",
+      "method": "web124ConcurrentPoliciesHaveNoCrossRequestIdentity",
+      "methodTokenSha256": "4f88131d5c8a913a7493e74b5754dd4a5a56864a5fb2bd284710172ce6eb6096",
+      "newSourceReason": false,
+      "oldRuntimeReassigned": false,
+      "originalRowSha256": "272b4d197fb65177cab08efd12ea7f353f5c995a15077efc105c41d55bbb773b",
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/security/WebAuthorizationFilterTest.java",
+      "previousReferenceRetainedAsHistorical": true,
+      "productTestsExecutedByReview": 0,
+      "reason": "A dedicated standalone JavaSE JUnit owns eight TWR workers and exactly100 in-memory MockServlet policy checks, checks identity separation, and clears SecurityContext in finally and the original AfterEach. Future gets have30-second bounds; invokeAll itself is unbounded and the outer owned JVM has240-second timeout with actual normal terminal. There is no external HTTP, authentication, DB, JMS or application-managed thread.",
+      "rule": "DoNotUseThreads",
+      "source": "ee82637a750105243ddeac665c61d27a781e5cf1",
+      "sourceSha256": "91341b7990bed75c6b6ae01960260f37d05df97e334d16b6432abbe7f30eb454",
+      "sourceSpanSha256": "cf119bee31771d362b9bd975f19c2a8de10a683718deaa11cd1a5fe37683e51c"
+    }
+  ],
+  "source": "ee82637a750105243ddeac665c61d27a781e5cf1"
+}

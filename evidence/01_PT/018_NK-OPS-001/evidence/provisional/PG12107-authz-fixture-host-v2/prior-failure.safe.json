@@ -1,0 +1,33 @@
+{
+  "recordKind": "OBSERVED_TOOL_FAILURES_NOT_REEXECUTED",
+  "source": "ee82637a750105243ddeac665c61d27a781e5cf1",
+  "failedTools": [
+    {
+      "entry": "tools/quality/pg12106_authz_fixture_host.py",
+      "entrySha256": "74e0b70b025d2cffb2acd011ac24ffa0d8722041ca7c752cd7e5493b2d4ae17a",
+      "lintExit": 0,
+      "bodyExit": 1,
+      "outputCreated": false,
+      "productTestsExecuted": 0,
+      "failureKind": "TYPE_ONLY_REFERENCE_COUNT_ONE_EXPECTED_ACTUAL_TWO",
+      "bug": "BUG-1946",
+      "ykt": "YKT-1695"
+    },
+    {
+      "entry": "tools/quality/pg12108_authz_fixture_static.py",
+      "entrySha256": "47a30972f6217217b091abd50f55ea66f940f6474a361c129f940d762cb9bd93",
+      "lintExit": 0,
+      "bodyExit": 1,
+      "outputCreated": false,
+      "productTestsExecuted": 0,
+      "failureKind": "PREMATURE_DOWNSTREAM_ENTRY_MISSING_HOST_MANIFEST",
+      "bug": "BUG-1947",
+      "ykt": "YKT-1696"
+    }
+  ],
+  "hostV2ManifestSha256": "4f764569dc6164b941b9b1e211578d47f6384cd2c0509862c0b6dba45ef0fefc",
+  "staticV2ManifestSha256": "debf7b4ce804a32e6b5c797e4fc5b1a2c129bf7caa065a1891487e50fa31ff6b",
+  "firstProductExecutionsInV2": 4,
+  "productTestsReexecuted": 0,
+  "platformRefusal": false
+}
