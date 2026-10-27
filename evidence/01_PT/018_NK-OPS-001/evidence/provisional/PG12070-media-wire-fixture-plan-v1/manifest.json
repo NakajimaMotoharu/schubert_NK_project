@@ -1,0 +1,202 @@
+{
+  "actualExit": 0,
+  "allMainAndOtherInputsPreserved": true,
+  "coverage": null,
+  "invocation": {
+    "actualPythonCommand": [
+      "/usr/bin/python3",
+      "-B",
+      "tools/quality/pg12070_media_wire_fixture_plan.py"
+    ],
+    "arbitraryArgumentsRecorded": false,
+    "entrypointPath": "tools/quality/pg12070_media_wire_fixture_plan.py",
+    "entrypointSha256": "68af29a2d587cb8a2d765a5307c9e898cfaa27e03a27cb8142697f4f562de8dd",
+    "helperPath": "tools/quality/host_tool_invocation.py",
+    "helperSha256": "85d616a3db4ff47f4c95ae2e0dd57954bc2b09f28b8f2a685b986e5621545c46",
+    "libraryPath": "tools/quality/pg12070_media_wire_fixture_plan.py",
+    "librarySha256": "68af29a2d587cb8a2d765a5307c9e898cfaa27e03a27cb8142697f4f562de8dd",
+    "loadedProjectPythonSources": {
+      "tools/quality/classfile_code_metadata.py": "2227e1e8df1ff91b606f094c7ee64366023273ca740d4d47126ed0928190e2f0",
+      "tools/quality/g07_host_class_provenance_inputs.py": "a676cb3e4145177c3c243722d737592ce7d44c3f29cfe4f670662ef7651f046b",
+      "tools/quality/host_tool_invocation.py": "85d616a3db4ff47f4c95ae2e0dd57954bc2b09f28b8f2a685b986e5621545c46",
+      "tools/quality/pg10130_uid_oracle_preflight.py": "e80cb1d6d45d4e4c0cdb3cb792e0638119d936403de5c3e141429d338485758a",
+      "tools/quality/pg10332_result_profile_oracle_plan.py": "82c9b4f57dd517c1dbee639dbf4955c316beb89216cb9a8a66e78e0b9a322ad4",
+      "tools/quality/pg10339_result_profile_oracle_post_v2.py": "42f86287f5236d2ef1a2e10f54f5b0634e799a4e866b15eaf6738336a4ebabb0",
+      "tools/quality/pg10392_role_literal_plan.py": "e1af98abd59175d867d29b07a73d7b2e4c7112754603d1805ec0bfc4d9465ce8",
+      "tools/quality/pg10398_role_view_preflight.py": "31709d50a345f3e0843fa62ae0b4c6849885503eb3d81555b6bcc9605b486d56",
+      "tools/quality/pg10840_web_view_duplicate_plan.py": "f4ea4a6f7d59ed872cc7c3dbd07e8d48c45c59f67c339d82d6ff4f2eef0a9a46",
+      "tools/quality/pg12070_media_wire_fixture_plan.py": "68af29a2d587cb8a2d765a5307c9e898cfaa27e03a27cb8142697f4f562de8dd",
+      "tools/quality/pg9906_user_query_oracle_source_post.py": "4f9bdaa17eea78a720c0f25b8af906f3f045fda590c8fea2a8868229403a98fa",
+      "tools/quality/pg9978_plain_core_quality_post.py": "c99cc753c6335c9f41e3eafe6a97c17521503739ba2cf80659b542a445dd48fa",
+      "tools/quality/public_java_digest_provenance.py": "dd47f8735a61ce849995633c3290a6ad047842ef3263829ce359db413778f7a0"
+    },
+    "provenance": "OBSERVED_SYS_ARGV_AND_ORIG_ARGV_NOT_RECONSTRUCTED"
+  },
+  "newAccepted": 0,
+  "originalMethods": 24,
+  "productTestsExecuted": 0,
+  "sourceBefore": "913eedbc22a42fa077c2c408baa7d63f7004abc3",
+  "sourceChanges": [
+    {
+      "beforeSha256": "96caa357e3aad5404568b2554e4afe2cec709a1df52159e1fac69ef2c35fa8e1",
+      "constants": [
+        {
+          "id": "PMD-08132",
+          "literal": "\"GAM\"",
+          "name": "GAME_LIST_KIND",
+          "references": 24
+        },
+        {
+          "id": "PMD-08133",
+          "literal": "\"SPK\"",
+          "name": "SPEAKER_LIST_KIND",
+          "references": 9
+        },
+        {
+          "id": "PMD-08134",
+          "literal": "\"SRC\"",
+          "name": "SCENARIO_SEARCH_KIND",
+          "references": 7
+        },
+        {
+          "id": "PMD-08135",
+          "literal": "\"RTE\"",
+          "name": "ROUTE_LIST_KIND",
+          "references": 9
+        },
+        {
+          "id": "PMD-08136",
+          "literal": "\"SCF\"",
+          "name": "SCENARIO_FILE_KIND",
+          "references": 7
+        },
+        {
+          "id": "PMD-08137",
+          "literal": "\"SCN\"",
+          "name": "SCENARIO_DETAIL_KIND",
+          "references": 9
+        },
+        {
+          "id": "PMD-08138",
+          "literal": "\"0000\"",
+          "name": "SUCCESS_CODE",
+          "references": 15
+        },
+        {
+          "id": "PMD-08139",
+          "literal": "\"RSP01\"",
+          "name": "RESPONSE_LAYOUT_SUFFIX",
+          "references": 4
+        },
+        {
+          "id": "PMD-08140",
+          "literal": "\"body\"",
+          "name": "BODY_PREFIX",
+          "references": 4
+        },
+        {
+          "id": "PMD-08141",
+          "literal": "\"private\"",
+          "name": "PRIVATE_FAILURE",
+          "references": 8
+        },
+        {
+          "id": "PMD-08150",
+          "literal": "\"NUKITASHI1\"",
+          "name": "GAME_WIRE_CODE",
+          "references": 7
+        }
+      ],
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/ScenarioWireClientTest.java",
+      "sha256": "3266789f948395e10f7106980eb9113af280046184338aeb0cd37a96bf7cb0b8"
+    },
+    {
+      "beforeSha256": "118b4518d52b727a484cbd3d97ff37a6e2a1bf2e576b2d3ad4cbfda2740dd338",
+      "constants": [
+        {
+          "id": "PMD-07987",
+          "literal": "\"ANM\"",
+          "name": "ANIMATION_MENU_KIND",
+          "references": 20
+        },
+        {
+          "id": "PMD-07988",
+          "literal": "\"MAIN\"",
+          "name": "MAIN_ANIMATION_KIND",
+          "references": 8
+        },
+        {
+          "id": "PMD-07989",
+          "literal": "\"OVA\"",
+          "name": "OVA_ANIMATION_KIND",
+          "references": 4
+        },
+        {
+          "id": "PMD-07990",
+          "literal": "\"0000\"",
+          "name": "SUCCESS_CODE",
+          "references": 7
+        },
+        {
+          "id": "PMD-07991",
+          "literal": "\"synthetic\"",
+          "name": "SYNTHETIC_FAILURE",
+          "references": 6
+        }
+      ],
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/AnimationWireClientTest.java",
+      "sha256": "b0404e82cfcf5d9054c4f586c873b1e72a63b8d115f111b436235c12f7afe41c"
+    },
+    {
+      "beforeSha256": "4a9303e92d9e8f3f6337cb4b9d57b718eebffd1cbebafe8ce1145b6f395e98fe",
+      "constants": [
+        {
+          "id": "PMD-08084",
+          "literal": "\"MCT\"",
+          "name": "MUSIC_CATEGORY_KIND",
+          "references": 19
+        },
+        {
+          "id": "PMD-08085",
+          "literal": "\"MCS\"",
+          "name": "MUSIC_SECTION_KIND",
+          "references": 11
+        },
+        {
+          "id": "PMD-08086",
+          "literal": "\"MTR\"",
+          "name": "MUSIC_TRACK_KIND",
+          "references": 14
+        },
+        {
+          "id": "PMD-08087",
+          "literal": "\"\u30b2\u30fc\u30e0\"",
+          "name": "GAME_SECTION",
+          "references": 4
+        },
+        {
+          "id": "PMD-08088",
+          "literal": "\"0000\"",
+          "name": "SUCCESS_CODE",
+          "references": 7
+        },
+        {
+          "id": "PMD-08089",
+          "literal": "\"synthetic\"",
+          "name": "SYNTHETIC_FAILURE",
+          "references": 6
+        },
+        {
+          "id": "PMD-08092",
+          "literal": "\"pair0\"",
+          "name": "PAIR_KEY",
+          "references": 4
+        }
+      ],
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/MusicWireClientTest.java",
+      "sha256": "218128c6532fed2727b9ba9d72fde5d1c28b18209e8d0d95b3694dc51f99939e"
+    }
+  ],
+  "stringConstants": 23,
+  "stringReferences": 213
+}
