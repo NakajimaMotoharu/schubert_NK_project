@@ -26,12 +26,17 @@ import org.junit.jupiter.api.Test;
 
 /** MQCONN001..008/1697. Own Function/SDK/thread fixtures only, no broker/JMS/management/Root. */
 class MqPressureMetricCollectorTest {
+  private static final int FIRST_READ_ORDINAL = 1;
+  private static final String ASYNC_ADDRESS = "nk.async.work";
+  private static final String LOG_ADDRESS = "nk.web.log";
+  private static final String QUEUE_MESSAGES = "nk_mq_queue_messages";
+  private static final String DEBUG_MODE = "DEBUG";
   private static final List<String> ADDRESSES =
       List.of(
           "nk.sync.request",
           "nk.sync.reply.web",
-          "nk.async.work",
-          "nk.web.log",
+          ASYNC_ADDRESS,
+          LOG_ADDRESS,
           "nk.dead.letter",
           "nk.expiry");
 
@@ -72,7 +77,7 @@ class MqPressureMetricCollectorTest {
   }
 
   private static double gauge(Registry registry, String metric, String address) {
-    boolean queue = metric.equals("nk_mq_queue_messages") || metric.equals("nk_mq_queue_bytes");
+    boolean queue = metric.equals(QUEUE_MESSAGES) || metric.equals("nk_mq_queue_bytes");
     return registry
         .get(metric)
         .tag(queue ? "queue" : "address", queue ? address + ".q" : address)
@@ -89,7 +94,7 @@ class MqPressureMetricCollectorTest {
       double paged,
       double paging,
       double files) {
-    assertEquals(messages, gauge(registry, "nk_mq_queue_messages", address));
+    assertEquals(messages, gauge(registry, QUEUE_MESSAGES, address));
     assertEquals(bytes, gauge(registry, "nk_mq_queue_bytes", address));
     assertEquals(memory, gauge(registry, "nk_mq_address_memory_bytes", address));
     assertEquals(paged, gauge(registry, "nk_mq_address_paged_bytes", address));
@@ -100,7 +105,7 @@ class MqPressureMetricCollectorTest {
   private static void unknown(Registry registry, String address) {
     for (String metric :
         List.of(
-            "nk_mq_queue_messages",
+            QUEUE_MESSAGES,
             "nk_mq_queue_bytes",
             "nk_mq_address_memory_bytes",
             "nk_mq_address_paged_bytes",
@@ -132,7 +137,7 @@ class MqPressureMetricCollectorTest {
                 return Optional.of(sample);
               },
               registry,
-              "DEBUG");
+              DEBUG_MODE);
       owner.set(collector);
       assertEquals(0, calls.get());
       for (String address : ADDRESSES) {
@@ -161,20 +166,20 @@ class MqPressureMetricCollectorTest {
                 return supplied.get();
               },
               registry,
-              "DEBUG");
+              DEBUG_MODE);
       collector.collect(BrokerTopology.ASYNC_WORK);
       collector.collect(BrokerTopology.WEB_LOG);
       var old = collector.snapshot(BrokerTopology.ASYNC_WORK);
       supplied.set(Optional.empty());
       assertTrue(collector.collect(BrokerTopology.ASYNC_WORK).isEmpty());
-      unknown(registry, "nk.async.work");
+      unknown(registry, ASYNC_ADDRESS);
       assertTrue(collector.snapshot(BrokerTopology.ASYNC_WORK).isEmpty());
       assertSame(sample, old.orElseThrow());
-      values(registry, "nk.web.log", 1, 2, 3, 4, 1, 5);
+      values(registry, LOG_ADDRESS, 1, 2, 3, 4, 1, 5);
       var zero = new Snapshot(0, 0, 0, 0, false, 0);
       supplied.set(Optional.of(zero));
       assertSame(zero, collector.collect(BrokerTopology.ASYNC_WORK).orElseThrow());
-      values(registry, "nk.async.work", 0, 0, 0, 0, 0, 0);
+      values(registry, ASYNC_ADDRESS, 0, 0, 0, 0, 0, 0);
       assertEquals(4, calls.get());
       assertEquals(36, registry.getMeters().size());
     }
@@ -203,7 +208,7 @@ class MqPressureMetricCollectorTest {
                   return Optional.of(sample);
                 },
                 registry,
-                "DEBUG");
+                DEBUG_MODE);
         collector.collect(BrokerTopology.ASYNC_WORK);
         collector.collect(BrokerTopology.WEB_LOG);
         var old = collector.snapshot(BrokerTopology.ASYNC_WORK);
@@ -214,13 +219,13 @@ class MqPressureMetricCollectorTest {
             assertThrows(problem.getClass(), () -> collector.collect(BrokerTopology.ASYNC_WORK)));
         assertEquals(1, calls.get());
         assertTrue(collector.snapshot(BrokerTopology.ASYNC_WORK).isEmpty());
-        unknown(registry, "nk.async.work");
+        unknown(registry, ASYNC_ADDRESS);
         assertSame(sample, old.orElseThrow());
-        values(registry, "nk.web.log", 1, 2, 3, 4, 1, 5);
+        values(registry, LOG_ADDRESS, 1, 2, 3, 4, 1, 5);
         assertEquals(0, registry.closes.get());
         failed.set(Optional.empty());
         assertSame(sample, collector.collect(BrokerTopology.ASYNC_WORK).orElseThrow());
-        values(registry, "nk.async.work", 1, 2, 3, 4, 1, 5);
+        values(registry, ASYNC_ADDRESS, 1, 2, 3, 4, 1, 5);
         assertEquals(2, calls.get());
       }
     }
@@ -237,9 +242,11 @@ class MqPressureMetricCollectorTest {
                 throw new AssertionError("STANDARD source must not run");
               };
       assertThrows(
-          NullPointerException.class, () -> new MqPressureMetricCollector(null, registry, "DEBUG"));
+          NullPointerException.class,
+          () -> new MqPressureMetricCollector(null, registry, DEBUG_MODE));
       assertThrows(
-          NullPointerException.class, () -> new MqPressureMetricCollector(source, null, "DEBUG"));
+          NullPointerException.class,
+          () -> new MqPressureMetricCollector(source, null, DEBUG_MODE));
       assertThrows(
           NullPointerException.class, () -> new MqPressureMetricCollector(source, registry, null));
       for (String mode : List.of("", "debug", "unknown-mode"))
@@ -277,7 +284,7 @@ class MqPressureMetricCollectorTest {
                 return illegal.get() ? null : Optional.of(sample);
               },
               registry,
-              "DEBUG");
+              DEBUG_MODE);
       collector.collect(BrokerTopology.ASYNC_WORK);
       collector.collect(BrokerTopology.WEB_LOG);
       var old = collector.snapshot(BrokerTopology.ASYNC_WORK);
@@ -293,8 +300,8 @@ class MqPressureMetricCollectorTest {
               .getMessage());
       assertEquals(3, calls.get());
       assertTrue(collector.snapshot(BrokerTopology.ASYNC_WORK).isEmpty());
-      unknown(registry, "nk.async.work");
-      values(registry, "nk.web.log", 1, 2, 3, 4, 1, 5);
+      unknown(registry, ASYNC_ADDRESS);
+      values(registry, LOG_ADDRESS, 1, 2, 3, 4, 1, 5);
       illegal.set(false);
       assertSame(sample, collector.collect(BrokerTopology.ASYNC_WORK).orElseThrow());
       assertEquals(4, calls.get());
@@ -317,7 +324,7 @@ class MqPressureMetricCollectorTest {
           new MqPressureMetricCollector(
               destination -> {
                 int call = calls.incrementAndGet();
-                if (call == 1) {
+                if (call == FIRST_READ_ORDINAL) {
                   entered.countDown();
                   await(release);
                   return Optional.of(firstSample);
@@ -326,7 +333,7 @@ class MqPressureMetricCollectorTest {
                 return Optional.of(secondSample);
               },
               registry,
-              "DEBUG");
+              DEBUG_MODE);
       owner.set(collector);
       var first = executor.submit(() -> collector.collect(BrokerTopology.ASYNC_WORK));
       try {
@@ -346,12 +353,12 @@ class MqPressureMetricCollectorTest {
         assertEquals(Thread.State.BLOCKED, contender.get().getState());
         assertEquals(1, calls.get());
         assertTrue(collector.snapshot(BrokerTopology.ASYNC_WORK).isEmpty());
-        unknown(registry, "nk.async.work");
+        unknown(registry, ASYNC_ADDRESS);
         release.countDown();
         assertSame(firstSample, first.get(5, TimeUnit.SECONDS).orElseThrow());
         assertSame(secondSample, second.get(5, TimeUnit.SECONDS).orElseThrow());
         assertSame(secondSample, collector.snapshot(BrokerTopology.ASYNC_WORK).orElseThrow());
-        values(registry, "nk.async.work", 7, 8, 9, 10, 0, 11);
+        values(registry, ASYNC_ADDRESS, 7, 8, 9, 10, 0, 11);
         assertEquals(2, calls.get());
       } finally {
         release.countDown();
@@ -378,10 +385,10 @@ class MqPressureMetricCollectorTest {
                 return Optional.of(sample);
               },
               registry,
-              "DEBUG");
+              DEBUG_MODE);
       var separate = new Snapshot(7, 8, 9, 10, false, 11);
       var second =
-          new MqPressureMetricCollector(destination -> Optional.of(separate), other, "DEBUG");
+          new MqPressureMetricCollector(destination -> Optional.of(separate), other, DEBUG_MODE);
       second.collect(BrokerTopology.ASYNC_WORK);
       var tasks = new ArrayList<Callable<Long>>();
       for (int i = 0; i < 64; i++)
@@ -405,7 +412,7 @@ class MqPressureMetricCollectorTest {
       assertEquals(64, calls.get());
       assertEquals(64, collector.snapshot(BrokerTopology.ASYNC_WORK).orElseThrow().messages());
       assertSame(separate, second.snapshot(BrokerTopology.ASYNC_WORK).orElseThrow());
-      values(other, "nk.async.work", 7, 8, 9, 10, 0, 11);
+      values(other, ASYNC_ADDRESS, 7, 8, 9, 10, 0, 11);
       assertEquals(36, registry.getMeters().size());
       assertEquals(36, other.getMeters().size());
       assertTrue(collector.snapshot(BrokerTopology.WEB_LOG).isEmpty());
@@ -431,12 +438,12 @@ class MqPressureMetricCollectorTest {
                           return Optional.empty();
                         },
                         registry,
-                        "DEBUG")));
+                        DEBUG_MODE)));
         assertEquals(0, calls.get());
         assertEquals(2, registry.registrations.get());
         assertEquals(1, registry.getMeters().size());
         assertEquals(0, registry.closes.get());
-        assertTrue(Double.isNaN(gauge(registry, "nk_mq_queue_messages", "nk.sync.request")));
+        assertTrue(Double.isNaN(gauge(registry, QUEUE_MESSAGES, "nk.sync.request")));
       } finally {
         registry.close();
       }

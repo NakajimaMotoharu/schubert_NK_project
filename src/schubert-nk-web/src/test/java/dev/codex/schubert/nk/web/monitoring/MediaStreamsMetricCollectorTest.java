@@ -31,6 +31,12 @@ import org.junit.jupiter.api.Test;
 
 /** MEDIACONN001..008/1704; owned function/SDK/thread fixtures, no media/HTTP/file I/O. */
 class MediaStreamsMetricCollectorTest {
+  private static final int BLOCKED_READ_ORDINAL = 2;
+  private static final String STREAMS_NAME = "nk_media_streams";
+  private static final String MEDIA_LABEL = "media_type";
+  private static final String AUDIO_TYPE = "AUDIO";
+  private static final String VIDEO_TYPE = "VIDEO";
+  private static final String DEBUG_MODE = "DEBUG";
   private static final List<MediaType> TYPES =
       List.of(MediaType.AUDIO, MediaType.VIDEO, MediaType.MUSIC);
 
@@ -72,21 +78,21 @@ class MediaStreamsMetricCollectorTest {
   }
 
   private static double gauge(Registry registry, String type) {
-    return registry.get("nk_media_streams").tag("media_type", type).gauge().value();
+    return registry.get(STREAMS_NAME).tag(MEDIA_LABEL, type).gauge().value();
   }
 
   private static void shape(Registry registry) {
     assertEquals(3, registry.getMeters().size());
     var observed = new java.util.HashSet<String>();
     for (var meter : registry.getMeters()) {
-      assertEquals("nk_media_streams", meter.getId().getName());
+      assertEquals(STREAMS_NAME, meter.getId().getName());
       assertEquals(Meter.Type.GAUGE, meter.getId().getType());
       assertEquals(
-          Set.of("media_type"),
+          Set.of(MEDIA_LABEL),
           meter.getId().getTags().stream().map(t -> t.getKey()).collect(Collectors.toSet()));
-      observed.add(meter.getId().getTag("media_type"));
+      observed.add(meter.getId().getTag(MEDIA_LABEL));
     }
-    assertEquals(Set.of("AUDIO", "VIDEO", "MUSIC"), observed);
+    assertEquals(Set.of(AUDIO_TYPE, VIDEO_TYPE, "MUSIC"), observed);
   }
 
   @Test
@@ -101,7 +107,7 @@ class MediaStreamsMetricCollectorTest {
                 return OptionalLong.of(inputs.get(type));
               },
               registry,
-              "DEBUG");
+              DEBUG_MODE);
       assertTrue(calls.isEmpty());
       for (var type : TYPES) {
         assertTrue(Double.isNaN(gauge(registry, type.name())));
@@ -119,19 +125,19 @@ class MediaStreamsMetricCollectorTest {
   void mediaConn002UnknownOnlyClearsSelectedTypeAndZeroIsNotMissing() {
     try (var registry = new Registry()) {
       var next = new AtomicReference<>(OptionalLong.of(7));
-      var collector = new MediaStreamsMetricCollector(type -> next.get(), registry, "DEBUG");
+      var collector = new MediaStreamsMetricCollector(type -> next.get(), registry, DEBUG_MODE);
       for (var type : TYPES) collector.collect(type);
       var old = collector.snapshot(MediaType.AUDIO);
       next.set(OptionalLong.empty());
       assertTrue(collector.collect(MediaType.AUDIO).isEmpty());
-      assertTrue(Double.isNaN(gauge(registry, "AUDIO")));
-      assertEquals(7, gauge(registry, "VIDEO"));
+      assertTrue(Double.isNaN(gauge(registry, AUDIO_TYPE)));
+      assertEquals(7, gauge(registry, VIDEO_TYPE));
       assertEquals(7, gauge(registry, "MUSIC"));
       assertEquals(OptionalLong.of(7), old);
       next.set(OptionalLong.of(0));
       assertEquals(OptionalLong.of(0), collector.collect(MediaType.AUDIO));
       assertEquals(OptionalLong.of(0), collector.snapshot(MediaType.AUDIO));
-      assertEquals(0, gauge(registry, "AUDIO"));
+      assertEquals(0, gauge(registry, AUDIO_TYPE));
       shape(registry);
     }
   }
@@ -147,9 +153,10 @@ class MediaStreamsMetricCollectorTest {
           };
       assertThrows(
           NullPointerException.class,
-          () -> new MediaStreamsMetricCollector(null, registry, "DEBUG"));
+          () -> new MediaStreamsMetricCollector(null, registry, DEBUG_MODE));
       assertThrows(
-          NullPointerException.class, () -> new MediaStreamsMetricCollector(source, null, "DEBUG"));
+          NullPointerException.class,
+          () -> new MediaStreamsMetricCollector(source, null, DEBUG_MODE));
       assertThrows(
           NullPointerException.class,
           () -> new MediaStreamsMetricCollector(source, registry, null));
@@ -188,7 +195,7 @@ class MediaStreamsMetricCollectorTest {
                   return OptionalLong.of(type == MediaType.AUDIO ? 7 : 2);
                 },
                 registry,
-                "DEBUG");
+                DEBUG_MODE);
         collector.collect(MediaType.AUDIO);
         collector.collect(MediaType.VIDEO);
         failure.set(Optional.of(problem));
@@ -196,8 +203,8 @@ class MediaStreamsMetricCollectorTest {
             problem, assertThrows(problem.getClass(), () -> collector.collect(MediaType.AUDIO)));
         assertEquals(3, calls.get());
         assertTrue(collector.snapshot(MediaType.AUDIO).isEmpty());
-        assertTrue(Double.isNaN(gauge(registry, "AUDIO")));
-        assertEquals(2, gauge(registry, "VIDEO"));
+        assertTrue(Double.isNaN(gauge(registry, AUDIO_TYPE)));
+        assertEquals(2, gauge(registry, VIDEO_TYPE));
         assertEquals(0, registry.closes.get());
       } finally {
         registry.close();
@@ -210,7 +217,7 @@ class MediaStreamsMetricCollectorTest {
   void mediaConn005NullOrNegativeObservationIsNotSuccessfulZeroAndMaximumIsRetained() {
     try (var registry = new Registry()) {
       var next = new AtomicReference<>(OptionalLong.of(2));
-      var collector = new MediaStreamsMetricCollector(type -> next.get(), registry, "DEBUG");
+      var collector = new MediaStreamsMetricCollector(type -> next.get(), registry, DEBUG_MODE);
       collector.collect(MediaType.VIDEO);
       for (var invalid : List.of(OptionalLong.of(-1), OptionalLong.of(Long.MIN_VALUE))) {
         next.set(OptionalLong.of(7));
@@ -218,17 +225,17 @@ class MediaStreamsMetricCollectorTest {
         next.set(invalid);
         assertThrows(IllegalArgumentException.class, () -> collector.collect(MediaType.AUDIO));
         assertTrue(collector.snapshot(MediaType.AUDIO).isEmpty());
-        assertEquals(2, gauge(registry, "VIDEO"));
+        assertEquals(2, gauge(registry, VIDEO_TYPE));
       }
       next.set(null);
       assertThrows(NullPointerException.class, () -> collector.collect(MediaType.AUDIO));
-      assertTrue(Double.isNaN(gauge(registry, "AUDIO")));
+      assertTrue(Double.isNaN(gauge(registry, AUDIO_TYPE)));
       next.set(OptionalLong.of(Long.MAX_VALUE));
       assertEquals(OptionalLong.of(9_223_372_036_854_775_807L), collector.collect(MediaType.AUDIO));
-      assertEquals(9.223372036854776E18, gauge(registry, "AUDIO"));
+      assertEquals(9.223372036854776E18, gauge(registry, AUDIO_TYPE));
       next.set(OptionalLong.of(0));
       assertEquals(OptionalLong.of(0), collector.collect(MediaType.AUDIO));
-      assertEquals(0, gauge(registry, "AUDIO"));
+      assertEquals(0, gauge(registry, AUDIO_TYPE));
       assertThrows(NullPointerException.class, () -> collector.collect(null));
       assertThrows(NullPointerException.class, () -> collector.snapshot(null));
       shape(registry);
@@ -256,14 +263,14 @@ class MediaStreamsMetricCollectorTest {
           new MediaStreamsMetricCollector(
               type -> {
                 int call = calls.incrementAndGet();
-                if (call == 2) {
+                if (call == BLOCKED_READ_ORDINAL) {
                   entered.countDown();
                   await(release);
                 }
                 return OptionalLong.of(call == 1 ? 7 : call == 2 ? 11 : 13);
               },
               registry,
-              "DEBUG");
+              DEBUG_MODE);
       collector.collect(MediaType.AUDIO);
       var first = executor.submit(() -> collector.collect(MediaType.AUDIO));
       await(entered);
@@ -283,15 +290,15 @@ class MediaStreamsMetricCollectorTest {
         assertEquals(2, calls.get());
         assertFalse(first.isDone());
         assertFalse(second.isDone());
-        assertEquals(7, gauge(registry, "AUDIO"));
-        assertTrue(Double.isNaN(gauge(registry, "VIDEO")));
+        assertEquals(7, gauge(registry, AUDIO_TYPE));
+        assertTrue(Double.isNaN(gauge(registry, VIDEO_TYPE)));
       } finally {
         release.countDown();
       }
       assertEquals(OptionalLong.of(11), first.get(5, TimeUnit.SECONDS));
       assertEquals(OptionalLong.of(13), second.get(5, TimeUnit.SECONDS));
-      assertEquals(11, gauge(registry, "AUDIO"));
-      assertEquals(13, gauge(registry, "VIDEO"));
+      assertEquals(11, gauge(registry, AUDIO_TYPE));
+      assertEquals(13, gauge(registry, VIDEO_TYPE));
       assertEquals(3, calls.get());
     }
   }
@@ -315,7 +322,7 @@ class MediaStreamsMetricCollectorTest {
                 return observation;
               },
               registry,
-              "DEBUG");
+              DEBUG_MODE);
       var tasks = new ArrayList<Callable<OptionalLong>>();
       for (int index = 0; index < 64; index++) {
         var type = TYPES.get(index % 3);
@@ -331,10 +338,10 @@ class MediaStreamsMetricCollectorTest {
       var observed = new AtomicInteger(99);
       var other =
           new MediaStreamsMetricCollector(
-              type -> OptionalLong.of(observed.incrementAndGet()), otherRegistry, "DEBUG");
+              type -> OptionalLong.of(observed.incrementAndGet()), otherRegistry, DEBUG_MODE);
       for (var type : TYPES) other.collect(type);
-      assertEquals(100, gauge(otherRegistry, "AUDIO"));
-      assertEquals(101, gauge(otherRegistry, "VIDEO"));
+      assertEquals(100, gauge(otherRegistry, AUDIO_TYPE));
+      assertEquals(101, gauge(otherRegistry, VIDEO_TYPE));
       assertEquals(102, gauge(otherRegistry, "MUSIC"));
       for (var type : TYPES) {
         assertTrue(perType.get(type).contains((long) gauge(registry, type.name())));
@@ -365,11 +372,11 @@ class MediaStreamsMetricCollectorTest {
                           return OptionalLong.of(7);
                         },
                         registry,
-                        "DEBUG")));
+                        DEBUG_MODE)));
         assertEquals(0, reads.get());
         assertEquals(2, registry.registrations.get());
         assertEquals(1, registry.getMeters().size());
-        assertTrue(Double.isNaN(gauge(registry, "AUDIO")));
+        assertTrue(Double.isNaN(gauge(registry, AUDIO_TYPE)));
         assertEquals(0, registry.closes.get());
       } finally {
         registry.close();
@@ -377,13 +384,12 @@ class MediaStreamsMetricCollectorTest {
       assertEquals(1, registry.closes.get());
     }
     try (var registry = new Registry()) {
-      var foreign =
-          Counter.builder("nk_media_streams").tag("media_type", "AUDIO").register(registry);
+      var foreign = Counter.builder(STREAMS_NAME).tag(MEDIA_LABEL, AUDIO_TYPE).register(registry);
       foreign.increment(7);
       assertThrows(
           IllegalArgumentException.class,
-          () -> new MediaStreamsMetricCollector(type -> OptionalLong.of(1), registry, "DEBUG"));
-      assertSame(foreign, registry.get("nk_media_streams").tag("media_type", "AUDIO").counter());
+          () -> new MediaStreamsMetricCollector(type -> OptionalLong.of(1), registry, DEBUG_MODE));
+      assertSame(foreign, registry.get(STREAMS_NAME).tag(MEDIA_LABEL, AUDIO_TYPE).counter());
       assertEquals(7, foreign.count());
       assertEquals(0, registry.closes.get());
     }
