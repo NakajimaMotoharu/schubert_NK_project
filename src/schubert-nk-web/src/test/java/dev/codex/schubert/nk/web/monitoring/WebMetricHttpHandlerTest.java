@@ -49,10 +49,16 @@ final class WebMetricHttpHandlerTest {
                 return true;
               });
       var exchange = new Exchange(GET_METHOD, PATH);
-      handler.handle(exchange);
-      response(exchange, 200, READY + READY_TRUE_SUFFIX, METRIC);
-      assertEquals(1, calls.get());
-      assertEquals(READY + READY_FALSE_SUFFIX, context.render(false));
+      try {
+
+        handler.handle(exchange);
+        response(exchange, 200, READY + READY_TRUE_SUFFIX, METRIC);
+        assertEquals(1, calls.get());
+        assertEquals(READY + READY_FALSE_SUFFIX, context.render(false));
+
+      } finally {
+        if (!exchange.closed) exchange.close();
+      }
     }
   }
 
@@ -60,8 +66,14 @@ final class WebMetricHttpHandlerTest {
   void webmhttp002() throws IOException {
     try (var context = standard()) {
       var exchange = new Exchange(GET_METHOD, PATH);
-      new WebMetricHttpHandler(context, () -> false).handle(exchange);
-      response(exchange, 200, READY + READY_FALSE_SUFFIX, METRIC);
+      try {
+
+        new WebMetricHttpHandler(context, () -> false).handle(exchange);
+        response(exchange, 200, READY + READY_FALSE_SUFFIX, METRIC);
+
+      } finally {
+        if (!exchange.closed) exchange.close();
+      }
     }
   }
 
@@ -80,25 +92,37 @@ final class WebMetricHttpHandlerTest {
       context.initialize();
       var handler = new WebMetricHttpHandler(context, () -> true);
       var first = new Exchange(GET_METHOD, PATH);
-      handler.handle(first);
-      String body = first.output.toString(StandardCharsets.UTF_8);
-      assertTrue(body.startsWith(READY + READY_TRUE_SUFFIX));
-      assertTrue(body.contains("nk_db_pool_connections{service=\"WEB\",state=\"active\"} 7.5\n"));
-      assertTrue(body.contains("jvm_memory_used_bytes"));
-      assertEquals(body.getBytes(StandardCharsets.UTF_8).length, first.length);
-      assertEquals(200, first.status);
-      assertEquals(METRIC, first.headers.getFirst(CONTENT_TYPE_HEADER));
-      assertEquals(NO_STORE_VALUE, first.headers.getFirst(CACHE_CONTROL_HEADER));
-      assertTrue(first.closed);
-      context.bindings().orElseThrow()[0] = 9.5;
-      var second = new Exchange(GET_METHOD, PATH);
-      handler.handle(second);
-      assertTrue(
-          second
-              .output
-              .toString(StandardCharsets.UTF_8)
-              .contains("nk_db_pool_connections{service=\"WEB\",state=\"active\"} 9.5\n"));
-      assertEquals(9.5, context.bindings().orElseThrow()[0]);
+      try {
+
+        handler.handle(first);
+        String body = first.output.toString(StandardCharsets.UTF_8);
+        assertTrue(body.startsWith(READY + READY_TRUE_SUFFIX));
+        assertTrue(body.contains("nk_db_pool_connections{service=\"WEB\",state=\"active\"} 7.5\n"));
+        assertTrue(body.contains("jvm_memory_used_bytes"));
+        assertEquals(body.getBytes(StandardCharsets.UTF_8).length, first.length);
+        assertEquals(200, first.status);
+        assertEquals(METRIC, first.headers.getFirst(CONTENT_TYPE_HEADER));
+        assertEquals(NO_STORE_VALUE, first.headers.getFirst(CACHE_CONTROL_HEADER));
+        assertTrue(first.closed);
+        context.bindings().orElseThrow()[0] = 9.5;
+        var second = new Exchange(GET_METHOD, PATH);
+        try {
+
+          handler.handle(second);
+          assertTrue(
+              second
+                  .output
+                  .toString(StandardCharsets.UTF_8)
+                  .contains("nk_db_pool_connections{service=\"WEB\",state=\"active\"} 9.5\n"));
+          assertEquals(9.5, context.bindings().orElseThrow()[0]);
+
+        } finally {
+          if (!second.closed) second.close();
+        }
+
+      } finally {
+        if (!first.closed) first.close();
+      }
     }
   }
 
@@ -115,8 +139,14 @@ final class WebMetricHttpHandlerTest {
               });
       for (String method : new String[] {"POST", "HEAD", "get", "OPTIONS"}) {
         var exchange = new Exchange(method, PATH);
-        handler.handle(exchange);
-        response(exchange, 405, "{}", "application/json; charset=utf-8");
+        try {
+
+          handler.handle(exchange);
+          response(exchange, 405, "{}", "application/json; charset=utf-8");
+
+        } finally {
+          if (!exchange.closed) exchange.close();
+        }
       }
       assertEquals(0, calls.get());
       context.initialize();
@@ -138,8 +168,14 @@ final class WebMetricHttpHandlerTest {
       for (String path :
           new String[] {"/actuator/prometheus/", "/actuator/%70rometheus", "/actuator/info"}) {
         var exchange = new Exchange(GET_METHOD, path);
-        handler.handle(exchange);
-        response(exchange, 404, "{}", "application/json; charset=utf-8");
+        try {
+
+          handler.handle(exchange);
+          response(exchange, 404, "{}", "application/json; charset=utf-8");
+
+        } finally {
+          if (!exchange.closed) exchange.close();
+        }
       }
       assertEquals(0, calls.get());
     }
@@ -149,8 +185,14 @@ final class WebMetricHttpHandlerTest {
   void webmhttp006() throws IOException {
     try (var context = standard()) {
       var exchange = new Exchange(GET_METHOD, PATH + "?unused=public");
-      new WebMetricHttpHandler(context, () -> true).handle(exchange);
-      response(exchange, 200, READY + READY_TRUE_SUFFIX, METRIC);
+      try {
+
+        new WebMetricHttpHandler(context, () -> true).handle(exchange);
+        response(exchange, 200, READY + READY_TRUE_SUFFIX, METRIC);
+
+      } finally {
+        if (!exchange.closed) exchange.close();
+      }
     }
   }
 
@@ -169,11 +211,17 @@ final class WebMetricHttpHandlerTest {
   void webmhttp008() {
     try (var context = new WebMetricContext<>(STANDARD_MODE, registry -> "unused")) {
       var exchange = new Exchange(GET_METHOD, PATH);
-      var handler = new WebMetricHttpHandler(context, () -> true);
-      assertThrows(IllegalStateException.class, () -> handler.handle(exchange));
-      unpublished(exchange);
-      context.initialize();
-      assertEquals(READY + READY_FALSE_SUFFIX, context.render(false));
+      try {
+
+        var handler = new WebMetricHttpHandler(context, () -> true);
+        assertThrows(IllegalStateException.class, () -> handler.handle(exchange));
+        unpublished(exchange);
+        context.initialize();
+        assertEquals(READY + READY_FALSE_SUFFIX, context.render(false));
+
+      } finally {
+        if (!exchange.closed) exchange.close();
+      }
     }
   }
 
@@ -182,10 +230,16 @@ final class WebMetricHttpHandlerTest {
     var context = standard();
     context.close();
     var exchange = new Exchange(GET_METHOD, PATH);
-    assertThrows(
-        IllegalStateException.class,
-        () -> new WebMetricHttpHandler(context, () -> true).handle(exchange));
-    unpublished(exchange);
+    try {
+
+      assertThrows(
+          IllegalStateException.class,
+          () -> new WebMetricHttpHandler(context, () -> true).handle(exchange));
+      unpublished(exchange);
+
+    } finally {
+      if (!exchange.closed) exchange.close();
+    }
   }
 
   @Test
@@ -193,16 +247,22 @@ final class WebMetricHttpHandlerTest {
     try (var context = standard()) {
       var failure = new IllegalStateException("fixed fixture");
       var exchange = new Exchange(GET_METHOD, PATH);
-      var handler =
-          new WebMetricHttpHandler(
-              context,
-              () -> {
-                throw failure;
-              });
-      assertSame(
-          failure, assertThrows(IllegalStateException.class, () -> handler.handle(exchange)));
-      unpublished(exchange);
-      assertEquals(READY + READY_TRUE_SUFFIX, context.render(true));
+      try {
+
+        var handler =
+            new WebMetricHttpHandler(
+                context,
+                () -> {
+                  throw failure;
+                });
+        assertSame(
+            failure, assertThrows(IllegalStateException.class, () -> handler.handle(exchange)));
+        unpublished(exchange);
+        assertEquals(READY + READY_TRUE_SUFFIX, context.render(true));
+
+      } finally {
+        if (!exchange.closed) exchange.close();
+      }
     }
   }
 
@@ -211,15 +271,21 @@ final class WebMetricHttpHandlerTest {
     try (var context = standard()) {
       var failure = new AssertionError("fixed fixture");
       var exchange = new Exchange(GET_METHOD, PATH);
-      var handler =
-          new WebMetricHttpHandler(
-              context,
-              () -> {
-                throw failure;
-              });
-      assertSame(failure, assertThrows(AssertionError.class, () -> handler.handle(exchange)));
-      unpublished(exchange);
-      assertEquals(READY + READY_TRUE_SUFFIX, context.render(true));
+      try {
+
+        var handler =
+            new WebMetricHttpHandler(
+                context,
+                () -> {
+                  throw failure;
+                });
+        assertSame(failure, assertThrows(AssertionError.class, () -> handler.handle(exchange)));
+        unpublished(exchange);
+        assertEquals(READY + READY_TRUE_SUFFIX, context.render(true));
+
+      } finally {
+        if (!exchange.closed) exchange.close();
+      }
     }
   }
 
@@ -228,13 +294,19 @@ final class WebMetricHttpHandlerTest {
     try (var context = standard()) {
       var failure = new IOException("fixed headers");
       var exchange = new Exchange(GET_METHOD, PATH);
-      exchange.headerFailure = failure;
-      var handler = new WebMetricHttpHandler(context, () -> true);
-      assertSame(failure, assertThrows(IOException.class, () -> handler.handle(exchange)));
-      assertEquals(1, exchange.headerCalls);
-      assertTrue(exchange.closed);
-      assertEquals(0, exchange.output.size());
-      assertEquals(READY + READY_TRUE_SUFFIX, context.render(true));
+      try {
+
+        exchange.headerFailure = failure;
+        var handler = new WebMetricHttpHandler(context, () -> true);
+        assertSame(failure, assertThrows(IOException.class, () -> handler.handle(exchange)));
+        assertEquals(1, exchange.headerCalls);
+        assertTrue(exchange.closed);
+        assertEquals(0, exchange.output.size());
+        assertEquals(READY + READY_TRUE_SUFFIX, context.render(true));
+
+      } finally {
+        if (!exchange.closed) exchange.close();
+      }
     }
   }
 
@@ -243,13 +315,19 @@ final class WebMetricHttpHandlerTest {
     try (var context = standard()) {
       var failure = new IOException("fixed output");
       var exchange = new Exchange(GET_METHOD, PATH);
-      exchange.bodyFailure = failure;
-      var handler = new WebMetricHttpHandler(context, () -> false);
-      assertSame(failure, assertThrows(IOException.class, () -> handler.handle(exchange)));
-      assertEquals(200, exchange.status);
-      assertTrue(exchange.closed);
-      assertEquals(0, exchange.output.size());
-      assertEquals(READY + READY_FALSE_SUFFIX, context.render(false));
+      try {
+
+        exchange.bodyFailure = failure;
+        var handler = new WebMetricHttpHandler(context, () -> false);
+        assertSame(failure, assertThrows(IOException.class, () -> handler.handle(exchange)));
+        assertEquals(200, exchange.status);
+        assertTrue(exchange.closed);
+        assertEquals(0, exchange.output.size());
+        assertEquals(READY + READY_FALSE_SUFFIX, context.render(false));
+
+      } finally {
+        if (!exchange.closed) exchange.close();
+      }
     }
   }
 
@@ -257,13 +335,19 @@ final class WebMetricHttpHandlerTest {
   void webmhttp014() throws IOException {
     try (var context = standard()) {
       var exchange = new Exchange("POST", "/unknown");
-      new WebMetricHttpHandler(
-              context,
-              () -> {
-                throw new AssertionError("must not read");
-              })
-          .handle(exchange);
-      response(exchange, 405, "{}", "application/json; charset=utf-8");
+      try {
+
+        new WebMetricHttpHandler(
+                context,
+                () -> {
+                  throw new AssertionError("must not read");
+                })
+            .handle(exchange);
+        response(exchange, 405, "{}", "application/json; charset=utf-8");
+
+      } finally {
+        if (!exchange.closed) exchange.close();
+      }
     }
   }
 
@@ -274,12 +358,24 @@ final class WebMetricHttpHandlerTest {
       BooleanSupplier ready = () -> next.getAndIncrement() == 0;
       var handler = new WebMetricHttpHandler(context, ready);
       var first = new Exchange(GET_METHOD, PATH);
-      var second = new Exchange(GET_METHOD, PATH);
-      handler.handle(first);
-      handler.handle(second);
-      response(first, 200, READY + READY_TRUE_SUFFIX, METRIC);
-      response(second, 200, READY + READY_FALSE_SUFFIX, METRIC);
-      assertEquals(2, next.get());
+      try {
+
+        var second = new Exchange(GET_METHOD, PATH);
+        try {
+
+          handler.handle(first);
+          handler.handle(second);
+          response(first, 200, READY + READY_TRUE_SUFFIX, METRIC);
+          response(second, 200, READY + READY_FALSE_SUFFIX, METRIC);
+          assertEquals(2, next.get());
+
+        } finally {
+          if (!second.closed) second.close();
+        }
+
+      } finally {
+        if (!first.closed) first.close();
+      }
     }
   }
 
@@ -287,13 +383,19 @@ final class WebMetricHttpHandlerTest {
   void webmhttp016() throws IOException {
     try (var context = standard()) {
       var exchange = new Exchange(GET_METHOD, PATH);
-      exchange.headers.set(CONTENT_TYPE_HEADER, "stale");
-      exchange.headers.set(CACHE_CONTROL_HEADER, "public");
-      new WebMetricHttpHandler(context, () -> true).handle(exchange);
-      response(exchange, 200, READY + READY_TRUE_SUFFIX, METRIC);
-      assertEquals(1, exchange.headers.get(CONTENT_TYPE_HEADER).size());
-      assertEquals(1, exchange.headers.get(CACHE_CONTROL_HEADER).size());
-      assertEquals(READY + READY_FALSE_SUFFIX, context.render(false));
+      try {
+
+        exchange.headers.set(CONTENT_TYPE_HEADER, "stale");
+        exchange.headers.set(CACHE_CONTROL_HEADER, "public");
+        new WebMetricHttpHandler(context, () -> true).handle(exchange);
+        response(exchange, 200, READY + READY_TRUE_SUFFIX, METRIC);
+        assertEquals(1, exchange.headers.get(CONTENT_TYPE_HEADER).size());
+        assertEquals(1, exchange.headers.get(CACHE_CONTROL_HEADER).size());
+        assertEquals(READY + READY_FALSE_SUFFIX, context.render(false));
+
+      } finally {
+        if (!exchange.closed) exchange.close();
+      }
     }
   }
 
@@ -301,20 +403,26 @@ final class WebMetricHttpHandlerTest {
   void webmhttp017() throws IOException {
     try (var context = standard()) {
       var exchange = new Exchange(GET_METHOD, PATH);
-      var handler = new WebMetricHttpHandler(context, () -> true);
-      handler.write(exchange);
-      assertFalse(exchange.closed);
-      assertEquals(0, exchange.closeCalls);
-      assertEquals(200, exchange.status);
-      assertEquals(READY + READY_TRUE_SUFFIX, exchange.output.toString(StandardCharsets.UTF_8));
-      assertEquals(
-          (READY + READY_TRUE_SUFFIX).getBytes(StandardCharsets.UTF_8).length, exchange.length);
-      assertEquals(METRIC, exchange.headers.getFirst(CONTENT_TYPE_HEADER));
-      assertEquals(NO_STORE_VALUE, exchange.headers.getFirst(CACHE_CONTROL_HEADER));
-      exchange.close();
-      response(exchange, 200, READY + READY_TRUE_SUFFIX, METRIC);
-      assertEquals(READY + READY_FALSE_SUFFIX, context.render(false));
-      assertThrows(NullPointerException.class, () -> handler.write(null));
+      try {
+
+        var handler = new WebMetricHttpHandler(context, () -> true);
+        handler.write(exchange);
+        assertFalse(exchange.closed);
+        assertEquals(0, exchange.closeCalls);
+        assertEquals(200, exchange.status);
+        assertEquals(READY + READY_TRUE_SUFFIX, exchange.output.toString(StandardCharsets.UTF_8));
+        assertEquals(
+            (READY + READY_TRUE_SUFFIX).getBytes(StandardCharsets.UTF_8).length, exchange.length);
+        assertEquals(METRIC, exchange.headers.getFirst(CONTENT_TYPE_HEADER));
+        assertEquals(NO_STORE_VALUE, exchange.headers.getFirst(CACHE_CONTROL_HEADER));
+        exchange.close();
+        response(exchange, 200, READY + READY_TRUE_SUFFIX, METRIC);
+        assertEquals(READY + READY_FALSE_SUFFIX, context.render(false));
+        assertThrows(NullPointerException.class, () -> handler.write(null));
+
+      } finally {
+        if (!exchange.closed) exchange.close();
+      }
     }
   }
 
@@ -322,22 +430,29 @@ final class WebMetricHttpHandlerTest {
   void webmhttp018() {
     try (var context = standard()) {
       var exchange = new Exchange(GET_METHOD, PATH);
-      var failure = new IllegalStateException("fixed borrowed write");
-      var handler =
-          new WebMetricHttpHandler(
-              context,
-              () -> {
-                throw failure;
-              });
-      assertSame(failure, assertThrows(IllegalStateException.class, () -> handler.write(exchange)));
-      assertFalse(exchange.closed);
-      assertEquals(0, exchange.closeCalls);
-      assertEquals(0, exchange.headerCalls);
-      assertEquals(0, exchange.output.size());
-      assertTrue(exchange.headers.isEmpty());
-      exchange.close();
-      assertEquals(1, exchange.closeCalls);
-      assertEquals(READY + READY_TRUE_SUFFIX, context.render(true));
+      try {
+
+        var failure = new IllegalStateException("fixed borrowed write");
+        var handler =
+            new WebMetricHttpHandler(
+                context,
+                () -> {
+                  throw failure;
+                });
+        assertSame(
+            failure, assertThrows(IllegalStateException.class, () -> handler.write(exchange)));
+        assertFalse(exchange.closed);
+        assertEquals(0, exchange.closeCalls);
+        assertEquals(0, exchange.headerCalls);
+        assertEquals(0, exchange.output.size());
+        assertTrue(exchange.headers.isEmpty());
+        exchange.close();
+        assertEquals(1, exchange.closeCalls);
+        assertEquals(READY + READY_TRUE_SUFFIX, context.render(true));
+
+      } finally {
+        if (!exchange.closed) exchange.close();
+      }
     }
   }
 
@@ -363,29 +478,42 @@ final class WebMetricHttpHandlerTest {
       context.initialize();
       var handler = new WebMetricHttpHandler(context, () -> readiness.getAndIncrement() == 0);
       var first = new Exchange(GET_METHOD, PATH);
-      var second = new Exchange(GET_METHOD, PATH);
-      handler.handle(first);
-      handler.handle(second);
-      String firstText = first.output.toString(StandardCharsets.UTF_8);
-      String secondText = second.output.toString(StandardCharsets.UTF_8);
-      assertTrue(firstText.startsWith(READY + READY_TRUE_SUFFIX));
-      assertTrue(secondText.startsWith(READY + READY_FALSE_SUFFIX));
-      assertTrue(
-          firstText.contains("nk_db_pool_connections{service=\"WEB\",state=\"active\"} 9.5\n"));
-      assertTrue(
-          secondText.contains("nk_db_pool_connections{service=\"WEB\",state=\"active\"} 11.5\n"));
-      assertEquals(200, first.status);
-      assertEquals(200, second.status);
-      assertEquals(firstText.getBytes(StandardCharsets.UTF_8).length, first.length);
-      assertEquals(secondText.getBytes(StandardCharsets.UTF_8).length, second.length);
-      assertEquals(METRIC, first.headers.getFirst(CONTENT_TYPE_HEADER));
-      assertEquals(NO_STORE_VALUE, second.headers.getFirst(CACHE_CONTROL_HEADER));
-      assertEquals(1, first.closeCalls);
-      assertEquals(1, second.closeCalls);
-      assertSame(value, context.bindings().orElseThrow());
-      assertEquals(11.5, value[0]);
-      assertEquals(2, samples.get());
-      assertEquals(2, readiness.get());
+      try {
+
+        var second = new Exchange(GET_METHOD, PATH);
+        try {
+
+          handler.handle(first);
+          handler.handle(second);
+          String firstText = first.output.toString(StandardCharsets.UTF_8);
+          String secondText = second.output.toString(StandardCharsets.UTF_8);
+          assertTrue(firstText.startsWith(READY + READY_TRUE_SUFFIX));
+          assertTrue(secondText.startsWith(READY + READY_FALSE_SUFFIX));
+          assertTrue(
+              firstText.contains("nk_db_pool_connections{service=\"WEB\",state=\"active\"} 9.5\n"));
+          assertTrue(
+              secondText.contains(
+                  "nk_db_pool_connections{service=\"WEB\",state=\"active\"} 11.5\n"));
+          assertEquals(200, first.status);
+          assertEquals(200, second.status);
+          assertEquals(firstText.getBytes(StandardCharsets.UTF_8).length, first.length);
+          assertEquals(secondText.getBytes(StandardCharsets.UTF_8).length, second.length);
+          assertEquals(METRIC, first.headers.getFirst(CONTENT_TYPE_HEADER));
+          assertEquals(NO_STORE_VALUE, second.headers.getFirst(CACHE_CONTROL_HEADER));
+          assertEquals(1, first.closeCalls);
+          assertEquals(1, second.closeCalls);
+          assertSame(value, context.bindings().orElseThrow());
+          assertEquals(11.5, value[0]);
+          assertEquals(2, samples.get());
+          assertEquals(2, readiness.get());
+
+        } finally {
+          if (!second.closed) second.close();
+        }
+
+      } finally {
+        if (!first.closed) first.close();
+      }
     }
   }
 
@@ -406,28 +534,41 @@ final class WebMetricHttpHandlerTest {
       assertTrue(f.calls.isEmpty());
       var handler = new WebMetricHttpHandler(context, () -> true);
       var first = new Exchange(GET_METHOD, PATH);
-      handler.handle(first);
-      String body = first.output.toString(StandardCharsets.UTF_8);
-      assertTrue(body.startsWith(READY + READY_TRUE_SUFFIX));
-      assertTrue(body.contains("nk_db_pool_connections{service=\"WEB\",state=\"active\"} 1.0\n"));
-      assertTrue(body.contains("nk_db_pool_connections{service=\"WEB\",state=\"max\"} 2.0\n"));
-      assertEquals(200, first.status);
-      assertEquals(body.getBytes(StandardCharsets.UTF_8).length, first.length);
-      assertEquals(METRIC, first.headers.getFirst(CONTENT_TYPE_HEADER));
-      assertEquals(NO_STORE_VALUE, first.headers.getFirst(CACHE_CONTROL_HEADER));
-      assertEquals(1, first.closeCalls);
-      f.complete();
-      f.calls.clear();
-      f.maximum = 0;
-      var missing = new Exchange(GET_METHOD, PATH);
-      handler.handle(missing);
-      String missingText = missing.output.toString(StandardCharsets.UTF_8);
-      assertTrue(
-          missingText.contains("nk_db_pool_connections{service=\"WEB\",state=\"active\"} NaN\n"));
-      assertTrue(context.bindings().orElseThrow().snapshot().isEmpty());
-      assertEquals(200, missing.status);
-      assertEquals(1, missing.closeCalls);
-      f.complete();
+      try {
+
+        handler.handle(first);
+        String body = first.output.toString(StandardCharsets.UTF_8);
+        assertTrue(body.startsWith(READY + READY_TRUE_SUFFIX));
+        assertTrue(body.contains("nk_db_pool_connections{service=\"WEB\",state=\"active\"} 1.0\n"));
+        assertTrue(body.contains("nk_db_pool_connections{service=\"WEB\",state=\"max\"} 2.0\n"));
+        assertEquals(200, first.status);
+        assertEquals(body.getBytes(StandardCharsets.UTF_8).length, first.length);
+        assertEquals(METRIC, first.headers.getFirst(CONTENT_TYPE_HEADER));
+        assertEquals(NO_STORE_VALUE, first.headers.getFirst(CACHE_CONTROL_HEADER));
+        assertEquals(1, first.closeCalls);
+        f.complete();
+        f.calls.clear();
+        f.maximum = 0;
+        var missing = new Exchange(GET_METHOD, PATH);
+        try {
+
+          handler.handle(missing);
+          String missingText = missing.output.toString(StandardCharsets.UTF_8);
+          assertTrue(
+              missingText.contains(
+                  "nk_db_pool_connections{service=\"WEB\",state=\"active\"} NaN\n"));
+          assertTrue(context.bindings().orElseThrow().snapshot().isEmpty());
+          assertEquals(200, missing.status);
+          assertEquals(1, missing.closeCalls);
+          f.complete();
+
+        } finally {
+          if (!missing.closed) missing.close();
+        }
+
+      } finally {
+        if (!first.closed) first.close();
+      }
     }
     f.complete();
   }
@@ -461,22 +602,28 @@ final class WebMetricHttpHandlerTest {
       for (int sample = 0; sample < 2; sample++) {
         f.active = sample == 0 ? 1 : 0;
         var exchange = new Exchange(GET_METHOD, PATH);
-        handler.handle(exchange);
-        String body = exchange.output.toString(StandardCharsets.UTF_8);
-        assertTrue(body.startsWith(READY + READY_TRUE_SUFFIX));
-        assertTrue(
-            body.contains(
-                "nk_db_pool_connections{service=\"WEB\",state=\"active\"} "
-                    + (sample == 0 ? "1.0" : "0.0")
-                    + "\n"));
-        assertTrue(body.contains("nk_db_pool_connections{service=\"WEB\",state=\"max\"} 2.0\n"));
-        assertEquals(200, exchange.status);
-        assertEquals(body.getBytes(StandardCharsets.UTF_8).length, exchange.length);
-        assertEquals(METRIC, exchange.headers.getFirst(CONTENT_TYPE_HEADER));
-        assertEquals(NO_STORE_VALUE, exchange.headers.getFirst(CACHE_CONTROL_HEADER));
-        assertEquals(1, exchange.closeCalls);
-        f.complete();
-        f.calls.clear();
+        try {
+
+          handler.handle(exchange);
+          String body = exchange.output.toString(StandardCharsets.UTF_8);
+          assertTrue(body.startsWith(READY + READY_TRUE_SUFFIX));
+          assertTrue(
+              body.contains(
+                  "nk_db_pool_connections{service=\"WEB\",state=\"active\"} "
+                      + (sample == 0 ? "1.0" : "0.0")
+                      + "\n"));
+          assertTrue(body.contains("nk_db_pool_connections{service=\"WEB\",state=\"max\"} 2.0\n"));
+          assertEquals(200, exchange.status);
+          assertEquals(body.getBytes(StandardCharsets.UTF_8).length, exchange.length);
+          assertEquals(METRIC, exchange.headers.getFirst(CONTENT_TYPE_HEADER));
+          assertEquals(NO_STORE_VALUE, exchange.headers.getFirst(CACHE_CONTROL_HEADER));
+          assertEquals(1, exchange.closeCalls);
+          f.complete();
+          f.calls.clear();
+
+        } finally {
+          if (!exchange.closed) exchange.close();
+        }
       }
       assertEquals(1, poolReads.get());
       assertEquals(1, configReads.get());
@@ -495,18 +642,24 @@ final class WebMetricHttpHandlerTest {
       var handler = new WebMetricHttpHandler(context, () -> true);
       for (int i = 0; i < 2; i++) {
         var exchange = new Exchange(GET_METHOD, PATH);
-        handler.handle(exchange);
-        String body = exchange.output.toString(StandardCharsets.UTF_8);
-        assertTrue(body.startsWith(READY + READY_TRUE_SUFFIX));
-        assertTrue(body.contains(WebServiceMetricBindingTest.REQUEST_ONE));
-        assertTrue(body.contains("nk_db_pool_connections{service=\"WEB\",state=\"max\"} 2.0\n"));
-        assertEquals(200, exchange.status);
-        assertEquals(body.getBytes(StandardCharsets.UTF_8).length, exchange.length);
-        assertEquals(METRIC, exchange.headers.getFirst(CONTENT_TYPE_HEADER));
-        assertEquals(NO_STORE_VALUE, exchange.headers.getFirst(CACHE_CONTROL_HEADER));
-        assertEquals(1, exchange.closeCalls);
-        f.complete();
-        f.calls.clear();
+        try {
+
+          handler.handle(exchange);
+          String body = exchange.output.toString(StandardCharsets.UTF_8);
+          assertTrue(body.startsWith(READY + READY_TRUE_SUFFIX));
+          assertTrue(body.contains(WebServiceMetricBindingTest.REQUEST_ONE));
+          assertTrue(body.contains("nk_db_pool_connections{service=\"WEB\",state=\"max\"} 2.0\n"));
+          assertEquals(200, exchange.status);
+          assertEquals(body.getBytes(StandardCharsets.UTF_8).length, exchange.length);
+          assertEquals(METRIC, exchange.headers.getFirst(CONTENT_TYPE_HEADER));
+          assertEquals(NO_STORE_VALUE, exchange.headers.getFirst(CACHE_CONTROL_HEADER));
+          assertEquals(1, exchange.closeCalls);
+          f.complete();
+          f.calls.clear();
+
+        } finally {
+          if (!exchange.closed) exchange.close();
+        }
       }
     }
     assertTrue(f.calls.isEmpty());
@@ -659,6 +812,32 @@ final class WebMetricHttpHandlerTest {
     @Override
     public HttpPrincipal getPrincipal() {
       throw new UnsupportedOperationException();
+    }
+  }
+
+  @Test
+  void webmhttp023CallerFailureStillCleansOnceAndCompletedCloseIsNotRepeated() {
+    var exchange = new Exchange(GET_METHOD, PATH);
+    try {
+      var failure = new AssertionError("caller cleanup fixture");
+      assertFalse(exchange.closed);
+      assertSame(
+          failure,
+          assertThrows(
+              AssertionError.class,
+              () -> {
+                try {
+                  throw failure;
+                } finally {
+                  if (!exchange.closed) exchange.close();
+                }
+              }));
+      assertTrue(exchange.closed);
+      assertEquals(1, exchange.closeCalls);
+      if (!exchange.closed) exchange.close();
+      assertEquals(1, exchange.closeCalls);
+    } finally {
+      if (!exchange.closed) exchange.close();
     }
   }
 }
