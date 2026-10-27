@@ -30,12 +30,19 @@ import org.junit.jupiter.api.Test;
 
 /** SCRAPE001..014/1769: literal SS catalog, pure mode control and borrowed owner invariants. */
 class WebMetricScrapeTest {
+  private static final String SERVICE_LABEL = "service";
+  private static final String WEB_SERVICE = "WEB";
+  private static final String DEBUG_MODE = "DEBUG";
+  private static final String GAUGE_TYPE = "gauge";
+  private static final String STATE_LABEL = "state";
+  private static final String ACTIVE_POOL_STATE = "active";
+  private static final String STANDARD_MODE = "STANDARD";
   private static final String HTTP = "nk_http_requests_total";
   private static final String TIMER = "nk_http_request_duration_seconds";
   private static final String POOL = "nk_db_pool_connections";
   private static final String BYTES = "nk_media_bytes_total";
   private static final Map<String, String> HTTP_LABELS =
-      Map.of("service", "WEB", "route", "/login", "method", "GET", "status_class", "2xx");
+      Map.of(SERVICE_LABEL, WEB_SERVICE, "route", "/login", "method", "GET", "status_class", "2xx");
   private final WebMetricScrape policy = new WebMetricScrape();
 
   private static class Registry extends SimpleMeterRegistry implements AutoCloseable {
@@ -67,11 +74,11 @@ class WebMetricScrapeTest {
   private static final class Bundle implements AutoCloseable {
     final OverflowSafeHttpMeterRegistry registry =
         new OverflowSafeHttpMeterRegistry(new MockClock());
-    final WebDbPoolMetricRecorder pool = new WebDbPoolMetricRecorder(registry, "DEBUG");
-    final WebOutboxMetricRecorder outbox = new WebOutboxMetricRecorder(registry, "DEBUG");
-    final MediaStreamsMetricRecorder streams = new MediaStreamsMetricRecorder(registry, "DEBUG");
-    final HttpMetricRecorder http = new HttpMetricRecorder(registry, "DEBUG");
-    final MediaBytesMetricRecorder bytes = new MediaBytesMetricRecorder(registry, "DEBUG");
+    final WebDbPoolMetricRecorder pool = new WebDbPoolMetricRecorder(registry, DEBUG_MODE);
+    final WebOutboxMetricRecorder outbox = new WebOutboxMetricRecorder(registry, DEBUG_MODE);
+    final MediaStreamsMetricRecorder streams = new MediaStreamsMetricRecorder(registry, DEBUG_MODE);
+    final HttpMetricRecorder http = new HttpMetricRecorder(registry, DEBUG_MODE);
+    final MediaBytesMetricRecorder bytes = new MediaBytesMetricRecorder(registry, DEBUG_MODE);
 
     void supplied() {
       pool.record(new WebDbPoolMetricRecorder.Counts(3, 5, 2, 8));
@@ -110,13 +117,13 @@ class WebMetricScrapeTest {
             TIMER,
             "histogram",
             POOL,
-            "gauge",
+            GAUGE_TYPE,
             "nk_outbox_rows",
-            "gauge",
+            GAUGE_TYPE,
             "nk_outbox_oldest_seconds",
-            "gauge",
+            GAUGE_TYPE,
             "nk_media_streams",
-            "gauge",
+            GAUGE_TYPE,
             BYTES,
             "counter");
     var types = text.lines().filter(line -> line.startsWith("# TYPE ")).toList();
@@ -144,8 +151,10 @@ class WebMetricScrapeTest {
   private static void supplied(String text) {
     catalog(text);
     assertEquals(1, value(text, HTTP, HTTP_LABELS));
-    assertEquals(3, value(text, POOL, Map.of("service", "WEB", "state", "active")));
-    assertEquals(1.0E-9, value(text, TIMER + "_sum", Map.of("service", "WEB", "route", "/login")));
+    assertEquals(
+        3, value(text, POOL, Map.of(SERVICE_LABEL, WEB_SERVICE, STATE_LABEL, ACTIVE_POOL_STATE)));
+    assertEquals(
+        1.0E-9, value(text, TIMER + "_sum", Map.of(SERVICE_LABEL, WEB_SERVICE, "route", "/login")));
     assertEquals(
         7, value(text, BYTES, Map.of("media_type", "AUDIO", "mode", "INLINE", "status", "200")));
   }
@@ -155,7 +164,10 @@ class WebMetricScrapeTest {
     var values = new AtomicInteger();
     var meter =
         new NoopGauge(
-            identity(POOL, Tags.of("service", "UNAPPROVED", "state", "active"), Meter.Type.GAUGE)) {
+            identity(
+                POOL,
+                Tags.of(SERVICE_LABEL, "UNAPPROVED", STATE_LABEL, ACTIVE_POOL_STATE),
+                Meter.Type.GAUGE)) {
           public double value() {
             values.incrementAndGet();
             throw new AssertionError("no detailed provider");
@@ -163,7 +175,7 @@ class WebMetricScrapeTest {
         };
     try (var source = new Registry(meter)) {
       source.reads.set(0);
-      assertEquals("", policy.scrape(source, "STANDARD"));
+      assertEquals("", policy.scrape(source, STANDARD_MODE));
       assertEquals(0, source.reads.get());
       assertEquals(0, values.get());
       assertFalse(source.isClosed());
@@ -173,7 +185,7 @@ class WebMetricScrapeTest {
   @Test
   void scrape002DebugRealInitialRegistryHasOnlySevenFamilies() {
     try (var b = new Bundle()) {
-      String result = b.text(policy, "DEBUG");
+      String result = b.text(policy, DEBUG_MODE);
       catalog(result);
       assertEquals(13, result.lines().filter(line -> line.endsWith("} NaN")).count());
       assertEquals(0, value(result, HTTP, HTTP_LABELS));
@@ -187,7 +199,7 @@ class WebMetricScrapeTest {
   void scrape003SuppliedRealRegistryUsesIndependentLiteralValues() {
     try (var b = new Bundle()) {
       b.supplied();
-      supplied(b.text(policy, "DEBUG"));
+      supplied(b.text(policy, DEBUG_MODE));
       assertFalse(b.registry.isClosed());
     }
   }
@@ -196,17 +208,17 @@ class WebMetricScrapeTest {
   void scrape004PureModeCallsDoNotResetOrCloseSource() {
     try (var b = new Bundle()) {
       b.supplied();
-      supplied(b.text(policy, "DEBUG"));
-      assertEquals("", b.text(policy, "STANDARD"));
+      supplied(b.text(policy, DEBUG_MODE));
+      assertEquals("", b.text(policy, STANDARD_MODE));
       assertFalse(b.registry.isClosed());
-      supplied(b.text(policy, "DEBUG"));
+      supplied(b.text(policy, DEBUG_MODE));
     }
   }
 
   @Test
   void scrape005EmptyCompatibleRegistryIsEmptyNotAnUnknownObservation() {
     try (var source = new OverflowSafeHttpMeterRegistry(new MockClock())) {
-      assertEquals("", policy.scrape(source, "DEBUG"));
+      assertEquals("", policy.scrape(source, DEBUG_MODE));
       assertFalse(source.isClosed());
     }
   }
@@ -216,7 +228,7 @@ class WebMetricScrapeTest {
     try (var source = new Registry()) {
       source.reads.set(0);
       var failure =
-          assertThrows(IllegalArgumentException.class, () -> policy.scrape(source, "DEBUG"));
+          assertThrows(IllegalArgumentException.class, () -> policy.scrape(source, DEBUG_MODE));
       assertEquals("CONFIG_INVALID", failure.getMessage());
       assertEquals(0, source.reads.get());
     }
@@ -224,7 +236,7 @@ class WebMetricScrapeTest {
 
   @Test
   void scrape007NullAndInvalidModesFailWithoutProviderReads() {
-    assertThrows(NullPointerException.class, () -> policy.scrape(null, "STANDARD"));
+    assertThrows(NullPointerException.class, () -> policy.scrape(null, STANDARD_MODE));
     try (var source = new Registry()) {
       source.reads.set(0);
       assertThrows(NullPointerException.class, () -> policy.scrape(source, null));
@@ -240,9 +252,9 @@ class WebMetricScrapeTest {
     try {
       source.close();
       source.reads.set(0);
-      assertEquals("", policy.scrape(source, "STANDARD"));
+      assertEquals("", policy.scrape(source, STANDARD_MODE));
       assertEquals(0, source.reads.get());
-      assertThrows(IllegalStateException.class, () -> policy.scrape(source, "DEBUG"));
+      assertThrows(IllegalStateException.class, () -> policy.scrape(source, DEBUG_MODE));
     } finally {
       source.close();
     }
@@ -259,7 +271,8 @@ class WebMetricScrapeTest {
         };
     try (var source = new Compatible(new NoopGauge(bad))) {
       assertSame(
-          failure, assertThrows(IllegalStateException.class, () -> policy.scrape(source, "DEBUG")));
+          failure,
+          assertThrows(IllegalStateException.class, () -> policy.scrape(source, DEBUG_MODE)));
       assertFalse(source.isClosed());
     }
     var fatal = new AssertionError("fixture");
@@ -270,7 +283,8 @@ class WebMetricScrapeTest {
           }
         };
     try (var source = new Compatible(new NoopGauge(broken))) {
-      assertSame(fatal, assertThrows(AssertionError.class, () -> policy.scrape(source, "DEBUG")));
+      assertSame(
+          fatal, assertThrows(AssertionError.class, () -> policy.scrape(source, DEBUG_MODE)));
       assertFalse(source.isClosed());
     }
   }
@@ -280,7 +294,10 @@ class WebMetricScrapeTest {
     var firstReads = new AtomicInteger();
     var first =
         new NoopGauge(
-            identity(POOL, Tags.of("service", "WEB", "state", "active"), Meter.Type.GAUGE)) {
+            identity(
+                POOL,
+                Tags.of(SERVICE_LABEL, WEB_SERVICE, STATE_LABEL, ACTIVE_POOL_STATE),
+                Meter.Type.GAUGE)) {
           public double value() {
             firstReads.incrementAndGet();
             return 3;
@@ -291,8 +308,8 @@ class WebMetricScrapeTest {
             identity(
                 HTTP,
                 Tags.of(
-                    "service",
-                    "WEB",
+                    SERVICE_LABEL,
+                    WEB_SERVICE,
                     "route",
                     "/unapproved/123",
                     "method",
@@ -304,7 +321,7 @@ class WebMetricScrapeTest {
     try (var source = new Compatible(first, later)) {
       assertThrows(
           IllegalArgumentException.class,
-          () -> returned.set(Optional.of(policy.scrape(source, "DEBUG"))));
+          () -> returned.set(Optional.of(policy.scrape(source, DEBUG_MODE))));
       assertEquals(1, firstReads.get());
       assertTrue(returned.get().isEmpty());
       assertFalse(source.isClosed());
@@ -323,7 +340,7 @@ class WebMetricScrapeTest {
           }
         };
     try (var source = new Compatible(unknown)) {
-      assertEquals("", policy.scrape(source, "DEBUG"));
+      assertEquals("", policy.scrape(source, DEBUG_MODE));
       assertEquals(0, values.get());
     }
   }
@@ -335,7 +352,7 @@ class WebMetricScrapeTest {
       b.supplied();
       var jobs = new ArrayList<Future<?>>();
       for (int index = 0; index < 64; index++)
-        jobs.add(workers.submit(() -> supplied(b.text(policy, "DEBUG"))));
+        jobs.add(workers.submit(() -> supplied(b.text(policy, DEBUG_MODE))));
       for (var job : jobs) job.get(10, TimeUnit.SECONDS);
       assertFalse(b.registry.isClosed());
     }
@@ -345,10 +362,13 @@ class WebMetricScrapeTest {
   void scrape013PoisonedApprovedLabelNeverFallsBackToGenericApi() {
     var bad =
         new NoopGauge(
-            identity(POOL, Tags.of("service", "API", "state", "active"), Meter.Type.GAUGE));
+            identity(
+                POOL,
+                Tags.of(SERVICE_LABEL, "API", STATE_LABEL, ACTIVE_POOL_STATE),
+                Meter.Type.GAUGE));
     try (var source = new Compatible(bad)) {
       var failure =
-          assertThrows(IllegalArgumentException.class, () -> policy.scrape(source, "DEBUG"));
+          assertThrows(IllegalArgumentException.class, () -> policy.scrape(source, DEBUG_MODE));
       assertEquals("invalid Web metric label", failure.getMessage());
     }
   }
@@ -357,12 +377,15 @@ class WebMetricScrapeTest {
   void scrape014SamePolicyDoesNotRetainPriorSourceOrPartialFailure() {
     var bad =
         new NoopGauge(
-            identity(POOL, Tags.of("service", "API", "state", "active"), Meter.Type.GAUGE));
+            identity(
+                POOL,
+                Tags.of(SERVICE_LABEL, "API", STATE_LABEL, ACTIVE_POOL_STATE),
+                Meter.Type.GAUGE));
     try (var broken = new Compatible(bad);
         var valid = new Bundle()) {
-      assertThrows(IllegalArgumentException.class, () -> policy.scrape(broken, "DEBUG"));
+      assertThrows(IllegalArgumentException.class, () -> policy.scrape(broken, DEBUG_MODE));
       valid.supplied();
-      supplied(valid.text(policy, "DEBUG"));
+      supplied(valid.text(policy, DEBUG_MODE));
       assertFalse(valid.registry.isClosed());
     }
   }

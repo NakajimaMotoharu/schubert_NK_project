@@ -37,6 +37,21 @@ import org.junit.jupiter.api.Test;
 
 /** APIPOL001..014/1773: literal domains and values, pure host memory, no business/IO authority. */
 class ApiMetricScrapeTest {
+  private static final int COUNTER_PROVIDER_KIND = 1;
+  private static final String DEBUG_MODE = "DEBUG";
+  private static final String LOGIN_LAYOUT = "LGNREQ01";
+  private static final String TYPE_LINE_PREFIX = "# TYPE ";
+  private static final String SERVICE_LABEL = "service";
+  private static final String API_SERVICE = "API";
+  private static final String STATE_LABEL = "state";
+  private static final String ACTIVE_POOL_STATE = "active";
+  private static final String LAYOUT_LABEL = "layout";
+  private static final String RESULT_LABEL = "result";
+  private static final String SUCCESS_RESULT = "0000";
+  private static final String QUERY_ID_LABEL = "query_id";
+  private static final String OUTCOME_LABEL = "outcome";
+  private static final String SUCCESS_OUTCOME = "SUCCESS";
+  private static final String STANDARD_MODE = "STANDARD";
   private static final String POOL = "nk_db_pool_connections";
   private static final String INBOX = "nk_inbox_replays_total";
   private static final String DB = "nk_db_query_duration_seconds";
@@ -72,28 +87,30 @@ class ApiMetricScrapeTest {
   private static final class Bundle implements AutoCloseable {
     final ExactDurationMeterRegistry registry =
         new ExactDurationMeterRegistry(SimpleConfig.DEFAULT, new MockClock());
-    final OutboxRowsMetricRecorder rows = new OutboxRowsMetricRecorder(registry, "DEBUG");
-    final OutboxAgeMetricRecorder age = new OutboxAgeMetricRecorder(registry, "DEBUG");
-    final AsyncJobMetricRecorder jobs = new AsyncJobMetricRecorder(registry, "DEBUG");
-    final DbPoolMetricRecorder pool = new DbPoolMetricRecorder(registry, "DEBUG");
-    final MqPressureMetricRecorder pressure = new MqPressureMetricRecorder(registry, "DEBUG");
-    final InboxReplayMetricRecorder inbox = new InboxReplayMetricRecorder(registry, "DEBUG");
+    final OutboxRowsMetricRecorder rows = new OutboxRowsMetricRecorder(registry, DEBUG_MODE);
+    final OutboxAgeMetricRecorder age = new OutboxAgeMetricRecorder(registry, DEBUG_MODE);
+    final AsyncJobMetricRecorder jobs = new AsyncJobMetricRecorder(registry, DEBUG_MODE);
+    final DbPoolMetricRecorder pool = new DbPoolMetricRecorder(registry, DEBUG_MODE);
+    final MqPressureMetricRecorder pressure = new MqPressureMetricRecorder(registry, DEBUG_MODE);
+    final InboxReplayMetricRecorder inbox = new InboxReplayMetricRecorder(registry, DEBUG_MODE);
     final OperationMismatchMetricRecorder operation =
-        new OperationMismatchMetricRecorder(registry, "DEBUG");
-    final MqRedeliveryMetricRecorder redelivery = new MqRedeliveryMetricRecorder(registry, "DEBUG");
+        new OperationMismatchMetricRecorder(registry, DEBUG_MODE);
+    final MqRedeliveryMetricRecorder redelivery =
+        new MqRedeliveryMetricRecorder(registry, DEBUG_MODE);
     final MqMessageMetricRecorder messages =
         new MqMessageMetricRecorder(
-            registry, "DEBUG", new LayoutId("WLGEVT01"), BrokerTopology.WEB_LOG);
-    final DbQueryDurationMetricRecorder db = new DbQueryDurationMetricRecorder(registry, "DEBUG");
+            registry, DEBUG_MODE, new LayoutId("WLGEVT01"), BrokerTopology.WEB_LOG);
+    final DbQueryDurationMetricRecorder db =
+        new DbQueryDurationMetricRecorder(registry, DEBUG_MODE);
     final MqProcessingDurationMetricRecorder mq =
-        new MqProcessingDurationMetricRecorder(registry, "DEBUG", new LayoutId("LGNREQ01"));
+        new MqProcessingDurationMetricRecorder(registry, DEBUG_MODE, new LayoutId(LOGIN_LAYOUT));
 
     void supplied() {
       rows.record(new OutboxRowsMetricRecorder.Counts(3, 5, 2));
       age.record(
           new OutboxAgeMetricRecorder.Ages(Duration.ofMillis(3500), Duration.ZERO, Duration.ZERO));
       pool.record(new DbPoolMetricRecorder.Counts(3, 5, 2, 8));
-      inbox.record(new LayoutId("LGNREQ01"), ResultCode.SUCCESS);
+      inbox.record(new LayoutId(LOGIN_LAYOUT), ResultCode.SUCCESS);
       db.record(
           DbQueryDurationMetricRecorder.Query.ASYNC_JOB_STATE_COUNTS,
           DbQueryDurationMetricRecorder.Outcome.SUCCESS,
@@ -133,19 +150,21 @@ class ApiMetricScrapeTest {
   }
 
   private static void catalog(String text) {
-    assertEquals(16, text.lines().filter(line -> line.startsWith("# TYPE ")).count());
+    assertEquals(16, text.lines().filter(line -> line.startsWith(TYPE_LINE_PREFIX)).count());
     assertEquals(
         10,
-        text.lines().filter(line -> line.startsWith("# TYPE ") && line.endsWith(" gauge")).count());
+        text.lines()
+            .filter(line -> line.startsWith(TYPE_LINE_PREFIX) && line.endsWith(" gauge"))
+            .count());
     assertEquals(
         4,
         text.lines()
-            .filter(line -> line.startsWith("# TYPE ") && line.endsWith(" counter"))
+            .filter(line -> line.startsWith(TYPE_LINE_PREFIX) && line.endsWith(" counter"))
             .count());
     assertEquals(
         2,
         text.lines()
-            .filter(line -> line.startsWith("# TYPE ") && line.endsWith(" histogram"))
+            .filter(line -> line.startsWith(TYPE_LINE_PREFIX) && line.endsWith(" histogram"))
             .count());
     assertEquals(900, text.lines().filter(line -> !line.startsWith("#")).count());
     assertFalse(text.contains("_total_total"));
@@ -154,13 +173,17 @@ class ApiMetricScrapeTest {
 
   private static void supplied(String text) {
     catalog(text);
-    assertEquals(3, value(text, POOL, Map.of("service", "API", "state", "active")));
-    assertEquals(1, value(text, INBOX, Map.of("layout", "LGNREQ01", "result", "0000")));
     assertEquals(
-        3.5, value(text, "nk_outbox_oldest_seconds", Map.of("store", "API", "status", "PENDING")));
-    var db = Map.of("query_id", "ASYNC_JOB_STATE_COUNTS", "outcome", "SUCCESS");
+        3, value(text, POOL, Map.of(SERVICE_LABEL, API_SERVICE, STATE_LABEL, ACTIVE_POOL_STATE)));
+    assertEquals(
+        1, value(text, INBOX, Map.of(LAYOUT_LABEL, LOGIN_LAYOUT, RESULT_LABEL, SUCCESS_RESULT)));
+    assertEquals(
+        3.5,
+        value(text, "nk_outbox_oldest_seconds", Map.of("store", API_SERVICE, "status", "PENDING")));
+    var db = Map.of(QUERY_ID_LABEL, "ASYNC_JOB_STATE_COUNTS", OUTCOME_LABEL, SUCCESS_OUTCOME);
     assertEquals(1e-9, value(text, DB + "_sum", db));
-    var mq = Map.of("flow", "SYNCHRONOUS", "layout", "LGNREQ01", "outcome", "SUCCESS");
+    var mq =
+        Map.of("flow", "SYNCHRONOUS", LAYOUT_LABEL, LOGIN_LAYOUT, OUTCOME_LABEL, SUCCESS_OUTCOME);
     assertEquals(1.5, value(text, MQD + "_sum", mq));
     for (String boundary : List.of("0.001", "0.01", "0.1", "1.0")) {
       assertEquals(
@@ -171,10 +194,10 @@ class ApiMetricScrapeTest {
               Map.of(
                   "flow",
                   "SYNCHRONOUS",
-                  "layout",
-                  "LGNREQ01",
-                  "outcome",
-                  "SUCCESS",
+                  LAYOUT_LABEL,
+                  LOGIN_LAYOUT,
+                  OUTCOME_LABEL,
+                  SUCCESS_OUTCOME,
                   "le",
                   boundary)));
     }
@@ -187,10 +210,10 @@ class ApiMetricScrapeTest {
               Map.of(
                   "flow",
                   "SYNCHRONOUS",
-                  "layout",
-                  "LGNREQ01",
-                  "outcome",
-                  "SUCCESS",
+                  LAYOUT_LABEL,
+                  LOGIN_LAYOUT,
+                  OUTCOME_LABEL,
+                  SUCCESS_OUTCOME,
                   "le",
                   boundary)));
     }
@@ -201,7 +224,10 @@ class ApiMetricScrapeTest {
     var values = new AtomicInteger();
     var meter =
         new NoopGauge(
-            id(POOL, Tags.of("service", "INVALID", "state", "active"), Meter.Type.GAUGE)) {
+            id(
+                POOL,
+                Tags.of(SERVICE_LABEL, "INVALID", STATE_LABEL, ACTIVE_POOL_STATE),
+                Meter.Type.GAUGE)) {
           public double value() {
             values.incrementAndGet();
             throw new AssertionError("not read");
@@ -209,7 +235,7 @@ class ApiMetricScrapeTest {
         };
     try (var source = new Registry(meter)) {
       source.reads.set(0);
-      assertEquals("", policy.scrape(source, "STANDARD"));
+      assertEquals("", policy.scrape(source, STANDARD_MODE));
       assertEquals(0, source.reads.get());
       assertEquals(0, values.get());
       assertFalse(source.isClosed());
@@ -219,10 +245,12 @@ class ApiMetricScrapeTest {
   @Test
   void apipol002RealInitialSixteenFamiliesAndNineHundredSamples() {
     try (var b = new Bundle()) {
-      String result = b.text(policy, "DEBUG");
+      String result = b.text(policy, DEBUG_MODE);
       catalog(result);
       assertEquals(51, result.lines().filter(line -> line.endsWith("} NaN")).count());
-      assertEquals(0, value(result, INBOX, Map.of("layout", "LGNREQ01", "result", "0000")));
+      assertEquals(
+          0,
+          value(result, INBOX, Map.of(LAYOUT_LABEL, LOGIN_LAYOUT, RESULT_LABEL, SUCCESS_RESULT)));
       assertFalse(b.registry.isClosed());
     }
   }
@@ -231,7 +259,7 @@ class ApiMetricScrapeTest {
   void apipol003IndependentSuppliedValuesAndCumulativeBoundary() {
     try (var b = new Bundle()) {
       b.supplied();
-      supplied(b.text(policy, "DEBUG"));
+      supplied(b.text(policy, DEBUG_MODE));
       assertFalse(b.registry.isClosed());
     }
   }
@@ -240,16 +268,16 @@ class ApiMetricScrapeTest {
   void apipol004PureModeSwitchDoesNotResetOrClose() {
     try (var b = new Bundle()) {
       b.supplied();
-      supplied(b.text(policy, "DEBUG"));
-      assertEquals("", b.text(policy, "STANDARD"));
-      supplied(b.text(policy, "DEBUG"));
+      supplied(b.text(policy, DEBUG_MODE));
+      assertEquals("", b.text(policy, STANDARD_MODE));
+      supplied(b.text(policy, DEBUG_MODE));
     }
   }
 
   @Test
   void apipol005EmptyCompatibleRegistryDoesNotFabricateUnknown() {
     try (var source = new ExactDurationMeterRegistry(SimpleConfig.DEFAULT, new MockClock())) {
-      assertEquals("", policy.scrape(source, "DEBUG"));
+      assertEquals("", policy.scrape(source, DEBUG_MODE));
       assertFalse(source.isClosed());
     }
   }
@@ -260,7 +288,7 @@ class ApiMetricScrapeTest {
       source.reads.set(0);
       assertEquals(
           "CONFIG_INVALID",
-          assertThrows(IllegalArgumentException.class, () -> policy.scrape(source, "DEBUG"))
+          assertThrows(IllegalArgumentException.class, () -> policy.scrape(source, DEBUG_MODE))
               .getMessage());
       assertEquals(0, source.reads.get());
     }
@@ -268,7 +296,7 @@ class ApiMetricScrapeTest {
 
   @Test
   void apipol007NullAndUnknownModesNeverReadSource() {
-    assertThrows(NullPointerException.class, () -> policy.scrape(null, "STANDARD"));
+    assertThrows(NullPointerException.class, () -> policy.scrape(null, STANDARD_MODE));
     try (var source = new Registry()) {
       source.reads.set(0);
       assertThrows(NullPointerException.class, () -> policy.scrape(source, null));
@@ -286,9 +314,9 @@ class ApiMetricScrapeTest {
     var source = new Compatible();
     source.close();
     source.reads.set(0);
-    assertEquals("", policy.scrape(source, "STANDARD"));
+    assertEquals("", policy.scrape(source, STANDARD_MODE));
     assertEquals(0, source.reads.get());
-    assertThrows(IllegalStateException.class, () -> policy.scrape(source, "DEBUG"));
+    assertThrows(IllegalStateException.class, () -> policy.scrape(source, DEBUG_MODE));
     assertTrue(source.isClosed());
   }
 
@@ -303,7 +331,8 @@ class ApiMetricScrapeTest {
         };
     try (var source = new Compatible(new NoopGauge(broken))) {
       assertSame(
-          failure, assertThrows(IllegalStateException.class, () -> policy.scrape(source, "DEBUG")));
+          failure,
+          assertThrows(IllegalStateException.class, () -> policy.scrape(source, DEBUG_MODE)));
       assertFalse(source.isClosed());
     }
     var fatal = new AssertionError("fixture");
@@ -314,7 +343,8 @@ class ApiMetricScrapeTest {
           }
         };
     try (var source = new Compatible(new NoopGauge(bad))) {
-      assertSame(fatal, assertThrows(AssertionError.class, () -> policy.scrape(source, "DEBUG")));
+      assertSame(
+          fatal, assertThrows(AssertionError.class, () -> policy.scrape(source, DEBUG_MODE)));
       assertFalse(source.isClosed());
     }
   }
@@ -323,7 +353,11 @@ class ApiMetricScrapeTest {
   void apipol010LaterFailureNeverReturnsPartialText() {
     var reads = new AtomicInteger();
     var first =
-        new NoopGauge(id(POOL, Tags.of("service", "API", "state", "active"), Meter.Type.GAUGE)) {
+        new NoopGauge(
+            id(
+                POOL,
+                Tags.of(SERVICE_LABEL, API_SERVICE, STATE_LABEL, ACTIVE_POOL_STATE),
+                Meter.Type.GAUGE)) {
           public double value() {
             reads.incrementAndGet();
             return 3;
@@ -331,12 +365,15 @@ class ApiMetricScrapeTest {
         };
     var later =
         new NoopCounter(
-            id(INBOX, Tags.of("layout", "UNAPPROVED", "result", "0000"), Meter.Type.COUNTER));
+            id(
+                INBOX,
+                Tags.of(LAYOUT_LABEL, "UNAPPROVED", RESULT_LABEL, SUCCESS_RESULT),
+                Meter.Type.COUNTER));
     var returned = new AtomicReference<Optional<String>>(Optional.empty());
     try (var source = new Compatible(first, later)) {
       assertThrows(
           IllegalArgumentException.class,
-          () -> returned.set(Optional.of(policy.scrape(source, "DEBUG"))));
+          () -> returned.set(Optional.of(policy.scrape(source, DEBUG_MODE))));
       assertEquals(1, reads.get());
       assertTrue(returned.get().isEmpty());
       assertFalse(source.isClosed());
@@ -354,7 +391,7 @@ class ApiMetricScrapeTest {
           }
         };
     try (var source = new Compatible(unknown)) {
-      assertEquals("", policy.scrape(source, "DEBUG"));
+      assertEquals("", policy.scrape(source, DEBUG_MODE));
       assertEquals(0, reads.get());
     }
   }
@@ -366,7 +403,7 @@ class ApiMetricScrapeTest {
       b.supplied();
       var jobs = new ArrayList<Future<?>>();
       for (int i = 0; i < 64; i++)
-        jobs.add(workers.submit(() -> supplied(b.text(policy, "DEBUG"))));
+        jobs.add(workers.submit(() -> supplied(b.text(policy, DEBUG_MODE))));
       for (var job : jobs) assertDoesNotThrow(() -> job.get(10, TimeUnit.SECONDS));
       assertFalse(b.registry.isClosed());
     }
@@ -375,34 +412,44 @@ class ApiMetricScrapeTest {
   @Test
   void apipol013AllThreeCodecsRejectPoisonedLabelsAndPolicyRecovers() {
     var gauge =
-        new NoopGauge(id(POOL, Tags.of("service", "WEB", "state", "active"), Meter.Type.GAUGE));
+        new NoopGauge(
+            id(
+                POOL,
+                Tags.of(SERVICE_LABEL, "WEB", STATE_LABEL, ACTIVE_POOL_STATE),
+                Meter.Type.GAUGE));
     var counter =
         new NoopCounter(
-            id(INBOX, Tags.of("layout", "LGNREQ01", "result", "9999"), Meter.Type.COUNTER));
+            id(
+                INBOX,
+                Tags.of(LAYOUT_LABEL, LOGIN_LAYOUT, RESULT_LABEL, "9999"),
+                Meter.Type.COUNTER));
     var summary =
         new NoopDistributionSummary(
             id(
                 DB,
-                Tags.of("query_id", "RAW SQL", "outcome", "SUCCESS"),
+                Tags.of(QUERY_ID_LABEL, "RAW SQL", OUTCOME_LABEL, SUCCESS_OUTCOME),
                 Meter.Type.DISTRIBUTION_SUMMARY));
     for (Meter bad : List.of(gauge, counter, summary)) {
       try (var source = new Compatible(bad)) {
         assertEquals(
             "invalid API metric label",
-            assertThrows(IllegalArgumentException.class, () -> policy.scrape(source, "DEBUG"))
+            assertThrows(IllegalArgumentException.class, () -> policy.scrape(source, DEBUG_MODE))
                 .getMessage());
       }
     }
     try (var first = new Bundle();
         var other = new Bundle()) {
       first.supplied();
-      supplied(first.text(policy, "DEBUG"));
+      supplied(first.text(policy, DEBUG_MODE));
       assertEquals(
           0,
           value(
-              other.text(policy, "DEBUG"), INBOX, Map.of("layout", "LGNREQ01", "result", "0000")));
+              other.text(policy, DEBUG_MODE),
+              INBOX,
+              Map.of(LAYOUT_LABEL, LOGIN_LAYOUT, RESULT_LABEL, SUCCESS_RESULT)));
       assertEquals(
-          51, other.text(policy, "DEBUG").lines().filter(line -> line.endsWith("} NaN")).count());
+          51,
+          other.text(policy, DEBUG_MODE).lines().filter(line -> line.endsWith("} NaN")).count());
       assertFalse(first.registry.isClosed());
       assertFalse(other.registry.isClosed());
     }
@@ -416,12 +463,14 @@ class ApiMetricScrapeTest {
       var tags =
           new ArrayList<Tag>(
               kind == 0
-                  ? List.of(Tag.of("service", "API"), Tag.of("state", "active"))
+                  ? List.of(
+                      Tag.of(SERVICE_LABEL, API_SERVICE), Tag.of(STATE_LABEL, ACTIVE_POOL_STATE))
                   : kind == 1
-                      ? List.of(Tag.of("layout", "LGNREQ01"), Tag.of("result", "0000"))
+                      ? List.of(
+                          Tag.of(LAYOUT_LABEL, LOGIN_LAYOUT), Tag.of(RESULT_LABEL, SUCCESS_RESULT))
                       : List.of(
-                          Tag.of("query_id", "ASYNC_JOB_STATE_COUNTS"),
-                          Tag.of("outcome", "SUCCESS")));
+                          Tag.of(QUERY_ID_LABEL, "ASYNC_JOB_STATE_COUNTS"),
+                          Tag.of(OUTCOME_LABEL, SUCCESS_OUTCOME)));
       var nameReads = new AtomicInteger();
       var tagReads = new AtomicInteger();
       var valueReads = new AtomicInteger();
@@ -458,7 +507,7 @@ class ApiMetricScrapeTest {
                 return 3;
               }
             };
-      else if (kind == 1)
+      else if (kind == COUNTER_PROVIDER_KIND)
         meter =
             new NoopCounter(identity) {
               public double count() {
@@ -487,23 +536,32 @@ class ApiMetricScrapeTest {
                 : selected == 1
                     ? new ApiScalarMetricExporter().scrapeApprovedCounters(source)
                     : new ApiDurationMetricExporter().scrapeApproved(source);
-        assertTrue(result.contains("# TYPE " + name + " "));
+        assertTrue(result.contains(TYPE_LINE_PREFIX + name + " "));
         assertFalse(result.contains("UNAPPROVED"));
         assertFalse(result.contains("nk_unknown_after_capture"));
         assertEquals(1, nameReads.get());
         assertEquals(1, tagReads.get());
         assertEquals(1, valueReads.get());
         if (kind == 0)
-          assertEquals(3, value(result, POOL, Map.of("service", "API", "state", "active")));
-        else if (kind == 1)
-          assertEquals(2, value(result, INBOX, Map.of("layout", "LGNREQ01", "result", "0000")));
+          assertEquals(
+              3,
+              value(
+                  result,
+                  POOL,
+                  Map.of(SERVICE_LABEL, API_SERVICE, STATE_LABEL, ACTIVE_POOL_STATE)));
+        else if (kind == COUNTER_PROVIDER_KIND)
+          assertEquals(
+              2,
+              value(
+                  result, INBOX, Map.of(LAYOUT_LABEL, LOGIN_LAYOUT, RESULT_LABEL, SUCCESS_RESULT)));
         else
           assertEquals(
               .1,
               value(
                   result,
                   DB + "_sum",
-                  Map.of("query_id", "ASYNC_JOB_STATE_COUNTS", "outcome", "SUCCESS")));
+                  Map.of(
+                      QUERY_ID_LABEL, "ASYNC_JOB_STATE_COUNTS", OUTCOME_LABEL, SUCCESS_OUTCOME)));
         assertFalse(source.isClosed());
       }
     }
