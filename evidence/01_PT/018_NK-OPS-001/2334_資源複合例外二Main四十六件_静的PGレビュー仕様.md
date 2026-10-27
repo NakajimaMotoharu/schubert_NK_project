@@ -1,0 +1,13 @@
+# 資源複合例外・二Main四十六件 静的PGレビュー仕様
+
+2026-10-28/PG-D741、source1be156b6ebb139713db31a561b8b024972975471、saved2cbfedc1/push37547真正0。WBS-F03主担当、元owner/cost ResourceScope=P00308/ProcessResourceScope=P01804はlogical941/trace_owner_joinで保持・副参照追加費0。着手前0.5/2/4pp cap10/fresh63残37/reset1793599188、N/T専有費null。正式1964PT/53scope・17/190・工数null/QA051final/各HOLDは不変。
+
+対象はStorage.ResourceScopeのgeneric八/instanceof十=18とBatch.ProcessResourceScopeのgeneric八/instanceof二十=28、計46の現在未参照原ID。対象Main全文131/86行と補助StorageIoException/Reason・StopGateException・StopGateFailureを全文確認した。SS333 SSC063/308（origin/main8b91944df）で明示したcompound precedenceのため型捕捉・判別が必要であり、TWRや単純catchの削除へ機械置換しない。原指摘は保持し全体適用性判断待ち、解析抑制/新raw是正/新実装コードは0。
+
+Storageはcallbackの既知IOにunknown Runtime/Error closeが重なるとunknownを同一objectで優先、それ以外はprimary identityを保ち固定path-free StorageIoException secondaryを一件追加する。outer IOだけ既Reason（suppressed無し）又はUNAVAILABLEに正規化し、unknownを正常化しない。acquireは全port非null検証後にfactory、未取得/nullではrelease0、受領後は同一resourceだけ解放し成功もrelease完了後に返す。handoffもこの規則を利用する。ProcessはIO/Interrupted/既知StopGateとunknownを区別し、既知primary＋unknown cleanupでcleanupを優先、割込primaryはflag再設定、その他は元primary＋固定COMMAND_FAILURE secondary。useは内部の信頼済みcallback契約であり、本レビューから全null境界や実OS解放の証明を捏造しない。
+
+12432は原10690全属性/完全path/ID/source-span・同正常snapshot sourceSHA・method block・明示制御と型位置を各rowへ束縛する。12434は別method解析とcatch領域解析、各理由/owner/件数/no-credit反例を照合する。46一意IDからsourceContexts/rawRetainedを算出し、両sourceの原raw48（別Thread二は本群外）と区別する。新PMD再発行無しのためwholeStaticScopeRawは未測定null。全source/normal未変更・原8追加指摘と全過去是正を保持して集合・traceへ反映し、検索だけで全F03完了とはしない。
+
+静的文書レビューのみ。新code/Test/build/PMD/JVM/Production method・file/native/process/Unit/Root/DB/Backup/鍵/VM操作0、保留工具二は内容未読/対象外。既ResourceScope 1970の27実PTとProcess1228の28静的理由はそれぞれ元sourceの歴史証拠として保持し、現sourceのPT/coverage資格に転用しない。ReceiptReference20はSQL/graph依存が別で対象外、旧3820はremote操作を含むため実行しない。QA053元通知消失を問直さずHOLD不明範囲は維持する。
+
+期待値はSS333 literal規則と元sourceの独立制御読取、metadataは一意ID/byte offset/lengthと別enclosing parser、runtime oracleは使用しない。commandはchecked Python entry、OS/時刻/branch/commit/実argv・source/input/期待/結果・hashはmanifestへ。新dynamicPTはNOT_EXECUTED、PT_ALT/coverage/正式受入加算0。通常レビュー/保存/PMO待ちでは停止せず独立PG/PTを継続する。
