@@ -138,8 +138,12 @@ class ScenarioRecordStreamTest {
     var closed =
         FileChannel.open(
             root.resolve("closed"), StandardOpenOption.CREATE_NEW, StandardOpenOption.WRITE);
-    closed.close();
-    reject(() -> prepared.write(closed));
+    try {
+      closed.close();
+      reject(() -> prepared.write(closed));
+    } finally {
+      closed.close();
+    }
     try (var channel =
         FileChannel.open(
             root.resolve("nonfresh"), StandardOpenOption.CREATE_NEW, StandardOpenOption.WRITE)) {
@@ -207,6 +211,11 @@ class ScenarioRecordStreamTest {
   }
 
   private static final class FaultChannel extends FileChannel {
+    private static final int ZERO_WRITE_MODE = 1;
+    private static final int NEGATIVE_WRITE_MODE = 2;
+    private static final int IO_FAILURE_MODE = 3;
+    private static final int FORCE_FAILURE_MODE = 4;
+
     final FileChannel actual;
     final int mode;
     boolean forced;
@@ -222,9 +231,9 @@ class ScenarioRecordStreamTest {
     public int write(ByteBuffer buffer) throws IOException {
       writes++;
       maximumBuffer = Math.max(maximumBuffer, buffer.remaining());
-      if (mode == 1) return 0;
-      if (mode == 2) return -1;
-      if (mode == 3) throw new IOException("SYNTHETIC_PRIVATE_PATH");
+      if (mode == ZERO_WRITE_MODE) return 0;
+      if (mode == NEGATIVE_WRITE_MODE) return -1;
+      if (mode == IO_FAILURE_MODE) throw new IOException("SYNTHETIC_PRIVATE_PATH");
       int limit = buffer.limit();
       buffer.limit(buffer.position() + Math.min(7, buffer.remaining()));
       try {
@@ -239,7 +248,7 @@ class ScenarioRecordStreamTest {
       assertTrue(metadata);
       assertEquals(4800, actual.size());
       forced = true;
-      if (mode == 4) throw new IOException("SYNTHETIC_PRIVATE_PATH");
+      if (mode == FORCE_FAILURE_MODE) throw new IOException("SYNTHETIC_PRIVATE_PATH");
       actual.force(metadata);
     }
 
