@@ -12,6 +12,7 @@ import dev.codex.schubert.nk.protocol.header.AuthenticationContext;
 import dev.codex.schubert.nk.protocol.header.ResultCode;
 import dev.codex.schubert.nk.protocol.layout.LayoutId;
 import dev.codex.schubert.nk.protocol.layout.PayloadData;
+import dev.codex.schubert.nk.protocol.layout.PayloadRecord;
 import dev.codex.schubert.nk.protocol.layout.TypedPayloadValues;
 import dev.codex.schubert.nk.protocol.layout.admin.PasswordResetRequestData;
 import dev.codex.schubert.nk.protocol.layout.admin.UserCreateRequestData;
@@ -23,6 +24,7 @@ import dev.codex.schubert.nk.protocol.layout.admin.UserStatusRequestData;
 import dev.codex.schubert.nk.protocol.layout.admin.UserUnlockRequestData;
 import dev.codex.schubert.nk.protocol.layout.auth.LogoutRequestData;
 import dev.codex.schubert.nk.protocol.layout.auth.LogoutResponseData;
+import dev.codex.schubert.nk.protocol.layout.common.PagedResponseData;
 import dev.codex.schubert.nk.protocol.layout.media.AudioDescriptorRequestData;
 import dev.codex.schubert.nk.protocol.layout.media.MusicDescriptorRequestData;
 import dev.codex.schubert.nk.protocol.layout.media.VideoDescriptorRequestData;
@@ -36,6 +38,8 @@ import dev.codex.schubert.nk.protocol.layout.question.QuestionDetailRequestData;
 import dev.codex.schubert.nk.protocol.layout.question.QuestionSearchRequestData;
 import dev.codex.schubert.nk.protocol.layout.question.QuestionSubmitRequestData;
 import dev.codex.schubert.nk.protocol.layout.question.QuestionSubmitResponseData;
+import dev.codex.schubert.nk.protocol.layout.question.QuestionSummaryRecord;
+import dev.codex.schubert.nk.protocol.layout.semantic.AnswerState;
 import dev.codex.schubert.nk.protocol.layout.semantic.AudioId;
 import dev.codex.schubert.nk.protocol.layout.semantic.ContentDisposition;
 import dev.codex.schubert.nk.protocol.layout.semantic.NotificationId;
@@ -45,6 +49,7 @@ import dev.codex.schubert.nk.protocol.layout.semantic.UserId;
 import dev.codex.schubert.nk.protocol.layout.semantic.UserRole;
 import jakarta.jms.JMSException;
 import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
 import java.time.Clock;
 import java.time.Duration;
 import java.time.Instant;
@@ -52,6 +57,7 @@ import java.time.ZoneOffset;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.HexFormat;
 import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
@@ -381,6 +387,147 @@ class WebBusinessWireClientsTest {
     assertEquals(180, seen.size());
     assertEquals(0, wire.pendingCount());
     sent.forEach(b -> assertArrayEquals(new byte[b.length], b));
+  }
+
+  @Test
+  void wire009QuestionPageRecordsUseIndependentUiVectorsAndPreserveOrder() throws Exception {
+    // Independently calculated from UI234/236 byte tables in PG12012, not a Main encoder.
+    var golden =
+        java.util.Map.of(
+            1, "ad12670840c01563abfa5a3f7bd0236b7a842bd01ecfd996823fbb9dfe81915b",
+            2, "902a963771b805fd8bafe5ffb4dd4e27dc1f83ef35e19cf0129cf18a45699678",
+            50, "73036d0a7f7d78228c414fa889d36d8cc1960167446e2bc4ff2804371d7c3687");
+    for (int count : new int[] {1, 2, 50}) {
+      var f = new Fixture();
+      byte[] provider = questionPageVector(count);
+      assertEquals(
+          golden.get(count),
+          HexFormat.of().formatHex(MessageDigest.getInstance("SHA-256").digest(provider)));
+      byte[] original = provider.clone();
+      f.reply =
+          (id, body) -> {
+            assertArrayEquals(request(QSS_TYPE, id, CONTEXT.wireValue()), body);
+            return provider;
+          };
+      var result = f.facade(0).apply(input(QSS_TYPE), CONTEXT);
+      assertEquals(ResultCode.SUCCESS, result.resultCode());
+      var payload = result.payload().orElseThrow();
+      var page = (PagedResponseData) payload.data();
+      assertEquals(1, page.effectivePage());
+      assertEquals(50, page.pageSize());
+      assertEquals(count, page.totalCount());
+      assertEquals(1, page.totalPages());
+      assertEquals(1, page.firstResult());
+      assertEquals(count, page.lastResult());
+      assertEquals(count, payload.records().size());
+      assertArrayEquals(original, provider);
+      Arrays.fill(provider, (byte) 9);
+      for (int index = 0; index < count; index++) {
+        var record = (QuestionSummaryRecord) payload.records().get(index);
+        assertEquals(100 - index, record.questionId().value());
+        assertEquals(String.format(Locale.ROOT, "%026d", index + 1), record.receiptId());
+        assertEquals("record-user-" + index, record.username());
+        assertEquals("質問é record-" + index, record.questionSummary());
+        AnswerState expectedState =
+            switch (index % 3) {
+              case 0 -> AnswerState.ANSWERED;
+              case 1 -> AnswerState.UNANSWERED;
+              default -> AnswerState.ERROR;
+            };
+        assertEquals(expectedState, record.answerState());
+        assertEquals(Instant.parse(EXPECTED_INSTANT_TEXT), record.submittedAt());
+        assertEquals(
+            expectedState == AnswerState.ANSWERED
+                ? Optional.of(Instant.parse("2026-10-02T19:00:01.123Z"))
+                : Optional.empty(),
+            record.answeredAt());
+      }
+      assertThrows(UnsupportedOperationException.class, () -> payload.records().clear());
+      assertEquals(1, f.sent.size());
+      f.erased();
+    }
+  }
+
+  @Test
+  void wire010RequestRecordsAreRejectedBeforeEncodingOrSending() {
+    var f = new Fixture();
+    PayloadRecord forbidden =
+        () -> {
+          throw new AssertionError("request record must be rejected before encoding");
+        };
+    var normal = input(QSS_TYPE);
+    var invalid = new TypedPayloadValues(normal.layoutId(), normal.data(), List.of(forbidden));
+    rejected(
+        ProtectedReadWireException.Reason.INVALID_INPUT, () -> f.facade(0).apply(invalid, CONTEXT));
+    assertTrue(f.sent.isEmpty());
+    f.erased();
+  }
+
+  @Test
+  void wire011ResponseShapeMismatchNeverBecomesAQuestionPage() {
+    byte[] valid = questionPageVector(1);
+    for (byte[] invalid :
+        List.of(
+            new byte[303],
+            new byte[33_905],
+            response(QSB_TYPE, SUCCESS_RESULT_CODE, ID, CONTEXT.wireValue()),
+            Arrays.copyOf(valid, valid.length + 1))) {
+      var f = new Fixture();
+      f.reply = (id, body) -> invalid;
+      rejected(
+          ProtectedReadWireException.Reason.INVALID_RESPONSE,
+          () -> f.facade(0).apply(input(QSS_TYPE), CONTEXT));
+      assertEquals(1, f.sent.size());
+      f.erased();
+    }
+  }
+
+  @Test
+  void wire012MalformedQuestionRecordsAreRejectedWithoutRetry() {
+    for (Consumer<byte[]> mutation :
+        List.<Consumer<byte[]>>of(
+            body -> number(body, 304, 12, 0),
+            body -> put(body, 918, 12, "UNKNOWN"),
+            body -> put(body, 947, 17, ""),
+            body -> body[964] = 'x')) {
+      var f = new Fixture();
+      byte[] provider = questionPageVector(1);
+      mutation.accept(provider);
+      f.reply = (id, body) -> provider;
+      rejected(
+          ProtectedReadWireException.Reason.INVALID_RESPONSE,
+          () -> f.facade(0).apply(input(QSS_TYPE), CONTEXT));
+      assertEquals(1, f.sent.size());
+      f.erased();
+    }
+  }
+
+  // UI234 PAGED48 and UI236 section 11.3: independent absolute offsets, no Main encoder/catalog.
+  private static byte[] questionPageVector(int count) {
+    byte[] bytes =
+        Arrays.copyOf(
+            header(QSS_TYPE, false, SUCCESS_RESULT_CODE, ID, CONTEXT.wireValue()),
+            304 + 672 * count);
+    Arrays.fill(bytes, 304, bytes.length, (byte) ' ');
+    number(bytes, 193, 6, count);
+    number(bytes, 199, 9, bytes.length);
+    number(bytes, 256, 6, 1);
+    number(bytes, 262, 3, 50);
+    number(bytes, 265, 9, count);
+    number(bytes, 274, 6, 1);
+    number(bytes, 280, 9, 1);
+    number(bytes, 289, 9, count);
+    for (int index = 0; index < count; index++) {
+      int start = 304 + 672 * index;
+      number(bytes, start, 12, 100 - index);
+      put(bytes, start + 12, 26, String.format(Locale.ROOT, "%026d", index + 1));
+      put(bytes, start + 38, 64, "record-user-" + index);
+      put(bytes, start + 102, 512, "質問é record-" + index);
+      put(bytes, start + 614, 12, List.of("ANSWERED", "UNANSWERED", "ERROR").get(index % 3));
+      put(bytes, start + 626, 17, WIRE_TIMESTAMP_TEXT);
+      put(bytes, start + 643, 17, index % 3 == 0 ? "20261003040001123" : "");
+    }
+    return bytes;
   }
 
   private static int index(String type) {
