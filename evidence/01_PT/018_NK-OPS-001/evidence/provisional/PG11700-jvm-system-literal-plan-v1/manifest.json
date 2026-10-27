@@ -1,0 +1,205 @@
+{
+  "actualExit": 0,
+  "allMainAndOtherInputsPreserved": true,
+  "comparisonReferences": 4,
+  "coverage": null,
+  "effortPercent": null,
+  "externalActions": 0,
+  "invocation": {
+    "actualPythonCommand": [
+      "/usr/bin/python3",
+      "-B",
+      "tools/quality/pg11700_jvm_system_literal_plan.py"
+    ],
+    "arbitraryArgumentsRecorded": false,
+    "entrypointPath": "tools/quality/pg11700_jvm_system_literal_plan.py",
+    "entrypointSha256": "7bc9bb98d0562a8a309142398959de012407166d025f0b25615120e20ff3281d",
+    "helperPath": "tools/quality/host_tool_invocation.py",
+    "helperSha256": "85d616a3db4ff47f4c95ae2e0dd57954bc2b09f28b8f2a685b986e5621545c46",
+    "libraryPath": "tools/quality/pg11700_jvm_system_literal_plan.py",
+    "librarySha256": "7bc9bb98d0562a8a309142398959de012407166d025f0b25615120e20ff3281d",
+    "loadedProjectPythonSources": {
+      "tools/quality/classfile_code_metadata.py": "2227e1e8df1ff91b606f094c7ee64366023273ca740d4d47126ed0928190e2f0",
+      "tools/quality/g07_host_class_provenance_inputs.py": "a676cb3e4145177c3c243722d737592ce7d44c3f29cfe4f670662ef7651f046b",
+      "tools/quality/host_tool_invocation.py": "85d616a3db4ff47f4c95ae2e0dd57954bc2b09f28b8f2a685b986e5621545c46",
+      "tools/quality/pg10130_uid_oracle_preflight.py": "e80cb1d6d45d4e4c0cdb3cb792e0638119d936403de5c3e141429d338485758a",
+      "tools/quality/pg10332_result_profile_oracle_plan.py": "82c9b4f57dd517c1dbee639dbf4955c316beb89216cb9a8a66e78e0b9a322ad4",
+      "tools/quality/pg10339_result_profile_oracle_post_v2.py": "42f86287f5236d2ef1a2e10f54f5b0634e799a4e866b15eaf6738336a4ebabb0",
+      "tools/quality/pg10392_role_literal_plan.py": "e1af98abd59175d867d29b07a73d7b2e4c7112754603d1805ec0bfc4d9465ce8",
+      "tools/quality/pg10398_role_view_preflight.py": "31709d50a345f3e0843fa62ae0b4c6849885503eb3d81555b6bcc9605b486d56",
+      "tools/quality/pg10840_web_view_duplicate_plan.py": "f4ea4a6f7d59ed872cc7c3dbd07e8d48c45c59f67c339d82d6ff4f2eef0a9a46",
+      "tools/quality/pg11700_jvm_system_literal_plan.py": "7bc9bb98d0562a8a309142398959de012407166d025f0b25615120e20ff3281d",
+      "tools/quality/pg9906_user_query_oracle_source_post.py": "4f9bdaa17eea78a720c0f25b8af906f3f045fda590c8fea2a8868229403a98fa",
+      "tools/quality/pg9978_plain_core_quality_post.py": "c99cc753c6335c9f41e3eafe6a97c17521503739ba2cf80659b542a445dd48fa",
+      "tools/quality/public_java_digest_provenance.py": "dd47f8735a61ce849995633c3290a6ad047842ef3263829ce359db413778f7a0"
+    },
+    "provenance": "OBSERVED_SYS_ARGV_AND_ORIG_ARGV_NOT_RECONSTRUCTED"
+  },
+  "newAccepted": 0,
+  "orderConstants": 4,
+  "originalMethods": 56,
+  "productTestsExecuted": 0,
+  "sourceBefore": "5a16139a752e2404cd6c26504760f4568ac413fd",
+  "sourceChanges": [
+    {
+      "beforeSha256": "5fda79be3385ed12bdc85657fc7e7026d6fa17dffa959a377f86a9871b9def3a",
+      "constants": [
+        {
+          "id": "PMD-01872",
+          "kind": "STRING",
+          "literal": "\"DEBUG\"",
+          "name": "DEBUG_MODE",
+          "references": 14
+        },
+        {
+          "id": "PMD-01873",
+          "kind": "STRING",
+          "literal": "\"STANDARD\"",
+          "name": "STANDARD_MODE",
+          "references": 5
+        },
+        {
+          "id": "PMD-01874",
+          "kind": "ORDER_INT",
+          "literal": "1",
+          "name": "FIRST_BINDER_ORDER",
+          "point": 4651,
+          "references": 1
+        },
+        {
+          "id": "PMD-01876",
+          "kind": "STRING",
+          "literal": "\"fixture\"",
+          "name": "FAILURE_FIXTURE",
+          "references": 4
+        }
+      ],
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiJvmMetricsTest.java",
+      "sha256": "2d0628db44d6548b7f7b693cec4e14ae18d1a63daad4e374446e64ad89253b01"
+    },
+    {
+      "beforeSha256": "62073b002c8f5ccf3b49eb548b2e25a6d96d82877440435de8edd8b59aee0f32",
+      "constants": [
+        {
+          "id": "PMD-02079",
+          "kind": "STRING",
+          "literal": "\"process.cpu.time\"",
+          "name": "PROCESS_CPU_TIME",
+          "references": 4
+        },
+        {
+          "id": "PMD-02080",
+          "kind": "STRING",
+          "literal": "\"DEBUG\"",
+          "name": "DEBUG_MODE",
+          "references": 14
+        },
+        {
+          "id": "PMD-02081",
+          "kind": "STRING",
+          "literal": "\"STANDARD\"",
+          "name": "STANDARD_MODE",
+          "references": 5
+        },
+        {
+          "id": "PMD-02082",
+          "kind": "ORDER_INT",
+          "literal": "1",
+          "name": "FIRST_BINDER_ORDER",
+          "point": 5025,
+          "references": 1
+        },
+        {
+          "id": "PMD-02084",
+          "kind": "STRING",
+          "literal": "\"fixture\"",
+          "name": "FAILURE_FIXTURE",
+          "references": 4
+        }
+      ],
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiSystemMetricsTest.java",
+      "sha256": "6f7fec78f2f10c1b5e24afe967ff0a9fc6f83c169b1506483bc6641ca195fa7a"
+    },
+    {
+      "beforeSha256": "853eac3e4bde98ac6e63fe9ec43570cd58d4f40e7cb85b730158d0f4630b6e79",
+      "constants": [
+        {
+          "id": "PMD-08379",
+          "kind": "STRING",
+          "literal": "\"DEBUG\"",
+          "name": "DEBUG_MODE",
+          "references": 14
+        },
+        {
+          "id": "PMD-08380",
+          "kind": "STRING",
+          "literal": "\"STANDARD\"",
+          "name": "STANDARD_MODE",
+          "references": 5
+        },
+        {
+          "id": "PMD-08381",
+          "kind": "ORDER_INT",
+          "literal": "1",
+          "name": "FIRST_BINDER_ORDER",
+          "point": 4651,
+          "references": 1
+        },
+        {
+          "id": "PMD-08383",
+          "kind": "STRING",
+          "literal": "\"fixture\"",
+          "name": "FAILURE_FIXTURE",
+          "references": 4
+        }
+      ],
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebJvmMetricsTest.java",
+      "sha256": "17ef23f2aba67dcec1fa659edb851f61f3317aedca7bee367868fc92ea2c258d"
+    },
+    {
+      "beforeSha256": "8697eea5ebaf1dc75fb7e8d0fabd2116c462577c7f6aa02ae3befa6be9a96a13",
+      "constants": [
+        {
+          "id": "PMD-08561",
+          "kind": "STRING",
+          "literal": "\"process.cpu.time\"",
+          "name": "PROCESS_CPU_TIME",
+          "references": 4
+        },
+        {
+          "id": "PMD-08562",
+          "kind": "STRING",
+          "literal": "\"DEBUG\"",
+          "name": "DEBUG_MODE",
+          "references": 14
+        },
+        {
+          "id": "PMD-08563",
+          "kind": "STRING",
+          "literal": "\"STANDARD\"",
+          "name": "STANDARD_MODE",
+          "references": 5
+        },
+        {
+          "id": "PMD-08564",
+          "kind": "ORDER_INT",
+          "literal": "1",
+          "name": "FIRST_BINDER_ORDER",
+          "point": 5025,
+          "references": 1
+        },
+        {
+          "id": "PMD-08566",
+          "kind": "STRING",
+          "literal": "\"fixture\"",
+          "name": "FAILURE_FIXTURE",
+          "references": 4
+        }
+      ],
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebSystemMetricsTest.java",
+      "sha256": "c468da61ae6a63ada1435ce49fa04160f06f5aaaca99dfcc5f8aefd4e1176211"
+    }
+  ],
+  "stringConstants": 14,
+  "stringReferences": 100
+}
