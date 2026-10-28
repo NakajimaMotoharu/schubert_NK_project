@@ -1,0 +1,31 @@
+"""One existing whole memory-only LGS Test, with two independent boundary subvectors."""
+import re
+import scoped_prometheus_host as run
+
+SOURCE = '17ab52b253282ce45016f0586c0167a22029fd8c'
+COMPILE = run.host.W/'pg13596-lgs-remaining-two-branches-v1'
+COMPILE_SHA = '1f1ff5bbdec9107bc7ce9f4a91ab202a1ddeb65b22b0d978c9c3eaf388ad1a12'
+COUNTS = {'LogSearchWireClientTest': 8}
+SESSION = 'PG13604-LGS-REMAINING-BRANCHES-WHOLE8'
+TESTS = {'LogSearchWireClientTest': run.host.ROOT/'src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/LogSearchWireClientTest.java'}
+
+if __name__ == '__main__':
+    run.SOURCE = SOURCE
+    run.COMPILE = COMPILE
+    run.COMPILE_SHA = COMPILE_SHA
+    run.SLOT = run.host.W/'pg13604-lgs-remaining-whole-eight-pt-v1'
+    run.OUT = run.host.BASE/'PG13604-lgs-remaining-whole-eight-pt-v1'
+    run.HELPER = run.host.ROOT/'tools/quality/architecture/LgsBoundaryCurrentJunitLauncher.java'
+    run.NEW_TEST = TESTS['LogSearchWireClientTest']
+    run.TEST_SOURCE_OVERRIDES = {}
+    run.EXTRA_TEST_SOURCES = ()
+    run.FIXTURES = {}
+    run.COUNTS = COUNTS
+    run.SESSION_ID = SESSION
+    text = run.NEW_TEST.read_text()
+    assert text.count('@Test') == 8 and len(re.findall(r'@Test\s+void\s+[A-Za-z0-9_]+\s*\(', text)) == 8
+    assert not any(value in text for value in ['@BeforeAll', '@BeforeEach', '@TempDir', 'DriverManager', 'getConnection(', 'java.net.', 'java.nio.file.', 'ProcessBuilder', 'Runtime.getRuntime', 'setAccessible', 'LinuxDirectoryCalls', 'LinuxInodeSecurity', 'getDeclared'])
+    selected = re.findall(r'List<String>\s+types\s*=\s*List\.of\((.*?)\);', run.HELPER.read_text(), re.S)
+    assert len(selected) == 1 and re.findall(r'"([a-zA-Z0-9_.]+)"', selected[0]) == ['dev.codex.schubert.nk.web.messaging.LogSearchWireClientTest']
+    assert run.SLOT.name.upper() == run.OUT.name.upper()
+    run.main()
