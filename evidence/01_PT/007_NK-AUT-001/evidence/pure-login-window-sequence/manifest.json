@@ -1,0 +1,108 @@
+{
+  "actualExit": 0,
+  "fullProgramAccepted": false,
+  "hostManifest": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG12940-login-policy-host-v1/manifest.json",
+  "hostSha256": "3cf0b7bab17d85a075c1ad007cf12ee7b2536706b062b3dac3dd32b17766dfca",
+  "invocation": {
+    "actualPythonCommand": [
+      "/usr/bin/python3",
+      "-B",
+      "tools/quality/pg12948_login_policy_complete_public.py"
+    ],
+    "arbitraryArgumentsRecorded": false,
+    "entrypointPath": "tools/quality/pg12948_login_policy_complete_public.py",
+    "entrypointSha256": "c562aaf337ceea8404d7220db0c85dccbb83db758ef808ab61e35415ce2dae3b",
+    "helperPath": "tools/quality/host_tool_invocation.py",
+    "helperSha256": "85d616a3db4ff47f4c95ae2e0dd57954bc2b09f28b8f2a685b986e5621545c46",
+    "libraryPath": "tools/quality/pg12948_login_policy_complete_public.py",
+    "librarySha256": "c562aaf337ceea8404d7220db0c85dccbb83db758ef808ab61e35415ce2dae3b",
+    "loadedProjectPythonSources": {
+      "tools/quality/g07_host_class_provenance_inputs.py": "a676cb3e4145177c3c243722d737592ce7d44c3f29cfe4f670662ef7651f046b",
+      "tools/quality/host_tool_invocation.py": "85d616a3db4ff47f4c95ae2e0dd57954bc2b09f28b8f2a685b986e5621545c46",
+      "tools/quality/pg12706_scenario_writer_public.py": "7ea9c6c0cb2c88e4e510ff6bc3f1e05070f6e9bd92b7e84e7aacdf4399f32395",
+      "tools/quality/pg12948_login_policy_complete_public.py": "c562aaf337ceea8404d7220db0c85dccbb83db758ef808ab61e35415ce2dae3b",
+      "tools/quality/pg9898_g07_enum_public_delta.py": "2a7cc75fc0591b65c114ef4c77353565ccaa07fe684c3e6aeba22613d11cb0e4"
+    },
+    "provenance": "OBSERVED_SYS_ARGV_AND_ORIG_ARGV_NOT_RECONSTRUCTED"
+  },
+  "newAccepted": 0,
+  "newTestIdMappings": [
+    {
+      "actual": "PASS",
+      "className": "dev.codex.schubert.nk.api.security.LoginAttemptSequenceTest",
+      "method": "spacedFailuresRestartAtTheLaterLockExpiry",
+      "testId": "PT-AUT-WINDOW-001"
+    },
+    {
+      "actual": "PASS",
+      "className": "dev.codex.schubert.nk.api.security.LoginAttemptSequenceTest",
+      "method": "everyRetryAfterSecondEdgeMatchesTheIndependentCeilingTable",
+      "testId": "PT-AUT-WINDOW-002"
+    },
+    {
+      "actual": "PASS",
+      "className": "dev.codex.schubert.nk.api.security.LoginAttemptSequenceTest",
+      "method": "branchingUserAndIpHistoriesAndSuccessStayIndependent",
+      "testId": "PT-AUT-WINDOW-003"
+    },
+    {
+      "actual": "PASS",
+      "className": "dev.codex.schubert.nk.api.security.LoginAttemptSequenceTest",
+      "method": "everyLockedRetryKeepsTheOriginalWindowAndLock",
+      "testId": "PT-AUT-WINDOW-004"
+    }
+  ],
+  "newUniqueTestIds": 4,
+  "observedProductTests": 9,
+  "oldExecUnion": false,
+  "postManifest": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG12944-login-policy-post-v1/manifest.json",
+  "postSha256": "a6d70118ffcbc9dc1ccbdf56e3ed711d1811561cc2043a1bf7a2af0ec771d426",
+  "program": "NK-AUT-001",
+  "run": "PG12940-LOGINWINDOW-JP",
+  "selectedTwoMain": {
+    "LoginAttemptKind": {
+      "classCrc64": "a87fa7a9dd5e8c9",
+      "counters": {
+        "BRANCH": {
+          "covered": 0,
+          "missed": 0
+        },
+        "CLASS": {
+          "covered": 1,
+          "missed": 0
+        },
+        "LINE": {
+          "covered": 7,
+          "missed": 0
+        },
+        "METHOD": {
+          "covered": 3,
+          "missed": 0
+        }
+      }
+    },
+    "LoginAttemptState": {
+      "classCrc64": "7cbd29ad6269ad55",
+      "counters": {
+        "BRANCH": {
+          "covered": 38,
+          "missed": 0
+        },
+        "CLASS": {
+          "covered": 1,
+          "missed": 0
+        },
+        "LINE": {
+          "covered": 34,
+          "missed": 0
+        },
+        "METHOD": {
+          "covered": 7,
+          "missed": 0
+        }
+      }
+    }
+  },
+  "source": "e49eb0cc84c62ace468cf389938b23f3e56ba520",
+  "whole451Accepted": false
+}
