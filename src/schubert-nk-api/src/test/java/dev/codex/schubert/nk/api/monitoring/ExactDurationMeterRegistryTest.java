@@ -30,6 +30,7 @@ import org.junit.jupiter.api.Test;
 
 /** EXDUR001..010/1723/BUG1678; literal CDF vectors, owned SDK and threads only. */
 class ExactDurationMeterRegistryTest {
+  private static final String SECONDS_UNIT = "seconds";
   private static final String NAME = "nk_db_query_duration_seconds";
   private static final Clock FIXED =
       new Clock() {
@@ -48,7 +49,7 @@ class ExactDurationMeterRegistryTest {
 
   private static DistributionSummary summary(MeterRegistry registry) {
     return DistributionSummary.builder(NAME)
-        .baseUnit("seconds")
+        .baseUnit(SECONDS_UNIT)
         .publishPercentileHistogram()
         .publishPercentiles()
         .serviceLevelObjectives(.001, .01, .1, 1., 1.5)
@@ -95,7 +96,7 @@ class ExactDurationMeterRegistryTest {
       assertEquals(6, registry.getMeters().size());
       assertSame(summary, registry.get(NAME).summary());
       assertEquals(NAME, summary.getId().getName());
-      assertEquals("seconds", summary.getId().getBaseUnit());
+      assertEquals(SECONDS_UNIT, summary.getId().getBaseUnit());
     }
   }
 
@@ -189,7 +190,7 @@ class ExactDurationMeterRegistryTest {
     try (var registry = new Probe()) {
       assertThrows(
           IllegalArgumentException.class,
-          () -> registry.create("seconds", configuration().build(), 2));
+          () -> registry.create(SECONDS_UNIT, configuration().build(), 2));
       assertThrows(
           IllegalArgumentException.class,
           () -> registry.create("bytes", configuration().build(), 1));
@@ -197,13 +198,13 @@ class ExactDurationMeterRegistryTest {
           IllegalArgumentException.class, () -> registry.create(null, configuration().build(), 1));
       assertThrows(
           IllegalArgumentException.class,
-          () -> registry.create("seconds", configuration().percentilesHistogram(false).build(), 1));
+          () -> registry.create(SECONDS_UNIT, configuration().percentilesHistogram(false).build(), 1));
       assertThrows(
           IllegalArgumentException.class,
-          () -> registry.create("seconds", configuration().percentiles(.95).build(), 1));
+          () -> registry.create(SECONDS_UNIT, configuration().percentiles(.95).build(), 1));
       assertThrows(
           IllegalArgumentException.class,
-          () -> registry.create("seconds", configuration().serviceLevelObjectives(.01).build(), 1));
+          () -> registry.create(SECONDS_UNIT, configuration().serviceLevelObjectives(.01).build(), 1));
       assertEquals(0, registry.getMeters().size());
     }
   }
