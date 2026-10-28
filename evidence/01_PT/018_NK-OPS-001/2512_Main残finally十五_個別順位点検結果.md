@@ -1,0 +1,15 @@
+# 2512 Main残finally十五 個別順位点検結果
+
+2026-10-29、2511/PG-D821、START2890・開始1/3/6cap10。source17ab52b25/Main/Test非変更・主F03、canonical各六担当は費用参照だけ追加0。raw6247/全995旧runtime/原WBS予算受入/正式1964-53/17-190/工数null/QA051final/全actualHOLD不変更。独立trace・終了event/利用枠は完了後追記する。
+
+PG13760/entrye1501a89、actual0、manifest26926a5a3246ae255c43c575303b7b4735eb1408392a75cd7ceda1720fce5c41。十五current源/元rawID/完全finally半開span/各resource・primary/全current normal入力/費用ownerを結合。13762/entryeafe67e5、actual0、manifest31e607c23aca4e1ebb854a8d1b03e1fce9d5e968bcdd3b4b60c1aa53c3339b2d、別XML/元catalog/独立offsetと十七typed反例で誤源/ID/resource/primary/method/span/理由/費用owner・raw削除/False-0/PT-native-graph水増しを拒否。これらは工具metadata検査で製品PT0。
+
+Readiness四scopeは取得したconnection/contextの必須解放と直接fatal優先、Repository十scopeはrows→statement→owned connectionの各所定所有/SQL対unknown順位、Reply一scopeは通知callbackが選択済Errorを隠せないことのために条件付きfinally throwが必要。戻り値は必須closeの正常帰還前に成功化しない。commit後close failureからcommit未実行/業務再送許可を推定しない。借用Connection契約を変えず、一般TWR化/throw削除/解析抑制0・PGコード変更不要。各IDの個別根拠は2511表と13760/review.jsonへ保存、他のresource/finally全般へ免除を広げない。
+
+origin/main8b91944dfのSS332 SSC310/199・SS321 SSC332/333、SS312/341/343と既1253/2231を照合。JdbcResourceFailuresは旧SQL/unknown専用、Receipt.replaceはknown SQL破棄前の既graph口、readiness/Replyは既選択Error口を変更0。**本レビューはgraphアルゴリズム/全Throwable組合せ/実DB・MQ・native所有や終端を資格確認していない。** Graph9/実環境等のHOLD、未実測coverageはそのまま、拒否PT免除/代替完了/PASSへ換算0。実target/fixture/callback/DB/MQ/VM/Root/鍵/held工具操作0、元PT/normal/staticの確認再演0。通常保存後も独立残PG/PTへ継続する。
+
+## 独立traceの真正終了
+
+13764/entry87306bca/session78405真正0、manifest87e71ae3e41ae9bf408bec0f1a90fb39716abe9a83b969c00a0e97fba5e446c6。13766/entry4df2788f/session35029真正0、manifestd1d82c5b6bde92e49359dae96e4f3a061d542abf2666c2304f74f4a3ca2aceff。独立八typed反例・二WBS JSON/原941論理943歴史physical/予算受入/全995旧runtimeを確認し、WBS前後audit1/HOLDを保持。既LGS限定資格と別Current普通PTをhistorical runtimeへ上書き0。
+
+次state=f03_main_finally_fifteen_trace.state_after/PG13764、raw6247Main1491Test4756corr3194不変、refs3373→3388/pending2512→2527/noRef2874→2859。十五は理由参照だけでraw削除/全finally合格/十五プログラム完成ではない。inventory SHA730a7715a9565d44f56598b099589dddbc55261157ea24126ae98a4d8fdac83b、snapshot9a4c9b7a41f1e71a527d9c32d2f30f7764f24309b158cfb71e170f9a29bd5e68。END2891・fresh29→29同reset1793774153（08:52:06JST）、丸め差0は専有費0ではなくN/T・配賦/工数null。工具/製品失敗/再試行0、正式/全HOLD不変更。保存後は残長寿命ownerへの資源移管を個別に点検する。
