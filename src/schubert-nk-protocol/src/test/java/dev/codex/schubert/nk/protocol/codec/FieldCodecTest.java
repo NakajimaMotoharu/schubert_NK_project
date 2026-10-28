@@ -130,4 +130,27 @@ class FieldCodecTest {
     assertThrows(NullPointerException.class, () -> FieldCodec.requireSpaces(null));
     assertThrows(IllegalArgumentException.class, () -> FieldCodec.requireSpaces(new byte[0]));
   }
+
+  /** PT-CODEC-NUMMAX001; SS322 §4.2/5/11; fixed decimal/semantic maxima, no production oracle. */
+  @Test
+  void numericSemanticCeilingIsIndependentOfWireAndLongCapacity() {
+    byte[] smallMaximum = "000099".getBytes(StandardCharsets.US_ASCII);
+    byte[] smallAbove = "000100".getBytes(StandardCharsets.US_ASCII);
+    assertEquals(99, FieldCodec.decodeNumeric(smallMaximum, 0, 99));
+    assertThrows(
+        PermanentProtocolException.class, () -> FieldCodec.decodeNumeric(smallAbove, 0, 99));
+    assertArrayEquals("000100".getBytes(StandardCharsets.US_ASCII), smallAbove);
+
+    long semanticMaximum = 9_223_372_036_854_775_806L;
+    byte[] longMaximum = "9223372036854775807".getBytes(StandardCharsets.US_ASCII);
+    assertEquals(
+        semanticMaximum,
+        FieldCodec.decodeNumeric(
+            "9223372036854775806".getBytes(StandardCharsets.US_ASCII), 0, semanticMaximum));
+    assertEquals(Long.MAX_VALUE, FieldCodec.decodeNumeric(longMaximum, 0, Long.MAX_VALUE));
+    assertThrows(
+        PermanentProtocolException.class,
+        () -> FieldCodec.decodeNumeric(longMaximum, 0, semanticMaximum));
+    assertArrayEquals("9223372036854775807".getBytes(StandardCharsets.US_ASCII), longMaximum);
+  }
 }
