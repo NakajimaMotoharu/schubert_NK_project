@@ -87,6 +87,31 @@ import org.springframework.web.context.support.AnnotationConfigWebApplicationCon
 
 /** Independent UI224236 wholebyte/DOM/HTTP oracles; PG-D350/016063/PT-QRY-HTTP001..012. */
 class QuestionControllerTest {
+  private static final String FIXTURE_READER_F734AAEA = "reader";
+  private static final String FIXTURE_GET_04F32A7E = "GET";
+  private static final String FIXTURE_QUESTIONS_2CDF4E3F = "/questions";
+  private static final String FIXTURE_0000_876EEFE0 = "0000";
+  private static final String FIXTURE_0200_FC9DB3AC = "0200";
+  private static final String FIXTURE_KEYWORD_C56BDFC4 = "keyword";
+  private static final String FIXTURE_STATE_55AF5B1D = "state";
+  private static final String FIXTURE_ANSWERED_6CA66E97 = "ANSWERED";
+  private static final String FIXTURE_FROM_E5403D47 = "from";
+  private static final String FIXTURE_2026_10_03_E227789F = "2026-10-03";
+  private static final String FIXTURE_PAGE_861424BC = "page";
+  private static final String FIXTURE_USERNAME_72488FAE = "username";
+  private static final String FIXTURE_ADMIN_C4BB3010 = "ADMIN";
+  private static final String FIXTURE_OTHER_D448C0E0 = "other";
+  private static final String FIXTURE_CHANGED_9ABF9994 = "changed";
+  private static final String FIXTURE_UNANSWERED_8B420ADF = "UNANSWERED";
+  private static final String FIXTURE_ERROR_F717E7D8 = "ERROR";
+  private static final String FIXTURE_BAD_CBFEDA2B = "bad";
+  private static final String FIXTURE_QUESTION_6D6CA52E = "question";
+  private static final String FIXTURE_ANSWER_B2437A6A = "answer";
+  private static final String FIXTURE_QSDREQ01_B5E5C68F = "QSDREQ01";
+  private static final String FIXTURE_QUESTIONS_1_483A8278 = "/questions/1";
+  private static final String FIXTURE_LOGIN_F843C044 = "/login";
+  private static final String FIXTURE_SET_COOKIE_39067BC9 = "set-cookie";
+  private static final String FIXTURE_POST_E46D3AE9 = "POST";
   private static final Clock CLOCK =
       Clock.fixed(Instant.parse("2026-10-03T00:00:00Z"), ZoneOffset.UTC);
   private static final Instant SUBMITTED = Instant.parse("2026-10-02T23:58:00Z");
@@ -121,7 +146,7 @@ class QuestionControllerTest {
 
   private static SessionPrincipal actor(UserRole role) {
     return new SessionPrincipal(
-        "reader", role, AuthenticationContext.of("a".repeat(64)), Instant.EPOCH);
+        FIXTURE_READER_F734AAEA, role, AuthenticationContext.of("a".repeat(64)), Instant.EPOCH);
   }
 
   private static LinkedMultiValueMap<String, String> params(String... pairs) {
@@ -131,7 +156,7 @@ class QuestionControllerTest {
   }
 
   private static MockHttpServletRequest raw() {
-    return new MockHttpServletRequest("GET", "/questions");
+    return new MockHttpServletRequest(FIXTURE_GET_04F32A7E, FIXTURE_QUESTIONS_2CDF4E3F);
   }
 
   private static CsrfToken csrf() {
@@ -153,34 +178,35 @@ class QuestionControllerTest {
   @Test
   void qry001IndependentSearchWireAndRoles() throws Exception {
     for (UserRole role : UserRole.values())
-      for (String code : List.of("0000", "0200"))
+      for (String code : List.of(FIXTURE_0000_876EEFE0, FIXTURE_0200_FC9DB3AC))
         try (var f = new Fixture()) {
           f.code = code;
           var input =
               params(
-                  "keyword",
+                  FIXTURE_KEYWORD_C56BDFC4,
                   " e\u0301 &+ ",
-                  "state",
-                  "ANSWERED",
-                  "from",
-                  "2026-10-03",
+                  FIXTURE_STATE_55AF5B1D,
+                  FIXTURE_ANSWERED_6CA66E97,
+                  FIXTURE_FROM_E5403D47,
+                  FIXTURE_2026_10_03_E227789F,
                   "to",
-                  "2026-10-03",
-                  "page",
+                  FIXTURE_2026_10_03_E227789F,
+                  FIXTURE_PAGE_861424BC,
                   "000001");
-          if (role == UserRole.ADMIN) input.add("username", "reader");
+          if (role == UserRole.ADMIN) input.add(FIXTURE_USERNAME_72488FAE, FIXTURE_READER_F734AAEA);
           var model = new ExtendedModelMap();
           var response = new MockHttpServletResponse();
           assertEquals(
               "questions/list", f.controller.list(input, actor(role), model, raw(), response));
           assertEquals(200, response.getStatus());
-          var page = assertInstanceOf(QuestionListViewModel.class, model.get("page"));
-          assertEquals("é &+", page.getFilters().getValues().get("keyword"));
+          var page =
+              assertInstanceOf(QuestionListViewModel.class, model.get(FIXTURE_PAGE_861424BC));
+          assertEquals("é &+", page.getFilters().getValues().get(FIXTURE_KEYWORD_C56BDFC4));
           assertEquals("回答済み", page.getRows().getFirst().get("stateLabel"));
           byte[] expected = request("QSSREQ01", 384, "a".repeat(64), new UUID(0, 1));
           put(expected, 256, 256, "é &+");
-          if (role == UserRole.ADMIN) put(expected, 512, 64, "reader");
-          put(expected, 576, 12, "ANSWERED");
+          if (role == UserRole.ADMIN) put(expected, 512, 64, FIXTURE_READER_F734AAEA);
+          put(expected, 576, 12, FIXTURE_ANSWERED_6CA66E97);
           put(expected, 588, 17, "20261003000000000");
           put(expected, 605, 17, "20261003235959999");
           number(expected, 622, 6, 1);
@@ -193,32 +219,46 @@ class QuestionControllerTest {
   @Test
   void qry002ClosedNullAndByteBoundaries() throws Exception {
     for (UserRole role : UserRole.values()) {
-      assertTrue(QuestionSearchForm.bind(params("keyword", "x".repeat(256)), role).isValid());
-      assertTrue(QuestionSearchForm.bind(params("keyword", "界".repeat(85) + "x"), role).isValid());
+      assertTrue(
+          QuestionSearchForm.bind(params(FIXTURE_KEYWORD_C56BDFC4, "x".repeat(256)), role)
+              .isValid());
+      assertTrue(
+          QuestionSearchForm.bind(params(FIXTURE_KEYWORD_C56BDFC4, "界".repeat(85) + "x"), role)
+              .isValid());
       for (var input :
           List.of(
-              params("keyword", "x".repeat(257)),
-              params("keyword", "界".repeat(85) + "xx"),
-              params("state", "UNKNOWN"),
-              params("state", "answered"),
-              params("owner", "reader"),
-              params("role", "ADMIN"),
-              params("keyword", "x", "keyword", "y"))) invalid(input, role);
-      for (String field : List.of("keyword", "state", "from", "to", "page"))
+              params(FIXTURE_KEYWORD_C56BDFC4, "x".repeat(257)),
+              params(FIXTURE_KEYWORD_C56BDFC4, "界".repeat(85) + "xx"),
+              params(FIXTURE_STATE_55AF5B1D, "UNKNOWN"),
+              params(FIXTURE_STATE_55AF5B1D, "answered"),
+              params("owner", FIXTURE_READER_F734AAEA),
+              params("role", FIXTURE_ADMIN_C4BB3010),
+              params(FIXTURE_KEYWORD_C56BDFC4, "x", FIXTURE_KEYWORD_C56BDFC4, "y")))
+        invalid(input, role);
+      for (String field :
+          List.of(
+              FIXTURE_KEYWORD_C56BDFC4,
+              FIXTURE_STATE_55AF5B1D,
+              FIXTURE_FROM_E5403D47,
+              "to",
+              FIXTURE_PAGE_861424BC))
         for (String raw : List.of("\r", "\n", "\t", "\0", "\u001f", "\u0085", "\ud800", "\udfff"))
           invalid(params(field, raw), role);
       var empty = params();
-      empty.put("keyword", List.of());
+      empty.put(FIXTURE_KEYWORD_C56BDFC4, List.of());
       invalid(empty, role);
     }
     assertTrue(
-        QuestionSearchForm.bind(params("username", "x".repeat(64)), UserRole.ADMIN).isValid());
-    invalid(params("username", "x".repeat(65)), UserRole.ADMIN);
-    invalid(params("username", "\r"), UserRole.ADMIN);
-    for (String name : List.of("", "reader", "other")) {
-      var input = params("username", name);
+        QuestionSearchForm.bind(params(FIXTURE_USERNAME_72488FAE, "x".repeat(64)), UserRole.ADMIN)
+            .isValid());
+    invalid(params(FIXTURE_USERNAME_72488FAE, "x".repeat(65)), UserRole.ADMIN);
+    invalid(params(FIXTURE_USERNAME_72488FAE, "\r"), UserRole.ADMIN);
+    for (String name : List.of("", FIXTURE_READER_F734AAEA, FIXTURE_OTHER_D448C0E0)) {
+      var input = params(FIXTURE_USERNAME_72488FAE, name);
       invalid(input, UserRole.USER);
-      assertEquals("", QuestionSearchForm.bind(input, UserRole.USER).getValues().get("username"));
+      assertEquals(
+          "",
+          QuestionSearchForm.bind(input, UserRole.USER).getValues().get(FIXTURE_USERNAME_72488FAE));
     }
     assertThrows(NullPointerException.class, () -> QuestionSearchForm.bind(null, UserRole.USER));
     assertThrows(NullPointerException.class, () -> QuestionSearchForm.bind(params(), null));
@@ -226,16 +266,18 @@ class QuestionControllerTest {
     bad.put(null, List.of("x"));
     assertThrows(NullPointerException.class, () -> QuestionSearchForm.bind(bad, UserRole.USER));
     bad.clear();
-    bad.put("keyword", null);
+    bad.put(FIXTURE_KEYWORD_C56BDFC4, null);
     assertThrows(NullPointerException.class, () -> QuestionSearchForm.bind(bad, UserRole.USER));
-    bad.put("keyword", Arrays.asList((String) null));
+    bad.put(FIXTURE_KEYWORD_C56BDFC4, Arrays.asList((String) null));
     assertThrows(NullPointerException.class, () -> QuestionSearchForm.bind(bad, UserRole.USER));
-    var good = QuestionSearchForm.bind(params("keyword", "x"), UserRole.USER);
+    var good = QuestionSearchForm.bind(params(FIXTURE_KEYWORD_C56BDFC4, "x"), UserRole.USER);
     assertEquals("QuestionSearchForm[REDACTED]", good.toString());
     assertThrows(
-        UnsupportedOperationException.class, () -> good.getValues().put("keyword", "changed"));
+        UnsupportedOperationException.class,
+        () -> good.getValues().put(FIXTURE_KEYWORD_C56BDFC4, FIXTURE_CHANGED_9ABF9994));
     assertThrows(
-        UnsupportedOperationException.class, () -> good.getIssues().put("keyword", "changed"));
+        UnsupportedOperationException.class,
+        () -> good.getIssues().put(FIXTURE_KEYWORD_C56BDFC4, FIXTURE_CHANGED_9ABF9994));
   }
 
   private static void invalid(LinkedMultiValueMap<String, String> input, UserRole role)
@@ -251,7 +293,9 @@ class QuestionControllerTest {
       assertEquals(400, reply.getStatus());
       assertTrue(f.requests.isEmpty());
       assertTrue(
-          assertInstanceOf(QuestionListViewModel.class, model.get("page")).getPage().isEmpty());
+          assertInstanceOf(QuestionListViewModel.class, model.get(FIXTURE_PAGE_861424BC))
+              .getPage()
+              .isEmpty());
       f.erased();
     }
   }
@@ -259,7 +303,8 @@ class QuestionControllerTest {
   @Test
   void qry003CalendarAndPageBounds() throws Exception {
     for (String day : List.of("0001-01-01", "9999-12-31", "2024-02-29")) {
-      var value = QuestionSearchForm.bind(params("from", day, "to", day), UserRole.USER);
+      var value =
+          QuestionSearchForm.bind(params(FIXTURE_FROM_E5403D47, day, "to", day), UserRole.USER);
       assertTrue(value.isValid());
       assertEquals(
           LocalDate.parse(day).atStartOfDay().toInstant(ZoneOffset.ofHours(9)),
@@ -268,7 +313,7 @@ class QuestionControllerTest {
           LocalDate.parse(day).atTime(23, 59, 59, 999_000_000).toInstant(ZoneOffset.ofHours(9)),
           value.toRequest().submittedTo().orElseThrow());
     }
-    for (String name : List.of("from", "to"))
+    for (String name : List.of(FIXTURE_FROM_E5403D47, "to"))
       for (String day :
           List.of(
               "0000-01-01",
@@ -281,14 +326,20 @@ class QuestionControllerTest {
               "2024-01-01Z",
               "2024-01-01+09:00")) invalid(params(name, day), UserRole.USER);
     assertTrue(
-        QuestionSearchForm.bind(params("from", "2024-01-01", "to", "2024-12-31"), UserRole.USER)
+        QuestionSearchForm.bind(
+                params(FIXTURE_FROM_E5403D47, "2024-01-01", "to", "2024-12-31"), UserRole.USER)
             .isValid());
-    invalid(params("from", "2024-01-01", "to", "2025-01-01"), UserRole.USER);
-    invalid(params("from", "2024-02-01", "to", "2024-01-31"), UserRole.USER);
-    assertTrue(QuestionSearchForm.bind(params("from", "2026-10-03"), UserRole.USER).isValid());
-    assertTrue(QuestionSearchForm.bind(params("to", "2026-10-03"), UserRole.USER).isValid());
+    invalid(params(FIXTURE_FROM_E5403D47, "2024-01-01", "to", "2025-01-01"), UserRole.USER);
+    invalid(params(FIXTURE_FROM_E5403D47, "2024-02-01", "to", "2024-01-31"), UserRole.USER);
+    assertTrue(
+        QuestionSearchForm.bind(
+                params(FIXTURE_FROM_E5403D47, FIXTURE_2026_10_03_E227789F), UserRole.USER)
+            .isValid());
+    assertTrue(
+        QuestionSearchForm.bind(params("to", FIXTURE_2026_10_03_E227789F), UserRole.USER)
+            .isValid());
     for (String page : List.of("", "0", "-1", "-2147483648", "0001", "999999")) {
-      var form = QuestionSearchForm.bind(params("page", page), UserRole.USER);
+      var form = QuestionSearchForm.bind(params(FIXTURE_PAGE_861424BC, page), UserRole.USER);
       assertTrue(form.isValid());
       assertEquals(page.equals("999999") ? 999999 : 1, form.getPage());
       assertEquals(form.getPage(), form.toRequest().page());
@@ -296,13 +347,14 @@ class QuestionControllerTest {
     }
     for (String page :
         List.of("1000000", "2147483648", "-2147483649", "+1", "1.0", "1e1", "１", "1 1", "-"))
-      invalid(params("page", page), UserRole.USER);
+      invalid(params(FIXTURE_PAGE_861424BC, page), UserRole.USER);
   }
 
   @Test
   void qry004ImmutableListsStatesPages() throws Exception {
     for (UserRole role : UserRole.values())
-      for (String state : List.of("ANSWERED", "UNANSWERED", "ERROR"))
+      for (String state :
+          List.of(FIXTURE_ANSWERED_6CA66E97, FIXTURE_UNANSWERED_8B420ADF, FIXTURE_ERROR_F717E7D8))
         for (int count : List.of(0, 1, 50))
           try (var f = new Fixture()) {
             f.count = count;
@@ -311,34 +363,47 @@ class QuestionControllerTest {
             var reply = new MockHttpServletResponse();
             assertEquals(
                 "questions/list",
-                f.controller.list(params("state", state), actor(role), model, raw(), reply));
-            var page = assertInstanceOf(QuestionListViewModel.class, model.get("page"));
+                f.controller.list(
+                    params(FIXTURE_STATE_55AF5B1D, state), actor(role), model, raw(), reply));
+            var page =
+                assertInstanceOf(QuestionListViewModel.class, model.get(FIXTURE_PAGE_861424BC));
             assertEquals(count, page.getRows().size());
             assertEquals(count, page.getRows().stream().map(r -> r.get("id")).distinct().count());
             assertEquals(role == UserRole.ADMIN, page.getFilters().isAdmin());
             assertEquals(
                 switch (role) {
                   case USER -> "USER";
-                  case ADMIN -> "ADMIN";
+                  case ADMIN -> FIXTURE_ADMIN_C4BB3010;
                 },
                 page.getTopBar().getRole());
             for (var row : page.getRows()) {
-              assertEquals(state, row.get("state"));
+              assertEquals(state, row.get(FIXTURE_STATE_55AF5B1D));
               assertEquals(
-                  Map.of("ANSWERED", "回答済み", "UNANSWERED", "未回答", "ERROR", "エラー").get(state),
+                  Map.of(
+                          FIXTURE_ANSWERED_6CA66E97,
+                          "回答済み",
+                          FIXTURE_UNANSWERED_8B420ADF,
+                          "未回答",
+                          FIXTURE_ERROR_F717E7D8,
+                          "エラー")
+                      .get(state),
                   row.get("stateLabel"));
-              assertEquals("reader", row.get("username"));
+              assertEquals(FIXTURE_READER_F734AAEA, row.get(FIXTURE_USERNAME_72488FAE));
               assertEquals("2026-10-03 08:58:00", row.get("submittedAt"));
               assertEquals(
-                  state.equals("ANSWERED") ? "2026-10-03 08:59:00" : "", row.get("answeredAt"));
+                  state.equals(FIXTURE_ANSWERED_6CA66E97) ? "2026-10-03 08:59:00" : "",
+                  row.get("answeredAt"));
               assertThrows(
-                  UnsupportedOperationException.class, () -> row.put("summary", "changed"));
+                  UnsupportedOperationException.class,
+                  () -> row.put("summary", FIXTURE_CHANGED_9ABF9994));
             }
             assertThrows(UnsupportedOperationException.class, () -> page.getRows().add(Map.of()));
             assertEquals("QuestionListViewModel[REDACTED]", page.toString());
             f.erased();
           }
-    var input = new ArrayList<>(List.of(summary(1, "reader", AnswerState.UNANSWERED, SUBMITTED)));
+    var input =
+        new ArrayList<>(
+            List.of(summary(1, FIXTURE_READER_F734AAEA, AnswerState.UNANSWERED, SUBMITTED)));
     var page =
         QuestionListViewModel.success(
             actor(UserRole.USER),
@@ -353,7 +418,7 @@ class QuestionControllerTest {
   void qry005ProjectionDamage() {
     var user = actor(UserRole.USER);
     var form = QuestionSearchForm.bind(params(), UserRole.USER);
-    var one = summary(1, "reader", AnswerState.UNANSWERED, SUBMITTED);
+    var one = summary(1, FIXTURE_READER_F734AAEA, AnswerState.UNANSWERED, SUBMITTED);
     assertThrows(
         IllegalArgumentException.class,
         () -> QuestionListViewModel.success(user, form, paged(1, 1), List.of()));
@@ -367,15 +432,7 @@ class QuestionControllerTest {
                 user,
                 form,
                 paged(1, 1),
-                List.of(summary(1, "other", AnswerState.UNANSWERED, SUBMITTED))));
-    assertThrows(
-        IllegalArgumentException.class,
-        () ->
-            QuestionListViewModel.success(
-                user,
-                form,
-                paged(2, 1),
-                List.of(one, summary(2, "reader", AnswerState.UNANSWERED, SUBMITTED))));
+                List.of(summary(1, FIXTURE_OTHER_D448C0E0, AnswerState.UNANSWERED, SUBMITTED))));
     assertThrows(
         IllegalArgumentException.class,
         () ->
@@ -384,12 +441,26 @@ class QuestionControllerTest {
                 form,
                 paged(2, 1),
                 List.of(
-                    one, summary(2, "reader", AnswerState.UNANSWERED, SUBMITTED.plusMillis(1)))));
+                    one, summary(2, FIXTURE_READER_F734AAEA, AnswerState.UNANSWERED, SUBMITTED))));
+    assertThrows(
+        IllegalArgumentException.class,
+        () ->
+            QuestionListViewModel.success(
+                user,
+                form,
+                paged(2, 1),
+                List.of(
+                    one,
+                    summary(
+                        2,
+                        FIXTURE_READER_F734AAEA,
+                        AnswerState.UNANSWERED,
+                        SUBMITTED.plusMillis(1)))));
     var longSummary =
         new QuestionSummaryRecord(
             new QuestionId(1),
             RECEIPT,
-            "reader",
+            FIXTURE_READER_F734AAEA,
             "x".repeat(101),
             AnswerState.UNANSWERED,
             SUBMITTED,
@@ -401,7 +472,7 @@ class QuestionControllerTest {
         new QuestionSummaryRecord(
             new QuestionId(1),
             RECEIPT,
-            "reader",
+            FIXTURE_READER_F734AAEA,
             "q",
             AnswerState.UNANSWERED,
             SUBMITTED,
@@ -414,7 +485,7 @@ class QuestionControllerTest {
         () ->
             QuestionListViewModel.success(
                 user,
-                QuestionSearchForm.bind(params("page", "2"), UserRole.USER),
+                QuestionSearchForm.bind(params(FIXTURE_PAGE_861424BC, "2"), UserRole.USER),
                 paged(51, 1),
                 List.of(one)));
     assertThrows(
@@ -422,7 +493,8 @@ class QuestionControllerTest {
         () ->
             QuestionListViewModel.success(
                 user,
-                QuestionSearchForm.bind(params("state", "bad"), UserRole.USER),
+                QuestionSearchForm.bind(
+                    params(FIXTURE_STATE_55AF5B1D, FIXTURE_BAD_CBFEDA2B), UserRole.USER),
                 paged(1, 1),
                 List.of(one)));
     assertThrows(IllegalArgumentException.class, () -> QuestionListViewModel.invalid(user, form));
@@ -430,7 +502,9 @@ class QuestionControllerTest {
         IllegalArgumentException.class,
         () ->
             QuestionListViewModel.invalid(
-                user, QuestionSearchForm.bind(params("state", "bad"), UserRole.ADMIN)));
+                user,
+                QuestionSearchForm.bind(
+                    params(FIXTURE_STATE_55AF5B1D, FIXTURE_BAD_CBFEDA2B), UserRole.ADMIN)));
     assertThrows(
         IllegalArgumentException.class,
         () ->
@@ -460,7 +534,9 @@ class QuestionControllerTest {
         NullPointerException.class,
         () ->
             QuestionListViewModel.invalid(
-                null, QuestionSearchForm.bind(params("state", "bad"), UserRole.USER)));
+                null,
+                QuestionSearchForm.bind(
+                    params(FIXTURE_STATE_55AF5B1D, FIXTURE_BAD_CBFEDA2B), UserRole.USER)));
     assertThrows(NullPointerException.class, () -> QuestionListViewModel.invalid(user, null));
   }
 
@@ -480,7 +556,7 @@ class QuestionControllerTest {
         new QuestionId(id),
         RECEIPT,
         owner,
-        "question",
+        FIXTURE_QUESTION_6D6CA52E,
         state,
         submitted,
         state == AnswerState.ANSWERED ? Optional.of(ANSWERED) : Optional.empty());
@@ -493,7 +569,7 @@ class QuestionControllerTest {
         RECEIPT,
         owner,
         state,
-        "question",
+        FIXTURE_QUESTION_6D6CA52E,
         answer.isEmpty() ? Optional.empty() : Optional.of(answer),
         SUBMITTED,
         state == AnswerState.ANSWERED ? Optional.of(ANSWERED) : Optional.empty());
@@ -502,7 +578,7 @@ class QuestionControllerTest {
   @Test
   void qry006DetailWholeWireAndDisplay() throws Exception {
     for (UserRole role : UserRole.values())
-      for (String code : List.of("0000", "0200"))
+      for (String code : List.of(FIXTURE_0000_876EEFE0, FIXTURE_0200_FC9DB3AC))
         for (AnswerState state : AnswerState.values())
           for (long id : List.of(1L, 999999999999L))
             try (var f = new Fixture()) {
@@ -515,37 +591,49 @@ class QuestionControllerTest {
                   "questions/detail",
                   f.controller.detail(Long.toString(id), actor(role), model, raw(), reply));
               assertEquals(200, reply.getStatus());
-              var page = assertInstanceOf(QuestionDetailViewModel.class, model.get("page"));
+              var page =
+                  assertInstanceOf(QuestionDetailViewModel.class, model.get(FIXTURE_PAGE_861424BC));
               assertEquals(id, page.getValues().get("id"));
               assertEquals(
                   id == 1 ? RECEIPT : String.format(Locale.ROOT, "%026d", id),
                   page.getValues().get("receiptId"));
-              assertEquals("reader", page.getValues().get("username"));
-              assertEquals("question", page.getValues().get("question"));
               assertEquals(
-                  Map.of("ANSWERED", "回答済み", "UNANSWERED", "未回答", "ERROR", "エラー")
+                  FIXTURE_READER_F734AAEA, page.getValues().get(FIXTURE_USERNAME_72488FAE));
+              assertEquals(
+                  FIXTURE_QUESTION_6D6CA52E, page.getValues().get(FIXTURE_QUESTION_6D6CA52E));
+              assertEquals(
+                  Map.of(
+                          FIXTURE_ANSWERED_6CA66E97,
+                          "回答済み",
+                          FIXTURE_UNANSWERED_8B420ADF,
+                          "未回答",
+                          FIXTURE_ERROR_F717E7D8,
+                          "エラー")
                       .get(state.wireValue()),
                   page.getValues().get("stateLabel"));
               assertEquals(
                   state == AnswerState.ANSWERED ? "2026-10-03 08:59:00" : "",
                   page.getValues().get("answeredAt"));
-              assertEquals(f.answer, page.getValues().get("answer"));
+              assertEquals(f.answer, page.getValues().get(FIXTURE_ANSWER_B2437A6A));
               assertEquals(state == AnswerState.ANSWERED, page.getValues().get("answerAvailable"));
               assertEquals("2026-10-03 08:58:00", page.getValues().get("submittedAt"));
               assertEquals(role == UserRole.ADMIN, page.getValues().get("admin"));
               assertEquals("QuestionDetailViewModel[REDACTED]", page.toString());
               assertThrows(
                   UnsupportedOperationException.class,
-                  () -> page.getValues().put("answer", "changed"));
-              byte[] expected = request("QSDREQ01", 12, "a".repeat(64), new UUID(0, 1));
+                  () -> page.getValues().put(FIXTURE_ANSWER_B2437A6A, FIXTURE_CHANGED_9ABF9994));
+              byte[] expected =
+                  request(FIXTURE_QSDREQ01_B5E5C68F, 12, "a".repeat(64), new UUID(0, 1));
               number(expected, 256, 12, id);
               assertArrayEquals(expected, f.requests.getFirst());
               f.erased();
             }
     var user = actor(UserRole.USER);
     var target = new QuestionId(1);
-    var data = detail(1, "reader", AnswerState.ANSWERED, "");
-    assertEquals("", QuestionDetailViewModel.from(user, target, data).getValues().get("answer"));
+    var data = detail(1, FIXTURE_READER_F734AAEA, AnswerState.ANSWERED, "");
+    assertEquals(
+        "",
+        QuestionDetailViewModel.from(user, target, data).getValues().get(FIXTURE_ANSWER_B2437A6A));
     assertEquals(
         true, QuestionDetailViewModel.from(user, target, data).getValues().get("answerAvailable"));
     assertThrows(
@@ -555,24 +643,29 @@ class QuestionControllerTest {
         IllegalArgumentException.class,
         () ->
             QuestionDetailViewModel.from(
-                user, target, detail(1, "other", AnswerState.UNANSWERED, "")));
+                user, target, detail(1, FIXTURE_OTHER_D448C0E0, AnswerState.UNANSWERED, "")));
     assertEquals(
-        "other",
+        FIXTURE_OTHER_D448C0E0,
         QuestionDetailViewModel.from(
-                actor(UserRole.ADMIN), target, detail(1, "other", AnswerState.UNANSWERED, ""))
+                actor(UserRole.ADMIN),
+                target,
+                detail(1, FIXTURE_OTHER_D448C0E0, AnswerState.UNANSWERED, ""))
             .getValues()
-            .get("username"));
+            .get(FIXTURE_USERNAME_72488FAE));
     assertThrows(
         IllegalArgumentException.class,
         () ->
             QuestionDetailViewModel.from(
-                user, target, detail(1, "reader", AnswerState.UNANSWERED, "unexpected answer")));
+                user,
+                target,
+                detail(1, FIXTURE_READER_F734AAEA, AnswerState.UNANSWERED, "unexpected answer")));
     assertThrows(
         NullPointerException.class, () -> QuestionDetailViewModel.from(null, target, data));
     assertThrows(NullPointerException.class, () -> QuestionDetailViewModel.from(user, null, data));
     assertThrows(
         NullPointerException.class, () -> QuestionDetailViewModel.from(user, target, null));
-    for (String id : List.of("0", "-1", "1000000000000", "bad", "9999999999999999999999"))
+    for (String id :
+        List.of("0", "-1", "1000000000000", FIXTURE_BAD_CBFEDA2B, "9999999999999999999999"))
       try (var f = new Fixture()) {
         var reply = new MockHttpServletResponse();
         assertNull(f.controller.detail(id, user, new ExtendedModelMap(), raw(), reply));
@@ -658,7 +751,10 @@ class QuestionControllerTest {
       try (var f = new Fixture()) {
         f.code = "0102";
         var reply = new MockHttpServletResponse();
-        var request = f.security.mock("GET", detail ? "/questions/1" : "/questions");
+        var request =
+            f.security.mock(
+                FIXTURE_GET_04F32A7E,
+                detail ? FIXTURE_QUESTIONS_1_483A8278 : FIXTURE_QUESTIONS_2CDF4E3F);
         assertNull(
             detail
                 ? f.controller.detail(
@@ -690,7 +786,7 @@ class QuestionControllerTest {
           var mvc = MockMvcBuilders.webAppContextSetup(context).build();
           var list =
               mvc.perform(
-                      get("/questions")
+                      get(FIXTURE_QUESTIONS_2CDF4E3F)
                           .principal(actor(role))
                           .requestAttr(CsrfToken.class.getName(), csrf()))
                   .andReturn()
@@ -700,16 +796,23 @@ class QuestionControllerTest {
           assertEquals("質問回答", dom.title());
           assertEquals(f.summary, dom.select(".question-summary").text());
           assertEquals(
-              Map.of("ANSWERED", "回答済み", "UNANSWERED", "未回答", "ERROR", "エラー")
+              Map.of(
+                      FIXTURE_ANSWERED_6CA66E97,
+                      "回答済み",
+                      FIXTURE_UNANSWERED_8B420ADF,
+                      "未回答",
+                      FIXTURE_ERROR_F717E7D8,
+                      "エラー")
                   .get(state.wireValue()),
               dom.select(".question-row .state").text());
           assertTrue(dom.select(".question-summary script").isEmpty());
           assertEquals(role == UserRole.ADMIN, !dom.select("input[name=username]").isEmpty());
           assertEquals(role == UserRole.ADMIN, !dom.select(".owner-heading,.owner").isEmpty());
-          assertEquals("/questions/1", dom.select(".question-row .detail").attr("href"));
+          assertEquals(
+              FIXTURE_QUESTIONS_1_483A8278, dom.select(".question-row .detail").attr("href"));
           var detail =
               mvc.perform(
-                      get("/questions/1")
+                      get(FIXTURE_QUESTIONS_1_483A8278)
                           .principal(actor(role))
                           .requestAttr(CsrfToken.class.getName(), csrf()))
                   .andReturn()
@@ -719,7 +822,13 @@ class QuestionControllerTest {
           assertEquals("質問回答明細", detailDom.title());
           assertEquals(f.summary, detailDom.select(".question-body").text());
           assertEquals(
-              Map.of("ANSWERED", "回答済み", "UNANSWERED", "未回答", "ERROR", "エラー")
+              Map.of(
+                      FIXTURE_ANSWERED_6CA66E97,
+                      "回答済み",
+                      FIXTURE_UNANSWERED_8B420ADF,
+                      "未回答",
+                      FIXTURE_ERROR_F717E7D8,
+                      "エラー")
                   .get(state.wireValue()),
               detailDom.select(".state").text());
           assertTrue(detailDom.select(".question-body script,.answer-body script").isEmpty());
@@ -731,7 +840,7 @@ class QuestionControllerTest {
           assertEquals(
               200,
               mvc.perform(
-                      head("/questions/1")
+                      head(FIXTURE_QUESTIONS_1_483A8278)
                           .principal(actor(role))
                           .requestAttr(CsrfToken.class.getName(), csrf()))
                   .andReturn()
@@ -739,7 +848,7 @@ class QuestionControllerTest {
                   .getStatus());
           assertEquals(
               503,
-              mvc.perform(post("/questions/1").principal(actor(role)))
+              mvc.perform(post(FIXTURE_QUESTIONS_1_483A8278).principal(actor(role)))
                   .andReturn()
                   .getResponse()
                   .getStatus());
@@ -751,8 +860,8 @@ class QuestionControllerTest {
                   .getStatus());
           var invalid =
               mvc.perform(
-                      get("/questions")
-                          .param("state", "bad")
+                      get(FIXTURE_QUESTIONS_2CDF4E3F)
+                          .param(FIXTURE_STATE_55AF5B1D, FIXTURE_BAD_CBFEDA2B)
                           .principal(actor(role))
                           .requestAttr(CsrfToken.class.getName(), csrf()))
                   .andReturn()
@@ -770,7 +879,7 @@ class QuestionControllerTest {
       var empty =
           Jsoup.parse(
               mvc.perform(
-                      get("/questions")
+                      get(FIXTURE_QUESTIONS_2CDF4E3F)
                           .principal(actor(UserRole.USER))
                           .requestAttr(CsrfToken.class.getName(), csrf()))
                   .andReturn()
@@ -782,13 +891,13 @@ class QuestionControllerTest {
     }
     try (var f = new Fixture();
         var context = f.mvc()) {
-      f.state = "ANSWERED";
+      f.state = FIXTURE_ANSWERED_6CA66E97;
       f.answer = "<img src=x onerror=alert(1)>&界";
       var mvc = MockMvcBuilders.webAppContextSetup(context).build();
       var answer =
           Jsoup.parse(
               mvc.perform(
-                      get("/questions/1")
+                      get(FIXTURE_QUESTIONS_1_483A8278)
                           .principal(actor(UserRole.USER))
                           .requestAttr(CsrfToken.class.getName(), csrf()))
                   .andReturn()
@@ -802,10 +911,11 @@ class QuestionControllerTest {
 
   @Test
   void qry009RealSecurityAnd0102() throws Exception {
-    for (String role : List.of("USER", "ADMIN"))
-      for (String path : List.of("/questions", "/questions/1")) {
+    for (String role : List.of("USER", FIXTURE_ADMIN_C4BB3010))
+      for (String path : List.of(FIXTURE_QUESTIONS_2CDF4E3F, FIXTURE_QUESTIONS_1_483A8278)) {
         reset();
-        var api = new SessionFormLoginTest.Api("0000", role, "0000", 0);
+        var api =
+            new SessionFormLoginTest.Api(FIXTURE_0000_876EEFE0, role, FIXTURE_0000_876EEFE0, 0);
         try (var f = new Fixture();
             var web =
                 new EmbeddedWebSecurityTest.Server(
@@ -816,32 +926,50 @@ class QuestionControllerTest {
                     true,
                     true,
                     (mvc, invalid) -> configure(mvc, f.client, invalid))) {
-          var loginPage = web.send("GET", "/login", null, null, true);
+          var loginPage = web.send(FIXTURE_GET_04F32A7E, FIXTURE_LOGIN_F843C044, null, null, true);
           String initial =
-              loginPage.headers().firstValue("set-cookie").orElseThrow().split(";", 2)[0];
+              loginPage
+                  .headers()
+                  .firstValue(FIXTURE_SET_COOKIE_39067BC9)
+                  .orElseThrow()
+                  .split(";", 2)[0];
           String token = loginPage.body().substring(6);
           var login =
               web.send(
-                  "POST", "/login", initial, "username=reader&password=p&_csrf=" + token, true);
-          String cookie = login.headers().firstValue("set-cookie").orElseThrow().split(";", 2)[0];
-          var page = web.send("GET", path, cookie, null, true);
+                  FIXTURE_POST_E46D3AE9,
+                  FIXTURE_LOGIN_F843C044,
+                  initial,
+                  "username=reader&password=p&_csrf=" + token,
+                  true);
+          String cookie =
+              login
+                  .headers()
+                  .firstValue(FIXTURE_SET_COOKIE_39067BC9)
+                  .orElseThrow()
+                  .split(";", 2)[0];
+          var page = web.send(FIXTURE_GET_04F32A7E, path, cookie, null, true);
           assertEquals(200, page.statusCode());
           assertTrue(page.headers().firstValue("cache-control").orElseThrow().contains("no-store"));
           assertEquals(
-              path.equals("/questions") ? "質問回答" : "質問回答明細", Jsoup.parse(page.body()).title());
+              path.equals(FIXTURE_QUESTIONS_2CDF4E3F) ? "質問回答" : "質問回答明細",
+              Jsoup.parse(page.body()).title());
           var head = web.send("HEAD", path, cookie, null, true);
           assertEquals(200, head.statusCode());
           assertEquals("", head.body());
-          assertEquals(302, web.send("GET", path, null, null, true).statusCode());
+          assertEquals(302, web.send(FIXTURE_GET_04F32A7E, path, null, null, true).statusCode());
           f.code = "0102";
-          var expired = web.send("GET", path, cookie, null, true);
+          var expired = web.send(FIXTURE_GET_04F32A7E, path, cookie, null, true);
           assertEquals(302, expired.statusCode());
           assertEquals(
               "/login?session-expired", expired.headers().firstValue("location").orElseThrow());
           assertTrue(
-              expired.headers().firstValue("set-cookie").orElseThrow().contains("Max-Age=0"));
+              expired
+                  .headers()
+                  .firstValue(FIXTURE_SET_COOKIE_39067BC9)
+                  .orElseThrow()
+                  .contains("Max-Age=0"));
           int before = f.requests.size();
-          assertEquals(302, web.send("GET", path, cookie, null, true).statusCode());
+          assertEquals(302, web.send(FIXTURE_GET_04F32A7E, path, cookie, null, true).statusCode());
           assertEquals(before, f.requests.size());
           f.erased();
           api.erased();
@@ -861,7 +989,7 @@ class QuestionControllerTest {
                 () -> {
                   var principal =
                       new SessionPrincipal(
-                          "reader",
+                          FIXTURE_READER_F734AAEA,
                           UserRole.USER,
                           AuthenticationContext.of(String.format(Locale.ROOT, "%064x", target)),
                           Instant.EPOCH);
@@ -874,7 +1002,8 @@ class QuestionControllerTest {
                   assertEquals(200, reply.getStatus());
                   assertEquals(
                       (long) target,
-                      assertInstanceOf(QuestionDetailViewModel.class, model.get("page"))
+                      assertInstanceOf(
+                              QuestionDetailViewModel.class, model.get(FIXTURE_PAGE_861424BC))
                           .getValues()
                           .get("id"));
                   return null;
@@ -898,13 +1027,18 @@ class QuestionControllerTest {
           QuestionDetailViewModel.from(
               actor(UserRole.ADMIN),
               new QuestionId(1),
-              detail(1, "other", state, state == AnswerState.ANSWERED ? "answer" : ""));
-      assertEquals(state.wireValue(), values.getValues().get("state"));
-      assertEquals("ADMIN", values.getTopBar().getRole());
+              detail(
+                  1,
+                  FIXTURE_OTHER_D448C0E0,
+                  state,
+                  state == AnswerState.ANSWERED ? FIXTURE_ANSWER_B2437A6A : ""));
+      assertEquals(state.wireValue(), values.getValues().get(FIXTURE_STATE_55AF5B1D));
+      assertEquals(FIXTURE_ADMIN_C4BB3010, values.getTopBar().getRole());
     }
     var form = QuestionSearchForm.bind(params(), UserRole.ADMIN);
-    var older = summary(1, "other", AnswerState.UNANSWERED, SUBMITTED.minusSeconds(1));
-    var newer = summary(2, "reader", AnswerState.ANSWERED, SUBMITTED);
+    var older =
+        summary(1, FIXTURE_OTHER_D448C0E0, AnswerState.UNANSWERED, SUBMITTED.minusSeconds(1));
+    var newer = summary(2, FIXTURE_READER_F734AAEA, AnswerState.ANSWERED, SUBMITTED);
     assertEquals(
         2,
         QuestionListViewModel.success(
@@ -920,7 +1054,7 @@ class QuestionControllerTest {
           () ->
               f.controller.list(
                   params(),
-                  () -> "reader",
+                  () -> FIXTURE_READER_F734AAEA,
                   new ExtendedModelMap(),
                   raw(),
                   new MockHttpServletResponse()));
@@ -929,7 +1063,7 @@ class QuestionControllerTest {
           () ->
               f.controller.detail(
                   "1",
-                  () -> "reader",
+                  () -> FIXTURE_READER_F734AAEA,
                   new ExtendedModelMap(),
                   raw(),
                   new MockHttpServletResponse()));
@@ -1002,7 +1136,7 @@ class QuestionControllerTest {
     }
     for (boolean detail : List.of(false, true))
       try (var f = new Fixture()) {
-        f.owner = "other";
+        f.owner = FIXTURE_OTHER_D448C0E0;
         var reply = new MockHttpServletResponse();
         assertNull(call(f, detail, reply));
         assertEquals(503, reply.getStatus());
@@ -1033,11 +1167,20 @@ class QuestionControllerTest {
   void qry012PaginationQueryAndOwnerShape() {
     for (UserRole role : UserRole.values()) {
       var input =
-          params("keyword", "é &+", "state", "ANSWERED", "from", "2026-10-03", "to", "2026-10-03");
-      if (role == UserRole.ADMIN) input.add("username", "reader");
+          params(
+              FIXTURE_KEYWORD_C56BDFC4,
+              "é &+",
+              FIXTURE_STATE_55AF5B1D,
+              FIXTURE_ANSWERED_6CA66E97,
+              FIXTURE_FROM_E5403D47,
+              FIXTURE_2026_10_03_E227789F,
+              "to",
+              FIXTURE_2026_10_03_E227789F);
+      if (role == UserRole.ADMIN) input.add(FIXTURE_USERNAME_72488FAE, FIXTURE_READER_F734AAEA);
       var form = QuestionSearchForm.bind(input, role);
       var rows = new ArrayList<QuestionSummaryRecord>();
-      for (int i = 50; i >= 1; i--) rows.add(summary(i, "reader", AnswerState.ANSWERED, SUBMITTED));
+      for (int i = 50; i >= 1; i--)
+        rows.add(summary(i, FIXTURE_READER_F734AAEA, AnswerState.ANSWERED, SUBMITTED));
       var first = QuestionListViewModel.success(actor(role), form, paged(51, 1), rows);
       assertTrue(first.getPreviousHref().isEmpty());
       String prefix =
@@ -1045,19 +1188,19 @@ class QuestionControllerTest {
               + (role == UserRole.ADMIN ? "&username=reader" : "")
               + "&page=";
       assertEquals(prefix + "2", first.getNextHref().orElseThrow());
-      input.add("page", "2");
+      input.add(FIXTURE_PAGE_861424BC, "2");
       var second =
           QuestionListViewModel.success(
               actor(role),
               QuestionSearchForm.bind(input, role),
               paged(51, 2),
-              List.of(summary(1, "reader", AnswerState.ANSWERED, SUBMITTED)));
+              List.of(summary(1, FIXTURE_READER_F734AAEA, AnswerState.ANSWERED, SUBMITTED)));
       assertEquals(prefix + "1", second.getPreviousHref().orElseThrow());
       assertTrue(second.getNextHref().isEmpty());
       var empty =
           QuestionListViewModel.success(
               actor(role),
-              QuestionSearchForm.bind(params("page", "999999"), role),
+              QuestionSearchForm.bind(params(FIXTURE_PAGE_861424BC, "999999"), role),
               paged(0, 1),
               List.of());
       assertTrue(empty.getPreviousHref().isEmpty());
@@ -1070,18 +1213,18 @@ class QuestionControllerTest {
   void rcpt006ANewFormCapacityRetirementAndMissingToken() throws Exception {
     try (var f = new Fixture()) {
       var actor = actor(UserRole.USER);
-      var request = f.authenticatedRequest(actor, "GET");
+      var request = f.authenticatedRequest(actor, FIXTURE_GET_04F32A7E);
       var id = WebSessionId.parse(request.getSession(false).getId());
       for (int n = 1; n <= 10; n++) {
         var page = new ExtendedModelMap();
         var response = new MockHttpServletResponse();
         assertEquals("questions/new", f.accepting().newForm(actor, page, request, response));
-        var view = (QuestionSubmitViewModel) page.get("page");
-        assertEquals("", view.getValues().get("question"));
+        var view = (QuestionSubmitViewModel) page.get(FIXTURE_PAGE_861424BC);
+        assertEquals("", view.getValues().get(FIXTURE_QUESTION_6D6CA52E));
         assertEquals(new UUID(9, n).toString(), view.getValues().get("operationToken"));
         assertTrue(view.getIssues().isEmpty());
         assertEquals("", view.getNotice());
-        assertEquals("reader", view.getTopBar().getUsername());
+        assertEquals(FIXTURE_READER_F734AAEA, view.getTopBar().getUsername());
         assertEquals("QuestionSubmitViewModel[REDACTED]", view.toString());
       }
       var full = new MockHttpServletResponse();
@@ -1100,7 +1243,11 @@ class QuestionControllerTest {
       assertNull(
           f.accepting()
               .submit(
-                  params("question", "literal", "operation_token", new UUID(9, 1).toString()),
+                  params(
+                      FIXTURE_QUESTION_6D6CA52E,
+                      "literal",
+                      "operation_token",
+                      new UUID(9, 1).toString()),
                   actor,
                   new ExtendedModelMap(),
                   request,
@@ -1119,18 +1266,18 @@ class QuestionControllerTest {
       reset();
       try (var f = new Fixture()) {
         var actor = actor(role);
-        var request = f.authenticatedRequest(actor, "POST");
+        var request = f.authenticatedRequest(actor, FIXTURE_POST_E46D3AE9);
         var session = WebSessionId.parse(request.getSession(false).getId());
         var token = f.tokens.issue(session, "QSBREQ01");
         var input =
             params(
-                "question",
+                FIXTURE_QUESTION_6D6CA52E,
                 "e\u0301 <script>x</script>",
                 "operation_token",
                 token.token().toString());
         var firstTime = f.security.f.clock.value;
         for (int n = 1; n <= 2; n++) {
-          f.code = n == 1 ? "0000" : "0200";
+          f.code = n == 1 ? FIXTURE_0000_876EEFE0 : FIXTURE_0200_FC9DB3AC;
           f.security.f.clock.value = firstTime.plusSeconds(n - 1);
           var success = new MockHttpServletResponse();
           assertNull(f.accepting().submit(input, actor, new ExtendedModelMap(), request, success));
@@ -1162,19 +1309,23 @@ class QuestionControllerTest {
       reset();
       try (var f = new Fixture()) {
         var actor = actor(UserRole.USER);
-        var request = f.authenticatedRequest(actor, "POST");
+        var request = f.authenticatedRequest(actor, FIXTURE_POST_E46D3AE9);
         var session = WebSessionId.parse(request.getSession(false).getId());
         var token = f.tokens.issue(session, "QSBREQ01");
         var input =
-            params("question", "public retry body", "operation_token", token.token().toString());
+            params(
+                FIXTURE_QUESTION_6D6CA52E,
+                "public retry body",
+                "operation_token",
+                token.token().toString());
         if (gap) f.failReceipt = true;
         else f.responder = (id, bytes) -> new byte[1];
         var model = new ExtendedModelMap();
         var response = new MockHttpServletResponse();
         assertEquals("questions/new", f.accepting().submit(input, actor, model, request, response));
         assertEquals(503, response.getStatus());
-        var display = (QuestionSubmitViewModel) model.get("page");
-        assertEquals("public retry body", display.getValues().get("question"));
+        var display = (QuestionSubmitViewModel) model.get(FIXTURE_PAGE_861424BC);
+        assertEquals("public retry body", display.getValues().get(FIXTURE_QUESTION_6D6CA52E));
         assertEquals(token.token().toString(), display.getValues().get("operationToken"));
         assertFalse(display.getNotice().isEmpty());
         var completion =
@@ -1191,7 +1342,7 @@ class QuestionControllerTest {
         f.failReceipt = false;
         assertTrue(f.receipts.find(RECEIPT).isEmpty());
         f.responder = f::standard;
-        f.code = "0200";
+        f.code = FIXTURE_0200_FC9DB3AC;
         var success = new MockHttpServletResponse();
         assertNull(f.accepting().submit(input, actor, new ExtendedModelMap(), request, success));
         assertEquals(302, success.getStatus());
@@ -1223,19 +1374,21 @@ class QuestionControllerTest {
       reset();
       try (var f = new Fixture()) {
         var actor = actor(UserRole.USER);
-        var request = f.authenticatedRequest(actor, "POST");
+        var request = f.authenticatedRequest(actor, FIXTURE_POST_E46D3AE9);
         var session = WebSessionId.parse(request.getSession(false).getId());
         var token = f.tokens.issue(session, mode.equals("purpose") ? "QDLREQ01" : "QSBREQ01");
         UUID input = mode.equals("missing") ? new UUID(6, 7) : token.token();
         if (mode.equals("no-session")) request.setSession(null);
-        if (mode.equals("malformed-session")) request.setSession(new MockHttpSession(null, "bad"));
+        if (mode.equals("malformed-session"))
+          request.setSession(new MockHttpSession(null, FIXTURE_BAD_CBFEDA2B));
         if (mode.equals("expired"))
           f.security.f.clock.value = f.security.f.clock.value.plusSeconds(28801);
         var response = new MockHttpServletResponse();
         assertNull(
             f.accepting()
                 .submit(
-                    params("question", "literal", "operation_token", input.toString()),
+                    params(
+                        FIXTURE_QUESTION_6D6CA52E, "literal", "operation_token", input.toString()),
                     actor,
                     new ExtendedModelMap(),
                     request,
@@ -1249,7 +1402,7 @@ class QuestionControllerTest {
     reset();
     try (var f = new Fixture()) {
       var actor = actor(UserRole.USER);
-      var request = f.authenticatedRequest(actor, "POST");
+      var request = f.authenticatedRequest(actor, FIXTURE_POST_E46D3AE9);
       var session = WebSessionId.parse(request.getSession(false).getId());
       var token = f.tokens.issue(session, "QSBREQ01");
       f.afterReply = () -> f.security.f.repository.invalidate(session);
@@ -1257,7 +1410,11 @@ class QuestionControllerTest {
       assertNull(
           f.accepting()
               .submit(
-                  params("question", "literal", "operation_token", token.token().toString()),
+                  params(
+                      FIXTURE_QUESTION_6D6CA52E,
+                      "literal",
+                      "operation_token",
+                      token.token().toString()),
                   actor,
                   new ExtendedModelMap(),
                   request,
@@ -1274,7 +1431,7 @@ class QuestionControllerTest {
       try (var f = new Fixture()) {
         f.receipts.register(new ReceiptReference(RECEIPT, 1, SUBMITTED));
         var actor = actor(role);
-        var request = f.security.mock("GET", "/questions/accepted/" + RECEIPT);
+        var request = f.security.mock(FIXTURE_GET_04F32A7E, "/questions/accepted/" + RECEIPT);
         for (int n = 1; n <= 2; n++) {
           f.summary = "current API body " + n;
           var model = new ExtendedModelMap();
@@ -1282,13 +1439,13 @@ class QuestionControllerTest {
               "questions/accepted",
               f.accepting()
                   .accepted(RECEIPT, actor, model, request, new MockHttpServletResponse()));
-          var page = (QuestionAcceptedViewModel) model.get("page");
-          assertEquals("current API body " + n, page.getValues().get("question"));
+          var page = (QuestionAcceptedViewModel) model.get(FIXTURE_PAGE_861424BC);
+          assertEquals("current API body " + n, page.getValues().get(FIXTURE_QUESTION_6D6CA52E));
           assertEquals("2026-10-03 08:58:00", page.getValues().get("submittedAt"));
           assertEquals(RECEIPT, page.getValues().get("receiptId"));
-          assertEquals("reader", page.getTopBar().getUsername());
+          assertEquals(FIXTURE_READER_F734AAEA, page.getTopBar().getUsername());
           assertEquals("QuestionAcceptedViewModel[REDACTED]", page.toString());
-          var expected = request("QSDREQ01", 12, "a".repeat(64), new UUID(0, n));
+          var expected = request(FIXTURE_QSDREQ01_B5E5C68F, 12, "a".repeat(64), new UUID(0, n));
           number(expected, 256, 12, 1);
           assertArrayEquals(expected, f.requests.get(n - 1));
           Arrays.fill(expected, (byte) 0);
@@ -1333,7 +1490,7 @@ class QuestionControllerTest {
     try (var f = new Fixture();
         var context = f.acceptanceMvc()) {
       var actor = actor(UserRole.USER);
-      var request = f.authenticatedRequest(actor, "GET");
+      var request = f.authenticatedRequest(actor, FIXTURE_GET_04F32A7E);
       var mvc = MockMvcBuilders.webAppContextSetup(context).build();
       var newForm =
           mvc.perform(
@@ -1394,16 +1551,21 @@ class QuestionControllerTest {
         assertNull(result);
         assertEquals(503, response.getStatus());
       }
-      var request = f.authenticatedRequest(actor, "POST");
+      var request = f.authenticatedRequest(actor, FIXTURE_POST_E46D3AE9);
       var session = WebSessionId.parse(request.getSession(false).getId());
       var token = f.tokens.issue(session, "QSBREQ01");
-      var good = params("question", "literal", "operation_token", token.token().toString());
+      var good =
+          params(FIXTURE_QUESTION_6D6CA52E, "literal", "operation_token", token.token().toString());
       var invalid = new MockHttpServletResponse();
       assertEquals(
           "questions/new",
           f.accepting()
               .submit(
-                  params("question", "x\n", "operation_token", token.token().toString()),
+                  params(
+                      FIXTURE_QUESTION_6D6CA52E,
+                      "x\n",
+                      "operation_token",
+                      token.token().toString()),
                   actor,
                   new ExtendedModelMap(),
                   request,
@@ -1422,7 +1584,7 @@ class QuestionControllerTest {
         if (item.getValue() == 400 || item.getValue() == 503) assertEquals("questions/new", result);
         else assertNull(result);
       }
-      f.code = "0000";
+      f.code = FIXTURE_0000_876EEFE0;
       f.security.f.failure = "open";
       var failed = new MockHttpServletResponse();
       assertEquals(
@@ -1457,7 +1619,7 @@ class QuestionControllerTest {
                   RECEIPT,
                   actor,
                   new ExtendedModelMap(),
-                  f.security.mock("GET", "/questions/accepted/" + RECEIPT),
+                  f.security.mock(FIXTURE_GET_04F32A7E, "/questions/accepted/" + RECEIPT),
                   expiredGet));
       assertEquals(302, expiredGet.getStatus());
       assertEquals("/login?session-expired", expiredGet.getRedirectedUrl());
@@ -1470,23 +1632,23 @@ class QuestionControllerTest {
     try (var f = new Fixture();
         var pool = Executors.newFixedThreadPool(8)) {
       var actor = actor(UserRole.USER);
-      var request = f.authenticatedRequest(actor, "POST");
+      var request = f.authenticatedRequest(actor, FIXTURE_POST_E46D3AE9);
       var rawSession = request.getSession(false).getId();
       var token = f.tokens.issue(WebSessionId.parse(rawSession), "QSBREQ01");
-      f.code = "0200";
+      f.code = FIXTURE_0200_FC9DB3AC;
       var jobs = new ArrayList<Future<String>>();
       for (int n = 0; n < 100; n++)
         jobs.add(
             pool.submit(
                 () -> {
-                  var current = f.security.mock("POST", "/questions/new");
+                  var current = f.security.mock(FIXTURE_POST_E46D3AE9, "/questions/new");
                   current.setSession(new MockHttpSession(null, rawSession));
                   var reply = new MockHttpServletResponse();
                   assertNull(
                       f.accepting()
                           .submit(
                               params(
-                                  "question",
+                                  FIXTURE_QUESTION_6D6CA52E,
                                   "same current body",
                                   "operation_token",
                                   token.token().toString()),
@@ -1526,7 +1688,7 @@ class QuestionControllerTest {
   void rcpt006GCurrentCompletionFailureAndInputContracts() throws Exception {
     try (var f = new Fixture()) {
       var actor = actor(UserRole.USER);
-      var request = f.authenticatedRequest(actor, "POST");
+      var request = f.authenticatedRequest(actor, FIXTURE_POST_E46D3AE9);
       var id = WebSessionId.parse(request.getSession(false).getId());
       var token = f.tokens.issue(id, "QSBREQ01");
       f.afterReply = () -> f.security.f.failure = "open";
@@ -1535,7 +1697,11 @@ class QuestionControllerTest {
           "questions/new",
           f.accepting()
               .submit(
-                  params("question", "literal", "operation_token", token.token().toString()),
+                  params(
+                      FIXTURE_QUESTION_6D6CA52E,
+                      "literal",
+                      "operation_token",
+                      token.token().toString()),
                   actor,
                   new ExtendedModelMap(),
                   request,
@@ -1571,7 +1737,7 @@ class QuestionControllerTest {
           () ->
               f.accepting()
                   .newForm(
-                      () -> "reader",
+                      () -> FIXTURE_READER_F734AAEA,
                       new ExtendedModelMap(),
                       request,
                       new MockHttpServletResponse()));
@@ -1614,7 +1780,11 @@ class QuestionControllerTest {
           NullPointerException.class, () -> QuestionSubmitViewModel.redisplay(actor, null, ""));
       var form =
           QuestionSubmitForm.bind(
-              params("question", "literal", "operation_token", token.token().toString()));
+              params(
+                  FIXTURE_QUESTION_6D6CA52E,
+                  "literal",
+                  "operation_token",
+                  token.token().toString()));
       assertThrows(
           NullPointerException.class, () -> QuestionSubmitViewModel.redisplay(actor, form, null));
       form.close();
@@ -1624,7 +1794,7 @@ class QuestionControllerTest {
           new QuestionDetailResponseData(
               new QuestionId(1),
               RECEIPT,
-              "reader",
+              FIXTURE_READER_F734AAEA,
               AnswerState.UNANSWERED,
               "literal",
               Optional.empty(),
@@ -1645,7 +1815,7 @@ class QuestionControllerTest {
                   new QuestionDetailResponseData(
                       new QuestionId(1),
                       RECEIPT,
-                      "reader",
+                      FIXTURE_READER_F734AAEA,
                       AnswerState.UNANSWERED,
                       "",
                       Optional.empty(),
@@ -1656,13 +1826,13 @@ class QuestionControllerTest {
 
   @Test
   void rcpt006FRealSecuredHttpPostCsrfRefreshAndNoAnonymousSubmission() throws Exception {
-    for (String role : List.of("USER", "ADMIN")) {
+    for (String role : List.of("USER", FIXTURE_ADMIN_C4BB3010)) {
       reset();
       try (var c = db.web();
           var s = c.createStatement()) {
         s.executeUpdate("delete from schubert_web_session.web_receipt_references");
       }
-      var api = new SessionFormLoginTest.Api("0000", role, "0000", 0);
+      var api = new SessionFormLoginTest.Api(FIXTURE_0000_876EEFE0, role, FIXTURE_0000_876EEFE0, 0);
       try (var f = new Fixture();
           var web =
               new EmbeddedWebSecurityTest.Server(
@@ -1684,14 +1854,25 @@ class QuestionControllerTest {
                   })) {
         f.verifyNoTransaction = true;
         f.security.f.clock.value = web.f.clock.value;
-        var loginPage = web.send("GET", "/login", null, null, true);
-        var initial = loginPage.headers().firstValue("set-cookie").orElseThrow().split(";", 2)[0];
+        var loginPage = web.send(FIXTURE_GET_04F32A7E, FIXTURE_LOGIN_F843C044, null, null, true);
+        var initial =
+            loginPage
+                .headers()
+                .firstValue(FIXTURE_SET_COOKIE_39067BC9)
+                .orElseThrow()
+                .split(";", 2)[0];
         var csrf = loginPage.body().substring(6);
         var login =
-            web.send("POST", "/login", initial, "username=reader&password=p&_csrf=" + csrf, true);
+            web.send(
+                FIXTURE_POST_E46D3AE9,
+                FIXTURE_LOGIN_F843C044,
+                initial,
+                "username=reader&password=p&_csrf=" + csrf,
+                true);
         assertEquals(302, login.statusCode());
-        var cookie = login.headers().firstValue("set-cookie").orElseThrow().split(";", 2)[0];
-        var newForm = web.send("GET", "/questions/new", cookie, null, true);
+        var cookie =
+            login.headers().firstValue(FIXTURE_SET_COOKIE_39067BC9).orElseThrow().split(";", 2)[0];
+        var newForm = web.send(FIXTURE_GET_04F32A7E, "/questions/new", cookie, null, true);
         assertEquals(200, newForm.statusCode());
         assertTrue(
             newForm.headers().firstValue("cache-control").orElseThrow().contains("no-store"));
@@ -1702,7 +1883,7 @@ class QuestionControllerTest {
         assertEquals(
             403,
             web.send(
-                    "POST",
+                    FIXTURE_POST_E46D3AE9,
                     "/questions/new",
                     cookie,
                     "question=public&operation_token=" + operation,
@@ -1710,21 +1891,24 @@ class QuestionControllerTest {
                 .statusCode());
         assertTrue(f.requests.isEmpty());
         var body = "question=public&operation_token=" + operation + "&_csrf=" + protectedToken;
-        var submitted = web.send("POST", "/questions/new", cookie, body, true);
+        var submitted = web.send(FIXTURE_POST_E46D3AE9, "/questions/new", cookie, body, true);
         assertEquals(302, submitted.statusCode());
         assertEquals(
             "/questions/accepted/" + RECEIPT,
             submitted.headers().firstValue("location").orElseThrow());
         assertEquals(1, f.requests.size());
         for (int n = 0; n < 2; n++) {
-          var result = web.send("GET", "/questions/accepted/" + RECEIPT, cookie, null, true);
+          var result =
+              web.send(FIXTURE_GET_04F32A7E, "/questions/accepted/" + RECEIPT, cookie, null, true);
           assertEquals(200, result.statusCode());
           assertEquals("質問受付完了", Jsoup.parse(result.body()).title());
-          assertEquals("QSDREQ01", ascii(f.requests.get(n + 1), 11, 8));
+          assertEquals(FIXTURE_QSDREQ01_B5E5C68F, ascii(f.requests.get(n + 1), 11, 8));
         }
         int sent = f.requests.size();
-        assertEquals(302, web.send("GET", "/questions/new", null, null, true).statusCode());
-        assertNotEquals(302, web.send("POST", "/questions/new", null, body, true).statusCode());
+        assertEquals(
+            302, web.send(FIXTURE_GET_04F32A7E, "/questions/new", null, null, true).statusCode());
+        assertNotEquals(
+            302, web.send(FIXTURE_POST_E46D3AE9, "/questions/new", null, body, true).statusCode());
         assertEquals(sent, f.requests.size());
         f.erased();
       }
@@ -1735,10 +1919,11 @@ class QuestionControllerTest {
   void rcpt006CLostRedirectAndBlankWireCannotInventANewQuestion() throws Exception {
     try (var f = new Fixture()) {
       var actor = actor(UserRole.USER);
-      var request = f.authenticatedRequest(actor, "POST");
+      var request = f.authenticatedRequest(actor, FIXTURE_POST_E46D3AE9);
       var session = WebSessionId.parse(request.getSession(false).getId());
       var token = f.tokens.issue(session, "QSBREQ01");
-      var input = params("question", "literal", "operation_token", token.token().toString());
+      var input =
+          params(FIXTURE_QUESTION_6D6CA52E, "literal", "operation_token", token.token().toString());
       var lost =
           new MockHttpServletResponse() {
             @Override
@@ -1762,7 +1947,7 @@ class QuestionControllerTest {
       assertTrue(completed.isPresent());
       assertEquals(
           new ReceiptReference(RECEIPT, 1, SUBMITTED), f.receipts.find(RECEIPT).orElseThrow());
-      f.code = "0200";
+      f.code = FIXTURE_0200_FC9DB3AC;
       f.security.f.clock.value = f.security.f.clock.value.plusSeconds(30);
       var delivered = new MockHttpServletResponse();
       assertNull(f.accepting().submit(input, actor, new ExtendedModelMap(), request, delivered));
@@ -1793,14 +1978,14 @@ class QuestionControllerTest {
                   RECEIPT,
                   actor,
                   new ExtendedModelMap(),
-                  f.security.mock("GET", "/questions/accepted/" + RECEIPT),
+                  f.security.mock(FIXTURE_GET_04F32A7E, "/questions/accepted/" + RECEIPT),
                   blank));
       assertEquals(503, blank.getStatus());
       var empty =
           new QuestionDetailResponseData(
               new QuestionId(1),
               RECEIPT,
-              "reader",
+              FIXTURE_READER_F734AAEA,
               AnswerState.UNANSWERED,
               "",
               Optional.empty(),
@@ -1872,11 +2057,11 @@ class QuestionControllerTest {
     final List<byte[]> buffers = new CopyOnWriteArrayList<>();
     final JmsRequestReplyClient wire =
         new JmsRequestReplyClient(new ReplyCorrelationRegistry(), CLOCK, 12);
-    volatile String code = "0000";
+    volatile String code = FIXTURE_0000_876EEFE0;
     volatile String state = "";
-    volatile String summary = "question";
+    volatile String summary = FIXTURE_QUESTION_6D6CA52E;
     volatile String answer = "";
-    volatile String owner = "reader";
+    volatile String owner = FIXTURE_READER_F734AAEA;
     volatile int count = 1;
     volatile int total = 1;
     volatile long replyId;
@@ -1927,10 +2112,11 @@ class QuestionControllerTest {
 
     byte[] standard(UUID id, byte[] request) {
       if (ascii(request, 11, 8).equals("QSBREQ01")) return submitReply(id, request);
-      boolean detail = ascii(request, 11, 8).equals("QSDREQ01");
-      boolean success = code.equals("0000") || code.equals("0200");
+      boolean detail = ascii(request, 11, 8).equals(FIXTURE_QSDREQ01_B5E5C68F);
+      boolean success = code.equals(FIXTURE_0000_876EEFE0) || code.equals(FIXTURE_0200_FC9DB3AC);
       String selected = detail ? "" : text(request, 576, 12);
-      String normalState = state.isEmpty() ? (selected.isEmpty() ? "UNANSWERED" : selected) : state;
+      String normalState =
+          state.isEmpty() ? (selected.isEmpty() ? FIXTURE_UNANSWERED_8B420ADF : selected) : state;
       int page =
           detail
               ? 1
@@ -1966,7 +2152,8 @@ class QuestionControllerTest {
           put(bytes, 370, 4096, summary);
           put(bytes, 4466, 4096, answer);
           put(bytes, 8562, 17, "20261003085800000");
-          if (normalState.equals("ANSWERED")) put(bytes, 8579, 17, "20261003085900000");
+          if (normalState.equals(FIXTURE_ANSWERED_6CA66E97))
+            put(bytes, 8579, 17, "20261003085900000");
         }
       } else {
         number(bytes, 256, 6, success ? page : 0);
@@ -1979,7 +2166,9 @@ class QuestionControllerTest {
         String normalOwner = requestedOwner.isEmpty() ? owner : requestedOwner;
         String keyword = text(request, 256, 256);
         String normalSummary =
-            summary.equals("question") && !keyword.isEmpty() ? "question " + keyword : summary;
+            summary.equals(FIXTURE_QUESTION_6D6CA52E) && !keyword.isEmpty()
+                ? "question " + keyword
+                : summary;
         for (int i = 0; i < rows; i++) {
           int at = 304 + 672 * i;
           long target = rows - i;
@@ -1993,7 +2182,8 @@ class QuestionControllerTest {
           put(bytes, at + 102, 512, normalSummary);
           put(bytes, at + 614, 12, normalState);
           put(bytes, at + 626, 17, "20261003085800000");
-          if (normalState.equals("ANSWERED")) put(bytes, at + 643, 17, "20261003085900000");
+          if (normalState.equals(FIXTURE_ANSWERED_6CA66E97))
+            put(bytes, at + 643, 17, "20261003085900000");
         }
       }
       return bytes;
@@ -2019,7 +2209,7 @@ class QuestionControllerTest {
       number(bytes, 193, 6, 0);
       number(bytes, 199, 9, 320);
       put(bytes, 208, 4, code);
-      boolean success = code.equals("0000") || code.equals("0200");
+      boolean success = code.equals(FIXTURE_0000_876EEFE0) || code.equals(FIXTURE_0200_FC9DB3AC);
       if (success) put(bytes, 256, 26, RECEIPT);
       number(bytes, 282, 12, success ? 1 : 0);
       number(bytes, 294, 17, success ? 20261003085800000L : 0);

@@ -47,6 +47,35 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** PG-D-154; OPS-009/UI251/SS343 6.11; independent PUB001..012; no real root/service mutation. */
 final class InspectorEnvironmentPublisherTest {
+  private static final String FIXTURE_UNLINK_04963CA9 = "unlink";
+  private static final String FIXTURE_CREATE_5498A731 = "create";
+  private static final String FIXTURE_PUBLISH_69201707 = "publish";
+  private static final String FIXTURE_FORCE_34B3B0C3 = "force";
+  private static final String FIXTURE_SYNC_5CFA1A73 = "sync";
+  private static final String FIXTURE_WRITE_BC2434A1 = "write";
+  private static final String FIXTURE_OPENWRITER_F648680A = "openWriter";
+  private static final String FIXTURE_DIR_16E08808 = "dir";
+  private static final String FIXTURE_FILE_BFDDE6F5 = "file";
+  private static final String FIXTURE_MODE_B6D5C2C3 = "mode";
+  private static final String FIXTURE_UID_0C18F38C = "uid";
+  private static final String FIXTURE_GID_0ACDD642 = "gid";
+  private static final String FIXTURE_SIZE_EB1E91E4 = "size";
+  private static final String FIXTURE_ACL_43B23946 = "acl";
+  private static final String FIXTURE_FILESYSTEM_909B3E41 = "filesystem";
+  private static final String FIXTURE_READONLY_C4A495E7 = "readonly";
+  private static final String FIXTURE_TMPFS_5401E650 = "tmpfs";
+  private static final String FIXTURE_ATTRIBUTES_D300E055 = "attributes";
+  private static final String FIXTURE_WRITERCLOSE_7C3AE2E0 = "writerClose";
+  private static final String FIXTURE_SAVED_A9347C50 = "saved";
+  private static final String FIXTURE_OPENENTRY_4A0BE764 = "openEntry";
+  private static final String FIXTURE_ENTRYCLOSE_2B5D4D25 = "entryClose";
+  private static final String FIXTURE_WRITESIZE_6572EE64 = "writeSize";
+  private static final String FIXTURE_OPENREAD_79674C24 = "openRead";
+  private static final String FIXTURE_READSIZE_5B0F1EC7 = "readSize";
+  private static final String FIXTURE_READ_6F365882 = "read";
+  private static final String FIXTURE_READCLOSE_8248E588 = "readClose";
+  private static final String FIXTURE_NEW_80270E39 = "new";
+  private static final String FIXTURE_RETIRE_A2A9D4FF = "retire";
   private static final BatchRun RUN =
       new BatchRun(
           UUID.fromString("00000000-0000-0000-0000-000000000154"),
@@ -66,8 +95,8 @@ final class InspectorEnvironmentPublisherTest {
         Files.writeString(preserved, "independent-old-byte-vector");
         assertThrows(StorageIoException.class, f.publisher::requireFresh);
         assertEquals("independent-old-byte-vector", Files.readString(preserved));
-        assertEquals(0, f.count("unlink"));
-        assertEquals(0, f.count("create"));
+        assertEquals(0, f.count(FIXTURE_UNLINK_04963CA9));
+        assertEquals(0, f.count(FIXTURE_CREATE_5498A731));
         f.released();
       }
     }
@@ -77,8 +106,8 @@ final class InspectorEnvironmentPublisherTest {
       f.publisher.requireFresh();
       assertEquals("unrelated-preserved-byte-vector", Files.readString(unrelated));
       assertFalse(Files.exists(f.target));
-      assertEquals(0, f.count("unlink"));
-      assertEquals(0, f.count("create"));
+      assertEquals(0, f.count(FIXTURE_UNLINK_04963CA9));
+      assertEquals(0, f.count(FIXTURE_CREATE_5498A731));
       f.released();
     }
   }
@@ -91,20 +120,20 @@ final class InspectorEnvironmentPublisherTest {
       assertEquals(0100600, Files.getAttribute(f.target, "unix:mode"));
       assertEquals(1, Files.getAttribute(f.target, "unix:nlink"));
       assertFalse(Files.exists(f.part));
-      assertEquals(1, f.count("create"));
-      assertEquals(1, f.count("publish"));
-      assertEquals(1, f.count("force"));
-      assertEquals(1, f.count("sync"));
+      assertEquals(1, f.count(FIXTURE_CREATE_5498A731));
+      assertEquals(1, f.count(FIXTURE_PUBLISH_69201707));
+      assertEquals(1, f.count(FIXTURE_FORCE_34B3B0C3));
+      assertEquals(1, f.count(FIXTURE_SYNC_5CFA1A73));
       f.released();
       f.reset();
       f.publisher.retire(RUN);
       assertFalse(Files.exists(f.target));
-      assertEquals(1, f.count("unlink"));
-      assertEquals(1, f.count("sync"));
+      assertEquals(1, f.count(FIXTURE_UNLINK_04963CA9));
+      assertEquals(1, f.count(FIXTURE_SYNC_5CFA1A73));
       f.reset();
       f.publisher.retire(RUN);
-      assertEquals(0, f.count("unlink"));
-      assertEquals(0, f.count("sync"));
+      assertEquals(0, f.count(FIXTURE_UNLINK_04963CA9));
+      assertEquals(0, f.count(FIXTURE_SYNC_5CFA1A73));
       boolean alive = f.root.atDirectory(Files::isDirectory);
       assertTrue(alive);
     }
@@ -119,10 +148,10 @@ final class InspectorEnvironmentPublisherTest {
       f.publisher.prepare(RUN);
       assertEquals(GOLDEN, Files.readString(f.target));
       assertEquals(inode, Files.getAttribute(f.target, "unix:ino"));
-      assertEquals(0, f.count("create"));
-      assertEquals(0, f.count("write"));
-      assertEquals(1, f.count("force"));
-      assertEquals(1, f.count("sync"));
+      assertEquals(0, f.count(FIXTURE_CREATE_5498A731));
+      assertEquals(0, f.count(FIXTURE_WRITE_BC2434A1));
+      assertEquals(1, f.count(FIXTURE_FORCE_34B3B0C3));
+      assertEquals(1, f.count(FIXTURE_SYNC_5CFA1A73));
       for (BatchRun other :
           List.of(
               new BatchRun(new UUID(1, 2), RUN.cutoff()),
@@ -149,7 +178,7 @@ final class InspectorEnvironmentPublisherTest {
         failure(() -> f.publisher.prepare(RUN));
         assertEquals(content, Files.readString(f.part));
         assertFalse(Files.exists(f.target));
-        assertEquals(0, f.count("openWriter"));
+        assertEquals(0, f.count(FIXTURE_OPENWRITER_F648680A));
       }
     try (var f = fixture()) {
       Path outside = Files.writeString(f.directory.resolve("outside"), "outside unchanged");
@@ -163,9 +192,18 @@ final class InspectorEnvironmentPublisherTest {
 
   @Test
   void permissionsAndNull() throws Exception {
-    for (String role : List.of("dir", "file")) {
+    for (String role : List.of(FIXTURE_DIR_16E08808, FIXTURE_FILE_BFDDE6F5)) {
       for (String key :
-          List.of("mode", "uid", "gid", "nlink", "size", "dev", "ino", "lastModifiedTime", "ctime"))
+          List.of(
+              FIXTURE_MODE_B6D5C2C3,
+              FIXTURE_UID_0C18F38C,
+              FIXTURE_GID_0ACDD642,
+              "nlink",
+              FIXTURE_SIZE_EB1E91E4,
+              "dev",
+              "ino",
+              "lastModifiedTime",
+              "ctime"))
         for (Object wrong : Arrays.asList(null, "wrong type"))
           try (var f = fixture()) {
             f.change =
@@ -173,41 +211,54 @@ final class InspectorEnvironmentPublisherTest {
                   if (observed.equals(role)) values.put(key, wrong);
                 };
             failure(() -> f.publisher.prepare(RUN));
-            assertEquals(0, f.count("write"));
+            assertEquals(0, f.count(FIXTURE_WRITE_BC2434A1));
           }
-      for (String field : List.of("mode", "uid", "gid", "nlink", "size"))
+      for (String field :
+          List.of(
+              FIXTURE_MODE_B6D5C2C3,
+              FIXTURE_UID_0C18F38C,
+              FIXTURE_GID_0ACDD642,
+              "nlink",
+              FIXTURE_SIZE_EB1E91E4))
         try (var f = fixture()) {
           f.change =
               (observed, values) -> {
                 if (observed.equals(role))
-                  values.put(field, field.equals("size") ? (Object) (-1L) : 0);
-                if (observed.equals(role) && (field.equals("uid") || field.equals("gid")))
+                  values.put(field, field.equals(FIXTURE_SIZE_EB1E91E4) ? (Object) (-1L) : 0);
+                if (observed.equals(role)
+                    && (field.equals(FIXTURE_UID_0C18F38C) || field.equals(FIXTURE_GID_0ACDD642)))
                   values.put(field, 99);
               };
           failure(() -> f.publisher.prepare(RUN));
-          assertEquals(0, f.count("write"));
+          assertEquals(0, f.count(FIXTURE_WRITE_BC2434A1));
         }
       for (String invalid :
-          List.of("nullAttributes", "nullAcl", "acl", "nullFilesystem", "filesystem", "readonly"))
+          List.of(
+              "nullAttributes",
+              "nullAcl",
+              FIXTURE_ACL_43B23946,
+              "nullFilesystem",
+              FIXTURE_FILESYSTEM_909B3E41,
+              FIXTURE_READONLY_C4A495E7))
         try (var f = fixture()) {
           f.badRole = role;
           f.invalid = invalid;
           failure(() -> f.publisher.prepare(RUN));
-          assertEquals(0, f.count("write"));
+          assertEquals(0, f.count(FIXTURE_WRITE_BC2434A1));
         }
     }
     try (var f = fixture()) {
       f.change =
           (role, values) -> {
-            if (role.equals("file")) values.put("dev", Long.MAX_VALUE);
+            if (role.equals(FIXTURE_FILE_BFDDE6F5)) values.put("dev", Long.MAX_VALUE);
           };
       failure(() -> f.publisher.prepare(RUN));
-      assertEquals(0, f.count("write"));
+      assertEquals(0, f.count(FIXTURE_WRITE_BC2434A1));
     }
     // Independent value-object comparisons: mutation must not be hidden by allowed ctime changes.
     FileTime time = FileTime.fromMillis(1);
     Metadata original = new Metadata(0100600, 0, 0, 1, 90, 2, 3, time, time);
-    Snapshot before = new Snapshot(original, "tmpfs", false);
+    Snapshot before = new Snapshot(original, FIXTURE_TMPFS_5401E650, false);
     List<Metadata> different =
         List.of(
             new Metadata(0100640, 0, 0, 1, 90, 2, 3, time, time),
@@ -217,26 +268,29 @@ final class InspectorEnvironmentPublisherTest {
             new Metadata(0100600, 0, 0, 1, 90, 4, 3, time, time),
             new Metadata(0100600, 0, 0, 1, 90, 2, 4, time, time));
     for (Metadata other : different) {
-      Snapshot changed = new Snapshot(other, "tmpfs", false);
+      Snapshot changed = new Snapshot(other, FIXTURE_TMPFS_5401E650, false);
       assertFalse(before.sameIdentity(changed));
       assertFalse(before.samePublishedFile(changed));
     }
     assertFalse(before.sameIdentity(new Snapshot(original, "ext4", false)));
-    assertFalse(before.sameIdentity(new Snapshot(original, "tmpfs", true)));
+    assertFalse(before.sameIdentity(new Snapshot(original, FIXTURE_TMPFS_5401E650, true)));
     assertFalse(
         before.samePublishedFile(
-            new Snapshot(new Metadata(0100600, 0, 0, 1, 91, 2, 3, time, time), "tmpfs", false)));
+            new Snapshot(
+                new Metadata(0100600, 0, 0, 1, 91, 2, 3, time, time),
+                FIXTURE_TMPFS_5401E650,
+                false)));
     assertFalse(
         before.samePublishedFile(
             new Snapshot(
                 new Metadata(0100600, 0, 0, 1, 90, 2, 3, FileTime.fromMillis(2), time),
-                "tmpfs",
+                FIXTURE_TMPFS_5401E650,
                 false)));
     assertTrue(
         before.samePublishedFile(
             new Snapshot(
                 new Metadata(0100600, 0, 0, 1, 90, 2, 3, time, FileTime.fromMillis(2)),
-                "tmpfs",
+                FIXTURE_TMPFS_5401E650,
                 false)));
   }
 
@@ -249,27 +303,27 @@ final class InspectorEnvironmentPublisherTest {
           assertThrows(IllegalArgumentException.class, () -> f.publisher.prepare(RUN));
         else failure(() -> f.publisher.prepare(RUN));
         assertEquals(length, Files.size(f.target));
-        assertEquals(0, f.count("openWriter"));
+        assertEquals(0, f.count(FIXTURE_OPENWRITER_F648680A));
       }
     // BUG-151/YKT-117: inode metadata and channel sizes are independent observations.
     for (int at : List.of(2, 3))
       try (var f = fixture()) {
         f.change =
             (role, values) -> {
-              if (role.equals("file") && f.count("attributes") == at)
-                values.put("size", at == 2 ? 1L : (long) GOLDEN.length() + 1);
+              if (role.equals(FIXTURE_FILE_BFDDE6F5) && f.count(FIXTURE_ATTRIBUTES_D300E055) == at)
+                values.put(FIXTURE_SIZE_EB1E91E4, at == 2 ? 1L : (long) GOLDEN.length() + 1);
             };
         failure(() -> f.publisher.prepare(RUN));
         assertFalse(Files.exists(f.target));
         assertTrue(Files.exists(f.part));
         assertEquals(at == 2 ? "" : GOLDEN, Files.readString(f.part));
-        assertEquals(at == 2 ? 0 : 1, f.count("write"));
+        assertEquals(at == 2 ? 0 : 1, f.count(FIXTURE_WRITE_BC2434A1));
       }
     try (var f = fixture()) {
       f.writeLimit = 7;
       f.publisher.prepare(RUN);
       assertEquals(GOLDEN, Files.readString(f.target));
-      assertTrue(f.count("write") > 1);
+      assertTrue(f.count(FIXTURE_WRITE_BC2434A1) > 1);
     }
     for (String behavior : List.of("zero", "negative", "overflow", "position"))
       try (var f = fixture()) {
@@ -310,7 +364,7 @@ final class InspectorEnvironmentPublisherTest {
         try (var f = fixture()) {
           if (reuse) f.seed();
           f.on(
-              "attributes",
+              FIXTURE_ATTRIBUTES_D300E055,
               point,
               () -> {
                 Files.move(f.target, f.directory.resolve("before-read"));
@@ -331,32 +385,32 @@ final class InspectorEnvironmentPublisherTest {
         }
         failure(() -> f.publisher.prepare(RUN));
         failure(() -> f.publisher.retire(RUN));
-        assertEquals(0, f.count("openWriter"));
+        assertEquals(0, f.count(FIXTURE_OPENWRITER_F648680A));
       }
     try (var f = fixture()) {
       f.on(
-          "writerClose",
+          FIXTURE_WRITERCLOSE_7C3AE2E0,
           1,
           () -> {
-            Files.move(f.part, f.directory.resolve("saved"));
+            Files.move(f.part, f.directory.resolve(FIXTURE_SAVED_A9347C50));
             Files.writeString(f.part, GOLDEN);
           });
       failure(() -> f.publisher.prepare(RUN));
       assertFalse(Files.exists(f.target));
-      assertEquals(GOLDEN, Files.readString(f.directory.resolve("saved")));
+      assertEquals(GOLDEN, Files.readString(f.directory.resolve(FIXTURE_SAVED_A9347C50)));
     }
     try (var f = fixture()) {
-      f.on("publish", 1, () -> Files.writeString(f.target, GOLDEN));
+      f.on(FIXTURE_PUBLISH_69201707, 1, () -> Files.writeString(f.target, GOLDEN));
       failure(() -> f.publisher.prepare(RUN));
       assertEquals(GOLDEN, Files.readString(f.target));
       assertEquals(GOLDEN, Files.readString(f.part));
     }
     try (var f = fixture()) {
       f.on(
-          "sync",
+          FIXTURE_SYNC_5CFA1A73,
           1,
           () -> {
-            Files.move(f.target, f.directory.resolve("saved"));
+            Files.move(f.target, f.directory.resolve(FIXTURE_SAVED_A9347C50));
             Files.writeString(f.target, GOLDEN);
           });
       failure(() -> f.publisher.prepare(RUN));
@@ -364,12 +418,12 @@ final class InspectorEnvironmentPublisherTest {
     }
     try (var f = fixture()) {
       f.on(
-          "sync",
+          FIXTURE_SYNC_5CFA1A73,
           1,
           () ->
               f.change =
                   (role, values) -> {
-                    if (role.equals("dir")) values.put("ino", Long.MAX_VALUE);
+                    if (role.equals(FIXTURE_DIR_16E08808)) values.put("ino", Long.MAX_VALUE);
                   });
       failure(() -> f.publisher.prepare(RUN));
       assertEquals(GOLDEN, Files.readString(f.target));
@@ -377,15 +431,15 @@ final class InspectorEnvironmentPublisherTest {
     try (var f = fixture()) {
       f.seed();
       f.on(
-          "openEntry",
+          FIXTURE_OPENENTRY_4A0BE764,
           4,
           () -> {
-            Files.move(f.target, f.directory.resolve("saved"));
+            Files.move(f.target, f.directory.resolve(FIXTURE_SAVED_A9347C50));
             Files.writeString(f.target, GOLDEN);
           });
       failure(() -> f.publisher.retire(RUN));
       assertEquals(GOLDEN, Files.readString(f.target));
-      assertEquals(0, f.count("unlink"));
+      assertEquals(0, f.count(FIXTURE_UNLINK_04963CA9));
     }
   }
 
@@ -395,26 +449,26 @@ final class InspectorEnvironmentPublisherTest {
         false,
         false,
         Map.ofEntries(
-            Map.entry("attributes", 17),
-            Map.entry("acl", 17),
-            Map.entry("filesystem", 17),
-            Map.entry("readonly", 17),
-            Map.entry("openEntry", 8),
-            Map.entry("entryClose", 8),
-            Map.entry("create", 1),
-            Map.entry("publish", 1),
-            Map.entry("sync", 1),
-            Map.entry("openWriter", 1),
-            Map.entry("writeSize", 2),
-            Map.entry("write", 1),
-            Map.entry("force", 1),
-            Map.entry("writerClose", 1),
-            Map.entry("openRead", 2),
-            Map.entry("readSize", 4),
-            Map.entry("read", 4),
-            Map.entry("readClose", 2)));
+            Map.entry(FIXTURE_ATTRIBUTES_D300E055, 17),
+            Map.entry(FIXTURE_ACL_43B23946, 17),
+            Map.entry(FIXTURE_FILESYSTEM_909B3E41, 17),
+            Map.entry(FIXTURE_READONLY_C4A495E7, 17),
+            Map.entry(FIXTURE_OPENENTRY_4A0BE764, 8),
+            Map.entry(FIXTURE_ENTRYCLOSE_2B5D4D25, 8),
+            Map.entry(FIXTURE_CREATE_5498A731, 1),
+            Map.entry(FIXTURE_PUBLISH_69201707, 1),
+            Map.entry(FIXTURE_SYNC_5CFA1A73, 1),
+            Map.entry(FIXTURE_OPENWRITER_F648680A, 1),
+            Map.entry(FIXTURE_WRITESIZE_6572EE64, 2),
+            Map.entry(FIXTURE_WRITE_BC2434A1, 1),
+            Map.entry(FIXTURE_FORCE_34B3B0C3, 1),
+            Map.entry(FIXTURE_WRITERCLOSE_7C3AE2E0, 1),
+            Map.entry(FIXTURE_OPENREAD_79674C24, 2),
+            Map.entry(FIXTURE_READSIZE_5B0F1EC7, 4),
+            Map.entry(FIXTURE_READ_6F365882, 4),
+            Map.entry(FIXTURE_READCLOSE_8248E588, 2)));
     try (var f = fixture()) {
-      f.fail = "sync";
+      f.fail = FIXTURE_SYNC_5CFA1A73;
       failure(() -> f.publisher.prepare(RUN));
       assertFalse(Files.exists(f.part));
       assertEquals(GOLDEN, Files.readString(f.target));
@@ -423,7 +477,7 @@ final class InspectorEnvironmentPublisherTest {
       assertEquals(GOLDEN, Files.readString(f.target));
     }
     try (var f = fixture()) {
-      f.fail = "write";
+      f.fail = FIXTURE_WRITE_BC2434A1;
       f.rawClose = true;
       failure(() -> f.publisher.prepare(RUN));
       assertTrue(Files.exists(f.part));
@@ -436,21 +490,21 @@ final class InspectorEnvironmentPublisherTest {
         true,
         false,
         Map.ofEntries(
-            Map.entry("attributes", 17),
-            Map.entry("acl", 17),
-            Map.entry("filesystem", 17),
-            Map.entry("readonly", 17),
-            Map.entry("openEntry", 8),
-            Map.entry("entryClose", 8),
-            Map.entry("sync", 1),
-            Map.entry("openWriter", 1),
-            Map.entry("writeSize", 2),
-            Map.entry("force", 1),
-            Map.entry("writerClose", 1),
-            Map.entry("openRead", 2),
-            Map.entry("readSize", 4),
-            Map.entry("read", 4),
-            Map.entry("readClose", 2)));
+            Map.entry(FIXTURE_ATTRIBUTES_D300E055, 17),
+            Map.entry(FIXTURE_ACL_43B23946, 17),
+            Map.entry(FIXTURE_FILESYSTEM_909B3E41, 17),
+            Map.entry(FIXTURE_READONLY_C4A495E7, 17),
+            Map.entry(FIXTURE_OPENENTRY_4A0BE764, 8),
+            Map.entry(FIXTURE_ENTRYCLOSE_2B5D4D25, 8),
+            Map.entry(FIXTURE_SYNC_5CFA1A73, 1),
+            Map.entry(FIXTURE_OPENWRITER_F648680A, 1),
+            Map.entry(FIXTURE_WRITESIZE_6572EE64, 2),
+            Map.entry(FIXTURE_FORCE_34B3B0C3, 1),
+            Map.entry(FIXTURE_WRITERCLOSE_7C3AE2E0, 1),
+            Map.entry(FIXTURE_OPENREAD_79674C24, 2),
+            Map.entry(FIXTURE_READSIZE_5B0F1EC7, 4),
+            Map.entry(FIXTURE_READ_6F365882, 4),
+            Map.entry(FIXTURE_READCLOSE_8248E588, 2)));
     try (var f = fixture()) {
       f.seed();
       f.rawRead = true;
@@ -466,31 +520,33 @@ final class InspectorEnvironmentPublisherTest {
         true,
         true,
         Map.ofEntries(
-            Map.entry("attributes", 9),
-            Map.entry("acl", 9),
-            Map.entry("filesystem", 9),
-            Map.entry("readonly", 9),
-            Map.entry("openEntry", 4),
-            Map.entry("entryClose", 4),
-            Map.entry("unlink", 1),
-            Map.entry("sync", 1),
-            Map.entry("openRead", 1),
-            Map.entry("readSize", 2),
-            Map.entry("read", 2),
-            Map.entry("readClose", 1)));
-    for (String point : List.of("attributes", "entryClose", "openEntry"))
+            Map.entry(FIXTURE_ATTRIBUTES_D300E055, 9),
+            Map.entry(FIXTURE_ACL_43B23946, 9),
+            Map.entry(FIXTURE_FILESYSTEM_909B3E41, 9),
+            Map.entry(FIXTURE_READONLY_C4A495E7, 9),
+            Map.entry(FIXTURE_OPENENTRY_4A0BE764, 4),
+            Map.entry(FIXTURE_ENTRYCLOSE_2B5D4D25, 4),
+            Map.entry(FIXTURE_UNLINK_04963CA9, 1),
+            Map.entry(FIXTURE_SYNC_5CFA1A73, 1),
+            Map.entry(FIXTURE_OPENREAD_79674C24, 1),
+            Map.entry(FIXTURE_READSIZE_5B0F1EC7, 2),
+            Map.entry(FIXTURE_READ_6F365882, 2),
+            Map.entry(FIXTURE_READCLOSE_8248E588, 1)));
+    for (String point :
+        List.of(
+            FIXTURE_ATTRIBUTES_D300E055, FIXTURE_ENTRYCLOSE_2B5D4D25, FIXTURE_OPENENTRY_4A0BE764))
       try (var f = fixture()) {
         f.seed();
         f.fail = point;
         f.reason = StorageIoException.Reason.MISSING;
-        f.failAt = point.equals("entryClose") ? 1 : 2;
+        f.failAt = point.equals(FIXTURE_ENTRYCLOSE_2B5D4D25) ? 1 : 2;
         failure(() -> f.publisher.retire(RUN));
         assertEquals(GOLDEN, Files.readString(f.target));
-        assertEquals(0, f.count("unlink"));
+        assertEquals(0, f.count(FIXTURE_UNLINK_04963CA9));
       }
     try (var f = fixture()) {
       f.seed();
-      f.fail = "sync";
+      f.fail = FIXTURE_SYNC_5CFA1A73;
       failure(() -> f.publisher.retire(RUN));
       assertFalse(Files.exists(f.target));
       f.reset();
@@ -509,18 +565,20 @@ final class InspectorEnvironmentPublisherTest {
                 new AssertionError("public compound")))
           try (var f = fixture()) {
             if (reuse) f.seed();
-            String body = reuse ? "force" : "write";
+            String body = reuse ? FIXTURE_FORCE_34B3B0C3 : FIXTURE_WRITE_BC2434A1;
             if (known) f.fail = body;
             f.compound =
                 (name, count) -> {
-                  if (count == 1 && (name.equals("writerClose") || (!known && name.equals(body)))) {
+                  if (count == 1
+                      && (name.equals(FIXTURE_WRITERCLOSE_7C3AE2E0)
+                          || (!known && name.equals(body)))) {
                     if (unknown instanceof RuntimeException failure) throw failure;
                     throw (Error) unknown;
                   }
                 };
             assertSame(unknown, assertThrows(unknown.getClass(), () -> f.publisher.prepare(RUN)));
             assertEquals(1, f.count(body));
-            assertEquals(1, f.count("writerClose"));
+            assertEquals(1, f.count(FIXTURE_WRITERCLOSE_7C3AE2E0));
             assertEquals(known ? 0 : 1, unknown.getSuppressed().length);
             for (Throwable secondary : unknown.getSuppressed())
               failure(
@@ -547,23 +605,23 @@ final class InspectorEnvironmentPublisherTest {
                 else f.publisher.prepare(RUN);
               });
           assertTrue(Thread.currentThread().isInterrupted());
-          assertEquals(0, f.count("attributes"));
+          assertEquals(0, f.count(FIXTURE_ATTRIBUTES_D300E055));
         } finally {
           Thread.interrupted();
         }
       }
-    for (String path : List.of("new", "reuse", "retire"))
+    for (String path : List.of(FIXTURE_NEW_80270E39, "reuse", FIXTURE_RETIRE_A2A9D4FF))
       for (boolean late : List.of(false, true))
         try (var f = fixture()) {
-          if (!path.equals("new")) f.seed();
+          if (!path.equals(FIXTURE_NEW_80270E39)) f.seed();
           f.on(
-              late ? "readonly" : "openRead",
-              late ? (path.equals("retire") ? 9 : 17) : 1,
+              late ? FIXTURE_READONLY_C4A495E7 : FIXTURE_OPENREAD_79674C24,
+              late ? (path.equals(FIXTURE_RETIRE_A2A9D4FF) ? 9 : 17) : 1,
               () -> Thread.currentThread().interrupt());
           try {
             failure(
                 () -> {
-                  if (path.equals("retire")) f.publisher.retire(RUN);
+                  if (path.equals(FIXTURE_RETIRE_A2A9D4FF)) f.publisher.retire(RUN);
                   else f.publisher.prepare(RUN);
                 });
             assertTrue(Thread.currentThread().isInterrupted());
@@ -571,12 +629,12 @@ final class InspectorEnvironmentPublisherTest {
             Thread.interrupted();
           }
         }
-    for (String path : List.of("new", "reuse", "retire"))
+    for (String path : List.of(FIXTURE_NEW_80270E39, "reuse", FIXTURE_RETIRE_A2A9D4FF))
       try (var f = fixture()) {
-        if (!path.equals("new")) f.seed();
+        if (!path.equals(FIXTURE_NEW_80270E39)) f.seed();
         var expected = new IllegalStateException("synthetic runtime failure");
         f.on(
-            "attributes",
+            FIXTURE_ATTRIBUTES_D300E055,
             3,
             () -> {
               throw expected;
@@ -586,7 +644,7 @@ final class InspectorEnvironmentPublisherTest {
             assertThrows(
                 IllegalStateException.class,
                 () -> {
-                  if (path.equals("retire")) f.publisher.retire(RUN);
+                  if (path.equals(FIXTURE_RETIRE_A2A9D4FF)) f.publisher.retire(RUN);
                   else f.publisher.prepare(RUN);
                 }));
         f.released();
@@ -606,8 +664,8 @@ final class InspectorEnvironmentPublisherTest {
                   return true;
                 }));
       for (var future : pending) future.get(10, TimeUnit.SECONDS);
-      assertEquals(1, f.count("create"));
-      assertEquals(1, f.count("publish"));
+      assertEquals(1, f.count(FIXTURE_CREATE_5498A731));
+      assertEquals(1, f.count(FIXTURE_PUBLISH_69201707));
       assertEquals(GOLDEN, Files.readString(f.target));
       pending.clear();
       for (int i = 0; i < 32; i++)
@@ -618,7 +676,7 @@ final class InspectorEnvironmentPublisherTest {
                   return true;
                 }));
       for (var future : pending) future.get(10, TimeUnit.SECONDS);
-      assertEquals(1, f.count("unlink"));
+      assertEquals(1, f.count(FIXTURE_UNLINK_04963CA9));
       assertFalse(Files.exists(f.target));
       f.publisher.prepare(RUN);
       pending.clear();
@@ -645,14 +703,14 @@ final class InspectorEnvironmentPublisherTest {
           NullPointerException.class, () -> new InspectorEnvironmentPublisher(f.root, f, null));
       assertThrows(NullPointerException.class, () -> f.publisher.prepare(null));
       assertThrows(NullPointerException.class, () -> f.publisher.retire(null));
-      assertEquals(0, f.count("attributes"));
+      assertEquals(0, f.count(FIXTURE_ATTRIBUTES_D300E055));
       var nativeSecurity = LinuxInodeSecurity.create();
       assertNotEquals(
           0, nativeSecurity.effectiveUid(), "local PT runs unprivileged; root deployment is IT");
       failure(() -> new InspectorEnvironmentPublisher(f.root, nativeSecurity).prepare(RUN));
       f.uid = 1;
       failure(() -> f.publisher.retire(RUN));
-      assertEquals(0, f.count("attributes"));
+      assertEquals(0, f.count(FIXTURE_ATTRIBUTES_D300E055));
     }
     var f = fixture();
     try {
@@ -751,8 +809,12 @@ final class InspectorEnvironmentPublisherTest {
                     String name = method.getName();
                     String point =
                         switch (name) {
-                          case "createPrivateFile" -> "create";
-                          case "openEntry", "publish", "unlink", "sync" -> name;
+                          case "createPrivateFile" -> FIXTURE_CREATE_5498A731;
+                          case FIXTURE_OPENENTRY_4A0BE764,
+                              FIXTURE_PUBLISH_69201707,
+                              FIXTURE_UNLINK_04963CA9,
+                              FIXTURE_SYNC_5CFA1A73 ->
+                              name;
                           default -> "";
                         };
                     if (!point.isEmpty()) point(point);
@@ -763,9 +825,9 @@ final class InspectorEnvironmentPublisherTest {
                     } catch (InvocationTargetException failure) {
                       throw failure.getCause();
                     }
-                    if (name.equals("createPrivateFile") || name.equals("openEntry"))
+                    if (name.equals("createPrivateFile") || name.equals(FIXTURE_OPENENTRY_4A0BE764))
                       entries.add((Integer) result);
-                    if (ownedClose) point("entryClose");
+                    if (ownedClose) point(FIXTURE_ENTRYCLOSE_2B5D4D25);
                     return result;
                   });
       root = OwnedTransferDirectory.open(calls, directory);
@@ -810,8 +872,8 @@ final class InspectorEnvironmentPublisherTest {
     }
 
     String role(Path held) throws IOException {
-      int mode = (Integer) nativeIo.attributes(held).get("mode");
-      return (mode & 0170000) == 040000 ? "dir" : "file";
+      int mode = (Integer) nativeIo.attributes(held).get(FIXTURE_MODE_B6D5C2C3);
+      return (mode & 0170000) == 040000 ? FIXTURE_DIR_16E08808 : FIXTURE_FILE_BFDDE6F5;
     }
 
     boolean selected(Path held) throws IOException {
@@ -820,37 +882,37 @@ final class InspectorEnvironmentPublisherTest {
 
     @Override
     public Map<String, Object> attributes(Path held) throws IOException {
-      point("attributes");
+      point(FIXTURE_ATTRIBUTES_D300E055);
       if (invalid.equals("nullAttributes") && selected(held)) return null;
       var result = new HashMap<>(nativeIo.attributes(held));
       String role = role(held);
-      int type = (Integer) result.get("mode") & 0170000;
-      result.put("mode", type | (role.equals("dir") ? 0700 : 0600));
-      result.put("uid", 0);
-      result.put("gid", 0);
+      int type = (Integer) result.get(FIXTURE_MODE_B6D5C2C3) & 0170000;
+      result.put(FIXTURE_MODE_B6D5C2C3, type | (role.equals(FIXTURE_DIR_16E08808) ? 0700 : 0600));
+      result.put(FIXTURE_UID_0C18F38C, 0);
+      result.put(FIXTURE_GID_0ACDD642, 0);
       change.accept(role, result);
       return result;
     }
 
     @Override
     public String filesystem(Path held) throws IOException {
-      point("filesystem");
+      point(FIXTURE_FILESYSTEM_909B3E41);
       assertNotNull(nativeIo.filesystem(held));
       if (selected(held)) {
         if (invalid.equals("nullFilesystem")) return null;
-        if (invalid.equals("filesystem")) return "nfs";
+        if (invalid.equals(FIXTURE_FILESYSTEM_909B3E41)) return "nfs";
       }
-      return "tmpfs";
+      return FIXTURE_TMPFS_5401E650;
     }
 
     @Override
     public byte[] accessAcl(Path held, int maximum) throws StorageIoException {
-      point("acl");
+      point(FIXTURE_ACL_43B23946);
       assertEquals(44, maximum);
       try {
         if (selected(held)) {
           if (invalid.equals("nullAcl")) return null;
-          if (invalid.equals("acl")) return new byte[] {2, 0, 0, 0};
+          if (invalid.equals(FIXTURE_ACL_43B23946)) return new byte[] {2, 0, 0, 0};
         }
       } catch (IOException failure) {
         throw new StorageIoException(StorageIoException.Reason.UNAVAILABLE);
@@ -860,9 +922,9 @@ final class InspectorEnvironmentPublisherTest {
 
     @Override
     public boolean readOnlyFilesystem(Path held) throws StorageIoException {
-      point("readonly");
+      point(FIXTURE_READONLY_C4A495E7);
       try {
-        return selected(held) && invalid.equals("readonly");
+        return selected(held) && invalid.equals(FIXTURE_READONLY_C4A495E7);
       } catch (IOException failure) {
         throw new StorageIoException(StorageIoException.Reason.UNAVAILABLE);
       }
@@ -875,7 +937,7 @@ final class InspectorEnvironmentPublisherTest {
 
     @Override
     public InspectorEnvironmentPublisher.Writer openWriter(Path held) throws IOException {
-      point("openWriter");
+      point(FIXTURE_OPENWRITER_F648680A);
       if (nullWriter) return null;
       var writer = nativeIo.openWriter(held);
       writers++;
@@ -883,7 +945,7 @@ final class InspectorEnvironmentPublisherTest {
         @Override
         public int write(ByteBuffer source) throws IOException {
           compoundBuffers.add(source.array());
-          point("write");
+          point(FIXTURE_WRITE_BC2434A1);
           int start = source.position();
           int remaining = source.remaining();
           if (writeBehavior.equals("zero")) return 0;
@@ -899,13 +961,13 @@ final class InspectorEnvironmentPublisherTest {
 
         @Override
         public long size() throws IOException {
-          point("writeSize");
-          return writer.size() + (count("writeSize") == badSizeAt ? 1 : 0);
+          point(FIXTURE_WRITESIZE_6572EE64);
+          return writer.size() + (count(FIXTURE_WRITESIZE_6572EE64) == badSizeAt ? 1 : 0);
         }
 
         @Override
         public void force() throws IOException {
-          point("force");
+          point(FIXTURE_FORCE_34B3B0C3);
           writer.force();
         }
 
@@ -913,7 +975,7 @@ final class InspectorEnvironmentPublisherTest {
         public void close() throws IOException {
           writer.close();
           writers--;
-          point("writerClose");
+          point(FIXTURE_WRITERCLOSE_7C3AE2E0);
           if (rawClose) throw new IOException("synthetic private write close diagnostic");
         }
       };
@@ -921,21 +983,21 @@ final class InspectorEnvironmentPublisherTest {
 
     @Override
     public SeekableByteChannel open(Path held) throws IOException {
-      point("openRead");
+      point(FIXTURE_OPENREAD_79674C24);
       var channel = nativeIo.open(held);
       readers++;
       return new SeekableByteChannel() {
         @Override
         public int read(ByteBuffer bytes) throws IOException {
           compoundBuffers.add(bytes.array());
-          point("read");
+          point(FIXTURE_READ_6F365882);
           if (rawRead) throw new IOException("synthetic private read diagnostic");
           return channel.read(bytes);
         }
 
         @Override
         public long size() throws IOException {
-          point("readSize");
+          point(FIXTURE_READSIZE_5B0F1EC7);
           return channel.size();
         }
 
@@ -943,7 +1005,7 @@ final class InspectorEnvironmentPublisherTest {
         public void close() throws IOException {
           channel.close();
           readers--;
-          point("readClose");
+          point(FIXTURE_READCLOSE_8248E588);
           if (rawClose) throw new IOException("synthetic private read close diagnostic");
         }
 
@@ -954,7 +1016,7 @@ final class InspectorEnvironmentPublisherTest {
 
         @Override
         public int write(ByteBuffer bytes) {
-          throw new AssertionError("readonly");
+          throw new AssertionError(FIXTURE_READONLY_C4A495E7);
         }
 
         @Override

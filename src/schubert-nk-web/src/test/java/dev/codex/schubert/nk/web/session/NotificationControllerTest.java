@@ -84,6 +84,36 @@ import org.springframework.web.context.support.AnnotationConfigWebApplicationCon
 
 /** Independent UI224/236 byte/HTTP/DOM oracle, PG-D347/016059/PT-NTF-HTTP001..010. */
 class NotificationControllerTest {
+  private static final String FIXTURE_READER_F734AAEA = "reader";
+  private static final String FIXTURE_GET_04F32A7E = "GET";
+  private static final String FIXTURE_NOTIFICATIONS_FF98C59A = "/notifications";
+  private static final String FIXTURE_0000_876EEFE0 = "0000";
+  private static final String FIXTURE_0200_FC9DB3AC = "0200";
+  private static final String FIXTURE_TYPE_D0070D5C = "type";
+  private static final String FIXTURE_ACCEPTED_E50B782C = "ACCEPTED";
+  private static final String FIXTURE_FROM_E5403D47 = "from";
+  private static final String FIXTURE_2024_01_01_270A4D24 = "2024-01-01";
+  private static final String FIXTURE_PAGE_861424BC = "page";
+  private static final String FIXTURE_USER_2DED8884 = "USER";
+  private static final String FIXTURE_ADMIN_C4BB3010 = "ADMIN";
+  private static final String FIXTURE_SCHBNK01_E209989D = "SCHBNK01";
+  private static final String FIXTURE_001_A3FEAA64 = "001";
+  private static final String FIXTURE_00000000_0000_0000_0000_000000000001_5D49BA04 =
+      "00000000-0000-0000-0000-000000000001";
+  private static final String FIXTURE_20261003090000000_7C7C75E7 = "20261003090000000";
+  private static final String FIXTURE_COMPLETED_BA0AE16A = "COMPLETED";
+  private static final String FIXTURE_ERROR_F717E7D8 = "ERROR";
+  private static final String FIXTURE_OWNER_622F06CB = "owner";
+  private static final String FIXTURE_QUESTION_6D6CA52E = "question";
+  private static final String FIXTURE_NOTIFICATIONS_1_89BB0591 = "/notifications/1";
+  private static final String FIXTURE_HREF_27C4F573 = "href";
+  private static final String FIXTURE_LOGIN_F843C044 = "/login";
+  private static final String FIXTURE_SET_COOKIE_39067BC9 = "set-cookie";
+  private static final String FIXTURE_RECEIVED_35302D54 = "RECEIVED";
+  private static final String FIXTURE_PROCESSING_01F94682 = "PROCESSING";
+  private static final String FIXTURE_CANCELLED_E01A549A = "CANCELLED";
+  private static final String FIXTURE_NOTIFICATIONS_DETAIL_5E217EDB = "notifications/detail";
+  private static final String FIXTURE_ANSWER_B2437A6A = "answer";
   private static final Clock CLOCK =
       Clock.fixed(Instant.parse("2026-10-03T00:00:00Z"), ZoneOffset.UTC);
   private static final String RECEIPT = "0123456789ABCDEFGHJKMNPQRS";
@@ -115,7 +145,7 @@ class NotificationControllerTest {
 
   private static SessionPrincipal actor(UserRole role) {
     return new SessionPrincipal(
-        "reader", role, AuthenticationContext.of("a".repeat(64)), Instant.EPOCH);
+        FIXTURE_READER_F734AAEA, role, AuthenticationContext.of("a".repeat(64)), Instant.EPOCH);
   }
 
   private static LinkedMultiValueMap<String, String> params(String... pairs) {
@@ -125,7 +155,7 @@ class NotificationControllerTest {
   }
 
   private static MockHttpServletRequest raw() {
-    return new MockHttpServletRequest("GET", "/notifications");
+    return new MockHttpServletRequest(FIXTURE_GET_04F32A7E, FIXTURE_NOTIFICATIONS_FF98C59A);
   }
 
   private static CsrfToken csrf() {
@@ -147,7 +177,7 @@ class NotificationControllerTest {
   @Test
   void ntf001IndependentWholeByteAndBothRoles() throws Exception {
     for (UserRole role : UserRole.values())
-      for (String code : List.of("0000", "0200"))
+      for (String code : List.of(FIXTURE_0000_876EEFE0, FIXTURE_0200_FC9DB3AC))
         for (int count : List.of(0, 1, 50))
           try (var f = new Fixture()) {
             f.code = code;
@@ -158,44 +188,51 @@ class NotificationControllerTest {
             assertEquals(
                 "notifications/list",
                 f.controller.list(
-                    params("type", "ACCEPTED", "from", "2024-01-01", "to", "2024-12-31"),
+                    params(
+                        FIXTURE_TYPE_D0070D5C,
+                        FIXTURE_ACCEPTED_E50B782C,
+                        FIXTURE_FROM_E5403D47,
+                        FIXTURE_2024_01_01_270A4D24,
+                        "to",
+                        "2024-12-31"),
                     actor(role),
                     model,
                     raw(),
                     response));
             assertEquals(200, response.getStatus());
-            var page = assertInstanceOf(NotificationListViewModel.class, model.get("page"));
+            var page =
+                assertInstanceOf(NotificationListViewModel.class, model.get(FIXTURE_PAGE_861424BC));
             assertEquals(count, page.getRows().size());
             assertEquals(
                 count, page.getRows().stream().map(row -> row.get("receiptId")).distinct().count());
             for (var row : page.getRows()) {
-              assertEquals("受付通知", row.get("type"));
+              assertEquals("受付通知", row.get(FIXTURE_TYPE_D0070D5C));
               assertEquals("2024-01-01 00:00:00", row.get("submittedAt"));
             }
             assertEquals(
                 switch (role) {
-                  case USER -> "USER";
-                  case ADMIN -> "ADMIN";
+                  case USER -> FIXTURE_USER_2DED8884;
+                  case ADMIN -> FIXTURE_ADMIN_C4BB3010;
                 },
                 page.getTopBar().getRole());
             byte[] expected = new byte[320];
             Arrays.fill(expected, (byte) ' ');
-            put(expected, 0, 8, "SCHBNK01");
-            put(expected, 8, 3, "001");
+            put(expected, 0, 8, FIXTURE_SCHBNK01_E209989D);
+            put(expected, 8, 3, FIXTURE_001_A3FEAA64);
             put(expected, 11, 8, "NTSREQ01");
-            put(expected, 19, 3, "001");
+            put(expected, 19, 3, FIXTURE_001_A3FEAA64);
             put(expected, 22, 1, "Q");
             put(expected, 23, 1, "S");
-            put(expected, 24, 36, "00000000-0000-0000-0000-000000000001");
-            put(expected, 60, 36, "00000000-0000-0000-0000-000000000001");
-            put(expected, 96, 17, "20261003090000000");
+            put(expected, 24, 36, FIXTURE_00000000_0000_0000_0000_000000000001_5D49BA04);
+            put(expected, 60, 36, FIXTURE_00000000_0000_0000_0000_000000000001_5D49BA04);
+            put(expected, 96, 17, FIXTURE_20261003090000000_7C7C75E7);
             put(expected, 113, 64, "a".repeat(64));
             number(expected, 177, 4, 256);
             number(expected, 181, 6, 64);
             number(expected, 187, 6, 0);
             number(expected, 193, 6, 0);
             number(expected, 199, 9, 320);
-            put(expected, 256, 12, "ACCEPTED");
+            put(expected, 256, 12, FIXTURE_ACCEPTED_E50B782C);
             put(expected, 268, 17, "20240101000000000");
             put(expected, 285, 17, "20241231235959999");
             number(expected, 302, 6, 1);
@@ -215,21 +252,24 @@ class NotificationControllerTest {
     assertEquals(Optional.empty(), data.submittedFrom());
     assertEquals(Optional.empty(), data.submittedTo());
     assertEquals(50, data.pageSize());
-    for (String type : List.of("ACCEPTED", "COMPLETED", "ERROR"))
+    for (String type :
+        List.of(FIXTURE_ACCEPTED_E50B782C, FIXTURE_COMPLETED_BA0AE16A, FIXTURE_ERROR_F717E7D8))
       for (String page : List.of("0", "-1", "-2147483648", "0001", "999999")) {
-        var value = NotificationSearchForm.bind(params("type", " " + type + " ", "page", page));
+        var value =
+            NotificationSearchForm.bind(
+                params(FIXTURE_TYPE_D0070D5C, " " + type + " ", FIXTURE_PAGE_861424BC, page));
         assertTrue(value.isValid());
         assertEquals(
             NotificationType.valueOf(type), value.toRequest().notificationType().orElseThrow());
         assertEquals(page.equals("999999") ? 999999 : 1, value.getPage());
       }
     var input = new HashMap<String, List<String>>();
-    var values = new ArrayList<>(List.of("ACCEPTED"));
-    input.put("type", values);
+    var values = new ArrayList<>(List.of(FIXTURE_ACCEPTED_E50B782C));
+    input.put(FIXTURE_TYPE_D0070D5C, values);
     var copy = NotificationSearchForm.bind(input);
-    values.set(0, "ERROR");
+    values.set(0, FIXTURE_ERROR_F717E7D8);
     input.clear();
-    assertEquals("ACCEPTED", copy.getValues().get("type"));
+    assertEquals(FIXTURE_ACCEPTED_E50B782C, copy.getValues().get(FIXTURE_TYPE_D0070D5C));
     assertThrows(UnsupportedOperationException.class, () -> copy.getValues().clear());
     assertThrows(UnsupportedOperationException.class, () -> copy.getIssues().put("x", "x"));
     assertEquals("NotificationSearchForm[REDACTED]", copy.toString());
@@ -237,27 +277,36 @@ class NotificationControllerTest {
 
   @Test
   void ntf003StrictDatesInclusive366DayAndYearBounds() {
-    var valid = NotificationSearchForm.bind(params("from", "2024-01-01", "to", "2024-12-31"));
+    var valid =
+        NotificationSearchForm.bind(
+            params(FIXTURE_FROM_E5403D47, FIXTURE_2024_01_01_270A4D24, "to", "2024-12-31"));
     assertTrue(valid.isValid());
     assertEquals(
         Instant.parse("2023-12-31T15:00:00Z"), valid.toRequest().submittedFrom().orElseThrow());
     assertEquals(
         Instant.parse("2024-12-31T14:59:59.999Z"), valid.toRequest().submittedTo().orElseThrow());
-    var same = NotificationSearchForm.bind(params("from", "2024-02-29", "to", "2024-02-29"));
+    var same =
+        NotificationSearchForm.bind(
+            params(FIXTURE_FROM_E5403D47, "2024-02-29", "to", "2024-02-29"));
     assertTrue(same.isValid());
     assertEquals(
         Instant.parse("2024-02-28T15:00:00Z"), same.toRequest().submittedFrom().orElseThrow());
     assertEquals(
         Instant.parse("2024-02-29T14:59:59.999Z"), same.toRequest().submittedTo().orElseThrow());
     assertFalse(
-        NotificationSearchForm.bind(params("from", "2024-01-01", "to", "2025-01-01")).isValid());
+        NotificationSearchForm.bind(
+                params(FIXTURE_FROM_E5403D47, FIXTURE_2024_01_01_270A4D24, "to", "2025-01-01"))
+            .isValid());
     assertFalse(
-        NotificationSearchForm.bind(params("from", "2024-01-02", "to", "2024-01-01")).isValid());
-    for (String field : List.of("from", "to")) {
+        NotificationSearchForm.bind(
+                params(FIXTURE_FROM_E5403D47, "2024-01-02", "to", FIXTURE_2024_01_01_270A4D24))
+            .isValid());
+    for (String field : List.of(FIXTURE_FROM_E5403D47, "to")) {
       for (String value : List.of("0001-01-01", "9999-12-31", "2024-02-29")) {
         var form = NotificationSearchForm.bind(params(field, value));
         assertTrue(form.isValid());
-        assertEquals(field.equals("from"), form.toRequest().submittedFrom().isPresent());
+        assertEquals(
+            field.equals(FIXTURE_FROM_E5403D47), form.toRequest().submittedFrom().isPresent());
         assertEquals(field.equals("to"), form.toRequest().submittedTo().isPresent());
       }
       for (String value :
@@ -281,7 +330,8 @@ class NotificationControllerTest {
 
   @Test
   void ntf004UnknownOwnerBindingAndNullContracts() throws Exception {
-    for (String name : List.of("owner", "username", "role", "context", "unknown", "TYPE", ""))
+    for (String name :
+        List.of(FIXTURE_OWNER_622F06CB, "username", "role", "context", "unknown", "TYPE", ""))
       try (var f = new Fixture()) {
         var response = new MockHttpServletResponse();
         var model = new ExtendedModelMap();
@@ -297,9 +347,13 @@ class NotificationControllerTest {
         assertTrue(f.requests.isEmpty());
         assertEquals(
             "入力項目を確認してください。",
-            ((NotificationListViewModel) model.get("page")).getFilters().getIssues().get("form"));
+            ((NotificationListViewModel) model.get(FIXTURE_PAGE_861424BC))
+                .getFilters()
+                .getIssues()
+                .get("form"));
       }
-    for (String name : List.of("type", "from", "to", "page")) {
+    for (String name :
+        List.of(FIXTURE_TYPE_D0070D5C, FIXTURE_FROM_E5403D47, "to", FIXTURE_PAGE_861424BC)) {
       for (List<String> list : List.of(List.<String>of(), List.of("a", "b"))) {
         var form = NotificationSearchForm.bind(Map.of(name, list));
         assertFalse(form.isValid());
@@ -309,25 +363,27 @@ class NotificationControllerTest {
         assertFalse(NotificationSearchForm.bind(params(name, bad)).isValid());
     }
     for (String page : List.of("1000000", "2147483648", "-2147483649", "１２", "+1", "1.0"))
-      assertFalse(NotificationSearchForm.bind(params("page", page)).isValid());
-    assertFalse(NotificationSearchForm.bind(params("type", "UNKNOWN")).isValid());
+      assertFalse(NotificationSearchForm.bind(params(FIXTURE_PAGE_861424BC, page)).isValid());
+    assertFalse(NotificationSearchForm.bind(params(FIXTURE_TYPE_D0070D5C, "UNKNOWN")).isValid());
     assertThrows(NullPointerException.class, () -> NotificationSearchForm.bind(null));
     var nullName = new HashMap<String, List<String>>();
     nullName.put(null, List.of("x"));
     assertThrows(NullPointerException.class, () -> NotificationSearchForm.bind(nullName));
     var nullList = new HashMap<String, List<String>>();
-    nullList.put("from", null);
+    nullList.put(FIXTURE_FROM_E5403D47, null);
     assertThrows(NullPointerException.class, () -> NotificationSearchForm.bind(nullList));
     assertThrows(
         NullPointerException.class,
-        () -> NotificationSearchForm.bind(Map.of("from", Arrays.asList((String) null))));
+        () ->
+            NotificationSearchForm.bind(
+                Map.of(FIXTURE_FROM_E5403D47, Arrays.asList((String) null))));
     try (var f = new Fixture()) {
       assertThrows(
           SessionStoreException.class,
           () ->
               f.controller.list(
                   params(),
-                  () -> "reader",
+                  () -> FIXTURE_READER_F734AAEA,
                   new ExtendedModelMap(),
                   raw(),
                   new MockHttpServletResponse()));
@@ -472,7 +528,7 @@ class NotificationControllerTest {
             CLOCK.instant(),
             NotificationType.ACCEPTED,
             NotificationState.RECEIVED,
-            "question",
+            FIXTURE_QUESTION_6D6CA52E,
             false);
     var b =
         record(
@@ -480,7 +536,7 @@ class NotificationControllerTest {
             CLOCK.instant(),
             NotificationType.ACCEPTED,
             NotificationState.RECEIVED,
-            "question",
+            FIXTURE_QUESTION_6D6CA52E,
             false);
     assertEquals(
         List.of(2L, 1L), page(List.of(a, b)).getRows().stream().map(row -> row.get("id")).toList());
@@ -515,7 +571,7 @@ class NotificationControllerTest {
                 "not deleted caption",
                 true))) assertThrows(IllegalArgumentException.class, () -> page(List.of(bad)));
     var form = NotificationSearchForm.bind(Map.of());
-    var badForm = NotificationSearchForm.bind(params("owner", "other"));
+    var badForm = NotificationSearchForm.bind(params(FIXTURE_OWNER_622F06CB, "other"));
     var data = new PagedResponseData(1, 50, 1, 1, 1, 1);
     assertThrows(
         IllegalArgumentException.class,
@@ -560,7 +616,7 @@ class NotificationControllerTest {
         if (kind == 1) f.replyPage = 2;
         if (kind == 2) f.summary = "q".repeat(101);
         if (kind == 3) f.deleted = true;
-        if (kind == 4) f.type = "ERROR";
+        if (kind == 4) f.type = FIXTURE_ERROR_F717E7D8;
         var response = new MockHttpServletResponse();
         assertNull(
             f.controller.list(
@@ -595,7 +651,7 @@ class NotificationControllerTest {
                         deleted ? "削除済み" : "😀".repeat(100),
                         deleted)));
         var row = page.getRows().getFirst();
-        assertEquals(label, row.get("type"));
+        assertEquals(label, row.get(FIXTURE_TYPE_D0070D5C));
         assertEquals(state.wireValue(), row.get("state"));
         assertEquals(RECEIPT, row.get("receiptId"));
         assertEquals(deleted ? "削除済み" : "😀".repeat(100), row.get("summary"));
@@ -611,7 +667,8 @@ class NotificationControllerTest {
       }
     var invalid =
         NotificationListViewModel.invalid(
-            actor(UserRole.ADMIN), NotificationSearchForm.bind(params("owner", "other")));
+            actor(UserRole.ADMIN),
+            NotificationSearchForm.bind(params(FIXTURE_OWNER_622F06CB, "other")));
     assertTrue(invalid.getPage().isEmpty());
     assertTrue(invalid.getRows().isEmpty());
     assertTrue(invalid.getPreviousHref().isEmpty());
@@ -630,7 +687,7 @@ class NotificationControllerTest {
       var mvc = MockMvcBuilders.webAppContextSetup(context).build();
       var result =
           mvc.perform(
-                  get("/notifications")
+                  get(FIXTURE_NOTIFICATIONS_FF98C59A)
                       .principal(actor(UserRole.USER))
                       .requestAttr(CsrfToken.class.getName(), csrf()))
               .andReturn();
@@ -638,11 +695,13 @@ class NotificationControllerTest {
       var dom = Jsoup.parse(result.getResponse().getContentAsString());
       assertEquals("通知", dom.title());
       assertEquals(1, dom.select(".notification-row").size());
-      assertEquals("/notifications/1", dom.select(".detail").attr("href"));
+      assertEquals(
+          FIXTURE_NOTIFICATIONS_1_89BB0591, dom.select(".detail").attr(FIXTURE_HREF_27C4F573));
       assertEquals("2026-10-03 09:00:00", dom.select(".submitted-at").text());
       assertEquals("受付通知", dom.select(".notification-row .type").text());
       assertEquals(
-          List.of("", "ACCEPTED", "COMPLETED", "ERROR"),
+          List.of(
+              "", FIXTURE_ACCEPTED_E50B782C, FIXTURE_COMPLETED_BA0AE16A, FIXTURE_ERROR_F717E7D8),
           dom.select("select[name=type] option").eachAttr("value"));
       assertEquals(2, dom.select("input[type=date]").size());
       assertTrue(
@@ -650,12 +709,13 @@ class NotificationControllerTest {
               .isEmpty());
       assertEquals(1, dom.select("input[name=_csrf]").size());
       assertEquals(
-          List.of("/", "/notifications"), dom.select(".topbar .nav-links a").eachAttr("href"));
+          List.of("/", FIXTURE_NOTIFICATIONS_FF98C59A),
+          dom.select(".topbar .nav-links a").eachAttr(FIXTURE_HREF_27C4F573));
       assertFalse(result.getResponse().getContentAsString().contains("a".repeat(64)));
       assertEquals(
           200,
           mvc.perform(
-                  head("/notifications")
+                  head(FIXTURE_NOTIFICATIONS_FF98C59A)
                       .principal(actor(UserRole.USER))
                       .requestAttr(CsrfToken.class.getName(), csrf()))
               .andReturn()
@@ -663,7 +723,7 @@ class NotificationControllerTest {
               .getStatus());
       assertEquals(
           405,
-          mvc.perform(post("/notifications").principal(actor(UserRole.USER)))
+          mvc.perform(post(FIXTURE_NOTIFICATIONS_FF98C59A).principal(actor(UserRole.USER)))
               .andReturn()
               .getResponse()
               .getStatus());
@@ -672,7 +732,7 @@ class NotificationControllerTest {
       dom =
           Jsoup.parse(
               mvc.perform(
-                      get("/notifications")
+                      get(FIXTURE_NOTIFICATIONS_FF98C59A)
                           .principal(actor(UserRole.USER))
                           .requestAttr(CsrfToken.class.getName(), csrf()))
                   .andReturn()
@@ -686,9 +746,9 @@ class NotificationControllerTest {
       dom =
           Jsoup.parse(
               mvc.perform(
-                      get("/notifications")
-                          .param("type", "ACCEPTED")
-                          .param("from", "2024-01-01")
+                      get(FIXTURE_NOTIFICATIONS_FF98C59A)
+                          .param(FIXTURE_TYPE_D0070D5C, FIXTURE_ACCEPTED_E50B782C)
+                          .param(FIXTURE_FROM_E5403D47, FIXTURE_2024_01_01_270A4D24)
                           .param("to", "2024-12-31")
                           .principal(actor(UserRole.USER))
                           .requestAttr(CsrfToken.class.getName(), csrf()))
@@ -703,27 +763,29 @@ class NotificationControllerTest {
       assertEquals(f.summary, dom.select(".notification-summary").first().text());
       assertEquals(
           "/notifications?type=ACCEPTED&from=2024-01-01&to=2024-12-31&page=2",
-          dom.select(".next").attr("href"));
+          dom.select(".next").attr(FIXTURE_HREF_27C4F573));
       f.count = 1;
       f.replyPage = 2;
       dom =
           Jsoup.parse(
               mvc.perform(
-                      get("/notifications")
-                          .param("page", "999999")
+                      get(FIXTURE_NOTIFICATIONS_FF98C59A)
+                          .param(FIXTURE_PAGE_861424BC, "999999")
                           .principal(actor(UserRole.USER))
                           .requestAttr(CsrfToken.class.getName(), csrf()))
                   .andReturn()
                   .getResponse()
                   .getContentAsString());
       assertEquals("51 notifications / page 2 of 2", dom.select(".count").text());
-      assertEquals("/notifications?type=&from=&to=&page=1", dom.select(".previous").attr("href"));
+      assertEquals(
+          "/notifications?type=&from=&to=&page=1",
+          dom.select(".previous").attr(FIXTURE_HREF_27C4F573));
       assertTrue(dom.select(".next").isEmpty());
       int before = f.requests.size();
       result =
           mvc.perform(
-                  get("/notifications")
-                      .param("owner", "other")
+                  get(FIXTURE_NOTIFICATIONS_FF98C59A)
+                      .param(FIXTURE_OWNER_622F06CB, "other")
                       .principal(actor(UserRole.ADMIN))
                       .requestAttr(CsrfToken.class.getName(), csrf()))
               .andReturn();
@@ -744,9 +806,9 @@ class NotificationControllerTest {
 
   @Test
   void ntf009RealSecurityBothRolesAnd0102() throws Exception {
-    for (String role : List.of("USER", "ADMIN")) {
+    for (String role : List.of(FIXTURE_USER_2DED8884, FIXTURE_ADMIN_C4BB3010)) {
       reset();
-      var api = new SessionFormLoginTest.Api("0000", role, "0000", 0);
+      var api = new SessionFormLoginTest.Api(FIXTURE_0000_876EEFE0, role, FIXTURE_0000_876EEFE0, 0);
       try (var f = new Fixture();
           var server =
               new EmbeddedWebSecurityTest.Server(
@@ -757,37 +819,57 @@ class NotificationControllerTest {
                   true,
                   true,
                   (mvc, invalid) -> configure(mvc, f.client, invalid))) {
-        assertEquals(302, server.send("GET", "/notifications", null, null, true).statusCode());
+        assertEquals(
+            302,
+            server
+                .send(FIXTURE_GET_04F32A7E, FIXTURE_NOTIFICATIONS_FF98C59A, null, null, true)
+                .statusCode());
         assertTrue(f.requests.isEmpty());
-        var first = server.send("GET", "/login", null, null, true);
-        String initial = first.headers().firstValue("set-cookie").orElseThrow().split(";", 2)[0];
+        var first = server.send(FIXTURE_GET_04F32A7E, FIXTURE_LOGIN_F843C044, null, null, true);
+        String initial =
+            first.headers().firstValue(FIXTURE_SET_COOKIE_39067BC9).orElseThrow().split(";", 2)[0];
         var login =
             server.send(
                 "POST",
-                "/login",
+                FIXTURE_LOGIN_F843C044,
                 initial,
                 "_csrf=" + first.body().substring(6) + "&username=reader&password=p",
                 true);
         assertEquals(302, login.statusCode());
-        String cookie = login.headers().firstValue("set-cookie").orElseThrow().split(";", 2)[0];
-        var page = server.send("GET", "/notifications", cookie, null, true);
+        String cookie =
+            login.headers().firstValue(FIXTURE_SET_COOKIE_39067BC9).orElseThrow().split(";", 2)[0];
+        var page =
+            server.send(FIXTURE_GET_04F32A7E, FIXTURE_NOTIFICATIONS_FF98C59A, cookie, null, true);
         assertEquals(200, page.statusCode());
         assertTrue(page.headers().firstValue("cache-control").orElseThrow().contains("no-store"));
-        var head = server.send("HEAD", "/notifications", cookie, null, true);
+        var head = server.send("HEAD", FIXTURE_NOTIFICATIONS_FF98C59A, cookie, null, true);
         assertEquals(200, head.statusCode());
         assertEquals("", head.body());
         int before = f.requests.size();
         assertEquals(
-            400, server.send("GET", "/notifications?owner=other", cookie, null, true).statusCode());
+            400,
+            server
+                .send(FIXTURE_GET_04F32A7E, "/notifications?owner=other", cookie, null, true)
+                .statusCode());
         assertEquals(before, f.requests.size());
         f.code = "0102";
-        var expired = server.send("GET", "/notifications", cookie, null, true);
+        var expired =
+            server.send(FIXTURE_GET_04F32A7E, FIXTURE_NOTIFICATIONS_FF98C59A, cookie, null, true);
         assertEquals(302, expired.statusCode());
         assertEquals(
             "/login?session-expired", expired.headers().firstValue("location").orElseThrow());
-        assertTrue(expired.headers().firstValue("set-cookie").orElseThrow().contains("Max-Age=0"));
+        assertTrue(
+            expired
+                .headers()
+                .firstValue(FIXTURE_SET_COOKIE_39067BC9)
+                .orElseThrow()
+                .contains("Max-Age=0"));
         assertEquals(before + 1, f.requests.size());
-        assertEquals(302, server.send("GET", "/notifications", cookie, null, true).statusCode());
+        assertEquals(
+            302,
+            server
+                .send(FIXTURE_GET_04F32A7E, FIXTURE_NOTIFICATIONS_FF98C59A, cookie, null, true)
+                .statusCode());
         assertEquals(before + 1, f.requests.size());
         f.erased();
         api.erased();
@@ -807,26 +889,26 @@ class NotificationControllerTest {
                 () -> {
                   var actor =
                       new SessionPrincipal(
-                          "reader" + n,
+                          FIXTURE_READER_F734AAEA + n,
                           n % 2 == 0 ? UserRole.USER : UserRole.ADMIN,
                           AuthenticationContext.of(String.format(Locale.ROOT, "%064x", n + 1)),
                           Instant.EPOCH);
                   var model = new ExtendedModelMap();
-                  String type = n % 2 == 0 ? "ACCEPTED" : "ERROR";
+                  String type = n % 2 == 0 ? FIXTURE_ACCEPTED_E50B782C : FIXTURE_ERROR_F717E7D8;
                   assertEquals(
                       "notifications/list",
                       f.controller.list(
-                          params("type", type),
+                          params(FIXTURE_TYPE_D0070D5C, type),
                           actor,
                           model,
                           raw(),
                           new MockHttpServletResponse()));
-                  var page = (NotificationListViewModel) model.get("page");
-                  assertEquals(type, page.getFilters().getValues().get("type"));
+                  var page = (NotificationListViewModel) model.get(FIXTURE_PAGE_861424BC);
+                  assertEquals(type, page.getFilters().getValues().get(FIXTURE_TYPE_D0070D5C));
                   assertEquals(
-                      type.equals("ERROR") ? "エラー通知" : "受付通知",
-                      page.getRows().getFirst().get("type"));
-                  assertEquals("reader" + n, page.getTopBar().getUsername());
+                      type.equals(FIXTURE_ERROR_F717E7D8) ? "エラー通知" : "受付通知",
+                      page.getRows().getFirst().get(FIXTURE_TYPE_D0070D5C));
+                  assertEquals(FIXTURE_READER_F734AAEA + n, page.getTopBar().getUsername());
                   return null;
                 }));
       }
@@ -839,7 +921,8 @@ class NotificationControllerTest {
             f.requests.stream().filter(bytes -> ascii(bytes, 113, 64).equals(context)).toList();
         assertEquals(1, sent.size());
         assertEquals(
-            i % 2 == 0 ? "ACCEPTED" : "ERROR", ascii(sent.getFirst(), 256, 12).stripTrailing());
+            i % 2 == 0 ? FIXTURE_ACCEPTED_E50B782C : FIXTURE_ERROR_F717E7D8,
+            ascii(sent.getFirst(), 256, 12).stripTrailing());
       }
       f.erased();
     }
@@ -848,36 +931,44 @@ class NotificationControllerTest {
   @Test
   void detail001BothRolesStatesAndIndependentWholeRequest() throws Exception {
     for (UserRole role : UserRole.values())
-      for (String state : List.of("RECEIVED", "PROCESSING", "COMPLETED", "ERROR", "CANCELLED"))
+      for (String state :
+          List.of(
+              FIXTURE_RECEIVED_35302D54,
+              FIXTURE_PROCESSING_01F94682,
+              FIXTURE_COMPLETED_BA0AE16A,
+              FIXTURE_ERROR_F717E7D8,
+              FIXTURE_CANCELLED_E01A549A))
         for (long target : List.of(1L, 999999999999L))
           try (var f = new Fixture()) {
             f.detailState = state;
             var model = new ExtendedModelMap();
             var reply = new MockHttpServletResponse();
             assertEquals(
-                "notifications/detail",
+                FIXTURE_NOTIFICATIONS_DETAIL_5E217EDB,
                 f.controller.detail(Long.toString(target), actor(role), model, raw(), reply));
             assertEquals(200, reply.getStatus());
-            var page = assertInstanceOf(NotificationDetailViewModel.class, model.get("page"));
+            var page =
+                assertInstanceOf(
+                    NotificationDetailViewModel.class, model.get(FIXTURE_PAGE_861424BC));
             assertEquals(target, page.getValues().get("id"));
             assertEquals(state, page.getValues().get("state"));
             assertEquals(
                 switch (role) {
-                  case USER -> "USER";
-                  case ADMIN -> "ADMIN";
+                  case USER -> FIXTURE_USER_2DED8884;
+                  case ADMIN -> FIXTURE_ADMIN_C4BB3010;
                 },
                 page.getTopBar().getRole());
             byte[] expected = new byte[268];
             Arrays.fill(expected, (byte) ' ');
-            put(expected, 0, 8, "SCHBNK01");
-            put(expected, 8, 3, "001");
+            put(expected, 0, 8, FIXTURE_SCHBNK01_E209989D);
+            put(expected, 8, 3, FIXTURE_001_A3FEAA64);
             put(expected, 11, 8, "NTDREQ01");
-            put(expected, 19, 3, "001");
+            put(expected, 19, 3, FIXTURE_001_A3FEAA64);
             put(expected, 22, 1, "Q");
             put(expected, 23, 1, "S");
-            put(expected, 24, 36, "00000000-0000-0000-0000-000000000001");
-            put(expected, 60, 36, "00000000-0000-0000-0000-000000000001");
-            put(expected, 96, 17, "20261003090000000");
+            put(expected, 24, 36, FIXTURE_00000000_0000_0000_0000_000000000001_5D49BA04);
+            put(expected, 60, 36, FIXTURE_00000000_0000_0000_0000_000000000001_5D49BA04);
+            put(expected, 96, 17, FIXTURE_20261003090000000_7C7C75E7);
             put(expected, 113, 64, "a".repeat(64));
             number(expected, 177, 4, 256);
             number(expected, 181, 6, 12);
@@ -889,9 +980,9 @@ class NotificationControllerTest {
             f.erased();
           }
     try (var f = new Fixture()) {
-      f.code = "0200";
+      f.code = FIXTURE_0200_FC9DB3AC;
       assertEquals(
-          "notifications/detail",
+          FIXTURE_NOTIFICATIONS_DETAIL_5E217EDB,
           f.controller.detail(
               "1",
               actor(UserRole.USER),
@@ -906,15 +997,15 @@ class NotificationControllerTest {
   void detail002StateDatesDeletedAndEmptyAnswerProjection() {
     var labels =
         Map.of(
-            "RECEIVED",
+            FIXTURE_RECEIVED_35302D54,
             "受付中",
-            "PROCESSING",
+            FIXTURE_PROCESSING_01F94682,
             "処理中",
-            "COMPLETED",
+            FIXTURE_COMPLETED_BA0AE16A,
             "処理完了",
-            "ERROR",
+            FIXTURE_ERROR_F717E7D8,
             "エラー",
-            "CANCELLED",
+            FIXTURE_CANCELLED_E01A549A,
             "取消済み");
     for (NotificationState state : NotificationState.values())
       for (boolean deleted : List.of(false, true)) {
@@ -925,13 +1016,14 @@ class NotificationControllerTest {
         assertEquals(labels.get(state.wireValue()), values.get("stateLabel"));
         assertEquals("2026-10-03 08:58:00", values.get("submittedAt"));
         assertEquals(deleted, values.get("deleted"));
-        assertEquals(deleted ? "" : "question", values.get("question"));
+        assertEquals(
+            deleted ? "" : FIXTURE_QUESTION_6D6CA52E, values.get(FIXTURE_QUESTION_6D6CA52E));
         assertEquals(
             state == NotificationState.COMPLETED && !deleted, values.get("answerAvailable"));
         assertEquals(
             state == NotificationState.COMPLETED && !deleted ? "/questions/1" : "",
             values.get("questionHref"));
-        assertEquals("", values.get("answer"));
+        assertEquals("", values.get(FIXTURE_ANSWER_B2437A6A));
         assertEquals(
             state == NotificationState.ERROR ? "PROCESS_FAILED" : "", values.get("errorCode"));
         assertEquals("NotificationDetailViewModel[REDACTED]", page.toString());
@@ -941,8 +1033,8 @@ class NotificationControllerTest {
         NotificationDetailViewModel.from(
             actor(UserRole.ADMIN),
             new NotificationId(1),
-            detailData(1, NotificationState.COMPLETED, false, "answer"));
-    assertEquals("answer", answered.getValues().get("answer"));
+            detailData(1, NotificationState.COMPLETED, false, FIXTURE_ANSWER_B2437A6A));
+    assertEquals(FIXTURE_ANSWER_B2437A6A, answered.getValues().get(FIXTURE_ANSWER_B2437A6A));
   }
 
   @Test
@@ -1065,7 +1157,13 @@ class NotificationControllerTest {
 
   @Test
   void detail005SafeStateDomAndHead() throws Exception {
-    for (String state : List.of("RECEIVED", "PROCESSING", "COMPLETED", "ERROR", "CANCELLED"))
+    for (String state :
+        List.of(
+            FIXTURE_RECEIVED_35302D54,
+            FIXTURE_PROCESSING_01F94682,
+            FIXTURE_COMPLETED_BA0AE16A,
+            FIXTURE_ERROR_F717E7D8,
+            FIXTURE_CANCELLED_E01A549A))
       for (boolean deleted : List.of(false, true))
         try (var f = new Fixture();
             var context = f.mvc()) {
@@ -1075,7 +1173,7 @@ class NotificationControllerTest {
           var mvc = MockMvcBuilders.webAppContextSetup(context).build();
           var result =
               mvc.perform(
-                      get("/notifications/1")
+                      get(FIXTURE_NOTIFICATIONS_1_89BB0591)
                           .principal(actor(UserRole.USER))
                           .requestAttr(CsrfToken.class.getName(), csrf()))
                   .andReturn();
@@ -1086,19 +1184,22 @@ class NotificationControllerTest {
           assertTrue(dom.select(".question-body script,.answer-body script").isEmpty());
           assertEquals(deleted ? "" : f.summary, dom.select(".question-body").text());
           assertEquals(deleted ? "質問・回答は削除済みです。" : "", dom.select(".deleted").text());
-          boolean answer = state.equals("COMPLETED") && !deleted;
+          boolean answer = state.equals(FIXTURE_COMPLETED_BA0AE16A) && !deleted;
           assertEquals(answer ? "（空の回答）" : "", dom.select(".answer-body").text());
-          assertEquals(answer ? "/questions/1" : "", dom.select(".question-detail").attr("href"));
           assertEquals(
-              state.equals("ERROR") ? "PROCESS_FAILED" : "", dom.select(".error-code").text());
+              answer ? "/questions/1" : "",
+              dom.select(".question-detail").attr(FIXTURE_HREF_27C4F573));
           assertEquals(
-              state.equals("CANCELLED") ? "2026-10-03 08:59:00" : "",
+              state.equals(FIXTURE_ERROR_F717E7D8) ? "PROCESS_FAILED" : "",
+              dom.select(".error-code").text());
+          assertEquals(
+              state.equals(FIXTURE_CANCELLED_E01A549A) ? "2026-10-03 08:59:00" : "",
               dom.select(".cancelled-at").text());
           assertTrue(dom.select("form[method=post] input[name=operation_token]").isEmpty());
           assertEquals(
               200,
               mvc.perform(
-                      head("/notifications/1")
+                      head(FIXTURE_NOTIFICATIONS_1_89BB0591)
                           .principal(actor(UserRole.USER))
                           .requestAttr(CsrfToken.class.getName(), csrf()))
                   .andReturn()
@@ -1106,7 +1207,7 @@ class NotificationControllerTest {
                   .getStatus());
           assertEquals(
               503,
-              mvc.perform(post("/notifications/1").principal(actor(UserRole.USER)))
+              mvc.perform(post(FIXTURE_NOTIFICATIONS_1_89BB0591).principal(actor(UserRole.USER)))
                   .andReturn()
                   .getResponse()
                   .getStatus());
@@ -1122,9 +1223,9 @@ class NotificationControllerTest {
 
   @Test
   void detail006RealSecurityAnd0102() throws Exception {
-    for (String role : List.of("USER", "ADMIN")) {
+    for (String role : List.of(FIXTURE_USER_2DED8884, FIXTURE_ADMIN_C4BB3010)) {
       reset();
-      var api = new SessionFormLoginTest.Api("0000", role, "0000", 0);
+      var api = new SessionFormLoginTest.Api(FIXTURE_0000_876EEFE0, role, FIXTURE_0000_876EEFE0, 0);
       try (var f = new Fixture();
           var web =
               new EmbeddedWebSecurityTest.Server(
@@ -1135,29 +1236,52 @@ class NotificationControllerTest {
                   true,
                   true,
                   (mvc, invalid) -> configure(mvc, f.client, invalid))) {
-        var loginPage = web.send("GET", "/login", null, null, true);
+        var loginPage = web.send(FIXTURE_GET_04F32A7E, FIXTURE_LOGIN_F843C044, null, null, true);
         String initial =
-            loginPage.headers().firstValue("set-cookie").orElseThrow().split(";", 2)[0];
+            loginPage
+                .headers()
+                .firstValue(FIXTURE_SET_COOKIE_39067BC9)
+                .orElseThrow()
+                .split(";", 2)[0];
         String csrf = loginPage.body().substring(6);
         var login =
-            web.send("POST", "/login", initial, "username=reader&password=p&_csrf=" + csrf, true);
-        String cookie = login.headers().firstValue("set-cookie").orElseThrow().split(";", 2)[0];
-        var page = web.send("GET", "/notifications/1", cookie, null, true);
+            web.send(
+                "POST",
+                FIXTURE_LOGIN_F843C044,
+                initial,
+                "username=reader&password=p&_csrf=" + csrf,
+                true);
+        String cookie =
+            login.headers().firstValue(FIXTURE_SET_COOKIE_39067BC9).orElseThrow().split(";", 2)[0];
+        var page =
+            web.send(FIXTURE_GET_04F32A7E, FIXTURE_NOTIFICATIONS_1_89BB0591, cookie, null, true);
         assertEquals(200, page.statusCode());
         assertTrue(page.headers().firstValue("cache-control").orElseThrow().contains("no-store"));
         assertEquals("通知明細", Jsoup.parse(page.body()).title());
-        var head = web.send("HEAD", "/notifications/1", cookie, null, true);
+        var head = web.send("HEAD", FIXTURE_NOTIFICATIONS_1_89BB0591, cookie, null, true);
         assertEquals(200, head.statusCode());
         assertEquals("", head.body());
-        assertEquals(302, web.send("GET", "/notifications/1", null, null, true).statusCode());
+        assertEquals(
+            302,
+            web.send(FIXTURE_GET_04F32A7E, FIXTURE_NOTIFICATIONS_1_89BB0591, null, null, true)
+                .statusCode());
         f.code = "0102";
-        var expired = web.send("GET", "/notifications/1", cookie, null, true);
+        var expired =
+            web.send(FIXTURE_GET_04F32A7E, FIXTURE_NOTIFICATIONS_1_89BB0591, cookie, null, true);
         assertEquals(302, expired.statusCode());
         assertEquals(
             "/login?session-expired", expired.headers().firstValue("location").orElseThrow());
-        assertTrue(expired.headers().firstValue("set-cookie").orElseThrow().contains("Max-Age=0"));
+        assertTrue(
+            expired
+                .headers()
+                .firstValue(FIXTURE_SET_COOKIE_39067BC9)
+                .orElseThrow()
+                .contains("Max-Age=0"));
         int count = f.requests.size();
-        assertEquals(302, web.send("GET", "/notifications/1", cookie, null, true).statusCode());
+        assertEquals(
+            302,
+            web.send(FIXTURE_GET_04F32A7E, FIXTURE_NOTIFICATIONS_1_89BB0591, cookie, null, true)
+                .statusCode());
         assertEquals(count, f.requests.size());
         f.erased();
         api.erased();
@@ -1176,18 +1300,18 @@ class NotificationControllerTest {
             () -> {
               var actor =
                   new SessionPrincipal(
-                      "reader" + n,
+                      FIXTURE_READER_F734AAEA + n,
                       n % 2 == 0 ? UserRole.USER : UserRole.ADMIN,
                       AuthenticationContext.of(String.format(Locale.ROOT, "%064x", n)),
                       Instant.EPOCH);
               var model = new ExtendedModelMap();
               assertEquals(
-                  "notifications/detail",
+                  FIXTURE_NOTIFICATIONS_DETAIL_5E217EDB,
                   f.controller.detail(
                       Integer.toString(n), actor, model, raw(), new MockHttpServletResponse()));
-              var page = (NotificationDetailViewModel) model.get("page");
+              var page = (NotificationDetailViewModel) model.get(FIXTURE_PAGE_861424BC);
               assertEquals((long) n, page.getValues().get("id"));
-              assertEquals("reader" + n, page.getTopBar().getUsername());
+              assertEquals(FIXTURE_READER_F734AAEA + n, page.getTopBar().getUsername());
               return null;
             });
       }
@@ -1235,7 +1359,7 @@ class NotificationControllerTest {
                         new TypedPayloadValues(new LayoutId("NTDRSP01"), invalid, List.of())),
                     ResultCode.SUCCESS));
     try (var f = new Fixture()) {
-      f.detailState = "COMPLETED";
+      f.detailState = FIXTURE_COMPLETED_BA0AE16A;
       f.deleted = true;
       f.answer = "must not survive deletion";
       f.deletedAnswer = true;
@@ -1258,7 +1382,7 @@ class NotificationControllerTest {
                           ResultCode.SUCCESS)));
       f.deletedAnswer = false;
       assertEquals(
-          "notifications/detail",
+          FIXTURE_NOTIFICATIONS_DETAIL_5E217EDB,
           f.controller.detail(
               "1",
               actor(UserRole.USER),
@@ -1288,7 +1412,7 @@ class NotificationControllerTest {
         state == NotificationState.ERROR ? Optional.of(at.plusSeconds(90)) : Optional.empty(),
         state == NotificationState.CANCELLED ? Optional.of(at.plusSeconds(60)) : Optional.empty(),
         deleted,
-        deleted ? Optional.empty() : Optional.of("question"),
+        deleted ? Optional.empty() : Optional.of(FIXTURE_QUESTION_6D6CA52E),
         state == NotificationState.COMPLETED && !deleted ? Optional.of(answer) : Optional.empty(),
         state == NotificationState.ERROR
             ? Optional.of(NotificationErrorCode.PROCESS_FAILED)
@@ -1304,15 +1428,15 @@ class NotificationControllerTest {
     final List<byte[]> buffers = new CopyOnWriteArrayList<>();
     final JmsRequestReplyClient wire =
         new JmsRequestReplyClient(new ReplyCorrelationRegistry(), CLOCK, 12);
-    volatile String code = "0000";
-    volatile String type = "ACCEPTED";
-    volatile String state = "RECEIVED";
-    volatile String summary = "question";
+    volatile String code = FIXTURE_0000_876EEFE0;
+    volatile String type = FIXTURE_ACCEPTED_E50B782C;
+    volatile String state = FIXTURE_RECEIVED_35302D54;
+    volatile String summary = FIXTURE_QUESTION_6D6CA52E;
     volatile int count = 1;
     volatile int total = 1;
     volatile int replyPage = 1;
     volatile boolean deleted;
-    volatile String detailState = "RECEIVED";
+    volatile String detailState = FIXTURE_RECEIVED_35302D54;
     volatile String answer = "";
     volatile long detailReplyId;
     volatile boolean deletedAnswer;
@@ -1335,14 +1459,17 @@ class NotificationControllerTest {
       // BUG560: only successful normal fixtures follow literal UI query conditions.
       // Explicit type/state overrides below remain intentional inconsistent negative replies.
       String requestedType = ascii(request, 256, 12).stripTrailing();
-      String normalType = requestedType.isEmpty() ? "ACCEPTED" : requestedType;
+      String normalType = requestedType.isEmpty() ? FIXTURE_ACCEPTED_E50B782C : requestedType;
       String normalState =
-          normalType.equals("ERROR")
-              ? "ERROR"
-              : normalType.equals("COMPLETED") ? "COMPLETED" : "RECEIVED";
+          normalType.equals(FIXTURE_ERROR_F717E7D8)
+              ? FIXTURE_ERROR_F717E7D8
+              : normalType.equals(FIXTURE_COMPLETED_BA0AE16A)
+                  ? FIXTURE_COMPLETED_BA0AE16A
+                  : FIXTURE_RECEIVED_35302D54;
       String from = ascii(request, 268, 17).stripTrailing();
       String to = ascii(request, 285, 17).stripTrailing();
-      String submitted = !from.isEmpty() ? from : !to.isEmpty() ? to : "20261003090000000";
+      String submitted =
+          !from.isEmpty() ? from : !to.isEmpty() ? to : FIXTURE_20261003090000000_7C7C75E7;
       return response(
           id,
           ascii(request, 113, 64),
@@ -1350,26 +1477,26 @@ class NotificationControllerTest {
           replyPage,
           count,
           total,
-          type.equals("ACCEPTED") ? normalType : type,
-          state.equals("RECEIVED") ? normalState : state,
+          type.equals(FIXTURE_ACCEPTED_E50B782C) ? normalType : type,
+          state.equals(FIXTURE_RECEIVED_35302D54) ? normalState : state,
           submitted,
           summary,
           deleted);
     }
 
     byte[] detailResponse(UUID id, byte[] request) {
-      boolean success = code.equals("0000") || code.equals("0200");
+      boolean success = code.equals(FIXTURE_0000_876EEFE0) || code.equals(FIXTURE_0200_FC9DB3AC);
       byte[] bytes = new byte[9152];
       Arrays.fill(bytes, (byte) ' ');
-      put(bytes, 0, 8, "SCHBNK01");
-      put(bytes, 8, 3, "001");
+      put(bytes, 0, 8, FIXTURE_SCHBNK01_E209989D);
+      put(bytes, 8, 3, FIXTURE_001_A3FEAA64);
       put(bytes, 11, 8, "NTDRSP01");
-      put(bytes, 19, 3, "001");
+      put(bytes, 19, 3, FIXTURE_001_A3FEAA64);
       put(bytes, 22, 1, "S");
       put(bytes, 23, 1, "S");
       put(bytes, 24, 36, new UUID(1, id.getLeastSignificantBits()).toString());
       put(bytes, 60, 36, id.toString());
-      put(bytes, 96, 17, "20261003090000000");
+      put(bytes, 96, 17, FIXTURE_20261003090000000_7C7C75E7);
       put(bytes, 113, 64, ascii(request, 113, 64));
       number(bytes, 177, 4, 256);
       number(bytes, 181, 6, 8896);
@@ -1390,26 +1517,28 @@ class NotificationControllerTest {
           bytes,
           294,
           12,
-          detailState.equals("COMPLETED")
-              ? "COMPLETED"
-              : detailState.equals("ERROR") ? "ERROR" : "ACCEPTED");
+          detailState.equals(FIXTURE_COMPLETED_BA0AE16A)
+              ? FIXTURE_COMPLETED_BA0AE16A
+              : detailState.equals(FIXTURE_ERROR_F717E7D8)
+                  ? FIXTURE_ERROR_F717E7D8
+                  : FIXTURE_ACCEPTED_E50B782C);
       put(bytes, 306, 12, detailState);
       put(bytes, 318, 17, "20261003085800000");
-      if (Set.of("PROCESSING", "COMPLETED", "ERROR").contains(detailState))
-        put(bytes, 335, 17, "20261003085900000");
-      if (detailState.equals("COMPLETED")) put(bytes, 352, 17, "20261003085930000");
-      if (detailState.equals("ERROR")) {
+      if (Set.of(FIXTURE_PROCESSING_01F94682, FIXTURE_COMPLETED_BA0AE16A, FIXTURE_ERROR_F717E7D8)
+          .contains(detailState)) put(bytes, 335, 17, "20261003085900000");
+      if (detailState.equals(FIXTURE_COMPLETED_BA0AE16A)) put(bytes, 352, 17, "20261003085930000");
+      if (detailState.equals(FIXTURE_ERROR_F717E7D8)) {
         put(bytes, 369, 17, "20261003085930000");
         put(bytes, 8596, 16, "PROCESS_FAILED");
         put(bytes, 8612, 512, "処理を完了できませんでした。");
       }
-      if (detailState.equals("CANCELLED")) put(bytes, 386, 17, "20261003085900000");
+      if (detailState.equals(FIXTURE_CANCELLED_E01A549A)) put(bytes, 386, 17, "20261003085900000");
       put(bytes, 403, 1, deleted ? "1" : "0");
       if (!deleted) {
         put(bytes, 404, 4096, summary);
         number(bytes, 9124, 12, target);
       }
-      if (detailState.equals("COMPLETED") && (!deleted || deletedAnswer))
+      if (detailState.equals(FIXTURE_COMPLETED_BA0AE16A) && (!deleted || deletedAnswer))
         put(bytes, 4500, 4096, answer);
       return bytes;
     }
@@ -1447,19 +1576,19 @@ class NotificationControllerTest {
       String submitted,
       String summary,
       boolean deleted) {
-    boolean success = code.equals("0000") || code.equals("0200");
+    boolean success = code.equals(FIXTURE_0000_876EEFE0) || code.equals(FIXTURE_0200_FC9DB3AC);
     int count = success ? rows : 0;
     byte[] bytes = new byte[304 + 624 * count];
     Arrays.fill(bytes, (byte) ' ');
-    put(bytes, 0, 8, "SCHBNK01");
-    put(bytes, 8, 3, "001");
+    put(bytes, 0, 8, FIXTURE_SCHBNK01_E209989D);
+    put(bytes, 8, 3, FIXTURE_001_A3FEAA64);
     put(bytes, 11, 8, "NTSRSP01");
-    put(bytes, 19, 3, "001");
+    put(bytes, 19, 3, FIXTURE_001_A3FEAA64);
     put(bytes, 22, 1, "S");
     put(bytes, 23, 1, "S");
     put(bytes, 24, 36, new UUID(1, id.getLeastSignificantBits()).toString());
     put(bytes, 60, 36, id.toString());
-    put(bytes, 96, 17, "20261003090000000");
+    put(bytes, 96, 17, FIXTURE_20261003090000000_7C7C75E7);
     put(bytes, 113, 64, context);
     number(bytes, 177, 4, 256);
     number(bytes, 181, 6, 48);
@@ -1485,7 +1614,7 @@ class NotificationControllerTest {
       put(bytes, at + 38, 12, type);
       put(bytes, at + 50, 12, state);
       put(bytes, at + 62, 17, submitted);
-      put(bytes, at + 79, 17, "20261003090000000");
+      put(bytes, at + 79, 17, FIXTURE_20261003090000000_7C7C75E7);
       put(bytes, at + 96, 512, summary);
       put(bytes, at + 608, 1, deleted ? "1" : "0");
     }

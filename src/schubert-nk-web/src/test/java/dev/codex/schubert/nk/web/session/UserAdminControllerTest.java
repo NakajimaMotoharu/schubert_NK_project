@@ -71,6 +71,28 @@ import org.springframework.web.context.support.AnnotationConfigWebApplicationCon
 
 /** UI232/236 byte and DOM literals, not production-generated expected. PG-D344/016053. */
 class UserAdminControllerTest {
+  private static final String FIXTURE_READER_F734AAEA = "reader";
+  private static final String FIXTURE_GET_04F32A7E = "GET";
+  private static final String FIXTURE_ADMIN_USERS_2C687608 = "/admin/users";
+  private static final String FIXTURE_0000_876EEFE0 = "0000";
+  private static final String FIXTURE_0200_FC9DB3AC = "0200";
+  private static final String FIXTURE_USERNAME_72488FAE = "username";
+  private static final String FIXTURE_ROLE_2BC933AF = "role";
+  private static final String FIXTURE_ADMIN_C4BB3010 = "ADMIN";
+  private static final String FIXTURE_STATE_55AF5B1D = "state";
+  private static final String FIXTURE_LOCKED_7FD82193 = "LOCKED";
+  private static final String FIXTURE_PAGE_861424BC = "page";
+  private static final String FIXTURE_USER_2DED8884 = "USER";
+  private static final String FIXTURE_ACTIVE_77FF42A3 = "ACTIVE";
+  private static final String FIXTURE_ADMIN_3D9A13EA = "admin";
+  private static final String FIXTURE_SAME_106C4202 = "same";
+  private static final String FIXTURE_HREF_27C4F573 = "href";
+  private static final String FIXTURE_2026_10_03_09_00_00_000_052FEE28 = "2026-10-03 09:00:00.000";
+  private static final String FIXTURE_LOGIN_F843C044 = "/login";
+  private static final String FIXTURE_SET_COOKIE_39067BC9 = "set-cookie";
+  private static final String FIXTURE_ADMIN_USERS_42_65AE9E81 = "/admin/users/42";
+  private static final String FIXTURE_ADMIN_USER_DETAIL_CC61E128 = "admin/user-detail";
+  private static final String FIXTURE_SYSTEM_8E1CB697 = "SYSTEM";
   private static final Clock CLOCK =
       Clock.fixed(Instant.parse("2026-10-03T00:00:00Z"), ZoneOffset.UTC);
   private static WebLogDatabaseFixture db;
@@ -101,7 +123,7 @@ class UserAdminControllerTest {
 
   private static SessionPrincipal actor(UserRole role) {
     return new SessionPrincipal(
-        "reader", role, AuthenticationContext.of("a".repeat(64)), Instant.EPOCH);
+        FIXTURE_READER_F734AAEA, role, AuthenticationContext.of("a".repeat(64)), Instant.EPOCH);
   }
 
   private static LinkedMultiValueMap<String, String> params(String... pairs) {
@@ -111,7 +133,7 @@ class UserAdminControllerTest {
   }
 
   private static MockHttpServletRequest raw() {
-    var result = new MockHttpServletRequest("GET", "/admin/users");
+    var result = new MockHttpServletRequest(FIXTURE_GET_04F32A7E, FIXTURE_ADMIN_USERS_2C687608);
     result.setRemoteAddr("127.0.0.1");
     return result;
   }
@@ -135,7 +157,7 @@ class UserAdminControllerTest {
   @Test
   void user001IndependentWholeByteAndAllPageSizes() throws Exception {
     try (var f = new Fixture()) {
-      for (String code : List.of("0000", "0200"))
+      for (String code : List.of(FIXTURE_0000_876EEFE0, FIXTURE_0200_FC9DB3AC))
         for (int count : new int[] {0, 1, 50}) {
           f.code = code;
           f.count = count;
@@ -145,15 +167,23 @@ class UserAdminControllerTest {
           assertEquals(
               "admin/user-list",
               f.controller.list(
-                  params("username", " e\u0301 ", "role", "ADMIN", "state", "LOCKED", "page", "1"),
+                  params(
+                      FIXTURE_USERNAME_72488FAE,
+                      " e\u0301 ",
+                      FIXTURE_ROLE_2BC933AF,
+                      FIXTURE_ADMIN_C4BB3010,
+                      FIXTURE_STATE_55AF5B1D,
+                      FIXTURE_LOCKED_7FD82193,
+                      FIXTURE_PAGE_861424BC,
+                      "1"),
                   actor(UserRole.ADMIN),
                   model,
                   raw(),
                   response));
           assertEquals(200, response.getStatus());
-          var page = assertInstanceOf(UserListViewModel.class, model.get("page"));
+          var page = assertInstanceOf(UserListViewModel.class, model.get(FIXTURE_PAGE_861424BC));
           assertEquals(count, page.getRows().size());
-          assertEquals("ADMIN", page.getTopBar().getRole());
+          assertEquals(FIXTURE_ADMIN_C4BB3010, page.getTopBar().getRole());
           byte[] sent = f.requests.getLast();
           assertEquals(352, sent.length);
           assertEquals("USRREQ01", ascii(sent, 11, 8));
@@ -163,8 +193,8 @@ class UserAdminControllerTest {
           byte[] expected = new byte[96];
           Arrays.fill(expected, (byte) ' ');
           put(expected, 0, 64, "é");
-          put(expected, 64, 5, "ADMIN");
-          put(expected, 69, 8, "LOCKED");
+          put(expected, 64, 5, FIXTURE_ADMIN_C4BB3010);
+          put(expected, 69, 8, FIXTURE_LOCKED_7FD82193);
           number(expected, 77, 6, 1);
           number(expected, 83, 3, 50);
           assertArrayEquals(expected, Arrays.copyOfRange(sent, 256, 352));
@@ -185,26 +215,36 @@ class UserAdminControllerTest {
     for (String page : List.of("0", "-1", "-2147483648", "000001", "999999")) {
       var form =
           UserSearchForm.bind(
-              params("username", " e\u0301 ", "role", " USER ", "state", " ACTIVE ", "page", page));
+              params(
+                  FIXTURE_USERNAME_72488FAE,
+                  " e\u0301 ",
+                  FIXTURE_ROLE_2BC933AF,
+                  " USER ",
+                  FIXTURE_STATE_55AF5B1D,
+                  " ACTIVE ",
+                  FIXTURE_PAGE_861424BC,
+                  page));
       assertTrue(form.isValid());
       assertEquals("é", form.getUsername());
-      assertEquals("USER", form.getRole());
-      assertEquals("ACTIVE", form.getState());
+      assertEquals(FIXTURE_USER_2DED8884, form.getRole());
+      assertEquals(FIXTURE_ACTIVE_77FF42A3, form.getState());
       assertEquals(page.equals("999999") ? 999999 : 1, form.getPage());
       assertEquals(Optional.of(UserRole.USER), form.toRequest().role());
       assertEquals(Optional.of(UserState.ACTIVE), form.toRequest().state());
     }
     var values = new ArrayList<>(List.of("first"));
     var input = new HashMap<String, List<String>>();
-    input.put("username", values);
+    input.put(FIXTURE_USERNAME_72488FAE, values);
     var copy = UserSearchForm.bind(input);
     values.set(0, "changed");
     input.clear();
     assertEquals("first", copy.getUsername());
     assertEquals("UserSearchForm[REDACTED]", copy.toString());
     assertThrows(UnsupportedOperationException.class, () -> copy.getIssues().put("x", "y"));
-    assertTrue(UserSearchForm.bind(params("username", "é".repeat(32))).isValid());
-    assertTrue(UserSearchForm.bind(params("username", "\uD800\uDC00".repeat(16))).isValid());
+    assertTrue(UserSearchForm.bind(params(FIXTURE_USERNAME_72488FAE, "é".repeat(32))).isValid());
+    assertTrue(
+        UserSearchForm.bind(params(FIXTURE_USERNAME_72488FAE, "\uD800\uDC00".repeat(16)))
+            .isValid());
   }
 
   @Test
@@ -212,9 +252,9 @@ class UserAdminControllerTest {
     try (var f = new Fixture()) {
       var bad = new ArrayList<LinkedMultiValueMap<String, String>>();
       bad.add(params("extra", "x"));
-      bad.add(params("username", "one", "username", "two"));
+      bad.add(params(FIXTURE_USERNAME_72488FAE, "one", FIXTURE_USERNAME_72488FAE, "two"));
       var noValue = params();
-      noValue.put("state", List.of());
+      noValue.put(FIXTURE_STATE_55AF5B1D, List.of());
       bad.add(noValue);
       for (String value :
           List.of(
@@ -226,11 +266,12 @@ class UserAdminControllerTest {
               "\uD800",
               "\uDC00",
               "x".repeat(65),
-              "é".repeat(33))) bad.add(params("username", value));
+              "é".repeat(33))) bad.add(params(FIXTURE_USERNAME_72488FAE, value));
       for (String value : List.of("+1", "1.0", "١", "1000000", "2147483648", "-2147483649"))
-        bad.add(params("page", value));
-      for (String value : List.of("root", "admin")) bad.add(params("role", value));
-      bad.add(params("state", "UNKNOWN"));
+        bad.add(params(FIXTURE_PAGE_861424BC, value));
+      for (String value : List.of("root", FIXTURE_ADMIN_3D9A13EA))
+        bad.add(params(FIXTURE_ROLE_2BC933AF, value));
+      bad.add(params(FIXTURE_STATE_55AF5B1D, "UNKNOWN"));
       for (var input : bad) {
         var form = UserSearchForm.bind(input);
         assertFalse(form.isValid());
@@ -241,7 +282,7 @@ class UserAdminControllerTest {
         assertEquals(
             "admin/user-list", f.controller.list(input, actor(UserRole.ADMIN), m, raw(), r));
         assertEquals(400, r.getStatus());
-        var view = (UserListViewModel) m.get("page");
+        var view = (UserListViewModel) m.get(FIXTURE_PAGE_861424BC);
         assertTrue(view.getPage().isEmpty());
         assertTrue(view.getRows().isEmpty());
         assertTrue(view.getPreviousHref().isEmpty());
@@ -254,9 +295,9 @@ class UserAdminControllerTest {
     input.put(null, List.of("x"));
     assertThrows(NullPointerException.class, () -> UserSearchForm.bind(input));
     input.clear();
-    input.put("username", null);
+    input.put(FIXTURE_USERNAME_72488FAE, null);
     assertThrows(NullPointerException.class, () -> UserSearchForm.bind(input));
-    input.put("username", Arrays.asList((String) null));
+    input.put(FIXTURE_USERNAME_72488FAE, Arrays.asList((String) null));
     assertThrows(NullPointerException.class, () -> UserSearchForm.bind(input));
   }
 
@@ -315,7 +356,7 @@ class UserAdminControllerTest {
             f.controller.list(params(), actor(UserRole.ADMIN), new ExtendedModelMap(), raw(), r));
         assertEquals(item.getValue(), r.getStatus());
       }
-      f.code = "0000";
+      f.code = FIXTURE_0000_876EEFE0;
       f.responder =
           (id, bytes) -> {
             throw new JMSRuntimeException("synthetic secret diagnostics");
@@ -409,7 +450,7 @@ class UserAdminControllerTest {
                 admin,
                 form,
                 new PagedResponseData(1, 50, 2, 1, 1, 2),
-                List.of(row(1, "same"), row(2, "same")))
+                List.of(row(1, FIXTURE_SAME_106C4202), row(2, FIXTURE_SAME_106C4202)))
             .getRows()
             .size());
     assertThrows(
@@ -419,7 +460,7 @@ class UserAdminControllerTest {
                 admin,
                 form,
                 new PagedResponseData(1, 50, 2, 1, 1, 2),
-                List.of(row(2, "same"), row(1, "same"))));
+                List.of(row(2, FIXTURE_SAME_106C4202), row(1, FIXTURE_SAME_106C4202))));
     assertThrows(
         IllegalArgumentException.class,
         () ->
@@ -461,7 +502,7 @@ class UserAdminControllerTest {
       var mvc = MockMvcBuilders.webAppContextSetup(context).build();
       var result =
           mvc.perform(
-                  get("/admin/users")
+                  get(FIXTURE_ADMIN_USERS_2C687608)
                       .principal(actor(UserRole.ADMIN))
                       .requestAttr(CsrfToken.class.getName(), csrf()))
               .andReturn();
@@ -470,29 +511,32 @@ class UserAdminControllerTest {
       assertEquals("Users", dom.title());
       assertEquals(1, dom.select(".user-row").size());
       assertEquals("user000", dom.select(".user-row .username").text());
-      assertEquals("/admin/users/1", dom.select(".detail").attr("href"));
-      assertEquals("2026-10-03 09:00:00.000", dom.select(".created-at").text());
+      assertEquals("/admin/users/1", dom.select(".detail").attr(FIXTURE_HREF_27C4F573));
+      assertEquals(FIXTURE_2026_10_03_09_00_00_000_052FEE28, dom.select(".created-at").text());
       assertEquals(1, dom.select("input[name=_csrf]").size());
       assertEquals(1, dom.select("a[href='/admin/users/new']").size());
-      assertEquals("/admin/users/new", dom.select("a[href='/admin/users/new']").attr("href"));
       assertEquals(
-          List.of("/", "/notifications"), dom.select(".topbar .nav-links a").eachAttr("href"));
+          "/admin/users/new", dom.select("a[href='/admin/users/new']").attr(FIXTURE_HREF_27C4F573));
       assertEquals(
-          List.of("", "USER", "ADMIN"), dom.select("select[name=role] option").eachAttr("value"));
+          List.of("/", "/notifications"),
+          dom.select(".topbar .nav-links a").eachAttr(FIXTURE_HREF_27C4F573));
       assertEquals(
-          List.of("", "ACTIVE", "DISABLED", "LOCKED"),
+          List.of("", FIXTURE_USER_2DED8884, FIXTURE_ADMIN_C4BB3010),
+          dom.select("select[name=role] option").eachAttr("value"));
+      assertEquals(
+          List.of("", FIXTURE_ACTIVE_77FF42A3, "DISABLED", FIXTURE_LOCKED_7FD82193),
           dom.select("select[name=state] option").eachAttr("value"));
       assertFalse(result.getResponse().getContentAsString().contains("a".repeat(64)));
       var head =
           mvc.perform(
-                  head("/admin/users")
+                  head(FIXTURE_ADMIN_USERS_2C687608)
                       .principal(actor(UserRole.ADMIN))
                       .requestAttr(CsrfToken.class.getName(), csrf()))
               .andReturn();
       assertEquals(200, head.getResponse().getStatus());
       assertEquals(
           405,
-          mvc.perform(post("/admin/users").principal(actor(UserRole.ADMIN)))
+          mvc.perform(post(FIXTURE_ADMIN_USERS_2C687608).principal(actor(UserRole.ADMIN)))
               .andReturn()
               .getResponse()
               .getStatus());
@@ -501,7 +545,7 @@ class UserAdminControllerTest {
       dom =
           Jsoup.parse(
               mvc.perform(
-                      get("/admin/users")
+                      get(FIXTURE_ADMIN_USERS_2C687608)
                           .principal(actor(UserRole.ADMIN))
                           .requestAttr(CsrfToken.class.getName(), csrf()))
                   .andReturn()
@@ -515,10 +559,10 @@ class UserAdminControllerTest {
       f.firstName = "<img src=x onerror=alert(1)>";
       var html =
           mvc.perform(
-                  get("/admin/users")
-                      .param("username", "a&b")
-                      .param("role", "USER")
-                      .param("state", "ACTIVE")
+                  get(FIXTURE_ADMIN_USERS_2C687608)
+                      .param(FIXTURE_USERNAME_72488FAE, "a&b")
+                      .param(FIXTURE_ROLE_2BC933AF, FIXTURE_USER_2DED8884)
+                      .param(FIXTURE_STATE_55AF5B1D, FIXTURE_ACTIVE_77FF42A3)
                       .principal(actor(UserRole.ADMIN))
                       .requestAttr(CsrfToken.class.getName(), csrf()))
               .andReturn()
@@ -530,15 +574,15 @@ class UserAdminControllerTest {
       assertEquals("<img src=x onerror=alert(1)>", dom.select(".username").first().text());
       assertEquals(
           "/admin/users?username=a%26b&role=USER&state=ACTIVE&page=2",
-          dom.select(".next").attr("href"));
+          dom.select(".next").attr(FIXTURE_HREF_27C4F573));
       f.replyPage = 2;
       f.count = 1;
       f.firstName = "user000";
       dom =
           Jsoup.parse(
               mvc.perform(
-                      get("/admin/users")
-                          .param("page", "999999")
+                      get(FIXTURE_ADMIN_USERS_2C687608)
+                          .param(FIXTURE_PAGE_861424BC, "999999")
                           .principal(actor(UserRole.ADMIN))
                           .requestAttr(CsrfToken.class.getName(), csrf()))
                   .andReturn()
@@ -546,12 +590,13 @@ class UserAdminControllerTest {
                   .getContentAsString());
       assertEquals("51 users / page 2 of 2", dom.select(".count").text());
       assertEquals(
-          "/admin/users?username=&role=&state=&page=1", dom.select(".previous").attr("href"));
+          "/admin/users?username=&role=&state=&page=1",
+          dom.select(".previous").attr(FIXTURE_HREF_27C4F573));
       assertTrue(dom.select(".next").isEmpty());
       dom =
           Jsoup.parse(
               mvc.perform(
-                      get("/admin/users")
+                      get(FIXTURE_ADMIN_USERS_2C687608)
                           .param("extra", "x")
                           .principal(actor(UserRole.ADMIN))
                           .requestAttr(CsrfToken.class.getName(), csrf()))
@@ -565,9 +610,9 @@ class UserAdminControllerTest {
 
   @Test
   void user008RealSecurityAndApi0102Terminal() throws Exception {
-    for (String role : List.of("USER", "ADMIN")) {
+    for (String role : List.of(FIXTURE_USER_2DED8884, FIXTURE_ADMIN_C4BB3010)) {
       reset();
-      var api = new SessionFormLoginTest.Api("0000", role, "0000", 0);
+      var api = new SessionFormLoginTest.Api(FIXTURE_0000_876EEFE0, role, FIXTURE_0000_876EEFE0, 0);
       try (var f = new Fixture();
           var server =
               new EmbeddedWebSecurityTest.Server(
@@ -578,39 +623,55 @@ class UserAdminControllerTest {
                   true,
                   true,
                   (mvc, invalid) -> configure(mvc, f.client, invalid))) {
-        var anonymous = server.send("GET", "/admin/users", null, null, true);
+        var anonymous =
+            server.send(FIXTURE_GET_04F32A7E, FIXTURE_ADMIN_USERS_2C687608, null, null, true);
         assertEquals(302, anonymous.statusCode());
         assertTrue(f.requests.isEmpty());
-        var first = server.send("GET", "/login", null, null, true);
-        String initial = first.headers().firstValue("set-cookie").orElseThrow().split(";", 2)[0];
+        var first = server.send(FIXTURE_GET_04F32A7E, FIXTURE_LOGIN_F843C044, null, null, true);
+        String initial =
+            first.headers().firstValue(FIXTURE_SET_COOKIE_39067BC9).orElseThrow().split(";", 2)[0];
         var login =
             server.send(
                 "POST",
-                "/login",
+                FIXTURE_LOGIN_F843C044,
                 initial,
                 "_csrf=" + first.body().substring(6) + "&username=reader&password=p",
                 true);
         assertEquals(302, login.statusCode());
-        String cookie = login.headers().firstValue("set-cookie").orElseThrow().split(";", 2)[0];
-        var page = server.send("GET", "/admin/users", cookie, null, true);
-        assertEquals(role.equals("ADMIN") ? 200 : 403, page.statusCode());
-        if (role.equals("ADMIN")) {
+        String cookie =
+            login.headers().firstValue(FIXTURE_SET_COOKIE_39067BC9).orElseThrow().split(";", 2)[0];
+        var page =
+            server.send(FIXTURE_GET_04F32A7E, FIXTURE_ADMIN_USERS_2C687608, cookie, null, true);
+        assertEquals(role.equals(FIXTURE_ADMIN_C4BB3010) ? 200 : 403, page.statusCode());
+        if (role.equals(FIXTURE_ADMIN_C4BB3010)) {
           assertTrue(page.headers().firstValue("cache-control").orElseThrow().contains("no-store"));
-          var head = server.send("HEAD", "/admin/users", cookie, null, true);
+          var head = server.send("HEAD", FIXTURE_ADMIN_USERS_2C687608, cookie, null, true);
           assertEquals(200, head.statusCode());
           assertEquals("", head.body());
           int before = f.requests.size();
           assertEquals(
-              400, server.send("GET", "/admin/users?page=bad", cookie, null, true).statusCode());
+              400,
+              server
+                  .send(FIXTURE_GET_04F32A7E, "/admin/users?page=bad", cookie, null, true)
+                  .statusCode());
           assertEquals(before, f.requests.size());
           f.code = "0102";
-          var expired = server.send("GET", "/admin/users", cookie, null, true);
+          var expired =
+              server.send(FIXTURE_GET_04F32A7E, FIXTURE_ADMIN_USERS_2C687608, cookie, null, true);
           assertEquals(302, expired.statusCode());
           assertEquals(
               "/login?session-expired", expired.headers().firstValue("location").orElseThrow());
           assertTrue(
-              expired.headers().firstValue("set-cookie").orElseThrow().contains("Max-Age=0"));
-          assertEquals(302, server.send("GET", "/admin/users", cookie, null, true).statusCode());
+              expired
+                  .headers()
+                  .firstValue(FIXTURE_SET_COOKIE_39067BC9)
+                  .orElseThrow()
+                  .contains("Max-Age=0"));
+          assertEquals(
+              302,
+              server
+                  .send(FIXTURE_GET_04F32A7E, FIXTURE_ADMIN_USERS_2C687608, cookie, null, true)
+                  .statusCode());
           assertEquals(before + 1, f.requests.size());
         } else assertTrue(f.requests.isEmpty());
         f.erased();
@@ -631,7 +692,7 @@ class UserAdminControllerTest {
                 () -> {
                   var principal =
                       new SessionPrincipal(
-                          "reader" + n,
+                          FIXTURE_READER_F734AAEA + n,
                           UserRole.ADMIN,
                           AuthenticationContext.of(String.format(Locale.ROOT, "%064x", n + 1)),
                           Instant.EPOCH);
@@ -640,11 +701,15 @@ class UserAdminControllerTest {
                   assertEquals(
                       "admin/user-list",
                       f.controller.list(
-                          params("username", "query" + n), principal, model, raw(), r));
-                  var page = (UserListViewModel) model.get("page");
+                          params(FIXTURE_USERNAME_72488FAE, "query" + n),
+                          principal,
+                          model,
+                          raw(),
+                          r));
+                  var page = (UserListViewModel) model.get(FIXTURE_PAGE_861424BC);
                   assertEquals(200, r.getStatus());
                   assertEquals("query" + n, page.getFilters().getUsername());
-                  assertEquals("reader" + n, page.getTopBar().getUsername());
+                  assertEquals(FIXTURE_READER_F734AAEA + n, page.getTopBar().getUsername());
                   return null;
                 }));
       }
@@ -668,7 +733,7 @@ class UserAdminControllerTest {
     var form = UserSearchForm.bind(Map.of());
     var bad = UserSearchForm.bind(params("extra", "x"));
     var data = new PagedResponseData(1, 50, 1, 1, 1, 1);
-    var records = List.of(row(42, "reader"));
+    var records = List.of(row(42, FIXTURE_READER_F734AAEA));
     assertThrows(
         NullPointerException.class, () -> UserListViewModel.success(null, form, data, records));
     assertThrows(
@@ -689,7 +754,7 @@ class UserAdminControllerTest {
     assertThrows(NullPointerException.class, () -> UserListViewModel.invalid(admin, null));
     assertThrows(
         IllegalArgumentException.class, () -> UserListViewModel.invalid(actor(UserRole.USER), bad));
-    var second = UserSearchForm.bind(params("page", "2"));
+    var second = UserSearchForm.bind(params(FIXTURE_PAGE_861424BC, "2"));
     assertThrows(
         IllegalArgumentException.class,
         () ->
@@ -703,14 +768,14 @@ class UserAdminControllerTest {
     assertTrue(page.getNextHref().isEmpty());
     var display = page.getRows().getFirst();
     assertEquals(42, display.getId());
-    assertEquals("/admin/users/42", display.getDetailHref());
-    assertEquals("reader", display.getUsername());
-    assertEquals("ADMIN", display.getRole());
-    assertEquals("LOCKED", display.getState());
-    assertEquals("2026-10-03 09:00:00.000", display.getLockedUntil());
-    assertEquals("2026-10-03 09:00:00.000", display.getLastLogin());
-    assertEquals("2026-10-03 09:00:00.000", display.getCreatedAt());
-    assertEquals("2026-10-03 09:00:00.000", display.getUpdatedAt());
+    assertEquals(FIXTURE_ADMIN_USERS_42_65AE9E81, display.getDetailHref());
+    assertEquals(FIXTURE_READER_F734AAEA, display.getUsername());
+    assertEquals(FIXTURE_ADMIN_C4BB3010, display.getRole());
+    assertEquals(FIXTURE_LOCKED_7FD82193, display.getState());
+    assertEquals(FIXTURE_2026_10_03_09_00_00_000_052FEE28, display.getLockedUntil());
+    assertEquals(FIXTURE_2026_10_03_09_00_00_000_052FEE28, display.getLastLogin());
+    assertEquals(FIXTURE_2026_10_03_09_00_00_000_052FEE28, display.getCreatedAt());
+    assertEquals(FIXTURE_2026_10_03_09_00_00_000_052FEE28, display.getUpdatedAt());
     assertEquals("UserListRow[REDACTED]", display.toString());
     var empty =
         UserListViewModel.success(admin, form, new PagedResponseData(1, 50, 0, 1, 0, 0), List.of());
@@ -733,23 +798,24 @@ class UserAdminControllerTest {
 
   @Test
   void detail001IndependentWireAndSafeDisplay() throws Exception {
-    for (String code : List.of("0000", "0200"))
+    for (String code : List.of(FIXTURE_0000_876EEFE0, FIXTURE_0200_FC9DB3AC))
       try (var f = new Fixture()) {
         f.code = code;
         var model = new ExtendedModelMap();
         var response = new MockHttpServletResponse();
         assertEquals(
-            "admin/user-detail",
+            FIXTURE_ADMIN_USER_DETAIL_CC61E128,
             f.controller.detail(42, actor(UserRole.ADMIN), model, raw(), response));
         assertEquals(200, response.getStatus());
-        var page = assertInstanceOf(UserDetailViewModel.class, model.get("page"));
-        assertEquals("reader", page.getValues().get("username"));
+        var page = assertInstanceOf(UserDetailViewModel.class, model.get(FIXTURE_PAGE_861424BC));
+        assertEquals(FIXTURE_READER_F734AAEA, page.getValues().get(FIXTURE_USERNAME_72488FAE));
         assertEquals("ログイン失敗によるロック", page.getValues().get("lockReason"));
-        assertEquals("2026-10-03 09:00:00.000", page.getValues().get("passwordChangedAt"));
+        assertEquals(
+            FIXTURE_2026_10_03_09_00_00_000_052FEE28, page.getValues().get("passwordChangedAt"));
         assertEquals(2, page.getValues().get("activeSessionCount"));
         assertEquals(7L, page.getValues().get("version"));
-        assertEquals("SYSTEM", page.getValues().get("createdBy"));
-        assertEquals("admin", page.getValues().get("updatedBy"));
+        assertEquals(FIXTURE_SYSTEM_8E1CB697, page.getValues().get("createdBy"));
+        assertEquals(FIXTURE_ADMIN_3D9A13EA, page.getValues().get("updatedBy"));
         var sent = f.requests.getFirst();
         assertEquals(268, sent.length);
         assertEquals("UDTREQ01", ascii(sent, 11, 8));
@@ -769,7 +835,7 @@ class UserAdminControllerTest {
       var mvc = MockMvcBuilders.webAppContextSetup(context).build();
       var result =
           mvc.perform(
-                  get("/admin/users/42")
+                  get(FIXTURE_ADMIN_USERS_42_65AE9E81)
                       .principal(actor(UserRole.ADMIN))
                       .requestAttr(CsrfToken.class.getName(), csrf()))
               .andReturn();
@@ -778,18 +844,21 @@ class UserAdminControllerTest {
       assertEquals("User詳細", dom.title());
       assertEquals(f.detailName, dom.select(".user-detail > dl .username").text());
       assertTrue(dom.select("dl img,dl script").isEmpty());
-      assertEquals("LOCKED", dom.select(".state").text());
+      assertEquals(FIXTURE_LOCKED_7FD82193, dom.select(".state").text());
       assertEquals("2", dom.select(".active-sessions").text());
-      assertEquals("/admin/users", dom.select("a[href='/admin/users']").attr("href"));
       assertEquals(
-          List.of("/", "/notifications"), dom.select(".topbar .nav-links a").eachAttr("href"));
+          FIXTURE_ADMIN_USERS_2C687608,
+          dom.select("a[href='/admin/users']").attr(FIXTURE_HREF_27C4F573));
+      assertEquals(
+          List.of("/", "/notifications"),
+          dom.select(".topbar .nav-links a").eachAttr(FIXTURE_HREF_27C4F573));
       assertEquals(1, dom.select("input[name=_csrf]").size());
       assertTrue(dom.select("input[type=password],input[name=operation_token]").isEmpty());
       assertFalse(result.getResponse().getContentAsString().contains("a".repeat(64)));
       assertEquals(
           200,
           mvc.perform(
-                  head("/admin/users/42")
+                  head(FIXTURE_ADMIN_USERS_42_65AE9E81)
                       .principal(actor(UserRole.ADMIN))
                       .requestAttr(CsrfToken.class.getName(), csrf()))
               .andReturn()
@@ -805,7 +874,7 @@ class UserAdminControllerTest {
                 .getStatus());
       assertEquals(
           503,
-          mvc.perform(post("/admin/users/42").principal(actor(UserRole.ADMIN)))
+          mvc.perform(post(FIXTURE_ADMIN_USERS_42_65AE9E81).principal(actor(UserRole.ADMIN)))
               .andReturn()
               .getResponse()
               .getStatus());
@@ -833,7 +902,7 @@ class UserAdminControllerTest {
           () ->
               f.controller.detail(
                   42,
-                  () -> "reader",
+                  () -> FIXTURE_READER_F734AAEA,
                   new ExtendedModelMap(),
                   raw(),
                   new MockHttpServletResponse()));
@@ -940,12 +1009,12 @@ class UserAdminControllerTest {
         var model = new ExtendedModelMap();
         var response = new MockHttpServletResponse();
         assertEquals(
-            "admin/user-detail",
+            FIXTURE_ADMIN_USER_DETAIL_CC61E128,
             f.controller.detail(42, actor(UserRole.ADMIN), model, raw(), response));
         assertEquals(200, response.getStatus());
         assertEquals(
             version,
-            assertInstanceOf(UserDetailViewModel.class, model.get("page"))
+            assertInstanceOf(UserDetailViewModel.class, model.get(FIXTURE_PAGE_861424BC))
                 .getValues()
                 .get("version"));
         f.erased();
@@ -975,7 +1044,7 @@ class UserAdminControllerTest {
 
   @Test
   void detail006AllSafeValuesAndFactoryInvariants() throws Exception {
-    for (String state : List.of("ACTIVE", "DISABLED", "LOCKED"))
+    for (String state : List.of(FIXTURE_ACTIVE_77FF42A3, "DISABLED", FIXTURE_LOCKED_7FD82193))
       for (boolean optional : List.of(true, false))
         for (int count : List.of(0, 1, 2))
           try (var f = new Fixture()) {
@@ -985,21 +1054,26 @@ class UserAdminControllerTest {
             f.detailName = "other";
             var model = new ExtendedModelMap();
             assertEquals(
-                "admin/user-detail",
+                FIXTURE_ADMIN_USER_DETAIL_CC61E128,
                 f.controller.detail(
                     42, actor(UserRole.ADMIN), model, raw(), new MockHttpServletResponse()));
-            var page = (UserDetailViewModel) model.get("page");
-            assertEquals("reader", page.getTopBar().getUsername());
-            assertEquals("ADMIN", page.getValues().get("role"));
-            assertEquals(state, page.getValues().get("state"));
+            var page = (UserDetailViewModel) model.get(FIXTURE_PAGE_861424BC);
+            assertEquals(FIXTURE_READER_F734AAEA, page.getTopBar().getUsername());
+            assertEquals(FIXTURE_ADMIN_C4BB3010, page.getValues().get(FIXTURE_ROLE_2BC933AF));
+            assertEquals(state, page.getValues().get(FIXTURE_STATE_55AF5B1D));
             assertEquals(
-                state.equals("LOCKED") ? "ログイン失敗によるロック" : "", page.getValues().get("lockReason"));
+                state.equals(FIXTURE_LOCKED_7FD82193) ? "ログイン失敗によるロック" : "",
+                page.getValues().get("lockReason"));
             assertEquals(
-                optional ? "2026-10-03 09:00:00.000" : "", page.getValues().get("lockedUntil"));
+                optional ? FIXTURE_2026_10_03_09_00_00_000_052FEE28 : "",
+                page.getValues().get("lockedUntil"));
             assertEquals(
-                optional ? "2026-10-03 09:00:00.000" : "", page.getValues().get("lastLogin"));
-            assertEquals("2026-10-03 09:00:00.000", page.getValues().get("createdAt"));
-            assertEquals("2026-10-03 09:00:00.000", page.getValues().get("updatedAt"));
+                optional ? FIXTURE_2026_10_03_09_00_00_000_052FEE28 : "",
+                page.getValues().get("lastLogin"));
+            assertEquals(
+                FIXTURE_2026_10_03_09_00_00_000_052FEE28, page.getValues().get("createdAt"));
+            assertEquals(
+                FIXTURE_2026_10_03_09_00_00_000_052FEE28, page.getValues().get("updatedAt"));
             assertEquals(count, page.getValues().get("activeSessionCount"));
             assertEquals(42L, page.getValues().get("id"));
             assertEquals(Boolean.FALSE, page.getValues().get("self"));
@@ -1011,7 +1085,7 @@ class UserAdminControllerTest {
     var detail =
         new UserDetailResponseData(
             new UserId(42),
-            "reader",
+            FIXTURE_READER_F734AAEA,
             UserRole.ADMIN,
             UserState.ACTIVE,
             Optional.empty(),
@@ -1021,8 +1095,8 @@ class UserAdminControllerTest {
             CLOCK.instant(),
             0,
             1,
-            "SYSTEM",
-            "admin");
+            FIXTURE_SYSTEM_8E1CB697,
+            FIXTURE_ADMIN_3D9A13EA);
     assertThrows(
         IllegalArgumentException.class,
         () -> UserDetailViewModel.from(actor(UserRole.USER), new UserId(42), detail));
@@ -1030,7 +1104,7 @@ class UserAdminControllerTest {
     var tooManySessions =
         new UserDetailResponseData(
             new UserId(42),
-            "reader",
+            FIXTURE_READER_F734AAEA,
             UserRole.ADMIN,
             UserState.ACTIVE,
             Optional.empty(),
@@ -1040,8 +1114,8 @@ class UserAdminControllerTest {
             CLOCK.instant(),
             3,
             1,
-            "SYSTEM",
-            "admin");
+            FIXTURE_SYSTEM_8E1CB697,
+            FIXTURE_ADMIN_3D9A13EA);
     var failure =
         assertThrows(
             IllegalArgumentException.class,
@@ -1069,17 +1143,19 @@ class UserAdminControllerTest {
                 () -> {
                   var actor =
                       new SessionPrincipal(
-                          "reader" + n,
+                          FIXTURE_READER_F734AAEA + n,
                           UserRole.ADMIN,
                           AuthenticationContext.of(String.format(Locale.ROOT, "%064x", n + 1)),
                           Instant.EPOCH);
                   var model = new ExtendedModelMap();
                   assertEquals(
-                      "admin/user-detail",
+                      FIXTURE_ADMIN_USER_DETAIL_CC61E128,
                       f.controller.detail(42, actor, model, raw(), new MockHttpServletResponse()));
                   assertEquals(
-                      "reader" + n,
-                      ((UserDetailViewModel) model.get("page")).getTopBar().getUsername());
+                      FIXTURE_READER_F734AAEA + n,
+                      ((UserDetailViewModel) model.get(FIXTURE_PAGE_861424BC))
+                          .getTopBar()
+                          .getUsername());
                   return null;
                 }));
       }
@@ -1094,9 +1170,9 @@ class UserAdminControllerTest {
 
   @Test
   void detail008RealSecurityAndApiInvalidTermination() throws Exception {
-    for (String role : List.of("USER", "ADMIN")) {
+    for (String role : List.of(FIXTURE_USER_2DED8884, FIXTURE_ADMIN_C4BB3010)) {
       reset();
-      var api = new SessionFormLoginTest.Api("0000", role, "0000", 0);
+      var api = new SessionFormLoginTest.Api(FIXTURE_0000_876EEFE0, role, FIXTURE_0000_876EEFE0, 0);
       try (var f = new Fixture();
           var server =
               new EmbeddedWebSecurityTest.Server(
@@ -1107,36 +1183,53 @@ class UserAdminControllerTest {
                   true,
                   true,
                   (mvc, invalid) -> configure(mvc, f.client, invalid))) {
-        assertEquals(302, server.send("GET", "/admin/users/42", null, null, true).statusCode());
+        assertEquals(
+            302,
+            server
+                .send(FIXTURE_GET_04F32A7E, FIXTURE_ADMIN_USERS_42_65AE9E81, null, null, true)
+                .statusCode());
         assertTrue(f.requests.isEmpty());
-        var first = server.send("GET", "/login", null, null, true);
-        String initial = first.headers().firstValue("set-cookie").orElseThrow().split(";", 2)[0];
+        var first = server.send(FIXTURE_GET_04F32A7E, FIXTURE_LOGIN_F843C044, null, null, true);
+        String initial =
+            first.headers().firstValue(FIXTURE_SET_COOKIE_39067BC9).orElseThrow().split(";", 2)[0];
         var login =
             server.send(
                 "POST",
-                "/login",
+                FIXTURE_LOGIN_F843C044,
                 initial,
                 "_csrf=" + first.body().substring(6) + "&username=reader&password=p",
                 true);
         assertEquals(302, login.statusCode());
-        String cookie = login.headers().firstValue("set-cookie").orElseThrow().split(";", 2)[0];
-        var response = server.send("GET", "/admin/users/42", cookie, null, true);
-        assertEquals(role.equals("ADMIN") ? 200 : 403, response.statusCode());
-        if (role.equals("ADMIN")) {
+        String cookie =
+            login.headers().firstValue(FIXTURE_SET_COOKIE_39067BC9).orElseThrow().split(";", 2)[0];
+        var response =
+            server.send(FIXTURE_GET_04F32A7E, FIXTURE_ADMIN_USERS_42_65AE9E81, cookie, null, true);
+        assertEquals(role.equals(FIXTURE_ADMIN_C4BB3010) ? 200 : 403, response.statusCode());
+        if (role.equals(FIXTURE_ADMIN_C4BB3010)) {
           assertTrue(
               response.headers().firstValue("cache-control").orElseThrow().contains("no-store"));
-          var head = server.send("HEAD", "/admin/users/42", cookie, null, true);
+          var head = server.send("HEAD", FIXTURE_ADMIN_USERS_42_65AE9E81, cookie, null, true);
           assertEquals(200, head.statusCode());
           assertEquals("", head.body());
           f.code = "0102";
-          var expired = server.send("GET", "/admin/users/42", cookie, null, true);
+          var expired =
+              server.send(
+                  FIXTURE_GET_04F32A7E, FIXTURE_ADMIN_USERS_42_65AE9E81, cookie, null, true);
           assertEquals(302, expired.statusCode());
           assertEquals(
               "/login?session-expired", expired.headers().firstValue("location").orElseThrow());
           assertTrue(
-              expired.headers().firstValue("set-cookie").orElseThrow().contains("Max-Age=0"));
+              expired
+                  .headers()
+                  .firstValue(FIXTURE_SET_COOKIE_39067BC9)
+                  .orElseThrow()
+                  .contains("Max-Age=0"));
           int before = f.requests.size();
-          assertEquals(302, server.send("GET", "/admin/users/42", cookie, null, true).statusCode());
+          assertEquals(
+              302,
+              server
+                  .send(FIXTURE_GET_04F32A7E, FIXTURE_ADMIN_USERS_42_65AE9E81, cookie, null, true)
+                  .statusCode());
           assertEquals(before, f.requests.size());
         } else assertTrue(f.requests.isEmpty());
         f.erased();
@@ -1152,7 +1245,7 @@ class UserAdminControllerTest {
     final List<byte[]> buffers = new CopyOnWriteArrayList<>();
     final JmsRequestReplyClient wire =
         new JmsRequestReplyClient(new ReplyCorrelationRegistry(), CLOCK, 12);
-    volatile String code = "0000";
+    volatile String code = FIXTURE_0000_876EEFE0;
     volatile String firstName = "user000";
     volatile int count = 1;
     volatile int total = 1;
@@ -1160,8 +1253,8 @@ class UserAdminControllerTest {
     volatile long detailId = 42;
     volatile long detailVersion = 7;
     volatile int detailSessions = 2;
-    volatile String detailName = "reader";
-    volatile String detailState = "LOCKED";
+    volatile String detailName = FIXTURE_READER_F734AAEA;
+    volatile String detailState = FIXTURE_LOCKED_7FD82193;
     volatile boolean detailOptional = true;
     volatile BiFunction<UUID, byte[], byte[]> responder = this::standard;
     final UserAdministrationWireClient client =
@@ -1223,7 +1316,7 @@ class UserAdminControllerTest {
       int sessions,
       long version,
       boolean optional) {
-    boolean success = code.equals("0000") || code.equals("0200");
+    boolean success = code.equals(FIXTURE_0000_876EEFE0) || code.equals(FIXTURE_0200_FC9DB3AC);
     byte[] bytes = new byte[576];
     Arrays.fill(bytes, (byte) ' ');
     put(bytes, 0, 8, "SCHBNK01");
@@ -1249,21 +1342,21 @@ class UserAdminControllerTest {
     number(bytes, 433, 9, success ? version : 0);
     if (success) {
       put(bytes, 268, 64, username);
-      put(bytes, 332, 5, "ADMIN");
+      put(bytes, 332, 5, FIXTURE_ADMIN_C4BB3010);
       put(bytes, 337, 8, state);
       if (optional) {
         put(bytes, 345, 17, "20261003090000000");
         put(bytes, 362, 17, "20261003090000000");
       }
-      put(bytes, 442, 64, "SYSTEM");
-      put(bytes, 506, 64, "admin");
+      put(bytes, 442, 64, FIXTURE_SYSTEM_8E1CB697);
+      put(bytes, 506, 64, FIXTURE_ADMIN_3D9A13EA);
     }
     return bytes;
   }
 
   private static byte[] response(
       UUID id, String context, String code, int page, int rows, int total, String firstName) {
-    boolean success = code.equals("0000") || code.equals("0200");
+    boolean success = code.equals(FIXTURE_0000_876EEFE0) || code.equals(FIXTURE_0200_FC9DB3AC);
     int count = success ? rows : 0;
     byte[] bytes = new byte[304 + 168 * count];
     Arrays.fill(bytes, (byte) ' ');
@@ -1293,8 +1386,8 @@ class UserAdminControllerTest {
       int at = 304 + i * 168;
       number(bytes, at, 12, i + 1);
       put(bytes, at + 12, 64, i == 0 ? firstName : String.format(Locale.ROOT, "user%03d", i));
-      put(bytes, at + 76, 5, "ADMIN");
-      put(bytes, at + 81, 8, "ACTIVE");
+      put(bytes, at + 76, 5, FIXTURE_ADMIN_C4BB3010);
+      put(bytes, at + 81, 8, FIXTURE_ACTIVE_77FF42A3);
       put(bytes, at + 123, 17, "20261003090000000");
       put(bytes, at + 140, 17, "20261003090000000");
       number(bytes, at + 157, 9, 1);
