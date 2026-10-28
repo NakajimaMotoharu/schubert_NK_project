@@ -559,8 +559,10 @@ final class MorningBackupArtifacts {
         long size = input.size();
         long readTotal = 0;
         var buffer = ByteBuffer.wrap(bytes);
-        int read;
-        while ((read = input.read(buffer)) != -1) {
+        // PG-D804/2476: one read per iteration; EOF still skips the original body.
+        while (true) {
+          int read = input.read(buffer);
+          if (read == -1) break;
           check();
           require(read > 0);
           readTotal += read;

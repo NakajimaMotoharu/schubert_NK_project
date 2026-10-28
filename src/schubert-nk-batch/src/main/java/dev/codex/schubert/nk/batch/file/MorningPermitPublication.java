@@ -155,7 +155,11 @@ final class MorningPermitPublication {
                         permit,
                         (boundary, current) -> {
                           owner();
-                          require(boundary.ordinal() == phase[0]++);
+                          // PG-D804/2476: ordinal failure precedes any phase mutation.
+                          int observedPhase = boundary.ordinal();
+                          int expectedPhase = phase[0];
+                          phase[0]++;
+                          require(observedPhase == expectedPhase);
                           if (boundary == StartupPermitFiles.IssuePhase.AFTER_READBACK) {
                             require(current.state() == State.ISSUED);
                             store.files().verifyPublication(current, permit);

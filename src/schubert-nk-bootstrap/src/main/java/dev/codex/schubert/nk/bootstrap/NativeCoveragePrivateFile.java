@@ -433,7 +433,13 @@ final class NativeCoveragePrivateFile {
       while (true) {
         int n = channel.read(buffer);
         if (n < 0) break;
-        require(n > 0 && (count += n) <= size);
+        // PG-D804/2476: retain the original short-circuit update and one require call.
+        boolean withinSize = n > 0;
+        if (withinSize) {
+          count += n;
+          withinSize = count <= size;
+        }
+        require(withinSize);
         buffer.flip();
         hash.update(buffer);
         buffer.clear();

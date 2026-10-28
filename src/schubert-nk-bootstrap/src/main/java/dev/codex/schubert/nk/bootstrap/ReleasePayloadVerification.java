@@ -377,8 +377,10 @@ final class ReleasePayloadVerification {
         reader -> {
           var crc = new CRC32();
           boolean first = true;
-          String line;
-          while ((line = reader.readLine()) != null) {
+          // PG-D804/2476: keep one read, then null termination, before the original body.
+          while (true) {
+            String line = reader.readLine();
+            if (line == null) break;
             if (first && line.startsWith("\ufeff")) line = line.substring(1);
             crc.update(line.getBytes(StandardCharsets.UTF_8));
             first = false;
