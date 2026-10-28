@@ -198,13 +198,17 @@ class ExactDurationMeterRegistryTest {
           IllegalArgumentException.class, () -> registry.create(null, configuration().build(), 1));
       assertThrows(
           IllegalArgumentException.class,
-          () -> registry.create(SECONDS_UNIT, configuration().percentilesHistogram(false).build(), 1));
+          () ->
+              registry.create(
+                  SECONDS_UNIT, configuration().percentilesHistogram(false).build(), 1));
       assertThrows(
           IllegalArgumentException.class,
           () -> registry.create(SECONDS_UNIT, configuration().percentiles(.95).build(), 1));
       assertThrows(
           IllegalArgumentException.class,
-          () -> registry.create(SECONDS_UNIT, configuration().serviceLevelObjectives(.01).build(), 1));
+          () ->
+              registry.create(
+                  SECONDS_UNIT, configuration().serviceLevelObjectives(.01).build(), 1));
       assertEquals(0, registry.getMeters().size());
     }
   }
