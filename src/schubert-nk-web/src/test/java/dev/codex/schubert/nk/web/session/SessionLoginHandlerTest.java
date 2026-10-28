@@ -83,6 +83,17 @@ import org.springframework.session.web.http.SessionRepositoryFilter;
  * NK-WEB-001/PT-WEB-113..120; FUN-001/AUT-001..004/MON-004; UI226/232; SS313/314/351/352; SSC-046.
  */
 class SessionLoginHandlerTest {
+  private static final String EXPECTED_AUTHORITY_USER = "ROLE_USER";
+  private static final String EXPECTED_AUTHORITY_ADMIN = "ROLE_ADMIN";
+
+  // SS314 closed Test input identity, never the Production output mapper.
+  private static String expectedAuthorityFor(SessionPrincipal principal) {
+    return switch (principal.role()) {
+      case USER -> EXPECTED_AUTHORITY_USER;
+      case ADMIN -> EXPECTED_AUTHORITY_ADMIN;
+    };
+  }
+
   private static final String FIXTURE_USER_2DED8884 = "USER";
   private static final String FIXTURE_READER_F734AAEA = "reader";
   private static final String FIXTURE_LOCATION_FB077BAD = "Location";
@@ -420,7 +431,7 @@ class SessionLoginHandlerTest {
                     FIXTURE_READER_F734AAEA,
                     SecurityContextHolder.getContext().getAuthentication().getName());
                 assertEquals(
-                    List.of("ROLE_ADMIN"),
+                    List.of(EXPECTED_AUTHORITY_ADMIN),
                     SecurityContextHolder.getContext().getAuthentication().getAuthorities().stream()
                         .map(a -> a.getAuthority())
                         .toList());
@@ -566,7 +577,7 @@ class SessionLoginHandlerTest {
 
   private static Authentication auth(SessionPrincipal p) {
     return UsernamePasswordAuthenticationToken.authenticated(
-        p, null, List.of(new SimpleGrantedAuthority("ROLE_" + p.role().wireValue())));
+        p, null, List.of(new SimpleGrantedAuthority(expectedAuthorityFor(p))));
   }
 
   private static BadCredentialsException secretBadCredentials() {

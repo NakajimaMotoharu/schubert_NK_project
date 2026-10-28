@@ -65,6 +65,17 @@ import org.springframework.security.web.context.SecurityContextHolderFilter;
  * PG-D-112.
  */
 class SessionAccessFailureTest {
+  private static final String EXPECTED_AUTHORITY_USER = "ROLE_USER";
+  private static final String EXPECTED_AUTHORITY_ADMIN = "ROLE_ADMIN";
+
+  // SS314 closed Test input identity, never the Production output mapper.
+  private static String expectedAuthorityFor(SessionPrincipal principal) {
+    return switch (principal.role()) {
+      case USER -> EXPECTED_AUTHORITY_USER;
+      case ADMIN -> EXPECTED_AUTHORITY_ADMIN;
+    };
+  }
+
   private static final String FIXTURE_GET_04F32A7E = "GET";
   private static final String FIXTURE_LOGIN_F843C044 = "/login";
   private static final String FIXTURE_LOCATION_FB077BAD = "Location";
@@ -241,7 +252,7 @@ class SessionAccessFailureTest {
           UsernamePasswordAuthenticationToken.authenticated(
               FIXTURE_PRIVATE_24ED6504,
               FIXTURE_PRIVATE_24ED6504,
-              List.of(new SimpleGrantedAuthority("ROLE_ADMIN")));
+              List.of(new SimpleGrantedAuthority(EXPECTED_AUTHORITY_ADMIN)));
       SecurityContextHolder.getContext().setAuthentication(wrong);
       assertThrows(SessionStoreException.class, () -> a.handler.handle(r, s, secretDenied()));
       SecurityContextHolder.clearContext();
@@ -473,7 +484,7 @@ class SessionAccessFailureTest {
     SecurityContextHolder.getContext()
         .setAuthentication(
             UsernamePasswordAuthenticationToken.authenticated(
-                p, null, List.of(new SimpleGrantedAuthority("ROLE_" + p.role().wireValue()))));
+                p, null, List.of(new SimpleGrantedAuthority(expectedAuthorityFor(p)))));
   }
 
   private static MockHttpServletRequest raw(

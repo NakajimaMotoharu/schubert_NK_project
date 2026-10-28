@@ -73,6 +73,17 @@ import org.springframework.session.web.http.SessionRepositoryFilter;
 
 /** NK-WEB-001/PT-WEB-068..075; FUN-001/AUT-001..004; UI226/232/234; SS314/331/352; SSC-044. */
 class SessionSecurityContextTest {
+  private static final String EXPECTED_AUTHORITY_USER = "ROLE_USER";
+  private static final String EXPECTED_AUTHORITY_ADMIN = "ROLE_ADMIN";
+
+  // SS314 closed Test input identity, never the Production output mapper.
+  private static String expectedAuthorityFor(SessionPrincipal principal) {
+    return switch (principal.role()) {
+      case USER -> EXPECTED_AUTHORITY_USER;
+      case ADMIN -> EXPECTED_AUTHORITY_ADMIN;
+    };
+  }
+
   private static WebLogDatabaseFixture db;
   private static final Instant LOGIN = Instant.parse("2026-09-08T00:00:00.123Z");
   private static final SessionPrincipal USER = principal("reader", UserRole.USER, "a");
@@ -116,22 +127,24 @@ class SessionSecurityContextTest {
         assertIdentity(p, contexts.loadDeferredContext(request).get().getAuthentication());
       }
       var invalid = new ArrayList<Authentication>();
-      invalid.add(new TestingAuthenticationToken(USER, null, "ROLE_USER"));
+      invalid.add(new TestingAuthenticationToken(USER, null, EXPECTED_AUTHORITY_USER));
       invalid.add(UsernamePasswordAuthenticationToken.unauthenticated(USER, null));
       invalid.add(
-          UsernamePasswordAuthenticationToken.authenticated("reader", null, roles("ROLE_USER")));
+          UsernamePasswordAuthenticationToken.authenticated(
+              "reader", null, roles(EXPECTED_AUTHORITY_USER)));
       invalid.add(
           UsernamePasswordAuthenticationToken.authenticated(
-              USER, new char[] {'p'}, roles("ROLE_USER")));
+              USER, new char[] {'p'}, roles(EXPECTED_AUTHORITY_USER)));
       var details = auth(USER);
       details.setDetails("private-detail");
       invalid.add(details);
       invalid.add(UsernamePasswordAuthenticationToken.authenticated(USER, null, List.of()));
       invalid.add(
           UsernamePasswordAuthenticationToken.authenticated(
-              USER, null, roles("ROLE_USER", "ROLE_ADMIN")));
+              USER, null, roles(EXPECTED_AUTHORITY_USER, EXPECTED_AUTHORITY_ADMIN)));
       invalid.add(
-          UsernamePasswordAuthenticationToken.authenticated(USER, null, roles("ROLE_ADMIN")));
+          UsernamePasswordAuthenticationToken.authenticated(
+              USER, null, roles(EXPECTED_AUTHORITY_ADMIN)));
       GrantedAuthority noText = () -> null;
       invalid.add(UsernamePasswordAuthenticationToken.authenticated(USER, null, List.of(noText)));
       request.getSession().setAttribute("principal", USER);
@@ -673,7 +686,7 @@ class SessionSecurityContextTest {
 
   private static UsernamePasswordAuthenticationToken auth(SessionPrincipal p) {
     return UsernamePasswordAuthenticationToken.authenticated(
-        p, null, roles("ROLE_" + p.role().wireValue()));
+        p, null, roles(expectedAuthorityFor(p)));
   }
 
   private static Authentication anonymous() {
@@ -712,7 +725,7 @@ class SessionSecurityContextTest {
     assertEquals(p, actual.getPrincipal());
     assertEquals(p.username(), actual.getName());
     assertEquals(
-        List.of("ROLE_" + p.role().wireValue()),
+        List.of(expectedAuthorityFor(p)),
         actual.getAuthorities().stream().map(GrantedAuthority::getAuthority).toList());
     assertNull(actual.getCredentials());
     assertNull(actual.getDetails());

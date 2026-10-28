@@ -78,6 +78,17 @@ import org.thymeleaf.spring6.view.ThymeleafViewResolver;
  * SSC071/PG194/PT-SCR-001..016.
  */
 class ScenarioControllerTest {
+  private static final String EXPECTED_AUTHORITY_USER = "ROLE_USER";
+  private static final String EXPECTED_AUTHORITY_ADMIN = "ROLE_ADMIN";
+
+  // SS314 closed Test input identity, never the Production output mapper.
+  private static String expectedAuthorityFor(SessionPrincipal principal) {
+    return switch (principal.role()) {
+      case USER -> EXPECTED_AUTHORITY_USER;
+      case ADMIN -> EXPECTED_AUTHORITY_ADMIN;
+    };
+  }
+
   private static final String FIXTURE_READER_F734AAEA = "reader";
   private static final String FIXTURE_0000_876EEFE0 = "0000";
   private static final String FIXTURE_SCENARIOS_26111785 = "/scenarios";
@@ -850,7 +861,7 @@ class ScenarioControllerTest {
     SecurityContextHolder.getContext()
         .setAuthentication(
             UsernamePasswordAuthenticationToken.authenticated(
-                p, null, List.of(new SimpleGrantedAuthority("ROLE_" + p.role().wireValue()))));
+                p, null, List.of(new SimpleGrantedAuthority(expectedAuthorityFor(p)))));
   }
 
   private static String path(String type) {

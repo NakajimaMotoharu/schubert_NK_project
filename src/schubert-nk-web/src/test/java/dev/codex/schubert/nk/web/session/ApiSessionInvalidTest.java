@@ -67,6 +67,17 @@ import org.springframework.session.web.http.SessionRepositoryFilter;
 
 /** NK-WEB-001/PT-WEB-158..165; UI221/222/226/232; SS313/314/351/352; SSC-048/PG-D-117. */
 class ApiSessionInvalidTest {
+  private static final String EXPECTED_AUTHORITY_USER = "ROLE_USER";
+  private static final String EXPECTED_AUTHORITY_ADMIN = "ROLE_ADMIN";
+
+  // SS314 closed Test input identity, never the Production output mapper.
+  private static String expectedAuthorityFor(SessionPrincipal principal) {
+    return switch (principal.role()) {
+      case USER -> EXPECTED_AUTHORITY_USER;
+      case ADMIN -> EXPECTED_AUTHORITY_ADMIN;
+    };
+  }
+
   private static final String FIXTURE_0000_876EEFE0 = "0000";
   private static final String FIXTURE_GET_04F32A7E = "GET";
   private static final String FIXTURE_SEARCH_F32C67A7 = "/search";
@@ -161,7 +172,9 @@ class ApiSessionInvalidTest {
       SecurityContextHolder.getContext()
           .setAuthentication(
               UsernamePasswordAuthenticationToken.authenticated(
-                  "private-foreign", null, List.of(new SimpleGrantedAuthority("ROLE_ADMIN"))));
+                  "private-foreign",
+                  null,
+                  List.of(new SimpleGrantedAuthority(EXPECTED_AUTHORITY_ADMIN))));
       assertThrows(SessionStoreException.class, () -> h.handler.handle(r, s));
       assertNull(SecurityContextHolder.getContext().getAuthentication());
       for (RuntimeException fault :
@@ -757,7 +770,7 @@ class ApiSessionInvalidTest {
     SecurityContextHolder.getContext()
         .setAuthentication(
             UsernamePasswordAuthenticationToken.authenticated(
-                p, null, List.of(new SimpleGrantedAuthority("ROLE_" + p.role().wireValue()))));
+                p, null, List.of(new SimpleGrantedAuthority(expectedAuthorityFor(p)))));
   }
 
   private static MockHttpServletRequest raw(String method, String path, String cookie) {

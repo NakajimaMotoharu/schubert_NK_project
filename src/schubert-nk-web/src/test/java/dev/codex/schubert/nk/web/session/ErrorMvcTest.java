@@ -86,6 +86,17 @@ import org.springframework.web.context.support.AnnotationConfigWebApplicationCon
  * NK-WEB-001/PT-WEB-148..157; UI221/222/226; SS313/314/351/352; SSC-047/PG-D-116; BUG-074/YKT-066.
  */
 class ErrorMvcTest {
+  private static final String EXPECTED_AUTHORITY_USER = "ROLE_USER";
+  private static final String EXPECTED_AUTHORITY_ADMIN = "ROLE_ADMIN";
+
+  // SS314 closed Test input identity, never the Production output mapper.
+  private static String expectedAuthorityFor(SessionPrincipal principal) {
+    return switch (principal.role()) {
+      case USER -> EXPECTED_AUTHORITY_USER;
+      case ADMIN -> EXPECTED_AUTHORITY_ADMIN;
+    };
+  }
+
   private static final String FIXTURE_READER_F734AAEA = "reader";
   private static final String FIXTURE_USER_2DED8884 = "USER";
   private static final String FIXTURE_ADMIN_C4BB3010 = "ADMIN";
@@ -996,7 +1007,7 @@ class ErrorMvcTest {
     SecurityContextHolder.getContext()
         .setAuthentication(
             UsernamePasswordAuthenticationToken.authenticated(
-                p, null, List.of(new SimpleGrantedAuthority("ROLE_" + p.role().wireValue()))));
+                p, null, List.of(new SimpleGrantedAuthority(expectedAuthorityFor(p)))));
   }
 
   private static HttpServletRequest noNative(HttpServletRequest request) {
