@@ -1,0 +1,217 @@
+{
+  "rows": [
+    {
+      "attributes": {
+        "begincolumn": "33",
+        "beginline": "39",
+        "class": "AsyncJobCountRepository",
+        "endcolumn": "42",
+        "endline": "39",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#closeresource",
+        "method": "read",
+        "package": "dev.codex.schubert.nk.api.monitoring.persistence",
+        "priority": "3",
+        "rule": "CloseResource",
+        "ruleset": "Error Prone",
+        "variable": "statement"
+      },
+      "basis": "P01809_RD171_UI252_SS351_MONITORING_CODE_AND_PT",
+      "canonicalCostOwner": "WBS-P018-09",
+      "canonicalOwner": "WBS-P018-09",
+      "currentRuntimeQualification": false,
+      "currentWholeJoinPending": true,
+      "disposition": "CONTEXT_NOT_APPLICABLE",
+      "historicalRuntimeTransferred": false,
+      "id": "PMD-00386",
+      "originalRowSha256": "4c960f548dca24d0f38a9f3df9811696461639ed4ba3cb255f2ee462f0279fac",
+      "ownership": {
+        "acquisitionAndGuardOrderVerified": true,
+        "borrowedConnectionNotModified": true,
+        "method": "read",
+        "methodTokenSha256": "49af914ad4603f3af2fe9d32e44c97294116622b361ebd52a34a9a14cb6e6ad6",
+        "nestedOwnerTokenSpans": [
+          [
+            295,
+            405
+          ],
+          [
+            332,
+            404
+          ]
+        ],
+        "returnAfterResources": true
+      },
+      "ownershipStatus": "NEW_LOGICAL_CANDIDATE_REVIEWED_NOT_ACCEPTED",
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/persistence/AsyncJobCountRepository.java",
+      "productTestsExecuted": 0,
+      "rawRetained": true,
+      "reason": "The acquired PS and RS aliases have exact null rejection followed immediately by nested Java9 try(variable) ownership. TWR closes every nonnull acquisition on normal, checked, unchecked and fatal exit, with RS before PS and language-defined suppression. Null return has no acquired object; borrowed Connection is neither configured nor closed. No resource leak is evidenced by these four declarations. PMD raw findings remain visible; internal analyzer cause is not established. This is exact-source static ownership reasoning, not live DB/role qualification or current-source runtime/coverage.",
+      "source": "17ab52b253282ce45016f0586c0167a22029fd8c",
+      "sourceSha256": "e337ab556b1e6b7033626ab57740c11f4b13e35ae446a582f20f41f344f66b76",
+      "sourceSpanSha256": "b111c6e1d318f203063e5c16bab43c108326af0aa2f7b65760c95547a43dbe52",
+      "spanConvention": "PMD_1_ORIGIN_EXCLUSIVE_END_TO_PYTHON_HALF_OPEN",
+      "spanEndOffsetExclusive": 1680,
+      "spanStartOffset": 1671
+    },
+    {
+      "attributes": {
+        "begincolumn": "27",
+        "beginline": "43",
+        "class": "AsyncJobCountRepository",
+        "endcolumn": "31",
+        "endline": "43",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#closeresource",
+        "method": "read",
+        "package": "dev.codex.schubert.nk.api.monitoring.persistence",
+        "priority": "3",
+        "rule": "CloseResource",
+        "ruleset": "Error Prone",
+        "variable": "rows"
+      },
+      "basis": "P01809_RD171_UI252_SS351_MONITORING_CODE_AND_PT",
+      "canonicalCostOwner": "WBS-P018-09",
+      "canonicalOwner": "WBS-P018-09",
+      "currentRuntimeQualification": false,
+      "currentWholeJoinPending": true,
+      "disposition": "CONTEXT_NOT_APPLICABLE",
+      "historicalRuntimeTransferred": false,
+      "id": "PMD-00387",
+      "originalRowSha256": "ce884f49025b1a5c49889620891a5f06acba22c2c6c01ba7b62dbaf41c5e5ac7",
+      "ownership": {
+        "acquisitionAndGuardOrderVerified": true,
+        "borrowedConnectionNotModified": true,
+        "method": "read",
+        "methodTokenSha256": "49af914ad4603f3af2fe9d32e44c97294116622b361ebd52a34a9a14cb6e6ad6",
+        "nestedOwnerTokenSpans": [
+          [
+            295,
+            405
+          ],
+          [
+            332,
+            404
+          ]
+        ],
+        "returnAfterResources": true
+      },
+      "ownershipStatus": "NEW_LOGICAL_CANDIDATE_REVIEWED_NOT_ACCEPTED",
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/persistence/AsyncJobCountRepository.java",
+      "productTestsExecuted": 0,
+      "rawRetained": true,
+      "reason": "The acquired PS and RS aliases have exact null rejection followed immediately by nested Java9 try(variable) ownership. TWR closes every nonnull acquisition on normal, checked, unchecked and fatal exit, with RS before PS and language-defined suppression. Null return has no acquired object; borrowed Connection is neither configured nor closed. No resource leak is evidenced by these four declarations. PMD raw findings remain visible; internal analyzer cause is not established. This is exact-source static ownership reasoning, not live DB/role qualification or current-source runtime/coverage.",
+      "source": "17ab52b253282ce45016f0586c0167a22029fd8c",
+      "sourceSha256": "e337ab556b1e6b7033626ab57740c11f4b13e35ae446a582f20f41f344f66b76",
+      "sourceSpanSha256": "bc51e9e65d79e1c90ba544ab2eae1044ccdf8c1af7a559ba375cba4276f7d99e",
+      "spanConvention": "PMD_1_ORIGIN_EXCLUSIVE_END_TO_PYTHON_HALF_OPEN",
+      "spanEndOffsetExclusive": 1885,
+      "spanStartOffset": 1881
+    },
+    {
+      "attributes": {
+        "begincolumn": "33",
+        "beginline": "47",
+        "class": "OutboxObservationRepository",
+        "endcolumn": "42",
+        "endline": "47",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#closeresource",
+        "method": "read",
+        "package": "dev.codex.schubert.nk.api.monitoring.persistence",
+        "priority": "3",
+        "rule": "CloseResource",
+        "ruleset": "Error Prone",
+        "variable": "statement"
+      },
+      "basis": "P01809_RD171_UI252_SS351_MONITORING_CODE_AND_PT",
+      "canonicalCostOwner": "WBS-P018-09",
+      "canonicalOwner": "WBS-P018-09",
+      "currentRuntimeQualification": false,
+      "currentWholeJoinPending": true,
+      "disposition": "CONTEXT_NOT_APPLICABLE",
+      "historicalRuntimeTransferred": false,
+      "id": "PMD-00388",
+      "originalRowSha256": "83472a458e527c75c4143590d92eab9e088b4531730117d6894cffefed647403",
+      "ownership": {
+        "acquisitionAndGuardOrderVerified": true,
+        "borrowedConnectionNotModified": true,
+        "method": "read",
+        "methodTokenSha256": "c6242b04283d3f2e982ae86d23b5e78250487d217fe9956975c5059a2567c2c8",
+        "nestedOwnerTokenSpans": [
+          [
+            357,
+            529
+          ],
+          [
+            394,
+            528
+          ]
+        ],
+        "returnAfterResources": true
+      },
+      "ownershipStatus": "NEW_LOGICAL_CANDIDATE_REVIEWED_NOT_ACCEPTED",
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/persistence/OutboxObservationRepository.java",
+      "productTestsExecuted": 0,
+      "rawRetained": true,
+      "reason": "The acquired PS and RS aliases have exact null rejection followed immediately by nested Java9 try(variable) ownership. TWR closes every nonnull acquisition on normal, checked, unchecked and fatal exit, with RS before PS and language-defined suppression. Null return has no acquired object; borrowed Connection is neither configured nor closed. No resource leak is evidenced by these four declarations. PMD raw findings remain visible; internal analyzer cause is not established. This is exact-source static ownership reasoning, not live DB/role qualification or current-source runtime/coverage.",
+      "source": "17ab52b253282ce45016f0586c0167a22029fd8c",
+      "sourceSha256": "90b0d76c02ba974dc22034fe8a13003fb93298105b5f3b3e53f1f90d99544f16",
+      "sourceSpanSha256": "b111c6e1d318f203063e5c16bab43c108326af0aa2f7b65760c95547a43dbe52",
+      "spanConvention": "PMD_1_ORIGIN_EXCLUSIVE_END_TO_PYTHON_HALF_OPEN",
+      "spanEndOffsetExclusive": 2043,
+      "spanStartOffset": 2034
+    },
+    {
+      "attributes": {
+        "begincolumn": "27",
+        "beginline": "51",
+        "class": "OutboxObservationRepository",
+        "endcolumn": "31",
+        "endline": "51",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#closeresource",
+        "method": "read",
+        "package": "dev.codex.schubert.nk.api.monitoring.persistence",
+        "priority": "3",
+        "rule": "CloseResource",
+        "ruleset": "Error Prone",
+        "variable": "rows"
+      },
+      "basis": "P01809_RD171_UI252_SS351_MONITORING_CODE_AND_PT",
+      "canonicalCostOwner": "WBS-P018-09",
+      "canonicalOwner": "WBS-P018-09",
+      "currentRuntimeQualification": false,
+      "currentWholeJoinPending": true,
+      "disposition": "CONTEXT_NOT_APPLICABLE",
+      "historicalRuntimeTransferred": false,
+      "id": "PMD-00389",
+      "originalRowSha256": "5ef3b777a92fd0e91a5f078911255152a11ca10482129fbe0f94020834d86df2",
+      "ownership": {
+        "acquisitionAndGuardOrderVerified": true,
+        "borrowedConnectionNotModified": true,
+        "method": "read",
+        "methodTokenSha256": "c6242b04283d3f2e982ae86d23b5e78250487d217fe9956975c5059a2567c2c8",
+        "nestedOwnerTokenSpans": [
+          [
+            357,
+            529
+          ],
+          [
+            394,
+            528
+          ]
+        ],
+        "returnAfterResources": true
+      },
+      "ownershipStatus": "NEW_LOGICAL_CANDIDATE_REVIEWED_NOT_ACCEPTED",
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/persistence/OutboxObservationRepository.java",
+      "productTestsExecuted": 0,
+      "rawRetained": true,
+      "reason": "The acquired PS and RS aliases have exact null rejection followed immediately by nested Java9 try(variable) ownership. TWR closes every nonnull acquisition on normal, checked, unchecked and fatal exit, with RS before PS and language-defined suppression. Null return has no acquired object; borrowed Connection is neither configured nor closed. No resource leak is evidenced by these four declarations. PMD raw findings remain visible; internal analyzer cause is not established. This is exact-source static ownership reasoning, not live DB/role qualification or current-source runtime/coverage.",
+      "source": "17ab52b253282ce45016f0586c0167a22029fd8c",
+      "sourceSha256": "90b0d76c02ba974dc22034fe8a13003fb93298105b5f3b3e53f1f90d99544f16",
+      "sourceSpanSha256": "bc51e9e65d79e1c90ba544ab2eae1044ccdf8c1af7a559ba375cba4276f7d99e",
+      "spanConvention": "PMD_1_ORIGIN_EXCLUSIVE_END_TO_PYTHON_HALF_OPEN",
+      "spanEndOffsetExclusive": 2248,
+      "spanStartOffset": 2244
+    }
+  ],
+  "source": "17ab52b253282ce45016f0586c0167a22029fd8c"
+}

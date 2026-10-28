@@ -1,0 +1,23 @@
+# 2487 API二Repository 四資源診断文脈結果
+
+2026-10-29、2486/PG-D809予定、主F03・元canonical担当費P01809（NEW_LOGICAL_CANDIDATE_REVIEWED_NOT_ACCEPTED）不変更。source17ab52b253282ce45016f0586c0167a22029fd8c/基点save396e70084、event2865開始0.5/2/3pp/cap10・fresh24。Main/Test/source変更0、Product/JUnit/compile/DB/JDBC/VM/native/Root/鍵/実broker実行0。inline owner宣言へのPG変更は不要とのsource確認で、資源漏れ修正をしたとはしない。
+
+## 確認結果
+
+現二MainのPS/RS四宣言は取得→null guard→Java9 try(variable)が直接連続し、RSをPS所有域内に入れ、全returnを両所有域の外に置く。借用Connectionは作成/config変更/commit/rollback/closeなし。null/取得失敗/読取・timeout/checked-unchecked-fatal・close競合の後条件はTWRの逆順close/同identity・抑制規則で確認。PMD実測13253の四finding/source SHAが現13596normalと一致する固定source限定根拠であり、db33全体解析を17ab全体の新合格へ転用しない。PMD内部実装の検出理由は未確定、一般のJava9非対応とも断定しない。
+
+全commandは `python3 -B tools/quality/pg11123_checked_python_entry.py tools/quality/<entry>.py`。13633_repository_resource_context_recovery.pyはentry4db2dac1/真正0、公開PG13633-repository-resource-context-recovery-v2/manifest.json SHAad792dd4e5b1b81d24476c98144099b86c974ba46dcd3ba81d1d7a5ca2428aab。独立13637_repository_resource_context_post_recovery_v3.pyはentry5fa06dc0/真正0、PG13637-repository-resource-context-post-recovery-v3/manifest.json SHA52a78f4d9b7315d6eb2e7d5ec90eca2347a21893e9022e9c5b4b5c0acaf94be1。pathはevidence/provisional配下。
+
+元ID00386～00389/属性/元row hash・source/span/read method・担当費と所有域を結合。全四正例、sourceの二nullguard/二try alias異常×二fileの八反例、metadataのsource/終端隣接1文字/偽hash/費用owner/理由空/抑制/旧runtime転用/whole-pending取消/false対0/ownership欠落の十反例を確認。raw4を残してCONTEXT_NOT_APPLICABLE、suppression/filter追加0。旧13384/86の18PT/a75は歴史証拠のまま、新source PT/coverageへの再計上・確認再実行0。
+
+## 工具障害と横展開
+
+13632 entry27f0a797/body1/OUTなしはPMD endcolumnをinclusiveと誤認して隣接1文字を含めた。BUG2071/YKT1819先行起票後、13633でbegin-1/end-1の半開区間に是正し全四変数exact一致を確認。13634はbody前unused import一件修正後entryea39f0eb/body1/OUTなし、JSON list対Python tupleを誤比較。BUG2072/YKT1820を先行起票。13636 entryba1d1e49/body1/OUTなしはnegative差分判定に残るfalse==0の同原因で停止。13637は正例とnegative両方をcanonical JSONで型別比較して全四/十/八を確認。旧entry/失敗・原本を非変更保全、製品失敗ではない。
+
+13635_pmd_span_candidate_inventory.py（body前unused Path一件だけ修正）はentrybbb53bf7/session26480/真正0、PG13635-pmd-span-candidate-inventory-v1/manifest.json SHA06659f1c7c1f953a5a1948206909803e2d94175a05c6a0d47ddf59be15ab2cf8。held二nameを先除外し公開Pythonのみからendcolumn/int同行の106候補を列挙、これは欠陥106確定/全column consumer監査ではない。旧13620/22・12023/25等の診断spanラベルは隣接1文字を含み得るためexact PMD区間と解さず、元whole source/method/case hashを保持する。YKT1819は全候補の個別契約照合/必要是正未完でOPEN。検索だけ完了にはしない。2072/1820は当新ownership field全四rowとtyped反例の工具scopeのみ確認、全他工具の正常を推定0。
+
+13640/25fe7097e595fb9899af0f981d61f7e275dfd50b2c4c692e7bfafd5cd09719c5・13642/af82f706a74acc3923bd9518da30b2f804fdd00cbb7409d52c08fe747402d26cを真正0確認。元raw6247/Main1491Test4756/corr3194保持、refs新四3353/pendingも四追加2492/noRef2894を独立八typed metadata反例と結合した。inventory3eff42a66975859283f7f39491d1b043f801a456fc1ff2f30462cdde5e596abd/snapshot35195fabb84427b9fd79c9c07f0b55de615d97225efd99ab1fe6a4bcd8856d25、原941943/予算受入不変更・全WBS監査1/HOLD。13640のrawDeltaBasisは直前source変更（LGS二vector）の歴史記述を保持しており、当文脈追加は別field currentMainRepositoryStaticContextsに明示する。全995旧責任費/runtimeと当source LGS限定資格は非変更。
+
+BUG2073/YKT1821: 元13640本体完了/manifest保存06:26:39.355925920後、helperを06:26:53.184930868に一行追記してhash不一致を作った。修正前起票後、自分の追記だけを元byteへ復元し、元invocation全168 loaded hash一致・13642による独立再verifyを確認、元run/manifestを改変・再実行0。旧168helperの全意味を今回新規検証したという主張ではない。
+
+event2866終端fresh24（21:30:46UTC）/開始24/同reset1793774153、丸め共有差0pp・専有N/T/工数null、無料とはみなさない。元0.5/2/3cap10/元予測不変更。2071の横展開はOPEN、2072/73は当工具scopeのみ確認。正式1964-53/17-190/工数null/QA051final/全actualHOLD/原本保全は不変更。新ProductPT/coverage/正式受入0、全F03/451未受入。保存commit/push/次commandは456/460へ。
