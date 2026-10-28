@@ -224,17 +224,19 @@ class HttpMetricContractTest {
   @Test
   void httpMetric006ConcurrentClassifiersAreStateless() throws Exception {
     var executor = Executors.newFixedThreadPool(4);
-    try {
-      var tasks = new ArrayList<Callable<Map<String, String>>>();
-      for (int index = 0; index < 64; index++) {
-        String raw = "/fixture/" + index;
-        tasks.add(() -> contract.labels(raw, raw, 204).requestLabels());
+    try (executor) {
+      try {
+        var tasks = new ArrayList<Callable<Map<String, String>>>();
+        for (int index = 0; index < 64; index++) {
+          String raw = "/fixture/" + index;
+          tasks.add(() -> contract.labels(raw, raw, 204).requestLabels());
+        }
+        for (var future : executor.invokeAll(tasks, 10, TimeUnit.SECONDS))
+          assertEquals(UNKNOWN, future.get());
+      } finally {
+        executor.shutdownNow();
+        assertTrue(executor.awaitTermination(10, TimeUnit.SECONDS));
       }
-      for (var future : executor.invokeAll(tasks, 10, TimeUnit.SECONDS))
-        assertEquals(UNKNOWN, future.get());
-    } finally {
-      executor.shutdownNow();
-      assertTrue(executor.awaitTermination(10, TimeUnit.SECONDS));
     }
   }
 }

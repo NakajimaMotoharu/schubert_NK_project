@@ -105,7 +105,7 @@ public final class HttpMetricContract {
     SCRIPTS("/js/**"),
     UNKNOWN("/**");
 
-    private static final Map<String, Route> INDEX = index();
+    private static final Map<String, Route> ROUTES_BY_TEMPLATE = index();
     private final String retainedTemplate;
 
     Route(String template) {
@@ -124,7 +124,8 @@ public final class HttpMetricContract {
 
     /** Never retain raw path/query/user values, including in an exception. */
     public static Route parse(String template) {
-      return INDEX.getOrDefault(Objects.requireNonNull(template, "HTTP route template"), UNKNOWN);
+      return ROUTES_BY_TEMPLATE.getOrDefault(
+          Objects.requireNonNull(template, "HTTP route template"), UNKNOWN);
     }
   }
 
