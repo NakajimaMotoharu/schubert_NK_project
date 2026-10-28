@@ -31,6 +31,17 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** NK-DAT-001; PT-DB-INBOX-089..096; UI251; SS331/332/341; SSC-050; BUG-092/093. */
 final class CleanupSafetyBoundaryTest {
+  private static final String FIXTURE_NOTIFICATIONS_49C51E6A = "notifications";
+  private static final String FIXTURE_QUESTIONS_BAB06435 = "questions";
+  private static final String FIXTURE_SESSIONS_7E0AF933 = "sessions";
+  private static final String FIXTURE_LOGS_A0526482 = "logs";
+  private static final String FIXTURE_BATCH_RUNS_5CA9ABAD = "batch_runs";
+  private static final String FIXTURE_APP_LOGS_EDF74EC8 = "app_logs";
+  private static final String FIXTURE_INSERT_INTO_1D1568AF = "insert into";
+  private static final String FIXTURE_BACKUP_CONFIG_8386D7E7 = "BACKUP_CONFIG";
+  private static final String FIXTURE_NULL_F072CBEC = "null";
+  private static final String FIXTURE_ERROR_F717E7D8 = "ERROR";
+  private static final String FIXTURE_SUCCESS_10855C7F = "SUCCESS";
   @TempDir static Path root;
   private static ApiLogDatabaseFixture db;
   private static String url;
@@ -38,11 +49,11 @@ final class CleanupSafetyBoundaryTest {
   private static final String START = "'2026-09-17 00:00:00+00'::timestamptz";
   private static final List<String> NAMES =
       List.of(
-          "notifications",
-          "questions",
-          "sessions",
-          "logs",
-          "batch_runs",
+          FIXTURE_NOTIFICATIONS_49C51E6A,
+          FIXTURE_QUESTIONS_BAB06435,
+          FIXTURE_SESSIONS_7E0AF933,
+          FIXTURE_LOGS_A0526482,
+          FIXTURE_BATCH_RUNS_5CA9ABAD,
           "message_stores",
           "log_progress",
           "inbox_progress");
@@ -65,26 +76,26 @@ final class CleanupSafetyBoundaryTest {
     try (var c = db.admin()) {
       for (String table :
           List.of(
-              "notifications",
-              "questions",
+              FIXTURE_NOTIFICATIONS_49C51E6A,
+              FIXTURE_QUESTIONS_BAB06435,
               "auth_sessions",
               "login_ip_attempts",
-              "app_logs",
+              FIXTURE_APP_LOGS_EDF74EC8,
               "request_inbox",
               "mq_outbox",
               "inbox_inspection_progress",
               "log_cleanup_progress",
-              "batch_runs")) sql(c, "delete from schubert." + table);
+              FIXTURE_BATCH_RUNS_5CA9ABAD)) sql(c, "delete from schubert." + table);
       sql(c, "delete from schubert_web_session.web_http_sessions");
       sql(c, "delete from schubert_web_session.web_log_outbox");
       sql(
           c,
-          "insert into"
+          FIXTURE_INSERT_INTO_1D1568AF
               + " schubert.app_users(id,username,username_key,password_hash,role,status,password_changed_at,created_at,updated_at)"
               + " values(7,'Learner','learner','synthetic-unused','USER','ACTIVE','2026-09-01','2026-09-01','2026-09-01')"
               + " on conflict(id) do nothing");
       backup(c, "BACKUP_DB");
-      backup(c, "BACKUP_CONFIG");
+      backup(c, FIXTURE_BACKUP_CONFIG_8386D7E7);
     }
   }
 
@@ -94,7 +105,7 @@ final class CleanupSafetyBoundaryTest {
       c.setAutoCommit(false);
       for (String name : NAMES) {
         assertEquals("0|0|0|OK", call(c, name, START, 1));
-        for (String step : List.of("BACKUP_DB", "BACKUP_CONFIG"))
+        for (String step : List.of("BACKUP_DB", FIXTURE_BACKUP_CONFIG_8386D7E7))
           for (String mutation :
               List.of(
                   "update schubert.batch_runs set status='RUNNING'",
@@ -152,7 +163,7 @@ final class CleanupSafetyBoundaryTest {
         owner.rollback();
         caller.rollback();
         assertEquals("0|0|0|OK", call(caller, name, START, 1));
-        for (String step : List.of("BACKUP_DB", "BACKUP_CONFIG")) {
+        for (String step : List.of("BACKUP_DB", FIXTURE_BACKUP_CONFIG_8386D7E7)) {
           var save = owner.setSavepoint();
           assertEquals(
               "55P03",
@@ -186,7 +197,7 @@ final class CleanupSafetyBoundaryTest {
         try {
           awaitBlocked(pid);
           try (var other = db.admin()) {
-            backup(other, "BACKUP_CONFIG");
+            backup(other, FIXTURE_BACKUP_CONFIG_8386D7E7);
           }
         } finally {
           writer.commit();
@@ -201,7 +212,7 @@ final class CleanupSafetyBoundaryTest {
   void invalidInputsAndTimezone() throws Exception {
     try (var c = batch()) {
       for (String name : NAMES) {
-        int max = name.equals("logs") ? 10000 : 1000;
+        int max = name.equals(FIXTURE_LOGS_A0526482) ? 10000 : 1000;
         for (String args :
             List.of(
                 "null," + START + ",1",
@@ -314,20 +325,22 @@ final class CleanupSafetyBoundaryTest {
   void rollbackAndRowLocks() throws Exception {
     try (var c = db.admin();
         var caller = batch()) {
-      log(c, 1, "'2026-01-01'", "null");
-      log(c, 2, "'2026-01-01'", "null");
+      log(c, 1, "'2026-01-01'", FIXTURE_NULL_F072CBEC);
+      log(c, 2, "'2026-01-01'", FIXTURE_NULL_F072CBEC);
       c.setAutoCommit(false);
       caller.setAutoCommit(false);
       scalar(c, "select id from schubert.app_logs where id=1 for update");
-      assertEquals("0|0|0|LOCK_BUSY", call(caller, "logs", START, 10000));
+      assertEquals("0|0|0|LOCK_BUSY", call(caller, FIXTURE_LOGS_A0526482, START, 10000));
       assertEquals("0", scalar(c, "select count(*) from schubert.log_cleanup_progress"));
-      assertEquals("1,2", ids(c, "app_logs"));
+      assertEquals("1,2", ids(c, FIXTURE_APP_LOGS_EDF74EC8));
       assertEquals(
-          "42501", assertThrows(SQLException.class, () -> ids(caller, "app_logs")).getSQLState());
+          "42501",
+          assertThrows(SQLException.class, () -> ids(caller, FIXTURE_APP_LOGS_EDF74EC8))
+              .getSQLState());
       caller.rollback();
       c.rollback();
-      assertEquals("1,2", ids(c, "app_logs"));
-      assertEquals("1|1|0|OK", call(caller, "logs", START, 1));
+      assertEquals("1,2", ids(c, FIXTURE_APP_LOGS_EDF74EC8));
+      assertEquals("1|1|0|OK", call(caller, FIXTURE_LOGS_A0526482, START, 1));
       caller.rollback();
       sql(
           c,
@@ -340,15 +353,16 @@ final class CleanupSafetyBoundaryTest {
       c.commit();
       assertEquals(
           "P0001",
-          assertThrows(SQLException.class, () -> call(caller, "logs", START, 10000)).getSQLState());
+          assertThrows(SQLException.class, () -> call(caller, FIXTURE_LOGS_A0526482, START, 10000))
+              .getSQLState());
       caller.rollback();
-      assertEquals("1,2", ids(c, "app_logs"));
+      assertEquals("1,2", ids(c, FIXTURE_APP_LOGS_EDF74EC8));
       sql(c, "drop trigger pt_cleanup_failure on schubert.app_logs");
       sql(c, "drop function schubert.pt_cleanup_failure()");
       c.commit();
-      assertEquals("2|2|0|OK", call(caller, "logs", START, 10000));
+      assertEquals("2|2|0|OK", call(caller, FIXTURE_LOGS_A0526482, START, 10000));
       caller.commit();
-      assertEquals("0|0|0|OK", call(caller, "logs", START, 10000));
+      assertEquals("0|0|0|OK", call(caller, FIXTURE_LOGS_A0526482, START, 10000));
       caller.rollback();
     }
   }
@@ -357,7 +371,8 @@ final class CleanupSafetyBoundaryTest {
   void businessAndSessionBoundaries() throws Exception {
     try (var c = db.admin()) {
       c.setAutoCommit(false);
-      List<String> states = List.of("RECEIVED", "PROCESSING", "COMPLETED", "ERROR", "CANCELLED");
+      List<String> states =
+          List.of("RECEIVED", "PROCESSING", "COMPLETED", FIXTURE_ERROR_F717E7D8, "CANCELLED");
       int id = 0;
       var expected = new ArrayList<String>();
       for (String state : states)
@@ -374,19 +389,19 @@ final class CleanupSafetyBoundaryTest {
           boolean deleted =
               state.equals("CANCELLED")
                   ? id % 5 >= 1 && id % 5 <= 3
-                  : (state.equals("COMPLETED") || state.equals("ERROR"))
+                  : (state.equals("COMPLETED") || state.equals(FIXTURE_ERROR_F717E7D8))
                       && (id % 5 == 1 || id % 5 == 2);
           if (!deleted) expected.add(Integer.toString(id));
         }
-      assertEquals("7|7|0|OK", call(c, "notifications", START, 1000));
-      assertEquals(String.join(",", expected), ids(c, "notifications"));
-      assertEquals("7|7|0|OK", call(c, "questions", START, 1000));
-      assertEquals(String.join(",", expected), ids(c, "questions"));
+      assertEquals("7|7|0|OK", call(c, FIXTURE_NOTIFICATIONS_49C51E6A, START, 1000));
+      assertEquals(String.join(",", expected), ids(c, FIXTURE_NOTIFICATIONS_49C51E6A));
+      assertEquals("7|7|0|OK", call(c, FIXTURE_QUESTIONS_BAB06435, START, 1000));
+      assertEquals(String.join(",", expected), ids(c, FIXTURE_QUESTIONS_BAB06435));
       assertEquals("18", scalar(c, "select count(*) from schubert.async_jobs"));
-      question(c, 30, false, "null");
+      question(c, 30, false, FIXTURE_NULL_F072CBEC);
       question(c, 31, true, START);
       question(c, 32, true, "'2026-09-17 00:00:00.000001+00'");
-      assertEquals("0|0|0|OK", call(c, "questions", START, 1000));
+      assertEquals("0|0|0|OK", call(c, FIXTURE_QUESTIONS_BAB06435, START, 1000));
       c.rollback();
 
       for (int i = 1; i <= 3; i++) {
@@ -398,7 +413,7 @@ final class CleanupSafetyBoundaryTest {
                 .get(i - 1);
         sql(
             c,
-            "insert into"
+            FIXTURE_INSERT_INTO_1D1568AF
                 + " schubert.auth_sessions(id,user_id,context_hash,context_ciphertext,key_version,issued_at,last_accessed_at,expires_at,client_address,created_message_id)"
                 + " values('"
                 + new UUID(0, i)
@@ -437,7 +452,7 @@ final class CleanupSafetyBoundaryTest {
                 + webExpiry
                 + ",28800,0)");
       }
-      assertEquals("2|2|0|OK", call(c, "sessions", START, 2));
+      assertEquals("2|2|0|OK", call(c, FIXTURE_SESSIONS_7E0AF933, START, 2));
       assertEquals(
           "1|3|3",
           scalar(
@@ -445,7 +460,7 @@ final class CleanupSafetyBoundaryTest {
               "select (select count(*) from schubert.auth_sessions)||'|'||(select count(*) from"
                   + " schubert.login_ip_attempts)||'|'||(select count(*) from"
                   + " schubert_web_session.web_http_sessions)"));
-      assertEquals("3|3|0|OK", call(c, "sessions", START, 3));
+      assertEquals("3|3|0|OK", call(c, FIXTURE_SESSIONS_7E0AF933, START, 3));
       assertEquals(
           "1|1|2",
           scalar(
@@ -453,8 +468,8 @@ final class CleanupSafetyBoundaryTest {
               "select (select count(*) from schubert.auth_sessions)||'|'||(select count(*) from"
                   + " schubert.login_ip_attempts)||'|'||(select count(*) from"
                   + " schubert_web_session.web_http_sessions)"));
-      assertEquals("1|1|0|OK", call(c, "sessions", START, 1000));
-      assertEquals("0|0|0|OK", call(c, "sessions", START, 1000));
+      assertEquals("1|1|0|OK", call(c, FIXTURE_SESSIONS_7E0AF933, START, 1000));
+      assertEquals("0|0|0|OK", call(c, FIXTURE_SESSIONS_7E0AF933, START, 1000));
       // Independent revocation/lock-window matrix, not just expiry.
       for (String time :
           List.of(
@@ -472,7 +487,8 @@ final class CleanupSafetyBoundaryTest {
             "update schubert.login_ip_attempts set window_started_at='2026-09-01',locked_until="
                 + time);
         boolean expired = !time.contains(".000001");
-        assertEquals(expired ? "2|2|0|OK" : "0|0|0|OK", call(c, "sessions", START, 1000));
+        assertEquals(
+            expired ? "2|2|0|OK" : "0|0|0|OK", call(c, FIXTURE_SESSIONS_7E0AF933, START, 1000));
         assertEquals(
             expired ? "0|0|1" : "1|1|1",
             scalar(
@@ -488,7 +504,7 @@ final class CleanupSafetyBoundaryTest {
               + " window_started_at='2026-09-17',locked_until='2026-09-01'");
       assertEquals(
           "0|0|0|OK",
-          call(c, "sessions", START, 1000),
+          call(c, FIXTURE_SESSIONS_7E0AF933, START, 1000),
           "active window protects even when old lock expired");
       c.rollback();
     }
@@ -498,21 +514,23 @@ final class CleanupSafetyBoundaryTest {
   void logRetentionAndHold() throws Exception {
     try (var c = db.admin()) {
       c.setAutoCommit(false);
-      log(c, 1, "'2026-06-18 23:59:59.999999+00'", "null");
-      log(c, 2, "'2026-06-19 00:00:00+00'", "null");
-      log(c, 3, "'2026-06-19 00:00:00.000001+00'", "null");
-      log(c, 4, "'2026-10-01'", "null");
+      log(c, 1, "'2026-06-18 23:59:59.999999+00'", FIXTURE_NULL_F072CBEC);
+      log(c, 2, "'2026-06-19 00:00:00+00'", FIXTURE_NULL_F072CBEC);
+      log(c, 3, "'2026-06-19 00:00:00.000001+00'", FIXTURE_NULL_F072CBEC);
+      log(c, 4, "'2026-10-01'", FIXTURE_NULL_F072CBEC);
       log(c, 5, "'2026-06-18'", "'2026-06-18 23:59:59.999999+00'");
       log(c, 6, "'2026-06-18'", "'2026-06-19 00:00:00+00'");
       log(c, 7, "'2026-06-18'", "'2026-06-19 00:00:00.000001+00'");
       var save = c.setSavepoint();
-      assertEquals("4|3|1|OK", call(c, "logs", START, 10000));
-      assertEquals("2,3,4,7", ids(c, "app_logs"));
-      assertEquals("0|0|0|OK", call(c, "logs", START, 10000)); // SSC-051: hold already counted.
+      assertEquals("4|3|1|OK", call(c, FIXTURE_LOGS_A0526482, START, 10000));
+      assertEquals("2,3,4,7", ids(c, FIXTURE_APP_LOGS_EDF74EC8));
+      assertEquals(
+          "0|0|0|OK",
+          call(c, FIXTURE_LOGS_A0526482, START, 10000)); // SSC-051: hold already counted.
       c.rollback(save);
-      assertEquals("1,2,3,4,5,6,7", ids(c, "app_logs"));
-      assertEquals("2|2|0|OK", call(c, "logs", START, 2));
-      assertEquals("1,2,3,4,7", ids(c, "app_logs"));
+      assertEquals("1,2,3,4,5,6,7", ids(c, FIXTURE_APP_LOGS_EDF74EC8));
+      assertEquals("2|2|0|OK", call(c, FIXTURE_LOGS_A0526482, START, 2));
+      assertEquals("1,2,3,4,7", ids(c, FIXTURE_APP_LOGS_EDF74EC8));
       c.rollback(save);
       sql(
           c,
@@ -520,9 +538,9 @@ final class CleanupSafetyBoundaryTest {
               migrations().resolve("V006__cleanup_null_bounds_and_outbox_retention.sql")));
       assertEquals(
           "6|6|0|OK",
-          call(c, "logs", START, 10000),
+          call(c, FIXTURE_LOGS_A0526482, START, 10000),
           "BUG-093 old run-anchor oracle deletes 90-day rows");
-      assertEquals("4", ids(c, "app_logs"));
+      assertEquals("4", ids(c, FIXTURE_APP_LOGS_EDF74EC8));
       c.rollback();
     }
   }
@@ -531,24 +549,24 @@ final class CleanupSafetyBoundaryTest {
   void batchCompletionRetention() throws Exception {
     try (var c = db.admin()) {
       c.setAutoCommit(false);
-      history(c, 101, 101, "SUCCESS", "'2025-08-12 23:59:59.999999+00'");
+      history(c, 101, 101, FIXTURE_SUCCESS_10855C7F, "'2025-08-12 23:59:59.999999+00'");
       history(c, 102, 102, "WARNING", "'2025-08-13 00:00:00+00'");
       history(c, 103, 103, "SKIPPED", "'2025-08-13 00:00:00.000001+00'");
-      history(c, 104, 104, "SUCCESS", "'2026-09-01'");
-      history(c, 105, 105, "RUNNING", "null");
+      history(c, 104, 104, FIXTURE_SUCCESS_10855C7F, "'2026-09-01'");
+      history(c, 105, 105, "RUNNING", FIXTURE_NULL_F072CBEC);
       history(c, 106, 106, "FAILED", "'2025-08-01'");
-      history(c, 107, 106, "SUCCESS", "'2025-08-01'");
+      history(c, 107, 106, FIXTURE_SUCCESS_10855C7F, "'2025-08-01'");
       history(c, 108, 105, "WARNING", "'2025-08-01'");
-      history(c, 109, 109, "SUCCESS", "null");
+      history(c, 109, 109, FIXTURE_SUCCESS_10855C7F, FIXTURE_NULL_F072CBEC);
       history(c, 110, 110, "WARNING", "'2025-08-01'");
       history(c, 111, 111, "SKIPPED", "'2025-08-01'");
-      history(c, 112, 81, "SUCCESS", "'2025-08-01'");
+      history(c, 112, 81, FIXTURE_SUCCESS_10855C7F, "'2025-08-01'");
       var save = c.setSavepoint();
-      assertEquals("2|2|0|OK", call(c, "batch_runs", START, 2));
+      assertEquals("2|2|0|OK", call(c, FIXTURE_BATCH_RUNS_5CA9ABAD, START, 2));
       assertEquals("101,102,103,104,105,106,107,108,109,112", historyIds(c));
-      assertEquals("1|1|0|OK", call(c, "batch_runs", START, 1000));
+      assertEquals("1|1|0|OK", call(c, FIXTURE_BATCH_RUNS_5CA9ABAD, START, 1000));
       assertEquals("102,103,104,105,106,107,108,109,112", historyIds(c));
-      assertEquals("0|0|0|OK", call(c, "batch_runs", START, 1000));
+      assertEquals("0|0|0|OK", call(c, FIXTURE_BATCH_RUNS_5CA9ABAD, START, 1000));
       c.rollback(save);
       sql(
           c,
@@ -556,7 +574,7 @@ final class CleanupSafetyBoundaryTest {
               migrations().resolve("V006__cleanup_null_bounds_and_outbox_retention.sql")));
       assertEquals(
           "9|9|0|OK",
-          call(c, "batch_runs", "'2025-08-13 00:00:00+00'", 1000),
+          call(c, FIXTURE_BATCH_RUNS_5CA9ABAD, "'2025-08-13 00:00:00+00'", 1000),
           "BUG-093 old started_at/caller-cutoff deletes recent completions");
       assertEquals("105,106,112", historyIds(c));
       c.rollback();
@@ -618,7 +636,7 @@ final class CleanupSafetyBoundaryTest {
   private static void backup(Connection c, String step) throws SQLException {
     sql(
         c,
-        "insert into"
+        FIXTURE_INSERT_INTO_1D1568AF
             + " schubert.batch_runs(run_id,business_date,step,attempt,started_at,ended_at,status)"
             + " values('"
             + RUN
@@ -634,7 +652,7 @@ final class CleanupSafetyBoundaryTest {
   private static void log(Connection c, int id, String at, String hold) throws SQLException {
     sql(
         c,
-        "insert into"
+        FIXTURE_INSERT_INTO_1D1568AF
             + " schubert.app_logs(id,logged_at,service,category,level,action,message,security_hold_until)"
             + " values("
             + id
@@ -649,7 +667,7 @@ final class CleanupSafetyBoundaryTest {
       throws SQLException {
     sql(
         c,
-        "insert into"
+        FIXTURE_INSERT_INTO_1D1568AF
             + " schubert.batch_runs(id,run_id,business_date,step,attempt,started_at,ended_at,status)"
             + " values("
             + id
@@ -668,7 +686,7 @@ final class CleanupSafetyBoundaryTest {
       throws SQLException {
     sql(
         c,
-        "insert into"
+        FIXTURE_INSERT_INTO_1D1568AF
             + " schubert.questions(id,receipt_id,owner_user_id,body,operation_token,submitted_at,is_deleted,deleted_at,deleted_by)"
             + " values("
             + id
@@ -681,7 +699,7 @@ final class CleanupSafetyBoundaryTest {
             + ","
             + at
             + ","
-            + (deleted ? "7" : "null")
+            + (deleted ? "7" : FIXTURE_NULL_F072CBEC)
             + ")");
   }
 
@@ -689,7 +707,7 @@ final class CleanupSafetyBoundaryTest {
       throws SQLException {
     sql(
         c,
-        "insert into"
+        FIXTURE_INSERT_INTO_1D1568AF
             + " schubert.async_jobs(id,question_id,owner_user_id,state,message_id,correlation_id,received_at,state_changed_at)"
             + " values("
             + id
@@ -700,11 +718,12 @@ final class CleanupSafetyBoundaryTest {
             + "','"
             + new UUID(2, id)
             + "','2026-09-01','2026-09-01')");
-    String type = Set.of("ERROR", "COMPLETED").contains(state) ? state : "ACCEPTED";
-    String error = state.equals("ERROR") ? "'PROCESS_FAILED','public failure'" : "null,null";
+    String type = Set.of(FIXTURE_ERROR_F717E7D8, "COMPLETED").contains(state) ? state : "ACCEPTED";
+    String error =
+        state.equals(FIXTURE_ERROR_F717E7D8) ? "'PROCESS_FAILED','public failure'" : "null,null";
     sql(
         c,
-        "insert into"
+        FIXTURE_INSERT_INTO_1D1568AF
             + " schubert.notifications(id,job_id,question_id,owner_user_id,notification_type,state,accepted_at,state_changed_at,error_code,error_message,created_at,updated_at)"
             + " values("
             + id

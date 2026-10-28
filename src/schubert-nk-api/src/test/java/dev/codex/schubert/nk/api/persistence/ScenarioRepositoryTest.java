@@ -65,6 +65,21 @@ import org.junit.jupiter.api.io.TempDir;
  * PT-SCN-001..007: synthetic real PostgreSQL, literal ID sets and independent UI234 byte offsets.
  */
 final class ScenarioRepositoryTest {
+  private static final String FIXTURE_01_A_D193F9D6 = "01_A";
+  private static final String FIXTURE_CHAPTER_A_E3A27D05 = "Chapter A";
+  private static final String FIXTURE_BOB_2ABF6B98 = "Bob";
+  private static final String FIXTURE_ALICE_1EA1F9A4 = "Alice";
+  private static final String FIXTURE_NUKITASHI1_F97F2EAE = "NUKITASHI1";
+  private static final String FIXTURE_NUKITASHI2_3B3D052F = "NUKITASHI2";
+  private static final String FIXTURE_TRUNCATE_SCHUBERT_SCRIPT_FILES_CASCADE_B7F22DE8 =
+      "truncate schubert.script_files cascade";
+  private static final String FIXTURE_NARRATION_320AF5F0 = "narration";
+  private static final String FIXTURE_DIALOGUE_37AC104E = "dialogue";
+  private static final String FIXTURE_GETLONG_7D3C0BFE = "getLong";
+  private static final String FIXTURE_GETSTRING_B3B802ED = "getString";
+  private static final String FIXTURE_CLOSE_97959247 = "close";
+  private static final String FIXTURE_SYNTHETIC_SQL_MUST_NOT_ESCAPE_6962B758 =
+      "synthetic SQL must not escape";
   @TempDir static Path root;
   private static ApiLogDatabaseFixture database;
   private static final ScenarioRepository REPOSITORY = new ScenarioRepository();
@@ -87,7 +102,7 @@ final class ScenarioRepositoryTest {
   void seed() throws Exception {
     sql("truncate schubert.script_files,schubert.speakers,schubert.audio_files cascade");
     sql("update schubert.games set title=code");
-    file(30, 1, 1, "01_A", "Chapter A");
+    file(30, 1, 1, FIXTURE_01_A_D193F9D6, FIXTURE_CHAPTER_A_E3A27D05);
     file(10, 1, 2, "02_B", null);
     file(20, 2, 1, "01_C", "chapter B");
     sql(
@@ -97,9 +112,9 @@ final class ScenarioRepositoryTest {
         (3,2,'Alice','alice','2026-09-01Z'),(4,1,'Unused','unused','2026-09-01Z')
         """);
     entry(100, 1, 30, 3, 0, 11, 1, "Alice label", "Alpha 100% x_y \\ tail");
-    entry(200, 1, 30, 1, 1, 22, 2, "Bob", "Beta O'Reilly");
+    entry(200, 1, 30, 1, 1, 22, 2, FIXTURE_BOB_2ABF6B98, "Beta O'Reilly");
     entry(300, 1, 10, 2, 0, 33, null, null, "alpha xy");
-    entry(400, 2, 20, 4, 0, 44, 3, "Alice", "ALPHA abc");
+    entry(400, 2, 20, 4, 0, 44, 3, FIXTURE_ALICE_1EA1F9A4, "ALPHA abc");
     sql(
         """
         insert into schubert.audio_files(id,game_id,storage_relative_path,display_path,file_name,basename,
@@ -119,11 +134,15 @@ final class ScenarioRepositoryTest {
       assertPayload(
           values,
           numeric(9, 2),
-          List.of(game("NUKITASHI1", "NUKITASHI1", 1), game("NUKITASHI2", "NUKITASHI2", 2)));
+          List.of(
+              game(FIXTURE_NUKITASHI1_F97F2EAE, FIXTURE_NUKITASHI1_F97F2EAE, 1),
+              game(FIXTURE_NUKITASHI2_3B3D052F, FIXTURE_NUKITASHI2_3B3D052F, 2)));
       assertPayload(
           REPOSITORY.games(c, ADMIN),
           numeric(9, 2),
-          List.of(game("NUKITASHI1", "NUKITASHI1", 1), game("NUKITASHI2", "NUKITASHI2", 2)));
+          List.of(
+              game(FIXTURE_NUKITASHI1_F97F2EAE, FIXTURE_NUKITASHI1_F97F2EAE, 1),
+              game(FIXTURE_NUKITASHI2_3B3D052F, FIXTURE_NUKITASHI2_3B3D052F, 2)));
       assertFalse(c.isClosed());
       assertFalse(c.getAutoCommit());
       assertTrue(c.isReadOnly());
@@ -137,7 +156,9 @@ final class ScenarioRepositoryTest {
       assertPayload(
           REPOSITORY.games(c, USER),
           numeric(9, 2),
-          List.of(game("NUKITASHI2", "Two", 1), game("NUKITASHI1", "One", 2)));
+          List.of(
+              game(FIXTURE_NUKITASHI2_3B3D052F, "Two", 1),
+              game(FIXTURE_NUKITASHI1_F97F2EAE, "One", 2)));
     }
     sql("truncate schubert.games cascade");
     try (Connection c = read()) {
@@ -157,16 +178,20 @@ final class ScenarioRepositoryTest {
       assertPayload(
           games.value(),
           numeric(9, 2),
-          List.of(game("NUKITASHI1", "NUKITASHI1", 1), game("NUKITASHI2", "NUKITASHI2", 2)));
+          List.of(
+              game(FIXTURE_NUKITASHI1_F97F2EAE, FIXTURE_NUKITASHI1_F97F2EAE, 1),
+              game(FIXTURE_NUKITASHI2_3B3D052F, FIXTURE_NUKITASHI2_3B3D052F, 2)));
       var speakers =
           (ScenarioQuerySnapshot.Inline)
               ScenarioRequest.decode(
                       ScenarioRequestFixture.message("SPKREQ01", ScenarioRequestFixture.spaces(12)))
                   .query(REPOSITORY, c, USER);
       assertPayload(
-          speakers.value(), numeric(9, 2), List.of(speaker(1, "Alice", 2), speaker(2, "Bob", 1)));
+          speakers.value(),
+          numeric(9, 2),
+          List.of(speaker(1, FIXTURE_ALICE_1EA1F9A4, 2), speaker(2, FIXTURE_BOB_2ABF6B98, 1)));
       byte[] game = ScenarioRequestFixture.spaces(12);
-      ScenarioRequestFixture.put(game, 0, "NUKITASHI1");
+      ScenarioRequestFixture.put(game, 0, FIXTURE_NUKITASHI1_F97F2EAE);
       var routes =
           (ScenarioQuerySnapshot.Inline)
               ScenarioRequest.decode(ScenarioRequestFixture.message("RTEREQ01", game))
@@ -174,7 +199,7 @@ final class ScenarioRepositoryTest {
       assertPayload(
           routes.value(), numeric(9, 2), List.of(route(1, "共通ルート", 1), route(2, "奈々瀬ルート", 1)));
       byte[] files = ScenarioRequestFixture.spaces(14);
-      ScenarioRequestFixture.put(files, 0, "NUKITASHI1");
+      ScenarioRequestFixture.put(files, 0, FIXTURE_NUKITASHI1_F97F2EAE);
       ScenarioRequestFixture.put(files, 12, "01");
       var fileList =
           (ScenarioQuerySnapshot.Inline)
@@ -182,8 +207,8 @@ final class ScenarioRepositoryTest {
                   .query(REPOSITORY, c, USER);
       assertPayload(
           fileList.value(),
-          fileData("NUKITASHI1", 1, "共通ルート", 1),
-          List.of(fileRecord(30, "Chapter A", 2)));
+          fileData(FIXTURE_NUKITASHI1_F97F2EAE, 1, "共通ルート", 1),
+          List.of(fileRecord(30, FIXTURE_CHAPTER_A_E3A27D05, 2)));
       var search =
           (ScenarioQuerySnapshot.Inline)
               ScenarioRequest.decode(
@@ -231,15 +256,15 @@ final class ScenarioRepositoryTest {
       assertPayload(
           REPOSITORY.speakers(c, USER, new SpeakerListRequestData(Optional.empty())),
           numeric(9, 2),
-          List.of(speaker(1, "Alice", 2), speaker(2, "Bob", 1)));
+          List.of(speaker(1, FIXTURE_ALICE_1EA1F9A4, 2), speaker(2, FIXTURE_BOB_2ABF6B98, 1)));
       assertPayload(
           REPOSITORY.speakers(c, USER, new SpeakerListRequestData(Optional.of(G1))),
           numeric(9, 2),
-          List.of(speaker(1, "Alice", 1), speaker(2, "Bob", 1)));
+          List.of(speaker(1, FIXTURE_ALICE_1EA1F9A4, 1), speaker(2, FIXTURE_BOB_2ABF6B98, 1)));
       assertPayload(
           REPOSITORY.speakers(c, ADMIN, new SpeakerListRequestData(Optional.of(G2))),
           numeric(9, 1),
-          List.of(speaker(3, "Alice", 1)));
+          List.of(speaker(3, FIXTURE_ALICE_1EA1F9A4, 1)));
     }
     sql("delete from schubert.script_entries where game_id=2");
     try (Connection c = read()) {
@@ -252,7 +277,7 @@ final class ScenarioRepositoryTest {
 
   @Test
   void ptScn003EveryRouteMapAndUnknownPrefixHaveIndependentBytes() throws Exception {
-    sql("truncate schubert.script_files cascade");
+    sql(FIXTURE_TRUNCATE_SCHUBERT_SCRIPT_FILES_CASCADE_B7F22DE8);
     int[][] prefixes = {{0, 1, 2, 3, 4, 5, 99}, {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 99}};
     String[][] names = {
       {"未分類", "共通ルート", "奈々瀬ルート", "ヒナミルート", "美岬ルート", "文乃ルート", "未分類"},
@@ -281,7 +306,7 @@ final class ScenarioRepositoryTest {
           (RouteRecord) REPOSITORY.routes(c, USER, new RouteListRequestData(G1)).records().get(1);
       assertEquals(2, r.fileCount());
     }
-    sql("truncate schubert.script_files cascade");
+    sql(FIXTURE_TRUNCATE_SCHUBERT_SCRIPT_FILES_CASCADE_B7F22DE8);
     try (Connection c = read()) {
       assertPayload(
           REPOSITORY.routes(c, USER, new RouteListRequestData(G2)), numeric(9, 0), List.of());
@@ -303,11 +328,11 @@ final class ScenarioRepositoryTest {
     try (Connection c = read()) {
       assertPayload(
           REPOSITORY.files(c, USER, new ScenarioFileListRequestData(G1, 1)),
-          fileData("NUKITASHI1", 1, "共通ルート", 2),
-          List.of(fileRecord(30, "Chapter A", 2), fileRecord(5, "01_Z", 0)));
+          fileData(FIXTURE_NUKITASHI1_F97F2EAE, 1, "共通ルート", 2),
+          List.of(fileRecord(30, FIXTURE_CHAPTER_A_E3A27D05, 2), fileRecord(5, "01_Z", 0)));
       assertPayload(
           REPOSITORY.files(c, ADMIN, new ScenarioFileListRequestData(G2, 2)),
-          fileData("NUKITASHI2", 2, "共通ルート", 0),
+          fileData(FIXTURE_NUKITASHI2_3B3D052F, 2, "共通ルート", 0),
           List.of());
     }
   }
@@ -317,15 +342,25 @@ final class ScenarioRepositoryTest {
     try (Connection c = read()) {
       assertIds(c, request("", "", "", "", "", "", 1), 200, 300, 100, 400);
       assertIds(c, request(" alpha ", "", "", "", "", "", 1), 300, 100, 400);
-      assertIds(c, request("", "NUKITASHI1", "", "", "", "", 1), 200, 300, 100);
+      assertIds(c, request("", FIXTURE_NUKITASHI1_F97F2EAE, "", "", "", "", 1), 200, 300, 100);
       assertIds(c, request("", "", " Alice ", "", "", "", 1), 100, 400);
       assertIds(c, request("", "", "", " CHAPTER ", "", "", 1), 200, 100, 400);
-      assertIds(c, request("", "", "", "", "narration", "", 1), 300);
-      assertIds(c, request("", "", "", "", "dialogue", "", 1), 200, 100, 400);
+      assertIds(c, request("", "", "", "", FIXTURE_NARRATION_320AF5F0, "", 1), 300);
+      assertIds(c, request("", "", "", "", FIXTURE_DIALOGUE_37AC104E, "", 1), 200, 100, 400);
       assertIds(c, request("", "", "", "", "", "1", 1), 100);
       assertIds(c, request("", "", "", "", "", "0", 1), 200, 300, 400);
-      assertIds(c, request("Alpha", "NUKITASHI1", "Alice", "chapter a", "dialogue", "1", 1), 100);
-      assertIds(c, request("", "NUKITASHI2", "Bob", "", "", "", 1));
+      assertIds(
+          c,
+          request(
+              "Alpha",
+              FIXTURE_NUKITASHI1_F97F2EAE,
+              FIXTURE_ALICE_1EA1F9A4,
+              "chapter a",
+              FIXTURE_DIALOGUE_37AC104E,
+              "1",
+              1),
+          100);
+      assertIds(c, request("", FIXTURE_NUKITASHI2_3B3D052F, FIXTURE_BOB_2ABF6B98, "", "", "", 1));
       assertIds(c, request("%", "", "", "", "", "", 1), 200, 300, 100, 400);
       assertIds(c, request("_", "", "", "", "", "", 1), 200, 300, 100, 400);
       assertIds(c, request("\\%", "", "", "", "", "", 1), 100);
@@ -339,12 +374,12 @@ final class ScenarioRepositoryTest {
       byte[] record = blank(5584);
       put(record, 0, numeric(12, 100));
       put(record, 12, numeric(12, 30));
-      put(record, 24, "NUKITASHI1");
-      put(record, 36, "Chapter A");
+      put(record, 24, FIXTURE_NUKITASHI1_F97F2EAE);
+      put(record, 36, FIXTURE_CHAPTER_A_E3A27D05);
       put(record, 292, numeric(8, 11));
-      put(record, 300, "dialogue");
+      put(record, 300, FIXTURE_DIALOGUE_37AC104E);
       // BUG-035: Current displays the joined speaker name, never the retained source label.
-      put(record, 310, "Alice");
+      put(record, 310, FIXTURE_ALICE_1EA1F9A4);
       put(record, 438, "Alpha 100% x_y \\ tail");
       put(record, 4534, "1");
       put(record, 4535, "800");
@@ -490,7 +525,7 @@ final class ScenarioRepositoryTest {
           () -> REPOSITORY.speakers(c, USER, new SpeakerListRequestData(Optional.empty())),
           ResultCode.RESOURCE_LIMIT);
     }
-    sql("truncate schubert.script_files cascade");
+    sql(FIXTURE_TRUNCATE_SCHUBERT_SCRIPT_FILES_CASCADE_B7F22DE8);
     sql(
         """
         insert into schubert.script_files(id,game_id,display_order,storage_relative_path,display_path,
@@ -508,7 +543,7 @@ final class ScenarioRepositoryTest {
           () -> REPOSITORY.files(c, USER, new ScenarioFileListRequestData(G1, 1)),
           ResultCode.RESOURCE_LIMIT);
     }
-    sql("truncate schubert.script_files cascade");
+    sql(FIXTURE_TRUNCATE_SCHUBERT_SCRIPT_FILES_CASCADE_B7F22DE8);
     for (int i = 0; i < 50; i++) file(i + 1, 1, i + 1, String.format(Locale.ROOT, "%02d", i), null);
     try (Connection c = read()) {
       assertEquals(50, REPOSITORY.routes(c, USER, new RouteListRequestData(G1)).records().size());
@@ -532,10 +567,10 @@ final class ScenarioRepositoryTest {
               "setString",
               "executeQuery",
               "next",
-              "getLong",
-              "getString",
+              FIXTURE_GETLONG_7D3C0BFE,
+              FIXTURE_GETSTRING_B3B802ED,
               "wasNull",
-              "close")) {
+              FIXTURE_CLOSE_97959247)) {
         AtomicInteger hits = new AtomicInteger();
         Connection broken =
             intercept(
@@ -543,8 +578,8 @@ final class ScenarioRepositoryTest {
                 (target, m, args) -> {
                   if (m.getName().equals(method)) {
                     hits.incrementAndGet();
-                    if (method.equals("close")) invoke(target, m, args);
-                    throw new SQLException("synthetic SQL must not escape", "08006");
+                    if (method.equals(FIXTURE_CLOSE_97959247)) invoke(target, m, args);
+                    throw new SQLException(FIXTURE_SYNTHETIC_SQL_MUST_NOT_ESCAPE_6962B758, "08006");
                   }
                   return invoke(target, m, args);
                 });
@@ -561,7 +596,7 @@ final class ScenarioRepositoryTest {
             intercept(
                 c,
                 (target, m, args) ->
-                    m.getName().equals("getString") && args[0].equals(field)
+                    m.getName().equals(FIXTURE_GETSTRING_B3B802ED) && args[0].equals(field)
                         ? null
                         : invoke(target, m, args));
         failure(() -> REPOSITORY.games(nullText, USER), ResultCode.TEMPORARY_FAILURE);
@@ -570,7 +605,7 @@ final class ScenarioRepositoryTest {
           intercept(
               c,
               (target, m, args) ->
-                  m.getName().equals("getString") && args[0].equals("code")
+                  m.getName().equals(FIXTURE_GETSTRING_B3B802ED) && args[0].equals("code")
                       ? "UNKNOWN"
                       : invoke(target, m, args));
       failure(() -> REPOSITORY.games(unknownGame, USER), ResultCode.TEMPORARY_FAILURE);
@@ -583,7 +618,7 @@ final class ScenarioRepositoryTest {
           intercept(
               c,
               (target, m, args) ->
-                  m.getName().equals("getLong") && args[0].equals("entries")
+                  m.getName().equals(FIXTURE_GETLONG_7D3C0BFE) && args[0].equals("entries")
                       ? 2147483648L
                       : invoke(target, m, args));
       failure(
@@ -599,7 +634,7 @@ final class ScenarioRepositoryTest {
           intercept(
               c,
               (target, m, args) ->
-                  m.getName().equals("getString") && args[0].equals("entry_type")
+                  m.getName().equals(FIXTURE_GETSTRING_B3B802ED) && args[0].equals("entry_type")
                       ? "UNKNOWN"
                       : invoke(target, m, args));
       failure(
@@ -609,7 +644,7 @@ final class ScenarioRepositoryTest {
           intercept(
               c,
               (target, m, args) ->
-                  m.getName().equals("getLong") && args[0].equals("total")
+                  m.getName().equals(FIXTURE_GETLONG_7D3C0BFE) && args[0].equals("total")
                       ? 99999901L
                       : invoke(target, m, args));
       failure(
@@ -627,7 +662,7 @@ final class ScenarioRepositoryTest {
           intercept(
               c,
               (target, m, args) ->
-                  m.getName().equals("getLong")
+                  m.getName().equals(FIXTURE_GETLONG_7D3C0BFE)
                       ? switch (args[0].toString()) {
                         case "total" -> 99999900L;
                         case "pages", "effective" -> 999999L;
@@ -643,17 +678,18 @@ final class ScenarioRepositoryTest {
 
   @Test
   void ptScn007CapacityAndCloseFailureNeverExposeSuppressedSql() throws Exception {
-    sql("truncate schubert.script_files cascade");
+    sql(FIXTURE_TRUNCATE_SCHUBERT_SCRIPT_FILES_CASCADE_B7F22DE8);
     for (int i = 0; i < 51; i++) file(i + 1, 1, i + 1, String.format(Locale.ROOT, "%02d", i), null);
     try (Connection c = read()) {
       Connection broken =
           intercept(
               c,
               (target, m, args) -> {
-                if (m.getName().equals("getLong") && args[0].equals("total")) return 99999901L;
-                if (m.getName().equals("close")) {
+                if (m.getName().equals(FIXTURE_GETLONG_7D3C0BFE) && args[0].equals("total"))
+                  return 99999901L;
+                if (m.getName().equals(FIXTURE_CLOSE_97959247)) {
                   invoke(target, m, args);
-                  throw new SQLException("synthetic SQL must not escape");
+                  throw new SQLException(FIXTURE_SYNTHETIC_SQL_MUST_NOT_ESCAPE_6962B758);
                 }
                 return invoke(target, m, args);
               });
@@ -746,13 +782,13 @@ final class ScenarioRepositoryTest {
       try (Connection c = read()) {
         assertPayload(
             REPOSITORY.files(c, USER, new ScenarioFileListRequestData(G1, 1)),
-            fileData("NUKITASHI1", 1, "共通ルート", 1),
-            List.of(fileRecord(30, "01_A", 2)));
+            fileData(FIXTURE_NUKITASHI1_F97F2EAE, 1, "共通ルート", 1),
+            List.of(fileRecord(30, FIXTURE_01_A_D193F9D6, 2)));
         ScenarioDetailSnapshot first =
             REPOSITORY
                 .detail(c, USER, new ScenarioDetailRequestData(new ScriptFileId(30)))
                 .orElseThrow();
-        assertEquals("01_A", first.metadata().displayTitle());
+        assertEquals(FIXTURE_01_A_D193F9D6, first.metadata().displayTitle());
         assertTrue(first.metadata().previousFileId().isEmpty());
         assertEquals(10, first.metadata().nextFileId().orElseThrow().value());
         assertEquals("02_B", first.metadata().nextTitle().orElseThrow());
@@ -761,7 +797,7 @@ final class ScenarioRepositoryTest {
                 .detail(c, ADMIN, new ScenarioDetailRequestData(new ScriptFileId(10)))
                 .orElseThrow();
         assertEquals(30, middle.metadata().previousFileId().orElseThrow().value());
-        assertEquals("01_A", middle.metadata().previousTitle().orElseThrow());
+        assertEquals(FIXTURE_01_A_D193F9D6, middle.metadata().previousTitle().orElseThrow());
         assertEquals(20, middle.metadata().nextFileId().orElseThrow().value());
         assertEquals("chapter B", middle.metadata().nextTitle().orElseThrow());
         ScenarioDetailSnapshot last =
@@ -830,8 +866,8 @@ final class ScenarioRepositoryTest {
               .orElseThrow();
       byte[] metadata = blank(1728);
       put(metadata, 0, numeric(12, 30));
-      put(metadata, 12, "NUKITASHI1");
-      put(metadata, 24, "Chapter A");
+      put(metadata, 12, FIXTURE_NUKITASHI1_F97F2EAE);
+      put(metadata, 24, FIXTURE_CHAPTER_A_E3A27D05);
       put(metadata, 280, "script/f30.ks");
       put(metadata, 1060, "10");
       put(metadata, 1072, "02_B");
@@ -841,9 +877,33 @@ final class ScenarioRepositoryTest {
       put(metadata, 1703, numeric(9, 0));
       List<byte[]> records =
           List.of(
-              detailRecord(100, 1, 11, "dialogue", "Alice", "Alpha 100% x_y \\ tail", 1, 800),
-              detailRecord(100, 1, 11, "dialogue", "Alice", "Alpha 100% x_y \\ tail", 2, 700),
-              detailRecord(200, 2, 22, "dialogue", "Bob", "Beta O'Reilly", 0, 0));
+              detailRecord(
+                  100,
+                  1,
+                  11,
+                  FIXTURE_DIALOGUE_37AC104E,
+                  FIXTURE_ALICE_1EA1F9A4,
+                  "Alpha 100% x_y \\ tail",
+                  1,
+                  800),
+              detailRecord(
+                  100,
+                  1,
+                  11,
+                  FIXTURE_DIALOGUE_37AC104E,
+                  FIXTURE_ALICE_1EA1F9A4,
+                  "Alpha 100% x_y \\ tail",
+                  2,
+                  700),
+              detailRecord(
+                  200,
+                  2,
+                  22,
+                  FIXTURE_DIALOGUE_37AC104E,
+                  FIXTURE_BOB_2ABF6B98,
+                  "Beta O'Reilly",
+                  0,
+                  0));
       assertPayload(
           new TypedPayloadValues(
               new LayoutId("SCNRSP01"), snapshot.metadata(), new ArrayList<>(snapshot.records())),
@@ -859,13 +919,13 @@ final class ScenarioRepositoryTest {
               .detail(c, USER, new ScenarioDetailRequestData(new ScriptFileId(10)))
               .orElseThrow();
       assertArrayEquals(
-          detailRecord(300, 1, 33, "narration", "", "alpha xy", 0, 0),
+          detailRecord(300, 1, 33, FIXTURE_NARRATION_320AF5F0, "", "alpha xy", 0, 0),
           rawDetail(narration.metadata(), narration.records().getFirst()));
     }
     sql("update schubert.script_entries set speaker_label=E'ignored\\tlabel' where id=100");
     try (Connection c = read()) {
       assertEquals(
-          "Alice",
+          FIXTURE_ALICE_1EA1F9A4,
           ((ScenarioSearchRecord)
                   REPOSITORY
                       .search(c, USER, request("\\%", "", "", "", "", "", 1))
@@ -907,7 +967,7 @@ final class ScenarioRepositoryTest {
           if (count > 0) {
             assertEquals(count, snapshot.records().getLast().entrySequence());
             assertArrayEquals(
-                detailRecord(count, count, count, "narration", "", "row", 0, 0),
+                detailRecord(count, count, count, FIXTURE_NARRATION_320AF5F0, "", "row", 0, 0),
                 rawDetail(snapshot.metadata(), snapshot.records().getLast()));
           }
         }
@@ -932,7 +992,7 @@ final class ScenarioRepositoryTest {
       assertEquals(999, snapshot.records().size());
       assertEquals(1, snapshot.records().getLast().entrySequence());
       assertArrayEquals(
-          detailRecord(1, 1, 1, "narration", "", "row", 999, 10999),
+          detailRecord(1, 1, 1, FIXTURE_NARRATION_320AF5F0, "", "row", 999, 10999),
           rawDetail(snapshot.metadata(), snapshot.records().getLast()));
     }
   }
@@ -951,16 +1011,16 @@ final class ScenarioRepositoryTest {
               "executeQuery",
               "next",
               "getObject",
-              "getLong",
-              "getString",
-              "close")) {
+              FIXTURE_GETLONG_7D3C0BFE,
+              FIXTURE_GETSTRING_B3B802ED,
+              FIXTURE_CLOSE_97959247)) {
         Connection broken =
             intercept(
                 c,
                 (target, m, args) -> {
                   if (m.getName().equals(method)) {
-                    if (method.equals("close")) invoke(target, m, args);
-                    throw new SQLException("synthetic SQL must not escape");
+                    if (method.equals(FIXTURE_CLOSE_97959247)) invoke(target, m, args);
+                    throw new SQLException(FIXTURE_SYNTHETIC_SQL_MUST_NOT_ESCAPE_6962B758);
                   }
                   return invoke(target, m, args);
                 });
@@ -1020,9 +1080,9 @@ final class ScenarioRepositoryTest {
           intercept(
               c,
               (target, m, args) -> {
-                if (m.getName().equals("close")) {
+                if (m.getName().equals(FIXTURE_CLOSE_97959247)) {
                   invoke(target, m, args);
-                  throw new SQLException("synthetic SQL must not escape");
+                  throw new SQLException(FIXTURE_SYNTHETIC_SQL_MUST_NOT_ESCAPE_6962B758);
                 }
                 return invoke(target, m, args);
               });
@@ -1102,10 +1162,13 @@ final class ScenarioRepositoryTest {
       String q, String game, String speaker, String chapter, String type, String voice, int page) {
     return new ScenarioSearchRequestData(
         optional(q),
-        optional(game).map(g -> g.equals("NUKITASHI1") ? G1 : G2),
+        optional(game).map(g -> g.equals(FIXTURE_NUKITASHI1_F97F2EAE) ? G1 : G2),
         optional(speaker),
         optional(chapter),
-        optional(type).map(t -> t.equals("dialogue") ? EntryType.DIALOGUE : EntryType.NARRATION),
+        optional(type)
+            .map(
+                t ->
+                    t.equals(FIXTURE_DIALOGUE_37AC104E) ? EntryType.DIALOGUE : EntryType.NARRATION),
         optional(voice).map(v -> v.equals("1") ? VoiceCondition.PRESENT : VoiceCondition.ABSENT),
         page,
         100);
@@ -1174,7 +1237,7 @@ final class ScenarioRepositoryTest {
       s.setLong(4, order);
       s.setInt(5, index);
       s.setInt(6, line);
-      s.setString(7, speaker == null ? "narration" : "dialogue");
+      s.setString(7, speaker == null ? FIXTURE_NARRATION_320AF5F0 : FIXTURE_DIALOGUE_37AC104E);
       s.setObject(8, speaker);
       s.setString(9, label);
       s.setString(10, body);

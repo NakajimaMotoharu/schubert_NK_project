@@ -82,6 +82,28 @@ import org.springframework.security.web.context.SecurityContextHolderFilter;
 
 /** NK-WEB-001/PT-WEB-082..089; FUN-001/AUT-001..004; UI226/232/234; SS313/314/342/352. */
 class SessionFormLoginTest {
+  private static final String FIXTURE_203_0_113_1_9BB16FDC = "203.0.113.1";
+  private static final String FIXTURE_READER_F734AAEA = "reader";
+  private static final String FIXTURE_X_FORWARDED_FOR_BECAABD0 = "X-Forwarded-For";
+  private static final String FIXTURE_X_FORWARDED_PROTO_6D975CE8 = "X-Forwarded-Proto";
+  private static final String FIXTURE_NULL_61DEF1DB = "NULL";
+  private static final String FIXTURE_ELEMENT_EECFA3AA = "ELEMENT";
+  private static final String FIXTURE_STATE_053339C0 = "STATE";
+  private static final String FIXTURE_ARGUMENT_DFF41B69 = "ARGUMENT";
+  private static final String FIXTURE_0000_876EEFE0 = "0000";
+  private static final String FIXTURE_USER_2DED8884 = "USER";
+  private static final String FIXTURE_PASSWORD_FF2BEA10 = "password";
+  private static final String FIXTURE_GET_04F32A7E = "GET";
+  private static final String FIXTURE_0200_FC9DB3AC = "0200";
+  private static final String FIXTURE_CSRFTOKEN_CF3CFD11 = "csrfToken";
+  private static final String FIXTURE_SCHUBERT_NK_SESSION_DD9EE5FF = "SCHUBERT_NK_SESSION";
+  private static final String FIXTURE_UNUSED_5A9D5965 = "unused";
+  private static final String FIXTURE_LOCK900_8CB1A8F9 = "LOCK900";
+  private static final String FIXTURE_JMS_1AEA59D9 = "JMS";
+  private static final String FIXTURE_REVOKED_303CE38D = "REVOKED";
+  private static final String FIXTURE_FORM_0339FF30 = "FORM";
+  private static final String FIXTURE_PROXY_F127C282 = "PROXY";
+  private static final String FIXTURE_PRIVATE_PARAMETER_840BC11E = "private-parameter";
   private static WebLogDatabaseFixture db;
   private static final Clock CLOCK =
       Clock.fixed(Instant.parse("2026-09-08T00:00:00.123Z"), ZoneOffset.UTC);
@@ -116,21 +138,27 @@ class SessionFormLoginTest {
     for (String peer : List.of("127.0.0.1", "127.255.0.1", "::1", "::ffff:127.0.0.1")) {
       for (String client :
           List.of(
-              "203.0.113.1",
+              FIXTURE_203_0_113_1_9BB16FDC,
               "2001:db8::1",
               "0:0:0:0:0:0:0:1",
               "ffff:ffff:ffff:ffff:ffff:ffff:255.255.255.255")) {
-        var r = form(null, null, "reader", "p");
+        var r = form(null, null, FIXTURE_READER_F734AAEA, "p");
         r.setRemoteAddr(peer);
-        r.removeHeader("X-Forwarded-For");
-        r.addHeader("X-Forwarded-For", client);
+        r.removeHeader(FIXTURE_X_FORWARDED_FOR_BECAABD0);
+        r.addHeader(FIXTURE_X_FORWARDED_FOR_BECAABD0, client);
         assertEquals(client, resolver.resolve(r).value());
         assertNull(r.getSession(false));
       }
     }
     for (String peer :
-        List.of("203.0.113.1", "2001:db8::1", "localhost", "", "::1%1", "127.0.0.1, 203.0.113.1")) {
-      var r = form(null, null, "reader", "p");
+        List.of(
+            FIXTURE_203_0_113_1_9BB16FDC,
+            "2001:db8::1",
+            "localhost",
+            "",
+            "::1%1",
+            "127.0.0.1, 203.0.113.1")) {
+      var r = form(null, null, FIXTURE_READER_F734AAEA, "p");
       r.setRemoteAddr(peer);
       proxyRejected(() -> resolver.resolve(r));
     }
@@ -142,26 +170,27 @@ class SessionFormLoginTest {
             " 203.0.113.1",
             "fe80::1%1",
             "203.0.113.999")) {
-      var r = form(null, null, "reader", "p");
-      r.removeHeader("X-Forwarded-For");
-      r.addHeader("X-Forwarded-For", client);
+      var r = form(null, null, FIXTURE_READER_F734AAEA, "p");
+      r.removeHeader(FIXTURE_X_FORWARDED_FOR_BECAABD0);
+      r.addHeader(FIXTURE_X_FORWARDED_FOR_BECAABD0, client);
       proxyRejected(() -> resolver.resolve(r));
     }
-    for (String header : List.of("X-Forwarded-For", "X-Forwarded-Proto")) {
-      var missing = form(null, null, "reader", "p");
+    for (String header :
+        List.of(FIXTURE_X_FORWARDED_FOR_BECAABD0, FIXTURE_X_FORWARDED_PROTO_6D975CE8)) {
+      var missing = form(null, null, FIXTURE_READER_F734AAEA, "p");
       missing.removeHeader(header);
       proxyRejected(() -> resolver.resolve(missing));
-      var duplicate = form(null, null, "reader", "p");
+      var duplicate = form(null, null, FIXTURE_READER_F734AAEA, "p");
       duplicate.addHeader(header, "synthetic");
       proxyRejected(() -> resolver.resolve(duplicate));
     }
     for (String proto : List.of("", "http", "HTTPS", "https,http")) {
-      var r = form(null, null, "reader", "p");
-      r.removeHeader("X-Forwarded-Proto");
-      r.addHeader("X-Forwarded-Proto", proto);
+      var r = form(null, null, FIXTURE_READER_F734AAEA, "p");
+      r.removeHeader(FIXTURE_X_FORWARDED_PROTO_6D975CE8);
+      r.addHeader(FIXTURE_X_FORWARDED_PROTO_6D975CE8, proto);
       proxyRejected(() -> resolver.resolve(r));
     }
-    var forwarded = form(null, null, "reader", "p");
+    var forwarded = form(null, null, FIXTURE_READER_F734AAEA, "p");
     forwarded.addHeader("Forwarded", "for=203.0.113.9;proto=https");
     proxyRejected(() -> resolver.resolve(forwarded));
   }
@@ -178,18 +207,28 @@ class SessionFormLoginTest {
           }
         };
     proxyRejected(() -> resolver.resolve(noPeer));
-    for (String header : List.of("Forwarded", "X-Forwarded-Proto", "X-Forwarded-For")) {
-      for (String fault : List.of("NULL", "ELEMENT", "STATE", "ARGUMENT", "ENUMERATION")) {
+    for (String header :
+        List.of(
+            "Forwarded", FIXTURE_X_FORWARDED_PROTO_6D975CE8, FIXTURE_X_FORWARDED_FOR_BECAABD0)) {
+      for (String fault :
+          List.of(
+              FIXTURE_NULL_61DEF1DB,
+              FIXTURE_ELEMENT_EECFA3AA,
+              FIXTURE_STATE_053339C0,
+              FIXTURE_ARGUMENT_DFF41B69,
+              "ENUMERATION")) {
         var r =
             new MockHttpServletRequest() {
               @Override
               public Enumeration<String> getHeaders(String name) {
                 if (!name.equals(header)) return super.getHeaders(name);
                 return switch (fault) {
-                  case "NULL" -> null;
-                  case "ELEMENT" -> Collections.enumeration(Arrays.asList((String) null));
-                  case "STATE" -> throw new IllegalStateException("private-header");
-                  case "ARGUMENT" -> throw new IllegalArgumentException("private-header");
+                  case FIXTURE_NULL_61DEF1DB -> null;
+                  case FIXTURE_ELEMENT_EECFA3AA ->
+                      Collections.enumeration(Arrays.asList((String) null));
+                  case FIXTURE_STATE_053339C0 -> throw new IllegalStateException("private-header");
+                  case FIXTURE_ARGUMENT_DFF41B69 ->
+                      throw new IllegalArgumentException("private-header");
                   default ->
                       new Enumeration<>() {
                         @Override
@@ -216,9 +255,9 @@ class SessionFormLoginTest {
         String client = "203.0.113." + i;
         jobs.add(
             () -> {
-              var r = form(null, null, "reader", "p");
-              r.removeHeader("X-Forwarded-For");
-              r.addHeader("X-Forwarded-For", client);
+              var r = form(null, null, FIXTURE_READER_F734AAEA, "p");
+              r.removeHeader(FIXTURE_X_FORWARDED_FOR_BECAABD0);
+              r.addHeader(FIXTURE_X_FORWARDED_FOR_BECAABD0, client);
               assertEquals(client, resolver.resolve(r).value());
               assertNull(r.getSession(false));
               return null;
@@ -233,8 +272,8 @@ class SessionFormLoginTest {
   @Test
   void web084FormCreatesOnlyConsumableUntrustedCredentials() {
     var converter = new LoginFormAuthenticationConverter(new CaddyClientAddressResolver());
-    var api = new Api("0000", "USER", "0000", 0);
-    for (String username : List.of("reader", " e\u0301 ", "İ".repeat(32))) {
+    var api = new Api(FIXTURE_0000_876EEFE0, FIXTURE_USER_2DED8884, FIXTURE_0000_876EEFE0, 0);
+    for (String username : List.of(FIXTURE_READER_F734AAEA, " e\u0301 ", "İ".repeat(32))) {
       for (String password : List.of("p", "p".repeat(256), "e\u0301")) {
         for (String type :
             List.of(
@@ -250,7 +289,7 @@ class SessionFormLoginTest {
           char[] consumed = assertInstanceOf(char[].class, input.getCredentials());
           assertArrayEquals(password.toCharArray(), consumed);
           assertEquals(
-              "203.0.113.1",
+              FIXTURE_203_0_113_1_9BB16FDC,
               assertInstanceOf(LoginClientAddress.class, input.getDetails()).value());
           assertNull(r.getSession(false));
           var result = api.provider.authenticate(input);
@@ -265,7 +304,7 @@ class SessionFormLoginTest {
     }
     // Semantic byte/password rejection remains the client's established independent contract.
     for (String password : List.of("p".repeat(257), "p ", "p\n")) {
-      var input = converter.convert(form(null, null, "reader", password));
+      var input = converter.convert(form(null, null, FIXTURE_READER_F734AAEA, password));
       char[] consumed = assertInstanceOf(char[].class, input.getCredentials());
       int before = api.sends.get();
       assertThrows(BadCredentialsException.class, () -> api.provider.authenticate(input));
@@ -281,7 +320,7 @@ class SessionFormLoginTest {
     var converter = new LoginFormAuthenticationConverter(new CaddyClientAddressResolver());
     assertThrows(NullPointerException.class, () -> new LoginFormAuthenticationConverter(null));
     assertThrows(NullPointerException.class, () -> converter.convert(null));
-    for (String name : List.of("username", "password")) {
+    for (String name : List.of("username", FIXTURE_PASSWORD_FF2BEA10)) {
       for (String[] value :
           Arrays.asList(
               null,
@@ -296,7 +335,7 @@ class SessionFormLoginTest {
                 return name.equals(key) ? value : super.getParameterValues(key);
               }
             };
-        configureForm(r, "reader", "p");
+        configureForm(r, FIXTURE_READER_F734AAEA, "p");
         formRejected(() -> converter.convert(r));
         assertNull(r.getSession(false));
       }
@@ -306,12 +345,12 @@ class SessionFormLoginTest {
             "username",
             "USERNAME",
             "%75sername",
-            "password",
+            FIXTURE_PASSWORD_FF2BEA10,
             "PaSsWoRd",
             "_csrf",
             "%5fcsrf",
             "%GG")) {
-      var r = form(null, null, "reader", "p");
+      var r = form(null, null, FIXTURE_READER_F734AAEA, "p");
       r.setQueryString("q=other&" + key + "=synthetic");
       formRejected(() -> converter.convert(r));
     }
@@ -325,7 +364,7 @@ class SessionFormLoginTest {
             "bad",
             "application/x-www-form-urlencoded;charset=ISO-8859-1",
             "application/x-www-form-urlencoded;charset=NO_SUCH_CHARSET")) {
-      var r = form(null, null, "reader", "p");
+      var r = form(null, null, FIXTURE_READER_F734AAEA, "p");
       // Override rather than Mock's eager MediaType parsing, to exercise the public boundary.
       var wrapped =
           new HttpServletRequestWrapper(r) {
@@ -338,7 +377,7 @@ class SessionFormLoginTest {
     }
     for (String encoding : Arrays.asList(null, "ISO-8859-1")) {
       var r =
-          new HttpServletRequestWrapper(form(null, null, "reader", "p")) {
+          new HttpServletRequestWrapper(form(null, null, FIXTURE_READER_F734AAEA, "p")) {
             @Override
             public String getCharacterEncoding() {
               return encoding;
@@ -346,17 +385,17 @@ class SessionFormLoginTest {
           };
       formRejected(() -> converter.convert(r));
     }
-    for (String method : List.of("GET", "PUT", "post")) {
-      var r = form(null, null, "reader", "p");
+    for (String method : List.of(FIXTURE_GET_04F32A7E, "PUT", "post")) {
+      var r = form(null, null, FIXTURE_READER_F734AAEA, "p");
       r.setMethod(method);
       formRejected(() -> converter.convert(r));
     }
-    var wrong = form(null, null, "reader", "p");
+    var wrong = form(null, null, FIXTURE_READER_F734AAEA, "p");
     wrong.setRequestURI("/elsewhere");
     formRejected(() -> converter.convert(wrong));
     for (boolean state : new boolean[] {false, true}) {
       var r =
-          new HttpServletRequestWrapper(form(null, null, "reader", "p")) {
+          new HttpServletRequestWrapper(form(null, null, FIXTURE_READER_F734AAEA, "p")) {
             @Override
             public String[] getParameterValues(String name) {
               if (state) throw new IllegalStateException("private-body");
@@ -365,15 +404,15 @@ class SessionFormLoginTest {
           };
       formRejected(() -> converter.convert(r));
     }
-    var proxy = form(null, null, "reader", "p");
+    var proxy = form(null, null, FIXTURE_READER_F734AAEA, "p");
     proxy.setRemoteAddr("203.0.113.9");
     proxyRejected(() -> converter.convert(proxy));
   }
 
   @Test
   void web086ActualCsrfProviderFixationAndHolderChainSucceeds() throws Exception {
-    for (String code : List.of("0000", "0200")) {
-      for (String role : List.of("USER", "ADMIN")) {
+    for (String code : List.of(FIXTURE_0000_876EEFE0, FIXTURE_0200_FC9DB3AC)) {
+      for (String role : List.of(FIXTURE_USER_2DED8884, "ADMIN")) {
         reset();
         try (var f = new Fixture(db)) {
           var adapter = adapter(f);
@@ -383,7 +422,7 @@ class SessionFormLoginTest {
           initial.setAttribute("savedRequest", "/search?q=abc");
           initial.setAttribute("operationTokens", SessionAttributeCodecTest.tokens(2));
           String oldId = initial.getId();
-          var api = new Api(code, role, "0000", 0);
+          var api = new Api(code, role, FIXTURE_0000_876EEFE0, 0);
           var successes = new AtomicInteger();
           var login =
               new MqFormLoginFilterFactory()
@@ -393,11 +432,13 @@ class SessionFormLoginTest {
                       (r, s, auth) -> {
                         successes.incrementAndGet();
                         assertSame(auth, SecurityContextHolder.getContext().getAuthentication());
-                        assertEquals("reader", auth.getName());
+                        assertEquals(FIXTURE_READER_F734AAEA, auth.getName());
                         assertEquals(
                             List.of("ROLE_" + role),
                             auth.getAuthorities().stream().map(a -> a.getAuthority()).toList());
-                        assertEquals("04".repeat(32), r.getSession().getAttribute("csrfToken"));
+                        assertEquals(
+                            "04".repeat(32),
+                            r.getSession().getAttribute(FIXTURE_CSRFTOKEN_CF3CFD11));
                         assertEquals(2, f.ids.get());
                         assertEquals(
                             SessionAttributeCodecTest.tokens(2),
@@ -412,15 +453,20 @@ class SessionFormLoginTest {
           run(
               adapter,
               login,
-              form(new Cookie("SCHUBERT_NK_SESSION", oldId), "02".repeat(32), "reader", "p"),
+              form(
+                  new Cookie(FIXTURE_SCHUBERT_NK_SESSION_DD9EE5FF, oldId),
+                  "02".repeat(32),
+                  FIXTURE_READER_F734AAEA,
+                  "p"),
               response,
               (r, s) -> fail("login should finish at the success handler"));
           assertEquals(302, response.getStatus());
           assertEquals("/search?q=abc", response.getHeader("Location"));
           assertEquals(1, successes.get());
           assertEquals(1, api.sends.get());
-          assertEquals(code.equals("0200") ? 1 : 0, api.probes.get());
-          var cookie = Objects.requireNonNull(response.getCookie("SCHUBERT_NK_SESSION"));
+          assertEquals(code.equals(FIXTURE_0200_FC9DB3AC) ? 1 : 0, api.probes.get());
+          var cookie =
+              Objects.requireNonNull(response.getCookie(FIXTURE_SCHUBERT_NK_SESSION_DD9EE5FF));
           assertNotEquals(oldId, cookie.getValue());
           assertTrue(cookie.getSecure());
           assertTrue(cookie.isHttpOnly());
@@ -428,8 +474,8 @@ class SessionFormLoginTest {
           assertNull(adapter.findById(oldId));
           assertEquals(1, count());
           assertNull(SecurityContextHolder.getContext().getAuthentication());
-          var next = form(cookie, null, "unused", "unused");
-          next.setMethod("GET");
+          var next = form(cookie, null, FIXTURE_UNUSED_5A9D5965, FIXTURE_UNUSED_5A9D5965);
+          next.setMethod(FIXTURE_GET_04F32A7E);
           next.setRequestURI("/search");
           next.setQueryString("q=abc");
           run(
@@ -440,7 +486,7 @@ class SessionFormLoginTest {
               (r, s) -> {
                 var auth = SecurityContextHolder.getContext().getAuthentication();
                 assertNotNull(auth);
-                assertEquals("reader", auth.getName());
+                assertEquals(FIXTURE_READER_F734AAEA, auth.getName());
                 assertEquals(
                     List.of("ROLE_" + role),
                     auth.getAuthorities().stream().map(a -> a.getAuthority()).toList());
@@ -458,7 +504,7 @@ class SessionFormLoginTest {
   void web087CsrfAndAuthenticationFailuresNeverGrantOrReplay() throws Exception {
     try (var f = new Fixture(db)) {
       var adapter = adapter(f);
-      var api = new Api("0000", "USER", "0000", 0);
+      var api = new Api(FIXTURE_0000_876EEFE0, FIXTURE_USER_2DED8884, FIXTURE_0000_876EEFE0, 0);
       var initial = adapter.createSession();
       var other = adapter.createSession();
       var filter =
@@ -468,18 +514,22 @@ class SessionFormLoginTest {
                   new EncryptedSessionSecurityContextRepository(adapter),
                   (r, s, a) -> fail("unexpected success"),
                   SessionFormLoginTest::failure);
-      String otherToken = other.getAttribute("csrfToken");
+      String otherToken = other.getAttribute(FIXTURE_CSRFTOKEN_CF3CFD11);
       for (String token : Arrays.asList(null, "", "z".repeat(64), otherToken)) {
         var response = new MockHttpServletResponse();
         run(
             adapter,
             filter,
-            form(new Cookie("SCHUBERT_NK_SESSION", initial.getId()), token, "reader", "p"),
+            form(
+                new Cookie(FIXTURE_SCHUBERT_NK_SESSION_DD9EE5FF, initial.getId()),
+                token,
+                FIXTURE_READER_F734AAEA,
+                "p"),
             response,
             (r, s) -> fail("CSRF must reject before downstream"));
         assertEquals(403, response.getStatus());
         assertEquals(0, api.sends.get());
-        assertNull(response.getCookie("SCHUBERT_NK_SESSION"));
+        assertNull(response.getCookie(FIXTURE_SCHUBERT_NK_SESSION_DD9EE5FF));
         assertNull(SecurityContextHolder.getContext().getAuthentication());
       }
     }
@@ -487,13 +537,13 @@ class SessionFormLoginTest {
         List.of(
             "0101",
             "LOCK0",
-            "LOCK900",
+            FIXTURE_LOCK900_8CB1A8F9,
             "9000",
-            "JMS",
-            "REVOKED",
+            FIXTURE_JMS_1AEA59D9,
+            FIXTURE_REVOKED_303CE38D,
             "PROBE_JMS",
-            "FORM",
-            "PROXY",
+            FIXTURE_FORM_0339FF30,
+            FIXTURE_PROXY_F127C282,
             "DB")) {
       reset();
       try (var f = new Fixture(db)) {
@@ -504,18 +554,18 @@ class SessionFormLoginTest {
             condition.startsWith("LOCK")
                 ? "0106"
                 : switch (condition) {
-                  case "REVOKED", "PROBE_JMS" -> "0200";
-                  case "FORM", "PROXY", "DB" -> "0000";
+                  case FIXTURE_REVOKED_303CE38D, "PROBE_JMS" -> FIXTURE_0200_FC9DB3AC;
+                  case FIXTURE_FORM_0339FF30, FIXTURE_PROXY_F127C282, "DB" -> FIXTURE_0000_876EEFE0;
                   default -> condition;
                 };
         var api =
             new Api(
                 code,
-                "USER",
-                condition.equals("REVOKED")
+                FIXTURE_USER_2DED8884,
+                condition.equals(FIXTURE_REVOKED_303CE38D)
                     ? "0102"
-                    : condition.equals("PROBE_JMS") ? "JMS" : "0000",
-                condition.equals("LOCK900") ? 900 : 0);
+                    : condition.equals("PROBE_JMS") ? FIXTURE_JMS_1AEA59D9 : FIXTURE_0000_876EEFE0,
+                condition.equals(FIXTURE_LOCK900_8CB1A8F9) ? 900 : 0);
         if (condition.equals("DB")) api.afterReply = () -> f.failure = "connection.commit";
         var failures = new AtomicInteger();
         var filter =
@@ -528,9 +578,15 @@ class SessionFormLoginTest {
                       failures.incrementAndGet();
                       failure(r, s, e);
                     });
-        var request = form(new Cookie("SCHUBERT_NK_SESSION", id), "02".repeat(32), "reader", "p");
-        if (condition.equals("FORM")) request.addParameter("password", "second");
-        if (condition.equals("PROXY")) request.setRemoteAddr("203.0.113.9");
+        var request =
+            form(
+                new Cookie(FIXTURE_SCHUBERT_NK_SESSION_DD9EE5FF, id),
+                "02".repeat(32),
+                FIXTURE_READER_F734AAEA,
+                "p");
+        if (condition.equals(FIXTURE_FORM_0339FF30))
+          request.addParameter(FIXTURE_PASSWORD_FF2BEA10, "second");
+        if (condition.equals(FIXTURE_PROXY_F127C282)) request.setRemoteAddr("203.0.113.9");
         var response = new MockHttpServletResponse();
         Executable action =
             () -> run(adapter, filter, request, response, (r, s) -> fail("login handled here"));
@@ -538,27 +594,31 @@ class SessionFormLoginTest {
         else assertDoesNotThrow(action);
         int expected =
             switch (condition) {
-              case "0101", "REVOKED" -> 401;
-              case "LOCK0", "LOCK900" -> 429;
-              case "FORM" -> 400;
-              case "PROXY" -> 403;
+              case "0101", FIXTURE_REVOKED_303CE38D -> 401;
+              case "LOCK0", FIXTURE_LOCK900_8CB1A8F9 -> 429;
+              case FIXTURE_FORM_0339FF30 -> 400;
+              case FIXTURE_PROXY_F127C282 -> 403;
               default -> 503;
             };
         assertEquals(expected, response.getStatus());
         assertEquals(1, failures.get());
         if (condition.startsWith("LOCK"))
           assertEquals(
-              condition.equals("LOCK900") ? "900" : "0", response.getHeader("Retry-After"));
+              condition.equals(FIXTURE_LOCK900_8CB1A8F9) ? "900" : "0",
+              response.getHeader("Retry-After"));
         else assertNull(response.getHeader("Retry-After"));
-        assertNull(response.getCookie("SCHUBERT_NK_SESSION"));
+        assertNull(response.getCookie(FIXTURE_SCHUBERT_NK_SESSION_DD9EE5FF));
         assertNull(SecurityContextHolder.getContext().getAuthentication());
         assertEquals(
-            condition.equals("FORM") || condition.equals("PROXY") ? 0 : 1, api.sends.get());
+            condition.equals(FIXTURE_FORM_0339FF30) || condition.equals(FIXTURE_PROXY_F127C282)
+                ? 0
+                : 1,
+            api.sends.get());
         f.failure = "";
         var retained = Objects.requireNonNull(adapter.findById(id));
         assertNull(retained.getAttribute("principal"));
         assertNull(retained.getAttribute("SPRING_SECURITY_LAST_EXCEPTION"));
-        assertEquals("02".repeat(32), retained.getAttribute("csrfToken"));
+        assertEquals("02".repeat(32), retained.getAttribute(FIXTURE_CSRFTOKEN_CF3CFD11));
         assertEquals(1, count());
         api.erased();
       }
@@ -570,7 +630,7 @@ class SessionFormLoginTest {
     try (var f = new Fixture(db)) {
       var adapter = adapter(f);
       var contexts = new EncryptedSessionSecurityContextRepository(adapter);
-      var api = new Api("0000", "USER", "0000", 0);
+      var api = new Api(FIXTURE_0000_876EEFE0, FIXTURE_USER_2DED8884, FIXTURE_0000_876EEFE0, 0);
       var factory = new MqFormLoginFilterFactory();
       AuthenticationSuccessHandler success = (r, s, a) -> s.setStatus(204);
       AuthenticationFailureHandler failure = SessionFormLoginTest::failure;
@@ -585,10 +645,11 @@ class SessionFormLoginTest {
       var login = factory.create(api.provider, contexts, success, failure);
       login.afterPropertiesSet();
       var initial = adapter.createSession();
-      var cookie = new Cookie("SCHUBERT_NK_SESSION", initial.getId());
+      var cookie = new Cookie(FIXTURE_SCHUBERT_NK_SESSION_DD9EE5FF, initial.getId());
       var nextCalls = new AtomicInteger();
-      for (String method : List.of("GET", "HEAD", "POST")) {
-        var request = form(cookie, "02".repeat(32), "unused", "unused");
+      for (String method : List.of(FIXTURE_GET_04F32A7E, "HEAD", "POST")) {
+        var request =
+            form(cookie, "02".repeat(32), FIXTURE_UNUSED_5A9D5965, FIXTURE_UNUSED_5A9D5965);
         request.setMethod(method);
         request.setRequestURI(method.equals("POST") ? "/questions/new" : "/login");
         run(
@@ -600,8 +661,8 @@ class SessionFormLoginTest {
       }
       assertEquals(3, nextCalls.get());
       assertEquals(0, api.sends.get());
-      var request = form(cookie, null, "unused", "unused");
-      request.setMethod("GET");
+      var request = form(cookie, null, FIXTURE_UNUSED_5A9D5965, FIXTURE_UNUSED_5A9D5965);
+      request.setMethod(FIXTURE_GET_04F32A7E);
       request.setRequestURI("/search");
       assertThrows(
           ServletException.class,
@@ -630,13 +691,13 @@ class SessionFormLoginTest {
               run(
                   adapter,
                   throwingSuccess,
-                  form(cookie, "02".repeat(32), "reader", "p"),
+                  form(cookie, "02".repeat(32), FIXTURE_READER_F734AAEA, "p"),
                   new MockHttpServletResponse(),
                   (r, s) -> fail("not reached")));
       assertNull(SecurityContextHolder.getContext().getAuthentication());
       var another = adapter.createSession();
-      String csrf = another.getAttribute("csrfToken");
-      var rejected = new Api("0101", "USER", "0000", 0);
+      String csrf = another.getAttribute(FIXTURE_CSRFTOKEN_CF3CFD11);
+      var rejected = new Api("0101", FIXTURE_USER_2DED8884, FIXTURE_0000_876EEFE0, 0);
       var throwingFailure =
           factory.create(
               rejected.provider,
@@ -652,7 +713,11 @@ class SessionFormLoginTest {
               run(
                   adapter,
                   throwingFailure,
-                  form(new Cookie("SCHUBERT_NK_SESSION", another.getId()), csrf, "reader", "p"),
+                  form(
+                      new Cookie(FIXTURE_SCHUBERT_NK_SESSION_DD9EE5FF, another.getId()),
+                      csrf,
+                      FIXTURE_READER_F734AAEA,
+                      "p"),
                   new MockHttpServletResponse(),
                   (r, s) -> fail("not reached")));
       assertNull(SecurityContextHolder.getContext().getAuthentication());
@@ -672,7 +737,7 @@ class SessionFormLoginTest {
               f.source, f.codec, f.clock, new SecureRandom(), UUID::randomUUID);
       var adapter = new SpringEncryptedSessionRepository(lifecycle, f.clock);
       var contexts = new EncryptedSessionSecurityContextRepository(adapter);
-      var api = new Api("0000", "DYNAMIC", "0000", 0);
+      var api = new Api(FIXTURE_0000_876EEFE0, "DYNAMIC", FIXTURE_0000_876EEFE0, 0);
       var login =
           new MqFormLoginFilterFactory()
               .create(
@@ -689,7 +754,7 @@ class SessionFormLoginTest {
         int n = i;
         var initial = adapter.createSession();
         String id = initial.getId();
-        String csrf = initial.getAttribute("csrfToken");
+        String csrf = initial.getAttribute(FIXTURE_CSRFTOKEN_CF3CFD11);
         jobs.add(
             () -> {
               var response = new MockHttpServletResponse();
@@ -697,13 +762,17 @@ class SessionFormLoginTest {
                   adapter,
                   login,
                   form(
-                      new Cookie("SCHUBERT_NK_SESSION", id), csrf, "user" + n, "password-user" + n),
+                      new Cookie(FIXTURE_SCHUBERT_NK_SESSION_DD9EE5FF, id),
+                      csrf,
+                      "user" + n,
+                      "password-user" + n),
                   response,
                   (r, s) -> fail("not reached"));
               assertEquals(204, response.getStatus());
               assertNull(SecurityContextHolder.getContext().getAuthentication());
               String current =
-                  Objects.requireNonNull(response.getCookie("SCHUBERT_NK_SESSION")).getValue();
+                  Objects.requireNonNull(response.getCookie(FIXTURE_SCHUBERT_NK_SESSION_DD9EE5FF))
+                      .getValue();
               assertNotEquals(id, current);
               assertTrue(newCookies.add(current));
               assertNull(adapter.findById(id));
@@ -711,11 +780,11 @@ class SessionFormLoginTest {
               SessionPrincipal p = restored.getAttribute("principal");
               assertNotNull(p);
               assertEquals("user" + n, p.username());
-              assertEquals(n % 2 == 0 ? "USER" : "ADMIN", p.role().wireValue());
+              assertEquals(n % 2 == 0 ? FIXTURE_USER_2DED8884 : "ADMIN", p.role().wireValue());
               assertEquals(
                   String.format(Locale.ROOT, "%064x", n + 1),
                   p.authenticationContext().wireValue());
-              assertNotEquals(csrf, restored.getAttribute("csrfToken"));
+              assertNotEquals(csrf, restored.getAttribute(FIXTURE_CSRFTOKEN_CF3CFD11));
               return null;
             });
       }
@@ -733,9 +802,9 @@ class SessionFormLoginTest {
   @Test
   void web090UnknownFormNamesAndEnumerationFaultsNeverAuthenticate() {
     var converter = new LoginFormAuthenticationConverter(new CaddyClientAddressResolver());
-    var api = new Api("0000", "USER", "0000", 0);
+    var api = new Api(FIXTURE_0000_876EEFE0, FIXTURE_USER_2DED8884, FIXTURE_0000_876EEFE0, 0);
     for (String name : List.of("role", "", "Username", "Password", "_CSRF", "unknown", "q")) {
-      var request = form(null, "01".repeat(32), "reader", "p");
+      var request = form(null, "01".repeat(32), FIXTURE_READER_F734AAEA, "p");
       request.addParameter(name, "synthetic");
       // Servlet merges decoded query and body parameter names; Mock setQueryString alone does not.
       if (name.equals("q")) request.setQueryString("q=synthetic");
@@ -743,26 +812,36 @@ class SessionFormLoginTest {
       assertNull(request.getSession(false));
       assertEquals(0, api.sends.get());
     }
-    for (String fault : List.of("NULL", "ELEMENT", "HAS", "NEXT", "STATE", "ARGUMENT")) {
+    for (String fault :
+        List.of(
+            FIXTURE_NULL_61DEF1DB,
+            FIXTURE_ELEMENT_EECFA3AA,
+            "HAS",
+            "NEXT",
+            FIXTURE_STATE_053339C0,
+            FIXTURE_ARGUMENT_DFF41B69)) {
       var request =
-          new HttpServletRequestWrapper(form(null, null, "reader", "p")) {
+          new HttpServletRequestWrapper(form(null, null, FIXTURE_READER_F734AAEA, "p")) {
             @Override
             public Enumeration<String> getParameterNames() {
-              if (fault.equals("NULL")) return null;
-              if (fault.equals("ELEMENT"))
+              if (fault.equals(FIXTURE_NULL_61DEF1DB)) return null;
+              if (fault.equals(FIXTURE_ELEMENT_EECFA3AA))
                 return Collections.enumeration(Arrays.asList((String) null));
-              if (fault.equals("STATE")) throw new IllegalStateException("private-parameter");
-              if (fault.equals("ARGUMENT")) throw new IllegalArgumentException("private-parameter");
+              if (fault.equals(FIXTURE_STATE_053339C0))
+                throw new IllegalStateException(FIXTURE_PRIVATE_PARAMETER_840BC11E);
+              if (fault.equals(FIXTURE_ARGUMENT_DFF41B69))
+                throw new IllegalArgumentException(FIXTURE_PRIVATE_PARAMETER_840BC11E);
               return new Enumeration<>() {
                 @Override
                 public boolean hasMoreElements() {
-                  if (fault.equals("HAS")) throw new NoSuchElementException("private-parameter");
+                  if (fault.equals("HAS"))
+                    throw new NoSuchElementException(FIXTURE_PRIVATE_PARAMETER_840BC11E);
                   return true;
                 }
 
                 @Override
                 public String nextElement() {
-                  throw new NoSuchElementException("private-parameter");
+                  throw new NoSuchElementException(FIXTURE_PRIVATE_PARAMETER_840BC11E);
                 }
               };
             }
@@ -775,8 +854,8 @@ class SessionFormLoginTest {
 
   private static void trusted(MockHttpServletRequest r) {
     r.setRemoteAddr("127.0.0.1");
-    r.addHeader("X-Forwarded-For", "203.0.113.1");
-    r.addHeader("X-Forwarded-Proto", "https");
+    r.addHeader(FIXTURE_X_FORWARDED_FOR_BECAABD0, FIXTURE_203_0_113_1_9BB16FDC);
+    r.addHeader(FIXTURE_X_FORWARDED_PROTO_6D975CE8, "https");
   }
 
   private static void configureForm(MockHttpServletRequest r, String username, String password) {
@@ -786,7 +865,7 @@ class SessionFormLoginTest {
     r.setContentType("application/x-www-form-urlencoded");
     trusted(r);
     r.addParameter("username", username);
-    r.addParameter("password", password);
+    r.addParameter(FIXTURE_PASSWORD_FF2BEA10, password);
   }
 
   private static MockHttpServletRequest form(
@@ -886,21 +965,21 @@ class SessionFormLoginTest {
               (id, body) -> {
                 sends.incrementAndGet();
                 buffers.add(body);
-                if (code.equals("JMS")) throw new JMSException("synthetic-private");
+                if (code.equals(FIXTURE_JMS_1AEA59D9)) throw new JMSException("synthetic-private");
                 String username = new String(body, 256, 64, StandardCharsets.UTF_8).stripTrailing();
                 String context = "a".repeat(64);
                 String assignedRole = role;
                 if (role.equals("DYNAMIC")) {
                   int n = Integer.parseInt(username.substring(4));
                   context = String.format(Locale.ROOT, "%064x", n + 1);
-                  assignedRole = n % 2 == 0 ? "USER" : "ADMIN";
+                  assignedRole = n % 2 == 0 ? FIXTURE_USER_2DED8884 : "ADMIN";
                   assertEquals(
                       "password-" + username,
                       new String(body, 320, 256, StandardCharsets.UTF_8).stripTrailing());
                 }
                 byte[] reply = SessionSecurityContextTest.reply(id, "LGNRSP01", code, null);
                 Arrays.fill(reply, 256, 389, (byte) ' ');
-                if (code.equals("0000") || code.equals("0200")) {
+                if (code.equals(FIXTURE_0000_876EEFE0) || code.equals(FIXTURE_0200_FC9DB3AC)) {
                   put(reply, 256, username);
                   put(reply, 320, assignedRole);
                   put(reply, 325, context);
@@ -924,7 +1003,8 @@ class SessionFormLoginTest {
               (id, body) -> {
                 probes.incrementAndGet();
                 buffers.add(body);
-                if (probeCode.equals("JMS")) throw new JMSException("synthetic-private");
+                if (probeCode.equals(FIXTURE_JMS_1AEA59D9))
+                  throw new JMSException("synthetic-private");
                 String context = new String(body, 113, 64, StandardCharsets.US_ASCII);
                 byte[] reply = SessionSecurityContextTest.reply(id, "GAMRSP01", probeCode, context);
                 try {

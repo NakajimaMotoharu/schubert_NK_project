@@ -18,6 +18,29 @@ import org.junit.jupiter.api.Test;
  * PT-SNAPSHOT-911001..009. Literal observations, never Unit/kernel/owner authority.
  */
 final class InspectorHeldStateContractTest {
+  private static final String FIXTURE_ACTIVESTATE_8ACAC4AA = "ActiveState";
+  private static final String FIXTURE_INACTIVE_A5714161 = "inactive";
+  private static final String FIXTURE_SUBSTATE_39662EFC = "SubState";
+  private static final String FIXTURE_DEAD_0453462F = "dead";
+  private static final String FIXTURE_RUNNING_79D116A0 = "running";
+  private static final String FIXTURE_JOB_F32F4C4D = "Job";
+  private static final String FIXTURE_MAINPID_D7C01CF7 = "MainPID";
+  private static final String FIXTURE_CONTROLPID_32D1DE3E = "ControlPID";
+  private static final String FIXTURE_REMAINAFTEREXIT_A99477E7 = "RemainAfterExit";
+  private static final String FIXTURE_RESULT_37D8A404 = "Result";
+  private static final String FIXTURE_SUCCESS_68E7A699 = "success";
+  private static final String FIXTURE_FAILED_33D04BD7 = "failed";
+  private static final String FIXTURE_EXIT_CODE_BC9E614D = "exit-code";
+  private static final String FIXTURE_EXECMAINSTATUS_179A8E0B = "ExecMainStatus";
+  private static final String FIXTURE_INVOCATIONID_0F13ED0E = "InvocationID";
+  private static final String FIXTURE_EXECMAINCODE_02C974D2 = "ExecMainCode";
+  private static final String FIXTURE_EXECMAINSTARTTIMESTAMPMONOTONIC_1FB48E62 =
+      "ExecMainStartTimestampMonotonic";
+  private static final String FIXTURE_EXECMAINEXITTIMESTAMPMONOTONIC_C1411C27 =
+      "ExecMainExitTimestampMonotonic";
+  private static final String FIXTURE_TIMEOUT_492BD020 = "timeout";
+  private static final String FIXTURE_ACTIVE_DB0FB2BF = "active";
+  private static final String FIXTURE_EXITED_3D0FE3B1 = "exited";
   private static final String INV = "11111111111111111111111111111111";
   private static final UUID SAME = UUID.fromString("11111111-1111-1111-1111-111111111111");
   private static final Map<InspectorUnitSnapshot.Target, String> NAMES =
@@ -60,11 +83,15 @@ final class InspectorHeldStateContractTest {
             InspectorUnitSnapshot.Target.EXPIRY)) {
       for (var change :
           List.of(
-              Map.of("ActiveState", "inactive", "SubState", "dead"),
-              Map.of("SubState", "running"),
-              Map.of("Job", "7"),
-              Map.of("MainPID", "17"),
-              Map.of("ControlPID", "18"))) {
+              Map.of(
+                  FIXTURE_ACTIVESTATE_8ACAC4AA,
+                  FIXTURE_INACTIVE_A5714161,
+                  FIXTURE_SUBSTATE_39662EFC,
+                  FIXTURE_DEAD_0453462F),
+              Map.of(FIXTURE_SUBSTATE_39662EFC, FIXTURE_RUNNING_79D116A0),
+              Map.of(FIXTURE_JOB_F32F4C4D, "7"),
+              Map.of(FIXTURE_MAINPID_D7C01CF7, "17"),
+              Map.of(FIXTURE_CONTROLPID_32D1DE3E, "18"))) {
         var observed = snapshot(target, change);
         assertFalse(observed.heldCleanup(), target + " " + change);
         assertFalse(observed.heldMaintenance(), target + " " + change);
@@ -72,7 +99,8 @@ final class InspectorHeldStateContractTest {
     }
     for (var target :
         List.of(InspectorUnitSnapshot.Target.INSPECTOR, InspectorUnitSnapshot.Target.EXPIRY)) {
-      assertFalse(snapshot(target, Map.of("RemainAfterExit", "no")).heldMaintenance());
+      assertFalse(
+          snapshot(target, Map.of(FIXTURE_REMAINAFTEREXIT_A99477E7, "no")).heldMaintenance());
     }
   }
 
@@ -80,24 +108,36 @@ final class InspectorHeldStateContractTest {
   void snapshot911003BrokerNormalTermRequiresCompleteOldStopProfile() {
     for (var terminal :
         List.of(
-            Map.of("ActiveState", "inactive", "SubState", "dead", "Result", "success"),
-            Map.of("ActiveState", "failed", "SubState", "failed", "Result", "exit-code"))) {
+            Map.of(
+                FIXTURE_ACTIVESTATE_8ACAC4AA,
+                FIXTURE_INACTIVE_A5714161,
+                FIXTURE_SUBSTATE_39662EFC,
+                FIXTURE_DEAD_0453462F,
+                FIXTURE_RESULT_37D8A404,
+                FIXTURE_SUCCESS_68E7A699),
+            Map.of(
+                FIXTURE_ACTIVESTATE_8ACAC4AA,
+                FIXTURE_FAILED_33D04BD7,
+                FIXTURE_SUBSTATE_39662EFC,
+                FIXTURE_FAILED_33D04BD7,
+                FIXTURE_RESULT_37D8A404,
+                FIXTURE_EXIT_CODE_BC9E614D))) {
       var input = new TreeMap<>(terminal);
-      input.put("ExecMainStatus", "143");
+      input.put(FIXTURE_EXECMAINSTATUS_179A8E0B, "143");
       assertTrue(snapshot(InspectorUnitSnapshot.Target.ARTEMIS, input).brokerStoppedNormally());
       for (var change :
           List.of(
-              Map.of("MainPID", "17"),
-              Map.of("ControlPID", "18"),
-              Map.of("Job", "7"),
-              Map.of("InvocationID", ""),
-              Map.of("ExecMainCode", "2"),
-              Map.of("ExecMainStatus", "0"),
-              Map.of("ExecMainStartTimestampMonotonic", "0"),
-              Map.of("ExecMainExitTimestampMonotonic", "99"),
-              Map.of("Result", "timeout"),
-              Map.of("SubState", "running"),
-              Map.of("ActiveState", "activating"))) {
+              Map.of(FIXTURE_MAINPID_D7C01CF7, "17"),
+              Map.of(FIXTURE_CONTROLPID_32D1DE3E, "18"),
+              Map.of(FIXTURE_JOB_F32F4C4D, "7"),
+              Map.of(FIXTURE_INVOCATIONID_0F13ED0E, ""),
+              Map.of(FIXTURE_EXECMAINCODE_02C974D2, "2"),
+              Map.of(FIXTURE_EXECMAINSTATUS_179A8E0B, "0"),
+              Map.of(FIXTURE_EXECMAINSTARTTIMESTAMPMONOTONIC_1FB48E62, "0"),
+              Map.of(FIXTURE_EXECMAINEXITTIMESTAMPMONOTONIC_C1411C27, "99"),
+              Map.of(FIXTURE_RESULT_37D8A404, FIXTURE_TIMEOUT_492BD020),
+              Map.of(FIXTURE_SUBSTATE_39662EFC, FIXTURE_RUNNING_79D116A0),
+              Map.of(FIXTURE_ACTIVESTATE_8ACAC4AA, "activating"))) {
         var bad = new TreeMap<>(input);
         bad.putAll(change);
         assertFalse(
@@ -106,27 +146,54 @@ final class InspectorHeldStateContractTest {
       }
     }
     assertFalse(
-        snapshot(InspectorUnitSnapshot.Target.CLEANUP, Map.of("ExecMainStatus", "143"))
+        snapshot(
+                InspectorUnitSnapshot.Target.CLEANUP,
+                Map.of(FIXTURE_EXECMAINSTATUS_179A8E0B, "143"))
             .brokerStoppedNormally());
   }
 
   @Test
   void snapshot911004InactiveInspectorNeedsRemainYesAndNoOutstandingProcess() {
-    var idle = Map.of("ActiveState", "inactive", "SubState", "dead");
+    var idle =
+        Map.of(
+            FIXTURE_ACTIVESTATE_8ACAC4AA,
+            FIXTURE_INACTIVE_A5714161,
+            FIXTURE_SUBSTATE_39662EFC,
+            FIXTURE_DEAD_0453462F);
     for (var target : NAMES.keySet()) {
       assertTrue(snapshot(target, idle).inactiveBaseline(), target.name());
       assertFalse(snapshot(target, Map.of()).inactiveBaseline());
       assertFalse(
-          snapshot(target, Map.of("ActiveState", "inactive", "SubState", "running"))
+          snapshot(
+                  target,
+                  Map.of(
+                      FIXTURE_ACTIVESTATE_8ACAC4AA,
+                      FIXTURE_INACTIVE_A5714161,
+                      FIXTURE_SUBSTATE_39662EFC,
+                      FIXTURE_RUNNING_79D116A0))
               .inactiveBaseline());
       assertFalse(
-          snapshot(target, Map.of("ActiveState", "inactive", "SubState", "dead", "Job", "1"))
+          snapshot(
+                  target,
+                  Map.of(
+                      FIXTURE_ACTIVESTATE_8ACAC4AA,
+                      FIXTURE_INACTIVE_A5714161,
+                      FIXTURE_SUBSTATE_39662EFC,
+                      FIXTURE_DEAD_0453462F,
+                      FIXTURE_JOB_F32F4C4D,
+                      "1"))
               .inactiveBaseline());
     }
     assertFalse(
         snapshot(
                 InspectorUnitSnapshot.Target.INSPECTOR,
-                Map.of("ActiveState", "inactive", "SubState", "dead", "RemainAfterExit", "no"))
+                Map.of(
+                    FIXTURE_ACTIVESTATE_8ACAC4AA,
+                    FIXTURE_INACTIVE_A5714161,
+                    FIXTURE_SUBSTATE_39662EFC,
+                    FIXTURE_DEAD_0453462F,
+                    FIXTURE_REMAINAFTEREXIT_A99477E7,
+                    "no"))
             .inactiveBaseline());
   }
 
@@ -138,13 +205,13 @@ final class InspectorHeldStateContractTest {
         snapshot(target, Map.of()).backupTerminalAfter(Optional.empty()));
     var failure =
         Map.of(
-            "ActiveState",
-            "failed",
-            "SubState",
-            "failed",
-            "Result",
-            "exit-code",
-            "ExecMainStatus",
+            FIXTURE_ACTIVESTATE_8ACAC4AA,
+            FIXTURE_FAILED_33D04BD7,
+            FIXTURE_SUBSTATE_39662EFC,
+            FIXTURE_FAILED_33D04BD7,
+            FIXTURE_RESULT_37D8A404,
+            FIXTURE_EXIT_CODE_BC9E614D,
+            FIXTURE_EXECMAINSTATUS_179A8E0B,
             "70");
     assertEquals(
         Optional.of(MorningBackupUnitCycle.Outcome.FAILED),
@@ -152,16 +219,20 @@ final class InspectorHeldStateContractTest {
     assertTrue(snapshot(target, failure).backupTerminalAfter(Optional.of(SAME)).isEmpty());
     for (var change :
         List.of(
-            Map.of("ExecMainStartTimestampMonotonic", "0"),
-            Map.of("ExecMainExitTimestampMonotonic", "99"),
-            Map.of("MainPID", "17"),
-            Map.of("ControlPID", "18"),
-            Map.of("Job", "7"),
-            Map.of("InvocationID", ""),
-            Map.of("ExecMainCode", "2"),
-            Map.of("ExecMainStatus", "0"),
-            Map.of("ActiveState", "inactive", "SubState", "dead"),
-            Map.of("Result", "timeout"))) {
+            Map.of(FIXTURE_EXECMAINSTARTTIMESTAMPMONOTONIC_1FB48E62, "0"),
+            Map.of(FIXTURE_EXECMAINEXITTIMESTAMPMONOTONIC_C1411C27, "99"),
+            Map.of(FIXTURE_MAINPID_D7C01CF7, "17"),
+            Map.of(FIXTURE_CONTROLPID_32D1DE3E, "18"),
+            Map.of(FIXTURE_JOB_F32F4C4D, "7"),
+            Map.of(FIXTURE_INVOCATIONID_0F13ED0E, ""),
+            Map.of(FIXTURE_EXECMAINCODE_02C974D2, "2"),
+            Map.of(FIXTURE_EXECMAINSTATUS_179A8E0B, "0"),
+            Map.of(
+                FIXTURE_ACTIVESTATE_8ACAC4AA,
+                FIXTURE_INACTIVE_A5714161,
+                FIXTURE_SUBSTATE_39662EFC,
+                FIXTURE_DEAD_0453462F),
+            Map.of(FIXTURE_RESULT_37D8A404, FIXTURE_TIMEOUT_492BD020))) {
       var bad = new TreeMap<>(failure);
       bad.putAll(change);
       assertTrue(
@@ -175,13 +246,13 @@ final class InspectorHeldStateContractTest {
         List.of(InspectorUnitSnapshot.Target.CLEANUP, InspectorUnitSnapshot.Target.EXPIRY)) {
       var failure =
           Map.of(
-              "ActiveState",
-              "failed",
-              "SubState",
-              "failed",
-              "Result",
-              "exit-code",
-              "ExecMainStatus",
+              FIXTURE_ACTIVESTATE_8ACAC4AA,
+              FIXTURE_FAILED_33D04BD7,
+              FIXTURE_SUBSTATE_39662EFC,
+              FIXTURE_FAILED_33D04BD7,
+              FIXTURE_RESULT_37D8A404,
+              FIXTURE_EXIT_CODE_BC9E614D,
+              FIXTURE_EXECMAINSTATUS_179A8E0B,
               "30");
       var observed = snapshot(target, failure);
       assertEquals(
@@ -194,22 +265,22 @@ final class InspectorHeldStateContractTest {
       assertFalse(observed.expiryRejectedAfter(Optional.of(SAME)));
       if (target == InspectorUnitSnapshot.Target.EXPIRY) {
         var noRemain = new TreeMap<>(failure);
-        noRemain.put("RemainAfterExit", "no");
+        noRemain.put(FIXTURE_REMAINAFTEREXIT_A99477E7, "no");
         var observedNoRemain = snapshot(target, noRemain);
         assertTrue(observedNoRemain.quiescent());
         assertFalse(observedNoRemain.expiryRejectedAfter(Optional.empty()));
       }
       for (var change :
           List.of(
-              Map.of("Job", "7"),
-              Map.of("MainPID", "17"),
-              Map.of("ControlPID", "18"),
-              Map.of("InvocationID", ""),
-              Map.of("ExecMainCode", "2"),
-              Map.of("ExecMainStatus", "70"),
-              Map.of("Result", "timeout"),
-              Map.of("ExecMainStartTimestampMonotonic", "0"),
-              Map.of("ExecMainExitTimestampMonotonic", "99"))) {
+              Map.of(FIXTURE_JOB_F32F4C4D, "7"),
+              Map.of(FIXTURE_MAINPID_D7C01CF7, "17"),
+              Map.of(FIXTURE_CONTROLPID_32D1DE3E, "18"),
+              Map.of(FIXTURE_INVOCATIONID_0F13ED0E, ""),
+              Map.of(FIXTURE_EXECMAINCODE_02C974D2, "2"),
+              Map.of(FIXTURE_EXECMAINSTATUS_179A8E0B, "70"),
+              Map.of(FIXTURE_RESULT_37D8A404, FIXTURE_TIMEOUT_492BD020),
+              Map.of(FIXTURE_EXECMAINSTARTTIMESTAMPMONOTONIC_1FB48E62, "0"),
+              Map.of(FIXTURE_EXECMAINEXITTIMESTAMPMONOTONIC_C1411C27, "99"))) {
         var bad = new TreeMap<>(failure);
         bad.putAll(change);
         assertFalse(snapshot(target, bad).cleanupRejectedAfter(Optional.empty()));
@@ -220,36 +291,64 @@ final class InspectorHeldStateContractTest {
         snapshot(
             InspectorUnitSnapshot.Target.ARTEMIS,
             Map.of(
-                "ActiveState", "active",
-                "SubState", "running",
-                "MainPID", "17",
-                "ExecMainCode", "0",
-                "ExecMainExitTimestampMonotonic", "0"));
+                FIXTURE_ACTIVESTATE_8ACAC4AA, FIXTURE_ACTIVE_DB0FB2BF,
+                FIXTURE_SUBSTATE_39662EFC, FIXTURE_RUNNING_79D116A0,
+                FIXTURE_MAINPID_D7C01CF7, "17",
+                FIXTURE_EXECMAINCODE_02C974D2, "0",
+                FIXTURE_EXECMAINEXITTIMESTAMPMONOTONIC_C1411C27, "0"));
     assertTrue(broker.running(17, INV));
     assertFalse(broker.running(18, INV));
     assertFalse(broker.running(17, "22222222222222222222222222222222"));
     assertFalse(
         snapshot(
                 InspectorUnitSnapshot.Target.ARTEMIS,
-                Map.of("ActiveState", "active", "SubState", "running", "MainPID", "17"))
+                Map.of(
+                    FIXTURE_ACTIVESTATE_8ACAC4AA,
+                    FIXTURE_ACTIVE_DB0FB2BF,
+                    FIXTURE_SUBSTATE_39662EFC,
+                    FIXTURE_RUNNING_79D116A0,
+                    FIXTURE_MAINPID_D7C01CF7,
+                    "17"))
             .running(17, INV),
         "A completed-execution default is not a live daemon; SS341 SSC125 start>0/end0");
   }
 
   @Test
   void snapshot911007IndependentStatePartitionPreservesAllTerminalPredicates() {
-    for (String active : List.of("inactive", "active", "failed", "unknown-state")) {
-      for (String sub : List.of("dead", "exited", "failed", "running", "unknown-substate")) {
-        for (String result : List.of("success", "exit-code", "unknown-result")) {
+    for (String active :
+        List.of(
+            FIXTURE_INACTIVE_A5714161,
+            FIXTURE_ACTIVE_DB0FB2BF,
+            FIXTURE_FAILED_33D04BD7,
+            "unknown-state")) {
+      for (String sub :
+          List.of(
+              FIXTURE_DEAD_0453462F,
+              FIXTURE_EXITED_3D0FE3B1,
+              FIXTURE_FAILED_33D04BD7,
+              FIXTURE_RUNNING_79D116A0,
+              "unknown-substate")) {
+        for (String result :
+            List.of(FIXTURE_SUCCESS_68E7A699, FIXTURE_EXIT_CODE_BC9E614D, "unknown-result")) {
           boolean stopped =
-              (active.equals("inactive") && sub.equals("dead"))
-                  || (active.equals("active") && sub.equals("exited"))
-                  || (active.equals("failed") && sub.equals("failed"));
+              (active.equals(FIXTURE_INACTIVE_A5714161) && sub.equals(FIXTURE_DEAD_0453462F))
+                  || (active.equals(FIXTURE_ACTIVE_DB0FB2BF) && sub.equals(FIXTURE_EXITED_3D0FE3B1))
+                  || (active.equals(FIXTURE_FAILED_33D04BD7)
+                      && sub.equals(FIXTURE_FAILED_33D04BD7));
           boolean failed =
-              active.equals("failed") && sub.equals("failed") && result.equals("exit-code");
-          var fields = Map.of("ActiveState", active, "SubState", sub, "Result", result);
+              active.equals(FIXTURE_FAILED_33D04BD7)
+                  && sub.equals(FIXTURE_FAILED_33D04BD7)
+                  && result.equals(FIXTURE_EXIT_CODE_BC9E614D);
+          var fields =
+              Map.of(
+                  FIXTURE_ACTIVESTATE_8ACAC4AA,
+                  active,
+                  FIXTURE_SUBSTATE_39662EFC,
+                  sub,
+                  FIXTURE_RESULT_37D8A404,
+                  result);
           var backupFields = new TreeMap<>(fields);
-          backupFields.put("ExecMainStatus", "70");
+          backupFields.put(FIXTURE_EXECMAINSTATUS_179A8E0B, "70");
           var backup = snapshot(InspectorUnitSnapshot.Target.BACKUP, backupFields);
           assertEquals(stopped, backup.quiescent(), fields.toString());
           assertEquals(
@@ -257,7 +356,7 @@ final class InspectorHeldStateContractTest {
               backup.backupTerminalAfter(Optional.empty()),
               fields.toString());
           var rejectionFields = new TreeMap<>(fields);
-          rejectionFields.put("ExecMainStatus", "30");
+          rejectionFields.put(FIXTURE_EXECMAINSTATUS_179A8E0B, "30");
           assertEquals(
               failed,
               snapshot(InspectorUnitSnapshot.Target.CLEANUP, rejectionFields)
@@ -269,10 +368,12 @@ final class InspectorHeldStateContractTest {
                   .expiryRejectedAfter(Optional.empty()),
               fields.toString());
           var brokerFields = new TreeMap<>(fields);
-          brokerFields.put("ExecMainStatus", "143");
+          brokerFields.put(FIXTURE_EXECMAINSTATUS_179A8E0B, "143");
           assertEquals(
               failed
-                  || (active.equals("inactive") && sub.equals("dead") && result.equals("success")),
+                  || (active.equals(FIXTURE_INACTIVE_A5714161)
+                      && sub.equals(FIXTURE_DEAD_0453462F)
+                      && result.equals(FIXTURE_SUCCESS_68E7A699)),
               snapshot(InspectorUnitSnapshot.Target.ARTEMIS, brokerFields).brokerStoppedNormally(),
               fields.toString());
         }
@@ -282,18 +383,27 @@ final class InspectorHeldStateContractTest {
 
   @Test
   void snapshot911008StoppedGenerationRequiresAllFiveOriginalExecutionValues() {
-    var stopped = Map.of("ActiveState", "inactive", "SubState", "dead");
+    var stopped =
+        Map.of(
+            FIXTURE_ACTIVESTATE_8ACAC4AA,
+            FIXTURE_INACTIVE_A5714161,
+            FIXTURE_SUBSTATE_39662EFC,
+            FIXTURE_DEAD_0453462F);
     var before = snapshot(InspectorUnitSnapshot.Target.MORNING, stopped);
     assertTrue(before.sameStoppedExecution(before));
     for (var change :
         List.of(
-            Map.of("InvocationID", "22222222222222222222222222222222"),
-            Map.of("ExecMainStatus", "30"),
-            Map.of("ExecMainStartTimestampMonotonic", "101"),
-            Map.of("ExecMainExitTimestampMonotonic", "201"),
-            Map.of("ExecMainCode", "2"),
-            Map.of("Result", "timeout"),
-            Map.of("ActiveState", "active", "SubState", "exited"))) {
+            Map.of(FIXTURE_INVOCATIONID_0F13ED0E, "22222222222222222222222222222222"),
+            Map.of(FIXTURE_EXECMAINSTATUS_179A8E0B, "30"),
+            Map.of(FIXTURE_EXECMAINSTARTTIMESTAMPMONOTONIC_1FB48E62, "101"),
+            Map.of(FIXTURE_EXECMAINEXITTIMESTAMPMONOTONIC_C1411C27, "201"),
+            Map.of(FIXTURE_EXECMAINCODE_02C974D2, "2"),
+            Map.of(FIXTURE_RESULT_37D8A404, FIXTURE_TIMEOUT_492BD020),
+            Map.of(
+                FIXTURE_ACTIVESTATE_8ACAC4AA,
+                FIXTURE_ACTIVE_DB0FB2BF,
+                FIXTURE_SUBSTATE_39662EFC,
+                FIXTURE_EXITED_3D0FE3B1))) {
       var fields = new TreeMap<>(stopped);
       fields.putAll(change);
       assertFalse(
@@ -321,7 +431,8 @@ final class InspectorHeldStateContractTest {
                     : OptionalInt.empty();
         assertEquals(
             expected,
-            snapshot(target, Map.of("ExecMainStatus", status)).receiptAfter(Optional.empty()),
+            snapshot(target, Map.of(FIXTURE_EXECMAINSTATUS_179A8E0B, status))
+                .receiptAfter(Optional.empty()),
             target + "/" + status);
       }
     }
@@ -347,20 +458,20 @@ final class InspectorHeldStateContractTest {
             Map.ofEntries(
                 Map.entry("Id", NAMES.get(target)),
                 Map.entry("LoadState", "loaded"),
-                Map.entry("ActiveState", "active"),
-                Map.entry("SubState", "exited"),
-                Map.entry("Job", ""),
-                Map.entry("MainPID", "0"),
-                Map.entry("ControlPID", "0"),
-                Map.entry("InvocationID", INV),
-                Map.entry("ExecMainCode", "1"),
-                Map.entry("ExecMainStatus", "0"),
-                Map.entry("ExecMainStartTimestampMonotonic", "100"),
-                Map.entry("ExecMainExitTimestampMonotonic", "200"),
-                Map.entry("Result", "success"),
+                Map.entry(FIXTURE_ACTIVESTATE_8ACAC4AA, FIXTURE_ACTIVE_DB0FB2BF),
+                Map.entry(FIXTURE_SUBSTATE_39662EFC, FIXTURE_EXITED_3D0FE3B1),
+                Map.entry(FIXTURE_JOB_F32F4C4D, ""),
+                Map.entry(FIXTURE_MAINPID_D7C01CF7, "0"),
+                Map.entry(FIXTURE_CONTROLPID_32D1DE3E, "0"),
+                Map.entry(FIXTURE_INVOCATIONID_0F13ED0E, INV),
+                Map.entry(FIXTURE_EXECMAINCODE_02C974D2, "1"),
+                Map.entry(FIXTURE_EXECMAINSTATUS_179A8E0B, "0"),
+                Map.entry(FIXTURE_EXECMAINSTARTTIMESTAMPMONOTONIC_1FB48E62, "100"),
+                Map.entry(FIXTURE_EXECMAINEXITTIMESTAMPMONOTONIC_C1411C27, "200"),
+                Map.entry(FIXTURE_RESULT_37D8A404, FIXTURE_SUCCESS_68E7A699),
                 Map.entry("Type", simple ? "simple" : "oneshot"),
                 Map.entry("Restart", simple ? "on-failure" : "no"),
-                Map.entry("RemainAfterExit", remain ? "yes" : "no"),
+                Map.entry(FIXTURE_REMAINAFTEREXIT_A99477E7, remain ? "yes" : "no"),
                 Map.entry("KillMode", "control-group"),
                 Map.entry("SendSIGKILL", "no")));
     fields.putAll(changes);

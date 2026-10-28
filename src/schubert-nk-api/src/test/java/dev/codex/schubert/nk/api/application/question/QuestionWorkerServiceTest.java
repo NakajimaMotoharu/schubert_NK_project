@@ -68,6 +68,20 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** AWORK001..006: real PG18 and JMS, independently literal QWK/SQL; not Linux IT/ST. */
 class QuestionWorkerServiceTest {
+  private static final String FIXTURE_VM_0_0C76084A = "vm://0";
+  private static final String FIXTURE_PUBLIC_FIXTURE_2BAE0C98 = "Public fixture";
+  private static final String FIXTURE_PRIVATE_PROVIDER_9ABB4509 = "private-provider";
+  private static final String FIXTURE_PROCESSING_01F94682 = "PROCESSING";
+  private static final String FIXTURE_SELECT_STATE_FROM_SCHUBERT_ASYNC_JOBS_E6C43F91 =
+      "select state from schubert.async_jobs";
+  private static final String FIXTURE_COMPLETED_BA0AE16A = "COMPLETED";
+  private static final String FIXTURE_ERROR_F717E7D8 = "ERROR";
+  private static final String FIXTURE_DATA_INTEGRITY_9097EAE7 = "DATA_INTEGRITY";
+  private static final String FIXTURE_SELECT_ERROR_CODE_FROM_SCHUBERT_NOTIFICA_8E9CC4F3 =
+      "select error_code from schubert.notifications";
+  private static final String FIXTURE_RECEIVED_35302D54 = "RECEIVED";
+  private static final String FIXTURE_JMSXDELIVERYCOUNT_90AF07ED = "JMSXDeliveryCount";
+  private static final String FIXTURE_PENDING_B11DB31F = "PENDING";
   @TempDir static Path databaseRoot;
   static ApiLogDatabaseFixture database;
   static final UUID W = new UUID(700, 1);
@@ -88,7 +102,7 @@ class QuestionWorkerServiceTest {
       throws Exception {
     var broker = broker(brokerRoot);
     try (var h = new Fixture(database);
-        var factory = new ActiveMQConnectionFactory("vm://0")) {
+        var factory = new ActiveMQConnectionFactory(FIXTURE_VM_0_0C76084A)) {
       factory.setConsumerWindowSize(0);
       try (var receiving = factory.createContext(JMSContext.SESSION_TRANSACTED);
           var consumer =
@@ -97,7 +111,7 @@ class QuestionWorkerServiceTest {
         h.signal = owned::wake;
         assertArrayEquals(
             response(M0, new UUID(700, 3), "0000", RECEIPT, 1, NOW),
-            h.service.process(request("Public fixture", M0, TOKEN, NOW, CONTEXT)));
+            h.service.process(request(FIXTURE_PUBLIC_FIXTURE_2BAE0C98, M0, TOKEN, NOW, CONTEXT)));
         BytesMessage incoming = (BytesMessage) consumer.receive(2000);
         assertNotNull(incoming);
         var body = new byte[(int) incoming.getBodyLength()];
@@ -110,7 +124,7 @@ class QuestionWorkerServiceTest {
                 h.source,
                 text -> {
                   assertEquals(0, h.live.get());
-                  assertEquals("Public fixture", text);
+                  assertEquals(FIXTURE_PUBLIC_FIXTURE_2BAE0C98, text);
                   calls.incrementAndGet();
                   return new StubAnswerProvider(h.clock).answer(text);
                 },
@@ -154,7 +168,7 @@ class QuestionWorkerServiceTest {
         assertNull(consumer.receiveNoWait());
         assertArrayEquals(
             response(M0, new UUID(700, 4), "0200", RECEIPT, 1, NOW),
-            h.service.process(request("Public fixture", M0, TOKEN, NOW, CONTEXT)));
+            h.service.process(request(FIXTURE_PUBLIC_FIXTURE_2BAE0C98, M0, TOKEN, NOW, CONTEXT)));
       }
     } finally {
       broker.stop();
@@ -170,12 +184,14 @@ class QuestionWorkerServiceTest {
               h,
               text -> {
                 calls.incrementAndGet();
-                throw new IllegalStateException("private-provider");
+                throw new IllegalStateException(FIXTURE_PRIVATE_PROVIDER_9ABB4509);
               },
               () -> false);
       assertThrows(
           TemporaryInfrastructureException.class, () -> worker.process(event(), delivery(1)));
-      assertEquals("PROCESSING", h.text("select state from schubert.async_jobs"));
+      assertEquals(
+          FIXTURE_PROCESSING_01F94682,
+          h.text(FIXTURE_SELECT_STATE_FROM_SCHUBERT_ASYNC_JOBS_E6C43F91));
       assertEquals(0, h.scalar("select retry_count from schubert.async_jobs"));
       assertThrows(
           TemporaryInfrastructureException.class, () -> worker.process(event(), delivery(3)));
@@ -186,7 +202,9 @@ class QuestionWorkerServiceTest {
           h.scalar(
               "select count(*) from schubert.app_logs where action='QUESTION_PROCESSING_STARTED'"));
       worker(h, text -> new AnswerResult("", NOW), () -> false).process(event(), delivery(4));
-      assertEquals("COMPLETED", h.text("select state from schubert.async_jobs"));
+      assertEquals(
+          FIXTURE_COMPLETED_BA0AE16A,
+          h.text(FIXTURE_SELECT_STATE_FROM_SCHUBERT_ASYNC_JOBS_E6C43F91));
       assertEquals(3, h.scalar("select retry_count from schubert.async_jobs"));
     }
     try (var h = accepted()) {
@@ -201,7 +219,7 @@ class QuestionWorkerServiceTest {
               () -> false)
           .process(event(), delivery(1));
       assertEquals(0, h.scalar("select count(*) from schubert.answers"));
-      assertEquals("CANCELLED", h.text("select state from schubert.async_jobs"));
+      assertEquals("CANCELLED", h.text(FIXTURE_SELECT_STATE_FROM_SCHUBERT_ASYNC_JOBS_E6C43F91));
       var wrong = event(new UUID(700, 99));
       assertThrows(
           PermanentProtocolException.class,
@@ -237,8 +255,11 @@ class QuestionWorkerServiceTest {
       h.sql(
           "insert into schubert.answers(question_id,body,answered_at,provider_type,created_at,updated_at) values(1,'Conflicting fixture','2026-10-01T00:00:00.123456Z','STUB','2026-10-01T00:00:00.123456Z','2026-10-01T00:00:00.123456Z')");
       worker(h, text -> new AnswerResult("", NOW), () -> false).process(event(), delivery(1));
-      assertEquals("ERROR", h.text("select state from schubert.async_jobs"));
-      assertEquals("DATA_INTEGRITY", h.text("select error_code from schubert.notifications"));
+      assertEquals(
+          FIXTURE_ERROR_F717E7D8, h.text(FIXTURE_SELECT_STATE_FROM_SCHUBERT_ASYNC_JOBS_E6C43F91));
+      assertEquals(
+          FIXTURE_DATA_INTEGRITY_9097EAE7,
+          h.text(FIXTURE_SELECT_ERROR_CODE_FROM_SCHUBERT_NOTIFICA_8E9CC4F3));
       assertEquals("Conflicting fixture", h.text("select body from schubert.answers"));
       worker(
               h,
@@ -257,7 +278,7 @@ class QuestionWorkerServiceTest {
       throws Exception {
     var broker = broker(brokerRoot);
     try (var h = accepted();
-        var factory = new ActiveMQConnectionFactory("vm://0")) {
+        var factory = new ActiveMQConnectionFactory(FIXTURE_VM_0_0C76084A)) {
       factory.setConsumerWindowSize(0);
       String original =
           h.text("select md5(body)||':'||status||':'||sent_at::text from schubert.mq_outbox");
@@ -273,7 +294,7 @@ class QuestionWorkerServiceTest {
               h,
               text -> {
                 calls.incrementAndGet();
-                throw new IllegalStateException("private-provider");
+                throw new IllegalStateException(FIXTURE_PRIVATE_PROVIDER_9ABB4509);
               },
               stop::get);
       assertThrows(
@@ -332,7 +353,8 @@ class QuestionWorkerServiceTest {
               },
               () -> false);
       worker.process(event(), delivery(1));
-      assertEquals("PROCESS_FAILED", h.text("select error_code from schubert.notifications"));
+      assertEquals(
+          "PROCESS_FAILED", h.text(FIXTURE_SELECT_ERROR_CODE_FROM_SCHUBERT_NOTIFICA_8E9CC4F3));
       assertEquals(1, h.scalar("select count(*) from schubert.mq_outbox"));
       worker.process(event(), delivery(2));
       assertThrows(TemporaryInfrastructureException.class, () -> worker.process(event()));
@@ -354,14 +376,18 @@ class QuestionWorkerServiceTest {
             () ->
                 worker(h, text -> new AnswerResult("", NOW), () -> false)
                     .process(event(), delivery(1)));
-        assertEquals("RECEIVED", h.text("select state from schubert.async_jobs"));
+        assertEquals(
+            FIXTURE_RECEIVED_35302D54,
+            h.text(FIXTURE_SELECT_STATE_FROM_SCHUBERT_ASYNC_JOBS_E6C43F91));
         assertEquals(0, h.scalar("select count(*) from schubert.answers"));
       }
     }
     for (String body : List.of("x".repeat(4097), "\ud800")) {
       try (var h = accepted()) {
         worker(h, text -> new AnswerResult(body, NOW), () -> false).process(event(), delivery(1));
-        assertEquals("DATA_INTEGRITY", h.text("select error_code from schubert.notifications"));
+        assertEquals(
+            FIXTURE_DATA_INTEGRITY_9097EAE7,
+            h.text(FIXTURE_SELECT_ERROR_CODE_FROM_SCHUBERT_NOTIFICA_8E9CC4F3));
         assertEquals(0, h.scalar("select count(*) from schubert.answers"));
       }
     }
@@ -373,13 +399,13 @@ class QuestionWorkerServiceTest {
     for (boolean afterSent : List.of(false, true)) {
       var broker = broker(root.resolve(afterSent ? "after-sent" : "before-send"));
       try (var h = new Fixture(database);
-          var factory = new ActiveMQConnectionFactory("vm://0")) {
+          var factory = new ActiveMQConnectionFactory(FIXTURE_VM_0_0C76084A)) {
         factory.setConsumerWindowSize(0);
         try (var owned = owned(factory, h.clock)) {
           h.signal = owned::wake;
           assertArrayEquals(
               response(M0, new UUID(700, 3), "0000", RECEIPT, 1, NOW),
-              h.service.process(request("Public fixture", M0, TOKEN, NOW, CONTEXT)));
+              h.service.process(request(FIXTURE_PUBLIC_FIXTURE_2BAE0C98, M0, TOKEN, NOW, CONTEXT)));
         }
         String original =
             h.text("select md5(body)||':'||status||':'||sent_at::text from schubert.mq_outbox");
@@ -391,7 +417,7 @@ class QuestionWorkerServiceTest {
                 text -> {
                   assertEquals(0, h.live.get());
                   calls.incrementAndGet();
-                  throw new IllegalStateException("private-provider");
+                  throw new IllegalStateException(FIXTURE_PRIVATE_PROVIDER_9ABB4509);
                 },
                 stop::get);
         var listener = new QuestionWorkListener(worker, h.clock);
@@ -402,14 +428,14 @@ class QuestionWorkerServiceTest {
           for (int attempt = 1; attempt <= 3; attempt++) {
             var incoming = consumer.receive(timeouts[attempt - 1]);
             assertNotNull(incoming);
-            assertEquals(attempt, incoming.getIntProperty("JMSXDeliveryCount"));
+            assertEquals(attempt, incoming.getIntProperty(FIXTURE_JMSXDELIVERYCOUNT_90AF07ED));
             assertThrows(
                 TemporaryInfrastructureException.class,
                 () -> listener.onMessage(receiving, incoming));
           }
           var incoming = consumer.receive(timeouts[3]);
           assertNotNull(incoming);
-          assertEquals(4, incoming.getIntProperty("JMSXDeliveryCount"));
+          assertEquals(4, incoming.getIntProperty(FIXTURE_JMSXDELIVERYCOUNT_90AF07ED));
           if (afterSent) {
             try (var owned = owned(factory, h.clock)) {
               h.signal = owned::wake;
@@ -439,7 +465,7 @@ class QuestionWorkerServiceTest {
                 TemporaryInfrastructureException.class,
                 () -> listener.onMessage(receiving, incoming));
             assertEquals(
-                "PENDING",
+                FIXTURE_PENDING_B11DB31F,
                 h.text("select status from schubert.mq_outbox where destination='nk.dead.letter'"));
           }
           assertNull(consumer.receive(500));
@@ -523,9 +549,10 @@ class QuestionWorkerServiceTest {
           assertThrows(ExecutionException.class, () -> pending.get(3, TimeUnit.SECONDS))
               .getCause());
       assertEquals(0, h.live.get());
-      assertEquals("ERROR", h.text("select state from schubert.async_jobs"));
       assertEquals(
-          "PENDING",
+          FIXTURE_ERROR_F717E7D8, h.text(FIXTURE_SELECT_STATE_FROM_SCHUBERT_ASYNC_JOBS_E6C43F91));
+      assertEquals(
+          FIXTURE_PENDING_B11DB31F,
           h.text("select status from schubert.mq_outbox where destination='nk.dead.letter'"));
     }
     try (var h = accepted()) {
@@ -539,11 +566,15 @@ class QuestionWorkerServiceTest {
       } finally {
         assertTrue(Thread.interrupted());
       }
-      assertEquals("RECEIVED", h.text("select state from schubert.async_jobs"));
+      assertEquals(
+          FIXTURE_RECEIVED_35302D54,
+          h.text(FIXTURE_SELECT_STATE_FROM_SCHUBERT_ASYNC_JOBS_E6C43F91));
       h.sql(
           "insert into schubert.answers(question_id,body,answered_at,provider_type,created_at,updated_at) values(1,'','2026-10-01T00:00:00.123456Z','STUB','2026-10-01T00:00:00.123456Z','2026-10-01T00:00:00.123456Z')");
       worker(h, text -> new AnswerResult("", NOW), () -> false).process(event(), delivery(1));
-      assertEquals("COMPLETED", h.text("select state from schubert.async_jobs"));
+      assertEquals(
+          FIXTURE_COMPLETED_BA0AE16A,
+          h.text(FIXTURE_SELECT_STATE_FROM_SCHUBERT_ASYNC_JOBS_E6C43F91));
       assertEquals(1, h.scalar("select count(*) from schubert.answers"));
     }
     try (var h = accepted()) {
@@ -575,7 +606,8 @@ class QuestionWorkerServiceTest {
               },
               () -> false)
           .process(event(), delivery(4));
-      assertEquals("PROCESS_FAILED", h.text("select error_code from schubert.notifications"));
+      assertEquals(
+          "PROCESS_FAILED", h.text(FIXTURE_SELECT_ERROR_CODE_FROM_SCHUBERT_NOTIFICA_8E9CC4F3));
       assertEquals(1, h.scalar("select count(*) from schubert.mq_outbox"));
     }
   }
@@ -585,11 +617,11 @@ class QuestionWorkerServiceTest {
       throws Exception {
     var broker = broker(root);
     try (var h = new Fixture(database);
-        var factory = new ActiveMQConnectionFactory("vm://0")) {
+        var factory = new ActiveMQConnectionFactory(FIXTURE_VM_0_0C76084A)) {
       factory.setConsumerWindowSize(0);
       try (var owned = owned(factory, h.clock)) {
         h.signal = owned::wake;
-        h.service.process(request("Public fixture", M0, TOKEN, NOW, CONTEXT));
+        h.service.process(request(FIXTURE_PUBLIC_FIXTURE_2BAE0C98, M0, TOKEN, NOW, CONTEXT));
       }
       AtomicBoolean stop = new AtomicBoolean();
       AtomicInteger calls = new AtomicInteger();
@@ -598,7 +630,7 @@ class QuestionWorkerServiceTest {
               h,
               text -> {
                 calls.incrementAndGet();
-                throw new IllegalStateException("private-provider");
+                throw new IllegalStateException(FIXTURE_PRIVATE_PROVIDER_9ABB4509);
               },
               stop::get);
       h.signal = () -> stop.set(true);
@@ -619,7 +651,7 @@ class QuestionWorkerServiceTest {
       assertThrows(
           TemporaryInfrastructureException.class, () -> corrupt.process(event(), delivery(5)));
       assertEquals(
-          "PENDING",
+          FIXTURE_PENDING_B11DB31F,
           h.text("select status from schubert.mq_outbox where destination='nk.dead.letter'"));
       try (var c = database.admin();
           var s = c.createStatement()) {
@@ -633,18 +665,19 @@ class QuestionWorkerServiceTest {
           var dlq = readDlq.createConsumer(new ActiveMQQueue("nk.dead.letter::nk.dead.letter.q"))) {
         var incoming = work.receive(2000);
         assertNotNull(incoming);
-        assertEquals(1, incoming.getIntProperty("JMSXDeliveryCount"));
+        assertEquals(1, incoming.getIntProperty(FIXTURE_JMSXDELIVERYCOUNT_90AF07ED));
         assertThrows(
             TemporaryInfrastructureException.class,
             () -> new QuestionWorkListener(worker, h.clock).onMessage(receiving, incoming));
         var redelivered = work.receive(6000);
         assertNotNull(redelivered);
-        assertEquals(2, redelivered.getIntProperty("JMSXDeliveryCount"));
+        assertEquals(2, redelivered.getIntProperty(FIXTURE_JMSXDELIVERYCOUNT_90AF07ED));
         assertEquals(incoming.getJMSMessageID(), redelivered.getJMSMessageID());
         assertNull(dlq.receiveNoWait());
       }
       assertEquals(1, calls.get());
-      assertEquals("ERROR", h.text("select state from schubert.async_jobs"));
+      assertEquals(
+          FIXTURE_ERROR_F717E7D8, h.text(FIXTURE_SELECT_STATE_FROM_SCHUBERT_ASYNC_JOBS_E6C43F91));
       assertEquals(0, h.scalar("select count(*) from schubert.answers"));
     } finally {
       broker.stop();
@@ -677,7 +710,9 @@ class QuestionWorkerServiceTest {
       assertThrows(
           TemporaryInfrastructureException.class,
           () -> worker(h, text -> null, () -> false).process(event(), delivery(1)));
-      assertEquals("PROCESSING", h.text("select state from schubert.async_jobs"));
+      assertEquals(
+          FIXTURE_PROCESSING_01F94682,
+          h.text(FIXTURE_SELECT_STATE_FROM_SCHUBERT_ASYNC_JOBS_E6C43F91));
       byte[] literal = work(W, M0, RECEIPT, 1, 1, NOW);
       literal[306] = '!';
       var malformed =
@@ -691,7 +726,9 @@ class QuestionWorkerServiceTest {
     for (Instant at : List.of(NOW.minusNanos(1000), Instant.MIN, Instant.MAX)) {
       try (var h = accepted()) {
         worker(h, text -> new AnswerResult("", at), () -> false).process(event(), delivery(1));
-        assertEquals("DATA_INTEGRITY", h.text("select error_code from schubert.notifications"));
+        assertEquals(
+            FIXTURE_DATA_INTEGRITY_9097EAE7,
+            h.text(FIXTURE_SELECT_ERROR_CODE_FROM_SCHUBERT_NOTIFICA_8E9CC4F3));
         assertEquals(0, h.scalar("select count(*) from schubert.answers"));
       }
     }
@@ -718,8 +755,11 @@ class QuestionWorkerServiceTest {
                 () -> false);
         assertThrows(
             TemporaryInfrastructureException.class, () -> worker.process(event(), delivery(1)));
-        assertEquals("PROCESSING", h.text("select state from schubert.async_jobs"));
-        assertEquals("PROCESSING", h.text("select state from schubert.notifications"));
+        assertEquals(
+            FIXTURE_PROCESSING_01F94682,
+            h.text(FIXTURE_SELECT_STATE_FROM_SCHUBERT_ASYNC_JOBS_E6C43F91));
+        assertEquals(
+            FIXTURE_PROCESSING_01F94682, h.text("select state from schubert.notifications"));
         assertEquals(0, h.scalar("select count(*) from schubert.answers"));
         assertEquals(
             0,
@@ -741,7 +781,9 @@ class QuestionWorkerServiceTest {
                 Clock.fixed(value, ZoneOffset.UTC));
         assertThrows(
             TemporaryInfrastructureException.class, () -> worker.process(event(), delivery(1)));
-        assertEquals("RECEIVED", h.text("select state from schubert.async_jobs"));
+        assertEquals(
+            FIXTURE_RECEIVED_35302D54,
+            h.text(FIXTURE_SELECT_STATE_FROM_SCHUBERT_ASYNC_JOBS_E6C43F91));
         assertEquals(0, h.scalar("select count(*) from schubert.answers"));
       }
     }
@@ -775,7 +817,9 @@ class QuestionWorkerServiceTest {
               backwards);
       assertThrows(
           TemporaryInfrastructureException.class, () -> worker.process(event(), delivery(1)));
-      assertEquals("PROCESSING", h.text("select state from schubert.async_jobs"));
+      assertEquals(
+          FIXTURE_PROCESSING_01F94682,
+          h.text(FIXTURE_SELECT_STATE_FROM_SCHUBERT_ASYNC_JOBS_E6C43F91));
       assertEquals(1, h.scalar("select count(*) from schubert.mq_outbox"));
     }
     try (var h = accepted()) {
@@ -786,7 +830,9 @@ class QuestionWorkerServiceTest {
           () ->
               worker(h, text -> new AnswerResult("", NOW), () -> false)
                   .process(event(), delivery(1)));
-      assertEquals("RECEIVED", h.text("select state from schubert.async_jobs"));
+      assertEquals(
+          FIXTURE_RECEIVED_35302D54,
+          h.text(FIXTURE_SELECT_STATE_FROM_SCHUBERT_ASYNC_JOBS_E6C43F91));
     }
     for (String mismatch :
         List.of(
@@ -798,7 +844,9 @@ class QuestionWorkerServiceTest {
             "insert into schubert.answers(question_id,body,answered_at,provider_type,created_at,updated_at) values(1,'','2026-10-01T00:00:00.123456Z','STUB','2026-10-01T00:00:00.123456Z','2026-10-01T00:00:00.123456Z'); update schubert.answers set "
                 + mismatch);
         worker(h, text -> new AnswerResult("", NOW), () -> false).process(event(), delivery(1));
-        assertEquals("DATA_INTEGRITY", h.text("select error_code from schubert.notifications"));
+        assertEquals(
+            FIXTURE_DATA_INTEGRITY_9097EAE7,
+            h.text(FIXTURE_SELECT_ERROR_CODE_FROM_SCHUBERT_NOTIFICA_8E9CC4F3));
         assertEquals(1, h.scalar("select count(*) from schubert.answers"));
       }
     }
@@ -837,7 +885,9 @@ class QuestionWorkerServiceTest {
         assertThrows(
             PermanentProtocolException.class, () -> worker.process(input, delivery(1)), fault);
         assertEquals(0, h.scalar("select count(*) from schubert.answers"));
-        assertNotEquals("COMPLETED", h.text("select state from schubert.async_jobs"));
+        assertNotEquals(
+            FIXTURE_COMPLETED_BA0AE16A,
+            h.text(FIXTURE_SELECT_STATE_FROM_SCHUBERT_ASYNC_JOBS_E6C43F91));
         assertEquals(
             0,
             h.scalar("select count(*) from schubert.app_logs where action='QUESTION_COMPLETED'"));
@@ -870,7 +920,9 @@ class QuestionWorkerServiceTest {
           () ->
               worker(h, text -> new AnswerResult("", NOW), () -> false)
                   .process(event, delivery(1)));
-      assertEquals("RECEIVED", h.text("select state from schubert.async_jobs"));
+      assertEquals(
+          FIXTURE_RECEIVED_35302D54,
+          h.text(FIXTURE_SELECT_STATE_FROM_SCHUBERT_ASYNC_JOBS_E6C43F91));
     }
   }
 
@@ -913,17 +965,18 @@ class QuestionWorkerServiceTest {
         assertEquals(
             1,
             h.scalar("select count(*) from schubert.mq_outbox where destination='nk.dead.letter'"));
-        assertEquals("ERROR", h.text("select state from schubert.async_jobs"));
+        assertEquals(
+            FIXTURE_ERROR_F717E7D8, h.text(FIXTURE_SELECT_STATE_FROM_SCHUBERT_ASYNC_JOBS_E6C43F91));
         assertEquals(0, h.scalar("select count(*) from schubert.answers"));
       }
     }
-    for (String state : List.of("PENDING", "LEASED", "ERROR")) {
+    for (String state : List.of(FIXTURE_PENDING_B11DB31F, "LEASED", FIXTURE_ERROR_F717E7D8)) {
       try (var h = accepted()) {
         finalError(h);
         if (state.equals("LEASED"))
           h.sql(
               "update schubert.mq_outbox set lease_owner='independent',lease_until='2026-10-01T00:00:30Z' where destination='nk.dead.letter'");
-        if (state.equals("ERROR"))
+        if (state.equals(FIXTURE_ERROR_F717E7D8))
           h.sql(
               "update schubert.mq_outbox set status='ERROR',last_error_code='JMS_SEND_FAILURE',last_error_detail='independent synthetic failure' where destination='nk.dead.letter'");
         AtomicInteger checks = new AtomicInteger();
@@ -942,7 +995,7 @@ class QuestionWorkerServiceTest {
         assertThrows(
             TemporaryInfrastructureException.class, () -> worker.process(event(), delivery(5)));
         assertEquals(
-            state.equals("LEASED") ? "PENDING" : state,
+            state.equals("LEASED") ? FIXTURE_PENDING_B11DB31F : state,
             h.text("select status from schubert.mq_outbox where destination='nk.dead.letter'"));
         assertEquals(0, h.live.get());
       }
@@ -973,9 +1026,11 @@ class QuestionWorkerServiceTest {
             h.scalar("select count(*) from schubert.app_logs where action='QUESTION_COMPLETED'"));
         assertEquals(
             fault.equals("completed-extra")
-                ? "COMPLETED"
-                : fault.equals("update-zero") ? "RECEIVED" : "PROCESSING",
-            h.text("select state from schubert.async_jobs"));
+                ? FIXTURE_COMPLETED_BA0AE16A
+                : fault.equals("update-zero")
+                    ? FIXTURE_RECEIVED_35302D54
+                    : FIXTURE_PROCESSING_01F94682,
+            h.text(FIXTURE_SELECT_STATE_FROM_SCHUBERT_ASYNC_JOBS_E6C43F91));
       }
     }
     try (var h = accepted()) {
@@ -989,7 +1044,9 @@ class QuestionWorkerServiceTest {
               h.clock);
       assertThrows(
           TemporaryInfrastructureException.class, () -> worker.process(event(), delivery(1)));
-      assertEquals("RECEIVED", h.text("select state from schubert.async_jobs"));
+      assertEquals(
+          FIXTURE_RECEIVED_35302D54,
+          h.text(FIXTURE_SELECT_STATE_FROM_SCHUBERT_ASYNC_JOBS_E6C43F91));
     }
   }
 
@@ -1000,12 +1057,13 @@ class QuestionWorkerServiceTest {
         worker(
             h,
             text -> {
-              throw new IllegalStateException("private-provider");
+              throw new IllegalStateException(FIXTURE_PRIVATE_PROVIDER_9ABB4509);
             },
             stop::get);
     assertThrows(
         TemporaryInfrastructureException.class, () -> worker.process(event(), delivery(4)));
-    assertEquals("ERROR", h.text("select state from schubert.async_jobs"));
+    assertEquals(
+        FIXTURE_ERROR_F717E7D8, h.text(FIXTURE_SELECT_STATE_FROM_SCHUBERT_ASYNC_JOBS_E6C43F91));
     assertEquals(
         1,
         h.scalar(
@@ -1136,7 +1194,7 @@ class QuestionWorkerServiceTest {
     h.confirmOnSignal(); // SQL proof fixture only; AWORK001 uses actual MQ acceptance.
     assertArrayEquals(
         response(M0, new UUID(700, 3), "0000", RECEIPT, 1, NOW),
-        h.service.process(request("Public fixture", M0, TOKEN, NOW, CONTEXT)));
+        h.service.process(request(FIXTURE_PUBLIC_FIXTURE_2BAE0C98, M0, TOKEN, NOW, CONTEXT)));
     return h;
   }
 

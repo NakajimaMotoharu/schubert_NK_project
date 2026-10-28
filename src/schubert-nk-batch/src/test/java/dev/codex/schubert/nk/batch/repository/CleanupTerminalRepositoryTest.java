@@ -33,6 +33,25 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** CTERM001..003: independent SQL fixture/full-row data, no native Unit acceptance. SSC119. */
 final class CleanupTerminalRepositoryTest {
+  private static final String FIXTURE_2026_09_13T02_00_00Z_EE45C842 = "2026-09-13T02:00:00Z";
+  private static final String FIXTURE_2026_09_13T02_00_01Z_DAAFD8AF = "2026-09-13T02:00:01Z";
+  private static final String FIXTURE_STEP_0D9F50D8 = "step";
+  private static final String FIXTURE_STATUS_CFC31BCC = "status";
+  private static final String FIXTURE_ATTEMPT_7FD8A755 = "attempt";
+  private static final String FIXTURE_TARGET_COUNT_5B6567D4 = "target_count";
+  private static final String FIXTURE_SUCCESS_COUNT_716E5185 = "success_count";
+  private static final String FIXTURE_FAILURE_COUNT_C7E67F21 = "failure_count";
+  private static final String FIXTURE_BYTE_COUNT_6D76E237 = "byte_count";
+  private static final String FIXTURE_ENDED_AT_E151E393 = "ended_at";
+  private static final String FIXTURE_ERROR_CODE_B886CCEF = "error_code";
+  private static final String FIXTURE_ERROR_SUMMARY_3F58BF23 = "error_summary";
+  private static final String FIXTURE_NULL_STATEMENT_8D4D0967 = "null-statement";
+  private static final String FIXTURE_NULL_ROWS_7967EEF2 = "null-rows";
+  private static final String FIXTURE_DUPLICATE_E75B7650 = "duplicate";
+  private static final String FIXTURE_REFERENCES_3C0C408A = "references";
+  private static final String FIXTURE_PROGRESS_74BECD94 = "progress";
+  private static final String FIXTURE_MISSING_4B62D186 = "missing";
+
   /** CTERM200001: literal same-day foreign run; current skip and prior success stay separate. */
   @Test
   void cterm200001DifferentRunNeedsExactRetainedOriginalAndCannotChangeEitherResult()
@@ -69,8 +88,9 @@ final class CleanupTerminalRepositoryTest {
         assertEquals(RUN, old.attempt().run());
         assertEquals(STEPS[i], old.attempt().step().name());
         assertEquals(1, old.attempt().attempt());
-        assertEquals(Instant.parse("2026-09-13T02:00:00Z"), old.attempt().startedAt());
-        assertEquals(Instant.parse("2026-09-13T02:00:01Z"), old.endedAt());
+        assertEquals(
+            Instant.parse(FIXTURE_2026_09_13T02_00_00Z_EE45C842), old.attempt().startedAt());
+        assertEquals(Instant.parse(FIXTURE_2026_09_13T02_00_01Z_DAAFD8AF), old.endedAt());
         assertEquals(
             new BatchStepResult(
                 BatchStepResult.Status.SUCCESS, 1, 1, 0, 0, BatchStepResult.Reason.NONE),
@@ -192,7 +212,7 @@ final class CleanupTerminalRepositoryTest {
 
   @Test
   void cterm010PublicValuesRejectInvalidTimeDuplicateAndForeignRun() {
-    var ended = Instant.parse("2026-09-13T02:00:01Z");
+    var ended = Instant.parse(FIXTURE_2026_09_13T02_00_01Z_DAAFD8AF);
     var success =
         new BatchStepResult(
             BatchStepResult.Status.SUCCESS, 1, 1, 0, 0, BatchStepResult.Reason.NONE);
@@ -297,18 +317,18 @@ final class CleanupTerminalRepositoryTest {
     for (boolean rejected : List.of(false, true)) {
       for (String column :
           List.of(
-              "step",
-              "status",
+              FIXTURE_STEP_0D9F50D8,
+              FIXTURE_STATUS_CFC31BCC,
               "id",
-              "attempt",
+              FIXTURE_ATTEMPT_7FD8A755,
               "started_at",
               "run_id",
               "business_date",
-              "target_count",
-              "success_count",
-              "failure_count",
-              "byte_count",
-              "ended_at")) {
+              FIXTURE_TARGET_COUNT_5B6567D4,
+              FIXTURE_SUCCESS_COUNT_716E5185,
+              FIXTURE_FAILURE_COUNT_C7E67F21,
+              FIXTURE_BYTE_COUNT_6D76E237,
+              FIXTURE_ENDED_AT_E151E393)) {
         var probe = new BatchJdbcProbe();
         probe.selectedSql = "select distinct on(step)";
         probe.columns.put(column, null);
@@ -319,29 +339,36 @@ final class CleanupTerminalRepositoryTest {
                   Map.entry("id", 1000L),
                   Map.entry("run_id", UUID.fromString("00000000-0000-4000-8000-000000000002")),
                   Map.entry("business_date", LocalDate.of(2026, 9, 14)),
-                  Map.entry("step", "BACKUP_DB"),
-                  Map.entry("status", "UNKNOWN"),
-                  Map.entry("error_code", "UNKNOWN"),
-                  Map.entry("error_summary", "synthetic wrong summary"),
-                  Map.entry("target_count", -1L),
-                  Map.entry("success_count", -1L),
-                  Map.entry("failure_count", -1L),
-                  Map.entry("byte_count", -1L),
+                  Map.entry(FIXTURE_STEP_0D9F50D8, "BACKUP_DB"),
+                  Map.entry(FIXTURE_STATUS_CFC31BCC, "UNKNOWN"),
+                  Map.entry(FIXTURE_ERROR_CODE_B886CCEF, "UNKNOWN"),
+                  Map.entry(FIXTURE_ERROR_SUMMARY_3F58BF23, "synthetic wrong summary"),
+                  Map.entry(FIXTURE_TARGET_COUNT_5B6567D4, -1L),
+                  Map.entry(FIXTURE_SUCCESS_COUNT_716E5185, -1L),
+                  Map.entry(FIXTURE_FAILURE_COUNT_C7E67F21, -1L),
+                  Map.entry(FIXTURE_BYTE_COUNT_6D76E237, -1L),
                   Map.entry("started_at", OffsetDateTime.parse("2026-10-01T00:00:00Z")),
-                  Map.entry("ended_at", OffsetDateTime.parse("2026-10-01T00:00:00Z")))
+                  Map.entry(
+                      FIXTURE_ENDED_AT_E151E393, OffsetDateTime.parse("2026-10-01T00:00:00Z")))
               .entrySet()) {
         var probe = new BatchJdbcProbe();
         probe.selectedSql = "select distinct on(step)";
         probe.columns.put(item.getKey(), item.getValue());
         refusedProjection(probe, rejected);
       }
-      for (String fault : List.of("null-statement", "null-rows", "eighth", "duplicate")) {
+      for (String fault :
+          List.of(
+              FIXTURE_NULL_STATEMENT_8D4D0967,
+              FIXTURE_NULL_ROWS_7967EEF2,
+              "eighth",
+              FIXTURE_DUPLICATE_E75B7650)) {
         var probe = new BatchJdbcProbe();
         probe.selectedSql = "select distinct on(step)";
-        probe.nullStatement = fault.equals("null-statement");
-        probe.nullRows = fault.equals("null-rows");
+        probe.nullStatement = fault.equals(FIXTURE_NULL_STATEMENT_8D4D0967);
+        probe.nullRows = fault.equals(FIXTURE_NULL_ROWS_7967EEF2);
         probe.extraLastRow = fault.equals("eighth");
-        if (fault.equals("duplicate")) probe.columns.put("step", "CLEAN_NOTIFICATION");
+        if (fault.equals(FIXTURE_DUPLICATE_E75B7650))
+          probe.columns.put(FIXTURE_STEP_0D9F50D8, "CLEAN_NOTIFICATION");
         refusedProjection(probe, rejected);
       }
     }
@@ -370,24 +397,30 @@ final class CleanupTerminalRepositoryTest {
     refusedProjection(inconsistent, true);
     for (String column :
         List.of(
-            "ended_at",
-            "target_count",
-            "success_count",
-            "failure_count",
-            "byte_count",
-            "error_code",
-            "error_summary")) {
+            FIXTURE_ENDED_AT_E151E393,
+            FIXTURE_TARGET_COUNT_5B6567D4,
+            FIXTURE_SUCCESS_COUNT_716E5185,
+            FIXTURE_FAILURE_COUNT_C7E67F21,
+            FIXTURE_BYTE_COUNT_6D76E237,
+            FIXTURE_ERROR_CODE_B886CCEF,
+            FIXTURE_ERROR_SUMMARY_3F58BF23)) {
       var probe = new BatchJdbcProbe();
       probe.selectedSql = "select distinct on(step)";
-      probe.columns.put("status", "RUNNING");
-      probe.columns.put("ended_at", null);
-      for (String count : List.of("target_count", "success_count", "failure_count", "byte_count"))
-        probe.columns.put(count, 0L);
+      probe.columns.put(FIXTURE_STATUS_CFC31BCC, "RUNNING");
+      probe.columns.put(FIXTURE_ENDED_AT_E151E393, null);
+      for (String count :
+          List.of(
+              FIXTURE_TARGET_COUNT_5B6567D4,
+              FIXTURE_SUCCESS_COUNT_716E5185,
+              FIXTURE_FAILURE_COUNT_C7E67F21,
+              FIXTURE_BYTE_COUNT_6D76E237)) probe.columns.put(count, 0L);
       probe.columns.put(
           column,
           switch (column) {
-            case "ended_at" -> OffsetDateTime.parse("2026-09-13T02:00:01Z");
-            case "error_code", "error_summary" -> "synthetic unexpected value";
+            case FIXTURE_ENDED_AT_E151E393 ->
+                OffsetDateTime.parse(FIXTURE_2026_09_13T02_00_01Z_DAAFD8AF);
+            case FIXTURE_ERROR_CODE_B886CCEF, FIXTURE_ERROR_SUMMARY_3F58BF23 ->
+                "synthetic unexpected value";
             default -> 1L;
           });
       refusedProjection(probe, true);
@@ -396,15 +429,17 @@ final class CleanupTerminalRepositoryTest {
 
   @Test
   void cterm008SqlBodyMustNotHideFatalOwnedClose() throws Exception {
-    for (String path : List.of("read", "rejected", "references", "progress")) {
+    for (String path :
+        List.of("read", "rejected", FIXTURE_REFERENCES_3C0C408A, FIXTURE_PROGRESS_74BECD94)) {
       seed();
-      if (path.equals("references") || path.equals("progress")) insertCurrentSkips();
+      if (path.equals(FIXTURE_REFERENCES_3C0C408A) || path.equals(FIXTURE_PROGRESS_74BECD94))
+        insertCurrentSkips();
       for (var sample : JdbcResourceCases.all()) {
         var probe = new BatchJdbcProbe();
         probe.selectedSql =
             switch (path) {
-              case "references" -> "and status='SUCCESS'";
-              case "progress" -> "select proof_sha256";
+              case FIXTURE_REFERENCES_3C0C408A -> "and status='SUCCESS'";
+              case FIXTURE_PROGRESS_74BECD94 -> "select proof_sha256";
               default -> "select distinct on(step)";
             };
         if (sample.primary() != null)
@@ -429,7 +464,8 @@ final class CleanupTerminalRepositoryTest {
                     switch (path) {
                       case "read" -> subject.read(RUN, OBSERVED);
                       case "rejected" -> subject.readRejected(RUN, OBSERVED);
-                      case "references", "progress" -> subject.references(current);
+                      case FIXTURE_REFERENCES_3C0C408A, FIXTURE_PROGRESS_74BECD94 ->
+                          subject.references(current);
                       default -> throw new AssertionError("unknown public path");
                     }
                   });
@@ -464,14 +500,21 @@ final class CleanupTerminalRepositoryTest {
   @Test
   void ref201006ProgressProjectionAndChangedOriginalCannotReturnAProof() throws Exception {
     insertCurrentSkips();
-    for (String fault : List.of("statement", "rows", "missing", "duplicate", "null", "invalid")) {
+    for (String fault :
+        List.of(
+            "statement",
+            "rows",
+            FIXTURE_MISSING_4B62D186,
+            FIXTURE_DUPLICATE_E75B7650,
+            "null",
+            "invalid")) {
       var probe = new BatchJdbcProbe();
       probe.selectedSql = "select proof_sha256";
       switch (fault) {
         case "statement" -> probe.nullStatement = true;
         case "rows" -> probe.nullRows = true;
-        case "missing" -> probe.empty = true;
-        case "duplicate" -> probe.duplicate = true;
+        case FIXTURE_MISSING_4B62D186 -> probe.empty = true;
+        case FIXTURE_DUPLICATE_E75B7650 -> probe.duplicate = true;
         case "null" -> probe.columns.put("proof_sha256", null);
         case "invalid" -> probe.columns.put("proof_sha256", "A".repeat(64));
         default -> throw new AssertionError("unknown literal fixture");
@@ -526,7 +569,7 @@ final class CleanupTerminalRepositoryTest {
         assertEquals(0, entry.result().success());
         assertEquals(0, entry.result().failure());
         assertEquals(0, entry.result().bytes());
-        assertEquals(Instant.parse("2026-09-13T02:00:00Z"), entry.endedAt());
+        assertEquals(Instant.parse(FIXTURE_2026_09_13T02_00_00Z_EE45C842), entry.endedAt());
       }
       assertEquals(BatchStepResult.Status.SUCCESS, actual.entries().get(6).result().status());
       assertEquals(7, subject.readRejected(RUN, OBSERVED).entries().size());
@@ -553,7 +596,7 @@ final class CleanupTerminalRepositoryTest {
       try (var raw = locked(db, false)) {
         var probe = new BatchJdbcProbe();
         probe.selectedSql = "select distinct on(step)";
-        if (mutation.equals("counts")) probe.columns.put("target_count", 1L);
+        if (mutation.equals("counts")) probe.columns.put(FIXTURE_TARGET_COUNT_5B6567D4, 1L);
         assertThrows(
             BatchRepositoryException.class,
             () ->
@@ -567,14 +610,14 @@ final class CleanupTerminalRepositoryTest {
     insertCurrentSkips();
     for (String fault :
         List.of(
-            "null-statement",
-            "null-rows",
-            "missing",
-            "duplicate",
-            "step",
+            FIXTURE_NULL_STATEMENT_8D4D0967,
+            FIXTURE_NULL_ROWS_7967EEF2,
+            FIXTURE_MISSING_4B62D186,
+            FIXTURE_DUPLICATE_E75B7650,
+            FIXTURE_STEP_0D9F50D8,
             "id",
-            "attempt",
-            "status",
+            FIXTURE_ATTEMPT_7FD8A755,
+            FIXTURE_STATUS_CFC31BCC,
             "not-skipped",
             "late-current")) {
       try (var raw = locked(db, false)) {
@@ -582,17 +625,17 @@ final class CleanupTerminalRepositoryTest {
         var probe = new BatchJdbcProbe();
         probe.selectedSql = "and status='SUCCESS'";
         switch (fault) {
-          case "null-statement" -> probe.nullStatement = true;
-          case "null-rows" -> probe.nullRows = true;
-          case "missing" -> probe.empty = true;
-          case "duplicate" -> probe.duplicate = true;
-          case "step" -> probe.columns.put("step", "CLEAN_TRANSFER");
+          case FIXTURE_NULL_STATEMENT_8D4D0967 -> probe.nullStatement = true;
+          case FIXTURE_NULL_ROWS_7967EEF2 -> probe.nullRows = true;
+          case FIXTURE_MISSING_4B62D186 -> probe.empty = true;
+          case FIXTURE_DUPLICATE_E75B7650 -> probe.duplicate = true;
+          case FIXTURE_STEP_0D9F50D8 -> probe.columns.put(FIXTURE_STEP_0D9F50D8, "CLEAN_TRANSFER");
           case "id" -> probe.columns.put("id", 2000L);
-          case "attempt" -> probe.columns.put("attempt", 2);
-          case "status" -> {
-            probe.columns.put("status", "WARNING");
-            probe.columns.put("error_code", "PROTECTED_RECORDS");
-            probe.columns.put("error_summary", "protected records retained");
+          case FIXTURE_ATTEMPT_7FD8A755 -> probe.columns.put(FIXTURE_ATTEMPT_7FD8A755, 2);
+          case FIXTURE_STATUS_CFC31BCC -> {
+            probe.columns.put(FIXTURE_STATUS_CFC31BCC, "WARNING");
+            probe.columns.put(FIXTURE_ERROR_CODE_B886CCEF, "PROTECTED_RECORDS");
+            probe.columns.put(FIXTURE_ERROR_SUMMARY_3F58BF23, "protected records retained");
           }
           case "not-skipped", "late-current" -> {
             var entries = new ArrayList<>(current.entries());
@@ -703,8 +746,9 @@ final class CleanupTerminalRepositoryTest {
       assertEquals(STEPS[index], entry.attempt().step().name());
       assertEquals(RUN, entry.attempt().run());
       assertEquals(1, entry.attempt().attempt());
-      assertEquals(Instant.parse("2026-09-13T02:00:00Z"), entry.attempt().startedAt());
-      assertEquals(Instant.parse("2026-09-13T02:00:01Z"), entry.endedAt());
+      assertEquals(
+          Instant.parse(FIXTURE_2026_09_13T02_00_00Z_EE45C842), entry.attempt().startedAt());
+      assertEquals(Instant.parse(FIXTURE_2026_09_13T02_00_01Z_DAAFD8AF), entry.endedAt());
       assertEquals(
           new BatchStepResult(
               BatchStepResult.Status.SUCCESS, 1, 1, 0, 0, BatchStepResult.Reason.NONE),
@@ -843,8 +887,9 @@ final class CleanupTerminalRepositoryTest {
         assertEquals(RUN, original.attempt().run());
         assertEquals(STEPS[index], original.attempt().step().name());
         assertEquals(1, original.attempt().attempt());
-        assertEquals(Instant.parse("2026-09-13T02:00:00Z"), original.attempt().startedAt());
-        assertEquals(Instant.parse("2026-09-13T02:00:01Z"), original.endedAt());
+        assertEquals(
+            Instant.parse(FIXTURE_2026_09_13T02_00_00Z_EE45C842), original.attempt().startedAt());
+        assertEquals(Instant.parse(FIXTURE_2026_09_13T02_00_01Z_DAAFD8AF), original.endedAt());
         assertEquals(
             new BatchStepResult(
                 BatchStepResult.Status.SUCCESS, 1, 1, 0, 0, BatchStepResult.Reason.NONE),
@@ -936,7 +981,8 @@ final class CleanupTerminalRepositoryTest {
         assertEquals(1000 + index, row.attempt().id());
         assertEquals(STEPS[index], row.attempt().step().name());
         assertEquals(1, row.attempt().attempt());
-        assertEquals(Instant.parse("2026-09-13T02:00:00Z"), row.attempt().startedAt());
+        assertEquals(
+            Instant.parse(FIXTURE_2026_09_13T02_00_00Z_EE45C842), row.attempt().startedAt());
       }
       assertEquals(
           BatchStepResult.Status.SUCCESS,
@@ -944,7 +990,8 @@ final class CleanupTerminalRepositoryTest {
       assertTrue(actual.entries().get(1).orElseThrow().result().isEmpty());
       assertTrue(actual.entries().get(1).orElseThrow().endedAt().isEmpty());
       var failed = actual.entries().get(2).orElseThrow();
-      assertEquals(Optional.of(Instant.parse("2026-09-13T02:00:01Z")), failed.endedAt());
+      assertEquals(
+          Optional.of(Instant.parse(FIXTURE_2026_09_13T02_00_01Z_DAAFD8AF)), failed.endedAt());
       assertEquals(
           Optional.of(
               new BatchStepResult(
@@ -1006,7 +1053,7 @@ final class CleanupTerminalRepositoryTest {
             RUN,
             BatchStep.CLEAN_NOTIFICATION,
             1,
-            Instant.parse("2026-09-13T02:00:00Z"),
+            Instant.parse(FIXTURE_2026_09_13T02_00_00Z_EE45C842),
             false);
     assertThrows(
         IllegalArgumentException.class,

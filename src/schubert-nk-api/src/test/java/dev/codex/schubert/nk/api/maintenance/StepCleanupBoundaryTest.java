@@ -28,6 +28,19 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** NK-DAT-001/OPS009/DAT009/UI251/SS331 3.14/332/341; SSC057/PG164; DB259..266. */
 final class StepCleanupBoundaryTest {
+  private static final String FIXTURE_NOTIFICATIONS_CEF4B870 = "NOTIFICATIONS";
+  private static final String FIXTURE_QUESTIONS_220AA8AB = "QUESTIONS";
+  private static final String FIXTURE_SESSIONS_1BB11AB1 = "SESSIONS";
+  private static final String FIXTURE_OUTBOX_4A998DF8 = "OUTBOX";
+  private static final String FIXTURE_BATCH_RUNS_FB17B0EE = "BATCH_RUNS";
+  private static final String FIXTURE_INBOX_PROGRESS_6FF00799 = "INBOX_PROGRESS";
+  private static final String FIXTURE_LOG_PROGRESS_8EFCB691 = "LOG_PROGRESS";
+  private static final String FIXTURE_SCHUBERT_NOTIFICATIONS_4B64D746 = "schubert.notifications";
+  private static final String FIXTURE_55000_F2ADCE46 = "55000";
+  private static final String FIXTURE_TRUE_18D10C7D = "true";
+  private static final String FIXTURE_DELETE_FROM_AF6A49CB = "delete from ";
+  private static final String FIXTURE_2026_09_11T15_00_00Z_564E8A05 = "2026-09-11T15:00:00Z";
+  private static final String FIXTURE_2025_08_08T15_00_00Z_45BD5D0B = "2025-08-08T15:00:00Z";
   @TempDir static Path root;
   static ApiLogDatabaseFixture db;
   static String url;
@@ -38,16 +51,16 @@ final class StepCleanupBoundaryTest {
   static final String SIG = FN + "(uuid,timestamptz,bigint,integer,timestamptz,text,integer)";
   static final List<String> KINDS =
       List.of(
-          "NOTIFICATIONS",
-          "QUESTIONS",
-          "SESSIONS",
-          "OUTBOX",
-          "BATCH_RUNS",
-          "INBOX_PROGRESS",
-          "LOG_PROGRESS");
+          FIXTURE_NOTIFICATIONS_CEF4B870,
+          FIXTURE_QUESTIONS_220AA8AB,
+          FIXTURE_SESSIONS_1BB11AB1,
+          FIXTURE_OUTBOX_4A998DF8,
+          FIXTURE_BATCH_RUNS_FB17B0EE,
+          FIXTURE_INBOX_PROGRESS_6FF00799,
+          FIXTURE_LOG_PROGRESS_8EFCB691);
   static final List<String> TABLES =
       List.of(
-          "schubert.notifications",
+          FIXTURE_SCHUBERT_NOTIFICATIONS_4B64D746,
           "schubert.questions",
           "schubert.auth_sessions",
           "schubert.login_ip_attempts",
@@ -104,9 +117,9 @@ final class StepCleanupBoundaryTest {
       assertEquals("1", scalar(admin, "select count(*) from schubert.questions"));
       assertEquals("1", scalar(admin, "select count(*) from schubert.async_jobs"));
       fixture(admin);
-      assertEquals("1|1|0|1|1|false|OK", call(c, "SESSIONS", 1));
-      assertEquals("2|2|0|3|3|false|OK", call(c, "SESSIONS", 1000));
-      assertEquals("0|0|0|3|3|true|OK", call(c, "SESSIONS", 1000));
+      assertEquals("1|1|0|1|1|false|OK", call(c, FIXTURE_SESSIONS_1BB11AB1, 1));
+      assertEquals("2|2|0|3|3|false|OK", call(c, FIXTURE_SESSIONS_1BB11AB1, 1000));
+      assertEquals("0|0|0|3|3|true|OK", call(c, FIXTURE_SESSIONS_1BB11AB1, 1000));
     }
     Path out = Path.of("target/atomic-cleanup-traces");
     Files.createDirectories(out);
@@ -179,16 +192,18 @@ final class StepCleanupBoundaryTest {
         fixture(admin);
         sql(admin, "update schubert.batch_runs set " + assignment + " where id=90010");
         assertEquals(
-            "55000",
-            assertThrows(SQLException.class, () -> call(c, "NOTIFICATIONS", 1)).getSQLState(),
+            FIXTURE_55000_F2ADCE46,
+            assertThrows(SQLException.class, () -> call(c, FIXTURE_NOTIFICATIONS_CEF4B870, 1))
+                .getSQLState(),
             assignment);
         assertEquals("1", scalar(admin, "select count(*) from schubert.notifications"));
       }
       fixture(admin);
       sql(admin, "delete from schubert.batch_runs where id=90010");
       assertEquals(
-          "55000",
-          assertThrows(SQLException.class, () -> call(c, "NOTIFICATIONS", 1)).getSQLState());
+          FIXTURE_55000_F2ADCE46,
+          assertThrows(SQLException.class, () -> call(c, FIXTURE_NOTIFICATIONS_CEF4B870, 1))
+              .getSQLState());
       fixture(admin);
       sql(
           admin,
@@ -196,8 +211,9 @@ final class StepCleanupBoundaryTest {
               + RUN
               + "','2026-09-12T15:00:01Z')");
       assertEquals(
-          "55000",
-          assertThrows(SQLException.class, () -> call(c, "NOTIFICATIONS", 1)).getSQLState());
+          FIXTURE_55000_F2ADCE46,
+          assertThrows(SQLException.class, () -> call(c, FIXTURE_NOTIFICATIONS_CEF4B870, 1))
+              .getSQLState());
     }
   }
 
@@ -207,12 +223,13 @@ final class StepCleanupBoundaryTest {
         var admin = db.admin()) {
       for (String step : List.of("BACKUP_DB", "BACKUP_CONFIG")) {
         sql(admin, "update schubert.batch_runs set status='FAILED' where step='" + step + "'");
-        assertEquals("0|0|0|NULL|NULL|false|BACKUP_GATE", call(c, "NOTIFICATIONS", 1));
+        assertEquals(
+            "0|0|0|NULL|NULL|false|BACKUP_GATE", call(c, FIXTURE_NOTIFICATIONS_CEF4B870, 1));
         fixture(admin);
       }
       admin.setAutoCommit(false);
       scalar(admin, "select id from schubert.batch_runs where id=90010 for update");
-      assertEquals("0|0|0|NULL|NULL|false|LOCK_BUSY", call(c, "NOTIFICATIONS", 1));
+      assertEquals("0|0|0|NULL|NULL|false|LOCK_BUSY", call(c, FIXTURE_NOTIFICATIONS_CEF4B870, 1));
       assertEquals("1", scalar(admin, "select count(*) from schubert.notifications"));
       admin.rollback();
       assertEquals(
@@ -226,7 +243,7 @@ final class StepCleanupBoundaryTest {
           "false",
           scalar(admin, "select has_function_privilege('public','" + SIG + "','EXECUTE')::text"));
       assertEquals(
-          "true",
+          FIXTURE_TRUE_18D10C7D,
           scalar(
               admin,
               "select has_function_privilege('schubert_batch','" + SIG + "','EXECUTE')::text"));
@@ -240,11 +257,13 @@ final class StepCleanupBoundaryTest {
         try (var denied = DriverManager.getConnection(url, role, "")) {
           assertEquals(
               "42501",
-              assertThrows(SQLException.class, () -> call(denied, "NOTIFICATIONS", 1))
+              assertThrows(
+                      SQLException.class, () -> call(denied, FIXTURE_NOTIFICATIONS_CEF4B870, 1))
                   .getSQLState());
         }
       try (var other = DriverManager.getConnection(url, "schubert_batch", "")) {
-        assertEquals("0|0|0|NULL|NULL|false|LOCK_BUSY", call(other, "NOTIFICATIONS", 1));
+        assertEquals(
+            "0|0|0|NULL|NULL|false|LOCK_BUSY", call(other, FIXTURE_NOTIFICATIONS_CEF4B870, 1));
       }
       admin.rollback();
     }
@@ -253,19 +272,28 @@ final class StepCleanupBoundaryTest {
   @Test
   void zeroChunkLockedRemainder() throws Exception {
     String[] kinds = {
-      "NOTIFICATIONS",
-      "QUESTIONS",
-      "SESSIONS",
-      "SESSIONS",
-      "SESSIONS",
-      "OUTBOX",
-      "OUTBOX",
-      "BATCH_RUNS",
-      "INBOX_PROGRESS",
-      "LOG_PROGRESS"
+      FIXTURE_NOTIFICATIONS_CEF4B870,
+      FIXTURE_QUESTIONS_220AA8AB,
+      FIXTURE_SESSIONS_1BB11AB1,
+      FIXTURE_SESSIONS_1BB11AB1,
+      FIXTURE_SESSIONS_1BB11AB1,
+      FIXTURE_OUTBOX_4A998DF8,
+      FIXTURE_OUTBOX_4A998DF8,
+      FIXTURE_BATCH_RUNS_FB17B0EE,
+      FIXTURE_INBOX_PROGRESS_6FF00799,
+      FIXTURE_LOG_PROGRESS_8EFCB691
     };
     String[] where = {
-      "id=1", "id=2", "true", "true", "true", "id=1", "id=1", "id=1", "true", "true"
+      "id=1",
+      "id=2",
+      FIXTURE_TRUE_18D10C7D,
+      FIXTURE_TRUE_18D10C7D,
+      FIXTURE_TRUE_18D10C7D,
+      "id=1",
+      "id=1",
+      "id=1",
+      FIXTURE_TRUE_18D10C7D,
+      FIXTURE_TRUE_18D10C7D
     };
     for (int i = 0; i < TABLES.size(); i++) {
       String table = TABLES.get(i);
@@ -275,12 +303,12 @@ final class StepCleanupBoundaryTest {
           var admin = db.admin()) {
         fixture(admin);
         // All other session/outbox components absent, so only the held row is eligible.
-        if (kind.equals("SESSIONS"))
+        if (kind.equals(FIXTURE_SESSIONS_1BB11AB1))
           for (String t : TABLES.subList(2, 5))
-            if (!t.equals(table)) sql(admin, "delete from " + t);
-        if (kind.equals("OUTBOX"))
+            if (!t.equals(table)) sql(admin, FIXTURE_DELETE_FROM_AF6A49CB + t);
+        if (kind.equals(FIXTURE_OUTBOX_4A998DF8))
           for (String t : TABLES.subList(5, 7))
-            if (!t.equals(table)) sql(admin, "delete from " + t);
+            if (!t.equals(table)) sql(admin, FIXTURE_DELETE_FROM_AF6A49CB + t);
         writer.setAutoCommit(false);
         scalar(
             writer,
@@ -307,31 +335,31 @@ final class StepCleanupBoundaryTest {
       for (String[] pair :
           List.of(
               new String[] {
-                "NOTIFICATIONS",
+                FIXTURE_NOTIFICATIONS_CEF4B870,
                 "update schubert.notifications set state_changed_at='2026-09-11T15:00:00.000001Z'"
               },
               new String[] {
-                "QUESTIONS",
+                FIXTURE_QUESTIONS_220AA8AB,
                 "update schubert.questions set deleted_at='2026-09-12T15:00:00Z' where id=2"
               },
               new String[] {
-                "SESSIONS",
+                FIXTURE_SESSIONS_1BB11AB1,
                 "update schubert.auth_sessions set expires_at='2026-09-11T15:00:00.000001Z';update schubert.login_ip_attempts set window_started_at='2026-09-11T14:45:00.000001Z';update schubert_web_session.web_http_sessions set expires_at='2026-09-12T15:00:00.000001Z'"
               },
               new String[] {
-                "OUTBOX",
+                FIXTURE_OUTBOX_4A998DF8,
                 "update schubert.mq_outbox set sent_at='2026-09-05T15:00:00Z';update schubert_web_session.web_log_outbox set sent_at='2026-09-05T15:00:00Z'"
               },
               new String[] {
-                "BATCH_RUNS",
+                FIXTURE_BATCH_RUNS_FB17B0EE,
                 "update schubert.batch_runs set ended_at=timestamptz '2026-09-12T15:00:00Z'-interval '9600 hours' where id=1"
               },
               new String[] {
-                "INBOX_PROGRESS",
+                FIXTURE_INBOX_PROGRESS_6FF00799,
                 "update schubert.inbox_inspection_progress set completed_at=timestamptz '2026-09-12T15:00:00Z'-interval '9600 hours'"
               },
               new String[] {
-                "LOG_PROGRESS",
+                FIXTURE_LOG_PROGRESS_8EFCB691,
                 "update schubert.log_cleanup_progress set completed_at=timestamptz '2026-09-12T15:00:00Z'-interval '9600 hours'"
               })) {
         fixture(admin);
@@ -347,7 +375,11 @@ final class StepCleanupBoundaryTest {
         sql(
             admin,
             "update schubert.log_cleanup_progress set run_id='00000000-0000-0000-0000-000000000001'");
-        for (String kind : List.of("BATCH_RUNS", "INBOX_PROGRESS", "LOG_PROGRESS"))
+        for (String kind :
+            List.of(
+                FIXTURE_BATCH_RUNS_FB17B0EE,
+                FIXTURE_INBOX_PROGRESS_6FF00799,
+                FIXTURE_LOG_PROGRESS_8EFCB691))
           assertEquals("0|0|0|0|0|true|OK", call(c, kind, 1000));
       }
       fixture(admin);
@@ -358,16 +390,16 @@ final class StepCleanupBoundaryTest {
               + "';update schubert_web_session.web_log_outbox set lease_owner='public-owner',lease_until='"
               + CUT
               + "'");
-      assertEquals("0|0|0|0|0|true|OK", call(c, "OUTBOX", 1000));
+      assertEquals("0|0|0|0|0|true|OK", call(c, FIXTURE_OUTBOX_4A998DF8, 1000));
       fixture(admin);
       sql(
           admin,
           "update schubert.notifications set state='PROCESSING',notification_type='ACCEPTED'");
-      assertEquals("0|0|0|0|0|true|OK", call(c, "NOTIFICATIONS", 1000));
+      assertEquals("0|0|0|0|0|true|OK", call(c, FIXTURE_NOTIFICATIONS_CEF4B870, 1000));
       sql(
           admin,
           "update schubert.questions set is_deleted=true,deleted_at='2026-09-01T00:00:00Z',deleted_by=7 where id=1;delete from schubert.questions where id=2");
-      assertEquals("0|0|0|0|0|true|OK", call(c, "QUESTIONS", 1000));
+      assertEquals("0|0|0|0|0|true|OK", call(c, FIXTURE_QUESTIONS_220AA8AB, 1000));
     }
     predicateMatrix();
   }
@@ -385,112 +417,123 @@ final class StepCleanupBoundaryTest {
     var cases =
         List.of(
             new Boundary(
-                "NOTIFICATIONS",
-                "schubert.notifications",
+                FIXTURE_NOTIFICATIONS_CEF4B870,
+                FIXTURE_SCHUBERT_NOTIFICATIONS_4B64D746,
                 "id=1",
                 "state='CANCELLED',state_changed_at=",
                 CUT,
                 false),
             new Boundary(
-                "NOTIFICATIONS",
-                "schubert.notifications",
+                FIXTURE_NOTIFICATIONS_CEF4B870,
+                FIXTURE_SCHUBERT_NOTIFICATIONS_4B64D746,
                 "id=1",
                 "state='COMPLETED',state_changed_at=",
-                "2026-09-11T15:00:00Z",
+                FIXTURE_2026_09_11T15_00_00Z_564E8A05,
                 true),
             new Boundary(
-                "NOTIFICATIONS",
-                "schubert.notifications",
+                FIXTURE_NOTIFICATIONS_CEF4B870,
+                FIXTURE_SCHUBERT_NOTIFICATIONS_4B64D746,
                 "id=1",
                 "state='ERROR',notification_type='ERROR',error_code='PROCESS_FAILED',error_message='public fixture',state_changed_at=",
-                "2026-09-11T15:00:00Z",
+                FIXTURE_2026_09_11T15_00_00Z_564E8A05,
                 true),
-            new Boundary("QUESTIONS", "schubert.questions", "id=2", "deleted_at=", CUT, false),
             new Boundary(
-                "SESSIONS",
+                FIXTURE_QUESTIONS_220AA8AB,
+                "schubert.questions",
+                "id=2",
+                "deleted_at=",
+                CUT,
+                false),
+            new Boundary(
+                FIXTURE_SESSIONS_1BB11AB1,
                 "schubert.auth_sessions",
-                "true",
+                FIXTURE_TRUE_18D10C7D,
                 "expires_at=",
-                "2026-09-11T15:00:00Z",
+                FIXTURE_2026_09_11T15_00_00Z_564E8A05,
                 true),
             new Boundary(
-                "SESSIONS",
+                FIXTURE_SESSIONS_1BB11AB1,
                 "schubert.auth_sessions",
-                "true",
+                FIXTURE_TRUE_18D10C7D,
                 "expires_at='2026-09-14T00:00:00Z',revoked=true,revoked_at=",
-                "2026-09-11T15:00:00Z",
+                FIXTURE_2026_09_11T15_00_00Z_564E8A05,
                 true),
             new Boundary(
-                "SESSIONS",
+                FIXTURE_SESSIONS_1BB11AB1,
                 "schubert.login_ip_attempts",
-                "true",
+                FIXTURE_TRUE_18D10C7D,
                 "locked_until=null,window_started_at=",
                 "2026-09-11T14:45:00Z",
                 true),
             new Boundary(
-                "SESSIONS",
+                FIXTURE_SESSIONS_1BB11AB1,
                 "schubert.login_ip_attempts",
-                "true",
+                FIXTURE_TRUE_18D10C7D,
                 "window_started_at='2026-09-01T00:00:00Z',locked_until=",
-                "2026-09-11T15:00:00Z",
+                FIXTURE_2026_09_11T15_00_00Z_564E8A05,
                 true),
             new Boundary(
-                "SESSIONS",
+                FIXTURE_SESSIONS_1BB11AB1,
                 "schubert_web_session.web_http_sessions",
-                "true",
+                FIXTURE_TRUE_18D10C7D,
                 "expires_at=",
                 CUT,
                 true),
             new Boundary(
-                "OUTBOX", "schubert.mq_outbox", "id=1", "sent_at=", "2026-09-05T15:00:00Z", false),
+                FIXTURE_OUTBOX_4A998DF8,
+                "schubert.mq_outbox",
+                "id=1",
+                "sent_at=",
+                "2026-09-05T15:00:00Z",
+                false),
             new Boundary(
-                "OUTBOX",
+                FIXTURE_OUTBOX_4A998DF8,
                 "schubert_web_session.web_log_outbox",
                 "id=1",
                 "sent_at=",
                 "2026-09-05T15:00:00Z",
                 false),
             new Boundary(
-                "OUTBOX",
+                FIXTURE_OUTBOX_4A998DF8,
                 "schubert.mq_outbox",
                 "id=1",
                 "lease_owner='public-owner',lease_until=",
                 CUT,
                 false),
             new Boundary(
-                "OUTBOX",
+                FIXTURE_OUTBOX_4A998DF8,
                 "schubert_web_session.web_log_outbox",
                 "id=1",
                 "lease_owner='public-owner',lease_until=",
                 CUT,
                 false),
             new Boundary(
-                "BATCH_RUNS",
+                FIXTURE_BATCH_RUNS_FB17B0EE,
                 "schubert.batch_runs",
                 "id=1",
                 "status='WARNING',ended_at=",
-                "2025-08-08T15:00:00Z",
+                FIXTURE_2025_08_08T15_00_00Z_45BD5D0B,
                 false),
             new Boundary(
-                "BATCH_RUNS",
+                FIXTURE_BATCH_RUNS_FB17B0EE,
                 "schubert.batch_runs",
                 "id=1",
                 "status='SKIPPED',ended_at=",
-                "2025-08-08T15:00:00Z",
+                FIXTURE_2025_08_08T15_00_00Z_45BD5D0B,
                 false),
             new Boundary(
-                "INBOX_PROGRESS",
+                FIXTURE_INBOX_PROGRESS_6FF00799,
                 "schubert.inbox_inspection_progress",
-                "true",
+                FIXTURE_TRUE_18D10C7D,
                 "completed_at=",
-                "2025-08-08T15:00:00Z",
+                FIXTURE_2025_08_08T15_00_00Z_45BD5D0B,
                 false),
             new Boundary(
-                "LOG_PROGRESS",
+                FIXTURE_LOG_PROGRESS_8EFCB691,
                 "schubert.log_cleanup_progress",
-                "true",
+                FIXTURE_TRUE_18D10C7D,
                 "completed_at=",
-                "2025-08-08T15:00:00Z",
+                FIXTURE_2025_08_08T15_00_00Z_45BD5D0B,
                 false));
     for (var b : cases)
       for (int micro : new int[] {-1, 0, 1}) {
@@ -498,12 +541,12 @@ final class StepCleanupBoundaryTest {
             var admin = db.admin();
             var holder = db.admin()) {
           fixture(admin);
-          if (b.kind().equals("SESSIONS"))
+          if (b.kind().equals(FIXTURE_SESSIONS_1BB11AB1))
             for (String t : TABLES.subList(2, 5))
-              if (!t.equals(b.table())) sql(admin, "delete from " + t);
-          if (b.kind().equals("OUTBOX"))
+              if (!t.equals(b.table())) sql(admin, FIXTURE_DELETE_FROM_AF6A49CB + t);
+          if (b.kind().equals(FIXTURE_OUTBOX_4A998DF8))
             for (String t : TABLES.subList(5, 7))
-              if (!t.equals(b.table())) sql(admin, "delete from " + t);
+              if (!t.equals(b.table())) sql(admin, FIXTURE_DELETE_FROM_AF6A49CB + t);
           sql(
               admin,
               "update "
@@ -538,7 +581,7 @@ final class StepCleanupBoundaryTest {
       sql(c, "select pg_advisory_lock(71419602)");
       c.setAutoCommit(false);
       var save = c.setSavepoint();
-      assertEquals("1|1|0|1|1|false|OK", call(c, "NOTIFICATIONS", 1));
+      assertEquals("1|1|0|1|1|false|OK", call(c, FIXTURE_NOTIFICATIONS_CEF4B870, 1));
       c.rollback(save);
       assertEquals("1", scalar(c, "select count(*) from schubert.notifications"));
       assertEquals("0", scalar(c, "select target_count from schubert.batch_runs where id=90010"));
@@ -548,14 +591,15 @@ final class StepCleanupBoundaryTest {
       save = c.setSavepoint();
       assertEquals(
           "22003",
-          assertThrows(SQLException.class, () -> call(c, "NOTIFICATIONS", 1)).getSQLState());
+          assertThrows(SQLException.class, () -> call(c, FIXTURE_NOTIFICATIONS_CEF4B870, 1))
+              .getSQLState());
       c.rollback(save);
       assertEquals("1", scalar(c, "select count(*) from schubert.notifications"));
       c.rollback();
       sql(
           c,
           "create table schubert.pt_question_reference(question_id bigint references schubert.questions(id));insert into schubert.pt_question_reference values(2)");
-      assertEquals("0|0|0|0|0|false|FOREIGN_KEY_CONFLICT", call(c, "QUESTIONS", 1));
+      assertEquals("0|0|0|0|0|false|FOREIGN_KEY_CONFLICT", call(c, FIXTURE_QUESTIONS_220AA8AB, 1));
       assertEquals("1", scalar(c, "select count(*) from schubert.questions where id=2"));
       assertEquals("0", scalar(c, "select target_count from schubert.batch_runs where id=90011"));
       c.rollback();
@@ -565,7 +609,8 @@ final class StepCleanupBoundaryTest {
       save = c.setSavepoint();
       assertEquals(
           "23503",
-          assertThrows(SQLException.class, () -> call(c, "NOTIFICATIONS", 1)).getSQLState());
+          assertThrows(SQLException.class, () -> call(c, FIXTURE_NOTIFICATIONS_CEF4B870, 1))
+              .getSQLState());
       c.rollback(save);
       assertEquals("1", scalar(c, "select count(*) from schubert.notifications"));
       c.rollback();
@@ -577,8 +622,9 @@ final class StepCleanupBoundaryTest {
           "create trigger pt_skip_count_update before update on schubert.batch_runs for each row execute function schubert.pt_skip_count_update()");
       save = c.setSavepoint();
       assertEquals(
-          "55000",
-          assertThrows(SQLException.class, () -> call(c, "NOTIFICATIONS", 1)).getSQLState());
+          FIXTURE_55000_F2ADCE46,
+          assertThrows(SQLException.class, () -> call(c, FIXTURE_NOTIFICATIONS_CEF4B870, 1))
+              .getSQLState());
       c.rollback(save);
       assertEquals("1", scalar(c, "select count(*) from schubert.notifications"));
       c.rollback();
@@ -595,7 +641,7 @@ final class StepCleanupBoundaryTest {
                 "select target_count,deleted_count,skipped_count,step_target_count,step_success_count,complete,reason_code from "
                     + FN
                     + "("
-                    + args("NOTIFICATIONS", 1)
+                    + args(FIXTURE_NOTIFICATIONS_CEF4B870, 1)
                     + ")")) {
       var md = rows.getMetaData();
       assertEquals(7, md.getColumnCount());
@@ -628,8 +674,9 @@ final class StepCleanupBoundaryTest {
         var save = c.setSavepoint();
         replaceNotification(c, select);
         assertEquals(
-            "55000",
-            assertThrows(SQLException.class, () -> call(c, "NOTIFICATIONS", 1)).getSQLState(),
+            FIXTURE_55000_F2ADCE46,
+            assertThrows(SQLException.class, () -> call(c, FIXTURE_NOTIFICATIONS_CEF4B870, 1))
+                .getSQLState(),
             select);
         c.rollback(save);
       }
@@ -637,7 +684,7 @@ final class StepCleanupBoundaryTest {
         var save = c.setSavepoint();
         replaceNotification(
             c, "select 0::bigint,0::bigint,0::bigint,'" + reason + "'::varchar(32)");
-        assertEquals("0|0|0|NULL|NULL|false|" + reason, call(c, "NOTIFICATIONS", 1));
+        assertEquals("0|0|0|NULL|NULL|false|" + reason, call(c, FIXTURE_NOTIFICATIONS_CEF4B870, 1));
         c.rollback(save);
       }
       for (String[] counter :
@@ -653,7 +700,8 @@ final class StepCleanupBoundaryTest {
         replaceNotification(c, counter[0]);
         assertEquals(
             counter[1],
-            assertThrows(SQLException.class, () -> call(c, "NOTIFICATIONS", 1)).getSQLState());
+            assertThrows(SQLException.class, () -> call(c, FIXTURE_NOTIFICATIONS_CEF4B870, 1))
+                .getSQLState());
         c.rollback(save);
       }
       c.rollback();
@@ -748,10 +796,10 @@ final class StepCleanupBoundaryTest {
 
   static long id(String k) {
     return switch (k) {
-      case "NOTIFICATIONS" -> 90010;
-      case "QUESTIONS" -> 90011;
-      case "SESSIONS" -> 90012;
-      case "OUTBOX" -> 90013;
+      case FIXTURE_NOTIFICATIONS_CEF4B870 -> 90010;
+      case FIXTURE_QUESTIONS_220AA8AB -> 90011;
+      case FIXTURE_SESSIONS_1BB11AB1 -> 90012;
+      case FIXTURE_OUTBOX_4A998DF8 -> 90013;
       default -> 90014;
     };
   }
