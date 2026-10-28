@@ -216,6 +216,17 @@ class LogSearchWireClientTest {
       rejected(Reason.INVALID_RESPONSE, () -> f.client.exchange(input(), CONTEXT));
       f.erased();
     }
+    for (boolean wrongLayout : List.of(true, false)) {
+      var f = new Fixture();
+      f.reply =
+          (id, b) ->
+              wrongLayout
+                  ? header("MCTRSP01", 8, 72, 1, FIXTURE_0000_876EEFE0, id, CONTEXT.wireValue())
+                  : Arrays.copyOf(
+                      response(0, false, FIXTURE_0000_876EEFE0, id, CONTEXT.wireValue()), 305);
+      rejected(Reason.INVALID_RESPONSE, () -> f.client.exchange(input(), CONTEXT));
+      f.erased();
+    }
   }
 
   @Test
