@@ -35,6 +35,7 @@ final class LinuxSystemdSession implements SystemManagerObservation.Session {
   private static final int EXPECTED_BASIC_READ_VALUES = 1;
   private static final int MAXIMUM_PROPERTY_UTF8_BYTES = 4096;
   private static final int READY_STATUS = 1;
+  private static final String LIBC_FREE_SYMBOL = "free";
 
   private static final java.lang.String LITERAL_SD_BUS_MESSAGE_UNREF = "sd_bus_message_unref";
 
@@ -133,7 +134,7 @@ final class LinuxSystemdSession implements SystemManagerObservation.Session {
     try {
       MemorySegment value = outputs[slot].get(ValueLayout.ADDRESS, 0);
       if (value.address() != 0) {
-        if (symbol.equals("free")) call(symbol, value);
+        if (symbol.equals(LIBC_FREE_SYMBOL)) call(symbol, value);
         else release(symbol, value);
       }
       outputState[slot] = 0;
@@ -281,7 +282,7 @@ final class LinuxSystemdSession implements SystemManagerObservation.Session {
     if (property.type == STRING_PROPERTY_TYPE) {
       return ResourceScope.acquire(
           () -> prepareOutput(1),
-          result -> releaseOutput(1, "free"),
+          result -> releaseOutput(1, LIBC_FREE_SYMBOL),
           result -> {
             timeout(micros);
             Object status =
@@ -505,9 +506,9 @@ final class LinuxSystemdSession implements SystemManagerObservation.Session {
               Map.entry(
                   "sd_bus_message_read_array",
                   FunctionDescriptor.of(integer, pointer, octet, pointer, pointer)),
-              Map.entry("free", FunctionDescriptor.ofVoid(pointer)));
+              Map.entry(LIBC_FREE_SYMBOL, FunctionDescriptor.ofVoid(pointer)));
       for (var entry : descriptors.entrySet()) {
-        SymbolLookup lookup = entry.getKey().equals("free") ? libc : systemd;
+        SymbolLookup lookup = entry.getKey().equals(LIBC_FREE_SYMBOL) ? libc : systemd;
         var address =
             lookup.find(entry.getKey()).orElseThrow(SystemManagerObservation::unavailable);
         handles.put(

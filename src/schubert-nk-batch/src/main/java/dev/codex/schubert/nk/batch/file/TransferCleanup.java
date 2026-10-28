@@ -98,6 +98,7 @@ final class TransferCleanup {
     }
   }
 
+  private static final int MINIMUM_SUPPORTED_DATE_YEAR = 1;
   private static final DateTimeFormatter DATE =
       DateTimeFormatter.ofPattern("uuuuMMdd").withResolverStyle(ResolverStyle.STRICT);
   private final OwnedTransferDirectory root;
@@ -144,7 +145,7 @@ final class TransferCleanup {
         }
         date = LocalDate.parse(name, DATE);
         // Eight ASCII digits and adjacent strict uuuu/MM/dd already bound the year to 0..9999.
-        if (date.getYear() < 1) {
+        if (date.getYear() < MINIMUM_SUPPORTED_DATE_YEAR) {
           counts.retained();
           continue;
         }
