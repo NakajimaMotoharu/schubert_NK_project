@@ -1,0 +1,71 @@
+{
+  "actualExit": 0,
+  "coverage": null,
+  "dynamicPtStatus": "NOT_EXECUTED_HOLD",
+  "invocation": {
+    "actualPythonCommand": [
+      "/usr/bin/python3",
+      "-B",
+      "tools/quality/pg13196_systemd_test_literal_static.py"
+    ],
+    "arbitraryArgumentsRecorded": false,
+    "entrypointPath": "tools/quality/pg13196_systemd_test_literal_static.py",
+    "entrypointSha256": "fa2fe510ed8d63119145dc6d76a957ad85c71b12f44363c833e0600a052a02df",
+    "helperPath": "tools/quality/host_tool_invocation.py",
+    "helperSha256": "85d616a3db4ff47f4c95ae2e0dd57954bc2b09f28b8f2a685b986e5621545c46",
+    "libraryPath": "tools/quality/pg13196_systemd_test_literal_static.py",
+    "librarySha256": "fa2fe510ed8d63119145dc6d76a957ad85c71b12f44363c833e0600a052a02df",
+    "loadedProjectPythonSources": {
+      "tools/quality/g07_host_class_provenance_inputs.py": "a676cb3e4145177c3c243722d737592ce7d44c3f29cfe4f670662ef7651f046b",
+      "tools/quality/host_tool_invocation.py": "85d616a3db4ff47f4c95ae2e0dd57954bc2b09f28b8f2a685b986e5621545c46",
+      "tools/quality/pg13196_systemd_test_literal_static.py": "fa2fe510ed8d63119145dc6d76a957ad85c71b12f44363c833e0600a052a02df",
+      "tools/quality/pg9666_pagination_static.py": "75347ce8aef713e43a3d2fd39e0e0b6244da9427caa8dc51d36e539d629e0ef5"
+    },
+    "provenance": "OBSERVED_SYS_ARGV_AND_ORIG_ARGV_NOT_RECONSTRUCTED"
+  },
+  "jarsUnchanged": {
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg13194-systemd-test-literal-six-compile-v1/snapshot/src/schubert-nk-api/target/schubert-nk-api-0.1.0-SNAPSHOT.jar": "124da005b1ade6f8fccfc3093aff3de6bd21835f209b46088794ac9f0777faf8",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg13194-systemd-test-literal-six-compile-v1/snapshot/src/schubert-nk-batch/target/schubert-nk-batch-0.1.0-SNAPSHOT.jar": "89d9fc8d06292d8f12e081d9267fd62f24460175a695353ee9af596c7dc3500a",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg13194-systemd-test-literal-six-compile-v1/snapshot/src/schubert-nk-bootstrap/target/schubert-nk-bootstrap-0.1.0-SNAPSHOT.jar": "fc5ccb1b1d7857e918699db706cbc744f02d1f3abace265bdc14986e90e24253",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg13194-systemd-test-literal-six-compile-v1/snapshot/src/schubert-nk-protocol/target/schubert-nk-protocol-0.1.0-SNAPSHOT.jar": "c4e970f4fc90cb3a605a3cefe2a7b01b9fe23fffedb0181c288d2c8332ad91e0",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg13194-systemd-test-literal-six-compile-v1/snapshot/src/schubert-nk-storage/target/schubert-nk-storage-0.1.0-SNAPSHOT.jar": "3426628a79dbeb33c379fce5f848750edf6bec6d67385444a3046006eb4b05cd",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg13194-systemd-test-literal-six-compile-v1/snapshot/src/schubert-nk-web/target/schubert-nk-web-0.1.0-SNAPSHOT.jar": "f36d9f9e10a586b1e64d3b870719a6d69408eebe3d98ffc0357bd5d5918b7def"
+  },
+  "newAccepted": 0,
+  "normalManifestSha256": "6c6809515a4ae056dad337e44b5ffd8e26b617e0292e88df7082b3ddcddea1b9",
+  "pmdCheckstyleReexecuted": false,
+  "preflightManifestSha256": "1a7db1f6a6db5b41a8c61119b98825cd1cce173fa6eab50c050f91557e6066f1",
+  "productTestsExecuted": 0,
+  "rawStatic": 19,
+  "rawStaticGateExit": 1,
+  "source": "41359340de234b8bea7578d957bcbf4df6ab951f",
+  "sourceHashRebindingOnly": true,
+  "sourceHashes": {
+    "src/schubert-nk-bootstrap/src/test/java/dev/codex/schubert/nk/bootstrap/LinuxSystemdSessionTest.java": "98a92859bee38488872912952c2a4706edca9ace6ad0b02a18b70ec15996cb93"
+  },
+  "spotbugsSixExit": 0,
+  "stages": [
+    {
+      "actualExit": 0,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/m2/wrapper/dists/apache-maven-3.9.12/6068d197/bin/mvn",
+        "-o",
+        "--no-transfer-progress",
+        "-Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository",
+        "-pl",
+        "src/schubert-nk-protocol,src/schubert-nk-storage,src/schubert-nk-bootstrap,src/schubert-nk-api,src/schubert-nk-web,src/schubert-nk-batch",
+        "-am",
+        "-DskipTests=true",
+        "com.github.spotbugs:spotbugs-maven-plugin:4.10.4.0:check"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg13194-systemd-test-literal-six-compile-v1/snapshot",
+      "endUTC": "2026-10-28T10:42:29.214752+00:00",
+      "startUTC": "2026-10-28T10:41:20.770437+00:00",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSha256": "5d2b36b336c65ed0ef6af6d5177dfb4e1e81f70a712b0b7708e485754f0f082d",
+      "timedOut": false
+    }
+  ],
+  "suppressionsAdded": false,
+  "whole451Accepted": false
+}
