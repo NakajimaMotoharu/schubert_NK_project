@@ -34,6 +34,26 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** PT-DB-INBOX-049..056; V010 SQL matrix, not an AES/Java-deletion/oneshot certificate. */
 final class InboxMaintenanceBoundaryTest {
+  private static final String FIXTURE_UST_A0082146 = "UST";
+  private static final String FIXTURE_QSB_661826BD = "QSB";
+  private static final String FIXTURE_NTC_1FFAAF5E = "NTC";
+  private static final String FIXTURE_QDL_6EE4F4E8 = "QDL";
+  private static final String FIXTURE_LGN_B0C92867 = "LGN";
+  private static final String FIXTURE_LOG_EDCC8D9B = "LOG";
+  private static final String FIXTURE_GAM_5BC4EFCF = "GAM";
+  private static final String FIXTURE_ERROR_F717E7D8 = "ERROR";
+  private static final String FIXTURE_SCHUBERT_APP_5AB151CF = "schubert_app";
+  private static final String FIXTURE_DELETE_FROM_SCHUBERT_REQUEST_INBOX_D18913CC =
+      "delete from schubert.request_inbox";
+  private static final String FIXTURE_AUTH_SESSION_97533387 = "AUTH_SESSION";
+  private static final String FIXTURE_USER_2DED8884 = "USER";
+  private static final String FIXTURE_SCENARIO_FILE_072D014E = "SCENARIO_FILE";
+  private static final String FIXTURE_QUESTION_8F4A4C6B = "QUESTION";
+  private static final String FIXTURE_JOB_804C2C2C = "JOB";
+  private static final String FIXTURE_NULL_F072CBEC = "null";
+  private static final String FIXTURE_NONE_C44E6DD7 = "NONE";
+  private static final String FIXTURE_22023_CDCA15BB = "22023";
+  private static final String FIXTURE_55P03_0FE714C6 = "55P03";
   @TempDir static Path root;
   private static ApiLogDatabaseFixture db;
   private static String url;
@@ -45,12 +65,48 @@ final class InboxMaintenanceBoundaryTest {
   private static final Instant COMPLETED = Instant.parse("2026-09-09T00:00:00.123Z");
   private static final Instant CUTOFF = Instant.parse("2026-09-17T00:00:00.123Z");
   private static final Set<String> TOKEN =
-      Set.of("UCR", "UST", "URL", "UPW", "ULK", "QSB", "NTC", "QDL");
+      Set.of(
+          "UCR",
+          FIXTURE_UST_A0082146,
+          "URL",
+          "UPW",
+          "ULK",
+          FIXTURE_QSB_661826BD,
+          FIXTURE_NTC_1FFAAF5E,
+          FIXTURE_QDL_6EE4F4E8);
   private static final List<String> ROUTES =
       List.of(
-          "LGN", "LOG", "GAM", "SPK", "RTE", "SCF", "SRC", "SCN", "AUD", "ANM", "ANL", "VID", "MCT",
-          "MCS", "MTR", "MED", "USR", "UDT", "LGS", "UCR", "UST", "URL", "UPW", "ULK", "NTS", "NTD",
-          "QSS", "QSD", "QSB", "NTC", "QDL");
+          FIXTURE_LGN_B0C92867,
+          FIXTURE_LOG_EDCC8D9B,
+          FIXTURE_GAM_5BC4EFCF,
+          "SPK",
+          "RTE",
+          "SCF",
+          "SRC",
+          "SCN",
+          "AUD",
+          "ANM",
+          "ANL",
+          "VID",
+          "MCT",
+          "MCS",
+          "MTR",
+          "MED",
+          "USR",
+          "UDT",
+          "LGS",
+          "UCR",
+          FIXTURE_UST_A0082146,
+          "URL",
+          "UPW",
+          "ULK",
+          "NTS",
+          "NTD",
+          "QSS",
+          "QSD",
+          FIXTURE_QSB_661826BD,
+          FIXTURE_NTC_1FFAAF5E,
+          FIXTURE_QDL_6EE4F4E8);
   private static final String NEXT = "schubert.maintenance_next_inbox(uuid,timestamptz,uuid)";
   private static final String DELETE =
       "schubert.maintenance_delete_inbox(uuid,timestamptz,uuid,text,bytea)";
@@ -88,7 +144,7 @@ final class InboxMaintenanceBoundaryTest {
             + "')");
     backup("BACKUP_DB");
     backup("BACKUP_CONFIG");
-    inbox(101, "GAM", "ERROR", COMPLETED.plusSeconds(86400));
+    inbox(101, FIXTURE_GAM_5BC4EFCF, FIXTURE_ERROR_F717E7D8, COMPLETED.plusSeconds(86400));
   }
 
   @Test
@@ -112,7 +168,7 @@ final class InboxMaintenanceBoundaryTest {
         for (String role :
             List.of(
                 ROLE,
-                "schubert_app",
+                FIXTURE_SCHUBERT_APP_5AB151CF,
                 "schubert_batch",
                 "schubert_backup",
                 "schubert_web_session",
@@ -165,7 +221,7 @@ final class InboxMaintenanceBoundaryTest {
             "select id from schubert_web_session.web_http_sessions",
             "update schubert.app_users set version=1",
             "delete from schubert.script_files",
-            "delete from schubert.request_inbox",
+            FIXTURE_DELETE_FROM_SCHUBERT_REQUEST_INBOX_D18913CC,
             "create table schubert.forbidden(id int)",
             "set role nk_owner",
             "set role schubert_app",
@@ -173,7 +229,7 @@ final class InboxMaintenanceBoundaryTest {
       denied(ROLE, "42501", statement);
     for (String role :
         List.of(
-            "schubert_app",
+            FIXTURE_SCHUBERT_APP_5AB151CF,
             "schubert_batch",
             "schubert_backup",
             "schubert_web_session",
@@ -186,12 +242,12 @@ final class InboxMaintenanceBoundaryTest {
 
   @Test
   void candidateOrderStateAndUnknownRoutes() throws Exception {
-    sql("delete from schubert.request_inbox");
-    inbox(1, "ZZZ", "ERROR", CUTOFF.minusNanos(1000));
-    inbox(2, "GAM", "COMPLETED", CUTOFF.minusNanos(1000));
-    inbox(3, "GAM", "PROCESSING", CUTOFF.minusNanos(1000));
-    inbox(4, "GAM", "ERROR", CUTOFF);
-    inbox(5, "GAM", "ERROR", CUTOFF.plusNanos(1000));
+    sql(FIXTURE_DELETE_FROM_SCHUBERT_REQUEST_INBOX_D18913CC);
+    inbox(1, "ZZZ", FIXTURE_ERROR_F717E7D8, CUTOFF.minusNanos(1000));
+    inbox(2, FIXTURE_GAM_5BC4EFCF, "COMPLETED", CUTOFF.minusNanos(1000));
+    inbox(3, FIXTURE_GAM_5BC4EFCF, "PROCESSING", CUTOFF.minusNanos(1000));
+    inbox(4, FIXTURE_GAM_5BC4EFCF, FIXTURE_ERROR_F717E7D8, CUTOFF);
+    inbox(5, FIXTURE_GAM_5BC4EFCF, FIXTURE_ERROR_F717E7D8, CUTOFF.plusNanos(1000));
     try (var c = restricted()) {
       assertEquals(List.of(new UUID(0, 1)), read(c, RUN, CUTOFF, null));
       assertFalse(remove(c, RUN, CUTOFF, new UUID(0, 1), xact(c), hash));
@@ -206,26 +262,35 @@ final class InboxMaintenanceBoundaryTest {
   @Test
   void canonicalRoutesReferencesAndTokens() throws Exception {
     for (String route : ROUTES) {
-      sql("delete from schubert.request_inbox");
-      inbox(101, route, "ERROR", CUTOFF.minusSeconds(1));
+      sql(FIXTURE_DELETE_FROM_SCHUBERT_REQUEST_INBOX_D18913CC);
+      inbox(101, route, FIXTURE_ERROR_F717E7D8, CUTOFF.minusSeconds(1));
       try (var c = restricted()) {
         assertEquals(List.of(MESSAGE), read(c, RUN, CUTOFF, null));
         assertTrue(remove(c, RUN, CUTOFF, MESSAGE, xact(c), hash), route);
         c.rollback();
       }
-      for (String reference : List.of("AUTH_SESSION", "USER", "SCENARIO_FILE", "QUESTION", "JOB")) {
+      for (String reference :
+          List.of(
+              FIXTURE_AUTH_SESSION_97533387,
+              FIXTURE_USER_2DED8884,
+              FIXTURE_SCENARIO_FILE_072D014E,
+              FIXTURE_QUESTION_8F4A4C6B,
+              FIXTURE_JOB_804C2C2C)) {
         sql(
             "update schubert.request_inbox set result_ref_type='"
                 + reference
                 + "',result_ref_id="
-                + (reference.equals("AUTH_SESSION") ? "null" : "9")
+                + (reference.equals(FIXTURE_AUTH_SESSION_97533387) ? FIXTURE_NULL_F072CBEC : "9")
                 + ",result_ref_uuid="
-                + (reference.equals("AUTH_SESSION") ? "'" + SESSION + "'" : "null"));
+                + (reference.equals(FIXTURE_AUTH_SESSION_97533387)
+                    ? "'" + SESSION + "'"
+                    : FIXTURE_NULL_F072CBEC));
         boolean expected =
-            reference.equals("AUTH_SESSION") && Set.of("LGN", "LOG").contains(route)
-                || reference.equals("USER")
-                    && Set.of("UCR", "UST", "URL", "UPW", "ULK").contains(route)
-                || reference.equals("SCENARIO_FILE") && route.equals("SCN");
+            reference.equals(FIXTURE_AUTH_SESSION_97533387)
+                    && Set.of(FIXTURE_LGN_B0C92867, FIXTURE_LOG_EDCC8D9B).contains(route)
+                || reference.equals(FIXTURE_USER_2DED8884)
+                    && Set.of("UCR", FIXTURE_UST_A0082146, "URL", "UPW", "ULK").contains(route)
+                || reference.equals(FIXTURE_SCENARIO_FILE_072D014E) && route.equals("SCN");
         try (var c = restricted()) {
           assertEquals(List.of(MESSAGE), read(c, RUN, CUTOFF, null));
           assertEquals(
@@ -235,31 +300,45 @@ final class InboxMaintenanceBoundaryTest {
       }
     }
     for (String route : List.of("ZZZ")) {
-      sql("delete from schubert.request_inbox");
-      inbox(101, route, "ERROR", CUTOFF.minusSeconds(1));
+      sql(FIXTURE_DELETE_FROM_SCHUBERT_REQUEST_INBOX_D18913CC);
+      inbox(101, route, FIXTURE_ERROR_F717E7D8, CUTOFF.minusSeconds(1));
       try (var c = restricted()) {
         assertEquals(List.of(MESSAGE), read(c, RUN, CUTOFF, null));
         assertFalse(remove(c, RUN, CUTOFF, MESSAGE, xact(c), hash));
       }
     }
     // V016: independent closed state/reference matrix for the three mutation routes.
-    for (String route : List.of("QSB", "NTC", "QDL")) {
-      for (String state : List.of("COMPLETED", "ERROR")) {
+    for (String route : List.of(FIXTURE_QSB_661826BD, FIXTURE_NTC_1FFAAF5E, FIXTURE_QDL_6EE4F4E8)) {
+      for (String state : List.of("COMPLETED", FIXTURE_ERROR_F717E7D8)) {
         for (String reference :
-            List.of("NONE", "AUTH_SESSION", "USER", "SCENARIO_FILE", "QUESTION", "JOB")) {
-          sql("delete from schubert.request_inbox");
+            List.of(
+                FIXTURE_NONE_C44E6DD7,
+                FIXTURE_AUTH_SESSION_97533387,
+                FIXTURE_USER_2DED8884,
+                FIXTURE_SCENARIO_FILE_072D014E,
+                FIXTURE_QUESTION_8F4A4C6B,
+                FIXTURE_JOB_804C2C2C)) {
+          sql(FIXTURE_DELETE_FROM_SCHUBERT_REQUEST_INBOX_D18913CC);
           inbox(101, route, state, CUTOFF.minusSeconds(1));
           sql(
               "update schubert.request_inbox set result_ref_type='"
                   + reference
                   + "',result_ref_id="
-                  + (Set.of("NONE", "AUTH_SESSION").contains(reference) ? "null" : "9")
+                  + (Set.of(FIXTURE_NONE_C44E6DD7, FIXTURE_AUTH_SESSION_97533387)
+                          .contains(reference)
+                      ? FIXTURE_NULL_F072CBEC
+                      : "9")
                   + ",result_ref_uuid="
-                  + (reference.equals("AUTH_SESSION") ? "'" + SESSION + "'" : "null"));
+                  + (reference.equals(FIXTURE_AUTH_SESSION_97533387)
+                      ? "'" + SESSION + "'"
+                      : FIXTURE_NULL_F072CBEC));
           boolean expected =
-              state.equals("ERROR")
-                  ? reference.equals("NONE")
-                  : reference.equals(route.equals("NTC") ? "JOB" : "QUESTION");
+              state.equals(FIXTURE_ERROR_F717E7D8)
+                  ? reference.equals(FIXTURE_NONE_C44E6DD7)
+                  : reference.equals(
+                      route.equals(FIXTURE_NTC_1FFAAF5E)
+                          ? FIXTURE_JOB_804C2C2C
+                          : FIXTURE_QUESTION_8F4A4C6B);
           try (var c = restricted()) {
             assertEquals(List.of(MESSAGE), read(c, RUN, CUTOFF, null));
             assertEquals(
@@ -272,14 +351,22 @@ final class InboxMaintenanceBoundaryTest {
       }
     }
     // Remove only constraints in a rollback-only isolated admin TX to test SQL defense in depth.
-    for (String route : List.of("LGN", "LOG", "GAM", "UST")) {
+    for (String route :
+        List.of(
+            FIXTURE_LGN_B0C92867,
+            FIXTURE_LOG_EDCC8D9B,
+            FIXTURE_GAM_5BC4EFCF,
+            FIXTURE_UST_A0082146)) {
       for (String mutation :
           List.of(
               "request_version='002'",
               "response_version='002'",
               "response_layout_id='AUDRSP01'",
-              "owner_user_id=" + (route.equals("LGN") ? "7" : "null"),
-              "operation_token=" + (route.equals("UST") ? "null" : "'" + UUID.randomUUID() + "'"),
+              "owner_user_id=" + (route.equals(FIXTURE_LGN_B0C92867) ? "7" : FIXTURE_NULL_F072CBEC),
+              "operation_token="
+                  + (route.equals(FIXTURE_UST_A0082146)
+                      ? FIXTURE_NULL_F072CBEC
+                      : "'" + UUID.randomUUID() + "'"),
               "result_ref_type='NONE',result_ref_id=9",
               "result_ref_type='NONE',result_ref_uuid='" + SESSION + "'")) {
         assertProtectedMutation(route, mutation);
@@ -292,14 +379,21 @@ final class InboxMaintenanceBoundaryTest {
   @Test
   void exactRetentionCutoffAndReplay() throws Exception {
     for (String route : ROUTES) {
-      long seconds = Set.of("LGN", "LOG").contains(route) || TOKEN.contains(route) ? 604800 : 86400;
+      long seconds =
+          Set.of(FIXTURE_LGN_B0C92867, FIXTURE_LOG_EDCC8D9B).contains(route)
+                  || TOKEN.contains(route)
+              ? 604800
+              : 86400;
       for (long adjustment : List.of(-1000L, 0L, 1000L)) {
-        sql("delete from schubert.request_inbox");
+        sql(FIXTURE_DELETE_FROM_SCHUBERT_REQUEST_INBOX_D18913CC);
         inbox(101, route, "COMPLETED", COMPLETED.plusSeconds(seconds).plusNanos(adjustment));
-        if (Set.of("QSB", "NTC", "QDL").contains(route))
+        if (Set.of(FIXTURE_QSB_661826BD, FIXTURE_NTC_1FFAAF5E, FIXTURE_QDL_6EE4F4E8)
+            .contains(route))
           sql(
               "update schubert.request_inbox set result_ref_type='"
-                  + (route.equals("NTC") ? "JOB" : "QUESTION")
+                  + (route.equals(FIXTURE_NTC_1FFAAF5E)
+                      ? FIXTURE_JOB_804C2C2C
+                      : FIXTURE_QUESTION_8F4A4C6B)
                   + "',result_ref_id=9");
         try (var c = restricted()) {
           assertEquals(List.of(MESSAGE), read(c, RUN, CUTOFF, null));
@@ -317,9 +411,10 @@ final class InboxMaintenanceBoundaryTest {
             "created_at='-infinity'",
             "completed_at='-infinity'",
             "completed_at='infinity'",
-            "created_at='2026-09-10T00:00:00Z'")) assertProtectedMutation("GAM", mutation);
-    sql("delete from schubert.request_inbox");
-    inbox(101, "GAM", "ERROR", CUTOFF.minusNanos(1000));
+            "created_at='2026-09-10T00:00:00Z'"))
+      assertProtectedMutation(FIXTURE_GAM_5BC4EFCF, mutation);
+    sql(FIXTURE_DELETE_FROM_SCHUBERT_REQUEST_INBOX_D18913CC);
+    inbox(101, FIXTURE_GAM_5BC4EFCF, FIXTURE_ERROR_F717E7D8, CUTOFF.minusNanos(1000));
     try (var c = restricted()) {
       try (var s = c.createStatement()) {
         s.execute("set local timezone='Asia/Tokyo'");
@@ -345,7 +440,7 @@ final class InboxMaintenanceBoundaryTest {
             "result_ref_type='USER',result_ref_id=0",
             "result_ref_type='USER',result_ref_id=1000000000000",
             "expires_at='-infinity'")) {
-      assertProtectedMutation("UST", mutation);
+      assertProtectedMutation(FIXTURE_UST_A0082146, mutation);
     }
     Object[][] invalid = {
       {null, CUTOFF, MESSAGE, "1", hash},
@@ -363,7 +458,7 @@ final class InboxMaintenanceBoundaryTest {
     for (Object[] args : invalid) {
       try (var c = restricted()) {
         assertEquals(
-            "22023",
+            FIXTURE_22023_CDCA15BB,
             assertThrows(
                     SQLException.class,
                     () ->
@@ -380,7 +475,7 @@ final class InboxMaintenanceBoundaryTest {
     for (String infinity : List.of("infinity", "-infinity")) {
       denied(
           ROLE,
-          "22023",
+          FIXTURE_22023_CDCA15BB,
           "select message_id from schubert.maintenance_next_inbox('"
               + RUN
               + "','"
@@ -388,7 +483,7 @@ final class InboxMaintenanceBoundaryTest {
               + "',null)");
       denied(
           ROLE,
-          "22023",
+          FIXTURE_22023_CDCA15BB,
           "select schubert.maintenance_delete_inbox('"
               + RUN
               + "','"
@@ -399,11 +494,12 @@ final class InboxMaintenanceBoundaryTest {
     }
     try (var c = restricted()) {
       assertEquals(
-          "22023",
+          FIXTURE_22023_CDCA15BB,
           assertThrows(SQLException.class, () -> read(c, null, CUTOFF, null)).getSQLState());
       c.rollback();
       assertEquals(
-          "22023", assertThrows(SQLException.class, () -> read(c, RUN, null, null)).getSQLState());
+          FIXTURE_22023_CDCA15BB,
+          assertThrows(SQLException.class, () -> read(c, RUN, null, null)).getSQLState());
       c.rollback();
       assertEquals(List.of(MESSAGE), read(c, RUN, CUTOFF, null));
       String transaction = xact(c);
@@ -430,28 +526,40 @@ final class InboxMaintenanceBoundaryTest {
 
   @Test
   void referencesStayLockedUntilTransactionEnds() throws Exception {
-    for (String reference : List.of("AUTH_SESSION", "USER", "SCENARIO_FILE")) {
+    for (String reference :
+        List.of(
+            FIXTURE_AUTH_SESSION_97533387, FIXTURE_USER_2DED8884, FIXTURE_SCENARIO_FILE_072D014E)) {
       sql(
           "update schubert.request_inbox set result_ref_type='"
               + reference
               + "',result_ref_id="
-              + (reference.equals("AUTH_SESSION") ? "null" : reference.equals("USER") ? "9" : "11")
+              + (reference.equals(FIXTURE_AUTH_SESSION_97533387)
+                  ? FIXTURE_NULL_F072CBEC
+                  : reference.equals(FIXTURE_USER_2DED8884) ? "9" : "11")
               + ",result_ref_uuid="
-              + (reference.equals("AUTH_SESSION") ? "'" + SESSION + "'" : "null"));
+              + (reference.equals(FIXTURE_AUTH_SESSION_97533387)
+                  ? "'" + SESSION + "'"
+                  : FIXTURE_NULL_F072CBEC));
       String row =
-          reference.equals("AUTH_SESSION")
+          reference.equals(FIXTURE_AUTH_SESSION_97533387)
               ? "schubert.auth_sessions where id='" + SESSION + "'"
-              : reference.equals("USER")
+              : reference.equals(FIXTURE_USER_2DED8884)
                   ? "schubert.app_users where id=9"
                   : "schubert.script_files where id=11";
       try (var c = restricted()) {
         assertEquals(List.of(MESSAGE), read(c, RUN, CUTOFF, null));
-        denied("schubert_app", "55P03", "select id from " + row + " for update nowait");
         denied(
-            "schubert_app",
-            "55P03",
+            FIXTURE_SCHUBERT_APP_5AB151CF,
+            FIXTURE_55P03_0FE714C6,
+            "select id from " + row + " for update nowait");
+        denied(
+            FIXTURE_SCHUBERT_APP_5AB151CF,
+            FIXTURE_55P03_0FE714C6,
             "select message_id from schubert.request_inbox for update nowait");
-        denied("schubert_batch", "55P03", "select id from schubert.batch_runs for update nowait");
+        denied(
+            "schubert_batch",
+            FIXTURE_55P03_0FE714C6,
+            "select id from schubert.batch_runs for update nowait");
         assertEquals(
             "7", scalarAdmin("select id from schubert.app_users where id=7 for update nowait"));
         c.rollback();
@@ -459,8 +567,10 @@ final class InboxMaintenanceBoundaryTest {
       try (var c = db.api()) {
         assertNotNull(scalar(c, "select id from " + row + " for update nowait"));
       }
-      if (reference.equals("AUTH_SESSION")) sql("delete from schubert.auth_sessions");
-      else if (reference.equals("USER")) sql("delete from schubert.app_users where id=9");
+      if (reference.equals(FIXTURE_AUTH_SESSION_97533387))
+        sql("delete from schubert.auth_sessions");
+      else if (reference.equals(FIXTURE_USER_2DED8884))
+        sql("delete from schubert.app_users where id=9");
       else sql("delete from schubert.script_files where id=11");
       try (var c = restricted()) {
         assertEquals(List.of(MESSAGE), read(c, RUN, CUTOFF, null));
@@ -470,7 +580,7 @@ final class InboxMaintenanceBoundaryTest {
 
   @Test
   void backupGateAndSnapshotRace() throws Exception {
-    denied("schubert_app", "23514", "update schubert.batch_runs set status='ERROR'");
+    denied(FIXTURE_SCHUBERT_APP_5AB151CF, "23514", "update schubert.batch_runs set status='ERROR'");
     for (String mutation :
         List.of(
             "delete from schubert.batch_runs",
@@ -502,12 +612,12 @@ final class InboxMaintenanceBoundaryTest {
         var c = restricted()) {
       s.execute("select pg_advisory_lock(71419602)");
       assertEquals(
-          "55P03",
+          FIXTURE_55P03_0FE714C6,
           assertThrows(SQLException.class, () -> read(c, RUN, CUTOFF, null)).getSQLState());
       c.rollback();
       String tx = xact(c);
       assertEquals(
-          "55P03",
+          FIXTURE_55P03_0FE714C6,
           assertThrows(SQLException.class, () -> remove(c, RUN, CUTOFF, MESSAGE, tx, hash))
               .getSQLState());
       c.rollback();
@@ -594,8 +704,8 @@ final class InboxMaintenanceBoundaryTest {
                 .formatHex(
                     MessageDigest.getInstance("SHA-256").digest(Files.readAllBytes(old.get(i)))));
     }
-    sql("delete from schubert.request_inbox");
-    inbox(101, "LGN", "ERROR", CUTOFF.minusSeconds(1));
+    sql(FIXTURE_DELETE_FROM_SCHUBERT_REQUEST_INBOX_D18913CC);
+    inbox(101, FIXTURE_LGN_B0C92867, FIXTURE_ERROR_F717E7D8, CUTOFF.minusSeconds(1));
     try (var c = restricted()) {
       assertEquals(
           MESSAGE.toString(),
@@ -627,8 +737,8 @@ final class InboxMaintenanceBoundaryTest {
   }
 
   private static void assertProtectedMutation(String route, String mutation) throws SQLException {
-    sql("delete from schubert.request_inbox");
-    inbox(101, route, "ERROR", CUTOFF.minusSeconds(1));
+    sql(FIXTURE_DELETE_FROM_SCHUBERT_REQUEST_INBOX_D18913CC);
+    inbox(101, route, FIXTURE_ERROR_F717E7D8, CUTOFF.minusSeconds(1));
     try (var c = db.admin();
         var s = c.createStatement()) {
       c.setAutoCommit(false);
@@ -742,10 +852,10 @@ final class InboxMaintenanceBoundaryTest {
       s.setObject(1, id);
       s.setObject(2, id);
       s.setString(3, route + "REQ01");
-      s.setObject(4, route.equals("LGN") ? null : 7L);
+      s.setObject(4, route.equals(FIXTURE_LGN_B0C92867) ? null : 7L);
       s.setObject(5, TOKEN.contains(route) ? UUID.randomUUID() : null);
       s.setString(6, state);
-      s.setString(7, processing ? null : "NONE");
+      s.setString(7, processing ? null : FIXTURE_NONE_C44E6DD7);
       s.setString(8, processing ? null : route + "RSP01");
       s.setString(9, processing ? null : "001");
       s.setBytes(10, processing ? null : new byte[30]);

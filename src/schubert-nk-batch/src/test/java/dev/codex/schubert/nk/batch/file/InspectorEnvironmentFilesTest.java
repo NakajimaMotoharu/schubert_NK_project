@@ -47,6 +47,22 @@ import org.junit.jupiter.api.io.TempDir;
  * OPS-009/UI251/SS343 6.12; PG-D-155; NS001..008; real isolated namespace, synthetic root/GID/FS.
  */
 final class InspectorEnvironmentFilesTest {
+  private static final String FIXTURE_COMPLETE_575951DB = "complete";
+  private static final String FIXTURE_UNLINK_04963CA9 = "unlink";
+  private static final String FIXTURE_GROUP_654E1E20 = "group";
+  private static final String FIXTURE_CREATE_5498A731 = "create";
+  private static final String FIXTURE_CLOSE_97959247 = "close";
+  private static final String FIXTURE_RUNTIME_2D52CD90 = "runtime";
+  private static final String FIXTURE_ETC_9F5F0C94 = "etc";
+  private static final String FIXTURE_CONFIG_48882AB4 = "config";
+  private static final String FIXTURE_APP_4E5EF144 = "app";
+  private static final String FIXTURE_MAINTENANCE_9CE8617E = "maintenance";
+  private static final String FIXTURE_STATIC_0105CCA0 = "static";
+  private static final String FIXTURE_ATTRIBUTES_D300E055 = "attributes";
+  private static final String FIXTURE_MODE_B6D5C2C3 = "mode";
+  private static final String FIXTURE_FILESYSTEM_909B3E41 = "filesystem";
+  private static final String FIXTURE_ACL_43B23946 = "acl";
+  private static final String FIXTURE_READONLY_C4A495E7 = "readonly";
   private static final BatchRun RUN =
       new BatchRun(
           UUID.fromString("00000000-0000-0000-0000-000000000155"),
@@ -63,7 +79,7 @@ final class InspectorEnvironmentFilesTest {
     try (var f = fixture();
         var executor = Executors.newSingleThreadExecutor()) {
       assertEquals(
-          "complete",
+          FIXTURE_COMPLETE_575951DB,
           f.files.executeOwned(
               RUN,
               retirement -> {
@@ -72,12 +88,12 @@ final class InspectorEnvironmentFilesTest {
                         () -> assertThrows(StorageIoException.class, retirement::retire));
                 assertNotNull(assertDoesNotThrow(() -> denied.get(5, TimeUnit.SECONDS)));
                 assertEquals(RUNTIME, Files.readString(f.target));
-                assertEquals(0, f.count("unlink"));
+                assertEquals(0, f.count(FIXTURE_UNLINK_04963CA9));
                 retirement.retire();
                 assertFalse(Files.exists(f.target));
-                return "complete";
+                return FIXTURE_COMPLETE_575951DB;
               }));
-      assertEquals(1, f.count("unlink"));
+      assertEquals(1, f.count(FIXTURE_UNLINK_04963CA9));
       f.released();
     }
   }
@@ -87,7 +103,7 @@ final class InspectorEnvironmentFilesTest {
     InspectorEnvironmentFiles.Retirement[] saved = {null};
     try (var f = fixture()) {
       assertEquals(
-          "complete",
+          FIXTURE_COMPLETE_575951DB,
           f.files.executeOwned(
               RUN,
               retirement -> {
@@ -97,7 +113,7 @@ final class InspectorEnvironmentFilesTest {
                 assertFalse(
                     Files.exists(f.target)); // The caller's intent may only be retired after this.
                 assertThrows(StorageIoException.class, retirement::retire);
-                return "complete";
+                return FIXTURE_COMPLETE_575951DB;
               }));
       assertThrows(StorageIoException.class, saved[0]::retire);
       f.released();
@@ -141,7 +157,7 @@ final class InspectorEnvironmentFilesTest {
                 return "terminal";
               }));
       assertEquals(1, f.callbacks);
-      assertEquals(3, f.count("group"));
+      assertEquals(3, f.count(FIXTURE_GROUP_654E1E20));
       assertFalse(Files.exists(f.target));
       assertEquals(CONFIG, Files.readString(f.staticFile));
       assertFalse(Files.exists(f.maintenance.resolve(RUN.id() + ".part")));
@@ -150,7 +166,7 @@ final class InspectorEnvironmentFilesTest {
     try (var f = fixture()) {
       Files.writeString(f.target, RUNTIME);
       assertEquals(7, (int) f.files.execute(RUN, () -> 7));
-      assertEquals(0, f.count("create"));
+      assertEquals(0, f.count(FIXTURE_CREATE_5498A731));
       assertFalse(Files.exists(f.target));
     }
   }
@@ -197,9 +213,9 @@ final class InspectorEnvironmentFilesTest {
                             () -> {
                               callbacks[0]++;
 
-                              closes[0] = f.count("close");
+                              closes[0] = f.count(FIXTURE_CLOSE_97959247);
                               f.on(
-                                  "close",
+                                  FIXTURE_CLOSE_97959247,
                                   closes[0] + offset,
                                   () -> {
                                     injected[0]++;
@@ -212,15 +228,15 @@ final class InspectorEnvironmentFilesTest {
             assertCompound(unknown, actual, known);
             assertEquals(1, injected[0]);
             assertEquals(1, callbacks[0]);
-            assertEquals(closes[0] + 5, f.count("close"));
+            assertEquals(closes[0] + 5, f.count(FIXTURE_CLOSE_97959247));
             assertEquals(RUNTIME, Files.readString(f.target));
             assertEquals(CONFIG, Files.readString(f.staticFile));
-            assertEquals(0, f.count("unlink"));
+            assertEquals(0, f.count(FIXTURE_UNLINK_04963CA9));
             f.released();
           }
         }
     }
-    for (String mode : List.of("io", "runtime", "null"))
+    for (String mode : List.of("io", FIXTURE_RUNTIME_2D52CD90, "null"))
       try (var f = fixture()) {
         var expected = new IllegalStateException("synthetic callback failure");
         Executable operation =
@@ -231,16 +247,16 @@ final class InspectorEnvironmentFilesTest {
                       f.callbacks++;
                       assertEquals(RUNTIME, Files.readString(f.target));
                       if (mode.equals("io")) throw new IOException("synthetic raw child detail");
-                      if (mode.equals("runtime")) throw expected;
+                      if (mode.equals(FIXTURE_RUNTIME_2D52CD90)) throw expected;
                       return null;
                     });
         if (mode.equals("io")) failure(operation);
-        else if (mode.equals("runtime"))
+        else if (mode.equals(FIXTURE_RUNTIME_2D52CD90))
           assertSame(expected, assertThrows(IllegalStateException.class, operation));
         else assertThrows(NullPointerException.class, operation);
         assertEquals(1, f.callbacks);
         assertEquals(RUNTIME, Files.readString(f.target));
-        assertEquals(0, f.count("unlink"));
+        assertEquals(0, f.count(FIXTURE_UNLINK_04963CA9));
         f.released();
       }
   }
@@ -248,33 +264,43 @@ final class InspectorEnvironmentFilesTest {
   @Test
   void namespaceAndStaticIdentity() throws Exception {
     for (int at : List.of(2, 3))
-      for (String role : List.of("etc", "config", "runtime", "app", "maintenance", "static"))
+      for (String role :
+          List.of(
+              FIXTURE_ETC_9F5F0C94,
+              FIXTURE_CONFIG_48882AB4,
+              FIXTURE_RUNTIME_2D52CD90,
+              FIXTURE_APP_4E5EF144,
+              FIXTURE_MAINTENANCE_9CE8617E,
+              FIXTURE_STATIC_0105CCA0))
         try (var f = fixture()) {
-          f.on("group", at, () -> f.replace(role));
+          f.on(FIXTURE_GROUP_654E1E20, at, () -> f.replace(role));
           failure(() -> f.files.execute(RUN, f::callback));
           assertEquals(at == 2 ? 0 : 1, f.callbacks);
-          assertEquals(0, f.count("unlink"));
+          assertEquals(0, f.count(FIXTURE_UNLINK_04963CA9));
           f.released();
         }
     for (int at : List.of(2, 3))
       try (var f = fixture()) {
-        f.on("group", at, () -> f.group = 2001);
+        f.on(FIXTURE_GROUP_654E1E20, at, () -> f.group = 2001);
         failure(() -> f.files.execute(RUN, f::callback));
         assertEquals(at == 2 ? 0 : 1, f.callbacks);
         assertEquals(RUNTIME, Files.readString(f.target));
       }
     for (int at : List.of(2, 3))
       try (var f = fixture()) {
-        f.on("group", at, () -> Files.writeString(f.staticFile, CONFIG.replace("v1,v2", "v3,v4")));
+        f.on(
+            FIXTURE_GROUP_654E1E20,
+            at,
+            () -> Files.writeString(f.staticFile, CONFIG.replace("v1,v2", "v3,v4")));
         failure(() -> f.files.execute(RUN, f::callback));
         assertEquals(at == 2 ? 0 : 1, f.callbacks);
         assertEquals(CONFIG.replace("v1,v2", "v3,v4"), Files.readString(f.staticFile));
       }
     try (var f = fixture()) {
-      f.on("attributes", 7, () -> f.replace("static"));
+      f.on(FIXTURE_ATTRIBUTES_D300E055, 7, () -> f.replace(FIXTURE_STATIC_0105CCA0));
       failure(() -> f.files.execute(RUN, f::callback));
       assertEquals(0, f.callbacks);
-      assertEquals(0, f.count("create"));
+      assertEquals(0, f.count(FIXTURE_CREATE_5498A731));
     }
   }
 
@@ -286,9 +312,25 @@ final class InspectorEnvironmentFilesTest {
         failure(() -> f.files.execute(RUN, f::callback));
         assertEquals(0, f.count("openRoot"));
       }
-    for (String role : List.of("etc", "config", "runtime", "app", "maintenance", "static")) {
+    for (String role :
+        List.of(
+            FIXTURE_ETC_9F5F0C94,
+            FIXTURE_CONFIG_48882AB4,
+            FIXTURE_RUNTIME_2D52CD90,
+            FIXTURE_APP_4E5EF144,
+            FIXTURE_MAINTENANCE_9CE8617E,
+            FIXTURE_STATIC_0105CCA0)) {
       for (String key :
-          List.of("mode", "uid", "gid", "nlink", "size", "dev", "ino", "lastModifiedTime", "ctime"))
+          List.of(
+              FIXTURE_MODE_B6D5C2C3,
+              "uid",
+              "gid",
+              "nlink",
+              "size",
+              "dev",
+              "ino",
+              "lastModifiedTime",
+              "ctime"))
         for (Object invalid : Arrays.asList(null, "wrong type"))
           try (var f = fixture()) {
             f.change =
@@ -297,9 +339,9 @@ final class InspectorEnvironmentFilesTest {
                 };
             failure(() -> f.files.execute(RUN, f::callback));
             assertEquals(0, f.callbacks);
-            assertEquals(0, f.count("create"));
+            assertEquals(0, f.count(FIXTURE_CREATE_5498A731));
           }
-      for (String key : List.of("mode", "uid", "gid", "nlink", "size"))
+      for (String key : List.of(FIXTURE_MODE_B6D5C2C3, "uid", "gid", "nlink", "size"))
         try (var f = fixture()) {
           f.change =
               (observed, values) -> {
@@ -308,14 +350,19 @@ final class InspectorEnvironmentFilesTest {
                       key,
                       key.equals("size")
                           ? (Object) (-1L)
-                          : key.equals("nlink") && !role.equals("static") ? 1 : 99);
+                          : key.equals("nlink") && !role.equals(FIXTURE_STATIC_0105CCA0) ? 1 : 99);
               };
           failure(() -> f.files.execute(RUN, f::callback));
           assertEquals(0, f.callbacks);
-          assertEquals(0, f.count("create"));
+          assertEquals(0, f.count(FIXTURE_CREATE_5498A731));
         }
       for (String wrong :
-          List.of("nullAttributes", "nullFilesystem", "filesystem", "nullAcl", "acl"))
+          List.of(
+              "nullAttributes",
+              "nullFilesystem",
+              FIXTURE_FILESYSTEM_909B3E41,
+              "nullAcl",
+              FIXTURE_ACL_43B23946))
         try (var f = fixture()) {
           f.badRole = role;
           f.invalid = wrong;
@@ -323,7 +370,12 @@ final class InspectorEnvironmentFilesTest {
           assertEquals(0, f.callbacks);
         }
     }
-    for (String role : List.of("config", "app", "maintenance", "static"))
+    for (String role :
+        List.of(
+            FIXTURE_CONFIG_48882AB4,
+            FIXTURE_APP_4E5EF144,
+            FIXTURE_MAINTENANCE_9CE8617E,
+            FIXTURE_STATIC_0105CCA0))
       try (var f = fixture()) {
         f.change =
             (observed, values) -> {
@@ -332,10 +384,11 @@ final class InspectorEnvironmentFilesTest {
         failure(() -> f.files.execute(RUN, f::callback));
         assertEquals(0, f.callbacks);
       }
-    for (String role : List.of("runtime", "app", "maintenance"))
+    for (String role :
+        List.of(FIXTURE_RUNTIME_2D52CD90, FIXTURE_APP_4E5EF144, FIXTURE_MAINTENANCE_9CE8617E))
       try (var f = fixture()) {
         f.badRole = role;
-        f.invalid = "readonly";
+        f.invalid = FIXTURE_READONLY_C4A495E7;
         failure(() -> f.files.execute(RUN, f::callback));
         assertEquals(0, f.callbacks);
       }
@@ -355,19 +408,19 @@ final class InspectorEnvironmentFilesTest {
       int directoryOpens = 3 * (f.etc.getNameCount() + f.runtime.getNameCount() + 3);
       expected =
           Map.ofEntries(
-              Map.entry("group", 3),
+              Map.entry(FIXTURE_GROUP_654E1E20, 3),
               Map.entry("openRoot", 6),
               Map.entry("openDirectory", directoryOpens),
               Map.entry("openEntry", 26),
-              Map.entry("create", 1),
-              Map.entry("close", 6 + directoryOpens + 26),
+              Map.entry(FIXTURE_CREATE_5498A731, 1),
+              Map.entry(FIXTURE_CLOSE_97959247, 6 + directoryOpens + 26),
               Map.entry("publish", 1),
-              Map.entry("unlink", 1),
+              Map.entry(FIXTURE_UNLINK_04963CA9, 1),
               Map.entry("sync", 2),
-              Map.entry("attributes", 70),
-              Map.entry("acl", 70),
-              Map.entry("filesystem", 70),
-              Map.entry("readonly", 70),
+              Map.entry(FIXTURE_ATTRIBUTES_D300E055, 70),
+              Map.entry(FIXTURE_ACL_43B23946, 70),
+              Map.entry(FIXTURE_FILESYSTEM_909B3E41, 70),
+              Map.entry(FIXTURE_READONLY_C4A495E7, 70),
               Map.entry("openRead", 8),
               Map.entry("readSize", 16),
               Map.entry("read", 16),
@@ -417,7 +470,7 @@ final class InspectorEnvironmentFilesTest {
     }
     for (int position : List.of(2, 3))
       try (var f = fixture()) {
-        f.on("group", position, () -> Thread.currentThread().interrupt());
+        f.on(FIXTURE_GROUP_654E1E20, position, () -> Thread.currentThread().interrupt());
         try {
           failure(() -> f.files.execute(RUN, f::callback));
           assertTrue(Thread.currentThread().isInterrupted());
@@ -428,7 +481,10 @@ final class InspectorEnvironmentFilesTest {
       }
     try (var f = fixture()) {
       int directoryOpens = 3 * (f.etc.getNameCount() + f.runtime.getNameCount() + 3);
-      f.on("close", 6 + directoryOpens + 26, () -> Thread.currentThread().interrupt());
+      f.on(
+          FIXTURE_CLOSE_97959247,
+          6 + directoryOpens + 26,
+          () -> Thread.currentThread().interrupt());
       try {
         failure(() -> f.files.execute(RUN, f::callback));
         assertTrue(Thread.currentThread().isInterrupted());
@@ -449,12 +505,12 @@ final class InspectorEnvironmentFilesTest {
                     Files.writeString(f.target, RUNTIME.replace("00:00:00Z", "00:00:01Z"));
                     // Conversion is not allowed: the runtime byte parser raises its fixed
                     // configuration error.
-                    f.fail = "attributes";
-                    f.failAt = f.count("attributes") + 1;
+                    f.fail = FIXTURE_ATTRIBUTES_D300E055;
+                    f.failAt = f.count(FIXTURE_ATTRIBUTES_D300E055) + 1;
                     return 1;
                   }));
       assertEquals(1, f.callbacks);
-      assertEquals(0, f.count("unlink"));
+      assertEquals(0, f.count(FIXTURE_UNLINK_04963CA9));
     }
     try (var f = fixture()) {
       assertThrows(
@@ -466,7 +522,7 @@ final class InspectorEnvironmentFilesTest {
                     Files.writeString(f.target, RUNTIME.replace("00:00:00Z", "00:00:01Z"));
                     return 1;
                   }));
-      assertEquals(0, f.count("unlink"));
+      assertEquals(0, f.count(FIXTURE_UNLINK_04963CA9));
       assertTrue(Files.exists(f.target));
     }
   }
@@ -496,8 +552,8 @@ final class InspectorEnvironmentFilesTest {
       }
       for (int index = 0; index < futures.size(); index++)
         assertEquals(index, futures.get(index).get(10, TimeUnit.SECONDS));
-      assertEquals(32, f.count("create"));
-      assertEquals(32, f.count("unlink"));
+      assertEquals(32, f.count(FIXTURE_CREATE_5498A731));
+      assertEquals(32, f.count(FIXTURE_UNLINK_04963CA9));
       assertFalse(Files.exists(f.target));
       f.released();
     }
@@ -596,17 +652,24 @@ final class InspectorEnvironmentFilesTest {
 
     Fixture(Path base) throws Exception {
       this.base = base;
-      etc = base.resolve("etc");
+      etc = base.resolve(FIXTURE_ETC_9F5F0C94);
       config = etc.resolve("schubert-nk");
       runtime = base.resolve("run");
       app = runtime.resolve("schubert-nk");
-      maintenance = app.resolve("maintenance");
+      maintenance = app.resolve(FIXTURE_MAINTENANCE_9CE8617E);
       staticFile = config.resolve(NAME);
       target = maintenance.resolve(NAME);
       Files.createDirectories(config);
       Files.createDirectories(maintenance);
       Files.writeString(staticFile, CONFIG);
-      for (String role : List.of("etc", "config", "runtime", "app", "maintenance", "static"))
+      for (String role :
+          List.of(
+              FIXTURE_ETC_9F5F0C94,
+              FIXTURE_CONFIG_48882AB4,
+              FIXTURE_RUNTIME_2D52CD90,
+              FIXTURE_APP_4E5EF144,
+              FIXTURE_MAINTENANCE_9CE8617E,
+              FIXTURE_STATIC_0105CCA0))
         originalRoles.put((Long) Files.getAttribute(path(role), "unix:ino"), role);
       DirectoryCalls delegate = LinuxDirectoryCalls.create();
       calls =
@@ -616,8 +679,9 @@ final class InspectorEnvironmentFilesTest {
                   new Class<?>[] {DirectoryCalls.class},
                   (proxy, method, args) -> {
                     String name = method.getName();
-                    String point = name.equals("createPrivateFile") ? "create" : name;
-                    if (!name.equals("close")) point(point);
+                    String point =
+                        name.equals("createPrivateFile") ? FIXTURE_CREATE_5498A731 : name;
+                    if (!name.equals(FIXTURE_CLOSE_97959247)) point(point);
                     Object value;
                     try {
                       value = method.invoke(delegate, args);
@@ -626,9 +690,9 @@ final class InspectorEnvironmentFilesTest {
                     }
                     if (Set.of("openRoot", "openDirectory", "openEntry", "createPrivateFile")
                         .contains(name)) assertTrue(live.add((Integer) value));
-                    if (name.equals("close")) {
+                    if (name.equals(FIXTURE_CLOSE_97959247)) {
                       assertTrue(live.remove((Integer) args[0]));
-                      point("close");
+                      point(FIXTURE_CLOSE_97959247);
                       if (rawCloses)
                         throw new StorageIoException(StorageIoException.Reason.UNAVAILABLE);
                     }
@@ -639,12 +703,12 @@ final class InspectorEnvironmentFilesTest {
 
     Path path(String role) {
       return switch (role) {
-        case "etc" -> etc;
-        case "config" -> config;
-        case "runtime" -> runtime;
-        case "app" -> app;
-        case "maintenance" -> maintenance;
-        case "static" -> staticFile;
+        case FIXTURE_ETC_9F5F0C94 -> etc;
+        case FIXTURE_CONFIG_48882AB4 -> config;
+        case FIXTURE_RUNTIME_2D52CD90 -> runtime;
+        case FIXTURE_APP_4E5EF144 -> app;
+        case FIXTURE_MAINTENANCE_9CE8617E -> maintenance;
+        case FIXTURE_STATIC_0105CCA0 -> staticFile;
         default -> throw new AssertionError(role);
       };
     }
@@ -656,7 +720,7 @@ final class InspectorEnvironmentFilesTest {
     }
 
     long group() throws IOException {
-      point("group");
+      point(FIXTURE_GROUP_654E1E20);
       return group;
     }
 
@@ -688,8 +752,8 @@ final class InspectorEnvironmentFilesTest {
     void replace(String role) throws IOException {
       Path old = path(role);
       Files.move(old, old.resolveSibling(old.getFileName() + "-saved"));
-      if (role.equals("static")) Files.writeString(staticFile, CONFIG);
-      else if (role.equals("etc") || role.equals("config")) {
+      if (role.equals(FIXTURE_STATIC_0105CCA0)) Files.writeString(staticFile, CONFIG);
+      else if (role.equals(FIXTURE_ETC_9F5F0C94) || role.equals(FIXTURE_CONFIG_48882AB4)) {
         Files.createDirectories(config);
         Files.writeString(staticFile, CONFIG);
       } else {
@@ -703,12 +767,12 @@ final class InspectorEnvironmentFilesTest {
       String original = originalRoles.get((Long) values.get("ino"));
       if (original != null) return original;
       Path resolved = held.toRealPath();
-      if (resolved.equals(etc)) return "etc";
-      if (resolved.equals(config)) return "config";
-      if (resolved.equals(runtime)) return "runtime";
-      if (resolved.equals(app)) return "app";
-      if (resolved.equals(maintenance)) return "maintenance";
-      return resolved.startsWith(config) ? "static" : "runfile";
+      if (resolved.equals(etc)) return FIXTURE_ETC_9F5F0C94;
+      if (resolved.equals(config)) return FIXTURE_CONFIG_48882AB4;
+      if (resolved.equals(runtime)) return FIXTURE_RUNTIME_2D52CD90;
+      if (resolved.equals(app)) return FIXTURE_APP_4E5EF144;
+      if (resolved.equals(maintenance)) return FIXTURE_MAINTENANCE_9CE8617E;
+      return resolved.startsWith(config) ? FIXTURE_STATIC_0105CCA0 : "runfile";
     }
 
     boolean selected(Path held) throws IOException {
@@ -717,48 +781,58 @@ final class InspectorEnvironmentFilesTest {
 
     @Override
     public Map<String, Object> attributes(Path held) throws IOException {
-      point("attributes");
+      point(FIXTURE_ATTRIBUTES_D300E055);
       String role = role(held);
       if (invalid.equals("nullAttributes") && selected(held)) return null;
       var values = new HashMap<>(nativeIo.attributes(held));
       int permission =
           switch (role) {
-            case "etc", "runtime", "app" -> 0755;
-            case "config" -> 0750;
-            case "maintenance" -> 0700;
-            case "static" -> 0640;
+            case FIXTURE_ETC_9F5F0C94, FIXTURE_RUNTIME_2D52CD90, FIXTURE_APP_4E5EF144 -> 0755;
+            case FIXTURE_CONFIG_48882AB4 -> 0750;
+            case FIXTURE_MAINTENANCE_9CE8617E -> 0700;
+            case FIXTURE_STATIC_0105CCA0 -> 0640;
             default -> 0600;
           };
-      int type = (Integer) values.get("mode") & 0170000;
-      values.put("mode", type | permission);
+      int type = (Integer) values.get(FIXTURE_MODE_B6D5C2C3) & 0170000;
+      values.put(FIXTURE_MODE_B6D5C2C3, type | permission);
       values.put("uid", 0);
-      values.put("gid", role.equals("config") || role.equals("static") ? 2000 : 0);
       values.put(
-          "dev", role.equals("etc") || role.equals("config") || role.equals("static") ? 10L : 20L);
+          "gid",
+          role.equals(FIXTURE_CONFIG_48882AB4) || role.equals(FIXTURE_STATIC_0105CCA0) ? 2000 : 0);
+      values.put(
+          "dev",
+          role.equals(FIXTURE_ETC_9F5F0C94)
+                  || role.equals(FIXTURE_CONFIG_48882AB4)
+                  || role.equals(FIXTURE_STATIC_0105CCA0)
+              ? 10L
+              : 20L);
       change.accept(role, values);
       return values;
     }
 
     @Override
     public String filesystem(Path held) throws IOException {
-      point("filesystem");
+      point(FIXTURE_FILESYSTEM_909B3E41);
       assertNotNull(nativeIo.filesystem(held));
       if (selected(held)) {
         if (invalid.equals("nullFilesystem")) return null;
-        if (invalid.equals("filesystem")) return "nfs";
+        if (invalid.equals(FIXTURE_FILESYSTEM_909B3E41)) return "nfs";
       }
       String role = role(held);
-      return Set.of("etc", "config", "static").contains(role) ? "ext4" : "tmpfs";
+      return Set.of(FIXTURE_ETC_9F5F0C94, FIXTURE_CONFIG_48882AB4, FIXTURE_STATIC_0105CCA0)
+              .contains(role)
+          ? "ext4"
+          : "tmpfs";
     }
 
     @Override
     public byte[] accessAcl(Path held, int max) throws StorageIoException {
-      point("acl");
+      point(FIXTURE_ACL_43B23946);
       assertEquals(44, max);
       try {
         if (selected(held)) {
           if (invalid.equals("nullAcl")) return null;
-          if (invalid.equals("acl")) return new byte[] {2, 0, 0, 0};
+          if (invalid.equals(FIXTURE_ACL_43B23946)) return new byte[] {2, 0, 0, 0};
         }
       } catch (IOException failure) {
         throw new StorageIoException(StorageIoException.Reason.UNAVAILABLE);
@@ -768,10 +842,12 @@ final class InspectorEnvironmentFilesTest {
 
     @Override
     public boolean readOnlyFilesystem(Path held) throws StorageIoException {
-      point("readonly");
+      point(FIXTURE_READONLY_C4A495E7);
       try {
-        return (selected(held) && invalid.equals("readonly"))
-            || (staticReadonly && Set.of("etc", "config", "static").contains(role(held)));
+        return (selected(held) && invalid.equals(FIXTURE_READONLY_C4A495E7))
+            || (staticReadonly
+                && Set.of(FIXTURE_ETC_9F5F0C94, FIXTURE_CONFIG_48882AB4, FIXTURE_STATIC_0105CCA0)
+                    .contains(role(held)));
       } catch (IOException failure) {
         throw new StorageIoException(StorageIoException.Reason.UNAVAILABLE);
       }
@@ -814,7 +890,7 @@ final class InspectorEnvironmentFilesTest {
 
         @Override
         public int write(ByteBuffer bytes) {
-          throw new AssertionError("readonly");
+          throw new AssertionError(FIXTURE_READONLY_C4A495E7);
         }
 
         @Override

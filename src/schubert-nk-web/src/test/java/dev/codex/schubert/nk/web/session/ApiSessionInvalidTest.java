@@ -67,6 +67,22 @@ import org.springframework.session.web.http.SessionRepositoryFilter;
 
 /** NK-WEB-001/PT-WEB-158..165; UI221/222/226/232; SS313/314/351/352; SSC-048/PG-D-117. */
 class ApiSessionInvalidTest {
+  private static final String FIXTURE_0000_876EEFE0 = "0000";
+  private static final String FIXTURE_GET_04F32A7E = "GET";
+  private static final String FIXTURE_SEARCH_F32C67A7 = "/search";
+  private static final String FIXTURE_READER_F734AAEA = "reader";
+  private static final String FIXTURE_PRIVATE_24ED6504 = "private";
+  private static final String FIXTURE_POST_E46D3AE9 = "POST";
+  private static final String FIXTURE_LOCATION_FB077BAD = "Location";
+  private static final String FIXTURE_USER_2DED8884 = "USER";
+  private static final String FIXTURE_WEB_HTTP_SESSIONS_9FBADB41 = "web_http_sessions";
+  private static final String FIXTURE_PENDING_CONTEXT_REVOCATIONS_DFFD11FD =
+      "pending_context_revocations";
+  private static final String FIXTURE_LOCATION_1D147FF5 = "location";
+  private static final String FIXTURE_SET_COOKIE_39067BC9 = "set-cookie";
+  private static final String FIXTURE_LOGIN_F843C044 = "/login";
+  private static final String FIXTURE_FIXTURE_EXPIRED_326F2F91 = "/fixture-expired";
+  private static final String FIXTURE_ADMIN_USERS_1_E2380322 = "/admin/users/1";
   private static WebLogDatabaseFixture db;
   @TempDir Path root;
 
@@ -97,7 +113,18 @@ class ApiSessionInvalidTest {
   void web158ResultCodesHaveIndependentHttpClassification() {
     var mapper = new WebResultMapper();
     String[] codes = {
-      "0000", "0100", "0101", "0102", "0103", "0104", "0105", "0106", "0107", "0200", "9000", "9001"
+      FIXTURE_0000_876EEFE0,
+      "0100",
+      "0101",
+      "0102",
+      "0103",
+      "0104",
+      "0105",
+      "0106",
+      "0107",
+      "0200",
+      "9000",
+      "9001"
     };
     int[] statuses = {200, 400, 401, 401, 403, 404, 409, 429, 409, 200, 503, 503};
     assertEquals(codes.length, ResultCode.values().length);
@@ -109,7 +136,7 @@ class ApiSessionInvalidTest {
   @Test
   void web159InvalidHandlerBoundariesNeverUseNativeSession() throws Exception {
     try (var h = new Harness()) {
-      var r = h.mock("GET", "/search");
+      var r = h.mock(FIXTURE_GET_04F32A7E, FIXTURE_SEARCH_F32C67A7);
       var s = new MockHttpServletResponse();
       assertThrows(NullPointerException.class, () -> new ApiSessionInvalidHandler(null, h.audit));
       assertThrows(NullPointerException.class, () -> new ApiSessionInvalidHandler(h.adapter, null));
@@ -126,7 +153,7 @@ class ApiSessionInvalidTest {
                 throw new AssertionError("native");
               }
             };
-        setActor(actor("reader", UserRole.USER));
+        setActor(actor(FIXTURE_READER_F734AAEA, UserRole.USER));
         assertThrows(SessionStoreException.class, () -> h.handler.handle(guarded, s));
         assertNull(SecurityContextHolder.getContext().getAuthentication());
       }
@@ -138,7 +165,9 @@ class ApiSessionInvalidTest {
       assertThrows(SessionStoreException.class, () -> h.handler.handle(r, s));
       assertNull(SecurityContextHolder.getContext().getAuthentication());
       for (RuntimeException fault :
-          List.of(new IllegalStateException("private"), new IllegalArgumentException("private"))) {
+          List.of(
+              new IllegalStateException(FIXTURE_PRIVATE_24ED6504),
+              new IllegalArgumentException(FIXTURE_PRIVATE_24ED6504))) {
         var broken =
             new HttpServletRequestWrapper(r) {
               @Override
@@ -160,7 +189,7 @@ class ApiSessionInvalidTest {
         assertThrows(SessionStoreException.class, () -> h.handler.handle(r, s));
       }
       r.setSession(null);
-      var npe = new NullPointerException("private");
+      var npe = new NullPointerException(FIXTURE_PRIVATE_24ED6504);
       var broken =
           new HttpServletRequestWrapper(r) {
             @Override
@@ -174,7 +203,7 @@ class ApiSessionInvalidTest {
             @Override
             public Object getAttribute(String name) {
               if (name.equals(SessionRepositoryFilter.SESSION_REPOSITORY_ATTR))
-                throw new IllegalStateException("private");
+                throw new IllegalStateException(FIXTURE_PRIVATE_24ED6504);
               return super.getAttribute(name);
             }
           };
@@ -186,10 +215,18 @@ class ApiSessionInvalidTest {
   @Test
   void web160InvalidHandlerUsesClosedNavigationAndAudit() throws Exception {
     try (var h = new Harness()) {
-      for (String method : List.of("GET", "HEAD", "POST", "PUT", "PATCH", "DELETE", "OPTIONS")) {
+      for (String method :
+          List.of(
+              FIXTURE_GET_04F32A7E,
+              "HEAD",
+              FIXTURE_POST_E46D3AE9,
+              "PUT",
+              "PATCH",
+              "DELETE",
+              "OPTIONS")) {
         for (String path :
             List.of(
-                "/search",
+                FIXTURE_SEARCH_F32C67A7,
                 "/audio/1",
                 "/audio/1/download",
                 "/animation/media/1",
@@ -199,7 +236,7 @@ class ApiSessionInvalidTest {
           for (String ajax : new String[] {null, "XMLHttpRequest", "xmlhttprequest", "ordinary"}) {
             var r = h.mock(method, path);
             if (ajax != null) r.addHeader("X-Requested-With", ajax);
-            var p = actor("reader", UserRole.USER);
+            var p = actor(FIXTURE_READER_F734AAEA, UserRole.USER);
             setActor(p);
             snapshot(r, p);
             var session = new MockHttpSession();
@@ -229,11 +266,12 @@ class ApiSessionInvalidTest {
                 };
             h.handler.handle(guarded, s);
             boolean navigate =
-                method.equals("GET")
-                    && path.equals("/search")
+                method.equals(FIXTURE_GET_04F32A7E)
+                    && path.equals(FIXTURE_SEARCH_F32C67A7)
                     && (ajax == null || ajax.equals("ordinary"));
             assertEquals(navigate ? 302 : 401, s.getStatus());
-            assertEquals(navigate ? "/login?session-expired" : null, s.getHeader("Location"));
+            assertEquals(
+                navigate ? "/login?session-expired" : null, s.getHeader(FIXTURE_LOCATION_FB077BAD));
             assertNull(s.getErrorMessage());
             assertTrue(session.isInvalid());
             cleared(r);
@@ -241,8 +279,8 @@ class ApiSessionInvalidTest {
             assertEquals("SESSION_EXPIRED", event.get("action").getAsString());
             assertEquals("INFO", event.get("level").getAsString());
             assertEquals("DENIED", event.get("outcome").getAsString());
-            assertEquals("reader", event.get("actorUsername").getAsString());
-            assertEquals("USER", event.get("actorRole").getAsString());
+            assertEquals(FIXTURE_READER_F734AAEA, event.get("actorUsername").getAsString());
+            assertEquals(FIXTURE_USER_2DED8884, event.get("actorRole").getAsString());
             assertEquals(
                 "API_SESSION_INVALID",
                 event.getAsJsonObject("details").get("reason").getAsString());
@@ -254,7 +292,7 @@ class ApiSessionInvalidTest {
           }
         }
       }
-      var absent = h.mock("GET", "/search");
+      var absent = h.mock(FIXTURE_GET_04F32A7E, FIXTURE_SEARCH_F32C67A7);
       h.handler.handle(absent, new MockHttpServletResponse());
       assertNull(absent.getSession(false));
       assertFalse(h.log.events.getLast().has("actorUsername"));
@@ -264,7 +302,7 @@ class ApiSessionInvalidTest {
   @Test
   void web161InvalidationClearsEncryptedSessionAndDisplay() throws Exception {
     try (var h = new Harness()) {
-      var p = actor("reader", UserRole.USER);
+      var p = actor(FIXTURE_READER_F734AAEA, UserRole.USER);
       var original = h.authenticated(p);
       h.f.repository.mutate(
           original.sessionId(),
@@ -272,10 +310,11 @@ class ApiSessionInvalidTest {
               new SessionAttributes(
                   a.principal(),
                   a.csrfToken(),
-                  Optional.of(SavedRequestTarget.fromGet("GET", "/search")),
+                  Optional.of(
+                      SavedRequestTarget.fromGet(FIXTURE_GET_04F32A7E, FIXTURE_SEARCH_F32C67A7)),
                   List.of(new SessionOperationToken("QSBREQ01", new UUID(0, 1), Instant.now()))));
       var neighbour = h.f.repository.create();
-      var r = raw("GET", "/private", original.sessionId().cookieValue());
+      var r = raw(FIXTURE_GET_04F32A7E, "/private", original.sessionId().cookieValue());
       var s = new MockHttpServletResponse();
       h.run(
           r,
@@ -288,39 +327,48 @@ class ApiSessionInvalidTest {
             assertNull(request.getSession(false));
           });
       assertEquals(302, s.getStatus());
-      assertEquals("/login?session-expired", s.getHeader("Location"));
+      assertEquals("/login?session-expired", s.getHeader(FIXTURE_LOCATION_FB077BAD));
       expiredCookie(s.getHeader("Set-Cookie"));
       assertTrue(h.f.repository.find(original.sessionId()).isEmpty());
       assertEquals(
           neighbour.row().identity(),
           h.f.repository.find(neighbour.sessionId()).orElseThrow().row().identity());
-      assertEquals(1, count("web_http_sessions"));
-      assertEquals(0, count("pending_context_revocations"));
+      assertEquals(1, count(FIXTURE_WEB_HTTP_SESSIONS_9FBADB41));
+      assertEquals(0, count(FIXTURE_PENDING_CONTEXT_REVOCATIONS_DFFD11FD));
       assertEquals(0, h.api.sends.get());
     }
   }
 
   @Test
   void web162RealHttpExpiredGetReturnsToLogin() throws Exception {
-    var api = new SessionFormLoginTest.Api("0000", "USER", "0000", 0);
+    var api =
+        new SessionFormLoginTest.Api(
+            FIXTURE_0000_876EEFE0, FIXTURE_USER_2DED8884, FIXTURE_0000_876EEFE0, 0);
     try (var server = server(api, false)) {
-      var login = login(server, "reader", "p");
+      var login = login(server, FIXTURE_READER_F734AAEA, "p");
       var expired =
           server.send(
-              "GET", "/fixture-expired?code=0000&password=private", login.cookie(), null, true);
+              FIXTURE_GET_04F32A7E,
+              "/fixture-expired?code=0000&password=private",
+              login.cookie(),
+              null,
+              true);
       assertEquals(302, expired.statusCode());
       assertEquals(
-          "/login?session-expired", expired.headers().firstValue("location").orElseThrow());
-      expiredCookie(expired.headers().firstValue("set-cookie").orElseThrow());
-      assertEquals(0, count("web_http_sessions"));
-      assertEquals(0, count("pending_context_revocations"));
+          "/login?session-expired",
+          expired.headers().firstValue(FIXTURE_LOCATION_1D147FF5).orElseThrow());
+      expiredCookie(expired.headers().firstValue(FIXTURE_SET_COOKIE_39067BC9).orElseThrow());
+      assertEquals(0, count(FIXTURE_WEB_HTTP_SESSIONS_9FBADB41));
+      assertEquals(0, count(FIXTURE_PENDING_CONTEXT_REVOCATIONS_DFFD11FD));
       var audit = server.log.events.getLast();
       assertEquals("SESSION_EXPIRED", audit.get("action").getAsString());
       assertEquals(new UUID(0, 3).toString(), audit.get("requestId").getAsString());
       assertEquals(2, server.log.events.size());
-      var next = server.send("GET", "/", login.cookie(), null, true);
+      var next = server.send(FIXTURE_GET_04F32A7E, "/", login.cookie(), null, true);
       assertEquals(302, next.statusCode());
-      assertEquals("/login", next.headers().firstValue("location").orElseThrow());
+      assertEquals(
+          FIXTURE_LOGIN_F843C044,
+          next.headers().firstValue(FIXTURE_LOCATION_1D147FF5).orElseThrow());
       assertEquals(1, api.sends.get());
       assertEquals(0, server.context.getManager().getActiveSessions());
       api.erased();
@@ -329,23 +377,25 @@ class ApiSessionInvalidTest {
 
   @Test
   void web163RealHttpPostAjaxAndMediaNeverReplay() throws Exception {
-    var api = new SessionFormLoginTest.Api("0000", "USER", "0000", 0);
+    var api =
+        new SessionFormLoginTest.Api(
+            FIXTURE_0000_876EEFE0, FIXTURE_USER_2DED8884, FIXTURE_0000_876EEFE0, 0);
     try (var server = server(api, true)) {
       for (String variant :
           List.of(
-              "POST",
+              FIXTURE_POST_E46D3AE9,
               "HEAD",
               "AJAX",
               "/audio/pt-expired",
               "/animation/media/pt-expired",
               "/music/media/pt-expired",
               "/music/download/pt-expired")) {
-        var login = login(server, "reader", "p");
+        var login = login(server, FIXTURE_READER_F734AAEA, "p");
         HttpResponse<String> response;
         if (variant.equals("AJAX")) {
           response =
               server.client.send(
-                  HttpRequest.newBuilder(server.base.resolve("/fixture-expired"))
+                  HttpRequest.newBuilder(server.base.resolve(FIXTURE_FIXTURE_EXPIRED_326F2F91))
                       .header("X-Forwarded-For", "203.0.113.1")
                       .header("X-Forwarded-Proto", "https")
                       .header("Cookie", login.cookie())
@@ -357,21 +407,23 @@ class ApiSessionInvalidTest {
         } else {
           response =
               server.send(
-                  variant.startsWith("/") ? "GET" : variant,
-                  variant.startsWith("/") ? variant : "/fixture-expired",
+                  variant.startsWith("/") ? FIXTURE_GET_04F32A7E : variant,
+                  variant.startsWith("/") ? variant : FIXTURE_FIXTURE_EXPIRED_326F2F91,
                   login.cookie(),
-                  variant.equals("POST") ? "_csrf=" + login.csrf() + "&private-body=canary" : null,
+                  variant.equals(FIXTURE_POST_E46D3AE9)
+                      ? "_csrf=" + login.csrf() + "&private-body=canary"
+                      : null,
                   true);
         }
         assertEquals(401, response.statusCode());
-        assertTrue(response.headers().firstValue("location").isEmpty());
-        expiredCookie(response.headers().firstValue("set-cookie").orElseThrow());
+        assertTrue(response.headers().firstValue(FIXTURE_LOCATION_1D147FF5).isEmpty());
+        expiredCookie(response.headers().firstValue(FIXTURE_SET_COOKIE_39067BC9).orElseThrow());
         assertEquals("no-store", response.headers().firstValue("cache-control").orElseThrow());
         assertEquals(
             "nosniff", response.headers().firstValue("x-content-type-options").orElseThrow());
         if (!variant.equals("HEAD")) anonymousError(response.body(), 401);
         else assertEquals("", response.body());
-        assertEquals(0, count("web_http_sessions"));
+        assertEquals(0, count(FIXTURE_WEB_HTTP_SESSIONS_9FBADB41));
       }
       assertEquals(7, api.sends.get());
       assertEquals(14, server.log.events.size());
@@ -384,30 +436,30 @@ class ApiSessionInvalidTest {
   @Test
   void web164InvalidationFaultsNeverClaimSuccessfulLogout() throws Exception {
     try (var h = new Harness()) {
-      var r = h.mock("GET", "/search");
+      var r = h.mock(FIXTURE_GET_04F32A7E, FIXTURE_SEARCH_F32C67A7);
       var session = new MockHttpSession();
       r.setSession(session);
-      setActor(actor("reader", UserRole.USER));
-      snapshot(r, actor("reader", UserRole.USER));
+      setActor(actor(FIXTURE_READER_F734AAEA, UserRole.USER));
+      snapshot(r, actor(FIXTURE_READER_F734AAEA, UserRole.USER));
       h.log.fail = true;
       var failed = new MockHttpServletResponse();
       assertThrows(IllegalStateException.class, () -> h.handler.handle(r, failed));
       assertTrue(session.isInvalid());
       assertEquals(401, failed.getStatus());
-      assertNull(failed.getHeader("Location"));
+      assertNull(failed.getHeader(FIXTURE_LOCATION_FB077BAD));
       cleared(r);
       h.log.fail = false;
       var committed = new MockHttpServletResponse();
       committed.setCommitted(true);
-      var r2 = h.mock("GET", "/search");
+      var r2 = h.mock(FIXTURE_GET_04F32A7E, FIXTURE_SEARCH_F32C67A7);
       var old = new MockHttpSession();
       r2.setSession(old);
       assertEquals(
           "session-invalid response already committed",
           assertThrows(IOException.class, () -> h.handler.handle(r2, committed)).getMessage());
       assertTrue(old.isInvalid());
-      assertNull(committed.getHeader("Location"));
-      var io = new IOException("private");
+      assertNull(committed.getHeader(FIXTURE_LOCATION_FB077BAD));
+      var io = new IOException(FIXTURE_PRIVATE_24ED6504);
       var send =
           new MockHttpServletResponse() {
             @Override
@@ -417,64 +469,75 @@ class ApiSessionInvalidTest {
           };
       assertSame(
           io,
-          assertThrows(IOException.class, () -> h.handler.handle(h.mock("POST", "/search"), send)));
+          assertThrows(
+              IOException.class,
+              () ->
+                  h.handler.handle(h.mock(FIXTURE_POST_E46D3AE9, FIXTURE_SEARCH_F32C67A7), send)));
       var header =
           new MockHttpServletResponse() {
             @Override
             public void setHeader(String n, String v) {
-              throw new IllegalStateException("private");
+              throw new IllegalStateException(FIXTURE_PRIVATE_24ED6504);
             }
           };
       assertThrows(
-          IllegalStateException.class, () -> h.handler.handle(h.mock("GET", "/search"), header));
+          IllegalStateException.class,
+          () -> h.handler.handle(h.mock(FIXTURE_GET_04F32A7E, FIXTURE_SEARCH_F32C67A7), header));
       var status =
           new MockHttpServletResponse() {
             @Override
             public void setStatus(int n) {
-              throw new IllegalStateException("private");
+              throw new IllegalStateException(FIXTURE_PRIVATE_24ED6504);
             }
           };
       assertThrows(
-          IllegalStateException.class, () -> h.handler.handle(h.mock("GET", "/search"), status));
+          IllegalStateException.class,
+          () -> h.handler.handle(h.mock(FIXTURE_GET_04F32A7E, FIXTURE_SEARCH_F32C67A7), status));
       var secondStatus =
           new MockHttpServletResponse() {
             @Override
             public void setStatus(int value) {
-              if (value == 302) throw new IllegalStateException("private");
+              if (value == 302) throw new IllegalStateException(FIXTURE_PRIVATE_24ED6504);
               super.setStatus(value);
             }
           };
       assertThrows(
           IllegalStateException.class,
-          () -> h.handler.handle(h.mock("GET", "/search"), secondStatus));
+          () ->
+              h.handler.handle(
+                  h.mock(FIXTURE_GET_04F32A7E, FIXTURE_SEARCH_F32C67A7), secondStatus));
       var committedGetter =
           new MockHttpServletResponse() {
             @Override
             public boolean isCommitted() {
-              throw new IllegalStateException("private");
+              throw new IllegalStateException(FIXTURE_PRIVATE_24ED6504);
             }
           };
       assertThrows(
           IllegalStateException.class,
-          () -> h.handler.handle(h.mock("GET", "/search"), committedGetter));
+          () ->
+              h.handler.handle(
+                  h.mock(FIXTURE_GET_04F32A7E, FIXTURE_SEARCH_F32C67A7), committedGetter));
       for (String field : List.of("method", "header", "uri")) {
         var requestFault =
-            new HttpServletRequestWrapper(h.mock("GET", "/search")) {
+            new HttpServletRequestWrapper(h.mock(FIXTURE_GET_04F32A7E, FIXTURE_SEARCH_F32C67A7)) {
               @Override
               public String getMethod() {
-                if (field.equals("method")) throw new IllegalStateException("private");
+                if (field.equals("method"))
+                  throw new IllegalStateException(FIXTURE_PRIVATE_24ED6504);
                 return super.getMethod();
               }
 
               @Override
               public String getHeader(String name) {
-                if (field.equals("header")) throw new IllegalStateException("private");
+                if (field.equals("header"))
+                  throw new IllegalStateException(FIXTURE_PRIVATE_24ED6504);
                 return super.getHeader(name);
               }
 
               @Override
               public String getRequestURI() {
-                if (field.equals("uri")) throw new IllegalStateException("private");
+                if (field.equals("uri")) throw new IllegalStateException(FIXTURE_PRIVATE_24ED6504);
                 return super.getRequestURI();
               }
             };
@@ -483,13 +546,13 @@ class ApiSessionInvalidTest {
             () -> h.handler.handle(requestFault, new MockHttpServletResponse()));
       }
       var clear =
-          new HttpServletRequestWrapper(h.mock("GET", "/search")) {
+          new HttpServletRequestWrapper(h.mock(FIXTURE_GET_04F32A7E, FIXTURE_SEARCH_F32C67A7)) {
             @Override
             public void removeAttribute(String n) {
-              throw new IllegalStateException("private");
+              throw new IllegalStateException(FIXTURE_PRIVATE_24ED6504);
             }
           };
-      setActor(actor("reader", UserRole.ADMIN));
+      setActor(actor(FIXTURE_READER_F734AAEA, UserRole.ADMIN));
       assertThrows(
           IllegalStateException.class,
           () -> h.handler.handle(clear, new MockHttpServletResponse()));
@@ -497,16 +560,20 @@ class ApiSessionInvalidTest {
     }
     for (String failure : List.of("open", "connection.commit")) {
       reset();
-      var api = new SessionFormLoginTest.Api("0000", "USER", "0000", 0);
+      var api =
+          new SessionFormLoginTest.Api(
+              FIXTURE_0000_876EEFE0, FIXTURE_USER_2DED8884, FIXTURE_0000_876EEFE0, 0);
       try (var server = server(api, false)) {
-        var login = login(server, "reader", "p");
+        var login = login(server, FIXTURE_READER_F734AAEA, "p");
         server.invalidationFailure = failure;
-        var response = server.send("GET", "/fixture-expired", login.cookie(), null, true);
+        var response =
+            server.send(
+                FIXTURE_GET_04F32A7E, FIXTURE_FIXTURE_EXPIRED_326F2F91, login.cookie(), null, true);
         assertEquals(503, response.statusCode());
         anonymousError(response.body(), 503);
-        assertEquals(1, count("web_http_sessions"));
+        assertEquals(1, count(FIXTURE_WEB_HTTP_SESSIONS_9FBADB41));
         assertEquals(1, server.log.events.size());
-        assertEquals(0, count("pending_context_revocations"));
+        assertEquals(0, count(FIXTURE_PENDING_CONTEXT_REVOCATIONS_DFFD11FD));
         assertEquals(1, api.sends.get());
         server.f.failure = "";
       }
@@ -515,7 +582,8 @@ class ApiSessionInvalidTest {
 
   @Test
   void web165ConcurrentAndStaleInvalidationCannotDeleteNewLogin() throws Exception {
-    var api = new SessionFormLoginTest.Api("0000", "DYNAMIC", "0000", 0);
+    var api =
+        new SessionFormLoginTest.Api(FIXTURE_0000_876EEFE0, "DYNAMIC", FIXTURE_0000_876EEFE0, 0);
     try (var server = server(api, true);
         var pool = Executors.newFixedThreadPool(8)) {
       var jobs = new ArrayList<Future<?>>();
@@ -525,12 +593,19 @@ class ApiSessionInvalidTest {
             pool.submit(
                 () -> {
                   var login = login(server, "user" + id, "password-user" + id);
-                  var response = server.send("GET", "/fixture-expired", login.cookie(), null, true);
+                  var response =
+                      server.send(
+                          FIXTURE_GET_04F32A7E,
+                          FIXTURE_FIXTURE_EXPIRED_326F2F91,
+                          login.cookie(),
+                          null,
+                          true);
                   assertEquals(302, response.statusCode());
                   assertEquals(
                       "/login?session-expired",
-                      response.headers().firstValue("location").orElseThrow());
-                  expiredCookie(response.headers().firstValue("set-cookie").orElseThrow());
+                      response.headers().firstValue(FIXTURE_LOCATION_1D147FF5).orElseThrow());
+                  expiredCookie(
+                      response.headers().firstValue(FIXTURE_SET_COOKIE_39067BC9).orElseThrow());
                   return null;
                 }));
       }
@@ -541,7 +616,8 @@ class ApiSessionInvalidTest {
         if (event.get("action").getAsString().equals("SESSION_EXPIRED")) {
           String user = event.get("actorUsername").getAsString();
           int n = Integer.parseInt(user.substring(4));
-          assertEquals(n % 2 == 0 ? "USER" : "ADMIN", event.get("actorRole").getAsString());
+          assertEquals(
+              n % 2 == 0 ? FIXTURE_USER_2DED8884 : "ADMIN", event.get("actorRole").getAsString());
           assertTrue(users.add(user));
           assertTrue(ids.add(event.get("requestId").getAsString()));
         }
@@ -550,14 +626,14 @@ class ApiSessionInvalidTest {
       assertEquals(200, server.log.events.size());
       assertEquals(300, server.ids.get());
       assertEquals(100, api.sends.get());
-      assertEquals(0, count("web_http_sessions"));
+      assertEquals(0, count(FIXTURE_WEB_HTTP_SESSIONS_9FBADB41));
       assertEquals(0, server.context.getManager().getActiveSessions());
       api.erased();
     }
     try (var h = new Harness()) {
-      var old = h.authenticated(actor("reader", UserRole.USER));
+      var old = h.authenticated(actor(FIXTURE_READER_F734AAEA, UserRole.USER));
       var replacement = new AtomicReference<WebSessionSnapshot>();
-      var r = raw("GET", "/private", old.sessionId().cookieValue());
+      var r = raw(FIXTURE_GET_04F32A7E, "/private", old.sessionId().cookieValue());
       var s = new MockHttpServletResponse();
       h.run(
           r,
@@ -575,8 +651,8 @@ class ApiSessionInvalidTest {
       var fresh = h.f.repository.find(replacement.get().sessionId()).orElseThrow();
       assertEquals("fresh", fresh.attributes().principal().orElseThrow().username());
       assertEquals(UserRole.ADMIN, fresh.attributes().principal().orElseThrow().role());
-      assertEquals(1, count("web_http_sessions"));
-      assertEquals(0, count("pending_context_revocations"));
+      assertEquals(1, count(FIXTURE_WEB_HTTP_SESSIONS_9FBADB41));
+      assertEquals(0, count(FIXTURE_PENDING_CONTEXT_REVOCATIONS_DFFD11FD));
     }
   }
 
@@ -600,16 +676,17 @@ class ApiSessionInvalidTest {
 
   private static Login login(EmbeddedWebSecurityTest.Server server, String user, String password)
       throws Exception {
-    var first = server.send("GET", "/login", null, null, true);
+    var first = server.send(FIXTURE_GET_04F32A7E, FIXTURE_LOGIN_F843C044, null, null, true);
     var response =
         server.send(
-            "POST",
-            "/login",
-            first.headers().firstValue("set-cookie").orElseThrow().split(";", 2)[0],
+            FIXTURE_POST_E46D3AE9,
+            FIXTURE_LOGIN_F843C044,
+            first.headers().firstValue(FIXTURE_SET_COOKIE_39067BC9).orElseThrow().split(";", 2)[0],
             "_csrf=" + first.body().substring(6) + "&username=" + user + "&password=" + password,
             true);
     assertEquals(302, response.statusCode());
-    String cookie = response.headers().firstValue("set-cookie").orElseThrow().split(";", 2)[0];
+    String cookie =
+        response.headers().firstValue(FIXTURE_SET_COOKIE_39067BC9).orElseThrow().split(";", 2)[0];
     // Read the already persisted CSRF solely as input to the next POST, never as its expected
     // oracle.
     var stored =
@@ -636,13 +713,15 @@ class ApiSessionInvalidTest {
         document.selectFirst(".error-message").text());
     assertTrue(document.select("form,input,.user-info").isEmpty());
     assertTrue(document.select("a[href='/login']").size() == 1);
-    assertFalse(html.contains("reader"));
-    assertFalse(html.contains("private"));
+    assertFalse(html.contains(FIXTURE_READER_F734AAEA));
+    assertFalse(html.contains(FIXTURE_PRIVATE_24ED6504));
     assertFalse(html.contains("a".repeat(64)));
   }
 
   private static long count(String table) throws Exception {
-    assertTrue(Set.of("web_http_sessions", "pending_context_revocations").contains(table));
+    assertTrue(
+        Set.of(FIXTURE_WEB_HTTP_SESSIONS_9FBADB41, FIXTURE_PENDING_CONTEXT_REVOCATIONS_DFFD11FD)
+            .contains(table));
     try (var c = db.web();
         var s = c.createStatement();
         var rows = s.executeQuery("select count(*) from schubert_web_session." + table)) {
@@ -694,7 +773,7 @@ class ApiSessionInvalidTest {
   @Test
   void biz007VerifiedSelfResetIsNotSyntheticSessionInvalid() throws Exception {
     try (var h = new Harness()) {
-      var r = h.mock("POST", "/admin/users/1");
+      var r = h.mock(FIXTURE_POST_E46D3AE9, FIXTURE_ADMIN_USERS_1_E2380322);
       var p = actor("admin", UserRole.ADMIN);
       setActor(p);
       snapshot(r, p);
@@ -704,7 +783,7 @@ class ApiSessionInvalidTest {
       h.handler.handleVerifiedSelfReset(r, response);
       assertTrue(session.isInvalid());
       assertEquals(302, response.getStatus());
-      assertEquals("/login", response.getHeader("Location"));
+      assertEquals(FIXTURE_LOGIN_F843C044, response.getHeader(FIXTURE_LOCATION_FB077BAD));
       cleared(r);
       assertTrue(h.log.events.isEmpty());
       assertThrows(
@@ -713,22 +792,22 @@ class ApiSessionInvalidTest {
       assertThrows(
           IllegalStateException.class,
           () -> h.handler.handleVerifiedSelfReset(new MockHttpServletRequest(), response));
-      final var absentActor = h.mock("POST", "/admin/users/1");
+      final var absentActor = h.mock(FIXTURE_POST_E46D3AE9, FIXTURE_ADMIN_USERS_1_E2380322);
       assertThrows(
           SessionStoreException.class,
           () -> h.handler.handleVerifiedSelfReset(absentActor, response));
       setActor(p);
-      final var absentSession = h.mock("POST", "/admin/users/1");
+      final var absentSession = h.mock(FIXTURE_POST_E46D3AE9, FIXTURE_ADMIN_USERS_1_E2380322);
       assertThrows(
           SessionStoreException.class,
           () -> h.handler.handleVerifiedSelfReset(absentSession, response));
       setActor(p);
-      final var foreign = h.mock("POST", "/admin/users/1");
+      final var foreign = h.mock(FIXTURE_POST_E46D3AE9, FIXTURE_ADMIN_USERS_1_E2380322);
       foreign.setAttribute(SessionRepositoryFilter.SESSION_REPOSITORY_ATTR, new Object());
       assertThrows(
           SessionStoreException.class, () -> h.handler.handleVerifiedSelfReset(foreign, response));
       setActor(p);
-      final var committedRequest = h.mock("POST", "/admin/users/1");
+      final var committedRequest = h.mock(FIXTURE_POST_E46D3AE9, FIXTURE_ADMIN_USERS_1_E2380322);
       var committedSession = new MockHttpSession();
       committedRequest.setSession(committedSession);
       var committed = new MockHttpServletResponse();
@@ -738,7 +817,7 @@ class ApiSessionInvalidTest {
       assertTrue(committedSession.isInvalid());
       assertTrue(h.log.events.isEmpty());
       var fatal = new AssertionError("private-self-terminal-fatal");
-      final var fatalRequest = h.mock("POST", "/admin/users/1");
+      final var fatalRequest = h.mock(FIXTURE_POST_E46D3AE9, FIXTURE_ADMIN_USERS_1_E2380322);
       fatalRequest.setSession(
           new MockHttpSession() {
             @Override
@@ -766,7 +845,9 @@ class ApiSessionInvalidTest {
         new CaddyTransportContextFilter(
             () -> new UUID(0, ids.incrementAndGet()), new CaddyClientAddressResolver(), audit);
     final ApiSessionInvalidHandler handler;
-    final SessionFormLoginTest.Api api = new SessionFormLoginTest.Api("0000", "USER", "0000", 0);
+    final SessionFormLoginTest.Api api =
+        new SessionFormLoginTest.Api(
+            FIXTURE_0000_876EEFE0, FIXTURE_USER_2DED8884, FIXTURE_0000_876EEFE0, 0);
 
     Harness() {
       this(db);

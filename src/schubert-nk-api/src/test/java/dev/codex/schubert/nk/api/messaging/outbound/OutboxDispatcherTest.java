@@ -64,6 +64,26 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** PostgreSQL 18 and Artemis component PT for PT-IDEM-009..011. */
 final class OutboxDispatcherTest {
+  private static final String FIXTURE_STATUS_CFC31BCC = "status";
+  private static final String FIXTURE_ATTEMPT_COUNT_87388C12 = "attempt_count";
+  private static final String FIXTURE_LAST_ERROR_CODE_BF1A4C63 = "last_error_code";
+  private static final String FIXTURE_NEXT_ATTEMPT_AT_BFB0B802 = "next_attempt_at";
+  private static final String FIXTURE_ERROR_F717E7D8 = "ERROR";
+  private static final String FIXTURE_LEASE_OWNER_6418FA0F = "lease_owner";
+  private static final String FIXTURE_COMMIT_5EA9C586 = "commit";
+  private static final String FIXTURE_ROLLBACK_3770B198 = "rollback";
+  private static final String FIXTURE_CLOSE_97959247 = "close";
+  private static final String FIXTURE_GETSESSIONMODE_BF25AD1A = "getSessionMode";
+  private static final String FIXTURE_CREATEBYTESMESSAGE_F47217B2 = "createBytesMessage";
+  private static final String FIXTURE_VM_0_0C76084A = "vm://0";
+  private static final String FIXTURE_NK_ASYNC_WORK_F9720513 = "nk.async.work";
+  private static final String FIXTURE_SENT_AT_C13E7660 = "sent_at";
+  private static final String FIXTURE_SENT_6C701E27 = "SENT";
+  private static final String FIXTURE_QWKREQ01_19741256 = "QWKREQ01";
+  private static final String FIXTURE_001_A3FEAA64 = "001";
+  private static final String FIXTURE_JMS_FAIL_B8C3E123 = "JMS_FAIL";
+  private static final String FIXTURE_SYNTHETIC_COMMIT_FAILURE_D03EA83F =
+      "synthetic commit failure";
   private static final String DATABASE = "outbox_pt";
   private static final String ADMIN = "pgpt_admin";
   private static final String MIGRATION = "schubert_migration";
@@ -205,21 +225,21 @@ final class OutboxDispatcherTest {
       if (kind < 6) {
         assertSame(fatal, assertThrows(Error.class, () -> dispatch.dispatch("graph", 1)));
         assertEquals(1, opens.get(), "only committed claim; no ordinary mark transaction");
-        assertEquals("PENDING", text(id, "status"));
-        assertEquals("0", text(id, "attempt_count"));
-        assertNull(text(id, "last_error_code"));
-        assertEquals(NOW, timestamp(id, "next_attempt_at"));
+        assertEquals("PENDING", text(id, FIXTURE_STATUS_CFC31BCC));
+        assertEquals("0", text(id, FIXTURE_ATTEMPT_COUNT_87388C12));
+        assertNull(text(id, FIXTURE_LAST_ERROR_CODE_BF1A4C63));
+        assertEquals(NOW, timestamp(id, FIXTURE_NEXT_ATTEMPT_AT_BFB0B802));
       } else {
         assertEquals(new OutboxDispatchReport(1, 0, 1, 0), dispatch.dispatch("graph", 1));
         assertEquals(2, opens.get());
-        assertEquals("ERROR", text(id, "status"));
-        assertEquals("1", text(id, "attempt_count"));
-        assertEquals("JMS_SEND_FAILURE", text(id, "last_error_code"));
-        assertEquals(NOW.plusSeconds(1), timestamp(id, "next_attempt_at"));
+        assertEquals(FIXTURE_ERROR_F717E7D8, text(id, FIXTURE_STATUS_CFC31BCC));
+        assertEquals("1", text(id, FIXTURE_ATTEMPT_COUNT_87388C12));
+        assertEquals("JMS_SEND_FAILURE", text(id, FIXTURE_LAST_ERROR_CODE_BF1A4C63));
+        assertEquals(NOW.plusSeconds(1), timestamp(id, FIXTURE_NEXT_ATTEMPT_AT_BFB0B802));
       }
       assertEquals(1, jms.get());
       if (kind < 6) {
-        assertEquals("graph", text(id, "lease_owner"));
+        assertEquals("graph", text(id, FIXTURE_LEASE_OWNER_6418FA0F));
         assertEquals(NOW.plusSeconds(10), timestamp(id, "lease_until"));
       }
     }
@@ -247,11 +267,11 @@ final class OutboxDispatcherTest {
             CLOCK);
     assertEquals(new OutboxDispatchReport(1, 0, 1, 0), dispatch.dispatch("graph-null", 1));
     assertEquals(2, opens.get());
-    assertEquals("ERROR", text(id, "status"));
-    assertEquals("1", text(id, "attempt_count"));
-    assertEquals("JMS_SEND_FAILURE", text(id, "last_error_code"));
-    assertEquals(NOW.plusSeconds(1), timestamp(id, "next_attempt_at"));
-    assertNull(text(id, "lease_owner"));
+    assertEquals(FIXTURE_ERROR_F717E7D8, text(id, FIXTURE_STATUS_CFC31BCC));
+    assertEquals("1", text(id, FIXTURE_ATTEMPT_COUNT_87388C12));
+    assertEquals("JMS_SEND_FAILURE", text(id, FIXTURE_LAST_ERROR_CODE_BF1A4C63));
+    assertEquals(NOW.plusSeconds(1), timestamp(id, FIXTURE_NEXT_ATTEMPT_AT_BFB0B802));
+    assertNull(text(id, FIXTURE_LEASE_OWNER_6418FA0F));
   }
 
   @Test
@@ -282,7 +302,9 @@ final class OutboxDispatcherTest {
       assertSame(failure, result.getCause());
       assertArrayEquals(new Throwable[] {rollback}, failure.getSuppressed());
       assertArrayEquals(new Throwable[] {closing}, result.getSuppressed());
-      assertEquals(List.of("commit", "rollback", "close"), order);
+      assertEquals(
+          List.of(FIXTURE_COMMIT_5EA9C586, FIXTURE_ROLLBACK_3770B198, FIXTURE_CLOSE_97959247),
+          order);
     }
   }
 
@@ -295,7 +317,8 @@ final class OutboxDispatcherTest {
     var failure = new jakarta.jms.JMSRuntimeException("synthetic commit", null, branched);
     List<String> order = new ArrayList<>();
     new OutboxJmsSender().send(() -> graphContext(failure, null, null, order), sample());
-    assertEquals(List.of("commit", "rollback", "close"), order);
+    assertEquals(
+        List.of(FIXTURE_COMMIT_5EA9C586, FIXTURE_ROLLBACK_3770B198, FIXTURE_CLOSE_97959247), order);
     assertEquals(0, failure.getSuppressed().length);
   }
 
@@ -330,21 +353,21 @@ final class OutboxDispatcherTest {
             new Class<?>[] {JMSContext.class},
             (proxy, method, arguments) -> {
               switch (method.getName()) {
-                case "getSessionMode":
+                case FIXTURE_GETSESSIONMODE_BF25AD1A:
                   return JMSContext.SESSION_TRANSACTED;
-                case "createBytesMessage":
+                case FIXTURE_CREATEBYTESMESSAGE_F47217B2:
                   return message;
                 case "createProducer":
                   return producer;
-                case "commit":
-                  order.add("commit");
+                case FIXTURE_COMMIT_5EA9C586:
+                  order.add(FIXTURE_COMMIT_5EA9C586);
                   throw failure;
-                case "rollback":
-                  order.add("rollback");
+                case FIXTURE_ROLLBACK_3770B198:
+                  order.add(FIXTURE_ROLLBACK_3770B198);
                   if (rollback != null) throw rollback;
                   return null;
-                case "close":
-                  order.add("close");
+                case FIXTURE_CLOSE_97959247:
+                  order.add(FIXTURE_CLOSE_97959247);
                   if (closing != null) throw closing;
                   return null;
                 default:
@@ -371,9 +394,9 @@ final class OutboxDispatcherTest {
   void resultTimesFollowTheObservedJmsFailureAndCommitAfterElapsedSendTime(@TempDir Path root)
       throws Exception {
     EmbeddedActiveMQ broker = startBroker(root);
-    try (ActiveMQConnectionFactory factory = new ActiveMQConnectionFactory("vm://0");
+    try (ActiveMQConnectionFactory factory = new ActiveMQConnectionFactory(FIXTURE_VM_0_0C76084A);
         JMSContext observer = factory.createContext(JMSContext.AUTO_ACKNOWLEDGE);
-        JMSConsumer work = observer.createConsumer(queue("nk.async.work"))) {
+        JMSConsumer work = observer.createConsumer(queue(FIXTURE_NK_ASYNC_WORK_F9720513))) {
       JdbcOutboxRepository repository = new JdbcOutboxRepository(() -> 100);
       long id = enqueue(repository, MESSAGE, NOW);
       AtomicReference<Instant> observedTime = new AtomicReference<>(NOW);
@@ -389,11 +412,13 @@ final class OutboxDispatcherTest {
               new OutboxJmsSender(),
               clock);
       assertEquals(new OutboxDispatchReport(1, 0, 1, 0), failedSend.dispatch("slow-send", 1));
-      assertEquals("ERROR", text(id, "status"));
-      assertEquals("1", text(id, "attempt_count"));
+      assertEquals(FIXTURE_ERROR_F717E7D8, text(id, FIXTURE_STATUS_CFC31BCC));
+      assertEquals("1", text(id, FIXTURE_ATTEMPT_COUNT_87388C12));
       // Independent oracle: failure at 00:00:03 + first base 1s + 10% = 00:00:04.100.
-      assertEquals(Instant.parse("2026-09-05T00:00:04.100Z"), timestamp(id, "next_attempt_at"));
-      assertNull(textNullable(id, "sent_at"));
+      assertEquals(
+          Instant.parse("2026-09-05T00:00:04.100Z"),
+          timestamp(id, FIXTURE_NEXT_ATTEMPT_AT_BFB0B802));
+      assertNull(textNullable(id, FIXTURE_SENT_AT_C13E7660));
       assertNull(work.receive(250));
 
       observedTime.set(Instant.parse("2026-09-05T00:00:04.099Z"));
@@ -414,10 +439,11 @@ final class OutboxDispatcherTest {
       assertEquals(
           new OutboxDispatchReport(1, 1, 0, 0), successfulRetry.dispatch("slow-success", 1));
       assertEquals(1, commits.get());
-      assertEquals("SENT", text(id, "status"));
-      assertEquals(Instant.parse("2026-09-05T00:00:07.100Z"), timestamp(id, "sent_at"));
-      assertNull(textNullable(id, "lease_owner"));
-      assertNull(textNullable(id, "last_error_code"));
+      assertEquals(FIXTURE_SENT_6C701E27, text(id, FIXTURE_STATUS_CFC31BCC));
+      assertEquals(
+          Instant.parse("2026-09-05T00:00:07.100Z"), timestamp(id, FIXTURE_SENT_AT_C13E7660));
+      assertNull(textNullable(id, FIXTURE_LEASE_OWNER_6418FA0F));
+      assertNull(textNullable(id, FIXTURE_LAST_ERROR_CODE_BF1A4C63));
       assertMessage(
           assertInstanceOf(BytesMessage.class, work.receive(5_000)),
           MESSAGE,
@@ -439,9 +465,9 @@ final class OutboxDispatcherTest {
               jitterCalls.incrementAndGet();
               throw new AssertionError("initial receipt send must not sample retry jitter");
             });
-    try (ActiveMQConnectionFactory factory = new ActiveMQConnectionFactory("vm://0");
+    try (ActiveMQConnectionFactory factory = new ActiveMQConnectionFactory(FIXTURE_VM_0_0C76084A);
         JMSContext observer = factory.createContext(JMSContext.AUTO_ACKNOWLEDGE);
-        JMSConsumer work = observer.createConsumer(queue("nk.async.work"))) {
+        JMSConsumer work = observer.createConsumer(queue(FIXTURE_NK_ASYNC_WORK_F9720513))) {
       long id =
           enqueue(
               repository,
@@ -449,17 +475,17 @@ final class OutboxDispatcherTest {
                   MESSAGE,
                   CORRELATION,
                   OutboxDestination.ASYNC_WORK,
-                  "QWKREQ01",
-                  "001",
+                  FIXTURE_QWKREQ01_19741256,
+                  FIXTURE_001_A3FEAA64,
                   eventWire(MESSAGE, CORRELATION),
                   NOW,
                   NOW));
-      assertEquals(NOW, timestamp(id, "next_attempt_at"));
+      assertEquals(NOW, timestamp(id, FIXTURE_NEXT_ATTEMPT_AT_BFB0B802));
       OutboxDispatcher dispatcher =
           dispatcher(repository, () -> factory.createContext(JMSContext.SESSION_TRANSACTED));
       assertEquals(new OutboxDispatchReport(1, 1, 0, 0), dispatcher.dispatch("receipt", 1));
       assertEquals(0, jitterCalls.get());
-      assertEquals(NOW, timestamp(id, "sent_at"));
+      assertEquals(NOW, timestamp(id, FIXTURE_SENT_AT_C13E7660));
       assertInstanceOf(BytesMessage.class, work.receive(5_000));
     } finally {
       broker.stop();
@@ -494,13 +520,17 @@ final class OutboxDispatcherTest {
         try (Connection connection = transaction()) {
           OutboxEntry claimed = repository.claim(connection, "jitter", NOW, 1).getFirst();
           assertEquals(id, claimed.id());
-          assertTrue(repository.markFailure(connection, claimed, NOW, "JMS_FAIL", "redacted"));
+          assertTrue(
+              repository.markFailure(
+                  connection, claimed, NOW, FIXTURE_JMS_FAIL_B8C3E123, "redacted"));
           connection.commit();
         }
-        assertEquals(Integer.toString(persistedAttempts[attempt]), text(id, "attempt_count"));
         assertEquals(
-            NOW.plusMillis(expectedMillis[attempt][boundary]), timestamp(id, "next_attempt_at"));
-        assertEquals("ERROR", text(id, "status"));
+            Integer.toString(persistedAttempts[attempt]), text(id, FIXTURE_ATTEMPT_COUNT_87388C12));
+        assertEquals(
+            NOW.plusMillis(expectedMillis[attempt][boundary]),
+            timestamp(id, FIXTURE_NEXT_ATTEMPT_AT_BFB0B802));
+        assertEquals(FIXTURE_ERROR_F717E7D8, text(id, FIXTURE_STATUS_CFC31BCC));
       }
     }
     JdbcOutboxRepository randomRepository = new JdbcOutboxRepository();
@@ -508,10 +538,12 @@ final class OutboxDispatcherTest {
     try (Connection connection = transaction()) {
       OutboxEntry claimed = randomRepository.claim(connection, "random-jitter", NOW, 1).getFirst();
       assertEquals(randomId, claimed.id());
-      assertTrue(randomRepository.markFailure(connection, claimed, NOW, "JMS_FAIL", "redacted"));
+      assertTrue(
+          randomRepository.markFailure(
+              connection, claimed, NOW, FIXTURE_JMS_FAIL_B8C3E123, "redacted"));
       connection.commit();
     }
-    Instant randomDue = timestamp(randomId, "next_attempt_at");
+    Instant randomDue = timestamp(randomId, FIXTURE_NEXT_ATTEMPT_AT_BFB0B802);
     assertFalse(randomDue.isBefore(Instant.parse("2026-09-05T00:00:00.900Z")));
     assertFalse(randomDue.isAfter(Instant.parse("2026-09-05T00:00:01.100Z")));
   }
@@ -562,9 +594,9 @@ final class OutboxDispatcherTest {
       first.commit();
       second.commit();
     }
-    assertEquals("PENDING", text(future, "status"));
-    assertEquals("active", text(activeLease, "lease_owner"));
-    assertEquals("boundary", text(boundaryLease, "lease_owner"));
+    assertEquals("PENDING", text(future, FIXTURE_STATUS_CFC31BCC));
+    assertEquals("active", text(activeLease, FIXTURE_LEASE_OWNER_6418FA0F));
+    assertEquals("boundary", text(boundaryLease, FIXTURE_LEASE_OWNER_6418FA0F));
 
     resetDatabase();
     for (int index = 0; index < 102; index++) {
@@ -593,18 +625,24 @@ final class OutboxDispatcherTest {
       assertFalse(repository.markSent(connection, withWorker(claimed, "wrong"), NOW));
       assertFalse(
           repository.markFailure(
-              connection, withWorker(claimed, "wrong"), NOW, "JMS_FAIL", "public detail"));
+              connection,
+              withWorker(claimed, "wrong"),
+              NOW,
+              FIXTURE_JMS_FAIL_B8C3E123,
+              "public detail"));
       connection.commit();
     }
     try (Connection connection = transaction()) {
-      assertTrue(repository.markFailure(connection, claimed, NOW, "JMS_FAIL", "public detail"));
+      assertTrue(
+          repository.markFailure(
+              connection, claimed, NOW, FIXTURE_JMS_FAIL_B8C3E123, "public detail"));
       connection.commit();
     }
-    assertEquals("ERROR", text(id, "status"));
-    assertEquals("1", text(id, "attempt_count"));
-    assertEquals(NOW.plusSeconds(1), timestamp(id, "next_attempt_at"));
-    assertNull(textNullable(id, "lease_owner"));
-    assertEquals("JMS_FAIL", text(id, "last_error_code"));
+    assertEquals(FIXTURE_ERROR_F717E7D8, text(id, FIXTURE_STATUS_CFC31BCC));
+    assertEquals("1", text(id, FIXTURE_ATTEMPT_COUNT_87388C12));
+    assertEquals(NOW.plusSeconds(1), timestamp(id, FIXTURE_NEXT_ATTEMPT_AT_BFB0B802));
+    assertNull(textNullable(id, FIXTURE_LEASE_OWNER_6418FA0F));
+    assertEquals(FIXTURE_JMS_FAIL_B8C3E123, text(id, FIXTURE_LAST_ERROR_CODE_BF1A4C63));
 
     try (Connection connection = transaction()) {
       OutboxEntry retry =
@@ -612,9 +650,9 @@ final class OutboxDispatcherTest {
       assertTrue(repository.markSent(connection, retry, NOW.plusSeconds(2)));
       connection.commit();
     }
-    assertEquals("SENT", text(id, "status"));
-    assertEquals(NOW.plusSeconds(2), timestamp(id, "sent_at"));
-    assertNull(textNullable(id, "last_error_code"));
+    assertEquals(FIXTURE_SENT_6C701E27, text(id, FIXTURE_STATUS_CFC31BCC));
+    assertEquals(NOW.plusSeconds(2), timestamp(id, FIXTURE_SENT_AT_C13E7660));
+    assertNull(textNullable(id, FIXTURE_LAST_ERROR_CODE_BF1A4C63));
     assertNull(textNullable(id, "last_error_detail"));
 
     long capped = enqueue(repository, uuid(500), NOW);
@@ -624,17 +662,17 @@ final class OutboxDispatcherTest {
       assertTrue(repository.markFailure(connection, retry, NOW, "CAP", "bounded"));
       connection.commit();
     }
-    assertEquals("100", text(capped, "attempt_count"));
-    assertEquals(NOW.plusSeconds(300), timestamp(capped, "next_attempt_at"));
+    assertEquals("100", text(capped, FIXTURE_ATTEMPT_COUNT_87388C12));
+    assertEquals(NOW.plusSeconds(300), timestamp(capped, FIXTURE_NEXT_ATTEMPT_AT_BFB0B802));
   }
 
   @Test
   void dispatcherPersistsBothDestinationsAndArtemisSuppressesSendMarkCrashDuplicate(
       @TempDir Path root) throws Exception {
     EmbeddedActiveMQ broker = startBroker(root);
-    try (ActiveMQConnectionFactory factory = new ActiveMQConnectionFactory("vm://0");
+    try (ActiveMQConnectionFactory factory = new ActiveMQConnectionFactory(FIXTURE_VM_0_0C76084A);
         JMSContext observer = factory.createContext(JMSContext.AUTO_ACKNOWLEDGE);
-        JMSConsumer work = observer.createConsumer(queue("nk.async.work"));
+        JMSConsumer work = observer.createConsumer(queue(FIXTURE_NK_ASYNC_WORK_F9720513));
         JMSConsumer dlq = observer.createConsumer(queue("nk.dead.letter"))) {
       JdbcOutboxRepository repository = new JdbcOutboxRepository(() -> 0);
       enqueue(
@@ -679,7 +717,7 @@ final class OutboxDispatcherTest {
       BytesMessage one = assertInstanceOf(BytesMessage.class, work.receive(5_000));
       assertEquals(crashId.toString(), one.getStringProperty("_AMQ_DUPL_ID"));
       assertNull(work.receive(500));
-      assertEquals("SENT", text(crashRow, "status"));
+      assertEquals(FIXTURE_SENT_6C701E27, text(crashRow, FIXTURE_STATUS_CFC31BCC));
 
       resetDatabase();
       UUID markId = uuid(702);
@@ -699,7 +737,7 @@ final class OutboxDispatcherTest {
               new OutboxJmsSender(),
               CLOCK);
       assertThrows(SQLException.class, () -> markCommitFailure.dispatch("worker-mark", 1));
-      assertEquals("PENDING", text(markRow, "status"));
+      assertEquals("PENDING", text(markRow, FIXTURE_STATUS_CFC31BCC));
       assertInstanceOf(BytesMessage.class, work.receive(5_000));
 
       OutboxSendException commitFailure =
@@ -713,7 +751,8 @@ final class OutboxDispatcherTest {
                                   factory.createContext(JMSContext.SESSION_TRANSACTED)),
                           sample()));
       assertEquals("outbox JMS commit was not confirmed", commitFailure.getMessage());
-      assertEquals("synthetic commit failure", commitFailure.getCause().getMessage());
+      assertEquals(
+          FIXTURE_SYNTHETIC_COMMIT_FAILURE_D03EA83F, commitFailure.getCause().getMessage());
       assertNull(work.receive(250));
     } finally {
       broker.stop();
@@ -724,14 +763,14 @@ final class OutboxDispatcherTest {
   void dispatcherTurnsJmsAndStoredWireFailuresIntoRedactedRetryWithoutSend(@TempDir Path root)
       throws Exception {
     EmbeddedActiveMQ broker = startBroker(root);
-    try (ActiveMQConnectionFactory factory = new ActiveMQConnectionFactory("vm://0");
+    try (ActiveMQConnectionFactory factory = new ActiveMQConnectionFactory(FIXTURE_VM_0_0C76084A);
         JMSContext observer = factory.createContext(JMSContext.AUTO_ACKNOWLEDGE);
-        JMSConsumer work = observer.createConsumer(queue("nk.async.work"))) {
+        JMSConsumer work = observer.createConsumer(queue(FIXTURE_NK_ASYNC_WORK_F9720513))) {
       JdbcOutboxRepository repository = new JdbcOutboxRepository(() -> 0);
       long jmsFailure = enqueue(repository, MESSAGE, NOW);
       OutboxDispatcher broken = dispatcher(repository, () -> failingJmsContext(false));
       assertEquals(new OutboxDispatchReport(1, 0, 1, 0), broken.dispatch("worker-jms", 1));
-      assertEquals("JMS_SEND_FAILURE", text(jmsFailure, "last_error_code"));
+      assertEquals("JMS_SEND_FAILURE", text(jmsFailure, FIXTURE_LAST_ERROR_CODE_BF1A4C63));
       assertEquals("outbox send was not confirmed", text(jmsFailure, "last_error_detail"));
       assertFalse(text(jmsFailure, "last_error_detail").contains(MESSAGE.toString()));
       assertNull(work.receive(250));
@@ -746,7 +785,7 @@ final class OutboxDispatcherTest {
                 return failingJmsContext(false);
               });
       assertEquals(new OutboxDispatchReport(1, 0, 0, 1), leaseLost.dispatch("worker-stolen", 1));
-      assertEquals("other-worker", text(stolen, "lease_owner"));
+      assertEquals("other-worker", text(stolen, FIXTURE_LEASE_OWNER_6418FA0F));
 
       resetDatabase();
       enqueue(repository, uuid(751), NOW);
@@ -771,7 +810,7 @@ final class OutboxDispatcherTest {
           dispatcher(repository, () -> factory.createContext(JMSContext.SESSION_TRANSACTED));
       assertEquals(
           new OutboxDispatchReport(1, 0, 1, 0), dispatcher.dispatch("worker-integrity", 1));
-      assertEquals("OUTBOX_INTEGRITY", text(integrity, "last_error_code"));
+      assertEquals("OUTBOX_INTEGRITY", text(integrity, FIXTURE_LAST_ERROR_CODE_BF1A4C63));
       assertNull(work.receive(250));
     } finally {
       broker.stop();
@@ -856,8 +895,8 @@ final class OutboxDispatcherTest {
             valid,
             uuid(900),
             CORRELATION,
-            "QWKREQ01",
-            "001",
+            FIXTURE_QWKREQ01_19741256,
+            FIXTURE_001_A3FEAA64,
             valid.body(),
             OutboxDestination.ASYNC_WORK));
     assertIntegrity(
@@ -866,8 +905,8 @@ final class OutboxDispatcherTest {
             valid,
             MESSAGE,
             uuid(901),
-            "QWKREQ01",
-            "001",
+            FIXTURE_QWKREQ01_19741256,
+            FIXTURE_001_A3FEAA64,
             valid.body(),
             OutboxDestination.ASYNC_WORK));
     assertIntegrity(
@@ -877,7 +916,7 @@ final class OutboxDispatcherTest {
             MESSAGE,
             CORRELATION,
             "WLGEVT01",
-            "001",
+            FIXTURE_001_A3FEAA64,
             valid.body(),
             OutboxDestination.ASYNC_WORK));
     assertIntegrity(
@@ -886,7 +925,7 @@ final class OutboxDispatcherTest {
             valid,
             MESSAGE,
             CORRELATION,
-            "QWKREQ01",
+            FIXTURE_QWKREQ01_19741256,
             "002",
             valid.body(),
             OutboxDestination.ASYNC_WORK));
@@ -896,8 +935,8 @@ final class OutboxDispatcherTest {
             valid,
             MESSAGE,
             CORRELATION,
-            "QWKREQ01",
-            "001",
+            FIXTURE_QWKREQ01_19741256,
+            FIXTURE_001_A3FEAA64,
             Arrays.copyOf(valid.body(), 321),
             OutboxDestination.ASYNC_WORK));
     assertIntegrity(
@@ -907,19 +946,31 @@ final class OutboxDispatcherTest {
             MESSAGE,
             CORRELATION,
             "LGSRSP01",
-            "001",
+            FIXTURE_001_A3FEAA64,
             largeWire(),
             OutboxDestination.ASYNC_WORK));
     byte[] syncRequest = smallRequestWire();
     assertIntegrity(
         sender,
         withIdentity(
-            valid, MESSAGE, MESSAGE, "LOGREQ01", "001", syncRequest, OutboxDestination.ASYNC_WORK));
+            valid,
+            MESSAGE,
+            MESSAGE,
+            "LOGREQ01",
+            FIXTURE_001_A3FEAA64,
+            syncRequest,
+            OutboxDestination.ASYNC_WORK));
     assertThrows(
         IllegalArgumentException.class,
         () ->
             withIdentity(
-                valid, MESSAGE, MESSAGE, "LOGREQ01", "001", syncRequest, OutboxDestination.DLQ));
+                valid,
+                MESSAGE,
+                MESSAGE,
+                "LOGREQ01",
+                FIXTURE_001_A3FEAA64,
+                syncRequest,
+                OutboxDestination.DLQ));
 
     OutboxSendException sendFailure =
         assertThrows(
@@ -1026,7 +1077,7 @@ final class OutboxDispatcherTest {
                         sender,
                         CLOCK)
                     .dispatch("worker-claim-failure", 1));
-    assertEquals("synthetic commit failure", claimFailure.getMessage());
+    assertEquals(FIXTURE_SYNTHETIC_COMMIT_FAILURE_D03EA83F, claimFailure.getMessage());
     SQLException rollbackFailure =
         assertThrows(
             SQLException.class,
@@ -1053,13 +1104,13 @@ final class OutboxDispatcherTest {
                 new Class<?>[] {JMSContext.class},
                 (ignored, method, args) ->
                     switch (method.getName()) {
-                      case "getSessionMode" -> JMSContext.SESSION_TRANSACTED;
-                      case "createBytesMessage" -> throw primary;
-                      case "rollback" -> {
+                      case FIXTURE_GETSESSIONMODE_BF25AD1A -> JMSContext.SESSION_TRANSACTED;
+                      case FIXTURE_CREATEBYTESMESSAGE_F47217B2 -> throw primary;
+                      case FIXTURE_ROLLBACK_3770B198 -> {
                         rollbacks.incrementAndGet();
                         throw primary;
                       }
-                      case "close" -> {
+                      case FIXTURE_CLOSE_97959247 -> {
                         closes.incrementAndGet();
                         yield null;
                       }
@@ -1086,8 +1137,8 @@ final class OutboxDispatcherTest {
                 new Class<?>[] {JMSContext.class},
                 (ignored, method, args) ->
                     switch (method.getName()) {
-                      case "getSessionMode" -> throw primary;
-                      case "close" -> {
+                      case FIXTURE_GETSESSIONMODE_BF25AD1A -> throw primary;
+                      case FIXTURE_CLOSE_97959247 -> {
                         closes.incrementAndGet();
                         throw primary;
                       }
@@ -1115,8 +1166,8 @@ final class OutboxDispatcherTest {
                 new Class<?>[] {JMSContext.class},
                 (ignored, method, args) ->
                     switch (method.getName()) {
-                      case "getSessionMode" -> throw primary;
-                      case "close" -> {
+                      case FIXTURE_GETSESSIONMODE_BF25AD1A -> throw primary;
+                      case FIXTURE_CLOSE_97959247 -> {
                         closes.incrementAndGet();
                         throw secondary;
                       }
@@ -1146,8 +1197,8 @@ final class OutboxDispatcherTest {
                   new Class<?>[] {JMSContext.class},
                   (ignored, method, args) ->
                       switch (method.getName()) {
-                        case "getSessionMode" -> throw primary;
-                        case "close" -> {
+                        case FIXTURE_GETSESSIONMODE_BF25AD1A -> throw primary;
+                        case FIXTURE_CLOSE_97959247 -> {
                           closes.incrementAndGet();
                           throw secondary;
                         }
@@ -1168,7 +1219,7 @@ final class OutboxDispatcherTest {
   void idem010r05CommittedSendCloseRuntimeAndFatalNeverReturnSuccess(@TempDir Path root)
       throws Exception {
     EmbeddedActiveMQ broker = startBroker(root);
-    try (ActiveMQConnectionFactory factory = new ActiveMQConnectionFactory("vm://0")) {
+    try (ActiveMQConnectionFactory factory = new ActiveMQConnectionFactory(FIXTURE_VM_0_0C76084A)) {
       JMSRuntimeException runtime = new JMSRuntimeException("synthetic-close-after-commit");
       JMSContext first =
           closingContext(factory.createContext(JMSContext.SESSION_TRANSACTED), runtime);
@@ -1184,8 +1235,8 @@ final class OutboxDispatcherTest {
               sample(),
               next,
               CORRELATION,
-              "QWKREQ01",
-              "001",
+              FIXTURE_QWKREQ01_19741256,
+              FIXTURE_001_A3FEAA64,
               eventWire(next, CORRELATION),
               OutboxDestination.ASYNC_WORK);
       JMSContext after =
@@ -1205,7 +1256,7 @@ final class OutboxDispatcherTest {
             JMSContext.class.getClassLoader(),
             new Class<?>[] {JMSContext.class},
             (ignored, method, args) -> {
-              if (method.getName().equals("close")) {
+              if (method.getName().equals(FIXTURE_CLOSE_97959247)) {
                 delegate.close();
                 if (closing instanceof Error fatal) throw fatal;
                 throw closing;
@@ -1259,8 +1310,8 @@ final class OutboxDispatcherTest {
                     uuid(801),
                     CORRELATION,
                     destination,
-                    "QWKREQ01",
-                    "001",
+                    FIXTURE_QWKREQ01_19741256,
+                    FIXTURE_001_A3FEAA64,
                     body,
                     0,
                     NOW,
@@ -1268,7 +1319,14 @@ final class OutboxDispatcherTest {
                     "worker",
                     NOW.plusSeconds(10),
                     dlqRequest(uuid(801)).dlqMetadata())
-                : withIdentity(valid, MESSAGE, CORRELATION, "QWKREQ01", "001", body, destination));
+                : withIdentity(
+                    valid,
+                    MESSAGE,
+                    CORRELATION,
+                    FIXTURE_QWKREQ01_19741256,
+                    FIXTURE_001_A3FEAA64,
+                    body,
+                    destination));
       }
     }
   }
@@ -1294,8 +1352,8 @@ final class OutboxDispatcherTest {
             message,
             rootRequest,
             OutboxDestination.ASYNC_WORK,
-            "QWKREQ01",
-            "001",
+            FIXTURE_QWKREQ01_19741256,
+            FIXTURE_001_A3FEAA64,
             eventWire(message, rootRequest),
             due,
             NOW.minusSeconds(30)));
@@ -1317,7 +1375,14 @@ final class OutboxDispatcherTest {
   private static OutboxRequest request(
       UUID message, OutboxDestination destination, byte[] body, Instant due) {
     return new OutboxRequest(
-        message, CORRELATION, destination, "QWKREQ01", "001", body, due, NOW.minusSeconds(30));
+        message,
+        CORRELATION,
+        destination,
+        FIXTURE_QWKREQ01_19741256,
+        FIXTURE_001_A3FEAA64,
+        body,
+        due,
+        NOW.minusSeconds(30));
   }
 
   private static OutboxEntry sample() {
@@ -1326,8 +1391,8 @@ final class OutboxDispatcherTest {
         MESSAGE,
         CORRELATION,
         OutboxDestination.ASYNC_WORK,
-        "QWKREQ01",
-        "001",
+        FIXTURE_QWKREQ01_19741256,
+        FIXTURE_001_A3FEAA64,
         eventWire(MESSAGE, CORRELATION),
         0,
         NOW,
@@ -1341,8 +1406,8 @@ final class OutboxDispatcherTest {
         dispatchId,
         CORRELATION,
         OutboxDestination.DLQ,
-        "QWKREQ01",
-        "001",
+        FIXTURE_QWKREQ01_19741256,
+        FIXTURE_001_A3FEAA64,
         eventWire(MESSAGE, CORRELATION),
         NOW,
         NOW.minusSeconds(30),
@@ -1357,9 +1422,9 @@ final class OutboxDispatcherTest {
     assertEquals(dispatchId.toString(), message.getStringProperty("_AMQ_DUPL_ID"));
     assertEquals(CORRELATION.toString(), message.getJMSCorrelationID());
     assertEquals(CORRELATION.toString(), message.getStringProperty("NKCorrelationID"));
-    assertEquals("QWKREQ01", message.getStringProperty("NKLayoutID"));
-    assertEquals("001", message.getStringProperty("NKProtocolVersion"));
-    assertEquals("nk.async.work", message.getStringProperty("_AMQ_ORIG_ADDRESS"));
+    assertEquals(FIXTURE_QWKREQ01_19741256, message.getStringProperty("NKLayoutID"));
+    assertEquals(FIXTURE_001_A3FEAA64, message.getStringProperty("NKProtocolVersion"));
+    assertEquals(FIXTURE_NK_ASYNC_WORK_F9720513, message.getStringProperty("_AMQ_ORIG_ADDRESS"));
     assertEquals("nk.async.work.q", message.getStringProperty("_AMQ_ORIG_QUEUE"));
     assertEquals("ID:independent-original", message.getStringProperty("NKOriginalTransportID"));
     assertEquals(4, message.getIntProperty("NKDeliveryCount"));
@@ -1458,7 +1523,7 @@ final class OutboxDispatcherTest {
   void dlqDispatchCrashUsesNewStableDuplicateIdWithoutChangingOriginalWork(@TempDir Path root)
       throws Exception {
     EmbeddedActiveMQ broker = startBroker(root);
-    try (ActiveMQConnectionFactory factory = new ActiveMQConnectionFactory("vm://0");
+    try (ActiveMQConnectionFactory factory = new ActiveMQConnectionFactory(FIXTURE_VM_0_0C76084A);
         JMSContext observer = factory.createContext(JMSContext.AUTO_ACKNOWLEDGE);
         JMSConsumer dlq = observer.createConsumer(queue("nk.dead.letter"))) {
       JdbcOutboxRepository repository = new JdbcOutboxRepository(() -> 0);
@@ -1481,7 +1546,7 @@ final class OutboxDispatcherTest {
               .dispatch("dlq-recovery", 1));
       assertDlqMessage(assertInstanceOf(BytesMessage.class, dlq.receive(5000)), dispatchId);
       assertNull(dlq.receive(500));
-      assertEquals("SENT", text(row, "status"));
+      assertEquals(FIXTURE_SENT_6C701E27, text(row, FIXTURE_STATUS_CFC31BCC));
       assertEquals("ID:independent-original", text(row, "dlq_original_transport_id"));
       assertEquals("4", text(row, "dlq_delivery_count"));
       assertEquals(MESSAGE.toString(), text(row, "dlq_original_message_id"));
@@ -1564,8 +1629,8 @@ final class OutboxDispatcherTest {
     assertArrayEquals(expected, body(message));
     assertEquals(CORRELATION.toString(), message.getJMSCorrelationID());
     assertEquals(id.toString(), message.getStringProperty("NKMessageID"));
-    assertEquals("QWKREQ01", message.getStringProperty("NKLayoutID"));
-    assertEquals("001", message.getStringProperty("NKProtocolVersion"));
+    assertEquals(FIXTURE_QWKREQ01_19741256, message.getStringProperty("NKLayoutID"));
+    assertEquals(FIXTURE_001_A3FEAA64, message.getStringProperty("NKProtocolVersion"));
     assertEquals(id.toString(), message.getStringProperty("_AMQ_DUPL_ID"));
     assertEquals(DeliveryMode.PERSISTENT, message.getJMSDeliveryMode());
     assertEquals(0L, message.getJMSExpiration());
@@ -1585,16 +1650,16 @@ final class OutboxDispatcherTest {
             new Class<?>[] {JMSContext.class},
             (proxy, method, arguments) -> {
               return switch (method.getName()) {
-                case "getSessionMode" -> JMSContext.SESSION_TRANSACTED;
-                case "createBytesMessage" ->
+                case FIXTURE_GETSESSIONMODE_BF25AD1A -> JMSContext.SESSION_TRANSACTED;
+                case FIXTURE_CREATEBYTESMESSAGE_F47217B2 ->
                     throw new JMSRuntimeException("synthetic public failure");
-                case "rollback" -> {
+                case FIXTURE_ROLLBACK_3770B198 -> {
                   if (rollbackFails) {
                     throw new JMSRuntimeException("synthetic rollback failure");
                   }
                   yield null;
                 }
-                case "close" -> null;
+                case FIXTURE_CLOSE_97959247 -> null;
                 case "toString" -> "FailingJmsContext";
                 case "hashCode" -> System.identityHashCode(proxy);
                 case "equals" -> proxy == arguments[0];
@@ -1624,9 +1689,9 @@ final class OutboxDispatcherTest {
             new Class<?>[] {JMSContext.class},
             (proxy, method, arguments) -> {
               return switch (method.getName()) {
-                case "getSessionMode" -> JMSContext.SESSION_TRANSACTED;
-                case "createBytesMessage" -> message;
-                case "rollback", "close" -> null;
+                case FIXTURE_GETSESSIONMODE_BF25AD1A -> JMSContext.SESSION_TRANSACTED;
+                case FIXTURE_CREATEBYTESMESSAGE_F47217B2 -> message;
+                case FIXTURE_ROLLBACK_3770B198, FIXTURE_CLOSE_97959247 -> null;
                 case "toString" -> "CheckedFailingJmsContext";
                 case "hashCode" -> System.identityHashCode(proxy);
                 case "equals" -> proxy == arguments[0];
@@ -1642,8 +1707,8 @@ final class OutboxDispatcherTest {
             new Class<?>[] {JMSContext.class},
             (proxy, method, arguments) -> {
               return switch (method.getName()) {
-                case "getSessionMode" -> mode;
-                case "close" -> null;
+                case FIXTURE_GETSESSIONMODE_BF25AD1A -> mode;
+                case FIXTURE_CLOSE_97959247 -> null;
                 case "toString" -> "SyntheticJmsContext";
                 case "hashCode" -> System.identityHashCode(proxy);
                 case "equals" -> proxy == arguments[0];
@@ -1670,7 +1735,7 @@ final class OutboxDispatcherTest {
                             (resultProxy, resultMethod, resultArguments) ->
                                 switch (resultMethod.getName()) {
                                   case "next" -> false;
-                                  case "close" -> null;
+                                  case FIXTURE_CLOSE_97959247 -> null;
                                   case "toString" -> "EmptyResult";
                                   case "hashCode" -> System.identityHashCode(resultProxy);
                                   case "equals" -> resultProxy == resultArguments[0];
@@ -1683,7 +1748,12 @@ final class OutboxDispatcherTest {
                     new Class<?>[] {PreparedStatement.class},
                     (statementProxy, statementMethod, statementArguments) ->
                         switch (statementMethod.getName()) {
-                          case "setObject", "setString", "setBytes", "setNull", "close" -> null;
+                          case "setObject",
+                              "setString",
+                              "setBytes",
+                              "setNull",
+                              FIXTURE_CLOSE_97959247 ->
+                              null;
                           case "executeQuery" -> empty;
                           case "toString" -> "EmptyInsert";
                           case "hashCode" -> System.identityHashCode(statementProxy);
@@ -1724,7 +1794,7 @@ final class OutboxDispatcherTest {
             (proxy, method, arguments) ->
                 switch (method.getName()) {
                   case "setAutoCommit" -> throw new SQLException("synthetic setup failure");
-                  case "close" -> throw new SQLException("synthetic close failure");
+                  case FIXTURE_CLOSE_97959247 -> throw new SQLException("synthetic close failure");
                   case "toString" -> "SetupFailingConnection";
                   case "hashCode" -> System.identityHashCode(proxy);
                   case "equals" -> proxy == arguments[0];
@@ -1740,7 +1810,7 @@ final class OutboxDispatcherTest {
             new Class<?>[] {JMSContext.class},
             (proxy, method, arguments) -> {
               Object result = invoke(delegate, method, arguments);
-              if (method.getName().equals("commit")) {
+              if (method.getName().equals(FIXTURE_COMMIT_5EA9C586)) {
                 commits.incrementAndGet();
                 action.run();
               }
@@ -1754,8 +1824,8 @@ final class OutboxDispatcherTest {
             JMSContext.class.getClassLoader(),
             new Class<?>[] {JMSContext.class},
             (proxy, method, arguments) -> {
-              if (method.getName().equals("commit")) {
-                throw new JMSRuntimeException("synthetic commit failure");
+              if (method.getName().equals(FIXTURE_COMMIT_5EA9C586)) {
+                throw new JMSRuntimeException(FIXTURE_SYNTHETIC_COMMIT_FAILURE_D03EA83F);
               }
               return invoke(delegate, method, arguments);
             });
@@ -1767,10 +1837,10 @@ final class OutboxDispatcherTest {
             Connection.class.getClassLoader(),
             new Class<?>[] {Connection.class},
             (proxy, method, arguments) -> {
-              if (method.getName().equals("commit")) {
-                throw new SQLException("synthetic commit failure");
+              if (method.getName().equals(FIXTURE_COMMIT_5EA9C586)) {
+                throw new SQLException(FIXTURE_SYNTHETIC_COMMIT_FAILURE_D03EA83F);
               }
-              if (rollbackFails && method.getName().equals("rollback")) {
+              if (rollbackFails && method.getName().equals(FIXTURE_ROLLBACK_3770B198)) {
                 throw new SQLException("synthetic rollback failure");
               }
               return invoke(delegate, method, arguments);
@@ -1787,7 +1857,7 @@ final class OutboxDispatcherTest {
   }
 
   private static byte[] eventWire(UUID message, UUID correlation) {
-    byte[] body = wire("QWKREQ01", message, correlation, 64, 0, 0, false);
+    byte[] body = wire(FIXTURE_QWKREQ01_19741256, message, correlation, 64, 0, 0, false);
     // Independent SS 323 QWKREQ01 oracle: data offsets 0/26/38/50, lengths 26/12/12/14.
     ascii(body, 256, "01ARZ3NDEKTSV4RRFFQ69G5FAV");
     ascii(body, 282, "000000000001");
@@ -1803,9 +1873,9 @@ final class OutboxDispatcherTest {
     byte[] body = new byte[256];
     Arrays.fill(body, (byte) ' ');
     ascii(body, 0, "SCHBNK01");
-    ascii(body, 8, "001");
+    ascii(body, 8, FIXTURE_001_A3FEAA64);
     ascii(body, 11, "LOGREQ01");
-    ascii(body, 19, "001");
+    ascii(body, 19, FIXTURE_001_A3FEAA64);
     body[22] = 'Q';
     body[23] = 'S';
     ascii(body, 24, MESSAGE.toString());
@@ -1832,9 +1902,9 @@ final class OutboxDispatcherTest {
     byte[] body = new byte[total];
     Arrays.fill(body, (byte) ' ');
     ascii(body, 0, "SCHBNK01");
-    ascii(body, 8, "001");
+    ascii(body, 8, FIXTURE_001_A3FEAA64);
     ascii(body, 11, layout);
-    ascii(body, 19, "001");
+    ascii(body, 19, FIXTURE_001_A3FEAA64);
     body[22] = response ? (byte) 'S' : (byte) 'E';
     body[23] = response ? (byte) 'S' : (byte) 'I';
     ascii(body, 24, message.toString());
@@ -1871,7 +1941,7 @@ final class OutboxDispatcherTest {
         .setLargeMessagesDirectory(root.resolve("large-messages").toString())
         .setSecurityEnabled(false)
         .clearAcceptorConfigurations()
-        .addAcceptorConfiguration("component", "vm://0");
+        .addAcceptorConfiguration("component", FIXTURE_VM_0_0C76084A);
     return new EmbeddedActiveMQ().setConfiguration(configuration).start();
   }
 

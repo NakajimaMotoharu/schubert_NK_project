@@ -90,6 +90,28 @@ import org.junit.jupiter.api.io.TempDir;
  * SSC-027/PT-SCN-009-T01..T05. Real PG and independent SQL/wire/AES; publisher stub scope explicit.
  */
 final class ScenarioApplicationServiceTest {
+  private static final String FIXTURE_SRC_27085F52 = "SRC";
+  private static final String FIXTURE_SCN_F30DFFA3 = "SCN";
+  private static final String FIXTURE_0000_876EEFE0 = "0000";
+  private static final String FIXTURE_SCENARIO_SEARCHED_55437FA2 = "SCENARIO_SEARCHED";
+  private static final String FIXTURE_SCENARIO_VIEWED_18E00896 = "SCENARIO_VIEWED";
+  private static final String FIXTURE_0200_FC9DB3AC = "0200";
+  private static final String FIXTURE_SCHUBERT_APP_LOGS_D6BE6409 = "schubert.app_logs";
+  private static final String FIXTURE_SCHUBERT_REQUEST_INBOX_CEAADFAA = "schubert.request_inbox";
+  private static final String FIXTURE_AFTERCOMMIT_940DD4A3 = "afterCommit";
+  private static final String FIXTURE_CLOSE_97959247 = "close";
+  private static final String FIXTURE_NONE_30A0924A = "none";
+  private static final String FIXTURE_LAYOUT_29C18BBC = "layout";
+  private static final String FIXTURE_GAM_5BC4EFCF = "GAM";
+  private static final String FIXTURE_SPK_2964937C = "SPK";
+  private static final String FIXTURE_9001_351F7309 = "9001";
+  private static final String FIXTURE_DELETE_FROM_SCHUBERT_SCRIPT_ENTRIES_76A083AC =
+      "delete from schubert.script_entries";
+  private static final String FIXTURE_OWNERCLOSE_08E63791 = "ownerClose";
+  private static final String FIXTURE_ROLE_2BC933AF = "role";
+  private static final String FIXTURE_COMMIT_5EA9C586 = "commit";
+  private static final String FIXTURE_PROCESSING_5EE780EA = "processing";
+  private static final String FIXTURE_DATABASE_21C67C24 = "database";
   @TempDir static Path root;
   private static ApiLogDatabaseFixture database;
   private static final Instant NOW = Instant.parse("2026-09-08T00:01:00Z");
@@ -121,19 +143,29 @@ final class ScenarioApplicationServiceTest {
   void successAuditIsAtomicAndNotRepeatedForSavedSearchAndDetail() throws Exception {
     master(2);
     try (var h = new Harness()) {
-      for (String prefix : List.of("SRC", "SCN")) {
+      for (String prefix : List.of(FIXTURE_SRC_27085F52, FIXTURE_SCN_F30DFFA3)) {
         var message = request(prefix);
         assertEquals(
-            "0000", new String(h.service.process(message), 208, 4, StandardCharsets.US_ASCII));
+            FIXTURE_0000_876EEFE0,
+            new String(h.service.process(message), 208, 4, StandardCharsets.US_ASCII));
         assertScenarioAudit(
-            message, prefix.equals("SRC") ? "SCENARIO_SEARCHED" : "SCENARIO_VIEWED", 2);
+            message,
+            prefix.equals(FIXTURE_SRC_27085F52)
+                ? FIXTURE_SCENARIO_SEARCHED_55437FA2
+                : FIXTURE_SCENARIO_VIEWED_18E00896,
+            2);
         assertEquals(
-            "0200", new String(h.service.process(message), 208, 4, StandardCharsets.US_ASCII));
+            FIXTURE_0200_FC9DB3AC,
+            new String(h.service.process(message), 208, 4, StandardCharsets.US_ASCII));
         assertScenarioAudit(
-            message, prefix.equals("SRC") ? "SCENARIO_SEARCHED" : "SCENARIO_VIEWED", 2);
+            message,
+            prefix.equals(FIXTURE_SRC_27085F52)
+                ? FIXTURE_SCENARIO_SEARCHED_55437FA2
+                : FIXTURE_SCENARIO_VIEWED_18E00896,
+            2);
       }
-      assertEquals(2, count("schubert.app_logs"));
-      assertEquals(2, count("schubert.request_inbox"));
+      assertEquals(2, count(FIXTURE_SCHUBERT_APP_LOGS_D6BE6409));
+      assertEquals(2, count(FIXTURE_SCHUBERT_REQUEST_INBOX_CEAADFAA));
     }
   }
 
@@ -145,19 +177,20 @@ final class ScenarioApplicationServiceTest {
     sql(
         "create trigger fail_scenario_audit before insert on schubert.app_logs for each row execute function schubert.fail_scenario_audit()");
     try (var h = new Harness()) {
-      var message = request("SRC");
+      var message = request(FIXTURE_SRC_27085F52);
       try {
         assertThrows(TemporaryInfrastructureException.class, () -> h.service.process(message));
-        assertEquals(0, count("schubert.request_inbox"));
-        assertEquals(0, count("schubert.app_logs"));
+        assertEquals(0, count(FIXTURE_SCHUBERT_REQUEST_INBOX_CEAADFAA));
+        assertEquals(0, count(FIXTURE_SCHUBERT_APP_LOGS_D6BE6409));
         assertEquals(0, h.live.get());
       } finally {
         sql("drop trigger fail_scenario_audit on schubert.app_logs");
         sql("drop function schubert.fail_scenario_audit()");
       }
       assertEquals(
-          "0000", new String(h.service.process(message), 208, 4, StandardCharsets.US_ASCII));
-      assertScenarioAudit(message, "SCENARIO_SEARCHED", 2);
+          FIXTURE_0000_876EEFE0,
+          new String(h.service.process(message), 208, 4, StandardCharsets.US_ASCII));
+      assertScenarioAudit(message, FIXTURE_SCENARIO_SEARCHED_55437FA2, 2);
     }
   }
 
@@ -166,7 +199,7 @@ final class ScenarioApplicationServiceTest {
     master(2);
     try (var h = new Harness();
         var workers = Executors.newFixedThreadPool(12)) {
-      var message = request("SRC");
+      var message = request(FIXTURE_SRC_27085F52);
       var start = new CountDownLatch(1);
       List<Future<String>> replies = new ArrayList<>();
       for (int n = 0; n < 24; n++)
@@ -179,42 +212,46 @@ final class ScenarioApplicationServiceTest {
       start.countDown();
       List<String> codes = new ArrayList<>();
       for (var reply : replies) codes.add(reply.get(20, TimeUnit.SECONDS));
-      assertEquals(1, Collections.frequency(codes, "0000"));
-      assertEquals(23, Collections.frequency(codes, "0200"));
-      assertScenarioAudit(message, "SCENARIO_SEARCHED", 2);
-      var first = workers.submit(() -> ascii(h.service.process(request("SRC")), 208, 4));
-      var second = workers.submit(() -> ascii(h.service.process(request("SRC")), 208, 4));
-      assertEquals("0000", first.get(10, TimeUnit.SECONDS));
-      assertEquals("0000", second.get(10, TimeUnit.SECONDS));
-      assertEquals(3, count("schubert.app_logs"));
-      assertEquals(3, count("schubert.request_inbox"));
+      assertEquals(1, Collections.frequency(codes, FIXTURE_0000_876EEFE0));
+      assertEquals(23, Collections.frequency(codes, FIXTURE_0200_FC9DB3AC));
+      assertScenarioAudit(message, FIXTURE_SCENARIO_SEARCHED_55437FA2, 2);
+      var first =
+          workers.submit(() -> ascii(h.service.process(request(FIXTURE_SRC_27085F52)), 208, 4));
+      var second =
+          workers.submit(() -> ascii(h.service.process(request(FIXTURE_SRC_27085F52)), 208, 4));
+      assertEquals(FIXTURE_0000_876EEFE0, first.get(10, TimeUnit.SECONDS));
+      assertEquals(FIXTURE_0000_876EEFE0, second.get(10, TimeUnit.SECONDS));
+      assertEquals(3, count(FIXTURE_SCHUBERT_APP_LOGS_D6BE6409));
+      assertEquals(3, count(FIXTURE_SCHUBERT_REQUEST_INBOX_CEAADFAA));
     }
   }
 
   @Test
   void committedAuditRemainsExactlyOnceAfterUnknownResponse() throws Exception {
-    for (String fault : List.of("afterCommit", "close")) {
+    for (String fault : List.of(FIXTURE_AFTERCOMMIT_940DD4A3, FIXTURE_CLOSE_97959247)) {
       seed();
       master(2);
       try (var h = new Harness()) {
-        var message = request("SRC");
+        var message = request(FIXTURE_SRC_27085F52);
         h.faultConnection = 2;
         h.fault = fault;
         assertThrows(TemporaryInfrastructureException.class, () -> h.service.process(message));
-        assertScenarioAudit(message, "SCENARIO_SEARCHED", 2);
-        assertEquals(1, count("schubert.request_inbox"));
-        h.fault = "none";
-        assertEquals("0200", ascii(h.service.process(message), 208, 4));
-        assertScenarioAudit(message, "SCENARIO_SEARCHED", 2);
+        assertScenarioAudit(message, FIXTURE_SCENARIO_SEARCHED_55437FA2, 2);
+        assertEquals(1, count(FIXTURE_SCHUBERT_REQUEST_INBOX_CEAADFAA));
+        h.fault = FIXTURE_NONE_30A0924A;
+        assertEquals(FIXTURE_0200_FC9DB3AC, ascii(h.service.process(message), 208, 4));
+        assertScenarioAudit(message, FIXTURE_SCENARIO_SEARCHED_55437FA2, 2);
         assertEquals(0, h.live.get());
       }
     }
     seed();
     try (var h = new Harness()) {
       h.identifierFaultAt = 1;
-      assertThrows(TemporaryInfrastructureException.class, () -> h.service.process(request("SRC")));
-      assertEquals(0, count("schubert.app_logs"));
-      assertEquals(0, count("schubert.request_inbox"));
+      assertThrows(
+          TemporaryInfrastructureException.class,
+          () -> h.service.process(request(FIXTURE_SRC_27085F52)));
+      assertEquals(0, count(FIXTURE_SCHUBERT_APP_LOGS_D6BE6409));
+      assertEquals(0, count(FIXTURE_SCHUBERT_REQUEST_INBOX_CEAADFAA));
     }
   }
 
@@ -237,8 +274,10 @@ final class ScenarioApplicationServiceTest {
         assertEquals(message.header().correlationId(), rows.getObject(8));
         assertEquals(NOW, rows.getObject(9, OffsetDateTime.class).toInstant());
         var details = com.google.gson.JsonParser.parseString(rows.getString(10)).getAsJsonObject();
-        assertEquals(Set.of("layout", "resultCount"), details.keySet());
-        assertEquals(message.header().layoutId().value(), details.get("layout").getAsString());
+        assertEquals(Set.of(FIXTURE_LAYOUT_29C18BBC, "resultCount"), details.keySet());
+        assertEquals(
+            message.header().layoutId().value(),
+            details.get(FIXTURE_LAYOUT_29C18BBC).getAsString());
         assertEquals(resultCount, details.get("resultCount").getAsInt());
         assertFalse(rows.next(), "saved replay must not duplicate the business audit");
       }
@@ -250,7 +289,7 @@ final class ScenarioApplicationServiceTest {
     try (var h = new Harness()) {
       for (String prefix : ScenarioReplayFixture.LAYOUTS) {
         var request = request(prefix);
-        String code = prefix.equals("SCN") ? "0104" : "0000";
+        String code = prefix.equals(FIXTURE_SCN_F30DFFA3) ? "0104" : FIXTURE_0000_876EEFE0;
         byte[] expected = golden(prefix, request, h, code, false, 0, 2);
         assertArrayEquals(expected, h.service.process(request));
         assertEquals(0, h.live.get());
@@ -259,15 +298,24 @@ final class ScenarioApplicationServiceTest {
             ScenarioReplayFixture.decrypt(ScenarioRequest.decode(request), cipher(request));
         assertArrayEquals(golden(prefix, request, h, code, false, 0, 1), frozen);
         assertArrayEquals(
-            golden(prefix, request, h, prefix.equals("SCN") ? "0104" : "0200", false, 0, 3),
+            golden(
+                prefix,
+                request,
+                h,
+                prefix.equals(FIXTURE_SCN_F30DFFA3) ? "0104" : FIXTURE_0200_FC9DB3AC,
+                false,
+                0,
+                3),
             h.service.process(request));
         assertEquals(before, stored(request));
         assertEquals(0, h.published.get());
         assertEquals(0, h.live.get());
         h.ids.set(0);
       }
-      assertEquals(6, count("schubert.request_inbox"));
-      assertEquals(1, count("schubert.app_logs")); // Only SRC succeeded; SCN0104 is not a view.
+      assertEquals(6, count(FIXTURE_SCHUBERT_REQUEST_INBOX_CEAADFAA));
+      assertEquals(
+          1,
+          count(FIXTURE_SCHUBERT_APP_LOGS_D6BE6409)); // Only SRC succeeded; SCN0104 is not a view.
       try (var c = database.api();
           var s = c.createStatement();
           var r =
@@ -285,13 +333,13 @@ final class ScenarioApplicationServiceTest {
       var service =
           ScenarioApplicationAssembly.create(
               h.source, h.keys, h.snapshots, h.publisher, h.inspector, h.clock);
-      var message = request("GAM");
+      var message = request(FIXTURE_GAM_5BC4EFCF);
       byte[] first = service.process(message);
-      assertEquals("0000", new String(first, 208, 4, StandardCharsets.US_ASCII));
-      assertEquals(1, count("schubert.request_inbox"));
+      assertEquals(FIXTURE_0000_876EEFE0, new String(first, 208, 4, StandardCharsets.US_ASCII));
+      assertEquals(1, count(FIXTURE_SCHUBERT_REQUEST_INBOX_CEAADFAA));
       byte[] replay = service.process(message);
-      assertEquals("0200", new String(replay, 208, 4, StandardCharsets.US_ASCII));
-      assertEquals(1, count("schubert.request_inbox"));
+      assertEquals(FIXTURE_0200_FC9DB3AC, new String(replay, 208, 4, StandardCharsets.US_ASCII));
+      assertEquals(1, count(FIXTURE_SCHUBERT_REQUEST_INBOX_CEAADFAA));
       assertEquals(0, h.published.get());
       assertThrows(
           NullPointerException.class,
@@ -333,8 +381,10 @@ final class ScenarioApplicationServiceTest {
         "insert into schubert.speakers(id,game_id,name,normalized_name,created_at) select n,1,'speaker'||n,'s'||n,'2026-09-08Z' from generate_series(1,501) t(n)");
     sql("update schubert.script_entries set speaker_id=id,entry_type='dialogue'");
     try (var h = new Harness()) {
-      var request = request("SPK");
-      assertArrayEquals(golden("SPK", request, h, "9001", false, 0, 2), h.service.process(request));
+      var request = request(FIXTURE_SPK_2964937C);
+      assertArrayEquals(
+          golden(FIXTURE_SPK_2964937C, request, h, FIXTURE_9001_351F7309, false, 0, 2),
+          h.service.process(request));
       assertEquals("ERROR", stored(request).get(0));
       assertEquals(0, h.published.get());
     }
@@ -342,25 +392,32 @@ final class ScenarioApplicationServiceTest {
       seed();
       master(count);
       try (var h = new Harness()) {
-        var request = request("SCN");
+        var request = request(FIXTURE_SCN_F30DFFA3);
         byte[] actual =
             assertDoesNotThrow(() -> h.service.process(request), "detail count=" + count);
         boolean file = count > 200 && count <= 10000;
-        String code = count > 10000 ? "9001" : "0000";
-        assertArrayEquals(golden("SCN", request, h, code, file, count, 2), actual);
+        String code = count > 10000 ? FIXTURE_9001_351F7309 : FIXTURE_0000_876EEFE0;
+        assertArrayEquals(golden(FIXTURE_SCN_F30DFFA3, request, h, code, file, count, 2), actual);
         assertEquals(file ? 1 : 0, h.published.get());
         assertEquals(0, h.live.get());
         assertEquals(List.of(true, false), h.modes);
-        if (count <= 10000) assertScenarioAudit(request, "SCENARIO_VIEWED", count);
-        else assertEquals(0, count("schubert.app_logs"));
+        if (count <= 10000) assertScenarioAudit(request, FIXTURE_SCENARIO_VIEWED_18E00896, count);
+        else assertEquals(0, count(FIXTURE_SCHUBERT_APP_LOGS_D6BE6409));
         var saved = stored(request);
         sql("update schubert.script_entries set body='changed after first response'");
         assertArrayEquals(
-            golden("SCN", request, h, count > 10000 ? "9001" : "0200", file, count, 3),
+            golden(
+                FIXTURE_SCN_F30DFFA3,
+                request,
+                h,
+                count > 10000 ? FIXTURE_9001_351F7309 : FIXTURE_0200_FC9DB3AC,
+                file,
+                count,
+                3),
             h.service.process(request));
         assertEquals(saved, stored(request));
         assertEquals(file ? 1 : 0, h.published.get());
-        assertEquals(count <= 10000 ? 1 : 0, count("schubert.app_logs"));
+        assertEquals(count <= 10000 ? 1 : 0, count(FIXTURE_SCHUBERT_APP_LOGS_D6BE6409));
       }
     }
     seed();
@@ -370,8 +427,10 @@ final class ScenarioApplicationServiceTest {
           () -> {
             throw new CapacityExceededException();
           };
-      var request = request("SCN");
-      assertArrayEquals(golden("SCN", request, h, "9001", false, 0, 2), h.service.process(request));
+      var request = request(FIXTURE_SCN_F30DFFA3);
+      assertArrayEquals(
+          golden(FIXTURE_SCN_F30DFFA3, request, h, FIXTURE_9001_351F7309, false, 0, 2),
+          h.service.process(request));
       assertEquals("ERROR", stored(request).get(0));
     }
   }
@@ -380,7 +439,7 @@ final class ScenarioApplicationServiceTest {
   void replayRegeneratesOnlyMissingOriginalFilesAndPreservesLifetime() throws Exception {
     master(201);
     try (var h = new Harness()) {
-      var request = request("SCN");
+      var request = request(FIXTURE_SCN_F30DFFA3);
       h.service.process(request);
       var first = stored(request);
       byte[] initial =
@@ -388,9 +447,10 @@ final class ScenarioApplicationServiceTest {
       h.missing = true;
       h.now.set(NOW.plusSeconds(20));
       assertArrayEquals(
-          golden("SCN", request, h, "0200", true, 201, 3), h.service.process(request));
+          golden(FIXTURE_SCN_F30DFFA3, request, h, FIXTURE_0200_FC9DB3AC, true, 201, 3),
+          h.service.process(request));
       assertEquals(2, h.published.get());
-      assertScenarioAudit(request, "SCENARIO_VIEWED", 201);
+      assertScenarioAudit(request, FIXTURE_SCENARIO_VIEWED_18E00896, 201);
       var replaced = stored(request);
       assertEquals(first.subList(0, 5), replaced.subList(0, 5));
       byte[] after =
@@ -406,9 +466,10 @@ final class ScenarioApplicationServiceTest {
         h.publishAction = () -> {};
         h.inspectAction = () -> {};
         if (failure.equals("master")) sql("update schubert.script_entries set body='changed'");
-        if (failure.equals("missingMaster")) sql("delete from schubert.script_entries");
+        if (failure.equals("missingMaster"))
+          sql(FIXTURE_DELETE_FROM_SCHUBERT_SCRIPT_ENTRIES_76A083AC);
         if (failure.equals("queryCapacity")) {
-          sql("delete from schubert.script_entries");
+          sql(FIXTURE_DELETE_FROM_SCHUBERT_SCRIPT_ENTRIES_76A083AC);
           entries(10001);
         }
         if (failure.equals("capacity"))
@@ -429,10 +490,10 @@ final class ScenarioApplicationServiceTest {
         temporary(() -> h.service.process(request));
         assertEquals(replaced, stored(request));
         assertEquals(0, h.live.get());
-        sql("delete from schubert.script_entries");
+        sql(FIXTURE_DELETE_FROM_SCHUBERT_SCRIPT_ENTRIES_76A083AC);
         entries(201);
       }
-      sql("delete from schubert.script_entries");
+      sql(FIXTURE_DELETE_FROM_SCHUBERT_SCRIPT_ENTRIES_76A083AC);
       sql("delete from schubert.script_files");
       h.inspectAction = () -> {};
       temporary(() -> h.service.process(request));
@@ -445,7 +506,7 @@ final class ScenarioApplicationServiceTest {
     master(201);
     try (var h = new Harness();
         var workers = Executors.newFixedThreadPool(16)) {
-      var request = request("SCN");
+      var request = request(FIXTURE_SCN_F30DFFA3);
       List<Future<byte[]>> replies = new ArrayList<>();
       for (int i = 0; i < 100; i++) replies.add(workers.submit(() -> h.service.process(request)));
       int initial = 0;
@@ -453,29 +514,37 @@ final class ScenarioApplicationServiceTest {
       for (var reply : replies) {
         byte[] actual = reply.get(30, TimeUnit.SECONDS);
         String code = ascii(actual, 208, 4);
-        if (code.equals("0000")) initial++;
-        else assertEquals("0200", code);
+        if (code.equals(FIXTURE_0000_876EEFE0)) initial++;
+        else assertEquals(FIXTURE_0200_FC9DB3AC, code);
         assertTrue(ids.add(ascii(actual, 24, 36)));
         assertEquals(request.header().messageId().toString(), ascii(actual, 60, 36));
         assertArrayEquals(
-            Arrays.copyOfRange(golden("SCN", request, h, code, true, 201, 1), 256, 1984),
+            Arrays.copyOfRange(
+                golden(FIXTURE_SCN_F30DFFA3, request, h, code, true, 201, 1), 256, 1984),
             Arrays.copyOfRange(actual, 256, actual.length));
       }
       assertEquals(1, initial);
       assertEquals(1, h.published.get());
-      assertEquals(1, count("schubert.request_inbox"));
+      assertEquals(1, count(FIXTURE_SCHUBERT_REQUEST_INBOX_CEAADFAA));
       assertEquals(0, h.live.get());
       session("d", 2, 101);
       var newContext = context(request, "d");
       assertArrayEquals(
-          golden("SCN", newContext, h, "0200", true, 201, 102), h.service.process(newContext));
+          golden(FIXTURE_SCN_F30DFFA3, newContext, h, FIXTURE_0200_FC9DB3AC, true, 201, 102),
+          h.service.process(newContext));
     }
     for (String change :
-        List.of("revoked", "owner", "ownerClose", "role", "expiry", "regenerationOwner")) {
+        List.of(
+            "revoked",
+            "owner",
+            FIXTURE_OWNERCLOSE_08E63791,
+            FIXTURE_ROLE_2BC933AF,
+            "expiry",
+            "regenerationOwner")) {
       seed();
       master(201);
       try (var h = new Harness()) {
-        var request = request("SCN");
+        var request = request(FIXTURE_SCN_F30DFFA3);
         if (change.equals("regenerationOwner")) {
           h.service.process(request);
           h.missing = true;
@@ -487,26 +556,29 @@ final class ScenarioApplicationServiceTest {
                   case "revoked" ->
                       sql(
                           "update schubert.auth_sessions set revoked=true,revoked_at='2026-09-08T00:01:01Z',revoke_reason='LOGOUT'");
-                  case "owner", "ownerClose" -> {
+                  case "owner", FIXTURE_OWNERCLOSE_08E63791 -> {
                     sql("update schubert.auth_sessions set user_id=102");
-                    if (change.equals("ownerClose")) {
-                      h.fault = "close";
+                    if (change.equals(FIXTURE_OWNERCLOSE_08E63791)) {
+                      h.fault = FIXTURE_CLOSE_97959247;
                       h.faultConnection = 2;
                     }
                   }
-                  case "role" -> sql("update schubert.app_users set role='ADMIN' where id=101");
+                  case FIXTURE_ROLE_2BC933AF ->
+                      sql("update schubert.app_users set role='ADMIN' where id=101");
                   case "expiry" -> h.now.set(Instant.parse("2026-09-08T08:00:00Z"));
                   default -> throw new AssertionError(change);
                 }
               };
-        if (change.equals("ownerClose")) temporary(() -> h.service.process(request));
+        if (change.equals(FIXTURE_OWNERCLOSE_08E63791)) temporary(() -> h.service.process(request));
         else {
           byte[] actual = h.service.process(request);
-          assertEquals(change.equals("role") ? "0000" : "0102", ascii(actual, 208, 4));
+          assertEquals(
+              change.equals(FIXTURE_ROLE_2BC933AF) ? FIXTURE_0000_876EEFE0 : "0102",
+              ascii(actual, 208, 4));
         }
         assertEquals(
-            change.equals("role") || change.equals("regenerationOwner") ? 1 : 0,
-            count("schubert.request_inbox"));
+            change.equals(FIXTURE_ROLE_2BC933AF) || change.equals("regenerationOwner") ? 1 : 0,
+            count(FIXTURE_SCHUBERT_REQUEST_INBOX_CEAADFAA));
         assertEquals(0, h.live.get());
       }
     }
@@ -639,7 +711,9 @@ final class ScenarioApplicationServiceTest {
               h.publisher,
               h.inspector,
               h.clock);
-      assertEquals("0000", ascii(publicService.process(request("GAM")), 208, 4));
+      assertEquals(
+          FIXTURE_0000_876EEFE0,
+          ascii(publicService.process(request(FIXTURE_GAM_5BC4EFCF)), 208, 4));
     }
     for (int stage : new int[] {1, 2}) {
       for (String fault :
@@ -649,33 +723,37 @@ final class ScenarioApplicationServiceTest {
               "setAutoCommit",
               "setReadOnly",
               "prepareStatement",
-              "commit",
-              "afterCommit",
+              FIXTURE_COMMIT_5EA9C586,
+              FIXTURE_AFTERCOMMIT_940DD4A3,
               "rollback",
-              "close")) {
+              FIXTURE_CLOSE_97959247)) {
         seed();
         try (var h = new Harness()) {
           h.fault = fault;
           h.faultConnection = stage;
-          temporary(() -> h.service.process(request("GAM")));
+          temporary(() -> h.service.process(request(FIXTURE_GAM_5BC4EFCF)));
           assertEquals(
-              stage == 2 && List.of("afterCommit", "close").contains(fault) ? 1 : 0,
-              count("schubert.request_inbox"),
+              stage == 2
+                      && List.of(FIXTURE_AFTERCOMMIT_940DD4A3, FIXTURE_CLOSE_97959247)
+                          .contains(fault)
+                  ? 1
+                  : 0,
+              count(FIXTURE_SCHUBERT_REQUEST_INBOX_CEAADFAA),
               fault);
           assertEquals(0, h.live.get());
         }
       }
     }
-    for (String fault : List.of("none", "close", "rollback")) {
+    for (String fault : List.of(FIXTURE_NONE_30A0924A, FIXTURE_CLOSE_97959247, "rollback")) {
       seed();
       sql(
           "update schubert.auth_sessions set revoked=true,revoked_at='2026-09-08T00:00:30Z',revoke_reason='LOGOUT'");
       try (var h = new Harness()) {
         h.fault = fault;
-        if (fault.equals("none"))
-          assertEquals("0102", ascii(h.service.process(request("GAM")), 208, 4));
-        else temporary(() -> h.service.process(request("GAM")));
-        assertEquals(0, count("schubert.request_inbox"));
+        if (fault.equals(FIXTURE_NONE_30A0924A))
+          assertEquals("0102", ascii(h.service.process(request(FIXTURE_GAM_5BC4EFCF)), 208, 4));
+        else temporary(() -> h.service.process(request(FIXTURE_GAM_5BC4EFCF)));
+        assertEquals(0, count(FIXTURE_SCHUBERT_REQUEST_INBOX_CEAADFAA));
       }
     }
     for (int stage = 1; stage <= 5; stage++) {
@@ -684,8 +762,8 @@ final class ScenarioApplicationServiceTest {
         try (var h = new Harness()) {
           h.clockFaultAt = stage;
           h.nullClock = nullValue;
-          temporary(() -> h.service.process(request("GAM")));
-          assertEquals(stage == 5 ? 1 : 0, count("schubert.request_inbox"));
+          temporary(() -> h.service.process(request(FIXTURE_GAM_5BC4EFCF)));
+          assertEquals(stage == 5 ? 1 : 0, count(FIXTURE_SCHUBERT_REQUEST_INBOX_CEAADFAA));
         }
       }
     }
@@ -695,8 +773,8 @@ final class ScenarioApplicationServiceTest {
         try (var h = new Harness()) {
           h.identifierFaultAt = stage;
           h.nullIdentifier = nullValue;
-          temporary(() -> h.service.process(request("GAM")));
-          assertEquals(stage == 2 ? 1 : 0, count("schubert.request_inbox"));
+          temporary(() -> h.service.process(request(FIXTURE_GAM_5BC4EFCF)));
+          assertEquals(stage == 2 ? 1 : 0, count(FIXTURE_SCHUBERT_REQUEST_INBOX_CEAADFAA));
         }
       }
     }
@@ -704,17 +782,17 @@ final class ScenarioApplicationServiceTest {
         List.of(
             "state",
             "ref",
-            "layout",
+            FIXTURE_LAYOUT_29C18BBC,
             "version",
             "time",
             "key",
             "cipher",
             "missingCipher",
-            "processing",
+            FIXTURE_PROCESSING_5EE780EA,
             "deleted")) {
       seed();
       try (var h = new Harness()) {
-        var request = request("GAM");
+        var request = request(FIXTURE_GAM_5BC4EFCF);
         h.service.process(request);
         h.opens.set(0);
         h.beforeOpenAction =
@@ -724,14 +802,14 @@ final class ScenarioApplicationServiceTest {
                   switch (corruption) {
                     case "state" -> "processing_state='ERROR'";
                     case "ref" -> "result_ref_type='SCENARIO_FILE',result_ref_id=30";
-                    case "layout" -> "response_layout_id='SPKRSP01'";
+                    case FIXTURE_LAYOUT_29C18BBC -> "response_layout_id='SPKRSP01'";
                     case "version" -> "response_version='002'";
                     case "time" -> "completed_at=completed_at+interval '1 microsecond'";
                     case "key" -> "response_key_version='other'";
                     case "cipher" -> "response_body_encrypted=decode(repeat('00',29),'hex')";
                     case "missingCipher" ->
                         "response_body_encrypted=null,response_key_version=null";
-                    case "processing" ->
+                    case FIXTURE_PROCESSING_5EE780EA ->
                         "processing_state='PROCESSING',result_ref_type=null,response_layout_id=null,response_version=null,response_body_encrypted=null,response_key_version=null,completed_at=null";
                     case "deleted" -> "";
                     default -> throw new AssertionError(corruption);
@@ -742,12 +820,13 @@ final class ScenarioApplicationServiceTest {
                       : "update schubert.request_inbox set " + change);
             };
         temporary(() -> h.service.process(request));
-        assertEquals(corruption.equals("deleted") ? 0 : 1, count("schubert.request_inbox"));
+        assertEquals(
+            corruption.equals("deleted") ? 0 : 1, count(FIXTURE_SCHUBERT_REQUEST_INBOX_CEAADFAA));
       }
     }
     seed();
     try (var h = new Harness()) {
-      var request = request("GAM");
+      var request = request(FIXTURE_GAM_5BC4EFCF);
       h.beforeOpenAction =
           () -> {
             if (h.opens.get() == 2) {
@@ -762,16 +841,17 @@ final class ScenarioApplicationServiceTest {
                       h.publisher,
                       h.inspector,
                       h.clock);
-              assertEquals("0000", ascii(other.process(request), 208, 4));
+              assertEquals(FIXTURE_0000_876EEFE0, ascii(other.process(request), 208, 4));
             }
           };
       temporary(() -> h.service.process(request));
-      assertEquals(1, count("schubert.request_inbox"));
+      assertEquals(1, count(FIXTURE_SCHUBERT_REQUEST_INBOX_CEAADFAA));
     }
-    for (String corrupt : List.of("identity", "identityClose", "fingerprintKey", "processing")) {
+    for (String corrupt :
+        List.of("identity", "identityClose", "fingerprintKey", FIXTURE_PROCESSING_5EE780EA)) {
       seed();
       try (var h = new Harness()) {
-        var request = request("GAM");
+        var request = request(FIXTURE_GAM_5BC4EFCF);
         h.service.process(request);
         sql(
             "update schubert.request_inbox set "
@@ -779,13 +859,13 @@ final class ScenarioApplicationServiceTest {
                   case "identity", "identityClose" ->
                       "correlation_id='00000000-0000-0000-0000-000000000999'";
                   case "fingerprintKey" -> "fingerprint_key_version='unknown'";
-                  case "processing" ->
+                  case FIXTURE_PROCESSING_5EE780EA ->
                       "processing_state='PROCESSING',result_ref_type=null,response_layout_id=null,response_version=null,response_body_encrypted=null,response_key_version=null,completed_at=null";
                   default -> throw new AssertionError(corrupt);
                 });
         var before = stored(request);
         if (corrupt.equals("identityClose")) {
-          h.fault = "close";
+          h.fault = FIXTURE_CLOSE_97959247;
           h.faultConnection = 3;
         }
         if (corrupt.equals("identity")) {
@@ -804,20 +884,20 @@ final class ScenarioApplicationServiceTest {
           () -> {
             throw new IOException("synthetic failed publication");
           };
-      temporary(() -> h.service.process(request("SCN")));
-      assertEquals(0, count("schubert.request_inbox"));
+      temporary(() -> h.service.process(request(FIXTURE_SCN_F30DFFA3)));
+      assertEquals(0, count(FIXTURE_SCHUBERT_REQUEST_INBOX_CEAADFAA));
       h.publishAction = () -> h.snapshots.close();
-      temporary(() -> h.service.process(request("SCN")));
+      temporary(() -> h.service.process(request(FIXTURE_SCN_F30DFFA3)));
       assertEquals(
           1, h.published.get()); // Confirmed ready is retained by the provider, not deleted.
-      assertEquals(0, count("schubert.request_inbox"));
+      assertEquals(0, count(FIXTURE_SCHUBERT_REQUEST_INBOX_CEAADFAA));
     }
     seed();
     master(1);
     try (var h = new Harness()) {
       sql("update schubert.script_files set display_path='/invalid-display-path'");
-      temporary(() -> h.service.process(request("SCN")));
-      assertEquals(0, count("schubert.request_inbox"));
+      temporary(() -> h.service.process(request(FIXTURE_SCN_F30DFFA3)));
+      assertEquals(0, count(FIXTURE_SCHUBERT_REQUEST_INBOX_CEAADFAA));
     }
   }
 
@@ -844,13 +924,14 @@ final class ScenarioApplicationServiceTest {
         var observer = factory.createContext(JMSContext.AUTO_ACKNOWLEDGE);
         var requests = receiver.createConsumer(requestQueue);
         var replies = observer.createConsumer(replyQueue)) {
-      for (String point : List.of("createProducer", "commit", "database")) {
+      for (String point :
+          List.of("createProducer", FIXTURE_COMMIT_5EA9C586, FIXTURE_DATABASE_21C67C24)) {
         seed();
         master(201);
         try (var h = new Harness()) {
-          var input = request("SCN");
+          var input = request(FIXTURE_SCN_F30DFFA3);
           var listener = new SyncRequestListener(h.service, h.clock);
-          if (point.equals("database")) h.fault = "open";
+          if (point.equals(FIXTURE_DATABASE_21C67C24)) h.fault = "open";
           var failing =
               (JMSContext)
                   Proxy.newProxyInstance(
@@ -858,7 +939,7 @@ final class ScenarioApplicationServiceTest {
                       new Class<?>[] {JMSContext.class},
                       (p, m, a) -> {
                         if (m.getName().equals(point)) {
-                          assertEquals(1, count("schubert.request_inbox"));
+                          assertEquals(1, count(FIXTURE_SCHUBERT_REQUEST_INBOX_CEAADFAA));
                           assertEquals(0, h.live.get());
                           assertEquals(1, h.published.get());
                           throw new JMSRuntimeException("synthetic transport boundary failure");
@@ -869,11 +950,14 @@ final class ScenarioApplicationServiceTest {
           Message first = requests.receive(5000);
           assertNotNull(first);
           assertEquals(1, first.getIntProperty("JMSXDeliveryCount"));
-          if (point.equals("database")) temporary(() -> listener.onMessage(failing, first));
+          if (point.equals(FIXTURE_DATABASE_21C67C24))
+            temporary(() -> listener.onMessage(failing, first));
           else assertThrows(JMSRuntimeException.class, () -> listener.onMessage(failing, first));
           assertNull(replies.receive(250));
-          assertEquals(point.equals("database") ? 0 : 1, count("schubert.request_inbox"));
-          h.fault = "none";
+          assertEquals(
+              point.equals(FIXTURE_DATABASE_21C67C24) ? 0 : 1,
+              count(FIXTURE_SCHUBERT_REQUEST_INBOX_CEAADFAA));
+          h.fault = FIXTURE_NONE_30A0924A;
           Message retry = requests.receive(5000);
           assertNotNull(retry);
           assertEquals(2, retry.getIntProperty("JMSXDeliveryCount"));
@@ -881,13 +965,15 @@ final class ScenarioApplicationServiceTest {
           assertBrokerReply(
               replies.receive(5000),
               golden(
-                  "SCN",
+                  FIXTURE_SCN_F30DFFA3,
                   input,
                   h,
-                  point.equals("database") ? "0000" : "0200",
+                  point.equals(FIXTURE_DATABASE_21C67C24)
+                      ? FIXTURE_0000_876EEFE0
+                      : FIXTURE_0200_FC9DB3AC,
                   true,
                   201,
-                  point.equals("database") ? 2 : 3));
+                  point.equals(FIXTURE_DATABASE_21C67C24) ? 2 : 3));
           var frozen = stored(input);
           sendScenario(
               producer, requestQueue, input); // New broker message, no duplicate-cache property.
@@ -897,9 +983,16 @@ final class ScenarioApplicationServiceTest {
           listener.onMessage(receiver, duplicate);
           assertBrokerReply(
               replies.receive(5000),
-              golden("SCN", input, h, "0200", true, 201, point.equals("database") ? 3 : 4));
+              golden(
+                  FIXTURE_SCN_F30DFFA3,
+                  input,
+                  h,
+                  FIXTURE_0200_FC9DB3AC,
+                  true,
+                  201,
+                  point.equals(FIXTURE_DATABASE_21C67C24) ? 3 : 4));
           assertEquals(frozen, stored(input));
-          assertEquals(1, count("schubert.request_inbox"));
+          assertEquals(1, count(FIXTURE_SCHUBERT_REQUEST_INBOX_CEAADFAA));
           assertEquals(1, h.published.get());
           assertEquals(0, h.live.get());
           assertNull(requests.receive(250));
@@ -985,25 +1078,29 @@ final class ScenarioApplicationServiceTest {
                 inspector,
                 h.clock,
                 () -> new UUID(0, h.ids.incrementAndGet()));
-        var request = request("SCN");
+        var request = request(FIXTURE_SCN_F30DFFA3);
         byte[] first = service.process(request);
-        assertArrayEquals(golden("SCN", request, h, "0000", true, count, 2), first);
+        assertArrayEquals(
+            golden(FIXTURE_SCN_F30DFFA3, request, h, FIXTURE_0000_876EEFE0, true, count, 2), first);
         Path original = filesRoot.resolve(h.lastFile.relativePath());
         assertRealFile(original, count);
         var saved = stored(request);
         assertArrayEquals(
-            golden("SCN", request, h, "0200", true, count, 3), service.process(request));
+            golden(FIXTURE_SCN_F30DFFA3, request, h, FIXTURE_0200_FC9DB3AC, true, count, 3),
+            service.process(request));
         assertEquals(1, h.published.get());
         assertEquals(saved, stored(request));
         // Delete only this test's verified ready, simulating completed morning cleanup.
         Files.delete(original);
         byte[] regenerated = service.process(request);
-        assertArrayEquals(golden("SCN", request, h, "0200", true, count, 4), regenerated);
+        assertArrayEquals(
+            golden(FIXTURE_SCN_F30DFFA3, request, h, FIXTURE_0200_FC9DB3AC, true, count, 4),
+            regenerated);
         assertEquals(2, h.published.get());
         assertEquals(saved.subList(0, 5), stored(request).subList(0, 5));
         assertRealFile(filesRoot.resolve(h.lastFile.relativePath()), count);
-        var failed = request("SCN");
-        h.fault = "commit";
+        var failed = request(FIXTURE_SCN_F30DFFA3);
+        h.fault = FIXTURE_COMMIT_5EA9C586;
         h.faultConnection = h.opens.get() + 2;
         temporary(() -> service.process(failed));
         assertEquals(3, h.published.get());
@@ -1055,7 +1152,7 @@ final class ScenarioApplicationServiceTest {
     int faultConnection = 1;
     int clockFaultAt;
     int identifierFaultAt;
-    String fault = "none";
+    String fault = FIXTURE_NONE_30A0924A;
     boolean nullClock;
     boolean nullIdentifier;
     final AtomicReference<Instant> now = new AtomicReference<>(NOW);
@@ -1147,10 +1244,10 @@ final class ScenarioApplicationServiceTest {
                       new Class<?>[] {Connection.class},
                       (p, m, a) -> {
                         if (m.getName().equals("setReadOnly")) modes.add((Boolean) a[0]);
-                        if (m.getName().equals("close")) {
+                        if (m.getName().equals(FIXTURE_CLOSE_97959247)) {
                           try {
                             Object result = invoke(c, m, a);
-                            if (affected && fault.equals("close"))
+                            if (affected && fault.equals(FIXTURE_CLOSE_97959247))
                               throw new SQLException("synthetic close");
                             return result;
                           } finally {
@@ -1163,7 +1260,9 @@ final class ScenarioApplicationServiceTest {
                                     && fault.equals("rollback"))))
                           throw new SQLException("synthetic JDBC failure");
                         Object result = invoke(c, m, a);
-                        if (affected && m.getName().equals("commit") && fault.equals("afterCommit"))
+                        if (affected
+                            && m.getName().equals(FIXTURE_COMMIT_5EA9C586)
+                            && fault.equals(FIXTURE_AFTERCOMMIT_940DD4A3))
                           throw new SQLException("synthetic after commit");
                         return result;
                       });
@@ -1200,14 +1299,14 @@ final class ScenarioApplicationServiceTest {
   private static WireMessage<FixedPayload> request(String prefix) {
     byte[] data =
         switch (prefix) {
-          case "GAM" -> new byte[0];
-          case "SPK", "RTE" -> spaces(12);
+          case FIXTURE_GAM_5BC4EFCF -> new byte[0];
+          case FIXTURE_SPK_2964937C, "RTE" -> spaces(12);
           case "SCF" -> spaces(14);
-          case "SRC" -> search();
-          case "SCN" -> "000000000030".getBytes(StandardCharsets.US_ASCII);
+          case FIXTURE_SRC_27085F52 -> search();
+          case FIXTURE_SCN_F30DFFA3 -> "000000000030".getBytes(StandardCharsets.US_ASCII);
           default -> throw new AssertionError(prefix);
         };
-    if (List.of("SPK", "RTE", "SCF").contains(prefix)) put(data, 0, "NUKITASHI1");
+    if (List.of(FIXTURE_SPK_2964937C, "RTE", "SCF").contains(prefix)) put(data, 0, "NUKITASHI1");
     if (prefix.equals("SCF")) put(data, 12, "01");
     return message(prefix + "REQ01", data);
   }
@@ -1255,7 +1354,8 @@ final class ScenarioApplicationServiceTest {
             code,
             file,
             count);
-    if (prefix.equals("SCF") && (code.equals("0000") || code.equals("0200")))
+    if (prefix.equals("SCF")
+        && (code.equals(FIXTURE_0000_876EEFE0) || code.equals(FIXTURE_0200_FC9DB3AC)))
       put(expected, 256 + 14, "共通ルート");
     if (file) {
       // Publisher's first descriptor is known before invocation; later calls use its public fixture

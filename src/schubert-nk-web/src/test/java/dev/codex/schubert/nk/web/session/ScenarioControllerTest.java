@@ -78,6 +78,22 @@ import org.thymeleaf.spring6.view.ThymeleafViewResolver;
  * SSC071/PG194/PT-SCR-001..016.
  */
 class ScenarioControllerTest {
+  private static final String FIXTURE_READER_F734AAEA = "reader";
+  private static final String FIXTURE_0000_876EEFE0 = "0000";
+  private static final String FIXTURE_SCENARIOS_26111785 = "/scenarios";
+  private static final String FIXTURE_PAGE_861424BC = "page";
+  private static final String FIXTURE_NUKITASHI1_F97F2EAE = "NUKITASHI1";
+  private static final String FIXTURE_SCENARIOS_NUKITASHI1_CE816CE5 = "/scenarios/NUKITASHI1";
+  private static final String FIXTURE_USER_2DED8884 = "USER";
+  private static final String FIXTURE_ADMIN_C4BB3010 = "ADMIN";
+  private static final String FIXTURE_NUKITASHI2_3B3D052F = "NUKITASHI2";
+  private static final String FIXTURE_RTE_F939614A = "RTE";
+  private static final String FIXTURE_SCF_AC95C8D1 = "SCF";
+  private static final String FIXTURE_0102_C967CE66 = "0102";
+  private static final String FIXTURE_GAM_5BC4EFCF = "GAM";
+  private static final String FIXTURE_SCENARIO_LINK_DB6222B8 = ".scenario-link";
+  private static final String FIXTURE_GET_04F32A7E = "GET";
+  private static final String FIXTURE_LOGIN_F843C044 = "/login";
   private static WebLogDatabaseFixture db;
   @TempDir Path root;
   private static final Clock CLOCK =
@@ -108,7 +124,7 @@ class ScenarioControllerTest {
 
   private static SessionPrincipal actor(UserRole role) {
     return new SessionPrincipal(
-        "reader",
+        FIXTURE_READER_F734AAEA,
         role,
         AuthenticationContext.of("a".repeat(64)),
         Instant.parse("2026-09-19T00:00:00Z"));
@@ -118,7 +134,7 @@ class ScenarioControllerTest {
   void screens001GamesSuccess() throws Exception {
     try (var f = new Fixture()) {
       for (var role : UserRole.values())
-        for (String code : List.of("0000", "0200"))
+        for (String code : List.of(FIXTURE_0000_876EEFE0, "0200"))
           for (int count : new int[] {0, 2, 10}) {
             f.code = code;
             f.count = count;
@@ -127,19 +143,21 @@ class ScenarioControllerTest {
             var response = new MockHttpServletResponse();
             assertEquals(
                 "scenarios",
-                f.controller.games(actor(role), model, f.request("/scenarios"), response));
-            var page = assertInstanceOf(GameListViewModel.class, model.get("page"));
-            assertEquals(Set.of("page"), model.keySet());
+                f.controller.games(
+                    actor(role), model, f.request(FIXTURE_SCENARIOS_26111785), response));
+            var page = assertInstanceOf(GameListViewModel.class, model.get(FIXTURE_PAGE_861424BC));
+            assertEquals(Set.of(FIXTURE_PAGE_861424BC), model.keySet());
             assertEquals(count, page.getGames().size());
             if (count > 0) {
-              assertEquals("NUKITASHI1", page.getGames().getFirst().getCode());
+              assertEquals(FIXTURE_NUKITASHI1_F97F2EAE, page.getGames().getFirst().getCode());
               assertEquals("NUKITASHI", page.getGames().getFirst().getTitle());
-              assertEquals("/scenarios/NUKITASHI1", page.getGames().getFirst().getHref());
+              assertEquals(
+                  FIXTURE_SCENARIOS_NUKITASHI1_CE816CE5, page.getGames().getFirst().getHref());
             }
             assertEquals(
                 switch (role) {
-                  case USER -> "USER";
-                  case ADMIN -> "ADMIN";
+                  case USER -> FIXTURE_USER_2DED8884;
+                  case ADMIN -> FIXTURE_ADMIN_C4BB3010;
                 },
                 page.getTopBar().getRole());
             assertEquals(200, response.getStatus());
@@ -152,7 +170,7 @@ class ScenarioControllerTest {
   @Test
   void screens002RoutesSuccess() throws Exception {
     try (var f = new Fixture()) {
-      for (String game : List.of("NUKITASHI1", "NUKITASHI2"))
+      for (String game : List.of(FIXTURE_NUKITASHI1_F97F2EAE, FIXTURE_NUKITASHI2_3B3D052F))
         for (int count : new int[] {1, 50}) {
           f.count = count;
           var m = new ExtendedModelMap();
@@ -164,7 +182,7 @@ class ScenarioControllerTest {
                   m,
                   f.request("/scenarios/" + game),
                   new MockHttpServletResponse()));
-          var page = assertInstanceOf(RouteListViewModel.class, m.get("page"));
+          var page = assertInstanceOf(RouteListViewModel.class, m.get(FIXTURE_PAGE_861424BC));
           assertEquals(game, page.getGame());
           assertEquals(count, page.getRoutes().size());
           assertEquals("01: 共通ルート", page.getRoutes().getFirst().getTitle());
@@ -185,12 +203,12 @@ class ScenarioControllerTest {
         assertEquals(
             "scenario-routes",
             f.controller.routes(
-                "NUKITASHI1",
+                FIXTURE_NUKITASHI1_F97F2EAE,
                 actor(UserRole.USER),
                 model,
-                f.request("/scenarios/NUKITASHI1"),
+                f.request(FIXTURE_SCENARIOS_NUKITASHI1_CE816CE5),
                 new MockHttpServletResponse()));
-        var page = assertInstanceOf(RouteListViewModel.class, model.get("page"));
+        var page = assertInstanceOf(RouteListViewModel.class, model.get(FIXTURE_PAGE_861424BC));
         assertEquals(prefix == 0 ? "00: 未分類" : "99: 未分類", page.getRoutes().getFirst().getTitle());
         assertEquals(
             prefix == 0 ? "/scenarios/NUKITASHI1/00" : "/scenarios/NUKITASHI1/99",
@@ -202,7 +220,7 @@ class ScenarioControllerTest {
   @Test
   void screens003FilesSuccess() throws Exception {
     try (var f = new Fixture()) {
-      for (String game : List.of("NUKITASHI1", "NUKITASHI2"))
+      for (String game : List.of(FIXTURE_NUKITASHI1_F97F2EAE, FIXTURE_NUKITASHI2_3B3D052F))
         for (String prefix : List.of("01", "99"))
           for (int count : new int[] {1, 500}) {
             f.count = count;
@@ -216,7 +234,8 @@ class ScenarioControllerTest {
                     m,
                     f.request("/scenarios/" + game + "/" + prefix),
                     new MockHttpServletResponse()));
-            var page = assertInstanceOf(ScenarioFileListViewModel.class, m.get("page"));
+            var page =
+                assertInstanceOf(ScenarioFileListViewModel.class, m.get(FIXTURE_PAGE_861424BC));
             assertEquals(game, page.getGame());
             assertEquals(prefix, page.getPrefix());
             assertEquals("共通ルート", page.getRouteName());
@@ -234,7 +253,7 @@ class ScenarioControllerTest {
   void screens004EmptyHierarchy() throws Exception {
     try (var f = new Fixture()) {
       f.count = 0;
-      for (String type : List.of("RTE", "SCF")) {
+      for (String type : List.of(FIXTURE_RTE_F939614A, FIXTURE_SCF_AC95C8D1)) {
         var m = new ExtendedModelMap();
         var s = new MockHttpServletResponse();
         assertNull(f.call(type, actor(UserRole.USER), m, f.request(path(type)), s));
@@ -244,7 +263,9 @@ class ScenarioControllerTest {
       }
       try (var context = f.mvc()) {
         var result =
-            mock(context).perform(pageRequest("/scenarios", actor(UserRole.USER))).andReturn();
+            mock(context)
+                .perform(pageRequest(FIXTURE_SCENARIOS_26111785, actor(UserRole.USER)))
+                .andReturn();
         assertEquals(200, result.getResponse().getStatus());
         assertEquals(
             "該当するデータはありません",
@@ -258,11 +279,22 @@ class ScenarioControllerTest {
   @Test
   void screens005AllResultCodes() throws Exception {
     String[] codes = {
-      "0000", "0100", "0101", "0102", "0103", "0104", "0105", "0106", "0107", "0200", "9000", "9001"
+      FIXTURE_0000_876EEFE0,
+      "0100",
+      "0101",
+      FIXTURE_0102_C967CE66,
+      "0103",
+      "0104",
+      "0105",
+      "0106",
+      "0107",
+      "0200",
+      "9000",
+      "9001"
     };
     int[] expected = {200, 400, 401, 302, 403, 404, 409, 429, 409, 200, 503, 503};
     try (var f = new Fixture()) {
-      for (String type : List.of("GAM", "RTE", "SCF"))
+      for (String type : List.of(FIXTURE_GAM_5BC4EFCF, FIXTURE_RTE_F939614A, FIXTURE_SCF_AC95C8D1))
         for (int i = 0; i < codes.length; i++) {
           f.code = codes[i];
           var m = new ExtendedModelMap();
@@ -275,7 +307,7 @@ class ScenarioControllerTest {
           assertEquals(before + 1, f.sent.get());
           if (expected[i] == 200) {
             assertNotNull(view);
-            assertEquals(Set.of("page"), m.keySet());
+            assertEquals(Set.of(FIXTURE_PAGE_861424BC), m.keySet());
           } else {
             assertNull(view);
             assertTrue(m.isEmpty());
@@ -289,11 +321,11 @@ class ScenarioControllerTest {
   @Test
   void screens006InvalidSessionTerminal() throws Exception {
     try (var f = new Fixture()) {
-      f.code = "0102";
+      f.code = FIXTURE_0102_C967CE66;
       for (boolean ajax : List.of(false, true)) {
         var p = actor(UserRole.USER);
         var session = f.security.authenticated(p);
-        var r = raw("/scenarios");
+        var r = raw(FIXTURE_SCENARIOS_26111785);
         r.setCookies(new Cookie("SCHUBERT_NK_SESSION", session.sessionId().cookieValue()));
         if (ajax) r.addHeader("X-Requested-With", "XMLHttpRequest");
         var s = new MockHttpServletResponse();
@@ -329,14 +361,20 @@ class ScenarioControllerTest {
             (id, request) -> {
               var bytes = f.standard(id, request);
               if (selected == 0) bytes[0] = 'X';
-              if (selected == 1) put(bytes, 256, 12, "NUKITASHI2");
+              if (selected == 1) put(bytes, 256, 12, FIXTURE_NUKITASHI2_3B3D052F);
               if (selected == 2) number(bytes, 268, 2, 99);
               if (selected == 3) throw new IllegalStateException("private transport");
               return bytes;
             };
         var m = new ExtendedModelMap();
         var s = new MockHttpServletResponse();
-        assertNull(f.call("SCF", actor(UserRole.USER), m, f.request(path("SCF")), s));
+        assertNull(
+            f.call(
+                FIXTURE_SCF_AC95C8D1,
+                actor(UserRole.USER),
+                m,
+                f.request(path(FIXTURE_SCF_AC95C8D1)),
+                s));
         assertEquals(503, s.getStatus());
         assertTrue(m.isEmpty());
         assertNull(s.getErrorMessage());
@@ -351,7 +389,8 @@ class ScenarioControllerTest {
       assertThrows(
           NullPointerException.class, () -> new ScenarioController(null, f.security.handler));
       assertThrows(NullPointerException.class, () -> new ScenarioController(f.client, null));
-      for (String type : List.of("GAM", "RTE", "SCF")) {
+      for (String type :
+          List.of(FIXTURE_GAM_5BC4EFCF, FIXTURE_RTE_F939614A, FIXTURE_SCF_AC95C8D1)) {
         var p = actor(UserRole.USER);
         var m = new ExtendedModelMap();
         var r = f.request(path(type));
@@ -368,12 +407,13 @@ class ScenarioControllerTest {
       }
       var p = actor(UserRole.USER);
       var m = new ExtendedModelMap();
-      var r = f.request("/scenarios");
+      var r = f.request(FIXTURE_SCENARIOS_26111785);
       var s = new MockHttpServletResponse();
       assertThrows(NullPointerException.class, () -> f.controller.routes(null, p, m, r, s));
       assertThrows(NullPointerException.class, () -> f.controller.files(null, "01", p, m, r, s));
       assertThrows(
-          NullPointerException.class, () -> f.controller.files("NUKITASHI1", null, p, m, r, s));
+          NullPointerException.class,
+          () -> f.controller.files(FIXTURE_NUKITASHI1_F97F2EAE, null, p, m, r, s));
       assertEquals(0, f.sent.get());
     }
   }
@@ -397,13 +437,19 @@ class ScenarioControllerTest {
         assertEquals(before, f.sent.get());
       }
       assertEquals(
-          405, mvc.perform(post("/scenarios").principal(p)).andReturn().getResponse().getStatus());
+          405,
+          mvc.perform(post(FIXTURE_SCENARIOS_26111785).principal(p))
+              .andReturn()
+              .getResponse()
+              .getStatus());
       var result =
           mvc.perform(
-                  pageRequest("/scenarios", p).param("role", "ADMIN").param("context", "forged"))
+                  pageRequest(FIXTURE_SCENARIOS_26111785, p)
+                      .param("role", FIXTURE_ADMIN_C4BB3010)
+                      .param("context", "forged"))
               .andReturn();
       assertEquals(
-          "USER",
+          FIXTURE_USER_2DED8884,
           Jsoup.parse(result.getResponse().getContentAsString()).select(".login-role").text());
       assertThrows(
           IllegalArgumentException.class,
@@ -412,18 +458,18 @@ class ScenarioControllerTest {
                   "unknown",
                   p,
                   new ExtendedModelMap(),
-                  f.request("/scenarios"),
+                  f.request(FIXTURE_SCENARIOS_26111785),
                   new MockHttpServletResponse()));
       for (String bad : List.of("1", "001", "-1", "０１", "a1", " 1"))
         assertThrows(
             IllegalArgumentException.class,
             () ->
                 f.controller.files(
-                    "NUKITASHI1",
+                    FIXTURE_NUKITASHI1_F97F2EAE,
                     bad,
                     p,
                     new ExtendedModelMap(),
-                    f.request("/scenarios"),
+                    f.request(FIXTURE_SCENARIOS_26111785),
                     new MockHttpServletResponse()));
     }
   }
@@ -434,41 +480,52 @@ class ScenarioControllerTest {
         var context = f.mvc()) {
       var mvc = mock(context);
       for (var role : UserRole.values())
-        for (String type : List.of("GAM", "RTE", "SCF")) {
+        for (String type :
+            List.of(FIXTURE_GAM_5BC4EFCF, FIXTURE_RTE_F939614A, FIXTURE_SCF_AC95C8D1)) {
           var result = mvc.perform(pageRequest(path(type), actor(role))).andReturn();
           assertEquals(200, result.getResponse().getStatus());
           String html = result.getResponse().getContentAsString();
           var dom = Jsoup.parse(html);
           assertEquals("ja", dom.selectFirst("html").attr("lang"));
           assertEquals(
-              type.equals("GAM")
+              type.equals(FIXTURE_GAM_5BC4EFCF)
                   ? "Scenario Games"
-                  : type.equals("RTE") ? "NUKITASHI1" : "01: 共通ルート",
+                  : type.equals(FIXTURE_RTE_F939614A) ? FIXTURE_NUKITASHI1_F97F2EAE : "01: 共通ルート",
               dom.select("h1").text());
           assertEquals(
-              type.equals("GAM")
+              type.equals(FIXTURE_GAM_5BC4EFCF)
                   ? "Scenario Games"
-                  : type.equals("RTE") ? "NUKITASHI1 Routes" : "NUKITASHI1 01: 共通ルート",
+                  : type.equals(FIXTURE_RTE_F939614A)
+                      ? "NUKITASHI1 Routes"
+                      : "NUKITASHI1 01: 共通ルート",
               dom.title());
-          assertEquals("reader", dom.select(".login-user").text());
+          assertEquals(FIXTURE_READER_F734AAEA, dom.select(".login-user").text());
           assertEquals(
               switch (role) {
-                case USER -> "USER";
-                case ADMIN -> "ADMIN";
+                case USER -> FIXTURE_USER_2DED8884;
+                case ADMIN -> FIXTURE_ADMIN_C4BB3010;
               },
               dom.select(".login-role").text());
           assertEquals(1, dom.select("a[href='/']").size());
           assertEquals(1, dom.select("a[href='/notifications']").size());
           assertEquals(1, dom.select("a[href='/search']").size());
           assertEquals(
-              type.equals("GAM") ? "検索" : type.equals("RTE") ? "ゲーム選択 検索" : "ゲーム選択 ルート選択 検索",
+              type.equals(FIXTURE_GAM_5BC4EFCF)
+                  ? "検索"
+                  : type.equals(FIXTURE_RTE_F939614A) ? "ゲーム選択 検索" : "ゲーム選択 ルート選択 検索",
               dom.select("nav[aria-label='Scenarioナビゲーション']").text());
           assertEquals("post", dom.select("form.logout-form").attr("method"));
           assertEquals("/logout", dom.select("form.logout-form").attr("action"));
           assertEquals("b".repeat(64), dom.select("input[name='_csrf']").attr("value"));
           assertTrue(dom.select("script,[onclick],[onchange]").isEmpty());
           assertFalse(html.contains("a".repeat(64)));
-          assertEquals(2, dom.select(type.equals("GAM") ? ".menu-item" : ".scenario-link").size());
+          assertEquals(
+              2,
+              dom.select(
+                      type.equals(FIXTURE_GAM_5BC4EFCF)
+                          ? ".menu-item"
+                          : FIXTURE_SCENARIO_LINK_DB6222B8)
+                  .size());
         }
     }
   }
@@ -483,9 +540,9 @@ class ScenarioControllerTest {
           (id, request) -> {
             byte[] bytes = f.standard(id, request);
             String type = ascii(request, 11, 3);
-            if (type.equals("GAM")) put(bytes, 277, 256, canary);
-            if (type.equals("RTE")) put(bytes, 267, 64, canary);
-            if (type.equals("SCF")) {
+            if (type.equals(FIXTURE_GAM_5BC4EFCF)) put(bytes, 277, 256, canary);
+            if (type.equals(FIXTURE_RTE_F939614A)) put(bytes, 267, 64, canary);
+            if (type.equals(FIXTURE_SCF_AC95C8D1)) {
               put(bytes, 270, 64, canary);
               put(bytes, 356, 256, canary);
               put(bytes, 612, 512, "folder/<img>.txt");
@@ -498,7 +555,8 @@ class ScenarioControllerTest {
               UserRole.USER,
               AuthenticationContext.of("a".repeat(64)),
               actor(UserRole.USER).loginAt());
-      for (String type : List.of("GAM", "RTE", "SCF")) {
+      for (String type :
+          List.of(FIXTURE_GAM_5BC4EFCF, FIXTURE_RTE_F939614A, FIXTURE_SCF_AC95C8D1)) {
         var result = mock(context).perform(pageRequest(path(type), p)).andReturn();
         assertEquals(200, result.getResponse().getStatus());
         var dom = Jsoup.parse(result.getResponse().getContentAsString());
@@ -518,7 +576,7 @@ class ScenarioControllerTest {
       var p = actor(UserRole.USER);
       var games =
           Jsoup.parse(
-              mvc.perform(pageRequest("/scenarios", p))
+              mvc.perform(pageRequest(FIXTURE_SCENARIOS_26111785, p))
                   .andReturn()
                   .getResponse()
                   .getContentAsString());
@@ -527,13 +585,13 @@ class ScenarioControllerTest {
           games.select(".menu-item").eachText());
       var routes =
           Jsoup.parse(
-              mvc.perform(pageRequest("/scenarios/NUKITASHI1", p))
+              mvc.perform(pageRequest(FIXTURE_SCENARIOS_NUKITASHI1_CE816CE5, p))
                   .andReturn()
                   .getResponse()
                   .getContentAsString());
       assertEquals(
           List.of("01: 共通ルート NUKITASHI1 7 files", "02: 未分類 NUKITASHI1 8 files"),
-          routes.select(".scenario-link").eachText());
+          routes.select(FIXTURE_SCENARIO_LINK_DB6222B8).eachText());
       var files =
           Jsoup.parse(
               mvc.perform(pageRequest("/scenarios/NUKITASHI1/01", p))
@@ -544,9 +602,10 @@ class ScenarioControllerTest {
           List.of(
               "Chapter1 NUKITASHI1 game/1.txt 1 entries",
               "Chapter2 NUKITASHI1 game/2.txt 2 entries"),
-          files.select(".scenario-link").eachText());
+          files.select(FIXTURE_SCENARIO_LINK_DB6222B8).eachText());
       assertEquals(
-          List.of("/scenarios/1", "/scenarios/2"), files.select(".scenario-link").eachAttr("href"));
+          List.of("/scenarios/1", "/scenarios/2"),
+          files.select(FIXTURE_SCENARIO_LINK_DB6222B8).eachAttr("href"));
       Path directory = Path.of("target/scenario-screen-traces");
       Files.createDirectories(directory);
       Files.writeString(
@@ -572,23 +631,25 @@ class ScenarioControllerTest {
         tasks.add(
             executor.submit(
                 () -> {
-                  String type = List.of("GAM", "RTE", "SCF").get(n % 3);
+                  String type =
+                      List.of(FIXTURE_GAM_5BC4EFCF, FIXTURE_RTE_F939614A, FIXTURE_SCF_AC95C8D1)
+                          .get(n % 3);
                   var p =
                       new SessionPrincipal(
-                          "reader" + n,
+                          FIXTURE_READER_F734AAEA + n,
                           UserRole.USER,
                           AuthenticationContext.of(String.format(Locale.ROOT, "%064x", n + 1)),
                           actor(UserRole.USER).loginAt());
                   var m = new ExtendedModelMap();
                   assertNotNull(f.call(type, p, m, raw(path(type)), new MockHttpServletResponse()));
-                  Object page = m.get("page");
+                  Object page = m.get(FIXTURE_PAGE_861424BC);
                   String name =
                       page instanceof GameListViewModel g
                           ? g.getTopBar().getUsername()
                           : page instanceof RouteListViewModel r
                               ? r.getTopBar().getUsername()
                               : ((ScenarioFileListViewModel) page).getTopBar().getUsername();
-                  assertEquals("reader" + n, name);
+                  assertEquals(FIXTURE_READER_F734AAEA + n, name);
                   return null;
                 }));
       }
@@ -617,10 +678,10 @@ class ScenarioControllerTest {
               IllegalStateException.class,
               () ->
                   f.call(
-                      "GAM",
+                      FIXTURE_GAM_5BC4EFCF,
                       actor(UserRole.USER),
                       broken,
-                      f.request("/scenarios"),
+                      f.request(FIXTURE_SCENARIOS_26111785),
                       new MockHttpServletResponse())));
       var io = new IOException("synthetic response failure");
       var response =
@@ -637,10 +698,10 @@ class ScenarioControllerTest {
               IOException.class,
               () ->
                   f.call(
-                      "GAM",
+                      FIXTURE_GAM_5BC4EFCF,
                       actor(UserRole.USER),
                       new ExtendedModelMap(),
-                      f.request("/scenarios"),
+                      f.request(FIXTURE_SCENARIOS_26111785),
                       response)));
       var unknown = new AssertionError("synthetic unknown");
       f.responder =
@@ -653,21 +714,21 @@ class ScenarioControllerTest {
               AssertionError.class,
               () ->
                   f.call(
-                      "GAM",
+                      FIXTURE_GAM_5BC4EFCF,
                       actor(UserRole.USER),
                       new ExtendedModelMap(),
-                      f.request("/scenarios"),
+                      f.request(FIXTURE_SCENARIOS_26111785),
                       new MockHttpServletResponse())));
       f.responder = f::standard;
-      f.code = "0102";
-      var r = f.request("/scenarios");
+      f.code = FIXTURE_0102_C967CE66;
+      var r = f.request(FIXTURE_SCENARIOS_26111785);
       r.setAttribute(SessionRepositoryFilter.SESSION_REPOSITORY_ATTR, new Object());
       setActor(actor(UserRole.USER));
       assertThrows(
           SessionStoreException.class,
           () ->
               f.call(
-                  "GAM",
+                  FIXTURE_GAM_5BC4EFCF,
                   actor(UserRole.USER),
                   new ExtendedModelMap(),
                   r,
@@ -710,9 +771,10 @@ class ScenarioControllerTest {
 
   @Test
   void screens016RealHttpSecurityAndTerminal() throws Exception {
-    for (String role : List.of("USER", "ADMIN")) {
+    for (String role : List.of(FIXTURE_USER_2DED8884, FIXTURE_ADMIN_C4BB3010)) {
       reset();
-      var loginApi = new SessionFormLoginTest.Api("0000", role, "0000", 0);
+      var loginApi =
+          new SessionFormLoginTest.Api(FIXTURE_0000_876EEFE0, role, FIXTURE_0000_876EEFE0, 0);
       try (var f = new Fixture();
           var server =
               new EmbeddedWebSecurityTest.Server(
@@ -723,24 +785,29 @@ class ScenarioControllerTest {
                   true,
                   true,
                   (mvc, invalid) -> configure(mvc, f.client, invalid))) {
-        var anonymous = server.send("GET", "/scenarios", null, null, true);
+        var anonymous =
+            server.send(FIXTURE_GET_04F32A7E, FIXTURE_SCENARIOS_26111785, null, null, true);
         assertEquals(302, anonymous.statusCode());
-        assertEquals("/login", anonymous.headers().firstValue("location").orElseThrow());
+        assertEquals(
+            FIXTURE_LOGIN_F843C044, anonymous.headers().firstValue("location").orElseThrow());
         assertEquals(0, f.sent.get());
-        var first = server.send("GET", "/login", null, null, true);
+        var first = server.send(FIXTURE_GET_04F32A7E, FIXTURE_LOGIN_F843C044, null, null, true);
         String initial = first.headers().firstValue("set-cookie").orElseThrow().split(";", 2)[0];
         var login =
             server.send(
                 "POST",
-                "/login",
+                FIXTURE_LOGIN_F843C044,
                 initial,
                 "_csrf=" + first.body().substring(6) + "&username=reader&password=p",
                 true);
         assertEquals(302, login.statusCode());
         String cookie = login.headers().firstValue("set-cookie").orElseThrow().split(";", 2)[0];
         for (String path :
-            List.of("/scenarios", "/scenarios/NUKITASHI1", "/scenarios/NUKITASHI1/01")) {
-          var response = server.send("GET", path, cookie, null, true);
+            List.of(
+                FIXTURE_SCENARIOS_26111785,
+                FIXTURE_SCENARIOS_NUKITASHI1_CE816CE5,
+                "/scenarios/NUKITASHI1/01")) {
+          var response = server.send(FIXTURE_GET_04F32A7E, path, cookie, null, true);
           assertEquals(200, response.statusCode());
           var dom = Jsoup.parse(response.body());
           assertEquals(role, dom.select(".login-role").text());
@@ -750,17 +817,19 @@ class ScenarioControllerTest {
           assertEquals(
               "nosniff", response.headers().firstValue("x-content-type-options").orElseThrow());
         }
-        f.code = "0102";
+        f.code = FIXTURE_0102_C967CE66;
         int before = f.sent.get();
-        var expired = server.send("GET", "/scenarios", cookie, null, true);
+        var expired =
+            server.send(FIXTURE_GET_04F32A7E, FIXTURE_SCENARIOS_26111785, cookie, null, true);
         assertEquals(302, expired.statusCode());
         assertEquals(
             "/login?session-expired", expired.headers().firstValue("location").orElseThrow());
         assertTrue(expired.headers().firstValue("set-cookie").orElseThrow().contains("Max-Age=0"));
         assertEquals(before + 1, f.sent.get());
-        var next = server.send("GET", "/scenarios", cookie, null, true);
+        var next =
+            server.send(FIXTURE_GET_04F32A7E, FIXTURE_SCENARIOS_26111785, cookie, null, true);
         assertEquals(302, next.statusCode());
-        assertEquals("/login", next.headers().firstValue("location").orElseThrow());
+        assertEquals(FIXTURE_LOGIN_F843C044, next.headers().firstValue("location").orElseThrow());
         assertEquals(before + 1, f.sent.get());
         assertEquals(0, server.context.getManager().getActiveSessions());
         f.erased();
@@ -770,7 +839,7 @@ class ScenarioControllerTest {
   }
 
   private static MockHttpServletRequest raw(String path) {
-    var r = new MockHttpServletRequest("GET", path);
+    var r = new MockHttpServletRequest(FIXTURE_GET_04F32A7E, path);
     r.setRemoteAddr("127.0.0.1");
     r.addHeader("X-Forwarded-For", "203.0.113.1");
     r.addHeader("X-Forwarded-Proto", "https");
@@ -786,9 +855,9 @@ class ScenarioControllerTest {
 
   private static String path(String type) {
     return switch (type) {
-      case "GAM" -> "/scenarios";
-      case "RTE" -> "/scenarios/NUKITASHI1";
-      case "SCF" -> "/scenarios/NUKITASHI1/01";
+      case FIXTURE_GAM_5BC4EFCF -> FIXTURE_SCENARIOS_26111785;
+      case FIXTURE_RTE_F939614A -> FIXTURE_SCENARIOS_NUKITASHI1_CE816CE5;
+      case FIXTURE_SCF_AC95C8D1 -> "/scenarios/NUKITASHI1/01";
       default -> throw new AssertionError();
     };
   }
@@ -825,7 +894,7 @@ class ScenarioControllerTest {
     final Set<String> contexts = ConcurrentHashMap.newKeySet();
     final Set<UUID> correlations = ConcurrentHashMap.newKeySet();
     final List<byte[]> buffers = new CopyOnWriteArrayList<>();
-    volatile String code = "0000";
+    volatile String code = FIXTURE_0000_876EEFE0;
     volatile int count = 2;
     volatile BiFunction<UUID, byte[], byte[]> responder = this::standard;
     final JmsRequestReplyClient wire =
@@ -840,9 +909,9 @@ class ScenarioControllerTest {
               String type = ascii(bytes, 11, 3);
               int length =
                   switch (type) {
-                    case "GAM" -> 0;
-                    case "RTE" -> 12;
-                    case "SCF" -> 14;
+                    case FIXTURE_GAM_5BC4EFCF -> 0;
+                    case FIXTURE_RTE_F939614A -> 12;
+                    case FIXTURE_SCF_AC95C8D1 -> 14;
                     default -> throw new AssertionError();
                   };
               assertEquals(256 + length, bytes.length);
@@ -861,15 +930,16 @@ class ScenarioControllerTest {
     final ScenarioController controller = new ScenarioController(client, security.handler);
 
     MockHttpServletRequest request(String path) throws Exception {
-      return security.mock("GET", path);
+      return security.mock(FIXTURE_GET_04F32A7E, path);
     }
 
     String call(String type, Principal p, Model m, HttpServletRequest r, HttpServletResponse s)
         throws IOException {
       return switch (type) {
-        case "GAM" -> controller.games(p, m, r, s);
-        case "RTE" -> controller.routes("NUKITASHI1", p, m, r, s);
-        case "SCF" -> controller.files("NUKITASHI1", "01", p, m, r, s);
+        case FIXTURE_GAM_5BC4EFCF -> controller.games(p, m, r, s);
+        case FIXTURE_RTE_F939614A -> controller.routes(FIXTURE_NUKITASHI1_F97F2EAE, p, m, r, s);
+        case FIXTURE_SCF_AC95C8D1 ->
+            controller.files(FIXTURE_NUKITASHI1_F97F2EAE, "01", p, m, r, s);
         default -> throw new AssertionError();
       };
     }
@@ -884,8 +954,11 @@ class ScenarioControllerTest {
 
     byte[] standard(UUID id, byte[] request) {
       String type = ascii(request, 11, 3);
-      String game = type.equals("GAM") ? "NUKITASHI1" : ascii(request, 256, 12).stripTrailing();
-      int prefix = type.equals("SCF") ? Integer.parseInt(ascii(request, 268, 2)) : 1;
+      String game =
+          type.equals(FIXTURE_GAM_5BC4EFCF)
+              ? FIXTURE_NUKITASHI1_F97F2EAE
+              : ascii(request, 256, 12).stripTrailing();
+      int prefix = type.equals(FIXTURE_SCF_AC95C8D1) ? Integer.parseInt(ascii(request, 268, 2)) : 1;
       return response(type, code, count, id, ascii(request, 113, 64), game, prefix);
     }
 
@@ -909,14 +982,14 @@ class ScenarioControllerTest {
       String context,
       String game,
       int prefix) {
-    boolean success = code.equals("0000") || code.equals("0200");
+    boolean success = code.equals(FIXTURE_0000_876EEFE0) || code.equals("0200");
     int count = success ? requestedCount : 0;
-    int data = type.equals("SCF") ? 88 : 9;
+    int data = type.equals(FIXTURE_SCF_AC95C8D1) ? 88 : 9;
     int record =
         switch (type) {
-          case "GAM" -> 272;
-          case "RTE" -> 72;
-          case "SCF" -> 800;
+          case FIXTURE_GAM_5BC4EFCF -> 272;
+          case FIXTURE_RTE_F939614A -> 72;
+          case FIXTURE_SCF_AC95C8D1 -> 800;
           default -> throw new AssertionError();
         };
     byte[] bytes = new byte[256 + data + record * count];
@@ -937,7 +1010,7 @@ class ScenarioControllerTest {
     number(bytes, 193, 6, count);
     number(bytes, 199, 9, bytes.length);
     put(bytes, 208, 4, code);
-    if (type.equals("SCF")) {
+    if (type.equals(FIXTURE_SCF_AC95C8D1)) {
       put(bytes, 256, 12, success ? game : "");
       number(bytes, 268, 2, success ? prefix : 0);
       put(bytes, 270, 64, success ? "共通ルート" : "");
@@ -946,17 +1019,21 @@ class ScenarioControllerTest {
     for (int n = 0; n < count; n++) {
       int offset = 256 + data + n * record;
       switch (type) {
-        case "GAM" -> {
-          put(bytes, offset, 12, n % 2 == 0 ? "NUKITASHI1" : "NUKITASHI2");
-          put(bytes, offset + 12, 256, n % 2 == 0 ? "NUKITASHI" : "NUKITASHI2");
+        case FIXTURE_GAM_5BC4EFCF -> {
+          put(
+              bytes,
+              offset,
+              12,
+              n % 2 == 0 ? FIXTURE_NUKITASHI1_F97F2EAE : FIXTURE_NUKITASHI2_3B3D052F);
+          put(bytes, offset + 12, 256, n % 2 == 0 ? "NUKITASHI" : FIXTURE_NUKITASHI2_3B3D052F);
           number(bytes, offset + 268, 3, n + 1);
         }
-        case "RTE" -> {
+        case FIXTURE_RTE_F939614A -> {
           number(bytes, offset, 2, n + 1);
           put(bytes, offset + 2, 64, n == 0 ? "共通ルート" : "未分類");
           number(bytes, offset + 66, 6, n + 7);
         }
-        case "SCF" -> {
+        case FIXTURE_SCF_AC95C8D1 -> {
           number(bytes, offset, 12, n + 1);
           put(bytes, offset + 12, 256, "Chapter" + (n + 1));
           put(bytes, offset + 268, 512, "game/" + (n + 1) + ".txt");

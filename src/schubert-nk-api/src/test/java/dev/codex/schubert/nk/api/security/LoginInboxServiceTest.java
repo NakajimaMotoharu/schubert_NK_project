@@ -87,6 +87,21 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** PT-AUT-INBOX-001..006: real PBKDF2, PostgreSQL and independent wire/LP-HMAC/SQL oracles. */
 final class LoginInboxServiceTest {
+  private static final String FIXTURE_127_0_0_1_88270499 = "127.0.0.1";
+  private static final String FIXTURE_SCHBNK01_E209989D = "SCHBNK01";
+  private static final String FIXTURE_LGNRSP01_A267E8A2 = "LGNRSP01";
+  private static final String FIXTURE_0000_876EEFE0 = "0000";
+  private static final String FIXTURE_SYNTHETIC_WRONG_EEC4C437 = "synthetic-wrong";
+  private static final String FIXTURE_0101_F2D4F761 = "0101";
+  private static final String FIXTURE_VM_0_0C76084A = "vm://0";
+  private static final String FIXTURE_0200_FC9DB3AC = "0200";
+  private static final String FIXTURE_AUTH_SESSION_97533387 = "AUTH_SESSION";
+  private static final String FIXTURE_COMMIT_AFTER_1222692D = "commit-after";
+  private static final String FIXTURE_CLOSE_97959247 = "close";
+  private static final String FIXTURE_ROLLBACK_3770B198 = "rollback";
+  private static final String FIXTURE_JMSXDELIVERYCOUNT_90AF07ED = "JMSXDeliveryCount";
+  private static final String FIXTURE_LGNREQ01_217C66A4 = "LGNREQ01";
+  private static final String FIXTURE_001_A3FEAA64 = "001";
   @TempDir static Path root;
   private static ApiLogDatabaseFixture database;
   private static AuthContextCodec contexts;
@@ -173,11 +188,14 @@ final class LoginInboxServiceTest {
         LoginApplicationAssembly.create(
             keys, contexts, snapshots, Clock.fixed(NOW, ZoneOffset.UTC));
     byte[] response =
-        call(login, request("利用者", PASSWORD, "127.0.0.1", REQUEST), NOW.minusSeconds(1));
+        call(
+            login,
+            request("利用者", PASSWORD, FIXTURE_127_0_0_1_88270499, REQUEST),
+            NOW.minusSeconds(1));
     assertEquals(688, response.length);
-    assertEquals("SCHBNK01", text(response, 0, 8));
-    assertEquals("LGNRSP01", text(response, 11, 8));
-    assertEquals("0000", text(response, 208, 4));
+    assertEquals(FIXTURE_SCHBNK01_E209989D, text(response, 0, 8));
+    assertEquals(FIXTURE_LGNRSP01_A267E8A2, text(response, 11, 8));
+    assertEquals(FIXTURE_0000_876EEFE0, text(response, 208, 4));
     assertEquals(REQUEST.toString(), text(response, 60, 36));
     assertEquals(FIRST_STAMP, text(response, 96, 17));
     assertEquals("利用者", text(response, 256, 64).stripTrailing());
@@ -211,13 +229,14 @@ final class LoginInboxServiceTest {
     var login =
         LoginApplicationAssembly.create(
             keys, contexts, snapshots, Clock.fixed(NOW, ZoneOffset.UTC));
-    var input = request("利用者", "synthetic-wrong", "127.0.0.1", REQUEST);
+    var input =
+        request("利用者", FIXTURE_SYNTHETIC_WRONG_EEC4C437, FIXTURE_127_0_0_1_88270499, REQUEST);
     byte[] first = call(login, input, NOW.minusSeconds(1));
     byte[] replay = call(login, input, NOW);
-    assertEquals("0101", text(first, 208, 4));
-    assertEquals("0101", text(replay, 208, 4));
-    assertEquals("LGNRSP01", text(first, 11, 8));
-    assertEquals("LGNRSP01", text(replay, 11, 8));
+    assertEquals(FIXTURE_0101_F2D4F761, text(first, 208, 4));
+    assertEquals(FIXTURE_0101_F2D4F761, text(replay, 208, 4));
+    assertEquals(FIXTURE_LGNRSP01_A267E8A2, text(first, 11, 8));
+    assertEquals(FIXTURE_LGNRSP01_A267E8A2, text(replay, 11, 8));
     assertEquals(FIRST_STAMP, text(first, 96, 17));
     assertEquals(0, scalar("select count(*) from schubert.auth_sessions"));
     assertEquals(1, scalar("select failed_count from schubert.app_users where id=7"));
@@ -239,10 +258,10 @@ final class LoginInboxServiceTest {
         .setLargeMessagesDirectory(brokerRoot.resolve("large").toString())
         .setSecurityEnabled(false)
         .clearAcceptorConfigurations()
-        .addAcceptorConfiguration("component", "vm://0");
+        .addAcceptorConfiguration("component", FIXTURE_VM_0_0C76084A);
     var broker = new EmbeddedActiveMQ().setConfiguration(configuration).start();
     var terminal = new AtomicInteger();
-    try (var factory = new ActiveMQConnectionFactory("vm://0");
+    try (var factory = new ActiveMQConnectionFactory(FIXTURE_VM_0_0C76084A);
         var producer = factory.createContext(JMSContext.AUTO_ACKNOWLEDGE);
         var observer = factory.createContext(JMSContext.AUTO_ACKNOWLEDGE);
         var replies =
@@ -266,10 +285,10 @@ final class LoginInboxServiceTest {
                 ignored -> terminal.incrementAndGet())) {
       assertTrue(runtime.ready());
       sendLogin(producer, new ActiveMQQueue(BrokerTopology.SYNC_REQUEST.fullyQualifiedQueue()));
-      assertBrokerLoginReply(replies.receive(5_000), "0000");
+      assertBrokerLoginReply(replies.receive(5_000), FIXTURE_0000_876EEFE0);
       assertEffects(1, 1, 1);
       sendLogin(producer, new ActiveMQQueue(BrokerTopology.SYNC_REQUEST.fullyQualifiedQueue()));
-      assertBrokerLoginReply(replies.receive(5_000), "0200");
+      assertBrokerLoginReply(replies.receive(5_000), FIXTURE_0200_FC9DB3AC);
       assertEffects(1, 1, 1);
       assertEquals(0, terminal.get());
       assertTrue(runtime.ready());
@@ -286,8 +305,8 @@ final class LoginInboxServiceTest {
     byte[] body = new byte[688];
     try {
       assertEquals(688, bytesMessage.readBytes(body));
-      assertEquals("SCHBNK01", text(body, 0, 8));
-      assertEquals("LGNRSP01", text(body, 11, 8));
+      assertEquals(FIXTURE_SCHBNK01_E209989D, text(body, 0, 8));
+      assertEquals(FIXTURE_LGNRSP01_A267E8A2, text(body, 11, 8));
       assertEquals(REQUEST.toString(), text(body, 60, 36));
       assertEquals(result, text(body, 208, 4));
       UUID.fromString(text(body, 24, 36));
@@ -301,27 +320,45 @@ final class LoginInboxServiceTest {
     var service = service(NOW);
     try (Connection c = database.transaction()) {
       byte[] result =
-          service.execute(c, request("利用者", PASSWORD, "127.0.0.1", REQUEST), NOW.minusSeconds(1));
-      assertArrayEquals(expected("0000", new UUID(0, 1000), FIRST_STAMP, 0), result);
+          service.execute(
+              c,
+              request("利用者", PASSWORD, FIXTURE_127_0_0_1_88270499, REQUEST),
+              NOW.minusSeconds(1));
+      assertArrayEquals(expected(FIXTURE_0000_876EEFE0, new UUID(0, 1000), FIRST_STAMP, 0), result);
       assertEffects(0, 0, 0); // Separate connection cannot see uncommitted effects.
-      assertInbox(c, "COMPLETED", "AUTH_SESSION", "利用者", PASSWORD, "127.0.0.1");
+      assertInbox(
+          c,
+          "COMPLETED",
+          FIXTURE_AUTH_SESSION_97533387,
+          "利用者",
+          PASSWORD,
+          FIXTURE_127_0_0_1_88270499);
       c.rollback();
     }
     assertEffects(0, 0, 0);
     byte[] first =
-        call(service, request("利用者", PASSWORD, "127.0.0.1", REQUEST), NOW.minusSeconds(1));
-    assertArrayEquals(expected("0000", new UUID(0, 1001), FIRST_STAMP, 0), first);
+        call(
+            service,
+            request("利用者", PASSWORD, FIXTURE_127_0_0_1_88270499, REQUEST),
+            NOW.minusSeconds(1));
+    assertArrayEquals(expected(FIXTURE_0000_876EEFE0, new UUID(0, 1001), FIRST_STAMP, 0), first);
     byte[] replay =
         call(
             service(NOW.plusSeconds(60)),
-            request("利用者", PASSWORD, "127.0.0.1", REQUEST),
+            request("利用者", PASSWORD, FIXTURE_127_0_0_1_88270499, REQUEST),
             NOW.plusSeconds(60));
-    assertArrayEquals(expected("0200", new UUID(0, 1002), LATER_STAMP, 0), replay);
+    assertArrayEquals(expected(FIXTURE_0200_FC9DB3AC, new UUID(0, 1002), LATER_STAMP, 0), replay);
     assertEquals(2, passwordChecks.get()); // Rolled-back attempt plus exactly one committed Login.
     assertArrayEquals(new char[PASSWORD.length()], observedPassword.get());
     assertEffects(1, 1, 1);
     try (Connection c = database.transaction()) {
-      assertInbox(c, "COMPLETED", "AUTH_SESSION", "利用者", PASSWORD, "127.0.0.1");
+      assertInbox(
+          c,
+          "COMPLETED",
+          FIXTURE_AUTH_SESSION_97533387,
+          "利用者",
+          PASSWORD,
+          FIXTURE_127_0_0_1_88270499);
       c.rollback();
     }
     assertEquals(0, scalar("select failed_count from schubert.app_users"));
@@ -337,8 +374,9 @@ final class LoginInboxServiceTest {
                 + "locked_until='2026-09-08T01:02:03.456789Z'::timestamptz+interval '"
                 + retry
                 + " seconds'");
-      String code = retry == 0 ? "0101" : "0106";
-      var request = request("利用者", "synthetic-wrong", "127.0.0.1", REQUEST);
+      String code = retry == 0 ? FIXTURE_0101_F2D4F761 : "0106";
+      var request =
+          request("利用者", FIXTURE_SYNTHETIC_WRONG_EEC4C437, FIXTURE_127_0_0_1_88270499, REQUEST);
       assertArrayEquals(
           expected(code, new UUID(0, 1000), FIRST_STAMP, retry),
           call(service(NOW), request, NOW.minusSeconds(1)));
@@ -349,7 +387,13 @@ final class LoginInboxServiceTest {
       assertEquals(retry == 0 ? 1 : 5, scalar("select failed_count from schubert.app_users"));
       assertEffects(1, 0, 1);
       try (Connection c = database.transaction()) {
-        assertInbox(c, "ERROR", "NONE", "利用者", "synthetic-wrong", "127.0.0.1");
+        assertInbox(
+            c,
+            "ERROR",
+            "NONE",
+            "利用者",
+            FIXTURE_SYNTHETIC_WRONG_EEC4C437,
+            FIXTURE_127_0_0_1_88270499);
         c.rollback();
       }
     }
@@ -358,7 +402,7 @@ final class LoginInboxServiceTest {
     assertEquals("café", text(normalizedAtSender.payload().copyData(), 64, 5));
     call(service(NOW), normalizedAtSender, NOW.minusSeconds(1));
     byte[] same = call(service(NOW), request("利用者", "café", "2001:0db8:0:0:0:0:0:1", REQUEST), NOW);
-    assertEquals("0101", text(same, 208, 4));
+    assertEquals(FIXTURE_0101_F2D4F761, text(same, 208, 4));
     assertEquals(1, passwordChecks.get());
     try (Connection c = database.transaction()) {
       assertInbox(c, "ERROR", "NONE", "利用者", "café", "2001:db8:0:0:0:0:0:1");
@@ -372,16 +416,23 @@ final class LoginInboxServiceTest {
       assertPermanent(() -> call(service(NOW), altered, NOW));
     }
     seed();
-    call(service(NOW), request("UnknownA", PASSWORD, "127.0.0.1", REQUEST), NOW.minusSeconds(1));
+    call(
+        service(NOW),
+        request("UnknownA", PASSWORD, FIXTURE_127_0_0_1_88270499, REQUEST),
+        NOW.minusSeconds(1));
     assertPermanent(
-        () -> call(service(NOW), request("Unknowna", PASSWORD, "127.0.0.1", REQUEST), NOW));
+        () ->
+            call(
+                service(NOW),
+                request("Unknowna", PASSWORD, FIXTURE_127_0_0_1_88270499, REQUEST),
+                NOW));
     assertEquals(1, passwordChecks.get());
     assertEffects(1, 0, 1);
   }
 
   @Test
   void processingIdentityReuseAndUnavailableKeysHaveDistinctOutcomes() throws Exception {
-    var input = request("利用者", "wrong", "127.0.0.1", REQUEST);
+    var input = request("利用者", "wrong", FIXTURE_127_0_0_1_88270499, REQUEST);
     call(service(NOW), input, NOW.minusSeconds(1));
     try (Connection c = database.transaction();
         var s = c.createStatement()) {
@@ -405,7 +456,10 @@ final class LoginInboxServiceTest {
         c.rollback();
       }
     }
-    assertPermanent(() -> call(service(NOW), request("利用者", "changed", "127.0.0.1", REQUEST), NOW));
+    assertPermanent(
+        () ->
+            call(
+                service(NOW), request("利用者", "changed", FIXTURE_127_0_0_1_88270499, REQUEST), NOW));
     assertEffects(1, 0, 1);
     assertEquals(1, passwordChecks.get());
   }
@@ -429,7 +483,7 @@ final class LoginInboxServiceTest {
                 service(NOW)
                     .execute(
                         fault(c, point),
-                        request("利用者", PASSWORD, "127.0.0.1", REQUEST),
+                        request("利用者", PASSWORD, FIXTURE_127_0_0_1_88270499, REQUEST),
                         NOW.minusSeconds(1)));
         assertFalse(c.isClosed());
         assertFalse(c.getAutoCommit());
@@ -453,7 +507,9 @@ final class LoginInboxServiceTest {
       assertInfrastructure(
           () ->
               unavailable.execute(
-                  c, request("利用者", PASSWORD, "127.0.0.1", REQUEST), NOW.minusSeconds(1)));
+                  c,
+                  request("利用者", PASSWORD, FIXTURE_127_0_0_1_88270499, REQUEST),
+                  NOW.minusSeconds(1)));
       c.rollback();
     }
     assertEffects(0, 0, 0);
@@ -468,17 +524,19 @@ final class LoginInboxServiceTest {
             Clock.fixed(NOW, ZoneOffset.UTC));
     try (Connection c = database.transaction()) {
       assertInfrastructure(
-          () -> noKeys.execute(c, request("利用者", PASSWORD, "127.0.0.1", REQUEST), NOW));
+          () ->
+              noKeys.execute(
+                  c, request("利用者", PASSWORD, FIXTURE_127_0_0_1_88270499, REQUEST), NOW));
       c.rollback();
     }
     assertEffects(0, 0, 0);
     char[] owned = PASSWORD.toCharArray();
     var canonical =
         LoginInboxService.canonical(
-            new LoginUsername("利用者"), owned, InetAddress.ofLiteral("127.0.0.1"));
+            new LoginUsername("利用者"), owned, InetAddress.ofLiteral(FIXTURE_127_0_0_1_88270499));
     try (canonical) {
       assertArrayEquals(
-          independentFingerprint("利用者", PASSWORD, "127.0.0.1"),
+          independentFingerprint("利用者", PASSWORD, FIXTURE_127_0_0_1_88270499),
           OperationFingerprint.INSTANCE.calculate(canonical, key(7)));
     }
     for (CanonicalField field : canonical.fields())
@@ -490,7 +548,7 @@ final class LoginInboxServiceTest {
   @Test
   void concurrentRedeliveryCreatesOneSessionAndOneAudit() throws Exception {
     var service = service(NOW);
-    var input = request("利用者", PASSWORD, "127.0.0.1", REQUEST);
+    var input = request("利用者", PASSWORD, FIXTURE_127_0_0_1_88270499, REQUEST);
     List<Future<byte[]>> futures = new ArrayList<>();
     try (var executor = Executors.newFixedThreadPool(16)) {
       for (int i = 0; i < 100; i++)
@@ -501,8 +559,8 @@ final class LoginInboxServiceTest {
       for (var future : futures) {
         byte[] body = future.get();
         String code = text(body, 208, 4);
-        if (code.equals("0000")) initial++;
-        else if (code.equals("0200")) replay++;
+        if (code.equals(FIXTURE_0000_876EEFE0)) initial++;
+        else if (code.equals(FIXTURE_0200_FC9DB3AC)) replay++;
         else fail("unexpected Login reply");
         UUID id = UUID.fromString(text(body, 24, 36));
         assertTrue(responseIds.add(id));
@@ -514,7 +572,13 @@ final class LoginInboxServiceTest {
     assertEquals(1, passwordChecks.get());
     assertEffects(1, 1, 1);
     try (Connection c = database.transaction()) {
-      assertInbox(c, "COMPLETED", "AUTH_SESSION", "利用者", PASSWORD, "127.0.0.1");
+      assertInbox(
+          c,
+          "COMPLETED",
+          FIXTURE_AUTH_SESSION_97533387,
+          "利用者",
+          PASSWORD,
+          FIXTURE_127_0_0_1_88270499);
       c.rollback();
     }
   }
@@ -535,7 +599,7 @@ final class LoginInboxServiceTest {
     assertThrows(
         NullPointerException.class,
         () -> new LoginInboxService(inbox, auth, response, clock, null));
-    var input = request("利用者", PASSWORD, "127.0.0.1", REQUEST);
+    var input = request("利用者", PASSWORD, FIXTURE_127_0_0_1_88270499, REQUEST);
     var service = service(NOW);
     try (Connection c = database.transaction()) {
       assertThrows(NullPointerException.class, () -> service.execute(null, input, NOW));
@@ -551,9 +615,9 @@ final class LoginInboxServiceTest {
           List.of(
               request("利用者", PASSWORD, "localhost", REQUEST),
               request("利用者", PASSWORD, "fe80::1%1", REQUEST),
-              request(" 利用者", PASSWORD, "127.0.0.1", REQUEST),
-              request("\u2003", PASSWORD, "127.0.0.1", REQUEST),
-              request("利用者", "", "127.0.0.1", REQUEST))) {
+              request(" 利用者", PASSWORD, FIXTURE_127_0_0_1_88270499, REQUEST),
+              request("\u2003", PASSWORD, FIXTURE_127_0_0_1_88270499, REQUEST),
+              request("利用者", "", FIXTURE_127_0_0_1_88270499, REQUEST))) {
         assertPermanent(() -> service.execute(c, invalid, NOW));
       }
       byte[] broken = input.payload().copyData();
@@ -586,7 +650,7 @@ final class LoginInboxServiceTest {
       }
       var wrongHeader =
           new CommonHeader(
-              "SCHBNK01",
+              FIXTURE_SCHBNK01_E209989D,
               1,
               new LayoutId("GAMREQ01"),
               1,
@@ -650,9 +714,10 @@ final class LoginInboxServiceTest {
             responses(),
             clock,
             () -> new UUID(0, ids.getAndIncrement()));
-    var input = request("利用者", PASSWORD, "127.0.0.1", REQUEST);
+    var input = request("利用者", PASSWORD, FIXTURE_127_0_0_1_88270499, REQUEST);
     byte[] expected =
-        LoginReplayServiceTest.golden(Role.USER, "0000", new UUID(0, 1000), "20260908100206456", 0);
+        LoginReplayServiceTest.golden(
+            Role.USER, FIXTURE_0000_876EEFE0, new UUID(0, 1000), "20260908100206456", 0);
     put(expected, 389, "20260908100204456");
     put(expected, 406, "20260908180204456");
     assertArrayEquals(expected, call(service, input, NOW));
@@ -675,7 +740,7 @@ final class LoginInboxServiceTest {
             "select count(*) from schubert.request_inbox where created_at='2026-09-08T01:02:03.456789Z' and completed_at='2026-09-08T01:02:05.456789Z' and expires_at='2026-09-15T01:02:05.456789Z'"));
     put(expected, 24, new UUID(0, 1001).toString());
     put(expected, 96, "20260908100207456");
-    put(expected, 208, "0200");
+    put(expected, 208, FIXTURE_0200_FC9DB3AC);
     assertArrayEquals(expected, call(service, input, NOW.plusSeconds(60)));
     assertEquals(4, ticks.get());
     assertEquals(1, passwordChecks.get());
@@ -690,9 +755,9 @@ final class LoginInboxServiceTest {
   void jdbcOwnerCommitsOnlyCompleteBusinessResults() throws Exception {
     for (boolean valid : new boolean[] {true, false}) {
       seed();
-      String password = valid ? PASSWORD : "synthetic-wrong";
-      String initial = valid ? "0000" : "0101";
-      String repeated = valid ? "0200" : "0101";
+      String password = valid ? PASSWORD : FIXTURE_SYNTHETIC_WRONG_EEC4C437;
+      String initial = valid ? FIXTURE_0000_876EEFE0 : FIXTURE_0101_F2D4F761;
+      String repeated = valid ? FIXTURE_0200_FC9DB3AC : FIXTURE_0101_F2D4F761;
       var connection = database.api();
       var processor =
           new JdbcSyncRequestProcessor(
@@ -705,7 +770,7 @@ final class LoginInboxServiceTest {
                 return response;
               },
               Clock.fixed(NOW, ZoneOffset.UTC));
-      var input = request("利用者", password, "127.0.0.1", REQUEST);
+      var input = request("利用者", password, FIXTURE_127_0_0_1_88270499, REQUEST);
       assertArrayEquals(
           expected(initial, new UUID(0, 1000), FIRST_STAMP, 0), processor.process(input));
       assertTrue(connection.isClosed());
@@ -721,7 +786,7 @@ final class LoginInboxServiceTest {
 
   @Test
   void jdbcLifecycleFaultsRemainRetryableAndRedacted() throws Exception {
-    var input = request("利用者", PASSWORD, "127.0.0.1", REQUEST);
+    var input = request("利用者", PASSWORD, FIXTURE_127_0_0_1_88270499, REQUEST);
     for (String point :
         List.of(
             "open",
@@ -730,9 +795,9 @@ final class LoginInboxServiceTest {
             "handler-runtime",
             "handler-null",
             "commit-before",
-            "commit-after",
-            "close",
-            "rollback",
+            FIXTURE_COMMIT_AFTER_1222692D,
+            FIXTURE_CLOSE_97959247,
+            FIXTURE_ROLLBACK_3770B198,
             "rollback-close",
             "connection-null")) {
       seed();
@@ -757,26 +822,32 @@ final class LoginInboxServiceTest {
                 if (point.equals("handler-runtime"))
                   throw new IllegalStateException("synthetic-sensitive-application");
                 if (point.equals("handler-null")) return null;
-                if (point.equals("handler-sql") || point.startsWith("rollback"))
+                if (point.equals("handler-sql") || point.startsWith(FIXTURE_ROLLBACK_3770B198))
                   throw new SQLException("synthetic-sensitive-handler");
                 return result;
               },
               Clock.fixed(NOW, ZoneOffset.UTC));
       assertTemporary(() -> processor.process(input));
-      boolean committed = point.equals("commit-after") || point.equals("close");
+      boolean committed =
+          point.equals(FIXTURE_COMMIT_AFTER_1222692D) || point.equals(FIXTURE_CLOSE_97959247);
       assertEffects(committed ? 1 : 0, committed ? 1 : 0, committed ? 1 : 0);
       boolean opened = !point.equals("open") && !point.equals("connection-null");
       assertEquals(opened ? 1 : 0, closes.get());
       if (opened) assertTrue(connection.get().isClosed());
       assertEquals(
-          List.of("commit-before", "commit-after", "close").contains(point) ? 1 : 0, commits.get());
+          List.of("commit-before", FIXTURE_COMMIT_AFTER_1222692D, FIXTURE_CLOSE_97959247)
+                  .contains(point)
+              ? 1
+              : 0,
+          commits.get());
       assertEquals(
-          opened && !point.equals("begin") && !point.equals("close") ? 1 : 0, rollbacks.get());
+          opened && !point.equals("begin") && !point.equals(FIXTURE_CLOSE_97959247) ? 1 : 0,
+          rollbacks.get());
       if (observedPassword.get() != null)
         assertArrayEquals(new char[PASSWORD.length()], observedPassword.get());
       int checksBeforeRetry = passwordChecks.get();
       byte[] retry = processor(NOW).process(input);
-      assertEquals(committed ? "0200" : "0000", text(retry, 208, 4));
+      assertEquals(committed ? FIXTURE_0200_FC9DB3AC : FIXTURE_0000_876EEFE0, text(retry, 208, 4));
       assertEffects(1, 1, 1);
       assertEquals(checksBeforeRetry + (committed ? 0 : 1), passwordChecks.get());
     }
@@ -797,7 +868,8 @@ final class LoginInboxServiceTest {
   @Test
   void permanentProtocolNeedsConfirmedRollbackAndClose() throws Exception {
     var input = request("利用者", PASSWORD, "localhost", REQUEST);
-    for (String point : List.of("none", "rollback", "close", "rollback-close")) {
+    for (String point :
+        List.of("none", FIXTURE_ROLLBACK_3770B198, FIXTURE_CLOSE_97959247, "rollback-close")) {
       var commits = new AtomicInteger();
       var rollbacks = new AtomicInteger();
       var closes = new AtomicInteger();
@@ -836,12 +908,12 @@ final class LoginInboxServiceTest {
         .setLargeMessagesDirectory(brokerRoot.resolve("large").toString())
         .setSecurityEnabled(false)
         .clearAcceptorConfigurations()
-        .addAcceptorConfiguration("component", "vm://0");
+        .addAcceptorConfiguration("component", FIXTURE_VM_0_0C76084A);
     var broker = new EmbeddedActiveMQ().setConfiguration(configuration).start();
     var requestQueue = new ActiveMQQueue(BrokerTopology.SYNC_REQUEST.fullyQualifiedQueue());
     var replyQueue = new ActiveMQQueue(BrokerTopology.SYNC_REPLY_WEB.fullyQualifiedQueue());
     var clock = Clock.fixed(NOW, ZoneOffset.UTC);
-    try (var factory = new ActiveMQConnectionFactory("vm://0");
+    try (var factory = new ActiveMQConnectionFactory(FIXTURE_VM_0_0C76084A);
         var producer = factory.createContext(JMSContext.AUTO_ACKNOWLEDGE);
         var receiver = factory.createContext(JMSContext.SESSION_TRANSACTED);
         var observer = factory.createContext(JMSContext.AUTO_ACKNOWLEDGE);
@@ -865,25 +937,25 @@ final class LoginInboxServiceTest {
         sendLogin(producer, requestQueue);
         Message first = requests.receive(5000);
         assertNotNull(first);
-        assertEquals(1, first.getIntProperty("JMSXDeliveryCount"));
+        assertEquals(1, first.getIntProperty(FIXTURE_JMSXDELIVERYCOUNT_90AF07ED));
         assertThrows(JMSRuntimeException.class, () -> listener.onMessage(failing, first));
         assertNull(replies.receive(250));
         assertEffects(1, 1, 1);
         assertEquals(1, passwordChecks.get());
         Message retry = requests.receive(5000);
         assertNotNull(retry);
-        assertEquals(2, retry.getIntProperty("JMSXDeliveryCount"));
+        assertEquals(2, retry.getIntProperty(FIXTURE_JMSXDELIVERYCOUNT_90AF07ED));
         listener.onMessage(receiver, retry);
-        assertReply(replies.receive(5000), "0200", new UUID(0, 1001));
+        assertReply(replies.receive(5000), FIXTURE_0200_FC9DB3AC, new UUID(0, 1001));
         assertEffects(1, 1, 1);
         assertEquals(1, passwordChecks.get());
         // Independent second send, not broker redelivery and no duplicate-cache property.
         sendLogin(producer, requestQueue);
         Message duplicate = requests.receive(5000);
         assertNotNull(duplicate);
-        assertEquals(1, duplicate.getIntProperty("JMSXDeliveryCount"));
+        assertEquals(1, duplicate.getIntProperty(FIXTURE_JMSXDELIVERYCOUNT_90AF07ED));
         listener.onMessage(receiver, duplicate);
-        assertReply(replies.receive(5000), "0200", new UUID(0, 1002));
+        assertReply(replies.receive(5000), FIXTURE_0200_FC9DB3AC, new UUID(0, 1002));
         assertEffects(1, 1, 1);
         assertEquals(1, passwordChecks.get());
         assertNull(requests.receive(250));
@@ -908,9 +980,9 @@ final class LoginInboxServiceTest {
       assertNull(replies.receive(250));
       Message retry = requests.receive(5000);
       assertNotNull(retry);
-      assertEquals(2, retry.getIntProperty("JMSXDeliveryCount"));
+      assertEquals(2, retry.getIntProperty(FIXTURE_JMSXDELIVERYCOUNT_90AF07ED));
       new SyncRequestListener(processor(NOW), clock).onMessage(receiver, retry);
-      assertReply(replies.receive(5000), "0000", new UUID(0, 1000));
+      assertReply(replies.receive(5000), FIXTURE_0000_876EEFE0, new UUID(0, 1000));
       assertEffects(1, 1, 1);
       assertEquals(1, passwordChecks.get());
       assertNull(requests.receive(250));
@@ -931,14 +1003,14 @@ final class LoginInboxServiceTest {
     put(body, 177, "0256000384000000000000000000640");
     put(body, 256, "利用者");
     put(body, 320, PASSWORD);
-    put(body, 576, "127.0.0.1");
+    put(body, 576, FIXTURE_127_0_0_1_88270499);
     var message = context.createBytesMessage();
     message.writeBytes(body);
     message.setJMSCorrelationID(REQUEST.toString());
     message.setJMSReplyTo(new ActiveMQQueue(BrokerTopology.SYNC_REPLY_WEB.fullyQualifiedQueue()));
     message.setStringProperty("NKMessageID", REQUEST.toString());
-    message.setStringProperty("NKLayoutID", "LGNREQ01");
-    message.setStringProperty("NKProtocolVersion", "001");
+    message.setStringProperty("NKLayoutID", FIXTURE_LGNREQ01_217C66A4);
+    message.setStringProperty("NKProtocolVersion", FIXTURE_001_A3FEAA64);
     context
         .createProducer()
         .setDeliveryMode(DeliveryMode.PERSISTENT)
@@ -955,8 +1027,8 @@ final class LoginInboxServiceTest {
     assertArrayEquals(expected(code, id, FIRST_STAMP, 0), body);
     assertEquals(REQUEST.toString(), response.getJMSCorrelationID());
     assertEquals(id.toString(), response.getStringProperty("NKMessageID"));
-    assertEquals("LGNRSP01", response.getStringProperty("NKLayoutID"));
-    assertEquals("001", response.getStringProperty("NKProtocolVersion"));
+    assertEquals(FIXTURE_LGNRSP01_A267E8A2, response.getStringProperty("NKLayoutID"));
+    assertEquals(FIXTURE_001_A3FEAA64, response.getStringProperty("NKProtocolVersion"));
     assertEquals(DeliveryMode.PERSISTENT, response.getJMSDeliveryMode());
     Arrays.fill(body, (byte) 0);
   }
@@ -1008,12 +1080,14 @@ final class LoginInboxServiceTest {
                 if (point.equals("commit-before"))
                   throw new SQLException("synthetic-sensitive-commit");
               }
-              if (operation.equals("rollback")) rollbacks.incrementAndGet();
-              if (operation.equals("close")) closes.incrementAndGet();
+              if (operation.equals(FIXTURE_ROLLBACK_3770B198)) rollbacks.incrementAndGet();
+              if (operation.equals(FIXTURE_CLOSE_97959247)) closes.incrementAndGet();
               Object result = invoke(connection, m, a);
-              if ((operation.equals("commit") && point.equals("commit-after"))
-                  || (operation.equals("rollback") && point.startsWith("rollback"))
-                  || (operation.equals("close") && point.endsWith("close")))
+              if ((operation.equals("commit") && point.equals(FIXTURE_COMMIT_AFTER_1222692D))
+                  || (operation.equals(FIXTURE_ROLLBACK_3770B198)
+                      && point.startsWith(FIXTURE_ROLLBACK_3770B198))
+                  || (operation.equals(FIXTURE_CLOSE_97959247)
+                      && point.endsWith(FIXTURE_CLOSE_97959247)))
                 throw new SQLException("synthetic-sensitive-lifecycle");
               return result;
             });
@@ -1070,9 +1144,9 @@ final class LoginInboxServiceTest {
     put(data, 320, ip);
     var header =
         new CommonHeader(
-            "SCHBNK01",
+            FIXTURE_SCHBNK01_E209989D,
             1,
-            new LayoutId("LGNREQ01"),
+            new LayoutId(FIXTURE_LGNREQ01_217C66A4),
             1,
             MessageKind.REQUEST,
             InteractionKind.SYNCHRONOUS,
@@ -1092,7 +1166,7 @@ final class LoginInboxServiceTest {
   private static byte[] expected(String code, UUID id, String timestamp, int retry) {
     if (!code.equals("9000"))
       return LoginReplayServiceTest.golden(Role.USER, code, id, timestamp, retry);
-    byte[] body = LoginReplayServiceTest.golden(Role.USER, "0101", id, timestamp, 0);
+    byte[] body = LoginReplayServiceTest.golden(Role.USER, FIXTURE_0101_F2D4F761, id, timestamp, 0);
     put(body, 208, "9000");
     Arrays.fill(body, 432, 688, (byte) ' ');
     put(body, 432, "現在処理できません。しばらくしてから再操作してください。");
@@ -1117,7 +1191,8 @@ final class LoginInboxServiceTest {
           HexFormat.of().formatHex(independentFingerprint(name, password, ip)), row.getString(5));
       assertEquals(state, row.getString(6));
       assertEquals(type, row.getString(7));
-      if (type.equals("AUTH_SESSION")) assertEquals(SESSION, row.getObject(8, UUID.class));
+      if (type.equals(FIXTURE_AUTH_SESSION_97533387))
+        assertEquals(SESSION, row.getObject(8, UUID.class));
       else assertNull(row.getObject(8));
       assertTrue(row.getBytes(9).length >= 29);
       assertEquals("s1", row.getString(10));
@@ -1125,8 +1200,8 @@ final class LoginInboxServiceTest {
       assertEquals(
           Instant.parse("2026-09-15T01:02:03.456789Z"),
           row.getObject(12, java.time.OffsetDateTime.class).toInstant());
-      assertEquals("LGNREQ01", row.getString(13));
-      assertEquals("001", row.getString(14));
+      assertEquals(FIXTURE_LGNREQ01_217C66A4, row.getString(13));
+      assertEquals(FIXTURE_001_A3FEAA64, row.getString(14));
       assertFalse(row.next());
     }
   }
@@ -1138,7 +1213,10 @@ final class LoginInboxServiceTest {
     out.write("SCHUBERT-NK-OP1".getBytes(StandardCharsets.US_ASCII));
     for (String text :
         new String[] {
-          "ANONYMOUS", "LGNREQ01", "001", "LOGIN:" + name.toLowerCase(Locale.ROOT) + ":" + ip
+          "ANONYMOUS",
+          FIXTURE_LGNREQ01_217C66A4,
+          FIXTURE_001_A3FEAA64,
+          "LOGIN:" + name.toLowerCase(Locale.ROOT) + ":" + ip
         }) lp(out, text);
     out.writeInt(3);
     lp(out, "username");
@@ -1233,7 +1311,7 @@ final class LoginInboxServiceTest {
                     new Class<?>[] {PreparedStatement.class},
                     (sp, sm, sa) -> {
                       Object result = invoke(statement, sm, sa);
-                      if (sm.getName().equals("close"))
+                      if (sm.getName().equals(FIXTURE_CLOSE_97959247))
                         throw new SQLException("synthetic-sensitive-close");
                       return result;
                     });
