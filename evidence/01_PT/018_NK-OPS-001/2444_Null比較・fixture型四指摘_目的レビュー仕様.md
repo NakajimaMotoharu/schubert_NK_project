@@ -1,0 +1,13 @@
+# 2444 Null比較・fixture型四指摘・PG目的レビュー仕様
+
+実行中追記：元13316/session42726/entry6bfedf4aaf91d0d1b6fd695c314571c5a14605a2bbfbc6f54a007985eb535dd5はnamespaceの四型を全てstaticと仮定した工具guardで真正1/OUT無し/source変更0/PT0。BUG2048/YKT1796起票後、別13317で実際の二static外型Script/Child＋Child所有の非static内部ReadStream/WriteStreamへ訂正し、四診断の独立postを行う。元工具は保全し、実Test失敗/製品不具合/目的確認済みとは扱わない。
+
+2026-10-28、save5ef20b6696f8c3be3184a718478a12d07416e9e7/push4049真正0/origin一致、Production81a1b0c32be8167c07320e6bfaf469bcd44eb7bd。群NULL_IDENTITY_FIXTURE_CLASS4_PURPOSE_REVIEW_V1、低0.5/基準1/高2pp・cap10、fresh共有used11/残89/reset1793774153/secondaryなし（API直接転送event参照）、専有費/N/Tnull。候補選定source閲覧を着手前実績へ遡及加算せず、原/改訂/前群開始見積不変更。
+
+対象は現存未参照四ID：PMD-02148 EqualsNull（DbQueryDurationMetricCollectorTest.dbConn005）、PMD-05293 MissingStaticMethodInNonInstantiatableClass（InspectorUnitProbeFixture）、PMD-06238/06249 TestClassWithoutTestCases（InspectorCredentialLoaderTest.TestIo/TestSecurity）。当三source以外の指摘/過去資格を変更しない。選定時followup CLIでDbQuery一致0/UnitFixture1924-227/CredentialLoader341-131、元成功は再演せずsource期待だけ参照。元owner-costは順にP01809/P00404/P01801、F03参照の追加費用配賦0。
+
+dbConn005のassertFalse(first.equals(null))がrecord equalsの負契約期待として意図されているか、namespace classのprivate constructor＋static nested fixture型用途、TestIo/TestSecurityがouter TestのIo/security callback実装であり@Testを欠落させたactual Test classではない根拠を確認する。三source hash/current全体診断の四signature/元IDと全attributes・current行/class/methodを照合、body/declarationと実際のouter参照を保存する。EqualsNullを単なる参照比較へ置換してequals(null)検証を失わない。fixture型の名称/可視性/実処理は変更しない。
+
+source/compiler metadataだけを読む。TestIoが実NioIo、TestSecurityがFiles等の実資源境界へつながることを残存リスクに明記し、classをロード/初期化/実行したり、別harnessへ抽出しない。fresh build/PMD/PT/coverage/FS/VM/Root/native/credential実体/保留二工具/私有rawにアクセスしない。既成功の確認再演でなく未分類目的の確認。独立postは元ID/三SHA/分類・exact断片/元owner-cost/実行0・raw/品質保持と非同値反例を確認する。
+
+code/Test/expected/source資格変更0、目的参照だけ+4候補。raw7747/corr1694/追加14/全F03-451未受入・正式1964PT53scope/17-190/工数null/QA051final/HOLD/原本等は保持。結果2445/PG-D789へ保存後も独立PG/PT継続、次定期used15/残10以下又は不明で保全停止、通常群/commit/PMO待ちで止めない。
