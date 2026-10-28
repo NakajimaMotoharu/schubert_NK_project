@@ -1,5 +1,7 @@
 # NK-OPS-001 検査起動wrapper・unit 単体テスト仕様書
 
+2026-10-28静的用途補足：2408/2409・PG-D771、元型56の残28（request5/Thread9/issuer-baseline7/receipt4/scope1/repository2）をsource保持元と比較siteへ結合する。型解析/製品PT/既成功の再演0・新Test ID/受入0、用途の必要性と実行正常性を分離し全actualHOLD保持。
+
 2026-10-28静的補足（製品PTではない）：2406/2407・PG-D770、元Main比較56/36fileの型・用途を照合、Throwable28のidentity根拠のみ確定・非Throwable28用途保留。source変更/製品PT/coverage/新規受入0、実例外graph/全F03/451はHOLD。Program内の既HTTPMETRIC等とは別の静的診断根拠でありTest ID数へ加算しない。
 
 2026-10-28追加（監視metadata部分限定）：2404/2405・HTTPMETRIC001～006、HttpMetricContract private map命名一と元Test外側TWR一を当sourceで確認。固定35route/1750tuple/9bucket・null/未知/境界/collection不変/自己4worker64taskの期待は元1570/2149不変更。evidence/http-route-private-name/manifest.jsonへ同source6/六Main各counter100・完全artifact未達・rawThread四/gate1・BUG2017/2018を結合する。wrapper/native/実HTTP/VM/Root/DBの試験を代替せず、元計画の未実行HOLDを保持する。

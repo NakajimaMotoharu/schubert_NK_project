@@ -1,0 +1,87 @@
+{
+  "actualExit": 0,
+  "actualViolationCount": null,
+  "categoryCounts": {
+    "CURRENT_SESSION_REPOSITORY_INSTANCE": 2,
+    "EXACT_TERMINAL_RECEIPT_CONTINUITY": 4,
+    "LEXICAL_SCOPE_STACK": 1,
+    "OPAQUE_ISSUER_AND_BASELINE": 7,
+    "REQUEST_SCOPE_BINDING": 5,
+    "THREAD_OWNER_OR_SELF_JOIN": 9
+  },
+  "designReferences": [
+    {
+      "line": 92,
+      "path": "documents/300_SS/320_\u30e1\u30c3\u30bb\u30fc\u30b8\u30f3\u30b0/324_Outbox\u30fbInbox\u30fb\u51aa\u7b49\u6027\u30fb\u518d\u9001\u8a2d\u8a08.md",
+      "sha256": "2bc99fd66ca1121a1ab4ae44e97aab96b52d4cf4c8145f6a425f89c7b07ce774",
+      "text": "2. \u5b58\u5728\u3059\u308b\u5834\u5408\u3001layout/correlation/owner/fingerprint\u3092\u6bd4\u8f03\u3059\u308b\u3002\u4e0d\u4e00\u81f4\u306fMessage ID\u518d\u5229\u7528\u306e\u6052\u4e45\u6574\u5408error\u3068\u3057\u3066\u51e6\u7406\u3057\u3001\u4fdd\u5b58\u7d50\u679c\u3092\u8fd4\u3055\u306a\u3044\u3002"
+    },
+    {
+      "line": 137,
+      "path": "documents/300_SS/310_\u30a2\u30d7\u30ea\u30b1\u30fc\u30b7\u30e7\u30f3/313_\u753b\u9762template\u30fbcontroller\u30fbform\u8a2d\u8a08.md",
+      "sha256": "76946dc55f4e2a4bda6dd40610ce5d993d0b2b727b3cbeffd80afa930a5af67b",
+      "text": "SCR016/017\u306e\u901a\u5e38\u5168\u69cb\u6210\u306f\u540c\u3058current session repository\u304b\u3089\u4f5c\u3063\u305ftoken lifecycle\u3092\u660e\u793a\u6ce8\u5165\u3057\u3001\u65e7read-only\u69cb\u6210\u3092\u5168Ready\u3078\u4f7f\u308f\u306a\u3044\u3002SCR017\u306ffresh IF-020\u306b\u57fa\u3065\u304f\u64cd\u4f5c\u5225form\u3092\u8868\u793a\u3057\u3001\u81ea\u5df1\u7121\u52b9\u5316/\u81ea\u5df1ADMIN\u89e3\u9664\u3092\u8a31\u3059form\u3092\u51fa\u3055\u305a\u3001Lock\u89e3\u9664\u306flock\u4e2d\u3060\u3051\u8868\u793a\u3059\u308b\u3002\u5b9f\u969b\u306b\u8868\u793a\u3059\u308bform\u7fa4\u306etoken\u306f314\u306e\u5358\u4e00\u77edTX\u3067\u5168\u78ba\u4fdd\u3057\u3001\u4e0d\u8db3\u6642\u306b\u672a\u8868\u793apending\u3092\u90e8\u5206\u767a\u884c\u3057\u306a\u3044\u3002"
+    },
+    {
+      "line": 48,
+      "path": "documents/300_SS/310_\u30a2\u30d7\u30ea\u30b1\u30fc\u30b7\u30e7\u30f3/314_\u8a8d\u8a3c\u30fb\u8a8d\u53ef\u30fbsession\u30fbCSRF\u5b9f\u88c5\u8a2d\u8a08.md",
+      "sha256": "ab7a1907d0861ca1b6d4181d674f98a73c13f8a4b897b86f655b5a30ce202a7b",
+      "text": "2. Request ID/filter\u3001security header\u3001session repository\u3092\u9069\u7528\u3059\u308b\u3002"
+    },
+    {
+      "line": 448,
+      "path": "documents/300_SS/340_batch\u30fb\u57fa\u76e4/343_\u8a2d\u5b9afile\u30fbdirectory\u30fb\u521d\u671fdata\u30fbmigration\u30fb\u5207\u623b\u3057\u8a2d\u8a08.md",
+      "sha256": "d8be70ce4c170df7939f7803723bb021c99ba40a72819f9b5d861731425332b2",
+      "text": "SSC237\uff082026-10-09\u3001SSC187203\u306e\u5168\u8a3c\u62e0\u914d\u7dda\u88dc\u8db3\uff09\uff1a\u771f\u6b63DONE\u306e\u5b8c\u4e86\u8a3c\u62e0\u3092Caddy/Web/API\u5404intent\u9000\u5f79\u524d\u5f8c\u3078\u540c\u3058\u4fdd\u6301DB/\u539f\u672c\u80fd\u529b\u3067\u6e21\u3059\u3002Web\u9000\u5f79\u76f4\u5f8c\u30fbAPI\u9000\u5f79\u524d\u5f8c\u3082\u3001\u5168Backup/Cleanup/Expiry\u884c\u30fb\u53c2\u7167/seal\u30fb\u660e\u793a\u505c\u6b62\u6e08Backup cycle/\u5143receipt\u30fbCleanup/Expiry\u4fdd\u6301receipt\u3068\u540cordinary peer/current/launch/identity/socket/info/ready\u3092\u5b9f\u518d\u78ba\u8a8d\u3059\u308b\u3002typed marker\u81ea\u4f53\u306f\u65e2Attempt\u3060\u3051\u304c\u6240\u6709\u3057\u3001\u7d14gate\u306f\u8ffd\u52a0marker/receipt\u3092\u751f\u6210\u305b\u305a\u3001DB\u3092\u65b0\u898f\u518d\u53d6\u5f97\u3057\u306a\u3044\u3002\u534a\u9000\u5f79/\u672a\u77e5close/\u8a3c\u62e0\u5909\u5316\u306f\u6b21\u9000\u5f79/DONE0\u30fb\u540cscope\u9694\u96e2\u3002\u5931\u6557\u306efixed phase/class/monotonic\u7d4c\u904e\u4ee5\u5916\u306b\u4f8b\u5916\u539f\u6587\u30fbDB\u5024\u30fbcredential\u30fbtoken\u3092\u51fa\u3055\u306a\u3044\u3002\u65e7FAILED_TIMEOUT143\u3068\u65b0source\u771f\u6b63\u6210\u529f\u3092\u5206\u96e2\u3001\u65e7\u539f\u672cactive/Backup/Current baseline\u3092\u4fdd\u5168\u3057\u3001\u65b0source\u6240\u5b9aquality\u2192code-only\u2192\u5225fresh\u4e00\u56deresume\u3067\u5b9f\u8a3c\u3059\u308b\u3002\u8ffd\u52a0QA/RD/UI/DIF\u5909\u66f4\u306f\u4e0d\u8981\u3002"
+    },
+    {
+      "line": 93,
+      "path": "documents/300_SS/350_\u904b\u7528\u30fb\u54c1\u8cea/351_Log\u30fbmetric\u30fbalert\u30fberror code\u8a2d\u8a08.md",
+      "sha256": "9da7c4e4f24740e031f37f984ec562d56e14ff098b1433af3ec55fe15bd195e6",
+      "text": "server UUID\u306fpretrust identity\u3001client address\u306fCaddy\u691c\u8a3c\u6e08\u5024\u3067\u3042\u308a\u6df7\u540c\u3057\u306a\u3044\u3002actor\u306f\u691c\u8a3c\u6e08username/role\u3060\u3051\u3001path\u306fregistered route\u306e\u9589allowlist\uff08unknown\u306f\u56fa\u5b9a/**\uff09\u3001raw URI/query/header/body/cookie/context/token/password\u306f\u9664\u5916\u3059\u308b\u3002\u65e2\u5b58fixed business wire\u306e\u6700\u521d\u306eMessage ID\u3060\u3051\u3092request lifetime\u3078\u95a2\u9023\u4ed8\u3051\u3001\u5bfe\u5fdcMQ\u306a\u3057\u306fCorrelation ID=event\u81ea\u8eab\u3068\u3059\u308b\u3002\u521d\u56delocal PENDING\u3068\u6545\u969c\u6642FAILED\u88dc\u8db3\u306f\u540cevent ID\u3067\u7d50\u5408\u3057\u3001DB source UK\u306e\u5225event\u3092\u751f\u6210\u3057\u306a\u3044\u3002"
+    }
+  ],
+  "failedEntryUnchanged": true,
+  "fixedEntryOnlyImportAndOutputChanged": true,
+  "independentImmutableNegativeVectors": [
+    "sourceSha256",
+    "originalLine",
+    "leftType",
+    "manualPurposeReviewComplete"
+  ],
+  "invocation": {
+    "actualPythonCommand": [
+      "/usr/bin/python3",
+      "-B",
+      "tools/quality/pg13048_reference_identity_post.py"
+    ],
+    "arbitraryArgumentsRecorded": false,
+    "entrypointPath": "tools/quality/pg13048_reference_identity_post.py",
+    "entrypointSha256": "18c35341ee908ade02e748acc5b668e95e0d2f557a76e3e082bebaa356b3bfda",
+    "helperPath": "tools/quality/host_tool_invocation.py",
+    "helperSha256": "85d616a3db4ff47f4c95ae2e0dd57954bc2b09f28b8f2a685b986e5621545c46",
+    "libraryPath": "tools/quality/pg13048_reference_identity_post.py",
+    "librarySha256": "18c35341ee908ade02e748acc5b668e95e0d2f557a76e3e082bebaa356b3bfda",
+    "loadedProjectPythonSources": {
+      "tools/quality/g07_host_class_provenance_inputs.py": "a676cb3e4145177c3c243722d737592ce7d44c3f29cfe4f670662ef7651f046b",
+      "tools/quality/host_tool_invocation.py": "85d616a3db4ff47f4c95ae2e0dd57954bc2b09f28b8f2a685b986e5621545c46",
+      "tools/quality/pg13048_reference_identity_post.py": "18c35341ee908ade02e748acc5b668e95e0d2f557a76e3e082bebaa356b3bfda"
+    },
+    "provenance": "OBSERVED_SYS_ARGV_AND_ORIG_ARGV_NOT_RECONSTRUCTED"
+  },
+  "joinedContextWarnings": 3259,
+  "metadataNegativeVectors": 8,
+  "newAccepted": 0,
+  "oldPostEntryUnchanged": true,
+  "productTestsExecuted": 0,
+  "reviewManifestSha256": "f7345a09e4b83152111b83b56a48534a9223f66f6704df8a6d870adefe5e8d06",
+  "reviewSha256": "85bd5b55fa0c3c372c2156b52b447cf10821cbc92c1528184a7d207ec1099e81",
+  "reviewedRows": 28,
+  "source": "2f4290e7e511ea30224d087f78d44964d3488919",
+  "sourceDerivedRaw": 8472,
+  "sourceFiles": 19,
+  "sourceReboundCurrentWholePending": 941,
+  "totalPriorCorrections": 953,
+  "whole451Accepted": false,
+  "wholeF03Accepted": false
+}

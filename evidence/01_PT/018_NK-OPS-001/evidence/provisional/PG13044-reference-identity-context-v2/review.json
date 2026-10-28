@@ -1,0 +1,1350 @@
+{
+  "actualViolationCount": null,
+  "effortPercent": null,
+  "globalRawCorrectionsAdded": 0,
+  "joinedContextWarnings": 3259,
+  "limits": "Static purpose only, not defect exemption or runtime ownership/receipt/session/termination proof; existing type analysis reused without replay",
+  "newAccepted": 0,
+  "newProductClassFiles": 0,
+  "newlyReviewedContextIds": [
+    "PMD-00007",
+    "PMD-00014",
+    "PMD-00021",
+    "PMD-00036",
+    "PMD-00043",
+    "PMD-00093",
+    "PMD-00325",
+    "PMD-00382",
+    "PMD-02800",
+    "PMD-02802",
+    "PMD-02868",
+    "PMD-03021",
+    "PMD-03022",
+    "PMD-03023",
+    "PMD-03024",
+    "PMD-03025",
+    "PMD-03114",
+    "PMD-03117",
+    "PMD-03120",
+    "PMD-06167",
+    "PMD-06169",
+    "PMD-07267",
+    "PMD-07307",
+    "PMD-07320",
+    "PMD-07322",
+    "PMD-07427",
+    "PMD-07429",
+    "PMD-07435"
+  ],
+  "noCurrentReferenceInThisJoin": 5213,
+  "productClassesLoaded": 0,
+  "productTestsExecuted": 0,
+  "reviewedContextRows": 28,
+  "reviewedRows": [
+    {
+      "actualAllocatedPp": null,
+      "actualViolation": null,
+      "additionalSharedCostPp": 0,
+      "astColumn": 15,
+      "astLine": 185,
+      "canonicalCostOwner": "WBS-P010-03",
+      "canonicalOwner": "WBS-P010-03",
+      "dynamicExecutionQualificationInferred": false,
+      "enclosingClass": "UserMutationReplayService",
+      "enclosingMethod": "reply",
+      "id": "PMD-00007",
+      "leftThrowable": "NO",
+      "leftType": "dev.codex.schubert.nk.api.application.admin.UserMutationRequest",
+      "manualPurposeReviewComplete": true,
+      "operator": "EQUAL_TO",
+      "originalColumn": 15,
+      "originalLine": 185,
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/UserMutationReplayService.java",
+      "purposeCategory": "REQUEST_SCOPE_BINDING",
+      "reason": "Private Snapshot retains the original request reference and actor owner; reply requires the same request scope, not a reconstructed value-equivalent request",
+      "rightThrowable": "NO",
+      "rightType": "dev.codex.schubert.nk.api.application.admin.UserMutationRequest",
+      "sourceContext": [
+        "try {",
+        "requireAdmin(actor);",
+        "require(saved.request == request);",
+        "require(saved.owner == actor.userId());",
+        "validateResult(request, saved.result);",
+        "var code =",
+        "saved.replay && saved.result.resultCode().usesSuccessProfile()"
+      ],
+      "sourceSha256": "706b3a9d6ce6f70caebbd7f2883bba8eb76fe0cbcfba487e9873df56d56795b4",
+      "sourceSnippet": "require(saved.request == request);",
+      "status": "STATIC_DIAGNOSTIC_CONTEXT_REVIEWED_DYNAMIC_HOLD",
+      "typeEvidence": "UNRESOLVED_APPLICABILITY"
+    },
+    {
+      "actualAllocatedPp": null,
+      "actualViolation": null,
+      "additionalSharedCostPp": 0,
+      "astColumn": 15,
+      "astLine": 191,
+      "canonicalCostOwner": "WBS-P010-01",
+      "canonicalOwner": "WBS-P010-01",
+      "dynamicExecutionQualificationInferred": false,
+      "enclosingClass": "UserQueryReplayService",
+      "enclosingMethod": "reply",
+      "id": "PMD-00014",
+      "leftThrowable": "NO",
+      "leftType": "dev.codex.schubert.nk.api.application.admin.UserQueryRequest",
+      "manualPurposeReviewComplete": true,
+      "operator": "EQUAL_TO",
+      "originalColumn": 15,
+      "originalLine": 191,
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/UserQueryReplayService.java",
+      "purposeCategory": "REQUEST_SCOPE_BINDING",
+      "reason": "Private Snapshot retains the original request reference and actor owner; reply requires the same request scope, not a reconstructed value-equivalent request",
+      "rightThrowable": "NO",
+      "rightType": "dev.codex.schubert.nk.api.application.admin.UserQueryRequest",
+      "sourceContext": [
+        "try {",
+        "requireAdmin(actor);",
+        "require(saved.request == request);",
+        "require(saved.owner == actor.userId());",
+        "return wire(",
+        "request,",
+        "saved.values,"
+      ],
+      "sourceSha256": "37ea798b275a02412bdfd9939646939ed548e994b565d85e4bc14c215cd8f789",
+      "sourceSnippet": "require(saved.request == request);",
+      "status": "STATIC_DIAGNOSTIC_CONTEXT_REVIEWED_DYNAMIC_HOLD",
+      "typeEvidence": "UNRESOLVED_APPLICABILITY"
+    },
+    {
+      "actualAllocatedPp": null,
+      "actualViolation": null,
+      "additionalSharedCostPp": 0,
+      "astColumn": 15,
+      "astLine": 190,
+      "canonicalCostOwner": "WBS-P010-04",
+      "canonicalOwner": "WBS-P010-04",
+      "dynamicExecutionQualificationInferred": false,
+      "enclosingClass": "LogReplayService",
+      "enclosingMethod": "reply",
+      "id": "PMD-00021",
+      "leftThrowable": "NO",
+      "leftType": "dev.codex.schubert.nk.api.application.log.LogRequest",
+      "manualPurposeReviewComplete": true,
+      "operator": "EQUAL_TO",
+      "originalColumn": 15,
+      "originalLine": 190,
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/log/LogReplayService.java",
+      "purposeCategory": "REQUEST_SCOPE_BINDING",
+      "reason": "Private Snapshot retains the original request reference and actor owner; reply requires the same request scope, not a reconstructed value-equivalent request",
+      "rightThrowable": "NO",
+      "rightType": "dev.codex.schubert.nk.api.application.log.LogRequest",
+      "sourceContext": [
+        "try {",
+        "requireAdmin(actor);",
+        "require(saved.request == request);",
+        "require(saved.owner == actor.userId());",
+        "return wire(",
+        "request,",
+        "saved.values,"
+      ],
+      "sourceSha256": "26cfd68dc2e2f0bdb6c9256354ae8b35d226491191d27c756ef79041c19a4a2e",
+      "sourceSnippet": "require(saved.request == request);",
+      "status": "STATIC_DIAGNOSTIC_CONTEXT_REVIEWED_DYNAMIC_HOLD",
+      "typeEvidence": "UNRESOLVED_APPLICABILITY"
+    },
+    {
+      "actualAllocatedPp": null,
+      "actualViolation": null,
+      "additionalSharedCostPp": 0,
+      "astColumn": 15,
+      "astLine": 198,
+      "canonicalCostOwner": "WBS-P013-02",
+      "canonicalOwner": "WBS-P013-02",
+      "dynamicExecutionQualificationInferred": false,
+      "enclosingClass": "QuestionMutationReplayService",
+      "enclosingMethod": "reply",
+      "id": "PMD-00036",
+      "leftThrowable": "NO",
+      "leftType": "dev.codex.schubert.nk.api.application.question.QuestionMutationRequest",
+      "manualPurposeReviewComplete": true,
+      "operator": "EQUAL_TO",
+      "originalColumn": 15,
+      "originalLine": 198,
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/QuestionMutationReplayService.java",
+      "purposeCategory": "REQUEST_SCOPE_BINDING",
+      "reason": "Private Snapshot retains the original request reference and actor owner; reply requires the same request scope, not a reconstructed value-equivalent request",
+      "rightThrowable": "NO",
+      "rightType": "dev.codex.schubert.nk.api.application.question.QuestionMutationRequest",
+      "sourceContext": [
+        "Objects.requireNonNull(sentAt, \"sentAt\");",
+        "try {",
+        "require(saved.request == request && saved.owner == actor.userId());",
+        "request.validate(saved.result);",
+        "var code =",
+        "saved.retainedReplay && saved.result.code().usesSuccessProfile()",
+        "? ResultCode.IDEMPOTENT_SUCCESS"
+      ],
+      "sourceSha256": "b5b58cd7e166a77fe3b8d546eb2885cb5b1a602e791d6b5ebd550aea2c533613",
+      "sourceSnippet": "require(saved.request == request && saved.owner == actor.userId());",
+      "status": "STATIC_DIAGNOSTIC_CONTEXT_REVIEWED_DYNAMIC_HOLD",
+      "typeEvidence": "UNRESOLVED_APPLICABILITY"
+    },
+    {
+      "actualAllocatedPp": null,
+      "actualViolation": null,
+      "additionalSharedCostPp": 0,
+      "astColumn": 15,
+      "astLine": 215,
+      "canonicalCostOwner": "WBS-P014-03",
+      "canonicalOwner": "WBS-P014-03",
+      "dynamicExecutionQualificationInferred": false,
+      "enclosingClass": "QuestionQueryReplayService",
+      "enclosingMethod": "reply",
+      "id": "PMD-00043",
+      "leftThrowable": "NO",
+      "leftType": "dev.codex.schubert.nk.api.application.question.QuestionQueryRequest",
+      "manualPurposeReviewComplete": true,
+      "operator": "EQUAL_TO",
+      "originalColumn": 15,
+      "originalLine": 215,
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/QuestionQueryReplayService.java",
+      "purposeCategory": "REQUEST_SCOPE_BINDING",
+      "reason": "Private Snapshot retains the original request reference and actor owner; reply requires the same request scope, not a reconstructed value-equivalent request",
+      "rightThrowable": "NO",
+      "rightType": "dev.codex.schubert.nk.api.application.question.QuestionQueryRequest",
+      "sourceContext": [
+        "Objects.requireNonNull(sentAt, \"sentAt\");",
+        "try {",
+        "require(saved.request == request);",
+        "require(saved.scopeAllowed(actor));",
+        "return wire(",
+        "request,",
+        "saved.values,"
+      ],
+      "sourceSha256": "f8cc65b60561d378dfa1052a6551f2ed9ca32eb21ca99b23f81accbceab44587",
+      "sourceSnippet": "require(saved.request == request);",
+      "status": "STATIC_DIAGNOSTIC_CONTEXT_REVIEWED_DYNAMIC_HOLD",
+      "typeEvidence": "UNRESOLVED_APPLICABILITY"
+    },
+    {
+      "actualAllocatedPp": null,
+      "actualViolation": null,
+      "additionalSharedCostPp": 0,
+      "astColumn": 9,
+      "astLine": 115,
+      "canonicalCostOwner": "WBS-P018-05",
+      "canonicalOwner": "WBS-P018-05",
+      "dynamicExecutionQualificationInferred": false,
+      "enclosingClass": "ApiProcessLifetime",
+      "enclosingMethod": "shutdown",
+      "id": "PMD-00093",
+      "leftThrowable": "NO",
+      "leftType": "java.lang.Thread",
+      "manualPurposeReviewComplete": true,
+      "operator": "EQUAL_TO",
+      "originalColumn": 9,
+      "originalLine": 115,
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/bootstrap/ApiProcessLifetime.java",
+      "purposeCategory": "THREAD_OWNER_OR_SELF_JOIN",
+      "reason": "Compare current physical Thread with the captured owner/owned worker, preventing self-wait/join or cross-thread terminal/scope use",
+      "rightThrowable": "NO",
+      "rightType": "java.lang.Thread",
+      "sourceContext": [
+        "void shutdown() {",
+        "stop();",
+        "if (Thread.currentThread() == owner) return;",
+        "boolean interrupted = false;",
+        "while (true) {",
+        "try {",
+        "finished.await();"
+      ],
+      "sourceSha256": "ab638ca6a7701bc8cd176c08b4a645f2d8ee1f63acfdb95923dd8b446eccdeea",
+      "sourceSnippet": "if (Thread.currentThread() == owner) return;",
+      "status": "STATIC_DIAGNOSTIC_CONTEXT_REVIEWED_DYNAMIC_HOLD",
+      "typeEvidence": "UNRESOLVED_APPLICABILITY"
+    },
+    {
+      "actualAllocatedPp": null,
+      "actualViolation": null,
+      "additionalSharedCostPp": 0,
+      "astColumn": 9,
+      "astLine": 100,
+      "canonicalCostOwner": "WBS-P006-02",
+      "canonicalOwner": "WBS-P006-02",
+      "dynamicExecutionQualificationInferred": false,
+      "enclosingClass": "OwnedOutboxDispatcher",
+      "enclosingMethod": "close",
+      "id": "PMD-00325",
+      "leftThrowable": "NO",
+      "leftType": "java.lang.Thread",
+      "manualPurposeReviewComplete": true,
+      "operator": "EQUAL_TO",
+      "originalColumn": 9,
+      "originalLine": 100,
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/OwnedOutboxDispatcher.java",
+      "purposeCategory": "THREAD_OWNER_OR_SELF_JOIN",
+      "reason": "Compare current physical Thread with the captured owner/owned worker, preventing self-wait/join or cross-thread terminal/scope use",
+      "rightThrowable": "NO",
+      "rightType": "java.lang.Thread",
+      "sourceContext": [
+        "@Override",
+        "public void close() {",
+        "if (Thread.currentThread() == worker)",
+        "throw new IllegalStateException(\"outbox worker cannot join itself\");",
+        "synchronized (lock) {",
+        "stopping = true;",
+        "lock.notifyAll();"
+      ],
+      "sourceSha256": "8f2eb236d04f8fce43b4fdad94f6323bdf17c574d79e5a5b09e981abe9e1a30a",
+      "sourceSnippet": "if (Thread.currentThread() == worker)",
+      "status": "STATIC_DIAGNOSTIC_CONTEXT_REVIEWED_DYNAMIC_HOLD",
+      "typeEvidence": "UNRESOLVED_APPLICABILITY"
+    },
+    {
+      "actualAllocatedPp": null,
+      "actualViolation": null,
+      "additionalSharedCostPp": 0,
+      "astColumn": 11,
+      "astLine": 127,
+      "canonicalCostOwner": "WBS-P018-09",
+      "canonicalOwner": "WBS-P018-09",
+      "dynamicExecutionQualificationInferred": false,
+      "enclosingClass": "OwnedApiObservationWorker",
+      "enclosingMethod": "awaitStopped",
+      "id": "PMD-00382",
+      "leftThrowable": "NO",
+      "leftType": "java.lang.Thread",
+      "manualPurposeReviewComplete": true,
+      "operator": "EQUAL_TO",
+      "originalColumn": 11,
+      "originalLine": 127,
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/OwnedApiObservationWorker.java",
+      "purposeCategory": "THREAD_OWNER_OR_SELF_JOIN",
+      "reason": "Compare current physical Thread with the captured owner/owned worker, preventing self-wait/join or cross-thread terminal/scope use",
+      "rightThrowable": "NO",
+      "rightType": "java.lang.Thread",
+      "sourceContext": [
+        "try {",
+        "requestStop();",
+        "if (Thread.currentThread() == worker || unconfirmedStop.get())",
+        "throw new IOException(UNCONFIRMED);",
+        "if (starting.get() || worker.isAlive()) {",
+        "long firstRemaining = remainingNanos.getAsLong();",
+        "if (firstRemaining <= 0) throw new IOException(UNCONFIRMED);"
+      ],
+      "sourceSha256": "8bd8e156ff5038f7e5783865523913e2a0cf6188d674de05c9892ccecc6b0bbf",
+      "sourceSnippet": "if (Thread.currentThread() == worker || unconfirmedStop.get())",
+      "status": "STATIC_DIAGNOSTIC_CONTEXT_REVIEWED_DYNAMIC_HOLD",
+      "typeEvidence": "UNRESOLVED_APPLICABILITY"
+    },
+    {
+      "actualAllocatedPp": null,
+      "actualViolation": null,
+      "additionalSharedCostPp": 0,
+      "astColumn": 43,
+      "astLine": 38,
+      "canonicalCostOwner": "WBS-P018-08",
+      "canonicalOwner": "WBS-P018-08",
+      "dynamicExecutionQualificationInferred": false,
+      "enclosingClass": "FixedNativeCoverageTerminal",
+      "enclosingMethod": "terminal",
+      "id": "PMD-06167",
+      "leftThrowable": "NO",
+      "leftType": "java.lang.Thread",
+      "manualPurposeReviewComplete": true,
+      "operator": "EQUAL_TO",
+      "originalColumn": 43,
+      "originalLine": 38,
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/FixedNativeCoverageTerminal.java",
+      "purposeCategory": "THREAD_OWNER_OR_SELF_JOIN",
+      "reason": "Compare current physical Thread with the captured owner/owned worker, preventing self-wait/join or cross-thread terminal/scope use",
+      "rightThrowable": "NO",
+      "rightType": "java.lang.Thread",
+      "sourceContext": [
+        "",
+        "public boolean terminal() throws IOException {",
+        "FixedNativeCoverageCheckpoint.require(Thread.currentThread() == owner);",
+        "FixedNativeCoverageCheckpoint.require(!terminalAttempted);",
+        "terminalAttempted = true;",
+        "var opened = factory.open();",
+        "// The nullable factory observation is validated before storing the invariant."
+      ],
+      "sourceSha256": "38e22ded1b51714c4718a08834199ed6a9653d7d2039c6d8be6fa74081df10ff",
+      "sourceSnippet": "FixedNativeCoverageCheckpoint.require(Thread.currentThread() == owner);",
+      "status": "STATIC_DIAGNOSTIC_CONTEXT_REVIEWED_DYNAMIC_HOLD",
+      "typeEvidence": "UNRESOLVED_APPLICABILITY"
+    },
+    {
+      "actualAllocatedPp": null,
+      "actualViolation": null,
+      "additionalSharedCostPp": 0,
+      "astColumn": 43,
+      "astLine": 52,
+      "canonicalCostOwner": "WBS-P018-08",
+      "canonicalOwner": "WBS-P018-08",
+      "dynamicExecutionQualificationInferred": false,
+      "enclosingClass": "FixedNativeCoverageTerminal",
+      "enclosingMethod": "closing",
+      "id": "PMD-06169",
+      "leftThrowable": "NO",
+      "leftType": "java.lang.Thread",
+      "manualPurposeReviewComplete": true,
+      "operator": "EQUAL_TO",
+      "originalColumn": 43,
+      "originalLine": 52,
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/FixedNativeCoverageTerminal.java",
+      "purposeCategory": "THREAD_OWNER_OR_SELF_JOIN",
+      "reason": "Compare current physical Thread with the captured owner/owned worker, preventing self-wait/join or cross-thread terminal/scope use",
+      "rightThrowable": "NO",
+      "rightType": "java.lang.Thread",
+      "sourceContext": [
+        "",
+        "public boolean closing() throws IOException {",
+        "FixedNativeCoverageCheckpoint.require(Thread.currentThread() == owner);",
+        "FixedNativeCoverageCheckpoint.require(!closingAttempted);",
+        "closingAttempted = true;",
+        "FixedNativeCoverageCheckpoint.require(terminalReturned);",
+        "if (checkpoint.isEmpty()) return false;"
+      ],
+      "sourceSha256": "38e22ded1b51714c4718a08834199ed6a9653d7d2039c6d8be6fa74081df10ff",
+      "sourceSnippet": "FixedNativeCoverageCheckpoint.require(Thread.currentThread() == owner);",
+      "status": "STATIC_DIAGNOSTIC_CONTEXT_REVIEWED_DYNAMIC_HOLD",
+      "typeEvidence": "UNRESOLVED_APPLICABILITY"
+    },
+    {
+      "actualAllocatedPp": null,
+      "actualViolation": null,
+      "additionalSharedCostPp": 0,
+      "astColumn": 9,
+      "astLine": 69,
+      "canonicalCostOwner": "WBS-P018-06",
+      "canonicalOwner": "WBS-P018-06",
+      "dynamicExecutionQualificationInferred": false,
+      "enclosingClass": "WebProcessLifetime",
+      "enclosingMethod": "shutdown",
+      "id": "PMD-07267",
+      "leftThrowable": "NO",
+      "leftType": "java.lang.Thread",
+      "manualPurposeReviewComplete": true,
+      "operator": "EQUAL_TO",
+      "originalColumn": 9,
+      "originalLine": 69,
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebProcessLifetime.java",
+      "purposeCategory": "THREAD_OWNER_OR_SELF_JOIN",
+      "reason": "Compare current physical Thread with the captured owner/owned worker, preventing self-wait/join or cross-thread terminal/scope use",
+      "rightThrowable": "NO",
+      "rightType": "java.lang.Thread",
+      "sourceContext": [
+        "void shutdown() {",
+        "stop();",
+        "if (Thread.currentThread() == owner) return;",
+        "boolean interrupted = false;",
+        "while (true) {",
+        "try {",
+        "finished.await();"
+      ],
+      "sourceSha256": "e3b00633a7e970eec6770d0ba60a57ef9cf907e4e34340f835b507cf1a1e9414",
+      "sourceSnippet": "if (Thread.currentThread() == owner) return;",
+      "status": "STATIC_DIAGNOSTIC_CONTEXT_REVIEWED_DYNAMIC_HOLD",
+      "typeEvidence": "UNRESOLVED_APPLICABILITY"
+    },
+    {
+      "actualAllocatedPp": null,
+      "actualViolation": null,
+      "additionalSharedCostPp": 0,
+      "astColumn": 9,
+      "astLine": 107,
+      "canonicalCostOwner": "WBS-P006-04",
+      "canonicalOwner": "WBS-P006-04",
+      "dynamicExecutionQualificationInferred": false,
+      "enclosingClass": "WebLogReplayWorker",
+      "enclosingMethod": "closeWithin",
+      "id": "PMD-07307",
+      "leftThrowable": "NO",
+      "leftType": "java.lang.Thread",
+      "manualPurposeReviewComplete": true,
+      "operator": "EQUAL_TO",
+      "originalColumn": 9,
+      "originalLine": 107,
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebLogReplayWorker.java",
+      "purposeCategory": "THREAD_OWNER_OR_SELF_JOIN",
+      "reason": "Compare current physical Thread with the captured owner/owned worker, preventing self-wait/join or cross-thread terminal/scope use",
+      "rightThrowable": "NO",
+      "rightType": "java.lang.Thread",
+      "sourceContext": [
+        "// BUG629: a requested stop is not a completed join; retry must inspect the live thread.",
+        "active.set(false);",
+        "if (Thread.currentThread() == thread)",
+        "throw new IllegalStateException(\"web log worker cannot join its own owner\");",
+        "thread.interrupt();",
+        "try {",
+        "if (!thread.join(remaining))"
+      ],
+      "sourceSha256": "51972e99e350715e5404d70a08af31f8a7be26b3b143919d79bfa4363c450ab8",
+      "sourceSnippet": "if (Thread.currentThread() == thread)",
+      "status": "STATIC_DIAGNOSTIC_CONTEXT_REVIEWED_DYNAMIC_HOLD",
+      "typeEvidence": "UNRESOLVED_APPLICABILITY"
+    },
+    {
+      "actualAllocatedPp": null,
+      "actualViolation": null,
+      "additionalSharedCostPp": 0,
+      "astColumn": 11,
+      "astLine": 181,
+      "canonicalCostOwner": "WBS-P006-03",
+      "canonicalOwner": "WBS-P006-03",
+      "dynamicExecutionQualificationInferred": false,
+      "enclosingClass": "WebRequestTrace.Scope",
+      "enclosingMethod": "close",
+      "id": "PMD-07320",
+      "leftThrowable": "NO",
+      "leftType": "java.lang.Thread",
+      "manualPurposeReviewComplete": true,
+      "operator": "NOT_EQUAL_TO",
+      "originalColumn": 11,
+      "originalLine": 181,
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebRequestTrace.java",
+      "purposeCategory": "THREAD_OWNER_OR_SELF_JOIN",
+      "reason": "Compare current physical Thread with the captured owner/owned worker, preventing self-wait/join or cross-thread terminal/scope use",
+      "rightThrowable": "NO",
+      "rightType": "java.lang.Thread",
+      "sourceContext": [
+        "@Override",
+        "public void close() {",
+        "if (owner != Thread.currentThread())",
+        "throw new IllegalStateException(\"request audit scope owner mismatch\");",
+        "if (closed) return;",
+        "if (CURRENT.get() != this)",
+        "throw new IllegalStateException(\"request audit scope order mismatch\");"
+      ],
+      "sourceSha256": "e913d995a5cd7443c96fede3171b2cc241b5340f952532c382e5246180382ad1",
+      "sourceSnippet": "if (owner != Thread.currentThread())",
+      "status": "STATIC_DIAGNOSTIC_CONTEXT_REVIEWED_DYNAMIC_HOLD",
+      "typeEvidence": "UNRESOLVED_APPLICABILITY"
+    },
+    {
+      "actualAllocatedPp": null,
+      "actualViolation": null,
+      "additionalSharedCostPp": 0,
+      "astColumn": 9,
+      "astLine": 94,
+      "canonicalCostOwner": "WBS-P015-05",
+      "canonicalOwner": "WBS-P015-05",
+      "dynamicExecutionQualificationInferred": false,
+      "enclosingClass": "RevocationRetryWorker",
+      "enclosingMethod": "closeWithin",
+      "id": "PMD-07427",
+      "leftThrowable": "NO",
+      "leftType": "java.lang.Thread",
+      "manualPurposeReviewComplete": true,
+      "operator": "EQUAL_TO",
+      "originalColumn": 9,
+      "originalLine": 94,
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/revocation/RevocationRetryWorker.java",
+      "purposeCategory": "THREAD_OWNER_OR_SELF_JOIN",
+      "reason": "Compare current physical Thread with the captured owner/owned worker, preventing self-wait/join or cross-thread terminal/scope use",
+      "rightThrowable": "NO",
+      "rightType": "java.lang.Thread",
+      "sourceContext": [
+        "throw new IllegalArgumentException(\"invalid revocation close budget\");",
+        "active.set(false);",
+        "if (Thread.currentThread() == thread)",
+        "throw new IllegalStateException(\"revocation worker cannot join its own owner\");",
+        "thread.interrupt();",
+        "try {",
+        "if (!thread.join(remaining))"
+      ],
+      "sourceSha256": "3db3ddaf2ce6f36c1f783c8ac7bee96dbd71fe8fe5755d58af7637c6010f29e3",
+      "sourceSnippet": "if (Thread.currentThread() == thread)",
+      "status": "STATIC_DIAGNOSTIC_CONTEXT_REVIEWED_DYNAMIC_HOLD",
+      "typeEvidence": "UNRESOLVED_APPLICABILITY"
+    },
+    {
+      "actualAllocatedPp": null,
+      "actualViolation": null,
+      "additionalSharedCostPp": 0,
+      "astColumn": 21,
+      "astLine": 276,
+      "canonicalCostOwner": "WBS-P017-06",
+      "canonicalOwner": "WBS-P017-06",
+      "dynamicExecutionQualificationInferred": false,
+      "enclosingClass": "BackupStartIntentFiles",
+      "enclosingMethod": "retire",
+      "id": "PMD-02800",
+      "leftThrowable": "NO",
+      "leftType": "dev.codex.schubert.nk.batch.file.BackupStartIntentFiles",
+      "manualPurposeReviewComplete": true,
+      "operator": "NOT_EQUAL_TO",
+      "originalColumn": 21,
+      "originalLine": 276,
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/BackupStartIntentFiles.java",
+      "purposeCategory": "OPAQUE_ISSUER_AND_BASELINE",
+      "reason": "Private Intent/Baseline/TerminalReceipt retains its issuing gate and exact baseline; equal serialized fields cannot substitute another issuer/frame",
+      "rightThrowable": "NO",
+      "rightType": "dev.codex.schubert.nk.batch.file.BackupStartIntentFiles",
+      "sourceContext": [
+        "synchronized (lock) {",
+        "Objects.requireNonNull(intent, \"same-start marker\");",
+        "if (!begun || intent.owner != this) throw unavailable();",
+        "gate.verify();",
+        "Snapshot directory = directory();",
+        "Snapshot actual = root.atExistingEntryHandle(name, held -> file(held, directory));",
+        "require(intent.marker.equals(actual));"
+      ],
+      "sourceSha256": "2c0eb6e6b079ce54c0368655d2f854e946e5390c72a3f02e71a2b420660b3d11",
+      "sourceSnippet": "if (!begun || intent.owner != this) throw unavailable();",
+      "status": "STATIC_DIAGNOSTIC_CONTEXT_REVIEWED_DYNAMIC_HOLD",
+      "typeEvidence": "UNRESOLVED_APPLICABILITY"
+    },
+    {
+      "actualAllocatedPp": null,
+      "actualViolation": null,
+      "additionalSharedCostPp": 0,
+      "astColumn": 24,
+      "astLine": 292,
+      "canonicalCostOwner": "WBS-P017-06",
+      "canonicalOwner": "WBS-P017-06",
+      "dynamicExecutionQualificationInferred": false,
+      "enclosingClass": "BackupStartIntentFiles",
+      "enclosingMethod": "requirePresent",
+      "id": "PMD-02802",
+      "leftThrowable": "NO",
+      "leftType": "dev.codex.schubert.nk.batch.file.BackupStartIntentFiles",
+      "manualPurposeReviewComplete": true,
+      "operator": "EQUAL_TO",
+      "originalColumn": 24,
+      "originalLine": 292,
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/BackupStartIntentFiles.java",
+      "purposeCategory": "OPAQUE_ISSUER_AND_BASELINE",
+      "reason": "Private Intent/Baseline/TerminalReceipt retains its issuing gate and exact baseline; equal serialized fields cannot substitute another issuer/frame",
+      "rightThrowable": "NO",
+      "rightType": "dev.codex.schubert.nk.batch.file.BackupStartIntentFiles",
+      "sourceContext": [
+        "synchronized (lock) {",
+        "Objects.requireNonNull(intent, \"same publication marker\");",
+        "require(begun && intent.owner == this);",
+        "gate.verify();",
+        "var directory = directory();",
+        "require(intent.marker.equals(root.atExistingEntryHandle(name, p -> file(p, directory))));",
+        "require(directory.sameIdentity(directory()));"
+      ],
+      "sourceSha256": "2c0eb6e6b079ce54c0368655d2f854e946e5390c72a3f02e71a2b420660b3d11",
+      "sourceSnippet": "require(begun && intent.owner == this);",
+      "status": "STATIC_DIAGNOSTIC_CONTEXT_REVIEWED_DYNAMIC_HOLD",
+      "typeEvidence": "UNRESOLVED_APPLICABILITY"
+    },
+    {
+      "actualAllocatedPp": null,
+      "actualViolation": null,
+      "additionalSharedCostPp": 0,
+      "astColumn": 9,
+      "astLine": 194,
+      "canonicalCostOwner": "WBS-P017-06",
+      "canonicalOwner": "WBS-P017-06",
+      "dynamicExecutionQualificationInferred": false,
+      "enclosingClass": "BackupUnitReceiptGate",
+      "enclosingMethod": "requireStillPresent",
+      "id": "PMD-03021",
+      "leftThrowable": "NO",
+      "leftType": "dev.codex.schubert.nk.batch.platform.BackupUnitReceiptGate",
+      "manualPurposeReviewComplete": true,
+      "operator": "NOT_EQUAL_TO",
+      "originalColumn": 9,
+      "originalLine": 194,
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/BackupUnitReceiptGate.java",
+      "purposeCategory": "OPAQUE_ISSUER_AND_BASELINE",
+      "reason": "Private Intent/Baseline/TerminalReceipt retains its issuing gate and exact baseline; equal serialized fields cannot substitute another issuer/frame",
+      "rightThrowable": "NO",
+      "rightType": "dev.codex.schubert.nk.batch.platform.BackupUnitReceiptGate",
+      "sourceContext": [
+        "public void requireStillPresent(TerminalReceipt receipt) throws IOException {",
+        "Objects.requireNonNull(receipt, \"same-owner receipt\");",
+        "if (receipt.owner != this",
+        "|| !receipt.snapshot.matches(present(observeTerminal(receipt.baseline))))",
+        "throw unavailable();",
+        "}",
+        ""
+      ],
+      "sourceSha256": "530ea41bdd7331185907f353e68441f92c5072bf1e764a5149499f0dc3e004aa",
+      "sourceSnippet": "if (receipt.owner != this",
+      "status": "STATIC_DIAGNOSTIC_CONTEXT_REVIEWED_DYNAMIC_HOLD",
+      "typeEvidence": "UNRESOLVED_APPLICABILITY"
+    },
+    {
+      "actualAllocatedPp": null,
+      "actualViolation": null,
+      "additionalSharedCostPp": 0,
+      "astColumn": 12,
+      "astLine": 209,
+      "canonicalCostOwner": "WBS-P017-06",
+      "canonicalOwner": "WBS-P017-06",
+      "dynamicExecutionQualificationInferred": false,
+      "enclosingClass": "BackupUnitReceiptGate",
+      "enclosingMethod": "requireStoppedResult",
+      "id": "PMD-03022",
+      "leftThrowable": "NO",
+      "leftType": "dev.codex.schubert.nk.batch.platform.BackupUnitReceiptGate",
+      "manualPurposeReviewComplete": true,
+      "operator": "NOT_EQUAL_TO",
+      "originalColumn": 12,
+      "originalLine": 209,
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/BackupUnitReceiptGate.java",
+      "purposeCategory": "OPAQUE_ISSUER_AND_BASELINE",
+      "reason": "Private Intent/Baseline/TerminalReceipt retains its issuing gate and exact baseline; equal serialized fields cannot substitute another issuer/frame",
+      "rightThrowable": "NO",
+      "rightType": "dev.codex.schubert.nk.batch.platform.BackupUnitReceiptGate",
+      "sourceContext": [
+        "check();",
+        "if (target != BackupUnitStartClient.Target.BACKUP",
+        "|| baseline.owner != this",
+        "|| before.owner != this",
+        "|| before.baseline != baseline) throw unavailable();",
+        "var first = present(known(probe.quiescent()));",
+        "var whole = present(known(terminal.quiescent()));"
+      ],
+      "sourceSha256": "530ea41bdd7331185907f353e68441f92c5072bf1e764a5149499f0dc3e004aa",
+      "sourceSnippet": "|| baseline.owner != this",
+      "status": "STATIC_DIAGNOSTIC_CONTEXT_REVIEWED_DYNAMIC_HOLD",
+      "typeEvidence": "UNRESOLVED_APPLICABILITY"
+    },
+    {
+      "actualAllocatedPp": null,
+      "actualViolation": null,
+      "additionalSharedCostPp": 0,
+      "astColumn": 12,
+      "astLine": 210,
+      "canonicalCostOwner": "WBS-P017-06",
+      "canonicalOwner": "WBS-P017-06",
+      "dynamicExecutionQualificationInferred": false,
+      "enclosingClass": "BackupUnitReceiptGate",
+      "enclosingMethod": "requireStoppedResult",
+      "id": "PMD-03023",
+      "leftThrowable": "NO",
+      "leftType": "dev.codex.schubert.nk.batch.platform.BackupUnitReceiptGate",
+      "manualPurposeReviewComplete": true,
+      "operator": "NOT_EQUAL_TO",
+      "originalColumn": 12,
+      "originalLine": 210,
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/BackupUnitReceiptGate.java",
+      "purposeCategory": "OPAQUE_ISSUER_AND_BASELINE",
+      "reason": "Private Intent/Baseline/TerminalReceipt retains its issuing gate and exact baseline; equal serialized fields cannot substitute another issuer/frame",
+      "rightThrowable": "NO",
+      "rightType": "dev.codex.schubert.nk.batch.platform.BackupUnitReceiptGate",
+      "sourceContext": [
+        "if (target != BackupUnitStartClient.Target.BACKUP",
+        "|| baseline.owner != this",
+        "|| before.owner != this",
+        "|| before.baseline != baseline) throw unavailable();",
+        "var first = present(known(probe.quiescent()));",
+        "var whole = present(known(terminal.quiescent()));",
+        "var after = present(known(probe.quiescent()));"
+      ],
+      "sourceSha256": "530ea41bdd7331185907f353e68441f92c5072bf1e764a5149499f0dc3e004aa",
+      "sourceSnippet": "|| before.owner != this",
+      "status": "STATIC_DIAGNOSTIC_CONTEXT_REVIEWED_DYNAMIC_HOLD",
+      "typeEvidence": "UNRESOLVED_APPLICABILITY"
+    },
+    {
+      "actualAllocatedPp": null,
+      "actualViolation": null,
+      "additionalSharedCostPp": 0,
+      "astColumn": 12,
+      "astLine": 211,
+      "canonicalCostOwner": "WBS-P017-06",
+      "canonicalOwner": "WBS-P017-06",
+      "dynamicExecutionQualificationInferred": false,
+      "enclosingClass": "BackupUnitReceiptGate",
+      "enclosingMethod": "requireStoppedResult",
+      "id": "PMD-03024",
+      "leftThrowable": "NO",
+      "leftType": "dev.codex.schubert.nk.batch.platform.BackupUnitReceiptGate.Baseline",
+      "manualPurposeReviewComplete": true,
+      "operator": "NOT_EQUAL_TO",
+      "originalColumn": 12,
+      "originalLine": 211,
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/BackupUnitReceiptGate.java",
+      "purposeCategory": "OPAQUE_ISSUER_AND_BASELINE",
+      "reason": "Private Intent/Baseline/TerminalReceipt retains its issuing gate and exact baseline; equal serialized fields cannot substitute another issuer/frame",
+      "rightThrowable": "NO",
+      "rightType": "dev.codex.schubert.nk.batch.platform.BackupUnitReceiptGate.Baseline",
+      "sourceContext": [
+        "|| baseline.owner != this",
+        "|| before.owner != this",
+        "|| before.baseline != baseline) throw unavailable();",
+        "var first = present(known(probe.quiescent()));",
+        "var whole = present(known(terminal.quiescent()));",
+        "var after = present(known(probe.quiescent()));",
+        "check();"
+      ],
+      "sourceSha256": "530ea41bdd7331185907f353e68441f92c5072bf1e764a5149499f0dc3e004aa",
+      "sourceSnippet": "|| before.baseline != baseline) throw unavailable();",
+      "status": "STATIC_DIAGNOSTIC_CONTEXT_REVIEWED_DYNAMIC_HOLD",
+      "typeEvidence": "UNRESOLVED_APPLICABILITY"
+    },
+    {
+      "actualAllocatedPp": null,
+      "actualViolation": null,
+      "additionalSharedCostPp": 0,
+      "astColumn": 9,
+      "astLine": 227,
+      "canonicalCostOwner": "WBS-P017-06",
+      "canonicalOwner": "WBS-P017-06",
+      "dynamicExecutionQualificationInferred": false,
+      "enclosingClass": "BackupUnitReceiptGate",
+      "enclosingMethod": "observe",
+      "id": "PMD-03025",
+      "leftThrowable": "NO",
+      "leftType": "dev.codex.schubert.nk.batch.platform.BackupUnitReceiptGate",
+      "manualPurposeReviewComplete": true,
+      "operator": "NOT_EQUAL_TO",
+      "originalColumn": 9,
+      "originalLine": 227,
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/BackupUnitReceiptGate.java",
+      "purposeCategory": "OPAQUE_ISSUER_AND_BASELINE",
+      "reason": "Private Intent/Baseline/TerminalReceipt retains its issuing gate and exact baseline; equal serialized fields cannot substitute another issuer/frame",
+      "rightThrowable": "NO",
+      "rightType": "dev.codex.schubert.nk.batch.platform.BackupUnitReceiptGate",
+      "sourceContext": [
+        "throws IOException {",
+        "Objects.requireNonNull(baseline, \"same-run Backup baseline\");",
+        "if (baseline.owner != this) throw unavailable();",
+        "check();",
+        "try {",
+        "Optional<InspectorUnitSnapshot> first = known(probe.quiescent());",
+        "if (first.isEmpty()"
+      ],
+      "sourceSha256": "530ea41bdd7331185907f353e68441f92c5072bf1e764a5149499f0dc3e004aa",
+      "sourceSnippet": "if (baseline.owner != this) throw unavailable();",
+      "status": "STATIC_DIAGNOSTIC_CONTEXT_REVIEWED_DYNAMIC_HOLD",
+      "typeEvidence": "UNRESOLVED_APPLICABILITY"
+    },
+    {
+      "actualAllocatedPp": null,
+      "actualViolation": null,
+      "additionalSharedCostPp": 0,
+      "astColumn": 9,
+      "astLine": 144,
+      "canonicalCostOwner": "WBS-P017-12",
+      "canonicalOwner": "WBS-P017-12",
+      "dynamicExecutionQualificationInferred": false,
+      "enclosingClass": "MorningCompletionEvidence",
+      "enclosingMethod": "verify",
+      "id": "PMD-02868",
+      "leftThrowable": "NO",
+      "leftType": "dev.codex.schubert.nk.batch.platform.BackupUnitReceiptGate.TerminalReceipt",
+      "manualPurposeReviewComplete": true,
+      "operator": "NOT_EQUAL_TO",
+      "originalColumn": 9,
+      "originalLine": 144,
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MorningCompletionEvidence.java",
+      "purposeCategory": "EXACT_TERMINAL_RECEIPT_CONTINUITY",
+      "reason": "Retain exactly the already observed child receipt across stop/recheck/handoff, not an equal-looking replacement or a new success receipt",
+      "rightThrowable": "NO",
+      "rightType": "dev.codex.schubert.nk.batch.platform.BackupUnitReceiptGate.TerminalReceipt",
+      "sourceContext": [
+        "});",
+        "// Backup was explicitly stopped by this completed cycle. KEEP_ACTIVE is only for the others.",
+        "if (backupCycle.completedReceipt() != backupReceipt) throw unavailable();",
+        "backupCycle.recheckCompletedBackup();",
+        "cleanup.receipt().requireStillPresent();",
+        "expiry.receipt().requireStillPresent();",
+        "database.recheckConsistent(run);"
+      ],
+      "sourceSha256": "6e8eca6f18bfd2a3ef516edb4e6825c2a435f6f5cdd3c98af0065b7d679ccf27",
+      "sourceSnippet": "if (backupCycle.completedReceipt() != backupReceipt) throw unavailable();",
+      "status": "STATIC_DIAGNOSTIC_CONTEXT_REVIEWED_DYNAMIC_HOLD",
+      "typeEvidence": "UNRESOLVED_APPLICABILITY"
+    },
+    {
+      "actualAllocatedPp": null,
+      "actualViolation": null,
+      "additionalSharedCostPp": 0,
+      "astColumn": 19,
+      "astLine": 379,
+      "canonicalCostOwner": "WBS-P017-06",
+      "canonicalOwner": "WBS-P017-06",
+      "dynamicExecutionQualificationInferred": false,
+      "enclosingClass": "MorningBackupUnitCycle",
+      "enclosingMethod": "executeBackup",
+      "id": "PMD-03114",
+      "leftThrowable": "NO",
+      "leftType": "dev.codex.schubert.nk.batch.platform.BackupUnitReceiptGate.TerminalReceipt",
+      "manualPurposeReviewComplete": true,
+      "operator": "NOT_EQUAL_TO",
+      "originalColumn": 19,
+      "originalLine": 379,
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle.java",
+      "purposeCategory": "EXACT_TERMINAL_RECEIPT_CONTINUITY",
+      "reason": "Retain exactly the already observed child receipt across stop/recheck/handoff, not an equal-looking replacement or a new success receipt",
+      "rightThrowable": "NO",
+      "rightType": "dev.codex.schubert.nk.batch.platform.BackupUnitReceiptGate.TerminalReceipt",
+      "sourceContext": [
+        "if (requireObserved) {",
+        "var held = completedActual.orElseThrow();",
+        "if (receipt.stopped(baseline, held) != held)",
+        "throw new IOException(\"actual stopped receipt changed\");",
+        "}",
+        "originalAndRequest.verify();",
+        "if (!terminal.quiescent()) throw new IOException(\"Backup terminal unavailable\");"
+      ],
+      "sourceSha256": "d2686fed8d6c620411de1b92ed4a7bf19507e9f37f18d65b753208b3631de68a",
+      "sourceSnippet": "if (receipt.stopped(baseline, held) != held)",
+      "status": "STATIC_DIAGNOSTIC_CONTEXT_REVIEWED_DYNAMIC_HOLD",
+      "typeEvidence": "UNRESOLVED_APPLICABILITY"
+    },
+    {
+      "actualAllocatedPp": null,
+      "actualViolation": null,
+      "additionalSharedCostPp": 0,
+      "astColumn": 9,
+      "astLine": 408,
+      "canonicalCostOwner": "WBS-P017-06",
+      "canonicalOwner": "WBS-P017-06",
+      "dynamicExecutionQualificationInferred": false,
+      "enclosingClass": "MorningBackupUnitCycle",
+      "enclosingMethod": "recheckCompletedBackup",
+      "id": "PMD-03117",
+      "leftThrowable": "NO",
+      "leftType": "dev.codex.schubert.nk.batch.platform.BackupUnitReceiptGate.TerminalReceipt",
+      "manualPurposeReviewComplete": true,
+      "operator": "NOT_EQUAL_TO",
+      "originalColumn": 9,
+      "originalLine": 408,
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle.java",
+      "purposeCategory": "EXACT_TERMINAL_RECEIPT_CONTINUITY",
+      "reason": "Retain exactly the already observed child receipt across stop/recheck/handoff, not an equal-looking replacement or a new success receipt",
+      "rightThrowable": "NO",
+      "rightType": "dev.codex.schubert.nk.batch.platform.BackupUnitReceiptGate.TerminalReceipt",
+      "sourceContext": [
+        "var baseline =",
+        "completedBaseline.orElseThrow(() -> new IOException(\"same Backup baseline unavailable\"));",
+        "if (receipt.stopped(baseline, before) != before || !terminal.quiescent())",
+        "throw new IOException(\"completed Backup stop proof changed\");",
+        "budget.requireWithin();",
+        "gate.recheck();",
+        "}"
+      ],
+      "sourceSha256": "d2686fed8d6c620411de1b92ed4a7bf19507e9f37f18d65b753208b3631de68a",
+      "sourceSnippet": "if (receipt.stopped(baseline, before) != before || !terminal.quiescent())",
+      "status": "STATIC_DIAGNOSTIC_CONTEXT_REVIEWED_DYNAMIC_HOLD",
+      "typeEvidence": "UNRESOLVED_APPLICABILITY"
+    },
+    {
+      "actualAllocatedPp": null,
+      "actualViolation": null,
+      "additionalSharedCostPp": 0,
+      "astColumn": 11,
+      "astLine": 479,
+      "canonicalCostOwner": "WBS-P017-06",
+      "canonicalOwner": "WBS-P017-06",
+      "dynamicExecutionQualificationInferred": false,
+      "enclosingClass": "MorningBackupUnitCycle",
+      "enclosingMethod": "executeHandoff",
+      "id": "PMD-03120",
+      "leftThrowable": "NO",
+      "leftType": "dev.codex.schubert.nk.batch.platform.BackupUnitReceiptGate.TerminalReceipt",
+      "manualPurposeReviewComplete": true,
+      "operator": "NOT_EQUAL_TO",
+      "originalColumn": 11,
+      "originalLine": 479,
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle.java",
+      "purposeCategory": "EXACT_TERMINAL_RECEIPT_CONTINUITY",
+      "reason": "Retain exactly the already observed child receipt across stop/recheck/handoff, not an equal-looking replacement or a new success receipt",
+      "rightThrowable": "NO",
+      "rightType": "dev.codex.schubert.nk.batch.platform.BackupUnitReceiptGate.TerminalReceipt",
+      "sourceContext": [
+        "});",
+        "Objects.requireNonNull(actual, \"same child terminal receipt\");",
+        "if (actual != observedReceipt.get()) throw new Unresolved();",
+        "budget.requireWithin();",
+        "gate.recheck();",
+        "requireHandoffTerminal(actual, stopChild);",
+        "completion.complete(actual); // Parent advisory has been reacquired, never inside handoff."
+      ],
+      "sourceSha256": "d2686fed8d6c620411de1b92ed4a7bf19507e9f37f18d65b753208b3631de68a",
+      "sourceSnippet": "if (actual != observedReceipt.get()) throw new Unresolved();",
+      "status": "STATIC_DIAGNOSTIC_CONTEXT_REVIEWED_DYNAMIC_HOLD",
+      "typeEvidence": "UNRESOLVED_APPLICABILITY"
+    },
+    {
+      "actualAllocatedPp": null,
+      "actualViolation": null,
+      "additionalSharedCostPp": 0,
+      "astColumn": 11,
+      "astLine": 184,
+      "canonicalCostOwner": "WBS-P006-03",
+      "canonicalOwner": "WBS-P006-03",
+      "dynamicExecutionQualificationInferred": false,
+      "enclosingClass": "WebRequestTrace.Scope",
+      "enclosingMethod": "close",
+      "id": "PMD-07322",
+      "leftThrowable": "NO",
+      "leftType": "dev.codex.schubert.nk.web.logging.WebRequestTrace.Scope",
+      "manualPurposeReviewComplete": true,
+      "operator": "NOT_EQUAL_TO",
+      "originalColumn": 11,
+      "originalLine": 184,
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebRequestTrace.java",
+      "purposeCategory": "LEXICAL_SCOPE_STACK",
+      "reason": "The current ThreadLocal must be this exact top Scope before pop restores previous; equivalent trace data is not the same stack frame",
+      "rightThrowable": "NO",
+      "rightType": "dev.codex.schubert.nk.web.logging.WebRequestTrace.Scope",
+      "sourceContext": [
+        "throw new IllegalStateException(\"request audit scope owner mismatch\");",
+        "if (closed) return;",
+        "if (CURRENT.get() != this)",
+        "throw new IllegalStateException(\"request audit scope order mismatch\");",
+        "closed = true;",
+        "if (previous == null) CURRENT.remove();",
+        "else CURRENT.set(previous);"
+      ],
+      "sourceSha256": "e913d995a5cd7443c96fede3171b2cc241b5340f952532c382e5246180382ad1",
+      "sourceSnippet": "if (CURRENT.get() != this)",
+      "status": "STATIC_DIAGNOSTIC_CONTEXT_REVIEWED_DYNAMIC_HOLD",
+      "typeEvidence": "UNRESOLVED_APPLICABILITY"
+    },
+    {
+      "actualAllocatedPp": null,
+      "actualViolation": null,
+      "additionalSharedCostPp": 0,
+      "astColumn": 11,
+      "astLine": 55,
+      "canonicalCostOwner": "WBS-P015-06",
+      "canonicalOwner": "WBS-P015-06",
+      "dynamicExecutionQualificationInferred": false,
+      "enclosingClass": "ApiSessionInvalidHandler",
+      "enclosingMethod": "terminate",
+      "id": "PMD-07429",
+      "leftThrowable": "NO",
+      "leftType": "java.lang.Object",
+      "manualPurposeReviewComplete": true,
+      "operator": "NOT_EQUAL_TO",
+      "originalColumn": 11,
+      "originalLine": 55,
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/ApiSessionInvalidHandler.java",
+      "purposeCategory": "CURRENT_SESSION_REPOSITORY_INSTANCE",
+      "reason": "The request SessionRepositoryFilter attribute must be the configured current repository instance before owned local invalidation/Logout; do not accept a different repository by value",
+      "rightThrowable": "NO",
+      "rightType": "dev.codex.schubert.nk.web.session.SpringEncryptedSessionRepository",
+      "sourceContext": [
+        "SecurityContextHolder.clearContext();",
+        "if (verifiedSelfReset && actor.isEmpty()) throw new SessionStoreException();",
+        "if (request.getAttribute(SessionRepositoryFilter.SESSION_REPOSITORY_ATTR) != sessions)",
+        "throw new SessionStoreException();",
+        "response.setStatus(401);",
+        "try {",
+        "var session = request.getSession(false);"
+      ],
+      "sourceSha256": "4fa8c1c3de0a3d5e2093e43a8f25f7aac82049bf6b3230bacb9a07c6646caf12",
+      "sourceSnippet": "if (request.getAttribute(SessionRepositoryFilter.SESSION_REPOSITORY_ATTR) != sessions)",
+      "status": "STATIC_DIAGNOSTIC_CONTEXT_REVIEWED_DYNAMIC_HOLD",
+      "typeEvidence": "UNRESOLVED_APPLICABILITY"
+    },
+    {
+      "actualAllocatedPp": null,
+      "actualViolation": null,
+      "additionalSharedCostPp": 0,
+      "astColumn": 9,
+      "astLine": 59,
+      "canonicalCostOwner": "WBS-P015-04",
+      "canonicalOwner": "WBS-P015-04",
+      "dynamicExecutionQualificationInferred": false,
+      "enclosingClass": "LocalLogoutHandler",
+      "enclosingMethod": "execute",
+      "id": "PMD-07435",
+      "leftThrowable": "NO",
+      "leftType": "java.lang.Object",
+      "manualPurposeReviewComplete": true,
+      "operator": "NOT_EQUAL_TO",
+      "originalColumn": 9,
+      "originalLine": 59,
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/LocalLogoutHandler.java",
+      "purposeCategory": "CURRENT_SESSION_REPOSITORY_INSTANCE",
+      "reason": "The request SessionRepositoryFilter attribute must be the configured current repository instance before owned local invalidation/Logout; do not accept a different repository by value",
+      "rightThrowable": "NO",
+      "rightType": "dev.codex.schubert.nk.web.session.SpringEncryptedSessionRepository",
+      "sourceContext": [
+        ".orElseThrow(SessionStoreException::new);",
+        "var transport = WebRequestContext.require(request);",
+        "if (request.getAttribute(SessionRepositoryFilter.SESSION_REPOSITORY_ATTR) != sessions)",
+        "throw new SessionStoreException();",
+        "var session = request.getSession(false);",
+        "if (session == null) throw new SessionStoreException();",
+        "final LocalLogoutCoordinator.Outcome outcome;"
+      ],
+      "sourceSha256": "182e407cc8e90f6b32a66d15a404f817da9a0a45c66d11bb958e01c610469373",
+      "sourceSnippet": "if (request.getAttribute(SessionRepositoryFilter.SESSION_REPOSITORY_ATTR) != sessions)",
+      "status": "STATIC_DIAGNOSTIC_CONTEXT_REVIEWED_DYNAMIC_HOLD",
+      "typeEvidence": "UNRESOLVED_APPLICABILITY"
+    }
+  ],
+  "source": "2f4290e7e511ea30224d087f78d44964d3488919",
+  "sourceCodeChanged": false,
+  "sourceDerivedRaw": 8472,
+  "sourceFiles": 19,
+  "sourceReboundCurrentWholePending": 941,
+  "sourceSupports": {
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/UserMutationReplayService.java": {
+      "sourceSha256": "706b3a9d6ce6f70caebbd7f2883bba8eb76fe0cbcfba487e9873df56d56795b4",
+      "supportingSourceLines": [
+        [
+          58,
+          "private Snapshot("
+        ],
+        [
+          60,
+          "this.request = request;"
+        ],
+        [
+          61,
+          "this.owner = owner;"
+        ],
+        [
+          155,
+          "return new Snapshot("
+        ]
+      ]
+    },
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/UserQueryReplayService.java": {
+      "sourceSha256": "37ea798b275a02412bdfd9939646939ed548e994b565d85e4bc14c215cd8f789",
+      "supportingSourceLines": [
+        [
+          58,
+          "private Snapshot(UserQueryRequest request, long owner, PayloadValues values, ResultCode code) {"
+        ],
+        [
+          59,
+          "this.request = request;"
+        ],
+        [
+          60,
+          "this.owner = owner;"
+        ],
+        [
+          161,
+          "return new Snapshot(request, actor.userId(), values, code);"
+        ]
+      ]
+    },
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/log/LogReplayService.java": {
+      "sourceSha256": "26cfd68dc2e2f0bdb6c9256354ae8b35d226491191d27c756ef79041c19a4a2e",
+      "supportingSourceLines": [
+        [
+          58,
+          "private Snapshot(LogRequest request, long owner, PayloadValues values, ResultCode code) {"
+        ],
+        [
+          59,
+          "this.request = request;"
+        ],
+        [
+          60,
+          "this.owner = owner;"
+        ],
+        [
+          160,
+          "return new Snapshot(request, actor.userId(), values, code);"
+        ]
+      ]
+    },
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/QuestionMutationReplayService.java": {
+      "sourceSha256": "b5b58cd7e166a77fe3b8d546eb2885cb5b1a602e791d6b5ebd550aea2c533613",
+      "supportingSourceLines": [
+        [
+          58,
+          "private Snapshot("
+        ],
+        [
+          63,
+          "this.request = request;"
+        ],
+        [
+          64,
+          "this.owner = owner;"
+        ],
+        [
+          170,
+          "return new Snapshot("
+        ]
+      ]
+    },
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/QuestionQueryReplayService.java": {
+      "sourceSha256": "f8cc65b60561d378dfa1052a6551f2ed9ca32eb21ca99b23f81accbceab44587",
+      "supportingSourceLines": [
+        [
+          61,
+          "private Snapshot("
+        ],
+        [
+          67,
+          "this.request = request;"
+        ],
+        [
+          68,
+          "this.owner = owner;"
+        ],
+        [
+          183,
+          "return new Snapshot(request, actor.userId(), scope, values, code);"
+        ]
+      ]
+    },
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/bootstrap/ApiProcessLifetime.java": {
+      "sourceSha256": "ab638ca6a7701bc8cd176c08b4a645f2d8ee1f63acfdb95923dd8b446eccdeea",
+      "supportingSourceLines": [
+        [
+          26,
+          "private final Thread owner = Thread.currentThread();"
+        ]
+      ]
+    },
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/outbound/OwnedOutboxDispatcher.java": {
+      "sourceSha256": "8f2eb236d04f8fce43b4fdad94f6323bdf17c574d79e5a5b09e981abe9e1a30a",
+      "supportingSourceLines": [
+        [
+          25,
+          "worker = new Thread(this::run, \"nk-api-outbox\");"
+        ]
+      ]
+    },
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/OwnedApiObservationWorker.java": {
+      "sourceSha256": "8bd8e156ff5038f7e5783865523913e2a0cf6188d674de05c9892ccecc6b0bbf",
+      "supportingSourceLines": [
+        [
+          53,
+          "worker = new Thread(this::run, \"nk-api-observation\");"
+        ]
+      ]
+    },
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/BackupStartIntentFiles.java": {
+      "sourceSha256": "2c0eb6e6b079ce54c0368655d2f854e946e5390c72a3f02e71a2b420660b3d11",
+      "supportingSourceLines": [
+        [
+          48,
+          "private Intent(BackupStartIntentFiles owner, Snapshot marker) {"
+        ],
+        [
+          49,
+          "this.owner = owner;"
+        ]
+      ]
+    },
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MorningCompletionEvidence.java": {
+      "sourceSha256": "6e8eca6f18bfd2a3ef516edb4e6825c2a435f6f5cdd3c98af0065b7d679ccf27",
+      "supportingSourceLines": []
+    },
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/BackupUnitReceiptGate.java": {
+      "sourceSha256": "530ea41bdd7331185907f353e68441f92c5072bf1e764a5149499f0dc3e004aa",
+      "supportingSourceLines": [
+        [
+          38,
+          "private Baseline(BackupUnitReceiptGate owner, Optional<UUID> previous) {"
+        ],
+        [
+          39,
+          "this.owner = owner;"
+        ],
+        [
+          55,
+          "private TerminalReceipt("
+        ],
+        [
+          57,
+          "this.owner = owner;"
+        ]
+      ]
+    },
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle.java": {
+      "sourceSha256": "d2686fed8d6c620411de1b92ed4a7bf19507e9f37f18d65b753208b3631de68a",
+      "supportingSourceLines": [
+        [
+          214,
+          "return before;"
+        ],
+        [
+          472,
+          "observedReceipt.set(value);"
+        ]
+      ]
+    },
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/FixedNativeCoverageTerminal.java": {
+      "sourceSha256": "38e22ded1b51714c4718a08834199ed6a9653d7d2039c6d8be6fa74081df10ff",
+      "supportingSourceLines": [
+        [
+          19,
+          "private final Thread owner = Thread.currentThread();"
+        ]
+      ]
+    },
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebProcessLifetime.java": {
+      "sourceSha256": "e3b00633a7e970eec6770d0ba60a57ef9cf907e4e34340f835b507cf1a1e9414",
+      "supportingSourceLines": [
+        [
+          22,
+          "private final Thread owner = Thread.currentThread();"
+        ]
+      ]
+    },
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebLogReplayWorker.java": {
+      "sourceSha256": "51972e99e350715e5404d70a08af31f8a7be26b3b143919d79bfa4363c450ab8",
+      "supportingSourceLines": [
+        [
+          92,
+          "return new Snapshot(completedCycles.get(), failedCycles.get(), lastReport);"
+        ]
+      ]
+    },
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebRequestTrace.java": {
+      "sourceSha256": "e913d995a5cd7443c96fede3171b2cc241b5340f952532c382e5246180382ad1",
+      "supportingSourceLines": [
+        [
+          173,
+          "owner = Thread.currentThread();"
+        ],
+        [
+          175,
+          "previous = CURRENT.get();"
+        ],
+        [
+          176,
+          "CURRENT.set(this);"
+        ],
+        [
+          188,
+          "else CURRENT.set(previous);"
+        ]
+      ]
+    },
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/revocation/RevocationRetryWorker.java": {
+      "sourceSha256": "3db3ddaf2ce6f36c1f783c8ac7bee96dbd71fe8fe5755d58af7637c6010f29e3",
+      "supportingSourceLines": [
+        [
+          80,
+          "return new Snapshot(completed.get(), failed.get());"
+        ]
+      ]
+    },
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/ApiSessionInvalidHandler.java": {
+      "sourceSha256": "4fa8c1c3de0a3d5e2093e43a8f25f7aac82049bf6b3230bacb9a07c6646caf12",
+      "supportingSourceLines": [
+        [
+          28,
+          "this.sessions = Objects.requireNonNull(sessions, \"sessions\");"
+        ]
+      ]
+    },
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/LocalLogoutHandler.java": {
+      "sourceSha256": "182e407cc8e90f6b32a66d15a404f817da9a0a45c66d11bb958e01c610469373",
+      "supportingSourceLines": [
+        [
+          32,
+          "this.sessions = Objects.requireNonNull(sessions, \"sessions\");"
+        ]
+      ]
+    }
+  },
+  "totalPriorCorrections": 953,
+  "unknownDynamicCorrectness": true,
+  "whole451Accepted": false,
+  "wholeF03Accepted": false
+}

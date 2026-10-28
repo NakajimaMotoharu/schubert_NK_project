@@ -1,5 +1,7 @@
 # NK-OPS-001 検査起動wrapper・unit 実行結果
 
+2026-10-28静的用途補足：2409/PG13044 f7345a09 actual0・元残28/19file用途/八反例、独立PG13048 a690dd56 actual0・全元metadata/源不変・四独立反例・旧工具二失敗保持。参照3259/pending941/raw8472/corr953不変、製品PT/coverage/正式受入増加0・source2f4290e7。BUG2021/2022・YKT1769/1770当工具のみ完了、全F03/実行免除/actualは未受入。
+
 2026-10-28静的補足：2407・PG13036型56/0未解決/28Throwable、PG13038独立manifest2db97b5ef8db4f2c84b69c3096a3ec966d89a42529db5c7c9c3bc9956b241f4d actual0/九反例。raw8472/corr953不変、参照3231/pending913・新製品PT0/実測coverage加算0/正式更新0。BUG2019/2020・YKT1767/1768は当工具限定完了、元失敗/entry保持。source2f4290e7、全F03/実例外graph/451は未受入。
 
 2026-10-28監視metadata限定結果：source2f4290e7e511ea30224d087f78d44964d3488919/PG13020-HTTPROUTENAME-JP、元whole6/一suite真正0、六Main各適用四counter100（120L28M6C13B/miss0）。2404/2405とevidence/http-route-private-name/manifest.jsonへ元Test ID/command/env/日時/入力/依存/hash・全物理差/固定resourceを結合。全Web/六artifact未達、PMD4/gate1/六SB0保持、実HTTP/native/Root/VM/DB未実行。Main五physical差を全て当SourceFileに限定・他1838Main同byte、当Test一TWR差・他1969Test同byte/新class0。正式1964/53・歴史17/190・工数null・QA051final不変。以下は旧sourceの歴史結果で当sourceへ合算しない。
