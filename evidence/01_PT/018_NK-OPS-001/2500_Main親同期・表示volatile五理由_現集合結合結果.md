@@ -1,0 +1,11 @@
+# 2500 Main親同期・表示volatile五理由 現集合結合結果
+
+2026-10-29、2499/PG-D815予定、source17ab52b25不変更・原0.5/1/2cap10保持。13703/c4daab13/637d3ce581ffc589ea0519e77a1f37a5f1946dcf1070f61ebecb3132b99d98a4真正0、13704/f08188cf/97d17086b4f150a57c5fde59e1f9f23057860ee6f9f98734ec9847a9b5c5427c独立十四typed反例・公開XML/原ID/旧理由/現source/PMD半開spanを真正0確認。旧四親同期＋旧一volatileの五理由再結合、新理由/PGコード/Test/PT/coverage/受入0。元5920/6122の完全二Main SHAが現normal13596/元13253に一致し、既JDK親同期witnessと411例外を参照する。JDK source.zipは利用不可の履歴保持・読了としない。親JDK/旧35/1939/Productの確認再演0。
+
+13702/ad182dc3はXMLのsnapshot pathをrepo直下と誤認してbody1/OUTなし（BUG2077/YKT1825）。事前metadata確認も6122にreviewsSha256が無いのに仮定し失敗し、shell exitをguardせず後続entryが起動した事実を保持。新13703は元canonical findings/明示published file SHA/旧source完全一致へ修正し、旧entry非改変。13704はbody前pyflakesが二行の括弧typoを検出し、&&で本体未開始のまま修正後lint0→唯一body0。前処理失敗と工具body1/製品失敗0を混同しない。
+
+13706/session82166/entryb1c10d58/313577daeb7cae8d24f9efb7420860d8b8fca4468e5a0088b9bdd3af63c8a1b9真正0、13708/session13700/entry938db42a/dbf9eb8fd854030992227a57a38e9da1d5fef9ae995e3a81af067e4781fff6ba真正0・独立八typed反例/原941943/費/受入/全995旧runtime保持を照合。refs3353→3358/pending2492→2497/noRef2894→2889、raw6247/Main1491/Test4756/corr3194は不変。485 inventory SHA1fb7c70c484e88092a6905efaccf258b7c4503983fc93c88783596bede7d92ee、486 snapshot SHA1bdaa3941fa67fd92c34db5e929639f4a3637530812999091227c941c69b71e7。所定WBS前後auditはactual1/HOLDで、全体合格に変換しない。次trace=f03_current_concurrency_trace.state_after/13706。
+
+START2878→END2879、開始0.5/1/2cap10を保持、freshused26→27/残73/同reset1793774153の丸め共有差1pp（専有N-T/PMO配賦/工数null）。原五理由は新規消化/新PT/製造変更と数えず、現在sourceへの参照補完として別計上。2077/YKT1825は二旧schema/元snapshot XML/currentcanonical・型差false対0を含む十四metadata反例/独立八trace反例・新前処理&&guardで当scope確認済み。元body1/未guard起動/13704本体前構文検出を保全、製品失敗/実行0・旧sourceの成功再演0。修正commitは当保存、全他工具schemaの正常や全横展開完了へ拡大しない。
+
+元allocation全経路/actual native競合/バッファkey-close動作の新検証ではない。正式1964/53・17/190/工数null/QA051final・全HOLD/原本/二held工具は保持する。
