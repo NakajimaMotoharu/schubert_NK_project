@@ -1,0 +1,11 @@
+# MonitorWindow・Clock・Poller 原24 単体テスト仕様書
+
+2026-10-28 / PG-D761 / BUG2006-YKT1754 / 親F03・原owner/cost P018-09を実registryで確認する。開始3/7/10pp・cap10・新Test ID/個別受入増分0。原source0124/save d8ceb9b93、Current/原本DBBackup/鍵/native/stash七/失敗成功/保留二工具を保持する。source差分はWindowTest007の同pool TWR外囲み（元finally shutdownNow/await10秒保持）とPollerTestのprivate AT→BASE_INSTANT二tokenだけ、全Main/他Test/全golden/Method不変更。逆全token/負例/指定formatterを先行する。
+
+PT_DEFAULT。対象Main=ContinuousConditionWindow/MonitoringObservationClock/MonitoringPoller、必要pure Main=ObservationContext/AlertThresholds/AlertLifecycle/FilesystemHealthObservation/FilesystemHealthMonitor/TimedFilesystemMonitor/HealthUsageRatio、計十全文確認。三選択whole Test=Window八/Clock八/Poller八、計763行全文、Clock008が使用するFilesystemHealthObservationTestも全source/initializer/FixtureStore body確認。support Testの元十methodは選択起動しない。FileStoreは全virtual methodを手書stubでoverrideし、2統計以外はthrow、実path/identity/属性/FS/VM/DB/JMS/HTTP/FFM/native/鍵/権限操作0。Clockは固定Instant/AtomicLong/FixtureClock、実system clockの変更/借用source権限取得をしない。
+
+Window MONWINDOW001..008：初回/同一時刻/299.999999999秒と300秒、NORMAL/UNKNOWN/明示gap、null/負/逆行は状態不変、最大Duration/1ns/1分、四worker64同時点、80/90%独立warning5分-critical1分への接続。Clock OBSCLOCK001..008：UTC rollbackと2/2000ns独立値、負origin/long wrap5ns、最大epoch/overflow分離、逆行時UTC未読、null/Runtime/Error同一例外・未commit、snapshot immutable、八worker1..64ns/65tick-64UTC読、FileStore fakeのCRITICAL時刻/回復はgap後600秒。Poll POLL001..008：17/23固定結果・呼出回数、unchecked identity/一回gap、逆行拒否/同一時刻、clock故障無action、null境界不変、null結果非commit、八worker非atomic actionを1..64へserialize、action/clock両APIのgap一回消費。
+
+期待値は手書SS351差分/境界/severity/独立HashSet{1..64}/固定呼出回数、productionによるexpected生成なし。各Test IDの元入力/事前条件/assertは全token逆で保持、fixture改変時の負例を追加する。TWR/get局所無期限とinvokeAll/await10秒又は外JVM240秒を区別し、未注入のfixture割込/全schedule/SDK暗黙故障は保証しない。
+
+PG12844plan→新source固定/12846六normal（PT0）→12848原24三suite/単一exec→12850原三Main＋三Test PMD-CS/六SB→12852独立全XML/input/CRC/全Main1843/全Test1962差/十Main＋四Test-source classload/完全六artifactcounter/対象三Mainの全method→12854/56同期/unchecked catch/nullable原ref/Thread文脈と独立反例→12858/59元983owner/12860/62集合/12864完成。通常PTであり拒否/HOLDを探るtrialや部分抽出ではない。結果2387へsource/run/日時/OS-JDK/tool/command/exit/期待実際/coverage/BUG/hashを記録、未達やskipを合格に補完せず全F03/451/正式とは分離、通常小群/commitでは停止しない。

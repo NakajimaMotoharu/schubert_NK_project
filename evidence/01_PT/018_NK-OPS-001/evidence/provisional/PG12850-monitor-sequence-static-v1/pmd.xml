@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pmd xmlns="http://pmd.sourceforge.net/report/2.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pmd.sourceforge.net/report/2.0.0 https://pmd.github.io/schema/report_2_0_0.xsd" version="7.28.0" timestamp="2026-10-28T10:14:57.457">
+<file name="/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/ContinuousConditionWindow.java">
+<violation beginline="27" endline="27" begincolumn="5" endcolumn="17" rule="AvoidSynchronizedStatement" ruleset="Multithreading" package="dev.codex.schubert.nk.batch.monitoring" class="ContinuousConditionWindow" method="observe" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#avoidsynchronizedstatement" priority="3">
+Use ReentrantLock rather than synchronization
+</violation>
+<violation beginline="32" endline="32" begincolumn="26" endcolumn="30" rule="NullAssignment" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.monitoring" class="ContinuousConditionWindow" method="observe" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#nullassignment" priority="3">
+Assigning an Object to null is a code smell.  Consider refactoring.
+</violation>
+</file>
+<file name="/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/MonitoringObservationClock.java">
+<violation beginline="31" endline="31" begincolumn="5" endcolumn="17" rule="AvoidSynchronizedStatement" ruleset="Multithreading" package="dev.codex.schubert.nk.batch.monitoring" class="MonitoringObservationClock" method="context" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#avoidsynchronizedstatement" priority="3">
+Use ReentrantLock rather than synchronization
+</violation>
+</file>
+<file name="/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/MonitoringPoller.java">
+<violation beginline="21" endline="21" begincolumn="5" endcolumn="17" rule="AvoidSynchronizedStatement" ruleset="Multithreading" package="dev.codex.schubert.nk.batch.monitoring" class="MonitoringPoller" method="observe" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#avoidsynchronizedstatement" priority="3">
+Use ReentrantLock rather than synchronization
+</violation>
+<violation beginline="34" endline="34" begincolumn="5" endcolumn="17" rule="AvoidSynchronizedStatement" ruleset="Multithreading" package="dev.codex.schubert.nk.batch.monitoring" class="MonitoringPoller" method="observeNow" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#avoidsynchronizedstatement" priority="3">
+Use ReentrantLock rather than synchronization
+</violation>
+<violation beginline="38" endline="38" begincolumn="16" endcolumn="32" rule="AvoidCatchingGenericException" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.monitoring" class="MonitoringPoller" method="observeNow" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidcatchinggenericexception" priority="3">
+Avoid catching RuntimeException in try-catch block
+</violation>
+<violation beginline="38" endline="38" begincolumn="35" endcolumn="40" rule="AvoidCatchingGenericException" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.monitoring" class="MonitoringPoller" method="observeNow" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidcatchinggenericexception" priority="3">
+Avoid catching Error in try-catch block
+</violation>
+<violation beginline="59" endline="59" begincolumn="14" endcolumn="30" rule="AvoidCatchingGenericException" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.monitoring" class="MonitoringPoller" method="observeLocked" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidcatchinggenericexception" priority="3">
+Avoid catching RuntimeException in try-catch block
+</violation>
+<violation beginline="59" endline="59" begincolumn="33" endcolumn="38" rule="AvoidCatchingGenericException" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.monitoring" class="MonitoringPoller" method="observeLocked" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidcatchinggenericexception" priority="3">
+Avoid catching Error in try-catch block
+</violation>
+</file>
+<file name="/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/ContinuousConditionWindowTest.java">
+<violation beginline="132" endline="132" begincolumn="25" endcolumn="56" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.batch.monitoring" class="ContinuousConditionWindowTest" method="monWindow007ConcurrentSamePointHasOneOrigin" variable="executor" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="138" endline="138" begincolumn="27" endcolumn="74" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.batch.monitoring" class="ContinuousConditionWindowTest" method="monWindow007ConcurrentSamePointHasOneOrigin" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="144" endline="144" begincolumn="9" endcolumn="31" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.batch.monitoring" class="ContinuousConditionWindowTest" method="monWindow007ConcurrentSamePointHasOneOrigin" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="145" endline="145" begincolumn="20" endcolumn="67" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.batch.monitoring" class="ContinuousConditionWindowTest" method="monWindow007ConcurrentSamePointHasOneOrigin" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+</file>
+<file name="/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/MonitoringObservationClockTest.java">
+<violation beginline="212" endline="212" begincolumn="21" endcolumn="52" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.batch.monitoring" class="MonitoringObservationClockTest" method="obsClock007ConcurrentContextsHaveUniqueMonotonicSnapshots" variable="pool" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="218" endline="218" begincolumn="25" endcolumn="45" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.batch.monitoring" class="MonitoringObservationClockTest" method="obsClock007ConcurrentContextsHaveUniqueMonotonicSnapshots" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+</file>
+<file name="/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/MonitoringPollerTest.java">
+<violation beginline="203" endline="203" begincolumn="21" endcolumn="52" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.batch.monitoring" class="MonitoringPollerTest" method="poll007ParallelNonAtomicActionsAreSerializedIntoOneToSixtyFour" variable="pool" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="209" endline="209" begincolumn="25" endcolumn="45" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.batch.monitoring" class="MonitoringPollerTest" method="poll007ParallelNonAtomicActionsAreSerializedIntoOneToSixtyFour" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+</file>
+</pmd>

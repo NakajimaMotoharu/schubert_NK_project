@@ -1,0 +1,1121 @@
+{
+  "rows": [
+    {
+      "attributes": {
+        "begincolumn": "5",
+        "beginline": "27",
+        "class": "ContinuousConditionWindow",
+        "endcolumn": "17",
+        "endline": "27",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#avoidsynchronizedstatement",
+        "method": "observe",
+        "package": "dev.codex.schubert.nk.batch.monitoring",
+        "priority": "3",
+        "rule": "AvoidSynchronizedStatement",
+        "ruleset": "Multithreading"
+      },
+      "controls": [
+        "synchronized(lock)",
+        "previous=elapsed",
+        "if(state!=State.VIOLATING){violationStart=null;",
+        "if(!consecutive||violationStart==null)violationStart=elapsed",
+        "elapsed.minus(violationStart)"
+      ],
+      "currentCases": [
+        {
+          "className": "dev.codex.schubert.nk.batch.monitoring.ContinuousConditionWindowTest",
+          "method": "monWindow001FirstContinuousAndSameTimestampBoundaries",
+          "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/ContinuousConditionWindowTest.java",
+          "sourceSha256": "3ff6279428c41c81db795a689c3dea66bbe9372f4014dff0ffb7e18568ece92c"
+        },
+        {
+          "className": "dev.codex.schubert.nk.batch.monitoring.ContinuousConditionWindowTest",
+          "method": "monWindow002NormalBreaksViolationHistory",
+          "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/ContinuousConditionWindowTest.java",
+          "sourceSha256": "3ff6279428c41c81db795a689c3dea66bbe9372f4014dff0ffb7e18568ece92c"
+        },
+        {
+          "className": "dev.codex.schubert.nk.batch.monitoring.ContinuousConditionWindowTest",
+          "method": "monWindow003UnknownIsAbsentAndBreaksHistory",
+          "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/ContinuousConditionWindowTest.java",
+          "sourceSha256": "3ff6279428c41c81db795a689c3dea66bbe9372f4014dff0ffb7e18568ece92c"
+        },
+        {
+          "className": "dev.codex.schubert.nk.batch.monitoring.ContinuousConditionWindowTest",
+          "method": "monWindow004ExplicitGapNeverBridgesOldPeriod",
+          "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/ContinuousConditionWindowTest.java",
+          "sourceSha256": "3ff6279428c41c81db795a689c3dea66bbe9372f4014dff0ffb7e18568ece92c"
+        },
+        {
+          "className": "dev.codex.schubert.nk.batch.monitoring.ContinuousConditionWindowTest",
+          "method": "monWindow005RejectedSequenceLeavesStateUnchanged",
+          "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/ContinuousConditionWindowTest.java",
+          "sourceSha256": "3ff6279428c41c81db795a689c3dea66bbe9372f4014dff0ffb7e18568ece92c"
+        },
+        {
+          "className": "dev.codex.schubert.nk.batch.monitoring.ContinuousConditionWindowTest",
+          "method": "monWindow006WholeNonnegativeDurationDomain",
+          "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/ContinuousConditionWindowTest.java",
+          "sourceSha256": "3ff6279428c41c81db795a689c3dea66bbe9372f4014dff0ffb7e18568ece92c"
+        },
+        {
+          "className": "dev.codex.schubert.nk.batch.monitoring.ContinuousConditionWindowTest",
+          "method": "monWindow007ConcurrentSamePointHasOneOrigin",
+          "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/ContinuousConditionWindowTest.java",
+          "sourceSha256": "3ff6279428c41c81db795a689c3dea66bbe9372f4014dff0ffb7e18568ece92c"
+        },
+        {
+          "className": "dev.codex.schubert.nk.batch.monitoring.ContinuousConditionWindowTest",
+          "method": "monWindow008SeparateThresholdPeriodsConnectWithoutActualObservations",
+          "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/ContinuousConditionWindowTest.java",
+          "sourceSha256": "3ff6279428c41c81db795a689c3dea66bbe9372f4014dff0ffb7e18568ece92c"
+        }
+      ],
+      "currentWholeJoinPending": true,
+      "disposition": "CONTEXT_NOT_APPLICABLE",
+      "id": "PMD-02959",
+      "kind": "PRIVATE_FINAL_ONE_OWNER_OBSERVATION_SEQUENCE_MONITOR",
+      "newAccepted": 0,
+      "oldRuntimeReassigned": false,
+      "originalRowSha256": "a59a6d5656da5faeba39de46927ea48c4afa9208bcae085d87078dcb69950c56",
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/ContinuousConditionWindow.java",
+      "productTestsExecutedByReview": 0,
+      "reason": "411 section9 requires private-final state lock, not public this/class monitor. Window protects previous/start as one transition; clock captures supplied ticks/UTC and commits only after valid context; poller serializes supplied time/input/action with gap/commit state. ReentrantLock suggestion is not a project requirement. Internal order is poller->clock then observation/window/lifecycle, no reverse calls in reviewed pure closure. Callback duration, actual collectors/stop authority are outer responsibilities, not a locally bounded-runtime claim. Finite standalone serialization tests validate this source only.",
+      "rule": "AvoidSynchronizedStatement",
+      "scopeKind": "METHOD",
+      "scopeName": "observe",
+      "scopeTokenSha256": "a9d3b2055f9a953707e15f3b180d360e981171decafc2c78670476ee2d47f15c",
+      "source": "f8ad1ae16aa52db0119fefbad9e2cea6d6affe55",
+      "sourceSha256": "89b651524b151fc772903dfd4a29bfa8bc41eb6984c9ca646d555363bba614ca",
+      "sourceSpanSha256": "c666a36176076433b56d77b2fc43ea0a3e66f65e1c74d0b769997a0295b6300f"
+    },
+    {
+      "attributes": {
+        "begincolumn": "26",
+        "beginline": "32",
+        "class": "ContinuousConditionWindow",
+        "endcolumn": "30",
+        "endline": "32",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#nullassignment",
+        "method": "observe",
+        "package": "dev.codex.schubert.nk.batch.monitoring",
+        "priority": "3",
+        "rule": "NullAssignment",
+        "ruleset": "Error Prone"
+      },
+      "controls": [
+        "synchronized(lock)",
+        "previous=elapsed",
+        "if(state!=State.VIOLATING){violationStart=null;",
+        "if(!consecutive||violationStart==null)violationStart=elapsed",
+        "elapsed.minus(violationStart)"
+      ],
+      "currentCases": [
+        {
+          "className": "dev.codex.schubert.nk.batch.monitoring.ContinuousConditionWindowTest",
+          "method": "monWindow001FirstContinuousAndSameTimestampBoundaries",
+          "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/ContinuousConditionWindowTest.java",
+          "sourceSha256": "3ff6279428c41c81db795a689c3dea66bbe9372f4014dff0ffb7e18568ece92c"
+        },
+        {
+          "className": "dev.codex.schubert.nk.batch.monitoring.ContinuousConditionWindowTest",
+          "method": "monWindow002NormalBreaksViolationHistory",
+          "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/ContinuousConditionWindowTest.java",
+          "sourceSha256": "3ff6279428c41c81db795a689c3dea66bbe9372f4014dff0ffb7e18568ece92c"
+        },
+        {
+          "className": "dev.codex.schubert.nk.batch.monitoring.ContinuousConditionWindowTest",
+          "method": "monWindow003UnknownIsAbsentAndBreaksHistory",
+          "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/ContinuousConditionWindowTest.java",
+          "sourceSha256": "3ff6279428c41c81db795a689c3dea66bbe9372f4014dff0ffb7e18568ece92c"
+        },
+        {
+          "className": "dev.codex.schubert.nk.batch.monitoring.ContinuousConditionWindowTest",
+          "method": "monWindow004ExplicitGapNeverBridgesOldPeriod",
+          "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/ContinuousConditionWindowTest.java",
+          "sourceSha256": "3ff6279428c41c81db795a689c3dea66bbe9372f4014dff0ffb7e18568ece92c"
+        },
+        {
+          "className": "dev.codex.schubert.nk.batch.monitoring.ContinuousConditionWindowTest",
+          "method": "monWindow005RejectedSequenceLeavesStateUnchanged",
+          "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/ContinuousConditionWindowTest.java",
+          "sourceSha256": "3ff6279428c41c81db795a689c3dea66bbe9372f4014dff0ffb7e18568ece92c"
+        },
+        {
+          "className": "dev.codex.schubert.nk.batch.monitoring.ContinuousConditionWindowTest",
+          "method": "monWindow006WholeNonnegativeDurationDomain",
+          "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/ContinuousConditionWindowTest.java",
+          "sourceSha256": "3ff6279428c41c81db795a689c3dea66bbe9372f4014dff0ffb7e18568ece92c"
+        },
+        {
+          "className": "dev.codex.schubert.nk.batch.monitoring.ContinuousConditionWindowTest",
+          "method": "monWindow007ConcurrentSamePointHasOneOrigin",
+          "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/ContinuousConditionWindowTest.java",
+          "sourceSha256": "3ff6279428c41c81db795a689c3dea66bbe9372f4014dff0ffb7e18568ece92c"
+        },
+        {
+          "className": "dev.codex.schubert.nk.batch.monitoring.ContinuousConditionWindowTest",
+          "method": "monWindow008SeparateThresholdPeriodsConnectWithoutActualObservations",
+          "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/ContinuousConditionWindowTest.java",
+          "sourceSha256": "3ff6279428c41c81db795a689c3dea66bbe9372f4014dff0ffb7e18568ece92c"
+        }
+      ],
+      "currentWholeJoinPending": true,
+      "disposition": "CONTEXT_NOT_APPLICABLE",
+      "id": "PMD-02960",
+      "kind": "EXPLICIT_NULLABLE_RESET_SENTINEL_NOT_HIDDEN_NPE",
+      "newAccepted": 0,
+      "oldRuntimeReassigned": false,
+      "originalRowSha256": "1b318e957aab8851d53e27276cc5b602aecfb1b562822c249cc9576a150a8981",
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/ContinuousConditionWindow.java",
+      "productTestsExecutedByReview": 0,
+      "reason": "Explicit @Nullable private period sentinel is cleared only for NORMAL/UNKNOWN under same lock; next violation reestablishes elapsed when null before subtraction. Independent rejected-input/state/gap vectors plus normal NullAway checks apply. This is not a null boundary contract relaxation or caught NPE treated as success; prior nullable review is source-rebound only.",
+      "rule": "NullAssignment",
+      "scopeKind": "METHOD",
+      "scopeName": "observe",
+      "scopeTokenSha256": "a9d3b2055f9a953707e15f3b180d360e981171decafc2c78670476ee2d47f15c",
+      "source": "f8ad1ae16aa52db0119fefbad9e2cea6d6affe55",
+      "sourceSha256": "89b651524b151fc772903dfd4a29bfa8bc41eb6984c9ca646d555363bba614ca",
+      "sourceSpanSha256": "88561e211e862344bd3cc71c03f8ab25d8a79b9bdbaa1e083af7e0603f30f689"
+    },
+    {
+      "attributes": {
+        "begincolumn": "5",
+        "beginline": "31",
+        "class": "MonitoringObservationClock",
+        "endcolumn": "17",
+        "endline": "31",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#avoidsynchronizedstatement",
+        "method": "context",
+        "package": "dev.codex.schubert.nk.batch.monitoring",
+        "priority": "3",
+        "rule": "AvoidSynchronizedStatement",
+        "ruleset": "Multithreading"
+      },
+      "controls": [
+        "synchronized(lock)",
+        "longnow=ticks.getAsLong()",
+        "if(now-last<0||elapsed<0)",
+        "Objects.requireNonNull(utc.instant(),\"observation instant\")",
+        "newObservationContext(clearance,at,Duration.ofNanos(elapsed))",
+        "last=now"
+      ],
+      "currentCases": [
+        {
+          "className": "dev.codex.schubert.nk.batch.monitoring.MonitoringObservationClockTest",
+          "method": "obsClock001IndependentNanosAndActualUtcAreNotRebasedOrClamped",
+          "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/MonitoringObservationClockTest.java",
+          "sourceSha256": "4612f486d88e111f2927330c0d227b00395d60e51993351896ab510cf6496e9d"
+        },
+        {
+          "className": "dev.codex.schubert.nk.batch.monitoring.MonitoringObservationClockTest",
+          "method": "obsClock002SignedOriginAndRegularLongWrapHaveFiveNanos",
+          "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/MonitoringObservationClockTest.java",
+          "sourceSha256": "4612f486d88e111f2927330c0d227b00395d60e51993351896ab510cf6496e9d"
+        },
+        {
+          "className": "dev.codex.schubert.nk.batch.monitoring.MonitoringObservationClockTest",
+          "method": "obsClock003EpochMaximumAndOverflowHaveExplicitDifferentOutcomes",
+          "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/MonitoringObservationClockTest.java",
+          "sourceSha256": "4612f486d88e111f2927330c0d227b00395d60e51993351896ab510cf6496e9d"
+        },
+        {
+          "className": "dev.codex.schubert.nk.batch.monitoring.MonitoringObservationClockTest",
+          "method": "obsClock004BackwardsTickDoesNotReadUtcCommitOrResetTheEpoch",
+          "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/MonitoringObservationClockTest.java",
+          "sourceSha256": "4612f486d88e111f2927330c0d227b00395d60e51993351896ab510cf6496e9d"
+        },
+        {
+          "className": "dev.codex.schubert.nk.batch.monitoring.MonitoringObservationClockTest",
+          "method": "obsClock005SourceFailuresRemainUnformattedAndDoNotCommitFailedContexts",
+          "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/MonitoringObservationClockTest.java",
+          "sourceSha256": "4612f486d88e111f2927330c0d227b00395d60e51993351896ab510cf6496e9d"
+        },
+        {
+          "className": "dev.codex.schubert.nk.batch.monitoring.MonitoringObservationClockTest",
+          "method": "obsClock006NullContractsDoNotTouchProvidersAndSnapshotsStayImmutable",
+          "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/MonitoringObservationClockTest.java",
+          "sourceSha256": "4612f486d88e111f2927330c0d227b00395d60e51993351896ab510cf6496e9d"
+        },
+        {
+          "className": "dev.codex.schubert.nk.batch.monitoring.MonitoringObservationClockTest",
+          "method": "obsClock007ConcurrentContextsHaveUniqueMonotonicSnapshots",
+          "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/MonitoringObservationClockTest.java",
+          "sourceSha256": "4612f486d88e111f2927330c0d227b00395d60e51993351896ab510cf6496e9d"
+        },
+        {
+          "className": "dev.codex.schubert.nk.batch.monitoring.MonitoringObservationClockTest",
+          "method": "obsClock008HealthConnectionBreaksClockAndUncheckedInputGapsAcrossBothApis",
+          "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/MonitoringObservationClockTest.java",
+          "sourceSha256": "4612f486d88e111f2927330c0d227b00395d60e51993351896ab510cf6496e9d"
+        }
+      ],
+      "currentWholeJoinPending": true,
+      "disposition": "CONTEXT_NOT_APPLICABLE",
+      "id": "PMD-02967",
+      "kind": "PRIVATE_FINAL_ONE_OWNER_OBSERVATION_SEQUENCE_MONITOR",
+      "newAccepted": 0,
+      "oldRuntimeReassigned": false,
+      "originalRowSha256": "5a311fcc084c87c2dc254a785d6147a583b08567cd32bd20cdf8981b6104f053",
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/MonitoringObservationClock.java",
+      "productTestsExecutedByReview": 0,
+      "reason": "411 section9 requires private-final state lock, not public this/class monitor. Window protects previous/start as one transition; clock captures supplied ticks/UTC and commits only after valid context; poller serializes supplied time/input/action with gap/commit state. ReentrantLock suggestion is not a project requirement. Internal order is poller->clock then observation/window/lifecycle, no reverse calls in reviewed pure closure. Callback duration, actual collectors/stop authority are outer responsibilities, not a locally bounded-runtime claim. Finite standalone serialization tests validate this source only.",
+      "rule": "AvoidSynchronizedStatement",
+      "scopeKind": "METHOD",
+      "scopeName": "context",
+      "scopeTokenSha256": "24c9f74dca1cf8888d77a2780a352888a51a3891902a05e4379ebade15168b55",
+      "source": "f8ad1ae16aa52db0119fefbad9e2cea6d6affe55",
+      "sourceSha256": "698e7630ddfbd10e195c4c1c31d767818494bb53d592595e23a8dc1eae7fd95f",
+      "sourceSpanSha256": "c666a36176076433b56d77b2fc43ea0a3e66f65e1c74d0b769997a0295b6300f"
+    },
+    {
+      "attributes": {
+        "begincolumn": "5",
+        "beginline": "21",
+        "class": "MonitoringPoller",
+        "endcolumn": "17",
+        "endline": "21",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#avoidsynchronizedstatement",
+        "method": "observe",
+        "package": "dev.codex.schubert.nk.batch.monitoring",
+        "priority": "3",
+        "rule": "AvoidSynchronizedStatement",
+        "ruleset": "Multithreading"
+      },
+      "controls": [
+        "synchronized(lock){returnobserveLocked(consecutive,context,action);}"
+      ],
+      "currentCases": [
+        {
+          "className": "dev.codex.schubert.nk.batch.monitoring.MonitoringPollerTest",
+          "method": "poll001NormalFlagsContextAndResultHaveNoRetries",
+          "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/MonitoringPollerTest.java",
+          "sourceSha256": "8172e31aad995283e0a443399a5e75f419d22a5b69e0f8579161aaddd3b7ca01"
+        },
+        {
+          "className": "dev.codex.schubert.nk.batch.monitoring.MonitoringPollerTest",
+          "method": "poll002EveryUncheckedFailureRemainsIdenticalAndCutsNextContinuity",
+          "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/MonitoringPollerTest.java",
+          "sourceSha256": "8172e31aad995283e0a443399a5e75f419d22a5b69e0f8579161aaddd3b7ca01"
+        },
+        {
+          "className": "dev.codex.schubert.nk.batch.monitoring.MonitoringPollerTest",
+          "method": "poll003BackwardsContextIsRejectedBeforeActionAndDoesNotInventGap",
+          "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/MonitoringPollerTest.java",
+          "sourceSha256": "8172e31aad995283e0a443399a5e75f419d22a5b69e0f8579161aaddd3b7ca01"
+        },
+        {
+          "className": "dev.codex.schubert.nk.batch.monitoring.MonitoringPollerTest",
+          "method": "poll004ClockFailureHasNoActionAndCrossApiGapIsConsumed",
+          "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/MonitoringPollerTest.java",
+          "sourceSha256": "8172e31aad995283e0a443399a5e75f419d22a5b69e0f8579161aaddd3b7ca01"
+        },
+        {
+          "className": "dev.codex.schubert.nk.batch.monitoring.MonitoringPollerTest",
+          "method": "poll005NullBoundariesDoNotCallOrChangeContinuity",
+          "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/MonitoringPollerTest.java",
+          "sourceSha256": "8172e31aad995283e0a443399a5e75f419d22a5b69e0f8579161aaddd3b7ca01"
+        },
+        {
+          "className": "dev.codex.schubert.nk.batch.monitoring.MonitoringPollerTest",
+          "method": "poll006NullResultIsFailureAndDoesNotCommitLaterEpoch",
+          "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/MonitoringPollerTest.java",
+          "sourceSha256": "8172e31aad995283e0a443399a5e75f419d22a5b69e0f8579161aaddd3b7ca01"
+        },
+        {
+          "className": "dev.codex.schubert.nk.batch.monitoring.MonitoringPollerTest",
+          "method": "poll007ParallelNonAtomicActionsAreSerializedIntoOneToSixtyFour",
+          "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/MonitoringPollerTest.java",
+          "sourceSha256": "8172e31aad995283e0a443399a5e75f419d22a5b69e0f8579161aaddd3b7ca01"
+        },
+        {
+          "className": "dev.codex.schubert.nk.batch.monitoring.MonitoringPollerTest",
+          "method": "poll008ActionFailureThenClockPathRecoversAfterOneGapOnly",
+          "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/MonitoringPollerTest.java",
+          "sourceSha256": "8172e31aad995283e0a443399a5e75f419d22a5b69e0f8579161aaddd3b7ca01"
+        }
+      ],
+      "currentWholeJoinPending": true,
+      "disposition": "CONTEXT_NOT_APPLICABLE",
+      "id": "PMD-02968",
+      "kind": "PRIVATE_FINAL_ONE_OWNER_OBSERVATION_SEQUENCE_MONITOR",
+      "newAccepted": 0,
+      "oldRuntimeReassigned": false,
+      "originalRowSha256": "b1418f2b73b1275ad101b11c92b8891f1f8fdaaceeb135fbfc598a0886977ed1",
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/MonitoringPoller.java",
+      "productTestsExecutedByReview": 0,
+      "reason": "411 section9 requires private-final state lock, not public this/class monitor. Window protects previous/start as one transition; clock captures supplied ticks/UTC and commits only after valid context; poller serializes supplied time/input/action with gap/commit state. ReentrantLock suggestion is not a project requirement. Internal order is poller->clock then observation/window/lifecycle, no reverse calls in reviewed pure closure. Callback duration, actual collectors/stop authority are outer responsibilities, not a locally bounded-runtime claim. Finite standalone serialization tests validate this source only.",
+      "rule": "AvoidSynchronizedStatement",
+      "scopeKind": "METHOD",
+      "scopeName": "observe",
+      "scopeTokenSha256": "4b6d50fe97dbb24975baf9efdd36504141a8d78666c386819d5df45ba594fa7a",
+      "source": "f8ad1ae16aa52db0119fefbad9e2cea6d6affe55",
+      "sourceSha256": "74da16e79b84ad392e13f7fdcd84b3fdc79f56c682ef859dd23eda5a0d671d6f",
+      "sourceSpanSha256": "c666a36176076433b56d77b2fc43ea0a3e66f65e1c74d0b769997a0295b6300f"
+    },
+    {
+      "attributes": {
+        "begincolumn": "5",
+        "beginline": "34",
+        "class": "MonitoringPoller",
+        "endcolumn": "17",
+        "endline": "34",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#avoidsynchronizedstatement",
+        "method": "observeNow",
+        "package": "dev.codex.schubert.nk.batch.monitoring",
+        "priority": "3",
+        "rule": "AvoidSynchronizedStatement",
+        "ruleset": "Multithreading"
+      },
+      "controls": [
+        "synchronized(lock)",
+        "context=clock.context(clearance)",
+        "catch(RuntimeException|ErrorunavailableClock){interrupted=true;throwunavailableClock;}",
+        "returnobserveLocked(consecutive,context,action)"
+      ],
+      "currentCases": [
+        {
+          "className": "dev.codex.schubert.nk.batch.monitoring.MonitoringObservationClockTest",
+          "method": "obsClock008HealthConnectionBreaksClockAndUncheckedInputGapsAcrossBothApis",
+          "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/MonitoringObservationClockTest.java",
+          "sourceSha256": "4612f486d88e111f2927330c0d227b00395d60e51993351896ab510cf6496e9d"
+        },
+        {
+          "className": "dev.codex.schubert.nk.batch.monitoring.MonitoringPollerTest",
+          "method": "poll004ClockFailureHasNoActionAndCrossApiGapIsConsumed",
+          "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/MonitoringPollerTest.java",
+          "sourceSha256": "8172e31aad995283e0a443399a5e75f419d22a5b69e0f8579161aaddd3b7ca01"
+        },
+        {
+          "className": "dev.codex.schubert.nk.batch.monitoring.MonitoringPollerTest",
+          "method": "poll005NullBoundariesDoNotCallOrChangeContinuity",
+          "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/MonitoringPollerTest.java",
+          "sourceSha256": "8172e31aad995283e0a443399a5e75f419d22a5b69e0f8579161aaddd3b7ca01"
+        },
+        {
+          "className": "dev.codex.schubert.nk.batch.monitoring.MonitoringPollerTest",
+          "method": "poll008ActionFailureThenClockPathRecoversAfterOneGapOnly",
+          "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/MonitoringPollerTest.java",
+          "sourceSha256": "8172e31aad995283e0a443399a5e75f419d22a5b69e0f8579161aaddd3b7ca01"
+        }
+      ],
+      "currentWholeJoinPending": true,
+      "disposition": "CONTEXT_NOT_APPLICABLE",
+      "id": "PMD-02969",
+      "kind": "PRIVATE_FINAL_ONE_OWNER_OBSERVATION_SEQUENCE_MONITOR",
+      "newAccepted": 0,
+      "oldRuntimeReassigned": false,
+      "originalRowSha256": "a4e7df6164a601c15ab5bd90ce7c4f2aaab22a6ff6df1e23392ead42c40ef16d",
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/MonitoringPoller.java",
+      "productTestsExecutedByReview": 0,
+      "reason": "411 section9 requires private-final state lock, not public this/class monitor. Window protects previous/start as one transition; clock captures supplied ticks/UTC and commits only after valid context; poller serializes supplied time/input/action with gap/commit state. ReentrantLock suggestion is not a project requirement. Internal order is poller->clock then observation/window/lifecycle, no reverse calls in reviewed pure closure. Callback duration, actual collectors/stop authority are outer responsibilities, not a locally bounded-runtime claim. Finite standalone serialization tests validate this source only.",
+      "rule": "AvoidSynchronizedStatement",
+      "scopeKind": "METHOD",
+      "scopeName": "observeNow",
+      "scopeTokenSha256": "ed0c8982dbe907fde93309e453f3ebef951a0feace913ab3d1c5f51197e21266",
+      "source": "f8ad1ae16aa52db0119fefbad9e2cea6d6affe55",
+      "sourceSha256": "74da16e79b84ad392e13f7fdcd84b3fdc79f56c682ef859dd23eda5a0d671d6f",
+      "sourceSpanSha256": "c666a36176076433b56d77b2fc43ea0a3e66f65e1c74d0b769997a0295b6300f"
+    },
+    {
+      "attributes": {
+        "begincolumn": "16",
+        "beginline": "38",
+        "class": "MonitoringPoller",
+        "endcolumn": "32",
+        "endline": "38",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidcatchinggenericexception",
+        "method": "observeNow",
+        "package": "dev.codex.schubert.nk.batch.monitoring",
+        "priority": "3",
+        "rule": "AvoidCatchingGenericException",
+        "ruleset": "Error Prone"
+      },
+      "controls": [
+        "synchronized(lock)",
+        "context=clock.context(clearance)",
+        "catch(RuntimeException|ErrorunavailableClock){interrupted=true;throwunavailableClock;}",
+        "returnobserveLocked(consecutive,context,action)"
+      ],
+      "currentCases": [
+        {
+          "className": "dev.codex.schubert.nk.batch.monitoring.MonitoringObservationClockTest",
+          "method": "obsClock008HealthConnectionBreaksClockAndUncheckedInputGapsAcrossBothApis",
+          "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/MonitoringObservationClockTest.java",
+          "sourceSha256": "4612f486d88e111f2927330c0d227b00395d60e51993351896ab510cf6496e9d"
+        },
+        {
+          "className": "dev.codex.schubert.nk.batch.monitoring.MonitoringPollerTest",
+          "method": "poll004ClockFailureHasNoActionAndCrossApiGapIsConsumed",
+          "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/MonitoringPollerTest.java",
+          "sourceSha256": "8172e31aad995283e0a443399a5e75f419d22a5b69e0f8579161aaddd3b7ca01"
+        },
+        {
+          "className": "dev.codex.schubert.nk.batch.monitoring.MonitoringPollerTest",
+          "method": "poll005NullBoundariesDoNotCallOrChangeContinuity",
+          "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/MonitoringPollerTest.java",
+          "sourceSha256": "8172e31aad995283e0a443399a5e75f419d22a5b69e0f8579161aaddd3b7ca01"
+        },
+        {
+          "className": "dev.codex.schubert.nk.batch.monitoring.MonitoringPollerTest",
+          "method": "poll008ActionFailureThenClockPathRecoversAfterOneGapOnly",
+          "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/MonitoringPollerTest.java",
+          "sourceSha256": "8172e31aad995283e0a443399a5e75f419d22a5b69e0f8579161aaddd3b7ca01"
+        }
+      ],
+      "currentWholeJoinPending": true,
+      "disposition": "CONTEXT_NOT_APPLICABLE",
+      "id": "PMD-02970",
+      "kind": "IDENTITY_RETHROW_AFTER_MARKING_ONE_CONTINUITY_GAP",
+      "newAccepted": 0,
+      "oldRuntimeReassigned": false,
+      "originalRowSha256": "32f31476c5eb462ee619315704d0df38ae5a9f194a51a2f319b19f3cb67b12da",
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/MonitoringPoller.java",
+      "productTestsExecutedByReview": 0,
+      "reason": "Private one-owner poll must mark any unchecked provider/action failure as interrupted then rethrow the identical RuntimeException/Error; no retry, swallowing, formatting, compensation or normal result. Null-result NPE also propagates and cannot commit later elapsed. Independent exception identity/no-call/next-gap tests cover intended source contract; no actual external failure recovery or all implicit JVM errors inferred.",
+      "rule": "AvoidCatchingGenericException",
+      "scopeKind": "METHOD",
+      "scopeName": "observeNow",
+      "scopeTokenSha256": "ed0c8982dbe907fde93309e453f3ebef951a0feace913ab3d1c5f51197e21266",
+      "source": "f8ad1ae16aa52db0119fefbad9e2cea6d6affe55",
+      "sourceSha256": "74da16e79b84ad392e13f7fdcd84b3fdc79f56c682ef859dd23eda5a0d671d6f",
+      "sourceSpanSha256": "40500e644c96eda41bb25ed7e79f0c623328c9979b292e28f6f21d38739a51db"
+    },
+    {
+      "attributes": {
+        "begincolumn": "35",
+        "beginline": "38",
+        "class": "MonitoringPoller",
+        "endcolumn": "40",
+        "endline": "38",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidcatchinggenericexception",
+        "method": "observeNow",
+        "package": "dev.codex.schubert.nk.batch.monitoring",
+        "priority": "3",
+        "rule": "AvoidCatchingGenericException",
+        "ruleset": "Error Prone"
+      },
+      "controls": [
+        "synchronized(lock)",
+        "context=clock.context(clearance)",
+        "catch(RuntimeException|ErrorunavailableClock){interrupted=true;throwunavailableClock;}",
+        "returnobserveLocked(consecutive,context,action)"
+      ],
+      "currentCases": [
+        {
+          "className": "dev.codex.schubert.nk.batch.monitoring.MonitoringObservationClockTest",
+          "method": "obsClock008HealthConnectionBreaksClockAndUncheckedInputGapsAcrossBothApis",
+          "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/MonitoringObservationClockTest.java",
+          "sourceSha256": "4612f486d88e111f2927330c0d227b00395d60e51993351896ab510cf6496e9d"
+        },
+        {
+          "className": "dev.codex.schubert.nk.batch.monitoring.MonitoringPollerTest",
+          "method": "poll004ClockFailureHasNoActionAndCrossApiGapIsConsumed",
+          "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/MonitoringPollerTest.java",
+          "sourceSha256": "8172e31aad995283e0a443399a5e75f419d22a5b69e0f8579161aaddd3b7ca01"
+        },
+        {
+          "className": "dev.codex.schubert.nk.batch.monitoring.MonitoringPollerTest",
+          "method": "poll005NullBoundariesDoNotCallOrChangeContinuity",
+          "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/MonitoringPollerTest.java",
+          "sourceSha256": "8172e31aad995283e0a443399a5e75f419d22a5b69e0f8579161aaddd3b7ca01"
+        },
+        {
+          "className": "dev.codex.schubert.nk.batch.monitoring.MonitoringPollerTest",
+          "method": "poll008ActionFailureThenClockPathRecoversAfterOneGapOnly",
+          "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/MonitoringPollerTest.java",
+          "sourceSha256": "8172e31aad995283e0a443399a5e75f419d22a5b69e0f8579161aaddd3b7ca01"
+        }
+      ],
+      "currentWholeJoinPending": true,
+      "disposition": "CONTEXT_NOT_APPLICABLE",
+      "id": "PMD-02971",
+      "kind": "IDENTITY_RETHROW_AFTER_MARKING_ONE_CONTINUITY_GAP",
+      "newAccepted": 0,
+      "oldRuntimeReassigned": false,
+      "originalRowSha256": "36f0f9fd94d3f397cc4d8cfc0eb74f5dac77b61b5aa5d7f9d19c2af3f0c095b6",
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/MonitoringPoller.java",
+      "productTestsExecutedByReview": 0,
+      "reason": "Private one-owner poll must mark any unchecked provider/action failure as interrupted then rethrow the identical RuntimeException/Error; no retry, swallowing, formatting, compensation or normal result. Null-result NPE also propagates and cannot commit later elapsed. Independent exception identity/no-call/next-gap tests cover intended source contract; no actual external failure recovery or all implicit JVM errors inferred.",
+      "rule": "AvoidCatchingGenericException",
+      "scopeKind": "METHOD",
+      "scopeName": "observeNow",
+      "scopeTokenSha256": "ed0c8982dbe907fde93309e453f3ebef951a0feace913ab3d1c5f51197e21266",
+      "source": "f8ad1ae16aa52db0119fefbad9e2cea6d6affe55",
+      "sourceSha256": "74da16e79b84ad392e13f7fdcd84b3fdc79f56c682ef859dd23eda5a0d671d6f",
+      "sourceSpanSha256": "4a5f25a6c1e1bff74d31a570627ffb860f6943cad8044bfc9c6f33e09847a6e8"
+    },
+    {
+      "attributes": {
+        "begincolumn": "14",
+        "beginline": "59",
+        "class": "MonitoringPoller",
+        "endcolumn": "30",
+        "endline": "59",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidcatchinggenericexception",
+        "method": "observeLocked",
+        "package": "dev.codex.schubert.nk.batch.monitoring",
+        "priority": "3",
+        "rule": "AvoidCatchingGenericException",
+        "ruleset": "Error Prone"
+      },
+      "controls": [
+        "action.apply(consecutive&&!interrupted,context)",
+        "lastCompleted=Optional.of(context.elapsed())",
+        "interrupted=false",
+        "catch(RuntimeException|ErrorunavailableObservation){interrupted=true;throwunavailableObservation;}"
+      ],
+      "currentCases": [
+        {
+          "className": "dev.codex.schubert.nk.batch.monitoring.MonitoringPollerTest",
+          "method": "poll001NormalFlagsContextAndResultHaveNoRetries",
+          "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/MonitoringPollerTest.java",
+          "sourceSha256": "8172e31aad995283e0a443399a5e75f419d22a5b69e0f8579161aaddd3b7ca01"
+        },
+        {
+          "className": "dev.codex.schubert.nk.batch.monitoring.MonitoringPollerTest",
+          "method": "poll002EveryUncheckedFailureRemainsIdenticalAndCutsNextContinuity",
+          "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/MonitoringPollerTest.java",
+          "sourceSha256": "8172e31aad995283e0a443399a5e75f419d22a5b69e0f8579161aaddd3b7ca01"
+        },
+        {
+          "className": "dev.codex.schubert.nk.batch.monitoring.MonitoringPollerTest",
+          "method": "poll003BackwardsContextIsRejectedBeforeActionAndDoesNotInventGap",
+          "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/MonitoringPollerTest.java",
+          "sourceSha256": "8172e31aad995283e0a443399a5e75f419d22a5b69e0f8579161aaddd3b7ca01"
+        },
+        {
+          "className": "dev.codex.schubert.nk.batch.monitoring.MonitoringPollerTest",
+          "method": "poll004ClockFailureHasNoActionAndCrossApiGapIsConsumed",
+          "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/MonitoringPollerTest.java",
+          "sourceSha256": "8172e31aad995283e0a443399a5e75f419d22a5b69e0f8579161aaddd3b7ca01"
+        },
+        {
+          "className": "dev.codex.schubert.nk.batch.monitoring.MonitoringPollerTest",
+          "method": "poll005NullBoundariesDoNotCallOrChangeContinuity",
+          "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/MonitoringPollerTest.java",
+          "sourceSha256": "8172e31aad995283e0a443399a5e75f419d22a5b69e0f8579161aaddd3b7ca01"
+        },
+        {
+          "className": "dev.codex.schubert.nk.batch.monitoring.MonitoringPollerTest",
+          "method": "poll006NullResultIsFailureAndDoesNotCommitLaterEpoch",
+          "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/MonitoringPollerTest.java",
+          "sourceSha256": "8172e31aad995283e0a443399a5e75f419d22a5b69e0f8579161aaddd3b7ca01"
+        },
+        {
+          "className": "dev.codex.schubert.nk.batch.monitoring.MonitoringPollerTest",
+          "method": "poll007ParallelNonAtomicActionsAreSerializedIntoOneToSixtyFour",
+          "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/MonitoringPollerTest.java",
+          "sourceSha256": "8172e31aad995283e0a443399a5e75f419d22a5b69e0f8579161aaddd3b7ca01"
+        },
+        {
+          "className": "dev.codex.schubert.nk.batch.monitoring.MonitoringPollerTest",
+          "method": "poll008ActionFailureThenClockPathRecoversAfterOneGapOnly",
+          "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/MonitoringPollerTest.java",
+          "sourceSha256": "8172e31aad995283e0a443399a5e75f419d22a5b69e0f8579161aaddd3b7ca01"
+        }
+      ],
+      "currentWholeJoinPending": true,
+      "disposition": "CONTEXT_NOT_APPLICABLE",
+      "id": "PMD-02972",
+      "kind": "IDENTITY_RETHROW_AFTER_MARKING_ONE_CONTINUITY_GAP",
+      "newAccepted": 0,
+      "oldRuntimeReassigned": false,
+      "originalRowSha256": "6e03c919c0b7168efa4960f49a0e346173a6fab46a138f1a8dc1f237ee1529ae",
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/MonitoringPoller.java",
+      "productTestsExecutedByReview": 0,
+      "reason": "Private one-owner poll must mark any unchecked provider/action failure as interrupted then rethrow the identical RuntimeException/Error; no retry, swallowing, formatting, compensation or normal result. Null-result NPE also propagates and cannot commit later elapsed. Independent exception identity/no-call/next-gap tests cover intended source contract; no actual external failure recovery or all implicit JVM errors inferred.",
+      "rule": "AvoidCatchingGenericException",
+      "scopeKind": "METHOD",
+      "scopeName": "observeLocked",
+      "scopeTokenSha256": "1d51fb74ccd56f8f0723e5cd6413fff3ea98aa4bbb34eea60a820cb337e561b6",
+      "source": "f8ad1ae16aa52db0119fefbad9e2cea6d6affe55",
+      "sourceSha256": "74da16e79b84ad392e13f7fdcd84b3fdc79f56c682ef859dd23eda5a0d671d6f",
+      "sourceSpanSha256": "40500e644c96eda41bb25ed7e79f0c623328c9979b292e28f6f21d38739a51db"
+    },
+    {
+      "attributes": {
+        "begincolumn": "33",
+        "beginline": "59",
+        "class": "MonitoringPoller",
+        "endcolumn": "38",
+        "endline": "59",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidcatchinggenericexception",
+        "method": "observeLocked",
+        "package": "dev.codex.schubert.nk.batch.monitoring",
+        "priority": "3",
+        "rule": "AvoidCatchingGenericException",
+        "ruleset": "Error Prone"
+      },
+      "controls": [
+        "action.apply(consecutive&&!interrupted,context)",
+        "lastCompleted=Optional.of(context.elapsed())",
+        "interrupted=false",
+        "catch(RuntimeException|ErrorunavailableObservation){interrupted=true;throwunavailableObservation;}"
+      ],
+      "currentCases": [
+        {
+          "className": "dev.codex.schubert.nk.batch.monitoring.MonitoringPollerTest",
+          "method": "poll001NormalFlagsContextAndResultHaveNoRetries",
+          "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/MonitoringPollerTest.java",
+          "sourceSha256": "8172e31aad995283e0a443399a5e75f419d22a5b69e0f8579161aaddd3b7ca01"
+        },
+        {
+          "className": "dev.codex.schubert.nk.batch.monitoring.MonitoringPollerTest",
+          "method": "poll002EveryUncheckedFailureRemainsIdenticalAndCutsNextContinuity",
+          "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/MonitoringPollerTest.java",
+          "sourceSha256": "8172e31aad995283e0a443399a5e75f419d22a5b69e0f8579161aaddd3b7ca01"
+        },
+        {
+          "className": "dev.codex.schubert.nk.batch.monitoring.MonitoringPollerTest",
+          "method": "poll003BackwardsContextIsRejectedBeforeActionAndDoesNotInventGap",
+          "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/MonitoringPollerTest.java",
+          "sourceSha256": "8172e31aad995283e0a443399a5e75f419d22a5b69e0f8579161aaddd3b7ca01"
+        },
+        {
+          "className": "dev.codex.schubert.nk.batch.monitoring.MonitoringPollerTest",
+          "method": "poll004ClockFailureHasNoActionAndCrossApiGapIsConsumed",
+          "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/MonitoringPollerTest.java",
+          "sourceSha256": "8172e31aad995283e0a443399a5e75f419d22a5b69e0f8579161aaddd3b7ca01"
+        },
+        {
+          "className": "dev.codex.schubert.nk.batch.monitoring.MonitoringPollerTest",
+          "method": "poll005NullBoundariesDoNotCallOrChangeContinuity",
+          "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/MonitoringPollerTest.java",
+          "sourceSha256": "8172e31aad995283e0a443399a5e75f419d22a5b69e0f8579161aaddd3b7ca01"
+        },
+        {
+          "className": "dev.codex.schubert.nk.batch.monitoring.MonitoringPollerTest",
+          "method": "poll006NullResultIsFailureAndDoesNotCommitLaterEpoch",
+          "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/MonitoringPollerTest.java",
+          "sourceSha256": "8172e31aad995283e0a443399a5e75f419d22a5b69e0f8579161aaddd3b7ca01"
+        },
+        {
+          "className": "dev.codex.schubert.nk.batch.monitoring.MonitoringPollerTest",
+          "method": "poll007ParallelNonAtomicActionsAreSerializedIntoOneToSixtyFour",
+          "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/MonitoringPollerTest.java",
+          "sourceSha256": "8172e31aad995283e0a443399a5e75f419d22a5b69e0f8579161aaddd3b7ca01"
+        },
+        {
+          "className": "dev.codex.schubert.nk.batch.monitoring.MonitoringPollerTest",
+          "method": "poll008ActionFailureThenClockPathRecoversAfterOneGapOnly",
+          "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/MonitoringPollerTest.java",
+          "sourceSha256": "8172e31aad995283e0a443399a5e75f419d22a5b69e0f8579161aaddd3b7ca01"
+        }
+      ],
+      "currentWholeJoinPending": true,
+      "disposition": "CONTEXT_NOT_APPLICABLE",
+      "id": "PMD-02973",
+      "kind": "IDENTITY_RETHROW_AFTER_MARKING_ONE_CONTINUITY_GAP",
+      "newAccepted": 0,
+      "oldRuntimeReassigned": false,
+      "originalRowSha256": "2e8a30536fc67a590a0986444cfb692d463a4e77793332ebcbdefcdab19a2622",
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/MonitoringPoller.java",
+      "productTestsExecutedByReview": 0,
+      "reason": "Private one-owner poll must mark any unchecked provider/action failure as interrupted then rethrow the identical RuntimeException/Error; no retry, swallowing, formatting, compensation or normal result. Null-result NPE also propagates and cannot commit later elapsed. Independent exception identity/no-call/next-gap tests cover intended source contract; no actual external failure recovery or all implicit JVM errors inferred.",
+      "rule": "AvoidCatchingGenericException",
+      "scopeKind": "METHOD",
+      "scopeName": "observeLocked",
+      "scopeTokenSha256": "1d51fb74ccd56f8f0723e5cd6413fff3ea98aa4bbb34eea60a820cb337e561b6",
+      "source": "f8ad1ae16aa52db0119fefbad9e2cea6d6affe55",
+      "sourceSha256": "74da16e79b84ad392e13f7fdcd84b3fdc79f56c682ef859dd23eda5a0d671d6f",
+      "sourceSpanSha256": "4a5f25a6c1e1bff74d31a570627ffb860f6943cad8044bfc9c6f33e09847a6e8"
+    },
+    {
+      "attributes": {
+        "begincolumn": "25",
+        "beginline": "132",
+        "class": "ContinuousConditionWindowTest",
+        "endcolumn": "56",
+        "endline": "132",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "method": "monWindow007ConcurrentSamePointHasOneOrigin",
+        "package": "dev.codex.schubert.nk.batch.monitoring",
+        "priority": "3",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading",
+        "variable": "executor"
+      },
+      "controls": [
+        "try(varexecutor=Executors.newFixedThreadPool(4))",
+        "index<64",
+        "executor.invokeAll(tasks,10,TimeUnit.SECONDS)",
+        "assertEquals(Duration.ZERO,future.get())",
+        "executor.shutdownNow()",
+        "assertTrue(executor.awaitTermination(10,TimeUnit.SECONDS))"
+      ],
+      "currentCases": [
+        {
+          "className": "dev.codex.schubert.nk.batch.monitoring.ContinuousConditionWindowTest",
+          "method": "monWindow007ConcurrentSamePointHasOneOrigin",
+          "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/ContinuousConditionWindowTest.java",
+          "sourceSha256": "3ff6279428c41c81db795a689c3dea66bbe9372f4014dff0ffb7e18568ece92c"
+        }
+      ],
+      "currentWholeJoinPending": true,
+      "disposition": "CONTEXT_NOT_APPLICABLE",
+      "id": "PMD-04808",
+      "kind": "STANDALONE_OWNED_FINITE_MONITOR_FIXTURE_WORKERS",
+      "newAccepted": 0,
+      "oldRuntimeReassigned": false,
+      "originalRowSha256": "302a5fc07bb3f8f1c38d017d8b4c7fe36a6b146fb2b4c28e68f44442c395b54f",
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/ContinuousConditionWindowTest.java",
+      "productTestsExecutedByReview": 0,
+      "reason": "Standalone whole JUnit owns only local pool and fixed values. Window has4workers/64calls/invokeAll10seconds and original shutdownNow-await10seconds; clock/poller have8workers/64finite calls and independent set1..64. Clock/poller invokeAll/get and all TWR closes have no local absolute deadline; distinct outer JVM240seconds. No application process, actual clock mutation, FS, DB, network, Root, VM, native, keys or authority. Historical refs source-rebound, raw retained.",
+      "rule": "DoNotUseThreads",
+      "scopeKind": "METHOD",
+      "scopeName": "monWindow007ConcurrentSamePointHasOneOrigin",
+      "scopeTokenSha256": "d9397ac6eccb99e915cc5f76193e500b8976166b9c1be5deb7f76d768072e4c4",
+      "source": "f8ad1ae16aa52db0119fefbad9e2cea6d6affe55",
+      "sourceSha256": "3ff6279428c41c81db795a689c3dea66bbe9372f4014dff0ffb7e18568ece92c",
+      "sourceSpanSha256": "f93e1793cb7a139e55f0b0dcf12d1f4620721e0707876be38f521c37b77d4ba3"
+    },
+    {
+      "attributes": {
+        "begincolumn": "27",
+        "beginline": "138",
+        "class": "ContinuousConditionWindowTest",
+        "endcolumn": "74",
+        "endline": "138",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "method": "monWindow007ConcurrentSamePointHasOneOrigin",
+        "package": "dev.codex.schubert.nk.batch.monitoring",
+        "priority": "3",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading"
+      },
+      "controls": [
+        "try(varexecutor=Executors.newFixedThreadPool(4))",
+        "index<64",
+        "executor.invokeAll(tasks,10,TimeUnit.SECONDS)",
+        "assertEquals(Duration.ZERO,future.get())",
+        "executor.shutdownNow()",
+        "assertTrue(executor.awaitTermination(10,TimeUnit.SECONDS))"
+      ],
+      "currentCases": [
+        {
+          "className": "dev.codex.schubert.nk.batch.monitoring.ContinuousConditionWindowTest",
+          "method": "monWindow007ConcurrentSamePointHasOneOrigin",
+          "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/ContinuousConditionWindowTest.java",
+          "sourceSha256": "3ff6279428c41c81db795a689c3dea66bbe9372f4014dff0ffb7e18568ece92c"
+        }
+      ],
+      "currentWholeJoinPending": true,
+      "disposition": "CONTEXT_NOT_APPLICABLE",
+      "id": "PMD-04809",
+      "kind": "STANDALONE_OWNED_FINITE_MONITOR_FIXTURE_WORKERS",
+      "newAccepted": 0,
+      "oldRuntimeReassigned": false,
+      "originalRowSha256": "26337e6f4e4a5565f5d65f01e7f89b28a51f562162c64cae6f428651daca5fa6",
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/ContinuousConditionWindowTest.java",
+      "productTestsExecutedByReview": 0,
+      "reason": "Standalone whole JUnit owns only local pool and fixed values. Window has4workers/64calls/invokeAll10seconds and original shutdownNow-await10seconds; clock/poller have8workers/64finite calls and independent set1..64. Clock/poller invokeAll/get and all TWR closes have no local absolute deadline; distinct outer JVM240seconds. No application process, actual clock mutation, FS, DB, network, Root, VM, native, keys or authority. Historical refs source-rebound, raw retained.",
+      "rule": "DoNotUseThreads",
+      "scopeKind": "METHOD",
+      "scopeName": "monWindow007ConcurrentSamePointHasOneOrigin",
+      "scopeTokenSha256": "d9397ac6eccb99e915cc5f76193e500b8976166b9c1be5deb7f76d768072e4c4",
+      "source": "f8ad1ae16aa52db0119fefbad9e2cea6d6affe55",
+      "sourceSha256": "3ff6279428c41c81db795a689c3dea66bbe9372f4014dff0ffb7e18568ece92c",
+      "sourceSpanSha256": "bb5f092b2a814953257be1b5d7c5685f2e2686044ca0f02f162d351ab9ce9c95"
+    },
+    {
+      "attributes": {
+        "begincolumn": "9",
+        "beginline": "144",
+        "class": "ContinuousConditionWindowTest",
+        "endcolumn": "31",
+        "endline": "144",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "method": "monWindow007ConcurrentSamePointHasOneOrigin",
+        "package": "dev.codex.schubert.nk.batch.monitoring",
+        "priority": "3",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading"
+      },
+      "controls": [
+        "try(varexecutor=Executors.newFixedThreadPool(4))",
+        "index<64",
+        "executor.invokeAll(tasks,10,TimeUnit.SECONDS)",
+        "assertEquals(Duration.ZERO,future.get())",
+        "executor.shutdownNow()",
+        "assertTrue(executor.awaitTermination(10,TimeUnit.SECONDS))"
+      ],
+      "currentCases": [
+        {
+          "className": "dev.codex.schubert.nk.batch.monitoring.ContinuousConditionWindowTest",
+          "method": "monWindow007ConcurrentSamePointHasOneOrigin",
+          "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/ContinuousConditionWindowTest.java",
+          "sourceSha256": "3ff6279428c41c81db795a689c3dea66bbe9372f4014dff0ffb7e18568ece92c"
+        }
+      ],
+      "currentWholeJoinPending": true,
+      "disposition": "CONTEXT_NOT_APPLICABLE",
+      "id": "PMD-04810",
+      "kind": "STANDALONE_OWNED_FINITE_MONITOR_FIXTURE_WORKERS",
+      "newAccepted": 0,
+      "oldRuntimeReassigned": false,
+      "originalRowSha256": "bce58c4f743b821ab7050998655bb90b5056814dba7425dd69c8788aa5693a16",
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/ContinuousConditionWindowTest.java",
+      "productTestsExecutedByReview": 0,
+      "reason": "Standalone whole JUnit owns only local pool and fixed values. Window has4workers/64calls/invokeAll10seconds and original shutdownNow-await10seconds; clock/poller have8workers/64finite calls and independent set1..64. Clock/poller invokeAll/get and all TWR closes have no local absolute deadline; distinct outer JVM240seconds. No application process, actual clock mutation, FS, DB, network, Root, VM, native, keys or authority. Historical refs source-rebound, raw retained.",
+      "rule": "DoNotUseThreads",
+      "scopeKind": "METHOD",
+      "scopeName": "monWindow007ConcurrentSamePointHasOneOrigin",
+      "scopeTokenSha256": "d9397ac6eccb99e915cc5f76193e500b8976166b9c1be5deb7f76d768072e4c4",
+      "source": "f8ad1ae16aa52db0119fefbad9e2cea6d6affe55",
+      "sourceSha256": "3ff6279428c41c81db795a689c3dea66bbe9372f4014dff0ffb7e18568ece92c",
+      "sourceSpanSha256": "447cb134622833454dbcfd6b8edb9568b5b6bffacad735fc46be8baae7c7c49c"
+    },
+    {
+      "attributes": {
+        "begincolumn": "20",
+        "beginline": "145",
+        "class": "ContinuousConditionWindowTest",
+        "endcolumn": "67",
+        "endline": "145",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "method": "monWindow007ConcurrentSamePointHasOneOrigin",
+        "package": "dev.codex.schubert.nk.batch.monitoring",
+        "priority": "3",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading"
+      },
+      "controls": [
+        "try(varexecutor=Executors.newFixedThreadPool(4))",
+        "index<64",
+        "executor.invokeAll(tasks,10,TimeUnit.SECONDS)",
+        "assertEquals(Duration.ZERO,future.get())",
+        "executor.shutdownNow()",
+        "assertTrue(executor.awaitTermination(10,TimeUnit.SECONDS))"
+      ],
+      "currentCases": [
+        {
+          "className": "dev.codex.schubert.nk.batch.monitoring.ContinuousConditionWindowTest",
+          "method": "monWindow007ConcurrentSamePointHasOneOrigin",
+          "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/ContinuousConditionWindowTest.java",
+          "sourceSha256": "3ff6279428c41c81db795a689c3dea66bbe9372f4014dff0ffb7e18568ece92c"
+        }
+      ],
+      "currentWholeJoinPending": true,
+      "disposition": "CONTEXT_NOT_APPLICABLE",
+      "id": "PMD-04811",
+      "kind": "STANDALONE_OWNED_FINITE_MONITOR_FIXTURE_WORKERS",
+      "newAccepted": 0,
+      "oldRuntimeReassigned": false,
+      "originalRowSha256": "09f53e5745e34051dfe1c52a68d735c8225da684219bf8b3606a6baa4b6cce1f",
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/ContinuousConditionWindowTest.java",
+      "productTestsExecutedByReview": 0,
+      "reason": "Standalone whole JUnit owns only local pool and fixed values. Window has4workers/64calls/invokeAll10seconds and original shutdownNow-await10seconds; clock/poller have8workers/64finite calls and independent set1..64. Clock/poller invokeAll/get and all TWR closes have no local absolute deadline; distinct outer JVM240seconds. No application process, actual clock mutation, FS, DB, network, Root, VM, native, keys or authority. Historical refs source-rebound, raw retained.",
+      "rule": "DoNotUseThreads",
+      "scopeKind": "METHOD",
+      "scopeName": "monWindow007ConcurrentSamePointHasOneOrigin",
+      "scopeTokenSha256": "d9397ac6eccb99e915cc5f76193e500b8976166b9c1be5deb7f76d768072e4c4",
+      "source": "f8ad1ae16aa52db0119fefbad9e2cea6d6affe55",
+      "sourceSha256": "3ff6279428c41c81db795a689c3dea66bbe9372f4014dff0ffb7e18568ece92c",
+      "sourceSpanSha256": "d541ae7bb57fcde19f69c441a68e1d8c3446a7babe941444ac301c72caad9cf7"
+    },
+    {
+      "attributes": {
+        "begincolumn": "21",
+        "beginline": "212",
+        "class": "MonitoringObservationClockTest",
+        "endcolumn": "52",
+        "endline": "212",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "method": "obsClock007ConcurrentContextsHaveUniqueMonotonicSnapshots",
+        "package": "dev.codex.schubert.nk.batch.monitoring",
+        "priority": "3",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading",
+        "variable": "pool"
+      },
+      "controls": [
+        "try(varpool=Executors.newFixedThreadPool(8))",
+        "IntStream.range(0,64)",
+        "pool.invokeAll(jobs)",
+        "result.get()",
+        "for(inti=1;i<=64;i++)expected.add(Duration.ofNanos(i))",
+        "assertEquals(expected,actual)",
+        "assertEquals(65,ticks.get())",
+        "assertEquals(64,wall.reads.get())"
+      ],
+      "currentCases": [
+        {
+          "className": "dev.codex.schubert.nk.batch.monitoring.MonitoringObservationClockTest",
+          "method": "obsClock007ConcurrentContextsHaveUniqueMonotonicSnapshots",
+          "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/MonitoringObservationClockTest.java",
+          "sourceSha256": "4612f486d88e111f2927330c0d227b00395d60e51993351896ab510cf6496e9d"
+        }
+      ],
+      "currentWholeJoinPending": true,
+      "disposition": "CONTEXT_NOT_APPLICABLE",
+      "id": "PMD-04858",
+      "kind": "STANDALONE_OWNED_FINITE_MONITOR_FIXTURE_WORKERS",
+      "newAccepted": 0,
+      "oldRuntimeReassigned": false,
+      "originalRowSha256": "57d52c03fb4ad442beaf2c08a5c598402efb213ff997ab0fbe3880bbef3a7e57",
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/MonitoringObservationClockTest.java",
+      "productTestsExecutedByReview": 0,
+      "reason": "Standalone whole JUnit owns only local pool and fixed values. Window has4workers/64calls/invokeAll10seconds and original shutdownNow-await10seconds; clock/poller have8workers/64finite calls and independent set1..64. Clock/poller invokeAll/get and all TWR closes have no local absolute deadline; distinct outer JVM240seconds. No application process, actual clock mutation, FS, DB, network, Root, VM, native, keys or authority. Historical refs source-rebound, raw retained.",
+      "rule": "DoNotUseThreads",
+      "scopeKind": "METHOD",
+      "scopeName": "obsClock007ConcurrentContextsHaveUniqueMonotonicSnapshots",
+      "scopeTokenSha256": "55dba800a04792b09849d644db118ca98ddc3b85b733ea77d2054137b73a3e95",
+      "source": "f8ad1ae16aa52db0119fefbad9e2cea6d6affe55",
+      "sourceSha256": "4612f486d88e111f2927330c0d227b00395d60e51993351896ab510cf6496e9d",
+      "sourceSpanSha256": "45a38a95e5b1914bc44b51b29e60fb4d5c93e0e1d3f6a314234d653392df5f14"
+    },
+    {
+      "attributes": {
+        "begincolumn": "25",
+        "beginline": "218",
+        "class": "MonitoringObservationClockTest",
+        "endcolumn": "45",
+        "endline": "218",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "method": "obsClock007ConcurrentContextsHaveUniqueMonotonicSnapshots",
+        "package": "dev.codex.schubert.nk.batch.monitoring",
+        "priority": "3",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading"
+      },
+      "controls": [
+        "try(varpool=Executors.newFixedThreadPool(8))",
+        "IntStream.range(0,64)",
+        "pool.invokeAll(jobs)",
+        "result.get()",
+        "for(inti=1;i<=64;i++)expected.add(Duration.ofNanos(i))",
+        "assertEquals(expected,actual)",
+        "assertEquals(65,ticks.get())",
+        "assertEquals(64,wall.reads.get())"
+      ],
+      "currentCases": [
+        {
+          "className": "dev.codex.schubert.nk.batch.monitoring.MonitoringObservationClockTest",
+          "method": "obsClock007ConcurrentContextsHaveUniqueMonotonicSnapshots",
+          "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/MonitoringObservationClockTest.java",
+          "sourceSha256": "4612f486d88e111f2927330c0d227b00395d60e51993351896ab510cf6496e9d"
+        }
+      ],
+      "currentWholeJoinPending": true,
+      "disposition": "CONTEXT_NOT_APPLICABLE",
+      "id": "PMD-04859",
+      "kind": "STANDALONE_OWNED_FINITE_MONITOR_FIXTURE_WORKERS",
+      "newAccepted": 0,
+      "oldRuntimeReassigned": false,
+      "originalRowSha256": "c0604c456d2dcc8f0e9834685c275d2fb0fb943fe7ff45c7ccfc22d1ab97d9bf",
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/MonitoringObservationClockTest.java",
+      "productTestsExecutedByReview": 0,
+      "reason": "Standalone whole JUnit owns only local pool and fixed values. Window has4workers/64calls/invokeAll10seconds and original shutdownNow-await10seconds; clock/poller have8workers/64finite calls and independent set1..64. Clock/poller invokeAll/get and all TWR closes have no local absolute deadline; distinct outer JVM240seconds. No application process, actual clock mutation, FS, DB, network, Root, VM, native, keys or authority. Historical refs source-rebound, raw retained.",
+      "rule": "DoNotUseThreads",
+      "scopeKind": "METHOD",
+      "scopeName": "obsClock007ConcurrentContextsHaveUniqueMonotonicSnapshots",
+      "scopeTokenSha256": "55dba800a04792b09849d644db118ca98ddc3b85b733ea77d2054137b73a3e95",
+      "source": "f8ad1ae16aa52db0119fefbad9e2cea6d6affe55",
+      "sourceSha256": "4612f486d88e111f2927330c0d227b00395d60e51993351896ab510cf6496e9d",
+      "sourceSpanSha256": "cf119bee31771d362b9bd975f19c2a8de10a683718deaa11cd1a5fe37683e51c"
+    },
+    {
+      "attributes": {
+        "begincolumn": "21",
+        "beginline": "203",
+        "class": "MonitoringPollerTest",
+        "endcolumn": "52",
+        "endline": "203",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "method": "poll007ParallelNonAtomicActionsAreSerializedIntoOneToSixtyFour",
+        "package": "dev.codex.schubert.nk.batch.monitoring",
+        "priority": "3",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading",
+        "variable": "pool"
+      },
+      "controls": [
+        "try(varpool=Executors.newFixedThreadPool(8))",
+        "IntStream.range(0,64)",
+        "poll.observe(true,at(1),(continuous,context)->++count[0])",
+        "pool.invokeAll(jobs)",
+        "result.get()",
+        "for(inti=1;i<=64;i++)expected.add(i)",
+        "assertEquals(expected,actual)",
+        "assertEquals(64,count[0])"
+      ],
+      "currentCases": [
+        {
+          "className": "dev.codex.schubert.nk.batch.monitoring.MonitoringPollerTest",
+          "method": "poll007ParallelNonAtomicActionsAreSerializedIntoOneToSixtyFour",
+          "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/MonitoringPollerTest.java",
+          "sourceSha256": "8172e31aad995283e0a443399a5e75f419d22a5b69e0f8579161aaddd3b7ca01"
+        }
+      ],
+      "currentWholeJoinPending": true,
+      "disposition": "CONTEXT_NOT_APPLICABLE",
+      "id": "PMD-04866",
+      "kind": "STANDALONE_OWNED_FINITE_MONITOR_FIXTURE_WORKERS",
+      "newAccepted": 0,
+      "oldRuntimeReassigned": false,
+      "originalRowSha256": "5593089d1d1fff38bf37514b8070dd6d981ad1a4b3c98e4108bc612eb7c49912",
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/MonitoringPollerTest.java",
+      "productTestsExecutedByReview": 0,
+      "reason": "Standalone whole JUnit owns only local pool and fixed values. Window has4workers/64calls/invokeAll10seconds and original shutdownNow-await10seconds; clock/poller have8workers/64finite calls and independent set1..64. Clock/poller invokeAll/get and all TWR closes have no local absolute deadline; distinct outer JVM240seconds. No application process, actual clock mutation, FS, DB, network, Root, VM, native, keys or authority. Historical refs source-rebound, raw retained.",
+      "rule": "DoNotUseThreads",
+      "scopeKind": "METHOD",
+      "scopeName": "poll007ParallelNonAtomicActionsAreSerializedIntoOneToSixtyFour",
+      "scopeTokenSha256": "c16259f1adabb09acb7863d19e1044f7345ce15dd4e690f08f699edfe03a3157",
+      "source": "f8ad1ae16aa52db0119fefbad9e2cea6d6affe55",
+      "sourceSha256": "8172e31aad995283e0a443399a5e75f419d22a5b69e0f8579161aaddd3b7ca01",
+      "sourceSpanSha256": "45a38a95e5b1914bc44b51b29e60fb4d5c93e0e1d3f6a314234d653392df5f14"
+    },
+    {
+      "attributes": {
+        "begincolumn": "25",
+        "beginline": "209",
+        "class": "MonitoringPollerTest",
+        "endcolumn": "45",
+        "endline": "209",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "method": "poll007ParallelNonAtomicActionsAreSerializedIntoOneToSixtyFour",
+        "package": "dev.codex.schubert.nk.batch.monitoring",
+        "priority": "3",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading"
+      },
+      "controls": [
+        "try(varpool=Executors.newFixedThreadPool(8))",
+        "IntStream.range(0,64)",
+        "poll.observe(true,at(1),(continuous,context)->++count[0])",
+        "pool.invokeAll(jobs)",
+        "result.get()",
+        "for(inti=1;i<=64;i++)expected.add(i)",
+        "assertEquals(expected,actual)",
+        "assertEquals(64,count[0])"
+      ],
+      "currentCases": [
+        {
+          "className": "dev.codex.schubert.nk.batch.monitoring.MonitoringPollerTest",
+          "method": "poll007ParallelNonAtomicActionsAreSerializedIntoOneToSixtyFour",
+          "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/MonitoringPollerTest.java",
+          "sourceSha256": "8172e31aad995283e0a443399a5e75f419d22a5b69e0f8579161aaddd3b7ca01"
+        }
+      ],
+      "currentWholeJoinPending": true,
+      "disposition": "CONTEXT_NOT_APPLICABLE",
+      "id": "PMD-04867",
+      "kind": "STANDALONE_OWNED_FINITE_MONITOR_FIXTURE_WORKERS",
+      "newAccepted": 0,
+      "oldRuntimeReassigned": false,
+      "originalRowSha256": "5d8eadf8cb0377f8ffa2283a8d25bb806f8e3e6d431d33de4b0f756feff95b21",
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/MonitoringPollerTest.java",
+      "productTestsExecutedByReview": 0,
+      "reason": "Standalone whole JUnit owns only local pool and fixed values. Window has4workers/64calls/invokeAll10seconds and original shutdownNow-await10seconds; clock/poller have8workers/64finite calls and independent set1..64. Clock/poller invokeAll/get and all TWR closes have no local absolute deadline; distinct outer JVM240seconds. No application process, actual clock mutation, FS, DB, network, Root, VM, native, keys or authority. Historical refs source-rebound, raw retained.",
+      "rule": "DoNotUseThreads",
+      "scopeKind": "METHOD",
+      "scopeName": "poll007ParallelNonAtomicActionsAreSerializedIntoOneToSixtyFour",
+      "scopeTokenSha256": "c16259f1adabb09acb7863d19e1044f7345ce15dd4e690f08f699edfe03a3157",
+      "source": "f8ad1ae16aa52db0119fefbad9e2cea6d6affe55",
+      "sourceSha256": "8172e31aad995283e0a443399a5e75f419d22a5b69e0f8579161aaddd3b7ca01",
+      "sourceSpanSha256": "cf119bee31771d362b9bd975f19c2a8de10a683718deaa11cd1a5fe37683e51c"
+    }
+  ],
+  "source": "f8ad1ae16aa52db0119fefbad9e2cea6d6affe55"
+}
