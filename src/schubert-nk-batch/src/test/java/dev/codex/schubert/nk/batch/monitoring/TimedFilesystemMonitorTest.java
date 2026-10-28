@@ -200,17 +200,18 @@ class TimedFilesystemMonitorTest {
   void timedFs006ConcurrentOwnerAndLocalStatusLiteral() throws Exception {
     sample(80, 0, false);
     var before = sample(80, 300, true).event().orElseThrow();
-    var executor = Executors.newFixedThreadPool(4);
-    try {
-      var tasks = new ArrayList<Callable<TimedFilesystemMonitor.Evaluation>>();
-      for (int index = 0; index < 64; index++) tasks.add(() -> sample(80, 300, true));
-      for (var future : executor.invokeAll(tasks, 10, TimeUnit.SECONDS)) {
-        assertTrue(future.get().suppliedValuePresent());
-        assertTrue(future.get().event().orElseThrow().isOpen());
+    try (var executor = Executors.newFixedThreadPool(4)) {
+      try {
+        var tasks = new ArrayList<Callable<TimedFilesystemMonitor.Evaluation>>();
+        for (int index = 0; index < 64; index++) tasks.add(() -> sample(80, 300, true));
+        for (var future : executor.invokeAll(tasks, 10, TimeUnit.SECONDS)) {
+          assertTrue(future.get().suppliedValuePresent());
+          assertTrue(future.get().event().orElseThrow().isOpen());
+        }
+      } finally {
+        executor.shutdownNow();
+        assertTrue(executor.awaitTermination(10, TimeUnit.SECONDS));
       }
-    } finally {
-      executor.shutdownNow();
-      assertTrue(executor.awaitTermination(10, TimeUnit.SECONDS));
     }
     assertEquals(BigInteger.ONE, before.count());
     var current = monitor.snapshot().orElseThrow();

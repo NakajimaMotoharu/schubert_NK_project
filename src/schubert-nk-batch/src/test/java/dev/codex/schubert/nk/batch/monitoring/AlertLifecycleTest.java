@@ -210,23 +210,25 @@ class AlertLifecycleTest {
   void alert009ConcurrentSameTickCountsAndPrivateMonitor() throws Exception {
     var owner = lifecycle();
     signal(owner, Severity.WARNING, Duration.ZERO);
-    var executor = Executors.newFixedThreadPool(4);
-    try {
-      var tasks = new ArrayList<Callable<BigInteger>>();
-      for (int index = 0; index < 64; index++)
-        tasks.add(() -> signal(owner, Severity.WARNING, Duration.ofSeconds(1)).count());
-      var counts = new HashSet<BigInteger>();
-      synchronized (owner) {
-        for (var future : executor.invokeAll(tasks, 10, TimeUnit.SECONDS)) counts.add(future.get());
+    try (var executor = Executors.newFixedThreadPool(4)) {
+      try {
+        var tasks = new ArrayList<Callable<BigInteger>>();
+        for (int index = 0; index < 64; index++)
+          tasks.add(() -> signal(owner, Severity.WARNING, Duration.ofSeconds(1)).count());
+        var counts = new HashSet<BigInteger>();
+        synchronized (owner) {
+          for (var future : executor.invokeAll(tasks, 10, TimeUnit.SECONDS))
+            counts.add(future.get());
+        }
+        var expected = new HashSet<BigInteger>();
+        for (int value = 2; value <= 65; value++) expected.add(BigInteger.valueOf(value));
+        assertEquals(expected, counts);
+        assertEquals(BigInteger.valueOf(65), owner.snapshot().orElseThrow().count());
+        assertEquals(TIME, owner.snapshot().orElseThrow().firstSeen());
+      } finally {
+        executor.shutdownNow();
+        assertTrue(executor.awaitTermination(10, TimeUnit.SECONDS));
       }
-      var expected = new HashSet<BigInteger>();
-      for (int value = 2; value <= 65; value++) expected.add(BigInteger.valueOf(value));
-      assertEquals(expected, counts);
-      assertEquals(BigInteger.valueOf(65), owner.snapshot().orElseThrow().count());
-      assertEquals(TIME, owner.snapshot().orElseThrow().firstSeen());
-    } finally {
-      executor.shutdownNow();
-      assertTrue(executor.awaitTermination(10, TimeUnit.SECONDS));
     }
   }
 
