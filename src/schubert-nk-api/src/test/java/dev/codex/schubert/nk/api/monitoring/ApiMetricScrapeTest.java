@@ -311,13 +311,14 @@ class ApiMetricScrapeTest {
 
   @Test
   void apipol008ClosedSourceNotReopenedOrReadByStandard() {
-    var source = new Compatible();
-    source.close();
-    source.reads.set(0);
-    assertEquals("", policy.scrape(source, STANDARD_MODE));
-    assertEquals(0, source.reads.get());
-    assertThrows(IllegalStateException.class, () -> policy.scrape(source, DEBUG_MODE));
-    assertTrue(source.isClosed());
+    try (var source = new Compatible()) {
+      source.close();
+      source.reads.set(0);
+      assertEquals("", policy.scrape(source, STANDARD_MODE));
+      assertEquals(0, source.reads.get());
+      assertThrows(IllegalStateException.class, () -> policy.scrape(source, DEBUG_MODE));
+      assertTrue(source.isClosed());
+    }
   }
 
   @Test
