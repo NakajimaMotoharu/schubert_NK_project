@@ -1,0 +1,9 @@
+# Systemd残raw14・source用途確認結果
+
+仕様2420/event2787、source44afb0a1ecddabfebe577b2037aabdc6fb31d1e3不変更。13148-source context manifest4c4d139f02de58aa29294e4022ba8c710f3d0117349c86778841183dfd8ac7f2、13149独立post b2d7947bd08f97f58b0872261d429793afaad836b21d188ef6af2dd607e7b25c。元原14 IDと現PMDのrule/class/method/message/column/current source lineを一対一結合し、原/現SHA・canonical owner/costP01803と全保持入力を確認した。checked lint/body各0、元静的/Javap/compile/型検査/製品PTの確認再演0。
+
+Thread.currentThreadによるowner観測二は既referenceで新規加算0。call/releaseOutput/start/close/invokeの広いcatch十一は、native uncertainty設定と再送出・closed設定順・固定unavailableへの変換という構文上の目的を記録した。decodeのbytes[end++]一は非NUL byte copy後の有限cursor更新を記録した。合計新用途referenceは十二、raw14は一つも除去せず、規則免除/actual非違反/正常close/全fatal保持/UTF8完全性を認定しない。特にNative.invokeのchecked Throwable変換における入れ子fatal保持は当構文確認だけでは未証明でHOLD。
+
+主工具十非同値反例、独立post四反例（owner/source/current line/PT免除）を確認、両工具原source/hash不変更・全14の型別2/11/1と原input一致。bind済み工具不備/製品不備/追加source再認証0。新製品Test ID/動的PT/coverage/新個別受入0、status STATIC_SOURCE_PURPOSE_REVIEWED_DYNAMIC_HOLD・actualViolationCountnullを保持。
+
+raw8459/corr966/introduced16は不変、参照3259→3271/pending963→975/noRef5188。既13144registryは当source製造前回参照として不変更保存、追加用途の現況は当13148/49を参照し旧runtimeを再割当しない。正式1964PT/53scope・歴史17/190・工数null/QA051final/全actual/二保留工具/原本保全を維持。開始0.5/1.5/3cap10・共有開始used3/reset1793774153、専有費/N/T/実費null・原見積不変更。
