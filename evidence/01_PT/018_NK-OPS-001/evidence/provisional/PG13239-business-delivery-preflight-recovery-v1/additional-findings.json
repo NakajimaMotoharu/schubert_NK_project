@@ -1,0 +1,69 @@
+{
+  "dynamicCorrectnessProven": false,
+  "findings": [
+    {
+      "actualViolation": null,
+      "attributes": {
+        "begincolumn": "11",
+        "beginline": "696",
+        "class": "LoginInboxServiceTest",
+        "endcolumn": "21",
+        "endline": "696",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#closeresource",
+        "method": "jdbcOwnerCommitsOnlyCompleteBusinessResults",
+        "package": "dev.codex.schubert.nk.api.security",
+        "priority": "3",
+        "rule": "CloseResource",
+        "ruleset": "Error Prone",
+        "variable": "connection"
+      },
+      "baselineObservationNewlyRecorded": true,
+      "canonicalCostOwner": "WBS-P007-04",
+      "canonicalOwner": "WBS-P007-04",
+      "id": "PMD-NEW-PG13240-001",
+      "manualPurposeReviewComplete": true,
+      "message": "Ensure that resources like this Connection object are closed after use",
+      "newSourceDefectInferred": false,
+      "originalSourceSha256": "e7d09867b0400f921a56a323baf7333453fc2931efdac92b6d24920e70c0db51",
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/LoginInboxServiceTest.java",
+      "ptExecutionExempt": false,
+      "purpose": "Existing Test eagerly obtains Connection, supplies it through DataSource callback to JdbcSyncRequestProcessor, then asserts closed; processor owns returned JDBC with try-with-resources",
+      "status": "STATIC_SOURCE_PURPOSE_REVIEWED_DYNAMIC_AND_PRE_HANDOFF_HOLD"
+    },
+    {
+      "actualViolation": null,
+      "attributes": {
+        "begincolumn": "11",
+        "beginline": "804",
+        "class": "LoginInboxServiceTest",
+        "endcolumn": "21",
+        "endline": "804",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#closeresource",
+        "method": "permanentProtocolNeedsConfirmedRollbackAndClose",
+        "package": "dev.codex.schubert.nk.api.security",
+        "priority": "3",
+        "rule": "CloseResource",
+        "ruleset": "Error Prone",
+        "variable": "connection"
+      },
+      "baselineObservationNewlyRecorded": true,
+      "canonicalCostOwner": "WBS-P007-04",
+      "canonicalOwner": "WBS-P007-04",
+      "id": "PMD-NEW-PG13240-002",
+      "manualPurposeReviewComplete": true,
+      "message": "Ensure that resources like this Connection object are closed after use",
+      "newSourceDefectInferred": false,
+      "originalSourceSha256": "e7d09867b0400f921a56a323baf7333453fc2931efdac92b6d24920e70c0db51",
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/LoginInboxServiceTest.java",
+      "ptExecutionExempt": false,
+      "purpose": "Existing Test eagerly obtains Connection, supplies it through DataSource callback to JdbcSyncRequestProcessor, then asserts closed; processor owns returned JDBC with try-with-resources",
+      "status": "STATIC_SOURCE_PURPOSE_REVIEWED_DYNAMIC_AND_PRE_HANDOFF_HOLD"
+    }
+  ],
+  "independentOriginalComparisonSha256": "706fe062f667570d28fdd0b62844ac76cedab545c83864029c8988288e9f66fd",
+  "originalGlobalOmissionCause": "UNRESOLVED_ANALYSIS_CONTEXT_DIFFERENCE_NOT_LITERAL_REFACTOR_REGRESSION",
+  "preHandoffFailureCleanupProven": false,
+  "processorSourceSha256": "65258747a2876004a921a86841b9bea32cd599a9301d7d6fb9e97c0fcec3db49",
+  "source": "1762d68747c3460afd90a03377858572dfc25931",
+  "sourceCodeChanged": false
+}
