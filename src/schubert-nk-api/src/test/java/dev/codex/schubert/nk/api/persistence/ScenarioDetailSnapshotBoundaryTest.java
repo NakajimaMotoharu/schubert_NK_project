@@ -4,8 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import dev.codex.schubert.nk.protocol.codec.MessageEncodingException;
-import dev.codex.schubert.nk.protocol.codec.PermanentProtocolException;
+import dev.codex.schubert.nk.protocol.codec.FieldEncodingException;
+import dev.codex.schubert.nk.protocol.layout.LayoutValidationException;
 import dev.codex.schubert.nk.protocol.layout.scenario.ScenarioDetailResponseData;
 import dev.codex.schubert.nk.protocol.layout.scenario.ScenarioEntryRecord;
 import dev.codex.schubert.nk.protocol.layout.semantic.DeliveryMode;
@@ -65,8 +65,7 @@ class ScenarioDetailSnapshotBoundaryTest {
       var bad = entry(position + 1, position + 2, "sequence gap");
       input.set(position, bad);
       assertThrows(
-          PermanentProtocolException.class,
-          () -> new ScenarioDetailSnapshot(HEADER_FIXTURE, input));
+          LayoutValidationException.class, () -> new ScenarioDetailSnapshot(HEADER_FIXTURE, input));
       assertEquals(MAXIMUM_ROWS, input.size());
       assertSame(bad, input.get(position));
       assertEquals(position + 2, input.get(position).entrySequence());
@@ -79,7 +78,7 @@ class ScenarioDetailSnapshotBoundaryTest {
     var bad = entry(MAXIMUM_ROWS, MAXIMUM_ROWS, "x".repeat(4097));
     input.set(MAXIMUM_ROWS - 1, bad);
     assertThrows(
-        MessageEncodingException.class, () -> new ScenarioDetailSnapshot(HEADER_FIXTURE, input));
+        FieldEncodingException.class, () -> new ScenarioDetailSnapshot(HEADER_FIXTURE, input));
     assertEquals(MAXIMUM_ROWS, input.size());
     assertSame(bad, input.getLast());
     assertEquals(4097, input.getLast().bodyText().length());
