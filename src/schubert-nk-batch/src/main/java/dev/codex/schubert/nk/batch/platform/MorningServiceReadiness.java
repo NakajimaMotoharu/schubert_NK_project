@@ -232,7 +232,9 @@ public final class MorningServiceReadiness {
       try (var entries = Files.newDirectoryStream(proc.resolve("fd"))) {
         int count = 0;
         for (Path entry : entries) {
-          if (++count > MAXIMUM_SOCKET_DIRECTORY_ENTRIES)
+          // PG-D802/2472: compare the incremented count without embedding the mutation.
+          count++;
+          if (count > MAXIMUM_SOCKET_DIRECTORY_ENTRIES)
             throw new IOException(LITERAL_SERVICE_OBSERVATION_UNAVAILABLE);
           try {
             String target = Files.readSymbolicLink(entry).toString();

@@ -394,7 +394,9 @@ public final class MorningCaddyReadiness {
       try (var entries = Files.newDirectoryStream(proc.resolve("fd"))) {
         int count = 0;
         for (Path entry : entries) {
-          if (++count > MAXIMUM_SOCKET_DIRECTORY_ENTRIES) throw unavailable();
+          // PG-D802/2472: retain the post-increment limit and the same failure catalog.
+          count++;
+          if (count > MAXIMUM_SOCKET_DIRECTORY_ENTRIES) throw unavailable();
           try {
             String target = Files.readSymbolicLink(entry).toString();
             if (target.matches("socket:\\[[1-9][0-9]{0,19}\\]"))

@@ -136,7 +136,10 @@ final class FixedUnitCgroupNamespace {
       if (descriptor < 0) throw unavailable();
       for (int index = 0; index < count; index++)
         if (descriptors[index] == descriptor) throw unavailable();
-      descriptors[count++] = descriptor;
+      // PG-D802/2472: count changes before the write, as in the original post-increment.
+      int ownedPosition = count;
+      count++;
+      descriptors[ownedPosition] = descriptor;
       return descriptor;
     }
 
@@ -150,7 +153,9 @@ final class FixedUnitCgroupNamespace {
       if (descriptor < 0) throw unavailable();
       for (int index = 0; index < count; index++)
         if (descriptors[index] == descriptor) throw unavailable();
-      descriptors[count++] = descriptor;
+      int ownedPosition = count;
+      count++;
+      descriptors[ownedPosition] = descriptor;
       return descriptor;
     }
 

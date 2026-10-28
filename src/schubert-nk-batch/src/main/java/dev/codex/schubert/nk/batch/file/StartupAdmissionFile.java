@@ -232,7 +232,10 @@ public final class StartupAdmissionFile {
       if (descriptor < 0) throw unavailable();
       for (int index = 0; index < count; index++)
         if (descriptors[index] == descriptor) throw unavailable();
-      descriptors[count++] = descriptor;
+      // PG-D802/2472: preserve the pre-increment index and update before the owned write.
+      int ownedPosition = count;
+      count++;
+      descriptors[ownedPosition] = descriptor;
       return descriptor;
     }
 
@@ -244,7 +247,9 @@ public final class StartupAdmissionFile {
       if (descriptor < 0) throw unavailable();
       for (int index = 0; index < count; index++)
         if (descriptors[index] == descriptor) throw unavailable();
-      descriptors[count++] = descriptor;
+      int ownedPosition = count;
+      count++;
+      descriptors[ownedPosition] = descriptor;
       return descriptor;
     }
 
@@ -256,7 +261,9 @@ public final class StartupAdmissionFile {
       if (descriptor < 0) throw unavailable();
       for (int index = 0; index < count; index++)
         if (descriptors[index] == descriptor) throw unavailable();
-      descriptors[count++] = descriptor;
+      int ownedPosition = count;
+      count++;
+      descriptors[ownedPosition] = descriptor;
       return descriptor;
     }
 
