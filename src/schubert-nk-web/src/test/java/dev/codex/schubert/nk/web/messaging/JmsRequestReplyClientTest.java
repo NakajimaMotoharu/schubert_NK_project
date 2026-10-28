@@ -143,14 +143,19 @@ final class JmsRequestReplyClientTest {
               }
             });
     waiting.start();
-    assertTrue(sent.await(2, TimeUnit.SECONDS));
-    waiting.interrupt();
-    waiting.join(2_000);
+    try {
+      assertTrue(sent.await(2, TimeUnit.SECONDS));
+      waiting.interrupt();
+      waiting.join(2_000);
 
-    assertFalse(waiting.isAlive());
-    assertEquals(JmsRequestReplyException.Reason.INTERRUPTED, observed.get().reason());
-    assertTrue(interrupted.get());
-    assertEquals(0, client.pendingCount());
+      assertFalse(waiting.isAlive());
+      assertEquals(JmsRequestReplyException.Reason.INTERRUPTED, observed.get().reason());
+      assertTrue(interrupted.get());
+      assertEquals(0, client.pendingCount());
+    } finally {
+      waiting.interrupt();
+      waiting.join(2_000);
+    }
   }
 
   @Test
@@ -162,36 +167,40 @@ final class JmsRequestReplyClientTest {
       AtomicInteger sends = new AtomicInteger();
       List<Future<byte[]>> waits = new ArrayList<>();
       try (ExecutorService executor = Executors.newFixedThreadPool(maximum)) {
-        for (int index = 1; index <= maximum; index++) {
-          UUID id = new UUID(0, index);
-          waits.add(
-              executor.submit(
+        try {
+          for (int index = 1; index <= maximum; index++) {
+            UUID id = new UUID(0, index);
+            waits.add(
+                executor.submit(
+                    () ->
+                        client.exchange(
+                            id,
+                            request(),
+                            Duration.ofSeconds(2),
+                            (correlationId, body) -> {
+                              sends.incrementAndGet();
+                              entered.countDown();
+                              await(release);
+                              client.onReply(correlationId, new byte[] {7});
+                            })));
+          }
+          assertTrue(entered.await(2, TimeUnit.SECONDS));
+          JmsRequestReplyException capacity =
+              assertThrows(
+                  JmsRequestReplyException.class,
                   () ->
                       client.exchange(
-                          id,
+                          new UUID(0, maximum + 1),
                           request(),
                           Duration.ofSeconds(2),
-                          (correlationId, body) -> {
-                            sends.incrementAndGet();
-                            entered.countDown();
-                            await(release);
-                            client.onReply(correlationId, new byte[] {7});
-                          })));
-        }
-        assertTrue(entered.await(2, TimeUnit.SECONDS));
-        JmsRequestReplyException capacity =
-            assertThrows(
-                JmsRequestReplyException.class,
-                () ->
-                    client.exchange(
-                        new UUID(0, maximum + 1),
-                        request(),
-                        Duration.ofSeconds(2),
-                        (id, body) -> sends.incrementAndGet()));
-        assertEquals(JmsRequestReplyException.Reason.CAPACITY, capacity.reason());
-        release.countDown();
-        for (Future<byte[]> wait : waits) {
-          assertArrayEquals(new byte[] {7}, wait.get(2, TimeUnit.SECONDS));
+                          (id, body) -> sends.incrementAndGet()));
+          assertEquals(JmsRequestReplyException.Reason.CAPACITY, capacity.reason());
+          release.countDown();
+          for (Future<byte[]> wait : waits) {
+            assertArrayEquals(new byte[] {7}, wait.get(2, TimeUnit.SECONDS));
+          }
+        } finally {
+          release.countDown();
         }
       }
       assertEquals(maximum, sends.get());
