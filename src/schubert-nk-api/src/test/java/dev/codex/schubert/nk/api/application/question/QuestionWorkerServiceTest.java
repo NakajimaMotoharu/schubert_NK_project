@@ -68,6 +68,10 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** AWORK001..006: real PG18 and JMS, independently literal QWK/SQL; not Linux IT/ST. */
 class QuestionWorkerServiceTest {
+  private static final String FIXTURE_SELECT_STATUS_FROM_SCHUBERT_MQ_OUTBOX_WH_71AC8AB8 =
+      "select status from schubert.mq_outbox where destination='nk.dead.letter'";
+  private static final String FIXTURE_SELECT_COUNT_FROM_SCHUBERT_APP_LOGS_WHER_E5BBEC80 =
+      "select count(*) from schubert.app_logs where action='QUESTION_COMPLETED'";
   private static final String FIXTURE_SELECT_COUNT_FROM_SCHUBERT_ANSWERS_03E9AB4B =
       "select count(*) from schubert.answers";
   private static final String FIXTURE_SELECT_COUNT_FROM_SCHUBERT_MQ_OUTBOX_73BAB5AA =
@@ -453,7 +457,7 @@ class QuestionWorkerServiceTest {
                               assertEquals(
                                   "SENT",
                                   h.text(
-                                      "select status from schubert.mq_outbox where destination='nk.dead.letter'"));
+                                      FIXTURE_SELECT_STATUS_FROM_SCHUBERT_MQ_OUTBOX_WH_71AC8AB8));
                               throw new jakarta.jms.JMSRuntimeException(
                                   "independent ACK-window fault");
                             }
@@ -470,7 +474,7 @@ class QuestionWorkerServiceTest {
                 () -> listener.onMessage(receiving, incoming));
             assertEquals(
                 FIXTURE_PENDING_B11DB31F,
-                h.text("select status from schubert.mq_outbox where destination='nk.dead.letter'"));
+                h.text(FIXTURE_SELECT_STATUS_FROM_SCHUBERT_MQ_OUTBOX_WH_71AC8AB8));
           }
           assertNull(consumer.receive(500));
         }
@@ -557,7 +561,7 @@ class QuestionWorkerServiceTest {
           FIXTURE_ERROR_F717E7D8, h.text(FIXTURE_SELECT_STATE_FROM_SCHUBERT_ASYNC_JOBS_E6C43F91));
       assertEquals(
           FIXTURE_PENDING_B11DB31F,
-          h.text("select status from schubert.mq_outbox where destination='nk.dead.letter'"));
+          h.text(FIXTURE_SELECT_STATUS_FROM_SCHUBERT_MQ_OUTBOX_WH_71AC8AB8));
     }
     try (var h = accepted()) {
       Thread.currentThread().interrupt();
@@ -592,8 +596,7 @@ class QuestionWorkerServiceTest {
               () -> false)
           .process(event(), delivery(1));
       assertEquals(1, h.scalar(FIXTURE_SELECT_COUNT_FROM_SCHUBERT_ANSWERS_03E9AB4B));
-      assertEquals(
-          1, h.scalar("select count(*) from schubert.app_logs where action='QUESTION_COMPLETED'"));
+      assertEquals(1, h.scalar(FIXTURE_SELECT_COUNT_FROM_SCHUBERT_APP_LOGS_WHER_E5BBEC80));
     }
     try (var h = accepted()) {
       worker(
@@ -656,7 +659,7 @@ class QuestionWorkerServiceTest {
           TemporaryInfrastructureException.class, () -> corrupt.process(event(), delivery(5)));
       assertEquals(
           FIXTURE_PENDING_B11DB31F,
-          h.text("select status from schubert.mq_outbox where destination='nk.dead.letter'"));
+          h.text(FIXTURE_SELECT_STATUS_FROM_SCHUBERT_MQ_OUTBOX_WH_71AC8AB8));
       try (var c = database.admin();
           var s = c.createStatement()) {
         assertEquals(
@@ -765,9 +768,7 @@ class QuestionWorkerServiceTest {
         assertEquals(
             FIXTURE_PROCESSING_01F94682, h.text("select state from schubert.notifications"));
         assertEquals(0, h.scalar(FIXTURE_SELECT_COUNT_FROM_SCHUBERT_ANSWERS_03E9AB4B));
-        assertEquals(
-            0,
-            h.scalar("select count(*) from schubert.app_logs where action='QUESTION_COMPLETED'"));
+        assertEquals(0, h.scalar(FIXTURE_SELECT_COUNT_FROM_SCHUBERT_APP_LOGS_WHER_E5BBEC80));
       }
     }
   }
@@ -892,9 +893,7 @@ class QuestionWorkerServiceTest {
         assertNotEquals(
             FIXTURE_COMPLETED_BA0AE16A,
             h.text(FIXTURE_SELECT_STATE_FROM_SCHUBERT_ASYNC_JOBS_E6C43F91));
-        assertEquals(
-            0,
-            h.scalar("select count(*) from schubert.app_logs where action='QUESTION_COMPLETED'"));
+        assertEquals(0, h.scalar(FIXTURE_SELECT_COUNT_FROM_SCHUBERT_APP_LOGS_WHER_E5BBEC80));
       }
     }
     try (var h = accepted()) {
@@ -1000,7 +999,7 @@ class QuestionWorkerServiceTest {
             TemporaryInfrastructureException.class, () -> worker.process(event(), delivery(5)));
         assertEquals(
             state.equals("LEASED") ? FIXTURE_PENDING_B11DB31F : state,
-            h.text("select status from schubert.mq_outbox where destination='nk.dead.letter'"));
+            h.text(FIXTURE_SELECT_STATUS_FROM_SCHUBERT_MQ_OUTBOX_WH_71AC8AB8));
         assertEquals(0, h.live.get());
       }
     }
@@ -1022,12 +1021,9 @@ class QuestionWorkerServiceTest {
                 () -> {},
                 () -> false,
                 h.clock);
-        long before =
-            h.scalar("select count(*) from schubert.app_logs where action='QUESTION_COMPLETED'");
+        long before = h.scalar(FIXTURE_SELECT_COUNT_FROM_SCHUBERT_APP_LOGS_WHER_E5BBEC80);
         assertThrows(PermanentProtocolException.class, () -> worker.process(event(), delivery(2)));
-        assertEquals(
-            before,
-            h.scalar("select count(*) from schubert.app_logs where action='QUESTION_COMPLETED'"));
+        assertEquals(before, h.scalar(FIXTURE_SELECT_COUNT_FROM_SCHUBERT_APP_LOGS_WHER_E5BBEC80));
         assertEquals(
             fault.equals("completed-extra")
                 ? FIXTURE_COMPLETED_BA0AE16A

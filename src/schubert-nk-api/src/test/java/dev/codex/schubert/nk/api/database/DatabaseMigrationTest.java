@@ -55,6 +55,13 @@ import org.postgresql.util.PSQLException;
  */
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 final class DatabaseMigrationTest {
+  private static final String FIXTURE_VALUE_E91D96ED = "','";
+  private static final String FIXTURE_VALUES_E1A41190 = " values('";
+  private static final String FIXTURE_WHERE_BUSINESS_DATE_2031_06_01_AND_STEP_24D844FD =
+      " where business_date='2031-06-01' and step='CLEAN_EXPIRY'";
+  private static final String FIXTURE_WHERE_BUSINESS_DATE_2031_06_04_AND_ATTEM_ED0EA78C =
+      " where business_date='2031-06-04' and attempt=1";
+  private static final String FIXTURE_WHERE_ID_2ACD8721 = " where id='";
   private static final String FIXTURE_SELECT_FROM_06A9ABF0 = "select * from ";
   private static final String FIXTURE_SCHUBERT_WEB_SESSION_1E78D426 = "schubert_web_session";
   private static final String FIXTURE_CREATEDB_AF6714D1 = "createdb";
@@ -374,7 +381,7 @@ final class DatabaseMigrationTest {
               + CIPHER
               + ",'key-1','"
               + FIXED_TIME
-              + "','"
+              + FIXTURE_VALUE_E91D96ED
               + FIXED_TIME
               + "','2026-09-03 00:00:00+00',false,'"
               + FIXED_TIME
@@ -411,11 +418,11 @@ final class DatabaseMigrationTest {
           "insert into schubert.notifications(job_id,question_id,owner_user_id,notification_type,state,accepted_at,state_changed_at,created_at,updated_at) "
               + "values(1,1,10,'ERROR','ERROR','"
               + FIXED_TIME
-              + "','"
+              + FIXTURE_VALUE_E91D96ED
               + FIXED_TIME
-              + "','"
+              + FIXTURE_VALUE_E91D96ED
               + FIXED_TIME
-              + "','"
+              + FIXTURE_VALUE_E91D96ED
               + FIXED_TIME
               + "')");
       assertRejects(
@@ -424,13 +431,13 @@ final class DatabaseMigrationTest {
           "insert into schubert.request_inbox(message_id,correlation_id,request_layout_id,request_version,"
               + "request_fingerprint_hmac,fingerprint_key_version,processing_state,created_at,completed_at,expires_at) values('"
               + UUID_1
-              + "','"
+              + FIXTURE_VALUE_E91D96ED
               + UUID_2
               + "','LGNREQ01','001','"
               + HASH
               + "','key-1','PROCESSING','"
               + FIXED_TIME
-              + "','"
+              + FIXTURE_VALUE_E91D96ED
               + FIXED_TIME
               + "','2026-09-03 00:00:00+00')");
       execute(
@@ -461,7 +468,7 @@ final class DatabaseMigrationTest {
           "insert into schubert.mq_outbox(message_id,correlation_id,destination,layout_id,layout_version,body,status,"
               + "next_attempt_at,lease_owner,created_at) values('"
               + UUID_1
-              + "','"
+              + FIXTURE_VALUE_E91D96ED
               + UUID_2
               + "','nk.async.work','QWKREQ01','001',decode('00','hex'),'PENDING','"
               + FIXED_TIME
@@ -473,13 +480,13 @@ final class DatabaseMigrationTest {
           FIXTURE_23514_8632CD65,
           "insert into schubert_web_session.web_http_sessions values('"
               + UUID_1
-              + "','"
+              + FIXTURE_VALUE_E91D96ED
               + HASH
               + "',"
               + CIPHER
               + ",'key-1','"
               + FIXED_TIME
-              + "','"
+              + FIXTURE_VALUE_E91D96ED
               + FIXED_TIME
               + "','2026-09-03 00:00:00+00',28801,0)");
       assertRejects(
@@ -543,11 +550,11 @@ final class DatabaseMigrationTest {
           "insert into schubert.notifications(job_id,question_id,owner_user_id,notification_type,state,accepted_at,state_changed_at,created_at,updated_at) "
               + "values(1,1,20,'ACCEPTED','RECEIVED','"
               + FIXED_TIME
-              + "','"
+              + FIXTURE_VALUE_E91D96ED
               + FIXED_TIME
-              + "','"
+              + FIXTURE_VALUE_E91D96ED
               + FIXED_TIME
-              + "','"
+              + FIXTURE_VALUE_E91D96ED
               + FIXED_TIME
               + "')");
       assertRejects(connection, "23001", "delete from schubert.questions where id=1");
@@ -573,7 +580,7 @@ final class DatabaseMigrationTest {
           "insert into schubert.audio_files(id,game_id,storage_relative_path,display_path,file_name,basename,audio_role,byte_size,sha256,created_at) "
               + "select 10000+g,1,'audio/'||g,'audio/'||g,g||'.ogg',g||'.ogg','voice',1,'"
               + HASH
-              + "','"
+              + FIXTURE_VALUE_E91D96ED
               + FIXED_TIME
               + "' from generate_series(1,1000) g");
       execute(
@@ -656,13 +663,13 @@ final class DatabaseMigrationTest {
               + UUID_2
               + "','2026-09-02','BACKUP_DB',1,'"
               + FIXED_TIME
-              + "','"
+              + FIXTURE_VALUE_E91D96ED
               + FIXED_TIME
               + "','SUCCESS'),('"
               + UUID_2
               + "','2026-09-02','BACKUP_CONFIG',1,'"
               + FIXED_TIME
-              + "','"
+              + FIXTURE_VALUE_E91D96ED
               + FIXED_TIME
               + "','SUCCESS')");
       execute(
@@ -685,7 +692,7 @@ final class DatabaseMigrationTest {
               "select target_count||'|'||deleted_count||'|'||skipped_count||'|'||reason_code "
                   + "from schubert.maintenance_cleanup_logs('"
                   + UUID_2
-                  + "','"
+                  + FIXTURE_VALUE_E91D96ED
                   + FIXED_TIME
                   + "',10)"));
       execute(connection, FIXTURE_RESET_ROLE_E5818A11);
@@ -740,7 +747,7 @@ final class DatabaseMigrationTest {
               "select target_count||'|'||deleted_count||'|'||skipped_count||'|'||reason_code "
                   + "from schubert.maintenance_cleanup_sessions('"
                   + UUID_2
-                  + "','"
+                  + FIXTURE_VALUE_E91D96ED
                   + FIXED_TIME
                   + "',10)"));
       execute(connection, FIXTURE_RESET_ROLE_E5818A11);
@@ -772,7 +779,13 @@ final class DatabaseMigrationTest {
           "BACKUP_GATE",
           queryString(
               FIXTURE_SCHUBERT_BATCH_F9C88479,
-              "select reason_code from " + function + "('" + UUID_1 + "','" + FIXED_TIME + "',1)"));
+              "select reason_code from "
+                  + function
+                  + "('"
+                  + UUID_1
+                  + FIXTURE_VALUE_E91D96ED
+                  + FIXED_TIME
+                  + "',1)"));
       assertSqlState(
           FIXTURE_SCHUBERT_BATCH_F9C88479,
           FIXTURE_22023_CDCA15BB,
@@ -784,7 +797,13 @@ final class DatabaseMigrationTest {
       assertSqlState(
           FIXTURE_SCHUBERT_BATCH_F9C88479,
           FIXTURE_22023_CDCA15BB,
-          FIXTURE_SELECT_FROM_06A9ABF0 + function + "('" + UUID_1 + "','" + FIXED_TIME + "',0)");
+          FIXTURE_SELECT_FROM_06A9ABF0
+              + function
+              + "('"
+              + UUID_1
+              + FIXTURE_VALUE_E91D96ED
+              + FIXED_TIME
+              + "',0)");
       assertSqlState(
           FIXTURE_SCHUBERT_BATCH_F9C88479,
           FIXTURE_22023_CDCA15BB,
@@ -792,7 +811,7 @@ final class DatabaseMigrationTest {
               + function
               + "('"
               + UUID_1
-              + "','"
+              + FIXTURE_VALUE_E91D96ED
               + FIXED_TIME
               + "',"
               + (cleanup.getValue() + 1)
@@ -810,7 +829,7 @@ final class DatabaseMigrationTest {
                     + cleanup
                     + "('"
                     + UUID_1
-                    + "','"
+                    + FIXTURE_VALUE_E91D96ED
                     + FIXED_TIME
                     + "',1)"));
       }
@@ -983,7 +1002,7 @@ final class DatabaseMigrationTest {
             + function
             + "('"
             + UUID_2
-            + "','"
+            + FIXTURE_VALUE_E91D96ED
             + cutoff
             + "',"
             + limit
@@ -1161,7 +1180,7 @@ final class DatabaseMigrationTest {
       connection.setAutoCommit(false);
       String row =
           "insert into schubert.batch_runs(run_id,business_date,step,attempt,started_at,status)"
-              + " values('"
+              + FIXTURE_VALUES_E1A41190
               + UUID_1
               + "','2031-06-01','CLEAN_EXPIRY',1,'2031-06-01 00:00:00+00','RUNNING')";
       execute(connection, row);
@@ -1169,56 +1188,56 @@ final class DatabaseMigrationTest {
           connection,
           FIXTURE_23514_8632CD65,
           "update schubert.batch_runs set expiry_cutoff_at='2031-05-25 00:00:00+00'"
-              + " where business_date='2031-06-01' and step='CLEAN_EXPIRY'");
+              + FIXTURE_WHERE_BUSINESS_DATE_2031_06_01_AND_STEP_24D844FD);
       assertRejects(
           connection,
           FIXTURE_23514_8632CD65,
           "update schubert.batch_runs set status='SUCCESS'"
-              + " where business_date='2031-06-01' and step='CLEAN_EXPIRY'");
+              + FIXTURE_WHERE_BUSINESS_DATE_2031_06_01_AND_STEP_24D844FD);
       assertRejects(
           connection,
           FIXTURE_23514_8632CD65,
           "update schubert.batch_runs set expiry_cutoff_at='infinity',"
               + "expiry_before_count=2,expiry_after_count=1"
-              + " where business_date='2031-06-01' and step='CLEAN_EXPIRY'");
+              + FIXTURE_WHERE_BUSINESS_DATE_2031_06_01_AND_STEP_24D844FD);
       assertRejects(
           connection,
           FIXTURE_23514_8632CD65,
           "update schubert.batch_runs set expiry_cutoff_at='2031-05-25 00:00:00+00',"
               + "expiry_before_count=1,expiry_after_count=2"
-              + " where business_date='2031-06-01' and step='CLEAN_EXPIRY'");
+              + FIXTURE_WHERE_BUSINESS_DATE_2031_06_01_AND_STEP_24D844FD);
       assertRejects(
           connection,
           FIXTURE_23514_8632CD65,
           "update schubert.batch_runs set expiry_cutoff_at='2031-05-25 00:00:00+00',"
               + "expiry_before_count=-1,expiry_after_count=0"
-              + " where business_date='2031-06-01' and step='CLEAN_EXPIRY'");
+              + FIXTURE_WHERE_BUSINESS_DATE_2031_06_01_AND_STEP_24D844FD);
       execute(
           connection,
           "update schubert.batch_runs set expiry_cutoff_at='2031-05-25 00:00:00+00',"
               + "expiry_before_count=2,expiry_after_count=1,target_count=1,success_count=1,"
               + "failure_count=0,byte_count=64,status='SUCCESS',"
               + "ended_at='2031-06-01 00:00:01+00'"
-              + " where business_date='2031-06-01' and step='CLEAN_EXPIRY'");
+              + FIXTURE_WHERE_BUSINESS_DATE_2031_06_01_AND_STEP_24D844FD);
       assertRejects(
           connection,
           FIXTURE_23514_8632CD65,
           "update schubert.batch_runs set expiry_after_count=0"
-              + " where business_date='2031-06-01' and step='CLEAN_EXPIRY'");
+              + FIXTURE_WHERE_BUSINESS_DATE_2031_06_01_AND_STEP_24D844FD);
       assertRejects(
           connection,
           FIXTURE_23514_8632CD65,
           "update schubert.batch_runs set target_count=2"
-              + " where business_date='2031-06-01' and step='CLEAN_EXPIRY'");
+              + FIXTURE_WHERE_BUSINESS_DATE_2031_06_01_AND_STEP_24D844FD);
       assertRejects(
           connection,
           FIXTURE_23514_8632CD65,
           "update schubert.batch_runs set failure_count=1"
-              + " where business_date='2031-06-01' and step='CLEAN_EXPIRY'");
+              + FIXTURE_WHERE_BUSINESS_DATE_2031_06_01_AND_STEP_24D844FD);
       execute(
           connection,
           "insert into schubert.batch_runs(run_id,business_date,step,attempt,started_at,status)"
-              + " values('"
+              + FIXTURE_VALUES_E1A41190
               + UUID_2
               + "','2031-06-02','BACKUP_DB',1,'2031-06-02 00:00:00+00','RUNNING')");
       assertRejects(
@@ -1274,7 +1293,7 @@ final class DatabaseMigrationTest {
         ADMIN,
         legacyUrl,
         "insert into schubert.batch_runs(run_id,business_date,step,attempt,started_at,ended_at,status)"
-            + " values('"
+            + FIXTURE_VALUES_E1A41190
             + UUID_1
             + "','2031-06-03','CLEAN_EXPIRY',1,'2031-06-03 00:00:00+00',"
             + "'2031-06-03 00:00:01+00','SUCCESS')");
@@ -1335,7 +1354,7 @@ final class DatabaseMigrationTest {
         ADMIN,
         stageUrl,
         "insert into schubert.batch_runs(run_id,business_date,step,attempt,started_at,status)"
-            + " values('"
+            + FIXTURE_VALUES_E1A41190
             + UUID_1
             + "','2031-06-04','CLEAN_EXPIRY',1,'2031-06-04 00:00:00+00','RUNNING')");
     execute(
@@ -1343,7 +1362,7 @@ final class DatabaseMigrationTest {
         stageUrl,
         "insert into schubert.batch_runs(run_id,business_date,step,attempt,started_at,ended_at,status,"
             + "expiry_cutoff_at,expiry_before_count,expiry_after_count,target_count,success_count)"
-            + " values('"
+            + FIXTURE_VALUES_E1A41190
             + UUID_2
             + "','2031-06-05','CLEAN_EXPIRY',1,'2031-06-05 00:00:00+00',"
             + "'2031-06-05 00:00:01+00','SUCCESS','2031-05-29 00:00:00+00',2,1,1,1)");
@@ -1354,7 +1373,7 @@ final class DatabaseMigrationTest {
           FIXTURE_23514_8632CD65,
           "update schubert.batch_runs set expiry_cutoff_at='2031-05-28 00:00:00+00',"
               + "expiry_before_count=2,target_count=2,byte_count=64"
-              + " where business_date='2031-06-04' and attempt=1");
+              + FIXTURE_WHERE_BUSINESS_DATE_2031_06_04_AND_ATTEM_ED0EA78C);
       connection.rollback();
     }
     assertEquals(
@@ -1382,22 +1401,22 @@ final class DatabaseMigrationTest {
           connection,
           "update schubert.batch_runs set expiry_cutoff_at='2031-05-28 00:00:00+00',"
               + "expiry_before_count=2,target_count=2,byte_count=64"
-              + " where business_date='2031-06-04' and attempt=1");
+              + FIXTURE_WHERE_BUSINESS_DATE_2031_06_04_AND_ATTEM_ED0EA78C);
       assertRejects(
           connection,
           FIXTURE_23514_8632CD65,
           "update schubert.batch_runs set status='SUCCESS'"
-              + " where business_date='2031-06-04' and attempt=1");
+              + FIXTURE_WHERE_BUSINESS_DATE_2031_06_04_AND_ATTEM_ED0EA78C);
       assertRejects(
           connection,
           FIXTURE_23514_8632CD65,
           "update schubert.batch_runs set target_count=3"
-              + " where business_date='2031-06-04' and attempt=1");
+              + FIXTURE_WHERE_BUSINESS_DATE_2031_06_04_AND_ATTEM_ED0EA78C);
       assertRejects(
           connection,
           FIXTURE_23514_8632CD65,
           "update schubert.batch_runs set success_count=1"
-              + " where business_date='2031-06-04' and attempt=1");
+              + FIXTURE_WHERE_BUSINESS_DATE_2031_06_04_AND_ATTEM_ED0EA78C);
       connection.commit();
     }
     assertEquals(
@@ -1414,7 +1433,7 @@ final class DatabaseMigrationTest {
         stageUrl,
         "update schubert.batch_runs set status='FAILED',failure_count=2,"
             + "ended_at='2031-06-04 00:00:01+00'"
-            + " where business_date='2031-06-04' and attempt=1");
+            + FIXTURE_WHERE_BUSINESS_DATE_2031_06_04_AND_ATTEM_ED0EA78C);
     assertEquals(
         "FAILED|2|0|NULL",
         queryString(
@@ -1629,7 +1648,7 @@ final class DatabaseMigrationTest {
               WEB_ROLE,
               "select count(*) from "
                   + table
-                  + " where id='"
+                  + FIXTURE_WHERE_ID_2ACD8721
                   + id
                   + "' and expires_at is null and attempt_count=0 and lease_owner is null and lease_until is null"));
       assertEquals(
@@ -1652,7 +1671,7 @@ final class DatabaseMigrationTest {
               WEB_ROLE,
               "select count(*) from "
                   + table
-                  + " where id='"
+                  + FIXTURE_WHERE_ID_2ACD8721
                   + id
                   + "' and expires_at is null and attempt_count=100 and last_error_code='SESSION_INVALID'"));
       for (String mutation :
@@ -1669,11 +1688,17 @@ final class DatabaseMigrationTest {
                     execute(
                         WEB_ROLE,
                         jdbcUrl,
-                        "update " + table + " set " + mutation + " where id='" + id + "'"));
+                        "update "
+                            + table
+                            + " set "
+                            + mutation
+                            + FIXTURE_WHERE_ID_2ACD8721
+                            + id
+                            + "'"));
         assertEquals(FIXTURE_23514_8632CD65, failure.getSQLState());
       }
     } finally {
-      execute(WEB_ROLE, jdbcUrl, "delete from " + table + " where id='" + id + "'");
+      execute(WEB_ROLE, jdbcUrl, "delete from " + table + FIXTURE_WHERE_ID_2ACD8721 + id + "'");
     }
   }
 
@@ -1720,7 +1745,7 @@ final class DatabaseMigrationTest {
         + "request_fingerprint_hmac,fingerprint_key_version,processing_state,result_ref_type,response_layout_id,"
         + "response_version,response_body_encrypted,response_key_version,created_at,completed_at,expires_at) values('"
         + messageId
-        + "','"
+        + FIXTURE_VALUE_E91D96ED
         + correlationId
         + "','LGNREQ01','001','"
         + HASH
@@ -1728,7 +1753,7 @@ final class DatabaseMigrationTest {
         + ciphertextBytes
         + "),'hex'),'key-1','"
         + FIXED_TIME
-        + "','"
+        + FIXTURE_VALUE_E91D96ED
         + FIXED_TIME
         + "','2026-09-03 00:00:00+00')";
   }
@@ -1842,7 +1867,7 @@ final class DatabaseMigrationTest {
         + version
         + ",'"
         + FIXED_TIME
-        + "','"
+        + FIXTURE_VALUE_E91D96ED
         + FIXED_TIME
         + "')";
   }
@@ -1857,9 +1882,9 @@ final class DatabaseMigrationTest {
         + role
         + "','ACTIVE','"
         + FIXED_TIME
-        + "','"
+        + FIXTURE_VALUE_E91D96ED
         + FIXED_TIME
-        + "','"
+        + FIXTURE_VALUE_E91D96ED
         + FIXED_TIME
         + "')";
   }
@@ -1894,12 +1919,12 @@ final class DatabaseMigrationTest {
         + "last_error_code,last_error_message) values(1,1,"
         + "(select owner_user_id from schubert.questions where id=1),'"
         + state
-        + "','"
+        + FIXTURE_VALUE_E91D96ED
         + "00000000-0000-0000-0000-000000000020','00000000-0000-0000-0000-000000000021',"
         + processingMessageId
         + ",'"
         + FIXED_TIME
-        + "','"
+        + FIXTURE_VALUE_E91D96ED
         + FIXED_TIME
         + "',"
         + startedAt
@@ -1927,7 +1952,7 @@ final class DatabaseMigrationTest {
         + id
         + "','shown/"
         + id
-        + "','"
+        + FIXTURE_VALUE_E91D96ED
         + id
         + ".ks','"
         + HASH
@@ -1945,7 +1970,7 @@ final class DatabaseMigrationTest {
         + id
         + "','speaker"
         + id
-        + "','"
+        + FIXTURE_VALUE_E91D96ED
         + FIXED_TIME
         + "')";
   }
@@ -1977,13 +2002,13 @@ final class DatabaseMigrationTest {
         + id
         + "','audio/"
         + id
-        + "','"
+        + FIXTURE_VALUE_E91D96ED
         + id
         + ".ogg','"
         + id
         + ".ogg','voice',1,'"
         + HASH
-        + "','"
+        + FIXTURE_VALUE_E91D96ED
         + FIXED_TIME
         + "')";
   }

@@ -90,6 +90,7 @@ import org.junit.jupiter.api.io.TempDir;
  * SSC-027/PT-SCN-009-T01..T05. Real PG and independent SQL/wire/AES; publisher stub scope explicit.
  */
 final class ScenarioApplicationServiceTest {
+  private static final String FIXTURE_SCF_AC95C8D1 = "SCF";
   private static final String FIXTURE_SRC_27085F52 = "SRC";
   private static final String FIXTURE_SCN_F30DFFA3 = "SCN";
   private static final String FIXTURE_0000_876EEFE0 = "0000";
@@ -1301,13 +1302,14 @@ final class ScenarioApplicationServiceTest {
         switch (prefix) {
           case FIXTURE_GAM_5BC4EFCF -> new byte[0];
           case FIXTURE_SPK_2964937C, "RTE" -> spaces(12);
-          case "SCF" -> spaces(14);
+          case FIXTURE_SCF_AC95C8D1 -> spaces(14);
           case FIXTURE_SRC_27085F52 -> search();
           case FIXTURE_SCN_F30DFFA3 -> "000000000030".getBytes(StandardCharsets.US_ASCII);
           default -> throw new AssertionError(prefix);
         };
-    if (List.of(FIXTURE_SPK_2964937C, "RTE", "SCF").contains(prefix)) put(data, 0, "NUKITASHI1");
-    if (prefix.equals("SCF")) put(data, 12, "01");
+    if (List.of(FIXTURE_SPK_2964937C, "RTE", FIXTURE_SCF_AC95C8D1).contains(prefix))
+      put(data, 0, "NUKITASHI1");
+    if (prefix.equals(FIXTURE_SCF_AC95C8D1)) put(data, 12, "01");
     return message(prefix + "REQ01", data);
   }
 
@@ -1354,7 +1356,7 @@ final class ScenarioApplicationServiceTest {
             code,
             file,
             count);
-    if (prefix.equals("SCF")
+    if (prefix.equals(FIXTURE_SCF_AC95C8D1)
         && (code.equals(FIXTURE_0000_876EEFE0) || code.equals(FIXTURE_0200_FC9DB3AC)))
       put(expected, 256 + 14, "共通ルート");
     if (file) {

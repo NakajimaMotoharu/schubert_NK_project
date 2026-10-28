@@ -28,6 +28,7 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** PT-DB-INBOX-025..032; SS331 3.5; SQL capability is NOT an AES/reference validation oracle. */
 final class InboxDeletionBoundaryTest {
+  private static final String FIXTURE_VALUE_E91D96ED = "','";
   private static final String FIXTURE_42501_719DF123 = "42501";
   @TempDir static Path root;
   private static ApiLogDatabaseFixture db;
@@ -69,7 +70,7 @@ final class InboxDeletionBoundaryTest {
     sql(
         "insert into schubert.request_inbox(message_id,correlation_id,request_layout_id,request_version,request_fingerprint_hmac,fingerprint_key_version,processing_state,result_ref_type,response_layout_id,response_version,response_body_encrypted,response_key_version,created_at,completed_at,expires_at) values('"
             + MESSAGE
-            + "','"
+            + FIXTURE_VALUE_E91D96ED
             + MESSAGE
             + "','LGNREQ01','001',repeat('a',64),'v1','ERROR','NONE','LGNRSP01','001',decode(repeat('00',30),'hex'),'v1','2026-09-09T00:00:00Z','2026-09-09T00:00:00.123Z','2026-09-16T00:00:00.123Z')");
   }
@@ -157,9 +158,9 @@ final class InboxDeletionBoundaryTest {
           "22023",
           "select schubert.maintenance_delete_auth_inbox('"
               + RUN
-              + "','"
+              + FIXTURE_VALUE_E91D96ED
               + infinity
-              + "','"
+              + FIXTURE_VALUE_E91D96ED
               + MESSAGE
               + "','1',decode(repeat('00',32),'hex'))");
     }
@@ -356,14 +357,18 @@ final class InboxDeletionBoundaryTest {
                 c,
                 "select has_function_privilege('"
                     + role
-                    + "','"
+                    + FIXTURE_VALUE_E91D96ED
                     + SIGNATURE
                     + "','execute')::text"));
       assertEquals(
           "true",
           value(
               c,
-              "select has_function_privilege('" + ROLE + "','" + SIGNATURE + "','execute')::text"));
+              "select has_function_privilege('"
+                  + ROLE
+                  + FIXTURE_VALUE_E91D96ED
+                  + SIGNATURE
+                  + "','execute')::text"));
     }
     for (String role :
         List.of(

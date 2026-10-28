@@ -29,6 +29,7 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** PT-DB-INBOX-153..160; BUG-104/SSC-051/PG-D-136; independent SQL/retention/lock oracles. */
 final class LogCleanupProgressBoundaryTest {
+  private static final String FIXTURE_2025_08_01_590D2F8C = "'2025-08-01'";
   private static final String FIXTURE_0_0_0_FALSE_DBD9596F = "0|0|0|false";
   private static final String FIXTURE_1_1_0_OK_A3F53FDF = "1|1|0|OK";
   private static final String FIXTURE_0_0_0_OK_B39BA730 = "0|0|0|OK";
@@ -449,10 +450,10 @@ final class LogCleanupProgressBoundaryTest {
         "'2025-08-13 00:00:00+00'",
         "'2025-08-13 00:00:00.000001+00'",
         FIXTURE_NULL_F072CBEC,
-        "'2025-08-01'",
-        "'2025-08-01'",
-        "'2025-08-01'",
-        "'2025-08-01'"
+        FIXTURE_2025_08_01_590D2F8C,
+        FIXTURE_2025_08_01_590D2F8C,
+        FIXTURE_2025_08_01_590D2F8C,
+        FIXTURE_2025_08_01_590D2F8C
       };
       for (int i = 0; i < ends.length; i++)
         sql(

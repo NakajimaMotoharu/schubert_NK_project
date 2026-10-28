@@ -41,6 +41,15 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** NK-BAT-001/OPS009/DAT009/UI251/SS331 8.3/332/341; SSC055/PG163; BAT138..153. */
 final class BatchRunRepositoryTest {
+  private static final String FIXTURE_REFS_0170B82B = "refs";
+  private static final String FIXTURE_CONNECTION_PREPARESTATEMENT_D4089450 =
+      "connection.prepareStatement";
+  private static final String FIXTURE_STATEMENT_SETQUERYTIMEOUT_72F2B24A =
+      "statement.setQueryTimeout";
+  private static final String FIXTURE_STATEMENT_SETOBJECT_F6BB1F43 = "statement.setObject";
+  private static final String FIXTURE_ROW_NEXT_C5E777C8 = "row.next";
+  private static final String FIXTURE_ROW_GETOBJECT_0ADC2582 = "row.getObject";
+  private static final String FIXTURE_STATEMENT_SETSTRING_2361CD39 = "statement.setString";
   private static final String FIXTURE_SELECT_COUNT_FROM_SCHUBERT_BATCH_RUNS_5545B4A2 =
       "select count(*) from schubert.batch_runs";
   private static final String FIXTURE_ATTEMPT_7FD8A755 = "attempt";
@@ -1149,7 +1158,7 @@ final class BatchRunRepositoryTest {
       p.closed();
       assertEquals(
           Set.of(
-              "refs",
+              FIXTURE_REFS_0170B82B,
               FIXTURE_HISTORY_BB36CCAE,
               FIXTURE_INSERT_A0C28A2E,
               FIXTURE_FINISH_91A2F12C,
@@ -1182,58 +1191,58 @@ final class BatchRunRepositoryTest {
                 Map.entry("connection.getAutoCommit", 2),
                 Map.entry("connection.isReadOnly", 2),
                 Map.entry("connection.getTransactionIsolation", 2),
-                Map.entry("connection.prepareStatement", 2),
-                Map.entry("statement.setQueryTimeout", 2),
-                Map.entry("statement.setObject", 4),
+                Map.entry(FIXTURE_CONNECTION_PREPARESTATEMENT_D4089450, 2),
+                Map.entry(FIXTURE_STATEMENT_SETQUERYTIMEOUT_72F2B24A, 2),
+                Map.entry(FIXTURE_STATEMENT_SETOBJECT_F6BB1F43, 4),
                 Map.entry(FIXTURE_STATEMENT_EXECUTEQUERY_67733F33, 2),
                 Map.entry(FIXTURE_STATEMENT_CLOSE_FE807BAF, 2),
-                Map.entry("row.next", 4),
-                Map.entry("row.getObject", 8),
+                Map.entry(FIXTURE_ROW_NEXT_C5E777C8, 4),
+                Map.entry(FIXTURE_ROW_GETOBJECT_0ADC2582, 8),
                 Map.entry(FIXTURE_ROW_CLOSE_F197F129, 2))
             .entrySet()) m.put(e.getKey(), e.getValue());
     if (path.equals(FIXTURE_FINISH_91A2F12C) || path.equals(FIXTURE_REPLAY_2AA31058)) {
-      add(m, "connection.prepareStatement", 1);
-      add(m, "statement.setQueryTimeout", 1);
-      add(m, "statement.setObject", 4);
-      add(m, "statement.setString", 4);
+      add(m, FIXTURE_CONNECTION_PREPARESTATEMENT_D4089450, 1);
+      add(m, FIXTURE_STATEMENT_SETQUERYTIMEOUT_72F2B24A, 1);
+      add(m, FIXTURE_STATEMENT_SETOBJECT_F6BB1F43, 4);
+      add(m, FIXTURE_STATEMENT_SETSTRING_2361CD39, 4);
       add(m, "statement.setLong", 5);
       add(m, "statement.setInt", 1);
       add(m, "statement.executeUpdate", 1);
       add(m, FIXTURE_STATEMENT_CLOSE_FE807BAF, 1);
       if (path.equals(FIXTURE_REPLAY_2AA31058)) {
-        add(m, "connection.prepareStatement", 1);
-        add(m, "statement.setQueryTimeout", 1);
-        add(m, "statement.setObject", 4);
-        add(m, "statement.setString", 4);
+        add(m, FIXTURE_CONNECTION_PREPARESTATEMENT_D4089450, 1);
+        add(m, FIXTURE_STATEMENT_SETQUERYTIMEOUT_72F2B24A, 1);
+        add(m, FIXTURE_STATEMENT_SETOBJECT_F6BB1F43, 4);
+        add(m, FIXTURE_STATEMENT_SETSTRING_2361CD39, 4);
         add(m, "statement.setLong", 5);
         add(m, "statement.setInt", 1);
         add(m, FIXTURE_STATEMENT_EXECUTEQUERY_67733F33, 1);
         add(m, FIXTURE_STATEMENT_CLOSE_FE807BAF, 1);
-        add(m, "row.next", 2);
-        add(m, "row.getObject", 1);
+        add(m, FIXTURE_ROW_NEXT_C5E777C8, 2);
+        add(m, FIXTURE_ROW_GETOBJECT_0ADC2582, 1);
         add(m, FIXTURE_ROW_CLOSE_F197F129, 1);
       }
     } else {
-      add(m, "connection.prepareStatement", 2);
-      add(m, "statement.setQueryTimeout", 2);
-      add(m, "statement.setObject", 5);
-      add(m, "statement.setString", 5);
+      add(m, FIXTURE_CONNECTION_PREPARESTATEMENT_D4089450, 2);
+      add(m, FIXTURE_STATEMENT_SETQUERYTIMEOUT_72F2B24A, 2);
+      add(m, FIXTURE_STATEMENT_SETOBJECT_F6BB1F43, 5);
+      add(m, FIXTURE_STATEMENT_SETSTRING_2361CD39, 5);
       add(m, "statement.setInt", 1);
       add(m, FIXTURE_STATEMENT_EXECUTEQUERY_67733F33, 2);
       add(m, FIXTURE_STATEMENT_CLOSE_FE807BAF, 2);
-      add(m, "row.next", 3);
-      add(m, "row.getObject", 1);
+      add(m, FIXTURE_ROW_NEXT_C5E777C8, 3);
+      add(m, FIXTURE_ROW_GETOBJECT_0ADC2582, 1);
       add(m, FIXTURE_ROW_CLOSE_F197F129, 2);
       if (!path.equals(FIXTURE_EMPTY_E6845188)) {
-        add(m, "row.next", 1);
-        add(m, "row.getObject", 10);
+        add(m, FIXTURE_ROW_NEXT_C5E777C8, 1);
+        add(m, FIXTURE_ROW_GETOBJECT_0ADC2582, 10);
         add(m, "row.getString", 2);
       }
       if (path.equals(FIXTURE_RECOVER_DE33FD76)) {
-        add(m, "connection.prepareStatement", 1);
-        add(m, "statement.setQueryTimeout", 1);
-        add(m, "statement.setObject", 3);
-        add(m, "statement.setString", 2);
+        add(m, FIXTURE_CONNECTION_PREPARESTATEMENT_D4089450, 1);
+        add(m, FIXTURE_STATEMENT_SETQUERYTIMEOUT_72F2B24A, 1);
+        add(m, FIXTURE_STATEMENT_SETOBJECT_F6BB1F43, 3);
+        add(m, FIXTURE_STATEMENT_SETSTRING_2361CD39, 2);
         add(m, "statement.setLong", 1);
         add(m, "statement.executeUpdate", 1);
         add(m, FIXTURE_STATEMENT_CLOSE_FE807BAF, 1);
@@ -1532,7 +1541,7 @@ final class BatchRunRepositoryTest {
           "id=? and run_id=? and business_date=? and step=? and attempt=? and started_at=?";
       Map<String, String> allowed =
           Map.of(
-              "refs",
+              FIXTURE_REFS_0170B82B,
               "select has_batch_history,has_inbox_progress,has_log_progress,identity_consistent from schubert.maintenance_read_run_references(?,?)",
               FIXTURE_HISTORY_BB36CCAE,
               "select id,run_id,business_date,step,attempt,started_at,ended_at,status,target_count,success_count,failure_count,byte_count from schubert.batch_runs where business_date=? and step=? order by attempt limit 100 for update",
@@ -1558,14 +1567,14 @@ final class BatchRunRepositoryTest {
     static void assertBinds(String k, Map<Integer, Object> b) {
       int count =
           switch (k) {
-            case "refs", FIXTURE_HISTORY_BB36CCAE -> 2;
+            case FIXTURE_REFS_0170B82B, FIXTURE_HISTORY_BB36CCAE -> 2;
             case FIXTURE_INSERT_A0C28A2E -> 9;
             case FIXTURE_ABANDON_5A676BA9 -> 6;
             default -> 14;
           };
       assertEquals(count, b.size());
       for (int i = 1; i <= count; i++) assertTrue(b.containsKey(i));
-      if (k.equals("refs")) {
+      if (k.equals(FIXTURE_REFS_0170B82B)) {
         assertEquals(RUN.id(), b.get(1));
         assertEquals(OffsetDateTime.parse("2026-09-12T15:00:00Z"), b.get(2));
       }

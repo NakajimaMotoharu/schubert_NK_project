@@ -71,6 +71,8 @@ import org.springframework.web.context.support.AnnotationConfigWebApplicationCon
 
 /** UI232/236 byte and DOM literals, not production-generated expected. PG-D344/016053. */
 class UserAdminControllerTest {
+  private static final String FIXTURE_001_A3FEAA64 = "001";
+  private static final String FIXTURE_20261003090000000_7C7C75E7 = "20261003090000000";
   private static final String FIXTURE_READER_F734AAEA = "reader";
   private static final String FIXTURE_GET_04F32A7E = "GET";
   private static final String FIXTURE_ADMIN_USERS_2C687608 = "/admin/users";
@@ -1320,14 +1322,14 @@ class UserAdminControllerTest {
     byte[] bytes = new byte[576];
     Arrays.fill(bytes, (byte) ' ');
     put(bytes, 0, 8, "SCHBNK01");
-    put(bytes, 8, 3, "001");
+    put(bytes, 8, 3, FIXTURE_001_A3FEAA64);
     put(bytes, 11, 8, "UDTRSP01");
-    put(bytes, 19, 3, "001");
+    put(bytes, 19, 3, FIXTURE_001_A3FEAA64);
     put(bytes, 22, 1, "S");
     put(bytes, 23, 1, "S");
     put(bytes, 24, 36, new UUID(1, id.getLeastSignificantBits()).toString());
     put(bytes, 60, 36, id.toString());
-    put(bytes, 96, 17, "20261003090000000");
+    put(bytes, 96, 17, FIXTURE_20261003090000000_7C7C75E7);
     put(bytes, 113, 64, context);
     number(bytes, 177, 4, 256);
     number(bytes, 181, 6, 320);
@@ -1345,8 +1347,8 @@ class UserAdminControllerTest {
       put(bytes, 332, 5, FIXTURE_ADMIN_C4BB3010);
       put(bytes, 337, 8, state);
       if (optional) {
-        put(bytes, 345, 17, "20261003090000000");
-        put(bytes, 362, 17, "20261003090000000");
+        put(bytes, 345, 17, FIXTURE_20261003090000000_7C7C75E7);
+        put(bytes, 362, 17, FIXTURE_20261003090000000_7C7C75E7);
       }
       put(bytes, 442, 64, FIXTURE_SYSTEM_8E1CB697);
       put(bytes, 506, 64, FIXTURE_ADMIN_3D9A13EA);
@@ -1361,14 +1363,14 @@ class UserAdminControllerTest {
     byte[] bytes = new byte[304 + 168 * count];
     Arrays.fill(bytes, (byte) ' ');
     put(bytes, 0, 8, "SCHBNK01");
-    put(bytes, 8, 3, "001");
+    put(bytes, 8, 3, FIXTURE_001_A3FEAA64);
     put(bytes, 11, 8, "USRRSP01");
-    put(bytes, 19, 3, "001");
+    put(bytes, 19, 3, FIXTURE_001_A3FEAA64);
     put(bytes, 22, 1, "S");
     put(bytes, 23, 1, "S");
     put(bytes, 24, 36, new UUID(1, id.getLeastSignificantBits()).toString());
     put(bytes, 60, 36, id.toString());
-    put(bytes, 96, 17, "20261003090000000");
+    put(bytes, 96, 17, FIXTURE_20261003090000000_7C7C75E7);
     put(bytes, 113, 64, context);
     number(bytes, 177, 4, 256);
     number(bytes, 181, 6, 48);
@@ -1388,8 +1390,8 @@ class UserAdminControllerTest {
       put(bytes, at + 12, 64, i == 0 ? firstName : String.format(Locale.ROOT, "user%03d", i));
       put(bytes, at + 76, 5, FIXTURE_ADMIN_C4BB3010);
       put(bytes, at + 81, 8, FIXTURE_ACTIVE_77FF42A3);
-      put(bytes, at + 123, 17, "20261003090000000");
-      put(bytes, at + 140, 17, "20261003090000000");
+      put(bytes, at + 123, 17, FIXTURE_20261003090000000_7C7C75E7);
+      put(bytes, at + 140, 17, FIXTURE_20261003090000000_7C7C75E7);
       number(bytes, at + 157, 9, 1);
     }
     return bytes;

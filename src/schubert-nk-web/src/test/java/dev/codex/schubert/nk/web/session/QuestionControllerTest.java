@@ -87,6 +87,15 @@ import org.springframework.web.context.support.AnnotationConfigWebApplicationCon
 
 /** Independent UI224236 wholebyte/DOM/HTTP oracles; PG-D350/016063/PT-QRY-HTTP001..012. */
 class QuestionControllerTest {
+  private static final String FIXTURE_QUESTIONS_NEW_193F26D5 = "questions/new";
+  private static final String FIXTURE_QSBREQ01_F9A27626 = "QSBREQ01";
+  private static final String FIXTURE_LITERAL_30C2AF62 = "literal";
+  private static final String FIXTURE_OPERATION_TOKEN_6C771227 = "operation_token";
+  private static final String FIXTURE_QUESTIONS_ACCEPTED_3838E205 = "/questions/accepted/";
+  private static final String FIXTURE_LOCATION_FB077BAD = "Location";
+  private static final String FIXTURE_QUESTIONS_NEW_F89B3C4E = "/questions/new";
+  private static final String FIXTURE_001_A3FEAA64 = "001";
+
   // Test-only exhaustive UI236 oracle; never use the Production output encoder.
   private static String expectedQuestionStateWire(AnswerState state) {
     return switch (state) {
@@ -1228,7 +1237,8 @@ class QuestionControllerTest {
       for (int n = 1; n <= 10; n++) {
         var page = new ExtendedModelMap();
         var response = new MockHttpServletResponse();
-        assertEquals("questions/new", f.accepting().newForm(actor, page, request, response));
+        assertEquals(
+            FIXTURE_QUESTIONS_NEW_193F26D5, f.accepting().newForm(actor, page, request, response));
         var view = (QuestionSubmitViewModel) page.get(FIXTURE_PAGE_861424BC);
         assertEquals("", view.getValues().get(FIXTURE_QUESTION_6D6CA52E));
         assertEquals(new UUID(9, n).toString(), view.getValues().get("operationToken"));
@@ -1243,9 +1253,12 @@ class QuestionControllerTest {
       assertEquals(10, f.tokenIds.get());
       assertTrue(f.requests.isEmpty());
       f.tokens.completeVerified(
-          id, "QSBREQ01", new UUID(9, 1), dev.codex.schubert.nk.protocol.header.ResultCode.SUCCESS);
+          id,
+          FIXTURE_QSBREQ01_F9A27626,
+          new UUID(9, 1),
+          dev.codex.schubert.nk.protocol.header.ResultCode.SUCCESS);
       assertEquals(
-          "questions/new",
+          FIXTURE_QUESTIONS_NEW_193F26D5,
           f.accepting()
               .newForm(actor, new ExtendedModelMap(), request, new MockHttpServletResponse()));
       assertEquals(11, f.tokenIds.get());
@@ -1255,8 +1268,8 @@ class QuestionControllerTest {
               .submit(
                   params(
                       FIXTURE_QUESTION_6D6CA52E,
-                      "literal",
-                      "operation_token",
+                      FIXTURE_LITERAL_30C2AF62,
+                      FIXTURE_OPERATION_TOKEN_6C771227,
                       new UUID(9, 1).toString()),
                   actor,
                   new ExtendedModelMap(),
@@ -1278,12 +1291,12 @@ class QuestionControllerTest {
         var actor = actor(role);
         var request = f.authenticatedRequest(actor, FIXTURE_POST_E46D3AE9);
         var session = WebSessionId.parse(request.getSession(false).getId());
-        var token = f.tokens.issue(session, "QSBREQ01");
+        var token = f.tokens.issue(session, FIXTURE_QSBREQ01_F9A27626);
         var input =
             params(
                 FIXTURE_QUESTION_6D6CA52E,
                 "e\u0301 <script>x</script>",
-                "operation_token",
+                FIXTURE_OPERATION_TOKEN_6C771227,
                 token.token().toString());
         var firstTime = f.security.f.clock.value;
         for (int n = 1; n <= 2; n++) {
@@ -1292,8 +1305,11 @@ class QuestionControllerTest {
           var success = new MockHttpServletResponse();
           assertNull(f.accepting().submit(input, actor, new ExtendedModelMap(), request, success));
           assertEquals(302, success.getStatus());
-          assertEquals("/questions/accepted/" + RECEIPT, success.getHeader("Location"));
-          byte[] expected = request("QSBREQ01", 4144, "a".repeat(64), new UUID(0, n));
+          assertEquals(
+              FIXTURE_QUESTIONS_ACCEPTED_3838E205 + RECEIPT,
+              success.getHeader(FIXTURE_LOCATION_FB077BAD));
+          byte[] expected =
+              request(FIXTURE_QSBREQ01_F9A27626, 4144, "a".repeat(64), new UUID(0, n));
           put(expected, 23, 1, "A");
           put(expected, 256, 4096, "é <script>x</script>");
           put(expected, 4352, 36, token.token().toString());
@@ -1321,18 +1337,20 @@ class QuestionControllerTest {
         var actor = actor(UserRole.USER);
         var request = f.authenticatedRequest(actor, FIXTURE_POST_E46D3AE9);
         var session = WebSessionId.parse(request.getSession(false).getId());
-        var token = f.tokens.issue(session, "QSBREQ01");
+        var token = f.tokens.issue(session, FIXTURE_QSBREQ01_F9A27626);
         var input =
             params(
                 FIXTURE_QUESTION_6D6CA52E,
                 "public retry body",
-                "operation_token",
+                FIXTURE_OPERATION_TOKEN_6C771227,
                 token.token().toString());
         if (gap) f.failReceipt = true;
         else f.responder = (id, bytes) -> new byte[1];
         var model = new ExtendedModelMap();
         var response = new MockHttpServletResponse();
-        assertEquals("questions/new", f.accepting().submit(input, actor, model, request, response));
+        assertEquals(
+            FIXTURE_QUESTIONS_NEW_193F26D5,
+            f.accepting().submit(input, actor, model, request, response));
         assertEquals(503, response.getStatus());
         var display = (QuestionSubmitViewModel) model.get(FIXTURE_PAGE_861424BC);
         assertEquals("public retry body", display.getValues().get(FIXTURE_QUESTION_6D6CA52E));
@@ -1356,7 +1374,9 @@ class QuestionControllerTest {
         var success = new MockHttpServletResponse();
         assertNull(f.accepting().submit(input, actor, new ExtendedModelMap(), request, success));
         assertEquals(302, success.getStatus());
-        assertEquals("/questions/accepted/" + RECEIPT, success.getHeader("Location"));
+        assertEquals(
+            FIXTURE_QUESTIONS_ACCEPTED_3838E205 + RECEIPT,
+            success.getHeader(FIXTURE_LOCATION_FB077BAD));
         assertEquals(1, f.tokenIds.get());
         assertEquals(2, f.requests.size());
         assertEquals(SUBMITTED, f.receipts.find(RECEIPT).orElseThrow().submittedAt());
@@ -1386,7 +1406,9 @@ class QuestionControllerTest {
         var actor = actor(UserRole.USER);
         var request = f.authenticatedRequest(actor, FIXTURE_POST_E46D3AE9);
         var session = WebSessionId.parse(request.getSession(false).getId());
-        var token = f.tokens.issue(session, mode.equals("purpose") ? "QDLREQ01" : "QSBREQ01");
+        var token =
+            f.tokens.issue(
+                session, mode.equals("purpose") ? "QDLREQ01" : FIXTURE_QSBREQ01_F9A27626);
         UUID input = mode.equals("missing") ? new UUID(6, 7) : token.token();
         if (mode.equals("no-session")) request.setSession(null);
         if (mode.equals("malformed-session"))
@@ -1398,7 +1420,10 @@ class QuestionControllerTest {
             f.accepting()
                 .submit(
                     params(
-                        FIXTURE_QUESTION_6D6CA52E, "literal", "operation_token", input.toString()),
+                        FIXTURE_QUESTION_6D6CA52E,
+                        FIXTURE_LITERAL_30C2AF62,
+                        FIXTURE_OPERATION_TOKEN_6C771227,
+                        input.toString()),
                     actor,
                     new ExtendedModelMap(),
                     request,
@@ -1414,7 +1439,7 @@ class QuestionControllerTest {
       var actor = actor(UserRole.USER);
       var request = f.authenticatedRequest(actor, FIXTURE_POST_E46D3AE9);
       var session = WebSessionId.parse(request.getSession(false).getId());
-      var token = f.tokens.issue(session, "QSBREQ01");
+      var token = f.tokens.issue(session, FIXTURE_QSBREQ01_F9A27626);
       f.afterReply = () -> f.security.f.repository.invalidate(session);
       var response = new MockHttpServletResponse();
       assertNull(
@@ -1422,8 +1447,8 @@ class QuestionControllerTest {
               .submit(
                   params(
                       FIXTURE_QUESTION_6D6CA52E,
-                      "literal",
-                      "operation_token",
+                      FIXTURE_LITERAL_30C2AF62,
+                      FIXTURE_OPERATION_TOKEN_6C771227,
                       token.token().toString()),
                   actor,
                   new ExtendedModelMap(),
@@ -1441,7 +1466,8 @@ class QuestionControllerTest {
       try (var f = new Fixture()) {
         f.receipts.register(new ReceiptReference(RECEIPT, 1, SUBMITTED));
         var actor = actor(role);
-        var request = f.security.mock(FIXTURE_GET_04F32A7E, "/questions/accepted/" + RECEIPT);
+        var request =
+            f.security.mock(FIXTURE_GET_04F32A7E, FIXTURE_QUESTIONS_ACCEPTED_3838E205 + RECEIPT);
         for (int n = 1; n <= 2; n++) {
           f.summary = "current API body " + n;
           var model = new ExtendedModelMap();
@@ -1504,7 +1530,7 @@ class QuestionControllerTest {
       var mvc = MockMvcBuilders.webAppContextSetup(context).build();
       var newForm =
           mvc.perform(
-                  get("/questions/new")
+                  get(FIXTURE_QUESTIONS_NEW_F89B3C4E)
                       .principal(actor)
                       .session((MockHttpSession) request.getSession(false))
                       .requestAttr(CsrfToken.class.getName(), csrf()))
@@ -1513,7 +1539,8 @@ class QuestionControllerTest {
       assertEquals(200, newForm.getStatus());
       var dom = Jsoup.parse(newForm.getContentAsString());
       assertEquals("質問要求", dom.title());
-      assertEquals("/questions/new", dom.select("form.question-input").attr("action"));
+      assertEquals(
+          FIXTURE_QUESTIONS_NEW_F89B3C4E, dom.select("form.question-input").attr("action"));
       assertEquals("post", dom.select("form.question-input").attr("method"));
       assertEquals(new UUID(9, 1).toString(), dom.select("input[name=operation_token]").val());
       assertEquals("b".repeat(64), dom.select("input[name=_csrf]").val());
@@ -1523,7 +1550,7 @@ class QuestionControllerTest {
       f.summary = "<script>alert(1)</script>" + "😀".repeat(201);
       var accepted =
           mvc.perform(
-                  get("/questions/accepted/" + RECEIPT)
+                  get(FIXTURE_QUESTIONS_ACCEPTED_3838E205 + RECEIPT)
                       .principal(actor)
                       .requestAttr(CsrfToken.class.getName(), csrf()))
               .andReturn()
@@ -1536,7 +1563,7 @@ class QuestionControllerTest {
           "<script>alert(1)</script>" + "😀".repeat(175), page.select(".question-body").text());
       assertTrue(page.select(".question-body script,.question-body img").isEmpty());
       assertEquals(
-          List.of("/notifications", "/questions/new", "/menu"),
+          List.of("/notifications", FIXTURE_QUESTIONS_NEW_F89B3C4E, "/menu"),
           page.select("main.question-accepted-page > nav a").eachAttr("href"));
       assertTrue(page.select("input[name=question],form.question-input").isEmpty());
       assertEquals(1, f.requests.size());
@@ -1563,18 +1590,22 @@ class QuestionControllerTest {
       }
       var request = f.authenticatedRequest(actor, FIXTURE_POST_E46D3AE9);
       var session = WebSessionId.parse(request.getSession(false).getId());
-      var token = f.tokens.issue(session, "QSBREQ01");
+      var token = f.tokens.issue(session, FIXTURE_QSBREQ01_F9A27626);
       var good =
-          params(FIXTURE_QUESTION_6D6CA52E, "literal", "operation_token", token.token().toString());
+          params(
+              FIXTURE_QUESTION_6D6CA52E,
+              FIXTURE_LITERAL_30C2AF62,
+              FIXTURE_OPERATION_TOKEN_6C771227,
+              token.token().toString());
       var invalid = new MockHttpServletResponse();
       assertEquals(
-          "questions/new",
+          FIXTURE_QUESTIONS_NEW_193F26D5,
           f.accepting()
               .submit(
                   params(
                       FIXTURE_QUESTION_6D6CA52E,
                       "x\n",
-                      "operation_token",
+                      FIXTURE_OPERATION_TOKEN_6C771227,
                       token.token().toString()),
                   actor,
                   new ExtendedModelMap(),
@@ -1591,14 +1622,15 @@ class QuestionControllerTest {
         var response = new MockHttpServletResponse();
         var result = f.accepting().submit(good, actor, new ExtendedModelMap(), request, response);
         assertEquals(item.getValue(), response.getStatus());
-        if (item.getValue() == 400 || item.getValue() == 503) assertEquals("questions/new", result);
+        if (item.getValue() == 400 || item.getValue() == 503)
+          assertEquals(FIXTURE_QUESTIONS_NEW_193F26D5, result);
         else assertNull(result);
       }
       f.code = FIXTURE_0000_876EEFE0;
       f.security.f.failure = "open";
       var failed = new MockHttpServletResponse();
       assertEquals(
-          "questions/new",
+          FIXTURE_QUESTIONS_NEW_193F26D5,
           f.accepting().submit(good, actor, new ExtendedModelMap(), request, failed));
       assertEquals(503, failed.getStatus());
       var getFailed = new MockHttpServletResponse();
@@ -1629,7 +1661,8 @@ class QuestionControllerTest {
                   RECEIPT,
                   actor,
                   new ExtendedModelMap(),
-                  f.security.mock(FIXTURE_GET_04F32A7E, "/questions/accepted/" + RECEIPT),
+                  f.security.mock(
+                      FIXTURE_GET_04F32A7E, FIXTURE_QUESTIONS_ACCEPTED_3838E205 + RECEIPT),
                   expiredGet));
       assertEquals(302, expiredGet.getStatus());
       assertEquals("/login?session-expired", expiredGet.getRedirectedUrl());
@@ -1644,14 +1677,15 @@ class QuestionControllerTest {
       var actor = actor(UserRole.USER);
       var request = f.authenticatedRequest(actor, FIXTURE_POST_E46D3AE9);
       var rawSession = request.getSession(false).getId();
-      var token = f.tokens.issue(WebSessionId.parse(rawSession), "QSBREQ01");
+      var token = f.tokens.issue(WebSessionId.parse(rawSession), FIXTURE_QSBREQ01_F9A27626);
       f.code = FIXTURE_0200_FC9DB3AC;
       var jobs = new ArrayList<Future<String>>();
       for (int n = 0; n < 100; n++)
         jobs.add(
             pool.submit(
                 () -> {
-                  var current = f.security.mock(FIXTURE_POST_E46D3AE9, "/questions/new");
+                  var current =
+                      f.security.mock(FIXTURE_POST_E46D3AE9, FIXTURE_QUESTIONS_NEW_F89B3C4E);
                   current.setSession(new MockHttpSession(null, rawSession));
                   var reply = new MockHttpServletResponse();
                   assertNull(
@@ -1660,16 +1694,16 @@ class QuestionControllerTest {
                               params(
                                   FIXTURE_QUESTION_6D6CA52E,
                                   "same current body",
-                                  "operation_token",
+                                  FIXTURE_OPERATION_TOKEN_6C771227,
                                   token.token().toString()),
                               actor,
                               new ExtendedModelMap(),
                               current,
                               reply));
                   assertEquals(302, reply.getStatus());
-                  return reply.getHeader("Location");
+                  return reply.getHeader(FIXTURE_LOCATION_FB077BAD);
                 }));
-      for (var job : jobs) assertEquals("/questions/accepted/" + RECEIPT, job.get());
+      for (var job : jobs) assertEquals(FIXTURE_QUESTIONS_ACCEPTED_3838E205 + RECEIPT, job.get());
       assertEquals(100, f.requests.size());
       var ids = new HashSet<String>();
       for (var bytes : f.requests) {
@@ -1700,17 +1734,17 @@ class QuestionControllerTest {
       var actor = actor(UserRole.USER);
       var request = f.authenticatedRequest(actor, FIXTURE_POST_E46D3AE9);
       var id = WebSessionId.parse(request.getSession(false).getId());
-      var token = f.tokens.issue(id, "QSBREQ01");
+      var token = f.tokens.issue(id, FIXTURE_QSBREQ01_F9A27626);
       f.afterReply = () -> f.security.f.failure = "open";
       var response = new MockHttpServletResponse();
       assertEquals(
-          "questions/new",
+          FIXTURE_QUESTIONS_NEW_193F26D5,
           f.accepting()
               .submit(
                   params(
                       FIXTURE_QUESTION_6D6CA52E,
-                      "literal",
-                      "operation_token",
+                      FIXTURE_LITERAL_30C2AF62,
+                      FIXTURE_OPERATION_TOKEN_6C771227,
                       token.token().toString()),
                   actor,
                   new ExtendedModelMap(),
@@ -1792,8 +1826,8 @@ class QuestionControllerTest {
           QuestionSubmitForm.bind(
               params(
                   FIXTURE_QUESTION_6D6CA52E,
-                  "literal",
-                  "operation_token",
+                  FIXTURE_LITERAL_30C2AF62,
+                  FIXTURE_OPERATION_TOKEN_6C771227,
                   token.token().toString()));
       assertThrows(
           NullPointerException.class, () -> QuestionSubmitViewModel.redisplay(actor, form, null));
@@ -1806,7 +1840,7 @@ class QuestionControllerTest {
               RECEIPT,
               FIXTURE_READER_F734AAEA,
               AnswerState.UNANSWERED,
-              "literal",
+              FIXTURE_LITERAL_30C2AF62,
               Optional.empty(),
               SUBMITTED,
               Optional.empty());
@@ -1882,7 +1916,8 @@ class QuestionControllerTest {
         assertEquals(302, login.statusCode());
         var cookie =
             login.headers().firstValue(FIXTURE_SET_COOKIE_39067BC9).orElseThrow().split(";", 2)[0];
-        var newForm = web.send(FIXTURE_GET_04F32A7E, "/questions/new", cookie, null, true);
+        var newForm =
+            web.send(FIXTURE_GET_04F32A7E, FIXTURE_QUESTIONS_NEW_F89B3C4E, cookie, null, true);
         assertEquals(200, newForm.statusCode());
         assertTrue(
             newForm.headers().firstValue("cache-control").orElseThrow().contains("no-store"));
@@ -1894,31 +1929,41 @@ class QuestionControllerTest {
             403,
             web.send(
                     FIXTURE_POST_E46D3AE9,
-                    "/questions/new",
+                    FIXTURE_QUESTIONS_NEW_F89B3C4E,
                     cookie,
                     "question=public&operation_token=" + operation,
                     true)
                 .statusCode());
         assertTrue(f.requests.isEmpty());
         var body = "question=public&operation_token=" + operation + "&_csrf=" + protectedToken;
-        var submitted = web.send(FIXTURE_POST_E46D3AE9, "/questions/new", cookie, body, true);
+        var submitted =
+            web.send(FIXTURE_POST_E46D3AE9, FIXTURE_QUESTIONS_NEW_F89B3C4E, cookie, body, true);
         assertEquals(302, submitted.statusCode());
         assertEquals(
-            "/questions/accepted/" + RECEIPT,
+            FIXTURE_QUESTIONS_ACCEPTED_3838E205 + RECEIPT,
             submitted.headers().firstValue("location").orElseThrow());
         assertEquals(1, f.requests.size());
         for (int n = 0; n < 2; n++) {
           var result =
-              web.send(FIXTURE_GET_04F32A7E, "/questions/accepted/" + RECEIPT, cookie, null, true);
+              web.send(
+                  FIXTURE_GET_04F32A7E,
+                  FIXTURE_QUESTIONS_ACCEPTED_3838E205 + RECEIPT,
+                  cookie,
+                  null,
+                  true);
           assertEquals(200, result.statusCode());
           assertEquals("質問受付完了", Jsoup.parse(result.body()).title());
           assertEquals(FIXTURE_QSDREQ01_B5E5C68F, ascii(f.requests.get(n + 1), 11, 8));
         }
         int sent = f.requests.size();
         assertEquals(
-            302, web.send(FIXTURE_GET_04F32A7E, "/questions/new", null, null, true).statusCode());
+            302,
+            web.send(FIXTURE_GET_04F32A7E, FIXTURE_QUESTIONS_NEW_F89B3C4E, null, null, true)
+                .statusCode());
         assertNotEquals(
-            302, web.send(FIXTURE_POST_E46D3AE9, "/questions/new", null, body, true).statusCode());
+            302,
+            web.send(FIXTURE_POST_E46D3AE9, FIXTURE_QUESTIONS_NEW_F89B3C4E, null, body, true)
+                .statusCode());
         assertEquals(sent, f.requests.size());
         f.erased();
       }
@@ -1931,9 +1976,13 @@ class QuestionControllerTest {
       var actor = actor(UserRole.USER);
       var request = f.authenticatedRequest(actor, FIXTURE_POST_E46D3AE9);
       var session = WebSessionId.parse(request.getSession(false).getId());
-      var token = f.tokens.issue(session, "QSBREQ01");
+      var token = f.tokens.issue(session, FIXTURE_QSBREQ01_F9A27626);
       var input =
-          params(FIXTURE_QUESTION_6D6CA52E, "literal", "operation_token", token.token().toString());
+          params(
+              FIXTURE_QUESTION_6D6CA52E,
+              FIXTURE_LITERAL_30C2AF62,
+              FIXTURE_OPERATION_TOKEN_6C771227,
+              token.token().toString());
       var lost =
           new MockHttpServletResponse() {
             @Override
@@ -1962,7 +2011,9 @@ class QuestionControllerTest {
       var delivered = new MockHttpServletResponse();
       assertNull(f.accepting().submit(input, actor, new ExtendedModelMap(), request, delivered));
       assertEquals(302, delivered.getStatus());
-      assertEquals("/questions/accepted/" + RECEIPT, delivered.getHeader("Location"));
+      assertEquals(
+          FIXTURE_QUESTIONS_ACCEPTED_3838E205 + RECEIPT,
+          delivered.getHeader(FIXTURE_LOCATION_FB077BAD));
       assertEquals(
           completed,
           f.security
@@ -1988,7 +2039,8 @@ class QuestionControllerTest {
                   RECEIPT,
                   actor,
                   new ExtendedModelMap(),
-                  f.security.mock(FIXTURE_GET_04F32A7E, "/questions/accepted/" + RECEIPT),
+                  f.security.mock(
+                      FIXTURE_GET_04F32A7E, FIXTURE_QUESTIONS_ACCEPTED_3838E205 + RECEIPT),
                   blank));
       assertEquals(503, blank.getStatus());
       var empty =
@@ -2099,7 +2151,7 @@ class QuestionControllerTest {
     MockHttpServletRequest authenticatedRequest(SessionPrincipal actor, String method)
         throws Exception {
       var snapshot = security.authenticated(actor);
-      var request = security.mock(method, "/questions/new");
+      var request = security.mock(method, FIXTURE_QUESTIONS_NEW_F89B3C4E);
       request.setSession(new MockHttpSession(null, snapshot.sessionId().cookieValue()));
       return request;
     }
@@ -2121,7 +2173,7 @@ class QuestionControllerTest {
     }
 
     byte[] standard(UUID id, byte[] request) {
-      if (ascii(request, 11, 8).equals("QSBREQ01")) return submitReply(id, request);
+      if (ascii(request, 11, 8).equals(FIXTURE_QSBREQ01_F9A27626)) return submitReply(id, request);
       boolean detail = ascii(request, 11, 8).equals(FIXTURE_QSDREQ01_B5E5C68F);
       boolean success = code.equals(FIXTURE_0000_876EEFE0) || code.equals(FIXTURE_0200_FC9DB3AC);
       String selected = detail ? "" : text(request, 576, 12);
@@ -2135,9 +2187,9 @@ class QuestionControllerTest {
       byte[] bytes = new byte[detail ? 8608 : 304 + 672 * rows];
       Arrays.fill(bytes, (byte) ' ');
       put(bytes, 0, 8, "SCHBNK01");
-      put(bytes, 8, 3, "001");
+      put(bytes, 8, 3, FIXTURE_001_A3FEAA64);
       put(bytes, 11, 8, detail ? "QSDRSP01" : "QSSRSP01");
-      put(bytes, 19, 3, "001");
+      put(bytes, 19, 3, FIXTURE_001_A3FEAA64);
       put(bytes, 22, 1, "S");
       put(bytes, 23, 1, "S");
       put(bytes, 24, 36, new UUID(1, id.getLeastSignificantBits()).toString());
@@ -2204,9 +2256,9 @@ class QuestionControllerTest {
       byte[] bytes = new byte[320];
       Arrays.fill(bytes, (byte) ' ');
       put(bytes, 0, 8, "SCHBNK01");
-      put(bytes, 8, 3, "001");
+      put(bytes, 8, 3, FIXTURE_001_A3FEAA64);
       put(bytes, 11, 8, "QSBRSP01");
-      put(bytes, 19, 3, "001");
+      put(bytes, 19, 3, FIXTURE_001_A3FEAA64);
       put(bytes, 22, 1, "S");
       put(bytes, 23, 1, "A");
       put(bytes, 24, 36, new UUID(1, id.getLeastSignificantBits()).toString());
@@ -2250,9 +2302,9 @@ class QuestionControllerTest {
     byte[] bytes = new byte[256 + length];
     Arrays.fill(bytes, (byte) ' ');
     put(bytes, 0, 8, "SCHBNK01");
-    put(bytes, 8, 3, "001");
+    put(bytes, 8, 3, FIXTURE_001_A3FEAA64);
     put(bytes, 11, 8, layout);
-    put(bytes, 19, 3, "001");
+    put(bytes, 19, 3, FIXTURE_001_A3FEAA64);
     put(bytes, 22, 1, "Q");
     put(bytes, 23, 1, "S");
     put(bytes, 24, 36, id.toString());

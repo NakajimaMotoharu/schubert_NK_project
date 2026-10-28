@@ -75,6 +75,8 @@ import org.springframework.web.context.support.AnnotationConfigWebApplicationCon
 
 /** UI225236 literals and real encrypted SQL; SSC177/PG-D366/PT-USER-BIZ001..012. */
 class UserBusinessControllerTest {
+  private static final String FIXTURE_AND_DETAILS_OUTCOME_SUCCESS_AND_DETAILS_8E857196 =
+      "' and details->>'outcome'='SUCCESS' and details->>'targetUserId'='42'";
   private static final String FIXTURE_SELECT_VERSION_FROM_SCHUBERT_APP_USERS_W_CDA2BB90 =
       "select version from schubert.app_users where id=42";
   private static final String FIXTURE_0000_876EEFE0 = "0000";
@@ -931,7 +933,7 @@ class UserBusinessControllerTest {
             api.scalar(
                 "select count(*) from schubert.app_logs where action='USER_STATUS_CHANGED' and category='"
                     + category
-                    + "' and details->>'outcome'='SUCCESS' and details->>'targetUserId'='42'"));
+                    + FIXTURE_AND_DETAILS_OUTCOME_SUCCESS_AND_DETAILS_8E857196));
       assertEquals(
           99, api.scalar("select count(*) from schubert.app_logs where action='INBOX_REPLAYED'"));
       assertEquals(
@@ -1000,13 +1002,13 @@ class UserBusinessControllerTest {
             api.scalar(
                 "select count(*) from schubert.app_logs where action='USER_CREATED' and category='"
                     + category
-                    + "' and details->>'outcome'='SUCCESS' and details->>'targetUserId'='42'"));
+                    + FIXTURE_AND_DETAILS_OUTCOME_SUCCESS_AND_DETAILS_8E857196));
         assertEquals(
             1,
             api.scalar(
                 "select count(*) from schubert.app_logs where action='USER_STATUS_CHANGED' and category='"
                     + category
-                    + "' and details->>'outcome'='SUCCESS' and details->>'targetUserId'='42'"));
+                    + FIXTURE_AND_DETAILS_OUTCOME_SUCCESS_AND_DETAILS_8E857196));
       }
       var different = f.change(FIXTURE_STATUS_0ABCCBF8, statusToken);
       different.set(FIXTURE_ENABLED_6E30BC5C, FIXTURE_TRUE_18D10C7D);
@@ -1039,7 +1041,7 @@ class UserBusinessControllerTest {
             api.scalar(
                 "select count(*) from schubert.app_logs where action='USER_ROLE_CHANGED' and category='"
                     + category
-                    + "' and details->>'outcome'='SUCCESS' and details->>'targetUserId'='42'"));
+                    + FIXTURE_AND_DETAILS_OUTCOME_SUCCESS_AND_DETAILS_8E857196));
       UUID unlockToken = f.issue(FIXTURE_UNLOCK_351153DC);
       var unlock = f.change(FIXTURE_UNLOCK_351153DC, unlockToken);
       unlock.set(FIXTURE_EXPECTED_VERSION_633674D2, "2");

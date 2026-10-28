@@ -64,6 +64,12 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** PostgreSQL 18 and Artemis component PT for PT-IDEM-009..011. */
 final class OutboxDispatcherTest {
+  private static final String FIXTURE_TOSTRING_5F8C6B3F = "toString";
+  private static final String FIXTURE_DLQ_ORIGINAL_MESSAGE_ID_7D1CCCBA = "dlq_original_message_id";
+  private static final String FIXTURE_DLQ_DELIVERY_COUNT_E5C288A9 = "dlq_delivery_count";
+  private static final String FIXTURE_GETOBJECT_B6112877 = "getObject";
+  private static final String FIXTURE_HASHCODE_613EE961 = "hashCode";
+  private static final String FIXTURE_EQUALS_7778BDDB = "equals";
   private static final String FIXTURE_STATUS_CFC31BCC = "status";
   private static final String FIXTURE_ATTEMPT_COUNT_87388C12 = "attempt_count";
   private static final String FIXTURE_LAST_ERROR_CODE_BF1A4C63 = "last_error_code";
@@ -1142,7 +1148,7 @@ final class OutboxDispatcherTest {
                         closes.incrementAndGet();
                         throw primary;
                       }
-                      case "toString" -> "synthetic-context";
+                      case FIXTURE_TOSTRING_5F8C6B3F -> "synthetic-context";
                       default -> throw new AssertionError(method.getName());
                     });
     OutboxSendException failure =
@@ -1171,7 +1177,7 @@ final class OutboxDispatcherTest {
                         closes.incrementAndGet();
                         throw secondary;
                       }
-                      case "toString" -> "synthetic-context";
+                      case FIXTURE_TOSTRING_5F8C6B3F -> "synthetic-context";
                       default -> throw new AssertionError(method.getName());
                     });
     OutboxSendException failure =
@@ -1202,7 +1208,7 @@ final class OutboxDispatcherTest {
                           closes.incrementAndGet();
                           throw secondary;
                         }
-                        case "toString" -> "synthetic-context";
+                        case FIXTURE_TOSTRING_5F8C6B3F -> "synthetic-context";
                         default -> throw new AssertionError(method.getName());
                       });
       assertSame(
@@ -1455,9 +1461,9 @@ final class OutboxDispatcherTest {
             4, JdbcOutboxRepository.read(result).dlqMetadata().orElseThrow().deliveryCount());
         for (String column :
             List.of(
-                "dlq_original_message_id",
+                FIXTURE_DLQ_ORIGINAL_MESSAGE_ID_7D1CCCBA,
                 "dlq_original_transport_id",
-                "dlq_delivery_count",
+                FIXTURE_DLQ_DELIVERY_COUNT_E5C288A9,
                 "dlq_error_code",
                 "dlq_detected_at")) {
           ResultSet absent =
@@ -1466,13 +1472,13 @@ final class OutboxDispatcherTest {
                       ResultSet.class.getClassLoader(),
                       new Class<?>[] {ResultSet.class},
                       (proxy, method, args) -> {
-                        if ((method.getName().equals("getObject")
+                        if ((method.getName().equals(FIXTURE_GETOBJECT_B6112877)
                                 || method.getName().equals("getString"))
                             && args != null
                             && column.equals(args[0])) return null;
                         return invoke(result, method, args);
                       });
-          if (column.equals("dlq_original_message_id"))
+          if (column.equals(FIXTURE_DLQ_ORIGINAL_MESSAGE_ID_7D1CCCBA))
             assertThrows(OutboxIntegrityException.class, () -> JdbcOutboxRepository.read(absent));
           else
             assertEquals(
@@ -1486,16 +1492,16 @@ final class OutboxDispatcherTest {
                     ResultSet.class.getClassLoader(),
                     new Class<?>[] {ResultSet.class},
                     (proxy, method, args) -> {
-                      if (method.getName().equals("getObject")
+                      if (method.getName().equals(FIXTURE_GETOBJECT_B6112877)
                           && args != null
-                          && "dlq_delivery_count".equals(args[0])) return 0;
+                          && FIXTURE_DLQ_DELIVERY_COUNT_E5C288A9.equals(args[0])) return 0;
                       return invoke(result, method, args);
                     });
         assertThrows(OutboxIntegrityException.class, () -> JdbcOutboxRepository.read(malformed));
         List<String> dlqColumns =
             List.of(
                 "dlq_original_transport_id",
-                "dlq_delivery_count",
+                FIXTURE_DLQ_DELIVERY_COUNT_E5C288A9,
                 "dlq_error_code",
                 "dlq_detected_at");
         for (int visible = 0; visible <= dlqColumns.size(); visible++) {
@@ -1506,9 +1512,9 @@ final class OutboxDispatcherTest {
                       ResultSet.class.getClassLoader(),
                       new Class<?>[] {ResultSet.class},
                       (proxy, method, args) -> {
-                        if (method.getName().equals("getObject")
+                        if (method.getName().equals(FIXTURE_GETOBJECT_B6112877)
                             && args != null
-                            && ("dlq_original_message_id".equals(args[0])
+                            && (FIXTURE_DLQ_ORIGINAL_MESSAGE_ID_7D1CCCBA.equals(args[0])
                                 || dlqColumns.contains(args[0]) && !visibleColumn.equals(args[0])))
                           return null;
                         return invoke(result, method, args);
@@ -1548,8 +1554,8 @@ final class OutboxDispatcherTest {
       assertNull(dlq.receive(500));
       assertEquals(FIXTURE_SENT_6C701E27, text(row, FIXTURE_STATUS_CFC31BCC));
       assertEquals("ID:independent-original", text(row, "dlq_original_transport_id"));
-      assertEquals("4", text(row, "dlq_delivery_count"));
-      assertEquals(MESSAGE.toString(), text(row, "dlq_original_message_id"));
+      assertEquals("4", text(row, FIXTURE_DLQ_DELIVERY_COUNT_E5C288A9));
+      assertEquals(MESSAGE.toString(), text(row, FIXTURE_DLQ_ORIGINAL_MESSAGE_ID_7D1CCCBA));
     } finally {
       broker.stop();
     }
@@ -1660,9 +1666,9 @@ final class OutboxDispatcherTest {
                   yield null;
                 }
                 case FIXTURE_CLOSE_97959247 -> null;
-                case "toString" -> "FailingJmsContext";
-                case "hashCode" -> System.identityHashCode(proxy);
-                case "equals" -> proxy == arguments[0];
+                case FIXTURE_TOSTRING_5F8C6B3F -> "FailingJmsContext";
+                case FIXTURE_HASHCODE_613EE961 -> System.identityHashCode(proxy);
+                case FIXTURE_EQUALS_7778BDDB -> proxy == arguments[0];
                 default -> throw new UnsupportedOperationException(method.getName());
               };
             });
@@ -1677,9 +1683,9 @@ final class OutboxDispatcherTest {
                 (proxy, method, arguments) -> {
                   return switch (method.getName()) {
                     case "writeBytes" -> throw new JMSException("synthetic checked failure");
-                    case "toString" -> "CheckedFailingMessage";
-                    case "hashCode" -> System.identityHashCode(proxy);
-                    case "equals" -> proxy == arguments[0];
+                    case FIXTURE_TOSTRING_5F8C6B3F -> "CheckedFailingMessage";
+                    case FIXTURE_HASHCODE_613EE961 -> System.identityHashCode(proxy);
+                    case FIXTURE_EQUALS_7778BDDB -> proxy == arguments[0];
                     default -> throw new UnsupportedOperationException(method.getName());
                   };
                 });
@@ -1692,9 +1698,9 @@ final class OutboxDispatcherTest {
                 case FIXTURE_GETSESSIONMODE_BF25AD1A -> JMSContext.SESSION_TRANSACTED;
                 case FIXTURE_CREATEBYTESMESSAGE_F47217B2 -> message;
                 case FIXTURE_ROLLBACK_3770B198, FIXTURE_CLOSE_97959247 -> null;
-                case "toString" -> "CheckedFailingJmsContext";
-                case "hashCode" -> System.identityHashCode(proxy);
-                case "equals" -> proxy == arguments[0];
+                case FIXTURE_TOSTRING_5F8C6B3F -> "CheckedFailingJmsContext";
+                case FIXTURE_HASHCODE_613EE961 -> System.identityHashCode(proxy);
+                case FIXTURE_EQUALS_7778BDDB -> proxy == arguments[0];
                 default -> throw new UnsupportedOperationException(method.getName());
               };
             });
@@ -1709,9 +1715,9 @@ final class OutboxDispatcherTest {
               return switch (method.getName()) {
                 case FIXTURE_GETSESSIONMODE_BF25AD1A -> mode;
                 case FIXTURE_CLOSE_97959247 -> null;
-                case "toString" -> "SyntheticJmsContext";
-                case "hashCode" -> System.identityHashCode(proxy);
-                case "equals" -> proxy == arguments[0];
+                case FIXTURE_TOSTRING_5F8C6B3F -> "SyntheticJmsContext";
+                case FIXTURE_HASHCODE_613EE961 -> System.identityHashCode(proxy);
+                case FIXTURE_EQUALS_7778BDDB -> proxy == arguments[0];
                 default -> throw new UnsupportedOperationException(method.getName());
               };
             });
@@ -1736,9 +1742,10 @@ final class OutboxDispatcherTest {
                                 switch (resultMethod.getName()) {
                                   case "next" -> false;
                                   case FIXTURE_CLOSE_97959247 -> null;
-                                  case "toString" -> "EmptyResult";
-                                  case "hashCode" -> System.identityHashCode(resultProxy);
-                                  case "equals" -> resultProxy == resultArguments[0];
+                                  case FIXTURE_TOSTRING_5F8C6B3F -> "EmptyResult";
+                                  case FIXTURE_HASHCODE_613EE961 ->
+                                      System.identityHashCode(resultProxy);
+                                  case FIXTURE_EQUALS_7778BDDB -> resultProxy == resultArguments[0];
                                   default ->
                                       throw new UnsupportedOperationException(
                                           resultMethod.getName());
@@ -1755,9 +1762,9 @@ final class OutboxDispatcherTest {
                               FIXTURE_CLOSE_97959247 ->
                               null;
                           case "executeQuery" -> empty;
-                          case "toString" -> "EmptyInsert";
-                          case "hashCode" -> System.identityHashCode(statementProxy);
-                          case "equals" -> statementProxy == statementArguments[0];
+                          case FIXTURE_TOSTRING_5F8C6B3F -> "EmptyInsert";
+                          case FIXTURE_HASHCODE_613EE961 -> System.identityHashCode(statementProxy);
+                          case FIXTURE_EQUALS_7778BDDB -> statementProxy == statementArguments[0];
                           default ->
                               throw new UnsupportedOperationException(statementMethod.getName());
                         });
@@ -1776,11 +1783,12 @@ final class OutboxDispatcherTest {
                   arguments == null || arguments.length == 0 ? "" : String.valueOf(arguments[0]);
               return switch (method.getName()) {
                 case "getLong" -> 1L;
-                case "getObject" -> column.equals("message_id") ? MESSAGE : CORRELATION;
+                case FIXTURE_GETOBJECT_B6112877 ->
+                    column.equals("message_id") ? MESSAGE : CORRELATION;
                 case "getString" -> "unapproved.address";
-                case "toString" -> "InvalidDestinationResult";
-                case "hashCode" -> System.identityHashCode(proxy);
-                case "equals" -> proxy == arguments[0];
+                case FIXTURE_TOSTRING_5F8C6B3F -> "InvalidDestinationResult";
+                case FIXTURE_HASHCODE_613EE961 -> System.identityHashCode(proxy);
+                case FIXTURE_EQUALS_7778BDDB -> proxy == arguments[0];
                 default -> throw new UnsupportedOperationException(method.getName());
               };
             });
@@ -1795,9 +1803,9 @@ final class OutboxDispatcherTest {
                 switch (method.getName()) {
                   case "setAutoCommit" -> throw new SQLException("synthetic setup failure");
                   case FIXTURE_CLOSE_97959247 -> throw new SQLException("synthetic close failure");
-                  case "toString" -> "SetupFailingConnection";
-                  case "hashCode" -> System.identityHashCode(proxy);
-                  case "equals" -> proxy == arguments[0];
+                  case FIXTURE_TOSTRING_5F8C6B3F -> "SetupFailingConnection";
+                  case FIXTURE_HASHCODE_613EE961 -> System.identityHashCode(proxy);
+                  case FIXTURE_EQUALS_7778BDDB -> proxy == arguments[0];
                   default -> throw new UnsupportedOperationException(method.getName());
                 });
   }

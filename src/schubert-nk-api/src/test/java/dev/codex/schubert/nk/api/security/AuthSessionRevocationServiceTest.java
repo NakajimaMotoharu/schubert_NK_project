@@ -43,6 +43,8 @@ import org.junit.jupiter.api.io.TempDir;
  * PT.
  */
 final class AuthSessionRevocationServiceTest {
+  private static final String FIXTURE_UPDATE_SCHUBERT_APP_USERS_SET_STATUS_DIS_D5D701C0 =
+      "update schubert.app_users set status='DISABLED' where id=7";
   private static final String FIXTURE_SELECT_COUNT_FROM_SCHUBERT_AUTH_SESSIONS_247E58FA =
       "select count(*) from schubert.auth_sessions where revoked";
   private static final String FIXTURE_SELECT_COUNT_FROM_SCHUBERT_APP_LOGS_218A3BCD =
@@ -109,7 +111,7 @@ final class AuthSessionRevocationServiceTest {
       connection.commit();
       assertFalse(connection.isClosed());
       assertFalse(connection.getAutoCommit());
-      execute("update schubert.app_users set status='DISABLED' where id=7");
+      execute(FIXTURE_UPDATE_SCHUBERT_APP_USERS_SET_STATUS_DIS_D5D701C0);
       var repeat =
           service.logout(
               connection, RAW, client, UUID.randomUUID(), CORRELATION, NOW.plusSeconds(86400));
@@ -141,7 +143,7 @@ final class AuthSessionRevocationServiceTest {
       seed();
       execute("update schubert.auth_sessions set " + condition + " where user_id=7");
       if (condition.contains("08:00:00"))
-        execute("update schubert.app_users set status='DISABLED' where id=7");
+        execute(FIXTURE_UPDATE_SCHUBERT_APP_USERS_SET_STATUS_DIS_D5D701C0);
       try (Connection connection = database.transaction()) {
         assertDenied(() -> service.logout(connection, RAW, client, MESSAGE, CORRELATION, NOW));
         assertDenied(
@@ -216,7 +218,7 @@ final class AuthSessionRevocationServiceTest {
           "update schubert.auth_sessions set revoked=true,revoked_at='2026-09-08T00:30:00Z',revoke_reason='LOGOUT' where id='"
               + new UUID(0, 4)
               + "'");
-      execute("update schubert.app_users set status='DISABLED' where id=7");
+      execute(FIXTURE_UPDATE_SCHUBERT_APP_USERS_SET_STATUS_DIS_D5D701C0);
       try (Connection connection = database.transaction()) {
         assertEquals(2, revokeAll(connection, 7, reason));
         assertEquals(1, count(FIXTURE_SELECT_COUNT_FROM_SCHUBERT_AUTH_SESSIONS_247E58FA));
@@ -555,7 +557,7 @@ final class AuthSessionRevocationServiceTest {
       for (int index = 0; index < 6; index++) {
         final int mode = index;
         seed();
-        execute("update schubert.app_users set status='DISABLED' where id=7");
+        execute(FIXTURE_UPDATE_SCHUBERT_APP_USERS_SET_STATUS_DIS_D5D701C0);
         execute(
             "update schubert.auth_sessions set expires_at='2026-09-08T01:00:00Z' where id='"
                 + SESSION

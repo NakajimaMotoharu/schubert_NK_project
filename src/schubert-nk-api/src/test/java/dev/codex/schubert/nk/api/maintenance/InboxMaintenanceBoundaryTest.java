@@ -34,6 +34,9 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** PT-DB-INBOX-049..056; V010 SQL matrix, not an AES/Java-deletion/oneshot certificate. */
 final class InboxMaintenanceBoundaryTest {
+  private static final String FIXTURE_VALUE_E91D96ED = "','";
+  private static final String FIXTURE_UPDATE_SCHUBERT_REQUEST_INBOX_SET_RESULT_318D4785 =
+      "update schubert.request_inbox set result_ref_type='";
   private static final String FIXTURE_UST_A0082146 = "UST";
   private static final String FIXTURE_QSB_661826BD = "QSB";
   private static final String FIXTURE_NTC_1FFAAF5E = "NTC";
@@ -179,7 +182,7 @@ final class InboxMaintenanceBoundaryTest {
                   c,
                   "select has_function_privilege('"
                       + role
-                      + "','"
+                      + FIXTURE_VALUE_E91D96ED
                       + signature
                       + "','EXECUTE')::text"));
         }
@@ -277,7 +280,7 @@ final class InboxMaintenanceBoundaryTest {
               FIXTURE_QUESTION_8F4A4C6B,
               FIXTURE_JOB_804C2C2C)) {
         sql(
-            "update schubert.request_inbox set result_ref_type='"
+            FIXTURE_UPDATE_SCHUBERT_REQUEST_INBOX_SET_RESULT_318D4785
                 + reference
                 + "',result_ref_id="
                 + (reference.equals(FIXTURE_AUTH_SESSION_97533387) ? FIXTURE_NULL_F072CBEC : "9")
@@ -321,7 +324,7 @@ final class InboxMaintenanceBoundaryTest {
           sql(FIXTURE_DELETE_FROM_SCHUBERT_REQUEST_INBOX_D18913CC);
           inbox(101, route, state, CUTOFF.minusSeconds(1));
           sql(
-              "update schubert.request_inbox set result_ref_type='"
+              FIXTURE_UPDATE_SCHUBERT_REQUEST_INBOX_SET_RESULT_318D4785
                   + reference
                   + "',result_ref_id="
                   + (Set.of(FIXTURE_NONE_C44E6DD7, FIXTURE_AUTH_SESSION_97533387)
@@ -390,7 +393,7 @@ final class InboxMaintenanceBoundaryTest {
         if (Set.of(FIXTURE_QSB_661826BD, FIXTURE_NTC_1FFAAF5E, FIXTURE_QDL_6EE4F4E8)
             .contains(route))
           sql(
-              "update schubert.request_inbox set result_ref_type='"
+              FIXTURE_UPDATE_SCHUBERT_REQUEST_INBOX_SET_RESULT_318D4785
                   + (route.equals(FIXTURE_NTC_1FFAAF5E)
                       ? FIXTURE_JOB_804C2C2C
                       : FIXTURE_QUESTION_8F4A4C6B)
@@ -478,7 +481,7 @@ final class InboxMaintenanceBoundaryTest {
           FIXTURE_22023_CDCA15BB,
           "select message_id from schubert.maintenance_next_inbox('"
               + RUN
-              + "','"
+              + FIXTURE_VALUE_E91D96ED
               + infinity
               + "',null)");
       denied(
@@ -486,9 +489,9 @@ final class InboxMaintenanceBoundaryTest {
           FIXTURE_22023_CDCA15BB,
           "select schubert.maintenance_delete_inbox('"
               + RUN
-              + "','"
+              + FIXTURE_VALUE_E91D96ED
               + infinity
-              + "','"
+              + FIXTURE_VALUE_E91D96ED
               + MESSAGE
               + "','1',decode(repeat('00',32),'hex'))");
     }
@@ -530,7 +533,7 @@ final class InboxMaintenanceBoundaryTest {
         List.of(
             FIXTURE_AUTH_SESSION_97533387, FIXTURE_USER_2DED8884, FIXTURE_SCENARIO_FILE_072D014E)) {
       sql(
-          "update schubert.request_inbox set result_ref_type='"
+          FIXTURE_UPDATE_SCHUBERT_REQUEST_INBOX_SET_RESULT_318D4785
               + reference
               + "',result_ref_id="
               + (reference.equals(FIXTURE_AUTH_SESSION_97533387)
@@ -713,7 +716,7 @@ final class InboxMaintenanceBoundaryTest {
               c,
               "select message_id from schubert.maintenance_next_auth_inbox('"
                   + RUN
-                  + "','"
+                  + FIXTURE_VALUE_E91D96ED
                   + CUTOFF
                   + "',null)"));
       try (var s = c.prepareStatement("select schubert.maintenance_delete_auth_inbox(?,?,?,?,?)")) {

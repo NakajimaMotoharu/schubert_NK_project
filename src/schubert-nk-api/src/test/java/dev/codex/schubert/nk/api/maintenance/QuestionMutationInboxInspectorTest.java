@@ -51,6 +51,7 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** PT-DB-INBOX-177..192; SS324 12.9/331 3.11/PG-D-141; independent wire and SQL oracle. */
 final class QuestionMutationInboxInspectorTest {
+  private static final String FIXTURE_VALUE_E91D96ED = "','";
   private static final String FIXTURE_QSBRSP01_9848D404 = "QSBRSP01";
   private static final String FIXTURE_NTCRSP01_CFC2AD25 = "NTCRSP01";
   private static final String FIXTURE_QDLRSP01_1746478A = "QDLRSP01";
@@ -117,7 +118,7 @@ final class QuestionMutationInboxInspectorTest {
             + RECEIPT
             + "',7,'Synthetic','"
             + token(FIXTURE_QSBRSP01_9848D404)
-            + "','"
+            + FIXTURE_VALUE_E91D96ED
             + SUBMITTED
             + "',true,'"
             + MUTATED
@@ -126,24 +127,24 @@ final class QuestionMutationInboxInspectorTest {
         "insert into schubert.async_jobs(id,question_id,owner_user_id,state,message_id,correlation_id,received_at,state_changed_at,cancelled_at,version) values"
             + "(11,9,7,'CANCELLED','"
             + message(FIXTURE_QSBRSP01_9848D404)
-            + "','"
+            + FIXTURE_VALUE_E91D96ED
             + message(FIXTURE_QSBRSP01_9848D404)
-            + "','"
+            + FIXTURE_VALUE_E91D96ED
             + SUBMITTED
-            + "','"
+            + FIXTURE_VALUE_E91D96ED
             + MUTATED
-            + "','"
+            + FIXTURE_VALUE_E91D96ED
             + MUTATED
             + "',1)");
     sql(
         "insert into schubert.notifications(id,job_id,question_id,owner_user_id,notification_type,state,accepted_at,state_changed_at,created_at,updated_at) values"
             + "(12,11,9,7,'ACCEPTED','CANCELLED','"
             + SUBMITTED
-            + "','"
+            + FIXTURE_VALUE_E91D96ED
             + MUTATED
-            + "','"
+            + FIXTURE_VALUE_E91D96ED
             + SUBMITTED
-            + "','"
+            + FIXTURE_VALUE_E91D96ED
             + MUTATED
             + "')");
     sql(
@@ -154,7 +155,7 @@ final class QuestionMutationInboxInspectorTest {
             + MUTATED
             + "',7,'"
             + SUBMITTED
-            + "','"
+            + FIXTURE_VALUE_E91D96ED
             + MUTATED
             + "')");
     try (var c = db.admin();

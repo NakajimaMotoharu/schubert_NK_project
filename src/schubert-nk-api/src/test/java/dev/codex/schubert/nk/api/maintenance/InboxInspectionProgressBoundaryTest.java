@@ -29,6 +29,7 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** PT-DB-INBOX-073..080; SS331 3.8/341 7.3; PG-D-127. SQL capability, not AES proof. */
 final class InboxInspectionProgressBoundaryTest {
+  private static final String FIXTURE_VALUE_E91D96ED = "','";
   private static final String FIXTURE_SELECT_COUNT_FROM_BDA3EEC8 = "select count(*) from ";
   private static final String FIXTURE_SELECT_COUNT_FROM_SCHUBERT_REQUEST_INBOX_E4FAEDDB =
       "select count(*) from schubert.request_inbox";
@@ -458,7 +459,11 @@ final class InboxInspectionProgressBoundaryTest {
             Boolean.toString(role.equals("schubert_backup")),
             scalar(
                 admin,
-                "select has_table_privilege('" + role + "','" + TABLE + "','SELECT')::text"));
+                "select has_table_privilege('"
+                    + role
+                    + FIXTURE_VALUE_E91D96ED
+                    + TABLE
+                    + "','SELECT')::text"));
         for (String permission : List.of("INSERT", "UPDATE", "DELETE", "TRUNCATE"))
           assertEquals(
               "false",
@@ -466,9 +471,9 @@ final class InboxInspectionProgressBoundaryTest {
                   admin,
                   "select has_table_privilege('"
                       + role
-                      + "','"
+                      + FIXTURE_VALUE_E91D96ED
                       + TABLE
-                      + "','"
+                      + FIXTURE_VALUE_E91D96ED
                       + permission
                       + "')::text"));
         for (int i = 0; i < signatures.size(); i++) {
@@ -479,7 +484,7 @@ final class InboxInspectionProgressBoundaryTest {
                   admin,
                   "select has_function_privilege('"
                       + role
-                      + "','"
+                      + FIXTURE_VALUE_E91D96ED
                       + signatures.get(i)
                       + "','EXECUTE')::text"));
         }
@@ -733,7 +738,7 @@ final class InboxInspectionProgressBoundaryTest {
             + " schubert.request_inbox(message_id,correlation_id,request_layout_id,request_version,owner_user_id,request_fingerprint_hmac,fingerprint_key_version,processing_state,result_ref_type,response_layout_id,response_version,response_body_encrypted,response_key_version,created_at,completed_at,expires_at)"
             + " values('"
             + id
-            + "','"
+            + FIXTURE_VALUE_E91D96ED
             + id
             + "','GAMREQ01','001',7,repeat('a',64),'v1','ERROR','NONE','GAMRSP01','001',decode(repeat('00',30),'hex'),'v1','2026-09-01','2026-09-01','2026-09-10')");
   }

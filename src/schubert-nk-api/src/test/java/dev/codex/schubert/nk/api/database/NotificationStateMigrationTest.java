@@ -27,6 +27,7 @@ import org.junit.jupiter.api.io.TempDir;
 /** PT-QST-STATE-001..003; UI242/SS331/SSC152/BUG422/YKT333. Independent legacy DB oracle. */
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 final class NotificationStateMigrationTest {
+  private static final String FIXTURE_VALUE_E91D96ED = "','";
   private static final String FIXTURE_ACCEPTED_E50B782C = "ACCEPTED";
   private static final String FIXTURE_ERROR_F717E7D8 = "ERROR";
   @TempDir static Path root;
@@ -50,9 +51,9 @@ final class NotificationStateMigrationTest {
               + "password_changed_at,created_at,updated_at) values(7,'Learner','learner','synthetic-unused',"
               + "'USER','ACTIVE','"
               + TIME
-              + "','"
+              + FIXTURE_VALUE_E91D96ED
               + TIME
-              + "','"
+              + FIXTURE_VALUE_E91D96ED
               + TIME
               + "')");
       sql(
@@ -69,7 +70,7 @@ final class NotificationStateMigrationTest {
               + "'00000000-0000-0000-0000-000000000021','00000000-0000-0000-0000-000000000021',"
               + "'"
               + TIME
-              + "','"
+              + FIXTURE_VALUE_E91D96ED
               + TIME
               + "')");
       sql(
@@ -78,11 +79,11 @@ final class NotificationStateMigrationTest {
               + "state,accepted_at,state_changed_at,created_at,updated_at) values(12,11,9,7,'ACCEPTED',"
               + "'ACCEPTED','"
               + TIME
-              + "','"
+              + FIXTURE_VALUE_E91D96ED
               + TIME
-              + "','"
+              + FIXTURE_VALUE_E91D96ED
               + TIME
-              + "','"
+              + FIXTURE_VALUE_E91D96ED
               + TIME
               + "')");
       history =

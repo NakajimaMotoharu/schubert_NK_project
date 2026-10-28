@@ -31,6 +31,7 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** NK-DAT-001; PT-DB-INBOX-089..096; UI251; SS331/332/341; SSC-050; BUG-092/093. */
 final class CleanupSafetyBoundaryTest {
+  private static final String FIXTURE_2025_08_01_590D2F8C = "'2025-08-01'";
   private static final String FIXTURE_0_0_0_OK_B39BA730 = "0|0|0|OK";
   private static final String FIXTURE_0_0_0_BACKUP_GATE_CEDCE044 = "0|0|0|BACKUP_GATE";
   private static final String FIXTURE_2_2_0_OK_D3DDE7F1 = "2|2|0|OK";
@@ -567,13 +568,13 @@ final class CleanupSafetyBoundaryTest {
       history(c, 103, 103, "SKIPPED", "'2025-08-13 00:00:00.000001+00'");
       history(c, 104, 104, FIXTURE_SUCCESS_10855C7F, "'2026-09-01'");
       history(c, 105, 105, "RUNNING", FIXTURE_NULL_F072CBEC);
-      history(c, 106, 106, "FAILED", "'2025-08-01'");
-      history(c, 107, 106, FIXTURE_SUCCESS_10855C7F, "'2025-08-01'");
-      history(c, 108, 105, "WARNING", "'2025-08-01'");
+      history(c, 106, 106, "FAILED", FIXTURE_2025_08_01_590D2F8C);
+      history(c, 107, 106, FIXTURE_SUCCESS_10855C7F, FIXTURE_2025_08_01_590D2F8C);
+      history(c, 108, 105, "WARNING", FIXTURE_2025_08_01_590D2F8C);
       history(c, 109, 109, FIXTURE_SUCCESS_10855C7F, FIXTURE_NULL_F072CBEC);
-      history(c, 110, 110, "WARNING", "'2025-08-01'");
-      history(c, 111, 111, "SKIPPED", "'2025-08-01'");
-      history(c, 112, 81, FIXTURE_SUCCESS_10855C7F, "'2025-08-01'");
+      history(c, 110, 110, "WARNING", FIXTURE_2025_08_01_590D2F8C);
+      history(c, 111, 111, "SKIPPED", FIXTURE_2025_08_01_590D2F8C);
+      history(c, 112, 81, FIXTURE_SUCCESS_10855C7F, FIXTURE_2025_08_01_590D2F8C);
       var save = c.setSavepoint();
       assertEquals(FIXTURE_2_2_0_OK_D3DDE7F1, call(c, FIXTURE_BATCH_RUNS_5CA9ABAD, START, 2));
       assertEquals("101,102,103,104,105,106,107,108,109,112", historyIds(c));

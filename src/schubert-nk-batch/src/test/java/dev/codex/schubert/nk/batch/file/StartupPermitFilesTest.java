@@ -52,6 +52,7 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** PT-OPS-PERMITFILE001..008; SS343 SSC089; real Linux FD IO, explicitly synthetic root/tmpfs. */
 final class StartupPermitFilesTest {
+  private static final String FIXTURE_PUBLIC_B7853257 = "public";
   private static final String FIXTURE_REPLACE_197D1A17 = "replace";
   private static final String FIXTURE_DIR_16E08808 = "dir";
   private static final String FIXTURE_FILE_BFDDE6F5 = "file";
@@ -1238,13 +1239,15 @@ final class StartupPermitFilesTest {
     @Override
     public void replace(Path p, String part, String current) throws IOException {
       point(FIXTURE_REPLACE_197D1A17);
-      if (replaceFailure) throw new AtomicMoveNotSupportedException("public", "public", "public");
+      if (replaceFailure)
+        throw new AtomicMoveNotSupportedException(
+            FIXTURE_PUBLIC_B7853257, FIXTURE_PUBLIC_B7853257, FIXTURE_PUBLIC_B7853257);
       nativeIo.replace(p, part, current);
     }
 
     @Override
     public MessageDigest digest() throws NoSuchAlgorithmException {
-      if (digestFailure) throw new NoSuchAlgorithmException("public");
+      if (digestFailure) throw new NoSuchAlgorithmException(FIXTURE_PUBLIC_B7853257);
       return nativeIo.digest();
     }
 

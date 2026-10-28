@@ -53,6 +53,46 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** MDB001..011. Literal role/lock oracle; actual isolated DB transaction/lock in MDB007..011. */
 final class MorningDatabaseSessionTest {
+  private static final String FIXTURE_ROLLBACK_3770B198 = "rollback";
+  private static final String FIXTURE_SETAUTOCOMMIT_17F7C6FD = "setAutoCommit";
+  private static final String FIXTURE_FROM_SCHUBERT_BATCH_RUNS_WHERE_RUN_ID_OR_9EF955AF =
+      " from schubert.batch_runs where run_id=? order by step";
+  private static final String FIXTURE_08006_5E6D8ABE = "08006";
+  private static final String FIXTURE_VALID_53E4338E = "VALID";
+  private static final String FIXTURE_EXTRA_6973AF6F = "EXTRA";
+  private static final String FIXTURE_STEP_0D9F50D8 = "step";
+  private static final String FIXTURE_ATTEMPT_7FD8A755 = "attempt";
+  private static final String FIXTURE_RETENTION_31E0EE4A = "RETENTION";
+  private static final String FIXTURE_SKIPPED_4B852540 = "SKIPPED";
+  private static final String FIXTURE_MISSING_B0CC6EC2 = "MISSING";
+  private static final String FIXTURE_NULL_ID_1D9B525C = "NULL_ID";
+  private static final String FIXTURE_OBSERVE_BCF98D4B = "OBSERVE";
+  private static final String FIXTURE_READONLY_72E7E87D = "READONLY";
+  private static final String FIXTURE_ISOLATION_BE727FC1 = "ISOLATION";
+  private static final String FIXTURE_HELD_BE1A57CE = "HELD";
+  private static final String FIXTURE_ISREADONLY_B1148EC6 = "isReadOnly";
+  private static final String FIXTURE_FIRST_MISSING_E2DAD1C7 = "FIRST_MISSING";
+  private static final String FIXTURE_SECOND_MISSING_F983DFA0 = "SECOND_MISSING";
+  private static final String FIXTURE_DATE_D3036BFE = "DATE";
+  private static final String FIXTURE_NULL_END_421C540E = "NULL_END";
+  private static final String FIXTURE_COMMAND_FAILURE_38148BF2 = "COMMAND_FAILURE";
+  private static final String FIXTURE_REASON_DC84A4A4 = "REASON";
+  private static final String FIXTURE_BATCH_COMMAND_FAILED_7D52C711 = "batch command failed";
+  private static final String FIXTURE_PUBLIC_HOST_4005163B = "public-host";
+  private static final String FIXTURE_1_0_A51162AE = "1.0";
+  private static final String FIXTURE_UBUNTU_26_04_B6E5E715 = "ubuntu-26.04";
+  private static final String FIXTURE_25_0_4_618D547E = "25.0.4";
+  private static final String FIXTURE_18_6_6BA7879A = "18.6";
+  private static final String FIXTURE_2_56_0_30D4A9A1 = "2.56.0";
+  private static final String FIXTURE_1_2_1_118D12E2 = "1.2.1";
+  private static final String FIXTURE_AUTO_6AFE91CF = "AUTO";
+  private static final String FIXTURE_SCHUBERT_BATCH_F9C88479 = "schubert_batch";
+  private static final String FIXTURE_SCHUBERT_NK_2E567755 = "schubert_nk";
+  private static final String FIXTURE_INSERT_INTO_1D1568AF = "insert into";
+  private static final String FIXTURE_PRIVATE_D45CA6F9 = "PRIVATE";
+  private static final String FIXTURE_LOCK_07EF1C28 = "LOCK";
+  private static final String FIXTURE_HISTORY_F89F2E29 = "HISTORY";
+  private static final String FIXTURE_PUBLIC_C22DFCF6 = "PUBLIC";
   private static final String FIXTURE_012D_02D3076F = "%012d";
   private static final String FIXTURE_ID_BUSINESS_DATE_STEP_ATTEMPT_STARTED_AT_F3540697 =
       " id,business_date,step,attempt,started_at,ended_at,target_count,";
@@ -1114,8 +1154,8 @@ final class MorningDatabaseSessionTest {
                         (unused, method, args) -> {
                           boolean boundary =
                               fault.equals("ROLLBACK")
-                                  ? method.getName().equals("rollback")
-                                  : method.getName().equals("setAutoCommit")
+                                  ? method.getName().equals(FIXTURE_ROLLBACK_3770B198)
+                                  : method.getName().equals(FIXTURE_SETAUTOCOMMIT_17F7C6FD)
                                       && Boolean.TRUE.equals(args[0]);
                           if (boundary && armed.compareAndSet(true, false)) {
                             intercepted.incrementAndGet();
@@ -1276,7 +1316,7 @@ final class MorningDatabaseSessionTest {
         var s =
             c.prepareStatement(
                 "select step,status,target_count,success_count,failure_count,byte_count,ended_at"
-                    + " from schubert.batch_runs where run_id=? order by step")) {
+                    + FIXTURE_FROM_SCHUBERT_BATCH_RUNS_WHERE_RUN_ID_OR_9EF955AF)) {
       s.setObject(1, run.id());
       try (var rows = s.executeQuery()) {
         for (String step : List.of(FIXTURE_BACKUP_CONFIG_8386D7E7, FIXTURE_BACKUP_DB_6C03A087)) {
@@ -1346,7 +1386,8 @@ final class MorningDatabaseSessionTest {
                           if (fault.equals("COMMIT")
                               && method.getName().equals(FIXTURE_COMMIT_5EA9C586)
                               && commits.incrementAndGet() == 1)
-                            throw new SQLException("isolated resume commit refusal", "08006");
+                            throw new SQLException(
+                                "isolated resume commit refusal", FIXTURE_08006_5E6D8ABE);
                           return mdb2292Invoke(method, connection, args);
                         });
               },
@@ -1366,7 +1407,13 @@ final class MorningDatabaseSessionTest {
   void mdb2592001SuccessfulPairRejectsIdentityExtraDuplicateAndSqlWithoutMutation()
       throws Exception {
     int ordinal = 0;
-    for (String fault : List.of("VALID", "IDENTITY", "EXTRA", "SAME_STEP", FIXTURE_SQL_5B7E398D)) {
+    for (String fault :
+        List.of(
+            FIXTURE_VALID_53E4338E,
+            "IDENTITY",
+            FIXTURE_EXTRA_6973AF6F,
+            "SAME_STEP",
+            FIXTURE_SQL_5B7E398D)) {
       int n = ++ordinal;
       var run =
           new BatchRun(
@@ -1399,7 +1446,8 @@ final class MorningDatabaseSessionTest {
                               method.getName().equals(FIXTURE_PREPARESTATEMENT_CB987D1F)
                                   && ((String) args[0]).contains("maintenance_read_run_references");
                           if (pair && fault.equals(FIXTURE_SQL_5B7E398D))
-                            throw new SQLException("isolated selected pair refusal", "08006");
+                            throw new SQLException(
+                                "isolated selected pair refusal", FIXTURE_08006_5E6D8ABE);
                           Object value = mdb2292Invoke(method, connection, args);
                           if (!pair && !identity) return value;
                           var statement = (PreparedStatement) value;
@@ -1417,13 +1465,13 @@ final class MorningDatabaseSessionTest {
                                     new Class<?>[] {ResultSet.class},
                                     (ignoredRow, read, columns) -> {
                                       if (pair
-                                          && fault.equals("EXTRA")
+                                          && fault.equals(FIXTURE_EXTRA_6973AF6F)
                                           && read.getName().equals(FIXTURE_NEXT_CA1733B5)
                                           && nextCalls.incrementAndGet() == 3) return true;
                                       if (pair
                                           && fault.equals("SAME_STEP")
                                           && read.getName().equals(FIXTURE_GETSTRING_B3B802ED)
-                                          && columns[0].equals("step"))
+                                          && columns[0].equals(FIXTURE_STEP_0D9F50D8))
                                         return FIXTURE_BACKUP_DB_6C03A087;
                                       if (pair
                                           && fault.equals("SAME_STEP")
@@ -1441,7 +1489,7 @@ final class MorningDatabaseSessionTest {
                         });
               },
               c -> {});
-      if (fault.equals("VALID")) {
+      if (fault.equals(FIXTURE_VALID_53E4338E)) {
         var pair =
             subject.execute(credential(), s -> s.successfulBackup(run, observed)).orElseThrow();
         assertEquals(id + 1, pair.database().id());
@@ -1467,8 +1515,8 @@ final class MorningDatabaseSessionTest {
             assertEquals(id + i, rows.getLong("id"));
             assertEquals(
                 i == 0 ? FIXTURE_BACKUP_CONFIG_8386D7E7 : FIXTURE_BACKUP_DB_6C03A087,
-                rows.getString("step"));
-            assertEquals(1, rows.getInt("attempt"));
+                rows.getString(FIXTURE_STEP_0D9F50D8));
+            assertEquals(1, rows.getInt(FIXTURE_ATTEMPT_7FD8A755));
             assertEquals(FIXTURE_SUCCESS_10855C7F, rows.getString(FIXTURE_STATUS_CFC31BCC));
             assertEquals(started, rows.getTimestamp(FIXTURE_STARTED_AT_D1210657).toInstant());
             assertEquals(
@@ -1489,7 +1537,7 @@ final class MorningDatabaseSessionTest {
   @Test
   void mdb2590001OriginalPairMustBeReinspectedBeforeReuseOrRetention() throws Exception {
     int ordinal = 0;
-    for (String operation : List.of("COMPLETE", "RETENTION")) {
+    for (String operation : List.of("COMPLETE", FIXTURE_RETENTION_31E0EE4A)) {
       for (String drift : List.of(FIXTURE_RUNNING_294BDBF9, "BYTE")) {
         int n = ++ordinal;
         var run =
@@ -1560,7 +1608,7 @@ final class MorningDatabaseSessionTest {
                     credential(),
                     session -> {
                       var current = session.beginResumeBackup(original, observed);
-                      if (operation.equals("RETENTION"))
+                      if (operation.equals(FIXTURE_RETENTION_31E0EE4A))
                         session.completeReusedBackup(current, original, observed);
                       try (var connection =
                               DriverManager.getConnection(
@@ -1586,7 +1634,7 @@ final class MorningDatabaseSessionTest {
                     }),
             operation + ":" + drift);
         assertTrue(retained.get().isClosed());
-        if (operation.equals("RETENTION")) assertEquals(2, cachedReads.get());
+        if (operation.equals(FIXTURE_RETENTION_31E0EE4A)) assertEquals(2, cachedReads.get());
         else assertEquals(0, cachedReads.get());
         try (var connection =
                 DriverManager.getConnection(actualUrl, FIXTURE_PGPT_ADMIN_F5D1227C, "");
@@ -1605,11 +1653,11 @@ final class MorningDatabaseSessionTest {
                 boolean running = !skipped && drift.equals(FIXTURE_RUNNING_294BDBF9);
                 long count =
                     skipped || running ? 0 : step.equals(FIXTURE_BACKUP_DB_6C03A087) ? 1 : 2;
-                assertEquals(step, rows.getString("step"));
-                assertEquals(attempt, rows.getInt("attempt"));
+                assertEquals(step, rows.getString(FIXTURE_STEP_0D9F50D8));
+                assertEquals(attempt, rows.getInt(FIXTURE_ATTEMPT_7FD8A755));
                 assertEquals(
                     skipped
-                        ? "SKIPPED"
+                        ? FIXTURE_SKIPPED_4B852540
                         : running ? FIXTURE_RUNNING_294BDBF9 : FIXTURE_SUCCESS_10855C7F,
                     rows.getString(FIXTURE_STATUS_CFC31BCC));
                 assertEquals(
@@ -1646,18 +1694,18 @@ final class MorningDatabaseSessionTest {
     int ordinal = 0;
     for (String fault :
         List.of(
-            "VALID",
-            "MISSING",
+            FIXTURE_VALID_53E4338E,
+            FIXTURE_MISSING_B0CC6EC2,
             "ONE_ROW",
             "FOREIGN_ID",
             "DUPLICATE_ID",
-            "NULL_ID",
+            FIXTURE_NULL_ID_1D9B525C,
             "NULL_STATUS",
             "UNKNOWN_STATUS",
             FIXTURE_RUNNING_294BDBF9,
             FIXTURE_FAILED_7E8A57FE,
             "WARNING",
-            "SKIPPED")) {
+            FIXTURE_SKIPPED_4B852540)) {
       int n = ++ordinal;
       var run =
           new BatchRun(
@@ -1712,13 +1760,14 @@ final class MorningDatabaseSessionTest {
                                       observedRows.incrementAndGet();
                                       if (read.getName().equals(FIXTURE_NEXT_CA1733B5)) {
                                         int index = row.incrementAndGet();
-                                        if (fault.equals("MISSING") && index == 1
+                                        if (fault.equals(FIXTURE_MISSING_B0CC6EC2) && index == 1
                                             || fault.equals("ONE_ROW") && index == 2) return false;
                                         return value;
                                       }
                                       if (read.getName().equals(FIXTURE_GETOBJECT_B6112877)
                                           && columns[0].equals("id")) {
-                                        if (fault.equals("NULL_ID") && row.get() == 1) return null;
+                                        if (fault.equals(FIXTURE_NULL_ID_1D9B525C)
+                                            && row.get() == 1) return null;
                                         if (fault.equals("FOREIGN_ID") && row.get() == 1)
                                           return id + 100000L;
                                         if (fault.equals("DUPLICATE_ID") && row.get() == 2)
@@ -1733,7 +1782,7 @@ final class MorningDatabaseSessionTest {
                                                 FIXTURE_RUNNING_294BDBF9,
                                                 FIXTURE_FAILED_7E8A57FE,
                                                 "WARNING",
-                                                "SKIPPED")
+                                                FIXTURE_SKIPPED_4B852540)
                                             .contains(fault)) return fault;
                                       }
                                       return value;
@@ -1750,7 +1799,12 @@ final class MorningDatabaseSessionTest {
                 session.completeReusedBackup(current, original, observed);
                 mdb2490SqlRows(run, started, observed, id);
                 armed.set(true);
-                if (Set.of("FOREIGN_ID", "DUPLICATE_ID", "NULL_ID", "NULL_STATUS", "UNKNOWN_STATUS")
+                if (Set.of(
+                        "FOREIGN_ID",
+                        "DUPLICATE_ID",
+                        FIXTURE_NULL_ID_1D9B525C,
+                        "NULL_STATUS",
+                        "UNKNOWN_STATUS")
                     .contains(fault)) {
                   assertThrows(
                       IOException.class,
@@ -1758,7 +1812,7 @@ final class MorningDatabaseSessionTest {
                       fault);
                 } else {
                   assertEquals(
-                      fault.equals("VALID"),
+                      fault.equals(FIXTURE_VALID_53E4338E),
                       session.retainedBackupSuccessful(original, observed),
                       fault);
                 }
@@ -1780,7 +1834,12 @@ final class MorningDatabaseSessionTest {
   void mdb2572001ReusedBackupRequiresExactManifestSkippedPairAndFreshTime() throws Exception {
     int ordinal = 0;
     for (String fault :
-        List.of("VALID", "MANIFEST", "DATABASE_NOT_SKIPPED", "CONFIG_NOT_SKIPPED", "STALE_TIME")) {
+        List.of(
+            FIXTURE_VALID_53E4338E,
+            "MANIFEST",
+            "DATABASE_NOT_SKIPPED",
+            "CONFIG_NOT_SKIPPED",
+            "STALE_TIME")) {
       int n = ++ordinal;
       var run =
           new BatchRun(
@@ -1842,7 +1901,7 @@ final class MorningDatabaseSessionTest {
                     : current.configuration();
             var offered =
                 new MorningDatabaseSession.BackupBegins(offeredDatabase, offeredConfiguration);
-            if (fault.equals("VALID")) {
+            if (fault.equals(FIXTURE_VALID_53E4338E)) {
               session.completeReusedBackup(offered, offeredManifest, observed);
               assertEquals(
                   2,
@@ -1883,17 +1942,17 @@ final class MorningDatabaseSessionTest {
   void mdb2570001FailedBackupFinalGuardsRejectDriverAndOwnerDriftWithoutChangingPair()
       throws Exception {
     int ordinal = 0;
-    for (String operation : List.of("SNAPSHOT", "OBSERVE", "RECHECK")) {
+    for (String operation : List.of("SNAPSHOT", FIXTURE_OBSERVE_BCF98D4B, "RECHECK")) {
       for (String fault :
           List.of(
               "AUTOCOMMIT",
-              "READONLY",
-              "ISOLATION",
+              FIXTURE_READONLY_72E7E87D,
+              FIXTURE_ISOLATION_BE727FC1,
               FIXTURE_SQL_5B7E398D,
               "OWNER",
-              "HELD",
+              FIXTURE_HELD_BE1A57CE,
               "FINAL_HELD")) {
-        if (!operation.equals("SNAPSHOT") && fault.equals("ISOLATION")) continue;
+        if (!operation.equals("SNAPSHOT") && fault.equals(FIXTURE_ISOLATION_BE727FC1)) continue;
         if (operation.equals("RECHECK") && fault.equals("OWNER")) continue;
         if (operation.equals("RECHECK") && fault.equals("FINAL_HELD")) continue;
         int n = ++ordinal;
@@ -1927,11 +1986,12 @@ final class MorningDatabaseSessionTest {
                                 injected.set(true);
                                 return false;
                               }
-                              if (fault.equals("READONLY") && name.equals("isReadOnly")) {
+                              if (fault.equals(FIXTURE_READONLY_72E7E87D)
+                                  && name.equals(FIXTURE_ISREADONLY_B1148EC6)) {
                                 injected.set(true);
                                 return true;
                               }
-                              if (fault.equals("ISOLATION")
+                              if (fault.equals(FIXTURE_ISOLATION_BE727FC1)
                                   && name.equals(FIXTURE_GETTRANSACTIONISOLATION_6ED78CE6)) {
                                 injected.set(true);
                                 return Connection.TRANSACTION_SERIALIZABLE;
@@ -1939,12 +1999,14 @@ final class MorningDatabaseSessionTest {
                               if (fault.equals(FIXTURE_SQL_5B7E398D)
                                   && name.equals(FIXTURE_GETAUTOCOMMIT_C0200BDE)) {
                                 injected.set(true);
-                                throw new SQLException("public final guard unavailable", "08006");
+                                throw new SQLException(
+                                    "public final guard unavailable", FIXTURE_08006_5E6D8ABE);
                               }
                             }
                             Object actual = mdb2292Invoke(method, connection, args);
                             if (!armed.get()
-                                || !(fault.equals("HELD") || fault.equals("FINAL_HELD"))
+                                || !(fault.equals(FIXTURE_HELD_BE1A57CE)
+                                    || fault.equals("FINAL_HELD"))
                                 || !method.getName().equals(FIXTURE_PREPARESTATEMENT_CB987D1F)
                                 || !((String) args[0])
                                     .contains("select exists(select 1 from pg_catalog.pg_locks"))
@@ -1966,7 +2028,7 @@ final class MorningDatabaseSessionTest {
                                         if (read.getName().equals(FIXTURE_GETOBJECT_B6112877)
                                             && columns[0].equals("value")) {
                                           int index = heldReads.incrementAndGet();
-                                          if (fault.equals("HELD") || index == 2) {
+                                          if (fault.equals(FIXTURE_HELD_BE1A57CE) || index == 2) {
                                             injected.set(true);
                                             return false;
                                           }
@@ -2009,7 +2071,7 @@ final class MorningDatabaseSessionTest {
                     () -> {
                       switch (operation) {
                         case "SNAPSHOT" -> session.failedBackupSnapshot(begins, owner);
-                        case "OBSERVE" ->
+                        case FIXTURE_OBSERVE_BCF98D4B ->
                             session.observeBackup(begins, Optional.empty(), ended, owner);
                         default -> session.recheckConsistent(run);
                       }
@@ -2040,10 +2102,10 @@ final class MorningDatabaseSessionTest {
     int ordinal = 0;
     for (String fault :
         List.of(
-            "VALID",
-            "FIRST_MISSING",
-            "SECOND_MISSING",
-            "EXTRA",
+            FIXTURE_VALID_53E4338E,
+            FIXTURE_FIRST_MISSING_E2DAD1C7,
+            FIXTURE_SECOND_MISSING_F983DFA0,
+            FIXTURE_EXTRA_6973AF6F,
             FIXTURE_SQL_5B7E398D,
             "STEP",
             "ATTEMPT",
@@ -2051,8 +2113,8 @@ final class MorningDatabaseSessionTest {
             FIXTURE_ERROR_F717E7D8,
             "END_BEFORE",
             "END_AFTER",
-            "DATE",
-            "NULL_END")) {
+            FIXTURE_DATE_D3036BFE,
+            FIXTURE_NULL_END_421C540E)) {
       int n = ++ordinal;
       var run =
           new BatchRun(
@@ -2100,7 +2162,8 @@ final class MorningDatabaseSessionTest {
                                 if (called.getName().equals(FIXTURE_EXECUTEQUERY_85C8C423)
                                     && fault.equals(FIXTURE_SQL_5B7E398D))
                                   throw new SQLException(
-                                      "public abandoned fixture unavailable", "08006");
+                                      "public abandoned fixture unavailable",
+                                      FIXTURE_08006_5E6D8ABE);
                                 Object actual = mdb2292Invoke(called, statement, input);
                                 if (!called.getName().equals(FIXTURE_EXECUTEQUERY_85C8C423))
                                   return actual;
@@ -2114,10 +2177,12 @@ final class MorningDatabaseSessionTest {
                                       readCount.incrementAndGet();
                                       if (read.getName().equals(FIXTURE_NEXT_CA1733B5)) {
                                         int index = row.incrementAndGet();
-                                        if (fault.equals("FIRST_MISSING") && index == 1
-                                            || fault.equals("SECOND_MISSING") && index == 2)
-                                          return false;
-                                        if (fault.equals("EXTRA") && index == 3) return true;
+                                        if (fault.equals(FIXTURE_FIRST_MISSING_E2DAD1C7)
+                                                && index == 1
+                                            || fault.equals(FIXTURE_SECOND_MISSING_F983DFA0)
+                                                && index == 2) return false;
+                                        if (fault.equals(FIXTURE_EXTRA_6973AF6F) && index == 3)
+                                          return true;
                                         return real;
                                       }
                                       if (row.get() != 1
@@ -2125,16 +2190,16 @@ final class MorningDatabaseSessionTest {
                                               || read.getName().equals(FIXTURE_GETSTRING_B3B802ED)))
                                         return real;
                                       String key = (String) columns[0];
-                                      if (fault.equals("STEP") && key.equals("step"))
+                                      if (fault.equals("STEP") && key.equals(FIXTURE_STEP_0D9F50D8))
                                         return FIXTURE_BACKUP_DB_6C03A087;
-                                      if (fault.equals("ATTEMPT") && key.equals("attempt"))
-                                        return 2;
+                                      if (fault.equals("ATTEMPT")
+                                          && key.equals(FIXTURE_ATTEMPT_7FD8A755)) return 2;
                                       if (fault.equals("STATUS")
                                           && key.equals(FIXTURE_STATUS_CFC31BCC))
                                         return FIXTURE_SUCCESS_10855C7F;
                                       if (fault.equals(FIXTURE_ERROR_F717E7D8)
                                           && key.equals(FIXTURE_ERROR_CODE_B886CCEF))
-                                        return "COMMAND_FAILURE";
+                                        return FIXTURE_COMMAND_FAILURE_38148BF2;
                                       if (fault.equals("END_BEFORE")
                                           && key.equals(FIXTURE_ENDED_AT_E151E393))
                                         return oldStart
@@ -2145,12 +2210,13 @@ final class MorningDatabaseSessionTest {
                                         return freshStart
                                             .plusSeconds(1)
                                             .atOffset(java.time.ZoneOffset.UTC);
-                                      if (fault.equals("DATE") && key.equals("business_date"))
+                                      if (fault.equals(FIXTURE_DATE_D3036BFE)
+                                          && key.equals("business_date"))
                                         return run.cutoff()
                                             .atZone(java.time.ZoneId.of("Asia/Tokyo"))
                                             .toLocalDate()
                                             .plusDays(1);
-                                      if (fault.equals("NULL_END")
+                                      if (fault.equals(FIXTURE_NULL_END_421C540E)
                                           && key.equals(FIXTURE_ENDED_AT_E151E393)) return null;
                                       return real;
                                     });
@@ -2166,7 +2232,8 @@ final class MorningDatabaseSessionTest {
             s.requireAbandonedRequest(previous);
             return true;
           };
-      if (fault.equals("VALID")) assertTrue(subject.execute(credential(), operation));
+      if (fault.equals(FIXTURE_VALID_53E4338E))
+        assertTrue(subject.execute(credential(), operation));
       else assertThrows(IOException.class, () -> subject.execute(credential(), operation), fault);
       assertTrue(retained.get().isClosed(), fault);
       if (!fault.equals(FIXTURE_SQL_5B7E398D)) assertTrue(readCount.get() > 0, fault);
@@ -2181,8 +2248,8 @@ final class MorningDatabaseSessionTest {
           for (String step : List.of(FIXTURE_BACKUP_CONFIG_8386D7E7, FIXTURE_BACKUP_DB_6C03A087)) {
             for (int attempt = 1; attempt <= 2; attempt++) {
               assertTrue(rows.next(), fault);
-              assertEquals(step, rows.getString("step"));
-              assertEquals(attempt, rows.getInt("attempt"));
+              assertEquals(step, rows.getString(FIXTURE_STEP_0D9F50D8));
+              assertEquals(attempt, rows.getInt(FIXTURE_ATTEMPT_7FD8A755));
               assertEquals(
                   attempt == 1 ? FIXTURE_FAILED_7E8A57FE : FIXTURE_RUNNING_294BDBF9,
                   rows.getString(FIXTURE_STATUS_CFC31BCC));
@@ -2244,7 +2311,8 @@ final class MorningDatabaseSessionTest {
   void mdb2490001SkippedBackupRequiresOriginalManifestAndActualReverseOrderedPair()
       throws Exception {
     int n = 0;
-    for (String mode : List.of("VALID", "MISSING", "DRIFT", "ORIGINAL_EMPTY")) {
+    for (String mode :
+        List.of(FIXTURE_VALID_53E4338E, FIXTURE_MISSING_B0CC6EC2, "DRIFT", "ORIGINAL_EMPTY")) {
       var run =
           new BatchRun(
               UUID.fromString(
@@ -2269,7 +2337,9 @@ final class MorningDatabaseSessionTest {
             session.completeReusedBackup(current, original, observed);
             armed.set(true);
             var offered =
-                mode.equals("MISSING") ? Optional.<BackupManifest>empty() : Optional.of(original);
+                mode.equals(FIXTURE_MISSING_B0CC6EC2)
+                    ? Optional.<BackupManifest>empty()
+                    : Optional.of(original);
             if (mode.equals("DRIFT"))
               offered =
                   Optional.of(
@@ -2313,7 +2383,7 @@ final class MorningDatabaseSessionTest {
             }
             return Boolean.TRUE;
           };
-      if (mode.equals("VALID")) assertTrue(subject.execute(credential(), operation));
+      if (mode.equals(FIXTURE_VALID_53E4338E)) assertTrue(subject.execute(credential(), operation));
       else assertThrows(IOException.class, () -> subject.execute(credential(), operation));
       assertTrue(retained.get().isClosed());
       mdb2490SqlRows(run, started, observed, id);
@@ -2325,7 +2395,11 @@ final class MorningDatabaseSessionTest {
   @Test
   void mdb2490002TerminalPairRejectsMissingAndExtraDriverRows() throws Exception {
     int n = 0;
-    for (String mode : List.of("FIRST_MISSING", "SECOND_MISSING", "EXTRA")) {
+    for (String mode :
+        List.of(
+            FIXTURE_FIRST_MISSING_E2DAD1C7,
+            FIXTURE_SECOND_MISSING_F983DFA0,
+            FIXTURE_EXTRA_6973AF6F)) {
       var run =
           new BatchRun(
               UUID.fromString(
@@ -2379,8 +2453,8 @@ final class MorningDatabaseSessionTest {
         for (int attempt = 1; attempt <= 2; attempt++)
           for (String step : List.of(FIXTURE_BACKUP_CONFIG_8386D7E7, FIXTURE_BACKUP_DB_6C03A087)) {
             assertTrue(r.next());
-            assertEquals(step, r.getString("step"));
-            assertEquals(attempt, r.getInt("attempt"));
+            assertEquals(step, r.getString(FIXTURE_STEP_0D9F50D8));
+            assertEquals(attempt, r.getInt(FIXTURE_ATTEMPT_7FD8A755));
             assertEquals(
                 attempt == 1 ? started : observed,
                 r.getTimestamp(FIXTURE_STARTED_AT_D1210657).toInstant());
@@ -2388,7 +2462,7 @@ final class MorningDatabaseSessionTest {
                 attempt == 1 ? started.plusSeconds(3) : observed,
                 r.getTimestamp(FIXTURE_ENDED_AT_E151E393).toInstant());
             assertEquals(
-                attempt == 1 ? FIXTURE_SUCCESS_10855C7F : "SKIPPED",
+                attempt == 1 ? FIXTURE_SUCCESS_10855C7F : FIXTURE_SKIPPED_4B852540,
                 r.getString(FIXTURE_STATUS_CFC31BCC));
             long count = attempt == 2 ? 0 : step.equals(FIXTURE_BACKUP_DB_6C03A087) ? 1 : 2;
             assertEquals(count, r.getLong(FIXTURE_TARGET_COUNT_5B6567D4));
@@ -2454,9 +2528,10 @@ final class MorningDatabaseSessionTest {
                                 if (mode.equals("ORIGINAL_EMPTY") && query == 2 && row == 1)
                                   return false;
                                 if (query == 1) {
-                                  if (mode.equals("FIRST_MISSING") && row == 1
-                                      || mode.equals("SECOND_MISSING") && row == 2) return false;
-                                  if (mode.equals("EXTRA") && row == 3) return true;
+                                  if (mode.equals(FIXTURE_FIRST_MISSING_E2DAD1C7) && row == 1
+                                      || mode.equals(FIXTURE_SECOND_MISSING_F983DFA0) && row == 2)
+                                    return false;
+                                  if (mode.equals(FIXTURE_EXTRA_6973AF6F) && row == 3) return true;
                                 }
                                 return real;
                               });
@@ -2470,7 +2545,7 @@ final class MorningDatabaseSessionTest {
   @Test
   void mdb2486001FinalAdvisoryObservationCannotReuseInitialAdmission() throws Exception {
     int n = 0;
-    for (String operation : List.of("OBSERVE", "RETENTION")) {
+    for (String operation : List.of(FIXTURE_OBSERVE_BCF98D4B, FIXTURE_RETENTION_31E0EE4A)) {
       var run =
           new BatchRun(
               UUID.fromString(
@@ -2483,7 +2558,7 @@ final class MorningDatabaseSessionTest {
       assertThrows(
           IOException.class,
           () ->
-              mdb2486Subject("HELD", retained, armed, observations)
+              mdb2486Subject(FIXTURE_HELD_BE1A57CE, retained, armed, observations)
                   .execute(
                       credential(),
                       session -> {
@@ -2498,7 +2573,7 @@ final class MorningDatabaseSessionTest {
                                 BatchStepResult.Reason.COMMAND_FAILURE);
                         session.failBackup(begins, started.plusSeconds(3), failed, failed);
                         armed.set(true);
-                        if (operation.equals("OBSERVE"))
+                        if (operation.equals(FIXTURE_OBSERVE_BCF98D4B))
                           session.observeBackup(
                               begins,
                               Optional.empty(),
@@ -2520,7 +2595,7 @@ final class MorningDatabaseSessionTest {
   @Test
   void mdb2486002TerminalResultTimeAndFailureReasonCannotBeReinterpreted() throws Exception {
     int n = 0;
-    for (String fault : List.of(FIXTURE_SUCCESS_10855C7F, "END", "REASON")) {
+    for (String fault : List.of(FIXTURE_SUCCESS_10855C7F, "END", FIXTURE_REASON_DC84A4A4)) {
       var run =
           new BatchRun(
               UUID.fromString(
@@ -2544,7 +2619,7 @@ final class MorningDatabaseSessionTest {
                                 0,
                                 1,
                                 0,
-                                fault.equals("REASON")
+                                fault.equals(FIXTURE_REASON_DC84A4A4)
                                     ? BatchStepResult.Reason.IO_FAILURE
                                     : BatchStepResult.Reason.COMMAND_FAILURE);
                         session.failBackup(begins, started.plusSeconds(3), failed, failed);
@@ -2567,9 +2642,15 @@ final class MorningDatabaseSessionTest {
         try (var r = s.executeQuery()) {
           for (int i = 0; i < 2; i++) {
             assertTrue(r.next());
-            assertEquals(fault.equals("REASON") ? "IO_FAILURE" : "COMMAND_FAILURE", r.getString(1));
             assertEquals(
-                fault.equals("REASON") ? "batch file operation failed" : "batch command failed",
+                fault.equals(FIXTURE_REASON_DC84A4A4)
+                    ? "IO_FAILURE"
+                    : FIXTURE_COMMAND_FAILURE_38148BF2,
+                r.getString(1));
+            assertEquals(
+                fault.equals(FIXTURE_REASON_DC84A4A4)
+                    ? "batch file operation failed"
+                    : FIXTURE_BATCH_COMMAND_FAILED_7D52C711,
                 r.getString(2));
           }
           assertFalse(r.next());
@@ -2599,9 +2680,9 @@ final class MorningDatabaseSessionTest {
                     if (!armed.get() || !method.getName().equals(FIXTURE_PREPARESTATEMENT_CB987D1F))
                       return result;
                     String sql = (String) args[0];
-                    boolean held = fault.equals("HELD") && sql.contains("pg_locks");
+                    boolean held = fault.equals(FIXTURE_HELD_BE1A57CE) && sql.contains("pg_locks");
                     boolean terminal =
-                        !fault.equals("HELD")
+                        !fault.equals(FIXTURE_HELD_BE1A57CE)
                             && sql.contains("order by id for update")
                             && sql.contains("schubert.batch_runs");
                     if (!held && !terminal) return result;
@@ -2681,7 +2762,8 @@ final class MorningDatabaseSessionTest {
                         (ignored, method, args) -> {
                           if (method.getName().equals(FIXTURE_GETAUTOCOMMIT_C0200BDE)
                               && fault.compareAndSet(FIXTURE_SQL_5B7E398D, ""))
-                            throw new SQLException("public fixture admission unavailable", "08006");
+                            throw new SQLException(
+                                "public fixture admission unavailable", FIXTURE_08006_5E6D8ABE);
                           return mdb2292Invoke(method, c, args);
                         });
               },
@@ -2814,7 +2896,14 @@ final class MorningDatabaseSessionTest {
         started,
         started.plusSeconds(2),
         new BackupVersions(
-            "public-host", "1.0", "023", "ubuntu-26.04", "25.0.4", "18.6", "2.56.0", "1.2.1"),
+            FIXTURE_PUBLIC_HOST_4005163B,
+            FIXTURE_1_0_A51162AE,
+            "023",
+            FIXTURE_UBUNTU_26_04_B6E5E715,
+            FIXTURE_25_0_4_618D547E,
+            FIXTURE_18_6_6BA7879A,
+            FIXTURE_2_56_0_30D4A9A1,
+            FIXTURE_1_2_1_118D12E2),
         "0".repeat(64),
         new BackupFileDigest(26, "1".repeat(64)),
         new BackupFileDigest(35, "2".repeat(64)),
@@ -2832,7 +2921,7 @@ final class MorningDatabaseSessionTest {
     mdb2480Seed(run, started, 24800010);
     for (String fault :
         List.of(
-            "DATE",
+            FIXTURE_DATE_D3036BFE,
             "START",
             "FUTURE",
             "NANO",
@@ -2842,9 +2931,9 @@ final class MorningDatabaseSessionTest {
             "BYTE",
             "ERROR_CODE",
             "ERROR_SUMMARY",
-            "NULL_ID",
+            FIXTURE_NULL_ID_1D9B525C,
             "NULL_STEP",
-            "NULL_END")) {
+            FIXTURE_NULL_END_421C540E)) {
       var retained = new AtomicReference<Connection>();
       IOException failure =
           assertThrows(
@@ -2873,8 +2962,8 @@ final class MorningDatabaseSessionTest {
     mdb2480Seed(run, started, 24800020);
     for (String fault :
         List.of(
-            "SECOND_MISSING",
-            "EXTRA",
+            FIXTURE_SECOND_MISSING_F983DFA0,
+            FIXTURE_EXTRA_6973AF6F,
             "PAIR_STEP",
             "PAIR_ATTEMPT",
             "PAIR_START",
@@ -2895,7 +2984,7 @@ final class MorningDatabaseSessionTest {
     var retained = new AtomicReference<Connection>();
     assertEquals(
         Optional.empty(),
-        mdb2480Subject("FIRST_MISSING", retained)
+        mdb2480Subject(FIXTURE_FIRST_MISSING_E2DAD1C7, retained)
             .execute(
                 credential(), session -> session.successfulBackup(run, started.plusSeconds(10))));
     assertTrue(retained.get().isClosed());
@@ -2945,8 +3034,8 @@ final class MorningDatabaseSessionTest {
           assertEquals(id + n, r.getLong("id"));
           assertEquals(
               n == 0 ? FIXTURE_BACKUP_DB_6C03A087 : FIXTURE_BACKUP_CONFIG_8386D7E7,
-              r.getString("step"));
-          assertEquals(1, r.getInt("attempt"));
+              r.getString(FIXTURE_STEP_0D9F50D8));
+          assertEquals(1, r.getInt(FIXTURE_ATTEMPT_7FD8A755));
           assertEquals(started, r.getTimestamp(FIXTURE_STARTED_AT_D1210657).toInstant());
           assertEquals(
               started.plusSeconds(3), r.getTimestamp(FIXTURE_ENDED_AT_E151E393).toInstant());
@@ -3003,7 +3092,7 @@ final class MorningDatabaseSessionTest {
                           if (called.getName().equals(FIXTURE_EXECUTEQUERY_85C8C423)
                               && fault.equals(FIXTURE_SQL_5B7E398D))
                             throw new SQLException(
-                                "public fixture projection unavailable", "08006");
+                                "public fixture projection unavailable", FIXTURE_08006_5E6D8ABE);
                           Object value = mdb2292Invoke(called, statement, input);
                           if (!called.getName().equals(FIXTURE_EXECUTEQUERY_85C8C423)) return value;
                           var rows = (ResultSet) value;
@@ -3016,9 +3105,10 @@ final class MorningDatabaseSessionTest {
                                 if (name.equals(FIXTURE_NEXT_CA1733B5)) {
                                   int n = ordinal.incrementAndGet();
                                   boolean real = rows.next();
-                                  if (fault.equals("FIRST_MISSING") && n == 1
-                                      || fault.equals("SECOND_MISSING") && n == 2) return false;
-                                  if (fault.equals("EXTRA") && n == 3) return true;
+                                  if (fault.equals(FIXTURE_FIRST_MISSING_E2DAD1C7) && n == 1
+                                      || fault.equals(FIXTURE_SECOND_MISSING_F983DFA0) && n == 2)
+                                    return false;
+                                  if (fault.equals(FIXTURE_EXTRA_6973AF6F) && n == 3) return true;
                                   return real;
                                 }
                                 Object real = mdb2292Invoke(read, rows, columns);
@@ -3026,7 +3116,8 @@ final class MorningDatabaseSessionTest {
                                     || name.equals(FIXTURE_GETSTRING_B3B802ED))) return real;
                                 String key = (String) columns[0];
                                 if (ordinal.get() == 1) {
-                                  if (fault.equals("DATE") && key.equals("business_date"))
+                                  if (fault.equals(FIXTURE_DATE_D3036BFE)
+                                      && key.equals("business_date"))
                                     return ((java.time.LocalDate) real).plusDays(1);
                                   if (fault.equals("START")
                                       && key.equals(FIXTURE_STARTED_AT_D1210657))
@@ -3049,16 +3140,18 @@ final class MorningDatabaseSessionTest {
                                       || fault.equals("ERROR_SUMMARY")
                                           && key.equals(FIXTURE_ERROR_SUMMARY_3F58BF23))
                                     return "public fixture";
-                                  if (fault.equals("NULL_ID") && key.equals("id")
-                                      || fault.equals("NULL_STEP") && key.equals("step")
-                                      || fault.equals("NULL_END")
+                                  if (fault.equals(FIXTURE_NULL_ID_1D9B525C) && key.equals("id")
+                                      || fault.equals("NULL_STEP")
+                                          && key.equals(FIXTURE_STEP_0D9F50D8)
+                                      || fault.equals(FIXTURE_NULL_END_421C540E)
                                           && key.equals(FIXTURE_ENDED_AT_E151E393)) return null;
                                 }
                                 if (ordinal.get() == 2) {
-                                  if (fault.equals("PAIR_STEP") && key.equals("step"))
+                                  if (fault.equals("PAIR_STEP")
+                                      && key.equals(FIXTURE_STEP_0D9F50D8))
                                     return FIXTURE_BACKUP_CONFIG_8386D7E7;
-                                  if (fault.equals("PAIR_ATTEMPT") && key.equals("attempt"))
-                                    return 2;
+                                  if (fault.equals("PAIR_ATTEMPT")
+                                      && key.equals(FIXTURE_ATTEMPT_7FD8A755)) return 2;
                                   if (fault.equals("PAIR_START")
                                       && key.equals(FIXTURE_STARTED_AT_D1210657))
                                     return ((java.time.OffsetDateTime) real).plusSeconds(1);
@@ -3078,7 +3171,12 @@ final class MorningDatabaseSessionTest {
   @Test
   void mdb2292001AbandonedRequestRejectsEveryJdbcInvariantBeforeMutation() throws Exception {
     int index = 0;
-    for (String fault : List.of("AUTO", "READONLY", "ISOLATION", "HELD")) {
+    for (String fault :
+        List.of(
+            FIXTURE_AUTO_6AFE91CF,
+            FIXTURE_READONLY_72E7E87D,
+            FIXTURE_ISOLATION_BE727FC1,
+            FIXTURE_HELD_BE1A57CE)) {
       var run =
           new BatchRun(
               UUID.fromString(
@@ -3118,7 +3216,8 @@ final class MorningDatabaseSessionTest {
   @Test
   void mdb2292002RetentionRejectsJdbcDriftAndPreservesBothFailedRows() throws Exception {
     int index = 0;
-    for (String fault : List.of("AUTO", "READONLY", "HELD")) {
+    for (String fault :
+        List.of(FIXTURE_AUTO_6AFE91CF, FIXTURE_READONLY_72E7E87D, FIXTURE_HELD_BE1A57CE)) {
       var run =
           new BatchRun(
               UUID.fromString(
@@ -3151,14 +3250,14 @@ final class MorningDatabaseSessionTest {
                     started,
                     started.plusSeconds(2),
                     new BackupVersions(
-                        "public-host",
-                        "1.0",
+                        FIXTURE_PUBLIC_HOST_4005163B,
+                        FIXTURE_1_0_A51162AE,
                         "028",
-                        "ubuntu-26.04",
-                        "25.0.4",
-                        "18.6",
-                        "2.56.0",
-                        "1.2.1"),
+                        FIXTURE_UBUNTU_26_04_B6E5E715,
+                        FIXTURE_25_0_4_618D547E,
+                        FIXTURE_18_6_6BA7879A,
+                        FIXTURE_2_56_0_30D4A9A1,
+                        FIXTURE_1_2_1_118D12E2),
                     "0".repeat(64),
                     new BackupFileDigest(26, "1".repeat(64)),
                     new BackupFileDigest(35, "2".repeat(64)),
@@ -3185,7 +3284,8 @@ final class MorningDatabaseSessionTest {
   @Test
   void mdb2402001ObservationRejectsJdbcDriftBeforeMutation() throws Exception {
     int index = 0;
-    for (String fault : List.of("AUTO", "READONLY", "HELD")) {
+    for (String fault :
+        List.of(FIXTURE_AUTO_6AFE91CF, FIXTURE_READONLY_72E7E87D, FIXTURE_HELD_BE1A57CE)) {
       var run =
           new BatchRun(
               UUID.fromString(
@@ -3226,8 +3326,9 @@ final class MorningDatabaseSessionTest {
                 for (var row : observed.current()) {
                   assertEquals(ended, row.ended());
                   assertEquals(failed, row.result());
-                  assertEquals(Optional.of("COMMAND_FAILURE"), row.errorCode());
-                  assertEquals(Optional.of("batch command failed"), row.errorSummary());
+                  assertEquals(Optional.of(FIXTURE_COMMAND_FAILURE_38148BF2), row.errorCode());
+                  assertEquals(
+                      Optional.of(FIXTURE_BATCH_COMMAND_FAILED_7D52C711), row.errorSummary());
                 }
                 mdb2292Rows(run, FIXTURE_FAILED_7E8A57FE, started, Optional.of(ended));
                 return Boolean.TRUE;
@@ -3304,9 +3405,9 @@ final class MorningDatabaseSessionTest {
                   check.executeQuery(
                       "select session_user,current_user,current_database(),pg_is_in_recovery()")) {
             assertTrue(values.next());
-            assertEquals("schubert_batch", values.getString(1));
-            assertEquals("schubert_batch", values.getString(2));
-            assertEquals("schubert_nk", values.getString(3));
+            assertEquals(FIXTURE_SCHUBERT_BATCH_F9C88479, values.getString(1));
+            assertEquals(FIXTURE_SCHUBERT_BATCH_F9C88479, values.getString(2));
+            assertEquals(FIXTURE_SCHUBERT_NK_2E567755, values.getString(3));
             assertFalse(values.getBoolean(4));
             assertFalse(values.next());
           }
@@ -3317,14 +3418,15 @@ final class MorningDatabaseSessionTest {
                   new Class<?>[] {Connection.class},
                   (proxy, method, arguments) -> {
                     String name = method.getName();
-                    if (drift.get().equals("AUTO") && name.equals(FIXTURE_GETAUTOCOMMIT_C0200BDE))
-                      return false;
-                    if (drift.get().equals("READONLY") && name.equals("isReadOnly")) return true;
-                    if (drift.get().equals("ISOLATION")
+                    if (drift.get().equals(FIXTURE_AUTO_6AFE91CF)
+                        && name.equals(FIXTURE_GETAUTOCOMMIT_C0200BDE)) return false;
+                    if (drift.get().equals(FIXTURE_READONLY_72E7E87D)
+                        && name.equals(FIXTURE_ISREADONLY_B1148EC6)) return true;
+                    if (drift.get().equals(FIXTURE_ISOLATION_BE727FC1)
                         && name.equals(FIXTURE_GETTRANSACTIONISOLATION_6ED78CE6))
                       return Connection.TRANSACTION_SERIALIZABLE;
                     Object result = mdb2292Invoke(method, actual, arguments);
-                    if (drift.get().equals("HELD")
+                    if (drift.get().equals(FIXTURE_HELD_BE1A57CE)
                         && name.equals(FIXTURE_PREPARESTATEMENT_CB987D1F)
                         && ((String) arguments[0]).contains("pg_locks")) {
                       var statement = (PreparedStatement) result;
@@ -3371,14 +3473,14 @@ final class MorningDatabaseSessionTest {
             observer.prepareStatement(
                 FIXTURE_SELECT_8DAC6259
                     + " step,status,attempt,started_at,ended_at,target_count,success_count,failure_count,byte_count"
-                    + " from schubert.batch_runs where run_id=? order by step")) {
+                    + FIXTURE_FROM_SCHUBERT_BATCH_RUNS_WHERE_RUN_ID_OR_9EF955AF)) {
       statement.setObject(1, run.id());
       try (var rows = statement.executeQuery()) {
         for (String step : List.of(FIXTURE_BACKUP_CONFIG_8386D7E7, FIXTURE_BACKUP_DB_6C03A087)) {
           assertTrue(rows.next());
-          assertEquals(step, rows.getString("step"));
+          assertEquals(step, rows.getString(FIXTURE_STEP_0D9F50D8));
           assertEquals(status, rows.getString(FIXTURE_STATUS_CFC31BCC));
-          assertEquals(1, rows.getInt("attempt"));
+          assertEquals(1, rows.getInt(FIXTURE_ATTEMPT_7FD8A755));
           assertEquals(started, rows.getTimestamp(FIXTURE_STARTED_AT_D1210657).toInstant());
           assertEquals(
               ended,
@@ -3427,7 +3529,7 @@ final class MorningDatabaseSessionTest {
       throws Exception {
     MorningDatabaseSession.Schema legacy =
         connection -> fail("inspection must not use a void gate");
-    try (var connection = db.open("schubert_batch")) {
+    try (var connection = db.open(FIXTURE_SCHUBERT_BATCH_F9C88479)) {
       assertThrows(IOException.class, () -> legacy.inspect(connection));
       assertThrows(NullPointerException.class, () -> legacy.inspect(null));
     }
@@ -3539,14 +3641,14 @@ final class MorningDatabaseSessionTest {
                   started,
                   started.plusSeconds(2),
                   new BackupVersions(
-                      "public-host",
-                      "1.0",
+                      FIXTURE_PUBLIC_HOST_4005163B,
+                      FIXTURE_1_0_A51162AE,
                       "023",
-                      "ubuntu-26.04",
-                      "25.0.4",
-                      "18.6",
-                      "2.56.0",
-                      "1.2.1"),
+                      FIXTURE_UBUNTU_26_04_B6E5E715,
+                      FIXTURE_25_0_4_618D547E,
+                      FIXTURE_18_6_6BA7879A,
+                      FIXTURE_2_56_0_30D4A9A1,
+                      FIXTURE_1_2_1_118D12E2),
                   "0".repeat(64),
                   new BackupFileDigest(26, "1".repeat(64)),
                   new BackupFileDigest(35, "2".repeat(64)),
@@ -3595,7 +3697,7 @@ final class MorningDatabaseSessionTest {
         var role =
             query.executeQuery("select current_database(),session_user::text,current_user::text")) {
       assertTrue(role.next());
-      assertEquals("schubert_nk", role.getString(1));
+      assertEquals(FIXTURE_SCHUBERT_NK_2E567755, role.getString(1));
       assertEquals(FIXTURE_PGPT_ADMIN_F5D1227C, role.getString(2));
       assertEquals(FIXTURE_PGPT_ADMIN_F5D1227C, role.getString(3));
       assertFalse(role.next());
@@ -3635,9 +3737,9 @@ final class MorningDatabaseSessionTest {
       for (String method :
           List.of(
               FIXTURE_GETAUTOCOMMIT_C0200BDE,
-              "isReadOnly",
+              FIXTURE_ISREADONLY_B1148EC6,
               FIXTURE_PREPARESTATEMENT_CB987D1F,
-              "rollback")) {
+              FIXTURE_ROLLBACK_3770B198)) {
         mdb590Scenarios(seed++, phase, method);
       }
     }
@@ -3660,7 +3762,7 @@ final class MorningDatabaseSessionTest {
             "cleanupReferences",
             "beginExpiry",
             "observeExpiry")) {
-      for (String method : List.of(FIXTURE_GETAUTOCOMMIT_C0200BDE, "isReadOnly")) {
+      for (String method : List.of(FIXTURE_GETAUTOCOMMIT_C0200BDE, FIXTURE_ISREADONLY_B1148EC6)) {
         mdb590Scenarios(seed++, phase, method, true);
       }
     }
@@ -3778,10 +3880,11 @@ final class MorningDatabaseSessionTest {
                   session.handoffCleanup(
                       () -> {
                         try (var child =
-                                DriverManager.getConnection(actualUrl, "schubert_batch", "");
+                                DriverManager.getConnection(
+                                    actualUrl, FIXTURE_SCHUBERT_BATCH_F9C88479, "");
                             var sql =
                                 child.prepareStatement(
-                                    "insert into"
+                                    FIXTURE_INSERT_INTO_1D1568AF
                                         + " schubert.batch_runs(id,run_id,business_date,step,attempt,started_at,ended_at,status,target_count,success_count,failure_count,byte_count,error_code,error_summary)"
                                         + " values(?,?,?,?,1,?,?,?,0,0,0,0,?,?)")) {
                           assertTrue(advisory(child));
@@ -3799,7 +3902,8 @@ final class MorningDatabaseSessionTest {
                                 began
                                     .plusSeconds(transfer ? 3 : 2)
                                     .atOffset(java.time.ZoneOffset.UTC));
-                            sql.setString(7, transfer ? FIXTURE_SUCCESS_10855C7F : "SKIPPED");
+                            sql.setString(
+                                7, transfer ? FIXTURE_SUCCESS_10855C7F : FIXTURE_SKIPPED_4B852540);
                             sql.setString(8, transfer ? null : "BACKUP_UNAVAILABLE");
                             sql.setString(9, transfer ? null : "verified backup unavailable");
                             assertEquals(1, sql.executeUpdate());
@@ -3845,7 +3949,7 @@ final class MorningDatabaseSessionTest {
                 long priorId = 595000000L + scenario;
                 try (var sql =
                     observer.prepareStatement(
-                        "insert into"
+                        FIXTURE_INSERT_INTO_1D1568AF
                             + " schubert.batch_runs(id,run_id,business_date,step,attempt,started_at,ended_at,status,target_count,success_count,failure_count,byte_count,error_code,error_summary,expiry_cutoff_at,expiry_before_count,expiry_after_count)"
                             + " values(?,?,?,'CLEAN_EXPIRY',1,?,?,'SUCCESS',1,1,0,17,null,null,?,2,1)")) {
                   sql.setLong(1, priorId);
@@ -3913,7 +4017,8 @@ final class MorningDatabaseSessionTest {
                     session.handoffExpiry(
                         () -> {
                           try (var child =
-                              DriverManager.getConnection(actualUrl, "schubert_batch", "")) {
+                              DriverManager.getConnection(
+                                  actualUrl, FIXTURE_SCHUBERT_BATCH_F9C88479, "")) {
                             assertTrue(advisory(child));
                             releaseAdvisory(child);
                           } catch (SQLException failure) {
@@ -3955,7 +4060,8 @@ final class MorningDatabaseSessionTest {
                   session.handoffExpiry(
                       () -> {
                         try (var child =
-                                DriverManager.getConnection(actualUrl, "schubert_batch", "");
+                                DriverManager.getConnection(
+                                    actualUrl, FIXTURE_SCHUBERT_BATCH_F9C88479, "");
                             var sql =
                                 child.prepareStatement(
                                     "update schubert.batch_runs set"
@@ -3974,13 +4080,15 @@ final class MorningDatabaseSessionTest {
                               5,
                               terminal == 0
                                   ? null
-                                  : terminal == 1 ? "COMMAND_FAILURE" : "SAFETY_FAILURE");
+                                  : terminal == 1
+                                      ? FIXTURE_COMMAND_FAILURE_38148BF2
+                                      : "SAFETY_FAILURE");
                           sql.setString(
                               6,
                               terminal == 0
                                   ? null
                                   : terminal == 1
-                                      ? "batch command failed"
+                                      ? FIXTURE_BATCH_COMMAND_FAILED_7D52C711
                                       : "batch safety check failed");
                           sql.setObject(
                               7,
@@ -4076,10 +4184,10 @@ final class MorningDatabaseSessionTest {
     var points =
         List.of(
             FIXTURE_GETAUTOCOMMIT_C0200BDE,
-            "isReadOnly",
+            FIXTURE_ISREADONLY_B1148EC6,
             "setAutoCommitFalse",
             FIXTURE_PREPARESTATEMENT_CB987D1F,
-            "rollback",
+            FIXTURE_ROLLBACK_3770B198,
             "setAutoCommitTrue",
             "ownerBind");
     for (int index = 0; index < points.size(); index++) {
@@ -4106,9 +4214,9 @@ final class MorningDatabaseSessionTest {
                           String name = method.getName();
                           boolean hit =
                               name.equals(point)
-                                  || (name.equals("setAutoCommit")
+                                  || (name.equals(FIXTURE_SETAUTOCOMMIT_17F7C6FD)
                                       && point.equals(
-                                          "setAutoCommit"
+                                          FIXTURE_SETAUTOCOMMIT_17F7C6FD
                                               + ((boolean) args[0] ? "True" : "False")));
                           if (enabled.get() && hit && injected.getAndIncrement() == 0)
                             throw new SQLException("PRIVATE_SQL_FAULT");
@@ -4338,10 +4446,11 @@ final class MorningDatabaseSessionTest {
                 session.handoffCleanup(
                     () -> {
                       try (var child =
-                              DriverManager.getConnection(actualUrl, "schubert_batch", "");
+                              DriverManager.getConnection(
+                                  actualUrl, FIXTURE_SCHUBERT_BATCH_F9C88479, "");
                           var statement =
                               child.prepareStatement(
-                                  "insert into"
+                                  FIXTURE_INSERT_INTO_1D1568AF
                                       + " schubert.batch_runs(id,run_id,business_date,step,attempt,started_at,ended_at,status,target_count,success_count,failure_count,byte_count,error_code,error_summary)"
                                       + " values"
                                       + " (588201,?,'2026-10-07','CLEAN_NOTIFICATION',1,'2026-10-07T00:00:11Z',null,'RUNNING',0,0,0,0,null,null),(588202,?,'2026-10-07','CLEAN_QUESTION',1,'2026-10-07T00:00:11Z','2026-10-07T00:00:12Z','FAILED',1,0,1,0,'COMMAND_FAILURE','batch"
@@ -4470,7 +4579,7 @@ final class MorningDatabaseSessionTest {
     try (var admin = DriverManager.getConnection(actualUrl, FIXTURE_PGPT_ADMIN_F5D1227C, "");
         var s = admin.createStatement()) {
       s.execute(
-          "insert into"
+          FIXTURE_INSERT_INTO_1D1568AF
               + " schubert.batch_runs(id,run_id,business_date,step,attempt,started_at,ended_at,status,target_count,success_count,byte_count)"
               + " values"
               + "(670001,'38700000-2222-4333-8444-555555555555','2026-11-28','BACKUP_DB',1,'2026-11-28T02:00:00Z','2026-11-28T02:00:03Z','SUCCESS',1,1,26),"
@@ -4487,7 +4596,14 @@ final class MorningDatabaseSessionTest {
             started,
             started.plusSeconds(2),
             new BackupVersions(
-                "public-host", "1.0", "023", "ubuntu-26.04", "25.0.4", "18.6", "2.56.0", "1.2.1"),
+                FIXTURE_PUBLIC_HOST_4005163B,
+                FIXTURE_1_0_A51162AE,
+                "023",
+                FIXTURE_UBUNTU_26_04_B6E5E715,
+                FIXTURE_25_0_4_618D547E,
+                FIXTURE_18_6_6BA7879A,
+                FIXTURE_2_56_0_30D4A9A1,
+                FIXTURE_1_2_1_118D12E2),
             "0".repeat(64),
             new BackupFileDigest(26, "1".repeat(64)),
             new BackupFileDigest(35, "2".repeat(64)),
@@ -4549,7 +4665,8 @@ final class MorningDatabaseSessionTest {
               assertThrows(IOException.class, () -> session.successfulBackup(run, observed));
               return skipped;
             });
-    try (var connection = DriverManager.getConnection(actualUrl, "schubert_batch", "")) {
+    try (var connection =
+        DriverManager.getConnection(actualUrl, FIXTURE_SCHUBERT_BATCH_F9C88479, "")) {
       awaitAcquired(connection, TimeUnit.SECONDS.toNanos(5));
       connection.setAutoCommit(false);
       var repository = new BatchRunRepository(connection);
@@ -4617,8 +4734,8 @@ final class MorningDatabaseSessionTest {
           for (var row : pair.current()) {
             assertEquals(ended, row.ended());
             assertEquals(failed, row.result());
-            assertEquals(Optional.of("COMMAND_FAILURE"), row.errorCode());
-            assertEquals(Optional.of("batch command failed"), row.errorSummary());
+            assertEquals(Optional.of(FIXTURE_COMMAND_FAILURE_38148BF2), row.errorCode());
+            assertEquals(Optional.of(FIXTURE_BATCH_COMMAND_FAILED_7D52C711), row.errorSummary());
           }
           assertThrows(
               IOException.class,
@@ -4653,7 +4770,8 @@ final class MorningDatabaseSessionTest {
     assertThrows(
         IOException.class,
         () -> held.get().failedBackupSnapshot(attempts.get(), () -> 10_000_000_000L));
-    try (var observer = DriverManager.getConnection(actualUrl, "schubert_batch", "")) {
+    try (var observer =
+        DriverManager.getConnection(actualUrl, FIXTURE_SCHUBERT_BATCH_F9C88479, "")) {
       awaitAcquired(observer, TimeUnit.SECONDS.toNanos(5));
       observer.setAutoCommit(false);
       var repository = new BatchRunRepository(observer);
@@ -4665,7 +4783,7 @@ final class MorningDatabaseSessionTest {
       try (var statement =
           observer.prepareStatement(
               "select step,status,target_count,success_count,failure_count,byte_count,error_code"
-                  + " from schubert.batch_runs where run_id=? order by step")) {
+                  + FIXTURE_FROM_SCHUBERT_BATCH_RUNS_WHERE_RUN_ID_OR_9EF955AF)) {
         statement.setObject(1, run.id());
         try (var rows = statement.executeQuery()) {
           for (String step : List.of(FIXTURE_BACKUP_CONFIG_8386D7E7, FIXTURE_BACKUP_DB_6C03A087)) {
@@ -4676,7 +4794,7 @@ final class MorningDatabaseSessionTest {
             assertEquals(0, rows.getLong(4));
             assertEquals(1, rows.getLong(5));
             assertEquals(0, rows.getLong(6));
-            assertEquals("COMMAND_FAILURE", rows.getString(7));
+            assertEquals(FIXTURE_COMMAND_FAILURE_38148BF2, rows.getString(7));
           }
           assertFalse(rows.next());
         }
@@ -4698,7 +4816,7 @@ final class MorningDatabaseSessionTest {
     try (var admin = DriverManager.getConnection(actualUrl, FIXTURE_PGPT_ADMIN_F5D1227C, "");
         var statement = admin.createStatement()) {
       String row =
-          "insert into"
+          FIXTURE_INSERT_INTO_1D1568AF
               + " schubert.batch_runs(id,run_id,business_date,step,attempt,started_at,ended_at,status,target_count,success_count,byte_count)"
               + " values";
       statement.execute(
@@ -4969,7 +5087,7 @@ final class MorningDatabaseSessionTest {
           var query =
               observer.prepareStatement(
                   "select step,status,target_count,success_count,failure_count,byte_count,error_code"
-                      + " from schubert.batch_runs where run_id=? order by step")) {
+                      + FIXTURE_FROM_SCHUBERT_BATCH_RUNS_WHERE_RUN_ID_OR_9EF955AF)) {
         query.setObject(1, run.id());
         try (var rows = query.executeQuery()) {
           for (String step : List.of(FIXTURE_BACKUP_CONFIG_8386D7E7, FIXTURE_BACKUP_DB_6C03A087)) {
@@ -4982,7 +5100,7 @@ final class MorningDatabaseSessionTest {
             assertEquals(0, rows.getLong(4));
             assertEquals(count, rows.getLong(5));
             assertEquals(0, rows.getLong(6));
-            assertEquals("COMMAND_FAILURE", rows.getString(7));
+            assertEquals(FIXTURE_COMMAND_FAILURE_38148BF2, rows.getString(7));
           }
           assertFalse(rows.next());
         }
@@ -5000,11 +5118,11 @@ final class MorningDatabaseSessionTest {
         new HashMap<>(
             Map.of(
                 "effective_role",
-                "schubert_batch",
+                FIXTURE_SCHUBERT_BATCH_F9C88479,
                 "login_role",
-                "schubert_batch",
+                FIXTURE_SCHUBERT_BATCH_F9C88479,
                 "database_name",
-                "schubert_nk",
+                FIXTURE_SCHUBERT_NK_2E567755,
                 "recovery",
                 false));
     boolean auto = true;
@@ -5026,7 +5144,7 @@ final class MorningDatabaseSessionTest {
     // MDB-PROJ-1737: optional literal provider rows, never schema/root authority.
     List<Map<String, Object>> successfulRows;
     String faultAt = "";
-    Throwable failure = new SQLException("PRIVATE");
+    Throwable failure = new SQLException(FIXTURE_PRIVATE_D45CA6F9);
 
     void event(String name) throws Throwable {
       String point = name + "#" + counts.merge(name, 1, Integer::sum);
@@ -5077,7 +5195,7 @@ final class MorningDatabaseSessionTest {
       assertEquals(
           Set.of("user", "password", "connectTimeout", "ApplicationName"),
           properties.stringPropertyNames());
-      assertEquals("schubert_batch", properties.getProperty("user"));
+      assertEquals(FIXTURE_SCHUBERT_BATCH_F9C88479, properties.getProperty("user"));
       assertEquals("PUBLIC_PASSWORD", properties.getProperty("password"));
       assertEquals("3", properties.getProperty("connectTimeout"));
       assertEquals(application, properties.getProperty("ApplicationName"));
@@ -5102,14 +5220,14 @@ final class MorningDatabaseSessionTest {
             event("connection." + m);
             return switch (m) {
               case FIXTURE_GETAUTOCOMMIT_C0200BDE -> auto;
-              case "isReadOnly" -> readonly;
+              case FIXTURE_ISREADONLY_B1148EC6 -> readonly;
               case FIXTURE_GETTRANSACTIONISOLATION_6ED78CE6 -> isolation;
-              case "setAutoCommit" -> {
+              case FIXTURE_SETAUTOCOMMIT_17F7C6FD -> {
                 auto = (boolean) a[0];
                 yield null;
               }
               case FIXTURE_PREPARESTATEMENT_CB987D1F -> statement((String) a[0]);
-              case FIXTURE_COMMIT_5EA9C586, "rollback" -> null;
+              case FIXTURE_COMMIT_5EA9C586, FIXTURE_ROLLBACK_3770B198 -> null;
               default -> throw new AssertionError(m);
             };
           });
@@ -5121,10 +5239,12 @@ final class MorningDatabaseSessionTest {
           sql.contains("current_user")
               ? "ROLE"
               : sql.contains("pg_try_advisory")
-                  ? "LOCK"
+                  ? FIXTURE_LOCK_07EF1C28
                   : sql.contains("pg_locks")
-                      ? "HELD"
-                      : sql.contains("maintenance_read_run_references") ? "REF" : "HISTORY";
+                      ? FIXTURE_HELD_BE1A57CE
+                      : sql.contains("maintenance_read_run_references")
+                          ? "REF"
+                          : FIXTURE_HISTORY_F89F2E29;
       statements++;
       return proxy(
           PreparedStatement.class,
@@ -5141,8 +5261,8 @@ final class MorningDatabaseSessionTest {
             }
             if (m.equals("setObject") || m.equals("setString")) return null;
             if (!m.equals(FIXTURE_EXECUTEQUERY_85C8C423)) throw new AssertionError(m);
-            if (kind.equals("HISTORY")) {
-              if (successfulRows == null) throw new SQLException("PRIVATE");
+            if (kind.equals(FIXTURE_HISTORY_F89F2E29)) {
+              if (successfulRows == null) throw new SQLException(FIXTURE_PRIVATE_D45CA6F9);
               assertTrue(
                   sql.startsWith(
                       "select id,business_date,step,attempt,started_at,ended_at,target_count,"));
@@ -5163,22 +5283,23 @@ final class MorningDatabaseSessionTest {
                   return switch (method) {
                     case FIXTURE_NEXT_CA1733B5 ->
                         ++index[0]
-                            <= (kind.equals("HISTORY")
+                            <= (kind.equals(FIXTURE_HISTORY_F89F2E29)
                                 ? successfulRows.size()
                                 : rowCounts.getOrDefault(kind, rowCount));
                     case FIXTURE_GETSTRING_B3B802ED ->
-                        kind.equals("HISTORY")
+                        kind.equals(FIXTURE_HISTORY_F89F2E29)
                             ? successfulRows.get(index[0] - 1).get((String) args[0])
                             : role.get((String) args[0]);
                     case FIXTURE_GETOBJECT_B6112877 -> {
                       String name = (String) args[0];
-                      if (kind.equals("HISTORY")) yield successfulRows.get(index[0] - 1).get(name);
-                      if (kind.equals("LOCK") && nullLock) yield null;
+                      if (kind.equals(FIXTURE_HISTORY_F89F2E29))
+                        yield successfulRows.get(index[0] - 1).get(name);
+                      if (kind.equals(FIXTURE_LOCK_07EF1C28) && nullLock) yield null;
                       yield kind.equals("ROLE")
                           ? role.get(name)
-                          : kind.equals("LOCK")
+                          : kind.equals(FIXTURE_LOCK_07EF1C28)
                               ? lock
-                              : kind.equals("HELD")
+                              : kind.equals(FIXTURE_HELD_BE1A57CE)
                                   ? held
                                   : name.equals("identity_consistent")
                                       ? identityConsistent
@@ -5223,7 +5344,7 @@ final class MorningDatabaseSessionTest {
             URL + "?user=root",
             "jdbc:postgresql://127.0.0.1:0/schubert_nk",
             "jdbc:postgresql://127.0.0.1:65536/schubert_nk",
-            URL.replace("schubert_nk", "postgres")))
+            URL.replace(FIXTURE_SCHUBERT_NK_2E567755, "postgres")))
       assertThrows(
           IllegalArgumentException.class,
           () -> new MorningDatabaseSession(url, () -> {}, (u, p) -> null));
@@ -5236,7 +5357,13 @@ final class MorningDatabaseSessionTest {
     var context = RootStartupContext.create();
     var snapshot =
         new RootStartupContext.Snapshot(
-            RootStartupContext.Service.MORNING, "PUBLIC", "PUBLIC", 2, 1, 1, "PUBLIC");
+            RootStartupContext.Service.MORNING,
+            FIXTURE_PUBLIC_C22DFCF6,
+            FIXTURE_PUBLIC_C22DFCF6,
+            2,
+            1,
+            1,
+            FIXTURE_PUBLIC_C22DFCF6);
     assertThrows(NullPointerException.class, () -> new MorningDatabaseSession(URL, null, snapshot));
     assertThrows(NullPointerException.class, () -> new MorningDatabaseSession(URL, context, null));
     assertThrows(
@@ -5271,14 +5398,14 @@ final class MorningDatabaseSessionTest {
     var holder = new AtomicReference<MorningDatabaseSession.Session>();
     var c = credential();
     assertEquals(
-        "PUBLIC",
+        FIXTURE_PUBLIC_C22DFCF6,
         p.subject()
             .execute(
                 c,
                 s -> {
                   holder.set(s);
                   s.requireUnused(RUN);
-                  return "PUBLIC";
+                  return FIXTURE_PUBLIC_C22DFCF6;
                 }));
     assertFalse(p.auto);
     assertThrows(IllegalStateException.class, c::copyPassword);
@@ -5392,7 +5519,7 @@ final class MorningDatabaseSessionTest {
 
   @Test
   void roleRecoveryNullAndLockRejections() throws Exception {
-    for (String kind : List.of("LOCK", "HELD"))
+    for (String kind : List.of(FIXTURE_LOCK_07EF1C28, FIXTURE_HELD_BE1A57CE))
       for (int count : List.of(0, 2)) {
         var probe = new Probe();
         probe.rowCounts.put(kind, count);
@@ -5451,9 +5578,11 @@ final class MorningDatabaseSessionTest {
     for (String point : points)
       for (Throwable failure :
           List.of(
-              point.startsWith("gate") ? new IOException("PRIVATE") : new SQLException("PRIVATE"),
-              new IllegalStateException("PRIVATE"),
-              new AssertionError("PRIVATE"))) {
+              point.startsWith("gate")
+                  ? new IOException(FIXTURE_PRIVATE_D45CA6F9)
+                  : new SQLException(FIXTURE_PRIVATE_D45CA6F9),
+              new IllegalStateException(FIXTURE_PRIVATE_D45CA6F9),
+              new AssertionError(FIXTURE_PRIVATE_D45CA6F9))) {
         var p = new Probe();
         p.faultAt = point;
         p.failure = failure;
@@ -5493,14 +5622,14 @@ final class MorningDatabaseSessionTest {
   void compoundUnknownAndNullMethodBoundaries() throws Exception {
     for (Throwable body :
         List.of(
-            new SQLException("PRIVATE"),
-            new IOException("PRIVATE"),
+            new SQLException(FIXTURE_PRIVATE_D45CA6F9),
+            new IOException(FIXTURE_PRIVATE_D45CA6F9),
             new BatchRepositoryException()))
       for (Throwable close :
           List.of(
-              new SQLException("PRIVATE"),
-              new IllegalStateException("PRIVATE"),
-              new AssertionError("PRIVATE"))) {
+              new SQLException(FIXTURE_PRIVATE_D45CA6F9),
+              new IllegalStateException(FIXTURE_PRIVATE_D45CA6F9),
+              new AssertionError(FIXTURE_PRIVATE_D45CA6F9))) {
         var probe = new Probe();
         if (body instanceof SQLException) probe.faults.put("ROLE.row.next", body);
         probe.faults.put("connection.close", close);
@@ -5524,11 +5653,11 @@ final class MorningDatabaseSessionTest {
       }
     for (Throwable secondary :
         List.of(
-            new SQLException("PRIVATE"),
-            new IllegalStateException("PRIVATE"),
-            new AssertionError("PRIVATE"))) {
+            new SQLException(FIXTURE_PRIVATE_D45CA6F9),
+            new IllegalStateException(FIXTURE_PRIVATE_D45CA6F9),
+            new AssertionError(FIXTURE_PRIVATE_D45CA6F9))) {
       var p = new Probe();
-      var primary = new IllegalStateException("PRIVATE");
+      var primary = new IllegalStateException(FIXTURE_PRIVATE_D45CA6F9);
       p.faults.put("ROLE.row.next", primary);
       p.faults.put("ROLE.row.close", secondary);
       p.faults.put("ROLE.statement.close", secondary);
@@ -5558,8 +5687,8 @@ final class MorningDatabaseSessionTest {
                 }));
     p.released();
     var other = new Probe();
-    var primary = new SQLException("PRIVATE");
-    var unknown = new AssertionError("PRIVATE");
+    var primary = new SQLException(FIXTURE_PRIVATE_D45CA6F9);
+    var unknown = new AssertionError(FIXTURE_PRIVATE_D45CA6F9);
     other.faults.put("ROLE.row.next", primary);
     other.faults.put("ROLE.row.close", unknown);
     var current = other;
@@ -5574,10 +5703,10 @@ final class MorningDatabaseSessionTest {
   void interruptionAndForeignThreadCannotUseBorrowedSession() throws Exception {
     for (Throwable failure :
         List.of(
-            new SQLException("PRIVATE"),
-            new IOException("PRIVATE"),
-            new IllegalStateException("PRIVATE"),
-            new AssertionError("PRIVATE"))) {
+            new SQLException(FIXTURE_PRIVATE_D45CA6F9),
+            new IOException(FIXTURE_PRIVATE_D45CA6F9),
+            new IllegalStateException(FIXTURE_PRIVATE_D45CA6F9),
+            new AssertionError(FIXTURE_PRIVATE_D45CA6F9))) {
       var blocked = new Probe();
       blocked.faults.put("schema", failure);
       Throwable actual =
@@ -5718,7 +5847,7 @@ final class MorningDatabaseSessionTest {
                     (name, args) -> {
                       if (name.equals(FIXTURE_COMMIT_5EA9C586)) {
                         if (afterCommit) c.commit();
-                        throw new SQLException("PRIVATE");
+                        throw new SQLException(FIXTURE_PRIVATE_D45CA6F9);
                       }
                       try {
                         return Connection.class
@@ -5826,7 +5955,8 @@ final class MorningDatabaseSessionTest {
                           assertThrows(
                               IOException.class, () -> session.handoffCleanup(() -> "REENTER"));
                           try (var child =
-                              DriverManager.getConnection(actualUrl, "schubert_batch", "")) {
+                              DriverManager.getConnection(
+                                  actualUrl, FIXTURE_SCHUBERT_BATCH_F9C88479, "")) {
                             assertTrue(advisory(child));
                             assertFalse(advisory(observer));
                             releaseAdvisory(child);
@@ -5938,7 +6068,7 @@ final class MorningDatabaseSessionTest {
 
   @Test
   void mdb020ReleaseObservationHasFiniteDeadlineAndCannotUnlockAnotherOwner() throws Exception {
-    try (var holder = DriverManager.getConnection(actualUrl, "schubert_batch", "");
+    try (var holder = DriverManager.getConnection(actualUrl, FIXTURE_SCHUBERT_BATCH_F9C88479, "");
         var observer = DriverManager.getConnection(actualUrl, FIXTURE_PGPT_ADMIN_F5D1227C, "")) {
       assertTrue(advisory(holder));
       assertThrows(
@@ -5996,8 +6126,8 @@ final class MorningDatabaseSessionTest {
   void mdb594002RetainedChildRefusesHandoffAndAcknowledgedUnlockAllowsParentReacquire()
       throws Exception {
     var reachedAfterHandoff = new AtomicInteger();
-    try (var parent = DriverManager.getConnection(actualUrl, "schubert_batch", "");
-        var child = DriverManager.getConnection(actualUrl, "schubert_batch", "");
+    try (var parent = DriverManager.getConnection(actualUrl, FIXTURE_SCHUBERT_BATCH_F9C88479, "");
+        var child = DriverManager.getConnection(actualUrl, FIXTURE_SCHUBERT_BATCH_F9C88479, "");
         var observer = DriverManager.getConnection(actualUrl, FIXTURE_PGPT_ADMIN_F5D1227C, "")) {
       try {
         assertTrue(advisory(parent));
@@ -6074,7 +6204,7 @@ final class MorningDatabaseSessionTest {
   private static Class<?>[] parameterTypes(String name, Object[] args) {
     if (args == null) return new Class<?>[0];
     if (name.equals(FIXTURE_PREPARESTATEMENT_CB987D1F)) return new Class<?>[] {String.class};
-    if (name.equals("setAutoCommit")) return new Class<?>[] {boolean.class};
+    if (name.equals(FIXTURE_SETAUTOCOMMIT_17F7C6FD)) return new Class<?>[] {boolean.class};
     throw new AssertionError(name);
   }
 }

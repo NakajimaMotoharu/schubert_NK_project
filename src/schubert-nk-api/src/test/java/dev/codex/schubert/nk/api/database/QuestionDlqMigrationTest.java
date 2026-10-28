@@ -23,6 +23,7 @@ import org.junit.jupiter.api.io.TempDir;
 /** PT-QST-DLQ-DB; SS331/SSC155. Independent SQL values, real V024->V025, no deployed data. */
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 final class QuestionDlqMigrationTest {
+  private static final String FIXTURE_VALUE_E91D96ED = "','";
   private static final String FIXTURE_NK_DEAD_LETTER_6588D12C = "nk.dead.letter";
   private static final String FIXTURE_23514_8632CD65 = "23514";
   @TempDir static Path root;
@@ -301,15 +302,15 @@ final class QuestionDlqMigrationTest {
         + id
         + ",'"
         + message
-        + "','"
+        + FIXTURE_VALUE_E91D96ED
         + C
-        + "','"
+        + FIXTURE_VALUE_E91D96ED
         + destination
         + "','QWKREQ01','001',decode(repeat('57',320),'hex'),'SENT','"
         + TIME
-        + "','"
+        + FIXTURE_VALUE_E91D96ED
         + TIME
-        + "','"
+        + FIXTURE_VALUE_E91D96ED
         + TIME
         + "')";
   }
@@ -317,13 +318,13 @@ final class QuestionDlqMigrationTest {
   private static String insert(List<String> metadata, String destination) {
     return "insert into schubert.mq_outbox(id,message_id,correlation_id,destination,layout_id,layout_version,body,status,next_attempt_at,created_at,dlq_original_message_id,dlq_original_transport_id,dlq_delivery_count,dlq_error_code,dlq_detected_at) values(10,'"
         + D
-        + "','"
+        + FIXTURE_VALUE_E91D96ED
         + C
-        + "','"
+        + FIXTURE_VALUE_E91D96ED
         + destination
         + "','QWKREQ01','001',decode(repeat('57',320),'hex'),'PENDING','"
         + TIME
-        + "','"
+        + FIXTURE_VALUE_E91D96ED
         + TIME
         + "',"
         + String.join(",", metadata)

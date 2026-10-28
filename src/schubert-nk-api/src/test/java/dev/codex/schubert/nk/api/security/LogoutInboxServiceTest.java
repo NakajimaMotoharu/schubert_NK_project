@@ -70,6 +70,11 @@ import org.junit.jupiter.api.io.TempDir;
  * PT-AUT-LOGOUT-INBOX-001..007; independent UI232/234 280-byte, JCA/LP-HMAC and real SQL oracles.
  */
 final class LogoutInboxServiceTest {
+  private static final String FIXTURE_SELECT_COUNT_FROM_SCHUBERT_AUTH_SESSIONS_2E509F2E =
+      "select count(*) from schubert.auth_sessions where id='";
+  private static final String FIXTURE_UPDATE_SCHUBERT_AUTH_SESSIONS_SET_EXPIRE_096D94ED =
+      "update schubert.auth_sessions set expires_at='";
+  private static final String FIXTURE_WHERE_ID_064F4CB4 = "' where id='";
   private static final String FIXTURE_0000_876EEFE0 = "0000";
   private static final String FIXTURE_0200_FC9DB3AC = "0200";
   private static final String FIXTURE_0102_C967CE66 = "0102";
@@ -189,7 +194,7 @@ final class LogoutInboxServiceTest {
     assertEquals(
         1,
         count(
-            "select count(*) from schubert.auth_sessions where id='"
+            FIXTURE_SELECT_COUNT_FROM_SCHUBERT_AUTH_SESSIONS_2E509F2E
                 + SESSION
                 + "' and revoked_at='2026-09-08T01:00:00.123456Z' and last_accessed_at='2026-09-08T00:00:00Z' and expires_at='2026-09-08T08:00:00Z'"));
   }
@@ -285,7 +290,12 @@ final class LogoutInboxServiceTest {
             "close:insert into schubert.app_logs",
             "close:update schubert.request_inbox")) {
       seed();
-      sql("update schubert.auth_sessions set expires_at='" + NOW + "' where id='" + SESSION + "'");
+      sql(
+          FIXTURE_UPDATE_SCHUBERT_AUTH_SESSIONS_SET_EXPIRE_096D94ED
+              + NOW
+              + FIXTURE_WHERE_ID_064F4CB4
+              + SESSION
+              + "'");
       try (var connection = database.transaction()) {
         assertInfrastructure(
             () -> service(NOW).execute(fault(connection, point), request(RAW, REQUEST), NOW));
@@ -296,7 +306,7 @@ final class LogoutInboxServiceTest {
       assertEquals(
           1,
           count(
-              "select count(*) from schubert.auth_sessions where id='"
+              FIXTURE_SELECT_COUNT_FROM_SCHUBERT_AUTH_SESSIONS_2E509F2E
                   + SESSION
                   + "' and not revoked and revoked_at is null and revoke_reason is null"));
     }
@@ -304,7 +314,12 @@ final class LogoutInboxServiceTest {
 
   @Test
   void rerun001PriorTouchIsCurrentAndLateVerifierCannotUndoFence() throws Exception {
-    sql("update schubert.auth_sessions set expires_at='" + NOW + "' where id='" + SESSION + "'");
+    sql(
+        FIXTURE_UPDATE_SCHUBERT_AUTH_SESSIONS_SET_EXPIRE_096D94ED
+            + NOW
+            + FIXTURE_WHERE_ID_064F4CB4
+            + SESSION
+            + "'");
     var verifier = new AuthenticationContextVerifier(hashes);
     try (var connection = database.transaction()) {
       assertEquals(7, verifier.verify(connection, RAW, NOW.minusSeconds(1)).userId());
@@ -317,12 +332,17 @@ final class LogoutInboxServiceTest {
     assertEquals(
         1,
         count(
-            "select count(*) from schubert.auth_sessions where id='"
+            FIXTURE_SELECT_COUNT_FROM_SCHUBERT_AUTH_SESSIONS_2E509F2E
                 + SESSION
                 + "' and revoke_reason='LOGOUT' and expires_at='2026-09-08T08:59:59.123456Z'"));
 
     seed();
-    sql("update schubert.auth_sessions set expires_at='" + NOW + "' where id='" + SESSION + "'");
+    sql(
+        FIXTURE_UPDATE_SCHUBERT_AUTH_SESSIONS_SET_EXPIRE_096D94ED
+            + NOW
+            + FIXTURE_WHERE_ID_064F4CB4
+            + SESSION
+            + "'");
     var waiting = new CountDownLatch(1);
     try (var connection = database.transaction();
         var pool = Executors.newSingleThreadExecutor()) {
@@ -364,7 +384,7 @@ final class LogoutInboxServiceTest {
     assertEquals(
         1,
         count(
-            "select count(*) from schubert.auth_sessions where id='"
+            FIXTURE_SELECT_COUNT_FROM_SCHUBERT_AUTH_SESSIONS_2E509F2E
                 + SESSION
                 + "' and revoke_reason='EXPIRED' and expires_at='"
                 + NOW
@@ -377,9 +397,9 @@ final class LogoutInboxServiceTest {
       seed();
       Instant expiry = NOW.plusNanos(micros * 1000L);
       sql(
-          "update schubert.auth_sessions set expires_at='"
+          FIXTURE_UPDATE_SCHUBERT_AUTH_SESSIONS_SET_EXPIRE_096D94ED
               + expiry
-              + "' where id='"
+              + FIXTURE_WHERE_ID_064F4CB4
               + SESSION
               + "'");
       boolean expired = micros <= 0;
@@ -404,7 +424,7 @@ final class LogoutInboxServiceTest {
       assertEquals(
           1,
           count(
-              "select count(*) from schubert.auth_sessions where id='"
+              FIXTURE_SELECT_COUNT_FROM_SCHUBERT_AUTH_SESSIONS_2E509F2E
                   + SESSION
                   + "' and revoked and revoked_at='"
                   + NOW
@@ -502,7 +522,7 @@ final class LogoutInboxServiceTest {
     assertEquals(
         1,
         count(
-            "select count(*) from schubert.auth_sessions where id='"
+            FIXTURE_SELECT_COUNT_FROM_SCHUBERT_AUTH_SESSIONS_2E509F2E
                 + SESSION
                 + "' and revoked_at='2026-09-08T01:00:00.123458Z' and revoke_reason='EXPIRED'"));
   }

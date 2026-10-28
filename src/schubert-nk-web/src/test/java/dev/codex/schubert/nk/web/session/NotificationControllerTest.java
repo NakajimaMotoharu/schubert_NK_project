@@ -84,6 +84,8 @@ import org.springframework.web.context.support.AnnotationConfigWebApplicationCon
 
 /** Independent UI224/236 byte/HTTP/DOM oracle, PG-D347/016059/PT-NTF-HTTP001..010. */
 class NotificationControllerTest {
+  private static final String FIXTURE_NTDRSP01_4741FF2A = "NTDRSP01";
+
   // Test-only exhaustive UI236 oracle; never use the Production output encoder.
   private static String expectedNotificationStateWire(NotificationState state) {
     return switch (state) {
@@ -1360,14 +1362,16 @@ class NotificationControllerTest {
         LayoutValidationException.class,
         () ->
             PayloadSemanticValidator.validate(
-                new TypedPayloadValues(new LayoutId("NTDRSP01"), invalid, List.of())));
+                new TypedPayloadValues(
+                    new LayoutId(FIXTURE_NTDRSP01_4741FF2A), invalid, List.of())));
     assertThrows(
         LayoutValidationException.class,
         () ->
             PayloadCodec.standard()
                 .encode(
                     PayloadTypeCatalog.encode(
-                        new TypedPayloadValues(new LayoutId("NTDRSP01"), invalid, List.of())),
+                        new TypedPayloadValues(
+                            new LayoutId(FIXTURE_NTDRSP01_4741FF2A), invalid, List.of())),
                     ResultCode.SUCCESS));
     try (var f = new Fixture()) {
       f.detailState = FIXTURE_COMPLETED_BA0AE16A;
@@ -1387,7 +1391,7 @@ class NotificationControllerTest {
               PayloadTypeCatalog.decode(
                   PayloadCodec.standard()
                       .decode(
-                          new LayoutId("NTDRSP01"),
+                          new LayoutId(FIXTURE_NTDRSP01_4741FF2A),
                           Arrays.copyOfRange(bytes, 256, bytes.length),
                           List.of(),
                           ResultCode.SUCCESS)));
@@ -1501,7 +1505,7 @@ class NotificationControllerTest {
       Arrays.fill(bytes, (byte) ' ');
       put(bytes, 0, 8, FIXTURE_SCHBNK01_E209989D);
       put(bytes, 8, 3, FIXTURE_001_A3FEAA64);
-      put(bytes, 11, 8, "NTDRSP01");
+      put(bytes, 11, 8, FIXTURE_NTDRSP01_4741FF2A);
       put(bytes, 19, 3, FIXTURE_001_A3FEAA64);
       put(bytes, 22, 1, "S");
       put(bytes, 23, 1, "S");

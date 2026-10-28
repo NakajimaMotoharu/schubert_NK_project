@@ -55,6 +55,11 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** PG158/SSC055; OPS009/UI251/SS343 6.15; PT-BAT-058..081, independent bytes/crash states. */
 final class MaintenanceRunFilesTest {
+  private static final String FIXTURE_FILESYSTEM_909B3E41 = "filesystem";
+  private static final String FIXTURE_ACL_43B23946 = "acl";
+  private static final String FIXTURE_READONLY_C4A495E7 = "readonly";
+  private static final String FIXTURE_START_A92AE961 = "start";
+  private static final String FIXTURE_SYNTHETIC_COMPOUND_B9776848 = "synthetic compound";
   private static final String FIXTURE_2026_09_12T05_06_07_234567Z_AD805265 =
       "2026-09-12T05:06:07.234567Z";
   private static final String FIXTURE_ACTIVE_DB0FB2BF = "active";
@@ -1142,11 +1147,11 @@ final class MaintenanceRunFilesTest {
           List.of(
               "nullAttributes",
               "nullFilesystem",
-              "filesystem",
+              FIXTURE_FILESYSTEM_909B3E41,
               "tmpfs",
               "nullAcl",
-              "acl",
-              "readonly"))
+              FIXTURE_ACL_43B23946,
+              FIXTURE_READONLY_C4A495E7))
         try (var f = fixture()) {
           f.badRole = role;
           f.invalid = bad;
@@ -1283,7 +1288,7 @@ final class MaintenanceRunFilesTest {
 
   @Test
   void rootAcquisitionAndCloseFailures() throws Exception {
-    faultMatrix("start", true);
+    faultMatrix(FIXTURE_START_A92AE961, true);
     try (var f = fixture()) {
       f.rawCloses = true;
       failure(
@@ -1324,7 +1329,7 @@ final class MaintenanceRunFilesTest {
           }
           f.released();
         }
-    faultMatrix("start", false);
+    faultMatrix(FIXTURE_START_A92AE961, false);
   }
 
   @Test
@@ -1478,9 +1483,9 @@ final class MaintenanceRunFilesTest {
       for (boolean known : List.of(false, true))
         for (Throwable unknown :
             List.of(
-                new IllegalStateException("synthetic compound"),
-                new NullPointerException("synthetic compound"),
-                new AssertionError("synthetic compound"))) {
+                new IllegalStateException(FIXTURE_SYNTHETIC_COMPOUND_B9776848),
+                new NullPointerException(FIXTURE_SYNTHETIC_COMPOUND_B9776848),
+                new AssertionError(FIXTURE_SYNTHETIC_COMPOUND_B9776848))) {
           try (var f = fixture()) {
             int[] closes = {0};
             int[] injected = {0};
@@ -1521,9 +1526,9 @@ final class MaintenanceRunFilesTest {
     for (boolean known : List.of(false, true))
       for (Throwable unknown :
           List.of(
-              new IllegalStateException("synthetic compound"),
-              new NullPointerException("synthetic compound"),
-              new AssertionError("synthetic compound")))
+              new IllegalStateException(FIXTURE_SYNTHETIC_COMPOUND_B9776848),
+              new NullPointerException(FIXTURE_SYNTHETIC_COMPOUND_B9776848),
+              new AssertionError(FIXTURE_SYNTHETIC_COMPOUND_B9776848)))
         try (var f = fixture()) {
           int[] injected = {0};
           int[] bodies = {0};
@@ -1556,7 +1561,7 @@ final class MaintenanceRunFilesTest {
     // Independently counted final closes: stop after operation IO, then after all scope roots.
     for (boolean wholeScope : List.of(false, true))
       try (var f = fixture()) {
-        int total = inventory(f, "start").get(FIXTURE_CLOSE_97959247);
+        int total = inventory(f, FIXTURE_START_A92AE961).get(FIXTURE_CLOSE_97959247);
         int at = wholeScope ? total : total - f.varPath.getNameCount() - 12;
         f.on(FIXTURE_CLOSE_97959247, at, () -> Thread.currentThread().interrupt());
         try {
@@ -1703,7 +1708,7 @@ final class MaintenanceRunFilesTest {
   private void faultMatrix(String operation, boolean nativeRoots) throws Exception {
     Map<String, Integer> expected;
     try (var f = fixture()) {
-      if (!operation.equals("start")) f.seed(true, true, false);
+      if (!operation.equals(FIXTURE_START_A92AE961)) f.seed(true, true, false);
       operate(f, operation);
       expected = inventory(f, operation);
       assertEquals(expected, f.counts, operation + " independent call inventory");
@@ -1716,7 +1721,7 @@ final class MaintenanceRunFilesTest {
       if (root != nativeRoots) continue;
       for (int at = 1; at <= point.getValue(); at++)
         try (var f = fixture()) {
-          if (!operation.equals("start")) f.seed(true, true, false);
+          if (!operation.equals(FIXTURE_START_A92AE961)) f.seed(true, true, false);
           f.fail = point.getKey();
           f.failAt = at;
           failure(() -> operate(f, operation));
@@ -1741,7 +1746,7 @@ final class MaintenanceRunFilesTest {
     int next;
     int has;
     switch (operation) {
-      case "start" -> {
+      case FIXTURE_START_A92AE961 -> {
         attrs = 171;
         roots = 13;
         entries = 42;
@@ -1783,8 +1788,12 @@ final class MaintenanceRunFilesTest {
       default -> throw new AssertionError(operation);
     }
     Map<String, Integer> result = new HashMap<>();
-    for (String name : List.of("attributes", "acl", "filesystem", "readonly"))
-      result.put(name, attrs);
+    for (String name :
+        List.of(
+            "attributes",
+            FIXTURE_ACL_43B23946,
+            FIXTURE_FILESYSTEM_909B3E41,
+            FIXTURE_READONLY_C4A495E7)) result.put(name, attrs);
     result.put(FIXTURE_OPENROOT_B83E53B3, roots);
     result.put(FIXTURE_OPENDIRECTORY_9E885716, roots * (f.varPath.getNameCount() + 5));
     result.put(FIXTURE_CLOSE_97959247, roots * (f.varPath.getNameCount() + 6) + entries);
@@ -1814,7 +1823,7 @@ final class MaintenanceRunFilesTest {
 
   private static void operate(Fixture f, String operation) throws IOException {
     switch (operation) {
-      case "start" -> f.files.execute(s -> s.start(RUN, ACTIVATION.id()));
+      case FIXTURE_START_A92AE961 -> f.files.execute(s -> s.start(RUN, ACTIVATION.id()));
       case FIXTURE_ACTIVE_DB0FB2BF -> f.files.execute(s -> s.resume(RUN.id(), NEXT));
       case "complete" ->
           f.files.execute(s -> s.complete(completion(MaintenanceCompletion.Outcome.SUCCESS)));
@@ -2062,11 +2071,11 @@ final class MaintenanceRunFilesTest {
 
     @Override
     public String filesystem(Path held) throws IOException {
-      point("filesystem");
+      point(FIXTURE_FILESYSTEM_909B3E41);
       assertNotNull(nativeIo.filesystem(held));
       if (selected(held)) {
         if (invalid.equals("nullFilesystem")) return null;
-        if (invalid.equals("filesystem")) return "nfs";
+        if (invalid.equals(FIXTURE_FILESYSTEM_909B3E41)) return "nfs";
         if (invalid.equals("tmpfs")) return "tmpfs";
       }
       return "ext4";
@@ -2074,12 +2083,12 @@ final class MaintenanceRunFilesTest {
 
     @Override
     public byte[] accessAcl(Path held, int max) throws StorageIoException {
-      point("acl");
+      point(FIXTURE_ACL_43B23946);
       assertEquals(44, max);
       try {
         if (selected(held)) {
           if (invalid.equals("nullAcl")) return null;
-          if (invalid.equals("acl")) return new byte[] {2, 0, 0, 0};
+          if (invalid.equals(FIXTURE_ACL_43B23946)) return new byte[] {2, 0, 0, 0};
         }
       } catch (IOException e) {
         throw new StorageIoException(StorageIoException.Reason.UNAVAILABLE);
@@ -2089,9 +2098,9 @@ final class MaintenanceRunFilesTest {
 
     @Override
     public boolean readOnlyFilesystem(Path held) throws StorageIoException {
-      point("readonly");
+      point(FIXTURE_READONLY_C4A495E7);
       try {
-        return selected(held) && invalid.equals("readonly");
+        return selected(held) && invalid.equals(FIXTURE_READONLY_C4A495E7);
       } catch (IOException e) {
         throw new StorageIoException(StorageIoException.Reason.UNAVAILABLE);
       }
@@ -2192,7 +2201,7 @@ final class MaintenanceRunFilesTest {
 
         @Override
         public int write(ByteBuffer bytes) {
-          throw new AssertionError("readonly");
+          throw new AssertionError(FIXTURE_READONLY_C4A495E7);
         }
 
         @Override
