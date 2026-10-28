@@ -1,0 +1,875 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pmd xmlns="http://pmd.sourceforge.net/report/2.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pmd.sourceforge.net/report/2.0.0 https://pmd.github.io/schema/report_2_0_0.xsd" version="7.28.0" timestamp="2026-10-29T03:12:50.123">
+<file name="/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/question/QuestionCommandServiceTest.java">
+<violation beginline="239" endline="239" begincolumn="20" endcolumn="55" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.api.application.question" class="QuestionCommandServiceTest" method="ntf013BothActualLockCommitOrdersWorkerAndCancel" variable="pool" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="243" endline="250" begincolumn="11" endcolumn="17" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.api.application.question" class="QuestionCommandServiceTest" method="ntf013BothActualLockCommitOrdersWorkerAndCancel" variable="worker" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="265" endline="265" begincolumn="20" endcolumn="76" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.api.application.question" class="QuestionCommandServiceTest" method="ntf013BothActualLockCommitOrdersWorkerAndCancel" variable="cancel" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="283" endline="283" begincolumn="24" endcolumn="31" rule="CloseResource" ruleset="Error Prone" package="dev.codex.schubert.nk.api.application.question" class="QuestionCommandServiceTest" method="qry030EachJdbcFailureRequiresCallerRollbackPreservesDataAndPrivateDiagnostic" variable="counted" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#closeresource" priority="3">
+it is recommended to wrap resource 'counted' in try-with-resource declaration directly
+</violation>
+<violation beginline="292" endline="292" begincolumn="26" endcolumn="32" rule="CloseResource" ruleset="Error Prone" package="dev.codex.schubert.nk.api.application.question" class="QuestionCommandServiceTest" method="qry030EachJdbcFailureRequiresCallerRollbackPreservesDataAndPrivateDiagnostic" variable="broken" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#closeresource" priority="3">
+it is recommended to wrap resource 'broken' in try-with-resource declaration directly
+</violation>
+<violation beginline="566" endline="566" begincolumn="22" endcolumn="29" rule="CloseResource" ruleset="Error Prone" package="dev.codex.schubert.nk.api.application.question" class="QuestionCommandServiceTest" method="qry035MissingExtraNullUnknownAndCasZeroNeverCreateDefiniteSuccess" variable="altered" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#closeresource" priority="3">
+it is recommended to wrap resource 'altered' in try-with-resource declaration directly
+</violation>
+<violation beginline="599" endline="599" begincolumn="24" endcolumn="59" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.api.application.question" class="QuestionCommandServiceTest" method="qry032ActualWorkerInheritsDeleteCommittedWhileAnswerWaitsAndReverseOrder" variable="pool" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="645" endline="650" begincolumn="15" endcolumn="97" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.api.application.question" class="QuestionCommandServiceTest" method="qry032ActualWorkerInheritsDeleteCommittedWhileAnswerWaitsAndReverseOrder" variable="future" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="683" endline="683" begincolumn="13" endcolumn="46" rule="UseProperClassLoader" ruleset="Error Prone" package="dev.codex.schubert.nk.api.application.question" class="QuestionCommandServiceTest" method="shape" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader" priority="3">
+In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.
+</violation>
+<violation beginline="690" endline="690" begincolumn="19" endcolumn="59" rule="UseProperClassLoader" ruleset="Error Prone" package="dev.codex.schubert.nk.api.application.question" class="QuestionCommandServiceTest" method="shape" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader" priority="3">
+In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.
+</violation>
+<violation beginline="708" endline="708" begincolumn="25" endcolumn="57" rule="UseProperClassLoader" ruleset="Error Prone" package="dev.codex.schubert.nk.api.application.question" class="QuestionCommandServiceTest" method="shape" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader" priority="3">
+In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.
+</violation>
+<violation beginline="750" endline="750" begincolumn="9" endcolumn="30" rule="UseProperClassLoader" ruleset="Error Prone" package="dev.codex.schubert.nk.api.application.question" class="QuestionCommandServiceTest" method="wrap" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader" priority="3">
+In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.
+</violation>
+</file>
+<file name="/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/question/QuestionWorkerServiceTest.java">
+<violation beginline="446" endline="446" begincolumn="19" endcolumn="27" rule="CloseResource" ruleset="Error Prone" package="dev.codex.schubert.nk.api.application.question" class="QuestionWorkerServiceTest" method="awork006RealFourthRollbackPreservesTwoPhysicalCopiesAndOneLogicalError" variable="ackFault" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#closeresource" priority="3">
+Ensure that resources like this JMSContext object are closed after use
+</violation>
+<violation beginline="449" endline="449" begincolumn="27" endcolumn="60" rule="UseProperClassLoader" ruleset="Error Prone" package="dev.codex.schubert.nk.api.application.question" class="QuestionWorkerServiceTest" method="awork006RealFourthRollbackPreservesTwoPhysicalCopiesAndOneLogicalError" variable="ackFault" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader" priority="3">
+In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.
+</violation>
+<violation beginline="456" endline="456" begincolumn="39" endcolumn="113" rule="AvoidDuplicateLiterals" ruleset="Error Prone" package="dev.codex.schubert.nk.api.application.question" class="QuestionWorkerServiceTest" method="awork006RealFourthRollbackPreservesTwoPhysicalCopiesAndOneLogicalError" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidduplicateliterals" priority="3">
+The String literal "select status from schubert.mq_outbox where destination=\'nk.dead.letter\'" appears 5 times in this file; the first occurrence is on line 456
+</violation>
+<violation beginline="532" endline="532" begincolumn="24" endcolumn="59" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.api.application.question" class="QuestionWorkerServiceTest" method="awork007PendingPollStopInterruptExistingAnswerAndConcurrentCompletion" variable="executor" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="543" endline="543" begincolumn="27" endcolumn="86" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.api.application.question" class="QuestionWorkerServiceTest" method="awork007PendingPollStopInterruptExistingAnswerAndConcurrentCompletion" variable="pending" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="546" endline="546" begincolumn="9" endcolumn="15" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.api.application.question" class="QuestionWorkerServiceTest" method="awork007PendingPollStopInterruptExistingAnswerAndConcurrentCompletion" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="563" endline="563" begincolumn="7" endcolumn="13" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.api.application.question" class="QuestionWorkerServiceTest" method="awork007PendingPollStopInterruptExistingAnswerAndConcurrentCompletion" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="571" endline="571" begincolumn="20" endcolumn="26" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.api.application.question" class="QuestionWorkerServiceTest" method="awork007PendingPollStopInterruptExistingAnswerAndConcurrentCompletion" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="596" endline="596" begincolumn="23" endcolumn="97" rule="AvoidDuplicateLiterals" ruleset="Error Prone" package="dev.codex.schubert.nk.api.application.question" class="QuestionWorkerServiceTest" method="awork007PendingPollStopInterruptExistingAnswerAndConcurrentCompletion" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidduplicateliterals" priority="3">
+The String literal "select count(*) from schubert.app_logs where action=\'QUESTION_COMPLETED\'" appears 5 times in this file; the first occurrence is on line 596
+</violation>
+<violation beginline="1083" endline="1083" begincolumn="13" endcolumn="46" rule="UseProperClassLoader" ruleset="Error Prone" package="dev.codex.schubert.nk.api.application.question" class="QuestionWorkerServiceTest" method="tampered" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader" priority="3">
+In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.
+</violation>
+<violation beginline="1089" endline="1089" begincolumn="19" endcolumn="52" rule="UseProperClassLoader" ruleset="Error Prone" package="dev.codex.schubert.nk.api.application.question" class="QuestionWorkerServiceTest" method="tampered" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader" priority="3">
+In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.
+</violation>
+<violation beginline="1128" endline="1128" begincolumn="25" endcolumn="65" rule="UseProperClassLoader" ruleset="Error Prone" package="dev.codex.schubert.nk.api.application.question" class="QuestionWorkerServiceTest" method="tampered" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader" priority="3">
+In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.
+</violation>
+<violation beginline="1140" endline="1140" begincolumn="31" endcolumn="63" rule="UseProperClassLoader" ruleset="Error Prone" package="dev.codex.schubert.nk.api.application.question" class="QuestionWorkerServiceTest" method="tampered" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader" priority="3">
+In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.
+</violation>
+</file>
+<file name="/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/maintenance/BackupRerunBoundaryTest.java">
+<violation beginline="129" endline="129" begincolumn="37" endcolumn="46" rule="AssignmentInOperand" ruleset="Error Prone" package="dev.codex.schubert.nk.api.maintenance" class="BackupRerunBoundaryTest" method="ordinarySuccessStillUnique" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#assignmentinoperand" priority="3">
+Avoid assignment to attempt in operand
+</violation>
+<violation beginline="261" endline="261" begincolumn="21" endcolumn="53" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.api.maintenance" class="BackupRerunBoundaryTest" method="concurrentSuccessAndAttemptConflicts" variable="pool" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="275" endline="275" begincolumn="23" endcolumn="43" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.api.maintenance" class="BackupRerunBoundaryTest" method="concurrentSuccessAndAttemptConflicts" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="298" endline="298" begincolumn="25" endcolumn="45" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.api.maintenance" class="BackupRerunBoundaryTest" method="concurrentSuccessAndAttemptConflicts" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+</file>
+<file name="/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/maintenance/CleanupSafetyBoundaryTest.java">
+<violation beginline="53" endline="53" begincolumn="31" endcolumn="36" rule="AvoidFieldNameMatchingMethodName" ruleset="Error Prone" package="dev.codex.schubert.nk.api.maintenance" class="CleanupSafetyBoundaryTest" variable="START" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidfieldnamematchingmethodname" priority="3">
+Field START has the same name as a method
+</violation>
+<violation beginline="201" endline="201" begincolumn="22" endcolumn="57" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.api.maintenance" class="CleanupSafetyBoundaryTest" method="backupLocksAndSnapshotRace" variable="pool" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="206" endline="206" begincolumn="22" endcolumn="69" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.api.maintenance" class="CleanupSafetyBoundaryTest" method="backupLocksAndSnapshotRace" variable="result" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="570" endline="570" begincolumn="38" endcolumn="52" rule="AvoidDuplicateLiterals" ruleset="Error Prone" package="dev.codex.schubert.nk.api.maintenance" class="CleanupSafetyBoundaryTest" method="batchCompletionRetention" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidduplicateliterals" priority="3">
+The String literal "\'2025-08-01\'" appears 6 times in this file; the first occurrence is on line 570
+</violation>
+</file>
+<file name="/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/maintenance/InboxInspectionBoundaryTest.java">
+<violation beginline="272" endline="272" begincolumn="20" endcolumn="55" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.api.maintenance" class="InboxInspectionBoundaryTest" method="sessionAndBackupLocksProtectReadOnlyValidation" variable="pool" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="284" endline="294" begincolumn="11" endcolumn="17" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.api.maintenance" class="InboxInspectionBoundaryTest" method="sessionAndBackupLocksProtectReadOnlyValidation" variable="outcome" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+</file>
+<file name="/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/maintenance/InboxInspectionProgressBoundaryTest.java">
+<violation beginline="50" endline="50" begincolumn="31" endcolumn="35" rule="AvoidFieldNameMatchingMethodName" ruleset="Error Prone" package="dev.codex.schubert.nk.api.maintenance" class="InboxInspectionProgressBoundaryTest" variable="OPEN" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidfieldnamematchingmethodname" priority="3">
+Field OPEN has the same name as a method
+</violation>
+<violation beginline="51" endline="51" begincolumn="31" endcolumn="37" rule="AvoidFieldNameMatchingMethodName" ruleset="Error Prone" package="dev.codex.schubert.nk.api.maintenance" class="InboxInspectionProgressBoundaryTest" variable="RECORD" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidfieldnamematchingmethodname" priority="3">
+Field RECORD has the same name as a method
+</violation>
+<violation beginline="52" endline="52" begincolumn="31" endcolumn="36" rule="AvoidFieldNameMatchingMethodName" ruleset="Error Prone" package="dev.codex.schubert.nk.api.maintenance" class="InboxInspectionProgressBoundaryTest" variable="PURGE" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidfieldnamematchingmethodname" priority="3">
+Field PURGE has the same name as a method
+</violation>
+<violation beginline="461" endline="461" begincolumn="57" endcolumn="62" rule="AvoidDuplicateLiterals" ruleset="Error Prone" package="dev.codex.schubert.nk.api.maintenance" class="InboxInspectionProgressBoundaryTest" method="rolesAndFixedFunctionsCannotEscalate" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidduplicateliterals" priority="3">
+The String literal "\',\'" appears 5 times in this file; the first occurrence is on line 461
+</violation>
+</file>
+<file name="/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/maintenance/LogCleanupProgressBoundaryTest.java">
+<violation beginline="46" endline="46" begincolumn="31" endcolumn="36" rule="AvoidFieldNameMatchingMethodName" ruleset="Error Prone" package="dev.codex.schubert.nk.api.maintenance" class="LogCleanupProgressBoundaryTest" variable="START" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidfieldnamematchingmethodname" priority="3">
+Field START has the same name as a method
+</violation>
+<violation beginline="222" endline="222" begincolumn="21" endcolumn="52" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.api.maintenance" class="LogCleanupProgressBoundaryTest" method="locksNeverSkipUnseenRows" variable="pool" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="232" endline="232" begincolumn="25" endcolumn="45" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.api.maintenance" class="LogCleanupProgressBoundaryTest" method="locksNeverSkipUnseenRows" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="452" endline="452" begincolumn="9" endcolumn="23" rule="AvoidDuplicateLiterals" ruleset="Error Prone" package="dev.codex.schubert.nk.api.maintenance" class="LogCleanupProgressBoundaryTest" method="completedProgressRetention" variable="ends" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidduplicateliterals" priority="3">
+The String literal "\'2025-08-01\'" appears 4 times in this file; the first occurrence is on line 452
+</violation>
+</file>
+<file name="/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/maintenance/OutboxCleanupBoundaryTest.java">
+<violation beginline="114" endline="114" begincolumn="78" endcolumn="82" rule="AssignmentInOperand" ruleset="Error Prone" package="dev.codex.schubert.nk.api.maintenance" class="OutboxCleanupBoundaryTest" method="inboxRowsAreNeverTouched" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#assignmentinoperand" priority="3">
+Avoid assignment to id in operand
+</violation>
+<violation beginline="303" endline="303" begincolumn="20" endcolumn="55" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.api.maintenance" class="OutboxCleanupBoundaryTest" method="backupSnapshotCannotBeReplaced" variable="pool" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="307" endline="307" begincolumn="20" endcolumn="79" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.api.maintenance" class="OutboxCleanupBoundaryTest" method="backupSnapshotCannotBeReplaced" variable="result" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+</file>
+<file name="/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/maintenance/StepCleanupBoundaryTest.java">
+<violation beginline="56" endline="56" begincolumn="23" endcolumn="28" rule="AvoidFieldNameMatchingMethodName" ruleset="Error Prone" package="dev.codex.schubert.nk.api.maintenance" class="StepCleanupBoundaryTest" variable="START" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidfieldnamematchingmethodname" priority="3">
+Field START has the same name as a method
+</violation>
+</file>
+<file name="/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiReadOnlyObservationAttemptTest.java">
+<violation beginline="51" endline="51" begincolumn="34" endcolumn="58" rule="UseConcurrentHashMap" ruleset="Multithreading" package="dev.codex.schubert.nk.api.monitoring" class="ApiReadOnlyObservationAttemptTest.Fixture" variable="faults" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap" priority="3">
+If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation
+</violation>
+<violation beginline="79" endline="79" begincolumn="15" endcolumn="48" rule="UseProperClassLoader" ruleset="Error Prone" package="dev.codex.schubert.nk.api.monitoring" class="ApiReadOnlyObservationAttemptTest.Fixture" method="connection" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader" priority="3">
+In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.
+</violation>
+<violation beginline="85" endline="85" begincolumn="43" endcolumn="55" rule="AssignmentInOperand" ruleset="Error Prone" package="dev.codex.schubert.nk.api.monitoring" class="ApiReadOnlyObservationAttemptTest.Fixture" method="connection" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#assignmentinoperand" priority="3">
+Avoid assignment to autoChecks in operand
+</violation>
+<violation beginline="132" endline="132" begincolumn="15" endcolumn="48" rule="UseProperClassLoader" ruleset="Error Prone" package="dev.codex.schubert.nk.api.monitoring" class="ApiReadOnlyObservationAttemptTest.Fixture" method="pool" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader" priority="3">
+In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.
+</violation>
+<violation beginline="195" endline="195" begincolumn="7" endcolumn="13" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.api.monitoring" class="ApiReadOnlyObservationAttemptTest" method="await" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="534" endline="534" begincolumn="24" endcolumn="55" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.api.monitoring" class="ApiReadOnlyObservationAttemptTest" method="roAttempt032" variable="workers" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="535" endline="535" begincolumn="19" endcolumn="46" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.api.monitoring" class="ApiReadOnlyObservationAttemptTest" method="roAttempt032" variable="first" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="539" endline="543" begincolumn="13" endcolumn="19" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.api.monitoring" class="ApiReadOnlyObservationAttemptTest" method="roAttempt032" variable="second" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+</file>
+<file name="/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/AuthSessionRevocationServiceTest.java">
+<violation beginline="66" endline="66" begincolumn="29" endcolumn="36" rule="AvoidFieldNameMatchingMethodName" ruleset="Error Prone" package="dev.codex.schubert.nk.api.security" class="AuthSessionRevocationServiceTest" variable="SESSION" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidfieldnamematchingmethodname" priority="3">
+Field SESSION has the same name as a method
+</violation>
+<violation beginline="112" endline="112" begincolumn="15" endcolumn="75" rule="AvoidDuplicateLiterals" ruleset="Error Prone" package="dev.codex.schubert.nk.api.security" class="AuthSessionRevocationServiceTest" method="logoutAndRepeatedLogoutKeepOriginalTimeWithoutExtendingIdle" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidduplicateliterals" priority="3">
+The String literal "update schubert.app_users set status=\'DISABLED\' where id=7" appears 4 times in this file; the first occurrence is on line 112
+</violation>
+<violation beginline="254" endline="254" begincolumn="25" endcolumn="57" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.api.security" class="AuthSessionRevocationServiceTest" method="concurrentLogoutAndIssuanceSerializeWithoutLostRevocation" variable="executor" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="256" endline="256" begincolumn="49" endcolumn="83" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.api.security" class="AuthSessionRevocationServiceTest" method="concurrentLogoutAndIssuanceSerializeWithoutLostRevocation" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="273" endline="273" begincolumn="21" endcolumn="55" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.api.security" class="AuthSessionRevocationServiceTest" method="concurrentLogoutAndIssuanceSerializeWithoutLostRevocation" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="275" endline="283" begincolumn="15" endcolumn="21" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.api.security" class="AuthSessionRevocationServiceTest" method="concurrentLogoutAndIssuanceSerializeWithoutLostRevocation" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="564" endline="564" begincolumn="23" endcolumn="24" rule="AvoidLiteralsInIfCondition" ruleset="Error Prone" package="dev.codex.schubert.nk.api.security" class="AuthSessionRevocationServiceTest" method="rerun001FatalMarkerMatrixKeepsIdentityAndSqlPrimaryCyclesAreBounded" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidliteralsinifcondition" priority="3">
+Avoid using literals such as 2 in if statements
+</violation>
+<violation beginline="573" endline="573" begincolumn="22" endcolumn="29" rule="CloseResource" ruleset="Error Prone" package="dev.codex.schubert.nk.api.security" class="AuthSessionRevocationServiceTest" method="rerun001FatalMarkerMatrixKeepsIdentityAndSqlPrimaryCyclesAreBounded" variable="wrapped" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#closeresource" priority="3">
+it is recommended to wrap resource 'wrapped' in try-with-resource declaration directly
+</violation>
+<violation beginline="632" endline="632" begincolumn="22" endcolumn="29" rule="CloseResource" ruleset="Error Prone" package="dev.codex.schubert.nk.api.security" class="AuthSessionRevocationServiceTest" method="rerun001FatalMarkerMatrixKeepsIdentityAndSqlPrimaryCyclesAreBounded" variable="wrapped" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#closeresource" priority="3">
+it is recommended to wrap resource 'wrapped' in try-with-resource declaration directly
+</violation>
+<violation beginline="657" endline="657" begincolumn="13" endcolumn="46" rule="UseProperClassLoader" ruleset="Error Prone" package="dev.codex.schubert.nk.api.security" class="AuthSessionRevocationServiceTest" method="closeFault" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader" priority="3">
+In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.
+</violation>
+<violation beginline="664" endline="664" begincolumn="19" endcolumn="59" rule="UseProperClassLoader" ruleset="Error Prone" package="dev.codex.schubert.nk.api.security" class="AuthSessionRevocationServiceTest" method="closeFault" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader" priority="3">
+In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.
+</violation>
+<violation beginline="670" endline="670" begincolumn="25" endcolumn="57" rule="UseProperClassLoader" ruleset="Error Prone" package="dev.codex.schubert.nk.api.security" class="AuthSessionRevocationServiceTest" method="closeFault" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader" priority="3">
+In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.
+</violation>
+<violation beginline="744" endline="744" begincolumn="13" endcolumn="46" rule="UseProperClassLoader" ruleset="Error Prone" package="dev.codex.schubert.nk.api.security" class="AuthSessionRevocationServiceTest" method="intercept" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader" priority="3">
+In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.
+</violation>
+<violation beginline="756" endline="756" begincolumn="26" endcolumn="36" rule="AssignmentInOperand" ruleset="Error Prone" package="dev.codex.schubert.nk.api.security" class="AuthSessionRevocationServiceTest" method="intercept" variable="step" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#assignmentinoperand" priority="3">
+Avoid assignments in operands
+</violation>
+<violation beginline="758" endline="758" begincolumn="19" endcolumn="59" rule="UseProperClassLoader" ruleset="Error Prone" package="dev.codex.schubert.nk.api.security" class="AuthSessionRevocationServiceTest" method="intercept" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader" priority="3">
+In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.
+</violation>
+<violation beginline="777" endline="777" begincolumn="25" endcolumn="57" rule="UseProperClassLoader" ruleset="Error Prone" package="dev.codex.schubert.nk.api.security" class="AuthSessionRevocationServiceTest" method="intercept" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader" priority="3">
+In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.
+</violation>
+</file>
+<file name="/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/LoginAttemptRepositoryTest.java">
+<violation beginline="193" endline="193" begincolumn="25" endcolumn="57" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.api.security" class="LoginAttemptRepositoryTest" method="concurrentAttemptsHaveNoLostUpdatesAndRollbackRestoresAllRows" variable="executor" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="198" endline="202" begincolumn="13" endcolumn="19" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.api.security" class="LoginAttemptRepositoryTest" method="concurrentAttemptsHaveNoLostUpdatesAndRollbackRestoresAllRows" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="467" endline="467" begincolumn="13" endcolumn="46" rule="UseProperClassLoader" ruleset="Error Prone" package="dev.codex.schubert.nk.api.security" class="LoginAttemptRepositoryTest" method="intercept" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader" priority="3">
+In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.
+</violation>
+<violation beginline="481" endline="481" begincolumn="19" endcolumn="59" rule="UseProperClassLoader" ruleset="Error Prone" package="dev.codex.schubert.nk.api.security" class="LoginAttemptRepositoryTest" method="intercept" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader" priority="3">
+In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.
+</violation>
+<violation beginline="503" endline="503" begincolumn="25" endcolumn="57" rule="UseProperClassLoader" ruleset="Error Prone" package="dev.codex.schubert.nk.api.security" class="LoginAttemptRepositoryTest" method="intercept" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader" priority="3">
+In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.
+</violation>
+</file>
+<file name="/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/BatchRunRepositoryTest.java">
+<violation beginline="172" endline="172" begincolumn="21" endcolumn="24" rule="AssignmentInOperand" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="BatchRunRepositoryTest" method="firstAttemptAndTerminalStates" variable="r" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#assignmentinoperand" priority="3">
+Avoid assignment to i in operand
+</violation>
+<violation beginline="901" endline="901" begincolumn="9" endcolumn="15" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.batch.repository" class="BatchRunRepositoryTest" method="interruptionAndRuntime" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="903" endline="903" begincolumn="20" endcolumn="26" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.batch.repository" class="BatchRunRepositoryTest" method="interruptionAndRuntime" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="906" endline="906" begincolumn="9" endcolumn="15" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.batch.repository" class="BatchRunRepositoryTest" method="interruptionAndRuntime" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="920" endline="920" begincolumn="22" endcolumn="28" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.batch.repository" class="BatchRunRepositoryTest" method="interruptionAndRuntime" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="923" endline="923" begincolumn="11" endcolumn="17" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.batch.repository" class="BatchRunRepositoryTest" method="interruptionAndRuntime" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="1070" endline="1070" begincolumn="20" endcolumn="63" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.batch.repository" class="BatchRunRepositoryTest" method="concurrentOwnersAndRowLocks" variable="pool" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="1083" endline="1096" begincolumn="11" endcolumn="17" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.batch.repository" class="BatchRunRepositoryTest" method="concurrentOwnersAndRowLocks" variable="blocked" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="1152" endline="1152" begincolumn="15" endcolumn="21" rule="AvoidDuplicateLiterals" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="BatchRunRepositoryTest" method="independentSqlInventoryAndGrants" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidduplicateliterals" priority="3">
+The String literal "refs" appears 4 times in this file; the first occurrence is on line 1,152
+</violation>
+<violation beginline="1178" endline="1178" begincolumn="26" endcolumn="45" rule="UseConcurrentHashMap" ruleset="Multithreading" package="dev.codex.schubert.nk.batch.repository" class="BatchRunRepositoryTest" method="inventory" variable="m" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap" priority="3">
+If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation
+</violation>
+<violation beginline="1185" endline="1185" begincolumn="27" endcolumn="56" rule="AvoidDuplicateLiterals" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="BatchRunRepositoryTest" method="inventory" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidduplicateliterals" priority="3">
+The String literal "connection.prepareStatement" appears 5 times in this file; the first occurrence is on line 1,185
+</violation>
+<violation beginline="1186" endline="1186" begincolumn="27" endcolumn="54" rule="AvoidDuplicateLiterals" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="BatchRunRepositoryTest" method="inventory" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidduplicateliterals" priority="3">
+The String literal "statement.setQueryTimeout" appears 5 times in this file; the first occurrence is on line 1,186
+</violation>
+<violation beginline="1187" endline="1187" begincolumn="27" endcolumn="48" rule="AvoidDuplicateLiterals" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="BatchRunRepositoryTest" method="inventory" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidduplicateliterals" priority="3">
+The String literal "statement.setObject" appears 5 times in this file; the first occurrence is on line 1,187
+</violation>
+<violation beginline="1190" endline="1190" begincolumn="27" endcolumn="37" rule="AvoidDuplicateLiterals" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="BatchRunRepositoryTest" method="inventory" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidduplicateliterals" priority="3">
+The String literal "row.next" appears 4 times in this file; the first occurrence is on line 1,190
+</violation>
+<violation beginline="1191" endline="1191" begincolumn="27" endcolumn="42" rule="AvoidDuplicateLiterals" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="BatchRunRepositoryTest" method="inventory" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidduplicateliterals" priority="3">
+The String literal "row.getObject" appears 4 times in this file; the first occurrence is on line 1,191
+</violation>
+<violation beginline="1198" endline="1198" begincolumn="14" endcolumn="35" rule="AvoidDuplicateLiterals" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="BatchRunRepositoryTest" method="inventory" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidduplicateliterals" priority="3">
+The String literal "statement.setString" appears 4 times in this file; the first occurrence is on line 1,198
+</violation>
+<violation beginline="1326" endline="1326" begincolumn="32" endcolumn="54" rule="UseConcurrentHashMap" ruleset="Multithreading" package="dev.codex.schubert.nk.batch.repository" class="BatchRunRepositoryTest.Probe" variable="seen" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap" priority="3">
+If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation
+</violation>
+<violation beginline="1327" endline="1327" begincolumn="32" endcolumn="56" rule="UseConcurrentHashMap" ruleset="Multithreading" package="dev.codex.schubert.nk.batch.repository" class="BatchRunRepositoryTest.Probe" variable="failAt" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap" priority="3">
+If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation
+</violation>
+<violation beginline="1328" endline="1328" begincolumn="32" endcolumn="60" rule="UseConcurrentHashMap" ruleset="Multithreading" package="dev.codex.schubert.nk.batch.repository" class="BatchRunRepositoryTest.Probe" variable="scopedSeen" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap" priority="3">
+If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation
+</violation>
+<violation beginline="1329" endline="1329" begincolumn="34" endcolumn="64" rule="UseConcurrentHashMap" ruleset="Multithreading" package="dev.codex.schubert.nk.batch.repository" class="BatchRunRepositoryTest.Probe" variable="scopedFaults" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap" priority="3">
+If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation
+</violation>
+<violation beginline="1346" endline="1346" begincolumn="62" endcolumn="68" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.batch.repository" class="BatchRunRepositoryTest.Probe" method="hit" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="1365" endline="1365" begincolumn="15" endcolumn="48" rule="UseProperClassLoader" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="BatchRunRepositoryTest.Probe" method="wrap" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader" priority="3">
+In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.
+</violation>
+<violation beginline="1387" endline="1387" begincolumn="28" endcolumn="51" rule="UseConcurrentHashMap" ruleset="Multithreading" package="dev.codex.schubert.nk.batch.repository" class="BatchRunRepositoryTest.Probe" method="statement" variable="binds" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap" priority="3">
+If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation
+</violation>
+<violation beginline="1390" endline="1390" begincolumn="15" endcolumn="55" rule="UseProperClassLoader" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="BatchRunRepositoryTest.Probe" method="statement" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader" priority="3">
+In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.
+</violation>
+<violation beginline="1426" endline="1426" begincolumn="15" endcolumn="47" rule="UseProperClassLoader" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="BatchRunRepositoryTest.Probe" method="row" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader" priority="3">
+In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.
+</violation>
+</file>
+<file name="/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/CleanupTerminalRepositoryTest.java">
+<violation beginline="541" endline="541" begincolumn="63" endcolumn="73" rule="AssignmentInOperand" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="CleanupTerminalRepositoryTest" method="ref201006ProgressProjectionAndChangedOriginalCannotReturnAProof" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#assignmentinoperand" priority="3">
+Avoid assignments in operands
+</violation>
+</file>
+<file name="/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/repository/MorningDatabaseSessionTest.java">
+<violation beginline="113" endline="113" begincolumn="15" endcolumn="24" rule="AssignmentInOperand" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="MorningDatabaseSessionTest" method="mdb3256001CompletionGuardSqlFailurePreservesCommittedBeginsAndEmptyBackupRoot" variable="n" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#assignmentinoperand" priority="3">
+Avoid assignment to ordinal in operand
+</violation>
+<violation beginline="142" endline="142" begincolumn="27" endcolumn="60" rule="UseProperClassLoader" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="MorningDatabaseSessionTest" method="mdb3256001CompletionGuardSqlFailurePreservesCommittedBeginsAndEmptyBackupRoot" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader" priority="3">
+In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.
+</violation>
+<violation beginline="219" endline="219" begincolumn="15" endcolumn="24" rule="AssignmentInOperand" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="MorningDatabaseSessionTest" method="mdb3254001ReadOnlyStatementCompoundFailuresKeepRowsAndCloseEveryOwner" variable="n" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#assignmentinoperand" priority="3">
+Avoid assignment to ordinal in operand
+</violation>
+<violation beginline="249" endline="249" begincolumn="25" endcolumn="58" rule="UseProperClassLoader" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="MorningDatabaseSessionTest" method="mdb3254001ReadOnlyStatementCompoundFailuresKeepRowsAndCloseEveryOwner" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader" priority="3">
+In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.
+</violation>
+<violation beginline="257" endline="257" begincolumn="31" endcolumn="63" rule="UseProperClassLoader" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="MorningDatabaseSessionTest" method="mdb3254001ReadOnlyStatementCompoundFailuresKeepRowsAndCloseEveryOwner" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader" priority="3">
+In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.
+</violation>
+<violation beginline="346" endline="346" begincolumn="15" endcolumn="24" rule="AssignmentInOperand" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="MorningDatabaseSessionTest" method="mdb2804001CheckedCallbackAndCompoundJdbcClosePreserveRowsAndRedactSecondary" variable="n" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#assignmentinoperand" priority="3">
+Avoid assignment to ordinal in operand
+</violation>
+<violation beginline="367" endline="367" begincolumn="25" endcolumn="58" rule="UseProperClassLoader" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="MorningDatabaseSessionTest" method="mdb2804001CheckedCallbackAndCompoundJdbcClosePreserveRowsAndRedactSecondary" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader" priority="3">
+In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.
+</violation>
+<violation beginline="379" endline="379" begincolumn="31" endcolumn="71" rule="UseProperClassLoader" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="MorningDatabaseSessionTest" method="mdb2804001CheckedCallbackAndCompoundJdbcClosePreserveRowsAndRedactSecondary" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader" priority="3">
+In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.
+</violation>
+<violation beginline="392" endline="392" begincolumn="37" endcolumn="69" rule="UseProperClassLoader" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="MorningDatabaseSessionTest" method="mdb2804001CheckedCallbackAndCompoundJdbcClosePreserveRowsAndRedactSecondary" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader" priority="3">
+In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.
+</violation>
+<violation beginline="462" endline="462" begincolumn="15" endcolumn="24" rule="AssignmentInOperand" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="MorningDatabaseSessionTest" method="mdb2796001ReadOnlyAndAbandonedNullResourcesPreserveAllCommittedRows" variable="n" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#assignmentinoperand" priority="3">
+Avoid assignment to ordinal in operand
+</violation>
+<violation beginline="481" endline="481" begincolumn="25" endcolumn="58" rule="UseProperClassLoader" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="MorningDatabaseSessionTest" method="mdb2796001ReadOnlyAndAbandonedNullResourcesPreserveAllCommittedRows" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader" priority="3">
+In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.
+</violation>
+<violation beginline="505" endline="505" begincolumn="31" endcolumn="71" rule="UseProperClassLoader" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="MorningDatabaseSessionTest" method="mdb2796001ReadOnlyAndAbandonedNullResourcesPreserveAllCommittedRows" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader" priority="3">
+In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.
+</violation>
+<violation beginline="569" endline="569" begincolumn="32" endcolumn="33" rule="AvoidLiteralsInIfCondition" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="MorningDatabaseSessionTest" method="mdb2796001ReadOnlyAndAbandonedNullResourcesPreserveAllCommittedRows" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidliteralsinifcondition" priority="3">
+Avoid using literals such as 1 in if statements
+</violation>
+<violation beginline="587" endline="587" begincolumn="15" endcolumn="24" rule="AssignmentInOperand" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="MorningDatabaseSessionTest" method="mdb2792001SuccessfulBackupRejectsNullJdbcResourcesWithoutNpe" variable="n" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#assignmentinoperand" priority="3">
+Avoid assignment to ordinal in operand
+</violation>
+<violation beginline="606" endline="606" begincolumn="25" endcolumn="58" rule="UseProperClassLoader" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="MorningDatabaseSessionTest" method="mdb2792001SuccessfulBackupRejectsNullJdbcResourcesWithoutNpe" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader" priority="3">
+In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.
+</violation>
+<violation beginline="623" endline="623" begincolumn="31" endcolumn="71" rule="UseProperClassLoader" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="MorningDatabaseSessionTest" method="mdb2792001SuccessfulBackupRejectsNullJdbcResourcesWithoutNpe" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader" priority="3">
+In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.
+</violation>
+<violation beginline="661" endline="661" begincolumn="15" endcolumn="24" rule="AssignmentInOperand" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="MorningDatabaseSessionTest" method="mdb2788001SuccessfulPairRejectsDifferentStartAndEndWithinValidBounds" variable="n" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#assignmentinoperand" priority="3">
+Avoid assignment to ordinal in operand
+</violation>
+<violation beginline="682" endline="682" begincolumn="25" endcolumn="58" rule="UseProperClassLoader" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="MorningDatabaseSessionTest" method="mdb2788001SuccessfulPairRejectsDifferentStartAndEndWithinValidBounds" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader" priority="3">
+In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.
+</violation>
+<violation beginline="696" endline="696" begincolumn="31" endcolumn="71" rule="UseProperClassLoader" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="MorningDatabaseSessionTest" method="mdb2788001SuccessfulPairRejectsDifferentStartAndEndWithinValidBounds" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader" priority="3">
+In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.
+</violation>
+<violation beginline="705" endline="705" begincolumn="37" endcolumn="69" rule="UseProperClassLoader" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="MorningDatabaseSessionTest" method="mdb2788001SuccessfulPairRejectsDifferentStartAndEndWithinValidBounds" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader" priority="3">
+In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.
+</violation>
+<violation beginline="745" endline="745" begincolumn="15" endcolumn="24" rule="AssignmentInOperand" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="MorningDatabaseSessionTest" method="mdb2784001EmptyBackupReinspectionCannotAuthorizeResumeOrObservation" variable="n" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#assignmentinoperand" priority="3">
+Avoid assignment to ordinal in operand
+</violation>
+<violation beginline="859" endline="859" begincolumn="19" endcolumn="52" rule="UseProperClassLoader" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="MorningDatabaseSessionTest" method="mdb2784Subject" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader" priority="3">
+In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.
+</violation>
+<violation beginline="869" endline="869" begincolumn="25" endcolumn="65" rule="UseProperClassLoader" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="MorningDatabaseSessionTest" method="mdb2784Subject" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader" priority="3">
+In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.
+</violation>
+<violation beginline="878" endline="878" begincolumn="31" endcolumn="63" rule="UseProperClassLoader" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="MorningDatabaseSessionTest" method="mdb2784Subject" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader" priority="3">
+In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.
+</violation>
+<violation beginline="915" endline="915" begincolumn="15" endcolumn="24" rule="AssignmentInOperand" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="MorningDatabaseSessionTest" method="mdb2780001ResumeRejectsEitherNonSkippedAttemptBeforeCommit" variable="n" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#assignmentinoperand" priority="3">
+Avoid assignment to ordinal in operand
+</violation>
+<violation beginline="942" endline="942" begincolumn="25" endcolumn="58" rule="UseProperClassLoader" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="MorningDatabaseSessionTest" method="mdb2780001ResumeRejectsEitherNonSkippedAttemptBeforeCommit" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader" priority="3">
+In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.
+</violation>
+<violation beginline="955" endline="955" begincolumn="31" endcolumn="71" rule="UseProperClassLoader" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="MorningDatabaseSessionTest" method="mdb2780001ResumeRejectsEitherNonSkippedAttemptBeforeCommit" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader" priority="3">
+In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.
+</violation>
+<violation beginline="966" endline="966" begincolumn="37" endcolumn="69" rule="UseProperClassLoader" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="MorningDatabaseSessionTest" method="mdb2780001ResumeRejectsEitherNonSkippedAttemptBeforeCommit" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader" priority="3">
+In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.
+</violation>
+<violation beginline="1001" endline="1001" begincolumn="15" endcolumn="24" rule="AssignmentInOperand" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="MorningDatabaseSessionTest" method="mdb2762001PostBeginRejectsForeignRunAndActualLogCutoffDrift" variable="n" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#assignmentinoperand" priority="3">
+Avoid assignment to ordinal in operand
+</violation>
+<violation beginline="1085" endline="1085" begincolumn="15" endcolumn="24" rule="AssignmentInOperand" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="MorningDatabaseSessionTest" method="mdb2758001ReusedBackupSqlCompletionFailuresPreserveOriginalAndSkippedRows" variable="n" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#assignmentinoperand" priority="3">
+Avoid assignment to ordinal in operand
+</violation>
+<violation beginline="1112" endline="1112" begincolumn="25" endcolumn="58" rule="UseProperClassLoader" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="MorningDatabaseSessionTest" method="mdb2758001ReusedBackupSqlCompletionFailuresPreserveOriginalAndSkippedRows" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader" priority="3">
+In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.
+</violation>
+<violation beginline="1117" endline="1117" begincolumn="61" endcolumn="71" rule="AvoidDuplicateLiterals" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="MorningDatabaseSessionTest" method="mdb2758001ReusedBackupSqlCompletionFailuresPreserveOriginalAndSkippedRows" variable="boundary" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidduplicateliterals" priority="3">
+The String literal "rollback" appears 4 times in this file; the first occurrence is on line 1,117
+</violation>
+<violation beginline="1118" endline="1118" begincolumn="61" endcolumn="76" rule="AvoidDuplicateLiterals" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="MorningDatabaseSessionTest" method="mdb2758001ReusedBackupSqlCompletionFailuresPreserveOriginalAndSkippedRows" variable="boundary" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidduplicateliterals" priority="3">
+The String literal "setAutoCommit" appears 5 times in this file; the first occurrence is on line 1,118
+</violation>
+<violation beginline="1179" endline="1179" begincolumn="23" endcolumn="56" rule="UseProperClassLoader" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="MorningDatabaseSessionTest" method="mdb2754001RetainedBackupRequiresCurrentCompletionAndPreservesOriginalRows" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader" priority="3">
+In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.
+</violation>
+<violation beginline="1237" endline="1237" begincolumn="23" endcolumn="56" rule="UseProperClassLoader" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="MorningDatabaseSessionTest" method="mdb2750001BackupObservationRejectsInHandoffBeforeJdbcAndPreservesFailedPair" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader" priority="3">
+In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.
+</violation>
+<violation beginline="1279" endline="1279" begincolumn="23" endcolumn="79" rule="AvoidDuplicateLiterals" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="MorningDatabaseSessionTest" method="mdb2750001BackupObservationRejectsInHandoffBeforeJdbcAndPreservesFailedPair" variable="s" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidduplicateliterals" priority="3">
+The String literal " from schubert.batch_runs where run_id=? order by step" appears 4 times in this file; the first occurrence is on line 1,279
+</violation>
+<violation beginline="1304" endline="1304" begincolumn="15" endcolumn="24" rule="AssignmentInOperand" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="MorningDatabaseSessionTest" method="mdb2594001ResumeAdmissionRejectsForeignManifestContentAndCommitWithoutPublishing" variable="n" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#assignmentinoperand" priority="3">
+Avoid assignment to ordinal in operand
+</violation>
+<violation beginline="1343" endline="1343" begincolumn="25" endcolumn="58" rule="UseProperClassLoader" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="MorningDatabaseSessionTest" method="mdb2594001ResumeAdmissionRejectsForeignManifestContentAndCommitWithoutPublishing" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader" priority="3">
+In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.
+</violation>
+<violation beginline="1349" endline="1349" begincolumn="86" endcolumn="93" rule="AvoidDuplicateLiterals" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="MorningDatabaseSessionTest" method="mdb2594001ResumeAdmissionRejectsForeignManifestContentAndCommitWithoutPublishing" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidduplicateliterals" priority="3">
+The String literal "08006" appears 6 times in this file; the first occurrence is on line 1,349
+</violation>
+<violation beginline="1369" endline="1369" begincolumn="33" endcolumn="40" rule="AvoidDuplicateLiterals" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="MorningDatabaseSessionTest" method="mdb2592001SuccessfulPairRejectsIdentityExtraDuplicateAndSqlWithoutMutation" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidduplicateliterals" priority="3">
+The String literal "VALID" appears 10 times in this file; the first occurrence is on line 1,369
+</violation>
+<violation beginline="1369" endline="1369" begincolumn="54" endcolumn="61" rule="AvoidDuplicateLiterals" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="MorningDatabaseSessionTest" method="mdb2592001SuccessfulPairRejectsIdentityExtraDuplicateAndSqlWithoutMutation" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidduplicateliterals" priority="3">
+The String literal "EXTRA" appears 8 times in this file; the first occurrence is on line 1,369
+</violation>
+<violation beginline="1370" endline="1370" begincolumn="15" endcolumn="24" rule="AssignmentInOperand" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="MorningDatabaseSessionTest" method="mdb2592001SuccessfulPairRejectsIdentityExtraDuplicateAndSqlWithoutMutation" variable="n" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#assignmentinoperand" priority="3">
+Avoid assignment to ordinal in operand
+</violation>
+<violation beginline="1389" endline="1389" begincolumn="25" endcolumn="58" rule="UseProperClassLoader" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="MorningDatabaseSessionTest" method="mdb2592001SuccessfulPairRejectsIdentityExtraDuplicateAndSqlWithoutMutation" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader" priority="3">
+In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.
+</violation>
+<violation beginline="1407" endline="1407" begincolumn="31" endcolumn="71" rule="UseProperClassLoader" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="MorningDatabaseSessionTest" method="mdb2592001SuccessfulPairRejectsIdentityExtraDuplicateAndSqlWithoutMutation" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader" priority="3">
+In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.
+</violation>
+<violation beginline="1416" endline="1416" begincolumn="37" endcolumn="69" rule="UseProperClassLoader" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="MorningDatabaseSessionTest" method="mdb2592001SuccessfulPairRejectsIdentityExtraDuplicateAndSqlWithoutMutation" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader" priority="3">
+In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.
+</violation>
+<violation beginline="1426" endline="1426" begincolumn="64" endcolumn="70" rule="AvoidDuplicateLiterals" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="MorningDatabaseSessionTest" method="mdb2592001SuccessfulPairRejectsIdentityExtraDuplicateAndSqlWithoutMutation" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidduplicateliterals" priority="3">
+The String literal "step" appears 10 times in this file; the first occurrence is on line 1,426
+</violation>
+<violation beginline="1471" endline="1471" begincolumn="41" endcolumn="50" rule="AvoidDuplicateLiterals" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="MorningDatabaseSessionTest" method="mdb2592001SuccessfulPairRejectsIdentityExtraDuplicateAndSqlWithoutMutation" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidduplicateliterals" priority="3">
+The String literal "attempt" appears 8 times in this file; the first occurrence is on line 1,471
+</violation>
+<violation beginline="1492" endline="1492" begincolumn="49" endcolumn="60" rule="AvoidDuplicateLiterals" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="MorningDatabaseSessionTest" method="mdb2590001OriginalPairMustBeReinspectedBeforeReuseOrRetention" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidduplicateliterals" priority="3">
+The String literal "RETENTION" appears 4 times in this file; the first occurrence is on line 1,492
+</violation>
+<violation beginline="1494" endline="1494" begincolumn="17" endcolumn="26" rule="AssignmentInOperand" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="MorningDatabaseSessionTest" method="mdb2590001OriginalPairMustBeReinspectedBeforeReuseOrRetention" variable="n" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#assignmentinoperand" priority="3">
+Avoid assignment to ordinal in operand
+</violation>
+<violation beginline="1522" endline="1522" begincolumn="27" endcolumn="60" rule="UseProperClassLoader" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="MorningDatabaseSessionTest" method="mdb2590001OriginalPairMustBeReinspectedBeforeReuseOrRetention" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader" priority="3">
+In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.
+</violation>
+<violation beginline="1533" endline="1533" begincolumn="33" endcolumn="73" rule="UseProperClassLoader" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="MorningDatabaseSessionTest" method="mdb2590001OriginalPairMustBeReinspectedBeforeReuseOrRetention" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader" priority="3">
+In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.
+</violation>
+<violation beginline="1541" endline="1541" begincolumn="39" endcolumn="71" rule="UseProperClassLoader" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="MorningDatabaseSessionTest" method="mdb2590001OriginalPairMustBeReinspectedBeforeReuseOrRetention" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader" priority="3">
+In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.
+</violation>
+<violation beginline="1612" endline="1612" begincolumn="27" endcolumn="36" rule="AvoidDuplicateLiterals" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="MorningDatabaseSessionTest" method="mdb2590001OriginalPairMustBeReinspectedBeforeReuseOrRetention" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidduplicateliterals" priority="3">
+The String literal "SKIPPED" appears 5 times in this file; the first occurrence is on line 1,612
+</violation>
+<violation beginline="1650" endline="1650" begincolumn="13" endcolumn="22" rule="AvoidDuplicateLiterals" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="MorningDatabaseSessionTest" method="mdb2588001RetentionEligibilityRequiresExactDistinctIdsAndKnownStatuses" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidduplicateliterals" priority="3">
+The String literal "MISSING" appears 4 times in this file; the first occurrence is on line 1,650
+</violation>
+<violation beginline="1654" endline="1654" begincolumn="13" endcolumn="22" rule="AvoidDuplicateLiterals" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="MorningDatabaseSessionTest" method="mdb2588001RetentionEligibilityRequiresExactDistinctIdsAndKnownStatuses" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidduplicateliterals" priority="3">
+The String literal "NULL_ID" appears 5 times in this file; the first occurrence is on line 1,654
+</violation>
+<violation beginline="1661" endline="1661" begincolumn="15" endcolumn="24" rule="AssignmentInOperand" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="MorningDatabaseSessionTest" method="mdb2588001RetentionEligibilityRequiresExactDistinctIdsAndKnownStatuses" variable="n" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#assignmentinoperand" priority="3">
+Avoid assignment to ordinal in operand
+</violation>
+<violation beginline="1688" endline="1688" begincolumn="25" endcolumn="58" rule="UseProperClassLoader" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="MorningDatabaseSessionTest" method="mdb2588001RetentionEligibilityRequiresExactDistinctIdsAndKnownStatuses" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader" priority="3">
+In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.
+</violation>
+<violation beginline="1699" endline="1699" begincolumn="31" endcolumn="71" rule="UseProperClassLoader" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="MorningDatabaseSessionTest" method="mdb2588001RetentionEligibilityRequiresExactDistinctIdsAndKnownStatuses" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader" priority="3">
+In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.
+</violation>
+<violation beginline="1708" endline="1708" begincolumn="37" endcolumn="69" rule="UseProperClassLoader" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="MorningDatabaseSessionTest" method="mdb2588001RetentionEligibilityRequiresExactDistinctIdsAndKnownStatuses" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader" priority="3">
+In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.
+</violation>
+<violation beginline="1784" endline="1784" begincolumn="15" endcolumn="24" rule="AssignmentInOperand" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="MorningDatabaseSessionTest" method="mdb2572001ReusedBackupRequiresExactManifestSkippedPairAndFreshTime" variable="n" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#assignmentinoperand" priority="3">
+Avoid assignment to ordinal in operand
+</violation>
+<violation beginline="1886" endline="1886" begincolumn="49" endcolumn="58" rule="AvoidDuplicateLiterals" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="MorningDatabaseSessionTest" method="mdb2570001FailedBackupFinalGuardsRejectDriverAndOwnerDriftWithoutChangingPair" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidduplicateliterals" priority="3">
+The String literal "OBSERVE" appears 4 times in this file; the first occurrence is on line 1,886
+</violation>
+<violation beginline="1890" endline="1890" begincolumn="15" endcolumn="25" rule="AvoidDuplicateLiterals" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="MorningDatabaseSessionTest" method="mdb2570001FailedBackupFinalGuardsRejectDriverAndOwnerDriftWithoutChangingPair" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidduplicateliterals" priority="3">
+The String literal "READONLY" appears 6 times in this file; the first occurrence is on line 1,890
+</violation>
+<violation beginline="1891" endline="1891" begincolumn="15" endcolumn="26" rule="AvoidDuplicateLiterals" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="MorningDatabaseSessionTest" method="mdb2570001FailedBackupFinalGuardsRejectDriverAndOwnerDriftWithoutChangingPair" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidduplicateliterals" priority="3">
+The String literal "ISOLATION" appears 5 times in this file; the first occurrence is on line 1,891
+</violation>
+<violation beginline="1894" endline="1894" begincolumn="15" endcolumn="21" rule="AvoidDuplicateLiterals" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="MorningDatabaseSessionTest" method="mdb2570001FailedBackupFinalGuardsRejectDriverAndOwnerDriftWithoutChangingPair" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidduplicateliterals" priority="3">
+The String literal "HELD" appears 13 times in this file; the first occurrence is on line 1,894
+</violation>
+<violation beginline="1899" endline="1899" begincolumn="17" endcolumn="26" rule="AssignmentInOperand" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="MorningDatabaseSessionTest" method="mdb2570001FailedBackupFinalGuardsRejectDriverAndOwnerDriftWithoutChangingPair" variable="n" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#assignmentinoperand" priority="3">
+Avoid assignment to ordinal in operand
+</violation>
+<violation beginline="1920" endline="1920" begincolumn="27" endcolumn="60" rule="UseProperClassLoader" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="MorningDatabaseSessionTest" method="mdb2570001FailedBackupFinalGuardsRejectDriverAndOwnerDriftWithoutChangingPair" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader" priority="3">
+In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.
+</violation>
+<violation beginline="1930" endline="1930" begincolumn="75" endcolumn="87" rule="AvoidDuplicateLiterals" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="MorningDatabaseSessionTest" method="mdb2570001FailedBackupFinalGuardsRejectDriverAndOwnerDriftWithoutChangingPair" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidduplicateliterals" priority="3">
+The String literal "isReadOnly" appears 6 times in this file; the first occurrence is on line 1,930
+</violation>
+<violation beginline="1954" endline="1954" begincolumn="33" endcolumn="73" rule="UseProperClassLoader" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="MorningDatabaseSessionTest" method="mdb2570001FailedBackupFinalGuardsRejectDriverAndOwnerDriftWithoutChangingPair" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader" priority="3">
+In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.
+</violation>
+<violation beginline="1962" endline="1962" begincolumn="39" endcolumn="71" rule="UseProperClassLoader" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="MorningDatabaseSessionTest" method="mdb2570001FailedBackupFinalGuardsRejectDriverAndOwnerDriftWithoutChangingPair" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader" priority="3">
+In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.
+</violation>
+<violation beginline="2044" endline="2044" begincolumn="13" endcolumn="28" rule="AvoidDuplicateLiterals" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="MorningDatabaseSessionTest" method="mdb2568001AbandonedRequestRejectsEveryUntrustedPairComponentWithoutMutation" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidduplicateliterals" priority="3">
+The String literal "FIRST_MISSING" appears 6 times in this file; the first occurrence is on line 2,044
+</violation>
+<violation beginline="2045" endline="2045" begincolumn="13" endcolumn="29" rule="AvoidDuplicateLiterals" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="MorningDatabaseSessionTest" method="mdb2568001AbandonedRequestRejectsEveryUntrustedPairComponentWithoutMutation" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidduplicateliterals" priority="3">
+The String literal "SECOND_MISSING" appears 6 times in this file; the first occurrence is on line 2,045
+</violation>
+<violation beginline="2054" endline="2054" begincolumn="13" endcolumn="19" rule="AvoidDuplicateLiterals" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="MorningDatabaseSessionTest" method="mdb2568001AbandonedRequestRejectsEveryUntrustedPairComponentWithoutMutation" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidduplicateliterals" priority="3">
+The String literal "DATE" appears 4 times in this file; the first occurrence is on line 2,054
+</violation>
+<violation beginline="2055" endline="2055" begincolumn="13" endcolumn="23" rule="AvoidDuplicateLiterals" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="MorningDatabaseSessionTest" method="mdb2568001AbandonedRequestRejectsEveryUntrustedPairComponentWithoutMutation" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidduplicateliterals" priority="3">
+The String literal "NULL_END" appears 4 times in this file; the first occurrence is on line 2,055
+</violation>
+<violation beginline="2056" endline="2056" begincolumn="15" endcolumn="24" rule="AssignmentInOperand" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="MorningDatabaseSessionTest" method="mdb2568001AbandonedRequestRejectsEveryUntrustedPairComponentWithoutMutation" variable="n" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#assignmentinoperand" priority="3">
+Avoid assignment to ordinal in operand
+</violation>
+<violation beginline="2085" endline="2085" begincolumn="25" endcolumn="58" rule="UseProperClassLoader" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="MorningDatabaseSessionTest" method="mdb2568001AbandonedRequestRejectsEveryUntrustedPairComponentWithoutMutation" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader" priority="3">
+In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.
+</violation>
+<violation beginline="2097" endline="2097" begincolumn="31" endcolumn="71" rule="UseProperClassLoader" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="MorningDatabaseSessionTest" method="mdb2568001AbandonedRequestRejectsEveryUntrustedPairComponentWithoutMutation" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader" priority="3">
+In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.
+</violation>
+<violation beginline="2110" endline="2110" begincolumn="37" endcolumn="69" rule="UseProperClassLoader" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="MorningDatabaseSessionTest" method="mdb2568001AbandonedRequestRejectsEveryUntrustedPairComponentWithoutMutation" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader" priority="3">
+In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.
+</violation>
+<violation beginline="2137" endline="2137" begincolumn="48" endcolumn="65" rule="AvoidDuplicateLiterals" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="MorningDatabaseSessionTest" method="mdb2568001AbandonedRequestRejectsEveryUntrustedPairComponentWithoutMutation" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidduplicateliterals" priority="3">
+The String literal "COMMAND_FAILURE" appears 7 times in this file; the first occurrence is on line 2,137
+</violation>
+<violation beginline="2251" endline="2251" begincolumn="85" endcolumn="88" rule="AssignmentInOperand" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="MorningDatabaseSessionTest" method="mdb2490001SkippedBackupRequiresOriginalManifestAndActualReverseOrderedPair" variable="run" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#assignmentinoperand" priority="3">
+Avoid assignment to n in operand
+</violation>
+<violation beginline="2332" endline="2332" begincolumn="85" endcolumn="88" rule="AssignmentInOperand" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="MorningDatabaseSessionTest" method="mdb2490002TerminalPairRejectsMissingAndExtraDriverRows" variable="run" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#assignmentinoperand" priority="3">
+Avoid assignment to n in operand
+</violation>
+<violation beginline="2406" endline="2406" begincolumn="28" endcolumn="29" rule="AvoidLiteralsInIfCondition" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="MorningDatabaseSessionTest" method="mdb2490SqlRows" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidliteralsinifcondition" priority="3">
+Avoid using literals such as 1 in if statements
+</violation>
+<violation beginline="2429" endline="2429" begincolumn="19" endcolumn="52" rule="UseProperClassLoader" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="MorningDatabaseSessionTest" method="mdb2490Subject" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader" priority="3">
+In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.
+</violation>
+<violation beginline="2439" endline="2439" begincolumn="25" endcolumn="65" rule="UseProperClassLoader" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="MorningDatabaseSessionTest" method="mdb2490Subject" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader" priority="3">
+In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.
+</violation>
+<violation beginline="2448" endline="2448" begincolumn="31" endcolumn="63" rule="UseProperClassLoader" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="MorningDatabaseSessionTest" method="mdb2490Subject" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader" priority="3">
+In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.
+</violation>
+<violation beginline="2456" endline="2456" begincolumn="46" endcolumn="47" rule="AvoidLiteralsInIfCondition" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="MorningDatabaseSessionTest" method="mdb2490Subject" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidliteralsinifcondition" priority="3">
+Avoid using literals such as 1 in if statements
+</violation>
+<violation beginline="2477" endline="2477" begincolumn="85" endcolumn="88" rule="AssignmentInOperand" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="MorningDatabaseSessionTest" method="mdb2486001FinalAdvisoryObservationCannotReuseInitialAdmission" variable="run" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#assignmentinoperand" priority="3">
+Avoid assignment to n in operand
+</violation>
+<violation beginline="2523" endline="2523" begincolumn="66" endcolumn="74" rule="AvoidDuplicateLiterals" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="MorningDatabaseSessionTest" method="mdb2486002TerminalResultTimeAndFailureReasonCannotBeReinterpreted" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidduplicateliterals" priority="3">
+The String literal "REASON" appears 4 times in this file; the first occurrence is on line 2,523
+</violation>
+<violation beginline="2527" endline="2527" begincolumn="85" endcolumn="88" rule="AssignmentInOperand" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="MorningDatabaseSessionTest" method="mdb2486002TerminalResultTimeAndFailureReasonCannotBeReinterpreted" variable="run" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#assignmentinoperand" priority="3">
+Avoid assignment to n in operand
+</violation>
+<violation beginline="2572" endline="2572" begincolumn="74" endcolumn="96" rule="AvoidDuplicateLiterals" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="MorningDatabaseSessionTest" method="mdb2486002TerminalResultTimeAndFailureReasonCannotBeReinterpreted" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidduplicateliterals" priority="3">
+The String literal "batch command failed" appears 4 times in this file; the first occurrence is on line 2,572
+</violation>
+<violation beginline="2595" endline="2595" begincolumn="19" endcolumn="52" rule="UseProperClassLoader" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="MorningDatabaseSessionTest" method="mdb2486Subject" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader" priority="3">
+In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.
+</violation>
+<violation beginline="2610" endline="2610" begincolumn="25" endcolumn="65" rule="UseProperClassLoader" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="MorningDatabaseSessionTest" method="mdb2486Subject" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader" priority="3">
+In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.
+</violation>
+<violation beginline="2618" endline="2618" begincolumn="31" endcolumn="63" rule="UseProperClassLoader" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="MorningDatabaseSessionTest" method="mdb2486Subject" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader" priority="3">
+In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.
+</violation>
+<violation beginline="2664" endline="2664" begincolumn="85" endcolumn="88" rule="AssignmentInOperand" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="MorningDatabaseSessionTest" method="mdb2482001BackupSqlRefusalAndExpiredOwnerPreserveCommittedRows" variable="run" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#assignmentinoperand" priority="3">
+Avoid assignment to n in operand
+</violation>
+<violation beginline="2679" endline="2679" begincolumn="25" endcolumn="58" rule="UseProperClassLoader" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="MorningDatabaseSessionTest" method="mdb2482001BackupSqlRefusalAndExpiredOwnerPreserveCommittedRows" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader" priority="3">
+In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.
+</violation>
+<violation beginline="2750" endline="2750" begincolumn="85" endcolumn="88" rule="AssignmentInOperand" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="MorningDatabaseSessionTest" method="mdb2482002ActualBackupManifestMismatchRejectsEveryPairComponent" variable="run" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#assignmentinoperand" priority="3">
+Avoid assignment to n in operand
+</violation>
+<violation beginline="2817" endline="2817" begincolumn="13" endcolumn="26" rule="AvoidDuplicateLiterals" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="MorningDatabaseSessionTest" method="mdb2482Manifest" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidduplicateliterals" priority="3">
+The String literal "public-host" appears 4 times in this file; the first occurrence is on line 2,817
+</violation>
+<violation beginline="2817" endline="2817" begincolumn="28" endcolumn="33" rule="AvoidDuplicateLiterals" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="MorningDatabaseSessionTest" method="mdb2482Manifest" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidduplicateliterals" priority="3">
+The String literal "1.0" appears 4 times in this file; the first occurrence is on line 2,817
+</violation>
+<violation beginline="2817" endline="2817" begincolumn="42" endcolumn="56" rule="AvoidDuplicateLiterals" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="MorningDatabaseSessionTest" method="mdb2482Manifest" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidduplicateliterals" priority="3">
+The String literal "ubuntu-26.04" appears 4 times in this file; the first occurrence is on line 2,817
+</violation>
+<violation beginline="2817" endline="2817" begincolumn="58" endcolumn="66" rule="AvoidDuplicateLiterals" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="MorningDatabaseSessionTest" method="mdb2482Manifest" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidduplicateliterals" priority="3">
+The String literal "25.0.4" appears 4 times in this file; the first occurrence is on line 2,817
+</violation>
+<violation beginline="2817" endline="2817" begincolumn="68" endcolumn="74" rule="AvoidDuplicateLiterals" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="MorningDatabaseSessionTest" method="mdb2482Manifest" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidduplicateliterals" priority="3">
+The String literal "18.6" appears 4 times in this file; the first occurrence is on line 2,817
+</violation>
+<violation beginline="2817" endline="2817" begincolumn="76" endcolumn="84" rule="AvoidDuplicateLiterals" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="MorningDatabaseSessionTest" method="mdb2482Manifest" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidduplicateliterals" priority="3">
+The String literal "2.56.0" appears 4 times in this file; the first occurrence is on line 2,817
+</violation>
+<violation beginline="2817" endline="2817" begincolumn="86" endcolumn="93" rule="AvoidDuplicateLiterals" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="MorningDatabaseSessionTest" method="mdb2482Manifest" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidduplicateliterals" priority="3">
+The String literal "1.2.1" appears 4 times in this file; the first occurrence is on line 2,817
+</violation>
+<violation beginline="2992" endline="2992" begincolumn="19" endcolumn="52" rule="UseProperClassLoader" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="MorningDatabaseSessionTest" method="mdb2480Subject" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader" priority="3">
+In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.
+</violation>
+<violation beginline="3000" endline="3000" begincolumn="25" endcolumn="65" rule="UseProperClassLoader" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="MorningDatabaseSessionTest" method="mdb2480Subject" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader" priority="3">
+In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.
+</violation>
+<violation beginline="3012" endline="3012" begincolumn="31" endcolumn="63" rule="UseProperClassLoader" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="MorningDatabaseSessionTest" method="mdb2480Subject" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader" priority="3">
+In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.
+</violation>
+<violation beginline="3028" endline="3028" begincolumn="54" endcolumn="55" rule="AvoidLiteralsInIfCondition" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="MorningDatabaseSessionTest" method="mdb2480Subject" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidliteralsinifcondition" priority="3">
+Avoid using literals such as 1 in if statements
+</violation>
+<violation beginline="3057" endline="3057" begincolumn="54" endcolumn="55" rule="AvoidLiteralsInIfCondition" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="MorningDatabaseSessionTest" method="mdb2480Subject" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidliteralsinifcondition" priority="3">
+Avoid using literals such as 2 in if statements
+</violation>
+<violation beginline="3081" endline="3081" begincolumn="33" endcolumn="39" rule="AvoidDuplicateLiterals" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="MorningDatabaseSessionTest" method="mdb2292001AbandonedRequestRejectsEveryJdbcInvariantBeforeMutation" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidduplicateliterals" priority="3">
+The String literal "AUTO" appears 4 times in this file; the first occurrence is on line 3,081
+</violation>
+<violation beginline="3085" endline="3085" begincolumn="85" endcolumn="92" rule="AssignmentInOperand" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="MorningDatabaseSessionTest" method="mdb2292001AbandonedRequestRejectsEveryJdbcInvariantBeforeMutation" variable="run" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#assignmentinoperand" priority="3">
+Avoid assignment to index in operand
+</violation>
+<violation beginline="3125" endline="3125" begincolumn="85" endcolumn="92" rule="AssignmentInOperand" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="MorningDatabaseSessionTest" method="mdb2292002RetentionRejectsJdbcDriftAndPreservesBothFailedRows" variable="run" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#assignmentinoperand" priority="3">
+Avoid assignment to index in operand
+</violation>
+<violation beginline="3192" endline="3192" begincolumn="85" endcolumn="92" rule="AssignmentInOperand" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="MorningDatabaseSessionTest" method="mdb2402001ObservationRejectsJdbcDriftBeforeMutation" variable="run" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#assignmentinoperand" priority="3">
+Avoid assignment to index in operand
+</violation>
+<violation beginline="3307" endline="3307" begincolumn="26" endcolumn="42" rule="AvoidDuplicateLiterals" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="MorningDatabaseSessionTest" method="mdb2292Subject" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidduplicateliterals" priority="3">
+The String literal "schubert_batch" appears 16 times in this file; the first occurrence is on line 3,307
+</violation>
+<violation beginline="3309" endline="3309" begincolumn="26" endcolumn="39" rule="AvoidDuplicateLiterals" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="MorningDatabaseSessionTest" method="mdb2292Subject" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidduplicateliterals" priority="3">
+The String literal "schubert_nk" appears 4 times in this file; the first occurrence is on line 3,309
+</violation>
+<violation beginline="3316" endline="3316" begincolumn="19" endcolumn="52" rule="UseProperClassLoader" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="MorningDatabaseSessionTest" method="mdb2292Subject" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader" priority="3">
+In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.
+</violation>
+<violation beginline="3332" endline="3332" begincolumn="27" endcolumn="67" rule="UseProperClassLoader" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="MorningDatabaseSessionTest" method="mdb2292Subject" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader" priority="3">
+In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.
+</violation>
+<violation beginline="3340" endline="3340" begincolumn="33" endcolumn="65" rule="UseProperClassLoader" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="MorningDatabaseSessionTest" method="mdb2292Subject" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader" priority="3">
+In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.
+</violation>
+<violation beginline="3641" endline="3641" begincolumn="25" endcolumn="31" rule="AssignmentInOperand" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="MorningDatabaseSessionTest" method="mdb592001SixReadbackTransitionsRejectEverySqlPortFailureAndPreserveRows" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#assignmentinoperand" priority="3">
+Avoid assignment to seed in operand
+</violation>
+<violation beginline="3664" endline="3664" begincolumn="25" endcolumn="31" rule="AssignmentInOperand" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="MorningDatabaseSessionTest" method="mdb594001ActualAutocommitAndReadonlyDriftRefusesSixTransitionsBeforeMutation" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#assignmentinoperand" priority="3">
+Avoid assignment to seed in operand
+</violation>
+<violation beginline="3727" endline="3727" begincolumn="27" endcolumn="60" rule="UseProperClassLoader" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="MorningDatabaseSessionTest" method="mdb590Scenarios" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader" priority="3">
+In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.
+</violation>
+<violation beginline="3784" endline="3784" begincolumn="37" endcolumn="50" rule="AvoidDuplicateLiterals" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="MorningDatabaseSessionTest" method="mdb590Scenarios" variable="sql" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidduplicateliterals" priority="3">
+The String literal "insert into" appears 5 times in this file; the first occurrence is on line 3,784
+</violation>
+<violation beginline="3875" endline="3875" begincolumn="44" endcolumn="45" rule="AvoidLiteralsInIfCondition" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="MorningDatabaseSessionTest" method="mdb590Scenarios" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidliteralsinifcondition" priority="3">
+Avoid using literals such as 1 in if statements
+</violation>
+<violation beginline="3878" endline="3878" begincolumn="44" endcolumn="45" rule="AvoidLiteralsInIfCondition" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="MorningDatabaseSessionTest" method="mdb590Scenarios" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidliteralsinifcondition" priority="3">
+Avoid using literals such as 2 in if statements
+</violation>
+<violation beginline="3879" endline="3879" begincolumn="44" endcolumn="45" rule="AvoidLiteralsInIfCondition" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="MorningDatabaseSessionTest" method="mdb590Scenarios" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidliteralsinifcondition" priority="3">
+Avoid using literals such as 3 in if statements
+</violation>
+<violation beginline="4042" endline="4042" begincolumn="33" endcolumn="34" rule="AvoidLiteralsInIfCondition" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="MorningDatabaseSessionTest" method="mdb590Scenarios" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidliteralsinifcondition" priority="3">
+Avoid using literals such as 3 in if statements
+</violation>
+<violation beginline="4103" endline="4103" begincolumn="25" endcolumn="58" rule="UseProperClassLoader" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="MorningDatabaseSessionTest" method="mdb589001ActualReadbackSqlFailuresCloseConnectionWithoutChangingCommittedRows" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader" priority="3">
+In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.
+</violation>
+<violation beginline="4185" endline="4185" begincolumn="27" endcolumn="60" rule="UseProperClassLoader" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="MorningDatabaseSessionTest" method="mdb589002ActualCloseFaultPriorityStillReleasesOwnedAdvisory" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader" priority="3">
+In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.
+</violation>
+<violation beginline="4996" endline="4996" begincolumn="32" endcolumn="56" rule="UseConcurrentHashMap" ruleset="Multithreading" package="dev.codex.schubert.nk.batch.repository" class="MorningDatabaseSessionTest.Probe" variable="counts" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap" priority="3">
+If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation
+</violation>
+<violation beginline="4997" endline="4997" begincolumn="34" endcolumn="58" rule="UseConcurrentHashMap" ruleset="Multithreading" package="dev.codex.schubert.nk.batch.repository" class="MorningDatabaseSessionTest.Probe" variable="faults" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap" priority="3">
+If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation
+</violation>
+<violation beginline="4998" endline="4998" begincolumn="32" endcolumn="59" rule="UseConcurrentHashMap" ruleset="Multithreading" package="dev.codex.schubert.nk.batch.repository" class="MorningDatabaseSessionTest.Probe" variable="rowCounts" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap" priority="3">
+If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation
+</violation>
+<violation beginline="4999" endline="5009" begincolumn="31" endcolumn="24" rule="UseConcurrentHashMap" ruleset="Multithreading" package="dev.codex.schubert.nk.batch.repository" class="MorningDatabaseSessionTest.Probe" variable="role" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap" priority="3">
+If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation
+</violation>
+<violation beginline="5029" endline="5029" begincolumn="42" endcolumn="51" rule="AvoidDuplicateLiterals" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="MorningDatabaseSessionTest.Probe" variable="failure" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidduplicateliterals" priority="3">
+The String literal "PRIVATE" appears 22 times in this file; the first occurrence is on line 5,029
+</violation>
+<violation beginline="5057" endline="5057" begincolumn="30" endcolumn="46" rule="AvoidCatchingGenericException" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="MorningDatabaseSessionTest.Probe" method="gate" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidcatchinggenericexception" priority="3">
+Avoid catching RuntimeException in try-catch block
+</violation>
+<violation beginline="5057" endline="5057" begincolumn="49" endcolumn="54" rule="AvoidCatchingGenericException" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="MorningDatabaseSessionTest.Probe" method="gate" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidcatchinggenericexception" priority="3">
+Avoid catching Error in try-catch block
+</violation>
+<violation beginline="5059" endline="5059" begincolumn="16" endcolumn="25" rule="AvoidCatchingGenericException" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="MorningDatabaseSessionTest.Probe" method="gate" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidcatchinggenericexception" priority="3">
+Avoid catching Throwable in try-catch block
+</violation>
+<violation beginline="5068" endline="5068" begincolumn="45" endcolumn="61" rule="AvoidCatchingGenericException" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="MorningDatabaseSessionTest.Probe" method="schema" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidcatchinggenericexception" priority="3">
+Avoid catching RuntimeException in try-catch block
+</violation>
+<violation beginline="5068" endline="5068" begincolumn="64" endcolumn="69" rule="AvoidCatchingGenericException" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="MorningDatabaseSessionTest.Probe" method="schema" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidcatchinggenericexception" priority="3">
+Avoid catching Error in try-catch block
+</violation>
+<violation beginline="5070" endline="5070" begincolumn="16" endcolumn="25" rule="AvoidCatchingGenericException" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="MorningDatabaseSessionTest.Probe" method="schema" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidcatchinggenericexception" priority="3">
+Avoid catching Throwable in try-catch block
+</violation>
+<violation beginline="5087" endline="5087" begincolumn="31" endcolumn="47" rule="AvoidCatchingGenericException" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="MorningDatabaseSessionTest.Probe" method="open" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidcatchinggenericexception" priority="3">
+Avoid catching RuntimeException in try-catch block
+</violation>
+<violation beginline="5087" endline="5087" begincolumn="50" endcolumn="55" rule="AvoidCatchingGenericException" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="MorningDatabaseSessionTest.Probe" method="open" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidcatchinggenericexception" priority="3">
+Avoid catching Error in try-catch block
+</violation>
+<violation beginline="5089" endline="5089" begincolumn="16" endcolumn="25" rule="AvoidCatchingGenericException" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="MorningDatabaseSessionTest.Probe" method="open" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidcatchinggenericexception" priority="3">
+Avoid catching Throwable in try-catch block
+</violation>
+<violation beginline="5124" endline="5124" begincolumn="21" endcolumn="27" rule="AvoidDuplicateLiterals" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="MorningDatabaseSessionTest.Probe" method="statement" variable="kind" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidduplicateliterals" priority="3">
+The String literal "LOCK" appears 4 times in this file; the first occurrence is on line 5,124
+</violation>
+<violation beginline="5127" endline="5127" begincolumn="83" endcolumn="92" rule="AvoidDuplicateLiterals" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="MorningDatabaseSessionTest.Probe" method="statement" variable="kind" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidduplicateliterals" priority="3">
+The String literal "HISTORY" appears 5 times in this file; the first occurrence is on line 5,127
+</violation>
+<violation beginline="5165" endline="5165" begincolumn="25" endcolumn="35" rule="AssignmentInOperand" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="MorningDatabaseSessionTest.Probe" method="statement" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#assignmentinoperand" priority="3">
+Avoid assignments in operands
+</violation>
+<violation beginline="5209" endline="5209" begincolumn="13" endcolumn="34" rule="UseProperClassLoader" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="MorningDatabaseSessionTest" method="proxy" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader" priority="3">
+In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.
+</violation>
+<violation beginline="5239" endline="5239" begincolumn="49" endcolumn="57" rule="AvoidDuplicateLiterals" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="MorningDatabaseSessionTest" method="fixedUrlRootConstructorAndNullContracts" variable="snapshot" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidduplicateliterals" priority="3">
+The String literal "PUBLIC" appears 5 times in this file; the first occurrence is on line 5,239
+</violation>
+<violation beginline="5257" endline="5257" begincolumn="9" endcolumn="10" rule="CloseResource" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="MorningDatabaseSessionTest" method="fixedUrlRootConstructorAndNullContracts" variable="c" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#closeresource" priority="3">
+Ensure that resources like this InspectorDbCredential object are closed after use
+</violation>
+<violation beginline="5272" endline="5272" begincolumn="9" endcolumn="10" rule="CloseResource" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="MorningDatabaseSessionTest" method="literalAdmissionAndSessionLifetime" variable="c" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#closeresource" priority="3">
+Ensure that resources like this InspectorDbCredential object are closed after use
+</violation>
+<violation beginline="5596" endline="5596" begincolumn="5" endcolumn="11" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.batch.repository" class="MorningDatabaseSessionTest" method="interruptionAndForeignThreadCannotUseBorrowedSession" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="5600" endline="5600" begincolumn="7" endcolumn="13" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.batch.repository" class="MorningDatabaseSessionTest" method="interruptionAndForeignThreadCannotUseBorrowedSession" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="5612" endline="5612" begincolumn="23" endcolumn="29" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.batch.repository" class="MorningDatabaseSessionTest" method="interruptionAndForeignThreadCannotUseBorrowedSession" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="5615" endline="5615" begincolumn="5" endcolumn="11" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.batch.repository" class="MorningDatabaseSessionTest" method="interruptionAndForeignThreadCannotUseBorrowedSession" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="5618" endline="5618" begincolumn="25" endcolumn="60" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.batch.repository" class="MorningDatabaseSessionTest" method="interruptionAndForeignThreadCannotUseBorrowedSession" variable="executor" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="5628" endline="5632" begincolumn="27" endcolumn="57" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.batch.repository" class="MorningDatabaseSessionTest" method="interruptionAndForeignThreadCannotUseBorrowedSession" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="5634" endline="5634" begincolumn="30" endcolumn="39" rule="AvoidCatchingGenericException" ruleset="Error Prone" package="dev.codex.schubert.nk.batch.repository" class="MorningDatabaseSessionTest" method="interruptionAndForeignThreadCannotUseBorrowedSession" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidcatchinggenericexception" priority="3">
+Avoid catching Exception in try-catch block
+</violation>
+<violation beginline="5805" endline="5805" begincolumn="40" endcolumn="75" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.batch.repository" class="MorningDatabaseSessionTest" method="mdb010RealSeparateChildAdvisoryHandoffAndParentReacquire" variable="otherThread" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="5808" endline="5814" begincolumn="23" endcolumn="53" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.batch.repository" class="MorningDatabaseSessionTest" method="mdb010RealSeparateChildAdvisoryHandoffAndParentReacquire" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="5817" endline="5817" begincolumn="19" endcolumn="25" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.batch.repository" class="MorningDatabaseSessionTest" method="mdb010RealSeparateChildAdvisoryHandoffAndParentReacquire" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+</file>
+<file name="/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/ApiSessionInvalidTest.java">
+<violation beginline="515" endline="515" begincolumn="28" endcolumn="31" rule="AvoidLiteralsInIfCondition" ruleset="Error Prone" package="dev.codex.schubert.nk.web.session" class="ApiSessionInvalidTest" method="setStatus" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidliteralsinifcondition" priority="3">
+Avoid using literals such as 302 in if statements
+</violation>
+<violation beginline="603" endline="603" begincolumn="20" endcolumn="51" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.web.session" class="ApiSessionInvalidTest" method="web165ConcurrentAndStaleInvalidationCannotDeleteNewLogin" variable="pool" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="608" endline="625" begincolumn="13" endcolumn="19" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.web.session" class="ApiSessionInvalidTest" method="web165ConcurrentAndStaleInvalidationCannotDeleteNewLogin" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+</file>
+<file name="/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/SessionAccessFailureTest.java">
+<violation beginline="395" endline="395" begincolumn="20" endcolumn="51" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.web.session" class="SessionAccessFailureTest" method="web130ConcurrentDenialsKeepRequestAndActorSeparate" variable="pool" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="407" endline="407" begincolumn="30" endcolumn="31" rule="AvoidLiteralsInIfCondition" ruleset="Error Prone" package="dev.codex.schubert.nk.web.session" class="SessionAccessFailureTest" method="web130ConcurrentDenialsKeepRequestAndActorSeparate" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidliteralsinifcondition" priority="3">
+Avoid using literals such as 2 in if statements
+</violation>
+<violation beginline="421" endline="421" begincolumn="30" endcolumn="31" rule="AvoidLiteralsInIfCondition" ruleset="Error Prone" package="dev.codex.schubert.nk.web.session" class="SessionAccessFailureTest" method="web130ConcurrentDenialsKeepRequestAndActorSeparate" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidliteralsinifcondition" priority="3">
+Avoid using literals such as 2 in if statements
+</violation>
+<violation beginline="432" endline="432" begincolumn="7" endcolumn="19" rule="AvoidSynchronizedStatement" ruleset="Multithreading" package="dev.codex.schubert.nk.web.session" class="SessionAccessFailureTest" method="web130ConcurrentDenialsKeepRequestAndActorSeparate" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#avoidsynchronizedstatement" priority="3">
+Use ReentrantLock rather than synchronization
+</violation>
+<violation beginline="433" endline="433" begincolumn="27" endcolumn="47" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.web.session" class="SessionAccessFailureTest" method="web130ConcurrentDenialsKeepRequestAndActorSeparate" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="496" endline="496" begincolumn="25" endcolumn="26" rule="AvoidLiteralsInIfCondition" ruleset="Error Prone" package="dev.codex.schubert.nk.web.session" class="SessionAccessFailureTest" method="raw" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidliteralsinifcondition" priority="3">
+Avoid using literals such as 2 in if statements
+</violation>
+</file>
+<file name="/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/SessionSecurityContextTest.java">
+<violation beginline="467" endline="467" begincolumn="20" endcolumn="51" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.web.session" class="SessionSecurityContextTest" method="web073ConcurrentLoadAndStaleRequestsNeverResurrect" variable="pool" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="491" endline="491" begincolumn="7" endcolumn="19" rule="AvoidSynchronizedStatement" ruleset="Multithreading" package="dev.codex.schubert.nk.web.session" class="SessionSecurityContextTest" method="web073ConcurrentLoadAndStaleRequestsNeverResurrect" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#avoidsynchronizedstatement" priority="3">
+Use ReentrantLock rather than synchronization
+</violation>
+<violation beginline="492" endline="492" begincolumn="9" endcolumn="21" rule="AvoidSynchronizedStatement" ruleset="Multithreading" package="dev.codex.schubert.nk.web.session" class="SessionSecurityContextTest" method="web073ConcurrentLoadAndStaleRequestsNeverResurrect" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#avoidsynchronizedstatement" priority="3">
+Use ReentrantLock rather than synchronization
+</violation>
+<violation beginline="493" endline="493" begincolumn="29" endcolumn="49" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.web.session" class="SessionSecurityContextTest" method="web073ConcurrentLoadAndStaleRequestsNeverResurrect" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+</file>
+<file name="/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/UserBusinessControllerTest.java">
+<violation beginline="805" endline="805" begincolumn="15" endcolumn="41" rule="CompareObjectsWithEquals" ruleset="Error Prone" package="dev.codex.schubert.nk.web.session" class="UserBusinessControllerTest" method="biz012AdministratorAndNullBoundariesLegacyAssemblyAndViewContract" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#compareobjectswithequals" priority="3">
+Use equals() to compare object references.
+</violation>
+<violation beginline="904" endline="904" begincolumn="27" endcolumn="58" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.web.session" class="UserBusinessControllerTest" method="biz011HundredSamePostRealApiUpdatesOnceAndConsumesOneToken" variable="executor" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="908" endline="924" begincolumn="15" endcolumn="21" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.web.session" class="UserBusinessControllerTest" method="biz011HundredSamePostRealApiUpdatesOnceAndConsumesOneToken" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="934" endline="934" begincolumn="23" endcolumn="94" rule="AvoidDuplicateLiterals" ruleset="Error Prone" package="dev.codex.schubert.nk.web.session" class="UserBusinessControllerTest" method="biz011HundredSamePostRealApiUpdatesOnceAndConsumesOneToken" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidduplicateliterals" priority="3">
+The String literal "\' and details-&gt;&gt;\'outcome\'=\'SUCCESS\' and details-&gt;&gt;\'targetUserId\'=\'42\'" appears 4 times in this file; the first occurrence is on line 934
+</violation>
+<violation beginline="1334" endline="1334" begincolumn="19" endcolumn="52" rule="UseProperClassLoader" ruleset="Error Prone" package="dev.codex.schubert.nk.web.session" class="UserBusinessControllerTest.RealApi" method="RealApi" variable="source" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#useproperclassloader" priority="3">
+In J2EE, getClassLoader() might not work as expected.  Use Thread.currentThread().getContextClassLoader() instead.
+</violation>
+<violation beginline="1373" endline="1373" begincolumn="60" endcolumn="66" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.web.session" class="UserBusinessControllerTest.RealApi" method="RealApi" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+</file>
+</pmd>
