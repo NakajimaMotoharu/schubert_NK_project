@@ -1,5 +1,7 @@
 # NK-QST-001 受付ID単体テスト仕様書
 
+2026-10-28追加（Question command共通値P01103）：2410/2411・PT-CMD-TIMEBOUND-001～003、新QuestionCommandTimeBoundaryTest whole3。UTC0001/9999のmicro秒端点・submicro秒と負epochのfloorを独立UTC literalで確認、保存Message/Correlation不変更。旧DB同居ケースの抽出0、当Program全体/実DB/正式受入にはしない。索引evidence/command-time-boundaries/manifest.json。
+
 2026-10-28失敗後回復追補：新`PT-QST-RNGREC-001～004`は[2397](../018_NK-OPS-001/2397_P011公開受付ID生成回復_単体テスト仕様書.md)へ一意参照。元RID001～008全件＋新四件を同source十二/二suiteで実施し、固定provider失敗後に別自己workerから同generator再利用/部分候補非流用を検証。公開受付IDは認証能力ではなく実key/session/credential/DB操作なし。元Testの固定public file一件だけfresh自己CWDへ許し、全集合/139byte/hashを独立検証する。source/run/TestID別索引は`evidence/public-receipt-recovery/manifest.json`。
 
 PG-D-188。RD QST002/ASY001、UI224§3/236、SS312§7/331§6.1。対象QuestionReceiptId(value)とQuestionReceiptIdGenerator.create/generate、関連methodを各Test IDへ対応。質問受付DB/Outbox/再送/認可は別の未完了範囲。

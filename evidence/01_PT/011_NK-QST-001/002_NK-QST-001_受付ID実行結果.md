@@ -1,5 +1,7 @@
 # NK-QST-001 受付ID実行結果
 
+2026-10-28追加：2411/source7ced2d707、当新3は共通run PG13058-TIMEHEADER-JP（全6/2）の内数・FES-aborted0、独立13062 b4014607。QuestionCommandMetadata L8/1 M1/1 C1/0 B4/0 covered/missed・toString未実行で全四100未達、旧結果合算0。scope static0/六SB0、Main旧Test同byte、Program索引evidence/command-time-boundaries/manifest.json、個別/正式受入増加0。
+
 2026-10-28限定追補：[2398](../018_NK-OPS-001/2398_P011公開受付ID生成回復_実行結果.md)、sourcec1d9b6e4b・元八＋新四の同一exec12/2真正0/FES-aborted0・二Main21L6M2C8B全miss0、既Main1843/旧Test1966同byte/新class一。計画済み固定公開file一件139byte/全dir-file集合とhash一致、乱数候補や秘密値の保存0。BUG2012/YKT1760の新fixture二定数だけ限定完了、PMD Thread/Map/公開monitor六はraw/gate1保持/CS0/六SB0、全F03/親受付/DB/正式の合格へ変換しない。原本/全HOLD/正式1964-53/17-190/工数null/QA051finalは不変、source/run/TestID/hash索引は`evidence/public-receipt-recovery/manifest.json`。
 
 正式認定: PT-WEB-20260920-06/source6575b21bf467002cccda7fbb9a6980e4cdfc9a71、03:13:05～03:24:50 JST、11:44/exit0。全1487PT・6Java4coverage100%・Production5静的解析未解決0・39scope/52負canary成功。RID001～008、新2class/6method/20line/8branch全missed0を認定し、QST1部分成果8PTを追加。Program全体は未完了。環境/command/source/input期待実際/sanitized結果/hashはevidence/manifest.json、raw log SHA256=c75b7bc94be1ea6c73540a73458bc126376279a7f751c9560499283484f43c7e。以下は選択時履歴。
