@@ -1,0 +1,85 @@
+{
+  "actualExit": 0,
+  "fullProgramAccepted": false,
+  "hostManifest": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG12976-query-binding-host-v1/manifest.json",
+  "hostSha256": "f2fda8705ee7829e92f33e541bcc1db84558ffb0d2e770ac3b900bd0805a9f2d",
+  "invocation": {
+    "actualPythonCommand": [
+      "/usr/bin/python3",
+      "-B",
+      "tools/quality/pg12986_query_binding_complete_public.py"
+    ],
+    "arbitraryArgumentsRecorded": false,
+    "entrypointPath": "tools/quality/pg12986_query_binding_complete_public.py",
+    "entrypointSha256": "1a0da1781c35fa92fd3303e8367ed42397205f7f86341b9d46ec4f0c5f48575e",
+    "helperPath": "tools/quality/host_tool_invocation.py",
+    "helperSha256": "85d616a3db4ff47f4c95ae2e0dd57954bc2b09f28b8f2a685b986e5621545c46",
+    "libraryPath": "tools/quality/pg12986_query_binding_complete_public.py",
+    "librarySha256": "1a0da1781c35fa92fd3303e8367ed42397205f7f86341b9d46ec4f0c5f48575e",
+    "loadedProjectPythonSources": {
+      "tools/quality/g07_host_class_provenance_inputs.py": "a676cb3e4145177c3c243722d737592ce7d44c3f29cfe4f670662ef7651f046b",
+      "tools/quality/host_tool_invocation.py": "85d616a3db4ff47f4c95ae2e0dd57954bc2b09f28b8f2a685b986e5621545c46",
+      "tools/quality/pg12986_query_binding_complete_public.py": "1a0da1781c35fa92fd3303e8367ed42397205f7f86341b9d46ec4f0c5f48575e"
+    },
+    "provenance": "OBSERVED_SYS_ARGV_AND_ORIG_ARGV_NOT_RECONSTRUCTED"
+  },
+  "newAccepted": 0,
+  "newTestIdMappings": [
+    {
+      "actual": "PASS",
+      "className": "dev.codex.schubert.nk.api.application.question.QuestionQueryResponseBindingTest",
+      "method": "qryBind001QuestionDetailRequiresOriginalId",
+      "testId": "PT-QRY-BIND001"
+    },
+    {
+      "actual": "PASS",
+      "className": "dev.codex.schubert.nk.api.application.question.QuestionQueryResponseBindingTest",
+      "method": "qryBind002NotificationDetailRequiresOriginalId",
+      "testId": "PT-QRY-BIND002"
+    },
+    {
+      "actual": "PASS",
+      "className": "dev.codex.schubert.nk.api.application.question.QuestionQueryResponseBindingTest",
+      "method": "qryBind003CorrectLayoutDoesNotAdmitWrongDataFamily",
+      "testId": "PT-QRY-BIND003"
+    },
+    {
+      "actual": "PASS",
+      "className": "dev.codex.schubert.nk.api.application.question.QuestionQueryResponseBindingTest",
+      "method": "qryBind004EmptySearchClampsEveryRequestedBoundaryToOne",
+      "testId": "PT-QRY-BIND004"
+    }
+  ],
+  "newUniqueTestIds": 4,
+  "observedProductTests": 6,
+  "oldExecUnion": false,
+  "postManifest": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG12980-query-binding-post-v1/manifest.json",
+  "postSha256": "a05f5898aeebabc5d5866e2fa85aa3b2263199667c4bc18533004733ae631a61",
+  "program": "NK-NTF-001",
+  "run": "PG12976-QUERYBINDING-JP",
+  "selectedMain": {
+    "QuestionQueryRequest": {
+      "classCrc64": "b452eff84f48d993",
+      "counters": {
+        "BRANCH": {
+          "covered": 26,
+          "missed": 6
+        },
+        "CLASS": {
+          "covered": 1,
+          "missed": 0
+        },
+        "LINE": {
+          "covered": 87,
+          "missed": 15
+        },
+        "METHOD": {
+          "covered": 15,
+          "missed": 1
+        }
+      }
+    }
+  },
+  "source": "762568bb0338749c9549ec937cc2c79e84418836",
+  "whole451Accepted": false
+}
