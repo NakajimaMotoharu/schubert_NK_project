@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pmd xmlns="http://pmd.sourceforge.net/report/2.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pmd.sourceforge.net/report/2.0.0 https://pmd.github.io/schema/report_2_0_0.xsd" version="7.28.0" timestamp="2026-10-28T12:19:47.645">
+<file name="/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/question/QuestionReceiptIdTest.java">
+<violation beginline="145" endline="145" begincolumn="26" endcolumn="52" rule="UseConcurrentHashMap" ruleset="Multithreading" package="dev.codex.schubert.nk.api.application.question" class="QuestionReceiptIdTest" method="concurrentCalls" variable="expected" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap" priority="3">
+If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation
+</violation>
+<violation beginline="147" endline="147" begincolumn="26" endcolumn="50" rule="UseConcurrentHashMap" ruleset="Multithreading" package="dev.codex.schubert.nk.api.application.question" class="QuestionReceiptIdTest" method="concurrentCalls" variable="actual" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap" priority="3">
+If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation
+</violation>
+<violation beginline="148" endline="148" begincolumn="25" endcolumn="56" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.api.application.question" class="QuestionReceiptIdTest" method="concurrentCalls" variable="executor" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="152" endline="152" begincolumn="7" endcolumn="19" rule="AvoidSynchronizedStatement" ruleset="Multithreading" package="dev.codex.schubert.nk.api.application.question" class="QuestionReceiptIdTest" method="concurrentCalls" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#avoidsynchronizedstatement" priority="3">
+Use ReentrantLock rather than synchronization
+</violation>
+</file>
+<file name="/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/question/QuestionReceiptRecoveryTest.java">
+<violation beginline="68" endline="68" begincolumn="27" endcolumn="29" rule="AvoidLiteralsInIfCondition" ruleset="Error Prone" package="dev.codex.schubert.nk.api.application.question" class="QuestionReceiptRecoveryTest" method="discardedPartialAlphabetDoesNotPrefixTheNextCandidate" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidliteralsinifcondition" priority="3">
+Avoid using literals such as 13 in if statements
+</violation>
+<violation beginline="87" endline="87" begincolumn="46" endcolumn="48" rule="AvoidLiteralsInIfCondition" ruleset="Error Prone" package="dev.codex.schubert.nk.api.application.question" class="QuestionReceiptRecoveryTest" method="lastDrawErrorKeepsIdentityAndStillUnlocks" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidliteralsinifcondition" priority="3">
+Avoid using literals such as 25 in if statements
+</violation>
+<violation beginline="101" endline="101" begincolumn="35" endcolumn="70" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.api.application.question" class="QuestionReceiptRecoveryTest" method="fromAnotherThread" variable="worker" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="102" endline="102" begincolumn="14" endcolumn="48" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.api.application.question" class="QuestionReceiptRecoveryTest" method="fromAnotherThread" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+</file>
+</pmd>
