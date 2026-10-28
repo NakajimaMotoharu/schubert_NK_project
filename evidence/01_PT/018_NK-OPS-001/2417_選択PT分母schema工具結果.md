@@ -1,0 +1,9 @@
+# 選択PT分母schema工具結果
+
+仕様2416・event2783、quality_scope_dimensions.bind/verify_qualificationを追加。元製品source5c378e064不変更、製品PT/compile/静的/coverageの再演0。予定1/2/4pp cap10、共有開始3/reset1793774153、NT/専有費/工数null・元予測不変更。
+
+元pg13124は型差反例guardがPython false==0で止まり真正1、BUG2028/YKT1776を修正前起票、entryabc3f40fとfailure.safe.jsonを保全。helper不変更・別13126でJSON型表現の差へ訂正、checked lint0/body0。PG13126-scope-dimensions-check-v2/manifest.json SHA15eeaf448f0e9dca5c3bb1c6f82bd9fe707fb0a734001c66dcea9bc15cfb56c0、実固定plan/host/proof/traceの3case/1suite/1source/新3ID/旧Test1972/新physical1/Main1843一致・全24反例拒否、一source三physical合成正例成功。
+
+PG13127-scope-dimensions-post-v1/manifest.json SHA791a0660e19b1c43770f160112c1f398a9d51865f2cc37f92c3cbb4104f5d7cd、checked lint0/body0、全元pin/helper/entry/source不変更・反例ラベル集合・独立JSON型五値識別を照合。両manifestのinvocationが実command/toolhashを保持する。当工具実装/再発防止のみ完了、未受入製品scopeをPASSへ変換0・新製品Test ID/実測counter/個別受入0。
+
+今後の対応schemaのtrace工具はこのhelperを着手前に呼び、case/suite/source/物理の固定値複製を減らす。古い未対応schemaへfieldを推測で補填せずfail closed。物理値の真偽をこのhelperだけで証明せず、実測独立proofのhash/全class照合は従来通り必要。原tool失敗一を製品成果と分離、正式1964/53・17/190・QA051final/全actual/保留二工具維持。
