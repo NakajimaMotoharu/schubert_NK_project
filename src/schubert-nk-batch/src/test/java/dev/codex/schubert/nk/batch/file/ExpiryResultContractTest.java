@@ -30,6 +30,8 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** EXP711: literal MQ outcomes + genuine isolated SQL; never a native admission claim. */
 final class ExpiryResultContractTest {
+  private static final String FIXTURE_RUNNING_3_NULL_2_0_0_200_NULL_6F8176AD =
+      "RUNNING|3|NULL|2|0|0|200|NULL";
   private static final String FIXTURE_HEALTH_69B7C75B = "health";
   private static final String FIXTURE_OBSERVE_584F9502 = "observe";
   private static final String FIXTURE_PURGE_B6F2C785 = "purge";
@@ -133,7 +135,7 @@ final class ExpiryResultContractTest {
       assertEquals(
           new ArtemisExpiryPurgeClient.Observation(1790121600000L, 3, 2, 300, 200), observed);
       try {
-        assertEquals("RUNNING|3|NULL|2|0|0|200|NULL", audit());
+        assertEquals(FIXTURE_RUNNING_3_NULL_2_0_0_200_NULL_6F8176AD, audit());
       } catch (Exception failure) {
         throw new AssertionError(failure);
       }
@@ -268,7 +270,7 @@ final class ExpiryResultContractTest {
       assertFalse(c.isClosed());
       assertTrue(c.getAutoCommit());
     }
-    assertEquals("RUNNING|3|NULL|2|0|0|200|NULL", audit());
+    assertEquals(FIXTURE_RUNNING_3_NULL_2_0_0_200_NULL_6F8176AD, audit());
     assertEquals(
         List.of(FIXTURE_HEALTH_69B7C75B, FIXTURE_OBSERVE_584F9502, FIXTURE_PURGE_B6F2C785),
         work.calls);
@@ -353,7 +355,7 @@ final class ExpiryResultContractTest {
                       work)));
       assertFalse(c.isClosed());
     }
-    assertEquals("RUNNING|3|NULL|2|0|0|200|NULL", audit());
+    assertEquals(FIXTURE_RUNNING_3_NULL_2_0_0_200_NULL_6F8176AD, audit());
     assertEquals(
         List.of(FIXTURE_HEALTH_69B7C75B, FIXTURE_OBSERVE_584F9502, FIXTURE_PURGE_B6F2C785),
         work.calls);
@@ -372,7 +374,7 @@ final class ExpiryResultContractTest {
                   request(),
                   () -> {
                     try {
-                      if (audit().equals("RUNNING|3|NULL|2|0|0|200|NULL")
+                      if (audit().equals(FIXTURE_RUNNING_3_NULL_2_0_0_200_NULL_6F8176AD)
                           && once.compareAndSet(false, true)) {
                         try (var admin = db.admin();
                             var sql = admin.createStatement()) {

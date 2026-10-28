@@ -30,6 +30,8 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** Native FD ownership and path replacement tests. NK-SCN-001; SSC-019; PT-SCN-008-F02. */
 class OwnedTransferDirectoryTest {
+  private static final String FIXTURE_UNIX_OWNER_GROUP_MODE_NLINK_SIZE_69F67BAF =
+      "unix:owner,group,mode,nlink,size";
   private static final String FIXTURE_OUTSIDE_F78EA721 = "outside";
   private static final String FIXTURE_ASSET_9D9381A7 = "asset";
   private static final String FIXTURE_MISSING_4B62D186 = "missing";
@@ -69,7 +71,9 @@ class OwnedTransferDirectoryTest {
                 Files.createSymbolicLink(
                     retained.resolve("音源 name.ogg"), outside.resolve("音源 name.ogg"));
                 StorageAttributeGuard.existingFile(
-                    Files.readAttributes(handle, "unix:owner,group,mode,nlink,size"), expected, 3);
+                    Files.readAttributes(handle, FIXTURE_UNIX_OWNER_GROUP_MODE_NLINK_SIZE_69F67BAF),
+                    expected,
+                    3);
                 return readHeld(handle);
               }));
       assertEquals(1, calls.live.size());
@@ -127,7 +131,9 @@ class OwnedTransferDirectoryTest {
                   FIXTURE_LINK_6EFEC986,
                   p -> {
                     StorageAttributeGuard.existingFile(
-                        Files.readAttributes(p, "unix:owner,group,mode,nlink,size"), expected, 3);
+                        Files.readAttributes(p, FIXTURE_UNIX_OWNER_GROUP_MODE_NLINK_SIZE_69F67BAF),
+                        expected,
+                        3);
                     return fail("symlink content read");
                   }));
       for (boolean closeFailure : new boolean[] {false, true}) {
@@ -256,7 +262,9 @@ class OwnedTransferDirectoryTest {
                   stream.force(true);
                 }
                 StorageAttributeGuard.file(
-                    Files.readAttributes(handle, "unix:owner,group,mode,nlink,size"), expected, 3);
+                    Files.readAttributes(handle, FIXTURE_UNIX_OWNER_GROUP_MODE_NLINK_SIZE_69F67BAF),
+                    expected,
+                    3);
                 return Boolean.TRUE;
               }));
       assertEquals(2, calls.live.size());
@@ -321,7 +329,9 @@ class OwnedTransferDirectoryTest {
                 Files.move(part, root.resolve("retained-part"));
                 Files.write(part, new byte[] {9}, StandardOpenOption.CREATE_NEW);
                 StorageAttributeGuard.file(
-                    Files.readAttributes(handle, "unix:owner,group,mode,nlink,size"), identity, 3);
+                    Files.readAttributes(handle, FIXTURE_UNIX_OWNER_GROUP_MODE_NLINK_SIZE_69F67BAF),
+                    identity,
+                    3);
                 return readHeld(handle);
               }));
       assertEquals(2, calls.live.size());
@@ -343,7 +353,9 @@ class OwnedTransferDirectoryTest {
                 Files.move(ready, root.resolve("retained-ready"));
                 Files.createSymbolicLink(ready, outside);
                 StorageAttributeGuard.file(
-                    Files.readAttributes(handle, "unix:owner,group,mode,nlink,size"), identity, 3);
+                    Files.readAttributes(handle, FIXTURE_UNIX_OWNER_GROUP_MODE_NLINK_SIZE_69F67BAF),
+                    identity,
+                    3);
                 return readHeld(handle);
               }));
       assertEquals(2, calls.live.size());
@@ -373,7 +385,8 @@ class OwnedTransferDirectoryTest {
                     assertEquals(
                         0120000, ((Integer) Files.getAttribute(handle, "unix:mode")) & 0170000);
                     StorageAttributeGuard.file(
-                        Files.readAttributes(handle, "unix:owner,group,mode,nlink,size"),
+                        Files.readAttributes(
+                            handle, FIXTURE_UNIX_OWNER_GROUP_MODE_NLINK_SIZE_69F67BAF),
                         identity,
                         3);
                     readAttempted.set(true);
@@ -390,7 +403,8 @@ class OwnedTransferDirectoryTest {
                   handle -> {
                     assertEquals(2, Files.getAttribute(handle, "unix:nlink"));
                     StorageAttributeGuard.file(
-                        Files.readAttributes(handle, "unix:owner,group,mode,nlink,size"),
+                        Files.readAttributes(
+                            handle, FIXTURE_UNIX_OWNER_GROUP_MODE_NLINK_SIZE_69F67BAF),
                         identity,
                         3);
                     readAttempted.set(true);

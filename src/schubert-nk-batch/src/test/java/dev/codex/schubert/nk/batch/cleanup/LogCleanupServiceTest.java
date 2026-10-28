@@ -35,6 +35,11 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** NK-BAT-001; UI251/SS341/SSC-051; PG-D-138; PT-BAT-018..029. */
 final class LogCleanupServiceTest {
+  private static final String FIXTURE_0_0_0_TRUE_9B3C5503 = "0|0|0|true";
+  private static final String FIXTURE_SELECT_PG_TRY_ADVISORY_LOCK_71419602_TEX_E075F895 =
+      "select pg_try_advisory_lock(71419602)::text";
+  private static final String FIXTURE_SELECT_PG_ADVISORY_UNLOCK_71419602_TEXT_F2CE8483 =
+      "select pg_advisory_unlock(71419602)::text";
   private static final String FIXTURE_TRUE_18D10C7D = "true";
   private static final String FIXTURE_CLEANUP_EXECUTEQUERY_B4A62D16 = "cleanup.executeQuery";
   private static final String FIXTURE_LOCK_RESULTCLOSE_E002B62D = "lock.resultClose";
@@ -63,7 +68,7 @@ final class LogCleanupServiceTest {
         assertEquals(CleanupStopReason.TIME_LIMIT, failure.reason());
         assertNull(failure.getCause());
         boolean durable = boundary >= 8;
-        if (durable) assertEquals("0|0|0|true", progress());
+        if (durable) assertEquals(FIXTURE_0_0_0_TRUE_9B3C5503, progress());
         else
           try (var admin = db.admin()) {
             assertEquals("0", scalar(admin, "select count(*) from schubert.log_cleanup_progress"));
@@ -77,7 +82,7 @@ final class LogCleanupServiceTest {
     try (var c = batch()) {
       assertEquals(
           0, LogCleanupService.withOwner(() -> 10_000_000_000L).execute(c, RUN).exitCode());
-      assertEquals("0|0|0|true", progress());
+      assertEquals(FIXTURE_0_0_0_TRUE_9B3C5503, progress());
     }
   }
 
@@ -128,7 +133,7 @@ final class LogCleanupServiceTest {
       assertFalse(c.isClosed());
       assertEquals(summary, new LogCleanupService(() -> 0).execute(c, RUN));
     }
-    assertEquals("0|0|0|true", progress());
+    assertEquals(FIXTURE_0_0_0_TRUE_9B3C5503, progress());
   }
 
   @Test
@@ -174,22 +179,29 @@ final class LogCleanupServiceTest {
     try (var parent = batch();
         var other = db.admin()) {
       assertEquals(
-          FIXTURE_TRUE_18D10C7D, scalar(parent, "select pg_try_advisory_lock(71419602)::text"));
+          FIXTURE_TRUE_18D10C7D,
+          scalar(parent, FIXTURE_SELECT_PG_TRY_ADVISORY_LOCK_71419602_TEX_E075F895));
       assertEquals(0, new LogCleanupService(() -> 0).execute(parent, RUN).exitCode());
-      assertEquals("false", scalar(other, "select pg_try_advisory_lock(71419602)::text"));
       assertEquals(
-          FIXTURE_TRUE_18D10C7D, scalar(parent, "select pg_advisory_unlock(71419602)::text"));
+          "false", scalar(other, FIXTURE_SELECT_PG_TRY_ADVISORY_LOCK_71419602_TEX_E075F895));
       assertEquals(
-          FIXTURE_TRUE_18D10C7D, scalar(other, "select pg_try_advisory_lock(71419602)::text"));
+          FIXTURE_TRUE_18D10C7D,
+          scalar(parent, FIXTURE_SELECT_PG_ADVISORY_UNLOCK_71419602_TEXT_F2CE8483));
+      assertEquals(
+          FIXTURE_TRUE_18D10C7D,
+          scalar(other, FIXTURE_SELECT_PG_TRY_ADVISORY_LOCK_71419602_TEX_E075F895));
       stopped(
           CleanupStopReason.LOCK_BUSY, () -> new LogCleanupService(() -> 0).execute(parent, RUN));
       assertEquals(
-          FIXTURE_TRUE_18D10C7D, scalar(other, "select pg_advisory_unlock(71419602)::text"));
+          FIXTURE_TRUE_18D10C7D,
+          scalar(other, FIXTURE_SELECT_PG_ADVISORY_UNLOCK_71419602_TEXT_F2CE8483));
       assertEquals(0, new LogCleanupService(() -> 0).execute(parent, RUN).exitCode());
       assertEquals(
-          FIXTURE_TRUE_18D10C7D, scalar(other, "select pg_try_advisory_lock(71419602)::text"));
+          FIXTURE_TRUE_18D10C7D,
+          scalar(other, FIXTURE_SELECT_PG_TRY_ADVISORY_LOCK_71419602_TEX_E075F895));
       assertEquals(
-          FIXTURE_TRUE_18D10C7D, scalar(other, "select pg_advisory_unlock(71419602)::text"));
+          FIXTURE_TRUE_18D10C7D,
+          scalar(other, FIXTURE_SELECT_PG_ADVISORY_UNLOCK_71419602_TEXT_F2CE8483));
     }
   }
 
@@ -284,7 +296,7 @@ final class LogCleanupServiceTest {
         assertTrue(c.getAutoCommit());
         assertFalse(c.isClosed());
       }
-      if (point == 3) assertEquals("0|0|0|true", progress());
+      if (point == 3) assertEquals(FIXTURE_0_0_0_TRUE_9B3C5503, progress());
     }
     reset();
     try (var c = batch()) {
@@ -366,7 +378,8 @@ final class LogCleanupServiceTest {
       try (var holder = db.admin();
           var c = batch()) {
         assertEquals(
-            FIXTURE_TRUE_18D10C7D, scalar(holder, "select pg_try_advisory_lock(71419602)::text"));
+            FIXTURE_TRUE_18D10C7D,
+            scalar(holder, FIXTURE_SELECT_PG_TRY_ADVISORY_LOCK_71419602_TEX_E075F895));
         stopped(
             CleanupStopReason.LOCK_BUSY,
             () -> new LogCleanupService(() -> 0).execute(probe.wrap(c), RUN));
@@ -379,7 +392,8 @@ final class LogCleanupServiceTest {
         assertFalse(probe.seen.containsKey(FIXTURE_CLEANUP_EXECUTEQUERY_B4A62D16));
         assertTrue(c.getAutoCommit());
         assertEquals(
-            FIXTURE_TRUE_18D10C7D, scalar(holder, "select pg_advisory_unlock(71419602)::text"));
+            FIXTURE_TRUE_18D10C7D,
+            scalar(holder, FIXTURE_SELECT_PG_ADVISORY_UNLOCK_71419602_TEXT_F2CE8483));
       }
       assertEquals("0", countLogs());
     }
@@ -734,9 +748,11 @@ final class LogCleanupServiceTest {
     // The failed borrowed connection has now been disposed; no session lock remains.
     try (var observer = db.admin()) {
       assertEquals(
-          FIXTURE_TRUE_18D10C7D, scalar(observer, "select pg_try_advisory_lock(71419602)::text"));
+          FIXTURE_TRUE_18D10C7D,
+          scalar(observer, FIXTURE_SELECT_PG_TRY_ADVISORY_LOCK_71419602_TEX_E075F895));
       assertEquals(
-          FIXTURE_TRUE_18D10C7D, scalar(observer, "select pg_advisory_unlock(71419602)::text"));
+          FIXTURE_TRUE_18D10C7D,
+          scalar(observer, FIXTURE_SELECT_PG_ADVISORY_UNLOCK_71419602_TEXT_F2CE8483));
     }
     assertEquals("0", countLogs());
   }

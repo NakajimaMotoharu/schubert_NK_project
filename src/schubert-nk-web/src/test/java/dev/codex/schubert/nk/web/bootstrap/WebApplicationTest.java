@@ -50,6 +50,7 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** PG222/PT-SCR117..119: actual PG/Flyway, broker and secured HTTP, not deployed services. */
 final class WebApplicationTest {
+  private static final String FIXTURE_SCHUBERT_NK_SESSION_3F69A002 = "SCHUBERT_NK_SESSION=";
   private static final String FIXTURE_BROKER_4F6E4F9C = "broker";
   private static final String FIXTURE_VM_0_0C76084A = "vm://0";
   private static final String FIXTURE_HTTP_127_0_0_1_B897D8EE = "http://127.0.0.1:";
@@ -95,7 +96,7 @@ final class WebApplicationTest {
             page.headers()
                 .firstValue(FIXTURE_SET_COOKIE_10F4EA2C)
                 .orElse("")
-                .startsWith("SCHUBERT_NK_SESSION="));
+                .startsWith(FIXTURE_SCHUBERT_NK_SESSION_3F69A002));
         try (var connection = database.web();
             var statement = connection.createStatement();
             var rows =
@@ -204,7 +205,7 @@ final class WebApplicationTest {
               page.headers()
                   .firstValue(FIXTURE_SET_COOKIE_10F4EA2C)
                   .orElse("")
-                  .startsWith("SCHUBERT_NK_SESSION="));
+                  .startsWith(FIXTURE_SCHUBERT_NK_SESSION_3F69A002));
           try (var connection = database.web();
               var statement = connection.createStatement();
               var rows =
@@ -341,7 +342,8 @@ final class WebApplicationTest {
         assertEquals(1, calls.get());
         assertNotNull(supplied.get());
         String cookie = page.headers().firstValue(FIXTURE_SET_COOKIE_10F4EA2C).orElseThrow();
-        String sessionId = cookie.substring("SCHUBERT_NK_SESSION=".length(), cookie.indexOf(';'));
+        String sessionId =
+            cookie.substring(FIXTURE_SCHUBERT_NK_SESSION_3F69A002.length(), cookie.indexOf(';'));
         assertNotNull(supplied.get().findById(sessionId));
       }
     } finally {
@@ -443,7 +445,8 @@ final class WebApplicationTest {
         assertEquals("schubert NK - ログイン", Jsoup.parse(page.body()).title());
         assertEquals(1, calls.get());
         String cookie = page.headers().firstValue(FIXTURE_SET_COOKIE_10F4EA2C).orElseThrow();
-        String sessionId = cookie.substring("SCHUBERT_NK_SESSION=".length(), cookie.indexOf(';'));
+        String sessionId =
+            cookie.substring(FIXTURE_SCHUBERT_NK_SESSION_3F69A002.length(), cookie.indexOf(';'));
         var session = suppliedSpring.get().findById(sessionId);
         assertNotNull(session);
         var principal =

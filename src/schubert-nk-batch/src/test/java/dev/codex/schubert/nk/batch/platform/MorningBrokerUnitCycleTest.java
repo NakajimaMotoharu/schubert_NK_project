@@ -18,26 +18,31 @@ import org.junit.jupiter.api.Test;
 
 /** SSC125 BROKERSTART001/002: independent daemon generation/intent/owner sequencing vectors. */
 final class MorningBrokerUnitCycleTest {
+  private static final String FIXTURE_ACTIVESTATE_ACTIVE_3FEE83ED = "ActiveState=active";
+  private static final String FIXTURE_SUBSTATE_RUNNING_EA94DECD = "SubState=running";
+  private static final String FIXTURE_MAINPID_43_0A61ACED = "MainPID=43";
+  private static final String FIXTURE_MAINPID_0_55E01B1A = "MainPID=0";
+  private static final String FIXTURE_RESULT_EXIT_CODE_009C3BFA = "Result=exit-code";
   private static final String FIXTURE_RETIRE_A2A9D4FF = "retire";
   private static final String FIXTURE_RETAINED_743E2854 = "retained";
 
   @Test
   void issbrokerstop001Known143IsNotAReceiptAndNeedsIndependentStoppedJournal() {
     String stopped =
-        LIVE.replace("ActiveState=active", "ActiveState=failed")
-            .replace("SubState=running", "SubState=failed")
-            .replace("MainPID=43", "MainPID=0")
+        LIVE.replace(FIXTURE_ACTIVESTATE_ACTIVE_3FEE83ED, "ActiveState=failed")
+            .replace(FIXTURE_SUBSTATE_RUNNING_EA94DECD, "SubState=failed")
+            .replace(FIXTURE_MAINPID_43_0A61ACED, FIXTURE_MAINPID_0_55E01B1A)
             .replace("ExecMainCode=0", "ExecMainCode=1")
             .replace("ExecMainStatus=0", "ExecMainStatus=143")
             .replace("ExecMainExitTimestampMonotonic=0", "ExecMainExitTimestampMonotonic=2234567")
-            .replace("Result=success", "Result=exit-code");
+            .replace("Result=success", FIXTURE_RESULT_EXIT_CODE_009C3BFA);
     assertTrue(parse(stopped).brokerStoppedNormally());
     assertTrue(
         parse(
                 stopped
                     .replace("ActiveState=failed", "ActiveState=inactive")
                     .replace("SubState=failed", "SubState=dead")
-                    .replace("Result=exit-code", "Result=success"))
+                    .replace(FIXTURE_RESULT_EXIT_CODE_009C3BFA, "Result=success"))
             .brokerStoppedNormally());
     assertFalse(parse(stopped).inactiveBaseline());
     assertTrue(parse(stopped).receiptAfter(Optional.empty()).isEmpty());
@@ -45,11 +50,11 @@ final class MorningBrokerUnitCycleTest {
         List.of(
             stopped.replace("ExecMainCode=1", "ExecMainCode=2"),
             stopped.replace("ExecMainStatus=143", "ExecMainStatus=137"),
-            stopped.replace("MainPID=0", "MainPID=43"),
+            stopped.replace(FIXTURE_MAINPID_0_55E01B1A, FIXTURE_MAINPID_43_0A61ACED),
             stopped.replace("Job=\n", "Job=12\n"),
             stopped.replace("2234567", "1234566"),
             stopped.replace("1234567", "0"),
-            stopped.replace("Result=exit-code", "Result=timeout")))
+            stopped.replace(FIXTURE_RESULT_EXIT_CODE_009C3BFA, "Result=timeout")))
       assertFalse(parse(bad).brokerStoppedNormally());
     var starts = new java.util.concurrent.atomic.AtomicInteger();
     var cycle =
@@ -98,9 +103,9 @@ final class MorningBrokerUnitCycleTest {
 
   static InspectorUnitSnapshot baseline() {
     return parse(
-        LIVE.replace("ActiveState=active", "ActiveState=inactive")
-            .replace("SubState=running", "SubState=dead")
-            .replace("MainPID=43", "MainPID=0")
+        LIVE.replace(FIXTURE_ACTIVESTATE_ACTIVE_3FEE83ED, "ActiveState=inactive")
+            .replace(FIXTURE_SUBSTATE_RUNNING_EA94DECD, "SubState=dead")
+            .replace(FIXTURE_MAINPID_43_0A61ACED, FIXTURE_MAINPID_0_55E01B1A)
             .replace(INV, "6".repeat(32)));
   }
 
@@ -183,13 +188,13 @@ final class MorningBrokerUnitCycleTest {
   void issbrokerstop001IndependentProofIsRetainedButOnlyFreshLiveIsReadiness() throws Exception {
     String prior =
         LIVE.replace(INV, "6".repeat(32))
-            .replace("ActiveState=active", "ActiveState=failed")
-            .replace("SubState=running", "SubState=failed")
-            .replace("MainPID=43", "MainPID=0")
+            .replace(FIXTURE_ACTIVESTATE_ACTIVE_3FEE83ED, "ActiveState=failed")
+            .replace(FIXTURE_SUBSTATE_RUNNING_EA94DECD, "SubState=failed")
+            .replace(FIXTURE_MAINPID_43_0A61ACED, FIXTURE_MAINPID_0_55E01B1A)
             .replace("ExecMainCode=0", "ExecMainCode=1")
             .replace("ExecMainStatus=0", "ExecMainStatus=143")
             .replace("ExecMainExitTimestampMonotonic=0", "ExecMainExitTimestampMonotonic=2234567")
-            .replace("Result=success", "Result=exit-code");
+            .replace("Result=success", FIXTURE_RESULT_EXIT_CODE_009C3BFA);
     var previous = parse(prior);
     byte[] stopped =
         BrokerJournalEvidenceTest.row(
@@ -249,9 +254,9 @@ final class MorningBrokerUnitCycleTest {
               () ->
                   fault.equals("old")
                       ? parse(
-                          LIVE.replace("ActiveState=active", "ActiveState=inactive")
-                              .replace("SubState=running", "SubState=dead")
-                              .replace("MainPID=43", "MainPID=0"))
+                          LIVE.replace(FIXTURE_ACTIVESTATE_ACTIVE_3FEE83ED, "ActiveState=inactive")
+                              .replace(FIXTURE_SUBSTATE_RUNNING_EA94DECD, "SubState=dead")
+                              .replace(FIXTURE_MAINPID_43_0A61ACED, FIXTURE_MAINPID_0_55E01B1A))
                       : baseline(),
               () -> {
                 if (fault.equals("drift") && reads[0]++ > 0) return Optional.empty();

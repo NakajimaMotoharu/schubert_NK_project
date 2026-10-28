@@ -18,6 +18,8 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** PT-IDEM-013 / PT-DB-011. SS324/332/341 independent retention and NULL regression. */
 final class MessageStoreCleanupTest {
+  private static final String FIXTURE_0_0_0_OK_B39BA730 = "0|0|0|OK";
+  private static final String FIXTURE_1_1_0_OK_A3F53FDF = "1|1|0|OK";
   private static final String FIXTURE_SENT_6C701E27 = "SENT";
   private static final UUID RUN = UUID.fromString("00000000-0000-0000-0000-000000000031");
   private static final Instant CUTOFF = Instant.parse("2026-09-07T00:00:00Z");
@@ -71,7 +73,7 @@ final class MessageStoreCleanupTest {
       backup(connection);
       outbox(connection, false, 1, FIXTURE_SENT_6C701E27, CUTOFF.minusSeconds(172800), null);
       outbox(connection, true, 2, FIXTURE_SENT_6C701E27, CUTOFF.minusSeconds(172800), null);
-      assertEquals("0|0|0|OK", cleanup(connection, 1000));
+      assertEquals(FIXTURE_0_0_0_OK_B39BA730, cleanup(connection, 1000));
       assertEquals(2, rows(connection));
     }
   }
@@ -114,7 +116,7 @@ final class MessageStoreCleanupTest {
           assertEquals(List.of(2L, 3L, 5L, 6L, 7L, 8L), ids);
         }
       }
-      assertEquals("0|0|0|OK", cleanup(connection, 1000));
+      assertEquals(FIXTURE_0_0_0_OK_B39BA730, cleanup(connection, 1000));
       assertEquals(12, rows(connection));
     }
   }
@@ -135,22 +137,22 @@ final class MessageStoreCleanupTest {
         assertEquals(1L, result.getLong(1));
       }
       connection.setAutoCommit(false);
-      assertEquals("1|1|0|OK", cleanup(connection, 1));
+      assertEquals(FIXTURE_1_1_0_OK_A3F53FDF, cleanup(connection, 1));
       assertEquals(2, rows(connection));
       connection.rollback();
       assertEquals(3, rows(connection));
-      assertEquals("1|1|0|OK", cleanup(connection, 1));
+      assertEquals(FIXTURE_1_1_0_OK_A3F53FDF, cleanup(connection, 1));
       connection.commit();
-      assertEquals("1|1|0|OK", cleanup(connection, 1));
+      assertEquals(FIXTURE_1_1_0_OK_A3F53FDF, cleanup(connection, 1));
       connection.commit();
-      assertEquals("0|0|0|OK", cleanup(connection, 1));
+      assertEquals(FIXTURE_0_0_0_OK_B39BA730, cleanup(connection, 1));
       connection.commit();
       assertEquals(1, rows(connection));
       locked.rollback();
-      assertEquals("1|1|0|OK", cleanup(connection, 1));
+      assertEquals(FIXTURE_1_1_0_OK_A3F53FDF, cleanup(connection, 1));
       connection.commit();
       assertEquals(0, rows(connection));
-      assertEquals("0|0|0|OK", cleanup(connection, 1));
+      assertEquals(FIXTURE_0_0_0_OK_B39BA730, cleanup(connection, 1));
       connection.commit();
       connection.setAutoCommit(true);
       for (int invalid : new int[] {0, 1001}) {

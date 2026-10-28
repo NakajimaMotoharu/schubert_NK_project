@@ -21,6 +21,7 @@ import org.junit.jupiter.api.Test;
 
 /** NK-OPS-001/PT-OPS-STOP-001..008; independent fixed systemd property vectors; SS341/343. */
 final class ApplicationStopGateTest {
+  private static final String FIXTURE_JOB_E68440C0 = "Job=";
   private static final String API =
       "Id=schubert-nk-api.service\nLoadState=loaded\nActiveState=inactive\nSubState=dead\nJob=\nMainPID=0\nControlPID=0\n";
   private static final String WEB =
@@ -69,11 +70,11 @@ final class ApplicationStopGateTest {
       reject(StopGateFailure.MALFORMED_STATE, API + line + "\n");
       reject(StopGateFailure.MALFORMED_STATE, API.replace(line, "Unknown" + line));
     }
-    reject(StopGateFailure.MALFORMED_STATE, API.replace("Job=", "MainPID="));
-    reject(StopGateFailure.MALFORMED_STATE, API.replace("Job=", "MainPID=0"));
-    reject(StopGateFailure.MALFORMED_STATE, API.replace("Job=", "no-equals"));
-    reject(StopGateFailure.MALFORMED_STATE, API.replace("Job=", "=empty-key"));
-    reject(StopGateFailure.MALFORMED_STATE, API.replace("Job=", "Job=x=y"));
+    reject(StopGateFailure.MALFORMED_STATE, API.replace(FIXTURE_JOB_E68440C0, "MainPID="));
+    reject(StopGateFailure.MALFORMED_STATE, API.replace(FIXTURE_JOB_E68440C0, "MainPID=0"));
+    reject(StopGateFailure.MALFORMED_STATE, API.replace(FIXTURE_JOB_E68440C0, "no-equals"));
+    reject(StopGateFailure.MALFORMED_STATE, API.replace(FIXTURE_JOB_E68440C0, "=empty-key"));
+    reject(StopGateFailure.MALFORMED_STATE, API.replace(FIXTURE_JOB_E68440C0, "Job=x=y"));
     reject(StopGateFailure.MALFORMED_STATE, API.replace("Id=", "id="));
     reject(
         StopGateFailure.MALFORMED_STATE,
@@ -105,7 +106,7 @@ final class ApplicationStopGateTest {
     String boundary = replace("Job", "x".repeat(1024 - API.length()));
     assertEquals(1024, bytes(boundary).length);
     reject(StopGateFailure.NOT_STOPPED, boundary);
-    reject(StopGateFailure.MALFORMED_STATE, boundary.replace("Job=", "Job=x"));
+    reject(StopGateFailure.MALFORMED_STATE, boundary.replace(FIXTURE_JOB_E68440C0, "Job=x"));
     assertThrows(
         NullPointerException.class, () -> UnitStateParser.requireStopped(null, bytes(API)));
     assertThrows(

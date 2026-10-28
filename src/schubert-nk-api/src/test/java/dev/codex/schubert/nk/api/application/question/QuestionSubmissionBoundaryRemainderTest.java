@@ -52,6 +52,10 @@ import org.postgresql.util.ServerErrorMessage;
 
 /** PG-D380 / PT-QST-ASUB-008..012: public process, independent wire and SQL postconditions. */
 class QuestionSubmissionBoundaryRemainderTest {
+  private static final String FIXTURE_SELECT_COUNT_FROM_SCHUBERT_QUESTIONS_9AA9E6E7 =
+      "select count(*) from schubert.questions";
+  private static final String FIXTURE_SELECT_COUNT_FROM_SCHUBERT_REQUEST_INBOX_E4FAEDDB =
+      "select count(*) from schubert.request_inbox";
   private static final String FIXTURE_PUBLIC_FIXTURE_2BAE0C98 = "Public fixture";
   private static final String FIXTURE_9000_0CDC37EC = "9000";
   @TempDir static Path root;
@@ -75,7 +79,7 @@ class QuestionSubmissionBoundaryRemainderTest {
           response(M0, new UUID(700, 3), "0000", RECEIPT, 1, NOW),
           f.service.process(
               request(FIXTURE_PUBLIC_FIXTURE_2BAE0C98, M0, TOKEN, NOW.plusSeconds(10), CONTEXT)));
-      assertEquals(1, f.h.scalar("select count(*) from schubert.questions"));
+      assertEquals(1, f.h.scalar(FIXTURE_SELECT_COUNT_FROM_SCHUBERT_QUESTIONS_9AA9E6E7));
     }
     try (var f = new Boundary()) {
       var wake = new AtomicInteger();
@@ -88,7 +92,7 @@ class QuestionSubmissionBoundaryRemainderTest {
           response(M0, new UUID(700, 3), FIXTURE_9000_0CDC37EC, "", 0, NOW),
           f.service.process(request(FIXTURE_PUBLIC_FIXTURE_2BAE0C98, M0, TOKEN, NOW, CONTEXT)));
       assertEquals(0, wake.get());
-      assertEquals(1, f.h.scalar("select count(*) from schubert.questions"));
+      assertEquals(1, f.h.scalar(FIXTURE_SELECT_COUNT_FROM_SCHUBERT_QUESTIONS_9AA9E6E7));
       assertEquals("COMPLETED", f.h.text("select processing_state from schubert.request_inbox"));
       assertEquals("PENDING", f.h.text("select status from schubert.mq_outbox"));
     }
@@ -104,7 +108,7 @@ class QuestionSubmissionBoundaryRemainderTest {
           response(M0, new UUID(700, 3), FIXTURE_9000_0CDC37EC, "", 0, NOW),
           f.service.process(request(FIXTURE_PUBLIC_FIXTURE_2BAE0C98, M0, TOKEN, NOW, CONTEXT)));
       assertEquals("SENT", f.h.text("select status from schubert.mq_outbox"));
-      assertEquals(1, f.h.scalar("select count(*) from schubert.questions"));
+      assertEquals(1, f.h.scalar(FIXTURE_SELECT_COUNT_FROM_SCHUBERT_QUESTIONS_9AA9E6E7));
     }
   }
 
@@ -122,7 +126,7 @@ class QuestionSubmissionBoundaryRemainderTest {
       assertArrayEquals(
           response(M0, new UUID(700, 1), FIXTURE_9000_0CDC37EC, "", 0, NOW),
           f.service.process(request(FIXTURE_PUBLIC_FIXTURE_2BAE0C98, M0, TOKEN, NOW, CONTEXT)));
-      assertEquals(0, f.h.scalar("select count(*) from schubert.questions"));
+      assertEquals(0, f.h.scalar(FIXTURE_SELECT_COUNT_FROM_SCHUBERT_QUESTIONS_9AA9E6E7));
       assertTrue(observed.get() > 0);
     }
     for (boolean secondary : new boolean[] {false, true})
@@ -142,7 +146,7 @@ class QuestionSubmissionBoundaryRemainderTest {
           assertArrayEquals(
               response(M0, new UUID(700, 3), FIXTURE_9000_0CDC37EC, "", 0, NOW),
               f.service.process(request(FIXTURE_PUBLIC_FIXTURE_2BAE0C98, M0, TOKEN, NOW, CONTEXT)));
-        assertEquals(1, f.h.scalar("select count(*) from schubert.questions"));
+        assertEquals(1, f.h.scalar(FIXTURE_SELECT_COUNT_FROM_SCHUBERT_QUESTIONS_9AA9E6E7));
         assertEquals(0, f.h.live.get());
       }
     try (var f = new Boundary()) {
@@ -157,7 +161,7 @@ class QuestionSubmissionBoundaryRemainderTest {
       } finally {
         Thread.interrupted();
       }
-      assertEquals(1, f.h.scalar("select count(*) from schubert.questions"));
+      assertEquals(1, f.h.scalar(FIXTURE_SELECT_COUNT_FROM_SCHUBERT_QUESTIONS_9AA9E6E7));
     }
     try (var f = new Boundary()) {
       var calls = new AtomicInteger();
@@ -165,7 +169,7 @@ class QuestionSubmissionBoundaryRemainderTest {
       assertArrayEquals(
           response(M0, new UUID(700, 3), FIXTURE_9000_0CDC37EC, "", 0, NOW),
           f.service.process(request(FIXTURE_PUBLIC_FIXTURE_2BAE0C98, M0, TOKEN, NOW, CONTEXT)));
-      assertEquals(1, f.h.scalar("select count(*) from schubert.questions"));
+      assertEquals(1, f.h.scalar(FIXTURE_SELECT_COUNT_FROM_SCHUBERT_QUESTIONS_9AA9E6E7));
       assertTrue(calls.get() >= 3);
     }
   }
@@ -210,7 +214,7 @@ class QuestionSubmissionBoundaryRemainderTest {
             preserved,
             f.h.text(
                 "select md5(response_body_encrypted)||':'||completed_at::text from schubert.request_inbox"));
-        assertEquals(1, f.h.scalar("select count(*) from schubert.questions"));
+        assertEquals(1, f.h.scalar(FIXTURE_SELECT_COUNT_FROM_SCHUBERT_QUESTIONS_9AA9E6E7));
         assertEquals(1, f.h.scalar("select count(*) from schubert.async_jobs"));
         assertEquals(1, f.h.scalar("select count(*) from schubert.mq_outbox"));
       }
@@ -228,7 +232,7 @@ class QuestionSubmissionBoundaryRemainderTest {
           () ->
               f.service.process(
                   request(FIXTURE_PUBLIC_FIXTURE_2BAE0C98, new UUID(701, 2), TOKEN, NOW, CONTEXT)));
-      assertEquals(1, f.h.scalar("select count(*) from schubert.questions"));
+      assertEquals(1, f.h.scalar(FIXTURE_SELECT_COUNT_FROM_SCHUBERT_QUESTIONS_9AA9E6E7));
       assertEquals(2, calls.get());
     }
   }
@@ -259,8 +263,8 @@ class QuestionSubmissionBoundaryRemainderTest {
                 f.service.process(
                     request(FIXTURE_PUBLIC_FIXTURE_2BAE0C98, M0, TOKEN, NOW, CONTEXT)));
         assertEquals(1, inserts.get());
-        assertEquals(0, f.h.scalar("select count(*) from schubert.questions"));
-        assertEquals(0, f.h.scalar("select count(*) from schubert.request_inbox"));
+        assertEquals(0, f.h.scalar(FIXTURE_SELECT_COUNT_FROM_SCHUBERT_QUESTIONS_9AA9E6E7));
+        assertEquals(0, f.h.scalar(FIXTURE_SELECT_COUNT_FROM_SCHUBERT_REQUEST_INBOX_E4FAEDDB));
       }
     try (var f = new Boundary()) {
       f.hook =
@@ -273,8 +277,8 @@ class QuestionSubmissionBoundaryRemainderTest {
           TemporaryInfrastructureException.class,
           () ->
               f.service.process(request(FIXTURE_PUBLIC_FIXTURE_2BAE0C98, M0, TOKEN, NOW, CONTEXT)));
-      assertEquals(0, f.h.scalar("select count(*) from schubert.questions"));
-      assertEquals(0, f.h.scalar("select count(*) from schubert.request_inbox"));
+      assertEquals(0, f.h.scalar(FIXTURE_SELECT_COUNT_FROM_SCHUBERT_QUESTIONS_9AA9E6E7));
+      assertEquals(0, f.h.scalar(FIXTURE_SELECT_COUNT_FROM_SCHUBERT_REQUEST_INBOX_E4FAEDDB));
       assertEquals(0, f.h.scalar("select count(*) from schubert.app_logs"));
     }
     try (var f = new Boundary()) {
@@ -284,7 +288,7 @@ class QuestionSubmissionBoundaryRemainderTest {
           TemporaryInfrastructureException.class,
           () ->
               f.service.process(request(FIXTURE_PUBLIC_FIXTURE_2BAE0C98, M0, TOKEN, NOW, CONTEXT)));
-      assertEquals(0, f.h.scalar("select count(*) from schubert.questions"));
+      assertEquals(0, f.h.scalar(FIXTURE_SELECT_COUNT_FROM_SCHUBERT_QUESTIONS_9AA9E6E7));
       assertEquals(0, f.h.scalar("select count(*) from schubert.async_jobs"));
     }
   }
@@ -311,8 +315,8 @@ class QuestionSubmissionBoundaryRemainderTest {
           else
             assertArrayEquals(
                 response(M0, new UUID(700, 1), "0105", "", 0, NOW), f.service.process(input));
-          assertEquals(0, f.h.scalar("select count(*) from schubert.questions"));
-          assertEquals(0, f.h.scalar("select count(*) from schubert.request_inbox"));
+          assertEquals(0, f.h.scalar(FIXTURE_SELECT_COUNT_FROM_SCHUBERT_QUESTIONS_9AA9E6E7));
+          assertEquals(0, f.h.scalar(FIXTURE_SELECT_COUNT_FROM_SCHUBERT_REQUEST_INBOX_E4FAEDDB));
         }
     for (boolean secondary : new boolean[] {false, true})
       try (var f = new Boundary()) {
@@ -334,7 +338,7 @@ class QuestionSubmissionBoundaryRemainderTest {
               assertThrows(
                   dev.codex.schubert.nk.protocol.codec.PermanentProtocolException.class,
                   () -> f.service.process(input)));
-        assertEquals(0, f.h.scalar("select count(*) from schubert.questions"));
+        assertEquals(0, f.h.scalar(FIXTURE_SELECT_COUNT_FROM_SCHUBERT_QUESTIONS_9AA9E6E7));
       }
     for (boolean extra : new boolean[] {false, true})
       try (var f = new Boundary()) {
@@ -350,8 +354,8 @@ class QuestionSubmissionBoundaryRemainderTest {
             () ->
                 f.service.process(
                     request(FIXTURE_PUBLIC_FIXTURE_2BAE0C98, M0, TOKEN, NOW, CONTEXT)));
-        assertEquals(0, f.h.scalar("select count(*) from schubert.questions"));
-        assertEquals(0, f.h.scalar("select count(*) from schubert.request_inbox"));
+        assertEquals(0, f.h.scalar(FIXTURE_SELECT_COUNT_FROM_SCHUBERT_QUESTIONS_9AA9E6E7));
+        assertEquals(0, f.h.scalar(FIXTURE_SELECT_COUNT_FROM_SCHUBERT_REQUEST_INBOX_E4FAEDDB));
       }
     for (String defect : List.of("result", "time", "question", "submitted"))
       try (var f = new Boundary()) {
@@ -385,7 +389,7 @@ class QuestionSubmissionBoundaryRemainderTest {
                 f.service.process(
                     request(
                         FIXTURE_PUBLIC_FIXTURE_2BAE0C98, new UUID(701, 2), TOKEN, NOW, CONTEXT)));
-        assertEquals(1, f.h.scalar("select count(*) from schubert.questions"));
+        assertEquals(1, f.h.scalar(FIXTURE_SELECT_COUNT_FROM_SCHUBERT_QUESTIONS_9AA9E6E7));
         assertEquals(1, f.h.scalar("select count(*) from schubert.async_jobs"));
       }
   }

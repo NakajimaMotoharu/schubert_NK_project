@@ -17,6 +17,7 @@ import org.junit.jupiter.api.Test;
 
 /** SS341/343 SSC125 BUG369/YKT290 BROKERLIVE001..004. Independent daemon literal, not authority. */
 final class ArtemisUnitSnapshotTest {
+  private static final String FIXTURE_MAINPID_123_40FF4CA3 = "MainPID=123";
   private static final String INVOCATION = "123456789abcdef08123456789abcdef";
   private static final String LIVE =
       """
@@ -62,7 +63,7 @@ final class ArtemisUnitSnapshotTest {
         parse(
             LIVE.replace("ActiveState=active", "ActiveState=inactive")
                 .replace("SubState=running", "SubState=dead")
-                .replace("MainPID=123", "MainPID=0")
+                .replace(FIXTURE_MAINPID_123_40FF4CA3, "MainPID=0")
                 .replace("ExecMainCode=0", "ExecMainCode=1")
                 .replace(
                     "ExecMainExitTimestampMonotonic=0", "ExecMainExitTimestampMonotonic=2345678"));
@@ -78,7 +79,7 @@ final class ArtemisUnitSnapshotTest {
             Map.entry("ActiveState=active", "ActiveState=activating"),
             Map.entry("SubState=running", "SubState=start"),
             Map.entry("Job=\n", "Job=1\n"),
-            Map.entry("MainPID=123", "MainPID=1"),
+            Map.entry(FIXTURE_MAINPID_123_40FF4CA3, "MainPID=1"),
             Map.entry("ControlPID=0", "ControlPID=1"),
             Map.entry("InvocationID=" + INVOCATION, "InvocationID="),
             Map.entry("ExecMainCode=0", "ExecMainCode=2"),
@@ -87,13 +88,15 @@ final class ArtemisUnitSnapshotTest {
                 "ExecMainStartTimestampMonotonic=1234567", "ExecMainStartTimestampMonotonic=0"),
             Map.entry("ExecMainExitTimestampMonotonic=0", "ExecMainExitTimestampMonotonic=2345678"),
             Map.entry("Result=success", "Result=timeout"),
-            Map.entry("MainPID=123", "MainPID=2147483648")))
+            Map.entry(FIXTURE_MAINPID_123_40FF4CA3, "MainPID=2147483648")))
       assertFalse(
           parse(LIVE.replace(mismatch.getKey(), mismatch.getValue()))
               .brokerRunningInvocation(INVOCATION));
-    assertTrue(parse(LIVE.replace("MainPID=123", "MainPID=2")).running(2, INVOCATION));
     assertTrue(
-        parse(LIVE.replace("MainPID=123", "MainPID=2147483647")).running(2147483647, INVOCATION));
+        parse(LIVE.replace(FIXTURE_MAINPID_123_40FF4CA3, "MainPID=2")).running(2, INVOCATION));
+    assertTrue(
+        parse(LIVE.replace(FIXTURE_MAINPID_123_40FF4CA3, "MainPID=2147483647"))
+            .running(2147483647, INVOCATION));
     for (var mismatch :
         Map.of(
                 "Type=simple",

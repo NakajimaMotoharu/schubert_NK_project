@@ -63,6 +63,10 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** RERUN005: independent UI wire/SQL, real API participants; transport fixture, not VM/IT/ST. */
 final class RevocationRetryCoordinatorTest {
+  private static final String FIXTURE_SELECT_COUNT_FROM_SCHUBERT_WEB_SESSION_P_3EEA0DD3 =
+      "select count(*) from schubert_web_session.pending_context_revocations";
+  private static final String FIXTURE_SELECT_COUNT_FROM_SCHUBERT_APP_LOGS_218A3BCD =
+      "select count(*) from schubert.app_logs";
   private static final String FIXTURE_0102_C967CE66 = "0102";
   private static final String FIXTURE_0000_876EEFE0 = "0000";
   private static final String FIXTURE_ACQUIRE_1585EBC6 = "acquire";
@@ -113,19 +117,17 @@ final class RevocationRetryCoordinatorTest {
         }
         assertEquals(
             expired ? 1 : 0,
-            count("select count(*) from schubert_web_session.pending_context_revocations", true));
+            count(FIXTURE_SELECT_COUNT_FROM_SCHUBERT_WEB_SESSION_P_3EEA0DD3, true));
         assertEquals(1, count("select count(*) from schubert.request_inbox", false));
-        assertEquals(1, count("select count(*) from schubert.app_logs", false));
+        assertEquals(1, count(FIXTURE_SELECT_COUNT_FROM_SCHUBERT_APP_LOGS_218A3BCD, false));
         if (expired) {
           state(1, REQUESTED.plusSeconds(35), "SESSION_INVALID");
           f.clock.set(REQUESTED.plusSeconds(35));
           f.expectedStamp = "20260908090035123";
           assertEquals(RevocationRetryCoordinator.Outcome.CONFIRMED, f.coordinator().dispatchOne());
-          assertEquals(
-              0,
-              count("select count(*) from schubert_web_session.pending_context_revocations", true));
+          assertEquals(0, count(FIXTURE_SELECT_COUNT_FROM_SCHUBERT_WEB_SESSION_P_3EEA0DD3, true));
           assertEquals(2, count("select count(*) from schubert.request_inbox", false));
-          assertEquals(2, count("select count(*) from schubert.app_logs", false));
+          assertEquals(2, count(FIXTURE_SELECT_COUNT_FROM_SCHUBERT_APP_LOGS_218A3BCD, false));
           assertNotEquals(f.ids.get(0), f.ids.get(1));
         }
         f.erased();
@@ -146,14 +148,13 @@ final class RevocationRetryCoordinatorTest {
       assertEquals(
           1,
           count("select count(*) from schubert.auth_sessions where revoke_reason='LOGOUT'", false));
-      assertEquals(1, count("select count(*) from schubert.app_logs", false));
+      assertEquals(1, count(FIXTURE_SELECT_COUNT_FROM_SCHUBERT_APP_LOGS_218A3BCD, false));
       f.loseReply = false;
       f.clock.set(REQUESTED.plusSeconds(35));
       f.expectedStamp = "20260908090035123";
       assertEquals(RevocationRetryCoordinator.Outcome.CONFIRMED, f.coordinator().dispatchOne());
-      assertEquals(
-          0, count("select count(*) from schubert_web_session.pending_context_revocations", true));
-      assertEquals(2, count("select count(*) from schubert.app_logs", false));
+      assertEquals(0, count(FIXTURE_SELECT_COUNT_FROM_SCHUBERT_WEB_SESSION_P_3EEA0DD3, true));
+      assertEquals(2, count(FIXTURE_SELECT_COUNT_FROM_SCHUBERT_APP_LOGS_218A3BCD, false));
       assertNotEquals(f.ids.get(0), f.ids.get(1));
       f.erased();
     }
@@ -229,9 +230,7 @@ final class RevocationRetryCoordinatorTest {
         f.code = failure ? FIXTURE_0102_C967CE66 : FIXTURE_0000_876EEFE0;
         f.afterReply = () -> f.clock.set(REQUESTED.plusSeconds(15));
         assertEquals(RevocationRetryCoordinator.Outcome.STALE, f.coordinator().dispatchOne());
-        assertEquals(
-            1,
-            count("select count(*) from schubert_web_session.pending_context_revocations", true));
+        assertEquals(1, count(FIXTURE_SELECT_COUNT_FROM_SCHUBERT_WEB_SESSION_P_3EEA0DD3, true));
         assertEquals(1, f.ids.size());
         f.erased();
       }
@@ -244,8 +243,7 @@ final class RevocationRetryCoordinatorTest {
       f.afterFirstClose = () -> f.clock.set(REQUESTED.plusSeconds(13));
       assertEquals(RevocationRetryCoordinator.Outcome.STALE, f.coordinator().dispatchOne());
       assertTrue(f.ids.isEmpty());
-      assertEquals(
-          1, count("select count(*) from schubert_web_session.pending_context_revocations", true));
+      assertEquals(1, count(FIXTURE_SELECT_COUNT_FROM_SCHUBERT_WEB_SESSION_P_3EEA0DD3, true));
     }
   }
 
@@ -286,9 +284,7 @@ final class RevocationRetryCoordinatorTest {
         fixed(() -> f.coordinator().dispatchOne());
         assertTrue(f.ids.isEmpty());
         assertEquals(0, f.active.get());
-        assertEquals(
-            1,
-            count("select count(*) from schubert_web_session.pending_context_revocations", true));
+        assertEquals(1, count(FIXTURE_SELECT_COUNT_FROM_SCHUBERT_WEB_SESSION_P_3EEA0DD3, true));
         if (phase.equals("commit-after") || phase.equals(FIXTURE_CLOSE_97959247)) {
           f.fault = "";
           f.clock.set(REQUESTED.plusSeconds(15));
@@ -307,9 +303,7 @@ final class RevocationRetryCoordinatorTest {
         fixed(() -> f.coordinator().dispatchOne());
         assertEquals(1, f.ids.size());
         assertEquals(0, f.active.get());
-        assertEquals(
-            1,
-            count("select count(*) from schubert_web_session.pending_context_revocations", true));
+        assertEquals(1, count(FIXTURE_SELECT_COUNT_FROM_SCHUBERT_WEB_SESSION_P_3EEA0DD3, true));
         f.erased();
       }
     }
@@ -352,9 +346,7 @@ final class RevocationRetryCoordinatorTest {
               fatal, assertThrows(AssertionError.class, () -> f.coordinator().dispatchOne()));
         assertEquals(0, f.active.get());
         assertTrue(f.ids.isEmpty());
-        assertEquals(
-            1,
-            count("select count(*) from schubert_web_session.pending_context_revocations", true));
+        assertEquals(1, count(FIXTURE_SELECT_COUNT_FROM_SCHUBERT_WEB_SESSION_P_3EEA0DD3, true));
       }
     }
     reset();
@@ -386,9 +378,8 @@ final class RevocationRetryCoordinatorTest {
       assertEquals(100, f.ids.size());
       assertEquals(100, new HashSet<>(f.ids).size());
       assertEquals(100, count("select count(*) from schubert.request_inbox", false));
-      assertEquals(100, count("select count(*) from schubert.app_logs", false));
-      assertEquals(
-          0, count("select count(*) from schubert_web_session.pending_context_revocations", true));
+      assertEquals(100, count(FIXTURE_SELECT_COUNT_FROM_SCHUBERT_APP_LOGS_218A3BCD, false));
+      assertEquals(0, count(FIXTURE_SELECT_COUNT_FROM_SCHUBERT_WEB_SESSION_P_3EEA0DD3, true));
       assertEquals(0, f.active.get());
       f.erased();
     }

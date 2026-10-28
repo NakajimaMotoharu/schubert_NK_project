@@ -43,6 +43,7 @@ import org.springframework.mock.web.MockHttpServletResponse;
 
 /** NK-WEB-001/PT-WEB-044..049; FUN-001/AUT-001..004; UI226; SS314/331/352; SSC-042. */
 class SpringWebSessionTest {
+  private static final String FIXTURE_LOGS_Q_ABC_718DB48A = "/logs?q=abc";
   private static final String FIXTURE_CSRFTOKEN_CF3CFD11 = "csrfToken";
   private static final String FIXTURE_OPERATIONTOKENS_F00C8D6B = "operationTokens";
   private static final String FIXTURE_PRINCIPAL_590C90CB = "principal";
@@ -137,10 +138,11 @@ class SpringWebSessionTest {
       assertEquals("02".repeat(32), csrf);
       session.setAttribute(FIXTURE_CSRFTOKEN_CF3CFD11, csrf);
       session.removeAttribute(FIXTURE_PRINCIPAL_590C90CB);
-      session.setAttribute(FIXTURE_SAVEDREQUEST_50131C2B, "/logs?q=abc");
+      session.setAttribute(FIXTURE_SAVEDREQUEST_50131C2B, FIXTURE_LOGS_Q_ABC_718DB48A);
       session.setAttribute(FIXTURE_OPERATIONTOKENS_F00C8D6B, SessionAttributeCodecTest.tokens(2));
       var reloaded = Objects.requireNonNull(repo.findById(originalId));
-      assertEquals("/logs?q=abc", reloaded.getAttribute(FIXTURE_SAVEDREQUEST_50131C2B));
+      assertEquals(
+          FIXTURE_LOGS_Q_ABC_718DB48A, reloaded.getAttribute(FIXTURE_SAVEDREQUEST_50131C2B));
       assertEquals(
           SessionAttributeCodecTest.tokens(2),
           reloaded.getAttribute(FIXTURE_OPERATIONTOKENS_F00C8D6B));
@@ -156,7 +158,8 @@ class SpringWebSessionTest {
       assertNotEquals(originalId, session.getId());
       assertNull(repo.findById(originalId));
       assertEquals("04".repeat(32), session.getAttribute(FIXTURE_CSRFTOKEN_CF3CFD11));
-      assertEquals("/logs?q=abc", session.getAttribute(FIXTURE_SAVEDREQUEST_50131C2B));
+      assertEquals(
+          FIXTURE_LOGS_Q_ABC_718DB48A, session.getAttribute(FIXTURE_SAVEDREQUEST_50131C2B));
       assertEquals(
           SessionAttributeCodecTest.tokens(2),
           session.getAttribute(FIXTURE_OPERATIONTOKENS_F00C8D6B));
@@ -472,7 +475,7 @@ class SpringWebSessionTest {
           first,
           (req, res) -> {
             var session = ((HttpServletRequest) req).getSession();
-            session.setAttribute(FIXTURE_SAVEDREQUEST_50131C2B, "/logs?q=abc");
+            session.setAttribute(FIXTURE_SAVEDREQUEST_50131C2B, FIXTURE_LOGS_Q_ABC_718DB48A);
             session.setAttribute(
                 FIXTURE_OPERATIONTOKENS_F00C8D6B, SessionAttributeCodecTest.tokens(2));
             ((HttpServletResponse) res).setStatus(200);
@@ -497,7 +500,8 @@ class SpringWebSessionTest {
             var session = ((HttpServletRequest) req).getSession(false);
             assertNotNull(session);
             assertEquals(original, session.getId());
-            assertEquals("/logs?q=abc", session.getAttribute(FIXTURE_SAVEDREQUEST_50131C2B));
+            assertEquals(
+                FIXTURE_LOGS_Q_ABC_718DB48A, session.getAttribute(FIXTURE_SAVEDREQUEST_50131C2B));
             session.setAttribute(FIXTURE_PRINCIPAL_590C90CB, PRINCIPAL);
             assertNotEquals(original, session.getId());
             assertEquals(PRINCIPAL, session.getAttribute(FIXTURE_PRINCIPAL_590C90CB));

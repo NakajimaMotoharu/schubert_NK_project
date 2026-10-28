@@ -46,6 +46,8 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** PT-QRY001..004/NTF001..004; literal SQL fixtures, typed expected values, no expected codec. */
 final class QuestionQueryRepositoryTest {
+  private static final String FIXTURE_SELECT_COUNT_FROM_SCHUBERT_QUESTIONS_9AA9E6E7 =
+      "select count(*) from schubert.questions";
   private static final String FIXTURE_EXECUTE_7FB37A54 = "execute";
   private static final String FIXTURE_CLOSE_97959247 = "close";
   @TempDir static Path root;
@@ -69,7 +71,7 @@ final class QuestionQueryRepositoryTest {
   void qry001ScopeSortPagingAndLiteralKeywordAreIndependent() throws Exception {
     try (var f = fixture();
         var c = read()) {
-      assertEquals(53, f.scalar("select count(*) from schubert.questions"));
+      assertEquals(53, f.scalar(FIXTURE_SELECT_COUNT_FROM_SCHUBERT_QUESTIONS_9AA9E6E7));
       var user = repository.questionSearch(c, USER, questions(1));
       assertEquals(new PagedResponseData(1, 50, 50, 1, 1, 50), user.data());
       assertEquals(51, ((QuestionSummaryRecord) user.records().getFirst()).questionId().value());
@@ -132,7 +134,7 @@ final class QuestionQueryRepositoryTest {
   void qry002StatesUnicodeSnippetAndUtcMicrosecondProjectionNeverUpdateDb() throws Exception {
     try (var f = fixture();
         var c = read()) {
-      assertEquals(53, f.scalar("select count(*) from schubert.questions"));
+      assertEquals(53, f.scalar(FIXTURE_SELECT_COUNT_FROM_SCHUBERT_QUESTIONS_9AA9E6E7));
       for (AnswerState state : AnswerState.values()) {
         var query =
             new QuestionSearchRequestData(
@@ -217,7 +219,7 @@ final class QuestionQueryRepositoryTest {
   void qry004DetailOwnerAdminDeletedAndAbsenceNeverLeak() throws Exception {
     try (var f = fixture();
         var c = read()) {
-      assertEquals(53, f.scalar("select count(*) from schubert.questions"));
+      assertEquals(53, f.scalar(FIXTURE_SELECT_COUNT_FROM_SCHUBERT_QUESTIONS_9AA9E6E7));
       assertTrue(
           repository
               .questionDetail(c, USER, new QuestionDetailRequestData(new QuestionId(52)))
@@ -328,7 +330,7 @@ final class QuestionQueryRepositoryTest {
   void qry003Ntf002NullInvalidPageAndNonReadTransactionsAreRejected() throws Exception {
     try (var f = fixture();
         var c = db.api()) {
-      assertEquals(53, f.scalar("select count(*) from schubert.questions"));
+      assertEquals(53, f.scalar(FIXTURE_SELECT_COUNT_FROM_SCHUBERT_QUESTIONS_9AA9E6E7));
       assertThrows(
           NullPointerException.class, () -> repository.questionSearch(null, USER, questions(1)));
       assertThrows(
@@ -365,7 +367,7 @@ final class QuestionQueryRepositoryTest {
   void qry005DriverProjectionShapeAndCloseFaultsCannotProduceSuccess() throws Exception {
     try (var f = fixture();
         var c = read()) {
-      assertEquals(53, f.scalar("select count(*) from schubert.questions"));
+      assertEquals(53, f.scalar(FIXTURE_SELECT_COUNT_FROM_SCHUBERT_QUESTIONS_9AA9E6E7));
       for (String fault :
           List.of(
               "total-negative",
@@ -436,7 +438,7 @@ final class QuestionQueryRepositoryTest {
   void qry027UserAndAdminHaveSeparateSqlQueryIdsWithoutRoleOrPredicate() throws Exception {
     try (var f = fixture();
         var c = read()) {
-      assertEquals(53, f.scalar("select count(*) from schubert.questions"));
+      assertEquals(53, f.scalar(FIXTURE_SELECT_COUNT_FROM_SCHUBERT_QUESTIONS_9AA9E6E7));
       var sql = new ArrayList<String>();
       var observed =
           (Connection)
@@ -469,7 +471,7 @@ final class QuestionQueryRepositoryTest {
   void qry011AllDecodedRoutesBindOriginalValuesAndBorrowReadOnlyConnection() throws Exception {
     try (var f = fixture();
         var c = read()) {
-      assertEquals(53, f.scalar("select count(*) from schubert.questions"));
+      assertEquals(53, f.scalar(FIXTURE_SELECT_COUNT_FROM_SCHUBERT_QUESTIONS_9AA9E6E7));
       for (String layout : List.of("QSSREQ01", "QSDREQ01", "NTSREQ01", "NTDREQ01")) {
         byte[] bytes = QuestionQueryRequestTest.data(layout, false);
         if (layout.contains("DREQ")) QuestionQueryRequestTest.put(bytes, 0, "000000000003");

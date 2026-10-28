@@ -20,6 +20,7 @@ import org.junit.jupiter.api.Test;
 
 /** SSC166/BUG532/YKT377 ISSCOLD001..006: independent boot absence and fresh journal vectors. */
 final class MorningNoPriorBrokerTest {
+  private static final String FIXTURE_INVOCATIONID_0041BC87 = "InvocationID=";
   private static final String FIXTURE_RETIRE_A2A9D4FF = "retire";
 
   static final class Query implements MorningPreviousBroker.Query {
@@ -123,7 +124,8 @@ final class MorningNoPriorBrokerTest {
               .replace("ActiveState=active", "ActiveState=inactive")
               .replace("SubState=running", "SubState=dead")
               .replace("MainPID=43", "MainPID=0")
-              .replace("InvocationID=" + "7".repeat(32), "InvocationID=")
+              .replace(
+                  FIXTURE_INVOCATIONID_0041BC87 + "7".repeat(32), FIXTURE_INVOCATIONID_0041BC87)
               .replace(
                   "ExecMainStartTimestampMonotonic=1234567", "ExecMainStartTimestampMonotonic=0")
               .replace(
@@ -310,12 +312,12 @@ final class MorningNoPriorBrokerTest {
             .replace("ActiveState=active", "ActiveState=inactive")
             .replace("SubState=running", "SubState=dead")
             .replace("MainPID=43", "MainPID=0")
-            .replace("InvocationID=" + "7".repeat(32), "InvocationID=")
+            .replace(FIXTURE_INVOCATIONID_0041BC87 + "7".repeat(32), FIXTURE_INVOCATIONID_0041BC87)
             .replace(
                 "ExecMainStartTimestampMonotonic=1234567", "ExecMainStartTimestampMonotonic=0");
     for (String bad :
         List.of(
-            cold.replace("InvocationID=\n", "InvocationID=" + "6".repeat(32) + "\n"),
+            cold.replace("InvocationID=\n", FIXTURE_INVOCATIONID_0041BC87 + "6".repeat(32) + "\n"),
             cold.replace(
                 "ExecMainStartTimestampMonotonic=0", "ExecMainStartTimestampMonotonic=1234567"),
             cold.replace(

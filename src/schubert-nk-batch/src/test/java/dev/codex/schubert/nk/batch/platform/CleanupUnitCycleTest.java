@@ -17,6 +17,10 @@ import org.junit.jupiter.api.Test;
 
 /** SSC117/CCYCLE001..003, literal state and ordered ports. Native acceptance is separate. */
 final class CleanupUnitCycleTest {
+  private static final String FIXTURE_RESULT_SUCCESS_C6F30111 = "Result=success";
+  private static final String FIXTURE_RESULT_EXIT_CODE_009C3BFA = "Result=exit-code";
+  private static final String FIXTURE_EXECMAINSTATUS_0_226B574B = "ExecMainStatus=0";
+  private static final String FIXTURE_EXECMAINSTATUS_30_43AE239C = "ExecMainStatus=30";
   private static final String BASELINE =
       """
       Id=schubert-nk-cleanup.service
@@ -72,8 +76,8 @@ final class CleanupUnitCycleTest {
         FRESH
             .replace("ActiveState=active", "ActiveState=failed")
             .replace("SubState=exited", "SubState=failed")
-            .replace("Result=success", "Result=exit-code")
-            .replace("ExecMainStatus=0", "ExecMainStatus=30");
+            .replace(FIXTURE_RESULT_SUCCESS_C6F30111, FIXTURE_RESULT_EXIT_CODE_009C3BFA)
+            .replace(FIXTURE_EXECMAINSTATUS_0_226B574B, FIXTURE_EXECMAINSTATUS_30_43AE239C);
     var state = new AtomicReference<>(parse(prior));
     var kernel = new AtomicReference<>(Optional.of(state.get()));
     var gate =
@@ -94,10 +98,10 @@ final class CleanupUnitCycleTest {
     assertEquals(0, gate.observeResult(before).orElseThrow().exitCode());
     for (String invalid :
         List.of(
-            prior.replace("ExecMainStatus=30", "ExecMainStatus=1"),
-            prior.replace("ExecMainStatus=30", "ExecMainStatus=70"),
+            prior.replace(FIXTURE_EXECMAINSTATUS_30_43AE239C, "ExecMainStatus=1"),
+            prior.replace(FIXTURE_EXECMAINSTATUS_30_43AE239C, "ExecMainStatus=70"),
             prior.replace("ExecMainCode=1", "ExecMainCode=2"),
-            prior.replace("Result=exit-code", "Result=timeout"),
+            prior.replace(FIXTURE_RESULT_EXIT_CODE_009C3BFA, "Result=timeout"),
             prior.replace("MainPID=0", "MainPID=123"),
             prior.replace("Job=\n", "Job=1\n"),
             prior.replace("InvocationID=11111111111111111111111111111111", "InvocationID="),
@@ -167,13 +171,15 @@ final class CleanupUnitCycleTest {
               },
               () -> {
                 events.add("start");
-                String observed = FRESH.replace("ExecMainStatus=0", "ExecMainStatus=" + code);
+                String observed =
+                    FRESH.replace(FIXTURE_EXECMAINSTATUS_0_226B574B, "ExecMainStatus=" + code);
                 if (code == 30)
                   observed =
                       observed
                           .replace("ActiveState=active", "ActiveState=failed")
                           .replace("SubState=exited", "SubState=failed")
-                          .replace("Result=success", "Result=exit-code");
+                          .replace(
+                              FIXTURE_RESULT_SUCCESS_C6F30111, FIXTURE_RESULT_EXIT_CODE_009C3BFA);
                 state.set(parse(observed));
                 return new MorningBackupUnitCycle.StartAttempt() {
                   public BackupUnitStartClient.Status status() {
@@ -240,8 +246,8 @@ final class CleanupUnitCycleTest {
         FRESH
             .replace("ActiveState=active", "ActiveState=failed")
             .replace("SubState=exited", "SubState=failed")
-            .replace("Result=success", "Result=exit-code")
-            .replace("ExecMainStatus=0", "ExecMainStatus=30");
+            .replace(FIXTURE_RESULT_SUCCESS_C6F30111, FIXTURE_RESULT_EXIT_CODE_009C3BFA)
+            .replace(FIXTURE_EXECMAINSTATUS_0_226B574B, FIXTURE_EXECMAINSTATUS_30_43AE239C);
     var state = new AtomicReference<>(parse(BASELINE));
     var kernel = new AtomicReference<>(Optional.of(state.get()));
     var gate =
@@ -260,10 +266,10 @@ final class CleanupUnitCycleTest {
     gate.requireStillPresent(rejected);
     for (String invalid :
         List.of(
-            failed.replace("ExecMainStatus=30", "ExecMainStatus=70"),
-            failed.replace("ExecMainStatus=30", "ExecMainStatus=1"),
+            failed.replace(FIXTURE_EXECMAINSTATUS_30_43AE239C, "ExecMainStatus=70"),
+            failed.replace(FIXTURE_EXECMAINSTATUS_30_43AE239C, "ExecMainStatus=1"),
             failed.replace("ExecMainCode=1", "ExecMainCode=2"),
-            failed.replace("Result=exit-code", "Result=timeout"),
+            failed.replace(FIXTURE_RESULT_EXIT_CODE_009C3BFA, "Result=timeout"),
             failed.replace("MainPID=0", "MainPID=123"),
             failed.replace(
                 "ExecMainStartTimestampMonotonic=1234567", "ExecMainStartTimestampMonotonic=0"),
@@ -300,9 +306,9 @@ final class CleanupUnitCycleTest {
     for (String invalid :
         List.of(
             FRESH.replace("ExecMainCode=1", "ExecMainCode=2"),
-            FRESH.replace("ExecMainStatus=0", "ExecMainStatus=30"),
+            FRESH.replace(FIXTURE_EXECMAINSTATUS_0_226B574B, FIXTURE_EXECMAINSTATUS_30_43AE239C),
             FRESH.replace("MainPID=0", "MainPID=123"),
-            FRESH.replace("Result=success", "Result=timeout"))) {
+            FRESH.replace(FIXTURE_RESULT_SUCCESS_C6F30111, "Result=timeout"))) {
       state.set(parse(invalid));
       kernel.set(Optional.of(state.get()));
       assertTrue(gate.observeResult(before).isEmpty());

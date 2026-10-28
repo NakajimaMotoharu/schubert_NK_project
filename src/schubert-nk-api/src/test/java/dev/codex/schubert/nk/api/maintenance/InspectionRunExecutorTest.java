@@ -38,6 +38,7 @@ import org.junit.jupiter.api.io.TempDir;
  * PT-DB-INBOX-097..104; PG-D-130; real PG, independent JCE and literal clock/SQL postconditions.
  */
 final class InspectionRunExecutorTest {
+  private static final String FIXTURE_0_0_0_TRUE_9B3C5503 = "0|0|0|true";
   @TempDir static Path root;
   private static ApiLogDatabaseFixture db;
   private static String url;
@@ -90,7 +91,7 @@ final class InspectionRunExecutorTest {
       assertEquals(
           new InspectionExecution(SUCCESS, Optional.of(progress(0, 0, true))), guarded.run(RUN));
       assertEquals(2, checked.get());
-      assertEquals("0|0|0|true", stored());
+      assertEquals(FIXTURE_0_0_0_TRUE_9B3C5503, stored());
       reset();
       AtomicInteger connections = new AtomicInteger();
       var denied =
@@ -124,7 +125,7 @@ final class InspectionRunExecutorTest {
       var result = executor(f, () -> 0).run(RUN);
       assertEquals(new InspectionExecution(SUCCESS, Optional.of(progress(0, 0, true))), result);
       assertEquals(0, result.exitCode());
-      assertEquals("0|0|0|true", stored());
+      assertEquals(FIXTURE_0_0_0_TRUE_9B3C5503, stored());
       var probe = new MaintenanceJdbcProbe();
       probe.fault = "executeQuery";
       assertEquals(
@@ -266,7 +267,7 @@ final class InspectionRunExecutorTest {
         assertTrue(Thread.interrupted());
       }
       assertEquals(1, probe.closes);
-      assertEquals("0|0|0|true", stored());
+      assertEquals(FIXTURE_0_0_0_TRUE_9B3C5503, stored());
     }
   }
 
@@ -391,7 +392,9 @@ final class InspectionRunExecutorTest {
       assertEquals(STORAGE_FAILURE, result.status());
       assertTrue(result.lastConfirmed().isEmpty());
       assertFalse(result.toString().contains("public fault"));
-      assertEquals("0|0|0|true", stored()); // DB complete is not proof that resource close passed.
+      assertEquals(
+          FIXTURE_0_0_0_TRUE_9B3C5503,
+          stored()); // DB complete is not proof that resource close passed.
     }
   }
 

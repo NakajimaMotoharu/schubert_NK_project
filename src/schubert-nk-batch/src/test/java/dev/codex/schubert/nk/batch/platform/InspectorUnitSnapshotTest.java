@@ -30,6 +30,12 @@ import org.junit.jupiter.api.Test;
 
 /** NK-OPS-001/OPS009/UI251/SS341 7.4; PG167/SSC060; UNIT001..008, 018/021. */
 final class InspectorUnitSnapshotTest {
+  private static final String FIXTURE_RESULT_SUCCESS_C6F30111 = "Result=success";
+  private static final String FIXTURE_RESULT_EXIT_CODE_009C3BFA = "Result=exit-code";
+  private static final String FIXTURE_EXECMAINSTATUS_30_43AE239C = "ExecMainStatus=30";
+  private static final String FIXTURE_EXECMAINSTATUS_0_226B574B = "ExecMainStatus=0";
+  private static final String FIXTURE_EXECMAINSTARTTIMESTAMPMONOTONIC_0_502CCA16 =
+      "ExecMainStartTimestampMonotonic=0";
   private static final String FIXTURE_123456789ABCDEF08123456789ABCDEF_8265AB15 =
       "123456789abcdef08123456789abcdef";
   private static final String FIXTURE_ACTIVESTATE_8ACAC4AA = "ActiveState";
@@ -55,8 +61,8 @@ final class InspectorUnitSnapshotTest {
               .replace(InspectorUnitSnapshot.UNIT, target.unit())
               .replace("ActiveState=active", "ActiveState=failed")
               .replace("SubState=exited", "SubState=failed")
-              .replace("Result=success", "Result=exit-code")
-              .replace("ExecMainStatus=10", "ExecMainStatus=30");
+              .replace(FIXTURE_RESULT_SUCCESS_C6F30111, FIXTURE_RESULT_EXIT_CODE_009C3BFA)
+              .replace("ExecMainStatus=10", FIXTURE_EXECMAINSTATUS_30_43AE239C);
       if (target != InspectorUnitSnapshot.Target.MORNING)
         text =
             text.replace("Type=oneshot", "Type=simple").replace("Restart=no", "Restart=on-failure");
@@ -68,18 +74,19 @@ final class InspectorUnitSnapshotTest {
           InspectorUnitSnapshot.parse(
               text.replace("ActiveState=failed", "ActiveState=inactive")
                   .replace("SubState=failed", "SubState=dead")
-                  .replace("Result=exit-code", "Result=success")
+                  .replace(FIXTURE_RESULT_EXIT_CODE_009C3BFA, FIXTURE_RESULT_SUCCESS_C6F30111)
                   .getBytes(StandardCharsets.US_ASCII),
               target);
       assertTrue(stopped.failedRootStillStoppedAfter(before));
       String cold =
           text.replace("ActiveState=failed", "ActiveState=inactive")
               .replace("SubState=failed", "SubState=dead")
-              .replace("Result=exit-code", "Result=success")
+              .replace(FIXTURE_RESULT_EXIT_CODE_009C3BFA, FIXTURE_RESULT_SUCCESS_C6F30111)
               .replace("ExecMainCode=1", "ExecMainCode=0")
-              .replace("ExecMainStatus=30", "ExecMainStatus=0")
+              .replace(FIXTURE_EXECMAINSTATUS_30_43AE239C, FIXTURE_EXECMAINSTATUS_0_226B574B)
               .replace(
-                  "ExecMainStartTimestampMonotonic=1234567", "ExecMainStartTimestampMonotonic=0")
+                  "ExecMainStartTimestampMonotonic=1234567",
+                  FIXTURE_EXECMAINSTARTTIMESTAMPMONOTONIC_0_502CCA16)
               .replace("ExecMainExitTimestampMonotonic=2345678", "ExecMainExitTimestampMonotonic=0")
               .replace("InvocationID=123456789abcdef08123456789abcdef", "InvocationID=");
       var collected = InspectorUnitSnapshot.parse(cold.getBytes(StandardCharsets.US_ASCII), target);
@@ -89,12 +96,13 @@ final class InspectorUnitSnapshotTest {
       assertFalse(collected.failedRootStillStoppedAfter(collected), "GC alone is no receipt");
       for (String partial :
           List.of(
-              cold.replace("ExecMainStatus=0", "ExecMainStatus=30"),
+              cold.replace(FIXTURE_EXECMAINSTATUS_0_226B574B, FIXTURE_EXECMAINSTATUS_30_43AE239C),
               cold.replace(
-                  "ExecMainStartTimestampMonotonic=0", "ExecMainStartTimestampMonotonic=1"),
+                  FIXTURE_EXECMAINSTARTTIMESTAMPMONOTONIC_0_502CCA16,
+                  "ExecMainStartTimestampMonotonic=1"),
               cold.replace("ExecMainExitTimestampMonotonic=0", "ExecMainExitTimestampMonotonic=1"),
               cold.replace("ExecMainCode=0", "ExecMainCode=1"),
-              cold.replace("Result=success", "Result=exit-code"),
+              cold.replace(FIXTURE_RESULT_SUCCESS_C6F30111, FIXTURE_RESULT_EXIT_CODE_009C3BFA),
               cold.replace("InvocationID=\n", "InvocationID=123456789abcdef08123456789abcdef\n")))
         assertFalse(
             InspectorUnitSnapshot.parse(partial.getBytes(StandardCharsets.US_ASCII), target)
@@ -102,16 +110,16 @@ final class InspectorUnitSnapshotTest {
       assertFalse(stopped.failedRootGeneration(FIXTURE_123456789ABCDEF08123456789ABCDEF_8265AB15));
       for (var change :
           Map.ofEntries(
-                  Map.entry("ExecMainStatus=30", "ExecMainStatus=0"),
+                  Map.entry(FIXTURE_EXECMAINSTATUS_30_43AE239C, FIXTURE_EXECMAINSTATUS_0_226B574B),
                   Map.entry("ExecMainCode=1", "ExecMainCode=2"),
-                  Map.entry("Result=exit-code", "Result=timeout"),
+                  Map.entry(FIXTURE_RESULT_EXIT_CODE_009C3BFA, "Result=timeout"),
                   Map.entry("MainPID=0", "MainPID=200"),
                   Map.entry("ControlPID=0", "ControlPID=200"),
                   Map.entry("Job=\n", "Job=1\n"),
                   Map.entry("InvocationID=123456789abcdef08123456789abcdef", "InvocationID="),
                   Map.entry(
                       "ExecMainStartTimestampMonotonic=1234567",
-                      "ExecMainStartTimestampMonotonic=0"),
+                      FIXTURE_EXECMAINSTARTTIMESTAMPMONOTONIC_0_502CCA16),
                   Map.entry(
                       "ExecMainExitTimestampMonotonic=2345678", "ExecMainExitTimestampMonotonic=1"))
               .entrySet()) {
@@ -154,7 +162,7 @@ final class InspectorUnitSnapshotTest {
         OptionalInt.of(0),
         InspectorUnitSnapshot.parse(
                 backup
-                    .replace("ExecMainStatus=10", "ExecMainStatus=0")
+                    .replace("ExecMainStatus=10", FIXTURE_EXECMAINSTATUS_0_226B574B)
                     .getBytes(StandardCharsets.US_ASCII),
                 InspectorUnitSnapshot.Target.BACKUP)
             .receiptAfter(Optional.empty()));
@@ -192,7 +200,7 @@ final class InspectorUnitSnapshotTest {
                 "ControlPID=0",
                 "ControlPID=1",
                 "ExecMainStartTimestampMonotonic=1234567",
-                "ExecMainStartTimestampMonotonic=0",
+                FIXTURE_EXECMAINSTARTTIMESTAMPMONOTONIC_0_502CCA16,
                 "ActiveState=activating",
                 "ActiveState=active",
                 "SubState=start",

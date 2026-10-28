@@ -22,6 +22,7 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** PG249/PT-BAT-284..287; SS331 §8.2/8.3,341 §9; SSC077/078/BUG237/238. */
 final class ExpiryAuditRepositoryTest {
+  private static final String FIXTURE_SUCCESS_2_0_NULL_3D355FA1 = "SUCCESS|2|0|NULL";
   private static final String FIXTURE_SUCCESS_10855C7F = "SUCCESS";
   private static final String FIXTURE_CLOSE_97959247 = "close";
   private static final String FIXTURE_SQL_SECRET_SENTINEL_1EEDE57D = "SQL_SECRET_SENTINEL";
@@ -80,7 +81,7 @@ final class ExpiryAuditRepositoryTest {
           new ExpiryAuditRepository.Snapshot(
               FIXTURE_SUCCESS_10855C7F, EXPIRY_CUTOFF, 3L, 1L, 2, 2, 0, 200, END, null, null),
           prior.audit());
-      assertEquals("SUCCESS|2|0|NULL", before);
+      assertEquals(FIXTURE_SUCCESS_2_0_NULL_3D355FA1, before);
       assertEquals(before, terminal(connection, 42));
       assertFalse(connection.getAutoCommit());
       assertFalse(connection.isClosed());
@@ -117,7 +118,7 @@ final class ExpiryAuditRepositoryTest {
         assertFalse(denied.toString().contains("INDEPENDENT_ERROR"));
         assertEquals(1, injected.get(), fault);
         assertEquals(0, live.get(), fault);
-        assertEquals("SUCCESS|2|0|NULL", terminal(connection, 42));
+        assertEquals(FIXTURE_SUCCESS_2_0_NULL_3D355FA1, terminal(connection, 42));
         assertEquals("2026-09-05 15:00:00.000500|3|1|2|2|0|200", audit(connection, 42));
         var valid =
             new ExpiryAuditRepository(connection)
@@ -272,7 +273,7 @@ final class ExpiryAuditRepositoryTest {
         assertNull(actual.getCause());
         assertFalse(actual.toString().contains(FIXTURE_SQL_SECRET_SENTINEL_1EEDE57D));
       }
-      assertEquals("SUCCESS|2|0|NULL", terminal(connection, 42));
+      assertEquals(FIXTURE_SUCCESS_2_0_NULL_3D355FA1, terminal(connection, 42));
       assertFalse(connection.isClosed());
       assertFalse(connection.getAutoCommit());
       connection.rollback();
@@ -340,7 +341,7 @@ final class ExpiryAuditRepositoryTest {
           new ExpiryAuditRepository.Snapshot(
               FIXTURE_SUCCESS_10855C7F, EXPIRY_CUTOFF, 3L, 1L, 2, 2, 0, 200, END, null, null),
           found.audit());
-      assertEquals("SUCCESS|2|0|NULL", terminal(connection, 42));
+      assertEquals(FIXTURE_SUCCESS_2_0_NULL_3D355FA1, terminal(connection, 42));
       assertThrows(
           BatchRepositoryException.class,
           () -> subject.successful(current, observed, owner, (id, time) -> current));
@@ -359,7 +360,7 @@ final class ExpiryAuditRepositoryTest {
                       })));
       assertThrows(
           NullPointerException.class, () -> subject.successful(current, observed, owner, null));
-      assertEquals("SUCCESS|2|0|NULL", terminal(connection, 42));
+      assertEquals(FIXTURE_SUCCESS_2_0_NULL_3D355FA1, terminal(connection, 42));
       assertFalse(connection.getAutoCommit());
       assertFalse(connection.isClosed());
       connection.rollback();
@@ -408,7 +409,7 @@ final class ExpiryAuditRepositoryTest {
       assertThrows(
           BatchRepositoryException.class,
           () -> repo.finish(attempt, stage, END.plusSeconds(1), 1L, SUCCESS));
-      assertEquals("SUCCESS|2|0|NULL", terminal(parent, attempt.id()));
+      assertEquals(FIXTURE_SUCCESS_2_0_NULL_3D355FA1, terminal(parent, attempt.id()));
     }
   }
 

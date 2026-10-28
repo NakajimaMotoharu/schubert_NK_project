@@ -16,6 +16,8 @@ import org.junit.jupiter.api.Test;
 
 /** EREQ001..004 literal independent NKEXPIRY1 byte oracle, SSC111. No native authority claim. */
 final class ExpiryWorkerRequestTest {
+  private static final String FIXTURE_PRIOR_ENDED_2026_09_30T00_00_02Z_F2FEAC16 =
+      "prior_ended=2026-09-30T00:00:02Z";
   static final String GOLDEN =
       """
       NKEXPIRY1
@@ -183,12 +185,14 @@ final class ExpiryWorkerRequestTest {
     for (String bad :
         List.of(
             SKIP_GOLDEN.replace(
-                "prior_ended=2026-09-30T00:00:02Z", "prior_ended=2026-09-30T00:00:02.000000001Z"),
+                FIXTURE_PRIOR_ENDED_2026_09_30T00_00_02Z_F2FEAC16,
+                "prior_ended=2026-09-30T00:00:02.000000001Z"),
             SKIP_GOLDEN.replace(
                 "prior_started=2026-09-30T00:00:01Z",
                 "prior_started=2026-09-30T00:00:01.000000001Z"),
             SKIP_GOLDEN.replace(
-                "prior_ended=2026-09-30T00:00:02Z", "prior_ended=+10000-01-01T00:00:00Z"),
+                FIXTURE_PRIOR_ENDED_2026_09_30T00_00_02Z_F2FEAC16,
+                "prior_ended=+10000-01-01T00:00:00Z"),
             SKIP_GOLDEN.replace("prior_step_id=42", "prior_step_id=1000000000000"),
             SKIP_GOLDEN.replace("prior_attempt=1", "prior_attempt=100"))) {
       byte[] owned = bad.getBytes(StandardCharsets.US_ASCII);
@@ -330,9 +334,11 @@ final class ExpiryWorkerRequestTest {
             SKIP_GOLDEN.replace(
                 "prior_started=2026-09-30T00:00:01Z", "prior_started=2026-09-29T00:00:01Z"),
             SKIP_GOLDEN.replace(
-                "prior_ended=2026-09-30T00:00:02Z", "prior_ended=2026-09-30T00:00:04Z"),
+                FIXTURE_PRIOR_ENDED_2026_09_30T00_00_02Z_F2FEAC16,
+                "prior_ended=2026-09-30T00:00:04Z"),
             SKIP_GOLDEN.replace(
-                "prior_ended=2026-09-30T00:00:02Z", "prior_ended=2026-09-30T00:00:00Z"),
+                FIXTURE_PRIOR_ENDED_2026_09_30T00_00_02Z_F2FEAC16,
+                "prior_ended=2026-09-30T00:00:00Z"),
             SKIP_GOLDEN.replace("prior_started=", "unknown="),
             SKIP_GOLDEN.replace("prior_attempt=1\n", ""),
             SKIP_GOLDEN + "\n",

@@ -46,6 +46,11 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** NK-BAT-001/OPS009/DAT009/UI251/SS331 3.14/332/341; SSC057/PG164; BAT170..177. */
 final class StepCleanupServiceTest {
+  private static final String FIXTURE_RUNNING_1_1_0_0_TRUE_993DDCF0 = "RUNNING|1|1|0|0|true";
+  private static final String FIXTURE_RUNNING_5380B208 = "RUNNING|";
+  private static final String FIXTURE_0_0_TRUE_F7C04945 = "|0|0|true";
+  private static final String FIXTURE_SELECT_COUNT_FROM_SCHUBERT_QUESTIONS_WHE_A7492FBD =
+      "select count(*) from schubert.questions where id=2";
   private static final String FIXTURE_CONNECTION_ROLLBACK_9F978A8C = "connection.rollback";
   private static final String FIXTURE_CONNECTION_SETAUTOCOMMIT_D9B0AF8D =
       "connection.setAutoCommit";
@@ -79,7 +84,8 @@ final class StepCleanupServiceTest {
         assertFalse(failure.toString().contains("PRIVATE_OWNER"));
         boolean durable = boundary >= 9;
         assertEquals(
-            durable ? "RUNNING|1|1|0|0|true" : "RUNNING|0|0|0|0|true", totals(admin, 90011));
+            durable ? FIXTURE_RUNNING_1_1_0_0_TRUE_993DDCF0 : "RUNNING|0|0|0|0|true",
+            totals(admin, 90011));
         assertEquals(durable ? 1 : 0, probe.commits);
         if (durable) assertEquals(0, probe.rollbacks);
         assertEquals(0, probe.closes);
@@ -92,7 +98,7 @@ final class StepCleanupServiceTest {
           StepCleanupService.withOwner(() -> 10_000_000_000L)
               .execute(c, attempt(CleanupKind.QUESTIONS), CleanupKind.QUESTIONS);
       assertEquals(new CleanupCounts(1, 1, 0), result.after());
-      assertEquals("RUNNING|1|1|0|0|true", totals(admin, 90011));
+      assertEquals(FIXTURE_RUNNING_1_1_0_0_TRUE_993DDCF0, totals(admin, 90011));
     }
   }
 
@@ -204,7 +210,8 @@ final class StepCleanupServiceTest {
         assertTrue(s.complete());
         assertFalse(s.deferred());
         assertEquals(
-            "RUNNING|" + total[i] + "|" + total[i] + "|0|0|true", totals(admin, attempt(k).id()));
+            FIXTURE_RUNNING_5380B208 + total[i] + "|" + total[i] + FIXTURE_0_0_TRUE_F7C04945,
+            totals(admin, attempt(k).id()));
         assertEquals(inventory(2), p.seen);
         p.closed();
         assertTrue(c.getAutoCommit());
@@ -311,7 +318,7 @@ final class StepCleanupServiceTest {
         assertEquals(new CleanupCounts(0, 0, 0), s.callCounts());
         assertEquals(inventory(1), p.seen);
         p.closed();
-        assertEquals("1", query(admin, "select count(*) from schubert.questions where id=2"));
+        assertEquals("1", query(admin, FIXTURE_SELECT_COUNT_FROM_SCHUBERT_QUESTIONS_WHE_A7492FBD));
       } finally {
         sql(admin, "drop table public.pg164_service_fk");
       }
@@ -327,7 +334,7 @@ final class StepCleanupServiceTest {
             () ->
                 new StepCleanupService(() -> 0)
                     .execute(p.wrap(c), attempt(CleanupKind.QUESTIONS), CleanupKind.QUESTIONS));
-        assertEquals("RUNNING|1|1|0|0|true", totals(admin, 90011));
+        assertEquals(FIXTURE_RUNNING_1_1_0_0_TRUE_993DDCF0, totals(admin, 90011));
         p.closed();
       }
     }
@@ -363,12 +370,12 @@ final class StepCleanupServiceTest {
           p.closed();
           long committed = committedBeforeFault(e.getKey(), i);
           assertEquals(
-              "RUNNING|" + committed + "|" + committed + "|0|0|true",
+              FIXTURE_RUNNING_5380B208 + committed + "|" + committed + FIXTURE_0_0_TRUE_F7C04945,
               totals(admin, 90011),
               e.getKey() + ":" + i);
           assertEquals(
               Long.toString(1 - committed),
-              query(admin, "select count(*) from schubert.questions where id=2"));
+              query(admin, FIXTURE_SELECT_COUNT_FROM_SCHUBERT_QUESTIONS_WHE_A7492FBD));
           cases++;
         }
       }
@@ -387,7 +394,7 @@ final class StepCleanupServiceTest {
           () ->
               new StepCleanupService(() -> 0)
                   .execute(p.wrap(c), attempt(CleanupKind.QUESTIONS), CleanupKind.QUESTIONS));
-      assertEquals("RUNNING|1|1|0|0|true", totals(admin, 90011));
+      assertEquals(FIXTURE_RUNNING_1_1_0_0_TRUE_993DDCF0, totals(admin, 90011));
       p.closed();
       var resumed =
           new StepCleanupService(() -> 0)
@@ -435,7 +442,9 @@ final class StepCleanupServiceTest {
           Thread.interrupted();
         }
         long n = point <= 3 ? 0 : 1;
-        assertEquals("RUNNING|" + n + "|" + n + "|0|0|true", totals(admin, 90011));
+        assertEquals(
+            FIXTURE_RUNNING_5380B208 + n + "|" + n + FIXTURE_0_0_TRUE_F7C04945,
+            totals(admin, 90011));
         assertTrue(c.getAutoCommit());
         assertFalse(c.isClosed());
       }
@@ -466,7 +475,9 @@ final class StepCleanupServiceTest {
                 new StepCleanupService(time)
                     .execute(c, attempt(CleanupKind.QUESTIONS), CleanupKind.QUESTIONS));
         long n = at <= 3 ? 0 : 1;
-        assertEquals("RUNNING|" + n + "|" + n + "|0|0|true", totals(admin, 90011));
+        assertEquals(
+            FIXTURE_RUNNING_5380B208 + n + "|" + n + FIXTURE_0_0_TRUE_F7C04945,
+            totals(admin, 90011));
         assertTrue(c.getAutoCommit());
       }
     }
@@ -518,7 +529,7 @@ final class StepCleanupServiceTest {
         } finally {
           Thread.interrupted();
         }
-        assertEquals("RUNNING|1|1|0|0|true", totals(admin, 90011));
+        assertEquals(FIXTURE_RUNNING_1_1_0_0_TRUE_993DDCF0, totals(admin, 90011));
         assertTrue(c.getAutoCommit());
       }
     }
@@ -547,7 +558,9 @@ final class StepCleanupServiceTest {
             () ->
                 new StepCleanupService(() -> 0)
                     .execute(p.wrap(c), attempt(CleanupKind.QUESTIONS), CleanupKind.QUESTIONS));
-        assertEquals("RUNNING|" + changed + "|" + changed + "|0|0|true", totals(admin, 90011));
+        assertEquals(
+            FIXTURE_RUNNING_5380B208 + changed + "|" + changed + FIXTURE_0_0_TRUE_F7C04945,
+            totals(admin, 90011));
         assertEquals(1, p.seen.get(FIXTURE_CONNECTION_ROLLBACK_9F978A8C));
         p.closed();
       }
@@ -563,7 +576,7 @@ final class StepCleanupServiceTest {
             () ->
                 new StepCleanupService(() -> 0)
                     .execute(c, attempt(CleanupKind.QUESTIONS), CleanupKind.QUESTIONS));
-        assertEquals("1", query(admin, "select count(*) from schubert.questions where id=2"));
+        assertEquals("1", query(admin, FIXTURE_SELECT_COUNT_FROM_SCHUBERT_QUESTIONS_WHE_A7492FBD));
         assertEquals(
             "RUNNING|9223372036854775807|9223372036854775807|0|0|true", totals(admin, 90011));
         sql(admin, "delete from schubert.questions where id=2");
@@ -719,12 +732,14 @@ final class StepCleanupServiceTest {
                 }
               });
       assertEquals(CleanupStopReason.DATABASE_FAILURE, competing.get(5, TimeUnit.SECONDS));
-      assertEquals("1", query(admin, "select count(*) from schubert.questions where id=2"));
+      assertEquals("1", query(admin, FIXTURE_SELECT_COUNT_FROM_SCHUBERT_QUESTIONS_WHE_A7492FBD));
       for (int i = 0; i < KINDS.size(); i++) {
         var k = KINDS.get(i);
         var s = new StepCleanupService(() -> 0).execute(c, attempt(k), k);
         String actual = totals(admin, attempt(k).id());
-        assertEquals("RUNNING|" + totals[i] + "|" + totals[i] + "|0|0|true", actual);
+        assertEquals(
+            FIXTURE_RUNNING_5380B208 + totals[i] + "|" + totals[i] + FIXTURE_0_0_TRUE_F7C04945,
+            actual);
         assertTrue(s.complete());
         result.append(k.name()).append('=').append(actual).append('\n');
       }

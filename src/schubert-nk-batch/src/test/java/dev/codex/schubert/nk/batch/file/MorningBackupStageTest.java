@@ -26,6 +26,8 @@ import org.junit.jupiter.api.Test;
 
 /** NK-OPS-001/OPS009/BAK001/UI251/SS341/343/SSC089/092/094/104/105; MBSTAGE001-004. */
 final class MorningBackupStageTest {
+  private static final String FIXTURE_M_A_DB_ORIGINAL_ENTER_INVALID_FA4E0930 =
+      "M/A/DB/original-enter;INVALID";
   private static final String FIXTURE_BOTH_BACKUP_BEGINS_COMMITTED_AF100AAF =
       "both-backup-begins-committed";
   private static final String FIXTURE_M_A_DB_ORIGINAL_CLOSE_92A6AD74 = "M/A/DB/original-close";
@@ -95,7 +97,7 @@ final class MorningBackupStageTest {
         assertTrue(execute.call());
         assertEquals(
             List.of(
-                "M/A/DB/original-enter;INVALID",
+                FIXTURE_M_A_DB_ORIGINAL_ENTER_INVALID_FA4E0930,
                 FIXTURE_BOTH_BACKUP_BEGINS_COMMITTED_AF100AAF,
                 "request",
                 "same-epoch-work",
@@ -104,7 +106,9 @@ final class MorningBackupStageTest {
       } else {
         assertThrows(IOException.class, execute::call);
         assertEquals(
-            List.of("M/A/DB/original-enter;INVALID", FIXTURE_M_A_DB_ORIGINAL_CLOSE_92A6AD74),
+            List.of(
+                FIXTURE_M_A_DB_ORIGINAL_ENTER_INVALID_FA4E0930,
+                FIXTURE_M_A_DB_ORIGINAL_CLOSE_92A6AD74),
             events);
       }
     }
@@ -123,7 +127,7 @@ final class MorningBackupStageTest {
     @Override
     public <T> T execute(MorningNewRunAdmission.OwnedContinuation<T> continuation)
         throws IOException {
-      events.add("M/A/DB/original-enter;INVALID");
+      events.add(FIXTURE_M_A_DB_ORIGINAL_ENTER_INVALID_FA4E0930);
       held.set(true);
       try {
         return continuation.execute(STATE, database);
@@ -203,7 +207,7 @@ final class MorningBackupStageTest {
     assertFalse(scope.held.get());
     assertEquals(
         List.of(
-            "M/A/DB/original-enter;INVALID",
+            FIXTURE_M_A_DB_ORIGINAL_ENTER_INVALID_FA4E0930,
             FIXTURE_BOTH_BACKUP_BEGINS_COMMITTED_AF100AAF,
             FIXTURE_REQUEST_PUBLISHED_B66E103F,
             "worker-boundary",
@@ -246,7 +250,7 @@ final class MorningBackupStageTest {
                     (request, begins) -> fail("no worker"))));
     assertEquals(
         List.of(
-            "M/A/DB/original-enter;INVALID",
+            FIXTURE_M_A_DB_ORIGINAL_ENTER_INVALID_FA4E0930,
             FIXTURE_BOTH_BACKUP_BEGINS_COMMITTED_AF100AAF,
             FIXTURE_M_A_DB_ORIGINAL_CLOSE_92A6AD74),
         events);
@@ -267,7 +271,7 @@ final class MorningBackupStageTest {
                 (request, begins) -> fail("no worker")));
     assertEquals(
         List.of(
-            "M/A/DB/original-enter;INVALID",
+            FIXTURE_M_A_DB_ORIGINAL_ENTER_INVALID_FA4E0930,
             FIXTURE_BOTH_BACKUP_BEGINS_COMMITTED_AF100AAF,
             FIXTURE_PUBLICATION_REFUSED_38D9B6DA,
             FIXTURE_M_A_DB_ORIGINAL_CLOSE_92A6AD74),
@@ -338,7 +342,7 @@ final class MorningBackupStageTest {
     assertFalse(scope.held.get());
     assertEquals(
         List.of(
-            "M/A/DB/original-enter;INVALID",
+            FIXTURE_M_A_DB_ORIGINAL_ENTER_INVALID_FA4E0930,
             FIXTURE_BOTH_BACKUP_BEGINS_COMMITTED_AF100AAF,
             FIXTURE_REQUEST_PUBLISHED_B66E103F,
             "owned-worker-boundary",
@@ -414,7 +418,7 @@ final class MorningBackupStageTest {
     assertFalse(scope.held.get());
     assertEquals(
         List.of(
-            "M/A/DB/original-enter;INVALID",
+            FIXTURE_M_A_DB_ORIGINAL_ENTER_INVALID_FA4E0930,
             FIXTURE_BOTH_BACKUP_BEGINS_COMMITTED_AF100AAF,
             FIXTURE_PUBLICATION_REFUSED_38D9B6DA,
             FIXTURE_M_A_DB_ORIGINAL_CLOSE_92A6AD74),

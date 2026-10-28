@@ -26,6 +26,9 @@ import org.junit.jupiter.api.Test;
 
 /** SS342/SSC178/CADDY455: literal manager/kernel/HTTP values, no native authority. */
 final class MorningCaddyReadinessTest {
+  private static final String FIXTURE_STATUS_0_0_FCBA6B28 = "status=0/0";
+  private static final String FIXTURE_CODE_EXITED_611579B5 = "code=exited";
+  private static final String FIXTURE_PID_43_C94D5426 = "pid=43";
   private static final String FIXTURE_MAINPID_D7C01CF7 = "MainPID";
   private static final String FIXTURE_EXECMAINCODE_02C974D2 = "ExecMainCode";
   private static final String FIXTURE_EXECMAINEXITTIMESTAMPMONOTONIC_C1411C27 =
@@ -251,13 +254,13 @@ final class MorningCaddyReadinessTest {
     m.put(FIXTURE_EXECMAINEXITTIMESTAMPMONOTONIC_C1411C27, "2000000");
     m.put(
         FIXTURE_EXECSTARTPRE_B16D3253,
-        m.get(FIXTURE_EXECSTARTPRE_B16D3253).replace("status=0/0", "status=0"));
+        m.get(FIXTURE_EXECSTARTPRE_B16D3253).replace(FIXTURE_STATUS_0_0_FCBA6B28, "status=0"));
     m.put(
         FIXTURE_EXECSTART_CFCC28D6,
         m.get(FIXTURE_EXECSTART_CFCC28D6)
             .replace("stop_time=[n/a]", "stop_time=[Sun 2026-10-04 19:01:00 JST]")
-            .replace("code=(null)", "code=exited")
-            .replace("status=0/0", "status=0"));
+            .replace("code=(null)", FIXTURE_CODE_EXITED_611579B5)
+            .replace(FIXTURE_STATUS_0_0_FCBA6B28, "status=0"));
     return m;
   }
 
@@ -305,7 +308,7 @@ final class MorningCaddyReadinessTest {
               "path=/tmp/caddy",
               "ignore_errors=yes",
               "pid=1",
-              "code=exited",
+              FIXTURE_CODE_EXITED_611579B5,
               "status=1/FAILURE",
               "start_time=[Mon 2026-10-05 13:00:00 JST]")) {
         var altered = normalHistory();
@@ -321,7 +324,9 @@ final class MorningCaddyReadinessTest {
                         ? "pid=0"
                         : bad.startsWith("code=")
                             ? "code=(null)"
-                            : bad.startsWith("status=") ? "status=0/0" : "start_time=[n/a]";
+                            : bad.startsWith("status=")
+                                ? FIXTURE_STATUS_0_0_FCBA6B28
+                                : "start_time=[n/a]";
         altered.put(key, entry.replace(expectedPart, bad));
         assertThrows(IOException.class, () -> MorningCaddyReadiness.cold(altered), key + bad);
       }
@@ -380,13 +385,14 @@ final class MorningCaddyReadinessTest {
         FIXTURE_77777777777777777777777777777777_300EBD76, MorningCaddyReadiness.cold(bound));
     var min = normalHistory();
     min.put(
-        FIXTURE_EXECSTART_CFCC28D6, min.get(FIXTURE_EXECSTART_CFCC28D6).replace("pid=43", "pid=2"));
+        FIXTURE_EXECSTART_CFCC28D6,
+        min.get(FIXTURE_EXECSTART_CFCC28D6).replace(FIXTURE_PID_43_C94D5426, "pid=2"));
     assertEquals(
         FIXTURE_77777777777777777777777777777777_300EBD76, MorningCaddyReadiness.cold(min));
     var max = normalHistory();
     max.put(
         FIXTURE_EXECSTART_CFCC28D6,
-        max.get(FIXTURE_EXECSTART_CFCC28D6).replace("pid=43", "pid=2147483647"));
+        max.get(FIXTURE_EXECSTART_CFCC28D6).replace(FIXTURE_PID_43_C94D5426, "pid=2147483647"));
     assertEquals(
         FIXTURE_77777777777777777777777777777777_300EBD76, MorningCaddyReadiness.cold(max));
   }
@@ -433,7 +439,9 @@ final class MorningCaddyReadinessTest {
         String old = m.get(key);
         String replaced =
             bad.startsWith("pid=")
-                ? old.replace(key.equals(FIXTURE_EXECSTARTPRE_B16D3253) ? "pid=42" : "pid=43", bad)
+                ? old.replace(
+                    key.equals(FIXTURE_EXECSTARTPRE_B16D3253) ? "pid=42" : FIXTURE_PID_43_C94D5426,
+                    bad)
                 : bad.startsWith("start_time")
                     ? old.replace(
                         key.equals(FIXTURE_EXECSTARTPRE_B16D3253)
@@ -446,7 +454,9 @@ final class MorningCaddyReadinessTest {
                                 ? "stop_time=[Sun 2026-10-04 19:00:01 JST]"
                                 : "stop_time=[Sun 2026-10-04 19:01:00 JST]",
                             bad)
-                        : old.replace(bad.startsWith("status") ? "status=0" : "code=exited", bad);
+                        : old.replace(
+                            bad.startsWith("status") ? "status=0" : FIXTURE_CODE_EXITED_611579B5,
+                            bad);
         m.put(key, replaced);
         assertThrows(IOException.class, () -> MorningCaddyReadiness.cold(m), key + bad);
       }
@@ -562,7 +572,8 @@ final class MorningCaddyReadinessTest {
       var m = values();
       m.put(
           FIXTURE_EXECSTARTPRE_B16D3253,
-          m.get(FIXTURE_EXECSTARTPRE_B16D3253).replace("status=0/0", "status=" + status));
+          m.get(FIXTURE_EXECSTARTPRE_B16D3253)
+              .replace(FIXTURE_STATUS_0_0_FCBA6B28, "status=" + status));
       MorningCaddyReadiness.profile(m);
       var f = new Fixture();
       f.manager = m;
@@ -573,7 +584,8 @@ final class MorningCaddyReadinessTest {
       var m = values();
       m.put(
           FIXTURE_EXECSTARTPRE_B16D3253,
-          m.get(FIXTURE_EXECSTARTPRE_B16D3253).replace("status=0/0", "status=" + status));
+          m.get(FIXTURE_EXECSTARTPRE_B16D3253)
+              .replace(FIXTURE_STATUS_0_0_FCBA6B28, "status=" + status));
       assertThrows(IOException.class, () -> MorningCaddyReadiness.profile(m), status);
     }
   }
@@ -633,7 +645,7 @@ final class MorningCaddyReadinessTest {
         f.manager.put(FIXTURE_MAINPID_D7C01CF7, "44");
         f.manager.put(
             FIXTURE_EXECSTART_CFCC28D6,
-            f.manager.get(FIXTURE_EXECSTART_CFCC28D6).replace("pid=43", "pid=44"));
+            f.manager.get(FIXTURE_EXECSTART_CFCC28D6).replace(FIXTURE_PID_43_C94D5426, "pid=44"));
       }
       assertThrows(IOException.class, observer::ready, drift);
       assertEquals(
@@ -682,7 +694,9 @@ final class MorningCaddyReadinessTest {
     var changed = values();
     changed.put(
         FIXTURE_EXECSTART_CFCC28D6,
-        changed.get(FIXTURE_EXECSTART_CFCC28D6).replace("status=0/0", "status=1/FAILURE"));
+        changed
+            .get(FIXTURE_EXECSTART_CFCC28D6)
+            .replace(FIXTURE_STATUS_0_0_FCBA6B28, "status=1/FAILURE"));
     assertThrows(IOException.class, () -> MorningCaddyReadiness.profile(changed));
   }
 
@@ -717,8 +731,10 @@ final class MorningCaddyReadinessTest {
               ? source.replace("start_time=[Sun 2026-10-04 19:00:00 JST]", mutation)
               : source.replace(
                   mutation.startsWith("status")
-                      ? "status=0/0"
-                      : mutation.startsWith("ignore") ? "ignore_errors=no" : "code=exited",
+                      ? FIXTURE_STATUS_0_0_FCBA6B28
+                      : mutation.startsWith("ignore")
+                          ? "ignore_errors=no"
+                          : FIXTURE_CODE_EXITED_611579B5,
                   mutation));
       assertThrows(IOException.class, () -> MorningCaddyReadiness.profile(m));
     }

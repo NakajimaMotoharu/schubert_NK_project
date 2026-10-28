@@ -27,6 +27,7 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** CFDB001..002: isolated real PostgreSQL with independent SQL/full 14-column postconditions. */
 final class BackupFailureSnapshotTest {
+  private static final String FIXTURE_SELECT_ID_RUN_ID_E5BFF0EB = "select id,run_id,";
   @TempDir static Path root;
   static BatchDatabaseFixture db;
   private static final BatchRun RUN =
@@ -136,7 +137,7 @@ final class BackupFailureSnapshotTest {
             cfdb2916Proxy(
                 actual,
                 (sql, column, observed) -> {
-                  if (sql.startsWith("select id,run_id,") && column.equals(fault)) {
+                  if (sql.startsWith(FIXTURE_SELECT_ID_RUN_ID_E5BFF0EB) && column.equals(fault)) {
                     injected.incrementAndGet();
                     return null;
                   }
@@ -230,7 +231,7 @@ final class BackupFailureSnapshotTest {
               if (!method.getName().equals("prepareStatement")) return observed;
               var sql = (String) args[0];
               var statement = (PreparedStatement) observed;
-              if (sql.startsWith("select id,run_id,") && fault.equals("STATEMENT")) {
+              if (sql.startsWith(FIXTURE_SELECT_ID_RUN_ID_E5BFF0EB) && fault.equals("STATEMENT")) {
                 statement.close();
                 return null;
               }
@@ -241,7 +242,7 @@ final class BackupFailureSnapshotTest {
                     var value = cfdb2916Invoke(called, statement, input);
                     if (!called.getName().equals("executeQuery")) return value;
                     var rows = (ResultSet) value;
-                    if (sql.startsWith("select id,run_id,") && fault.equals("ROWS")) {
+                    if (sql.startsWith(FIXTURE_SELECT_ID_RUN_ID_E5BFF0EB) && fault.equals("ROWS")) {
                       rows.close();
                       return null;
                     }
@@ -251,7 +252,7 @@ final class BackupFailureSnapshotTest {
                         (unusedRows, read, values) -> {
                           var cell = cfdb2916Invoke(read, rows, values);
                           if (fault.equals("EXTRA_ROW")) {
-                            if (sql.startsWith("select id,run_id,")
+                            if (sql.startsWith(FIXTURE_SELECT_ID_RUN_ID_E5BFF0EB)
                                 && read.getName().equals("next"))
                               return projection.read(sql, "__next__", cell);
                             return cell;

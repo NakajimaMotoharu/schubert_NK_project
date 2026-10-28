@@ -15,6 +15,7 @@ import org.junit.jupiter.api.Test;
 
 /** SS341/343 fixed 18-field vectors; no real Unit start or fabricated kernel acceptance. */
 final class BackupUnitReceiptGateTest {
+  private static final String FIXTURE_EXECMAINSTATUS_36758074 = "ExecMainStatus=";
   private static final String FIXTURE_ACTIVE_DB0FB2BF = "active";
   private static final String FIXTURE_FAILED_33D04BD7 = "failed";
   private static final String FIXTURE_EXITED_3D0FE3B1 = "exited";
@@ -97,7 +98,7 @@ final class BackupUnitReceiptGateTest {
       String retained =
           cold.replace("InvocationID=\n", "InvocationID=" + FRESH + "\n")
               .replace("ExecMainCode=0", "ExecMainCode=1")
-              .replace("ExecMainStatus=0", "ExecMainStatus=" + code)
+              .replace("ExecMainStatus=0", FIXTURE_EXECMAINSTATUS_36758074 + code)
               .replace(
                   "ExecMainStartTimestampMonotonic=0", "ExecMainStartTimestampMonotonic=1234567")
               .replace(
@@ -106,7 +107,9 @@ final class BackupUnitReceiptGateTest {
           List.of(
               retained.replace(FRESH, OTHER),
               retained.replace("ExecMainCode=1", "ExecMainCode=2"),
-              retained.replace("ExecMainStatus=" + code, "ExecMainStatus=" + (code + 1)),
+              retained.replace(
+                  FIXTURE_EXECMAINSTATUS_36758074 + code,
+                  FIXTURE_EXECMAINSTATUS_36758074 + (code + 1)),
               retained.replace(
                   "ExecMainStartTimestampMonotonic=1234567",
                   "ExecMainStartTimestampMonotonic=1234568"),
@@ -207,7 +210,7 @@ final class BackupUnitReceiptGateTest {
             + "ExecMainCode="
             + code
             + "\n"
-            + "ExecMainStatus="
+            + FIXTURE_EXECMAINSTATUS_36758074
             + status
             + "\n"
             + "ExecMainStartTimestampMonotonic=1234567\n"

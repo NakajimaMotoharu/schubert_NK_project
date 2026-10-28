@@ -55,6 +55,7 @@ import org.postgresql.util.PSQLException;
  */
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 final class DatabaseMigrationTest {
+  private static final String FIXTURE_SELECT_FROM_06A9ABF0 = "select * from ";
   private static final String FIXTURE_SCHUBERT_WEB_SESSION_1E78D426 = "schubert_web_session";
   private static final String FIXTURE_CREATEDB_AF6714D1 = "createdb";
   private static final String FIXTURE_127_0_0_1_88270499 = "127.0.0.1";
@@ -775,19 +776,19 @@ final class DatabaseMigrationTest {
       assertSqlState(
           FIXTURE_SCHUBERT_BATCH_F9C88479,
           FIXTURE_22023_CDCA15BB,
-          "select * from " + function + "(null,'" + FIXED_TIME + "',1)");
+          FIXTURE_SELECT_FROM_06A9ABF0 + function + "(null,'" + FIXED_TIME + "',1)");
       assertSqlState(
           FIXTURE_SCHUBERT_BATCH_F9C88479,
           FIXTURE_22023_CDCA15BB,
-          "select * from " + function + "('" + UUID_1 + "',null,1)");
+          FIXTURE_SELECT_FROM_06A9ABF0 + function + "('" + UUID_1 + "',null,1)");
       assertSqlState(
           FIXTURE_SCHUBERT_BATCH_F9C88479,
           FIXTURE_22023_CDCA15BB,
-          "select * from " + function + "('" + UUID_1 + "','" + FIXED_TIME + "',0)");
+          FIXTURE_SELECT_FROM_06A9ABF0 + function + "('" + UUID_1 + "','" + FIXED_TIME + "',0)");
       assertSqlState(
           FIXTURE_SCHUBERT_BATCH_F9C88479,
           FIXTURE_22023_CDCA15BB,
-          "select * from "
+          FIXTURE_SELECT_FROM_06A9ABF0
               + function
               + "('"
               + UUID_1

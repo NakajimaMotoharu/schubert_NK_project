@@ -30,6 +30,10 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** NK-BAT-001; UI251/SS311/331/332/341; PG-D-137; PT-BAT-001..017. */
 final class CleanupRepositoryTest {
+  private static final String FIXTURE_SELECT_COUNT_FROM_SCHUBERT_LOG_CLEANUP_P_7DDBEA06 =
+      "select count(*) from schubert.log_cleanup_progress";
+  private static final String FIXTURE_SELECT_COUNT_FROM_SCHUBERT_APP_LOGS_218A3BCD =
+      "select count(*) from schubert.app_logs";
   private static final String FIXTURE_TRUE_18D10C7D = "true";
   private static final String FIXTURE_TARGET_COUNT_5B6567D4 = "target_count";
   private static final String FIXTURE_DELETED_COUNT_EA6A9020 = "deleted_count";
@@ -207,14 +211,14 @@ final class CleanupRepositoryTest {
         var admin = db.admin()) {
       var r = new CleanupRepository(c);
       assertEquals(new CleanupCounts(2, 0, 2), r.execute(RUN, CleanupKind.LOGS, 2).counts());
-      assertEquals("0", scalar(admin, "select count(*) from schubert.log_cleanup_progress"));
+      assertEquals("0", scalar(admin, FIXTURE_SELECT_COUNT_FROM_SCHUBERT_LOG_CLEANUP_P_7DDBEA06));
       c.commit();
       assertEquals(new CleanupCounts(2, 0, 2), r.readLogProgress(RUN).counts());
       c.commit();
       assertEquals(new CleanupCounts(1, 1, 0), r.execute(RUN, CleanupKind.LOGS, 2).counts());
-      assertEquals("3", scalar(admin, "select count(*) from schubert.app_logs"));
+      assertEquals("3", scalar(admin, FIXTURE_SELECT_COUNT_FROM_SCHUBERT_APP_LOGS_218A3BCD));
       c.commit();
-      assertEquals("2", scalar(admin, "select count(*) from schubert.app_logs"));
+      assertEquals("2", scalar(admin, FIXTURE_SELECT_COUNT_FROM_SCHUBERT_APP_LOGS_218A3BCD));
       assertEquals(ZERO, r.execute(RUN, CleanupKind.LOGS, 2).counts());
       var progress = r.readLogProgress(RUN);
       assertTrue(progress.complete());
@@ -267,7 +271,7 @@ final class CleanupRepositoryTest {
       c.rollback();
       assertEquals(
           FIXTURE_TRUE_18D10C7D, scalar(admin, "select pg_advisory_unlock(71419602)::text"));
-      assertEquals("0", scalar(admin, "select count(*) from schubert.log_cleanup_progress"));
+      assertEquals("0", scalar(admin, FIXTURE_SELECT_COUNT_FROM_SCHUBERT_LOG_CLEANUP_P_7DDBEA06));
     }
   }
 
@@ -465,7 +469,7 @@ final class CleanupRepositoryTest {
       assertEquals(
           new CleanupChunk(ZERO, CleanupReason.LOCK_BUSY), r.execute(RUN, CleanupKind.LOGS, 10000));
       c.commit();
-      assertEquals("0", scalar(locked, "select count(*) from schubert.log_cleanup_progress"));
+      assertEquals("0", scalar(locked, FIXTURE_SELECT_COUNT_FROM_SCHUBERT_LOG_CLEANUP_P_7DDBEA06));
       locked.rollback();
       assertEquals(new CleanupCounts(3, 1, 2), r.execute(RUN, CleanupKind.LOGS, 10000).counts());
       c.commit();
@@ -494,7 +498,7 @@ final class CleanupRepositoryTest {
       assertEquals(0, p.closes);
       assertEquals(0, p.saves);
       assertEquals(0, p.autoChanges);
-      assertEquals("2", scalar(admin, "select count(*) from schubert.app_logs"));
+      assertEquals("2", scalar(admin, FIXTURE_SELECT_COUNT_FROM_SCHUBERT_APP_LOGS_218A3BCD));
       c.commit();
       assertEquals("2", scalar(admin, "select string_agg(id::text,',') from schubert.app_logs"));
     }
@@ -654,8 +658,9 @@ final class CleanupRepositoryTest {
           c.rollback();
         }
         try (var admin = db.admin()) {
-          assertEquals("0", scalar(admin, "select count(*) from schubert.log_cleanup_progress"));
-          assertEquals("0", scalar(admin, "select count(*) from schubert.app_logs"));
+          assertEquals(
+              "0", scalar(admin, FIXTURE_SELECT_COUNT_FROM_SCHUBERT_LOG_CLEANUP_P_7DDBEA06));
+          assertEquals("0", scalar(admin, FIXTURE_SELECT_COUNT_FROM_SCHUBERT_APP_LOGS_218A3BCD));
         }
       }
       for (boolean statement : List.of(false, true)) {
@@ -741,7 +746,7 @@ final class CleanupRepositoryTest {
       assertFalse(c.isClosed());
     }
     try (var admin = db.admin()) {
-      assertEquals("0", scalar(admin, "select count(*) from schubert.log_cleanup_progress"));
+      assertEquals("0", scalar(admin, FIXTURE_SELECT_COUNT_FROM_SCHUBERT_LOG_CLEANUP_P_7DDBEA06));
     }
   }
 

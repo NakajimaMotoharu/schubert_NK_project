@@ -25,6 +25,11 @@ import org.junit.jupiter.api.Test;
 
 /** PT-OPS-ROOTCTX-001..009; literal kernel/system manager vector, never production expected. */
 final class RootStartupContextTest {
+  private static final String FIXTURE_MAINPID_42_0075A51F = "MainPID=42";
+  private static final String FIXTURE_MAINPID_200_B6F3F218 = "MainPID=200";
+  private static final String FIXTURE_IO_A0EA7E0E = "<IO>";
+  private static final String FIXTURE_R_76BC7761 = ") R ";
+  private static final String FIXTURE_Z_D3E05587 = ") Z ";
   private static final String FIXTURE_SYNTHETIC_85DA8434 = "synthetic";
   private static final String FIXTURE_PROCESS_B140B547 = "process";
   private static final String FIXTURE_999_A90868B2 = "999";
@@ -162,7 +167,7 @@ final class RootStartupContextTest {
       unit = RootStartupContextTest.unit(RootStartupContext.Service.MORNING);
       targetUnit =
           RootStartupContextTest.unit(target)
-              .replace("MainPID=42", "MainPID=200")
+              .replace(FIXTURE_MAINPID_42_0075A51F, FIXTURE_MAINPID_200_B6F3F218)
               .replace(INV, "2".repeat(32));
       targetGroup = "0::/system.slice/" + target.unit() + "\n";
     }
@@ -174,7 +179,7 @@ final class RootStartupContextTest {
       targetReads++;
       return bytes(
           targetDrift && targetReads > 1
-              ? targetUnit.replace("MainPID=200", "MainPID=201")
+              ? targetUnit.replace(FIXTURE_MAINPID_200_B6F3F218, "MainPID=201")
               : targetUnit);
     }
 
@@ -182,7 +187,8 @@ final class RootStartupContextTest {
     public byte[] stat(long value) throws IOException {
       if (value == 200 && targetStat.equals("<MISSING>"))
         throw new java.nio.file.NoSuchFileException("PUBLIC_FIXED_PROC");
-      if (value == 200 && targetStat.equals("<IO>")) throw new IOException("PUBLIC_FIXED_IO");
+      if (value == 200 && targetStat.equals(FIXTURE_IO_A0EA7E0E))
+        throw new IOException("PUBLIC_FIXED_IO");
       return value == 200 ? bytes(targetStat) : super.stat(value);
     }
 
@@ -263,12 +269,15 @@ final class RootStartupContextTest {
       var f = new LaunchFixture();
       f.target = service;
       f.targetUnit =
-          unit(service).replace("MainPID=42", "MainPID=200").replace(INV, "2".repeat(32));
+          unit(service)
+              .replace(FIXTURE_MAINPID_42_0075A51F, FIXTURE_MAINPID_200_B6F3F218)
+              .replace(INV, "2".repeat(32));
       f.targetGroup = "0::/system.slice/" + service.unit() + "\n";
       var root = f.context();
       var morning = root.capture(RootStartupContext.Service.MORNING);
       var child = root.captureServiceRoot(morning, service);
-      f.targetStat = stat(200, FIXTURE_999_A90868B2).replace(") R ", ") Z ");
+      f.targetStat =
+          stat(200, FIXTURE_999_A90868B2).replace(FIXTURE_R_76BC7761, FIXTURE_Z_D3E05587);
       assertDoesNotThrow(() -> root.recheckServiceGeneration(morning, child));
       assertFalse(root.serviceGenerationExited(morning, child));
       f.targetStat = stat(200, FIXTURE_999_A90868B2);
@@ -288,27 +297,28 @@ final class RootStartupContextTest {
     var morning = root.capture(RootStartupContext.Service.MORNING);
     var child = root.captureServiceRoot(morning, RootStartupContext.Service.API);
     for (String state : List.of("Z", "X", "x", "?", "ZZ")) {
-      f.targetStat = stat(200, FIXTURE_999_A90868B2).replace(") R ", ") " + state + " ");
+      f.targetStat =
+          stat(200, FIXTURE_999_A90868B2).replace(FIXTURE_R_76BC7761, ") " + state + " ");
       assertThrows(IOException.class, () -> root.captureServiceRoot(morning, f.target));
       if (!state.equals("Z")) {
         assertThrows(IOException.class, () -> root.recheckServiceGeneration(morning, child));
         assertThrows(IOException.class, () -> root.serviceGenerationExited(morning, child));
       }
     }
-    f.targetStat = stat(200, "1000").replace(") R ", ") Z ");
+    f.targetStat = stat(200, "1000").replace(FIXTURE_R_76BC7761, FIXTURE_Z_D3E05587);
     assertThrows(IOException.class, () -> root.recheckServiceGeneration(morning, child));
     assertThrows(IOException.class, () -> root.serviceGenerationExited(morning, child));
-    f.targetStat = stat(200, FIXTURE_999_A90868B2).replace(") R ", ") Z ");
+    f.targetStat = stat(200, FIXTURE_999_A90868B2).replace(FIXTURE_R_76BC7761, FIXTURE_Z_D3E05587);
     f.targetGroup = "0::/system.slice/foreign.service\n";
     assertThrows(IOException.class, () -> root.recheckServiceGeneration(morning, child));
     f.targetGroup = "0::/system.slice/schubert-nk-api.service\n";
     f.targetDrift = true;
     assertThrows(IOException.class, () -> root.recheckServiceGeneration(morning, child));
     f.targetDrift = false;
-    f.own = stat(42, FIXTURE_12345_AFC21EDA).replace(") R ", ") Z ");
+    f.own = stat(42, FIXTURE_12345_AFC21EDA).replace(FIXTURE_R_76BC7761, FIXTURE_Z_D3E05587);
     assertThrows(IOException.class, () -> root.recheckServiceGeneration(morning, child));
     f.own = stat(42, FIXTURE_12345_AFC21EDA);
-    f.init = stat(1, "5").replace(") R ", ") Z ");
+    f.init = stat(1, "5").replace(FIXTURE_R_76BC7761, FIXTURE_Z_D3E05587);
     assertThrows(IOException.class, () -> root.recheckServiceGeneration(morning, child));
   }
 
@@ -321,7 +331,7 @@ final class RootStartupContextTest {
     assertFalse(root.serviceGenerationExited(morning, child));
     f.targetStat = "<MISSING>";
     assertTrue(root.serviceGenerationExited(morning, child));
-    f.targetStat = "<IO>";
+    f.targetStat = FIXTURE_IO_A0EA7E0E;
     assertThrows(IOException.class, () -> root.serviceGenerationExited(morning, child));
     f.targetStat = stat(200, "1000");
     assertThrows(IOException.class, () -> root.serviceGenerationExited(morning, child));
@@ -335,7 +345,10 @@ final class RootStartupContextTest {
     for (var target : List.of(RootStartupContext.Service.API, RootStartupContext.Service.WEB)) {
       var f = new LaunchFixture();
       f.target = target;
-      f.targetUnit = unit(target).replace("MainPID=42", "MainPID=200").replace(INV, "2".repeat(32));
+      f.targetUnit =
+          unit(target)
+              .replace(FIXTURE_MAINPID_42_0075A51F, FIXTURE_MAINPID_200_B6F3F218)
+              .replace(INV, "2".repeat(32));
       f.targetGroup = "0::/system.slice/" + target.unit() + "\n";
       var context = f.context();
       var morning = context.capture(RootStartupContext.Service.MORNING);
@@ -388,9 +401,13 @@ final class RootStartupContextTest {
         case "cgroup" -> f.targetGroup = "0::/system.slice/other.service\n";
         case FIXTURE_STAT_F3E718BA -> f.targetStat = stat(200, "0");
         case "manager" -> f.targetDrift = true;
-        case "zeroPid" -> f.targetUnit = f.targetUnit.replace("MainPID=200", "MainPID=0");
-        case "largePid" -> f.targetUnit = f.targetUnit.replace("MainPID=200", "MainPID=2147483648");
-        case "parentPid" -> f.targetUnit = f.targetUnit.replace("MainPID=200", "MainPID=42");
+        case "zeroPid" ->
+            f.targetUnit = f.targetUnit.replace(FIXTURE_MAINPID_200_B6F3F218, "MainPID=0");
+        case "largePid" ->
+            f.targetUnit = f.targetUnit.replace(FIXTURE_MAINPID_200_B6F3F218, "MainPID=2147483648");
+        case "parentPid" ->
+            f.targetUnit =
+                f.targetUnit.replace(FIXTURE_MAINPID_200_B6F3F218, FIXTURE_MAINPID_42_0075A51F);
         case "parentInvocation" -> f.targetUnit = f.targetUnit.replace("2".repeat(32), INV);
         case "missing" -> f.targetUnit = f.targetUnit.replace("LoadState=loaded\n", "");
         case "duplicate" -> f.targetUnit += "LoadState=loaded\n";
@@ -532,7 +549,8 @@ final class RootStartupContextTest {
           @Override
           public byte[] unitDeadline(RootStartupContext.Service service) throws IOException {
             assertEquals(RootStartupContext.Service.MORNING, service);
-            if (selected[0].equals("<IO>")) throw new IOException("private manager detail");
+            if (selected[0].equals(FIXTURE_IO_A0EA7E0E))
+              throw new IOException("private manager detail");
             if (selected[0].equals("<NULL>")) return null;
             owned[0] = bytes(selected[0]);
             return owned[0];
@@ -564,14 +582,14 @@ final class RootStartupContextTest {
           literal.replace(
               "Id=schubert-nk-morning-controller.service", "Id=schubert-nk-cleanup.service"),
           literal.replace(INV, "2".repeat(32)),
-          literal.replace("MainPID=42", "MainPID=43"),
+          literal.replace(FIXTURE_MAINPID_42_0075A51F, "MainPID=43"),
           literal + "Unknown=1\n"
         }) {
       selected[0] = wrong;
       assertThrows(IOException.class, () -> context.maintenanceDeadline(morning, Long.MAX_VALUE));
     }
     selected[0] = literal;
-    selected[0] = "<IO>";
+    selected[0] = FIXTURE_IO_A0EA7E0E;
     var sanitized =
         assertThrows(IOException.class, () -> context.maintenanceDeadline(morning, Long.MAX_VALUE));
     assertEquals(FIXTURE_STARTUP_CONTEXT_UNAVAILABLE_1B156CA0, sanitized.getMessage());
@@ -616,7 +634,7 @@ final class RootStartupContextTest {
     context.recheck(snapshot);
     assertThrows(IOException.class, () -> context.capture(RootStartupContext.Service.MORNING));
     assertThrows(IOException.class, () -> context.capture(RootStartupContext.Service.API));
-    f.unit = f.unit.replace("MainPID=42", "MainPID=43");
+    f.unit = f.unit.replace(FIXTURE_MAINPID_42_0075A51F, "MainPID=43");
     assertThrows(IOException.class, () -> context.recheck(snapshot));
     assertEquals(
         FIXTURE_STARTUP_CONTEXT_UNAVAILABLE_1B156CA0,
@@ -700,7 +718,7 @@ final class RootStartupContextTest {
     var max = new Fixture();
     max.pid = 2147483647;
     max.own = stat(max.pid, "9223372036854775807");
-    max.unit = max.unit.replace("MainPID=42", "MainPID=" + max.pid);
+    max.unit = max.unit.replace(FIXTURE_MAINPID_42_0075A51F, "MainPID=" + max.pid);
     assertEquals(
         Long.MAX_VALUE,
         assertDoesNotThrow(() -> max.context().capture(RootStartupContext.Service.API))

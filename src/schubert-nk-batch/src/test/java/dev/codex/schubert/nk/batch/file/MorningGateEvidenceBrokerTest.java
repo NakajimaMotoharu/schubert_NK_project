@@ -23,6 +23,7 @@ import org.junit.jupiter.api.Test;
 
 /** SSC130/ISSBROKER002: persisted independent SS321/343 literal vectors, no expected encoder. */
 final class MorningGateEvidenceBrokerTest {
+  private static final String FIXTURE_MOPS_5CCB9DD9 = "mops.#";
   private static final String FIXTURE_NK_EXPIRY_41CB6B4A = "nk.expiry";
   private static final StartupPermitRecords.Epoch EPOCH =
       new StartupPermitRecords.Epoch(
@@ -109,11 +110,13 @@ final class MorningGateEvidenceBrokerTest {
     var good = fixture();
     for (int slot = 0; slot < 4; slot++) {
       var roles = new HashMap<>(good.roles());
-      if (slot == 0) roles.remove("mops.#");
-      if (slot == 1) roles.put("mops.#", Map.of());
+      if (slot == 0) roles.remove(FIXTURE_MOPS_5CCB9DD9);
+      if (slot == 1) roles.put(FIXTURE_MOPS_5CCB9DD9, Map.of());
       if (slot == 2)
-        roles.put("mops.#", Map.of("unknown", good.roles().get("mops.#").get("nk_ops")));
-      if (slot == 3) roles.put("mops.#", Map.of("nk_ops", Map.of("send", true)));
+        roles.put(
+            FIXTURE_MOPS_5CCB9DD9,
+            Map.of("unknown", good.roles().get(FIXTURE_MOPS_5CCB9DD9).get("nk_ops")));
+      if (slot == 3) roles.put(FIXTURE_MOPS_5CCB9DD9, Map.of("nk_ops", Map.of("send", true)));
       var wrong =
           new ArtemisStartupObservation.Evidence(
               good.topology(),

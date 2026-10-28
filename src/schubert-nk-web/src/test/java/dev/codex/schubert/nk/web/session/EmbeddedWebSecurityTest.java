@@ -81,6 +81,9 @@ import org.springframework.web.filter.CharacterEncodingFilter;
  * NK-WEB-001/PT-WEB-109..112; UI222/226/252; SS311/313/314/342/351/352; PG-D-109.
  */
 class EmbeddedWebSecurityTest {
+  private static final String FIXTURE_CSRF_53C8B8F1 = "_csrf=";
+  private static final String FIXTURE_TEXT_PLAIN_CHARSET_UTF_8_00068F22 =
+      "text/plain;charset=UTF-8";
   private static final String FIXTURE_GET_04F32A7E = "GET";
   private static final String FIXTURE_FIXTURE_D9E71FCD = "/fixture";
   private static final String FIXTURE_SET_COOKIE_39067BC9 = "set-cookie";
@@ -133,7 +136,11 @@ class EmbeddedWebSecurityTest {
       String cookie = setCookie.split(";", 2)[0];
       var ok =
           server.send(
-              FIXTURE_POST_E46D3AE9, FIXTURE_FIXTURE_D9E71FCD, cookie, "_csrf=" + token, true);
+              FIXTURE_POST_E46D3AE9,
+              FIXTURE_FIXTURE_D9E71FCD,
+              cookie,
+              FIXTURE_CSRF_53C8B8F1 + token,
+              true);
       assertEquals(200, ok.statusCode());
       assertEquals("ok", ok.body());
       assertHeaders(ok);
@@ -142,7 +149,7 @@ class EmbeddedWebSecurityTest {
               FIXTURE_POST_E46D3AE9,
               FIXTURE_FIXTURE_D9E71FCD,
               cookie,
-              "_csrf=" + "ff".repeat(32),
+              FIXTURE_CSRF_53C8B8F1 + "ff".repeat(32),
               true);
       assertEquals(403, denied.statusCode());
       assertEquals("error:403", denied.body());
@@ -201,7 +208,7 @@ class EmbeddedWebSecurityTest {
       String token = get.body().substring(6);
       String cookie =
           get.headers().firstValue(FIXTURE_SET_COOKIE_39067BC9).orElseThrow().split(";", 2)[0];
-      String body = "_csrf=" + token + "&username=reader&password=synthetic-password";
+      String body = FIXTURE_CSRF_53C8B8F1 + token + "&username=reader&password=synthetic-password";
       for (String query :
           List.of(
               "?role=ADMIN",
@@ -266,7 +273,7 @@ class EmbeddedWebSecurityTest {
                           FIXTURE_POST_E46D3AE9,
                           FIXTURE_FIXTURE_D9E71FCD,
                           cookie,
-                          "_csrf=" + token,
+                          FIXTURE_CSRF_53C8B8F1 + token,
                           true)
                       .statusCode());
               var denied =
@@ -500,7 +507,7 @@ class EmbeddedWebSecurityTest {
                   }
                   if (request.getRequestURI().equals("/fixture-principal")) {
                     var principal = request.getUserPrincipal();
-                    response.setContentType("text/plain;charset=UTF-8");
+                    response.setContentType(FIXTURE_TEXT_PLAIN_CHARSET_UTF_8_00068F22);
                     response
                         .getWriter()
                         .write(principal == null ? "ANONYMOUS" : principal.getName());
@@ -528,7 +535,7 @@ class EmbeddedWebSecurityTest {
                     assertSame(principal, request.getUserPrincipal());
                     assertSame(session, request.getSession(false));
                     assertEquals(csrf, session.getAttribute("csrfToken"));
-                    response.setContentType("text/plain;charset=UTF-8");
+                    response.setContentType(FIXTURE_TEXT_PLAIN_CHARSET_UTF_8_00068F22);
                     response
                         .getWriter()
                         .write(
@@ -548,7 +555,7 @@ class EmbeddedWebSecurityTest {
                     return;
                   }
                   var token = (CsrfToken) request.getAttribute("_csrf");
-                  response.setContentType("text/plain;charset=UTF-8");
+                  response.setContentType(FIXTURE_TEXT_PLAIN_CHARSET_UTF_8_00068F22);
                   response.getWriter().write("TOKEN:" + token.getToken());
                 }
 
@@ -623,7 +630,7 @@ class EmbeddedWebSecurityTest {
                       throws IOException {
                     errorCalls.incrementAndGet();
                     errorIds.add(WebRequestContext.require(request).requestId());
-                    response.setContentType("text/plain;charset=UTF-8");
+                    response.setContentType(FIXTURE_TEXT_PLAIN_CHARSET_UTF_8_00068F22);
                     response.getWriter().write("error:" + response.getStatus());
                   }
                 })

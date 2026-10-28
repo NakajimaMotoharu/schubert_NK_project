@@ -45,6 +45,7 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** BAK/BKO/UI251/SS341 6.5/343 5.3; SSC059/PG166; BAT194..209, see 017/038. */
 final class BackupArtifactVerifierTest {
+  private static final String FIXTURE_READ_1_D82DE594 = "read#1";
   private static final String FIXTURE_SCHUBERT_NK_DUMP_96644B79 = "schubert_nk.dump";
   private static final String FIXTURE_CONFIG_TAR_7AD1B394 = "config.tar";
   private static final String FIXTURE_MANIFEST_JSON_0D4099EC = "MANIFEST.json";
@@ -676,8 +677,8 @@ final class BackupArtifactVerifierTest {
               new NullPointerException("public repeated"),
               new AssertionError("public repeated"))) {
         try (var f = fixture()) {
-          f.extraFaults.add("read#1");
-          f.faultTypes.put("read#1", primary);
+          f.extraFaults.add(FIXTURE_READ_1_D82DE594);
+          f.faultTypes.put(FIXTURE_READ_1_D82DE594, primary);
           f.extraFaults.add(close + "#1");
           f.faultTypes.put(close + "#1", primary);
           assertSame(
@@ -689,7 +690,7 @@ final class BackupArtifactVerifierTest {
       }
     try (var f = fixture()) {
       var fatal = new AssertionError("public close fatal");
-      f.extraFaults.add("read#1");
+      f.extraFaults.add(FIXTURE_READ_1_D82DE594);
       f.extraFaults.add("closeChannel#1");
       f.faultTypes.put("closeChannel#1", fatal);
       assertSame(fatal, assertThrows(AssertionError.class, () -> f.verifier().verify(f.expected)));
@@ -915,7 +916,7 @@ final class BackupArtifactVerifierTest {
     try (var f = fixture();
         var pool = Executors.newFixedThreadPool(8)) {
       var verifier = f.verifier();
-      f.extraFaults.add("read#1");
+      f.extraFaults.add(FIXTURE_READ_1_D82DE594);
       var tasks = new ArrayList<Future<Boolean>>();
       for (int i = 0; i < 64; i++)
         tasks.add(

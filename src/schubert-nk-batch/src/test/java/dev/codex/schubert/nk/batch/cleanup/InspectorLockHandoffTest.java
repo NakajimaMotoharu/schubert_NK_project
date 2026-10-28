@@ -27,6 +27,10 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** Independent real PG lock ownership and public JDBC fault oracle. PT-BAT-030..037; SS341. */
 final class InspectorLockHandoffTest {
+  private static final String FIXTURE_SELECT_PG_TRY_ADVISORY_LOCK_71419602_TEX_E075F895 =
+      "select pg_try_advisory_lock(71419602)::text";
+  private static final String FIXTURE_SELECT_PG_ADVISORY_UNLOCK_71419602_TEXT_F2CE8483 =
+      "select pg_advisory_unlock(71419602)::text";
   private static final String FIXTURE_TRUE_18D10C7D = "true";
   private static final String FIXTURE_FALSE_076DE6E7 = "false";
   private static final String FIXTURE_TRANSACTION_3094DE95 = "transaction";
@@ -61,7 +65,8 @@ final class InspectorLockHandoffTest {
                         scalar(child, "select pg_try_advisory_xact_lock(71419602)::text"));
                     assertEquals(
                         FIXTURE_FALSE_076DE6E7,
-                        scalar(observer, "select pg_try_advisory_lock(71419602)::text"));
+                        scalar(
+                            observer, FIXTURE_SELECT_PG_TRY_ADVISORY_LOCK_71419602_TEX_E075F895));
                     child.commit();
                     return FIXTURE_TRUE_18D10C7D;
                   } catch (SQLException failure) {
@@ -73,12 +78,14 @@ final class InspectorLockHandoffTest {
         assertFalse(parent.isClosed());
         assertEquals(
             FIXTURE_FALSE_076DE6E7,
-            scalar(observer, "select pg_try_advisory_lock(71419602)::text"));
+            scalar(observer, FIXTURE_SELECT_PG_TRY_ADVISORY_LOCK_71419602_TEX_E075F895));
       }
       assertEquals(
-          FIXTURE_TRUE_18D10C7D, scalar(parent, "select pg_advisory_unlock(71419602)::text"));
+          FIXTURE_TRUE_18D10C7D,
+          scalar(parent, FIXTURE_SELECT_PG_ADVISORY_UNLOCK_71419602_TEXT_F2CE8483));
       assertEquals(
-          FIXTURE_TRUE_18D10C7D, scalar(observer, "select pg_try_advisory_lock(71419602)::text"));
+          FIXTURE_TRUE_18D10C7D,
+          scalar(observer, FIXTURE_SELECT_PG_TRY_ADVISORY_LOCK_71419602_TEX_E075F895));
     }
   }
 
@@ -116,9 +123,11 @@ final class InspectorLockHandoffTest {
         if (condition.equals("reentrant")) {
           // Exactly one of the two acquisitions was released; the helper did not force-unlock.
           assertEquals(
-              FIXTURE_TRUE_18D10C7D, scalar(parent, "select pg_advisory_unlock(71419602)::text"));
+              FIXTURE_TRUE_18D10C7D,
+              scalar(parent, FIXTURE_SELECT_PG_ADVISORY_UNLOCK_71419602_TEXT_F2CE8483));
           assertEquals(
-              FIXTURE_FALSE_076DE6E7, scalar(parent, "select pg_advisory_unlock(71419602)::text"));
+              FIXTURE_FALSE_076DE6E7,
+              scalar(parent, FIXTURE_SELECT_PG_ADVISORY_UNLOCK_71419602_TEXT_F2CE8483));
         }
       }
     }
@@ -138,7 +147,8 @@ final class InspectorLockHandoffTest {
                     throw new IOException("private-probe");
                   }));
       assertEquals(
-          FIXTURE_FALSE_076DE6E7, scalar(observer, "select pg_try_advisory_lock(71419602)::text"));
+          FIXTURE_FALSE_076DE6E7,
+          scalar(observer, FIXTURE_SELECT_PG_TRY_ADVISORY_LOCK_71419602_TEX_E075F895));
       var runtime = new IllegalStateException("public programming failure");
       assertSame(
           runtime,
@@ -164,11 +174,14 @@ final class InspectorLockHandoffTest {
       assertThrows(
           NullPointerException.class, () -> InspectorLockHandoff.execute(parent, () -> null));
       assertEquals(
-          FIXTURE_FALSE_076DE6E7, scalar(observer, "select pg_try_advisory_lock(71419602)::text"));
+          FIXTURE_FALSE_076DE6E7,
+          scalar(observer, FIXTURE_SELECT_PG_TRY_ADVISORY_LOCK_71419602_TEX_E075F895));
       assertEquals(
-          FIXTURE_TRUE_18D10C7D, scalar(parent, "select pg_advisory_unlock(71419602)::text"));
+          FIXTURE_TRUE_18D10C7D,
+          scalar(parent, FIXTURE_SELECT_PG_ADVISORY_UNLOCK_71419602_TEXT_F2CE8483));
       assertEquals(
-          FIXTURE_TRUE_18D10C7D, scalar(observer, "select pg_try_advisory_lock(71419602)::text"));
+          FIXTURE_TRUE_18D10C7D,
+          scalar(observer, FIXTURE_SELECT_PG_TRY_ADVISORY_LOCK_71419602_TEX_E075F895));
     }
   }
 
@@ -186,7 +199,7 @@ final class InspectorLockHandoffTest {
                       calls.incrementAndGet();
                       assertEquals(
                           FIXTURE_TRUE_18D10C7D,
-                          scalar(other, "select pg_try_advisory_lock(71419602)::text"));
+                          scalar(other, FIXTURE_SELECT_PG_TRY_ADVISORY_LOCK_71419602_TEX_E075F895));
                       return "must not escape";
                     } catch (SQLException failure) {
                       throw new IOException(failure);
@@ -194,9 +207,11 @@ final class InspectorLockHandoffTest {
                   }));
       assertEquals(1, calls.get());
       assertEquals(
-          FIXTURE_FALSE_076DE6E7, scalar(parent, "select pg_try_advisory_lock(71419602)::text"));
+          FIXTURE_FALSE_076DE6E7,
+          scalar(parent, FIXTURE_SELECT_PG_TRY_ADVISORY_LOCK_71419602_TEX_E075F895));
       assertEquals(
-          FIXTURE_TRUE_18D10C7D, scalar(other, "select pg_advisory_unlock(71419602)::text"));
+          FIXTURE_TRUE_18D10C7D,
+          scalar(other, FIXTURE_SELECT_PG_ADVISORY_UNLOCK_71419602_TEXT_F2CE8483));
     }
   }
 
@@ -405,15 +420,18 @@ final class InspectorLockHandoffTest {
       try {
         assertTrue(gap.await(5, TimeUnit.SECONDS));
         assertEquals(
-            FIXTURE_TRUE_18D10C7D, scalar(other, "select pg_try_advisory_lock(71419602)::text"));
+            FIXTURE_TRUE_18D10C7D,
+            scalar(other, FIXTURE_SELECT_PG_TRY_ADVISORY_LOCK_71419602_TEX_E075F895));
       } finally {
         acquired.countDown();
       }
       assertNotNull(future.get(5, TimeUnit.SECONDS));
       assertEquals(
-          FIXTURE_FALSE_076DE6E7, scalar(parent, "select pg_try_advisory_lock(71419602)::text"));
+          FIXTURE_FALSE_076DE6E7,
+          scalar(parent, FIXTURE_SELECT_PG_TRY_ADVISORY_LOCK_71419602_TEX_E075F895));
       assertEquals(
-          FIXTURE_TRUE_18D10C7D, scalar(other, "select pg_advisory_unlock(71419602)::text"));
+          FIXTURE_TRUE_18D10C7D,
+          scalar(other, FIXTURE_SELECT_PG_ADVISORY_UNLOCK_71419602_TEXT_F2CE8483));
     }
   }
 
@@ -421,7 +439,8 @@ final class InspectorLockHandoffTest {
     var connection = db.open("schubert_batch");
     try {
       assertEquals(
-          FIXTURE_TRUE_18D10C7D, scalar(connection, "select pg_try_advisory_lock(71419602)::text"));
+          FIXTURE_TRUE_18D10C7D,
+          scalar(connection, FIXTURE_SELECT_PG_TRY_ADVISORY_LOCK_71419602_TEX_E075F895));
     } catch (SQLException | RuntimeException | Error failure) {
       connection.close();
       throw failure;

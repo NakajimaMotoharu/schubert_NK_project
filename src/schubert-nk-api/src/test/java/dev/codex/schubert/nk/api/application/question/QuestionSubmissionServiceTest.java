@@ -68,6 +68,10 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** Real PG18 and Artemis, literal UI236 offsets; no production-generated expected wire. */
 class QuestionSubmissionServiceTest {
+  private static final String FIXTURE_SELECT_COUNT_FROM_SCHUBERT_QUESTIONS_9AA9E6E7 =
+      "select count(*) from schubert.questions";
+  private static final String FIXTURE_SELECT_COUNT_FROM_SCHUBERT_REQUEST_INBOX_E4FAEDDB =
+      "select count(*) from schubert.request_inbox";
   private static final String FIXTURE_PUBLIC_FIXTURE_2BAE0C98 = "Public fixture";
   private static final String FIXTURE_0200_FC9DB3AC = "0200";
   private static final String FIXTURE_9000_0CDC37EC = "9000";
@@ -146,7 +150,7 @@ class QuestionSubmissionServiceTest {
             frozen,
             h.text(
                 "select md5(response_body_encrypted)||':'||completed_at::text||':'||expires_at::text from schubert.request_inbox"));
-        assertEquals(1, h.scalar("select count(*) from schubert.questions"));
+        assertEquals(1, h.scalar(FIXTURE_SELECT_COUNT_FROM_SCHUBERT_QUESTIONS_9AA9E6E7));
         assertEquals(
             1,
             h.scalar(
@@ -198,7 +202,7 @@ class QuestionSubmissionServiceTest {
       assertArrayEquals(
           response(M0, new UUID(700, 1), FIXTURE_9000_0CDC37EC, "", 0, NOW),
           h.service.process(input));
-      assertEquals(0, h.scalar("select count(*) from schubert.questions"));
+      assertEquals(0, h.scalar(FIXTURE_SELECT_COUNT_FROM_SCHUBERT_QUESTIONS_9AA9E6E7));
       h.nanoStep = 0;
       h.ids.set(0);
       h.nanos.set(0);
@@ -210,7 +214,7 @@ class QuestionSubmissionServiceTest {
       assertArrayEquals(
           response(M0, new UUID(700, 3), FIXTURE_9000_0CDC37EC, "", 0, NOW),
           h.service.process(input));
-      assertEquals(1, h.scalar("select count(*) from schubert.questions"));
+      assertEquals(1, h.scalar(FIXTURE_SELECT_COUNT_FROM_SCHUBERT_QUESTIONS_9AA9E6E7));
       assertEquals("COMPLETED", h.text("select processing_state from schubert.request_inbox"));
       assertEquals("PENDING", h.text("select status from schubert.mq_outbox"));
       var frozen =
@@ -235,7 +239,7 @@ class QuestionSubmissionServiceTest {
           response(new UUID(701, 3), new UUID(700, 1), FIXTURE_9000_0CDC37EC, "", 0, NOW),
           h.service.process(
               request("late", new UUID(701, 3), new UUID(702, 3), NOW.minusSeconds(2), CONTEXT)));
-      assertEquals(1, h.scalar("select count(*) from schubert.questions"));
+      assertEquals(1, h.scalar(FIXTURE_SELECT_COUNT_FROM_SCHUBERT_QUESTIONS_9AA9E6E7));
     }
   }
 
@@ -248,7 +252,7 @@ class QuestionSubmissionServiceTest {
           denied,
           h.service.process(
               request(FIXTURE_PUBLIC_FIXTURE_2BAE0C98, M0, TOKEN, NOW, "c".repeat(64))));
-      assertEquals(0, h.scalar("select count(*) from schubert.request_inbox"));
+      assertEquals(0, h.scalar(FIXTURE_SELECT_COUNT_FROM_SCHUBERT_REQUEST_INBOX_E4FAEDDB));
       h.ids.set(0);
       h.confirmOnSignal();
       h.service.process(request(FIXTURE_PUBLIC_FIXTURE_2BAE0C98, M0, TOKEN, NOW, CONTEXT));
@@ -268,8 +272,8 @@ class QuestionSubmissionServiceTest {
           response(new UUID(701, 4), new UUID(700, 6), "0105", "", 0, NOW),
           h.service.process(
               request(FIXTURE_DIFFERENT_7F1988DF, new UUID(701, 4), TOKEN, NOW, CONTEXT)));
-      assertEquals(0, h.scalar("select count(*) from schubert.request_inbox"));
-      assertEquals(1, h.scalar("select count(*) from schubert.questions"));
+      assertEquals(0, h.scalar(FIXTURE_SELECT_COUNT_FROM_SCHUBERT_REQUEST_INBOX_E4FAEDDB));
+      assertEquals(1, h.scalar(FIXTURE_SELECT_COUNT_FROM_SCHUBERT_QUESTIONS_9AA9E6E7));
       assertEquals(1, h.scalar("select count(*) from schubert.mq_outbox"));
       assertEquals(
           2,
@@ -338,7 +342,7 @@ class QuestionSubmissionServiceTest {
                     request(FIXTURE_PUBLIC_FIXTURE_2BAE0C98, M0, TOKEN, NOW, CONTEXT)));
         assertEquals(
             fault.equals(FIXTURE_CLOSE_97959247) ? 1 : 0,
-            h.scalar("select count(*) from schubert.questions"));
+            h.scalar(FIXTURE_SELECT_COUNT_FROM_SCHUBERT_QUESTIONS_9AA9E6E7));
         assertEquals(0, h.live.get());
       }
   }
@@ -372,8 +376,8 @@ class QuestionSubmissionServiceTest {
                     request(
                         FIXTURE_PUBLIC_FIXTURE_2BAE0C98, new UUID(701, 2), TOKEN, NOW, CONTEXT)),
             mutation);
-        assertEquals(1, h.scalar("select count(*) from schubert.questions"));
-        assertEquals(1, h.scalar("select count(*) from schubert.request_inbox"));
+        assertEquals(1, h.scalar(FIXTURE_SELECT_COUNT_FROM_SCHUBERT_QUESTIONS_9AA9E6E7));
+        assertEquals(1, h.scalar(FIXTURE_SELECT_COUNT_FROM_SCHUBERT_REQUEST_INBOX_E4FAEDDB));
         assertEquals(0, h.live.get());
       }
     }
@@ -392,14 +396,14 @@ class QuestionSubmissionServiceTest {
           service.process(request("second", new UUID(701, 2), new UUID(702, 2), NOW, CONTEXT));
       assertArrayEquals(
           response(new UUID(701, 2), new UUID(700, 103), "0000", "1".repeat(26), 3, NOW), result);
-      assertEquals(2, h.scalar("select count(*) from schubert.questions"));
+      assertEquals(2, h.scalar(FIXTURE_SELECT_COUNT_FROM_SCHUBERT_QUESTIONS_9AA9E6E7));
       assertThrows(
           TemporaryInfrastructureException.class,
           () ->
               h.service.process(
                   request("third", new UUID(701, 3), new UUID(702, 3), NOW, CONTEXT)));
-      assertEquals(2, h.scalar("select count(*) from schubert.questions"));
-      assertEquals(2, h.scalar("select count(*) from schubert.request_inbox"));
+      assertEquals(2, h.scalar(FIXTURE_SELECT_COUNT_FROM_SCHUBERT_QUESTIONS_9AA9E6E7));
+      assertEquals(2, h.scalar(FIXTURE_SELECT_COUNT_FROM_SCHUBERT_REQUEST_INBOX_E4FAEDDB));
       assertThrows(NullPointerException.class, () -> h.service.process(null));
       var wrong = request("valid", M0, TOKEN, NOW, CONTEXT);
       byte[] invalid = wrong.payload().copyData();
@@ -426,7 +430,7 @@ class QuestionSubmissionServiceTest {
       assertEquals(4, fresh.version());
       assertNotEquals(M0, fresh);
       assertArrayEquals(response(M0, fresh, FIXTURE_9000_0CDC37EC, "", 0, NOW), actual);
-      assertEquals(0, h.scalar("select count(*) from schubert.questions"));
+      assertEquals(0, h.scalar(FIXTURE_SELECT_COUNT_FROM_SCHUBERT_QUESTIONS_9AA9E6E7));
       for (int i = 0; i < 9; i++) {
         int missing = i;
         assertThrows(

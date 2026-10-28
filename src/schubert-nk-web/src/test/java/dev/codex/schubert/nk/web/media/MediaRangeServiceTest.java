@@ -35,6 +35,7 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** Explicit HTTP header/body oracles on actual retained files and fault ports. PT-MED-027..032. */
 class MediaRangeServiceTest {
+  private static final String FIXTURE_BYTES_2_4_8BC33315 = "bytes=2-4";
   private static final String FIXTURE_AUDIO_OGG_96A5CB00 = "audio/ogg";
   private static final String FIXTURE_MUSIC_D5800D43 = "MUSIC";
   private static final String FIXTURE_SYNTHETIC_PRIVATE_PATH_6CBCF6F9 = "SYNTHETIC_PRIVATE_PATH";
@@ -65,7 +66,7 @@ class MediaRangeServiceTest {
       expect(full, 200, 0, 2_097_155, null, false, false);
       for (String[] vector :
           List.of(
-              new String[] {"bytes=2-4", "2", "5"},
+              new String[] {FIXTURE_BYTES_2_4_8BC33315, "2", "5"},
               new String[] {"bytes=-3", "2097152", "2097155"},
               new String[] {"bytes=0-", "0", "1048576"},
               new String[] {"BYTES= 2-4 ,bogus", "2", "5"},
@@ -99,7 +100,10 @@ class MediaRangeServiceTest {
     try (var held = OwnedTransferDirectory.open(LinuxDirectoryCalls.create(), root)) {
       var service = new MediaRangeService(new DescriptorFileResolver(held, identity));
       for (Optional<String> range :
-          List.of(Optional.<String>empty(), Optional.of("bytes=2-4"), Optional.of("invalid"))) {
+          List.of(
+              Optional.<String>empty(),
+              Optional.of(FIXTURE_BYTES_2_4_8BC33315),
+              Optional.of("invalid"))) {
         FakeResponse get = deliver(service, inline, range, false);
         FakeResponse head = deliver(service, inline, range, true);
         assertEquals(get.status, head.status);
@@ -253,7 +257,7 @@ class MediaRangeServiceTest {
                   executor.submit(
                       () -> {
                         try {
-                          deliver(service, inline, Optional.of("bytes=2-4"), false);
+                          deliver(service, inline, Optional.of(FIXTURE_BYTES_2_4_8BC33315), false);
                           return true;
                         } catch (MediaDeliveryException failure) {
                           assertEquals(MediaDeliveryException.Reason.UNAVAILABLE, failure.reason());
@@ -331,7 +335,8 @@ class MediaRangeServiceTest {
         assertEquals(fault.equals("source") ? 0 : 1, response.begins);
         assertEquals(0, response.closes);
         if (fault.equals("partial")) assertEquals(65_536, response.output.size());
-        FakeResponse recovery = deliver(service, inline, Optional.of("bytes=2-4"), false);
+        FakeResponse recovery =
+            deliver(service, inline, Optional.of(FIXTURE_BYTES_2_4_8BC33315), false);
         expect(recovery, 206, 2, 5, "bytes 2-4/2097155", false, false);
       }
     }

@@ -46,6 +46,9 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** NK-BAT-001/BAK/BKO/UI251/SS341 6.7/343; SSC062/PG169; BAT226..241; independent017046. */
 final class BackupManifestReaderTest {
+  private static final String FIXTURE_READ_1_D82DE594 = "read#1";
+  private static final String FIXTURE_CLOSECHANNEL_1_2CBD3D35 = "closeChannel#1";
+  private static final String FIXTURE_ATTRIBUTES_1_3F7B5B66 = "attributes#1";
   private static final String FIXTURE_MANIFEST_JSON_0D4099EC = "MANIFEST.json";
   private static final String FIXTURE_SIZE_EB1E91E4 = "size";
   private static final String FIXTURE_READ_6F365882 = "read";
@@ -775,8 +778,8 @@ final class BackupManifestReaderTest {
               new NullPointerException("public repeated"),
               new AssertionError("public repeated"))) {
         try (var f = fixture()) {
-          f.extraFaults.add("read#1");
-          f.faultTypes.put("read#1", primary);
+          f.extraFaults.add(FIXTURE_READ_1_D82DE594);
+          f.faultTypes.put(FIXTURE_READ_1_D82DE594, primary);
           f.extraFaults.add(close + "#1");
           f.faultTypes.put(close + "#1", primary);
           assertSame(primary, assertThrows(primary.getClass(), () -> read(f)));
@@ -787,9 +790,9 @@ final class BackupManifestReaderTest {
       }
     try (var f = fixture()) {
       var fatal = new AssertionError("public close fatal");
-      f.extraFaults.add("read#1");
-      f.extraFaults.add("closeChannel#1");
-      f.faultTypes.put("closeChannel#1", fatal);
+      f.extraFaults.add(FIXTURE_READ_1_D82DE594);
+      f.extraFaults.add(FIXTURE_CLOSECHANNEL_1_2CBD3D35);
+      f.faultTypes.put(FIXTURE_CLOSECHANNEL_1_2CBD3D35, fatal);
       assertSame(fatal, assertThrows(AssertionError.class, () -> read(f)));
       f.released();
     }
@@ -803,8 +806,8 @@ final class BackupManifestReaderTest {
                 case 2 -> new NullPointerException(FIXTURE_PUBLIC_PRIMARY_DBDAEFC3);
                 default -> new AssertionError(FIXTURE_PUBLIC_PRIMARY_DBDAEFC3);
               };
-          f.extraFaults.add("read#1");
-          f.faultTypes.put("read#1", primary);
+          f.extraFaults.add(FIXTURE_READ_1_D82DE594);
+          f.faultTypes.put(FIXTURE_READ_1_D82DE594, primary);
           f.extraFaults.add(close + "#1");
           if (kind == 0) denied(() -> read(f));
           else {
@@ -827,8 +830,8 @@ final class BackupManifestReaderTest {
             new NullPointerException("public cleanup"),
             new AssertionError("public cleanup"))) {
       try (var f = fixture()) {
-        f.extraFaults.add("closeChannel#1");
-        f.faultTypes.put("closeChannel#1", cleanup);
+        f.extraFaults.add(FIXTURE_CLOSECHANNEL_1_2CBD3D35);
+        f.faultTypes.put(FIXTURE_CLOSECHANNEL_1_2CBD3D35, cleanup);
         assertSame(cleanup, assertThrows(cleanup.getClass(), () -> read(f)));
         f.released();
       }
@@ -938,15 +941,17 @@ final class BackupManifestReaderTest {
         }
       }
     try (var f = fixture()) {
-      f.extraFaults.add("attributes#1");
-      f.faultTypes.put("attributes#1", new UnsupportedOperationException("public unavailable"));
+      f.extraFaults.add(FIXTURE_ATTRIBUTES_1_3F7B5B66);
+      f.faultTypes.put(
+          FIXTURE_ATTRIBUTES_1_3F7B5B66, new UnsupportedOperationException("public unavailable"));
       denied(() -> read(f));
       f.released();
     }
     try (var f = fixture()) {
-      f.extraFaults.add("attributes#1");
+      f.extraFaults.add(FIXTURE_ATTRIBUTES_1_3F7B5B66);
       f.faultTypes.put(
-          "attributes#1", new DirectoryIteratorException(new IOException("public unavailable")));
+          FIXTURE_ATTRIBUTES_1_3F7B5B66,
+          new DirectoryIteratorException(new IOException("public unavailable")));
       denied(() -> read(f));
       f.released();
     }

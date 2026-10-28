@@ -41,6 +41,8 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** PT-AUT-004-01..06: production PBKDF2/JDBC/session/audit, independent hash and SQL oracle. */
 final class AuthenticationServiceTest {
+  private static final String FIXTURE_SELECT_COUNT_FROM_SCHUBERT_AUTH_SESSIONS_F75D93B5 =
+      "select count(*) from schubert.auth_sessions";
   private static final String FIXTURE_LOGIN_USER_D270AFC0 = "login-user";
   private static final String FIXTURE_SELECT_FAILED_COUNT_FROM_SCHUBERT_APP_US_DB6B407A =
       "select failed_count from schubert.app_users";
@@ -163,7 +165,7 @@ final class AuthenticationServiceTest {
           new String(wire, 133, 34, java.nio.charset.StandardCharsets.US_ASCII));
       assertEquals(
           "000000000", new String(wire, 167, 9, java.nio.charset.StandardCharsets.US_ASCII));
-      assertEquals(0, scalar("select count(*) from schubert.auth_sessions"));
+      assertEquals(0, scalar(FIXTURE_SELECT_COUNT_FROM_SCHUBERT_AUTH_SESSIONS_F75D93B5));
       assertEquals(0, scalar("select count(*) from schubert.app_logs"));
       assertEquals(2, scalar(FIXTURE_SELECT_FAILED_COUNT_FROM_SCHUBERT_APP_US_DB6B407A));
       connection.rollback();
@@ -233,7 +235,7 @@ final class AuthenticationServiceTest {
       assertEquals(1, seenHashes.size());
       if (condition.equals("wrong")) assertEquals(fixtureHash, seenHashes.getFirst());
       else assertEquals("{pbkdf2-v1}" + "0".repeat(96), seenHashes.getFirst());
-      assertEquals(0, scalar("select count(*) from schubert.auth_sessions"));
+      assertEquals(0, scalar(FIXTURE_SELECT_COUNT_FROM_SCHUBERT_AUTH_SESSIONS_F75D93B5));
       assertEquals(1, scalar("select failed_count from schubert.login_ip_attempts"));
       assertEquals(
           condition.equals("absent") ? 0 : 1,
@@ -254,7 +256,7 @@ final class AuthenticationServiceTest {
     assertEquals(
         ResultCode.AUTHENTICATION_FAILED,
         call(alwaysTrue, FIXTURE_LOGIN_USER_D270AFC0, password(), NOW).resultCode());
-    assertEquals(0, scalar("select count(*) from schubert.auth_sessions"));
+    assertEquals(0, scalar(FIXTURE_SELECT_COUNT_FROM_SCHUBERT_AUTH_SESSIONS_F75D93B5));
   }
 
   @Test
@@ -345,7 +347,7 @@ final class AuthenticationServiceTest {
       }
       assertEquals(2, count);
     }
-    assertEquals(1, scalar("select count(*) from schubert.auth_sessions"));
+    assertEquals(1, scalar(FIXTURE_SELECT_COUNT_FROM_SCHUBERT_AUTH_SESSIONS_F75D93B5));
     assertEquals(1, scalar("select failed_count from schubert.app_users where id=7"));
   }
 
@@ -537,7 +539,7 @@ final class AuthenticationServiceTest {
         successes.add(
             executor.submit(() -> call(service, FIXTURE_LOGIN_USER_D270AFC0, password(), NOW)));
       for (var result : successes) assertEquals(ResultCode.SUCCESS, result.get().resultCode());
-      assertEquals(12, scalar("select count(*) from schubert.auth_sessions"));
+      assertEquals(12, scalar(FIXTURE_SELECT_COUNT_FROM_SCHUBERT_AUTH_SESSIONS_F75D93B5));
       assertEquals(2, scalar("select count(*) from schubert.auth_sessions where not revoked"));
       assertEquals(
           12, scalar("select count(*) from schubert.app_logs where action='LOGIN_SUCCEEDED'"));
@@ -566,7 +568,7 @@ final class AuthenticationServiceTest {
     assertEquals(32, scalar("select count(*) from schubert.app_logs where action like 'LOGIN_%'"));
     assertEquals(
         10, scalar("select count(*) from schubert.app_logs where action='SESSION_REVOKED'"));
-    assertEquals(12, scalar("select count(*) from schubert.auth_sessions"));
+    assertEquals(12, scalar(FIXTURE_SELECT_COUNT_FROM_SCHUBERT_AUTH_SESSIONS_F75D93B5));
   }
 
   @Test
@@ -609,7 +611,7 @@ final class AuthenticationServiceTest {
       }
       blocker.rollback();
     }
-    assertEquals(0, scalar("select count(*) from schubert.auth_sessions"));
+    assertEquals(0, scalar(FIXTURE_SELECT_COUNT_FROM_SCHUBERT_AUTH_SESSIONS_F75D93B5));
     assertEquals(0, scalar("select count(*) from schubert.app_logs"));
     assertEquals(0, scalar("select count(*) from schubert.login_ip_attempts"));
     assertEquals(0, scalar("select failed_count from schubert.app_users where id=7"));
@@ -744,7 +746,7 @@ final class AuthenticationServiceTest {
   private static void assertEmptyTransactionEffects() throws SQLException {
     assertEquals(0, scalar(FIXTURE_SELECT_FAILED_COUNT_FROM_SCHUBERT_APP_US_DB6B407A));
     assertEquals(0, scalar("select count(*) from schubert.login_ip_attempts"));
-    assertEquals(0, scalar("select count(*) from schubert.auth_sessions"));
+    assertEquals(0, scalar(FIXTURE_SELECT_COUNT_FROM_SCHUBERT_AUTH_SESSIONS_F75D93B5));
     assertEquals(0, scalar("select count(*) from schubert.app_logs"));
   }
 
