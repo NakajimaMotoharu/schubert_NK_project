@@ -1,5 +1,7 @@
 # PGPT成果物一覧・進捗
 
+2026-10-28追加：2377/2378/PG-D757、ApiDurationExporter原24/一suiteとfixture二定数/19参照是正、六normal0/PMD-CS0/六SpotBugs0。raw8473/累計944、Main6L1M1B未達はmethod別に保持し100%補完0、正式1964-53/17-190/工数null/HOLD不変。次は必要なapproved接続のwholefixtureを別scopeで審査・通常PG/PT継続。
+
 2026-10-28追加：2375/2376/PG-D756、MetricContext両role各33＝66/二suiteの同source成功と二Main148L26M2C51B全miss0。16指摘是正/raw8475/累計942・ownership四新参照、六normal0/SpotBugs0・PMDraw38/静的真正1と全六artifact未達を保持。BUG1998の旧工具1/旧sourcef29 build1は保全・当sourcef75へ成功転用0。正式1964-53/17-190/工数null/HOLD不変、保存後通常PG/PT継続。
 
 2026-10-28追加：2373/2374/PG-D755、AlertThresholds Main上限名とTest TWRの二是正、当source af3f0f86の原14/一suite成功・Main66L21M1C102B全miss0、六compile0/SpotBugs0・PMD残Thread四のgate1を保持。raw8491/累計926、正式1964-53/17-190/工数null・全F03/451/HOLD不変。YKT1744 actualTransferCleanup候補はOPEN、通常PG/PTを継続。

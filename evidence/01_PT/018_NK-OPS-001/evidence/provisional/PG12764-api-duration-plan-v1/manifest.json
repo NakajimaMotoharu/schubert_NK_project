@@ -1,0 +1,132 @@
+{
+  "actualExit": 0,
+  "allMainAndOtherInputsUnchanged": true,
+  "completeStringReferences": 19,
+  "coverage": null,
+  "eligibilityClosureSourceHashes": {
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ApiDurationMetricExporter.java": "8c60f981ee23028f0566d61447fb2bffdad75008d3bb0e206c3e91d4cac1e6af",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ApiMetricCatalog.java": "c3d1fc99a2679fa8ef4e8ce19c4da32da376efba8cfb8c1dc8291ce8d0202979",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/header/InteractionKind.java": "5424c3f1ad90de3965e298380da683ec72644ecd8fae80117c01001d1d0aa620",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/header/MessageKind.java": "3b003356680171b300d7c5d680b05cec255f4267190907c62cfaec3261a920a0",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/header/ResultCode.java": "ade5ac5514ed62f2be57419eeab2d3a5e27da98a1c6607621be60e3a11c162f4",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/LayoutDefinition.java": "d4ad2f50f40e9cb860786af43875583ac324fd2e6055f0bee1e6804101257d5d",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/LayoutId.java": "87c8f01b5f84f211a8902d323eba221d11dc6b6add1cfe2a514fdbb68e82bc24",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/LayoutRegistry.java": "6c8f5806097d9827a02058f8c1b53f108e2e40f28ef190ead2a7f9140be080f8",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/LayoutValidationException.java": "b99e562fe3afd1f1e11a7ff415f25999c14e46016d5a115022706d4f8674a9df",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/UnsupportedLayoutException.java": "ed22caff978204b37fce0e3b9221758e7539596b64e3c19be77f76f7b7901dd2",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/transport/BrokerTopology.java": "57e7967fe6b44f7e37eb510bd0d2c0a877e5257c73e7d688c0fdab59379f46c5"
+  },
+  "invocation": {
+    "actualPythonCommand": [
+      "/usr/bin/python3",
+      "-B",
+      "tools/quality/pg12764_api_duration_plan.py"
+    ],
+    "arbitraryArgumentsRecorded": false,
+    "entrypointPath": "tools/quality/pg12764_api_duration_plan.py",
+    "entrypointSha256": "9b6cff44d3c0d67106a43c301e6f54f3acbaca3ac83ebba362d05d704e42644c",
+    "helperPath": "tools/quality/host_tool_invocation.py",
+    "helperSha256": "85d616a3db4ff47f4c95ae2e0dd57954bc2b09f28b8f2a685b986e5621545c46",
+    "libraryPath": "tools/quality/pg12764_api_duration_plan.py",
+    "librarySha256": "9b6cff44d3c0d67106a43c301e6f54f3acbaca3ac83ebba362d05d704e42644c",
+    "loadedProjectPythonSources": {
+      "tools/quality/fixture_scope_advisory.py": "7cb04fe4c1efe260af65f17a392c1b7aff3ddb32af2db1dea4d78a69fc214e8d",
+      "tools/quality/g07_host_class_provenance_inputs.py": "a676cb3e4145177c3c243722d737592ce7d44c3f29cfe4f670662ef7651f046b",
+      "tools/quality/host_tool_invocation.py": "85d616a3db4ff47f4c95ae2e0dd57954bc2b09f28b8f2a685b986e5621545c46",
+      "tools/quality/pg12764_api_duration_plan.py": "9b6cff44d3c0d67106a43c301e6f54f3acbaca3ac83ebba362d05d704e42644c",
+      "tools/quality/public_java_digest_provenance.py": "dd47f8735a61ce849995633c3290a6ad047842ef3263829ce359db413778f7a0"
+    },
+    "provenance": "OBSERVED_SYS_ARGV_AND_ORIG_ARGV_NOT_RECONSTRUCTED"
+  },
+  "judgement": "PT_DEFAULT_WHOLE_API_DURATION_MEMORY_SNAPSHOT_JDK_OUTPUTSTREAM_NO_EXTERNAL_IO",
+  "metadataAdvisory": {
+    "coverage": null,
+    "directImports": {
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ApiDurationMetricExporter.java": [],
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ApiMetricCatalog.java": [
+        {
+          "name": "dev.codex.schubert.nk.protocol.header.ResultCode",
+          "outerSourceCandidate": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/header/ResultCode.java",
+          "static": false
+        },
+        {
+          "name": "dev.codex.schubert.nk.protocol.layout.LayoutRegistry",
+          "outerSourceCandidate": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/LayoutRegistry.java",
+          "static": false
+        },
+        {
+          "name": "dev.codex.schubert.nk.protocol.transport.BrokerTopology",
+          "outerSourceCandidate": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/transport/BrokerTopology.java",
+          "static": false
+        }
+      ],
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiDurationMetricExporterTest.java": [],
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/header/InteractionKind.java": [],
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/header/MessageKind.java": [],
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/header/ResultCode.java": [],
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/LayoutDefinition.java": [
+        {
+          "name": "dev.codex.schubert.nk.protocol.header.InteractionKind",
+          "outerSourceCandidate": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/header/InteractionKind.java",
+          "static": false
+        },
+        {
+          "name": "dev.codex.schubert.nk.protocol.header.MessageKind",
+          "outerSourceCandidate": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/header/MessageKind.java",
+          "static": false
+        }
+      ],
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/LayoutId.java": [],
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/LayoutRegistry.java": [
+        {
+          "name": "dev.codex.schubert.nk.protocol.header.InteractionKind",
+          "outerSourceCandidate": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/header/InteractionKind.java",
+          "static": false
+        },
+        {
+          "name": "dev.codex.schubert.nk.protocol.header.MessageKind",
+          "outerSourceCandidate": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/header/MessageKind.java",
+          "static": false
+        }
+      ],
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/LayoutValidationException.java": [],
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/UnsupportedLayoutException.java": [],
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/transport/BrokerTopology.java": []
+    },
+    "executionQualified": false,
+    "holdReleased": false,
+    "limitations": [
+      "RAW_LEXER_NOT_JAVA_UNICODE_PREPROCESSOR",
+      "SAME_PACKAGE_AND_INHERITED_REFERENCES_NOT_CLOSED",
+      "REFLECTION_TRANSITIVE_CALL_AND_INITIALIZATION_NOT_PROVEN",
+      "PARENT_MUST_REVIEW_WHOLE_FIXTURE_OPERATIONS_AND_ORACLE"
+    ],
+    "metadataConsistent": true,
+    "metadataIssues": [],
+    "newAccepted": 0,
+    "originalOwners": [
+      {
+        "canonicalCostOwner": "WBS-P018-09",
+        "canonicalOwner": "WBS-P018-09",
+        "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiDurationMetricExporterTest.java"
+      }
+    ],
+    "productTestsExecuted": 0
+  },
+  "metadataNegativeVectors": 10,
+  "newAccepted": 0,
+  "originalSuites": 1,
+  "originalTests": 24,
+  "productTestsExecuted": 0,
+  "sourceBefore": "f75d2fea05a98fe40d731d1a3046a64d20bbbb65",
+  "sourceChanges": [
+    {
+      "beforeSha256": "01ba3ce772814042c2ca8434a24fefd4eecf81ec6e25e9dd1dd6e96431cb5db5",
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiDurationMetricExporterTest.java",
+      "sha256": "be8d7f91cbfbd752446ad5385436e4b5c6e0cd47a63f5868a5d2c7b2870a23ec"
+    }
+  ],
+  "specificationPath": "evidence/01_PT/018_NK-OPS-001/2377_ApiDurationExporter\u516824fixture\u4e8c\u5b9a\u6570\u662f\u6b63_\u5358\u4f53\u30c6\u30b9\u30c8\u4ed5\u69d8\u66f8.md",
+  "specificationSha256": "da5f55467f7a949e816eaa68a1a8432b8c2c00f6fcdba1f71476cde8fa69cd81",
+  "totalCorrections": 2
+}
