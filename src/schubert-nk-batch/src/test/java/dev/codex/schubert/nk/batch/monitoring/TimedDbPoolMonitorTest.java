@@ -22,10 +22,11 @@ import org.junit.jupiter.api.Test;
  * Supplied count/percent/context vectors, not a real pool, counter source or database operation.
  */
 class TimedDbPoolMonitorTest {
-  private static final Instant AT = Instant.parse("2026-10-23T00:00:00Z");
+  private static final Instant OBSERVED_AT = Instant.parse("2026-10-23T00:00:00Z");
 
   private static ObservationContext at(long seconds, CauseClearance cause) {
-    return new ObservationContext(cause, AT.plusSeconds(seconds), Duration.ofSeconds(seconds));
+    return new ObservationContext(
+        cause, OBSERVED_AT.plusSeconds(seconds), Duration.ofSeconds(seconds));
   }
 
   private static TimedDbPoolMonitor.Evaluation sample(
@@ -48,14 +49,14 @@ class TimedDbPoolMonitorTest {
                 true,
                 new ObservationContext(
                     CauseClearance.UNCONFIRMED,
-                    AT.plusSeconds(299),
+                    OBSERVED_AT.plusSeconds(299),
                     Duration.ofSeconds(299, 999_999_999)))
             .event()
             .isEmpty());
     var warning = sample(monitor, 80, 300).event().orElseThrow();
     assertEquals(Severity.WARNING, warning.severity());
     assertEquals(Condition.DB_POOL, warning.condition());
-    assertEquals(AT.plusSeconds(300), warning.firstSeen());
+    assertEquals(OBSERVED_AT.plusSeconds(300), warning.firstSeen());
     assertEquals(BigInteger.ONE, warning.count());
     assertTrue(sample(monitor, 0, 301).event().orElseThrow().isOpen());
     assertTrue(sample(monitor, 0, 600).event().orElseThrow().isOpen());
@@ -79,7 +80,7 @@ class TimedDbPoolMonitorTest {
               .orElseThrow();
       assertEquals(Severity.CRITICAL, critical.severity());
       assertEquals(Service.API, critical.service());
-      assertEquals(AT, critical.firstSeen());
+      assertEquals(OBSERVED_AT, critical.firstSeen());
       monitor.observe(OptionalDouble.of(0), 0, 0, true, at(1, CauseClearance.UNCONFIRMED));
       assertTrue(
           monitor
@@ -237,7 +238,7 @@ class TimedDbPoolMonitorTest {
       for (var result : pool.invokeAll(jobs)) assertEquals(Severity.CRITICAL, result.get());
     }
     assertEquals(BigInteger.ONE, first.count());
-    assertEquals(AT, first.lastSeen());
+    assertEquals(OBSERVED_AT, first.lastSeen());
     assertEquals(BigInteger.valueOf(65), monitor.snapshot().orElseThrow().count());
   }
 

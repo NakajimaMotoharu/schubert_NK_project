@@ -30,7 +30,8 @@ import org.junit.jupiter.api.Test;
 
 /** Literal transfer thresholds/recovery clock and real owned SDK, no collection or control. */
 class TransferHealthMonitorTest {
-  private static final Instant AT = Instant.parse("2026-10-23T00:00:00Z");
+  private static final Instant OBSERVED_AT = Instant.parse("2026-10-23T00:00:00Z");
+  private static final String DEBUG_MODE_FIXTURE = "DEBUG";
 
   private static final class Registry extends SimpleMeterRegistry implements AutoCloseable {
     final AtomicInteger calls = new AtomicInteger();
@@ -60,7 +61,8 @@ class TransferHealthMonitorTest {
   }
 
   private static ObservationContext at(long seconds, CauseClearance cause) {
-    return new ObservationContext(cause, AT.plusSeconds(seconds), Duration.ofSeconds(seconds));
+    return new ObservationContext(
+        cause, OBSERVED_AT.plusSeconds(seconds), Duration.ofSeconds(seconds));
   }
 
   private static Usage usage(long files, long bytes) {
@@ -76,7 +78,7 @@ class TransferHealthMonitorTest {
   @Test
   void transferConn001DebugUsesExactCountsMetricsAndSameImmutableInput() {
     try (var registry = new Registry()) {
-      var monitor = new TransferHealthMonitor(registry, "DEBUG", Service.WEB);
+      var monitor = new TransferHealthMonitor(registry, DEBUG_MODE_FIXTURE, Service.WEB);
       assertTrue(monitor.snapshot().isEmpty());
       assertTrue(monitor.observedUsage().isEmpty());
       assertTrue(monitor.detailedMetricsRequested());
@@ -99,13 +101,13 @@ class TransferHealthMonitorTest {
   void transferConn002WarningBytesAndFilesHaveIndependentExactBoundaries() {
     try (var byteRegistry = new Registry();
         var countRegistry = new Registry()) {
-      var bytes = new TransferHealthMonitor(byteRegistry, "DEBUG", Service.WEB);
-      var counts = new TransferHealthMonitor(countRegistry, "DEBUG", Service.API);
+      var bytes = new TransferHealthMonitor(byteRegistry, DEBUG_MODE_FIXTURE, Service.WEB);
+      var counts = new TransferHealthMonitor(countRegistry, DEBUG_MODE_FIXTURE, Service.API);
       assertTrue(sample(bytes, 0, 3_499_999_999L, 0).event().isEmpty());
       var byteEvent = sample(bytes, 0, 3_500_000_000L, 1).event().orElseThrow();
       assertEquals(Severity.WARNING, byteEvent.severity());
       assertEquals(Condition.TRANSFER, byteEvent.condition());
-      assertEquals(AT.plusSeconds(1), byteEvent.firstSeen());
+      assertEquals(OBSERVED_AT.plusSeconds(1), byteEvent.firstSeen());
       assertEquals(Service.WEB, byteEvent.service());
       assertTrue(sample(counts, 4999, 0, 0).event().isEmpty());
       var countEvent = sample(counts, 5000, 0, 1).event().orElseThrow();
@@ -133,8 +135,8 @@ class TransferHealthMonitorTest {
   void transferConn003CriticalPromotesSameEventAndRemainsStickyAtWarningValues() {
     try (var byteRegistry = new Registry();
         var countRegistry = new Registry()) {
-      var bytes = new TransferHealthMonitor(byteRegistry, "DEBUG", Service.BATCH);
-      var counts = new TransferHealthMonitor(countRegistry, "DEBUG", Service.WEB);
+      var bytes = new TransferHealthMonitor(byteRegistry, DEBUG_MODE_FIXTURE, Service.BATCH);
+      var counts = new TransferHealthMonitor(countRegistry, DEBUG_MODE_FIXTURE, Service.WEB);
       var warning = sample(bytes, 0, 4_499_999_999L, 0).event().orElseThrow();
       assertEquals(Severity.WARNING, warning.severity());
       var critical = sample(bytes, 0, 4_500_000_000L, 1).event().orElseThrow();
@@ -166,7 +168,7 @@ class TransferHealthMonitorTest {
   @Test
   void transferConn004UnknownClearsGaugesWithoutNormalizingOrClosingEvent() {
     try (var registry = new Registry()) {
-      var monitor = new TransferHealthMonitor(registry, "DEBUG", Service.BATCH);
+      var monitor = new TransferHealthMonitor(registry, DEBUG_MODE_FIXTURE, Service.BATCH);
       var initial = monitor.observe(Optional.empty(), true, at(0, CauseClearance.CONFIRMED));
       assertFalse(initial.suppliedValuePresent());
       assertTrue(initial.event().isEmpty());
@@ -190,7 +192,7 @@ class TransferHealthMonitorTest {
   @Test
   void transferConn005ExplicitGapRestartsCriticalRecoveryWithoutIncrement() {
     try (var registry = new Registry()) {
-      var monitor = new TransferHealthMonitor(registry, "DEBUG", Service.API);
+      var monitor = new TransferHealthMonitor(registry, DEBUG_MODE_FIXTURE, Service.API);
       var critical = sample(monitor, 9000, 0, 0).event().orElseThrow();
       sample(monitor, 0, 0, 1);
       var gap = monitor.observe(Optional.of(usage(0, 0)), false, at(601, CauseClearance.CONFIRMED));
@@ -240,14 +242,15 @@ class TransferHealthMonitorTest {
         NullPointerException.class, () -> new TransferHealthMonitor(null, "STANDARD", Service.WEB));
     try (var registry = new Registry()) {
       assertThrows(
-          NullPointerException.class, () -> new TransferHealthMonitor(registry, "DEBUG", null));
+          NullPointerException.class,
+          () -> new TransferHealthMonitor(registry, DEBUG_MODE_FIXTURE, null));
       assertThrows(
           NullPointerException.class, () -> new TransferHealthMonitor(registry, null, Service.WEB));
       assertThrows(
           IllegalArgumentException.class,
           () -> new TransferHealthMonitor(registry, "debug", Service.WEB));
       assertEquals(0, registry.calls.get());
-      var monitor = new TransferHealthMonitor(registry, "DEBUG", Service.WEB);
+      var monitor = new TransferHealthMonitor(registry, DEBUG_MODE_FIXTURE, Service.WEB);
       var input = usage(9000, 0);
       var before =
           monitor
@@ -272,7 +275,7 @@ class TransferHealthMonitorTest {
             failure,
             assertThrows(
                 failure.getClass(),
-                () -> new TransferHealthMonitor(registry, "DEBUG", Service.WEB)));
+                () -> new TransferHealthMonitor(registry, DEBUG_MODE_FIXTURE, Service.WEB)));
         assertEquals(1, registry.calls.get());
         assertEquals(0, registry.closes.get());
         assertFalse(registry.isClosed());
@@ -283,7 +286,7 @@ class TransferHealthMonitorTest {
   void transferConn008ConcurrentOneOwnerHasExactCountAndImmutableOldSnapshot() throws Exception {
     try (var registry = new Registry();
         var pool = Executors.newFixedThreadPool(8)) {
-      var monitor = new TransferHealthMonitor(registry, "DEBUG", Service.BATCH);
+      var monitor = new TransferHealthMonitor(registry, DEBUG_MODE_FIXTURE, Service.BATCH);
       var input = usage(9000, 1024);
       var first =
           monitor
@@ -303,7 +306,7 @@ class TransferHealthMonitorTest {
               .toList();
       for (var result : pool.invokeAll(jobs)) assertEquals(Severity.CRITICAL, result.get());
       assertEquals(BigInteger.ONE, first.count());
-      assertEquals(AT, first.lastSeen());
+      assertEquals(OBSERVED_AT, first.lastSeen());
       assertEquals(BigInteger.valueOf(65), monitor.snapshot().orElseThrow().count());
       assertSame(input, monitor.observedUsage().orElseThrow());
       assertEquals(4, registry.getMeters().size());

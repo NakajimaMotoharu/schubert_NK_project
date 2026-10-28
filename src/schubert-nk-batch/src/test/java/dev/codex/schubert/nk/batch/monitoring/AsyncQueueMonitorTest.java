@@ -27,10 +27,11 @@ import org.junit.jupiter.api.Test;
  * operations.
  */
 class AsyncQueueMonitorTest {
-  private static final Instant AT = Instant.parse("2026-10-23T00:00:00Z");
+  private static final Instant OBSERVED_AT = Instant.parse("2026-10-23T00:00:00Z");
 
   private static ObservationContext at(long seconds, CauseClearance cause) {
-    return new ObservationContext(cause, AT.plusSeconds(seconds), Duration.ofSeconds(seconds));
+    return new ObservationContext(
+        cause, OBSERVED_AT.plusSeconds(seconds), Duration.ofSeconds(seconds));
   }
 
   private static Evaluation sample(
@@ -135,8 +136,8 @@ class AsyncQueueMonitorTest {
         assertEquals(Condition.ASYNC_QUEUE, event.condition());
         assertEquals(Service.API, event.service());
         assertEquals(BigInteger.ONE, event.count());
-        assertEquals(AT, event.firstSeen());
-        assertEquals(AT, event.lastSeen());
+        assertEquals(OBSERVED_AT, event.firstSeen());
+        assertEquals(OBSERVED_AT, event.lastSeen());
         assertTrue(event.isOpen());
       }
     }
@@ -210,8 +211,8 @@ class AsyncQueueMonitorTest {
     var closed = sample(monitor, 0, 100000, 500).event().orElseThrow();
     assertFalse(closed.isOpen());
     assertEquals(BigInteger.ONE, closed.count());
-    assertEquals(AT, closed.firstSeen());
-    assertEquals(AT, closed.lastSeen());
+    assertEquals(OBSERVED_AT, closed.firstSeen());
+    assertEquals(OBSERVED_AT, closed.lastSeen());
     assertTrue(monitor.snapshot().isEmpty());
     assertTrue(first.isOpen());
   }
@@ -236,8 +237,8 @@ class AsyncQueueMonitorTest {
     assertFalse(closed.isOpen());
     assertEquals(Severity.CRITICAL, closed.severity());
     assertEquals(BigInteger.TWO, closed.count());
-    assertEquals(AT, closed.firstSeen());
-    assertEquals(AT.plusSeconds(1), closed.lastSeen());
+    assertEquals(OBSERVED_AT, closed.firstSeen());
+    assertEquals(OBSERVED_AT.plusSeconds(1), closed.lastSeen());
     assertTrue(monitor.snapshot().isEmpty());
   }
 
@@ -309,8 +310,8 @@ class AsyncQueueMonitorTest {
     var finalEvent = monitor.snapshot().orElseThrow();
     assertEquals(BigInteger.valueOf(64), finalEvent.count());
     assertEquals(Severity.CRITICAL, finalEvent.severity());
-    assertEquals(AT, finalEvent.firstSeen());
-    assertEquals(AT, finalEvent.lastSeen());
+    assertEquals(OBSERVED_AT, finalEvent.firstSeen());
+    assertEquals(OBSERVED_AT, finalEvent.lastSeen());
     assertSame(otherEvent, other.snapshot().orElseThrow());
     assertEquals(BigInteger.ONE, otherEvent.count());
     assertEquals(Severity.WARNING, otherEvent.severity());

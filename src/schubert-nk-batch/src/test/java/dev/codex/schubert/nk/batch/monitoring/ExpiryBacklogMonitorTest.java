@@ -25,10 +25,11 @@ import org.junit.jupiter.api.Test;
  * EXPIRYMON001..008/1676: supplied count and memory context only, no actual queue/purge/control.
  */
 class ExpiryBacklogMonitorTest {
-  private static final Instant AT = Instant.parse("2026-10-24T00:00:00Z");
+  private static final Instant OBSERVED_AT = Instant.parse("2026-10-24T00:00:00Z");
 
   private static ObservationContext at(long seconds, CauseClearance cause) {
-    return new ObservationContext(cause, AT.plusSeconds(seconds), Duration.ofSeconds(seconds));
+    return new ObservationContext(
+        cause, OBSERVED_AT.plusSeconds(seconds), Duration.ofSeconds(seconds));
   }
 
   private static Evaluation sample(ExpiryBacklogMonitor monitor, long count, long seconds) {
@@ -65,8 +66,8 @@ class ExpiryBacklogMonitorTest {
         assertEquals(Condition.EXPIRY, event.condition());
         assertEquals(Service.BROKER, event.service());
         assertEquals(BigInteger.ONE, event.count());
-        assertEquals(AT, event.firstSeen());
-        assertEquals(AT, event.lastSeen());
+        assertEquals(OBSERVED_AT, event.firstSeen());
+        assertEquals(OBSERVED_AT, event.lastSeen());
         assertTrue(event.isOpen());
       }
     }
@@ -85,8 +86,8 @@ class ExpiryBacklogMonitorTest {
     var closed = sample(monitor, 0, 500).event().orElseThrow();
     assertFalse(closed.isOpen());
     assertEquals(BigInteger.ONE, closed.count());
-    assertEquals(AT, closed.firstSeen());
-    assertEquals(AT, closed.lastSeen());
+    assertEquals(OBSERVED_AT, closed.firstSeen());
+    assertEquals(OBSERVED_AT, closed.lastSeen());
     assertTrue(first.isOpen());
     assertTrue(monitor.snapshot().isEmpty());
   }
@@ -105,8 +106,8 @@ class ExpiryBacklogMonitorTest {
     var closed = sample(monitor, 0, 603).event().orElseThrow();
     assertFalse(closed.isOpen());
     assertEquals(Severity.CRITICAL, closed.severity());
-    assertEquals(AT, closed.firstSeen());
-    assertEquals(AT.plusSeconds(1), closed.lastSeen());
+    assertEquals(OBSERVED_AT, closed.firstSeen());
+    assertEquals(OBSERVED_AT.plusSeconds(1), closed.lastSeen());
     assertEquals(BigInteger.TWO, closed.count());
     assertEquals(BigInteger.ONE, first.count());
     assertTrue(monitor.snapshot().isEmpty());
@@ -160,8 +161,8 @@ class ExpiryBacklogMonitorTest {
     var actual = monitor.snapshot().orElseThrow();
     assertEquals(BigInteger.valueOf(64), actual.count());
     assertEquals(Severity.CRITICAL, actual.severity());
-    assertEquals(AT, actual.firstSeen());
-    assertEquals(AT, actual.lastSeen());
+    assertEquals(OBSERVED_AT, actual.firstSeen());
+    assertEquals(OBSERVED_AT, actual.lastSeen());
     assertSame(otherEvent, other.snapshot().orElseThrow());
     assertEquals(BigInteger.ONE, otherEvent.count());
     assertEquals(Severity.WARNING, otherEvent.severity());

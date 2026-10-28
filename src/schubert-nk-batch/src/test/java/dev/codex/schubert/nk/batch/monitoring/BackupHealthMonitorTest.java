@@ -24,10 +24,11 @@ import org.junit.jupiter.api.Test;
 
 /** BACKUPMON001..008/1683 independent fixed health/time fixtures, no actual Backup/DB/Root. */
 class BackupHealthMonitorTest {
-  private static final Instant AT = Instant.parse("2026-10-24T00:00:00Z");
+  private static final Instant OBSERVED_AT = Instant.parse("2026-10-24T00:00:00Z");
 
   private static ObservationContext at(long seconds, CauseClearance cause) {
-    return new ObservationContext(cause, AT.plusSeconds(seconds), Duration.ofSeconds(seconds));
+    return new ObservationContext(
+        cause, OBSERVED_AT.plusSeconds(seconds), Duration.ofSeconds(seconds));
   }
 
   private static Evaluation sample(
@@ -86,8 +87,8 @@ class BackupHealthMonitorTest {
             assertEquals(Condition.BACKUP, event.condition());
             assertEquals(Service.BATCH, event.service());
             assertEquals(BigInteger.ONE, event.count());
-            assertEquals(AT, event.firstSeen());
-            assertEquals(AT, event.lastSeen());
+            assertEquals(OBSERVED_AT, event.firstSeen());
+            assertEquals(OBSERVED_AT, event.lastSeen());
             assertTrue(event.isOpen());
           }
         }
@@ -136,8 +137,8 @@ class BackupHealthMonitorTest {
     var closed = sample(owner, true, true, 0, 500).event().orElseThrow();
     assertFalse(closed.isOpen());
     assertEquals(BigInteger.ONE, closed.count());
-    assertEquals(AT, closed.firstSeen());
-    assertEquals(AT, closed.lastSeen());
+    assertEquals(OBSERVED_AT, closed.firstSeen());
+    assertEquals(OBSERVED_AT, closed.lastSeen());
     assertTrue(owner.snapshot().isEmpty());
     assertTrue(first.isOpen());
   }
@@ -162,8 +163,8 @@ class BackupHealthMonitorTest {
     assertFalse(closed.isOpen());
     assertEquals(BigInteger.TWO, closed.count());
     assertEquals(Severity.CRITICAL, closed.severity());
-    assertEquals(AT, closed.firstSeen());
-    assertEquals(AT.plusSeconds(1), closed.lastSeen());
+    assertEquals(OBSERVED_AT, closed.firstSeen());
+    assertEquals(OBSERVED_AT.plusSeconds(1), closed.lastSeen());
     assertTrue(owner.snapshot().isEmpty());
   }
 
@@ -211,8 +212,8 @@ class BackupHealthMonitorTest {
     var last = owner.snapshot().orElseThrow();
     assertEquals(BigInteger.valueOf(64), last.count());
     assertEquals(Severity.CRITICAL, last.severity());
-    assertEquals(AT, last.firstSeen());
-    assertEquals(AT, last.lastSeen());
+    assertEquals(OBSERVED_AT, last.firstSeen());
+    assertEquals(OBSERVED_AT, last.lastSeen());
     assertSame(otherEvent, other.snapshot().orElseThrow());
     assertEquals(BigInteger.ONE, otherEvent.count());
     assertEquals(Severity.WARNING, otherEvent.severity());

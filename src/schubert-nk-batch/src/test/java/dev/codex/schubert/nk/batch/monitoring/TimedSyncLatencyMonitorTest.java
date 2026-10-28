@@ -21,10 +21,11 @@ import org.junit.jupiter.api.Test;
  * SS351 literal strict boundaries and independent elapsed time, no actual percentile calculation.
  */
 class TimedSyncLatencyMonitorTest {
-  private static final Instant AT = Instant.parse("2026-10-23T00:00:00Z");
+  private static final Instant OBSERVED_AT = Instant.parse("2026-10-23T00:00:00Z");
 
   private static ObservationContext at(long seconds, CauseClearance cause) {
-    return new ObservationContext(cause, AT.plusSeconds(seconds), Duration.ofSeconds(seconds));
+    return new ObservationContext(
+        cause, OBSERVED_AT.plusSeconds(seconds), Duration.ofSeconds(seconds));
   }
 
   private static TimedSyncLatencyMonitor.Evaluation sample(
@@ -46,14 +47,14 @@ class TimedSyncLatencyMonitorTest {
                 true,
                 new ObservationContext(
                     CauseClearance.CONFIRMED,
-                    AT.plusSeconds(600),
+                    OBSERVED_AT.plusSeconds(600),
                     Duration.ofSeconds(600, 999_999_999)))
             .event()
             .isEmpty());
     var warning = sample(monitor, 2.0001, 601).event().orElseThrow();
     assertEquals(Severity.WARNING, warning.severity());
     assertEquals(Condition.SYNC_P95, warning.condition());
-    assertEquals(AT.plusSeconds(601), warning.firstSeen());
+    assertEquals(OBSERVED_AT.plusSeconds(601), warning.firstSeen());
     assertEquals(BigInteger.ONE, warning.count());
   }
 
@@ -72,7 +73,7 @@ class TimedSyncLatencyMonitorTest {
                 true,
                 new ObservationContext(
                     CauseClearance.CONFIRMED,
-                    AT.plusSeconds(600),
+                    OBSERVED_AT.plusSeconds(600),
                     Duration.ofSeconds(600, 999_999_999)))
             .event()
             .orElseThrow()
@@ -178,7 +179,7 @@ class TimedSyncLatencyMonitorTest {
       for (var result : pool.invokeAll(jobs)) assertEquals(Severity.CRITICAL, result.get());
     }
     assertEquals(BigInteger.ONE, first.count());
-    assertEquals(AT.plusSeconds(300), first.lastSeen());
+    assertEquals(OBSERVED_AT.plusSeconds(300), first.lastSeen());
     assertEquals(BigInteger.valueOf(65), monitor.snapshot().orElseThrow().count());
   }
 

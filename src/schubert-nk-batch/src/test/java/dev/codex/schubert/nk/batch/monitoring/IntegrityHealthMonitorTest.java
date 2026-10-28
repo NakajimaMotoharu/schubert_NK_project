@@ -23,10 +23,11 @@ import org.junit.jupiter.api.Test;
 
 /** INTEGRITYMON001..008/1687 fixed count/time fixtures, no real file/DB/key/config access. */
 class IntegrityHealthMonitorTest {
-  private static final Instant AT = Instant.parse("2026-10-24T00:00:00Z");
+  private static final Instant OBSERVED_AT = Instant.parse("2026-10-24T00:00:00Z");
 
   private static ObservationContext at(long seconds, CauseClearance cause) {
-    return new ObservationContext(cause, AT.plusSeconds(seconds), Duration.ofSeconds(seconds));
+    return new ObservationContext(
+        cause, OBSERVED_AT.plusSeconds(seconds), Duration.ofSeconds(seconds));
   }
 
   private static IntegrityHealthMonitor owner() {
@@ -60,8 +61,8 @@ class IntegrityHealthMonitorTest {
       assertEquals(Service.BATCH, event.service());
       assertEquals(Severity.CRITICAL, event.severity());
       assertEquals(BigInteger.ONE, event.count());
-      assertEquals(AT, event.firstSeen());
-      assertEquals(AT, event.lastSeen());
+      assertEquals(OBSERVED_AT, event.firstSeen());
+      assertEquals(OBSERVED_AT, event.lastSeen());
       assertTrue(event.isOpen());
     }
   }
@@ -86,8 +87,8 @@ class IntegrityHealthMonitorTest {
     assertSame(first, owner.snapshot().orElseThrow());
     assertTrue(first.isOpen());
     assertEquals(BigInteger.ONE, first.count());
-    assertEquals(AT, first.firstSeen());
-    assertEquals(AT, first.lastSeen());
+    assertEquals(OBSERVED_AT, first.firstSeen());
+    assertEquals(OBSERVED_AT, first.lastSeen());
   }
 
   @Test
@@ -103,8 +104,8 @@ class IntegrityHealthMonitorTest {
     var second = sample(owner, 1, 603).event().orElseThrow();
     assertEquals(Severity.CRITICAL, second.severity());
     assertEquals(BigInteger.TWO, second.count());
-    assertEquals(AT, second.firstSeen());
-    assertEquals(AT.plusSeconds(603), second.lastSeen());
+    assertEquals(OBSERVED_AT, second.firstSeen());
+    assertEquals(OBSERVED_AT.plusSeconds(603), second.lastSeen());
     assertEquals(BigInteger.ONE, first.count());
     assertTrue(first.isOpen());
   }
@@ -155,8 +156,8 @@ class IntegrityHealthMonitorTest {
     assertEquals(BigInteger.valueOf(64), last.count());
     assertEquals(Severity.CRITICAL, last.severity());
     assertEquals(Service.BATCH, last.service());
-    assertEquals(AT, last.firstSeen());
-    assertEquals(AT, last.lastSeen());
+    assertEquals(OBSERVED_AT, last.firstSeen());
+    assertEquals(OBSERVED_AT, last.lastSeen());
     assertSame(otherEvent, other.snapshot().orElseThrow());
     assertEquals(Service.API, otherEvent.service());
     assertEquals(BigInteger.ONE, otherEvent.count());

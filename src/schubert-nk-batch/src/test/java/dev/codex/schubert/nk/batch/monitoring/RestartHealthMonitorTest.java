@@ -25,10 +25,11 @@ import org.junit.jupiter.api.Test;
  * RESTARTMON001..008/1685 independent count/flag/time fixtures; no systemd/control/history read.
  */
 class RestartHealthMonitorTest {
-  private static final Instant AT = Instant.parse("2026-10-24T00:00:00Z");
+  private static final Instant OBSERVED_AT = Instant.parse("2026-10-24T00:00:00Z");
 
   private static ObservationContext at(long seconds, CauseClearance cause) {
-    return new ObservationContext(cause, AT.plusSeconds(seconds), Duration.ofSeconds(seconds));
+    return new ObservationContext(
+        cause, OBSERVED_AT.plusSeconds(seconds), Duration.ofSeconds(seconds));
   }
 
   private static RestartHealthMonitor owner() {
@@ -85,8 +86,8 @@ class RestartHealthMonitorTest {
           assertEquals(Condition.RESTART, event.condition());
           assertEquals(Service.WEB, event.service());
           assertEquals(BigInteger.ONE, event.count());
-          assertEquals(AT, event.firstSeen());
-          assertEquals(AT, event.lastSeen());
+          assertEquals(OBSERVED_AT, event.firstSeen());
+          assertEquals(OBSERVED_AT, event.lastSeen());
           assertTrue(event.isOpen());
         }
       }
@@ -141,8 +142,8 @@ class RestartHealthMonitorTest {
     var closed = sample(owner, 0, false, 500).event().orElseThrow();
     assertFalse(closed.isOpen());
     assertEquals(BigInteger.ONE, closed.count());
-    assertEquals(AT, closed.firstSeen());
-    assertEquals(AT, closed.lastSeen());
+    assertEquals(OBSERVED_AT, closed.firstSeen());
+    assertEquals(OBSERVED_AT, closed.lastSeen());
     assertTrue(owner.snapshot().isEmpty());
     assertTrue(first.isOpen());
   }
@@ -167,8 +168,8 @@ class RestartHealthMonitorTest {
     assertFalse(closed.isOpen());
     assertEquals(Severity.CRITICAL, closed.severity());
     assertEquals(BigInteger.TWO, closed.count());
-    assertEquals(AT, closed.firstSeen());
-    assertEquals(AT.plusSeconds(1), closed.lastSeen());
+    assertEquals(OBSERVED_AT, closed.firstSeen());
+    assertEquals(OBSERVED_AT.plusSeconds(1), closed.lastSeen());
     assertTrue(owner.snapshot().isEmpty());
   }
 
@@ -214,8 +215,8 @@ class RestartHealthMonitorTest {
     assertEquals(BigInteger.valueOf(64), last.count());
     assertEquals(Severity.CRITICAL, last.severity());
     assertEquals(Service.WEB, last.service());
-    assertEquals(AT, last.firstSeen());
-    assertEquals(AT, last.lastSeen());
+    assertEquals(OBSERVED_AT, last.firstSeen());
+    assertEquals(OBSERVED_AT, last.lastSeen());
     assertSame(otherEvent, other.snapshot().orElseThrow());
     assertEquals(Service.API, otherEvent.service());
     assertEquals(BigInteger.ONE, otherEvent.count());
@@ -235,8 +236,8 @@ class RestartHealthMonitorTest {
       assertEquals(service, critical.service());
       assertEquals(Condition.RESTART, critical.condition());
       assertEquals(BigInteger.TWO, critical.count());
-      assertEquals(AT.plusSeconds(1), critical.firstSeen());
-      assertEquals(AT.plusSeconds(2), critical.lastSeen());
+      assertEquals(OBSERVED_AT.plusSeconds(1), critical.firstSeen());
+      assertEquals(OBSERVED_AT.plusSeconds(2), critical.lastSeen());
     }
   }
 

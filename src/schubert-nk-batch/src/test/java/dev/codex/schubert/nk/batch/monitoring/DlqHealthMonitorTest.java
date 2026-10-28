@@ -25,10 +25,11 @@ import org.junit.jupiter.api.Test;
  * DLQMON001..008/1689 current-entry count/flags only, no broker/incident/body/DB/control access.
  */
 class DlqHealthMonitorTest {
-  private static final Instant AT = Instant.parse("2026-10-24T00:00:00Z");
+  private static final Instant OBSERVED_AT = Instant.parse("2026-10-24T00:00:00Z");
 
   private static ObservationContext at(long seconds, CauseClearance cause) {
-    return new ObservationContext(cause, AT.plusSeconds(seconds), Duration.ofSeconds(seconds));
+    return new ObservationContext(
+        cause, OBSERVED_AT.plusSeconds(seconds), Duration.ofSeconds(seconds));
   }
 
   private static DlqHealthMonitor owner() {
@@ -71,8 +72,8 @@ class DlqHealthMonitorTest {
             assertEquals(Condition.DLQ, event.condition());
             assertEquals(service, event.service());
             assertEquals(BigInteger.ONE, event.count());
-            assertEquals(AT, event.firstSeen());
-            assertEquals(AT, event.lastSeen());
+            assertEquals(OBSERVED_AT, event.firstSeen());
+            assertEquals(OBSERVED_AT, event.lastSeen());
             assertTrue(event.isOpen());
           }
         }
@@ -107,8 +108,8 @@ class DlqHealthMonitorTest {
         assertSame(first, owner.snapshot().orElseThrow());
         assertEquals(critical ? Severity.CRITICAL : Severity.WARNING, first.severity());
         assertEquals(BigInteger.ONE, first.count());
-        assertEquals(AT, first.firstSeen());
-        assertEquals(AT, first.lastSeen());
+        assertEquals(OBSERVED_AT, first.firstSeen());
+        assertEquals(OBSERVED_AT, first.lastSeen());
         assertTrue(first.isOpen());
       }
     }
@@ -136,8 +137,8 @@ class DlqHealthMonitorTest {
     var critical = sample(owner, 1, false, true, 3).event().orElseThrow();
     assertEquals(Severity.CRITICAL, critical.severity());
     assertEquals(BigInteger.TWO, critical.count());
-    assertEquals(AT, critical.firstSeen());
-    assertEquals(AT.plusSeconds(3), critical.lastSeen());
+    assertEquals(OBSERVED_AT, critical.firstSeen());
+    assertEquals(OBSERVED_AT.plusSeconds(3), critical.lastSeen());
     assertSame(critical, sample(owner, 0, false, false, 603).event().orElseThrow());
     assertEquals(Severity.WARNING, first.severity());
     assertEquals(BigInteger.ONE, first.count());
@@ -179,8 +180,8 @@ class DlqHealthMonitorTest {
     assertEquals(Severity.CRITICAL, last.severity());
     assertEquals(BigInteger.valueOf(64), last.count());
     assertEquals(Service.BROKER, last.service());
-    assertEquals(AT, last.firstSeen());
-    assertEquals(AT, last.lastSeen());
+    assertEquals(OBSERVED_AT, last.firstSeen());
+    assertEquals(OBSERVED_AT, last.lastSeen());
     assertSame(otherEvent, other.snapshot().orElseThrow());
     assertEquals(Service.API, otherEvent.service());
     assertEquals(BigInteger.ONE, otherEvent.count());
