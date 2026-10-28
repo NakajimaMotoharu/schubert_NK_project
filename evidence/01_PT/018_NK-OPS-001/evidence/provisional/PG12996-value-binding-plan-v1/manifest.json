@@ -1,0 +1,113 @@
+{
+  "actualExit": 0,
+  "candidateStyleCorrectionNotBaseline": true,
+  "cases": [
+    {
+      "className": "dev.codex.schubert.nk.api.application.media.MediaRequestDescriptorBindingTest",
+      "method": "mediaBind001AudioUsesCanonicalNumericIdAndRequestedDisposition",
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/media/MediaRequestDescriptorBindingTest.java",
+      "sourceSha256": "21b6d6830f46eb260d7b64b01b2b8863e913bbe9115049dd6c12fbb648b49a1b"
+    },
+    {
+      "className": "dev.codex.schubert.nk.api.application.media.MediaRequestDescriptorBindingTest",
+      "method": "mediaBind002MusicKeepsTrackIdAndMaximumMetadataLength",
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/media/MediaRequestDescriptorBindingTest.java",
+      "sourceSha256": "21b6d6830f46eb260d7b64b01b2b8863e913bbe9115049dd6c12fbb648b49a1b"
+    },
+    {
+      "className": "dev.codex.schubert.nk.api.application.media.MediaRequestDescriptorBindingTest",
+      "method": "mediaBind003VideoIsInlineAndCannotRebindLogicalIdentity",
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/media/MediaRequestDescriptorBindingTest.java",
+      "sourceSha256": "21b6d6830f46eb260d7b64b01b2b8863e913bbe9115049dd6c12fbb648b49a1b"
+    },
+    {
+      "className": "dev.codex.schubert.nk.api.application.media.MediaRequestDescriptorBindingTest",
+      "method": "mediaBind004NonDescriptorsReturnEmptyOnlyAfterLayoutCheck",
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/media/MediaRequestDescriptorBindingTest.java",
+      "sourceSha256": "21b6d6830f46eb260d7b64b01b2b8863e913bbe9115049dd6c12fbb648b49a1b"
+    },
+    {
+      "className": "dev.codex.schubert.nk.api.application.scenario.ScenarioScriptFileBindingTest",
+      "method": "scriptBind001DetailIdSurvivesCallerByteMutationAndOtherRequests",
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/scenario/ScenarioScriptFileBindingTest.java",
+      "sourceSha256": "a7fe439fdbcab85e7d783ce4904cc32d2c5f1ba90111909720cf118972ce9706"
+    },
+    {
+      "className": "dev.codex.schubert.nk.api.application.scenario.ScenarioScriptFileBindingTest",
+      "method": "scriptBind002EveryOtherKindHasNoDetailId",
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/scenario/ScenarioScriptFileBindingTest.java",
+      "sourceSha256": "a7fe439fdbcab85e7d783ce4904cc32d2c5f1ba90111909720cf118972ce9706"
+    }
+  ],
+  "eligibilityClosureSourceHashes": {
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/media/MediaRequest.java": "73abe09934880c7aaae1d0db57c471788fc9d988c77791d7c876d8567b0cb55a",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/scenario/ScenarioRequest.java": "5530667c85ed9345fbe13aa3c89eef8a3fd51a38b019e8b52f4aea13e818fa5a"
+  },
+  "existingTests": 0,
+  "externalActions": 0,
+  "heldOriginalTests": 6,
+  "inverseNegativeVectors": [
+    "AUDIO_LOGICAL_ID = \"700\"",
+    "audio(\"701\", disposition)",
+    "assertEquals(1, descriptor.byteLength())",
+    "000000000700",
+    "\"audio/ogg\"",
+    "List.of(\"ANMREQ01\""
+  ],
+  "invocation": {
+    "actualPythonCommand": [
+      "/usr/bin/python3",
+      "-B",
+      "tools/quality/pg12996_value_binding_plan.py"
+    ],
+    "arbitraryArgumentsRecorded": false,
+    "entrypointPath": "tools/quality/pg12996_value_binding_plan.py",
+    "entrypointSha256": "1f092392f2c31f6c7e25f4ccd55dc6cc1850014a14d4b08d4404e9b3f2b9d190",
+    "helperPath": "tools/quality/host_tool_invocation.py",
+    "helperSha256": "85d616a3db4ff47f4c95ae2e0dd57954bc2b09f28b8f2a685b986e5621545c46",
+    "libraryPath": "tools/quality/pg12996_value_binding_plan.py",
+    "librarySha256": "1f092392f2c31f6c7e25f4ccd55dc6cc1850014a14d4b08d4404e9b3f2b9d190",
+    "loadedProjectPythonSources": {
+      "tools/quality/g07_host_class_provenance_inputs.py": "a676cb3e4145177c3c243722d737592ce7d44c3f29cfe4f670662ef7651f046b",
+      "tools/quality/host_tool_invocation.py": "85d616a3db4ff47f4c95ae2e0dd57954bc2b09f28b8f2a685b986e5621545c46",
+      "tools/quality/pg12996_value_binding_plan.py": "1f092392f2c31f6c7e25f4ccd55dc6cc1850014a14d4b08d4404e9b3f2b9d190",
+      "tools/quality/public_java_digest_provenance.py": "dd47f8735a61ce849995633c3290a6ad047842ef3263829ce359db413778f7a0"
+    },
+    "provenance": "OBSERVED_SYS_ARGV_AND_ORIG_ARGV_NOT_RECONSTRUCTED"
+  },
+  "judgement": "WHOLE_NEW_SIX_DISTINCT_VALUE_BINDING_TESTS_PURE_TWO_FIXTURES_PUBLIC_MESSAGE_UUID_NO_REPOSITORY_QUERY_JCE_OR_FILES",
+  "newAccepted": 0,
+  "newTestIds": 6,
+  "oldExecUnion": false,
+  "originalCandidateTokenCount": 1540,
+  "originalSuites": 2,
+  "originalTests": 6,
+  "productTestsExecuted": 0,
+  "sameExecRequired": true,
+  "source": "94eeea264b449e5826f292c746a9cd4655b3122a",
+  "sourceBefore": "762568bb0338749c9549ec937cc2c79e84418836",
+  "sourceChanges": [
+    {
+      "kind": "NEW_TEST_ONLY",
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/media/MediaRequestDescriptorBindingTest.java",
+      "sha256": "21b6d6830f46eb260d7b64b01b2b8863e913bbe9115049dd6c12fbb648b49a1b"
+    },
+    {
+      "kind": "NEW_TEST_ONLY",
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/scenario/ScenarioScriptFileBindingTest.java",
+      "sha256": "a7fe439fdbcab85e7d783ce4904cc32d2c5f1ba90111909720cf118972ce9706"
+    }
+  ],
+  "specificationPath": "evidence/01_PT/018_NK-OPS-001/2401_P008P009\u72ec\u7acb\u5024\u675f\u7e1b_\u5358\u4f53\u30c6\u30b9\u30c8\u4ed5\u69d8\u66f8.md",
+  "specificationSha256": "c0ba7f661d06104038f18b5f04d336ac2fdef5f31e04eb617e5b92a3b01a391c",
+  "supportTestSourceHashes": {
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/media/MediaRequestFixture.java": "4f1fb62819c2a7ea91d5c0d3706f3d78415fdc4bd2259b74d87bc89274a25dc8",
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/scenario/ScenarioRequestFixture.java": "59b79a09aa45f9878e551e4f7943c9f88b597b1f5976f46daa038a9811ae23f8"
+  },
+  "totalCorrections": 1,
+  "whole451Accepted": false,
+  "wholeTestSourceHashes": {
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/media/MediaRequestDescriptorBindingTest.java": "21b6d6830f46eb260d7b64b01b2b8863e913bbe9115049dd6c12fbb648b49a1b",
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/application/scenario/ScenarioScriptFileBindingTest.java": "a7fe439fdbcab85e7d783ce4904cc32d2c5f1ba90111909720cf118972ce9706"
+  }
+}

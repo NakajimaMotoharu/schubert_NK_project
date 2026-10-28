@@ -1,0 +1,84 @@
+{
+  "actualExit": 0,
+  "fullProgramAccepted": false,
+  "hostManifest": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG13000-value-binding-host-v1/manifest.json",
+  "hostSha256": "90ec2c83ee7746f7a602cbb8c2fd8edd75ade4b3a0336c843966e52aba290194",
+  "invocation": {
+    "actualPythonCommand": [
+      "/usr/bin/python3",
+      "-B",
+      "tools/quality/pg13008_value_binding_complete.py"
+    ],
+    "arbitraryArgumentsRecorded": false,
+    "entrypointPath": "tools/quality/pg13008_value_binding_complete.py",
+    "entrypointSha256": "a2a73d30ee3614fe34bdf585bc8b7ceae61dafd51541561e83471d0da59b7042",
+    "helperPath": "tools/quality/host_tool_invocation.py",
+    "helperSha256": "85d616a3db4ff47f4c95ae2e0dd57954bc2b09f28b8f2a685b986e5621545c46",
+    "libraryPath": "tools/quality/pg13008_value_binding_complete.py",
+    "librarySha256": "a2a73d30ee3614fe34bdf585bc8b7ceae61dafd51541561e83471d0da59b7042",
+    "loadedProjectPythonSources": {
+      "tools/quality/g07_host_class_provenance_inputs.py": "a676cb3e4145177c3c243722d737592ce7d44c3f29cfe4f670662ef7651f046b",
+      "tools/quality/host_tool_invocation.py": "85d616a3db4ff47f4c95ae2e0dd57954bc2b09f28b8f2a685b986e5621545c46",
+      "tools/quality/pg13008_value_binding_complete.py": "a2a73d30ee3614fe34bdf585bc8b7ceae61dafd51541561e83471d0da59b7042"
+    },
+    "provenance": "OBSERVED_SYS_ARGV_AND_ORIG_ARGV_NOT_RECONSTRUCTED"
+  },
+  "newAccepted": 0,
+  "newTestIdMappings": [
+    {
+      "actual": "PASS",
+      "className": "dev.codex.schubert.nk.api.application.media.MediaRequestDescriptorBindingTest",
+      "method": "mediaBind001AudioUsesCanonicalNumericIdAndRequestedDisposition",
+      "testId": "PT-MED-BIND001"
+    },
+    {
+      "actual": "PASS",
+      "className": "dev.codex.schubert.nk.api.application.media.MediaRequestDescriptorBindingTest",
+      "method": "mediaBind002MusicKeepsTrackIdAndMaximumMetadataLength",
+      "testId": "PT-MED-BIND002"
+    },
+    {
+      "actual": "PASS",
+      "className": "dev.codex.schubert.nk.api.application.media.MediaRequestDescriptorBindingTest",
+      "method": "mediaBind003VideoIsInlineAndCannotRebindLogicalIdentity",
+      "testId": "PT-MED-BIND003"
+    },
+    {
+      "actual": "PASS",
+      "className": "dev.codex.schubert.nk.api.application.media.MediaRequestDescriptorBindingTest",
+      "method": "mediaBind004NonDescriptorsReturnEmptyOnlyAfterLayoutCheck",
+      "testId": "PT-MED-BIND004"
+    }
+  ],
+  "newUniqueTestIds": 4,
+  "observedRunProductTests": 6,
+  "oldExecUnion": false,
+  "postManifest": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG13004-value-binding-post-v1/manifest.json",
+  "postSha256": "3ea296e632ac9f8e2b9ae5824fb0637a8edf821d4c49bfa9140f476c5c22df85",
+  "program": "NK-MED-001",
+  "programSelectedTests": 4,
+  "run": "PG13000-VALUEBINDING-JP",
+  "selectedMain": {
+    "classCrc64": "9a82abdea1ea816c",
+    "counters": {
+      "BRANCH": {
+        "covered": 26,
+        "missed": 16
+      },
+      "CLASS": {
+        "covered": 1,
+        "missed": 0
+      },
+      "LINE": {
+        "covered": 55,
+        "missed": 44
+      },
+      "METHOD": {
+        "covered": 5,
+        "missed": 4
+      }
+    }
+  },
+  "source": "94eeea264b449e5826f292c746a9cd4655b3122a",
+  "whole451Accepted": false
+}
