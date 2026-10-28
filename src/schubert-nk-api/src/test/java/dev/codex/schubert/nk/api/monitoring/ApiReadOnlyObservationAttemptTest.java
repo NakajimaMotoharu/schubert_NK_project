@@ -33,6 +33,17 @@ import org.junit.jupiter.api.Test;
 
 /** 1858/ROATTEMPT001..032: own typed proxies/clock/finite diagnostic, no actual JDBC/network. */
 final class ApiReadOnlyObservationAttemptTest {
+  private static final String FIXTURE_READ_ONLY_A9812E1E = "read-only";
+  private static final String FIXTURE_ISOLATION_AB1E8569 = "isolation";
+  private static final String FIXTURE_BEGIN_FB45FB7B = "begin";
+  private static final String FIXTURE_QUERY_4C4F28A0 = "query";
+  private static final String FIXTURE_ROLLBACK_3770B198 = "rollback";
+  private static final String FIXTURE_CLOSE_97959247 = "close";
+  private static final String FIXTURE_OPEN_35FF74AE = "open";
+  private static final String FIXTURE_TIME_C894B672 = "time";
+  private static final String FIXTURE_DIAGNOSTIC_19A7ACC1 = "diagnostic";
+  private static final String FIXTURE_FIXTURE_B086DE7B = "fixture";
+
   static final class Fixture {
     final OutboxObservationRepositoryTest.Fixture query;
     final List<String> calls = new ArrayList<>();
@@ -73,21 +84,21 @@ final class ApiReadOnlyObservationAttemptTest {
                     fault("auto-check-" + ++autoChecks);
                     return autoCommit;
                   case "setReadOnly":
-                    calls.add("read-only");
+                    calls.add(FIXTURE_READ_ONLY_A9812E1E);
                     assertEquals(true, args[0]);
-                    fault("read-only");
+                    fault(FIXTURE_READ_ONLY_A9812E1E);
                     readOnly = true;
                     return null;
                   case "setTransactionIsolation":
-                    calls.add("isolation");
+                    calls.add(FIXTURE_ISOLATION_AB1E8569);
                     assertEquals(Connection.TRANSACTION_READ_COMMITTED, args[0]);
-                    fault("isolation");
+                    fault(FIXTURE_ISOLATION_AB1E8569);
                     isolation = Connection.TRANSACTION_READ_COMMITTED;
                     return null;
                   case "setAutoCommit":
-                    calls.add("begin");
+                    calls.add(FIXTURE_BEGIN_FB45FB7B);
                     assertEquals(false, args[0]);
-                    fault("begin");
+                    fault(FIXTURE_BEGIN_FB45FB7B);
                     autoCommit = false;
                     return null;
                   case "isReadOnly":
@@ -97,16 +108,16 @@ final class ApiReadOnlyObservationAttemptTest {
                     calls.add("isolation?");
                     return isolation;
                   case "prepareStatement":
-                    calls.add("query");
-                    fault("query");
+                    calls.add(FIXTURE_QUERY_4C4F28A0);
+                    fault(FIXTURE_QUERY_4C4F28A0);
                     return query.connection().prepareStatement((String) args[0]);
-                  case "rollback":
-                    calls.add("rollback");
-                    fault("rollback");
+                  case FIXTURE_ROLLBACK_3770B198:
+                    calls.add(FIXTURE_ROLLBACK_3770B198);
+                    fault(FIXTURE_ROLLBACK_3770B198);
                     return null;
-                  case "close":
-                    calls.add("close");
-                    fault("close");
+                  case FIXTURE_CLOSE_97959247:
+                    calls.add(FIXTURE_CLOSE_97959247);
+                    fault(FIXTURE_CLOSE_97959247);
                     return null;
                   default:
                     throw new AssertionError("unapproved observation connection operation");
@@ -123,8 +134,8 @@ final class ApiReadOnlyObservationAttemptTest {
                 assertEquals(
                     "getConnection", method.getName(), "pool controls must not be touched");
                 assertTrue(args == null || args.length == 0);
-                calls.add("open");
-                fault("open");
+                calls.add(FIXTURE_OPEN_35FF74AE);
+                fault(FIXTURE_OPEN_35FF74AE);
                 return nullConnection ? null : connection();
               }));
     }
@@ -143,8 +154,8 @@ final class ApiReadOnlyObservationAttemptTest {
 
         @Override
         public Instant instant() {
-          calls.add("time");
-          unchecked("time");
+          calls.add(FIXTURE_TIME_C894B672);
+          unchecked(FIXTURE_TIME_C894B672);
           return nullTime ? null : Instant.EPOCH;
         }
       };
@@ -153,7 +164,7 @@ final class ApiReadOnlyObservationAttemptTest {
     void unconfirmed(Throwable failure) {
       calls.add("unknown");
       unknown.add(failure);
-      unchecked("diagnostic");
+      unchecked(FIXTURE_DIAGNOSTIC_19A7ACC1);
     }
 
     ApiReadOnlyObservationAttempt attempt() {
@@ -166,9 +177,9 @@ final class ApiReadOnlyObservationAttemptTest {
     }
 
     void cleanup(int rollbacks, int closes) {
-      assertEquals(rollbacks, calls.stream().filter("rollback"::equals).count());
-      assertEquals(closes, calls.stream().filter("close"::equals).count());
-      assertEquals(1, calls.stream().filter("open"::equals).count());
+      assertEquals(rollbacks, calls.stream().filter(FIXTURE_ROLLBACK_3770B198::equals).count());
+      assertEquals(closes, calls.stream().filter(FIXTURE_CLOSE_97959247::equals).count());
+      assertEquals(1, calls.stream().filter(FIXTURE_OPEN_35FF74AE::equals).count());
     }
   }
 
@@ -191,7 +202,7 @@ final class ApiReadOnlyObservationAttemptTest {
     var value = f.attempt();
     assertSame(failure, assertThrows(failure.getClass(), value::read));
     f.cleanup(rollbacks, closes);
-    assertEquals(point.equals("close"), value.hasUnconfirmedResource());
+    assertEquals(point.equals(FIXTURE_CLOSE_97959247), value.hasUnconfirmedResource());
     assertThrows(IllegalStateException.class, value::read);
     f.cleanup(rollbacks, closes);
   }
@@ -236,18 +247,18 @@ final class ApiReadOnlyObservationAttemptTest {
     assertEquals(Duration.ofSeconds(6), actual.ages().error());
     assertEquals(
         List.of(
-            "open",
+            FIXTURE_OPEN_35FF74AE,
             "auto?",
-            "read-only",
-            "isolation",
-            "begin",
-            "time",
+            FIXTURE_READ_ONLY_A9812E1E,
+            FIXTURE_ISOLATION_AB1E8569,
+            FIXTURE_BEGIN_FB45FB7B,
+            FIXTURE_TIME_C894B672,
             "auto?",
             "read-only?",
             "isolation?",
-            "query",
-            "rollback",
-            "close"),
+            FIXTURE_QUERY_4C4F28A0,
+            FIXTURE_ROLLBACK_3770B198,
+            FIXTURE_CLOSE_97959247),
         f.calls);
     assertFalse(value.hasUnconfirmedResource());
     f.query.complete();
@@ -283,24 +294,24 @@ final class ApiReadOnlyObservationAttemptTest {
     var value = f.attempt();
     assertThrows(SQLException.class, value::read);
     assertFalse(value.hasUnconfirmedResource());
-    assertEquals(List.of("open"), f.calls);
+    assertEquals(List.of(FIXTURE_OPEN_35FF74AE), f.calls);
     assertThrows(IllegalStateException.class, value::read);
     f.cleanup(0, 0);
   }
 
   @Test
   void roAttempt007() {
-    failure("open", new SQLException("fixture"), 0, 0);
+    failure(FIXTURE_OPEN_35FF74AE, new SQLException(FIXTURE_FIXTURE_B086DE7B), 0, 0);
   }
 
   @Test
   void roAttempt008() {
-    failure("open", new IllegalStateException("fixture"), 0, 0);
+    failure(FIXTURE_OPEN_35FF74AE, new IllegalStateException(FIXTURE_FIXTURE_B086DE7B), 0, 0);
   }
 
   @Test
   void roAttempt009() {
-    failure("open", new AssertionError("fixture"), 0, 0);
+    failure(FIXTURE_OPEN_35FF74AE, new AssertionError(FIXTURE_FIXTURE_B086DE7B), 0, 0);
   }
 
   @Test
@@ -308,33 +319,33 @@ final class ApiReadOnlyObservationAttemptTest {
     var f = rows();
     f.autoCommit = false;
     assertThrows(SQLException.class, f.attempt()::read);
-    assertEquals(List.of("open", "auto?", "close"), f.calls);
+    assertEquals(List.of(FIXTURE_OPEN_35FF74AE, "auto?", FIXTURE_CLOSE_97959247), f.calls);
     f.cleanup(0, 1);
   }
 
   @Test
   void roAttempt011() {
-    failure("auto-check-1", new SQLException("fixture"), 0, 1);
+    failure("auto-check-1", new SQLException(FIXTURE_FIXTURE_B086DE7B), 0, 1);
   }
 
   @Test
   void roAttempt012() {
-    failure("read-only", new SQLException("fixture"), 0, 1);
+    failure(FIXTURE_READ_ONLY_A9812E1E, new SQLException(FIXTURE_FIXTURE_B086DE7B), 0, 1);
   }
 
   @Test
   void roAttempt013() {
-    failure("isolation", new IllegalStateException("fixture"), 0, 1);
+    failure(FIXTURE_ISOLATION_AB1E8569, new IllegalStateException(FIXTURE_FIXTURE_B086DE7B), 0, 1);
   }
 
   @Test
   void roAttempt014() {
-    failure("begin", new SQLException("ambiguous begin"), 1, 1);
+    failure(FIXTURE_BEGIN_FB45FB7B, new SQLException("ambiguous begin"), 1, 1);
   }
 
   @Test
   void roAttempt015() {
-    failure("time", new IllegalStateException("fixture"), 1, 1);
+    failure(FIXTURE_TIME_C894B672, new IllegalStateException(FIXTURE_FIXTURE_B086DE7B), 1, 1);
   }
 
   @Test
@@ -347,7 +358,7 @@ final class ApiReadOnlyObservationAttemptTest {
 
   @Test
   void roAttempt017() {
-    failure("query", new SQLException("fixture"), 1, 1);
+    failure(FIXTURE_QUERY_4C4F28A0, new SQLException(FIXTURE_FIXTURE_B086DE7B), 1, 1);
   }
 
   @Test
@@ -372,19 +383,19 @@ final class ApiReadOnlyObservationAttemptTest {
 
   @Test
   void roAttempt020() {
-    failure("rollback", new SQLException("fixture"), 1, 1);
+    failure(FIXTURE_ROLLBACK_3770B198, new SQLException(FIXTURE_FIXTURE_B086DE7B), 1, 1);
   }
 
   @Test
   void roAttempt021() {
-    failure("rollback", new AssertionError("fixture"), 1, 1);
+    failure(FIXTURE_ROLLBACK_3770B198, new AssertionError(FIXTURE_FIXTURE_B086DE7B), 1, 1);
   }
 
   @Test
   void roAttempt022() {
     var f = rows();
-    var close = new SQLException("close");
-    f.faults.put("close", close);
+    var close = new SQLException(FIXTURE_CLOSE_97959247);
+    f.faults.put(FIXTURE_CLOSE_97959247, close);
     var owner = new java.util.concurrent.atomic.AtomicReference<ApiReadOnlyObservationAttempt>();
     var value =
         f.attempt(
@@ -403,23 +414,23 @@ final class ApiReadOnlyObservationAttemptTest {
 
   @Test
   void roAttempt023() {
-    failure("close", new IllegalStateException("fixture"), 1, 1);
+    failure(FIXTURE_CLOSE_97959247, new IllegalStateException(FIXTURE_FIXTURE_B086DE7B), 1, 1);
   }
 
   @Test
   void roAttempt024() {
-    failure("close", new AssertionError("fixture"), 1, 1);
+    failure(FIXTURE_CLOSE_97959247, new AssertionError(FIXTURE_FIXTURE_B086DE7B), 1, 1);
   }
 
   @Test
   void roAttempt025() {
     var f = rows();
     var primary = new SQLException("read");
-    var rollback = new SQLException("rollback");
-    var close = new SQLException("close");
-    f.faults.put("query", primary);
-    f.faults.put("rollback", rollback);
-    f.faults.put("close", close);
+    var rollback = new SQLException(FIXTURE_ROLLBACK_3770B198);
+    var close = new SQLException(FIXTURE_CLOSE_97959247);
+    f.faults.put(FIXTURE_QUERY_4C4F28A0, primary);
+    f.faults.put(FIXTURE_ROLLBACK_3770B198, rollback);
+    f.faults.put(FIXTURE_CLOSE_97959247, close);
     assertSame(primary, assertThrows(SQLException.class, f.attempt()::read));
     assertArrayEquals(new Throwable[] {rollback, close}, primary.getSuppressed());
     assertEquals(List.of(close), f.unknown);
@@ -430,10 +441,10 @@ final class ApiReadOnlyObservationAttemptTest {
   void roAttempt026() {
     var f = rows();
     var primary = new SQLException("read");
-    var fatal = new AssertionError("rollback");
-    f.faults.put("query", primary);
-    f.faults.put("rollback", fatal);
-    f.faults.put("close", new SQLException("close"));
+    var fatal = new AssertionError(FIXTURE_ROLLBACK_3770B198);
+    f.faults.put(FIXTURE_QUERY_4C4F28A0, primary);
+    f.faults.put(FIXTURE_ROLLBACK_3770B198, fatal);
+    f.faults.put(FIXTURE_CLOSE_97959247, new SQLException(FIXTURE_CLOSE_97959247));
     assertSame(fatal, assertThrows(AssertionError.class, f.attempt()::read));
     f.cleanup(1, 1);
     assertEquals(1, f.unknown.size());
@@ -442,10 +453,10 @@ final class ApiReadOnlyObservationAttemptTest {
   @Test
   void roAttempt027() {
     var f = rows();
-    var close = new SQLException("close");
-    var diagnostic = new IllegalStateException("diagnostic");
-    f.faults.put("close", close);
-    f.faults.put("diagnostic", diagnostic);
+    var close = new SQLException(FIXTURE_CLOSE_97959247);
+    var diagnostic = new IllegalStateException(FIXTURE_DIAGNOSTIC_19A7ACC1);
+    f.faults.put(FIXTURE_CLOSE_97959247, close);
+    f.faults.put(FIXTURE_DIAGNOSTIC_19A7ACC1, diagnostic);
     assertSame(close, assertThrows(SQLException.class, f.attempt()::read));
     assertArrayEquals(new Throwable[] {diagnostic}, close.getSuppressed());
     f.cleanup(1, 1);
@@ -454,9 +465,9 @@ final class ApiReadOnlyObservationAttemptTest {
   @Test
   void roAttempt028() {
     var f = rows();
-    var fatal = new AssertionError("diagnostic");
-    f.faults.put("close", new SQLException("close"));
-    f.faults.put("diagnostic", fatal);
+    var fatal = new AssertionError(FIXTURE_DIAGNOSTIC_19A7ACC1);
+    f.faults.put(FIXTURE_CLOSE_97959247, new SQLException(FIXTURE_CLOSE_97959247));
+    f.faults.put(FIXTURE_DIAGNOSTIC_19A7ACC1, fatal);
     assertSame(fatal, assertThrows(AssertionError.class, f.attempt()::read));
     f.cleanup(1, 1);
   }
@@ -465,9 +476,9 @@ final class ApiReadOnlyObservationAttemptTest {
   void roAttempt029() {
     var f = rows();
     var same = new SQLException("same");
-    f.faults.put("query", same);
-    f.faults.put("rollback", same);
-    f.faults.put("close", same);
+    f.faults.put(FIXTURE_QUERY_4C4F28A0, same);
+    f.faults.put(FIXTURE_ROLLBACK_3770B198, same);
+    f.faults.put(FIXTURE_CLOSE_97959247, same);
     assertSame(same, assertThrows(SQLException.class, f.attempt()::read));
     assertEquals(0, same.getSuppressed().length);
     f.cleanup(1, 1);
@@ -477,16 +488,16 @@ final class ApiReadOnlyObservationAttemptTest {
     private static final long serialVersionUID = 1L;
 
     private SuppressionDisabled() {
-      super("fixture", null, false, false);
+      super(FIXTURE_FIXTURE_B086DE7B, null, false, false);
     }
   }
 
   @Test
   void roAttempt030() {
     var f = rows();
-    var fatal = new AssertionError("close");
-    f.faults.put("query", new SuppressionDisabled());
-    f.faults.put("close", fatal);
+    var fatal = new AssertionError(FIXTURE_CLOSE_97959247);
+    f.faults.put(FIXTURE_QUERY_4C4F28A0, new SuppressionDisabled());
+    f.faults.put(FIXTURE_CLOSE_97959247, fatal);
     assertSame(fatal, assertThrows(AssertionError.class, f.attempt()::read));
     f.cleanup(1, 1);
     assertEquals(List.of(fatal), f.unknown);
@@ -499,7 +510,7 @@ final class ApiReadOnlyObservationAttemptTest {
     var next = new SQLException("next");
     primary.setNextException(next);
     next.setNextException(primary);
-    f.faults.put("query", primary);
+    f.faults.put(FIXTURE_QUERY_4C4F28A0, primary);
     assertTimeoutPreemptively(
         Duration.ofSeconds(5),
         () -> assertSame(primary, assertThrows(SQLException.class, f.attempt()::read)));

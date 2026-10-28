@@ -16,6 +16,8 @@ import org.junit.jupiter.api.Test;
 
 /** PT-DB-INBOX-669001..004 / SS343354 / PG-D401: no synthetic native admission. */
 final class InspectorEntryBoundaryTest {
+  private static final String FIXTURE_UNEXPECTED_B0C94341 = "unexpected";
+
   /** SSC234/PT-DB-CLOSE743001: same completed receipt/callback returns before CLOSING. */
   @Test
   void close743001ClosingRunsAfterCompleteReturnsWithLiteralReceiptAndDiagnostic()
@@ -26,7 +28,7 @@ final class InspectorEntryBoundaryTest {
       try (var output = new PrintStream(out);
           var diagnostics = new PrintStream(err)) {
         InspectorLauncher.completeAndClose(
-            new String[] {"unexpected"},
+            new String[] {FIXTURE_UNEXPECTED_B0C94341},
             Map.of(),
             output,
             settings -> {
@@ -80,7 +82,7 @@ final class InspectorEntryBoundaryTest {
               IOException.class,
               () ->
                   InspectorLauncher.completeAndClose(
-                      new String[] {"unexpected"},
+                      new String[] {FIXTURE_UNEXPECTED_B0C94341},
                       Map.of(),
                       output,
                       factory,
@@ -103,7 +105,7 @@ final class InspectorEntryBoundaryTest {
       try (var output = new PrintStream(out, false, StandardCharsets.UTF_8);
           var diagnostics = new PrintStream(err, false, StandardCharsets.UTF_8)) {
         InspectorLauncher.complete(
-            new String[] {"unexpected"},
+            new String[] {FIXTURE_UNEXPECTED_B0C94341},
             Map.of(),
             output,
             s -> {
@@ -135,7 +137,7 @@ final class InspectorEntryBoundaryTest {
               IOException.class,
               () ->
                   InspectorLauncher.complete(
-                      new String[] {"unexpected"},
+                      new String[] {FIXTURE_UNEXPECTED_B0C94341},
                       Map.of(),
                       output,
                       s -> {
@@ -167,7 +169,7 @@ final class InspectorEntryBoundaryTest {
               IOException.class,
               () ->
                   InspectorLauncher.complete(
-                      new String[] {"unexpected"},
+                      new String[] {FIXTURE_UNEXPECTED_B0C94341},
                       Map.of(),
                       output,
                       s -> {

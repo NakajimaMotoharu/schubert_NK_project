@@ -24,6 +24,7 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** NK-OPS-001/PT-OPS-INBOX-001..008; SS341/342/343 6.8. No host service is started. */
 final class InspectorDeploymentTest {
+  private static final String FIXTURE_BIN_SH_EA0135D2 = "/bin/sh";
   private static final Path REPO = Path.of(System.getProperty("nk.pt.repository"));
   private static final Path DEPLOYMENT = REPO.resolve("src/deployment");
   private static final Path SHELLCHECK = shellCheck();
@@ -48,7 +49,7 @@ final class InspectorDeploymentTest {
   @Test
   void renderedShellCheck() throws Exception {
     var wrapper = fake("NKINSPECTOR1 0\n", 0);
-    assertEquals(0, execute(List.of("/bin/sh", "-n", wrapper.toString())).code());
+    assertEquals(0, execute(List.of(FIXTURE_BIN_SH_EA0135D2, "-n", wrapper.toString())).code());
     var version = execute(List.of(SHELLCHECK.toString(), "--version"));
     assertEquals(0, version.code());
     assertTrue(version.out().contains("version: 0.11.0"));
@@ -140,7 +141,7 @@ final class InspectorDeploymentTest {
   void argumentsAndPlaceholders() throws Exception {
     var wrapper = fake("NKINSPECTOR1 0\n", 0);
     for (List<String> arguments : List.of(List.of("unknown"), List.of("one", "two"))) {
-      var command = new ArrayList<>(List.of("/bin/sh", "-x", wrapper.toString()));
+      var command = new ArrayList<>(List.of(FIXTURE_BIN_SH_EA0135D2, "-x", wrapper.toString()));
       command.addAll(arguments);
       var result = execute(command);
       assertEquals(70, result.code());
@@ -160,7 +161,7 @@ final class InspectorDeploymentTest {
             Path.of(System.getProperty("java.home"), "bin/java").toString(),
             System.getProperty("java.class.path"),
             root.toString());
-    var result = execute(List.of("/bin/sh", wrapper.toString()));
+    var result = execute(List.of(FIXTURE_BIN_SH_EA0135D2, wrapper.toString()));
     assertEquals(new Result(70, "", ""), result);
   }
 
@@ -328,7 +329,7 @@ final class InspectorDeploymentTest {
   }
 
   private Result shell(Path script) throws Exception {
-    return execute(List.of("/bin/sh", "-x", script.toString()));
+    return execute(List.of(FIXTURE_BIN_SH_EA0135D2, "-x", script.toString()));
   }
 
   private Result execute(List<String> command) throws Exception {

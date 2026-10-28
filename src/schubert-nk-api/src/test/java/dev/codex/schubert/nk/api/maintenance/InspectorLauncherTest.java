@@ -29,6 +29,7 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** PT-DB-INBOX-225..232; fixed receipt/status oracles and real main/native negative boundaries. */
 final class InspectorLauncherTest {
+  private static final String FIXTURE_UNTRUSTED_6FC6869D = "UNTRUSTED";
   @TempDir Path root;
 
   private Map<String, String> environment() {
@@ -68,7 +69,7 @@ final class InspectorLauncherTest {
     assertEquals(
         70,
         launcher.run(
-            new String[] {"UNTRUSTED"},
+            new String[] {FIXTURE_UNTRUSTED_6FC6869D},
             environment(),
             s -> {
               throw new AssertionError("no IO");
@@ -108,7 +109,7 @@ final class InspectorLauncherTest {
                 environment(),
                 s ->
                     r -> {
-                      throw new IllegalStateException("UNTRUSTED");
+                      throw new IllegalStateException(FIXTURE_UNTRUSTED_6FC6869D);
                     }));
   }
 
@@ -148,7 +149,7 @@ final class InspectorLauncherTest {
             new OutputStream() {
               @Override
               public void write(int value) throws IOException {
-                throw new IOException("UNTRUSTED");
+                throw new IOException(FIXTURE_UNTRUSTED_6FC6869D);
               }
             })) {
       var failure =
@@ -196,7 +197,7 @@ final class InspectorLauncherTest {
       try {
         System.setOut(output);
         System.setErr(error);
-        InspectorLauncher.main(new String[] {"UNTRUSTED"});
+        InspectorLauncher.main(new String[] {FIXTURE_UNTRUSTED_6FC6869D});
         assertEquals("NKINSPECTOR1 70\n", bytes.toString(StandardCharsets.UTF_8));
         assertEquals("", errors.toString(StandardCharsets.UTF_8));
         thread
@@ -244,7 +245,7 @@ final class InspectorLauncherTest {
 
   @Test
   void actualJvmEntry() throws Exception {
-    for (List<String> args : List.of(List.<String>of(), List.of("UNTRUSTED"))) {
+    for (List<String> args : List.of(List.<String>of(), List.of(FIXTURE_UNTRUSTED_6FC6869D))) {
       var command =
           new ArrayList<>(
               List.of(

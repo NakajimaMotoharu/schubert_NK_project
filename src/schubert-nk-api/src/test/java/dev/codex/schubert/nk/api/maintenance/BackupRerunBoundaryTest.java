@@ -35,13 +35,18 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** NK-DAT-001/PT-DB-INBOX-233..240; UI251 11/SS331 8.2; SSC-054/BUG-138/YKT-108. */
 final class BackupRerunBoundaryTest {
+  private static final String FIXTURE_BACKUP_DB_6C03A087 = "BACKUP_DB";
+  private static final String FIXTURE_BACKUP_CONFIG_8386D7E7 = "BACKUP_CONFIG";
+  private static final String FIXTURE_SUCCESS_10855C7F = "SUCCESS";
+  private static final String FIXTURE_23505_AB91EF20 = "23505";
   @TempDir static Path root;
   private static ApiLogDatabaseFixture db;
   private static String url;
   private static final UUID RUN = new UUID(0, 200);
   private static final LocalDate DAY = LocalDate.of(2026, 9, 17);
   private static final Instant CUTOFF = Instant.parse("2026-09-17T00:00:00Z");
-  private static final List<String> BACKUPS = List.of("BACKUP_DB", "BACKUP_CONFIG");
+  private static final List<String> BACKUPS =
+      List.of(FIXTURE_BACKUP_DB_6C03A087, FIXTURE_BACKUP_CONFIG_8386D7E7);
   private static final List<String> CLEANUPS =
       List.of(
           "notifications",
@@ -79,9 +84,9 @@ final class BackupRerunBoundaryTest {
   void sameDayBackupReruns() throws Exception {
     try (var c = batch()) {
       for (String step : BACKUPS) {
-        insert(c, RUN, DAY, step, 1, "SUCCESS");
-        insert(c, RUN, DAY, step, 2, "SUCCESS");
-        insert(c, new UUID(0, 201), DAY, step, 3, "SUCCESS");
+        insert(c, RUN, DAY, step, 1, FIXTURE_SUCCESS_10855C7F);
+        insert(c, RUN, DAY, step, 2, FIXTURE_SUCCESS_10855C7F);
+        insert(c, new UUID(0, 201), DAY, step, 3, FIXTURE_SUCCESS_10855C7F);
       }
       assertEquals(
           "6", scalar(c, "select count(*) from schubert.batch_runs where status='SUCCESS'"));
@@ -110,10 +115,12 @@ final class BackupRerunBoundaryTest {
               "backup_db",
               "BACKUP_D",
               "BACKUP_CONFIG_EXTRA")) {
-        insert(c, RUN, DAY, step, 1, "SUCCESS");
+        insert(c, RUN, DAY, step, 1, FIXTURE_SUCCESS_10855C7F);
         assertEquals(
-            "23505",
-            assertThrows(SQLException.class, () -> insert(c, RUN, DAY, step, 2, "SUCCESS"))
+            FIXTURE_23505_AB91EF20,
+            assertThrows(
+                    SQLException.class,
+                    () -> insert(c, RUN, DAY, step, 2, FIXTURE_SUCCESS_10855C7F))
                 .getSQLState());
         int attempt = 2;
         for (String status : List.of("RUNNING", "WARNING", "FAILED", "SKIPPED"))
@@ -129,19 +136,21 @@ final class BackupRerunBoundaryTest {
   void attemptAndDateBoundaries() throws Exception {
     try (var c = batch()) {
       for (String step : BACKUPS) {
-        insert(c, RUN, DAY, step, 1, "SUCCESS");
-        insert(c, RUN, DAY, step, 99, "SUCCESS");
+        insert(c, RUN, DAY, step, 1, FIXTURE_SUCCESS_10855C7F);
+        insert(c, RUN, DAY, step, 99, FIXTURE_SUCCESS_10855C7F);
         for (int n : List.of(0, 100))
           assertEquals(
               "23514",
-              assertThrows(SQLException.class, () -> insert(c, RUN, DAY, step, n, "SUCCESS"))
+              assertThrows(
+                      SQLException.class,
+                      () -> insert(c, RUN, DAY, step, n, FIXTURE_SUCCESS_10855C7F))
                   .getSQLState());
         assertEquals(
-            "23505",
+            FIXTURE_23505_AB91EF20,
             assertThrows(
                     SQLException.class, () -> insert(c, new UUID(0, 201), DAY, step, 1, "FAILED"))
                 .getSQLState());
-        insert(c, RUN, DAY.plusDays(1), step, 1, "SUCCESS");
+        insert(c, RUN, DAY.plusDays(1), step, 1, FIXTURE_SUCCESS_10855C7F);
       }
       assertEquals("6", scalar(c, "select count(*) from schubert.batch_runs"));
       for (String column :
@@ -171,7 +180,8 @@ final class BackupRerunBoundaryTest {
   void failureAndLatestSuccessHistory() throws Exception {
     try (var c = batch()) {
       for (String step : BACKUPS) {
-        for (int n = 1; n <= 3; n++) insert(c, RUN, DAY, step, n, n == 3 ? "FAILED" : "SUCCESS");
+        for (int n = 1; n <= 3; n++)
+          insert(c, RUN, DAY, step, n, n == 3 ? "FAILED" : FIXTURE_SUCCESS_10855C7F);
         try (var statement =
             c.prepareStatement(
                 "select attempt::integer from schubert.batch_runs where run_id=? and business_date=? and step=? and status='SUCCESS' and ended_at is not null order by ended_at desc,id desc limit 1")) {
@@ -211,10 +221,13 @@ final class BackupRerunBoundaryTest {
                   Files.readString(migrations().resolve("V004__indexes_and_initial_data.sql")));
       assertTrue(old.find());
       sql(c, old.group());
-      insert(c, RUN, DAY, "BACKUP_DB", 1, "SUCCESS");
+      insert(c, RUN, DAY, FIXTURE_BACKUP_DB_6C03A087, 1, FIXTURE_SUCCESS_10855C7F);
       assertEquals(
-          "23505",
-          assertThrows(SQLException.class, () -> insert(c, RUN, DAY, "BACKUP_DB", 2, "SUCCESS"))
+          FIXTURE_23505_AB91EF20,
+          assertThrows(
+                  SQLException.class,
+                  () ->
+                      insert(c, RUN, DAY, FIXTURE_BACKUP_DB_6C03A087, 2, FIXTURE_SUCCESS_10855C7F))
               .getSQLState());
       c.rollback(save);
       assertEquals(
@@ -222,8 +235,8 @@ final class BackupRerunBoundaryTest {
           scalar(
               c,
               "select pg_get_indexdef('schubert.uq_batch_runs_business_step_success'::regclass)"));
-      insert(c, RUN, DAY, "BACKUP_DB", 1, "SUCCESS");
-      insert(c, RUN, DAY, "BACKUP_DB", 2, "SUCCESS");
+      insert(c, RUN, DAY, FIXTURE_BACKUP_DB_6C03A087, 1, FIXTURE_SUCCESS_10855C7F);
+      insert(c, RUN, DAY, FIXTURE_BACKUP_DB_6C03A087, 2, FIXTURE_SUCCESS_10855C7F);
       assertEquals("2", scalar(c, "select count(*) from schubert.batch_runs"));
       c.rollback();
       assertEquals("0", scalar(c, "select count(*) from schubert.batch_runs"));
@@ -252,7 +265,7 @@ final class BackupRerunBoundaryTest {
             () -> {
               try (var c = batch()) {
                 barrier.await(10, TimeUnit.SECONDS);
-                insert(c, RUN, DAY, "BACKUP_DB", attempt, "SUCCESS");
+                insert(c, RUN, DAY, FIXTURE_BACKUP_DB_6C03A087, attempt, FIXTURE_SUCCESS_10855C7F);
                 return "OK";
               }
             });
@@ -261,17 +274,17 @@ final class BackupRerunBoundaryTest {
       try (var c = batch()) {
         assertEquals("16", scalar(c, "select count(*) from schubert.batch_runs"));
       }
-      for (String step : List.of("BACKUP_CONFIG", "CLEAN_LOG")) {
+      for (String step : List.of(FIXTURE_BACKUP_CONFIG_8386D7E7, "CLEAN_LOG")) {
         var pair = new CyclicBarrier(2);
         var race = new ArrayList<Callable<String>>();
         for (int i = 1; i <= 2; i++) {
-          final int attempt = step.equals("BACKUP_CONFIG") ? 1 : i;
+          final int attempt = step.equals(FIXTURE_BACKUP_CONFIG_8386D7E7) ? 1 : i;
           race.add(
               () -> {
                 try (var c = batch()) {
                   pair.await(10, TimeUnit.SECONDS);
                   try {
-                    insert(c, RUN, DAY, step, attempt, "SUCCESS");
+                    insert(c, RUN, DAY, step, attempt, FIXTURE_SUCCESS_10855C7F);
                     return "OK";
                   } catch (SQLException failure) {
                     return failure.getSQLState();
@@ -282,7 +295,7 @@ final class BackupRerunBoundaryTest {
         var results = new ArrayList<String>();
         for (var done : pool.invokeAll(race)) results.add(done.get(10, TimeUnit.SECONDS));
         Collections.sort(results);
-        assertEquals(List.of("23505", "OK"), results);
+        assertEquals(List.of(FIXTURE_23505_AB91EF20, "OK"), results);
       }
     }
   }
@@ -291,7 +304,7 @@ final class BackupRerunBoundaryTest {
   void cleanupGatesWithRepeatedBackups() throws Exception {
     try (var c = batch()) {
       for (String step : BACKUPS)
-        for (int i = 1; i <= 3; i++) insert(c, RUN, DAY, step, i, "SUCCESS");
+        for (int i = 1; i <= 3; i++) insert(c, RUN, DAY, step, i, FIXTURE_SUCCESS_10855C7F);
       for (String name : CLEANUPS) assertEquals("OK", cleanup(c, name));
       assertEquals("6", scalar(c, "select count(*) from schubert.batch_runs"));
       for (String step : BACKUPS) {
@@ -353,7 +366,9 @@ final class BackupRerunBoundaryTest {
           scalar(
               c,
               "select pg_get_expr(indpred,indrelid) from pg_index where indexrelid='schubert.uq_batch_runs_business_step_success'::regclass");
-      for (String word : List.of("SUCCESS", "BACKUP_DB", "BACKUP_CONFIG"))
+      for (String word :
+          List.of(
+              FIXTURE_SUCCESS_10855C7F, FIXTURE_BACKUP_DB_6C03A087, FIXTURE_BACKUP_CONFIG_8386D7E7))
         assertTrue(predicate.contains(word));
       assertEquals(
           "1",
@@ -371,7 +386,15 @@ final class BackupRerunBoundaryTest {
           assertEquals(
               "42501",
               assertThrows(
-                      SQLException.class, () -> insert(denied, RUN, DAY, "BACKUP_DB", 1, "SUCCESS"))
+                      SQLException.class,
+                      () ->
+                          insert(
+                              denied,
+                              RUN,
+                              DAY,
+                              FIXTURE_BACKUP_DB_6C03A087,
+                              1,
+                              FIXTURE_SUCCESS_10855C7F))
                   .getSQLState());
         }
       }
@@ -401,7 +424,7 @@ final class BackupRerunBoundaryTest {
       statement.setObject(5, CUTOFF.atOffset(java.time.ZoneOffset.UTC));
       statement.setObject(6, CUTOFF.plusSeconds(attempt).atOffset(java.time.ZoneOffset.UTC));
       statement.setString(7, status);
-      if (step.equals("CLEAN_EXPIRY") && status.equals("SUCCESS")) {
+      if (step.equals("CLEAN_EXPIRY") && status.equals(FIXTURE_SUCCESS_10855C7F)) {
         statement.setObject(
             8, CUTOFF.minus(7, java.time.temporal.ChronoUnit.DAYS).atOffset(ZoneOffset.UTC));
         statement.setLong(9, 0);

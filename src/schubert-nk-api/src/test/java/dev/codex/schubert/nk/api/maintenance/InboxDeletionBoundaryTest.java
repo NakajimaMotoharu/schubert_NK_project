@@ -28,6 +28,7 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** PT-DB-INBOX-025..032; SS331 3.5; SQL capability is NOT an AES/reference validation oracle. */
 final class InboxDeletionBoundaryTest {
+  private static final String FIXTURE_42501_719DF123 = "42501";
   @TempDir static Path root;
   private static ApiLogDatabaseFixture db;
   private static String url;
@@ -372,10 +373,12 @@ final class InboxDeletionBoundaryTest {
             "schubert_backup",
             "schubert_ops_ro"))
       denied(
-          role, "42501", "select schubert.maintenance_delete_auth_inbox(null,null,null,null,null)");
-    denied(ROLE, "42501", "delete from schubert.request_inbox");
-    denied(ROLE, "42501", "update schubert.auth_sessions set revoked=true");
-    denied(ROLE, "42501", "set role nk_owner");
+          role,
+          FIXTURE_42501_719DF123,
+          "select schubert.maintenance_delete_auth_inbox(null,null,null,null,null)");
+    denied(ROLE, FIXTURE_42501_719DF123, "delete from schubert.request_inbox");
+    denied(ROLE, FIXTURE_42501_719DF123, "update schubert.auth_sessions set revoked=true");
+    denied(ROLE, FIXTURE_42501_719DF123, "set role nk_owner");
     assertEquals("1", count());
   }
 

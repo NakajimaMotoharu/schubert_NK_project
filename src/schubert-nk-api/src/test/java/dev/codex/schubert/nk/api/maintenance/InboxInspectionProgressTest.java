@@ -36,6 +36,8 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** PT-DB-INBOX-081..088; SS324 12.6/331 3.8; PG-D-128; independent wire/JCE and real SQL. */
 final class InboxInspectionProgressTest {
+  private static final String FIXTURE_GAMRSP01_D6D22C8C = "GAMRSP01";
+  private static final String FIXTURE_0000_876EEFE0 = "0000";
   @TempDir static Path root;
   private static ApiLogDatabaseFixture db;
   private static String url;
@@ -87,23 +89,23 @@ final class InboxInspectionProgressTest {
   void mixedRowsPersistExactProgress() throws Exception {
     try (var f = new Fixture()) {
       seed(f, 1, "LGNRSP01", "0101", NONE, Map.of());
-      seed(f, 2, "GAMRSP01", "0000", NONE, Map.of());
+      seed(f, 2, FIXTURE_GAMRSP01_D6D22C8C, FIXTURE_0000_876EEFE0, NONE, Map.of());
       seed(
           f,
           3,
           "UCRRSP01",
-          "0000",
+          FIXTURE_0000_876EEFE0,
           InboxResultReference.numeric(InboxResultReferenceType.USER, 9),
           Map.of());
       seed(
           f,
           4,
           "SCNRSP01",
-          "0000",
+          FIXTURE_0000_876EEFE0,
           InboxResultReference.numeric(InboxResultReferenceType.SCENARIO_FILE, 11),
           NonAuthenticationInboxInspectorTest.fileValues(1));
-      seed(f, 5, "GAMRSP01", "0000", NONE, Map.of());
-      seed(f, 6, "GAMRSP01", "0000", NONE, Map.of());
+      seed(f, 5, FIXTURE_GAMRSP01_D6D22C8C, FIXTURE_0000_876EEFE0, NONE, Map.of());
+      seed(f, 6, FIXTURE_GAMRSP01_D6D22C8C, FIXTURE_0000_876EEFE0, NONE, Map.of());
       sql(
           "update schubert.request_inbox set response_key_version='unknown' where message_id='"
               + id(5)
@@ -126,8 +128,8 @@ final class InboxInspectionProgressTest {
   @Test
   void boundedChunksResumeAndSkipCompleted() throws Exception {
     try (var f = new Fixture()) {
-      seed(f, 1, "GAMRSP01", "0000", NONE, Map.of());
-      seed(f, 2, "GAMRSP01", "0000", NONE, Map.of());
+      seed(f, 1, FIXTURE_GAMRSP01_D6D22C8C, FIXTURE_0000_876EEFE0, NONE, Map.of());
+      seed(f, 2, FIXTURE_GAMRSP01_D6D22C8C, FIXTURE_0000_876EEFE0, NONE, Map.of());
       assertEquals(progress(1, 1, 1, 0, false), f.service().runChunk(RUN, 1));
       assertEquals("1|1|0|false", stored());
       assertEquals(progress(2, 2, 2, 0, false), f.service().runChunk(RUN, 1));
@@ -158,7 +160,7 @@ final class InboxInspectionProgressTest {
   @Test
   void providerIllegalArgumentCannotAdvanceStoredProgress() throws Exception {
     try (var f = new Fixture()) {
-      seed(f, 1, "GAMRSP01", "0000", NONE, Map.of());
+      seed(f, 1, FIXTURE_GAMRSP01_D6D22C8C, FIXTURE_0000_876EEFE0, NONE, Map.of());
       var probe = new MaintenanceJdbcProbe();
       probe.runtimeColumn = "result_ref_type";
       redacted(() -> f.service(probe).inspectStoredNext(RUN));
@@ -213,7 +215,7 @@ final class InboxInspectionProgressTest {
                 "protected_count",
                 "inspection_xact")) {
           reset();
-          seed(f, 1, "GAMRSP01", "0000", NONE, Map.of());
+          seed(f, 1, FIXTURE_GAMRSP01_D6D22C8C, FIXTURE_0000_876EEFE0, NONE, Map.of());
           var p = new MaintenanceJdbcProbe();
           p.selectedSql = selected;
           p.columns.put(column, null);
@@ -232,7 +234,7 @@ final class InboxInspectionProgressTest {
                 Map.entry("inspection_xact", "x"),
                 Map.entry("inspection_xact", "0".repeat(21)))) {
           reset();
-          seed(f, 1, "GAMRSP01", "0000", NONE, Map.of());
+          seed(f, 1, FIXTURE_GAMRSP01_D6D22C8C, FIXTURE_0000_876EEFE0, NONE, Map.of());
           var p = new MaintenanceJdbcProbe();
           p.selectedSql = selected;
           p.columns.put(value.getKey(), value.getValue());
@@ -267,7 +269,7 @@ final class InboxInspectionProgressTest {
           faults.addAll(List.of("setLong", "setString", "setObject#3", "setObject#4"));
         for (String fault : faults) {
           reset();
-          seed(f, 1, "GAMRSP01", "0000", NONE, Map.of());
+          seed(f, 1, FIXTURE_GAMRSP01_D6D22C8C, FIXTURE_0000_876EEFE0, NONE, Map.of());
           var p = new MaintenanceJdbcProbe();
           p.selectedSql = selected;
           p.fault = fault;
@@ -282,7 +284,7 @@ final class InboxInspectionProgressTest {
         }
         for (boolean empty : List.of(false, true)) {
           reset();
-          seed(f, 1, "GAMRSP01", "0000", NONE, Map.of());
+          seed(f, 1, FIXTURE_GAMRSP01_D6D22C8C, FIXTURE_0000_876EEFE0, NONE, Map.of());
           var p = new MaintenanceJdbcProbe();
           p.selectedSql = selected;
           p.empty = empty;
@@ -301,7 +303,7 @@ final class InboxInspectionProgressTest {
     try (var f = new Fixture()) {
       for (String mode : List.of("before", "after", "close")) {
         reset();
-        seed(f, 1, "GAMRSP01", "0000", NONE, Map.of());
+        seed(f, 1, FIXTURE_GAMRSP01_D6D22C8C, FIXTURE_0000_876EEFE0, NONE, Map.of());
         var p = new MaintenanceJdbcProbe();
         p.fault = mode.equals("close") ? "close" : "commit";
         p.commitAfter = mode.equals("after");
@@ -323,7 +325,7 @@ final class InboxInspectionProgressTest {
           f,
           1,
           "UCRRSP01",
-          "0000",
+          FIXTURE_0000_876EEFE0,
           InboxResultReference.numeric(InboxResultReferenceType.USER, 9),
           Map.of());
       // First step checks candidate/reference/backup locks; the next checks the committed progress
@@ -352,7 +354,7 @@ final class InboxInspectionProgressTest {
       assertEquals(1, p.closes);
       assertEquals(0, p.saves);
       // Existing progress lock is observed while the next owned step is executing.
-      seed(f, 2, "GAMRSP01", "0000", NONE, Map.of());
+      seed(f, 2, FIXTURE_GAMRSP01_D6D22C8C, FIXTURE_0000_876EEFE0, NONE, Map.of());
       var second = new MaintenanceJdbcProbe();
       second.beforeDelete =
           c -> {
@@ -370,7 +372,7 @@ final class InboxInspectionProgressTest {
       assertEquals(0, second.saves);
       for (String selected : List.of(OPEN, SAVE, "inspection_health")) {
         reset();
-        seed(f, 1, "GAMRSP01", "0000", NONE, Map.of());
+        seed(f, 1, FIXTURE_GAMRSP01_D6D22C8C, FIXTURE_0000_876EEFE0, NONE, Map.of());
         var bad = new MaintenanceJdbcProbe();
         bad.selectedSql = selected;
         bad.fault = "aborted";
@@ -385,8 +387,8 @@ final class InboxInspectionProgressTest {
   void concurrentAttemptsNeverDoubleCount() throws Exception {
     try (var f = new Fixture();
         var pool = Executors.newFixedThreadPool(12)) {
-      seed(f, 1, "GAMRSP01", "0000", NONE, Map.of());
-      seed(f, 2, "GAMRSP01", "0000", NONE, Map.of());
+      seed(f, 1, FIXTURE_GAMRSP01_D6D22C8C, FIXTURE_0000_876EEFE0, NONE, Map.of());
+      seed(f, 2, FIXTURE_GAMRSP01_D6D22C8C, FIXTURE_0000_876EEFE0, NONE, Map.of());
       sql(
           "update schubert.request_inbox set response_key_version='missing' where message_id='"
               + id(2)
@@ -429,7 +431,7 @@ final class InboxInspectionProgressTest {
   @Test
   void runIdentityKeysAndResultsStayPrivate() throws Exception {
     try (var f = new Fixture()) {
-      seed(f, 1, "GAMRSP01", "0000", NONE, Map.of());
+      seed(f, 1, FIXTURE_GAMRSP01_D6D22C8C, FIXTURE_0000_876EEFE0, NONE, Map.of());
       f.service().runChunk(RUN, 1);
       redacted(
           () ->
@@ -447,7 +449,7 @@ final class InboxInspectionProgressTest {
       assertFalse(value.toString().contains(RUN.id().toString()));
       assertFalse(value.toString().contains(f.base.raw));
       reset();
-      seed(f, 1, "GAMRSP01", "0000", NONE, Map.of());
+      seed(f, 1, FIXTURE_GAMRSP01_D6D22C8C, FIXTURE_0000_876EEFE0, NONE, Map.of());
       f.base.snapshots.close();
       assertEquals(progress(1, 1, 0, 1, true), f.service().runChunk(RUN, 1000));
       assertEquals("1", inboxCount());
@@ -549,7 +551,9 @@ final class InboxInspectionProgressTest {
         f.base.savedBytes(
             identity,
             wire,
-            code.equals("0000") ? InboxCompletionState.COMPLETED : InboxCompletionState.ERROR,
+            code.equals(FIXTURE_0000_876EEFE0)
+                ? InboxCompletionState.COMPLETED
+                : InboxCompletionState.ERROR,
             ref);
     assertTrue(
         new InboxResponseInspector(f.base.snapshots).isStructurallyValid(identity, saved),

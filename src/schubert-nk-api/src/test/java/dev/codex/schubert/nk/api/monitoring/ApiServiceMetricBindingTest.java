@@ -20,6 +20,8 @@ import org.junit.jupiter.api.Test;
 
 /** 1852 APISERVICE001..016: immutable supplied data/typed fake bean only, no DB or clock. */
 final class ApiServiceMetricBindingTest {
+  private static final String FIXTURE_DEBUG_B6DFBABB = "DEBUG";
+
   private static Snapshot sample() {
     return new Snapshot(
         new Counts(3, 5, 7),
@@ -56,7 +58,7 @@ final class ApiServiceMetricBindingTest {
     var reads = new AtomicInteger();
     try (var context =
         ApiServiceMetricBinding.prepareContext(
-            "DEBUG",
+            FIXTURE_DEBUG_B6DFBABB,
             () -> {
               pools.incrementAndGet();
               return f.pool();
@@ -94,7 +96,8 @@ final class ApiServiceMetricBindingTest {
     var first = sample();
     var value = new AtomicReference<>(Optional.of(first));
     try (var context =
-        ApiServiceMetricBinding.prepareContext("DEBUG", f::pool, f::config, value::get)) {
+        ApiServiceMetricBinding.prepareContext(
+            FIXTURE_DEBUG_B6DFBABB, f::pool, f::config, value::get)) {
       context.initialize();
       String body = context.render(true);
       assertEquals(
@@ -122,7 +125,8 @@ final class ApiServiceMetricBindingTest {
   @Test
   void apiservice003() {
     var f = new Fixture();
-    try (var context = ApiServiceMetricBinding.prepareContext("DEBUG", f::pool, f::config)) {
+    try (var context =
+        ApiServiceMetricBinding.prepareContext(FIXTURE_DEBUG_B6DFBABB, f::pool, f::config)) {
       context.initialize();
       missing(context.render(true));
       assertTrue(context.bindings().orElseThrow().snapshot().isEmpty());
@@ -135,7 +139,8 @@ final class ApiServiceMetricBindingTest {
     var f = new Fixture();
     var value = new AtomicReference<>(Optional.of(sample()));
     try (var context =
-        ApiServiceMetricBinding.prepareContext("DEBUG", f::pool, f::config, value::get)) {
+        ApiServiceMetricBinding.prepareContext(
+            FIXTURE_DEBUG_B6DFBABB, f::pool, f::config, value::get)) {
       context.initialize();
       context.render(true);
       value.set(Optional.empty());
@@ -151,7 +156,7 @@ final class ApiServiceMetricBindingTest {
     var primary = new IllegalStateException("synthetic metadata failure");
     try (var context =
         ApiServiceMetricBinding.prepareContext(
-            "DEBUG",
+            FIXTURE_DEBUG_B6DFBABB,
             f::pool,
             f::config,
             () -> {
@@ -173,7 +178,7 @@ final class ApiServiceMetricBindingTest {
     var primary = new AssertionError("synthetic metadata error");
     try (var context =
         ApiServiceMetricBinding.prepareContext(
-            "DEBUG",
+            FIXTURE_DEBUG_B6DFBABB,
             f::pool,
             f::config,
             () -> {
@@ -193,7 +198,8 @@ final class ApiServiceMetricBindingTest {
     var f = new Fixture();
     var value = new AtomicReference<>(Optional.of(sample()));
     try (var context =
-        ApiServiceMetricBinding.prepareContext("DEBUG", f::pool, f::config, value::get)) {
+        ApiServiceMetricBinding.prepareContext(
+            FIXTURE_DEBUG_B6DFBABB, f::pool, f::config, value::get)) {
       context.initialize();
       context.render(true);
       value.set(null);
@@ -209,13 +215,15 @@ final class ApiServiceMetricBindingTest {
     var f = new Fixture();
     assertThrows(
         NullPointerException.class,
-        () -> ApiServiceMetricBinding.prepareContext("DEBUG", null, f::config));
+        () -> ApiServiceMetricBinding.prepareContext(FIXTURE_DEBUG_B6DFBABB, null, f::config));
     assertThrows(
         NullPointerException.class,
-        () -> ApiServiceMetricBinding.prepareContext("DEBUG", f::pool, null));
+        () -> ApiServiceMetricBinding.prepareContext(FIXTURE_DEBUG_B6DFBABB, f::pool, null));
     assertThrows(
         NullPointerException.class,
-        () -> ApiServiceMetricBinding.prepareContext("DEBUG", f::pool, f::config, null));
+        () ->
+            ApiServiceMetricBinding.prepareContext(
+                FIXTURE_DEBUG_B6DFBABB, f::pool, f::config, null));
     assertThrows(
         NullPointerException.class,
         () -> ApiServiceMetricBinding.prepareContext(null, f::pool, f::config));
@@ -231,7 +239,7 @@ final class ApiServiceMetricBindingTest {
     var reads = new AtomicInteger();
     try (var context =
         ApiServiceMetricBinding.prepareContext(
-            "DEBUG",
+            FIXTURE_DEBUG_B6DFBABB,
             () -> null,
             f::config,
             () -> {
@@ -250,7 +258,7 @@ final class ApiServiceMetricBindingTest {
     var reads = new AtomicInteger();
     try (var context =
         ApiServiceMetricBinding.prepareContext(
-            "DEBUG",
+            FIXTURE_DEBUG_B6DFBABB,
             f::pool,
             () -> null,
             () -> {
@@ -269,7 +277,7 @@ final class ApiServiceMetricBindingTest {
     var primary = new IllegalStateException("synthetic bean supplier");
     try (var context =
         ApiServiceMetricBinding.prepareContext(
-            "DEBUG",
+            FIXTURE_DEBUG_B6DFBABB,
             () -> {
               throw primary;
             },
@@ -285,7 +293,7 @@ final class ApiServiceMetricBindingTest {
     var primary = new AssertionError("synthetic configuration supplier");
     try (var context =
         ApiServiceMetricBinding.prepareContext(
-            "DEBUG",
+            FIXTURE_DEBUG_B6DFBABB,
             f::pool,
             () -> {
               throw primary;
@@ -329,7 +337,7 @@ final class ApiServiceMetricBindingTest {
         new Snapshot(new Counts(0, 0, 0), new Ages(Duration.ZERO, Duration.ZERO, Duration.ZERO));
     try (var context =
         ApiServiceMetricBinding.prepareContext(
-            "DEBUG", f::pool, f::config, () -> Optional.of(zero))) {
+            FIXTURE_DEBUG_B6DFBABB, f::pool, f::config, () -> Optional.of(zero))) {
       context.initialize();
       String body = context.render(true);
       for (String status : List.of("PENDING", "SENT", "ERROR")) {
@@ -349,7 +357,7 @@ final class ApiServiceMetricBindingTest {
     var primary = new IllegalStateException("synthetic pool getter");
     try (var context =
         ApiServiceMetricBinding.prepareContext(
-            "DEBUG",
+            FIXTURE_DEBUG_B6DFBABB,
             f::pool,
             f::config,
             () -> {
@@ -372,7 +380,7 @@ final class ApiServiceMetricBindingTest {
     var reads = new AtomicInteger();
     var context =
         ApiServiceMetricBinding.prepareContext(
-            "DEBUG",
+            FIXTURE_DEBUG_B6DFBABB,
             f::pool,
             f::config,
             () -> {

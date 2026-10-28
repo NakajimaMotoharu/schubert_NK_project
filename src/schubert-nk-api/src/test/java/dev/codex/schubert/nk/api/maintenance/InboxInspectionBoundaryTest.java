@@ -30,6 +30,12 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** PT-DB-INBOX-017..024; independent SQLSTATE/catalog/row and lock postconditions for V008. */
 final class InboxInspectionBoundaryTest {
+  private static final String FIXTURE_PGPT_ADMIN_F5D1227C = "pgpt_admin";
+  private static final String FIXTURE_SCHUBERT_APP_5AB151CF = "schubert_app";
+  private static final String FIXTURE_LGNREQ01_217C66A4 = "LGNREQ01";
+  private static final String FIXTURE_ERROR_F717E7D8 = "ERROR";
+  private static final String FIXTURE_COMPLETED_BA0AE16A = "COMPLETED";
+  private static final String FIXTURE_55P03_0FE714C6 = "55P03";
   @TempDir static Path root;
   private static ApiLogDatabaseFixture db;
   private static String url;
@@ -82,17 +88,17 @@ final class InboxInspectionBoundaryTest {
     assertEquals(
         "0",
         scalar(
-            "pgpt_admin",
+            FIXTURE_PGPT_ADMIN_F5D1227C,
             "select count(*) from pg_auth_members where member=(select oid from pg_roles where rolname='schubert_inbox_inspector')"));
     assertEquals(
         "nk_owner|true|search_path=pg_catalog, schubert,TimeZone=UTC",
         scalar(
-            "pgpt_admin",
+            FIXTURE_PGPT_ADMIN_F5D1227C,
             "select pg_get_userbyid(proowner)||'|'||prosecdef::text||'|'||array_to_string(proconfig,',') from pg_proc where oid='schubert.maintenance_next_auth_inbox(uuid,timestamptz,uuid)'::regprocedure"));
     assertEquals(
         "false",
         scalar(
-            "pgpt_admin",
+            FIXTURE_PGPT_ADMIN_F5D1227C,
             "select has_function_privilege('public','schubert.maintenance_next_auth_inbox(uuid,timestamptz,uuid)','execute')::text"));
     assertEquals(
         "true",
@@ -138,19 +144,21 @@ final class InboxInspectionBoundaryTest {
       assertEquals(List.of(), read(c, null));
       c.rollback();
     }
-    assertEquals("0", scalar("schubert_app", "select count(*) from schubert.request_inbox"));
+    assertEquals(
+        "0", scalar(FIXTURE_SCHUBERT_APP_5AB151CF, "select count(*) from schubert.request_inbox"));
   }
 
   @Test
   void expiryStateLayoutAndCursorAreExact() throws Exception {
     backups();
     try (var c = db.api()) {
-      inbox(c, 5, "LGNREQ01", "ERROR", CUTOFF.minusNanos(1000), false);
-      inbox(c, 4, "LOGREQ01", "COMPLETED", CUTOFF.minusSeconds(1), false);
-      inbox(c, 1, "LGNREQ01", "PROCESSING", CUTOFF.minusSeconds(1), false);
-      inbox(c, 2, "GAMREQ01", "COMPLETED", CUTOFF.minusSeconds(1), false);
-      inbox(c, 3, "LGNREQ01", "COMPLETED", CUTOFF, false);
-      inbox(c, 6, "LOGREQ01", "ERROR", CUTOFF.plusNanos(1000), false);
+      inbox(
+          c, 5, FIXTURE_LGNREQ01_217C66A4, FIXTURE_ERROR_F717E7D8, CUTOFF.minusNanos(1000), false);
+      inbox(c, 4, "LOGREQ01", FIXTURE_COMPLETED_BA0AE16A, CUTOFF.minusSeconds(1), false);
+      inbox(c, 1, FIXTURE_LGNREQ01_217C66A4, "PROCESSING", CUTOFF.minusSeconds(1), false);
+      inbox(c, 2, "GAMREQ01", FIXTURE_COMPLETED_BA0AE16A, CUTOFF.minusSeconds(1), false);
+      inbox(c, 3, FIXTURE_LGNREQ01_217C66A4, FIXTURE_COMPLETED_BA0AE16A, CUTOFF, false);
+      inbox(c, 6, "LOGREQ01", FIXTURE_ERROR_F717E7D8, CUTOFF.plusNanos(1000), false);
     }
     try (var c = inspection()) {
       assertEquals(List.of(new UUID(0, 4)), read(c, null));
@@ -159,20 +167,21 @@ final class InboxInspectionBoundaryTest {
       assertEquals(List.of(), read(c, new UUID(0, 999)));
       c.rollback();
     }
-    assertEquals("6", scalar("schubert_app", "select count(*) from schubert.request_inbox"));
+    assertEquals(
+        "6", scalar(FIXTURE_SCHUBERT_APP_5AB151CF, "select count(*) from schubert.request_inbox"));
   }
 
   @Test
   void candidateLocksLiveUntilCallerEndsTransaction() throws Exception {
     backups();
     try (var c = db.api()) {
-      inbox(c, 1, "LGNREQ01", "ERROR", CUTOFF.minusSeconds(1), false);
+      inbox(c, 1, FIXTURE_LGNREQ01_217C66A4, FIXTURE_ERROR_F717E7D8, CUTOFF.minusSeconds(1), false);
     }
     try (var held = inspection()) {
       assertEquals(List.of(new UUID(0, 1)), read(held, null));
       denied(
-          "schubert_app",
-          "55P03",
+          FIXTURE_SCHUBERT_APP_5AB151CF,
+          FIXTURE_55P03_0FE714C6,
           "select message_id from schubert.request_inbox for update nowait");
       try (var concurrent = db.api();
           var s = concurrent.createStatement()) {
@@ -182,13 +191,14 @@ final class InboxInspectionBoundaryTest {
                 "update schubert.request_inbox set fingerprint_key_version='v2'",
                 "delete from schubert.request_inbox"))
           assertEquals(
-              "55P03", assertThrows(SQLException.class, () -> s.execute(change)).getSQLState());
+              FIXTURE_55P03_0FE714C6,
+              assertThrows(SQLException.class, () -> s.execute(change)).getSQLState());
       }
       held.rollback();
       assertEquals(
           "00000000-0000-0000-0000-000000000001",
           scalar(
-              "schubert_app",
+              FIXTURE_SCHUBERT_APP_5AB151CF,
               "select message_id::text from schubert.request_inbox for update nowait"));
     }
   }
@@ -201,7 +211,13 @@ final class InboxInspectionBoundaryTest {
       var saved = f.saved(id, "0000", InboxResultReference.authSession(SESSION));
       try (var c = db.api()) {
         f.seed(c, true);
-        inbox(c, 101, "LGNREQ01", "COMPLETED", CUTOFF.minusSeconds(1), true);
+        inbox(
+            c,
+            101,
+            FIXTURE_LGNREQ01_217C66A4,
+            FIXTURE_COMPLETED_BA0AE16A,
+            CUTOFF.minusSeconds(1),
+            true);
         try (var s =
             c.prepareStatement(
                 "update schubert.request_inbox set response_body_encrypted=?,response_key_version='s1',completed_at=?")) {
@@ -213,8 +229,14 @@ final class InboxInspectionBoundaryTest {
       try (var held = inspection()) {
         assertEquals(List.of(new UUID(0, 101)), read(held, null));
         assertTrue(f.inspector.isConsistent(held, id, saved));
-        denied("schubert_app", "55P03", "select id from schubert.auth_sessions for update nowait");
-        denied("schubert_batch", "55P03", "select id from schubert.batch_runs for update nowait");
+        denied(
+            FIXTURE_SCHUBERT_APP_5AB151CF,
+            FIXTURE_55P03_0FE714C6,
+            "select id from schubert.auth_sessions for update nowait");
+        denied(
+            "schubert_batch",
+            FIXTURE_55P03_0FE714C6,
+            "select id from schubert.batch_runs for update nowait");
         held.rollback();
       }
       try (var c = db.api();
@@ -226,7 +248,9 @@ final class InboxInspectionBoundaryTest {
         assertFalse(f.inspector.isConsistent(held, id, saved));
         held.rollback();
       }
-      assertEquals("1", scalar("schubert_app", "select count(*) from schubert.request_inbox"));
+      assertEquals(
+          "1",
+          scalar(FIXTURE_SCHUBERT_APP_5AB151CF, "select count(*) from schubert.request_inbox"));
     }
     // BUG-080: lock wait pins the first query snapshot before CONFIG is committed.
     try (var setup = db.api();
@@ -265,7 +289,10 @@ final class InboxInspectionBoundaryTest {
     }
     try (var retry = inspection()) {
       assertEquals(List.of(new UUID(0, 101)), read(retry, null));
-      denied("schubert_batch", "55P03", "select id from schubert.batch_runs for update nowait");
+      denied(
+          "schubert_batch",
+          FIXTURE_55P03_0FE714C6,
+          "select id from schubert.batch_runs for update nowait");
       retry.rollback();
     }
   }
@@ -274,7 +301,7 @@ final class InboxInspectionBoundaryTest {
   void noRoleCanEscalateInspectionPrivileges() throws Exception {
     for (String role :
         List.of(
-            "schubert_app",
+            FIXTURE_SCHUBERT_APP_5AB151CF,
             "schubert_batch",
             "schubert_backup",
             "schubert_web_session",
@@ -308,7 +335,7 @@ final class InboxInspectionBoundaryTest {
     try (var lock = db.api();
         var s = lock.createStatement()) {
       s.execute("select pg_advisory_lock(71419602)");
-      denied(ROLE, "55P03", CALL);
+      denied(ROLE, FIXTURE_55P03_0FE714C6, CALL);
       s.execute("select pg_advisory_unlock(71419602)");
       try (var c = inspection()) {
         assertEquals(List.of(), read(c, null));
@@ -316,14 +343,15 @@ final class InboxInspectionBoundaryTest {
       }
     }
     try (var c = db.api()) {
-      inbox(c, 1, "LGNREQ01", "ERROR", CUTOFF.minusSeconds(1), false);
+      inbox(c, 1, FIXTURE_LGNREQ01_217C66A4, FIXTURE_ERROR_F717E7D8, CUTOFF.minusSeconds(1), false);
     }
     try (var c = inspection()) {
       assertEquals(List.of(new UUID(0, 1)), read(c, null));
       c.rollback();
     }
     // No deletion command is part of this capability.
-    assertEquals("1", scalar("schubert_app", "select count(*) from schubert.request_inbox"));
+    assertEquals(
+        "1", scalar(FIXTURE_SCHUBERT_APP_5AB151CF, "select count(*) from schubert.request_inbox"));
   }
 
   @Test
@@ -331,7 +359,7 @@ final class InboxInspectionBoundaryTest {
     assertEquals(
         MigrationInventory.COUNT_TEXT,
         scalar(
-            "pgpt_admin",
+            FIXTURE_PGPT_ADMIN_F5D1227C,
             "select count(*) from schubert_meta.flyway_schema_history where success and version is not null"));
     var flyway =
         Flyway.configure()
@@ -349,7 +377,7 @@ final class InboxInspectionBoundaryTest {
     assertEquals(0, flyway.migrate().migrationsExecuted);
     backups();
     try (var c = db.api()) {
-      inbox(c, 1, "LGNREQ01", "ERROR", CUTOFF.minusSeconds(1), false);
+      inbox(c, 1, FIXTURE_LGNREQ01_217C66A4, FIXTURE_ERROR_F717E7D8, CUTOFF.minusSeconds(1), false);
     }
     try (var c = inspection();
         var s = c.createStatement();
@@ -449,7 +477,7 @@ final class InboxInspectionBoundaryTest {
       s.setObject(1, id);
       s.setObject(2, id);
       s.setString(3, layout);
-      s.setObject(4, layout.equals("LGNREQ01") ? null : 7L);
+      s.setObject(4, layout.equals(FIXTURE_LGNREQ01_217C66A4) ? null : 7L);
       s.setString(5, state);
       s.setString(6, processing ? null : session ? "AUTH_SESSION" : "NONE");
       s.setObject(7, session ? SESSION : null);

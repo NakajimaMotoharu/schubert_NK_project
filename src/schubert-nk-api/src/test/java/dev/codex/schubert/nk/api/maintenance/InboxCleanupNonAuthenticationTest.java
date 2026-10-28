@@ -44,6 +44,13 @@ import org.junit.jupiter.api.io.TempDir;
  * PT-DB-INBOX-057..064: shared owned transaction, independent wire/JCE and real least-privilege PG.
  */
 final class InboxCleanupNonAuthenticationTest {
+  private static final String FIXTURE_USTRSP01_19F531B7 = "USTRSP01";
+  private static final String FIXTURE_GAMRSP01_D6D22C8C = "GAMRSP01";
+  private static final String FIXTURE_SCNRSP01_DD42C8D5 = "SCNRSP01";
+  private static final String FIXTURE_0000_876EEFE0 = "0000";
+  private static final String FIXTURE_DELETE_FROM_SCHUBERT_REQUEST_INBOX_D18913CC =
+      "delete from schubert.request_inbox";
+  private static final String FIXTURE_55P03_0FE714C6 = "55P03";
   @TempDir static Path root;
   private static ApiLogDatabaseFixture db;
   private static String url;
@@ -51,15 +58,15 @@ final class InboxCleanupNonAuthenticationTest {
   private static final InspectionRun RUN =
       new InspectionRun(new UUID(0, 42), Instant.parse("2026-09-17T00:00:00.123Z"));
   private static final Set<String> MUTATIONS =
-      Set.of("UCRRSP01", "USTRSP01", "URLRSP01", "UPWRSP01", "ULKRSP01");
+      Set.of("UCRRSP01", FIXTURE_USTRSP01_19F531B7, "URLRSP01", "UPWRSP01", "ULKRSP01");
   private static final List<String> QUERIES =
       List.of(
-          "GAMRSP01",
+          FIXTURE_GAMRSP01_D6D22C8C,
           "SPKRSP01",
           "RTERSP01",
           "SCFRSP01",
           "SRCRSP01",
-          "SCNRSP01",
+          FIXTURE_SCNRSP01_DD42C8D5,
           "AUDRSP01",
           "ANMRSP01",
           "ANLRSP01",
@@ -117,13 +124,14 @@ final class InboxCleanupNonAuthenticationTest {
     try (var f = new Fixture()) {
       String before = references();
       for (String layout : routes) {
-        for (String code : List.of("0000", layout.equals("UDTRSP01") ? "0104" : "9001")) {
+        for (String code :
+            List.of(FIXTURE_0000_876EEFE0, layout.equals("UDTRSP01") ? "0104" : "9001")) {
           seed(
               f,
               101,
               layout,
               code,
-              code.equals("0000") && MUTATIONS.contains(layout) ? USER : NONE,
+              code.equals(FIXTURE_0000_876EEFE0) && MUTATIONS.contains(layout) ? USER : NONE,
               Map.of());
           assertEquals(
               new InspectionStep(InspectionStep.Outcome.DELETED, Optional.of(new UUID(0, 101))),
@@ -138,7 +146,13 @@ final class InboxCleanupNonAuthenticationTest {
       seed(f, 101, "ULKRSP01", "0200", USER, Map.of("更新後version", "0"));
       assertEquals(
           InspectionStep.Outcome.DELETED, f.service().inspectNext(RUN, Optional.empty()).outcome());
-      seed(f, 101, "SCNRSP01", "0000", SCRIPT, NonAuthenticationInboxInspectorTest.fileValues(1));
+      seed(
+          f,
+          101,
+          FIXTURE_SCNRSP01_DD42C8D5,
+          FIXTURE_0000_876EEFE0,
+          SCRIPT,
+          NonAuthenticationInboxInspectorTest.fileValues(1));
       assertEquals(
           InspectionStep.Outcome.DELETED, f.service().inspectNext(RUN, Optional.empty()).outcome());
       assertEquals(before, references());
@@ -154,19 +168,25 @@ final class InboxCleanupNonAuthenticationTest {
               "result_ref_id=7",
               "response_key_version='unknown'",
               "response_body_encrypted=decode(repeat('00',30),'hex')")) {
-        sql("delete from schubert.request_inbox");
-        seed(f, 101, "USTRSP01", "0000", USER, Map.of());
+        sql(FIXTURE_DELETE_FROM_SCHUBERT_REQUEST_INBOX_D18913CC);
+        seed(f, 101, FIXTURE_USTRSP01_19F531B7, FIXTURE_0000_876EEFE0, USER, Map.of());
         sql("update schubert.request_inbox set " + mutation);
         protectedRow(f);
       }
-      sql("delete from schubert.request_inbox");
-      seed(f, 101, "USTRSP01", "0000", USER, Map.of("更新後version", "10"));
+      sql(FIXTURE_DELETE_FROM_SCHUBERT_REQUEST_INBOX_D18913CC);
+      seed(
+          f,
+          101,
+          FIXTURE_USTRSP01_19F531B7,
+          FIXTURE_0000_876EEFE0,
+          USER,
+          Map.of("更新後version", "10"));
       protectedRow(f);
       sql(
           "update schubert.app_users set version=10,username='Later',username_key='later',status='DISABLED',role='ADMIN' where id=9");
       assertEquals(
           InspectionStep.Outcome.DELETED, f.service().inspectNext(RUN, Optional.empty()).outcome());
-      seed(f, 101, "USTRSP01", "0000", USER, Map.of());
+      seed(f, 101, FIXTURE_USTRSP01_19F531B7, FIXTURE_0000_876EEFE0, USER, Map.of());
       sql("delete from schubert.app_users where id=9");
       protectedRow(f);
       for (String mutation :
@@ -175,14 +195,20 @@ final class InboxCleanupNonAuthenticationTest {
               "update schubert.script_files set game_id=2 where id=11",
               "delete from schubert.script_files where id=11")) {
         reset();
-        seed(f, 101, "SCNRSP01", "0000", SCRIPT, NonAuthenticationInboxInspectorTest.fileValues(1));
+        seed(
+            f,
+            101,
+            FIXTURE_SCNRSP01_DD42C8D5,
+            FIXTURE_0000_876EEFE0,
+            SCRIPT,
+            NonAuthenticationInboxInspectorTest.fileValues(1));
         sql(mutation);
         protectedRow(f);
       }
       reset();
       var invalidDate = NonAuthenticationInboxInspectorTest.fileValues(1);
       invalidDate.put("File relative path", "20260230/" + new UUID(0, 3) + ".ready");
-      seed(f, 101, "SCNRSP01", "0000", SCRIPT, invalidDate);
+      seed(f, 101, FIXTURE_SCNRSP01_DD42C8D5, FIXTURE_0000_876EEFE0, SCRIPT, invalidDate);
       protectedRow(f);
     }
   }
@@ -195,7 +221,7 @@ final class InboxCleanupNonAuthenticationTest {
           () ->
               new InboxCleanup(
                   InboxCleanupNonAuthenticationTest::connection, f.auth, null, Set.of("v1")));
-      for (String layout : List.of("GAMRSP01", "USTRSP01")) {
+      for (String layout : List.of(FIXTURE_GAMRSP01_D6D22C8C, FIXTURE_USTRSP01_19F531B7)) {
         for (String mutation :
             List.of(
                 "request_version='002'",
@@ -203,30 +229,43 @@ final class InboxCleanupNonAuthenticationTest {
                 "response_layout_id='AUDRSP01'",
                 "fingerprint_key_version='unknown'",
                 "response_body_encrypted=null,response_key_version=null")) {
-          sql("delete from schubert.request_inbox");
-          seed(f, 101, layout, "0000", MUTATIONS.contains(layout) ? USER : NONE, Map.of());
+          sql(FIXTURE_DELETE_FROM_SCHUBERT_REQUEST_INBOX_D18913CC);
+          seed(
+              f,
+              101,
+              layout,
+              FIXTURE_0000_876EEFE0,
+              MUTATIONS.contains(layout) ? USER : NONE,
+              Map.of());
           sql("update schubert.request_inbox set " + mutation);
           protectedRow(f);
         }
         for (boolean tokenPresent : List.of(false, true)) {
-          sql("delete from schubert.request_inbox");
-          seed(f, 101, layout, "0000", MUTATIONS.contains(layout) ? USER : NONE, Map.of());
+          sql(FIXTURE_DELETE_FROM_SCHUBERT_REQUEST_INBOX_D18913CC);
+          seed(
+              f,
+              101,
+              layout,
+              FIXTURE_0000_876EEFE0,
+              MUTATIONS.contains(layout) ? USER : NONE,
+              Map.of());
           var p = new MaintenanceJdbcProbe();
           p.columns.put("operation_token", tokenPresent ? UUID.randomUUID() : null);
           assertEquals(
-              tokenPresent == layout.equals("USTRSP01")
+              tokenPresent == layout.equals(FIXTURE_USTRSP01_19F531B7)
                   ? InspectionStep.Outcome.DELETED
                   : InspectionStep.Outcome.PROTECTED,
               f.service(() -> p.wrap(connection())).inspectNext(RUN, Optional.empty()).outcome());
-          assertEquals(tokenPresent == layout.equals("USTRSP01") ? "0" : "1", count());
+          assertEquals(
+              tokenPresent == layout.equals(FIXTURE_USTRSP01_19F531B7) ? "0" : "1", count());
         }
       }
       for (String mutation :
           List.of(
               "expires_at='2026-09-17T00:00:00.123Z'",
               "processing_state='PROCESSING',completed_at=null,result_ref_type=null,response_layout_id=null,response_version=null,response_body_encrypted=null,response_key_version=null")) {
-        sql("delete from schubert.request_inbox");
-        seed(f, 101, "GAMRSP01", "0000", NONE, Map.of());
+        sql(FIXTURE_DELETE_FROM_SCHUBERT_REQUEST_INBOX_D18913CC);
+        seed(f, 101, FIXTURE_GAMRSP01_D6D22C8C, FIXTURE_0000_876EEFE0, NONE, Map.of());
         sql("update schubert.request_inbox set " + mutation);
         assertEquals(
             InspectionStep.Outcome.END, f.service().inspectNext(RUN, Optional.empty()).outcome());
@@ -238,16 +277,16 @@ final class InboxCleanupNonAuthenticationTest {
   @Test
   void mixedCursorsNeverSkipUnverifiedRows() throws Exception {
     try (var f = new Fixture()) {
-      seed(f, 101, "GAMRSP01", "0000", NONE, Map.of());
+      seed(f, 101, FIXTURE_GAMRSP01_D6D22C8C, FIXTURE_0000_876EEFE0, NONE, Map.of());
       sql(
           "update schubert.request_inbox set request_layout_id='ZZZREQ01',response_layout_id='ZZZRSP01'");
-      seed(f, 102, "GAMRSP01", "0000", NONE, Map.of());
+      seed(f, 102, FIXTURE_GAMRSP01_D6D22C8C, FIXTURE_0000_876EEFE0, NONE, Map.of());
       sql(
           "update schubert.request_inbox set fingerprint_key_version='unknown' where message_id='"
               + new UUID(0, 102)
               + "'");
-      seed(f, 103, "UCRRSP01", "0000", USER, Map.of());
-      seed(f, 104, "GAMRSP01", "9001", NONE, Map.of());
+      seed(f, 103, "UCRRSP01", FIXTURE_0000_876EEFE0, USER, Map.of());
+      seed(f, 104, FIXTURE_GAMRSP01_D6D22C8C, "9001", NONE, Map.of());
       Optional<UUID> cursor = Optional.empty();
       for (int i = 101; i <= 104; i++) {
         var step = f.service().inspectNext(RUN, cursor);
@@ -273,12 +312,14 @@ final class InboxCleanupNonAuthenticationTest {
   @Test
   void transactionFaultsRollbackAndResume() throws Exception {
     try (var f = new Fixture()) {
-      for (String layout : List.of("GAMRSP01", "USTRSP01", "SCNRSP01")) {
+      for (String layout :
+          List.of(
+              FIXTURE_GAMRSP01_D6D22C8C, FIXTURE_USTRSP01_19F531B7, FIXTURE_SCNRSP01_DD42C8D5)) {
         for (String fault :
             List.of(
                 "executeQuery", "getObject", "resultClose", "statementClose", "commit", "close")) {
-          sql("delete from schubert.request_inbox");
-          seed(f, 101, layout, "0000", reference(layout), values(layout));
+          sql(FIXTURE_DELETE_FROM_SCHUBERT_REQUEST_INBOX_D18913CC);
+          seed(f, 101, layout, FIXTURE_0000_876EEFE0, reference(layout), values(layout));
           var p = new MaintenanceJdbcProbe();
           p.selectedSql = "maintenance_delete_inbox";
           p.fault = fault;
@@ -295,10 +336,10 @@ final class InboxCleanupNonAuthenticationTest {
               f.service().inspectNext(RUN, Optional.empty()).outcome());
         }
       }
-      for (String layout : List.of("USTRSP01", "SCNRSP01")) {
+      for (String layout : List.of(FIXTURE_USTRSP01_19F531B7, FIXTURE_SCNRSP01_DD42C8D5)) {
         for (String fault : List.of("getObject", "aborted")) {
-          sql("delete from schubert.request_inbox");
-          seed(f, 101, layout, "0000", reference(layout), values(layout));
+          sql(FIXTURE_DELETE_FROM_SCHUBERT_REQUEST_INBOX_D18913CC);
+          seed(f, 101, layout, FIXTURE_0000_876EEFE0, reference(layout), values(layout));
           var p = new MaintenanceJdbcProbe();
           p.selectedSql = "reference_value";
           p.fault = fault;
@@ -317,8 +358,8 @@ final class InboxCleanupNonAuthenticationTest {
           assertEquals(1, p.closes);
         }
       }
-      sql("delete from schubert.request_inbox");
-      seed(f, 101, "USTRSP01", "0000", USER, Map.of());
+      sql(FIXTURE_DELETE_FROM_SCHUBERT_REQUEST_INBOX_D18913CC);
+      seed(f, 101, FIXTURE_USTRSP01_19F531B7, FIXTURE_0000_876EEFE0, USER, Map.of());
       var uncertain = new MaintenanceJdbcProbe();
       uncertain.fault = "commit";
       uncertain.commitAfter = true;
@@ -338,9 +379,15 @@ final class InboxCleanupNonAuthenticationTest {
   void concurrentMixedRequestsStayIsolated() throws Exception {
     try (var f = new Fixture();
         var pool = Executors.newFixedThreadPool(8)) {
-      seed(f, 101, "GAMRSP01", "0000", NONE, Map.of());
-      seed(f, 102, "USTRSP01", "0000", USER, Map.of());
-      seed(f, 103, "SCNRSP01", "0000", SCRIPT, values("SCNRSP01"));
+      seed(f, 101, FIXTURE_GAMRSP01_D6D22C8C, FIXTURE_0000_876EEFE0, NONE, Map.of());
+      seed(f, 102, FIXTURE_USTRSP01_19F531B7, FIXTURE_0000_876EEFE0, USER, Map.of());
+      seed(
+          f,
+          103,
+          FIXTURE_SCNRSP01_DD42C8D5,
+          FIXTURE_0000_876EEFE0,
+          SCRIPT,
+          values(FIXTURE_SCNRSP01_DD42C8D5));
       var local = ThreadLocal.withInitial(MaintenanceJdbcProbe::new);
       var service = f.service(() -> local.get().wrap(connection()));
       var tasks = new ArrayList<Callable<Optional<UUID>>>();
@@ -354,7 +401,7 @@ final class InboxCleanupNonAuthenticationTest {
                 assertNotEquals(InspectionStep.Outcome.PROTECTED, result.outcome());
                 return result.cursor();
               } catch (InboxMaintenanceException failure) {
-                assertEquals("55P03", p.lastSqlState);
+                assertEquals(FIXTURE_55P03_0FE714C6, p.lastSqlState);
                 redacted(failure);
                 return Optional.empty();
               } finally {
@@ -377,15 +424,15 @@ final class InboxCleanupNonAuthenticationTest {
           Set.of(new UUID(0, 101), new UUID(0, 102), new UUID(0, 103)), new HashSet<>(deleted));
       assertEquals("0", count());
       for (String unexpected : List.of("08006", "unobserved"))
-        assertThrows(AssertionError.class, () -> assertEquals("55P03", unexpected));
+        assertThrows(AssertionError.class, () -> assertEquals(FIXTURE_55P03_0FE714C6, unexpected));
     }
   }
 
   @Test
   void leastPrivilegeAndKeyLifetimes() throws Exception {
     try (var f = new Fixture()) {
-      for (String layout : List.of("USTRSP01", "SCNRSP01")) {
-        seed(f, 101, layout, "0000", reference(layout), values(layout));
+      for (String layout : List.of(FIXTURE_USTRSP01_19F531B7, FIXTURE_SCNRSP01_DD42C8D5)) {
+        seed(f, 101, layout, FIXTURE_0000_876EEFE0, reference(layout), values(layout));
         var p = new MaintenanceJdbcProbe();
         p.beforeDelete =
             c -> {
@@ -393,18 +440,20 @@ final class InboxCleanupNonAuthenticationTest {
               assertEquals(0, p.commits);
               assertEquals(0, p.saves);
               String table =
-                  layout.equals("USTRSP01") ? "app_users where id=9" : "script_files where id=11";
+                  layout.equals(FIXTURE_USTRSP01_19F531B7)
+                      ? "app_users where id=9"
+                      : "script_files where id=11";
               denied(
                   "schubert_app",
-                  "55P03",
+                  FIXTURE_55P03_0FE714C6,
                   "select id from schubert." + table + " for update nowait");
               denied(
                   "schubert_app",
-                  "55P03",
+                  FIXTURE_55P03_0FE714C6,
                   "select message_id from schubert.request_inbox for update nowait");
               denied(
                   "schubert_batch",
-                  "55P03",
+                  FIXTURE_55P03_0FE714C6,
                   "select id from schubert.batch_runs for update nowait");
               denied(
                   "schubert_inbox_inspector",
@@ -419,7 +468,7 @@ final class InboxCleanupNonAuthenticationTest {
         assertEquals(1, p.deletes);
         assertEquals(0, p.rollbacks);
       }
-      seed(f, 101, "GAMRSP01", "0000", NONE, Map.of());
+      seed(f, 101, FIXTURE_GAMRSP01_D6D22C8C, FIXTURE_0000_876EEFE0, NONE, Map.of());
       byte[] newKey = new byte[32];
       new SecureRandom().nextBytes(newKey);
       try (var rotated = new ResponseSnapshotCodec("v2", newKey, "v1", f.base.key)) {
@@ -434,7 +483,7 @@ final class InboxCleanupNonAuthenticationTest {
       } finally {
         Arrays.fill(newKey, (byte) 0);
       }
-      seed(f, 101, "GAMRSP01", "0000", NONE, Map.of());
+      seed(f, 101, FIXTURE_GAMRSP01_D6D22C8C, FIXTURE_0000_876EEFE0, NONE, Map.of());
       f.base.codec.close();
       protectedRow(f);
     }
@@ -444,12 +493,13 @@ final class InboxCleanupNonAuthenticationTest {
   void outcomesAndSideEffectsRemainBounded() throws Exception {
     try (var f = new Fixture()) {
       String before = references();
-      for (String layout : List.of("GAMRSP01", "USTRSP01")) {
+      for (String layout : List.of(FIXTURE_GAMRSP01_D6D22C8C, FIXTURE_USTRSP01_19F531B7)) {
         for (long adjustment : List.of(-1000L, 0L, 1000L)) {
-          sql("delete from schubert.request_inbox");
-          seed(f, 101, layout, "0000", reference(layout), Map.of());
+          sql(FIXTURE_DELETE_FROM_SCHUBERT_REQUEST_INBOX_D18913CC);
+          seed(f, 101, layout, FIXTURE_0000_876EEFE0, reference(layout), Map.of());
           Instant expires =
-              TIME.plusSeconds(layout.equals("GAMRSP01") ? 86400 : 604800).plusNanos(adjustment);
+              TIME.plusSeconds(layout.equals(FIXTURE_GAMRSP01_D6D22C8C) ? 86400 : 604800)
+                  .plusNanos(adjustment);
           try (var c = db.api();
               var s = c.prepareStatement("update schubert.request_inbox set expires_at=?")) {
             s.setObject(1, expires.atOffset(java.time.ZoneOffset.UTC));
@@ -462,8 +512,8 @@ final class InboxCleanupNonAuthenticationTest {
         }
       }
       for (String prefix : List.of("QSB", "NTS", "NTD", "NTC", "QSS", "QSD", "QDL")) {
-        sql("delete from schubert.request_inbox");
-        seed(f, 101, "GAMRSP01", "0000", NONE, Map.of());
+        sql(FIXTURE_DELETE_FROM_SCHUBERT_REQUEST_INBOX_D18913CC);
+        seed(f, 101, FIXTURE_GAMRSP01_D6D22C8C, FIXTURE_0000_876EEFE0, NONE, Map.of());
         try (var c = db.api();
             var s =
                 c.prepareStatement(
@@ -478,7 +528,7 @@ final class InboxCleanupNonAuthenticationTest {
         assertFalse(step.toString().contains(new UUID(0, 101).toString()));
         assertEquals("1", count());
       }
-      sql("delete from schubert.request_inbox");
+      sql(FIXTURE_DELETE_FROM_SCHUBERT_REQUEST_INBOX_D18913CC);
       for (int i = 0; i < 100; i++)
         assertEquals(
             new InspectionStep(InspectionStep.Outcome.END, Optional.empty()),
@@ -488,11 +538,15 @@ final class InboxCleanupNonAuthenticationTest {
   }
 
   private static InboxResultReference reference(String layout) {
-    return layout.equals("SCNRSP01") ? SCRIPT : MUTATIONS.contains(layout) ? USER : NONE;
+    return layout.equals(FIXTURE_SCNRSP01_DD42C8D5)
+        ? SCRIPT
+        : MUTATIONS.contains(layout) ? USER : NONE;
   }
 
   private static Map<String, String> values(String layout) {
-    return layout.equals("SCNRSP01") ? NonAuthenticationInboxInspectorTest.fileValues(1) : Map.of();
+    return layout.equals(FIXTURE_SCNRSP01_DD42C8D5)
+        ? NonAuthenticationInboxInspectorTest.fileValues(1)
+        : Map.of();
   }
 
   private static void protectedRow(Fixture f) throws Exception {
@@ -580,7 +634,7 @@ final class InboxCleanupNonAuthenticationTest {
           f.base.saved(
               identity,
               wire,
-              Set.of("0000", "0200").contains(code)
+              Set.of(FIXTURE_0000_876EEFE0, "0200").contains(code)
                   ? InboxCompletionState.COMPLETED
                   : InboxCompletionState.ERROR,
               TIME);

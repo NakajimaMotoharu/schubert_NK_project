@@ -48,15 +48,18 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** PT-DB-INBOX-009..016. Independent wire/AAD/JCE and SQL fixtures, no Production capture. */
 final class AuthenticationInboxInspectorTest {
+  private static final String FIXTURE_001_A3FEAA64 = "001";
+  private static final String FIXTURE_0000_876EEFE0 = "0000";
+  private static final String FIXTURE_0101_F2D4F761 = "0101";
   @TempDir static Path root;
   private static ApiLogDatabaseFixture db;
   private static final Instant TIME = Instant.parse("2026-09-09T00:00:00.123Z");
   private static final UUID REQUEST = new UUID(0, 101);
   private static final UUID SESSION = new UUID(0, 104);
   private static final ResponseSnapshotIdentity LOGIN =
-      ResponseSnapshotIdentity.anonymous(REQUEST, "LGNRSP01", "001");
+      ResponseSnapshotIdentity.anonymous(REQUEST, "LGNRSP01", FIXTURE_001_A3FEAA64);
   private static final ResponseSnapshotIdentity LOGOUT =
-      ResponseSnapshotIdentity.authenticated(REQUEST, "LOGRSP01", "001", 7);
+      ResponseSnapshotIdentity.authenticated(REQUEST, "LOGRSP01", FIXTURE_001_A3FEAA64, 7);
 
   @BeforeAll
   static void start() throws Exception {
@@ -85,7 +88,7 @@ final class AuthenticationInboxInspectorTest {
     try (var f = new Fixture();
         var c = db.transaction()) {
       f.seed(c, false);
-      var saved = f.saved(LOGIN, "0000", InboxResultReference.authSession(SESSION));
+      var saved = f.saved(LOGIN, FIXTURE_0000_876EEFE0, InboxResultReference.authSession(SESSION));
       assertTrue(f.inspector.isConsistent(c, LOGIN, saved));
       try (var s = c.createStatement()) {
         s.execute(
@@ -118,11 +121,11 @@ final class AuthenticationInboxInspectorTest {
     try (var f = new Fixture();
         var c = db.transaction()) {
       f.seed(c, true);
-      for (String code : List.of("0000", "0200"))
+      for (String code : List.of(FIXTURE_0000_876EEFE0, "0200"))
         assertTrue(
             f.inspector.isConsistent(
                 c, LOGOUT, f.saved(LOGOUT, code, InboxResultReference.authSession(SESSION))));
-      var saved = f.saved(LOGOUT, "0000", InboxResultReference.authSession(SESSION));
+      var saved = f.saved(LOGOUT, FIXTURE_0000_876EEFE0, InboxResultReference.authSession(SESSION));
       for (String change :
           List.of(
               "user_id=8",
@@ -141,7 +144,10 @@ final class AuthenticationInboxInspectorTest {
           f.inspector.isConsistent(
               c,
               LOGOUT,
-              f.saved(LOGOUT, "0000", InboxResultReference.authSession(new UUID(0, 999)))));
+              f.saved(
+                  LOGOUT,
+                  FIXTURE_0000_876EEFE0,
+                  InboxResultReference.authSession(new UUID(0, 999)))));
       assertEquals(
           "2026-09-09T00:00:00.123Z|2026-09-09T00:00:00.123Z|2026-09-09T08:00:00.123Z|true|0",
           state(c));
@@ -153,7 +159,7 @@ final class AuthenticationInboxInspectorTest {
   void deterministicErrorReferences() throws Exception {
     try (var f = new Fixture();
         var c = db.transaction()) {
-      for (String code : List.of("0101", "0106")) {
+      for (String code : List.of(FIXTURE_0101_F2D4F761, "0106")) {
         assertTrue(
             f.inspector.isConsistent(c, LOGIN, f.saved(LOGIN, code, InboxResultReference.none())));
         assertFalse(
@@ -176,7 +182,7 @@ final class AuthenticationInboxInspectorTest {
               c, LOGOUT, f.saved(LOGOUT, "0102", InboxResultReference.authSession(SESSION))));
       assertFalse(
           f.inspector.isConsistent(
-              c, LOGOUT, f.saved(LOGOUT, "0101", InboxResultReference.none())));
+              c, LOGOUT, f.saved(LOGOUT, FIXTURE_0101_F2D4F761, InboxResultReference.none())));
       assertFalse(
           f.inspector.isConsistent(c, LOGIN, f.saved(LOGIN, "9000", InboxResultReference.none())));
       try (var s = c.createStatement();
@@ -193,7 +199,7 @@ final class AuthenticationInboxInspectorTest {
     try (var f = new Fixture();
         var c = db.transaction()) {
       f.seed(c, false);
-      var saved = f.saved(LOGIN, "0000", InboxResultReference.authSession(SESSION));
+      var saved = f.saved(LOGIN, FIXTURE_0000_876EEFE0, InboxResultReference.authSession(SESSION));
       for (String change :
           List.of(
               "user_id=8",
@@ -223,18 +229,24 @@ final class AuthenticationInboxInspectorTest {
   void identityStructureAndNullContracts() throws Exception {
     try (var f = new Fixture();
         var c = db.transaction()) {
-      var saved = f.saved(LOGIN, "0101", InboxResultReference.none());
+      var saved = f.saved(LOGIN, FIXTURE_0101_F2D4F761, InboxResultReference.none());
       assertFalse(
           f.inspector.isConsistent(
-              c, ResponseSnapshotIdentity.authenticated(REQUEST, "GAMRSP01", "001", 7), saved));
+              c,
+              ResponseSnapshotIdentity.authenticated(REQUEST, "GAMRSP01", FIXTURE_001_A3FEAA64, 7),
+              saved));
       assertFalse(
           f.inspector.isConsistent(
-              c, ResponseSnapshotIdentity.authenticated(REQUEST, "LGNRSP01", "001", 7), saved));
+              c,
+              ResponseSnapshotIdentity.authenticated(REQUEST, "LGNRSP01", FIXTURE_001_A3FEAA64, 7),
+              saved));
       assertFalse(
           f.inspector.isConsistent(
-              c, ResponseSnapshotIdentity.anonymous(REQUEST, "LOGRSP01", "001"), saved));
+              c,
+              ResponseSnapshotIdentity.anonymous(REQUEST, "LOGRSP01", FIXTURE_001_A3FEAA64),
+              saved));
       assertFalse(f.inspector.isConsistent(c, LOGOUT, saved));
-      byte[] broken = f.wire(LOGIN, "0101");
+      byte[] broken = f.wire(LOGIN, FIXTURE_0101_F2D4F761);
       broken[0] = 'X';
       assertFalse(
           f.inspector.isConsistent(
@@ -248,7 +260,7 @@ final class AuthenticationInboxInspectorTest {
               LOGIN,
               f.savedBytes(
                   LOGIN,
-                  f.wire(LOGIN, "0101"),
+                  f.wire(LOGIN, FIXTURE_0101_F2D4F761),
                   InboxCompletionState.COMPLETED,
                   InboxResultReference.none())));
       assertThrows(
@@ -272,7 +284,7 @@ final class AuthenticationInboxInspectorTest {
     try (var f = new Fixture();
         var c = db.transaction()) {
       f.seed(c, false);
-      var saved = f.saved(LOGIN, "0000", InboxResultReference.authSession(SESSION));
+      var saved = f.saved(LOGIN, FIXTURE_0000_876EEFE0, InboxResultReference.authSession(SESSION));
       for (String method : List.of("getAutoCommit", "prepareStatement")) {
         assertFalse(f.inspector.isConsistent(proxy(c, method, () -> {}), LOGIN, saved));
         assertFalse(c.isClosed());
@@ -296,8 +308,9 @@ final class AuthenticationInboxInspectorTest {
     try (var f = new Fixture();
         var c = db.transaction()) {
       f.seed(c, true);
-      var login = f.saved(LOGIN, "0000", InboxResultReference.authSession(SESSION));
-      var logout = f.saved(LOGOUT, "0000", InboxResultReference.authSession(SESSION));
+      var login = f.saved(LOGIN, FIXTURE_0000_876EEFE0, InboxResultReference.authSession(SESSION));
+      var logout =
+          f.saved(LOGOUT, FIXTURE_0000_876EEFE0, InboxResultReference.authSession(SESSION));
       byte[] newKey = random(32);
       try (var s = new ResponseSnapshotCodec("s2", newKey, "s1", f.key);
           var a = new AuthContextCodec("a2", newKey, "a1", f.contextKey)) {
@@ -328,9 +341,11 @@ final class AuthenticationInboxInspectorTest {
         f.seed(c, true);
         c.commit();
       }
-      var saved = f.saved(LOGIN, "0000", InboxResultReference.authSession(SESSION));
-      var logout = f.saved(LOGOUT, "0000", InboxResultReference.authSession(SESSION));
-      var wrong = f.saved(LOGIN, "0000", InboxResultReference.authSession(new UUID(0, 999)));
+      var saved = f.saved(LOGIN, FIXTURE_0000_876EEFE0, InboxResultReference.authSession(SESSION));
+      var logout =
+          f.saved(LOGOUT, FIXTURE_0000_876EEFE0, InboxResultReference.authSession(SESSION));
+      var wrong =
+          f.saved(LOGIN, FIXTURE_0000_876EEFE0, InboxResultReference.authSession(new UUID(0, 999)));
       byte[] before = saved.responseSnapshot().orElseThrow().ciphertext();
       var jobs = new ArrayList<Callable<Boolean>>();
       for (int i = 0; i < 100; i++)
@@ -488,7 +503,7 @@ final class AuthenticationInboxInspectorTest {
 
     byte[] wire(ResponseSnapshotIdentity id, String code) {
       boolean login = id.responseLayoutId().equals("LGNRSP01");
-      boolean success = code.equals("0000") || code.equals("0200");
+      boolean success = code.equals(FIXTURE_0000_876EEFE0) || code.equals("0200");
       byte[] bytes = new byte[login ? 688 : 280];
       Arrays.fill(bytes, (byte) ' ');
       put(bytes, 0, "SCHBNK01001" + id.responseLayoutId() + "001SS");
@@ -519,7 +534,7 @@ final class AuthenticationInboxInspectorTest {
       return savedBytes(
           id,
           wire(id, code),
-          code.equals("0000") || code.equals("0200")
+          code.equals(FIXTURE_0000_876EEFE0) || code.equals("0200")
               ? InboxCompletionState.COMPLETED
               : InboxCompletionState.ERROR,
           ref);

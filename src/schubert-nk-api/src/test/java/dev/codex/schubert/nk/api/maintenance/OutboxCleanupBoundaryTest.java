@@ -32,6 +32,10 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** PT-DB-INBOX-065..072; SS331 3.7/332 11.4; BUG-014/YKT-012; SQL postconditions. */
 final class OutboxCleanupBoundaryTest {
+  private static final String FIXTURE_BACKUP_CONFIG_8386D7E7 = "BACKUP_CONFIG";
+  private static final String FIXTURE_LGN_B0C92867 = "LGN";
+  private static final String FIXTURE_SENT_6C701E27 = "SENT";
+  private static final String FIXTURE_SCHUBERT_BATCH_F9C88479 = "schubert_batch";
   @TempDir static Path root;
   private static ApiLogDatabaseFixture db;
   private static String url;
@@ -61,7 +65,7 @@ final class OutboxCleanupBoundaryTest {
         List.of("schubert.request_inbox", TABLES.get(0), TABLES.get(1), "schubert.batch_runs"))
       sql("delete from " + table);
     backup("BACKUP_DB");
-    backup("BACKUP_CONFIG");
+    backup(FIXTURE_BACKUP_CONFIG_8386D7E7);
     sql(
         "insert into schubert.app_users(id,username,username_key,password_hash,role,status,password_changed_at,created_at,updated_at) values(7,'Learner','learner','synthetic-unused','USER','ACTIVE','2026-09-01','2026-09-01','2026-09-01') on conflict(id) do nothing");
   }
@@ -70,9 +74,38 @@ final class OutboxCleanupBoundaryTest {
   void inboxRowsAreNeverTouched() throws Exception {
     var routes =
         List.of(
-            "LGN", "LOG", "GAM", "SPK", "RTE", "SCF", "SRC", "SCN", "AUD", "ANM", "ANL", "VID",
-            "MCT", "MCS", "MTR", "MED", "USR", "UDT", "LGS", "UCR", "UST", "URL", "UPW", "ULK",
-            "QSB", "NTS", "NTD", "NTC", "QSS", "QSD", "QDL", "ZZZ");
+            FIXTURE_LGN_B0C92867,
+            "LOG",
+            "GAM",
+            "SPK",
+            "RTE",
+            "SCF",
+            "SRC",
+            "SCN",
+            "AUD",
+            "ANM",
+            "ANL",
+            "VID",
+            "MCT",
+            "MCS",
+            "MTR",
+            "MED",
+            "USR",
+            "UDT",
+            "LGS",
+            "UCR",
+            "UST",
+            "URL",
+            "UPW",
+            "ULK",
+            "QSB",
+            "NTS",
+            "NTD",
+            "NTC",
+            "QSS",
+            "QSD",
+            "QDL",
+            "ZZZ");
     int id = 1;
     for (String route : routes)
       for (String state : List.of("PROCESSING", "COMPLETED", "ERROR")) inbox(id++, route, state);
@@ -93,8 +126,8 @@ final class OutboxCleanupBoundaryTest {
         scalar(
             "select md5(string_agg(row_to_json(i)::text,',' order by message_id)) from schubert.request_inbox i");
     assertEquals("96", scalar("select count(*) from schubert.request_inbox"));
-    outbox(false, 1, "SENT", CUTOFF.minusSeconds(604801), null);
-    outbox(true, 1, "SENT", CUTOFF.minusSeconds(604801), null);
+    outbox(false, 1, FIXTURE_SENT_6C701E27, CUTOFF.minusSeconds(604801), null);
+    outbox(true, 1, FIXTURE_SENT_6C701E27, CUTOFF.minusSeconds(604801), null);
     try (var c = batch()) {
       assertEquals("2|2|0|OK", cleanup(c, RUN, CUTOFF.toString(), 1000));
       assertEquals("0|0|0|OK", cleanup(c, RUN, CUTOFF.toString(), 1000));
@@ -111,12 +144,12 @@ final class OutboxCleanupBoundaryTest {
   void outboxBoundariesAndSharedLimit() throws Exception {
     Instant boundary = CUTOFF.minusSeconds(604800);
     for (boolean web : List.of(false, true)) {
-      outbox(web, 1, "SENT", boundary.minusNanos(1000), null);
-      outbox(web, 2, "SENT", boundary, null);
-      outbox(web, 3, "SENT", boundary.plusNanos(1000), null);
-      outbox(web, 4, "SENT", boundary.minusNanos(1000), CUTOFF.minusNanos(1000));
-      outbox(web, 5, "SENT", boundary.minusNanos(1000), CUTOFF);
-      outbox(web, 6, "SENT", boundary.minusNanos(1000), CUTOFF.plusNanos(1000));
+      outbox(web, 1, FIXTURE_SENT_6C701E27, boundary.minusNanos(1000), null);
+      outbox(web, 2, FIXTURE_SENT_6C701E27, boundary, null);
+      outbox(web, 3, FIXTURE_SENT_6C701E27, boundary.plusNanos(1000), null);
+      outbox(web, 4, FIXTURE_SENT_6C701E27, boundary.minusNanos(1000), CUTOFF.minusNanos(1000));
+      outbox(web, 5, FIXTURE_SENT_6C701E27, boundary.minusNanos(1000), CUTOFF);
+      outbox(web, 6, FIXTURE_SENT_6C701E27, boundary.minusNanos(1000), CUTOFF.plusNanos(1000));
       outbox(web, 7, "PENDING", null, null);
       outbox(web, 8, "ERROR", null, CUTOFF.minusSeconds(1));
     }
@@ -140,7 +173,7 @@ final class OutboxCleanupBoundaryTest {
 
   @Test
   void invalidArgumentsAndFixedReasons() throws Exception {
-    outbox(false, 1, "SENT", CUTOFF.minusSeconds(604801), null);
+    outbox(false, 1, FIXTURE_SENT_6C701E27, CUTOFF.minusSeconds(604801), null);
     try (var c = batch()) {
       Object[][] invalid = {
         {null, CUTOFF.toString(), 1},
@@ -167,8 +200,8 @@ final class OutboxCleanupBoundaryTest {
     }
     assertEquals("1", rows());
     backup("BACKUP_DB");
-    backup("BACKUP_CONFIG");
-    outbox(true, 1, "SENT", CUTOFF.minusSeconds(604801), null);
+    backup(FIXTURE_BACKUP_CONFIG_8386D7E7);
+    outbox(true, 1, FIXTURE_SENT_6C701E27, CUTOFF.minusSeconds(604801), null);
     sql(
         "create function schubert.pt_cleanup_failure() returns trigger language plpgsql as $f$ begin raise exception using errcode='P0001',message='synthetic cleanup failure'; end $f$");
     sql(
@@ -191,7 +224,7 @@ final class OutboxCleanupBoundaryTest {
 
   @Test
   void backupStatesAndDatesAreLocked() throws Exception {
-    outbox(false, 1, "SENT", CUTOFF.minusSeconds(604801), null);
+    outbox(false, 1, FIXTURE_SENT_6C701E27, CUTOFF.minusSeconds(604801), null);
     for (String mutation :
         List.of(
             "status='RUNNING'",
@@ -207,13 +240,13 @@ final class OutboxCleanupBoundaryTest {
       }
       assertEquals("1", rows());
       sql("delete from schubert.batch_runs where step='BACKUP_CONFIG'");
-      backup("BACKUP_CONFIG");
+      backup(FIXTURE_BACKUP_CONFIG_8386D7E7);
     }
     try (var c = batch();
         var writer = db.admin()) {
       c.setAutoCommit(false);
       assertEquals("1|1|0|OK", cleanup(c, RUN, CUTOFF.toString(), 1));
-      for (String step : List.of("BACKUP_DB", "BACKUP_CONFIG")) {
+      for (String step : List.of("BACKUP_DB", FIXTURE_BACKUP_CONFIG_8386D7E7)) {
         assertEquals(
             "55P03",
             assertThrows(
@@ -238,7 +271,8 @@ final class OutboxCleanupBoundaryTest {
 
   @Test
   void competingMaintenanceNeverDeletes() throws Exception {
-    for (long id : List.of(1L, 2L)) outbox(false, id, "SENT", CUTOFF.minusSeconds(604801), null);
+    for (long id : List.of(1L, 2L))
+      outbox(false, id, FIXTURE_SENT_6C701E27, CUTOFF.minusSeconds(604801), null);
     try (var c = batch();
         var locked = db.admin()) {
       locked.setAutoCommit(false);
@@ -259,7 +293,7 @@ final class OutboxCleanupBoundaryTest {
   @Test
   void backupSnapshotCannotBeReplaced() throws Exception {
     sql("delete from schubert.batch_runs where step='BACKUP_CONFIG'");
-    outbox(false, 1, "SENT", CUTOFF.minusSeconds(604801), null);
+    outbox(false, 1, FIXTURE_SENT_6C701E27, CUTOFF.minusSeconds(604801), null);
     try (var c = batch();
         var writer = db.admin();
         var pool = Executors.newSingleThreadExecutor()) {
@@ -269,7 +303,7 @@ final class OutboxCleanupBoundaryTest {
       var result = pool.submit(() -> cleanup(c, RUN, CUTOFF.toString(), 1000));
       try {
         awaitBlocked(pid);
-        backup("BACKUP_CONFIG");
+        backup(FIXTURE_BACKUP_CONFIG_8386D7E7);
       } finally {
         writer.commit();
       }
@@ -297,14 +331,14 @@ final class OutboxCleanupBoundaryTest {
               "select proconfig::text from pg_proc where oid='" + SIGNATURE + "'::regprocedure"));
       for (String role :
           List.of(
-              "schubert_batch",
+              FIXTURE_SCHUBERT_BATCH_F9C88479,
               "schubert_app",
               "schubert_inbox_inspector",
               "schubert_web_session",
               "schubert_backup",
               "schubert_ops_ro")) {
         assertEquals(
-            Boolean.toString(role.equals("schubert_batch")),
+            Boolean.toString(role.equals(FIXTURE_SCHUBERT_BATCH_F9C88479)),
             scalar(
                 c,
                 "select has_function_privilege('"
@@ -312,7 +346,7 @@ final class OutboxCleanupBoundaryTest {
                     + "','"
                     + SIGNATURE
                     + "','EXECUTE')::text"));
-        if (!role.equals("schubert_batch"))
+        if (!role.equals(FIXTURE_SCHUBERT_BATCH_F9C88479))
           try (var denied = DriverManager.getConnection(url, role, "")) {
             assertEquals(
                 "42501",
@@ -422,8 +456,8 @@ final class OutboxCleanupBoundaryTest {
                         Files.readAllBytes(
                             migrations.resolve(
                                 "V010__full_inbox_scan_and_restricted_deletion.sql")))));
-    inbox(1, "LGN", "COMPLETED");
-    inbox(2, "LGN", "PROCESSING");
+    inbox(1, FIXTURE_LGN_B0C92867, "COMPLETED");
+    inbox(2, FIXTURE_LGN_B0C92867, "PROCESSING");
     try (var c = batch()) {
       assertEquals("0|0|0|OK", cleanup(c, RUN, CUTOFF.toString(), 10));
     }
@@ -431,7 +465,7 @@ final class OutboxCleanupBoundaryTest {
   }
 
   private static Connection batch() throws SQLException {
-    return DriverManager.getConnection(url, "schubert_batch", "");
+    return DriverManager.getConnection(url, FIXTURE_SCHUBERT_BATCH_F9C88479, "");
   }
 
   private static String cleanup(Connection c, UUID run, String cutoff, Integer limit)
@@ -540,7 +574,7 @@ final class OutboxCleanupBoundaryTest {
       s.setObject(1, new UUID(0, id));
       s.setObject(2, new UUID(1, id));
       s.setString(3, route + "REQ01");
-      s.setObject(4, route.equals("LGN") ? null : 7L);
+      s.setObject(4, route.equals(FIXTURE_LGN_B0C92867) ? null : 7L);
       s.setObject(5, token ? new UUID(2, id) : null);
       s.setString(6, state);
       s.setString(7, processing ? null : "NONE");

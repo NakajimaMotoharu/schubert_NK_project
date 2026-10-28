@@ -29,6 +29,8 @@ import org.junit.jupiter.api.Test;
 
 /** 1868/OBSCTX001..026: real assembly lifecycle, own JVM/fake JDBC, no application main. */
 final class ApiObservationContextTest {
+  private static final String FIXTURE_DEBUG_B6DFBABB = "DEBUG";
+  private static final String FIXTURE_SDK_CLOSE_7E75EA88 = "SDK close";
   private static final String UNKNOWN = "API observation context close unconfirmed";
 
   private static void raise(Throwable value) {
@@ -76,7 +78,7 @@ final class ApiObservationContextTest {
     Fixture(boolean worker) {
       metrics =
           new ApiMetricContext<>(
-              "DEBUG",
+              FIXTURE_DEBUG_B6DFBABB,
               ignored -> {
                 setups.incrementAndGet();
                 setup.run();
@@ -118,7 +120,7 @@ final class ApiObservationContextTest {
           NullPointerException.class,
           () ->
               ApiObservationContext.prepare(
-                  index == 0 ? null : "DEBUG",
+                  index == 0 ? null : FIXTURE_DEBUG_B6DFBABB,
                   index == 1 ? null : f.pool(),
                   index == 2 ? null : beans::pool,
                   index == 3 ? null : beans::config,
@@ -207,7 +209,7 @@ final class ApiObservationContextTest {
     var beans = new DbPoolMetricObservationTest.Fixture();
     try (var owner =
         ApiObservationContext.prepare(
-            "DEBUG",
+            FIXTURE_DEBUG_B6DFBABB,
             f.pool(),
             beans::pool,
             beans::config,
@@ -232,7 +234,7 @@ final class ApiObservationContextTest {
     List<Throwable> unknown = new ArrayList<>();
     try (var owner =
         ApiObservationContext.prepare(
-            "DEBUG",
+            FIXTURE_DEBUG_B6DFBABB,
             f.pool(),
             beans::pool,
             beans::config,
@@ -274,7 +276,7 @@ final class ApiObservationContextTest {
     var seen = new AtomicReference<Throwable>();
     try (var owner =
         ApiObservationContext.prepare(
-            "DEBUG",
+            FIXTURE_DEBUG_B6DFBABB,
             f.pool(),
             beans::pool,
             beans::config,
@@ -433,7 +435,7 @@ final class ApiObservationContextTest {
   void obsCtx018() {
     try (var f = new Fixture(false)) {
       f.owner.initialize();
-      var primary = new IllegalStateException("SDK close");
+      var primary = new IllegalStateException(FIXTURE_SDK_CLOSE_7E75EA88);
       f.registry.failure = primary;
       assertSame(primary, assertThrows(IllegalStateException.class, f.owner::close));
       assertThrows(IOException.class, f.owner::close);
@@ -446,7 +448,7 @@ final class ApiObservationContextTest {
   void obsCtx019() {
     try (var f = new Fixture(false)) {
       f.owner.initialize();
-      var fatal = new AssertionError("SDK close");
+      var fatal = new AssertionError(FIXTURE_SDK_CLOSE_7E75EA88);
       f.registry.failure = fatal;
       assertSame(fatal, assertThrows(AssertionError.class, f.owner::close));
       assertSame(fatal, f.unknown.peek());
@@ -458,7 +460,7 @@ final class ApiObservationContextTest {
   void obsCtx020() {
     try (var f = new Fixture(false)) {
       f.owner.initialize();
-      var primary = new IllegalStateException("SDK close");
+      var primary = new IllegalStateException(FIXTURE_SDK_CLOSE_7E75EA88);
       var diagnostic = new IllegalArgumentException("policy");
       f.registry.failure = primary;
       f.policyFault = diagnostic;
@@ -471,7 +473,7 @@ final class ApiObservationContextTest {
   void obsCtx021() {
     try (var f = new Fixture(false)) {
       f.owner.initialize();
-      var primary = new IllegalStateException("SDK close");
+      var primary = new IllegalStateException(FIXTURE_SDK_CLOSE_7E75EA88);
       var fatal = new AssertionError("policy");
       f.registry.failure = primary;
       f.policyFault = fatal;

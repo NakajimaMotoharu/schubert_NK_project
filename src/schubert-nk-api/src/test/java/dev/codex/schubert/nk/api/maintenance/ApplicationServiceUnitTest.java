@@ -15,6 +15,8 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** NK-OPS-001; RD SYS-002/004, OPS-009; UI212/231/243/251/253; SS342/343; PG269/274/277. */
 final class ApplicationServiceUnitTest {
+  private static final String FIXTURE_API_63E3A42F = "api";
+  private static final String FIXTURE_WEB_BDE14896 = "web";
   private static final Path ROOT = Path.of(System.getProperty("nk.pt.repository"));
   private static final Path UNITS = ROOT.resolve("src/deployment/systemd");
   @TempDir Path temporary;
@@ -22,7 +24,7 @@ final class ApplicationServiceUnitTest {
   @Test
   void apiDependencyCredentialAndResourceContract() throws Exception {
     String unit = read("schubert-nk-api");
-    common(unit, "api", "2048M", "60s", "512m", "1024m", "256m", "256m");
+    common(unit, FIXTURE_API_63E3A42F, "2048M", "60s", "512m", "1024m", "256m", "256m");
     // SSC099/BUG307: SS341§2 independent complete Unit name, not SS342's old shorthand.
     exact(unit, "After", "schubert-nk-expiry-cleanup.service artemis.service postgresql.service");
     // SSC139/BUG398: ordering is retained; the parent alone starts owned maintenance.
@@ -40,13 +42,13 @@ final class ApplicationServiceUnitTest {
     assertFalse(unit.contains("dev.codex.schubert.nk.api.bootstrap.ApiProcessMain"));
     assertFalse(unit.contains("LoadCredential=web-session-aes"));
     assertFalse(unit.contains("ReadWritePaths=/srv/schubert-nk/data/assets"));
-    exactEnvTemplate("api");
+    exactEnvTemplate(FIXTURE_API_63E3A42F);
   }
 
   @Test
   void webDependencyCredentialAndResourceContract() throws Exception {
     String unit = read("schubert-nk-web");
-    common(unit, "web", "1536M", "30s", "384m", "768m", "128m", "192m");
+    common(unit, FIXTURE_WEB_BDE14896, "1536M", "30s", "384m", "768m", "128m", "192m");
     exact(unit, "After", "schubert-nk-api.service artemis.service postgresql.service");
     exact(unit, "Requires", "schubert-nk-api.service artemis.service postgresql.service");
     exact(unit, "SupplementaryGroups", "schubert schubert-read");
@@ -62,12 +64,12 @@ final class ApplicationServiceUnitTest {
     assertFalse(unit.contains("dev.codex.schubert.nk.web.bootstrap.WebProcessMain"));
     assertFalse(unit.contains("LoadCredential=api-context-aes"));
     assertFalse(unit.contains("LoadCredential=operation-hmac"));
-    exactEnvTemplate("web");
+    exactEnvTemplate(FIXTURE_WEB_BDE14896);
   }
 
   @Test
   void noSecretInEnvironmentOrShellAndNoAutomaticWritableEscalation() throws Exception {
-    for (String service : List.of("api", "web")) {
+    for (String service : List.of(FIXTURE_API_63E3A42F, FIXTURE_WEB_BDE14896)) {
       String unit = read("schubert-nk-" + service);
       for (String line : unit.lines().toList()) {
         if (line.startsWith("#")) continue;
@@ -90,7 +92,7 @@ final class ApplicationServiceUnitTest {
 
   @Test
   void renderedSyntaxIsAcceptedWithoutStartingService() throws Exception {
-    for (String service : List.of("api", "web")) {
+    for (String service : List.of(FIXTURE_API_63E3A42F, FIXTURE_WEB_BDE14896)) {
       String name = "schubert-nk-" + service;
       Path directory = Files.createDirectory(temporary.resolve(service));
       String unit = read(name);

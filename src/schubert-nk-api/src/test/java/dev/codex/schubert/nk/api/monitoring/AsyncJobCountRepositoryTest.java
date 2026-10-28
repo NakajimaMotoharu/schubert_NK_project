@@ -25,6 +25,8 @@ import org.junit.jupiter.api.Test;
  * ASYNCDB001..008: owned JDBC doubles only; SQL/count/ownership oracles independent of production.
  */
 class AsyncJobCountRepositoryTest {
+  private static final String FIXTURE_ERROR_F717E7D8 = "ERROR";
+  private static final String FIXTURE_RECEIVED_35302D54 = "RECEIVED";
   private static final String SQL =
       "SELECT state, COUNT(*) AS job_count FROM schubert.async_jobs GROUP BY state";
 
@@ -156,8 +158,8 @@ class AsyncJobCountRepositoryTest {
     var f =
         new Fixture(
             Row.row("CANCELLED", 5),
-            Row.row("ERROR", 4),
-            Row.row("RECEIVED", 1),
+            Row.row(FIXTURE_ERROR_F717E7D8, 4),
+            Row.row(FIXTURE_RECEIVED_35302D54, 1),
             Row.row("COMPLETED", 3),
             Row.row("PROCESSING", 2));
     var actual = new AsyncJobCountRepository().read(f.connection());
@@ -177,7 +179,8 @@ class AsyncJobCountRepositoryTest {
     assertEquals(0, zero.totalJobs());
     for (var state : State.values()) assertEquals(0, zero.value(state));
     empty.complete();
-    var sparse = new Fixture(Row.row("RECEIVED", 7), Row.row("ERROR", 3));
+    var sparse =
+        new Fixture(Row.row(FIXTURE_RECEIVED_35302D54, 7), Row.row(FIXTURE_ERROR_F717E7D8, 3));
     var actual = new AsyncJobCountRepository().read(sparse.connection());
     assertEquals(10, actual.totalJobs());
     assertEquals(7, actual.value(State.RECEIVED));
@@ -219,10 +222,11 @@ class AsyncJobCountRepositoryTest {
     var cases =
         List.of(
             new Fixture(new Row(Optional.empty(), 1, false)),
-            new Fixture(new Row(Optional.of("RECEIVED"), 0, true)),
+            new Fixture(new Row(Optional.of(FIXTURE_RECEIVED_35302D54), 0, true)),
             new Fixture(Row.row("received-canary", 1)),
-            new Fixture(Row.row("ERROR", -1)),
-            new Fixture(Row.row("RECEIVED", 1), Row.row("RECEIVED", 2)));
+            new Fixture(Row.row(FIXTURE_ERROR_F717E7D8, -1)),
+            new Fixture(
+                Row.row(FIXTURE_RECEIVED_35302D54, 1), Row.row(FIXTURE_RECEIVED_35302D54, 2)));
     for (var f : cases) {
       var failure =
           assertThrows(
@@ -239,7 +243,9 @@ class AsyncJobCountRepositoryTest {
     assertEquals(Long.MAX_VALUE, actual.totalJobs());
     assertEquals(Long.MAX_VALUE, actual.value(State.COMPLETED));
     maximum.complete();
-    var overflow = new Fixture(Row.row("RECEIVED", Long.MAX_VALUE), Row.row("ERROR", 1));
+    var overflow =
+        new Fixture(
+            Row.row(FIXTURE_RECEIVED_35302D54, Long.MAX_VALUE), Row.row(FIXTURE_ERROR_F717E7D8, 1));
     var failure =
         assertThrows(
             SQLException.class, () -> new AsyncJobCountRepository().read(overflow.connection()));
@@ -283,7 +289,7 @@ class AsyncJobCountRepositoryTest {
   @Test
   void asyncDb007ReadAndCloseFaultsKeepIdentityAndSuppressionWithoutCauseTraversal() {
     for (var point : List.of("next", "state", "count", "wasNull", "RSclose", "PSclose")) {
-      var f = new Fixture(Row.row("RECEIVED", 3));
+      var f = new Fixture(Row.row(FIXTURE_RECEIVED_35302D54, 3));
       var primary = new SQLException("owned cyclic fixture failure");
       var cause = new SQLException("owned cycle peer");
       primary.initCause(cause);
@@ -295,7 +301,7 @@ class AsyncJobCountRepositoryTest {
               SQLException.class, () -> new AsyncJobCountRepository().read(f.connection())));
       f.complete();
     }
-    var f = new Fixture(Row.row("RECEIVED", 3));
+    var f = new Fixture(Row.row(FIXTURE_RECEIVED_35302D54, 3));
     var primary = new SQLException("owned query failure");
     var rs = new SQLException("owned rows-close failure");
     var ps = new SQLException("owned statement-close failure");
@@ -317,7 +323,7 @@ class AsyncJobCountRepositoryTest {
       long count = owner;
       tasks.add(
           () -> {
-            var f = new Fixture(Row.row("PROCESSING", count), Row.row("ERROR", 2));
+            var f = new Fixture(Row.row("PROCESSING", count), Row.row(FIXTURE_ERROR_F717E7D8, 2));
             var actual = repository.read(f.connection());
             assertEquals(count, actual.value(State.PROCESSING));
             assertEquals(2, actual.value(State.ERROR));

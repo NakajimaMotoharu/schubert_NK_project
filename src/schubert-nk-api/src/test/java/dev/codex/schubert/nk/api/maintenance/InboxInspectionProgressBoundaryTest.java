@@ -29,6 +29,12 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** PT-DB-INBOX-073..080; SS331 3.8/341 7.3; PG-D-127. SQL capability, not AES proof. */
 final class InboxInspectionProgressBoundaryTest {
+  private static final String FIXTURE_55000_F2ADCE46 = "55000";
+  private static final String FIXTURE_DELETED_1693CDB2 = "DELETED";
+  private static final String FIXTURE_END_5AB955DF = "END";
+  private static final String FIXTURE_PROTECTED_9E1A622F = "PROTECTED";
+  private static final String FIXTURE_22023_CDCA15BB = "22023";
+  private static final String FIXTURE_55P03_0FE714C6 = "55P03";
   @TempDir static Path root;
   private static ApiLogDatabaseFixture db;
   private static String url;
@@ -76,23 +82,30 @@ final class InboxInspectionProgressBoundaryTest {
       assertEquals(new Progress(null, 0, 0, 0, false), open(c, RUN, CUTOFF.toString()));
       c.commit();
       assertEquals(new Progress(null, 0, 0, 0, false), open(c, RUN, CUTOFF.toString()));
-      rejects(c, "55000", () -> open(c, RUN, CUTOFF.plusSeconds(1).toString()));
-      assertEquals(new Progress(ONE, 1, 1, 0, false), record(c, null, 0L, ONE, "DELETED", xact(c)));
+      rejects(c, FIXTURE_55000_F2ADCE46, () -> open(c, RUN, CUTOFF.plusSeconds(1).toString()));
+      assertEquals(
+          new Progress(ONE, 1, 1, 0, false),
+          record(c, null, 0L, ONE, FIXTURE_DELETED_1693CDB2, xact(c)));
       c.commit();
     }
     try (var c = inspector()) {
       assertEquals(new Progress(ONE, 1, 1, 0, false), open(c, RUN, CUTOFF.toString()));
-      assertEquals(new Progress(ONE, 1, 1, 0, true), record(c, ONE, 1L, null, "END", xact(c)));
+      assertEquals(
+          new Progress(ONE, 1, 1, 0, true),
+          record(c, ONE, 1L, null, FIXTURE_END_5AB955DF, xact(c)));
       c.commit();
       assertEquals(new Progress(ONE, 1, 1, 0, true), open(c, RUN, CUTOFF.toString()));
-      rejects(c, "55000", () -> record(c, ONE, 1L, null, "END", xact(c)));
+      rejects(
+          c, FIXTURE_55000_F2ADCE46, () -> record(c, ONE, 1L, null, FIXTURE_END_5AB955DF, xact(c)));
       c.commit();
     }
     assertEquals("1", scalar("select count(*) from " + TABLE));
     sql("delete from " + TABLE);
     try (var c = inspector()) {
       open(c, RUN, CUTOFF.toString());
-      assertEquals(new Progress(null, 0, 0, 0, true), record(c, null, 0L, null, "END", xact(c)));
+      assertEquals(
+          new Progress(null, 0, 0, 0, true),
+          record(c, null, 0L, null, FIXTURE_END_5AB955DF, xact(c)));
       c.commit();
     }
   }
@@ -104,37 +117,71 @@ final class InboxInspectionProgressBoundaryTest {
     inbox(high);
     try (var c = inspector()) {
       open(c, RUN, CUTOFF.toString());
-      rejects(c, "55000", () -> record(c, null, 0L, null, "END", xact(c)));
-      rejects(c, "55000", () -> record(c, null, 0L, ONE, "DELETED", xact(c)));
-      rejects(c, "55000", () -> record(c, null, 0L, TWO, "PROTECTED", xact(c)));
+      rejects(
+          c,
+          FIXTURE_55000_F2ADCE46,
+          () -> record(c, null, 0L, null, FIXTURE_END_5AB955DF, xact(c)));
+      rejects(
+          c,
+          FIXTURE_55000_F2ADCE46,
+          () -> record(c, null, 0L, ONE, FIXTURE_DELETED_1693CDB2, xact(c)));
+      rejects(
+          c,
+          FIXTURE_55000_F2ADCE46,
+          () -> record(c, null, 0L, TWO, FIXTURE_PROTECTED_9E1A622F, xact(c)));
       sql(
           "update schubert.request_inbox set expires_at='"
               + CUTOFF
               + "' where message_id='"
               + ONE
               + "'");
-      rejects(c, "55000", () -> record(c, null, 0L, ONE, "PROTECTED", xact(c)));
+      rejects(
+          c,
+          FIXTURE_55000_F2ADCE46,
+          () -> record(c, null, 0L, ONE, FIXTURE_PROTECTED_9E1A622F, xact(c)));
       sql(
           "update schubert.request_inbox set"
               + " processing_state='PROCESSING',result_ref_type=null,response_layout_id=null,response_version=null,response_body_encrypted=null,response_key_version=null,completed_at=null"
               + " where message_id='"
               + ONE
               + "'");
-      rejects(c, "55000", () -> record(c, null, 0L, ONE, "PROTECTED", xact(c)));
+      rejects(
+          c,
+          FIXTURE_55000_F2ADCE46,
+          () -> record(c, null, 0L, ONE, FIXTURE_PROTECTED_9E1A622F, xact(c)));
       sql("delete from schubert.request_inbox where message_id='" + ONE + "'");
       inbox(ONE);
       assertEquals(
-          new Progress(ONE, 1, 0, 1, false), record(c, null, 0L, ONE, "PROTECTED", xact(c)));
-      rejects(c, "55000", () -> record(c, null, 0L, high, "PROTECTED", xact(c)));
-      rejects(c, "55000", () -> record(c, ONE, 0L, high, "PROTECTED", xact(c)));
-      rejects(c, "55000", () -> record(c, TWO, 1L, high, "PROTECTED", xact(c)));
-      rejects(c, "55000", () -> record(c, ONE, 1L, ONE, "PROTECTED", xact(c)));
-      rejects(c, "55000", () -> record(c, ONE, 1L, new UUID(0, 0), "DELETED", xact(c)));
+          new Progress(ONE, 1, 0, 1, false),
+          record(c, null, 0L, ONE, FIXTURE_PROTECTED_9E1A622F, xact(c)));
+      rejects(
+          c,
+          FIXTURE_55000_F2ADCE46,
+          () -> record(c, null, 0L, high, FIXTURE_PROTECTED_9E1A622F, xact(c)));
+      rejects(
+          c,
+          FIXTURE_55000_F2ADCE46,
+          () -> record(c, ONE, 0L, high, FIXTURE_PROTECTED_9E1A622F, xact(c)));
+      rejects(
+          c,
+          FIXTURE_55000_F2ADCE46,
+          () -> record(c, TWO, 1L, high, FIXTURE_PROTECTED_9E1A622F, xact(c)));
+      rejects(
+          c,
+          FIXTURE_55000_F2ADCE46,
+          () -> record(c, ONE, 1L, ONE, FIXTURE_PROTECTED_9E1A622F, xact(c)));
+      rejects(
+          c,
+          FIXTURE_55000_F2ADCE46,
+          () -> record(c, ONE, 1L, new UUID(0, 0), FIXTURE_DELETED_1693CDB2, xact(c)));
       // PostgreSQL UUID byte order advances here even though Java UUID.compareTo is signed.
       assertTrue(high.compareTo(ONE) < 0);
       assertEquals(
-          new Progress(high, 2, 0, 2, false), record(c, ONE, 1L, high, "PROTECTED", xact(c)));
-      assertEquals(new Progress(high, 2, 0, 2, true), record(c, high, 2L, null, "END", xact(c)));
+          new Progress(high, 2, 0, 2, false),
+          record(c, ONE, 1L, high, FIXTURE_PROTECTED_9E1A622F, xact(c)));
+      assertEquals(
+          new Progress(high, 2, 0, 2, true),
+          record(c, high, 2L, null, FIXTURE_END_5AB955DF, xact(c)));
       c.commit();
     }
     assertEquals("2", scalar("select count(*) from schubert.request_inbox"));
@@ -148,19 +195,24 @@ final class InboxInspectionProgressBoundaryTest {
       c.commit();
       open(c, RUN, CUTOFF.toString());
       delete(c, ONE);
-      assertEquals(new Progress(ONE, 1, 1, 0, false), record(c, null, 0L, ONE, "DELETED", xact(c)));
+      assertEquals(
+          new Progress(ONE, 1, 1, 0, false),
+          record(c, null, 0L, ONE, FIXTURE_DELETED_1693CDB2, xact(c)));
       assertEquals("1", scalar("select count(*) from schubert.request_inbox"));
       c.rollback();
       assertEquals(new Progress(null, 0, 0, 0, false), open(c, RUN, CUTOFF.toString()));
       delete(c, ONE);
-      record(c, null, 0L, ONE, "DELETED", xact(c));
+      record(c, null, 0L, ONE, FIXTURE_DELETED_1693CDB2, xact(c));
       c.commit();
     }
     assertEquals("0", scalar("select count(*) from schubert.request_inbox"));
     try (var c = inspector()) {
       assertEquals(new Progress(ONE, 1, 1, 0, false), open(c, RUN, CUTOFF.toString()));
-      rejects(c, "55000", () -> record(c, null, 0L, ONE, "DELETED", xact(c)));
-      record(c, ONE, 1L, null, "END", xact(c));
+      rejects(
+          c,
+          FIXTURE_55000_F2ADCE46,
+          () -> record(c, null, 0L, ONE, FIXTURE_DELETED_1693CDB2, xact(c)));
+      record(c, ONE, 1L, null, FIXTURE_END_5AB955DF, xact(c));
       c.commit();
     }
     assertEquals(
@@ -172,35 +224,73 @@ final class InboxInspectionProgressBoundaryTest {
   void invalidInputsAndConstraintsReject() throws Exception {
     try (var c = inspector()) {
       for (String cutoff : Arrays.asList(null, "infinity", "-infinity"))
-        rejects(c, "22023", () -> open(c, RUN, cutoff));
-      rejects(c, "22023", () -> open(c, null, CUTOFF.toString()));
-      rejects(c, "55000", () -> record(c, null, 0L, ONE, "DELETED", xact(c))); // no progress yet
+        rejects(c, FIXTURE_22023_CDCA15BB, () -> open(c, RUN, cutoff));
+      rejects(c, FIXTURE_22023_CDCA15BB, () -> open(c, null, CUTOFF.toString()));
+      rejects(
+          c,
+          FIXTURE_55000_F2ADCE46,
+          () -> record(c, null, 0L, ONE, FIXTURE_DELETED_1693CDB2, xact(c))); // no progress yet
       open(c, RUN, CUTOFF.toString());
       for (String cutoff : Arrays.asList(null, "infinity", "-infinity"))
-        rejects(c, "22023", () -> recordAt(c, RUN, cutoff, null, 0L, ONE, "DELETED", xact(c)));
+        rejects(
+            c,
+            FIXTURE_22023_CDCA15BB,
+            () -> recordAt(c, RUN, cutoff, null, 0L, ONE, FIXTURE_DELETED_1693CDB2, xact(c)));
       rejects(
           c,
-          "22023",
-          () -> recordAt(c, null, CUTOFF.toString(), null, 0L, ONE, "DELETED", xact(c)));
-      rejects(
-          c,
-          "55000",
+          FIXTURE_22023_CDCA15BB,
           () ->
               recordAt(
-                  c, RUN, CUTOFF.plusSeconds(1).toString(), null, 0L, ONE, "DELETED", xact(c)));
+                  c, null, CUTOFF.toString(), null, 0L, ONE, FIXTURE_DELETED_1693CDB2, xact(c)));
       rejects(
           c,
-          "55000",
-          () -> recordAt(c, new UUID(0, 62), CUTOFF.toString(), null, 0L, ONE, "DELETED", xact(c)));
+          FIXTURE_55000_F2ADCE46,
+          () ->
+              recordAt(
+                  c,
+                  RUN,
+                  CUTOFF.plusSeconds(1).toString(),
+                  null,
+                  0L,
+                  ONE,
+                  FIXTURE_DELETED_1693CDB2,
+                  xact(c)));
+      rejects(
+          c,
+          FIXTURE_55000_F2ADCE46,
+          () ->
+              recordAt(
+                  c,
+                  new UUID(0, 62),
+                  CUTOFF.toString(),
+                  null,
+                  0L,
+                  ONE,
+                  FIXTURE_DELETED_1693CDB2,
+                  xact(c)));
       for (String outcome : Arrays.asList(null, "", "SUCCESS", "deleted"))
-        rejects(c, "22023", () -> record(c, null, 0L, ONE, outcome, xact(c)));
+        rejects(c, FIXTURE_22023_CDCA15BB, () -> record(c, null, 0L, ONE, outcome, xact(c)));
       for (String tx : Arrays.asList(null, "", "-1", "abc", "0".repeat(21)))
-        rejects(c, "22023", () -> record(c, null, 0L, ONE, "DELETED", tx));
-      rejects(c, "55000", () -> record(c, null, 0L, ONE, "DELETED", "0"));
-      rejects(c, "22023", () -> record(c, null, null, ONE, "DELETED", xact(c)));
-      rejects(c, "22023", () -> record(c, null, -1L, ONE, "DELETED", xact(c)));
-      rejects(c, "22023", () -> record(c, null, 0L, null, "DELETED", xact(c)));
-      rejects(c, "22023", () -> record(c, null, 0L, ONE, "END", xact(c)));
+        rejects(
+            c,
+            FIXTURE_22023_CDCA15BB,
+            () -> record(c, null, 0L, ONE, FIXTURE_DELETED_1693CDB2, tx));
+      rejects(
+          c, FIXTURE_55000_F2ADCE46, () -> record(c, null, 0L, ONE, FIXTURE_DELETED_1693CDB2, "0"));
+      rejects(
+          c,
+          FIXTURE_22023_CDCA15BB,
+          () -> record(c, null, null, ONE, FIXTURE_DELETED_1693CDB2, xact(c)));
+      rejects(
+          c,
+          FIXTURE_22023_CDCA15BB,
+          () -> record(c, null, -1L, ONE, FIXTURE_DELETED_1693CDB2, xact(c)));
+      rejects(
+          c,
+          FIXTURE_22023_CDCA15BB,
+          () -> record(c, null, 0L, null, FIXTURE_DELETED_1693CDB2, xact(c)));
+      rejects(
+          c, FIXTURE_22023_CDCA15BB, () -> record(c, null, 0L, ONE, FIXTURE_END_5AB955DF, xact(c)));
       c.commit();
     }
     try (var c = db.admin()) {
@@ -236,7 +326,8 @@ final class InboxInspectionProgressBoundaryTest {
       assertEquals(
           "22003",
           assertThrows(
-                  SQLException.class, () -> record(c, ONE, Long.MAX_VALUE, TWO, "DELETED", xact(c)))
+                  SQLException.class,
+                  () -> record(c, ONE, Long.MAX_VALUE, TWO, FIXTURE_DELETED_1693CDB2, xact(c)))
               .getSQLState());
       c.rollback();
     }
@@ -256,7 +347,7 @@ final class InboxInspectionProgressBoundaryTest {
             "ended_at=null")) {
       sql("update schubert.batch_runs set " + mutation + " where step='BACKUP_CONFIG'");
       try (var c = inspector()) {
-        rejects(c, "55000", () -> open(c, RUN, CUTOFF.toString()));
+        rejects(c, FIXTURE_55000_F2ADCE46, () -> open(c, RUN, CUTOFF.toString()));
       }
       sql("delete from schubert.batch_runs where step='BACKUP_CONFIG'");
       backup("BACKUP_CONFIG");
@@ -265,11 +356,11 @@ final class InboxInspectionProgressBoundaryTest {
         var b = inspector();
         var writer = db.admin()) {
       assertEquals(new Progress(null, 0, 0, 0, false), open(a, RUN, CUTOFF.toString()));
-      rejects(b, "55P03", () -> open(b, RUN, CUTOFF.toString()));
-      rejects(b, "55P03", () -> open(b, new UUID(0, 62), CUTOFF.toString()));
+      rejects(b, FIXTURE_55P03_0FE714C6, () -> open(b, RUN, CUTOFF.toString()));
+      rejects(b, FIXTURE_55P03_0FE714C6, () -> open(b, new UUID(0, 62), CUTOFF.toString()));
       for (String step : List.of("BACKUP_DB", "BACKUP_CONFIG"))
         assertEquals(
-            "55P03",
+            FIXTURE_55P03_0FE714C6,
             assertThrows(
                     SQLException.class,
                     () ->
@@ -282,7 +373,7 @@ final class InboxInspectionProgressBoundaryTest {
       a.commit();
       open(a, RUN, CUTOFF.toString());
       assertEquals(
-          "55P03",
+          FIXTURE_55P03_0FE714C6,
           assertThrows(
                   SQLException.class,
                   () -> scalar(writer, "select run_id from " + TABLE + " for update nowait"))
@@ -329,10 +420,10 @@ final class InboxInspectionProgressBoundaryTest {
       assertEquals("0|0|0|OK", purge(c, RUN, CUTOFF.toString(), 1000));
       c.commit();
       for (Integer limit : Arrays.asList(null, 0, 1001))
-        rejects(c, "22023", () -> purge(c, RUN, CUTOFF.toString(), limit));
+        rejects(c, FIXTURE_22023_CDCA15BB, () -> purge(c, RUN, CUTOFF.toString(), limit));
       for (String cutoff : Arrays.asList(null, "infinity", "-infinity"))
-        rejects(c, "22023", () -> purge(c, RUN, cutoff, 1));
-      rejects(c, "22023", () -> purge(c, null, CUTOFF.toString(), 1));
+        rejects(c, FIXTURE_22023_CDCA15BB, () -> purge(c, RUN, cutoff, 1));
+      rejects(c, FIXTURE_22023_CDCA15BB, () -> purge(c, null, CUTOFF.toString(), 1));
       c.rollback();
       assertEquals("true", scalar(lock, "select pg_try_advisory_xact_lock(71419602)::text"));
       assertEquals("0|0|0|LOCK_BUSY", purge(c, RUN, CUTOFF.toString(), 1));

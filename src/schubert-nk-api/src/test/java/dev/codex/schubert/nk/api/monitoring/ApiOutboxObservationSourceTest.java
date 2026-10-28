@@ -23,8 +23,11 @@ import org.junit.jupiter.api.Test;
  * 1854/OUTBOXSOURCE001..020: own typed JDBC doubles, no actual DB/driver/worker/source admission.
  */
 final class ApiOutboxObservationSourceTest {
+  private static final String FIXTURE_DEBUG_B6DFBABB = "DEBUG";
+
   private static ApiOutboxObservationSource source() {
-    return new ApiOutboxObservationSource(new OutboxObservationRepository(), "DEBUG");
+    return new ApiOutboxObservationSource(
+        new OutboxObservationRepository(), FIXTURE_DEBUG_B6DFBABB);
   }
 
   private static Fixture rows() {
@@ -42,7 +45,9 @@ final class ApiOutboxObservationSourceTest {
 
   @Test
   void outboxSource001() {
-    assertThrows(NullPointerException.class, () -> new ApiOutboxObservationSource(null, "DEBUG"));
+    assertThrows(
+        NullPointerException.class,
+        () -> new ApiOutboxObservationSource(null, FIXTURE_DEBUG_B6DFBABB));
     assertThrows(
         NullPointerException.class,
         () -> new ApiOutboxObservationSource(new OutboxObservationRepository(), null));
@@ -304,7 +309,8 @@ final class ApiOutboxObservationSourceTest {
     value.observe(f.connection(), Instant.EPOCH);
     var pool = new DbPoolMetricObservationTest.Fixture();
     try (var context =
-        ApiServiceMetricBinding.prepareContext("DEBUG", pool::pool, pool::config, value)) {
+        ApiServiceMetricBinding.prepareContext(
+            FIXTURE_DEBUG_B6DFBABB, pool::pool, pool::config, value)) {
       context.initialize();
       var actual =
           Set.copyOf(
@@ -332,7 +338,8 @@ final class ApiOutboxObservationSourceTest {
     var value = source();
     var pool = new DbPoolMetricObservationTest.Fixture();
     try (var context =
-        ApiServiceMetricBinding.prepareContext("DEBUG", pool::pool, pool::config, value)) {
+        ApiServiceMetricBinding.prepareContext(
+            FIXTURE_DEBUG_B6DFBABB, pool::pool, pool::config, value)) {
       context.initialize();
       assertTrue(
           context.render(true).contains("nk_outbox_rows{status=\"PENDING\",store=\"API\"} NaN"));

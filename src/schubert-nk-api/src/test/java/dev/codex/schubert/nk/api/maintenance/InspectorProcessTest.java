@@ -57,6 +57,7 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** PT-DB-INBOX-141..152; PG-D-135; real PG and independent JCE/ASCII fixtures. */
 final class InspectorProcessTest {
+  private static final String FIXTURE_INSERT_INTO_1D1568AF = "insert into";
   @TempDir static Path root;
   private static ApiLogDatabaseFixture db;
   private static String url;
@@ -82,13 +83,13 @@ final class InspectorProcessTest {
     sql("delete from schubert.request_inbox");
     sql("delete from schubert.batch_runs");
     sql(
-        "insert into"
+        FIXTURE_INSERT_INTO_1D1568AF
             + " schubert.app_users(id,username,username_key,password_hash,role,status,password_changed_at,created_at,updated_at)"
             + " values(7,'Learner','learner','synthetic-unused','USER','ACTIVE','2026-09-01','2026-09-01','2026-09-01')"
             + " on conflict(id) do nothing");
     for (String step : List.of("BACKUP_DB", "BACKUP_CONFIG"))
       sql(
-          "insert into"
+          FIXTURE_INSERT_INTO_1D1568AF
               + " schubert.batch_runs(run_id,business_date,step,attempt,started_at,ended_at,status)"
               + " values('"
               + RUN.id()
@@ -556,7 +557,7 @@ final class InspectorProcessTest {
     for (int i = 1; i <= 2; i++) {
       String prefix = i == 1 ? "GAM" : "QSB";
       sql(
-          "insert into"
+          FIXTURE_INSERT_INTO_1D1568AF
               + " schubert.request_inbox(message_id,correlation_id,request_layout_id,request_version,owner_user_id,request_fingerprint_hmac,fingerprint_key_version,processing_state,result_ref_type,response_layout_id,response_version,response_body_encrypted,response_key_version,created_at,completed_at,expires_at,operation_token)"
               + " values('"
               + new UUID(0, i)
@@ -580,7 +581,7 @@ final class InspectorProcessTest {
     try (var c = db.admin();
         var s =
             c.prepareStatement(
-                "insert into"
+                FIXTURE_INSERT_INTO_1D1568AF
                     + " schubert.request_inbox(message_id,correlation_id,request_layout_id,request_version,request_fingerprint_hmac,fingerprint_key_version,processing_state,result_ref_type,response_layout_id,response_version,response_body_encrypted,response_key_version,created_at,completed_at,expires_at)"
                     + " values(?,?,'LGNREQ01','001',repeat('a',64),'v1','ERROR','NONE','LGNRSP01','001',?,'s1','2026-09-09"
                     + " 00:00:00.122+00','2026-09-09 00:00:00.123+00','2026-09-16"

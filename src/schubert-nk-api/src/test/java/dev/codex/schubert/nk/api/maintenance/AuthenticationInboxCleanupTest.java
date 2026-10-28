@@ -38,6 +38,9 @@ import org.junit.jupiter.api.io.TempDir;
  * PT-DB-INBOX-033..040: real least-privilege PG and independent JCE/wire, never production capture.
  */
 final class AuthenticationInboxCleanupTest {
+  private static final String FIXTURE_0000_876EEFE0 = "0000";
+  private static final String FIXTURE_0101_F2D4F761 = "0101";
+  private static final String FIXTURE_INSPECTION_HEALTH_F475CF78 = "inspection_health";
   @TempDir static Path root;
   private static ApiLogDatabaseFixture db;
   private static String url;
@@ -86,7 +89,9 @@ final class AuthenticationInboxCleanupTest {
   void validAuthRowsDeleteAtomically() throws Exception {
     for (var id : List.of(LOGIN, LOGOUT)) {
       for (String code :
-          id.equals(LOGIN) ? List.of("0000", "0101", "0106") : List.of("0000", "0200", "0102")) {
+          id.equals(LOGIN)
+              ? List.of(FIXTURE_0000_876EEFE0, FIXTURE_0101_F2D4F761, "0106")
+              : List.of(FIXTURE_0000_876EEFE0, "0200", "0102")) {
         reset();
         try (var f = new AuthenticationInboxInspectorTest.Fixture()) {
           seed(f, id, code);
@@ -121,7 +126,7 @@ final class AuthenticationInboxCleanupTest {
             "update schubert.request_inbox set response_body_encrypted=null,response_key_version=null")) {
       reset();
       try (var f = new AuthenticationInboxInspectorTest.Fixture()) {
-        seed(f, LOGIN, "0000");
+        seed(f, LOGIN, FIXTURE_0000_876EEFE0);
         sql(mutation);
         assertEquals(
             InspectionStep.Outcome.PROTECTED,
@@ -137,7 +142,7 @@ final class AuthenticationInboxCleanupTest {
             "processing_state='PROCESSING',completed_at=null,result_ref_type=null,result_ref_uuid=null,response_layout_id=null,response_version=null,response_body_encrypted=null,response_key_version=null")) {
       reset();
       try (var f = new AuthenticationInboxInspectorTest.Fixture()) {
-        seed(f, LOGIN, "0000");
+        seed(f, LOGIN, FIXTURE_0000_876EEFE0);
         sql("update schubert.request_inbox set " + mutation);
         assertEquals(
             mutation.contains("GAMREQ01")
@@ -223,7 +228,7 @@ final class AuthenticationInboxCleanupTest {
       versions.clear();
       assertThrows(NullPointerException.class, () -> cleanup.inspectNext(null, Optional.empty()));
       assertThrows(NullPointerException.class, () -> cleanup.inspectNext(RUN, null));
-      seed(f, LOGIN, "0101");
+      seed(f, LOGIN, FIXTURE_0101_F2D4F761);
       assertEquals(
           InspectionStep.Outcome.DELETED, cleanup.inspectNext(RUN, Optional.empty()).outcome());
     }
@@ -247,7 +252,7 @@ final class AuthenticationInboxCleanupTest {
             "inspection_hash")) {
       reset();
       try (var f = new AuthenticationInboxInspectorTest.Fixture()) {
-        seed(f, LOGIN, "0101");
+        seed(f, LOGIN, FIXTURE_0101_F2D4F761);
         var probe = new MaintenanceJdbcProbe();
         probe.columns.put(column, null);
         redacted(() -> probed(f, probe).inspectNext(RUN, Optional.empty()));
@@ -269,7 +274,7 @@ final class AuthenticationInboxCleanupTest {
     for (var bad : malformed.entrySet()) {
       reset();
       try (var f = new AuthenticationInboxInspectorTest.Fixture()) {
-        seed(f, LOGIN, "0101");
+        seed(f, LOGIN, FIXTURE_0101_F2D4F761);
         var probe = new MaintenanceJdbcProbe();
         probe.columns.put(bad.getKey(), bad.getValue());
         assertEquals(
@@ -284,7 +289,7 @@ final class AuthenticationInboxCleanupTest {
   @Test
   void ownsTransactionAndKeepsLocks() throws Exception {
     try (var f = new AuthenticationInboxInspectorTest.Fixture()) {
-      seed(f, LOGIN, "0000");
+      seed(f, LOGIN, FIXTURE_0000_876EEFE0);
       var probe = new MaintenanceJdbcProbe();
       probe.beforeDelete =
           c -> {
@@ -325,7 +330,7 @@ final class AuthenticationInboxCleanupTest {
   @Test
   void failuresRollbackAndRemainRedacted() throws Exception {
     try (var f = new AuthenticationInboxInspectorTest.Fixture()) {
-      seed(f, LOGIN, "0101");
+      seed(f, LOGIN, FIXTURE_0101_F2D4F761);
       var probe = new MaintenanceJdbcProbe();
       probe.columns.put("message_id", null);
       probe.fault = "rollback";
@@ -352,7 +357,7 @@ final class AuthenticationInboxCleanupTest {
             "close")) {
       reset();
       try (var f = new AuthenticationInboxInspectorTest.Fixture()) {
-        seed(f, LOGIN, "0101");
+        seed(f, LOGIN, FIXTURE_0101_F2D4F761);
         var probe = new MaintenanceJdbcProbe();
         probe.fault = fault;
         redacted(() -> probed(f, probe).inspectNext(RUN, Optional.empty()));
@@ -361,11 +366,14 @@ final class AuthenticationInboxCleanupTest {
       }
     }
     for (String selected :
-        List.of("maintenance_next_inbox", "maintenance_delete_inbox", "inspection_health")) {
+        List.of(
+            "maintenance_next_inbox",
+            "maintenance_delete_inbox",
+            FIXTURE_INSPECTION_HEALTH_F475CF78)) {
       for (String fault : List.of("executeQuery", "resultClose", "statementClose")) {
         reset();
         try (var f = new AuthenticationInboxInspectorTest.Fixture()) {
-          seed(f, LOGIN, "0101");
+          seed(f, LOGIN, FIXTURE_0101_F2D4F761);
           var p = new MaintenanceJdbcProbe();
           p.selectedSql = selected;
           p.fault = fault;
@@ -379,15 +387,15 @@ final class AuthenticationInboxCleanupTest {
       for (String mode : List.of("empty", "duplicate", "null")) {
         reset();
         try (var f = new AuthenticationInboxInspectorTest.Fixture()) {
-          seed(f, LOGIN, "0101");
+          seed(f, LOGIN, FIXTURE_0101_F2D4F761);
           var p = new MaintenanceJdbcProbe();
           p.selectedSql = selected;
           p.empty = mode.equals("empty");
           p.duplicate = mode.equals("duplicate");
           if (mode.equals("null"))
             p.columns.put(
-                selected.equals("inspection_health")
-                    ? "inspection_health"
+                selected.equals(FIXTURE_INSPECTION_HEALTH_F475CF78)
+                    ? FIXTURE_INSPECTION_HEALTH_F475CF78
                     : selected.contains("delete") ? "deleted" : "message_id",
                 null);
           if (selected.contains("next") && mode.equals("empty"))
@@ -403,7 +411,7 @@ final class AuthenticationInboxCleanupTest {
     }
     reset();
     try (var f = new AuthenticationInboxInspectorTest.Fixture()) {
-      seed(f, LOGIN, "0000");
+      seed(f, LOGIN, FIXTURE_0000_876EEFE0);
       var p = new MaintenanceJdbcProbe();
       p.selectedSql = "from schubert.auth_sessions";
       p.fault = "aborted";
@@ -455,7 +463,7 @@ final class AuthenticationInboxCleanupTest {
               "inspection_xact",
               "inspection_hash")) {
         reset();
-        seed(f, LOGIN, "0101");
+        seed(f, LOGIN, FIXTURE_0101_F2D4F761);
         var probe = new MaintenanceJdbcProbe();
         probe.runtimeColumn = column;
         redacted(() -> probed(f, probe).inspectNext(RUN, Optional.empty()));
@@ -470,7 +478,7 @@ final class AuthenticationInboxCleanupTest {
   @Test
   void orderedCursorAndFixedRunReplay() throws Exception {
     try (var f = new AuthenticationInboxInspectorTest.Fixture()) {
-      seed(f, LOGIN, "0101");
+      seed(f, LOGIN, FIXTURE_0101_F2D4F761);
       sql(
           "insert into schubert.request_inbox select '"
               + new UUID(0, 100)
@@ -499,7 +507,7 @@ final class AuthenticationInboxCleanupTest {
   void concurrentAttemptsCannotDoubleDelete() throws Exception {
     try (var f = new AuthenticationInboxInspectorTest.Fixture();
         var pool = Executors.newFixedThreadPool(8)) {
-      seed(f, LOGIN, "0101");
+      seed(f, LOGIN, FIXTURE_0101_F2D4F761);
       var observed = new ThreadLocal<MaintenanceJdbcProbe>();
       var cleanup =
           new InboxCleanup(
@@ -541,10 +549,10 @@ final class AuthenticationInboxCleanupTest {
   @Test
   void keysAndResultsNeverEscape() throws Exception {
     try (var f = new AuthenticationInboxInspectorTest.Fixture()) {
-      seed(f, LOGIN, "0101");
+      seed(f, LOGIN, FIXTURE_0101_F2D4F761);
       var p = new MaintenanceJdbcProbe();
-      p.selectedSql = "inspection_health";
-      p.columns.put("inspection_health", 0);
+      p.selectedSql = FIXTURE_INSPECTION_HEALTH_F475CF78;
+      p.columns.put(FIXTURE_INSPECTION_HEALTH_F475CF78, 0);
       redacted(() -> probed(f, p).inspectNext(RUN, Optional.empty()));
       assertEquals("1", count());
       var step = service(f).inspectNext(RUN, Optional.empty());
@@ -552,7 +560,7 @@ final class AuthenticationInboxCleanupTest {
       assertFalse(RUN.toString().contains(RUN.id().toString()));
       assertTrue(step.toString().contains("DELETED"));
       reset();
-      seed(f, LOGIN, "0101");
+      seed(f, LOGIN, FIXTURE_0101_F2D4F761);
       f.snapshots.close();
       assertEquals(
           InspectionStep.Outcome.PROTECTED,
@@ -562,7 +570,7 @@ final class AuthenticationInboxCleanupTest {
     for (boolean previous : List.of(false, true)) {
       reset();
       try (var f = new AuthenticationInboxInspectorTest.Fixture()) {
-        seed(f, LOGIN, "0000");
+        seed(f, LOGIN, FIXTURE_0000_876EEFE0);
         byte[] newKey = new byte[32];
         new java.security.SecureRandom().nextBytes(newKey);
         try (var snapshots =
@@ -603,7 +611,7 @@ final class AuthenticationInboxCleanupTest {
   @Test
   void inbox269ParentGuardBoundsSqlAndOwnsEveryDeleteCommitBoundary() throws Exception {
     try (var f = new AuthenticationInboxInspectorTest.Fixture()) {
-      seed(f, LOGIN, "0000");
+      seed(f, LOGIN, FIXTURE_0000_876EEFE0);
       var probe = new MaintenanceJdbcProbe();
       probe.beforeDelete =
           connection -> {
@@ -640,7 +648,7 @@ final class AuthenticationInboxCleanupTest {
     for (int failAt = 1; failAt <= 8; failAt++) {
       reset();
       try (var f = new AuthenticationInboxInspectorTest.Fixture()) {
-        seed(f, LOGIN, "0000");
+        seed(f, LOGIN, FIXTURE_0000_876EEFE0);
         int position = failAt;
         int[] calls = {0};
         var probe = new MaintenanceJdbcProbe();
@@ -669,7 +677,7 @@ final class AuthenticationInboxCleanupTest {
     for (String fault : List.of("wrong", "missing", "extra", "io")) {
       reset();
       try (var f = new AuthenticationInboxInspectorTest.Fixture()) {
-        seed(f, LOGIN, "0000");
+        seed(f, LOGIN, FIXTURE_0000_876EEFE0);
         var probe = new MaintenanceJdbcProbe();
         probe.selectedSql = "set_config";
         if (fault.equals("wrong")) probe.columns.put("bound_timeout", "5001");
@@ -724,7 +732,7 @@ final class AuthenticationInboxCleanupTest {
   private static void seed(
       AuthenticationInboxInspectorTest.Fixture f, ResponseSnapshotIdentity id, String code)
       throws Exception {
-    boolean success = code.equals("0000") || code.equals("0200");
+    boolean success = code.equals(FIXTURE_0000_876EEFE0) || code.equals("0200");
     var saved =
         f.saved(
             id,

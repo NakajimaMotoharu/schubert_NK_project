@@ -20,6 +20,8 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** PT-OPS-DBADMIT-001..004; isolated real PG and public JDBC fault probes, no deployed secret. */
 final class ServiceDatabaseAdmissionTest {
+  private static final String FIXTURE_PRIVATE_D45CA6F9 = "PRIVATE";
+  private static final String FIXTURE_CLOSE_97959247 = "close";
   @TempDir static Path root;
   private static ApiLogDatabaseFixture db;
   private static String url;
@@ -72,7 +74,9 @@ final class ServiceDatabaseAdmissionTest {
     var admission = new ServiceDatabaseAdmission(ServiceConfigFiles.Service.API, url);
     // BUG283/YKT216: known body + unknown statement-close must not become fixed success/failure.
     for (Throwable closeFailure :
-        List.of(new IllegalStateException("PRIVATE"), new SQLException("PRIVATE"))) {
+        List.of(
+            new IllegalStateException(FIXTURE_PRIVATE_D45CA6F9),
+            new SQLException(FIXTURE_PRIVATE_D45CA6F9))) {
       int[] statementCloses = {0};
       var closeProbe =
           (java.sql.Connection)
@@ -89,8 +93,8 @@ final class ServiceDatabaseAdmissionTest {
                                 new Class<?>[] {java.sql.PreparedStatement.class},
                                 (sp, sm, sa) -> {
                                   if (sm.getName().equals("executeQuery"))
-                                    throw new SQLException("PRIVATE");
-                                  if (sm.getName().equals("close")) {
+                                    throw new SQLException(FIXTURE_PRIVATE_D45CA6F9);
+                                  if (sm.getName().equals(FIXTURE_CLOSE_97959247)) {
                                     statementCloses[0]++;
                                     throw closeFailure;
                                   }
@@ -112,14 +116,14 @@ final class ServiceDatabaseAdmissionTest {
                     (org.junit.jupiter.api.function.Executable)
                         () -> {
                           int[] closed = new int[3];
-                          var primary = new IllegalStateException("PRIVATE");
+                          var primary = new IllegalStateException(FIXTURE_PRIVATE_D45CA6F9);
                           java.sql.ResultSet rows =
                               (java.sql.ResultSet)
                                   java.lang.reflect.Proxy.newProxyInstance(
                                       getClass().getClassLoader(),
                                       new Class<?>[] {java.sql.ResultSet.class},
                                       (p, m, a) -> {
-                                        if (m.getName().equals("close")) {
+                                        if (m.getName().equals(FIXTURE_CLOSE_97959247)) {
                                           closed[0]++;
                                           throw primary;
                                         }
@@ -135,7 +139,7 @@ final class ServiceDatabaseAdmissionTest {
                                           switch (m.getName()) {
                                             case "executeQuery" ->
                                                 kind.equals("rows") ? null : rows;
-                                            case "close" -> {
+                                            case FIXTURE_CLOSE_97959247 -> {
                                               closed[1]++;
                                               yield null;
                                             }
@@ -152,7 +156,7 @@ final class ServiceDatabaseAdmissionTest {
                                             case "isReadOnly" -> false;
                                             case "prepareStatement" ->
                                                 kind.equals("statement") ? null : statement;
-                                            case "close" -> {
+                                            case FIXTURE_CLOSE_97959247 -> {
                                               closed[2]++;
                                               yield null;
                                             }

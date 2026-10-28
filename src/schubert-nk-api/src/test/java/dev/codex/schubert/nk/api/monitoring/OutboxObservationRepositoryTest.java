@@ -31,6 +31,9 @@ import org.junit.jupiter.api.Test;
 
 /** OUTBOXDB001..010/1664: own JDBC doubles only, not actual DB/driver/source admission. */
 class OutboxObservationRepositoryTest {
+  private static final String FIXTURE_ERROR_F717E7D8 = "ERROR";
+  private static final String FIXTURE_PENDING_B11DB31F = "PENDING";
+  private static final String FIXTURE_OWNED_FIXTURE_FAILURE_CCD2F9F2 = "owned fixture failure";
   private static final Instant AS_OF = Instant.EPOCH;
   private static final String SQL =
       "SELECT status, COUNT(*) AS row_count, MIN(created_at) AS oldest_created_at"
@@ -171,7 +174,11 @@ class OutboxObservationRepositoryTest {
 
   @Test
   void outboxDb001ShuffledRowsHaveLiteralCountsAndAgesAfterReverseClose() throws SQLException {
-    var f = new Fixture(Row.row("ERROR", 7, 11), Row.row("PENDING", 3, 2), Row.row("SENT", 5, 4));
+    var f =
+        new Fixture(
+            Row.row(FIXTURE_ERROR_F717E7D8, 7, 11),
+            Row.row(FIXTURE_PENDING_B11DB31F, 3, 2),
+            Row.row("SENT", 5, 4));
     var actual = new OutboxObservationRepository().read(f.connection(), AS_OF);
     assertEquals(3, actual.counts().pending());
     assertEquals(5, actual.counts().sent());
@@ -191,7 +198,7 @@ class OutboxObservationRepositoryTest {
       assertEquals(Duration.ZERO, actual.ages().value(status));
     }
     empty.complete();
-    var sparse = new Fixture(Row.row("PENDING", Long.MAX_VALUE, 0));
+    var sparse = new Fixture(Row.row(FIXTURE_PENDING_B11DB31F, Long.MAX_VALUE, 0));
     var value = new OutboxObservationRepository().read(sparse.connection(), AS_OF);
     assertEquals(Long.MAX_VALUE, value.counts().pending());
     assertEquals(0, value.counts().sent());
@@ -241,7 +248,8 @@ class OutboxObservationRepositoryTest {
                     false,
                     Optional.of(OffsetDateTime.ofInstant(AS_OF, ZoneOffset.UTC)))),
             new Fixture(Row.row("pending-canary", 1, 0)),
-            new Fixture(Row.row("PENDING", 1, 0), Row.row("PENDING", 2, 1)));
+            new Fixture(
+                Row.row(FIXTURE_PENDING_B11DB31F, 1, 0), Row.row(FIXTURE_PENDING_B11DB31F, 2, 1)));
     for (var f : cases) {
       assertEquals(
           "outbox metric source rejected",
@@ -258,11 +266,11 @@ class OutboxObservationRepositoryTest {
     var present = Optional.of(OffsetDateTime.ofInstant(AS_OF, ZoneOffset.UTC));
     var cases =
         List.of(
-            new Fixture(new Row(Optional.of("ERROR"), 1, true, present)),
-            new Fixture(Row.row("ERROR", -1, 0)),
-            new Fixture(Row.row("ERROR", 0, 0)),
+            new Fixture(new Row(Optional.of(FIXTURE_ERROR_F717E7D8), 1, true, present)),
+            new Fixture(Row.row(FIXTURE_ERROR_F717E7D8, -1, 0)),
+            new Fixture(Row.row(FIXTURE_ERROR_F717E7D8, 0, 0)),
             new Fixture(new Row(Optional.of("SENT"), 2, false, Optional.empty())),
-            new Fixture(Row.row("PENDING", 3, -1)));
+            new Fixture(Row.row(FIXTURE_PENDING_B11DB31F, 3, -1)));
     for (var f : cases) {
       assertEquals(
           "outbox metric source rejected",
@@ -279,7 +287,7 @@ class OutboxObservationRepositoryTest {
     var jst =
         new Fixture(
             new Row(
-                Optional.of("PENDING"),
+                Optional.of(FIXTURE_PENDING_B11DB31F),
                 1,
                 false,
                 Optional.of(OffsetDateTime.parse("1970-01-01T08:59:58.500000+09:00"))));
@@ -290,7 +298,7 @@ class OutboxObservationRepositoryTest {
     var earliest =
         new Fixture(
             new Row(
-                Optional.of("ERROR"),
+                Optional.of(FIXTURE_ERROR_F717E7D8),
                 1,
                 false,
                 Optional.of(OffsetDateTime.parse("0001-01-01T00:00:00Z"))));
@@ -324,9 +332,9 @@ class OutboxObservationRepositoryTest {
     for (var point : List.of("prepare", "timeout", "execute")) {
       for (var fault :
           List.<Throwable>of(
-              new SQLException("owned fixture failure"),
-              new IllegalStateException("owned fixture failure"),
-              new AssertionError("owned fixture failure"))) {
+              new SQLException(FIXTURE_OWNED_FIXTURE_FAILURE_CCD2F9F2),
+              new IllegalStateException(FIXTURE_OWNED_FIXTURE_FAILURE_CCD2F9F2),
+              new AssertionError(FIXTURE_OWNED_FIXTURE_FAILURE_CCD2F9F2))) {
         var f = new Fixture();
         f.faults.put(point, fault);
         assertSame(
@@ -347,10 +355,10 @@ class OutboxObservationRepositoryTest {
         List.of("next", "status", "count", "wasNull", "oldest", "RSclose", "PSclose")) {
       for (var fault :
           List.<Throwable>of(
-              new SQLException("owned fixture failure"),
-              new IllegalStateException("owned fixture failure"),
-              new AssertionError("owned fixture failure"))) {
-        var f = new Fixture(Row.row("PENDING", 3, 5));
+              new SQLException(FIXTURE_OWNED_FIXTURE_FAILURE_CCD2F9F2),
+              new IllegalStateException(FIXTURE_OWNED_FIXTURE_FAILURE_CCD2F9F2),
+              new AssertionError(FIXTURE_OWNED_FIXTURE_FAILURE_CCD2F9F2))) {
+        var f = new Fixture(Row.row(FIXTURE_PENDING_B11DB31F, 3, 5));
         f.faults.put(point, fault);
         assertSame(
             fault,
@@ -360,7 +368,7 @@ class OutboxObservationRepositoryTest {
         f.complete();
       }
     }
-    var f = new Fixture(Row.row("PENDING", 3, 5));
+    var f = new Fixture(Row.row(FIXTURE_PENDING_B11DB31F, 3, 5));
     var primary = new SQLException("owned query failure");
     var rs = new SQLException("owned rows close failure");
     var ps = new SQLException("owned statement close failure");
@@ -384,7 +392,10 @@ class OutboxObservationRepositoryTest {
       long count = owner;
       tasks.add(
           () -> {
-            var f = new Fixture(Row.row("PENDING", count, count), Row.row("ERROR", 2, 4));
+            var f =
+                new Fixture(
+                    Row.row(FIXTURE_PENDING_B11DB31F, count, count),
+                    Row.row(FIXTURE_ERROR_F717E7D8, 2, 4));
             var actual = repository.read(f.connection(), AS_OF);
             assertEquals(count, actual.counts().pending());
             assertEquals(2, actual.counts().error());

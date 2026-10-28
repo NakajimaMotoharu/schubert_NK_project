@@ -20,6 +20,8 @@ import org.junit.jupiter.api.Test;
 
 /** 1860/OUTBOXPUBLISH001..014: cleanup-confirmed result/cache/SDK, own doubles only. */
 final class ApiOutboxCleanupPublicationTest {
+  private static final String FIXTURE_CLOSE_97959247 = "close";
+
   private static ApiOutboxObservationSource source() {
     return new ApiOutboxObservationSource(new OutboxObservationRepository(), "DEBUG");
   }
@@ -63,7 +65,7 @@ final class ApiOutboxCleanupPublicationTest {
     f.cleanup(1, 1);
     f.query.complete();
     assertSame(actual, value.get());
-    assertEquals("close", f.calls.getLast());
+    assertEquals(FIXTURE_CLOSE_97959247, f.calls.getLast());
     var pool = new DbPoolMetricObservationTest.Fixture();
     try (var context =
         ApiServiceMetricBinding.prepareContext("DEBUG", pool::pool, pool::config, value)) {
@@ -137,8 +139,8 @@ final class ApiOutboxCleanupPublicationTest {
     var value = source();
     value.observe(rows().attempt());
     var f = rows();
-    var primary = new SQLException("close");
-    f.faults.put("close", primary);
+    var primary = new SQLException(FIXTURE_CLOSE_97959247);
+    f.faults.put(FIXTURE_CLOSE_97959247, primary);
     var owner = new AtomicReference<ApiReadOnlyObservationAttempt>();
     var attempt =
         f.attempt(
@@ -159,8 +161,8 @@ final class ApiOutboxCleanupPublicationTest {
   void outboxPublish009() {
     var value = source();
     var f = rows();
-    var fatal = new AssertionError("close");
-    f.faults.put("close", fatal);
+    var fatal = new AssertionError(FIXTURE_CLOSE_97959247);
+    f.faults.put(FIXTURE_CLOSE_97959247, fatal);
     assertSame(fatal, assertThrows(AssertionError.class, () -> value.observe(f.attempt())));
     assertTrue(value.get().isEmpty());
     f.cleanup(1, 1);
@@ -171,7 +173,7 @@ final class ApiOutboxCleanupPublicationTest {
     var value = source();
     var f = rows();
     var fatal = new AssertionError("diagnostic");
-    f.faults.put("close", new SQLException("close"));
+    f.faults.put(FIXTURE_CLOSE_97959247, new SQLException(FIXTURE_CLOSE_97959247));
     f.faults.put("diagnostic", fatal);
     assertSame(fatal, assertThrows(AssertionError.class, () -> value.observe(f.attempt())));
     assertTrue(value.get().isEmpty());

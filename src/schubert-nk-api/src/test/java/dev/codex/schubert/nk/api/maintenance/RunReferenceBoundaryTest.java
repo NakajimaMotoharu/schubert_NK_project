@@ -36,6 +36,9 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** NK-DAT-001; DAT-009/OPS-009/UI251/SS331 3.12/332/343; SSC055/056/PG159/160; DB241..250. */
 final class RunReferenceBoundaryTest {
+  private static final String FIXTURE_9999_12_31T23_59_59_999999Z_652E4701 =
+      "9999-12-31T23:59:59.999999Z";
+  private static final String FIXTURE_55000_F2ADCE46 = "55000";
   @TempDir static Path root;
   static ApiLogDatabaseFixture db;
   static String url;
@@ -147,7 +150,7 @@ final class RunReferenceBoundaryTest {
       for (String value :
           List.of(
               "0001-01-01T00:00:00Z",
-              "9999-12-31T23:59:59.999999Z",
+              FIXTURE_9999_12_31T23_59_59_999999Z_652E4701,
               "2026-09-12T14:59:59.999999Z",
               "2026-09-12T15:00:00Z")) {
         Instant instant = Instant.parse(value);
@@ -192,12 +195,12 @@ final class RunReferenceBoundaryTest {
     }
     try (var admin = db.admin();
         var c = locked()) {
-      insert(admin, 0, RUN, Instant.parse("9999-12-31T23:59:59.999999Z"));
+      insert(admin, 0, RUN, Instant.parse(FIXTURE_9999_12_31T23_59_59_999999Z_652E4701));
       assertEquals(
           "10000-01-01", scalar(admin, "select business_date::text from schubert.batch_runs"));
       assertEquals(
           List.of(true, false, false, true),
-          read(c, RUN, Instant.parse("9999-12-31T23:59:59.999999Z")));
+          read(c, RUN, Instant.parse(FIXTURE_9999_12_31T23_59_59_999999Z_652E4701)));
     }
   }
 
@@ -215,7 +218,7 @@ final class RunReferenceBoundaryTest {
             "1970-01-01T00:00:00Z",
             "2026-09-12T14:59:59.999999Z",
             "2026-09-12T15:00:00.123456Z",
-            "9999-12-31T23:59:59.999999Z");
+            FIXTURE_9999_12_31T23_59_59_999999Z_652E4701);
     try (var c = db.admin()) {
       for (String zone : List.of("UTC", "Asia/Tokyo", "America/New_York")) {
         sql(c, "set timezone='" + zone + "'");
@@ -323,17 +326,17 @@ final class RunReferenceBoundaryTest {
   @Test
   void lockOwnership() throws Exception {
     try (var c = open("schubert_batch")) {
-      reject(c, query(), "55000");
+      reject(c, query(), FIXTURE_55000_F2ADCE46);
       assertEquals(
           "0",
           scalar(
               c,
               "select count(*) from pg_locks where pid=pg_backend_pid() and locktype='advisory'"));
       sql(c, "select pg_advisory_lock_shared(71419602)");
-      reject(c, query(), "55000");
+      reject(c, query(), FIXTURE_55000_F2ADCE46);
       assertEquals("t", scalar(c, "select pg_advisory_unlock_shared(71419602)"));
       sql(c, "select pg_advisory_lock(0,71419602)");
-      reject(c, query(), "55000");
+      reject(c, query(), FIXTURE_55000_F2ADCE46);
       assertEquals("t", scalar(c, "select pg_advisory_unlock(0,71419602)"));
       sql(c, "select pg_advisory_lock(71419602)");
       assertEquals(List.of(false, false, false, true), read(c, RUN, TIME));
@@ -344,7 +347,7 @@ final class RunReferenceBoundaryTest {
       assertEquals(List.of(false, false, false, true), read(c, RUN, TIME));
       c.rollback();
       c.setAutoCommit(true);
-      reject(c, query(), "55000");
+      reject(c, query(), FIXTURE_55000_F2ADCE46);
     }
   }
 
@@ -415,7 +418,7 @@ final class RunReferenceBoundaryTest {
     try (var first = locked();
         var executor = Executors.newVirtualThreadPerTaskExecutor()) {
       assertEquals(
-          "55000",
+          FIXTURE_55000_F2ADCE46,
           executor
               .submit(
                   () -> {

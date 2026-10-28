@@ -51,10 +51,28 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** PT-DB-INBOX-177..192; SS324 12.9/331 3.11/PG-D-141; independent wire and SQL oracle. */
 final class QuestionMutationInboxInspectorTest {
+  private static final String FIXTURE_QSBRSP01_9848D404 = "QSBRSP01";
+  private static final String FIXTURE_NTCRSP01_CFC2AD25 = "NTCRSP01";
+  private static final String FIXTURE_QDLRSP01_1746478A = "QDLRSP01";
+  private static final String FIXTURE_0000_876EEFE0 = "0000";
+  private static final String FIXTURE_0200_FC9DB3AC = "0200";
+  private static final String FIXTURE_0107_BAC582DD = "0107";
+  private static final String FIXTURE_9001_351F7309 = "9001";
+  private static final String FIXTURE_001_A3FEAA64 = "001";
+  private static final String FIXTURE_002_F3F2837C = "002";
+  private static final String FIXTURE_FROM_SCHUBERT_ASYNC_JOBS_53890648 =
+      "from schubert.async_jobs";
+  private static final String FIXTURE_FROM_SCHUBERT_QUESTIONS_FE2F38CB = "from schubert.questions";
+  private static final String FIXTURE_FROM_SCHUBERT_NOTIFICATIONS_D4F7D30C =
+      "from schubert.notifications";
+  private static final String FIXTURE_OWNER_USER_ID_CAE361AA = "owner_user_id";
+  private static final String FIXTURE_QUESTION_ID_98F02597 = "question_id";
+  private static final String FIXTURE_STATE_CHANGED_AT_2B6AF503 = "state_changed_at";
   @TempDir static Path root;
   static ApiLogDatabaseFixture db;
   static String url;
-  static final List<String> ROUTES = List.of("QSBRSP01", "NTCRSP01", "QDLRSP01");
+  static final List<String> ROUTES =
+      List.of(FIXTURE_QSBRSP01_9848D404, FIXTURE_NTCRSP01_CFC2AD25, FIXTURE_QDLRSP01_1746478A);
   static final Instant TIME = Instant.parse("2026-09-09T00:00:00.123456Z");
   static final Instant SUBMITTED = Instant.parse("2026-09-09T00:00:00.121456Z");
   static final Instant MUTATED = Instant.parse("2026-09-09T00:00:00.122456Z");
@@ -98,7 +116,7 @@ final class QuestionMutationInboxInspectorTest {
             + "(9,'"
             + RECEIPT
             + "',7,'Synthetic','"
-            + token("QSBRSP01")
+            + token(FIXTURE_QSBRSP01_9848D404)
             + "','"
             + SUBMITTED
             + "',true,'"
@@ -107,9 +125,9 @@ final class QuestionMutationInboxInspectorTest {
     sql(
         "insert into schubert.async_jobs(id,question_id,owner_user_id,state,message_id,correlation_id,received_at,state_changed_at,cancelled_at,version) values"
             + "(11,9,7,'CANCELLED','"
-            + message("QSBRSP01")
+            + message(FIXTURE_QSBRSP01_9848D404)
             + "','"
-            + message("QSBRSP01")
+            + message(FIXTURE_QSBRSP01_9848D404)
             + "','"
             + SUBMITTED
             + "','"
@@ -144,7 +162,7 @@ final class QuestionMutationInboxInspectorTest {
             c.prepareStatement(
                 "insert into schubert.mq_outbox(id,message_id,correlation_id,destination,layout_id,layout_version,body,status,next_attempt_at,created_at,sent_at) values(14,?,?,'nk.async.work','QWKREQ01','001',?,'SENT',?,?,?)")) {
       s.setObject(1, WORK);
-      s.setObject(2, message("QSBRSP01"));
+      s.setObject(2, message(FIXTURE_QSBRSP01_9848D404));
       s.setBytes(3, workWire());
       s.setObject(4, TIME.atOffset(java.time.ZoneOffset.UTC));
       s.setObject(5, TIME.atOffset(java.time.ZoneOffset.UTC));
@@ -173,7 +191,7 @@ final class QuestionMutationInboxInspectorTest {
         var c = connection()) {
       c.setAutoCommit(false);
       for (String route : ROUTES)
-        for (String code : List.of("0000", "0200"))
+        for (String code : List.of(FIXTURE_0000_876EEFE0, FIXTURE_0200_FC9DB3AC))
           assertTrue(check(f, c, route, code), route + code);
       assertFalse(c.getAutoCommit());
       assertFalse(c.isClosed());
@@ -206,7 +224,7 @@ final class QuestionMutationInboxInspectorTest {
               "update schubert.mq_outbox set sent_at='2026-09-09T00:00:00.123455Z'",
               "delete from schubert.mq_outbox")) {
         sql(change);
-        assertFalse(check(f, c, "QSBRSP01", "0000"), change);
+        assertFalse(check(f, c, FIXTURE_QSBRSP01_9848D404, FIXTURE_0000_876EEFE0), change);
         reset();
       }
       for (var change :
@@ -220,11 +238,13 @@ final class QuestionMutationInboxInspectorTest {
         byte[] wire = workWire();
         put(wire, change.getKey(), change.getValue());
         workBody(wire);
-        assertFalse(check(f, c, "QSBRSP01", "0000"), "work offset" + change.getKey());
+        assertFalse(
+            check(f, c, FIXTURE_QSBRSP01_9848D404, FIXTURE_0000_876EEFE0),
+            "work offset" + change.getKey());
         reset();
       }
       sql("update schubert.app_users set role='ADMIN',status='DISABLED' where id=7");
-      assertTrue(check(f, c, "QSBRSP01", "0000"));
+      assertTrue(check(f, c, FIXTURE_QSBRSP01_9848D404, FIXTURE_0000_876EEFE0));
     }
   }
 
@@ -234,7 +254,7 @@ final class QuestionMutationInboxInspectorTest {
         var c = connection()) {
       c.setAutoCommit(false);
       sql("delete from schubert.notifications");
-      assertTrue(check(f, c, "NTCRSP01", "0000"));
+      assertTrue(check(f, c, FIXTURE_NTCRSP01_CFC2AD25, FIXTURE_0000_876EEFE0));
       reset();
       for (String change :
           List.of(
@@ -247,11 +267,11 @@ final class QuestionMutationInboxInspectorTest {
               "update schubert.notifications set state='PROCESSING'",
               "update schubert.notifications set state_changed_at=state_changed_at+interval '1 microsecond'")) {
         sql(change);
-        assertFalse(check(f, c, "NTCRSP01", "0000"), change);
+        assertFalse(check(f, c, FIXTURE_NTCRSP01_CFC2AD25, FIXTURE_0000_876EEFE0), change);
         reset();
       }
       sql("update schubert.app_users set status='DISABLED' where id=7");
-      assertTrue(check(f, c, "NTCRSP01", "0200"));
+      assertTrue(check(f, c, FIXTURE_NTCRSP01_CFC2AD25, FIXTURE_0200_FC9DB3AC));
     }
   }
 
@@ -261,12 +281,12 @@ final class QuestionMutationInboxInspectorTest {
         var c = connection()) {
       c.setAutoCommit(false);
       sql("delete from schubert.answers");
-      assertTrue(check(f, c, "QDLRSP01", "0000"));
+      assertTrue(check(f, c, FIXTURE_QDLRSP01_1746478A, FIXTURE_0000_876EEFE0));
       reset();
       sql("update schubert.questions set deleted_by=8,owner_user_id=8");
       sql("update schubert.answers set deleted_by=8");
-      assertTrue(check(f, c, "QDLRSP01", "0200"));
-      assertFalse(check(f, c, "QDLRSP01", "0000"));
+      assertTrue(check(f, c, FIXTURE_QDLRSP01_1746478A, FIXTURE_0200_FC9DB3AC));
+      assertFalse(check(f, c, FIXTURE_QDLRSP01_1746478A, FIXTURE_0000_876EEFE0));
       reset();
       for (String change :
           List.of(
@@ -277,14 +297,14 @@ final class QuestionMutationInboxInspectorTest {
               "update schubert.answers set deleted_by=8",
               "update schubert.answers set deleted_at=deleted_at+interval '1 microsecond'")) {
         sql(change);
-        assertFalse(check(f, c, "QDLRSP01", "0000"), change);
+        assertFalse(check(f, c, FIXTURE_QDLRSP01_1746478A, FIXTURE_0000_876EEFE0), change);
         reset();
       }
       sql("delete from schubert.notifications");
       sql("delete from schubert.questions");
-      assertFalse(check(f, c, "QDLRSP01", "0000"));
-      assertFalse(check(f, c, "NTCRSP01", "0000"));
-      assertFalse(check(f, c, "QSBRSP01", "0000"));
+      assertFalse(check(f, c, FIXTURE_QDLRSP01_1746478A, FIXTURE_0000_876EEFE0));
+      assertFalse(check(f, c, FIXTURE_NTCRSP01_CFC2AD25, FIXTURE_0000_876EEFE0));
+      assertFalse(check(f, c, FIXTURE_QSBRSP01_9848D404, FIXTURE_0000_876EEFE0));
     }
   }
 
@@ -296,32 +316,62 @@ final class QuestionMutationInboxInspectorTest {
       for (String route : ROUTES)
         for (String code :
             List.of(
-                "0000", "0100", "0101", "0102", "0103", "0104", "0105", "0106", "0107", "0200",
-                "9000", "9001")) {
+                FIXTURE_0000_876EEFE0,
+                "0100",
+                "0101",
+                "0102",
+                "0103",
+                "0104",
+                "0105",
+                "0106",
+                FIXTURE_0107_BAC582DD,
+                FIXTURE_0200_FC9DB3AC,
+                "9000",
+                FIXTURE_9001_351F7309)) {
           boolean expected =
-              Set.of("0000", "0200", "9001").contains(code)
-                  || (route.equals("QSBRSP01") ? code.equals("0100") : code.equals("0104"))
-                  || (route.equals("NTCRSP01") && code.equals("0107"));
+              Set.of(FIXTURE_0000_876EEFE0, FIXTURE_0200_FC9DB3AC, FIXTURE_9001_351F7309)
+                      .contains(code)
+                  || (route.equals(FIXTURE_QSBRSP01_9848D404)
+                      ? code.equals("0100")
+                      : code.equals("0104"))
+                  || (route.equals(FIXTURE_NTCRSP01_CFC2AD25)
+                      && code.equals(FIXTURE_0107_BAC582DD));
           assertEquals(expected, check(f, c, route, code), route + code);
         }
       for (String state :
           List.of("PROCESSING", "COMPLETED", "ERROR", "RECEIVED", "CANCELLED", "UNKNOWN", "")) {
-        byte[] wire = golden("NTCRSP01", "0107", message("NTCRSP01"));
+        byte[] wire =
+            golden(
+                FIXTURE_NTCRSP01_CFC2AD25,
+                FIXTURE_0107_BAC582DD,
+                message(FIXTURE_NTCRSP01_CFC2AD25));
         Arrays.fill(wire, 256, 268, (byte) ' ');
         put(wire, 256, state);
         assertEquals(
             Set.of("PROCESSING", "COMPLETED", "ERROR").contains(state),
             f.inspector.isConsistent(
                 c,
-                id("NTCRSP01"),
-                snapshot(f, id("NTCRSP01"), "0107", wire, token("NTCRSP01")),
-                token("NTCRSP01")),
+                id(FIXTURE_NTCRSP01_CFC2AD25),
+                snapshot(
+                    f,
+                    id(FIXTURE_NTCRSP01_CFC2AD25),
+                    FIXTURE_0107_BAC582DD,
+                    wire,
+                    token(FIXTURE_NTCRSP01_CFC2AD25)),
+                token(FIXTURE_NTCRSP01_CFC2AD25)),
             state);
       }
       for (String route : ROUTES) {
-        var s = snapshot(f, id(route), "9001", golden(route, "9001", message(route)), token(route));
+        var s =
+            snapshot(
+                f,
+                id(route),
+                FIXTURE_9001_351F7309,
+                golden(route, FIXTURE_9001_351F7309, message(route)),
+                token(route));
         var bad =
-            new InboxCompletion(s.state(), ref(route), route, "001", s.responseSnapshot(), TIME);
+            new InboxCompletion(
+                s.state(), ref(route), route, FIXTURE_001_A3FEAA64, s.responseSnapshot(), TIME);
         assertFalse(f.inspector.isConsistent(c, id(route), bad, token(route)));
       }
     }
@@ -348,24 +398,36 @@ final class QuestionMutationInboxInspectorTest {
               193,
               200,
               252,
-              golden(route, "0000", message(route)).length - 1
+              golden(route, FIXTURE_0000_876EEFE0, message(route)).length - 1
             }) {
-          byte[] wire = golden(route, "0000", message(route));
+          byte[] wire = golden(route, FIXTURE_0000_876EEFE0, message(route));
           wire[pos] = (byte) '!';
           assertFalse(
               f.inspector.isConsistent(
-                  c, id(route), snapshot(f, id(route), "0000", wire, token(route)), token(route)),
+                  c,
+                  id(route),
+                  snapshot(f, id(route), FIXTURE_0000_876EEFE0, wire, token(route)),
+                  token(route)),
               route + pos);
         }
         var original =
-            snapshot(f, id(route), "0000", golden(route, "0000", message(route)), token(route));
+            snapshot(
+                f,
+                id(route),
+                FIXTURE_0000_876EEFE0,
+                golden(route, FIXTURE_0000_876EEFE0, message(route)),
+                token(route));
         for (var identity :
             List.of(
-                ResponseSnapshotIdentity.anonymous(message(route), route, "001"),
-                ResponseSnapshotIdentity.authenticated(new UUID(0, 999), route, "001", 7),
-                ResponseSnapshotIdentity.authenticated(message(route), route, "001", 8),
-                ResponseSnapshotIdentity.authenticated(message(route), route, "002", 7),
-                ResponseSnapshotIdentity.authenticated(message(route), "GAMRSP01", "001", 7)))
+                ResponseSnapshotIdentity.anonymous(message(route), route, FIXTURE_001_A3FEAA64),
+                ResponseSnapshotIdentity.authenticated(
+                    new UUID(0, 999), route, FIXTURE_001_A3FEAA64, 7),
+                ResponseSnapshotIdentity.authenticated(
+                    message(route), route, FIXTURE_001_A3FEAA64, 8),
+                ResponseSnapshotIdentity.authenticated(
+                    message(route), route, FIXTURE_002_F3F2837C, 7),
+                ResponseSnapshotIdentity.authenticated(
+                    message(route), "GAMRSP01", FIXTURE_001_A3FEAA64, 7)))
           assertFalse(f.inspector.isConsistent(c, identity, original, token(route)));
         assertFalse(
             f.inspector.isConsistent(
@@ -375,7 +437,7 @@ final class QuestionMutationInboxInspectorTest {
                     original.state(),
                     original.resultReference(),
                     route,
-                    "002",
+                    FIXTURE_002_F3F2837C,
                     original.responseSnapshot(),
                     TIME),
                 token(route)));
@@ -387,14 +449,14 @@ final class QuestionMutationInboxInspectorTest {
                     original.state(),
                     original.resultReference(),
                     route,
-                    "001",
+                    FIXTURE_001_A3FEAA64,
                     Optional.empty(),
                     TIME),
                 token(route)));
         var old =
             f.base.saved(
                 id(route),
-                golden(route, "0000", message(route)),
+                golden(route, FIXTURE_0000_876EEFE0, message(route)),
                 InboxCompletionState.COMPLETED,
                 TIME);
         assertFalse(
@@ -402,7 +464,12 @@ final class QuestionMutationInboxInspectorTest {
                 c,
                 id(route),
                 new InboxCompletion(
-                    old.state(), ref(route), route, "001", old.responseSnapshot(), TIME),
+                    old.state(),
+                    ref(route),
+                    route,
+                    FIXTURE_001_A3FEAA64,
+                    old.responseSnapshot(),
+                    TIME),
                 token(route)));
         byte[] cipher = original.responseSnapshot().orElseThrow().ciphertext();
         cipher[cipher.length - 1] ^= 1;
@@ -414,7 +481,7 @@ final class QuestionMutationInboxInspectorTest {
                     original.state(),
                     ref(route),
                     route,
-                    "001",
+                    FIXTURE_001_A3FEAA64,
                     Optional.of(new EncryptedResponseSnapshot("v1", cipher)),
                     TIME),
                 token(route)));
@@ -430,23 +497,32 @@ final class QuestionMutationInboxInspectorTest {
       var saved =
           snapshot(
               f,
-              id("QSBRSP01"),
-              "0000",
-              golden("QSBRSP01", "0000", message("QSBRSP01")),
-              token("QSBRSP01"));
+              id(FIXTURE_QSBRSP01_9848D404),
+              FIXTURE_0000_876EEFE0,
+              golden(
+                  FIXTURE_QSBRSP01_9848D404,
+                  FIXTURE_0000_876EEFE0,
+                  message(FIXTURE_QSBRSP01_9848D404)),
+              token(FIXTURE_QSBRSP01_9848D404));
       assertThrows(
           NullPointerException.class,
-          () -> f.inspector.isConsistent(null, id("QSBRSP01"), saved, token("QSBRSP01")));
+          () ->
+              f.inspector.isConsistent(
+                  null, id(FIXTURE_QSBRSP01_9848D404), saved, token(FIXTURE_QSBRSP01_9848D404)));
       assertThrows(
           NullPointerException.class,
-          () -> f.inspector.isConsistent(c, null, saved, token("QSBRSP01")));
+          () -> f.inspector.isConsistent(c, null, saved, token(FIXTURE_QSBRSP01_9848D404)));
       assertThrows(
           NullPointerException.class,
-          () -> f.inspector.isConsistent(c, id("QSBRSP01"), null, token("QSBRSP01")));
+          () ->
+              f.inspector.isConsistent(
+                  c, id(FIXTURE_QSBRSP01_9848D404), null, token(FIXTURE_QSBRSP01_9848D404)));
       assertThrows(
           NullPointerException.class,
-          () -> f.inspector.isConsistent(c, id("QSBRSP01"), saved, null));
-      assertFalse(f.inspector.isConsistent(c, id("QSBRSP01"), saved, token("QSBRSP01")));
+          () -> f.inspector.isConsistent(c, id(FIXTURE_QSBRSP01_9848D404), saved, null));
+      assertFalse(
+          f.inspector.isConsistent(
+              c, id(FIXTURE_QSBRSP01_9848D404), saved, token(FIXTURE_QSBRSP01_9848D404)));
       c.setAutoCommit(false);
       for (String route : ROUTES) {
         for (String fault :
@@ -460,52 +536,63 @@ final class QuestionMutationInboxInspectorTest {
                 "getString",
                 "resultClose",
                 "statementClose")) {
-          if (route.equals("QDLRSP01") && fault.equals("getString"))
+          if (route.equals(FIXTURE_QDLRSP01_1746478A) && fault.equals("getString"))
             continue; // No string projection.
           var p = new MaintenanceJdbcProbe();
           p.selectedSql =
-              route.equals("NTCRSP01") ? "from schubert.async_jobs" : "from schubert.questions";
+              route.equals(FIXTURE_NTCRSP01_CFC2AD25)
+                  ? FIXTURE_FROM_SCHUBERT_ASYNC_JOBS_53890648
+                  : FIXTURE_FROM_SCHUBERT_QUESTIONS_FE2F38CB;
           p.fault = fault;
-          assertFalse(check(f, p.wrap(c), route, "0000"), route + fault);
+          assertFalse(check(f, p.wrap(c), route, FIXTURE_0000_876EEFE0), route + fault);
         }
       }
       for (var target :
           List.of(
-              Map.entry("QSBRSP01", "from schubert.questions"),
-              Map.entry("QSBRSP01", "from schubert.async_jobs"),
-              Map.entry("QSBRSP01", "maintenance_read_question_work"),
-              Map.entry("NTCRSP01", "from schubert.async_jobs"),
-              Map.entry("NTCRSP01", "from schubert.notifications"),
-              Map.entry("QDLRSP01", "from schubert.questions"),
-              Map.entry("QDLRSP01", "from schubert.answers"))) {
+              Map.entry(FIXTURE_QSBRSP01_9848D404, FIXTURE_FROM_SCHUBERT_QUESTIONS_FE2F38CB),
+              Map.entry(FIXTURE_QSBRSP01_9848D404, FIXTURE_FROM_SCHUBERT_ASYNC_JOBS_53890648),
+              Map.entry(FIXTURE_QSBRSP01_9848D404, "maintenance_read_question_work"),
+              Map.entry(FIXTURE_NTCRSP01_CFC2AD25, FIXTURE_FROM_SCHUBERT_ASYNC_JOBS_53890648),
+              Map.entry(FIXTURE_NTCRSP01_CFC2AD25, FIXTURE_FROM_SCHUBERT_NOTIFICATIONS_D4F7D30C),
+              Map.entry(FIXTURE_QDLRSP01_1746478A, FIXTURE_FROM_SCHUBERT_QUESTIONS_FE2F38CB),
+              Map.entry(FIXTURE_QDLRSP01_1746478A, "from schubert.answers"))) {
         var columns =
             switch (target.getValue()) {
-              case "from schubert.questions" ->
-                  target.getKey().equals("QSBRSP01")
-                      ? List.of(
-                          "id", "owner_user_id", "operation_token", "receipt_id", "submitted_at")
-                      : List.of("id", "is_deleted", "deleted_by", "deleted_at", "version");
-              case "from schubert.async_jobs" ->
-                  target.getKey().equals("QSBRSP01")
+              case FIXTURE_FROM_SCHUBERT_QUESTIONS_FE2F38CB ->
+                  target.getKey().equals(FIXTURE_QSBRSP01_9848D404)
                       ? List.of(
                           "id",
-                          "question_id",
-                          "owner_user_id",
+                          FIXTURE_OWNER_USER_ID_CAE361AA,
+                          "operation_token",
+                          "receipt_id",
+                          "submitted_at")
+                      : List.of("id", "is_deleted", "deleted_by", "deleted_at", "version");
+              case FIXTURE_FROM_SCHUBERT_ASYNC_JOBS_53890648 ->
+                  target.getKey().equals(FIXTURE_QSBRSP01_9848D404)
+                      ? List.of(
+                          "id",
+                          FIXTURE_QUESTION_ID_98F02597,
+                          FIXTURE_OWNER_USER_ID_CAE361AA,
                           "message_id",
                           "correlation_id",
                           "received_at")
                       : List.of(
                           "id",
-                          "question_id",
-                          "owner_user_id",
+                          FIXTURE_QUESTION_ID_98F02597,
+                          FIXTURE_OWNER_USER_ID_CAE361AA,
                           "state",
                           "cancelled_at",
-                          "state_changed_at",
+                          FIXTURE_STATE_CHANGED_AT_2B6AF503,
                           "version");
-              case "from schubert.notifications" ->
-                  List.of("job_id", "question_id", "owner_user_id", "state", "state_changed_at");
+              case FIXTURE_FROM_SCHUBERT_NOTIFICATIONS_D4F7D30C ->
+                  List.of(
+                      "job_id",
+                      FIXTURE_QUESTION_ID_98F02597,
+                      FIXTURE_OWNER_USER_ID_CAE361AA,
+                      "state",
+                      FIXTURE_STATE_CHANGED_AT_2B6AF503);
               case "from schubert.answers" ->
-                  List.of("question_id", "is_deleted", "deleted_by", "deleted_at");
+                  List.of(FIXTURE_QUESTION_ID_98F02597, "is_deleted", "deleted_by", "deleted_at");
               default ->
                   List.of("message_id", "correlation_id", "status", "sent_at", "leased", "body");
             };
@@ -513,13 +600,14 @@ final class QuestionMutationInboxInspectorTest {
           var p = new MaintenanceJdbcProbe();
           p.selectedSql = target.getValue();
           p.columns.put(column, null);
-          assertFalse(check(f, p.wrap(c), target.getKey(), "0000"), target + column);
+          assertFalse(check(f, p.wrap(c), target.getKey(), FIXTURE_0000_876EEFE0), target + column);
           assertTrue(p.selectedStatements > 0);
         }
         var p = new MaintenanceJdbcProbe();
         p.selectedSql = target.getValue();
         p.duplicate = true;
-        assertFalse(check(f, p.wrap(c), target.getKey(), "0000"), "duplicate" + target);
+        assertFalse(
+            check(f, p.wrap(c), target.getKey(), FIXTURE_0000_876EEFE0), "duplicate" + target);
         for (String fault :
             List.of(
                 "prepareStatement",
@@ -531,18 +619,26 @@ final class QuestionMutationInboxInspectorTest {
           var failing = new MaintenanceJdbcProbe();
           failing.selectedSql = target.getValue();
           failing.fault = fault;
-          assertFalse(check(f, failing.wrap(c), target.getKey(), "0000"), target + fault);
+          assertFalse(
+              check(f, failing.wrap(c), target.getKey(), FIXTURE_0000_876EEFE0), target + fault);
           assertTrue(failing.selectedStatements > 0);
         }
         for (String column : columns) {
-          if (Set.of("id", "question_id", "job_id", "owner_user_id", "deleted_by", "version")
+          if (Set.of(
+                  "id",
+                  FIXTURE_QUESTION_ID_98F02597,
+                  "job_id",
+                  FIXTURE_OWNER_USER_ID_CAE361AA,
+                  "deleted_by",
+                  "version")
               .contains(column))
             for (long value : new long[] {0, 1_000_000_000_000L}) {
               var invalid = new MaintenanceJdbcProbe();
               invalid.selectedSql = target.getValue();
               invalid.columns.put(column, value);
               assertFalse(
-                  check(f, invalid.wrap(c), target.getKey(), "0000"), target + column + value);
+                  check(f, invalid.wrap(c), target.getKey(), FIXTURE_0000_876EEFE0),
+                  target + column + value);
             }
           if (column.endsWith("_at"))
             for (OffsetDateTime invalidTime :
@@ -554,81 +650,108 @@ final class QuestionMutationInboxInspectorTest {
               invalid.selectedSql = target.getValue();
               invalid.columns.put(column, invalidTime);
               assertFalse(
-                  check(f, invalid.wrap(c), target.getKey(), "0000"),
+                  check(f, invalid.wrap(c), target.getKey(), FIXTURE_0000_876EEFE0),
                   target + column + invalidTime);
             }
         }
       }
       for (var changed :
           List.of(
-              List.of("QSBRSP01", "from schubert.questions", "id"),
-              List.of("QSBRSP01", "from schubert.async_jobs", "question_id"),
-              List.of("NTCRSP01", "from schubert.async_jobs", "id"),
-              List.of("NTCRSP01", "from schubert.notifications", "job_id"),
-              List.of("NTCRSP01", "from schubert.notifications", "question_id"),
-              List.of("QDLRSP01", "from schubert.questions", "id"),
-              List.of("QDLRSP01", "from schubert.answers", "question_id"))) {
+              List.of(FIXTURE_QSBRSP01_9848D404, FIXTURE_FROM_SCHUBERT_QUESTIONS_FE2F38CB, "id"),
+              List.of(
+                  FIXTURE_QSBRSP01_9848D404,
+                  FIXTURE_FROM_SCHUBERT_ASYNC_JOBS_53890648,
+                  FIXTURE_QUESTION_ID_98F02597),
+              List.of(FIXTURE_NTCRSP01_CFC2AD25, FIXTURE_FROM_SCHUBERT_ASYNC_JOBS_53890648, "id"),
+              List.of(
+                  FIXTURE_NTCRSP01_CFC2AD25,
+                  FIXTURE_FROM_SCHUBERT_NOTIFICATIONS_D4F7D30C,
+                  "job_id"),
+              List.of(
+                  FIXTURE_NTCRSP01_CFC2AD25,
+                  FIXTURE_FROM_SCHUBERT_NOTIFICATIONS_D4F7D30C,
+                  FIXTURE_QUESTION_ID_98F02597),
+              List.of(FIXTURE_QDLRSP01_1746478A, FIXTURE_FROM_SCHUBERT_QUESTIONS_FE2F38CB, "id"),
+              List.of(
+                  FIXTURE_QDLRSP01_1746478A,
+                  "from schubert.answers",
+                  FIXTURE_QUESTION_ID_98F02597))) {
         var p = new MaintenanceJdbcProbe();
         p.selectedSql = changed.get(1);
         p.columns.put(changed.get(2), 8L);
-        assertFalse(check(f, p.wrap(c), changed.get(0), "0000"), changed.toString());
+        assertFalse(check(f, p.wrap(c), changed.get(0), FIXTURE_0000_876EEFE0), changed.toString());
       }
-      for (String route : List.of("NTCRSP01", "QDLRSP01")) {
+      for (String route : List.of(FIXTURE_NTCRSP01_CFC2AD25, FIXTURE_QDLRSP01_1746478A)) {
         var p = new MaintenanceJdbcProbe();
         p.selectedSql =
-            route.equals("NTCRSP01") ? "from schubert.async_jobs" : "from schubert.questions";
+            route.equals(FIXTURE_NTCRSP01_CFC2AD25)
+                ? FIXTURE_FROM_SCHUBERT_ASYNC_JOBS_53890648
+                : FIXTURE_FROM_SCHUBERT_QUESTIONS_FE2F38CB;
         p.columns.put(
-            route.equals("NTCRSP01") ? "state" : "is_deleted",
-            route.equals("NTCRSP01") ? "RECEIVED" : false);
-        assertFalse(check(f, p.wrap(c), route, "0000"));
+            route.equals(FIXTURE_NTCRSP01_CFC2AD25) ? "state" : "is_deleted",
+            route.equals(FIXTURE_NTCRSP01_CFC2AD25) ? "RECEIVED" : false);
+        assertFalse(check(f, p.wrap(c), route, FIXTURE_0000_876EEFE0));
         p.columns.clear();
         p.columns.put(
-            route.equals("NTCRSP01") ? "cancelled_at" : "deleted_at",
+            route.equals(FIXTURE_NTCRSP01_CFC2AD25) ? "cancelled_at" : "deleted_at",
             OffsetDateTime.ofInstant(TIME.plusNanos(1000), ZoneOffset.UTC));
-        if (route.equals("NTCRSP01"))
+        if (route.equals(FIXTURE_NTCRSP01_CFC2AD25))
           p.columns.put(
-              "state_changed_at", OffsetDateTime.ofInstant(TIME.plusNanos(1000), ZoneOffset.UTC));
-        assertFalse(check(f, p.wrap(c), route, "0000"));
-        if (route.equals("NTCRSP01")) {
+              FIXTURE_STATE_CHANGED_AT_2B6AF503,
+              OffsetDateTime.ofInstant(TIME.plusNanos(1000), ZoneOffset.UTC));
+        assertFalse(check(f, p.wrap(c), route, FIXTURE_0000_876EEFE0));
+        if (route.equals(FIXTURE_NTCRSP01_CFC2AD25)) {
           p.columns.put("cancelled_at", OffsetDateTime.ofInstant(SUBMITTED, ZoneOffset.UTC));
-          p.columns.put("state_changed_at", OffsetDateTime.ofInstant(SUBMITTED, ZoneOffset.UTC));
-          assertFalse(check(f, p.wrap(c), route, "0000"));
+          p.columns.put(
+              FIXTURE_STATE_CHANGED_AT_2B6AF503,
+              OffsetDateTime.ofInstant(SUBMITTED, ZoneOffset.UTC));
+          assertFalse(check(f, p.wrap(c), route, FIXTURE_0000_876EEFE0));
         }
       }
       for (var change :
           List.of(
-              Map.entry("message_id", message("QSBRSP01")),
+              Map.entry("message_id", message(FIXTURE_QSBRSP01_9848D404)),
               Map.entry("correlation_id", new UUID(0, 999)))) {
         var p = new MaintenanceJdbcProbe();
         p.selectedSql = "maintenance_read_question_work";
         p.columns.put(change.getKey(), change.getValue());
-        assertFalse(check(f, p.wrap(c), "QSBRSP01", "0000"));
+        assertFalse(check(f, p.wrap(c), FIXTURE_QSBRSP01_9848D404, FIXTURE_0000_876EEFE0));
       }
       for (byte[] body :
           List.of(
               new byte[0],
               Arrays.copyOf(workWire(), 321),
-              golden("QSBRSP01", "0000", message("QSBRSP01")))) {
+              golden(
+                  FIXTURE_QSBRSP01_9848D404,
+                  FIXTURE_0000_876EEFE0,
+                  message(FIXTURE_QSBRSP01_9848D404)))) {
         var p = new MaintenanceJdbcProbe();
         p.selectedSql = "maintenance_read_question_work";
         p.columns.put("body", body);
-        assertFalse(check(f, p.wrap(c), "QSBRSP01", "0000"));
+        assertFalse(check(f, p.wrap(c), FIXTURE_QSBRSP01_9848D404, FIXTURE_0000_876EEFE0));
       }
       var future = new MaintenanceJdbcProbe();
-      future.selectedSql = "from schubert.questions";
+      future.selectedSql = FIXTURE_FROM_SCHUBERT_QUESTIONS_FE2F38CB;
       future.columns.put(
           "submitted_at", OffsetDateTime.ofInstant(TIME.plusNanos(1000), ZoneOffset.UTC));
-      byte[] wire = golden("QSBRSP01", "0000", message("QSBRSP01"));
+      byte[] wire =
+          golden(
+              FIXTURE_QSBRSP01_9848D404, FIXTURE_0000_876EEFE0, message(FIXTURE_QSBRSP01_9848D404));
       put(wire, 294, "20260909090000123");
       assertFalse(
           f.inspector.isConsistent(
               future.wrap(c),
-              id("QSBRSP01"),
-              snapshot(f, id("QSBRSP01"), "0000", wire, token("QSBRSP01")),
-              token("QSBRSP01")));
+              id(FIXTURE_QSBRSP01_9848D404),
+              snapshot(
+                  f,
+                  id(FIXTURE_QSBRSP01_9848D404),
+                  FIXTURE_0000_876EEFE0,
+                  wire,
+                  token(FIXTURE_QSBRSP01_9848D404)),
+              token(FIXTURE_QSBRSP01_9848D404)));
       c.rollback();
       f.base.codec.close();
-      assertFalse(check(f, c, "QDLRSP01", "0000"));
+      assertFalse(check(f, c, FIXTURE_QDLRSP01_1746478A, FIXTURE_0000_876EEFE0));
     }
   }
 
@@ -639,8 +762,16 @@ final class QuestionMutationInboxInspectorTest {
       c.setAutoCommit(false);
       for (String route : ROUTES) {
         var original =
-            snapshot(f, id(route), "0000", golden(route, "0000", message(route)), token(route));
-        var otherLayout = route.equals("QSBRSP01") ? "QDLRSP01" : "QSBRSP01";
+            snapshot(
+                f,
+                id(route),
+                FIXTURE_0000_876EEFE0,
+                golden(route, FIXTURE_0000_876EEFE0, message(route)),
+                token(route));
+        var otherLayout =
+            route.equals(FIXTURE_QSBRSP01_9848D404)
+                ? FIXTURE_QDLRSP01_1746478A
+                : FIXTURE_QSBRSP01_9848D404;
         assertFalse(
             f.inspector.isConsistent(
                 c,
@@ -649,30 +780,34 @@ final class QuestionMutationInboxInspectorTest {
                     original.state(),
                     original.resultReference(),
                     otherLayout,
-                    "001",
+                    FIXTURE_001_A3FEAA64,
                     original.responseSnapshot(),
                     TIME),
                 token(route)));
         assertFalse(
             f.inspector.isConsistent(
                 c,
-                ResponseSnapshotIdentity.authenticated(message(route), route, "002", 7),
+                ResponseSnapshotIdentity.authenticated(
+                    message(route), route, FIXTURE_002_F3F2837C, 7),
                 new InboxCompletion(
                     original.state(),
                     original.resultReference(),
                     route,
-                    "002",
+                    FIXTURE_002_F3F2837C,
                     original.responseSnapshot(),
                     TIME),
                 token(route)));
         for (var change :
             List.of(
                 Map.entry(60, new UUID(0, 999).toString()), Map.entry(96, "20260909090000124"))) {
-          byte[] wire = golden(route, "0000", message(route));
+          byte[] wire = golden(route, FIXTURE_0000_876EEFE0, message(route));
           put(wire, change.getKey(), change.getValue());
           assertFalse(
               f.inspector.isConsistent(
-                  c, id(route), snapshot(f, id(route), "0000", wire, token(route)), token(route)));
+                  c,
+                  id(route),
+                  snapshot(f, id(route), FIXTURE_0000_876EEFE0, wire, token(route)),
+                  token(route)));
         }
         for (UUID token :
             List.of(new UUID(1, token(route).getLeastSignificantBits()), new UUID(0, 999)))
@@ -689,17 +824,29 @@ final class QuestionMutationInboxInspectorTest {
                   c,
                   id(route),
                   new InboxCompletion(
-                      original.state(), ref, route, "001", original.responseSnapshot(), TIME),
+                      original.state(),
+                      ref,
+                      route,
+                      FIXTURE_001_A3FEAA64,
+                      original.responseSnapshot(),
+                      TIME),
                   token(route)));
       }
-      byte[] wrongId = golden("QSBRSP01", "0000", message("QSBRSP01"));
+      byte[] wrongId =
+          golden(
+              FIXTURE_QSBRSP01_9848D404, FIXTURE_0000_876EEFE0, message(FIXTURE_QSBRSP01_9848D404));
       put(wrongId, 282, "000000000008");
       assertFalse(
           f.inspector.isConsistent(
               c,
-              id("QSBRSP01"),
-              snapshot(f, id("QSBRSP01"), "0000", wrongId, token("QSBRSP01")),
-              token("QSBRSP01")));
+              id(FIXTURE_QSBRSP01_9848D404),
+              snapshot(
+                  f,
+                  id(FIXTURE_QSBRSP01_9848D404),
+                  FIXTURE_0000_876EEFE0,
+                  wrongId,
+                  token(FIXTURE_QSBRSP01_9848D404)),
+              token(FIXTURE_QSBRSP01_9848D404)));
     }
   }
 
@@ -718,7 +865,9 @@ final class QuestionMutationInboxInspectorTest {
             "schubert_ops_ro"))
       denied(
           role,
-          "select * from schubert.maintenance_read_question_work('" + message("QSBRSP01") + "')");
+          "select * from schubert.maintenance_read_question_work('"
+              + message(FIXTURE_QSBRSP01_9848D404)
+              + "')");
     for (String query :
         List.of(
             "select body from schubert.questions",
@@ -766,7 +915,7 @@ final class QuestionMutationInboxInspectorTest {
         try (var r =
             s.executeQuery(
                 "select count(*) from schubert.maintenance_read_question_work('"
-                    + message("QSBRSP01")
+                    + message(FIXTURE_QSBRSP01_9848D404)
                     + "')")) {
           assertTrue(r.next());
           assertEquals(0, r.getInt(1));
@@ -780,7 +929,7 @@ final class QuestionMutationInboxInspectorTest {
   void referencesAndPhantomsStayLocked() throws Exception {
     try (var f = new Fixture()) {
       for (String route : ROUTES) {
-        seed(f, route, "0000", message(route), token(route));
+        seed(f, route, FIXTURE_0000_876EEFE0, message(route), token(route));
         try (var held = connection();
             var other = db.admin();
             var s =
@@ -796,7 +945,7 @@ final class QuestionMutationInboxInspectorTest {
           try (var os = other.createStatement()) {
             os.execute("set lock_timeout='50ms'");
             for (String change :
-                route.equals("NTCRSP01")
+                route.equals(FIXTURE_NTCRSP01_CFC2AD25)
                     ? List.of(
                         "update schubert.async_jobs set version=2",
                         "update schubert.notifications set updated_at=now()")
@@ -812,10 +961,10 @@ final class QuestionMutationInboxInspectorTest {
         }
         reset();
       }
-      for (String route : List.of("QDLRSP01", "NTCRSP01")) {
+      for (String route : List.of(FIXTURE_QDLRSP01_1746478A, FIXTURE_NTCRSP01_CFC2AD25)) {
         sql("delete from schubert.answers");
         sql("delete from schubert.notifications");
-        seed(f, route, "0000", message(route), token(route));
+        seed(f, route, FIXTURE_0000_876EEFE0, message(route), token(route));
         try (var held = connection();
             var other = db.admin();
             var s =
@@ -828,7 +977,7 @@ final class QuestionMutationInboxInspectorTest {
             assertTrue(rows.next());
           }
           String insert =
-              route.equals("QDLRSP01")
+              route.equals(FIXTURE_QDLRSP01_1746478A)
                   ? "insert into schubert.answers(question_id,body,answered_at,provider_type,created_at,updated_at) values(9,'',now(),'STUB',now(),now())"
                   : "insert into schubert.notifications(job_id,question_id,owner_user_id,notification_type,state,accepted_at,state_changed_at,created_at,updated_at) values(11,9,7,'ACCEPTED','CANCELLED',now(),now(),now(),now())";
           try (var os = other.createStatement()) {
@@ -850,7 +999,7 @@ final class QuestionMutationInboxInspectorTest {
     try (var f = new Fixture()) {
       for (String route : ROUTES) {
         for (long micros : new long[] {-1, 0, 1}) {
-          seed(f, route, "0000", message(route), token(route));
+          seed(f, route, FIXTURE_0000_876EEFE0, message(route), token(route));
           sql(
               "update schubert.request_inbox set expires_at=completed_at+interval '168 hours'+interval '"
                   + micros
@@ -860,12 +1009,12 @@ final class QuestionMutationInboxInspectorTest {
               f.service().inspectNext(RUN, Optional.empty()).outcome());
           sql("delete from schubert.request_inbox");
         }
-        seed(f, route, "0000", message(route), token(route));
+        seed(f, route, FIXTURE_0000_876EEFE0, message(route), token(route));
         sql("update schubert.request_inbox set expires_at='" + RUN.cutoff() + "'");
         assertEquals(
             InspectionStep.Outcome.END, f.service().inspectNext(RUN, Optional.empty()).outcome());
         reset();
-        seed(f, route, "0000", message(route), token(route));
+        seed(f, route, FIXTURE_0000_876EEFE0, message(route), token(route));
         var p = new MaintenanceJdbcProbe();
         p.columns.put("operation_token", null);
         assertEquals(
@@ -887,7 +1036,7 @@ final class QuestionMutationInboxInspectorTest {
         for (String fault :
             List.of(
                 "executeQuery", "getObject", "resultClose", "statementClose", "commit", "close")) {
-          seed(f, route, "0000", message(route), token(route));
+          seed(f, route, FIXTURE_0000_876EEFE0, message(route), token(route));
           var p = new MaintenanceJdbcProbe();
           p.selectedSql = "maintenance_delete_inbox";
           p.fault = fault;
@@ -906,7 +1055,12 @@ final class QuestionMutationInboxInspectorTest {
           assertEquals(1, end.inspected());
           reset();
         }
-      seed(f, "QDLRSP01", "0000", message("QDLRSP01"), token("QDLRSP01"));
+      seed(
+          f,
+          FIXTURE_QDLRSP01_1746478A,
+          FIXTURE_0000_876EEFE0,
+          message(FIXTURE_QDLRSP01_1746478A),
+          token(FIXTURE_QDLRSP01_1746478A));
       var p = new MaintenanceJdbcProbe();
       p.fault = "commit";
       p.commitAfter = true;
@@ -924,17 +1078,17 @@ final class QuestionMutationInboxInspectorTest {
   void durableMixedResume() throws Exception {
     try (var f = new Fixture()) {
       for (String route : ROUTES) {
-        seed(f, route, "0000", message(route), token(route));
+        seed(f, route, FIXTURE_0000_876EEFE0, message(route), token(route));
         seed(
             f,
             route,
-            "9001",
+            FIXTURE_9001_351F7309,
             new UUID(0, message(route).getLeastSignificantBits() + 1000),
             new UUID(0, token(route).getLeastSignificantBits() + 1000));
         seed(
             f,
             route,
-            "9001",
+            FIXTURE_9001_351F7309,
             new UUID(0, message(route).getLeastSignificantBits() + 2000),
             new UUID(0, token(route).getLeastSignificantBits() + 2000));
       }
@@ -964,12 +1118,13 @@ final class QuestionMutationInboxInspectorTest {
             () -> {
               try (var c = connection()) {
                 c.setAutoCommit(false);
-                return check(f, c, route, "0000");
+                return check(f, c, route, FIXTURE_0000_876EEFE0);
               }
             });
       }
       for (var future : executor.invokeAll(calls)) assertTrue(future.get());
-      for (String route : ROUTES) seed(f, route, "0000", message(route), token(route));
+      for (String route : ROUTES)
+        seed(f, route, FIXTURE_0000_876EEFE0, message(route), token(route));
       var cleanup = new ArrayList<Callable<InspectionProgress>>();
       for (int i = 0; i < 10; i++) cleanup.add(() -> f.service().runChunk(RUN, 10));
       int completed = 0;
@@ -1046,17 +1201,19 @@ final class QuestionMutationInboxInspectorTest {
   }
 
   static ResponseSnapshotIdentity id(String route) {
-    return ResponseSnapshotIdentity.authenticated(message(route), route, "001", 7);
+    return ResponseSnapshotIdentity.authenticated(message(route), route, FIXTURE_001_A3FEAA64, 7);
   }
 
   static InboxResultReference ref(String route) {
     return InboxResultReference.numeric(
-        route.equals("NTCRSP01") ? InboxResultReferenceType.JOB : InboxResultReferenceType.QUESTION,
-        route.equals("NTCRSP01") ? 11 : 9);
+        route.equals(FIXTURE_NTCRSP01_CFC2AD25)
+            ? InboxResultReferenceType.JOB
+            : InboxResultReferenceType.QUESTION,
+        route.equals(FIXTURE_NTCRSP01_CFC2AD25) ? 11 : 9);
   }
 
   static boolean success(String code) {
-    return Set.of("0000", "0200").contains(code);
+    return Set.of(FIXTURE_0000_876EEFE0, FIXTURE_0200_FC9DB3AC).contains(code);
   }
 
   static boolean check(Fixture f, Connection c, String route, String code) throws Exception {
@@ -1080,8 +1237,8 @@ final class QuestionMutationInboxInspectorTest {
         var bytes = new ByteArrayOutputStream();
         try (var out = new DataOutputStream(bytes)) {
           out.writeBytes("NKREF1");
-          out.writeByte(id.responseLayoutId().equals("NTCRSP01") ? 2 : 1);
-          out.writeLong(id.responseLayoutId().equals("NTCRSP01") ? 11 : 9);
+          out.writeByte(id.responseLayoutId().equals(FIXTURE_NTCRSP01_CFC2AD25) ? 2 : 1);
+          out.writeLong(id.responseLayoutId().equals(FIXTURE_NTCRSP01_CFC2AD25) ? 11 : 9);
           out.writeLong(token.getMostSignificantBits());
           out.writeLong(token.getLeastSignificantBits());
           out.writeInt(wire.length);
@@ -1112,14 +1269,16 @@ final class QuestionMutationInboxInspectorTest {
     var values = new HashMap<String, String>();
     if (success(code))
       switch (route) {
-        case "QSBRSP01" ->
+        case FIXTURE_QSBRSP01_9848D404 ->
             values.putAll(Map.of("受付ID", RECEIPT, "Question ID", "9", "受付日時", "20260909090000121"));
-        case "NTCRSP01" -> values.putAll(Map.of("更新後状態", "CANCELLED", "取消日時", "20260909090000122"));
+        case FIXTURE_NTCRSP01_CFC2AD25 ->
+            values.putAll(Map.of("更新後状態", "CANCELLED", "取消日時", "20260909090000122"));
         default -> values.put("削除日時", "20260909090000122");
       }
-    else if (route.equals("NTCRSP01") && code.equals("0107")) values.put("更新後状態", "PROCESSING");
+    else if (route.equals(FIXTURE_NTCRSP01_CFC2AD25) && code.equals(FIXTURE_0107_BAC582DD))
+      values.put("更新後状態", "PROCESSING");
     byte[] wire = NonAuthenticationInboxInspectorTest.wire(route, code, values, 0);
-    if (route.equals("QSBRSP01"))
+    if (route.equals(FIXTURE_QSBRSP01_9848D404))
       put(wire, 23, "A"); // UI236 async acceptance, not shared SS query.
     put(wire, 60, message.toString());
     put(wire, 96, "20260909090000123");
@@ -1132,7 +1291,7 @@ final class QuestionMutationInboxInspectorTest {
     put(wire, 0, "SCHBNK01");
     put(wire, 8, "001QWKREQ01001EI");
     put(wire, 24, WORK.toString());
-    put(wire, 60, message("QSBRSP01").toString());
+    put(wire, 60, message(FIXTURE_QSBRSP01_9848D404).toString());
     put(wire, 96, "20260909090000123");
     put(wire, 177, "0256");
     put(wire, 181, "000064");
@@ -1160,7 +1319,7 @@ final class QuestionMutationInboxInspectorTest {
 
   static void seed(Fixture f, String route, String code, UUID message, UUID token)
       throws Exception {
-    var id = ResponseSnapshotIdentity.authenticated(message, route, "001", 7);
+    var id = ResponseSnapshotIdentity.authenticated(message, route, FIXTURE_001_A3FEAA64, 7);
     var s = snapshot(f, id, code, golden(route, code, message), token);
     try (var c = db.admin();
         var p =
@@ -1172,7 +1331,7 @@ final class QuestionMutationInboxInspectorTest {
       p.setObject(4, token);
       p.setString(5, s.state().name());
       p.setString(6, s.resultReference().type().name());
-      p.setObject(7, success(code) ? (route.equals("NTCRSP01") ? 11L : 9L) : null);
+      p.setObject(7, success(code) ? (route.equals(FIXTURE_NTCRSP01_CFC2AD25) ? 11L : 9L) : null);
       p.setString(8, route);
       p.setBytes(9, s.responseSnapshot().orElseThrow().ciphertext());
       p.setObject(10, TIME.minusSeconds(1).atOffset(java.time.ZoneOffset.UTC));

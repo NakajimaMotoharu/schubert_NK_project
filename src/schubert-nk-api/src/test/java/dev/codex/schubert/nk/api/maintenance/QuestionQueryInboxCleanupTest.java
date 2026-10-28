@@ -44,11 +44,30 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** PT-DB-INBOX-161..168; SS324 12.8/331 3.10/PG-D-139. Independent UI byte vectors. */
 final class QuestionQueryInboxCleanupTest {
+  private static final String FIXTURE_NTSRSP01_420AB9AB = "NTSRSP01";
+  private static final String FIXTURE_NTDRSP01_4741FF2A = "NTDRSP01";
+  private static final String FIXTURE_QSSRSP01_DBC5C1ED = "QSSRSP01";
+  private static final String FIXTURE_QSDRSP01_3477C62F = "QSDRSP01";
+  private static final String FIXTURE_DELETE_FROM_SCHUBERT_REQUEST_INBOX_D18913CC =
+      "delete from schubert.request_inbox";
+  private static final String FIXTURE_0000_876EEFE0 = "0000";
+  private static final String FIXTURE_9001_351F7309 = "9001";
+  private static final String FIXTURE_0104_96E1973C = "0104";
+  private static final String FIXTURE_RECEIVED_35302D54 = "RECEIVED";
+  private static final String FIXTURE_UNANSWERED_8B420ADF = "UNANSWERED";
+  private static final String FIXTURE_COMPLETED_BA0AE16A = "COMPLETED";
+  private static final String FIXTURE_ERROR_F717E7D8 = "ERROR";
+  private static final String FIXTURE_ANSWERED_6CA66E97 = "ANSWERED";
+  private static final String FIXTURE_001_A3FEAA64 = "001";
   @TempDir static Path root;
   private static ApiLogDatabaseFixture db;
   private static String url;
   private static final List<String> LAYOUTS =
-      List.of("NTSRSP01", "NTDRSP01", "QSSRSP01", "QSDRSP01");
+      List.of(
+          FIXTURE_NTSRSP01_420AB9AB,
+          FIXTURE_NTDRSP01_4741FF2A,
+          FIXTURE_QSSRSP01_DBC5C1ED,
+          FIXTURE_QSDRSP01_3477C62F);
   private static final Instant TIME = Instant.parse("2026-09-09T00:00:00.123Z");
   private static final String JST = "20260909090000123";
   private static final String RECEIPT = "0".repeat(25) + "1";
@@ -73,7 +92,7 @@ final class QuestionQueryInboxCleanupTest {
   @BeforeEach
   void reset() throws SQLException {
     sql("delete from schubert.inbox_inspection_progress");
-    sql("delete from schubert.request_inbox");
+    sql(FIXTURE_DELETE_FROM_SCHUBERT_REQUEST_INBOX_D18913CC);
     sql("delete from schubert.batch_runs");
     sql("delete from schubert.app_users");
     sql(
@@ -97,8 +116,19 @@ final class QuestionQueryInboxCleanupTest {
       c.setAutoCommit(false);
       var structural = new InboxResponseInspector(f.base.codec);
       for (String layout : LAYOUTS) {
-        for (String code : List.of("0000", list(layout) ? "9001" : "0104")) {
-          byte[] wire = golden(layout, code, 0, "RECEIVED", false, "UNANSWERED", "");
+        for (String code :
+            List.of(
+                FIXTURE_0000_876EEFE0,
+                list(layout) ? FIXTURE_9001_351F7309 : FIXTURE_0104_96E1973C)) {
+          byte[] wire =
+              golden(
+                  layout,
+                  code,
+                  0,
+                  FIXTURE_RECEIVED_35302D54,
+                  false,
+                  FIXTURE_UNANSWERED_8B420ADF,
+                  "");
           var legacy = snapshot(f, layout, code, wire.clone(), NONE);
           assertTrue(structural.isStructurallyValid(identity(layout), legacy));
           assertTrue(f.inspector.isConsistent(c, identity(layout), legacy));
@@ -139,15 +169,34 @@ final class QuestionQueryInboxCleanupTest {
       for (String layout : LAYOUTS) {
         for (String code :
             List.of(
-                "0000", "0100", "0101", "0102", "0103", "0104", "0105", "0106", "0107", "0200",
-                "9000", "9001")) {
-          boolean expected = code.equals("0000") || code.equals(list(layout) ? "9001" : "0104");
+                FIXTURE_0000_876EEFE0,
+                "0100",
+                "0101",
+                "0102",
+                "0103",
+                FIXTURE_0104_96E1973C,
+                "0105",
+                "0106",
+                "0107",
+                "0200",
+                "9000",
+                FIXTURE_9001_351F7309)) {
+          boolean expected =
+              code.equals(FIXTURE_0000_876EEFE0)
+                  || code.equals(list(layout) ? FIXTURE_9001_351F7309 : FIXTURE_0104_96E1973C);
           var saved =
               snapshot(
                   f,
                   layout,
                   code,
-                  golden(layout, code, 0, "RECEIVED", false, "UNANSWERED", ""),
+                  golden(
+                      layout,
+                      code,
+                      0,
+                      FIXTURE_RECEIVED_35302D54,
+                      false,
+                      FIXTURE_UNANSWERED_8B420ADF,
+                      ""),
                   NONE);
           assertEquals(
               expected, f.inspector.isConsistent(c, identity(layout), saved), layout + "/" + code);
@@ -160,8 +209,15 @@ final class QuestionQueryInboxCleanupTest {
             snapshot(
                 f,
                 layout,
-                "0000",
-                golden(layout, "0000", 0, "RECEIVED", false, "UNANSWERED", ""),
+                FIXTURE_0000_876EEFE0,
+                golden(
+                    layout,
+                    FIXTURE_0000_876EEFE0,
+                    0,
+                    FIXTURE_RECEIVED_35302D54,
+                    false,
+                    FIXTURE_UNANSWERED_8B420ADF,
+                    ""),
                 NONE);
         assertTrue(f.inspector.isConsistent(c, identity(layout), saved));
       }
@@ -179,30 +235,54 @@ final class QuestionQueryInboxCleanupTest {
     try (var f = new Fixture();
         var c = connection()) {
       c.setAutoCommit(false);
-      for (String layout : List.of("NTSRSP01", "QSSRSP01"))
+      for (String layout : List.of(FIXTURE_NTSRSP01_420AB9AB, FIXTURE_QSSRSP01_DBC5C1ED))
         for (int count : new int[] {0, 1, 50})
           valid(
               f,
               c,
               layout,
-              golden(layout, "0000", count, "RECEIVED", false, "UNANSWERED", ""),
+              golden(
+                  layout,
+                  FIXTURE_0000_876EEFE0,
+                  count,
+                  FIXTURE_RECEIVED_35302D54,
+                  false,
+                  FIXTURE_UNANSWERED_8B420ADF,
+                  ""),
               true);
-      for (String state : List.of("RECEIVED", "PROCESSING", "COMPLETED", "ERROR", "CANCELLED")) {
+      for (String state :
+          List.of(
+              FIXTURE_RECEIVED_35302D54,
+              "PROCESSING",
+              FIXTURE_COMPLETED_BA0AE16A,
+              FIXTURE_ERROR_F717E7D8,
+              "CANCELLED")) {
         valid(
-            f, c, "NTSRSP01", golden("NTSRSP01", "0000", 1, state, false, "UNANSWERED", ""), true);
+            f,
+            c,
+            FIXTURE_NTSRSP01_420AB9AB,
+            golden(
+                FIXTURE_NTSRSP01_420AB9AB,
+                FIXTURE_0000_876EEFE0,
+                1,
+                state,
+                false,
+                FIXTURE_UNANSWERED_8B420ADF,
+                ""),
+            true);
         for (boolean deleted : List.of(false, true))
           valid(
               f,
               c,
-              "NTDRSP01",
+              FIXTURE_NTDRSP01_4741FF2A,
               golden(
-                  "NTDRSP01",
-                  "0000",
+                  FIXTURE_NTDRSP01_4741FF2A,
+                  FIXTURE_0000_876EEFE0,
                   0,
                   state,
                   deleted,
-                  "UNANSWERED",
-                  state.equals("COMPLETED") && !deleted ? "A".repeat(4096) : ""),
+                  FIXTURE_UNANSWERED_8B420ADF,
+                  state.equals(FIXTURE_COMPLETED_BA0AE16A) && !deleted ? "A".repeat(4096) : ""),
               true,
               state + "/deleted=" + deleted);
       }
@@ -211,35 +291,108 @@ final class QuestionQueryInboxCleanupTest {
       valid(
           f,
           c,
-          "NTDRSP01",
-          golden("NTDRSP01", "0000", 0, "COMPLETED", true, "UNANSWERED", "A".repeat(4096)),
+          FIXTURE_NTDRSP01_4741FF2A,
+          golden(
+              FIXTURE_NTDRSP01_4741FF2A,
+              FIXTURE_0000_876EEFE0,
+              0,
+              FIXTURE_COMPLETED_BA0AE16A,
+              true,
+              FIXTURE_UNANSWERED_8B420ADF,
+              "A".repeat(4096)),
           false,
           "deleted completed answer must be rejected by Inbox inspector");
       valid(
           f,
           c,
-          "NTDRSP01",
-          golden("NTDRSP01", "0000", 0, "COMPLETED", false, "UNANSWERED", ""),
+          FIXTURE_NTDRSP01_4741FF2A,
+          golden(
+              FIXTURE_NTDRSP01_4741FF2A,
+              FIXTURE_0000_876EEFE0,
+              0,
+              FIXTURE_COMPLETED_BA0AE16A,
+              false,
+              FIXTURE_UNANSWERED_8B420ADF,
+              ""),
           true);
-      for (String state : List.of("ANSWERED", "UNANSWERED", "ERROR")) {
-        valid(f, c, "QSSRSP01", golden("QSSRSP01", "0000", 1, "RECEIVED", false, state, ""), true);
-        valid(f, c, "QSDRSP01", golden("QSDRSP01", "0000", 0, "RECEIVED", false, state, ""), true);
+      for (String state :
+          List.of(FIXTURE_ANSWERED_6CA66E97, FIXTURE_UNANSWERED_8B420ADF, FIXTURE_ERROR_F717E7D8)) {
+        valid(
+            f,
+            c,
+            FIXTURE_QSSRSP01_DBC5C1ED,
+            golden(
+                FIXTURE_QSSRSP01_DBC5C1ED,
+                FIXTURE_0000_876EEFE0,
+                1,
+                FIXTURE_RECEIVED_35302D54,
+                false,
+                state,
+                ""),
+            true);
+        valid(
+            f,
+            c,
+            FIXTURE_QSDRSP01_3477C62F,
+            golden(
+                FIXTURE_QSDRSP01_3477C62F,
+                FIXTURE_0000_876EEFE0,
+                0,
+                FIXTURE_RECEIVED_35302D54,
+                false,
+                state,
+                ""),
+            true);
       }
       valid(
           f,
           c,
-          "QSDRSP01",
-          golden("QSDRSP01", "0000", 0, "RECEIVED", false, "ANSWERED", "A".repeat(4096)),
+          FIXTURE_QSDRSP01_3477C62F,
+          golden(
+              FIXTURE_QSDRSP01_3477C62F,
+              FIXTURE_0000_876EEFE0,
+              0,
+              FIXTURE_RECEIVED_35302D54,
+              false,
+              FIXTURE_ANSWERED_6CA66E97,
+              "A".repeat(4096)),
           true);
-      for (String layout : List.of("NTSRSP01", "QSSRSP01")) {
-        valid(f, c, layout, golden(layout, "0000", 51, "RECEIVED", false, "UNANSWERED", ""), false);
-        byte[] bytes = golden(layout, "0000", 0, "RECEIVED", false, "UNANSWERED", "");
+      for (String layout : List.of(FIXTURE_NTSRSP01_420AB9AB, FIXTURE_QSSRSP01_DBC5C1ED)) {
+        valid(
+            f,
+            c,
+            layout,
+            golden(
+                layout,
+                FIXTURE_0000_876EEFE0,
+                51,
+                FIXTURE_RECEIVED_35302D54,
+                false,
+                FIXTURE_UNANSWERED_8B420ADF,
+                ""),
+            false);
+        byte[] bytes =
+            golden(
+                layout,
+                FIXTURE_0000_876EEFE0,
+                0,
+                FIXTURE_RECEIVED_35302D54,
+                false,
+                FIXTURE_UNANSWERED_8B420ADF,
+                "");
         put(bytes, 262, "051");
         valid(f, c, layout, bytes, false);
       }
       for (String layout : LAYOUTS) {
         byte[] bytes =
-            golden(layout, "0000", list(layout) ? 1 : 0, "RECEIVED", false, "UNANSWERED", "");
+            golden(
+                layout,
+                FIXTURE_0000_876EEFE0,
+                list(layout) ? 1 : 0,
+                FIXTURE_RECEIVED_35302D54,
+                false,
+                FIXTURE_UNANSWERED_8B420ADF,
+                "");
         bytes[bytes.length - 1] = 'x';
         valid(f, c, layout, bytes, false);
       }
@@ -254,11 +407,27 @@ final class QuestionQueryInboxCleanupTest {
               Map.entry(435, "e\u0301"),
               Map.entry(352, JST),
               Map.entry(8597, "BAD"))) {
-        byte[] bytes = golden("NTDRSP01", "0000", 0, "RECEIVED", false, "UNANSWERED", "");
+        byte[] bytes =
+            golden(
+                FIXTURE_NTDRSP01_4741FF2A,
+                FIXTURE_0000_876EEFE0,
+                0,
+                FIXTURE_RECEIVED_35302D54,
+                false,
+                FIXTURE_UNANSWERED_8B420ADF,
+                "");
         put(bytes, change.getKey() - 1, change.getValue());
-        valid(f, c, "NTDRSP01", bytes, false);
+        valid(f, c, FIXTURE_NTDRSP01_4741FF2A, bytes, false);
       }
-      byte[] badUtf8 = golden("QSDRSP01", "0000", 0, "RECEIVED", false, "UNANSWERED", "");
+      byte[] badUtf8 =
+          golden(
+              FIXTURE_QSDRSP01_3477C62F,
+              FIXTURE_0000_876EEFE0,
+              0,
+              FIXTURE_RECEIVED_35302D54,
+              false,
+              FIXTURE_UNANSWERED_8B420ADF,
+              "");
       for (String error :
           List.of(
               "PROCESS_FAILED",
@@ -267,19 +436,42 @@ final class QuestionQueryInboxCleanupTest {
               "DATA_INTEGRITY",
               "PROTOCOL_ERROR",
               "UNKNOWN")) {
-        byte[] wire = golden("NTDRSP01", "0000", 0, "ERROR", false, "UNANSWERED", "");
+        byte[] wire =
+            golden(
+                FIXTURE_NTDRSP01_4741FF2A,
+                FIXTURE_0000_876EEFE0,
+                0,
+                FIXTURE_ERROR_F717E7D8,
+                false,
+                FIXTURE_UNANSWERED_8B420ADF,
+                "");
         Arrays.fill(wire, 8596, 8612, (byte) ' ');
         put(wire, 8596, error);
-        valid(f, c, "NTDRSP01", wire, !error.equals("UNKNOWN"));
+        valid(f, c, FIXTURE_NTDRSP01_4741FF2A, wire, !error.equals("UNKNOWN"));
       }
       badUtf8[370] = (byte) 0xff;
-      valid(f, c, "QSDRSP01", badUtf8, false);
-      byte[] missingDate = golden("QSDRSP01", "0000", 0, "RECEIVED", false, "ANSWERED", "");
+      valid(f, c, FIXTURE_QSDRSP01_3477C62F, badUtf8, false);
+      byte[] missingDate =
+          golden(
+              FIXTURE_QSDRSP01_3477C62F,
+              FIXTURE_0000_876EEFE0,
+              0,
+              FIXTURE_RECEIVED_35302D54,
+              false,
+              FIXTURE_ANSWERED_6CA66E97,
+              "");
       Arrays.fill(missingDate, 8579, 8596, (byte) ' ');
-      valid(f, c, "QSDRSP01", missingDate, false);
+      valid(f, c, FIXTURE_QSDRSP01_3477C62F, missingDate, false);
       byte[] unwantedAnswer =
-          golden("QSDRSP01", "0000", 0, "RECEIVED", false, "UNANSWERED", "not allowed");
-      valid(f, c, "QSDRSP01", unwantedAnswer, false);
+          golden(
+              FIXTURE_QSDRSP01_3477C62F,
+              FIXTURE_0000_876EEFE0,
+              0,
+              FIXTURE_RECEIVED_35302D54,
+              false,
+              FIXTURE_UNANSWERED_8B420ADF,
+              "not allowed");
+      valid(f, c, FIXTURE_QSDRSP01_3477C62F, unwantedAnswer, false);
     }
   }
 
@@ -292,8 +484,15 @@ final class QuestionQueryInboxCleanupTest {
             snapshot(
                 f,
                 layout,
-                "0000",
-                golden(layout, "0000", 0, "RECEIVED", false, "UNANSWERED", ""),
+                FIXTURE_0000_876EEFE0,
+                golden(
+                    layout,
+                    FIXTURE_0000_876EEFE0,
+                    0,
+                    FIXTURE_RECEIVED_35302D54,
+                    false,
+                    FIXTURE_UNANSWERED_8B420ADF,
+                    ""),
                 NONE);
         assertFalse(f.inspector.isConsistent(c, identity(layout), saved));
         c.setAutoCommit(false);
@@ -305,10 +504,14 @@ final class QuestionQueryInboxCleanupTest {
             NullPointerException.class, () -> f.inspector.isConsistent(c, identity(layout), null));
         assertFalse(
             f.inspector.isConsistent(
-                c, ResponseSnapshotIdentity.anonymous(MESSAGE, layout, "001"), saved));
+                c,
+                ResponseSnapshotIdentity.anonymous(MESSAGE, layout, FIXTURE_001_A3FEAA64),
+                saved));
         assertFalse(
             f.inspector.isConsistent(
-                c, ResponseSnapshotIdentity.authenticated(MESSAGE, layout, "001", 9), saved));
+                c,
+                ResponseSnapshotIdentity.authenticated(MESSAGE, layout, FIXTURE_001_A3FEAA64, 9),
+                saved));
         assertFalse(
             f.inspector.isConsistent(
                 c, ResponseSnapshotIdentity.authenticated(MESSAGE, layout, "002", 7), saved));
@@ -333,8 +536,17 @@ final class QuestionQueryInboxCleanupTest {
             f.inspector.isConsistent(
                 c,
                 identity(layout),
-                new InboxCompletion(saved.state(), NONE, layout, "001", Optional.empty(), TIME)));
-        byte[] bytes = golden(layout, "0000", 0, "RECEIVED", false, "UNANSWERED", "");
+                new InboxCompletion(
+                    saved.state(), NONE, layout, FIXTURE_001_A3FEAA64, Optional.empty(), TIME)));
+        byte[] bytes =
+            golden(
+                layout,
+                FIXTURE_0000_876EEFE0,
+                0,
+                FIXTURE_RECEIVED_35302D54,
+                false,
+                FIXTURE_UNANSWERED_8B420ADF,
+                "");
         put(bytes, 60, new UUID(0, 99).toString());
         valid(f, c, layout, bytes, false);
         var probe = new MaintenanceJdbcProbe();
@@ -350,7 +562,10 @@ final class QuestionQueryInboxCleanupTest {
   void validRowsDeleteAndRetainExactMetadata() throws Exception {
     try (var f = new Fixture()) {
       for (String layout : LAYOUTS) {
-        for (String code : List.of("0000", list(layout) ? "9001" : "0104")) {
+        for (String code :
+            List.of(
+                FIXTURE_0000_876EEFE0,
+                list(layout) ? FIXTURE_9001_351F7309 : FIXTURE_0104_96E1973C)) {
           seed(f, 101, layout, code);
           assertEquals(
               InspectionStep.Outcome.DELETED,
@@ -359,7 +574,7 @@ final class QuestionQueryInboxCleanupTest {
           assertEquals(
               InspectionStep.Outcome.END, f.service().inspectNext(RUN, Optional.empty()).outcome());
         }
-        seed(f, 101, layout, "0000");
+        seed(f, 101, layout, FIXTURE_0000_876EEFE0);
         try (var c = db.admin();
             var s = c.createStatement()) {
           assertEquals(
@@ -394,8 +609,8 @@ final class QuestionQueryInboxCleanupTest {
                 "response_key_version='unknown'",
                 "response_body_encrypted=decode(repeat('00',30),'hex')",
                 "response_body_encrypted=null,response_key_version=null")) {
-          sql("delete from schubert.request_inbox");
-          seed(f, 101, layout, "0000");
+          sql(FIXTURE_DELETE_FROM_SCHUBERT_REQUEST_INBOX_D18913CC);
+          seed(f, 101, layout, FIXTURE_0000_876EEFE0);
           sql("update schubert.request_inbox set " + change);
           assertEquals(
               InspectionStep.Outcome.PROTECTED,
@@ -403,7 +618,7 @@ final class QuestionQueryInboxCleanupTest {
               layout + "/" + change);
           assertEquals("1", count());
         }
-        sql("delete from schubert.request_inbox");
+        sql(FIXTURE_DELETE_FROM_SCHUBERT_REQUEST_INBOX_D18913CC);
       }
       assertEquals(
           "Learner/USER/ACTIVE/0",
@@ -424,8 +639,8 @@ final class QuestionQueryInboxCleanupTest {
                 "2026-09-17T00:00:00.122999Z",
                 "2026-09-17T00:00:00.123Z",
                 "2026-09-17T00:00:00.123001Z")) {
-          sql("delete from schubert.request_inbox");
-          seed(f, 101, layout, "0000");
+          sql(FIXTURE_DELETE_FROM_SCHUBERT_REQUEST_INBOX_D18913CC);
+          seed(f, 101, layout, FIXTURE_0000_876EEFE0);
           sql("update schubert.request_inbox set expires_at='" + expiry + "'::timestamptz");
           var expected =
               Map.of(
@@ -443,8 +658,8 @@ final class QuestionQueryInboxCleanupTest {
           assertEquals(expected == InspectionStep.Outcome.DELETED ? "0" : "1", count());
         }
       }
-      sql("delete from schubert.request_inbox");
-      seed(f, 101, "NTSRSP01", "0000");
+      sql(FIXTURE_DELETE_FROM_SCHUBERT_REQUEST_INBOX_D18913CC);
+      seed(f, 101, FIXTURE_NTSRSP01_420AB9AB, FIXTURE_0000_876EEFE0);
       sql("update schubert.batch_runs set status='FAILED' where step='BACKUP_DB'");
       assertThrows(
           InboxMaintenanceException.class, () -> f.service().inspectNext(RUN, Optional.empty()));
@@ -453,7 +668,7 @@ final class QuestionQueryInboxCleanupTest {
       assertThrows(
           InboxMaintenanceException.class, () -> f.service().inspectNext(RUN, Optional.empty()));
       reset();
-      seed(f, 101, "QSDRSP01", "0000");
+      seed(f, 101, FIXTURE_QSDRSP01_3477C62F, FIXTURE_0000_876EEFE0);
       try (var lock = db.api();
           var s = lock.createStatement()) {
         lock.setAutoCommit(false);
@@ -491,8 +706,8 @@ final class QuestionQueryInboxCleanupTest {
         for (String fault :
             List.of(
                 "executeQuery", "getObject", "resultClose", "statementClose", "commit", "close")) {
-          sql("delete from schubert.request_inbox");
-          seed(f, 101, layout, "0000");
+          sql(FIXTURE_DELETE_FROM_SCHUBERT_REQUEST_INBOX_D18913CC);
+          seed(f, 101, layout, FIXTURE_0000_876EEFE0);
           var p = new MaintenanceJdbcProbe();
           p.selectedSql = "maintenance_delete_inbox";
           p.fault = fault;
@@ -512,7 +727,7 @@ final class QuestionQueryInboxCleanupTest {
               fault.equals("close") ? InspectionStep.Outcome.END : InspectionStep.Outcome.DELETED,
               f.service().inspectNext(RUN, Optional.empty()).outcome());
         }
-      seed(f, 101, "NTDRSP01", "0000");
+      seed(f, 101, FIXTURE_NTDRSP01_4741FF2A, FIXTURE_0000_876EEFE0);
       var p = new MaintenanceJdbcProbe();
       p.fault = "commit";
       p.commitAfter = true;
@@ -540,8 +755,15 @@ final class QuestionQueryInboxCleanupTest {
             snapshot(
                 f,
                 layout,
-                "0000",
-                golden(layout, "0000", 0, "RECEIVED", false, "UNANSWERED", ""),
+                FIXTURE_0000_876EEFE0,
+                golden(
+                    layout,
+                    FIXTURE_0000_876EEFE0,
+                    0,
+                    FIXTURE_RECEIVED_35302D54,
+                    false,
+                    FIXTURE_UNANSWERED_8B420ADF,
+                    ""),
                 NONE));
       var tasks = new ArrayList<Callable<Boolean>>();
       for (int i = 0; i < 100; i++) {
@@ -561,15 +783,15 @@ final class QuestionQueryInboxCleanupTest {
       for (var result : results) assertTrue(result.get());
       long seq = 101;
       for (String layout : LAYOUTS) {
-        seed(f, seq++, layout, "0000");
-        seed(f, seq, layout, "0000");
+        seed(f, seq++, layout, FIXTURE_0000_876EEFE0);
+        seed(f, seq, layout, FIXTURE_0000_876EEFE0);
         sql(
             "update schubert.request_inbox set response_key_version='unknown' where message_id='"
                 + new UUID(0, seq++)
                 + "'");
       }
       for (String prefix : List.of("QSB", "NTC", "QDL")) {
-        seed(f, seq, "QSDRSP01", "0000");
+        seed(f, seq, FIXTURE_QSDRSP01_3477C62F, FIXTURE_0000_876EEFE0);
         sql(
             "update schubert.request_inbox set request_layout_id='"
                 + prefix
@@ -641,11 +863,11 @@ final class QuestionQueryInboxCleanupTest {
   }
 
   private static boolean list(String layout) {
-    return layout.equals("NTSRSP01") || layout.equals("QSSRSP01");
+    return layout.equals(FIXTURE_NTSRSP01_420AB9AB) || layout.equals(FIXTURE_QSSRSP01_DBC5C1ED);
   }
 
   private static ResponseSnapshotIdentity identity(String layout) {
-    return ResponseSnapshotIdentity.authenticated(MESSAGE, layout, "001", 7);
+    return ResponseSnapshotIdentity.authenticated(MESSAGE, layout, FIXTURE_001_A3FEAA64, 7);
   }
 
   private static void valid(Fixture f, Connection c, String layout, byte[] bytes, boolean expected)
@@ -658,7 +880,8 @@ final class QuestionQueryInboxCleanupTest {
       throws Exception {
     assertEquals(
         expected,
-        f.inspector.isConsistent(c, identity(layout), snapshot(f, layout, "0000", bytes, NONE)),
+        f.inspector.isConsistent(
+            c, identity(layout), snapshot(f, layout, FIXTURE_0000_876EEFE0, bytes, NONE)),
         caseLabel);
   }
 
@@ -670,11 +893,12 @@ final class QuestionQueryInboxCleanupTest {
           f.base.saved(
               identity(layout),
               wire,
-              Set.of("0000", "0200").contains(code)
+              Set.of(FIXTURE_0000_876EEFE0, "0200").contains(code)
                   ? InboxCompletionState.COMPLETED
                   : InboxCompletionState.ERROR,
               TIME);
-      return new InboxCompletion(s.state(), ref, layout, "001", s.responseSnapshot(), TIME);
+      return new InboxCompletion(
+          s.state(), ref, layout, FIXTURE_001_A3FEAA64, s.responseSnapshot(), TIME);
     } finally {
       Arrays.fill(wire, (byte) 0);
     }
@@ -691,7 +915,7 @@ final class QuestionQueryInboxCleanupTest {
       String answer)
       throws Exception {
     var values = new HashMap<String, String>();
-    if (Set.of("0000", "0200").contains(code)) {
+    if (Set.of(FIXTURE_0000_876EEFE0, "0200").contains(code)) {
       if (list(layout)) {
         values.putAll(
             Map.of(
@@ -716,22 +940,23 @@ final class QuestionQueryInboxCleanupTest {
                 "Synthetic question",
                 "回答本文",
                 answer));
-        if (layout.equals("NTDRSP01")) {
+        if (layout.equals(FIXTURE_NTDRSP01_4741FF2A)) {
           values.putAll(
               Map.of(
                   "Notification ID",
                   "11",
                   "通知区分",
-                  state.equals("COMPLETED")
-                      ? "COMPLETED"
-                      : state.equals("ERROR") ? "ERROR" : "ACCEPTED",
+                  state.equals(FIXTURE_COMPLETED_BA0AE16A)
+                      ? FIXTURE_COMPLETED_BA0AE16A
+                      : state.equals(FIXTURE_ERROR_F717E7D8) ? FIXTURE_ERROR_F717E7D8 : "ACCEPTED",
                   "内部状態",
                   state,
                   "質問削除済み",
                   deleted ? "1" : "0"));
-          if (Set.of("PROCESSING", "COMPLETED", "ERROR").contains(state)) values.put("処理開始日時", JST);
-          if (state.equals("COMPLETED")) values.put("処理完了日時", JST);
-          if (state.equals("ERROR"))
+          if (Set.of("PROCESSING", FIXTURE_COMPLETED_BA0AE16A, FIXTURE_ERROR_F717E7D8)
+              .contains(state)) values.put("処理開始日時", JST);
+          if (state.equals(FIXTURE_COMPLETED_BA0AE16A)) values.put("処理完了日時", JST);
+          if (state.equals(FIXTURE_ERROR_F717E7D8))
             values.putAll(
                 Map.of(
                     "Error日時",
@@ -747,23 +972,25 @@ final class QuestionQueryInboxCleanupTest {
           }
         } else {
           values.putAll(Map.of("Username", "HistoricalOwner", "回答状態", answerState));
-          if (answerState.equals("ANSWERED")) values.put("回答日時", JST);
+          if (answerState.equals(FIXTURE_ANSWERED_6CA66E97)) values.put("回答日時", JST);
         }
       }
     }
     byte[] wire = NonAuthenticationInboxInspectorTest.wire(layout, code, values, count);
     put(wire, 60, MESSAGE.toString());
     for (int i = 0; i < count; i++) {
-      int length = layout.equals("NTSRSP01") ? 624 : 672;
+      int length = layout.equals(FIXTURE_NTSRSP01_420AB9AB) ? 624 : 672;
       int base = 304 + i * length;
       Arrays.fill(wire, base, base + length, (byte) ' ');
       put(wire, base, String.format(Locale.ROOT, "%012d", count - i));
       put(wire, base + 12, RECEIPT);
-      if (layout.equals("NTSRSP01")) {
+      if (layout.equals(FIXTURE_NTSRSP01_420AB9AB)) {
         put(
             wire,
             base + 38,
-            state.equals("COMPLETED") ? "COMPLETED" : state.equals("ERROR") ? "ERROR" : "ACCEPTED");
+            state.equals(FIXTURE_COMPLETED_BA0AE16A)
+                ? FIXTURE_COMPLETED_BA0AE16A
+                : state.equals(FIXTURE_ERROR_F717E7D8) ? FIXTURE_ERROR_F717E7D8 : "ACCEPTED");
         put(wire, base + 50, state);
         put(wire, base + 62, JST);
         put(wire, base + 79, JST);
@@ -774,7 +1001,7 @@ final class QuestionQueryInboxCleanupTest {
         put(wire, base + 102, "Synthetic summary");
         put(wire, base + 614, answerState);
         put(wire, base + 626, JST);
-        if (answerState.equals("ANSWERED")) put(wire, base + 643, JST);
+        if (answerState.equals(FIXTURE_ANSWERED_6CA66E97)) put(wire, base + 643, JST);
       }
     }
     return wire;
@@ -787,8 +1014,9 @@ final class QuestionQueryInboxCleanupTest {
 
   private static void seed(Fixture f, long sequence, String layout, String code) throws Exception {
     UUID message = new UUID(0, sequence);
-    var id = ResponseSnapshotIdentity.authenticated(message, layout, "001", 7);
-    byte[] wire = golden(layout, code, 0, "RECEIVED", false, "UNANSWERED", "");
+    var id = ResponseSnapshotIdentity.authenticated(message, layout, FIXTURE_001_A3FEAA64, 7);
+    byte[] wire =
+        golden(layout, code, 0, FIXTURE_RECEIVED_35302D54, false, FIXTURE_UNANSWERED_8B420ADF, "");
     put(wire, 60, message.toString());
     InboxCompletion saved;
     try {
@@ -796,7 +1024,9 @@ final class QuestionQueryInboxCleanupTest {
           f.base.saved(
               id,
               wire,
-              code.equals("0000") ? InboxCompletionState.COMPLETED : InboxCompletionState.ERROR,
+              code.equals(FIXTURE_0000_876EEFE0)
+                  ? InboxCompletionState.COMPLETED
+                  : InboxCompletionState.ERROR,
               TIME);
     } finally {
       Arrays.fill(wire, (byte) 0);

@@ -38,7 +38,11 @@ import org.junit.jupiter.api.Test;
 
 /** PT-DB-INBOX-169..176; SS352 11.2.1/SSC-052/PG-D-140; no real credential or business DB. */
 final class ResultBoundResponseSnapshotCodecTest {
-  private static final List<String> ROUTES = List.of("QSBRSP01", "NTCRSP01", "QDLRSP01");
+  private static final String FIXTURE_NTCRSP01_CFC2AD25 = "NTCRSP01";
+  private static final String FIXTURE_QDLRSP01_1746478A = "QDLRSP01";
+  private static final String FIXTURE_001_A3FEAA64 = "001";
+  private static final List<String> ROUTES =
+      List.of("QSBRSP01", FIXTURE_NTCRSP01_CFC2AD25, FIXTURE_QDLRSP01_1746478A);
   private static final UUID MESSAGE = new UUID(0, 1);
   private static final UUID TOKEN = new UUID(0, 5);
   private static final Instant TIME = Instant.parse("2026-09-09T00:00:00.123Z");
@@ -58,7 +62,8 @@ final class ResultBoundResponseSnapshotCodecTest {
             assertArrayEquals(
                 wire, codec.decrypt(id(route), ref(route, target), token, independentlySaved));
           }
-      byte[] literal = plain("QDLRSP01", 9, TOKEN, wire("QDLRSP01", 0));
+      byte[] literal =
+          plain(FIXTURE_QDLRSP01_1746478A, 9, TOKEN, wire(FIXTURE_QDLRSP01_1746478A, 0));
       assertEquals(
           "4e4b524546310100000000000000090000000000000000000000000000000500000118",
           HexFormat.of().formatHex(Arrays.copyOf(literal, 35)));
@@ -91,9 +96,10 @@ final class ResultBoundResponseSnapshotCodecTest {
             NullPointerException.class, () -> codec.decrypt(identity, reference, TOKEN, null));
         for (var invalid :
             List.of(
-                ResponseSnapshotIdentity.anonymous(MESSAGE, route, "001"),
+                ResponseSnapshotIdentity.anonymous(MESSAGE, route, FIXTURE_001_A3FEAA64),
                 ResponseSnapshotIdentity.authenticated(MESSAGE, route, "002", 7),
-                ResponseSnapshotIdentity.authenticated(MESSAGE, "GAMRSP01", "001", 7))) {
+                ResponseSnapshotIdentity.authenticated(
+                    MESSAGE, "GAMRSP01", FIXTURE_001_A3FEAA64, 7))) {
           assertThrows(
               IllegalArgumentException.class, () -> codec.encrypt(invalid, reference, TOKEN, wire));
           assertThrows(
@@ -107,7 +113,7 @@ final class ResultBoundResponseSnapshotCodecTest {
                 InboxResultReference.numeric(InboxResultReferenceType.USER, 9),
                 InboxResultReference.numeric(InboxResultReferenceType.SCENARIO_FILE, 9),
                 InboxResultReference.numeric(
-                    route.equals("NTCRSP01")
+                    route.equals(FIXTURE_NTCRSP01_CFC2AD25)
                         ? InboxResultReferenceType.QUESTION
                         : InboxResultReferenceType.JOB,
                     9))) {
@@ -186,28 +192,46 @@ final class ResultBoundResponseSnapshotCodecTest {
           var unknown = new ResponseSnapshotCodec("v2", newKey, null, null)) {
         var codec = new ResultBoundResponseSnapshotCodec(f.codec);
         var snapshot =
-            codec.encrypt(id("QDLRSP01"), ref("QDLRSP01", 9), TOKEN, wire("QDLRSP01", 7));
+            codec.encrypt(
+                id(FIXTURE_QDLRSP01_1746478A),
+                ref(FIXTURE_QDLRSP01_1746478A, 9),
+                TOKEN,
+                wire(FIXTURE_QDLRSP01_1746478A, 7));
         assertArrayEquals(
-            wire("QDLRSP01", 7),
+            wire(FIXTURE_QDLRSP01_1746478A, 7),
             new ResultBoundResponseSnapshotCodec(rotated)
-                .decrypt(id("QDLRSP01"), ref("QDLRSP01", 9), TOKEN, snapshot));
+                .decrypt(
+                    id(FIXTURE_QDLRSP01_1746478A),
+                    ref(FIXTURE_QDLRSP01_1746478A, 9),
+                    TOKEN,
+                    snapshot));
         assertThrows(
             ResponseSnapshotException.class,
             () ->
                 new ResultBoundResponseSnapshotCodec(unrelated)
-                    .decrypt(id("QDLRSP01"), ref("QDLRSP01", 9), TOKEN, snapshot));
+                    .decrypt(
+                        id(FIXTURE_QDLRSP01_1746478A),
+                        ref(FIXTURE_QDLRSP01_1746478A, 9),
+                        TOKEN,
+                        snapshot));
         assertEquals(
             ResponseSnapshotException.Reason.KEY_UNAVAILABLE,
             assertThrows(
                     ResponseSnapshotException.class,
                     () ->
                         new ResultBoundResponseSnapshotCodec(unknown)
-                            .decrypt(id("QDLRSP01"), ref("QDLRSP01", 9), TOKEN, snapshot))
+                            .decrypt(
+                                id(FIXTURE_QDLRSP01_1746478A),
+                                ref(FIXTURE_QDLRSP01_1746478A, 9),
+                                TOKEN,
+                                snapshot))
                 .reason());
         for (var altered :
             List.of(
-                ResponseSnapshotIdentity.authenticated(new UUID(0, 2), "QDLRSP01", "001", 7),
-                ResponseSnapshotIdentity.authenticated(MESSAGE, "QDLRSP01", "001", 8),
+                ResponseSnapshotIdentity.authenticated(
+                    new UUID(0, 2), FIXTURE_QDLRSP01_1746478A, FIXTURE_001_A3FEAA64, 7),
+                ResponseSnapshotIdentity.authenticated(
+                    MESSAGE, FIXTURE_QDLRSP01_1746478A, FIXTURE_001_A3FEAA64, 8),
                 id("QSBRSP01"))) {
           assertThrows(
               ResponseSnapshotException.class,
@@ -219,7 +243,12 @@ final class ResultBoundResponseSnapshotCodecTest {
           var changed = new EncryptedResponseSnapshot("v1", bytes);
           assertThrows(
               ResponseSnapshotException.class,
-              () -> codec.decrypt(id("QDLRSP01"), ref("QDLRSP01", 9), TOKEN, changed));
+              () ->
+                  codec.decrypt(
+                      id(FIXTURE_QDLRSP01_1746478A),
+                      ref(FIXTURE_QDLRSP01_1746478A, 9),
+                      TOKEN,
+                      changed));
         }
       } finally {
         Arrays.fill(newKey, (byte) 0);
@@ -231,7 +260,7 @@ final class ResultBoundResponseSnapshotCodecTest {
   void borrowedOwnershipAndRedaction() throws Exception {
     try (var f = new InboxResponseInspectorTest.Fixture()) {
       var codec = new ResultBoundResponseSnapshotCodec(f.codec);
-      String route = "NTCRSP01";
+      String route = FIXTURE_NTCRSP01_CFC2AD25;
       byte[] input = wire(route, 6);
       byte[] before = input.clone();
       var snapshot = codec.encrypt(id(route), ref(route, 9), TOKEN, input);
@@ -267,7 +296,8 @@ final class ResultBoundResponseSnapshotCodecTest {
         tasks.add(
             () -> {
               var identity =
-                  ResponseSnapshotIdentity.authenticated(new UUID(0, n), route, "001", n);
+                  ResponseSnapshotIdentity.authenticated(
+                      new UUID(0, n), route, FIXTURE_001_A3FEAA64, n);
               var token = new UUID(1, n);
               byte[] wire = wire(route, n);
               var snapshot = codec.encrypt(identity, ref(route, n), token, wire);
@@ -316,17 +346,20 @@ final class ResultBoundResponseSnapshotCodecTest {
   }
 
   private static ResponseSnapshotIdentity id(String route) {
-    return ResponseSnapshotIdentity.authenticated(MESSAGE, route, "001", 7);
+    return ResponseSnapshotIdentity.authenticated(MESSAGE, route, FIXTURE_001_A3FEAA64, 7);
   }
 
   private static InboxResultReference ref(String route, long value) {
     return InboxResultReference.numeric(
-        route.equals("NTCRSP01") ? InboxResultReferenceType.JOB : InboxResultReferenceType.QUESTION,
+        route.equals(FIXTURE_NTCRSP01_CFC2AD25)
+            ? InboxResultReferenceType.JOB
+            : InboxResultReferenceType.QUESTION,
         value);
   }
 
   private static int length(String route) {
-    return Map.of("QSBRSP01", 320, "NTCRSP01", 288, "QDLRSP01", 280).get(route);
+    return Map.of("QSBRSP01", 320, FIXTURE_NTCRSP01_CFC2AD25, 288, FIXTURE_QDLRSP01_1746478A, 280)
+        .get(route);
   }
 
   private static byte[] wire(String route, int value) {
@@ -340,7 +373,7 @@ final class ResultBoundResponseSnapshotCodecTest {
     var bytes = new ByteArrayOutputStream();
     try (var out = new DataOutputStream(bytes)) {
       out.writeBytes("NKREF1");
-      out.writeByte(route.equals("NTCRSP01") ? 2 : 1);
+      out.writeByte(route.equals(FIXTURE_NTCRSP01_CFC2AD25) ? 2 : 1);
       out.writeLong(target);
       out.writeLong(token.getMostSignificantBits());
       out.writeLong(token.getLeastSignificantBits());

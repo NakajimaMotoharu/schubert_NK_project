@@ -29,6 +29,11 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** PT-DB-INBOX-153..160; BUG-104/SSC-051/PG-D-136; independent SQL/retention/lock oracles. */
 final class LogCleanupProgressBoundaryTest {
+  private static final String FIXTURE_LOGS_A0526482 = "logs";
+  private static final String FIXTURE_LOG_PROGRESS_05F336FC = "log_progress";
+  private static final String FIXTURE_NULL_F072CBEC = "null";
+  private static final String FIXTURE_INSERT_INTO_11535B2F = "insert into ";
+  private static final String FIXTURE_42501_719DF123 = "42501";
   @TempDir static Path root;
   private static ApiLogDatabaseFixture db;
   private static String url;
@@ -41,10 +46,10 @@ final class LogCleanupProgressBoundaryTest {
           "questions",
           "sessions",
           "message_stores",
-          "logs",
+          FIXTURE_LOGS_A0526482,
           "batch_runs",
           "inbox_progress",
-          "log_progress");
+          FIXTURE_LOG_PROGRESS_05F336FC);
 
   @BeforeAll
   static void start() throws Exception {
@@ -87,20 +92,20 @@ final class LogCleanupProgressBoundaryTest {
       sql(
           c,
           Files.readString(migrations().resolve("V013__cleanup_backup_and_retention_guards.sql")));
-      assertEquals("2|0|2|OK", call(c, "logs", 2));
-      assertEquals("2|0|2|OK", call(c, "logs", 2));
+      assertEquals("2|0|2|OK", call(c, FIXTURE_LOGS_A0526482, 2));
+      assertEquals("2|0|2|OK", call(c, FIXTURE_LOGS_A0526482, 2));
       assertEquals("1,2,3", ids(c));
       c.rollback(save);
       c.rollback();
     }
     try (var c = batch()) {
       assertEquals("0|0|0|false", read(c));
-      assertEquals("2|0|2|OK", call(c, "logs", 2));
+      assertEquals("2|0|2|OK", call(c, FIXTURE_LOGS_A0526482, 2));
       assertEquals("2|0|2|false", read(c));
-      assertEquals("1|1|0|OK", call(c, "logs", 2));
-      assertEquals("0|0|0|OK", call(c, "logs", 2));
+      assertEquals("1|1|0|OK", call(c, FIXTURE_LOGS_A0526482, 2));
+      assertEquals("0|0|0|OK", call(c, FIXTURE_LOGS_A0526482, 2));
       assertEquals("3|1|2|true", read(c));
-      assertEquals("0|0|0|OK", call(c, "logs", 2));
+      assertEquals("0|0|0|OK", call(c, FIXTURE_LOGS_A0526482, 2));
     }
     try (var c = db.admin()) {
       assertEquals("1,2", ids(c));
@@ -112,28 +117,29 @@ final class LogCleanupProgressBoundaryTest {
     try (var c = db.admin()) {
       log(c, 2, "'2026-06-18'", "'2026-06-19 00:00:00.000001+00'");
       log(c, 1, "'2026-06-18'", "'2026-06-19 00:00:00+00'");
-      log(c, 3, "'2026-06-18 23:59:59.999999+00'", "null");
-      log(c, 4, "'2026-06-19 00:00:00+00'", "null");
-      log(c, 5, "'2026-06-19 00:00:00.000001+00'", "null");
+      log(c, 3, "'2026-06-18 23:59:59.999999+00'", FIXTURE_NULL_F072CBEC);
+      log(c, 4, "'2026-06-19 00:00:00+00'", FIXTURE_NULL_F072CBEC);
+      log(c, 5, "'2026-06-19 00:00:00.000001+00'", FIXTURE_NULL_F072CBEC);
     }
     try (var c = batch();
         var admin = db.admin()) {
-      assertEquals("1|1|0|OK", call(c, "logs", 1));
+      assertEquals("1|1|0|OK", call(c, FIXTURE_LOGS_A0526482, 1));
       assertEquals("1", cursor(admin));
-      assertEquals("1|0|1|OK", call(c, "logs", 1));
+      assertEquals("1|0|1|OK", call(c, FIXTURE_LOGS_A0526482, 1));
       assertEquals("2", cursor(admin));
-      assertEquals("1|1|0|OK", call(c, "logs", 10000));
-      assertEquals("0|0|0|OK", call(c, "logs", 10000));
+      assertEquals("1|1|0|OK", call(c, FIXTURE_LOGS_A0526482, 10000));
+      assertEquals("0|0|0|OK", call(c, FIXTURE_LOGS_A0526482, 10000));
       assertEquals("3|2|1|true", read(c));
       assertEquals("2,4,5", ids(admin));
       // New old log after END must wait for a new maintenance run, not rewind this one.
-      log(admin, 6, "'2026-06-01'", "null");
-      assertEquals("0|0|0|OK", call(c, "logs", 1));
+      log(admin, 6, "'2026-06-01'", FIXTURE_NULL_F072CBEC);
+      assertEquals("0|0|0|OK", call(c, FIXTURE_LOGS_A0526482, 1));
       assertEquals("2,4,5,6", ids(admin));
       String next = new UUID(0, 95).toString();
       sql(admin, "update schubert.batch_runs set run_id='" + next + "'");
       assertEquals(
-          "2|1|1|OK", scalar(c, projection("logs") + "('" + next + "'," + START + ",10000)"));
+          "2|1|1|OK",
+          scalar(c, projection(FIXTURE_LOGS_A0526482) + "('" + next + "'," + START + ",10000)"));
       assertEquals("2,4,5", ids(admin));
     }
   }
@@ -144,30 +150,30 @@ final class LogCleanupProgressBoundaryTest {
     try (var c = batch();
         var admin = db.admin()) {
       c.setAutoCommit(false);
-      assertEquals("3|1|2|OK", call(c, "logs", 3));
+      assertEquals("3|1|2|OK", call(c, FIXTURE_LOGS_A0526482, 3));
       assertEquals("3|1|2|false", read(c));
       assertEquals("1,2,3", ids(admin));
       c.rollback();
       assertEquals("0|0|0|false", read(c));
       assertEquals("1,2,3", ids(admin));
       var save = c.setSavepoint();
-      assertEquals("3|1|2|OK", call(c, "logs", 3));
+      assertEquals("3|1|2|OK", call(c, FIXTURE_LOGS_A0526482, 3));
       c.rollback(save);
       assertEquals("0|0|0|false", read(c));
-      assertEquals("3|1|2|OK", call(c, "logs", 3));
+      assertEquals("3|1|2|OK", call(c, FIXTURE_LOGS_A0526482, 3));
       c.commit();
       try (var resumed = batch()) {
         assertEquals("3|1|2|false", read(resumed));
-        assertEquals("0|0|0|OK", call(resumed, "logs", 1));
+        assertEquals("0|0|0|OK", call(resumed, FIXTURE_LOGS_A0526482, 1));
         assertEquals("3|1|2|true", read(resumed));
       }
     }
     reset();
     try (var c = db.admin()) {
-      log(c, 1, "'2026-06-02'", "null");
+      log(c, 1, "'2026-06-02'", FIXTURE_NULL_F072CBEC);
       sql(
           c,
-          "insert into "
+          FIXTURE_INSERT_INTO_11535B2F
               + TABLE
               + "(run_id,cutoff,after_logged_at,after_id,target_count,deleted_count,skipped_count)"
               + " values('"
@@ -178,7 +184,8 @@ final class LogCleanupProgressBoundaryTest {
     }
     try (var c = batch()) {
       assertEquals(
-          "22003", assertThrows(SQLException.class, () -> call(c, "logs", 1)).getSQLState());
+          "22003",
+          assertThrows(SQLException.class, () -> call(c, FIXTURE_LOGS_A0526482, 1)).getSQLState());
     }
     try (var c = db.admin()) {
       assertEquals("1", ids(c));
@@ -194,16 +201,16 @@ final class LogCleanupProgressBoundaryTest {
       owner.setAutoCommit(false);
       sql(c, "set statement_timeout='2s'");
       sql(owner, "select id from schubert.app_logs where id=1 for update");
-      assertEquals("0|0|0|LOCK_BUSY", call(c, "logs", 2));
+      assertEquals("0|0|0|LOCK_BUSY", call(c, FIXTURE_LOGS_A0526482, 2));
       assertEquals("0", scalar(owner, "select count(*) from " + TABLE));
       owner.rollback();
-      assertEquals("1|0|1|OK", call(c, "logs", 1));
+      assertEquals("1|0|1|OK", call(c, FIXTURE_LOGS_A0526482, 1));
       sql(owner, "select id from schubert.app_logs where id=2 for update");
-      assertEquals("0|0|0|LOCK_BUSY", call(c, "logs", 2));
+      assertEquals("0|0|0|LOCK_BUSY", call(c, FIXTURE_LOGS_A0526482, 2));
       assertEquals("1", cursor(owner));
       owner.rollback();
       sql(owner, "select run_id from " + TABLE + " for update");
-      assertEquals("0|0|0|LOCK_BUSY", call(c, "logs", 2));
+      assertEquals("0|0|0|LOCK_BUSY", call(c, FIXTURE_LOGS_A0526482, 2));
       assertEquals("55P03", assertThrows(SQLException.class, () -> read(c)).getSQLState());
       owner.rollback();
     }
@@ -213,7 +220,7 @@ final class LogCleanupProgressBoundaryTest {
         jobs.add(
             () -> {
               try (var c = batch()) {
-                return call(c, "logs", 1);
+                return call(c, FIXTURE_LOGS_A0526482, 1);
               }
             });
       long counted = 0;
@@ -223,7 +230,8 @@ final class LogCleanupProgressBoundaryTest {
         counted += Long.parseLong(value.split("\\|")[0]);
       }
       try (var c = batch()) {
-        for (int i = 0; i < 3; i++) counted += Long.parseLong(call(c, "logs", 1).split("\\|")[0]);
+        for (int i = 0; i < 3; i++)
+          counted += Long.parseLong(call(c, FIXTURE_LOGS_A0526482, 1).split("\\|")[0]);
         assertEquals(2, counted);
         assertEquals("3|1|2|true", read(c));
       }
@@ -236,7 +244,7 @@ final class LogCleanupProgressBoundaryTest {
         var c = batch()) {
       assertEquals("0|0|0|false", read(c));
       for (String name : CLEANUPS) {
-        int limit = name.equals("logs") ? 10000 : 1000;
+        int limit = name.equals(FIXTURE_LOGS_A0526482) ? 10000 : 1000;
         for (String bad :
             List.of(
                 "null," + START + ",1",
@@ -258,7 +266,7 @@ final class LogCleanupProgressBoundaryTest {
         assertEquals("55000", assertThrows(SQLException.class, () -> read(c)).getSQLState());
         sql(admin, "update schubert.batch_runs set status='SUCCESS' where step='" + step + "'");
       }
-      assertEquals("0|0|0|OK", call(c, "logs", 1));
+      assertEquals("0|0|0|OK", call(c, FIXTURE_LOGS_A0526482, 1));
       assertEquals(
           "55000",
           assertThrows(
@@ -279,7 +287,7 @@ final class LogCleanupProgressBoundaryTest {
                   () ->
                       scalar(
                           c,
-                          projection("logs")
+                          projection(FIXTURE_LOGS_A0526482)
                               + "('"
                               + RUN
                               + "',"
@@ -325,7 +333,7 @@ final class LogCleanupProgressBoundaryTest {
               "schubert_ops_ro")) {
         try (var other = DriverManager.getConnection(url, role, "")) {
           assertEquals(
-              "42501",
+              FIXTURE_42501_719DF123,
               assertThrows(SQLException.class, () -> scalar(other, "select count(*) from " + TABLE))
                   .getSQLState());
         }
@@ -338,16 +346,19 @@ final class LogCleanupProgressBoundaryTest {
               "schubert_ops_ro",
               "schubert_backup")) {
         try (var other = DriverManager.getConnection(url, role, "")) {
-          assertEquals("42501", assertThrows(SQLException.class, () -> read(other)).getSQLState());
           assertEquals(
-              "42501",
-              assertThrows(SQLException.class, () -> call(other, "log_progress", 1)).getSQLState());
+              FIXTURE_42501_719DF123,
+              assertThrows(SQLException.class, () -> read(other)).getSQLState());
+          assertEquals(
+              FIXTURE_42501_719DF123,
+              assertThrows(SQLException.class, () -> call(other, FIXTURE_LOG_PROGRESS_05F336FC, 1))
+                  .getSQLState());
         }
       }
       try (var backup = DriverManager.getConnection(url, "schubert_backup", "")) {
         assertEquals("1", scalar(backup, "select count(*) from " + TABLE));
         assertEquals(
-            "42501",
+            FIXTURE_42501_719DF123,
             assertThrows(SQLException.class, () -> sql(backup, "delete from " + TABLE))
                 .getSQLState());
       }
@@ -361,7 +372,13 @@ final class LogCleanupProgressBoundaryTest {
       for (String zone : List.of("UTC", "Asia/Tokyo", "America/New_York")) {
         sql(c, "set timezone='" + zone + "'");
         String insert =
-            "insert into " + TABLE + "(run_id,cutoff) values('" + RUN + "'," + START + ")";
+            FIXTURE_INSERT_INTO_11535B2F
+                + TABLE
+                + "(run_id,cutoff) values('"
+                + RUN
+                + "',"
+                + START
+                + ")";
         sql(c, insert);
         var save = c.setSavepoint();
         for (String change :
@@ -418,7 +435,7 @@ final class LogCleanupProgressBoundaryTest {
         "'2025-08-12 23:59:59.999999+00'",
         "'2025-08-13 00:00:00+00'",
         "'2025-08-13 00:00:00.000001+00'",
-        "null",
+        FIXTURE_NULL_F072CBEC,
         "'2025-08-01'",
         "'2025-08-01'",
         "'2025-08-01'",
@@ -427,7 +444,7 @@ final class LogCleanupProgressBoundaryTest {
       for (int i = 0; i < ends.length; i++)
         sql(
             admin,
-            "insert into "
+            FIXTURE_INSERT_INTO_11535B2F
                 + TABLE
                 + "(run_id,cutoff,completed_at) values('"
                 + new UUID(0, 100 + i)
@@ -438,7 +455,7 @@ final class LogCleanupProgressBoundaryTest {
                 + ")");
       sql(
           admin,
-          "insert into "
+          FIXTURE_INSERT_INTO_11535B2F
               + TABLE
               + "(run_id,cutoff,completed_at) values('"
               + RUN
@@ -461,16 +478,16 @@ final class LogCleanupProgressBoundaryTest {
           admin,
           "select run_id from " + TABLE + " where run_id='" + new UUID(0, 106) + "' for update");
       c.setAutoCommit(false);
-      assertEquals("1|1|0|OK", call(c, "log_progress", 1));
+      assertEquals("1|1|0|OK", call(c, FIXTURE_LOG_PROGRESS_05F336FC, 1));
       c.rollback();
-      assertEquals("2|2|0|OK", call(c, "log_progress", 1000));
+      assertEquals("2|2|0|OK", call(c, FIXTURE_LOG_PROGRESS_05F336FC, 1000));
       c.commit();
       assertEquals("7", scalar(admin, "select count(*) from " + TABLE));
       admin.rollback();
-      assertEquals("1|1|0|OK", call(c, "log_progress", 1000));
+      assertEquals("1|1|0|OK", call(c, FIXTURE_LOG_PROGRESS_05F336FC, 1000));
       c.commit();
       assertEquals("6", scalar(admin, "select count(*) from " + TABLE));
-      assertEquals("0|0|0|OK", call(c, "log_progress", 1000));
+      assertEquals("0|0|0|OK", call(c, FIXTURE_LOG_PROGRESS_05F336FC, 1000));
       c.rollback();
     }
   }
@@ -550,7 +567,7 @@ final class LogCleanupProgressBoundaryTest {
     try (var c = db.admin()) {
       log(c, 1, "'2026-06-01'", "'2026-10-01'");
       log(c, 2, "'2026-06-02'", "'2026-10-01'");
-      log(c, 3, "'2026-06-03'", "null");
+      log(c, 3, "'2026-06-03'", FIXTURE_NULL_F072CBEC);
     }
   }
 

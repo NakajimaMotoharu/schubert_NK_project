@@ -29,6 +29,8 @@ import org.junit.jupiter.api.Timeout;
 /** NK-DAT-001; SS312/324/332/343/354; BUG1592/1595; PT-DB-INSPECTOR-GRAPH329001..009. No I/O. */
 @Timeout(value = 5, threadMode = Timeout.ThreadMode.SEPARATE_THREAD)
 final class InspectorFailureGraph329Test {
+  private static final String FIXTURE_PUBLIC_CLOSE_7F17170B = "PUBLIC close";
+  private static final String FIXTURE_CLOSE_97959247 = "close";
   private static final String URL = "jdbc:postgresql://127.0.0.1:1/public_fixture";
 
   @Test
@@ -55,7 +57,8 @@ final class InspectorFailureGraph329Test {
   void inspector329002AdmissionGraphClosesOnceBeforeFatalEscapes() throws Exception {
     for (int mode = 0; mode < 3; mode++) {
       var fatal = new AssertionError("PUBLIC fatal");
-      var fixture = new Factory(graph(fatal, mode), new SQLException("PUBLIC close"));
+      var fixture =
+          new Factory(graph(fatal, mode), new SQLException(FIXTURE_PUBLIC_CLOSE_7F17170B));
       withProvider(
           fixture,
           provider -> assertSame(fatal, assertThrows(AssertionError.class, provider::open)));
@@ -69,9 +72,9 @@ final class InspectorFailureGraph329Test {
     var fatal = new AssertionError("PUBLIC primary");
     for (Throwable close :
         new Throwable[] {
-          new SQLException("PUBLIC close"),
-          new IllegalStateException("PUBLIC close"),
-          new AssertionError("PUBLIC close"),
+          new SQLException(FIXTURE_PUBLIC_CLOSE_7F17170B),
+          new IllegalStateException(FIXTURE_PUBLIC_CLOSE_7F17170B),
+          new AssertionError(FIXTURE_PUBLIC_CLOSE_7F17170B),
           fatal
         }) {
       var fixture = new Factory(fatal, close);
@@ -98,7 +101,7 @@ final class InspectorFailureGraph329Test {
     assertEquals(1, sqlFixture.closes);
     var runtime = new IllegalStateException("PUBLIC primary");
     runtime.initCause(graph(null, 3));
-    var runtimeFixture = new Factory(runtime, new SQLException("PUBLIC close"));
+    var runtimeFixture = new Factory(runtime, new SQLException(FIXTURE_PUBLIC_CLOSE_7F17170B));
     withProvider(
         runtimeFixture,
         provider -> assertSame(runtime, assertThrows(IllegalStateException.class, provider::open)));
@@ -205,8 +208,8 @@ final class InspectorFailureGraph329Test {
                       calls.incrementAndGet();
                       throw failure;
                     }
-                    if (java.util.Set.of("commit", "rollback", "close").contains(method.getName()))
-                      ownedOperations.incrementAndGet();
+                    if (java.util.Set.of("commit", "rollback", FIXTURE_CLOSE_97959247)
+                        .contains(method.getName())) ownedOperations.incrementAndGet();
                     throw new AssertionError(
                         "Unexpected borrowed connection operation: " + method.getName());
                   });
@@ -295,7 +298,7 @@ final class InspectorFailureGraph329Test {
                           yield autoCommit;
                         }
                         case "isReadOnly" -> false;
-                        case "close" -> {
+                        case FIXTURE_CLOSE_97959247 -> {
                           closes++;
                           if (secondary != null) throw secondary;
                           yield null;
@@ -326,7 +329,7 @@ final class InspectorFailureGraph329Test {
               (object, method, args) ->
                   switch (method.getName()) {
                     case "executeQuery" -> result();
-                    case "close" -> {
+                    case FIXTURE_CLOSE_97959247 -> {
                       statementCloses++;
                       yield null;
                     }
@@ -351,7 +354,7 @@ final class InspectorFailureGraph329Test {
                           default -> throw new AssertionError("Unexpected column");
                         };
                     case "getObject" -> false;
-                    case "close" -> {
+                    case FIXTURE_CLOSE_97959247 -> {
                       resultCloses++;
                       yield null;
                     }

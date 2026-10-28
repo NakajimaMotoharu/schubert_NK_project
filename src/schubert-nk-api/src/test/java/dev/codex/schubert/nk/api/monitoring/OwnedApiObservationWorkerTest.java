@@ -30,6 +30,9 @@ import org.junit.jupiter.api.Test;
  * 1864/OBSOWN001..044: own JVM Threads and fake observation only, no application/runtime admission.
  */
 final class OwnedApiObservationWorkerTest {
+  private static final String FIXTURE_QUERY_4C4F28A0 = "query";
+  private static final String FIXTURE_NOTIFICATION_59AAC10C = "notification";
+
   private static void raise(Throwable value) {
     if (value instanceof RuntimeException runtime) throw runtime;
     if (value instanceof Error fatal) throw fatal;
@@ -192,7 +195,7 @@ final class OwnedApiObservationWorkerTest {
   private static void asynchronous(
       Throwable primary, Throwable diagnostic, Throwable expectedUncaught) throws Exception {
     try (var f = new Fixture()) {
-      f.h.configure = row -> row.faults.put("query", primary);
+      f.h.configure = row -> row.faults.put(FIXTURE_QUERY_4C4F28A0, primary);
       f.notifierFault = diagnostic;
       f.worker.start();
       await(f.notified);
@@ -373,7 +376,7 @@ final class OwnedApiObservationWorkerTest {
       f.h.configure =
           row -> {
             if (attempts.incrementAndGet() == 1)
-              row.faults.put("query", new SQLException("temporary"));
+              row.faults.put(FIXTURE_QUERY_4C4F28A0, new SQLException("temporary"));
             else row.query.beforeStatementClose = second::countDown;
           };
       f.signal.immediateOnce.set(true);
@@ -391,8 +394,8 @@ final class OwnedApiObservationWorkerTest {
   void obsOwn012() throws Exception {
     try (var f = new Fixture()) {
       var fatal = new AssertionError("linked");
-      var sql = new SQLException("query", fatal);
-      f.h.configure = row -> row.faults.put("query", sql);
+      var sql = new SQLException(FIXTURE_QUERY_4C4F28A0, fatal);
+      f.h.configure = row -> row.faults.put(FIXTURE_QUERY_4C4F28A0, sql);
       f.worker.start();
       await(f.notified);
       f.worker.awaitStopped(budget());
@@ -403,26 +406,26 @@ final class OwnedApiObservationWorkerTest {
 
   @Test
   void obsOwn013() throws Exception {
-    var primary = new IllegalStateException("query");
+    var primary = new IllegalStateException(FIXTURE_QUERY_4C4F28A0);
     asynchronous(primary, null, primary);
   }
 
   @Test
   void obsOwn014() throws Exception {
-    var primary = new AssertionError("query");
+    var primary = new AssertionError(FIXTURE_QUERY_4C4F28A0);
     asynchronous(primary, null, primary);
   }
 
   @Test
   void obsOwn015() throws Exception {
-    var primary = new IllegalStateException("query");
-    asynchronous(primary, new IllegalStateException("notification"), primary);
+    var primary = new IllegalStateException(FIXTURE_QUERY_4C4F28A0);
+    asynchronous(primary, new IllegalStateException(FIXTURE_NOTIFICATION_59AAC10C), primary);
   }
 
   @Test
   void obsOwn016() throws Exception {
-    var primary = new IllegalStateException("query");
-    var fatal = new AssertionError("notification");
+    var primary = new IllegalStateException(FIXTURE_QUERY_4C4F28A0);
+    var fatal = new AssertionError(FIXTURE_NOTIFICATION_59AAC10C);
     asynchronous(primary, fatal, fatal);
   }
 
@@ -430,7 +433,7 @@ final class OwnedApiObservationWorkerTest {
   void obsOwn017() throws Exception {
     try (var f = new Fixture()) {
       var primary = new InterruptedException("idle");
-      var secondary = new IllegalStateException("notification");
+      var secondary = new IllegalStateException(FIXTURE_NOTIFICATION_59AAC10C);
       f.signal.interrupt = primary;
       f.notifierFault = secondary;
       f.worker.start();
@@ -447,7 +450,7 @@ final class OwnedApiObservationWorkerTest {
   void obsOwn018() throws Exception {
     try (var f = new Fixture()) {
       var primary = new InterruptedException("idle");
-      var fatal = new AssertionError("notification");
+      var fatal = new AssertionError(FIXTURE_NOTIFICATION_59AAC10C);
       f.signal.interrupt = primary;
       f.notifierFault = fatal;
       f.worker.start();

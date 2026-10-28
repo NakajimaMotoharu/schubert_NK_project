@@ -34,6 +34,7 @@ import org.junit.jupiter.api.Test;
  * DBCONN001..008/1714. Independent integer vectors and own providers/threads, no DB or real clock.
  */
 class DbQueryDurationMetricCollectorTest {
+  private static final String FIXTURE_DEBUG_B6DFBABB = "DEBUG";
   private static final List<Query> QUERIES =
       List.of(Query.ASYNC_JOB_STATE_COUNTS, Query.OUTBOX_STATUS_COUNTS_OLDEST);
   private static final List<Outcome> OUTCOMES = List.of(Outcome.SUCCESS, Outcome.FAILURE);
@@ -153,7 +154,7 @@ class DbQueryDurationMetricCollectorTest {
                 return Optional.of(value);
               },
               registry,
-              "DEBUG");
+              FIXTURE_DEBUG_B6DFBABB);
       assertEquals(0, calls.get());
       for (var query : QUERIES)
         for (var outcome : OUTCOMES) {
@@ -181,7 +182,7 @@ class DbQueryDurationMetricCollectorTest {
                 return supplied.get();
               },
               registry,
-              "DEBUG");
+              FIXTURE_DEBUG_B6DFBABB);
       for (var query : QUERIES) {
         assertTrue(collector.collect(query).isEmpty());
         for (var outcome : OUTCOMES) assertEquals(0, summary(registry, query, outcome).count());
@@ -220,7 +221,7 @@ class DbQueryDurationMetricCollectorTest {
                   return Optional.of(new Observation(Outcome.SUCCESS, 250000000));
                 },
                 registry,
-                "DEBUG");
+                FIXTURE_DEBUG_B6DFBABB);
         collector.collect(Query.ASYNC_JOB_STATE_COUNTS);
         broken.set(true);
         assertSame(
@@ -245,7 +246,7 @@ class DbQueryDurationMetricCollectorTest {
                 return null;
               },
               registry,
-              "DEBUG");
+              FIXTURE_DEBUG_B6DFBABB);
       assertEquals(
           "DB duration observation",
           assertThrows(
@@ -270,10 +271,10 @@ class DbQueryDurationMetricCollectorTest {
           };
       assertThrows(
           NullPointerException.class,
-          () -> new DbQueryDurationMetricCollector(null, registry, "DEBUG"));
+          () -> new DbQueryDurationMetricCollector(null, registry, FIXTURE_DEBUG_B6DFBABB));
       assertThrows(
           NullPointerException.class,
-          () -> new DbQueryDurationMetricCollector(source, null, "DEBUG"));
+          () -> new DbQueryDurationMetricCollector(source, null, FIXTURE_DEBUG_B6DFBABB));
       assertThrows(
           NullPointerException.class,
           () -> new DbQueryDurationMetricCollector(source, registry, null));
@@ -345,7 +346,7 @@ class DbQueryDurationMetricCollectorTest {
                 return Optional.of(second);
               },
               registry,
-              "DEBUG");
+              FIXTURE_DEBUG_B6DFBABB);
       var a = executor.submit(() -> collector.collect(Query.ASYNC_JOB_STATE_COUNTS));
       try {
         await(entered);
@@ -394,7 +395,7 @@ class DbQueryDurationMetricCollectorTest {
                 return Optional.of(requested.get());
               },
               registry,
-              "DEBUG");
+              FIXTURE_DEBUG_B6DFBABB);
       var jobs = new ArrayList<Callable<Optional<Observation>>>();
       for (int i = 0; i < 64; i++) {
         var query = QUERIES.get(i % 2);
@@ -425,7 +426,9 @@ class DbQueryDurationMetricCollectorTest {
         }
       var independent =
           new DbQueryDurationMetricCollector(
-              query -> Optional.of(new Observation(Outcome.SUCCESS, 1000000000)), other, "DEBUG");
+              query -> Optional.of(new Observation(Outcome.SUCCESS, 1000000000)),
+              other,
+              FIXTURE_DEBUG_B6DFBABB);
       independent.collect(Query.ASYNC_JOB_STATE_COUNTS);
       assertEquals(1, summary(other, Query.ASYNC_JOB_STATE_COUNTS, Outcome.SUCCESS).count());
       assertEquals(1, summary(other, Query.ASYNC_JOB_STATE_COUNTS, Outcome.SUCCESS).totalAmount());
@@ -452,7 +455,7 @@ class DbQueryDurationMetricCollectorTest {
                           return Optional.empty();
                         },
                         registry,
-                        "DEBUG")));
+                        FIXTURE_DEBUG_B6DFBABB)));
         assertEquals(0, calls.get());
         assertEquals(2, registry.factories.get());
         assertEquals(6, registry.getMeters().size());
@@ -471,7 +474,7 @@ class DbQueryDurationMetricCollectorTest {
                   return Optional.of(sample);
                 },
                 recording,
-                "DEBUG");
+                FIXTURE_DEBUG_B6DFBABB);
         recording.recordFailure = Optional.of(problem);
         assertSame(
             problem,

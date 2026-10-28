@@ -25,6 +25,8 @@ import org.junit.jupiter.api.Test;
 
 /** 1862/OUTBOXPUMP001..032: injected nano time/resource-free factory and typed fake JDBC only. */
 final class ApiOutboxObservationPumpTest {
+  private static final String FIXTURE_DEBUG_B6DFBABB = "DEBUG";
+  private static final String FIXTURE_CLOSE_97959247 = "close";
   private static final long PERIOD = 15_000_000_000L;
 
   static final class Harness {
@@ -45,7 +47,7 @@ final class ApiOutboxObservationPumpTest {
         };
     final ApiOutboxObservationPump pump =
         ApiOutboxObservationPump.create(
-            "DEBUG", this::time, this::attempt, new OutboxObservationRepository());
+            FIXTURE_DEBUG_B6DFBABB, this::time, this::attempt, new OutboxObservationRepository());
 
     private static void unchecked(Throwable value) {
       if (value instanceof RuntimeException runtime) throw runtime;
@@ -101,22 +103,24 @@ final class ApiOutboxObservationPumpTest {
                 null, Duration.ofSeconds(15), h::time, h::attempt, repository));
     assertThrows(
         NullPointerException.class,
-        () -> new ApiOutboxObservationPump("DEBUG", null, h::time, h::attempt, repository));
+        () ->
+            new ApiOutboxObservationPump(
+                FIXTURE_DEBUG_B6DFBABB, null, h::time, h::attempt, repository));
     assertThrows(
         NullPointerException.class,
         () ->
             new ApiOutboxObservationPump(
-                "DEBUG", Duration.ofSeconds(15), null, h::attempt, repository));
+                FIXTURE_DEBUG_B6DFBABB, Duration.ofSeconds(15), null, h::attempt, repository));
     assertThrows(
         NullPointerException.class,
         () ->
             new ApiOutboxObservationPump(
-                "DEBUG", Duration.ofSeconds(15), h::time, null, repository));
+                FIXTURE_DEBUG_B6DFBABB, Duration.ofSeconds(15), h::time, null, repository));
     assertThrows(
         NullPointerException.class,
         () ->
             new ApiOutboxObservationPump(
-                "DEBUG", Duration.ofSeconds(15), h::time, h::attempt, null));
+                FIXTURE_DEBUG_B6DFBABB, Duration.ofSeconds(15), h::time, h::attempt, null));
     assertEquals(0, h.clockReads);
     assertEquals(0, h.factoryReads);
   }
@@ -142,12 +146,16 @@ final class ApiOutboxObservationPumpTest {
           IllegalArgumentException.class,
           () ->
               new ApiOutboxObservationPump(
-                  "DEBUG", period, h::time, h::attempt, new OutboxObservationRepository()));
+                  FIXTURE_DEBUG_B6DFBABB,
+                  period,
+                  h::time,
+                  h::attempt,
+                  new OutboxObservationRepository()));
     assertThrows(
         ArithmeticException.class,
         () ->
             new ApiOutboxObservationPump(
-                "DEBUG",
+                FIXTURE_DEBUG_B6DFBABB,
                 Duration.ofSeconds(Long.MAX_VALUE),
                 h::time,
                 h::attempt,
@@ -203,7 +211,8 @@ final class ApiOutboxObservationPumpTest {
     assertTrue(h.pump.isQuiescent());
     var pool = new DbPoolMetricObservationTest.Fixture();
     try (var context =
-        ApiServiceMetricBinding.prepareContext("DEBUG", pool::pool, pool::config, h.pump)) {
+        ApiServiceMetricBinding.prepareContext(
+            FIXTURE_DEBUG_B6DFBABB, pool::pool, pool::config, h.pump)) {
       context.initialize();
       assertTrue(
           context.render(true).contains("nk_outbox_rows{status=\"PENDING\",store=\"API\"} 3.0"));
@@ -264,7 +273,11 @@ final class ApiOutboxObservationPumpTest {
     var h = new Harness();
     var pump =
         new ApiOutboxObservationPump(
-            "DEBUG", Duration.ofNanos(15), h::time, h::attempt, new OutboxObservationRepository());
+            FIXTURE_DEBUG_B6DFBABB,
+            Duration.ofNanos(15),
+            h::time,
+            h::attempt,
+            new OutboxObservationRepository());
     h.now = Long.MAX_VALUE - 5;
     pump.sampleIfDue();
     h.now = Long.MIN_VALUE + 8;
@@ -303,12 +316,12 @@ final class ApiOutboxObservationPumpTest {
 
   @Test
   void outboxPump015() {
-    ordinaryFailure("close", new SQLException("close"), true);
+    ordinaryFailure(FIXTURE_CLOSE_97959247, new SQLException(FIXTURE_CLOSE_97959247), true);
   }
 
   @Test
   void outboxPump016() {
-    ordinaryFailure("close", new AssertionError("close"), true);
+    ordinaryFailure(FIXTURE_CLOSE_97959247, new AssertionError(FIXTURE_CLOSE_97959247), true);
   }
 
   @Test
@@ -317,7 +330,7 @@ final class ApiOutboxObservationPumpTest {
     var fatal = new AssertionError("diagnostic");
     h.configure =
         f -> {
-          f.faults.put("close", new SQLException("close"));
+          f.faults.put(FIXTURE_CLOSE_97959247, new SQLException(FIXTURE_CLOSE_97959247));
           f.faults.put("diagnostic", fatal);
         };
     assertSame(fatal, assertThrows(AssertionError.class, h.pump::sampleIfDue));
@@ -548,12 +561,12 @@ final class ApiOutboxObservationPumpTest {
   @Test
   void outboxPump030() throws Exception {
     var h = new Harness();
-    var primary = new SQLException("close");
+    var primary = new SQLException(FIXTURE_CLOSE_97959247);
     var entered = new CountDownLatch(1);
     var release = new CountDownLatch(1);
     h.configure =
         f -> {
-          f.faults.put("close", primary);
+          f.faults.put(FIXTURE_CLOSE_97959247, primary);
           f.query.beforeStatementClose =
               () -> {
                 entered.countDown();

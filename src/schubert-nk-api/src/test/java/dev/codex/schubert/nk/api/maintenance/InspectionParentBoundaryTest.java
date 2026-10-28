@@ -34,6 +34,9 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** NK-DAT-001; OPS009/DAT009/MQ008/UI212/241/251/SS331 3.13; SSC049/PG162; DB251..258. */
 final class InspectionParentBoundaryTest {
+  private static final String FIXTURE_DELETE_FROM_SCHUBERT_INBOX_INSPECTION_PR_0A37C504 =
+      "delete from schubert.inbox_inspection_progress";
+  private static final String FIXTURE_55000_F2ADCE46 = "55000";
   @TempDir static Path root;
   static ApiLogDatabaseFixture db;
   static String url;
@@ -59,7 +62,7 @@ final class InspectionParentBoundaryTest {
   @BeforeEach
   void reset() throws Exception {
     try (var c = db.admin()) {
-      sql(c, "delete from schubert.inbox_inspection_progress");
+      sql(c, FIXTURE_DELETE_FROM_SCHUBERT_INBOX_INSPECTION_PR_0A37C504);
     }
   }
 
@@ -76,11 +79,11 @@ final class InspectionParentBoundaryTest {
       sql(admin, "update schubert.inbox_inspection_progress set completed_at='2000-01-01'");
       assertEquals(List.of(0L, 0L, 0L, true), read(c, RUN, TIME));
       trace.append("emptyEnd=").append(read(c, RUN, TIME)).append('\n');
-      sql(admin, "delete from schubert.inbox_inspection_progress");
+      sql(admin, FIXTURE_DELETE_FROM_SCHUBERT_INBOX_INSPECTION_PR_0A37C504);
       insert(admin, TIME, 9, 5, 4, true);
       assertEquals(List.of(9L, 5L, 4L, true), read(c, RUN, TIME));
       trace.append("mixedEnd=").append(read(c, RUN, TIME)).append('\n');
-      sql(admin, "delete from schubert.inbox_inspection_progress");
+      sql(admin, FIXTURE_DELETE_FROM_SCHUBERT_INBOX_INSPECTION_PR_0A37C504);
       insert(admin, TIME, Long.MAX_VALUE, Long.MAX_VALUE - 1, 1, true);
       assertEquals(List.of(Long.MAX_VALUE, Long.MAX_VALUE - 1, 1L, true), read(c, RUN, TIME));
       trace.append("maxEnd=").append(read(c, RUN, TIME)).append('\n');
@@ -105,7 +108,7 @@ final class InspectionParentBoundaryTest {
                 "2026-09-12T14:59:59.999999Z",
                 TIME,
                 "9999-12-31T23:59:59.999999Z")) {
-          sql(admin, "delete from schubert.inbox_inspection_progress");
+          sql(admin, FIXTURE_DELETE_FROM_SCHUBERT_INBOX_INSPECTION_PR_0A37C504);
           insert(admin, literal, 0, 0, 0, false);
           assertEquals(List.of(0L, 0L, 0L, false), read(c, RUN, literal), zone + "/" + literal);
           assertEquals(List.of(), read(c, new UUID(0, 99), literal));
@@ -124,10 +127,10 @@ final class InspectionParentBoundaryTest {
       }
       reject(
           c, "select * from schubert.maintenance_read_inbox_summary(null,'" + TIME + "')", "22023");
-      sql(admin, "delete from schubert.inbox_inspection_progress");
+      sql(admin, FIXTURE_DELETE_FROM_SCHUBERT_INBOX_INSPECTION_PR_0A37C504);
       insert(admin, TIME, 0, 0, 0, false);
       assertEquals(
-          "55000",
+          FIXTURE_55000_F2ADCE46,
           assertThrows(SQLException.class, () -> read(c, RUN, "2026-09-12T15:00:00.123457Z"))
               .getSQLState());
     }
@@ -136,7 +139,7 @@ final class InspectionParentBoundaryTest {
   @Test
   void parentLockNamespaces() throws Exception {
     try (var c = open("schubert_batch")) {
-      reject(c, query(), "55000");
+      reject(c, query(), FIXTURE_55000_F2ADCE46);
       assertEquals(
           "0",
           scalar(
@@ -145,7 +148,7 @@ final class InspectionParentBoundaryTest {
       for (String lock :
           List.of("pg_advisory_lock_shared(71419602)", "pg_advisory_lock(0,71419602)")) {
         sql(c, "select " + lock);
-        reject(c, query(), "55000");
+        reject(c, query(), FIXTURE_55000_F2ADCE46);
         sql(c, "select pg_advisory_unlock_all()");
       }
       sql(c, "select pg_advisory_lock(71419602)");
@@ -157,7 +160,7 @@ final class InspectionParentBoundaryTest {
       assertEquals(List.of(), read(c, RUN, TIME));
       c.rollback();
       c.setAutoCommit(true);
-      reject(c, query(), "55000");
+      reject(c, query(), FIXTURE_55000_F2ADCE46);
       assertTrue(c.getAutoCommit());
       assertFalse(c.isReadOnly());
       assertEquals(Connection.TRANSACTION_READ_COMMITTED, c.getTransactionIsolation());
@@ -238,7 +241,7 @@ final class InspectionParentBoundaryTest {
       insert(admin, TIME, 5, 2, 3, true);
       assertEquals(List.of(), read(first, RUN, TIME));
       assertEquals(
-          "55000",
+          FIXTURE_55000_F2ADCE46,
           executor
               .submit(
                   () -> {
