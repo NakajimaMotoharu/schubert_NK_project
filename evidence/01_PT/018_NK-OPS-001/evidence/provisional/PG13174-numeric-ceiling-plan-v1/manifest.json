@@ -1,0 +1,121 @@
+{
+  "actualExit": 0,
+  "appendedMethodInverse": {
+    "addedMethodTokens": 190,
+    "addedMethods": 1,
+    "newMethodTokenSha256": "5514c99f6e498fcbf14d905f963c987658f9e1f6e5d88193feb5030f6d0594e6",
+    "originalFiveCasesUnchanged": true,
+    "originalTokens": 1770
+  },
+  "before": "b11fe71bd20e244dd10c83bd339f8345a0c1f085",
+  "cases": [
+    {
+      "className": "dev.codex.schubert.nk.protocol.codec.FieldCodecTest",
+      "method": "textEncodeNormalizesUtf8AndPadsWithAsciiSpace",
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/FieldCodecTest.java",
+      "sourceSha256": "bf10cc0ce49e2411917dbe66aa8c15312a399ea40284b67b5d2ff383a971e3b1"
+    },
+    {
+      "className": "dev.codex.schubert.nk.protocol.codec.FieldCodecTest",
+      "method": "textDecodeIsStrictCanonicalAndOptionalAware",
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/FieldCodecTest.java",
+      "sourceSha256": "bf10cc0ce49e2411917dbe66aa8c15312a399ea40284b67b5d2ff383a971e3b1"
+    },
+    {
+      "className": "dev.codex.schubert.nk.protocol.codec.FieldCodecTest",
+      "method": "numericCodecChecksDigitsRangeAndOverflow",
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/FieldCodecTest.java",
+      "sourceSha256": "bf10cc0ce49e2411917dbe66aa8c15312a399ea40284b67b5d2ff383a971e3b1"
+    },
+    {
+      "className": "dev.codex.schubert.nk.protocol.codec.FieldCodecTest",
+      "method": "numericErrorFillerDoesNotBecomeBusinessZero",
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/FieldCodecTest.java",
+      "sourceSha256": "bf10cc0ce49e2411917dbe66aa8c15312a399ea40284b67b5d2ff383a971e3b1"
+    },
+    {
+      "className": "dev.codex.schubert.nk.protocol.codec.FieldCodecTest",
+      "method": "booleanAndReservedFieldsRejectUnknownBytes",
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/FieldCodecTest.java",
+      "sourceSha256": "bf10cc0ce49e2411917dbe66aa8c15312a399ea40284b67b5d2ff383a971e3b1"
+    },
+    {
+      "className": "dev.codex.schubert.nk.protocol.codec.FieldCodecTest",
+      "method": "numericSemanticCeilingIsIndependentOfWireAndLongCapacity",
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/FieldCodecTest.java",
+      "sourceSha256": "bf10cc0ce49e2411917dbe66aa8c15312a399ea40284b67b5d2ff383a971e3b1"
+    },
+    {
+      "className": "dev.codex.schubert.nk.protocol.codec.FieldCodecNfcGoldenTest",
+      "method": "nfcGolden001HangulJamoFitsComposedByteWidth",
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/FieldCodecNfcGoldenTest.java",
+      "sourceSha256": "f94593eb1b57c9ce6c65dfac75dec1061439471fb2a66ff8877f5fc1c93dfceb"
+    },
+    {
+      "className": "dev.codex.schubert.nk.protocol.codec.FieldCodecNfcGoldenTest",
+      "method": "nfcGolden002AngstromUsesCanonicalTwoByteScalarBeforeWidthCheck",
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/FieldCodecNfcGoldenTest.java",
+      "sourceSha256": "f94593eb1b57c9ce6c65dfac75dec1061439471fb2a66ff8877f5fc1c93dfceb"
+    },
+    {
+      "className": "dev.codex.schubert.nk.protocol.codec.FieldCodecNfcGoldenTest",
+      "method": "nfcGolden003CanonicalCombiningOrderIsRequiredWithoutComposition",
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/FieldCodecNfcGoldenTest.java",
+      "sourceSha256": "f94593eb1b57c9ce6c65dfac75dec1061439471fb2a66ff8877f5fc1c93dfceb"
+    }
+  ],
+  "eligibilityClosureSourceHashes": {
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/FieldCodec.java": "43a625c478114afea49c8ee423926d7d330d58dd56b3667a803108c068121513",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/FieldEncodingException.java": "60f7a35b38a0a90dfc7caf0746de64668d4dd31c3d14f7ec81b6eb7bd671f669",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/PermanentProtocolException.java": "9193af24f93fcd0d45e536abbacbe4adf46029619de6d6f63e889b9af44ea2d3"
+  },
+  "externalActions": 0,
+  "inverseNegativeVectors": 6,
+  "invocation": {
+    "actualPythonCommand": [
+      "/usr/bin/python3",
+      "-B",
+      "tools/quality/pg13174_numeric_ceiling_plan.py"
+    ],
+    "arbitraryArgumentsRecorded": false,
+    "entrypointPath": "tools/quality/pg13174_numeric_ceiling_plan.py",
+    "entrypointSha256": "6074b5cf37cd7fce80d0e60cd5f7d8fa98a03549dad4d7b81700e839b8957e45",
+    "helperPath": "tools/quality/host_tool_invocation.py",
+    "helperSha256": "85d616a3db4ff47f4c95ae2e0dd57954bc2b09f28b8f2a685b986e5621545c46",
+    "libraryPath": "tools/quality/pg13174_numeric_ceiling_plan.py",
+    "librarySha256": "6074b5cf37cd7fce80d0e60cd5f7d8fa98a03549dad4d7b81700e839b8957e45",
+    "loadedProjectPythonSources": {
+      "tools/quality/g07_host_class_provenance_inputs.py": "a676cb3e4145177c3c243722d737592ce7d44c3f29cfe4f670662ef7651f046b",
+      "tools/quality/host_tool_invocation.py": "85d616a3db4ff47f4c95ae2e0dd57954bc2b09f28b8f2a685b986e5621545c46",
+      "tools/quality/pg13152_nfc_golden_preflight.py": "ccb42d6a0465ddd6a1e2c2eff532d2e01c956e94fb26af08b97e2f09ffc9c4e6",
+      "tools/quality/pg13171_numeric_ceiling_inverse.py": "306130eff6c1cc58cd1638e80074b5f52a48e2ced214903c0c9f504454dc04e5",
+      "tools/quality/pg13174_numeric_ceiling_plan.py": "6074b5cf37cd7fce80d0e60cd5f7d8fa98a03549dad4d7b81700e839b8957e45",
+      "tools/quality/pg9666_pagination_static.py": "75347ce8aef713e43a3d2fd39e0e0b6244da9427caa8dc51d36e539d629e0ef5",
+      "tools/quality/public_java_digest_provenance.py": "dd47f8735a61ce849995633c3290a6ad047842ef3263829ce359db413778f7a0"
+    },
+    "provenance": "OBSERVED_SYS_ARGV_AND_ORIG_ARGV_NOT_RECONSTRUCTED"
+  },
+  "judgement": "Pure FieldCodec whole six plus unchanged NFC three; one new semantic ceiling method, original eight assertions preserved, no actual resources or old exec union",
+  "modifiedTestPaths": [
+    "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/FieldCodecTest.java"
+  ],
+  "newAccepted": 0,
+  "newMethodIds": [
+    "dev.codex.schubert.nk.protocol.codec.FieldCodecTest#numericSemanticCeilingIsIndependentOfWireAndLongCapacity"
+  ],
+  "newTestPaths": [],
+  "newTests": 1,
+  "oldExecUnion": false,
+  "originalTests": 8,
+  "sameExecRequired": true,
+  "scopeStaticFindings": 0,
+  "source": "80ba5f783432c84b6facd83bcd3a80774f4e4665",
+  "supportTestSourceHashes": {},
+  "totalCorrections": 0,
+  "totalTests": 9,
+  "whole451Accepted": false,
+  "wholeTestSourceHashes": {
+    "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/FieldCodecNfcGoldenTest.java": "f94593eb1b57c9ce6c65dfac75dec1061439471fb2a66ff8877f5fc1c93dfceb",
+    "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/FieldCodecTest.java": "bf10cc0ce49e2411917dbe66aa8c15312a399ea40284b67b5d2ff383a971e3b1"
+  }
+}
