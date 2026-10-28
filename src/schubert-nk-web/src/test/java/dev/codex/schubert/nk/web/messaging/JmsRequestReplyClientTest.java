@@ -299,14 +299,14 @@ final class JmsRequestReplyClientTest {
   }
 
   private static final class MutableClock extends Clock {
-    private final AtomicReference<Instant> instant;
+    private final AtomicReference<Instant> currentInstant;
 
     private MutableClock(Instant initial) {
-      instant = new AtomicReference<>(initial);
+      currentInstant = new AtomicReference<>(initial);
     }
 
     private void set(Instant value) {
-      instant.set(value);
+      currentInstant.set(value);
     }
 
     @Override
@@ -321,7 +321,7 @@ final class JmsRequestReplyClientTest {
 
     @Override
     public Instant instant() {
-      return instant.get();
+      return currentInstant.get();
     }
   }
 }
