@@ -1,0 +1,1240 @@
+{
+  "rows": [
+    {
+      "attributes": {
+        "begincolumn": "5",
+        "beginline": "131",
+        "class": "AlertLifecycle",
+        "endcolumn": "17",
+        "endline": "131",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#avoidsynchronizedstatement",
+        "method": "observe",
+        "package": "dev.codex.schubert.nk.batch.monitoring",
+        "priority": "3",
+        "rule": "AvoidSynchronizedStatement",
+        "ruleset": "Multithreading"
+      },
+      "controls": [
+        "synchronized(lock)",
+        "lastElapsed=Optional.of(elapsed)",
+        "if(observed==Severity.NORMAL)returnnormal(clearance,elapsed)",
+        "active=Optional.of(newEvent(conditionKey,serviceKey,level,first,at,count,true))"
+      ],
+      "currentCases": [
+        {
+          "className": "dev.codex.schubert.nk.batch.monitoring.AlertLifecycleTest",
+          "method": "alert001InitialNormalAndFirstWarningIdentity",
+          "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/AlertLifecycleTest.java",
+          "sourceSha256": "92024d5360a1198fa8a99a31886ab09fe763761d0fc9b6cc4d697809948b7b71"
+        },
+        {
+          "className": "dev.codex.schubert.nk.batch.monitoring.AlertLifecycleTest",
+          "method": "alert002DedupEscalationAndNoAutomaticDowngrade",
+          "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/AlertLifecycleTest.java",
+          "sourceSha256": "92024d5360a1198fa8a99a31886ab09fe763761d0fc9b6cc4d697809948b7b71"
+        },
+        {
+          "className": "dev.codex.schubert.nk.batch.monitoring.AlertLifecycleTest",
+          "method": "alert003WarningFiveMinuteExactBoundary",
+          "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/AlertLifecycleTest.java",
+          "sourceSha256": "92024d5360a1198fa8a99a31886ab09fe763761d0fc9b6cc4d697809948b7b71"
+        },
+        {
+          "className": "dev.codex.schubert.nk.batch.monitoring.AlertLifecycleTest",
+          "method": "alert004CriticalNeedsTenMinutesAndCauseConfirmation",
+          "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/AlertLifecycleTest.java",
+          "sourceSha256": "92024d5360a1198fa8a99a31886ab09fe763761d0fc9b6cc4d697809948b7b71"
+        },
+        {
+          "className": "dev.codex.schubert.nk.batch.monitoring.AlertLifecycleTest",
+          "method": "alert005AnyViolationRestartsContinuousNormalPeriod",
+          "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/AlertLifecycleTest.java",
+          "sourceSha256": "92024d5360a1198fa8a99a31886ab09fe763761d0fc9b6cc4d697809948b7b71"
+        },
+        {
+          "className": "dev.codex.schubert.nk.batch.monitoring.AlertLifecycleTest",
+          "method": "alert006ClosedEventRetiredAndNewViolationStartsFresh",
+          "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/AlertLifecycleTest.java",
+          "sourceSha256": "92024d5360a1198fa8a99a31886ab09fe763761d0fc9b6cc4d697809948b7b71"
+        },
+        {
+          "className": "dev.codex.schubert.nk.batch.monitoring.AlertLifecycleTest",
+          "method": "alert007NullAndInvalidElapsedLeaveStateUnchanged",
+          "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/AlertLifecycleTest.java",
+          "sourceSha256": "92024d5360a1198fa8a99a31886ab09fe763761d0fc9b6cc4d697809948b7b71"
+        },
+        {
+          "className": "dev.codex.schubert.nk.batch.monitoring.AlertLifecycleTest",
+          "method": "alert008WallClockJumpDoesNotShortenRecoveryOrOverflow",
+          "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/AlertLifecycleTest.java",
+          "sourceSha256": "92024d5360a1198fa8a99a31886ab09fe763761d0fc9b6cc4d697809948b7b71"
+        },
+        {
+          "className": "dev.codex.schubert.nk.batch.monitoring.AlertLifecycleTest",
+          "method": "alert009ConcurrentSameTickCountsAndPrivateMonitor",
+          "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/AlertLifecycleTest.java",
+          "sourceSha256": "92024d5360a1198fa8a99a31886ab09fe763761d0fc9b6cc4d697809948b7b71"
+        },
+        {
+          "className": "dev.codex.schubert.nk.batch.monitoring.AlertLifecycleTest",
+          "method": "alert010AllClosedConditionServiceIdentities",
+          "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/AlertLifecycleTest.java",
+          "sourceSha256": "92024d5360a1198fa8a99a31886ab09fe763761d0fc9b6cc4d697809948b7b71"
+        },
+        {
+          "className": "dev.codex.schubert.nk.batch.monitoring.AlertLifecycleTest",
+          "method": "protectedAlert001AllKeysHonorNoAutomaticCloseDespiteConfirmedCause",
+          "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/AlertLifecycleTest.java",
+          "sourceSha256": "92024d5360a1198fa8a99a31886ab09fe763761d0fc9b6cc4d697809948b7b71"
+        },
+        {
+          "className": "dev.codex.schubert.nk.batch.monitoring.AlertLifecycleTest",
+          "method": "protectedAlert002ConcurrentNormalSamplesCannotRetireOrChangeProtectedEvent",
+          "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/AlertLifecycleTest.java",
+          "sourceSha256": "92024d5360a1198fa8a99a31886ab09fe763761d0fc9b6cc4d697809948b7b71"
+        },
+        {
+          "className": "dev.codex.schubert.nk.batch.monitoring.AlertContinuityTest",
+          "method": "alertContinuity001InvalidInterruptionHasNoStateChange",
+          "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/AlertContinuityTest.java",
+          "sourceSha256": "07b790376ed5c47504e3a6be9e6fbd011c0575f827456f804b91fbbca4ec2811"
+        },
+        {
+          "className": "dev.codex.schubert.nk.batch.monitoring.AlertContinuityTest",
+          "method": "alertContinuity002WarningAndCriticalRecoveryCannotBridgeGap",
+          "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/AlertContinuityTest.java",
+          "sourceSha256": "07b790376ed5c47504e3a6be9e6fbd011c0575f827456f804b91fbbca4ec2811"
+        }
+      ],
+      "currentWholeJoinPending": true,
+      "disposition": "CONTEXT_NOT_APPLICABLE",
+      "id": "PMD-02954",
+      "kind": "PRIVATE_FINAL_PURE_ALERT_OR_TIMED_STATE_MONITOR",
+      "newAccepted": 0,
+      "oldRuntimeReassigned": false,
+      "originalRowSha256": "60cb4732fbf87422617017832a1b56cc6ececd36cf547a934d56e0d818f64aa8",
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/AlertLifecycle.java",
+      "productTestsExecutedByReview": 0,
+      "reason": "411 section9 requires private-final state lock. Alert transition/gap/snapshot and timed threshold windows/alert projection are each one atomic local observation, no public this/class monitor. No I/O/callback inside these primary critical sections; nested window/lifecycle lock order is one direction in reviewed closure. ReentrantLock suggestion is not a stronger project contract. Boundary/rejected-state/private-owner/finite concurrent tests cover source contract, not all scheduling/OOME or actual system observation.",
+      "rule": "AvoidSynchronizedStatement",
+      "scopeKind": "METHOD",
+      "scopeName": "observe",
+      "scopeTokenSha256": "6ede7b0e9adfe171f28ebe3559251c14c26864a7c51357c3eda18a523994d43c",
+      "source": "105fd644e90918945607b3ac3e4962843c7762bf",
+      "sourceSha256": "4a461128998ebb7debb2ba1b6f978d1eb4e6e92920f21d20d4e2b2d2dd1ccb61",
+      "sourceSpanSha256": "c666a36176076433b56d77b2fc43ea0a3e66f65e1c74d0b769997a0295b6300f"
+    },
+    {
+      "attributes": {
+        "begincolumn": "5",
+        "beginline": "179",
+        "class": "AlertLifecycle",
+        "endcolumn": "17",
+        "endline": "179",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#avoidsynchronizedstatement",
+        "method": "interruptContinuity",
+        "package": "dev.codex.schubert.nk.batch.monitoring",
+        "priority": "3",
+        "rule": "AvoidSynchronizedStatement",
+        "ruleset": "Multithreading"
+      },
+      "controls": [
+        "if(elapsed.isNegative())",
+        "synchronized(lock)",
+        "elapsed.compareTo(lastElapsed.orElseThrow())<0",
+        "lastElapsed=Optional.of(elapsed)",
+        "recoveringSince=Optional.empty()"
+      ],
+      "currentCases": [
+        {
+          "className": "dev.codex.schubert.nk.batch.monitoring.AlertContinuityTest",
+          "method": "alertContinuity001InvalidInterruptionHasNoStateChange",
+          "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/AlertContinuityTest.java",
+          "sourceSha256": "07b790376ed5c47504e3a6be9e6fbd011c0575f827456f804b91fbbca4ec2811"
+        },
+        {
+          "className": "dev.codex.schubert.nk.batch.monitoring.AlertContinuityTest",
+          "method": "alertContinuity002WarningAndCriticalRecoveryCannotBridgeGap",
+          "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/AlertContinuityTest.java",
+          "sourceSha256": "07b790376ed5c47504e3a6be9e6fbd011c0575f827456f804b91fbbca4ec2811"
+        }
+      ],
+      "currentWholeJoinPending": true,
+      "disposition": "CONTEXT_NOT_APPLICABLE",
+      "id": "PMD-02955",
+      "kind": "PRIVATE_FINAL_PURE_ALERT_OR_TIMED_STATE_MONITOR",
+      "newAccepted": 0,
+      "oldRuntimeReassigned": false,
+      "originalRowSha256": "c8acbfba7097fe08aa5fe5c0b68a79670d5b8270ee1796996bb6f7c2bdafb52e",
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/AlertLifecycle.java",
+      "productTestsExecutedByReview": 0,
+      "reason": "411 section9 requires private-final state lock. Alert transition/gap/snapshot and timed threshold windows/alert projection are each one atomic local observation, no public this/class monitor. No I/O/callback inside these primary critical sections; nested window/lifecycle lock order is one direction in reviewed closure. ReentrantLock suggestion is not a stronger project contract. Boundary/rejected-state/private-owner/finite concurrent tests cover source contract, not all scheduling/OOME or actual system observation.",
+      "rule": "AvoidSynchronizedStatement",
+      "scopeKind": "METHOD",
+      "scopeName": "interruptContinuity",
+      "scopeTokenSha256": "0d279faba3ed7e4eb69b1df1dd224e2470590e1d63ac2fc7f72946190f02feca",
+      "source": "105fd644e90918945607b3ac3e4962843c7762bf",
+      "sourceSha256": "4a461128998ebb7debb2ba1b6f978d1eb4e6e92920f21d20d4e2b2d2dd1ccb61",
+      "sourceSpanSha256": "c666a36176076433b56d77b2fc43ea0a3e66f65e1c74d0b769997a0295b6300f"
+    },
+    {
+      "attributes": {
+        "begincolumn": "5",
+        "beginline": "188",
+        "class": "AlertLifecycle",
+        "endcolumn": "17",
+        "endline": "188",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#avoidsynchronizedstatement",
+        "method": "snapshot",
+        "package": "dev.codex.schubert.nk.batch.monitoring",
+        "priority": "3",
+        "rule": "AvoidSynchronizedStatement",
+        "ruleset": "Multithreading"
+      },
+      "controls": [
+        "synchronized(lock){returnactive;}"
+      ],
+      "currentCases": [
+        {
+          "className": "dev.codex.schubert.nk.batch.monitoring.AlertLifecycleTest",
+          "method": "alert001InitialNormalAndFirstWarningIdentity",
+          "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/AlertLifecycleTest.java",
+          "sourceSha256": "92024d5360a1198fa8a99a31886ab09fe763761d0fc9b6cc4d697809948b7b71"
+        },
+        {
+          "className": "dev.codex.schubert.nk.batch.monitoring.AlertLifecycleTest",
+          "method": "alert003WarningFiveMinuteExactBoundary",
+          "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/AlertLifecycleTest.java",
+          "sourceSha256": "92024d5360a1198fa8a99a31886ab09fe763761d0fc9b6cc4d697809948b7b71"
+        },
+        {
+          "className": "dev.codex.schubert.nk.batch.monitoring.AlertLifecycleTest",
+          "method": "alert006ClosedEventRetiredAndNewViolationStartsFresh",
+          "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/AlertLifecycleTest.java",
+          "sourceSha256": "92024d5360a1198fa8a99a31886ab09fe763761d0fc9b6cc4d697809948b7b71"
+        },
+        {
+          "className": "dev.codex.schubert.nk.batch.monitoring.AlertLifecycleTest",
+          "method": "alert007NullAndInvalidElapsedLeaveStateUnchanged",
+          "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/AlertLifecycleTest.java",
+          "sourceSha256": "92024d5360a1198fa8a99a31886ab09fe763761d0fc9b6cc4d697809948b7b71"
+        },
+        {
+          "className": "dev.codex.schubert.nk.batch.monitoring.AlertLifecycleTest",
+          "method": "alert009ConcurrentSameTickCountsAndPrivateMonitor",
+          "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/AlertLifecycleTest.java",
+          "sourceSha256": "92024d5360a1198fa8a99a31886ab09fe763761d0fc9b6cc4d697809948b7b71"
+        },
+        {
+          "className": "dev.codex.schubert.nk.batch.monitoring.AlertLifecycleTest",
+          "method": "protectedAlert001AllKeysHonorNoAutomaticCloseDespiteConfirmedCause",
+          "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/AlertLifecycleTest.java",
+          "sourceSha256": "92024d5360a1198fa8a99a31886ab09fe763761d0fc9b6cc4d697809948b7b71"
+        },
+        {
+          "className": "dev.codex.schubert.nk.batch.monitoring.AlertLifecycleTest",
+          "method": "protectedAlert002ConcurrentNormalSamplesCannotRetireOrChangeProtectedEvent",
+          "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/AlertLifecycleTest.java",
+          "sourceSha256": "92024d5360a1198fa8a99a31886ab09fe763761d0fc9b6cc4d697809948b7b71"
+        }
+      ],
+      "currentWholeJoinPending": true,
+      "disposition": "CONTEXT_NOT_APPLICABLE",
+      "id": "PMD-02956",
+      "kind": "PRIVATE_FINAL_PURE_ALERT_OR_TIMED_STATE_MONITOR",
+      "newAccepted": 0,
+      "oldRuntimeReassigned": false,
+      "originalRowSha256": "775cbfb622f9ea3680caa54a26da680b2425b92fce2c9ef27361a814d5358da8",
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/AlertLifecycle.java",
+      "productTestsExecutedByReview": 0,
+      "reason": "411 section9 requires private-final state lock. Alert transition/gap/snapshot and timed threshold windows/alert projection are each one atomic local observation, no public this/class monitor. No I/O/callback inside these primary critical sections; nested window/lifecycle lock order is one direction in reviewed closure. ReentrantLock suggestion is not a stronger project contract. Boundary/rejected-state/private-owner/finite concurrent tests cover source contract, not all scheduling/OOME or actual system observation.",
+      "rule": "AvoidSynchronizedStatement",
+      "scopeKind": "METHOD",
+      "scopeName": "snapshot",
+      "scopeTokenSha256": "dbc256bf5ffe5d37a064a5a7e85fdb5c8973a763e024ad423d44fc872082eeb5",
+      "source": "105fd644e90918945607b3ac3e4962843c7762bf",
+      "sourceSha256": "4a461128998ebb7debb2ba1b6f978d1eb4e6e92920f21d20d4e2b2d2dd1ccb61",
+      "sourceSpanSha256": "c666a36176076433b56d77b2fc43ea0a3e66f65e1c74d0b769997a0295b6300f"
+    },
+    {
+      "attributes": {
+        "begincolumn": "5",
+        "beginline": "42",
+        "class": "TimedFilesystemMonitor",
+        "endcolumn": "17",
+        "endline": "42",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#avoidsynchronizedstatement",
+        "method": "observe",
+        "package": "dev.codex.schubert.nk.batch.monitoring",
+        "priority": "3",
+        "rule": "AvoidSynchronizedStatement",
+        "ruleset": "Multithreading"
+      },
+      "controls": [
+        "synchronized(lock)",
+        "lastElapsed=Optional.of(elapsed)",
+        "warning.observe(State.UNKNOWN,elapsed,consecutive)",
+        "critical.observe(State.UNKNOWN,elapsed,consecutive)",
+        "if(!consecutive)lifecycle.interruptContinuity(elapsed)",
+        "thresholds.filesystem(value,above80,above90)"
+      ],
+      "currentCases": [
+        {
+          "className": "dev.codex.schubert.nk.batch.monitoring.TimedFilesystemMonitorTest",
+          "method": "timedFs001WarningBoundaryAndFiveMinuteRecovery",
+          "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/TimedFilesystemMonitorTest.java",
+          "sourceSha256": "eaf75929cad6da6e663b4cac164f48c435bba6014d198d7c6d2b40eae6f04387"
+        },
+        {
+          "className": "dev.codex.schubert.nk.batch.monitoring.TimedFilesystemMonitorTest",
+          "method": "timedFs002CriticalBoundaryAndExplicitCause",
+          "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/TimedFilesystemMonitorTest.java",
+          "sourceSha256": "eaf75929cad6da6e663b4cac164f48c435bba6014d198d7c6d2b40eae6f04387"
+        },
+        {
+          "className": "dev.codex.schubert.nk.batch.monitoring.TimedFilesystemMonitorTest",
+          "method": "timedFs003MissingBreaksViolationWithoutClearingOpenEvent",
+          "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/TimedFilesystemMonitorTest.java",
+          "sourceSha256": "eaf75929cad6da6e663b4cac164f48c435bba6014d198d7c6d2b40eae6f04387"
+        },
+        {
+          "className": "dev.codex.schubert.nk.batch.monitoring.TimedFilesystemMonitorTest",
+          "method": "timedFs004MissingAndExplicitGapBreakNormalRecovery",
+          "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/TimedFilesystemMonitorTest.java",
+          "sourceSha256": "eaf75929cad6da6e663b4cac164f48c435bba6014d198d7c6d2b40eae6f04387"
+        },
+        {
+          "className": "dev.codex.schubert.nk.batch.monitoring.TimedFilesystemMonitorTest",
+          "method": "timedFs005InvalidInputsCannotChangeOwnerState",
+          "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/TimedFilesystemMonitorTest.java",
+          "sourceSha256": "eaf75929cad6da6e663b4cac164f48c435bba6014d198d7c6d2b40eae6f04387"
+        },
+        {
+          "className": "dev.codex.schubert.nk.batch.monitoring.TimedFilesystemMonitorTest",
+          "method": "timedFs006ConcurrentOwnerAndLocalStatusLiteral",
+          "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/TimedFilesystemMonitorTest.java",
+          "sourceSha256": "eaf75929cad6da6e663b4cac164f48c435bba6014d198d7c6d2b40eae6f04387"
+        }
+      ],
+      "currentWholeJoinPending": true,
+      "disposition": "CONTEXT_NOT_APPLICABLE",
+      "id": "PMD-02976",
+      "kind": "PRIVATE_FINAL_PURE_ALERT_OR_TIMED_STATE_MONITOR",
+      "newAccepted": 0,
+      "oldRuntimeReassigned": false,
+      "originalRowSha256": "e993fc9dfc831654300df772e52a5bdc355376c981d57c1f8d4d5fbf01312b9e",
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/TimedFilesystemMonitor.java",
+      "productTestsExecutedByReview": 0,
+      "reason": "411 section9 requires private-final state lock. Alert transition/gap/snapshot and timed threshold windows/alert projection are each one atomic local observation, no public this/class monitor. No I/O/callback inside these primary critical sections; nested window/lifecycle lock order is one direction in reviewed closure. ReentrantLock suggestion is not a stronger project contract. Boundary/rejected-state/private-owner/finite concurrent tests cover source contract, not all scheduling/OOME or actual system observation.",
+      "rule": "AvoidSynchronizedStatement",
+      "scopeKind": "METHOD",
+      "scopeName": "observe",
+      "scopeTokenSha256": "34806b5fb90104b094def5ff0b2749ecd1b0c967f6e673ec64e1c6e99aff6c0e",
+      "source": "105fd644e90918945607b3ac3e4962843c7762bf",
+      "sourceSha256": "f5419d0ad5c8403e7bc09911833f57f3f6f1ce4aebc88824c67bd95ec7e11729",
+      "sourceSpanSha256": "c666a36176076433b56d77b2fc43ea0a3e66f65e1c74d0b769997a0295b6300f"
+    },
+    {
+      "attributes": {
+        "begincolumn": "5",
+        "beginline": "73",
+        "class": "TimedFilesystemMonitor",
+        "endcolumn": "17",
+        "endline": "73",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#avoidsynchronizedstatement",
+        "method": "snapshot",
+        "package": "dev.codex.schubert.nk.batch.monitoring",
+        "priority": "3",
+        "rule": "AvoidSynchronizedStatement",
+        "ruleset": "Multithreading"
+      },
+      "controls": [
+        "synchronized(lock){returnlifecycle.snapshot();}"
+      ],
+      "currentCases": [
+        {
+          "className": "dev.codex.schubert.nk.batch.monitoring.TimedFilesystemMonitorTest",
+          "method": "timedFs001WarningBoundaryAndFiveMinuteRecovery",
+          "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/TimedFilesystemMonitorTest.java",
+          "sourceSha256": "eaf75929cad6da6e663b4cac164f48c435bba6014d198d7c6d2b40eae6f04387"
+        },
+        {
+          "className": "dev.codex.schubert.nk.batch.monitoring.TimedFilesystemMonitorTest",
+          "method": "timedFs002CriticalBoundaryAndExplicitCause",
+          "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/TimedFilesystemMonitorTest.java",
+          "sourceSha256": "eaf75929cad6da6e663b4cac164f48c435bba6014d198d7c6d2b40eae6f04387"
+        },
+        {
+          "className": "dev.codex.schubert.nk.batch.monitoring.TimedFilesystemMonitorTest",
+          "method": "timedFs003MissingBreaksViolationWithoutClearingOpenEvent",
+          "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/TimedFilesystemMonitorTest.java",
+          "sourceSha256": "eaf75929cad6da6e663b4cac164f48c435bba6014d198d7c6d2b40eae6f04387"
+        },
+        {
+          "className": "dev.codex.schubert.nk.batch.monitoring.TimedFilesystemMonitorTest",
+          "method": "timedFs005InvalidInputsCannotChangeOwnerState",
+          "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/TimedFilesystemMonitorTest.java",
+          "sourceSha256": "eaf75929cad6da6e663b4cac164f48c435bba6014d198d7c6d2b40eae6f04387"
+        },
+        {
+          "className": "dev.codex.schubert.nk.batch.monitoring.TimedFilesystemMonitorTest",
+          "method": "timedFs006ConcurrentOwnerAndLocalStatusLiteral",
+          "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/TimedFilesystemMonitorTest.java",
+          "sourceSha256": "eaf75929cad6da6e663b4cac164f48c435bba6014d198d7c6d2b40eae6f04387"
+        }
+      ],
+      "currentWholeJoinPending": true,
+      "disposition": "CONTEXT_NOT_APPLICABLE",
+      "id": "PMD-02977",
+      "kind": "PRIVATE_FINAL_PURE_ALERT_OR_TIMED_STATE_MONITOR",
+      "newAccepted": 0,
+      "oldRuntimeReassigned": false,
+      "originalRowSha256": "aa04f383513d5d97c880149e5dbaeb6b65941d851f1f069bd4bbe24807e52a3a",
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/TimedFilesystemMonitor.java",
+      "productTestsExecutedByReview": 0,
+      "reason": "411 section9 requires private-final state lock. Alert transition/gap/snapshot and timed threshold windows/alert projection are each one atomic local observation, no public this/class monitor. No I/O/callback inside these primary critical sections; nested window/lifecycle lock order is one direction in reviewed closure. ReentrantLock suggestion is not a stronger project contract. Boundary/rejected-state/private-owner/finite concurrent tests cover source contract, not all scheduling/OOME or actual system observation.",
+      "rule": "AvoidSynchronizedStatement",
+      "scopeKind": "METHOD",
+      "scopeName": "snapshot",
+      "scopeTokenSha256": "be0a33ce57688dd5321741980028d1d24baf15bd031ce4322de917b1e7a9523a",
+      "source": "105fd644e90918945607b3ac3e4962843c7762bf",
+      "sourceSha256": "f5419d0ad5c8403e7bc09911833f57f3f6f1ce4aebc88824c67bd95ec7e11729",
+      "sourceSpanSha256": "c666a36176076433b56d77b2fc43ea0a3e66f65e1c74d0b769997a0295b6300f"
+    },
+    {
+      "attributes": {
+        "begincolumn": "25",
+        "beginline": "213",
+        "class": "AlertLifecycleTest",
+        "endcolumn": "56",
+        "endline": "213",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "method": "alert009ConcurrentSameTickCountsAndPrivateMonitor",
+        "package": "dev.codex.schubert.nk.batch.monitoring",
+        "priority": "3",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading",
+        "variable": "executor"
+      },
+      "controls": [
+        "try(varexecutor=Executors.newFixedThreadPool(4))",
+        "index<64",
+        "synchronized(owner)",
+        "executor.invokeAll(tasks,10,TimeUnit.SECONDS)",
+        "value<=65",
+        "assertEquals(expected,counts)",
+        "executor.shutdownNow()",
+        "assertTrue(executor.awaitTermination(10,TimeUnit.SECONDS))"
+      ],
+      "currentCases": [
+        {
+          "className": "dev.codex.schubert.nk.batch.monitoring.AlertLifecycleTest",
+          "method": "alert009ConcurrentSameTickCountsAndPrivateMonitor",
+          "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/AlertLifecycleTest.java",
+          "sourceSha256": "92024d5360a1198fa8a99a31886ab09fe763761d0fc9b6cc4d697809948b7b71"
+        }
+      ],
+      "currentWholeJoinPending": true,
+      "disposition": "CONTEXT_NOT_APPLICABLE",
+      "id": "PMD-04686",
+      "kind": "OWNED_FINITE_PURE_HEALTH_ALERT_FIXTURE_WORKERS",
+      "newAccepted": 0,
+      "oldRuntimeReassigned": false,
+      "originalRowSha256": "e61f7b1b2d01809dc0e2c676c9d4b8d672a470c2e535d3ed3b012060568f5f68",
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/AlertLifecycleTest.java",
+      "productTestsExecutedByReview": 0,
+      "reason": "Standalone local pools, four/eight workers and64 finite scalar/stub calls; protected alert test is logical enum state only. Alert/Timed invokeAll/await10seconds where explicit; Filesystem/Clock invokeAll and get, plus all TWR close, have no local absolute deadline. Distinct outer JVM240seconds. FileStore methods are fixed overridden values/counters, not actual filesystem or identity; no DB/network/VM/Root/native/key/permission operation. Existing thread refs source-rebound, raw retained.",
+      "rule": "DoNotUseThreads",
+      "scopeKind": "METHOD",
+      "scopeName": "alert009ConcurrentSameTickCountsAndPrivateMonitor",
+      "scopeTokenSha256": "d2dd283762ddd54f81ff47340be0a0b150898822dd64dc48397e306c807e1b37",
+      "source": "105fd644e90918945607b3ac3e4962843c7762bf",
+      "sourceSha256": "92024d5360a1198fa8a99a31886ab09fe763761d0fc9b6cc4d697809948b7b71",
+      "sourceSpanSha256": "f93e1793cb7a139e55f0b0dcf12d1f4620721e0707876be38f521c37b77d4ba3"
+    },
+    {
+      "attributes": {
+        "begincolumn": "9",
+        "beginline": "219",
+        "class": "AlertLifecycleTest",
+        "endcolumn": "21",
+        "endline": "219",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#avoidsynchronizedstatement",
+        "method": "alert009ConcurrentSameTickCountsAndPrivateMonitor",
+        "package": "dev.codex.schubert.nk.batch.monitoring",
+        "priority": "3",
+        "rule": "AvoidSynchronizedStatement",
+        "ruleset": "Multithreading"
+      },
+      "controls": [
+        "try(varexecutor=Executors.newFixedThreadPool(4))",
+        "index<64",
+        "synchronized(owner)",
+        "executor.invokeAll(tasks,10,TimeUnit.SECONDS)",
+        "value<=65",
+        "assertEquals(expected,counts)",
+        "executor.shutdownNow()",
+        "assertTrue(executor.awaitTermination(10,TimeUnit.SECONDS))"
+      ],
+      "currentCases": [
+        {
+          "className": "dev.codex.schubert.nk.batch.monitoring.AlertLifecycleTest",
+          "method": "alert009ConcurrentSameTickCountsAndPrivateMonitor",
+          "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/AlertLifecycleTest.java",
+          "sourceSha256": "92024d5360a1198fa8a99a31886ab09fe763761d0fc9b6cc4d697809948b7b71"
+        }
+      ],
+      "currentWholeJoinPending": true,
+      "disposition": "CONTEXT_NOT_APPLICABLE",
+      "id": "PMD-04687",
+      "kind": "INTENTIONAL_PUBLIC_OWNER_MONITOR_DEFENSE_CHECK",
+      "newAccepted": 0,
+      "oldRuntimeReassigned": false,
+      "originalRowSha256": "7d6a3f3fd66749c7c23f44d6d4a3802e8e5bb027638ef8a7e31f85139fbe1fe7",
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/AlertLifecycleTest.java",
+      "productTestsExecutedByReview": 0,
+      "reason": "Test deliberately holds public owner monitor while separate workers update owner: successful independent counts2..65 prove Main uses a distinct private monitor. Replacing this fixture lock would remove the safety oracle. Owned four-worker invokeAll10seconds/TWR+original finally and outer240seconds remain; no external object/process locking or authority.",
+      "rule": "AvoidSynchronizedStatement",
+      "scopeKind": "METHOD",
+      "scopeName": "alert009ConcurrentSameTickCountsAndPrivateMonitor",
+      "scopeTokenSha256": "d2dd283762ddd54f81ff47340be0a0b150898822dd64dc48397e306c807e1b37",
+      "source": "105fd644e90918945607b3ac3e4962843c7762bf",
+      "sourceSha256": "92024d5360a1198fa8a99a31886ab09fe763761d0fc9b6cc4d697809948b7b71",
+      "sourceSpanSha256": "c666a36176076433b56d77b2fc43ea0a3e66f65e1c74d0b769997a0295b6300f"
+    },
+    {
+      "attributes": {
+        "begincolumn": "29",
+        "beginline": "220",
+        "class": "AlertLifecycleTest",
+        "endcolumn": "76",
+        "endline": "220",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "method": "alert009ConcurrentSameTickCountsAndPrivateMonitor",
+        "package": "dev.codex.schubert.nk.batch.monitoring",
+        "priority": "3",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading"
+      },
+      "controls": [
+        "try(varexecutor=Executors.newFixedThreadPool(4))",
+        "index<64",
+        "synchronized(owner)",
+        "executor.invokeAll(tasks,10,TimeUnit.SECONDS)",
+        "value<=65",
+        "assertEquals(expected,counts)",
+        "executor.shutdownNow()",
+        "assertTrue(executor.awaitTermination(10,TimeUnit.SECONDS))"
+      ],
+      "currentCases": [
+        {
+          "className": "dev.codex.schubert.nk.batch.monitoring.AlertLifecycleTest",
+          "method": "alert009ConcurrentSameTickCountsAndPrivateMonitor",
+          "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/AlertLifecycleTest.java",
+          "sourceSha256": "92024d5360a1198fa8a99a31886ab09fe763761d0fc9b6cc4d697809948b7b71"
+        }
+      ],
+      "currentWholeJoinPending": true,
+      "disposition": "CONTEXT_NOT_APPLICABLE",
+      "id": "PMD-04688",
+      "kind": "OWNED_FINITE_PURE_HEALTH_ALERT_FIXTURE_WORKERS",
+      "newAccepted": 0,
+      "oldRuntimeReassigned": false,
+      "originalRowSha256": "c4afb6ed208bb194f3ff521017b76e8bf2339410d4b4b9c9e53b6d49ff1d622b",
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/AlertLifecycleTest.java",
+      "productTestsExecutedByReview": 0,
+      "reason": "Standalone local pools, four/eight workers and64 finite scalar/stub calls; protected alert test is logical enum state only. Alert/Timed invokeAll/await10seconds where explicit; Filesystem/Clock invokeAll and get, plus all TWR close, have no local absolute deadline. Distinct outer JVM240seconds. FileStore methods are fixed overridden values/counters, not actual filesystem or identity; no DB/network/VM/Root/native/key/permission operation. Existing thread refs source-rebound, raw retained.",
+      "rule": "DoNotUseThreads",
+      "scopeKind": "METHOD",
+      "scopeName": "alert009ConcurrentSameTickCountsAndPrivateMonitor",
+      "scopeTokenSha256": "d2dd283762ddd54f81ff47340be0a0b150898822dd64dc48397e306c807e1b37",
+      "source": "105fd644e90918945607b3ac3e4962843c7762bf",
+      "sourceSha256": "92024d5360a1198fa8a99a31886ab09fe763761d0fc9b6cc4d697809948b7b71",
+      "sourceSpanSha256": "bb5f092b2a814953257be1b5d7c5685f2e2686044ca0f02f162d351ab9ce9c95"
+    },
+    {
+      "attributes": {
+        "begincolumn": "9",
+        "beginline": "229",
+        "class": "AlertLifecycleTest",
+        "endcolumn": "31",
+        "endline": "229",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "method": "alert009ConcurrentSameTickCountsAndPrivateMonitor",
+        "package": "dev.codex.schubert.nk.batch.monitoring",
+        "priority": "3",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading"
+      },
+      "controls": [
+        "try(varexecutor=Executors.newFixedThreadPool(4))",
+        "index<64",
+        "synchronized(owner)",
+        "executor.invokeAll(tasks,10,TimeUnit.SECONDS)",
+        "value<=65",
+        "assertEquals(expected,counts)",
+        "executor.shutdownNow()",
+        "assertTrue(executor.awaitTermination(10,TimeUnit.SECONDS))"
+      ],
+      "currentCases": [
+        {
+          "className": "dev.codex.schubert.nk.batch.monitoring.AlertLifecycleTest",
+          "method": "alert009ConcurrentSameTickCountsAndPrivateMonitor",
+          "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/AlertLifecycleTest.java",
+          "sourceSha256": "92024d5360a1198fa8a99a31886ab09fe763761d0fc9b6cc4d697809948b7b71"
+        }
+      ],
+      "currentWholeJoinPending": true,
+      "disposition": "CONTEXT_NOT_APPLICABLE",
+      "id": "PMD-04689",
+      "kind": "OWNED_FINITE_PURE_HEALTH_ALERT_FIXTURE_WORKERS",
+      "newAccepted": 0,
+      "oldRuntimeReassigned": false,
+      "originalRowSha256": "f365d59d9467aed41db6f4d558eb7a4b0d9c8319d05267aea105fed55ed7ff8f",
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/AlertLifecycleTest.java",
+      "productTestsExecutedByReview": 0,
+      "reason": "Standalone local pools, four/eight workers and64 finite scalar/stub calls; protected alert test is logical enum state only. Alert/Timed invokeAll/await10seconds where explicit; Filesystem/Clock invokeAll and get, plus all TWR close, have no local absolute deadline. Distinct outer JVM240seconds. FileStore methods are fixed overridden values/counters, not actual filesystem or identity; no DB/network/VM/Root/native/key/permission operation. Existing thread refs source-rebound, raw retained.",
+      "rule": "DoNotUseThreads",
+      "scopeKind": "METHOD",
+      "scopeName": "alert009ConcurrentSameTickCountsAndPrivateMonitor",
+      "scopeTokenSha256": "d2dd283762ddd54f81ff47340be0a0b150898822dd64dc48397e306c807e1b37",
+      "source": "105fd644e90918945607b3ac3e4962843c7762bf",
+      "sourceSha256": "92024d5360a1198fa8a99a31886ab09fe763761d0fc9b6cc4d697809948b7b71",
+      "sourceSpanSha256": "447cb134622833454dbcfd6b8edb9568b5b6bffacad735fc46be8baae7c7c49c"
+    },
+    {
+      "attributes": {
+        "begincolumn": "20",
+        "beginline": "230",
+        "class": "AlertLifecycleTest",
+        "endcolumn": "67",
+        "endline": "230",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "method": "alert009ConcurrentSameTickCountsAndPrivateMonitor",
+        "package": "dev.codex.schubert.nk.batch.monitoring",
+        "priority": "3",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading"
+      },
+      "controls": [
+        "try(varexecutor=Executors.newFixedThreadPool(4))",
+        "index<64",
+        "synchronized(owner)",
+        "executor.invokeAll(tasks,10,TimeUnit.SECONDS)",
+        "value<=65",
+        "assertEquals(expected,counts)",
+        "executor.shutdownNow()",
+        "assertTrue(executor.awaitTermination(10,TimeUnit.SECONDS))"
+      ],
+      "currentCases": [
+        {
+          "className": "dev.codex.schubert.nk.batch.monitoring.AlertLifecycleTest",
+          "method": "alert009ConcurrentSameTickCountsAndPrivateMonitor",
+          "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/AlertLifecycleTest.java",
+          "sourceSha256": "92024d5360a1198fa8a99a31886ab09fe763761d0fc9b6cc4d697809948b7b71"
+        }
+      ],
+      "currentWholeJoinPending": true,
+      "disposition": "CONTEXT_NOT_APPLICABLE",
+      "id": "PMD-04690",
+      "kind": "OWNED_FINITE_PURE_HEALTH_ALERT_FIXTURE_WORKERS",
+      "newAccepted": 0,
+      "oldRuntimeReassigned": false,
+      "originalRowSha256": "b0904ace1bfefe34a58d499b16bc3057780b69b5ed53b5f1e5dce0dfbdb38a7f",
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/AlertLifecycleTest.java",
+      "productTestsExecutedByReview": 0,
+      "reason": "Standalone local pools, four/eight workers and64 finite scalar/stub calls; protected alert test is logical enum state only. Alert/Timed invokeAll/await10seconds where explicit; Filesystem/Clock invokeAll and get, plus all TWR close, have no local absolute deadline. Distinct outer JVM240seconds. FileStore methods are fixed overridden values/counters, not actual filesystem or identity; no DB/network/VM/Root/native/key/permission operation. Existing thread refs source-rebound, raw retained.",
+      "rule": "DoNotUseThreads",
+      "scopeKind": "METHOD",
+      "scopeName": "alert009ConcurrentSameTickCountsAndPrivateMonitor",
+      "scopeTokenSha256": "d2dd283762ddd54f81ff47340be0a0b150898822dd64dc48397e306c807e1b37",
+      "source": "105fd644e90918945607b3ac3e4962843c7762bf",
+      "sourceSha256": "92024d5360a1198fa8a99a31886ab09fe763761d0fc9b6cc4d697809948b7b71",
+      "sourceSpanSha256": "d541ae7bb57fcde19f69c441a68e1d8c3446a7babe941444ac301c72caad9cf7"
+    },
+    {
+      "attributes": {
+        "begincolumn": "27",
+        "beginline": "289",
+        "class": "AlertLifecycleTest",
+        "endcolumn": "58",
+        "endline": "289",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "method": "protectedAlert002ConcurrentNormalSamplesCannotRetireOrChangeProtectedEvent",
+        "package": "dev.codex.schubert.nk.batch.monitoring",
+        "priority": "3",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading",
+        "variable": "executor"
+      },
+      "controls": [
+        "newCondition[]{Condition.DLQ,Condition.INTEGRITY_CONFIG}",
+        "i<64",
+        "try(varexecutor=Executors.newFixedThreadPool(8))",
+        "executor.invokeAll(tasks,10,TimeUnit.SECONDS)",
+        "assertSame(first,result.get())",
+        "assertSame(first,owner.snapshot().orElseThrow())"
+      ],
+      "currentCases": [
+        {
+          "className": "dev.codex.schubert.nk.batch.monitoring.AlertLifecycleTest",
+          "method": "protectedAlert002ConcurrentNormalSamplesCannotRetireOrChangeProtectedEvent",
+          "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/AlertLifecycleTest.java",
+          "sourceSha256": "92024d5360a1198fa8a99a31886ab09fe763761d0fc9b6cc4d697809948b7b71"
+        }
+      ],
+      "currentWholeJoinPending": true,
+      "disposition": "CONTEXT_NOT_APPLICABLE",
+      "id": "PMD-04691",
+      "kind": "OWNED_FINITE_PURE_HEALTH_ALERT_FIXTURE_WORKERS",
+      "newAccepted": 0,
+      "oldRuntimeReassigned": false,
+      "originalRowSha256": "c203bbd2d9022544e22a7dc0ec0bc329ca294ebb896b3f6c5ac74f6cec78cca3",
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/AlertLifecycleTest.java",
+      "productTestsExecutedByReview": 0,
+      "reason": "Standalone local pools, four/eight workers and64 finite scalar/stub calls; protected alert test is logical enum state only. Alert/Timed invokeAll/await10seconds where explicit; Filesystem/Clock invokeAll and get, plus all TWR close, have no local absolute deadline. Distinct outer JVM240seconds. FileStore methods are fixed overridden values/counters, not actual filesystem or identity; no DB/network/VM/Root/native/key/permission operation. Existing thread refs source-rebound, raw retained.",
+      "rule": "DoNotUseThreads",
+      "scopeKind": "METHOD",
+      "scopeName": "protectedAlert002ConcurrentNormalSamplesCannotRetireOrChangeProtectedEvent",
+      "scopeTokenSha256": "ea1b33ee9ac9e6e9073a2b5e467587050990b01196f4ef91ea6eadca9a2f53c5",
+      "source": "105fd644e90918945607b3ac3e4962843c7762bf",
+      "sourceSha256": "92024d5360a1198fa8a99a31886ab09fe763761d0fc9b6cc4d697809948b7b71",
+      "sourceSpanSha256": "45a38a95e5b1914bc44b51b29e60fb4d5c93e0e1d3f6a314234d653392df5f14"
+    },
+    {
+      "attributes": {
+        "begincolumn": "27",
+        "beginline": "290",
+        "class": "AlertLifecycleTest",
+        "endcolumn": "74",
+        "endline": "290",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "method": "protectedAlert002ConcurrentNormalSamplesCannotRetireOrChangeProtectedEvent",
+        "package": "dev.codex.schubert.nk.batch.monitoring",
+        "priority": "3",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading"
+      },
+      "controls": [
+        "newCondition[]{Condition.DLQ,Condition.INTEGRITY_CONFIG}",
+        "i<64",
+        "try(varexecutor=Executors.newFixedThreadPool(8))",
+        "executor.invokeAll(tasks,10,TimeUnit.SECONDS)",
+        "assertSame(first,result.get())",
+        "assertSame(first,owner.snapshot().orElseThrow())"
+      ],
+      "currentCases": [
+        {
+          "className": "dev.codex.schubert.nk.batch.monitoring.AlertLifecycleTest",
+          "method": "protectedAlert002ConcurrentNormalSamplesCannotRetireOrChangeProtectedEvent",
+          "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/AlertLifecycleTest.java",
+          "sourceSha256": "92024d5360a1198fa8a99a31886ab09fe763761d0fc9b6cc4d697809948b7b71"
+        }
+      ],
+      "currentWholeJoinPending": true,
+      "disposition": "CONTEXT_NOT_APPLICABLE",
+      "id": "PMD-04692",
+      "kind": "OWNED_FINITE_PURE_HEALTH_ALERT_FIXTURE_WORKERS",
+      "newAccepted": 0,
+      "oldRuntimeReassigned": false,
+      "originalRowSha256": "67128cd88b5fe6ebc996d19426624320735648dba58cf6a057d634b330c7682c",
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/AlertLifecycleTest.java",
+      "productTestsExecutedByReview": 0,
+      "reason": "Standalone local pools, four/eight workers and64 finite scalar/stub calls; protected alert test is logical enum state only. Alert/Timed invokeAll/await10seconds where explicit; Filesystem/Clock invokeAll and get, plus all TWR close, have no local absolute deadline. Distinct outer JVM240seconds. FileStore methods are fixed overridden values/counters, not actual filesystem or identity; no DB/network/VM/Root/native/key/permission operation. Existing thread refs source-rebound, raw retained.",
+      "rule": "DoNotUseThreads",
+      "scopeKind": "METHOD",
+      "scopeName": "protectedAlert002ConcurrentNormalSamplesCannotRetireOrChangeProtectedEvent",
+      "scopeTokenSha256": "ea1b33ee9ac9e6e9073a2b5e467587050990b01196f4ef91ea6eadca9a2f53c5",
+      "source": "105fd644e90918945607b3ac3e4962843c7762bf",
+      "sourceSha256": "92024d5360a1198fa8a99a31886ab09fe763761d0fc9b6cc4d697809948b7b71",
+      "sourceSpanSha256": "bb5f092b2a814953257be1b5d7c5685f2e2686044ca0f02f162d351ab9ce9c95"
+    },
+    {
+      "attributes": {
+        "begincolumn": "21",
+        "beginline": "224",
+        "class": "FilesystemHealthObservationTest",
+        "endcolumn": "52",
+        "endline": "224",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "method": "fsInput007NullAndConcurrentIndependentReadsDoNotAcquireOwnership",
+        "package": "dev.codex.schubert.nk.batch.monitoring",
+        "priority": "3",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading",
+        "variable": "pool"
+      },
+      "controls": [
+        "try(varpool=Executors.newFixedThreadPool(8))",
+        "IntStream.range(0,64)",
+        "pool.invokeAll(jobs)",
+        "assertEquals(80,result.get())",
+        "assertEquals(64,store.totalReads.get())",
+        "assertEquals(64,store.usableReads.get())"
+      ],
+      "currentCases": [
+        {
+          "className": "dev.codex.schubert.nk.batch.monitoring.FilesystemHealthObservationTest",
+          "method": "fsInput007NullAndConcurrentIndependentReadsDoNotAcquireOwnership",
+          "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/FilesystemHealthObservationTest.java",
+          "sourceSha256": "a1925aaa21a6bfe9db25d6dc8c83156f190ac980d1af0c2dadca624929f81dca"
+        }
+      ],
+      "currentWholeJoinPending": true,
+      "disposition": "CONTEXT_NOT_APPLICABLE",
+      "id": "PMD-04818",
+      "kind": "OWNED_FINITE_PURE_HEALTH_ALERT_FIXTURE_WORKERS",
+      "newAccepted": 0,
+      "oldRuntimeReassigned": false,
+      "originalRowSha256": "8856d0665018ed10092ab9d2c44e8b67c68cbde93c28ddbd1f514001f335f6ba",
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/FilesystemHealthObservationTest.java",
+      "productTestsExecutedByReview": 0,
+      "reason": "Standalone local pools, four/eight workers and64 finite scalar/stub calls; protected alert test is logical enum state only. Alert/Timed invokeAll/await10seconds where explicit; Filesystem/Clock invokeAll and get, plus all TWR close, have no local absolute deadline. Distinct outer JVM240seconds. FileStore methods are fixed overridden values/counters, not actual filesystem or identity; no DB/network/VM/Root/native/key/permission operation. Existing thread refs source-rebound, raw retained.",
+      "rule": "DoNotUseThreads",
+      "scopeKind": "METHOD",
+      "scopeName": "fsInput007NullAndConcurrentIndependentReadsDoNotAcquireOwnership",
+      "scopeTokenSha256": "6c3c760cc22fc99f483a50d43a52297ea9086e1053d35ebe1a4dc0bc5c10b347",
+      "source": "105fd644e90918945607b3ac3e4962843c7762bf",
+      "sourceSha256": "a1925aaa21a6bfe9db25d6dc8c83156f190ac980d1af0c2dadca624929f81dca",
+      "sourceSpanSha256": "45a38a95e5b1914bc44b51b29e60fb4d5c93e0e1d3f6a314234d653392df5f14"
+    },
+    {
+      "attributes": {
+        "begincolumn": "25",
+        "beginline": "229",
+        "class": "FilesystemHealthObservationTest",
+        "endcolumn": "45",
+        "endline": "229",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "method": "fsInput007NullAndConcurrentIndependentReadsDoNotAcquireOwnership",
+        "package": "dev.codex.schubert.nk.batch.monitoring",
+        "priority": "3",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading"
+      },
+      "controls": [
+        "try(varpool=Executors.newFixedThreadPool(8))",
+        "IntStream.range(0,64)",
+        "pool.invokeAll(jobs)",
+        "assertEquals(80,result.get())",
+        "assertEquals(64,store.totalReads.get())",
+        "assertEquals(64,store.usableReads.get())"
+      ],
+      "currentCases": [
+        {
+          "className": "dev.codex.schubert.nk.batch.monitoring.FilesystemHealthObservationTest",
+          "method": "fsInput007NullAndConcurrentIndependentReadsDoNotAcquireOwnership",
+          "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/FilesystemHealthObservationTest.java",
+          "sourceSha256": "a1925aaa21a6bfe9db25d6dc8c83156f190ac980d1af0c2dadca624929f81dca"
+        }
+      ],
+      "currentWholeJoinPending": true,
+      "disposition": "CONTEXT_NOT_APPLICABLE",
+      "id": "PMD-04819",
+      "kind": "OWNED_FINITE_PURE_HEALTH_ALERT_FIXTURE_WORKERS",
+      "newAccepted": 0,
+      "oldRuntimeReassigned": false,
+      "originalRowSha256": "fc91673f16765023a27550ff25aafffb8848fda014d18f1e48315d5464b481d2",
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/FilesystemHealthObservationTest.java",
+      "productTestsExecutedByReview": 0,
+      "reason": "Standalone local pools, four/eight workers and64 finite scalar/stub calls; protected alert test is logical enum state only. Alert/Timed invokeAll/await10seconds where explicit; Filesystem/Clock invokeAll and get, plus all TWR close, have no local absolute deadline. Distinct outer JVM240seconds. FileStore methods are fixed overridden values/counters, not actual filesystem or identity; no DB/network/VM/Root/native/key/permission operation. Existing thread refs source-rebound, raw retained.",
+      "rule": "DoNotUseThreads",
+      "scopeKind": "METHOD",
+      "scopeName": "fsInput007NullAndConcurrentIndependentReadsDoNotAcquireOwnership",
+      "scopeTokenSha256": "6c3c760cc22fc99f483a50d43a52297ea9086e1053d35ebe1a4dc0bc5c10b347",
+      "source": "105fd644e90918945607b3ac3e4962843c7762bf",
+      "sourceSha256": "a1925aaa21a6bfe9db25d6dc8c83156f190ac980d1af0c2dadca624929f81dca",
+      "sourceSpanSha256": "cf119bee31771d362b9bd975f19c2a8de10a683718deaa11cd1a5fe37683e51c"
+    },
+    {
+      "attributes": {
+        "begincolumn": "21",
+        "beginline": "325",
+        "class": "FilesystemHealthObservationTest",
+        "endcolumn": "52",
+        "endline": "325",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "method": "fsInput010NullBackwardsGapAndConcurrentPollHaveOneSerializedOwner",
+        "package": "dev.codex.schubert.nk.batch.monitoring",
+        "priority": "3",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading",
+        "variable": "pool"
+      },
+      "controls": [
+        "try(varpool=Executors.newFixedThreadPool(8))",
+        "IntStream.range(0,64)",
+        "pool.invokeAll(jobs)",
+        "assertEquals(Severity.CRITICAL,result.get())",
+        "assertEquals(BigInteger.valueOf(65),monitor.snapshot().orElseThrow().count())"
+      ],
+      "currentCases": [
+        {
+          "className": "dev.codex.schubert.nk.batch.monitoring.FilesystemHealthObservationTest",
+          "method": "fsInput010NullBackwardsGapAndConcurrentPollHaveOneSerializedOwner",
+          "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/FilesystemHealthObservationTest.java",
+          "sourceSha256": "a1925aaa21a6bfe9db25d6dc8c83156f190ac980d1af0c2dadca624929f81dca"
+        }
+      ],
+      "currentWholeJoinPending": true,
+      "disposition": "CONTEXT_NOT_APPLICABLE",
+      "id": "PMD-04820",
+      "kind": "OWNED_FINITE_PURE_HEALTH_ALERT_FIXTURE_WORKERS",
+      "newAccepted": 0,
+      "oldRuntimeReassigned": false,
+      "originalRowSha256": "13278d1621386e65f4d9b2d1b4780f475b68c4d46c9af8df0d55a13206d8f689",
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/FilesystemHealthObservationTest.java",
+      "productTestsExecutedByReview": 0,
+      "reason": "Standalone local pools, four/eight workers and64 finite scalar/stub calls; protected alert test is logical enum state only. Alert/Timed invokeAll/await10seconds where explicit; Filesystem/Clock invokeAll and get, plus all TWR close, have no local absolute deadline. Distinct outer JVM240seconds. FileStore methods are fixed overridden values/counters, not actual filesystem or identity; no DB/network/VM/Root/native/key/permission operation. Existing thread refs source-rebound, raw retained.",
+      "rule": "DoNotUseThreads",
+      "scopeKind": "METHOD",
+      "scopeName": "fsInput010NullBackwardsGapAndConcurrentPollHaveOneSerializedOwner",
+      "scopeTokenSha256": "12f14e7340517dfc4f88498a08a79bb179281a3d4c80e3e3e225e99f2dfb3c1b",
+      "source": "105fd644e90918945607b3ac3e4962843c7762bf",
+      "sourceSha256": "a1925aaa21a6bfe9db25d6dc8c83156f190ac980d1af0c2dadca624929f81dca",
+      "sourceSpanSha256": "45a38a95e5b1914bc44b51b29e60fb4d5c93e0e1d3f6a314234d653392df5f14"
+    },
+    {
+      "attributes": {
+        "begincolumn": "25",
+        "beginline": "337",
+        "class": "FilesystemHealthObservationTest",
+        "endcolumn": "45",
+        "endline": "337",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "method": "fsInput010NullBackwardsGapAndConcurrentPollHaveOneSerializedOwner",
+        "package": "dev.codex.schubert.nk.batch.monitoring",
+        "priority": "3",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading"
+      },
+      "controls": [
+        "try(varpool=Executors.newFixedThreadPool(8))",
+        "IntStream.range(0,64)",
+        "pool.invokeAll(jobs)",
+        "assertEquals(Severity.CRITICAL,result.get())",
+        "assertEquals(BigInteger.valueOf(65),monitor.snapshot().orElseThrow().count())"
+      ],
+      "currentCases": [
+        {
+          "className": "dev.codex.schubert.nk.batch.monitoring.FilesystemHealthObservationTest",
+          "method": "fsInput010NullBackwardsGapAndConcurrentPollHaveOneSerializedOwner",
+          "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/FilesystemHealthObservationTest.java",
+          "sourceSha256": "a1925aaa21a6bfe9db25d6dc8c83156f190ac980d1af0c2dadca624929f81dca"
+        }
+      ],
+      "currentWholeJoinPending": true,
+      "disposition": "CONTEXT_NOT_APPLICABLE",
+      "id": "PMD-04821",
+      "kind": "OWNED_FINITE_PURE_HEALTH_ALERT_FIXTURE_WORKERS",
+      "newAccepted": 0,
+      "oldRuntimeReassigned": false,
+      "originalRowSha256": "d7b087dd10b53dda963e9e91ecbf08e154f74a27f793d94081a955ef451855b4",
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/FilesystemHealthObservationTest.java",
+      "productTestsExecutedByReview": 0,
+      "reason": "Standalone local pools, four/eight workers and64 finite scalar/stub calls; protected alert test is logical enum state only. Alert/Timed invokeAll/await10seconds where explicit; Filesystem/Clock invokeAll and get, plus all TWR close, have no local absolute deadline. Distinct outer JVM240seconds. FileStore methods are fixed overridden values/counters, not actual filesystem or identity; no DB/network/VM/Root/native/key/permission operation. Existing thread refs source-rebound, raw retained.",
+      "rule": "DoNotUseThreads",
+      "scopeKind": "METHOD",
+      "scopeName": "fsInput010NullBackwardsGapAndConcurrentPollHaveOneSerializedOwner",
+      "scopeTokenSha256": "12f14e7340517dfc4f88498a08a79bb179281a3d4c80e3e3e225e99f2dfb3c1b",
+      "source": "105fd644e90918945607b3ac3e4962843c7762bf",
+      "sourceSha256": "a1925aaa21a6bfe9db25d6dc8c83156f190ac980d1af0c2dadca624929f81dca",
+      "sourceSpanSha256": "cf119bee31771d362b9bd975f19c2a8de10a683718deaa11cd1a5fe37683e51c"
+    },
+    {
+      "attributes": {
+        "begincolumn": "21",
+        "beginline": "212",
+        "class": "MonitoringObservationClockTest",
+        "endcolumn": "52",
+        "endline": "212",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "method": "obsClock007ConcurrentContextsHaveUniqueMonotonicSnapshots",
+        "package": "dev.codex.schubert.nk.batch.monitoring",
+        "priority": "3",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading",
+        "variable": "pool"
+      },
+      "controls": [
+        "try(varpool=Executors.newFixedThreadPool(8))",
+        "IntStream.range(0,64)",
+        "pool.invokeAll(jobs)",
+        "result.get()",
+        "for(inti=1;i<=64;i++)expected.add(Duration.ofNanos(i))",
+        "assertEquals(expected,actual)",
+        "assertEquals(65,ticks.get())",
+        "assertEquals(64,wall.reads.get())"
+      ],
+      "currentCases": [
+        {
+          "className": "dev.codex.schubert.nk.batch.monitoring.MonitoringObservationClockTest",
+          "method": "obsClock007ConcurrentContextsHaveUniqueMonotonicSnapshots",
+          "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/MonitoringObservationClockTest.java",
+          "sourceSha256": "4612f486d88e111f2927330c0d227b00395d60e51993351896ab510cf6496e9d"
+        }
+      ],
+      "currentWholeJoinPending": true,
+      "disposition": "CONTEXT_NOT_APPLICABLE",
+      "id": "PMD-04858",
+      "kind": "OWNED_FINITE_PURE_HEALTH_ALERT_FIXTURE_WORKERS",
+      "newAccepted": 0,
+      "oldRuntimeReassigned": false,
+      "originalRowSha256": "57d52c03fb4ad442beaf2c08a5c598402efb213ff997ab0fbe3880bbef3a7e57",
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/MonitoringObservationClockTest.java",
+      "productTestsExecutedByReview": 0,
+      "reason": "Standalone local pools, four/eight workers and64 finite scalar/stub calls; protected alert test is logical enum state only. Alert/Timed invokeAll/await10seconds where explicit; Filesystem/Clock invokeAll and get, plus all TWR close, have no local absolute deadline. Distinct outer JVM240seconds. FileStore methods are fixed overridden values/counters, not actual filesystem or identity; no DB/network/VM/Root/native/key/permission operation. Existing thread refs source-rebound, raw retained.",
+      "rule": "DoNotUseThreads",
+      "scopeKind": "METHOD",
+      "scopeName": "obsClock007ConcurrentContextsHaveUniqueMonotonicSnapshots",
+      "scopeTokenSha256": "55dba800a04792b09849d644db118ca98ddc3b85b733ea77d2054137b73a3e95",
+      "source": "105fd644e90918945607b3ac3e4962843c7762bf",
+      "sourceSha256": "4612f486d88e111f2927330c0d227b00395d60e51993351896ab510cf6496e9d",
+      "sourceSpanSha256": "45a38a95e5b1914bc44b51b29e60fb4d5c93e0e1d3f6a314234d653392df5f14"
+    },
+    {
+      "attributes": {
+        "begincolumn": "25",
+        "beginline": "218",
+        "class": "MonitoringObservationClockTest",
+        "endcolumn": "45",
+        "endline": "218",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "method": "obsClock007ConcurrentContextsHaveUniqueMonotonicSnapshots",
+        "package": "dev.codex.schubert.nk.batch.monitoring",
+        "priority": "3",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading"
+      },
+      "controls": [
+        "try(varpool=Executors.newFixedThreadPool(8))",
+        "IntStream.range(0,64)",
+        "pool.invokeAll(jobs)",
+        "result.get()",
+        "for(inti=1;i<=64;i++)expected.add(Duration.ofNanos(i))",
+        "assertEquals(expected,actual)",
+        "assertEquals(65,ticks.get())",
+        "assertEquals(64,wall.reads.get())"
+      ],
+      "currentCases": [
+        {
+          "className": "dev.codex.schubert.nk.batch.monitoring.MonitoringObservationClockTest",
+          "method": "obsClock007ConcurrentContextsHaveUniqueMonotonicSnapshots",
+          "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/MonitoringObservationClockTest.java",
+          "sourceSha256": "4612f486d88e111f2927330c0d227b00395d60e51993351896ab510cf6496e9d"
+        }
+      ],
+      "currentWholeJoinPending": true,
+      "disposition": "CONTEXT_NOT_APPLICABLE",
+      "id": "PMD-04859",
+      "kind": "OWNED_FINITE_PURE_HEALTH_ALERT_FIXTURE_WORKERS",
+      "newAccepted": 0,
+      "oldRuntimeReassigned": false,
+      "originalRowSha256": "c0604c456d2dcc8f0e9834685c275d2fb0fb943fe7ff45c7ccfc22d1ab97d9bf",
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/MonitoringObservationClockTest.java",
+      "productTestsExecutedByReview": 0,
+      "reason": "Standalone local pools, four/eight workers and64 finite scalar/stub calls; protected alert test is logical enum state only. Alert/Timed invokeAll/await10seconds where explicit; Filesystem/Clock invokeAll and get, plus all TWR close, have no local absolute deadline. Distinct outer JVM240seconds. FileStore methods are fixed overridden values/counters, not actual filesystem or identity; no DB/network/VM/Root/native/key/permission operation. Existing thread refs source-rebound, raw retained.",
+      "rule": "DoNotUseThreads",
+      "scopeKind": "METHOD",
+      "scopeName": "obsClock007ConcurrentContextsHaveUniqueMonotonicSnapshots",
+      "scopeTokenSha256": "55dba800a04792b09849d644db118ca98ddc3b85b733ea77d2054137b73a3e95",
+      "source": "105fd644e90918945607b3ac3e4962843c7762bf",
+      "sourceSha256": "4612f486d88e111f2927330c0d227b00395d60e51993351896ab510cf6496e9d",
+      "sourceSpanSha256": "cf119bee31771d362b9bd975f19c2a8de10a683718deaa11cd1a5fe37683e51c"
+    },
+    {
+      "attributes": {
+        "begincolumn": "25",
+        "beginline": "203",
+        "class": "TimedFilesystemMonitorTest",
+        "endcolumn": "56",
+        "endline": "203",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "method": "timedFs006ConcurrentOwnerAndLocalStatusLiteral",
+        "package": "dev.codex.schubert.nk.batch.monitoring",
+        "priority": "3",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading",
+        "variable": "executor"
+      },
+      "controls": [
+        "try(varexecutor=Executors.newFixedThreadPool(4))",
+        "index<64",
+        "executor.invokeAll(tasks,10,TimeUnit.SECONDS)",
+        "executor.shutdownNow()",
+        "assertTrue(executor.awaitTermination(10,TimeUnit.SECONDS))",
+        "assertEquals(BigInteger.valueOf(65),current.count())"
+      ],
+      "currentCases": [
+        {
+          "className": "dev.codex.schubert.nk.batch.monitoring.TimedFilesystemMonitorTest",
+          "method": "timedFs006ConcurrentOwnerAndLocalStatusLiteral",
+          "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/TimedFilesystemMonitorTest.java",
+          "sourceSha256": "eaf75929cad6da6e663b4cac164f48c435bba6014d198d7c6d2b40eae6f04387"
+        }
+      ],
+      "currentWholeJoinPending": true,
+      "disposition": "CONTEXT_NOT_APPLICABLE",
+      "id": "PMD-04897",
+      "kind": "OWNED_FINITE_PURE_HEALTH_ALERT_FIXTURE_WORKERS",
+      "newAccepted": 0,
+      "oldRuntimeReassigned": false,
+      "originalRowSha256": "dbec12ae52f74651fba6ebb58855e68179680b97fd35dc1641bd97330f43417a",
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/TimedFilesystemMonitorTest.java",
+      "productTestsExecutedByReview": 0,
+      "reason": "Standalone local pools, four/eight workers and64 finite scalar/stub calls; protected alert test is logical enum state only. Alert/Timed invokeAll/await10seconds where explicit; Filesystem/Clock invokeAll and get, plus all TWR close, have no local absolute deadline. Distinct outer JVM240seconds. FileStore methods are fixed overridden values/counters, not actual filesystem or identity; no DB/network/VM/Root/native/key/permission operation. Existing thread refs source-rebound, raw retained.",
+      "rule": "DoNotUseThreads",
+      "scopeKind": "METHOD",
+      "scopeName": "timedFs006ConcurrentOwnerAndLocalStatusLiteral",
+      "scopeTokenSha256": "f1044a8183aa439579534daca0c3d87c53c7a0988f763021d3f89aeadfff6d20",
+      "source": "105fd644e90918945607b3ac3e4962843c7762bf",
+      "sourceSha256": "eaf75929cad6da6e663b4cac164f48c435bba6014d198d7c6d2b40eae6f04387",
+      "sourceSpanSha256": "f93e1793cb7a139e55f0b0dcf12d1f4620721e0707876be38f521c37b77d4ba3"
+    },
+    {
+      "attributes": {
+        "begincolumn": "27",
+        "beginline": "207",
+        "class": "TimedFilesystemMonitorTest",
+        "endcolumn": "74",
+        "endline": "207",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "method": "timedFs006ConcurrentOwnerAndLocalStatusLiteral",
+        "package": "dev.codex.schubert.nk.batch.monitoring",
+        "priority": "3",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading"
+      },
+      "controls": [
+        "try(varexecutor=Executors.newFixedThreadPool(4))",
+        "index<64",
+        "executor.invokeAll(tasks,10,TimeUnit.SECONDS)",
+        "executor.shutdownNow()",
+        "assertTrue(executor.awaitTermination(10,TimeUnit.SECONDS))",
+        "assertEquals(BigInteger.valueOf(65),current.count())"
+      ],
+      "currentCases": [
+        {
+          "className": "dev.codex.schubert.nk.batch.monitoring.TimedFilesystemMonitorTest",
+          "method": "timedFs006ConcurrentOwnerAndLocalStatusLiteral",
+          "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/TimedFilesystemMonitorTest.java",
+          "sourceSha256": "eaf75929cad6da6e663b4cac164f48c435bba6014d198d7c6d2b40eae6f04387"
+        }
+      ],
+      "currentWholeJoinPending": true,
+      "disposition": "CONTEXT_NOT_APPLICABLE",
+      "id": "PMD-04898",
+      "kind": "OWNED_FINITE_PURE_HEALTH_ALERT_FIXTURE_WORKERS",
+      "newAccepted": 0,
+      "oldRuntimeReassigned": false,
+      "originalRowSha256": "065a04d5510e9a10e9c3cd595e1d57eebba41d5fec6aaf1348d651c5767bbf61",
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/TimedFilesystemMonitorTest.java",
+      "productTestsExecutedByReview": 0,
+      "reason": "Standalone local pools, four/eight workers and64 finite scalar/stub calls; protected alert test is logical enum state only. Alert/Timed invokeAll/await10seconds where explicit; Filesystem/Clock invokeAll and get, plus all TWR close, have no local absolute deadline. Distinct outer JVM240seconds. FileStore methods are fixed overridden values/counters, not actual filesystem or identity; no DB/network/VM/Root/native/key/permission operation. Existing thread refs source-rebound, raw retained.",
+      "rule": "DoNotUseThreads",
+      "scopeKind": "METHOD",
+      "scopeName": "timedFs006ConcurrentOwnerAndLocalStatusLiteral",
+      "scopeTokenSha256": "f1044a8183aa439579534daca0c3d87c53c7a0988f763021d3f89aeadfff6d20",
+      "source": "105fd644e90918945607b3ac3e4962843c7762bf",
+      "sourceSha256": "eaf75929cad6da6e663b4cac164f48c435bba6014d198d7c6d2b40eae6f04387",
+      "sourceSpanSha256": "bb5f092b2a814953257be1b5d7c5685f2e2686044ca0f02f162d351ab9ce9c95"
+    },
+    {
+      "attributes": {
+        "begincolumn": "9",
+        "beginline": "212",
+        "class": "TimedFilesystemMonitorTest",
+        "endcolumn": "31",
+        "endline": "212",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "method": "timedFs006ConcurrentOwnerAndLocalStatusLiteral",
+        "package": "dev.codex.schubert.nk.batch.monitoring",
+        "priority": "3",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading"
+      },
+      "controls": [
+        "try(varexecutor=Executors.newFixedThreadPool(4))",
+        "index<64",
+        "executor.invokeAll(tasks,10,TimeUnit.SECONDS)",
+        "executor.shutdownNow()",
+        "assertTrue(executor.awaitTermination(10,TimeUnit.SECONDS))",
+        "assertEquals(BigInteger.valueOf(65),current.count())"
+      ],
+      "currentCases": [
+        {
+          "className": "dev.codex.schubert.nk.batch.monitoring.TimedFilesystemMonitorTest",
+          "method": "timedFs006ConcurrentOwnerAndLocalStatusLiteral",
+          "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/TimedFilesystemMonitorTest.java",
+          "sourceSha256": "eaf75929cad6da6e663b4cac164f48c435bba6014d198d7c6d2b40eae6f04387"
+        }
+      ],
+      "currentWholeJoinPending": true,
+      "disposition": "CONTEXT_NOT_APPLICABLE",
+      "id": "PMD-04899",
+      "kind": "OWNED_FINITE_PURE_HEALTH_ALERT_FIXTURE_WORKERS",
+      "newAccepted": 0,
+      "oldRuntimeReassigned": false,
+      "originalRowSha256": "7aca61c036827da4c1738097e69d7d144dd335a2ab3c4b3078ffcf4d1b6a78e9",
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/TimedFilesystemMonitorTest.java",
+      "productTestsExecutedByReview": 0,
+      "reason": "Standalone local pools, four/eight workers and64 finite scalar/stub calls; protected alert test is logical enum state only. Alert/Timed invokeAll/await10seconds where explicit; Filesystem/Clock invokeAll and get, plus all TWR close, have no local absolute deadline. Distinct outer JVM240seconds. FileStore methods are fixed overridden values/counters, not actual filesystem or identity; no DB/network/VM/Root/native/key/permission operation. Existing thread refs source-rebound, raw retained.",
+      "rule": "DoNotUseThreads",
+      "scopeKind": "METHOD",
+      "scopeName": "timedFs006ConcurrentOwnerAndLocalStatusLiteral",
+      "scopeTokenSha256": "f1044a8183aa439579534daca0c3d87c53c7a0988f763021d3f89aeadfff6d20",
+      "source": "105fd644e90918945607b3ac3e4962843c7762bf",
+      "sourceSha256": "eaf75929cad6da6e663b4cac164f48c435bba6014d198d7c6d2b40eae6f04387",
+      "sourceSpanSha256": "447cb134622833454dbcfd6b8edb9568b5b6bffacad735fc46be8baae7c7c49c"
+    },
+    {
+      "attributes": {
+        "begincolumn": "20",
+        "beginline": "213",
+        "class": "TimedFilesystemMonitorTest",
+        "endcolumn": "67",
+        "endline": "213",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "method": "timedFs006ConcurrentOwnerAndLocalStatusLiteral",
+        "package": "dev.codex.schubert.nk.batch.monitoring",
+        "priority": "3",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading"
+      },
+      "controls": [
+        "try(varexecutor=Executors.newFixedThreadPool(4))",
+        "index<64",
+        "executor.invokeAll(tasks,10,TimeUnit.SECONDS)",
+        "executor.shutdownNow()",
+        "assertTrue(executor.awaitTermination(10,TimeUnit.SECONDS))",
+        "assertEquals(BigInteger.valueOf(65),current.count())"
+      ],
+      "currentCases": [
+        {
+          "className": "dev.codex.schubert.nk.batch.monitoring.TimedFilesystemMonitorTest",
+          "method": "timedFs006ConcurrentOwnerAndLocalStatusLiteral",
+          "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/TimedFilesystemMonitorTest.java",
+          "sourceSha256": "eaf75929cad6da6e663b4cac164f48c435bba6014d198d7c6d2b40eae6f04387"
+        }
+      ],
+      "currentWholeJoinPending": true,
+      "disposition": "CONTEXT_NOT_APPLICABLE",
+      "id": "PMD-04900",
+      "kind": "OWNED_FINITE_PURE_HEALTH_ALERT_FIXTURE_WORKERS",
+      "newAccepted": 0,
+      "oldRuntimeReassigned": false,
+      "originalRowSha256": "5972d15d5751203cc5a22b256f8b68438b51f8f48bc801a782bc6256470b84cb",
+      "path": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/TimedFilesystemMonitorTest.java",
+      "productTestsExecutedByReview": 0,
+      "reason": "Standalone local pools, four/eight workers and64 finite scalar/stub calls; protected alert test is logical enum state only. Alert/Timed invokeAll/await10seconds where explicit; Filesystem/Clock invokeAll and get, plus all TWR close, have no local absolute deadline. Distinct outer JVM240seconds. FileStore methods are fixed overridden values/counters, not actual filesystem or identity; no DB/network/VM/Root/native/key/permission operation. Existing thread refs source-rebound, raw retained.",
+      "rule": "DoNotUseThreads",
+      "scopeKind": "METHOD",
+      "scopeName": "timedFs006ConcurrentOwnerAndLocalStatusLiteral",
+      "scopeTokenSha256": "f1044a8183aa439579534daca0c3d87c53c7a0988f763021d3f89aeadfff6d20",
+      "source": "105fd644e90918945607b3ac3e4962843c7762bf",
+      "sourceSha256": "eaf75929cad6da6e663b4cac164f48c435bba6014d198d7c6d2b40eae6f04387",
+      "sourceSpanSha256": "d541ae7bb57fcde19f69c441a68e1d8c3446a7babe941444ac301c72caad9cf7"
+    }
+  ],
+  "source": "105fd644e90918945607b3ac3e4962843c7762bf"
+}

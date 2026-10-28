@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<pmd xmlns="http://pmd.sourceforge.net/report/2.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pmd.sourceforge.net/report/2.0.0 https://pmd.github.io/schema/report_2_0_0.xsd" version="7.28.0" timestamp="2026-10-28T10:46:12.471">
+<file name="/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/AlertLifecycle.java">
+<violation beginline="131" endline="131" begincolumn="5" endcolumn="17" rule="AvoidSynchronizedStatement" ruleset="Multithreading" package="dev.codex.schubert.nk.batch.monitoring" class="AlertLifecycle" method="observe" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#avoidsynchronizedstatement" priority="3">
+Use ReentrantLock rather than synchronization
+</violation>
+<violation beginline="179" endline="179" begincolumn="5" endcolumn="17" rule="AvoidSynchronizedStatement" ruleset="Multithreading" package="dev.codex.schubert.nk.batch.monitoring" class="AlertLifecycle" method="interruptContinuity" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#avoidsynchronizedstatement" priority="3">
+Use ReentrantLock rather than synchronization
+</violation>
+<violation beginline="188" endline="188" begincolumn="5" endcolumn="17" rule="AvoidSynchronizedStatement" ruleset="Multithreading" package="dev.codex.schubert.nk.batch.monitoring" class="AlertLifecycle" method="snapshot" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#avoidsynchronizedstatement" priority="3">
+Use ReentrantLock rather than synchronization
+</violation>
+</file>
+<file name="/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/TimedFilesystemMonitor.java">
+<violation beginline="42" endline="42" begincolumn="5" endcolumn="17" rule="AvoidSynchronizedStatement" ruleset="Multithreading" package="dev.codex.schubert.nk.batch.monitoring" class="TimedFilesystemMonitor" method="observe" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#avoidsynchronizedstatement" priority="3">
+Use ReentrantLock rather than synchronization
+</violation>
+<violation beginline="73" endline="73" begincolumn="5" endcolumn="17" rule="AvoidSynchronizedStatement" ruleset="Multithreading" package="dev.codex.schubert.nk.batch.monitoring" class="TimedFilesystemMonitor" method="snapshot" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#avoidsynchronizedstatement" priority="3">
+Use ReentrantLock rather than synchronization
+</violation>
+</file>
+<file name="/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/AlertLifecycleTest.java">
+<violation beginline="213" endline="213" begincolumn="25" endcolumn="56" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.batch.monitoring" class="AlertLifecycleTest" method="alert009ConcurrentSameTickCountsAndPrivateMonitor" variable="executor" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="219" endline="219" begincolumn="9" endcolumn="21" rule="AvoidSynchronizedStatement" ruleset="Multithreading" package="dev.codex.schubert.nk.batch.monitoring" class="AlertLifecycleTest" method="alert009ConcurrentSameTickCountsAndPrivateMonitor" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#avoidsynchronizedstatement" priority="3">
+Use ReentrantLock rather than synchronization
+</violation>
+<violation beginline="220" endline="220" begincolumn="29" endcolumn="76" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.batch.monitoring" class="AlertLifecycleTest" method="alert009ConcurrentSameTickCountsAndPrivateMonitor" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="229" endline="229" begincolumn="9" endcolumn="31" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.batch.monitoring" class="AlertLifecycleTest" method="alert009ConcurrentSameTickCountsAndPrivateMonitor" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="230" endline="230" begincolumn="20" endcolumn="67" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.batch.monitoring" class="AlertLifecycleTest" method="alert009ConcurrentSameTickCountsAndPrivateMonitor" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="289" endline="289" begincolumn="27" endcolumn="58" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.batch.monitoring" class="AlertLifecycleTest" method="protectedAlert002ConcurrentNormalSamplesCannotRetireOrChangeProtectedEvent" variable="executor" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="290" endline="290" begincolumn="27" endcolumn="74" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.batch.monitoring" class="AlertLifecycleTest" method="protectedAlert002ConcurrentNormalSamplesCannotRetireOrChangeProtectedEvent" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+</file>
+<file name="/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/FilesystemHealthObservationTest.java">
+<violation beginline="224" endline="224" begincolumn="21" endcolumn="52" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.batch.monitoring" class="FilesystemHealthObservationTest" method="fsInput007NullAndConcurrentIndependentReadsDoNotAcquireOwnership" variable="pool" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="229" endline="229" begincolumn="25" endcolumn="45" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.batch.monitoring" class="FilesystemHealthObservationTest" method="fsInput007NullAndConcurrentIndependentReadsDoNotAcquireOwnership" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="325" endline="325" begincolumn="21" endcolumn="52" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.batch.monitoring" class="FilesystemHealthObservationTest" method="fsInput010NullBackwardsGapAndConcurrentPollHaveOneSerializedOwner" variable="pool" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="337" endline="337" begincolumn="25" endcolumn="45" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.batch.monitoring" class="FilesystemHealthObservationTest" method="fsInput010NullBackwardsGapAndConcurrentPollHaveOneSerializedOwner" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+</file>
+<file name="/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/MonitoringObservationClockTest.java">
+<violation beginline="212" endline="212" begincolumn="21" endcolumn="52" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.batch.monitoring" class="MonitoringObservationClockTest" method="obsClock007ConcurrentContextsHaveUniqueMonotonicSnapshots" variable="pool" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="218" endline="218" begincolumn="25" endcolumn="45" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.batch.monitoring" class="MonitoringObservationClockTest" method="obsClock007ConcurrentContextsHaveUniqueMonotonicSnapshots" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+</file>
+<file name="/home/mini/codex/project1/work/pgpt-foundation/src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/monitoring/TimedFilesystemMonitorTest.java">
+<violation beginline="203" endline="203" begincolumn="25" endcolumn="56" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.batch.monitoring" class="TimedFilesystemMonitorTest" method="timedFs006ConcurrentOwnerAndLocalStatusLiteral" variable="executor" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="207" endline="207" begincolumn="27" endcolumn="74" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.batch.monitoring" class="TimedFilesystemMonitorTest" method="timedFs006ConcurrentOwnerAndLocalStatusLiteral" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="212" endline="212" begincolumn="9" endcolumn="31" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.batch.monitoring" class="TimedFilesystemMonitorTest" method="timedFs006ConcurrentOwnerAndLocalStatusLiteral" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+<violation beginline="213" endline="213" begincolumn="20" endcolumn="67" rule="DoNotUseThreads" ruleset="Multithreading" package="dev.codex.schubert.nk.batch.monitoring" class="TimedFilesystemMonitorTest" method="timedFs006ConcurrentOwnerAndLocalStatusLiteral" externalInfoUrl="https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads" priority="3">
+To be compliant to J2EE, a webapp should not use any thread.
+</violation>
+</file>
+</pmd>
