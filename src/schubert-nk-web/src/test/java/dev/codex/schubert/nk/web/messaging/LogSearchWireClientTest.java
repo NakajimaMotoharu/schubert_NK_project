@@ -228,8 +228,7 @@ class LogSearchWireClientTest {
                 new TypedPayloadValues(
                     new LayoutId(FIXTURE_LGSREQ01_A99ED320),
                     input().data(),
-                    List.of(
-                        new SpeakerRecord(new SpeakerId(1), FIXTURE_SYNTHETIC_85DA8434, 1))),
+                    List.of(new SpeakerRecord(new SpeakerId(1), FIXTURE_SYNTHETIC_85DA8434, 1))),
                 CONTEXT));
     for (String layout : List.of("ANMREQ01", "MCTREQ01", "WLGEVT01")) {
       var request = new TypedPayloadValues(new LayoutId(layout), input().data(), List.of());
