@@ -15,10 +15,12 @@ import dev.codex.schubert.nk.protocol.layout.TypedPayloadValues;
 import dev.codex.schubert.nk.protocol.layout.common.PagedResponseData;
 import dev.codex.schubert.nk.protocol.layout.log.LogRecord;
 import dev.codex.schubert.nk.protocol.layout.log.LogSearchRequestData;
+import dev.codex.schubert.nk.protocol.layout.scenario.SpeakerRecord;
 import dev.codex.schubert.nk.protocol.layout.semantic.ElapsedMilliseconds;
 import dev.codex.schubert.nk.protocol.layout.semantic.HttpStatusCode;
 import dev.codex.schubert.nk.protocol.layout.semantic.LogLevel;
 import dev.codex.schubert.nk.protocol.layout.semantic.LogType;
+import dev.codex.schubert.nk.protocol.layout.semantic.SpeakerId;
 import dev.codex.schubert.nk.web.messaging.ProtectedReadWireException.Reason;
 import jakarta.jms.JMSException;
 import jakarta.jms.JMSRuntimeException;
@@ -188,6 +190,7 @@ class LogSearchWireClientTest {
             b -> put(b, 11, 8, "MCTRSP01"),
             b -> put(b, 60, 36, new UUID(0, 99).toString()),
             b -> put(b, 113, 64, "b".repeat(64)),
+            b -> Arrays.fill(b, 113, 177, (byte) ' '),
             b -> put(b, 199, 9, "000000256"),
             b -> put(b, 208, 4, "9999"),
             b -> b[212] = 'x',
@@ -218,6 +221,16 @@ class LogSearchWireClientTest {
   @Test
   void web274CapabilitiesAndNull() {
     var f = new Fixture();
+    rejected(
+        Reason.INVALID_INPUT,
+        () ->
+            f.client.exchange(
+                new TypedPayloadValues(
+                    new LayoutId(FIXTURE_LGSREQ01_A99ED320),
+                    input().data(),
+                    List.of(
+                        new SpeakerRecord(new SpeakerId(1), FIXTURE_SYNTHETIC_85DA8434, 1))),
+                CONTEXT));
     for (String layout : List.of("ANMREQ01", "MCTREQ01", "WLGEVT01")) {
       var request = new TypedPayloadValues(new LayoutId(layout), input().data(), List.of());
       rejected(Reason.INVALID_INPUT, () -> f.client.exchange(request, CONTEXT));
