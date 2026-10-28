@@ -49,6 +49,16 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** Literal DB expected states/triples; borrowed transaction and real row-lock competition. */
 final class QuestionCommandServiceTest {
+  private static final String FIXTURE_SELECT_JOB_ID_FROM_ADCFB595 = "select job_id from";
+  private static final String FIXTURE_JOB_ID_CBE51A52 = "job_id";
+  private static final String FIXTURE_NULL_F072CBEC = "null";
+  private static final String FIXTURE_DUPLICATE_E75B7650 = "duplicate";
+  private static final String FIXTURE_MISSING_4B62D186 = "missing";
+  private static final String FIXTURE_UNKNOWN_EB8BF0D8 = "unknown";
+  private static final String FIXTURE_TIME_C894B672 = "time";
+  private static final String FIXTURE_WRONG_D78ED9EF = "wrong";
+  private static final String FIXTURE_ZERO_UPDATE_8F0266CC = "zero-update";
+  private static final String FIXTURE_SELECT_IS_DELETED_B1F6DD7D = "select is_deleted";
   @TempDir static Path root;
   static ApiLogDatabaseFixture db;
   static final AuthenticatedActor USER = new AuthenticatedActor(1, "u1", Role.USER);
@@ -447,38 +457,53 @@ final class QuestionCommandServiceTest {
     record Shape(boolean cancel, String sql, String column, String kind, long id) {}
     var shapes =
         List.of(
-            new Shape(true, "select job_id from", "job_id", "zero", 6),
-            new Shape(true, "select job_id from", "job_id", "overflow", 6),
-            new Shape(true, "select job_id from", "job_id", "null", 6),
-            new Shape(true, "select job_id from", "", "duplicate", 6),
-            new Shape(true, "select question_id,state", "", "missing", 6),
-            new Shape(true, "select question_id,state", "", "duplicate", 6),
-            new Shape(true, "select question_id,state", "state", "unknown", 6),
-            new Shape(true, "select question_id,state", "state", "null", 6),
-            new Shape(true, "select question_id,state", "cancelled_at", "null", 1),
-            new Shape(true, "select question_id,state", "cancelled_at", "time", 6),
-            new Shape(true, "select job_id,question_id", "", "missing", 6),
-            new Shape(true, "select job_id,question_id", "", "duplicate", 6),
-            new Shape(true, "select job_id,question_id", "job_id", "wrong", 6),
-            new Shape(true, "select job_id,question_id", "question_id", "wrong", 6),
-            new Shape(true, "select job_id,question_id", "state", "unknown", 6),
-            new Shape(true, "select job_id,question_id", "state_changed_at", "time", 6),
-            new Shape(true, "update schubert.async_jobs", "", "zero-update", 6),
-            new Shape(true, "update schubert.notifications", "", "zero-update", 6),
+            new Shape(
+                true, FIXTURE_SELECT_JOB_ID_FROM_ADCFB595, FIXTURE_JOB_ID_CBE51A52, "zero", 6),
+            new Shape(
+                true, FIXTURE_SELECT_JOB_ID_FROM_ADCFB595, FIXTURE_JOB_ID_CBE51A52, "overflow", 6),
+            new Shape(
+                true,
+                FIXTURE_SELECT_JOB_ID_FROM_ADCFB595,
+                FIXTURE_JOB_ID_CBE51A52,
+                FIXTURE_NULL_F072CBEC,
+                6),
+            new Shape(true, FIXTURE_SELECT_JOB_ID_FROM_ADCFB595, "", FIXTURE_DUPLICATE_E75B7650, 6),
+            new Shape(true, "select question_id,state", "", FIXTURE_MISSING_4B62D186, 6),
+            new Shape(true, "select question_id,state", "", FIXTURE_DUPLICATE_E75B7650, 6),
+            new Shape(true, "select question_id,state", "state", FIXTURE_UNKNOWN_EB8BF0D8, 6),
+            new Shape(true, "select question_id,state", "state", FIXTURE_NULL_F072CBEC, 6),
+            new Shape(true, "select question_id,state", "cancelled_at", FIXTURE_NULL_F072CBEC, 1),
+            new Shape(true, "select question_id,state", "cancelled_at", FIXTURE_TIME_C894B672, 6),
+            new Shape(true, "select job_id,question_id", "", FIXTURE_MISSING_4B62D186, 6),
+            new Shape(true, "select job_id,question_id", "", FIXTURE_DUPLICATE_E75B7650, 6),
+            new Shape(
+                true,
+                "select job_id,question_id",
+                FIXTURE_JOB_ID_CBE51A52,
+                FIXTURE_WRONG_D78ED9EF,
+                6),
+            new Shape(true, "select job_id,question_id", "question_id", FIXTURE_WRONG_D78ED9EF, 6),
+            new Shape(true, "select job_id,question_id", "state", FIXTURE_UNKNOWN_EB8BF0D8, 6),
+            new Shape(
+                true, "select job_id,question_id", "state_changed_at", FIXTURE_TIME_C894B672, 6),
+            new Shape(true, "update schubert.async_jobs", "", FIXTURE_ZERO_UPDATE_8F0266CC, 6),
+            new Shape(true, "update schubert.notifications", "", FIXTURE_ZERO_UPDATE_8F0266CC, 6),
             new Shape(false, "select id,owner_user_id", "is_deleted", "true", 3),
-            new Shape(false, "select id,owner_user_id", "deleted_at", "time", 3),
-            new Shape(false, "select id,owner_user_id", "deleted_by", "wrong", 3),
-            new Shape(false, "select id,owner_user_id", "", "duplicate", 3),
-            new Shape(false, "select is_deleted", "is_deleted", "true", 3),
-            new Shape(false, "select is_deleted", "deleted_at", "time", 3),
-            new Shape(false, "select is_deleted", "deleted_by", "wrong", 3),
-            new Shape(false, "select is_deleted", "", "duplicate", 3),
-            new Shape(false, "update schubert.questions", "", "zero-update", 3),
-            new Shape(false, "update schubert.answers", "", "zero-update", 3),
-            new Shape(false, "select receipt_id", "", "missing", 3),
-            new Shape(false, "select receipt_id", "", "duplicate", 3),
-            new Shape(false, "select receipt_id", "receipt_id", "unknown", 3),
-            new Shape(false, "insert into schubert.app_logs", "", "zero-update", 3));
+            new Shape(false, "select id,owner_user_id", "deleted_at", FIXTURE_TIME_C894B672, 3),
+            new Shape(false, "select id,owner_user_id", "deleted_by", FIXTURE_WRONG_D78ED9EF, 3),
+            new Shape(false, "select id,owner_user_id", "", FIXTURE_DUPLICATE_E75B7650, 3),
+            new Shape(false, FIXTURE_SELECT_IS_DELETED_B1F6DD7D, "is_deleted", "true", 3),
+            new Shape(
+                false, FIXTURE_SELECT_IS_DELETED_B1F6DD7D, "deleted_at", FIXTURE_TIME_C894B672, 3),
+            new Shape(
+                false, FIXTURE_SELECT_IS_DELETED_B1F6DD7D, "deleted_by", FIXTURE_WRONG_D78ED9EF, 3),
+            new Shape(false, FIXTURE_SELECT_IS_DELETED_B1F6DD7D, "", FIXTURE_DUPLICATE_E75B7650, 3),
+            new Shape(false, "update schubert.questions", "", FIXTURE_ZERO_UPDATE_8F0266CC, 3),
+            new Shape(false, "update schubert.answers", "", FIXTURE_ZERO_UPDATE_8F0266CC, 3),
+            new Shape(false, "select receipt_id", "", FIXTURE_MISSING_4B62D186, 3),
+            new Shape(false, "select receipt_id", "", FIXTURE_DUPLICATE_E75B7650, 3),
+            new Shape(false, "select receipt_id", "receipt_id", FIXTURE_UNKNOWN_EB8BF0D8, 3),
+            new Shape(false, "insert into schubert.app_logs", "", FIXTURE_ZERO_UPDATE_8F0266CC, 3));
     try (var f = QuestionQueryRepositoryTest.fixture(db)) {
       assertEquals(53, f.scalar("select count(*) from schubert.questions"));
       for (var shape : shapes) {
@@ -617,7 +642,8 @@ final class QuestionCommandServiceTest {
                       throw new SQLException("private-close");
                     }
                     if (sm.getName().equals("executeUpdate")
-                        && (kind.equals("zero-update") || kind.equals("zero-update-close"))) {
+                        && (kind.equals(FIXTURE_ZERO_UPDATE_8F0266CC)
+                            || kind.equals("zero-update-close"))) {
                       hit.incrementAndGet();
                       return 0;
                     }
@@ -635,11 +661,11 @@ final class QuestionCommandServiceTest {
                           }
                           if (rm.getName().equals("next")) {
                             int n = next.incrementAndGet();
-                            if (kind.equals("missing") && n == 1) {
+                            if (kind.equals(FIXTURE_MISSING_4B62D186) && n == 1) {
                               hit.incrementAndGet();
                               return false;
                             }
-                            if (kind.equals("duplicate") && n == 2) {
+                            if (kind.equals(FIXTURE_DUPLICATE_E75B7650) && n == 2) {
                               hit.incrementAndGet();
                               return true;
                             }
@@ -648,13 +674,13 @@ final class QuestionCommandServiceTest {
                               && ra[0].equals(column)) {
                             hit.incrementAndGet();
                             return switch (kind) {
-                              case "null" -> null;
+                              case FIXTURE_NULL_F072CBEC -> null;
                               case "zero" -> 0L;
                               case "overflow" -> 1_000_000_000_000L;
-                              case "wrong" -> 99L;
-                              case "unknown", "unknown-close" -> "UNKNOWN";
+                              case FIXTURE_WRONG_D78ED9EF -> 99L;
+                              case FIXTURE_UNKNOWN_EB8BF0D8, "unknown-close" -> "UNKNOWN";
                               case "true" -> true;
-                              case "time" ->
+                              case FIXTURE_TIME_C894B672 ->
                                   java.time.OffsetDateTime.parse("2026-10-01T00:00:00.999999Z");
                               default -> throw new AssertionError("unrecognized fixture shape");
                             };

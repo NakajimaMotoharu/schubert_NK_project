@@ -46,6 +46,17 @@ import org.junit.jupiter.api.Test;
 
 /** PostgreSQL 18 component PT for PT-IDEM-004..006. */
 final class JdbcInboxCoordinatorTest {
+  private static final String FIXTURE_DELETE_FROM_SCHUBERT_REQUEST_INBOX_D18913CC =
+      "delete from schubert.request_inbox";
+  private static final String FIXTURE_FP1_54E2C4E0 = "fp1";
+  private static final String FIXTURE_QSBREQ01_F9A27626 = "QSBREQ01";
+  private static final String FIXTURE_001_A3FEAA64 = "001";
+  private static final String FIXTURE_QUESTION_6D6CA52E = "question";
+  private static final String FIXTURE_FP2_0F8E0697 = "fp2";
+  private static final String FIXTURE_SCHUBERT_REQUEST_INBOX_CEAADFAA = "schubert.request_inbox";
+  private static final String FIXTURE_SCHUBERT_APP_LOGS_D6BE6409 = "schubert.app_logs";
+  private static final String FIXTURE_QSTREQ01_D01029E2 = "QSTREQ01";
+  private static final String FIXTURE_COMPLETED_BA0AE16A = "COMPLETED";
   private static final String DATABASE = "inbox_pt";
   private static final String ADMIN = "pgpt_admin";
   private static final String MIGRATION = "schubert_migration";
@@ -129,7 +140,7 @@ final class JdbcInboxCoordinatorTest {
   void resetDatabase() throws SQLException {
     try (Connection connection = appConnection();
         Statement statement = connection.createStatement()) {
-      statement.executeUpdate("delete from schubert.request_inbox");
+      statement.executeUpdate(FIXTURE_DELETE_FROM_SCHUBERT_REQUEST_INBOX_D18913CC);
       statement.executeUpdate("delete from schubert.app_logs");
       statement.executeUpdate("delete from schubert.app_users");
       statement.executeUpdate(userInsert(101, "owner101"));
@@ -139,7 +150,7 @@ final class JdbcInboxCoordinatorTest {
 
   @Test
   void completionRetentionStartsAtCompletionAndReplayNeverExtendsIt() throws Exception {
-    try (var keys = new FingerprintKeyRing("fp1", key((byte) 11), null, null)) {
+    try (var keys = new FingerprintKeyRing(FIXTURE_FP1_54E2C4E0, key((byte) 11), null, null)) {
       var coordinator = new JdbcInboxCoordinator(keys);
       for (long seconds : new long[] {86400, 604800}) {
         for (var state : InboxCompletionState.values()) {
@@ -157,7 +168,11 @@ final class JdbcInboxCoordinatorTest {
                     message,
                     OptionalLong.of(101),
                     update ? Optional.of(UUID.randomUUID()) : Optional.empty(),
-                    canonical(101, update ? "QSBREQ01" : "GAMREQ01", "001", "retention"),
+                    canonical(
+                        101,
+                        update ? FIXTURE_QSBREQ01_F9A27626 : "GAMREQ01",
+                        FIXTURE_001_A3FEAA64,
+                        "retention"),
                     RECEIVED,
                     RECEIVED.plusSeconds(seconds));
             Instant finished = RECEIVED.plus(processing);
@@ -166,7 +181,7 @@ final class JdbcInboxCoordinatorTest {
                     state,
                     InboxResultReference.none(),
                     update ? "QSBRSP01" : "GAMRSP01",
-                    "001",
+                    FIXTURE_001_A3FEAA64,
                     Optional.empty(),
                     finished);
             try (Connection connection = transaction()) {
@@ -247,9 +262,17 @@ final class JdbcInboxCoordinatorTest {
   @Test
   void sameMessageReplaysAndEveryIdentityOrPayloadMutationIsRejected() throws Exception {
     InboxRequest original =
-        tokenRequest(MESSAGE, CORRELATION, 101, TOKEN, "question", "QSBREQ01", "001");
+        tokenRequest(
+            MESSAGE,
+            CORRELATION,
+            101,
+            TOKEN,
+            FIXTURE_QUESTION_6D6CA52E,
+            FIXTURE_QSBREQ01_F9A27626,
+            FIXTURE_001_A3FEAA64);
     byte[] previousKey = key((byte) 11);
-    try (FingerprintKeyRing originalKeys = new FingerprintKeyRing("fp1", previousKey, null, null)) {
+    try (FingerprintKeyRing originalKeys =
+        new FingerprintKeyRing(FIXTURE_FP1_54E2C4E0, previousKey, null, null)) {
       JdbcInboxCoordinator coordinator = new JdbcInboxCoordinator(originalKeys);
       try (Connection connection = transaction()) {
         InboxExecution first =
@@ -267,7 +290,8 @@ final class JdbcInboxCoordinatorTest {
 
     byte[] currentKey = key((byte) 12);
     try (FingerprintKeyRing rotated =
-        new FingerprintKeyRing("fp2", currentKey, "fp1", previousKey)) {
+        new FingerprintKeyRing(
+            FIXTURE_FP2_0F8E0697, currentKey, FIXTURE_FP1_54E2C4E0, previousKey)) {
       JdbcInboxCoordinator coordinator = new JdbcInboxCoordinator(rotated);
       AtomicInteger handlers = new AtomicInteger();
       try (Connection connection = transaction()) {
@@ -288,30 +312,73 @@ final class JdbcInboxCoordinatorTest {
         connection.commit();
       }
       assertEquals(0, handlers.get());
-      assertEquals(1, count("schubert.request_inbox"));
-      assertEquals(1, count("schubert.app_logs"));
+      assertEquals(1, count(FIXTURE_SCHUBERT_REQUEST_INBOX_CEAADFAA));
+      assertEquals(1, count(FIXTURE_SCHUBERT_APP_LOGS_D6BE6409));
 
-      assertMessageReuse(
-          coordinator, tokenRequest(MESSAGE, uuid(2), 101, TOKEN, "question", "QSBREQ01", "001"));
-      assertMessageReuse(
-          coordinator,
-          tokenRequest(MESSAGE, CORRELATION, 101, TOKEN, "question", "USTREQ01", "001"));
-      assertMessageReuse(
-          coordinator,
-          tokenRequest(MESSAGE, CORRELATION, 101, TOKEN, "question", "QSBREQ01", "002"));
-      assertMessageReuse(
-          coordinator,
-          tokenRequest(MESSAGE, CORRELATION, 102, TOKEN, "question", "QSBREQ01", "001"));
-      assertMessageReuse(
-          coordinator,
-          tokenRequest(MESSAGE, CORRELATION, 101, uuid(3), "question", "QSBREQ01", "001"));
       assertMessageReuse(
           coordinator,
           tokenRequest(
-              MESSAGE, CORRELATION, 101, TOKEN, "sensitive-target-7f3c", "QSBREQ01", "001"));
+              MESSAGE,
+              uuid(2),
+              101,
+              TOKEN,
+              FIXTURE_QUESTION_6D6CA52E,
+              FIXTURE_QSBREQ01_F9A27626,
+              FIXTURE_001_A3FEAA64));
+      assertMessageReuse(
+          coordinator,
+          tokenRequest(
+              MESSAGE,
+              CORRELATION,
+              101,
+              TOKEN,
+              FIXTURE_QUESTION_6D6CA52E,
+              "USTREQ01",
+              FIXTURE_001_A3FEAA64));
+      assertMessageReuse(
+          coordinator,
+          tokenRequest(
+              MESSAGE,
+              CORRELATION,
+              101,
+              TOKEN,
+              FIXTURE_QUESTION_6D6CA52E,
+              FIXTURE_QSBREQ01_F9A27626,
+              "002"));
+      assertMessageReuse(
+          coordinator,
+          tokenRequest(
+              MESSAGE,
+              CORRELATION,
+              102,
+              TOKEN,
+              FIXTURE_QUESTION_6D6CA52E,
+              FIXTURE_QSBREQ01_F9A27626,
+              FIXTURE_001_A3FEAA64));
+      assertMessageReuse(
+          coordinator,
+          tokenRequest(
+              MESSAGE,
+              CORRELATION,
+              101,
+              uuid(3),
+              FIXTURE_QUESTION_6D6CA52E,
+              FIXTURE_QSBREQ01_F9A27626,
+              FIXTURE_001_A3FEAA64));
+      assertMessageReuse(
+          coordinator,
+          tokenRequest(
+              MESSAGE,
+              CORRELATION,
+              101,
+              TOKEN,
+              "sensitive-target-7f3c",
+              FIXTURE_QSBREQ01_F9A27626,
+              FIXTURE_001_A3FEAA64));
     }
 
-    try (FingerprintKeyRing unavailable = new FingerprintKeyRing("fp2", currentKey, null, null)) {
+    try (FingerprintKeyRing unavailable =
+        new FingerprintKeyRing(FIXTURE_FP2_0F8E0697, currentKey, null, null)) {
       JdbcInboxCoordinator coordinator = new JdbcInboxCoordinator(unavailable);
       try (Connection connection = transaction()) {
         InboxException exception =
@@ -327,8 +394,16 @@ final class JdbcInboxCoordinatorTest {
   @Test
   void tokenReplaysAcrossMessageIdsRejectsChangedPayloadAndExposesProcessing() throws Exception {
     InboxRequest original =
-        tokenRequest(MESSAGE, CORRELATION, 101, TOKEN, "question", "QSBREQ01", "001");
-    try (FingerprintKeyRing keys = new FingerprintKeyRing("fp1", key((byte) 21), null, null)) {
+        tokenRequest(
+            MESSAGE,
+            CORRELATION,
+            101,
+            TOKEN,
+            FIXTURE_QUESTION_6D6CA52E,
+            FIXTURE_QSBREQ01_F9A27626,
+            FIXTURE_001_A3FEAA64);
+    try (FingerprintKeyRing keys =
+        new FingerprintKeyRing(FIXTURE_FP1_54E2C4E0, key((byte) 21), null, null)) {
       JdbcInboxCoordinator coordinator = new JdbcInboxCoordinator(keys);
       try (Connection connection = transaction()) {
         InboxExecution first =
@@ -338,7 +413,14 @@ final class JdbcInboxCoordinatorTest {
       }
 
       InboxRequest retry =
-          tokenRequest(uuid(10), uuid(11), 101, TOKEN, "question", "QSBREQ01", "001");
+          tokenRequest(
+              uuid(10),
+              uuid(11),
+              101,
+              TOKEN,
+              FIXTURE_QUESTION_6D6CA52E,
+              FIXTURE_QSBREQ01_F9A27626,
+              FIXTURE_001_A3FEAA64);
       try (Connection connection = transaction()) {
         InboxExecution replay =
             coordinator.execute(
@@ -354,7 +436,14 @@ final class JdbcInboxCoordinatorTest {
       }
 
       InboxRequest changed =
-          tokenRequest(uuid(12), uuid(13), 101, TOKEN, "changed", "QSBREQ01", "001");
+          tokenRequest(
+              uuid(12),
+              uuid(13),
+              101,
+              TOKEN,
+              "changed",
+              FIXTURE_QSBREQ01_F9A27626,
+              FIXTURE_001_A3FEAA64);
       try (Connection connection = transaction()) {
         InboxException exception =
             assertThrows(
@@ -364,10 +453,17 @@ final class JdbcInboxCoordinatorTest {
         connection.rollback();
       }
 
-      executeApp("delete from schubert.request_inbox");
+      executeApp(FIXTURE_DELETE_FROM_SCHUBERT_REQUEST_INBOX_D18913CC);
       UUID processingToken = uuid(20);
       InboxRequest processing =
-          tokenRequest(uuid(21), uuid(22), 101, processingToken, "pending", "QSBREQ01", "001");
+          tokenRequest(
+              uuid(21),
+              uuid(22),
+              101,
+              processingToken,
+              "pending",
+              FIXTURE_QSBREQ01_F9A27626,
+              FIXTURE_001_A3FEAA64);
       try (Connection connection = transaction()) {
         insertProcessing(connection, processing, keys.calculate(processing.canonicalRequest()));
         connection.commit();
@@ -379,7 +475,14 @@ final class JdbcInboxCoordinatorTest {
         connection.commit();
       }
       InboxRequest processingRetry =
-          tokenRequest(uuid(23), uuid(24), 101, processingToken, "pending", "QSBREQ01", "001");
+          tokenRequest(
+              uuid(23),
+              uuid(24),
+              101,
+              processingToken,
+              "pending",
+              FIXTURE_QSBREQ01_F9A27626,
+              FIXTURE_001_A3FEAA64);
       try (Connection connection = transaction()) {
         assertEquals(
             InboxExecutionStatus.IN_PROGRESS,
@@ -393,7 +496,8 @@ final class JdbcInboxCoordinatorTest {
 
   @Test
   void anonymousAndErrorRowsPersistUuidAndEmptySnapshotUnions() throws Exception {
-    try (FingerprintKeyRing keys = new FingerprintKeyRing("fp1", key((byte) 31), null, null)) {
+    try (FingerprintKeyRing keys =
+        new FingerprintKeyRing(FIXTURE_FP1_54E2C4E0, key((byte) 31), null, null)) {
       JdbcInboxCoordinator coordinator = new JdbcInboxCoordinator(keys);
       InboxRequest login = anonymousRequest(MESSAGE, CORRELATION, "login");
       UUID authSession = uuid(30);
@@ -403,7 +507,7 @@ final class JdbcInboxCoordinatorTest {
                 InboxCompletionState.COMPLETED,
                 InboxResultReference.authSession(authSession),
                 "LGNRSP01",
-                "001",
+                FIXTURE_001_A3FEAA64,
                 Optional.empty(),
                 COMPLETED);
         assertEquals(
@@ -423,14 +527,14 @@ final class JdbcInboxCoordinatorTest {
       }
 
       InboxRequest errorRequest =
-          authenticatedRequest(uuid(31), uuid(32), 101, "QSTREQ01", "read-error");
+          authenticatedRequest(uuid(31), uuid(32), 101, FIXTURE_QSTREQ01_D01029E2, "read-error");
       try (Connection connection = transaction()) {
         InboxCompletion error =
             new InboxCompletion(
                 InboxCompletionState.ERROR,
                 InboxResultReference.none(),
                 "QSTRSP01",
-                "001",
+                FIXTURE_001_A3FEAA64,
                 Optional.empty(),
                 COMPLETED);
         coordinator.execute(connection, errorRequest, ignored -> error);
@@ -451,8 +555,10 @@ final class JdbcInboxCoordinatorTest {
 
   @Test
   void handlerAndCallerRollbackKeepInboxBusinessAndAuditAtomic() throws Exception {
-    InboxRequest request = authenticatedRequest(MESSAGE, CORRELATION, 101, "QSTREQ01", "read");
-    try (FingerprintKeyRing keys = new FingerprintKeyRing("fp1", key((byte) 41), null, null)) {
+    InboxRequest request =
+        authenticatedRequest(MESSAGE, CORRELATION, 101, FIXTURE_QSTREQ01_D01029E2, "read");
+    try (FingerprintKeyRing keys =
+        new FingerprintKeyRing(FIXTURE_FP1_54E2C4E0, key((byte) 41), null, null)) {
       JdbcInboxCoordinator coordinator = new JdbcInboxCoordinator(keys);
       try (Connection connection = transaction()) {
         SQLException failure =
@@ -469,8 +575,8 @@ final class JdbcInboxCoordinatorTest {
         assertEquals("40001", failure.getSQLState());
         connection.rollback();
       }
-      assertEquals(0, count("schubert.request_inbox"));
-      assertEquals(0, count("schubert.app_logs"));
+      assertEquals(0, count(FIXTURE_SCHUBERT_REQUEST_INBOX_CEAADFAA));
+      assertEquals(0, count(FIXTURE_SCHUBERT_APP_LOGS_D6BE6409));
 
       try (Connection connection = transaction()) {
         coordinator.execute(
@@ -482,8 +588,8 @@ final class JdbcInboxCoordinatorTest {
             });
         connection.rollback();
       }
-      assertEquals(0, count("schubert.request_inbox"));
-      assertEquals(0, count("schubert.app_logs"));
+      assertEquals(0, count(FIXTURE_SCHUBERT_REQUEST_INBOX_CEAADFAA));
+      assertEquals(0, count(FIXTURE_SCHUBERT_APP_LOGS_D6BE6409));
 
       try (Connection connection = transaction()) {
         coordinator.execute(
@@ -495,16 +601,18 @@ final class JdbcInboxCoordinatorTest {
             });
         connection.commit();
       }
-      assertEquals(1, count("schubert.request_inbox"));
-      assertEquals(1, count("schubert.app_logs"));
+      assertEquals(1, count(FIXTURE_SCHUBERT_REQUEST_INBOX_CEAADFAA));
+      assertEquals(1, count(FIXTURE_SCHUBERT_APP_LOGS_D6BE6409));
     }
   }
 
   @Test
   void transactionNullCompletionTimeAndForeignKeyFailuresDenyClosed() throws Exception {
-    InboxRequest request = authenticatedRequest(MESSAGE, CORRELATION, 101, "QSTREQ01", "read");
+    InboxRequest request =
+        authenticatedRequest(MESSAGE, CORRELATION, 101, FIXTURE_QSTREQ01_D01029E2, "read");
     assertThrows(NullPointerException.class, () -> new JdbcInboxCoordinator(null));
-    try (FingerprintKeyRing keys = new FingerprintKeyRing("fp1", key((byte) 51), null, null)) {
+    try (FingerprintKeyRing keys =
+        new FingerprintKeyRing(FIXTURE_FP1_54E2C4E0, key((byte) 51), null, null)) {
       JdbcInboxCoordinator coordinator = new JdbcInboxCoordinator(keys);
       assertThrows(
           NullPointerException.class,
@@ -536,7 +644,7 @@ final class JdbcInboxCoordinatorTest {
                 InboxCompletionState.COMPLETED,
                 InboxResultReference.none(),
                 "QSTRSP01",
-                "001",
+                FIXTURE_001_A3FEAA64,
                 Optional.empty(),
                 RECEIVED.minusSeconds(1));
         InboxException exception =
@@ -548,7 +656,7 @@ final class JdbcInboxCoordinatorTest {
       }
 
       InboxRequest missingOwner =
-          authenticatedRequest(uuid(50), uuid(51), 999, "QSTREQ01", "missing-owner");
+          authenticatedRequest(uuid(50), uuid(51), 999, FIXTURE_QSTREQ01_D01029E2, "missing-owner");
       try (Connection connection = transaction()) {
         SQLException exception =
             assertThrows(
@@ -564,10 +672,18 @@ final class JdbcInboxCoordinatorTest {
 
   @Test
   void concurrentUniqueRacesAreRereadOnceAndImpossibleOutcomesDenyClosed() throws Exception {
-    try (FingerprintKeyRing keys = new FingerprintKeyRing("fp1", key((byte) 61), null, null)) {
+    try (FingerprintKeyRing keys =
+        new FingerprintKeyRing(FIXTURE_FP1_54E2C4E0, key((byte) 61), null, null)) {
       JdbcInboxCoordinator coordinator = new JdbcInboxCoordinator(keys);
       InboxRequest messageRace =
-          tokenRequest(MESSAGE, CORRELATION, 101, TOKEN, "race", "QSBREQ01", "001");
+          tokenRequest(
+              MESSAGE,
+              CORRELATION,
+              101,
+              TOKEN,
+              "race",
+              FIXTURE_QSBREQ01_F9A27626,
+              FIXTURE_001_A3FEAA64);
       try (Connection delegate = transaction()) {
         Connection intercepted =
             afterSavepoint(
@@ -585,12 +701,26 @@ final class JdbcInboxCoordinatorTest {
         intercepted.commit();
       }
 
-      executeApp("delete from schubert.request_inbox");
+      executeApp(FIXTURE_DELETE_FROM_SCHUBERT_REQUEST_INBOX_D18913CC);
       UUID racedToken = uuid(60);
       InboxRequest tokenRace =
-          tokenRequest(uuid(61), uuid(62), 101, racedToken, "race-token", "QSBREQ01", "001");
+          tokenRequest(
+              uuid(61),
+              uuid(62),
+              101,
+              racedToken,
+              "race-token",
+              FIXTURE_QSBREQ01_F9A27626,
+              FIXTURE_001_A3FEAA64);
       InboxRequest tokenWinner =
-          tokenRequest(uuid(63), uuid(64), 101, racedToken, "race-token", "QSBREQ01", "001");
+          tokenRequest(
+              uuid(63),
+              uuid(64),
+              101,
+              racedToken,
+              "race-token",
+              FIXTURE_QSBREQ01_F9A27626,
+              FIXTURE_001_A3FEAA64);
       try (Connection delegate = transaction()) {
         Connection intercepted =
             afterSavepoint(
@@ -608,9 +738,10 @@ final class JdbcInboxCoordinatorTest {
         intercepted.commit();
       }
 
-      executeApp("delete from schubert.request_inbox");
+      executeApp(FIXTURE_DELETE_FROM_SCHUBERT_REQUEST_INBOX_D18913CC);
       InboxRequest artificialUnique =
-          authenticatedRequest(uuid(65), uuid(66), 101, "QSTREQ01", "artificial-race");
+          authenticatedRequest(
+              uuid(65), uuid(66), 101, FIXTURE_QSTREQ01_D01029E2, "artificial-race");
       try (Connection delegate = transaction()) {
         Connection intercepted = failRequestInboxInsertAsUnique(delegate);
         SQLException exception =
@@ -625,7 +756,13 @@ final class JdbcInboxCoordinatorTest {
 
       InboxRequest artificialTokenUnique =
           tokenRequest(
-              uuid(69), uuid(70), 101, uuid(71), "artificial-token-race", "QSBREQ01", "001");
+              uuid(69),
+              uuid(70),
+              101,
+              uuid(71),
+              "artificial-token-race",
+              FIXTURE_QSBREQ01_F9A27626,
+              FIXTURE_001_A3FEAA64);
       try (Connection delegate = transaction()) {
         Connection intercepted = failRequestInboxInsertAsUnique(delegate);
         SQLException exception =
@@ -638,7 +775,8 @@ final class JdbcInboxCoordinatorTest {
         intercepted.rollback();
       }
 
-      InboxRequest vanished = authenticatedRequest(uuid(67), uuid(68), 101, "QSTREQ01", "vanished");
+      InboxRequest vanished =
+          authenticatedRequest(uuid(67), uuid(68), 101, FIXTURE_QSTREQ01_D01029E2, "vanished");
       try (Connection connection = transaction()) {
         InboxException exception =
             assertThrows(
@@ -664,13 +802,21 @@ final class JdbcInboxCoordinatorTest {
 
   @Test
   void readOnlyMessageLookupPreservesAbsenceCompletionErrorAndProcessing() throws Exception {
-    var request = tokenRequest(MESSAGE, CORRELATION, 101, TOKEN, "question", "QSBREQ01", "001");
-    try (var keys = new FingerprintKeyRing("fp1", key((byte) 11), null, null)) {
+    var request =
+        tokenRequest(
+            MESSAGE,
+            CORRELATION,
+            101,
+            TOKEN,
+            FIXTURE_QUESTION_6D6CA52E,
+            FIXTURE_QSBREQ01_F9A27626,
+            FIXTURE_001_A3FEAA64);
+    try (var keys = new FingerprintKeyRing(FIXTURE_FP1_54E2C4E0, key((byte) 11), null, null)) {
       var coordinator = new JdbcInboxCoordinator(keys);
       try (Connection connection = transaction()) {
         connection.setReadOnly(true);
         assertTrue(coordinator.inspectMessage(connection, request).isEmpty());
-        assertEquals(0, count("schubert.request_inbox"));
+        assertEquals(0, count(FIXTURE_SCHUBERT_REQUEST_INBOX_CEAADFAA));
         assertFalse(connection.getAutoCommit());
         assertFalse(connection.isClosed());
         try (var statement = connection.createStatement();
@@ -680,8 +826,8 @@ final class JdbcInboxCoordinatorTest {
         }
         connection.commit();
       }
-      for (String state : List.of("COMPLETED", "ERROR", "PROCESSING")) {
-        executeApp("delete from schubert.request_inbox");
+      for (String state : List.of(FIXTURE_COMPLETED_BA0AE16A, "ERROR", "PROCESSING")) {
+        executeApp(FIXTURE_DELETE_FROM_SCHUBERT_REQUEST_INBOX_D18913CC);
         insertReadOnlyFixture(request, state);
         try (Connection connection = transaction()) {
           connection.setReadOnly(true);
@@ -697,23 +843,31 @@ final class JdbcInboxCoordinatorTest {
             assertTrue(saved.resultReference().numericId().isEmpty());
             assertTrue(saved.resultReference().uuid().isEmpty());
             assertEquals("QSBRSP01", saved.responseLayoutId());
-            assertEquals("001", saved.responseVersion());
+            assertEquals(FIXTURE_001_A3FEAA64, saved.responseVersion());
             assertEquals(COMPLETED, saved.completedAt());
             assertEquals("snapshot1", saved.responseSnapshot().orElseThrow().keyVersion());
             assertArrayEquals(new byte[29], saved.responseSnapshot().orElseThrow().ciphertext());
           }
           var another =
-              tokenRequest(uuid(400), CORRELATION, 101, TOKEN, "question", "QSBREQ01", "001");
+              tokenRequest(
+                  uuid(400),
+                  CORRELATION,
+                  101,
+                  TOKEN,
+                  FIXTURE_QUESTION_6D6CA52E,
+                  FIXTURE_QSBREQ01_F9A27626,
+                  FIXTURE_001_A3FEAA64);
           assertTrue(coordinator.inspectMessage(connection, another).isEmpty());
           assertEquals(EXPIRES, storedExpiry(connection, MESSAGE));
           connection.commit();
         }
-        assertEquals(1, count("schubert.request_inbox"));
-        assertEquals(0, count("schubert.app_logs"));
+        assertEquals(1, count(FIXTURE_SCHUBERT_REQUEST_INBOX_CEAADFAA));
+        assertEquals(0, count(FIXTURE_SCHUBERT_APP_LOGS_D6BE6409));
       }
-      executeApp("delete from schubert.request_inbox");
-      var reference = authenticatedRequest(MESSAGE, CORRELATION, 101, "GAMREQ01", "question");
-      insertReadOnlyFixture(reference, "COMPLETED");
+      executeApp(FIXTURE_DELETE_FROM_SCHUBERT_REQUEST_INBOX_D18913CC);
+      var reference =
+          authenticatedRequest(MESSAGE, CORRELATION, 101, "GAMREQ01", FIXTURE_QUESTION_6D6CA52E);
+      insertReadOnlyFixture(reference, FIXTURE_COMPLETED_BA0AE16A);
       try (Connection connection = transaction()) {
         connection.setReadOnly(true);
         assertEquals(
@@ -726,9 +880,19 @@ final class JdbcInboxCoordinatorTest {
 
   @Test
   void readOnlyMessageLookupUsesAllIdentityAndFingerprintChecks() throws Exception {
-    var original = tokenRequest(MESSAGE, CORRELATION, 101, TOKEN, "question", "QSBREQ01", "001");
-    insertReadOnlyFixture(original, "COMPLETED");
-    try (var keys = new FingerprintKeyRing("fp2", key((byte) 12), "fp1", key((byte) 11))) {
+    var original =
+        tokenRequest(
+            MESSAGE,
+            CORRELATION,
+            101,
+            TOKEN,
+            FIXTURE_QUESTION_6D6CA52E,
+            FIXTURE_QSBREQ01_F9A27626,
+            FIXTURE_001_A3FEAA64);
+    insertReadOnlyFixture(original, FIXTURE_COMPLETED_BA0AE16A);
+    try (var keys =
+        new FingerprintKeyRing(
+            FIXTURE_FP2_0F8E0697, key((byte) 12), FIXTURE_FP1_54E2C4E0, key((byte) 11))) {
       var coordinator = new JdbcInboxCoordinator(keys);
       try (Connection connection = transaction()) {
         connection.setReadOnly(true);
@@ -737,12 +901,54 @@ final class JdbcInboxCoordinatorTest {
             coordinator.inspectMessage(connection, original).orElseThrow().status());
         for (var changed :
             List.of(
-                tokenRequest(MESSAGE, uuid(401), 101, TOKEN, "question", "QSBREQ01", "001"),
-                tokenRequest(MESSAGE, CORRELATION, 101, TOKEN, "question", "USTREQ01", "001"),
-                tokenRequest(MESSAGE, CORRELATION, 101, TOKEN, "question", "QSBREQ01", "002"),
-                tokenRequest(MESSAGE, CORRELATION, 102, TOKEN, "question", "QSBREQ01", "001"),
-                tokenRequest(MESSAGE, CORRELATION, 101, uuid(402), "question", "QSBREQ01", "001"),
-                tokenRequest(MESSAGE, CORRELATION, 101, TOKEN, "changed", "QSBREQ01", "001"))) {
+                tokenRequest(
+                    MESSAGE,
+                    uuid(401),
+                    101,
+                    TOKEN,
+                    FIXTURE_QUESTION_6D6CA52E,
+                    FIXTURE_QSBREQ01_F9A27626,
+                    FIXTURE_001_A3FEAA64),
+                tokenRequest(
+                    MESSAGE,
+                    CORRELATION,
+                    101,
+                    TOKEN,
+                    FIXTURE_QUESTION_6D6CA52E,
+                    "USTREQ01",
+                    FIXTURE_001_A3FEAA64),
+                tokenRequest(
+                    MESSAGE,
+                    CORRELATION,
+                    101,
+                    TOKEN,
+                    FIXTURE_QUESTION_6D6CA52E,
+                    FIXTURE_QSBREQ01_F9A27626,
+                    "002"),
+                tokenRequest(
+                    MESSAGE,
+                    CORRELATION,
+                    102,
+                    TOKEN,
+                    FIXTURE_QUESTION_6D6CA52E,
+                    FIXTURE_QSBREQ01_F9A27626,
+                    FIXTURE_001_A3FEAA64),
+                tokenRequest(
+                    MESSAGE,
+                    CORRELATION,
+                    101,
+                    uuid(402),
+                    FIXTURE_QUESTION_6D6CA52E,
+                    FIXTURE_QSBREQ01_F9A27626,
+                    FIXTURE_001_A3FEAA64),
+                tokenRequest(
+                    MESSAGE,
+                    CORRELATION,
+                    101,
+                    TOKEN,
+                    "changed",
+                    FIXTURE_QSBREQ01_F9A27626,
+                    FIXTURE_001_A3FEAA64))) {
           var failure =
               assertThrows(
                   InboxException.class, () -> coordinator.inspectMessage(connection, changed));
@@ -751,9 +957,9 @@ final class JdbcInboxCoordinatorTest {
         try (var canonical =
             new CanonicalRequest(
                 "101",
-                "QSBREQ01",
-                "001",
-                "question",
+                FIXTURE_QSBREQ01_F9A27626,
+                FIXTURE_001_A3FEAA64,
+                FIXTURE_QUESTION_6D6CA52E,
                 List.of(new CanonicalField("body", "UTF8-v1", new byte[] {65})))) {
           var changed =
               new InboxRequest(
@@ -773,7 +979,7 @@ final class JdbcInboxCoordinatorTest {
         connection.commit();
       }
     }
-    try (var keys = new FingerprintKeyRing("fp2", key((byte) 12), null, null);
+    try (var keys = new FingerprintKeyRing(FIXTURE_FP2_0F8E0697, key((byte) 12), null, null);
         Connection connection = transaction()) {
       connection.setReadOnly(true);
       var coordinator = new JdbcInboxCoordinator(keys);
@@ -787,9 +993,17 @@ final class JdbcInboxCoordinatorTest {
 
   @Test
   void readOnlyMessageLookupRejectsNullModesCorruptionAndJdbcFaults() throws Exception {
-    var request = tokenRequest(MESSAGE, CORRELATION, 101, TOKEN, "question", "QSBREQ01", "001");
-    insertReadOnlyFixture(request, "COMPLETED");
-    try (var keys = new FingerprintKeyRing("fp1", key((byte) 11), null, null)) {
+    var request =
+        tokenRequest(
+            MESSAGE,
+            CORRELATION,
+            101,
+            TOKEN,
+            FIXTURE_QUESTION_6D6CA52E,
+            FIXTURE_QSBREQ01_F9A27626,
+            FIXTURE_001_A3FEAA64);
+    insertReadOnlyFixture(request, FIXTURE_COMPLETED_BA0AE16A);
+    try (var keys = new FingerprintKeyRing(FIXTURE_FP1_54E2C4E0, key((byte) 11), null, null)) {
       var coordinator = new JdbcInboxCoordinator(keys);
       assertThrows(NullPointerException.class, () -> coordinator.inspectMessage(null, request));
       try (Connection connection = appConnection()) {
@@ -845,15 +1059,23 @@ final class JdbcInboxCoordinatorTest {
             () -> coordinator.inspectMessage(readOnlyFault(connection, "unknownState"), request));
         connection.rollback();
       }
-      assertEquals(1, count("schubert.request_inbox"));
+      assertEquals(1, count(FIXTURE_SCHUBERT_REQUEST_INBOX_CEAADFAA));
     }
   }
 
   @Test
   void readOnlyMessageLookupRunsOneHundredTimesWhileRowIsLocked() throws Exception {
-    var request = tokenRequest(MESSAGE, CORRELATION, 101, TOKEN, "question", "QSBREQ01", "001");
-    insertReadOnlyFixture(request, "COMPLETED");
-    try (var keys = new FingerprintKeyRing("fp1", key((byte) 11), null, null);
+    var request =
+        tokenRequest(
+            MESSAGE,
+            CORRELATION,
+            101,
+            TOKEN,
+            FIXTURE_QUESTION_6D6CA52E,
+            FIXTURE_QSBREQ01_F9A27626,
+            FIXTURE_001_A3FEAA64);
+    insertReadOnlyFixture(request, FIXTURE_COMPLETED_BA0AE16A);
+    try (var keys = new FingerprintKeyRing(FIXTURE_FP1_54E2C4E0, key((byte) 11), null, null);
         Connection locked = transaction();
         var statement = locked.createStatement()) {
       try (var row =
@@ -894,7 +1116,7 @@ final class JdbcInboxCoordinatorTest {
       assertEquals(EXPIRES, storedExpiry(locked, MESSAGE));
       locked.rollback();
     }
-    assertEquals(1, count("schubert.request_inbox"));
+    assertEquals(1, count(FIXTURE_SCHUBERT_REQUEST_INBOX_CEAADFAA));
   }
 
   private static void insertReadOnlyFixture(InboxRequest request, String state) throws Exception {
@@ -902,8 +1124,8 @@ final class JdbcInboxCoordinatorTest {
     var bytes = new ByteArrayOutputStream();
     try (var out = new DataOutputStream(bytes)) {
       out.write("SCHUBERT-NK-OP1".getBytes(StandardCharsets.US_ASCII));
-      String layout = request.operationToken().isPresent() ? "QSBREQ01" : "GAMREQ01";
-      for (String value : List.of("101", layout, "001", "question")) {
+      String layout = request.operationToken().isPresent() ? FIXTURE_QSBREQ01_F9A27626 : "GAMREQ01";
+      for (String value : List.of("101", layout, FIXTURE_001_A3FEAA64, FIXTURE_QUESTION_6D6CA52E)) {
         byte[] encoded = value.getBytes(StandardCharsets.UTF_8);
         out.writeInt(encoded.length);
         out.write(encoded);
@@ -914,7 +1136,9 @@ final class JdbcInboxCoordinatorTest {
     mac.init(new SecretKeySpec(key((byte) 11), "HmacSHA256"));
     try (Connection connection = transaction()) {
       insertProcessing(
-          connection, request, new Fingerprint("fp1", mac.doFinal(bytes.toByteArray())));
+          connection,
+          request,
+          new Fingerprint(FIXTURE_FP1_54E2C4E0, mac.doFinal(bytes.toByteArray())));
       if (!state.equals("PROCESSING")) {
         try (var statement =
             connection.prepareStatement(
@@ -1016,7 +1240,7 @@ final class JdbcInboxCoordinatorTest {
         correlation,
         OptionalLong.of(owner),
         Optional.empty(),
-        canonical(owner, layout, "001", target),
+        canonical(owner, layout, FIXTURE_001_A3FEAA64, target),
         RECEIVED,
         EXPIRES);
   }
@@ -1027,7 +1251,7 @@ final class JdbcInboxCoordinatorTest {
         correlation,
         OptionalLong.empty(),
         Optional.empty(),
-        new CanonicalRequest("ANONYMOUS", "LGNREQ01", "001", target, List.of()),
+        new CanonicalRequest("ANONYMOUS", "LGNREQ01", FIXTURE_001_A3FEAA64, target, List.of()),
         RECEIVED,
         EXPIRES);
   }
@@ -1042,7 +1266,7 @@ final class JdbcInboxCoordinatorTest {
         InboxCompletionState.COMPLETED,
         InboxResultReference.none(),
         "QBSRSP01",
-        "001",
+        FIXTURE_001_A3FEAA64,
         Optional.of(new EncryptedResponseSnapshot("snapshot1", new byte[29])),
         COMPLETED);
   }
@@ -1052,7 +1276,7 @@ final class JdbcInboxCoordinatorTest {
         InboxCompletionState.COMPLETED,
         InboxResultReference.numeric(InboxResultReferenceType.QUESTION, 77),
         "QBSRSP01",
-        "001",
+        FIXTURE_001_A3FEAA64,
         Optional.empty(),
         COMPLETED);
   }
@@ -1062,7 +1286,7 @@ final class JdbcInboxCoordinatorTest {
         InboxCompletionState.COMPLETED,
         InboxResultReference.none(),
         "QSTRSP01",
-        "001",
+        FIXTURE_001_A3FEAA64,
         Optional.empty(),
         COMPLETED);
   }

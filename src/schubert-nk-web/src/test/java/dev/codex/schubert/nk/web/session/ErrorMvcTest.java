@@ -86,6 +86,17 @@ import org.springframework.web.context.support.AnnotationConfigWebApplicationCon
  * NK-WEB-001/PT-WEB-148..157; UI221/222/226; SS313/314/351/352; SSC-047/PG-D-116; BUG-074/YKT-066.
  */
 class ErrorMvcTest {
+  private static final String FIXTURE_READER_F734AAEA = "reader";
+  private static final String FIXTURE_USER_2DED8884 = "USER";
+  private static final String FIXTURE_ADMIN_C4BB3010 = "ADMIN";
+  private static final String FIXTURE_GET_04F32A7E = "GET";
+  private static final String FIXTURE_UNUSED_5A9D5965 = "unused";
+  private static final String FIXTURE_CSRF_A082304B = "_csrf";
+  private static final String FIXTURE_ERROR_7157D9BC = "/error";
+  private static final String FIXTURE_ADMIN_USERS_2C687608 = "/admin/users";
+  private static final String FIXTURE_POST_E46D3AE9 = "POST";
+  private static final String FIXTURE_0000_876EEFE0 = "0000";
+  private static final String FIXTURE_ANONYMOUS_9F338305 = "ANONYMOUS";
   private static WebLogDatabaseFixture db;
   @TempDir Path root;
   private static final UUID REQUEST_ID = new UUID(0, 27);
@@ -132,8 +143,10 @@ class ErrorMvcTest {
       for (var top :
           List.of(
               Optional.<TopBarViewModel>empty(),
-              Optional.of(TopBarViewModel.from(principal("reader", "USER"))),
-              Optional.of(TopBarViewModel.from(principal("administrator", "ADMIN"))))) {
+              Optional.of(
+                  TopBarViewModel.from(principal(FIXTURE_READER_F734AAEA, FIXTURE_USER_2DED8884))),
+              Optional.of(
+                  TopBarViewModel.from(principal("administrator", FIXTURE_ADMIN_C4BB3010))))) {
         var page = factory.create(expected.getKey(), REQUEST_ID, top);
         assertEquals(expected.getKey().intValue(), page.getStatus());
         assertEquals(expected.getValue(), page.getMessage());
@@ -182,38 +195,39 @@ class ErrorMvcTest {
     filterNulls(errors);
     assertThrows(NullPointerException.class, () -> WebDisplayContext.existing(null));
     assertThrows(NullPointerException.class, () -> WebDisplayContext.clear(null));
-    var request = request("GET", "/search");
+    var request = request(FIXTURE_GET_04F32A7E, "/search");
     display.doFilter(request, new MockHttpServletResponse(), (r, s) -> assertSame(request, r));
     assertTrue(WebDisplayContext.existing(request).isEmpty());
-    for (String role : List.of("USER", "ADMIN")) {
-      request.setUserPrincipal(principal("reader", role));
+    for (String role : List.of(FIXTURE_USER_2DED8884, FIXTURE_ADMIN_C4BB3010)) {
+      request.setUserPrincipal(principal(FIXTURE_READER_F734AAEA, role));
       request.setAttribute(
-          CsrfToken.class.getName(), new DefaultCsrfToken("unused", "_csrf", "b".repeat(64)));
+          CsrfToken.class.getName(),
+          new DefaultCsrfToken(FIXTURE_UNUSED_5A9D5965, FIXTURE_CSRF_A082304B, "b".repeat(64)));
       display.doFilter(request, new MockHttpServletResponse(), (r, s) -> {});
       var snapshot = WebDisplayContext.existing(request).orElseThrow();
-      assertEquals("reader", snapshot.topBar().getUsername());
+      assertEquals(FIXTURE_READER_F734AAEA, snapshot.topBar().getUsername());
       assertEquals(role, snapshot.topBar().getRole());
       assertEquals("WebDisplayContext[REDACTED]", snapshot.toString());
-      request.setUserPrincipal(principal("different", "ADMIN"));
+      request.setUserPrincipal(principal("different", FIXTURE_ADMIN_C4BB3010));
       request.setDispatcherType(DispatcherType.ERROR);
-      request.setRequestURI("/error");
+      request.setRequestURI(FIXTURE_ERROR_7157D9BC);
       request.setAttribute(CsrfToken.class.getName(), new Object());
-      request.setAttribute("_csrf", "secret-placeholder");
+      request.setAttribute(FIXTURE_CSRF_A082304B, "secret-placeholder");
       var noNative = noNative(request);
       errors.doFilter(
           noNative,
           new MockHttpServletResponse(),
           (r, s) -> {
-            var token = assertInstanceOf(CsrfToken.class, r.getAttribute("_csrf"));
+            var token = assertInstanceOf(CsrfToken.class, r.getAttribute(FIXTURE_CSRF_A082304B));
             assertSame(token, r.getAttribute(CsrfToken.class.getName()));
             assertEquals("b".repeat(64), token.getToken());
-            assertEquals("_csrf", token.getParameterName());
+            assertEquals(FIXTURE_CSRF_A082304B, token.getParameterName());
             assertEquals("X-CSRF-TOKEN", token.getHeaderName());
           });
       assertSame(snapshot, WebDisplayContext.existing(request).orElseThrow());
       WebDisplayContext.clear(noNative);
       assertTrue(WebDisplayContext.existing(noNative).isEmpty());
-      assertNull(request.getAttribute("_csrf"));
+      assertNull(request.getAttribute(FIXTURE_CSRF_A082304B));
       assertNull(request.getAttribute(CsrfToken.class.getName()));
       request.setAttribute(CsrfToken.class.getName(), new Object());
       errors.doFilter(
@@ -231,19 +245,21 @@ class ErrorMvcTest {
     assertThrows(
         SessionStoreException.class,
         () -> display.doFilter(request, new MockHttpServletResponse(), (r, s) -> fail()));
-    request.setUserPrincipal(principal("reader", "USER"));
+    request.setUserPrincipal(principal(FIXTURE_READER_F734AAEA, FIXTURE_USER_2DED8884));
     assertThrows(
         SessionStoreException.class,
         () -> display.doFilter(request, new MockHttpServletResponse(), (r, s) -> fail()));
     for (Object token :
-        List.of("foreign", new DefaultCsrfToken("unused", "wrong", "b".repeat(64)))) {
+        List.of(
+            "foreign", new DefaultCsrfToken(FIXTURE_UNUSED_5A9D5965, "wrong", "b".repeat(64)))) {
       request.setAttribute(CsrfToken.class.getName(), token);
       assertThrows(
           SessionStoreException.class,
           () -> display.doFilter(request, new MockHttpServletResponse(), (r, s) -> fail()));
     }
     request.setAttribute(
-        CsrfToken.class.getName(), new DefaultCsrfToken("unused", "_csrf", "invalid"));
+        CsrfToken.class.getName(),
+        new DefaultCsrfToken(FIXTURE_UNUSED_5A9D5965, FIXTURE_CSRF_A082304B, "invalid"));
     assertThrows(
         IllegalArgumentException.class,
         () -> display.doFilter(request, new MockHttpServletResponse(), (r, s) -> fail()));
@@ -254,12 +270,12 @@ class ErrorMvcTest {
 
           @Override
           public String getHeaderName() {
-            return "unused";
+            return FIXTURE_UNUSED_5A9D5965;
           }
 
           @Override
           public String getParameterName() {
-            return "_csrf";
+            return FIXTURE_CSRF_A082304B;
           }
 
           @Override
@@ -275,7 +291,7 @@ class ErrorMvcTest {
         ServletException.class,
         () -> errors.doFilter(request, new MockHttpServletResponse(), (r, s) -> fail()));
     request.setDispatcherType(DispatcherType.ERROR);
-    request.setRequestURI("/admin/users");
+    request.setRequestURI(FIXTURE_ADMIN_USERS_2C687608);
     assertThrows(
         ServletException.class,
         () -> errors.doFilter(request, new MockHttpServletResponse(), (r, s) -> fail()));
@@ -283,12 +299,13 @@ class ErrorMvcTest {
     for (boolean authenticated : List.of(false, true))
       for (boolean tokenPresent : List.of(false, true)) {
         SecurityContextHolder.clearContext();
-        if (authenticated) set(principal("reader", "USER"));
-        var r = request("POST", "/");
+        if (authenticated) set(principal(FIXTURE_READER_F734AAEA, FIXTURE_USER_2DED8884));
+        var r = request(FIXTURE_POST_E46D3AE9, "/");
         context(r);
         if (tokenPresent)
           r.setAttribute(
-              CsrfToken.class.getName(), new DefaultCsrfToken("unused", "_csrf", "b".repeat(64)));
+              CsrfToken.class.getName(),
+              new DefaultCsrfToken(FIXTURE_UNUSED_5A9D5965, FIXTURE_CSRF_A082304B, "b".repeat(64)));
         denied.handle(r, new MockHttpServletResponse(), new AccessDeniedException("private"));
         assertEquals(authenticated && tokenPresent, WebDisplayContext.existing(r).isPresent());
       }
@@ -298,7 +315,7 @@ class ErrorMvcTest {
   void web150InfrastructureFailuresDoNotLoopOrHideOtherFaults() throws Exception {
     var filter = new WebInfrastructureFailureFilter();
     filterNulls(filter);
-    var request = request("GET", "/");
+    var request = request(FIXTURE_GET_04F32A7E, "/");
     var failure = new SessionStoreException();
     FilterChain failing =
         (r, s) -> {
@@ -399,7 +416,7 @@ class ErrorMvcTest {
     var controller = new ErrorController(new ProblemViewFactory());
     assertThrows(NullPointerException.class, () -> new ErrorController(null));
     assertThrows(NullPointerException.class, () -> new WebMvcConfiguration().errorController(null));
-    var request = request("GET", "/error");
+    var request = request(FIXTURE_GET_04F32A7E, FIXTURE_ERROR_7157D9BC);
     context(request);
     var response = new MockHttpServletResponse();
     var model = new ExtendedModelMap();
@@ -432,14 +449,24 @@ class ErrorMvcTest {
     assertEquals(404, response.getStatus());
     assertEquals(Set.of("page"), model.keySet());
     assertEquals(404, ((ErrorViewModel) model.get("page")).getStatus());
-    for (String method : List.of("GET", "HEAD", "POST", "PUT", "PATCH", "DELETE", "OPTIONS")) {
+    for (String method :
+        List.of(
+            FIXTURE_GET_04F32A7E,
+            "HEAD",
+            FIXTURE_POST_E46D3AE9,
+            "PUT",
+            "PATCH",
+            "DELETE",
+            "OPTIONS")) {
       request.setMethod(method);
       for (DispatcherType dispatcher : List.of(DispatcherType.REQUEST, DispatcherType.ERROR)) {
         request.setDispatcherType(dispatcher);
         var output = new MockHttpServletResponse();
         controller.error(safeOnly, output, new ExtendedModelMap());
         boolean allowed =
-            dispatcher == DispatcherType.ERROR || method.equals("GET") || method.equals("HEAD");
+            dispatcher == DispatcherType.ERROR
+                || method.equals(FIXTURE_GET_04F32A7E)
+                || method.equals("HEAD");
         assertEquals(allowed ? 404 : 405, output.getStatus());
         assertEquals(allowed ? null : "GET, HEAD", output.getHeader("Allow"));
       }
@@ -487,7 +514,9 @@ class ErrorMvcTest {
   void web156ForgedErrorDispatchNeverBypassesBusinessSecurity() throws Exception {
     try (var f = new Fixture(db)) {
       f.clock.value = Instant.now();
-      var api = new SessionFormLoginTest.Api("0000", "USER", "0000", 0);
+      var api =
+          new SessionFormLoginTest.Api(
+              FIXTURE_0000_876EEFE0, FIXTURE_USER_2DED8884, FIXTURE_0000_876EEFE0, 0);
       var filter =
           new WebSecurityFilterFactory()
               .create(
@@ -495,7 +524,7 @@ class ErrorMvcTest {
                   api.provider,
                   new WebSecurityAudit(new EmbeddedWebSecurityTest.Log(), f.clock, "pt", "pt"),
                   () -> new UUID(0, 1));
-      var request = new MockHttpServletRequest("TRACE", "/error");
+      var request = new MockHttpServletRequest("TRACE", FIXTURE_ERROR_7157D9BC);
       request.setDispatcherType(DispatcherType.ERROR);
       request.setAttribute(RequestDispatcher.ERROR_STATUS_CODE, 400);
       request.setRemoteAddr("127.0.0.1");
@@ -509,8 +538,8 @@ class ErrorMvcTest {
       assertEquals(0, api.sends.get());
       f.failure = "";
       for (DispatcherType dispatcher : DispatcherType.values()) {
-        for (String path : List.of("/error", "/admin/users")) {
-          var r = request("GET", path);
+        for (String path : List.of(FIXTURE_ERROR_7157D9BC, FIXTURE_ADMIN_USERS_2C687608)) {
+          var r = request(FIXTURE_GET_04F32A7E, path);
           r.setDispatcherType(dispatcher);
           r.addHeader("Dispatcher-Type", "ERROR");
           r.setQueryString("dispatcher=ERROR&status=200");
@@ -521,7 +550,8 @@ class ErrorMvcTest {
               response,
               (req, res) -> {
                 reached.incrementAndGet();
-                boolean internal = dispatcher == DispatcherType.ERROR && path.equals("/error");
+                boolean internal =
+                    dispatcher == DispatcherType.ERROR && path.equals(FIXTURE_ERROR_7157D9BC);
                 Object repository =
                     req.getAttribute(
                         org.springframework.session.web.http.SessionRepositoryFilter
@@ -529,8 +559,8 @@ class ErrorMvcTest {
                 if (internal) assertNull(repository);
                 else assertInstanceOf(SpringEncryptedSessionRepository.class, repository);
               });
-          assertEquals(path.equals("/error") ? 1 : 0, reached.get());
-          if (!path.equals("/error")) assertEquals(302, response.getStatus());
+          assertEquals(path.equals(FIXTURE_ERROR_7157D9BC) ? 1 : 0, reached.get());
+          if (!path.equals(FIXTURE_ERROR_7157D9BC)) assertEquals(302, response.getStatus());
         }
       }
       filter.destroy();
@@ -545,9 +575,9 @@ class ErrorMvcTest {
     router.init(new MockFilterConfig());
     assertEquals(1, business.initialized);
     assertEquals(1, errors.initialized);
-    var missing = request("GET", "/error");
+    var missing = request(FIXTURE_GET_04F32A7E, FIXTURE_ERROR_7157D9BC);
     missing.setDispatcherType(DispatcherType.ERROR);
-    set(principal("reader", "USER"));
+    set(principal(FIXTURE_READER_F734AAEA, FIXTURE_USER_2DED8884));
     assertThrows(
         IllegalStateException.class,
         () -> router.doFilter(missing, new MockHttpServletResponse(), (r, s) -> fail()));
@@ -585,13 +615,16 @@ class ErrorMvcTest {
       mvc.refresh();
       var mock = MockMvcBuilders.webAppContextSetup(mvc).build();
       for (int status : MESSAGES.keySet())
-        for (String role : List.of("ANONYMOUS", "USER", "ADMIN")) {
-          var prepared = request("GET", "/error");
+        for (String role :
+            List.of(FIXTURE_ANONYMOUS_9F338305, FIXTURE_USER_2DED8884, FIXTURE_ADMIN_C4BB3010)) {
+          var prepared = request(FIXTURE_GET_04F32A7E, FIXTURE_ERROR_7157D9BC);
           context(prepared);
-          if (!role.equals("ANONYMOUS")) {
-            prepared.setUserPrincipal(principal("reader", role));
+          if (!role.equals(FIXTURE_ANONYMOUS_9F338305)) {
+            prepared.setUserPrincipal(principal(FIXTURE_READER_F734AAEA, role));
             prepared.setAttribute(
-                CsrfToken.class.getName(), new DefaultCsrfToken("unused", "_csrf", "b".repeat(64)));
+                CsrfToken.class.getName(),
+                new DefaultCsrfToken(
+                    FIXTURE_UNUSED_5A9D5965, FIXTURE_CSRF_A082304B, "b".repeat(64)));
             new WebDisplayContextFilter()
                 .doFilter(prepared, new MockHttpServletResponse(), (r, s) -> {});
           }
@@ -599,7 +632,7 @@ class ErrorMvcTest {
           new WebErrorDispatchFilter()
               .doFilter(prepared, new MockHttpServletResponse(), (r, s) -> {});
           var builder =
-              get("/error")
+              get(FIXTURE_ERROR_7157D9BC)
                   .requestAttr(RequestDispatcher.ERROR_STATUS_CODE, status)
                   .with(
                       r -> {
@@ -616,7 +649,7 @@ class ErrorMvcTest {
           verifyError(
               response.getContentAsString(StandardCharsets.UTF_8),
               status,
-              role.equals("ANONYMOUS") ? null : "reader",
+              role.equals(FIXTURE_ANONYMOUS_9F338305) ? null : FIXTURE_READER_F734AAEA,
               role,
               "b".repeat(64),
               REQUEST_ID);
@@ -627,18 +660,22 @@ class ErrorMvcTest {
   @Test
   void web153RealHttpErrorsKeepStatusHeadersAndIdentity() throws Exception {
     resetDatabase();
-    var api = new SessionFormLoginTest.Api("0000", "USER", "0000", 0);
+    var api =
+        new SessionFormLoginTest.Api(
+            FIXTURE_0000_876EEFE0, FIXTURE_USER_2DED8884, FIXTURE_0000_876EEFE0, 0);
     try (var server = server(api, false)) {
-      String cookie = login(server, "reader", "p");
+      String cookie = login(server, FIXTURE_READER_F734AAEA, "p");
       for (int status : new int[] {400, 401, 403, 404, 405, 409, 416, 429, 500, 503}) {
-        var response = server.send("GET", "/fixture-error?status=" + status, cookie, null, true);
+        var response =
+            server.send(
+                FIXTURE_GET_04F32A7E, "/fixture-error?status=" + status, cookie, null, true);
         int expected = status == 500 ? 503 : status;
         assertEquals(expected, response.statusCode());
         verifyError(
             response.body(),
             expected,
-            "reader",
-            "USER",
+            FIXTURE_READER_F734AAEA,
+            FIXTURE_USER_2DED8884,
             "04".repeat(32),
             new UUID(0, server.ids.get()));
         safeHeaders(response);
@@ -654,21 +691,27 @@ class ErrorMvcTest {
   void web154DatabaseFailureRendersWithoutReadingSessionAgain() throws Exception {
     for (boolean afterSnapshot : List.of(false, true)) {
       resetDatabase();
-      var api = new SessionFormLoginTest.Api("0000", "USER", "0000", 0);
+      var api =
+          new SessionFormLoginTest.Api(
+              FIXTURE_0000_876EEFE0, FIXTURE_USER_2DED8884, FIXTURE_0000_876EEFE0, 0);
       try (var server = server(api, false)) {
-        String cookie = login(server, "reader", "p");
+        String cookie = login(server, FIXTURE_READER_F734AAEA, "p");
         try {
           if (afterSnapshot) server.breakDatabaseBeforeError = true;
           else server.f.failure = "open";
           var response =
               server.send(
-                  "GET", afterSnapshot ? "/fixture-error?status=503" : "/", cookie, null, true);
+                  FIXTURE_GET_04F32A7E,
+                  afterSnapshot ? "/fixture-error?status=503" : "/",
+                  cookie,
+                  null,
+                  true);
           assertEquals(503, response.statusCode());
           verifyError(
               response.body(),
               503,
-              afterSnapshot ? "reader" : null,
-              "USER",
+              afterSnapshot ? FIXTURE_READER_F734AAEA : null,
+              FIXTURE_USER_2DED8884,
               "04".repeat(32),
               new UUID(0, 3));
           safeHeaders(response);
@@ -686,34 +729,65 @@ class ErrorMvcTest {
   @Test
   void web155DeniedRequestsKeepOneAuditAndOriginalRequestId() throws Exception {
     resetDatabase();
-    var api = new SessionFormLoginTest.Api("0000", "USER", "0000", 0);
+    var api =
+        new SessionFormLoginTest.Api(
+            FIXTURE_0000_876EEFE0, FIXTURE_USER_2DED8884, FIXTURE_0000_876EEFE0, 0);
     try (var server = server(api, false)) {
-      String cookie = login(server, "reader", "p");
-      var role = server.send("GET", "/admin/users", cookie, null, true);
+      String cookie = login(server, FIXTURE_READER_F734AAEA, "p");
+      var role =
+          server.send(FIXTURE_GET_04F32A7E, FIXTURE_ADMIN_USERS_2C687608, cookie, null, true);
       assertEquals(403, role.statusCode());
-      verifyError(role.body(), 403, "reader", "USER", "04".repeat(32), new UUID(0, 3));
+      verifyError(
+          role.body(),
+          403,
+          FIXTURE_READER_F734AAEA,
+          FIXTURE_USER_2DED8884,
+          "04".repeat(32),
+          new UUID(0, 3));
       assertEquals(2, server.log.events.size());
-      var csrf = server.send("POST", "/", cookie, "_csrf=" + "ff".repeat(32), true);
+      var csrf = server.send(FIXTURE_POST_E46D3AE9, "/", cookie, "_csrf=" + "ff".repeat(32), true);
       assertEquals(403, csrf.statusCode());
-      verifyError(csrf.body(), 403, "reader", "USER", "04".repeat(32), new UUID(0, 4));
+      verifyError(
+          csrf.body(),
+          403,
+          FIXTURE_READER_F734AAEA,
+          FIXTURE_USER_2DED8884,
+          "04".repeat(32),
+          new UUID(0, 4));
       assertEquals(3, server.log.events.size());
       assertEquals(
           "00000000-0000-0000-0000-000000000004",
           server.log.events.getLast().get("requestId").getAsString());
       var direct =
           server.send(
-              "GET", "/error?status=200&exception=private-query-canary", cookie, null, true);
+              FIXTURE_GET_04F32A7E,
+              "/error?status=200&exception=private-query-canary",
+              cookie,
+              null,
+              true);
       assertEquals(404, direct.statusCode());
-      verifyError(direct.body(), 404, "reader", "USER", "04".repeat(32), new UUID(0, 5));
-      var post = server.send("POST", "/error", cookie, "_csrf=" + "04".repeat(32), true);
+      verifyError(
+          direct.body(),
+          404,
+          FIXTURE_READER_F734AAEA,
+          FIXTURE_USER_2DED8884,
+          "04".repeat(32),
+          new UUID(0, 5));
+      var post =
+          server.send(
+              FIXTURE_POST_E46D3AE9,
+              FIXTURE_ERROR_7157D9BC,
+              cookie,
+              "_csrf=" + "04".repeat(32),
+              true);
       assertEquals(405, post.statusCode());
       assertEquals("GET, HEAD", post.headers().firstValue("allow").orElseThrow());
-      var proxy = server.send("GET", "/error", cookie, null, false);
+      var proxy = server.send(FIXTURE_GET_04F32A7E, FIXTURE_ERROR_7157D9BC, cookie, null, false);
       assertEquals(403, proxy.statusCode());
       assertEquals("", proxy.body());
       var method = server.send("TRACK", "/private", null, null, true);
       assertEquals(400, method.statusCode());
-      verifyError(method.body(), 400, null, "ANONYMOUS", "", new UUID(0, 8));
+      verifyError(method.body(), 400, null, FIXTURE_ANONYMOUS_9F338305, "", new UUID(0, 8));
       safeHeaders(method);
       assertEquals(0, server.posts.get());
     }
@@ -723,7 +797,8 @@ class ErrorMvcTest {
   @Test
   void web157ConcurrentErrorRenderingKeepsRequestActorsSeparate() throws Exception {
     resetDatabase();
-    var api = new SessionFormLoginTest.Api("0000", "DYNAMIC", "0000", 0);
+    var api =
+        new SessionFormLoginTest.Api(FIXTURE_0000_876EEFE0, "DYNAMIC", FIXTURE_0000_876EEFE0, 0);
     try (var server = server(api, true);
         var pool = Executors.newFixedThreadPool(8)) {
       var futures = new ArrayList<Future<Void>>();
@@ -737,8 +812,8 @@ class ErrorMvcTest {
                   String cookie = login(server, "user" + n, "password-user" + n);
                   var response =
                       server.send(
-                          "GET",
-                          n % 2 == 0 ? "/admin/users" : "/fixture-error?status=503",
+                          FIXTURE_GET_04F32A7E,
+                          n % 2 == 0 ? FIXTURE_ADMIN_USERS_2C687608 : "/fixture-error?status=503",
                           cookie,
                           null,
                           true);
@@ -751,7 +826,12 @@ class ErrorMvcTest {
                   assertEquals(64, csrf.length());
                   assertTrue(tokens.add(csrf));
                   verifyError(
-                      response.body(), status, "user" + n, n % 2 == 0 ? "USER" : "ADMIN", csrf, id);
+                      response.body(),
+                      status,
+                      "user" + n,
+                      n % 2 == 0 ? FIXTURE_USER_2DED8884 : FIXTURE_ADMIN_C4BB3010,
+                      csrf,
+                      id);
                   return null;
                 }));
       }
@@ -818,11 +898,11 @@ class ErrorMvcTest {
 
   private static String login(
       EmbeddedWebSecurityTest.Server server, String username, String password) throws Exception {
-    var first = server.send("GET", "/login", null, null, true);
+    var first = server.send(FIXTURE_GET_04F32A7E, "/login", null, null, true);
     String cookie = first.headers().firstValue("set-cookie").orElseThrow().split(";", 2)[0];
     var login =
         server.send(
-            "POST",
+            FIXTURE_POST_E46D3AE9,
             "/login",
             cookie,
             "_csrf="

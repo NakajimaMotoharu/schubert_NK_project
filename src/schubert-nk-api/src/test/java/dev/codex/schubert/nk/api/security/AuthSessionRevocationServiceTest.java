@@ -43,6 +43,14 @@ import org.junit.jupiter.api.io.TempDir;
  * PT.
  */
 final class AuthSessionRevocationServiceTest {
+  private static final String FIXTURE_PREPARESTATEMENT_CB987D1F = "prepareStatement";
+  private static final String FIXTURE_EXECUTEQUERY_85C8C423 = "executeQuery";
+  private static final String FIXTURE_ROWCLOSE_4440E762 = "rowClose";
+  private static final String FIXTURE_AUDITPREPARE_07760EC2 = "auditPrepare";
+  private static final String FIXTURE_ZEROAUDIT_795EFF88 = "zeroAudit";
+  private static final String FIXTURE_AUDITAFTER_7F1E49F2 = "auditAfter";
+  private static final String FIXTURE_AUDITCLOSE_57DDF9CB = "auditClose";
+  private static final String FIXTURE_CLOSE_97959247 = "close";
   @TempDir static Path root;
   private static ApiLogDatabaseFixture database;
   private static AuthSessionRevocationService service;
@@ -294,17 +302,17 @@ final class AuthSessionRevocationServiceTest {
     for (String fault :
         List.of(
             "getAutoCommit",
-            "prepareStatement",
+            FIXTURE_PREPARESTATEMENT_CB987D1F,
             "setString",
-            "executeQuery",
-            "rowClose",
+            FIXTURE_EXECUTEQUERY_85C8C423,
+            FIXTURE_ROWCLOSE_4440E762,
             "statementClose",
             "zeroUpdate",
             "updateAfter",
-            "auditPrepare",
-            "zeroAudit",
-            "auditAfter",
-            "auditClose",
+            FIXTURE_AUDITPREPARE_07760EC2,
+            FIXTURE_ZEROAUDIT_795EFF88,
+            FIXTURE_AUDITAFTER_7F1E49F2,
+            FIXTURE_AUDITCLOSE_57DDF9CB,
             "null:id",
             "null:user_id",
             "null:revoked",
@@ -335,7 +343,12 @@ final class AuthSessionRevocationServiceTest {
                   CORRELATION,
                   NOW));
       connection.rollback();
-      for (String fault : List.of("auditPrepare", "zeroAudit", "auditAfter", "auditClose")) {
+      for (String fault :
+          List.of(
+              FIXTURE_AUDITPREPARE_07760EC2,
+              FIXTURE_ZEROAUDIT_795EFF88,
+              FIXTURE_AUDITAFTER_7F1E49F2,
+              FIXTURE_AUDITCLOSE_57DDF9CB)) {
         assertInfrastructure(
             () ->
                 service.logout(
@@ -347,17 +360,17 @@ final class AuthSessionRevocationServiceTest {
     for (String fault :
         List.of(
             "getAutoCommit",
-            "prepareStatement",
+            FIXTURE_PREPARESTATEMENT_CB987D1F,
             "setLong",
-            "executeQuery",
-            "rowClose",
+            FIXTURE_EXECUTEQUERY_85C8C423,
+            FIXTURE_ROWCLOSE_4440E762,
             "statementClose",
             "zeroUpdate",
             "updateAfter",
-            "auditPrepare",
-            "zeroAudit",
-            "auditAfter",
-            "auditClose",
+            FIXTURE_AUDITPREPARE_07760EC2,
+            FIXTURE_ZEROAUDIT_795EFF88,
+            FIXTURE_AUDITAFTER_7F1E49F2,
+            FIXTURE_AUDITCLOSE_57DDF9CB,
             "null:id")) {
       try (Connection connection = database.transaction()) {
         assertInfrastructure(
@@ -375,7 +388,7 @@ final class AuthSessionRevocationServiceTest {
       assertInfrastructure(
           () ->
               service.logout(
-                  intercept(connection, "rowClose"),
+                  intercept(connection, FIXTURE_ROWCLOSE_4440E762),
                   AuthenticationContext.of("f".repeat(64)),
                   client,
                   MESSAGE,
@@ -389,7 +402,11 @@ final class AuthSessionRevocationServiceTest {
       assertNull(absent.getCause());
       assertEquals(0, absent.getSuppressed().length);
       assertInfrastructure(
-          () -> revokeAll(intercept(connection, "rowClose"), 99, SessionRevocationReason.ADMIN));
+          () ->
+              revokeAll(
+                  intercept(connection, FIXTURE_ROWCLOSE_4440E762),
+                  99,
+                  SessionRevocationReason.ADMIN));
       assertThrows(NullPointerException.class, () -> new AuthSessionRevocationService(null));
       for (var operation :
           List.<org.junit.jupiter.api.function.Executable>of(
@@ -637,21 +654,22 @@ final class AuthSessionRevocationServiceTest {
             new Class<?>[] {Connection.class},
             (p, m, a) -> {
               Object statement = invoke(real, m, a);
-              if (!m.getName().equals("prepareStatement") || !((String) a[0]).startsWith(match))
-                return statement;
+              if (!m.getName().equals(FIXTURE_PREPARESTATEMENT_CB987D1F)
+                  || !((String) a[0]).startsWith(match)) return statement;
               return Proxy.newProxyInstance(
                   PreparedStatement.class.getClassLoader(),
                   new Class<?>[] {PreparedStatement.class},
                   (sp, sm, sa) -> {
                     Object result = invoke(statement, sm, sa);
-                    if (!sm.getName().equals("executeQuery")) return result;
+                    if (!sm.getName().equals(FIXTURE_EXECUTEQUERY_85C8C423)) return result;
                     return Proxy.newProxyInstance(
                         ResultSet.class.getClassLoader(),
                         new Class<?>[] {ResultSet.class},
                         (rp, rm, ra) -> {
                           if (primary != null && rm.getName().startsWith("get")) throw primary;
                           Object actual = invoke(result, rm, ra);
-                          if (fatal != null && rm.getName().equals("close")) throw fatal;
+                          if (fatal != null && rm.getName().equals(FIXTURE_CLOSE_97959247))
+                            throw fatal;
                           return actual;
                         });
                   });
@@ -724,10 +742,10 @@ final class AuthSessionRevocationServiceTest {
             (proxy, method, args) -> {
               if (method.getName().equals(fault))
                 throw new SQLException("synthetic-sensitive-provider-text");
-              boolean prepare = method.getName().equals("prepareStatement");
+              boolean prepare = method.getName().equals(FIXTURE_PREPARESTATEMENT_CB987D1F);
               boolean audit =
                   prepare && ((String) args[0]).startsWith("insert into schubert.app_logs");
-              if (audit && fault.equals("auditPrepare"))
+              if (audit && fault.equals(FIXTURE_AUDITPREPARE_07760EC2))
                 throw new SQLException("synthetic-sensitive-audit");
               Object result = invoke(real, method, args);
               if (!prepare) return result;
@@ -740,17 +758,17 @@ final class AuthSessionRevocationServiceTest {
                       throw new SQLException("synthetic-sensitive-statement");
                     if (sm.getName().equals("executeUpdate")
                         && ((!audit && fault.equals("zeroUpdate"))
-                            || (audit && fault.equals("zeroAudit")))) return 0;
+                            || (audit && fault.equals(FIXTURE_ZEROAUDIT_795EFF88)))) return 0;
                     Object sr = invoke(result, sm, sa);
                     if (sm.getName().equals("executeUpdate")
                         && ((!audit && fault.equals("updateAfter"))
-                            || (audit && fault.equals("auditAfter"))))
+                            || (audit && fault.equals(FIXTURE_AUDITAFTER_7F1E49F2))))
                       throw new SQLException("synthetic-sensitive-after");
-                    if (sm.getName().equals("close")
+                    if (sm.getName().equals(FIXTURE_CLOSE_97959247)
                         && (fault.equals("statementClose")
-                            || (audit && fault.equals("auditClose"))))
+                            || (audit && fault.equals(FIXTURE_AUDITCLOSE_57DDF9CB))))
                       throw new SQLException("synthetic-sensitive-close");
-                    if (!sm.getName().equals("executeQuery")) return sr;
+                    if (!sm.getName().equals(FIXTURE_EXECUTEQUERY_85C8C423)) return sr;
                     return Proxy.newProxyInstance(
                         ResultSet.class.getClassLoader(),
                         new Class<?>[] {ResultSet.class},
@@ -773,11 +791,11 @@ final class AuthSessionRevocationServiceTest {
                           }
                           Object rr = invoke(sr, rm, ra);
                           if (step == 2
-                              && rm.getName().equals("close")
+                              && rm.getName().equals(FIXTURE_CLOSE_97959247)
                               && fault.equals("fatalSessionClose"))
                             throw new AssertionError("fatal-close-canary");
-                          if (rm.getName().equals("close")
-                              && (fault.equals("rowClose")
+                          if (rm.getName().equals(FIXTURE_CLOSE_97959247)
+                              && (fault.equals(FIXTURE_ROWCLOSE_4440E762)
                                   || (step == 2 && fault.equals("providerIaeReadAndRowClose"))))
                             throw new SQLException("synthetic-sensitive-row-close");
                           return rr;

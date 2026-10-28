@@ -49,6 +49,16 @@ import org.junit.jupiter.api.function.Executable;
 
 /** SS324 §6.3/SSC-026, UI232/234/237, PT-SCN-009-S01..S05. No DB/file/current auth claim. */
 final class ScenarioReplayServiceTest {
+  private static final String FIXTURE_SCN_F30DFFA3 = "SCN";
+  private static final String FIXTURE_001_A3FEAA64 = "001";
+  private static final String FIXTURE_20260908090001123_E5C758D8 = "20260908090001123";
+  private static final String FIXTURE_0000_876EEFE0 = "0000";
+  private static final String FIXTURE_20260908090002789_D269B2BC = "20260908090002789";
+  private static final String FIXTURE_0200_FC9DB3AC = "0200";
+  private static final String FIXTURE_GAM_5BC4EFCF = "GAM";
+  private static final String FIXTURE_SCNRSP01_DD42C8D5 = "SCNRSP01";
+  private static final String FIXTURE_READY_6630F9C3 = ".ready";
+  private static final String FIXTURE_20260909_291418E8 = "20260909/";
   private static final AuthenticatedActor ACTOR = new AuthenticatedActor(101, "reader", Role.USER);
   private static final AuthenticatedActor OTHER = new AuthenticatedActor(102, "other", Role.ADMIN);
   private static final UUID RESPONSE = UUID.fromString("00000000-0000-4000-8000-000000000001");
@@ -61,7 +71,7 @@ final class ScenarioReplayServiceTest {
     try (var codec = codec()) {
       var service = new ScenarioReplayService(codec);
       for (String prefix : LAYOUTS) {
-        for (int count : prefix.equals("SCN") ? List.of(0, 1, 200) : List.of(0)) {
+        for (int count : prefix.equals(FIXTURE_SCN_F30DFFA3) ? List.of(0, 1, 200) : List.of(0)) {
           var request = request(prefix);
           assertEquals(prefix + "RSP01", request.responseLayoutId().value());
           var completion =
@@ -71,22 +81,22 @@ final class ScenarioReplayServiceTest {
           assertEquals(InboxResultReference.none(), completion.resultReference());
           assertEquals(COMPLETED.truncatedTo(ChronoUnit.MICROS), completion.completedAt());
           assertEquals(prefix + "RSP01", completion.responseLayoutId());
-          assertEquals("001", completion.responseVersion());
+          assertEquals(FIXTURE_001_A3FEAA64, completion.responseVersion());
           byte[] expected =
               wire(
                   prefix,
                   request.header().messageId(),
                   RESPONSE,
-                  "20260908090001123",
+                  FIXTURE_20260908090001123_E5C758D8,
                   "b".repeat(64),
-                  "0000",
+                  FIXTURE_0000_876EEFE0,
                   false,
                   count);
           assertArrayEquals(
               expected, decrypt(request, completion.responseSnapshot().orElseThrow()));
           var snapshot = service.read(request, ACTOR, completion);
           assertEquals(ResultCode.SUCCESS, snapshot.resultCode());
-          assertEquals(prefix.equals("SCN"), snapshot.detail().isPresent());
+          assertEquals(prefix.equals(FIXTURE_SCN_F30DFFA3), snapshot.detail().isPresent());
           assertTrue(snapshot.descriptor().isEmpty());
           assertEquals("ScenarioSnapshot[REDACTED]", snapshot.toString());
           for (boolean replay : List.of(false, true))
@@ -95,22 +105,22 @@ final class ScenarioReplayServiceTest {
                     prefix,
                     request.header().messageId(),
                     NEXT,
-                    "20260908090002789",
+                    FIXTURE_20260908090002789_D269B2BC,
                     "b".repeat(64),
-                    replay ? "0200" : "0000",
+                    replay ? FIXTURE_0200_FC9DB3AC : FIXTURE_0000_876EEFE0,
                     false,
                     count),
                 service.reply(snapshot, request, ACTOR, NEXT, SENT, replay));
-          if (prefix.equals("SCN") || prefix.equals("GAM")) {
+          if (prefix.equals(FIXTURE_SCN_F30DFFA3) || prefix.equals(FIXTURE_GAM_5BC4EFCF)) {
             var current = newContext(request);
             assertArrayEquals(
                 wire(
                     prefix,
                     request.header().messageId(),
                     NEXT,
-                    "20260908090002789",
+                    FIXTURE_20260908090002789_D269B2BC,
                     "d".repeat(64),
-                    "0200",
+                    FIXTURE_0200_FC9DB3AC,
                     false,
                     count),
                 service.reply(snapshot, current, ACTOR, NEXT, SENT, true));
@@ -125,20 +135,21 @@ final class ScenarioReplayServiceTest {
     try (var codec = codec()) {
       var service = new ScenarioReplayService(codec);
       for (int count : List.of(201, 10_000)) {
-        var request = request("SCN");
+        var request = request(FIXTURE_SCN_F30DFFA3);
         var completion =
-            service.captureSuccess(request, ACTOR, typed("SCN", true, count), RESPONSE, COMPLETED);
+            service.captureSuccess(
+                request, ACTOR, typed(FIXTURE_SCN_F30DFFA3, true, count), RESPONSE, COMPLETED);
         assertEquals(
             InboxResultReference.numeric(InboxResultReferenceType.SCENARIO_FILE, 30),
             completion.resultReference());
         assertArrayEquals(
             wire(
-                "SCN",
+                FIXTURE_SCN_F30DFFA3,
                 request.header().messageId(),
                 RESPONSE,
-                "20260908090001123",
+                FIXTURE_20260908090001123_E5C758D8,
                 "b".repeat(64),
-                "0000",
+                FIXTURE_0000_876EEFE0,
                 true,
                 count),
             decrypt(request, completion.responseSnapshot().orElseThrow()));
@@ -153,12 +164,12 @@ final class ScenarioReplayServiceTest {
         assertEquals(30, saved.detail().orElseThrow().scriptFileId().value());
         assertArrayEquals(
             wire(
-                "SCN",
+                FIXTURE_SCN_F30DFFA3,
                 request.header().messageId(),
                 NEXT,
-                "20260908090002789",
+                FIXTURE_20260908090002789_D269B2BC,
                 "b".repeat(64),
-                "0200",
+                FIXTURE_0200_FC9DB3AC,
                 true,
                 count),
             service.reply(saved, request, ACTOR, NEXT, SENT, true));
@@ -166,7 +177,7 @@ final class ScenarioReplayServiceTest {
       for (String prefix : LAYOUTS) {
         var request = request(prefix);
         for (ResultCode code :
-            prefix.equals("SCN")
+            prefix.equals(FIXTURE_SCN_F30DFFA3)
                 ? List.of(ResultCode.RESOURCE_LIMIT, ResultCode.NOT_FOUND)
                 : List.of(ResultCode.RESOURCE_LIMIT)) {
           String expectedCode = code == ResultCode.RESOURCE_LIMIT ? "9001" : "0104";
@@ -178,7 +189,7 @@ final class ScenarioReplayServiceTest {
                   prefix,
                   request.header().messageId(),
                   RESPONSE,
-                  "20260908090001123",
+                  FIXTURE_20260908090001123_E5C758D8,
                   "b".repeat(64),
                   expectedCode,
                   false,
@@ -194,7 +205,7 @@ final class ScenarioReplayServiceTest {
                     prefix,
                     request.header().messageId(),
                     NEXT,
-                    "20260908090002789",
+                    FIXTURE_20260908090002789_D269B2BC,
                     "b".repeat(64),
                     expectedCode,
                     false,
@@ -205,7 +216,7 @@ final class ScenarioReplayServiceTest {
                   prefix,
                   request.header().messageId(),
                   NEXT,
-                  "20260908090002789",
+                  FIXTURE_20260908090002789_D269B2BC,
                   "b".repeat(64),
                   expectedCode,
                   false,
@@ -218,7 +229,7 @@ final class ScenarioReplayServiceTest {
                   prefix,
                   request.header().messageId(),
                   NEXT,
-                  "20260908090002789",
+                  FIXTURE_20260908090002789_D269B2BC,
                   "b".repeat(64),
                   code == ResultCode.SESSION_INVALID ? "0102" : "9000",
                   false,
@@ -233,15 +244,15 @@ final class ScenarioReplayServiceTest {
   void authenticatedTamperingAndIdentityMixupsAreNeverReplayed() throws Exception {
     try (var codec = codec()) {
       var service = new ScenarioReplayService(codec);
-      var request = request("SCN");
+      var request = request(FIXTURE_SCN_F30DFFA3);
       byte[] good =
           wire(
-              "SCN",
+              FIXTURE_SCN_F30DFFA3,
               request.header().messageId(),
               RESPONSE,
-              "20260908090001123",
+              FIXTURE_20260908090001123_E5C758D8,
               "b".repeat(64),
-              "0000",
+              FIXTURE_0000_876EEFE0,
               false,
               1);
       var completion =
@@ -265,7 +276,7 @@ final class ScenarioReplayServiceTest {
         {187, "004799"},
         {193, "000002"},
         {199, "000000256"},
-        {208, "0200"},
+        {208, FIXTURE_0200_FC9DB3AC},
         {212, "X"},
         {256, "000000000031"},
         {268, "UNKNOWN   "},
@@ -299,16 +310,16 @@ final class ScenarioReplayServiceTest {
                   completion,
                   InboxCompletionState.ERROR,
                   completion.resultReference(),
-                  "SCNRSP01",
-                  "001",
+                  FIXTURE_SCNRSP01_DD42C8D5,
+                  FIXTURE_001_A3FEAA64,
                   completion.responseSnapshot(),
                   completion.completedAt()),
               replace(
                   completion,
                   completion.state(),
                   InboxResultReference.authSession(FILE),
-                  "SCNRSP01",
-                  "001",
+                  FIXTURE_SCNRSP01_DD42C8D5,
+                  FIXTURE_001_A3FEAA64,
                   completion.responseSnapshot(),
                   completion.completedAt()),
               replace(
@@ -316,14 +327,14 @@ final class ScenarioReplayServiceTest {
                   completion.state(),
                   completion.resultReference(),
                   "GAMRSP01",
-                  "001",
+                  FIXTURE_001_A3FEAA64,
                   completion.responseSnapshot(),
                   completion.completedAt()),
               replace(
                   completion,
                   completion.state(),
                   completion.resultReference(),
-                  "SCNRSP01",
+                  FIXTURE_SCNRSP01_DD42C8D5,
                   "002",
                   completion.responseSnapshot(),
                   completion.completedAt()),
@@ -331,16 +342,16 @@ final class ScenarioReplayServiceTest {
                   completion,
                   completion.state(),
                   completion.resultReference(),
-                  "SCNRSP01",
-                  "001",
+                  FIXTURE_SCNRSP01_DD42C8D5,
+                  FIXTURE_001_A3FEAA64,
                   Optional.empty(),
                   completion.completedAt()),
               replace(
                   completion,
                   completion.state(),
                   completion.resultReference(),
-                  "SCNRSP01",
-                  "001",
+                  FIXTURE_SCNRSP01_DD42C8D5,
+                  FIXTURE_001_A3FEAA64,
                   completion.responseSnapshot(),
                   SENT))) {
         denied(() -> service.read(request, ACTOR, bad));
@@ -357,26 +368,26 @@ final class ScenarioReplayServiceTest {
                 completion,
                 completion.state(),
                 completion.resultReference(),
-                "SCNRSP01",
-                "001",
+                FIXTURE_SCNRSP01_DD42C8D5,
+                FIXTURE_001_A3FEAA64,
                 Optional.of(encrypted),
                 completion.completedAt());
         denied(() -> service.read(request, ACTOR, bad));
       }
       denied(() -> service.read(request, OTHER, completion));
-      denied(() -> service.read(request("SCN"), ACTOR, completion));
+      denied(() -> service.read(request(FIXTURE_SCN_F30DFFA3), ACTOR, completion));
       var saved = service.read(request, ACTOR, completion);
       denied(() -> service.reply(saved, request, OTHER, NEXT, SENT, true));
-      denied(() -> service.reply(saved, request("SCN"), ACTOR, NEXT, SENT, true));
-      denied(() -> service.reply(saved, request("GAM"), ACTOR, NEXT, SENT, true));
+      denied(() -> service.reply(saved, request(FIXTURE_SCN_F30DFFA3), ACTOR, NEXT, SENT, true));
+      denied(() -> service.reply(saved, request(FIXTURE_GAM_5BC4EFCF), ACTOR, NEXT, SENT, true));
       byte[] file =
           wire(
-              "SCN",
+              FIXTURE_SCN_F30DFFA3,
               request.header().messageId(),
               RESPONSE,
-              "20260908090001123",
+              FIXTURE_20260908090001123_E5C758D8,
               "b".repeat(64),
-              "0000",
+              FIXTURE_0000_876EEFE0,
               true,
               201);
       for (Object[] mutation :
@@ -411,12 +422,12 @@ final class ScenarioReplayServiceTest {
                   prefix,
                   current.header().messageId(),
                   RESPONSE,
-                  "20260908090001123",
+                  FIXTURE_20260908090001123_E5C758D8,
                   "b".repeat(64),
                   code,
                   false,
                   0);
-          if (code.equals("9001") || code.equals("0104") && prefix.equals("SCN")) {
+          if (code.equals("9001") || code.equals("0104") && prefix.equals(FIXTURE_SCN_F30DFFA3)) {
             var bad =
                 completion(
                     current, error, InboxCompletionState.COMPLETED, InboxResultReference.none());
@@ -437,8 +448,8 @@ final class ScenarioReplayServiceTest {
     var codec = codec();
     try {
       var service = new ScenarioReplayService(codec);
-      var request = request("SCN");
-      var response = typed("SCN", false, 0);
+      var request = request(FIXTURE_SCN_F30DFFA3);
+      var response = typed(FIXTURE_SCN_F30DFFA3, false, 0);
       var completion = service.captureSuccess(request, ACTOR, response, RESPONSE, COMPLETED);
       var saved = service.read(request, ACTOR, completion);
       List<Executable> nulls =
@@ -475,16 +486,16 @@ final class ScenarioReplayServiceTest {
       for (var call : nulls) assertThrows(NullPointerException.class, call);
       for (var invalid :
           List.of(
-              typed("GAM", false, 0),
+              typed(FIXTURE_GAM_5BC4EFCF, false, 0),
               new TypedPayloadValues(
-                  new LayoutId("SCNRSP01"), new GameListResponseData(0), List.of()),
+                  new LayoutId(FIXTURE_SCNRSP01_DD42C8D5), new GameListResponseData(0), List.of()),
               new TypedPayloadValues(
-                  new LayoutId("SCNRSP01"), metadata(31, false, 0, PATH), List.of()),
+                  new LayoutId(FIXTURE_SCNRSP01_DD42C8D5), metadata(31, false, 0, PATH), List.of()),
               new TypedPayloadValues(
-                  new LayoutId("SCNRSP01"),
-                  metadata(30, true, 201, "20260230/" + FILE + ".ready"),
+                  new LayoutId(FIXTURE_SCNRSP01_DD42C8D5),
+                  metadata(30, true, 201, "20260230/" + FILE + FIXTURE_READY_6630F9C3),
                   List.of()),
-              typed("SCN", false, 201)))
+              typed(FIXTURE_SCN_F30DFFA3, false, 201)))
         denied(() -> service.captureSuccess(request, ACTOR, invalid, RESPONSE, COMPLETED));
       for (ResultCode code : ResultCode.values()) {
         if (code != ResultCode.RESOURCE_LIMIT && code != ResultCode.NOT_FOUND)
@@ -495,7 +506,7 @@ final class ScenarioReplayServiceTest {
             && code != ResultCode.TEMPORARY_FAILURE)
           denied(() -> service.failure(request, code, NEXT, SENT));
       }
-      var games = request("GAM");
+      var games = request(FIXTURE_GAM_5BC4EFCF);
       denied(() -> service.captureFailure(games, ACTOR, ResultCode.NOT_FOUND, RESPONSE, COMPLETED));
       denied(() -> service.failure(games, ResultCode.NOT_FOUND, NEXT, SENT));
       for (Instant invalid : List.of(Instant.parse("+10000-01-01T00:00:00Z"), Instant.MAX)) {
@@ -524,9 +535,10 @@ final class ScenarioReplayServiceTest {
     try (var codec = codec();
         var workers = Executors.newFixedThreadPool(16)) {
       var service = new ScenarioReplayService(codec);
-      var request = request("SCN");
+      var request = request(FIXTURE_SCN_F30DFFA3);
       var completion =
-          service.captureSuccess(request, ACTOR, typed("SCN", false, 1), RESPONSE, COMPLETED);
+          service.captureSuccess(
+              request, ACTOR, typed(FIXTURE_SCN_F30DFFA3, false, 1), RESPONSE, COMPLETED);
       byte[] original = completion.responseSnapshot().orElseThrow().ciphertext();
       List<Future<?>> results = new ArrayList<>();
       var start = new CountDownLatch(1);
@@ -540,12 +552,12 @@ final class ScenarioReplayServiceTest {
                   UUID id = new UUID(1, index + 1);
                   assertArrayEquals(
                       wire(
-                          "SCN",
+                          FIXTURE_SCN_F30DFFA3,
                           request.header().messageId(),
                           id,
-                          "20260908090002789",
+                          FIXTURE_20260908090002789_D269B2BC,
                           "b".repeat(64),
-                          "0200",
+                          FIXTURE_0200_FC9DB3AC,
                           false,
                           1),
                       service.reply(saved, request, ACTOR, id, SENT, true));
@@ -565,37 +577,39 @@ final class ScenarioReplayServiceTest {
   void regeneratedDescriptorKeepsOriginalHeaderResultAndCompletionTime() throws Exception {
     try (var codec = codec()) {
       var service = new ScenarioReplayService(codec);
-      var request = request("SCN");
+      var request = request(FIXTURE_SCN_F30DFFA3);
       var original =
-          service.captureSuccess(request, ACTOR, typed("SCN", true, 201), RESPONSE, COMPLETED);
+          service.captureSuccess(
+              request, ACTOR, typed(FIXTURE_SCN_F30DFFA3, true, 201), RESPONSE, COMPLETED);
       byte[] oldCiphertext = original.responseSnapshot().orElseThrow().ciphertext();
       var replacement =
-          new LargeResultDescriptor(NEXT, "20260909/" + NEXT + ".ready", 964800, HASH, 201);
+          new LargeResultDescriptor(
+              NEXT, FIXTURE_20260909_291418E8 + NEXT + FIXTURE_READY_6630F9C3, 964800, HASH, 201);
       var updated = service.replaceFile(newContext(request), ACTOR, original, replacement);
       byte[] expected =
           wire(
-              "SCN",
+              FIXTURE_SCN_F30DFFA3,
               request.header().messageId(),
               RESPONSE,
-              "20260908090001123",
+              FIXTURE_20260908090001123_E5C758D8,
               "b".repeat(64),
-              "0000",
+              FIXTURE_0000_876EEFE0,
               true,
               201);
       put(expected, 256 + 1329, NEXT.toString());
-      put(expected, 256 + 1365, "20260909/" + NEXT + ".ready");
+      put(expected, 256 + 1365, FIXTURE_20260909_291418E8 + NEXT + FIXTURE_READY_6630F9C3);
       assertArrayEquals(expected, decrypt(request, updated.responseSnapshot().orElseThrow()));
       assertArrayEquals(oldCiphertext, original.responseSnapshot().orElseThrow().ciphertext());
       assertEquals(original.completedAt(), updated.completedAt());
       assertEquals(original.state(), updated.state());
       assertEquals(original.resultReference(), updated.resultReference());
-      assertEquals("SCNRSP01", updated.responseLayoutId());
-      assertEquals("001", updated.responseVersion());
+      assertEquals(FIXTURE_SCNRSP01_DD42C8D5, updated.responseLayoutId());
+      assertEquals(FIXTURE_001_A3FEAA64, updated.responseVersion());
       var saved = service.read(request, ACTOR, updated);
       assertEquals(NEXT, saved.descriptor().orElseThrow().fileId());
       put(expected, 24, NEXT.toString());
-      put(expected, 96, "20260908090002789");
-      put(expected, 208, "0200");
+      put(expected, 96, FIXTURE_20260908090002789_D269B2BC);
+      put(expected, 208, FIXTURE_0200_FC9DB3AC);
       assertArrayEquals(expected, service.reply(saved, request, ACTOR, NEXT, SENT, true));
       assertThrows(
           NullPointerException.class,
@@ -610,12 +624,17 @@ final class ScenarioReplayServiceTest {
       denied(() -> service.replaceFile(request, OTHER, original, replacement));
       for (var wrong :
           List.of(
-              new LargeResultDescriptor(NEXT, "20260909/" + NEXT + ".ready", 4800, HASH, 1),
               new LargeResultDescriptor(
-                  NEXT, "20260909/" + NEXT + ".ready", 964800, "0".repeat(64), 201)))
-        denied(() -> service.replaceFile(request, ACTOR, original, wrong));
+                  NEXT, FIXTURE_20260909_291418E8 + NEXT + FIXTURE_READY_6630F9C3, 4800, HASH, 1),
+              new LargeResultDescriptor(
+                  NEXT,
+                  FIXTURE_20260909_291418E8 + NEXT + FIXTURE_READY_6630F9C3,
+                  964800,
+                  "0".repeat(64),
+                  201))) denied(() -> service.replaceFile(request, ACTOR, original, wrong));
       var inline =
-          service.captureSuccess(request, ACTOR, typed("SCN", false, 0), RESPONSE, COMPLETED);
+          service.captureSuccess(
+              request, ACTOR, typed(FIXTURE_SCN_F30DFFA3, false, 0), RESPONSE, COMPLETED);
       denied(() -> service.replaceFile(request, ACTOR, inline, replacement));
     }
   }
@@ -634,7 +653,7 @@ final class ScenarioReplayServiceTest {
         state,
         reference,
         request.responseLayoutId().value(),
-        "001",
+        FIXTURE_001_A3FEAA64,
         Optional.of(encrypt(request, body)),
         COMPLETED.truncatedTo(ChronoUnit.MICROS));
   }

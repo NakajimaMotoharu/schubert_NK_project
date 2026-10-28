@@ -76,6 +76,16 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** Actual staged PostgreSQL/file/JMS orchestration. SS312/324/333; PT-MED-055..061. */
 class MediaApplicationServiceTest {
+  private static final String FIXTURE_DATABASE_21C67C24 = "database";
+  private static final String FIXTURE_MED_5ED30FD5 = "MED";
+  private static final String FIXTURE_0000_876EEFE0 = "0000";
+  private static final String FIXTURE_0200_FC9DB3AC = "0200";
+  private static final String FIXTURE_MEDREQ01_23053712 = "MEDREQ01";
+  private static final String FIXTURE_001_A3FEAA64 = "001";
+  private static final String FIXTURE_MEDRSP01_B0244A9A = "MEDRSP01";
+  private static final String FIXTURE_AUD_5C44DBC9 = "AUD";
+  private static final String FIXTURE_ANM_691ADB31 = "ANM";
+  private static final String FIXTURE_CLOSE_97959247 = "close";
   @TempDir static Path root;
   static ApiLogDatabaseFixture database;
 
@@ -113,12 +123,12 @@ class MediaApplicationServiceTest {
         var observer = factory.createContext(JMSContext.AUTO_ACKNOWLEDGE);
         var requests = receiver.createConsumer(requestQueue);
         var replies = observer.createConsumer(replyQueue)) {
-      for (String point : List.of("createProducer", "commit", "database")) {
+      for (String point : List.of("createProducer", "commit", FIXTURE_DATABASE_21C67C24)) {
         try (var h = new MediaStageFixture(database)) {
           h.seed();
-          var request = input("MED");
+          var request = input(FIXTURE_MED_5ED30FD5);
           var listener = new SyncRequestListener(h.service, h.clock);
-          if (point.equals("database")) h.fault = "open";
+          if (point.equals(FIXTURE_DATABASE_21C67C24)) h.fault = "open";
           var failing =
               (JMSContext)
                   Proxy.newProxyInstance(
@@ -137,10 +147,11 @@ class MediaApplicationServiceTest {
           Message first = requests.receive(5000);
           assertNotNull(first);
           assertEquals(1, first.getIntProperty("JMSXDeliveryCount"));
-          if (point.equals("database")) temporary(() -> listener.onMessage(failing, first));
+          if (point.equals(FIXTURE_DATABASE_21C67C24))
+            temporary(() -> listener.onMessage(failing, first));
           else assertThrows(JMSRuntimeException.class, () -> listener.onMessage(failing, first));
           assertNull(replies.receive(250));
-          assertEquals(point.equals("database") ? 0 : 1, h.inboxCount());
+          assertEquals(point.equals(FIXTURE_DATABASE_21C67C24) ? 0 : 1, h.inboxCount());
           h.fault = "none";
           Message retry = requests.receive(5000);
           assertNotNull(retry);
@@ -150,8 +161,10 @@ class MediaApplicationServiceTest {
               replies.receive(5000),
               h.golden(
                   request,
-                  point.equals("database") ? "0000" : "0200",
-                  point.equals("database") ? 2 : 3));
+                  point.equals(FIXTURE_DATABASE_21C67C24)
+                      ? FIXTURE_0000_876EEFE0
+                      : FIXTURE_0200_FC9DB3AC,
+                  point.equals(FIXTURE_DATABASE_21C67C24) ? 2 : 3));
           var frozen = h.stored(request);
           // A distinct broker message with the same business ID, without duplicate-cache hints.
           sendMedia(producer, requestQueue, request);
@@ -160,10 +173,12 @@ class MediaApplicationServiceTest {
           assertEquals(1, duplicate.getIntProperty("JMSXDeliveryCount"));
           listener.onMessage(receiver, duplicate);
           assertBrokerReply(
-              replies.receive(5000), h.golden(request, "0200", point.equals("database") ? 3 : 4));
+              replies.receive(5000),
+              h.golden(
+                  request, FIXTURE_0200_FC9DB3AC, point.equals(FIXTURE_DATABASE_21C67C24) ? 3 : 4));
           assertEquals(frozen, h.stored(request));
           assertEquals(1, h.inboxCount());
-          assertEquals(point.equals("database") ? 2 : 3, h.inspections.get());
+          assertEquals(point.equals(FIXTURE_DATABASE_21C67C24) ? 2 : 3, h.inspections.get());
           assertEquals(0, h.live.get());
           assertNull(requests.receive(250));
           assertNull(replies.receive(250));
@@ -185,14 +200,14 @@ class MediaApplicationServiceTest {
     MediaRequestFixture.put(body, 96, "20260908090100000");
     MediaRequestFixture.put(body, 113, "b".repeat(64));
     MediaRequestFixture.put(body, 177, "0256000072000000000000000000328");
-    System.arraycopy(MediaRequestFixture.data("MEDREQ01"), 0, body, 256, 72);
+    System.arraycopy(MediaRequestFixture.data(FIXTURE_MEDREQ01_23053712), 0, body, 256, 72);
     var message = context.createBytesMessage();
     message.writeBytes(body);
     message.setJMSCorrelationID(input.header().messageId().toString());
     message.setJMSReplyTo(new ActiveMQQueue(BrokerTopology.SYNC_REPLY_WEB.fullyQualifiedQueue()));
     message.setStringProperty("NKMessageID", input.header().messageId().toString());
-    message.setStringProperty("NKLayoutID", "MEDREQ01");
-    message.setStringProperty("NKProtocolVersion", "001");
+    message.setStringProperty("NKLayoutID", FIXTURE_MEDREQ01_23053712);
+    message.setStringProperty("NKProtocolVersion", FIXTURE_001_A3FEAA64);
     context
         .createProducer()
         .setDeliveryMode(DeliveryMode.PERSISTENT)
@@ -209,8 +224,8 @@ class MediaApplicationServiceTest {
     assertArrayEquals(expected, actual);
     assertEquals(ascii(expected, 60, 36), response.getJMSCorrelationID());
     assertEquals(ascii(expected, 24, 36), response.getStringProperty("NKMessageID"));
-    assertEquals("MEDRSP01", response.getStringProperty("NKLayoutID"));
-    assertEquals("001", response.getStringProperty("NKProtocolVersion"));
+    assertEquals(FIXTURE_MEDRSP01_B0244A9A, response.getStringProperty("NKLayoutID"));
+    assertEquals(FIXTURE_001_A3FEAA64, response.getStringProperty("NKProtocolVersion"));
     assertEquals(DeliveryMode.PERSISTENT, response.getJMSDeliveryMode());
     Arrays.fill(actual, (byte) 0);
   }
@@ -221,16 +236,18 @@ class MediaApplicationServiceTest {
       try (var h = new MediaStageFixture(database)) {
         h.seed();
         var input = input(prefix);
-        assertArrayEquals(h.golden(input, "0000", 2), h.service.process(input));
+        assertArrayEquals(h.golden(input, FIXTURE_0000_876EEFE0, 2), h.service.process(input));
         var before = h.stored(input);
         assertEquals("COMPLETED", before.get(0));
         assertEquals("NONE", before.get(1));
         assertEquals("2026-09-09T00:01:00Z", before.get(4));
         assertEquals(List.of(true, false), h.modes);
-        assertEquals(List.of("AUD", "VID", "MED").contains(prefix) ? 1 : 0, h.inspections.get());
+        assertEquals(
+            List.of(FIXTURE_AUD_5C44DBC9, "VID", FIXTURE_MED_5ED30FD5).contains(prefix) ? 1 : 0,
+            h.inspections.get());
         h.sql("update schubert.media_assets set title='changed-master'");
         h.now.set(NOW.plusSeconds(20));
-        assertArrayEquals(h.golden(input, "0200", 3), h.service.process(input));
+        assertArrayEquals(h.golden(input, FIXTURE_0200_FC9DB3AC, 3), h.service.process(input));
         assertEquals(before, h.stored(input));
         assertEquals(1, h.inboxCount());
         assertEquals(List.of(true, false, true, false), h.modes);
@@ -245,7 +262,7 @@ class MediaApplicationServiceTest {
       try (var h = new MediaStageFixture(database)) {
         h.seed();
         String code;
-        if (List.of("AUD", "VID", "MED").contains(prefix)) {
+        if (List.of(FIXTURE_AUD_5C44DBC9, "VID", FIXTURE_MED_5ED30FD5).contains(prefix)) {
           h.sql("truncate schubert.media_assets,schubert.audio_files cascade");
           code = "0104";
         } else {
@@ -267,7 +284,7 @@ class MediaApplicationServiceTest {
     try (var h = new MediaStageFixture(database)) {
       h.seed();
       h.fault = "query";
-      temporary(() -> h.service.process(input("ANM")));
+      temporary(() -> h.service.process(input(FIXTURE_ANM_691ADB31)));
       assertEquals(0, h.inboxCount());
       assertEquals(0, h.inspections.get());
       assertEquals(0, h.live.get());
@@ -280,8 +297,8 @@ class MediaApplicationServiceTest {
         var assets = new Assets(root.resolve("assets"))) {
       h.seed();
       h.physical = assets.inspector;
-      var request = input("MED");
-      assertArrayEquals(h.golden(request, "0000", 2), h.service.process(request));
+      var request = input(FIXTURE_MED_5ED30FD5);
+      assertArrayEquals(h.golden(request, FIXTURE_0000_876EEFE0, 2), h.service.process(request));
       var frozen = h.stored(request);
       Path file = assets.root.resolve("music/合成.ogg");
       mode(file, "rw-------");
@@ -295,18 +312,18 @@ class MediaApplicationServiceTest {
       assertEquals(frozen, h.stored(request));
       Files.move(saved, file);
       h.sql("update schubert.media_assets set sha256=repeat('0',64) where logical_id='music-0'");
-      temporary(() -> h.service.process(input("MED")));
+      temporary(() -> h.service.process(input(FIXTURE_MED_5ED30FD5)));
       assertEquals(1, h.inboxCount());
       assertEquals(frozen, h.stored(request));
       // Replay validates the old saved hash, not the currently changed DB metadata.
-      assertArrayEquals(h.golden(request, "0200", 3), h.service.process(request));
+      assertArrayEquals(h.golden(request, FIXTURE_0200_FC9DB3AC, 3), h.service.process(request));
       assertEquals("abc", Files.readString(file));
       h.seed();
       h.physical =
           descriptor -> {
             throw new IOException("synthetic private file fault");
           };
-      temporary(() -> h.service.process(input("AUD")));
+      temporary(() -> h.service.process(input(FIXTURE_AUD_5C44DBC9)));
       assertEquals(0, h.inboxCount());
     }
     for (String update :
@@ -317,7 +334,7 @@ class MediaApplicationServiceTest {
       try (var h = new MediaStageFixture(database)) {
         h.seed();
         h.duringFile = () -> h.sql(update);
-        var request = input("MED");
+        var request = input(FIXTURE_MED_5ED30FD5);
         assertArrayEquals(h.golden(request, "0102", 1), h.service.process(request));
         assertEquals(0, h.inboxCount());
         assertEquals(1, h.inspections.get());
@@ -331,9 +348,9 @@ class MediaApplicationServiceTest {
             h.sql("update schubert.app_users set role='ADMIN' where id=101");
             h.now.set(NOW.plusSeconds(20));
           };
-      var request = input("AUD");
+      var request = input(FIXTURE_AUD_5C44DBC9);
       byte[] afterFile = h.service.process(request);
-      assertArrayEquals(h.golden(request, "0000", 2), afterFile);
+      assertArrayEquals(h.golden(request, FIXTURE_0000_876EEFE0, 2), afterFile);
       assertEquals("2026-09-08T00:01:20Z", h.stored(request).get(3));
       assertEquals(1, h.inspections.get());
       assertEquals(List.of(true, false), h.modes);
@@ -351,7 +368,7 @@ class MediaApplicationServiceTest {
     try (var h = new MediaStageFixture(database);
         var workers = Executors.newFixedThreadPool(10)) {
       h.seed();
-      var request = input("MED");
+      var request = input(FIXTURE_MED_5ED30FD5);
       var start = new CountDownLatch(1);
       List<Future<byte[]>> tasks = new ArrayList<>();
       for (int i = 0; i < 100; i++)
@@ -368,9 +385,9 @@ class MediaApplicationServiceTest {
       for (var task : tasks) {
         byte[] actual = task.get(30, TimeUnit.SECONDS);
         String code = ascii(actual, 208, 4);
-        if (code.equals("0000")) first++;
+        if (code.equals(FIXTURE_0000_876EEFE0)) first++;
         else {
-          assertEquals("0200", code);
+          assertEquals(FIXTURE_0200_FC9DB3AC, code);
           replay++;
         }
         UUID id = UUID.fromString(ascii(actual, 24, 36));
@@ -385,26 +402,26 @@ class MediaApplicationServiceTest {
       assertEquals(101, h.ids.get());
       for (long id = 2; id <= 101; id++) assertTrue(responseIds.contains(id));
       var frozen = h.stored(request);
-      byte[] changed = MediaRequestFixture.data("MEDREQ01");
+      byte[] changed = MediaRequestFixture.data(FIXTURE_MEDREQ01_23053712);
       MediaRequestFixture.put(changed, 64, "I");
-      var otherMode = sameMessage(request, "MED", changed);
+      var otherMode = sameMessage(request, FIXTURE_MED_5ED30FD5, changed);
       assertThrows(PermanentProtocolException.class, () -> h.service.process(otherMode));
-      var otherLayout = sameMessage(request, "ANM", new byte[0]);
+      var otherLayout = sameMessage(request, FIXTURE_ANM_691ADB31, new byte[0]);
       assertThrows(PermanentProtocolException.class, () -> h.service.process(otherLayout));
       h.sql("update schubert.auth_sessions set user_id=102");
       assertThrows(PermanentProtocolException.class, () -> h.service.process(request));
       h.sql("update schubert.auth_sessions set user_id=101");
       assertEquals(frozen, h.stored(request));
       assertEquals(100, h.inspections.get());
-      var another = input("MED");
-      assertArrayEquals(h.golden(another, "0000", 103), h.service.process(another));
+      var another = input(FIXTURE_MED_5ED30FD5);
+      assertArrayEquals(h.golden(another, FIXTURE_0000_876EEFE0, 103), h.service.process(another));
       assertEquals(2, h.inboxCount());
       assertEquals(0, h.live.get());
     }
     try (var h = new MediaStageFixture(database);
         var workers = Executors.newVirtualThreadPerTaskExecutor()) {
       h.seed();
-      var request = input("AUD");
+      var request = input(FIXTURE_AUD_5C44DBC9);
       var held = new CountDownLatch(1);
       var release = new CountDownLatch(1);
       h.duringFile =
@@ -433,9 +450,10 @@ class MediaApplicationServiceTest {
       } finally {
         release.countDown();
       }
-      assertArrayEquals(h.golden(request, "0000", 2), first.get(10, TimeUnit.SECONDS));
+      assertArrayEquals(
+          h.golden(request, FIXTURE_0000_876EEFE0, 2), first.get(10, TimeUnit.SECONDS));
       h.duringFile = () -> {};
-      assertArrayEquals(h.golden(request, "0200", 3), h.service.process(request));
+      assertArrayEquals(h.golden(request, FIXTURE_0200_FC9DB3AC, 3), h.service.process(request));
       assertEquals(1, h.inboxCount());
     }
   }
@@ -454,31 +472,33 @@ class MediaApplicationServiceTest {
               "afterCommit",
               "rollback",
               "rollback-close",
-              "close")) {
+              FIXTURE_CLOSE_97959247)) {
         try (var h = new MediaStageFixture(database)) {
           h.seed();
           h.faultConnection = stage;
           h.fault = fault;
-          var request = input("ANM");
+          var request = input(FIXTURE_ANM_691ADB31);
           temporary(() -> h.service.process(request));
-          boolean committed = stage == 2 && List.of("afterCommit", "close").contains(fault);
+          boolean committed =
+              stage == 2 && List.of("afterCommit", FIXTURE_CLOSE_97959247).contains(fault);
           assertEquals(committed ? 1 : 0, h.inboxCount(), fault);
           assertEquals(0, h.live.get());
           h.fault = "none";
           long nextId = h.ids.get() + (committed ? 1 : 2);
           assertArrayEquals(
-              h.golden(request, committed ? "0200" : "0000", nextId), h.service.process(request));
+              h.golden(request, committed ? FIXTURE_0200_FC9DB3AC : FIXTURE_0000_876EEFE0, nextId),
+              h.service.process(request));
           assertEquals(1, h.inboxCount());
         }
       }
     }
-    for (String fault : List.of("close", "authRollback")) {
+    for (String fault : List.of(FIXTURE_CLOSE_97959247, "authRollback")) {
       try (var h = new MediaStageFixture(database)) {
         h.seed();
         h.sql(
             "update schubert.auth_sessions set revoked=true,revoked_at='2026-09-08T00:01:00Z',revoke_reason='ADMIN'");
         h.fault = fault;
-        temporary(() -> h.service.process(input("MED")));
+        temporary(() -> h.service.process(input(FIXTURE_MED_5ED30FD5)));
         assertEquals(0, h.inboxCount());
         assertEquals(0, h.live.get());
       }
@@ -489,13 +509,14 @@ class MediaApplicationServiceTest {
           h.seed();
           h.clockFaultAt = stage;
           h.nullClock = missing;
-          var request = input("ANM");
+          var request = input(FIXTURE_ANM_691ADB31);
           temporary(() -> h.service.process(request));
           assertEquals(stage == 5 ? 1 : 0, h.inboxCount());
           h.clockFaultAt = 0;
           long next = h.ids.get() + (stage == 5 ? 1 : 2);
           assertArrayEquals(
-              h.golden(request, stage == 5 ? "0200" : "0000", next), h.service.process(request));
+              h.golden(request, stage == 5 ? FIXTURE_0200_FC9DB3AC : FIXTURE_0000_876EEFE0, next),
+              h.service.process(request));
         }
       }
     }
@@ -505,13 +526,14 @@ class MediaApplicationServiceTest {
           h.seed();
           h.identifierFaultAt = stage;
           h.nullIdentifier = missing;
-          var request = input("ANM");
+          var request = input(FIXTURE_ANM_691ADB31);
           temporary(() -> h.service.process(request));
           assertEquals(stage == 2 ? 1 : 0, h.inboxCount());
           h.identifierFaultAt = 0;
           long next = h.ids.get() + (stage == 2 ? 1 : 2);
           assertArrayEquals(
-              h.golden(request, stage == 2 ? "0200" : "0000", next), h.service.process(request));
+              h.golden(request, stage == 2 ? FIXTURE_0200_FC9DB3AC : FIXTURE_0000_876EEFE0, next),
+              h.service.process(request));
         }
       }
     }
@@ -523,7 +545,7 @@ class MediaApplicationServiceTest {
         if (closed.equals("snapshot-start")) h.snapshots.close();
         if (closed.equals("fingerprint-file")) h.duringFile = h.keys::close;
         if (closed.equals("snapshot-file")) h.duringFile = h.snapshots::close;
-        temporary(() -> h.service.process(input("MED")));
+        temporary(() -> h.service.process(input(FIXTURE_MED_5ED30FD5)));
         assertEquals(0, h.inboxCount());
         assertEquals(0, h.live.get());
       }
@@ -543,7 +565,7 @@ class MediaApplicationServiceTest {
             "deleted")) {
       try (var h = new MediaStageFixture(database)) {
         h.seed();
-        var request = input("MED");
+        var request = input(FIXTURE_MED_5ED30FD5);
         h.service.process(request);
         h.duringFile =
             () -> {
@@ -574,7 +596,7 @@ class MediaApplicationServiceTest {
     }
     try (var h = new MediaStageFixture(database)) {
       h.seed();
-      var request = input("MED");
+      var request = input(FIXTURE_MED_5ED30FD5);
       h.service.process(request);
       h.sql(
           "update schubert.request_inbox set processing_state='PROCESSING',result_ref_type=null,response_layout_id=null,response_version=null,response_body_encrypted=null,response_key_version=null,completed_at=null");
@@ -585,20 +607,20 @@ class MediaApplicationServiceTest {
     }
     try (var h = new MediaStageFixture(database)) {
       h.seed();
-      var request = input("MED");
+      var request = input(FIXTURE_MED_5ED30FD5);
       h.service.process(request);
-      byte[] changed = MediaRequestFixture.data("MEDREQ01");
+      byte[] changed = MediaRequestFixture.data(FIXTURE_MEDREQ01_23053712);
       MediaRequestFixture.put(changed, 64, "I");
-      var different = sameMessage(request, "MED", changed);
+      var different = sameMessage(request, FIXTURE_MED_5ED30FD5, changed);
       h.faultConnection = h.opens.get() + 1;
-      h.fault = "close";
+      h.fault = FIXTURE_CLOSE_97959247;
       temporary(() -> h.service.process(different));
       assertEquals(1, h.inboxCount());
       assertEquals(0, h.live.get());
     }
     try (var h = new MediaStageFixture(database)) {
       h.seed();
-      var request = input("MED");
+      var request = input(FIXTURE_MED_5ED30FD5);
       h.beforeOpen =
           () -> {
             if (h.opens.get() != 2) return;
@@ -613,13 +635,13 @@ class MediaApplicationServiceTest {
                     h.inspector,
                     h.clock,
                     () -> new UUID(0, h.ids.incrementAndGet()));
-            assertEquals("0000", ascii(competing.process(request), 208, 4));
+            assertEquals(FIXTURE_0000_876EEFE0, ascii(competing.process(request), 208, 4));
           };
       // Fault injection of a forbidden second service instance: never accept an unchecked winner.
       temporary(() -> h.service.process(request));
       assertEquals(1, h.inboxCount());
       assertEquals(0, h.live.get());
-      assertArrayEquals(h.golden(request, "0200", 3), h.service.process(request));
+      assertArrayEquals(h.golden(request, FIXTURE_0200_FC9DB3AC, 3), h.service.process(request));
     }
   }
 
@@ -718,9 +740,9 @@ class MediaApplicationServiceTest {
                   MediaApplicationAssembly.create(
                       h.source, h.keys, h.snapshots, h.inspector, null)))
         assertThrows(NullPointerException.class, missing);
-      var request = input("ANM");
+      var request = input(FIXTURE_ANM_691ADB31);
       byte[] actual = publicService.process(request);
-      assertEquals("0000", ascii(actual, 208, 4));
+      assertEquals(FIXTURE_0000_876EEFE0, ascii(actual, 208, 4));
       assertEquals("0010001002      ", ascii(actual, 256, 16));
       assertNotEquals(request.header().messageId(), UUID.fromString(ascii(actual, 24, 36)));
       assertEquals("2026-09-09T00:01:00Z", h.stored(request).get(4));
@@ -750,8 +772,8 @@ class MediaApplicationServiceTest {
         new InboxCompletion(
             InboxCompletionState.COMPLETED,
             InboxResultReference.none(),
-            "MEDRSP01",
-            "001",
+            FIXTURE_MEDRSP01_B0244A9A,
+            FIXTURE_001_A3FEAA64,
             Optional.of(encrypted),
             NOW);
     assertThrows(
@@ -772,43 +794,43 @@ class MediaApplicationServiceTest {
             new InboxCompletion(
                 InboxCompletionState.ERROR,
                 value.resultReference(),
-                "MEDRSP01",
-                "001",
+                FIXTURE_MEDRSP01_B0244A9A,
+                FIXTURE_001_A3FEAA64,
                 value.responseSnapshot(),
                 NOW),
             new InboxCompletion(
                 value.state(),
                 InboxResultReference.numeric(InboxResultReferenceType.USER, 101),
-                "MEDRSP01",
-                "001",
+                FIXTURE_MEDRSP01_B0244A9A,
+                FIXTURE_001_A3FEAA64,
                 value.responseSnapshot(),
                 NOW),
             new InboxCompletion(
                 value.state(),
                 value.resultReference(),
                 "AUDRSP01",
-                "001",
+                FIXTURE_001_A3FEAA64,
                 value.responseSnapshot(),
                 NOW),
             new InboxCompletion(
                 value.state(),
                 value.resultReference(),
-                "MEDRSP01",
+                FIXTURE_MEDRSP01_B0244A9A,
                 "002",
                 value.responseSnapshot(),
                 NOW),
             new InboxCompletion(
                 value.state(),
                 value.resultReference(),
-                "MEDRSP01",
-                "001",
+                FIXTURE_MEDRSP01_B0244A9A,
+                FIXTURE_001_A3FEAA64,
                 value.responseSnapshot(),
                 NOW.plusSeconds(1)),
             new InboxCompletion(
                 value.state(),
                 value.resultReference(),
-                "MEDRSP01",
-                "001",
+                FIXTURE_MEDRSP01_B0244A9A,
+                FIXTURE_001_A3FEAA64,
                 Optional.of(new EncryptedResponseSnapshot("other", new byte[29])),
                 NOW))) assertFalse(InboxCompletionConsistency.sameSaved(value, different));
     for (int i = 0; i < 29; i++) {
@@ -818,8 +840,8 @@ class MediaApplicationServiceTest {
           new InboxCompletion(
               value.state(),
               value.resultReference(),
-              "MEDRSP01",
-              "001",
+              FIXTURE_MEDRSP01_B0244A9A,
+              FIXTURE_001_A3FEAA64,
               Optional.of(new EncryptedResponseSnapshot("test", altered)),
               NOW);
       assertFalse(InboxCompletionConsistency.sameSaved(value, other));
@@ -827,7 +849,12 @@ class MediaApplicationServiceTest {
     }
     var missing =
         new InboxCompletion(
-            value.state(), value.resultReference(), "MEDRSP01", "001", Optional.empty(), NOW);
+            value.state(),
+            value.resultReference(),
+            FIXTURE_MEDRSP01_B0244A9A,
+            FIXTURE_001_A3FEAA64,
+            Optional.empty(),
+            NOW);
     temporary(() -> InboxCompletionConsistency.sameSaved(value, missing));
     temporary(() -> InboxCompletionConsistency.sameSaved(missing, value));
     assertArrayEquals(new byte[29], encrypted.ciphertext());

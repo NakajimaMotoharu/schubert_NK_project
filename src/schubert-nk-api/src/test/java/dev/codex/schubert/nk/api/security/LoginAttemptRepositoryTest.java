@@ -31,6 +31,15 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** PT-AUT-003-D01..06. Production DDL/limited role; literal SQL postconditions are the oracle. */
 final class LoginAttemptRepositoryTest {
+  private static final String FIXTURE_LOGIN_USER_D270AFC0 = "login-user";
+  private static final String FIXTURE_127_0_0_1_88270499 = "127.0.0.1";
+  private static final String FIXTURE_LOCKED_UNTIL_C81A370E = "locked_until";
+  private static final String FIXTURE_2026_09_08T00_15_00Z_5E8331B7 = "2026-09-08T00:15:00Z";
+  private static final String FIXTURE_LOGIN_IP_ATTEMPTS_0BA2E9DA = "login_ip_attempts";
+  private static final String FIXTURE_TRUE_18D10C7D = "true";
+  private static final String FIXTURE_CLOSE_97959247 = "close";
+  private static final String FIXTURE_SYNTHETIC_SENSITIVE_CLOSE_16A2CAC4 =
+      "synthetic-sensitive-close";
   @TempDir static Path root;
   private static ApiLogDatabaseFixture database;
   private static InetAddress client;
@@ -66,7 +75,7 @@ final class LoginAttemptRepositoryTest {
     try (Connection connection = database.transaction()) {
       var locked =
           repository.lockForAttempt(
-              intercept(connection, "observe", sql), "login-user", client, NOW);
+              intercept(connection, "observe", sql), FIXTURE_LOGIN_USER_D270AFC0, client, NOW);
       var account = locked.account().orElseThrow();
       assertEquals(new AuthenticatedActor(7, "Login-User", Role.USER), account.identity());
       assertTrue(account.active());
@@ -74,7 +83,7 @@ final class LoginAttemptRepositoryTest {
       assertEquals(0, account.attempts().failedCount());
       assertEquals(0, locked.ip().failedCount());
       assertEquals(Optional.of(NOW), locked.ip().windowStartedAt());
-      assertEquals("127.0.0.1", locked.clientAddress());
+      assertEquals(FIXTURE_127_0_0_1_88270499, locked.clientAddress());
       assertEquals("LoginAccount[REDACTED]", account.toString());
       assertEquals("LockedLoginAttempt[REDACTED]", locked.toString());
       repository.recordFailure(connection, locked, NOW);
@@ -88,7 +97,7 @@ final class LoginAttemptRepositoryTest {
     try (Connection connection = database.transaction()) {
       var restarted =
           new LoginAttemptRepository()
-              .lockForAttempt(connection, "login-user", client, NOW.plusSeconds(1));
+              .lockForAttempt(connection, FIXTURE_LOGIN_USER_D270AFC0, client, NOW.plusSeconds(1));
       assertEquals(1, restarted.account().orElseThrow().attempts().failedCount());
       assertEquals(
           Optional.of(NOW), restarted.account().orElseThrow().attempts().windowStartedAt());
@@ -114,19 +123,30 @@ final class LoginAttemptRepositoryTest {
   @Test
   void thresholdsWindowsLocksAndSuccessHaveLiteralSqlPostconditions() throws Exception {
     for (int i = 1; i <= 10; i++) {
-      fail("login-user", NOW);
+      fail(FIXTURE_LOGIN_USER_D270AFC0, NOW);
       assertEquals(
           Math.min(5, i), scalar("select failed_count from schubert.app_users where id=7"));
       assertEquals(i, scalar("select failed_count from schubert.login_ip_attempts"));
     }
-    assertTimestamp("app_users", "locked_until", "id=7", "2026-09-08T00:15:00Z");
-    assertTimestamp("login_ip_attempts", "locked_until", "true", "2026-09-08T00:15:00Z");
-    fail("login-user", NOW.plusSeconds(30));
-    assertTimestamp("app_users", "locked_until", "id=7", "2026-09-08T00:15:00Z");
-    assertTimestamp("login_ip_attempts", "locked_until", "true", "2026-09-08T00:15:00Z");
+    assertTimestamp(
+        "app_users", FIXTURE_LOCKED_UNTIL_C81A370E, "id=7", FIXTURE_2026_09_08T00_15_00Z_5E8331B7);
+    assertTimestamp(
+        FIXTURE_LOGIN_IP_ATTEMPTS_0BA2E9DA,
+        FIXTURE_LOCKED_UNTIL_C81A370E,
+        FIXTURE_TRUE_18D10C7D,
+        FIXTURE_2026_09_08T00_15_00Z_5E8331B7);
+    fail(FIXTURE_LOGIN_USER_D270AFC0, NOW.plusSeconds(30));
+    assertTimestamp(
+        "app_users", FIXTURE_LOCKED_UNTIL_C81A370E, "id=7", FIXTURE_2026_09_08T00_15_00Z_5E8331B7);
+    assertTimestamp(
+        FIXTURE_LOGIN_IP_ATTEMPTS_0BA2E9DA,
+        FIXTURE_LOCKED_UNTIL_C81A370E,
+        FIXTURE_TRUE_18D10C7D,
+        FIXTURE_2026_09_08T00_15_00Z_5E8331B7);
     try (Connection connection = database.transaction()) {
       var locked =
-          repository.lockForAttempt(connection, "login-user", client, NOW.plusSeconds(901));
+          repository.lockForAttempt(
+              connection, FIXTURE_LOGIN_USER_D270AFC0, client, NOW.plusSeconds(901));
       repository.recordSuccess(connection, locked, NOW.plusSeconds(901));
       connection.commit();
     }
@@ -141,12 +161,20 @@ final class LoginAttemptRepositoryTest {
             "select count(*) from schubert.login_ip_attempts where failed_count=0 and locked_until"
                 + " is null"));
     assertTimestamp("app_users", "last_login_at", "id=7", "2026-09-08T00:15:01Z");
-    assertTimestamp("login_ip_attempts", "window_started_at", "true", "2026-09-08T00:15:01Z");
-    assertTimestamp("login_ip_attempts", "updated_at", "true", "2026-09-08T00:15:01Z");
+    assertTimestamp(
+        FIXTURE_LOGIN_IP_ATTEMPTS_0BA2E9DA,
+        "window_started_at",
+        FIXTURE_TRUE_18D10C7D,
+        "2026-09-08T00:15:01Z");
+    assertTimestamp(
+        FIXTURE_LOGIN_IP_ATTEMPTS_0BA2E9DA,
+        "updated_at",
+        FIXTURE_TRUE_18D10C7D,
+        "2026-09-08T00:15:01Z");
     for (long offset : new long[] {899_999_999_000L, 900_000_000_000L, 900_000_001_000L}) {
       seed();
-      fail("login-user", NOW);
-      fail("login-user", NOW.plusNanos(offset));
+      fail(FIXTURE_LOGIN_USER_D270AFC0, NOW);
+      fail(FIXTURE_LOGIN_USER_D270AFC0, NOW.plusNanos(offset));
       int expected = offset <= 900_000_000_000L ? 2 : 1; // Current endpoint, SSC-009/BUG-021.
       assertEquals(expected, scalar("select failed_count from schubert.app_users where id=7"));
       assertEquals(expected, scalar("select failed_count from schubert.login_ip_attempts"));
@@ -161,7 +189,7 @@ final class LoginAttemptRepositoryTest {
     try (var executor = Executors.newFixedThreadPool(16)) {
       var results = new ArrayList<Future<?>>();
       for (int i = 0; i < 100; i++) {
-        String name = List.of("login-user", "other-user", "unknown").get(i % 3);
+        String name = List.of(FIXTURE_LOGIN_USER_D270AFC0, "other-user", "unknown").get(i % 3);
         results.add(
             executor.submit(
                 () -> {
@@ -183,7 +211,8 @@ final class LoginAttemptRepositoryTest {
                 + " locked_until='2026-09-08T00:15:00Z'"));
     try (Connection connection = database.transaction()) {
       var locked =
-          repository.lockForAttempt(connection, "login-user", client, NOW.plusSeconds(901));
+          repository.lockForAttempt(
+              connection, FIXTURE_LOGIN_USER_D270AFC0, client, NOW.plusSeconds(901));
       repository.recordSuccess(connection, locked, NOW.plusSeconds(901));
       connection.rollback();
       assertFalse(connection.isClosed());
@@ -193,7 +222,9 @@ final class LoginAttemptRepositoryTest {
     seed();
     try (Connection connection = database.transaction()) {
       repository.recordFailure(
-          connection, repository.lockForAttempt(connection, "login-user", client, NOW), NOW);
+          connection,
+          repository.lockForAttempt(connection, FIXTURE_LOGIN_USER_D270AFC0, client, NOW),
+          NOW);
       connection.rollback();
     }
     assertEquals(0, scalar("select failed_count from schubert.app_users where id=7"));
@@ -209,7 +240,7 @@ final class LoginAttemptRepositoryTest {
         c.rollback();
       }
       try (var c = database.transaction()) {
-        var locked = repository.lockForAttempt(c, "login-user", client, NOW);
+        var locked = repository.lockForAttempt(c, FIXTURE_LOGIN_USER_D270AFC0, client, NOW);
         assertInfrastructure(() -> repository.recordSuccess(c, locked, invalid));
         c.rollback();
         assertFalse(c.isClosed());
@@ -242,7 +273,10 @@ final class LoginAttemptRepositoryTest {
         assertInfrastructure(
             () ->
                 repository.lockForAttempt(
-                    intercept(connection, fault, new ArrayList<>()), "login-user", client, NOW));
+                    intercept(connection, fault, new ArrayList<>()),
+                    FIXTURE_LOGIN_USER_D270AFC0,
+                    client,
+                    NOW));
         connection.rollback();
         assertFalse(connection.isClosed());
       }
@@ -260,7 +294,8 @@ final class LoginAttemptRepositoryTest {
             "afterIp",
             "statementClose")) {
       try (Connection connection = database.transaction()) {
-        var locked = repository.lockForAttempt(connection, "login-user", client, NOW);
+        var locked =
+            repository.lockForAttempt(connection, FIXTURE_LOGIN_USER_D270AFC0, client, NOW);
         assertInfrastructure(
             () ->
                 repository.recordFailure(
@@ -270,9 +305,9 @@ final class LoginAttemptRepositoryTest {
       assertEquals(0, scalar("select failed_count from schubert.app_users where id=7"));
       assertEquals(0, scalar("select count(*) from schubert.login_ip_attempts"));
     }
-    fail("login-user", NOW);
+    fail(FIXTURE_LOGIN_USER_D270AFC0, NOW);
     try (Connection connection = database.transaction()) {
-      var locked = repository.lockForAttempt(connection, "login-user", client, NOW);
+      var locked = repository.lockForAttempt(connection, FIXTURE_LOGIN_USER_D270AFC0, client, NOW);
       assertInfrastructure(() -> repository.recordFailure(connection, locked, NOW.minusSeconds(1)));
       connection.rollback();
     }
@@ -288,7 +323,7 @@ final class LoginAttemptRepositoryTest {
           () ->
               repository.lockForAttempt(
                   intercept(connection, "providerIaeReadAndRowClose", new ArrayList<>()),
-                  "login-user",
+                  FIXTURE_LOGIN_USER_D270AFC0,
                   client,
                   NOW));
       connection.rollback();
@@ -296,7 +331,7 @@ final class LoginAttemptRepositoryTest {
     }
     assertEquals(0, scalar("select count(*) from schubert.login_ip_attempts"));
     try (Connection connection = database.transaction()) {
-      var locked = repository.lockForAttempt(connection, "login-user", client, NOW);
+      var locked = repository.lockForAttempt(connection, FIXTURE_LOGIN_USER_D270AFC0, client, NOW);
       assertInfrastructure(
           () ->
               repository.recordFailure(
@@ -324,14 +359,16 @@ final class LoginAttemptRepositoryTest {
     assertThrows(IllegalArgumentException.class, () -> new LoginAccount(actor, true, "hash", ip));
     assertThrows(
         NullPointerException.class, () -> new LockedLoginAttempt(null, Optional.empty(), ip));
-    assertThrows(NullPointerException.class, () -> new LockedLoginAttempt("127.0.0.1", null, ip));
     assertThrows(
         NullPointerException.class,
-        () -> new LockedLoginAttempt("127.0.0.1", Optional.empty(), null));
+        () -> new LockedLoginAttempt(FIXTURE_127_0_0_1_88270499, null, ip));
+    assertThrows(
+        NullPointerException.class,
+        () -> new LockedLoginAttempt(FIXTURE_127_0_0_1_88270499, Optional.empty(), null));
     assertThrows(
         IllegalArgumentException.class,
-        () -> new LockedLoginAttempt("127.0.0.1", Optional.empty(), user));
-    var locked = new LockedLoginAttempt("127.0.0.1", Optional.empty(), ip);
+        () -> new LockedLoginAttempt(FIXTURE_127_0_0_1_88270499, Optional.empty(), user));
+    var locked = new LockedLoginAttempt(FIXTURE_127_0_0_1_88270499, Optional.empty(), ip);
     assertEquals(
         "0:0:0:0:0:0:0:1", new LockedLoginAttempt("::1", Optional.empty(), ip).clientAddress());
     for (String invalid : List.of("", "localhost", "127.0.0.999", "fe80::1%1", "127.0.0.1\n")) {
@@ -345,7 +382,8 @@ final class LoginAttemptRepositoryTest {
               || error.getMessage().equals("login IP scope is invalid"));
     }
     try (Connection connection = database.api()) {
-      assertInfrastructure(() -> repository.lockForAttempt(connection, "login-user", client, NOW));
+      assertInfrastructure(
+          () -> repository.lockForAttempt(connection, FIXTURE_LOGIN_USER_D270AFC0, client, NOW));
       assertInfrastructure(() -> repository.recordFailure(connection, locked, NOW));
     }
     try (Connection connection = database.transaction()) {
@@ -443,8 +481,8 @@ final class LoginAttemptRepositoryTest {
                         && sm.getName().equals("setInt"))
                       throw new IllegalArgumentException("synthetic-sensitive-provider-identity");
                     if (fault.equals("providerIaeWriteAndStatementClose")
-                        && sm.getName().equals("close"))
-                      throw new SQLException("synthetic-sensitive-close");
+                        && sm.getName().equals(FIXTURE_CLOSE_97959247))
+                      throw new SQLException(FIXTURE_SYNTHETIC_SENSITIVE_CLOSE_16A2CAC4);
                     if (sm.getName().equals(fault))
                       throw new SQLException("synthetic-sensitive-provider-text");
                     if (sm.getName().equals("executeUpdate")
@@ -453,8 +491,9 @@ final class LoginAttemptRepositoryTest {
                     Object sr = invoke(result, sm, sa);
                     if (ipUpdate && fault.equals("afterIp") && sm.getName().equals("executeUpdate"))
                       throw new SQLException("synthetic-sensitive-after-write");
-                    if (sm.getName().equals("close") && fault.equals("statementClose"))
-                      throw new SQLException("synthetic-sensitive-close");
+                    if (sm.getName().equals(FIXTURE_CLOSE_97959247)
+                        && fault.equals("statementClose"))
+                      throw new SQLException(FIXTURE_SYNTHETIC_SENSITIVE_CLOSE_16A2CAC4);
                     if (!sm.getName().equals("executeQuery")) return sr;
                     return Proxy.newProxyInstance(
                         ResultSet.class.getClassLoader(),
@@ -465,8 +504,8 @@ final class LoginAttemptRepositoryTest {
                             throw new IllegalArgumentException(
                                 "synthetic-sensitive-provider-identity");
                           if (fault.equals("providerIaeReadAndRowClose")
-                              && rm.getName().equals("close"))
-                            throw new SQLException("synthetic-sensitive-close");
+                              && rm.getName().equals(FIXTURE_CLOSE_97959247))
+                            throw new SQLException(FIXTURE_SYNTHETIC_SENSITIVE_CLOSE_16A2CAC4);
                           String scope = userQuery ? "user:" : "ip:";
                           if (fault.startsWith(scope + "null:")
                               && ra != null
@@ -487,8 +526,9 @@ final class LoginAttemptRepositoryTest {
                           if (ipQuery && fault.equals("missingIp") && rm.getName().equals("next"))
                             return false;
                           Object rr = invoke(sr, rm, ra);
-                          if (rm.getName().equals("close") && fault.equals("rowClose"))
-                            throw new SQLException("synthetic-sensitive-close");
+                          if (rm.getName().equals(FIXTURE_CLOSE_97959247)
+                              && fault.equals("rowClose"))
+                            throw new SQLException(FIXTURE_SYNTHETIC_SENSITIVE_CLOSE_16A2CAC4);
                           return rr;
                         });
                   });

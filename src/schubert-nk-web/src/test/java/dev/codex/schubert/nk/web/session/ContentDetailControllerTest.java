@@ -83,6 +83,16 @@ import org.springframework.web.context.support.AnnotationConfigWebApplicationCon
 
 /** Literal UI232234235 offsets; HTTP/DOM and held-file bytes independent of production encoding. */
 class ContentDetailControllerTest {
+  private static final String FIXTURE_SCN_F30DFFA3 = "SCN";
+  private static final String FIXTURE_PAGE_861424BC = "page";
+  private static final String FIXTURE_OPENING_3CE77203 = "OPENING";
+  private static final String FIXTURE_0000_876EEFE0 = "0000";
+  private static final String FIXTURE_MTR_863D3C01 = "MTR";
+  private static final String FIXTURE_VID_38542B9C = "VID";
+  private static final String FIXTURE_SCENARIOS_23_C5B9E136 = "/scenarios/23";
+  private static final String FIXTURE_GET_04F32A7E = "GET";
+  private static final String FIXTURE_TITLE_4BE9D4F1 = "Title";
+  private static final String FIXTURE_KEY_C0C1BAF2 = "key";
   private static WebLogDatabaseFixture db;
   private static final Clock CLOCK =
       Clock.fixed(Instant.parse("2026-10-04T00:00:00Z"), ZoneOffset.UTC);
@@ -115,8 +125,8 @@ class ContentDetailControllerTest {
       for (int count : new int[] {0, 1, 200}) {
         f.count = count;
         var m = new ExtendedModelMap();
-        assertEquals("scenario", f.call("SCN", m, new MockHttpServletResponse()));
-        var page = assertInstanceOf(ScenarioDetailViewModel.class, m.get("page"));
+        assertEquals("scenario", f.call(FIXTURE_SCN_F30DFFA3, m, new MockHttpServletResponse()));
+        var page = assertInstanceOf(ScenarioDetailViewModel.class, m.get(FIXTURE_PAGE_861424BC));
         assertEquals(23, page.getId());
         assertEquals(count, page.getEntries().size());
         assertEquals("章<script>", page.getTitle());
@@ -129,8 +139,8 @@ class ContentDetailControllerTest {
         f.prepareFile();
         byte[] before = Files.readAllBytes(f.readyFile());
         var m = new ExtendedModelMap();
-        assertEquals("scenario", f.call("SCN", m, new MockHttpServletResponse()));
-        var page = assertInstanceOf(ScenarioDetailViewModel.class, m.get("page"));
+        assertEquals("scenario", f.call(FIXTURE_SCN_F30DFFA3, m, new MockHttpServletResponse()));
+        var page = assertInstanceOf(ScenarioDetailViewModel.class, m.get(FIXTURE_PAGE_861424BC));
         assertEquals(count, page.getEntries().size());
         assertEquals("本文", page.getEntries().getLast().getBody());
         assertArrayEquals(before, Files.readAllBytes(f.readyFile()));
@@ -151,7 +161,7 @@ class ContentDetailControllerTest {
       }
       f.wrongId = true;
       var r = new MockHttpServletResponse();
-      assertNull(f.call("SCN", new ExtendedModelMap(), r));
+      assertNull(f.call(FIXTURE_SCN_F30DFFA3, new ExtendedModelMap(), r));
       assertEquals(503, r.getStatus());
       f.wrongId = false;
       f.file = true;
@@ -159,11 +169,11 @@ class ContentDetailControllerTest {
       f.prepareFile();
       Files.write(f.readyFile(), new byte[] {0});
       r = new MockHttpServletResponse();
-      assertNull(f.call("SCN", new ExtendedModelMap(), r));
+      assertNull(f.call(FIXTURE_SCN_F30DFFA3, new ExtendedModelMap(), r));
       assertEquals(503, r.getStatus());
       Files.delete(f.readyFile());
       r = new MockHttpServletResponse();
-      assertNull(f.call("SCN", new ExtendedModelMap(), r));
+      assertNull(f.call(FIXTURE_SCN_F30DFFA3, new ExtendedModelMap(), r));
       assertEquals(503, r.getStatus());
       f.erased();
     }
@@ -174,9 +184,9 @@ class ContentDetailControllerTest {
     try (var f = new Fixture();
         var context = f.mvc()) {
       var mvc = MockMvcBuilders.webAppContextSetup(context).build();
-      for (String category : List.of("MAIN", "SUBTRACK", "OVA", "OPENING")) {
+      for (String category : List.of("MAIN", "SUBTRACK", "OVA", FIXTURE_OPENING_3CE77203)) {
         f.category = category;
-        for (String code : List.of("0000", "0200")) {
+        for (String code : List.of(FIXTURE_0000_876EEFE0, "0200")) {
           f.code = code;
           var result =
               mvc.perform(
@@ -200,18 +210,18 @@ class ContentDetailControllerTest {
                               .equals(
                                   category.equals("OVA")
                                       ? "/animation/ova"
-                                      : category.equals("OPENING")
+                                      : category.equals(FIXTURE_OPENING_3CE77203)
                                           ? "/animation"
                                           : "/animation/main")));
           assertFalse(result.getResponse().getContentAsString().contains("video/v.mp4"));
         }
       }
-      f.category = "OPENING";
+      f.category = FIXTURE_OPENING_3CE77203;
       var m = new ExtendedModelMap();
       assertEquals(
           "animation-watch",
           f.controller.opening(actor(), m, f.request(), new MockHttpServletResponse()));
-      var page = assertInstanceOf(AnimationWatchViewModel.class, m.get("page"));
+      var page = assertInstanceOf(AnimationWatchViewModel.class, m.get(FIXTURE_PAGE_861424BC));
       assertEquals("/animation/media/opening", page.getValues().get("mediaHref"));
       assertEquals("AnimationWatchViewModel[REDACTED]", page.toString());
       assertThrows(UnsupportedOperationException.class, () -> page.getValues().clear());
@@ -224,7 +234,7 @@ class ContentDetailControllerTest {
       var invalidModel = new ExtendedModelMap();
       assertNull(f.controller.watch("opening", actor(), invalidModel, f.request(), r));
       assertEquals(503, r.getStatus());
-      assertFalse(invalidModel.containsKey("page"));
+      assertFalse(invalidModel.containsKey(FIXTURE_PAGE_861424BC));
       f.erased();
     }
   }
@@ -255,7 +265,7 @@ class ContentDetailControllerTest {
       }
       f.count = 0;
       var r = new MockHttpServletResponse();
-      assertNull(f.call("MTR", new ExtendedModelMap(), r));
+      assertNull(f.call(FIXTURE_MTR_863D3C01, new ExtendedModelMap(), r));
       assertEquals(404, r.getStatus());
       for (String value : List.of("", "x".repeat(129))) {
         int sent = f.sent.get();
@@ -332,7 +342,8 @@ class ContentDetailControllerTest {
   @Test
   void content006EveryKnownErrorAndBrokenWireHasNoModel() throws Exception {
     try (var f = new Fixture()) {
-      for (String type : List.of("SCN", "VID", "MTR")) {
+      for (String type :
+          List.of(FIXTURE_SCN_F30DFFA3, FIXTURE_VID_38542B9C, FIXTURE_MTR_863D3C01)) {
         for (String[] pair :
             List.of(
                 new String[] {"0100", "400"},
@@ -351,7 +362,7 @@ class ContentDetailControllerTest {
           assertEquals(Integer.parseInt(pair[1]), r.getStatus());
           assertTrue(m.isEmpty());
         }
-        f.code = "0000";
+        f.code = FIXTURE_0000_876EEFE0;
         f.badContext = true;
         var r = new MockHttpServletResponse();
         assertNull(f.call(type, new ExtendedModelMap(), r));
@@ -450,11 +461,14 @@ class ContentDetailControllerTest {
                 (mvc, invalid) -> f.configure(mvc, invalid))) {
       var paths =
           List.of(
-              "/scenarios/23", "/animation/opening", "/animation/videos/opening", "/music/BGM/ゲーム");
+              FIXTURE_SCENARIOS_23_C5B9E136,
+              "/animation/opening",
+              "/animation/videos/opening",
+              "/music/BGM/ゲーム");
       for (String path : paths)
-        assertEquals(302, server.send("GET", path, null, null, true).statusCode());
+        assertEquals(302, server.send(FIXTURE_GET_04F32A7E, path, null, null, true).statusCode());
       assertEquals(0, f.sent.get());
-      var first = server.send("GET", "/login", null, null, true);
+      var first = server.send(FIXTURE_GET_04F32A7E, "/login", null, null, true);
       String initial = first.headers().firstValue("set-cookie").orElseThrow().split(";", 2)[0];
       var login =
           server.send(
@@ -465,7 +479,7 @@ class ContentDetailControllerTest {
               true);
       String cookie = login.headers().firstValue("set-cookie").orElseThrow().split(";", 2)[0];
       for (String path : paths) {
-        var shown = server.send("GET", path, cookie, null, true);
+        var shown = server.send(FIXTURE_GET_04F32A7E, path, cookie, null, true);
         assertEquals(200, shown.statusCode(), path);
         assertEquals(200, server.send("HEAD", path, cookie, null, true).statusCode());
         String csrf = Jsoup.parse(shown.body()).select("input[name='_csrf']").attr("value");
@@ -474,19 +488,26 @@ class ContentDetailControllerTest {
       try (var executor = Executors.newFixedThreadPool(12)) {
         var jobs = new ArrayList<Callable<Integer>>();
         for (int n = 0; n < 100; n++)
-          jobs.add(() -> server.send("GET", "/scenarios/23", cookie, null, true).statusCode());
+          jobs.add(
+              () ->
+                  server
+                      .send(FIXTURE_GET_04F32A7E, FIXTURE_SCENARIOS_23_C5B9E136, cookie, null, true)
+                      .statusCode());
         for (var result : executor.invokeAll(jobs, 30, TimeUnit.SECONDS)) {
           assertFalse(result.isCancelled());
           assertEquals(200, result.get());
         }
       }
       f.code = "0102";
-      var expired = server.send("GET", "/scenarios/23", cookie, null, true);
+      var expired =
+          server.send(FIXTURE_GET_04F32A7E, FIXTURE_SCENARIOS_23_C5B9E136, cookie, null, true);
       assertEquals(302, expired.statusCode());
       assertEquals(
           "/login?session-expired", expired.headers().firstValue("location").orElseThrow());
       assertTrue(expired.headers().firstValue("set-cookie").orElseThrow().contains("Max-Age=0"));
-      assertEquals(302, server.send("GET", "/animation/opening", cookie, null, true).statusCode());
+      assertEquals(
+          302,
+          server.send(FIXTURE_GET_04F32A7E, "/animation/opening", cookie, null, true).statusCode());
       f.erased();
     }
   }
@@ -537,7 +558,7 @@ class ContentDetailControllerTest {
       assertThrows(
           IllegalArgumentException.class, () -> AnimationWatchViewModel.from(actor(), bad));
     }
-    var rows = List.of(track("id", "Title", "key", PairRole.MAIN, 1));
+    var rows = List.of(track("id", FIXTURE_TITLE_4BE9D4F1, FIXTURE_KEY_C0C1BAF2, PairRole.MAIN, 1));
     assertThrows(
         NullPointerException.class,
         () -> MusicTrackViewModel.from(null, "曲", "ゲーム", new MusicTrackResponseData(1), rows));
@@ -562,7 +583,8 @@ class ContentDetailControllerTest {
                   "曲",
                   "ゲーム",
                   new MusicTrackResponseData(1),
-                  List.of(track(id, "Title", "key", PairRole.MAIN, 1))));
+                  List.of(
+                      track(id, FIXTURE_TITLE_4BE9D4F1, FIXTURE_KEY_C0C1BAF2, PairRole.MAIN, 1))));
     assertThrows(
         IllegalArgumentException.class,
         () ->
@@ -579,12 +601,12 @@ class ContentDetailControllerTest {
     var zero =
         new MusicTrackRecord(
             "id",
-            "Title",
+            FIXTURE_TITLE_4BE9D4F1,
             "曲",
             "ゲーム",
             DisplayPath.of("id.m4a"),
             0,
-            Optional.of("key"),
+            Optional.of(FIXTURE_KEY_C0C1BAF2),
             PairRole.MAIN,
             1);
     assertThrows(
@@ -601,8 +623,8 @@ class ContentDetailControllerTest {
                 "ゲーム",
                 new MusicTrackResponseData(2),
                 List.of(
-                    track("a", "Title", "key", PairRole.MAIN, 2),
-                    track("b", "Title", "other", PairRole.MAIN, 1))));
+                    track("a", FIXTURE_TITLE_4BE9D4F1, FIXTURE_KEY_C0C1BAF2, PairRole.MAIN, 2),
+                    track("b", FIXTURE_TITLE_4BE9D4F1, "other", PairRole.MAIN, 1))));
     assertThrows(
         IllegalArgumentException.class,
         () ->
@@ -612,12 +634,12 @@ class ContentDetailControllerTest {
                 "ゲーム",
                 new MusicTrackResponseData(2),
                 List.of(
-                    track("a", "Title", "key", PairRole.MAIN, 1),
-                    track("b", "Title", "key", PairRole.MAIN, 2))));
+                    track("a", FIXTURE_TITLE_4BE9D4F1, FIXTURE_KEY_C0C1BAF2, PairRole.MAIN, 1),
+                    track("b", FIXTURE_TITLE_4BE9D4F1, FIXTURE_KEY_C0C1BAF2, PairRole.MAIN, 2))));
     var absent =
         new MusicTrackRecord(
             "id",
-            "Title",
+            FIXTURE_TITLE_4BE9D4F1,
             "曲",
             "ゲーム",
             DisplayPath.of("id.m4a"),
@@ -643,7 +665,9 @@ class ContentDetailControllerTest {
               "x".repeat(64), "y".repeat(128), actor(), model, f.request(), response));
       assertEquals(
           "x".repeat(64) + " / " + "y".repeat(128),
-          assertInstanceOf(MusicTrackViewModel.class, model.get("page")).getValues().get("title"));
+          assertInstanceOf(MusicTrackViewModel.class, model.get(FIXTURE_PAGE_861424BC))
+              .getValues()
+              .get("title"));
       for (String category : List.of("", "x".repeat(65))) {
         int sent = f.sent.get();
         response = new MockHttpServletResponse();
@@ -660,7 +684,7 @@ class ContentDetailControllerTest {
             f.controller.watch(id, actor(), model, f.request(), new MockHttpServletResponse()));
         assertEquals(
             id.length() == 64 ? "/animation/media/" + id : "/animation/media/%C3%A9",
-            assertInstanceOf(AnimationWatchViewModel.class, model.get("page"))
+            assertInstanceOf(AnimationWatchViewModel.class, model.get(FIXTURE_PAGE_861424BC))
                 .getValues()
                 .get("mediaHref"));
       }
@@ -703,8 +727,8 @@ class ContentDetailControllerTest {
     final AtomicInteger sent = new AtomicInteger();
     final Set<UUID> messages = ConcurrentHashMap.newKeySet();
     final List<byte[]> buffers = new CopyOnWriteArrayList<>();
-    volatile String code = "0000";
-    volatile String category = "OPENING";
+    volatile String code = FIXTURE_0000_876EEFE0;
+    volatile String category = FIXTURE_OPENING_3CE77203;
     volatile String hash = "a".repeat(64);
     volatile String videoPath = "video/v.mp4";
     volatile int count = 1;
@@ -747,14 +771,14 @@ class ContentDetailControllerTest {
     }
 
     MockHttpServletRequest request() throws Exception {
-      return security.mock("GET", "/scenarios/23");
+      return security.mock(FIXTURE_GET_04F32A7E, FIXTURE_SCENARIOS_23_C5B9E136);
     }
 
     String call(String type, ExtendedModelMap m, MockHttpServletResponse r) throws Exception {
       return switch (type) {
-        case "SCN" -> controller.scenario("23", actor(), m, request(), r);
-        case "VID" -> controller.watch("opening", actor(), m, request(), r);
-        case "MTR" -> controller.tracks("BGM", "ゲーム", actor(), m, request(), r);
+        case FIXTURE_SCN_F30DFFA3 -> controller.scenario("23", actor(), m, request(), r);
+        case FIXTURE_VID_38542B9C -> controller.watch("opening", actor(), m, request(), r);
+        case FIXTURE_MTR_863D3C01 -> controller.tracks("BGM", "ゲーム", actor(), m, request(), r);
         default -> throw new AssertionError();
       };
     }
@@ -796,11 +820,17 @@ class ContentDetailControllerTest {
 
     byte[] response(UUID id, byte[] q) {
       String type = ascii(q, 11, 3);
-      boolean ok = code.equals("0000") || code.equals("0200");
-      int data = type.equals("SCN") ? 1728 : type.equals("VID") ? 1808 : 16;
-      int length = type.equals("SCN") ? 4800 : type.equals("MTR") ? 1312 : 0;
-      int requested = type.equals("MTR") && !pairRecords.isEmpty() ? pairRecords.size() : count;
-      int records = ok && !type.equals("VID") && !(type.equals("SCN") && file) ? requested : 0;
+      boolean ok = code.equals(FIXTURE_0000_876EEFE0) || code.equals("0200");
+      int data =
+          type.equals(FIXTURE_SCN_F30DFFA3) ? 1728 : type.equals(FIXTURE_VID_38542B9C) ? 1808 : 16;
+      int length =
+          type.equals(FIXTURE_SCN_F30DFFA3) ? 4800 : type.equals(FIXTURE_MTR_863D3C01) ? 1312 : 0;
+      int requested =
+          type.equals(FIXTURE_MTR_863D3C01) && !pairRecords.isEmpty() ? pairRecords.size() : count;
+      int records =
+          ok && !type.equals(FIXTURE_VID_38542B9C) && !(type.equals(FIXTURE_SCN_F30DFFA3) && file)
+              ? requested
+              : 0;
       byte[] b = new byte[256 + data + records * length];
       Arrays.fill(b, (byte) ' ');
       put(b, 0, "SCHBNK01001");
@@ -816,7 +846,7 @@ class ContentDetailControllerTest {
       number(b, 193, 6, records);
       number(b, 199, 9, b.length);
       put(b, 208, code);
-      if (type.equals("SCN")) {
+      if (type.equals(FIXTURE_SCN_F30DFFA3)) {
         number(b, 256, 12, ok ? (wrongId ? 24 : 23) : 0);
         number(b, 1877, 12, ok && file ? 4800L * count : 0);
         number(b, 1953, 6, ok && file ? 4800 : 0);
@@ -834,7 +864,7 @@ class ContentDetailControllerTest {
         }
         for (int n = 0; n < records; n++)
           System.arraycopy(entry(n + 1), 0, b, 1984 + n * 4800, 4800);
-      } else if (type.equals("VID")) {
+      } else if (type.equals(FIXTURE_VID_38542B9C)) {
         number(b, 1088, 12, ok ? 12 : 0);
         if (ok) {
           put(b, 256, new String(q, 256, 64, StandardCharsets.UTF_8).stripTrailing());

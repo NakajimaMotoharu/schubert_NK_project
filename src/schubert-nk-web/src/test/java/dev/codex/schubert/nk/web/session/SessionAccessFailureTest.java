@@ -65,6 +65,16 @@ import org.springframework.security.web.context.SecurityContextHolderFilter;
  * PG-D-112.
  */
 class SessionAccessFailureTest {
+  private static final String FIXTURE_GET_04F32A7E = "GET";
+  private static final String FIXTURE_LOGIN_F843C044 = "/login";
+  private static final String FIXTURE_LOCATION_FB077BAD = "Location";
+  private static final String FIXTURE_DETAILS_521BCB5E = "details";
+  private static final String FIXTURE_ACTORUSERNAME_538489F0 = "actorUsername";
+  private static final String FIXTURE_PRIVATE_24ED6504 = "private";
+  private static final String FIXTURE_POST_E46D3AE9 = "POST";
+  private static final String FIXTURE_SEARCH_F32C67A7 = "/search";
+  private static final String FIXTURE_READER_F734AAEA = "reader";
+  private static final String FIXTURE_ADMIN_USERS_2C687608 = "/admin/users";
   private static WebLogDatabaseFixture db;
 
   @BeforeAll
@@ -101,11 +111,11 @@ class SessionAccessFailureTest {
               "/search?password=private",
               "/search?token=private")) {
         a.log.events.clear();
-        var r = a.mock("GET", location);
+        var r = a.mock(FIXTURE_GET_04F32A7E, location);
         var s = new MockHttpServletResponse();
         a.handler.commence(r, s, secretAuth());
         assertEquals(302, s.getStatus());
-        assertEquals("/login", s.getHeader("Location"));
+        assertEquals(FIXTURE_LOGIN_F843C044, s.getHeader(FIXTURE_LOCATION_FB077BAD));
         var saved = a.cache.getRequest(r, s);
         if (location.equals("/search?q=abc") || location.equals("/scenarios/game/file"))
           assertEquals(location, Objects.requireNonNull(saved).getRedirectUrl());
@@ -117,9 +127,10 @@ class SessionAccessFailureTest {
         var event = a.log.events.getFirst();
         assertEquals("AUTHORIZATION_DENIED", event.get("action").getAsString());
         assertEquals(
-            "UNAUTHENTICATED", event.getAsJsonObject("details").get("reason").getAsString());
-        assertFalse(event.has("actorUsername"));
-        assertFalse(event.toString().contains("private"));
+            "UNAUTHENTICATED",
+            event.getAsJsonObject(FIXTURE_DETAILS_521BCB5E).get("reason").getAsString());
+        assertFalse(event.has(FIXTURE_ACTORUSERNAME_538489F0));
+        assertFalse(event.toString().contains(FIXTURE_PRIVATE_24ED6504));
         assertEquals(
             WebRequestContext.require(r).requestId().toString(),
             event.get("requestId").getAsString());
@@ -130,8 +141,9 @@ class SessionAccessFailureTest {
   @Test
   void web126PostAjaxAndMediaNeverRedirectOrReplay() throws Exception {
     try (var a = new Harness()) {
-      for (String method : List.of("POST", "HEAD", "PUT", "PATCH", "DELETE", "OPTIONS")) {
-        var r = a.mock(method, "/search");
+      for (String method :
+          List.of(FIXTURE_POST_E46D3AE9, "HEAD", "PUT", "PATCH", "DELETE", "OPTIONS")) {
+        var r = a.mock(method, FIXTURE_SEARCH_F32C67A7);
         r.addParameter("private-body", "synthetic");
         assertForbidden(a, r);
       }
@@ -142,19 +154,19 @@ class SessionAccessFailureTest {
               "/animation/media/1",
               "/music/media/1",
               "/music/download/1",
-              "/%61udio/1")) assertForbidden(a, a.mock("GET", path));
+              "/%61udio/1")) assertForbidden(a, a.mock(FIXTURE_GET_04F32A7E, path));
       for (String ajax : List.of("XMLHttpRequest", "xmlhttprequest")) {
-        var r = a.mock("GET", "/search");
+        var r = a.mock(FIXTURE_GET_04F32A7E, FIXTURE_SEARCH_F32C67A7);
         r.addHeader("X-Requested-With", ajax);
         assertForbidden(a, r);
       }
       for (String path : List.of("/animation/videos/1", "/music/1", "/audiox/1")) {
-        var r = a.mock("GET", path);
+        var r = a.mock(FIXTURE_GET_04F32A7E, path);
         r.addHeader("X-Requested-With", "ordinary");
         var s = new MockHttpServletResponse();
         a.handler.commence(r, s, secretAuth());
         assertEquals(302, s.getStatus());
-        assertEquals("/login", s.getHeader("Location"));
+        assertEquals(FIXTURE_LOGIN_F843C044, s.getHeader(FIXTURE_LOCATION_FB077BAD));
       }
     }
   }
@@ -164,42 +176,47 @@ class SessionAccessFailureTest {
     try (var a = new Harness()) {
       for (UserRole role : UserRole.values()) {
         a.log.events.clear();
-        var p = principal(role, "reader");
+        var p = principal(role, FIXTURE_READER_F734AAEA);
         setPrincipal(p);
-        var r = a.mock("GET", "/admin/users");
+        var r = a.mock(FIXTURE_GET_04F32A7E, FIXTURE_ADMIN_USERS_2C687608);
         r.getSession().setAttribute("principal", p);
         r.getSession().setAttribute("csrfToken", "02".repeat(32));
         var s = new MockHttpServletResponse();
         a.handler.handle(r, s, secretDenied());
         assertEquals(403, s.getStatus());
-        assertNull(s.getHeader("Location"));
+        assertNull(s.getHeader(FIXTURE_LOCATION_FB077BAD));
         assertNull(s.getErrorMessage());
         assertSame(p, r.getSession(false).getAttribute("principal"));
         assertEquals("02".repeat(32), r.getSession(false).getAttribute("csrfToken"));
         var event = a.log.events.getFirst();
         assertEquals(1, a.log.events.size());
-        assertEquals("ROLE", event.getAsJsonObject("details").get("reason").getAsString());
-        assertEquals("/**", event.getAsJsonObject("details").get("route").getAsString());
-        assertEquals("reader", event.get("actorUsername").getAsString());
+        assertEquals(
+            "ROLE", event.getAsJsonObject(FIXTURE_DETAILS_521BCB5E).get("reason").getAsString());
+        assertEquals(
+            "/**", event.getAsJsonObject(FIXTURE_DETAILS_521BCB5E).get("route").getAsString());
+        assertEquals(
+            FIXTURE_READER_F734AAEA, event.get(FIXTURE_ACTORUSERNAME_538489F0).getAsString());
         assertEquals(
             switch (role) {
               case USER -> "USER";
               case ADMIN -> "ADMIN";
             },
             event.get("actorRole").getAsString());
-        assertFalse(event.toString().contains("private"));
+        assertFalse(event.toString().contains(FIXTURE_PRIVATE_24ED6504));
       }
       SecurityContextHolder.clearContext();
       a.handler.handle(
-          a.mock("POST", "/admin/users"), new MockHttpServletResponse(), secretDenied());
-      assertFalse(a.log.events.getLast().has("actorUsername"));
+          a.mock(FIXTURE_POST_E46D3AE9, FIXTURE_ADMIN_USERS_2C687608),
+          new MockHttpServletResponse(),
+          secretDenied());
+      assertFalse(a.log.events.getLast().has(FIXTURE_ACTORUSERNAME_538489F0));
     }
   }
 
   @Test
   void web128NullStorageLoggerAndResponseFaultsRemainFailures() throws Exception {
     try (var a = new Harness()) {
-      var r = a.mock("GET", "/search");
+      var r = a.mock(FIXTURE_GET_04F32A7E, FIXTURE_SEARCH_F32C67A7);
       var s = new MockHttpServletResponse();
       assertThrows(NullPointerException.class, () -> new WebAccessFailureHandler(null, a.audit));
       assertThrows(NullPointerException.class, () -> new WebAccessFailureHandler(a.cache, null));
@@ -217,19 +234,21 @@ class SessionAccessFailureTest {
       assertThrows(
           IllegalStateException.class,
           () -> a.handler.handle(new MockHttpServletRequest(), s, secretDenied()));
-      var corrupt = a.mock("GET", "/search");
-      corrupt.setAttribute(WebRequestContext.class.getName(), "private");
+      var corrupt = a.mock(FIXTURE_GET_04F32A7E, FIXTURE_SEARCH_F32C67A7);
+      corrupt.setAttribute(WebRequestContext.class.getName(), FIXTURE_PRIVATE_24ED6504);
       assertThrows(IllegalStateException.class, () -> a.handler.commence(corrupt, s, secretAuth()));
       var wrong =
           UsernamePasswordAuthenticationToken.authenticated(
-              "private", "private", List.of(new SimpleGrantedAuthority("ROLE_ADMIN")));
+              FIXTURE_PRIVATE_24ED6504,
+              FIXTURE_PRIVATE_24ED6504,
+              List.of(new SimpleGrantedAuthority("ROLE_ADMIN")));
       SecurityContextHolder.getContext().setAuthentication(wrong);
       assertThrows(SessionStoreException.class, () -> a.handler.handle(r, s, secretDenied()));
       SecurityContextHolder.clearContext();
       a.log.fail = true;
       assertThrows(IllegalStateException.class, () -> a.handler.commence(r, s, secretAuth()));
       assertEquals(403, s.getStatus());
-      assertNull(s.getHeader("Location"));
+      assertNull(s.getHeader(FIXTURE_LOCATION_FB077BAD));
       assertThrows(IllegalStateException.class, () -> a.handler.handle(r, s, secretDenied()));
       a.log.fail = false;
       var io = new IOException("synthetic-send");
@@ -244,7 +263,11 @@ class SessionAccessFailureTest {
           io,
           assertThrows(
               IOException.class,
-              () -> a.handler.commence(a.mock("POST", "/search"), broken, secretAuth())));
+              () ->
+                  a.handler.commence(
+                      a.mock(FIXTURE_POST_E46D3AE9, FIXTURE_SEARCH_F32C67A7),
+                      broken,
+                      secretAuth())));
       assertSame(
           io, assertThrows(IOException.class, () -> a.handler.handle(r, broken, secretDenied())));
       var brokenHeader =
@@ -261,7 +284,7 @@ class SessionAccessFailureTest {
           new HttpServletRequestWrapper(r) {
             @Override
             public HttpSession getSession() {
-              throw new IllegalStateException("private");
+              throw new IllegalStateException(FIXTURE_PRIVATE_24ED6504);
             }
           };
       assertThrows(SessionStoreException.class, () -> a.handler.commence(attr, s, secretAuth()));
@@ -270,7 +293,7 @@ class SessionAccessFailureTest {
           SessionStoreException.class,
           () ->
               a.run(
-                  raw("GET", "/search", null, null),
+                  raw(FIXTURE_GET_04F32A7E, FIXTURE_SEARCH_F32C67A7, null, null),
                   new MockHttpServletResponse(),
                   (x, y) -> fail("no business")));
       a.f.failure = "";
@@ -282,51 +305,62 @@ class SessionAccessFailureTest {
   void web129ActualExceptionTranslationUsesEncryptedCacheAndRoleGate() throws Exception {
     try (var a = new Harness()) {
       var first = new MockHttpServletResponse();
-      a.run(raw("GET", "/search?q=abc", null, null), first, (r, s) -> fail("protected"));
+      a.run(
+          raw(FIXTURE_GET_04F32A7E, "/search?q=abc", null, null),
+          first,
+          (r, s) -> fail("protected"));
       assertEquals(302, first.getStatus());
-      assertEquals("/login", first.getHeader("Location"));
+      assertEquals(FIXTURE_LOGIN_F843C044, first.getHeader(FIXTURE_LOCATION_FB077BAD));
       var anonymous = Objects.requireNonNull(first.getCookie("SCHUBERT_NK_SESSION"));
       var stored = Objects.requireNonNull(a.adapter.findById(anonymous.getValue()));
       assertEquals("/search?q=abc", stored.getAttribute("savedRequest"));
       assertEquals("02".repeat(32), stored.getAttribute("csrfToken"));
       var denied = new MockHttpServletResponse();
       a.run(
-          raw("POST", "/notifications/1/cancel", anonymous, "02".repeat(32)),
+          raw(FIXTURE_POST_E46D3AE9, "/notifications/1/cancel", anonymous, "02".repeat(32)),
           denied,
           (r, s) -> fail("no replay"));
       assertEquals(403, denied.getStatus());
-      assertNull(denied.getHeader("Location"));
+      assertNull(denied.getHeader(FIXTURE_LOCATION_FB077BAD));
       assertEquals(
           "/search?q=abc",
           Objects.requireNonNull(a.adapter.findById(anonymous.getValue()))
               .getAttribute("savedRequest"));
       var loggedIn = new MockHttpServletResponse();
       a.run(
-          raw("POST", "/login", anonymous, "02".repeat(32)),
+          raw(FIXTURE_POST_E46D3AE9, FIXTURE_LOGIN_F843C044, anonymous, "02".repeat(32)),
           loggedIn,
           (r, s) -> fail("Login handler"));
       assertEquals(302, loggedIn.getStatus());
-      assertEquals("/search?q=abc", loggedIn.getHeader("Location"));
+      assertEquals("/search?q=abc", loggedIn.getHeader(FIXTURE_LOCATION_FB077BAD));
       var user = Objects.requireNonNull(loggedIn.getCookie("SCHUBERT_NK_SESSION"));
       assertNull(a.adapter.findById(anonymous.getValue()));
       var count = new AtomicInteger();
       a.run(
-          raw("GET", "/search?q=abc", user, null),
+          raw(FIXTURE_GET_04F32A7E, "/search?q=abc", user, null),
           new MockHttpServletResponse(),
           (r, s) -> {
             assertEquals(
-                "reader", SecurityContextHolder.getContext().getAuthentication().getName());
+                FIXTURE_READER_F734AAEA,
+                SecurityContextHolder.getContext().getAuthentication().getName());
             count.incrementAndGet();
             assertSame(
                 r, a.cache.getMatchingRequest((HttpServletRequest) r, (HttpServletResponse) s));
           });
       var forbidden = new MockHttpServletResponse();
-      a.run(raw("GET", "/admin/users", user, null), forbidden, (r, s) -> fail("USER cannot enter"));
+      a.run(
+          raw(FIXTURE_GET_04F32A7E, FIXTURE_ADMIN_USERS_2C687608, user, null),
+          forbidden,
+          (r, s) -> fail("USER cannot enter"));
       assertEquals(403, forbidden.getStatus());
       var admin = a.adapter.createSession();
       admin.setAttribute("principal", principal(UserRole.ADMIN, "administrator"));
       a.run(
-          raw("GET", "/admin/users", new Cookie("SCHUBERT_NK_SESSION", admin.getId()), null),
+          raw(
+              FIXTURE_GET_04F32A7E,
+              FIXTURE_ADMIN_USERS_2C687608,
+              new Cookie("SCHUBERT_NK_SESSION", admin.getId()),
+              null),
           new MockHttpServletResponse(),
           (r, s) -> count.incrementAndGet());
       assertEquals(2, count.get());
@@ -336,7 +370,7 @@ class SessionAccessFailureTest {
       assertEquals(
           List.of("UNAUTHENTICATED", "UNAUTHENTICATED", "AUTHENTICATED", "ROLE"),
           a.log.events.stream()
-              .map(e -> e.getAsJsonObject("details").get("reason").getAsString())
+              .map(e -> e.getAsJsonObject(FIXTURE_DETAILS_521BCB5E).get("reason").getAsString())
               .toList());
       assertNull(SecurityContextHolder.getContext().getAuthentication());
     }
@@ -352,14 +386,19 @@ class SessionAccessFailureTest {
         jobs.add(
             () -> {
               try {
-                var r = a.mock(n % 3 == 0 ? "GET" : "POST", "/admin/users");
+                var r =
+                    a.mock(
+                        n % 3 == 0 ? FIXTURE_GET_04F32A7E : FIXTURE_POST_E46D3AE9,
+                        FIXTURE_ADMIN_USERS_2C687608);
                 var s = new MockHttpServletResponse();
                 if (n % 3 == 2) {
-                  setPrincipal(principal(UserRole.USER, "reader" + n));
+                  setPrincipal(principal(UserRole.USER, FIXTURE_READER_F734AAEA + n));
                   a.handler.handle(r, s, secretDenied());
                 } else a.handler.commence(r, s, secretAuth());
                 assertEquals(n % 3 == 0 ? 302 : 403, s.getStatus());
-                assertEquals(n % 3 == 0 ? "/login" : null, s.getHeader("Location"));
+                assertEquals(
+                    n % 3 == 0 ? FIXTURE_LOGIN_F843C044 : null,
+                    s.getHeader(FIXTURE_LOCATION_FB077BAD));
                 String id = WebRequestContext.require(r).requestId().toString();
                 var events =
                     a.log.events.stream()
@@ -367,8 +406,10 @@ class SessionAccessFailureTest {
                         .toList();
                 assertEquals(1, events.size());
                 if (n % 3 == 2)
-                  assertEquals("reader" + n, events.getFirst().get("actorUsername").getAsString());
-                else assertFalse(events.getFirst().has("actorUsername"));
+                  assertEquals(
+                      FIXTURE_READER_F734AAEA + n,
+                      events.getFirst().get(FIXTURE_ACTORUSERNAME_538489F0).getAsString());
+                else assertFalse(events.getFirst().has(FIXTURE_ACTORUSERNAME_538489F0));
               } finally {
                 SecurityContextHolder.clearContext();
               }
@@ -387,13 +428,13 @@ class SessionAccessFailureTest {
     var s = new MockHttpServletResponse();
     a.handler.commence(r, s, secretAuth());
     assertEquals(403, s.getStatus());
-    assertNull(s.getHeader("Location"));
+    assertNull(s.getHeader(FIXTURE_LOCATION_FB077BAD));
     assertNull(s.getErrorMessage());
     assertNull(r.getSession(false));
   }
 
   private static BadCredentialsException secretAuth() {
-    return new BadCredentialsException("private") {
+    return new BadCredentialsException(FIXTURE_PRIVATE_24ED6504) {
       @Override
       public String getMessage() {
         throw new AssertionError("diagnostic");
@@ -407,7 +448,7 @@ class SessionAccessFailureTest {
   }
 
   private static AccessDeniedException secretDenied() {
-    return new AccessDeniedException("private") {
+    return new AccessDeniedException(FIXTURE_PRIVATE_24ED6504) {
       @Override
       public String getMessage() {
         throw new AssertionError("diagnostic");
@@ -447,8 +488,8 @@ class SessionAccessFailureTest {
     r.setContentType("application/x-www-form-urlencoded");
     if (cookie != null) r.setCookies(cookie);
     if (csrf != null) r.addParameter("_csrf", csrf);
-    if (location.equals("/login")) {
-      r.addParameter("username", "reader");
+    if (location.equals(FIXTURE_LOGIN_F843C044)) {
+      r.addParameter("username", FIXTURE_READER_F734AAEA);
       r.addParameter("password", "p");
     }
     return r;

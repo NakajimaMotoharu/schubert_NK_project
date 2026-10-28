@@ -48,6 +48,18 @@ import org.springframework.security.core.context.SecurityContextHolder;
  * SS311/313/314/342/351/352; PG-D-113.
  */
 class WebSecurityChainTest {
+  private static final String FIXTURE_0000_876EEFE0 = "0000";
+  private static final String FIXTURE_USER_2DED8884 = "USER";
+  private static final String FIXTURE_GET_04F32A7E = "GET";
+  private static final String FIXTURE_LOGIN_F843C044 = "/login";
+  private static final String FIXTURE_ADMIN_C4BB3010 = "ADMIN";
+  private static final String FIXTURE_LOCATION_1D147FF5 = "location";
+  private static final String FIXTURE_TOKEN_190FC7FC = "TOKEN:";
+  private static final String FIXTURE_POST_E46D3AE9 = "POST";
+  private static final String FIXTURE_READER_F734AAEA = "reader";
+  private static final String FIXTURE_0106_EF3D3B45 = "0106";
+  private static final String FIXTURE_CSRF_2949BEA6 = "CSRF";
+  private static final String FIXTURE_SEARCH_F32C67A7 = "/search";
   private static WebLogDatabaseFixture db;
   @TempDir Path root;
 
@@ -74,7 +86,9 @@ class WebSecurityChainTest {
     try (var f = new EncryptedWebSessionRepositoryTest.Fixture(db)) {
       f.clock.value = Instant.now();
       var adapter = new SpringEncryptedSessionRepository(f.repository, f.clock);
-      var api = new SessionFormLoginTest.Api("0000", "USER", "0000", 0);
+      var api =
+          new SessionFormLoginTest.Api(
+              FIXTURE_0000_876EEFE0, FIXTURE_USER_2DED8884, FIXTURE_0000_876EEFE0, 0);
       var audit = new WebSecurityAudit(new SessionLoginHandlerTest.Log(), f.clock, "pt", "pt");
       var factory = new WebSecurityFilterFactory();
       assertThrows(
@@ -91,7 +105,7 @@ class WebSecurityChainTest {
       assertNotSame(filter, factory.create(adapter, api.provider, audit, UUID::randomUUID));
       filter.init(new MockFilterConfig("businessSecurity"));
       try {
-        var r = new MockHttpServletRequest("GET", "/login");
+        var r = new MockHttpServletRequest(FIXTURE_GET_04F32A7E, FIXTURE_LOGIN_F843C044);
         r.setRemoteAddr("127.0.0.1");
         r.addHeader("X-Forwarded-For", "203.0.113.1");
         r.addHeader("X-Forwarded-Proto", "https");
@@ -121,33 +135,43 @@ class WebSecurityChainTest {
 
   @Test
   void web132RealHttpLoginReturnsToSavedScreen() throws Exception {
-    for (String role : List.of("USER", "ADMIN"))
-      for (String code : List.of("0000", "0200")) {
+    for (String role : List.of(FIXTURE_USER_2DED8884, FIXTURE_ADMIN_C4BB3010))
+      for (String code : List.of(FIXTURE_0000_876EEFE0, "0200")) {
         reset();
-        var api = new SessionFormLoginTest.Api(code, role, "0000", 0);
+        var api = new SessionFormLoginTest.Api(code, role, FIXTURE_0000_876EEFE0, 0);
         try (var server = server(api, false)) {
-          var first = server.send("GET", "/search?q=abc", null, null, true);
+          var first = server.send(FIXTURE_GET_04F32A7E, "/search?q=abc", null, null, true);
           assertEquals(302, first.statusCode());
-          assertEquals("/login", first.headers().firstValue("location").orElseThrow());
+          assertEquals(
+              FIXTURE_LOGIN_F843C044,
+              first.headers().firstValue(FIXTURE_LOCATION_1D147FF5).orElseThrow());
           String anonymous = cookie(first);
-          var login = server.send("GET", "/login", anonymous, null, true);
+          var login =
+              server.send(FIXTURE_GET_04F32A7E, FIXTURE_LOGIN_F843C044, anonymous, null, true);
           assertEquals(200, login.statusCode());
-          assertEquals("TOKEN:" + "02".repeat(32), login.body());
+          assertEquals(FIXTURE_TOKEN_190FC7FC + "02".repeat(32), login.body());
           var success =
-              server.send("POST", "/login", anonymous, body("02".repeat(32), "reader", "p"), true);
+              server.send(
+                  FIXTURE_POST_E46D3AE9,
+                  FIXTURE_LOGIN_F843C044,
+                  anonymous,
+                  body("02".repeat(32), FIXTURE_READER_F734AAEA, "p"),
+                  true);
           assertEquals(302, success.statusCode());
-          assertEquals("/search?q=abc", success.headers().firstValue("location").orElseThrow());
+          assertEquals(
+              "/search?q=abc",
+              success.headers().firstValue(FIXTURE_LOCATION_1D147FF5).orElseThrow());
           String current = cookie(success);
           assertNotEquals(anonymous, current);
           var adapter = new SpringEncryptedSessionRepository(server.f.repository, server.f.clock);
           assertNull(adapter.findById(value(anonymous)));
           SessionPrincipal principal =
               Objects.requireNonNull(adapter.findById(value(current))).getAttribute("principal");
-          assertEquals("reader", principal.username());
+          assertEquals(FIXTURE_READER_F734AAEA, principal.username());
           assertEquals(role, principal.role().wireValue());
-          var restored = server.send("GET", "/search?q=abc", current, null, true);
+          var restored = server.send(FIXTURE_GET_04F32A7E, "/search?q=abc", current, null, true);
           assertEquals(200, restored.statusCode());
-          assertEquals("TOKEN:" + "04".repeat(32), restored.body());
+          assertEquals(FIXTURE_TOKEN_190FC7FC + "04".repeat(32), restored.body());
           assertNull(
               Objects.requireNonNull(adapter.findById(value(current)))
                   .getAttribute("savedRequest"));
@@ -170,33 +194,44 @@ class WebSecurityChainTest {
 
   @Test
   void web133RealHttpFailuresNeverGrantAuthentication() throws Exception {
-    for (String code : List.of("0101", "0106", "9000", "JMS", "CSRF")) {
+    for (String code :
+        List.of("0101", FIXTURE_0106_EF3D3B45, "9000", "JMS", FIXTURE_CSRF_2949BEA6)) {
       reset();
       var api =
           new SessionFormLoginTest.Api(
-              code.equals("CSRF") ? "0000" : code, "USER", "0000", code.equals("0106") ? 123 : 0);
+              code.equals(FIXTURE_CSRF_2949BEA6) ? FIXTURE_0000_876EEFE0 : code,
+              FIXTURE_USER_2DED8884,
+              FIXTURE_0000_876EEFE0,
+              code.equals(FIXTURE_0106_EF3D3B45) ? 123 : 0);
       try (var server = server(api, false)) {
-        var page = server.send("GET", "/login", null, null, true);
+        var page = server.send(FIXTURE_GET_04F32A7E, FIXTURE_LOGIN_F843C044, null, null, true);
         String anonymous = cookie(page);
         var failed =
             server.send(
-                "POST",
-                "/login",
+                FIXTURE_POST_E46D3AE9,
+                FIXTURE_LOGIN_F843C044,
                 anonymous,
-                body(code.equals("CSRF") ? "ff".repeat(32) : "02".repeat(32), "reader", "p"),
+                body(
+                    code.equals(FIXTURE_CSRF_2949BEA6) ? "ff".repeat(32) : "02".repeat(32),
+                    FIXTURE_READER_F734AAEA,
+                    "p"),
                 true);
         int status =
-            code.equals("0101") || code.equals("0106") ? 302 : code.equals("CSRF") ? 403 : 503;
+            code.equals("0101") || code.equals(FIXTURE_0106_EF3D3B45)
+                ? 302
+                : code.equals(FIXTURE_CSRF_2949BEA6) ? 403 : 503;
         assertEquals(status, failed.statusCode());
         headers(failed);
         assertEquals(
-            code.equals("0106") ? Optional.of("123") : Optional.empty(),
+            code.equals(FIXTURE_0106_EF3D3B45) ? Optional.of("123") : Optional.empty(),
             failed.headers().firstValue("retry-after"));
         assertEquals(
             code.equals("0101")
                 ? Optional.of("/login?error")
-                : code.equals("0106") ? Optional.of("/login?locked") : Optional.empty(),
-            failed.headers().firstValue("location"));
+                : code.equals(FIXTURE_0106_EF3D3B45)
+                    ? Optional.of("/login?locked")
+                    : Optional.empty(),
+            failed.headers().firstValue(FIXTURE_LOCATION_1D147FF5));
         if (status != 302) assertEquals("error:" + status, failed.body());
         else assertEquals("", failed.body());
         assertTrue(failed.headers().allValues("set-cookie").isEmpty());
@@ -205,7 +240,7 @@ class WebSecurityChainTest {
                     new SpringEncryptedSessionRepository(server.f.repository, server.f.clock)
                         .findById(value(anonymous)))
                 .getAttribute("principal"));
-        assertEquals(code.equals("CSRF") ? 0 : 1, api.sends.get());
+        assertEquals(code.equals(FIXTURE_CSRF_2949BEA6) ? 0 : 1, api.sends.get());
         assertEquals(0, server.context.getManager().getActiveSessions());
         assertEquals(code.equals("9000") || code.equals("JMS") ? 0 : 1, server.log.events.size());
       }
@@ -215,17 +250,17 @@ class WebSecurityChainTest {
 
   @Test
   void web134RealHttpRoleAndErrorDispatchRemainBound() throws Exception {
-    for (String role : List.of("USER", "ADMIN")) {
+    for (String role : List.of(FIXTURE_USER_2DED8884, FIXTURE_ADMIN_C4BB3010)) {
       reset();
-      var api = new SessionFormLoginTest.Api("0000", role, "0000", 0);
+      var api = new SessionFormLoginTest.Api(FIXTURE_0000_876EEFE0, role, FIXTURE_0000_876EEFE0, 0);
       try (var server = server(api, false)) {
-        var media = server.send("GET", "/audio/1", null, null, true);
+        var media = server.send(FIXTURE_GET_04F32A7E, "/audio/1", null, null, true);
         assertEquals(403, media.statusCode());
         assertEquals("error:403", media.body());
-        assertTrue(media.headers().allValues("location").isEmpty());
+        assertTrue(media.headers().allValues(FIXTURE_LOCATION_1D147FF5).isEmpty());
         var ajax =
             server.client.send(
-                HttpRequest.newBuilder(server.base.resolve("/search"))
+                HttpRequest.newBuilder(server.base.resolve(FIXTURE_SEARCH_F32C67A7))
                     .timeout(Duration.ofSeconds(5))
                     .header("X-Forwarded-For", "203.0.113.1")
                     .header("X-Forwarded-Proto", "https")
@@ -234,29 +269,39 @@ class WebSecurityChainTest {
                     .build(),
                 HttpResponse.BodyHandlers.ofString());
         assertEquals(403, ajax.statusCode());
-        assertTrue(ajax.headers().allValues("location").isEmpty());
-        var get = server.send("GET", "/login", null, null, true);
+        assertTrue(ajax.headers().allValues(FIXTURE_LOCATION_1D147FF5).isEmpty());
+        var get = server.send(FIXTURE_GET_04F32A7E, FIXTURE_LOGIN_F843C044, null, null, true);
         String anonymous = cookie(get);
         var invalidMethod =
-            server.send("PUT", "/login", anonymous, body("02".repeat(32), "reader", "p"), true);
+            server.send(
+                "PUT",
+                FIXTURE_LOGIN_F843C044,
+                anonymous,
+                body("02".repeat(32), FIXTURE_READER_F734AAEA, "p"),
+                true);
         assertEquals(403, invalidMethod.statusCode());
         assertEquals(0, api.sends.get());
         var login =
-            server.send("POST", "/login", anonymous, body("02".repeat(32), "reader", "p"), true);
+            server.send(
+                FIXTURE_POST_E46D3AE9,
+                FIXTURE_LOGIN_F843C044,
+                anonymous,
+                body("02".repeat(32), FIXTURE_READER_F734AAEA, "p"),
+                true);
         String current = cookie(login);
         for (String path : List.of("/admin/users", "/logs")) {
-          var response = server.send("GET", path, current, null, true);
+          var response = server.send(FIXTURE_GET_04F32A7E, path, current, null, true);
           headers(response);
-          assertEquals(role.equals("USER") ? 403 : 200, response.statusCode());
-          if (role.equals("USER")) {
+          assertEquals(role.equals(FIXTURE_USER_2DED8884) ? 403 : 200, response.statusCode());
+          if (role.equals(FIXTURE_USER_2DED8884)) {
             assertEquals("error:403", response.body());
             assertEquals(
                 server.log.events.getLast().get("requestId").getAsString(),
                 server.errorIds.getLast().toString());
           }
         }
-        assertEquals(role.equals("USER") ? 6 : 4, server.log.events.size());
-        assertEquals(role.equals("USER") ? 5 : 3, server.errorCalls.get());
+        assertEquals(role.equals(FIXTURE_USER_2DED8884) ? 6 : 4, server.log.events.size());
+        assertEquals(role.equals(FIXTURE_USER_2DED8884) ? 5 : 3, server.errorCalls.get());
         assertEquals(7, server.ids.get());
         assertEquals(0, server.context.getManager().getActiveSessions());
       }
@@ -266,16 +311,18 @@ class WebSecurityChainTest {
 
   @Test
   void web135FirewallRejectionRetainsSafeHeaders() throws Exception {
-    var api = new SessionFormLoginTest.Api("0000", "USER", "0000", 0);
+    var api =
+        new SessionFormLoginTest.Api(
+            FIXTURE_0000_876EEFE0, FIXTURE_USER_2DED8884, FIXTURE_0000_876EEFE0, 0);
     try (var server = server(api, false)) {
-      var proxy = server.send("GET", "/search", null, null, false);
+      var proxy = server.send(FIXTURE_GET_04F32A7E, FIXTURE_SEARCH_F32C67A7, null, null, false);
       assertEquals(403, proxy.statusCode());
       assertEquals("", proxy.body());
       headers(proxy);
       assertEquals(1, server.log.events.size());
       assertEquals(1, server.ids.get());
       for (String path : List.of("/search;session=private", "/login;private=value", "/admin/%25")) {
-        var rejected = server.send("GET", path, null, null, true);
+        var rejected = server.send(FIXTURE_GET_04F32A7E, path, null, null, true);
         assertEquals(400, rejected.statusCode());
         assertEquals("error:400", rejected.body());
         headers(rejected);
@@ -295,7 +342,8 @@ class WebSecurityChainTest {
 
   @Test
   void web136ConcurrentHttpChainsKeepSessionsAndAuditIsolated() throws Exception {
-    var api = new SessionFormLoginTest.Api("0000", "DYNAMIC", "0000", 0);
+    var api =
+        new SessionFormLoginTest.Api(FIXTURE_0000_876EEFE0, "DYNAMIC", FIXTURE_0000_876EEFE0, 0);
     try (var server = server(api, true);
         var pool = Executors.newFixedThreadPool(8)) {
       var currentIds = ConcurrentHashMap.<String>newKeySet();
@@ -304,26 +352,29 @@ class WebSecurityChainTest {
         int n = i;
         jobs.add(
             () -> {
-              var page = server.send("GET", "/login", null, null, true);
+              var page =
+                  server.send(FIXTURE_GET_04F32A7E, FIXTURE_LOGIN_F843C044, null, null, true);
               assertEquals(200, page.statusCode());
               String anonymous = cookie(page);
               String csrf = page.body().substring(6);
               var login =
                   server.send(
-                      "POST",
-                      "/login",
+                      FIXTURE_POST_E46D3AE9,
+                      FIXTURE_LOGIN_F843C044,
                       anonymous,
                       body(csrf, "user" + n, "password-user" + n),
                       true);
               assertEquals(302, login.statusCode());
-              assertEquals("/", login.headers().firstValue("location").orElseThrow());
+              assertEquals(
+                  "/", login.headers().firstValue(FIXTURE_LOCATION_1D147FF5).orElseThrow());
               String current = cookie(login);
               assertNotEquals(anonymous, current);
               assertTrue(currentIds.add(current));
-              var get = server.send("GET", "/search", current, null, true);
+              var get =
+                  server.send(FIXTURE_GET_04F32A7E, FIXTURE_SEARCH_F32C67A7, current, null, true);
               assertEquals(200, get.statusCode());
-              assertNotEquals("TOKEN:" + csrf, get.body());
-              var role = server.send("GET", "/admin/users", current, null, true);
+              assertNotEquals(FIXTURE_TOKEN_190FC7FC + csrf, get.body());
+              var role = server.send(FIXTURE_GET_04F32A7E, "/admin/users", current, null, true);
               assertEquals(n % 2 == 0 ? 403 : 200, role.statusCode());
               headers(role);
               SessionPrincipal p =
@@ -332,7 +383,9 @@ class WebSecurityChainTest {
                               .findById(value(current)))
                       .getAttribute("principal");
               assertEquals("user" + n, p.username());
-              assertEquals(n % 2 == 0 ? "USER" : "ADMIN", p.role().wireValue());
+              assertEquals(
+                  n % 2 == 0 ? FIXTURE_USER_2DED8884 : FIXTURE_ADMIN_C4BB3010,
+                  p.role().wireValue());
               return null;
             });
       }
@@ -356,27 +409,34 @@ class WebSecurityChainTest {
 
   @Test
   void web137ServletPrincipalAndProgrammaticAuthStayClosed() throws Exception {
-    for (String role : List.of("USER", "ADMIN")) {
+    for (String role : List.of(FIXTURE_USER_2DED8884, FIXTURE_ADMIN_C4BB3010)) {
       reset();
-      var api = new SessionFormLoginTest.Api("0000", role, "0000", 0);
+      var api = new SessionFormLoginTest.Api(FIXTURE_0000_876EEFE0, role, FIXTURE_0000_876EEFE0, 0);
       try (var server = server(api, false)) {
-        var first = server.send("GET", "/login", null, null, true);
+        var first = server.send(FIXTURE_GET_04F32A7E, FIXTURE_LOGIN_F843C044, null, null, true);
         var login =
             server.send(
-                "POST", "/login", cookie(first), body("02".repeat(32), "reader", "p"), true);
-        var response = server.send("GET", "/fixture-principal", cookie(login), null, true);
+                FIXTURE_POST_E46D3AE9,
+                FIXTURE_LOGIN_F843C044,
+                cookie(first),
+                body("02".repeat(32), FIXTURE_READER_F734AAEA, "p"),
+                true);
+        var response =
+            server.send(FIXTURE_GET_04F32A7E, "/fixture-principal", cookie(login), null, true);
         assertEquals(200, response.statusCode());
-        assertEquals("reader", response.body());
-        var programmatic = server.send("GET", "/fixture-programmatic", cookie(login), null, true);
+        assertEquals(FIXTURE_READER_F734AAEA, response.body());
+        var programmatic =
+            server.send(FIXTURE_GET_04F32A7E, "/fixture-programmatic", cookie(login), null, true);
         assertEquals(200, programmatic.statusCode());
         assertEquals(
-            role.equals("USER")
+            role.equals(FIXTURE_USER_2DED8884)
                 ? "reader:FORM:true:false:true:false:false"
                 : "reader:FORM:false:true:false:true:false",
             programmatic.body());
-        var stillAuthenticated = server.send("GET", "/search", cookie(login), null, true);
+        var stillAuthenticated =
+            server.send(FIXTURE_GET_04F32A7E, FIXTURE_SEARCH_F32C67A7, cookie(login), null, true);
         assertEquals(200, stillAuthenticated.statusCode());
-        assertEquals("TOKEN:" + "04".repeat(32), stillAuthenticated.body());
+        assertEquals(FIXTURE_TOKEN_190FC7FC + "04".repeat(32), stillAuthenticated.body());
         assertTrue(programmatic.headers().allValues("set-cookie").isEmpty());
         assertEquals(1, rows());
         assertEquals(0, server.context.getManager().getActiveSessions());

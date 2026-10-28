@@ -51,6 +51,15 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** PT-JMS-005/006/007/009 synchronous API listener transaction matrix. */
 final class SyncRequestListenerTest {
+  private static final String FIXTURE_VM_0_0C76084A = "vm://0";
+  private static final String FIXTURE_QSBREQ01_F9A27626 = "QSBREQ01";
+  private static final String FIXTURE_NKLAYOUTID_EB6996DB = "NKLayoutID";
+  private static final String FIXTURE_NKMESSAGEID_1B669E52 = "NKMessageID";
+  private static final String FIXTURE_LOGREQ01_A98AF5F3 = "LOGREQ01";
+  private static final String FIXTURE_001_A3FEAA64 = "001";
+  private static final String FIXTURE_UNAVAILABLE_30F591F0 = "UNAVAILABLE";
+  private static final String FIXTURE_NKDELIVERYCOUNT_6AE5C7CF = "NKDeliveryCount";
+  private static final String FIXTURE_ID_1_9FB5E8A2 = "ID:1";
   private static final UUID REQUEST_ID = UUID.fromString("00000000-0000-0000-0000-000000000001");
   private static final UUID RESPONSE_ID = UUID.fromString("00000000-0000-0000-0000-000000000002");
   private static final Instant NOW = Instant.parse("2026-09-03T00:00:00Z");
@@ -60,14 +69,14 @@ final class SyncRequestListenerTest {
   @DisplayName("PT-JMS-QSB-A-API: independent Q/A and S/A golden bytes on actual sync queues")
   void questionAcceptanceUsesExistingPhysicalSyncQueues(@TempDir Path root) throws Exception {
     var broker = start(root);
-    try (var factory = new ActiveMQConnectionFactory("vm://0");
+    try (var factory = new ActiveMQConnectionFactory(FIXTURE_VM_0_0C76084A);
         var producer = factory.createContext(JMSContext.AUTO_ACKNOWLEDGE);
         var receiving = factory.createContext(JMSContext.SESSION_TRANSACTED);
         var observing = factory.createContext(JMSContext.AUTO_ACKNOWLEDGE);
         var requests = receiving.createConsumer(queue(BrokerTopology.SYNC_REQUEST));
         var replies = observing.createConsumer(queue(BrokerTopology.SYNC_REPLY_WEB));
         var dlq = observing.createConsumer(queue(BrokerTopology.DEAD_LETTER))) {
-      byte[] input = wire('Q', "QSBREQ01", REQUEST_ID, REQUEST_ID, 4144, false);
+      byte[] input = wire('Q', FIXTURE_QSBREQ01_F9A27626, REQUEST_ID, REQUEST_ID, 4144, false);
       input[23] = 'A';
       ascii(input, 256, "independent question");
       ascii(input, 4352, "00000000-0000-0000-0000-000000000004");
@@ -81,19 +90,19 @@ final class SyncRequestListenerTest {
           new SyncRequestListener(
               request -> {
                 calls.incrementAndGet();
-                assertEquals("QSBREQ01", request.header().layoutId().value());
+                assertEquals(FIXTURE_QSBREQ01_F9A27626, request.header().layoutId().value());
                 assertEquals(InteractionKind.ASYNC_ACCEPTANCE, request.header().interactionKind());
                 assertArrayEquals(
                     Arrays.copyOfRange(input, 256, 4400), request.payload().copyData());
                 return expected;
               },
               CLOCK);
-      sendRequest(producer, input, "QSBREQ01");
+      sendRequest(producer, input, FIXTURE_QSBREQ01_F9A27626);
       listener.onMessage(receiving, required(requests.receive(5000)));
       var reply = assertInstanceOf(BytesMessage.class, replies.receive(5000));
       assertArrayEquals(expected, body(reply));
-      assertEquals("QSBRSP01", reply.getStringProperty("NKLayoutID"));
-      assertEquals(RESPONSE_ID.toString(), reply.getStringProperty("NKMessageID"));
+      assertEquals("QSBRSP01", reply.getStringProperty(FIXTURE_NKLAYOUTID_EB6996DB));
+      assertEquals(RESPONSE_ID.toString(), reply.getStringProperty(FIXTURE_NKMESSAGEID_1B669E52));
       assertEquals(REQUEST_ID.toString(), reply.getJMSCorrelationID());
       assertEquals(DeliveryMode.PERSISTENT, reply.getJMSDeliveryMode());
       assertTrue(reply.getJMSExpiration() > System.currentTimeMillis());
@@ -102,13 +111,13 @@ final class SyncRequestListenerTest {
       for (char wrong : new char[] {'S', 'I'}) {
         byte[] invalid = input.clone();
         invalid[23] = (byte) wrong;
-        sendRequest(producer, invalid, "QSBREQ01");
+        sendRequest(producer, invalid, FIXTURE_QSBREQ01_F9A27626);
         assertThrows(
             CommittedFatalInboundException.class,
             () -> listener.onMessage(receiving, required(requests.receive(5000))));
         assertNotNull(dlq.receive(5000));
       }
-      sendRequest(producer, input, "LOGREQ01");
+      sendRequest(producer, input, FIXTURE_LOGREQ01_A98AF5F3);
       assertThrows(
           CommittedFatalInboundException.class,
           () -> listener.onMessage(receiving, required(requests.receive(5000))));
@@ -131,7 +140,7 @@ final class SyncRequestListenerTest {
   @DisplayName("PT-JMS-005/007 request ACK and reply become visible in one caller commit")
   void validRequestDispatchesAndCommitsReplyWithOriginalAck(@TempDir Path root) throws Exception {
     EmbeddedActiveMQ broker = start(root);
-    try (ActiveMQConnectionFactory factory = new ActiveMQConnectionFactory("vm://0");
+    try (ActiveMQConnectionFactory factory = new ActiveMQConnectionFactory(FIXTURE_VM_0_0C76084A);
         JMSContext producer = factory.createContext(JMSContext.AUTO_ACKNOWLEDGE);
         JMSContext listenerContext = factory.createContext(JMSContext.SESSION_TRANSACTED);
         JMSContext observer = factory.createContext(JMSContext.AUTO_ACKNOWLEDGE);
@@ -144,7 +153,7 @@ final class SyncRequestListenerTest {
           new SyncRequestListener(
               request -> {
                 dispatches.incrementAndGet();
-                assertEquals("LOGREQ01", request.header().layoutId().value());
+                assertEquals(FIXTURE_LOGREQ01_A98AF5F3, request.header().layoutId().value());
                 assertEquals(MessageKind.REQUEST, request.header().messageKind());
                 assertEquals(InteractionKind.SYNCHRONOUS, request.header().interactionKind());
                 assertEquals(0, request.payload().dataLength());
@@ -160,9 +169,9 @@ final class SyncRequestListenerTest {
       BytesMessage reply = assertInstanceOf(BytesMessage.class, replies.receive(5_000));
       assertArrayEquals(responseBody, body(reply));
       assertEquals(REQUEST_ID.toString(), reply.getJMSCorrelationID());
-      assertEquals(RESPONSE_ID.toString(), reply.getStringProperty("NKMessageID"));
-      assertEquals("LOGRSP01", reply.getStringProperty("NKLayoutID"));
-      assertEquals("001", reply.getStringProperty("NKProtocolVersion"));
+      assertEquals(RESPONSE_ID.toString(), reply.getStringProperty(FIXTURE_NKMESSAGEID_1B669E52));
+      assertEquals("LOGRSP01", reply.getStringProperty(FIXTURE_NKLAYOUTID_EB6996DB));
+      assertEquals(FIXTURE_001_A3FEAA64, reply.getStringProperty("NKProtocolVersion"));
       assertEquals(DeliveryMode.PERSISTENT, reply.getJMSDeliveryMode());
     } finally {
       broker.stop();
@@ -173,7 +182,7 @@ final class SyncRequestListenerTest {
   @DisplayName("PT-JMS-007 temporary processor failure rolls back the request delivery")
   void processorFailureRollsBackAndRequestIsRedelivered(@TempDir Path root) throws Exception {
     EmbeddedActiveMQ broker = start(root);
-    try (ActiveMQConnectionFactory factory = new ActiveMQConnectionFactory("vm://0");
+    try (ActiveMQConnectionFactory factory = new ActiveMQConnectionFactory(FIXTURE_VM_0_0C76084A);
         JMSContext producer = factory.createContext(JMSContext.AUTO_ACKNOWLEDGE);
         JMSContext listenerContext = factory.createContext(JMSContext.SESSION_TRANSACTED);
         JMSConsumer requests = listenerContext.createConsumer(queue(BrokerTopology.SYNC_REQUEST))) {
@@ -204,7 +213,7 @@ final class SyncRequestListenerTest {
   @DisplayName("PT-JMS-006/009 invalid request type is committed to DLQ before fatal signal")
   void invalidRequestIsSanitizedAckedAndCommittedToDlq(@TempDir Path root) throws Exception {
     EmbeddedActiveMQ broker = start(root);
-    try (ActiveMQConnectionFactory factory = new ActiveMQConnectionFactory("vm://0");
+    try (ActiveMQConnectionFactory factory = new ActiveMQConnectionFactory(FIXTURE_VM_0_0C76084A);
         JMSContext producer = factory.createContext(JMSContext.AUTO_ACKNOWLEDGE);
         JMSContext listenerContext = factory.createContext(JMSContext.SESSION_TRANSACTED);
         JMSContext observer = factory.createContext(JMSContext.AUTO_ACKNOWLEDGE);
@@ -212,8 +221,8 @@ final class SyncRequestListenerTest {
         JMSConsumer dlq = observer.createConsumer(queue(BrokerTopology.DEAD_LETTER))) {
       TextMessage invalid = producer.createTextMessage("opaque synthetic invalid request");
       invalid.setJMSCorrelationID("invalid-correlation");
-      invalid.setStringProperty("NKMessageID", "invalid-message");
-      invalid.setStringProperty("NKLayoutID", "bad");
+      invalid.setStringProperty(FIXTURE_NKMESSAGEID_1B669E52, "invalid-message");
+      invalid.setStringProperty(FIXTURE_NKLAYOUTID_EB6996DB, "bad");
       invalid.setStringProperty("NKProtocolVersion", "999");
       invalid.setStringProperty("UnapprovedSecret", "must-not-be-copied");
       producer
@@ -242,16 +251,18 @@ final class SyncRequestListenerTest {
 
       TextMessage isolated = assertInstanceOf(TextMessage.class, dlq.receive(5_000));
       assertEquals("opaque synthetic invalid request", isolated.getText());
-      assertEquals("UNAVAILABLE", isolated.getJMSCorrelationID());
-      assertEquals("UNAVAILABLE", isolated.getStringProperty("NKMessageID"));
-      assertEquals("UNAVAILABLE", isolated.getStringProperty("NKCorrelationID"));
-      assertEquals("UNAVAILABLE", isolated.getStringProperty("NKLayoutID"));
+      assertEquals(FIXTURE_UNAVAILABLE_30F591F0, isolated.getJMSCorrelationID());
+      assertEquals(
+          FIXTURE_UNAVAILABLE_30F591F0, isolated.getStringProperty(FIXTURE_NKMESSAGEID_1B669E52));
+      assertEquals(FIXTURE_UNAVAILABLE_30F591F0, isolated.getStringProperty("NKCorrelationID"));
+      assertEquals(
+          FIXTURE_UNAVAILABLE_30F591F0, isolated.getStringProperty(FIXTURE_NKLAYOUTID_EB6996DB));
       assertEquals("nk.sync.request", isolated.getStringProperty("_AMQ_ORIG_ADDRESS"));
       assertEquals("nk.sync.request.q", isolated.getStringProperty("_AMQ_ORIG_QUEUE"));
       assertEquals("PROTOCOL_INVALID", isolated.getStringProperty("NKErrorCode"));
       assertEquals("API_SYNC", isolated.getStringProperty("NKDetectedBy"));
       assertEquals(NOW.toString(), isolated.getStringProperty("NKDetectedAt"));
-      assertEquals(1, isolated.getIntProperty("NKDeliveryCount"));
+      assertEquals(1, isolated.getIntProperty(FIXTURE_NKDELIVERYCOUNT_6AE5C7CF));
       assertFalse(isolated.propertyExists("UnapprovedSecret"));
     } finally {
       broker.stop();
@@ -281,14 +292,19 @@ final class SyncRequestListenerTest {
         new FatalDlqMetadata("PROTOCOL_INVALID", FatalDlqMetadata.DetectedBy.API_SYNC, NOW);
     ContextState context = new ContextState();
     MessageState valid =
-        messageState("ID:provider-1", REQUEST_ID.toString(), REQUEST_ID.toString(), "LOGREQ01", 2);
+        messageState(
+            "ID:provider-1",
+            REQUEST_ID.toString(),
+            REQUEST_ID.toString(),
+            FIXTURE_LOGREQ01_A98AF5F3,
+            2);
 
     sender.sendUntrusted(context.proxy(), valid.message, BrokerTopology.SYNC_REQUEST, fatal);
     assertEquals("ID:provider-1", valid.strings.get("NKOriginalTransportID"));
-    assertEquals(REQUEST_ID.toString(), valid.strings.get("NKMessageID"));
+    assertEquals(REQUEST_ID.toString(), valid.strings.get(FIXTURE_NKMESSAGEID_1B669E52));
     assertEquals(REQUEST_ID.toString(), valid.strings.get("NKCorrelationID"));
-    assertEquals("LOGREQ01", valid.strings.get("NKLayoutID"));
-    assertEquals(2, valid.integers.get("NKDeliveryCount"));
+    assertEquals(FIXTURE_LOGREQ01_A98AF5F3, valid.strings.get(FIXTURE_NKLAYOUTID_EB6996DB));
+    assertEquals(2, valid.integers.get(FIXTURE_NKDELIVERYCOUNT_6AE5C7CF));
     assertEquals("API_SYNC", valid.strings.get("NKDetectedBy"));
     assertEquals(DeliveryMode.PERSISTENT, context.deliveryMode);
     assertEquals(0L, context.timeToLive);
@@ -336,21 +352,31 @@ final class SyncRequestListenerTest {
 
     MessageState uppercase =
         messageState(
-            "ID:1", "AAAAAAAA-AAAA-AAAA-AAAA-AAAAAAAAAAAA", REQUEST_ID.toString(), "LOGREQ01", 1);
+            FIXTURE_ID_1_9FB5E8A2,
+            "AAAAAAAA-AAAA-AAAA-AAAA-AAAAAAAAAAAA",
+            REQUEST_ID.toString(),
+            FIXTURE_LOGREQ01_A98AF5F3,
+            1);
     sender.sendUntrusted(context.proxy(), uppercase.message, BrokerTopology.SYNC_REQUEST, fatal);
-    assertEquals("UNAVAILABLE", uppercase.strings.get("NKMessageID"));
+    assertEquals(FIXTURE_UNAVAILABLE_30F591F0, uppercase.strings.get(FIXTURE_NKMESSAGEID_1B669E52));
 
-    MessageState malformed = messageState("ID:1", "not-a-uuid", "not-a-uuid", "bad", null);
+    MessageState malformed =
+        messageState(FIXTURE_ID_1_9FB5E8A2, "not-a-uuid", "not-a-uuid", "bad", null);
     sender.sendUntrusted(context.proxy(), malformed.message, BrokerTopology.SYNC_REQUEST, fatal);
-    assertEquals("UNAVAILABLE", malformed.strings.get("NKMessageID"));
-    assertEquals("UNAVAILABLE", malformed.strings.get("NKCorrelationID"));
-    assertEquals("UNAVAILABLE", malformed.strings.get("NKLayoutID"));
-    assertEquals(1, malformed.integers.get("NKDeliveryCount"));
+    assertEquals(FIXTURE_UNAVAILABLE_30F591F0, malformed.strings.get(FIXTURE_NKMESSAGEID_1B669E52));
+    assertEquals(FIXTURE_UNAVAILABLE_30F591F0, malformed.strings.get("NKCorrelationID"));
+    assertEquals(FIXTURE_UNAVAILABLE_30F591F0, malformed.strings.get(FIXTURE_NKLAYOUTID_EB6996DB));
+    assertEquals(1, malformed.integers.get(FIXTURE_NKDELIVERYCOUNT_6AE5C7CF));
 
     MessageState zero =
-        messageState("ID:1", REQUEST_ID.toString(), REQUEST_ID.toString(), "LOGREQ01", 0);
+        messageState(
+            FIXTURE_ID_1_9FB5E8A2,
+            REQUEST_ID.toString(),
+            REQUEST_ID.toString(),
+            FIXTURE_LOGREQ01_A98AF5F3,
+            0);
     sender.sendUntrusted(context.proxy(), zero.message, BrokerTopology.SYNC_REQUEST, fatal);
-    assertEquals(1, zero.integers.get("NKDeliveryCount"));
+    assertEquals(1, zero.integers.get(FIXTURE_NKDELIVERYCOUNT_6AE5C7CF));
   }
 
   @Test
@@ -371,7 +397,12 @@ final class SyncRequestListenerTest {
     // Original isolation identity remains the cause; unconfirmed rollback is retained separately.
     ContextState confirmedIsolationContext = new ContextState();
     MessageState confirmedMessage =
-        messageState("ID:1", REQUEST_ID.toString(), REQUEST_ID.toString(), "LOGREQ01", 1);
+        messageState(
+            FIXTURE_ID_1_9FB5E8A2,
+            REQUEST_ID.toString(),
+            REQUEST_ID.toString(),
+            FIXTURE_LOGREQ01_A98AF5F3,
+            1);
     JMSException confirmedIsolationFailure = new JMSException("synthetic-confirmed-DLQ-read");
     confirmedMessage.transportReadFailure = confirmedIsolationFailure;
     assertSame(
@@ -392,7 +423,12 @@ final class SyncRequestListenerTest {
     JMSRuntimeException rollbackFailure = new JMSRuntimeException("synthetic-rollback-failure");
     checkedIsolationContext.rollbackFailure = rollbackFailure;
     MessageState checkedMessage =
-        messageState("ID:1", REQUEST_ID.toString(), REQUEST_ID.toString(), "LOGREQ01", 1);
+        messageState(
+            FIXTURE_ID_1_9FB5E8A2,
+            REQUEST_ID.toString(),
+            REQUEST_ID.toString(),
+            FIXTURE_LOGREQ01_A98AF5F3,
+            1);
     JMSException isolationFailure = new JMSException("synthetic-DLQ-read-failure");
     checkedMessage.transportReadFailure = isolationFailure;
     var failedIsolation =
@@ -420,7 +456,12 @@ final class SyncRequestListenerTest {
     JMSRuntimeException commitFailure = new JMSRuntimeException("synthetic-DLQ-commit-failure");
     commitIsolationContext.commitFailure = commitFailure;
     MessageState commitMessage =
-        messageState("ID:1", REQUEST_ID.toString(), REQUEST_ID.toString(), "LOGREQ01", 1);
+        messageState(
+            FIXTURE_ID_1_9FB5E8A2,
+            REQUEST_ID.toString(),
+            REQUEST_ID.toString(),
+            FIXTURE_LOGREQ01_A98AF5F3,
+            1);
     Throwable runtimeObserved =
         assertThrows(
                 dev.codex.schubert.nk.protocol.transport.FailedJmsIsolationException.class,
@@ -443,9 +484,14 @@ final class SyncRequestListenerTest {
       DlqSender sender, ContextState context, FatalDlqMetadata fatal, String transportId)
       throws Exception {
     MessageState state =
-        messageState(transportId, REQUEST_ID.toString(), REQUEST_ID.toString(), "LOGREQ01", 1);
+        messageState(
+            transportId,
+            REQUEST_ID.toString(),
+            REQUEST_ID.toString(),
+            FIXTURE_LOGREQ01_A98AF5F3,
+            1);
     sender.sendUntrusted(context.proxy(), state.message, BrokerTopology.SYNC_REQUEST, fatal);
-    assertEquals("UNAVAILABLE", state.strings.get("NKOriginalTransportID"));
+    assertEquals(FIXTURE_UNAVAILABLE_30F591F0, state.strings.get("NKOriginalTransportID"));
   }
 
   private static byte[] body(BytesMessage message) throws Exception {
@@ -459,7 +505,7 @@ final class SyncRequestListenerTest {
   }
 
   private static void sendRequest(JMSContext context, byte[] body) throws Exception {
-    sendRequest(context, body, "LOGREQ01");
+    sendRequest(context, body, FIXTURE_LOGREQ01_A98AF5F3);
   }
 
   private static void sendRequest(JMSContext context, byte[] body, String layout) throws Exception {
@@ -467,9 +513,9 @@ final class SyncRequestListenerTest {
     request.writeBytes(body);
     request.setJMSCorrelationID(REQUEST_ID.toString());
     request.setJMSReplyTo(new ActiveMQQueue(BrokerTopology.SYNC_REPLY_WEB.address()));
-    request.setStringProperty("NKMessageID", REQUEST_ID.toString());
-    request.setStringProperty("NKLayoutID", layout);
-    request.setStringProperty("NKProtocolVersion", "001");
+    request.setStringProperty(FIXTURE_NKMESSAGEID_1B669E52, REQUEST_ID.toString());
+    request.setStringProperty(FIXTURE_NKLAYOUTID_EB6996DB, layout);
+    request.setStringProperty("NKProtocolVersion", FIXTURE_001_A3FEAA64);
     context
         .createProducer()
         .setDeliveryMode(DeliveryMode.PERSISTENT)
@@ -520,8 +566,8 @@ final class SyncRequestListenerTest {
     MessageState state = new MessageState();
     state.transportId = transportId;
     state.correlationId = correlationId;
-    state.strings.put("NKMessageID", messageId);
-    state.strings.put("NKLayoutID", layoutId);
+    state.strings.put(FIXTURE_NKMESSAGEID_1B669E52, messageId);
+    state.strings.put(FIXTURE_NKLAYOUTID_EB6996DB, layoutId);
     if (deliveryCount != null) {
       state.integers.put("JMSXDeliveryCount", deliveryCount);
     }
@@ -670,7 +716,7 @@ final class SyncRequestListenerTest {
   }
 
   private static byte[] requestWire() {
-    return wire('Q', "LOGREQ01", REQUEST_ID, REQUEST_ID, 0, false);
+    return wire('Q', FIXTURE_LOGREQ01_A98AF5F3, REQUEST_ID, REQUEST_ID, 0, false);
   }
 
   private static byte[] responseWire() {
@@ -688,9 +734,9 @@ final class SyncRequestListenerTest {
     byte[] body = new byte[totalLength];
     Arrays.fill(body, (byte) ' ');
     ascii(body, 0, "SCHBNK01");
-    ascii(body, 8, "001");
+    ascii(body, 8, FIXTURE_001_A3FEAA64);
     ascii(body, 11, layout);
-    ascii(body, 19, "001");
+    ascii(body, 19, FIXTURE_001_A3FEAA64);
     body[22] = (byte) kind;
     body[23] = 'S';
     ascii(body, 24, messageId.toString());
@@ -725,7 +771,7 @@ final class SyncRequestListenerTest {
         .setLargeMessagesDirectory(root.resolve("large-messages").toString())
         .setSecurityEnabled(false)
         .clearAcceptorConfigurations()
-        .addAcceptorConfiguration("component", "vm://0");
+        .addAcceptorConfiguration("component", FIXTURE_VM_0_0C76084A);
     return new EmbeddedActiveMQ().setConfiguration(configuration).start();
   }
 }

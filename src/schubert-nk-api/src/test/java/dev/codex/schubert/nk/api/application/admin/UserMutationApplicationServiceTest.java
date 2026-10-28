@@ -38,6 +38,20 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** Real User/Inbox/audit/session transactions with independent wire/SQL. PT-ADM-033..039. */
 class UserMutationApplicationServiceTest {
+  private static final String FIXTURE_UCRREQ01_841A676A = "UCRREQ01";
+  private static final String FIXTURE_USTREQ01_D6E6CD9B = "USTREQ01";
+  private static final String FIXTURE_URLREQ01_27B8B3D0 = "URLREQ01";
+  private static final String FIXTURE_UPWREQ01_256BADE0 = "UPWREQ01";
+  private static final String FIXTURE_ULKREQ01_CC99AF15 = "ULKREQ01";
+  private static final String FIXTURE_0000_876EEFE0 = "0000";
+  private static final String FIXTURE_0200_FC9DB3AC = "0200";
+  private static final String FIXTURE_0103_09B05C76 = "0103";
+  private static final String FIXTURE_0105_6F9AB3E4 = "0105";
+  private static final String FIXTURE_DUPLICATE_E75B7650 = "duplicate";
+  private static final String FIXTURE_PASSWORD_FF2BEA10 = "password";
+  private static final String FIXTURE_CAPACITY_84594495 = "capacity";
+  private static final String FIXTURE_NOOP_A48838A5 = "noop";
+  private static final String FIXTURE_DATABASE_21C67C24 = "database";
   @TempDir static Path root;
   static ApiLogDatabaseFixture database;
 
@@ -53,16 +67,22 @@ class UserMutationApplicationServiceTest {
 
   @Test
   void adm033AllMutationsCommitOnceAndReplayFrozenVersions() throws Exception {
-    for (String layout : List.of("UCRREQ01", "USTREQ01", "URLREQ01", "UPWREQ01", "ULKREQ01"))
+    for (String layout :
+        List.of(
+            FIXTURE_UCRREQ01_841A676A,
+            FIXTURE_USTREQ01_D6E6CD9B,
+            FIXTURE_URLREQ01_27B8B3D0,
+            FIXTURE_UPWREQ01_256BADE0,
+            FIXTURE_ULKREQ01_CC99AF15))
       try (var h = new UserApplicationFixture(database)) {
         h.seed();
-        if (layout.equals("ULKREQ01"))
+        if (layout.equals(FIXTURE_ULKREQ01_CC99AF15))
           h.sql(
               "update schubert.app_users set locked_until='2026-09-08T00:02:00Z',failed_count=2,failure_window_started_at='2026-09-08T00:00:00Z' where id=3");
         var request = input(layout, 3, 0, true, MESSAGE, TOKEN, 1);
-        long target = layout.equals("UCRREQ01") ? 4 : 3;
-        long version = layout.equals("UCRREQ01") ? 0 : 1;
-        reply(h.service.process(request), request, "0000", target, version, 2);
+        long target = layout.equals(FIXTURE_UCRREQ01_841A676A) ? 4 : 3;
+        long version = layout.equals(FIXTURE_UCRREQ01_841A676A) ? 0 : 1;
+        reply(h.service.process(request), request, FIXTURE_0000_876EEFE0, target, version, 2);
         assertEquals(1, h.inboxCount());
         assertEquals(version, h.version(target));
         assertEquals(1, h.commits.get());
@@ -77,25 +97,34 @@ class UserMutationApplicationServiceTest {
             independentFingerprint(layout),
             h.text("select request_fingerprint_hmac from schubert.request_inbox"));
         var frozen = h.inboxMetadata();
-        reply(h.service.process(request), request, "0200", target, version, 3);
+        reply(h.service.process(request), request, FIXTURE_0200_FC9DB3AC, target, version, 3);
         var retry = input(layout, 3, 0, true, new UUID(90, 3), TOKEN, 1);
-        reply(h.service.process(retry), retry, "0200", target, version, 4);
+        reply(h.service.process(retry), retry, FIXTURE_0200_FC9DB3AC, target, version, 4);
         assertEquals(frozen, h.inboxMetadata());
         assertEquals(version, h.version(target));
         assertEquals(
             2, h.scalar("select count(*) from schubert.app_logs where action='INBOX_REPLAYED'"));
-        if (List.of("USTREQ01", "URLREQ01", "UPWREQ01").contains(layout))
+        if (List.of(FIXTURE_USTREQ01_D6E6CD9B, FIXTURE_URLREQ01_27B8B3D0, FIXTURE_UPWREQ01_256BADE0)
+            .contains(layout))
           assertEquals(
               1,
               h.scalar("select count(*) from schubert.auth_sessions where user_id=3 and revoked"));
-        if (layout.equals("UPWREQ01") || layout.equals("UCRREQ01")) {
+        if (layout.equals(FIXTURE_UPWREQ01_256BADE0) || layout.equals(FIXTURE_UCRREQ01_841A676A)) {
           String hash = h.text("select password_hash from schubert.app_users where id=" + target);
           UserCommandServiceTest.independentHash(hash, PASSWORD);
         }
         // A real later independent command advances DB; replay must retain the first version.
-        var later = input("USTREQ01", target, version, true, new UUID(90, 4), new UUID(90, 5), 1);
-        reply(h.service.process(later), later, "0000", target, version + 1, 6);
-        reply(h.service.process(retry), retry, "0200", target, version, 7);
+        var later =
+            input(
+                FIXTURE_USTREQ01_D6E6CD9B,
+                target,
+                version,
+                true,
+                new UUID(90, 4),
+                new UUID(90, 5),
+                1);
+        reply(h.service.process(later), later, FIXTURE_0000_876EEFE0, target, version + 1, 6);
+        reply(h.service.process(retry), retry, FIXTURE_0200_FC9DB3AC, target, version, 7);
         assertEquals(version + 1, h.version(target));
         assertEquals(2, h.inboxCount());
         assertEquals(
@@ -126,8 +155,15 @@ class UserMutationApplicationServiceTest {
         else if (!mutation.equals("unknown"))
           h.sql("update schubert.app_users set " + mutation + " where id=1");
         var request =
-            input("USTREQ01", 3, 0, true, MESSAGE, TOKEN, mutation.equals("unknown") ? 99 : 1);
-        String code = mutation.equals("role='USER'") ? "0103" : "0102";
+            input(
+                FIXTURE_USTREQ01_D6E6CD9B,
+                3,
+                0,
+                true,
+                MESSAGE,
+                TOKEN,
+                mutation.equals("unknown") ? 99 : 1);
+        String code = mutation.equals("role='USER'") ? FIXTURE_0103_09B05C76 : "0102";
         reply(h.service.process(request), request, code, 0, 0, 1);
         assertEquals(0, h.inboxCount());
         assertEquals(0, h.version(3));
@@ -136,33 +172,35 @@ class UserMutationApplicationServiceTest {
             h.scalar(
                 "select count(*) from schubert.app_logs where action='AUTHORIZATION_DENIED' and category='SECURITY'"));
         // YKT-060: fixed request layout/type survive every denied admission path.
-        assertEquals("USTREQ01", h.text("select details->>'layout' from schubert.app_logs"));
+        assertEquals(
+            FIXTURE_USTREQ01_D6E6CD9B, h.text("select details->>'layout' from schubert.app_logs"));
         assertEquals("USER", h.text("select details->>'targetType' from schubert.app_logs"));
         assertEquals(
-            code.equals("0103") ? 1 : 0,
+            code.equals(FIXTURE_0103_09B05C76) ? 1 : 0,
             h.scalar("select count(actor_user_id) from schubert.app_logs"));
         assertEquals(
-            code.equals("0103") ? "WARN" : "INFO", h.text("select level from schubert.app_logs"));
+            code.equals(FIXTURE_0103_09B05C76) ? "WARN" : "INFO",
+            h.text("select level from schubert.app_logs"));
       }
       h.seed();
-      var first = input("USTREQ01", 3, 0, true, MESSAGE, TOKEN, 1);
+      var first = input(FIXTURE_USTREQ01_D6E6CD9B, 3, 0, true, MESSAGE, TOKEN, 1);
       h.service.process(first);
       var stored = h.inboxMetadata();
       // Same token, changed target/version/value; no alias row or second command.
       for (var request :
           List.of(
-              input("USTREQ01", 2, 0, true, new UUID(90, 6), TOKEN, 1),
-              input("USTREQ01", 3, 1, true, new UUID(90, 7), TOKEN, 1),
-              input("USTREQ01", 3, 0, false, new UUID(90, 8), TOKEN, 1))) {
+              input(FIXTURE_USTREQ01_D6E6CD9B, 2, 0, true, new UUID(90, 6), TOKEN, 1),
+              input(FIXTURE_USTREQ01_D6E6CD9B, 3, 1, true, new UUID(90, 7), TOKEN, 1),
+              input(FIXTURE_USTREQ01_D6E6CD9B, 3, 0, false, new UUID(90, 8), TOKEN, 1))) {
         byte[] actual = h.service.process(request);
-        reply(actual, request, "0105", 0, 0, h.ids.get());
+        reply(actual, request, FIXTURE_0105_6F9AB3E4, 0, 0, h.ids.get());
         assertEquals(stored, h.inboxMetadata());
         assertEquals(1, h.version(3));
       }
       for (var request :
           List.of(
-              input("USTREQ01", 3, 0, false, MESSAGE, TOKEN, 1),
-              input("USTREQ01", 3, 0, true, MESSAGE, TOKEN, 2))) {
+              input(FIXTURE_USTREQ01_D6E6CD9B, 3, 0, false, MESSAGE, TOKEN, 1),
+              input(FIXTURE_USTREQ01_D6E6CD9B, 3, 0, true, MESSAGE, TOKEN, 2))) {
         var failure =
             assertThrows(PermanentProtocolException.class, () -> h.service.process(request));
         assertNull(failure.getCause());
@@ -173,7 +211,7 @@ class UserMutationApplicationServiceTest {
           2, h.scalar("select count(*) from schubert.app_logs where action='PROTOCOL_REJECTED'"));
       h.sql("update schubert.app_users set role='USER' where id=1");
       byte[] denied = h.service.process(first);
-      reply(denied, first, "0103", 0, 0, h.ids.get());
+      reply(denied, first, FIXTURE_0103_09B05C76, 0, 0, h.ids.get());
       assertEquals(stored, h.inboxMetadata());
     }
   }
@@ -185,7 +223,7 @@ class UserMutationApplicationServiceTest {
       try (var h = new UserApplicationFixture(database)) {
         h.seed();
         h.connectionFault = fault;
-        var request = input("USTREQ01", 3, 0, true, MESSAGE, TOKEN, 1);
+        var request = input(FIXTURE_USTREQ01_D6E6CD9B, 3, 0, true, MESSAGE, TOKEN, 1);
         temporary(() -> h.service.process(request));
         boolean committed = fault.equals("close");
         assertEquals(committed ? 1 : 0, h.inboxCount());
@@ -193,7 +231,13 @@ class UserMutationApplicationServiceTest {
         assertEquals(0, h.live.get());
         h.connectionFault = "none";
         byte[] retry = h.service.process(request);
-        reply(retry, request, committed ? "0200" : "0000", 3, 1, h.ids.get());
+        reply(
+            retry,
+            request,
+            committed ? FIXTURE_0200_FC9DB3AC : FIXTURE_0000_876EEFE0,
+            3,
+            1,
+            h.ids.get());
         assertEquals(1, h.inboxCount());
         assertEquals(1, h.version(3));
       }
@@ -215,7 +259,10 @@ class UserMutationApplicationServiceTest {
           failure.sqlPart = sqlPart;
           failure.fault = fault;
           h.sqlFault = failure;
-          temporary(() -> h.service.process(input("USTREQ01", 3, 0, true, MESSAGE, TOKEN, 1)));
+          temporary(
+              () ->
+                  h.service.process(
+                      input(FIXTURE_USTREQ01_D6E6CD9B, 3, 0, true, MESSAGE, TOKEN, 1)));
           assertEquals(0, h.inboxCount());
           assertEquals(0, h.version(3));
           assertEquals(0, h.scalar("select count(*) from schubert.app_logs"));
@@ -230,7 +277,9 @@ class UserMutationApplicationServiceTest {
         failure.updateCount = 0;
         if (suppressed) failure.fault = "statementClose";
         h.sqlFault = failure;
-        temporary(() -> h.service.process(input("USTREQ01", 3, 0, true, MESSAGE, TOKEN, 1)));
+        temporary(
+            () ->
+                h.service.process(input(FIXTURE_USTREQ01_D6E6CD9B, 3, 0, true, MESSAGE, TOKEN, 1)));
         assertEquals(0, h.inboxCount());
         assertEquals(0, h.version(3));
       }
@@ -247,7 +296,7 @@ class UserMutationApplicationServiceTest {
             "message-audit")) {
       try (var h = new UserApplicationFixture(database)) {
         h.seed();
-        var request = input("USTREQ01", 3, 0, true, MESSAGE, TOKEN, 1);
+        var request = input(FIXTURE_USTREQ01_D6E6CD9B, 3, 0, true, MESSAGE, TOKEN, 1);
         boolean existing = List.of("replay-audit", "token-audit", "message-audit").contains(mode);
         if (existing) h.service.process(request);
         var failure = new UserCommandFaults();
@@ -273,9 +322,9 @@ class UserMutationApplicationServiceTest {
               "update schubert.auth_sessions set expires_at='2026-09-08T00:01:00Z' where user_id=1");
         var attempted =
             mode.equals("token-audit")
-                ? input("USTREQ01", 3, 1, true, new UUID(90, 11), TOKEN, 1)
+                ? input(FIXTURE_USTREQ01_D6E6CD9B, 3, 1, true, new UUID(90, 11), TOKEN, 1)
                 : mode.equals("message-audit")
-                    ? input("USTREQ01", 3, 1, true, MESSAGE, TOKEN, 1)
+                    ? input(FIXTURE_USTREQ01_D6E6CD9B, 3, 1, true, MESSAGE, TOKEN, 1)
                     : request;
         var before = h.inboxMetadata();
         long audit = h.scalar("select count(*) from schubert.app_logs");
@@ -297,7 +346,9 @@ class UserMutationApplicationServiceTest {
                     calls.incrementAndGet() == failAt
                         ? null
                         : new UUID(900, h.ids.incrementAndGet()));
-        temporary(() -> h.service.process(input("USTREQ01", 3, 0, true, MESSAGE, TOKEN, 1)));
+        temporary(
+            () ->
+                h.service.process(input(FIXTURE_USTREQ01_D6E6CD9B, 3, 0, true, MESSAGE, TOKEN, 1)));
         assertEquals(failAt == 2 ? 1 : 0, h.inboxCount());
         assertEquals(failAt == 2 ? 1 : 0, h.version(3));
       }
@@ -326,7 +377,9 @@ class UserMutationApplicationServiceTest {
               }
             };
         h.service = h.build(clock, () -> new UUID(900, h.ids.incrementAndGet()));
-        temporary(() -> h.service.process(input("USTREQ01", 3, 0, true, MESSAGE, TOKEN, 1)));
+        temporary(
+            () ->
+                h.service.process(input(FIXTURE_USTREQ01_D6E6CD9B, 3, 0, true, MESSAGE, TOKEN, 1)));
         assertEquals(after ? 1 : 0, h.inboxCount());
         assertEquals(0, h.live.get());
       }
@@ -346,7 +399,7 @@ class UserMutationApplicationServiceTest {
                   () ->
                       h.service.process(
                           input(
-                              "USTREQ01",
+                              FIXTURE_USTREQ01_D6E6CD9B,
                               3,
                               0,
                               true,
@@ -360,9 +413,9 @@ class UserMutationApplicationServiceTest {
         for (int i = 0; i < 100; i++) {
           byte[] body = results.get(i).get(30, java.util.concurrent.TimeUnit.SECONDS);
           String code = ascii(body, 208, 4);
-          if (code.equals("0000")) fresh++;
+          if (code.equals(FIXTURE_0000_876EEFE0)) fresh++;
           else {
-            assertEquals("0200", code);
+            assertEquals(FIXTURE_0200_FC9DB3AC, code);
             replay++;
           }
           assertEquals((sameMessage ? MESSAGE : new UUID(91, i)).toString(), ascii(body, 60, 36));
@@ -386,13 +439,20 @@ class UserMutationApplicationServiceTest {
             workers.submit(
                 () ->
                     h.service.process(
-                        input("USTREQ01", 3, 0, true, new UUID(92, n), new UUID(93, n), 1))));
+                        input(
+                            FIXTURE_USTREQ01_D6E6CD9B,
+                            3,
+                            0,
+                            true,
+                            new UUID(92, n),
+                            new UUID(93, n),
+                            1))));
       }
       int successes = 0;
       for (var future : results) {
         String code = ascii(future.get(30, java.util.concurrent.TimeUnit.SECONDS), 208, 4);
-        if (code.equals("0000")) successes++;
-        else assertEquals("0105", code);
+        if (code.equals(FIXTURE_0000_876EEFE0)) successes++;
+        else assertEquals(FIXTURE_0105_6F9AB3E4, code);
       }
       assertEquals(1, successes);
       assertEquals(20, h.inboxCount());
@@ -405,12 +465,18 @@ class UserMutationApplicationServiceTest {
           "insert into schubert.app_users(id,username,username_key,password_hash,role,status,password_changed_at,created_at,updated_at) select 4,'u4','u4',password_hash,role,status,password_changed_at,created_at,updated_at from schubert.app_users where id=3");
       var a =
           workers.submit(
-              () -> h.service.process(input("USTREQ01", 3, 0, true, new UUID(94, 1), TOKEN, 1)));
+              () ->
+                  h.service.process(
+                      input(FIXTURE_USTREQ01_D6E6CD9B, 3, 0, true, new UUID(94, 1), TOKEN, 1)));
       var b =
           workers.submit(
-              () -> h.service.process(input("USTREQ01", 4, 0, true, new UUID(94, 2), TOKEN, 2)));
-      assertEquals("0000", ascii(a.get(20, java.util.concurrent.TimeUnit.SECONDS), 208, 4));
-      assertEquals("0000", ascii(b.get(20, java.util.concurrent.TimeUnit.SECONDS), 208, 4));
+              () ->
+                  h.service.process(
+                      input(FIXTURE_USTREQ01_D6E6CD9B, 4, 0, true, new UUID(94, 2), TOKEN, 2)));
+      assertEquals(
+          FIXTURE_0000_876EEFE0, ascii(a.get(20, java.util.concurrent.TimeUnit.SECONDS), 208, 4));
+      assertEquals(
+          FIXTURE_0000_876EEFE0, ascii(b.get(20, java.util.concurrent.TimeUnit.SECONDS), 208, 4));
       assertEquals(2, h.inboxCount());
       assertEquals(1, h.version(3));
       assertEquals(1, h.version(4));
@@ -429,7 +495,9 @@ class UserMutationApplicationServiceTest {
                     barrier.await(10, java.util.concurrent.TimeUnit.SECONDS);
                     return h.service.process(
                         input(
-                            mode.equals("demote") ? "URLREQ01" : "USTREQ01",
+                            mode.equals("demote")
+                                ? FIXTURE_URLREQ01_27B8B3D0
+                                : FIXTURE_USTREQ01_D6E6CD9B,
                             owner == 1 ? 2 : 1,
                             0,
                             mode.equals("enable") || (mode.equals("mixed") && owner == 2),
@@ -442,7 +510,7 @@ class UserMutationApplicationServiceTest {
         for (var result : results)
           codes.add(ascii(result.get(20, java.util.concurrent.TimeUnit.SECONDS), 208, 4));
         Collections.sort(codes);
-        assertEquals(List.of("0000", "0102"), codes);
+        assertEquals(List.of(FIXTURE_0000_876EEFE0, "0102"), codes);
         assertEquals(1, h.inboxCount());
         assertTrue(
             h.scalar(
@@ -458,42 +526,60 @@ class UserMutationApplicationServiceTest {
   @Test
   void adm037DefiniteErrorsAndProcessingKeepApprovedResults() throws Exception {
     try (var h = new UserApplicationFixture(database)) {
-      for (String kind : List.of("duplicate", "missing", "password", "capacity", "noop")) {
+      for (String kind :
+          List.of(
+              FIXTURE_DUPLICATE_E75B7650,
+              "missing",
+              FIXTURE_PASSWORD_FF2BEA10,
+              FIXTURE_CAPACITY_84594495,
+              FIXTURE_NOOP_A48838A5)) {
         h.seed();
-        if (kind.equals("capacity"))
+        if (kind.equals(FIXTURE_CAPACITY_84594495))
           h.sql("update schubert.app_users set version=999999999 where id=3");
-        if (kind.equals("password"))
+        if (kind.equals(FIXTURE_PASSWORD_FF2BEA10))
           h.sql(
               "update schubert.app_users set username='TargetUser12',username_key='targetuser12' where id=3");
         String layout =
             switch (kind) {
-              case "duplicate" -> "UCRREQ01";
-              case "password" -> "UPWREQ01";
-              case "noop" -> "ULKREQ01";
-              default -> "USTREQ01";
+              case FIXTURE_DUPLICATE_E75B7650 -> FIXTURE_UCRREQ01_841A676A;
+              case FIXTURE_PASSWORD_FF2BEA10 -> FIXTURE_UPWREQ01_256BADE0;
+              case FIXTURE_NOOP_A48838A5 -> FIXTURE_ULKREQ01_CC99AF15;
+              default -> FIXTURE_USTREQ01_D6E6CD9B;
             };
         var request =
             input(
                 layout,
                 kind.equals("missing") ? 99 : 3,
-                kind.equals("capacity") ? 999_999_999L : 0,
+                kind.equals(FIXTURE_CAPACITY_84594495) ? 999_999_999L : 0,
                 true,
                 MESSAGE,
                 TOKEN,
                 1,
-                kind.equals("duplicate") ? "u1" : "New",
-                kind.equals("password") ? "targetuser12" : PASSWORD);
+                kind.equals(FIXTURE_DUPLICATE_E75B7650) ? "u1" : "New",
+                kind.equals(FIXTURE_PASSWORD_FF2BEA10) ? "targetuser12" : PASSWORD);
         String code =
             switch (kind) {
-              case "duplicate" -> "0105";
+              case FIXTURE_DUPLICATE_E75B7650 -> FIXTURE_0105_6F9AB3E4;
               case "missing" -> "0104";
-              case "password" -> "0100";
-              case "capacity" -> "9001";
-              default -> "0200";
+              case FIXTURE_PASSWORD_FF2BEA10 -> "0100";
+              case FIXTURE_CAPACITY_84594495 -> "9001";
+              default -> FIXTURE_0200_FC9DB3AC;
             };
-        reply(h.service.process(request), request, code, kind.equals("noop") ? 3 : 0, 0, 2);
+        reply(
+            h.service.process(request),
+            request,
+            code,
+            kind.equals(FIXTURE_NOOP_A48838A5) ? 3 : 0,
+            0,
+            2);
         var stored = h.inboxMetadata();
-        reply(h.service.process(request), request, code, kind.equals("noop") ? 3 : 0, 0, 3);
+        reply(
+            h.service.process(request),
+            request,
+            code,
+            kind.equals(FIXTURE_NOOP_A48838A5) ? 3 : 0,
+            0,
+            3);
         assertEquals(stored, h.inboxMetadata());
         assertEquals(1, h.inboxCount());
       }
@@ -504,7 +590,7 @@ class UserMutationApplicationServiceTest {
               "response_key_version='unknown'",
               "response_body_encrypted=decode(repeat('00',29),'hex')")) {
         h.seed();
-        var request = input("USTREQ01", 3, 0, true, MESSAGE, TOKEN, 1);
+        var request = input(FIXTURE_USTREQ01_D6E6CD9B, 3, 0, true, MESSAGE, TOKEN, 1);
         h.service.process(request);
         if (corrupt.equals("processing"))
           h.sql(
@@ -567,14 +653,14 @@ class UserMutationApplicationServiceTest {
         var requests = receiver.createConsumer(requestQueue);
         var replies = observer.createConsumer(replyQueue);
         var dlq = observer.createConsumer(dlqQueue)) {
-      for (String point : List.of("createProducer", "commit", "database"))
+      for (String point : List.of("createProducer", "commit", FIXTURE_DATABASE_21C67C24))
         try (var h = new UserApplicationFixture(database)) {
           h.seed();
-          var request = input("USTREQ01", 3, 0, true, MESSAGE, TOKEN, 1);
+          var request = input(FIXTURE_USTREQ01_D6E6CD9B, 3, 0, true, MESSAGE, TOKEN, 1);
           var listener =
               new dev.codex.schubert.nk.api.messaging.inbound.SyncRequestListener(
                   h.service, java.time.Clock.fixed(NOW, java.time.ZoneOffset.UTC));
-          if (point.equals("database")) h.connectionFault = "open";
+          if (point.equals(FIXTURE_DATABASE_21C67C24)) h.connectionFault = "open";
           var failing =
               (jakarta.jms.JMSContext)
                   java.lang.reflect.Proxy.newProxyInstance(
@@ -592,19 +678,28 @@ class UserMutationApplicationServiceTest {
           send(producer, requestQueue, request);
           var first = requests.receive(5000);
           assertNotNull(first);
-          if (point.equals("database")) temporary(() -> listener.onMessage(failing, first));
+          if (point.equals(FIXTURE_DATABASE_21C67C24))
+            temporary(() -> listener.onMessage(failing, first));
           else
             assertThrows(
                 jakarta.jms.JMSRuntimeException.class, () -> listener.onMessage(failing, first));
           assertNull(replies.receive(250));
-          assertEquals(point.equals("database") ? 0 : 1, h.inboxCount());
+          assertEquals(point.equals(FIXTURE_DATABASE_21C67C24) ? 0 : 1, h.inboxCount());
           h.connectionFault = "none";
           var retry = requests.receive(5000);
           assertNotNull(retry);
           assertEquals(2, retry.getIntProperty("JMSXDeliveryCount"));
           listener.onMessage(receiver, retry);
           byte[] response = brokerBody(replies.receive(5000));
-          reply(response, request, point.equals("database") ? "0000" : "0200", 3, 1, h.ids.get());
+          reply(
+              response,
+              request,
+              point.equals(FIXTURE_DATABASE_21C67C24)
+                  ? FIXTURE_0000_876EEFE0
+                  : FIXTURE_0200_FC9DB3AC,
+              3,
+              1,
+              h.ids.get());
           assertEquals(1, h.inboxCount());
           assertEquals(1, h.version(3));
           var frozen = h.inboxMetadata();
@@ -612,9 +707,10 @@ class UserMutationApplicationServiceTest {
           var duplicate = requests.receive(5000);
           assertNotNull(duplicate);
           listener.onMessage(receiver, duplicate);
-          reply(brokerBody(replies.receive(5000)), request, "0200", 3, 1, h.ids.get());
+          reply(
+              brokerBody(replies.receive(5000)), request, FIXTURE_0200_FC9DB3AC, 3, 1, h.ids.get());
           assertEquals(frozen, h.inboxMetadata());
-          var changed = input("USTREQ01", 3, 0, false, MESSAGE, TOKEN, 1);
+          var changed = input(FIXTURE_USTREQ01_D6E6CD9B, 3, 0, false, MESSAGE, TOKEN, 1);
           send(producer, requestQueue, changed);
           var invalid = requests.receive(5000);
           assertNotNull(invalid);
@@ -662,7 +758,7 @@ class UserMutationApplicationServiceTest {
                       h.source, h.authentication, h.inbox, h.commands, h.responses, null),
               () -> h.build(clock, null),
               () -> h.service.process(null))) assertThrows(NullPointerException.class, call);
-      var request = input("USTREQ01", 3, 0, true, MESSAGE, TOKEN, 1);
+      var request = input(FIXTURE_USTREQ01_D6E6CD9B, 3, 0, true, MESSAGE, TOKEN, 1);
       h.service =
           h.build(
               clock,
@@ -672,7 +768,7 @@ class UserMutationApplicationServiceTest {
                 assertEquals(i == 1 ? 0 : 1, h.commits.get());
                 return new UUID(900, i);
               });
-      reply(h.service.process(request), request, "0000", 3, 1, 2);
+      reply(h.service.process(request), request, FIXTURE_0000_876EEFE0, 3, 1, 2);
       assertEquals(1, h.commits.get());
       h.seed();
       var normal = UserApplicationAssembly.mutations(h.source, h.fingerprints, h.snapshots, clock);
@@ -685,7 +781,7 @@ class UserMutationApplicationServiceTest {
               () -> UserApplicationAssembly.mutations(h.source, h.fingerprints, h.snapshots, null)))
         assertThrows(NullPointerException.class, missing);
       byte[] result = normal.process(request);
-      assertEquals("0000", ascii(result, 208, 4));
+      assertEquals(FIXTURE_0000_876EEFE0, ascii(result, 208, 4));
       assertEquals(MESSAGE.toString(), ascii(result, 60, 36));
       assertNotEquals(MESSAGE, UUID.fromString(ascii(result, 24, 36)));
       assertEquals(1, h.version(3));
@@ -747,7 +843,13 @@ class UserMutationApplicationServiceTest {
       assertEquals(0, h.inboxCount());
       assertEquals(0, h.version(3));
     }
-    for (String layout : List.of("UCRREQ01", "USTREQ01", "URLREQ01", "UPWREQ01", "ULKREQ01"))
+    for (String layout :
+        List.of(
+            FIXTURE_UCRREQ01_841A676A,
+            FIXTURE_USTREQ01_D6E6CD9B,
+            FIXTURE_URLREQ01_27B8B3D0,
+            FIXTURE_UPWREQ01_256BADE0,
+            FIXTURE_ULKREQ01_CC99AF15))
       try (var h = new UserApplicationFixture(database)) {
         h.seed();
         h.sql("update schubert.app_users set username=E'Admin\\nName' where id=1");
@@ -764,7 +866,7 @@ class UserMutationApplicationServiceTest {
                 1,
                 "New2",
                 "Changed-Synthetic-Password-12");
-        reply(h.service.process(changed), changed, "0105", 0, 0, h.ids.get());
+        reply(h.service.process(changed), changed, FIXTURE_0105_6F9AB3E4, 0, 0, h.ids.get());
         assertEquals(
             "Admin Name",
             h.text(
@@ -783,12 +885,12 @@ class UserMutationApplicationServiceTest {
                     "targetType",
                     "actorRole",
                     "resultCode"));
-        if (!layout.equals("UCRREQ01")) expected.add("targetUserId");
+        if (!layout.equals(FIXTURE_UCRREQ01_841A676A)) expected.add("targetUserId");
         assertEquals(expected, object.keySet());
         assertEquals("DENIED", object.get("outcome").getAsString());
         assertEquals("ADMIN", object.get("actorRole").getAsString());
         assertEquals(layout, object.get("layout").getAsString());
-        assertEquals("0105", object.get("resultCode").getAsString());
+        assertEquals(FIXTURE_0105_6F9AB3E4, object.get("resultCode").getAsString());
         for (String secret :
             List.of(
                 TOKEN.toString(), context(1), PASSWORD, "Changed-Synthetic-Password-12", "pbkdf2"))
@@ -808,7 +910,11 @@ class UserMutationApplicationServiceTest {
     try (var out = new java.io.DataOutputStream(bytes)) {
       out.write("SCHUBERT-NK-OP1".getBytes(java.nio.charset.StandardCharsets.US_ASCII));
       for (String field :
-          List.of("1", layout, "001", layout.equals("UCRREQ01") ? "NEW_USER:new" : "USER:3"))
+          List.of(
+              "1",
+              layout,
+              "001",
+              layout.equals(FIXTURE_UCRREQ01_841A676A) ? "NEW_USER:new" : "USER:3"))
         UserMutationRequestTest.lp(out, field);
       out.writeInt(fields.size());
       for (var field : fields) {

@@ -32,6 +32,15 @@ import org.junit.jupiter.api.io.TempDir;
  * PT-AUT-007: real PostgreSQL/production DDL, literal SQL postconditions and JDBC-boundary faults.
  */
 final class AuthenticationContextVerifierTest {
+  private static final String FIXTURE_2026_09_07T00_00_00Z_B56C6475 = "2026-09-07T00:00:00Z";
+  private static final String FIXTURE_2026_09_07T08_00_00Z_F65D06C1 = "2026-09-07T08:00:00Z";
+  private static final String FIXTURE_UNKNOWN_EB8BF0D8 = "unknown";
+  private static final String FIXTURE_REVOKED_5B509F63 = "revoked";
+  private static final String FIXTURE_EQUALEXPIRY_24F1D684 = "equalExpiry";
+  private static final String FIXTURE_PASTEXPIRY_05D25D6D = "pastExpiry";
+  private static final String FIXTURE_DISABLED_F693B9DE = "disabled";
+  private static final String FIXTURE_ROWCLOSE_4440E762 = "rowClose";
+  private static final String FIXTURE_STATEMENTCLOSE_D5A13A63 = "statementClose";
   @TempDir static Path root;
   private static ApiLogDatabaseFixture database;
   private static AuthenticationContextVerifier verifier;
@@ -70,11 +79,11 @@ final class AuthenticationContextVerifierTest {
     try (Connection connection = database.transaction()) {
       AuthenticatedActor actor = verifier.verify(connection, RAW, NOW);
       assertEquals(new AuthenticatedActor(7, "verifier-user", Role.USER), actor);
-      assertTimes("2026-09-07T00:00:00Z", "2026-09-07T08:00:00Z");
+      assertTimes(FIXTURE_2026_09_07T00_00_00Z_B56C6475, FIXTURE_2026_09_07T08_00_00Z_F65D06C1);
       assertFalse(connection.isClosed());
       assertFalse(connection.getAutoCommit());
       connection.rollback();
-      assertTimes("2026-09-07T00:00:00Z", "2026-09-07T08:00:00Z");
+      assertTimes(FIXTURE_2026_09_07T00_00_00Z_B56C6475, FIXTURE_2026_09_07T08_00_00Z_F65D06C1);
       verifier.verify(connection, RAW, NOW);
       connection.commit();
     }
@@ -93,7 +102,9 @@ final class AuthenticationContextVerifierTest {
     try (Connection connection = database.transaction()) {
       for (int hour = 3; hour <= 30; hour++) {
         verifier.verify(
-            connection, RAW, Instant.parse("2026-09-07T00:00:00Z").plusSeconds(hour * 3600L));
+            connection,
+            RAW,
+            Instant.parse(FIXTURE_2026_09_07T00_00_00Z_B56C6475).plusSeconds(hour * 3600L));
         connection.commit();
       }
     }
@@ -102,23 +113,32 @@ final class AuthenticationContextVerifierTest {
 
   @Test
   void unknownRevokedExpiredAndDisabledAllDenyWithoutTouch() throws Exception {
-    for (String scenario : List.of("unknown", "revoked", "equalExpiry", "pastExpiry", "disabled")) {
+    for (String scenario :
+        List.of(
+            FIXTURE_UNKNOWN_EB8BF0D8,
+            FIXTURE_REVOKED_5B509F63,
+            FIXTURE_EQUALEXPIRY_24F1D684,
+            FIXTURE_PASTEXPIRY_05D25D6D,
+            FIXTURE_DISABLED_F693B9DE)) {
       seed();
       switch (scenario) {
-        case "revoked" ->
+        case FIXTURE_REVOKED_5B509F63 ->
             execute(
                 "update schubert.auth_sessions set"
                     + " revoked=true,revoked_at='2026-09-07T00:30:00Z',revoke_reason='LOGOUT'");
-        case "equalExpiry" ->
+        case FIXTURE_EQUALEXPIRY_24F1D684 ->
             execute("update schubert.auth_sessions set expires_at='2026-09-07T01:00:00Z'");
-        case "pastExpiry" ->
+        case FIXTURE_PASTEXPIRY_05D25D6D ->
             execute("update schubert.auth_sessions set expires_at='2026-09-07T00:59:59.999999Z'");
-        case "disabled" -> execute("update schubert.app_users set status='DISABLED'");
+        case FIXTURE_DISABLED_F693B9DE ->
+            execute("update schubert.app_users set status='DISABLED'");
         default -> {}
       }
       try (Connection connection = database.transaction()) {
         AuthenticationContext raw =
-            scenario.equals("unknown") ? AuthenticationContext.of("b".repeat(64)) : RAW;
+            scenario.equals(FIXTURE_UNKNOWN_EB8BF0D8)
+                ? AuthenticationContext.of("b".repeat(64))
+                : RAW;
         AuthenticationContextException error =
             assertThrows(
                 AuthenticationContextException.class, () -> verifier.verify(connection, raw, NOW));
@@ -132,7 +152,7 @@ final class AuthenticationContextVerifierTest {
           var row = statement.executeQuery("select last_accessed_at from schubert.auth_sessions")) {
         assertTrue(row.next());
         assertEquals(
-            Instant.parse("2026-09-07T00:00:00Z"),
+            Instant.parse(FIXTURE_2026_09_07T00_00_00Z_B56C6475),
             row.getObject(1, java.time.OffsetDateTime.class).toInstant());
       }
     }
@@ -172,7 +192,14 @@ final class AuthenticationContextVerifierTest {
   @Test
   void sqlNullAndUnknownRoleNeverBecomeAValidActor() throws Exception {
     for (String column :
-        List.of("revoked", "expires_at", "status", "id", "user_id", "username", "role")) {
+        List.of(
+            FIXTURE_REVOKED_5B509F63,
+            "expires_at",
+            "status",
+            "id",
+            "user_id",
+            "username",
+            "role")) {
       try (Connection connection = database.transaction()) {
         assertInfrastructure(
             () ->
@@ -204,8 +231,8 @@ final class AuthenticationContextVerifierTest {
             "executeQuery",
             "getObject",
             "executeUpdate",
-            "rowClose",
-            "statementClose",
+            FIXTURE_ROWCLOSE_4440E762,
+            FIXTURE_STATEMENTCLOSE_D5A13A63,
             "zeroUpdate")) {
       try (Connection connection = database.transaction()) {
         assertInfrastructure(
@@ -213,13 +240,13 @@ final class AuthenticationContextVerifierTest {
         assertFalse(connection.isClosed());
         connection.rollback();
       }
-      assertTimes("2026-09-07T00:00:00Z", "2026-09-07T08:00:00Z");
+      assertTimes(FIXTURE_2026_09_07T00_00_00Z_B56C6475, FIXTURE_2026_09_07T08_00_00Z_F65D06C1);
     }
     try (Connection connection = database.transaction()) {
       assertInfrastructure(
           () ->
               verifier.verify(
-                  intercept(connection, "rowClose", new ArrayList<>()),
+                  intercept(connection, FIXTURE_ROWCLOSE_4440E762, new ArrayList<>()),
                   AuthenticationContext.of("b".repeat(64)),
                   NOW));
       connection.rollback();
@@ -236,7 +263,7 @@ final class AuthenticationContextVerifierTest {
       assertInfrastructure(() -> verifier.verify(connection, RAW, NOW));
       assertFalse(connection.isClosed());
     }
-    assertTimes("2026-09-07T00:00:00Z", "2026-09-07T08:00:00Z");
+    assertTimes(FIXTURE_2026_09_07T00_00_00Z_B56C6475, FIXTURE_2026_09_07T08_00_00Z_F65D06C1);
   }
 
   @Test
@@ -264,30 +291,39 @@ final class AuthenticationContextVerifierTest {
             sql.getFirst());
         connection.commit();
       }
-      assertTimes("2026-09-07T00:00:00Z", "2026-09-07T08:00:00Z");
+      assertTimes(FIXTURE_2026_09_07T00_00_00Z_B56C6475, FIXTURE_2026_09_07T08_00_00Z_F65D06C1);
     }
   }
 
   @Test
   void readOnlyPreflightRejectsUnknownRevokedExpiredAndDisabled() throws Exception {
-    for (String scenario : List.of("unknown", "revoked", "equalExpiry", "pastExpiry", "disabled")) {
+    for (String scenario :
+        List.of(
+            FIXTURE_UNKNOWN_EB8BF0D8,
+            FIXTURE_REVOKED_5B509F63,
+            FIXTURE_EQUALEXPIRY_24F1D684,
+            FIXTURE_PASTEXPIRY_05D25D6D,
+            FIXTURE_DISABLED_F693B9DE)) {
       seed();
       switch (scenario) {
-        case "revoked" ->
+        case FIXTURE_REVOKED_5B509F63 ->
             execute(
                 "update schubert.auth_sessions set"
                     + " revoked=true,revoked_at='2026-09-07T00:30:00Z',revoke_reason='LOGOUT'");
-        case "equalExpiry" ->
+        case FIXTURE_EQUALEXPIRY_24F1D684 ->
             execute("update schubert.auth_sessions set expires_at='2026-09-07T01:00:00Z'");
-        case "pastExpiry" ->
+        case FIXTURE_PASTEXPIRY_05D25D6D ->
             execute("update schubert.auth_sessions set expires_at='2026-09-07T00:59:59.999999Z'");
-        case "disabled" -> execute("update schubert.app_users set status='DISABLED'");
+        case FIXTURE_DISABLED_F693B9DE ->
+            execute("update schubert.app_users set status='DISABLED'");
         default -> {}
       }
       try (Connection connection = database.transaction()) {
         connection.setReadOnly(true);
         AuthenticationContext raw =
-            scenario.equals("unknown") ? AuthenticationContext.of("b".repeat(64)) : RAW;
+            scenario.equals(FIXTURE_UNKNOWN_EB8BF0D8)
+                ? AuthenticationContext.of("b".repeat(64))
+                : RAW;
         AuthenticationContextException error =
             assertThrows(
                 AuthenticationContextException.class,
@@ -302,7 +338,7 @@ final class AuthenticationContextVerifierTest {
           var row = statement.executeQuery("select last_accessed_at from schubert.auth_sessions")) {
         assertTrue(row.next());
         assertEquals(
-            Instant.parse("2026-09-07T00:00:00Z"),
+            Instant.parse(FIXTURE_2026_09_07T00_00_00Z_B56C6475),
             row.getObject(1, java.time.OffsetDateTime.class).toInstant());
       }
     }
@@ -328,8 +364,8 @@ final class AuthenticationContextVerifierTest {
             "setString",
             "executeQuery",
             "getObject",
-            "rowClose",
-            "statementClose",
+            FIXTURE_ROWCLOSE_4440E762,
+            FIXTURE_STATEMENTCLOSE_D5A13A63,
             "null:revoked",
             "null:expires_at",
             "null:status",
@@ -349,7 +385,7 @@ final class AuthenticationContextVerifierTest {
         connection.rollback();
       }
     }
-    for (String point : List.of("rowClose", "statementClose")) {
+    for (String point : List.of(FIXTURE_ROWCLOSE_4440E762, FIXTURE_STATEMENTCLOSE_D5A13A63)) {
       try (Connection connection = database.transaction()) {
         connection.setReadOnly(true);
         assertInfrastructure(
@@ -370,7 +406,7 @@ final class AuthenticationContextVerifierTest {
                   intercept(connection, "missingSession", new ArrayList<>()), RAW, NOW));
       connection.rollback();
     }
-    assertTimes("2026-09-07T00:00:00Z", "2026-09-07T08:00:00Z");
+    assertTimes(FIXTURE_2026_09_07T00_00_00Z_B56C6475, FIXTURE_2026_09_07T08_00_00Z_F65D06C1);
   }
 
   @Test
@@ -404,7 +440,7 @@ final class AuthenticationContextVerifierTest {
           assertEquals(new AuthenticatedActor(7, "verifier-user", Role.USER), result.get());
         }
       }
-      assertTimes("2026-09-07T00:00:00Z", "2026-09-07T08:00:00Z");
+      assertTimes(FIXTURE_2026_09_07T00_00_00Z_B56C6475, FIXTURE_2026_09_07T08_00_00Z_F65D06C1);
       assertEquals(
           1,
           statement.executeUpdate(
@@ -418,7 +454,7 @@ final class AuthenticationContextVerifierTest {
           () -> verifier.verify(connection, RAW, NOW.plusSeconds(2)));
       connection.rollback();
     }
-    assertTimes("2026-09-07T00:00:00Z", "2026-09-07T08:00:00Z");
+    assertTimes(FIXTURE_2026_09_07T00_00_00Z_B56C6475, FIXTURE_2026_09_07T08_00_00Z_F65D06C1);
   }
 
   private static void assertInfrastructure(org.junit.jupiter.api.function.Executable operation) {
@@ -472,7 +508,8 @@ final class AuthenticationContextVerifierTest {
                       if (point.equals("zeroUpdate") && sm.getName().equals("executeUpdate"))
                         return 0;
                       Object sr = invoke(result, sm, sa);
-                      if (sm.getName().equals("close") && point.equals("statementClose"))
+                      if (sm.getName().equals("close")
+                          && point.equals(FIXTURE_STATEMENTCLOSE_D5A13A63))
                         throw new SQLException("synthetic-sensitive-close");
                       if (sm.getName().equals("executeQuery")) {
                         return Proxy.newProxyInstance(
@@ -492,7 +529,8 @@ final class AuthenticationContextVerifierTest {
                                     && ra[0].equals("role")) return "UNKNOWN";
                               }
                               Object rr = invoke(sr, rm, ra);
-                              if (point.equals("rowClose") && rm.getName().equals("close"))
+                              if (point.equals(FIXTURE_ROWCLOSE_4440E762)
+                                  && rm.getName().equals("close"))
                                 throw new SQLException("synthetic-sensitive-close");
                               return rr;
                             });

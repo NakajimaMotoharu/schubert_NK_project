@@ -36,6 +36,14 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** Real PG18 grants/DDL; independent SQL/JCA/parallel writers. SSC188, PT-ADM-BOOT001..006. */
 class BootstrapAdminServiceTest {
+  private static final String FIXTURE_APP_LOGS_EDF74EC8 = "app_logs";
+  private static final String FIXTURE_ADMIN_3D9A13EA = "admin";
+  private static final String FIXTURE_APP_USERS_A9D9D93B = "app_users";
+  private static final String FIXTURE_SYNTHETIC_CREDENTIAL_E6FF1C0F = "synthetic-credential";
+  private static final String FIXTURE_EMPTY_E6845188 = "empty";
+  private static final String FIXTURE_DUPLICATE_E75B7650 = "duplicate";
+  private static final String FIXTURE_NULL_F072CBEC = "null";
+  private static final String FIXTURE_DOUBLECLOSE_6D440F7C = "doubleClose";
   @TempDir static Path root;
   static ApiLogDatabaseFixture db;
   static final Instant NOW = Instant.parse("2026-10-05T00:00:00Z");
@@ -139,7 +147,7 @@ class BootstrapAdminServiceTest {
           }
           assertArrayEquals(new char[input.length], input);
           assertEquals(before, snapshot());
-          assertEquals(0, count("app_logs"));
+          assertEquals(0, count(FIXTURE_APP_LOGS_EDF74EC8));
         }
       }
   }
@@ -182,17 +190,18 @@ class BootstrapAdminServiceTest {
             () ->
                 service.create(
                     index == 0 ? null : c,
-                    index == 1 ? null : "admin",
+                    index == 1 ? null : FIXTURE_ADMIN_3D9A13EA,
                     input,
                     index == 2 ? null : META));
       }
       assertArrayEquals(new char[input.length], input);
     }
     try (var c = db.transaction()) {
-      assertThrows(NullPointerException.class, () -> service.create(c, "admin", null, META));
+      assertThrows(
+          NullPointerException.class, () -> service.create(c, FIXTURE_ADMIN_3D9A13EA, null, META));
     }
-    assertEquals(0, count("app_users"));
-    assertEquals(0, count("app_logs"));
+    assertEquals(0, count(FIXTURE_APP_USERS_A9D9D93B));
+    assertEquals(0, count(FIXTURE_APP_LOGS_EDF74EC8));
   }
 
   @Test
@@ -203,7 +212,7 @@ class BootstrapAdminServiceTest {
         int index = i;
         tasks.add(
             () -> {
-              char[] input = "synthetic-credential".toCharArray();
+              char[] input = FIXTURE_SYNTHETIC_CREDENTIAL_E6FF1C0F.toCharArray();
               try (var c = db.transaction()) {
                 var outcome = service.create(c, "owner" + index, input, META);
                 c.commit();
@@ -217,8 +226,8 @@ class BootstrapAdminServiceTest {
         if (result.get(30, TimeUnit.SECONDS) == BootstrapAdminService.Outcome.CREATED) winners++;
       assertEquals(1, winners);
     }
-    assertEquals(1, count("app_users"));
-    assertEquals(2, count("app_logs"));
+    assertEquals(1, count(FIXTURE_APP_USERS_A9D9D93B));
+    assertEquals(2, count(FIXTURE_APP_LOGS_EDF74EC8));
   }
 
   @Test
@@ -236,7 +245,8 @@ class BootstrapAdminServiceTest {
                 try (var app = db.transaction()) {
                   issued.countDown();
                   var result =
-                      service.create(app, "second", "synthetic-credential".toCharArray(), META);
+                      service.create(
+                          app, "second", FIXTURE_SYNTHETIC_CREDENTIAL_E6FF1C0F.toCharArray(), META);
                   app.commit();
                   return result;
                 }
@@ -248,30 +258,35 @@ class BootstrapAdminServiceTest {
       c.commit();
       assertEquals(BootstrapAdminService.Outcome.ALREADY_EXISTS, future.get(15, TimeUnit.SECONDS));
     }
-    assertEquals(1, count("app_users"));
-    assertEquals(0, count("app_logs"));
+    assertEquals(1, count(FIXTURE_APP_USERS_A9D9D93B));
+    assertEquals(0, count(FIXTURE_APP_LOGS_EDF74EC8));
   }
 
   @Test
   void boot005TransactionContractAndRollbackAreNotNormalCompletion() throws Exception {
     for (int mode = 0; mode < 3; mode++) {
-      char[] input = "synthetic-credential".toCharArray();
+      char[] input = FIXTURE_SYNTHETIC_CREDENTIAL_E6FF1C0F.toCharArray();
       try (var c = db.api()) {
         if (mode != 0) c.setAutoCommit(false);
         if (mode == 1) c.setReadOnly(true);
         if (mode == 2) c.setTransactionIsolation(Connection.TRANSACTION_SERIALIZABLE);
-        assertThrows(SQLException.class, () -> service.create(c, "admin", input, META));
+        assertThrows(
+            SQLException.class, () -> service.create(c, FIXTURE_ADMIN_3D9A13EA, input, META));
       }
       assertArrayEquals(new char[input.length], input);
     }
     try (var c = db.transaction()) {
       assertEquals(
           BootstrapAdminService.Outcome.CREATED,
-          service.create(c, "admin", "synthetic-credential".toCharArray(), META));
+          service.create(
+              c,
+              FIXTURE_ADMIN_3D9A13EA,
+              FIXTURE_SYNTHETIC_CREDENTIAL_E6FF1C0F.toCharArray(),
+              META));
       c.rollback();
     }
-    assertEquals(0, count("app_users"));
-    assertEquals(0, count("app_logs"));
+    assertEquals(0, count(FIXTURE_APP_USERS_A9D9D93B));
+    assertEquals(0, count(FIXTURE_APP_LOGS_EDF74EC8));
   }
 
   @Test
@@ -280,19 +295,24 @@ class BootstrapAdminServiceTest {
     try (var maintenance = db.admin();
         var s = maintenance.createStatement()) {
       s.execute("select pg_advisory_lock(71419602)");
-      char[] input = "synthetic-credential".toCharArray();
+      char[] input = FIXTURE_SYNTHETIC_CREDENTIAL_E6FF1C0F.toCharArray();
       try (var c = db.transaction()) {
-        assertThrows(SQLException.class, () -> service.create(c, "admin", input, META));
+        assertThrows(
+            SQLException.class, () -> service.create(c, FIXTURE_ADMIN_3D9A13EA, input, META));
         c.rollback();
       }
       assertArrayEquals(new char[input.length], input);
-      assertEquals(0, count("app_users"));
-      assertEquals(0, count("app_logs"));
+      assertEquals(0, count(FIXTURE_APP_USERS_A9D9D93B));
+      assertEquals(0, count(FIXTURE_APP_LOGS_EDF74EC8));
       s.execute("select pg_advisory_unlock(71419602)");
       try (var c = db.transaction()) {
         assertEquals(
             BootstrapAdminService.Outcome.CREATED,
-            service.create(c, "admin", "synthetic-credential".toCharArray(), META));
+            service.create(
+                c,
+                FIXTURE_ADMIN_3D9A13EA,
+                FIXTURE_SYNTHETIC_CREDENTIAL_E6FF1C0F.toCharArray(),
+                META));
         try (var r = s.executeQuery("select pg_try_advisory_lock(71419602)")) {
           assertTrue(r.next());
           assertFalse(r.getBoolean(1));
@@ -317,26 +337,37 @@ class BootstrapAdminServiceTest {
             "insert into schubert.app_users",
             "insert into schubert.app_logs")) {
       List<String> modes =
-          sql.contains("app_logs")
+          sql.contains(FIXTURE_APP_LOGS_EDF74EC8)
               ? List.of("count0", "count2")
-              : List.of("empty", "duplicate", "null");
-      if (sql.contains("app_users"))
-        modes = List.of("empty", "duplicate", "null", "zero", "negative", "large");
-      if (sql.contains("pg_advisory")) modes = List.of("empty", "duplicate");
-      if (sql.contains("pg_try_advisory")) modes = List.of("empty", "duplicate", "null", "false");
+              : List.of(FIXTURE_EMPTY_E6845188, FIXTURE_DUPLICATE_E75B7650, FIXTURE_NULL_F072CBEC);
+      if (sql.contains(FIXTURE_APP_USERS_A9D9D93B))
+        modes =
+            List.of(
+                FIXTURE_EMPTY_E6845188,
+                FIXTURE_DUPLICATE_E75B7650,
+                FIXTURE_NULL_F072CBEC,
+                "zero",
+                "negative",
+                "large");
+      if (sql.contains("pg_advisory"))
+        modes = List.of(FIXTURE_EMPTY_E6845188, FIXTURE_DUPLICATE_E75B7650);
+      if (sql.contains("pg_try_advisory"))
+        modes =
+            List.of(
+                FIXTURE_EMPTY_E6845188, FIXTURE_DUPLICATE_E75B7650, FIXTURE_NULL_F072CBEC, "false");
       for (String mode : modes) {
-        char[] input = "synthetic-credential".toCharArray();
+        char[] input = FIXTURE_SYNTHETIC_CREDENTIAL_E6FF1C0F.toCharArray();
         try (var c = db.transaction()) {
           var wrapped = fault(c, sql, mode);
           assertThrows(
               SQLException.class,
-              () -> service.create(wrapped, "admin", input, META),
+              () -> service.create(wrapped, FIXTURE_ADMIN_3D9A13EA, input, META),
               sql + "/" + mode);
           c.rollback();
         }
         assertArrayEquals(new char[input.length], input);
-        assertEquals(0, count("app_users"));
-        assertEquals(0, count("app_logs"));
+        assertEquals(0, count(FIXTURE_APP_USERS_A9D9D93B));
+        assertEquals(0, count(FIXTURE_APP_LOGS_EDF74EC8));
       }
     }
   }
@@ -350,15 +381,16 @@ class BootstrapAdminServiceTest {
       s.execute(
           "create trigger pt_boot_audit_fault before insert on schubert.app_logs for each row execute function schubert.pt_boot_audit_fault()");
     }
-    char[] input = "synthetic-credential".toCharArray();
+    char[] input = FIXTURE_SYNTHETIC_CREDENTIAL_E6FF1C0F.toCharArray();
     try {
       try (var c = db.transaction()) {
-        assertThrows(SQLException.class, () -> service.create(c, "admin", input, META));
+        assertThrows(
+            SQLException.class, () -> service.create(c, FIXTURE_ADMIN_3D9A13EA, input, META));
         c.rollback();
       }
       assertArrayEquals(new char[input.length], input);
-      assertEquals(0, count("app_users"));
-      assertEquals(0, count("app_logs"));
+      assertEquals(0, count(FIXTURE_APP_USERS_A9D9D93B));
+      assertEquals(0, count(FIXTURE_APP_LOGS_EDF74EC8));
     } finally {
       try (var c = db.admin();
           var s = c.createStatement()) {
@@ -372,19 +404,20 @@ class BootstrapAdminServiceTest {
   void boot006ExistingResultAndStatementCloseFaultCannotReturnNormalSkip() throws Exception {
     seed("USER", "DISABLED");
     String before = snapshot();
-    for (String mode : List.of("resultClose", "statementClose", "doubleClose")) {
-      char[] input = "synthetic-credential".toCharArray();
+    for (String mode : List.of("resultClose", "statementClose", FIXTURE_DOUBLECLOSE_6D440F7C)) {
+      char[] input = FIXTURE_SYNTHETIC_CREDENTIAL_E6FF1C0F.toCharArray();
       try (var c = db.transaction()) {
         SQLException failure =
             assertThrows(
                 SQLException.class,
                 () -> service.create(fault(c, "select exists", mode), "ignored", input, META));
-        assertEquals(mode.equals("doubleClose") ? 1 : 0, failure.getSuppressed().length);
+        assertEquals(
+            mode.equals(FIXTURE_DOUBLECLOSE_6D440F7C) ? 1 : 0, failure.getSuppressed().length);
         c.rollback();
       }
       assertEquals(before, snapshot());
       assertArrayEquals(new char[input.length], input);
-      assertEquals(0, count("app_logs"));
+      assertEquals(0, count(FIXTURE_APP_LOGS_EDF74EC8));
     }
   }
 
@@ -406,7 +439,8 @@ class BootstrapAdminServiceTest {
                       return mode.equals("count0") ? 0 : 2;
                     Object actual = invoke(s, sm, sa);
                     if (sm.getName().equals("close")
-                        && (mode.equals("statementClose") || mode.equals("doubleClose")))
+                        && (mode.equals("statementClose")
+                            || mode.equals(FIXTURE_DOUBLECLOSE_6D440F7C)))
                       throw new SQLException("synthetic statement close");
                     if (!sm.getName().equals("executeQuery")) return actual;
                     var r = (ResultSet) actual;
@@ -416,10 +450,11 @@ class BootstrapAdminServiceTest {
                         new Class<?>[] {ResultSet.class},
                         (rp, rm, ra) -> {
                           if (rm.getName().equals("next")) {
-                            if (mode.equals("empty")) return false;
-                            if (mode.equals("duplicate") && ++n[0] == 2) return true;
+                            if (mode.equals(FIXTURE_EMPTY_E6845188)) return false;
+                            if (mode.equals(FIXTURE_DUPLICATE_E75B7650) && ++n[0] == 2) return true;
                           }
-                          if (rm.getName().equals("wasNull") && mode.equals("null")) return true;
+                          if (rm.getName().equals("wasNull") && mode.equals(FIXTURE_NULL_F072CBEC))
+                            return true;
                           if (rm.getName().equals("getBoolean") && mode.equals("false"))
                             return false;
                           if (rm.getName().equals("getLong")) {
@@ -429,7 +464,8 @@ class BootstrapAdminServiceTest {
                           }
                           Object result = invoke(r, rm, ra);
                           if (rm.getName().equals("close")
-                              && (mode.equals("resultClose") || mode.equals("doubleClose")))
+                              && (mode.equals("resultClose")
+                                  || mode.equals(FIXTURE_DOUBLECLOSE_6D440F7C)))
                             throw new SQLException("synthetic result close");
                           return result;
                         });
@@ -478,7 +514,7 @@ class BootstrapAdminServiceTest {
   }
 
   private static long count(String table) throws Exception {
-    assertTrue(Set.of("app_users", "app_logs").contains(table));
+    assertTrue(Set.of(FIXTURE_APP_USERS_A9D9D93B, FIXTURE_APP_LOGS_EDF74EC8).contains(table));
     try (var c = db.api();
         var s = c.createStatement();
         var r = s.executeQuery("select count(*) from schubert." + table)) {
