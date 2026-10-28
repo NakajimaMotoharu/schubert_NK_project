@@ -1,0 +1,110 @@
+{
+  "actualExit": 0,
+  "aggregateCoverage": null,
+  "aggregateProductPassCount": null,
+  "formalUpdated": false,
+  "fullProgramAccepted": false,
+  "invocation": {
+    "actualPythonCommand": [
+      "/usr/bin/python3",
+      "-B",
+      "tools/quality/pg12932_coordinator_complete_public.py"
+    ],
+    "arbitraryArgumentsRecorded": false,
+    "entrypointPath": "tools/quality/pg12932_coordinator_complete_public.py",
+    "entrypointSha256": "8866c8a487cc37d82f9b743d28c30791ae5ce7413b06ac8e1ee2aad40688bb9f",
+    "helperPath": "tools/quality/host_tool_invocation.py",
+    "helperSha256": "85d616a3db4ff47f4c95ae2e0dd57954bc2b09f28b8f2a685b986e5621545c46",
+    "libraryPath": "tools/quality/pg12932_coordinator_complete_public.py",
+    "librarySha256": "8866c8a487cc37d82f9b743d28c30791ae5ce7413b06ac8e1ee2aad40688bb9f",
+    "loadedProjectPythonSources": {
+      "tools/quality/g07_host_class_provenance_inputs.py": "a676cb3e4145177c3c243722d737592ce7d44c3f29cfe4f670662ef7651f046b",
+      "tools/quality/host_tool_invocation.py": "85d616a3db4ff47f4c95ae2e0dd57954bc2b09f28b8f2a685b986e5621545c46",
+      "tools/quality/pg12706_scenario_writer_public.py": "7ea9c6c0cb2c88e4e510ff6bc3f1e05070f6e9bd92b7e84e7aacdf4399f32395",
+      "tools/quality/pg12932_coordinator_complete_public.py": "8866c8a487cc37d82f9b743d28c30791ae5ce7413b06ac8e1ee2aad40688bb9f",
+      "tools/quality/pg9898_g07_enum_public_delta.py": "2a7cc75fc0591b65c114ef4c77353565ccaa07fe684c3e6aeba22613d11cb0e4"
+    },
+    "provenance": "OBSERVED_SYS_ARGV_AND_ORIG_ARGV_NOT_RECONSTRUCTED"
+  },
+  "metadataProductExecutions": 0,
+  "newAccepted": 0,
+  "newUniqueTestIds": 8,
+  "program": "NK-MSG-001",
+  "reason": "Two historical source domains; test counts and coverage not added across runs",
+  "records": [
+    {
+      "hostManifest": "PG12896-reply-terminal-host-v1/manifest.json",
+      "hostSha256": "26389dbc5e120a4897d864c8f7e8496f401620cf0ff846eb824959a181726fb0",
+      "newTestIdMappings": [
+        {
+          "actual": "PASS",
+          "className": "dev.codex.schubert.nk.web.messaging.ReplyCorrelationTerminalRaceTest",
+          "method": "terminalRaceHasOneWinnerAndReturnsThePermit",
+          "testId": "PT-JMS-TERM-001"
+        },
+        {
+          "actual": "PASS",
+          "className": "dev.codex.schubert.nk.web.messaging.ReplyCorrelationTerminalRaceTest",
+          "method": "concurrentRegistrationsRespectCapacityAndReuseAllSlots",
+          "testId": "PT-JMS-TERM-002"
+        },
+        {
+          "actual": "PASS",
+          "className": "dev.codex.schubert.nk.web.messaging.ReplyCorrelationTerminalRaceTest",
+          "method": "nanosecondDeadlineAndCopiesStayIndependent",
+          "testId": "PT-JMS-TERM-003"
+        },
+        {
+          "actual": "PASS",
+          "className": "dev.codex.schubert.nk.web.messaging.ReplyCorrelationTerminalRaceTest",
+          "method": "callerCompletionViewCannotSetOrCancelTheRegistryPromise",
+          "testId": "PT-JMS-TERM-004"
+        }
+      ],
+      "noCrossSourceCoverageUnion": true,
+      "observedTestExecutions": 9,
+      "postManifest": "PG12900-reply-terminal-post-v1/manifest.json",
+      "postSha256": "b7618d0a1c1e8f15aa08fae490abd8ec584245dd19bfb37288c545026d55a99f",
+      "run": "PG12896-REPLYTERMINAL-JP",
+      "source": "5590eee0d766fdd48e56d95f6b33ce729accbd00"
+    },
+    {
+      "hostManifest": "PG12922-coordinator-corrected-host-v1/manifest.json",
+      "hostSha256": "1aa4cded3c135470f100f246770ebf77424b9689f991511a9ff37e63a7af0ba2",
+      "newTestIdMappings": [
+        {
+          "actual": "PASS",
+          "className": "dev.codex.schubert.nk.web.messaging.JmsRequestReplyCleanupTest",
+          "method": "everySendFailureKeepsIdentityAndReturnsBothCapacities",
+          "testId": "PT-JMS-RECOVERY-001"
+        },
+        {
+          "actual": "PASS",
+          "className": "dev.codex.schubert.nk.web.messaging.JmsRequestReplyCleanupTest",
+          "method": "registryFullDoesNotCancelAnotherWaiterAndRecovers",
+          "testId": "PT-JMS-RECOVERY-002"
+        },
+        {
+          "actual": "PASS",
+          "className": "dev.codex.schubert.nk.web.messaging.JmsRequestReplyCleanupTest",
+          "method": "clockFailureAndDeadlineOverflowReturnTheWaitPermit",
+          "testId": "PT-JMS-RECOVERY-003"
+        },
+        {
+          "actual": "PASS",
+          "className": "dev.codex.schubert.nk.web.messaging.JmsRequestReplyCleanupTest",
+          "method": "suppliedRequestAndReplyBuffersRemainBorrowed",
+          "testId": "PT-JMS-RECOVERY-004"
+        }
+      ],
+      "noCrossSourceCoverageUnion": true,
+      "observedTestExecutions": 17,
+      "postManifest": "PG12926-coordinator-corrected-post-v1/manifest.json",
+      "postSha256": "b3904e8e05c97c403ff65e65793dae5d3e447c564c61cbd7150262e7041ea3f9",
+      "run": "PG12922-COORDINATOR-JP",
+      "source": "4a3fad244f21530547fdc79b16f9ea3af0ca13af"
+    }
+  ],
+  "sourceDomainsSeparated": true,
+  "whole451Accepted": false
+}
