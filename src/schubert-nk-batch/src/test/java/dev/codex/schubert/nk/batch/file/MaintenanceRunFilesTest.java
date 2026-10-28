@@ -55,6 +55,39 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** PG158/SSC055; OPS009/UI251/SS343 6.15; PT-BAT-058..081, independent bytes/crash states. */
 final class MaintenanceRunFilesTest {
+  private static final String FIXTURE_2026_09_12T05_06_07_234567Z_AD805265 =
+      "2026-09-12T05:06:07.234567Z";
+  private static final String FIXTURE_ACTIVE_DB0FB2BF = "active";
+  private static final String FIXTURE_DONE_67185DC1 = ".done";
+  private static final String FIXTURE_WRITE_BC2434A1 = "write";
+  private static final String FIXTURE_2026_09_12T06_00_00Z_C00DCE5C = "2026-09-12T06:00:00Z";
+  private static final String FIXTURE_RUN_DA82F99F = ".run";
+  private static final String FIXTURE_NONE_30A0924A = "none";
+  private static final String FIXTURE_UNRELATED_34DD830A = "unrelated";
+  private static final String FIXTURE_PRIOR_A868E167 = "prior";
+  private static final String FIXTURE_NAMESPACE_C664670B = "namespace";
+  private static final String FIXTURE_LISTING_56A1BA18 = "listing";
+  private static final String FIXTURE_CLOSE_97959247 = "close";
+  private static final String FIXTURE_INTERRUPT_DDE42D5D = "interrupt";
+  private static final String FIXTURE_NAMESOPEN_379D365A = "namesOpen";
+  private static final String FIXTURE_RUNS_5D79E8DF = "runs";
+  private static final String FIXTURE_NAMESCLOSE_524EA1D8 = "namesClose";
+  private static final String FIXTURE_CREATE_5498A731 = "create";
+  private static final String FIXTURE_PUBLISH_69201707 = "publish";
+  private static final String FIXTURE_UNLINK_04963CA9 = "unlink";
+  private static final String FIXTURE_SYNC_5CFA1A73 = "sync";
+  private static final String FIXTURE_OPENREAD_79674C24 = "openRead";
+  private static final String FIXTURE_OPENROOT_B83E53B3 = "openRoot";
+  private static final String FIXTURE_OPENDIRECTORY_9E885716 = "openDirectory";
+  private static final String FIXTURE_OPENENTRY_4A0BE764 = "openEntry";
+  private static final String FIXTURE_VAR_1657FC17 = "var";
+  private static final String FIXTURE_LIB_5A090A50 = "lib";
+  private static final String FIXTURE_APP_4E5EF144 = "app";
+  private static final String FIXTURE_ATTEMPTS_2EF26378 = "attempts/";
+  private static final String FIXTURE_BEGIN_53B77CDD = ".begin";
+  private static final String FIXTURE_FORCE_34B3B0C3 = "force";
+  private static final String FIXTURE_MAINTENANCE_9CE8617E = "maintenance";
+  private static final String FIXTURE_ATTEMPTS_0D098B4D = "attempts";
   private static final String RUN_ID = "12345678-9abc-def0-8123-456789abcdef";
   private static final String ACT_ID = "fedcba98-7654-3210-8fed-cba987654321";
   private static final UUID NEXT = UUID.fromString("aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee");
@@ -89,21 +122,25 @@ final class MaintenanceRunFilesTest {
             var done =
                 new MaintenanceCompletion(
                     ACTIVATION,
-                    Instant.parse("2026-09-12T05:06:07.234567Z"),
+                    Instant.parse(FIXTURE_2026_09_12T05_06_07_234567Z_AD805265),
                     MaintenanceCompletion.Outcome.SUCCESS);
             assertEquals(done, s.complete(done));
             assertEquals(
                 new MaintenanceRunFiles.StartupOriginal(ACTIVATION, Optional.of(done)),
                 s.observeStartup(ACTIVATION));
-            assertFalse(Files.exists(f.maintenance.resolve("active")));
-            assertEquals(DONE0, Files.readString(f.attempts.resolve(ACT_ID + ".done")));
+            assertFalse(Files.exists(f.maintenance.resolve(FIXTURE_ACTIVE_DB0FB2BF)));
+            assertEquals(
+                DONE0, Files.readString(f.attempts.resolve(ACT_ID + FIXTURE_DONE_67185DC1)));
             assertThrows(
                 IOException.class, () -> s.successReferenceRun(ACTIVATION, RUN.id(), RUN.cutoff()));
             var before = new HashMap<>(f.counts);
             assertEquals(RUN, s.completedSuccessReferenceRun(done, RUN.id(), RUN.cutoff()));
-            assertEquals(before.getOrDefault("write", 0), f.counts.getOrDefault("write", 0));
+            assertEquals(
+                before.getOrDefault(FIXTURE_WRITE_BC2434A1, 0),
+                f.counts.getOrDefault(FIXTURE_WRITE_BC2434A1, 0));
             assertEquals(before.getOrDefault("remove", 0), f.counts.getOrDefault("remove", 0));
-            assertEquals(DONE0, Files.readString(f.attempts.resolve(ACT_ID + ".done")));
+            assertEquals(
+                DONE0, Files.readString(f.attempts.resolve(ACT_ID + FIXTURE_DONE_67185DC1)));
             return RUN;
           });
     }
@@ -167,7 +204,7 @@ final class MaintenanceRunFilesTest {
   void completedWarningRetainsHistoricalPriorButNeverPendingOrForeignActive() throws Exception {
     try (var f = fixture()) {
       f.seed(true, false, true);
-      var current = new BatchRun(NEXT, Instant.parse("2026-09-12T06:00:00Z"));
+      var current = new BatchRun(NEXT, Instant.parse(FIXTURE_2026_09_12T06_00_00Z_C00DCE5C));
       var activation = new MaintenanceActivation(current, OTHER);
       var done =
           new MaintenanceCompletion(
@@ -190,8 +227,9 @@ final class MaintenanceRunFilesTest {
                       s.completedSuccessReferenceRun(
                           done, RUN.id(), Instant.parse("2026-09-12T05:00:00Z"))));
       Files.writeString(
-          f.attempts.resolve(ACT_ID + ".done"),
-          DONE0.replace("2026-09-12T05:06:07.234567Z", "2026-09-12T07:06:07.234567Z"));
+          f.attempts.resolve(ACT_ID + FIXTURE_DONE_67185DC1),
+          DONE0.replace(
+              FIXTURE_2026_09_12T05_06_07_234567Z_AD805265, "2026-09-12T07:06:07.234567Z"));
       assertThrows(
           IOException.class,
           () ->
@@ -221,14 +259,15 @@ final class MaintenanceRunFilesTest {
           IOException.class,
           () ->
               f.files.execute(s -> s.completedSuccessReferenceRun(wrong, RUN.id(), RUN.cutoff())));
-      Files.writeString(f.runs.resolve(OTHER + ".run"), ANCHOR.replace(RUN_ID, OTHER.toString()));
+      Files.writeString(
+          f.runs.resolve(OTHER + FIXTURE_RUN_DA82F99F), ANCHOR.replace(RUN_ID, OTHER.toString()));
       assertThrows(
           IOException.class,
           () -> f.files.execute(s -> s.completedSuccessReferenceRun(done, RUN.id(), RUN.cutoff())));
       assertThrows(
           IOException.class,
           () -> f.files.execute(s -> s.completedSuccessReferenceRun(done, OTHER, RUN.cutoff())));
-      assertEquals(DONE0, Files.readString(f.attempts.resolve(ACT_ID + ".done")));
+      assertEquals(DONE0, Files.readString(f.attempts.resolve(ACT_ID + FIXTURE_DONE_67185DC1)));
     }
   }
 
@@ -236,7 +275,14 @@ final class MaintenanceRunFilesTest {
   @Test
   void completedReferenceRejectsWholeGraphDriftWithoutMutation() throws Exception {
     for (String fault :
-        List.of("none", "unrelated", "prior", "namespace", "listing", "close", "interrupt"))
+        List.of(
+            FIXTURE_NONE_30A0924A,
+            FIXTURE_UNRELATED_34DD830A,
+            FIXTURE_PRIOR_A868E167,
+            FIXTURE_NAMESPACE_C664670B,
+            FIXTURE_LISTING_56A1BA18,
+            FIXTURE_CLOSE_97959247,
+            FIXTURE_INTERRUPT_DDE42D5D))
       try (var f = fixture()) {
         f.seed(true, false, true);
         var done = completion(MaintenanceCompletion.Outcome.SUCCESS);
@@ -245,36 +291,52 @@ final class MaintenanceRunFilesTest {
                 f.files.execute(
                     s -> {
                       f.reset();
-                      if (fault.equals("unrelated")) f.on("namesOpen", 4, f::otherCompleted);
-                      if (fault.equals("prior"))
+                      if (fault.equals(FIXTURE_UNRELATED_34DD830A))
+                        f.on(FIXTURE_NAMESOPEN_379D365A, 4, f::otherCompleted);
+                      if (fault.equals(FIXTURE_PRIOR_A868E167))
                         f.on(
-                            "namesOpen",
+                            FIXTURE_NAMESOPEN_379D365A,
                             4,
-                            () -> Files.writeString(f.attempts.resolve(ACT_ID + ".done"), DONE10));
-                      if (fault.equals("namespace")) f.on("namesOpen", 4, () -> f.replace("runs"));
-                      if (fault.equals("listing") || fault.equals("close")) {
-                        f.fail = fault.equals("listing") ? "namesOpen" : "namesClose";
+                            () ->
+                                Files.writeString(
+                                    f.attempts.resolve(ACT_ID + FIXTURE_DONE_67185DC1), DONE10));
+                      if (fault.equals(FIXTURE_NAMESPACE_C664670B))
+                        f.on(FIXTURE_NAMESOPEN_379D365A, 4, () -> f.replace(FIXTURE_RUNS_5D79E8DF));
+                      if (fault.equals(FIXTURE_LISTING_56A1BA18)
+                          || fault.equals(FIXTURE_CLOSE_97959247)) {
+                        f.fail =
+                            fault.equals(FIXTURE_LISTING_56A1BA18)
+                                ? FIXTURE_NAMESOPEN_379D365A
+                                : FIXTURE_NAMESCLOSE_524EA1D8;
                         f.failAt = 4;
                       }
-                      if (fault.equals("interrupt"))
-                        f.on("namesOpen", 4, () -> Thread.currentThread().interrupt());
+                      if (fault.equals(FIXTURE_INTERRUPT_DDE42D5D))
+                        f.on(
+                            FIXTURE_NAMESOPEN_379D365A,
+                            4,
+                            () -> Thread.currentThread().interrupt());
                       try {
-                        if (fault.equals("none")) {
+                        if (fault.equals(FIXTURE_NONE_30A0924A)) {
                           assertEquals(
                               RUN, s.completedSuccessReferenceRun(done, RUN.id(), RUN.cutoff()));
-                          assertEquals(6, f.count("namesOpen"));
-                          assertEquals(6, f.count("namesClose"));
+                          assertEquals(6, f.count(FIXTURE_NAMESOPEN_379D365A));
+                          assertEquals(6, f.count(FIXTURE_NAMESCLOSE_524EA1D8));
                         } else
                           failure(
                               () -> s.completedSuccessReferenceRun(done, RUN.id(), RUN.cutoff()));
                       } finally {
                         Thread.interrupted();
                       }
-                      for (String write : List.of("create", "publish", "unlink", "write", "sync"))
-                        assertEquals(0, f.count(write));
+                      for (String write :
+                          List.of(
+                              FIXTURE_CREATE_5498A731,
+                              FIXTURE_PUBLISH_69201707,
+                              FIXTURE_UNLINK_04963CA9,
+                              FIXTURE_WRITE_BC2434A1,
+                              FIXTURE_SYNC_5CFA1A73)) assertEquals(0, f.count(write));
                       return RUN;
                     });
-        if (fault.equals("namespace")) failure(operation::execute);
+        if (fault.equals(FIXTURE_NAMESPACE_C664670B)) failure(operation::execute);
         else operation.execute();
       }
   }
@@ -285,7 +347,7 @@ final class MaintenanceRunFilesTest {
     try (var f = fixture()) {
       f.files.execute(s -> s.start(RUN, ACTIVATION.id()));
       f.files.execute(s -> s.complete(completion(MaintenanceCompletion.Outcome.SUCCESS)));
-      var current = new BatchRun(NEXT, Instant.parse("2026-09-12T06:00:00Z"));
+      var current = new BatchRun(NEXT, Instant.parse(FIXTURE_2026_09_12T06_00_00Z_C00DCE5C));
       var activation = new MaintenanceActivation(current, OTHER);
       f.files.execute(s -> s.start(current, OTHER));
       var before = new MaintenanceRunFiles.StartupOriginal(activation, Optional.empty());
@@ -332,7 +394,7 @@ final class MaintenanceRunFilesTest {
   @Test
   void comp203004RetainedNamespaceChecksReadNoGraphAndRejectReplacementOrExpiredSession()
       throws Exception {
-    for (String mode : List.of("normal", "replaced", "interrupt"))
+    for (String mode : List.of("normal", "replaced", FIXTURE_INTERRUPT_DDE42D5D))
       try (var f = fixture()) {
         var held = new java.util.concurrent.atomic.AtomicReference<MaintenanceRunFiles.Session>();
         Action operation =
@@ -341,8 +403,9 @@ final class MaintenanceRunFilesTest {
                     s -> {
                       held.set(s);
                       f.reset();
-                      if (mode.equals("replaced")) f.replace("runs");
-                      if (mode.equals("interrupt")) Thread.currentThread().interrupt();
+                      if (mode.equals("replaced")) f.replace(FIXTURE_RUNS_5D79E8DF);
+                      if (mode.equals(FIXTURE_INTERRUPT_DDE42D5D))
+                        Thread.currentThread().interrupt();
                       try {
                         if (mode.equals("normal")) s.verifyRetained();
                         else failure(s::verifyRetained);
@@ -350,8 +413,13 @@ final class MaintenanceRunFilesTest {
                         Thread.interrupted();
                       }
                       for (String io :
-                          List.of("namesOpen", "openRead", "create", "write", "unlink", "sync"))
-                        assertEquals(0, f.count(io), io);
+                          List.of(
+                              FIXTURE_NAMESOPEN_379D365A,
+                              FIXTURE_OPENREAD_79674C24,
+                              FIXTURE_CREATE_5498A731,
+                              FIXTURE_WRITE_BC2434A1,
+                              FIXTURE_UNLINK_04963CA9,
+                              FIXTURE_SYNC_5CFA1A73)) assertEquals(0, f.count(io), io);
                       return true;
                     });
         if (mode.equals("replaced")) failure(operation::execute);
@@ -365,10 +433,17 @@ final class MaintenanceRunFilesTest {
   @Test
   void successReferenceUsesTwoWholeSnapshotsAndRejectsSecondSnapshotDrift() throws Exception {
     for (String fault :
-        List.of("none", "unrelated", "prior", "namespace", "listing", "close", "interrupt"))
+        List.of(
+            FIXTURE_NONE_30A0924A,
+            FIXTURE_UNRELATED_34DD830A,
+            FIXTURE_PRIOR_A868E167,
+            FIXTURE_NAMESPACE_C664670B,
+            FIXTURE_LISTING_56A1BA18,
+            FIXTURE_CLOSE_97959247,
+            FIXTURE_INTERRUPT_DDE42D5D))
       try (var f = fixture()) {
         f.seed(true, false, true);
-        var current = new BatchRun(NEXT, Instant.parse("2026-09-12T06:00:00Z"));
+        var current = new BatchRun(NEXT, Instant.parse(FIXTURE_2026_09_12T06_00_00Z_C00DCE5C));
         var activation = new MaintenanceActivation(current, OTHER);
         f.files.execute(s -> s.start(current, OTHER));
         Action operation =
@@ -377,27 +452,39 @@ final class MaintenanceRunFilesTest {
                     s -> {
                       for (var requested : List.of(RUN, current)) {
                         f.reset();
-                        if (fault.equals("unrelated")) f.on("namesOpen", 4, f::otherCompleted);
-                        if (fault.equals("prior"))
+                        if (fault.equals(FIXTURE_UNRELATED_34DD830A))
+                          f.on(FIXTURE_NAMESOPEN_379D365A, 4, f::otherCompleted);
+                        if (fault.equals(FIXTURE_PRIOR_A868E167))
                           f.on(
-                              "namesOpen",
+                              FIXTURE_NAMESOPEN_379D365A,
                               4,
                               () ->
-                                  Files.writeString(f.attempts.resolve(ACT_ID + ".done"), DONE10));
-                        if (fault.equals("namespace"))
-                          f.on("namesOpen", 4, () -> f.replace("runs"));
-                        if (fault.equals("listing") || fault.equals("close")) {
-                          f.fail = fault.equals("listing") ? "namesOpen" : "namesClose";
+                                  Files.writeString(
+                                      f.attempts.resolve(ACT_ID + FIXTURE_DONE_67185DC1), DONE10));
+                        if (fault.equals(FIXTURE_NAMESPACE_C664670B))
+                          f.on(
+                              FIXTURE_NAMESOPEN_379D365A,
+                              4,
+                              () -> f.replace(FIXTURE_RUNS_5D79E8DF));
+                        if (fault.equals(FIXTURE_LISTING_56A1BA18)
+                            || fault.equals(FIXTURE_CLOSE_97959247)) {
+                          f.fail =
+                              fault.equals(FIXTURE_LISTING_56A1BA18)
+                                  ? FIXTURE_NAMESOPEN_379D365A
+                                  : FIXTURE_NAMESCLOSE_524EA1D8;
                           f.failAt = 4;
                         }
-                        if (fault.equals("interrupt"))
-                          f.on("namesOpen", 4, () -> Thread.currentThread().interrupt());
-                        if (fault.equals("none")) {
+                        if (fault.equals(FIXTURE_INTERRUPT_DDE42D5D))
+                          f.on(
+                              FIXTURE_NAMESOPEN_379D365A,
+                              4,
+                              () -> Thread.currentThread().interrupt());
+                        if (fault.equals(FIXTURE_NONE_30A0924A)) {
                           assertEquals(
                               requested,
                               s.successReferenceRun(activation, requested.id(), current.cutoff()));
-                          assertEquals(6, f.count("namesOpen"));
-                          assertEquals(6, f.count("namesClose"));
+                          assertEquals(6, f.count(FIXTURE_NAMESOPEN_379D365A));
+                          assertEquals(6, f.count(FIXTURE_NAMESCLOSE_524EA1D8));
                         } else {
                           try {
                             failure(
@@ -408,15 +495,20 @@ final class MaintenanceRunFilesTest {
                             Thread.interrupted();
                           }
                         }
-                        for (String write : List.of("create", "publish", "write", "unlink", "sync"))
-                          assertEquals(0, f.count(write), write);
+                        for (String write :
+                            List.of(
+                                FIXTURE_CREATE_5498A731,
+                                FIXTURE_PUBLISH_69201707,
+                                FIXTURE_WRITE_BC2434A1,
+                                FIXTURE_UNLINK_04963CA9,
+                                FIXTURE_SYNC_5CFA1A73)) assertEquals(0, f.count(write), write);
                         // Mutation cases change the fixture once; never reuse that graph as a fresh
                         // success.
-                        if (!fault.equals("none")) break;
+                        if (!fault.equals(FIXTURE_NONE_30A0924A)) break;
                       }
                       return true;
                     });
-        if (fault.equals("namespace")) failure(operation::execute);
+        if (fault.equals(FIXTURE_NAMESPACE_C664670B)) failure(operation::execute);
         else operation.execute();
         assertEquals(0, f.live.size());
       }
@@ -435,7 +527,9 @@ final class MaintenanceRunFilesTest {
         f.files.execute(s -> s.complete(done));
         var current =
             new BatchRun(
-                NEXT, Instant.parse(future ? "2026-09-12T06:00:00Z" : "2026-09-13T06:00:00Z"));
+                NEXT,
+                Instant.parse(
+                    future ? FIXTURE_2026_09_12T06_00_00Z_C00DCE5C : "2026-09-13T06:00:00Z"));
         var activation = new MaintenanceActivation(current, OTHER);
         f.files.execute(s -> s.start(current, OTHER));
         assertThrows(
@@ -495,9 +589,12 @@ final class MaintenanceRunFilesTest {
                     (proxy, method, args) -> {
                       try {
                         Object value = method.invoke(f.calls, args);
-                        if (Set.of("openRoot", "openDirectory", "openEntry")
+                        if (Set.of(
+                                FIXTURE_OPENROOT_B83E53B3,
+                                FIXTURE_OPENDIRECTORY_9E885716,
+                                FIXTURE_OPENENTRY_4A0BE764)
                             .contains(method.getName())) assertTrue(hostFds.add((Integer) value));
-                        if (method.getName().equals("close"))
+                        if (method.getName().equals(FIXTURE_CLOSE_97959247))
                           assertTrue(hostFds.remove((Integer) args[0]));
                         return value;
                       } catch (InvocationTargetException failure) {
@@ -540,7 +637,8 @@ final class MaintenanceRunFilesTest {
                   return condition.equals("host-ro");
                 try {
                   String role = f.role(held);
-                  return Set.of("var", "lib", "app").contains(role)
+                  return Set.of(FIXTURE_VAR_1657FC17, FIXTURE_LIB_5A090A50, FIXTURE_APP_4E5EF144)
+                          .contains(role)
                       || condition.equals(role + "-ro");
                 } catch (IOException failure) {
                   throw new StorageIoException(StorageIoException.Reason.UNAVAILABLE);
@@ -563,8 +661,8 @@ final class MaintenanceRunFilesTest {
           failure(() -> files.execute(s -> invoked.incrementAndGet()));
           assertEquals(0, invoked.get());
         }
-        assertEquals(0, f.count("publish"));
-        assertEquals(0, f.count("write"));
+        assertEquals(0, f.count(FIXTURE_PUBLISH_69201707));
+        assertEquals(0, f.count(FIXTURE_WRITE_BC2434A1));
         assertTrue(hostFds.isEmpty());
         f.released();
       }
@@ -573,12 +671,17 @@ final class MaintenanceRunFilesTest {
 
   private static MaintenanceCompletion completion(MaintenanceCompletion.Outcome outcome) {
     return new MaintenanceCompletion(
-        ACTIVATION, Instant.parse("2026-09-12T05:06:07.234567Z"), outcome);
+        ACTIVATION, Instant.parse(FIXTURE_2026_09_12T05_06_07_234567Z_AD805265), outcome);
   }
 
   private static Map<String, String> activeFiles() {
     return Map.of(
-        "runs/" + RUN_ID + ".run", ANCHOR, "attempts/" + ACT_ID + ".begin", BEGIN, "active", BEGIN);
+        "runs/" + RUN_ID + FIXTURE_RUN_DA82F99F,
+        ANCHOR,
+        FIXTURE_ATTEMPTS_2EF26378 + ACT_ID + FIXTURE_BEGIN_53B77CDD,
+        BEGIN,
+        FIXTURE_ACTIVE_DB0FB2BF,
+        BEGIN);
   }
 
   private static CleanupWorkerRequest cleanupRequest() {
@@ -593,8 +696,14 @@ final class MaintenanceRunFilesTest {
       var original = disk(f);
       assertEquals(ACTIVATION, f.files.execute(s -> s.observeCleanup(cleanupRequest())));
       assertEquals(original, disk(f));
-      for (String operation : List.of("create", "write", "force", "publish", "unlink", "sync"))
-        assertEquals(0, f.count(operation), operation);
+      for (String operation :
+          List.of(
+              FIXTURE_CREATE_5498A731,
+              FIXTURE_WRITE_BC2434A1,
+              FIXTURE_FORCE_34B3B0C3,
+              FIXTURE_PUBLISH_69201707,
+              FIXTURE_UNLINK_04963CA9,
+              FIXTURE_SYNC_5CFA1A73)) assertEquals(0, f.count(operation), operation);
       f.released();
     }
   }
@@ -612,7 +721,7 @@ final class MaintenanceRunFilesTest {
                   RUN.id(), ACTIVATION.id(), RUN.cutoff().plusSeconds(1), "0".repeat(64))))
         failure(() -> f.files.execute(s -> s.observeCleanup(request)));
       assertEquals(activeFiles(), disk(f));
-      assertEquals(0, f.count("publish"));
+      assertEquals(0, f.count(FIXTURE_PUBLISH_69201707));
       f.released();
     }
   }
@@ -626,13 +735,13 @@ final class MaintenanceRunFilesTest {
           try (var f = fixture()) {
             f.seed(begin, active, false);
             failure(() -> f.files.execute(s -> s.observeCleanup(cleanupRequest())));
-            assertEquals(0, f.count("publish"));
+            assertEquals(0, f.count(FIXTURE_PUBLISH_69201707));
             f.released();
           }
     try (var f = fixture()) {
       f.seed(true, true, true);
       failure(() -> f.files.execute(s -> s.observeCleanup(cleanupRequest())));
-      assertEquals(0, f.count("publish"));
+      assertEquals(0, f.count(FIXTURE_PUBLISH_69201707));
       f.released();
     }
   }
@@ -649,31 +758,32 @@ final class MaintenanceRunFilesTest {
     try (var f = fixture()) {
       f.seed(true, true, false);
       f.on(
-          "namesOpen",
+          FIXTURE_NAMESOPEN_379D365A,
           4,
           () ->
               Files.writeString(
-                  f.maintenance.resolve("active"), BEGIN.replace(ACT_ID, NEXT.toString())));
+                  f.maintenance.resolve(FIXTURE_ACTIVE_DB0FB2BF),
+                  BEGIN.replace(ACT_ID, NEXT.toString())));
       failure(() -> f.files.execute(s -> s.observeCleanup(cleanupRequest())));
-      assertEquals(0, f.count("publish"));
+      assertEquals(0, f.count(FIXTURE_PUBLISH_69201707));
       f.released();
     }
     try (var f = fixture()) {
       f.seed(true, true, false);
       f.rawCloses = true;
       failure(() -> f.files.execute(s -> s.observeCleanup(cleanupRequest())));
-      assertEquals(0, f.count("publish"));
+      assertEquals(0, f.count(FIXTURE_PUBLISH_69201707));
       f.released();
     }
   }
 
   private static Map<String, String> completedFiles(String done) {
     return Map.of(
-        "runs/" + RUN_ID + ".run",
+        "runs/" + RUN_ID + FIXTURE_RUN_DA82F99F,
         ANCHOR,
-        "attempts/" + ACT_ID + ".begin",
+        FIXTURE_ATTEMPTS_2EF26378 + ACT_ID + FIXTURE_BEGIN_53B77CDD,
         BEGIN,
-        "attempts/" + ACT_ID + ".done",
+        FIXTURE_ATTEMPTS_2EF26378 + ACT_ID + FIXTURE_DONE_67185DC1,
         done);
   }
 
@@ -700,13 +810,18 @@ final class MaintenanceRunFilesTest {
     try (var f = fixture()) {
       state(f.files.execute(s -> s.start(RUN, ACTIVATION.id())), ACTIVATION, false);
       assertEquals(activeFiles(), disk(f));
-      trace("PT-BAT-058-anchor.txt", Files.readString(f.runs.resolve(RUN_ID + ".run")));
-      trace("PT-BAT-058-begin.txt", Files.readString(f.attempts.resolve(ACT_ID + ".begin")));
-      trace("PT-BAT-058-active.txt", Files.readString(f.maintenance.resolve("active")));
-      assertEquals(3, f.count("create"));
-      assertEquals(3, f.count("force"));
-      assertEquals(3, f.count("publish"));
-      assertEquals(3, f.count("sync"));
+      trace(
+          "PT-BAT-058-anchor.txt", Files.readString(f.runs.resolve(RUN_ID + FIXTURE_RUN_DA82F99F)));
+      trace(
+          "PT-BAT-058-begin.txt",
+          Files.readString(f.attempts.resolve(ACT_ID + FIXTURE_BEGIN_53B77CDD)));
+      trace(
+          "PT-BAT-058-active.txt",
+          Files.readString(f.maintenance.resolve(FIXTURE_ACTIVE_DB0FB2BF)));
+      assertEquals(3, f.count(FIXTURE_CREATE_5498A731));
+      assertEquals(3, f.count(FIXTURE_FORCE_34B3B0C3));
+      assertEquals(3, f.count(FIXTURE_PUBLISH_69201707));
+      assertEquals(3, f.count(FIXTURE_SYNC_5CFA1A73));
       f.released();
     }
   }
@@ -718,11 +833,13 @@ final class MaintenanceRunFilesTest {
       var original = disk(f);
       state(f.files.execute(s -> s.resume(RUN.id(), NEXT)), ACTIVATION, false);
       assertEquals(original, disk(f));
-      assertEquals(0, f.count("create"));
-      assertEquals(0, f.count("write"));
+      assertEquals(0, f.count(FIXTURE_CREATE_5498A731));
+      assertEquals(0, f.count(FIXTURE_WRITE_BC2434A1));
       assertEquals(
-          3, f.count("force"), "BUG159: visible chain needs re-sync before recovery succeeds");
-      assertEquals(3, f.count("sync"));
+          3,
+          f.count(FIXTURE_FORCE_34B3B0C3),
+          "BUG159: visible chain needs re-sync before recovery succeeds");
+      assertEquals(3, f.count(FIXTURE_SYNC_5CFA1A73));
       f.released();
     }
   }
@@ -731,12 +848,12 @@ final class MaintenanceRunFilesTest {
   void resumeOrphanAnchor() throws Exception {
     try (var f = fixture()) {
       f.seed(false, false, false);
-      var original = f.nativeIo.attributes(f.runs.resolve(RUN_ID + ".run"));
+      var original = f.nativeIo.attributes(f.runs.resolve(RUN_ID + FIXTURE_RUN_DA82F99F));
       state(f.files.execute(s -> s.resume(RUN.id(), ACTIVATION.id())), ACTIVATION, false);
-      assertEquals(original, f.nativeIo.attributes(f.runs.resolve(RUN_ID + ".run")));
+      assertEquals(original, f.nativeIo.attributes(f.runs.resolve(RUN_ID + FIXTURE_RUN_DA82F99F)));
       assertEquals(activeFiles(), disk(f));
-      assertEquals(2, f.count("create"));
-      assertEquals(3, f.count("force"));
+      assertEquals(2, f.count(FIXTURE_CREATE_5498A731));
+      assertEquals(3, f.count(FIXTURE_FORCE_34B3B0C3));
       f.released();
     }
   }
@@ -747,8 +864,8 @@ final class MaintenanceRunFilesTest {
       f.seed(true, false, false);
       state(f.files.execute(s -> s.resume(RUN.id(), NEXT)), ACTIVATION, false);
       assertEquals(activeFiles(), disk(f));
-      assertEquals(1, f.count("create"));
-      assertEquals(3, f.count("force"));
+      assertEquals(1, f.count(FIXTURE_CREATE_5498A731));
+      assertEquals(3, f.count(FIXTURE_FORCE_34B3B0C3));
       f.released();
     }
   }
@@ -758,15 +875,17 @@ final class MaintenanceRunFilesTest {
     try (var f = fixture()) {
       f.seed(true, false, true);
       var expected = new HashMap<>(completedFiles(DONE0));
-      expected.put("attempts/" + NEXT + ".begin", BEGIN.replace(ACT_ID, NEXT.toString()));
-      expected.put("active", BEGIN.replace(ACT_ID, NEXT.toString()));
+      expected.put(
+          FIXTURE_ATTEMPTS_2EF26378 + NEXT + FIXTURE_BEGIN_53B77CDD,
+          BEGIN.replace(ACT_ID, NEXT.toString()));
+      expected.put(FIXTURE_ACTIVE_DB0FB2BF, BEGIN.replace(ACT_ID, NEXT.toString()));
       state(
           f.files.execute(s -> s.resume(RUN.id(), NEXT)),
           new MaintenanceActivation(RUN, NEXT),
           false);
       assertEquals(expected, disk(f));
-      assertEquals(2, f.count("create"));
-      assertEquals(3, f.count("force"));
+      assertEquals(2, f.count(FIXTURE_CREATE_5498A731));
+      assertEquals(3, f.count(FIXTURE_FORCE_34B3B0C3));
       f.released();
     }
   }
@@ -778,8 +897,8 @@ final class MaintenanceRunFilesTest {
       var original = disk(f);
       state(f.files.execute(s -> s.resume(RUN.id(), NEXT)), ACTIVATION, true);
       assertEquals(original, disk(f));
-      assertEquals(0, f.count("write"));
-      assertEquals(4, f.count("force"));
+      assertEquals(0, f.count(FIXTURE_WRITE_BC2434A1));
+      assertEquals(4, f.count(FIXTURE_FORCE_34B3B0C3));
       f.released();
     }
   }
@@ -797,13 +916,13 @@ final class MaintenanceRunFilesTest {
         String code = outcome == MaintenanceCompletion.Outcome.SUCCESS ? "0" : "10";
         trace(
             "PT-BAT-064-done-" + code + ".txt",
-            Files.readString(f.attempts.resolve(ACT_ID + ".done")));
+            Files.readString(f.attempts.resolve(ACT_ID + FIXTURE_DONE_67185DC1)));
         trace(
             "PT-BAT-064-names-" + code + ".txt",
             String.join("\n", new TreeSet<>(disk(f).keySet())) + "\n");
-        assertEquals(1, f.count("create"));
-        assertEquals(1, f.count("unlink"));
-        assertEquals(4, f.count("force"));
+        assertEquals(1, f.count(FIXTURE_CREATE_5498A731));
+        assertEquals(1, f.count(FIXTURE_UNLINK_04963CA9));
+        assertEquals(4, f.count(FIXTURE_FORCE_34B3B0C3));
         f.released();
       }
   }
@@ -814,14 +933,14 @@ final class MaintenanceRunFilesTest {
       f.seed(true, false, true);
       f.otherCompleted();
       Files.writeString(
-          f.maintenance.resolve("active"),
+          f.maintenance.resolve(FIXTURE_ACTIVE_DB0FB2BF),
           BEGIN.replace(RUN_ID, OTHER.toString()).replace(ACT_ID, NEXT.toString()));
       var before = disk(f);
       failure(
           () ->
               f.files.execute(s -> s.complete(completion(MaintenanceCompletion.Outcome.SUCCESS))));
       assertEquals(before, disk(f));
-      assertEquals(0, f.count("force"));
+      assertEquals(0, f.count(FIXTURE_FORCE_34B3B0C3));
       f.released();
     }
     for (boolean active : List.of(false, true))
@@ -831,7 +950,7 @@ final class MaintenanceRunFilesTest {
             completion(MaintenanceCompletion.Outcome.SUCCESS),
             f.files.execute(s -> s.complete(completion(MaintenanceCompletion.Outcome.SUCCESS))));
         assertEquals(completedFiles(DONE0), disk(f));
-        assertEquals(0, f.count("create"));
+        assertEquals(0, f.count(FIXTURE_CREATE_5498A731));
         f.released();
       }
     for (var wrong :
@@ -843,7 +962,7 @@ final class MaintenanceRunFilesTest {
                 MaintenanceCompletion.Outcome.SUCCESS),
             new MaintenanceCompletion(
                 new MaintenanceActivation(RUN, NEXT),
-                Instant.parse("2026-09-12T05:06:07.234567Z"),
+                Instant.parse(FIXTURE_2026_09_12T05_06_07_234567Z_AD805265),
                 MaintenanceCompletion.Outcome.SUCCESS)))
       try (var f = fixture()) {
         f.seed(true, true, true);
@@ -870,7 +989,7 @@ final class MaintenanceRunFilesTest {
         BatchRun requested = mode == 3 ? new BatchRun(OTHER, RUN.cutoff()) : RUN;
         failure(() -> f.files.execute(s -> s.start(requested, ACTIVATION.id())));
         assertEquals(original, disk(f));
-        assertEquals(0, f.count("write"));
+        assertEquals(0, f.count(FIXTURE_WRITE_BC2434A1));
         f.released();
       }
     try (var f = fixture()) {
@@ -885,12 +1004,13 @@ final class MaintenanceRunFilesTest {
     }
     try (var f = fixture()) {
       f.seed(true, true, false);
-      Files.writeString(f.runs.resolve(OTHER + ".run"), ANCHOR.replace(RUN_ID, OTHER.toString()));
       Files.writeString(
-          f.attempts.resolve(NEXT + ".begin"),
+          f.runs.resolve(OTHER + FIXTURE_RUN_DA82F99F), ANCHOR.replace(RUN_ID, OTHER.toString()));
+      Files.writeString(
+          f.attempts.resolve(NEXT + FIXTURE_BEGIN_53B77CDD),
           BEGIN.replace(RUN_ID, OTHER.toString()).replace(ACT_ID, NEXT.toString()));
       Files.writeString(
-          f.attempts.resolve(NEXT + ".done"),
+          f.attempts.resolve(NEXT + FIXTURE_DONE_67185DC1),
           DONE0.replace(RUN_ID, OTHER.toString()).replace(ACT_ID, NEXT.toString()));
       failure(() -> f.files.execute(s -> s.resume(OTHER, NEXT)));
       f.released();
@@ -910,25 +1030,30 @@ final class MaintenanceRunFilesTest {
       try (var f = fixture()) {
         f.seed(true, true, true);
         switch (action) {
-          case "missingAnchor" -> Files.delete(f.runs.resolve(RUN_ID + ".run"));
-          case "missingBegin" -> Files.delete(f.attempts.resolve(ACT_ID + ".begin"));
+          case "missingAnchor" -> Files.delete(f.runs.resolve(RUN_ID + FIXTURE_RUN_DA82F99F));
+          case "missingBegin" -> Files.delete(f.attempts.resolve(ACT_ID + FIXTURE_BEGIN_53B77CDD));
           case "wrongCutoff" ->
               Files.writeString(
-                  f.attempts.resolve(ACT_ID + ".begin"), BEGIN.replace("123456Z", "123457Z"));
+                  f.attempts.resolve(ACT_ID + FIXTURE_BEGIN_53B77CDD),
+                  BEGIN.replace("123456Z", "123457Z"));
           case "wrongDone" ->
               Files.writeString(
-                  f.attempts.resolve(ACT_ID + ".done"), DONE0.replace("123456Z", "123457Z"));
+                  f.attempts.resolve(ACT_ID + FIXTURE_DONE_67185DC1),
+                  DONE0.replace("123456Z", "123457Z"));
           case "wrongActive" ->
               Files.writeString(
-                  f.maintenance.resolve("active"), BEGIN.replace(ACT_ID, NEXT.toString()));
+                  f.maintenance.resolve(FIXTURE_ACTIVE_DB0FB2BF),
+                  BEGIN.replace(ACT_ID, NEXT.toString()));
           case "wrongName" ->
-              Files.move(f.runs.resolve(RUN_ID + ".run"), f.runs.resolve(OTHER + ".run"));
+              Files.move(
+                  f.runs.resolve(RUN_ID + FIXTURE_RUN_DA82F99F),
+                  f.runs.resolve(OTHER + FIXTURE_RUN_DA82F99F));
           default -> throw new AssertionError(action);
         }
         var before = disk(f);
         failure(() -> f.files.execute(s -> s.resume(RUN.id(), NEXT)));
         assertEquals(before, disk(f));
-        assertEquals(0, f.count("write"));
+        assertEquals(0, f.count(FIXTURE_WRITE_BC2434A1));
         f.released();
       }
     try (var f = fixture()) {
@@ -945,11 +1070,12 @@ final class MaintenanceRunFilesTest {
     for (boolean active : List.of(false, true))
       try (var f = fixture()) {
         f.seed(true, active, true);
-        Files.writeString(f.runs.resolve(OTHER + ".run"), ANCHOR.replace(RUN_ID, OTHER.toString()));
+        Files.writeString(
+            f.runs.resolve(OTHER + FIXTURE_RUN_DA82F99F), ANCHOR.replace(RUN_ID, OTHER.toString()));
         var before = disk(f);
         failure(() -> f.files.execute(s -> s.resume(RUN.id(), NEXT)));
         assertEquals(before, disk(f));
-        assertEquals(0, f.count("write"));
+        assertEquals(0, f.count(FIXTURE_WRITE_BC2434A1));
         f.released();
       }
     for (int mode = 0; mode < 5; mode++)
@@ -957,10 +1083,12 @@ final class MaintenanceRunFilesTest {
         f.seed(mode != 0, mode >= 2, mode == 4);
         if (mode == 0 || mode == 1 || mode == 2)
           Files.writeString(
-              f.runs.resolve(OTHER + ".run"), ANCHOR.replace(RUN_ID, OTHER.toString()));
+              f.runs.resolve(OTHER + FIXTURE_RUN_DA82F99F),
+              ANCHOR.replace(RUN_ID, OTHER.toString()));
         else
           Files.writeString(
-              f.attempts.resolve(NEXT + ".begin"), BEGIN.replace(ACT_ID, NEXT.toString()));
+              f.attempts.resolve(NEXT + FIXTURE_BEGIN_53B77CDD),
+              BEGIN.replace(ACT_ID, NEXT.toString()));
         var before = disk(f);
         failure(() -> f.files.execute(s -> s.resume(RUN.id(), NEXT)));
         assertEquals(before, disk(f));
@@ -970,15 +1098,16 @@ final class MaintenanceRunFilesTest {
 
   @Test
   void inventoryUnknownAndPartial() throws Exception {
-    for (String role : List.of("maintenance", "runs", "attempts"))
+    for (String role :
+        List.of(FIXTURE_MAINTENANCE_9CE8617E, FIXTURE_RUNS_5D79E8DF, FIXTURE_ATTEMPTS_0D098B4D))
       for (String name :
           List.of(
               "unknown",
               OTHER + ".part",
               OTHER + ".gc",
-              RUN_ID.toUpperCase(Locale.ROOT) + ".run",
+              RUN_ID.toUpperCase(Locale.ROOT) + FIXTURE_RUN_DA82F99F,
               "zzzzzzzz-zzzz-zzzz-zzzz-zzzzzzzzzzzz.run",
-              RUN_ID + ".done"))
+              RUN_ID + FIXTURE_DONE_67185DC1))
         try (var f = fixture()) {
           f.seed(true, true, false);
           Files.writeString(f.path(role).resolve(name), "preserve");
@@ -998,10 +1127,17 @@ final class MaintenanceRunFilesTest {
             if (role.equals("file")) values.put("dev", -1L);
           };
       failure(() -> f.files.execute(s -> s.resume(RUN.id(), NEXT)));
-      assertEquals(0, f.count("openRead"));
+      assertEquals(0, f.count(FIXTURE_OPENREAD_79674C24));
       f.released();
     }
-    for (String role : List.of("var", "lib", "app", "maintenance", "runs", "attempts"))
+    for (String role :
+        List.of(
+            FIXTURE_VAR_1657FC17,
+            FIXTURE_LIB_5A090A50,
+            FIXTURE_APP_4E5EF144,
+            FIXTURE_MAINTENANCE_9CE8617E,
+            FIXTURE_RUNS_5D79E8DF,
+            FIXTURE_ATTEMPTS_0D098B4D))
       for (String bad :
           List.of(
               "nullAttributes",
@@ -1017,7 +1153,14 @@ final class MaintenanceRunFilesTest {
           failure(() -> f.files.execute(s -> true));
           f.released();
         }
-    for (String role : List.of("var", "lib", "app", "maintenance", "runs", "attempts"))
+    for (String role :
+        List.of(
+            FIXTURE_VAR_1657FC17,
+            FIXTURE_LIB_5A090A50,
+            FIXTURE_APP_4E5EF144,
+            FIXTURE_MAINTENANCE_9CE8617E,
+            FIXTURE_RUNS_5D79E8DF,
+            FIXTURE_ATTEMPTS_0D098B4D))
       for (var bad :
           Map.<String, Object>of("mode", 040777, "uid", 1, "gid", 1, "nlink", 0, "size", -1L)
               .entrySet())
@@ -1029,7 +1172,7 @@ final class MaintenanceRunFilesTest {
           failure(() -> f.files.execute(s -> true));
           f.released();
         }
-    for (String role : List.of("runs", "attempts"))
+    for (String role : List.of(FIXTURE_RUNS_5D79E8DF, FIXTURE_ATTEMPTS_0D098B4D))
       try (var f = fixture()) {
         f.change =
             (r, m) -> {
@@ -1041,7 +1184,8 @@ final class MaintenanceRunFilesTest {
     try (var f = fixture()) {
       f.change =
           (r, m) -> {
-            if (Set.of("var", "lib", "app").contains(r)) m.put("dev", (long) r.length());
+            if (Set.of(FIXTURE_VAR_1657FC17, FIXTURE_LIB_5A090A50, FIXTURE_APP_4E5EF144)
+                .contains(r)) m.put("dev", (long) r.length());
           };
       boolean accepted = f.files.execute(s -> true);
       assertTrue(accepted);
@@ -1051,7 +1195,14 @@ final class MaintenanceRunFilesTest {
 
   @Test
   void namespaceReplacement() throws Exception {
-    for (String role : List.of("var", "lib", "app", "maintenance", "runs", "attempts"))
+    for (String role :
+        List.of(
+            FIXTURE_VAR_1657FC17,
+            FIXTURE_LIB_5A090A50,
+            FIXTURE_APP_4E5EF144,
+            FIXTURE_MAINTENANCE_9CE8617E,
+            FIXTURE_RUNS_5D79E8DF,
+            FIXTURE_ATTEMPTS_0D098B4D))
       try (var f = fixture()) {
         failure(
             () ->
@@ -1073,7 +1224,10 @@ final class MaintenanceRunFilesTest {
   @Test
   void recordReplacementDuringScan() throws Exception {
     try (var f = fixture()) {
-      f.on("namesClose", 3, () -> Files.setLastModifiedTime(f.maintenance, FileTime.fromMillis(1)));
+      f.on(
+          FIXTURE_NAMESCLOSE_524EA1D8,
+          3,
+          () -> Files.setLastModifiedTime(f.maintenance, FileTime.fromMillis(1)));
       failure(() -> f.files.execute(s -> s.start(RUN, ACTIVATION.id())));
       assertTrue(disk(f).isEmpty());
       f.released();
@@ -1081,10 +1235,10 @@ final class MaintenanceRunFilesTest {
     try (var f = fixture()) {
       f.seed(true, true, false);
       f.on(
-          "openEntry",
+          FIXTURE_OPENENTRY_4A0BE764,
           5,
           () -> {
-            Path original = f.runs.resolve(RUN_ID + ".run");
+            Path original = f.runs.resolve(RUN_ID + FIXTURE_RUN_DA82F99F);
             Files.move(original, f.base.resolve("retained-original"));
             Files.writeString(original, ANCHOR);
           });
@@ -1096,10 +1250,10 @@ final class MaintenanceRunFilesTest {
       try (var f = fixture()) {
         f.seed(true, true, false);
         f.on(
-            "namesClose",
+            FIXTURE_NAMESCLOSE_524EA1D8,
             3,
             () -> {
-              Path anchor = f.runs.resolve(RUN_ID + ".run");
+              Path anchor = f.runs.resolve(RUN_ID + FIXTURE_RUN_DA82F99F);
               switch (mutation) {
                 case "rename" -> {
                   Files.move(anchor, f.base.resolve("saved"));
@@ -1124,7 +1278,7 @@ final class MaintenanceRunFilesTest {
         failure(() -> f.files.execute(s -> s.start(RUN, ACTIVATION.id())));
         f.released();
       }
-    faultMatrix("active", false);
+    faultMatrix(FIXTURE_ACTIVE_DB0FB2BF, false);
   }
 
   @Test
@@ -1145,12 +1299,13 @@ final class MaintenanceRunFilesTest {
   @Test
   void startCrashBoundaries() throws Exception {
     try (var f = fixture()) {
-      f.on("sync", 3, f::otherCompleted);
+      f.on(FIXTURE_SYNC_5CFA1A73, 3, f::otherCompleted);
       failure(() -> f.files.execute(s -> s.start(RUN, ACTIVATION.id())));
       assertEquals(6, disk(f).size());
       f.released();
     }
-    for (String point : List.of("force", "publish", "sync"))
+    for (String point :
+        List.of(FIXTURE_FORCE_34B3B0C3, FIXTURE_PUBLISH_69201707, FIXTURE_SYNC_5CFA1A73))
       for (int at = 1; at <= 3; at++)
         try (var f = fixture()) {
           f.fail = point;
@@ -1160,7 +1315,7 @@ final class MaintenanceRunFilesTest {
           var state = disk(f);
           assertFalse(state.isEmpty());
           f.reset();
-          if (point.equals("sync")) {
+          if (point.equals(FIXTURE_SYNC_5CFA1A73)) {
             state(f.files.execute(s -> s.resume(RUN.id(), ACTIVATION.id())), ACTIVATION, false);
             assertEquals(activeFiles(), disk(f));
           } else {
@@ -1177,13 +1332,13 @@ final class MaintenanceRunFilesTest {
     for (boolean active : List.of(false, true))
       try (var f = fixture()) {
         f.seed(active, active, false);
-        f.on("sync", 3, f::otherCompleted);
+        f.on(FIXTURE_SYNC_5CFA1A73, 3, f::otherCompleted);
         failure(() -> f.files.execute(s -> s.resume(RUN.id(), ACTIVATION.id())));
         assertEquals(6, disk(f).size());
         f.released();
       }
     for (int mode = 0; mode < 4; mode++)
-      for (String point : List.of("force", "sync"))
+      for (String point : List.of(FIXTURE_FORCE_34B3B0C3, FIXTURE_SYNC_5CFA1A73))
         for (int at = 1; at <= (mode == 3 ? 4 : 3); at++)
           try (var f = fixture()) {
             f.seed(mode != 0, mode >= 2, mode == 3);
@@ -1192,7 +1347,7 @@ final class MaintenanceRunFilesTest {
             f.failAt = at;
             UUID next = mode == 0 ? ACTIVATION.id() : NEXT;
             failure(() -> f.files.execute(s -> s.resume(RUN.id(), next)));
-            assertEquals(ANCHOR, Files.readString(f.runs.resolve(RUN_ID + ".run")));
+            assertEquals(ANCHOR, Files.readString(f.runs.resolve(RUN_ID + FIXTURE_RUN_DA82F99F)));
             if (mode >= 2) assertEquals(before, disk(f));
             f.released();
           }
@@ -1202,14 +1357,14 @@ final class MaintenanceRunFilesTest {
   void completionCrashBoundaries() throws Exception {
     try (var f = fixture()) {
       f.seed(true, true, false);
-      f.on("sync", 5, f::otherCompleted);
+      f.on(FIXTURE_SYNC_5CFA1A73, 5, f::otherCompleted);
       failure(
           () ->
               f.files.execute(s -> s.complete(completion(MaintenanceCompletion.Outcome.SUCCESS))));
       assertEquals(6, disk(f).size());
       f.released();
     }
-    for (String point : List.of("force", "sync"))
+    for (String point : List.of(FIXTURE_FORCE_34B3B0C3, FIXTURE_SYNC_5CFA1A73))
       for (int at = 1; at <= 4; at++)
         try (var f = fixture()) {
           f.seed(true, true, false);
@@ -1219,19 +1374,19 @@ final class MaintenanceRunFilesTest {
               () ->
                   f.files.execute(
                       s -> s.complete(completion(MaintenanceCompletion.Outcome.SUCCESS))));
-          assertEquals(BEGIN, Files.readString(f.maintenance.resolve("active")));
+          assertEquals(BEGIN, Files.readString(f.maintenance.resolve(FIXTURE_ACTIVE_DB0FB2BF)));
           f.released();
         }
     try (var f = fixture()) {
       f.seed(true, true, false);
-      f.fail = "sync";
+      f.fail = FIXTURE_SYNC_5CFA1A73;
       f.failAt = 5;
       failure(
           () ->
               f.files.execute(s -> s.complete(completion(MaintenanceCompletion.Outcome.SUCCESS))));
       assertEquals(completedFiles(DONE0), disk(f));
       f.reset();
-      f.fail = "sync";
+      f.fail = FIXTURE_SYNC_5CFA1A73;
       f.failAt = 4;
       failure(
           () ->
@@ -1340,9 +1495,9 @@ final class MaintenanceRunFilesTest {
                             session -> {
                               callbacks[0]++;
                               retained.set(session);
-                              closes[0] = f.count("close");
+                              closes[0] = f.count(FIXTURE_CLOSE_97959247);
                               f.on(
-                                  "close",
+                                  FIXTURE_CLOSE_97959247,
                                   closes[0] + offset,
                                   () -> {
                                     injected[0]++;
@@ -1355,7 +1510,7 @@ final class MaintenanceRunFilesTest {
             assertCompound(unknown, actual, known);
             assertEquals(1, injected[0]);
             assertEquals(1, callbacks[0]);
-            assertEquals(closes[0] + 6, f.count("close"));
+            assertEquals(closes[0] + 6, f.count(FIXTURE_CLOSE_97959247));
             failure(() -> retained.get().start(RUN, ACTIVATION.id()));
             assertTrue(disk(f).isEmpty());
             f.released();
@@ -1378,7 +1533,7 @@ final class MaintenanceRunFilesTest {
               () -> {
                 bodies[0]++;
                 f.on(
-                    "namesClose",
+                    FIXTURE_NAMESCLOSE_524EA1D8,
                     1,
                     () -> {
                       injected[0]++;
@@ -1394,16 +1549,16 @@ final class MaintenanceRunFilesTest {
           assertCompound(unknown, actual, known);
           assertEquals(1, bodies[0]);
           assertEquals(1, injected[0]);
-          assertEquals(1, f.count("namesClose"));
+          assertEquals(1, f.count(FIXTURE_NAMESCLOSE_524EA1D8));
           assertTrue(disk(f).isEmpty());
           f.released();
         }
     // Independently counted final closes: stop after operation IO, then after all scope roots.
     for (boolean wholeScope : List.of(false, true))
       try (var f = fixture()) {
-        int total = inventory(f, "start").get("close");
+        int total = inventory(f, "start").get(FIXTURE_CLOSE_97959247);
         int at = wholeScope ? total : total - f.varPath.getNameCount() - 12;
-        f.on("close", at, () -> Thread.currentThread().interrupt());
+        f.on(FIXTURE_CLOSE_97959247, at, () -> Thread.currentThread().interrupt());
         try {
           failure(() -> f.files.execute(s -> s.start(RUN, ACTIVATION.id())));
           assertTrue(Thread.currentThread().isInterrupted());
@@ -1473,7 +1628,7 @@ final class MaintenanceRunFilesTest {
       var session = new AtomicReference<MaintenanceRunFiles.Session>();
       var worker = new AtomicReference<Future<MaintenanceRunState>>();
       f.on(
-          "namesOpen",
+          FIXTURE_NAMESOPEN_379D365A,
           1,
           () -> {
             entered.countDown();
@@ -1555,7 +1710,9 @@ final class MaintenanceRunFilesTest {
       f.released();
     }
     for (var point : expected.entrySet()) {
-      boolean root = Set.of("openRoot", "openDirectory", "close").contains(point.getKey());
+      boolean root =
+          Set.of(FIXTURE_OPENROOT_B83E53B3, FIXTURE_OPENDIRECTORY_9E885716, FIXTURE_CLOSE_97959247)
+              .contains(point.getKey());
       if (root != nativeRoots) continue;
       for (int at = 1; at <= point.getValue(); at++)
         try (var f = fixture()) {
@@ -1565,8 +1722,8 @@ final class MaintenanceRunFilesTest {
           failure(() -> operate(f, operation));
           assertTrue(f.triggered);
           f.released();
-          if (Files.exists(f.runs.resolve(RUN_ID + ".run")))
-            assertEquals(ANCHOR, Files.readString(f.runs.resolve(RUN_ID + ".run")));
+          if (Files.exists(f.runs.resolve(RUN_ID + FIXTURE_RUN_DA82F99F)))
+            assertEquals(ANCHOR, Files.readString(f.runs.resolve(RUN_ID + FIXTURE_RUN_DA82F99F)));
         }
     }
   }
@@ -1597,7 +1754,7 @@ final class MaintenanceRunFilesTest {
         next = 7;
         has = 13;
       }
-      case "active" -> {
+      case FIXTURE_ACTIVE_DB0FB2BF -> {
         attrs = 201;
         roots = 13;
         entries = 60;
@@ -1628,27 +1785,27 @@ final class MaintenanceRunFilesTest {
     Map<String, Integer> result = new HashMap<>();
     for (String name : List.of("attributes", "acl", "filesystem", "readonly"))
       result.put(name, attrs);
-    result.put("openRoot", roots);
-    result.put("openDirectory", roots * (f.varPath.getNameCount() + 5));
-    result.put("close", roots * (f.varPath.getNameCount() + 6) + entries);
-    result.put("openEntry", entries);
-    result.put("openRead", readers);
+    result.put(FIXTURE_OPENROOT_B83E53B3, roots);
+    result.put(FIXTURE_OPENDIRECTORY_9E885716, roots * (f.varPath.getNameCount() + 5));
+    result.put(FIXTURE_CLOSE_97959247, roots * (f.varPath.getNameCount() + 6) + entries);
+    result.put(FIXTURE_OPENENTRY_4A0BE764, entries);
+    result.put(FIXTURE_OPENREAD_79674C24, readers);
     result.put("readClose", readers);
     result.put("read", 2 * readers);
     result.put("readSize", 2 * readers);
     result.put("openWriter", writers);
     result.put("writerClose", writers);
-    result.put("force", writers);
+    result.put(FIXTURE_FORCE_34B3B0C3, writers);
     result.put("writeSize", 2 * writers);
-    result.put("sync", syncs);
+    result.put(FIXTURE_SYNC_5CFA1A73, syncs);
     if (creates > 0) {
-      result.put("create", creates);
-      result.put("publish", creates);
+      result.put(FIXTURE_CREATE_5498A731, creates);
+      result.put(FIXTURE_PUBLISH_69201707, creates);
     }
-    if (writes > 0) result.put("write", writes);
-    if (unlinks > 0) result.put("unlink", unlinks);
-    result.put("namesOpen", 6);
-    result.put("namesClose", 6);
+    if (writes > 0) result.put(FIXTURE_WRITE_BC2434A1, writes);
+    if (unlinks > 0) result.put(FIXTURE_UNLINK_04963CA9, unlinks);
+    result.put(FIXTURE_NAMESOPEN_379D365A, 6);
+    result.put(FIXTURE_NAMESCLOSE_524EA1D8, 6);
     result.put("namesIterator", 6);
     result.put("namesNext", next);
     result.put("namesHasNext", has);
@@ -1658,7 +1815,7 @@ final class MaintenanceRunFilesTest {
   private static void operate(Fixture f, String operation) throws IOException {
     switch (operation) {
       case "start" -> f.files.execute(s -> s.start(RUN, ACTIVATION.id()));
-      case "active" -> f.files.execute(s -> s.resume(RUN.id(), NEXT));
+      case FIXTURE_ACTIVE_DB0FB2BF -> f.files.execute(s -> s.resume(RUN.id(), NEXT));
       case "complete" ->
           f.files.execute(s -> s.complete(completion(MaintenanceCompletion.Outcome.SUCCESS)));
       default -> throw new AssertionError(operation);
@@ -1734,15 +1891,22 @@ final class MaintenanceRunFilesTest {
 
     Fixture(Path base) throws Exception {
       this.base = base;
-      varPath = base.resolve("var");
-      lib = varPath.resolve("lib");
+      varPath = base.resolve(FIXTURE_VAR_1657FC17);
+      lib = varPath.resolve(FIXTURE_LIB_5A090A50);
       app = lib.resolve("schubert-nk");
-      maintenance = app.resolve("maintenance");
-      runs = maintenance.resolve("runs");
-      attempts = maintenance.resolve("attempts");
+      maintenance = app.resolve(FIXTURE_MAINTENANCE_9CE8617E);
+      runs = maintenance.resolve(FIXTURE_RUNS_5D79E8DF);
+      attempts = maintenance.resolve(FIXTURE_ATTEMPTS_0D098B4D);
       Files.createDirectories(runs);
       Files.createDirectories(attempts);
-      for (String role : List.of("var", "lib", "app", "maintenance", "runs", "attempts"))
+      for (String role :
+          List.of(
+              FIXTURE_VAR_1657FC17,
+              FIXTURE_LIB_5A090A50,
+              FIXTURE_APP_4E5EF144,
+              FIXTURE_MAINTENANCE_9CE8617E,
+              FIXTURE_RUNS_5D79E8DF,
+              FIXTURE_ATTEMPTS_0D098B4D))
         originalRoles.put((Long) Files.getAttribute(path(role), "unix:ino"), role);
       DirectoryCalls delegate = LinuxDirectoryCalls.create();
       calls =
@@ -1752,12 +1916,12 @@ final class MaintenanceRunFilesTest {
                   new Class<?>[] {DirectoryCalls.class},
                   (proxy, method, args) -> {
                     String name = method.getName();
-                    if (!name.equals("close"))
-                      point(name.equals("createPrivateFile") ? "create" : name);
+                    if (!name.equals(FIXTURE_CLOSE_97959247))
+                      point(name.equals("createPrivateFile") ? FIXTURE_CREATE_5498A731 : name);
                     Object result;
                     try {
                       result = method.invoke(delegate, args);
-                      if (name.equals("sync"))
+                      if (name.equals(FIXTURE_SYNC_5CFA1A73))
                         syncTargets.add(
                             base.relativize(
                                     Path.of("/proc/self/fd", args[0].toString()).toRealPath())
@@ -1765,11 +1929,15 @@ final class MaintenanceRunFilesTest {
                     } catch (InvocationTargetException e) {
                       throw e.getCause();
                     }
-                    if (Set.of("openRoot", "openDirectory", "openEntry", "createPrivateFile")
+                    if (Set.of(
+                            FIXTURE_OPENROOT_B83E53B3,
+                            FIXTURE_OPENDIRECTORY_9E885716,
+                            FIXTURE_OPENENTRY_4A0BE764,
+                            "createPrivateFile")
                         .contains(name)) assertTrue(live.add((Integer) result));
-                    if (name.equals("close")) {
+                    if (name.equals(FIXTURE_CLOSE_97959247)) {
                       assertTrue(live.remove((Integer) args[0]));
-                      point("close");
+                      point(FIXTURE_CLOSE_97959247);
                       if (rawCloses)
                         throw new StorageIoException(StorageIoException.Reason.UNAVAILABLE);
                     }
@@ -1785,21 +1953,21 @@ final class MaintenanceRunFilesTest {
 
     Path path(String role) {
       return switch (role) {
-        case "var" -> varPath;
-        case "lib" -> lib;
-        case "app" -> app;
-        case "maintenance" -> maintenance;
-        case "runs" -> runs;
-        case "attempts" -> attempts;
+        case FIXTURE_VAR_1657FC17 -> varPath;
+        case FIXTURE_LIB_5A090A50 -> lib;
+        case FIXTURE_APP_4E5EF144 -> app;
+        case FIXTURE_MAINTENANCE_9CE8617E -> maintenance;
+        case FIXTURE_RUNS_5D79E8DF -> runs;
+        case FIXTURE_ATTEMPTS_0D098B4D -> attempts;
         default -> throw new AssertionError(role);
       };
     }
 
     void seed(boolean begin, boolean active, boolean done) throws IOException {
-      Files.writeString(runs.resolve(RUN_ID + ".run"), ANCHOR);
-      if (begin) Files.writeString(attempts.resolve(ACT_ID + ".begin"), BEGIN);
-      if (active) Files.writeString(maintenance.resolve("active"), BEGIN);
-      if (done) Files.writeString(attempts.resolve(ACT_ID + ".done"), DONE0);
+      Files.writeString(runs.resolve(RUN_ID + FIXTURE_RUN_DA82F99F), ANCHOR);
+      if (begin) Files.writeString(attempts.resolve(ACT_ID + FIXTURE_BEGIN_53B77CDD), BEGIN);
+      if (active) Files.writeString(maintenance.resolve(FIXTURE_ACTIVE_DB0FB2BF), BEGIN);
+      if (done) Files.writeString(attempts.resolve(ACT_ID + FIXTURE_DONE_67185DC1), DONE0);
       reset();
     }
 
@@ -1812,12 +1980,13 @@ final class MaintenanceRunFilesTest {
     }
 
     void otherCompleted() throws IOException {
-      Files.writeString(runs.resolve(OTHER + ".run"), ANCHOR.replace(RUN_ID, OTHER.toString()));
       Files.writeString(
-          attempts.resolve(NEXT + ".begin"),
+          runs.resolve(OTHER + FIXTURE_RUN_DA82F99F), ANCHOR.replace(RUN_ID, OTHER.toString()));
+      Files.writeString(
+          attempts.resolve(NEXT + FIXTURE_BEGIN_53B77CDD),
           BEGIN.replace(RUN_ID, OTHER.toString()).replace(ACT_ID, NEXT.toString()));
       Files.writeString(
-          attempts.resolve(NEXT + ".done"),
+          attempts.resolve(NEXT + FIXTURE_DONE_67185DC1),
           DONE0.replace(RUN_ID, OTHER.toString()).replace(ACT_ID, NEXT.toString()));
     }
 
@@ -1859,8 +2028,14 @@ final class MaintenanceRunFilesTest {
       String original = originalRoles.get((Long) attributes.get("ino"));
       if (original != null) return original;
       Path resolved = held.toRealPath();
-      for (String role : List.of("var", "lib", "app", "maintenance", "runs", "attempts"))
-        if (resolved.equals(path(role))) return role;
+      for (String role :
+          List.of(
+              FIXTURE_VAR_1657FC17,
+              FIXTURE_LIB_5A090A50,
+              FIXTURE_APP_4E5EF144,
+              FIXTURE_MAINTENANCE_9CE8617E,
+              FIXTURE_RUNS_5D79E8DF,
+              FIXTURE_ATTEMPTS_0D098B4D)) if (resolved.equals(path(role))) return role;
       return "file";
     }
 
@@ -1875,7 +2050,9 @@ final class MaintenanceRunFilesTest {
       if (invalid.equals("nullAttributes") && selected(held)) return null;
       var values = new HashMap<>(nativeIo.attributes(held));
       int permission =
-          Set.of("var", "lib", "app").contains(role) ? 0755 : role.equals("file") ? 0600 : 0700;
+          Set.of(FIXTURE_VAR_1657FC17, FIXTURE_LIB_5A090A50, FIXTURE_APP_4E5EF144).contains(role)
+              ? 0755
+              : role.equals("file") ? 0600 : 0700;
       values.put("mode", ((Integer) values.get("mode") & 0170000) | permission);
       values.put("uid", 0);
       values.put("gid", 0);
@@ -1927,7 +2104,7 @@ final class MaintenanceRunFilesTest {
 
     @Override
     public DirectoryStream<Path> openNames(Path held) throws IOException {
-      point("namesOpen");
+      point(FIXTURE_NAMESOPEN_379D365A);
       if (listingFault.equals("nullStream")) return null;
       DirectoryStream<Path> delegate = nativeIo.openNames(held);
       listings++;
@@ -1941,7 +2118,9 @@ final class MaintenanceRunFilesTest {
           if (listingFault.equals("otherParent"))
             actual = List.of(held.resolveSibling("alien")).iterator();
           if (listingFault.equals("duplicate"))
-            actual = List.of(held.resolve("runs"), held.resolve("runs")).iterator();
+            actual =
+                List.of(held.resolve(FIXTURE_RUNS_5D79E8DF), held.resolve(FIXTURE_RUNS_5D79E8DF))
+                    .iterator();
           if (listingFault.equals("rootOnly")) actual = List.of(Path.of("/")).iterator();
           Iterator<Path> chosen = actual;
           return new Iterator<>() {
@@ -1971,14 +2150,14 @@ final class MaintenanceRunFilesTest {
         public void close() throws IOException {
           delegate.close();
           listings--;
-          point("namesClose");
+          point(FIXTURE_NAMESCLOSE_524EA1D8);
         }
       };
     }
 
     @Override
     public SeekableByteChannel open(Path held) throws IOException {
-      point("openRead");
+      point(FIXTURE_OPENREAD_79674C24);
       var channel = nativeIo.open(held);
       readers++;
       return new SeekableByteChannel() {
@@ -2041,7 +2220,7 @@ final class MaintenanceRunFilesTest {
       return new InspectorEnvironmentPublisher.Writer() {
         @Override
         public int write(ByteBuffer bytes) throws IOException {
-          point("write");
+          point(FIXTURE_WRITE_BC2434A1);
           return writer.write(bytes);
         }
 
@@ -2053,7 +2232,7 @@ final class MaintenanceRunFilesTest {
 
         @Override
         public void force() throws IOException {
-          point("force");
+          point(FIXTURE_FORCE_34B3B0C3);
           writer.force();
         }
 

@@ -50,6 +50,39 @@ import org.junit.jupiter.api.io.TempDir;
  * SSC055/SS343 6.14; PT-BAT-046..057. Literal oracle and synthetic admission, real inode/native IO.
  */
 final class DurableRecordFilesTest {
+  private static final String FIXTURE_BEGIN_53B77CDD = ".begin";
+  private static final String FIXTURE_DONE_67185DC1 = ".done";
+  private static final String FIXTURE_WRITE_BC2434A1 = "write";
+  private static final String FIXTURE_UNLINK_04963CA9 = "unlink";
+  private static final String FIXTURE_CREATE_5498A731 = "create";
+  private static final String FIXTURE_PUBLISH_69201707 = "publish";
+  private static final String FIXTURE_SYNC_5CFA1A73 = "sync";
+  private static final String FIXTURE_FORCE_34B3B0C3 = "force";
+  private static final String FIXTURE_PRESERVE_82307EF7 = "preserve";
+  private static final String FIXTURE_PART_92B0D5FC = ".part";
+  private static final String FIXTURE_OPENENTRY_4A0BE764 = "openEntry";
+  private static final String FIXTURE_DIR_16E08808 = "dir";
+  private static final String FIXTURE_FILE_BFDDE6F5 = "file";
+  private static final String FIXTURE_FILESYSTEM_909B3E41 = "filesystem";
+  private static final String FIXTURE_ACL_43B23946 = "acl";
+  private static final String FIXTURE_READONLY_C4A495E7 = "readonly";
+  private static final String FIXTURE_MODE_B6D5C2C3 = "mode";
+  private static final String FIXTURE_UID_0C18F38C = "uid";
+  private static final String FIXTURE_GID_0ACDD642 = "gid";
+  private static final String FIXTURE_NLINK_3DDD828B = "nlink";
+  private static final String FIXTURE_SIZE_EB1E91E4 = "size";
+  private static final String FIXTURE_ATTRIBUTES_D300E055 = "attributes";
+  private static final String FIXTURE_READ_6F365882 = "read";
+  private static final String FIXTURE_ZERO_B7CE3F81 = "zero";
+  private static final String FIXTURE_NEGATIVE_B7EA6C83 = "negative";
+  private static final String FIXTURE_OVERFLOW_80A6ECE5 = "overflow";
+  private static final String FIXTURE_POSITION_5451AEB6 = "position";
+  private static final String FIXTURE_OPENREAD_79674C24 = "openRead";
+  private static final String FIXTURE_REUSE_40212409 = "reuse";
+  private static final String FIXTURE_REMOVE_66F3D68B = "remove";
+  private static final String FIXTURE_READCLOSE_8248E588 = "readClose";
+  private static final String FIXTURE_NEW_80270E39 = "new";
+  private static final String FIXTURE_ENTRYCLOSE_2B5D4D25 = "entryClose";
   private static final String RUN_ID = "12345678-9abc-def0-8123-456789abcdef";
   private static final String ACT_ID = "fedcba98-7654-3210-8fed-cba987654321";
   private static final UUID PART = UUID.fromString("11111111-2222-3333-4444-555555555555");
@@ -71,7 +104,14 @@ final class DurableRecordFilesTest {
 
   private static Map<String, String> records() {
     return Map.of(
-        NAME, GOLDEN, ACT_ID + ".begin", BEGIN, "active", BEGIN, ACT_ID + ".done", DONE + "10\n");
+        NAME,
+        GOLDEN,
+        ACT_ID + FIXTURE_BEGIN_53B77CDD,
+        BEGIN,
+        "active",
+        BEGIN,
+        ACT_ID + FIXTURE_DONE_67185DC1,
+        DONE + "10\n");
   }
 
   @Test
@@ -86,10 +126,11 @@ final class DurableRecordFilesTest {
         assertArrayEquals(bytes(record.getValue()), f.records.read(record.getKey()).orElseThrow());
         assertEquals(record.getValue(), Files.readString(f.directory.resolve(record.getKey())));
       }
-      Files.writeString(f.directory.resolve(ACT_ID + ".done"), DONE + "0\n");
-      assertArrayEquals(bytes(DONE + "0\n"), f.records.read(ACT_ID + ".done").orElseThrow());
-      assertEquals(0, f.count("write"));
-      assertEquals(0, f.count("unlink"));
+      Files.writeString(f.directory.resolve(ACT_ID + FIXTURE_DONE_67185DC1), DONE + "0\n");
+      assertArrayEquals(
+          bytes(DONE + "0\n"), f.records.read(ACT_ID + FIXTURE_DONE_67185DC1).orElseThrow());
+      assertEquals(0, f.count(FIXTURE_WRITE_BC2434A1));
+      assertEquals(0, f.count(FIXTURE_UNLINK_04963CA9));
       f.released();
     }
   }
@@ -107,7 +148,7 @@ final class DurableRecordFilesTest {
                 ? "anchor"
                 : record.getKey().equals("active")
                     ? "active"
-                    : record.getKey().endsWith(".begin") ? "begin" : "done-10";
+                    : record.getKey().endsWith(FIXTURE_BEGIN_53B77CDD) ? "begin" : "done-10";
         Path traces = Path.of("target/durable-record-traces");
         Files.createDirectories(traces);
         Files.copy(
@@ -119,10 +160,10 @@ final class DurableRecordFilesTest {
         assertEquals(
             0100600, Files.getAttribute(f.directory.resolve(record.getKey()), "unix:mode"));
         assertFalse(Files.exists(f.part));
-        assertEquals(1, f.count("create"));
-        assertEquals(1, f.count("publish"));
-        assertEquals(1, f.count("sync"));
-        assertEquals(1, f.count("force"));
+        assertEquals(1, f.count(FIXTURE_CREATE_5498A731));
+        assertEquals(1, f.count(FIXTURE_PUBLISH_69201707));
+        assertEquals(1, f.count(FIXTURE_SYNC_5CFA1A73));
+        assertEquals(1, f.count(FIXTURE_FORCE_34B3B0C3));
         f.released();
       }
   }
@@ -130,9 +171,10 @@ final class DurableRecordFilesTest {
   @Test
   void sameRecordReuse() throws Exception {
     try (var f = fixture()) {
-      Files.writeString(f.directory.resolve(ACT_ID + ".done"), DONE + "0\n");
-      failure(() -> f.records.publish(ACT_ID + ".done", bytes(DONE + "10\n"), PART));
-      assertEquals(DONE + "0\n", Files.readString(f.directory.resolve(ACT_ID + ".done")));
+      Files.writeString(f.directory.resolve(ACT_ID + FIXTURE_DONE_67185DC1), DONE + "0\n");
+      failure(() -> f.records.publish(ACT_ID + FIXTURE_DONE_67185DC1, bytes(DONE + "10\n"), PART));
+      assertEquals(
+          DONE + "0\n", Files.readString(f.directory.resolve(ACT_ID + FIXTURE_DONE_67185DC1)));
       assertEquals(0, f.count("openWriter"));
       f.released();
     }
@@ -141,11 +183,11 @@ final class DurableRecordFilesTest {
       Map<String, Object> before = f.nativeIo.attributes(f.target);
       f.records.publish(NAME, bytes(GOLDEN), PART);
       assertEquals(before, f.nativeIo.attributes(f.target));
-      assertEquals(0, f.count("write"));
-      assertEquals(0, f.count("create"));
-      assertEquals(0, f.count("publish"));
-      assertEquals(1, f.count("force"));
-      assertEquals(1, f.count("sync"));
+      assertEquals(0, f.count(FIXTURE_WRITE_BC2434A1));
+      assertEquals(0, f.count(FIXTURE_CREATE_5498A731));
+      assertEquals(0, f.count(FIXTURE_PUBLISH_69201707));
+      assertEquals(1, f.count(FIXTURE_FORCE_34B3B0C3));
+      assertEquals(1, f.count(FIXTURE_SYNC_5CFA1A73));
       failure(() -> f.records.publish(NAME, bytes(GOLDEN.replace("123456Z", "123457Z")), PART));
       assertEquals(GOLDEN, Files.readString(f.target));
       f.released();
@@ -156,35 +198,36 @@ final class DurableRecordFilesTest {
   void expectedRetirement() throws Exception {
     try (var f = fixture()) {
       f.seed();
-      f.fail = "sync";
+      f.fail = FIXTURE_SYNC_5CFA1A73;
       failure(() -> f.records.remove(NAME, bytes(GOLDEN)));
       assertFalse(Files.exists(f.target));
       f.reset();
-      f.fail = "sync";
+      f.fail = FIXTURE_SYNC_5CFA1A73;
       failure(() -> f.records.remove(NAME, bytes(GOLDEN)));
       assertFalse(Files.exists(f.target));
-      assertEquals(1, f.count("sync"));
-      assertEquals(0, f.count("unlink"));
+      assertEquals(1, f.count(FIXTURE_SYNC_5CFA1A73));
+      assertEquals(0, f.count(FIXTURE_UNLINK_04963CA9));
       f.reset();
       f.records.remove(NAME, bytes(GOLDEN));
-      assertEquals(1, f.count("sync"));
+      assertEquals(1, f.count(FIXTURE_SYNC_5CFA1A73));
       f.released();
     }
     try (var f = fixture()) {
       f.seed();
-      Files.writeString(f.directory.resolve("unrelated"), "preserve");
+      Files.writeString(f.directory.resolve("unrelated"), FIXTURE_PRESERVE_82307EF7);
       failure(() -> f.records.remove(NAME, bytes(GOLDEN.replace("123456Z", "123457Z"))));
       assertTrue(Files.exists(f.target));
       f.reset();
       f.records.remove(NAME, bytes(GOLDEN));
       assertFalse(Files.exists(f.target));
-      assertEquals(1, f.count("unlink"));
-      assertEquals(1, f.count("sync"));
+      assertEquals(1, f.count(FIXTURE_UNLINK_04963CA9));
+      assertEquals(1, f.count(FIXTURE_SYNC_5CFA1A73));
       f.reset();
       f.records.remove(NAME, bytes(GOLDEN));
-      assertEquals(0, f.count("unlink"));
-      assertEquals(1, f.count("sync"), "absence after a failed unlink sync must be sealed");
-      assertEquals("preserve", Files.readString(f.directory.resolve("unrelated")));
+      assertEquals(0, f.count(FIXTURE_UNLINK_04963CA9));
+      assertEquals(
+          1, f.count(FIXTURE_SYNC_5CFA1A73), "absence after a failed unlink sync must be sealed");
+      assertEquals(FIXTURE_PRESERVE_82307EF7, Files.readString(f.directory.resolve("unrelated")));
       f.released();
     }
   }
@@ -208,7 +251,7 @@ final class DurableRecordFilesTest {
               "../active",
               "Active",
               NAME.toUpperCase(Locale.ROOT),
-              RUN_ID + ".part",
+              RUN_ID + FIXTURE_PART_92B0D5FC,
               RUN_ID + ".run\n",
               "a.run")) {
         assertThrows(IllegalArgumentException.class, () -> f.records.read(name));
@@ -220,14 +263,16 @@ final class DurableRecordFilesTest {
         failure(() -> f.records.publish(r.getKey(), bytes("invalid"), PART));
         failure(() -> f.records.remove(r.getKey(), bytes("invalid")));
       }
-      for (String suffix : List.of(".run", ".begin", ".done")) {
+      for (String suffix : List.of(".run", FIXTURE_BEGIN_53B77CDD, FIXTURE_DONE_67185DC1)) {
         String name = PART + suffix;
         String value =
-            suffix.equals(".run") ? GOLDEN : suffix.equals(".begin") ? BEGIN : DONE + "0\n";
+            suffix.equals(".run")
+                ? GOLDEN
+                : suffix.equals(FIXTURE_BEGIN_53B77CDD) ? BEGIN : DONE + "0\n";
         failure(() -> f.records.publish(name, bytes(value), PART));
       }
-      assertEquals(0, f.count("create"));
-      assertEquals(0, f.count("openEntry"));
+      assertEquals(0, f.count(FIXTURE_CREATE_5498A731));
+      assertEquals(0, f.count(FIXTURE_OPENENTRY_4A0BE764));
       f.released();
     }
   }
@@ -240,9 +285,15 @@ final class DurableRecordFilesTest {
         f.seed();
         assertArrayEquals(bytes(GOLDEN), f.records.read(NAME).orElseThrow());
       }
-    for (String role : List.of("dir", "file")) {
+    for (String role : List.of(FIXTURE_DIR_16E08808, FIXTURE_FILE_BFDDE6F5)) {
       for (String bad :
-          List.of("nullAttributes", "nullFilesystem", "filesystem", "nullAcl", "acl", "readonly"))
+          List.of(
+              "nullAttributes",
+              "nullFilesystem",
+              FIXTURE_FILESYSTEM_909B3E41,
+              "nullAcl",
+              FIXTURE_ACL_43B23946,
+              FIXTURE_READONLY_C4A495E7))
         try (var f = fixture()) {
           f.seed();
           f.badRole = role;
@@ -252,7 +303,15 @@ final class DurableRecordFilesTest {
         }
       for (String key :
           List.of(
-              "mode", "uid", "gid", "nlink", "size", "dev", "ino", "lastModifiedTime", "ctime")) {
+              FIXTURE_MODE_B6D5C2C3,
+              FIXTURE_UID_0C18F38C,
+              FIXTURE_GID_0ACDD642,
+              FIXTURE_NLINK_3DDD828B,
+              FIXTURE_SIZE_EB1E91E4,
+              "dev",
+              "ino",
+              "lastModifiedTime",
+              "ctime")) {
         for (boolean missing : List.of(false, true))
           try (var f = fixture()) {
             f.seed();
@@ -268,7 +327,17 @@ final class DurableRecordFilesTest {
           }
       }
       for (var entry :
-          Map.<String, Object>of("mode", 0100644, "uid", 1, "gid", 1, "nlink", 0, "size", -1L)
+          Map.<String, Object>of(
+                  FIXTURE_MODE_B6D5C2C3,
+                  0100644,
+                  FIXTURE_UID_0C18F38C,
+                  1,
+                  FIXTURE_GID_0ACDD642,
+                  1,
+                  FIXTURE_NLINK_3DDD828B,
+                  0,
+                  FIXTURE_SIZE_EB1E91E4,
+                  -1L)
               .entrySet())
         try (var f = fixture()) {
           f.seed();
@@ -286,12 +355,14 @@ final class DurableRecordFilesTest {
         f.filesystem = fs;
         failure(() -> f.records.read(NAME));
       }
-    for (var entry : Map.<String, Object>of("size", 142L, "nlink", 2, "dev", -1L).entrySet())
+    for (var entry :
+        Map.<String, Object>of(FIXTURE_SIZE_EB1E91E4, 142L, FIXTURE_NLINK_3DDD828B, 2, "dev", -1L)
+            .entrySet())
       try (var f = fixture()) {
         f.seed();
         f.change =
             (r, m) -> {
-              if (r.equals("file")) m.put(entry.getKey(), entry.getValue());
+              if (r.equals(FIXTURE_FILE_BFDDE6F5)) m.put(entry.getKey(), entry.getValue());
             };
         failure(() -> f.records.read(NAME));
         f.released();
@@ -304,12 +375,13 @@ final class DurableRecordFilesTest {
     for (int at : List.of(2, 3))
       try (var f = fixture()) {
         f.on(
-            "attributes",
+            FIXTURE_ATTRIBUTES_D300E055,
             at,
             () ->
                 f.change =
                     (role, values) -> {
-                      if (role.equals("file")) values.put("size", at == 2 ? 1L : 73L);
+                      if (role.equals(FIXTURE_FILE_BFDDE6F5))
+                        values.put(FIXTURE_SIZE_EB1E91E4, at == 2 ? 1L : 73L);
                     });
         failure(() -> f.records.publish(NAME, bytes(GOLDEN), PART));
         assertTrue(Files.exists(f.part));
@@ -318,12 +390,18 @@ final class DurableRecordFilesTest {
       }
     try (var f = fixture()) {
       f.seed();
-      f.on("read", 1, () -> Files.write(f.target, new byte[142]));
+      f.on(FIXTURE_READ_6F365882, 1, () -> Files.write(f.target, new byte[142]));
       failure(() -> f.records.read(NAME));
       assertEquals(142, Files.size(f.target));
       f.released();
     }
-    for (String bad : List.of("zero", "negative", "overflow", "early", "position"))
+    for (String bad :
+        List.of(
+            FIXTURE_ZERO_B7CE3F81,
+            FIXTURE_NEGATIVE_B7EA6C83,
+            FIXTURE_OVERFLOW_80A6ECE5,
+            "early",
+            FIXTURE_POSITION_5451AEB6))
       try (var f = fixture()) {
         f.seed();
         f.readBehavior = bad;
@@ -343,7 +421,12 @@ final class DurableRecordFilesTest {
       failure(() -> f.records.read(NAME));
       f.released();
     }
-    for (String bad : List.of("zero", "negative", "overflow", "position"))
+    for (String bad :
+        List.of(
+            FIXTURE_ZERO_B7CE3F81,
+            FIXTURE_NEGATIVE_B7EA6C83,
+            FIXTURE_OVERFLOW_80A6ECE5,
+            FIXTURE_POSITION_5451AEB6))
       try (var f = fixture()) {
         f.writeBehavior = bad;
         failure(() -> f.records.publish(NAME, bytes(GOLDEN), PART));
@@ -367,7 +450,7 @@ final class DurableRecordFilesTest {
     }
     try (var f = fixture()) {
       f.seed();
-      f.on("openRead", 1, () -> Files.write(f.target, new byte[142]));
+      f.on(FIXTURE_OPENREAD_79674C24, 1, () -> Files.write(f.target, new byte[142]));
       failure(() -> f.records.read(NAME));
       f.released();
     }
@@ -384,22 +467,23 @@ final class DurableRecordFilesTest {
   void namespaceAndReplacement() throws Exception {
     for (boolean symbolic : List.of(false, true))
       try (var f = fixture()) {
-        Path other = f.directory.resolve("preserve");
+        Path other = f.directory.resolve(FIXTURE_PRESERVE_82307EF7);
         Files.writeString(other, GOLDEN);
         if (symbolic) Files.createSymbolicLink(f.target, other);
         else Files.createLink(f.target, other);
         failure(() -> f.records.read(NAME));
         failure(() -> f.records.remove(NAME, bytes(GOLDEN)));
         assertEquals(GOLDEN, Files.readString(other));
-        assertEquals(0, f.count("openRead"));
-        assertEquals(0, f.count("unlink"));
+        assertEquals(0, f.count(FIXTURE_OPENREAD_79674C24));
+        assertEquals(0, f.count(FIXTURE_UNLINK_04963CA9));
         f.released();
       }
-    for (String op : List.of("read", "reuse", "remove"))
+    for (String op :
+        List.of(FIXTURE_READ_6F365882, FIXTURE_REUSE_40212409, FIXTURE_REMOVE_66F3D68B))
       try (var f = fixture()) {
         f.seed();
         f.on(
-            "readClose",
+            FIXTURE_READCLOSE_8248E588,
             1,
             () -> {
               Files.move(f.target, f.directory.resolve("retained"));
@@ -410,28 +494,37 @@ final class DurableRecordFilesTest {
         f.released();
       }
     try (var f = fixture()) {
-      Files.writeString(f.part, "preserve");
-      failure(() -> operate(f, "new"));
-      assertEquals("preserve", Files.readString(f.part));
+      Files.writeString(f.part, FIXTURE_PRESERVE_82307EF7);
+      failure(() -> operate(f, FIXTURE_NEW_80270E39));
+      assertEquals(FIXTURE_PRESERVE_82307EF7, Files.readString(f.part));
       assertFalse(Files.exists(f.target));
     }
     try (var f = fixture()) {
-      f.on("publish", 1, () -> Files.writeString(f.target, "other"));
-      failure(() -> operate(f, "new"));
+      f.on(FIXTURE_PUBLISH_69201707, 1, () -> Files.writeString(f.target, "other"));
+      failure(() -> operate(f, FIXTURE_NEW_80270E39));
       assertEquals("other", Files.readString(f.target));
       assertEquals(GOLDEN, Files.readString(f.part));
     }
     for (String attribute :
-        List.of("ino", "dev", "ctime", "lastModifiedTime", "mode", "uid", "gid", "nlink", "size"))
+        List.of(
+            "ino",
+            "dev",
+            "ctime",
+            "lastModifiedTime",
+            FIXTURE_MODE_B6D5C2C3,
+            FIXTURE_UID_0C18F38C,
+            FIXTURE_GID_0ACDD642,
+            FIXTURE_NLINK_3DDD828B,
+            FIXTURE_SIZE_EB1E91E4))
       try (var f = fixture()) {
         f.seed();
         f.on(
-            "readClose",
+            FIXTURE_READCLOSE_8248E588,
             1,
             () ->
                 f.change =
                     (r, m) -> {
-                      if (r.equals("file")) {
+                      if (r.equals(FIXTURE_FILE_BFDDE6F5)) {
                         Object v = m.get(attribute);
                         m.put(
                             attribute,
@@ -445,26 +538,26 @@ final class DurableRecordFilesTest {
       }
     try (var f = fixture()) {
       f.on(
-          "readClose",
+          FIXTURE_READCLOSE_8248E588,
           2,
           () ->
               f.change =
                   (r, m) -> {
-                    if (r.equals("file")) m.put("ctime", FileTime.fromMillis(1));
+                    if (r.equals(FIXTURE_FILE_BFDDE6F5)) m.put("ctime", FileTime.fromMillis(1));
                   });
-      failure(() -> operate(f, "new"));
+      failure(() -> operate(f, FIXTURE_NEW_80270E39));
       assertTrue(Files.exists(f.target));
       f.released();
     }
     try (var f = fixture()) {
       f.seed();
       f.on(
-          "readClose",
+          FIXTURE_READCLOSE_8248E588,
           1,
           () ->
               f.change =
                   (r, m) -> {
-                    if (r.equals("dir")) m.put("ino", -1L);
+                    if (r.equals(FIXTURE_DIR_16E08808)) m.put("ino", -1L);
                   });
       failure(() -> f.records.read(NAME));
       f.released();
@@ -473,20 +566,29 @@ final class DurableRecordFilesTest {
 
   @Test
   void allReadFailures() throws Exception {
-    faults("read", inventory(7, 3, 3, 1, 2, 2, 0, 0, 0, 0, 0, 0, 0));
+    faults(FIXTURE_READ_6F365882, inventory(7, 3, 3, 1, 2, 2, 0, 0, 0, 0, 0, 0, 0));
     for (String point :
-        List.of("attributes", "acl", "filesystem", "readonly", "entryClose", "readClose"))
+        List.of(
+            FIXTURE_ATTRIBUTES_D300E055,
+            FIXTURE_ACL_43B23946,
+            FIXTURE_FILESYSTEM_909B3E41,
+            FIXTURE_READONLY_C4A495E7,
+            FIXTURE_ENTRYCLOSE_2B5D4D25,
+            FIXTURE_READCLOSE_8248E588))
       try (var f = fixture()) {
         f.seed();
         f.fail = point;
-        f.failAt = point.equals("entryClose") || point.equals("readClose") ? 1 : 2;
+        f.failAt =
+            point.equals(FIXTURE_ENTRYCLOSE_2B5D4D25) || point.equals(FIXTURE_READCLOSE_8248E588)
+                ? 1
+                : 2;
         f.reason = StorageIoException.Reason.MISSING;
         failure(() -> f.records.read(NAME));
         f.released();
       }
     try (var f = fixture()) {
       f.seed();
-      f.fail = "openEntry";
+      f.fail = FIXTURE_OPENENTRY_4A0BE764;
       f.failAt = 2;
       f.reason = StorageIoException.Reason.MISSING;
       failure(() -> f.records.read(NAME));
@@ -496,14 +598,14 @@ final class DurableRecordFilesTest {
 
   @Test
   void allWriteRetireFailures() throws Exception {
-    faults("new", inventory(13, 8, 8, 2, 4, 4, 1, 1, 1, 1, 2, 1, 0));
-    faults("reuse", inventory(13, 8, 8, 2, 4, 4, 0, 0, 1, 1, 2, 0, 0));
-    faults("remove", inventory(7, 4, 4, 1, 2, 2, 0, 0, 0, 1, 0, 0, 1));
+    faults(FIXTURE_NEW_80270E39, inventory(13, 8, 8, 2, 4, 4, 1, 1, 1, 1, 2, 1, 0));
+    faults(FIXTURE_REUSE_40212409, inventory(13, 8, 8, 2, 4, 4, 0, 0, 1, 1, 2, 0, 0));
+    faults(FIXTURE_REMOVE_66F3D68B, inventory(7, 4, 4, 1, 2, 2, 0, 0, 0, 1, 0, 0, 1));
   }
 
   @Test
   void interruptionsAndUnknownRuntime() throws Exception {
-    for (String op : List.of("read", "new", "reuse"))
+    for (String op : List.of(FIXTURE_READ_6F365882, FIXTURE_NEW_80270E39, FIXTURE_REUSE_40212409))
       for (boolean known : List.of(false, true))
         for (Throwable unknown :
             List.of(
@@ -511,10 +613,16 @@ final class DurableRecordFilesTest {
                 new NullPointerException("public compound"),
                 new AssertionError("public compound")))
           try (var f = fixture()) {
-            if (!op.equals("new")) f.seed();
-            String body = op.equals("read") ? "read" : op.equals("new") ? "write" : "force";
-            String close = op.equals("read") ? "readClose" : "writerClose";
-            int bodyAt = op.equals("read") ? 2 : 1;
+            if (!op.equals(FIXTURE_NEW_80270E39)) f.seed();
+            String body =
+                op.equals(FIXTURE_READ_6F365882)
+                    ? FIXTURE_READ_6F365882
+                    : op.equals(FIXTURE_NEW_80270E39)
+                        ? FIXTURE_WRITE_BC2434A1
+                        : FIXTURE_FORCE_34B3B0C3;
+            String close =
+                op.equals(FIXTURE_READ_6F365882) ? FIXTURE_READCLOSE_8248E588 : "writerClose";
+            int bodyAt = op.equals(FIXTURE_READ_6F365882) ? 2 : 1;
             if (known) {
               f.fail = body;
               f.failAt = bodyAt;
@@ -539,15 +647,20 @@ final class DurableRecordFilesTest {
             f.released();
             assertFalse(f.compoundBuffers.isEmpty());
             for (byte[] bytes : f.compoundBuffers) assertArrayEquals(new byte[bytes.length], bytes);
-            if (op.equals("new")) {
+            if (op.equals(FIXTURE_NEW_80270E39)) {
               assertFalse(Files.exists(f.target));
               assertTrue(Files.exists(f.part));
               assertEquals(0, Files.size(f.part));
             } else assertEquals(GOLDEN, Files.readString(f.target));
           }
-    for (String op : List.of("read", "new", "reuse", "remove")) {
+    for (String op :
+        List.of(
+            FIXTURE_READ_6F365882,
+            FIXTURE_NEW_80270E39,
+            FIXTURE_REUSE_40212409,
+            FIXTURE_REMOVE_66F3D68B)) {
       try (var f = fixture()) {
-        if (!op.equals("new")) f.seed();
+        if (!op.equals(FIXTURE_NEW_80270E39)) f.seed();
         Thread.currentThread().interrupt();
         try {
           failure(() -> operate(f, op));
@@ -558,14 +671,14 @@ final class DurableRecordFilesTest {
         }
       }
       try (var f = fixture()) {
-        if (!op.equals("new")) f.seed();
+        if (!op.equals(FIXTURE_NEW_80270E39)) f.seed();
         f.uid = 1000;
         failure(() -> operate(f, op));
         assertTrue(f.counts.isEmpty());
       }
       try (var f = fixture()) {
-        if (!op.equals("new")) f.seed();
-        f.on("readClose", 1, () -> Thread.currentThread().interrupt());
+        if (!op.equals(FIXTURE_NEW_80270E39)) f.seed();
+        f.on(FIXTURE_READCLOSE_8248E588, 1, () -> Thread.currentThread().interrupt());
         try {
           failure(() -> operate(f, op));
           assertTrue(Thread.currentThread().isInterrupted());
@@ -577,8 +690,8 @@ final class DurableRecordFilesTest {
       for (RuntimeException error :
           List.of(new IllegalStateException("synthetic"), new NullPointerException("synthetic")))
         try (var f = fixture()) {
-          if (!op.equals("new")) f.seed();
-          f.fail = "attributes";
+          if (!op.equals(FIXTURE_NEW_80270E39)) f.seed();
+          f.fail = FIXTURE_ATTRIBUTES_D300E055;
           f.failAt = 2;
           f.runtime = error;
           assertSame(error, assertThrows(error.getClass(), () -> operate(f, op)));
@@ -601,8 +714,8 @@ final class DurableRecordFilesTest {
               throw new IOException("fixture rendezvous failed");
             }
           };
-      first.on("publish", 1, rendezvous);
-      second.on("publish", 1, rendezvous);
+      first.on(FIXTURE_PUBLISH_69201707, 1, rendezvous);
+      second.on(FIXTURE_PUBLISH_69201707, 1, rendezvous);
       UUID otherPart = UUID.fromString("aaaaaaaa-bbbb-cccc-dddd-eeeeeeeeeeee");
       List<Future<Boolean>> results = new ArrayList<>();
       for (var pair : List.of(Map.entry(first, PART), Map.entry(second, otherPart))) {
@@ -625,9 +738,12 @@ final class DurableRecordFilesTest {
       assertEquals(1, successes);
       assertEquals(GOLDEN, Files.readString(first.target));
       assertNotEquals(
-          Files.exists(first.part), Files.exists(first.directory.resolve(otherPart + ".part")));
+          Files.exists(first.part),
+          Files.exists(first.directory.resolve(otherPart + FIXTURE_PART_92B0D5FC)));
       Path retained =
-          Files.exists(first.part) ? first.part : first.directory.resolve(otherPart + ".part");
+          Files.exists(first.part)
+              ? first.part
+              : first.directory.resolve(otherPart + FIXTURE_PART_92B0D5FC);
       assertEquals(GOLDEN, Files.readString(retained));
       first.released();
       second.released();
@@ -644,8 +760,8 @@ final class DurableRecordFilesTest {
                 }));
       for (var future : futures) future.get(10, TimeUnit.SECONDS);
       assertEquals(GOLDEN, Files.readString(f.target));
-      assertEquals(1, f.count("create"));
-      assertEquals(32, f.count("force"));
+      assertEquals(1, f.count(FIXTURE_CREATE_5498A731));
+      assertEquals(32, f.count(FIXTURE_FORCE_34B3B0C3));
       f.released();
       var nativeRecords = new DurableRecordFiles(f.root, f);
       // Real UID/mode/filesystem admission is not replaced by the successful synthetic fixture.
@@ -668,31 +784,35 @@ final class DurableRecordFilesTest {
       int writes,
       int unlinks) {
     Map<String, Integer> result = new HashMap<>();
-    for (String p : List.of("attributes", "acl", "filesystem", "readonly"))
-      result.put(p, attributes);
-    result.put("openEntry", open);
-    result.put("entryClose", close);
-    result.put("openRead", readers);
-    result.put("readClose", readers);
-    result.put("read", reads);
+    for (String p :
+        List.of(
+            FIXTURE_ATTRIBUTES_D300E055,
+            FIXTURE_ACL_43B23946,
+            FIXTURE_FILESYSTEM_909B3E41,
+            FIXTURE_READONLY_C4A495E7)) result.put(p, attributes);
+    result.put(FIXTURE_OPENENTRY_4A0BE764, open);
+    result.put(FIXTURE_ENTRYCLOSE_2B5D4D25, close);
+    result.put(FIXTURE_OPENREAD_79674C24, readers);
+    result.put(FIXTURE_READCLOSE_8248E588, readers);
+    result.put(FIXTURE_READ_6F365882, reads);
     result.put("readSize", readSizes);
-    if (creates > 0) result.put("create", creates);
-    if (publishes > 0) result.put("publish", publishes);
+    if (creates > 0) result.put(FIXTURE_CREATE_5498A731, creates);
+    if (publishes > 0) result.put(FIXTURE_PUBLISH_69201707, publishes);
     if (writers > 0) {
       result.put("openWriter", writers);
       result.put("writerClose", writers);
-      result.put("force", writers);
+      result.put(FIXTURE_FORCE_34B3B0C3, writers);
     }
-    if (syncs > 0) result.put("sync", syncs);
+    if (syncs > 0) result.put(FIXTURE_SYNC_5CFA1A73, syncs);
     if (writeSizes > 0) result.put("writeSize", writeSizes);
-    if (writes > 0) result.put("write", writes);
-    if (unlinks > 0) result.put("unlink", unlinks);
+    if (writes > 0) result.put(FIXTURE_WRITE_BC2434A1, writes);
+    if (unlinks > 0) result.put(FIXTURE_UNLINK_04963CA9, unlinks);
     return result;
   }
 
   private void faults(String op, Map<String, Integer> expected) throws Exception {
     try (var f = fixture()) {
-      if (!op.equals("new")) f.seed();
+      if (!op.equals(FIXTURE_NEW_80270E39)) f.seed();
       operate(f, op);
       assertEquals(expected, f.counts, op);
       f.released();
@@ -700,28 +820,31 @@ final class DurableRecordFilesTest {
     for (var point : expected.entrySet())
       for (int at = 1; at <= point.getValue(); at++)
         try (var f = fixture()) {
-          if (!op.equals("new")) f.seed();
+          if (!op.equals(FIXTURE_NEW_80270E39)) f.seed();
           f.fail = point.getKey();
           f.failAt = at;
           failure(() -> operate(f, op));
           f.released();
-          if (op.equals("new") && Files.exists(f.target))
+          if (op.equals(FIXTURE_NEW_80270E39) && Files.exists(f.target))
             assertEquals(GOLDEN, Files.readString(f.target));
-          if (op.equals("new") && Files.exists(f.part)) {
+          if (op.equals(FIXTURE_NEW_80270E39) && Files.exists(f.part)) {
             String retained = Files.readString(f.part);
             assertTrue(retained.isEmpty() || retained.equals(GOLDEN));
           }
-          if (op.equals("read") || op.equals("reuse"))
+          if (op.equals(FIXTURE_READ_6F365882) || op.equals(FIXTURE_REUSE_40212409))
             assertEquals(GOLDEN, Files.readString(f.target));
-          if (op.equals("new")) assertFalse(Files.exists(f.target) && Files.exists(f.part));
+          if (op.equals(FIXTURE_NEW_80270E39))
+            assertFalse(Files.exists(f.target) && Files.exists(f.part));
         }
   }
 
   private static void operate(Fixture f, String operation) throws Exception {
     switch (operation) {
-      case "read" -> assertArrayEquals(bytes(GOLDEN), f.records.read(NAME).orElseThrow());
-      case "new", "reuse" -> f.records.publish(NAME, bytes(GOLDEN), PART);
-      case "remove" -> f.records.remove(NAME, bytes(GOLDEN));
+      case FIXTURE_READ_6F365882 ->
+          assertArrayEquals(bytes(GOLDEN), f.records.read(NAME).orElseThrow());
+      case FIXTURE_NEW_80270E39, FIXTURE_REUSE_40212409 ->
+          f.records.publish(NAME, bytes(GOLDEN), PART);
+      case FIXTURE_REMOVE_66F3D68B -> f.records.remove(NAME, bytes(GOLDEN));
       default -> throw new AssertionError(operation);
     }
   }
@@ -783,7 +906,7 @@ final class DurableRecordFilesTest {
     Fixture(Path directory) throws Exception {
       this.directory = directory;
       target = directory.resolve(NAME);
-      part = directory.resolve(PART + ".part");
+      part = directory.resolve(PART + FIXTURE_PART_92B0D5FC);
       DirectoryCalls delegate = LinuxDirectoryCalls.create();
       DirectoryCalls calls =
           (DirectoryCalls)
@@ -794,8 +917,12 @@ final class DurableRecordFilesTest {
                     String name = method.getName();
                     String point =
                         switch (name) {
-                          case "createPrivateFile" -> "create";
-                          case "openEntry", "publish", "unlink", "sync" -> name;
+                          case "createPrivateFile" -> FIXTURE_CREATE_5498A731;
+                          case FIXTURE_OPENENTRY_4A0BE764,
+                              FIXTURE_PUBLISH_69201707,
+                              FIXTURE_UNLINK_04963CA9,
+                              FIXTURE_SYNC_5CFA1A73 ->
+                              name;
                           default -> "";
                         };
                     if (!point.isEmpty()) point(point);
@@ -806,9 +933,9 @@ final class DurableRecordFilesTest {
                     } catch (InvocationTargetException failure) {
                       throw failure.getCause();
                     }
-                    if (name.equals("createPrivateFile") || name.equals("openEntry"))
+                    if (name.equals("createPrivateFile") || name.equals(FIXTURE_OPENENTRY_4A0BE764))
                       entries.add((Integer) result);
-                    if (ownedClose) point("entryClose");
+                    if (ownedClose) point(FIXTURE_ENTRYCLOSE_2B5D4D25);
                     return result;
                   });
       root = OwnedTransferDirectory.open(calls, directory);
@@ -856,8 +983,8 @@ final class DurableRecordFilesTest {
     }
 
     String role(Path held) throws IOException {
-      int mode = (Integer) nativeIo.attributes(held).get("mode");
-      return (mode & 0170000) == 040000 ? "dir" : "file";
+      int mode = (Integer) nativeIo.attributes(held).get(FIXTURE_MODE_B6D5C2C3);
+      return (mode & 0170000) == 040000 ? FIXTURE_DIR_16E08808 : FIXTURE_FILE_BFDDE6F5;
     }
 
     boolean selected(Path held) throws IOException {
@@ -866,37 +993,37 @@ final class DurableRecordFilesTest {
 
     @Override
     public Map<String, Object> attributes(Path held) throws IOException {
-      point("attributes");
+      point(FIXTURE_ATTRIBUTES_D300E055);
       if (invalid.equals("nullAttributes") && selected(held)) return null;
       var result = new HashMap<>(nativeIo.attributes(held));
       String role = role(held);
-      int type = (Integer) result.get("mode") & 0170000;
-      result.put("mode", type | (role.equals("dir") ? 0700 : 0600));
-      result.put("uid", 0);
-      result.put("gid", 0);
+      int type = (Integer) result.get(FIXTURE_MODE_B6D5C2C3) & 0170000;
+      result.put(FIXTURE_MODE_B6D5C2C3, type | (role.equals(FIXTURE_DIR_16E08808) ? 0700 : 0600));
+      result.put(FIXTURE_UID_0C18F38C, 0);
+      result.put(FIXTURE_GID_0ACDD642, 0);
       change.accept(role, result);
       return result;
     }
 
     @Override
     public String filesystem(Path held) throws IOException {
-      point("filesystem");
+      point(FIXTURE_FILESYSTEM_909B3E41);
       assertNotNull(nativeIo.filesystem(held));
       if (selected(held)) {
         if (invalid.equals("nullFilesystem")) return null;
-        if (invalid.equals("filesystem")) return "nfs";
+        if (invalid.equals(FIXTURE_FILESYSTEM_909B3E41)) return "nfs";
       }
       return filesystem;
     }
 
     @Override
     public byte[] accessAcl(Path held, int maximum) throws StorageIoException {
-      point("acl");
+      point(FIXTURE_ACL_43B23946);
       assertEquals(44, maximum);
       try {
         if (selected(held)) {
           if (invalid.equals("nullAcl")) return null;
-          if (invalid.equals("acl")) return new byte[] {2, 0, 0, 0};
+          if (invalid.equals(FIXTURE_ACL_43B23946)) return new byte[] {2, 0, 0, 0};
         }
       } catch (IOException failure) {
         throw new StorageIoException(StorageIoException.Reason.UNAVAILABLE);
@@ -906,9 +1033,9 @@ final class DurableRecordFilesTest {
 
     @Override
     public boolean readOnlyFilesystem(Path held) throws StorageIoException {
-      point("readonly");
+      point(FIXTURE_READONLY_C4A495E7);
       try {
-        return selected(held) && invalid.equals("readonly");
+        return selected(held) && invalid.equals(FIXTURE_READONLY_C4A495E7);
       } catch (IOException failure) {
         throw new StorageIoException(StorageIoException.Reason.UNAVAILABLE);
       }
@@ -929,17 +1056,17 @@ final class DurableRecordFilesTest {
         @Override
         public int write(ByteBuffer source) throws IOException {
           compoundBuffers.add(source.array());
-          point("write");
+          point(FIXTURE_WRITE_BC2434A1);
           int start = source.position();
           int remaining = source.remaining();
-          if (writeBehavior.equals("zero")) return 0;
-          if (writeBehavior.equals("negative")) return -1;
-          if (writeBehavior.equals("overflow")) return remaining + 1;
+          if (writeBehavior.equals(FIXTURE_ZERO_B7CE3F81)) return 0;
+          if (writeBehavior.equals(FIXTURE_NEGATIVE_B7EA6C83)) return -1;
+          if (writeBehavior.equals(FIXTURE_OVERFLOW_80A6ECE5)) return remaining + 1;
           int end = source.limit();
           source.limit(start + Math.min(remaining, writeLimit));
           int count = writer.write(source);
           source.limit(end);
-          if (writeBehavior.equals("position")) source.position(start);
+          if (writeBehavior.equals(FIXTURE_POSITION_5451AEB6)) source.position(start);
           return count;
         }
 
@@ -951,7 +1078,7 @@ final class DurableRecordFilesTest {
 
         @Override
         public void force() throws IOException {
-          point("force");
+          point(FIXTURE_FORCE_34B3B0C3);
           writer.force();
         }
 
@@ -967,7 +1094,7 @@ final class DurableRecordFilesTest {
 
     @Override
     public SeekableByteChannel open(Path held) throws IOException {
-      point("openRead");
+      point(FIXTURE_OPENREAD_79674C24);
       if (nullReader) return null;
       var channel = nativeIo.open(held);
       readers++;
@@ -975,19 +1102,19 @@ final class DurableRecordFilesTest {
         @Override
         public int read(ByteBuffer bytes) throws IOException {
           compoundBuffers.add(bytes.array());
-          point("read");
+          point(FIXTURE_READ_6F365882);
           if (rawRead) throw new IOException("synthetic private read diagnostic");
           int start = bytes.position();
           int remaining = bytes.remaining();
           int end = bytes.limit();
-          if (readBehavior.equals("zero")) return 0;
-          if (readBehavior.equals("negative")) return -2;
-          if (readBehavior.equals("overflow")) return remaining + 1;
+          if (readBehavior.equals(FIXTURE_ZERO_B7CE3F81)) return 0;
+          if (readBehavior.equals(FIXTURE_NEGATIVE_B7EA6C83)) return -2;
+          if (readBehavior.equals(FIXTURE_OVERFLOW_80A6ECE5)) return remaining + 1;
           if (readBehavior.equals("early")) return -1;
           bytes.limit(start + Math.min(remaining, readLimit));
           int result = channel.read(bytes);
           bytes.limit(end);
-          if (readBehavior.equals("position") && result > 0) bytes.position(start);
+          if (readBehavior.equals(FIXTURE_POSITION_5451AEB6) && result > 0) bytes.position(start);
           return result;
         }
 
@@ -1001,7 +1128,7 @@ final class DurableRecordFilesTest {
         public void close() throws IOException {
           channel.close();
           readers--;
-          point("readClose");
+          point(FIXTURE_READCLOSE_8248E588);
           if (rawClose) throw new IOException("synthetic private read close diagnostic");
         }
 
@@ -1012,7 +1139,7 @@ final class DurableRecordFilesTest {
 
         @Override
         public int write(ByteBuffer bytes) {
-          throw new AssertionError("readonly");
+          throw new AssertionError(FIXTURE_READONLY_C4A495E7);
         }
 
         @Override

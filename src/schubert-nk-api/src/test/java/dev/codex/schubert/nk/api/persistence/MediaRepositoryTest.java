@@ -49,6 +49,38 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** PT-MED-008..014; real production DDL/grants, synthetic master and independent UI235 bytes. */
 class MediaRepositoryTest {
+  private static final String FIXTURE_MUSIC_D5800D43 = "MUSIC";
+  private static final String FIXTURE_MUSIC_0_A0B30B4A = "music-0";
+  private static final String FIXTURE_TRACK_43CA9734 = "Track";
+  private static final String FIXTURE_BGM_2427B415 = "BGM";
+  private static final String FIXTURE_AUDREQ01_7A5DA392 = "AUDREQ01";
+  private static final String FIXTURE_AUDIO_OGG_96A5CB00 = "audio/ogg";
+  private static final String FIXTURE_MAIN_Z_82616435 = "main-z";
+  private static final String FIXTURE_FIRST_81C9759D = "First";
+  private static final String FIXTURE_MAIN_7FCC0BE2 = "MAIN";
+  private static final String FIXTURE_SUB_B8F15D32 = "sub";
+  private static final String FIXTURE_SUB_574FA518 = "Sub";
+  private static final String FIXTURE_SUBTRACK_BF9F5649 = "SUBTRACK";
+  private static final String FIXTURE_OPENING_583FF6F7 = "opening";
+  private static final String FIXTURE_VIDEO_MP4_9A1C8BFA = "video/mp4";
+  private static final String FIXTURE_MISSING_4B62D186 = "missing";
+  private static final String FIXTURE_OGG_09018BA2 = ".ogg";
+  private static final String FIXTURE_MUSIC_80DD0E40 = "music/";
+  private static final String FIXTURE_MP4_90A2AC73 = ".mp4";
+  private static final String FIXTURE_MEDIA_5FBF5FE3 = "media";
+  private static final String FIXTURE_STORAGE_RELATIVE_PATH_3B93240E = "storage_relative_path";
+  private static final String FIXTURE_FILE_NAME_13C51B3C = "file_name";
+  private static final String FIXTURE_OVERRIDESTRING_6A02E9F8 = "overrideString";
+  private static final String FIXTURE_OVERRIDELONG_54987068 = "overrideLong";
+  private static final String FIXTURE_NUMERICNULL_C13B0A60 = "numericNull";
+  private static final String FIXTURE_CATEGORY_DE46A45C = "category";
+  private static final String FIXTURE_OTHER_D448C0E0 = "other";
+  private static final String FIXTURE_FROZEN_KEY_959C182D = "frozen-key";
+  private static final String FIXTURE_ANIMATION_4D33DF79 = "animation";
+  private static final String FIXTURE_CATEGORIES_DCB1A2E4 = "categories";
+  private static final String FIXTURE_SECTIONS_4914C922 = "sections";
+  private static final String FIXTURE_TRACKS_7FF43291 = "tracks";
+  private static final String FIXTURE_VIDEO_C9B6F4C2 = "VIDEO";
   @TempDir static Path root;
   private static ApiLogDatabaseFixture database;
   private static final MediaRepository QUERIES = new MediaRepository();
@@ -76,11 +108,21 @@ class MediaRepositoryTest {
   void med036DecodedRequestsDispatchAllEightStoredQueries() throws Exception {
     audio();
     videos();
-    asset(100, "MUSIC", "music-0", "Track", "BGM", "ゲーム", null, null, "N", 1);
+    asset(
+        100,
+        FIXTURE_MUSIC_D5800D43,
+        FIXTURE_MUSIC_0_A0B30B4A,
+        FIXTURE_TRACK_43CA9734,
+        FIXTURE_BGM_2427B415,
+        "ゲーム",
+        null,
+        null,
+        "N",
+        1);
     try (var c = read()) {
       for (String layout :
           List.of(
-              "AUDREQ01",
+              FIXTURE_AUDREQ01_7A5DA392,
               "ANMREQ01",
               "ANLREQ01",
               "VIDREQ01",
@@ -96,11 +138,15 @@ class MediaRepositoryTest {
         var result = request.query(QUERIES, c, USER).orElseThrow();
         assertEquals(layout.replace("REQ", "RSP"), result.layoutId().value());
         switch (layout) {
-          case "AUDREQ01" ->
+          case FIXTURE_AUDREQ01_7A5DA392 ->
               assertWire(
                   result,
                   descriptorBytes(
-                      "700", "scenario/G/audio/700.ogg", "Audio nice.ogg", "audio/ogg", "A"),
+                      "700",
+                      "scenario/G/audio/700.ogg",
+                      "Audio nice.ogg",
+                      FIXTURE_AUDIO_OGG_96A5CB00,
+                      "A"),
                   List.of());
           case "ANMREQ01" ->
               assertWire(result, "0030011005      ".getBytes(StandardCharsets.US_ASCII), List.of());
@@ -109,13 +155,30 @@ class MediaRepositoryTest {
                   result,
                   count(8, 6, 3),
                   List.of(
-                      animation("main-z", "First", "MAIN", "v/30.mp4", null, 1),
-                      animation("main-a", "Second", "MAIN", "v/10.mp4", null, 2),
-                      animation("sub", "Sub", "SUBTRACK", "v/20.mp4", "main-z", 3)));
+                      animation(
+                          FIXTURE_MAIN_Z_82616435,
+                          FIXTURE_FIRST_81C9759D,
+                          FIXTURE_MAIN_7FCC0BE2,
+                          "v/30.mp4",
+                          null,
+                          1),
+                      animation("main-a", "Second", FIXTURE_MAIN_7FCC0BE2, "v/10.mp4", null, 2),
+                      animation(
+                          FIXTURE_SUB_B8F15D32,
+                          FIXTURE_SUB_574FA518,
+                          FIXTURE_SUBTRACK_BF9F5649,
+                          "v/20.mp4",
+                          FIXTURE_MAIN_Z_82616435,
+                          3)));
           case "VIDREQ01" -> {
             byte[] expected = blank(1808);
             System.arraycopy(
-                descriptorBytes("opening", "video/50.mp4", "file.mp4", "video/mp4", "I"),
+                descriptorBytes(
+                    FIXTURE_OPENING_583FF6F7,
+                    "video/50.mp4",
+                    "file.mp4",
+                    FIXTURE_VIDEO_MP4_9A1C8BFA,
+                    "I"),
                 0,
                 expected,
                 0,
@@ -125,17 +188,32 @@ class MediaRepositoryTest {
             put(expected, 1296, "v/50.mp4");
             assertWire(result, expected, List.of());
           }
-          case "MCTREQ01" -> assertWire(result, count(8, 6, 1), List.of(group(72, 64, "BGM", 1)));
+          case "MCTREQ01" ->
+              assertWire(result, count(8, 6, 1), List.of(group(72, 64, FIXTURE_BGM_2427B415, 1)));
           case "MCSREQ01" -> assertWire(result, count(8, 6, 1), List.of(group(136, 128, "ゲーム", 1)));
           case "MTRREQ01" ->
               assertWire(
                   result,
                   count(16, 9, 1),
-                  List.of(track("music-0", "Track", "BGM", "ゲーム", "v/100.ogg", null, "N", 1)));
+                  List.of(
+                      track(
+                          FIXTURE_MUSIC_0_A0B30B4A,
+                          FIXTURE_TRACK_43CA9734,
+                          FIXTURE_BGM_2427B415,
+                          "ゲーム",
+                          "v/100.ogg",
+                          null,
+                          "N",
+                          1)));
           case "MEDREQ01" ->
               assertWire(
                   result,
-                  descriptorBytes("music-0", "music/100.ogg", "file.ogg", "audio/ogg", "A"),
+                  descriptorBytes(
+                      FIXTURE_MUSIC_0_A0B30B4A,
+                      "music/100.ogg",
+                      "file.ogg",
+                      FIXTURE_AUDIO_OGG_96A5CB00,
+                      "A"),
                   List.of());
           default -> fail("unexpected query");
         }
@@ -143,10 +221,10 @@ class MediaRepositoryTest {
         assertFalse(c.getAutoCommit());
         assertFalse(c.isClosed());
       }
-      for (String layout : List.of("AUDREQ01", "VIDREQ01", "MEDREQ01")) {
+      for (String layout : List.of(FIXTURE_AUDREQ01_7A5DA392, "VIDREQ01", "MEDREQ01")) {
         byte[] data = dev.codex.schubert.nk.api.application.media.MediaRequestFixture.data(layout);
-        if (layout.equals("AUDREQ01")) put(data, 0, "000000000701");
-        else put(data, 0, "missing");
+        if (layout.equals(FIXTURE_AUDREQ01_7A5DA392)) put(data, 0, "000000000701");
+        else put(data, 0, FIXTURE_MISSING_4B62D186);
         var request =
             dev.codex.schubert.nk.api.application.media.MediaRequest.decode(
                 dev.codex.schubert.nk.api.application.media.MediaRequestFixture.message(
@@ -174,7 +252,11 @@ class MediaRepositoryTest {
                 .audioMetadata(c, USER, new AudioDescriptorRequestData(new AudioId(700), mode))
                 .orElseThrow(),
             descriptorBytes(
-                "700", "scenario/G/audio/700.ogg", "Audio nice.ogg", "audio/ogg", mode.wireValue()),
+                "700",
+                "scenario/G/audio/700.ogg",
+                "Audio nice.ogg",
+                FIXTURE_AUDIO_OGG_96A5CB00,
+                mode.wireValue()),
             List.of());
       }
       assertTrue(
@@ -188,7 +270,7 @@ class MediaRepositoryTest {
     String[][] formats = {
       {".m4a", "audio/mp4"},
       {".mp3", "audio/mpeg"},
-      {".ogg", "audio/ogg"},
+      {FIXTURE_OGG_09018BA2, FIXTURE_AUDIO_OGG_96A5CB00},
       {".wav", "audio/wav"},
       {".flac", "audio/flac"}
     };
@@ -197,7 +279,17 @@ class MediaRepositoryTest {
       String suffix = formats[i][0];
       String mime = formats[i][1];
       String logical = "music-" + i;
-      asset(id, "MUSIC", logical, "Track", "BGM", "ゲーム", null, null, "N", i + 1);
+      asset(
+          id,
+          FIXTURE_MUSIC_D5800D43,
+          logical,
+          FIXTURE_TRACK_43CA9734,
+          FIXTURE_BGM_2427B415,
+          "ゲーム",
+          null,
+          null,
+          "N",
+          i + 1);
       sql(
           "update schubert.media_assets set storage_relative_path='music/"
               + id
@@ -215,7 +307,11 @@ class MediaRepositoryTest {
                   .musicMetadata(c, ADMIN, new MusicDescriptorRequestData(logical, mode))
                   .orElseThrow(),
               descriptorBytes(
-                  logical, "music/" + id + suffix, "表示名" + suffix, mime, mode.wireValue()),
+                  logical,
+                  FIXTURE_MUSIC_80DD0E40 + id + suffix,
+                  "表示名" + suffix,
+                  mime,
+                  mode.wireValue()),
               List.of());
       }
     }
@@ -224,7 +320,10 @@ class MediaRepositoryTest {
       assertTrue(
           QUERIES
               .musicMetadata(
-                  c, USER, new MusicDescriptorRequestData("opening", ContentDisposition.INLINE))
+                  c,
+                  USER,
+                  new MusicDescriptorRequestData(
+                      FIXTURE_OPENING_583FF6F7, ContentDisposition.INLINE))
               .isEmpty());
       assertTrue(
           QUERIES
@@ -232,7 +331,9 @@ class MediaRepositoryTest {
                   c, USER, new MusicDescriptorRequestData("' OR '1'='1", ContentDisposition.INLINE))
               .isEmpty());
       assertTrue(
-          QUERIES.videoMetadata(c, USER, new VideoDescriptorRequestData("music-0")).isEmpty());
+          QUERIES
+              .videoMetadata(c, USER, new VideoDescriptorRequestData(FIXTURE_MUSIC_0_A0B30B4A))
+              .isEmpty());
     }
   }
 
@@ -241,30 +342,37 @@ class MediaRepositoryTest {
   void videoMetadataIncludesOpeningAndDisplayFields() throws Exception {
     videos();
     String[][] rows = {
-      {"main-z", "30", "First", "MAIN"},
-      {"sub", "20", "Sub", "SUBTRACK"},
+      {FIXTURE_MAIN_Z_82616435, "30", FIXTURE_FIRST_81C9759D, FIXTURE_MAIN_7FCC0BE2},
+      {FIXTURE_SUB_B8F15D32, "20", FIXTURE_SUB_574FA518, FIXTURE_SUBTRACK_BF9F5649},
       {"ova", "40", "Ova", "OVA"},
-      {"opening", "50", "Opening", "OPENING"}
+      {FIXTURE_OPENING_583FF6F7, "50", "Opening", "OPENING"}
     };
     try (var c = read()) {
       for (String[] row : rows) {
         byte[] expected = blank(1808);
         System.arraycopy(
-            descriptorBytes(row[0], "video/" + row[1] + ".mp4", "file.mp4", "video/mp4", "I"),
+            descriptorBytes(
+                row[0],
+                "video/" + row[1] + FIXTURE_MP4_90A2AC73,
+                "file.mp4",
+                FIXTURE_VIDEO_MP4_9A1C8BFA,
+                "I"),
             0,
             expected,
             0,
             1024);
         put(expected, 1024, row[2]);
         put(expected, 1280, row[3]);
-        put(expected, 1296, "v/" + row[1] + ".mp4");
+        put(expected, 1296, "v/" + row[1] + FIXTURE_MP4_90A2AC73);
         assertWire(
             QUERIES.videoMetadata(c, USER, new VideoDescriptorRequestData(row[0])).orElseThrow(),
             expected,
             List.of());
       }
       assertTrue(
-          QUERIES.videoMetadata(c, USER, new VideoDescriptorRequestData("missing")).isEmpty());
+          QUERIES
+              .videoMetadata(c, USER, new VideoDescriptorRequestData(FIXTURE_MISSING_4B62D186))
+              .isEmpty());
       assertFalse(c.isClosed());
       assertFalse(c.getAutoCommit());
       assertTrue(c.isReadOnly());
@@ -276,7 +384,17 @@ class MediaRepositoryTest {
   void descriptorNullDatabaseAndMetadataFaultsNeverBecomeMissing() throws Exception {
     audio();
     videos();
-    asset(90, "MUSIC", "media", "Track", "BGM", "ゲーム", null, null, "N", 1);
+    asset(
+        90,
+        FIXTURE_MUSIC_D5800D43,
+        FIXTURE_MEDIA_5FBF5FE3,
+        FIXTURE_TRACK_43CA9734,
+        FIXTURE_BGM_2427B415,
+        "ゲーム",
+        null,
+        null,
+        "N",
+        1);
     for (String kind : List.of("audio", "video", "music")) {
       assertThrows(NullPointerException.class, () -> metadata(kind, null, USER));
       try (var c = read()) {
@@ -293,19 +411,28 @@ class MediaRepositoryTest {
               ResultCode.TEMPORARY_FAILURE,
               () -> metadata(kind, fault(c, problem, null, null), USER));
         for (String column :
-            List.of("logical_id", "storage_relative_path", "file_name", "sha256", "mime_type"))
+            List.of(
+                "logical_id",
+                FIXTURE_STORAGE_RELATIVE_PATH_3B93240E,
+                FIXTURE_FILE_NAME_13C51B3C,
+                "sha256",
+                "mime_type"))
           failure(
               ResultCode.TEMPORARY_FAILURE,
-              () -> metadata(kind, fault(c, "overrideString", column, null), USER));
+              () -> metadata(kind, fault(c, FIXTURE_OVERRIDESTRING_6A02E9F8, column, null), USER));
         failure(
             ResultCode.TEMPORARY_FAILURE,
-            () -> metadata(kind, fault(c, "overrideString", "logical_id", "different"), USER));
+            () ->
+                metadata(
+                    kind,
+                    fault(c, FIXTURE_OVERRIDESTRING_6A02E9F8, "logical_id", "different"),
+                    USER));
         failure(
             ResultCode.TEMPORARY_FAILURE,
-            () -> metadata(kind, fault(c, "overrideLong", "byte_size", 0L), USER));
+            () -> metadata(kind, fault(c, FIXTURE_OVERRIDELONG_54987068, "byte_size", 0L), USER));
         failure(
             ResultCode.TEMPORARY_FAILURE,
-            () -> metadata(kind, fault(c, "numericNull", null, null), USER));
+            () -> metadata(kind, fault(c, FIXTURE_NUMERICNULL_C13B0A60, null, null), USER));
         assertFalse(c.isClosed());
         assertFalse(c.getAutoCommit());
         assertTrue(c.isReadOnly());
@@ -315,61 +442,79 @@ class MediaRepositoryTest {
       assertThrows(NullPointerException.class, () -> QUERIES.audioMetadata(c, USER, null));
       assertThrows(NullPointerException.class, () -> QUERIES.videoMetadata(c, USER, null));
       assertThrows(NullPointerException.class, () -> QUERIES.musicMetadata(c, USER, null));
-      for (String column : List.of("title", "category", "display_path"))
+      for (String column : List.of("title", FIXTURE_CATEGORY_DE46A45C, "display_path"))
         failure(
             ResultCode.TEMPORARY_FAILURE,
             () ->
                 QUERIES.videoMetadata(
-                    fault(c, "overrideString", column, null),
+                    fault(c, FIXTURE_OVERRIDESTRING_6A02E9F8, column, null),
                     USER,
-                    new VideoDescriptorRequestData("opening")));
+                    new VideoDescriptorRequestData(FIXTURE_OPENING_583FF6F7)));
       failure(
           ResultCode.TEMPORARY_FAILURE,
           () ->
               QUERIES.videoMetadata(
-                  fault(c, "overrideString", "category", "UNKNOWN"),
+                  fault(c, FIXTURE_OVERRIDESTRING_6A02E9F8, FIXTURE_CATEGORY_DE46A45C, "UNKNOWN"),
                   USER,
-                  new VideoDescriptorRequestData("opening")));
+                  new VideoDescriptorRequestData(FIXTURE_OPENING_583FF6F7)));
       String[][] invalid = {
-        {"storage_relative_path", "video/wrong.ogg"},
-        {"storage_relative_path", "music/wrong.bin"},
-        {"storage_relative_path", "music/../wrong.ogg"},
-        {"storage_relative_path", "music/" + "あ".repeat(84) + ".ogg"},
-        {"file_name", "wrong.mp4"},
-        {"file_name", "line\r\n.ogg"},
+        {FIXTURE_STORAGE_RELATIVE_PATH_3B93240E, "video/wrong.ogg"},
+        {FIXTURE_STORAGE_RELATIVE_PATH_3B93240E, "music/wrong.bin"},
+        {FIXTURE_STORAGE_RELATIVE_PATH_3B93240E, "music/../wrong.ogg"},
+        {
+          FIXTURE_STORAGE_RELATIVE_PATH_3B93240E,
+          FIXTURE_MUSIC_80DD0E40 + "あ".repeat(84) + FIXTURE_OGG_09018BA2
+        },
+        {FIXTURE_FILE_NAME_13C51B3C, "wrong.mp4"},
+        {FIXTURE_FILE_NAME_13C51B3C, "line\r\n.ogg"},
         {"sha256", "g".repeat(64)},
         {"mime_type", "audio/wav"}
       };
       for (String[] value : invalid)
         failure(
             ResultCode.TEMPORARY_FAILURE,
-            () -> metadata("music", fault(c, "overrideString", value[0], value[1]), USER));
+            () ->
+                metadata(
+                    "music", fault(c, FIXTURE_OVERRIDESTRING_6A02E9F8, value[0], value[1]), USER));
       var renamed =
           QUERIES
               .musicMetadata(
-                  fault(c, "overrideString", "file_name", "あ".repeat(84) + ".ogg"),
+                  fault(
+                      c,
+                      FIXTURE_OVERRIDESTRING_6A02E9F8,
+                      FIXTURE_FILE_NAME_13C51B3C,
+                      "あ".repeat(84) + FIXTURE_OGG_09018BA2),
                   USER,
-                  new MusicDescriptorRequestData("media", ContentDisposition.INLINE))
+                  new MusicDescriptorRequestData(FIXTURE_MEDIA_5FBF5FE3, ContentDisposition.INLINE))
               .orElseThrow();
       assertWire(
           renamed,
-          descriptorBytes("media", "music/90.ogg", "あ".repeat(84) + ".ogg", "audio/ogg", "I"),
+          descriptorBytes(
+              FIXTURE_MEDIA_5FBF5FE3,
+              "music/90.ogg",
+              "あ".repeat(84) + FIXTURE_OGG_09018BA2,
+              FIXTURE_AUDIO_OGG_96A5CB00,
+              "I"),
           List.of());
       var segmented =
           QUERIES
               .musicMetadata(
                   fault(
                       c,
-                      "overrideString",
-                      "storage_relative_path",
-                      "music/" + "a".repeat(251) + ".ogg"),
+                      FIXTURE_OVERRIDESTRING_6A02E9F8,
+                      FIXTURE_STORAGE_RELATIVE_PATH_3B93240E,
+                      FIXTURE_MUSIC_80DD0E40 + "a".repeat(251) + FIXTURE_OGG_09018BA2),
                   USER,
-                  new MusicDescriptorRequestData("media", ContentDisposition.INLINE))
+                  new MusicDescriptorRequestData(FIXTURE_MEDIA_5FBF5FE3, ContentDisposition.INLINE))
               .orElseThrow();
       assertWire(
           segmented,
           descriptorBytes(
-              "media", "music/" + "a".repeat(251) + ".ogg", "file.ogg", "audio/ogg", "I"),
+              FIXTURE_MEDIA_5FBF5FE3,
+              FIXTURE_MUSIC_80DD0E40 + "a".repeat(251) + FIXTURE_OGG_09018BA2,
+              "file.ogg",
+              FIXTURE_AUDIO_OGG_96A5CB00,
+              "I"),
           List.of());
     }
   }
@@ -382,10 +527,13 @@ class MediaRepositoryTest {
               c,
               actor,
               new AudioDescriptorRequestData(new AudioId(700), ContentDisposition.INLINE));
-      case "video" -> QUERIES.videoMetadata(c, actor, new VideoDescriptorRequestData("opening"));
+      case "video" ->
+          QUERIES.videoMetadata(c, actor, new VideoDescriptorRequestData(FIXTURE_OPENING_583FF6F7));
       case "music" ->
           QUERIES.musicMetadata(
-              c, actor, new MusicDescriptorRequestData("media", ContentDisposition.INLINE));
+              c,
+              actor,
+              new MusicDescriptorRequestData(FIXTURE_MEDIA_5FBF5FE3, ContentDisposition.INLINE));
       default -> throw new AssertionError(kind);
     };
   }
@@ -417,7 +565,17 @@ class MediaRepositoryTest {
           List.of());
     }
     videos();
-    asset(60, "MUSIC", "ignored", "ignored", "BGM", "ゲーム", null, null, "N", 1);
+    asset(
+        60,
+        FIXTURE_MUSIC_D5800D43,
+        "ignored",
+        "ignored",
+        FIXTURE_BGM_2427B415,
+        "ゲーム",
+        null,
+        null,
+        "N",
+        1);
     try (var c = read()) {
       assertWire(
           QUERIES.animationMenu(c, USER),
@@ -447,9 +605,21 @@ class MediaRepositoryTest {
     videos();
     List<byte[]> expected =
         List.of(
-            animation("main-z", "First", "MAIN", "v/30.mp4", null, 1),
-            animation("main-a", "Second", "MAIN", "v/10.mp4", null, 2),
-            animation("sub", "Sub", "SUBTRACK", "v/20.mp4", "main-z", 3));
+            animation(
+                FIXTURE_MAIN_Z_82616435,
+                FIXTURE_FIRST_81C9759D,
+                FIXTURE_MAIN_7FCC0BE2,
+                "v/30.mp4",
+                null,
+                1),
+            animation("main-a", "Second", FIXTURE_MAIN_7FCC0BE2, "v/10.mp4", null, 2),
+            animation(
+                FIXTURE_SUB_B8F15D32,
+                FIXTURE_SUB_574FA518,
+                FIXTURE_SUBTRACK_BF9F5649,
+                "v/20.mp4",
+                FIXTURE_MAIN_Z_82616435,
+                3));
     try (var c = read()) {
       var value = QUERIES.animationList(c, USER, MAIN);
       assertWire(value, count(8, 6, 3), expected);
@@ -473,25 +643,35 @@ class MediaRepositoryTest {
   @Test
   void musicGroupsUseApprovedCategoryAndSectionOrder() throws Exception {
     String[][] groups = {
-      {"ZZ", "other"},
-      {"BGM", "ゲーム"},
+      {"ZZ", FIXTURE_OTHER_D448C0E0},
+      {FIXTURE_BGM_2427B415, "ゲーム"},
       {"曲", "アニメ"},
       {"曲", "ゲーム"},
       {"曲", "キャラクターソング"},
       {"曲", "ZZ"},
       {"曲", "AA"},
-      {"AA", "other"},
+      {"AA", FIXTURE_OTHER_D448C0E0},
       {"曲", "ゲーム"}
     };
     for (int i = 0; i < groups.length; i++)
-      asset(i + 1, "MUSIC", "m" + i, "Track", groups[i][0], groups[i][1], null, null, "N", i + 1);
+      asset(
+          i + 1,
+          FIXTURE_MUSIC_D5800D43,
+          "m" + i,
+          FIXTURE_TRACK_43CA9734,
+          groups[i][0],
+          groups[i][1],
+          null,
+          null,
+          "N",
+          i + 1);
     try (var c = read()) {
       assertWire(
           QUERIES.musicCategories(c, USER),
           count(8, 6, 4),
           List.of(
               group(72, 64, "曲", 6),
-              group(72, 64, "BGM", 1),
+              group(72, 64, FIXTURE_BGM_2427B415, 1),
               group(72, 64, "AA", 1),
               group(72, 64, "ZZ", 1)));
       assertWire(
@@ -504,11 +684,21 @@ class MediaRepositoryTest {
               group(136, 128, "AA", 1),
               group(136, 128, "ZZ", 1)));
       assertWire(
-          QUERIES.musicSections(c, USER, new MusicSectionRequestData("missing")),
+          QUERIES.musicSections(c, USER, new MusicSectionRequestData(FIXTURE_MISSING_4B62D186)),
           count(8, 6, 0),
           List.of());
     }
-    asset(20, "MUSIC", "quoted", "Track", "O'Reilly", "quote", null, null, "N", 20);
+    asset(
+        20,
+        FIXTURE_MUSIC_D5800D43,
+        "quoted",
+        FIXTURE_TRACK_43CA9734,
+        "O'Reilly",
+        "quote",
+        null,
+        null,
+        "N",
+        20);
     try (var c = read()) {
       assertWire(
           QUERIES.musicSections(c, USER, new MusicSectionRequestData("O'Reilly")),
@@ -527,25 +717,72 @@ class MediaRepositoryTest {
 
   @Test
   void musicTracksReadFrozenPairsAndLogicalIdTies() throws Exception {
-    asset(50, "MUSIC", "z-main", "Unrelated title", "曲", "ゲーム", null, "frozen-key", "M", 1);
-    asset(10, "MUSIC", "a-inst", "No suffix inference", "曲", "ゲーム", null, "frozen-key", "I", 1);
-    asset(30, "MUSIC", "lonely", "Solo", "曲", "ゲーム", null, "solo-key", "M", 2);
-    asset(60, "MUSIC", "bgm", "Bgm", "BGM", "ゲーム", null, null, "N", 1);
-    asset(70, "MUSIC", "other", "Other", "曲", "アニメ", null, "other", "M", 1);
+    asset(
+        50,
+        FIXTURE_MUSIC_D5800D43,
+        "z-main",
+        "Unrelated title",
+        "曲",
+        "ゲーム",
+        null,
+        FIXTURE_FROZEN_KEY_959C182D,
+        "M",
+        1);
+    asset(
+        10,
+        FIXTURE_MUSIC_D5800D43,
+        "a-inst",
+        "No suffix inference",
+        "曲",
+        "ゲーム",
+        null,
+        FIXTURE_FROZEN_KEY_959C182D,
+        "I",
+        1);
+    asset(30, FIXTURE_MUSIC_D5800D43, "lonely", "Solo", "曲", "ゲーム", null, "solo-key", "M", 2);
+    asset(
+        60, FIXTURE_MUSIC_D5800D43, "bgm", "Bgm", FIXTURE_BGM_2427B415, "ゲーム", null, null, "N", 1);
+    asset(
+        70,
+        FIXTURE_MUSIC_D5800D43,
+        FIXTURE_OTHER_D448C0E0,
+        "Other",
+        "曲",
+        "アニメ",
+        null,
+        FIXTURE_OTHER_D448C0E0,
+        "M",
+        1);
     try (var c = read()) {
       assertWire(
           QUERIES.musicTracks(c, USER, new MusicTrackRequestData("曲", "ゲーム")),
           count(16, 9, 3),
           List.of(
-              track("a-inst", "No suffix inference", "曲", "ゲーム", "v/10.ogg", "frozen-key", "I", 1),
-              track("z-main", "Unrelated title", "曲", "ゲーム", "v/50.ogg", "frozen-key", "M", 1),
+              track(
+                  "a-inst",
+                  "No suffix inference",
+                  "曲",
+                  "ゲーム",
+                  "v/10.ogg",
+                  FIXTURE_FROZEN_KEY_959C182D,
+                  "I",
+                  1),
+              track(
+                  "z-main",
+                  "Unrelated title",
+                  "曲",
+                  "ゲーム",
+                  "v/50.ogg",
+                  FIXTURE_FROZEN_KEY_959C182D,
+                  "M",
+                  1),
               track("lonely", "Solo", "曲", "ゲーム", "v/30.ogg", "solo-key", "M", 2)));
       assertWire(
-          QUERIES.musicTracks(c, ADMIN, new MusicTrackRequestData("BGM", "ゲーム")),
+          QUERIES.musicTracks(c, ADMIN, new MusicTrackRequestData(FIXTURE_BGM_2427B415, "ゲーム")),
           count(16, 9, 1),
-          List.of(track("bgm", "Bgm", "BGM", "ゲーム", "v/60.ogg", null, "N", 1)));
+          List.of(track("bgm", "Bgm", FIXTURE_BGM_2427B415, "ゲーム", "v/60.ogg", null, "N", 1)));
       assertWire(
-          QUERIES.musicTracks(c, USER, new MusicTrackRequestData("曲", "missing")),
+          QUERIES.musicTracks(c, USER, new MusicTrackRequestData("曲", FIXTURE_MISSING_4B62D186)),
           count(16, 9, 0),
           List.of());
     }
@@ -553,12 +790,17 @@ class MediaRepositoryTest {
 
   @Test
   void everyListCapacityRejectsTruncationAndCloseDowngrades() throws Exception {
-    for (String kind : List.of("animation", "categories", "sections", "tracks")) {
+    for (String kind :
+        List.of(
+            FIXTURE_ANIMATION_4D33DF79,
+            FIXTURE_CATEGORIES_DCB1A2E4,
+            FIXTURE_SECTIONS_4914C922,
+            FIXTURE_TRACKS_7FF43291)) {
       int maximum =
           switch (kind) {
-            case "animation" -> 50;
-            case "categories" -> 20;
-            case "sections" -> 100;
+            case FIXTURE_ANIMATION_4D33DF79 -> 50;
+            case FIXTURE_CATEGORIES_DCB1A2E4 -> 20;
+            case FIXTURE_SECTIONS_4914C922 -> 100;
             default -> 200;
           };
       fill(kind, maximum);
@@ -573,39 +815,48 @@ class MediaRepositoryTest {
             () -> select(kind, fault(c, "result.close", null, null), USER));
       }
     }
-    fill("animation", 999);
+    fill(FIXTURE_ANIMATION_4D33DF79, 999);
     try (var c = read()) {
       assertEquals(
           999,
           ((AnimationMenuResponseData) QUERIES.animationMenu(c, USER).data()).totalFileCount());
     }
-    fill("animation", 1000);
+    fill(FIXTURE_ANIMATION_4D33DF79, 1000);
     try (var c = read()) {
       failure(ResultCode.RESOURCE_LIMIT, () -> QUERIES.animationMenu(c, USER));
     }
-    fill("tracks", 1);
-    for (String kind : List.of("categories", "sections")) {
+    fill(FIXTURE_TRACKS_7FF43291, 1);
+    for (String kind : List.of(FIXTURE_CATEGORIES_DCB1A2E4, FIXTURE_SECTIONS_4914C922)) {
       try (var c = read()) {
-        var value = select(kind, fault(c, "overrideLong", "track_count", 999999L), USER);
+        var value =
+            select(kind, fault(c, FIXTURE_OVERRIDELONG_54987068, "track_count", 999999L), USER);
         var expected =
-            kind.equals("categories")
-                ? group(72, 64, "BGM", 999999)
+            kind.equals(FIXTURE_CATEGORIES_DCB1A2E4)
+                ? group(72, 64, FIXTURE_BGM_2427B415, 999999)
                 : group(136, 128, "ゲーム", 999999);
         assertWire(value, count(8, 6, 1), List.of(expected));
         failure(
             ResultCode.RESOURCE_LIMIT,
-            () -> select(kind, fault(c, "overrideLong", "track_count", 1000000L), USER));
+            () ->
+                select(
+                    kind, fault(c, FIXTURE_OVERRIDELONG_54987068, "track_count", 1000000L), USER));
         failure(
             ResultCode.TEMPORARY_FAILURE,
-            () -> select(kind, fault(c, "overrideLong", "track_count", -1L), USER));
+            () -> select(kind, fault(c, FIXTURE_OVERRIDELONG_54987068, "track_count", -1L), USER));
       }
     }
   }
 
   @Test
   void nullContractsAndJdbcMetadataFailuresRemainRedacted() throws Exception {
-    fill("tracks", 1);
-    for (String kind : List.of("menu", "animation", "categories", "sections", "tracks")) {
+    fill(FIXTURE_TRACKS_7FF43291, 1);
+    for (String kind :
+        List.of(
+            "menu",
+            FIXTURE_ANIMATION_4D33DF79,
+            FIXTURE_CATEGORIES_DCB1A2E4,
+            FIXTURE_SECTIONS_4914C922,
+            FIXTURE_TRACKS_7FF43291)) {
       assertThrows(NullPointerException.class, () -> select(kind, null, USER));
       try (var c = read()) {
         assertThrows(NullPointerException.class, () -> select(kind, c, null));
@@ -624,7 +875,9 @@ class MediaRepositoryTest {
           () -> QUERIES.musicSections(c, USER, new MusicSectionRequestData("x".repeat(65))));
       assertThrows(
           RuntimeException.class,
-          () -> QUERIES.musicTracks(c, USER, new MusicTrackRequestData("BGM", "x".repeat(129))));
+          () ->
+              QUERIES.musicTracks(
+                  c, USER, new MusicTrackRequestData(FIXTURE_BGM_2427B415, "x".repeat(129))));
       for (String problem :
           List.of(
               "connection.getAutoCommit",
@@ -640,53 +893,88 @@ class MediaRepositoryTest {
               "statement.close")) {
         failure(
             ResultCode.TEMPORARY_FAILURE,
-            () -> select("tracks", fault(c, problem, null, null), USER));
+            () -> select(FIXTURE_TRACKS_7FF43291, fault(c, problem, null, null), USER));
         assertFalse(c.isClosed());
         assertFalse(c.getAutoCommit());
         assertTrue(c.isReadOnly());
       }
       for (String column :
-          List.of("logical_id", "title", "category", "section", "display_path", "pair_role"))
+          List.of(
+              "logical_id",
+              "title",
+              FIXTURE_CATEGORY_DE46A45C,
+              "section",
+              "display_path",
+              "pair_role"))
         failure(
             ResultCode.TEMPORARY_FAILURE,
-            () -> select("tracks", fault(c, "overrideString", column, null), USER));
+            () ->
+                select(
+                    FIXTURE_TRACKS_7FF43291,
+                    fault(c, FIXTURE_OVERRIDESTRING_6A02E9F8, column, null),
+                    USER));
       failure(
           ResultCode.TEMPORARY_FAILURE,
-          () -> select("tracks", fault(c, "overrideString", "pair_role", "UNKNOWN"), USER));
+          () ->
+              select(
+                  FIXTURE_TRACKS_7FF43291,
+                  fault(c, FIXTURE_OVERRIDESTRING_6A02E9F8, "pair_role", "UNKNOWN"),
+                  USER));
       failure(
           ResultCode.TEMPORARY_FAILURE,
-          () -> select("tracks", fault(c, "overrideString", "display_path", "/outside"), USER));
+          () ->
+              select(
+                  FIXTURE_TRACKS_7FF43291,
+                  fault(c, FIXTURE_OVERRIDESTRING_6A02E9F8, "display_path", "/outside"),
+                  USER));
       failure(
           ResultCode.TEMPORARY_FAILURE,
-          () -> select("tracks", fault(c, "overrideString", "title", " "), USER));
+          () ->
+              select(
+                  FIXTURE_TRACKS_7FF43291,
+                  fault(c, FIXTURE_OVERRIDESTRING_6A02E9F8, "title", " "),
+                  USER));
       failure(
           ResultCode.TEMPORARY_FAILURE,
-          () -> select("tracks", fault(c, "overrideLong", "display_order", Long.MAX_VALUE), USER));
+          () ->
+              select(
+                  FIXTURE_TRACKS_7FF43291,
+                  fault(c, FIXTURE_OVERRIDELONG_54987068, "display_order", Long.MAX_VALUE),
+                  USER));
       failure(
           ResultCode.TEMPORARY_FAILURE,
-          () -> select("tracks", fault(c, "numericNull", null, null), USER));
+          () ->
+              select(
+                  FIXTURE_TRACKS_7FF43291,
+                  fault(c, FIXTURE_NUMERICNULL_C13B0A60, null, null),
+                  USER));
       failure(
           ResultCode.TEMPORARY_FAILURE,
           () -> QUERIES.animationMenu(fault(c, "noRows", null, null), USER));
     }
-    fill("animation", 1);
+    fill(FIXTURE_ANIMATION_4D33DF79, 1);
     try (var c = read()) {
       failure(
           ResultCode.TEMPORARY_FAILURE,
           () ->
-              QUERIES.animationList(fault(c, "overrideString", "category", "UNKNOWN"), USER, MAIN));
+              QUERIES.animationList(
+                  fault(c, FIXTURE_OVERRIDESTRING_6A02E9F8, FIXTURE_CATEGORY_DE46A45C, "UNKNOWN"),
+                  USER,
+                  MAIN));
       failure(
           ResultCode.TEMPORARY_FAILURE,
-          () -> QUERIES.animationMenu(fault(c, "overrideLong", "opening_count", -1L), USER));
+          () ->
+              QUERIES.animationMenu(
+                  fault(c, FIXTURE_OVERRIDELONG_54987068, "opening_count", -1L), USER));
       failure(
           ResultCode.TEMPORARY_FAILURE,
-          () -> QUERIES.animationMenu(fault(c, "numericNull", null, null), USER));
+          () -> QUERIES.animationMenu(fault(c, FIXTURE_NUMERICNULL_C13B0A60, null, null), USER));
     }
   }
 
   @Test
   void concurrentReadersNeverMutateOrAcquireRowLocks() throws Exception {
-    fill("tracks", 3);
+    fill(FIXTURE_TRACKS_7FF43291, 3);
     try (var lock = database.admin();
         var statement = lock.createStatement();
         var workers = Executors.newFixedThreadPool(8)) {
@@ -697,7 +985,7 @@ class MediaRepositoryTest {
         tasks.add(
             () -> {
               try (var c = read()) {
-                return select("tracks", c, USER);
+                return select(FIXTURE_TRACKS_7FF43291, c, USER);
               }
             });
       var futures = workers.invokeAll(tasks);
@@ -706,9 +994,33 @@ class MediaRepositoryTest {
             future.get(),
             count(16, 9, 3),
             List.of(
-                track("m0001", "Track", "BGM", "ゲーム", "v/1.ogg", null, "N", 1),
-                track("m0002", "Track", "BGM", "ゲーム", "v/2.ogg", null, "N", 2),
-                track("m0003", "Track", "BGM", "ゲーム", "v/3.ogg", null, "N", 3)));
+                track(
+                    "m0001",
+                    FIXTURE_TRACK_43CA9734,
+                    FIXTURE_BGM_2427B415,
+                    "ゲーム",
+                    "v/1.ogg",
+                    null,
+                    "N",
+                    1),
+                track(
+                    "m0002",
+                    FIXTURE_TRACK_43CA9734,
+                    FIXTURE_BGM_2427B415,
+                    "ゲーム",
+                    "v/2.ogg",
+                    null,
+                    "N",
+                    2),
+                track(
+                    "m0003",
+                    FIXTURE_TRACK_43CA9734,
+                    FIXTURE_BGM_2427B415,
+                    "ゲーム",
+                    "v/3.ogg",
+                    null,
+                    "N",
+                    3)));
       try (var result =
           statement.executeQuery(
               "select count(*),min(display_order),max(display_order) from schubert.media_assets")) {
@@ -724,10 +1036,12 @@ class MediaRepositoryTest {
   private static TypedPayloadValues select(String kind, Connection c, AuthenticatedActor actor) {
     return switch (kind) {
       case "menu" -> QUERIES.animationMenu(c, actor);
-      case "animation" -> QUERIES.animationList(c, actor, MAIN);
-      case "categories" -> QUERIES.musicCategories(c, actor);
-      case "sections" -> QUERIES.musicSections(c, actor, new MusicSectionRequestData("BGM"));
-      case "tracks" -> QUERIES.musicTracks(c, actor, new MusicTrackRequestData("BGM", "ゲーム"));
+      case FIXTURE_ANIMATION_4D33DF79 -> QUERIES.animationList(c, actor, MAIN);
+      case FIXTURE_CATEGORIES_DCB1A2E4 -> QUERIES.musicCategories(c, actor);
+      case FIXTURE_SECTIONS_4914C922 ->
+          QUERIES.musicSections(c, actor, new MusicSectionRequestData(FIXTURE_BGM_2427B415));
+      case FIXTURE_TRACKS_7FF43291 ->
+          QUERIES.musicTracks(c, actor, new MusicTrackRequestData(FIXTURE_BGM_2427B415, "ゲーム"));
       default -> throw new AssertionError(kind);
     };
   }
@@ -756,11 +1070,51 @@ class MediaRepositoryTest {
   }
 
   private static void videos() throws Exception {
-    asset(30, "VIDEO", "main-z", "First", "MAIN", null, null, null, null, 1);
-    asset(10, "VIDEO", "main-a", "Second", "MAIN", null, null, null, null, 2);
-    asset(20, "VIDEO", "sub", "Sub", "SUBTRACK", null, "main-z", null, null, 3);
-    asset(40, "VIDEO", "ova", "Ova", "OVA", null, null, null, null, 4);
-    asset(50, "VIDEO", "opening", "Opening", "OPENING", null, null, null, null, 5);
+    asset(
+        30,
+        FIXTURE_VIDEO_C9B6F4C2,
+        FIXTURE_MAIN_Z_82616435,
+        FIXTURE_FIRST_81C9759D,
+        FIXTURE_MAIN_7FCC0BE2,
+        null,
+        null,
+        null,
+        null,
+        1);
+    asset(
+        10,
+        FIXTURE_VIDEO_C9B6F4C2,
+        "main-a",
+        "Second",
+        FIXTURE_MAIN_7FCC0BE2,
+        null,
+        null,
+        null,
+        null,
+        2);
+    asset(
+        20,
+        FIXTURE_VIDEO_C9B6F4C2,
+        FIXTURE_SUB_B8F15D32,
+        FIXTURE_SUB_574FA518,
+        FIXTURE_SUBTRACK_BF9F5649,
+        null,
+        FIXTURE_MAIN_Z_82616435,
+        null,
+        null,
+        3);
+    asset(40, FIXTURE_VIDEO_C9B6F4C2, "ova", "Ova", "OVA", null, null, null, null, 4);
+    asset(
+        50,
+        FIXTURE_VIDEO_C9B6F4C2,
+        FIXTURE_OPENING_583FF6F7,
+        "Opening",
+        "OPENING",
+        null,
+        null,
+        null,
+        null,
+        5);
   }
 
   private static void asset(
@@ -775,8 +1129,8 @@ class MediaRepositoryTest {
       String role,
       int order)
       throws SQLException {
-    boolean video = type.equals("VIDEO");
-    String suffix = video ? ".mp4" : ".ogg";
+    boolean video = type.equals(FIXTURE_VIDEO_C9B6F4C2);
+    String suffix = video ? FIXTURE_MP4_90A2AC73 : FIXTURE_OGG_09018BA2;
     try (var c = database.admin();
         var s =
             c.prepareStatement(
@@ -791,10 +1145,10 @@ class MediaRepositoryTest {
       s.setString(4, title);
       s.setString(5, category);
       s.setString(6, section);
-      s.setString(7, (video ? "video/" : "music/") + id + suffix);
+      s.setString(7, (video ? "video/" : FIXTURE_MUSIC_80DD0E40) + id + suffix);
       s.setString(8, "v/" + id + suffix);
       s.setString(9, "file" + suffix);
-      s.setString(10, video ? "video/mp4" : "audio/ogg");
+      s.setString(10, video ? FIXTURE_VIDEO_MP4_9A1C8BFA : FIXTURE_AUDIO_OGG_96A5CB00);
       s.setString(11, parent);
       s.setString(12, pair);
       s.setString(13, role);
@@ -805,21 +1159,25 @@ class MediaRepositoryTest {
 
   private static void fill(String kind, int count) throws SQLException {
     sql("truncate schubert.media_assets cascade");
-    boolean video = kind.equals("animation");
-    String suffix = video ? ".mp4" : ".ogg";
+    boolean video = kind.equals(FIXTURE_ANIMATION_4D33DF79);
+    String suffix = video ? FIXTURE_MP4_90A2AC73 : FIXTURE_OGG_09018BA2;
     String category =
-        video ? "'MAIN'" : kind.equals("categories") ? "'c'||lpad(i::text,4,'0')" : "'BGM'";
+        video
+            ? "'MAIN'"
+            : kind.equals(FIXTURE_CATEGORIES_DCB1A2E4) ? "'c'||lpad(i::text,4,'0')" : "'BGM'";
     String section =
-        video ? "NULL" : kind.equals("sections") ? "'s'||lpad(i::text,4,'0')" : "'ゲーム'";
+        video
+            ? "NULL"
+            : kind.equals(FIXTURE_SECTIONS_4914C922) ? "'s'||lpad(i::text,4,'0')" : "'ゲーム'";
     sql(
         "insert into schubert.media_assets(id,logical_id,media_type,title,category,section,storage_relative_path,display_path,file_name,byte_size,sha256,mime_type,pair_role,display_order,created_at) select i,'m'||lpad(i::text,4,'0'),'"
-            + (video ? "VIDEO" : "MUSIC")
+            + (video ? FIXTURE_VIDEO_C9B6F4C2 : FIXTURE_MUSIC_D5800D43)
             + "','Track',"
             + category
             + ","
             + section
             + ",'"
-            + (video ? "video/" : "music/")
+            + (video ? "video/" : FIXTURE_MUSIC_80DD0E40)
             + "'||i||'"
             + suffix
             + "','v/'||i||'"
@@ -827,7 +1185,7 @@ class MediaRepositoryTest {
             + "','file"
             + suffix
             + "',123,repeat('a',64),'"
-            + (video ? "video/mp4" : "audio/ogg")
+            + (video ? FIXTURE_VIDEO_MP4_9A1C8BFA : FIXTURE_AUDIO_OGG_96A5CB00)
             + "',"
             + (video ? "NULL" : "'N'")
             + ",i,'2026-09-08Z' from generate_series(1,"
@@ -850,9 +1208,9 @@ class MediaRepositoryTest {
             throw new SQLException("synthetic private JDBC");
           if (layer.equals("result")) {
             if (fault.equals("noRows") && name.equals("next")) return false;
-            if (fault.equals("numericNull") && name.equals("wasNull")) return true;
-            if (((fault.equals("overrideLong") && name.equals("getLong"))
-                    || (fault.equals("overrideString") && name.equals("getString")))
+            if (fault.equals(FIXTURE_NUMERICNULL_C13B0A60) && name.equals("wasNull")) return true;
+            if (((fault.equals(FIXTURE_OVERRIDELONG_54987068) && name.equals("getLong"))
+                    || (fault.equals(FIXTURE_OVERRIDESTRING_6A02E9F8) && name.equals("getString")))
                 && Objects.equals(args[0], column)) return value;
           }
           Object result;

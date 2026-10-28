@@ -41,6 +41,29 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** NK-BAT-001/OPS009/DAT009/UI251/SS331 8.3/332/341; SSC055/PG163; BAT138..153. */
 final class BatchRunRepositoryTest {
+  private static final String FIXTURE_ATTEMPT_7FD8A755 = "attempt";
+  private static final String FIXTURE_STATUS_CFC31BCC = "status";
+  private static final String FIXTURE_DELETE_FROM_SCHUBERT_BATCH_RUNS_0A02FC69 =
+      "delete from schubert.batch_runs";
+  private static final String FIXTURE_FAILED_7E8A57FE = "FAILED";
+  private static final String FIXTURE_2026_09_13_8B08300C = "2026-09-13";
+  private static final String FIXTURE_2026_09_13T01_00_00Z_FE4F9CBB = "2026-09-13T01:00:00Z";
+  private static final String FIXTURE_2026_09_13T01_00_01Z_7D588561 = "2026-09-13T01:00:01Z";
+  private static final String FIXTURE_RUNNING_294BDBF9 = "RUNNING";
+  private static final String FIXTURE_ABANDON_5A676BA9 = "abandon";
+  private static final String FIXTURE_FINISH_91A2F12C = "finish";
+  private static final String FIXTURE_EMPTY_E6845188 = "empty";
+  private static final String FIXTURE_NULLSTATEMENT_5A17BE38 = "nullStatement";
+  private static final String FIXTURE_NULLROWS_D5C4412B = "nullRows";
+  private static final String FIXTURE_REPLAY_2AA31058 = "replay";
+  private static final String FIXTURE_SUCCESS_10855C7F = "SUCCESS";
+  private static final String FIXTURE_SCHUBERT_BATCH_F9C88479 = "schubert_batch";
+  private static final String FIXTURE_HISTORY_BB36CCAE = "history";
+  private static final String FIXTURE_INSERT_A0C28A2E = "insert";
+  private static final String FIXTURE_RECOVER_DE33FD76 = "recover";
+  private static final String FIXTURE_ROW_CLOSE_F197F129 = "row.close";
+  private static final String FIXTURE_STATEMENT_CLOSE_FE807BAF = "statement.close";
+  private static final String FIXTURE_STATEMENT_EXECUTEQUERY_67733F33 = "statement.executeQuery";
   @TempDir static Path root;
   static BatchDatabaseFixture db;
   static final BatchRun RUN =
@@ -58,10 +81,10 @@ final class BatchRunRepositoryTest {
           "run_id",
           "business_date",
           "step",
-          "attempt",
+          FIXTURE_ATTEMPT_7FD8A755,
           "started_at",
           "ended_at",
-          "status",
+          FIXTURE_STATUS_CFC31BCC,
           "target_count",
           "success_count",
           "failure_count",
@@ -80,7 +103,7 @@ final class BatchRunRepositoryTest {
   @BeforeEach
   void reset() throws Exception {
     try (var c = db.admin()) {
-      sql(c, "delete from schubert.batch_runs");
+      sql(c, FIXTURE_DELETE_FROM_SCHUBERT_BATCH_RUNS_0A02FC69);
       sql(c, "delete from schubert.inbox_inspection_progress");
       sql(c, "delete from schubert.log_cleanup_progress");
     }
@@ -335,7 +358,14 @@ final class BatchRunRepositoryTest {
       c.commit();
       assertEquals(
           "4", query(c, "select count(*) from schubert.batch_runs where status='SUCCESS'"));
-      seed(c, 98, "FAILED", RUN.id(), "2026-09-13", "2026-09-13T01:00:00Z", "2026-09-13T01:00:01Z");
+      seed(
+          c,
+          98,
+          FIXTURE_FAILED_7E8A57FE,
+          RUN.id(),
+          FIXTURE_2026_09_13_8B08300C,
+          FIXTURE_2026_09_13T01_00_00Z_FE4F9CBB,
+          FIXTURE_2026_09_13T01_00_01Z_7D588561);
       var last = repo.begin(RUN, STEP, NOW, false);
       assertEquals(99, last.attempt());
       String before = snapshot(c);
@@ -348,9 +378,30 @@ final class BatchRunRepositoryTest {
   @Test
   void explicitAbandonedRecovery() throws Exception {
     try (var c = locked()) {
-      seed(c, 1, "RUNNING", RUN.id(), "2026-09-13", "2026-09-13T01:00:00Z", null);
-      seed(c, 2, "WARNING", RUN.id(), "2026-09-13", "2026-09-13T01:10:00Z", "2026-09-13T01:10:01Z");
-      seed(c, 3, "RUNNING", RUN.id(), "2026-09-13", "2026-09-13T01:20:00Z", null);
+      seed(
+          c,
+          1,
+          FIXTURE_RUNNING_294BDBF9,
+          RUN.id(),
+          FIXTURE_2026_09_13_8B08300C,
+          FIXTURE_2026_09_13T01_00_00Z_FE4F9CBB,
+          null);
+      seed(
+          c,
+          2,
+          "WARNING",
+          RUN.id(),
+          FIXTURE_2026_09_13_8B08300C,
+          "2026-09-13T01:10:00Z",
+          "2026-09-13T01:10:01Z");
+      seed(
+          c,
+          3,
+          FIXTURE_RUNNING_294BDBF9,
+          RUN.id(),
+          FIXTURE_2026_09_13_8B08300C,
+          "2026-09-13T01:20:00Z",
+          null);
       c.commit();
       var repo = new BatchRunRepository(c);
       String before = snapshot(c);
@@ -371,7 +422,7 @@ final class BatchRunRepositoryTest {
       c.rollback();
       assertEquals(before, snapshot(c));
       Probe wrong = new Probe();
-      wrong.changeKind = "abandon";
+      wrong.changeKind = FIXTURE_ABANDON_5A676BA9;
       wrong.changed = 0;
       redacted(() -> new BatchRunRepository(wrong.wrap(c)).begin(RUN, STEP, NOW, true));
       wrong.closed();
@@ -382,18 +433,32 @@ final class BatchRunRepositoryTest {
   @Test
   void foreignRunningAndRootIdentity() throws Exception {
     try (var c = locked()) {
-      seed(c, 1, "RUNNING", new UUID(0, 7), "2026-09-13", "2026-09-13T01:00:00Z", null);
+      seed(
+          c,
+          1,
+          FIXTURE_RUNNING_294BDBF9,
+          new UUID(0, 7),
+          FIXTURE_2026_09_13_8B08300C,
+          FIXTURE_2026_09_13T01_00_00Z_FE4F9CBB,
+          null);
       c.commit();
       String before = snapshot(c);
       redacted(() -> new BatchRunRepository(c).begin(RUN, STEP, NOW, true));
       assertEquals(before, snapshot(c));
       c.rollback();
-      sql(c, "delete from schubert.batch_runs");
-      seed(c, 1, "FAILED", RUN.id(), "2026-09-12", "2026-09-12T01:00:00Z", "2026-09-12T01:00:01Z");
+      sql(c, FIXTURE_DELETE_FROM_SCHUBERT_BATCH_RUNS_0A02FC69);
+      seed(
+          c,
+          1,
+          FIXTURE_FAILED_7E8A57FE,
+          RUN.id(),
+          "2026-09-12",
+          "2026-09-12T01:00:00Z",
+          "2026-09-12T01:00:01Z");
       c.commit();
       redacted(() -> new BatchRunRepository(c).begin(RUN, STEP, NOW, false));
       c.rollback();
-      sql(c, "delete from schubert.batch_runs");
+      sql(c, FIXTURE_DELETE_FROM_SCHUBERT_BATCH_RUNS_0A02FC69);
       c.commit();
       try (var admin = db.admin()) {
         sql(
@@ -472,18 +537,25 @@ final class BatchRunRepositoryTest {
           () -> repo.finish(new BatchStepAttempt(a.id(), RUN, STEP, 1, NOW, true), END, SUCCESS));
       for (int changed : List.of(-1, 2)) {
         Probe p = new Probe();
-        p.changeKind = "finish";
+        p.changeKind = FIXTURE_FINISH_91A2F12C;
         p.changed = changed;
         redacted(() -> new BatchRunRepository(p.wrap(c)).finish(a, END, SUCCESS));
         p.closed();
         c.rollback();
         assertEquals(
-            "RUNNING", query(c, "select status from schubert.batch_runs where id=" + a.id()));
+            FIXTURE_RUNNING_294BDBF9,
+            query(c, "select status from schubert.batch_runs where id=" + a.id()));
       }
       repo.finish(a, END, SUCCESS);
-      for (String bad : List.of("empty", "extra", "matches", "nullStatement", "nullRows")) {
+      for (String bad :
+          List.of(
+              FIXTURE_EMPTY_E6845188,
+              "extra",
+              "matches",
+              FIXTURE_NULLSTATEMENT_5A17BE38,
+              FIXTURE_NULLROWS_D5C4412B)) {
         Probe p = new Probe();
-        p.kind = "replay";
+        p.kind = FIXTURE_REPLAY_2AA31058;
         p.anomaly = bad;
         redacted(() -> new BatchRunRepository(p.wrap(c)).finish(a, END, SUCCESS));
         p.closed();
@@ -506,13 +578,15 @@ final class BatchRunRepositoryTest {
       repo.finish(b, END, SUCCESS);
       c.rollback();
       assertEquals(
-          "RUNNING", query(c, "select status from schubert.batch_runs where id=" + b.id()));
+          FIXTURE_RUNNING_294BDBF9,
+          query(c, "select status from schubert.batch_runs where id=" + b.id()));
       repo.finish(b, END, SUCCESS);
       c.commit();
       // Simulated lost commit acknowledgement: state is independently observed committed,
       // same-value retry only.
       assertEquals(
-          "SUCCESS", query(observer, "select status from schubert.batch_runs where id=" + b.id()));
+          FIXTURE_SUCCESS_10855C7F,
+          query(observer, "select status from schubert.batch_runs where id=" + b.id()));
       repo.finish(b, END, SUCCESS);
       var skip = repo.begin(RUN, STEP, END.plusSeconds(1), false);
       assertTrue(skip.skipped());
@@ -530,14 +604,14 @@ final class BatchRunRepositoryTest {
       {"1900-03-01T00:00:00Z", "1900-03-01"},
       {"1970-01-01T00:00:00Z", "1970-01-01"},
       {"2026-09-12T14:59:59.999999Z", "2026-09-12"},
-      {"2026-09-12T15:00:00Z", "2026-09-13"},
+      {"2026-09-12T15:00:00Z", FIXTURE_2026_09_13_8B08300C},
       {"9999-12-31T23:59:59.999999Z", "10000-01-01"}
     };
     try (var c = locked()) {
       for (String zone : List.of("UTC", "Asia/Tokyo", "America/New_York")) {
         sql(c, "set timezone='" + zone + "'");
         for (String[] v : vectors) {
-          sql(c, "delete from schubert.batch_runs");
+          sql(c, FIXTURE_DELETE_FROM_SCHUBERT_BATCH_RUNS_0A02FC69);
           var run = new BatchRun(RUN.id(), Instant.parse(v[0]));
           var repo = new BatchRunRepository(c);
           var a = repo.begin(run, STEP, run.cutoff(), false);
@@ -559,10 +633,10 @@ final class BatchRunRepositoryTest {
           assertEquals(2, b.attempt());
         }
       }
-      sql(c, "delete from schubert.batch_runs");
+      sql(c, FIXTURE_DELETE_FROM_SCHUBERT_BATCH_RUNS_0A02FC69);
       var a = new BatchRunRepository(c).begin(RUN, STEP, NOW.plusSeconds(86400), false);
       assertEquals(
-          "2026-09-13",
+          FIXTURE_2026_09_13_8B08300C,
           query(c, "select business_date from schubert.batch_runs where id=" + a.id()));
     }
   }
@@ -602,7 +676,7 @@ final class BatchRunRepositoryTest {
 
   @Test
   void parentTransactionAndLock() throws Exception {
-    try (var c = db.open("schubert_batch")) {
+    try (var c = db.open(FIXTURE_SCHUBERT_BATCH_F9C88479)) {
       redacted(() -> new BatchRunRepository(c).begin(RUN, STEP, NOW, false));
       c.setAutoCommit(false);
       for (String command :
@@ -638,7 +712,7 @@ final class BatchRunRepositoryTest {
       assertFalse(c.getAutoCommit());
       assertFalse(c.isReadOnly());
       assertEquals(Connection.TRANSACTION_READ_COMMITTED, c.getTransactionIsolation());
-      try (var other = db.open("schubert_batch")) {
+      try (var other = db.open(FIXTURE_SCHUBERT_BATCH_F9C88479)) {
         other.setAutoCommit(false);
         redacted(() -> new BatchRunRepository(other).begin(RUN, STEP, NOW, false));
       }
@@ -648,13 +722,20 @@ final class BatchRunRepositoryTest {
   @Test
   void historyProjectionAndNulls() throws Exception {
     try (var c = locked()) {
-      seed(c, 1, "FAILED", RUN.id(), "2026-09-13", "2026-09-13T01:00:00Z", "2026-09-13T01:00:01Z");
+      seed(
+          c,
+          1,
+          FIXTURE_FAILED_7E8A57FE,
+          RUN.id(),
+          FIXTURE_2026_09_13_8B08300C,
+          FIXTURE_2026_09_13T01_00_00Z_FE4F9CBB,
+          FIXTURE_2026_09_13T01_00_01Z_7D588561);
       c.commit();
       List<String> anomalies = new ArrayList<>(COLS);
       anomalies.addAll(
           List.of(
-              "nullStatement",
-              "nullRows",
+              FIXTURE_NULLSTATEMENT_5A17BE38,
+              FIXTURE_NULLROWS_D5C4412B,
               "badIdLow",
               "badIdHigh",
               "badDate",
@@ -681,7 +762,7 @@ final class BatchRunRepositoryTest {
               "doubleSuccess"));
       for (String bad : anomalies) {
         Probe p = new Probe();
-        p.kind = "history";
+        p.kind = FIXTURE_HISTORY_BB36CCAE;
         p.anomaly = bad;
         try {
           redacted(() -> new BatchRunRepository(p.wrap(c)).begin(RUN, STEP, NOW, true));
@@ -692,12 +773,19 @@ final class BatchRunRepositoryTest {
         c.rollback();
         assertEquals("1", query(c, "select count(*) from schubert.batch_runs"));
       }
-      sql(c, "delete from schubert.batch_runs");
+      sql(c, FIXTURE_DELETE_FROM_SCHUBERT_BATCH_RUNS_0A02FC69);
       c.commit();
       for (String bad :
-          List.of("nullStatement", "nullRows", "empty", "extra", "id", "badIdLow", "badIdHigh")) {
+          List.of(
+              FIXTURE_NULLSTATEMENT_5A17BE38,
+              FIXTURE_NULLROWS_D5C4412B,
+              FIXTURE_EMPTY_E6845188,
+              "extra",
+              "id",
+              "badIdLow",
+              "badIdHigh")) {
         Probe p = new Probe();
-        p.kind = "insert";
+        p.kind = FIXTURE_INSERT_A0C28A2E;
         p.anomaly = bad;
         redacted(() -> new BatchRunRepository(p.wrap(c)).begin(RUN, STEP, NOW, false));
         p.closed();
@@ -710,31 +798,52 @@ final class BatchRunRepositoryTest {
   @Test
   void jdbcFailurePositions() throws Exception {
     StringBuilder trace = new StringBuilder();
-    assertEquals(57, inventory("empty").values().stream().mapToInt(Integer::intValue).sum());
-    assertEquals(70, inventory("history").values().stream().mapToInt(Integer::intValue).sum());
-    assertEquals(80, inventory("recover").values().stream().mapToInt(Integer::intValue).sum());
-    assertEquals(50, inventory("finish").values().stream().mapToInt(Integer::intValue).sum());
-    assertEquals(72, inventory("replay").values().stream().mapToInt(Integer::intValue).sum());
+    assertEquals(
+        57, inventory(FIXTURE_EMPTY_E6845188).values().stream().mapToInt(Integer::intValue).sum());
+    assertEquals(
+        70,
+        inventory(FIXTURE_HISTORY_BB36CCAE).values().stream().mapToInt(Integer::intValue).sum());
+    assertEquals(
+        80,
+        inventory(FIXTURE_RECOVER_DE33FD76).values().stream().mapToInt(Integer::intValue).sum());
+    assertEquals(
+        50, inventory(FIXTURE_FINISH_91A2F12C).values().stream().mapToInt(Integer::intValue).sum());
+    assertEquals(
+        72, inventory(FIXTURE_REPLAY_2AA31058).values().stream().mapToInt(Integer::intValue).sum());
     try (var c = locked()) {
-      for (String path : List.of("empty", "history", "skip", "recover", "finish", "replay")) {
-        sql(c, "delete from schubert.batch_runs");
+      for (String path :
+          List.of(
+              FIXTURE_EMPTY_E6845188,
+              FIXTURE_HISTORY_BB36CCAE,
+              "skip",
+              FIXTURE_RECOVER_DE33FD76,
+              FIXTURE_FINISH_91A2F12C,
+              FIXTURE_REPLAY_2AA31058)) {
+        sql(c, FIXTURE_DELETE_FROM_SCHUBERT_BATCH_RUNS_0A02FC69);
         c.commit();
         BatchStepAttempt handle = null;
-        if (Set.of("history", "skip", "recover").contains(path)) {
+        if (Set.of(FIXTURE_HISTORY_BB36CCAE, "skip", FIXTURE_RECOVER_DE33FD76).contains(path)) {
           String status =
-              path.equals("skip") ? "SUCCESS" : path.equals("recover") ? "RUNNING" : "FAILED";
+              path.equals("skip")
+                  ? FIXTURE_SUCCESS_10855C7F
+                  : path.equals(FIXTURE_RECOVER_DE33FD76)
+                      ? FIXTURE_RUNNING_294BDBF9
+                      : FIXTURE_FAILED_7E8A57FE;
           seed(
               c,
               1,
               status,
               RUN.id(),
-              "2026-09-13",
-              "2026-09-13T01:00:00Z",
-              status.equals("RUNNING") ? null : "2026-09-13T01:00:01Z");
+              FIXTURE_2026_09_13_8B08300C,
+              FIXTURE_2026_09_13T01_00_00Z_FE4F9CBB,
+              status.equals(FIXTURE_RUNNING_294BDBF9)
+                  ? null
+                  : FIXTURE_2026_09_13T01_00_01Z_7D588561);
         }
-        if (Set.of("finish", "replay").contains(path)) {
+        if (Set.of(FIXTURE_FINISH_91A2F12C, FIXTURE_REPLAY_2AA31058).contains(path)) {
           handle = new BatchRunRepository(c).begin(RUN, STEP, NOW, false);
-          if (path.equals("replay")) new BatchRunRepository(c).finish(handle, END, SUCCESS);
+          if (path.equals(FIXTURE_REPLAY_2AA31058))
+            new BatchRunRepository(c).finish(handle, END, SUCCESS);
         }
         c.commit();
         String before = snapshot(c);
@@ -758,8 +867,8 @@ final class BatchRunRepositoryTest {
             assertFalse(c.isClosed());
           }
         Probe both = new Probe();
-        both.failAt.put("row.close", 1);
-        both.failAt.put("statement.close", 1);
+        both.failAt.put(FIXTURE_ROW_CLOSE_F197F129, 1);
+        both.failAt.put(FIXTURE_STATEMENT_CLOSE_FE807BAF, 1);
         BatchStepAttempt fixed = handle;
         redacted(() -> operate(new BatchRunRepository(both.wrap(c)), path, fixed));
         assertEquals(2, both.failures);
@@ -794,14 +903,16 @@ final class BatchRunRepositoryTest {
       } finally {
         Thread.interrupted();
       }
-      for (String path : List.of("empty", "finish")) {
-        sql(c, "delete from schubert.batch_runs");
+      for (String path : List.of(FIXTURE_EMPTY_E6845188, FIXTURE_FINISH_91A2F12C)) {
+        sql(c, FIXTURE_DELETE_FROM_SCHUBERT_BATCH_RUNS_0A02FC69);
         BatchStepAttempt a =
-            path.equals("finish") ? new BatchRunRepository(c).begin(RUN, STEP, NOW, false) : null;
+            path.equals(FIXTURE_FINISH_91A2F12C)
+                ? new BatchRunRepository(c).begin(RUN, STEP, NOW, false)
+                : null;
         c.commit();
         Probe last = new Probe();
-        last.interruptAt = "statement.close";
-        last.interruptPosition = path.equals("finish") ? 3 : 4;
+        last.interruptAt = FIXTURE_STATEMENT_CLOSE_FE807BAF;
+        last.interruptPosition = path.equals(FIXTURE_FINISH_91A2F12C) ? 3 : 4;
         try {
           redacted(() -> operate(new BatchRunRepository(last.wrap(c)), path, a));
           assertTrue(Thread.currentThread().isInterrupted());
@@ -865,25 +976,41 @@ final class BatchRunRepositoryTest {
   private void resourceCompounds() throws Exception {
     int cases = 0;
     try (var c = locked()) {
-      for (String kind : List.of("history", "insert", "abandon", "finish", "replay")) {
-        sql(c, "delete from schubert.batch_runs");
+      for (String kind :
+          List.of(
+              FIXTURE_HISTORY_BB36CCAE,
+              FIXTURE_INSERT_A0C28A2E,
+              FIXTURE_ABANDON_5A676BA9,
+              FIXTURE_FINISH_91A2F12C,
+              FIXTURE_REPLAY_2AA31058)) {
+        sql(c, FIXTURE_DELETE_FROM_SCHUBERT_BATCH_RUNS_0A02FC69);
         c.commit();
         String path =
-            kind.equals("abandon")
-                ? "recover"
-                : Set.of("finish", "replay").contains(kind) ? kind : "empty";
+            kind.equals(FIXTURE_ABANDON_5A676BA9)
+                ? FIXTURE_RECOVER_DE33FD76
+                : Set.of(FIXTURE_FINISH_91A2F12C, FIXTURE_REPLAY_2AA31058).contains(kind)
+                    ? kind
+                    : FIXTURE_EMPTY_E6845188;
         BatchStepAttempt handle = null;
-        if (kind.equals("abandon"))
-          seed(c, 1, "RUNNING", RUN.id(), "2026-09-13", "2026-09-13T01:00:00Z", null);
-        if (Set.of("finish", "replay").contains(kind)) {
+        if (kind.equals(FIXTURE_ABANDON_5A676BA9))
+          seed(
+              c,
+              1,
+              FIXTURE_RUNNING_294BDBF9,
+              RUN.id(),
+              FIXTURE_2026_09_13_8B08300C,
+              FIXTURE_2026_09_13T01_00_00Z_FE4F9CBB,
+              null);
+        if (Set.of(FIXTURE_FINISH_91A2F12C, FIXTURE_REPLAY_2AA31058).contains(kind)) {
           handle = new BatchRunRepository(c).begin(RUN, STEP, NOW, false);
-          if (kind.equals("replay")) new BatchRunRepository(c).finish(handle, END, SUCCESS);
+          if (kind.equals(FIXTURE_REPLAY_2AA31058))
+            new BatchRunRepository(c).finish(handle, END, SUCCESS);
         }
         c.commit();
         String before = snapshot(c);
         c.rollback();
         BatchStepAttempt fixed = handle;
-        boolean update = Set.of("abandon", "finish").contains(kind);
+        boolean update = Set.of(FIXTURE_ABANDON_5A676BA9, FIXTURE_FINISH_91A2F12C).contains(kind);
         int stageCases = 0;
         for (var sample : JdbcResourceCases.all()) {
           if (update && sample.body().startsWith("row.")) continue;
@@ -897,7 +1024,11 @@ final class BatchRunRepositoryTest {
           assertEquals(sample.primary() == null ? 1 : 2, p.scopedInjected);
           assertEquals(1, p.scopedSeen.get(kind + ".statement.close"));
           assertEquals(
-              update || (body.equals("statement.executeQuery") && sample.primary() != null) ? 0 : 1,
+              update
+                      || (body.equals(FIXTURE_STATEMENT_EXECUTEQUERY_67733F33)
+                          && sample.primary() != null)
+                  ? 0
+                  : 1,
               p.scopedSeen.getOrDefault(kind + ".row.close", 0));
           p.closed();
           for (String key :
@@ -917,7 +1048,7 @@ final class BatchRunRepositoryTest {
         if (update) {
           Probe absent = new Probe();
           absent.kind = kind;
-          absent.anomaly = "nullStatement";
+          absent.anomaly = FIXTURE_NULLSTATEMENT_5A17BE38;
           redacted(() -> operate(new BatchRunRepository(absent.wrap(c)), path, fixed));
           assertEquals(0, absent.scopedSeen.getOrDefault(kind + ".statement.close", 0));
           absent.closed();
@@ -933,7 +1064,7 @@ final class BatchRunRepositoryTest {
   @Test
   void concurrentOwnersAndRowLocks() throws Exception {
     try (var owner = locked();
-        var other = db.open("schubert_batch");
+        var other = db.open(FIXTURE_SCHUBERT_BATCH_F9C88479);
         var pool = Executors.newVirtualThreadPerTaskExecutor()) {
       other.setAutoCommit(false);
       assertEquals("false", query(other, "select pg_try_advisory_lock(71419602)::text"));
@@ -998,7 +1129,14 @@ final class BatchRunRepositoryTest {
           query(
               admin,
               "select has_table_privilege('schubert_batch','schubert.batch_runs','SELECT')||'|'||has_table_privilege('schubert_batch','schubert.batch_runs','INSERT')||'|'||has_table_privilege('schubert_batch','schubert.batch_runs','UPDATE')||'|'||has_table_privilege('schubert_batch','schubert.questions','SELECT')"));
-      seed(c, 1, "FAILED", RUN.id(), "2026-09-13", "2026-09-13T01:00:00Z", "2026-09-13T01:00:01Z");
+      seed(
+          c,
+          1,
+          FIXTURE_FAILED_7E8A57FE,
+          RUN.id(),
+          FIXTURE_2026_09_13_8B08300C,
+          FIXTURE_2026_09_13T01_00_00Z_FE4F9CBB,
+          FIXTURE_2026_09_13T01_00_01Z_7D588561);
       sql(c, "update schubert.batch_runs set error_summary='public historical diagnostic'");
       c.commit();
       Probe p = new Probe();
@@ -1007,7 +1145,14 @@ final class BatchRunRepositoryTest {
       repo.finish(a, END, SUCCESS);
       repo.finish(a, END, SUCCESS);
       p.closed();
-      assertEquals(Set.of("refs", "history", "insert", "finish", "replay"), p.kinds);
+      assertEquals(
+          Set.of(
+              "refs",
+              FIXTURE_HISTORY_BB36CCAE,
+              FIXTURE_INSERT_A0C28A2E,
+              FIXTURE_FINISH_91A2F12C,
+              FIXTURE_REPLAY_2AA31058),
+          p.kinds);
       assertEquals(
           "public historical diagnostic",
           query(c, "select error_summary from schubert.batch_runs where attempt=1"));
@@ -1038,13 +1183,13 @@ final class BatchRunRepositoryTest {
                 Map.entry("connection.prepareStatement", 2),
                 Map.entry("statement.setQueryTimeout", 2),
                 Map.entry("statement.setObject", 4),
-                Map.entry("statement.executeQuery", 2),
-                Map.entry("statement.close", 2),
+                Map.entry(FIXTURE_STATEMENT_EXECUTEQUERY_67733F33, 2),
+                Map.entry(FIXTURE_STATEMENT_CLOSE_FE807BAF, 2),
                 Map.entry("row.next", 4),
                 Map.entry("row.getObject", 8),
-                Map.entry("row.close", 2))
+                Map.entry(FIXTURE_ROW_CLOSE_F197F129, 2))
             .entrySet()) m.put(e.getKey(), e.getValue());
-    if (path.equals("finish") || path.equals("replay")) {
+    if (path.equals(FIXTURE_FINISH_91A2F12C) || path.equals(FIXTURE_REPLAY_2AA31058)) {
       add(m, "connection.prepareStatement", 1);
       add(m, "statement.setQueryTimeout", 1);
       add(m, "statement.setObject", 4);
@@ -1052,19 +1197,19 @@ final class BatchRunRepositoryTest {
       add(m, "statement.setLong", 5);
       add(m, "statement.setInt", 1);
       add(m, "statement.executeUpdate", 1);
-      add(m, "statement.close", 1);
-      if (path.equals("replay")) {
+      add(m, FIXTURE_STATEMENT_CLOSE_FE807BAF, 1);
+      if (path.equals(FIXTURE_REPLAY_2AA31058)) {
         add(m, "connection.prepareStatement", 1);
         add(m, "statement.setQueryTimeout", 1);
         add(m, "statement.setObject", 4);
         add(m, "statement.setString", 4);
         add(m, "statement.setLong", 5);
         add(m, "statement.setInt", 1);
-        add(m, "statement.executeQuery", 1);
-        add(m, "statement.close", 1);
+        add(m, FIXTURE_STATEMENT_EXECUTEQUERY_67733F33, 1);
+        add(m, FIXTURE_STATEMENT_CLOSE_FE807BAF, 1);
         add(m, "row.next", 2);
         add(m, "row.getObject", 1);
-        add(m, "row.close", 1);
+        add(m, FIXTURE_ROW_CLOSE_F197F129, 1);
       }
     } else {
       add(m, "connection.prepareStatement", 2);
@@ -1072,24 +1217,24 @@ final class BatchRunRepositoryTest {
       add(m, "statement.setObject", 5);
       add(m, "statement.setString", 5);
       add(m, "statement.setInt", 1);
-      add(m, "statement.executeQuery", 2);
-      add(m, "statement.close", 2);
+      add(m, FIXTURE_STATEMENT_EXECUTEQUERY_67733F33, 2);
+      add(m, FIXTURE_STATEMENT_CLOSE_FE807BAF, 2);
       add(m, "row.next", 3);
       add(m, "row.getObject", 1);
-      add(m, "row.close", 2);
-      if (!path.equals("empty")) {
+      add(m, FIXTURE_ROW_CLOSE_F197F129, 2);
+      if (!path.equals(FIXTURE_EMPTY_E6845188)) {
         add(m, "row.next", 1);
         add(m, "row.getObject", 10);
         add(m, "row.getString", 2);
       }
-      if (path.equals("recover")) {
+      if (path.equals(FIXTURE_RECOVER_DE33FD76)) {
         add(m, "connection.prepareStatement", 1);
         add(m, "statement.setQueryTimeout", 1);
         add(m, "statement.setObject", 3);
         add(m, "statement.setString", 2);
         add(m, "statement.setLong", 1);
         add(m, "statement.executeUpdate", 1);
-        add(m, "statement.close", 1);
+        add(m, FIXTURE_STATEMENT_CLOSE_FE807BAF, 1);
       }
     }
     return m;
@@ -1106,13 +1251,13 @@ final class BatchRunRepositoryTest {
   }
 
   static void operate(BatchRunRepository repo, String path, BatchStepAttempt a) {
-    if (path.equals("finish") || path.equals("replay"))
+    if (path.equals(FIXTURE_FINISH_91A2F12C) || path.equals(FIXTURE_REPLAY_2AA31058))
       repo.finish(Objects.requireNonNull(a), END, SUCCESS);
-    else repo.begin(RUN, STEP, NOW, path.equals("recover"));
+    else repo.begin(RUN, STEP, NOW, path.equals(FIXTURE_RECOVER_DE33FD76));
   }
 
   static Connection locked() throws SQLException {
-    var c = db.open("schubert_batch");
+    var c = db.open(FIXTURE_SCHUBERT_BATCH_F9C88479);
     sql(c, "set timezone='UTC'");
     sql(c, "select pg_advisory_lock(71419602)");
     c.setAutoCommit(false);
@@ -1223,7 +1368,7 @@ final class BatchRunRepositoryTest {
                   String sql = (String) a[0];
                   String k = classify(sql);
                   kinds.add(k);
-                  if (k.equals(kind) && anomaly.equals("nullStatement")) return null;
+                  if (k.equals(kind) && anomaly.equals(FIXTURE_NULLSTATEMENT_5A17BE38)) return null;
                   var s = (PreparedStatement) invoke(c, m, a);
                   statements++;
                   return statement(s, k);
@@ -1247,8 +1392,8 @@ final class BatchRunRepositoryTest {
                 if (name.equals("close")) {
                   Object v = invoke(s, m, a);
                   statements--;
-                  hit("statement.close");
-                  scopedHit(k, "statement.close");
+                  hit(FIXTURE_STATEMENT_CLOSE_FE807BAF);
+                  scopedHit(k, FIXTURE_STATEMENT_CLOSE_FE807BAF);
                   return v;
                 }
                 hit("statement." + name);
@@ -1262,7 +1407,7 @@ final class BatchRunRepositoryTest {
                 if (name.equals("executeQuery") || name.equals("executeUpdate")) {
                   if (runtime != null) throw runtime;
                   assertBinds(k, binds);
-                  if (k.equals(kind) && anomaly.equals("nullRows")) return null;
+                  if (k.equals(kind) && anomaly.equals(FIXTURE_NULLROWS_D5C4412B)) return null;
                   Object v = invoke(s, m, a);
                   if (name.equals("executeUpdate")) return k.equals(changeKind) ? changed : v;
                   rows++;
@@ -1283,8 +1428,8 @@ final class BatchRunRepositoryTest {
                 if (name.equals("close")) {
                   Object v = invoke(r, m, a);
                   rows--;
-                  hit("row.close");
-                  scopedHit(k, "row.close");
+                  hit(FIXTURE_ROW_CLOSE_F197F129);
+                  scopedHit(k, FIXTURE_ROW_CLOSE_F197F129);
                   return v;
                 }
                 hit("row." + name);
@@ -1292,7 +1437,7 @@ final class BatchRunRepositoryTest {
                 boolean broken = k.equals(kind);
                 if (name.equals("next")) {
                   pos[0]++;
-                  if (broken && anomaly.equals("empty")) return false;
+                  if (broken && anomaly.equals(FIXTURE_EMPTY_E6845188)) return false;
                   if (broken
                       && Set.of("extra", "duplicateId", "duplicateAttempt", "doubleSuccess")
                           .contains(anomaly)
@@ -1306,15 +1451,15 @@ final class BatchRunRepositoryTest {
                     if (anomaly.equals(col)) return null;
                     if (anomaly.equals("tooMany")) return synthetic(col, pos[0]);
                     if (anomaly.equals("duplicateId")) {
-                      if (col.equals("attempt")) return pos[0];
+                      if (col.equals(FIXTURE_ATTEMPT_7FD8A755)) return pos[0];
                       return synthetic(col, 1);
                     }
                     if (anomaly.equals("duplicateAttempt") && pos[0] == 2) {
-                      if (col.equals("attempt")) return 1;
+                      if (col.equals(FIXTURE_ATTEMPT_7FD8A755)) return 1;
                       return synthetic(col, 2);
                     }
                     if (anomaly.equals("doubleSuccess")) {
-                      if (col.equals("status")) return "SUCCESS";
+                      if (col.equals(FIXTURE_STATUS_CFC31BCC)) return FIXTURE_SUCCESS_10855C7F;
                       return synthetic(col, pos[0]);
                     }
                     Object override = override(col, anomaly);
@@ -1335,13 +1480,13 @@ final class BatchRunRepositoryTest {
       if (col.equals("business_date") && anomaly.equals("badDate"))
         return LocalDate.of(2026, 9, 14);
       if (col.equals("step") && anomaly.equals("badStep")) return "CLEAN_SESSION";
-      if (col.equals("attempt")) {
+      if (col.equals(FIXTURE_ATTEMPT_7FD8A755)) {
         if (anomaly.equals("badAttemptLow")) return 0;
         if (anomaly.equals("badAttemptHigh")) return 100;
       }
-      if (col.equals("status")) {
+      if (col.equals(FIXTURE_STATUS_CFC31BCC)) {
         if (anomaly.equals("unknown")) return "UNKNOWN";
-        if (anomaly.equals("runningEnd")) return "RUNNING";
+        if (anomaly.equals("runningEnd")) return FIXTURE_RUNNING_294BDBF9;
       }
       if (col.equals("target_count") && anomaly.equals("negativeTarget")) return -1L;
       if (col.equals("success_count") && anomaly.equals("negativeSuccess")) return -1L;
@@ -1371,10 +1516,10 @@ final class BatchRunRepositoryTest {
         case "run_id" -> RUN.id();
         case "business_date" -> LocalDate.of(2026, 9, 13);
         case "step" -> "CLEAN_LOG";
-        case "attempt" -> n;
-        case "started_at" -> OffsetDateTime.parse("2026-09-13T01:00:00Z");
-        case "ended_at" -> OffsetDateTime.parse("2026-09-13T01:00:01Z");
-        case "status" -> "FAILED";
+        case FIXTURE_ATTEMPT_7FD8A755 -> n;
+        case "started_at" -> OffsetDateTime.parse(FIXTURE_2026_09_13T01_00_00Z_FE4F9CBB);
+        case "ended_at" -> OffsetDateTime.parse(FIXTURE_2026_09_13T01_00_01Z_7D588561);
+        case FIXTURE_STATUS_CFC31BCC -> FIXTURE_FAILED_7E8A57FE;
         case "target_count", "success_count", "failure_count", "byte_count" -> 0L;
         default -> throw new AssertionError(col);
       };
@@ -1386,21 +1531,21 @@ final class BatchRunRepositoryTest {
       Map<String, String> allowed =
           Map.of(
               "refs",
-                  "select has_batch_history,has_inbox_progress,has_log_progress,identity_consistent from schubert.maintenance_read_run_references(?,?)",
-              "history",
-                  "select id,run_id,business_date,step,attempt,started_at,ended_at,status,target_count,success_count,failure_count,byte_count from schubert.batch_runs where business_date=? and step=? order by attempt limit 100 for update",
-              "insert",
-                  "insert into schubert.batch_runs(run_id,business_date,step,attempt,started_at,ended_at,status,target_count,success_count,failure_count,byte_count,error_code,error_summary) values(?,?,?,?,?,?,?,0,0,0,0,?,?) returning id",
-              "abandon",
-                  "update schubert.batch_runs set status='FAILED',ended_at=?,error_code=?,error_summary=? where id=? and run_id=? and started_at=? and status='RUNNING' and ended_at is null",
-              "finish",
-                  "update schubert.batch_runs set ended_at=?,status=?,target_count=?,success_count=?,failure_count=?,byte_count=?,error_code=?,error_summary=? where "
-                      + handle
-                      + " and status='RUNNING' and ended_at is null",
-              "replay",
-                  "select exists(select 1 from schubert.batch_runs where ended_at=? and status=? and target_count=? and success_count=? and failure_count=? and byte_count=? and error_code is not distinct from ? and error_summary is not distinct from ? and "
-                      + handle
-                      + ") as matches");
+              "select has_batch_history,has_inbox_progress,has_log_progress,identity_consistent from schubert.maintenance_read_run_references(?,?)",
+              FIXTURE_HISTORY_BB36CCAE,
+              "select id,run_id,business_date,step,attempt,started_at,ended_at,status,target_count,success_count,failure_count,byte_count from schubert.batch_runs where business_date=? and step=? order by attempt limit 100 for update",
+              FIXTURE_INSERT_A0C28A2E,
+              "insert into schubert.batch_runs(run_id,business_date,step,attempt,started_at,ended_at,status,target_count,success_count,failure_count,byte_count,error_code,error_summary) values(?,?,?,?,?,?,?,0,0,0,0,?,?) returning id",
+              FIXTURE_ABANDON_5A676BA9,
+              "update schubert.batch_runs set status='FAILED',ended_at=?,error_code=?,error_summary=? where id=? and run_id=? and started_at=? and status='RUNNING' and ended_at is null",
+              FIXTURE_FINISH_91A2F12C,
+              "update schubert.batch_runs set ended_at=?,status=?,target_count=?,success_count=?,failure_count=?,byte_count=?,error_code=?,error_summary=? where "
+                  + handle
+                  + " and status='RUNNING' and ended_at is null",
+              FIXTURE_REPLAY_2AA31058,
+              "select exists(select 1 from schubert.batch_runs where ended_at=? and status=? and target_count=? and success_count=? and failure_count=? and byte_count=? and error_code is not distinct from ? and error_summary is not distinct from ? and "
+                  + handle
+                  + ") as matches");
       return allowed.entrySet().stream()
           .filter(e -> e.getValue().equals(sql))
           .map(Map.Entry::getKey)
@@ -1411,9 +1556,9 @@ final class BatchRunRepositoryTest {
     static void assertBinds(String k, Map<Integer, Object> b) {
       int count =
           switch (k) {
-            case "refs", "history" -> 2;
-            case "insert" -> 9;
-            case "abandon" -> 6;
+            case "refs", FIXTURE_HISTORY_BB36CCAE -> 2;
+            case FIXTURE_INSERT_A0C28A2E -> 9;
+            case FIXTURE_ABANDON_5A676BA9 -> 6;
             default -> 14;
           };
       assertEquals(count, b.size());
@@ -1422,22 +1567,22 @@ final class BatchRunRepositoryTest {
         assertEquals(RUN.id(), b.get(1));
         assertEquals(OffsetDateTime.parse("2026-09-12T15:00:00Z"), b.get(2));
       }
-      if (k.equals("history")) {
+      if (k.equals(FIXTURE_HISTORY_BB36CCAE)) {
         assertEquals(LocalDate.of(2026, 9, 13), b.get(1));
         assertEquals("CLEAN_LOG", b.get(2));
       }
-      if (k.equals("insert")) {
+      if (k.equals(FIXTURE_INSERT_A0C28A2E)) {
         assertEquals(RUN.id(), b.get(1));
         assertEquals(LocalDate.of(2026, 9, 13), b.get(2));
         assertEquals("CLEAN_LOG", b.get(3));
       }
-      if (k.equals("abandon")) {
+      if (k.equals(FIXTURE_ABANDON_5A676BA9)) {
         assertEquals("ABANDONED", b.get(2));
         assertEquals("previous same-run attempt abandoned", b.get(3));
       }
-      if (k.equals("finish") || k.equals("replay")) {
+      if (k.equals(FIXTURE_FINISH_91A2F12C) || k.equals(FIXTURE_REPLAY_2AA31058)) {
         assertEquals(OffsetDateTime.parse("2026-09-13T02:00:01Z"), b.get(1));
-        assertEquals("SUCCESS", b.get(2));
+        assertEquals(FIXTURE_SUCCESS_10855C7F, b.get(2));
         assertEquals(5L, b.get(3));
         assertEquals(3L, b.get(4));
         assertEquals(0L, b.get(5));
