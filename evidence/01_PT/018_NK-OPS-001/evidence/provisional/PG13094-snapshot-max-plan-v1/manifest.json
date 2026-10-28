@@ -1,0 +1,63 @@
+{
+  "actualExit": 0,
+  "before": "42ae92a74d57a9e1d031613d5b558af3ebe2925c",
+  "cases": [
+    {
+      "className": "dev.codex.schubert.nk.api.persistence.ScenarioDetailSnapshotBoundaryTest",
+      "method": "snapshotMax001MaximumRowsRemainImmutableAndKeepLastRecord",
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/persistence/ScenarioDetailSnapshotBoundaryTest.java",
+      "sourceSha256": "2ef48e15545867b3302529fe009abc62372ac5c2bdcb143902a4b1d3a2e07c7f"
+    },
+    {
+      "className": "dev.codex.schubert.nk.api.persistence.ScenarioDetailSnapshotBoundaryTest",
+      "method": "snapshotMax002InteriorAndTailSequenceGapsRejectWithoutChangingCaller",
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/persistence/ScenarioDetailSnapshotBoundaryTest.java",
+      "sourceSha256": "2ef48e15545867b3302529fe009abc62372ac5c2bdcb143902a4b1d3a2e07c7f"
+    },
+    {
+      "className": "dev.codex.schubert.nk.api.persistence.ScenarioDetailSnapshotBoundaryTest",
+      "method": "snapshotMax003TailTextPastWireBoundRejectsBeforeSnapshotEscapes",
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/persistence/ScenarioDetailSnapshotBoundaryTest.java",
+      "sourceSha256": "2ef48e15545867b3302529fe009abc62372ac5c2bdcb143902a4b1d3a2e07c7f"
+    }
+  ],
+  "eligibilityClosureSourceHashes": {
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/persistence/ScenarioDetailSnapshot.java": "a9adb21b9bddf514ad3b44218465762c767d8f4f8ba34d38c4526df74eb0dcc6"
+  },
+  "externalActions": 0,
+  "invocation": {
+    "actualPythonCommand": [
+      "/usr/bin/python3",
+      "-B",
+      "tools/quality/pg13094_snapshot_max_plan.py"
+    ],
+    "arbitraryArgumentsRecorded": false,
+    "entrypointPath": "tools/quality/pg13094_snapshot_max_plan.py",
+    "entrypointSha256": "b92924e77cdf8e7ea1253c00eb9ed62b18813c39ee313050c0fcf343939c4ad9",
+    "helperPath": "tools/quality/host_tool_invocation.py",
+    "helperSha256": "85d616a3db4ff47f4c95ae2e0dd57954bc2b09f28b8f2a685b986e5621545c46",
+    "libraryPath": "tools/quality/pg13094_snapshot_max_plan.py",
+    "librarySha256": "b92924e77cdf8e7ea1253c00eb9ed62b18813c39ee313050c0fcf343939c4ad9",
+    "loadedProjectPythonSources": {
+      "tools/quality/g07_host_class_provenance_inputs.py": "a676cb3e4145177c3c243722d737592ce7d44c3f29cfe4f670662ef7651f046b",
+      "tools/quality/host_tool_invocation.py": "85d616a3db4ff47f4c95ae2e0dd57954bc2b09f28b8f2a685b986e5621545c46",
+      "tools/quality/pg13094_snapshot_max_plan.py": "b92924e77cdf8e7ea1253c00eb9ed62b18813c39ee313050c0fcf343939c4ad9"
+    },
+    "provenance": "OBSERVED_SYS_ARGV_AND_ORIG_ARGV_NOT_RECONSTRUCTED"
+  },
+  "judgement": "Maximum10000 immutable pre-I/O memory snapshot, interior sequence and tail field validation; no old null/10001/FILE-mode or DB/FS/Root/native cases",
+  "newAccepted": 0,
+  "newTests": 3,
+  "oldExecUnion": false,
+  "originalTests": 0,
+  "protocolClosure": "Existing reviewed standard64 codec/value sources, all old protocol source/jar bytes unchanged; API only this Snapshot and Test",
+  "sameExecRequired": true,
+  "source": "0a84859838be8826d58886e6d7f27bd849a9ea05",
+  "supportTestSourceHashes": {},
+  "totalCorrections": 0,
+  "totalTests": 3,
+  "whole451Accepted": false,
+  "wholeTestSourceHashes": {
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/persistence/ScenarioDetailSnapshotBoundaryTest.java": "2ef48e15545867b3302529fe009abc62372ac5c2bdcb143902a4b1d3a2e07c7f"
+  }
+}

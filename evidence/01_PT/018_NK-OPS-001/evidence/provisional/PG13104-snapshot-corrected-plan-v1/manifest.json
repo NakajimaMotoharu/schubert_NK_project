@@ -1,0 +1,75 @@
+{
+  "actualExit": 0,
+  "additionalSourceQualificationCycles": 1,
+  "before": "42ae92a74d57a9e1d031613d5b558af3ebe2925c",
+  "cases": [
+    {
+      "className": "dev.codex.schubert.nk.api.persistence.ScenarioDetailSnapshotBoundaryTest",
+      "method": "snapshotMax001MaximumRowsRemainImmutableAndKeepLastRecord",
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/persistence/ScenarioDetailSnapshotBoundaryTest.java",
+      "sourceSha256": "4d235d14a7c7c31089525741ac93cb425520bae75e703d9b51b2e6d46c03ede2"
+    },
+    {
+      "className": "dev.codex.schubert.nk.api.persistence.ScenarioDetailSnapshotBoundaryTest",
+      "method": "snapshotMax002InteriorAndTailSequenceGapsRejectWithoutChangingCaller",
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/persistence/ScenarioDetailSnapshotBoundaryTest.java",
+      "sourceSha256": "4d235d14a7c7c31089525741ac93cb425520bae75e703d9b51b2e6d46c03ede2"
+    },
+    {
+      "className": "dev.codex.schubert.nk.api.persistence.ScenarioDetailSnapshotBoundaryTest",
+      "method": "snapshotMax003TailTextPastWireBoundRejectsBeforeSnapshotEscapes",
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/persistence/ScenarioDetailSnapshotBoundaryTest.java",
+      "sourceSha256": "4d235d14a7c7c31089525741ac93cb425520bae75e703d9b51b2e6d46c03ede2"
+    }
+  ],
+  "eligibilityClosureSourceHashes": {
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/persistence/ScenarioDetailSnapshot.java": "a9adb21b9bddf514ad3b44218465762c767d8f4f8ba34d38c4526df74eb0dcc6"
+  },
+  "externalActions": 0,
+  "failedCandidateSource": "0a84859838be8826d58886e6d7f27bd849a9ea05",
+  "invocation": {
+    "actualPythonCommand": [
+      "/usr/bin/python3",
+      "-B",
+      "tools/quality/pg13104_snapshot_corrected_plan.py"
+    ],
+    "arbitraryArgumentsRecorded": false,
+    "entrypointPath": "tools/quality/pg13104_snapshot_corrected_plan.py",
+    "entrypointSha256": "e3b4399afe07ad03c1b70c3bcb78cd7f5c71b6d24b13c9b4e2846ea287170aad",
+    "helperPath": "tools/quality/host_tool_invocation.py",
+    "helperSha256": "85d616a3db4ff47f4c95ae2e0dd57954bc2b09f28b8f2a685b986e5621545c46",
+    "libraryPath": "tools/quality/pg13104_snapshot_corrected_plan.py",
+    "librarySha256": "e3b4399afe07ad03c1b70c3bcb78cd7f5c71b6d24b13c9b4e2846ea287170aad",
+    "loadedProjectPythonSources": {
+      "tools/quality/g07_host_class_provenance_inputs.py": "a676cb3e4145177c3c243722d737592ce7d44c3f29cfe4f670662ef7651f046b",
+      "tools/quality/host_tool_invocation.py": "85d616a3db4ff47f4c95ae2e0dd57954bc2b09f28b8f2a685b986e5621545c46",
+      "tools/quality/pg13101_snapshot_oracle_inverse.py": "569a49a22508eb5c78599781bc0126d4941b8ff417c9260b5629cfcb057387d9",
+      "tools/quality/pg13104_snapshot_corrected_plan.py": "e3b4399afe07ad03c1b70c3bcb78cd7f5c71b6d24b13c9b4e2846ea287170aad",
+      "tools/quality/public_java_digest_provenance.py": "dd47f8735a61ce849995633c3290a6ad047842ef3263829ce359db413778f7a0"
+    },
+    "provenance": "OBSERVED_SYS_ARGV_AND_ORIG_ARGV_NOT_RECONSTRUCTED"
+  },
+  "judgement": "Same novel memory-only maximum/interior/tail vectors, strong corrected immutable-layout/field exception classes; old candidate failed2 remains failed, no old PASS transfer",
+  "newAccepted": 0,
+  "newTests": 3,
+  "oldExecUnion": false,
+  "oracleCorrectionInverse": {
+    "changedExceptionClasses": 2,
+    "changedImports": 2,
+    "inputAndAssertionShapeChanged": false,
+    "mainChanged": false,
+    "originalTokens": 954
+  },
+  "oracleCorrectionNegativeVectors": 7,
+  "originalTests": 0,
+  "protocolClosure": "Existing reviewed standard64 codec/value sources, all old protocol source/jar bytes unchanged; API only this Snapshot and Test",
+  "sameExecRequired": true,
+  "source": "5c378e064f0f8a7366316d4afa28fbb2cd9cec81",
+  "supportTestSourceHashes": {},
+  "totalCorrections": 1,
+  "totalTests": 3,
+  "whole451Accepted": false,
+  "wholeTestSourceHashes": {
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/persistence/ScenarioDetailSnapshotBoundaryTest.java": "4d235d14a7c7c31089525741ac93cb425520bae75e703d9b51b2e6d46c03ede2"
+  }
+}

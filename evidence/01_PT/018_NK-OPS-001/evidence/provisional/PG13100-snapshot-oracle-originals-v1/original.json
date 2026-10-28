@@ -1,0 +1,41 @@
+{
+  "basisHashes": {
+    "documents/300_SS/320_\u30e1\u30c3\u30bb\u30fc\u30b8\u30f3\u30b0/322_\u56fa\u5b9a\u9577\u96fb\u6587codec\u5b9f\u88c5\u8a2d\u8a08.md": "f6dcecf979d9dbac0338aae079d5730f97ba53afaa3dd46db3e20ef49b21618d",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/FieldCodec.java": "43a625c478114afea49c8ee423926d7d330d58dd56b3667a803108c068121513",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/LayoutValidationException.java": "b99e562fe3afd1f1e11a7ff415f25999c14e46016d5a115022706d4f8674a9df",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/PayloadSemanticValidator.java": "f2b7b23daa77b820b218089247a82adb0daac8fe8188287b42a8b69c62a502a9",
+    "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/FieldCodecTest.java": "e59bf92e94c83762a80e224dd7bb8a300f3f579e36f9feb87010162b7bd3ce12"
+  },
+  "cases": [
+    {
+      "classname": "dev.codex.schubert.nk.api.persistence.ScenarioDetailSnapshotBoundaryTest",
+      "name": "snapshotMax001MaximumRowsRemainImmutableAndKeepLastRecord",
+      "nonPass": []
+    },
+    {
+      "classname": "dev.codex.schubert.nk.api.persistence.ScenarioDetailSnapshotBoundaryTest",
+      "name": "snapshotMax002InteriorAndTailSequenceGapsRejectWithoutChangingCaller",
+      "nonPass": [
+        "failure"
+      ]
+    },
+    {
+      "classname": "dev.codex.schubert.nk.api.persistence.ScenarioDetailSnapshotBoundaryTest",
+      "name": "snapshotMax003TailTextPastWireBoundRejectsBeforeSnapshotEscapes",
+      "nonPass": [
+        "failure"
+      ]
+    }
+  ],
+  "expectedCorrections": {
+    "snapshotMax002": "LayoutValidationException",
+    "snapshotMax003": "FieldEncodingException"
+  },
+  "failedHostManifestSha256": "bdc508fa33f1ccb731cd62427bc7b3190a91d4ad28f5d40bf2f31a766b74b27d",
+  "oldActualCauseClassExported": false,
+  "primarySpecification": "SS322\u00a711 byte overflow and existing immutable layout semantic contract; no Main/spec behavior change",
+  "source": "0a84859838be8826d58886e6d7f27bd849a9ea05",
+  "sourceSha256": "2ef48e15545867b3302529fe009abc62372ac5c2bdcb143902a4b1d3a2e07c7f",
+  "test": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/persistence/ScenarioDetailSnapshotBoundaryTest.java",
+  "text": "package dev.codex.schubert.nk.api.persistence;\n\nimport static org.junit.jupiter.api.Assertions.assertEquals;\nimport static org.junit.jupiter.api.Assertions.assertSame;\nimport static org.junit.jupiter.api.Assertions.assertThrows;\n\nimport dev.codex.schubert.nk.protocol.codec.MessageEncodingException;\nimport dev.codex.schubert.nk.protocol.codec.PermanentProtocolException;\nimport dev.codex.schubert.nk.protocol.layout.scenario.ScenarioDetailResponseData;\nimport dev.codex.schubert.nk.protocol.layout.scenario.ScenarioEntryRecord;\nimport dev.codex.schubert.nk.protocol.layout.semantic.DeliveryMode;\nimport dev.codex.schubert.nk.protocol.layout.semantic.DisplayPath;\nimport dev.codex.schubert.nk.protocol.layout.semantic.EntryId;\nimport dev.codex.schubert.nk.protocol.layout.semantic.EntryType;\nimport dev.codex.schubert.nk.protocol.layout.semantic.GameCode;\nimport dev.codex.schubert.nk.protocol.layout.semantic.ScriptFileId;\nimport java.util.ArrayList;\nimport java.util.Optional;\nimport org.junit.jupiter.api.Test;\n\n/** New pre-I/O maximum/middle/tail vectors; SS332 section4.2/SS333, SNAPSHOTMAX001..003. */\nclass ScenarioDetailSnapshotBoundaryTest {\n  private static final int MAXIMUM_ROWS = 10_000;\n  private static final ScenarioDetailResponseData HEADER_FIXTURE =\n      new ScenarioDetailResponseData(\n          new ScriptFileId(1),\n          GameCode.NUKITASHI_1,\n          \"Snapshot fixture\",\n          DisplayPath.of(\"scenario/synthetic.txt\"),\n          Optional.empty(),\n          Optional.empty(),\n          Optional.empty(),\n          Optional.empty(),\n          DeliveryMode.INLINE,\n          Optional.empty(),\n          Optional.empty(),\n          0,\n          Optional.empty(),\n          0,\n          0);\n\n  @Test\n  void snapshotMax001MaximumRowsRemainImmutableAndKeepLastRecord() {\n    var input = records();\n    var snapshot = new ScenarioDetailSnapshot(HEADER_FIXTURE, input);\n    input.set(0, entry(1, 1, \"caller replacement\"));\n    input.clear();\n    assertEquals(MAXIMUM_ROWS, snapshot.records().size());\n    assertEquals(new EntryId(1), snapshot.records().getFirst().entryId());\n    assertEquals(1, snapshot.records().getFirst().entrySequence());\n    assertEquals(\"row-1\", snapshot.records().getFirst().bodyText());\n    assertEquals(new EntryId(MAXIMUM_ROWS), snapshot.records().getLast().entryId());\n    assertEquals(MAXIMUM_ROWS, snapshot.records().getLast().entrySequence());\n    assertEquals(MAXIMUM_ROWS, snapshot.records().getLast().lineNumber());\n    assertEquals(\"row-10000\", snapshot.records().getLast().bodyText());\n    assertSame(HEADER_FIXTURE, snapshot.metadata());\n    assertEquals(\"ScenarioDetailSnapshot[recordCount=10000]\", snapshot.toString());\n    assertThrows(UnsupportedOperationException.class, () -> snapshot.records().clear());\n  }\n\n  @Test\n  void snapshotMax002InteriorAndTailSequenceGapsRejectWithoutChangingCaller() {\n    for (int position : new int[] {201, 5000, 9999}) {\n      var input = records();\n      var bad = entry(position + 1, position + 2, \"sequence gap\");\n      input.set(position, bad);\n      assertThrows(\n          PermanentProtocolException.class,\n          () -> new ScenarioDetailSnapshot(HEADER_FIXTURE, input));\n      assertEquals(MAXIMUM_ROWS, input.size());\n      assertSame(bad, input.get(position));\n      assertEquals(position + 2, input.get(position).entrySequence());\n    }\n  }\n\n  @Test\n  void snapshotMax003TailTextPastWireBoundRejectsBeforeSnapshotEscapes() {\n    var input = records();\n    var bad = entry(MAXIMUM_ROWS, MAXIMUM_ROWS, \"x\".repeat(4097));\n    input.set(MAXIMUM_ROWS - 1, bad);\n    assertThrows(\n        MessageEncodingException.class, () -> new ScenarioDetailSnapshot(HEADER_FIXTURE, input));\n    assertEquals(MAXIMUM_ROWS, input.size());\n    assertSame(bad, input.getLast());\n    assertEquals(4097, input.getLast().bodyText().length());\n    assertEquals(\"row-1\", input.getFirst().bodyText());\n  }\n\n  private static ArrayList<ScenarioEntryRecord> records() {\n    var rows = new ArrayList<ScenarioEntryRecord>(MAXIMUM_ROWS);\n    for (int index = 1; index <= MAXIMUM_ROWS; index++)\n      rows.add(entry(index, index, \"row-\" + index));\n    return rows;\n  }\n\n  private static ScenarioEntryRecord entry(int id, int sequence, String body) {\n    return new ScenarioEntryRecord(\n        new EntryId(id),\n        sequence,\n        id,\n        EntryType.NARRATION,\n        Optional.empty(),\n        body,\n        0,\n        Optional.empty(),\n        Optional.empty());\n  }\n}\n"
+}
