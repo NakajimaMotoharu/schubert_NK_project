@@ -1,0 +1,7 @@
+# ApiDuration承認catalog接続 中間結果・追加発見
+
+2026-10-28 / 2379・PG-D758 / source639bbc777593cd98d95db1b0316e8113b40b886b。code差0/normal12766再利用の当初前提で、12784 plan46699bde6540959934fc3bdb2d76368b77bb6b6b07b4f1bcade7adf20b4660cb actual0・26Main/二wholeTest/実rowP01809・独立51+801+48=900算術、12786 host2a5cc0e165fffa4941fc91cb80e93fc82ccbb79b3991c8ebe9b4572e25c204eb/session1897真正0・原generic24＋必要wholepolicy14＝38/二suite/FES-aborted0、一execPG12786-APIAPPROVED-JPで成功した。Source不変の正常buildを再演せず、元24と14を別execから合算していない。
+
+12788新scope静的7fbc48e4144162a72ac99ba0de8d412ecc4e479f53ce37b141435428fad67e59/session50123真正1・raw3（policy008 CloseResource一/012 Thread二）/CS-processing0。Source/normal input/SDK/rule/tool hash/全六target/classes=immutable jarを照合し、同source639の元12770六SpotBugs0を明示参照、当stageでSB再実行0とした。新stage実行のPMD/CSと旧同sourceSBを区別する。
+
+Main四counterの当38独立postはまだ未実行・未測定で、元24の6L1M1B不足を解消済みとはしない。新CloseResourceはfixture所有規約違反としてBUG2000/YKT1748を修正前起票、元38成功を消さず独立証跡として保持する。追加是正でsourceが変わるため旧normal/38/staticをnewsourceへ転用せず、2381/2382とnewonly工具でnewsource品質を確認する。親2/5/8cap10の原見積・開始費は不変更、追加発見一と必要手戻りを別計測する。code差0だった旧2379/12784とSOURCE639は歴史として保全、正式1964-53/17-190/工数null/HOLD不変。通常継続。

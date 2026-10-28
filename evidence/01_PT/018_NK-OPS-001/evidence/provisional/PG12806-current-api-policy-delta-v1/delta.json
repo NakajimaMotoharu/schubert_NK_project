@@ -1,0 +1,132 @@
+{
+  "actualViolationCount": null,
+  "addedFindingIds": [],
+  "coverage": null,
+  "freshRows": [
+    {
+      "attributes": {
+        "begincolumn": "23",
+        "beginline": "403",
+        "class": "ApiMetricScrapeTest",
+        "endcolumn": "54",
+        "endline": "403",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "method": "apipol012FiniteConcurrentCallsKeepSource",
+        "package": "dev.codex.schubert.nk.api.monitoring",
+        "priority": "3",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading",
+        "variable": "workers"
+      },
+      "controls": [
+        "try(varb=newBundle();varworkers=Executors.newFixedThreadPool(4))",
+        "i<64",
+        "workers.submit(()->supplied(b.text(policy,DEBUG_MODE)))",
+        "job.get(10,TimeUnit.SECONDS)",
+        "assertFalse(b.registry.isClosed())"
+      ],
+      "currentCases": [
+        {
+          "className": "dev.codex.schubert.nk.api.monitoring.ApiMetricScrapeTest",
+          "method": "apipol012FiniteConcurrentCallsKeepSource",
+          "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiMetricScrapeTest.java",
+          "sourceSha256": "eb3c35e5ffbe0eada68aacce03f744b3b2eabadcb531a3810e234600585dfc89"
+        }
+      ],
+      "currentWholeJoinPending": true,
+      "disposition": "CONTEXT_NOT_APPLICABLE",
+      "id": "PMD-01969",
+      "kind": "FINITE_OWNED_PURE_API_METRIC_POLICY_WORKERS",
+      "newAccepted": 0,
+      "oldRuntimeReassigned": false,
+      "originalRowSha256": "3552f8e7e08d38921c214336e1e223efc164377b1914871ff8d03e5e68772e4c",
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiMetricScrapeTest.java",
+      "productTestsExecutedByReview": 0,
+      "reason": "Standalone JavaSE whole JUnit fixture owns four SDK memory workers with64 finite callbacks and handwritten SS351 expected values. Bundle and workers TWR closes in reverse order. Each Future.get has10second timeout; submission and TWR close have no local absolute deadline, separate outer JVM240second bound. Actual38 success proves these fixtures only, not application-worker, DB, FS, HTTP, VM, Root, native, credential or authority operation. Original two historical context refs are source-rebound; raw2/gate1 retained.",
+      "rule": "DoNotUseThreads",
+      "scopeKind": "METHOD",
+      "scopeName": "apipol012FiniteConcurrentCallsKeepSource",
+      "scopeTokenSha256": "0de518e8f8367c73d34d5c9febfd37f2b56eea08f2df66e97ed0e0bb62a71b70",
+      "source": "2baca5740741adb7c676cb85a83f15d19de01083",
+      "sourceSha256": "eb3c35e5ffbe0eada68aacce03f744b3b2eabadcb531a3810e234600585dfc89",
+      "sourceSpanSha256": "f93e1793cb7a139e55f0b0dcf12d1f4620721e0707876be38f521c37b77d4ba3"
+    },
+    {
+      "attributes": {
+        "begincolumn": "18",
+        "beginline": "407",
+        "class": "ApiMetricScrapeTest",
+        "endcolumn": "76",
+        "endline": "407",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "method": "apipol012FiniteConcurrentCallsKeepSource",
+        "package": "dev.codex.schubert.nk.api.monitoring",
+        "priority": "3",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading"
+      },
+      "controls": [
+        "try(varb=newBundle();varworkers=Executors.newFixedThreadPool(4))",
+        "i<64",
+        "workers.submit(()->supplied(b.text(policy,DEBUG_MODE)))",
+        "job.get(10,TimeUnit.SECONDS)",
+        "assertFalse(b.registry.isClosed())"
+      ],
+      "currentCases": [
+        {
+          "className": "dev.codex.schubert.nk.api.monitoring.ApiMetricScrapeTest",
+          "method": "apipol012FiniteConcurrentCallsKeepSource",
+          "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiMetricScrapeTest.java",
+          "sourceSha256": "eb3c35e5ffbe0eada68aacce03f744b3b2eabadcb531a3810e234600585dfc89"
+        }
+      ],
+      "currentWholeJoinPending": true,
+      "disposition": "CONTEXT_NOT_APPLICABLE",
+      "id": "PMD-01970",
+      "kind": "FINITE_OWNED_PURE_API_METRIC_POLICY_WORKERS",
+      "newAccepted": 0,
+      "oldRuntimeReassigned": false,
+      "originalRowSha256": "c1b67bf8178c07d00b012d589f43b2a669f10ec886246f4017d5d09dc1885a9c",
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ApiMetricScrapeTest.java",
+      "productTestsExecutedByReview": 0,
+      "reason": "Standalone JavaSE whole JUnit fixture owns four SDK memory workers with64 finite callbacks and handwritten SS351 expected values. Bundle and workers TWR closes in reverse order. Each Future.get has10second timeout; submission and TWR close have no local absolute deadline, separate outer JVM240second bound. Actual38 success proves these fixtures only, not application-worker, DB, FS, HTTP, VM, Root, native, credential or authority operation. Original two historical context refs are source-rebound; raw2/gate1 retained.",
+      "rule": "DoNotUseThreads",
+      "scopeKind": "METHOD",
+      "scopeName": "apipol012FiniteConcurrentCallsKeepSource",
+      "scopeTokenSha256": "0de518e8f8367c73d34d5c9febfd37f2b56eea08f2df66e97ed0e0bb62a71b70",
+      "source": "2baca5740741adb7c676cb85a83f15d19de01083",
+      "sourceSha256": "eb3c35e5ffbe0eada68aacce03f744b3b2eabadcb531a3810e234600585dfc89",
+      "sourceSpanSha256": "d67524e61fc9a5a72a88b83fb7702b223b9f7a4f6e7db592ed424787570defa7"
+    }
+  ],
+  "joinedContextWarnings": 3178,
+  "mainRaw": 1505,
+  "newAccepted": 0,
+  "newClassificationIds": [],
+  "newScopeFindings": 2,
+  "newSourceRebindings": 2,
+  "noCurrentReferenceInThisJoin": 5294,
+  "oldScopeFindings": 3,
+  "productTestsExecuted": 0,
+  "removedFindingIds": [
+    "PMD-01968"
+  ],
+  "retainedIntroducedFindings": [
+    "PMD-NEW-PG11448-001",
+    "PMD-NEW-PG11448-002",
+    "PMD-NEW-PG11448-003",
+    "PMD-NEW-PG11448-004",
+    "PMD-NEW-PG11448-005",
+    "PMD-NEW-PG11448-006",
+    "PMD-NEW-PG11540-001",
+    "PMD-NEW-PG11540-002"
+  ],
+  "source": "2baca5740741adb7c676cb85a83f15d19de01083",
+  "sourceDerivedRaw": 8472,
+  "sourceReboundCurrentWholePending": 827,
+  "staticActualExit": 1,
+  "testRaw": 6967,
+  "totalPriorCorrections": 945,
+  "wholeCurrentAnalyzerReissued": false,
+  "wholeF03Accepted": false
+}
