@@ -1,0 +1,82 @@
+{
+  "rows": [
+    {
+      "attributes": {
+        "begincolumn": "21",
+        "beginline": "399",
+        "class": "LogSearchWireClientTest",
+        "endcolumn": "52",
+        "endline": "399",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "method": "web276ConcurrentRequests",
+        "package": "dev.codex.schubert.nk.web.messaging",
+        "priority": "3",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading",
+        "variable": "pool"
+      },
+      "currentCase": {
+        "classname": "dev.codex.schubert.nk.web.messaging.LogSearchWireClientTest",
+        "name": "web276ConcurrentRequests",
+        "nonPass": [],
+        "result": "PASS"
+      },
+      "currentWholeJoinPending": true,
+      "disposition": "CONTEXT_NOT_APPLICABLE",
+      "id": "PMD-08082",
+      "kind": "OWN_FINITE64_MEMORY_CALLBACK_TASKS",
+      "method": "web276ConcurrentRequests",
+      "methodTokenSha256": "b9b08cc68179de34691a5f0e91fbd5b2330eaf2198661c62327aef8fbafb20b6",
+      "newSourceReason": false,
+      "oldRuntimeReassigned": false,
+      "originalRowSha256": "83c29b65a3665643a1051c8f85d7cac4e2ffa1ac9df2c5519e70ad73f3af7f4a",
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/LogSearchWireClientTest.java",
+      "previousReferenceRetainedAsHistorical": true,
+      "productTestsExecutedByReview": 0,
+      "reason": "The J2EE application-thread restriction does not apply to this isolated JavaSE JUnit fixture. Eight TWR-owned workers execute exactly64 finite own-memory callback exchanges; every Future is joined and pending0 is asserted. Future.get has no individual timeout; Product exchanges are bounded by the fixed2second wait and the selected JVM has180second timeout. Current whole8 and independent single-session CRC evidence cover these inputs/schedules only, not all schedules or service ownership. No broker, database, network, native, Root or actual authentication/credential operation is performed.",
+      "rule": "DoNotUseThreads",
+      "source": "17ab52b253282ce45016f0586c0167a22029fd8c",
+      "sourceSha256": "d4c586832cec19d3a7d896aa0ee6f316c3cab96af6a808d0b54f5cff8734729f",
+      "sourceSpanSha256": "45a38a95e5b1914bc44b51b29e60fb4d5c93e0e1d3f6a314234d653392df5f14"
+    },
+    {
+      "attributes": {
+        "begincolumn": "13",
+        "beginline": "404",
+        "class": "LogSearchWireClientTest",
+        "endcolumn": "19",
+        "endline": "412",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "method": "web276ConcurrentRequests",
+        "package": "dev.codex.schubert.nk.web.messaging",
+        "priority": "3",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading"
+      },
+      "currentCase": {
+        "classname": "dev.codex.schubert.nk.web.messaging.LogSearchWireClientTest",
+        "name": "web276ConcurrentRequests",
+        "nonPass": [],
+        "result": "PASS"
+      },
+      "currentWholeJoinPending": true,
+      "disposition": "CONTEXT_NOT_APPLICABLE",
+      "id": "PMD-08083",
+      "kind": "OWN_FINITE64_MEMORY_CALLBACK_TASKS",
+      "method": "web276ConcurrentRequests",
+      "methodTokenSha256": "b9b08cc68179de34691a5f0e91fbd5b2330eaf2198661c62327aef8fbafb20b6",
+      "newSourceReason": false,
+      "oldRuntimeReassigned": false,
+      "originalRowSha256": "6ca8c1b8008afec2f28f432d99cb362f1f5fb1ea4dd9ccae427de0d4948241fd",
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/LogSearchWireClientTest.java",
+      "previousReferenceRetainedAsHistorical": true,
+      "productTestsExecutedByReview": 0,
+      "reason": "The J2EE application-thread restriction does not apply to this isolated JavaSE JUnit fixture. Eight TWR-owned workers execute exactly64 finite own-memory callback exchanges; every Future is joined and pending0 is asserted. Future.get has no individual timeout; Product exchanges are bounded by the fixed2second wait and the selected JVM has180second timeout. Current whole8 and independent single-session CRC evidence cover these inputs/schedules only, not all schedules or service ownership. No broker, database, network, native, Root or actual authentication/credential operation is performed.",
+      "rule": "DoNotUseThreads",
+      "source": "17ab52b253282ce45016f0586c0167a22029fd8c",
+      "sourceSha256": "d4c586832cec19d3a7d896aa0ee6f316c3cab96af6a808d0b54f5cff8734729f",
+      "sourceSpanSha256": "f90209ef5eff7178fd3e87d043d99b9026979ba5226bd69b1b97991d87fa5af7"
+    }
+  ],
+  "source": "17ab52b253282ce45016f0586c0167a22029fd8c"
+}
