@@ -84,6 +84,17 @@ import org.springframework.web.context.support.AnnotationConfigWebApplicationCon
 
 /** Independent UI224/236 byte/HTTP/DOM oracle, PG-D347/016059/PT-NTF-HTTP001..010. */
 class NotificationControllerTest {
+  // Test-only exhaustive UI236 oracle; never use the Production output encoder.
+  private static String expectedNotificationStateWire(NotificationState state) {
+    return switch (state) {
+      case RECEIVED -> FIXTURE_RECEIVED_35302D54;
+      case PROCESSING -> FIXTURE_PROCESSING_01F94682;
+      case COMPLETED -> FIXTURE_COMPLETED_BA0AE16A;
+      case ERROR -> FIXTURE_ERROR_F717E7D8;
+      case CANCELLED -> FIXTURE_CANCELLED_E01A549A;
+    };
+  }
+
   private static final String FIXTURE_READER_F734AAEA = "reader";
   private static final String FIXTURE_GET_04F32A7E = "GET";
   private static final String FIXTURE_NOTIFICATIONS_FF98C59A = "/notifications";
@@ -652,7 +663,7 @@ class NotificationControllerTest {
                         deleted)));
         var row = page.getRows().getFirst();
         assertEquals(label, row.get(FIXTURE_TYPE_D0070D5C));
-        assertEquals(state.wireValue(), row.get("state"));
+        assertEquals(expectedNotificationStateWire(state), row.get("state"));
         assertEquals(RECEIPT, row.get("receiptId"));
         assertEquals(deleted ? "削除済み" : "😀".repeat(100), row.get("summary"));
         assertEquals(deleted, row.get("deleted"));
@@ -1013,7 +1024,7 @@ class NotificationControllerTest {
             NotificationDetailViewModel.from(
                 actor(UserRole.USER), new NotificationId(1), detailData(1, state, deleted, ""));
         var values = page.getValues();
-        assertEquals(labels.get(state.wireValue()), values.get("stateLabel"));
+        assertEquals(labels.get(expectedNotificationStateWire(state)), values.get("stateLabel"));
         assertEquals("2026-10-03 08:58:00", values.get("submittedAt"));
         assertEquals(deleted, values.get("deleted"));
         assertEquals(

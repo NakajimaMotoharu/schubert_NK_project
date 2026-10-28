@@ -87,6 +87,15 @@ import org.springframework.web.context.support.AnnotationConfigWebApplicationCon
 
 /** Independent UI224236 wholebyte/DOM/HTTP oracles; PG-D350/016063/PT-QRY-HTTP001..012. */
 class QuestionControllerTest {
+  // Test-only exhaustive UI236 oracle; never use the Production output encoder.
+  private static String expectedQuestionStateWire(AnswerState state) {
+    return switch (state) {
+      case ANSWERED -> FIXTURE_ANSWERED_6CA66E97;
+      case UNANSWERED -> FIXTURE_UNANSWERED_8B420ADF;
+      case ERROR -> FIXTURE_ERROR_F717E7D8;
+    };
+  }
+
   private static final String FIXTURE_READER_F734AAEA = "reader";
   private static final String FIXTURE_GET_04F32A7E = "GET";
   private static final String FIXTURE_QUESTIONS_2CDF4E3F = "/questions";
@@ -583,7 +592,7 @@ class QuestionControllerTest {
           for (long id : List.of(1L, 999999999999L))
             try (var f = new Fixture()) {
               f.code = code;
-              f.state = state.wireValue();
+              f.state = expectedQuestionStateWire(state);
               f.answer = state == AnswerState.ANSWERED ? "answer<>界" : "";
               var model = new ExtendedModelMap();
               var reply = new MockHttpServletResponse();
@@ -609,7 +618,7 @@ class QuestionControllerTest {
                           "未回答",
                           FIXTURE_ERROR_F717E7D8,
                           "エラー")
-                      .get(state.wireValue()),
+                      .get(expectedQuestionStateWire(state)),
                   page.getValues().get("stateLabel"));
               assertEquals(
                   state == AnswerState.ANSWERED ? "2026-10-03 08:59:00" : "",
@@ -780,7 +789,7 @@ class QuestionControllerTest {
       for (AnswerState state : AnswerState.values())
         try (var f = new Fixture();
             var context = f.mvc()) {
-          f.state = state.wireValue();
+          f.state = expectedQuestionStateWire(state);
           f.summary = "<script>alert(1)</script>&界";
           f.answer = "";
           var mvc = MockMvcBuilders.webAppContextSetup(context).build();
@@ -803,7 +812,7 @@ class QuestionControllerTest {
                       "未回答",
                       FIXTURE_ERROR_F717E7D8,
                       "エラー")
-                  .get(state.wireValue()),
+                  .get(expectedQuestionStateWire(state)),
               dom.select(".question-row .state").text());
           assertTrue(dom.select(".question-summary script").isEmpty());
           assertEquals(role == UserRole.ADMIN, !dom.select("input[name=username]").isEmpty());
@@ -829,7 +838,7 @@ class QuestionControllerTest {
                       "未回答",
                       FIXTURE_ERROR_F717E7D8,
                       "エラー")
-                  .get(state.wireValue()),
+                  .get(expectedQuestionStateWire(state)),
               detailDom.select(".state").text());
           assertTrue(detailDom.select(".question-body script,.answer-body script").isEmpty());
           assertEquals(
@@ -1032,7 +1041,8 @@ class QuestionControllerTest {
                   FIXTURE_OTHER_D448C0E0,
                   state,
                   state == AnswerState.ANSWERED ? FIXTURE_ANSWER_B2437A6A : ""));
-      assertEquals(state.wireValue(), values.getValues().get(FIXTURE_STATE_55AF5B1D));
+      assertEquals(
+          expectedQuestionStateWire(state), values.getValues().get(FIXTURE_STATE_55AF5B1D));
       assertEquals(FIXTURE_ADMIN_C4BB3010, values.getTopBar().getRole());
     }
     var form = QuestionSearchForm.bind(params(), UserRole.ADMIN);
