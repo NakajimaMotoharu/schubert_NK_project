@@ -1,0 +1,19 @@
+# 2446 質問通知state八箇所・独立oracle製造仕様
+
+2026-10-28、HEADc289427e0fc9f2c9b4b5f18683ee5733c9d41342/push98866真正0/origin一致、Production source81a1b0c32be8167c07320e6bfaf469bcd44eb7bd。群G03_STATE_ORACLE_PG8_SOURCE_ONLY_V1、着手前低1/基準3/高6pp・cap10、fresh API最小観測を487開始eventへ直接転送、専有費/N/Tnull・原/改訂/元2391見積2/5/10不変更。既BUG1829/YKT1580の必要PG、結果2447/PG-D790。
+
+## 独立性と有限scope
+
+477/478DのPGを省略しない方針により、既存二Test-local oracleのsource補完と許可済みcompile/型/null/staticだけ行う。新fixture/ハーネス/別経路のTest実行ではない。2065は原G03停止がモデル混雑であって安全拒否と断定しないこと、八classのBeforeAllが実DBを開始することを明記している。元2391/job/PG10426/旧commandは再発行しない。当source編集は未実装BUG1829の八state依存だけで、R09/BIZ007責任未確定・BUG1830 authority七・実認証/DB/HTTP/鍵/Graph9等は当scope外HOLDを維持する。原静的PT設計レビュー2065や今回PGを実行PT免除/PASSへ変換しない。
+
+対象QuestionControllerTest六（現SHA56d185a9df42ba845e55817417533626f4d09ddaabe95c2aa98fb8999fc61672/P01618）とNotificationControllerTest二（9a202dd561060fab3d056026da13317e0de00b9f539b1387fd5a6af522bf9d42/P01621）。既Test IDは2065 R01～08：NTF-HTTP007/NTF-DETAIL002、QRY-HTTP006/008/011。一methodに複数siteを新PT複数件にしない。source/helperの変更主担当はG03.01、元責任費は不変更/F03参照追加費0。
+
+UI236（SHA0468f20da240ed61e056084f80e88f3b3f5d60b3afb70f23710a8320c5c653c9・origin/main8b91944dfとbyte一致）の内部状態51/12と回答状態615/12を独立根拠に、通知RECEIVED/PROCESSING/COMPLETED/ERROR/CANCELLED・質問ANSWERED/UNANSWERED/ERRORの固定文字列を選ぶ。入力enum identityを選択条件としProduction wireValue/label/parse/encoderからexpectedを生成しない。既Test内の独立private String八定数を再利用、値・元label Map・元入力/全assert/固定byte配置は保持する。
+
+## 製造・静的確認
+
+新13326で元二source/八callsite/既固定定数/既caseとUI値を固定。state.wireValue()だけTest-local exhaustive switch helperへ置換しprivate helper二つを追加する。callsiteを戻しhelperだけ除去すると全元source tokenが復元できること、各caseの誤field/欠落/重複/Production再導入・他assert/annotation等の非同値を拒否することを確認。metadataの八domainを実PT八件にしない。
+
+13328は当二sourceのPMD/CS/型条件・全input hash/終了codeを保持し、元同SHA全体13253の当scope診断と比較、追加/消失があれば先に分類する。新Source固定後13330六normal/PT0→13332当fresh六SpotBugs全1843/全missing-error0→13334/35全Main同byte/全Test集合・当SourceFile由来差/二private helperのみのmethod構造・元非oracle token/固定値・独立metadata→13336/37元995二SHA/他993・全担当費/旧runtime/unknown二を保全。enum switch由来のTest compiler生成物も実分母/差を全記録し安易な除外をしない。必要な元PTはNOT_EXECUTED_HOLD/coverage未測定。
+
+Main/Production authority/設定/権限・アクセス経路/RD/UI/SS/Currentbaseline不変更。開始derived7747/corr1694/refs3349pending1370、追加32/うち14未分類を保持しoracle是正八とPMD是正件数を混同しない。code資格PRIOR_TRACE13312/7443c342・履歴13320を継承し元新sourceへ旧成功を加算しない。正式1964PT53scope/17-190/工数null/QA051final・全F03/451未受入を保持、実VM/Root/native/DB/鍵/保留二工具/私有rawへのアクセスなし。次点検used15・残10以下又は不明で新規停止保全、通常群/commit/PMO待ちでは停止しない。
