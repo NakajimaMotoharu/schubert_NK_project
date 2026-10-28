@@ -1,5 +1,7 @@
 # NK-OPS-001 検査起動wrapper・unit 単体テスト仕様書
 
+2026-10-28追加（監視metadata部分限定）：2404/2405・HTTPMETRIC001～006、HttpMetricContract private map命名一と元Test外側TWR一を当sourceで確認。固定35route/1750tuple/9bucket・null/未知/境界/collection不変/自己4worker64taskの期待は元1570/2149不変更。evidence/http-route-private-name/manifest.jsonへ同source6/六Main各counter100・完全artifact未達・rawThread四/gate1・BUG2017/2018を結合する。wrapper/native/実HTTP/VM/Root/DBの試験を代替せず、元計画の未実行HOLDを保持する。
+
 RD OPS-009/ENV/SEC、UI212/251/252、SS341/342/343 §6.8/352、QA-046/UIC-006/SSC-049/PG-D-144。専用wrapperとbase/previous選択unit雛形の部分PT。全OPS Programや実unit/ITの完了ではない。
 
 ## 1. Fixture・網羅方針
