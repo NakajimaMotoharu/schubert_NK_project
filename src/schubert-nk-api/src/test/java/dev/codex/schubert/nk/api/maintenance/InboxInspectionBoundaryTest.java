@@ -30,6 +30,8 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** PT-DB-INBOX-017..024; independent SQLSTATE/catalog/row and lock postconditions for V008. */
 final class InboxInspectionBoundaryTest {
+  private static final String FIXTURE_SELECT_COUNT_FROM_SCHUBERT_REQUEST_INBOX_E4FAEDDB =
+      "select count(*) from schubert.request_inbox";
   private static final String FIXTURE_PGPT_ADMIN_F5D1227C = "pgpt_admin";
   private static final String FIXTURE_SCHUBERT_APP_5AB151CF = "schubert_app";
   private static final String FIXTURE_LGNREQ01_217C66A4 = "LGNREQ01";
@@ -145,7 +147,10 @@ final class InboxInspectionBoundaryTest {
       c.rollback();
     }
     assertEquals(
-        "0", scalar(FIXTURE_SCHUBERT_APP_5AB151CF, "select count(*) from schubert.request_inbox"));
+        "0",
+        scalar(
+            FIXTURE_SCHUBERT_APP_5AB151CF,
+            FIXTURE_SELECT_COUNT_FROM_SCHUBERT_REQUEST_INBOX_E4FAEDDB));
   }
 
   @Test
@@ -168,7 +173,10 @@ final class InboxInspectionBoundaryTest {
       c.rollback();
     }
     assertEquals(
-        "6", scalar(FIXTURE_SCHUBERT_APP_5AB151CF, "select count(*) from schubert.request_inbox"));
+        "6",
+        scalar(
+            FIXTURE_SCHUBERT_APP_5AB151CF,
+            FIXTURE_SELECT_COUNT_FROM_SCHUBERT_REQUEST_INBOX_E4FAEDDB));
   }
 
   @Test
@@ -250,7 +258,9 @@ final class InboxInspectionBoundaryTest {
       }
       assertEquals(
           "1",
-          scalar(FIXTURE_SCHUBERT_APP_5AB151CF, "select count(*) from schubert.request_inbox"));
+          scalar(
+              FIXTURE_SCHUBERT_APP_5AB151CF,
+              FIXTURE_SELECT_COUNT_FROM_SCHUBERT_REQUEST_INBOX_E4FAEDDB));
     }
     // BUG-080: lock wait pins the first query snapshot before CONFIG is committed.
     try (var setup = db.api();
@@ -351,7 +361,10 @@ final class InboxInspectionBoundaryTest {
     }
     // No deletion command is part of this capability.
     assertEquals(
-        "1", scalar(FIXTURE_SCHUBERT_APP_5AB151CF, "select count(*) from schubert.request_inbox"));
+        "1",
+        scalar(
+            FIXTURE_SCHUBERT_APP_5AB151CF,
+            FIXTURE_SELECT_COUNT_FROM_SCHUBERT_REQUEST_INBOX_E4FAEDDB));
   }
 
   @Test

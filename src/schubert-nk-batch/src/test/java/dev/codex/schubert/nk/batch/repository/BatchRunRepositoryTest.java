@@ -41,6 +41,8 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** NK-BAT-001/OPS009/DAT009/UI251/SS331 8.3/332/341; SSC055/PG163; BAT138..153. */
 final class BatchRunRepositoryTest {
+  private static final String FIXTURE_SELECT_COUNT_FROM_SCHUBERT_BATCH_RUNS_5545B4A2 =
+      "select count(*) from schubert.batch_runs";
   private static final String FIXTURE_ATTEMPT_7FD8A755 = "attempt";
   private static final String FIXTURE_STATUS_CFC31BCC = "status";
   private static final String FIXTURE_DELETE_FROM_SCHUBERT_BATCH_RUNS_0A02FC69 =
@@ -213,7 +215,7 @@ final class BatchRunRepositoryTest {
                     + a.id()));
       }
       c.commit();
-      assertEquals("10", query(c, "select count(*) from schubert.batch_runs"));
+      assertEquals("10", query(c, FIXTURE_SELECT_COUNT_FROM_SCHUBERT_BATCH_RUNS_5545B4A2));
     }
     trace("PT-BAT-138-terminals.txt", trace.toString());
   }
@@ -468,7 +470,7 @@ final class BatchRunRepositoryTest {
                 + "','2026-09-12T15:00:01Z')");
       }
       redacted(() -> new BatchRunRepository(c).begin(RUN, STEP, NOW, false));
-      assertEquals("0", query(c, "select count(*) from schubert.batch_runs"));
+      assertEquals("0", query(c, FIXTURE_SELECT_COUNT_FROM_SCHUBERT_BATCH_RUNS_5545B4A2));
     }
   }
 
@@ -569,9 +571,9 @@ final class BatchRunRepositoryTest {
         var observer = db.admin()) {
       var repo = new BatchRunRepository(c);
       var a = repo.begin(RUN, STEP, NOW, false);
-      assertEquals("0", query(observer, "select count(*) from schubert.batch_runs"));
+      assertEquals("0", query(observer, FIXTURE_SELECT_COUNT_FROM_SCHUBERT_BATCH_RUNS_5545B4A2));
       c.rollback();
-      assertEquals("0", query(c, "select count(*) from schubert.batch_runs"));
+      assertEquals("0", query(c, FIXTURE_SELECT_COUNT_FROM_SCHUBERT_BATCH_RUNS_5545B4A2));
       var b = repo.begin(RUN, STEP, NOW, false);
       c.commit();
       redacted(() -> repo.finish(a, END, SUCCESS));
@@ -771,7 +773,7 @@ final class BatchRunRepositoryTest {
         }
         p.closed();
         c.rollback();
-        assertEquals("1", query(c, "select count(*) from schubert.batch_runs"));
+        assertEquals("1", query(c, FIXTURE_SELECT_COUNT_FROM_SCHUBERT_BATCH_RUNS_5545B4A2));
       }
       sql(c, FIXTURE_DELETE_FROM_SCHUBERT_BATCH_RUNS_0A02FC69);
       c.commit();
@@ -790,7 +792,7 @@ final class BatchRunRepositoryTest {
         redacted(() -> new BatchRunRepository(p.wrap(c)).begin(RUN, STEP, NOW, false));
         p.closed();
         c.rollback();
-        assertEquals("0", query(c, "select count(*) from schubert.batch_runs"));
+        assertEquals("0", query(c, FIXTURE_SELECT_COUNT_FROM_SCHUBERT_BATCH_RUNS_5545B4A2));
       }
     }
   }
@@ -1071,7 +1073,7 @@ final class BatchRunRepositoryTest {
       other.rollback();
       var repo = new BatchRunRepository(owner);
       var a = repo.begin(RUN, STEP, NOW, false);
-      assertEquals("0", query(other, "select count(*) from schubert.batch_runs"));
+      assertEquals("0", query(other, FIXTURE_SELECT_COUNT_FROM_SCHUBERT_BATCH_RUNS_5545B4A2));
       other.rollback();
       repo.finish(a, END, SUCCESS);
       owner.commit();

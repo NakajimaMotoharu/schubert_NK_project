@@ -75,6 +75,8 @@ import org.springframework.web.context.support.AnnotationConfigWebApplicationCon
 
 /** UI225236 literals and real encrypted SQL; SSC177/PG-D366/PT-USER-BIZ001..012. */
 class UserBusinessControllerTest {
+  private static final String FIXTURE_SELECT_VERSION_FROM_SCHUBERT_APP_USERS_W_CDA2BB90 =
+      "select version from schubert.app_users where id=42";
   private static final String FIXTURE_0000_876EEFE0 = "0000";
   private static final String FIXTURE_0200_FC9DB3AC = "0200";
   private static final String FIXTURE_ADMIN_USER_NEW_5A16DB0A = "admin/user-new";
@@ -922,7 +924,7 @@ class UserBusinessControllerTest {
                   }));
         for (var future : futures) future.get(60, TimeUnit.SECONDS);
       }
-      assertEquals(1, api.scalar("select version from schubert.app_users where id=42"));
+      assertEquals(1, api.scalar(FIXTURE_SELECT_VERSION_FROM_SCHUBERT_APP_USERS_W_CDA2BB90));
       for (String category : List.of("ACTION", "SECURITY"))
         assertEquals(
             1,
@@ -961,7 +963,7 @@ class UserBusinessControllerTest {
               response));
       assertEquals(302, response.getStatus());
       assertEquals(FIXTURE_ADMIN_USERS_42_65AE9E81, response.getHeader(FIXTURE_LOCATION_FB077BAD));
-      assertEquals(0, api.scalar("select version from schubert.app_users where id=42"));
+      assertEquals(0, api.scalar(FIXTURE_SELECT_VERSION_FROM_SCHUBERT_APP_USERS_W_CDA2BB90));
       var model = new ExtendedModelMap();
       response = new MockHttpServletResponse();
       assertEquals(
@@ -982,7 +984,7 @@ class UserBusinessControllerTest {
           f.controller.change(
               42, input, actor(UserRole.ADMIN), model, f.request(FIXTURE_POST_E46D3AE9), response));
       assertEquals(302, response.getStatus());
-      assertEquals(1, api.scalar("select version from schubert.app_users where id=42"));
+      assertEquals(1, api.scalar(FIXTURE_SELECT_VERSION_FROM_SCHUBERT_APP_USERS_W_CDA2BB90));
       assertEquals(
           1,
           api.scalar("select count(*) from schubert.app_users where id=42 and status='DISABLED'"));
@@ -991,7 +993,7 @@ class UserBusinessControllerTest {
           f.controller.change(
               42, input, actor(UserRole.ADMIN), model, f.request(FIXTURE_POST_E46D3AE9), response));
       assertEquals(302, response.getStatus());
-      assertEquals(1, api.scalar("select version from schubert.app_users where id=42"));
+      assertEquals(1, api.scalar(FIXTURE_SELECT_VERSION_FROM_SCHUBERT_APP_USERS_W_CDA2BB90));
       for (String category : List.of("ACTION", "SECURITY")) {
         assertEquals(
             1,
@@ -1019,7 +1021,7 @@ class UserBusinessControllerTest {
               f.request(FIXTURE_POST_E46D3AE9),
               response));
       assertEquals(409, response.getStatus());
-      assertEquals(1, api.scalar("select version from schubert.app_users where id=42"));
+      assertEquals(1, api.scalar(FIXTURE_SELECT_VERSION_FROM_SCHUBERT_APP_USERS_W_CDA2BB90));
       UUID roleToken = f.issue(FIXTURE_ROLE_7C85C916);
       var role = f.change(FIXTURE_ROLE_7C85C916, roleToken);
       role.set(FIXTURE_EXPECTED_VERSION_633674D2, "1");
@@ -1051,7 +1053,7 @@ class UserBusinessControllerTest {
               f.request(FIXTURE_POST_E46D3AE9),
               response));
       assertEquals(302, response.getStatus());
-      assertEquals(2, api.scalar("select version from schubert.app_users where id=42"));
+      assertEquals(2, api.scalar(FIXTURE_SELECT_VERSION_FROM_SCHUBERT_APP_USERS_W_CDA2BB90));
       assertEquals(
           1,
           api.scalar(
@@ -1070,7 +1072,7 @@ class UserBusinessControllerTest {
               response));
       assertEquals(302, response.getStatus());
       assertEquals(FIXTURE_ADMIN_USERS_42_65AE9E81, response.getHeader(FIXTURE_LOCATION_FB077BAD));
-      assertEquals(3, api.scalar("select version from schubert.app_users where id=42"));
+      assertEquals(3, api.scalar(FIXTURE_SELECT_VERSION_FROM_SCHUBERT_APP_USERS_W_CDA2BB90));
       assertEquals(
           1,
           api.scalar(
@@ -1242,7 +1244,7 @@ class UserBusinessControllerTest {
                     body + "&_csrf=" + csrf,
                     true)
                 .statusCode());
-        assertEquals(0, api.scalar("select version from schubert.app_users where id=42"));
+        assertEquals(0, api.scalar(FIXTURE_SELECT_VERSION_FROM_SCHUBERT_APP_USERS_W_CDA2BB90));
         page = server.send(FIXTURE_GET_04F32A7E, "/admin/users/1", cookie, null, true);
         assertEquals(200, page.statusCode());
         dom = Jsoup.parse(page.body());

@@ -33,6 +33,7 @@ import org.junit.jupiter.api.Test;
 
 /** 1858/ROATTEMPT001..032: own typed proxies/clock/finite diagnostic, no actual JDBC/network. */
 final class ApiReadOnlyObservationAttemptTest {
+  private static final String FIXTURE_AUTO_76DD72FF = "auto?";
   private static final String FIXTURE_READ_ONLY_A9812E1E = "read-only";
   private static final String FIXTURE_ISOLATION_AB1E8569 = "isolation";
   private static final String FIXTURE_BEGIN_FB45FB7B = "begin";
@@ -80,7 +81,7 @@ final class ApiReadOnlyObservationAttemptTest {
               (proxy, method, args) -> {
                 switch (method.getName()) {
                   case "getAutoCommit":
-                    calls.add("auto?");
+                    calls.add(FIXTURE_AUTO_76DD72FF);
                     fault("auto-check-" + ++autoChecks);
                     return autoCommit;
                   case "setReadOnly":
@@ -248,12 +249,12 @@ final class ApiReadOnlyObservationAttemptTest {
     assertEquals(
         List.of(
             FIXTURE_OPEN_35FF74AE,
-            "auto?",
+            FIXTURE_AUTO_76DD72FF,
             FIXTURE_READ_ONLY_A9812E1E,
             FIXTURE_ISOLATION_AB1E8569,
             FIXTURE_BEGIN_FB45FB7B,
             FIXTURE_TIME_C894B672,
-            "auto?",
+            FIXTURE_AUTO_76DD72FF,
             "read-only?",
             "isolation?",
             FIXTURE_QUERY_4C4F28A0,
@@ -319,7 +320,8 @@ final class ApiReadOnlyObservationAttemptTest {
     var f = rows();
     f.autoCommit = false;
     assertThrows(SQLException.class, f.attempt()::read);
-    assertEquals(List.of(FIXTURE_OPEN_35FF74AE, "auto?", FIXTURE_CLOSE_97959247), f.calls);
+    assertEquals(
+        List.of(FIXTURE_OPEN_35FF74AE, FIXTURE_AUTO_76DD72FF, FIXTURE_CLOSE_97959247), f.calls);
     f.cleanup(0, 1);
   }
 

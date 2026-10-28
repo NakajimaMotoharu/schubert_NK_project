@@ -35,6 +35,8 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** NK-DAT-001/PT-DB-INBOX-233..240; UI251 11/SS331 8.2; SSC-054/BUG-138/YKT-108. */
 final class BackupRerunBoundaryTest {
+  private static final String FIXTURE_SELECT_COUNT_FROM_SCHUBERT_BATCH_RUNS_5545B4A2 =
+      "select count(*) from schubert.batch_runs";
   private static final String FIXTURE_BACKUP_DB_6C03A087 = "BACKUP_DB";
   private static final String FIXTURE_BACKUP_CONFIG_8386D7E7 = "BACKUP_CONFIG";
   private static final String FIXTURE_SUCCESS_10855C7F = "SUCCESS";
@@ -126,7 +128,7 @@ final class BackupRerunBoundaryTest {
         for (String status : List.of("RUNNING", "WARNING", "FAILED", "SKIPPED"))
           insert(c, RUN, DAY, step, attempt++, status);
       }
-      assertEquals("60", scalar(c, "select count(*) from schubert.batch_runs"));
+      assertEquals("60", scalar(c, FIXTURE_SELECT_COUNT_FROM_SCHUBERT_BATCH_RUNS_5545B4A2));
       assertEquals(
           "12", scalar(c, "select count(*) from schubert.batch_runs where status='SUCCESS'"));
     }
@@ -152,7 +154,7 @@ final class BackupRerunBoundaryTest {
                 .getSQLState());
         insert(c, RUN, DAY.plusDays(1), step, 1, FIXTURE_SUCCESS_10855C7F);
       }
-      assertEquals("6", scalar(c, "select count(*) from schubert.batch_runs"));
+      assertEquals("6", scalar(c, FIXTURE_SELECT_COUNT_FROM_SCHUBERT_BATCH_RUNS_5545B4A2));
       for (String column :
           List.of("run_id", "business_date", "step", "attempt", "started_at", "status")) {
         assertEquals(
@@ -237,9 +239,9 @@ final class BackupRerunBoundaryTest {
               "select pg_get_indexdef('schubert.uq_batch_runs_business_step_success'::regclass)"));
       insert(c, RUN, DAY, FIXTURE_BACKUP_DB_6C03A087, 1, FIXTURE_SUCCESS_10855C7F);
       insert(c, RUN, DAY, FIXTURE_BACKUP_DB_6C03A087, 2, FIXTURE_SUCCESS_10855C7F);
-      assertEquals("2", scalar(c, "select count(*) from schubert.batch_runs"));
+      assertEquals("2", scalar(c, FIXTURE_SELECT_COUNT_FROM_SCHUBERT_BATCH_RUNS_5545B4A2));
       c.rollback();
-      assertEquals("0", scalar(c, "select count(*) from schubert.batch_runs"));
+      assertEquals("0", scalar(c, FIXTURE_SELECT_COUNT_FROM_SCHUBERT_BATCH_RUNS_5545B4A2));
     }
     var flyway =
         Flyway.configure()
@@ -272,7 +274,7 @@ final class BackupRerunBoundaryTest {
       }
       for (var done : pool.invokeAll(work)) assertEquals("OK", done.get(10, TimeUnit.SECONDS));
       try (var c = batch()) {
-        assertEquals("16", scalar(c, "select count(*) from schubert.batch_runs"));
+        assertEquals("16", scalar(c, FIXTURE_SELECT_COUNT_FROM_SCHUBERT_BATCH_RUNS_5545B4A2));
       }
       for (String step : List.of(FIXTURE_BACKUP_CONFIG_8386D7E7, "CLEAN_LOG")) {
         var pair = new CyclicBarrier(2);
@@ -306,7 +308,7 @@ final class BackupRerunBoundaryTest {
       for (String step : BACKUPS)
         for (int i = 1; i <= 3; i++) insert(c, RUN, DAY, step, i, FIXTURE_SUCCESS_10855C7F);
       for (String name : CLEANUPS) assertEquals("OK", cleanup(c, name));
-      assertEquals("6", scalar(c, "select count(*) from schubert.batch_runs"));
+      assertEquals("6", scalar(c, FIXTURE_SELECT_COUNT_FROM_SCHUBERT_BATCH_RUNS_5545B4A2));
       for (String step : BACKUPS) {
         c.setAutoCommit(false);
         for (String change :

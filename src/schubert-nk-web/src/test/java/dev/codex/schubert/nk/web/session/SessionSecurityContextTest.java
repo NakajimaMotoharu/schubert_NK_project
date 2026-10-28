@@ -73,6 +73,13 @@ import org.springframework.session.web.http.SessionRepositoryFilter;
 
 /** NK-WEB-001/PT-WEB-068..075; FUN-001/AUT-001..004; UI226/232/234; SS314/331/352; SSC-044. */
 class SessionSecurityContextTest {
+  private static final String FIXTURE_READER_F734AAEA = "reader";
+  private static final String FIXTURE_PRINCIPAL_590C90CB = "principal";
+  private static final String FIXTURE_CSRFTOKEN_CF3CFD11 = "csrfToken";
+  private static final String FIXTURE_SCHUBERT_NK_SESSION_DD9EE5FF = "SCHUBERT_NK_SESSION";
+  private static final String FIXTURE_PRIVATE_24ED6504 = "private";
+  private static final String FIXTURE_0000_876EEFE0 = "0000";
+  private static final String FIXTURE_REVOKED_303CE38D = "REVOKED";
   private static final String EXPECTED_AUTHORITY_USER = "ROLE_USER";
   private static final String EXPECTED_AUTHORITY_ADMIN = "ROLE_ADMIN";
 
@@ -86,7 +93,8 @@ class SessionSecurityContextTest {
 
   private static WebLogDatabaseFixture db;
   private static final Instant LOGIN = Instant.parse("2026-09-08T00:00:00.123Z");
-  private static final SessionPrincipal USER = principal("reader", UserRole.USER, "a");
+  private static final SessionPrincipal USER =
+      principal(FIXTURE_READER_F734AAEA, UserRole.USER, "a");
   private static final SessionPrincipal ADMIN = principal("operator", UserRole.ADMIN, "b");
 
   @BeforeAll
@@ -122,7 +130,7 @@ class SessionSecurityContextTest {
       var request = marked(adapter, new MockHttpSession());
       var response = new MockHttpServletResponse();
       for (var p : List.of(USER, ADMIN)) {
-        request.getSession().setAttribute("principal", p);
+        request.getSession().setAttribute(FIXTURE_PRINCIPAL_590C90CB, p);
         contexts.saveContext(context(auth(p)), request, response);
         assertIdentity(p, contexts.loadDeferredContext(request).get().getAuthentication());
       }
@@ -131,7 +139,7 @@ class SessionSecurityContextTest {
       invalid.add(UsernamePasswordAuthenticationToken.unauthenticated(USER, null));
       invalid.add(
           UsernamePasswordAuthenticationToken.authenticated(
-              "reader", null, roles(EXPECTED_AUTHORITY_USER)));
+              FIXTURE_READER_F734AAEA, null, roles(EXPECTED_AUTHORITY_USER)));
       invalid.add(
           UsernamePasswordAuthenticationToken.authenticated(
               USER, new char[] {'p'}, roles(EXPECTED_AUTHORITY_USER)));
@@ -147,14 +155,14 @@ class SessionSecurityContextTest {
               USER, null, roles(EXPECTED_AUTHORITY_ADMIN)));
       GrantedAuthority noText = () -> null;
       invalid.add(UsernamePasswordAuthenticationToken.authenticated(USER, null, List.of(noText)));
-      request.getSession().setAttribute("principal", USER);
+      request.getSession().setAttribute(FIXTURE_PRINCIPAL_590C90CB, USER);
       for (var value : invalid)
         unavailable(() -> contexts.saveContext(context(value), request, response));
-      request.getSession().removeAttribute("principal");
+      request.getSession().removeAttribute(FIXTURE_PRINCIPAL_590C90CB);
       contexts.saveContext(context(null), request, response);
       contexts.saveContext(context(anonymous()), request, response);
       for (Object value : List.of("bad-principal", context(auth(USER)), 42)) {
-        request.getSession().setAttribute("principal", value);
+        request.getSession().setAttribute(FIXTURE_PRINCIPAL_590C90CB, value);
         unavailable(() -> contexts.containsContext(request));
         unavailable(() -> contexts.loadDeferredContext(request).get());
       }
@@ -229,7 +237,7 @@ class SessionSecurityContextTest {
           });
       assertEquals(0, count());
       var session = adapter.createSession();
-      session.setAttribute("principal", USER);
+      session.setAttribute(FIXTURE_PRINCIPAL_590C90CB, USER);
       String id = session.getId();
       filter.doFilter(
           request(cookie(id)),
@@ -247,10 +255,10 @@ class SessionSecurityContextTest {
             for (var mismatch :
                 List.of(
                     ADMIN,
-                    principal("reader", UserRole.ADMIN, "a"),
-                    principal("reader", UserRole.USER, "b"),
+                    principal(FIXTURE_READER_F734AAEA, UserRole.ADMIN, "a"),
+                    principal(FIXTURE_READER_F734AAEA, UserRole.USER, "b"),
                     new SessionPrincipal(
-                        "reader",
+                        FIXTURE_READER_F734AAEA,
                         UserRole.USER,
                         USER.authenticationContext(),
                         LOGIN.plusMillis(1)))) {
@@ -289,7 +297,7 @@ class SessionSecurityContextTest {
       initial.setAttribute("savedRequest", "/logs?q=abc");
       initial.setAttribute("operationTokens", SessionAttributeCodecTest.tokens(2));
       var original = initial.getId();
-      assertEquals("02".repeat(32), initial.getAttribute("csrfToken"));
+      assertEquals("02".repeat(32), initial.getAttribute(FIXTURE_CSRFTOKEN_CF3CFD11));
       var response = new MockHttpServletResponse();
       new WebSessionFilterFactory()
           .create(adapter)
@@ -302,18 +310,23 @@ class SessionSecurityContextTest {
                 var session = r.getSession(false);
                 assertNotNull(session);
                 assertNotEquals(original, session.getId());
-                assertEquals("04".repeat(32), session.getAttribute("csrfToken"));
+                assertEquals("04".repeat(32), session.getAttribute(FIXTURE_CSRFTOKEN_CF3CFD11));
                 assertEquals("/logs?q=abc", session.getAttribute("savedRequest"));
                 assertEquals(
                     SessionAttributeCodecTest.tokens(2), session.getAttribute("operationTokens"));
                 assertEquals(
-                    Set.of("principal", "csrfToken", "savedRequest", "operationTokens"),
+                    Set.of(
+                        FIXTURE_PRINCIPAL_590C90CB,
+                        FIXTURE_CSRFTOKEN_CF3CFD11,
+                        "savedRequest",
+                        "operationTokens"),
                     Collections.list(session.getAttributeNames()).stream()
                         .collect(java.util.stream.Collectors.toSet()));
                 contexts.saveContext(context(auth(ADMIN)), r, (HttpServletResponse) res);
                 assertEquals(2, f.ids.get());
               });
-      Cookie issued = Objects.requireNonNull(response.getCookie("SCHUBERT_NK_SESSION"));
+      Cookie issued =
+          Objects.requireNonNull(response.getCookie(FIXTURE_SCHUBERT_NK_SESSION_DD9EE5FF));
       assertNotEquals(original, issued.getValue());
       assertTrue(issued.getSecure());
       assertTrue(issued.isHttpOnly());
@@ -375,8 +388,8 @@ class SessionSecurityContextTest {
             new MockHttpSession() {
               private RuntimeException fault() {
                 return illegalState
-                    ? new IllegalStateException("private")
-                    : new IllegalArgumentException("private");
+                    ? new IllegalStateException(FIXTURE_PRIVATE_24ED6504)
+                    : new IllegalArgumentException(FIXTURE_PRIVATE_24ED6504);
               }
 
               @Override
@@ -396,15 +409,15 @@ class SessionSecurityContextTest {
             new MockHttpServletRequest() {
               @Override
               public HttpSession getSession(boolean create) {
-                if (illegalState) throw new IllegalStateException("private");
-                throw new IllegalArgumentException("private");
+                if (illegalState) throw new IllegalStateException(FIXTURE_PRIVATE_24ED6504);
+                throw new IllegalArgumentException(FIXTURE_PRIVATE_24ED6504);
               }
             };
         getFailure.setAttribute(SessionRepositoryFilter.SESSION_REPOSITORY_ATTR, adapter);
         unavailable(() -> contexts.containsContext(getFailure));
         loginUnavailable(() -> strategy.onAuthentication(auth(USER), getFailure, response));
       }
-      assertNull(response.getCookie("SCHUBERT_NK_SESSION"));
+      assertNull(response.getCookie(FIXTURE_SCHUBERT_NK_SESSION_DD9EE5FF));
       assertEquals(0, count());
     }
     for (String fault :
@@ -435,13 +448,13 @@ class SessionSecurityContextTest {
                               () ->
                                   strategy.onAuthentication(
                                       auth(USER), r, (HttpServletResponse) res));
-                          assertNull(r.getSession(false).getAttribute("principal"));
+                          assertNull(r.getSession(false).getAttribute(FIXTURE_PRINCIPAL_590C90CB));
                           ((HttpServletResponse) res).setStatus(503);
                           // Existing failure remains: filter must also reject committing its old
                           // snapshot.
                         }));
         assertEquals(503, response.getStatus());
-        assertNull(response.getCookie("SCHUBERT_NK_SESSION"));
+        assertNull(response.getCookie(FIXTURE_SCHUBERT_NK_SESSION_DD9EE5FF));
         f.failure = "";
         assertEquals(1, count()); // Commit-close fault may have committed new row; never success.
       }
@@ -464,7 +477,7 @@ class SessionSecurityContextTest {
             }
           };
       var session = new MockHttpSession();
-      session.setAttribute("principal", USER);
+      session.setAttribute(FIXTURE_PRINCIPAL_590C90CB, USER);
       r.setSession(session);
       r.setAttribute(SessionRepositoryFilter.SESSION_REPOSITORY_ATTR, adapter);
       var deferred = contexts.loadDeferredContext(r);
@@ -484,12 +497,12 @@ class SessionSecurityContextTest {
       assertEquals(1, calls.get());
       assertIdentity(USER, deferred.get().getAuthentication());
       var other = new MockHttpSession();
-      other.setAttribute("principal", ADMIN);
+      other.setAttribute(FIXTURE_PRINCIPAL_590C90CB, ADMIN);
       assertIdentity(
           ADMIN, contexts.loadDeferredContext(marked(adapter, other)).get().getAuthentication());
       f.clock.value = Instant.now();
       var real = adapter.createSession();
-      real.setAttribute("principal", USER);
+      real.setAttribute(FIXTURE_PRINCIPAL_590C90CB, USER);
       String id = real.getId();
       var response = new MockHttpServletResponse();
       unavailable(
@@ -509,7 +522,7 @@ class SessionSecurityContextTest {
                             () -> contexts.saveContext(loaded, request, (HttpServletResponse) res));
                       }));
       assertEquals(0, count());
-      assertNull(response.getCookie("SCHUBERT_NK_SESSION"));
+      assertNull(response.getCookie(FIXTURE_SCHUBERT_NK_SESSION_DD9EE5FF));
     }
   }
 
@@ -520,7 +533,7 @@ class SessionSecurityContextTest {
       var adapter = adapter(f);
       for (var p : List.of(USER, ADMIN)) {
         var session = adapter.createSession();
-        session.setAttribute("principal", p);
+        session.setAttribute(FIXTURE_PRINCIPAL_590C90CB, p);
         String id = session.getId();
         for (boolean failure : new boolean[] {false, true}) {
           // New repository/filter instances simulate process-local cache loss with the same DB/key.
@@ -550,12 +563,12 @@ class SessionSecurityContextTest {
         }
       }
       var expired = adapter.createSession();
-      expired.setAttribute("principal", USER);
+      expired.setAttribute(FIXTURE_PRINCIPAL_590C90CB, USER);
       String expiredId = expired.getId();
       f.clock.value = f.clock.value.plusSeconds(28801);
       assertAnonymous(adapter, cookie(expiredId));
       var corrupt = adapter.createSession();
-      corrupt.setAttribute("principal", ADMIN);
+      corrupt.setAttribute(FIXTURE_PRINCIPAL_590C90CB, ADMIN);
       try (var c = db.web();
           var s = c.createStatement()) {
         assertTrue(
@@ -571,7 +584,7 @@ class SessionSecurityContextTest {
 
   @Test
   void web075ProviderFixationAndRestoreStayBoundAcrossRequests() throws Exception {
-    for (String result : List.of("0000", "0200", "REVOKED")) {
+    for (String result : List.of(FIXTURE_0000_876EEFE0, "0200", FIXTURE_REVOKED_303CE38D)) {
       reset();
       try (var f = new Fixture(db)) {
         f.clock.value = Instant.now();
@@ -590,7 +603,12 @@ class SessionSecurityContextTest {
                 client,
                 (id, body) -> {
                   assertEquals("LGNREQ01", new String(body, 11, 8, StandardCharsets.US_ASCII));
-                  var reply = reply(id, "LGNRSP01", result.equals("0000") ? "0000" : "0200", null);
+                  var reply =
+                      reply(
+                          id,
+                          "LGNRSP01",
+                          result.equals(FIXTURE_0000_876EEFE0) ? FIXTURE_0000_876EEFE0 : "0200",
+                          null);
                   assertTrue(client.onReply(id, reply));
                   Arrays.fill(reply, (byte) 0);
                 },
@@ -608,7 +626,7 @@ class SessionSecurityContextTest {
                       reply(
                           id,
                           "GAMRSP01",
-                          result.equals("REVOKED") ? "0102" : "0000",
+                          result.equals(FIXTURE_REVOKED_303CE38D) ? "0102" : FIXTURE_0000_876EEFE0,
                           "a".repeat(64));
                   assertTrue(client.onReply(id, reply));
                   Arrays.fill(reply, (byte) 0);
@@ -626,31 +644,36 @@ class SessionSecurityContextTest {
                 (req, res) -> {
                   var r = (HttpServletRequest) req;
                   char[] secret = {'p'};
-                  var input = UsernamePasswordAuthenticationToken.unauthenticated("reader", secret);
+                  var input =
+                      UsernamePasswordAuthenticationToken.unauthenticated(
+                          FIXTURE_READER_F734AAEA, secret);
                   input.setDetails(new LoginClientAddress("127.0.0.1"));
-                  if (result.equals("REVOKED")) {
+                  if (result.equals(FIXTURE_REVOKED_303CE38D)) {
                     assertThrows(BadCredentialsException.class, () -> provider.authenticate(input));
-                    assertNull(r.getSession().getAttribute("principal"));
-                    assertEquals("02".repeat(32), r.getSession().getAttribute("csrfToken"));
+                    assertNull(r.getSession().getAttribute(FIXTURE_PRINCIPAL_590C90CB));
+                    assertEquals(
+                        "02".repeat(32), r.getSession().getAttribute(FIXTURE_CSRFTOKEN_CF3CFD11));
                     ((HttpServletResponse) res).setStatus(401);
                   } else {
                     var authenticated = provider.authenticate(input);
                     strategy.onAuthentication(authenticated, r, (HttpServletResponse) res);
                     contexts.saveContext(context(authenticated), r, (HttpServletResponse) res);
-                    assertEquals("04".repeat(32), r.getSession().getAttribute("csrfToken"));
+                    assertEquals(
+                        "04".repeat(32), r.getSession().getAttribute(FIXTURE_CSRFTOKEN_CF3CFD11));
                     ((HttpServletResponse) res).setStatus(204);
                   }
                   assertNull(input.getCredentials());
                   assertArrayEquals(new char[1], secret);
                 });
-        assertEquals(result.equals("0000") ? 0 : 1, probes.get());
+        assertEquals(result.equals(FIXTURE_0000_876EEFE0) ? 0 : 1, probes.get());
         assertEquals(0, client.pendingCount());
-        if (result.equals("REVOKED")) {
+        if (result.equals(FIXTURE_REVOKED_303CE38D)) {
           assertEquals(401, response.getStatus());
-          assertNull(response.getCookie("SCHUBERT_NK_SESSION"));
+          assertNull(response.getCookie(FIXTURE_SCHUBERT_NK_SESSION_DD9EE5FF));
         } else {
           assertEquals(204, response.getStatus());
-          var next = Objects.requireNonNull(response.getCookie("SCHUBERT_NK_SESSION"));
+          var next =
+              Objects.requireNonNull(response.getCookie(FIXTURE_SCHUBERT_NK_SESSION_DD9EE5FF));
           new WebSessionFilterFactory()
               .create(adapter)
               .doFilter(
@@ -665,7 +688,9 @@ class SessionSecurityContextTest {
                             .getAuthentication());
                     assertEquals(
                         "04".repeat(32),
-                        ((HttpServletRequest) req).getSession().getAttribute("csrfToken"));
+                        ((HttpServletRequest) req)
+                            .getSession()
+                            .getAttribute(FIXTURE_CSRFTOKEN_CF3CFD11));
                   });
         }
       }
@@ -709,7 +734,7 @@ class SessionSecurityContextTest {
   }
 
   private static Cookie cookie(String value) {
-    return new Cookie("SCHUBERT_NK_SESSION", value);
+    return new Cookie(FIXTURE_SCHUBERT_NK_SESSION_DD9EE5FF, value);
   }
 
   private static MockHttpServletRequest request(Cookie cookie) {
@@ -788,7 +813,7 @@ class SessionSecurityContextTest {
     put(wire, 177, login ? "0256000432000000000000000000688" : "0256000009000272000000000000265");
     put(wire, 208, code);
     if (login) {
-      put(wire, 256, "reader");
+      put(wire, 256, FIXTURE_READER_F734AAEA);
       put(wire, 320, "USER");
       put(wire, 325, "a".repeat(64));
       put(wire, 389, "2026090809000012320260908170000123000000000");

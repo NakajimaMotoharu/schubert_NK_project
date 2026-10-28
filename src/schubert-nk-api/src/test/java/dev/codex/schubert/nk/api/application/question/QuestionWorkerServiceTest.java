@@ -68,6 +68,10 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** AWORK001..006: real PG18 and JMS, independently literal QWK/SQL; not Linux IT/ST. */
 class QuestionWorkerServiceTest {
+  private static final String FIXTURE_SELECT_COUNT_FROM_SCHUBERT_ANSWERS_03E9AB4B =
+      "select count(*) from schubert.answers";
+  private static final String FIXTURE_SELECT_COUNT_FROM_SCHUBERT_MQ_OUTBOX_73BAB5AA =
+      "select count(*) from schubert.mq_outbox";
   private static final String FIXTURE_VM_0_0C76084A = "vm://0";
   private static final String FIXTURE_PUBLIC_FIXTURE_2BAE0C98 = "Public fixture";
   private static final String FIXTURE_PRIVATE_PROVIDER_9ABB4509 = "private-provider";
@@ -164,7 +168,7 @@ class QuestionWorkerServiceTest {
                 "select count(*) from schubert.app_logs where details::text like '%Public fixture%' or message like '%Public fixture%'"));
         worker.process(event(), delivery(2));
         assertEquals(1, calls.get());
-        assertEquals(1, h.scalar("select count(*) from schubert.answers"));
+        assertEquals(1, h.scalar(FIXTURE_SELECT_COUNT_FROM_SCHUBERT_ANSWERS_03E9AB4B));
         assertNull(consumer.receiveNoWait());
         assertArrayEquals(
             response(M0, new UUID(700, 4), "0200", RECEIPT, 1, NOW),
@@ -218,7 +222,7 @@ class QuestionWorkerServiceTest {
               },
               () -> false)
           .process(event(), delivery(1));
-      assertEquals(0, h.scalar("select count(*) from schubert.answers"));
+      assertEquals(0, h.scalar(FIXTURE_SELECT_COUNT_FROM_SCHUBERT_ANSWERS_03E9AB4B));
       assertEquals("CANCELLED", h.text(FIXTURE_SELECT_STATE_FROM_SCHUBERT_ASYNC_JOBS_E6C43F91));
       var wrong = event(new UUID(700, 99));
       assertThrows(
@@ -269,7 +273,7 @@ class QuestionWorkerServiceTest {
               },
               () -> false)
           .process(event(), delivery(2));
-      assertEquals(1, h.scalar("select count(*) from schubert.mq_outbox"));
+      assertEquals(1, h.scalar(FIXTURE_SELECT_COUNT_FROM_SCHUBERT_MQ_OUTBOX_73BAB5AA));
     }
   }
 
@@ -333,8 +337,8 @@ class QuestionWorkerServiceTest {
         assertEquals(M0.toString(), dlq.getJMSCorrelationID());
         assertEquals(7, dlq.getIntProperty("NKDeliveryCount"));
         receiving.commit();
-        assertEquals(2, h.scalar("select count(*) from schubert.mq_outbox"));
-        assertEquals(0, h.scalar("select count(*) from schubert.answers"));
+        assertEquals(2, h.scalar(FIXTURE_SELECT_COUNT_FROM_SCHUBERT_MQ_OUTBOX_73BAB5AA));
+        assertEquals(0, h.scalar(FIXTURE_SELECT_COUNT_FROM_SCHUBERT_ANSWERS_03E9AB4B));
         assertNull(consumer.receiveNoWait());
       }
     } finally {
@@ -355,7 +359,7 @@ class QuestionWorkerServiceTest {
       worker.process(event(), delivery(1));
       assertEquals(
           "PROCESS_FAILED", h.text(FIXTURE_SELECT_ERROR_CODE_FROM_SCHUBERT_NOTIFICA_8E9CC4F3));
-      assertEquals(1, h.scalar("select count(*) from schubert.mq_outbox"));
+      assertEquals(1, h.scalar(FIXTURE_SELECT_COUNT_FROM_SCHUBERT_MQ_OUTBOX_73BAB5AA));
       worker.process(event(), delivery(2));
       assertThrows(TemporaryInfrastructureException.class, () -> worker.process(event()));
       assertThrows(NullPointerException.class, () -> worker.process(null, delivery(1)));
@@ -379,7 +383,7 @@ class QuestionWorkerServiceTest {
         assertEquals(
             FIXTURE_RECEIVED_35302D54,
             h.text(FIXTURE_SELECT_STATE_FROM_SCHUBERT_ASYNC_JOBS_E6C43F91));
-        assertEquals(0, h.scalar("select count(*) from schubert.answers"));
+        assertEquals(0, h.scalar(FIXTURE_SELECT_COUNT_FROM_SCHUBERT_ANSWERS_03E9AB4B));
       }
     }
     for (String body : List.of("x".repeat(4097), "\ud800")) {
@@ -388,7 +392,7 @@ class QuestionWorkerServiceTest {
         assertEquals(
             FIXTURE_DATA_INTEGRITY_9097EAE7,
             h.text(FIXTURE_SELECT_ERROR_CODE_FROM_SCHUBERT_NOTIFICA_8E9CC4F3));
-        assertEquals(0, h.scalar("select count(*) from schubert.answers"));
+        assertEquals(0, h.scalar(FIXTURE_SELECT_COUNT_FROM_SCHUBERT_ANSWERS_03E9AB4B));
       }
     }
   }
@@ -510,7 +514,7 @@ class QuestionWorkerServiceTest {
               1,
               h.scalar(
                   "select count(*) from schubert.mq_outbox where destination='nk.dead.letter' and status='SENT' and dlq_delivery_count=4"));
-          assertEquals(0, h.scalar("select count(*) from schubert.answers"));
+          assertEquals(0, h.scalar(FIXTURE_SELECT_COUNT_FROM_SCHUBERT_ANSWERS_03E9AB4B));
           assertEquals(
               original,
               h.text(
@@ -575,7 +579,7 @@ class QuestionWorkerServiceTest {
       assertEquals(
           FIXTURE_COMPLETED_BA0AE16A,
           h.text(FIXTURE_SELECT_STATE_FROM_SCHUBERT_ASYNC_JOBS_E6C43F91));
-      assertEquals(1, h.scalar("select count(*) from schubert.answers"));
+      assertEquals(1, h.scalar(FIXTURE_SELECT_COUNT_FROM_SCHUBERT_ANSWERS_03E9AB4B));
     }
     try (var h = accepted()) {
       worker(
@@ -587,7 +591,7 @@ class QuestionWorkerServiceTest {
               },
               () -> false)
           .process(event(), delivery(1));
-      assertEquals(1, h.scalar("select count(*) from schubert.answers"));
+      assertEquals(1, h.scalar(FIXTURE_SELECT_COUNT_FROM_SCHUBERT_ANSWERS_03E9AB4B));
       assertEquals(
           1, h.scalar("select count(*) from schubert.app_logs where action='QUESTION_COMPLETED'"));
     }
@@ -608,7 +612,7 @@ class QuestionWorkerServiceTest {
           .process(event(), delivery(4));
       assertEquals(
           "PROCESS_FAILED", h.text(FIXTURE_SELECT_ERROR_CODE_FROM_SCHUBERT_NOTIFICA_8E9CC4F3));
-      assertEquals(1, h.scalar("select count(*) from schubert.mq_outbox"));
+      assertEquals(1, h.scalar(FIXTURE_SELECT_COUNT_FROM_SCHUBERT_MQ_OUTBOX_73BAB5AA));
     }
   }
 
@@ -678,7 +682,7 @@ class QuestionWorkerServiceTest {
       assertEquals(1, calls.get());
       assertEquals(
           FIXTURE_ERROR_F717E7D8, h.text(FIXTURE_SELECT_STATE_FROM_SCHUBERT_ASYNC_JOBS_E6C43F91));
-      assertEquals(0, h.scalar("select count(*) from schubert.answers"));
+      assertEquals(0, h.scalar(FIXTURE_SELECT_COUNT_FROM_SCHUBERT_ANSWERS_03E9AB4B));
     } finally {
       broker.stop();
     }
@@ -729,7 +733,7 @@ class QuestionWorkerServiceTest {
         assertEquals(
             FIXTURE_DATA_INTEGRITY_9097EAE7,
             h.text(FIXTURE_SELECT_ERROR_CODE_FROM_SCHUBERT_NOTIFICA_8E9CC4F3));
-        assertEquals(0, h.scalar("select count(*) from schubert.answers"));
+        assertEquals(0, h.scalar(FIXTURE_SELECT_COUNT_FROM_SCHUBERT_ANSWERS_03E9AB4B));
       }
     }
     try (var h = accepted()) {
@@ -760,7 +764,7 @@ class QuestionWorkerServiceTest {
             h.text(FIXTURE_SELECT_STATE_FROM_SCHUBERT_ASYNC_JOBS_E6C43F91));
         assertEquals(
             FIXTURE_PROCESSING_01F94682, h.text("select state from schubert.notifications"));
-        assertEquals(0, h.scalar("select count(*) from schubert.answers"));
+        assertEquals(0, h.scalar(FIXTURE_SELECT_COUNT_FROM_SCHUBERT_ANSWERS_03E9AB4B));
         assertEquals(
             0,
             h.scalar("select count(*) from schubert.app_logs where action='QUESTION_COMPLETED'"));
@@ -784,7 +788,7 @@ class QuestionWorkerServiceTest {
         assertEquals(
             FIXTURE_RECEIVED_35302D54,
             h.text(FIXTURE_SELECT_STATE_FROM_SCHUBERT_ASYNC_JOBS_E6C43F91));
-        assertEquals(0, h.scalar("select count(*) from schubert.answers"));
+        assertEquals(0, h.scalar(FIXTURE_SELECT_COUNT_FROM_SCHUBERT_ANSWERS_03E9AB4B));
       }
     }
     try (var h = accepted()) {
@@ -820,7 +824,7 @@ class QuestionWorkerServiceTest {
       assertEquals(
           FIXTURE_PROCESSING_01F94682,
           h.text(FIXTURE_SELECT_STATE_FROM_SCHUBERT_ASYNC_JOBS_E6C43F91));
-      assertEquals(1, h.scalar("select count(*) from schubert.mq_outbox"));
+      assertEquals(1, h.scalar(FIXTURE_SELECT_COUNT_FROM_SCHUBERT_MQ_OUTBOX_73BAB5AA));
     }
     try (var h = accepted()) {
       h.fault = "rollback";
@@ -847,7 +851,7 @@ class QuestionWorkerServiceTest {
         assertEquals(
             FIXTURE_DATA_INTEGRITY_9097EAE7,
             h.text(FIXTURE_SELECT_ERROR_CODE_FROM_SCHUBERT_NOTIFICA_8E9CC4F3));
-        assertEquals(1, h.scalar("select count(*) from schubert.answers"));
+        assertEquals(1, h.scalar(FIXTURE_SELECT_COUNT_FROM_SCHUBERT_ANSWERS_03E9AB4B));
       }
     }
   }
@@ -884,7 +888,7 @@ class QuestionWorkerServiceTest {
         var input = fault.equals("job-source-work") ? event(W, W) : event();
         assertThrows(
             PermanentProtocolException.class, () -> worker.process(input, delivery(1)), fault);
-        assertEquals(0, h.scalar("select count(*) from schubert.answers"));
+        assertEquals(0, h.scalar(FIXTURE_SELECT_COUNT_FROM_SCHUBERT_ANSWERS_03E9AB4B));
         assertNotEquals(
             FIXTURE_COMPLETED_BA0AE16A,
             h.text(FIXTURE_SELECT_STATE_FROM_SCHUBERT_ASYNC_JOBS_E6C43F91));
@@ -967,7 +971,7 @@ class QuestionWorkerServiceTest {
             h.scalar("select count(*) from schubert.mq_outbox where destination='nk.dead.letter'"));
         assertEquals(
             FIXTURE_ERROR_F717E7D8, h.text(FIXTURE_SELECT_STATE_FROM_SCHUBERT_ASYNC_JOBS_E6C43F91));
-        assertEquals(0, h.scalar("select count(*) from schubert.answers"));
+        assertEquals(0, h.scalar(FIXTURE_SELECT_COUNT_FROM_SCHUBERT_ANSWERS_03E9AB4B));
       }
     }
     for (String state : List.of(FIXTURE_PENDING_B11DB31F, "LEASED", FIXTURE_ERROR_F717E7D8)) {

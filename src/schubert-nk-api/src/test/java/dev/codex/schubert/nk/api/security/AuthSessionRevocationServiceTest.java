@@ -43,6 +43,10 @@ import org.junit.jupiter.api.io.TempDir;
  * PT.
  */
 final class AuthSessionRevocationServiceTest {
+  private static final String FIXTURE_SELECT_COUNT_FROM_SCHUBERT_AUTH_SESSIONS_247E58FA =
+      "select count(*) from schubert.auth_sessions where revoked";
+  private static final String FIXTURE_SELECT_COUNT_FROM_SCHUBERT_APP_LOGS_218A3BCD =
+      "select count(*) from schubert.app_logs";
   private static final String FIXTURE_PREPARESTATEMENT_CB987D1F = "prepareStatement";
   private static final String FIXTURE_EXECUTEQUERY_85C8C423 = "executeQuery";
   private static final String FIXTURE_ROWCLOSE_4440E762 = "rowClose";
@@ -98,8 +102,8 @@ final class AuthSessionRevocationServiceTest {
       assertEquals(NOW.plusNanos(123456000), first.revokedAt());
       assertEquals(ResultCode.SUCCESS, first.resultCode());
       assertEquals("RevokedContext[REDACTED]", first.toString());
-      assertEquals(0, count("select count(*) from schubert.auth_sessions where revoked"));
-      assertEquals(0, count("select count(*) from schubert.app_logs"));
+      assertEquals(0, count(FIXTURE_SELECT_COUNT_FROM_SCHUBERT_AUTH_SESSIONS_247E58FA));
+      assertEquals(0, count(FIXTURE_SELECT_COUNT_FROM_SCHUBERT_APP_LOGS_218A3BCD));
       connection.rollback();
       service.logout(connection, RAW, client, MESSAGE, CORRELATION, NOW);
       connection.commit();
@@ -151,8 +155,8 @@ final class AuthSessionRevocationServiceTest {
                     NOW));
         connection.rollback();
       }
-      assertEquals(0, count("select count(*) from schubert.auth_sessions where revoked"));
-      assertEquals(0, count("select count(*) from schubert.app_logs"));
+      assertEquals(0, count(FIXTURE_SELECT_COUNT_FROM_SCHUBERT_AUTH_SESSIONS_247E58FA));
+      assertEquals(0, count(FIXTURE_SELECT_COUNT_FROM_SCHUBERT_APP_LOGS_218A3BCD));
     }
     seed();
     execute(
@@ -215,7 +219,7 @@ final class AuthSessionRevocationServiceTest {
       execute("update schubert.app_users set status='DISABLED' where id=7");
       try (Connection connection = database.transaction()) {
         assertEquals(2, revokeAll(connection, 7, reason));
-        assertEquals(1, count("select count(*) from schubert.auth_sessions where revoked"));
+        assertEquals(1, count(FIXTURE_SELECT_COUNT_FROM_SCHUBERT_AUTH_SESSIONS_247E58FA));
         connection.rollback();
         assertEquals(2, revokeAll(connection, 7, reason));
         connection.commit();
@@ -258,7 +262,7 @@ final class AuthSessionRevocationServiceTest {
         else assertEquals(ResultCode.IDEMPOTENT_SUCCESS, value.resultCode());
       }
       assertEquals(1, first);
-      assertEquals(100, count("select count(*) from schubert.app_logs"));
+      assertEquals(100, count(FIXTURE_SELECT_COUNT_FROM_SCHUBERT_APP_LOGS_218A3BCD));
       assertEquals(
           99, count("select count(*) from schubert.app_logs where details->>'resultCode'='0200'"));
       seed();
@@ -327,8 +331,8 @@ final class AuthSessionRevocationServiceTest {
         assertFalse(connection.isClosed());
         connection.rollback();
       }
-      assertEquals(0, count("select count(*) from schubert.auth_sessions where revoked"));
-      assertEquals(0, count("select count(*) from schubert.app_logs"));
+      assertEquals(0, count(FIXTURE_SELECT_COUNT_FROM_SCHUBERT_AUTH_SESSIONS_247E58FA));
+      assertEquals(0, count(FIXTURE_SELECT_COUNT_FROM_SCHUBERT_APP_LOGS_218A3BCD));
     }
     execute(
         "update schubert.auth_sessions set revoked=true,revoked_at='2026-09-08T00:30:00Z',revoke_reason='ADMIN' where user_id=7");
@@ -377,8 +381,8 @@ final class AuthSessionRevocationServiceTest {
             () -> revokeAll(intercept(connection, fault), 7, SessionRevocationReason.ADMIN));
         connection.rollback();
       }
-      assertEquals(0, count("select count(*) from schubert.auth_sessions where revoked"));
-      assertEquals(0, count("select count(*) from schubert.app_logs"));
+      assertEquals(0, count(FIXTURE_SELECT_COUNT_FROM_SCHUBERT_AUTH_SESSIONS_247E58FA));
+      assertEquals(0, count(FIXTURE_SELECT_COUNT_FROM_SCHUBERT_APP_LOGS_218A3BCD));
     }
     try (Connection connection = database.transaction()) {
       assertDenied(
@@ -506,8 +510,8 @@ final class AuthSessionRevocationServiceTest {
       assertFalse(connection.isClosed());
       connection.rollback();
     }
-    assertEquals(0, count("select count(*) from schubert.auth_sessions where revoked"));
-    assertEquals(0, count("select count(*) from schubert.app_logs"));
+    assertEquals(0, count(FIXTURE_SELECT_COUNT_FROM_SCHUBERT_AUTH_SESSIONS_247E58FA));
+    assertEquals(0, count(FIXTURE_SELECT_COUNT_FROM_SCHUBERT_APP_LOGS_218A3BCD));
   }
 
   @Test
@@ -534,8 +538,8 @@ final class AuthSessionRevocationServiceTest {
         connection.rollback();
       }
     }
-    assertEquals(0, count("select count(*) from schubert.auth_sessions where revoked"));
-    assertEquals(0, count("select count(*) from schubert.app_logs"));
+    assertEquals(0, count(FIXTURE_SELECT_COUNT_FROM_SCHUBERT_AUTH_SESSIONS_247E58FA));
+    assertEquals(0, count(FIXTURE_SELECT_COUNT_FROM_SCHUBERT_APP_LOGS_218A3BCD));
   }
 
   private static int revokeAll(Connection connection, long target, SessionRevocationReason reason) {
@@ -611,8 +615,8 @@ final class AuthSessionRevocationServiceTest {
             connection.rollback();
           }
         }
-        assertEquals(0, count("select count(*) from schubert.auth_sessions where revoked"));
-        assertEquals(0, count("select count(*) from schubert.app_logs"));
+        assertEquals(0, count(FIXTURE_SELECT_COUNT_FROM_SCHUBERT_AUTH_SESSIONS_247E58FA));
+        assertEquals(0, count(FIXTURE_SELECT_COUNT_FROM_SCHUBERT_APP_LOGS_218A3BCD));
       }
     }
     seed();
@@ -641,8 +645,8 @@ final class AuthSessionRevocationServiceTest {
           connection.rollback();
         }
       }
-      assertEquals(0, count("select count(*) from schubert.auth_sessions where revoked"));
-      assertEquals(0, count("select count(*) from schubert.app_logs"));
+      assertEquals(0, count(FIXTURE_SELECT_COUNT_FROM_SCHUBERT_AUTH_SESSIONS_247E58FA));
+      assertEquals(0, count(FIXTURE_SELECT_COUNT_FROM_SCHUBERT_APP_LOGS_218A3BCD));
     }
   }
 

@@ -53,6 +53,9 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** MDB001..011. Literal role/lock oracle; actual isolated DB transaction/lock in MDB007..011. */
 final class MorningDatabaseSessionTest {
+  private static final String FIXTURE_012D_02D3076F = "%012d";
+  private static final String FIXTURE_ID_BUSINESS_DATE_STEP_ATTEMPT_STARTED_AT_F3540697 =
+      " id,business_date,step,attempt,started_at,ended_at,target_count,";
   private static final String FIXTURE_GETAUTOCOMMIT_C0200BDE = "getAutoCommit";
   private static final String FIXTURE_GETTRANSACTIONISOLATION_6ED78CE6 = "getTransactionIsolation";
   private static final String FIXTURE_RUNNING_294BDBF9 = "RUNNING";
@@ -110,7 +113,7 @@ final class MorningDatabaseSessionTest {
       int n = ++ordinal;
       var run =
           new BatchRun(
-              UUID.fromString("32560001-2222-4333-8444-" + String.format("%012d", n)),
+              UUID.fromString("32560001-2222-4333-8444-" + String.format(FIXTURE_012D_02D3076F, n)),
               Instant.parse("2058-04-09T15:00:00Z").plusSeconds((n - 1L) * 86400));
       Instant started = run.cutoff().plusSeconds(11 * 3600);
       var armed = new AtomicBoolean();
@@ -216,7 +219,7 @@ final class MorningDatabaseSessionTest {
       int n = ++ordinal;
       var run =
           new BatchRun(
-              UUID.fromString("32540001-2222-4333-8444-" + String.format("%012d", n)),
+              UUID.fromString("32540001-2222-4333-8444-" + String.format(FIXTURE_012D_02D3076F, n)),
               Instant.parse("2057-04-09T15:00:00Z").plusSeconds((n - 1L) * 86400));
       Instant started = run.cutoff().plusSeconds(11 * 3600);
       Instant ended = started.plusSeconds(2);
@@ -343,7 +346,7 @@ final class MorningDatabaseSessionTest {
       int n = ++ordinal;
       var run =
           new BatchRun(
-              UUID.fromString("28040001-2222-4333-8444-" + String.format("%012d", n)),
+              UUID.fromString("28040001-2222-4333-8444-" + String.format(FIXTURE_012D_02D3076F, n)),
               Instant.parse("2052-03-09T15:00:00Z").plusSeconds((n - 1L) * 86400));
       var started = run.cutoff().plusSeconds(11 * 3600);
       long id = 28040010L + n * 10;
@@ -369,7 +372,7 @@ final class MorningDatabaseSessionTest {
                               || !((String) args[0])
                                   .startsWith(
                                       FIXTURE_SELECT_8DAC6259
-                                          + " id,business_date,step,attempt,started_at,ended_at,target_count,"))
+                                          + FIXTURE_ID_BUSINESS_DATE_STEP_ATTEMPT_STARTED_AT_F3540697))
                             return value;
                           var statement = (PreparedStatement) value;
                           return Proxy.newProxyInstance(
@@ -459,7 +462,7 @@ final class MorningDatabaseSessionTest {
       int n = ++ordinal;
       var run =
           new BatchRun(
-              UUID.fromString("27960001-2222-4333-8444-" + String.format("%012d", n)),
+              UUID.fromString("27960001-2222-4333-8444-" + String.format(FIXTURE_012D_02D3076F, n)),
               Instant.parse("2052-02-09T15:00:00Z").plusSeconds((n - 1L) * 86400));
       var started = run.cutoff().plusSeconds(11 * 3600);
       var currentStart = started.plusSeconds(10);
@@ -584,7 +587,7 @@ final class MorningDatabaseSessionTest {
       int n = ++ordinal;
       var run =
           new BatchRun(
-              UUID.fromString("27920001-2222-4333-8444-" + String.format("%012d", n)),
+              UUID.fromString("27920001-2222-4333-8444-" + String.format(FIXTURE_012D_02D3076F, n)),
               Instant.parse("2052-01-09T15:00:00Z").plusSeconds((n - 1L) * 86400));
       var started = run.cutoff().plusSeconds(11 * 3600);
       long id = 27920010L + n * 10;
@@ -608,7 +611,7 @@ final class MorningDatabaseSessionTest {
                               || !((String) args[0])
                                   .startsWith(
                                       FIXTURE_SELECT_8DAC6259
-                                          + " id,business_date,step,attempt,started_at,ended_at,target_count,"))
+                                          + FIXTURE_ID_BUSINESS_DATE_STEP_ATTEMPT_STARTED_AT_F3540697))
                             return value;
                           var statement = (PreparedStatement) value;
                           if (fault.equals(FIXTURE_STATEMENT_8A602677)) {
@@ -658,7 +661,7 @@ final class MorningDatabaseSessionTest {
       int n = ++ordinal;
       var run =
           new BatchRun(
-              UUID.fromString("27880001-2222-4333-8444-" + String.format("%012d", n)),
+              UUID.fromString("27880001-2222-4333-8444-" + String.format(FIXTURE_012D_02D3076F, n)),
               Instant.parse("2051-04-09T15:00:00Z").plusSeconds((n - 1L) * 86400));
       var started = run.cutoff().plusSeconds(11 * 3600);
       var observed = started.plusSeconds(3600);
@@ -686,7 +689,7 @@ final class MorningDatabaseSessionTest {
                               || !((String) args[0])
                                   .startsWith(
                                       FIXTURE_SELECT_8DAC6259
-                                          + " id,business_date,step,attempt,started_at,ended_at,target_count,"))
+                                          + FIXTURE_ID_BUSINESS_DATE_STEP_ATTEMPT_STARTED_AT_F3540697))
                             return value;
                           var statement = (PreparedStatement) value;
                           return Proxy.newProxyInstance(
@@ -742,7 +745,7 @@ final class MorningDatabaseSessionTest {
       int n = ++ordinal;
       var run =
           new BatchRun(
-              UUID.fromString("27840001-2222-4333-8444-" + String.format("%012d", n)),
+              UUID.fromString("27840001-2222-4333-8444-" + String.format(FIXTURE_012D_02D3076F, n)),
               Instant.parse("2051-03-09T15:00:00Z").plusSeconds((n - 1L) * 86400));
       var started = run.cutoff().plusSeconds(11 * 3600);
       var observed = started.plusSeconds(3600);
@@ -912,7 +915,7 @@ final class MorningDatabaseSessionTest {
       int n = ++ordinal;
       var run =
           new BatchRun(
-              UUID.fromString("27800001-2222-4333-8444-" + String.format("%012d", n)),
+              UUID.fromString("27800001-2222-4333-8444-" + String.format(FIXTURE_012D_02D3076F, n)),
               Instant.parse("2051-02-09T15:00:00Z").plusSeconds((n - 1L) * 86400));
       var started = run.cutoff().plusSeconds(11 * 3600);
       var observed = started.plusSeconds(3600);
@@ -998,7 +1001,7 @@ final class MorningDatabaseSessionTest {
       int n = ++ordinal;
       var run =
           new BatchRun(
-              UUID.fromString("27620001-2222-4333-8444-" + String.format("%012d", n)),
+              UUID.fromString("27620001-2222-4333-8444-" + String.format(FIXTURE_012D_02D3076F, n)),
               Instant.parse("2050-04-09T15:00:00Z").plusSeconds((n - 1L) * 86400));
       var started = run.cutoff().plusSeconds(11 * 3600);
       var ended = started.plusSeconds(3);
@@ -1082,7 +1085,7 @@ final class MorningDatabaseSessionTest {
       int n = ++ordinal;
       var run =
           new BatchRun(
-              UUID.fromString("27580001-2222-4333-8444-" + String.format("%012d", n)),
+              UUID.fromString("27580001-2222-4333-8444-" + String.format(FIXTURE_012D_02D3076F, n)),
               Instant.parse("2050-03-09T15:00:00Z").plusSeconds((n - 1L) * 86400));
       var started = run.cutoff().plusSeconds(11 * 3600);
       var observed = started.plusSeconds(3600);
@@ -1301,7 +1304,7 @@ final class MorningDatabaseSessionTest {
       int n = ++ordinal;
       var run =
           new BatchRun(
-              UUID.fromString("25940001-2222-4333-8444-" + String.format("%012d", n)),
+              UUID.fromString("25940001-2222-4333-8444-" + String.format(FIXTURE_012D_02D3076F, n)),
               Instant.parse("2047-01-09T15:00:00Z").plusSeconds((n - 1L) * 86400));
       var started = run.cutoff().plusSeconds(11 * 3600);
       var observed = started.plusSeconds(3600);
@@ -1367,7 +1370,7 @@ final class MorningDatabaseSessionTest {
       int n = ++ordinal;
       var run =
           new BatchRun(
-              UUID.fromString("25920001-2222-4333-8444-" + String.format("%012d", n)),
+              UUID.fromString("25920001-2222-4333-8444-" + String.format(FIXTURE_012D_02D3076F, n)),
               Instant.parse("2046-01-09T15:00:00Z").plusSeconds((n - 1L) * 86400));
       var started = run.cutoff().plusSeconds(11 * 3600);
       var observed = started.plusSeconds(3600);
@@ -1391,7 +1394,7 @@ final class MorningDatabaseSessionTest {
                                   && ((String) args[0])
                                       .startsWith(
                                           FIXTURE_SELECT_8DAC6259
-                                              + " id,business_date,step,attempt,started_at,ended_at,target_count,");
+                                              + FIXTURE_ID_BUSINESS_DATE_STEP_ATTEMPT_STARTED_AT_F3540697);
                           boolean identity =
                               method.getName().equals(FIXTURE_PREPARESTATEMENT_CB987D1F)
                                   && ((String) args[0]).contains("maintenance_read_run_references");
@@ -1491,7 +1494,8 @@ final class MorningDatabaseSessionTest {
         int n = ++ordinal;
         var run =
             new BatchRun(
-                UUID.fromString("25900001-2222-4333-8444-" + String.format("%012d", n)),
+                UUID.fromString(
+                    "25900001-2222-4333-8444-" + String.format(FIXTURE_012D_02D3076F, n)),
                 Instant.parse("2045-01-09T15:00:00Z").plusSeconds((n - 1L) * 86400));
         var started = run.cutoff().plusSeconds(11 * 3600);
         var observed = started.plusSeconds(3600);
@@ -1657,7 +1661,7 @@ final class MorningDatabaseSessionTest {
       int n = ++ordinal;
       var run =
           new BatchRun(
-              UUID.fromString("25880001-2222-4333-8444-" + String.format("%012d", n)),
+              UUID.fromString("25880001-2222-4333-8444-" + String.format(FIXTURE_012D_02D3076F, n)),
               Instant.parse("2044-01-09T15:00:00Z").plusSeconds((n - 1L) * 86400));
       var started = run.cutoff().plusSeconds(11 * 3600);
       var observed = started.plusSeconds(3600);
@@ -1780,7 +1784,7 @@ final class MorningDatabaseSessionTest {
       int n = ++ordinal;
       var run =
           new BatchRun(
-              UUID.fromString("25720001-2222-4333-8444-" + String.format("%012d", n)),
+              UUID.fromString("25720001-2222-4333-8444-" + String.format(FIXTURE_012D_02D3076F, n)),
               Instant.parse("2043-01-09T15:00:00Z").plusSeconds((n - 1L) * 86400));
       var started = run.cutoff().plusSeconds(11 * 3600);
       var observed = started.plusSeconds(3600);
@@ -1895,7 +1899,8 @@ final class MorningDatabaseSessionTest {
         int n = ++ordinal;
         var run =
             new BatchRun(
-                UUID.fromString("25700001-2222-4333-8444-" + String.format("%012d", n)),
+                UUID.fromString(
+                    "25700001-2222-4333-8444-" + String.format(FIXTURE_012D_02D3076F, n)),
                 Instant.parse("2042-01-09T15:00:00Z").plusSeconds((n - 1L) * 86400));
         var started = run.cutoff().plusSeconds(11 * 3600);
         var ended = started.plusSeconds(3);
@@ -2051,7 +2056,7 @@ final class MorningDatabaseSessionTest {
       int n = ++ordinal;
       var run =
           new BatchRun(
-              UUID.fromString("25680001-2222-4333-8444-" + String.format("%012d", n)),
+              UUID.fromString("25680001-2222-4333-8444-" + String.format(FIXTURE_012D_02D3076F, n)),
               Instant.parse("2041-01-09T15:00:00Z").plusSeconds((n - 1L) * 86400));
       var oldStart = run.cutoff().plusSeconds(11 * 3600);
       var freshStart = oldStart.plusSeconds(10);
@@ -2242,7 +2247,8 @@ final class MorningDatabaseSessionTest {
     for (String mode : List.of("VALID", "MISSING", "DRIFT", "ORIGINAL_EMPTY")) {
       var run =
           new BatchRun(
-              UUID.fromString("24900001-2222-4333-8444-" + String.format("%012d", ++n)),
+              UUID.fromString(
+                  "24900001-2222-4333-8444-" + String.format(FIXTURE_012D_02D3076F, ++n)),
               Instant.parse("2036-01-09T15:00:00Z").plusSeconds((n - 1L) * 86400));
       var started = Instant.parse("2036-01-10T02:00:00Z").plusSeconds((n - 1L) * 86400);
       long id = 24900010L + n * 10;
@@ -2322,7 +2328,8 @@ final class MorningDatabaseSessionTest {
     for (String mode : List.of("FIRST_MISSING", "SECOND_MISSING", "EXTRA")) {
       var run =
           new BatchRun(
-              UUID.fromString("24900002-2222-4333-8444-" + String.format("%012d", ++n)),
+              UUID.fromString(
+                  "24900002-2222-4333-8444-" + String.format(FIXTURE_012D_02D3076F, ++n)),
               Instant.parse("2036-02-09T15:00:00Z").plusSeconds((n - 1L) * 86400));
       var started = Instant.parse("2036-02-10T02:00:00Z").plusSeconds((n - 1L) * 86400);
       var retained = new AtomicReference<Connection>();
@@ -2466,7 +2473,8 @@ final class MorningDatabaseSessionTest {
     for (String operation : List.of("OBSERVE", "RETENTION")) {
       var run =
           new BatchRun(
-              UUID.fromString("24860001-2222-4333-8444-" + String.format("%012d", ++n)),
+              UUID.fromString(
+                  "24860001-2222-4333-8444-" + String.format(FIXTURE_012D_02D3076F, ++n)),
               Instant.parse("2035-01-09T15:00:00Z").plusSeconds((n - 1L) * 86400));
       var started = Instant.parse("2035-01-10T02:00:00Z").plusSeconds((n - 1L) * 86400);
       var retained = new AtomicReference<Connection>();
@@ -2515,7 +2523,8 @@ final class MorningDatabaseSessionTest {
     for (String fault : List.of(FIXTURE_SUCCESS_10855C7F, "END", "REASON")) {
       var run =
           new BatchRun(
-              UUID.fromString("24860002-2222-4333-8444-" + String.format("%012d", ++n)),
+              UUID.fromString(
+                  "24860002-2222-4333-8444-" + String.format(FIXTURE_012D_02D3076F, ++n)),
               Instant.parse("2035-02-09T15:00:00Z").plusSeconds((n - 1L) * 86400));
       var started = Instant.parse("2035-02-10T02:00:00Z").plusSeconds((n - 1L) * 86400);
       var retained = new AtomicReference<Connection>();
@@ -2651,7 +2660,8 @@ final class MorningDatabaseSessionTest {
         List.of("OBSERVE_SQL", "RETENTION_SQL", "FAIL_SQL", "ABANDON_SQL", "EXPIRED")) {
       var run =
           new BatchRun(
-              UUID.fromString("24820001-2222-4333-8444-" + String.format("%012d", ++n)),
+              UUID.fromString(
+                  "24820001-2222-4333-8444-" + String.format(FIXTURE_012D_02D3076F, ++n)),
               Instant.parse("2034-01-09T15:00:00Z").plusSeconds((n - 1L) * 86400));
       var started = Instant.parse("2034-01-10T02:00:00Z").plusSeconds((n - 1L) * 86400);
       var ended = started.plusSeconds(3);
@@ -2736,7 +2746,8 @@ final class MorningDatabaseSessionTest {
     for (String fault : List.of("DATABASE", "CONFIGURATION", "FAILED_PAIR")) {
       var run =
           new BatchRun(
-              UUID.fromString("24820002-2222-4333-8444-" + String.format("%012d", ++n)),
+              UUID.fromString(
+                  "24820002-2222-4333-8444-" + String.format(FIXTURE_012D_02D3076F, ++n)),
               Instant.parse("2034-02-09T15:00:00Z").plusSeconds((n - 1L) * 86400));
       var started = Instant.parse("2034-02-10T02:00:00Z").plusSeconds((n - 1L) * 86400);
       var ended = started.plusSeconds(3);
@@ -3070,7 +3081,8 @@ final class MorningDatabaseSessionTest {
     for (String fault : List.of("AUTO", "READONLY", "ISOLATION", "HELD")) {
       var run =
           new BatchRun(
-              UUID.fromString("22920001-2222-4333-8444-" + String.format("%012d", ++index)),
+              UUID.fromString(
+                  "22920001-2222-4333-8444-" + String.format(FIXTURE_012D_02D3076F, ++index)),
               Instant.parse("2031-01-09T15:00:00Z").plusSeconds((index - 1L) * 86400));
       var started = Instant.parse("2031-01-10T02:00:00Z").plusSeconds((index - 1L) * 86400);
       var drift = new AtomicReference<String>("");
@@ -3109,7 +3121,8 @@ final class MorningDatabaseSessionTest {
     for (String fault : List.of("AUTO", "READONLY", "HELD")) {
       var run =
           new BatchRun(
-              UUID.fromString("22920002-2222-4333-8444-" + String.format("%012d", ++index)),
+              UUID.fromString(
+                  "22920002-2222-4333-8444-" + String.format(FIXTURE_012D_02D3076F, ++index)),
               Instant.parse("2031-02-02T15:00:00Z").plusSeconds((index - 1L) * 86400));
       var started = Instant.parse("2031-02-03T02:00:00Z").plusSeconds((index - 1L) * 86400);
       var ended = started.plusSeconds(3);
@@ -3175,7 +3188,8 @@ final class MorningDatabaseSessionTest {
     for (String fault : List.of("AUTO", "READONLY", "HELD")) {
       var run =
           new BatchRun(
-              UUID.fromString("24020001-2222-4333-8444-" + String.format("%012d", ++index)),
+              UUID.fromString(
+                  "24020001-2222-4333-8444-" + String.format(FIXTURE_012D_02D3076F, ++index)),
               Instant.parse("2032-01-09T15:00:00Z").plusSeconds((index - 1L) * 86400));
       var started = Instant.parse("2032-01-10T02:00:00Z").plusSeconds((index - 1L) * 86400);
       var ended = started.plusSeconds(3);

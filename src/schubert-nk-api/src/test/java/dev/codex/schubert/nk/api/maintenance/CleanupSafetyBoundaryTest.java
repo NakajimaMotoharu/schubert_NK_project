@@ -31,6 +31,10 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** NK-DAT-001; PT-DB-INBOX-089..096; UI251; SS331/332/341; SSC-050; BUG-092/093. */
 final class CleanupSafetyBoundaryTest {
+  private static final String FIXTURE_0_0_0_OK_B39BA730 = "0|0|0|OK";
+  private static final String FIXTURE_0_0_0_BACKUP_GATE_CEDCE044 = "0|0|0|BACKUP_GATE";
+  private static final String FIXTURE_2_2_0_OK_D3DDE7F1 = "2|2|0|OK";
+  private static final String FIXTURE_VALUES_BD6696AD = " values(";
   private static final String FIXTURE_NOTIFICATIONS_49C51E6A = "notifications";
   private static final String FIXTURE_QUESTIONS_BAB06435 = "questions";
   private static final String FIXTURE_SESSIONS_7E0AF933 = "sessions";
@@ -104,7 +108,7 @@ final class CleanupSafetyBoundaryTest {
     try (var c = db.admin()) {
       c.setAutoCommit(false);
       for (String name : NAMES) {
-        assertEquals("0|0|0|OK", call(c, name, START, 1));
+        assertEquals(FIXTURE_0_0_0_OK_B39BA730, call(c, name, START, 1));
         for (String step : List.of("BACKUP_DB", FIXTURE_BACKUP_CONFIG_8386D7E7))
           for (String mutation :
               List.of(
@@ -125,7 +129,9 @@ final class CleanupSafetyBoundaryTest {
                     "select md5(string_agg(row_to_json(b)::text,',' order by id)) from"
                         + " schubert.batch_runs b");
             assertEquals(
-                "0|0|0|BACKUP_GATE", call(c, name, START, 1), name + ":" + step + ":" + mutation);
+                FIXTURE_0_0_0_BACKUP_GATE_CEDCE044,
+                call(c, name, START, 1),
+                name + ":" + step + ":" + mutation);
             assertEquals(
                 before,
                 scalar(
@@ -143,10 +149,14 @@ final class CleanupSafetyBoundaryTest {
               migrations().resolve("V006__cleanup_null_bounds_and_outbox_retention.sql")));
       sql(c, "update schubert.batch_runs set business_date='2026-09-16',ended_at=null");
       for (String name : NAMES.subList(0, 5))
-        assertEquals("0|0|0|OK", call(c, name, START, 1), "BUG-092 legacy counterexample " + name);
+        assertEquals(
+            FIXTURE_0_0_0_OK_B39BA730,
+            call(c, name, START, 1),
+            "BUG-092 legacy counterexample " + name);
       c.rollback(save);
       sql(c, "update schubert.batch_runs set business_date='2026-09-16',ended_at=null");
-      for (String name : NAMES) assertEquals("0|0|0|BACKUP_GATE", call(c, name, START, 1));
+      for (String name : NAMES)
+        assertEquals(FIXTURE_0_0_0_BACKUP_GATE_CEDCE044, call(c, name, START, 1));
       c.rollback();
     }
   }
@@ -162,7 +172,7 @@ final class CleanupSafetyBoundaryTest {
         assertEquals("0|0|0|LOCK_BUSY", call(caller, name, START, 1));
         owner.rollback();
         caller.rollback();
-        assertEquals("0|0|0|OK", call(caller, name, START, 1));
+        assertEquals(FIXTURE_0_0_0_OK_B39BA730, call(caller, name, START, 1));
         for (String step : List.of("BACKUP_DB", FIXTURE_BACKUP_CONFIG_8386D7E7)) {
           var save = owner.setSavepoint();
           assertEquals(
@@ -202,8 +212,8 @@ final class CleanupSafetyBoundaryTest {
         } finally {
           writer.commit();
         }
-        assertEquals("0|0|0|BACKUP_GATE", result.get(5, TimeUnit.SECONDS));
-        assertEquals("0|0|0|OK", call(caller, name, START, 1));
+        assertEquals(FIXTURE_0_0_0_BACKUP_GATE_CEDCE044, result.get(5, TimeUnit.SECONDS));
+        assertEquals(FIXTURE_0_0_0_OK_B39BA730, call(caller, name, START, 1));
       }
     }
   }
@@ -232,9 +242,11 @@ final class CleanupSafetyBoundaryTest {
                   .getSQLState());
         for (String zone : List.of("UTC", "America/Los_Angeles", "Asia/Tokyo")) {
           sql(c, "set timezone='" + zone + "'");
-          assertEquals("0|0|0|OK", call(c, name, "'2026-09-16 17:00:00-07'::timestamptz", max));
           assertEquals(
-              "0|0|0|BACKUP_GATE",
+              FIXTURE_0_0_0_OK_B39BA730,
+              call(c, name, "'2026-09-16 17:00:00-07'::timestamptz", max));
+          assertEquals(
+              FIXTURE_0_0_0_BACKUP_GATE_CEDCE044,
               call(c, name, "'2026-09-16 14:59:59.999999+00'::timestamptz", 1));
         }
       }
@@ -360,9 +372,9 @@ final class CleanupSafetyBoundaryTest {
       sql(c, "drop trigger pt_cleanup_failure on schubert.app_logs");
       sql(c, "drop function schubert.pt_cleanup_failure()");
       c.commit();
-      assertEquals("2|2|0|OK", call(caller, FIXTURE_LOGS_A0526482, START, 10000));
+      assertEquals(FIXTURE_2_2_0_OK_D3DDE7F1, call(caller, FIXTURE_LOGS_A0526482, START, 10000));
       caller.commit();
-      assertEquals("0|0|0|OK", call(caller, FIXTURE_LOGS_A0526482, START, 10000));
+      assertEquals(FIXTURE_0_0_0_OK_B39BA730, call(caller, FIXTURE_LOGS_A0526482, START, 10000));
       caller.rollback();
     }
   }
@@ -401,7 +413,7 @@ final class CleanupSafetyBoundaryTest {
       question(c, 30, false, FIXTURE_NULL_F072CBEC);
       question(c, 31, true, START);
       question(c, 32, true, "'2026-09-17 00:00:00.000001+00'");
-      assertEquals("0|0|0|OK", call(c, FIXTURE_QUESTIONS_BAB06435, START, 1000));
+      assertEquals(FIXTURE_0_0_0_OK_B39BA730, call(c, FIXTURE_QUESTIONS_BAB06435, START, 1000));
       c.rollback();
 
       for (int i = 1; i <= 3; i++) {
@@ -452,7 +464,7 @@ final class CleanupSafetyBoundaryTest {
                 + webExpiry
                 + ",28800,0)");
       }
-      assertEquals("2|2|0|OK", call(c, FIXTURE_SESSIONS_7E0AF933, START, 2));
+      assertEquals(FIXTURE_2_2_0_OK_D3DDE7F1, call(c, FIXTURE_SESSIONS_7E0AF933, START, 2));
       assertEquals(
           "1|3|3",
           scalar(
@@ -469,7 +481,7 @@ final class CleanupSafetyBoundaryTest {
                   + " schubert.login_ip_attempts)||'|'||(select count(*) from"
                   + " schubert_web_session.web_http_sessions)"));
       assertEquals("1|1|0|OK", call(c, FIXTURE_SESSIONS_7E0AF933, START, 1000));
-      assertEquals("0|0|0|OK", call(c, FIXTURE_SESSIONS_7E0AF933, START, 1000));
+      assertEquals(FIXTURE_0_0_0_OK_B39BA730, call(c, FIXTURE_SESSIONS_7E0AF933, START, 1000));
       // Independent revocation/lock-window matrix, not just expiry.
       for (String time :
           List.of(
@@ -488,7 +500,8 @@ final class CleanupSafetyBoundaryTest {
                 + time);
         boolean expired = !time.contains(".000001");
         assertEquals(
-            expired ? "2|2|0|OK" : "0|0|0|OK", call(c, FIXTURE_SESSIONS_7E0AF933, START, 1000));
+            expired ? FIXTURE_2_2_0_OK_D3DDE7F1 : FIXTURE_0_0_0_OK_B39BA730,
+            call(c, FIXTURE_SESSIONS_7E0AF933, START, 1000));
         assertEquals(
             expired ? "0|0|1" : "1|1|1",
             scalar(
@@ -503,7 +516,7 @@ final class CleanupSafetyBoundaryTest {
           "update schubert.login_ip_attempts set"
               + " window_started_at='2026-09-17',locked_until='2026-09-01'");
       assertEquals(
-          "0|0|0|OK",
+          FIXTURE_0_0_0_OK_B39BA730,
           call(c, FIXTURE_SESSIONS_7E0AF933, START, 1000),
           "active window protects even when old lock expired");
       c.rollback();
@@ -525,11 +538,11 @@ final class CleanupSafetyBoundaryTest {
       assertEquals("4|3|1|OK", call(c, FIXTURE_LOGS_A0526482, START, 10000));
       assertEquals("2,3,4,7", ids(c, FIXTURE_APP_LOGS_EDF74EC8));
       assertEquals(
-          "0|0|0|OK",
+          FIXTURE_0_0_0_OK_B39BA730,
           call(c, FIXTURE_LOGS_A0526482, START, 10000)); // SSC-051: hold already counted.
       c.rollback(save);
       assertEquals("1,2,3,4,5,6,7", ids(c, FIXTURE_APP_LOGS_EDF74EC8));
-      assertEquals("2|2|0|OK", call(c, FIXTURE_LOGS_A0526482, START, 2));
+      assertEquals(FIXTURE_2_2_0_OK_D3DDE7F1, call(c, FIXTURE_LOGS_A0526482, START, 2));
       assertEquals("1,2,3,4,7", ids(c, FIXTURE_APP_LOGS_EDF74EC8));
       c.rollback(save);
       sql(
@@ -562,11 +575,11 @@ final class CleanupSafetyBoundaryTest {
       history(c, 111, 111, "SKIPPED", "'2025-08-01'");
       history(c, 112, 81, FIXTURE_SUCCESS_10855C7F, "'2025-08-01'");
       var save = c.setSavepoint();
-      assertEquals("2|2|0|OK", call(c, FIXTURE_BATCH_RUNS_5CA9ABAD, START, 2));
+      assertEquals(FIXTURE_2_2_0_OK_D3DDE7F1, call(c, FIXTURE_BATCH_RUNS_5CA9ABAD, START, 2));
       assertEquals("101,102,103,104,105,106,107,108,109,112", historyIds(c));
       assertEquals("1|1|0|OK", call(c, FIXTURE_BATCH_RUNS_5CA9ABAD, START, 1000));
       assertEquals("102,103,104,105,106,107,108,109,112", historyIds(c));
-      assertEquals("0|0|0|OK", call(c, FIXTURE_BATCH_RUNS_5CA9ABAD, START, 1000));
+      assertEquals(FIXTURE_0_0_0_OK_B39BA730, call(c, FIXTURE_BATCH_RUNS_5CA9ABAD, START, 1000));
       c.rollback(save);
       sql(
           c,
@@ -654,7 +667,7 @@ final class CleanupSafetyBoundaryTest {
         c,
         FIXTURE_INSERT_INTO_1D1568AF
             + " schubert.app_logs(id,logged_at,service,category,level,action,message,security_hold_until)"
-            + " values("
+            + FIXTURE_VALUES_BD6696AD
             + id
             + ","
             + at
@@ -669,7 +682,7 @@ final class CleanupSafetyBoundaryTest {
         c,
         FIXTURE_INSERT_INTO_1D1568AF
             + " schubert.batch_runs(id,run_id,business_date,step,attempt,started_at,ended_at,status)"
-            + " values("
+            + FIXTURE_VALUES_BD6696AD
             + id
             + ",'"
             + new UUID(0, run)
@@ -688,7 +701,7 @@ final class CleanupSafetyBoundaryTest {
         c,
         FIXTURE_INSERT_INTO_1D1568AF
             + " schubert.questions(id,receipt_id,owner_user_id,body,operation_token,submitted_at,is_deleted,deleted_at,deleted_by)"
-            + " values("
+            + FIXTURE_VALUES_BD6696AD
             + id
             + ",lpad('"
             + id
@@ -709,7 +722,7 @@ final class CleanupSafetyBoundaryTest {
         c,
         FIXTURE_INSERT_INTO_1D1568AF
             + " schubert.async_jobs(id,question_id,owner_user_id,state,message_id,correlation_id,received_at,state_changed_at)"
-            + " values("
+            + FIXTURE_VALUES_BD6696AD
             + id
             + ","
             + id
@@ -725,7 +738,7 @@ final class CleanupSafetyBoundaryTest {
         c,
         FIXTURE_INSERT_INTO_1D1568AF
             + " schubert.notifications(id,job_id,question_id,owner_user_id,notification_type,state,accepted_at,state_changed_at,error_code,error_message,created_at,updated_at)"
-            + " values("
+            + FIXTURE_VALUES_BD6696AD
             + id
             + ","
             + id

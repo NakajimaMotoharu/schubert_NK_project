@@ -67,6 +67,7 @@ import org.springframework.session.web.http.SessionRepositoryFilter;
 
 /** NK-WEB-001/PT-WEB-158..165; UI221/222/226/232; SS313/314/351/352; SSC-048/PG-D-117. */
 class ApiSessionInvalidTest {
+  private static final String FIXTURE_LOGIN_SESSION_EXPIRED_FE785E22 = "/login?session-expired";
   private static final String EXPECTED_AUTHORITY_USER = "ROLE_USER";
   private static final String EXPECTED_AUTHORITY_ADMIN = "ROLE_ADMIN";
 
@@ -284,7 +285,8 @@ class ApiSessionInvalidTest {
                     && (ajax == null || ajax.equals("ordinary"));
             assertEquals(navigate ? 302 : 401, s.getStatus());
             assertEquals(
-                navigate ? "/login?session-expired" : null, s.getHeader(FIXTURE_LOCATION_FB077BAD));
+                navigate ? FIXTURE_LOGIN_SESSION_EXPIRED_FE785E22 : null,
+                s.getHeader(FIXTURE_LOCATION_FB077BAD));
             assertNull(s.getErrorMessage());
             assertTrue(session.isInvalid());
             cleared(r);
@@ -340,7 +342,7 @@ class ApiSessionInvalidTest {
             assertNull(request.getSession(false));
           });
       assertEquals(302, s.getStatus());
-      assertEquals("/login?session-expired", s.getHeader(FIXTURE_LOCATION_FB077BAD));
+      assertEquals(FIXTURE_LOGIN_SESSION_EXPIRED_FE785E22, s.getHeader(FIXTURE_LOCATION_FB077BAD));
       expiredCookie(s.getHeader("Set-Cookie"));
       assertTrue(h.f.repository.find(original.sessionId()).isEmpty());
       assertEquals(
@@ -368,7 +370,7 @@ class ApiSessionInvalidTest {
               true);
       assertEquals(302, expired.statusCode());
       assertEquals(
-          "/login?session-expired",
+          FIXTURE_LOGIN_SESSION_EXPIRED_FE785E22,
           expired.headers().firstValue(FIXTURE_LOCATION_1D147FF5).orElseThrow());
       expiredCookie(expired.headers().firstValue(FIXTURE_SET_COOKIE_39067BC9).orElseThrow());
       assertEquals(0, count(FIXTURE_WEB_HTTP_SESSIONS_9FBADB41));
@@ -615,7 +617,7 @@ class ApiSessionInvalidTest {
                           true);
                   assertEquals(302, response.statusCode());
                   assertEquals(
-                      "/login?session-expired",
+                      FIXTURE_LOGIN_SESSION_EXPIRED_FE785E22,
                       response.headers().firstValue(FIXTURE_LOCATION_1D147FF5).orElseThrow());
                   expiredCookie(
                       response.headers().firstValue(FIXTURE_SET_COOKIE_39067BC9).orElseThrow());

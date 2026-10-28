@@ -15,6 +15,7 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** NK-OPS-001; RD SYS-002/004, OPS-009; UI212/231/243/251/253; SS342/343; PG269/274/277. */
 final class ApplicationServiceUnitTest {
+  private static final String FIXTURE_EXECSTART_5DA1718B = "ExecStart=";
   private static final String FIXTURE_API_63E3A42F = "api";
   private static final String FIXTURE_WEB_BDE14896 = "web";
   private static final Path ROOT = Path.of(System.getProperty("nk.pt.repository"));
@@ -85,7 +86,8 @@ final class ApplicationServiceUnitTest {
       exact(unit, "SendSIGKILL", "no");
       exact(unit, "NoNewPrivileges", "true");
       exact(unit, "RestrictAddressFamilies", "AF_UNIX AF_INET AF_INET6");
-      assertEquals(1, unit.lines().filter(line -> line.startsWith("ExecStart=")).count());
+      assertEquals(
+          1, unit.lines().filter(line -> line.startsWith(FIXTURE_EXECSTART_5DA1718B)).count());
       assertEquals(5, unit.lines().filter(line -> line.startsWith("LoadCredential=")).count());
     }
   }
@@ -97,7 +99,10 @@ final class ApplicationServiceUnitTest {
       Path directory = Files.createDirectory(temporary.resolve(service));
       String unit = read(name);
       String executable =
-          unit.lines().filter(line -> line.startsWith("ExecStart=")).findFirst().orElseThrow();
+          unit.lines()
+              .filter(line -> line.startsWith(FIXTURE_EXECSTART_5DA1718B))
+              .findFirst()
+              .orElseThrow();
       Files.writeString(
           directory.resolve(name + ".service"),
           unit.replace(executable, "ExecStart=/bin/true")
@@ -212,12 +217,15 @@ final class ApplicationServiceUnitTest {
         "CAP_SETUID CAP_SETGID CAP_SETPCAP CAP_SYS_PTRACE CAP_DAC_READ_SEARCH");
     assertTrue(
         unit.lines()
-            .filter(line -> line.startsWith("ExecStart="))
+            .filter(line -> line.startsWith(FIXTURE_EXECSTART_5DA1718B))
             .findFirst()
             .orElseThrow()
             .startsWith("ExecStart=!/usr/bin/java "));
     String command =
-        unit.lines().filter(line -> line.startsWith("ExecStart=")).findFirst().orElseThrow();
+        unit.lines()
+            .filter(line -> line.startsWith(FIXTURE_EXECSTART_5DA1718B))
+            .findFirst()
+            .orElseThrow();
     for (String fixed :
         List.of(
             "/usr/bin/java",

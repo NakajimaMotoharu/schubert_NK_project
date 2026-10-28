@@ -49,6 +49,11 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** Literal DB expected states/triples; borrowed transaction and real row-lock competition. */
 final class QuestionCommandServiceTest {
+  private static final String FIXTURE_SELECT_QUESTION_ID_STATE_65A5F7F4 =
+      "select question_id,state";
+  private static final String FIXTURE_SELECT_JOB_ID_QUESTION_ID_8C6722E3 =
+      "select job_id,question_id";
+  private static final String FIXTURE_SELECT_ID_OWNER_USER_ID_826E757A = "select id,owner_user_id";
   private static final String FIXTURE_SELECT_JOB_ID_FROM_ADCFB595 = "select job_id from";
   private static final String FIXTURE_JOB_ID_CBE51A52 = "job_id";
   private static final String FIXTURE_NULL_F072CBEC = "null";
@@ -468,30 +473,79 @@ final class QuestionCommandServiceTest {
                 FIXTURE_NULL_F072CBEC,
                 6),
             new Shape(true, FIXTURE_SELECT_JOB_ID_FROM_ADCFB595, "", FIXTURE_DUPLICATE_E75B7650, 6),
-            new Shape(true, "select question_id,state", "", FIXTURE_MISSING_4B62D186, 6),
-            new Shape(true, "select question_id,state", "", FIXTURE_DUPLICATE_E75B7650, 6),
-            new Shape(true, "select question_id,state", "state", FIXTURE_UNKNOWN_EB8BF0D8, 6),
-            new Shape(true, "select question_id,state", "state", FIXTURE_NULL_F072CBEC, 6),
-            new Shape(true, "select question_id,state", "cancelled_at", FIXTURE_NULL_F072CBEC, 1),
-            new Shape(true, "select question_id,state", "cancelled_at", FIXTURE_TIME_C894B672, 6),
-            new Shape(true, "select job_id,question_id", "", FIXTURE_MISSING_4B62D186, 6),
-            new Shape(true, "select job_id,question_id", "", FIXTURE_DUPLICATE_E75B7650, 6),
+            new Shape(
+                true, FIXTURE_SELECT_QUESTION_ID_STATE_65A5F7F4, "", FIXTURE_MISSING_4B62D186, 6),
+            new Shape(
+                true, FIXTURE_SELECT_QUESTION_ID_STATE_65A5F7F4, "", FIXTURE_DUPLICATE_E75B7650, 6),
             new Shape(
                 true,
-                "select job_id,question_id",
+                FIXTURE_SELECT_QUESTION_ID_STATE_65A5F7F4,
+                "state",
+                FIXTURE_UNKNOWN_EB8BF0D8,
+                6),
+            new Shape(
+                true, FIXTURE_SELECT_QUESTION_ID_STATE_65A5F7F4, "state", FIXTURE_NULL_F072CBEC, 6),
+            new Shape(
+                true,
+                FIXTURE_SELECT_QUESTION_ID_STATE_65A5F7F4,
+                "cancelled_at",
+                FIXTURE_NULL_F072CBEC,
+                1),
+            new Shape(
+                true,
+                FIXTURE_SELECT_QUESTION_ID_STATE_65A5F7F4,
+                "cancelled_at",
+                FIXTURE_TIME_C894B672,
+                6),
+            new Shape(
+                true, FIXTURE_SELECT_JOB_ID_QUESTION_ID_8C6722E3, "", FIXTURE_MISSING_4B62D186, 6),
+            new Shape(
+                true,
+                FIXTURE_SELECT_JOB_ID_QUESTION_ID_8C6722E3,
+                "",
+                FIXTURE_DUPLICATE_E75B7650,
+                6),
+            new Shape(
+                true,
+                FIXTURE_SELECT_JOB_ID_QUESTION_ID_8C6722E3,
                 FIXTURE_JOB_ID_CBE51A52,
                 FIXTURE_WRONG_D78ED9EF,
                 6),
-            new Shape(true, "select job_id,question_id", "question_id", FIXTURE_WRONG_D78ED9EF, 6),
-            new Shape(true, "select job_id,question_id", "state", FIXTURE_UNKNOWN_EB8BF0D8, 6),
             new Shape(
-                true, "select job_id,question_id", "state_changed_at", FIXTURE_TIME_C894B672, 6),
+                true,
+                FIXTURE_SELECT_JOB_ID_QUESTION_ID_8C6722E3,
+                "question_id",
+                FIXTURE_WRONG_D78ED9EF,
+                6),
+            new Shape(
+                true,
+                FIXTURE_SELECT_JOB_ID_QUESTION_ID_8C6722E3,
+                "state",
+                FIXTURE_UNKNOWN_EB8BF0D8,
+                6),
+            new Shape(
+                true,
+                FIXTURE_SELECT_JOB_ID_QUESTION_ID_8C6722E3,
+                "state_changed_at",
+                FIXTURE_TIME_C894B672,
+                6),
             new Shape(true, "update schubert.async_jobs", "", FIXTURE_ZERO_UPDATE_8F0266CC, 6),
             new Shape(true, "update schubert.notifications", "", FIXTURE_ZERO_UPDATE_8F0266CC, 6),
-            new Shape(false, "select id,owner_user_id", "is_deleted", "true", 3),
-            new Shape(false, "select id,owner_user_id", "deleted_at", FIXTURE_TIME_C894B672, 3),
-            new Shape(false, "select id,owner_user_id", "deleted_by", FIXTURE_WRONG_D78ED9EF, 3),
-            new Shape(false, "select id,owner_user_id", "", FIXTURE_DUPLICATE_E75B7650, 3),
+            new Shape(false, FIXTURE_SELECT_ID_OWNER_USER_ID_826E757A, "is_deleted", "true", 3),
+            new Shape(
+                false,
+                FIXTURE_SELECT_ID_OWNER_USER_ID_826E757A,
+                "deleted_at",
+                FIXTURE_TIME_C894B672,
+                3),
+            new Shape(
+                false,
+                FIXTURE_SELECT_ID_OWNER_USER_ID_826E757A,
+                "deleted_by",
+                FIXTURE_WRONG_D78ED9EF,
+                3),
+            new Shape(
+                false, FIXTURE_SELECT_ID_OWNER_USER_ID_826E757A, "", FIXTURE_DUPLICATE_E75B7650, 3),
             new Shape(false, FIXTURE_SELECT_IS_DELETED_B1F6DD7D, "is_deleted", "true", 3),
             new Shape(
                 false, FIXTURE_SELECT_IS_DELETED_B1F6DD7D, "deleted_at", FIXTURE_TIME_C894B672, 3),

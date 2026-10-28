@@ -29,6 +29,9 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** PT-DB-INBOX-073..080; SS331 3.8/341 7.3; PG-D-127. SQL capability, not AES proof. */
 final class InboxInspectionProgressBoundaryTest {
+  private static final String FIXTURE_SELECT_COUNT_FROM_BDA3EEC8 = "select count(*) from ";
+  private static final String FIXTURE_SELECT_COUNT_FROM_SCHUBERT_REQUEST_INBOX_E4FAEDDB =
+      "select count(*) from schubert.request_inbox";
   private static final String FIXTURE_55000_F2ADCE46 = "55000";
   private static final String FIXTURE_DELETED_1693CDB2 = "DELETED";
   private static final String FIXTURE_END_5AB955DF = "END";
@@ -99,7 +102,7 @@ final class InboxInspectionProgressBoundaryTest {
           c, FIXTURE_55000_F2ADCE46, () -> record(c, ONE, 1L, null, FIXTURE_END_5AB955DF, xact(c)));
       c.commit();
     }
-    assertEquals("1", scalar("select count(*) from " + TABLE));
+    assertEquals("1", scalar(FIXTURE_SELECT_COUNT_FROM_BDA3EEC8 + TABLE));
     sql("delete from " + TABLE);
     try (var c = inspector()) {
       open(c, RUN, CUTOFF.toString());
@@ -184,7 +187,7 @@ final class InboxInspectionProgressBoundaryTest {
           record(c, high, 2L, null, FIXTURE_END_5AB955DF, xact(c)));
       c.commit();
     }
-    assertEquals("2", scalar("select count(*) from schubert.request_inbox"));
+    assertEquals("2", scalar(FIXTURE_SELECT_COUNT_FROM_SCHUBERT_REQUEST_INBOX_E4FAEDDB));
   }
 
   @Test
@@ -198,14 +201,14 @@ final class InboxInspectionProgressBoundaryTest {
       assertEquals(
           new Progress(ONE, 1, 1, 0, false),
           record(c, null, 0L, ONE, FIXTURE_DELETED_1693CDB2, xact(c)));
-      assertEquals("1", scalar("select count(*) from schubert.request_inbox"));
+      assertEquals("1", scalar(FIXTURE_SELECT_COUNT_FROM_SCHUBERT_REQUEST_INBOX_E4FAEDDB));
       c.rollback();
       assertEquals(new Progress(null, 0, 0, 0, false), open(c, RUN, CUTOFF.toString()));
       delete(c, ONE);
       record(c, null, 0L, ONE, FIXTURE_DELETED_1693CDB2, xact(c));
       c.commit();
     }
-    assertEquals("0", scalar("select count(*) from schubert.request_inbox"));
+    assertEquals("0", scalar(FIXTURE_SELECT_COUNT_FROM_SCHUBERT_REQUEST_INBOX_E4FAEDDB));
     try (var c = inspector()) {
       assertEquals(new Progress(ONE, 1, 1, 0, false), open(c, RUN, CUTOFF.toString()));
       rejects(
@@ -331,7 +334,7 @@ final class InboxInspectionProgressBoundaryTest {
               .getSQLState());
       c.rollback();
     }
-    assertEquals("1", scalar("select count(*) from schubert.request_inbox"));
+    assertEquals("1", scalar(FIXTURE_SELECT_COUNT_FROM_SCHUBERT_REQUEST_INBOX_E4FAEDDB));
     assertEquals("9223372036854775807", scalar("select inspected_count from " + TABLE));
   }
 
@@ -382,7 +385,7 @@ final class InboxInspectionProgressBoundaryTest {
       assertEquals(new Progress(null, 0, 0, 0, false), open(b, RUN, CUTOFF.toString()));
       b.commit();
     }
-    assertEquals("1", scalar("select count(*) from " + TABLE));
+    assertEquals("1", scalar(FIXTURE_SELECT_COUNT_FROM_BDA3EEC8 + TABLE));
   }
 
   @Test
@@ -409,14 +412,14 @@ final class InboxInspectionProgressBoundaryTest {
       c.setAutoCommit(false);
       assertEquals("1|1|0|OK", purge(c, RUN, CUTOFF.toString(), 1));
       c.rollback();
-      assertEquals("9", scalar("select count(*) from " + TABLE));
+      assertEquals("9", scalar(FIXTURE_SELECT_COUNT_FROM_BDA3EEC8 + TABLE));
       assertEquals("2|2|0|OK", purge(c, RUN, CUTOFF.toString(), 1000));
       c.commit();
-      assertEquals("7", scalar("select count(*) from " + TABLE));
+      assertEquals("7", scalar(FIXTURE_SELECT_COUNT_FROM_BDA3EEC8 + TABLE));
       lock.rollback();
       assertEquals("1|1|0|OK", purge(c, RUN, CUTOFF.toString(), 1000));
       c.commit();
-      assertEquals("6", scalar("select count(*) from " + TABLE));
+      assertEquals("6", scalar(FIXTURE_SELECT_COUNT_FROM_BDA3EEC8 + TABLE));
       assertEquals("0|0|0|OK", purge(c, RUN, CUTOFF.toString(), 1000));
       c.commit();
       for (Integer limit : Arrays.asList(null, 0, 1001))
@@ -486,7 +489,7 @@ final class InboxInspectionProgressBoundaryTest {
                 "42501",
                 assertThrows(SQLException.class, () -> scalar(c, "select run_id from " + TABLE))
                     .getSQLState());
-          else assertEquals("0", scalar(c, "select count(*) from " + TABLE));
+          else assertEquals("0", scalar(c, FIXTURE_SELECT_COUNT_FROM_BDA3EEC8 + TABLE));
           for (String statement : List.of("delete from " + TABLE, "set role nk_owner"))
             assertEquals(
                 "42501",

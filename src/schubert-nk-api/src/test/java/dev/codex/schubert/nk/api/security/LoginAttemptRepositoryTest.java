@@ -31,6 +31,10 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** PT-AUT-003-D01..06. Production DDL/limited role; literal SQL postconditions are the oracle. */
 final class LoginAttemptRepositoryTest {
+  private static final String FIXTURE_SELECT_COUNT_FROM_SCHUBERT_LOGIN_IP_ATTE_4B6009EB =
+      "select count(*) from schubert.login_ip_attempts";
+  private static final String FIXTURE_SELECT_FAILED_COUNT_FROM_SCHUBERT_APP_US_FF15412D =
+      "select failed_count from schubert.app_users where id=7";
   private static final String FIXTURE_LOGIN_USER_D270AFC0 = "login-user";
   private static final String FIXTURE_127_0_0_1_88270499 = "127.0.0.1";
   private static final String FIXTURE_LOCKED_UNTIL_C81A370E = "locked_until";
@@ -117,7 +121,7 @@ final class LoginAttemptRepositoryTest {
     assertEquals(
         1,
         scalar("select failed_count from schubert.login_ip_attempts where client_address='::1'"));
-    assertEquals(2, scalar("select count(*) from schubert.login_ip_attempts"));
+    assertEquals(2, scalar(FIXTURE_SELECT_COUNT_FROM_SCHUBERT_LOGIN_IP_ATTE_4B6009EB));
   }
 
   @Test
@@ -125,7 +129,7 @@ final class LoginAttemptRepositoryTest {
     for (int i = 1; i <= 10; i++) {
       fail(FIXTURE_LOGIN_USER_D270AFC0, NOW);
       assertEquals(
-          Math.min(5, i), scalar("select failed_count from schubert.app_users where id=7"));
+          Math.min(5, i), scalar(FIXTURE_SELECT_FAILED_COUNT_FROM_SCHUBERT_APP_US_FF15412D));
       assertEquals(i, scalar("select failed_count from schubert.login_ip_attempts"));
     }
     assertTimestamp(
@@ -176,7 +180,7 @@ final class LoginAttemptRepositoryTest {
       fail(FIXTURE_LOGIN_USER_D270AFC0, NOW);
       fail(FIXTURE_LOGIN_USER_D270AFC0, NOW.plusNanos(offset));
       int expected = offset <= 900_000_000_000L ? 2 : 1; // Current endpoint, SSC-009/BUG-021.
-      assertEquals(expected, scalar("select failed_count from schubert.app_users where id=7"));
+      assertEquals(expected, scalar(FIXTURE_SELECT_FAILED_COUNT_FROM_SCHUBERT_APP_US_FF15412D));
       assertEquals(expected, scalar("select failed_count from schubert.login_ip_attempts"));
       assertEquals(
           1,
@@ -217,7 +221,7 @@ final class LoginAttemptRepositoryTest {
       connection.rollback();
       assertFalse(connection.isClosed());
     }
-    assertEquals(5, scalar("select failed_count from schubert.app_users where id=7"));
+    assertEquals(5, scalar(FIXTURE_SELECT_FAILED_COUNT_FROM_SCHUBERT_APP_US_FF15412D));
     assertEquals(10, scalar("select failed_count from schubert.login_ip_attempts"));
     seed();
     try (Connection connection = database.transaction()) {
@@ -227,8 +231,8 @@ final class LoginAttemptRepositoryTest {
           NOW);
       connection.rollback();
     }
-    assertEquals(0, scalar("select failed_count from schubert.app_users where id=7"));
-    assertEquals(0, scalar("select count(*) from schubert.login_ip_attempts"));
+    assertEquals(0, scalar(FIXTURE_SELECT_FAILED_COUNT_FROM_SCHUBERT_APP_US_FF15412D));
+    assertEquals(0, scalar(FIXTURE_SELECT_COUNT_FROM_SCHUBERT_LOGIN_IP_ATTE_4B6009EB));
   }
 
   @Test
@@ -245,7 +249,7 @@ final class LoginAttemptRepositoryTest {
         c.rollback();
         assertFalse(c.isClosed());
       }
-      assertEquals(0, scalar("select count(*) from schubert.login_ip_attempts"));
+      assertEquals(0, scalar(FIXTURE_SELECT_COUNT_FROM_SCHUBERT_LOGIN_IP_ATTE_4B6009EB));
     }
     for (String fault :
         List.of(
@@ -280,7 +284,7 @@ final class LoginAttemptRepositoryTest {
         connection.rollback();
         assertFalse(connection.isClosed());
       }
-      assertEquals(0, scalar("select count(*) from schubert.login_ip_attempts"));
+      assertEquals(0, scalar(FIXTURE_SELECT_COUNT_FROM_SCHUBERT_LOGIN_IP_ATTE_4B6009EB));
     }
     for (String fault :
         List.of(
@@ -302,8 +306,8 @@ final class LoginAttemptRepositoryTest {
                     intercept(connection, fault, new ArrayList<>()), locked, NOW));
         connection.rollback();
       }
-      assertEquals(0, scalar("select failed_count from schubert.app_users where id=7"));
-      assertEquals(0, scalar("select count(*) from schubert.login_ip_attempts"));
+      assertEquals(0, scalar(FIXTURE_SELECT_FAILED_COUNT_FROM_SCHUBERT_APP_US_FF15412D));
+      assertEquals(0, scalar(FIXTURE_SELECT_COUNT_FROM_SCHUBERT_LOGIN_IP_ATTE_4B6009EB));
     }
     fail(FIXTURE_LOGIN_USER_D270AFC0, NOW);
     try (Connection connection = database.transaction()) {
@@ -311,7 +315,7 @@ final class LoginAttemptRepositoryTest {
       assertInfrastructure(() -> repository.recordFailure(connection, locked, NOW.minusSeconds(1)));
       connection.rollback();
     }
-    assertEquals(1, scalar("select failed_count from schubert.app_users where id=7"));
+    assertEquals(1, scalar(FIXTURE_SELECT_FAILED_COUNT_FROM_SCHUBERT_APP_US_FF15412D));
   }
 
   @Test
@@ -329,7 +333,7 @@ final class LoginAttemptRepositoryTest {
       connection.rollback();
       assertFalse(connection.isClosed());
     }
-    assertEquals(0, scalar("select count(*) from schubert.login_ip_attempts"));
+    assertEquals(0, scalar(FIXTURE_SELECT_COUNT_FROM_SCHUBERT_LOGIN_IP_ATTE_4B6009EB));
     try (Connection connection = database.transaction()) {
       var locked = repository.lockForAttempt(connection, FIXTURE_LOGIN_USER_D270AFC0, client, NOW);
       assertInfrastructure(
@@ -341,8 +345,8 @@ final class LoginAttemptRepositoryTest {
       connection.rollback();
       assertFalse(connection.isClosed());
     }
-    assertEquals(0, scalar("select failed_count from schubert.app_users where id=7"));
-    assertEquals(0, scalar("select count(*) from schubert.login_ip_attempts"));
+    assertEquals(0, scalar(FIXTURE_SELECT_FAILED_COUNT_FROM_SCHUBERT_APP_US_FF15412D));
+    assertEquals(0, scalar(FIXTURE_SELECT_COUNT_FROM_SCHUBERT_LOGIN_IP_ATTE_4B6009EB));
   }
 
   @Test
@@ -410,7 +414,7 @@ final class LoginAttemptRepositoryTest {
           repository.lockForAttempt(connection, "a".repeat(96), client, NOW).account().isEmpty());
       connection.rollback();
     }
-    assertEquals(0, scalar("select count(*) from schubert.login_ip_attempts"));
+    assertEquals(0, scalar(FIXTURE_SELECT_COUNT_FROM_SCHUBERT_LOGIN_IP_ATTE_4B6009EB));
   }
 
   private void fail(String name, Instant now) throws SQLException {

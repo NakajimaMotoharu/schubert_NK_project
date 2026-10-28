@@ -32,6 +32,9 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** PT-DB-INBOX-065..072; SS331 3.7/332 11.4; BUG-014/YKT-012; SQL postconditions. */
 final class OutboxCleanupBoundaryTest {
+  private static final String FIXTURE_0_0_0_OK_B39BA730 = "0|0|0|OK";
+  private static final String FIXTURE_1_1_0_OK_A3F53FDF = "1|1|0|OK";
+  private static final String FIXTURE_0_0_0_BACKUP_GATE_CEDCE044 = "0|0|0|BACKUP_GATE";
   private static final String FIXTURE_BACKUP_CONFIG_8386D7E7 = "BACKUP_CONFIG";
   private static final String FIXTURE_LGN_B0C92867 = "LGN";
   private static final String FIXTURE_SENT_6C701E27 = "SENT";
@@ -130,7 +133,7 @@ final class OutboxCleanupBoundaryTest {
     outbox(true, 1, FIXTURE_SENT_6C701E27, CUTOFF.minusSeconds(604801), null);
     try (var c = batch()) {
       assertEquals("2|2|0|OK", cleanup(c, RUN, CUTOFF.toString(), 1000));
-      assertEquals("0|0|0|OK", cleanup(c, RUN, CUTOFF.toString(), 1000));
+      assertEquals(FIXTURE_0_0_0_OK_B39BA730, cleanup(c, RUN, CUTOFF.toString(), 1000));
     }
     assertEquals(
         before,
@@ -155,18 +158,18 @@ final class OutboxCleanupBoundaryTest {
     }
     try (var c = batch()) {
       c.setAutoCommit(false);
-      assertEquals("1|1|0|OK", cleanup(c, RUN, CUTOFF.toString(), 1));
+      assertEquals(FIXTURE_1_1_0_OK_A3F53FDF, cleanup(c, RUN, CUTOFF.toString(), 1));
       assertEquals("16", rows());
       c.rollback();
       assertEquals("16", rows());
-      assertEquals("1|1|0|OK", cleanup(c, RUN, CUTOFF.toString(), 1));
+      assertEquals(FIXTURE_1_1_0_OK_A3F53FDF, cleanup(c, RUN, CUTOFF.toString(), 1));
       c.commit();
       assertEquals("2,3,4,5,6,7,8", ids(TABLES.get(0)));
       assertEquals("1,2,3,4,5,6,7,8", ids(TABLES.get(1)));
       assertEquals("3|3|0|OK", cleanup(c, RUN, CUTOFF.toString(), 1000));
       c.commit();
       for (String table : TABLES) assertEquals("2,3,5,6,7,8", ids(table));
-      assertEquals("0|0|0|OK", cleanup(c, RUN, CUTOFF.toString(), 1000));
+      assertEquals(FIXTURE_0_0_0_OK_B39BA730, cleanup(c, RUN, CUTOFF.toString(), 1000));
       c.commit();
     }
   }
@@ -192,11 +195,12 @@ final class OutboxCleanupBoundaryTest {
         assertEquals("22023", ex.getSQLState());
         assertFalse(ex.getMessage().contains(RUN.toString()));
       }
-      assertEquals("0|0|0|BACKUP_GATE", cleanup(c, new UUID(0, 53), CUTOFF.toString(), 1));
+      assertEquals(
+          FIXTURE_0_0_0_BACKUP_GATE_CEDCE044, cleanup(c, new UUID(0, 53), CUTOFF.toString(), 1));
     }
     sql("delete from schubert.batch_runs");
     try (var c = batch()) {
-      assertEquals("0|0|0|BACKUP_GATE", cleanup(c, RUN, CUTOFF.toString(), 1));
+      assertEquals(FIXTURE_0_0_0_BACKUP_GATE_CEDCE044, cleanup(c, RUN, CUTOFF.toString(), 1));
     }
     assertEquals("1", rows());
     backup("BACKUP_DB");
@@ -236,7 +240,7 @@ final class OutboxCleanupBoundaryTest {
             "run_id='00000000-0000-0000-0000-000000000099'")) {
       sql("update schubert.batch_runs set " + mutation + " where step='BACKUP_CONFIG'");
       try (var c = batch()) {
-        assertEquals("0|0|0|BACKUP_GATE", cleanup(c, RUN, CUTOFF.toString(), 1));
+        assertEquals(FIXTURE_0_0_0_BACKUP_GATE_CEDCE044, cleanup(c, RUN, CUTOFF.toString(), 1));
       }
       assertEquals("1", rows());
       sql("delete from schubert.batch_runs where step='BACKUP_CONFIG'");
@@ -245,7 +249,7 @@ final class OutboxCleanupBoundaryTest {
     try (var c = batch();
         var writer = db.admin()) {
       c.setAutoCommit(false);
-      assertEquals("1|1|0|OK", cleanup(c, RUN, CUTOFF.toString(), 1));
+      assertEquals(FIXTURE_1_1_0_OK_A3F53FDF, cleanup(c, RUN, CUTOFF.toString(), 1));
       for (String step : List.of("BACKUP_DB", FIXTURE_BACKUP_CONFIG_8386D7E7)) {
         assertEquals(
             "55P03",
@@ -281,11 +285,11 @@ final class OutboxCleanupBoundaryTest {
       assertEquals("2", rows());
       locked.rollback();
       assertEquals("1", scalar(locked, "select id from schubert.mq_outbox where id=1 for update"));
-      assertEquals("1|1|0|OK", cleanup(c, RUN, CUTOFF.toString(), 1000));
+      assertEquals(FIXTURE_1_1_0_OK_A3F53FDF, cleanup(c, RUN, CUTOFF.toString(), 1000));
       assertEquals("1", ids(TABLES.get(0)));
-      assertEquals("0|0|0|OK", cleanup(c, RUN, CUTOFF.toString(), 1000));
+      assertEquals(FIXTURE_0_0_0_OK_B39BA730, cleanup(c, RUN, CUTOFF.toString(), 1000));
       locked.rollback();
-      assertEquals("1|1|0|OK", cleanup(c, RUN, CUTOFF.toString(), 1000));
+      assertEquals(FIXTURE_1_1_0_OK_A3F53FDF, cleanup(c, RUN, CUTOFF.toString(), 1000));
       assertEquals("0", rows());
     }
   }
@@ -307,9 +311,9 @@ final class OutboxCleanupBoundaryTest {
       } finally {
         writer.commit();
       }
-      assertEquals("0|0|0|BACKUP_GATE", result.get(5, TimeUnit.SECONDS));
+      assertEquals(FIXTURE_0_0_0_BACKUP_GATE_CEDCE044, result.get(5, TimeUnit.SECONDS));
       assertEquals("1", rows());
-      assertEquals("1|1|0|OK", cleanup(c, RUN, CUTOFF.toString(), 1000));
+      assertEquals(FIXTURE_1_1_0_OK_A3F53FDF, cleanup(c, RUN, CUTOFF.toString(), 1000));
       assertEquals("0", rows());
     }
   }
@@ -459,7 +463,7 @@ final class OutboxCleanupBoundaryTest {
     inbox(1, FIXTURE_LGN_B0C92867, "COMPLETED");
     inbox(2, FIXTURE_LGN_B0C92867, "PROCESSING");
     try (var c = batch()) {
-      assertEquals("0|0|0|OK", cleanup(c, RUN, CUTOFF.toString(), 10));
+      assertEquals(FIXTURE_0_0_0_OK_B39BA730, cleanup(c, RUN, CUTOFF.toString(), 10));
     }
     assertEquals("2", scalar("select count(*) from schubert.request_inbox"));
   }

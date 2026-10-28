@@ -65,6 +65,7 @@ import org.springframework.security.web.context.SecurityContextHolderFilter;
  * PG-D-112.
  */
 class SessionAccessFailureTest {
+  private static final String FIXTURE_SEARCH_Q_ABC_A4D7F62A = "/search?q=abc";
   private static final String EXPECTED_AUTHORITY_USER = "ROLE_USER";
   private static final String EXPECTED_AUTHORITY_ADMIN = "ROLE_ADMIN";
 
@@ -116,7 +117,7 @@ class SessionAccessFailureTest {
     try (var a = new Harness()) {
       for (String location :
           List.of(
-              "/search?q=abc",
+              FIXTURE_SEARCH_Q_ABC_A4D7F62A,
               "/scenarios/game/file",
               "/unknown",
               "/search?password=private",
@@ -128,7 +129,8 @@ class SessionAccessFailureTest {
         assertEquals(302, s.getStatus());
         assertEquals(FIXTURE_LOGIN_F843C044, s.getHeader(FIXTURE_LOCATION_FB077BAD));
         var saved = a.cache.getRequest(r, s);
-        if (location.equals("/search?q=abc") || location.equals("/scenarios/game/file"))
+        if (location.equals(FIXTURE_SEARCH_Q_ABC_A4D7F62A)
+            || location.equals("/scenarios/game/file"))
           assertEquals(location, Objects.requireNonNull(saved).getRedirectUrl());
         else {
           assertNull(saved);
@@ -317,14 +319,14 @@ class SessionAccessFailureTest {
     try (var a = new Harness()) {
       var first = new MockHttpServletResponse();
       a.run(
-          raw(FIXTURE_GET_04F32A7E, "/search?q=abc", null, null),
+          raw(FIXTURE_GET_04F32A7E, FIXTURE_SEARCH_Q_ABC_A4D7F62A, null, null),
           first,
           (r, s) -> fail("protected"));
       assertEquals(302, first.getStatus());
       assertEquals(FIXTURE_LOGIN_F843C044, first.getHeader(FIXTURE_LOCATION_FB077BAD));
       var anonymous = Objects.requireNonNull(first.getCookie("SCHUBERT_NK_SESSION"));
       var stored = Objects.requireNonNull(a.adapter.findById(anonymous.getValue()));
-      assertEquals("/search?q=abc", stored.getAttribute("savedRequest"));
+      assertEquals(FIXTURE_SEARCH_Q_ABC_A4D7F62A, stored.getAttribute("savedRequest"));
       assertEquals("02".repeat(32), stored.getAttribute("csrfToken"));
       var denied = new MockHttpServletResponse();
       a.run(
@@ -334,7 +336,7 @@ class SessionAccessFailureTest {
       assertEquals(403, denied.getStatus());
       assertNull(denied.getHeader(FIXTURE_LOCATION_FB077BAD));
       assertEquals(
-          "/search?q=abc",
+          FIXTURE_SEARCH_Q_ABC_A4D7F62A,
           Objects.requireNonNull(a.adapter.findById(anonymous.getValue()))
               .getAttribute("savedRequest"));
       var loggedIn = new MockHttpServletResponse();
@@ -343,12 +345,12 @@ class SessionAccessFailureTest {
           loggedIn,
           (r, s) -> fail("Login handler"));
       assertEquals(302, loggedIn.getStatus());
-      assertEquals("/search?q=abc", loggedIn.getHeader(FIXTURE_LOCATION_FB077BAD));
+      assertEquals(FIXTURE_SEARCH_Q_ABC_A4D7F62A, loggedIn.getHeader(FIXTURE_LOCATION_FB077BAD));
       var user = Objects.requireNonNull(loggedIn.getCookie("SCHUBERT_NK_SESSION"));
       assertNull(a.adapter.findById(anonymous.getValue()));
       var count = new AtomicInteger();
       a.run(
-          raw(FIXTURE_GET_04F32A7E, "/search?q=abc", user, null),
+          raw(FIXTURE_GET_04F32A7E, FIXTURE_SEARCH_Q_ABC_A4D7F62A, user, null),
           new MockHttpServletResponse(),
           (r, s) -> {
             assertEquals(

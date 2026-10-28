@@ -33,6 +33,7 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** CTERM001..003: independent SQL fixture/full-row data, no native Unit acceptance. SSC119. */
 final class CleanupTerminalRepositoryTest {
+  private static final String FIXTURE_SELECT_DISTINCT_ON_STEP_EA902C4A = "select distinct on(step)";
   private static final String FIXTURE_2026_09_13T02_00_00Z_EE45C842 = "2026-09-13T02:00:00Z";
   private static final String FIXTURE_2026_09_13T02_00_01Z_DAAFD8AF = "2026-09-13T02:00:01Z";
   private static final String FIXTURE_STEP_0D9F50D8 = "step";
@@ -330,7 +331,7 @@ final class CleanupTerminalRepositoryTest {
               FIXTURE_BYTE_COUNT_6D76E237,
               FIXTURE_ENDED_AT_E151E393)) {
         var probe = new BatchJdbcProbe();
-        probe.selectedSql = "select distinct on(step)";
+        probe.selectedSql = FIXTURE_SELECT_DISTINCT_ON_STEP_EA902C4A;
         probe.columns.put(column, null);
         refusedProjection(probe, rejected);
       }
@@ -352,7 +353,7 @@ final class CleanupTerminalRepositoryTest {
                       FIXTURE_ENDED_AT_E151E393, OffsetDateTime.parse("2026-10-01T00:00:00Z")))
               .entrySet()) {
         var probe = new BatchJdbcProbe();
-        probe.selectedSql = "select distinct on(step)";
+        probe.selectedSql = FIXTURE_SELECT_DISTINCT_ON_STEP_EA902C4A;
         probe.columns.put(item.getKey(), item.getValue());
         refusedProjection(probe, rejected);
       }
@@ -363,7 +364,7 @@ final class CleanupTerminalRepositoryTest {
               "eighth",
               FIXTURE_DUPLICATE_E75B7650)) {
         var probe = new BatchJdbcProbe();
-        probe.selectedSql = "select distinct on(step)";
+        probe.selectedSql = FIXTURE_SELECT_DISTINCT_ON_STEP_EA902C4A;
         probe.nullStatement = fault.equals(FIXTURE_NULL_STATEMENT_8D4D0967);
         probe.nullRows = fault.equals(FIXTURE_NULL_ROWS_7967EEF2);
         probe.extraLastRow = fault.equals("eighth");
@@ -386,7 +387,7 @@ final class CleanupTerminalRepositoryTest {
                 Connection.TRANSACTION_SERIALIZABLE)
             .entrySet()) {
       var probe = new BatchJdbcProbe();
-      probe.selectedSql = "select distinct on(step)";
+      probe.selectedSql = FIXTURE_SELECT_DISTINCT_ON_STEP_EA902C4A;
       probe.connectionValues.put(item.getKey(), item.getValue());
       refusedProjection(probe, true);
       assertEquals(0, probe.selectedStatements);
@@ -405,7 +406,7 @@ final class CleanupTerminalRepositoryTest {
             FIXTURE_ERROR_CODE_B886CCEF,
             FIXTURE_ERROR_SUMMARY_3F58BF23)) {
       var probe = new BatchJdbcProbe();
-      probe.selectedSql = "select distinct on(step)";
+      probe.selectedSql = FIXTURE_SELECT_DISTINCT_ON_STEP_EA902C4A;
       probe.columns.put(FIXTURE_STATUS_CFC31BCC, "RUNNING");
       probe.columns.put(FIXTURE_ENDED_AT_E151E393, null);
       for (String count :
@@ -440,7 +441,7 @@ final class CleanupTerminalRepositoryTest {
             switch (path) {
               case FIXTURE_REFERENCES_3C0C408A -> "and status='SUCCESS'";
               case FIXTURE_PROGRESS_74BECD94 -> "select proof_sha256";
-              default -> "select distinct on(step)";
+              default -> FIXTURE_SELECT_DISTINCT_ON_STEP_EA902C4A;
             };
         if (sample.primary() != null)
           probe.thrown.put(
@@ -595,7 +596,7 @@ final class CleanupTerminalRepositoryTest {
       }
       try (var raw = locked(db, false)) {
         var probe = new BatchJdbcProbe();
-        probe.selectedSql = "select distinct on(step)";
+        probe.selectedSql = FIXTURE_SELECT_DISTINCT_ON_STEP_EA902C4A;
         if (mutation.equals("counts")) probe.columns.put(FIXTURE_TARGET_COUNT_5B6567D4, 1L);
         assertThrows(
             BatchRepositoryException.class,
