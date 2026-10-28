@@ -1,0 +1,98 @@
+{
+  "actualExit": 0,
+  "before": "44afb0a1ecddabfebe577b2037aabdc6fb31d1e3",
+  "cases": [
+    {
+      "className": "dev.codex.schubert.nk.protocol.codec.FieldCodecTest",
+      "method": "textEncodeNormalizesUtf8AndPadsWithAsciiSpace",
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/FieldCodecTest.java",
+      "sourceSha256": "e59bf92e94c83762a80e224dd7bb8a300f3f579e36f9feb87010162b7bd3ce12"
+    },
+    {
+      "className": "dev.codex.schubert.nk.protocol.codec.FieldCodecTest",
+      "method": "textDecodeIsStrictCanonicalAndOptionalAware",
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/FieldCodecTest.java",
+      "sourceSha256": "e59bf92e94c83762a80e224dd7bb8a300f3f579e36f9feb87010162b7bd3ce12"
+    },
+    {
+      "className": "dev.codex.schubert.nk.protocol.codec.FieldCodecTest",
+      "method": "numericCodecChecksDigitsRangeAndOverflow",
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/FieldCodecTest.java",
+      "sourceSha256": "e59bf92e94c83762a80e224dd7bb8a300f3f579e36f9feb87010162b7bd3ce12"
+    },
+    {
+      "className": "dev.codex.schubert.nk.protocol.codec.FieldCodecTest",
+      "method": "numericErrorFillerDoesNotBecomeBusinessZero",
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/FieldCodecTest.java",
+      "sourceSha256": "e59bf92e94c83762a80e224dd7bb8a300f3f579e36f9feb87010162b7bd3ce12"
+    },
+    {
+      "className": "dev.codex.schubert.nk.protocol.codec.FieldCodecTest",
+      "method": "booleanAndReservedFieldsRejectUnknownBytes",
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/FieldCodecTest.java",
+      "sourceSha256": "e59bf92e94c83762a80e224dd7bb8a300f3f579e36f9feb87010162b7bd3ce12"
+    },
+    {
+      "className": "dev.codex.schubert.nk.protocol.codec.FieldCodecNfcGoldenTest",
+      "method": "nfcGolden001HangulJamoFitsComposedByteWidth",
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/FieldCodecNfcGoldenTest.java",
+      "sourceSha256": "f94593eb1b57c9ce6c65dfac75dec1061439471fb2a66ff8877f5fc1c93dfceb"
+    },
+    {
+      "className": "dev.codex.schubert.nk.protocol.codec.FieldCodecNfcGoldenTest",
+      "method": "nfcGolden002AngstromUsesCanonicalTwoByteScalarBeforeWidthCheck",
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/FieldCodecNfcGoldenTest.java",
+      "sourceSha256": "f94593eb1b57c9ce6c65dfac75dec1061439471fb2a66ff8877f5fc1c93dfceb"
+    },
+    {
+      "className": "dev.codex.schubert.nk.protocol.codec.FieldCodecNfcGoldenTest",
+      "method": "nfcGolden003CanonicalCombiningOrderIsRequiredWithoutComposition",
+      "path": "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/FieldCodecNfcGoldenTest.java",
+      "sourceSha256": "f94593eb1b57c9ce6c65dfac75dec1061439471fb2a66ff8877f5fc1c93dfceb"
+    }
+  ],
+  "eligibilityClosureSourceHashes": {
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/FieldCodec.java": "43a625c478114afea49c8ee423926d7d330d58dd56b3667a803108c068121513",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/FieldEncodingException.java": "60f7a35b38a0a90dfc7caf0746de64668d4dd31c3d14f7ec81b6eb7bd671f669",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/PermanentProtocolException.java": "9193af24f93fcd0d45e536abbacbe4adf46029619de6d6f63e889b9af44ea2d3"
+  },
+  "externalActions": 0,
+  "invocation": {
+    "actualPythonCommand": [
+      "/usr/bin/python3",
+      "-B",
+      "tools/quality/pg13154_nfc_golden_plan.py"
+    ],
+    "arbitraryArgumentsRecorded": false,
+    "entrypointPath": "tools/quality/pg13154_nfc_golden_plan.py",
+    "entrypointSha256": "e847c8c59816ed37a9737bb8a566b231cb0fa6385f68f3911bfe8f84ca1ef5bf",
+    "helperPath": "tools/quality/host_tool_invocation.py",
+    "helperSha256": "85d616a3db4ff47f4c95ae2e0dd57954bc2b09f28b8f2a685b986e5621545c46",
+    "libraryPath": "tools/quality/pg13154_nfc_golden_plan.py",
+    "librarySha256": "e847c8c59816ed37a9737bb8a566b231cb0fa6385f68f3911bfe8f84ca1ef5bf",
+    "loadedProjectPythonSources": {
+      "tools/quality/g07_host_class_provenance_inputs.py": "a676cb3e4145177c3c243722d737592ce7d44c3f29cfe4f670662ef7651f046b",
+      "tools/quality/host_tool_invocation.py": "85d616a3db4ff47f4c95ae2e0dd57954bc2b09f28b8f2a685b986e5621545c46",
+      "tools/quality/pg13152_nfc_golden_preflight.py": "ccb42d6a0465ddd6a1e2c2eff532d2e01c956e94fb26af08b97e2f09ffc9c4e6",
+      "tools/quality/pg13154_nfc_golden_plan.py": "e847c8c59816ed37a9737bb8a566b231cb0fa6385f68f3911bfe8f84ca1ef5bf",
+      "tools/quality/pg9666_pagination_static.py": "75347ce8aef713e43a3d2fd39e0e0b6244da9427caa8dc51d36e539d629e0ef5"
+    },
+    "provenance": "OBSERVED_SYS_ARGV_AND_ORIG_ARGV_NOT_RECONSTRUCTED"
+  },
+  "judgement": "Pure FieldCodec whole old five plus three new Hangul/Angstrom/canonical-order independent scalar/hex vectors; no old method extraction or actual resources",
+  "newAccepted": 0,
+  "newTests": 3,
+  "oldExecUnion": false,
+  "originalTests": 5,
+  "sameExecRequired": true,
+  "scopeStaticFindings": 0,
+  "source": "b11fe71bd20e244dd10c83bd339f8345a0c1f085",
+  "supportTestSourceHashes": {},
+  "totalCorrections": 0,
+  "totalTests": 8,
+  "whole451Accepted": false,
+  "wholeTestSourceHashes": {
+    "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/FieldCodecNfcGoldenTest.java": "f94593eb1b57c9ce6c65dfac75dec1061439471fb2a66ff8877f5fc1c93dfceb",
+    "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/FieldCodecTest.java": "e59bf92e94c83762a80e224dd7bb8a300f3f579e36f9feb87010162b7bd3ce12"
+  }
+}
