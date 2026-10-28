@@ -1,0 +1,229 @@
+{
+  "actualExit": 0,
+  "allMainAndOtherInputsUnchanged": true,
+  "completeStringReferences": 6,
+  "coverage": null,
+  "eligibilityClosureSourceHashes": {
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ApiDurationMetricExporter.java": "8c60f981ee23028f0566d61447fb2bffdad75008d3bb0e206c3e91d4cac1e6af",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ApiMetricCatalog.java": "c3d1fc99a2679fa8ef4e8ce19c4da32da376efba8cfb8c1dc8291ce8d0202979",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ApiMetricScrape.java": "5f37aad0fd0717c025cdda2a00b372c98e649bdfeb90f50917edc97b93dde1be",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ApiScalarMetricExporter.java": "08f9ab87b7cd994f70fbb47c352d1e22def6dd787ab73625e73e6779527999ff",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/AsyncJobMetricRecorder.java": "bcbe814f37ba7a9cdba482369fa7ab70c5688713249ab780c35b6eeba3190cd6",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/DbPoolMetricRecorder.java": "11a8f25926ef4727e019349b1965b97c456eb46f5f82d2697506610f12e4241c",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/DbQueryDurationMetricRecorder.java": "8e3719d6bb520ba2dde1acd9bdf37d0a1269c4cfcc83d6d34148c0ce76633e2a",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ExactDurationMeterRegistry.java": "20f47112dcc5776b4f18c190adbcd782c03355815adce2e380d23cf6d9551108",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ExactDurationSupport.java": "5750f04c6fd9b6453c3412323cbffdb60dfca37be224414ab94c24a9d3efde5b",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/InboxReplayMetricRecorder.java": "e3a039040d777390abdb6e20e9157f50b0d638b695d34e89f87d26da5a4a9121",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/MqMessageMetricRecorder.java": "80db82e8f57592a5b5cc1aded30fd72a3c8fe9d3ff813ac2c6fb45f832460b2f",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/MqPressureMetricRecorder.java": "ff09f8d1258c04d3b6d59136310a8d9681fe7f6172258d08d079c36f972d204d",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/MqProcessingDurationMetricRecorder.java": "6446a7eb3accec378ceeeb0f4c85bfd6f4f1a39af82bce866333794dacbd986b",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/MqRedeliveryMetricRecorder.java": "0f83ae3cc38efc4f5b0b96dac3623023a96393a6da61365111d4d3c29fb6c05c",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/OperationMismatchMetricRecorder.java": "74cef118229b3163b561702d8001e9cd0509bcc6ff6d6a56d2ccccf98de9de55",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/OutboxAgeMetricRecorder.java": "dd027385f27bbe03bebbd5e7dd67a78626d8e27550eb1ed7428e876fc3ab9700",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/OutboxRowsMetricRecorder.java": "c0d709475517e31192afe8486be24f7a88232a87dd43d0db4e77ce34dd78a7d5",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/header/InteractionKind.java": "5424c3f1ad90de3965e298380da683ec72644ecd8fae80117c01001d1d0aa620",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/header/MessageKind.java": "3b003356680171b300d7c5d680b05cec255f4267190907c62cfaec3261a920a0",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/header/ResultCode.java": "ade5ac5514ed62f2be57419eeab2d3a5e27da98a1c6607621be60e3a11c162f4",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/LayoutDefinition.java": "d4ad2f50f40e9cb860786af43875583ac324fd2e6055f0bee1e6804101257d5d",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/LayoutId.java": "87c8f01b5f84f211a8902d323eba221d11dc6b6add1cfe2a514fdbb68e82bc24",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/LayoutRegistry.java": "6c8f5806097d9827a02058f8c1b53f108e2e40f28ef190ead2a7f9140be080f8",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/LayoutValidationException.java": "b99e562fe3afd1f1e11a7ff415f25999c14e46016d5a115022706d4f8674a9df",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/UnsupportedLayoutException.java": "ed22caff978204b37fce0e3b9221758e7539596b64e3c19be77f76f7b7901dd2",
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/transport/BrokerTopology.java": "57e7967fe6b44f7e37eb510bd0d2c0a877e5257c73e7d688c0fdab59379f46c5"
+  },
+  "invocation": {
+    "actualPythonCommand": [
+      "/usr/bin/python3",
+      "-B",
+      "tools/quality/pg12815_exact_registry_plan_v2.py"
+    ],
+    "arbitraryArgumentsRecorded": false,
+    "entrypointPath": "tools/quality/pg12815_exact_registry_plan_v2.py",
+    "entrypointSha256": "4fee9cef663f318693cac0eec39afc67fadce57802849e73ac19410a37c4c0d2",
+    "helperPath": "tools/quality/host_tool_invocation.py",
+    "helperSha256": "85d616a3db4ff47f4c95ae2e0dd57954bc2b09f28b8f2a685b986e5621545c46",
+    "libraryPath": "tools/quality/pg12815_exact_registry_plan_v2.py",
+    "librarySha256": "4fee9cef663f318693cac0eec39afc67fadce57802849e73ac19410a37c4c0d2",
+    "loadedProjectPythonSources": {
+      "tools/quality/fixture_scope_advisory.py": "7cb04fe4c1efe260af65f17a392c1b7aff3ddb32af2db1dea4d78a69fc214e8d",
+      "tools/quality/g07_host_class_provenance_inputs.py": "a676cb3e4145177c3c243722d737592ce7d44c3f29cfe4f670662ef7651f046b",
+      "tools/quality/host_tool_invocation.py": "85d616a3db4ff47f4c95ae2e0dd57954bc2b09f28b8f2a685b986e5621545c46",
+      "tools/quality/pg12815_exact_registry_plan_v2.py": "4fee9cef663f318693cac0eec39afc67fadce57802849e73ac19410a37c4c0d2",
+      "tools/quality/public_java_digest_provenance.py": "dd47f8735a61ce849995633c3290a6ad047842ef3263829ce359db413778f7a0"
+    },
+    "provenance": "OBSERVED_SYS_ARGV_AND_ORIG_ARGV_NOT_RECONSTRUCTED"
+  },
+  "judgement": "PT_DEFAULT_WHOLE_EXACT_REGISTRY10_FIXED_CLOCK_SDK_MEMORY_FINITE_WORKERS_NO_EXTERNAL_IO",
+  "metadataAdvisory": {
+    "coverage": null,
+    "directImports": {
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ApiDurationMetricExporter.java": [],
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ApiMetricCatalog.java": [
+        {
+          "name": "dev.codex.schubert.nk.protocol.header.ResultCode",
+          "outerSourceCandidate": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/header/ResultCode.java",
+          "static": false
+        },
+        {
+          "name": "dev.codex.schubert.nk.protocol.layout.LayoutRegistry",
+          "outerSourceCandidate": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/LayoutRegistry.java",
+          "static": false
+        },
+        {
+          "name": "dev.codex.schubert.nk.protocol.transport.BrokerTopology",
+          "outerSourceCandidate": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/transport/BrokerTopology.java",
+          "static": false
+        }
+      ],
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ApiMetricScrape.java": [],
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ApiScalarMetricExporter.java": [],
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/AsyncJobMetricRecorder.java": [],
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/DbPoolMetricRecorder.java": [],
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/DbQueryDurationMetricRecorder.java": [],
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ExactDurationMeterRegistry.java": [],
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ExactDurationSupport.java": [],
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/InboxReplayMetricRecorder.java": [
+        {
+          "name": "dev.codex.schubert.nk.protocol.header.ResultCode",
+          "outerSourceCandidate": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/header/ResultCode.java",
+          "static": false
+        },
+        {
+          "name": "dev.codex.schubert.nk.protocol.layout.LayoutId",
+          "outerSourceCandidate": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/LayoutId.java",
+          "static": false
+        },
+        {
+          "name": "dev.codex.schubert.nk.protocol.layout.LayoutRegistry",
+          "outerSourceCandidate": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/LayoutRegistry.java",
+          "static": false
+        }
+      ],
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/MqMessageMetricRecorder.java": [
+        {
+          "name": "dev.codex.schubert.nk.protocol.layout.LayoutId",
+          "outerSourceCandidate": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/LayoutId.java",
+          "static": false
+        },
+        {
+          "name": "dev.codex.schubert.nk.protocol.layout.LayoutRegistry",
+          "outerSourceCandidate": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/LayoutRegistry.java",
+          "static": false
+        },
+        {
+          "name": "dev.codex.schubert.nk.protocol.transport.BrokerTopology",
+          "outerSourceCandidate": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/transport/BrokerTopology.java",
+          "static": false
+        }
+      ],
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/MqPressureMetricRecorder.java": [
+        {
+          "name": "dev.codex.schubert.nk.protocol.transport.BrokerTopology",
+          "outerSourceCandidate": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/transport/BrokerTopology.java",
+          "static": false
+        }
+      ],
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/MqProcessingDurationMetricRecorder.java": [
+        {
+          "name": "dev.codex.schubert.nk.protocol.layout.LayoutId",
+          "outerSourceCandidate": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/LayoutId.java",
+          "static": false
+        },
+        {
+          "name": "dev.codex.schubert.nk.protocol.layout.LayoutRegistry",
+          "outerSourceCandidate": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/LayoutRegistry.java",
+          "static": false
+        }
+      ],
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/MqRedeliveryMetricRecorder.java": [
+        {
+          "name": "dev.codex.schubert.nk.protocol.transport.BrokerTopology",
+          "outerSourceCandidate": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/transport/BrokerTopology.java",
+          "static": false
+        }
+      ],
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/OperationMismatchMetricRecorder.java": [],
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/OutboxAgeMetricRecorder.java": [
+        {
+          "name": "dev.codex.schubert.nk.api.monitoring.OutboxRowsMetricRecorder.Status",
+          "outerSourceCandidate": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/OutboxRowsMetricRecorder.java",
+          "static": false
+        }
+      ],
+      "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/OutboxRowsMetricRecorder.java": [],
+      "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ExactDurationMeterRegistryTest.java": [
+        {
+          "name": "dev.codex.schubert.nk.protocol.layout.LayoutId",
+          "outerSourceCandidate": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/LayoutId.java",
+          "static": false
+        }
+      ],
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/header/InteractionKind.java": [],
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/header/MessageKind.java": [],
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/header/ResultCode.java": [],
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/LayoutDefinition.java": [
+        {
+          "name": "dev.codex.schubert.nk.protocol.header.InteractionKind",
+          "outerSourceCandidate": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/header/InteractionKind.java",
+          "static": false
+        },
+        {
+          "name": "dev.codex.schubert.nk.protocol.header.MessageKind",
+          "outerSourceCandidate": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/header/MessageKind.java",
+          "static": false
+        }
+      ],
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/LayoutId.java": [],
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/LayoutRegistry.java": [
+        {
+          "name": "dev.codex.schubert.nk.protocol.header.InteractionKind",
+          "outerSourceCandidate": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/header/InteractionKind.java",
+          "static": false
+        },
+        {
+          "name": "dev.codex.schubert.nk.protocol.header.MessageKind",
+          "outerSourceCandidate": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/header/MessageKind.java",
+          "static": false
+        }
+      ],
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/LayoutValidationException.java": [],
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/UnsupportedLayoutException.java": [],
+      "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/transport/BrokerTopology.java": []
+    },
+    "executionQualified": false,
+    "holdReleased": false,
+    "limitations": [
+      "RAW_LEXER_NOT_JAVA_UNICODE_PREPROCESSOR",
+      "SAME_PACKAGE_AND_INHERITED_REFERENCES_NOT_CLOSED",
+      "REFLECTION_TRANSITIVE_CALL_AND_INITIALIZATION_NOT_PROVEN",
+      "PARENT_MUST_REVIEW_WHOLE_FIXTURE_OPERATIONS_AND_ORACLE"
+    ],
+    "metadataConsistent": true,
+    "metadataIssues": [],
+    "newAccepted": 0,
+    "originalOwners": [
+      {
+        "canonicalCostOwner": "WBS-P018-09",
+        "canonicalOwner": "WBS-P018-09",
+        "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ExactDurationMeterRegistryTest.java"
+      }
+    ],
+    "productTestsExecuted": 0
+  },
+  "metadataNegativeVectors": 7,
+  "newAccepted": 0,
+  "originalSuites": 1,
+  "originalTests": 10,
+  "productTestsExecuted": 0,
+  "sourceBefore": "2baca5740741adb7c676cb85a83f15d19de01083",
+  "sourceChanges": [
+    {
+      "beforeSha256": "4bb47970f7103a576d488048246a0ee3a535bcc86b1d4b2a106f862cadc765d7",
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ExactDurationMeterRegistryTest.java",
+      "sha256": "c68cae3c782893e69a3f0a8471911f168b1863fbcb9612a40a4a463cf4678573"
+    }
+  ],
+  "specificationPath": "evidence/01_PT/018_NK-OPS-001/2383_ExactDurationRegistry\u516810\u30fb\u540c\u671f\u5951\u7d04_\u5358\u4f53\u30c6\u30b9\u30c8\u4ed5\u69d8\u66f8.md",
+  "specificationSha256": "2f06629c29c14dda11dfa9bc2ac6aaa76d906dbe8be38d1fa284fc73104018f8",
+  "totalCorrections": 1
+}

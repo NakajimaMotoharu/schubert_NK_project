@@ -1,0 +1,523 @@
+{
+  "rows": [
+    {
+      "attributes": {
+        "begincolumn": "7",
+        "beginline": "83",
+        "class": "ExactDurationMeterRegistry.ExactSummary",
+        "endcolumn": "19",
+        "endline": "83",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#avoidsynchronizedstatement",
+        "method": "record",
+        "package": "dev.codex.schubert.nk.api.monitoring",
+        "priority": "3",
+        "rule": "AvoidSynchronizedStatement",
+        "ruleset": "Multithreading"
+      },
+      "controls": [
+        "synchronized(stateLock){sampleCount++;total+=amount;maximum=Math.max(maximum,amount);for(inti=0;i<BOUNDARIES.length;i++)if(amount<=BOUNDARIES[i])buckets[i]++;}"
+      ],
+      "currentCases": [
+        {
+          "className": "dev.codex.schubert.nk.api.monitoring.ExactDurationMeterRegistryTest",
+          "method": "exDur001IndependentBelowEqualAboveEveryFiniteBoundary",
+          "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ExactDurationMeterRegistryTest.java",
+          "sourceSha256": "03f108cfc6db26c0f36497a0bc8568fad7a3d1fe204b6acdfb3d04db55d781f4"
+        },
+        {
+          "className": "dev.codex.schubert.nk.api.monitoring.ExactDurationMeterRegistryTest",
+          "method": "exDur002BothMixedExtremeOrdersKeepSmallSamplesAndFiniteSum",
+          "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ExactDurationMeterRegistryTest.java",
+          "sourceSha256": "03f108cfc6db26c0f36497a0bc8568fad7a3d1fe204b6acdfb3d04db55d781f4"
+        },
+        {
+          "className": "dev.codex.schubert.nk.api.monitoring.ExactDurationMeterRegistryTest",
+          "method": "exDur003RejectedScalarInputsLeaveCompleteSnapshotUnchanged",
+          "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ExactDurationMeterRegistryTest.java",
+          "sourceSha256": "03f108cfc6db26c0f36497a0bc8568fad7a3d1fe204b6acdfb3d04db55d781f4"
+        },
+        {
+          "className": "dev.codex.schubert.nk.api.monitoring.ExactDurationMeterRegistryTest",
+          "method": "exDur004SnapshotIsAtomicDefensiveAndDoesNotAliasMutableBuckets",
+          "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ExactDurationMeterRegistryTest.java",
+          "sourceSha256": "03f108cfc6db26c0f36497a0bc8568fad7a3d1fe204b6acdfb3d04db55d781f4"
+        },
+        {
+          "className": "dev.codex.schubert.nk.api.monitoring.ExactDurationMeterRegistryTest",
+          "method": "exDur008ConstructorsRejectNullAndDurationStateNeverReadsClock",
+          "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ExactDurationMeterRegistryTest.java",
+          "sourceSha256": "03f108cfc6db26c0f36497a0bc8568fad7a3d1fe204b6acdfb3d04db55d781f4"
+        },
+        {
+          "className": "dev.codex.schubert.nk.api.monitoring.ExactDurationMeterRegistryTest",
+          "method": "exDur009ConcurrentUpdatesAndSnapshotsHaveConsistentIndependentIdentity",
+          "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ExactDurationMeterRegistryTest.java",
+          "sourceSha256": "03f108cfc6db26c0f36497a0bc8568fad7a3d1fe204b6acdfb3d04db55d781f4"
+        },
+        {
+          "className": "dev.codex.schubert.nk.api.monitoring.ExactDurationMeterRegistryTest",
+          "method": "exDur010AuxiliaryGaugeFactoryFailureRetainsCallerOwnershipAndIdentity",
+          "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ExactDurationMeterRegistryTest.java",
+          "sourceSha256": "03f108cfc6db26c0f36497a0bc8568fad7a3d1fe204b6acdfb3d04db55d781f4"
+        }
+      ],
+      "currentWholeJoinPending": true,
+      "disposition": "CONTEXT_NOT_APPLICABLE",
+      "id": "PMD-00358",
+      "kind": "PRIVATE_FINAL_MONITOR_CONSTANT_MEMORY_ATOMIC_SNAPSHOT",
+      "newAccepted": 0,
+      "oldRuntimeReassigned": false,
+      "originalRowSha256": "457f4d217194b83d1b72b55a6c7a921ecb0823c8e8f4c631f2e582f1e982d477",
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ExactDurationMeterRegistry.java",
+      "productTestsExecutedByReview": 0,
+      "reason": "411 section9 explicitly requires private-final state lock. Same private stateLock protects count/total/max/all five cumulative buckets in record and fresh defensive snapshot copy. No public this/class monitor, nested lock, blocking I/O, callback or external authority in either critical section. SDK snapshot allocations only; monitor exits release on ordinary exception. ReentrantLock is a generic PMD preference, not a stronger project contract. Current whole boundary/defensive/concurrent tests and full selected counters support this source, not all JVM scheduling/OOME possibilities.",
+      "rule": "AvoidSynchronizedStatement",
+      "scopeKind": "METHOD",
+      "scopeName": "record",
+      "scopeTokenSha256": "6f2e75202d3820c2783f41f69d0577c79e3b2073957769d08341e4cc807a46bd",
+      "source": "0124b5938a50f4ceea542486c336ba12146cb1b4",
+      "sourceSha256": "20f47112dcc5776b4f18c190adbcd782c03355815adce2e380d23cf6d9551108",
+      "sourceSpanSha256": "c666a36176076433b56d77b2fc43ea0a3e66f65e1c74d0b769997a0295b6300f"
+    },
+    {
+      "attributes": {
+        "begincolumn": "7",
+        "beginline": "108",
+        "class": "ExactDurationMeterRegistry.ExactSummary",
+        "endcolumn": "19",
+        "endline": "108",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#avoidsynchronizedstatement",
+        "method": "takeSnapshot",
+        "package": "dev.codex.schubert.nk.api.monitoring",
+        "priority": "3",
+        "rule": "AvoidSynchronizedStatement",
+        "ruleset": "Multithreading"
+      },
+      "controls": [
+        "synchronized(stateLock){",
+        "varcounts=newCountAtBucket[BOUNDARIES.length]",
+        "counts[i]=newCountAtBucket(BOUNDARIES[i],buckets[i])",
+        "newHistogramSnapshot(sampleCount,total,maximum,newValueAtPercentile[0],counts,null)"
+      ],
+      "currentCases": [
+        {
+          "className": "dev.codex.schubert.nk.api.monitoring.ExactDurationMeterRegistryTest",
+          "method": "exDur001IndependentBelowEqualAboveEveryFiniteBoundary",
+          "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ExactDurationMeterRegistryTest.java",
+          "sourceSha256": "03f108cfc6db26c0f36497a0bc8568fad7a3d1fe204b6acdfb3d04db55d781f4"
+        },
+        {
+          "className": "dev.codex.schubert.nk.api.monitoring.ExactDurationMeterRegistryTest",
+          "method": "exDur002BothMixedExtremeOrdersKeepSmallSamplesAndFiniteSum",
+          "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ExactDurationMeterRegistryTest.java",
+          "sourceSha256": "03f108cfc6db26c0f36497a0bc8568fad7a3d1fe204b6acdfb3d04db55d781f4"
+        },
+        {
+          "className": "dev.codex.schubert.nk.api.monitoring.ExactDurationMeterRegistryTest",
+          "method": "exDur003RejectedScalarInputsLeaveCompleteSnapshotUnchanged",
+          "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ExactDurationMeterRegistryTest.java",
+          "sourceSha256": "03f108cfc6db26c0f36497a0bc8568fad7a3d1fe204b6acdfb3d04db55d781f4"
+        },
+        {
+          "className": "dev.codex.schubert.nk.api.monitoring.ExactDurationMeterRegistryTest",
+          "method": "exDur004SnapshotIsAtomicDefensiveAndDoesNotAliasMutableBuckets",
+          "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ExactDurationMeterRegistryTest.java",
+          "sourceSha256": "03f108cfc6db26c0f36497a0bc8568fad7a3d1fe204b6acdfb3d04db55d781f4"
+        },
+        {
+          "className": "dev.codex.schubert.nk.api.monitoring.ExactDurationMeterRegistryTest",
+          "method": "exDur008ConstructorsRejectNullAndDurationStateNeverReadsClock",
+          "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ExactDurationMeterRegistryTest.java",
+          "sourceSha256": "03f108cfc6db26c0f36497a0bc8568fad7a3d1fe204b6acdfb3d04db55d781f4"
+        },
+        {
+          "className": "dev.codex.schubert.nk.api.monitoring.ExactDurationMeterRegistryTest",
+          "method": "exDur009ConcurrentUpdatesAndSnapshotsHaveConsistentIndependentIdentity",
+          "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ExactDurationMeterRegistryTest.java",
+          "sourceSha256": "03f108cfc6db26c0f36497a0bc8568fad7a3d1fe204b6acdfb3d04db55d781f4"
+        },
+        {
+          "className": "dev.codex.schubert.nk.api.monitoring.ExactDurationMeterRegistryTest",
+          "method": "exDur010AuxiliaryGaugeFactoryFailureRetainsCallerOwnershipAndIdentity",
+          "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ExactDurationMeterRegistryTest.java",
+          "sourceSha256": "03f108cfc6db26c0f36497a0bc8568fad7a3d1fe204b6acdfb3d04db55d781f4"
+        }
+      ],
+      "currentWholeJoinPending": true,
+      "disposition": "CONTEXT_NOT_APPLICABLE",
+      "id": "PMD-00359",
+      "kind": "PRIVATE_FINAL_MONITOR_CONSTANT_MEMORY_ATOMIC_SNAPSHOT",
+      "newAccepted": 0,
+      "oldRuntimeReassigned": false,
+      "originalRowSha256": "fd0d728f59a0f105ef6f5d286769c9889f6c5d34d001ff431669c2ea1aa1fad0",
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/monitoring/ExactDurationMeterRegistry.java",
+      "productTestsExecutedByReview": 0,
+      "reason": "411 section9 explicitly requires private-final state lock. Same private stateLock protects count/total/max/all five cumulative buckets in record and fresh defensive snapshot copy. No public this/class monitor, nested lock, blocking I/O, callback or external authority in either critical section. SDK snapshot allocations only; monitor exits release on ordinary exception. ReentrantLock is a generic PMD preference, not a stronger project contract. Current whole boundary/defensive/concurrent tests and full selected counters support this source, not all JVM scheduling/OOME possibilities.",
+      "rule": "AvoidSynchronizedStatement",
+      "scopeKind": "METHOD",
+      "scopeName": "takeSnapshot",
+      "scopeTokenSha256": "092718f471bae84c62d98664134307da2ae07027da2b9160c37a0d3606d6cef8",
+      "source": "0124b5938a50f4ceea542486c336ba12146cb1b4",
+      "sourceSha256": "20f47112dcc5776b4f18c190adbcd782c03355815adce2e380d23cf6d9551108",
+      "sourceSpanSha256": "c666a36176076433b56d77b2fc43ea0a3e66f65e1c74d0b769997a0295b6300f"
+    },
+    {
+      "attributes": {
+        "begincolumn": "31",
+        "beginline": "235",
+        "class": "DbQueryDurationMetricRecorderTest",
+        "endcolumn": "55",
+        "endline": "235",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap",
+        "method": "dbTime002IndependentSecondsHistogramCdfAndTwoMaximumSamplesNeverLongWrap",
+        "package": "dev.codex.schubert.nk.api.monitoring",
+        "priority": "3",
+        "rule": "UseConcurrentHashMap",
+        "ruleset": "Multithreading",
+        "variable": "counts"
+      },
+      "controls": [
+        "Map<Double,Double>counts=newHashMap<>()",
+        "counts.put(bucket.bucket(),bucket.count())",
+        "assertEquals(2.0,counts.get(.001).doubleValue())"
+      ],
+      "currentCases": [
+        {
+          "className": "dev.codex.schubert.nk.api.monitoring.DbQueryDurationMetricRecorderTest",
+          "method": "dbTime002IndependentSecondsHistogramCdfAndTwoMaximumSamplesNeverLongWrap",
+          "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/DbQueryDurationMetricRecorderTest.java",
+          "sourceSha256": "ba5366f062bf5e07b646aed6fb71105ecff8466916c1b61ba0d3b66837ff2095"
+        }
+      ],
+      "currentWholeJoinPending": true,
+      "disposition": "CONTEXT_NOT_APPLICABLE",
+      "id": "PMD-02168",
+      "kind": "THREAD_CONFINED_INDEPENDENT_ORACLE_MAP_NOT_SHARED_WITH_TASKS",
+      "newAccepted": 0,
+      "oldRuntimeReassigned": false,
+      "originalRowSha256": "9c517a6d163a99b176f0aaed72f7ccc8a66bd812a51df468317da43c4e65e135",
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/DbQueryDurationMetricRecorderTest.java",
+      "productTestsExecutedByReview": 0,
+      "reason": "Whole source shows002 CDF map created/read only on calling thread. In007 counts/sums/maxima are filled on parent before invokeAll and read after join; submitted lambda captures only recorder/query/outcome/ns, never the maps. They are independent expected values, not shared Product state. No ConcurrentHashMap requirement for these thread-confined maps; historical ref source-rebound, raw retained.",
+      "rule": "UseConcurrentHashMap",
+      "scopeKind": "METHOD",
+      "scopeName": "dbTime002IndependentSecondsHistogramCdfAndTwoMaximumSamplesNeverLongWrap",
+      "scopeTokenSha256": "c5c9efe2a753924ddf3c73ed7231fdb1e47a588ed963e27fa718ea071941a1ee",
+      "source": "0124b5938a50f4ceea542486c336ba12146cb1b4",
+      "sourceSha256": "ba5366f062bf5e07b646aed6fb71105ecff8466916c1b61ba0d3b66837ff2095",
+      "sourceSpanSha256": "be55f799ae16fb21d581fe1f045f0fc62e7da818b5329804ead64e363e1376b7"
+    },
+    {
+      "attributes": {
+        "begincolumn": "24",
+        "beginline": "398",
+        "class": "DbQueryDurationMetricRecorderTest",
+        "endcolumn": "55",
+        "endline": "398",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "method": "dbTime007ConcurrentSampleCountSumAndMaximumUsePrecomputedIntegerInputs",
+        "package": "dev.codex.schubert.nk.api.monitoring",
+        "priority": "3",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading",
+        "variable": "executor"
+      },
+      "controls": [
+        "varexecutor=Executors.newFixedThreadPool(8)",
+        "index<64",
+        "counts.merge(key,1L,Long::sum)",
+        "sums.merge(key,ns,Long::sum)",
+        "maxima.merge(key,ns,Long::max)",
+        "recorder.record(query,outcome,ns);returnnull;",
+        "executor.invokeAll(tasks)",
+        "result.get(5,TimeUnit.SECONDS)",
+        "assertEquals(64,registry.records.get())"
+      ],
+      "currentCases": [
+        {
+          "className": "dev.codex.schubert.nk.api.monitoring.DbQueryDurationMetricRecorderTest",
+          "method": "dbTime007ConcurrentSampleCountSumAndMaximumUsePrecomputedIntegerInputs",
+          "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/DbQueryDurationMetricRecorderTest.java",
+          "sourceSha256": "ba5366f062bf5e07b646aed6fb71105ecff8466916c1b61ba0d3b66837ff2095"
+        }
+      ],
+      "currentWholeJoinPending": true,
+      "disposition": "CONTEXT_NOT_APPLICABLE",
+      "id": "PMD-02169",
+      "kind": "OWNED_FINITE_EIGHT_WORKER_DB_DURATION_FIXTURE",
+      "newAccepted": 0,
+      "oldRuntimeReassigned": false,
+      "originalRowSha256": "c8b496c8e5b60f3b78bf47b537205d478d1b0fdcf5e16888111b40c4cbb3c50a",
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/DbQueryDurationMetricRecorderTest.java",
+      "productTestsExecutedByReview": 0,
+      "reason": "Own SDK registry, eight standalone workers/64 finite scalar-record callbacks, parent independent count/sum/max, TWR reverse close. invokeAll and TWR lack local absolute deadline; later Future.get5seconds and outer JVM240seconds distinguished. No SQL/JDBC/DB/network/VM/Root/native/authority operations. Historical thread refs source-rebound, raw retained.",
+      "rule": "DoNotUseThreads",
+      "scopeKind": "METHOD",
+      "scopeName": "dbTime007ConcurrentSampleCountSumAndMaximumUsePrecomputedIntegerInputs",
+      "scopeTokenSha256": "42ae8cc1422ec013d0bb344af2026d5795e7b856c4df3683b4643b4a1de01685",
+      "source": "0124b5938a50f4ceea542486c336ba12146cb1b4",
+      "sourceSha256": "ba5366f062bf5e07b646aed6fb71105ecff8466916c1b61ba0d3b66837ff2095",
+      "sourceSpanSha256": "45a38a95e5b1914bc44b51b29e60fb4d5c93e0e1d3f6a314234d653392df5f14"
+    },
+    {
+      "attributes": {
+        "begincolumn": "25",
+        "beginline": "400",
+        "class": "DbQueryDurationMetricRecorderTest",
+        "endcolumn": "49",
+        "endline": "400",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap",
+        "method": "dbTime007ConcurrentSampleCountSumAndMaximumUsePrecomputedIntegerInputs",
+        "package": "dev.codex.schubert.nk.api.monitoring",
+        "priority": "3",
+        "rule": "UseConcurrentHashMap",
+        "ruleset": "Multithreading",
+        "variable": "counts"
+      },
+      "controls": [
+        "varexecutor=Executors.newFixedThreadPool(8)",
+        "index<64",
+        "counts.merge(key,1L,Long::sum)",
+        "sums.merge(key,ns,Long::sum)",
+        "maxima.merge(key,ns,Long::max)",
+        "recorder.record(query,outcome,ns);returnnull;",
+        "executor.invokeAll(tasks)",
+        "result.get(5,TimeUnit.SECONDS)",
+        "assertEquals(64,registry.records.get())"
+      ],
+      "currentCases": [
+        {
+          "className": "dev.codex.schubert.nk.api.monitoring.DbQueryDurationMetricRecorderTest",
+          "method": "dbTime007ConcurrentSampleCountSumAndMaximumUsePrecomputedIntegerInputs",
+          "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/DbQueryDurationMetricRecorderTest.java",
+          "sourceSha256": "ba5366f062bf5e07b646aed6fb71105ecff8466916c1b61ba0d3b66837ff2095"
+        }
+      ],
+      "currentWholeJoinPending": true,
+      "disposition": "CONTEXT_NOT_APPLICABLE",
+      "id": "PMD-02170",
+      "kind": "THREAD_CONFINED_INDEPENDENT_ORACLE_MAP_NOT_SHARED_WITH_TASKS",
+      "newAccepted": 0,
+      "oldRuntimeReassigned": false,
+      "originalRowSha256": "23d594d4aea1f421948ce7eb6f23a812872fd32e71a01be66766e4a6d60e8864",
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/DbQueryDurationMetricRecorderTest.java",
+      "productTestsExecutedByReview": 0,
+      "reason": "Whole source shows002 CDF map created/read only on calling thread. In007 counts/sums/maxima are filled on parent before invokeAll and read after join; submitted lambda captures only recorder/query/outcome/ns, never the maps. They are independent expected values, not shared Product state. No ConcurrentHashMap requirement for these thread-confined maps; historical ref source-rebound, raw retained.",
+      "rule": "UseConcurrentHashMap",
+      "scopeKind": "METHOD",
+      "scopeName": "dbTime007ConcurrentSampleCountSumAndMaximumUsePrecomputedIntegerInputs",
+      "scopeTokenSha256": "42ae8cc1422ec013d0bb344af2026d5795e7b856c4df3683b4643b4a1de01685",
+      "source": "0124b5938a50f4ceea542486c336ba12146cb1b4",
+      "sourceSha256": "ba5366f062bf5e07b646aed6fb71105ecff8466916c1b61ba0d3b66837ff2095",
+      "sourceSpanSha256": "be55f799ae16fb21d581fe1f045f0fc62e7da818b5329804ead64e363e1376b7"
+    },
+    {
+      "attributes": {
+        "begincolumn": "25",
+        "beginline": "401",
+        "class": "DbQueryDurationMetricRecorderTest",
+        "endcolumn": "47",
+        "endline": "401",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap",
+        "method": "dbTime007ConcurrentSampleCountSumAndMaximumUsePrecomputedIntegerInputs",
+        "package": "dev.codex.schubert.nk.api.monitoring",
+        "priority": "3",
+        "rule": "UseConcurrentHashMap",
+        "ruleset": "Multithreading",
+        "variable": "sums"
+      },
+      "controls": [
+        "varexecutor=Executors.newFixedThreadPool(8)",
+        "index<64",
+        "counts.merge(key,1L,Long::sum)",
+        "sums.merge(key,ns,Long::sum)",
+        "maxima.merge(key,ns,Long::max)",
+        "recorder.record(query,outcome,ns);returnnull;",
+        "executor.invokeAll(tasks)",
+        "result.get(5,TimeUnit.SECONDS)",
+        "assertEquals(64,registry.records.get())"
+      ],
+      "currentCases": [
+        {
+          "className": "dev.codex.schubert.nk.api.monitoring.DbQueryDurationMetricRecorderTest",
+          "method": "dbTime007ConcurrentSampleCountSumAndMaximumUsePrecomputedIntegerInputs",
+          "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/DbQueryDurationMetricRecorderTest.java",
+          "sourceSha256": "ba5366f062bf5e07b646aed6fb71105ecff8466916c1b61ba0d3b66837ff2095"
+        }
+      ],
+      "currentWholeJoinPending": true,
+      "disposition": "CONTEXT_NOT_APPLICABLE",
+      "id": "PMD-02171",
+      "kind": "THREAD_CONFINED_INDEPENDENT_ORACLE_MAP_NOT_SHARED_WITH_TASKS",
+      "newAccepted": 0,
+      "oldRuntimeReassigned": false,
+      "originalRowSha256": "8213ac2c32df3833c83981053cfc6c871dd0a20f757ca6a4bd82912afdcd58c8",
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/DbQueryDurationMetricRecorderTest.java",
+      "productTestsExecutedByReview": 0,
+      "reason": "Whole source shows002 CDF map created/read only on calling thread. In007 counts/sums/maxima are filled on parent before invokeAll and read after join; submitted lambda captures only recorder/query/outcome/ns, never the maps. They are independent expected values, not shared Product state. No ConcurrentHashMap requirement for these thread-confined maps; historical ref source-rebound, raw retained.",
+      "rule": "UseConcurrentHashMap",
+      "scopeKind": "METHOD",
+      "scopeName": "dbTime007ConcurrentSampleCountSumAndMaximumUsePrecomputedIntegerInputs",
+      "scopeTokenSha256": "42ae8cc1422ec013d0bb344af2026d5795e7b856c4df3683b4643b4a1de01685",
+      "source": "0124b5938a50f4ceea542486c336ba12146cb1b4",
+      "sourceSha256": "ba5366f062bf5e07b646aed6fb71105ecff8466916c1b61ba0d3b66837ff2095",
+      "sourceSpanSha256": "4dababec03fbcda0847ea38c899952bacff7ca888265a4efc7a3f06014abf3bf"
+    },
+    {
+      "attributes": {
+        "begincolumn": "25",
+        "beginline": "402",
+        "class": "DbQueryDurationMetricRecorderTest",
+        "endcolumn": "49",
+        "endline": "402",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap",
+        "method": "dbTime007ConcurrentSampleCountSumAndMaximumUsePrecomputedIntegerInputs",
+        "package": "dev.codex.schubert.nk.api.monitoring",
+        "priority": "3",
+        "rule": "UseConcurrentHashMap",
+        "ruleset": "Multithreading",
+        "variable": "maxima"
+      },
+      "controls": [
+        "varexecutor=Executors.newFixedThreadPool(8)",
+        "index<64",
+        "counts.merge(key,1L,Long::sum)",
+        "sums.merge(key,ns,Long::sum)",
+        "maxima.merge(key,ns,Long::max)",
+        "recorder.record(query,outcome,ns);returnnull;",
+        "executor.invokeAll(tasks)",
+        "result.get(5,TimeUnit.SECONDS)",
+        "assertEquals(64,registry.records.get())"
+      ],
+      "currentCases": [
+        {
+          "className": "dev.codex.schubert.nk.api.monitoring.DbQueryDurationMetricRecorderTest",
+          "method": "dbTime007ConcurrentSampleCountSumAndMaximumUsePrecomputedIntegerInputs",
+          "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/DbQueryDurationMetricRecorderTest.java",
+          "sourceSha256": "ba5366f062bf5e07b646aed6fb71105ecff8466916c1b61ba0d3b66837ff2095"
+        }
+      ],
+      "currentWholeJoinPending": true,
+      "disposition": "CONTEXT_NOT_APPLICABLE",
+      "id": "PMD-02172",
+      "kind": "THREAD_CONFINED_INDEPENDENT_ORACLE_MAP_NOT_SHARED_WITH_TASKS",
+      "newAccepted": 0,
+      "oldRuntimeReassigned": false,
+      "originalRowSha256": "06a2e1457f13fa68d15d4055b7d12f4e48bedbe0b03fb0b88e79d21132346d81",
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/DbQueryDurationMetricRecorderTest.java",
+      "productTestsExecutedByReview": 0,
+      "reason": "Whole source shows002 CDF map created/read only on calling thread. In007 counts/sums/maxima are filled on parent before invokeAll and read after join; submitted lambda captures only recorder/query/outcome/ns, never the maps. They are independent expected values, not shared Product state. No ConcurrentHashMap requirement for these thread-confined maps; historical ref source-rebound, raw retained.",
+      "rule": "UseConcurrentHashMap",
+      "scopeKind": "METHOD",
+      "scopeName": "dbTime007ConcurrentSampleCountSumAndMaximumUsePrecomputedIntegerInputs",
+      "scopeTokenSha256": "42ae8cc1422ec013d0bb344af2026d5795e7b856c4df3683b4643b4a1de01685",
+      "source": "0124b5938a50f4ceea542486c336ba12146cb1b4",
+      "sourceSha256": "ba5366f062bf5e07b646aed6fb71105ecff8466916c1b61ba0d3b66837ff2095",
+      "sourceSpanSha256": "546307bc55690b698a9e87662e15e8b733d22d45a4043d4c5910381d567a216b"
+    },
+    {
+      "attributes": {
+        "begincolumn": "25",
+        "beginline": "418",
+        "class": "DbQueryDurationMetricRecorderTest",
+        "endcolumn": "50",
+        "endline": "418",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "method": "dbTime007ConcurrentSampleCountSumAndMaximumUsePrecomputedIntegerInputs",
+        "package": "dev.codex.schubert.nk.api.monitoring",
+        "priority": "3",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading"
+      },
+      "controls": [
+        "varexecutor=Executors.newFixedThreadPool(8)",
+        "index<64",
+        "counts.merge(key,1L,Long::sum)",
+        "sums.merge(key,ns,Long::sum)",
+        "maxima.merge(key,ns,Long::max)",
+        "recorder.record(query,outcome,ns);returnnull;",
+        "executor.invokeAll(tasks)",
+        "result.get(5,TimeUnit.SECONDS)",
+        "assertEquals(64,registry.records.get())"
+      ],
+      "currentCases": [
+        {
+          "className": "dev.codex.schubert.nk.api.monitoring.DbQueryDurationMetricRecorderTest",
+          "method": "dbTime007ConcurrentSampleCountSumAndMaximumUsePrecomputedIntegerInputs",
+          "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/DbQueryDurationMetricRecorderTest.java",
+          "sourceSha256": "ba5366f062bf5e07b646aed6fb71105ecff8466916c1b61ba0d3b66837ff2095"
+        }
+      ],
+      "currentWholeJoinPending": true,
+      "disposition": "CONTEXT_NOT_APPLICABLE",
+      "id": "PMD-02173",
+      "kind": "OWNED_FINITE_EIGHT_WORKER_DB_DURATION_FIXTURE",
+      "newAccepted": 0,
+      "oldRuntimeReassigned": false,
+      "originalRowSha256": "db911fc2770943fee61fbd545488cf27edec11bb8c0be605cae518ef7aedc657",
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/DbQueryDurationMetricRecorderTest.java",
+      "productTestsExecutedByReview": 0,
+      "reason": "Own SDK registry, eight standalone workers/64 finite scalar-record callbacks, parent independent count/sum/max, TWR reverse close. invokeAll and TWR lack local absolute deadline; later Future.get5seconds and outer JVM240seconds distinguished. No SQL/JDBC/DB/network/VM/Root/native/authority operations. Historical thread refs source-rebound, raw retained.",
+      "rule": "DoNotUseThreads",
+      "scopeKind": "METHOD",
+      "scopeName": "dbTime007ConcurrentSampleCountSumAndMaximumUsePrecomputedIntegerInputs",
+      "scopeTokenSha256": "42ae8cc1422ec013d0bb344af2026d5795e7b856c4df3683b4643b4a1de01685",
+      "source": "0124b5938a50f4ceea542486c336ba12146cb1b4",
+      "sourceSha256": "ba5366f062bf5e07b646aed6fb71105ecff8466916c1b61ba0d3b66837ff2095",
+      "sourceSpanSha256": "9af25a128f8effbccd5f83bd239b1f00d33d2aec1c3032555507eedcec5d2eec"
+    },
+    {
+      "attributes": {
+        "begincolumn": "24",
+        "beginline": "295",
+        "class": "ExactDurationMeterRegistryTest",
+        "endcolumn": "55",
+        "endline": "295",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+        "method": "exDur009ConcurrentUpdatesAndSnapshotsHaveConsistentIndependentIdentity",
+        "package": "dev.codex.schubert.nk.api.monitoring",
+        "priority": "3",
+        "rule": "DoNotUseThreads",
+        "ruleset": "Multithreading",
+        "variable": "executor"
+      },
+      "controls": [
+        "try(varregistry=registry();varexecutor=Executors.newFixedThreadPool(5))",
+        "thread<4",
+        "i<64",
+        "i<128",
+        "start.await(5,TimeUnit.SECONDS)",
+        "start.countDown()",
+        "future.get(10,TimeUnit.SECONDS)",
+        "assertEquals(256,summary.count())",
+        "cdf(summary,0,0,0,256,256)"
+      ],
+      "currentCases": [
+        {
+          "className": "dev.codex.schubert.nk.api.monitoring.ExactDurationMeterRegistryTest",
+          "method": "exDur009ConcurrentUpdatesAndSnapshotsHaveConsistentIndependentIdentity",
+          "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ExactDurationMeterRegistryTest.java",
+          "sourceSha256": "03f108cfc6db26c0f36497a0bc8568fad7a3d1fe204b6acdfb3d04db55d781f4"
+        }
+      ],
+      "currentWholeJoinPending": true,
+      "disposition": "CONTEXT_NOT_APPLICABLE",
+      "id": "PMD-02175",
+      "kind": "OWNED_FINITE_FIVE_WORKER_EXACT_SNAPSHOT_FIXTURE",
+      "newAccepted": 0,
+      "oldRuntimeReassigned": false,
+      "originalRowSha256": "7c0e5780bf7a27d377aa383e53583c5582813f31192bc2a76e17422ce42f5c0c",
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/ExactDurationMeterRegistryTest.java",
+      "productTestsExecutedByReview": 0,
+      "reason": "Standalone own SDK fixture, four writers each64 records plus one observer128 snapshots, own CountDownLatch wait5seconds and Future.get10seconds. TWR closes executor then registry. TWR local absolute deadline absent; distinct outer JVM240seconds. No application process, DB, network, filesystem, VM, Root, native, keys or authority. Existing historical thread context is source-rebound only; raw warning retained.",
+      "rule": "DoNotUseThreads",
+      "scopeKind": "METHOD",
+      "scopeName": "exDur009ConcurrentUpdatesAndSnapshotsHaveConsistentIndependentIdentity",
+      "scopeTokenSha256": "8e4969bb306e4f67aa2181b07af61e56b8c09d76b14e3ee95c2b7d10a1ec73b9",
+      "source": "0124b5938a50f4ceea542486c336ba12146cb1b4",
+      "sourceSha256": "03f108cfc6db26c0f36497a0bc8568fad7a3d1fe204b6acdfb3d04db55d781f4",
+      "sourceSpanSha256": "998ab34e7a0cad750fe1f30f9febb47d341350ab991f474a95882964df119bd4"
+    }
+  ],
+  "source": "0124b5938a50f4ceea542486c336ba12146cb1b4"
+}
