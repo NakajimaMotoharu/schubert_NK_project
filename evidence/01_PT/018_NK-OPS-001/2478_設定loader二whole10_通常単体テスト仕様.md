@@ -1,0 +1,19 @@
+# 2478 設定loader二whole10・通常単体テスト仕様
+
+2026-10-29、source a90e303fc59938d413c2d777380bdffbe3e7f9e7/savecf761ac2a610e10cca6eda68ae93beaeb7d29e59/origin一致。現在コードのprivate定数同値PG後の必要ordinary PT、主F03・元担当費P01805/API/P01806/Webは内数/追加費0。開始0.75/2/4共有pp/cap10、fresh値は487へ直接保存、原予測/専有N-T/工数null保持。PG-D805、結果予定2479_設定loader二whole10_単体結果.md、保存前に実path/hashを検査する。
+
+## PT_DEFAULT・実操作と独立性
+
+ApiConfigurationLoaderTest全文152行/WebConfigurationLoaderTest全文156行、両loader全本文、ServiceConfigFiles factory/Contents/production、LinuxDirectoryCalls create/constructor/bind、StorageIdentity、ChildStartupContext.isDescriptorKey、両非秘密parserの静的設定/実parse/validateを読取。元whole各五（PT-OPS-API-LOAD001..005/WEB-LOAD001..005）をそのまま選択し、hold wholeのmethodを抽出しない。旧066～069成功を再演して確認するためでなく、13514等までのTest private定数変更後の現在source資格である。
+
+各loadは明示NonSecretConfigSource callbackが返す固定YAML二文字列だけを読む。NonSecretConfig parserはSnakeYAMLの非再帰/alias0/有限scalarとJDK Pathの字句・SHA/Map検証で、DB/MQ URLは文字列として扱い接続しない。実DB/HTTP/JMS/Root/Unit/VM/credential/permit/原本・私有fileへ到達しない。32read×二familyの自己所有8thread poolは全Future回収/close、元host runnerは180秒でown JVMを有限管理する。
+
+opsLoad003のproduction()はServiceConfigFiles.RETAINED_PRODUCTIONを構築するため**FFMの固定libc symbol lookup/downcall handle束縛**が発生する。constructor/bindはhandle/SAMを保持するだけでopenat/mkdirat/renameat2/unlinkat/fsync/closeを呼ばない。production戻りへloadは呼ばず、全Testのloadは自己所有memory sourceに限定。nativeアクセスflag/権限/経路/環境を追加変更しない。FFM factory確認を実FD/native資格や実設定認証の証明に使わない。System.getenvはproduction constructorが値を保持するだけで実load/承認に使わず、環境実値・symbol addressはログ/公開manifestへ出さない。
+
+ArtemisTransport wholeのactual embedded broker、ConfigurationGroupResolver wholeのnativeFactory/実getent/子process、WebRequestSecurity/SessionSavedRequestのDB BeforeAllは現在の具体副作用で保留する。部分読取を全文review完了とせず、checksum/codec/closureを新harnessへ抽出して回避しない。ResponseSnapshotCodecTestはkey-close関連の独立性未確定でHOLD、名称だけで全cryptoを危険とするものではない。
+
+## 正本・期待・実行・coverage
+
+NK-OPS-001/SYS002004/UI253/SS311/342/343§4–5、066/068。固定環境key/root、common→roleのlayer順/Protocol001、API monitoringDEBUG/MQ文字列/POOL8、Web port8082/8080・SOURCE call1、parser未知key拒否、source StorageIoException同identity、null source/Contents/environment拒否、各32freshread/call32、未知namespace/小文字alias/descriptor認識は権限にならないことを元assertの独立固定値/回数で確認する。期待をProductionから生成せず、Test/入力/期待は不変更。固定source・13536normal/current全input hashへ束縛し、pg13550で元whole10一回、pg13552で元二XML/10一意case/FES0/原exec・単一session/CRC0とloader二source unit全class/method/line/branchを独立確認する。
+
+対象coverageはApiConfigurationLoader/WebConfigurationLoader各全物理classで、両parser/ServiceConfigFiles/LinuxDirectoryCalls/実設定全体は対象外の未資格参照とする。手動除外を加えず、未達/未測定を100へ補完しない。新TestID/新機能/新受入0、元正式1964/53・17/190・工数null・QA051final/全actualHOLD維持、実測とstatic metadataを区別して保存し通常区切り停止なし。
