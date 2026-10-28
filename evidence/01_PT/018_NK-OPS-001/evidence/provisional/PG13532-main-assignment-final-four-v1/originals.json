@@ -1,0 +1,545 @@
+{
+  "source": "df0c755d82564f2a637206a1bda5c33c7df7006c",
+  "sources": [
+    {
+      "basis": "485_ORIGINAL_LOGICAL_OWNER_ONLY_NOT_OLD_PT_OR_BYTES",
+      "canonicalCostOwner": "WBS-P017-03",
+      "canonicalOwner": "WBS-P017-03",
+      "findings": [
+        {
+          "attributes": {
+            "begincolumn": "28",
+            "beginline": "548",
+            "class": "MorningBackupArtifacts",
+            "endcolumn": "44",
+            "endline": "548",
+            "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidcatchinggenericexception",
+            "method": "bytes",
+            "package": "dev.codex.schubert.nk.batch.file",
+            "priority": "3",
+            "rule": "AvoidCatchingGenericException",
+            "ruleset": "Error Prone"
+          },
+          "disposition": "UNCLASSIFIED_NOT_AUTOMATIC_DEFECT_OR_PASS",
+          "id": "PMD-02859",
+          "inputSha256": "8bc88f0ee11c4c70316aef8675ef9772cc316a9d808274f8314fc226382d1235",
+          "line": 548,
+          "message": "Avoid catching RuntimeException in try-catch block",
+          "module": "schubert-nk-batch",
+          "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MorningBackupArtifacts.java",
+          "rowSha256": "d1007d8122f2c8bd1e28ceb71dda453691d2f9138e6dbb4c6d3ef3a1e2e5568e",
+          "rule": "AvoidCatchingGenericException",
+          "scanner": "pmd",
+          "sourceKind": "MAIN"
+        },
+        {
+          "attributes": {
+            "begincolumn": "47",
+            "beginline": "548",
+            "class": "MorningBackupArtifacts",
+            "endcolumn": "52",
+            "endline": "548",
+            "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidcatchinggenericexception",
+            "method": "bytes",
+            "package": "dev.codex.schubert.nk.batch.file",
+            "priority": "3",
+            "rule": "AvoidCatchingGenericException",
+            "ruleset": "Error Prone"
+          },
+          "disposition": "UNCLASSIFIED_NOT_AUTOMATIC_DEFECT_OR_PASS",
+          "id": "PMD-02860",
+          "inputSha256": "8bc88f0ee11c4c70316aef8675ef9772cc316a9d808274f8314fc226382d1235",
+          "line": 548,
+          "message": "Avoid catching Error in try-catch block",
+          "module": "schubert-nk-batch",
+          "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MorningBackupArtifacts.java",
+          "rowSha256": "a826f6f480c65ba04cc8d10130c8528426a3cde490f9d1158ef5ee7450b84816",
+          "rule": "AvoidCatchingGenericException",
+          "scanner": "pmd",
+          "sourceKind": "MAIN"
+        },
+        {
+          "attributes": {
+            "begincolumn": "16",
+            "beginline": "563",
+            "class": "MorningBackupArtifacts",
+            "endcolumn": "43",
+            "endline": "563",
+            "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#assignmentinoperand",
+            "method": "sha",
+            "package": "dev.codex.schubert.nk.batch.file",
+            "priority": "3",
+            "rule": "AssignmentInOperand",
+            "ruleset": "Error Prone"
+          },
+          "disposition": "UNCLASSIFIED_NOT_AUTOMATIC_DEFECT_OR_PASS",
+          "id": "PMD-02861",
+          "inputSha256": "8bc88f0ee11c4c70316aef8675ef9772cc316a9d808274f8314fc226382d1235",
+          "line": 563,
+          "message": "Avoid assignment to read in operand",
+          "module": "schubert-nk-batch",
+          "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MorningBackupArtifacts.java",
+          "rowSha256": "fe8e1173258c05d25a0bce4ff1f04df85ec2ca89a0db83c6f80eb836b4051d39",
+          "rule": "AssignmentInOperand",
+          "scanner": "pmd",
+          "sourceKind": "MAIN"
+        }
+      ],
+      "mapping": [
+        {
+          "id": "PMD-02861",
+          "kind": "READ"
+        }
+      ],
+      "ownershipStatus": "BASELINE_LOGICAL_REFERENCE",
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MorningBackupArtifacts.java",
+      "preEditNegativeVectors": 5,
+      "sha256": "8bc88f0ee11c4c70316aef8675ef9772cc316a9d808274f8314fc226382d1235",
+      "text": "package dev.codex.schubert.nk.batch.file;\n\nimport static dev.codex.schubert.nk.batch.file.EnvironmentInodePolicy.require;\n\nimport dev.codex.schubert.nk.batch.backup.BackupManifest;\nimport dev.codex.schubert.nk.batch.backup.BackupProfile;\nimport dev.codex.schubert.nk.batch.platform.BackupArchiveProcess;\nimport dev.codex.schubert.nk.batch.platform.BackupWorkerRequest;\nimport dev.codex.schubert.nk.batch.platform.MorningParentBudget;\nimport dev.codex.schubert.nk.batch.platform.RootStartupContext;\nimport dev.codex.schubert.nk.batch.repository.MorningDatabaseSession;\nimport dev.codex.schubert.nk.bootstrap.FixedServiceIdentity;\nimport dev.codex.schubert.nk.bootstrap.StartupReleaseManifest;\nimport dev.codex.schubert.nk.storage.DirectoryCalls;\nimport dev.codex.schubert.nk.storage.InodeSecurityCalls;\nimport dev.codex.schubert.nk.storage.LinuxDirectoryCalls;\nimport dev.codex.schubert.nk.storage.LinuxHostDirectoryCalls;\nimport dev.codex.schubert.nk.storage.LinuxInodeSecurity;\nimport dev.codex.schubert.nk.storage.OwnedTransferDirectory;\nimport dev.codex.schubert.nk.storage.ResourceScope;\nimport dev.codex.schubert.nk.storage.ServiceConfigFiles;\nimport edu.umd.cs.findbugs.annotations.SuppressFBWarnings;\nimport edu.umd.cs.findbugs.annotations.SuppressMatchType;\nimport java.io.IOException;\nimport java.nio.ByteBuffer;\nimport java.nio.channels.FileChannel;\nimport java.nio.file.Files;\nimport java.nio.file.Path;\nimport java.nio.file.StandardOpenOption;\nimport java.security.MessageDigest;\nimport java.time.Instant;\nimport java.time.temporal.ChronoUnit;\nimport java.util.Arrays;\nimport java.util.HexFormat;\nimport java.util.List;\nimport java.util.Map;\nimport java.util.Objects;\nimport java.util.UUID;\nimport org.jspecify.annotations.NullMarked;\n\n/** Actual parent archives + publication, never owner/receipt authority. SS341/343 SSC110, PG381. */\n@NullMarked\nfinal class MorningBackupArtifacts {\n  static final List<String> CONFIG =\n      List.of(\n          \"common.yml\",\n          \"api.yml\",\n          \"web.yml\",\n          \"batch.yml\",\n          \"api.env\",\n          \"web.env\",\n          \"backup-profile.json\",\n          \"inbox-inspector.env\");\n  static final List<String> CREDENTIALS =\n      List.of(\n          \"db-api\",\n          \"db-web\",\n          \"db-batch\",\n          \"db-migration\",\n          \"backup-pgpass\",\n          \"mq-api\",\n          \"mq-web\",\n          \"mq-maintenance\",\n          \"mq-ops\",\n          \"api-context-aes-current\",\n          \"api-inbox-response-aes-current\",\n          \"operation-hmac-current\",\n          \"web-session-aes-current\",\n          \"web-revoke-aes-current\",\n          \"web-log-aes-current\",\n          \"artemis-users\",\n          \"db-inbox-inspector\");\n  private static final Map<String, String> TOOLS =\n      Map.of(\n          \"pgDumpWrapperSha256\",\n          \"/usr/share/postgresql-common/pg_wrapper\",\n          \"pgRestoreWrapperSha256\",\n          \"/usr/share/postgresql-common/pg_wrapper\",\n          \"pgDumpSha256\",\n          \"/usr/lib/postgresql/18/bin/pg_dump\",\n          \"pgRestoreSha256\",\n          \"/usr/lib/postgresql/18/bin/pg_restore\",\n          \"tarSha256\",\n          \"/usr/bin/tar\",\n          \"ageSha256\",\n          \"/usr/bin/age\",\n          \"artemisArtifactSha256\",\n          \"/opt/apache-artemis-2.56.0/lib/artemis-cli-2.56.0.jar\");\n  private final RootStartupContext context;\n  private final RootStartupContext.Snapshot expected;\n  private final MorningParentBudget budget;\n  private final InodeSecurityCalls security = LinuxInodeSecurity.create();\n  private final DirectoryCalls host = LinuxHostDirectoryCalls.create();\n  private final FixedServiceIdentity identities = new FixedServiceIdentity();\n\n  MorningBackupArtifacts(\n      RootStartupContext context,\n      RootStartupContext.Snapshot expected,\n      MorningParentBudget budget) {\n    this.context = Objects.requireNonNull(context);\n    this.expected = Objects.requireNonNull(expected);\n    this.budget = Objects.requireNonNull(budget);\n  }\n\n  @SuppressFBWarnings(\n      value = \"DMI_HARDCODED_ABSOLUTE_FILENAME\",\n      matchType = SuppressMatchType.EXACT,\n      justification =\n          \"SS343/SSC110 fixed parent archive/config/tool paths; external VM BARCHIVE acceptance required\")\n  BackupManifest complete(\n      BackupWorkerRequest request,\n      MorningDatabaseSession.BackupBegins begins,\n      UUID part,\n      MorningDatabaseSession.Access database)\n      throws IOException {\n    check();\n    var approval = RootReleaseApprovalReader.create(context, expected);\n    var release =\n        approval.execute(\n            value ->\n                StartupReleaseManifest.createHost(identities.configurationGroup()).verify(value));\n    var artifact = new java.util.concurrent.atomic.AtomicReference<BackupManifest>();\n    Path configPath = Path.of(\"/etc/schubert-nk\");\n    ResourceScope.<OwnedTransferDirectory, Boolean, IOException>acquire(\n        () -> OwnedTransferDirectory.open(host, configPath),\n        OwnedTransferDirectory::close,\n        config -> {\n          var configBefore = directory(config, identities.configurationGroup(), 0x41e8);\n          Boolean result =\n              config.atExistingEntryHandle(\n                  \"backup-profile.json\",\n                  profilePath -> {\n                    var profileBefore =\n                        file(profilePath, identities.configurationGroup(), 0x81a0, 4096);\n                    var profile =\n                        BackupProfile.consume(bytes(profilePath, (int) profileBefore.size()));\n                    String profileHash = sha(profilePath);\n                    require(profile.versions().host().equals(hostname()));\n                    require(profile.versions().jdk().equals(System.getProperty(\"java.version\")));\n                    require(\n                        profileBefore.equals(\n                            file(profilePath, identities.configurationGroup(), 0x81a0, 4096)));\n                    require(\n                        profileHash.equals(\n                            release.artifactHashes().get(\"config/effective/backup-profile.json\")));\n                    require(\n                        profile.versions().app().equals(release.versions().get(\"app\"))\n                            && profile.versions().schema().equals(release.versions().get(\"schema\"))\n                            && profile\n                                .versions()\n                                .os()\n                                .equals(\n                                    release.platform().get(\"osId\")\n                                        + \"-\"\n                                        + release.platform().get(\"osVersion\"))\n                            && profile.versions().jdk().equals(release.build().get(\"jdkVersion\")));\n                    Boolean completed =\n                        withTools(\n                            profile,\n                            0,\n                            () ->\n                                config.atExistingEntryHandle(\n                                    \"backup-age-recipient\",\n                                    recipient -> {\n                                      var recipientBefore = file(recipient, 0, 0x8180, 1024);\n                                      byte[] publicRecipient =\n                                          bytes(recipient, (int) recipientBefore.size());\n                                      try {\n                                        require(\n                                            new String(\n                                                    publicRecipient,\n                                                    java.nio.charset.StandardCharsets.US_ASCII)\n                                                .matches(\n                                                    \"age1[023456789acdefghjklmnpqrstuvwxyz]{58}\\\\n\"));\n                                      } finally {\n                                        Arrays.fill(publicRecipient, (byte) 0);\n                                      }\n                                      String recipientHash = sha(recipient);\n                                      require(\n                                          recipientHash.equals(\n                                              release\n                                                  .artifactHashes()\n                                                  .get(\"config/effective/backup-age-recipient\")));\n                                      Boolean archives =\n                                          withInputs(\n                                              config,\n                                              CONFIG,\n                                              0,\n                                              false,\n                                              () -> {\n                                                return ResourceScope\n                                                    .<OwnedTransferDirectory, Boolean, IOException>\n                                                        acquire(\n                                                            () ->\n                                                                config.openExistingChild(\n                                                                    \"credentials\"),\n                                                            OwnedTransferDirectory::close,\n                                                            credentials -> {\n                                                              var credentialsBefore =\n                                                                  directory(credentials, 0, 0x41c0);\n                                                              return withInputs(\n                                                                  credentials,\n                                                                  CREDENTIALS,\n                                                                  0,\n                                                                  true,\n                                                                  () -> {\n                                                                    var identity =\n                                                                        identities.resolveBackup();\n                                                                    return ResourceScope\n                                                                        .<OwnedTransferDirectory,\n                                                                            Boolean, IOException>\n                                                                            acquire(\n                                                                                MorningBackupArtifacts\n                                                                                    ::openBackup,\n                                                                                OwnedTransferDirectory\n                                                                                    ::close,\n                                                                                backup -> {\n                                                                                  ResourceScope\n                                                                                      .<OwnedTransferDirectory,\n                                                                                          Boolean,\n                                                                                          IOException>\n                                                                                          acquire(\n                                                                                              () ->\n                                                                                                  backup\n                                                                                                      .openExistingChild(\n                                                                                                          request\n                                                                                                                  .directoryName()\n                                                                                                              + \".part\"),\n                                                                                              OwnedTransferDirectory\n                                                                                                  ::close,\n                                                                                              pending -> {\n                                                                                                directory(\n                                                                                                    pending,\n                                                                                                    identity\n                                                                                                        .gid(),\n                                                                                                    0x41c0,\n                                                                                                    identity\n                                                                                                        .uid());\n                                                                                                var\n                                                                                                    processes =\n                                                                                                        new BackupArchiveProcess(\n                                                                                                            security,\n                                                                                                            budget);\n                                                                                                write(\n                                                                                                    pending,\n                                                                                                    \"config.tar\",\n                                                                                                    output ->\n                                                                                                        config\n                                                                                                            .atDirectory(\n                                                                                                                source -> {\n                                                                                                                  processes\n                                                                                                                      .configuration(\n                                                                                                                          source,\n                                                                                                                          output,\n                                                                                                                          CONFIG);\n                                                                                                                  return Boolean\n                                                                                                                      .TRUE;\n                                                                                                                }));\n                                                                                                write(\n                                                                                                    pending,\n                                                                                                    \"credentials.tar.age\",\n                                                                                                    output ->\n                                                                                                        credentials\n                                                                                                            .atDirectory(\n                                                                                                                source -> {\n                                                                                                                  processes\n                                                                                                                      .credentials(\n                                                                                                                          source,\n                                                                                                                          output,\n                                                                                                                          recipient,\n                                                                                                                          CREDENTIALS);\n                                                                                                                  return Boolean\n                                                                                                                      .TRUE;\n                                                                                                                }));\n                                                                                                return Boolean\n                                                                                                    .TRUE;\n                                                                                              });\n                                                                                  check();\n                                                                                  var observed =\n                                                                                      new BackupArtifactVerifier(\n                                                                                              backup,\n                                                                                              security,\n                                                                                              identity\n                                                                                                  .uid(),\n                                                                                              identity\n                                                                                                  .gid())\n                                                                                          .observePending(\n                                                                                              request);\n                                                                                  var manifest =\n                                                                                      new BackupManifest(\n                                                                                          begins\n                                                                                              .database(),\n                                                                                          begins\n                                                                                              .configuration(),\n                                                                                          request\n                                                                                              .started(),\n                                                                                          Instant\n                                                                                              .now()\n                                                                                              .truncatedTo(\n                                                                                                  ChronoUnit\n                                                                                                      .MICROS),\n                                                                                          profile\n                                                                                              .versions(),\n                                                                                          recipientHash,\n                                                                                          observed\n                                                                                              .dump(),\n                                                                                          observed\n                                                                                              .configuration(),\n                                                                                          observed\n                                                                                              .credentials());\n                                                                                  artifact.set(\n                                                                                      manifest); // Claims only: no\n                                                                                  // DB or\n                                                                                  // publication\n                                                                                  // before ALL\n                                                                                  // input\n                                                                                  // closes.\n                                                                                  check();\n                                                                                  require(\n                                                                                      credentialsBefore\n                                                                                          .equals(\n                                                                                              directory(\n                                                                                                  credentials,\n                                                                                                  0,\n                                                                                                  0x41c0)));\n                                                                                  return Boolean\n                                                                                      .TRUE;\n                                                                                });\n                                                                  });\n                                                            });\n                                              });\n                                      require(\n                                          recipientBefore.equals(file(recipient, 0, 0x8180, 1024)));\n                                      return archives;\n                                    }));\n                    require(\n                        profileBefore.equals(\n                            file(profilePath, identities.configurationGroup(), 0x81a0, 4096)));\n                    return completed;\n                  });\n          require(configBefore.equals(directory(config, identities.configurationGroup(), 0x41e8)));\n          return result;\n        });\n    check();\n    var current =\n        approval.execute(\n            value ->\n                StartupReleaseManifest.createHost(identities.configurationGroup()).verify(value));\n    require(release.equals(current));\n    var manifest = Objects.requireNonNull(artifact.get(), \"actual observed backup content\");\n    var identity = identities.resolveBackup();\n    var backupCalls = LinuxDirectoryCalls.create();\n    Path backupPath = Path.of(\"/srv/schubert-nk/backup\");\n    ResourceScope.<OwnedTransferDirectory, Boolean, IOException>acquire(\n        () -> OwnedTransferDirectory.open(backupCalls, backupPath),\n        OwnedTransferDirectory::close,\n        backup -> {\n          new BackupManifestPublisher(backup, security, identity.uid(), identity.gid())\n              .create(manifest, part);\n          new BackupBundlePublisher(backup, security, identity.uid(), identity.gid())\n              .publish(manifest);\n          database.completeBackup(\n              begins,\n              new BackupBundleCompletion(backup, security, identity.uid(), identity.gid()),\n              manifest.directoryName());\n          check();\n          return Boolean.TRUE;\n        });\n    check();\n    return manifest;\n  }\n\n  @FunctionalInterface\n  private interface Work {\n    Boolean run() throws IOException;\n  }\n\n  @FunctionalInterface\n  private interface Writer {\n    Boolean write(Path held) throws IOException;\n  }\n\n  private Boolean withTools(BackupProfile profile, int index, Work work) throws IOException {\n    if (index == BackupProfile.TOOL_KEYS.size()) return work.run();\n    String key = BackupProfile.TOOL_KEYS.get(index);\n    Path fixed = Path.of(Objects.requireNonNull(TOOLS.get(key)));\n    Path parent = Objects.requireNonNull(fixed.getParent());\n    return ResourceScope.<OwnedTransferDirectory, Boolean, IOException>acquire(\n        () -> OwnedTransferDirectory.open(host, parent),\n        OwnedTransferDirectory::close,\n        root ->\n            root.atExistingEntryHandle(\n                Objects.requireNonNull(fixed.getFileName(), \"fixed tool file name\").toString(),\n                held -> {\n                  var before = tool(held);\n                  require(sha(held).equals(profile.toolHashes().get(key)));\n                  Boolean result = withTools(profile, index + 1, work);\n                  require(before.equals(tool(held)));\n                  check();\n                  return result;\n                }));\n  }\n\n  private Boolean withInputs(\n      OwnedTransferDirectory directory,\n      List<String> names,\n      int index,\n      boolean credential,\n      Work work)\n      throws IOException {\n    if (index == names.size()) return work.run();\n    String name = names.get(index);\n    long group =\n        credential\n            ? 0\n            : name.equals(\"api.env\")\n                ? identities.resolve(ServiceConfigFiles.Service.API).gid()\n                : name.equals(\"web.env\")\n                    ? identities.resolve(ServiceConfigFiles.Service.WEB).gid()\n                    : identities.configurationGroup();\n    int mode = inputMode(name, credential);\n    return directory.atExistingEntryHandle(\n        name,\n        held -> {\n          var before = file(held, group, mode, 65536);\n          Boolean result = withInputs(directory, names, index + 1, credential, work);\n          require(before.equals(file(held, group, mode, 65536)));\n          check();\n          return result;\n        });\n  }\n\n  /** SS343 SSC197 / BUG771: static Inspector env is not an API/Web private env. */\n  static int inputMode(String name, boolean credential) {\n    Objects.requireNonNull(name, \"fixed backup input name\");\n    if (!(credential ? CREDENTIALS : CONFIG).contains(name))\n      throw new IllegalArgumentException(\"backup input name outside fixed catalog\");\n    return credential || name.equals(\"api.env\") || name.equals(\"web.env\") ? 0x8180 : 0x81a0;\n  }\n\n  private void write(OwnedTransferDirectory pending, String name, Writer writer)\n      throws IOException {\n    UUID temporary = UUID.randomUUID();\n    pending.createPrivatePart(\n        temporary,\n        held -> {\n          file(held, 0, 0x8180, 0);\n          writer.write(held);\n          check();\n          try (var channel = FileChannel.open(held, StandardOpenOption.WRITE)) {\n            channel.force(true);\n          }\n          return Boolean.TRUE;\n        });\n    pending.publishAs(temporary, name);\n    pending.sync();\n    check();\n  }\n\n  private EnvironmentInodePolicy.Metadata directory(\n      OwnedTransferDirectory owned, long group, int mode) throws IOException {\n    return directory(owned, group, mode, 0);\n  }\n\n  private EnvironmentInodePolicy.Metadata directory(\n      OwnedTransferDirectory owned, long group, int mode, long uid) throws IOException {\n    return owned.atDirectory(\n        held -> {\n          var m = metadata(held);\n          requireDirectoryMetadata(m, group, mode, uid);\n          acl(held);\n          return m;\n        });\n  }\n\n  private EnvironmentInodePolicy.Metadata file(Path held, long group, int mode, long maximum)\n      throws IOException {\n    var m = metadata(held);\n    requireFileMetadata(m, group, mode, maximum);\n    acl(held);\n    return m;\n  }\n\n  private EnvironmentInodePolicy.Metadata tool(Path held) throws IOException {\n    var m = metadata(held);\n    requireToolMetadata(m);\n    acl(held);\n    return m;\n  }\n\n  /** Pure internal value guards, no Root/FD admission and no filesystem repair. */\n  static void requireDirectoryMetadata(\n      EnvironmentInodePolicy.Metadata m, long group, int mode, long uid) throws IOException {\n    Objects.requireNonNull(m);\n    require(\n        m.mode() == mode && m.uid() == uid && m.gid() == group && m.links() >= 2 && m.size() >= 0);\n  }\n\n  static void requireFileMetadata(\n      EnvironmentInodePolicy.Metadata m, long group, int mode, long maximum) throws IOException {\n    Objects.requireNonNull(m);\n    require(\n        m.mode() == mode\n            && m.uid() == 0\n            && m.gid() == group\n            && m.links() == 1\n            && m.size() >= 0\n            && m.size() <= maximum);\n  }\n\n  static void requireToolMetadata(EnvironmentInodePolicy.Metadata m) throws IOException {\n    Objects.requireNonNull(m);\n    require(\n        (m.mode() == 0x81a4 || m.mode() == 0x81ed)\n            && m.uid() == 0\n            && m.gid() == 0\n            && m.links() == 1\n            && m.size() > 0\n            && m.size() <= 268435456L);\n  }\n\n  private EnvironmentInodePolicy.Metadata metadata(Path held) throws IOException {\n    check();\n    return EnvironmentInodePolicy.metadata(\n        Files.readAttributes(held, \"unix:mode,uid,gid,nlink,size,dev,ino,lastModifiedTime,ctime\"));\n  }\n\n  private void acl(Path held) throws IOException {\n    byte[] acl = security.accessAcl(held, 44);\n    requireNoAccessAcl(acl);\n    check();\n  }\n\n  static void requireNoAccessAcl(@org.jspecify.annotations.Nullable byte[] acl) throws IOException {\n    require(acl != null && acl.length == 0);\n  }\n\n  private byte[] bytes(Path held, int size) throws IOException {\n    byte[] owned = new byte[size];\n    try (var input = FileChannel.open(held, StandardOpenOption.READ)) {\n      var buffer = ByteBuffer.wrap(owned);\n      while (buffer.hasRemaining()) {\n        check();\n        require(input.read(buffer) > 0);\n      }\n      require(input.read(ByteBuffer.allocate(1)) == -1 && input.size() == size);\n      return owned;\n    } catch (IOException | RuntimeException | Error failure) {\n      Arrays.fill(owned, (byte) 0);\n      throw failure;\n    }\n  }\n\n  private String sha(Path held) throws IOException {\n    try {\n      MessageDigest digest = MessageDigest.getInstance(\"SHA-256\");\n      byte[] bytes = new byte[65536];\n      try (var input = FileChannel.open(held, StandardOpenOption.READ)) {\n        long size = input.size();\n        long readTotal = 0;\n        var buffer = ByteBuffer.wrap(bytes);\n        int read;\n        while ((read = input.read(buffer)) != -1) {\n          check();\n          require(read > 0);\n          readTotal += read;\n          buffer.flip();\n          digest.update(buffer);\n          buffer.clear();\n        }\n        require(readTotal == size && input.size() == size);\n        return HexFormat.of().formatHex(digest.digest());\n      } finally {\n        Arrays.fill(bytes, (byte) 0);\n      }\n    } catch (java.security.NoSuchAlgorithmException impossible) {\n      throw EnvironmentInodePolicy.unavailable();\n    }\n  }\n\n  @SuppressFBWarnings(\n      value = \"DMI_HARDCODED_ABSOLUTE_FILENAME\",\n      matchType = SuppressMatchType.EXACT,\n      justification = \"SS343 fixed root-owned backup output namespace\")\n  private static OwnedTransferDirectory openBackup() throws IOException {\n    return OwnedTransferDirectory.open(\n        LinuxDirectoryCalls.create(), Path.of(\"/srv/schubert-nk/backup\"));\n  }\n\n  @SuppressFBWarnings(\n      value = \"DMI_HARDCODED_ABSOLUTE_FILENAME\",\n      matchType = SuppressMatchType.EXACT,\n      justification = \"SS343/SSC110 actual fixed host hostname, not DNS/caller input\")\n  private String hostname() throws IOException {\n    Path etcPath = Path.of(\"/etc\");\n    return ResourceScope.<OwnedTransferDirectory, String, IOException>acquire(\n        () -> OwnedTransferDirectory.open(host, etcPath),\n        OwnedTransferDirectory::close,\n        etc -> {\n          var before = directory(etc, 0, 0x41ed);\n          String value =\n              etc.atExistingEntryHandle(\n                  \"hostname\",\n                  held -> {\n                    var first = file(held, 0, 0x81a4, 129);\n                    byte[] owned = bytes(held, (int) first.size());\n                    try {\n                      String text = new String(owned, java.nio.charset.StandardCharsets.US_ASCII);\n                      require(text.matches(\"[A-Za-z0-9][A-Za-z0-9._+\\\\-]{0,127}\\\\n\"));\n                      require(first.equals(file(held, 0, 0x81a4, 129)));\n                      return text.substring(0, text.length() - 1);\n                    } finally {\n                      Arrays.fill(owned, (byte) 0);\n                    }\n                  });\n          require(before.equals(directory(etc, 0, 0x41ed)));\n          return value;\n        });\n  }\n\n  private void check() throws IOException {\n    budget.requireWithin();\n    context.recheck(expected);\n    require(security.effectiveUid() == 0);\n  }\n}\n"
+    },
+    {
+      "basis": "485_ORIGINAL_LOGICAL_OWNER_ONLY_NOT_OLD_PT_OR_BYTES",
+      "canonicalCostOwner": "WBS-P018-03",
+      "canonicalOwner": "WBS-P018-03",
+      "findings": [
+        {
+          "attributes": {
+            "begincolumn": "31",
+            "beginline": "75",
+            "class": "MorningPermitPublication",
+            "endcolumn": "37",
+            "endline": "75",
+            "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+            "package": "dev.codex.schubert.nk.batch.file",
+            "priority": "3",
+            "rule": "DoNotUseThreads",
+            "ruleset": "Multithreading"
+          },
+          "disposition": "UNCLASSIFIED_NOT_AUTOMATIC_DEFECT_OR_PASS",
+          "id": "PMD-02879",
+          "inputSha256": "9e56961ce7a0227cc35b2e11f702d660ef185c7d35f5b0bb2cdf3148c0728cdf",
+          "line": 75,
+          "message": "To be compliant to J2EE, a webapp should not use any thread.",
+          "module": "schubert-nk-batch",
+          "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MorningPermitPublication.java",
+          "rowSha256": "336e9c6f3e72e8598bb1943a189a603356c0fd37da3cbbd82000eb131f0946bd",
+          "rule": "DoNotUseThreads",
+          "scanner": "pmd",
+          "sourceKind": "MAIN"
+        },
+        {
+          "attributes": {
+            "begincolumn": "57",
+            "beginline": "158",
+            "class": "MorningPermitPublication",
+            "endcolumn": "67",
+            "endline": "158",
+            "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#assignmentinoperand",
+            "method": "issue",
+            "package": "dev.codex.schubert.nk.batch.file",
+            "priority": "3",
+            "rule": "AssignmentInOperand",
+            "ruleset": "Error Prone"
+          },
+          "disposition": "UNCLASSIFIED_NOT_AUTOMATIC_DEFECT_OR_PASS",
+          "id": "PMD-02880",
+          "inputSha256": "9e56961ce7a0227cc35b2e11f702d660ef185c7d35f5b0bb2cdf3148c0728cdf",
+          "line": 158,
+          "message": "Avoid assignments in operands",
+          "module": "schubert-nk-batch",
+          "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MorningPermitPublication.java",
+          "rowSha256": "f6e621b46e2ab3f7f9c02ad2902b2c726c7b5fe98e308768b0274bd162b9d169",
+          "rule": "AssignmentInOperand",
+          "scanner": "pmd",
+          "sourceKind": "MAIN"
+        },
+        {
+          "attributes": {
+            "begincolumn": "30",
+            "beginline": "205",
+            "class": "MorningPermitPublication",
+            "endcolumn": "46",
+            "endline": "205",
+            "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidcatchinggenericexception",
+            "method": "abort",
+            "package": "dev.codex.schubert.nk.batch.file",
+            "priority": "3",
+            "rule": "AvoidCatchingGenericException",
+            "ruleset": "Error Prone"
+          },
+          "disposition": "UNCLASSIFIED_NOT_AUTOMATIC_DEFECT_OR_PASS",
+          "id": "PMD-02881",
+          "inputSha256": "9e56961ce7a0227cc35b2e11f702d660ef185c7d35f5b0bb2cdf3148c0728cdf",
+          "line": 205,
+          "message": "Avoid catching RuntimeException in try-catch block",
+          "module": "schubert-nk-batch",
+          "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MorningPermitPublication.java",
+          "rowSha256": "3260fcc5c21fb1227c413d46ed88cd99daac8bb957ebc0495d193badf8d86c36",
+          "rule": "AvoidCatchingGenericException",
+          "scanner": "pmd",
+          "sourceKind": "MAIN"
+        },
+        {
+          "attributes": {
+            "begincolumn": "49",
+            "beginline": "205",
+            "class": "MorningPermitPublication",
+            "endcolumn": "54",
+            "endline": "205",
+            "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidcatchinggenericexception",
+            "method": "abort",
+            "package": "dev.codex.schubert.nk.batch.file",
+            "priority": "3",
+            "rule": "AvoidCatchingGenericException",
+            "ruleset": "Error Prone"
+          },
+          "disposition": "UNCLASSIFIED_NOT_AUTOMATIC_DEFECT_OR_PASS",
+          "id": "PMD-02882",
+          "inputSha256": "9e56961ce7a0227cc35b2e11f702d660ef185c7d35f5b0bb2cdf3148c0728cdf",
+          "line": 205,
+          "message": "Avoid catching Error in try-catch block",
+          "module": "schubert-nk-batch",
+          "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MorningPermitPublication.java",
+          "rowSha256": "2165669aa6b462901c15ea660374b4b18d574561a463ce0a172829181cbd4543",
+          "rule": "AvoidCatchingGenericException",
+          "scanner": "pmd",
+          "sourceKind": "MAIN"
+        },
+        {
+          "attributes": {
+            "begincolumn": "28",
+            "beginline": "232",
+            "class": "MorningPermitPublication",
+            "endcolumn": "44",
+            "endline": "232",
+            "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidcatchinggenericexception",
+            "method": "abort",
+            "package": "dev.codex.schubert.nk.batch.file",
+            "priority": "3",
+            "rule": "AvoidCatchingGenericException",
+            "ruleset": "Error Prone"
+          },
+          "disposition": "UNCLASSIFIED_NOT_AUTOMATIC_DEFECT_OR_PASS",
+          "id": "PMD-02883",
+          "inputSha256": "9e56961ce7a0227cc35b2e11f702d660ef185c7d35f5b0bb2cdf3148c0728cdf",
+          "line": 232,
+          "message": "Avoid catching RuntimeException in try-catch block",
+          "module": "schubert-nk-batch",
+          "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MorningPermitPublication.java",
+          "rowSha256": "1ebd53e0e18a937be810152e9af0cb0ba415fecb26d4aebc984e41ccb52ec972",
+          "rule": "AvoidCatchingGenericException",
+          "scanner": "pmd",
+          "sourceKind": "MAIN"
+        },
+        {
+          "attributes": {
+            "begincolumn": "47",
+            "beginline": "232",
+            "class": "MorningPermitPublication",
+            "endcolumn": "52",
+            "endline": "232",
+            "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidcatchinggenericexception",
+            "method": "abort",
+            "package": "dev.codex.schubert.nk.batch.file",
+            "priority": "3",
+            "rule": "AvoidCatchingGenericException",
+            "ruleset": "Error Prone"
+          },
+          "disposition": "UNCLASSIFIED_NOT_AUTOMATIC_DEFECT_OR_PASS",
+          "id": "PMD-02884",
+          "inputSha256": "9e56961ce7a0227cc35b2e11f702d660ef185c7d35f5b0bb2cdf3148c0728cdf",
+          "line": 232,
+          "message": "Avoid catching Error in try-catch block",
+          "module": "schubert-nk-batch",
+          "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MorningPermitPublication.java",
+          "rowSha256": "827492023edc1fa40efe5dc099831aab65d8fa2cd56760d56e426d44c1432e31",
+          "rule": "AvoidCatchingGenericException",
+          "scanner": "pmd",
+          "sourceKind": "MAIN"
+        },
+        {
+          "attributes": {
+            "begincolumn": "23",
+            "beginline": "238",
+            "class": "MorningPermitPublication",
+            "endcolumn": "29",
+            "endline": "238",
+            "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+            "method": "owner",
+            "package": "dev.codex.schubert.nk.batch.file",
+            "priority": "3",
+            "rule": "DoNotUseThreads",
+            "ruleset": "Multithreading"
+          },
+          "disposition": "UNCLASSIFIED_NOT_AUTOMATIC_DEFECT_OR_PASS",
+          "id": "PMD-02885",
+          "inputSha256": "9e56961ce7a0227cc35b2e11f702d660ef185c7d35f5b0bb2cdf3148c0728cdf",
+          "line": 238,
+          "message": "To be compliant to J2EE, a webapp should not use any thread.",
+          "module": "schubert-nk-batch",
+          "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MorningPermitPublication.java",
+          "rowSha256": "c22f40df1b77467b6264a4aff50cd0c38a67bc704c04eaf922fa6060533c8af6",
+          "rule": "DoNotUseThreads",
+          "scanner": "pmd",
+          "sourceKind": "MAIN"
+        },
+        {
+          "attributes": {
+            "begincolumn": "7",
+            "beginline": "305",
+            "class": "MorningPermitPublication",
+            "endcolumn": "13",
+            "endline": "305",
+            "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+            "method": "retainNative",
+            "package": "dev.codex.schubert.nk.batch.file",
+            "priority": "3",
+            "rule": "DoNotUseThreads",
+            "ruleset": "Multithreading"
+          },
+          "disposition": "UNCLASSIFIED_NOT_AUTOMATIC_DEFECT_OR_PASS",
+          "id": "PMD-02886",
+          "inputSha256": "9e56961ce7a0227cc35b2e11f702d660ef185c7d35f5b0bb2cdf3148c0728cdf",
+          "line": 305,
+          "message": "To be compliant to J2EE, a webapp should not use any thread.",
+          "module": "schubert-nk-batch",
+          "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MorningPermitPublication.java",
+          "rowSha256": "287e2e48ac89f27caff1c5283244d48c7eed0908d51b9edd16e5e40c651e17a3",
+          "rule": "DoNotUseThreads",
+          "scanner": "pmd",
+          "sourceKind": "MAIN"
+        }
+      ],
+      "mapping": [
+        {
+          "id": "PMD-02880",
+          "kind": "PHASE"
+        }
+      ],
+      "ownershipStatus": "BASELINE_LOGICAL_REFERENCE",
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/MorningPermitPublication.java",
+      "preEditNegativeVectors": 5,
+      "sha256": "9e56961ce7a0227cc35b2e11f702d660ef185c7d35f5b0bb2cdf3148c0728cdf",
+      "text": "package dev.codex.schubert.nk.batch.file;\n\nimport static dev.codex.schubert.nk.batch.file.EnvironmentInodePolicy.require;\n\nimport dev.codex.schubert.nk.batch.file.StartupPermitRecords.Epoch;\nimport dev.codex.schubert.nk.batch.file.StartupPermitRecords.Permit;\nimport dev.codex.schubert.nk.batch.file.StartupPermitRecords.State;\nimport dev.codex.schubert.nk.batch.platform.MorningParentBudget;\nimport dev.codex.schubert.nk.batch.platform.RootStartupContext;\nimport dev.codex.schubert.nk.batch.repository.MaintenanceRunState;\nimport dev.codex.schubert.nk.batch.repository.MorningDatabaseSession;\nimport dev.codex.schubert.nk.storage.LinuxDirectoryCalls;\nimport dev.codex.schubert.nk.storage.LinuxInodeSecurity;\nimport dev.codex.schubert.nk.storage.OwnedTransferDirectory;\nimport dev.codex.schubert.nk.storage.ResourceScope;\nimport java.io.IOException;\nimport java.nio.file.Path;\nimport java.util.Objects;\nimport java.util.Optional;\nimport org.jspecify.annotations.NullMarked;\n\n/**\n * SSC136: one original-continuation owner, allocated before A and borrowed by Main. Publication\n * commits only after Main's nested closes and A close; failures revoke under the still-held M/DB/\n * original. Root admission/normal S3 launch is a separate gate. NK-OPS-001 OPS009 UI251 SS343\u00a76.17\n * PT295 ISSPUB001..006. No capability is returned outside the original continuation.\n */\n@NullMarked\nfinal class MorningPermitPublication {\n  interface Intents extends AutoCloseable {\n    void begin() throws IOException;\n\n    void verify() throws IOException;\n\n    void retire() throws IOException;\n\n    void quarantine() throws IOException;\n\n    @Override\n    void close() throws IOException;\n  }\n\n  interface Store extends AutoCloseable {\n    StartupPermitFiles files();\n\n    @Override\n    void close() throws IOException;\n  }\n\n  @FunctionalInterface\n  interface OpenStore {\n    Store open() throws IOException;\n  }\n\n  @FunctionalInterface\n  interface OpenIntent {\n    Intents open() throws IOException;\n  }\n\n  @FunctionalInterface\n  interface Gate {\n    void verify() throws IOException;\n  }\n\n  @FunctionalInterface\n  interface Retain {\n    void indefinitely();\n  }\n\n  private final Intents intents;\n  private final OpenStore stores;\n  private final OpenIntent recoveryIntents;\n  private final Gate gate;\n  private final Retain retainedRetain;\n  private final long thread = Thread.currentThread().threadId();\n  private Optional<Epoch> invalid = Optional.empty();\n  private Optional<Epoch> retainedExpected = Optional.empty();\n  private Optional<Permit> attempted = Optional.empty();\n  private boolean started;\n  private boolean issued;\n  private boolean committed;\n  private boolean aborted;\n\n  MorningPermitPublication(\n      Intents intents, OpenStore stores, OpenIntent recoveryIntents, Gate gate, Retain retain) {\n    this.intents = Objects.requireNonNull(intents);\n    this.stores = Objects.requireNonNull(stores);\n    this.recoveryIntents = Objects.requireNonNull(recoveryIntents);\n    this.gate = Objects.requireNonNull(gate);\n    this.retainedRetain = Objects.requireNonNull(retain);\n  }\n\n  static MorningPermitPublication create(\n      RootStartupContext root,\n      RootStartupContext.Snapshot snapshot,\n      MorningParentBudget budget,\n      MaintenanceRunState state,\n      MorningDatabaseSession.Access database,\n      MorningNewRunAdmission.OriginalProof original)\n      throws IOException {\n    Gate gate =\n        () -> {\n          budget.requireWithin();\n          root.recheck(snapshot);\n          original.verify();\n          database.recheckConsistent(state.activation().run());\n          budget.requireWithin();\n          root.recheck(snapshot);\n        };\n    // BUG390: this owner is allocated BEFORE backup begins. Do not demand its completed pair here.\n    budget.requireWithin();\n    root.recheck(snapshot);\n    original.verify();\n    budget.requireWithin();\n    OpenIntent intents = () -> nativeIntent(root, snapshot);\n    OpenStore stores = MorningPermitPublication::nativeStore;\n    Retain retain = MorningPermitPublication::retainNative;\n    return ResourceScope.handoff(\n        intents::open,\n        Intents::close,\n        opened -> new MorningPermitPublication(opened, stores, intents, gate, retain));\n  }\n\n  void bind(Epoch epoch) throws IOException {\n    owner();\n    require(invalid.isEmpty() && epoch.state() == State.INVALID);\n    invalid = Optional.of(epoch);\n    retainedExpected = Optional.of(epoch);\n  }\n\n  Epoch expected() throws IOException {\n    owner();\n    return retainedExpected.orElseThrow(() -> new IOException(\"publication epoch unavailable\"));\n  }\n\n  Epoch issue(Permit permit, StartupPermitFiles.IssueProof proof) throws IOException {\n    Objects.requireNonNull(permit);\n    Objects.requireNonNull(proof);\n    owner();\n    require(!started && !committed && !aborted && invalid.isPresent());\n    attempted = Optional.of(permit);\n    started = true; // even begin/force/close uncertainty belongs to this supervised attempt\n    intents.begin();\n    gate.verify();\n    int[] phase = {0};\n    Epoch result =\n        ResourceScope.acquire(\n            stores::open,\n            Store::close,\n            store ->\n                store\n                    .files()\n                    .issue(\n                        invalid.orElseThrow(),\n                        permit,\n                        (boundary, current) -> {\n                          owner();\n                          require(boundary.ordinal() == phase[0]++);\n                          if (boundary == StartupPermitFiles.IssuePhase.AFTER_READBACK) {\n                            require(current.state() == State.ISSUED);\n                            store.files().verifyPublication(current, permit);\n                            retainedExpected =\n                                Optional.of(current); // only after actual exact issued readback\n                          } else require(current.equals(invalid.orElseThrow()));\n                          intents.verify();\n                          gate.verify();\n                          proof.verify(boundary, current);\n                          gate.verify();\n                          intents.verify();\n                        }));\n    require(phase[0] == 3 && result.equals(retainedExpected.orElseThrow()));\n    issued = true;\n    gate.verify();\n    return result;\n  }\n\n  /** Only the owner calls this AFTER normal A and all subordinate resource closure. */\n  void commit() throws IOException {\n    owner();\n    require(issued && !committed);\n    gate.verify();\n    intents.verify();\n    ResourceScope.acquire(\n        stores::open,\n        Store::close,\n        store -> {\n          store.files().verifyPublication(retainedExpected.orElseThrow(), attempted.orElseThrow());\n          return true;\n        });\n    gate.verify();\n    intents.retire();\n    intents.close();\n    committed = true;\n  }\n\n  /**\n   * Called inside the original scope before normal unwind, including after intent close failure.\n   */\n  void abort() {\n    if (aborted) return;\n    if (!started) {\n      try {\n        intents.close();\n        aborted = true;\n      } catch (IOException | RuntimeException | Error unknown) {\n        retain();\n      }\n      return;\n    }\n    try {\n      owner();\n      // Fresh fixed handles; consumed close descriptors are never reused.\n      ResourceScope.acquire(\n          recoveryIntents::open,\n          Intents::close,\n          quarantine -> {\n            quarantine.quarantine();\n            return true;\n          });\n      ResourceScope.acquire(\n          stores::open,\n          Store::close,\n          store -> {\n            var revoked = store.files().revoke(invalid.orElseThrow(), attempted.orElseThrow());\n            require(\n                revoked.equals(invalid.orElseThrow()) && store.files().current().equals(revoked));\n            return true;\n          });\n      retainedExpected = invalid;\n      intents.close();\n      aborted = true;\n    } catch (IOException | RuntimeException | Error unknown) {\n      retain();\n    }\n  }\n\n  private void owner() throws IOException {\n    require(thread == Thread.currentThread().threadId());\n  }\n\n  private void retain() {\n    retainedRetain.indefinitely();\n    throw new IllegalStateException(\"publication owner retention returned\");\n  }\n\n  private static Intents nativeIntent(RootStartupContext root, RootStartupContext.Snapshot snapshot)\n      throws IOException {\n    return ResourceScope.handoff(\n        () -> BackupStartIntentFiles.createPublication(root, snapshot),\n        BackupStartIntentFiles::close,\n        files ->\n            new Intents() {\n              private Optional<BackupStartIntentFiles.Intent> token = Optional.empty();\n\n              public void begin() throws IOException {\n                token = Optional.of(files.begin());\n              }\n\n              public void verify() throws IOException {\n                files.requirePresent(token.orElseThrow());\n              }\n\n              public void retire() throws IOException {\n                files.retire(token.orElseThrow());\n              }\n\n              public void quarantine() throws IOException {\n                files.quarantinePublication();\n              }\n\n              public void close() throws IOException {\n                files.close();\n              }\n            });\n  }\n\n  @edu.umd.cs.findbugs.annotations.SuppressFBWarnings(\n      value = \"DMI_HARDCODED_ABSOLUTE_FILENAME\",\n      matchType = edu.umd.cs.findbugs.annotations.SuppressMatchType.EXACT,\n      justification = \"SS343 SSC136 fixed startup root, no caller-selected path\")\n  private static Store nativeStore() throws IOException {\n    var calls = LinuxDirectoryCalls.create();\n    Path path = Path.of(\"/run/schubert-nk/startup\");\n    return ResourceScope.handoff(\n        () -> OwnedTransferDirectory.open(calls, path),\n        OwnedTransferDirectory::close,\n        root -> {\n          var files = new StartupPermitFiles(root, LinuxInodeSecurity.create());\n          return new Store() {\n            public StartupPermitFiles files() {\n              return files;\n            }\n\n            public void close() throws IOException {\n              root.close();\n            }\n          };\n        });\n  }\n\n  private static void retainNative() {\n    for (; ; ) {\n      java.util.concurrent.locks.LockSupport.parkNanos(\n          java.util.concurrent.TimeUnit.SECONDS.toNanos(1));\n      Thread.interrupted(); // preserve ownership until the existing external hard deadline\n    }\n  }\n}\n"
+    },
+    {
+      "basis": "485_ORIGINAL_LOGICAL_OWNER_ONLY_NOT_OLD_PT_OR_BYTES",
+      "canonicalCostOwner": "WBS-P018-08",
+      "canonicalOwner": "WBS-P018-08",
+      "findings": [
+        {
+          "attributes": {
+            "begincolumn": "26",
+            "beginline": "436",
+            "class": "NativeCoveragePrivateFile",
+            "endcolumn": "38",
+            "endline": "436",
+            "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#assignmentinoperand",
+            "method": "hash",
+            "package": "dev.codex.schubert.nk.bootstrap",
+            "priority": "3",
+            "rule": "AssignmentInOperand",
+            "ruleset": "Error Prone"
+          },
+          "disposition": "UNCLASSIFIED_NOT_AUTOMATIC_DEFECT_OR_PASS",
+          "id": "PMD-06188",
+          "inputSha256": "06f1b384d1a82f5163cc7c71f5adb2a39419754682be60fd411760589b33bf47",
+          "line": 436,
+          "message": "Avoid assignment to count in operand",
+          "module": "schubert-nk-bootstrap",
+          "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/NativeCoveragePrivateFile.java",
+          "rowSha256": "d0e1cee8854858e66151ad604e60ee0c2f3e6e61dbf5329387f3603774297e3a",
+          "rule": "AssignmentInOperand",
+          "scanner": "pmd",
+          "sourceKind": "MAIN"
+        }
+      ],
+      "mapping": [
+        {
+          "id": "PMD-06188",
+          "kind": "SIZE"
+        }
+      ],
+      "ownershipStatus": "BASELINE_LOGICAL_REFERENCE",
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/NativeCoveragePrivateFile.java",
+      "preEditNegativeVectors": 5,
+      "sha256": "06f1b384d1a82f5163cc7c71f5adb2a39419754682be60fd411760589b33bf47",
+      "text": "package dev.codex.schubert.nk.bootstrap;\n\nimport static dev.codex.schubert.nk.bootstrap.FixedNativeCoverageCheckpoint.require;\nimport static dev.codex.schubert.nk.bootstrap.FixedNativeCoverageCheckpoint.unavailable;\n\nimport dev.codex.schubert.nk.storage.InodeSecurityCalls;\nimport dev.codex.schubert.nk.storage.LinuxDirectoryCalls;\nimport dev.codex.schubert.nk.storage.LinuxInodeSecurity;\nimport dev.codex.schubert.nk.storage.OwnedTransferDirectory;\nimport dev.codex.schubert.nk.storage.ResourceScope;\nimport edu.umd.cs.findbugs.annotations.SuppressFBWarnings;\nimport edu.umd.cs.findbugs.annotations.SuppressMatchType;\nimport java.io.IOException;\nimport java.nio.ByteBuffer;\nimport java.nio.channels.FileChannel;\nimport java.nio.file.Files;\nimport java.nio.file.Path;\nimport java.nio.file.StandardOpenOption;\nimport java.security.MessageDigest;\nimport java.security.NoSuchAlgorithmException;\nimport java.util.HexFormat;\nimport java.util.Map;\nimport org.jspecify.annotations.NullMarked;\nimport org.jspecify.annotations.Nullable;\n\n/**\n * SSC193 fixed isolated-PT namespace. No create/chmod/repair of configured directories, no vendor\n * pathname writer and no existing-file resume. Root operator provisions the four new private role\n * directories before signed deployment. Partial output remains quarantined on every failure.\n * NK-OPS-001 / OPS009,TST004 / UI251 / SS333342343451 / PT-OPS-NEXPORT193001..006.\n */\n@NullMarked\nfinal class NativeCoveragePrivateFile {\n  private NativeCoveragePrivateFile() {}\n\n  record Identity(long uid, long gid, int mode, int links, long device, long inode) {}\n\n  private record FileState(Identity identity, long size) {}\n\n  /** SSC261: resources over the already held entry only; never path/profile authority. */\n  interface FileCalls {\n    @Nullable FileChannel read(Path held) throws IOException;\n\n    @Nullable FileChannel write(Path held) throws IOException;\n  }\n\n  static final FileCalls NATIVE_CHANNELS = new NativeFileCalls();\n\n  private static final class NativeFileCalls implements FileCalls {\n    public FileChannel read(Path held) throws IOException {\n      return FileChannel.open(held, StandardOpenOption.READ);\n    }\n\n    public FileChannel write(Path held) throws IOException {\n      return FileChannel.open(held, StandardOpenOption.WRITE);\n    }\n  }\n\n  @FunctionalInterface\n  interface ReadOnlyObservation {\n    boolean readOnly() throws IOException;\n  }\n\n  /** Scalar pin prerequisite only; real Root inode/full SHA remains caller-owned. */\n  static void verifyAgentShape(long size, @Nullable ReadOnlyObservation observation)\n      throws IOException {\n    if (observation == null) throw new IllegalArgumentException(\"private PT observation required\");\n    require(size == 307843 && observation.readOnly());\n  }\n\n  private static FileChannel channel(@Nullable FileChannel acquired) {\n    if (acquired == null) throw new IllegalArgumentException(\"private PT channel required\");\n    return acquired;\n  }\n\n  /** PG-D399: data observations only; no startup evidence, configurable path or privilege grant. */\n  interface Io {\n    InodeSecurityCalls security();\n\n    FixedServiceIdentity resolver();\n\n    OwnedTransferDirectory openRun() throws IOException;\n\n    @Nullable String invocation();\n\n    String cgroup() throws IOException;\n\n    ChildStartupContext.Observed ordinary() throws IOException;\n\n    String filesystem(Path held) throws IOException;\n\n    @Nullable Map<String, ? extends @Nullable Object> attributes(Path held) throws IOException;\n\n    @Nullable Object size(Path held) throws IOException;\n  }\n\n  @SuppressFBWarnings(\n      value = \"DMI_HARDCODED_ABSOLUTE_FILENAME\",\n      matchType = SuppressMatchType.EXACT,\n      justification = \"PG-D399 fixed native run/proc observations; no configurable namespace\")\n  static final class NativeIo implements Io {\n    public InodeSecurityCalls security() {\n      return LinuxInodeSecurity.create();\n    }\n\n    public FixedServiceIdentity resolver() {\n      return new FixedServiceIdentity();\n    }\n\n    public OwnedTransferDirectory openRun() throws IOException {\n      return OwnedTransferDirectory.open(LinuxDirectoryCalls.create(), Path.of(\"/run\"));\n    }\n\n    public @Nullable String invocation() {\n      return System.getenv(\"INVOCATION_ID\");\n    }\n\n    public String cgroup() throws IOException {\n      return Files.readString(Path.of(\"/proc/self/cgroup\"));\n    }\n\n    public ChildStartupContext.Observed ordinary() throws IOException {\n      return new ChildStartupContext().capture();\n    }\n\n    public String filesystem(Path held) throws IOException {\n      return Files.getFileStore(held).type();\n    }\n\n    public Map<String, Object> attributes(Path held) throws IOException {\n      return Files.readAttributes(held, \"unix:uid,gid,mode,nlink,dev,ino\");\n    }\n\n    public Object size(Path held) throws IOException {\n      return Files.getAttribute(held, \"unix:size\");\n    }\n  }\n\n  @SuppressFBWarnings(\n      value = \"DMI_HARDCODED_ABSOLUTE_FILENAME\",\n      matchType = SuppressMatchType.EXACT,\n      justification =\n          \"SSC193/PG-D375 fixed Root-managed Linux opt agent pin only; NEXPORT193/native metadata/RO; no arbitrary path or coverage exclusion\")\n  static void verifyPinnedAgent() throws IOException {\n    var security = LinuxInodeSecurity.create();\n    Path optPath = Path.of(\"/opt\");\n    ResourceScope.acquire(\n        () -> OwnedTransferDirectory.open(LinuxDirectoryCalls.create(), optPath),\n        OwnedTransferDirectory::close,\n        opt -> {\n          Identity first = directory(opt, security, 0, 0, 0x41ed);\n          ResourceScope.acquire(\n              () -> opt.openExistingChild(\"pgpt-tools-pg390\"),\n              OwnedTransferDirectory::close,\n              tools -> {\n                Identity before = directory(tools, security, 0, 0, 0x41ed);\n                FileState file =\n                    tools.atExistingEntryHandle(\n                        \"jacoco-agent.jar\",\n                        held -> {\n                          FileState state = file(held, security, 0, 0, 0x81a4);\n                          verifyAgentShape(state.size(), () -> security.readOnlyFilesystem(held));\n                          require(\n                              FixedNativeCoverageProfile.AGENT_SHA256.equals(hash(held, 307843)));\n                          require(state.equals(file(held, security, 0, 0, 0x81a4)));\n                          return state;\n                        });\n                tools.atExistingEntryHandle(\n                    \"jacoco-agent.jar\",\n                    held -> {\n                      require(file.equals(file(held, security, 0, 0, 0x81a4)));\n                      return Boolean.TRUE;\n                    });\n                require(before.equals(directory(tools, security, 0, 0, 0x41ed)));\n                return Boolean.TRUE;\n              });\n          require(first.equals(directory(opt, security, 0, 0, 0x41ed)));\n          return Boolean.TRUE;\n        });\n  }\n\n  static void export(FixedNativeCoverageProfile profile, String name, byte[] bytes)\n      throws IOException {\n    export(profile, name, bytes, new NativeIo());\n  }\n\n  static void export(\n      @Nullable FixedNativeCoverageProfile profile,\n      @Nullable String name,\n      byte @Nullable [] bytes,\n      @Nullable Io io)\n      throws IOException {\n    export(profile, name, bytes, io, NATIVE_CHANNELS);\n  }\n\n  static void export(\n      @Nullable FixedNativeCoverageProfile profile,\n      @Nullable String name,\n      byte @Nullable [] bytes,\n      @Nullable Io io,\n      @Nullable FileCalls channels)\n      throws IOException {\n    if (profile == null || name == null || bytes == null || io == null || channels == null)\n      throw new IllegalArgumentException(\"private PT export dependencies required\");\n    // Name is admitted by the closed profile; a second path cannot be substituted by a caller.\n    require(\n        name.equals(profile.invocation() + \".terminal.exec\")\n            || (profile.supportsClosing() && name.equals(profile.invocation() + \".closing.exec\"))\n            || (profile.phase() == FixedNativeCoverageProfile.Phase.ROOT\n                && name.equals(profile.invocation() + \".before-exec.exec\")));\n    var security = io.security();\n    var fixed = profile.identity(io.resolver());\n    long uid = profile.phase() == FixedNativeCoverageProfile.Phase.ROOT ? 0 : fixed.uid();\n    long gid = profile.phase() == FixedNativeCoverageProfile.Phase.ROOT ? 0 : fixed.gid();\n    require(security.effectiveUid() == uid);\n    require(profile.invocation().equals(io.invocation()));\n    String cgroup = profile.cgroup();\n    require(cgroup.equals(io.cgroup()));\n    var ordinary =\n        profile.phase() == FixedNativeCoverageProfile.Phase.ORDINARY\n            ? java.util.Optional.of(io.ordinary())\n            : java.util.Optional.<ChildStartupContext.Observed>empty();\n    if (ordinary.isPresent()) {\n      verifyOrdinaryProcess(fixed, ordinary.orElseThrow(), cgroup);\n    }\n    ResourceScope.acquire(\n        io::openRun,\n        OwnedTransferDirectory::close,\n        run -> {\n          Identity top = directory(run, security, 0, 0, 0x41ed, io);\n          ResourceScope.acquire(\n              () -> run.openExistingChild(\"schubert-nk\"),\n              OwnedTransferDirectory::close,\n              service -> {\n                Identity serviceBefore = directory(service, security, 0, 0, 0x41ed, io);\n                ResourceScope.acquire(\n                    () -> service.openExistingChild(\"pt-coverage\"),\n                    OwnedTransferDirectory::close,\n                    parent -> {\n                      Identity parentBefore = directory(parent, security, 0, 0, 0x41ed, io);\n                      String role = profile.directory();\n                      Identity saved =\n                          ResourceScope.acquire(\n                              () -> parent.openExistingChild(role),\n                              OwnedTransferDirectory::close,\n                              target -> {\n                                Identity original =\n                                    directory(target, security, uid, gid, 0x41c0, io);\n                                target.atDirectory(\n                                    held -> {\n                                      require(\n                                          \"tmpfs\".equals(io.filesystem(held))\n                                              && !security.readOnlyFilesystem(held));\n                                      return Boolean.TRUE;\n                                    });\n                                write(target, security, uid, gid, name, bytes, io, channels);\n                                require(\n                                    original.equals(\n                                        directory(target, security, uid, gid, 0x41c0, io)));\n                                return original;\n                              });\n                      ResourceScope.acquire(\n                          () -> parent.openExistingChild(role),\n                          OwnedTransferDirectory::close,\n                          reopened -> {\n                            require(\n                                saved.equals(directory(reopened, security, uid, gid, 0x41c0, io)));\n                            return Boolean.TRUE;\n                          });\n                      require(parentBefore.equals(directory(parent, security, 0, 0, 0x41ed, io)));\n                      return Boolean.TRUE;\n                    });\n                require(serviceBefore.equals(directory(service, security, 0, 0, 0x41ed, io)));\n                return Boolean.TRUE;\n              });\n          require(top.equals(directory(run, security, 0, 0, 0x41ed, io)));\n          return Boolean.TRUE;\n        });\n    require(\n        profile.invocation().equals(io.invocation())\n            && cgroup.equals(io.cgroup())\n            && security.effectiveUid() == uid\n            && fixed.equals(profile.identity(io.resolver())));\n    if (ordinary.isPresent()) verifySameOrdinaryProcess(ordinary.orElseThrow(), io.ordinary());\n  }\n\n  /** PG-D396/NEXPORT598: observed data policy, never startup or namespace authority. */\n  static void verifyOrdinaryProcess(\n      FixedServiceIdentity.@Nullable Value fixed,\n      ChildStartupContext.@Nullable Observed own,\n      @Nullable String cgroup)\n      throws IOException {\n    if (fixed == null || own == null || cgroup == null) throw unavailable();\n    require(\n        own.uid() == fixed.uid()\n            && own.gid() == fixed.gid()\n            && own.groups().equals(fixed.groups())\n            && own.zeroCapabilities()\n            && own.noNewPrivileges()\n            && own.cgroup().equals(cgroup));\n  }\n\n  static void verifySameOrdinaryProcess(\n      ChildStartupContext.@Nullable Observed before, ChildStartupContext.@Nullable Observed after)\n      throws IOException {\n    if (before == null || after == null) throw unavailable();\n    require(before.equals(after));\n  }\n\n  /** Borrowed directory only; all file callbacks retain the originally created inode descriptor. */\n  static void write(\n      OwnedTransferDirectory directory,\n      InodeSecurityCalls security,\n      long uid,\n      long gid,\n      String name,\n      byte[] bytes)\n      throws IOException {\n    write(directory, security, uid, gid, name, bytes, new NativeIo(), NATIVE_CHANNELS);\n  }\n\n  private static void write(\n      OwnedTransferDirectory directory,\n      InodeSecurityCalls security,\n      long uid,\n      long gid,\n      String name,\n      byte[] bytes,\n      Io io,\n      FileCalls channels)\n      throws IOException {\n    if (directory == null || security == null || name == null || bytes == null)\n      throw new IllegalArgumentException(\"private PT output dependencies required\");\n    require(bytes.length >= 5 && bytes.length <= FixedNativeCoverageCheckpoint.MAX_BYTES);\n    Identity before = directory(directory, security, uid, gid, 0x41c0, io);\n    FileState saved =\n        directory.createPrivateEntry(\n            name,\n            held -> {\n              FileState original = file(held, security, uid, gid, 0x8180, io);\n              require(original.size() == 0);\n              try (var channel = channel(channels.write(held))) {\n                var buffer = ByteBuffer.wrap(bytes);\n                while (buffer.hasRemaining()) require(channel.write(buffer) > 0);\n                channel.force(true);\n                require(channel.size() == bytes.length);\n              }\n              FileState after = file(held, security, uid, gid, 0x8180, io);\n              require(original.identity().equals(after.identity()) && after.size() == bytes.length);\n              require(hash(held, bytes.length, channels).equals(digest(bytes)));\n              return after;\n            });\n    // createPrivateEntry has normally closed its owned FD before sync/publication acceptance.\n    directory.sync();\n    directory.atExistingEntryHandle(\n        name,\n        held -> {\n          require(saved.equals(file(held, security, uid, gid, 0x8180, io)));\n          require(hash(held, bytes.length, channels).equals(digest(bytes)));\n          return Boolean.TRUE;\n        });\n    require(before.equals(directory(directory, security, uid, gid, 0x41c0, io)));\n  }\n\n  private static Identity directory(\n      OwnedTransferDirectory directory, InodeSecurityCalls security, long uid, long gid, int mode)\n      throws IOException {\n    return directory(directory, security, uid, gid, mode, new NativeIo());\n  }\n\n  private static Identity directory(\n      OwnedTransferDirectory directory,\n      InodeSecurityCalls security,\n      long uid,\n      long gid,\n      int mode,\n      Io io)\n      throws IOException {\n    return directory.atDirectory(\n        held -> checked(io.attributes(held), security.accessAcl(held, 44), uid, gid, mode));\n  }\n\n  private static FileState file(\n      Path held, InodeSecurityCalls security, long uid, long gid, int mode) throws IOException {\n    return file(held, security, uid, gid, mode, new NativeIo());\n  }\n\n  private static FileState file(\n      Path held, InodeSecurityCalls security, long uid, long gid, int mode, Io io)\n      throws IOException {\n    Identity value = checked(io.attributes(held), security.accessAcl(held, 44), uid, gid, mode);\n    Object size = io.size(held);\n    if (!(size instanceof Long length) || length < 0) throw unavailable();\n    return new FileState(value, length);\n  }\n\n  /** Independent metadata oracle port; never grants namespace or process authority. */\n  static Identity checked(\n      @Nullable Map<String, ? extends @Nullable Object> a,\n      byte @Nullable [] acl,\n      long uid,\n      long gid,\n      int mode)\n      throws IOException {\n    if (a == null || acl == null) throw unavailable();\n    if (!(a.get(\"uid\") instanceof Integer owner)\n        || !(a.get(\"gid\") instanceof Integer group)\n        || !(a.get(\"mode\") instanceof Integer permissions)\n        || !(a.get(\"nlink\") instanceof Integer links)\n        || !(a.get(\"dev\") instanceof Long device)\n        || !(a.get(\"ino\") instanceof Long inode)) throw unavailable();\n    require(\n        Integer.toUnsignedLong(owner) == uid\n            && Integer.toUnsignedLong(group) == gid\n            && permissions == mode);\n    require(\n        device != 0 && inode != 0 && (mode == 0x8180 || mode == 0x81a4 ? links == 1 : links >= 2));\n    require(acl.length == 0);\n    return new Identity(uid, gid, mode, links, device, inode);\n  }\n\n  private static String hash(Path held, int size) throws IOException, NoSuchAlgorithmException {\n    return hash(held, size, NATIVE_CHANNELS);\n  }\n\n  private static String hash(Path held, int size, FileCalls channels)\n      throws IOException, NoSuchAlgorithmException {\n    var hash = MessageDigest.getInstance(\"SHA-256\");\n    try (var channel = channel(channels.read(held))) {\n      require(channel.size() == size);\n      var buffer = ByteBuffer.allocate(8192);\n      long count = 0;\n      while (true) {\n        int n = channel.read(buffer);\n        if (n < 0) break;\n        require(n > 0 && (count += n) <= size);\n        buffer.flip();\n        hash.update(buffer);\n        buffer.clear();\n      }\n      require(count == size && channel.size() == size);\n      return HexFormat.of().formatHex(hash.digest());\n    }\n  }\n\n  private static String digest(byte[] bytes) throws NoSuchAlgorithmException {\n    return HexFormat.of().formatHex(MessageDigest.getInstance(\"SHA-256\").digest(bytes));\n  }\n}\n"
+    },
+    {
+      "basis": "485_ORIGINAL_LOGICAL_OWNER_ONLY_NOT_OLD_PT_OR_BYTES",
+      "canonicalCostOwner": "WBS-P018-02",
+      "canonicalOwner": "WBS-P018-02",
+      "findings": [
+        {
+          "attributes": {
+            "begincolumn": "39",
+            "beginline": "49",
+            "class": "ReleasePayloadVerification",
+            "endcolumn": "61",
+            "endline": "49",
+            "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap",
+            "package": "dev.codex.schubert.nk.bootstrap",
+            "priority": "3",
+            "rule": "UseConcurrentHashMap",
+            "ruleset": "Multithreading",
+            "variable": "jars"
+          },
+          "disposition": "UNCLASSIFIED_NOT_AUTOMATIC_DEFECT_OR_PASS",
+          "id": "PMD-06190",
+          "inputSha256": "341d360a0b31ece1d72c69f95157e702ea5b3dfc68c1a882f648c0df60135d4a",
+          "line": 49,
+          "message": "If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation",
+          "module": "schubert-nk-bootstrap",
+          "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/ReleasePayloadVerification.java",
+          "rowSha256": "1b867bd0d1b7be2f0399236f545cf0ee680a3ee7b9afe1d666b50e50104a4982",
+          "rule": "UseConcurrentHashMap",
+          "scanner": "pmd",
+          "sourceKind": "MAIN"
+        },
+        {
+          "attributes": {
+            "begincolumn": "38",
+            "beginline": "50",
+            "class": "ReleasePayloadVerification",
+            "endcolumn": "65",
+            "endline": "50",
+            "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap",
+            "package": "dev.codex.schubert.nk.bootstrap",
+            "priority": "3",
+            "rule": "UseConcurrentHashMap",
+            "ruleset": "Multithreading",
+            "variable": "checksums"
+          },
+          "disposition": "UNCLASSIFIED_NOT_AUTOMATIC_DEFECT_OR_PASS",
+          "id": "PMD-06191",
+          "inputSha256": "341d360a0b31ece1d72c69f95157e702ea5b3dfc68c1a882f648c0df60135d4a",
+          "line": 50,
+          "message": "If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation",
+          "module": "schubert-nk-bootstrap",
+          "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/ReleasePayloadVerification.java",
+          "rowSha256": "079d899d6922b369f12e1c00b7fc5a5479646cc778d513c0f732fd4dd400ee0f",
+          "rule": "UseConcurrentHashMap",
+          "scanner": "pmd",
+          "sourceKind": "MAIN"
+        },
+        {
+          "attributes": {
+            "begincolumn": "14",
+            "beginline": "222",
+            "class": "ReleasePayloadVerification",
+            "endcolumn": "20",
+            "endline": "222",
+            "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+            "method": "checked",
+            "package": "dev.codex.schubert.nk.bootstrap",
+            "priority": "3",
+            "rule": "DoNotUseThreads",
+            "ruleset": "Multithreading"
+          },
+          "disposition": "UNCLASSIFIED_NOT_AUTOMATIC_DEFECT_OR_PASS",
+          "id": "PMD-06192",
+          "inputSha256": "341d360a0b31ece1d72c69f95157e702ea5b3dfc68c1a882f648c0df60135d4a",
+          "line": 222,
+          "message": "To be compliant to J2EE, a webapp should not use any thread.",
+          "module": "schubert-nk-bootstrap",
+          "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/ReleasePayloadVerification.java",
+          "rowSha256": "8e4cd18c549a1ad7f84940dc9cb1df4b05dfdd3b18b36311927a0b0f6eed2cee",
+          "rule": "DoNotUseThreads",
+          "scanner": "pmd",
+          "sourceKind": "MAIN"
+        },
+        {
+          "attributes": {
+            "begincolumn": "22",
+            "beginline": "268",
+            "class": "ReleasePayloadVerification",
+            "endcolumn": "28",
+            "endline": "268",
+            "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#donotusethreads",
+            "method": "read",
+            "package": "dev.codex.schubert.nk.bootstrap",
+            "priority": "3",
+            "rule": "DoNotUseThreads",
+            "ruleset": "Multithreading"
+          },
+          "disposition": "UNCLASSIFIED_NOT_AUTOMATIC_DEFECT_OR_PASS",
+          "id": "PMD-06193",
+          "inputSha256": "341d360a0b31ece1d72c69f95157e702ea5b3dfc68c1a882f648c0df60135d4a",
+          "line": 268,
+          "message": "To be compliant to J2EE, a webapp should not use any thread.",
+          "module": "schubert-nk-bootstrap",
+          "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/ReleasePayloadVerification.java",
+          "rowSha256": "02b4baacd89cc163d5fdb81b7627caa34760e98226f42bd40546c46eb8eb7331",
+          "rule": "DoNotUseThreads",
+          "scanner": "pmd",
+          "sourceKind": "MAIN"
+        },
+        {
+          "attributes": {
+            "begincolumn": "31",
+            "beginline": "297",
+            "class": "ReleasePayloadVerification",
+            "endcolumn": "52",
+            "endline": "297",
+            "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#useconcurrenthashmap",
+            "method": "archive",
+            "package": "dev.codex.schubert.nk.bootstrap",
+            "priority": "3",
+            "rule": "UseConcurrentHashMap",
+            "ruleset": "Multithreading",
+            "variable": "sql"
+          },
+          "disposition": "UNCLASSIFIED_NOT_AUTOMATIC_DEFECT_OR_PASS",
+          "id": "PMD-06194",
+          "inputSha256": "341d360a0b31ece1d72c69f95157e702ea5b3dfc68c1a882f648c0df60135d4a",
+          "line": 297,
+          "message": "If you run in Java5 or newer and have concurrent access, you should use the ConcurrentHashMap implementation",
+          "module": "schubert-nk-bootstrap",
+          "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/ReleasePayloadVerification.java",
+          "rowSha256": "008b2b1d9c8ddb0511a0f6cd2de10dd49d866942b6845dc5046bf17112eb30e3",
+          "rule": "UseConcurrentHashMap",
+          "scanner": "pmd",
+          "sourceKind": "MAIN"
+        },
+        {
+          "attributes": {
+            "begincolumn": "18",
+            "beginline": "381",
+            "class": "ReleasePayloadVerification",
+            "endcolumn": "44",
+            "endline": "381",
+            "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#assignmentinoperand",
+            "method": "sqlChecksum",
+            "package": "dev.codex.schubert.nk.bootstrap",
+            "priority": "3",
+            "rule": "AssignmentInOperand",
+            "ruleset": "Error Prone"
+          },
+          "disposition": "UNCLASSIFIED_NOT_AUTOMATIC_DEFECT_OR_PASS",
+          "id": "PMD-06195",
+          "inputSha256": "341d360a0b31ece1d72c69f95157e702ea5b3dfc68c1a882f648c0df60135d4a",
+          "line": 381,
+          "message": "Avoid assignment to line in operand",
+          "module": "schubert-nk-bootstrap",
+          "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/ReleasePayloadVerification.java",
+          "rowSha256": "5644b0f80fc84effa68062e71b2ba02aa1068ff7a57c8f53dd31513a90338a04",
+          "rule": "AssignmentInOperand",
+          "scanner": "pmd",
+          "sourceKind": "MAIN"
+        }
+      ],
+      "mapping": [
+        {
+          "id": "PMD-06195",
+          "kind": "LINE"
+        }
+      ],
+      "ownershipStatus": "BASELINE_LOGICAL_REFERENCE",
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/ReleasePayloadVerification.java",
+      "preEditNegativeVectors": 5,
+      "sha256": "341d360a0b31ece1d72c69f95157e702ea5b3dfc68c1a882f648c0df60135d4a",
+      "text": "package dev.codex.schubert.nk.bootstrap;\n\nimport dev.codex.schubert.nk.storage.InodeSecurityCalls;\nimport dev.codex.schubert.nk.storage.OwnedTransferDirectory;\nimport dev.codex.schubert.nk.storage.ResourceScope;\nimport dev.codex.schubert.nk.storage.StorageIoException;\nimport java.io.BufferedReader;\nimport java.io.ByteArrayInputStream;\nimport java.io.IOException;\nimport java.io.StringReader;\nimport java.nio.ByteBuffer;\nimport java.nio.channels.SeekableByteChannel;\nimport java.nio.charset.StandardCharsets;\nimport java.nio.file.Path;\nimport java.security.MessageDigest;\nimport java.security.NoSuchAlgorithmException;\nimport java.util.Arrays;\nimport java.util.Collections;\nimport java.util.HashMap;\nimport java.util.HashSet;\nimport java.util.HexFormat;\nimport java.util.Map;\nimport java.util.Objects;\nimport java.util.Set;\nimport java.util.TreeMap;\nimport java.util.TreeSet;\nimport java.util.jar.Manifest;\nimport java.util.zip.CRC32;\nimport java.util.zip.ZipFile;\nimport org.jspecify.annotations.NullMarked;\n\n/**\n * Actual immutable thin release under the outer selector/manifest/approval scope. No publisher,\n * authority token, repair or DB observation. NK-OPS-001/SYS002/004/OPS009/DAT009/UI212/251/253;\n * SS3439.1/11.1/SSC095096/PG-D314; PT-OPS-FULLBOM001..008/018156.\n */\n@NullMarked\nfinal class ReleasePayloadVerification {\n  private static final java.lang.String LITERAL_RELEASE_MANIFEST_JSON = \"RELEASE-MANIFEST.json\";\n\n  private static final java.lang.String LITERAL_DB_MIGRATION = \"db/migration/\";\n\n  private static final int MAX_MATERIAL = 67_108_864;\n  private final StartupReleaseManifest reader;\n  private final long group;\n  private final StartupReleaseManifest.Io io;\n  private final InodeSecurityCalls security;\n  private final Set<String> identities = new HashSet<>();\n  private final Map<String, JarValue> jars = new HashMap<>();\n  private final Map<String, Integer> checksums = new HashMap<>();\n\n  private record FileValue(String hash, byte[] material) {}\n\n  private record JarValue(Set<String> classes, Map<String, String> sql) {}\n\n  ReleasePayloadVerification(\n      StartupReleaseManifest reader,\n      long group,\n      StartupReleaseManifest.Io io,\n      InodeSecurityCalls security) {\n    this.reader = Objects.requireNonNull(reader);\n    this.group = group;\n    this.io = Objects.requireNonNull(io);\n    this.security = Objects.requireNonNull(security);\n  }\n\n  StartupReleaseManifest.Contents verify(\n      OwnedTransferDirectory release, String version, ReleaseApproval approval)\n      throws StorageIoException {\n    return release.atExistingEntryHandle(\n        LITERAL_RELEASE_MANIFEST_JSON,\n        held -> {\n          require(version.equals(approval.version()));\n          var original = checked(held, 0x81a0);\n          require(original.size() > 0 && original.size() <= 1_048_576);\n          own(original);\n          FileValue value = read(held, original, true);\n          require(value.hash().equals(approval.manifestSha256()));\n          ReleaseInventory inventory = ReleaseInventory.parse(value.material());\n          require(version.equals(inventory.release()));\n          var expected = new TreeMap<String, ReleaseInventory.Artifact>();\n          for (var artifact : inventory.artifacts()) {\n            require(layout(artifact.path()));\n            expected.put(artifact.path(), artifact);\n          }\n          var tree = new TreeMap<String, Set<String>>();\n          for (String path : expected.keySet()) add(tree, path);\n          add(tree, LITERAL_RELEASE_MANIFEST_JSON);\n          add(tree, \"SHA256SUMS\");\n          var sums = new TreeMap<String, String>();\n          for (var a : expected.values()) sums.put(a.path(), a.sha256());\n          sums.put(LITERAL_RELEASE_MANIFEST_JSON, value.hash());\n          StringBuilder canonical = new StringBuilder();\n          sums.forEach(\n              (path, hash) -> canonical.append(hash).append(\"  \").append(path).append('\\n'));\n          byte[] sumBytes = canonical.toString().getBytes(StandardCharsets.US_ASCII);\n          walk(release, \"\", tree, expected, original, sumBytes, inventory);\n          require(original.equals(checked(held, 0x81a0)));\n          agreement(inventory, expected);\n          return new StartupReleaseManifest.Contents(\n              version,\n              value.hash(),\n              inventory.migrations(),\n              inventory.build(),\n              inventory.platform(),\n              inventory.versions(),\n              inventory.artifacts().stream()\n                  .collect(\n                      java.util.stream.Collectors.toUnmodifiableMap(\n                          ReleaseInventory.Artifact::path, ReleaseInventory.Artifact::sha256)));\n        });\n  }\n\n  private static boolean layout(String path) {\n    return path.equals(\"VERSION\")\n        || path.matches(\"(?:api/api|web/web|operations/batch)\\\\.jar\")\n        || path.matches(\"(?:api|web|operations)/lib/[^/]+\\\\.jar\")\n        || path.matches(\"db/migration/V[0-9]{3}__[a-z0-9_]+\\\\.sql\")\n        || path.matches(\"config/templates/[A-Za-z0-9._-]+\\\\.yml\")\n        || path.equals(\"config/effective/backup-profile.json\")\n        || path.equals(\"config/effective/backup-age-recipient\")\n        || path.equals(\"config/caddy/Caddyfile.template\")\n        || path.equals(\"config/artemis/broker.xml.template\")\n        || path.equals(\"config/tmpfiles/schubert-nk-maintenance.conf\")\n        || path.matches(\"systemd/[A-Za-z0-9._-]+\\\\.(?:service|target|timer)\")\n        || path.equals(\"systemd/caddy.service.d/schubert-nk-startup-policy.conf\")\n        || executable(path)\n        || path.matches(\"operations/runbooks/[A-Za-z0-9._-]+\");\n  }\n\n  private static boolean executable(String path) {\n    return path.equals(\"operations/bin/schubert-nkctl\")\n        || path.equals(\"operations/bin/schubert-nk-inbox-inspector\");\n  }\n\n  private static void add(Map<String, Set<String>> tree, String path) {\n    var parent = new StringBuilder();\n    for (String segment : path.split(\"/\")) {\n      tree.computeIfAbsent(parent.toString(), ignored -> new TreeSet<>()).add(segment);\n      if (!parent.isEmpty()) parent.append('/');\n      parent.append(segment);\n    }\n  }\n\n  private void walk(\n      OwnedTransferDirectory directory,\n      String path,\n      Map<String, Set<String>> tree,\n      Map<String, ReleaseInventory.Artifact> expected,\n      StartupReleaseManifest.Snapshot original,\n      byte[] sumBytes,\n      ReleaseInventory inventory)\n      throws StorageIoException {\n    var before = directory.atDirectory(p -> checked(p, 0x41e8));\n    require(before.device() == original.device());\n    own(before);\n    Set<String> children = Objects.requireNonNull(tree.get(path), \"declared directory children\");\n    names(directory, children);\n    for (String name : children) {\n      String child = path.isEmpty() ? name : path + \"/\" + name;\n      if (tree.containsKey(child)) {\n        ResourceScope.acquire(\n            () -> directory.openExistingChild(name),\n            OwnedTransferDirectory::close,\n            nested -> {\n              var first = nested.atDirectory(p -> checked(p, 0x41e8));\n              walk(nested, child, tree, expected, original, sumBytes, inventory);\n              ResourceScope.acquire(\n                  () -> directory.openExistingChild(name),\n                  OwnedTransferDirectory::close,\n                  reopened -> {\n                    require(first.equals(reopened.atDirectory(p -> checked(p, 0x41e8))));\n                    return Boolean.TRUE;\n                  });\n              return Boolean.TRUE;\n            });\n      } else {\n        directory.atExistingEntryHandle(\n            name,\n            held -> {\n              int mode = executable(child) ? 0x81e8 : 0x81a0;\n              var first = checked(held, mode);\n              require(first.device() == original.device());\n              if (child.equals(LITERAL_RELEASE_MANIFEST_JSON)) require(first.equals(original));\n              else {\n                own(first);\n                boolean material =\n                    child.equals(\"VERSION\")\n                        || child.equals(\"SHA256SUMS\")\n                        || child.startsWith(LITERAL_DB_MIGRATION);\n                FileValue value = read(held, first, material);\n                if (child.equals(\"SHA256SUMS\")) require(Arrays.equals(sumBytes, value.material()));\n                else {\n                  var a = Objects.requireNonNull(expected.get(child), \"declared payload\");\n                  require(first.size() == a.size() && value.hash().equals(a.sha256()));\n                  if (child.equals(\"VERSION\"))\n                    require(\n                        Arrays.equals(\n                            (inventory.release() + \"\\n\").getBytes(StandardCharsets.US_ASCII),\n                            value.material()));\n                  else if (child.startsWith(LITERAL_DB_MIGRATION))\n                    checksums.put(child, sqlChecksum(value.material()));\n                  else if (child.endsWith(\".jar\")) jars.put(child, archive(held, child, expected));\n                }\n              }\n              require(first.equals(checked(held, mode)));\n              directory.atExistingEntryHandle(\n                  name,\n                  reopened -> {\n                    require(first.equals(checked(reopened, mode)));\n                    return Boolean.TRUE;\n                  });\n              return Boolean.TRUE;\n            });\n      }\n    }\n    names(directory, children);\n    require(before.equals(directory.atDirectory(p -> checked(p, 0x41e8))));\n  }\n\n  private StartupReleaseManifest.Snapshot checked(Path held, int mode) throws IOException {\n    require(!Thread.currentThread().isInterrupted());\n    var value = reader.checked(held, group, mode, mode == 0x41e8 ? 2 : 1, -1);\n    require(security.readOnlyFilesystem(held));\n    return value;\n  }\n\n  private void own(StartupReleaseManifest.Snapshot snapshot) throws StorageIoException {\n    require(identities.add(snapshot.device() + \":\" + snapshot.inode()));\n  }\n\n  private void names(OwnedTransferDirectory directory, Set<String> expected)\n      throws StorageIoException {\n    directory.atDirectory(\n        held -> {\n          return ResourceScope.acquire(\n              () -> io.names(held),\n              java.nio.file.DirectoryStream::close,\n              names -> {\n                var actual = new HashSet<String>();\n                for (Path entry : names) {\n                  require(entry != null && held.equals(entry.getParent()));\n                  require(\n                      actual.size() < 16384\n                          && actual.add(\n                              Objects.requireNonNull(entry.getFileName(), \"directory child name\")\n                                  .toString()));\n                }\n                require(actual.equals(expected));\n                return Boolean.TRUE;\n              });\n        });\n  }\n\n  private FileValue read(Path held, StartupReleaseManifest.Snapshot before, boolean material)\n      throws IOException, NoSuchAlgorithmException {\n    require(!material || before.size() <= MAX_MATERIAL);\n    byte[] bytes = material ? new byte[(int) before.size()] : new byte[0];\n    MessageDigest hash = MessageDigest.getInstance(\"SHA-256\");\n    return ResourceScope.acquire(\n        () -> io.open(held),\n        SeekableByteChannel::close,\n        channel -> {\n          require(channel.size() == before.size() && channel.position() == 0);\n          ByteBuffer buffer = ByteBuffer.allocate(8192);\n          long total = 0;\n          while (true) {\n            require(!Thread.currentThread().isInterrupted());\n            int count = channel.read(buffer);\n            if (count < 0) {\n              require(count == -1 && buffer.position() == 0 && channel.position() == total);\n              break;\n            }\n            require(count > 0 && count == buffer.position() && count <= before.size() - total);\n            if (material) System.arraycopy(buffer.array(), 0, bytes, (int) total, count);\n            total += count;\n            require(channel.position() == total);\n            buffer.flip();\n            hash.update(buffer);\n            buffer.clear();\n          }\n          require(total == before.size() && channel.size() == before.size());\n          return new FileValue(HexFormat.of().formatHex(hash.digest()), bytes);\n        });\n  }\n\n  private JarValue archive(Path held, String path, Map<String, ReleaseInventory.Artifact> expected)\n      throws IOException, NoSuchAlgorithmException {\n    MessageDigest digest = MessageDigest.getInstance(\"SHA-256\");\n    return ResourceScope.acquire(\n        () -> io.archive(held),\n        ZipFile::close,\n        zip -> {\n          require(zip.size() > 0 && zip.size() <= 131072);\n          Set<String> entries = new HashSet<>();\n          Set<String> classes = new HashSet<>();\n          Map<String, String> sql = new HashMap<>();\n          var iterator = zip.entries();\n          while (iterator.hasMoreElements()) {\n            var entry = Objects.requireNonNull(iterator.nextElement(), \"archive entry\");\n            String name = Objects.requireNonNull(entry.getName(), \"archive entry name\");\n            require(\n                entries.add(name)\n                    && !name.startsWith(\"/\")\n                    && !name.contains(\"\\\\\")\n                    && !Arrays.asList(name.split(\"/\", -1)).contains(\"..\"));\n            require(!name.endsWith(\".jar\"));\n            if (name.endsWith(\".class\") && !name.endsWith(\"module-info.class\")) classes.add(name);\n            if (entry.isDirectory()) continue;\n            if (name.startsWith(LITERAL_DB_MIGRATION) || name.equals(\"META-INF/MANIFEST.MF\")) {\n              require(entry.getSize() >= 0 && entry.getSize() <= MAX_MATERIAL);\n              byte[] bytes =\n                  ResourceScope.acquire(\n                      () -> zip.getInputStream(entry),\n                      java.io.InputStream::close,\n                      stream -> stream.readNBytes((int) entry.getSize() + 1));\n              require(bytes.length == entry.getSize());\n              if (name.equals(\"META-INF/MANIFEST.MF\")) {\n                var manifest = new Manifest(new ByteArrayInputStream(bytes));\n                String classpath = manifest.getMainAttributes().getValue(\"Class-Path\");\n                if (classpath != null) {\n                  require(!classpath.isBlank());\n                  for (String token : classpath.trim().split(\" +\")) {\n                    require(token.matches(\"(?:lib/)?[A-Za-z0-9][A-Za-z0-9._-]*\\\\.jar\"));\n                    String target =\n                        Objects.requireNonNull(Path.of(path).getParent()).resolve(token).toString();\n                    require(expected.containsKey(target));\n                  }\n                }\n              } else {\n                require(path.equals(\"api/api.jar\") && name.endsWith(\".sql\"));\n                digest.reset();\n                sql.put(name, HexFormat.of().formatHex(digest.digest(bytes)));\n              }\n            }\n          }\n          return new JarValue(Set.copyOf(classes), Map.copyOf(sql));\n        });\n  }\n\n  private void agreement(\n      ReleaseInventory inventory, Map<String, ReleaseInventory.Artifact> expected)\n      throws StorageIoException {\n    Set<String> sharedPaths = new HashSet<>();\n    Set<String> sharedClasses = new HashSet<>();\n    for (var dep : inventory.dependencies()) {\n      if (dep.coordinate()\n          .matches(\"dev\\\\.codex\\\\.schubert:schubert-nk-(?:protocol|storage|bootstrap):.+\")) {\n        sharedPaths.addAll(dep.paths());\n        for (String path : dep.paths())\n          sharedClasses.addAll(\n              Objects.requireNonNull(jars.get(path), \"declared shared archive\").classes());\n      }\n    }\n    for (var entry : jars.entrySet())\n      if (!sharedPaths.contains(entry.getKey()))\n        require(Collections.disjoint(sharedClasses, entry.getValue().classes()));\n    var sql = Objects.requireNonNull(jars.get(\"api/api.jar\"), \"declared API archive\").sql();\n    require(sql.keySet().equals(checksums.keySet()));\n    for (int i = 1; i < inventory.migrations().size(); i++) {\n      var row = inventory.migrations().get(i);\n      String path = LITERAL_DB_MIGRATION + row.script();\n      require(\n          Objects.requireNonNull(expected.get(path), \"declared SQL artifact\")\n              .sha256()\n              .equals(sql.get(path)));\n      require(Objects.equals(row.checksum(), checksums.get(path)));\n    }\n  }\n\n  /** Flyway13.4: UTF8, line endings ignored, first line BOM only; signed CRC32. */\n  static int sqlChecksum(byte[] original) throws IOException {\n    String text = StandardCharsets.UTF_8.newDecoder().decode(ByteBuffer.wrap(original)).toString();\n    return ResourceScope.acquire(\n        () -> new BufferedReader(new StringReader(text), 4096),\n        BufferedReader::close,\n        reader -> {\n          var crc = new CRC32();\n          boolean first = true;\n          String line;\n          while ((line = reader.readLine()) != null) {\n            if (first && line.startsWith(\"\\ufeff\")) line = line.substring(1);\n            crc.update(line.getBytes(StandardCharsets.UTF_8));\n            first = false;\n          }\n          return (int) crc.getValue();\n        });\n  }\n\n  private static void require(boolean valid) throws StorageIoException {\n    if (!valid) throw new StorageIoException(StorageIoException.Reason.UNAVAILABLE);\n  }\n}\n"
+    }
+  ]
+}
