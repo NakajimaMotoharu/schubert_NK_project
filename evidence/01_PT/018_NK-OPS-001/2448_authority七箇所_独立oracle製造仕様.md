@@ -1,0 +1,21 @@
+# 2448 authority七箇所・独立oracle製造仕様
+
+実行中追記：元13342/session29146は制御反例でimplicit token-block unpackがValueErrorとなる工具signal不一致で真正1/OUT無し/source変更0/PT0、元SLOT begin/source hashesを保全。BUG2049/YKT1797先行起票後、別f03_authority_oracle_sources_v2と13343 planで明示一意構造assertに統一して全反例を回収する。元工具/planは非変更・再実行せず、scope/期待/原見積不変更。
+
+2026-10-29、savecb523fcc7538f8b16736e18a6aa803f6bb0879e0/push10464真正0/origin一致、Production703876e73d6ec1bd06229a8b9a119e66d8d99a30。群G03_AUTHORITY_ORACLE_PG7_SOURCE_ONLY_V1、着手前低1.5/基準4/高8pp・cap10、fresh API最小観測は487開始eventへ直接転送、専有費/N/Tnull・原/改訂/元2391予実不変更。既BUG1830/YKT1581、結果2449/PG-D791。
+
+## 確定済みPGと保留条件の分離
+
+SS314§7.2.6（ab7a1907d0861ca1b6d4181d674f98a73c13f8a4b897b86f655b5a30ce202a7b、origin/main8b91944dfとbyte一致）の固定ROLE_USER/ROLE_ADMIN一個という確定済み部分だけを既Test sourceへ実装する。478DのPG必要・着手依存と終了依存の分離に従い、R09/BIZ007の逐TestID責任/criteria・終了依存はUNKNOWN/HOLDのまま保持し、source level ownerを理由に未知のcase責任費/受入を決めない。sourceの固定値選択はこの未知判断を要さず、実際の認証/権限設定/アクセス経路の変更ではない。
+
+対象はSessionSecurityContextTest二（auth/assertIdentity）、SessionLoginHandlerTest#auth、ApiSessionInvalidTest#setActor、ErrorMvcTest#set、ScenarioControllerTest#setActor、SessionAccessFailureTest#setPrincipalの六source/七箇所。元source責任費はP01502/P00706/P01506/P01624/P01607/P01502、変更担当G03.01と区別する。既Test IDと残存動的依存は2065 R09～15へ結合、R09のUNKNOWNはsource修正後も未解決として残す。元2391/10426/job/全class BeforeAll/実DB-HTTP-session-暗号/Graph9等は非実行、新fixture/harnessや旧停止操作の再発行なし。
+
+入力SessionPrincipalのenum identityからprivate exhaustive switchで固定authorityを返し、SUT role.wireValue等の出力mapperでfixture/expectedを作らない。Test-local固定String二つ/六helperを追加し、既ROLE_USER/ROLE_ADMIN literalも同じTest固定値へ同値化して規約を損なわない。七callを元exprへ戻しhelper/追加定数だけを除去・逆展開すると元全source tokenが復元されることを確認。未知role追加の自動期待生成/default fallbackを使わない。null入力/旧fixtureの他値・全assert/元認証オブジェクト構築順/例外経路は変更しない。
+
+対象外のSessionFormLoginTest/WebSecurityChainTestの二wireValue actual検査は最新source全byteで保護する。元literal期待が実際値側encoderを検査する目的を壊さず、一括置換しない。質問通知stateの既ORACLE_SOURCE_SCOPE_CLOSED（2447）は再実行しない。
+
+## 品質と計上
+
+新13342で元六SHA/七caller/SS固定表・protected二SHAと全変換を固定→13344全非oracle token/誤role・欠落/Production再導入等の静的非同値/既PMD残件と必要同値定数化による差/CS0→新source固定→13346六normal/PT0→13348当fresh六SpotBugs全1843/全missing-error0→13350/51全Main同byte/全Test集合・対象SourceFile由来のhelper/定数/compiler生成差・全既member/固定UI二値/独立typed→13352/53既995六SHA/他989と全担当費/旧runtime/unknown二を保持。compiler生成Test class/fieldは実差と根拠を全記録して除外しない。
+
+ProductPT0/coverage未測定・実行免除の新認定0、source範囲だけ閉鎖可能でもR09/動的/全G03/451/正式1964-53・17-190/工数null/QA051finalを閉じない。開始derived7747/corr1694/refs3349pending1370・追加32うち14未分類と全体実測db33/8022を保持、oracle七是正/必要なPMD是正/実PTを別測定する。原本DBBackup鍵/native/stash7/Scenario3/Currentbaseline/保留二工具/私有raw/実VM/Rootは非アクセス・保全。次定期used15・残10以下又は不明で新規停止保全、通常群/commit/PMO待ちで止めない。
