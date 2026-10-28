@@ -1,0 +1,775 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<BugCollection version="4.10.4" sequence="0" timestamp="1793214043753" analysisTimestamp="1793214273193" release="">
+  <Project projectName="">
+    <Jar>/home/mini/codex/project1/work/pgpt-runs/PG379/pg13486-positioned-current-literal-v1/snapshot/src/schubert-nk-web/target/schubert-nk-web-0.1.0-SNAPSHOT.jar</Jar>
+    <AuxClasspathEntry>/home/mini/codex/project1/work/pgpt-runs/PG379/pg13486-positioned-current-literal-v1/snapshot/src/schubert-nk-api/target/schubert-nk-api-0.1.0-SNAPSHOT.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/home/mini/codex/project1/work/pgpt-runs/PG379/pg13486-positioned-current-literal-v1/snapshot/src/schubert-nk-batch/target/schubert-nk-batch-0.1.0-SNAPSHOT.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/home/mini/codex/project1/work/pgpt-runs/PG379/pg13486-positioned-current-literal-v1/snapshot/src/schubert-nk-bootstrap/target/schubert-nk-bootstrap-0.1.0-SNAPSHOT.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/home/mini/codex/project1/work/pgpt-runs/PG379/pg13486-positioned-current-literal-v1/snapshot/src/schubert-nk-protocol/target/schubert-nk-protocol-0.1.0-SNAPSHOT.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/home/mini/codex/project1/work/pgpt-runs/PG379/pg13486-positioned-current-literal-v1/snapshot/src/schubert-nk-storage/target/schubert-nk-storage-0.1.0-SNAPSHOT.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/home/mini/codex/project1/work/pgpt-runs/PG379/pg13486-positioned-current-literal-v1/snapshot/src/schubert-nk-web/target/schubert-nk-web-0.1.0-SNAPSHOT.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/home/mini/codex/project1/work/toolchain/m2/repository/com/fasterxml/jackson/core/jackson-annotations/2.21/jackson-annotations-2.21.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/home/mini/codex/project1/work/toolchain/m2/repository/com/github/spotbugs/spotbugs-annotations/4.10.4/spotbugs-annotations-4.10.4.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/home/mini/codex/project1/work/toolchain/m2/repository/com/google/code/findbugs/jsr305/3.0.2/jsr305-3.0.2.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/home/mini/codex/project1/work/toolchain/m2/repository/com/google/code/gson/gson/2.14.0/gson-2.14.0.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/home/mini/codex/project1/work/toolchain/m2/repository/com/google/errorprone/error_prone_annotations/2.48.0/error_prone_annotations-2.48.0.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/home/mini/codex/project1/work/toolchain/m2/repository/com/hierynomus/asn-one/0.6.0/asn-one-0.6.0.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/home/mini/codex/project1/work/toolchain/m2/repository/com/zaxxer/HikariCP/7.1.0/HikariCP-7.1.0.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/home/mini/codex/project1/work/toolchain/m2/repository/commons-beanutils/commons-beanutils/1.11.0/commons-beanutils-1.11.0.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/home/mini/codex/project1/work/toolchain/m2/repository/commons-collections/commons-collections/3.2.2/commons-collections-3.2.2.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/home/mini/codex/project1/work/toolchain/m2/repository/commons-logging/commons-logging/1.4.0/commons-logging-1.4.0.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/home/mini/codex/project1/work/toolchain/m2/repository/de/dentrassi/crypto/pem-keystore/3.0.0/pem-keystore-3.0.0.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/home/mini/codex/project1/work/toolchain/m2/repository/io/micrometer/micrometer-commons/1.17.1/micrometer-commons-1.17.1.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/home/mini/codex/project1/work/toolchain/m2/repository/io/micrometer/micrometer-core/1.17.1/micrometer-core-1.17.1.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/home/mini/codex/project1/work/toolchain/m2/repository/io/micrometer/micrometer-observation/1.17.1/micrometer-observation-1.17.1.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/home/mini/codex/project1/work/toolchain/m2/repository/io/micrometer/micrometer-registry-prometheus/1.17.1/micrometer-registry-prometheus-1.17.1.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/home/mini/codex/project1/work/toolchain/m2/repository/io/netty/netty-buffer/4.1.137.Final/netty-buffer-4.1.137.Final.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/home/mini/codex/project1/work/toolchain/m2/repository/io/netty/netty-codec-http/4.1.137.Final/netty-codec-http-4.1.137.Final.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/home/mini/codex/project1/work/toolchain/m2/repository/io/netty/netty-codec-socks/4.1.137.Final/netty-codec-socks-4.1.137.Final.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/home/mini/codex/project1/work/toolchain/m2/repository/io/netty/netty-codec/4.1.137.Final/netty-codec-4.1.137.Final.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/home/mini/codex/project1/work/toolchain/m2/repository/io/netty/netty-common/4.1.137.Final/netty-common-4.1.137.Final.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/home/mini/codex/project1/work/toolchain/m2/repository/io/netty/netty-handler-proxy/4.1.137.Final/netty-handler-proxy-4.1.137.Final.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/home/mini/codex/project1/work/toolchain/m2/repository/io/netty/netty-handler/4.1.137.Final/netty-handler-4.1.137.Final.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/home/mini/codex/project1/work/toolchain/m2/repository/io/netty/netty-resolver/4.1.137.Final/netty-resolver-4.1.137.Final.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/home/mini/codex/project1/work/toolchain/m2/repository/io/netty/netty-transport-classes-epoll/4.1.137.Final/netty-transport-classes-epoll-4.1.137.Final.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/home/mini/codex/project1/work/toolchain/m2/repository/io/netty/netty-transport-classes-kqueue/4.1.137.Final/netty-transport-classes-kqueue-4.1.137.Final.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/home/mini/codex/project1/work/toolchain/m2/repository/io/netty/netty-transport-native-epoll/4.1.137.Final/netty-transport-native-epoll-4.1.137.Final-linux-x86_64.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/home/mini/codex/project1/work/toolchain/m2/repository/io/netty/netty-transport-native-kqueue/4.1.137.Final/netty-transport-native-kqueue-4.1.137.Final-osx-x86_64.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/home/mini/codex/project1/work/toolchain/m2/repository/io/netty/netty-transport-native-unix-common/4.1.137.Final/netty-transport-native-unix-common-4.1.137.Final.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/home/mini/codex/project1/work/toolchain/m2/repository/io/netty/netty-transport/4.1.137.Final/netty-transport-4.1.137.Final.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/home/mini/codex/project1/work/toolchain/m2/repository/io/prometheus/prometheus-metrics-config/1.7.0/prometheus-metrics-config-1.7.0.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/home/mini/codex/project1/work/toolchain/m2/repository/io/prometheus/prometheus-metrics-core/1.7.0/prometheus-metrics-core-1.7.0.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/home/mini/codex/project1/work/toolchain/m2/repository/io/prometheus/prometheus-metrics-exposition-textformats/1.7.0/prometheus-metrics-exposition-textformats-1.7.0.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/home/mini/codex/project1/work/toolchain/m2/repository/io/prometheus/prometheus-metrics-model/1.7.0/prometheus-metrics-model-1.7.0.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/home/mini/codex/project1/work/toolchain/m2/repository/io/prometheus/prometheus-metrics-tracer-common/1.7.0/prometheus-metrics-tracer-common-1.7.0.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/home/mini/codex/project1/work/toolchain/m2/repository/jakarta/jms/jakarta.jms-api/3.1.0/jakarta.jms-api-3.1.0.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/artemis/artemis-commons/2.56.0/artemis-commons-2.56.0.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/artemis/artemis-core-client/2.56.0/artemis-core-client-2.56.0.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/artemis/artemis-jakarta-client/2.56.0/artemis-jakarta-client-2.56.0.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/artemis/artemis-selector/2.56.0/artemis-selector-2.56.0.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/tomcat/embed/tomcat-embed-core/11.0.25/tomcat-embed-core-11.0.25.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/home/mini/codex/project1/work/toolchain/m2/repository/org/apache/tomcat/tomcat-annotations-api/11.0.25/tomcat-annotations-api-11.0.25.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/home/mini/codex/project1/work/toolchain/m2/repository/org/attoparser/attoparser/2.0.7.RELEASE/attoparser-2.0.7.RELEASE.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/home/mini/codex/project1/work/toolchain/m2/repository/org/flywaydb/flyway-core/13.4.0/flyway-core-13.4.0.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/home/mini/codex/project1/work/toolchain/m2/repository/org/jgroups/jgroups/5.3.13.Final/jgroups-5.3.13.Final.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/home/mini/codex/project1/work/toolchain/m2/repository/org/jspecify/jspecify/1.0.1/jspecify-1.0.1.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/home/mini/codex/project1/work/toolchain/m2/repository/org/postgresql/postgresql/42.7.13/postgresql-42.7.13.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/home/mini/codex/project1/work/toolchain/m2/repository/org/slf4j/slf4j-api/2.0.18/slf4j-api-2.0.18.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/home/mini/codex/project1/work/toolchain/m2/repository/org/snakeyaml/snakeyaml-engine/3.1.1/snakeyaml-engine-3.1.1.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/security/spring-security-core/7.1.1/spring-security-core-7.1.1.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/security/spring-security-crypto/7.1.1/spring-security-crypto-7.1.1.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/security/spring-security-web/7.1.1/spring-security-web-7.1.1.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/session/spring-session-core/4.1.1/spring-session-core-4.1.1.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/spring-aop/7.0.9/spring-aop-7.0.9.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/spring-beans/7.0.9/spring-beans-7.0.9.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/spring-context/7.0.9/spring-context-7.0.9.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/spring-core/7.0.9/spring-core-7.0.9.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/spring-expression/7.0.9/spring-expression-7.0.9.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/spring-web/7.0.9/spring-web-7.0.9.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/home/mini/codex/project1/work/toolchain/m2/repository/org/springframework/spring-webmvc/7.0.9/spring-webmvc-7.0.9.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/home/mini/codex/project1/work/toolchain/m2/repository/org/thymeleaf/thymeleaf-spring6/3.1.5.RELEASE/thymeleaf-spring6-3.1.5.RELEASE.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/home/mini/codex/project1/work/toolchain/m2/repository/org/thymeleaf/thymeleaf/3.1.5.RELEASE/thymeleaf-3.1.5.RELEASE.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/home/mini/codex/project1/work/toolchain/m2/repository/org/unbescape/unbescape/1.1.6.RELEASE/unbescape-1.1.6.RELEASE.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/home/mini/codex/project1/work/toolchain/m2/repository/tools/jackson/core/jackson-core/3.1.5/jackson-core-3.1.5.jar</AuxClasspathEntry>
+    <AuxClasspathEntry>/home/mini/codex/project1/work/toolchain/m2/repository/tools/jackson/core/jackson-databind/3.1.5/jackson-databind-3.1.5.jar</AuxClasspathEntry>
+  </Project>
+  <Errors errors="0" missingClasses="0"></Errors>
+  <FindBugsSummary timestamp="Thu, 29 Oct 2026 04:00:43 +0900" total_classes="358" referenced_classes="1092" total_bugs="0" total_size="13849" num_packages="15" java_version="25.0.4" vm_version="25.0.4+7-1-26.04-Ubuntu" cpu_seconds="47.69" clock_seconds="10.98" peak_mbytes="371.25" alloc_mbytes="2048.00" gc_seconds="0.19">
+    <FileStats path="dev/codex/schubert/nk/web/bootstrap/WebApplication.java" bugCount="0" size="56"/>
+    <FileStats path="dev/codex/schubert/nk/web/bootstrap/WebBusinessAssembly.java" bugCount="0" size="62"/>
+    <FileStats path="dev/codex/schubert/nk/web/bootstrap/WebConfigurationLoader.java" bugCount="0" size="30"/>
+    <FileStats path="dev/codex/schubert/nk/web/bootstrap/WebDependencyReadiness.java" bugCount="0" size="47"/>
+    <FileStats path="dev/codex/schubert/nk/web/bootstrap/WebHttpAdmission.java" bugCount="0" size="66"/>
+    <FileStats path="dev/codex/schubert/nk/web/bootstrap/WebHttpAdmissionValve.java" bugCount="0" size="42"/>
+    <FileStats path="dev/codex/schubert/nk/web/bootstrap/WebHttpServer.java" bugCount="0" size="140"/>
+    <FileStats path="dev/codex/schubert/nk/web/bootstrap/WebJdbcPool.java" bugCount="0" size="17"/>
+    <FileStats path="dev/codex/schubert/nk/web/bootstrap/WebLogApplicationRuntime.java" bugCount="0" size="124"/>
+    <FileStats path="dev/codex/schubert/nk/web/bootstrap/WebManagementServer.java" bugCount="0" size="192"/>
+    <FileStats path="dev/codex/schubert/nk/web/bootstrap/WebNativeCodecs.java" bugCount="0" size="92"/>
+    <FileStats path="dev/codex/schubert/nk/web/bootstrap/WebNativeRuntime.java" bugCount="0" size="240"/>
+    <FileStats path="dev/codex/schubert/nk/web/bootstrap/WebProcessLifetime.java" bugCount="0" size="79"/>
+    <FileStats path="dev/codex/schubert/nk/web/bootstrap/WebProcessMain.java" bugCount="0" size="103"/>
+    <FileStats path="dev/codex/schubert/nk/web/bootstrap/WebRuntimeExecution.java" bugCount="0" size="40"/>
+    <FileStats path="dev/codex/schubert/nk/web/bootstrap/WebRuntimeFailureSignal.java" bugCount="0" size="14"/>
+    <FileStats path="dev/codex/schubert/nk/web/bootstrap/WebRuntimeHealth.java" bugCount="0" size="12"/>
+    <FileStats path="dev/codex/schubert/nk/web/bootstrap/WebRuntimeStop.java" bugCount="0" size="25"/>
+    <FileStats path="dev/codex/schubert/nk/web/bootstrap/WebStartupException.java" bugCount="0" size="36"/>
+    <FileStats path="dev/codex/schubert/nk/web/bootstrap/WebStartupInputs.java" bugCount="0" size="29"/>
+    <FileStats path="dev/codex/schubert/nk/web/bootstrap/WebTerminalCapture.java" bugCount="0" size="46"/>
+    <FileStats path="dev/codex/schubert/nk/web/config/AnimationMvcConfiguration.java" bugCount="0" size="5"/>
+    <FileStats path="dev/codex/schubert/nk/web/config/ContentDetailMvcConfiguration.java" bugCount="0" size="5"/>
+    <FileStats path="dev/codex/schubert/nk/web/config/LogMvcConfiguration.java" bugCount="0" size="5"/>
+    <FileStats path="dev/codex/schubert/nk/web/config/LogoutMvcConfiguration.java" bugCount="0" size="5"/>
+    <FileStats path="dev/codex/schubert/nk/web/config/MediaMvcConfiguration.java" bugCount="0" size="5"/>
+    <FileStats path="dev/codex/schubert/nk/web/config/MusicMvcConfiguration.java" bugCount="0" size="5"/>
+    <FileStats path="dev/codex/schubert/nk/web/config/NotificationBusinessMvcConfiguration.java" bugCount="0" size="5"/>
+    <FileStats path="dev/codex/schubert/nk/web/config/NotificationMvcConfiguration.java" bugCount="0" size="5"/>
+    <FileStats path="dev/codex/schubert/nk/web/config/QuestionAcceptanceMvcConfiguration.java" bugCount="0" size="5"/>
+    <FileStats path="dev/codex/schubert/nk/web/config/QuestionMvcConfiguration.java" bugCount="0" size="5"/>
+    <FileStats path="dev/codex/schubert/nk/web/config/RequestLogMvcConfiguration.java" bugCount="0" size="6"/>
+    <FileStats path="dev/codex/schubert/nk/web/config/ScenarioLogMvcConfiguration.java" bugCount="0" size="3"/>
+    <FileStats path="dev/codex/schubert/nk/web/config/ScenarioMvcConfiguration.java" bugCount="0" size="5"/>
+    <FileStats path="dev/codex/schubert/nk/web/config/UserBusinessMvcConfiguration.java" bugCount="0" size="5"/>
+    <FileStats path="dev/codex/schubert/nk/web/config/UserMvcConfiguration.java" bugCount="0" size="5"/>
+    <FileStats path="dev/codex/schubert/nk/web/config/WebMvcConfiguration.java" bugCount="0" size="46"/>
+    <FileStats path="dev/codex/schubert/nk/web/controller/AnimationController.java" bugCount="0" size="64"/>
+    <FileStats path="dev/codex/schubert/nk/web/controller/ContentDetailController.java" bugCount="0" size="120"/>
+    <FileStats path="dev/codex/schubert/nk/web/controller/ErrorController.java" bugCount="0" size="23"/>
+    <FileStats path="dev/codex/schubert/nk/web/controller/LogController.java" bugCount="0" size="53"/>
+    <FileStats path="dev/codex/schubert/nk/web/controller/LoginController.java" bugCount="0" size="5"/>
+    <FileStats path="dev/codex/schubert/nk/web/controller/LogoutController.java" bugCount="0" size="9"/>
+    <FileStats path="dev/codex/schubert/nk/web/controller/MediaController.java" bugCount="0" size="121"/>
+    <FileStats path="dev/codex/schubert/nk/web/controller/MenuController.java" bugCount="0" size="9"/>
+    <FileStats path="dev/codex/schubert/nk/web/controller/MusicController.java" bugCount="0" size="78"/>
+    <FileStats path="dev/codex/schubert/nk/web/controller/NotificationController.java" bugCount="0" size="186"/>
+    <FileStats path="dev/codex/schubert/nk/web/controller/QuestionController.java" bugCount="0" size="306"/>
+    <FileStats path="dev/codex/schubert/nk/web/controller/ScenarioController.java" bugCount="0" size="127"/>
+    <FileStats path="dev/codex/schubert/nk/web/controller/UserAdminController.java" bugCount="0" size="327"/>
+    <FileStats path="dev/codex/schubert/nk/web/error/ProblemViewFactory.java" bugCount="0" size="21"/>
+    <FileStats path="dev/codex/schubert/nk/web/error/WebResultMapper.java" bugCount="0" size="18"/>
+    <FileStats path="dev/codex/schubert/nk/web/form/CancelForm.java" bugCount="0" size="19"/>
+    <FileStats path="dev/codex/schubert/nk/web/form/LogSearchForm.java" bugCount="0" size="163"/>
+    <FileStats path="dev/codex/schubert/nk/web/form/NotificationSearchForm.java" bugCount="0" size="92"/>
+    <FileStats path="dev/codex/schubert/nk/web/form/PasswordResetForm.java" bugCount="0" size="26"/>
+    <FileStats path="dev/codex/schubert/nk/web/form/QuestionDeleteForm.java" bugCount="0" size="19"/>
+    <FileStats path="dev/codex/schubert/nk/web/form/QuestionSearchForm.java" bugCount="0" size="112"/>
+    <FileStats path="dev/codex/schubert/nk/web/form/QuestionSubmitForm.java" bugCount="0" size="78"/>
+    <FileStats path="dev/codex/schubert/nk/web/form/ScenarioSearchForm.java" bugCount="0" size="142"/>
+    <FileStats path="dev/codex/schubert/nk/web/form/TargetOperationInput.java" bugCount="0" size="56"/>
+    <FileStats path="dev/codex/schubert/nk/web/form/UserChangeForm.java" bugCount="0" size="6"/>
+    <FileStats path="dev/codex/schubert/nk/web/form/UserCreateForm.java" bugCount="0" size="101"/>
+    <FileStats path="dev/codex/schubert/nk/web/form/UserMutationInput.java" bugCount="0" size="126"/>
+    <FileStats path="dev/codex/schubert/nk/web/form/UserRoleForm.java" bugCount="0" size="27"/>
+    <FileStats path="dev/codex/schubert/nk/web/form/UserSearchForm.java" bugCount="0" size="80"/>
+    <FileStats path="dev/codex/schubert/nk/web/form/UserStatusForm.java" bugCount="0" size="26"/>
+    <FileStats path="dev/codex/schubert/nk/web/form/UserUnlockForm.java" bugCount="0" size="24"/>
+    <FileStats path="dev/codex/schubert/nk/web/logging/ClaimedWebLog.java" bugCount="0" size="40"/>
+    <FileStats path="dev/codex/schubert/nk/web/logging/EncryptedWebLogPayload.java" bugCount="0" size="23"/>
+    <FileStats path="dev/codex/schubert/nk/web/logging/HttpRequestLoggingValve.java" bugCount="0" size="48"/>
+    <FileStats path="dev/codex/schubert/nk/web/logging/WebLogDispatcher.java" bugCount="0" size="119"/>
+    <FileStats path="dev/codex/schubert/nk/web/logging/WebLogMessageSender.java" bugCount="0" size="92"/>
+    <FileStats path="dev/codex/schubert/nk/web/logging/WebLogOutboxRepository.java" bugCount="0" size="112"/>
+    <FileStats path="dev/codex/schubert/nk/web/logging/WebLogPayloadCodec.java" bugCount="0" size="161"/>
+    <FileStats path="dev/codex/schubert/nk/web/logging/WebLogPayloadException.java" bugCount="0" size="23"/>
+    <FileStats path="dev/codex/schubert/nk/web/logging/WebLogPayloadIdentity.java" bugCount="0" size="37"/>
+    <FileStats path="dev/codex/schubert/nk/web/logging/WebLogReplayWorker.java" bugCount="0" size="103"/>
+    <FileStats path="dev/codex/schubert/nk/web/logging/WebLogSendException.java" bugCount="0" size="8"/>
+    <FileStats path="dev/codex/schubert/nk/web/logging/WebMediaAudit.java" bugCount="0" size="77"/>
+    <FileStats path="dev/codex/schubert/nk/web/logging/WebRequestLogProducer.java" bugCount="0" size="181"/>
+    <FileStats path="dev/codex/schubert/nk/web/logging/WebRequestRouteInterceptor.java" bugCount="0" size="13"/>
+    <FileStats path="dev/codex/schubert/nk/web/logging/WebRequestTrace.java" bugCount="0" size="108"/>
+    <FileStats path="dev/codex/schubert/nk/web/logging/WebSecurityAudit.java" bugCount="0" size="141"/>
+    <FileStats path="dev/codex/schubert/nk/web/logging/package-info.java" bugCount="0" size="1"/>
+    <FileStats path="dev/codex/schubert/nk/web/media/ContentDispositionFactory.java" bugCount="0" size="11"/>
+    <FileStats path="dev/codex/schubert/nk/web/media/DescriptorFileResolver.java" bugCount="0" size="20"/>
+    <FileStats path="dev/codex/schubert/nk/web/media/HttpByteRangeParser.java" bugCount="0" size="72"/>
+    <FileStats path="dev/codex/schubert/nk/web/media/MediaBodyStreamer.java" bugCount="0" size="23"/>
+    <FileStats path="dev/codex/schubert/nk/web/media/MediaDeliveryException.java" bugCount="0" size="27"/>
+    <FileStats path="dev/codex/schubert/nk/web/media/MediaRangeService.java" bugCount="0" size="70"/>
+    <FileStats path="dev/codex/schubert/nk/web/media/MediaResponseDecoder.java" bugCount="0" size="129"/>
+    <FileStats path="dev/codex/schubert/nk/web/media/package-info.java" bugCount="0" size="1"/>
+    <FileStats path="dev/codex/schubert/nk/web/messaging/AnimationWireClient.java" bugCount="0" size="9"/>
+    <FileStats path="dev/codex/schubert/nk/web/messaging/ArtemisReplyConsumer.java" bugCount="0" size="56"/>
+    <FileStats path="dev/codex/schubert/nk/web/messaging/ArtemisReplyConsumers.java" bugCount="0" size="127"/>
+    <FileStats path="dev/codex/schubert/nk/web/messaging/ArtemisReplyDlqSender.java" bugCount="0" size="63"/>
+    <FileStats path="dev/codex/schubert/nk/web/messaging/ArtemisRequestSender.java" bugCount="0" size="74"/>
+    <FileStats path="dev/codex/schubert/nk/web/messaging/CommittedFatalReplyException.java" bugCount="0" size="5"/>
+    <FileStats path="dev/codex/schubert/nk/web/messaging/JmsContextFactory.java" bugCount="0" size="2"/>
+    <FileStats path="dev/codex/schubert/nk/web/messaging/JmsReplyDecoder.java" bugCount="0" size="84"/>
+    <FileStats path="dev/codex/schubert/nk/web/messaging/JmsRequestReplyClient.java" bugCount="0" size="69"/>
+    <FileStats path="dev/codex/schubert/nk/web/messaging/JmsRequestReplyException.java" bugCount="0" size="27"/>
+    <FileStats path="dev/codex/schubert/nk/web/messaging/JmsRequestSender.java" bugCount="0" size="2"/>
+    <FileStats path="dev/codex/schubert/nk/web/messaging/LogSearchWireClient.java" bugCount="0" size="9"/>
+    <FileStats path="dev/codex/schubert/nk/web/messaging/LogoutWireClient.java" bugCount="0" size="9"/>
+    <FileStats path="dev/codex/schubert/nk/web/messaging/MediaDescriptorWireClient.java" bugCount="0" size="9"/>
+    <FileStats path="dev/codex/schubert/nk/web/messaging/MusicWireClient.java" bugCount="0" size="9"/>
+    <FileStats path="dev/codex/schubert/nk/web/messaging/NotificationWireClient.java" bugCount="0" size="9"/>
+    <FileStats path="dev/codex/schubert/nk/web/messaging/PendingReply.java" bugCount="0" size="25"/>
+    <FileStats path="dev/codex/schubert/nk/web/messaging/ProtectedReadWireClient.java" bugCount="0" size="106"/>
+    <FileStats path="dev/codex/schubert/nk/web/messaging/ProtectedReadWireException.java" bugCount="0" size="23"/>
+    <FileStats path="dev/codex/schubert/nk/web/messaging/QuestionWireClient.java" bugCount="0" size="9"/>
+    <FileStats path="dev/codex/schubert/nk/web/messaging/ReplyCorrelationRegistry.java" bugCount="0" size="76"/>
+    <FileStats path="dev/codex/schubert/nk/web/messaging/ScenarioWireClient.java" bugCount="0" size="24"/>
+    <FileStats path="dev/codex/schubert/nk/web/messaging/ScenarioWireException.java" bugCount="0" size="23"/>
+    <FileStats path="dev/codex/schubert/nk/web/messaging/UserAdministrationWireClient.java" bugCount="0" size="9"/>
+    <FileStats path="dev/codex/schubert/nk/web/messaging/ValidatedReply.java" bugCount="0" size="17"/>
+    <FileStats path="dev/codex/schubert/nk/web/messaging/WebBrokerContexts.java" bugCount="0" size="131"/>
+    <FileStats path="dev/codex/schubert/nk/web/messaging/package-info.java" bugCount="0" size="1"/>
+    <FileStats path="dev/codex/schubert/nk/web/monitoring/HttpMetricContract.java" bugCount="0" size="247"/>
+    <FileStats path="dev/codex/schubert/nk/web/monitoring/HttpMetricRecorder.java" bugCount="0" size="47"/>
+    <FileStats path="dev/codex/schubert/nk/web/monitoring/HttpMetricValve.java" bugCount="0" size="68"/>
+    <FileStats path="dev/codex/schubert/nk/web/monitoring/MediaBytesMetricRecorder.java" bugCount="0" size="62"/>
+    <FileStats path="dev/codex/schubert/nk/web/monitoring/MediaStreamsMetricCollector.java" bugCount="0" size="24"/>
+    <FileStats path="dev/codex/schubert/nk/web/monitoring/MediaStreamsMetricRecorder.java" bugCount="0" size="36"/>
+    <FileStats path="dev/codex/schubert/nk/web/monitoring/OverflowSafeDurationSupport.java" bugCount="0" size="1"/>
+    <FileStats path="dev/codex/schubert/nk/web/monitoring/OverflowSafeHttpMeterRegistry.java" bugCount="0" size="107"/>
+    <FileStats path="dev/codex/schubert/nk/web/monitoring/WebCounterMetricExporter.java" bugCount="0" size="46"/>
+    <FileStats path="dev/codex/schubert/nk/web/monitoring/WebCustomMetricPayload.java" bugCount="0" size="17"/>
+    <FileStats path="dev/codex/schubert/nk/web/monitoring/WebDbPoolMetricBinding.java" bugCount="0" size="25"/>
+    <FileStats path="dev/codex/schubert/nk/web/monitoring/WebDbPoolMetricCollector.java" bugCount="0" size="25"/>
+    <FileStats path="dev/codex/schubert/nk/web/monitoring/WebDbPoolMetricObservation.java" bugCount="0" size="12"/>
+    <FileStats path="dev/codex/schubert/nk/web/monitoring/WebDbPoolMetricRecorder.java" bugCount="0" size="84"/>
+    <FileStats path="dev/codex/schubert/nk/web/monitoring/WebDurationMetricExporter.java" bugCount="0" size="71"/>
+    <FileStats path="dev/codex/schubert/nk/web/monitoring/WebGaugeMetricExporter.java" bugCount="0" size="44"/>
+    <FileStats path="dev/codex/schubert/nk/web/monitoring/WebGcMetricRegistration.java" bugCount="0" size="21"/>
+    <FileStats path="dev/codex/schubert/nk/web/monitoring/WebJvmMetrics.java" bugCount="0" size="21"/>
+    <FileStats path="dev/codex/schubert/nk/web/monitoring/WebMetricCatalog.java" bugCount="0" size="79"/>
+    <FileStats path="dev/codex/schubert/nk/web/monitoring/WebMetricContext.java" bugCount="0" size="105"/>
+    <FileStats path="dev/codex/schubert/nk/web/monitoring/WebMetricHttpHandler.java" bugCount="0" size="35"/>
+    <FileStats path="dev/codex/schubert/nk/web/monitoring/WebMetricScrape.java" bugCount="0" size="16"/>
+    <FileStats path="dev/codex/schubert/nk/web/monitoring/WebMetricText.java" bugCount="0" size="32"/>
+    <FileStats path="dev/codex/schubert/nk/web/monitoring/WebOutboxMetricCollector.java" bugCount="0" size="24"/>
+    <FileStats path="dev/codex/schubert/nk/web/monitoring/WebOutboxMetricRecorder.java" bugCount="0" size="101"/>
+    <FileStats path="dev/codex/schubert/nk/web/monitoring/WebOutboxObservationRepository.java" bugCount="0" size="46"/>
+    <FileStats path="dev/codex/schubert/nk/web/monitoring/WebServiceMetricBinding.java" bugCount="0" size="40"/>
+    <FileStats path="dev/codex/schubert/nk/web/monitoring/WebStandardMetricSource.java" bugCount="0" size="61"/>
+    <FileStats path="dev/codex/schubert/nk/web/monitoring/WebStandardMetrics.java" bugCount="0" size="25"/>
+    <FileStats path="dev/codex/schubert/nk/web/monitoring/WebSystemMetrics.java" bugCount="0" size="21"/>
+    <FileStats path="dev/codex/schubert/nk/web/monitoring/package-info.java" bugCount="0" size="1"/>
+    <FileStats path="dev/codex/schubert/nk/web/receipt/ReceiptReference.java" bugCount="0" size="24"/>
+    <FileStats path="dev/codex/schubert/nk/web/receipt/ReceiptReferenceException.java" bugCount="0" size="5"/>
+    <FileStats path="dev/codex/schubert/nk/web/receipt/ReceiptReferenceRepository.java" bugCount="0" size="113"/>
+    <FileStats path="dev/codex/schubert/nk/web/revocation/ClaimedRevocation.java" bugCount="0" size="35"/>
+    <FileStats path="dev/codex/schubert/nk/web/revocation/EncryptedRevocationPayload.java" bugCount="0" size="24"/>
+    <FileStats path="dev/codex/schubert/nk/web/revocation/LocalLogoutCoordinator.java" bugCount="0" size="57"/>
+    <FileStats path="dev/codex/schubert/nk/web/revocation/PendingRevocationRepository.java" bugCount="0" size="132"/>
+    <FileStats path="dev/codex/schubert/nk/web/revocation/RevocationFailureCode.java" bugCount="0" size="22"/>
+    <FileStats path="dev/codex/schubert/nk/web/revocation/RevocationPayloadCodec.java" bugCount="0" size="125"/>
+    <FileStats path="dev/codex/schubert/nk/web/revocation/RevocationPayloadException.java" bugCount="0" size="23"/>
+    <FileStats path="dev/codex/schubert/nk/web/revocation/RevocationPayloadIdentity.java" bugCount="0" size="37"/>
+    <FileStats path="dev/codex/schubert/nk/web/revocation/RevocationRetryCoordinator.java" bugCount="0" size="127"/>
+    <FileStats path="dev/codex/schubert/nk/web/revocation/RevocationRetryException.java" bugCount="0" size="5"/>
+    <FileStats path="dev/codex/schubert/nk/web/revocation/RevocationRetryWorker.java" bugCount="0" size="93"/>
+    <FileStats path="dev/codex/schubert/nk/web/revocation/package-info.java" bugCount="0" size="1"/>
+    <FileStats path="dev/codex/schubert/nk/web/security/ApiSessionInvalidHandler.java" bugCount="0" size="44"/>
+    <FileStats path="dev/codex/schubert/nk/web/security/CaddyClientAddressResolver.java" bugCount="0" size="24"/>
+    <FileStats path="dev/codex/schubert/nk/web/security/CaddyRequestRejectedException.java" bugCount="0" size="5"/>
+    <FileStats path="dev/codex/schubert/nk/web/security/CaddyTransportContextFilter.java" bugCount="0" size="35"/>
+    <FileStats path="dev/codex/schubert/nk/web/security/ClosedServletSecurityFilter.java" bugCount="0" size="40"/>
+    <FileStats path="dev/codex/schubert/nk/web/security/ClosedWebAuthentication.java" bugCount="0" size="19"/>
+    <FileStats path="dev/codex/schubert/nk/web/security/EncryptedSessionAuthenticationStrategy.java" bugCount="0" size="15"/>
+    <FileStats path="dev/codex/schubert/nk/web/security/EncryptedSessionCsrfTokenRepository.java" bugCount="0" size="39"/>
+    <FileStats path="dev/codex/schubert/nk/web/security/EncryptedSessionRequestCache.java" bugCount="0" size="85"/>
+    <FileStats path="dev/codex/schubert/nk/web/security/EncryptedSessionSecurityContextRepository.java" bugCount="0" size="80"/>
+    <FileStats path="dev/codex/schubert/nk/web/security/FormCsrfTokenRequestHandler.java" bugCount="0" size="24"/>
+    <FileStats path="dev/codex/schubert/nk/web/security/InternalErrorDispatchRouter.java" bugCount="0" size="38"/>
+    <FileStats path="dev/codex/schubert/nk/web/security/LocalLogoutHandler.java" bugCount="0" size="71"/>
+    <FileStats path="dev/codex/schubert/nk/web/security/LoginClientAddress.java" bugCount="0" size="17"/>
+    <FileStats path="dev/codex/schubert/nk/web/security/LoginFormAuthenticationConverter.java" bugCount="0" size="51"/>
+    <FileStats path="dev/codex/schubert/nk/web/security/LoginFormRejectedException.java" bugCount="0" size="5"/>
+    <FileStats path="dev/codex/schubert/nk/web/security/MqAuthenticationProvider.java" bugCount="0" size="44"/>
+    <FileStats path="dev/codex/schubert/nk/web/security/MqFormLoginFilterFactory.java" bugCount="0" size="23"/>
+    <FileStats path="dev/codex/schubert/nk/web/security/MqLoginClient.java" bugCount="0" size="110"/>
+    <FileStats path="dev/codex/schubert/nk/web/security/MqLoginContextProbe.java" bugCount="0" size="68"/>
+    <FileStats path="dev/codex/schubert/nk/web/security/MqLoginExchangeException.java" bugCount="0" size="21"/>
+    <FileStats path="dev/codex/schubert/nk/web/security/MqLoginFailureHandler.java" bugCount="0" size="37"/>
+    <FileStats path="dev/codex/schubert/nk/web/security/MqLoginLockedException.java" bugCount="0" size="11"/>
+    <FileStats path="dev/codex/schubert/nk/web/security/MqLoginSuccessHandler.java" bugCount="0" size="28"/>
+    <FileStats path="dev/codex/schubert/nk/web/security/SavedRequestTarget.java" bugCount="0" size="42"/>
+    <FileStats path="dev/codex/schubert/nk/web/security/SavedScreenTarget.java" bugCount="0" size="38"/>
+    <FileStats path="dev/codex/schubert/nk/web/security/WebAccessExceptionFilterFactory.java" bugCount="0" size="8"/>
+    <FileStats path="dev/codex/schubert/nk/web/security/WebAccessFailureHandler.java" bugCount="0" size="46"/>
+    <FileStats path="dev/codex/schubert/nk/web/security/WebAuthorizationFilterFactory.java" bugCount="0" size="25"/>
+    <FileStats path="dev/codex/schubert/nk/web/security/WebCsrfDeniedHandler.java" bugCount="0" size="19"/>
+    <FileStats path="dev/codex/schubert/nk/web/security/WebCsrfFilterFactory.java" bugCount="0" size="10"/>
+    <FileStats path="dev/codex/schubert/nk/web/security/WebCsrfToken.java" bugCount="0" size="40"/>
+    <FileStats path="dev/codex/schubert/nk/web/security/WebDisplayContext.java" bugCount="0" size="62"/>
+    <FileStats path="dev/codex/schubert/nk/web/security/WebDisplayContextFilter.java" bugCount="0" size="12"/>
+    <FileStats path="dev/codex/schubert/nk/web/security/WebErrorDispatchFilter.java" bugCount="0" size="14"/>
+    <FileStats path="dev/codex/schubert/nk/web/security/WebInfrastructureFailureFilter.java" bugCount="0" size="16"/>
+    <FileStats path="dev/codex/schubert/nk/web/security/WebRequestContext.java" bugCount="0" size="53"/>
+    <FileStats path="dev/codex/schubert/nk/web/security/WebSecurityFilterFactory.java" bugCount="0" size="29"/>
+    <FileStats path="dev/codex/schubert/nk/web/security/WebSecurityHeaderFilterFactory.java" bugCount="0" size="5"/>
+    <FileStats path="dev/codex/schubert/nk/web/security/WebSecurityHeaderWriter.java" bugCount="0" size="14"/>
+    <FileStats path="dev/codex/schubert/nk/web/security/package-info.java" bugCount="0" size="1"/>
+    <FileStats path="dev/codex/schubert/nk/web/session/EncryptedSessionPayload.java" bugCount="0" size="24"/>
+    <FileStats path="dev/codex/schubert/nk/web/session/EncryptedWebSessionRepository.java" bugCount="0" size="207"/>
+    <FileStats path="dev/codex/schubert/nk/web/session/InvalidSessionRowException.java" bugCount="0" size="4"/>
+    <FileStats path="dev/codex/schubert/nk/web/session/JdbcWebSessionStore.java" bugCount="0" size="150"/>
+    <FileStats path="dev/codex/schubert/nk/web/session/OperationTokenConflictException.java" bugCount="0" size="7"/>
+    <FileStats path="dev/codex/schubert/nk/web/session/SessionAttributeCodec.java" bugCount="0" size="140"/>
+    <FileStats path="dev/codex/schubert/nk/web/session/SessionAttributeException.java" bugCount="0" size="5"/>
+    <FileStats path="dev/codex/schubert/nk/web/session/SessionAttributes.java" bugCount="0" size="33"/>
+    <FileStats path="dev/codex/schubert/nk/web/session/SessionOperationToken.java" bugCount="0" size="35"/>
+    <FileStats path="dev/codex/schubert/nk/web/session/SessionOperationTokenLifecycle.java" bugCount="0" size="92"/>
+    <FileStats path="dev/codex/schubert/nk/web/session/SessionPayloadCodec.java" bugCount="0" size="128"/>
+    <FileStats path="dev/codex/schubert/nk/web/session/SessionPayloadException.java" bugCount="0" size="23"/>
+    <FileStats path="dev/codex/schubert/nk/web/session/SessionPayloadIdentity.java" bugCount="0" size="42"/>
+    <FileStats path="dev/codex/schubert/nk/web/session/SessionPrincipal.java" bugCount="0" size="30"/>
+    <FileStats path="dev/codex/schubert/nk/web/session/SessionStoreException.java" bugCount="0" size="22"/>
+    <FileStats path="dev/codex/schubert/nk/web/session/SpringEncryptedSessionRepository.java" bugCount="0" size="36"/>
+    <FileStats path="dev/codex/schubert/nk/web/session/SpringWebSession.java" bugCount="0" size="175"/>
+    <FileStats path="dev/codex/schubert/nk/web/session/WebSessionFilterFactory.java" bugCount="0" size="18"/>
+    <FileStats path="dev/codex/schubert/nk/web/session/WebSessionId.java" bugCount="0" size="36"/>
+    <FileStats path="dev/codex/schubert/nk/web/session/WebSessionRow.java" bugCount="0" size="35"/>
+    <FileStats path="dev/codex/schubert/nk/web/session/WebSessionSnapshot.java" bugCount="0" size="20"/>
+    <FileStats path="dev/codex/schubert/nk/web/session/package-info.java" bugCount="0" size="1"/>
+    <FileStats path="dev/codex/schubert/nk/web/storage/FileIntegrityException.java" bugCount="0" size="5"/>
+    <FileStats path="dev/codex/schubert/nk/web/storage/LargeResultReader.java" bugCount="0" size="39"/>
+    <FileStats path="dev/codex/schubert/nk/web/storage/ScenarioRecordReader.java" bugCount="0" size="36"/>
+    <FileStats path="dev/codex/schubert/nk/web/storage/package-info.java" bugCount="0" size="1"/>
+    <FileStats path="dev/codex/schubert/nk/web/view/AnimationListViewModel.java" bugCount="0" size="108"/>
+    <FileStats path="dev/codex/schubert/nk/web/view/AnimationMenuViewModel.java" bugCount="0" size="33"/>
+    <FileStats path="dev/codex/schubert/nk/web/view/AnimationWatchViewModel.java" bugCount="0" size="33"/>
+    <FileStats path="dev/codex/schubert/nk/web/view/ErrorViewModel.java" bugCount="0" size="57"/>
+    <FileStats path="dev/codex/schubert/nk/web/view/GameListViewModel.java" bugCount="0" size="39"/>
+    <FileStats path="dev/codex/schubert/nk/web/view/LogSearchResultsViewModel.java" bugCount="0" size="106"/>
+    <FileStats path="dev/codex/schubert/nk/web/view/LogSearchViewModel.java" bugCount="0" size="128"/>
+    <FileStats path="dev/codex/schubert/nk/web/view/MenuCard.java" bugCount="0" size="40"/>
+    <FileStats path="dev/codex/schubert/nk/web/view/MenuViewModel.java" bugCount="0" size="21"/>
+    <FileStats path="dev/codex/schubert/nk/web/view/MusicCategoryViewModel.java" bugCount="0" size="56"/>
+    <FileStats path="dev/codex/schubert/nk/web/view/MusicSectionViewModel.java" bugCount="0" size="62"/>
+    <FileStats path="dev/codex/schubert/nk/web/view/MusicTrackViewModel.java" bugCount="0" size="76"/>
+    <FileStats path="dev/codex/schubert/nk/web/view/NotificationDetailViewModel.java" bugCount="0" size="66"/>
+    <FileStats path="dev/codex/schubert/nk/web/view/NotificationListViewModel.java" bugCount="0" size="105"/>
+    <FileStats path="dev/codex/schubert/nk/web/view/PageViewModel.java" bugCount="0" size="53"/>
+    <FileStats path="dev/codex/schubert/nk/web/view/QuestionAcceptedViewModel.java" bugCount="0" size="41"/>
+    <FileStats path="dev/codex/schubert/nk/web/view/QuestionDetailViewModel.java" bugCount="0" size="61"/>
+    <FileStats path="dev/codex/schubert/nk/web/view/QuestionListViewModel.java" bugCount="0" size="99"/>
+    <FileStats path="dev/codex/schubert/nk/web/view/QuestionSubmitViewModel.java" bugCount="0" size="33"/>
+    <FileStats path="dev/codex/schubert/nk/web/view/RouteListViewModel.java" bugCount="0" size="53"/>
+    <FileStats path="dev/codex/schubert/nk/web/view/ScenarioDetailViewModel.java" bugCount="0" size="161"/>
+    <FileStats path="dev/codex/schubert/nk/web/view/ScenarioFileListViewModel.java" bugCount="0" size="66"/>
+    <FileStats path="dev/codex/schubert/nk/web/view/ScenarioSearchResultsViewModel.java" bugCount="0" size="101"/>
+    <FileStats path="dev/codex/schubert/nk/web/view/ScenarioSearchViewModel.java" bugCount="0" size="141"/>
+    <FileStats path="dev/codex/schubert/nk/web/view/TopBarViewModel.java" bugCount="0" size="18"/>
+    <FileStats path="dev/codex/schubert/nk/web/view/UserCreateViewModel.java" bugCount="0" size="24"/>
+    <FileStats path="dev/codex/schubert/nk/web/view/UserDetailViewModel.java" bugCount="0" size="48"/>
+    <FileStats path="dev/codex/schubert/nk/web/view/UserListViewModel.java" bugCount="0" size="118"/>
+    <PackageStats package="dev.codex.schubert.nk.web.bootstrap" total_bugs="0" total_types="35" total_size="1492">
+      <ClassStats class="dev.codex.schubert.nk.web.bootstrap.WebApplication" sourceFile="WebApplication.java" interface="false" size="56" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.bootstrap.WebBusinessAssembly" sourceFile="WebBusinessAssembly.java" interface="false" size="62" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.bootstrap.WebConfigurationLoader" sourceFile="WebConfigurationLoader.java" interface="false" size="30" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.bootstrap.WebDependencyReadiness" sourceFile="WebDependencyReadiness.java" interface="false" size="47" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.bootstrap.WebHttpAdmission" sourceFile="WebHttpAdmission.java" interface="false" size="66" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.bootstrap.WebHttpAdmissionValve" sourceFile="WebHttpAdmissionValve.java" interface="false" size="33" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.bootstrap.WebHttpAdmissionValve$Lease" sourceFile="WebHttpAdmissionValve.java" interface="false" size="9" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.bootstrap.WebHttpServer" sourceFile="WebHttpServer.java" interface="false" size="140" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.bootstrap.WebJdbcPool" sourceFile="WebJdbcPool.java" interface="false" size="17" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.bootstrap.WebLogApplicationRuntime" sourceFile="WebLogApplicationRuntime.java" interface="false" size="124" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.bootstrap.WebManagementServer" sourceFile="WebManagementServer.java" interface="false" size="190" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.bootstrap.WebManagementServer$Factory" sourceFile="WebManagementServer.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.bootstrap.WebNativeCodecs" sourceFile="WebNativeCodecs.java" interface="false" size="81" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.bootstrap.WebNativeCodecs$1" sourceFile="WebNativeCodecs.java" interface="false" size="8" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.bootstrap.WebNativeCodecs$KeySource" sourceFile="WebNativeCodecs.java" interface="true" size="3" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.bootstrap.WebNativeRuntime" sourceFile="WebNativeRuntime.java" interface="false" size="240" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.bootstrap.WebProcessLifetime" sourceFile="WebProcessLifetime.java" interface="false" size="79" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.bootstrap.WebProcessMain" sourceFile="WebProcessMain.java" interface="false" size="101" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.bootstrap.WebProcessMain$Startup" sourceFile="WebProcessMain.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.bootstrap.WebRuntimeExecution" sourceFile="WebRuntimeExecution.java" interface="false" size="36" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.bootstrap.WebRuntimeExecution$Io" sourceFile="WebRuntimeExecution.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.bootstrap.WebRuntimeExecution$Start" sourceFile="WebRuntimeExecution.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.bootstrap.WebRuntimeFailureSignal" sourceFile="WebRuntimeFailureSignal.java" interface="false" size="14" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.bootstrap.WebRuntimeHealth" sourceFile="WebRuntimeHealth.java" interface="false" size="12" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.bootstrap.WebRuntimeStop" sourceFile="WebRuntimeStop.java" interface="false" size="23" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.bootstrap.WebRuntimeStop$Step" sourceFile="WebRuntimeStop.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.bootstrap.WebStartupException" sourceFile="WebStartupException.java" interface="false" size="36" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.bootstrap.WebStartupInputs" sourceFile="WebStartupInputs.java" interface="false" size="15" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.bootstrap.WebStartupInputs$Values" sourceFile="WebStartupInputs.java" interface="false" size="14" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.bootstrap.WebTerminalCapture" sourceFile="WebTerminalCapture.java" interface="false" size="22" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.bootstrap.WebTerminalCapture$Capture" sourceFile="WebTerminalCapture.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.bootstrap.WebTerminalCapture$Factory" sourceFile="WebTerminalCapture.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.bootstrap.WebTerminalCapture$Open" sourceFile="WebTerminalCapture.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.bootstrap.WebTerminalCapture$Operation" sourceFile="WebTerminalCapture.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.bootstrap.WebTerminalCapture$Owner" sourceFile="WebTerminalCapture.java" interface="false" size="16" bugs="0"/>
+    </PackageStats>
+    <PackageStats package="dev.codex.schubert.nk.web.config" total_bugs="0" total_types="16" total_size="120">
+      <ClassStats class="dev.codex.schubert.nk.web.config.AnimationMvcConfiguration" sourceFile="AnimationMvcConfiguration.java" interface="false" size="5" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.config.ContentDetailMvcConfiguration" sourceFile="ContentDetailMvcConfiguration.java" interface="false" size="5" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.config.LogMvcConfiguration" sourceFile="LogMvcConfiguration.java" interface="false" size="5" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.config.LogoutMvcConfiguration" sourceFile="LogoutMvcConfiguration.java" interface="false" size="5" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.config.MediaMvcConfiguration" sourceFile="MediaMvcConfiguration.java" interface="false" size="5" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.config.MusicMvcConfiguration" sourceFile="MusicMvcConfiguration.java" interface="false" size="5" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.config.NotificationBusinessMvcConfiguration" sourceFile="NotificationBusinessMvcConfiguration.java" interface="false" size="5" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.config.NotificationMvcConfiguration" sourceFile="NotificationMvcConfiguration.java" interface="false" size="5" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.config.QuestionAcceptanceMvcConfiguration" sourceFile="QuestionAcceptanceMvcConfiguration.java" interface="false" size="5" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.config.QuestionMvcConfiguration" sourceFile="QuestionMvcConfiguration.java" interface="false" size="5" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.config.RequestLogMvcConfiguration" sourceFile="RequestLogMvcConfiguration.java" interface="false" size="6" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.config.ScenarioLogMvcConfiguration" sourceFile="ScenarioLogMvcConfiguration.java" interface="false" size="3" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.config.ScenarioMvcConfiguration" sourceFile="ScenarioMvcConfiguration.java" interface="false" size="5" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.config.UserBusinessMvcConfiguration" sourceFile="UserBusinessMvcConfiguration.java" interface="false" size="5" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.config.UserMvcConfiguration" sourceFile="UserMvcConfiguration.java" interface="false" size="5" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.config.WebMvcConfiguration" sourceFile="WebMvcConfiguration.java" interface="false" size="46" bugs="0"/>
+    </PackageStats>
+    <PackageStats package="dev.codex.schubert.nk.web.controller" total_bugs="0" total_types="15" total_size="1428">
+      <ClassStats class="dev.codex.schubert.nk.web.controller.AnimationController" sourceFile="AnimationController.java" interface="false" size="64" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.controller.ContentDetailController" sourceFile="ContentDetailController.java" interface="false" size="120" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.controller.ErrorController" sourceFile="ErrorController.java" interface="false" size="23" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.controller.LogController" sourceFile="LogController.java" interface="false" size="53" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.controller.LoginController" sourceFile="LoginController.java" interface="false" size="5" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.controller.LogoutController" sourceFile="LogoutController.java" interface="false" size="9" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.controller.MediaController" sourceFile="MediaController.java" interface="false" size="95" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.controller.MediaController$ServletResponse" sourceFile="MediaController.java" interface="false" size="14" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.controller.MediaController$ServletResponse$1" sourceFile="MediaController.java" interface="false" size="12" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.controller.MenuController" sourceFile="MenuController.java" interface="false" size="9" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.controller.MusicController" sourceFile="MusicController.java" interface="false" size="78" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.controller.NotificationController" sourceFile="NotificationController.java" interface="false" size="186" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.controller.QuestionController" sourceFile="QuestionController.java" interface="false" size="306" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.controller.ScenarioController" sourceFile="ScenarioController.java" interface="false" size="127" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.controller.UserAdminController" sourceFile="UserAdminController.java" interface="false" size="327" bugs="0"/>
+    </PackageStats>
+    <PackageStats package="dev.codex.schubert.nk.web.error" total_bugs="0" total_types="3" total_size="39">
+      <ClassStats class="dev.codex.schubert.nk.web.error.ProblemViewFactory" sourceFile="ProblemViewFactory.java" interface="false" size="21" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.error.WebResultMapper" sourceFile="WebResultMapper.java" interface="false" size="14" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.error.WebResultMapper$1" sourceFile="WebResultMapper.java" interface="false" size="4" bugs="0"/>
+    </PackageStats>
+    <PackageStats package="dev.codex.schubert.nk.web.form" total_bugs="0" total_types="20" total_size="1097">
+      <ClassStats class="dev.codex.schubert.nk.web.form.CancelForm" sourceFile="CancelForm.java" interface="false" size="19" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.form.LogSearchForm" sourceFile="LogSearchForm.java" interface="false" size="119" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.form.LogSearchForm$Code" sourceFile="LogSearchForm.java" interface="false" size="18" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.form.LogSearchForm$Field" sourceFile="LogSearchForm.java" interface="false" size="26" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.form.NotificationSearchForm" sourceFile="NotificationSearchForm.java" interface="false" size="92" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.form.PasswordResetForm" sourceFile="PasswordResetForm.java" interface="false" size="26" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.form.QuestionDeleteForm" sourceFile="QuestionDeleteForm.java" interface="false" size="19" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.form.QuestionSearchForm" sourceFile="QuestionSearchForm.java" interface="false" size="112" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.form.QuestionSubmitForm" sourceFile="QuestionSubmitForm.java" interface="false" size="78" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.form.ScenarioSearchForm" sourceFile="ScenarioSearchForm.java" interface="false" size="102" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.form.ScenarioSearchForm$Code" sourceFile="ScenarioSearchForm.java" interface="false" size="16" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.form.ScenarioSearchForm$Field" sourceFile="ScenarioSearchForm.java" interface="false" size="24" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.form.TargetOperationInput" sourceFile="TargetOperationInput.java" interface="false" size="56" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.form.UserChangeForm" sourceFile="UserChangeForm.java" interface="true" size="6" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.form.UserCreateForm" sourceFile="UserCreateForm.java" interface="false" size="101" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.form.UserMutationInput" sourceFile="UserMutationInput.java" interface="false" size="126" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.form.UserRoleForm" sourceFile="UserRoleForm.java" interface="false" size="27" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.form.UserSearchForm" sourceFile="UserSearchForm.java" interface="false" size="80" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.form.UserStatusForm" sourceFile="UserStatusForm.java" interface="false" size="26" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.form.UserUnlockForm" sourceFile="UserUnlockForm.java" interface="false" size="24" bugs="0"/>
+    </PackageStats>
+    <PackageStats package="dev.codex.schubert.nk.web.logging" total_bugs="0" total_types="26" total_size="1287">
+      <ClassStats class="dev.codex.schubert.nk.web.logging.ClaimedWebLog" sourceFile="ClaimedWebLog.java" interface="false" size="40" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.logging.EncryptedWebLogPayload" sourceFile="EncryptedWebLogPayload.java" interface="false" size="23" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.logging.HttpRequestLoggingValve" sourceFile="HttpRequestLoggingValve.java" interface="false" size="48" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.logging.WebLogDispatcher" sourceFile="WebLogDispatcher.java" interface="false" size="99" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.logging.WebLogDispatcher$Report" sourceFile="WebLogDispatcher.java" interface="false" size="18" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.logging.WebLogDispatcher$SqlAction" sourceFile="WebLogDispatcher.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.logging.WebLogMessageSender" sourceFile="WebLogMessageSender.java" interface="false" size="92" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.logging.WebLogOutboxRepository" sourceFile="WebLogOutboxRepository.java" interface="false" size="112" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.logging.WebLogPayloadCodec" sourceFile="WebLogPayloadCodec.java" interface="false" size="161" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.logging.WebLogPayloadException" sourceFile="WebLogPayloadException.java" interface="false" size="9" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.logging.WebLogPayloadException$Reason" sourceFile="WebLogPayloadException.java" interface="false" size="14" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.logging.WebLogPayloadIdentity" sourceFile="WebLogPayloadIdentity.java" interface="false" size="37" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.logging.WebLogReplayWorker" sourceFile="WebLogReplayWorker.java" interface="false" size="84" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.logging.WebLogReplayWorker$DispatchAction" sourceFile="WebLogReplayWorker.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.logging.WebLogReplayWorker$Snapshot" sourceFile="WebLogReplayWorker.java" interface="false" size="17" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.logging.WebLogSendException" sourceFile="WebLogSendException.java" interface="false" size="8" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.logging.WebMediaAudit" sourceFile="WebMediaAudit.java" interface="false" size="61" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.logging.WebMediaAudit$Failure" sourceFile="WebMediaAudit.java" interface="false" size="16" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.logging.WebRequestLogProducer" sourceFile="WebRequestLogProducer.java" interface="false" size="181" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.logging.WebRequestRouteInterceptor" sourceFile="WebRequestRouteInterceptor.java" interface="false" size="13" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.logging.WebRequestTrace" sourceFile="WebRequestTrace.java" interface="false" size="86" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.logging.WebRequestTrace$Scope" sourceFile="WebRequestTrace.java" interface="false" size="22" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.logging.WebSecurityAudit" sourceFile="WebSecurityAudit.java" interface="false" size="81" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.logging.WebSecurityAudit$Event" sourceFile="WebSecurityAudit.java" interface="false" size="38" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.logging.WebSecurityAudit$Route" sourceFile="WebSecurityAudit.java" interface="false" size="22" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.logging.package-info" sourceFile="package-info.java" interface="true" size="1" bugs="0"/>
+    </PackageStats>
+    <PackageStats package="dev.codex.schubert.nk.web.media" total_bugs="0" total_types="18" total_size="353">
+      <ClassStats class="dev.codex.schubert.nk.web.media.ContentDispositionFactory" sourceFile="ContentDispositionFactory.java" interface="false" size="11" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.media.DescriptorFileResolver" sourceFile="DescriptorFileResolver.java" interface="false" size="20" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.media.HttpByteRangeParser" sourceFile="HttpByteRangeParser.java" interface="false" size="34" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.media.HttpByteRangeParser$Full" sourceFile="HttpByteRangeParser.java" interface="false" size="11" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.media.HttpByteRangeParser$Partial" sourceFile="HttpByteRangeParser.java" interface="false" size="16" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.media.HttpByteRangeParser$Selection" sourceFile="HttpByteRangeParser.java" interface="true" size="1" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.media.HttpByteRangeParser$Unsatisfiable" sourceFile="HttpByteRangeParser.java" interface="false" size="10" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.media.MediaBodyStreamer" sourceFile="MediaBodyStreamer.java" interface="false" size="23" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.media.MediaDeliveryException" sourceFile="MediaDeliveryException.java" interface="false" size="13" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.media.MediaDeliveryException$Reason" sourceFile="MediaDeliveryException.java" interface="false" size="14" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.media.MediaRangeService" sourceFile="MediaRangeService.java" interface="false" size="63" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.media.MediaRangeService$FileSource" sourceFile="MediaRangeService.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.media.MediaRangeService$ReadOperation" sourceFile="MediaRangeService.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.media.MediaRangeService$Response" sourceFile="MediaRangeService.java" interface="true" size="3" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.media.MediaResponseDecoder" sourceFile="MediaResponseDecoder.java" interface="false" size="101" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.media.MediaResponseDecoder$Binding" sourceFile="MediaResponseDecoder.java" interface="false" size="10" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.media.MediaResponseDecoder$Result" sourceFile="MediaResponseDecoder.java" interface="false" size="18" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.media.package-info" sourceFile="package-info.java" interface="true" size="1" bugs="0"/>
+    </PackageStats>
+    <PackageStats package="dev.codex.schubert.nk.web.messaging" total_bugs="0" total_types="32" total_size="1007">
+      <ClassStats class="dev.codex.schubert.nk.web.messaging.AnimationWireClient" sourceFile="AnimationWireClient.java" interface="false" size="9" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.messaging.ArtemisReplyConsumer" sourceFile="ArtemisReplyConsumer.java" interface="false" size="56" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.messaging.ArtemisReplyConsumers" sourceFile="ArtemisReplyConsumers.java" interface="false" size="127" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.messaging.ArtemisReplyDlqSender" sourceFile="ArtemisReplyDlqSender.java" interface="false" size="63" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.messaging.ArtemisRequestSender" sourceFile="ArtemisRequestSender.java" interface="false" size="74" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.messaging.CommittedFatalReplyException" sourceFile="CommittedFatalReplyException.java" interface="false" size="5" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.messaging.JmsContextFactory" sourceFile="JmsContextFactory.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.messaging.JmsReplyDecoder" sourceFile="JmsReplyDecoder.java" interface="false" size="84" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.messaging.JmsRequestReplyClient" sourceFile="JmsRequestReplyClient.java" interface="false" size="69" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.messaging.JmsRequestReplyException" sourceFile="JmsRequestReplyException.java" interface="false" size="13" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.messaging.JmsRequestReplyException$Reason" sourceFile="JmsRequestReplyException.java" interface="false" size="14" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.messaging.JmsRequestSender" sourceFile="JmsRequestSender.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.messaging.LogSearchWireClient" sourceFile="LogSearchWireClient.java" interface="false" size="9" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.messaging.LogoutWireClient" sourceFile="LogoutWireClient.java" interface="false" size="9" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.messaging.MediaDescriptorWireClient" sourceFile="MediaDescriptorWireClient.java" interface="false" size="9" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.messaging.MusicWireClient" sourceFile="MusicWireClient.java" interface="false" size="9" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.messaging.NotificationWireClient" sourceFile="NotificationWireClient.java" interface="false" size="9" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.messaging.PendingReply" sourceFile="PendingReply.java" interface="false" size="25" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.messaging.ProtectedReadWireClient" sourceFile="ProtectedReadWireClient.java" interface="false" size="92" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.messaging.ProtectedReadWireClient$Result" sourceFile="ProtectedReadWireClient.java" interface="false" size="14" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.messaging.ProtectedReadWireException" sourceFile="ProtectedReadWireException.java" interface="false" size="9" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.messaging.ProtectedReadWireException$Reason" sourceFile="ProtectedReadWireException.java" interface="false" size="14" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.messaging.QuestionWireClient" sourceFile="QuestionWireClient.java" interface="false" size="9" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.messaging.ReplyCorrelationRegistry" sourceFile="ReplyCorrelationRegistry.java" interface="false" size="76" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.messaging.ScenarioWireClient" sourceFile="ScenarioWireClient.java" interface="false" size="12" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.messaging.ScenarioWireClient$Result" sourceFile="ScenarioWireClient.java" interface="false" size="12" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.messaging.ScenarioWireException" sourceFile="ScenarioWireException.java" interface="false" size="9" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.messaging.ScenarioWireException$Reason" sourceFile="ScenarioWireException.java" interface="false" size="14" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.messaging.UserAdministrationWireClient" sourceFile="UserAdministrationWireClient.java" interface="false" size="9" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.messaging.ValidatedReply" sourceFile="ValidatedReply.java" interface="false" size="17" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.messaging.WebBrokerContexts" sourceFile="WebBrokerContexts.java" interface="false" size="131" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.messaging.package-info" sourceFile="package-info.java" interface="true" size="1" bugs="0"/>
+    </PackageStats>
+    <PackageStats package="dev.codex.schubert.nk.web.monitoring" total_bugs="0" total_types="43" total_size="1544">
+      <ClassStats class="dev.codex.schubert.nk.web.monitoring.HttpMetricContract" sourceFile="HttpMetricContract.java" interface="false" size="38" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.monitoring.HttpMetricContract$Labels" sourceFile="HttpMetricContract.java" interface="false" size="24" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.monitoring.HttpMetricContract$Method" sourceFile="HttpMetricContract.java" interface="false" size="33" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.monitoring.HttpMetricContract$Metric" sourceFile="HttpMetricContract.java" interface="false" size="31" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.monitoring.HttpMetricContract$Route" sourceFile="HttpMetricContract.java" interface="false" size="93" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.monitoring.HttpMetricContract$Status" sourceFile="HttpMetricContract.java" interface="false" size="28" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.monitoring.HttpMetricRecorder" sourceFile="HttpMetricRecorder.java" interface="false" size="47" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.monitoring.HttpMetricValve" sourceFile="HttpMetricValve.java" interface="false" size="61" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.monitoring.HttpMetricValve$Completion" sourceFile="HttpMetricValve.java" interface="false" size="7" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.monitoring.MediaBytesMetricRecorder" sourceFile="MediaBytesMetricRecorder.java" interface="false" size="44" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.monitoring.MediaBytesMetricRecorder$Mode" sourceFile="MediaBytesMetricRecorder.java" interface="false" size="18" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.monitoring.MediaStreamsMetricCollector" sourceFile="MediaStreamsMetricCollector.java" interface="false" size="24" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.monitoring.MediaStreamsMetricRecorder" sourceFile="MediaStreamsMetricRecorder.java" interface="false" size="36" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.monitoring.OverflowSafeDurationSupport" sourceFile="OverflowSafeDurationSupport.java" interface="true" size="1" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.monitoring.OverflowSafeHttpMeterRegistry" sourceFile="OverflowSafeHttpMeterRegistry.java" interface="false" size="27" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.monitoring.OverflowSafeHttpMeterRegistry$OverflowSafeTimer" sourceFile="OverflowSafeHttpMeterRegistry.java" interface="false" size="80" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.monitoring.WebCounterMetricExporter" sourceFile="WebCounterMetricExporter.java" interface="false" size="46" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.monitoring.WebCustomMetricPayload" sourceFile="WebCustomMetricPayload.java" interface="false" size="17" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.monitoring.WebDbPoolMetricBinding" sourceFile="WebDbPoolMetricBinding.java" interface="false" size="25" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.monitoring.WebDbPoolMetricCollector" sourceFile="WebDbPoolMetricCollector.java" interface="false" size="25" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.monitoring.WebDbPoolMetricObservation" sourceFile="WebDbPoolMetricObservation.java" interface="false" size="12" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.monitoring.WebDbPoolMetricRecorder" sourceFile="WebDbPoolMetricRecorder.java" interface="false" size="38" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.monitoring.WebDbPoolMetricRecorder$Counts" sourceFile="WebDbPoolMetricRecorder.java" interface="false" size="24" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.monitoring.WebDbPoolMetricRecorder$State" sourceFile="WebDbPoolMetricRecorder.java" interface="false" size="22" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.monitoring.WebDurationMetricExporter" sourceFile="WebDurationMetricExporter.java" interface="false" size="71" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.monitoring.WebGaugeMetricExporter" sourceFile="WebGaugeMetricExporter.java" interface="false" size="44" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.monitoring.WebGcMetricRegistration" sourceFile="WebGcMetricRegistration.java" interface="false" size="21" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.monitoring.WebJvmMetrics" sourceFile="WebJvmMetrics.java" interface="false" size="21" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.monitoring.WebMetricCatalog" sourceFile="WebMetricCatalog.java" interface="false" size="79" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.monitoring.WebMetricContext" sourceFile="WebMetricContext.java" interface="false" size="105" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.monitoring.WebMetricHttpHandler" sourceFile="WebMetricHttpHandler.java" interface="false" size="35" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.monitoring.WebMetricScrape" sourceFile="WebMetricScrape.java" interface="false" size="16" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.monitoring.WebMetricText" sourceFile="WebMetricText.java" interface="false" size="32" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.monitoring.WebOutboxMetricCollector" sourceFile="WebOutboxMetricCollector.java" interface="false" size="24" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.monitoring.WebOutboxMetricRecorder" sourceFile="WebOutboxMetricRecorder.java" interface="false" size="39" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.monitoring.WebOutboxMetricRecorder$Observation" sourceFile="WebOutboxMetricRecorder.java" interface="false" size="44" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.monitoring.WebOutboxMetricRecorder$Status" sourceFile="WebOutboxMetricRecorder.java" interface="false" size="18" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.monitoring.WebOutboxObservationRepository" sourceFile="WebOutboxObservationRepository.java" interface="false" size="46" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.monitoring.WebServiceMetricBinding" sourceFile="WebServiceMetricBinding.java" interface="false" size="40" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.monitoring.WebStandardMetricSource" sourceFile="WebStandardMetricSource.java" interface="false" size="61" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.monitoring.WebStandardMetrics" sourceFile="WebStandardMetrics.java" interface="false" size="25" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.monitoring.WebSystemMetrics" sourceFile="WebSystemMetrics.java" interface="false" size="21" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.monitoring.package-info" sourceFile="package-info.java" interface="true" size="1" bugs="0"/>
+    </PackageStats>
+    <PackageStats package="dev.codex.schubert.nk.web.receipt" total_bugs="0" total_types="4" total_size="142">
+      <ClassStats class="dev.codex.schubert.nk.web.receipt.ReceiptReference" sourceFile="ReceiptReference.java" interface="false" size="24" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.receipt.ReceiptReferenceException" sourceFile="ReceiptReferenceException.java" interface="false" size="5" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.receipt.ReceiptReferenceRepository" sourceFile="ReceiptReferenceRepository.java" interface="false" size="111" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.receipt.ReceiptReferenceRepository$Work" sourceFile="ReceiptReferenceRepository.java" interface="true" size="2" bugs="0"/>
+    </PackageStats>
+    <PackageStats package="dev.codex.schubert.nk.web.revocation" total_bugs="0" total_types="18" total_size="681">
+      <ClassStats class="dev.codex.schubert.nk.web.revocation.ClaimedRevocation" sourceFile="ClaimedRevocation.java" interface="false" size="35" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.revocation.EncryptedRevocationPayload" sourceFile="EncryptedRevocationPayload.java" interface="false" size="24" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.revocation.LocalLogoutCoordinator" sourceFile="LocalLogoutCoordinator.java" interface="false" size="45" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.revocation.LocalLogoutCoordinator$Outcome" sourceFile="LocalLogoutCoordinator.java" interface="false" size="12" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.revocation.PendingRevocationRepository" sourceFile="PendingRevocationRepository.java" interface="false" size="132" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.revocation.RevocationFailureCode" sourceFile="RevocationFailureCode.java" interface="false" size="22" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.revocation.RevocationPayloadCodec" sourceFile="RevocationPayloadCodec.java" interface="false" size="125" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.revocation.RevocationPayloadException" sourceFile="RevocationPayloadException.java" interface="false" size="9" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.revocation.RevocationPayloadException$Reason" sourceFile="RevocationPayloadException.java" interface="false" size="14" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.revocation.RevocationPayloadIdentity" sourceFile="RevocationPayloadIdentity.java" interface="false" size="37" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.revocation.RevocationRetryCoordinator" sourceFile="RevocationRetryCoordinator.java" interface="false" size="109" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.revocation.RevocationRetryCoordinator$Outcome" sourceFile="RevocationRetryCoordinator.java" interface="false" size="16" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.revocation.RevocationRetryCoordinator$SqlWork" sourceFile="RevocationRetryCoordinator.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.revocation.RevocationRetryException" sourceFile="RevocationRetryException.java" interface="false" size="5" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.revocation.RevocationRetryWorker" sourceFile="RevocationRetryWorker.java" interface="false" size="77" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.revocation.RevocationRetryWorker$DispatchAction" sourceFile="RevocationRetryWorker.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.revocation.RevocationRetryWorker$Snapshot" sourceFile="RevocationRetryWorker.java" interface="false" size="14" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.revocation.package-info" sourceFile="package-info.java" interface="true" size="1" bugs="0"/>
+    </PackageStats>
+    <PackageStats package="dev.codex.schubert.nk.web.security" total_bugs="0" total_types="47" total_size="1368">
+      <ClassStats class="dev.codex.schubert.nk.web.security.ApiSessionInvalidHandler" sourceFile="ApiSessionInvalidHandler.java" interface="false" size="44" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.security.CaddyClientAddressResolver" sourceFile="CaddyClientAddressResolver.java" interface="false" size="24" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.security.CaddyRequestRejectedException" sourceFile="CaddyRequestRejectedException.java" interface="false" size="5" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.security.CaddyTransportContextFilter" sourceFile="CaddyTransportContextFilter.java" interface="false" size="35" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.security.ClosedServletSecurityFilter" sourceFile="ClosedServletSecurityFilter.java" interface="false" size="13" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.security.ClosedServletSecurityFilter$ClosedServletRequest" sourceFile="ClosedServletSecurityFilter.java" interface="false" size="27" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.security.ClosedWebAuthentication" sourceFile="ClosedWebAuthentication.java" interface="false" size="19" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.security.EncryptedSessionAuthenticationStrategy" sourceFile="EncryptedSessionAuthenticationStrategy.java" interface="false" size="15" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.security.EncryptedSessionCsrfTokenRepository" sourceFile="EncryptedSessionCsrfTokenRepository.java" interface="false" size="39" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.security.EncryptedSessionRequestCache" sourceFile="EncryptedSessionRequestCache.java" interface="false" size="58" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.security.EncryptedSessionRequestCache$SavedGet" sourceFile="EncryptedSessionRequestCache.java" interface="false" size="27" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.security.EncryptedSessionSecurityContextRepository" sourceFile="EncryptedSessionSecurityContextRepository.java" interface="false" size="47" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.security.EncryptedSessionSecurityContextRepository$Deferred" sourceFile="EncryptedSessionSecurityContextRepository.java" interface="false" size="33" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.security.FormCsrfTokenRequestHandler" sourceFile="FormCsrfTokenRequestHandler.java" interface="false" size="24" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.security.InternalErrorDispatchRouter" sourceFile="InternalErrorDispatchRouter.java" interface="false" size="38" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.security.LocalLogoutHandler" sourceFile="LocalLogoutHandler.java" interface="false" size="71" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.security.LoginClientAddress" sourceFile="LoginClientAddress.java" interface="false" size="17" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.security.LoginFormAuthenticationConverter" sourceFile="LoginFormAuthenticationConverter.java" interface="false" size="51" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.security.LoginFormRejectedException" sourceFile="LoginFormRejectedException.java" interface="false" size="5" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.security.MqAuthenticationProvider" sourceFile="MqAuthenticationProvider.java" interface="false" size="44" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.security.MqFormLoginFilterFactory" sourceFile="MqFormLoginFilterFactory.java" interface="false" size="20" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.security.MqFormLoginFilterFactory$1" sourceFile="MqFormLoginFilterFactory.java" interface="false" size="3" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.security.MqLoginClient" sourceFile="MqLoginClient.java" interface="false" size="96" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.security.MqLoginClient$Reply" sourceFile="MqLoginClient.java" interface="false" size="14" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.security.MqLoginContextProbe" sourceFile="MqLoginContextProbe.java" interface="false" size="68" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.security.MqLoginExchangeException" sourceFile="MqLoginExchangeException.java" interface="false" size="9" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.security.MqLoginExchangeException$Reason" sourceFile="MqLoginExchangeException.java" interface="false" size="12" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.security.MqLoginFailureHandler" sourceFile="MqLoginFailureHandler.java" interface="false" size="37" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.security.MqLoginLockedException" sourceFile="MqLoginLockedException.java" interface="false" size="11" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.security.MqLoginSuccessHandler" sourceFile="MqLoginSuccessHandler.java" interface="false" size="28" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.security.SavedRequestTarget" sourceFile="SavedRequestTarget.java" interface="false" size="42" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.security.SavedScreenTarget" sourceFile="SavedScreenTarget.java" interface="false" size="38" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.security.WebAccessExceptionFilterFactory" sourceFile="WebAccessExceptionFilterFactory.java" interface="false" size="8" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.security.WebAccessFailureHandler" sourceFile="WebAccessFailureHandler.java" interface="false" size="46" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.security.WebAuthorizationFilterFactory" sourceFile="WebAuthorizationFilterFactory.java" interface="false" size="25" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.security.WebCsrfDeniedHandler" sourceFile="WebCsrfDeniedHandler.java" interface="false" size="19" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.security.WebCsrfFilterFactory" sourceFile="WebCsrfFilterFactory.java" interface="false" size="10" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.security.WebCsrfToken" sourceFile="WebCsrfToken.java" interface="false" size="40" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.security.WebDisplayContext" sourceFile="WebDisplayContext.java" interface="false" size="62" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.security.WebDisplayContextFilter" sourceFile="WebDisplayContextFilter.java" interface="false" size="12" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.security.WebErrorDispatchFilter" sourceFile="WebErrorDispatchFilter.java" interface="false" size="14" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.security.WebInfrastructureFailureFilter" sourceFile="WebInfrastructureFailureFilter.java" interface="false" size="16" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.security.WebRequestContext" sourceFile="WebRequestContext.java" interface="false" size="53" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.security.WebSecurityFilterFactory" sourceFile="WebSecurityFilterFactory.java" interface="false" size="29" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.security.WebSecurityHeaderFilterFactory" sourceFile="WebSecurityHeaderFilterFactory.java" interface="false" size="5" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.security.WebSecurityHeaderWriter" sourceFile="WebSecurityHeaderWriter.java" interface="false" size="14" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.security.package-info" sourceFile="package-info.java" interface="true" size="1" bugs="0"/>
+    </PackageStats>
+    <PackageStats package="dev.codex.schubert.nk.web.session" total_bugs="0" total_types="26" total_size="1263">
+      <ClassStats class="dev.codex.schubert.nk.web.session.EncryptedSessionPayload" sourceFile="EncryptedSessionPayload.java" interface="false" size="24" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.session.EncryptedWebSessionRepository" sourceFile="EncryptedWebSessionRepository.java" interface="false" size="193" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.session.EncryptedWebSessionRepository$Loaded" sourceFile="EncryptedWebSessionRepository.java" interface="false" size="12" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.session.EncryptedWebSessionRepository$Work" sourceFile="EncryptedWebSessionRepository.java" interface="true" size="2" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.session.InvalidSessionRowException" sourceFile="InvalidSessionRowException.java" interface="false" size="4" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.session.JdbcWebSessionStore" sourceFile="JdbcWebSessionStore.java" interface="false" size="146" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.session.JdbcWebSessionStore$InvalidStoredRow" sourceFile="JdbcWebSessionStore.java" interface="false" size="4" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.session.OperationTokenConflictException" sourceFile="OperationTokenConflictException.java" interface="false" size="7" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.session.SessionAttributeCodec" sourceFile="SessionAttributeCodec.java" interface="false" size="140" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.session.SessionAttributeException" sourceFile="SessionAttributeException.java" interface="false" size="5" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.session.SessionAttributes" sourceFile="SessionAttributes.java" interface="false" size="33" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.session.SessionOperationToken" sourceFile="SessionOperationToken.java" interface="false" size="35" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.session.SessionOperationTokenLifecycle" sourceFile="SessionOperationTokenLifecycle.java" interface="false" size="92" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.session.SessionPayloadCodec" sourceFile="SessionPayloadCodec.java" interface="false" size="128" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.session.SessionPayloadException" sourceFile="SessionPayloadException.java" interface="false" size="9" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.session.SessionPayloadException$Reason" sourceFile="SessionPayloadException.java" interface="false" size="14" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.session.SessionPayloadIdentity" sourceFile="SessionPayloadIdentity.java" interface="false" size="42" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.session.SessionPrincipal" sourceFile="SessionPrincipal.java" interface="false" size="30" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.session.SessionStoreException" sourceFile="SessionStoreException.java" interface="false" size="22" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.session.SpringEncryptedSessionRepository" sourceFile="SpringEncryptedSessionRepository.java" interface="false" size="36" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.session.SpringWebSession" sourceFile="SpringWebSession.java" interface="false" size="175" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.session.WebSessionFilterFactory" sourceFile="WebSessionFilterFactory.java" interface="false" size="18" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.session.WebSessionId" sourceFile="WebSessionId.java" interface="false" size="36" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.session.WebSessionRow" sourceFile="WebSessionRow.java" interface="false" size="35" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.session.WebSessionSnapshot" sourceFile="WebSessionSnapshot.java" interface="false" size="20" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.session.package-info" sourceFile="package-info.java" interface="true" size="1" bugs="0"/>
+    </PackageStats>
+    <PackageStats package="dev.codex.schubert.nk.web.storage" total_bugs="0" total_types="4" total_size="81">
+      <ClassStats class="dev.codex.schubert.nk.web.storage.FileIntegrityException" sourceFile="FileIntegrityException.java" interface="false" size="5" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.storage.LargeResultReader" sourceFile="LargeResultReader.java" interface="false" size="39" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.storage.ScenarioRecordReader" sourceFile="ScenarioRecordReader.java" interface="false" size="36" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.storage.package-info" sourceFile="package-info.java" interface="true" size="1" bugs="0"/>
+    </PackageStats>
+    <PackageStats package="dev.codex.schubert.nk.web.view" total_bugs="0" total_types="51" total_size="1947">
+      <ClassStats class="dev.codex.schubert.nk.web.view.AnimationListViewModel" sourceFile="AnimationListViewModel.java" interface="false" size="65" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.view.AnimationListViewModel$Row" sourceFile="AnimationListViewModel.java" interface="false" size="14" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.view.AnimationListViewModel$Video" sourceFile="AnimationListViewModel.java" interface="false" size="29" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.view.AnimationMenuViewModel" sourceFile="AnimationMenuViewModel.java" interface="false" size="33" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.view.AnimationWatchViewModel" sourceFile="AnimationWatchViewModel.java" interface="false" size="29" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.view.AnimationWatchViewModel$1" sourceFile="AnimationWatchViewModel.java" interface="false" size="4" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.view.ErrorViewModel" sourceFile="ErrorViewModel.java" interface="false" size="25" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.view.ErrorViewModel$Status" sourceFile="ErrorViewModel.java" interface="false" size="32" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.view.GameListViewModel" sourceFile="GameListViewModel.java" interface="false" size="21" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.view.GameListViewModel$Card" sourceFile="GameListViewModel.java" interface="false" size="18" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.view.LogSearchResultsViewModel" sourceFile="LogSearchResultsViewModel.java" interface="false" size="38" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.view.LogSearchResultsViewModel$Row" sourceFile="LogSearchResultsViewModel.java" interface="false" size="68" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.view.LogSearchViewModel" sourceFile="LogSearchViewModel.java" interface="false" size="68" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.view.LogSearchViewModel$FieldError" sourceFile="LogSearchViewModel.java" interface="false" size="25" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.view.LogSearchViewModel$Filters" sourceFile="LogSearchViewModel.java" interface="false" size="35" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.view.MenuCard" sourceFile="MenuCard.java" interface="false" size="40" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.view.MenuViewModel" sourceFile="MenuViewModel.java" interface="false" size="21" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.view.MusicCategoryViewModel" sourceFile="MusicCategoryViewModel.java" interface="false" size="38" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.view.MusicCategoryViewModel$Card" sourceFile="MusicCategoryViewModel.java" interface="false" size="18" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.view.MusicSectionViewModel" sourceFile="MusicSectionViewModel.java" interface="false" size="44" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.view.MusicSectionViewModel$Card" sourceFile="MusicSectionViewModel.java" interface="false" size="18" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.view.MusicTrackViewModel" sourceFile="MusicTrackViewModel.java" interface="false" size="76" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.view.NotificationDetailViewModel" sourceFile="NotificationDetailViewModel.java" interface="false" size="62" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.view.NotificationDetailViewModel$1" sourceFile="NotificationDetailViewModel.java" interface="false" size="4" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.view.NotificationListViewModel" sourceFile="NotificationListViewModel.java" interface="false" size="99" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.view.NotificationListViewModel$1" sourceFile="NotificationListViewModel.java" interface="false" size="6" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.view.PageViewModel" sourceFile="PageViewModel.java" interface="false" size="53" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.view.QuestionAcceptedViewModel" sourceFile="QuestionAcceptedViewModel.java" interface="false" size="41" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.view.QuestionDetailViewModel" sourceFile="QuestionDetailViewModel.java" interface="false" size="57" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.view.QuestionDetailViewModel$1" sourceFile="QuestionDetailViewModel.java" interface="false" size="4" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.view.QuestionListViewModel" sourceFile="QuestionListViewModel.java" interface="false" size="99" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.view.QuestionSubmitViewModel" sourceFile="QuestionSubmitViewModel.java" interface="false" size="33" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.view.RouteListViewModel" sourceFile="RouteListViewModel.java" interface="false" size="29" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.view.RouteListViewModel$Card" sourceFile="RouteListViewModel.java" interface="false" size="24" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.view.ScenarioDetailViewModel" sourceFile="ScenarioDetailViewModel.java" interface="false" size="76" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.view.ScenarioDetailViewModel$Audio" sourceFile="ScenarioDetailViewModel.java" interface="false" size="22" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.view.ScenarioDetailViewModel$Entry" sourceFile="ScenarioDetailViewModel.java" interface="false" size="47" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.view.ScenarioDetailViewModel$Navigation" sourceFile="ScenarioDetailViewModel.java" interface="false" size="16" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.view.ScenarioFileListViewModel" sourceFile="ScenarioFileListViewModel.java" interface="false" size="40" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.view.ScenarioFileListViewModel$Card" sourceFile="ScenarioFileListViewModel.java" interface="false" size="26" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.view.ScenarioSearchResultsViewModel" sourceFile="ScenarioSearchResultsViewModel.java" interface="false" size="26" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.view.ScenarioSearchResultsViewModel$Audio" sourceFile="ScenarioSearchResultsViewModel.java" interface="false" size="18" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.view.ScenarioSearchResultsViewModel$Row" sourceFile="ScenarioSearchResultsViewModel.java" interface="false" size="57" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.view.ScenarioSearchViewModel" sourceFile="ScenarioSearchViewModel.java" interface="false" size="85" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.view.ScenarioSearchViewModel$FieldError" sourceFile="ScenarioSearchViewModel.java" interface="false" size="25" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.view.ScenarioSearchViewModel$Filters" sourceFile="ScenarioSearchViewModel.java" interface="false" size="31" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.view.TopBarViewModel" sourceFile="TopBarViewModel.java" interface="false" size="18" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.view.UserCreateViewModel" sourceFile="UserCreateViewModel.java" interface="false" size="24" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.view.UserDetailViewModel" sourceFile="UserDetailViewModel.java" interface="false" size="48" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.view.UserListViewModel" sourceFile="UserListViewModel.java" interface="false" size="71" bugs="0"/>
+      <ClassStats class="dev.codex.schubert.nk.web.view.UserListViewModel$Row" sourceFile="UserListViewModel.java" interface="false" size="47" bugs="0"/>
+    </PackageStats>
+    <FindBugsProfile>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.ClassInfoAnalysisEngine" totalMilliseconds="880" invocations="3499" avgMicrosecondsPerInvocation="251" maxMicrosecondsPerInvocation="30151" standardDeviationMicrosecondsPerInvocation="841"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.FieldItemSummary" totalMilliseconds="583" invocations="1092" avgMicrosecondsPerInvocation="534" maxMicrosecondsPerInvocation="24485" standardDeviationMicrosecondsPerInvocation="1453"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.FindNoSideEffectMethods" totalMilliseconds="568" invocations="1092" avgMicrosecondsPerInvocation="520" maxMicrosecondsPerInvocation="17517" standardDeviationMicrosecondsPerInvocation="1184"/>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.bcel.TypeDataflowFactory" totalMilliseconds="420" invocations="2331" avgMicrosecondsPerInvocation="180" maxMicrosecondsPerInvocation="12774" standardDeviationMicrosecondsPerInvocation="536"/>
+      <ClassProfile name="edu.umd.cs.findbugs.ba.npe.NullDerefAndRedundantComparisonFinder" totalMilliseconds="396" invocations="2068" avgMicrosecondsPerInvocation="191" maxMicrosecondsPerInvocation="13685" standardDeviationMicrosecondsPerInvocation="572"/>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.bcel.IsNullValueDataflowFactory" totalMilliseconds="385" invocations="2077" avgMicrosecondsPerInvocation="185" maxMicrosecondsPerInvocation="21297" standardDeviationMicrosecondsPerInvocation="654"/>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.bcel.ValueNumberDataflowFactory" totalMilliseconds="324" invocations="2334" avgMicrosecondsPerInvocation="139" maxMicrosecondsPerInvocation="12229" standardDeviationMicrosecondsPerInvocation="433"/>
+      <ClassProfile name="edu.umd.cs.findbugs.OpcodeStack$JumpInfoFactory" totalMilliseconds="318" invocations="3013" avgMicrosecondsPerInvocation="105" maxMicrosecondsPerInvocation="6467" standardDeviationMicrosecondsPerInvocation="258"/>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.bcel.UnconditionalValueDerefDataflowFactory" totalMilliseconds="289" invocations="2071" avgMicrosecondsPerInvocation="139" maxMicrosecondsPerInvocation="7762" standardDeviationMicrosecondsPerInvocation="401"/>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.ClassDataAnalysisEngine" totalMilliseconds="266" invocations="3509" avgMicrosecondsPerInvocation="75" maxMicrosecondsPerInvocation="9312" standardDeviationMicrosecondsPerInvocation="178"/>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.bcel.CFGFactory" totalMilliseconds="262" invocations="2241" avgMicrosecondsPerInvocation="117" maxMicrosecondsPerInvocation="7506" standardDeviationMicrosecondsPerInvocation="247"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.FindRefComparison$SpecialTypeAnalysis" totalMilliseconds="243" invocations="1508" avgMicrosecondsPerInvocation="161" maxMicrosecondsPerInvocation="9273" standardDeviationMicrosecondsPerInvocation="415"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.NoteDirectlyRelevantTypeQualifiers" totalMilliseconds="200" invocations="1092" avgMicrosecondsPerInvocation="183" maxMicrosecondsPerInvocation="6469" standardDeviationMicrosecondsPerInvocation="405"/>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.bcel.JavaClassAnalysisEngine" totalMilliseconds="181" invocations="1357" avgMicrosecondsPerInvocation="133" maxMicrosecondsPerInvocation="21895" standardDeviationMicrosecondsPerInvocation="631"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.FunctionsThatMightBeMistakenForProcedures" totalMilliseconds="143" invocations="1092" avgMicrosecondsPerInvocation="131" maxMicrosecondsPerInvocation="6290" standardDeviationMicrosecondsPerInvocation="365"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.CalledMethods" totalMilliseconds="138" invocations="1092" avgMicrosecondsPerInvocation="127" maxMicrosecondsPerInvocation="3339" standardDeviationMicrosecondsPerInvocation="285"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.FindImproperSynchronization" totalMilliseconds="131" invocations="358" avgMicrosecondsPerInvocation="368" maxMicrosecondsPerInvocation="8471" standardDeviationMicrosecondsPerInvocation="641"/>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.bcel.MethodGenFactory" totalMilliseconds="118" invocations="2241" avgMicrosecondsPerInvocation="53" maxMicrosecondsPerInvocation="27104" standardDeviationMicrosecondsPerInvocation="583"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.BuildStringPassthruGraph" totalMilliseconds="116" invocations="1092" avgMicrosecondsPerInvocation="107" maxMicrosecondsPerInvocation="4927" standardDeviationMicrosecondsPerInvocation="293"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.BuildObligationPolicyDatabase" totalMilliseconds="107" invocations="1092" avgMicrosecondsPerInvocation="98" maxMicrosecondsPerInvocation="2275" standardDeviationMicrosecondsPerInvocation="170"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.ResourceInMultipleThreadsDetector" totalMilliseconds="102" invocations="358" avgMicrosecondsPerInvocation="285" maxMicrosecondsPerInvocation="7214" standardDeviationMicrosecondsPerInvocation="629"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.OverridingEqualsNotSymmetrical" totalMilliseconds="102" invocations="1092" avgMicrosecondsPerInvocation="93" maxMicrosecondsPerInvocation="6584" standardDeviationMicrosecondsPerInvocation="261"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.BuildAccessMethodsDatabase" totalMilliseconds="98" invocations="1092" avgMicrosecondsPerInvocation="90" maxMicrosecondsPerInvocation="3449" standardDeviationMicrosecondsPerInvocation="244"/>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.bcel.ConstantDataflowFactory" totalMilliseconds="98" invocations="2077" avgMicrosecondsPerInvocation="47" maxMicrosecondsPerInvocation="2228" standardDeviationMicrosecondsPerInvocation="122"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.ReflectiveClasses" totalMilliseconds="94" invocations="1092" avgMicrosecondsPerInvocation="86" maxMicrosecondsPerInvocation="2882" standardDeviationMicrosecondsPerInvocation="223"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.FindReturnRef" totalMilliseconds="92" invocations="358" avgMicrosecondsPerInvocation="259" maxMicrosecondsPerInvocation="4446" standardDeviationMicrosecondsPerInvocation="357"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.UnreadFields" totalMilliseconds="85" invocations="358" avgMicrosecondsPerInvocation="238" maxMicrosecondsPerInvocation="1769" standardDeviationMicrosecondsPerInvocation="214"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.EqualsOperandShouldHaveClassCompatibleWithThis" totalMilliseconds="79" invocations="1092" avgMicrosecondsPerInvocation="72" maxMicrosecondsPerInvocation="20967" standardDeviationMicrosecondsPerInvocation="644"/>
+      <ClassProfile name="edu.umd.cs.findbugs.util.TopologicalSort" totalMilliseconds="79" invocations="3339" avgMicrosecondsPerInvocation="23" maxMicrosecondsPerInvocation="1405" standardDeviationMicrosecondsPerInvocation="45"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.FindDeadLocalStores" totalMilliseconds="78" invocations="358" avgMicrosecondsPerInvocation="219" maxMicrosecondsPerInvocation="4889" standardDeviationMicrosecondsPerInvocation="440"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.LoadOfKnownNullValue" totalMilliseconds="74" invocations="358" avgMicrosecondsPerInvocation="207" maxMicrosecondsPerInvocation="2525" standardDeviationMicrosecondsPerInvocation="308"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.FindOpenStream" totalMilliseconds="74" invocations="358" avgMicrosecondsPerInvocation="206" maxMicrosecondsPerInvocation="5460" standardDeviationMicrosecondsPerInvocation="621"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.FindRefComparison" totalMilliseconds="67" invocations="358" avgMicrosecondsPerInvocation="189" maxMicrosecondsPerInvocation="4242" standardDeviationMicrosecondsPerInvocation="357"/>
+      <ClassProfile name="edu.umd.cs.findbugs.ba.npe.TypeQualifierNullnessAnnotationDatabase" totalMilliseconds="66" invocations="41029" avgMicrosecondsPerInvocation="1" maxMicrosecondsPerInvocation="1028" standardDeviationMicrosecondsPerInvocation="8"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.SharedVariableAtomicityDetector" totalMilliseconds="66" invocations="358" avgMicrosecondsPerInvocation="185" maxMicrosecondsPerInvocation="5067" standardDeviationMicrosecondsPerInvocation="540"/>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.bcel.ValueRangeAnalysisFactory" totalMilliseconds="63" invocations="2105" avgMicrosecondsPerInvocation="30" maxMicrosecondsPerInvocation="12684" standardDeviationMicrosecondsPerInvocation="307"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.DumbMethods" totalMilliseconds="58" invocations="358" avgMicrosecondsPerInvocation="164" maxMicrosecondsPerInvocation="4123" standardDeviationMicrosecondsPerInvocation="265"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.MethodReturnCheck" totalMilliseconds="56" invocations="358" avgMicrosecondsPerInvocation="159" maxMicrosecondsPerInvocation="2598" standardDeviationMicrosecondsPerInvocation="222"/>
+      <ClassProfile name="edu.umd.cs.findbugs.classfile.engine.bcel.LiveLocalStoreDataflowFactory" totalMilliseconds="55" invocations="1847" avgMicrosecondsPerInvocation="29" maxMicrosecondsPerInvocation="1826" standardDeviationMicrosecondsPerInvocation="82"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.FindUncalledPrivateMethods" totalMilliseconds="54" invocations="358" avgMicrosecondsPerInvocation="151" maxMicrosecondsPerInvocation="1665" standardDeviationMicrosecondsPerInvocation="145"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.FindInconsistentSync2" totalMilliseconds="50" invocations="358" avgMicrosecondsPerInvocation="141" maxMicrosecondsPerInvocation="3090" standardDeviationMicrosecondsPerInvocation="242"/>
+      <ClassProfile name="edu.umd.cs.findbugs.detect.FindBadCast2" totalMilliseconds="50" invocations="358" avgMicrosecondsPerInvocation="141" maxMicrosecondsPerInvocation="1838" standardDeviationMicrosecondsPerInvocation="240"/>
+    </FindBugsProfile>
+  </FindBugsSummary>
+  <ClassFeatures></ClassFeatures>
+  <History></History>
+</BugCollection>
