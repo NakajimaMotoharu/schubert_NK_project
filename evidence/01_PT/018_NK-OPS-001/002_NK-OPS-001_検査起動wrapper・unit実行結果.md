@@ -1,5 +1,7 @@
 # NK-OPS-001 検査起動wrapper・unit 実行結果
 
+2026-10-28追加：2413/source42ae92a74・PG13078-MONITORNAME-JP81/10真正0・FES-aborted0、独立13082 911c0f67。十monitor所属23class各四100・class合計239L53M23C122B、全十九Main source44class/全artifactは未達・未使用clock/observeNow0、全1843Main同byte/十outerTest＋一Registry debug差・他1961Test同byte。13084/85原十一是正→derived8461/corr964/refs3259pending961・rawworker20gate1、13086/87旧992十SHAだけ/全担当費保全・全WBS同HOLD1。BUG2023/2024・YKT1771/1772限定完了、新Test ID/新個別/正式受入0。索引evidence/monitor-test-name-regression/manifest.json。
+
 2026-10-28静的用途補足：2409/PG13044 f7345a09 actual0・元残28/19file用途/八反例、独立PG13048 a690dd56 actual0・全元metadata/源不変・四独立反例・旧工具二失敗保持。参照3259/pending941/raw8472/corr953不変、製品PT/coverage/正式受入増加0・source2f4290e7。BUG2021/2022・YKT1769/1770当工具のみ完了、全F03/実行免除/actualは未受入。
 
 2026-10-28静的補足：2407・PG13036型56/0未解決/28Throwable、PG13038独立manifest2db97b5ef8db4f2c84b69c3096a3ec966d89a42529db5c7c9c3bc9956b241f4d actual0/九反例。raw8472/corr953不変、参照3231/pending913・新製品PT0/実測coverage加算0/正式更新0。BUG2019/2020・YKT1767/1768は当工具限定完了、元失敗/entry保持。source2f4290e7、全F03/実例外graph/451は未受入。
