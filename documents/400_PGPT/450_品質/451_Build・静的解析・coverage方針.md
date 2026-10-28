@@ -1,5 +1,7 @@
 # Build・静的解析・coverage方針
 
+2026-10-28静的完了条件の具体化（BUG2038/YKT1786、品質緩和なし）：SpotBugsは既4.10.4/Max/Low・全対象を維持し、command0/BugInstance0だけでなくMissingClass/解析Error0・同sourceの全物理MainとClassStats集合一致を必須とする。解析auxはfresh siblingと固定外部依存へ束縛し、古いlocal m2 snapshot混入を拒否する。原不完全結果を修正せず、当sourceの新解析と独立postに分離する。2430/13216/13220は全1843/六artifactの当静的証拠であってPT/coverage/native/全F03/正式451受入ではない。以後のactive staticも同条件を満たし、旧Maven経路のexit0だけを受入根拠にしない。
+
 SSC234（2026-10-09）：固定INSPECTOR/BOOTSTRAPの同期CLOSINGはSS342343354を正とし、terminal→closing同source/単一session/actor/時刻順/probe単調性/完了markerを独立照合してlatest closing一つを選ぶ。古いterminalへのfallback/同session union/採取点連鎖/除外0。追加点自身のtail・同main terminationは独立port試験、実native権限/終端の代用にしない。Root BEFORE_EXEC/API-Web terminal/全四100/正式同source全scope条件は不変更。
 
 SSC193採取補足（2026-10-06）：隔離PG/PTの固定pin/output=none/公開getExecutionData(false)・held新0600 inode・Root exec直前と普通owned帰還後終端はSS342343を正とする。host選択は独立literal/metadata/byte/FD/null/並行/例外の限定証拠、実main/session/真正manager及びstop後条件の代用ではない。正式runへ加えるexecは同source/frozen byte/boot/Invocation/PID/start/time/pointを独立に照合し、before-execだけから普通成功を推定しない。全counter100%、既定argv/env/2FD/security/owner/budget・独立oracle・非秘密/trace・全scope/run条件は不変更、除外追加/累積exec/別source流用0。

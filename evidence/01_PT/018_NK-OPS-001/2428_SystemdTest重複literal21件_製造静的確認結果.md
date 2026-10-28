@@ -1,5 +1,9 @@
 # 2428 Systemd Test 重複literal21件・製造静的確認結果
 
+## 後続品質補足（2026-10-28、BUG2038/YKT1786）
+
+当13194の六SpotBugs元command0/BugInstance0は歴史観測として保持するが、後続13210の厳密な処理後条件により当13194にもMissingClassが延べ18存在すると確認した。API5/batch6/bootstrap3/Web4・protocol/storage0であり、「依存解決/解析処理errorを含む六static完全0」を当結果から主張しない。旧結果を改竄せず、同source完全性の不足を別BUGへ記録した。元Test21 raw是正・全文token逆・normal/全class/ConstantValue確認と動的HOLDは不変、F03/451/正式/個別受入は元から未受入で増減なし。新sourceで必要なfresh依存束縛静的確認を行っても、旧sourceの成功へ移植しない。
+
 2026-10-28、2427/PG-D780/BUG2035/YKT1783。Production source41359340de234b8bea7578d957bcbf4df6ab951f（当Test一fileのprivate String21だけ、Main不変更・未配備）。既20 Test methodは変更なし、新Test ID/新physical0。動的PT NOT_EXECUTED_HOLD、coverage NOT_MEASURED、実行免除・代替PASSではない。
 
 |工程・元owned session|公開manifest（`evidence/provisional/`配下）|SHA256・真正終了|
