@@ -1,0 +1,72 @@
+{
+  "actualExit": 0,
+  "coverage": null,
+  "dynamicPtStatus": "NOT_EXECUTED_HOLD",
+  "invocation": {
+    "actualPythonCommand": [
+      "/usr/bin/python3",
+      "-B",
+      "tools/quality/pg13136_main_literal_static.py"
+    ],
+    "arbitraryArgumentsRecorded": false,
+    "entrypointPath": "tools/quality/pg13136_main_literal_static.py",
+    "entrypointSha256": "22c81a748f72d9dd9e5d3564be095322ff8bd2b5479af4879ccce540ea2807ff",
+    "helperPath": "tools/quality/host_tool_invocation.py",
+    "helperSha256": "85d616a3db4ff47f4c95ae2e0dd57954bc2b09f28b8f2a685b986e5621545c46",
+    "libraryPath": "tools/quality/pg13136_main_literal_static.py",
+    "librarySha256": "22c81a748f72d9dd9e5d3564be095322ff8bd2b5479af4879ccce540ea2807ff",
+    "loadedProjectPythonSources": {
+      "tools/quality/g07_host_class_provenance_inputs.py": "a676cb3e4145177c3c243722d737592ce7d44c3f29cfe4f670662ef7651f046b",
+      "tools/quality/host_tool_invocation.py": "85d616a3db4ff47f4c95ae2e0dd57954bc2b09f28b8f2a685b986e5621545c46",
+      "tools/quality/pg13136_main_literal_static.py": "22c81a748f72d9dd9e5d3564be095322ff8bd2b5479af4879ccce540ea2807ff",
+      "tools/quality/pg9666_pagination_static.py": "75347ce8aef713e43a3d2fd39e0e0b6244da9427caa8dc51d36e539d629e0ef5"
+    },
+    "provenance": "OBSERVED_SYS_ARGV_AND_ORIG_ARGV_NOT_RECONSTRUCTED"
+  },
+  "jarsUnchanged": {
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg13134-main-literal-six-compile-v1/snapshot/src/schubert-nk-api/target/schubert-nk-api-0.1.0-SNAPSHOT.jar": "935e549b5b9bcff5e473095c9c91e915969e8306d8a105a4768cac34b76e3a71",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg13134-main-literal-six-compile-v1/snapshot/src/schubert-nk-batch/target/schubert-nk-batch-0.1.0-SNAPSHOT.jar": "1b42eba3f471152150d2d891da3da1f1eed2bc8085cf81d47f988419348fb4d8",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg13134-main-literal-six-compile-v1/snapshot/src/schubert-nk-bootstrap/target/schubert-nk-bootstrap-0.1.0-SNAPSHOT.jar": "b77a68769ad2937d021360b91387a307b0dd74754a7a08c6051eba96ddb7c314",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg13134-main-literal-six-compile-v1/snapshot/src/schubert-nk-protocol/target/schubert-nk-protocol-0.1.0-SNAPSHOT.jar": "0d1c6545ce1d037fcddf407ddd97178c8406e0cc7d75c60afe4ddb2688b6aa14",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg13134-main-literal-six-compile-v1/snapshot/src/schubert-nk-storage/target/schubert-nk-storage-0.1.0-SNAPSHOT.jar": "2f9b2b309b526d8983bf2cb06f0e267c2ee0f92dbed1c8282e6b2402215f5d0d",
+    "/home/mini/codex/project1/work/pgpt-runs/PG379/pg13134-main-literal-six-compile-v1/snapshot/src/schubert-nk-web/target/schubert-nk-web-0.1.0-SNAPSHOT.jar": "b71531f93920bfe8ff1e6bdecef7bbfbc6663fc6c3b5b4002086aa5331443fe4"
+  },
+  "newAccepted": 0,
+  "normalManifestSha256": "ef0c374ffb76d88402c3a19c70999c9f644bdbdecb0252c747b7f1544521d823",
+  "pmdCheckstyleReexecuted": false,
+  "preflightManifestSha256": "4367bdd95cd9f8f503855250edb1b9104ad2bd2edf146018912596973ed8f9c0",
+  "productTestsExecuted": 0,
+  "rawStatic": 14,
+  "rawStaticGateExit": 1,
+  "source": "44afb0a1ecddabfebe577b2037aabdc6fb31d1e3",
+  "sourceHashRebindingOnly": true,
+  "sourceHashes": {
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/TransferCleanup.java": "58853f16a2a73b23f8454872958a757ea8c9db3dc4c27fe8e34bedfc318f37f1",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/LinuxSystemdSession.java": "c931c6ee998ba8e9b1e982d569f7f5ca79f083a0c2cfb36600e5862134518cc9"
+  },
+  "spotbugsSixExit": 0,
+  "stages": [
+    {
+      "actualExit": 0,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/m2/wrapper/dists/apache-maven-3.9.12/6068d197/bin/mvn",
+        "-o",
+        "--no-transfer-progress",
+        "-Dmaven.repo.local=/home/mini/codex/project1/work/toolchain/m2/repository",
+        "-pl",
+        "src/schubert-nk-protocol,src/schubert-nk-storage,src/schubert-nk-bootstrap,src/schubert-nk-api,src/schubert-nk-web,src/schubert-nk-batch",
+        "-am",
+        "-DskipTests=true",
+        "com.github.spotbugs:spotbugs-maven-plugin:4.10.4.0:check"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg13134-main-literal-six-compile-v1/snapshot",
+      "endUTC": "2026-10-28T08:28:00.093864+00:00",
+      "startUTC": "2026-10-28T08:26:55.390157+00:00",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSha256": "a8e928d77dfb63c3a1be422d69b295884bfb97c8914ab93764de22d6a88eb668",
+      "timedOut": false
+    }
+  ],
+  "suppressionsAdded": false,
+  "whole451Accepted": false
+}
