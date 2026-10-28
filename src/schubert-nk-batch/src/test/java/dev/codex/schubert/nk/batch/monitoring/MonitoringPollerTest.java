@@ -21,10 +21,11 @@ import org.junit.jupiter.api.Test;
 
 /** Independent action/count/epoch contracts; callback result does not generate its own expected. */
 class MonitoringPollerTest {
-  private static final Instant AT = Instant.parse("2026-10-23T00:00:00Z");
+  private static final Instant BASE_INSTANT = Instant.parse("2026-10-23T00:00:00Z");
 
   private static ObservationContext at(long seconds) {
-    return new ObservationContext(CauseClearance.UNCONFIRMED, AT, Duration.ofSeconds(seconds));
+    return new ObservationContext(
+        CauseClearance.UNCONFIRMED, BASE_INSTANT, Duration.ofSeconds(seconds));
   }
 
   private static void fail(Throwable failure) {

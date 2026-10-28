@@ -129,20 +129,21 @@ class ContinuousConditionWindowTest {
 
   @Test
   void monWindow007ConcurrentSamePointHasOneOrigin() throws Exception {
-    var executor = Executors.newFixedThreadPool(4);
-    try {
-      var tasks = new ArrayList<Callable<Duration>>();
-      for (int index = 0; index < 64; index++)
-        tasks.add(
-            () -> window.observe(State.VIOLATING, Duration.ofSeconds(100), true).orElseThrow());
-      for (var future : executor.invokeAll(tasks, 10, TimeUnit.SECONDS))
-        assertEquals(Duration.ZERO, future.get());
-      assertEquals(
-          Duration.ofSeconds(1),
-          window.observe(State.VIOLATING, Duration.ofSeconds(101), true).orElseThrow());
-    } finally {
-      executor.shutdownNow();
-      assertTrue(executor.awaitTermination(10, TimeUnit.SECONDS));
+    try (var executor = Executors.newFixedThreadPool(4)) {
+      try {
+        var tasks = new ArrayList<Callable<Duration>>();
+        for (int index = 0; index < 64; index++)
+          tasks.add(
+              () -> window.observe(State.VIOLATING, Duration.ofSeconds(100), true).orElseThrow());
+        for (var future : executor.invokeAll(tasks, 10, TimeUnit.SECONDS))
+          assertEquals(Duration.ZERO, future.get());
+        assertEquals(
+            Duration.ofSeconds(1),
+            window.observe(State.VIOLATING, Duration.ofSeconds(101), true).orElseThrow());
+      } finally {
+        executor.shutdownNow();
+        assertTrue(executor.awaitTermination(10, TimeUnit.SECONDS));
+      }
     }
   }
 
