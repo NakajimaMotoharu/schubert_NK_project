@@ -18,6 +18,9 @@ import org.junit.jupiter.api.Test;
 
 /** BUG704/SSC187; independent STOPCOMP001..003 stopped versus KEEP_ACTIVE receipt contract. */
 final class StoppedBackupCompletionTest {
+  private static final String FIXTURE_NEW_80270E39 = "new";
+  private static final String FIXTURE_FAILED_33D04BD7 = "failed";
+
   private static MorningCompletionEvidence bound(
       MorningCompletionEvidence f,
       MorningBackupUnitCycle cycle,
@@ -42,9 +45,9 @@ final class StoppedBackupCompletionTest {
 
   @Test
   void stopcomp001ExplicitStopKeepsActualOutcomeNotTheActiveReceiptProfile() throws Exception {
-    for (String mode : List.of("new", "reused", "failed")) {
+    for (String mode : List.of(FIXTURE_NEW_80270E39, "reused", FIXTURE_FAILED_33D04BD7)) {
       var original = MorningCompletionEvidenceTest.fixture(mode);
-      var stopped = new StoppedBackupFixture(mode.equals("failed") ? 30 : 0, true);
+      var stopped = new StoppedBackupFixture(mode.equals(FIXTURE_FAILED_33D04BD7) ? 30 : 0, true);
       assertEquals(
           List.of(
               "fresh-receipt",
@@ -55,8 +58,8 @@ final class StoppedBackupCompletionTest {
               "original-request",
               "intent-retired"),
           stopped.events);
-      assertEquals(mode.equals("failed") ? 30 : 0, stopped.receipt.exitCode());
-      if (!mode.equals("failed")) {
+      assertEquals(mode.equals(FIXTURE_FAILED_33D04BD7) ? 30 : 0, stopped.receipt.exitCode());
+      if (!mode.equals(FIXTURE_FAILED_33D04BD7)) {
         // This is the pre-fix failure: actual stopped bus fields no longer match active/exited.
         assertThrows(IOException.class, stopped.receipt::requireStillPresent);
       }
@@ -68,7 +71,7 @@ final class StoppedBackupCompletionTest {
       stopped.current.set(StoppedBackupFixture.COLD);
       verify(f); // Full GC cold is accepted ONLY with this observed and explicitly stopped cycle.
       assertEquals(
-          mode.equals("failed")
+          mode.equals(FIXTURE_FAILED_33D04BD7)
               ? MaintenanceCompletion.Outcome.WARNING
               : MaintenanceCompletion.Outcome.SUCCESS,
           f.completion(
@@ -80,7 +83,7 @@ final class StoppedBackupCompletionTest {
 
   @Test
   void stopcomp002ChangedGenerationPartialColdKernelOwnerAndDeadlineReject() throws Exception {
-    var base = MorningCompletionEvidenceTest.fixture("new");
+    var base = MorningCompletionEvidenceTest.fixture(FIXTURE_NEW_80270E39);
     var stopped = new StoppedBackupFixture(0, true);
     var f = bound(base, stopped.cycle, stopped.receipt);
     for (String invalid :
@@ -110,7 +113,7 @@ final class StoppedBackupCompletionTest {
 
   @Test
   void stopcomp003CompletedCycleAndExactReceiptCannotBeSubstituted() throws Exception {
-    var base = MorningCompletionEvidenceTest.fixture("new");
+    var base = MorningCompletionEvidenceTest.fixture(FIXTURE_NEW_80270E39);
     var first = new StoppedBackupFixture(0, true);
     var second = new StoppedBackupFixture(0, true);
     assertNotSame(first.receipt, second.receipt);
@@ -128,7 +131,7 @@ final class StoppedBackupCompletionTest {
 
   @Test
   void stopcomp003FullRowAndOriginalReferenceChangesStillReject() throws Exception {
-    var f = MorningCompletionEvidenceTest.fixture("new");
+    var f = MorningCompletionEvidenceTest.fixture(FIXTURE_NEW_80270E39);
     var reused = MorningCompletionEvidenceTest.fixture("reused");
     for (String changed : List.of("observeBackup", "observeCleanup", "cleanupReferences")) {
       var ordinary = MorningCompletionEvidenceTest.database(f, new ArrayList<>(), "");

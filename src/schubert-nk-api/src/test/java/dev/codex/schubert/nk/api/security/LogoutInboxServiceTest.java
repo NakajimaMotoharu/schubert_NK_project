@@ -70,6 +70,12 @@ import org.junit.jupiter.api.io.TempDir;
  * PT-AUT-LOGOUT-INBOX-001..007; independent UI232/234 280-byte, JCA/LP-HMAC and real SQL oracles.
  */
 final class LogoutInboxServiceTest {
+  private static final String FIXTURE_0000_876EEFE0 = "0000";
+  private static final String FIXTURE_0200_FC9DB3AC = "0200";
+  private static final String FIXTURE_0102_C967CE66 = "0102";
+  private static final String FIXTURE_SELECT_U_ID_F892A651 = "select u.id";
+  private static final String FIXTURE_LOGRSP01_BEEB0A2B = "LOGRSP01";
+  private static final String FIXTURE_001_A3FEAA64 = "001";
   @TempDir static Path root;
   private static ApiLogDatabaseFixture database;
   private static ContextHash hashes;
@@ -139,17 +145,18 @@ final class LogoutInboxServiceTest {
     var input = request(RAW, REQUEST);
     try (var c = database.transaction()) {
       assertArrayEquals(
-          golden("0000", RAW, REQUEST, new UUID(0, 1000), STAMP),
+          golden(FIXTURE_0000_876EEFE0, RAW, REQUEST, new UUID(0, 1000), STAMP),
           service(NOW).execute(c, input, NOW.minusSeconds(1)));
       effects(0, 0, 0);
       c.rollback();
     }
     effects(0, 0, 0);
     assertArrayEquals(
-        golden("0000", RAW, REQUEST, new UUID(0, 1001), STAMP),
+        golden(FIXTURE_0000_876EEFE0, RAW, REQUEST, new UUID(0, 1001), STAMP),
         call(service(NOW), input, NOW.minusSeconds(1)));
     assertArrayEquals(
-        golden("0200", RAW, REQUEST, new UUID(0, 1002), STAMP), call(service(NOW), input, NOW));
+        golden(FIXTURE_0200_FC9DB3AC, RAW, REQUEST, new UUID(0, 1002), STAMP),
+        call(service(NOW), input, NOW));
     effects(1, 1, 1);
     assertEquals(1, count("select count(*) from schubert.app_logs where remote_address is null"));
     try (var c = database.api();
@@ -169,14 +176,15 @@ final class LogoutInboxServiceTest {
     }
     var another = AuthenticationContext.of("c".repeat(64));
     assertArrayEquals(
-        golden("0200", another, REQUEST, new UUID(0, 1003), STAMP),
+        golden(FIXTURE_0200_FC9DB3AC, another, REQUEST, new UUID(0, 1003), STAMP),
         call(service(NOW), request(another, REQUEST), NOW));
     effects(1, 1, 1); // Header context excluded from HMAC; do not revoke the second session.
     assertPermanent(
         () -> call(service(NOW), request(AuthenticationContext.of("b".repeat(64)), REQUEST), NOW));
     UUID next = new UUID(0, 102);
     byte[] later = call(service(NOW.plusSeconds(60)), request(RAW, next), NOW.plusSeconds(60));
-    assertArrayEquals(golden("0200", RAW, next, new UUID(0, 1005), "20260908100100123"), later);
+    assertArrayEquals(
+        golden(FIXTURE_0200_FC9DB3AC, RAW, next, new UUID(0, 1005), "20260908100100123"), later);
     effects(2, 1, 2);
     assertEquals(
         1,
@@ -190,7 +198,7 @@ final class LogoutInboxServiceTest {
   void invalidAndExpiredContextsNeverGainAuthority() throws Exception {
     var unknown = AuthenticationContext.of("f".repeat(64));
     assertArrayEquals(
-        golden("0102", unknown, REQUEST, new UUID(0, 1000), STAMP),
+        golden(FIXTURE_0102_C967CE66, unknown, REQUEST, new UUID(0, 1000), STAMP),
         call(service(NOW), request(unknown, REQUEST), NOW));
     effects(0, 0, 0);
     for (String mutation :
@@ -202,7 +210,7 @@ final class LogoutInboxServiceTest {
       sql(mutation);
       boolean expired = mutation.contains("expires_at");
       assertArrayEquals(
-          golden("0102", RAW, REQUEST, new UUID(0, 1000), STAMP),
+          golden(FIXTURE_0102_C967CE66, RAW, REQUEST, new UUID(0, 1000), STAMP),
           call(service(NOW), request(RAW, REQUEST), NOW));
       effects(1, expired ? 1 : 0, expired ? 1 : 0);
       assertEquals(
@@ -212,18 +220,23 @@ final class LogoutInboxServiceTest {
       sql("update schubert.app_users set status='ACTIVE'");
       sql("update schubert.auth_sessions set expires_at='2026-09-08T08:00:00Z'");
       assertArrayEquals(
-          golden("0102", RAW, REQUEST, new UUID(0, 1001), STAMP),
+          golden(FIXTURE_0102_C967CE66, RAW, REQUEST, new UUID(0, 1001), STAMP),
           call(service(NOW), request(RAW, REQUEST), NOW));
       effects(1, expired ? 1 : 0, expired ? 1 : 0);
       UUID next = new UUID(0, 103);
       assertArrayEquals(
-          golden(expired ? "0200" : "0000", RAW, next, new UUID(0, 1002), STAMP),
+          golden(
+              expired ? FIXTURE_0200_FC9DB3AC : FIXTURE_0000_876EEFE0,
+              RAW,
+              next,
+              new UUID(0, 1002),
+              STAMP),
           call(service(NOW), request(RAW, next), NOW));
       effects(2, 1, expired ? 2 : 1);
       sql("update schubert.app_users set status='DISABLED' where id=7");
       sql("update schubert.auth_sessions set expires_at='2026-09-08T00:00:01Z'");
       assertEquals(
-          "0200",
+          FIXTURE_0200_FC9DB3AC,
           text(
               call(service(NOW.plusSeconds(60)), request(RAW, next), NOW.plusSeconds(60)), 208, 4));
       effects(2, 1, expired ? 2 : 1);
@@ -244,8 +257,8 @@ final class LogoutInboxServiceTest {
         byte[] body = future.get();
         String code = text(body, 208, 4);
         UUID id = UUID.fromString(text(body, 24, 36));
-        if (code.equals("0000")) initial++;
-        else if (code.equals("0200")) replay++;
+        if (code.equals(FIXTURE_0000_876EEFE0)) initial++;
+        else if (code.equals(FIXTURE_0200_FC9DB3AC)) replay++;
         else fail("unexpected Logout result");
         assertTrue(emitted.add(id));
         assertArrayEquals(golden(code, RAW, REQUEST, id, STAMP), body);
@@ -298,7 +311,7 @@ final class LogoutInboxServiceTest {
       connection.commit();
     }
     assertArrayEquals(
-        golden("0000", RAW, REQUEST, new UUID(0, 1000), STAMP),
+        golden(FIXTURE_0000_876EEFE0, RAW, REQUEST, new UUID(0, 1000), STAMP),
         call(service(NOW), request(RAW, REQUEST), NOW));
     effects(1, 1, 1);
     assertEquals(
@@ -314,7 +327,7 @@ final class LogoutInboxServiceTest {
     try (var connection = database.transaction();
         var pool = Executors.newSingleThreadExecutor()) {
       assertArrayEquals(
-          golden("0102", RAW, REQUEST, new UUID(0, 1000), STAMP),
+          golden(FIXTURE_0102_C967CE66, RAW, REQUEST, new UUID(0, 1000), STAMP),
           service(NOW).execute(connection, request(RAW, REQUEST), NOW));
       var delayed =
           pool.submit(
@@ -328,7 +341,8 @@ final class LogoutInboxServiceTest {
                               (p, m, a) -> {
                                 if (m.getName().equals("prepareStatement")
                                     && a[0] instanceof String query
-                                    && query.startsWith("select u.id")) waiting.countDown();
+                                    && query.startsWith(FIXTURE_SELECT_U_ID_F892A651))
+                                  waiting.countDown();
                                 return invoke(other, m, a);
                               });
                   assertThrows(
@@ -370,7 +384,12 @@ final class LogoutInboxServiceTest {
               + "'");
       boolean expired = micros <= 0;
       assertArrayEquals(
-          golden(expired ? "0102" : "0000", RAW, REQUEST, new UUID(0, 1000), STAMP),
+          golden(
+              expired ? FIXTURE_0102_C967CE66 : FIXTURE_0000_876EEFE0,
+              RAW,
+              REQUEST,
+              new UUID(0, 1000),
+              STAMP),
           call(service(NOW), request(RAW, REQUEST), NOW));
       effects(1, 1, 1);
       assertEquals(
@@ -380,7 +399,7 @@ final class LogoutInboxServiceTest {
                   + " and details->>'reason'='"
                   + (expired ? "EXPIRED" : "LOGOUT")
                   + "' and details->>'resultCode'='"
-                  + (expired ? "0102" : "0000")
+                  + (expired ? FIXTURE_0102_C967CE66 : FIXTURE_0000_876EEFE0)
                   + "'"));
       assertEquals(
           1,
@@ -399,12 +418,17 @@ final class LogoutInboxServiceTest {
                   + (expired ? "ERROR" : "COMPLETED")
                   + "'"));
       assertArrayEquals(
-          golden(expired ? "0102" : "0200", RAW, REQUEST, new UUID(0, 1001), STAMP),
+          golden(
+              expired ? FIXTURE_0102_C967CE66 : FIXTURE_0200_FC9DB3AC,
+              RAW,
+              REQUEST,
+              new UUID(0, 1001),
+              STAMP),
           call(service(NOW), request(RAW, REQUEST), NOW));
       effects(1, 1, 1);
       UUID fresh = new UUID(0, 102);
       assertArrayEquals(
-          golden("0200", RAW, fresh, new UUID(0, 1002), STAMP),
+          golden(FIXTURE_0200_FC9DB3AC, RAW, fresh, new UUID(0, 1002), STAMP),
           call(service(NOW), request(RAW, fresh), NOW));
       effects(2, 1, 2);
     }
@@ -469,7 +493,7 @@ final class LogoutInboxServiceTest {
                     return value;
                   });
       assertArrayEquals(
-          golden("0102", RAW, REQUEST, new UUID(0, 1000), STAMP),
+          golden(FIXTURE_0102_C967CE66, RAW, REQUEST, new UUID(0, 1000), STAMP),
           service.execute(wrapped, request(RAW, REQUEST), NOW));
       connection.commit();
     }
@@ -512,7 +536,8 @@ final class LogoutInboxServiceTest {
             clock,
             () -> new UUID(0, ids.getAndIncrement()));
     var input = request(RAW, REQUEST);
-    byte[] expected = golden("0000", RAW, REQUEST, new UUID(0, 1000), "20260908100003123");
+    byte[] expected =
+        golden(FIXTURE_0000_876EEFE0, RAW, REQUEST, new UUID(0, 1000), "20260908100003123");
     put(expected, 256, "20260908100001123");
     assertArrayEquals(expected, call(service, input, NOW));
     assertEquals(3, ticks.get());
@@ -530,7 +555,7 @@ final class LogoutInboxServiceTest {
             "select count(*) from schubert.request_inbox where created_at='2026-09-08T01:00:00.123456Z' and completed_at='2026-09-08T01:00:02.123456Z' and expires_at='2026-09-15T01:00:02.123456Z'"));
     put(expected, 24, new UUID(0, 1001).toString());
     put(expected, 96, "20260908100004123");
-    put(expected, 208, "0200");
+    put(expected, 208, FIXTURE_0200_FC9DB3AC);
     assertArrayEquals(expected, call(service, input, NOW.plusSeconds(60)));
     assertEquals(4, ticks.get());
     effects(1, 1, 1);
@@ -550,52 +575,57 @@ final class LogoutInboxServiceTest {
                 saved,
                 InboxCompletionState.ERROR,
                 saved.resultReference(),
-                "LOGRSP01",
-                "001",
+                FIXTURE_LOGRSP01_BEEB0A2B,
+                FIXTURE_001_A3FEAA64,
                 saved.responseSnapshot()),
             copy(
                 saved,
                 saved.state(),
                 InboxResultReference.none(),
-                "LOGRSP01",
-                "001",
+                FIXTURE_LOGRSP01_BEEB0A2B,
+                FIXTURE_001_A3FEAA64,
                 saved.responseSnapshot()),
             copy(
                 saved,
                 saved.state(),
                 saved.resultReference(),
                 "GAMRSP01",
-                "001",
+                FIXTURE_001_A3FEAA64,
                 saved.responseSnapshot()),
             copy(
                 saved,
                 saved.state(),
                 saved.resultReference(),
-                "LOGRSP01",
+                FIXTURE_LOGRSP01_BEEB0A2B,
                 "002",
                 saved.responseSnapshot()),
             copy(
-                saved, saved.state(), saved.resultReference(), "LOGRSP01", "001", Optional.empty()),
+                saved,
+                saved.state(),
+                saved.resultReference(),
+                FIXTURE_LOGRSP01_BEEB0A2B,
+                FIXTURE_001_A3FEAA64,
+                Optional.empty()),
             copy(
                 saved,
                 saved.state(),
                 InboxResultReference.authSession(new UUID(0, 99)),
-                "LOGRSP01",
-                "001",
+                FIXTURE_LOGRSP01_BEEB0A2B,
+                FIXTURE_001_A3FEAA64,
                 saved.responseSnapshot()),
             copy(
                 saved,
                 saved.state(),
                 InboxResultReference.authSession(new UUID(0, 3)),
-                "LOGRSP01",
-                "001",
+                FIXTURE_LOGRSP01_BEEB0A2B,
+                FIXTURE_001_A3FEAA64,
                 saved.responseSnapshot()),
             copy(
                 saved,
                 saved.state(),
                 InboxResultReference.authSession(new UUID(0, 2)),
-                "LOGRSP01",
-                "001",
+                FIXTURE_LOGRSP01_BEEB0A2B,
+                FIXTURE_001_A3FEAA64,
                 saved.responseSnapshot()));
     try (var c = database.transaction()) {
       for (var bad : invalid) assertInfrastructure(() -> restore(c, bad, 7));
@@ -620,7 +650,7 @@ final class LogoutInboxServiceTest {
               new String[] {"256", "20260908100000124"},
               new String[] {"256", "00000000000000000"},
               new String[] {"273", "x"})) {
-        byte[] body = golden("0000", RAW, REQUEST, new UUID(0, 1000), STAMP);
+        byte[] body = golden(FIXTURE_0000_876EEFE0, RAW, REQUEST, new UUID(0, 1000), STAMP);
         put(body, Integer.parseInt(change[0]), change[1]);
         var bad = withBody(saved, body);
         assertInfrastructure(() -> restore(c, bad, 7));
@@ -628,7 +658,9 @@ final class LogoutInboxServiceTest {
       for (int size : new int[] {279, 281}) {
         var bad =
             withBody(
-                saved, Arrays.copyOf(golden("0000", RAW, REQUEST, new UUID(0, 1000), STAMP), size));
+                saved,
+                Arrays.copyOf(
+                    golden(FIXTURE_0000_876EEFE0, RAW, REQUEST, new UUID(0, 1000), STAMP), size));
         assertInfrastructure(() -> restore(c, bad, 7));
       }
       for (String code : List.of("0101", "9000")) {
@@ -637,8 +669,8 @@ final class LogoutInboxServiceTest {
                 saved,
                 InboxCompletionState.ERROR,
                 InboxResultReference.none(),
-                "LOGRSP01",
-                "001",
+                FIXTURE_LOGRSP01_BEEB0A2B,
+                FIXTURE_001_A3FEAA64,
                 Optional.of(
                     snapshots.encrypt(
                         identity(7), golden(code, RAW, REQUEST, new UUID(0, 1000), STAMP))));
@@ -653,8 +685,8 @@ final class LogoutInboxServiceTest {
                       denied,
                       InboxCompletionState.COMPLETED,
                       denied.resultReference(),
-                      "LOGRSP01",
-                      "001",
+                      FIXTURE_LOGRSP01_BEEB0A2B,
+                      FIXTURE_001_A3FEAA64,
                       denied.responseSnapshot()),
                   7));
       assertInfrastructure(
@@ -665,8 +697,8 @@ final class LogoutInboxServiceTest {
                       denied,
                       denied.state(),
                       saved.resultReference(),
-                      "LOGRSP01",
-                      "001",
+                      FIXTURE_LOGRSP01_BEEB0A2B,
+                      FIXTURE_001_A3FEAA64,
                       denied.responseSnapshot()),
                   7));
       byte[] cipher = saved.responseSnapshot().orElseThrow().ciphertext();
@@ -676,8 +708,8 @@ final class LogoutInboxServiceTest {
               saved,
               saved.state(),
               saved.resultReference(),
-              "LOGRSP01",
-              "001",
+              FIXTURE_LOGRSP01_BEEB0A2B,
+              FIXTURE_001_A3FEAA64,
               Optional.of(new EncryptedResponseSnapshot("s1", cipher)));
       assertInfrastructure(() -> restore(c, tampered, 7));
       var unknown =
@@ -685,8 +717,8 @@ final class LogoutInboxServiceTest {
               saved,
               saved.state(),
               saved.resultReference(),
-              "LOGRSP01",
-              "001",
+              FIXTURE_LOGRSP01_BEEB0A2B,
+              FIXTURE_001_A3FEAA64,
               Optional.of(
                   new EncryptedResponseSnapshot(
                       "unknown", saved.responseSnapshot().orElseThrow().ciphertext())));
@@ -718,7 +750,7 @@ final class LogoutInboxServiceTest {
   void jdbcAndCryptoFaultsRollBackEveryEffect() throws Exception {
     for (String point :
         List.of(
-            "select u.id",
+            FIXTURE_SELECT_U_ID_F892A651,
             "insert into schubert.request_inbox",
             "select s.id",
             "update schubert.auth_sessions",
@@ -775,7 +807,7 @@ final class LogoutInboxServiceTest {
         var c = database.transaction()) {
       var rotatedResponse = new LogoutReplayService(rotated, hashes);
       assertArrayEquals(
-          golden("0200", RAW, REQUEST, new UUID(0, 5000), STAMP),
+          golden(FIXTURE_0200_FC9DB3AC, RAW, REQUEST, new UUID(0, 5000), STAMP),
           rotatedResponse.restore(c, saved, 7, RAW, REQUEST, new UUID(0, 5000), NOW, true));
       assertEquals(
           "s2",
@@ -796,7 +828,8 @@ final class LogoutInboxServiceTest {
               rotatedResponse,
               hashes,
               Clock.fixed(NOW, ZoneOffset.UTC));
-      assertEquals("0200", text(service.execute(c, request(RAW, REQUEST), NOW), 208, 4));
+      assertEquals(
+          FIXTURE_0200_FC9DB3AC, text(service.execute(c, request(RAW, REQUEST), NOW), 208, 4));
       var unavailable = new LogoutReplayService(closed, hashes);
       assertInfrastructure(
           () -> unavailable.restore(c, saved, 7, RAW, REQUEST, new UUID(0, 5000), NOW, true));
@@ -914,12 +947,12 @@ final class LogoutInboxServiceTest {
     var firstId = UUID.fromString(text(initial, 24, 36));
     assertEquals(4, firstId.version());
     assertNotEquals(REQUEST, firstId);
-    assertArrayEquals(golden("0000", RAW, REQUEST, firstId, STAMP), initial);
+    assertArrayEquals(golden(FIXTURE_0000_876EEFE0, RAW, REQUEST, firstId, STAMP), initial);
     effects(1, 1, 1);
     byte[] repeated = call(application, input, NOW);
     var secondId = UUID.fromString(text(repeated, 24, 36));
     assertNotEquals(firstId, secondId);
-    assertArrayEquals(golden("0200", RAW, REQUEST, secondId, STAMP), repeated);
+    assertArrayEquals(golden(FIXTURE_0200_FC9DB3AC, RAW, REQUEST, secondId, STAMP), repeated);
     effects(1, 1, 1);
     assertEquals(
         1, count("select count(*) from schubert.request_inbox where fingerprint_key_version='f1'"));
@@ -930,7 +963,8 @@ final class LogoutInboxServiceTest {
   }
 
   private static ResponseSnapshotIdentity identity(long owner) {
-    return ResponseSnapshotIdentity.authenticated(REQUEST, "LOGRSP01", "001", owner);
+    return ResponseSnapshotIdentity.authenticated(
+        REQUEST, FIXTURE_LOGRSP01_BEEB0A2B, FIXTURE_001_A3FEAA64, owner);
   }
 
   private static InboxCompletion saved() throws SQLException {
@@ -943,8 +977,8 @@ final class LogoutInboxServiceTest {
       return new InboxCompletion(
           InboxCompletionState.COMPLETED,
           InboxResultReference.authSession(SESSION),
-          "LOGRSP01",
-          "001",
+          FIXTURE_LOGRSP01_BEEB0A2B,
+          FIXTURE_001_A3FEAA64,
           Optional.of(new EncryptedResponseSnapshot(r.getString(2), r.getBytes(1))),
           NOW);
     }
@@ -965,8 +999,8 @@ final class LogoutInboxServiceTest {
         saved,
         saved.state(),
         saved.resultReference(),
-        "LOGRSP01",
-        "001",
+        FIXTURE_LOGRSP01_BEEB0A2B,
+        FIXTURE_001_A3FEAA64,
         Optional.of(snapshots.encrypt(identity(7), body)));
   }
 
@@ -976,9 +1010,11 @@ final class LogoutInboxServiceTest {
     boolean providerIae = point.equals("providerIaeOwnerAndRowClose");
     String match =
         providerIae
-            ? "select u.id"
+            ? FIXTURE_SELECT_U_ID_F892A651
             : nullValue
-                ? (point.equals("null:owner") ? "select u.id" : "select user_id,context_hash")
+                ? (point.equals("null:owner")
+                    ? FIXTURE_SELECT_U_ID_F892A651
+                    : "select user_id,context_hash")
                 : close ? point.substring(6) : point;
     return (Connection)
         Proxy.newProxyInstance(
@@ -1094,7 +1130,12 @@ final class LogoutInboxServiceTest {
     put(body, 113, raw.wireValue());
     put(body, 177, "0256000024000000000000000000280");
     put(body, 208, code);
-    put(body, 256, code.equals("0000") || code.equals("0200") ? STAMP : "00000000000000000");
+    put(
+        body,
+        256,
+        code.equals(FIXTURE_0000_876EEFE0) || code.equals(FIXTURE_0200_FC9DB3AC)
+            ? STAMP
+            : "00000000000000000");
     return body;
   }
 
@@ -1102,7 +1143,7 @@ final class LogoutInboxServiceTest {
     var bytes = new ByteArrayOutputStream();
     var out = new DataOutputStream(bytes);
     out.write("SCHUBERT-NK-OP1".getBytes(StandardCharsets.US_ASCII));
-    for (String item : List.of("7", "LOGREQ01", "001", "REQUEST:LOGREQ01")) {
+    for (String item : List.of("7", "LOGREQ01", FIXTURE_001_A3FEAA64, "REQUEST:LOGREQ01")) {
       byte[] value = item.getBytes(StandardCharsets.UTF_8);
       out.writeInt(value.length);
       out.write(value);

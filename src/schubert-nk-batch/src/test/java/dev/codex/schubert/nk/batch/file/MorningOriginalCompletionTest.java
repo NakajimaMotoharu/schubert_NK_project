@@ -24,6 +24,14 @@ import org.junit.jupiter.api.Test;
 
 /** NK-OPS-001/OPS009/UI251/SS341342343/SSC178/318; ORIG455001..003, host scope only. */
 final class MorningOriginalCompletionTest {
+  private static final String FIXTURE_ROOT_956E6E33 = "root";
+  private static final String FIXTURE_PENDING_12ADAC54 = "pending";
+  private static final String FIXTURE_PUBLISH_69201707 = "publish";
+  private static final String FIXTURE_DONE_58BF5B54 = "done";
+  private static final String FIXTURE_00000000_0000_0000_0000_000000000454_8FB0DAE0 =
+      "00000000-0000-0000-0000-000000000454";
+  private static final String FIXTURE_2026_10_04T09_00_30Z_AA12EB17 = "2026-10-04T09:00:30Z";
+  private static final String FIXTURE_REFERENCE_86A3D412 = "reference";
   private static final MaintenanceActivation ACTIVATION =
       new MaintenanceActivation(
           new BatchRun(
@@ -59,42 +67,42 @@ final class MorningOriginalCompletionTest {
     }
 
     void root() throws IOException {
-      events.add("root");
+      events.add(FIXTURE_ROOT_956E6E33);
       if (++roots == rootFault) failure();
     }
 
     public void verify(MaintenanceActivation expected) throws IOException {
       assertEquals(ACTIVATION, expected);
-      events.add("pending");
-      if (fault.equals("pending")) failure();
+      events.add(FIXTURE_PENDING_12ADAC54);
+      if (fault.equals(FIXTURE_PENDING_12ADAC54)) failure();
       assertTrue(stored.isEmpty());
     }
 
     public MaintenanceCompletion complete(MaintenanceCompletion expected) throws IOException {
       assertEquals(DONE, expected);
-      events.add("publish");
+      events.add(FIXTURE_PUBLISH_69201707);
       publish++;
       stored = Optional.of(expected);
       if (expireAfterPublish) alive.set(false);
-      if (fault.equals("publish")) failure();
+      if (fault.equals(FIXTURE_PUBLISH_69201707)) failure();
       return wrongResult
           ? new MaintenanceCompletion(ACTIVATION, DONE.endedAt().plusNanos(1000), DONE.outcome())
           : expected;
     }
 
     public void verifyCompleted(MaintenanceCompletion expected) throws IOException {
-      events.add("done");
-      if (fault.equals("done")) failure();
+      events.add(FIXTURE_DONE_58BF5B54);
+      if (fault.equals(FIXTURE_DONE_58BF5B54)) failure();
       assertEquals(Optional.of(expected), stored);
     }
 
     public BatchRun referenceRun(MaintenanceActivation current, UUID priorId, Instant observed)
         throws IOException {
       assertEquals(ACTIVATION, current);
-      assertEquals(UUID.fromString("00000000-0000-0000-0000-000000000454"), priorId);
-      assertEquals(Instant.parse("2026-10-04T09:00:30Z"), observed);
-      events.add("reference");
-      if (fault.equals("reference")) failure();
+      assertEquals(UUID.fromString(FIXTURE_00000000_0000_0000_0000_000000000454_8FB0DAE0), priorId);
+      assertEquals(Instant.parse(FIXTURE_2026_10_04T09_00_30Z_AA12EB17), observed);
+      events.add(FIXTURE_REFERENCE_86A3D412);
+      if (fault.equals(FIXTURE_REFERENCE_86A3D412)) failure();
       if (expireAfterReference) alive.set(false);
       return new BatchRun(priorId, Instant.parse("2026-10-04T08:00:00Z"));
     }
@@ -119,8 +127,8 @@ final class MorningOriginalCompletionTest {
   /** SSC240/RLOOK852003: historical SKIP precedes current WARNING DONE; no republish. */
   @Test
   void completedLookupSwitchesToTypedDataOnlyForPublishedAndExistingWarning() throws Exception {
-    var id = UUID.fromString("00000000-0000-0000-0000-000000000454");
-    var observed = Instant.parse("2026-10-04T09:00:30Z");
+    var id = UUID.fromString(FIXTURE_00000000_0000_0000_0000_000000000454_8FB0DAE0);
+    var observed = Instant.parse(FIXTURE_2026_10_04T09_00_30Z_AA12EB17);
     for (boolean existing : List.of(false, true)) {
       var f = new Fixture();
       if (existing) f.stored = Optional.of(DONE);
@@ -132,7 +140,14 @@ final class MorningOriginalCompletionTest {
           proof.referenceRun(id, observed));
       assertEquals(
           List.of(
-              "root", "done", "root", "completed-reference", "reference", "root", "done", "root"),
+              FIXTURE_ROOT_956E6E33,
+              FIXTURE_DONE_58BF5B54,
+              FIXTURE_ROOT_956E6E33,
+              "completed-reference",
+              FIXTURE_REFERENCE_86A3D412,
+              FIXTURE_ROOT_956E6E33,
+              FIXTURE_DONE_58BF5B54,
+              FIXTURE_ROOT_956E6E33),
           f.events);
       assertEquals(existing ? 0 : 1, f.publish);
       assertEquals(Optional.of(DONE), f.stored);
@@ -144,13 +159,13 @@ final class MorningOriginalCompletionTest {
   /** RLOOK852004: completed reference preserves exact exception/owner and fail-closed default. */
   @Test
   void completedReferenceFailureOwnerAndMissingAdapterNeverReturnData() throws Exception {
-    var id = UUID.fromString("00000000-0000-0000-0000-000000000454");
-    var observed = Instant.parse("2026-10-04T09:00:30Z");
+    var id = UUID.fromString(FIXTURE_00000000_0000_0000_0000_000000000454_8FB0DAE0);
+    var observed = Instant.parse(FIXTURE_2026_10_04T09_00_30Z_AA12EB17);
     for (int kind = 0; kind < 3; kind++) {
       var f = new Fixture();
       f.stored = Optional.of(DONE);
       f.kind = kind;
-      f.fault = "reference";
+      f.fault = FIXTURE_REFERENCE_86A3D412;
       assertSame(
           kind == 0 ? f.io : kind == 1 ? f.runtime : f.fatal,
           assertThrows(Throwable.class, () -> f.proof().referenceRun(id, observed)));
@@ -180,12 +195,20 @@ final class MorningOriginalCompletionTest {
   void rlook200002RetainedLookupCannotEscapeOriginalOwnerThreadOrLifetime() throws Exception {
     var f = new Fixture();
     var proof = f.proof();
-    var id = UUID.fromString("00000000-0000-0000-0000-000000000454");
-    var observed = Instant.parse("2026-10-04T09:00:30Z");
+    var id = UUID.fromString(FIXTURE_00000000_0000_0000_0000_000000000454_8FB0DAE0);
+    var observed = Instant.parse(FIXTURE_2026_10_04T09_00_30Z_AA12EB17);
     assertEquals(
         new BatchRun(id, Instant.parse("2026-10-04T08:00:00Z")), proof.referenceRun(id, observed));
     assertEquals(
-        List.of("root", "pending", "root", "reference", "root", "pending", "root"), f.events);
+        List.of(
+            FIXTURE_ROOT_956E6E33,
+            FIXTURE_PENDING_12ADAC54,
+            FIXTURE_ROOT_956E6E33,
+            FIXTURE_REFERENCE_86A3D412,
+            FIXTURE_ROOT_956E6E33,
+            FIXTURE_PENDING_12ADAC54,
+            FIXTURE_ROOT_956E6E33),
+        f.events);
     assertEquals(0, f.publish);
     assertThrows(NullPointerException.class, () -> proof.referenceRun(null, observed));
     assertThrows(NullPointerException.class, () -> proof.referenceRun(id, null));
@@ -204,17 +227,17 @@ final class MorningOriginalCompletionTest {
     assertInstanceOf(IOException.class, failure.get());
     f.alive.set(false);
     assertThrows(IOException.class, () -> proof.referenceRun(id, observed));
-    assertEquals(1, f.events.stream().filter("reference"::equals).count());
+    assertEquals(1, f.events.stream().filter(FIXTURE_REFERENCE_86A3D412::equals).count());
   }
 
   @Test
   void rlook200002LookupFailureAndPostReadOwnerLossNeverReturnTheData() throws Exception {
-    var id = UUID.fromString("00000000-0000-0000-0000-000000000454");
-    var observed = Instant.parse("2026-10-04T09:00:30Z");
+    var id = UUID.fromString(FIXTURE_00000000_0000_0000_0000_000000000454_8FB0DAE0);
+    var observed = Instant.parse(FIXTURE_2026_10_04T09_00_30Z_AA12EB17);
     for (int kind = 0; kind < 3; kind++) {
       var f = new Fixture();
       f.kind = kind;
-      f.fault = "reference";
+      f.fault = FIXTURE_REFERENCE_86A3D412;
       var proof = f.proof();
       var actual = assertThrows(Throwable.class, () -> proof.referenceRun(id, observed));
       assertSame(kind == 0 ? f.io : kind == 1 ? f.runtime : f.fatal, actual);
@@ -240,8 +263,21 @@ final class MorningOriginalCompletionTest {
     proof.verify();
     assertEquals(
         List.of(
-            "root", "pending", "root", "root", "pending", "root", "publish", "done", "root", "root",
-            "done", "root", "root", "done", "root"),
+            FIXTURE_ROOT_956E6E33,
+            FIXTURE_PENDING_12ADAC54,
+            FIXTURE_ROOT_956E6E33,
+            FIXTURE_ROOT_956E6E33,
+            FIXTURE_PENDING_12ADAC54,
+            FIXTURE_ROOT_956E6E33,
+            FIXTURE_PUBLISH_69201707,
+            FIXTURE_DONE_58BF5B54,
+            FIXTURE_ROOT_956E6E33,
+            FIXTURE_ROOT_956E6E33,
+            FIXTURE_DONE_58BF5B54,
+            FIXTURE_ROOT_956E6E33,
+            FIXTURE_ROOT_956E6E33,
+            FIXTURE_DONE_58BF5B54,
+            FIXTURE_ROOT_956E6E33),
         f.events);
     assertEquals(1, f.publish);
     assertThrows(IOException.class, () -> proof.complete(DONE));
@@ -257,7 +293,8 @@ final class MorningOriginalCompletionTest {
     var f = new Fixture();
     var proof = f.proof();
     proof.verifyRetained();
-    assertEquals(List.of("root", "pending", "root"), f.events);
+    assertEquals(
+        List.of(FIXTURE_ROOT_956E6E33, FIXTURE_PENDING_12ADAC54, FIXTURE_ROOT_956E6E33), f.events);
     assertEquals(0, f.publish);
     f.alive.set(false);
     assertThrows(IOException.class, proof::verifyRetained);
@@ -304,7 +341,7 @@ final class MorningOriginalCompletionTest {
     assertEquals(DONE, proof.complete(DONE));
     proof.verify();
     assertEquals(0, f.publish);
-    assertFalse(f.events.contains("pending"));
+    assertFalse(f.events.contains(FIXTURE_PENDING_12ADAC54));
     assertEquals(Optional.of(DONE), f.stored);
     assertThrows(IOException.class, () -> proof.complete(DONE));
   }
@@ -339,7 +376,8 @@ final class MorningOriginalCompletionTest {
 
   @Test
   void orig455004CompleteOrReadbackUncertaintyPoisonsPendingProof() throws Exception {
-    for (String phase : List.of("pending", "publish", "done")) {
+    for (String phase :
+        List.of(FIXTURE_PENDING_12ADAC54, FIXTURE_PUBLISH_69201707, FIXTURE_DONE_58BF5B54)) {
       for (int kind = 0; kind < 3; kind++) {
         var f = new Fixture();
         f.fault = phase;
@@ -347,8 +385,8 @@ final class MorningOriginalCompletionTest {
         var proof = f.proof();
         Throwable actual = assertThrows(Throwable.class, () -> proof.complete(DONE));
         assertSame(kind == 0 ? f.io : kind == 1 ? f.runtime : f.fatal, actual);
-        assertEquals(phase.equals("pending") ? 0 : 1, f.publish);
-        if (!phase.equals("pending")) {
+        assertEquals(phase.equals(FIXTURE_PENDING_12ADAC54) ? 0 : 1, f.publish);
+        if (!phase.equals(FIXTURE_PENDING_12ADAC54)) {
           f.fault = "";
           assertThrows(IOException.class, proof::verify);
           assertThrows(IOException.class, () -> proof.complete(DONE));

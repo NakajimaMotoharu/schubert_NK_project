@@ -26,6 +26,23 @@ import org.junit.jupiter.api.Test;
 
 /** SS342/SSC178/CADDY455: literal manager/kernel/HTTP values, no native authority. */
 final class MorningCaddyReadinessTest {
+  private static final String FIXTURE_MAINPID_D7C01CF7 = "MainPID";
+  private static final String FIXTURE_EXECMAINCODE_02C974D2 = "ExecMainCode";
+  private static final String FIXTURE_EXECMAINEXITTIMESTAMPMONOTONIC_C1411C27 =
+      "ExecMainExitTimestampMonotonic";
+  private static final String FIXTURE_EXECSTARTPRE_B16D3253 = "ExecStartPre";
+  private static final String FIXTURE_EXECSTART_CFCC28D6 = "ExecStart";
+  private static final String FIXTURE_INVOCATIONID_0F13ED0E = "InvocationID";
+  private static final String FIXTURE_EXECMAINSTARTTIMESTAMPMONOTONIC_1FB48E62 =
+      "ExecMainStartTimestampMonotonic";
+  private static final String FIXTURE_77777777777777777777777777777777_300EBD76 =
+      "77777777777777777777777777777777";
+  private static final String FIXTURE_RESULT_37D8A404 = "Result";
+  private static final String FIXTURE_12345_AFC21EDA = "12345";
+  private static final String FIXTURE_GUARD_EE044669 = "guard";
+  private static final String FIXTURE_TLS_LOGIN_59AEC819 = "TLS-login";
+  private static final String FIXTURE_0100007F_DCCA36B1 = "0100007F";
+
   @Test
   void caddyStream001SameInputIsClosedOnceWithoutReading() throws Exception {
     var closes = new AtomicInteger();
@@ -229,13 +246,15 @@ final class MorningCaddyReadinessTest {
     var m = values();
     m.put("ActiveState", "inactive");
     m.put("SubState", "dead");
-    m.put("MainPID", "0");
-    m.put("ExecMainCode", "1");
-    m.put("ExecMainExitTimestampMonotonic", "2000000");
-    m.put("ExecStartPre", m.get("ExecStartPre").replace("status=0/0", "status=0"));
+    m.put(FIXTURE_MAINPID_D7C01CF7, "0");
+    m.put(FIXTURE_EXECMAINCODE_02C974D2, "1");
+    m.put(FIXTURE_EXECMAINEXITTIMESTAMPMONOTONIC_C1411C27, "2000000");
     m.put(
-        "ExecStart",
-        m.get("ExecStart")
+        FIXTURE_EXECSTARTPRE_B16D3253,
+        m.get(FIXTURE_EXECSTARTPRE_B16D3253).replace("status=0/0", "status=0"));
+    m.put(
+        FIXTURE_EXECSTART_CFCC28D6,
+        m.get(FIXTURE_EXECSTART_CFCC28D6)
             .replace("stop_time=[n/a]", "stop_time=[Sun 2026-10-04 19:01:00 JST]")
             .replace("code=(null)", "code=exited")
             .replace("status=0/0", "status=0"));
@@ -244,15 +263,15 @@ final class MorningCaddyReadinessTest {
 
   static Map<String, String> noHistory() {
     var m = normalHistory();
-    m.put("InvocationID", "");
-    m.put("ExecMainCode", "0");
-    m.put("ExecMainStartTimestampMonotonic", "0");
-    m.put("ExecMainExitTimestampMonotonic", "0");
+    m.put(FIXTURE_INVOCATIONID_0F13ED0E, "");
+    m.put(FIXTURE_EXECMAINCODE_02C974D2, "0");
+    m.put(FIXTURE_EXECMAINSTARTTIMESTAMPMONOTONIC_1FB48E62, "0");
+    m.put(FIXTURE_EXECMAINEXITTIMESTAMPMONOTONIC_C1411C27, "0");
     m.put(
-        "ExecStartPre",
+        FIXTURE_EXECSTARTPRE_B16D3253,
         "{ path=/usr/bin/caddy ; argv[]=/usr/bin/caddy validate --config /etc/caddy/Caddyfile ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }");
     m.put(
-        "ExecStart",
+        FIXTURE_EXECSTART_CFCC28D6,
         "{ path=/usr/bin/caddy ; argv[]=/usr/bin/caddy run --config /etc/caddy/Caddyfile ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }");
     return m;
   }
@@ -261,13 +280,15 @@ final class MorningCaddyReadinessTest {
   void caddy192001ReloadClearedAuxiliaryHistoryRetainsOnlyPreviousGeneration() throws Exception {
     var retained = normalHistory();
     // Independent manager literals: daemon-reload clears both auxiliary entries, not F18.
-    retained.put("ExecStartPre", noHistory().get("ExecStartPre"));
-    retained.put("ExecStart", noHistory().get("ExecStart"));
-    assertEquals("77777777777777777777777777777777", MorningCaddyReadiness.cold(retained));
+    retained.put(FIXTURE_EXECSTARTPRE_B16D3253, noHistory().get(FIXTURE_EXECSTARTPRE_B16D3253));
+    retained.put(FIXTURE_EXECSTART_CFCC28D6, noHistory().get(FIXTURE_EXECSTART_CFCC28D6));
+    assertEquals(
+        FIXTURE_77777777777777777777777777777777_300EBD76, MorningCaddyReadiness.cold(retained));
     assertThrows(
         IOException.class,
         () ->
-            new MorningCaddyReadiness(() -> {}, new Fixture(), "77777777777777777777777777777777"));
+            new MorningCaddyReadiness(
+                () -> {}, new Fixture(), FIXTURE_77777777777777777777777777777777_300EBD76));
     var fresh =
         new MorningCaddyReadiness(() -> {}, new Fixture(), "88888888888888888888888888888888");
     assertTrue(fresh.ready());
@@ -275,7 +296,7 @@ final class MorningCaddyReadinessTest {
 
   @Test
   void caddy192002MixedOrMalformedReloadEntriesNeverBecomeColdAuthority() {
-    for (String key : List.of("ExecStartPre", "ExecStart")) {
+    for (String key : List.of(FIXTURE_EXECSTARTPRE_B16D3253, FIXTURE_EXECSTART_CFCC28D6)) {
       var mixed = normalHistory();
       mixed.put(key, noHistory().get(key));
       assertThrows(IOException.class, () -> MorningCaddyReadiness.cold(mixed), key);
@@ -288,8 +309,8 @@ final class MorningCaddyReadinessTest {
               "status=1/FAILURE",
               "start_time=[Mon 2026-10-05 13:00:00 JST]")) {
         var altered = normalHistory();
-        altered.put("ExecStartPre", noHistory().get("ExecStartPre"));
-        altered.put("ExecStart", noHistory().get("ExecStart"));
+        altered.put(FIXTURE_EXECSTARTPRE_B16D3253, noHistory().get(FIXTURE_EXECSTARTPRE_B16D3253));
+        altered.put(FIXTURE_EXECSTART_CFCC28D6, noHistory().get(FIXTURE_EXECSTART_CFCC28D6));
         String entry = altered.get(key);
         String expectedPart =
             bad.startsWith("path=")
@@ -313,50 +334,61 @@ final class MorningCaddyReadinessTest {
         Map.ofEntries(
                 Map.entry("ActiveState", "failed"),
                 Map.entry("SubState", "running"),
-                Map.entry("MainPID", "43"),
+                Map.entry(FIXTURE_MAINPID_D7C01CF7, "43"),
                 Map.entry("Job", "123"),
-                Map.entry("Result", "exit-code"),
-                Map.entry("ExecMainCode", "0"),
+                Map.entry(FIXTURE_RESULT_37D8A404, "exit-code"),
+                Map.entry(FIXTURE_EXECMAINCODE_02C974D2, "0"),
                 Map.entry("ExecMainStatus", "143"),
-                Map.entry("ExecMainStartTimestampMonotonic", "0"),
-                Map.entry("ExecMainExitTimestampMonotonic", "999999"),
-                Map.entry("InvocationID", "0".repeat(32)),
+                Map.entry(FIXTURE_EXECMAINSTARTTIMESTAMPMONOTONIC_1FB48E62, "0"),
+                Map.entry(FIXTURE_EXECMAINEXITTIMESTAMPMONOTONIC_C1411C27, "999999"),
+                Map.entry(FIXTURE_INVOCATIONID_0F13ED0E, "0".repeat(32)),
                 Map.entry("Id", "foreign.service"),
                 Map.entry("User", "root"),
                 Map.entry("NoNewPrivileges", "no"))
             .entrySet()) {
       var altered = normalHistory();
-      altered.put("ExecStartPre", noHistory().get("ExecStartPre"));
-      altered.put("ExecStart", noHistory().get("ExecStart"));
+      altered.put(FIXTURE_EXECSTARTPRE_B16D3253, noHistory().get(FIXTURE_EXECSTARTPRE_B16D3253));
+      altered.put(FIXTURE_EXECSTART_CFCC28D6, noHistory().get(FIXTURE_EXECSTART_CFCC28D6));
       altered.put(change.getKey(), change.getValue());
       assertThrows(IOException.class, () -> MorningCaddyReadiness.cold(altered), change.getKey());
     }
     var missing = normalHistory();
-    missing.put("ExecStartPre", noHistory().get("ExecStartPre"));
-    missing.put("ExecStart", noHistory().get("ExecStart"));
-    missing.remove("ExecMainExitTimestampMonotonic");
+    missing.put(FIXTURE_EXECSTARTPRE_B16D3253, noHistory().get(FIXTURE_EXECSTARTPRE_B16D3253));
+    missing.put(FIXTURE_EXECSTART_CFCC28D6, noHistory().get(FIXTURE_EXECSTART_CFCC28D6));
+    missing.remove(FIXTURE_EXECMAINEXITTIMESTAMPMONOTONIC_C1411C27);
     assertThrows(IOException.class, () -> MorningCaddyReadiness.cold(missing));
   }
 
   @Test
   void caddy180001ColdIsInitialOrNormalHistoryNotInvocationEmptyOnly() throws Exception {
-    assertEquals("77777777777777777777777777777777", MorningCaddyReadiness.cold(normalHistory()));
+    assertEquals(
+        FIXTURE_77777777777777777777777777777777_300EBD76,
+        MorningCaddyReadiness.cold(normalHistory()));
     assertEquals("", MorningCaddyReadiness.cold(noHistory()));
     var legacy = normalHistory();
     legacy.replaceAll(
         (key, value) ->
-            key.startsWith("ExecStart") ? value.replace("status=0 }", "status=0/0 }") : value);
-    assertEquals("77777777777777777777777777777777", MorningCaddyReadiness.cold(legacy));
+            key.startsWith(FIXTURE_EXECSTART_CFCC28D6)
+                ? value.replace("status=0 }", "status=0/0 }")
+                : value);
+    assertEquals(
+        FIXTURE_77777777777777777777777777777777_300EBD76, MorningCaddyReadiness.cold(legacy));
     var bound = normalHistory();
-    bound.put("ExecMainStartTimestampMonotonic", "18446744073709551615");
-    bound.put("ExecMainExitTimestampMonotonic", "18446744073709551615");
-    assertEquals("77777777777777777777777777777777", MorningCaddyReadiness.cold(bound));
+    bound.put(FIXTURE_EXECMAINSTARTTIMESTAMPMONOTONIC_1FB48E62, "18446744073709551615");
+    bound.put(FIXTURE_EXECMAINEXITTIMESTAMPMONOTONIC_C1411C27, "18446744073709551615");
+    assertEquals(
+        FIXTURE_77777777777777777777777777777777_300EBD76, MorningCaddyReadiness.cold(bound));
     var min = normalHistory();
-    min.put("ExecStart", min.get("ExecStart").replace("pid=43", "pid=2"));
-    assertEquals("77777777777777777777777777777777", MorningCaddyReadiness.cold(min));
+    min.put(
+        FIXTURE_EXECSTART_CFCC28D6, min.get(FIXTURE_EXECSTART_CFCC28D6).replace("pid=43", "pid=2"));
+    assertEquals(
+        FIXTURE_77777777777777777777777777777777_300EBD76, MorningCaddyReadiness.cold(min));
     var max = normalHistory();
-    max.put("ExecStart", max.get("ExecStart").replace("pid=43", "pid=2147483647"));
-    assertEquals("77777777777777777777777777777777", MorningCaddyReadiness.cold(max));
+    max.put(
+        FIXTURE_EXECSTART_CFCC28D6,
+        max.get(FIXTURE_EXECSTART_CFCC28D6).replace("pid=43", "pid=2147483647"));
+    assertEquals(
+        FIXTURE_77777777777777777777777777777777_300EBD76, MorningCaddyReadiness.cold(max));
   }
 
   @Test
@@ -365,28 +397,30 @@ final class MorningCaddyReadinessTest {
         Map.ofEntries(
                 Map.entry("ActiveState", "active"),
                 Map.entry("SubState", "running"),
-                Map.entry("MainPID", "43"),
+                Map.entry(FIXTURE_MAINPID_D7C01CF7, "43"),
                 Map.entry("Job", "123"),
-                Map.entry("Result", "timeout"),
-                Map.entry("ExecMainCode", "0"),
+                Map.entry(FIXTURE_RESULT_37D8A404, "timeout"),
+                Map.entry(FIXTURE_EXECMAINCODE_02C974D2, "0"),
                 Map.entry("ExecMainStatus", "143"),
-                Map.entry("ExecMainStartTimestampMonotonic", "0"),
-                Map.entry("ExecMainExitTimestampMonotonic", "999999"),
-                Map.entry("InvocationID", "0".repeat(32)))
+                Map.entry(FIXTURE_EXECMAINSTARTTIMESTAMPMONOTONIC_1FB48E62, "0"),
+                Map.entry(FIXTURE_EXECMAINEXITTIMESTAMPMONOTONIC_C1411C27, "999999"),
+                Map.entry(FIXTURE_INVOCATIONID_0F13ED0E, "0".repeat(32)))
             .entrySet()) {
       var m = normalHistory();
       m.put(change.getKey(), change.getValue());
       assertThrows(IOException.class, () -> MorningCaddyReadiness.cold(m), change.getKey());
     }
     for (String field :
-        List.of("ExecMainStartTimestampMonotonic", "ExecMainExitTimestampMonotonic"))
+        List.of(
+            FIXTURE_EXECMAINSTARTTIMESTAMPMONOTONIC_1FB48E62,
+            FIXTURE_EXECMAINEXITTIMESTAMPMONOTONIC_C1411C27))
       for (String bad :
           List.of("-1", "01", "", "18446744073709551616", "184467440737095516150", "x")) {
         var m = normalHistory();
         m.put(field, bad);
         assertThrows(IOException.class, () -> MorningCaddyReadiness.cold(m));
       }
-    for (String key : List.of("ExecStartPre", "ExecStart"))
+    for (String key : List.of(FIXTURE_EXECSTARTPRE_B16D3253, FIXTURE_EXECSTART_CFCC28D6))
       for (String bad :
           List.of(
               "status=1",
@@ -399,16 +433,16 @@ final class MorningCaddyReadinessTest {
         String old = m.get(key);
         String replaced =
             bad.startsWith("pid=")
-                ? old.replace(key.equals("ExecStartPre") ? "pid=42" : "pid=43", bad)
+                ? old.replace(key.equals(FIXTURE_EXECSTARTPRE_B16D3253) ? "pid=42" : "pid=43", bad)
                 : bad.startsWith("start_time")
                     ? old.replace(
-                        key.equals("ExecStartPre")
+                        key.equals(FIXTURE_EXECSTARTPRE_B16D3253)
                             ? "start_time=[Sun 2026-10-04 19:00:00 JST]"
                             : "start_time=[Sun 2026-10-04 19:00:02 JST]",
                         bad)
                     : bad.startsWith("stop_time")
                         ? old.replace(
-                            key.equals("ExecStartPre")
+                            key.equals(FIXTURE_EXECSTARTPRE_B16D3253)
                                 ? "stop_time=[Sun 2026-10-04 19:00:01 JST]"
                                 : "stop_time=[Sun 2026-10-04 19:01:00 JST]",
                             bad)
@@ -418,20 +452,20 @@ final class MorningCaddyReadinessTest {
       }
     for (String key :
         List.of(
-            "ExecMainCode",
-            "ExecMainStartTimestampMonotonic",
-            "ExecMainExitTimestampMonotonic",
-            "ExecStartPre",
-            "ExecStart")) {
+            FIXTURE_EXECMAINCODE_02C974D2,
+            FIXTURE_EXECMAINSTARTTIMESTAMPMONOTONIC_1FB48E62,
+            FIXTURE_EXECMAINEXITTIMESTAMPMONOTONIC_C1411C27,
+            FIXTURE_EXECSTARTPRE_B16D3253,
+            FIXTURE_EXECSTART_CFCC28D6)) {
       var m = noHistory();
       m.put(key, normalHistory().get(key));
       assertThrows(IOException.class, () -> MorningCaddyReadiness.cold(m), key);
     }
     var missing = normalHistory();
-    missing.remove("Result");
+    missing.remove(FIXTURE_RESULT_37D8A404);
     assertThrows(IOException.class, () -> MorningCaddyReadiness.cold(missing));
     var nullable = normalHistory();
-    nullable.put("ExecMainStartTimestampMonotonic", null);
+    nullable.put(FIXTURE_EXECMAINSTARTTIMESTAMPMONOTONIC_1FB48E62, null);
     assertThrows(IOException.class, () -> MorningCaddyReadiness.cold(nullable));
   }
 
@@ -443,7 +477,8 @@ final class MorningCaddyReadinessTest {
     assertThrows(
         IOException.class,
         () ->
-            new MorningCaddyReadiness(() -> {}, new Fixture(), "77777777777777777777777777777777"));
+            new MorningCaddyReadiness(
+                () -> {}, new Fixture(), FIXTURE_77777777777777777777777777777777_300EBD76));
     for (String malformed : List.of("0".repeat(32), "x", "8".repeat(31), "8".repeat(33)))
       assertThrows(
           IOException.class, () -> new MorningCaddyReadiness(() -> {}, new Fixture(), malformed));
@@ -451,15 +486,15 @@ final class MorningCaddyReadinessTest {
         NullPointerException.class, () -> new MorningCaddyReadiness(() -> {}, new Fixture(), null));
     for (var change :
         Map.of(
-                "Result",
+                FIXTURE_RESULT_37D8A404,
                 "exit-code",
-                "ExecMainCode",
+                FIXTURE_EXECMAINCODE_02C974D2,
                 "1",
                 "ExecMainStatus",
                 "10",
-                "ExecMainStartTimestampMonotonic",
+                FIXTURE_EXECMAINSTARTTIMESTAMPMONOTONIC_1FB48E62,
                 "0",
-                "ExecMainExitTimestampMonotonic",
+                FIXTURE_EXECMAINEXITTIMESTAMPMONOTONIC_C1411C27,
                 "1")
             .entrySet()) {
       var mutated = new Fixture();
@@ -471,8 +506,8 @@ final class MorningCaddyReadinessTest {
   static final class Fixture implements MorningCaddyReadiness.Io {
     Map<String, String> manager = values();
     ChildStartupContext.Observed actor = ACTOR;
-    Set<String> before = Set.of("12345");
-    Set<String> after = Set.of("12345");
+    Set<String> before = Set.of(FIXTURE_12345_AFC21EDA);
+    Set<String> after = Set.of(FIXTURE_12345_AFC21EDA);
     int status = 200;
     int sockets;
     int guards;
@@ -482,7 +517,7 @@ final class MorningCaddyReadinessTest {
     final List<String> events = new ArrayList<>();
 
     void guard() throws IOException {
-      events.add("guard");
+      events.add(FIXTURE_GUARD_EE044669);
       if (++guards == failGuard) throw new IOException("fixed fault");
     }
 
@@ -512,7 +547,7 @@ final class MorningCaddyReadinessTest {
 
     public int login() throws IOException {
       io();
-      events.add("TLS-login");
+      events.add(FIXTURE_TLS_LOGIN_59AEC819);
       return status;
     }
 
@@ -525,7 +560,9 @@ final class MorningCaddyReadinessTest {
   void caddy457003ActualSystemdValidateZeroAndOnlyNormalZeroVariantsAccepted() throws Exception {
     for (String status : List.of("0", "0/0")) {
       var m = values();
-      m.put("ExecStartPre", m.get("ExecStartPre").replace("status=0/0", "status=" + status));
+      m.put(
+          FIXTURE_EXECSTARTPRE_B16D3253,
+          m.get(FIXTURE_EXECSTARTPRE_B16D3253).replace("status=0/0", "status=" + status));
       MorningCaddyReadiness.profile(m);
       var f = new Fixture();
       f.manager = m;
@@ -534,7 +571,9 @@ final class MorningCaddyReadinessTest {
     for (String status :
         List.of("00", "1", "30", "0/1", "1/0", "0/00", "0/0/0", "0x0", "", "unexpected")) {
       var m = values();
-      m.put("ExecStartPre", m.get("ExecStartPre").replace("status=0/0", "status=" + status));
+      m.put(
+          FIXTURE_EXECSTARTPRE_B16D3253,
+          m.get(FIXTURE_EXECSTARTPRE_B16D3253).replace("status=0/0", "status=" + status));
       assertThrows(IOException.class, () -> MorningCaddyReadiness.profile(m), status);
     }
   }
@@ -547,16 +586,16 @@ final class MorningCaddyReadinessTest {
     assertTrue(observer.ready());
     assertEquals(
         List.of(
-            "guard",
+            FIXTURE_GUARD_EE044669,
             "manager",
             "actor",
             "socket",
-            "TLS-login",
-            "guard",
+            FIXTURE_TLS_LOGIN_59AEC819,
+            FIXTURE_GUARD_EE044669,
             "actor",
             "manager",
             "socket",
-            "guard"),
+            FIXTURE_GUARD_EE044669),
         f.events);
   }
 
@@ -584,18 +623,21 @@ final class MorningCaddyReadinessTest {
                             true);
                   if (drift.equals("managerAfterTls")) {
                     f.manager = values();
-                    f.manager.put("InvocationID", "8".repeat(32));
+                    f.manager.put(FIXTURE_INVOCATIONID_0F13ED0E, "8".repeat(32));
                   }
                 }
               },
               f);
       if (drift.equals("pidBefore")) {
         f.manager = values();
-        f.manager.put("MainPID", "44");
-        f.manager.put("ExecStart", f.manager.get("ExecStart").replace("pid=43", "pid=44"));
+        f.manager.put(FIXTURE_MAINPID_D7C01CF7, "44");
+        f.manager.put(
+            FIXTURE_EXECSTART_CFCC28D6,
+            f.manager.get(FIXTURE_EXECSTART_CFCC28D6).replace("pid=43", "pid=44"));
       }
       assertThrows(IOException.class, observer::ready, drift);
-      assertEquals(!drift.equals("pidBefore"), f.events.contains("TLS-login"), drift);
+      assertEquals(
+          !drift.equals("pidBefore"), f.events.contains(FIXTURE_TLS_LOGIN_59AEC819), drift);
     }
     var f = new Fixture();
     var reads = new java.util.concurrent.atomic.AtomicInteger();
@@ -603,7 +645,8 @@ final class MorningCaddyReadinessTest {
         new MorningCaddyReadiness.Io() {
           public Map<String, String> manager() throws IOException {
             var copy = new HashMap<>(f.manager());
-            if (reads.incrementAndGet() == 2) copy.put("InvocationID", "8".repeat(32));
+            if (reads.incrementAndGet() == 2)
+              copy.put(FIXTURE_INVOCATIONID_0F13ED0E, "8".repeat(32));
             return copy;
           }
 
@@ -629,7 +672,7 @@ final class MorningCaddyReadinessTest {
   /** PT-OPS-CADDY3052-002: valid command prefix cannot hide malformed or extra execution data. */
   @Test
   void caddy3052002EmbeddedBraceAndLiveNonzeroStartNeverBecomeReady() {
-    for (String key : List.of("ExecStartPre", "ExecStart")) {
+    for (String key : List.of(FIXTURE_EXECSTARTPRE_B16D3253, FIXTURE_EXECSTART_CFCC28D6)) {
       var changed = values();
       changed.put(
           key,
@@ -637,7 +680,9 @@ final class MorningCaddyReadinessTest {
       assertThrows(IOException.class, () -> MorningCaddyReadiness.configuration(changed), key);
     }
     var changed = values();
-    changed.put("ExecStart", changed.get("ExecStart").replace("status=0/0", "status=1/FAILURE"));
+    changed.put(
+        FIXTURE_EXECSTART_CFCC28D6,
+        changed.get(FIXTURE_EXECSTART_CFCC28D6).replace("status=0/0", "status=1/FAILURE"));
     assertThrows(IOException.class, () -> MorningCaddyReadiness.profile(changed));
   }
 
@@ -654,20 +699,20 @@ final class MorningCaddyReadinessTest {
     }
     for (String pid : List.of("0", "1", "01", "2147483648", "9999999999", "-1")) {
       var m = values();
-      m.put("MainPID", pid);
+      m.put(FIXTURE_MAINPID_D7C01CF7, pid);
       assertThrows(IOException.class, () -> MorningCaddyReadiness.profile(m));
     }
     for (String inv : List.of("0".repeat(32), "A".repeat(32), "7".repeat(31))) {
       var m = values();
-      m.put("InvocationID", inv);
+      m.put(FIXTURE_INVOCATIONID_0F13ED0E, inv);
       assertThrows(IOException.class, () -> MorningCaddyReadiness.profile(m));
     }
     for (String mutation :
         List.of("status=30/0", "ignore_errors=yes", "code=killed", "start_time=[n/a]")) {
       var m = values();
-      String source = m.get("ExecStartPre");
+      String source = m.get(FIXTURE_EXECSTARTPRE_B16D3253);
       m.put(
-          "ExecStartPre",
+          FIXTURE_EXECSTARTPRE_B16D3253,
           mutation.startsWith("start_time")
               ? source.replace("start_time=[Sun 2026-10-04 19:00:00 JST]", mutation)
               : source.replace(
@@ -690,12 +735,12 @@ final class MorningCaddyReadinessTest {
     var f = new Fixture();
     f.before = Set.of();
     assertFalse(f.create().ready());
-    assertFalse(f.events.contains("TLS-login"));
+    assertFalse(f.events.contains(FIXTURE_TLS_LOGIN_59AEC819));
     f = new Fixture();
     f.after = Set.of("99999");
     assertFalse(f.create().ready());
     f = new Fixture();
-    f.before = Set.of("12345", "88888");
+    f.before = Set.of(FIXTURE_12345_AFC21EDA, "88888");
     assertTrue(f.create().ready());
   }
 
@@ -714,7 +759,7 @@ final class MorningCaddyReadinessTest {
     var f = new Fixture();
     var observer = f.create();
     f.manager = values();
-    f.manager.put("InvocationID", "8".repeat(32));
+    f.manager.put(FIXTURE_INVOCATIONID_0F13ED0E, "8".repeat(32));
     assertThrows(IOException.class, observer::ready);
     f = new Fixture();
     observer = f.create();
@@ -733,7 +778,8 @@ final class MorningCaddyReadinessTest {
 
   @Test
   void caddy455005IndependentProcAddressAndListenerVectors() {
-    assertEquals("0100007F", MorningCaddyReadiness.kernelAddress(new byte[] {127, 0, 0, 1}));
+    assertEquals(
+        FIXTURE_0100007F_DCCA36B1, MorningCaddyReadiness.kernelAddress(new byte[] {127, 0, 0, 1}));
     assertEquals(
         "0000000000000000FFFF00000100007F",
         MorningCaddyReadiness.kernelAddress(
@@ -742,17 +788,22 @@ final class MorningCaddyReadinessTest {
         IllegalArgumentException.class, () -> MorningCaddyReadiness.kernelAddress(new byte[5]));
     String row = "0: 0100007F:D778 00000000:0000 0A 0 0 0 0 0 12345\n";
     assertEquals(
-        Set.of("12345"), MorningCaddyReadiness.listeners(row, Set.of("12345"), "0100007F", false));
+        Set.of(FIXTURE_12345_AFC21EDA),
+        MorningCaddyReadiness.listeners(
+            row, Set.of(FIXTURE_12345_AFC21EDA), FIXTURE_0100007F_DCCA36B1, false));
     for (String bad :
         List.of(
             row.replace("0A", "01"),
-            row.replace("12345", "0"),
+            row.replace(FIXTURE_12345_AFC21EDA, "0"),
             row.replace("D778", "D777"),
-            row.replace("0100007F", "00000000"),
+            row.replace(FIXTURE_0100007F_DCCA36B1, "00000000"),
             ""))
       assertEquals(
-          Set.of(), MorningCaddyReadiness.listeners(bad, Set.of("12345"), "0100007F", false));
+          Set.of(),
+          MorningCaddyReadiness.listeners(
+              bad, Set.of(FIXTURE_12345_AFC21EDA), FIXTURE_0100007F_DCCA36B1, false));
     assertEquals(
-        Set.of(), MorningCaddyReadiness.listeners(row, Set.of("99999"), "0100007F", false));
+        Set.of(),
+        MorningCaddyReadiness.listeners(row, Set.of("99999"), FIXTURE_0100007F_DCCA36B1, false));
   }
 }

@@ -25,6 +25,7 @@ import org.junit.jupiter.api.Test;
 
 /** Independent SS342 section 6 inventory; RD SYS/DAT/PER, UI212/253; PG187/BUG208. */
 final class PostgresDeploymentTest {
+  private static final String FIXTURE_DATA_PG_HBA_CONF_73424ED1 = "data/pg_hba.conf";
   private static final Path REPOSITORY = Path.of(System.getProperty("nk.pt.repository"));
   private static final Path TEMPLATES = REPOSITORY.resolve("src/deployment/postgresql");
   private static final String EXPECTED =
@@ -76,7 +77,7 @@ final class PostgresDeploymentTest {
             ? Path.of("/home/mini/codex/project1/work/characterization-tools/root/usr")
             : Path.of(configured);
     database = new ApiLogDatabaseFixture(root);
-    originalHba = Files.readString(root.resolve("data/pg_hba.conf"));
+    originalHba = Files.readString(root.resolve(FIXTURE_DATA_PG_HBA_CONF_73424ED1));
   }
 
   @AfterAll
@@ -141,7 +142,7 @@ final class PostgresDeploymentTest {
       }
     }
     assertEquals(expected, inspectHba(hba(), false));
-    assertEquals(originalHba, Files.readString(root.resolve("data/pg_hba.conf")));
+    assertEquals(originalHba, Files.readString(root.resolve(FIXTURE_DATA_PG_HBA_CONF_73424ED1)));
   }
 
   @Test
@@ -215,14 +216,14 @@ final class PostgresDeploymentTest {
             hba().replace("127.0.0.1/32", "0.0.0.0/0"),
             hba().replace("host all all ::/0 reject", "")))
       assertNotEquals(expectedHba(), lines(changed));
-    assertEquals(originalHba, Files.readString(root.resolve("data/pg_hba.conf")));
+    assertEquals(originalHba, Files.readString(root.resolve(FIXTURE_DATA_PG_HBA_CONF_73424ED1)));
   }
 
   @Test
   @DisplayName("PT-OPS-PGCFG-008 isolated fixture and public evidence")
   void isolationAndEvidence() throws Exception {
     assertTrue(root.startsWith(Path.of("target").toAbsolutePath()));
-    assertEquals(originalHba, Files.readString(root.resolve("data/pg_hba.conf")));
+    assertEquals(originalHba, Files.readString(root.resolve(FIXTURE_DATA_PG_HBA_CONF_73424ED1)));
     try (Connection connection = database.admin()) {
       assertTrue(connection.getMetaData().getURL().startsWith("jdbc:postgresql://127.0.0.1:"));
     }
@@ -272,7 +273,7 @@ final class PostgresDeploymentTest {
   }
 
   private static List<String> inspectHba(String text, boolean errors) throws Exception {
-    Path file = root.resolve("data/pg_hba.conf");
+    Path file = root.resolve(FIXTURE_DATA_PG_HBA_CONF_73424ED1);
     try (Connection connection = database.admin()) {
       try {
         Files.writeString(file, text);

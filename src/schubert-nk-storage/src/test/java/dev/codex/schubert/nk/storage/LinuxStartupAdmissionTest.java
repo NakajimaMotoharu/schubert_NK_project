@@ -27,6 +27,14 @@ import org.junit.jupiter.api.Test;
 
 /** PT-OPS-CHILDFD-001..008; independent root metadata/syscall vectors, native positive in VM015. */
 final class LinuxStartupAdmissionTest {
+  private static final String FIXTURE_UID_0C18F38C = "uid";
+  private static final String FIXTURE_NLINK_3DDD828B = "nlink";
+  private static final String FIXTURE_SIZE_EB1E91E4 = "size";
+  private static final String FIXTURE_DEV_8A17302D = "dev";
+  private static final String FIXTURE_INO_4BE7C1E0 = "ino";
+  private static final String FIXTURE_PRIVATE_D45CA6F9 = "PRIVATE";
+  private static final String FIXTURE_AMD64_58D0BD71 = "amd64";
+  private static final String FIXTURE_LINUX_1CA133AF = "Linux";
   static final int A = 128;
   static final int P = 129;
 
@@ -35,17 +43,17 @@ final class LinuxStartupAdmissionTest {
         Map.of(
             "mode",
             0100600,
-            "uid",
+            FIXTURE_UID_0C18F38C,
             0,
             "gid",
             0,
-            "nlink",
+            FIXTURE_NLINK_3DDD828B,
             proof ? 0 : 1,
-            "size",
+            FIXTURE_SIZE_EB1E91E4,
             proof ? 3L : 0L,
-            "dev",
+            FIXTURE_DEV_8A17302D,
             2L,
-            "ino",
+            FIXTURE_INO_4BE7C1E0,
             proof ? 3L : 4L));
   }
 
@@ -86,13 +94,13 @@ final class LinuxStartupAdmissionTest {
     }
 
     public Map<String, Object> attributes(int fd) throws IOException {
-      if (attrsIo) throw new IOException("PRIVATE");
+      if (attrsIo) throw new IOException(FIXTURE_PRIVATE_D45CA6F9);
       return attrs.get(fd);
     }
 
     public byte[] proof(int fd) throws IOException {
       assertEquals(P, fd);
-      if (readIo) throw new IOException("PRIVATE");
+      if (readIo) throw new IOException(FIXTURE_PRIVATE_D45CA6F9);
       return payload;
     }
 
@@ -289,7 +297,15 @@ final class LinuxStartupAdmissionTest {
   @Test
   void childfd004EveryTypedAttributeRootModeLinkSizeAndUnsignedIdentity() {
     for (int fd : List.of(A, P))
-      for (String key : List.of("mode", "uid", "gid", "nlink", "size", "dev", "ino")) {
+      for (String key :
+          List.of(
+              "mode",
+              FIXTURE_UID_0C18F38C,
+              "gid",
+              FIXTURE_NLINK_3DDD828B,
+              FIXTURE_SIZE_EB1E91E4,
+              FIXTURE_DEV_8A17302D,
+              FIXTURE_INO_4BE7C1E0)) {
         var f = new Fixture();
         f.attrs.get(fd).remove(key);
         reject(f);
@@ -301,10 +317,10 @@ final class LinuxStartupAdmissionTest {
       for (var bad :
           List.of(
               Map.entry("mode", (Object) 0100640),
-              Map.entry("uid", (Object) 1),
+              Map.entry(FIXTURE_UID_0C18F38C, (Object) 1),
               Map.entry("gid", (Object) 1),
-              Map.entry("dev", (Object) 0L),
-              Map.entry("ino", (Object) 0L))) {
+              Map.entry(FIXTURE_DEV_8A17302D, (Object) 0L),
+              Map.entry(FIXTURE_INO_4BE7C1E0, (Object) 0L))) {
         var f = new Fixture();
         f.attrs.get(fd).put(bad.getKey(), bad.getValue());
         reject(f);
@@ -316,35 +332,35 @@ final class LinuxStartupAdmissionTest {
     }
     for (int links : List.of(-1, 0, 2)) {
       var f = new Fixture();
-      f.attrs.get(A).put("nlink", links);
+      f.attrs.get(A).put(FIXTURE_NLINK_3DDD828B, links);
       reject(f);
     }
     for (long size : List.of(-1L, 1L, 8192L)) {
       var f = new Fixture();
-      f.attrs.get(A).put("size", size);
+      f.attrs.get(A).put(FIXTURE_SIZE_EB1E91E4, size);
       reject(f);
     }
     for (int links : List.of(-1, 1, 2)) {
       var f = new Fixture();
-      f.attrs.get(P).put("nlink", links);
+      f.attrs.get(P).put(FIXTURE_NLINK_3DDD828B, links);
       reject(f);
     }
     for (long size : List.of(-1L, 0L, 8193L)) {
       var f = new Fixture();
-      f.attrs.get(P).put("size", size);
+      f.attrs.get(P).put(FIXTURE_SIZE_EB1E91E4, size);
       reject(f);
     }
     for (int size : List.of(1, 8192)) {
       var f = new Fixture();
-      f.attrs.get(P).put("size", (long) size);
+      f.attrs.get(P).put(FIXTURE_SIZE_EB1E91E4, (long) size);
       f.payload = new byte[size];
       assertEquals(
           (Object) size,
           assertDoesNotThrow(() -> f.subject().withAdmitted(A, P, (a, p) -> p.length)));
     }
     var f = new Fixture();
-    f.attrs.get(A).put("dev", -1L);
-    f.attrs.get(A).put("ino", -2L);
+    f.attrs.get(A).put(FIXTURE_DEV_8A17302D, -1L);
+    f.attrs.get(A).put(FIXTURE_INO_4BE7C1E0, -2L);
     assertEquals(
         new LinuxStartupAdmission.Identity(A, -1, -2),
         assertDoesNotThrow(() -> f.subject().withAdmitted(A, P, (a, p) -> a.identity())));
@@ -381,7 +397,9 @@ final class LinuxStartupAdmissionTest {
   void childfd006UnknownAndCompoundFailurePriorityAndOneClose() {
     for (int fd : List.of(A, P))
       for (Throwable unknown :
-          List.of(new AssertionError("PRIVATE"), new IllegalStateException("PRIVATE"))) {
+          List.of(
+              new AssertionError(FIXTURE_PRIVATE_D45CA6F9),
+              new IllegalStateException(FIXTURE_PRIVATE_D45CA6F9))) {
         var f = new Fixture();
         f.failClose = fd;
         f.unknown = unknown;
@@ -411,7 +429,7 @@ final class LinuxStartupAdmissionTest {
     }
     var f = new Fixture();
     f.failClose = A;
-    var fatal = new AssertionError("PRIVATE");
+    var fatal = new AssertionError(FIXTURE_PRIVATE_D45CA6F9);
     f.unknown = fatal;
     assertSame(
         fatal,
@@ -423,7 +441,7 @@ final class LinuxStartupAdmissionTest {
                         A,
                         P,
                         (a, p) -> {
-                          throw new IOException("PRIVATE");
+                          throw new IOException(FIXTURE_PRIVATE_D45CA6F9);
                         })));
     assertEquals(List.of(P, A), f.closed);
     var ordinary = new Fixture();
@@ -483,25 +501,32 @@ final class LinuxStartupAdmissionTest {
     var symbols = Linker.nativeLinker().defaultLookup();
     for (String os : List.of("Windows", "linux"))
       assertThrows(
-          IllegalStateException.class, () -> LinuxStartupAdmission.create(os, "amd64", symbols));
-    assertThrows(
-        IllegalStateException.class, () -> LinuxStartupAdmission.create("Linux", "x86", symbols));
+          IllegalStateException.class,
+          () -> LinuxStartupAdmission.create(os, FIXTURE_AMD64_58D0BD71, symbols));
     assertThrows(
         IllegalStateException.class,
-        () -> LinuxStartupAdmission.create("Linux", "amd64", name -> Optional.empty()));
+        () -> LinuxStartupAdmission.create(FIXTURE_LINUX_1CA133AF, "x86", symbols));
     assertThrows(
         IllegalStateException.class,
         () ->
             LinuxStartupAdmission.create(
-                "Linux",
-                "amd64",
+                FIXTURE_LINUX_1CA133AF, FIXTURE_AMD64_58D0BD71, name -> Optional.empty()));
+    assertThrows(
+        IllegalStateException.class,
+        () ->
+            LinuxStartupAdmission.create(
+                FIXTURE_LINUX_1CA133AF,
+                FIXTURE_AMD64_58D0BD71,
                 name -> name.equals("close") ? Optional.empty() : symbols.find(name)));
     assertThrows(
-        NullPointerException.class, () -> LinuxStartupAdmission.create(null, "amd64", symbols));
+        NullPointerException.class,
+        () -> LinuxStartupAdmission.create(null, FIXTURE_AMD64_58D0BD71, symbols));
     assertThrows(
-        NullPointerException.class, () -> LinuxStartupAdmission.create("Linux", null, symbols));
+        NullPointerException.class,
+        () -> LinuxStartupAdmission.create(FIXTURE_LINUX_1CA133AF, null, symbols));
     assertThrows(
-        NullPointerException.class, () -> LinuxStartupAdmission.create("Linux", "amd64", null));
+        NullPointerException.class,
+        () -> LinuxStartupAdmission.create(FIXTURE_LINUX_1CA133AF, FIXTURE_AMD64_58D0BD71, null));
     var reader = LinuxSealedProof.create();
     var nativeIo = new LinuxStartupAdmission.NativeIo((fd, cmd, arg) -> 3, fd -> 4, reader);
     assertEquals(3, nativeIo.fcntl(128, 1, 0));
@@ -519,7 +544,7 @@ final class LinuxStartupAdmissionTest {
         "PUBLIC".getBytes(StandardCharsets.US_ASCII),
         fd -> {
           assertArrayEquals("PUBLIC".getBytes(StandardCharsets.US_ASCII), nativeIo.proof(fd));
-          assertNotEquals(0, nativeIo.attributes(fd).get("uid"));
+          assertNotEquals(0, nativeIo.attributes(fd).get(FIXTURE_UID_0C18F38C));
           return 1;
         });
     assertThrows(IOException.class, () -> nativeIo.attributes(65535));

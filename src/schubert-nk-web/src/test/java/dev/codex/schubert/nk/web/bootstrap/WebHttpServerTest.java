@@ -33,6 +33,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 /** PG220/PT-SCR109..111; actual loopback Tomcat/MVC, not API/JMS or NK CHR. */
 class WebHttpServerTest {
+  private static final String FIXTURE_SYNTHETIC_ACQUISITION_5736B45C = "synthetic acquisition";
+  private static final String FIXTURE_LOGIN_F843C044 = "/login";
+  private static final String FIXTURE_GET_04F32A7E = "GET";
   @TempDir Path root;
 
   /** SS313/342/SSC312/PG-D461/PT-HTTP-OWN003; no container/owner notification on failed get. */
@@ -41,10 +44,10 @@ class WebHttpServerTest {
     Filter security = (request, response, chain) -> chain.doFilter(request, response);
     for (Throwable primary :
         java.util.List.of(
-            new IllegalArgumentException("synthetic acquisition"),
-            new IllegalStateException("synthetic acquisition"),
-            new NullPointerException("synthetic acquisition"),
-            new AssertionError("synthetic acquisition"))) {
+            new IllegalArgumentException(FIXTURE_SYNTHETIC_ACQUISITION_5736B45C),
+            new IllegalStateException(FIXTURE_SYNTHETIC_ACQUISITION_5736B45C),
+            new NullPointerException(FIXTURE_SYNTHETIC_ACQUISITION_5736B45C),
+            new AssertionError(FIXTURE_SYNTHETIC_ACQUISITION_5736B45C))) {
       var calls = new AtomicInteger();
       var notifications = new AtomicInteger();
       assertSame(
@@ -158,8 +161,10 @@ class WebHttpServerTest {
     var server = WebHttpServer.startOwned(root, 0, security, Map.of(), captured::set);
     try (var client = HttpClient.newHttpClient()) {
       assertSame(server, captured.get());
-      assertTrue(server.mappedPaths().contains("/login"));
-      assertEquals(200, send(client, server.port(), "GET", "/login").statusCode());
+      assertTrue(server.mappedPaths().contains(FIXTURE_LOGIN_F843C044));
+      assertEquals(
+          200,
+          send(client, server.port(), FIXTURE_GET_04F32A7E, FIXTURE_LOGIN_F843C044).statusCode());
     } finally {
       server.close();
     }
@@ -245,14 +250,15 @@ class WebHttpServerTest {
         };
     try (var server = WebHttpServer.start(root, 0, security);
         var client = HttpClient.newBuilder().connectTimeout(Duration.ofSeconds(2)).build()) {
-      var login = send(client, server.port(), "GET", "/login");
+      var login = send(client, server.port(), FIXTURE_GET_04F32A7E, FIXTURE_LOGIN_F843C044);
       assertEquals(200, login.statusCode());
       var document = Jsoup.parse(login.body());
       assertEquals("schubert NK - ログイン", document.title());
       assertEquals("schubert NK", document.selectFirst("h1").text());
       assertEquals("fixture", document.selectFirst("input[name=_csrf]").val());
-      assertEquals(404, send(client, server.port(), "GET", "/no-such-route").statusCode());
-      assertEquals(200, send(client, server.port(), "HEAD", "/login").statusCode());
+      assertEquals(
+          404, send(client, server.port(), FIXTURE_GET_04F32A7E, "/no-such-route").statusCode());
+      assertEquals(200, send(client, server.port(), "HEAD", FIXTURE_LOGIN_F843C044).statusCode());
       assertEquals(3, admissions.get());
     }
   }
@@ -357,11 +363,13 @@ class WebHttpServerTest {
     int port = server.port();
     assertTrue(port > 0);
     try (var client = HttpClient.newBuilder().connectTimeout(Duration.ofSeconds(2)).build()) {
-      assertEquals(200, send(client, port, "GET", "/login").statusCode());
+      assertEquals(
+          200, send(client, port, FIXTURE_GET_04F32A7E, FIXTURE_LOGIN_F843C044).statusCode());
       server.close();
       server.close();
       assertThrows(IllegalStateException.class, server::port);
-      assertThrows(Exception.class, () -> send(client, port, "GET", "/login"));
+      assertThrows(
+          Exception.class, () -> send(client, port, FIXTURE_GET_04F32A7E, FIXTURE_LOGIN_F843C044));
     } finally {
       server.close();
     }
@@ -379,7 +387,7 @@ class WebHttpServerTest {
                 Map.of(InjectedPort.class, supplied),
                 InjectedConfiguration.class);
         var client = HttpClient.newBuilder().connectTimeout(Duration.ofSeconds(2)).build()) {
-      var response = send(client, server.port(), "GET", "/pt-port");
+      var response = send(client, server.port(), FIXTURE_GET_04F32A7E, "/pt-port");
       assertEquals(200, response.statusCode());
       assertEquals("PG227-PORT", response.body());
     }
@@ -420,7 +428,9 @@ class WebHttpServerTest {
     Filter security = (request, response, chain) -> chain.doFilter(request, response);
     try (var server = WebHttpServer.startWithFactory(root, 0, security, Tomcat::new);
         var client = HttpClient.newBuilder().connectTimeout(Duration.ofSeconds(2)).build()) {
-      assertEquals(200, send(client, server.port(), "GET", "/login").statusCode());
+      assertEquals(
+          200,
+          send(client, server.port(), FIXTURE_GET_04F32A7E, FIXTURE_LOGIN_F843C044).statusCode());
     }
   }
 

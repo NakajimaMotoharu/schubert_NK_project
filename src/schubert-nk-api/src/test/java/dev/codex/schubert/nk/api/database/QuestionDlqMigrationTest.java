@@ -23,6 +23,8 @@ import org.junit.jupiter.api.io.TempDir;
 /** PT-QST-DLQ-DB; SS331/SSC155. Independent SQL values, real V024->V025, no deployed data. */
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 final class QuestionDlqMigrationTest {
+  private static final String FIXTURE_NK_DEAD_LETTER_6588D12C = "nk.dead.letter";
+  private static final String FIXTURE_23514_8632CD65 = "23514";
   @TempDir static Path root;
   private static ApiLogDatabaseFixture database;
   private static String url;
@@ -39,7 +41,7 @@ final class QuestionDlqMigrationTest {
     try (var c = database.admin()) {
       url = c.getMetaData().getURL();
       sql(c, legacy(1, "nk.async.work", W));
-      sql(c, legacy(2, "nk.dead.letter", D));
+      sql(c, legacy(2, FIXTURE_NK_DEAD_LETTER_6588D12C, D));
       history =
           value(
               c,
@@ -135,33 +137,33 @@ final class QuestionDlqMigrationTest {
         List<String> bad = new ArrayList<>(valid);
         for (int field = 0; field < 5; field++)
           if ((mask & (1 << field)) != 0) bad.set(field, "null");
-        rejectInsert(c, bad, "nk.dead.letter", "23514");
+        rejectInsert(c, bad, FIXTURE_NK_DEAD_LETTER_6588D12C, FIXTURE_23514_8632CD65);
       }
-      rejectInsert(c, values(D), "nk.dead.letter", "23514");
-      rejectInsert(c, valid, "nk.async.work", "23514");
+      rejectInsert(c, values(D), FIXTURE_NK_DEAD_LETTER_6588D12C, FIXTURE_23514_8632CD65);
+      rejectInsert(c, valid, "nk.async.work", FIXTURE_23514_8632CD65);
       for (String invalid : List.of("''", "' '", "E'\\n'", "chr(127)", "'日'")) {
         var bad = new ArrayList<>(valid);
         bad.set(1, invalid);
-        rejectInsert(c, bad, "nk.dead.letter", "23514");
+        rejectInsert(c, bad, FIXTURE_NK_DEAD_LETTER_6588D12C, FIXTURE_23514_8632CD65);
       }
       var tooLong = new ArrayList<>(valid);
       tooLong.set(1, "repeat('x',129)");
-      rejectInsert(c, tooLong, "nk.dead.letter", "22001");
+      rejectInsert(c, tooLong, FIXTURE_NK_DEAD_LETTER_6588D12C, "22001");
       for (String invalid : List.of("0", "-1")) {
         var bad = new ArrayList<>(valid);
         bad.set(2, invalid);
-        rejectInsert(c, bad, "nk.dead.letter", "23514");
+        rejectInsert(c, bad, FIXTURE_NK_DEAD_LETTER_6588D12C, FIXTURE_23514_8632CD65);
       }
       for (String invalid : List.of("'UNKNOWN'", "''", "'question_retry_exhausted'")) {
         var bad = new ArrayList<>(valid);
         bad.set(3, invalid);
-        rejectInsert(c, bad, "nk.dead.letter", "23514");
+        rejectInsert(c, bad, FIXTURE_NK_DEAD_LETTER_6588D12C, FIXTURE_23514_8632CD65);
       }
       for (String invalid :
           List.of("'infinity'", "'-infinity'", "'0001-01-01 BC'", "'10000-01-01+00'")) {
         var bad = new ArrayList<>(valid);
         bad.set(4, invalid);
-        rejectInsert(c, bad, "nk.dead.letter", "23514");
+        rejectInsert(c, bad, FIXTURE_NK_DEAD_LETTER_6588D12C, FIXTURE_23514_8632CD65);
       }
       for (String time : List.of("0001-01-01 00:00:00+00", "9999-12-31 23:59:59.999999+00")) {
         var point = c.setSavepoint();
@@ -169,7 +171,7 @@ final class QuestionDlqMigrationTest {
         bounded.set(1, "repeat('x',128)");
         bounded.set(2, "2147483647");
         bounded.set(4, "'" + time + "'");
-        sql(c, insert(bounded, "nk.dead.letter"));
+        sql(c, insert(bounded, FIXTURE_NK_DEAD_LETTER_6588D12C));
         assertEquals(
             "2147483647|128",
             value(
@@ -177,7 +179,7 @@ final class QuestionDlqMigrationTest {
                 "select dlq_delivery_count||'|'||length(dlq_original_transport_id) from schubert.mq_outbox where id=10"));
         c.rollback(point);
       }
-      sql(c, insert(values(W), "nk.dead.letter"));
+      sql(c, insert(values(W), FIXTURE_NK_DEAD_LETTER_6588D12C));
       var point = c.setSavepoint();
       assertEquals(
           "23505",
@@ -186,7 +188,7 @@ final class QuestionDlqMigrationTest {
                   () ->
                       sql(
                           c,
-                          insert(values(W), "nk.dead.letter")
+                          insert(values(W), FIXTURE_NK_DEAD_LETTER_6588D12C)
                               .replace("values(10,", "values(11,")
                               .replace("'" + D + "'", "'84000000-0000-4000-8000-000000000005'")))
               .getSQLState());
@@ -201,7 +203,7 @@ final class QuestionDlqMigrationTest {
   void originalMetadataAndWireCannotBeRewrittenButDispatchStatusCan() throws Exception {
     try (var c = database.api()) {
       c.setAutoCommit(false);
-      sql(c, insert(values(W), "nk.dead.letter"));
+      sql(c, insert(values(W), FIXTURE_NK_DEAD_LETTER_6588D12C));
       for (String assignment :
           List.of(
               "dlq_original_message_id='" + W2 + "'",
@@ -221,7 +223,7 @@ final class QuestionDlqMigrationTest {
             assertThrows(
                 SQLException.class,
                 () -> sql(c, "update schubert.mq_outbox set " + assignment + " where id=10"));
-        assertEquals("23514", failure.getSQLState());
+        assertEquals(FIXTURE_23514_8632CD65, failure.getSQLState());
         assertTrue(failure.getMessage().contains("IMMUTABLE_DLQ_IDENTITY"));
         c.rollback(point);
       }
@@ -258,7 +260,7 @@ final class QuestionDlqMigrationTest {
   void layoutVersionBodyAndOrdinaryReclassificationAreNotRepairShortcuts() throws Exception {
     try (var c = database.api()) {
       c.setAutoCommit(false);
-      String good = insert(values(W2), "nk.dead.letter");
+      String good = insert(values(W2), FIXTURE_NK_DEAD_LETTER_6588D12C);
       for (String bad :
           List.of(
               good.replace("'QWKREQ01'", "'LOGREQ01'"),
@@ -266,7 +268,9 @@ final class QuestionDlqMigrationTest {
               good.replace("repeat('57',320)", "repeat('57',319)"),
               good.replace("repeat('57',320)", "repeat('57',321)"))) {
         var point = c.setSavepoint();
-        assertEquals("23514", assertThrows(SQLException.class, () -> sql(c, bad)).getSQLState());
+        assertEquals(
+            FIXTURE_23514_8632CD65,
+            assertThrows(SQLException.class, () -> sql(c, bad)).getSQLState());
         c.rollback(point);
       }
       var point = c.setSavepoint();
@@ -282,7 +286,7 @@ final class QuestionDlqMigrationTest {
                           + "dlq_error_code='QUESTION_RETRY_EXHAUSTED',dlq_detected_at='"
                           + TIME
                           + "' where id=1"));
-      assertEquals("23514", failure.getSQLState());
+      assertEquals(FIXTURE_23514_8632CD65, failure.getSQLState());
       assertTrue(failure.getMessage().contains("IMMUTABLE_DLQ_IDENTITY"));
       c.rollback(point);
       assertEquals(

@@ -31,6 +31,9 @@ import org.junit.jupiter.api.io.TempDirFactory;
 
 /** Held-root real filesystem and independent provider rejection matrix. PT-SCN-008-A06. */
 class TransferRootInspectionTest {
+  private static final String FIXTURE_RWXR_X_E5EF2357 = "rwxr-x---";
+  private static final String FIXTURE_UNIX_MODE_18F40B0C = "unix:mode";
+
   @TempDir(factory = Ext4Fixture.class)
   Path fixture;
 
@@ -46,7 +49,7 @@ class TransferRootInspectionTest {
   @Test
   void a06HeldRootRemainsOriginalWhenConfiguredPathIsReplacedBySymlink() throws Exception {
     Path root = Files.createDirectory(fixture.resolve("root"));
-    Files.setPosixFilePermissions(root, PosixFilePermissions.fromString("rwxr-x---"));
+    Files.setPosixFilePermissions(root, PosixFilePermissions.fromString(FIXTURE_RWXR_X_E5EF2357));
     Path outside = Files.createDirectory(fixture.resolve("outside"));
     Files.setPosixFilePermissions(outside, PosixFilePermissions.fromString("rwx------"));
     StorageIdentity identity = identity(root);
@@ -55,7 +58,8 @@ class TransferRootInspectionTest {
       Files.move(root, fixture.resolve("retained"));
       Files.createSymbolicLink(root, outside);
       TransferRootInspection.inspect(directory, identity);
-      Object heldMode = directory.atDirectory(handle -> Files.getAttribute(handle, "unix:mode"));
+      Object heldMode =
+          directory.atDirectory(handle -> Files.getAttribute(handle, FIXTURE_UNIX_MODE_18F40B0C));
       assertEquals(040750, heldMode);
       assertThrows(NullPointerException.class, () -> directory.atDirectory(null));
       reject(
@@ -65,7 +69,7 @@ class TransferRootInspectionTest {
                     throw new IOException("SYNTHETIC_PRIVATE_PATH");
                   }));
       assertTrue(Files.isSymbolicLink(root));
-      assertEquals(040700, Files.getAttribute(outside, "unix:mode"));
+      assertEquals(040700, Files.getAttribute(outside, FIXTURE_UNIX_MODE_18F40B0C));
       try (var entries = Files.list(outside)) {
         assertEquals(0, entries.count());
       }
@@ -74,7 +78,8 @@ class TransferRootInspectionTest {
 
   @Test
   void a06NullClosedWrongOwnerGroupAndPermissionNeverModifyRoot() throws Exception {
-    Files.setPosixFilePermissions(fixture, PosixFilePermissions.fromString("rwxr-x---"));
+    Files.setPosixFilePermissions(
+        fixture, PosixFilePermissions.fromString(FIXTURE_RWXR_X_E5EF2357));
     StorageIdentity identity = identity(fixture);
     var directory = OwnedTransferDirectory.open(LinuxDirectoryCalls.create(), fixture);
     try (directory) {
@@ -95,11 +100,12 @@ class TransferRootInspectionTest {
         reject(() -> TransferRootInspection.inspect(directory, identity));
         assertEquals(PosixFilePermissions.fromString(mode), Files.getPosixFilePermissions(fixture));
       }
-      Files.setPosixFilePermissions(fixture, PosixFilePermissions.fromString("rwxr-x---"));
+      Files.setPosixFilePermissions(
+          fixture, PosixFilePermissions.fromString(FIXTURE_RWXR_X_E5EF2357));
       TransferRootInspection.inspect(directory, identity);
     }
     reject(() -> TransferRootInspection.inspect(directory, identity));
-    assertEquals(040750, Files.getAttribute(fixture, "unix:mode"));
+    assertEquals(040750, Files.getAttribute(fixture, FIXTURE_UNIX_MODE_18F40B0C));
   }
 
   @Test
@@ -142,7 +148,8 @@ class TransferRootInspectionTest {
 
   @Test
   void a06Mount001CurrentHeldMountFlagsAreMandatoryAndReadOnlyIsRejected() throws Exception {
-    Files.setPosixFilePermissions(fixture, PosixFilePermissions.fromString("rwxr-x---"));
+    Files.setPosixFilePermissions(
+        fixture, PosixFilePermissions.fromString(FIXTURE_RWXR_X_E5EF2357));
     var identity = identity(fixture);
     var calls = new AtomicInteger();
     try (var root = OwnedTransferDirectory.open(LinuxDirectoryCalls.create(), fixture)) {
@@ -150,7 +157,7 @@ class TransferRootInspectionTest {
       assertEquals(1, calls.get());
       TransferRootInspection.inspect(root, identity, mount(false, false, calls));
       assertEquals(2, calls.get());
-      assertEquals(040750, Files.getAttribute(fixture, "unix:mode"));
+      assertEquals(040750, Files.getAttribute(fixture, FIXTURE_UNIX_MODE_18F40B0C));
       try (var entries = Files.list(fixture)) {
         assertEquals(0, entries.count());
       }
@@ -159,7 +166,8 @@ class TransferRootInspectionTest {
 
   @Test
   void a06Mount002UnknownMountAndNullNeverFallBackToWritablePath() throws Exception {
-    Files.setPosixFilePermissions(fixture, PosixFilePermissions.fromString("rwxr-x---"));
+    Files.setPosixFilePermissions(
+        fixture, PosixFilePermissions.fromString(FIXTURE_RWXR_X_E5EF2357));
     var identity = identity(fixture);
     var calls = new AtomicInteger();
     try (var root = OwnedTransferDirectory.open(LinuxDirectoryCalls.create(), fixture)) {
@@ -168,7 +176,7 @@ class TransferRootInspectionTest {
       assertThrows(
           NullPointerException.class, () -> TransferRootInspection.inspect(root, identity, null));
       assertEquals(1, calls.get());
-      assertEquals(040750, Files.getAttribute(fixture, "unix:mode"));
+      assertEquals(040750, Files.getAttribute(fixture, FIXTURE_UNIX_MODE_18F40B0C));
       try (var entries = Files.list(fixture)) {
         assertEquals(0, entries.count());
       }

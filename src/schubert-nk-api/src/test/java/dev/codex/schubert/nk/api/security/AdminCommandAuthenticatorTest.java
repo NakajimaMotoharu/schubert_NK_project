@@ -35,6 +35,11 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** SSC-031; independent real PG lock/state postconditions, PT-ADM-008..013/074. */
 class AdminCommandAuthenticatorTest {
+  private static final String FIXTURE_ORDER_BY_ID_FOR_UPDATE_C773C7BB = "order by id for update";
+  private static final String FIXTURE_PG_ADVISORY_XACT_LOCK_C93E2E63 = "pg_advisory_xact_lock";
+  private static final String FIXTURE_2026_09_08T00_00_00Z_0AD85BE3 = "2026-09-08T00:00:00Z";
+  private static final String FIXTURE_2026_09_08T08_00_00Z_508CC681 = "2026-09-08T08:00:00Z";
+  private static final String FIXTURE_SELECT_USER_ID_FROM_416FE1DC = "select user_id from";
   @TempDir static Path root;
   static ApiLogDatabaseFixture database;
   static AdminCommandAuthenticator authentication;
@@ -75,7 +80,8 @@ class AdminCommandAuthenticatorTest {
         int users = reducing ? 2 : 1;
         if (reducing)
           assertEquals("select pg_advisory_xact_lock(71419601)", tracking.statements.get(1));
-        assertTrue(tracking.statements.get(users).contains("order by id for update"));
+        assertTrue(
+            tracking.statements.get(users).contains(FIXTURE_ORDER_BY_ID_FOR_UPDATE_C773C7BB));
         assertEquals(
             "select user_id from schubert.auth_sessions where context_hash=? for update",
             tracking.statements.get(users + 1));
@@ -166,8 +172,9 @@ class AdminCommandAuthenticatorTest {
                     var tracking = new AdminAuthFixture();
                     tracking.before =
                         sql -> {
-                          if (sql.contains("pg_advisory_xact_lock")
-                              || sql.contains("order by id for update")) attempting.countDown();
+                          if (sql.contains(FIXTURE_PG_ADVISORY_XACT_LOCK_C93E2E63)
+                              || sql.contains(FIXTURE_ORDER_BY_ID_FOR_UPDATE_C773C7BB))
+                            attempting.countDown();
                         };
                     var actor =
                         authentication.verify(
@@ -197,7 +204,8 @@ class AdminCommandAuthenticatorTest {
                   var tracking = new AdminAuthFixture();
                   tracking.before =
                       sql -> {
-                        if (sql.contains("order by id for update")) attempting.countDown();
+                        if (sql.contains(FIXTURE_ORDER_BY_ID_FOR_UPDATE_C773C7BB))
+                          attempting.countDown();
                       };
                   assertEquals(
                       ResultCode.FORBIDDEN,
@@ -226,7 +234,10 @@ class AdminCommandAuthenticatorTest {
     }
     try (var c = database.api()) {
       assertTimes(
-          c, 2, Instant.parse("2026-09-08T00:00:00Z"), Instant.parse("2026-09-08T08:00:00Z"));
+          c,
+          2,
+          Instant.parse(FIXTURE_2026_09_08T00_00_00Z_0AD85BE3),
+          Instant.parse(FIXTURE_2026_09_08T08_00_00Z_508CC681));
     }
   }
 
@@ -250,7 +261,7 @@ class AdminCommandAuthenticatorTest {
         var tracking = new AdminAuthFixture();
         tracking.before =
             text -> {
-              if (!text.contains("order by id for update")) return;
+              if (!text.contains(FIXTURE_ORDER_BY_ID_FOR_UPDATE_C773C7BB)) return;
               tracking.before = ignored -> {};
               switch (change) {
                 case "revoke" ->
@@ -301,9 +312,9 @@ class AdminCommandAuthenticatorTest {
   void adm012JdbcClockAndResourceFailuresRollbackWithoutLeaks() throws Exception {
     for (String stage :
         List.of(
-            "select user_id from",
-            "pg_advisory_xact_lock",
-            "order by id for update",
+            FIXTURE_SELECT_USER_ID_FROM_416FE1DC,
+            FIXTURE_PG_ADVISORY_XACT_LOCK_C93E2E63,
+            FIXTURE_ORDER_BY_ID_FOR_UPDATE_C773C7BB,
             "where context_hash=? for update",
             "for update of u",
             "for update of s",
@@ -312,10 +323,12 @@ class AdminCommandAuthenticatorTest {
       if (stage.startsWith("update"))
         points.addAll(List.of("executeUpdate", "zeroUpdate", "setObject", "setObject#2"));
       else points.addAll(List.of("executeQuery", "next", "resultClose"));
-      if (stage.equals("select user_id from") || stage.equals("order by id for update"))
+      if (stage.equals(FIXTURE_SELECT_USER_ID_FROM_416FE1DC)
+          || stage.equals(FIXTURE_ORDER_BY_ID_FOR_UPDATE_C773C7BB))
         points.addAll(List.of("getLong", "wasNull"));
-      if (stage.equals("select user_id from")) points.add("setString");
-      if (stage.equals("order by id for update")) points.addAll(List.of("setLong", "setBoolean"));
+      if (stage.equals(FIXTURE_SELECT_USER_ID_FROM_416FE1DC)) points.add("setString");
+      if (stage.equals(FIXTURE_ORDER_BY_ID_FOR_UPDATE_C773C7BB))
+        points.addAll(List.of("setLong", "setBoolean"));
       for (String point : points) {
         try (var c = database.transaction()) {
           var fault = new AdminAuthFixture();
@@ -342,7 +355,9 @@ class AdminCommandAuthenticatorTest {
       }
     for (String stage :
         List.of(
-            "select user_id from", "where context_hash=? for update", "order by id for update")) {
+            FIXTURE_SELECT_USER_ID_FROM_416FE1DC,
+            "where context_hash=? for update",
+            FIXTURE_ORDER_BY_ID_FOR_UPDATE_C773C7BB)) {
       try (var c = database.transaction()) {
         var fault = new AdminAuthFixture();
         fault.match = stage;
@@ -357,7 +372,7 @@ class AdminCommandAuthenticatorTest {
     for (long invalid : new long[] {0, 1_000_000_000_000L, 999})
       try (var c = database.transaction()) {
         var fault = new AdminAuthFixture();
-        fault.match = "select user_id from";
+        fault.match = FIXTURE_SELECT_USER_ID_FROM_416FE1DC;
         fault.ownerOverride = invalid;
         infrastructure(
             () ->
@@ -377,19 +392,19 @@ class AdminCommandAuthenticatorTest {
         var fault = new AdminAuthFixture();
         switch (kind) {
           case "duplicateOwner" -> {
-            fault.match = "select user_id from";
+            fault.match = FIXTURE_SELECT_USER_ID_FROM_416FE1DC;
             fault.duplicate = true;
           }
           case "emptyAdvisory" -> {
-            fault.match = "pg_advisory_xact_lock";
+            fault.match = FIXTURE_PG_ADVISORY_XACT_LOCK_C93E2E63;
             fault.empty = true;
           }
           case "duplicateAdvisory" -> {
-            fault.match = "pg_advisory_xact_lock";
+            fault.match = FIXTURE_PG_ADVISORY_XACT_LOCK_C93E2E63;
             fault.duplicate = true;
           }
           case "reversedUserIds" -> {
-            fault.match = "order by id for update";
+            fault.match = FIXTURE_ORDER_BY_ID_FOR_UPDATE_C773C7BB;
             fault.reverseIds = true;
           }
           case "nullRole" -> {
@@ -410,7 +425,7 @@ class AdminCommandAuthenticatorTest {
     for (String close : List.of("resultClose", "statementClose"))
       try (var c = database.transaction()) {
         var fault = new AdminAuthFixture();
-        fault.match = "select user_id from";
+        fault.match = FIXTURE_SELECT_USER_ID_FROM_416FE1DC;
         fault.method = close;
         infrastructure(
             () ->
@@ -432,7 +447,10 @@ class AdminCommandAuthenticatorTest {
     }
     try (var c = database.api()) {
       assertTimes(
-          c, 1, Instant.parse("2026-09-08T00:00:00Z"), Instant.parse("2026-09-08T08:00:00Z"));
+          c,
+          1,
+          Instant.parse(FIXTURE_2026_09_08T00_00_00Z_0AD85BE3),
+          Instant.parse(FIXTURE_2026_09_08T08_00_00Z_508CC681));
     }
   }
 
@@ -472,7 +490,10 @@ class AdminCommandAuthenticatorTest {
       for (int user = 1; user <= 2; user++)
         assertTimes(c, user, NOW, Instant.parse("2026-09-08T08:01:00Z"));
       assertTimes(
-          c, 3, Instant.parse("2026-09-08T00:00:00Z"), Instant.parse("2026-09-08T08:00:00Z"));
+          c,
+          3,
+          Instant.parse(FIXTURE_2026_09_08T00_00_00Z_0AD85BE3),
+          Instant.parse(FIXTURE_2026_09_08T08_00_00Z_508CC681));
     }
   }
 
@@ -482,7 +503,7 @@ class AdminCommandAuthenticatorTest {
     // and the caller-owned transaction retains its original session state after rollback.
     try (var c = database.transaction()) {
       var fault = new AdminAuthFixture();
-      fault.match = "select user_id from";
+      fault.match = FIXTURE_SELECT_USER_ID_FROM_416FE1DC;
       fault.method = "providerIaeGetLongAndResultClose";
       infrastructure(
           () ->
@@ -494,7 +515,10 @@ class AdminCommandAuthenticatorTest {
     }
     try (var c = database.api()) {
       assertTimes(
-          c, 1, Instant.parse("2026-09-08T00:00:00Z"), Instant.parse("2026-09-08T08:00:00Z"));
+          c,
+          1,
+          Instant.parse(FIXTURE_2026_09_08T00_00_00Z_0AD85BE3),
+          Instant.parse(FIXTURE_2026_09_08T08_00_00Z_508CC681));
     }
   }
 

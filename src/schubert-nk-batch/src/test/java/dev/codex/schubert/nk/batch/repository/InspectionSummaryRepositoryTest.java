@@ -32,6 +32,10 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** NK-BAT-001; SS331 3.13/341 7.3; SSC049/PG162; BAT114..121. */
 final class InspectionSummaryRepositoryTest {
+  private static final String FIXTURE_STATEMENT_EXECUTEQUERY_67733F33 = "statement.executeQuery";
+  private static final String FIXTURE_STATEMENT_CLOSE_FE807BAF = "statement.close";
+  private static final String FIXTURE_ROW_CLOSE_F197F129 = "row.close";
+  private static final String FIXTURE_CLOSE_97959247 = "close";
   @TempDir static Path root;
   static BatchDatabaseFixture db;
   static final BatchRun RUN =
@@ -50,19 +54,20 @@ final class InspectionSummaryRepositoryTest {
           Map.entry("connection.prepareStatement", 1),
           Map.entry("statement.setQueryTimeout", 1),
           Map.entry("statement.setObject", 2),
-          Map.entry("statement.executeQuery", 1),
-          Map.entry("statement.close", 1),
+          Map.entry(FIXTURE_STATEMENT_EXECUTEQUERY_67733F33, 1),
+          Map.entry(FIXTURE_STATEMENT_CLOSE_FE807BAF, 1),
           Map.entry("row.next", 2),
           Map.entry("row.getObject", 4),
-          Map.entry("row.close", 1));
+          Map.entry(FIXTURE_ROW_CLOSE_F197F129, 1));
   static final Map<String, Integer> EMPTY =
       Map.ofEntries(
           Map.entry("connection.getAutoCommit", 1), Map.entry("connection.isReadOnly", 1),
           Map.entry("connection.getTransactionIsolation", 1),
               Map.entry("connection.prepareStatement", 1),
           Map.entry("statement.setQueryTimeout", 1), Map.entry("statement.setObject", 2),
-          Map.entry("statement.executeQuery", 1), Map.entry("statement.close", 1),
-          Map.entry("row.next", 1), Map.entry("row.close", 1));
+          Map.entry(FIXTURE_STATEMENT_EXECUTEQUERY_67733F33, 1),
+              Map.entry(FIXTURE_STATEMENT_CLOSE_FE807BAF, 1),
+          Map.entry("row.next", 1), Map.entry(FIXTURE_ROW_CLOSE_F197F129, 1));
 
   @BeforeAll
   static void start() throws Exception {
@@ -215,8 +220,8 @@ final class InspectionSummaryRepositoryTest {
             assertFalse(c.isClosed());
           }
         Probe both = new Probe();
-        both.failAt.put("row.close", 1);
-        both.failAt.put("statement.close", 1);
+        both.failAt.put(FIXTURE_ROW_CLOSE_F197F129, 1);
+        both.failAt.put(FIXTURE_STATEMENT_CLOSE_FE807BAF, 1);
         redacted(() -> new InspectionSummaryRepository(both.wrap(c)).read(RUN));
         assertEquals(2, both.failures);
         both.assertOwnedClosed();
@@ -279,7 +284,7 @@ final class InspectionSummaryRepositoryTest {
           List.of(
               "commit",
               "rollback",
-              "close",
+              FIXTURE_CLOSE_97959247,
               "setAutoCommit",
               "setReadOnly",
               "setTransactionIsolation"))
@@ -302,13 +307,15 @@ final class InspectionSummaryRepositoryTest {
                 Throwable.class, () -> new InspectionSummaryRepository(probe.wrap(c)).read(RUN)));
         probe.assertOwnedClosed();
         assertEquals(sample.first() < 0 ? 1 : 2, probe.failures);
-        assertEquals(1, probe.seen.getOrDefault("statement.close", 0));
+        assertEquals(1, probe.seen.getOrDefault(FIXTURE_STATEMENT_CLOSE_FE807BAF, 0));
         assertEquals(
-            sample.first() >= 0 && sample.body().equals("statement.executeQuery") ? 0 : 1,
-            probe.seen.getOrDefault("row.close", 0));
+            sample.first() >= 0 && sample.body().equals(FIXTURE_STATEMENT_EXECUTEQUERY_67733F33)
+                ? 0
+                : 1,
+            probe.seen.getOrDefault(FIXTURE_ROW_CLOSE_F197F129, 0));
         for (String call :
             List.of(
-                "close",
+                FIXTURE_CLOSE_97959247,
                 "commit",
                 "rollback",
                 "setAutoCommit",
@@ -322,7 +329,7 @@ final class InspectionSummaryRepositoryTest {
           () -> {
             var probe = new Probe();
             var failure = new IllegalArgumentException("public unknown provider fault");
-            probe.thrown.put("statement.executeQuery", failure);
+            probe.thrown.put(FIXTURE_STATEMENT_EXECUTEQUERY_67733F33, failure);
             assertSame(
                 failure,
                 assertThrows(
@@ -333,7 +340,7 @@ final class InspectionSummaryRepositoryTest {
             var probe = new Probe();
             var failure = new IllegalStateException("public same provider fault");
             probe.thrown.put("row.next", failure);
-            probe.thrown.put("row.close", failure);
+            probe.thrown.put(FIXTURE_ROW_CLOSE_F197F129, failure);
             assertSame(
                 failure,
                 assertThrows(
@@ -350,7 +357,7 @@ final class InspectionSummaryRepositoryTest {
         Thread.interrupted();
       }
       Probe last = new Probe();
-      last.interruptAt = "statement.close";
+      last.interruptAt = FIXTURE_STATEMENT_CLOSE_FE807BAF;
       try {
         redacted(() -> new InspectionSummaryRepository(last.wrap(c)).read(RUN));
         assertTrue(Thread.currentThread().isInterrupted());
@@ -441,10 +448,10 @@ final class InspectionSummaryRepositoryTest {
               new Class<?>[] {PreparedStatement.class},
               (p, m, a) -> {
                 String name = m.getName();
-                if (name.equals("close")) {
+                if (name.equals(FIXTURE_CLOSE_97959247)) {
                   Object value = invoke(statement, m, a);
                   statements--;
-                  hit("statement.close");
+                  hit(FIXTURE_STATEMENT_CLOSE_FE807BAF);
                   return value;
                 }
                 hit("statement." + name);
@@ -476,10 +483,10 @@ final class InspectionSummaryRepositoryTest {
               new Class<?>[] {ResultSet.class},
               (p, m, a) -> {
                 String name = m.getName();
-                if (name.equals("close")) {
+                if (name.equals(FIXTURE_CLOSE_97959247)) {
                   Object value = invoke(row, m, a);
                   rows--;
-                  hit("row.close");
+                  hit(FIXTURE_ROW_CLOSE_F197F129);
                   return value;
                 }
                 hit("row." + name);

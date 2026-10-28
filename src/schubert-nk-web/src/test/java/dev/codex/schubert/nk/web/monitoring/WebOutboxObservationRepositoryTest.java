@@ -27,6 +27,16 @@ import org.junit.jupiter.api.Test;
 
 /** WEBOBXDB001..010/1721: own JDBC doubles only, not actual DB/driver/source admission. */
 class WebOutboxObservationRepositoryTest {
+  private static final String FIXTURE_PREPARE_1F4EE68F = "prepare";
+  private static final String FIXTURE_TIMEOUT_492BD020 = "timeout";
+  private static final String FIXTURE_EXECUTE_7FB37A54 = "execute";
+  private static final String FIXTURE_NEXT_CA1733B5 = "next";
+  private static final String FIXTURE_STATUS_CFC31BCC = "status";
+  private static final String FIXTURE_COUNT_CC3EC73C = "count";
+  private static final String FIXTURE_WASNULL_89F0F5E0 = "wasNull";
+  private static final String FIXTURE_ERROR_F717E7D8 = "ERROR";
+  private static final String FIXTURE_PENDING_B11DB31F = "PENDING";
+  private static final String FIXTURE_SENT_6C701E27 = "SENT";
   static final Instant AS_OF = Instant.EPOCH;
   private static final String SQL =
       "SELECT status, COUNT(*) AS row_count, MIN(created_at) AS oldest_created_at"
@@ -86,7 +96,7 @@ class WebOutboxObservationRepositoryTest {
                   case "prepareStatement":
                     prepared++;
                     assertEquals(SQL, arguments[0]);
-                    fault("prepare");
+                    fault(FIXTURE_PREPARE_1F4EE68F);
                     return nullStatement ? null : statement();
                   default:
                     throw new AssertionError("borrowed connection must not be mutated or closed");
@@ -104,11 +114,11 @@ class WebOutboxObservationRepositoryTest {
                   case "setQueryTimeout":
                     timeout = (Integer) arguments[0];
                     assertEquals(1, timeout);
-                    fault("timeout");
+                    fault(FIXTURE_TIMEOUT_492BD020);
                     return null;
                   case "executeQuery":
                     executed++;
-                    fault("execute");
+                    fault(FIXTURE_EXECUTE_7FB37A54);
                     return nullRows ? null : result();
                   case "close":
                     beforeStatementClose.run();
@@ -128,24 +138,24 @@ class WebOutboxObservationRepositoryTest {
               new Class<?>[] {ResultSet.class},
               (object, method, arguments) -> {
                 switch (method.getName()) {
-                  case "next":
-                    fault("next");
+                  case FIXTURE_NEXT_CA1733B5:
+                    fault(FIXTURE_NEXT_CA1733B5);
                     return ++cursor < rows.size();
                   case "getString":
-                    assertEquals("status", arguments[0]);
-                    fault("status");
+                    assertEquals(FIXTURE_STATUS_CFC31BCC, arguments[0]);
+                    fault(FIXTURE_STATUS_CFC31BCC);
                     return rows.get(cursor).status().orElse(null);
                   case "getLong":
                     assertEquals("row_count", arguments[0]);
-                    fault("count");
+                    fault(FIXTURE_COUNT_CC3EC73C);
                     return rows.get(cursor).count();
                   case "getObject":
                     assertEquals("oldest_created_at", arguments[0]);
                     assertEquals(OffsetDateTime.class, arguments[1]);
                     fault("oldest");
                     return rows.get(cursor).oldest().orElse(null);
-                  case "wasNull":
-                    fault("wasNull");
+                  case FIXTURE_WASNULL_89F0F5E0:
+                    fault(FIXTURE_WASNULL_89F0F5E0);
                     return rows.get(cursor).sqlNull();
                   case "close":
                     closes.add("RS");
@@ -168,7 +178,11 @@ class WebOutboxObservationRepositoryTest {
   @Test
   void webObxDb001ShuffledRowsHaveLiteralCountsAndAgesOnlyAfterReverseResourceClose()
       throws SQLException {
-    var f = new Fixture(Row.row("ERROR", 7, 11), Row.row("PENDING", 3, 2), Row.row("SENT", 5, 4));
+    var f =
+        new Fixture(
+            Row.row(FIXTURE_ERROR_F717E7D8, 7, 11),
+            Row.row(FIXTURE_PENDING_B11DB31F, 3, 2),
+            Row.row(FIXTURE_SENT_6C701E27, 5, 4));
     var value = new WebOutboxObservationRepository().read(f.connection(), AS_OF);
     assertEquals(3, value.pending());
     assertEquals(5, value.sent());
@@ -189,7 +203,7 @@ class WebOutboxObservationRepositoryTest {
       assertEquals(Duration.ZERO, a.age(status));
     }
     empty.complete();
-    var sparse = new Fixture(Row.row("PENDING", Long.MAX_VALUE, 0));
+    var sparse = new Fixture(Row.row(FIXTURE_PENDING_B11DB31F, Long.MAX_VALUE, 0));
     var b = new WebOutboxObservationRepository().read(sparse.connection(), AS_OF);
     assertEquals(Long.MAX_VALUE, b.pending());
     assertEquals(0, b.sent());
@@ -205,7 +219,7 @@ class WebOutboxObservationRepositoryTest {
     var jst =
         new Fixture(
             new Row(
-                Optional.of("PENDING"),
+                Optional.of(FIXTURE_PENDING_B11DB31F),
                 1,
                 false,
                 Optional.of(OffsetDateTime.parse("1970-01-01T08:59:58.500000+09:00"))));
@@ -216,7 +230,7 @@ class WebOutboxObservationRepositoryTest {
     var earliest =
         new Fixture(
             new Row(
-                Optional.of("ERROR"),
+                Optional.of(FIXTURE_ERROR_F717E7D8),
                 Long.MAX_VALUE,
                 false,
                 Optional.of(OffsetDateTime.parse("0001-01-01T00:00:00Z"))));
@@ -227,7 +241,7 @@ class WebOutboxObservationRepositoryTest {
     assertEquals(Duration.ofSeconds(315537897599L, 999999000), distant.errorAge());
     assertEquals(315537897600.0, distant.ageSeconds(Status.ERROR));
     earliest.complete();
-    var same = new Fixture(Row.row("SENT", 1, 0));
+    var same = new Fixture(Row.row(FIXTURE_SENT_6C701E27, 1, 0));
     assertEquals(
         Duration.ZERO,
         new WebOutboxObservationRepository().read(same.connection(), AS_OF).sentAge());
@@ -262,15 +276,17 @@ class WebOutboxObservationRepositoryTest {
     cases.add(new Fixture(new Row(Optional.empty(), 1, false, now)));
     for (String bad : List.of("", "pending", "UNKNOWN", "PENDING canary"))
       cases.add(new Fixture(Row.row(bad, 1, 0)));
-    cases.add(new Fixture(Row.row("PENDING", 1, 0), Row.row("PENDING", 2, 1)));
-    cases.add(new Fixture(new Row(Optional.of("ERROR"), 1, true, now)));
+    cases.add(
+        new Fixture(
+            Row.row(FIXTURE_PENDING_B11DB31F, 1, 0), Row.row(FIXTURE_PENDING_B11DB31F, 2, 1)));
+    cases.add(new Fixture(new Row(Optional.of(FIXTURE_ERROR_F717E7D8), 1, true, now)));
     for (long invalid : List.of(0L, -1L, Long.MIN_VALUE))
-      cases.add(new Fixture(Row.row("ERROR", invalid, 0)));
-    cases.add(new Fixture(new Row(Optional.of("SENT"), 2, false, Optional.empty())));
+      cases.add(new Fixture(Row.row(FIXTURE_ERROR_F717E7D8, invalid, 0)));
+    cases.add(new Fixture(new Row(Optional.of(FIXTURE_SENT_6C701E27), 2, false, Optional.empty())));
     cases.add(
         new Fixture(
             new Row(
-                Optional.of("PENDING"),
+                Optional.of(FIXTURE_PENDING_B11DB31F),
                 3,
                 false,
                 Optional.of(AS_OF.plusNanos(1).atOffset(ZoneOffset.UTC)))));
@@ -293,15 +309,15 @@ class WebOutboxObservationRepositoryTest {
             "autoCommit",
             "readOnly",
             "isolation",
-            "prepare",
-            "timeout",
-            "execute",
-            "next",
-            "status",
-            "count",
-            "wasNull",
+            FIXTURE_PREPARE_1F4EE68F,
+            FIXTURE_TIMEOUT_492BD020,
+            FIXTURE_EXECUTE_7FB37A54,
+            FIXTURE_NEXT_CA1733B5,
+            FIXTURE_STATUS_CFC31BCC,
+            FIXTURE_COUNT_CC3EC73C,
+            FIXTURE_WASNULL_89F0F5E0,
             "oldest")) {
-      var f = new Fixture(Row.row("PENDING", 3, 5));
+      var f = new Fixture(Row.row(FIXTURE_PENDING_B11DB31F, 3, 5));
       var failure = new SQLException("owned JDBC fixture");
       f.faults.put(point, failure);
       assertSame(
@@ -312,13 +328,13 @@ class WebOutboxObservationRepositoryTest {
       if (List.of("autoCommit", "readOnly", "isolation").contains(point)) {
         assertEquals(0, f.prepared);
         assertTrue(f.closes.isEmpty());
-      } else if (point.equals("prepare")) {
+      } else if (point.equals(FIXTURE_PREPARE_1F4EE68F)) {
         assertEquals(1, f.prepared);
         assertEquals(0, f.executed);
         assertTrue(f.closes.isEmpty());
-      } else if (point.equals("timeout") || point.equals("execute")) {
+      } else if (point.equals(FIXTURE_TIMEOUT_492BD020) || point.equals(FIXTURE_EXECUTE_7FB37A54)) {
         assertEquals(1, f.prepared);
-        assertEquals(point.equals("execute") ? 1 : 0, f.executed);
+        assertEquals(point.equals(FIXTURE_EXECUTE_7FB37A54) ? 1 : 0, f.executed);
         assertEquals(List.of("PS"), f.closes);
       } else f.complete();
     }
@@ -341,12 +357,20 @@ class WebOutboxObservationRepositoryTest {
         () -> new WebOutboxObservationRepository().read(noRows.connection(), AS_OF));
     assertEquals(List.of("PS"), noRows.closes);
     for (String point :
-        List.of("prepare", "timeout", "execute", "next", "status", "count", "wasNull", "oldest"))
+        List.of(
+            FIXTURE_PREPARE_1F4EE68F,
+            FIXTURE_TIMEOUT_492BD020,
+            FIXTURE_EXECUTE_7FB37A54,
+            FIXTURE_NEXT_CA1733B5,
+            FIXTURE_STATUS_CFC31BCC,
+            FIXTURE_COUNT_CC3EC73C,
+            FIXTURE_WASNULL_89F0F5E0,
+            "oldest"))
       for (var failure :
           List.<Throwable>of(
               new IllegalStateException("owned JDBC fixture"),
               new AssertionError("owned JDBC fixture"))) {
-        var f = new Fixture(Row.row("PENDING", 3, 5));
+        var f = new Fixture(Row.row(FIXTURE_PENDING_B11DB31F, 3, 5));
         f.faults.put(point, failure);
         assertSame(
             failure,
@@ -354,8 +378,8 @@ class WebOutboxObservationRepositoryTest {
                 failure.getClass(),
                 () -> new WebOutboxObservationRepository().read(f.connection(), AS_OF)));
         assertEquals(1, f.prepared);
-        if (point.equals("prepare")) assertTrue(f.closes.isEmpty());
-        else if (point.equals("timeout") || point.equals("execute"))
+        if (point.equals(FIXTURE_PREPARE_1F4EE68F)) assertTrue(f.closes.isEmpty());
+        else if (point.equals(FIXTURE_TIMEOUT_492BD020) || point.equals(FIXTURE_EXECUTE_7FB37A54))
           assertEquals(List.of("PS"), f.closes);
         else f.complete();
       }
@@ -369,7 +393,7 @@ class WebOutboxObservationRepositoryTest {
               new SQLException("owned close"),
               new IllegalStateException("owned close"),
               new AssertionError("owned close"))) {
-        var f = new Fixture(Row.row("PENDING", 3, 5));
+        var f = new Fixture(Row.row(FIXTURE_PENDING_B11DB31F, 3, 5));
         f.faults.put(point, failure);
         assertSame(
             failure,
@@ -378,11 +402,11 @@ class WebOutboxObservationRepositoryTest {
                 () -> new WebOutboxObservationRepository().read(f.connection(), AS_OF)));
         f.complete();
       }
-    var f = new Fixture(Row.row("PENDING", 3, 5));
+    var f = new Fixture(Row.row(FIXTURE_PENDING_B11DB31F, 3, 5));
     var primary = new SQLException("owned count");
     var rs = new SQLException("owned rows close");
     var ps = new SQLException("owned statement close");
-    f.faults.put("count", primary);
+    f.faults.put(FIXTURE_COUNT_CC3EC73C, primary);
     f.faults.put("RSclose", rs);
     f.faults.put("PSclose", ps);
     assertSame(
@@ -397,9 +421,9 @@ class WebOutboxObservationRepositoryTest {
   @Test
   void webObxDb009AllSixStatusOrdersUseOnlyLiteralReadonlySqlAndMetadataColumns()
       throws SQLException {
-    var p = Row.row("PENDING", 3, 2);
-    var s = Row.row("SENT", 5, 4);
-    var e = Row.row("ERROR", 7, 11);
+    var p = Row.row(FIXTURE_PENDING_B11DB31F, 3, 2);
+    var s = Row.row(FIXTURE_SENT_6C701E27, 5, 4);
+    var e = Row.row(FIXTURE_ERROR_F717E7D8, 7, 11);
     for (var order :
         List.of(
             List.of(p, s, e),
@@ -429,7 +453,10 @@ class WebOutboxObservationRepositoryTest {
       long count = index;
       tasks.add(
           () -> {
-            var f = new Fixture(Row.row("PENDING", count, count), Row.row("ERROR", 2, 4));
+            var f =
+                new Fixture(
+                    Row.row(FIXTURE_PENDING_B11DB31F, count, count),
+                    Row.row(FIXTURE_ERROR_F717E7D8, 2, 4));
             var actual = repo.read(f.connection(), AS_OF);
             assertEquals(count, actual.pending());
             assertEquals(2, actual.error());
@@ -444,7 +471,7 @@ class WebOutboxObservationRepositoryTest {
       for (int index = 0; index < 64; index++)
         assertEquals(index + 1L, results.get(index).get(5, TimeUnit.SECONDS));
     }
-    var later = new Fixture(Row.row("PENDING", 1, 3));
+    var later = new Fixture(Row.row(FIXTURE_PENDING_B11DB31F, 1, 3));
     assertEquals(
         Duration.ofSeconds(4), repo.read(later.connection(), AS_OF.plusSeconds(1)).pendingAge());
     later.complete();

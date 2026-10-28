@@ -30,6 +30,7 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** RCPT005/BUG608/YKT428; actual JDBC with independent injected fault/close accounting. */
 class ReceiptReferenceFaultTest {
+  private static final String FIXTURE_ERROR_FC4AC196 = "Error";
   static final String ID = "00000000000000000000000001";
   static final Instant TIME = Instant.parse("2026-10-04T00:00:00.123Z");
   static WebLogDatabaseFixture db;
@@ -81,7 +82,7 @@ class ReceiptReferenceFaultTest {
         hits.incrementAndGet();
         throw new IllegalStateException("fixture unknown");
       }
-      if (Arrays.asList(fault.split("\\+", -1)).contains(point + "Error")) {
+      if (Arrays.asList(fault.split("\\+", -1)).contains(point + FIXTURE_ERROR_FC4AC196)) {
         hits.incrementAndGet();
         throw new AssertionError("fixture error");
       }
@@ -250,7 +251,7 @@ class ReceiptReferenceFaultTest {
     for (String point :
         List.of("PreparedStatementClose", "ResultSetClose", "ConnectionClose", "rollback")) {
       String sqlPoint = point.equals("ResultSetClose") ? "getObject" : "executeQuery";
-      for (String secondary : List.of("Sql", "Unknown", "Error")) {
+      for (String secondary : List.of("Sql", "Unknown", FIXTURE_ERROR_FC4AC196)) {
         var p = new Probe(sqlPoint + "Unknown+" + point + secondary);
         var failure =
             assertThrows(
@@ -267,7 +268,7 @@ class ReceiptReferenceFaultTest {
           ReceiptReferenceException.class,
           () -> new ReceiptReferenceRepository(p.source()).find(ID));
       assertEquals(0, p.live.get());
-      var e = new Probe(sqlPoint + "Sql+" + point + "Error");
+      var e = new Probe(sqlPoint + "Sql+" + point + FIXTURE_ERROR_FC4AC196);
       assertThrows(AssertionError.class, () -> new ReceiptReferenceRepository(e.source()).find(ID));
       assertEquals(0, e.live.get());
     }
@@ -304,7 +305,9 @@ class ReceiptReferenceFaultTest {
             "ConnectionCloseError")) {
       var p = new Probe(fault);
       Class<? extends Throwable> expected =
-          fault.endsWith("Error") ? AssertionError.class : IllegalStateException.class;
+          fault.endsWith(FIXTURE_ERROR_FC4AC196)
+              ? AssertionError.class
+              : IllegalStateException.class;
       assertThrows(expected, () -> new ReceiptReferenceRepository(p.source()).find(ID), fault);
       assertEquals(0, p.live.get(), fault);
     }

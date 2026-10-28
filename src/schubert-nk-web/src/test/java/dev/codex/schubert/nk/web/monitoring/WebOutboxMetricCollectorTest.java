@@ -27,6 +27,10 @@ import org.junit.jupiter.api.Test;
 
 /** WEBOBXCONN001..008/1721, own JDBC proxy/registry/latches only, never real DB/clock/Root. */
 class WebOutboxMetricCollectorTest {
+  private static final String FIXTURE_PENDING_B11DB31F = "PENDING";
+  private static final String FIXTURE_ERROR_F717E7D8 = "ERROR";
+  private static final String FIXTURE_DEBUG_B6DFBABB = "DEBUG";
+
   private static void await(CountDownLatch latch) {
     try {
       assertTrue(latch.await(5, TimeUnit.SECONDS));
@@ -37,7 +41,10 @@ class WebOutboxMetricCollectorTest {
   }
 
   private static Fixture sample() {
-    return new Fixture(Row.row("PENDING", 3, 2), Row.row("SENT", 5, 4), Row.row("ERROR", 7, 6));
+    return new Fixture(
+        Row.row(FIXTURE_PENDING_B11DB31F, 3, 2),
+        Row.row("SENT", 5, 4),
+        Row.row(FIXTURE_ERROR_F717E7D8, 7, 6));
   }
 
   @Test
@@ -45,7 +52,8 @@ class WebOutboxMetricCollectorTest {
       throws SQLException {
     try (var registry = new Registry()) {
       var collector =
-          new WebOutboxMetricCollector(new WebOutboxObservationRepository(), registry, "DEBUG");
+          new WebOutboxMetricCollector(
+              new WebOutboxObservationRepository(), registry, FIXTURE_DEBUG_B6DFBABB);
       var f = sample();
       f.beforeStatementClose =
           () -> {
@@ -75,9 +83,11 @@ class WebOutboxMetricCollectorTest {
     try (var registry = new Registry();
         var other = new Registry()) {
       var collector =
-          new WebOutboxMetricCollector(new WebOutboxObservationRepository(), registry, "DEBUG");
+          new WebOutboxMetricCollector(
+              new WebOutboxObservationRepository(), registry, FIXTURE_DEBUG_B6DFBABB);
       var independent =
-          new WebOutboxMetricCollector(new WebOutboxObservationRepository(), other, "DEBUG");
+          new WebOutboxMetricCollector(
+              new WebOutboxObservationRepository(), other, FIXTURE_DEBUG_B6DFBABB);
       var empty = new Fixture();
       var zero = collector.collect(empty.connection(), AS_OF).orElseThrow();
       assertSame(zero, collector.snapshot().orElseThrow());
@@ -89,7 +99,7 @@ class WebOutboxMetricCollectorTest {
       assertSame(supplied, collector.snapshot().orElseThrow());
       values(registry, 3, 5, 7, 2, 4, 6);
       f.complete();
-      var separate = new Fixture(Row.row("ERROR", 9, 8));
+      var separate = new Fixture(Row.row(FIXTURE_ERROR_F717E7D8, 9, 8));
       independent.collect(separate.connection(), AS_OF);
       values(other, 0, 0, 9, 0, 0, 8);
       separate.complete();
@@ -108,7 +118,8 @@ class WebOutboxMetricCollectorTest {
             new AssertionError("owned read"))) {
       try (var registry = new Registry()) {
         var collector =
-            new WebOutboxMetricCollector(new WebOutboxObservationRepository(), registry, "DEBUG");
+            new WebOutboxMetricCollector(
+                new WebOutboxObservationRepository(), registry, FIXTURE_DEBUG_B6DFBABB);
         var good = sample();
         collector.collect(good.connection(), AS_OF);
         good.complete();
@@ -130,7 +141,8 @@ class WebOutboxMetricCollectorTest {
     for (boolean nullStatement : List.of(false, true))
       try (var registry = new Registry()) {
         var collector =
-            new WebOutboxMetricCollector(new WebOutboxObservationRepository(), registry, "DEBUG");
+            new WebOutboxMetricCollector(
+                new WebOutboxObservationRepository(), registry, FIXTURE_DEBUG_B6DFBABB);
         var good = sample();
         collector.collect(good.connection(), AS_OF);
         good.complete();
@@ -150,9 +162,11 @@ class WebOutboxMetricCollectorTest {
     try (var registry = new Registry()) {
       var repo = new WebOutboxObservationRepository();
       assertThrows(
-          NullPointerException.class, () -> new WebOutboxMetricCollector(null, registry, "DEBUG"));
+          NullPointerException.class,
+          () -> new WebOutboxMetricCollector(null, registry, FIXTURE_DEBUG_B6DFBABB));
       assertThrows(
-          NullPointerException.class, () -> new WebOutboxMetricCollector(repo, null, "DEBUG"));
+          NullPointerException.class,
+          () -> new WebOutboxMetricCollector(repo, null, FIXTURE_DEBUG_B6DFBABB));
       assertThrows(
           NullPointerException.class, () -> new WebOutboxMetricCollector(repo, registry, null));
       for (String mode : List.of("", "debug", "unknown"))
@@ -176,7 +190,8 @@ class WebOutboxMetricCollectorTest {
     }
     try (var registry = new Registry()) {
       var collector =
-          new WebOutboxMetricCollector(new WebOutboxObservationRepository(), registry, "DEBUG");
+          new WebOutboxMetricCollector(
+              new WebOutboxObservationRepository(), registry, FIXTURE_DEBUG_B6DFBABB);
       var f = new Fixture();
       assertThrows(NullPointerException.class, () -> collector.collect(null, AS_OF));
       assertThrows(NullPointerException.class, () -> collector.collect(f.connection(), null));
@@ -197,7 +212,8 @@ class WebOutboxMetricCollectorTest {
               new AssertionError("owned close"))) {
         try (var registry = new Registry()) {
           var collector =
-              new WebOutboxMetricCollector(new WebOutboxObservationRepository(), registry, "DEBUG");
+              new WebOutboxMetricCollector(
+                  new WebOutboxObservationRepository(), registry, FIXTURE_DEBUG_B6DFBABB);
           var good = sample();
           collector.collect(good.connection(), AS_OF);
           good.complete();
@@ -220,13 +236,14 @@ class WebOutboxMetricCollectorTest {
     try (var registry = new Registry();
         var executor = Executors.newFixedThreadPool(2)) {
       var collector =
-          new WebOutboxMetricCollector(new WebOutboxObservationRepository(), registry, "DEBUG");
+          new WebOutboxMetricCollector(
+              new WebOutboxObservationRepository(), registry, FIXTURE_DEBUG_B6DFBABB);
       var entered = new CountDownLatch(1);
       var release = new CountDownLatch(1);
       var attempted = new CountDownLatch(1);
       var contender = new AtomicReference<Thread>();
-      var first = new Fixture(Row.row("PENDING", 3, 2));
-      var second = new Fixture(Row.row("ERROR", 7, 6));
+      var first = new Fixture(Row.row(FIXTURE_PENDING_B11DB31F, 3, 2));
+      var second = new Fixture(Row.row(FIXTURE_ERROR_F717E7D8, 7, 6));
       var seen = new AtomicReference<Observation>();
       first.beforeStatementClose =
           () -> {
@@ -278,7 +295,8 @@ class WebOutboxMetricCollectorTest {
         var other = new Registry();
         var executor = Executors.newFixedThreadPool(8)) {
       var collector =
-          new WebOutboxMetricCollector(new WebOutboxObservationRepository(), registry, "DEBUG");
+          new WebOutboxMetricCollector(
+              new WebOutboxObservationRepository(), registry, FIXTURE_DEBUG_B6DFBABB);
       var expected = new ArrayList<long[]>();
       var jobs = new ArrayList<Callable<Optional<Observation>>>();
       for (int i = 1; i <= 64; i++) {
@@ -290,7 +308,9 @@ class WebOutboxMetricCollectorTest {
             () -> {
               var f =
                   new Fixture(
-                      Row.row("PENDING", p, p), Row.row("SENT", s, s), Row.row("ERROR", e, e));
+                      Row.row(FIXTURE_PENDING_B11DB31F, p, p),
+                      Row.row("SENT", s, s),
+                      Row.row(FIXTURE_ERROR_F717E7D8, e, e));
               var value = collector.collect(f.connection(), AS_OF);
               f.complete();
               return value;
@@ -316,9 +336,10 @@ class WebOutboxMetricCollectorTest {
       var vector = expected.get(owner);
       values(registry, vector[0], vector[1], vector[2], vector[0], vector[1], vector[2]);
       var independent =
-          new WebOutboxMetricCollector(new WebOutboxObservationRepository(), other, "DEBUG");
+          new WebOutboxMetricCollector(
+              new WebOutboxObservationRepository(), other, FIXTURE_DEBUG_B6DFBABB);
       unknown(other);
-      var f = new Fixture(Row.row("ERROR", 9, 8));
+      var f = new Fixture(Row.row(FIXTURE_ERROR_F717E7D8, 9, 8));
       independent.collect(f.connection(), AS_OF);
       values(other, 0, 0, 9, 0, 0, 8);
       f.complete();
@@ -341,11 +362,13 @@ class WebOutboxMetricCollectorTest {
                 failure.getClass(),
                 () ->
                     new WebOutboxMetricCollector(
-                        new WebOutboxObservationRepository(), registry, "DEBUG")));
+                        new WebOutboxObservationRepository(), registry, FIXTURE_DEBUG_B6DFBABB)));
         assertEquals(2, registry.factories.get());
         assertEquals(1, registry.getMeters().size());
         assertTrue(
-            Double.isNaN(WebOutboxMetricRecorderTest.gauge(registry, "nk_outbox_rows", "PENDING")));
+            Double.isNaN(
+                WebOutboxMetricRecorderTest.gauge(
+                    registry, "nk_outbox_rows", FIXTURE_PENDING_B11DB31F)));
         assertEquals(0, registry.closes.get());
       } finally {
         registry.close();

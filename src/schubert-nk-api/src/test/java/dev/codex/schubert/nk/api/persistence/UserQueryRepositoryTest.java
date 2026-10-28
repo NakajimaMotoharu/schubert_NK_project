@@ -51,6 +51,11 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** NK-ADM-001; UI225/236 literal bytes and production PostgreSQL DDL. PT-ADM-001..007. */
 class UserQueryRepositoryTest {
+  private static final String FIXTURE_USER_2DED8884 = "USER";
+  private static final String FIXTURE_ACTIVE_77FF42A3 = "ACTIVE";
+  private static final String FIXTURE_U001_5E72701D = "u001";
+  private static final String FIXTURE_SYSTEM_8E1CB697 = "SYSTEM";
+  private static final String FIXTURE_TOTAL_714BDB4B = "total";
   @TempDir static Path root;
   static ApiLogDatabaseFixture database;
   static final Instant NOW = Instant.parse("2026-09-08T00:01:00Z");
@@ -88,7 +93,11 @@ class UserQueryRepositoryTest {
           for (int i = first; i > 0 && i <= last; i++) {
             var row = (UserRecord) actual.records().get(i - first);
             assertArrayEquals(
-                userBytes(i, String.format(Locale.ROOT, "u%03d", i), "USER", "ACTIVE"),
+                userBytes(
+                    i,
+                    String.format(Locale.ROOT, "u%03d", i),
+                    FIXTURE_USER_2DED8884,
+                    FIXTURE_ACTIVE_77FF42A3),
                 PayloadCodec.standard().encodeRecord(new LayoutId("USRRSP01"), row.fields()));
           }
           assertFalse(c.isClosed());
@@ -151,7 +160,15 @@ class UserQueryRepositoryTest {
     try (var c = read()) {
       var value =
           QUERIES.detail(c, ADMIN, new UserDetailRequestData(new UserId(1)), NOW).orElseThrow();
-      byte[] expected = detailBytes(1, "u001", "USER", "ACTIVE", 0, "SYSTEM", "SYSTEM");
+      byte[] expected =
+          detailBytes(
+              1,
+              FIXTURE_U001_5E72701D,
+              FIXTURE_USER_2DED8884,
+              FIXTURE_ACTIVE_77FF42A3,
+              0,
+              FIXTURE_SYSTEM_8E1CB697,
+              FIXTURE_SYSTEM_8E1CB697);
       assertArrayEquals(expected, fixed(value).copyData());
       assertTrue(
           QUERIES.detail(c, ADMIN, new UserDetailRequestData(new UserId(99)), NOW).isEmpty());
@@ -164,7 +181,15 @@ class UserQueryRepositoryTest {
       try (var c = read()) {
         var value =
             QUERIES.detail(c, ADMIN, new UserDetailRequestData(new UserId(1)), NOW).orElseThrow();
-        byte[] expected = detailBytes(1, "u001", "USER", "ACTIVE", Math.min(i, 2), "u002", "u002");
+        byte[] expected =
+            detailBytes(
+                1,
+                FIXTURE_U001_5E72701D,
+                FIXTURE_USER_2DED8884,
+                FIXTURE_ACTIVE_77FF42A3,
+                Math.min(i, 2),
+                "u002",
+                "u002");
         put(expected, 89, "20260908090059000");
         put(expected, 106, "20260908090059000");
         assertArrayEquals(expected, fixed(value).copyData());
@@ -193,7 +218,15 @@ class UserQueryRepositoryTest {
     try (var c = read()) {
       var detail =
           QUERIES.detail(c, ADMIN, new UserDetailRequestData(new UserId(1)), NOW).orElseThrow();
-      byte[] expected = detailBytes(1, "u001", "USER", "LOCKED", 0, "SYSTEM", "SYSTEM");
+      byte[] expected =
+          detailBytes(
+              1,
+              FIXTURE_U001_5E72701D,
+              FIXTURE_USER_2DED8884,
+              "LOCKED",
+              0,
+              FIXTURE_SYSTEM_8E1CB697,
+              FIXTURE_SYSTEM_8E1CB697);
       put(expected, 89, "20260908090200000");
       put(expected, 106, "20260908090059000");
       put(expected, 123, "20260908090100123");
@@ -237,7 +270,10 @@ class UserQueryRepositoryTest {
     seed(1);
     sql("update schubert.app_users set locked_until='2026-09-08T00:01:00Z'");
     for (boolean disabled : List.of(false, true)) {
-      sql("update schubert.app_users set status='" + (disabled ? "DISABLED" : "ACTIVE") + "'");
+      sql(
+          "update schubert.app_users set status='"
+              + (disabled ? "DISABLED" : FIXTURE_ACTIVE_77FF42A3)
+              + "'");
       for (Instant now : List.of(NOW.minusNanos(1000), NOW, NOW.plusNanos(1000))) {
         UserState expected =
             disabled ? UserState.DISABLED : now.isBefore(NOW) ? UserState.LOCKED : UserState.ACTIVE;
@@ -437,7 +473,7 @@ class UserQueryRepositoryTest {
     seed(51);
     try (var c = read()) {
       var fault = new UserQueryFaults();
-      fault.columns.put("total", 49_999_950L);
+      fault.columns.put(FIXTURE_TOTAL_714BDB4B, 49_999_950L);
       fault.columns.put("pages", 999999L);
       var value = (TypedPayloadValues) query(false, fault.wrap(c));
       assertPage(value, 1, 49_999_950, 999999, 1, 50);
@@ -446,7 +482,7 @@ class UserQueryRepositoryTest {
     for (String close : List.of("none", "resultClose", "statementClose")) {
       try (var c = read()) {
         var fault = new UserQueryFaults();
-        fault.columns.put("total", 49_999_951L);
+        fault.columns.put(FIXTURE_TOTAL_714BDB4B, 49_999_951L);
         fault.fault = close;
         var error = assertThrows(UserQueryException.class, () -> query(false, fault.wrap(c)));
         assertEquals(
@@ -456,9 +492,9 @@ class UserQueryRepositoryTest {
         assertFalse(c.isClosed());
       }
     }
-    for (String field : List.of("total", "pages", "effective")) {
+    for (String field : List.of(FIXTURE_TOTAL_714BDB4B, "pages", "effective")) {
       for (Object value : Arrays.asList(null, -1L, Integer.MAX_VALUE + 1L)) {
-        if (field.equals("total") && value != null && ((Long) value) > 0) continue;
+        if (field.equals(FIXTURE_TOTAL_714BDB4B) && value != null && ((Long) value) > 0) continue;
         try (var c = read()) {
           var fault = new UserQueryFaults();
           fault.columns.put(field, value);
@@ -514,7 +550,14 @@ class UserQueryRepositoryTest {
                             .detail(wrapped, ADMIN, new UserDetailRequestData(new UserId(1)), NOW)
                             .orElseThrow();
                     assertArrayEquals(
-                        detailBytes(1, "u001", "USER", "ACTIVE", 0, "SYSTEM", "SYSTEM"),
+                        detailBytes(
+                            1,
+                            FIXTURE_U001_5E72701D,
+                            FIXTURE_USER_2DED8884,
+                            FIXTURE_ACTIVE_77FF42A3,
+                            0,
+                            FIXTURE_SYSTEM_8E1CB697,
+                            FIXTURE_SYSTEM_8E1CB697),
                         fixed(detail).copyData());
                     assertEquals(2, tracking.statements);
                     assertEquals(2, tracking.statementCloses);

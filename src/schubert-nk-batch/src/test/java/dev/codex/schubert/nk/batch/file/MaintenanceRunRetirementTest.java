@@ -63,6 +63,13 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** SS343 6.16; SSC055/PG161; BAT098..113. Real isolated native files and V018 PostgreSQL. */
 final class MaintenanceRunRetirementTest {
+  private static final String FIXTURE_UNLINK_04963CA9 = "unlink";
+  private static final String FIXTURE_ACTIVE_DB0FB2BF = "active";
+  private static final String FIXTURE_DONE_67185DC1 = ".done";
+  private static final String FIXTURE_RUN_DA82F99F = ".run";
+  private static final String FIXTURE_BEGIN_53B77CDD = ".begin";
+  private static final String FIXTURE_RETIRE_F8493D5C = ".retire";
+  private static final String FIXTURE_PLAN_A6DBC386 = ".plan";
   static final String OTHER = "00000000-0000-0000-0000-000000000001";
   static final String SECOND = "00000000-0000-0000-0000-000000000002";
   static final Instant TIME = Instant.parse(NOW);
@@ -90,7 +97,7 @@ final class MaintenanceRunRetirementTest {
           Map.entry("readSize", 114),
           Map.entry("readonly", 1075),
           Map.entry("sync", 13),
-          Map.entry("unlink", 5),
+          Map.entry(FIXTURE_UNLINK_04963CA9, 5),
           Map.entry("write", 2),
           Map.entry("writeSize", 4),
           Map.entry("writerClose", 2));
@@ -123,7 +130,7 @@ final class MaintenanceRunRetirementTest {
         var c = locked()) {
       seed(f);
       other(f, true);
-      Files.writeString(f.maintenance.resolve("active"), BEGIN);
+      Files.writeString(f.maintenance.resolve(FIXTURE_ACTIVE_DB0FB2BF), BEGIN);
       var before = disk(f);
       assertEquals(
           List.of(new BatchRun(UUID.fromString(OTHER), Instant.parse(CUTOFF))),
@@ -142,22 +149,25 @@ final class MaintenanceRunRetirementTest {
       List<BatchRun> candidates = f.files.execute(s -> s.retirementCandidates());
       assertEquals(List.of(otherRun, RUN), candidates);
       assertThrows(UnsupportedOperationException.class, () -> candidates.add(RUN));
-      Files.delete(f.attempts.resolve(SECOND + ".done"));
+      Files.delete(f.attempts.resolve(SECOND + FIXTURE_DONE_67185DC1));
       Files.writeString(
-          f.maintenance.resolve("active"), BEGIN.replace(ID, OTHER).replace(ACT, SECOND));
+          f.maintenance.resolve(FIXTURE_ACTIVE_DB0FB2BF),
+          BEGIN.replace(ID, OTHER).replace(ACT, SECOND));
       assertEquals(List.of(RUN), f.files.execute(s -> s.retirementCandidates()));
       Map<String, String> before = disk(f);
       assertEquals(PROTECTED, f.files.execute(s -> s.retire(otherRun, TIME, repository)));
       assertEquals(before, disk(f));
       assertEquals(RETIRED, f.files.execute(s -> s.retire(RUN, TIME, repository)));
-      assertEquals(before.get("active"), Files.readString(f.maintenance.resolve("active")));
+      assertEquals(
+          before.get(FIXTURE_ACTIVE_DB0FB2BF),
+          Files.readString(f.maintenance.resolve(FIXTURE_ACTIVE_DB0FB2BF)));
       assertEquals(List.of(), f.files.execute(s -> s.retirementCandidates()));
     }
     for (boolean begin : List.of(false, true))
       try (var f = fixture();
           var c = locked()) {
-        Files.writeString(f.runs.resolve(ID + ".run"), ANCHOR);
-        if (begin) Files.writeString(f.attempts.resolve(ACT + ".begin"), BEGIN);
+        Files.writeString(f.runs.resolve(ID + FIXTURE_RUN_DA82F99F), ANCHOR);
+        if (begin) Files.writeString(f.attempts.resolve(ACT + FIXTURE_BEGIN_53B77CDD), BEGIN);
         var before = disk(f);
         assertEquals(
             PROTECTED, f.files.execute(s -> s.retire(RUN, TIME, new RunReferenceRepository(c))));
@@ -179,9 +189,10 @@ final class MaintenanceRunRetirementTest {
         assertThrows(
             IllegalArgumentException.class,
             () -> f.files.execute(s -> s.retire(RUN, wrong, repository)));
-      Files.writeString(f.attempts.resolve(SECOND + ".begin"), BEGIN.replace(ACT, SECOND));
       Files.writeString(
-          f.attempts.resolve(SECOND + ".done"),
+          f.attempts.resolve(SECOND + FIXTURE_BEGIN_53B77CDD), BEGIN.replace(ACT, SECOND));
+      Files.writeString(
+          f.attempts.resolve(SECOND + FIXTURE_DONE_67185DC1),
           DONE.replace(ACT, SECOND)
               .replace(END, "2025-01-03T00:00:00.000000Z")
               .replace("\n0\n", "\n10\n"));
@@ -195,7 +206,7 @@ final class MaintenanceRunRetirementTest {
               .replace(HASH, "e6ff18dc21a10852fe4de7e8606fe0ad005c8e242bdc535ea8d391dd052528de");
       probe.beforeQuery =
           () -> {
-            String marker = disk(f).get(ID + ".retire");
+            String marker = disk(f).get(ID + FIXTURE_RETIRE_F8493D5C);
             if (marker != null) {
               assertEquals(twoMarker, marker);
               trace("PT-BAT-099-two-activation-marker.txt", ascii(marker));
@@ -259,7 +270,7 @@ final class MaintenanceRunRetirementTest {
           "update schubert.inbox_inspection_progress set cutoff=cutoff+interval '1 microsecond'");
       failure(() -> f.files.execute(s -> s.retire(RUN, TIME, repository)));
       assertEquals(before, disk(f));
-      Files.delete(f.runs.resolve(ID + ".run"));
+      Files.delete(f.runs.resolve(ID + FIXTURE_RUN_DA82F99F));
       failure(() -> f.files.execute(s -> s.retirementCandidates()));
     }
   }
@@ -278,7 +289,7 @@ final class MaintenanceRunRetirementTest {
           () -> {
             var values = disk(f);
             snapshots.add(Set.copyOf(values.keySet()));
-            String marker = values.get(ID + ".retire");
+            String marker = values.get(ID + FIXTURE_RETIRE_F8493D5C);
             if (marker != null) {
               assertEquals(MARKER, marker);
               trace("PT-BAT-102-marker.txt", ascii(marker));
@@ -296,11 +307,11 @@ final class MaintenanceRunRetirementTest {
         selected.removeAll(expected.keySet());
         if (phases.isEmpty() || !phases.getLast().equals(selected)) phases.add(selected);
       }
-      String run = "runs/" + ID + ".run";
-      String begin = "attempts/" + ACT + ".begin";
-      String done = "attempts/" + ACT + ".done";
-      String plan = "attempts/" + ACT + ".plan";
-      String marker = ID + ".retire";
+      String run = "runs/" + ID + FIXTURE_RUN_DA82F99F;
+      String begin = "attempts/" + ACT + FIXTURE_BEGIN_53B77CDD;
+      String done = "attempts/" + ACT + FIXTURE_DONE_67185DC1;
+      String plan = "attempts/" + ACT + FIXTURE_PLAN_A6DBC386;
+      String marker = ID + FIXTURE_RETIRE_F8493D5C;
       assertEquals(
           List.of(
               Set.of(run, begin, done),
@@ -327,7 +338,7 @@ final class MaintenanceRunRetirementTest {
     try (var f = fixture();
         var c = locked()) {
       seed(f);
-      Files.writeString(f.attempts.resolve(ACT + ".plan"), DONE);
+      Files.writeString(f.attempts.resolve(ACT + FIXTURE_PLAN_A6DBC386), DONE);
       assertEquals(List.of(RUN), f.files.execute(s -> s.retirementCandidates()));
       failure(() -> f.files.execute(s -> s.resume(RUN.id(), UUID.fromString(SECOND))));
       assertEquals(
@@ -337,9 +348,11 @@ final class MaintenanceRunRetirementTest {
     try (var f = fixture();
         var c = locked()) {
       seed(f);
-      Files.writeString(f.attempts.resolve(SECOND + ".begin"), BEGIN.replace(ACT, SECOND));
-      Files.writeString(f.attempts.resolve(SECOND + ".done"), DONE.replace(ACT, SECOND));
-      Files.writeString(f.attempts.resolve(ACT + ".plan"), DONE);
+      Files.writeString(
+          f.attempts.resolve(SECOND + FIXTURE_BEGIN_53B77CDD), BEGIN.replace(ACT, SECOND));
+      Files.writeString(
+          f.attempts.resolve(SECOND + FIXTURE_DONE_67185DC1), DONE.replace(ACT, SECOND));
+      Files.writeString(f.attempts.resolve(ACT + FIXTURE_PLAN_A6DBC386), DONE);
       assertEquals(
           RETIRED, f.files.execute(s -> s.retire(RUN, TIME, new RunReferenceRepository(c))));
       assertEquals(Map.of(), disk(f));
@@ -370,7 +383,7 @@ final class MaintenanceRunRetirementTest {
         assertEquals(List.of(RUN), f.files.execute(s -> s.retirementCandidates()));
         f.reset();
         f.on(
-            "unlink",
+            FIXTURE_UNLINK_04963CA9,
             1,
             () ->
                 assertEquals(
@@ -397,7 +410,7 @@ final class MaintenanceRunRetirementTest {
           failure(() -> f.files.execute(s -> s.retire(RUN, TIME, new RunReferenceRepository(c))));
           assertTrue(f.triggered);
           assertEquals(before, disk(f));
-          assertEquals(0, f.count("unlink"));
+          assertEquals(0, f.count(FIXTURE_UNLINK_04963CA9));
           f.reset();
           assertEquals(
               RETIRED, f.files.execute(s -> s.retire(RUN, TIME, new RunReferenceRepository(c))));
@@ -424,16 +437,20 @@ final class MaintenanceRunRetirementTest {
         switch (fault) {
           case "beginCutoff" ->
               Files.writeString(
-                  f.attempts.resolve(ACT + ".begin"),
+                  f.attempts.resolve(ACT + FIXTURE_BEGIN_53B77CDD),
                   BEGIN.replace(CUTOFF, "2025-01-01T00:00:00.000001Z"));
           case "beginCollision" -> {
-            Files.writeString(f.runs.resolve(OTHER + ".run"), ANCHOR.replace(ID, OTHER));
-            Files.writeString(f.attempts.resolve(ACT + ".begin"), BEGIN.replace(ID, OTHER));
+            Files.writeString(
+                f.runs.resolve(OTHER + FIXTURE_RUN_DA82F99F), ANCHOR.replace(ID, OTHER));
+            Files.writeString(
+                f.attempts.resolve(ACT + FIXTURE_BEGIN_53B77CDD), BEGIN.replace(ID, OTHER));
           }
           case "doneCollision" -> {
-            Files.delete(f.attempts.resolve(ACT + ".begin"));
-            Files.writeString(f.runs.resolve(OTHER + ".run"), ANCHOR.replace(ID, OTHER));
-            Files.writeString(f.attempts.resolve(ACT + ".done"), DONE.replace(ID, OTHER));
+            Files.delete(f.attempts.resolve(ACT + FIXTURE_BEGIN_53B77CDD));
+            Files.writeString(
+                f.runs.resolve(OTHER + FIXTURE_RUN_DA82F99F), ANCHOR.replace(ID, OTHER));
+            Files.writeString(
+                f.attempts.resolve(ACT + FIXTURE_DONE_67185DC1), DONE.replace(ID, OTHER));
           }
           default -> throw new AssertionError(fault);
         }
@@ -455,23 +472,30 @@ final class MaintenanceRunRetirementTest {
           var c = locked()) {
         seededMarker(f, 0);
         switch (fault) {
-          case "missing" -> Files.delete(f.attempts.resolve(ACT + ".plan"));
+          case "missing" -> Files.delete(f.attempts.resolve(ACT + FIXTURE_PLAN_A6DBC386));
           case "extra" ->
-              Files.writeString(f.attempts.resolve(SECOND + ".plan"), DONE.replace(ACT, SECOND));
+              Files.writeString(
+                  f.attempts.resolve(SECOND + FIXTURE_PLAN_A6DBC386), DONE.replace(ACT, SECOND));
           case "digest" ->
               Files.writeString(
-                  f.maintenance.resolve(ID + ".retire"), MARKER.replace(HASH, "0".repeat(64)));
+                  f.maintenance.resolve(ID + FIXTURE_RETIRE_F8493D5C),
+                  MARKER.replace(HASH, "0".repeat(64)));
           case "count" ->
               Files.writeString(
-                  f.maintenance.resolve(ID + ".retire"), MARKER.replace("\n1\n", "\n2\n"));
+                  f.maintenance.resolve(ID + FIXTURE_RETIRE_F8493D5C),
+                  MARKER.replace("\n1\n", "\n2\n"));
           case "latest" ->
-              Files.writeString(f.maintenance.resolve(ID + ".retire"), MARKER.replace(END, CUTOFF));
+              Files.writeString(
+                  f.maintenance.resolve(ID + FIXTURE_RETIRE_F8493D5C), MARKER.replace(END, CUTOFF));
           case "value" ->
-              Files.writeString(f.attempts.resolve(ACT + ".plan"), DONE.replace("\n0\n", "\n10\n"));
+              Files.writeString(
+                  f.attempts.resolve(ACT + FIXTURE_PLAN_A6DBC386), DONE.replace("\n0\n", "\n10\n"));
           case "foreignBegin" ->
-              Files.writeString(f.attempts.resolve(SECOND + ".begin"), BEGIN.replace(ACT, SECOND));
+              Files.writeString(
+                  f.attempts.resolve(SECOND + FIXTURE_BEGIN_53B77CDD), BEGIN.replace(ACT, SECOND));
           case "foreignDone" ->
-              Files.writeString(f.attempts.resolve(SECOND + ".done"), DONE.replace(ACT, SECOND));
+              Files.writeString(
+                  f.attempts.resolve(SECOND + FIXTURE_DONE_67185DC1), DONE.replace(ACT, SECOND));
           default -> throw new AssertionError(fault);
         }
         var before = disk(f);
@@ -484,7 +508,13 @@ final class MaintenanceRunRetirementTest {
   void namespaceAndForeignArtifacts() throws Exception {
     for (String fault :
         List.of(
-            "unknown", "part", "secondMarker", "foreignPlan", "active", "pending", "orphanPlan"))
+            "unknown",
+            "part",
+            "secondMarker",
+            "foreignPlan",
+            FIXTURE_ACTIVE_DB0FB2BF,
+            "pending",
+            "orphanPlan"))
       try (var f = fixture();
           var c = locked()) {
         seededMarker(f, 0);
@@ -493,19 +523,23 @@ final class MaintenanceRunRetirementTest {
           case "part" -> Files.writeString(f.attempts.resolve(SECOND + ".part"), DONE);
           case "secondMarker" ->
               Files.writeString(
-                  f.maintenance.resolve(OTHER + ".retire"), MARKER.replace(ID, OTHER));
+                  f.maintenance.resolve(OTHER + FIXTURE_RETIRE_F8493D5C),
+                  MARKER.replace(ID, OTHER));
           case "foreignPlan" ->
               Files.writeString(
-                  f.attempts.resolve(SECOND + ".plan"),
+                  f.attempts.resolve(SECOND + FIXTURE_PLAN_A6DBC386),
                   DONE.replace(ID, OTHER).replace(ACT, SECOND));
-          case "active" -> Files.writeString(f.maintenance.resolve("active"), BEGIN);
+          case FIXTURE_ACTIVE_DB0FB2BF ->
+              Files.writeString(f.maintenance.resolve(FIXTURE_ACTIVE_DB0FB2BF), BEGIN);
           case "pending" -> {
-            Files.delete(f.maintenance.resolve(ID + ".retire"));
-            Files.writeString(f.attempts.resolve(SECOND + ".begin"), BEGIN.replace(ACT, SECOND));
+            Files.delete(f.maintenance.resolve(ID + FIXTURE_RETIRE_F8493D5C));
+            Files.writeString(
+                f.attempts.resolve(SECOND + FIXTURE_BEGIN_53B77CDD), BEGIN.replace(ACT, SECOND));
           }
           case "orphanPlan" -> {
-            Files.delete(f.maintenance.resolve(ID + ".retire"));
-            Files.writeString(f.attempts.resolve(ACT + ".plan"), DONE.replace("\n0\n", "\n10\n"));
+            Files.delete(f.maintenance.resolve(ID + FIXTURE_RETIRE_F8493D5C));
+            Files.writeString(
+                f.attempts.resolve(ACT + FIXTURE_PLAN_A6DBC386), DONE.replace("\n0\n", "\n10\n"));
           }
           default -> throw new AssertionError(fault);
         }
@@ -570,7 +604,7 @@ final class MaintenanceRunRetirementTest {
           RETIRED, f.files.execute(s -> s.retire(RUN, TIME, new RunReferenceRepository(c))));
       count = Map.copyOf(f.counts);
     }
-    for (String operation : List.of("publish", "unlink", "sync"))
+    for (String operation : List.of("publish", FIXTURE_UNLINK_04963CA9, "sync"))
       for (int at = 1; at <= Objects.requireNonNull(count.get(operation)); at++)
         try (var f = fixture();
             var c = locked()) {
@@ -781,8 +815,8 @@ final class MaintenanceRunRetirementTest {
                 throw new NoSuchAlgorithmException("synthetic provider detail");
               });
       failure(() -> broken.execute(s -> s.retire(RUN, TIME, new RunReferenceRepository(c))));
-      assertTrue(Files.exists(f.attempts.resolve(ACT + ".plan")));
-      assertFalse(Files.exists(f.maintenance.resolve(ID + ".retire")));
+      assertTrue(Files.exists(f.attempts.resolve(ACT + FIXTURE_PLAN_A6DBC386)));
+      assertFalse(Files.exists(f.maintenance.resolve(ID + FIXTURE_RETIRE_F8493D5C)));
       f.released();
       var nullDigest = new MaintenanceRunFiles(f.varPath, f.calls, f, f, f::part, () -> null);
       assertThrows(
@@ -803,30 +837,32 @@ final class MaintenanceRunRetirementTest {
   }
 
   private static void seed(MaintenanceRunFilesTest.Fixture f) throws IOException {
-    Files.writeString(f.runs.resolve(ID + ".run"), ANCHOR);
-    Files.writeString(f.attempts.resolve(ACT + ".begin"), BEGIN);
-    Files.writeString(f.attempts.resolve(ACT + ".done"), DONE);
+    Files.writeString(f.runs.resolve(ID + FIXTURE_RUN_DA82F99F), ANCHOR);
+    Files.writeString(f.attempts.resolve(ACT + FIXTURE_BEGIN_53B77CDD), BEGIN);
+    Files.writeString(f.attempts.resolve(ACT + FIXTURE_DONE_67185DC1), DONE);
   }
 
   private static void other(MaintenanceRunFilesTest.Fixture f, boolean completed)
       throws IOException {
-    Files.writeString(f.runs.resolve(OTHER + ".run"), ANCHOR.replace(ID, OTHER));
+    Files.writeString(f.runs.resolve(OTHER + FIXTURE_RUN_DA82F99F), ANCHOR.replace(ID, OTHER));
     Files.writeString(
-        f.attempts.resolve(SECOND + ".begin"), BEGIN.replace(ID, OTHER).replace(ACT, SECOND));
+        f.attempts.resolve(SECOND + FIXTURE_BEGIN_53B77CDD),
+        BEGIN.replace(ID, OTHER).replace(ACT, SECOND));
     if (completed)
       Files.writeString(
-          f.attempts.resolve(SECOND + ".done"), DONE.replace(ID, OTHER).replace(ACT, SECOND));
+          f.attempts.resolve(SECOND + FIXTURE_DONE_67185DC1),
+          DONE.replace(ID, OTHER).replace(ACT, SECOND));
   }
 
   private static void seededMarker(MaintenanceRunFilesTest.Fixture f, int stage)
       throws IOException {
     seed(f);
-    Files.writeString(f.attempts.resolve(ACT + ".plan"), DONE);
-    Files.writeString(f.maintenance.resolve(ID + ".retire"), MARKER);
-    if (stage >= 1) Files.delete(f.attempts.resolve(ACT + ".done"));
-    if (stage >= 2) Files.delete(f.attempts.resolve(ACT + ".begin"));
-    if (stage >= 3) Files.delete(f.runs.resolve(ID + ".run"));
-    if (stage >= 4) Files.delete(f.attempts.resolve(ACT + ".plan"));
+    Files.writeString(f.attempts.resolve(ACT + FIXTURE_PLAN_A6DBC386), DONE);
+    Files.writeString(f.maintenance.resolve(ID + FIXTURE_RETIRE_F8493D5C), MARKER);
+    if (stage >= 1) Files.delete(f.attempts.resolve(ACT + FIXTURE_DONE_67185DC1));
+    if (stage >= 2) Files.delete(f.attempts.resolve(ACT + FIXTURE_BEGIN_53B77CDD));
+    if (stage >= 3) Files.delete(f.runs.resolve(ID + FIXTURE_RUN_DA82F99F));
+    if (stage >= 4) Files.delete(f.attempts.resolve(ACT + FIXTURE_PLAN_A6DBC386));
   }
 
   private static Map<String, String> disk(MaintenanceRunFilesTest.Fixture f) throws IOException {

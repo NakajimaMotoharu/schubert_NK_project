@@ -45,6 +45,21 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** BAK/BKO/UI251/SS341 6.5/343 5.3; SSC059/PG166; BAT194..209, see 017/038. */
 final class BackupArtifactVerifierTest {
+  private static final String FIXTURE_SCHUBERT_NK_DUMP_96644B79 = "schubert_nk.dump";
+  private static final String FIXTURE_CONFIG_TAR_7AD1B394 = "config.tar";
+  private static final String FIXTURE_MANIFEST_JSON_0D4099EC = "MANIFEST.json";
+  private static final String FIXTURE_PART_92B0D5FC = ".part";
+  private static final String FIXTURE_PARENT_E31E1F44 = "parent";
+  private static final String FIXTURE_INO_4BE7C1E0 = "ino";
+  private static final String FIXTURE_DEV_8A17302D = "dev";
+  private static final String FIXTURE_SIZE_EB1E91E4 = "size";
+  private static final String FIXTURE_EXTRA_ED1BF81A = "extra";
+  private static final String FIXTURE_READ_6F365882 = "read";
+  private static final String FIXTURE_UID_0C18F38C = "uid";
+  private static final String FIXTURE_CHILD_0AFBC7C3 = "child";
+  private static final String FIXTURE_MODE_B6D5C2C3 = "mode";
+  private static final String FIXTURE_GID_0ACDD642 = "gid";
+  private static final String FIXTURE_CLOCK_49F3C56E = "clock";
   @TempDir Path temporary;
 
   /** PT-BAK-2740-001: pending163/171/182/188/229, independent inode/UID races. */
@@ -63,31 +78,41 @@ final class BackupArtifactVerifierTest {
             "fileDevice",
             "parentDrift",
             "lateNonroot")) {
-      for (String selected : List.of("schubert_nk.dump", "config.tar", "credentials.tar.age")) {
+      for (String selected :
+          List.of(
+              FIXTURE_SCHUBERT_NK_DUMP_96644B79,
+              FIXTURE_CONFIG_TAR_7AD1B394,
+              "credentials.tar.age")) {
         try (var f = fixture()) {
-          Files.delete(f.child.resolve("MANIFEST.json"));
-          Path pending = f.parent.resolve(DIR + ".part");
+          Files.delete(f.child.resolve(FIXTURE_MANIFEST_JSON_0D4099EC));
+          Path pending = f.parent.resolve(DIR + FIXTURE_PART_92B0D5FC);
           Files.move(f.child, pending);
           Map<String, byte[]> before = new HashMap<>();
-          for (String name : List.of("schubert_nk.dump", "config.tar", "credentials.tar.age"))
+          for (String name :
+              List.of(
+                  FIXTURE_SCHUBERT_NK_DUMP_96644B79,
+                  FIXTURE_CONFIG_TAR_7AD1B394,
+                  "credentials.tar.age"))
             before.put(name, Files.readAllBytes(pending.resolve(name)));
           var parentReads = new AtomicInteger();
           var fileReads = new AtomicInteger();
           if (bad.equals("nonroot")) f.effective = 1;
           f.metadata =
               (role, values) -> {
-                if (role.equals("parent") && parentReads.incrementAndGet() == 2) {
-                  if (bad.equals("parentDrift")) values.put("ino", (Long) values.get("ino") + 1);
+                if (role.equals(FIXTURE_PARENT_E31E1F44) && parentReads.incrementAndGet() == 2) {
+                  if (bad.equals("parentDrift"))
+                    values.put(FIXTURE_INO_4BE7C1E0, (Long) values.get(FIXTURE_INO_4BE7C1E0) + 1);
                   if (bad.equals("lateNonroot")) f.effective = 1;
                 }
-                if (bad.equals("childDevice") && role.equals(DIR + ".part"))
-                  values.put("dev", (Long) values.get("dev") + 1);
+                if (bad.equals("childDevice") && role.equals(DIR + FIXTURE_PART_92B0D5FC))
+                  values.put(FIXTURE_DEV_8A17302D, (Long) values.get(FIXTURE_DEV_8A17302D) + 1);
                 if (role.equals(selected)) {
                   int count = fileReads.incrementAndGet();
-                  if (bad.equals("negativeSize")) values.put("size", -1L);
-                  if (bad.equals("fileDevice")) values.put("dev", (Long) values.get("dev") + 1);
+                  if (bad.equals("negativeSize")) values.put(FIXTURE_SIZE_EB1E91E4, -1L);
+                  if (bad.equals("fileDevice"))
+                    values.put(FIXTURE_DEV_8A17302D, (Long) values.get(FIXTURE_DEV_8A17302D) + 1);
                   if (bad.equals("captureDrift") && count == 2)
-                    values.put("ino", (Long) values.get("ino") + 1);
+                    values.put(FIXTURE_INO_4BE7C1E0, (Long) values.get(FIXTURE_INO_4BE7C1E0) + 1);
                 }
               };
           var error =
@@ -97,7 +122,7 @@ final class BackupArtifactVerifierTest {
           for (var value : before.entrySet())
             assertArrayEquals(
                 value.getValue(), Files.readAllBytes(pending.resolve(value.getKey())));
-          assertFalse(Files.exists(pending.resolve("MANIFEST.json")));
+          assertFalse(Files.exists(pending.resolve(FIXTURE_MANIFEST_JSON_0D4099EC)));
           if (bad.equals("captureDrift")) assertEquals(2, fileReads.get());
           if (bad.equals("parentDrift") || bad.equals("lateNonroot"))
             assertEquals(2, parentReads.get());
@@ -114,8 +139,8 @@ final class BackupArtifactVerifierTest {
             UUID.fromString("12345678-9abc-def0-8123-456789abcdef"),
             java.time.Instant.parse("2026-09-12T15:00:02Z"));
     try (var f = fixture()) {
-      Files.delete(f.child.resolve("MANIFEST.json"));
-      Files.move(f.child, f.parent.resolve(DIR + ".part"));
+      Files.delete(f.child.resolve(FIXTURE_MANIFEST_JSON_0D4099EC));
+      Files.move(f.child, f.parent.resolve(DIR + FIXTURE_PART_92B0D5FC));
       var actual = f.verifier().observePending(request);
       assertEquals(new BackupFileDigest(26, DUMP_HASH), actual.dump());
       assertEquals(new BackupFileDigest(35, CONFIG_HASH), actual.configuration());
@@ -124,27 +149,39 @@ final class BackupArtifactVerifierTest {
       f.released();
     }
     for (String bad :
-        List.of("manifest", "missing", "extra", "wrongRequest", "owner", "drift", "read")) {
+        List.of(
+            "manifest",
+            "missing",
+            FIXTURE_EXTRA_ED1BF81A,
+            "wrongRequest",
+            "owner",
+            "drift",
+            FIXTURE_READ_6F365882)) {
       try (var f = fixture()) {
-        Files.delete(f.child.resolve("MANIFEST.json"));
-        Path pending = f.parent.resolve(DIR + ".part");
+        Files.delete(f.child.resolve(FIXTURE_MANIFEST_JSON_0D4099EC));
+        Path pending = f.parent.resolve(DIR + FIXTURE_PART_92B0D5FC);
         Files.move(f.child, pending);
         switch (bad) {
-          case "manifest" -> Files.writeString(pending.resolve("MANIFEST.json"), "{}\n");
-          case "missing" -> Files.delete(pending.resolve("config.tar"));
-          case "extra" -> Files.writeString(pending.resolve("extra"), "public");
+          case "manifest" ->
+              Files.writeString(pending.resolve(FIXTURE_MANIFEST_JSON_0D4099EC), "{}\n");
+          case "missing" -> Files.delete(pending.resolve(FIXTURE_CONFIG_TAR_7AD1B394));
+          case FIXTURE_EXTRA_ED1BF81A ->
+              Files.writeString(pending.resolve(FIXTURE_EXTRA_ED1BF81A), "public");
           case "owner" ->
               f.metadata =
                   (role, values) -> {
-                    if (role.equals("config.tar")) values.put("uid", 1);
+                    if (role.equals(FIXTURE_CONFIG_TAR_7AD1B394))
+                      values.put(FIXTURE_UID_0C18F38C, 1);
                   };
           case "drift" ->
               f.metadata =
                   (role, values) -> {
-                    if (role.equals("config.tar") && f.counts.getOrDefault("read", 0) >= 4)
-                      values.put("ino", ((Long) values.get("ino")) + 1);
+                    if (role.equals(FIXTURE_CONFIG_TAR_7AD1B394)
+                        && f.counts.getOrDefault(FIXTURE_READ_6F365882, 0) >= 4)
+                      values.put(
+                          FIXTURE_INO_4BE7C1E0, ((Long) values.get(FIXTURE_INO_4BE7C1E0)) + 1);
                   };
-          case "read" -> f.nullChannel = true;
+          case FIXTURE_READ_6F365882 -> f.nullChannel = true;
           default -> {}
         }
         var chosen =
@@ -216,9 +253,9 @@ final class BackupArtifactVerifierTest {
       }
     }
     try (var f = fixture()) {
-      Files.move(f.child, f.parent.resolve(DIR + ".part"));
+      Files.move(f.child, f.parent.resolve(DIR + FIXTURE_PART_92B0D5FC));
       failure(() -> f.verifier().verify(f.expected));
-      assertTrue(Files.exists(f.parent.resolve(DIR + ".part")));
+      assertTrue(Files.exists(f.parent.resolve(DIR + FIXTURE_PART_92B0D5FC)));
       f.released();
     }
     try (var f = fixture()) {
@@ -232,12 +269,12 @@ final class BackupArtifactVerifierTest {
 
   @Test
   void directoryAndOwnerContracts() throws Exception {
-    for (String role : List.of("parent", "child"))
+    for (String role : List.of(FIXTURE_PARENT_E31E1F44, FIXTURE_CHILD_0AFBC7C3))
       for (var bad :
           List.<Map.Entry<String, Object>>of(
-              Map.entry("mode", 040750), Map.entry("mode", 0100700),
-              Map.entry("uid", 0), Map.entry("gid", 0),
-              Map.entry("nlink", 1), Map.entry("size", -1L))) {
+              Map.entry(FIXTURE_MODE_B6D5C2C3, 040750), Map.entry(FIXTURE_MODE_B6D5C2C3, 0100700),
+              Map.entry(FIXTURE_UID_0C18F38C, 0), Map.entry(FIXTURE_GID_0ACDD642, 0),
+              Map.entry("nlink", 1), Map.entry(FIXTURE_SIZE_EB1E91E4, -1L))) {
         try (var f = fixture()) {
           f.selectedRole = role;
           f.metadata = (name, values) -> values.put(bad.getKey(), bad.getValue());
@@ -246,7 +283,7 @@ final class BackupArtifactVerifierTest {
           f.unchanged();
         }
       }
-    for (String role : List.of("parent", "child")) {
+    for (String role : List.of(FIXTURE_PARENT_E31E1F44, FIXTURE_CHILD_0AFBC7C3)) {
       try (var f = fixture()) {
         f.selectedRole = role;
         f.readonly = true;
@@ -255,8 +292,10 @@ final class BackupArtifactVerifierTest {
       }
     }
     try (var f = fixture()) {
-      f.selectedRole = "child";
-      f.metadata = (role, values) -> values.put("dev", ((Long) values.get("dev")) + 1);
+      f.selectedRole = FIXTURE_CHILD_0AFBC7C3;
+      f.metadata =
+          (role, values) ->
+              values.put(FIXTURE_DEV_8A17302D, ((Long) values.get(FIXTURE_DEV_8A17302D)) + 1);
       failure(() -> f.verifier().verify(f.expected));
       f.released();
     }
@@ -272,11 +311,11 @@ final class BackupArtifactVerifierTest {
         var verifier = new BackupArtifactVerifier(f.root, f, id, id, f, f::digest, f::clock);
         f.metadata =
             (role, values) -> {
-              if (role.equals("parent")
-                  || role.equals("child")
-                  || role.equals("schubert_nk.dump")) {
-                values.put("uid", (int) id);
-                values.put("gid", (int) id);
+              if (role.equals(FIXTURE_PARENT_E31E1F44)
+                  || role.equals(FIXTURE_CHILD_0AFBC7C3)
+                  || role.equals(FIXTURE_SCHUBERT_NK_DUMP_96644B79)) {
+                values.put(FIXTURE_UID_0C18F38C, (int) id);
+                values.put(FIXTURE_GID_0ACDD642, (int) id);
               }
             };
         assertEquals(MANIFEST_HASH, verifier.verify(f.expected).sha256());
@@ -303,13 +342,13 @@ final class BackupArtifactVerifierTest {
     for (String name : NAMES) {
       for (var bad :
           List.<Map.Entry<String, Object>>of(
-              Map.entry("mode", 0100640),
-              Map.entry("mode", 0120600),
-              Map.entry("uid", 99),
-              Map.entry("gid", 99),
+              Map.entry(FIXTURE_MODE_B6D5C2C3, 0100640),
+              Map.entry(FIXTURE_MODE_B6D5C2C3, 0120600),
+              Map.entry(FIXTURE_UID_0C18F38C, 99),
+              Map.entry(FIXTURE_GID_0ACDD642, 99),
               Map.entry("nlink", 2),
-              Map.entry("size", 0L),
-              Map.entry("dev", Long.MIN_VALUE))) {
+              Map.entry(FIXTURE_SIZE_EB1E91E4, 0L),
+              Map.entry(FIXTURE_DEV_8A17302D, Long.MIN_VALUE))) {
         try (var f = fixture()) {
           f.selectedRole = name;
           f.metadata = (role, values) -> values.put(bad.getKey(), bad.getValue());
@@ -334,7 +373,16 @@ final class BackupArtifactVerifierTest {
       }
     }
     for (String field :
-        List.of("mode", "uid", "gid", "nlink", "size", "dev", "ino", "lastModifiedTime", "ctime"))
+        List.of(
+            FIXTURE_MODE_B6D5C2C3,
+            FIXTURE_UID_0C18F38C,
+            FIXTURE_GID_0ACDD642,
+            "nlink",
+            FIXTURE_SIZE_EB1E91E4,
+            FIXTURE_DEV_8A17302D,
+            FIXTURE_INO_4BE7C1E0,
+            "lastModifiedTime",
+            "ctime"))
       for (boolean absent : List.of(false, true))
         try (var f = fixture()) {
           f.metadata =
@@ -355,7 +403,8 @@ final class BackupArtifactVerifierTest {
   @Test
   void sizesShortLongAndZeroRead() throws Exception {
     for (String name : NAMES) {
-      for (String mode : List.of("zero", "short", "count", "position", "extra", "eof-position"))
+      for (String mode :
+          List.of("zero", "short", "count", "position", FIXTURE_EXTRA_ED1BF81A, "eof-position"))
         try (var f = fixture()) {
           f.selectedRole = name;
           f.readMode = mode;
@@ -375,7 +424,9 @@ final class BackupArtifactVerifierTest {
     try (var f = fixture()) {
       f.smallRead = 1;
       assertEquals(MANIFEST_HASH, f.verifier().verify(f.expected).sha256());
-      assertEquals(1061, f.counts.get("read")); // 964+26+35+32 data reads, plus four EOF reads.
+      assertEquals(
+          1061,
+          f.counts.get(FIXTURE_READ_6F365882)); // 964+26+35+32 data reads, plus four EOF reads.
       f.released();
       f.unchanged();
     }
@@ -395,10 +446,11 @@ final class BackupArtifactVerifierTest {
       try (var f = fixture()) {
         byte[] wrong = golden();
         wrong[position] ^= 1;
-        Files.write(f.child.resolve("MANIFEST.json"), wrong);
+        Files.write(f.child.resolve(FIXTURE_MANIFEST_JSON_0D4099EC), wrong);
         failure(() -> f.verifier().verify(f.expected));
         f.released();
-        assertArrayEquals(wrong, Files.readAllBytes(f.child.resolve("MANIFEST.json")));
+        assertArrayEquals(
+            wrong, Files.readAllBytes(f.child.resolve(FIXTURE_MANIFEST_JSON_0D4099EC)));
       }
     try (var f = fixture()) {
       var wrong =
@@ -472,7 +524,10 @@ final class BackupArtifactVerifierTest {
         f.hook =
             (name, count) -> {
               if (name.equals("attributes") && count == point)
-                f.metadata = (role, values) -> values.put("ino", ((Long) values.get("ino")) + 1);
+                f.metadata =
+                    (role, values) ->
+                        values.put(
+                            FIXTURE_INO_4BE7C1E0, ((Long) values.get(FIXTURE_INO_4BE7C1E0)) + 1);
             };
         failure(() -> f.verifier().verify(f.expected));
         f.released();
@@ -554,9 +609,10 @@ final class BackupArtifactVerifierTest {
     try (var f = fixture()) {
       f.hook =
           (name, n) -> {
-            if (name.equals("read") && n == 3)
+            if (name.equals(FIXTURE_READ_6F365882) && n == 3)
               try {
-                Files.writeString(f.child.resolve("schubert_nk.dump"), "X".repeat(26));
+                Files.writeString(
+                    f.child.resolve(FIXTURE_SCHUBERT_NK_DUMP_96644B79), "X".repeat(26));
               } catch (IOException e) {
                 throw new UncheckedIOException(e);
               }
@@ -584,13 +640,15 @@ final class BackupArtifactVerifierTest {
       try (var f = fixture()) {
         byte[] bytes = new byte[size];
         Arrays.fill(bytes, (byte) 'D');
-        Files.write(f.child.resolve("schubert_nk.dump"), bytes);
+        Files.write(f.child.resolve(FIXTURE_SCHUBERT_NK_DUMP_96644B79), bytes);
         String literal =
             new String(golden(), java.nio.charset.StandardCharsets.US_ASCII)
                 .replace("\"size\":26,", "\"size\":" + size + ",")
                 .replace(DUMP_HASH, fileHashes.get(size));
         Files.writeString(
-            f.child.resolve("MANIFEST.json"), literal, java.nio.charset.StandardCharsets.US_ASCII);
+            f.child.resolve(FIXTURE_MANIFEST_JSON_0D4099EC),
+            literal,
+            java.nio.charset.StandardCharsets.US_ASCII);
         f.expected =
             BackupManifestFixture.manifest(
                 6,
@@ -602,7 +660,7 @@ final class BackupArtifactVerifierTest {
         var actual = f.verifier().verify(f.expected);
         assertEquals(size == 196613 ? 968 : 967, actual.size());
         assertEquals(manifestHashes.get(size), actual.sha256());
-        assertEquals(7 + (size + 65535) / 65536, f.counts.get("read"));
+        assertEquals(7 + (size + 65535) / 65536, f.counts.get(FIXTURE_READ_6F365882));
         assertTrue(f.buffers.stream().allMatch(b -> b.length == 65536));
         f.released();
       }
@@ -637,7 +695,7 @@ final class BackupArtifactVerifierTest {
       assertSame(fatal, assertThrows(AssertionError.class, () -> f.verifier().verify(f.expected)));
       f.released();
     }
-    for (String location : List.of("read", "next", "openEntry"))
+    for (String location : List.of(FIXTURE_READ_6F365882, "next", "openEntry"))
       for (int kind = 0; kind < 4; kind++)
         try (var f = fixture()) {
           Throwable primary =
@@ -650,7 +708,7 @@ final class BackupArtifactVerifierTest {
           f.extraFaults.add(location + "#1");
           f.faultTypes.put(location + "#1", primary);
           f.extraFaults.add("closeDirectory#1");
-          if (location.equals("read")) f.extraFaults.add("closeChannel#1");
+          if (location.equals(FIXTURE_READ_6F365882)) f.extraFaults.add("closeChannel#1");
           if (location.equals("next")) f.extraFaults.add("closeNames#1");
           if (kind == 0) failure(() -> f.verifier().verify(f.expected));
           else {
@@ -676,7 +734,7 @@ final class BackupArtifactVerifierTest {
       try (var f = fixture()) {
         f.hook =
             (name, n) -> {
-              if (name.equals("clock") && n == 2) f.clockValue = 100 + elapsed;
+              if (name.equals(FIXTURE_CLOCK_49F3C56E) && n == 2) f.clockValue = 100 + elapsed;
             };
         failure(() -> f.verifier().verify(f.expected));
         f.released();
@@ -684,7 +742,7 @@ final class BackupArtifactVerifierTest {
     try (var f = fixture()) {
       f.hook =
           (name, n) -> {
-            if (name.equals("clock") && n == 2) f.clockValue = 100 + 1799999999999L;
+            if (name.equals(FIXTURE_CLOCK_49F3C56E) && n == 2) f.clockValue = 100 + 1799999999999L;
           };
       assertEquals(MANIFEST_HASH, f.verifier().verify(f.expected).sha256());
       f.released();
@@ -693,7 +751,7 @@ final class BackupArtifactVerifierTest {
       f.clockValue = Long.MAX_VALUE - 50;
       f.hook =
           (name, n) -> {
-            if (name.equals("clock") && n == 2) f.clockValue = Long.MIN_VALUE + 49;
+            if (name.equals(FIXTURE_CLOCK_49F3C56E) && n == 2) f.clockValue = Long.MIN_VALUE + 49;
           };
       assertEquals(MANIFEST_HASH, f.verifier().verify(f.expected).sha256());
       f.released();
@@ -703,7 +761,8 @@ final class BackupArtifactVerifierTest {
       try (var f = fixture()) {
         f.hook =
             (name, n) -> {
-              if (name.equals("clock") && n == selected) f.clockValue = 100 + 1800000000000L;
+              if (name.equals(FIXTURE_CLOCK_49F3C56E) && n == selected)
+                f.clockValue = 100 + 1800000000000L;
             };
         failure(() -> f.verifier().verify(f.expected));
         f.released();
@@ -715,7 +774,8 @@ final class BackupArtifactVerifierTest {
       try (var f = fixture()) {
         f.hook =
             (name, n) -> {
-              if (name.equals("clock") && n == selected) Thread.currentThread().interrupt();
+              if (name.equals(FIXTURE_CLOCK_49F3C56E) && n == selected)
+                Thread.currentThread().interrupt();
             };
         try {
           failure(() -> f.verifier().verify(f.expected));
@@ -835,7 +895,7 @@ final class BackupArtifactVerifierTest {
       AtomicInteger maximum = new AtomicInteger();
       f.hook =
           (name, n) -> {
-            if (name.equals("clock")) {
+            if (name.equals(FIXTURE_CLOCK_49F3C56E)) {
               if ((n - 1) % 207 == 0) maximum.accumulateAndGet(active.incrementAndGet(), Math::max);
               if (n % 207 == 0) active.decrementAndGet();
             }

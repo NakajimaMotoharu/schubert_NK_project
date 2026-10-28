@@ -29,6 +29,10 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** OPS-009/BAK-001/UI251/SS341/343/SSC104/PG332; CBA001..005 independent SQL/file oracle. */
 final class CleanupBackupAdmissionTest {
+  private static final String FIXTURE_ROOT_CLEANUP_BACKUP_UNAVAILABLE_E87CD24E =
+      "root cleanup backup unavailable";
+  private static final String FIXTURE_ROLLBACK_3770B198 = "rollback";
+  private static final String FIXTURE_PUBLIC_CANARY_73B3ABA9 = "PUBLIC_CANARY";
   @TempDir static Path databaseRoot;
   @TempDir Path temporary;
   private static final Instant OBSERVED = Instant.parse("2026-09-12T15:00:06Z");
@@ -123,7 +127,7 @@ final class CleanupBackupAdmissionTest {
       bytes[0] ^= 1;
       Files.write(f.child.resolve("config.tar"), bytes);
       assertEquals(
-          "root cleanup backup unavailable",
+          FIXTURE_ROOT_CLEANUP_BACKUP_UNAVAILABLE_E87CD24E,
           assertThrows(IOException.class, () -> admission(f).verify(request(), OBSERVED, forbidden))
               .getMessage());
       assertEquals(0, f.counts.getOrDefault("create", 0));
@@ -133,7 +137,7 @@ final class CleanupBackupAdmissionTest {
       var wrong =
           new CleanupWorkerRequest(request().run(), ACTIVATION, request().cutoff(), "a".repeat(64));
       assertEquals(
-          "root cleanup backup unavailable",
+          FIXTURE_ROOT_CLEANUP_BACKUP_UNAVAILABLE_E87CD24E,
           assertThrows(
                   IOException.class,
                   () ->
@@ -160,7 +164,7 @@ final class CleanupBackupAdmissionTest {
     try (var f = new BackupArtifactFixture(temporary);
         var child = childConnection()) {
       assertEquals(
-          "root cleanup backup unavailable",
+          FIXTURE_ROOT_CLEANUP_BACKUP_UNAVAILABLE_E87CD24E,
           assertThrows(IOException.class, () -> admission(f).verify(request(), OBSERVED, child))
               .getMessage());
       assertTrue(child.getAutoCommit());
@@ -179,7 +183,7 @@ final class CleanupBackupAdmissionTest {
     try (var f = new BackupArtifactFixture(temporary);
         var child = childConnection()) {
       assertEquals(
-          "root cleanup backup unavailable",
+          FIXTURE_ROOT_CLEANUP_BACKUP_UNAVAILABLE_E87CD24E,
           assertThrows(IOException.class, () -> admission(f).verify(request(), OBSERVED, child))
               .getMessage());
       assertTrue(child.getAutoCommit());
@@ -199,7 +203,7 @@ final class CleanupBackupAdmissionTest {
                   Connection.class.getClassLoader(),
                   new Class<?>[] {Connection.class},
                   (proxy, method, args) -> {
-                    if (method.getName().equals("rollback")) {
+                    if (method.getName().equals(FIXTURE_ROLLBACK_3770B198)) {
                       rollbacks.incrementAndGet();
                       throw new SQLException("PUBLIC_SYNTHETIC_CANARY");
                     }
@@ -212,7 +216,7 @@ final class CleanupBackupAdmissionTest {
                     }
                   });
       assertEquals(
-          "root cleanup backup unavailable",
+          FIXTURE_ROOT_CLEANUP_BACKUP_UNAVAILABLE_E87CD24E,
           assertThrows(IOException.class, () -> admission(f).verify(request(), OBSERVED, broken))
               .getMessage());
       assertEquals(2, rollbacks.get());
@@ -249,20 +253,20 @@ final class CleanupBackupAdmissionTest {
                   null));
       child.setReadOnly(true);
       assertEquals(
-          "root cleanup backup unavailable",
+          FIXTURE_ROOT_CLEANUP_BACKUP_UNAVAILABLE_E87CD24E,
           assertThrows(IOException.class, () -> admission.verify(request(), OBSERVED, child))
               .getMessage());
       child.setReadOnly(false);
       child.setAutoCommit(false);
       assertEquals(
-          "root cleanup backup unavailable",
+          FIXTURE_ROOT_CLEANUP_BACKUP_UNAVAILABLE_E87CD24E,
           assertThrows(IOException.class, () -> admission.verify(request(), OBSERVED, child))
               .getMessage());
       child.rollback();
       child.setAutoCommit(true);
       child.setTransactionIsolation(Connection.TRANSACTION_SERIALIZABLE);
       assertEquals(
-          "root cleanup backup unavailable",
+          FIXTURE_ROOT_CLEANUP_BACKUP_UNAVAILABLE_E87CD24E,
           assertThrows(IOException.class, () -> admission.verify(request(), OBSERVED, child))
               .getMessage());
     }
@@ -276,7 +280,7 @@ final class CleanupBackupAdmissionTest {
           var child = childConnection()) {
         var checks = new AtomicInteger();
         assertEquals(
-            "root cleanup backup unavailable",
+            FIXTURE_ROOT_CLEANUP_BACKUP_UNAVAILABLE_E87CD24E,
             assertThrows(
                     IOException.class,
                     () -> atInterrupt(f, stopAt, checks).verify(request(), OBSERVED, child))
@@ -293,7 +297,7 @@ final class CleanupBackupAdmissionTest {
     try (var f = new BackupArtifactFixture(temporary);
         var child = childConnection()) {
       assertEquals(
-          "root cleanup backup unavailable",
+          FIXTURE_ROOT_CLEANUP_BACKUP_UNAVAILABLE_E87CD24E,
           assertThrows(
                   IOException.class,
                   () ->
@@ -301,10 +305,13 @@ final class CleanupBackupAdmissionTest {
                           .verify(
                               request(),
                               OBSERVED,
-                              spy(child, "getAutoCommit", new SQLException("PUBLIC_CANARY"))))
+                              spy(
+                                  child,
+                                  "getAutoCommit",
+                                  new SQLException(FIXTURE_PUBLIC_CANARY_73B3ABA9))))
               .getMessage());
       assertEquals(
-          "root cleanup backup unavailable",
+          FIXTURE_ROOT_CLEANUP_BACKUP_UNAVAILABLE_E87CD24E,
           assertThrows(
                   IOException.class,
                   () ->
@@ -312,13 +319,16 @@ final class CleanupBackupAdmissionTest {
                           .verify(
                               request(),
                               OBSERVED,
-                              spy(child, "setAutoCommit", new SQLException("PUBLIC_CANARY"))))
+                              spy(
+                                  child,
+                                  "setAutoCommit",
+                                  new SQLException(FIXTURE_PUBLIC_CANARY_73B3ABA9))))
               .getMessage());
       assertTrue(child.getAutoCommit());
     }
     try (var f = new BackupArtifactFixture(temporary);
         var child = childConnection()) {
-      var unknown = new IllegalStateException("PUBLIC_CANARY");
+      var unknown = new IllegalStateException(FIXTURE_PUBLIC_CANARY_73B3ABA9);
       var rollbacks = new AtomicInteger();
       Connection fault =
           (Connection)
@@ -327,9 +337,9 @@ final class CleanupBackupAdmissionTest {
                   new Class<?>[] {Connection.class},
                   (proxy, method, args) -> {
                     if (method.getName().equals("prepareStatement")) throw unknown;
-                    if (method.getName().equals("rollback")) {
+                    if (method.getName().equals(FIXTURE_ROLLBACK_3770B198)) {
                       rollbacks.incrementAndGet();
-                      throw new SQLException("PUBLIC_CANARY");
+                      throw new SQLException(FIXTURE_PUBLIC_CANARY_73B3ABA9);
                     }
                     try {
                       return method.invoke(child, args);
@@ -348,8 +358,8 @@ final class CleanupBackupAdmissionTest {
     }
     try (var f = new BackupArtifactFixture(temporary);
         var child = childConnection()) {
-      var unknown = new IllegalStateException("PUBLIC_CANARY");
-      var fault = spy(child, "rollback", unknown);
+      var unknown = new IllegalStateException(FIXTURE_PUBLIC_CANARY_73B3ABA9);
+      var fault = spy(child, FIXTURE_ROLLBACK_3770B198, unknown);
       assertSame(
           unknown,
           assertThrows(
@@ -363,7 +373,7 @@ final class CleanupBackupAdmissionTest {
   void unknownPrimaryErrorSurvivesKnownRollbackFault() throws Exception { // CBA004
     try (var f = new BackupArtifactFixture(temporary);
         var child = childConnection()) {
-      var fatal = new AssertionError("PUBLIC_CANARY");
+      var fatal = new AssertionError(FIXTURE_PUBLIC_CANARY_73B3ABA9);
       Connection fault =
           (Connection)
               Proxy.newProxyInstance(
@@ -371,8 +381,8 @@ final class CleanupBackupAdmissionTest {
                   new Class<?>[] {Connection.class},
                   (proxy, method, args) -> {
                     if (method.getName().equals("prepareStatement")) throw fatal;
-                    if (method.getName().equals("rollback"))
-                      throw new SQLException("PUBLIC_CANARY");
+                    if (method.getName().equals(FIXTURE_ROLLBACK_3770B198))
+                      throw new SQLException(FIXTURE_PUBLIC_CANARY_73B3ABA9);
                     try {
                       return method.invoke(child, args);
                     } catch (InvocationTargetException reflected) {
@@ -393,7 +403,7 @@ final class CleanupBackupAdmissionTest {
   void knownPrimaryAndUnknownOrKnownCleanupNeverSucceed() throws Exception { // CBA004
     try (var f = new BackupArtifactFixture(temporary);
         var child = childConnection()) {
-      var unknown = new IllegalStateException("PUBLIC_CANARY");
+      var unknown = new IllegalStateException(FIXTURE_PUBLIC_CANARY_73B3ABA9);
       var checks = new AtomicInteger();
       assertSame(
           unknown,
@@ -401,7 +411,8 @@ final class CleanupBackupAdmissionTest {
               IllegalStateException.class,
               () ->
                   atInterrupt(f, 3, checks)
-                      .verify(request(), OBSERVED, spy(child, "rollback", unknown))));
+                      .verify(
+                          request(), OBSERVED, spy(child, FIXTURE_ROLLBACK_3770B198, unknown))));
       assertEquals(3, checks.get());
       assertFalse(child.getAutoCommit());
       child.rollback();
@@ -410,7 +421,7 @@ final class CleanupBackupAdmissionTest {
         var child = childConnection()) {
       var checks = new AtomicInteger();
       assertEquals(
-          "root cleanup backup unavailable",
+          FIXTURE_ROOT_CLEANUP_BACKUP_UNAVAILABLE_E87CD24E,
           assertThrows(
                   IOException.class,
                   () ->
@@ -418,7 +429,10 @@ final class CleanupBackupAdmissionTest {
                           .verify(
                               request(),
                               OBSERVED,
-                              spy(child, "rollback", new BatchRepositoryException())))
+                              spy(
+                                  child,
+                                  FIXTURE_ROLLBACK_3770B198,
+                                  new BatchRepositoryException())))
               .getMessage());
       assertFalse(child.getAutoCommit());
       child.rollback();
@@ -434,7 +448,7 @@ final class CleanupBackupAdmissionTest {
     try (var f = new BackupArtifactFixture(temporary);
         var child = childConnection()) {
       assertEquals(
-          "root cleanup backup unavailable",
+          FIXTURE_ROOT_CLEANUP_BACKUP_UNAVAILABLE_E87CD24E,
           assertThrows(
                   IOException.class,
                   () ->
@@ -442,7 +456,10 @@ final class CleanupBackupAdmissionTest {
                           .verify(
                               request(),
                               OBSERVED,
-                              spy(child, "rollback", new SQLException("PUBLIC_CANARY"))))
+                              spy(
+                                  child,
+                                  FIXTURE_ROLLBACK_3770B198,
+                                  new SQLException(FIXTURE_PUBLIC_CANARY_73B3ABA9))))
               .getMessage());
       assertFalse(child.getAutoCommit());
       assertEquals("BACKUP_CONFIG:SUCCESS:2:68,BACKUP_DB:SUCCESS:1:26", rows(child));

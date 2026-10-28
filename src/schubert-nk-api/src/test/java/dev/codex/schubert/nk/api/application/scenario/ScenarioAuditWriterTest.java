@@ -45,6 +45,8 @@ import org.junit.jupiter.api.Test;
  * Independent JDBC bindings/fault oracle; BUG742/PT-SCN-AUD469003..006. No DB expected generator.
  */
 final class ScenarioAuditWriterTest {
+  private static final String FIXTURE_NONE_30A0924A = "none";
+  private static final String FIXTURE_PREPARE_1F4EE68F = "prepare";
   private static final Instant NOW = Instant.parse("2026-09-08T00:01:00Z");
   private static final AuthenticatedActor ACTOR =
       new AuthenticatedActor(101, "e\u0301\n\t\r\u2028\u2029", Role.USER);
@@ -66,7 +68,7 @@ final class ScenarioAuditWriterTest {
                   count == 0 ? 0 : 1,
                   Math.min(count, 100)),
               List.of());
-      var jdbc = new Jdbc("none", 1);
+      var jdbc = new Jdbc(FIXTURE_NONE_30A0924A, 1);
       new ScenarioAuditWriter().write(jdbc.connection(), ACTOR, request, response, NOW);
       assertBinding(jdbc, request, "SCENARIO_SEARCHED", count);
     }
@@ -112,7 +114,7 @@ final class ScenarioAuditWriterTest {
       var response =
           new TypedPayloadValues(
               new LayoutId("SCNRSP01"), metadata, file ? List.of() : List.of(record));
-      var jdbc = new Jdbc("none", 1);
+      var jdbc = new Jdbc(FIXTURE_NONE_30A0924A, 1);
       new ScenarioAuditWriter().write(jdbc.connection(), ACTOR, request, response, NOW);
       assertBinding(jdbc, request, "SCENARIO_VIEWED", file ? 201 : 1);
     }
@@ -125,7 +127,7 @@ final class ScenarioAuditWriterTest {
       if (!prefix.equals("GAM")) put(data, 0, "NUKITASHI1");
       if (prefix.equals("SCF")) put(data, 12, "01");
       var request = ScenarioRequest.decode(message(prefix + "REQ01", data));
-      var jdbc = new Jdbc("prepare", 1);
+      var jdbc = new Jdbc(FIXTURE_PREPARE_1F4EE68F, 1);
       new ScenarioAuditWriter().write(jdbc.connection(), ACTOR, request, searchResponse(), NOW);
       assertEquals(0, jdbc.prepare);
       assertEquals(0, jdbc.close);
@@ -135,7 +137,7 @@ final class ScenarioAuditWriterTest {
   @Test
   void sqlFailuresArePropagatedWithStatementOwnership() {
     var request = ScenarioRequest.decode(message("SRCREQ01", search()));
-    for (String fault : List.of("prepare", "bind", "execute", "close")) {
+    for (String fault : List.of(FIXTURE_PREPARE_1F4EE68F, "bind", "execute", "close")) {
       var jdbc = new Jdbc(fault, 1);
       var failure =
           assertThrows(
@@ -145,10 +147,10 @@ final class ScenarioAuditWriterTest {
                       .write(jdbc.connection(), ACTOR, request, searchResponse(), NOW));
       assertSame(jdbc.failure, failure);
       assertEquals(1, jdbc.faultReached);
-      assertEquals(fault.equals("prepare") ? 0 : 1, jdbc.close);
+      assertEquals(fault.equals(FIXTURE_PREPARE_1F4EE68F) ? 0 : 1, jdbc.close);
     }
     for (int changed : new int[] {0, 2}) {
-      var jdbc = new Jdbc("none", changed);
+      var jdbc = new Jdbc(FIXTURE_NONE_30A0924A, changed);
       assertThrows(
           SQLException.class,
           () ->
@@ -162,7 +164,7 @@ final class ScenarioAuditWriterTest {
   @Test
   void nullBoundaryFailsBeforeDatabaseEffects() {
     var request = ScenarioRequest.decode(message("SRCREQ01", search()));
-    var jdbc = new Jdbc("none", 1);
+    var jdbc = new Jdbc(FIXTURE_NONE_30A0924A, 1);
     var writer = new ScenarioAuditWriter();
     assertThrows(
         NullPointerException.class,
@@ -237,7 +239,7 @@ final class ScenarioAuditWriterTest {
                 if (!m.getName().equals("prepareStatement"))
                   throw new AssertionError("audit must not own connection lifecycle");
                 prepare++;
-                fail("prepare");
+                fail(FIXTURE_PREPARE_1F4EE68F);
                 assertEquals(
                     "insert into schubert.app_logs(logged_at,service,category,level,action,message, message_id,correlation_id,actor_user_id,actor_username,details) values (?,'API','ACTION','INFO',?,?,?,?,?,?,cast(? as jsonb))",
                     ((String) a[0]).replaceAll("\\s+", " ").trim());

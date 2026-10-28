@@ -25,23 +25,55 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** Independent syscall order oracle; borrowed ownership and actual exec/flock interop. */
 final class LinuxExecDescriptorsTest {
+  private static final String FIXTURE_BODY_BFD4D039 = "body";
+  private static final String FIXTURE_128_1_0_31CFFFFA = "128:1:0";
+  private static final String FIXTURE_128_2_0_F22A3178 = "128:2:0";
+  private static final String FIXTURE_129_1_0_F3574D87 = "129:1:0";
+  private static final String FIXTURE_129_2_0_AE3E5612 = "129:2:0";
+  private static final String FIXTURE_129_2_1_81F75D1D = "129:2:1";
+  private static final String FIXTURE_128_2_1_FBB8F1D8 = "128:2:1";
+  private static final String FIXTURE_PUBLIC_UNKNOWN_5B451478 = "public unknown";
+  private static final String FIXTURE_AMD64_58D0BD71 = "amd64";
+  private static final String FIXTURE_LINUX_1CA133AF = "Linux";
   @TempDir Path root;
 
   @Test
   void opsXfd001ExactlyTwoFlagsRestoredInReverseOrder() {
     var calls = new ArrayList<String>();
     var descriptor = fixture(calls);
-    assertDoesNotThrow(() -> descriptor.withInherited(128, 129, () -> calls.add("body")));
+    assertDoesNotThrow(
+        () -> descriptor.withInherited(128, 129, () -> calls.add(FIXTURE_BODY_BFD4D039)));
     assertEquals(
-        List.of("128:1:0", "128:2:0", "129:1:0", "129:2:0", "body", "129:2:1", "128:2:1"), calls);
+        List.of(
+            FIXTURE_128_1_0_31CFFFFA,
+            FIXTURE_128_2_0_F22A3178,
+            FIXTURE_129_1_0_F3574D87,
+            FIXTURE_129_2_0_AE3E5612,
+            FIXTURE_BODY_BFD4D039,
+            FIXTURE_129_2_1_81F75D1D,
+            FIXTURE_128_2_1_FBB8F1D8),
+        calls);
   }
 
   @Test
   void opsXfd002EveryNativeFailureAndPartialTransition() {
     var expected =
-        List.of("128:1:0", "128:2:0", "129:1:0", "129:2:0", "body", "129:2:1", "128:2:1");
+        List.of(
+            FIXTURE_128_1_0_31CFFFFA,
+            FIXTURE_128_2_0_F22A3178,
+            FIXTURE_129_1_0_F3574D87,
+            FIXTURE_129_2_0_AE3E5612,
+            FIXTURE_BODY_BFD4D039,
+            FIXTURE_129_2_1_81F75D1D,
+            FIXTURE_128_2_1_FBB8F1D8);
     for (String failed :
-        List.of("128:1:0", "128:2:0", "129:1:0", "129:2:0", "129:2:1", "128:2:1")) {
+        List.of(
+            FIXTURE_128_1_0_31CFFFFA,
+            FIXTURE_128_2_0_F22A3178,
+            FIXTURE_129_1_0_F3574D87,
+            FIXTURE_129_2_0_AE3E5612,
+            FIXTURE_129_2_1_81F75D1D,
+            FIXTURE_128_2_1_FBB8F1D8)) {
       for (int returned : List.of(-1, 2)) {
         var calls = new ArrayList<String>();
         var descriptor =
@@ -54,15 +86,15 @@ final class LinuxExecDescriptorsTest {
         unavailable(
             assertThrows(
                 StorageIoException.class,
-                () -> descriptor.withInherited(128, 129, () -> calls.add("body"))));
+                () -> descriptor.withInherited(128, 129, () -> calls.add(FIXTURE_BODY_BFD4D039))));
         var oracle = new ArrayList<>(expected.subList(0, expected.indexOf(failed) + 1));
-        if (failed.equals("128:2:0")) oracle.add("128:2:1");
-        if (failed.equals("129:1:0")) oracle.add("128:2:1");
-        if (failed.equals("129:2:0")) {
-          oracle.add("129:2:1");
-          oracle.add("128:2:1");
+        if (failed.equals(FIXTURE_128_2_0_F22A3178)) oracle.add(FIXTURE_128_2_1_FBB8F1D8);
+        if (failed.equals(FIXTURE_129_1_0_F3574D87)) oracle.add(FIXTURE_128_2_1_FBB8F1D8);
+        if (failed.equals(FIXTURE_129_2_0_AE3E5612)) {
+          oracle.add(FIXTURE_129_2_1_81F75D1D);
+          oracle.add(FIXTURE_128_2_1_FBB8F1D8);
         }
-        if (failed.equals("129:2:1")) oracle.add("128:2:1");
+        if (failed.equals(FIXTURE_129_2_1_81F75D1D)) oracle.add(FIXTURE_128_2_1_FBB8F1D8);
         assertEquals(oracle, calls);
       }
     }
@@ -77,7 +109,7 @@ final class LinuxExecDescriptorsTest {
         assertThrows(
             StorageIoException.class,
             () -> missingCloexec.withInherited(128, 129, () -> fail("no replacement"))));
-    assertEquals(List.of("128:1:0"), calls);
+    assertEquals(List.of(FIXTURE_128_1_0_31CFFFFA), calls);
   }
 
   @Test
@@ -85,8 +117,8 @@ final class LinuxExecDescriptorsTest {
     for (Throwable body :
         List.of(
             new IOException("private fixture diagnostic"),
-            new IllegalStateException("public unknown"),
-            new AssertionError("public unknown"))) {
+            new IllegalStateException(FIXTURE_PUBLIC_UNKNOWN_5B451478),
+            new AssertionError(FIXTURE_PUBLIC_UNKNOWN_5B451478))) {
       var calls = new ArrayList<String>();
       var descriptor = fixture(calls);
       Class<? extends Throwable> expectedType =
@@ -99,7 +131,7 @@ final class LinuxExecDescriptorsTest {
                       128,
                       129,
                       () -> {
-                        calls.add("body");
+                        calls.add(FIXTURE_BODY_BFD4D039);
                         if (body instanceof IOException failure) throw failure;
                         if (body instanceof RuntimeException failure) throw failure;
                         throw (Error) body;
@@ -107,7 +139,15 @@ final class LinuxExecDescriptorsTest {
       if (body instanceof IOException) unavailable((StorageIoException) actual);
       else assertSame(body, actual);
       assertEquals(
-          List.of("128:1:0", "128:2:0", "129:1:0", "129:2:0", "body", "129:2:1", "128:2:1"), calls);
+          List.of(
+              FIXTURE_128_1_0_31CFFFFA,
+              FIXTURE_128_2_0_F22A3178,
+              FIXTURE_129_1_0_F3574D87,
+              FIXTURE_129_2_0_AE3E5612,
+              FIXTURE_BODY_BFD4D039,
+              FIXTURE_129_2_1_81F75D1D,
+              FIXTURE_128_2_1_FBB8F1D8),
+          calls);
     }
   }
 
@@ -116,7 +156,8 @@ final class LinuxExecDescriptorsTest {
     for (boolean knownBody : List.of(false, true)) {
       for (Throwable unknown :
           List.of(
-              new IllegalStateException("public unknown"), new AssertionError("public unknown"))) {
+              new IllegalStateException(FIXTURE_PUBLIC_UNKNOWN_5B451478),
+              new AssertionError(FIXTURE_PUBLIC_UNKNOWN_5B451478))) {
         var calls = new ArrayList<String>();
         var descriptor =
             new LinuxExecDescriptors(
@@ -141,7 +182,7 @@ final class LinuxExecDescriptorsTest {
                           if (unknown instanceof RuntimeException failure) throw failure;
                           throw (Error) unknown;
                         })));
-        assertEquals("128:2:1", calls.getLast());
+        assertEquals(FIXTURE_128_2_1_FBB8F1D8, calls.getLast());
         assertEquals(knownBody ? 0 : 1, unknown.getSuppressed().length);
       }
     }
@@ -170,7 +211,14 @@ final class LinuxExecDescriptorsTest {
     assertEquals(List.of(), calls);
     assertDoesNotThrow(() -> descriptor.withInherited(128, 65535, () -> {}));
     assertEquals(
-        List.of("128:1:0", "128:2:0", "65535:1:0", "65535:2:0", "65535:2:1", "128:2:1"), calls);
+        List.of(
+            FIXTURE_128_1_0_31CFFFFA,
+            FIXTURE_128_2_0_F22A3178,
+            "65535:1:0",
+            "65535:2:0",
+            "65535:2:1",
+            FIXTURE_128_2_1_FBB8F1D8),
+        calls);
     unavailable(
         assertThrows(
             StorageIoException.class,
@@ -181,22 +229,28 @@ final class LinuxExecDescriptorsTest {
   void opsXfd006PlatformAndSymbolContracts() {
     var symbols = Linker.nativeLinker().defaultLookup();
     assertThrows(
-        NullPointerException.class, () -> LinuxExecDescriptors.create(null, "amd64", symbols));
+        NullPointerException.class,
+        () -> LinuxExecDescriptors.create(null, FIXTURE_AMD64_58D0BD71, symbols));
     assertThrows(
-        NullPointerException.class, () -> LinuxExecDescriptors.create("Linux", null, symbols));
+        NullPointerException.class,
+        () -> LinuxExecDescriptors.create(FIXTURE_LINUX_1CA133AF, null, symbols));
     assertThrows(
-        NullPointerException.class, () -> LinuxExecDescriptors.create("Linux", "amd64", null));
+        NullPointerException.class,
+        () -> LinuxExecDescriptors.create(FIXTURE_LINUX_1CA133AF, FIXTURE_AMD64_58D0BD71, null));
     for (String os : List.of("Windows", "linux", ""))
       assertThrows(
-          IllegalStateException.class, () -> LinuxExecDescriptors.create(os, "amd64", symbols));
+          IllegalStateException.class,
+          () -> LinuxExecDescriptors.create(os, FIXTURE_AMD64_58D0BD71, symbols));
     assertThrows(
         IllegalStateException.class,
-        () -> LinuxExecDescriptors.create("Linux", "unknown", symbols));
+        () -> LinuxExecDescriptors.create(FIXTURE_LINUX_1CA133AF, "unknown", symbols));
     assertThrows(
         IllegalStateException.class,
-        () -> LinuxExecDescriptors.create("Linux", "amd64", name -> Optional.empty()));
-    for (String arch : List.of("amd64", "x86_64", "aarch64"))
-      assertNotNull(LinuxExecDescriptors.create("Linux", arch, symbols));
+        () ->
+            LinuxExecDescriptors.create(
+                FIXTURE_LINUX_1CA133AF, FIXTURE_AMD64_58D0BD71, name -> Optional.empty()));
+    for (String arch : List.of(FIXTURE_AMD64_58D0BD71, "x86_64", "aarch64"))
+      assertNotNull(LinuxExecDescriptors.create(FIXTURE_LINUX_1CA133AF, arch, symbols));
   }
 
   @Test

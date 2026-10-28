@@ -32,21 +32,27 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** Actual ext4 metadata, independent size/count and bounded startup failures. U01..U03. */
 class TransferUsageScannerTest {
+  private static final String FIXTURE_ROOT_956E6E33 = "root";
+  private static final String FIXTURE_20260908_520314A3 = "20260908";
+  private static final String FIXTURE_PART_3262B7A6 = "part";
+  private static final String FIXTURE_READY_40EC7F71 = "ready";
+  private static final String FIXTURE_SYNTHETIC_PRIVATE_PATH_6CBCF6F9 = "SYNTHETIC_PRIVATE_PATH";
+
   @TempDir(factory = TransferRootInspectionTest.Ext4Fixture.class)
   Path fixture;
 
   @Test
   void u01LiteralSizesAcrossDatesAndReplacedRootInitializeCapacityWithoutWriting()
       throws Exception {
-    Path root = directory(fixture.resolve("root"));
+    Path root = directory(fixture.resolve(FIXTURE_ROOT_956E6E33));
     Path first = directory(root.resolve("20260907"));
-    Path second = directory(root.resolve("20260908"));
+    Path second = directory(root.resolve(FIXTURE_20260908_520314A3));
     directory(root.resolve("20260909"));
-    file(first, 1, "part", 0);
-    file(first, 2, "part", 1);
-    file(second, 3, "part", 4799);
-    file(second, 4, "ready", 4800);
-    file(second, 5, "ready", 48_000_000);
+    file(first, 1, FIXTURE_PART_3262B7A6, 0);
+    file(first, 2, FIXTURE_PART_3262B7A6, 1);
+    file(second, 3, FIXTURE_PART_3262B7A6, 4799);
+    file(second, 4, FIXTURE_READY_40EC7F71, 4800);
+    file(second, 5, FIXTURE_READY_40EC7F71, 48_000_000);
     var calls = new ReadCalls();
     StorageIdentity identity = identity(root);
     try (var held = OwnedTransferDirectory.open(calls, root)) {
@@ -70,16 +76,16 @@ class TransferUsageScannerTest {
 
   @Test
   void u01EmptyAnd9000And10000AreCompleteBut10001NeverReturnsPartialCounts() throws Exception {
-    Path root = directory(fixture.resolve("root"));
+    Path root = directory(fixture.resolve(FIXTURE_ROOT_956E6E33));
     var calls = new ReadCalls();
     try (var held = OwnedTransferDirectory.open(calls, root)) {
       var scanner = new TransferUsageScanner();
       var identity = identity(root);
       assertEquals(new TransferUsageScanner.Usage(0, 0), scanner.scan(held, identity));
-      Path day = directory(root.resolve("20260908"));
+      Path day = directory(root.resolve(FIXTURE_20260908_520314A3));
       Path nextDay = directory(root.resolve("20260909"));
       for (int index = 1; index <= 10001; index++) {
-        file(index <= 9000 ? day : nextDay, index, "part", 0);
+        file(index <= 9000 ? day : nextDay, index, FIXTURE_PART_3262B7A6, 0);
         if (index == 9000 || index == 10000) {
           var usage = scanner.scan(held, identity);
           assertEquals(0, usage.bytes());
@@ -106,7 +112,7 @@ class TransferUsageScannerTest {
 
   @Test
   void u02NullClosedUnknownDateAndNoncanonicalEntriesAreRejectedWithoutRepair() throws Exception {
-    Path root = directory(fixture.resolve("root"));
+    Path root = directory(fixture.resolve(FIXTURE_ROOT_956E6E33));
     var calls = new ReadCalls();
     var held = OwnedTransferDirectory.open(calls, root);
     var identity = identity(root);
@@ -122,7 +128,7 @@ class TransferUsageScannerTest {
         assertTrue(Files.isDirectory(invalid));
         Files.delete(invalid);
       }
-      Path day = directory(root.resolve("20260908"));
+      Path day = directory(root.resolve(FIXTURE_20260908_520314A3));
       for (String name :
           new String[] {
             "unknown",
@@ -143,9 +149,9 @@ class TransferUsageScannerTest {
 
   @Test
   void u02HeldMetadataRejectsWrongModesLinksAndInvalidReadySizeWithoutDeleting() throws Exception {
-    Path root = directory(fixture.resolve("root"));
-    Path day = directory(root.resolve("20260908"));
-    Path ready = file(day, 1, "ready", 4800);
+    Path root = directory(fixture.resolve(FIXTURE_ROOT_956E6E33));
+    Path day = directory(root.resolve(FIXTURE_20260908_520314A3));
+    Path ready = file(day, 1, FIXTURE_READY_40EC7F71, 4800);
     var calls = new ReadCalls();
     try (var held = OwnedTransferDirectory.open(calls, root)) {
       var scanner = new TransferUsageScanner();
@@ -184,9 +190,9 @@ class TransferUsageScannerTest {
   @Test
   void u03EnumerationOpenIteratorCloseAndNativeCloseFaultsNeverReturnPartialUsage()
       throws Exception {
-    Path root = directory(fixture.resolve("root"));
-    Path day = directory(root.resolve("20260908"));
-    file(day, 1, "part", 1);
+    Path root = directory(fixture.resolve(FIXTURE_ROOT_956E6E33));
+    Path day = directory(root.resolve(FIXTURE_20260908_520314A3));
+    file(day, 1, FIXTURE_PART_3262B7A6, 1);
     var calls = new ReadCalls();
     try (var held = OwnedTransferDirectory.open(calls, root)) {
       var identity = identity(root);
@@ -205,7 +211,11 @@ class TransferUsageScannerTest {
       reject(() -> new TransferUsageScanner(removed).scan(held, identity));
       assertEquals(removed.opened, removed.closed);
       assertFalse(Files.exists(day.resolve(new UUID(0, 1) + ".part")));
-      file(day, 1, "part", 1); // Restore only the synthetic file removed by the fault injector.
+      file(
+          day,
+          1,
+          FIXTURE_PART_3262B7A6,
+          1); // Restore only the synthetic file removed by the fault injector.
       assertEquals(
           new TransferUsageScanner.Usage(1, 1), new TransferUsageScanner().scan(held, identity));
     }
@@ -215,11 +225,11 @@ class TransferUsageScannerTest {
   @Test
   void u03RetainedDateSurvivesReplacementDuringEnumerationWithoutFollowingTheNewSymlink()
       throws Exception {
-    Path root = directory(fixture.resolve("root"));
-    Path day = directory(root.resolve("20260908"));
-    file(day, 1, "part", 1);
+    Path root = directory(fixture.resolve(FIXTURE_ROOT_956E6E33));
+    Path day = directory(root.resolve(FIXTURE_20260908_520314A3));
+    file(day, 1, FIXTURE_PART_3262B7A6, 1);
     Path outside = directory(fixture.resolve("outside"));
-    file(outside, 2, "ready", 4800);
+    file(outside, 2, FIXTURE_READY_40EC7F71, 4800);
     var calls = new ReadCalls();
     int[] opened = {0};
     var scanner =
@@ -288,14 +298,16 @@ class TransferUsageScannerTest {
     @Override
     public DirectoryStream<Path> open(Path path) throws IOException {
       boolean fail = ++calls == target;
-      if (fail && kind.equals("OPEN")) throw new IOException("SYNTHETIC_PRIVATE_PATH");
+      if (fail && kind.equals("OPEN"))
+        throw new IOException(FIXTURE_SYNTHETIC_PRIVATE_PATH_6CBCF6F9);
       var real = Files.newDirectoryStream(path);
       opened++;
       return new DirectoryStream<>() {
         @Override
         public Iterator<Path> iterator() {
           if (fail && (kind.equals("ITERATOR") || kind.equals("COMPOUND")))
-            throw new DirectoryIteratorException(new IOException("SYNTHETIC_PRIVATE_PATH"));
+            throw new DirectoryIteratorException(
+                new IOException(FIXTURE_SYNTHETIC_PRIVATE_PATH_6CBCF6F9));
           Iterator<Path> delegate = real.iterator();
           if (fail && (kind.equals("AFTER_ONE") || kind.equals("REMOVE_ENTRY"))) {
             return new Iterator<>() {
@@ -304,7 +316,8 @@ class TransferUsageScannerTest {
               @Override
               public boolean hasNext() {
                 if (returned > 0 && kind.equals("AFTER_ONE"))
-                  throw new DirectoryIteratorException(new IOException("SYNTHETIC_PRIVATE_PATH"));
+                  throw new DirectoryIteratorException(
+                      new IOException(FIXTURE_SYNTHETIC_PRIVATE_PATH_6CBCF6F9));
                 return delegate.hasNext();
               }
 
@@ -331,7 +344,7 @@ class TransferUsageScannerTest {
           real.close();
           closed++;
           if (fail && (kind.equals("CLOSE") || kind.equals("COMPOUND")))
-            throw new IOException("SYNTHETIC_PRIVATE_PATH");
+            throw new IOException(FIXTURE_SYNTHETIC_PRIVATE_PATH_6CBCF6F9);
         }
       };
     }
@@ -354,7 +367,7 @@ class TransferUsageScannerTest {
     public int openDirectory(int parent, String name) throws StorageIoException {
       int fd = delegate.openDirectory(parent, name);
       assertTrue(live.add(fd));
-      if (name.equals("20260908")) dates.add(fd);
+      if (name.equals(FIXTURE_20260908_520314A3)) dates.add(fd);
       return fd;
     }
 

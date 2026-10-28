@@ -13,6 +13,7 @@ import org.junit.jupiter.api.Test;
 
 /** NK-BAT-001 / DAT009 OPS009 / UI251 / SS331341343 / EXP-1749. Data is not ownership. */
 final class MorningExpiryObservationInvariantTest {
+  private static final String FIXTURE_SUCCESS_10855C7F = "SUCCESS";
   private static final BatchRun RUN =
       new BatchRun(
           UUID.fromString("17490000-0000-4000-8000-000000000001"),
@@ -47,7 +48,7 @@ final class MorningExpiryObservationInvariantTest {
   }
 
   private static ExpiryAuditRepository.Snapshot audit() {
-    return audit("SUCCESS", 2, 2, 0, 200, END);
+    return audit(FIXTURE_SUCCESS_10855C7F, 2, 2, 0, 200, END);
   }
 
   private static MorningDatabaseSession.ExpiryBegins begins(boolean skip) {
@@ -94,12 +95,12 @@ final class MorningExpiryObservationInvariantTest {
         () -> new MorningDatabaseSession.ExpiryObservation(begins, END, SKIP, audit(), receipt));
     for (var bad :
         List.of(
-            audit("SUCCESS", 2, 2, 0, 200, START),
+            audit(FIXTURE_SUCCESS_10855C7F, 2, 2, 0, 200, START),
             audit("WARNING", 2, 2, 0, 200, END),
-            audit("SUCCESS", 3, 2, 0, 200, END),
-            audit("SUCCESS", 2, 1, 0, 200, END),
-            audit("SUCCESS", 2, 2, 1, 200, END),
-            audit("SUCCESS", 2, 2, 0, 201, END))) {
+            audit(FIXTURE_SUCCESS_10855C7F, 3, 2, 0, 200, END),
+            audit(FIXTURE_SUCCESS_10855C7F, 2, 1, 0, 200, END),
+            audit(FIXTURE_SUCCESS_10855C7F, 2, 2, 1, 200, END),
+            audit(FIXTURE_SUCCESS_10855C7F, 2, 2, 0, 201, END))) {
       assertThrows(
           IllegalArgumentException.class,
           () -> new MorningDatabaseSession.ExpiryObservation(begins, END, SUCCESS, bad, receipt));

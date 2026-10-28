@@ -27,6 +27,11 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** PT-OPS-BREQFILE001..008 source-only; fixture root/tmpfs is explicitly synthetic. */
 final class BackupWorkerRequestFilesTest {
+  private static final String FIXTURE_UID_0C18F38C = "uid";
+  private static final String FIXTURE_GID_0ACDD642 = "gid";
+  private static final String FIXTURE_BACKUP_REQUEST_7ADCA59A = "backup-request";
+  private static final String FIXTURE_PART_92B0D5FC = ".part";
+  private static final String FIXTURE_PREPARE_1F4EE68F = "prepare";
   @TempDir Path temporary;
   private static final BackupWorkerRequest REQUEST =
       new BackupWorkerRequest(PART, Instant.parse("2026-09-27T14:59:59.123456Z"));
@@ -37,8 +42,8 @@ final class BackupWorkerRequestFilesTest {
     var f = new BackupPublicationFixture(temporary);
     f.metadata =
         (role, m) -> {
-          m.put("uid", 0);
-          m.put("gid", 0);
+          m.put(FIXTURE_UID_0C18F38C, 0);
+          m.put(FIXTURE_GID_0ACDD642, 0);
         };
     return f;
   }
@@ -56,11 +61,11 @@ final class BackupWorkerRequestFilesTest {
     try (var f = fixture()) {
       f.chunk = 7;
       prepare(f);
-      assertEquals(GOLDEN, Files.readString(f.parent.resolve("backup-request")));
-      assertFalse(Files.exists(f.parent.resolve(PART + ".part")));
+      assertEquals(GOLDEN, Files.readString(f.parent.resolve(FIXTURE_BACKUP_REQUEST_7ADCA59A)));
+      assertFalse(Files.exists(f.parent.resolve(PART + FIXTURE_PART_92B0D5FC)));
       assertEquals(REQUEST, files(f).read());
       files(f).retire(REQUEST);
-      assertFalse(Files.exists(f.parent.resolve("backup-request")));
+      assertFalse(Files.exists(f.parent.resolve(FIXTURE_BACKUP_REQUEST_7ADCA59A)));
       f.released();
     }
   }
@@ -70,7 +75,7 @@ final class BackupWorkerRequestFilesTest {
     try (var f = fixture()) {
       var subject = files(f);
       subject.prepareResume(REQUEST, PART);
-      Path source = f.parent.resolve("backup-request");
+      Path source = f.parent.resolve(FIXTURE_BACKUP_REQUEST_7ADCA59A);
       var before =
           Files.readAttributes(
               source, "unix:ino,ctime,size,lastModifiedTime", LinkOption.NOFOLLOW_LINKS);
@@ -83,7 +88,7 @@ final class BackupWorkerRequestFilesTest {
           Files.readAttributes(
               source, "unix:ino,ctime,size,lastModifiedTime", LinkOption.NOFOLLOW_LINKS));
       assertEquals(counts.get("publish"), f.counts.get("publish"));
-      assertFalse(Files.exists(f.parent.resolve(next + ".part")));
+      assertFalse(Files.exists(f.parent.resolve(next + FIXTURE_PART_92B0D5FC)));
       assertThrows(
           StorageIoException.class,
           () -> subject.prepareResume(new BackupWorkerRequest(next, REQUEST.started()), next));
@@ -117,8 +122,8 @@ final class BackupWorkerRequestFilesTest {
                   old -> {
                     throw new java.io.IOException("actual DB unknown");
                   }));
-      assertEquals(GOLDEN, Files.readString(f.parent.resolve("backup-request")));
-      assertFalse(Files.exists(f.parent.resolve(next + ".part")));
+      assertEquals(GOLDEN, Files.readString(f.parent.resolve(FIXTURE_BACKUP_REQUEST_7ADCA59A)));
+      assertFalse(Files.exists(f.parent.resolve(next + FIXTURE_PART_92B0D5FC)));
       var proof = new AtomicInteger();
       subject.prepareResumeReplacement(
           later,
@@ -126,13 +131,14 @@ final class BackupWorkerRequestFilesTest {
           old -> {
             assertEquals(PART, old.run());
             assertEquals(Instant.parse("2026-09-27T14:59:59.123456Z"), old.started());
-            assertEquals(GOLDEN, Files.readString(f.parent.resolve("backup-request")));
+            assertEquals(
+                GOLDEN, Files.readString(f.parent.resolve(FIXTURE_BACKUP_REQUEST_7ADCA59A)));
             proof.incrementAndGet();
           });
       assertEquals(1, proof.get());
       assertEquals(
           "NKBACKUP1\nrun=11111111-2222-4333-8444-555555555555\nstarted=2026-09-27T15:00:00Z\n",
-          Files.readString(f.parent.resolve("backup-request")));
+          Files.readString(f.parent.resolve(FIXTURE_BACKUP_REQUEST_7ADCA59A)));
       subject.prepareResumeReplacement(
           later, next, old -> fail("same-byte is not a prior generation"));
       assertThrows(
@@ -180,12 +186,12 @@ final class BackupWorkerRequestFilesTest {
     for (String kind : List.of("owner", "mode", "acl", "readonly", "fs", "map"))
       try (var f = fixture()) {
         switch (kind) {
-          case "owner" -> f.metadata = (r, m) -> m.put("uid", 1);
+          case "owner" -> f.metadata = (r, m) -> m.put(FIXTURE_UID_0C18F38C, 1);
           case "mode" ->
               f.metadata =
                   (r, m) -> {
-                    m.put("uid", 0);
-                    m.put("gid", 0);
+                    m.put(FIXTURE_UID_0C18F38C, 0);
+                    m.put(FIXTURE_GID_0ACDD642, 0);
                     m.put("mode", 040755);
                   };
           case "acl" -> f.acl = new byte[] {1};
@@ -209,30 +215,31 @@ final class BackupWorkerRequestFilesTest {
     try (var f = fixture()) {
       prepare(f);
       assertThrows(StorageIoException.class, () -> prepare(f));
-      assertEquals(GOLDEN, Files.readString(f.parent.resolve("backup-request")));
-      assertTrue(Files.exists(f.parent.resolve(PART + ".part")));
+      assertEquals(GOLDEN, Files.readString(f.parent.resolve(FIXTURE_BACKUP_REQUEST_7ADCA59A)));
+      assertTrue(Files.exists(f.parent.resolve(PART + FIXTURE_PART_92B0D5FC)));
       f.released();
     }
     try (var f = fixture()) {
-      Files.writeString(f.parent.resolve(PART + ".part"), "PUBLIC_EXISTING");
+      Files.writeString(f.parent.resolve(PART + FIXTURE_PART_92B0D5FC), "PUBLIC_EXISTING");
       assertThrows(StorageIoException.class, () -> prepare(f));
-      assertEquals("PUBLIC_EXISTING", Files.readString(f.parent.resolve(PART + ".part")));
+      assertEquals(
+          "PUBLIC_EXISTING", Files.readString(f.parent.resolve(PART + FIXTURE_PART_92B0D5FC)));
     }
   }
 
   @Test
   void allIoPositionsAndProgress() throws Exception {
-    for (String operation : List.of("prepare", "read", "retire")) {
+    for (String operation : List.of(FIXTURE_PREPARE_1F4EE68F, "read", "retire")) {
       int positions;
       try (var f = fixture()) {
-        if (!operation.equals("prepare")) prepare(f);
+        if (!operation.equals(FIXTURE_PREPARE_1F4EE68F)) prepare(f);
         f.position = 0;
         operate(f, operation);
         positions = f.position;
       }
       for (int position = 1; position <= positions; position++)
         try (var f = fixture()) {
-          if (!operation.equals("prepare")) prepare(f);
+          if (!operation.equals(FIXTURE_PREPARE_1F4EE68F)) prepare(f);
           f.position = 0;
           f.faultAt = position;
           assertThrows(StorageIoException.class, () -> operate(f, operation));
@@ -269,7 +276,7 @@ final class BackupWorkerRequestFilesTest {
 
   private void operate(BackupPublicationFixture f, String operation) throws IOException {
     switch (operation) {
-      case "prepare" -> prepare(f);
+      case FIXTURE_PREPARE_1F4EE68F -> prepare(f);
       case "read" -> files(f).read();
       default -> files(f).retire(REQUEST);
     }
@@ -280,8 +287,8 @@ final class BackupWorkerRequestFilesTest {
     try (var f = fixture()) {
       f.metadata =
           (role, m) -> {
-            m.put("uid", 0);
-            m.put("gid", 0);
+            m.put(FIXTURE_UID_0C18F38C, 0);
+            m.put(FIXTURE_GID_0ACDD642, 0);
             if (role.equals("file")) m.put("size", 1L);
           };
       assertThrows(StorageIoException.class, () -> prepare(f));
@@ -289,7 +296,7 @@ final class BackupWorkerRequestFilesTest {
     }
     try (var f = fixture()) {
       prepare(f);
-      Files.writeString(f.parent.resolve("backup-request"), "PUBLIC_BAD_REQUEST\n");
+      Files.writeString(f.parent.resolve(FIXTURE_BACKUP_REQUEST_7ADCA59A), "PUBLIC_BAD_REQUEST\n");
       assertThrows(IllegalArgumentException.class, () -> files(f).read());
       f.released();
     }
@@ -298,7 +305,7 @@ final class BackupWorkerRequestFilesTest {
       assertThrows(
           StorageIoException.class,
           () -> files(f).retire(new BackupWorkerRequest(UUID.randomUUID(), REQUEST.started())));
-      assertEquals(GOLDEN, Files.readString(f.parent.resolve("backup-request")));
+      assertEquals(GOLDEN, Files.readString(f.parent.resolve(FIXTURE_BACKUP_REQUEST_7ADCA59A)));
       f.released();
     }
     for (String mutation : List.of("dev", "ino", "size", "lastModifiedTime"))
@@ -306,8 +313,8 @@ final class BackupWorkerRequestFilesTest {
         var seen = new AtomicInteger();
         f.metadata =
             (role, m) -> {
-              m.put("uid", 0);
-              m.put("gid", 0);
+              m.put(FIXTURE_UID_0C18F38C, 0);
+              m.put(FIXTURE_GID_0ACDD642, 0);
               if (role.equals("file")
                   && seen.incrementAndGet() > (mutation.equals("lastModifiedTime") ? 2 : 1))
                 m.put(
@@ -322,8 +329,8 @@ final class BackupWorkerRequestFilesTest {
     try (var f = fixture()) {
       f.metadata =
           (r, m) -> {
-            m.put("uid", 0);
-            m.put("gid", 0);
+            m.put(FIXTURE_UID_0C18F38C, 0);
+            m.put(FIXTURE_GID_0ACDD642, 0);
             if (r.equals("file")) m.put("dev", -1L);
           };
       assertThrows(StorageIoException.class, () -> prepare(f));
@@ -384,7 +391,7 @@ final class BackupWorkerRequestFilesTest {
       prepare(f);
       f.faults.put("sync#2", new IOException("uncertain retire sync"));
       assertThrows(StorageIoException.class, () -> files(f).retire(REQUEST));
-      assertFalse(Files.exists(f.parent.resolve("backup-request")));
+      assertFalse(Files.exists(f.parent.resolve(FIXTURE_BACKUP_REQUEST_7ADCA59A)));
       f.released();
     }
     try (var f = fixture()) {
@@ -393,8 +400,10 @@ final class BackupWorkerRequestFilesTest {
           (name, n) -> {
             if (name.equals("openReader")) {
               try {
-                Files.move(f.parent.resolve("backup-request"), f.parent.resolve("retained"));
-                Files.writeString(f.parent.resolve("backup-request"), GOLDEN);
+                Files.move(
+                    f.parent.resolve(FIXTURE_BACKUP_REQUEST_7ADCA59A),
+                    f.parent.resolve("retained"));
+                Files.writeString(f.parent.resolve(FIXTURE_BACKUP_REQUEST_7ADCA59A), GOLDEN);
               } catch (IOException e) {
                 throw new AssertionError(e);
               }

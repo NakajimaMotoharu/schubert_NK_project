@@ -22,6 +22,16 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** PG249/PT-BAT-284..287; SS331 §8.2/8.3,341 §9; SSC077/078/BUG237/238. */
 final class ExpiryAuditRepositoryTest {
+  private static final String FIXTURE_SUCCESS_10855C7F = "SUCCESS";
+  private static final String FIXTURE_CLOSE_97959247 = "close";
+  private static final String FIXTURE_SQL_SECRET_SENTINEL_1EEDE57D = "SQL_SECRET_SENTINEL";
+  private static final String FIXTURE_RUNNING_294BDBF9 = "RUNNING";
+  private static final String FIXTURE_STAGENULL_A015B184 = "stageNull";
+  private static final String FIXTURE_FINISHNULL_BE9B800A = "finishNull";
+  private static final String FIXTURE_READNEXTANDROWCLOSE_548E8C85 = "readNextAndRowClose";
+  private static final String FIXTURE_READNEXTANDSTATEMENTCLOSE_4EFF3B8A =
+      "readNextAndStatementClose";
+  private static final String FIXTURE_READSTATEMENTCLOSE_64BB69A7 = "readStatementClose";
   @TempDir static Path root;
   private static BatchDatabaseFixture db;
   private static final BatchRun RUN =
@@ -68,7 +78,7 @@ final class ExpiryAuditRepositoryTest {
           new BatchStepAttempt(42, RUN, BatchStep.CLEAN_EXPIRY, 1, START, false), prior.handle());
       assertEquals(
           new ExpiryAuditRepository.Snapshot(
-              "SUCCESS", EXPIRY_CUTOFF, 3L, 1L, 2, 2, 0, 200, END, null, null),
+              FIXTURE_SUCCESS_10855C7F, EXPIRY_CUTOFF, 3L, 1L, 2, 2, 0, 200, END, null, null),
           prior.audit());
       assertEquals("SUCCESS|2|0|NULL", before);
       assertEquals(before, terminal(connection, 42));
@@ -117,7 +127,7 @@ final class ExpiryAuditRepositoryTest {
             new BatchStepAttempt(42, RUN, BatchStep.CLEAN_EXPIRY, 1, START, false), valid.handle());
         assertEquals(
             new ExpiryAuditRepository.Snapshot(
-                "SUCCESS", EXPIRY_CUTOFF, 3L, 1L, 2, 2, 0, 200, END, null, null),
+                FIXTURE_SUCCESS_10855C7F, EXPIRY_CUTOFF, 3L, 1L, 2, 2, 0, 200, END, null, null),
             valid.audit());
         assertFalse(connection.isClosed());
         assertFalse(connection.getAutoCommit());
@@ -149,7 +159,7 @@ final class ExpiryAuditRepositoryTest {
                   java.sql.PreparedStatement.class.getClassLoader(),
                   new Class<?>[] {java.sql.PreparedStatement.class},
                   (sp, sm, sa) -> {
-                    if (sm.getName().equals("close")) {
+                    if (sm.getName().equals(FIXTURE_CLOSE_97959247)) {
                       assertTrue(statementClosed.compareAndSet(false, true));
                       try {
                         return invokePublicJdbc(sm, statement, sa);
@@ -172,7 +182,7 @@ final class ExpiryAuditRepositoryTest {
                         java.sql.ResultSet.class.getClassLoader(),
                         new Class<?>[] {java.sql.ResultSet.class},
                         (rp, rm, ra) -> {
-                          if (rm.getName().equals("close")) {
+                          if (rm.getName().equals(FIXTURE_CLOSE_97959247)) {
                             assertTrue(rowsClosed.compareAndSet(false, true));
                             try {
                               return invokePublicJdbc(rm, rows, ra);
@@ -260,7 +270,7 @@ final class ExpiryAuditRepositoryTest {
         var actual =
             assertThrows(BatchRepositoryException.class, () -> fault.successful(RUN, END, owner));
         assertNull(actual.getCause());
-        assertFalse(actual.toString().contains("SQL_SECRET_SENTINEL"));
+        assertFalse(actual.toString().contains(FIXTURE_SQL_SECRET_SENTINEL_1EEDE57D));
       }
       assertEquals("SUCCESS|2|0|NULL", terminal(connection, 42));
       assertFalse(connection.isClosed());
@@ -328,7 +338,7 @@ final class ExpiryAuditRepositoryTest {
           new BatchStepAttempt(42, RUN, BatchStep.CLEAN_EXPIRY, 1, START, false), found.handle());
       assertEquals(
           new ExpiryAuditRepository.Snapshot(
-              "SUCCESS", EXPIRY_CUTOFF, 3L, 1L, 2, 2, 0, 200, END, null, null),
+              FIXTURE_SUCCESS_10855C7F, EXPIRY_CUTOFF, 3L, 1L, 2, 2, 0, 200, END, null, null),
           found.audit());
       assertEquals("SUCCESS|2|0|NULL", terminal(connection, 42));
       assertThrows(
@@ -371,7 +381,7 @@ final class ExpiryAuditRepositoryTest {
       assertEquals("2026-09-05 15:00:00.000500|3|NULL|2|0|0|200", audit(observer, attempt.id()));
       assertEquals(stage, repo.stage(attempt, 3, 2, 200)); // Same committed stage is idempotent.
       var snapshot = repo.read(attempt).orElseThrow();
-      assertEquals("RUNNING", snapshot.status());
+      assertEquals(FIXTURE_RUNNING_294BDBF9, snapshot.status());
       assertEquals(EXPIRY_CUTOFF, snapshot.cutoff());
       assertEquals(3L, snapshot.before());
       assertNull(snapshot.after());
@@ -390,7 +400,7 @@ final class ExpiryAuditRepositoryTest {
       repo.finish(attempt, stage, END, 1L, SUCCESS);
       parent.commit();
       var snapshot = repo.read(attempt).orElseThrow();
-      assertEquals("SUCCESS", snapshot.status());
+      assertEquals(FIXTURE_SUCCESS_10855C7F, snapshot.status());
       assertEquals(1L, snapshot.after());
       assertEquals(END, snapshot.ended());
       assertEquals(2, snapshot.success());
@@ -544,20 +554,20 @@ final class ExpiryAuditRepositoryTest {
       for (String operation :
           new String[] {
             "stage",
-            "stageNull",
+            FIXTURE_STAGENULL_A015B184,
             "stageRuntime",
             "finish",
-            "finishNull",
+            FIXTURE_FINISHNULL_BE9B800A,
             "finishRuntime",
             "read",
             "readNullStatement",
             "readNullRows",
             "readExecute",
             "readNext",
-            "readNextAndRowClose",
-            "readNextAndStatementClose",
+            FIXTURE_READNEXTANDROWCLOSE_548E8C85,
+            FIXTURE_READNEXTANDSTATEMENTCLOSE_4EFF3B8A,
             "readRowClose",
-            "readStatementClose"
+            FIXTURE_READSTATEMENTCLOSE_64BB69A7
           }) {
         var fault = new ExpiryAuditRepository(failingConnection(parent, operation));
         BatchRepositoryException caught =
@@ -565,14 +575,15 @@ final class ExpiryAuditRepositoryTest {
                 BatchRepositoryException.class,
                 () -> {
                   switch (operation) {
-                    case "stage", "stageNull", "stageRuntime" -> fault.stage(attempt, 3, 2, 200);
-                    case "finish", "finishNull", "finishRuntime" ->
+                    case "stage", FIXTURE_STAGENULL_A015B184, "stageRuntime" ->
+                        fault.stage(attempt, 3, 2, 200);
+                    case "finish", FIXTURE_FINISHNULL_BE9B800A, "finishRuntime" ->
                         fault.finish(attempt, stage, END, 1L, SUCCESS);
                     default -> fault.read(attempt);
                   }
                 });
         assertNull(caught.getCause());
-        assertFalse(caught.toString().contains("SQL_SECRET_SENTINEL"));
+        assertFalse(caught.toString().contains(FIXTURE_SQL_SECRET_SENTINEL_1EEDE57D));
       }
       // SSC310: unknown provider Runtime is not malformed SQL/data projection.
       var provider = new IllegalStateException("public unknown provider fixture");
@@ -617,7 +628,8 @@ final class ExpiryAuditRepositoryTest {
   }
 
   private static Connection failingConnection(Connection delegate, String operation) {
-    return failingConnection(delegate, operation, new IllegalStateException("SQL_SECRET_SENTINEL"));
+    return failingConnection(
+        delegate, operation, new IllegalStateException(FIXTURE_SQL_SECRET_SENTINEL_1EEDE57D));
   }
 
   private static Connection failingConnection(
@@ -633,56 +645,59 @@ final class ExpiryAuditRepositoryTest {
                     switch (operation) {
                       case "successSelect", "successNullStatement" ->
                           sql.startsWith("select id,run_id,attempt,started_at");
-                      case "stage", "stageNull", "stageRuntime" ->
+                      case "stage", FIXTURE_STAGENULL_A015B184, "stageRuntime" ->
                           sql.startsWith("update schubert.batch_runs set expiry_cutoff_at");
-                      case "finish", "finishNull", "finishRuntime" ->
+                      case "finish", FIXTURE_FINISHNULL_BE9B800A, "finishRuntime" ->
                           sql.startsWith("update schubert.batch_runs set ended_at");
                       default -> sql.startsWith("select status,expiry_cutoff_at");
                     };
                 if (selected) {
-                  if (operation.equals("stageNull")
-                      || operation.equals("finishNull")
+                  if (operation.equals(FIXTURE_STAGENULL_A015B184)
+                      || operation.equals(FIXTURE_FINISHNULL_BE9B800A)
                       || operation.equals("readNullStatement")
                       || operation.equals("successNullStatement")) return null;
                   if (operation.endsWith("Runtime")) throw provider;
                   if (operation.equals("readExecute")
                       || operation.equals("readNext")
-                      || operation.equals("readNextAndRowClose")
-                      || operation.equals("readNextAndStatementClose")
+                      || operation.equals(FIXTURE_READNEXTANDROWCLOSE_548E8C85)
+                      || operation.equals(FIXTURE_READNEXTANDSTATEMENTCLOSE_4EFF3B8A)
                       || operation.equals("readNullRows")
                       || operation.equals("readRowClose")
-                      || operation.equals("readStatementClose")) {
+                      || operation.equals(FIXTURE_READSTATEMENTCLOSE_64BB69A7)) {
                     var statement = (java.sql.PreparedStatement) method.invoke(delegate, args);
                     return Proxy.newProxyInstance(
                         java.sql.PreparedStatement.class.getClassLoader(),
                         new Class<?>[] {java.sql.PreparedStatement.class},
                         (statementProxy, statementMethod, statementArgs) -> {
-                          if (statementMethod.getName().equals("close")
-                              && (operation.equals("readStatementClose")
-                                  || operation.equals("readNextAndStatementClose"))) {
+                          if (statementMethod.getName().equals(FIXTURE_CLOSE_97959247)
+                              && (operation.equals(FIXTURE_READSTATEMENTCLOSE_64BB69A7)
+                                  || operation.equals(
+                                      FIXTURE_READNEXTANDSTATEMENTCLOSE_4EFF3B8A))) {
                             statement.close();
-                            throw new SQLException("SQL_SECRET_SENTINEL");
+                            throw new SQLException(FIXTURE_SQL_SECRET_SENTINEL_1EEDE57D);
                           }
                           if (statementMethod.getName().equals("executeQuery")) {
                             if (operation.equals("readExecute"))
-                              throw new SQLException("SQL_SECRET_SENTINEL");
+                              throw new SQLException(FIXTURE_SQL_SECRET_SENTINEL_1EEDE57D);
                             if (operation.equals("readNullRows")) return null;
                             var rows = statement.executeQuery();
-                            if (operation.equals("readStatementClose")) return rows;
+                            if (operation.equals(FIXTURE_READSTATEMENTCLOSE_64BB69A7)) return rows;
                             return Proxy.newProxyInstance(
                                 java.sql.ResultSet.class.getClassLoader(),
                                 new Class<?>[] {java.sql.ResultSet.class},
                                 (rowsProxy, rowsMethod, rowsArgs) -> {
                                   if (rowsMethod.getName().equals("next")
                                       && (operation.equals("readNext")
-                                          || operation.equals("readNextAndRowClose")
-                                          || operation.equals("readNextAndStatementClose")))
-                                    throw new SQLException("SQL_SECRET_SENTINEL");
-                                  if (rowsMethod.getName().equals("close")
+                                          || operation.equals(FIXTURE_READNEXTANDROWCLOSE_548E8C85)
+                                          || operation.equals(
+                                              FIXTURE_READNEXTANDSTATEMENTCLOSE_4EFF3B8A)))
+                                    throw new SQLException(FIXTURE_SQL_SECRET_SENTINEL_1EEDE57D);
+                                  if (rowsMethod.getName().equals(FIXTURE_CLOSE_97959247)
                                       && (operation.equals("readRowClose")
-                                          || operation.equals("readNextAndRowClose"))) {
+                                          || operation.equals(
+                                              FIXTURE_READNEXTANDROWCLOSE_548E8C85))) {
                                     rows.close();
-                                    throw new SQLException("SQL_SECRET_SENTINEL");
+                                    throw new SQLException(FIXTURE_SQL_SECRET_SENTINEL_1EEDE57D);
                                   }
                                   return rowsMethod.invoke(rows, rowsArgs);
                                 });
@@ -694,7 +709,7 @@ final class ExpiryAuditRepositoryTest {
                           }
                         });
                   }
-                  throw new SQLException("SQL_SECRET_SENTINEL");
+                  throw new SQLException(FIXTURE_SQL_SECRET_SENTINEL_1EEDE57D);
                 }
               }
               try {
@@ -708,8 +723,10 @@ final class ExpiryAuditRepositoryTest {
   private static void projectionMatrix() {
     var handle = new BatchStepAttempt(1, RUN, BatchStep.CLEAN_EXPIRY, 1, START, false);
     var stage = new ExpiryAuditRepository.Stage(EXPIRY_CUTOFF, 3, 2, 200);
-    var running = snapshot("RUNNING", EXPIRY_CUTOFF, 3L, null, 2, 0, 0, 200, null, null, null);
-    var success = snapshot("SUCCESS", EXPIRY_CUTOFF, 3L, 1L, 2, 2, 0, 200, END, null, null);
+    var running =
+        snapshot(FIXTURE_RUNNING_294BDBF9, EXPIRY_CUTOFF, 3L, null, 2, 0, 0, 200, null, null, null);
+    var success =
+        snapshot(FIXTURE_SUCCESS_10855C7F, EXPIRY_CUTOFF, 3L, 1L, 2, 2, 0, 200, END, null, null);
     assertTrue(ExpiryAuditRepository.validSnapshot(handle, running));
     assertTrue(ExpiryAuditRepository.validSnapshot(handle, success));
     assertTrue(ExpiryAuditRepository.matchesStage(java.util.Optional.of(running), stage));
@@ -721,28 +738,49 @@ final class ExpiryAuditRepositoryTest {
     var invalid =
         new ExpiryAuditRepository.Snapshot[] {
           snapshot("UNKNOWN", EXPIRY_CUTOFF, 3L, null, 2, 0, 0, 200, null, null, null),
-          snapshot("RUNNING", EXPIRY_CUTOFF, 3L, null, 2, 0, 0, 200, END, null, null),
-          snapshot("FAILED", EXPIRY_CUTOFF, 3L, null, 2, 0, 0, 200, null, null, null),
-          snapshot("RUNNING", EXPIRY_CUTOFF, 3L, null, -1, 0, 0, 200, null, null, null),
-          snapshot("RUNNING", EXPIRY_CUTOFF, 3L, null, 2, -1, 0, 200, null, null, null),
-          snapshot("RUNNING", EXPIRY_CUTOFF, 3L, null, 2, 0, -1, 200, null, null, null),
-          snapshot("RUNNING", EXPIRY_CUTOFF, 3L, null, 2, 0, 0, -1, null, null, null),
-          snapshot("RUNNING", null, 3L, null, 2, 0, 0, 200, null, null, null),
-          snapshot("RUNNING", EXPIRY_CUTOFF, null, null, 2, 0, 0, 200, null, null, null),
-          snapshot("RUNNING", null, null, 1L, 0, 0, 0, 0, null, null, null),
-          snapshot("SUCCESS", null, null, null, 0, 0, 0, 0, END, null, null),
           snapshot(
-              "RUNNING", EXPIRY_CUTOFF.plusSeconds(1), 3L, null, 2, 0, 0, 200, null, null, null),
-          snapshot("RUNNING", EXPIRY_CUTOFF, -1L, null, 0, 0, 0, 200, null, null, null),
-          snapshot("RUNNING", EXPIRY_CUTOFF, 3L, null, 4, 0, 0, 200, null, null, null),
-          snapshot("SUCCESS", EXPIRY_CUTOFF, 3L, null, 2, 0, 0, 200, END, null, null),
-          snapshot("RUNNING", EXPIRY_CUTOFF, 3L, null, 2, 1, 0, 200, null, null, null),
-          snapshot("RUNNING", EXPIRY_CUTOFF, 3L, -1L, 2, 0, 0, 200, null, null, null),
-          snapshot("RUNNING", EXPIRY_CUTOFF, 3L, 4L, 2, 0, 0, 200, null, null, null),
+              FIXTURE_RUNNING_294BDBF9, EXPIRY_CUTOFF, 3L, null, 2, 0, 0, 200, END, null, null),
+          snapshot("FAILED", EXPIRY_CUTOFF, 3L, null, 2, 0, 0, 200, null, null, null),
+          snapshot(
+              FIXTURE_RUNNING_294BDBF9, EXPIRY_CUTOFF, 3L, null, -1, 0, 0, 200, null, null, null),
+          snapshot(
+              FIXTURE_RUNNING_294BDBF9, EXPIRY_CUTOFF, 3L, null, 2, -1, 0, 200, null, null, null),
+          snapshot(
+              FIXTURE_RUNNING_294BDBF9, EXPIRY_CUTOFF, 3L, null, 2, 0, -1, 200, null, null, null),
+          snapshot(
+              FIXTURE_RUNNING_294BDBF9, EXPIRY_CUTOFF, 3L, null, 2, 0, 0, -1, null, null, null),
+          snapshot(FIXTURE_RUNNING_294BDBF9, null, 3L, null, 2, 0, 0, 200, null, null, null),
+          snapshot(
+              FIXTURE_RUNNING_294BDBF9, EXPIRY_CUTOFF, null, null, 2, 0, 0, 200, null, null, null),
+          snapshot(FIXTURE_RUNNING_294BDBF9, null, null, 1L, 0, 0, 0, 0, null, null, null),
+          snapshot(FIXTURE_SUCCESS_10855C7F, null, null, null, 0, 0, 0, 0, END, null, null),
+          snapshot(
+              FIXTURE_RUNNING_294BDBF9,
+              EXPIRY_CUTOFF.plusSeconds(1),
+              3L,
+              null,
+              2,
+              0,
+              0,
+              200,
+              null,
+              null,
+              null),
+          snapshot(
+              FIXTURE_RUNNING_294BDBF9, EXPIRY_CUTOFF, -1L, null, 0, 0, 0, 200, null, null, null),
+          snapshot(
+              FIXTURE_RUNNING_294BDBF9, EXPIRY_CUTOFF, 3L, null, 4, 0, 0, 200, null, null, null),
+          snapshot(
+              FIXTURE_SUCCESS_10855C7F, EXPIRY_CUTOFF, 3L, null, 2, 0, 0, 200, END, null, null),
+          snapshot(
+              FIXTURE_RUNNING_294BDBF9, EXPIRY_CUTOFF, 3L, null, 2, 1, 0, 200, null, null, null),
+          snapshot(
+              FIXTURE_RUNNING_294BDBF9, EXPIRY_CUTOFF, 3L, -1L, 2, 0, 0, 200, null, null, null),
+          snapshot(FIXTURE_RUNNING_294BDBF9, EXPIRY_CUTOFF, 3L, 4L, 2, 0, 0, 200, null, null, null),
           snapshot("WARNING", EXPIRY_CUTOFF, 3L, 2L, 2, 0, 1, 200, END, null, null),
-          snapshot("SUCCESS", EXPIRY_CUTOFF, 3L, 1L, 2, 1, 0, 200, END, null, null),
-          snapshot("SUCCESS", EXPIRY_CUTOFF, 3L, 1L, 1, 2, 0, 200, END, null, null),
-          snapshot("SUCCESS", EXPIRY_CUTOFF, 3L, 1L, 2, 2, 1, 200, END, null, null),
+          snapshot(FIXTURE_SUCCESS_10855C7F, EXPIRY_CUTOFF, 3L, 1L, 2, 1, 0, 200, END, null, null),
+          snapshot(FIXTURE_SUCCESS_10855C7F, EXPIRY_CUTOFF, 3L, 1L, 1, 2, 0, 200, END, null, null),
+          snapshot(FIXTURE_SUCCESS_10855C7F, EXPIRY_CUTOFF, 3L, 1L, 2, 2, 1, 200, END, null, null),
         };
     for (var candidate : invalid)
       assertFalse(ExpiryAuditRepository.validSnapshot(handle, candidate), candidate.toString());
@@ -751,14 +789,29 @@ final class ExpiryAuditRepositoryTest {
     var stageMutations =
         new ExpiryAuditRepository.Snapshot[] {
           snapshot("FAILED", EXPIRY_CUTOFF, 3L, null, 2, 0, 0, 200, END, null, null),
-          snapshot("RUNNING", EXPIRY_CUTOFF, 3L, 1L, 2, 0, 0, 200, null, null, null),
+          snapshot(FIXTURE_RUNNING_294BDBF9, EXPIRY_CUTOFF, 3L, 1L, 2, 0, 0, 200, null, null, null),
           snapshot(
-              "RUNNING", EXPIRY_CUTOFF.plusSeconds(1), 3L, null, 2, 0, 0, 200, null, null, null),
-          snapshot("RUNNING", EXPIRY_CUTOFF, 4L, null, 2, 0, 0, 200, null, null, null),
-          snapshot("RUNNING", EXPIRY_CUTOFF, 3L, null, 1, 0, 0, 200, null, null, null),
-          snapshot("RUNNING", EXPIRY_CUTOFF, 3L, null, 2, 1, 0, 200, null, null, null),
-          snapshot("RUNNING", EXPIRY_CUTOFF, 3L, null, 2, 0, 1, 200, null, null, null),
-          snapshot("RUNNING", EXPIRY_CUTOFF, 3L, null, 2, 0, 0, 201, null, null, null)
+              FIXTURE_RUNNING_294BDBF9,
+              EXPIRY_CUTOFF.plusSeconds(1),
+              3L,
+              null,
+              2,
+              0,
+              0,
+              200,
+              null,
+              null,
+              null),
+          snapshot(
+              FIXTURE_RUNNING_294BDBF9, EXPIRY_CUTOFF, 4L, null, 2, 0, 0, 200, null, null, null),
+          snapshot(
+              FIXTURE_RUNNING_294BDBF9, EXPIRY_CUTOFF, 3L, null, 1, 0, 0, 200, null, null, null),
+          snapshot(
+              FIXTURE_RUNNING_294BDBF9, EXPIRY_CUTOFF, 3L, null, 2, 1, 0, 200, null, null, null),
+          snapshot(
+              FIXTURE_RUNNING_294BDBF9, EXPIRY_CUTOFF, 3L, null, 2, 0, 1, 200, null, null, null),
+          snapshot(
+              FIXTURE_RUNNING_294BDBF9, EXPIRY_CUTOFF, 3L, null, 2, 0, 0, 201, null, null, null)
         };
     for (var candidate : stageMutations)
       assertFalse(ExpiryAuditRepository.matchesStage(java.util.Optional.of(candidate), stage));
@@ -767,17 +820,41 @@ final class ExpiryAuditRepositoryTest {
         ExpiryAuditRepository.matchesTerminal(java.util.Optional.empty(), stage, END, 1L, SUCCESS));
     var terminalMutations =
         new ExpiryAuditRepository.Snapshot[] {
-          snapshot("SUCCESS", EXPIRY_CUTOFF.plusSeconds(1), 3L, 1L, 2, 2, 0, 200, END, null, null),
-          snapshot("SUCCESS", EXPIRY_CUTOFF, 4L, 1L, 2, 2, 0, 200, END, null, null),
-          snapshot("SUCCESS", EXPIRY_CUTOFF, 3L, 0L, 2, 2, 0, 200, END, null, null),
-          snapshot("SUCCESS", EXPIRY_CUTOFF, 3L, 1L, 1, 2, 0, 200, END, null, null),
-          snapshot("SUCCESS", EXPIRY_CUTOFF, 3L, 1L, 2, 1, 0, 200, END, null, null),
-          snapshot("SUCCESS", EXPIRY_CUTOFF, 3L, 1L, 2, 2, 1, 200, END, null, null),
-          snapshot("SUCCESS", EXPIRY_CUTOFF, 3L, 1L, 2, 2, 0, 201, END, null, null),
+          snapshot(
+              FIXTURE_SUCCESS_10855C7F,
+              EXPIRY_CUTOFF.plusSeconds(1),
+              3L,
+              1L,
+              2,
+              2,
+              0,
+              200,
+              END,
+              null,
+              null),
+          snapshot(FIXTURE_SUCCESS_10855C7F, EXPIRY_CUTOFF, 4L, 1L, 2, 2, 0, 200, END, null, null),
+          snapshot(FIXTURE_SUCCESS_10855C7F, EXPIRY_CUTOFF, 3L, 0L, 2, 2, 0, 200, END, null, null),
+          snapshot(FIXTURE_SUCCESS_10855C7F, EXPIRY_CUTOFF, 3L, 1L, 1, 2, 0, 200, END, null, null),
+          snapshot(FIXTURE_SUCCESS_10855C7F, EXPIRY_CUTOFF, 3L, 1L, 2, 1, 0, 200, END, null, null),
+          snapshot(FIXTURE_SUCCESS_10855C7F, EXPIRY_CUTOFF, 3L, 1L, 2, 2, 1, 200, END, null, null),
+          snapshot(FIXTURE_SUCCESS_10855C7F, EXPIRY_CUTOFF, 3L, 1L, 2, 2, 0, 201, END, null, null),
           snapshot("WARNING", EXPIRY_CUTOFF, 3L, 1L, 2, 2, 0, 200, END, null, null),
-          snapshot("SUCCESS", EXPIRY_CUTOFF, 3L, 1L, 2, 2, 0, 200, END.plusSeconds(1), null, null),
-          snapshot("SUCCESS", EXPIRY_CUTOFF, 3L, 1L, 2, 2, 0, 200, END, "OTHER", null),
-          snapshot("SUCCESS", EXPIRY_CUTOFF, 3L, 1L, 2, 2, 0, 200, END, null, "OTHER")
+          snapshot(
+              FIXTURE_SUCCESS_10855C7F,
+              EXPIRY_CUTOFF,
+              3L,
+              1L,
+              2,
+              2,
+              0,
+              200,
+              END.plusSeconds(1),
+              null,
+              null),
+          snapshot(
+              FIXTURE_SUCCESS_10855C7F, EXPIRY_CUTOFF, 3L, 1L, 2, 2, 0, 200, END, "OTHER", null),
+          snapshot(
+              FIXTURE_SUCCESS_10855C7F, EXPIRY_CUTOFF, 3L, 1L, 2, 2, 0, 200, END, null, "OTHER")
         };
     for (var candidate : terminalMutations)
       assertFalse(

@@ -19,6 +19,7 @@ import org.junit.jupiter.api.Test;
 
 /** SSC119/BUG356: independent manager/kernel parent vectors, no root authority from claims. */
 class ChildMaintenanceParentTest {
+  private static final String FIXTURE_UNKNOWN_EB8BF0D8 = "unknown";
   private static final UUID BOOT = UUID.fromString("11111111-1111-4111-8111-111111111111");
 
   /** PT-OPS-MANAGER4404-003: internal key order is not an external wire oracle. */
@@ -61,7 +62,8 @@ class ChildMaintenanceParentTest {
         for (byte[] bytes : fixture.owned) assertArrayEquals(new byte[bytes.length], bytes);
       }
       for (String groups :
-          List.of("0 0", "-1", "unknown", "0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16")) {
+          List.of(
+              "0 0", "-1", FIXTURE_UNKNOWN_EB8BF0D8, "0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16")) {
         var fixture = new Fixture();
         fixture.groups = groups;
         assertThrows(
@@ -111,7 +113,7 @@ class ChildMaintenanceParentTest {
           "io",
           "kernelDrift",
           "null",
-          "unknown"
+          FIXTURE_UNKNOWN_EB8BF0D8
         }) {
       var f = new Fixture();
       f.fault = fault;
@@ -122,7 +124,7 @@ class ChildMaintenanceParentTest {
             () ->
                 context.verifyMaintenanceParent(
                     ChildStartupContext.MaintenanceParent.MORNING, owner()));
-      } else if (fault.equals("unknown")) {
+      } else if (fault.equals(FIXTURE_UNKNOWN_EB8BF0D8)) {
         assertSame(
             f.unknown,
             assertThrows(
@@ -278,7 +280,7 @@ class ChildMaintenanceParentTest {
     public byte[] maintenanceUnit(ChildStartupContext.MaintenanceParent kind) throws IOException {
       if (fault.equals("io")) throw new IOException("PRIVATE provider cause");
       if (fault.equals("null")) return null;
-      if (fault.equals("unknown")) throw unknown;
+      if (fault.equals(FIXTURE_UNKNOWN_EB8BF0D8)) throw unknown;
       units++;
       boolean morning = kind == ChildStartupContext.MaintenanceParent.MORNING;
       String unit =

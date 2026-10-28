@@ -43,6 +43,12 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** PT-JMS-010 actual NIO File Journal restart and persistent duplicate-cache test. */
 final class ArtemisFileJournalTest {
+  private static final String FIXTURE_VM_0_0C76084A = "vm://0";
+  private static final String FIXTURE_NK_DEAD_LETTER_6588D12C = "nk.dead.letter";
+  private static final String FIXTURE_NK_SYNC_REQUEST_422EE207 = "nk.sync.request";
+  private static final String FIXTURE_NK_EXPIRY_41CB6B4A = "nk.expiry";
+  private static final String FIXTURE_NK_ASYNC_WORK_NK_ASYNC_WORK_Q_5AB7EE46 =
+      "nk.async.work::nk.async.work.q";
   private static final byte[] GOLDEN_BODY = {
     0x53, 0x43, 0x48, 0x55, 0x42, 0x45, 0x52, 0x54, 0x2d, 0x4e, 0x4b
   };
@@ -76,31 +82,31 @@ final class ArtemisFileJournalTest {
   void persistentDlqAndExpirySurviveRestartWithoutPurge(@TempDir Path root) throws Exception {
     Configuration configuration = isolatedProductionConfiguration(root);
     EmbeddedActiveMQ broker = start(configuration);
-    try (ActiveMQConnectionFactory factory = new ActiveMQConnectionFactory("vm://0");
+    try (ActiveMQConnectionFactory factory = new ActiveMQConnectionFactory(FIXTURE_VM_0_0C76084A);
         JMSContext context = factory.createContext(JMSContext.AUTO_ACKNOWLEDGE)) {
-      sendPersistent(context, "nk.dead.letter", DLQ_BODY, 0);
-      sendPersistent(context, "nk.sync.request", EXPIRY_BODY, 100);
+      sendPersistent(context, FIXTURE_NK_DEAD_LETTER_6588D12C, DLQ_BODY, 0);
+      sendPersistent(context, FIXTURE_NK_SYNC_REQUEST_422EE207, EXPIRY_BODY, 100);
       Thread.sleep(250);
 
       Queue request = new ActiveMQQueue("nk.sync.request::nk.sync.request.q");
       try (JMSConsumer consumer = context.createConsumer(request)) {
         assertNull(consumer.receive(1_000));
       }
-      assertEquals(1, browseCount(context, "nk.dead.letter"));
-      assertEquals(1, browseCount(context, "nk.expiry"));
+      assertEquals(1, browseCount(context, FIXTURE_NK_DEAD_LETTER_6588D12C));
+      assertEquals(1, browseCount(context, FIXTURE_NK_EXPIRY_41CB6B4A));
     } finally {
       broker.stop();
     }
 
     broker = start(configuration);
-    try (ActiveMQConnectionFactory factory = new ActiveMQConnectionFactory("vm://0");
+    try (ActiveMQConnectionFactory factory = new ActiveMQConnectionFactory(FIXTURE_VM_0_0C76084A);
         JMSContext context = factory.createContext(JMSContext.AUTO_ACKNOWLEDGE)) {
-      assertEquals(1, browseCount(context, "nk.dead.letter"));
-      assertEquals(1, browseCount(context, "nk.expiry"));
-      assertArrayEquals(DLQ_BODY, receiveBody(context, "nk.dead.letter"));
-      assertArrayEquals(EXPIRY_BODY, receiveBody(context, "nk.expiry"));
-      assertEquals(0, browseCount(context, "nk.dead.letter"));
-      assertEquals(0, browseCount(context, "nk.expiry"));
+      assertEquals(1, browseCount(context, FIXTURE_NK_DEAD_LETTER_6588D12C));
+      assertEquals(1, browseCount(context, FIXTURE_NK_EXPIRY_41CB6B4A));
+      assertArrayEquals(DLQ_BODY, receiveBody(context, FIXTURE_NK_DEAD_LETTER_6588D12C));
+      assertArrayEquals(EXPIRY_BODY, receiveBody(context, FIXTURE_NK_EXPIRY_41CB6B4A));
+      assertEquals(0, browseCount(context, FIXTURE_NK_DEAD_LETTER_6588D12C));
+      assertEquals(0, browseCount(context, FIXTURE_NK_EXPIRY_41CB6B4A));
     } finally {
       broker.stop();
     }
@@ -115,9 +121,10 @@ final class ArtemisFileJournalTest {
     try {
       List<Long> receivedAt = new ArrayList<>();
       List<Integer> deliveryCounts = new ArrayList<>();
-      try (ActiveMQConnectionFactory factory = new ActiveMQConnectionFactory("vm://0");
+      try (ActiveMQConnectionFactory factory =
+              new ActiveMQConnectionFactory(FIXTURE_VM_0_0C76084A);
           JMSContext context = factory.createContext(JMSContext.SESSION_TRANSACTED)) {
-        Queue work = new ActiveMQQueue("nk.async.work::nk.async.work.q");
+        Queue work = new ActiveMQQueue(FIXTURE_NK_ASYNC_WORK_NK_ASYNC_WORK_Q_5AB7EE46);
         BytesMessage outbound = context.createBytesMessage();
         outbound.writeBytes(GOLDEN_BODY);
         context.createProducer().setDeliveryMode(DeliveryMode.PERSISTENT).send(work, outbound);
@@ -152,7 +159,7 @@ final class ArtemisFileJournalTest {
       throws Exception {
     Configuration configuration = isolatedProductionConfiguration(root);
     EmbeddedActiveMQ broker = start(configuration);
-    try (ActiveMQConnectionFactory factory = new ActiveMQConnectionFactory("vm://0");
+    try (ActiveMQConnectionFactory factory = new ActiveMQConnectionFactory(FIXTURE_VM_0_0C76084A);
         JMSContext context = factory.createContext(JMSContext.AUTO_ACKNOWLEDGE)) {
       Queue requestAddress = new ActiveMQQueue("nk.sync.request::nk.sync.request.q");
       BytesMessage outbound = context.createBytesMessage();
@@ -180,7 +187,7 @@ final class ArtemisFileJournalTest {
                     new ExpectedRoute(
                         MessageKind.REQUEST,
                         InteractionKind.SYNCHRONOUS,
-                        "nk.sync.request",
+                        FIXTURE_NK_SYNC_REQUEST_422EE207,
                         Optional.of("nk.sync.reply.web"),
                         true));
         assertArrayEquals(GOLDEN_BODY, guarded.body());
@@ -199,9 +206,9 @@ final class ArtemisFileJournalTest {
   void transactedSendAndReceiveRespectRollbackAndCommit(@TempDir Path root) throws Exception {
     Configuration configuration = isolatedProductionConfiguration(root);
     EmbeddedActiveMQ broker = start(configuration);
-    try (ActiveMQConnectionFactory factory = new ActiveMQConnectionFactory("vm://0");
+    try (ActiveMQConnectionFactory factory = new ActiveMQConnectionFactory(FIXTURE_VM_0_0C76084A);
         JMSContext context = factory.createContext(JMSContext.SESSION_TRANSACTED)) {
-      Queue work = new ActiveMQQueue("nk.async.work::nk.async.work.q");
+      Queue work = new ActiveMQQueue(FIXTURE_NK_ASYNC_WORK_NK_ASYNC_WORK_Q_5AB7EE46);
       BytesMessage rolledBack = context.createBytesMessage();
       rolledBack.writeBytes(new byte[] {0x11});
       context.createProducer().setDeliveryMode(DeliveryMode.PERSISTENT).send(work, rolledBack);
@@ -234,7 +241,7 @@ final class ArtemisFileJournalTest {
   void fatalDlqMessageRoundTripsThroughActualBroker(@TempDir Path root) throws Exception {
     Configuration configuration = isolatedProductionConfiguration(root);
     EmbeddedActiveMQ broker = start(configuration);
-    try (ActiveMQConnectionFactory factory = new ActiveMQConnectionFactory("vm://0");
+    try (ActiveMQConnectionFactory factory = new ActiveMQConnectionFactory(FIXTURE_VM_0_0C76084A);
         JMSContext context = factory.createContext(JMSContext.AUTO_ACKNOWLEDGE)) {
       GuardedJmsMessage source =
           new GuardedJmsMessage(
@@ -250,7 +257,7 @@ final class ArtemisFileJournalTest {
                   UUID.fromString("00000000-0000-0000-0000-000000000001"),
                   new LayoutId("LOGREQ01"),
                   "001",
-                  "nk.sync.request"));
+                  FIXTURE_NK_SYNC_REQUEST_422EE207));
       BytesMessage dlq =
           FatalDlqMessageWriter.INSTANCE.create(
               context,
@@ -268,7 +275,8 @@ final class ArtemisFileJournalTest {
         byte[] body = new byte[Math.toIntExact(received.getBodyLength())];
         received.readBytes(body);
         assertArrayEquals(GOLDEN_BODY, body);
-        assertEquals("nk.sync.request", received.getStringProperty("_AMQ_ORIG_ADDRESS"));
+        assertEquals(
+            FIXTURE_NK_SYNC_REQUEST_422EE207, received.getStringProperty("_AMQ_ORIG_ADDRESS"));
         assertEquals("nk.sync.request.q", received.getStringProperty("_AMQ_ORIG_QUEUE"));
         assertEquals("PROTOCOL_INVALID", received.getStringProperty("NKErrorCode"));
         assertEquals("API_SYNC", received.getStringProperty("NKDetectedBy"));
@@ -292,7 +300,7 @@ final class ArtemisFileJournalTest {
         .setLargeMessagesDirectory(root.resolve("large-messages").toString())
         .setSecurityEnabled(false)
         .clearAcceptorConfigurations()
-        .addAcceptorConfiguration("component", "vm://0");
+        .addAcceptorConfiguration("component", FIXTURE_VM_0_0C76084A);
     return configuration;
   }
 
@@ -301,9 +309,9 @@ final class ArtemisFileJournalTest {
   }
 
   private static void sendPersistentDuplicatePair() throws Exception {
-    try (ActiveMQConnectionFactory factory = new ActiveMQConnectionFactory("vm://0");
+    try (ActiveMQConnectionFactory factory = new ActiveMQConnectionFactory(FIXTURE_VM_0_0C76084A);
         JMSContext context = factory.createContext(JMSContext.AUTO_ACKNOWLEDGE)) {
-      Queue destination = new ActiveMQQueue("nk.async.work::nk.async.work.q");
+      Queue destination = new ActiveMQQueue(FIXTURE_NK_ASYNC_WORK_NK_ASYNC_WORK_Q_5AB7EE46);
       for (int send = 0; send < 2; send++) {
         BytesMessage message = context.createBytesMessage();
         message.writeBytes(GOLDEN_BODY);
@@ -317,10 +325,11 @@ final class ArtemisFileJournalTest {
   }
 
   private static void receiveOnePersistentMessageAndNoDuplicate() throws Exception {
-    try (ActiveMQConnectionFactory factory = new ActiveMQConnectionFactory("vm://0");
+    try (ActiveMQConnectionFactory factory = new ActiveMQConnectionFactory(FIXTURE_VM_0_0C76084A);
         JMSContext context = factory.createContext(JMSContext.AUTO_ACKNOWLEDGE);
         JMSConsumer consumer =
-            context.createConsumer(new ActiveMQQueue("nk.async.work::nk.async.work.q"))) {
+            context.createConsumer(
+                new ActiveMQQueue(FIXTURE_NK_ASYNC_WORK_NK_ASYNC_WORK_Q_5AB7EE46))) {
       BytesMessage received = (BytesMessage) consumer.receive(5_000);
       byte[] body = new byte[Math.toIntExact(received.getBodyLength())];
       received.readBytes(body);
@@ -330,7 +339,7 @@ final class ArtemisFileJournalTest {
   }
 
   private static void receiveDlqBodyAndNoDuplicate() throws Exception {
-    try (ActiveMQConnectionFactory factory = new ActiveMQConnectionFactory("vm://0");
+    try (ActiveMQConnectionFactory factory = new ActiveMQConnectionFactory(FIXTURE_VM_0_0C76084A);
         JMSContext context = factory.createContext(JMSContext.AUTO_ACKNOWLEDGE);
         JMSConsumer consumer =
             context.createConsumer(new ActiveMQQueue("nk.dead.letter::nk.dead.letter.q"))) {

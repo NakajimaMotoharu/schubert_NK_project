@@ -61,6 +61,9 @@ import org.springframework.session.web.http.SessionRepositoryFilter;
 
 /** RERUN007: literal HTTP/SQL/256+280 byte oracles, real security/Servlet/MVC, not native. */
 final class LogoutControllerTest {
+  private static final String FIXTURE_0000_876EEFE0 = "0000";
+  private static final String FIXTURE_POST_E46D3AE9 = "POST";
+  private static final String FIXTURE_LOGOUT_AD6C492E = "/logout";
   private static WebLogDatabaseFixture db;
   @TempDir Path root;
 
@@ -90,14 +93,16 @@ final class LogoutControllerTest {
 
   @Test
   void rerun007aActualHttpConfirmedAndQueuedDestroyCookieAndOnlyCurrentRow() throws Exception {
-    for (String code : List.of("0000", "0200", "0102", "9000", "lost", "timeout")) {
+    for (String code : List.of(FIXTURE_0000_876EEFE0, "0200", "0102", "9000", "lost", "timeout")) {
       reset();
       try (var f = new Fixture()) {
         f.code = code;
         var old = f.authenticated();
         var newer = f.authenticated();
         try (var server = f.server(root.resolve(code))) {
-          var reply = f.send(server, "POST", old, old.attributes().csrfToken().orElseThrow());
+          var reply =
+              f.send(
+                  server, FIXTURE_POST_E46D3AE9, old, old.attributes().csrfToken().orElseThrow());
           assertEquals(302, reply.statusCode());
           assertEquals("/login?logout", reply.headers().firstValue("location").orElseThrow());
           String cookie = reply.headers().firstValue("set-cookie").orElseThrow();
@@ -107,14 +112,15 @@ final class LogoutControllerTest {
           assertFalse(cookie.contains("JSESSIONID"));
           assertTrue(f.sessions.find(old.sessionId()).isEmpty());
           assertTrue(f.sessions.find(newer.sessionId()).isPresent());
-          boolean confirmed = code.equals("0000") || code.equals("0200");
+          boolean confirmed = code.equals(FIXTURE_0000_876EEFE0) || code.equals("0200");
           assertEquals(confirmed ? 0 : 1, pending());
           var event = f.h.log.events.getLast();
           assertEquals(
               confirmed ? "LOGOUT_SUCCEEDED" : "LOGOUT_REVOCATION_QUEUED",
               event.get("action").getAsString());
           assertEquals("reader", event.get("actorUsername").getAsString());
-          assertEquals("/logout", event.getAsJsonObject("details").get("route").getAsString());
+          assertEquals(
+              FIXTURE_LOGOUT_AD6C492E, event.getAsJsonObject("details").get("route").getAsString());
           assertFalse(event.toString().contains("b".repeat(64)));
           assertEquals(1, f.calls.get());
           if (!confirmed) {
@@ -144,14 +150,18 @@ final class LogoutControllerTest {
       var old = f.authenticated();
       assertEquals(405, f.send(server, "GET", old, "").statusCode());
       assertEquals(405, f.send(server, "HEAD", old, "").statusCode());
-      assertEquals(403, f.send(server, "POST", old, "wrong").statusCode());
+      assertEquals(403, f.send(server, FIXTURE_POST_E46D3AE9, old, "wrong").statusCode());
       assertEquals(0, f.calls.get());
       assertEquals(0, pending());
       assertTrue(f.sessions.find(old.sessionId()).isPresent());
       var anonymous = f.sessions.create();
       assertEquals(
           403,
-          f.send(server, "POST", anonymous, anonymous.attributes().csrfToken().orElseThrow())
+          f.send(
+                  server,
+                  FIXTURE_POST_E46D3AE9,
+                  anonymous,
+                  anonymous.attributes().csrfToken().orElseThrow())
               .statusCode());
       assertEquals(0, f.calls.get());
       assertEquals(0, pending());
@@ -171,7 +181,8 @@ final class LogoutControllerTest {
       assertThrows(
           NullPointerException.class, () -> f.handler.handle(null, new MockHttpServletResponse()));
       assertThrows(
-          NullPointerException.class, () -> f.handler.handle(f.h.mock("POST", "/logout"), null));
+          NullPointerException.class,
+          () -> f.handler.handle(f.h.mock(FIXTURE_POST_E46D3AE9, FIXTURE_LOGOUT_AD6C492E), null));
       for (String fault : List.of("anonymous", "marker", "session", "transport", "identity")) {
         var request = f.direct();
         if (fault.equals("anonymous")) SecurityContextHolder.clearContext();
@@ -313,7 +324,12 @@ final class LogoutControllerTest {
       for (var input : inputs)
         futures.add(
             pool.submit(
-                () -> f.send(server, "POST", input, input.attributes().csrfToken().orElseThrow())));
+                () ->
+                    f.send(
+                        server,
+                        FIXTURE_POST_E46D3AE9,
+                        input,
+                        input.attributes().csrfToken().orElseThrow())));
       for (var result : futures) assertEquals(302, result.get(60, TimeUnit.SECONDS).statusCode());
       assertEquals(100, f.calls.get());
       assertEquals(100, pending());
@@ -358,7 +374,7 @@ final class LogoutControllerTest {
         new JmsRequestReplyClient(new ReplyCorrelationRegistry(), h.f.clock, 12);
     final AtomicLong calls = new AtomicLong();
     final AtomicLong ids = new AtomicLong(1000);
-    volatile String code = "0000";
+    volatile String code = FIXTURE_0000_876EEFE0;
     volatile Error fatal;
     final LogoutWireClient wire =
         new LogoutWireClient(
@@ -382,7 +398,7 @@ final class LogoutControllerTest {
               put(
                   response,
                   256,
-                  code.equals("0000") || code.equals("0200")
+                  code.equals(FIXTURE_0000_876EEFE0) || code.equals("0200")
                       ? "20261004090000000"
                       : "00000000000000000");
               assertTrue(replies.onReply(id, response));
@@ -402,7 +418,7 @@ final class LogoutControllerTest {
 
     MockHttpServletRequest direct() throws Exception {
       var snapshot = authenticated();
-      var request = h.mock("POST", "/logout");
+      var request = h.mock(FIXTURE_POST_E46D3AE9, FIXTURE_LOGOUT_AD6C492E);
       request.setAttribute(SessionRepositoryFilter.SESSION_REPOSITORY_ATTR, adapter);
       request.setSession(new MockHttpSession(null, snapshot.sessionId().cookieValue()));
       SecurityContextHolder.getContext()
@@ -426,11 +442,12 @@ final class LogoutControllerTest {
         WebHttpServer server, String method, WebSessionSnapshot input, String csrf)
         throws Exception {
       var body =
-          method.equals("POST")
+          method.equals(FIXTURE_POST_E46D3AE9)
               ? HttpRequest.BodyPublishers.ofString("_csrf=" + csrf)
               : HttpRequest.BodyPublishers.noBody();
       return client.send(
-          HttpRequest.newBuilder(URI.create("http://127.0.0.1:" + server.port() + "/logout"))
+          HttpRequest.newBuilder(
+                  URI.create("http://127.0.0.1:" + server.port() + FIXTURE_LOGOUT_AD6C492E))
               .timeout(Duration.ofSeconds(10))
               .header("X-Forwarded-For", "203.0.113.1")
               .header("X-Forwarded-Proto", "https")

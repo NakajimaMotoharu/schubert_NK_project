@@ -39,6 +39,9 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** PT-JMS-013: real four-consumer startup, transaction, fatal path, and partial-start rollback. */
 final class SyncRequestConsumersTest {
+  private static final String FIXTURE_VM_0_0C76084A = "vm://0";
+  private static final String FIXTURE_NK_SYNC_REQUEST_NK_SYNC_REQUEST_Q_D0778F85 =
+      "nk.sync.request::nk.sync.request.q";
   private static final UUID REQUEST_ID = UUID.fromString("00000000-0000-0000-0000-000000000001");
   private static final UUID RESPONSE_ID = UUID.fromString("00000000-0000-0000-0000-000000000002");
   private static final Clock CLOCK =
@@ -47,7 +50,7 @@ final class SyncRequestConsumersTest {
   @Test
   void fourConsumersReceiveAndCommitOneReply(@TempDir Path root) throws Exception {
     EmbeddedActiveMQ broker = start(root);
-    try (ActiveMQConnectionFactory factory = new ActiveMQConnectionFactory("vm://0");
+    try (ActiveMQConnectionFactory factory = new ActiveMQConnectionFactory(FIXTURE_VM_0_0C76084A);
         JMSContext producer = factory.createContext(JMSContext.AUTO_ACKNOWLEDGE);
         JMSContext observer = factory.createContext(JMSContext.AUTO_ACKNOWLEDGE);
         var replies =
@@ -97,7 +100,7 @@ final class SyncRequestConsumersTest {
   @Test
   void invalidMessageCommitsToDlqAndSignalsTerminal(@TempDir Path root) throws Exception {
     EmbeddedActiveMQ broker = start(root);
-    try (ActiveMQConnectionFactory factory = new ActiveMQConnectionFactory("vm://0");
+    try (ActiveMQConnectionFactory factory = new ActiveMQConnectionFactory(FIXTURE_VM_0_0C76084A);
         JMSContext producer = factory.createContext(JMSContext.AUTO_ACKNOWLEDGE);
         JMSContext observer = factory.createContext(JMSContext.AUTO_ACKNOWLEDGE);
         var dlq = observer.createConsumer(new ActiveMQQueue("nk.dead.letter::nk.dead.letter.q"))) {
@@ -119,7 +122,7 @@ final class SyncRequestConsumersTest {
         producer
             .createProducer()
             .setDeliveryMode(DeliveryMode.PERSISTENT)
-            .send(new ActiveMQQueue("nk.sync.request::nk.sync.request.q"), bad);
+            .send(new ActiveMQQueue(FIXTURE_NK_SYNC_REQUEST_NK_SYNC_REQUEST_Q_D0778F85), bad);
         Message isolated = dlq.receive(5_000);
         assertNotNull(isolated);
         assertTrue(notified.await(5, TimeUnit.SECONDS));
@@ -127,7 +130,7 @@ final class SyncRequestConsumersTest {
             .createProducer()
             .setDeliveryMode(DeliveryMode.PERSISTENT)
             .send(
-                new ActiveMQQueue("nk.sync.request::nk.sync.request.q"),
+                new ActiveMQQueue(FIXTURE_NK_SYNC_REQUEST_NK_SYNC_REQUEST_Q_D0778F85),
                 producer.createTextMessage("second-unacknowledged"));
         assertNull(dlq.receive(200));
         assertNotNull(terminal.get());
@@ -136,7 +139,8 @@ final class SyncRequestConsumersTest {
         assertTrue(consumers.terminalFailureObserved());
       }
       try (var pending =
-          observer.createConsumer(new ActiveMQQueue("nk.sync.request::nk.sync.request.q"))) {
+          observer.createConsumer(
+              new ActiveMQQueue(FIXTURE_NK_SYNC_REQUEST_NK_SYNC_REQUEST_Q_D0778F85))) {
         var returned = pending.receive(10_000);
         assertNotNull(returned);
         assertEquals("second-unacknowledged", returned.getBody(String.class));
@@ -150,7 +154,7 @@ final class SyncRequestConsumersTest {
   @Test
   void temporaryBusinessFailureRollsBackAndRedelivers(@TempDir Path root) throws Exception {
     EmbeddedActiveMQ broker = start(root);
-    try (ActiveMQConnectionFactory factory = new ActiveMQConnectionFactory("vm://0");
+    try (ActiveMQConnectionFactory factory = new ActiveMQConnectionFactory(FIXTURE_VM_0_0C76084A);
         JMSContext producer = factory.createContext(JMSContext.AUTO_ACKNOWLEDGE);
         JMSContext observer = factory.createContext(JMSContext.AUTO_ACKNOWLEDGE);
         var replies =
@@ -229,7 +233,7 @@ final class SyncRequestConsumersTest {
   @Test
   void partialStartupRejectsWrongSessionAndClosesAll(@TempDir Path root) throws Exception {
     EmbeddedActiveMQ broker = start(root);
-    try (ActiveMQConnectionFactory factory = new ActiveMQConnectionFactory("vm://0")) {
+    try (ActiveMQConnectionFactory factory = new ActiveMQConnectionFactory(FIXTURE_VM_0_0C76084A)) {
       AtomicInteger count = new AtomicInteger();
       assertThrows(
           IllegalStateException.class,
@@ -283,7 +287,7 @@ final class SyncRequestConsumersTest {
         .createProducer()
         .setDeliveryMode(DeliveryMode.PERSISTENT)
         .setTimeToLive(5_000)
-        .send(new ActiveMQQueue("nk.sync.request::nk.sync.request.q"), request);
+        .send(new ActiveMQQueue(FIXTURE_NK_SYNC_REQUEST_NK_SYNC_REQUEST_Q_D0778F85), request);
   }
 
   /** Independent SS322 byte-offset oracle; production encoder is never used for expected bytes. */
@@ -374,7 +378,7 @@ final class SyncRequestConsumersTest {
         .setLargeMessagesDirectory(root.resolve("large-messages").toString())
         .setSecurityEnabled(false)
         .clearAcceptorConfigurations()
-        .addAcceptorConfiguration("component", "vm://0");
+        .addAcceptorConfiguration("component", FIXTURE_VM_0_0C76084A);
     return new EmbeddedActiveMQ().setConfiguration(configuration).start();
   }
 }

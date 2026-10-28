@@ -34,12 +34,16 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** PG235/PT-OPS-MQ-005..007; independent SS321 literals and real read-only Core management. */
 final class ArtemisManagementReadinessClientTest {
+  private static final String FIXTURE_VM_0_0C76084A = "vm://0";
+  private static final String FIXTURE_NAME_6FFE58B8 = "name";
+  private static final String FIXTURE_JOURNALMINFILES_2FE39AAF = "journalMinFiles";
+  private static final String FIXTURE_DISKSTOREUSAGE_03C16F30 = "diskStoreUsage";
   @TempDir Path root;
 
   @Test
   void opsMq005ReadsActualBrokerWithoutChangingOrClosingBorrowedSession() throws Exception {
     var broker = start(root);
-    try (var locator = ActiveMQClient.createServerLocator("vm://0");
+    try (var locator = ActiveMQClient.createServerLocator(FIXTURE_VM_0_0C76084A);
         var factory = locator.createSessionFactory();
         var session = factory.createSession()) {
       assertDoesNotThrow(() -> new ArtemisManagementReadinessClient().verifyBroker(session));
@@ -67,7 +71,7 @@ final class ArtemisManagementReadinessClientTest {
         .setLargeMessagesDirectory(location.resolve("large-messages").toString())
         .setSecurityEnabled(true)
         .clearAcceptorConfigurations()
-        .addAcceptorConfiguration("component", "vm://0");
+        .addAcceptorConfiguration("component", FIXTURE_VM_0_0C76084A);
     String credential = UUID.randomUUID().toString();
     var security =
         new ActiveMQBasicSecurityManager()
@@ -83,7 +87,7 @@ final class ArtemisManagementReadinessClientTest {
         new EmbeddedActiveMQ().setConfiguration(config).setSecurityManager(security).start();
     String applicationCredential = UUID.randomUUID().toString();
     security.addNewUser("pt_api", applicationCredential, "nk_api");
-    try (var locator = ActiveMQClient.createServerLocator("vm://0");
+    try (var locator = ActiveMQClient.createServerLocator(FIXTURE_VM_0_0C76084A);
         var factory = locator.createSessionFactory();
         var session = factory.createSession("pt_ops", credential, false, true, true, false, 0)) {
       var reply = SimpleString.of("activemq.management.ptprobe");
@@ -122,17 +126,17 @@ final class ArtemisManagementReadinessClientTest {
     assertDoesNotThrow(() -> client.verifyBroker(session));
     Map<String, Object> wrong =
         Map.ofEntries(
-            Map.entry("name", "other"),
+            Map.entry(FIXTURE_NAME_6FFE58B8, "other"),
             Map.entry("persistenceEnabled", false),
             Map.entry("journalType", "ASYNCIO"),
             Map.entry("journalFileSize", 1L),
-            Map.entry("journalMinFiles", 3),
+            Map.entry(FIXTURE_JOURNALMINFILES_2FE39AAF, 3),
             Map.entry("journalPoolFiles", 19),
             Map.entry("globalMaxSize", 0L),
             Map.entry("IDCacheSize", 1),
             Map.entry("persistIDCache", false),
             Map.entry("maxDiskUsage", 91),
-            Map.entry("diskStoreUsage", 0.9));
+            Map.entry(FIXTURE_DISKSTOREUSAGE_03C16F30, 0.9));
     for (var entry : wrong.entrySet()) {
       var observed = new LinkedHashMap<>(expected);
       observed.put(entry.getKey(), entry.getValue());
@@ -143,13 +147,13 @@ final class ArtemisManagementReadinessClientTest {
     }
     for (Object invalid : new Object[] {-0.01, 0.9, Double.NaN, Double.POSITIVE_INFINITY, "0.5"}) {
       var observed = new LinkedHashMap<>(expected);
-      observed.put("diskStoreUsage", invalid);
+      observed.put(FIXTURE_DISKSTOREUSAGE_03C16F30, invalid);
       assertRedacted(
           () ->
               new ArtemisManagementReadinessClient((ignored, key) -> observed.get(key))
                   .verifyBroker(session));
     }
-    expected.put("diskStoreUsage", 0.899999);
+    expected.put(FIXTURE_DISKSTOREUSAGE_03C16F30, 0.899999);
     assertDoesNotThrow(() -> client.verifyBroker(session));
   }
 
@@ -161,18 +165,18 @@ final class ArtemisManagementReadinessClientTest {
         () -> new ArtemisManagementReadinessClient().verifyBroker(null));
     var session = unusedSession();
     var observed = expected();
-    observed.put("journalMinFiles", null);
+    observed.put(FIXTURE_JOURNALMINFILES_2FE39AAF, null);
     assertRedacted(
         () ->
             new ArtemisManagementReadinessClient((ignored, key) -> observed.get(key))
                 .verifyBroker(session));
-    observed.put("journalMinFiles", 4.5);
+    observed.put(FIXTURE_JOURNALMINFILES_2FE39AAF, 4.5);
     assertRedacted(
         () ->
             new ArtemisManagementReadinessClient((ignored, key) -> observed.get(key))
                 .verifyBroker(session));
-    observed.put("journalMinFiles", 4);
-    observed.put("diskStoreUsage", null);
+    observed.put(FIXTURE_JOURNALMINFILES_2FE39AAF, 4);
+    observed.put(FIXTURE_DISKSTOREUSAGE_03C16F30, null);
     assertRedacted(
         () ->
             new ArtemisManagementReadinessClient((ignored, key) -> observed.get(key))
@@ -196,7 +200,7 @@ final class ArtemisManagementReadinessClientTest {
     var closes = new AtomicInteger();
     var deletes = new AtomicInteger();
     var session = noReplySession(timeout, closes, deletes, false);
-    assertRedacted(() -> ArtemisManagementReadinessClient.read(session, "name"));
+    assertRedacted(() -> ArtemisManagementReadinessClient.read(session, FIXTURE_NAME_6FFE58B8));
     assertEquals(2_000L, timeout.get());
     assertEquals(2, closes.get());
     assertEquals(1, deletes.get());
@@ -204,13 +208,13 @@ final class ArtemisManagementReadinessClientTest {
 
     var closeFault =
         noReplySession(new AtomicLong(), new AtomicInteger(), new AtomicInteger(), true);
-    assertRedacted(() -> ArtemisManagementReadinessClient.read(closeFault, "name"));
+    assertRedacted(() -> ArtemisManagementReadinessClient.read(closeFault, FIXTURE_NAME_6FFE58B8));
 
     assertRedacted(
         () ->
             ArtemisManagementReadinessClient.read(
                 session,
-                "name",
+                FIXTURE_NAME_6FFE58B8,
                 (ignored, attribute) -> {
                   throw new InterruptedException();
                 }));
@@ -279,17 +283,17 @@ final class ArtemisManagementReadinessClientTest {
 
   private static Map<String, Object> expected() {
     var values = new LinkedHashMap<String, Object>();
-    values.put("name", "schubert-nk-broker");
+    values.put(FIXTURE_NAME_6FFE58B8, "schubert-nk-broker");
     values.put("persistenceEnabled", true);
     values.put("journalType", "NIO");
     values.put("journalFileSize", 10 * 1024 * 1024);
-    values.put("journalMinFiles", 4);
+    values.put(FIXTURE_JOURNALMINFILES_2FE39AAF, 4);
     values.put("journalPoolFiles", 20);
     values.put("globalMaxSize", 512L * 1024 * 1024);
     values.put("IDCacheSize", 20_000);
     values.put("persistIDCache", true);
     values.put("maxDiskUsage", 90);
-    values.put("diskStoreUsage", 0.2);
+    values.put(FIXTURE_DISKSTOREUSAGE_03C16F30, 0.2);
     return values;
   }
 
@@ -315,7 +319,7 @@ final class ArtemisManagementReadinessClientTest {
         .setLargeMessagesDirectory(root.resolve("large-messages").toString())
         .setSecurityEnabled(false)
         .clearAcceptorConfigurations()
-        .addAcceptorConfiguration("component", "vm://0");
+        .addAcceptorConfiguration("component", FIXTURE_VM_0_0C76084A);
     return new EmbeddedActiveMQ().setConfiguration(config).start();
   }
 }

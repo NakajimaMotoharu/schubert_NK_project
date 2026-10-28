@@ -37,6 +37,16 @@ import org.junit.jupiter.api.io.TempDir;
  * PT-IDEM-012: real DB/broker, independent SQL after-conditions, controlled time/failure oracles.
  */
 final class WebLogDispatcherTest {
+  private static final String FIXTURE_PENDING_B11DB31F = "PENDING";
+  private static final String FIXTURE_STATUS_CFC31BCC = "status";
+  private static final String FIXTURE_ATTEMPT_COUNT_87388C12 = "attempt_count";
+  private static final String FIXTURE_LAST_ERROR_CODE_BF1A4C63 = "last_error_code";
+  private static final String FIXTURE_LEASE_OWNER_6418FA0F = "lease_owner";
+  private static final String FIXTURE_WORKER_1636F9EC = "worker";
+  private static final String FIXTURE_SENT_AT_C13E7660 = "sent_at";
+  private static final String FIXTURE_SETAUTOCOMMIT_17F7C6FD = "setAutoCommit";
+  private static final String FIXTURE_ROLLBACK_3770B198 = "rollback";
+  private static final String FIXTURE_CLOSE_97959247 = "close";
   private static final Instant NOW = Instant.parse("2026-09-06T00:00:00Z");
   private static final WebLogPayloadIdentity IDENTITY =
       new WebLogPayloadIdentity(
@@ -92,20 +102,20 @@ final class WebLogDispatcherTest {
         if (kind < 3) {
           assertSame(fatal, assertThrows(Error.class, () -> dispatch.dispatch("graph", 1)));
           assertEquals(1, opens.get());
-          assertEquals("PENDING", column("status"));
-          assertEquals("0", column("attempt_count"));
-          assertNull(column("last_error_code"));
+          assertEquals(FIXTURE_PENDING_B11DB31F, column(FIXTURE_STATUS_CFC31BCC));
+          assertEquals("0", column(FIXTURE_ATTEMPT_COUNT_87388C12));
+          assertNull(column(FIXTURE_LAST_ERROR_CODE_BF1A4C63));
           assertEquals(NOW, timestamp("next_attempt_at"));
-          assertEquals("graph", column("lease_owner"));
+          assertEquals("graph", column(FIXTURE_LEASE_OWNER_6418FA0F));
           assertEquals(NOW.plusSeconds(10), timestamp("lease_until"));
         } else {
           assertEquals(new WebLogDispatcher.Report(1, 0, 1, 0), dispatch.dispatch("graph", 1));
           assertEquals(2, opens.get());
-          assertEquals("ERROR", column("status"));
-          assertEquals("1", column("attempt_count"));
-          assertEquals("JMS_SEND_FAILURE", column("last_error_code"));
+          assertEquals("ERROR", column(FIXTURE_STATUS_CFC31BCC));
+          assertEquals("1", column(FIXTURE_ATTEMPT_COUNT_87388C12));
+          assertEquals("JMS_SEND_FAILURE", column(FIXTURE_LAST_ERROR_CODE_BF1A4C63));
           assertEquals(NOW.plusMillis(1100), timestamp("next_attempt_at"));
-          assertNull(column("lease_owner"));
+          assertNull(column(FIXTURE_LEASE_OWNER_6418FA0F));
         }
         assertEquals(1, jms.get());
       }
@@ -123,19 +133,19 @@ final class WebLogDispatcherTest {
       AtomicReference<Instant> now = new AtomicReference<>(NOW);
       JmsContextFactory failed =
           () -> {
-            unlocked("worker");
+            unlocked(FIXTURE_WORKER_1636F9EC);
             now.set(NOW.plusSeconds(3));
             throw new JMSRuntimeException("synthetic transport failure");
           };
       assertEquals(
           new WebLogDispatcher.Report(1, 0, 1, 0),
-          dispatcher(codec, failed, now).dispatch("worker", 1));
-      assertEquals("ERROR", column("status"));
-      assertEquals("JMS_SEND_FAILURE", column("last_error_code"));
-      assertEquals("1", column("attempt_count"));
+          dispatcher(codec, failed, now).dispatch(FIXTURE_WORKER_1636F9EC, 1));
+      assertEquals("ERROR", column(FIXTURE_STATUS_CFC31BCC));
+      assertEquals("JMS_SEND_FAILURE", column(FIXTURE_LAST_ERROR_CODE_BF1A4C63));
+      assertEquals("1", column(FIXTURE_ATTEMPT_COUNT_87388C12));
       assertEquals(NOW.plusMillis(4100), timestamp("next_attempt_at"));
-      assertNull(column("lease_owner"));
-      assertNull(column("sent_at"));
+      assertNull(column(FIXTURE_LEASE_OWNER_6418FA0F));
+      assertNull(column(FIXTURE_SENT_AT_C13E7660));
       now.set(NOW.plusMillis(4099));
       assertEquals(
           new WebLogDispatcher.Report(0, 0, 0, 0),
@@ -143,18 +153,18 @@ final class WebLogDispatcherTest {
       now.set(NOW.plusMillis(4100));
       JmsContextFactory success =
           () -> {
-            unlocked("worker");
+            unlocked(FIXTURE_WORKER_1636F9EC);
             now.set(NOW.plusMillis(7100));
             return factory.createContext(JMSContext.SESSION_TRANSACTED);
           };
-      var report = dispatcher(codec, success, now).dispatch("worker", 1);
+      var report = dispatcher(codec, success, now).dispatch(FIXTURE_WORKER_1636F9EC, 1);
       assertEquals(1, report.claimed());
       assertEquals(1, report.sent());
       assertEquals(0, report.failed());
       assertEquals(0, report.leaseLost());
-      assertEquals("SENT", column("status"));
-      assertEquals(NOW.plusMillis(7100), timestamp("sent_at"));
-      assertNull(column("last_error_code"));
+      assertEquals("SENT", column(FIXTURE_STATUS_CFC31BCC));
+      assertEquals(NOW.plusMillis(7100), timestamp(FIXTURE_SENT_AT_C13E7660));
+      assertNull(column(FIXTURE_LAST_ERROR_CODE_BF1A4C63));
       assertNotNull(consumer.receive(5000));
       assertNull(consumer.receive(100));
     } finally {
@@ -192,17 +202,17 @@ final class WebLogDispatcherTest {
                               broken, repository, sender, Clock.fixed(NOW, ZoneOffset.UTC))
                           .dispatch("crashed", 1))
               .getSQLState());
-      assertEquals("PENDING", column("status"));
-      assertEquals("crashed", column("lease_owner"));
-      assertNull(column("sent_at"));
+      assertEquals(FIXTURE_PENDING_B11DB31F, column(FIXTURE_STATUS_CFC31BCC));
+      assertEquals("crashed", column(FIXTURE_LEASE_OWNER_6418FA0F));
+      assertNull(column(FIXTURE_SENT_AT_C13E7660));
       AtomicReference<Instant> now = new AtomicReference<>(NOW.plusSeconds(10));
       var recovered =
           dispatcher(codec, () -> factory.createContext(JMSContext.SESSION_TRANSACTED), now);
       assertEquals(new WebLogDispatcher.Report(0, 0, 0, 0), recovered.dispatch("recovery", 1));
       now.set(NOW.plusSeconds(10).plusNanos(1000));
       assertEquals(new WebLogDispatcher.Report(1, 1, 0, 0), recovered.dispatch("recovery", 1));
-      assertEquals("SENT", column("status"));
-      assertEquals(now.get(), timestamp("sent_at"));
+      assertEquals("SENT", column(FIXTURE_STATUS_CFC31BCC));
+      assertEquals(now.get(), timestamp(FIXTURE_SENT_AT_C13E7660));
       assertNotNull(consumer.receive(5000));
       assertNull(consumer.receive(100));
     } finally {
@@ -236,9 +246,9 @@ final class WebLogDispatcherTest {
         assertEquals(
             new WebLogDispatcher.Report(1, 0, 0, 1),
             dispatcher(codec, provider, new AtomicReference<>(NOW)).dispatch("old", 1));
-        assertEquals("new-owner", column("lease_owner"));
-        assertEquals("PENDING", column("status"));
-        assertEquals("0", column("attempt_count"));
+        assertEquals("new-owner", column(FIXTURE_LEASE_OWNER_6418FA0F));
+        assertEquals(FIXTURE_PENDING_B11DB31F, column(FIXTURE_STATUS_CFC31BCC));
+        assertEquals("0", column(FIXTURE_ATTEMPT_COUNT_87388C12));
       }
       db.reset();
       try (var connection = db.transaction()) {
@@ -256,8 +266,8 @@ final class WebLogDispatcherTest {
                   },
                   new AtomicReference<>(NOW))
               .dispatch("invalid", 1));
-      assertEquals("WEB_LOG_PAYLOAD_INVALID", column("last_error_code"));
-      assertEquals("ERROR", column("status"));
+      assertEquals("WEB_LOG_PAYLOAD_INVALID", column(FIXTURE_LAST_ERROR_CODE_BF1A4C63));
+      assertEquals("ERROR", column(FIXTURE_STATUS_CFC31BCC));
     }
   }
 
@@ -272,7 +282,13 @@ final class WebLogDispatcherTest {
                 throw new AssertionError("claim failure must not send");
               });
       for (String point :
-          new String[] {"setAutoCommit", "prepareStatement", "commit", "rollback", "close"}) {
+          new String[] {
+            FIXTURE_SETAUTOCOMMIT_17F7C6FD,
+            "prepareStatement",
+            "commit",
+            FIXTURE_ROLLBACK_3770B198,
+            FIXTURE_CLOSE_97959247
+          }) {
         AtomicInteger closed = new AtomicInteger();
         AtomicInteger rolledBack = new AtomicInteger();
         DataSource failing = source(() -> faultConnection(db.web(), point, closed, rolledBack));
@@ -286,13 +302,16 @@ final class WebLogDispatcherTest {
         assertEquals("PT001", failure.getSQLState());
         assertEquals(1, closed.get());
         assertEquals(
-            point.equals("setAutoCommit") || point.equals("close") ? 0 : 1, rolledBack.get());
-        if (point.equals("rollback")) {
+            point.equals(FIXTURE_SETAUTOCOMMIT_17F7C6FD) || point.equals(FIXTURE_CLOSE_97959247)
+                ? 0
+                : 1,
+            rolledBack.get());
+        if (point.equals(FIXTURE_ROLLBACK_3770B198)) {
           assertEquals(1, failure.getSuppressed().length);
         }
-        assertEquals("PENDING", column("status"));
-        if (!point.equals("close")) {
-          assertNull(column("lease_owner"));
+        assertEquals(FIXTURE_PENDING_B11DB31F, column(FIXTURE_STATUS_CFC31BCC));
+        if (!point.equals(FIXTURE_CLOSE_97959247)) {
+          assertNull(column(FIXTURE_LEASE_OWNER_6418FA0F));
         }
       }
       for (boolean sendFails : new boolean[] {false, true}) {
@@ -325,10 +344,10 @@ final class WebLogDispatcherTest {
                     .dispatch("mark-failed", 1));
         assertEquals(1, rolledBack.get());
         assertEquals(1, closed.get());
-        assertEquals("PENDING", column("status"));
-        assertEquals("mark-failed", column("lease_owner"));
-        assertNull(column("sent_at"));
-        assertEquals("0", column("attempt_count"));
+        assertEquals(FIXTURE_PENDING_B11DB31F, column(FIXTURE_STATUS_CFC31BCC));
+        assertEquals("mark-failed", column(FIXTURE_LEASE_OWNER_6418FA0F));
+        assertNull(column(FIXTURE_SENT_AT_C13E7660));
+        assertEquals("0", column(FIXTURE_ATTEMPT_COUNT_87388C12));
       }
     }
   }
@@ -348,15 +367,16 @@ final class WebLogDispatcherTest {
                           new Class<?>[] {Connection.class},
                           (ignored, method, args) -> {
                             if (method.getName().equals("prepareStatement")) throw primary;
-                            if (method.getName().equals("rollback")) {
+                            if (method.getName().equals(FIXTURE_ROLLBACK_3770B198)) {
                               rolledBack.incrementAndGet();
                               throw primary;
                             }
-                            if (method.getName().equals("close")) {
+                            if (method.getName().equals(FIXTURE_CLOSE_97959247)) {
                               closed.incrementAndGet();
                               throw primary;
                             }
-                            if (method.getName().equals("setAutoCommit")) return null;
+                            if (method.getName().equals(FIXTURE_SETAUTOCOMMIT_17F7C6FD))
+                              return null;
                             if (method.getName().equals("getAutoCommit")) return false;
                             throw new AssertionError(method.getName());
                           }));
@@ -372,7 +392,7 @@ final class WebLogDispatcherTest {
               () ->
                   new WebLogDispatcher(
                           failing, repository, sender, Clock.fixed(NOW, ZoneOffset.UTC))
-                      .dispatch("worker", 1));
+                      .dispatch(FIXTURE_WORKER_1636F9EC, 1));
       assertSame(primary, observed);
       assertEquals(0, observed.getSuppressed().length);
       assertEquals(1, rolledBack.get());
@@ -384,8 +404,8 @@ final class WebLogDispatcherTest {
   void idem012r03DistinctRollbackAndCloseFailuresRemainSecondary() throws Exception {
     try (var codec = codec()) {
       SQLException primary = new SQLException("claim", "PT003");
-      SQLException rollback = new SQLException("rollback", "PT004");
-      SQLException close = new SQLException("close", "PT005");
+      SQLException rollback = new SQLException(FIXTURE_ROLLBACK_3770B198, "PT004");
+      SQLException close = new SQLException(FIXTURE_CLOSE_97959247, "PT005");
       AtomicInteger rolledBack = new AtomicInteger();
       AtomicInteger closed = new AtomicInteger();
       SQLException observed =
@@ -399,7 +419,7 @@ final class WebLogDispatcherTest {
                           repository,
                           unreachableSender(codec),
                           Clock.fixed(NOW, ZoneOffset.UTC))
-                      .dispatch("worker", 1));
+                      .dispatch(FIXTURE_WORKER_1636F9EC, 1));
       assertSame(primary, observed);
       assertArrayEquals(new Throwable[] {rollback, close}, observed.getSuppressed());
       assertEquals(1, rolledBack.get());
@@ -424,7 +444,7 @@ final class WebLogDispatcherTest {
                           repository,
                           unreachableSender(codec),
                           Clock.fixed(NOW, ZoneOffset.UTC))
-                      .dispatch("worker", 1));
+                      .dispatch(FIXTURE_WORKER_1636F9EC, 1));
       assertSame(fatal, observed);
       assertArrayEquals(new Throwable[] {primary}, observed.getSuppressed());
       assertEquals(1, rolledBack.get());
@@ -448,7 +468,7 @@ final class WebLogDispatcherTest {
                           repository,
                           unreachableSender(codec),
                           Clock.fixed(NOW, ZoneOffset.UTC))
-                      .dispatch("worker", 1));
+                      .dispatch(FIXTURE_WORKER_1636F9EC, 1));
       assertSame(fatal, observed);
       assertArrayEquals(new Throwable[] {primary}, observed.getSuppressed());
       assertEquals(1, rolledBack.get());
@@ -478,13 +498,15 @@ final class WebLogDispatcherTest {
       var dispatcher = new WebLogDispatcher(source, repository, sender, clock);
       assertThrows(NullPointerException.class, () -> dispatcher.dispatch(null, 1));
       assertThrows(IllegalArgumentException.class, () -> dispatcher.dispatch("bad worker", 1));
-      assertThrows(IllegalArgumentException.class, () -> dispatcher.dispatch("worker", 0));
-      assertThrows(IllegalArgumentException.class, () -> dispatcher.dispatch("worker", 101));
+      assertThrows(
+          IllegalArgumentException.class, () -> dispatcher.dispatch(FIXTURE_WORKER_1636F9EC, 0));
+      assertThrows(
+          IllegalArgumentException.class, () -> dispatcher.dispatch(FIXTURE_WORKER_1636F9EC, 101));
       assertThrows(
           NullPointerException.class,
           () ->
               new WebLogDispatcher(source(() -> null), repository, sender, clock)
-                  .dispatch("worker", 1));
+                  .dispatch(FIXTURE_WORKER_1636F9EC, 1));
       for (int[] counts :
           new int[][] {
             {-1, 0, 0, 0},
@@ -602,14 +624,15 @@ final class WebLogDispatcherTest {
             new Class<?>[] {Connection.class},
             (proxy, method, args) -> {
               String name = method.getName();
-              if (name.equals("close")) {
+              if (name.equals(FIXTURE_CLOSE_97959247)) {
                 closed.incrementAndGet();
                 actual.close();
               }
-              if (name.equals("rollback")) {
+              if (name.equals(FIXTURE_ROLLBACK_3770B198)) {
                 rolledBack.incrementAndGet();
               }
-              if (point.equals(name) || point.equals("rollback") && name.equals("commit")) {
+              if (point.equals(name)
+                  || point.equals(FIXTURE_ROLLBACK_3770B198) && name.equals("commit")) {
                 throw new SQLException("synthetic JDBC failure", "PT001");
               }
               try {
@@ -632,15 +655,15 @@ final class WebLogDispatcherTest {
             new Class<?>[] {Connection.class},
             (ignored, method, args) -> {
               return switch (method.getName()) {
-                case "setAutoCommit" -> null;
+                case FIXTURE_SETAUTOCOMMIT_17F7C6FD -> null;
                 case "getAutoCommit" -> false;
                 case "prepareStatement" -> throw claim;
-                case "rollback" -> {
+                case FIXTURE_ROLLBACK_3770B198 -> {
                   rolledBack.incrementAndGet();
                   if (rollback != null) throw rollback;
                   yield null;
                 }
-                case "close" -> {
+                case FIXTURE_CLOSE_97959247 -> {
                   closed.incrementAndGet();
                   if (close != null) throw close;
                   yield null;

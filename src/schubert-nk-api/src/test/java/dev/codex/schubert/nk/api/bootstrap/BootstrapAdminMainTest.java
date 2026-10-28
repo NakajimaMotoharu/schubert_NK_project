@@ -28,6 +28,8 @@ import org.junit.jupiter.api.io.TempDir;
  * Actual PG transaction/independent identity literals; SSC188/PT-ADM-BOOT007, not native success.
  */
 class BootstrapAdminMainTest {
+  private static final String FIXTURE_SYNTHETIC_CREDENTIAL_E6FF1C0F = "synthetic-credential";
+  private static final String FIXTURE_ADMIN_3D9A13EA = "admin";
   @TempDir static Path root;
   static ApiLogDatabaseFixture db;
   static final Value FIXED = new Value(900, 900, List.of(800L, 900L));
@@ -162,7 +164,7 @@ class BootstrapAdminMainTest {
       s.execute("truncate schubert.app_users,schubert.app_logs restart identity cascade");
     }
     for (int expected : List.of(0, 20)) {
-      char[] input = "synthetic-credential".toCharArray();
+      char[] input = FIXTURE_SYNTHETIC_CREDENTIAL_E6FF1C0F.toCharArray();
       try (var c = db.api()) {
         assertEquals(expected, BootstrapAdminMain.createAndCommit(c, "Initial.Admin", input));
         assertFalse(c.isClosed());
@@ -179,13 +181,15 @@ class BootstrapAdminMainTest {
       assertEquals(2, r.getLong(2));
       assertFalse(r.next());
     }
-    char[] input = "synthetic-credential".toCharArray();
+    char[] input = FIXTURE_SYNTHETIC_CREDENTIAL_E6FF1C0F.toCharArray();
     assertThrows(
-        NullPointerException.class, () -> BootstrapAdminMain.createAndCommit(null, "admin", input));
+        NullPointerException.class,
+        () -> BootstrapAdminMain.createAndCommit(null, FIXTURE_ADMIN_3D9A13EA, input));
     assertArrayEquals(new char[input.length], input);
     try (var c = db.api()) {
       assertThrows(
-          NullPointerException.class, () -> BootstrapAdminMain.createAndCommit(c, "admin", null));
+          NullPointerException.class,
+          () -> BootstrapAdminMain.createAndCommit(c, FIXTURE_ADMIN_3D9A13EA, null));
     }
   }
 
@@ -196,7 +200,7 @@ class BootstrapAdminMainTest {
           var s = c.createStatement()) {
         s.execute("truncate schubert.app_users,schubert.app_logs restart identity cascade");
       }
-      char[] input = "synthetic-credential".toCharArray();
+      char[] input = FIXTURE_SYNTHETIC_CREDENTIAL_E6FF1C0F.toCharArray();
       try (var actual = db.api()) {
         var fault =
             (Connection)
@@ -215,7 +219,8 @@ class BootstrapAdminMainTest {
                       }
                     });
         assertThrows(
-            SQLException.class, () -> BootstrapAdminMain.createAndCommit(fault, "admin", input));
+            SQLException.class,
+            () -> BootstrapAdminMain.createAndCommit(fault, FIXTURE_ADMIN_3D9A13EA, input));
         assertArrayEquals(new char[input.length], input);
       }
       try (var c = db.api();
@@ -230,7 +235,8 @@ class BootstrapAdminMainTest {
       try (var c = db.api()) {
         assertEquals(
             committed ? 20 : 0,
-            BootstrapAdminMain.createAndCommit(c, "admin", "synthetic-credential".toCharArray()));
+            BootstrapAdminMain.createAndCommit(
+                c, FIXTURE_ADMIN_3D9A13EA, FIXTURE_SYNTHETIC_CREDENTIAL_E6FF1C0F.toCharArray()));
       }
     }
   }

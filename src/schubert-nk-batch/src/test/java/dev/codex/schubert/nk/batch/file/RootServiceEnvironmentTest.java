@@ -17,23 +17,26 @@ import org.junit.jupiter.api.Test;
 
 /** OPS009/UI251/SS342/343; PT-OPS-ROOTENV-001..003, fixed launch environment only. */
 final class RootServiceEnvironmentTest {
+  private static final String FIXTURE_API_E3AF609E = "API";
+  private static final String FIXTURE_REJECT_9D13B1BC = "reject";
+
   @Test
   void eachServiceExportsExactlyFiveLiteralBindingsAndNoInheritedExtras() throws Exception {
-    child("API", "/run/credentials/schubert-nk-api.service", "accept");
+    child(FIXTURE_API_E3AF609E, "/run/credentials/schubert-nk-api.service", "accept");
     child("WEB", "/run/credentials/schubert-nk-web.service", "accept");
   }
 
   @Test
   void missingWrongServiceRelativeAndExtraSuffixCredentialPathsAreRejected() throws Exception {
-    for (String role : new String[] {"API", "WEB"}) {
-      child(role, null, "reject");
-      child(role, "/run/credentials/other.service", "reject");
-      child(role, "run/credentials/relative", "reject");
+    for (String role : new String[] {FIXTURE_API_E3AF609E, "WEB"}) {
+      child(role, null, FIXTURE_REJECT_9D13B1BC);
+      child(role, "/run/credentials/other.service", FIXTURE_REJECT_9D13B1BC);
+      child(role, "run/credentials/relative", FIXTURE_REJECT_9D13B1BC);
       String exact =
-          role.equals("API")
+          role.equals(FIXTURE_API_E3AF609E)
               ? "/run/credentials/schubert-nk-api.service"
               : "/run/credentials/schubert-nk-web.service";
-      child(role, exact + ".part", "reject");
+      child(role, exact + ".part", FIXTURE_REJECT_9D13B1BC);
     }
   }
 
@@ -90,7 +93,7 @@ final class RootServiceEnvironmentTest {
       var self = RootServiceProofTest.self(RootStartupContext.Service.valueOf(args[0]));
       if (args[1].equals("accept")) {
         String credentials =
-            args[0].equals("API")
+            args[0].equals(FIXTURE_API_E3AF609E)
                 ? "/run/credentials/schubert-nk-api.service"
                 : "/run/credentials/schubert-nk-web.service";
         Map<String, String> expected =
@@ -105,7 +108,7 @@ final class RootServiceEnvironmentTest {
         assertEquals(5, actual.size());
         assertThrows(UnsupportedOperationException.class, () -> actual.put("OTHER", "VALUE"));
       } else {
-        assertEquals("reject", args[1]);
+        assertEquals(FIXTURE_REJECT_9D13B1BC, args[1]);
         assertThrows(
             IOException.class, () -> RootServiceLauncher.environment(service, self, 128, 129));
       }

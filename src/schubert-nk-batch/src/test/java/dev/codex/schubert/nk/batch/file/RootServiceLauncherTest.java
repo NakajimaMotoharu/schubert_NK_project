@@ -15,10 +15,12 @@ import org.junit.jupiter.api.Test;
 
 /** NK-OPS-001/OPS009/UI251/SS342/343/PG370; PT-OPS-RMAIN001..006. */
 final class RootServiceLauncherTest {
+  private static final String FIXTURE_WEB_97D727BB = "WEB";
+
   @Test
   void rmain001WebOnlyGateReturnsNonSuccess() {
     var seen = new AtomicReference<ServiceConfigFiles.Service>();
-    assertEquals(30, RootServiceLauncher.run(new String[] {"WEB"}, seen::set));
+    assertEquals(30, RootServiceLauncher.run(new String[] {FIXTURE_WEB_97D727BB}, seen::set));
     assertEquals(ServiceConfigFiles.Service.WEB, seen.get());
   }
 
@@ -34,8 +36,9 @@ final class RootServiceLauncherTest {
     var calls = new AtomicInteger();
     RootServiceLauncher.Admission gate = ignored -> calls.incrementAndGet();
     for (String[] input :
-        new String[][] {{}, {"WEB", "API"}, {"web"}, {"--service=WEB"}, {""}, {"OTHER"}})
-      assertEquals(70, RootServiceLauncher.run(input, gate));
+        new String[][] {
+          {}, {FIXTURE_WEB_97D727BB, "API"}, {"web"}, {"--service=WEB"}, {""}, {"OTHER"}
+        }) assertEquals(70, RootServiceLauncher.run(input, gate));
     assertEquals(0, calls.get());
   }
 
@@ -44,7 +47,7 @@ final class RootServiceLauncherTest {
     assertEquals(
         30,
         RootServiceLauncher.run(
-            new String[] {"WEB"},
+            new String[] {FIXTURE_WEB_97D727BB},
             ignored -> {
               throw new IOException("PRIVATE");
             }));
@@ -65,11 +68,12 @@ final class RootServiceLauncherTest {
   void rmain005NullContractAndRepeatedCallsHaveNoState() {
     assertThrows(NullPointerException.class, () -> RootServiceLauncher.run(null, ignored -> {}));
     assertThrows(
-        NullPointerException.class, () -> RootServiceLauncher.run(new String[] {"WEB"}, null));
+        NullPointerException.class,
+        () -> RootServiceLauncher.run(new String[] {FIXTURE_WEB_97D727BB}, null));
     var calls = new AtomicInteger();
     RootServiceLauncher.Admission gate = ignored -> calls.incrementAndGet();
-    assertEquals(30, RootServiceLauncher.run(new String[] {"WEB"}, gate));
-    assertEquals(30, RootServiceLauncher.run(new String[] {"WEB"}, gate));
+    assertEquals(30, RootServiceLauncher.run(new String[] {FIXTURE_WEB_97D727BB}, gate));
+    assertEquals(30, RootServiceLauncher.run(new String[] {FIXTURE_WEB_97D727BB}, gate));
     assertEquals(2, calls.get());
   }
 

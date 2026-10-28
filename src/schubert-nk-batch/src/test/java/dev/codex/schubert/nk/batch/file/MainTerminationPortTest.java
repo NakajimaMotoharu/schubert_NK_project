@@ -21,6 +21,11 @@ import org.junit.jupiter.api.Test;
 
 /** SSC299/BUG1380/YKT1146; MAIN-TERM001..008 data/control-flow only, never native authority. */
 final class MainTerminationPortTest {
+  private static final String FIXTURE_EXIT_61090B57 = "exit:";
+  private static final String FIXTURE_PUBLIC_IO_5EF2F93D = "PUBLIC_IO";
+  private static final String FIXTURE_PUBLIC_UNKNOWN_E86C45C2 = "PUBLIC_UNKNOWN";
+  private static final String FIXTURE_PUBLIC_FATAL_93D0542B = "PUBLIC_FATAL";
+  private static final String FIXTURE_ADMISSION_5F37BB96 = "admission";
   private final Thread.UncaughtExceptionHandler originalHandler =
       Thread.currentThread().getUncaughtExceptionHandler();
 
@@ -46,7 +51,7 @@ final class MainTerminationPortTest {
                       Instant.parse("2026-10-04T09:01:00Z"),
                       outcome);
                 },
-                status -> order.add("exit:" + status));
+                status -> order.add(FIXTURE_EXIT_61090B57 + status));
         entry.main(
             resume
                 ? new String[] {"--resume", MorningCompletedMainTest.RUN.toString()}
@@ -72,13 +77,15 @@ final class MainTerminationPortTest {
     exits.clear();
     new MorningProcessMain(
             (budget, run) -> {
-              throw new IOException("PUBLIC_IO");
+              throw new IOException(FIXTURE_PUBLIC_IO_5EF2F93D);
             },
             exits::add)
         .main(new String[0]);
     assertEquals(List.of(30), exits);
     for (var failure :
-        List.of(new IllegalStateException("PUBLIC_UNKNOWN"), new AssertionError("PUBLIC_FATAL"))) {
+        List.of(
+            new IllegalStateException(FIXTURE_PUBLIC_UNKNOWN_E86C45C2),
+            new AssertionError(FIXTURE_PUBLIC_FATAL_93D0542B))) {
       exits.clear();
       var entry =
           new MorningProcessMain(
@@ -116,15 +123,15 @@ final class MainTerminationPortTest {
                   (actual, held) -> {
                     assertEquals(service, actual);
                     assertSame(checkpoint, held);
-                    order.add("admission");
-                    if (knownFailure) throw new IOException("PUBLIC_IO");
+                    order.add(FIXTURE_ADMISSION_5F37BB96);
+                    if (knownFailure) throw new IOException(FIXTURE_PUBLIC_IO_5EF2F93D);
                   },
-                  status -> order.add("exit:" + status));
+                  status -> order.add(FIXTURE_EXIT_61090B57 + status));
           entry.main(new String[] {service.name()});
           assertEquals(
               measured
-                  ? List.of("open", "admission", "terminal", "exit:30")
-                  : List.of("open", "admission", "exit:30"),
+                  ? List.of("open", FIXTURE_ADMISSION_5F37BB96, "terminal", "exit:30")
+                  : List.of("open", FIXTURE_ADMISSION_5F37BB96, "exit:30"),
               order);
         }
   }
@@ -145,9 +152,9 @@ final class MainTerminationPortTest {
     assertThrows(NullPointerException.class, () -> entry.main(null));
     for (var failure :
         List.of(
-            new IOException("PUBLIC_IO"),
-            new IllegalStateException("PUBLIC_UNKNOWN"),
-            new AssertionError("PUBLIC_FATAL"))) {
+            new IOException(FIXTURE_PUBLIC_IO_5EF2F93D),
+            new IllegalStateException(FIXTURE_PUBLIC_UNKNOWN_E86C45C2),
+            new AssertionError(FIXTURE_PUBLIC_FATAL_93D0542B))) {
       var refused =
           new RootServiceLauncher(
               service -> {
@@ -178,12 +185,14 @@ final class MainTerminationPortTest {
     var entry =
         new RootServiceLauncher(
             service -> Optional.of(checkpoint),
-            (service, held) -> order.add("admission"),
+            (service, held) -> order.add(FIXTURE_ADMISSION_5F37BB96),
             status -> fail("capture failure must not request exit"));
     assertSame(failure, assertThrows(IOException.class, () -> entry.main(new String[] {"API"})));
-    assertEquals(List.of("admission", "terminal"), order);
+    assertEquals(List.of(FIXTURE_ADMISSION_5F37BB96, "terminal"), order);
     for (var unknown :
-        List.of(new IllegalStateException("PUBLIC_UNKNOWN"), new AssertionError("PUBLIC_FATAL"))) {
+        List.of(
+            new IllegalStateException(FIXTURE_PUBLIC_UNKNOWN_E86C45C2),
+            new AssertionError(FIXTURE_PUBLIC_FATAL_93D0542B))) {
       var refused =
           new RootServiceLauncher(
               service -> Optional.empty(),
@@ -211,10 +220,13 @@ final class MainTerminationPortTest {
                   order.add("expiry");
                   return status;
                 },
-                value -> order.add("exit:" + value));
+                value -> order.add(FIXTURE_EXIT_61090B57 + value));
         entry.main(expiry ? new String[] {"--expiry"} : new String[0]);
         assertEquals(
-            List.of(expiry ? "expiry" : "cleanup", "exit:" + (status == 71 ? 30 : status)), order);
+            List.of(
+                expiry ? "expiry" : "cleanup",
+                FIXTURE_EXIT_61090B57 + (status == 71 ? 30 : status)),
+            order);
       }
   }
 
@@ -238,17 +250,19 @@ final class MainTerminationPortTest {
     var io =
         new CleanupProcessMain(
             () -> {
-              throw new IOException("PUBLIC_IO");
+              throw new IOException(FIXTURE_PUBLIC_IO_5EF2F93D);
             },
             () -> {
-              throw new IOException("PUBLIC_IO");
+              throw new IOException(FIXTURE_PUBLIC_IO_5EF2F93D);
             },
             exits::add);
     io.main(new String[0]);
     io.main(new String[] {"--expiry"});
     assertEquals(List.of(30, 30), exits);
     for (var unknown :
-        List.of(new IllegalStateException("PUBLIC_UNKNOWN"), new AssertionError("PUBLIC_FATAL"))) {
+        List.of(
+            new IllegalStateException(FIXTURE_PUBLIC_UNKNOWN_E86C45C2),
+            new AssertionError(FIXTURE_PUBLIC_FATAL_93D0542B))) {
       exits.clear();
       var entry =
           new CleanupProcessMain(

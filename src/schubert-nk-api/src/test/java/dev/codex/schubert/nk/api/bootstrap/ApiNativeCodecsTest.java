@@ -25,6 +25,7 @@ import org.junit.jupiter.api.Test;
  * independent LP/HMAC oracle; not native key/rotation readiness acceptance.
  */
 final class ApiNativeCodecsTest {
+  private static final String FIXTURE_001_A3FEAA64 = "001";
   @org.junit.jupiter.api.io.TempDir java.nio.file.Path directory;
 
   @Test
@@ -96,7 +97,9 @@ final class ApiNativeCodecsTest {
   void exactPurposesVersionsAndIndependentHmacSurviveTemporaryCopyErasure() throws Exception {
     var keys = new Keys();
     try (var owner = ApiNativeCodecs.create(keys);
-        var request = new CanonicalRequest("7", "LOGREQ01", "001", "REQUEST:LOGREQ01", List.of())) {
+        var request =
+            new CanonicalRequest(
+                "7", "LOGREQ01", FIXTURE_001_A3FEAA64, "REQUEST:LOGREQ01", List.of())) {
       keys.erased();
       assertEquals(3, keys.copies.size());
       var auth =
@@ -111,7 +114,7 @@ final class ApiNativeCodecsTest {
       var bytes = new ByteArrayOutputStream();
       try (var out = new DataOutputStream(bytes)) {
         out.write("SCHUBERT-NK-OP1".getBytes(StandardCharsets.US_ASCII));
-        for (String value : List.of("7", "LOGREQ01", "001", "REQUEST:LOGREQ01")) {
+        for (String value : List.of("7", "LOGREQ01", FIXTURE_001_A3FEAA64, "REQUEST:LOGREQ01")) {
           byte[] utf8 = value.getBytes(StandardCharsets.UTF_8);
           out.writeInt(utf8.length);
           out.write(utf8);
@@ -129,7 +132,7 @@ final class ApiNativeCodecsTest {
               .snapshots()
               .encrypt(
                   dev.codex.schubert.nk.api.idempotency.ResponseSnapshotIdentity.anonymous(
-                      new UUID(0, 2), "LGNRSP01", "001"),
+                      new UUID(0, 2), "LGNRSP01", FIXTURE_001_A3FEAA64),
                   new byte[] {1})
               .keyVersion());
     }
@@ -191,7 +194,8 @@ final class ApiNativeCodecsTest {
                   new AuthContextIdentity(new UUID(0, 1), 7),
                   AuthenticationContext.of("a".repeat(64))));
       try (var request =
-          new CanonicalRequest("7", "LOGREQ01", "001", "REQUEST:LOGREQ01", List.of())) {
+          new CanonicalRequest(
+              "7", "LOGREQ01", FIXTURE_001_A3FEAA64, "REQUEST:LOGREQ01", List.of())) {
         assertThrows(IllegalStateException.class, () -> fingerprints.calculate(request));
       }
       keys.erased();

@@ -24,6 +24,7 @@ import org.junit.jupiter.api.Test;
 
 /** NK-OPS-001/OPS009/SYS002004/UI251/SS333343354/SSC308; PT-OPS-VIEWFD001..008. */
 final class StartupAdmissionViewOwnerTest {
+  private static final String FIXTURE_PRIMARY_9466F7E5 = "PRIMARY";
   private static final String[] TYPE = {
     "NIREIIRERRRREEEE", "IIREIIRERRRREEEE", "RRRRRRRRRRRRRRRR", "EEEEEEEEEEEEEEEE"
   };
@@ -296,7 +297,9 @@ final class StartupAdmissionViewOwnerTest {
   @Test
   void viewfd007BodyAndOwnerCloseKeepExistingIndependentPriority() throws Exception {
     String[][] expected = {
-      {"IO", "CLOSE", "CLOSE"}, {"PRIMARY", "PRIMARY", "PRIMARY"}, {"PRIMARY", "PRIMARY", "PRIMARY"}
+      {"IO", "CLOSE", "CLOSE"},
+      {FIXTURE_PRIMARY_9466F7E5, FIXTURE_PRIMARY_9466F7E5, FIXTURE_PRIMARY_9466F7E5},
+      {FIXTURE_PRIMARY_9466F7E5, FIXTURE_PRIMARY_9466F7E5, FIXTURE_PRIMARY_9466F7E5}
     };
     for (int body = 0; body < 3; body++) {
       for (int close = 0; close < 3; close++) {
@@ -330,7 +333,7 @@ final class StartupAdmissionViewOwnerTest {
               assertNotSame(secondary, actual);
             }
             case "CLOSE" -> assertSame(secondary, actual);
-            case "PRIMARY" -> {
+            case FIXTURE_PRIMARY_9466F7E5 -> {
               assertSame(before, actual);
               assertEquals(1, actual.getSuppressed().length);
               assertInstanceOf(StorageIoException.class, actual.getSuppressed()[0]);

@@ -20,20 +20,23 @@ import org.junit.jupiter.api.Test;
  * expected.
  */
 final class MorningCompletionRetirementTest {
+  private static final String FIXTURE_PENDING_12ADAC54 = "pending";
+  private static final String FIXTURE_RETIRED_C6F3C288 = "retired";
+  private static final String FIXTURE_PRIVATE_SECONDARY_5CBC33CB = "PRIVATE secondary";
   private static final List<String> EXPECTED =
       List.of(
-          "pending",
+          FIXTURE_PENDING_12ADAC54,
           "unlink:CADDY",
-          "pending",
-          "pending",
+          FIXTURE_PENDING_12ADAC54,
+          FIXTURE_PENDING_12ADAC54,
           "unlink:WEB",
-          "retired",
+          FIXTURE_RETIRED_C6F3C288,
           "api-held",
-          "retired",
-          "retired",
+          FIXTURE_RETIRED_C6F3C288,
+          FIXTURE_RETIRED_C6F3C288,
           "unlink:API",
-          "retired",
-          "retired");
+          FIXTURE_RETIRED_C6F3C288,
+          FIXTURE_RETIRED_C6F3C288);
 
   private static MorningStartupLaunchOwner.CompletionRetirement attempt(
       String service, List<String> events) {
@@ -75,11 +78,11 @@ final class MorningCompletionRetirementTest {
         events,
         () -> {
           assertEquals(thread, Thread.currentThread().threadId());
-          events.add("pending");
+          events.add(FIXTURE_PENDING_12ADAC54);
         },
         () -> {
           assertEquals(thread, Thread.currentThread().threadId());
-          events.add("retired");
+          events.add(FIXTURE_RETIRED_C6F3C288);
         },
         progress);
     assertEquals(EXPECTED, events);
@@ -119,12 +122,12 @@ final class MorningCompletionRetirementTest {
           BackupUnitStartClient.RetirementGate pending =
               () -> {
                 if (calls[0]++ == failAt) raise(failure);
-                events.add("pending");
+                events.add(FIXTURE_PENDING_12ADAC54);
               };
           BackupUnitStartClient.RetirementGate retired =
               () -> {
                 if (calls[0]++ == failAt) raise(failure);
-                events.add("retired");
+                events.add(FIXTURE_RETIRED_C6F3C288);
               };
           var actual =
               assertThrows(
@@ -232,8 +235,8 @@ final class MorningCompletionRetirementTest {
                 var lines = new ArrayList<String>();
                 var secondary =
                     error
-                        ? new AssertionError("PRIVATE secondary")
-                        : new IllegalStateException("PRIVATE secondary");
+                        ? new AssertionError(FIXTURE_PRIVATE_SECONDARY_5CBC33CB)
+                        : new IllegalStateException(FIXTURE_PRIVATE_SECONDARY_5CBC33CB);
                 var progress =
                     new MorningStartupLaunchOwner.CompletionProgress(
                         () -> {
@@ -267,8 +270,8 @@ final class MorningCompletionRetirementTest {
         var reads = new AtomicLong();
         var secondary =
             error
-                ? new AssertionError("PRIVATE secondary")
-                : new IllegalStateException("PRIVATE secondary");
+                ? new AssertionError(FIXTURE_PRIVATE_SECONDARY_5CBC33CB)
+                : new IllegalStateException(FIXTURE_PRIVATE_SECONDARY_5CBC33CB);
         var progress =
             new MorningStartupLaunchOwner.CompletionProgress(
                 () -> {

@@ -52,6 +52,14 @@ import org.springframework.mock.web.MockHttpServletRequest;
 
 /** REQ005007009..014. Independent JSON/2336-byte/JCE/SQL postconditions; no deployed data. */
 final class WebRequestLogProducerTest {
+  private static final String FIXTURE_GET_04F32A7E = "GET";
+  private static final String FIXTURE_127_0_0_1_88270499 = "127.0.0.1";
+  private static final String FIXTURE_LEVEL_06435E3C = "level";
+  private static final String FIXTURE_DETAILS_521BCB5E = "details";
+  private static final String FIXTURE_FAILED_7E8A57FE = "FAILED";
+  private static final String FIXTURE_PROJECTIONSTATUS_B121730C = "projectionStatus";
+  private static final String FIXTURE_COMMIT_5EA9C586 = "commit";
+  private static final String FIXTURE_CLOSE_97959247 = "close";
   static final Instant NOW = Instant.parse("2026-10-03T01:00:00.123987Z");
   static final Clock CLOCK = Clock.fixed(NOW, ZoneOffset.UTC);
   static final byte[] KEY = new byte[32]; // Public synthetic fixture, not a deployed key.
@@ -79,7 +87,8 @@ final class WebRequestLogProducerTest {
       var request = new MockHttpServletRequest();
       var trace = WebRequestTraceTest.trace(request, 1);
       trace.captureRoute("/login");
-      fixture.producer.complete(trace, 200, 12999999, 3, "GET", Optional.of("203.0.113.7"));
+      fixture.producer.complete(
+          trace, 200, 12999999, 3, FIXTURE_GET_04F32A7E, Optional.of("203.0.113.7"));
       String expected =
           "{\"timestamp\":\"2026-10-03T01:00:00.123Z\",\"service\":\"WEB\","
               + "\"appVersion\":\"pt-1\",\"configVersion\":\"cfg-1\",\"level\":\"INFO\",\"category\":\"REQUEST\","
@@ -141,7 +150,7 @@ final class WebRequestLogProducerTest {
       int id = 10;
       for (String method :
           List.of(
-              "GET",
+              FIXTURE_GET_04F32A7E,
               "HEAD",
               "POST",
               "PUT",
@@ -175,16 +184,16 @@ final class WebRequestLogProducerTest {
                     AuthenticationContext.of("a".repeat(64)),
                     Instant.EPOCH)));
         fixture.producer.complete(
-            trace, status, 1000000, 999999999999L, "POST", Optional.of("127.0.0.1"));
+            trace, status, 1000000, 999999999999L, "POST", Optional.of(FIXTURE_127_0_0_1_88270499));
         var json = fixture.logger.entries.getLast().json();
         assertEquals(status, json.get("status").getAsInt());
         assertEquals(
             status >= 500 ? "ERROR" : status >= 400 ? "WARN" : "INFO",
-            json.get("level").getAsString());
+            json.get(FIXTURE_LEVEL_06435E3C).getAsString());
         assertEquals(status >= 400 ? "FAILURE" : "SUCCESS", json.get("outcome").getAsString());
         assertEquals("équipe test", json.get("actorUsername").getAsString());
         assertEquals("ADMIN", json.get("actorRole").getAsString());
-        assertFalse(json.getAsJsonObject("details").has("truncated"));
+        assertFalse(json.getAsJsonObject(FIXTURE_DETAILS_521BCB5E).has("truncated"));
       }
       for (long[] input :
           new long[][] {
@@ -203,16 +212,22 @@ final class WebRequestLogProducerTest {
                     UserRole.USER,
                     AuthenticationContext.of("b".repeat(64)),
                     Instant.EPOCH)));
-        fixture.producer.complete(trace, 200, input[0], input[1], "GET", Optional.of("127.0.0.1"));
+        fixture.producer.complete(
+            trace,
+            200,
+            input[0],
+            input[1],
+            FIXTURE_GET_04F32A7E,
+            Optional.of(FIXTURE_127_0_0_1_88270499));
         var json = fixture.logger.entries.getLast().json();
         assertEquals(
             Math.min(input[0] / 1000000, 999999999999L), json.get("elapsedMs").getAsLong());
         assertEquals(
             Math.min(input[1], 999999999999L),
-            json.getAsJsonObject("details").get("responseBytes").getAsLong());
+            json.getAsJsonObject(FIXTURE_DETAILS_521BCB5E).get("responseBytes").getAsLong());
         assertEquals(
             input[0] > 999999999000000L || input[1] > 999999999999L,
-            json.getAsJsonObject("details").has("truncated"));
+            json.getAsJsonObject(FIXTURE_DETAILS_521BCB5E).has("truncated"));
         assertFalse(json.has("actorUsername"));
         assertFalse(json.has("actorRole"));
         byte[] plain =
@@ -231,7 +246,12 @@ final class WebRequestLogProducerTest {
       var trace = WebRequestTraceTest.trace(new MockHttpServletRequest(), 40);
       for (long[] values : new long[][] {{99, 0, 0}, {600, 0, 0}, {200, -1, 0}, {200, 0, -1}}) {
         fixture.producer.complete(
-            trace, (int) values[0], values[1], values[2], "GET", Optional.of("127.0.0.1"));
+            trace,
+            (int) values[0],
+            values[1],
+            values[2],
+            FIXTURE_GET_04F32A7E,
+            Optional.of(FIXTURE_127_0_0_1_88270499));
         var json = fixture.logger.entries.getLast().json();
         assertEquals("SYSTEM", json.get("category").getAsString());
         assertEquals("UNKNOWN", json.get("outcome").getAsString());
@@ -239,24 +259,28 @@ final class WebRequestLogProducerTest {
         assertFalse(json.has("status"));
         assertFalse(json.has("remoteAddress"));
       }
-      fixture.producer.complete(trace, 403, 0, 0, "GET", Optional.empty());
+      fixture.producer.complete(trace, 403, 0, 0, FIXTURE_GET_04F32A7E, Optional.empty());
       assertEquals(6, fixture.logger.entries.size());
-      assertEquals("WARN", fixture.logger.entries.getLast().json().get("level").getAsString());
+      assertEquals(
+          "WARN",
+          fixture.logger.entries.getLast().json().get(FIXTURE_LEVEL_06435E3C).getAsString());
       assertEquals(Level.WARNING, fixture.logger.entries.getLast().level());
       assertEquals(
-          "FAILED",
+          FIXTURE_FAILED_7E8A57FE,
           fixture
               .logger
               .entries
               .getLast()
               .json()
-              .getAsJsonObject("details")
-              .get("projectionStatus")
+              .getAsJsonObject(FIXTURE_DETAILS_521BCB5E)
+              .get(FIXTURE_PROJECTIONSTATUS_B121730C)
               .getAsString());
-      fixture.producer.complete(trace, 200, 0, 0, "GET", Optional.of("not-an-ip-secret-canary"));
+      fixture.producer.complete(
+          trace, 200, 0, 0, FIXTURE_GET_04F32A7E, Optional.of("not-an-ip-secret-canary"));
       assertEquals("UNKNOWN", fixture.logger.entries.getLast().json().get("outcome").getAsString());
       assertFalse(fixture.logger.entries.toString().contains("not-an-ip-secret-canary"));
-      fixture.producer.complete(trace, 200, 0, 0, "GET", Optional.of("127.0.0.1\r\nsecret"));
+      fixture.producer.complete(
+          trace, 200, 0, 0, FIXTURE_GET_04F32A7E, Optional.of("127.0.0.1\r\nsecret"));
       assertFalse(fixture.logger.entries.toString().contains("secret"));
       assertEquals(0, count());
     }
@@ -266,22 +290,25 @@ final class WebRequestLogProducerTest {
   void req012DuplicateKeepsFirstCiphertextAndClosedCodecIsFailedNotSuccess() throws Exception {
     try (var fixture = new Fixture(source(db::web))) {
       var trace = WebRequestTraceTest.trace(new MockHttpServletRequest(), 41);
-      fixture.producer.complete(trace, 200, 0, 0, "GET", Optional.of("127.0.0.1"));
+      fixture.producer.complete(
+          trace, 200, 0, 0, FIXTURE_GET_04F32A7E, Optional.of(FIXTURE_127_0_0_1_88270499));
       byte[] first = ciphertext(trace.eventId());
-      fixture.producer.complete(trace, 503, 0, 0, "POST", Optional.of("127.0.0.1"));
+      fixture.producer.complete(trace, 503, 0, 0, "POST", Optional.of(FIXTURE_127_0_0_1_88270499));
       assertArrayEquals(first, ciphertext(trace.eventId()));
       assertEquals(1, count());
-      assertEquals("ERROR", fixture.logger.entries.getLast().json().get("level").getAsString());
+      assertEquals(
+          "ERROR",
+          fixture.logger.entries.getLast().json().get(FIXTURE_LEVEL_06435E3C).getAsString());
       assertEquals(Level.ERROR, fixture.logger.entries.getLast().level());
       assertEquals(
-          "FAILED",
+          FIXTURE_FAILED_7E8A57FE,
           fixture
               .logger
               .entries
               .getLast()
               .json()
-              .getAsJsonObject("details")
-              .get("projectionStatus")
+              .getAsJsonObject(FIXTURE_DETAILS_521BCB5E)
+              .get(FIXTURE_PROJECTIONSTATUS_B121730C)
               .getAsString());
       fixture.codec.close();
       fixture.producer.complete(
@@ -289,8 +316,8 @@ final class WebRequestLogProducerTest {
           200,
           0,
           0,
-          "GET",
-          Optional.of("127.0.0.1"));
+          FIXTURE_GET_04F32A7E,
+          Optional.of(FIXTURE_127_0_0_1_88270499));
       assertEquals(1, count());
       assertEquals(
           "WEB_REQUEST_LOG_PROJECTION_FAILED",
@@ -300,7 +327,13 @@ final class WebRequestLogProducerTest {
 
   @Test
   void req013AllSqlAndUnknownFailuresCloseRollbackAndPreserveSafeOutput() throws Exception {
-    for (String stage : List.of("get", "setAutoCommit", "prepareStatement", "commit", "close")) {
+    for (String stage :
+        List.of(
+            "get",
+            "setAutoCommit",
+            "prepareStatement",
+            FIXTURE_COMMIT_5EA9C586,
+            FIXTURE_CLOSE_97959247)) {
       for (boolean runtime : List.of(false, true)) {
         db.reset();
         var closed = new AtomicInteger();
@@ -318,9 +351,9 @@ final class WebRequestLogProducerTest {
                   return proxy(
                       Connection.class,
                       (instance, method, args) -> {
-                        if (method.getName().equals("close")) {
+                        if (method.getName().equals(FIXTURE_CLOSE_97959247)) {
                           closed.incrementAndGet();
-                          if (stage.equals("close")) real.close();
+                          if (stage.equals(FIXTURE_CLOSE_97959247)) real.close();
                         }
                         if (method.getName().equals("rollback")) rolled.incrementAndGet();
                         if (method.getName().equals(stage)) {
@@ -336,19 +369,23 @@ final class WebRequestLogProducerTest {
               200,
               0,
               0,
-              "GET",
-              Optional.of("127.0.0.1"));
+              FIXTURE_GET_04F32A7E,
+              Optional.of(FIXTURE_127_0_0_1_88270499));
           assertEquals(2, fixture.logger.entries.size());
           var json = fixture.logger.entries.getLast().json();
-          assertEquals("WARN", json.get("level").getAsString());
+          assertEquals("WARN", json.get(FIXTURE_LEVEL_06435E3C).getAsString());
           assertEquals(Level.WARNING, fixture.logger.entries.getLast().level());
           assertEquals(
-              "FAILED", json.getAsJsonObject("details").get("projectionStatus").getAsString());
+              FIXTURE_FAILED_7E8A57FE,
+              json.getAsJsonObject(FIXTURE_DETAILS_521BCB5E)
+                  .get(FIXTURE_PROJECTIONSTATUS_B121730C)
+                  .getAsString());
           assertFalse(json.toString().contains("synthetic-private-provider-canary"));
           assertEquals(stage.equals("get") ? 0 : 1, closed.get());
           assertEquals(
-              stage.equals("prepareStatement") || stage.equals("commit") ? 1 : 0, rolled.get());
-          assertEquals(stage.equals("close") ? 1 : 0, count());
+              stage.equals("prepareStatement") || stage.equals(FIXTURE_COMMIT_5EA9C586) ? 1 : 0,
+              rolled.get());
+          assertEquals(stage.equals(FIXTURE_CLOSE_97959247) ? 1 : 0, count());
         }
       }
     }
@@ -367,7 +404,7 @@ final class WebRequestLogProducerTest {
                 return proxy(
                     Connection.class,
                     (instance, method, args) -> {
-                      if (method.getName().equals("commit")) throw primary;
+                      if (method.getName().equals(FIXTURE_COMMIT_5EA9C586)) throw primary;
                       if (method.getName().equals("rollback")) {
                         switch (cleanup) {
                           case "sql" -> throw new SQLException("private-rollback");
@@ -376,7 +413,7 @@ final class WebRequestLogProducerTest {
                           default -> throw fatal;
                         }
                       }
-                      if (method.getName().equals("close")) closed.incrementAndGet();
+                      if (method.getName().equals(FIXTURE_CLOSE_97959247)) closed.incrementAndGet();
                       return invoke(real, method, args);
                     });
               });
@@ -389,20 +426,26 @@ final class WebRequestLogProducerTest {
                   AssertionError.class,
                   () ->
                       fixture.producer.complete(
-                          trace, 200, 0, 0, "GET", Optional.of("127.0.0.1"))));
+                          trace,
+                          200,
+                          0,
+                          0,
+                          FIXTURE_GET_04F32A7E,
+                          Optional.of(FIXTURE_127_0_0_1_88270499))));
           assertArrayEquals(new Throwable[] {primary}, fatal.getSuppressed());
         } else {
-          fixture.producer.complete(trace, 200, 0, 0, "GET", Optional.of("127.0.0.1"));
+          fixture.producer.complete(
+              trace, 200, 0, 0, FIXTURE_GET_04F32A7E, Optional.of(FIXTURE_127_0_0_1_88270499));
           assertEquals(cleanup.equals("same") ? 0 : 1, primary.getSuppressed().length);
           assertEquals(
-              "FAILED",
+              FIXTURE_FAILED_7E8A57FE,
               fixture
                   .logger
                   .entries
                   .getLast()
                   .json()
-                  .getAsJsonObject("details")
-                  .get("projectionStatus")
+                  .getAsJsonObject(FIXTURE_DETAILS_521BCB5E)
+                  .get(FIXTURE_PROJECTIONSTATUS_B121730C)
                   .getAsString());
         }
         assertEquals(1, closed.get());
@@ -417,7 +460,7 @@ final class WebRequestLogProducerTest {
               return proxy(
                   Connection.class,
                   (instance, method, args) -> {
-                    if (method.getName().equals("commit")) throw primary;
+                    if (method.getName().equals(FIXTURE_COMMIT_5EA9C586)) throw primary;
                     return invoke(real, method, args);
                   });
             });
@@ -432,8 +475,8 @@ final class WebRequestLogProducerTest {
                       200,
                       0,
                       0,
-                      "GET",
-                      Optional.of("127.0.0.1"))));
+                      FIXTURE_GET_04F32A7E,
+                      Optional.of(FIXTURE_127_0_0_1_88270499))));
       assertEquals(0, count());
     }
   }
@@ -469,8 +512,8 @@ final class WebRequestLogProducerTest {
               status,
               0,
               0,
-              "GET",
-              Optional.of("127.0.0.1"));
+              FIXTURE_GET_04F32A7E,
+              Optional.of(FIXTURE_127_0_0_1_88270499));
         producer.metadataInvalid();
       }
       assertEquals(8, terminal.get());
@@ -490,9 +533,9 @@ final class WebRequestLogProducerTest {
               return proxy(
                   Connection.class,
                   (instance, method, args) -> {
-                    if (method.getName().equals("commit") || method.getName().equals("rollback"))
-                      throw fatal;
-                    if (method.getName().equals("close")) closed.incrementAndGet();
+                    if (method.getName().equals(FIXTURE_COMMIT_5EA9C586)
+                        || method.getName().equals("rollback")) throw fatal;
+                    if (method.getName().equals(FIXTURE_CLOSE_97959247)) closed.incrementAndGet();
                     return invoke(real, method, args);
                   });
             });
@@ -507,8 +550,8 @@ final class WebRequestLogProducerTest {
                       200,
                       0,
                       0,
-                      "GET",
-                      Optional.of("127.0.0.1"))));
+                      FIXTURE_GET_04F32A7E,
+                      Optional.of(FIXTURE_127_0_0_1_88270499))));
       assertEquals(0, fatal.getSuppressed().length);
       assertEquals(1, closed.get());
       assertEquals(0, count());
@@ -642,13 +685,13 @@ final class WebRequestLogProducerTest {
       var trace = WebRequestTraceTest.trace(new MockHttpServletRequest(), 63);
       assertThrows(
           NullPointerException.class,
-          () -> fixture.producer.complete(null, 200, 0, 0, "GET", Optional.empty()));
+          () -> fixture.producer.complete(null, 200, 0, 0, FIXTURE_GET_04F32A7E, Optional.empty()));
       assertThrows(
           NullPointerException.class,
           () -> fixture.producer.complete(trace, 200, 0, 0, null, Optional.empty()));
       assertThrows(
           NullPointerException.class,
-          () -> fixture.producer.complete(trace, 200, 0, 0, "GET", null));
+          () -> fixture.producer.complete(trace, 200, 0, 0, FIXTURE_GET_04F32A7E, null));
       Clock nullClock =
           new Clock() {
             @Override
@@ -680,7 +723,7 @@ final class WebRequestLogProducerTest {
       assertThrows(NullPointerException.class, producer::metadataInvalid);
       assertThrows(
           NullPointerException.class,
-          () -> producer.complete(trace, 200, 0, 0, "GET", Optional.empty()));
+          () -> producer.complete(trace, 200, 0, 0, FIXTURE_GET_04F32A7E, Optional.empty()));
       assertTrue(logger.entries.isEmpty());
     }
   }
@@ -842,7 +885,7 @@ final class WebRequestLogProducerTest {
     put(wire, 297, "HTTP_REQUEST_COMPLETED");
     put(wire, 361, "HTTP request completed");
     put(wire, 873, request.toString());
-    put(wire, 909, "GET");
+    put(wire, 909, FIXTURE_GET_04F32A7E);
     put(wire, 917, "/login");
     put(wire, 1173, "200");
     put(wire, 1176, "12");

@@ -20,6 +20,8 @@ import org.junit.jupiter.api.Test;
 
 /** SSC166/BUG532/YKT377 ISSCOLD001..006: independent boot absence and fresh journal vectors. */
 final class MorningNoPriorBrokerTest {
+  private static final String FIXTURE_RETIRE_A2A9D4FF = "retire";
+
   static final class Query implements MorningPreviousBroker.Query {
     final List<byte[]> delivered = new ArrayList<>();
     int calls;
@@ -173,7 +175,7 @@ final class MorningNoPriorBrokerTest {
     var events = new ArrayList<String>();
     var live = cycle(MorningPreviousBrokerTest.cold(), events).execute(proof::recheck);
     assertEquals(4, q.calls);
-    assertEquals(1, events.stream().filter("retire"::equals).count());
+    assertEquals(1, events.stream().filter(FIXTURE_RETIRE_A2A9D4FF::equals).count());
     proof.recheck(live);
     assertEquals(5, q.calls);
     q.erased();
@@ -216,7 +218,7 @@ final class MorningNoPriorBrokerTest {
       assertThrows(
           MorningBrokerUnitCycleTest.Retained.class,
           () -> cycle(MorningPreviousBrokerTest.cold(), events).execute(proof::recheck));
-      assertFalse(events.contains("retire"));
+      assertFalse(events.contains(FIXTURE_RETIRE_A2A9D4FF));
       assertTrue(events.contains("retained"));
       q.erased();
     }
@@ -237,7 +239,7 @@ final class MorningNoPriorBrokerTest {
                       proof.recheck(actual);
                     }));
     assertEquals(2, checks[0]);
-    assertFalse(events.contains("retire"));
+    assertFalse(events.contains(FIXTURE_RETIRE_A2A9D4FF));
     q.erased();
   }
 
@@ -251,7 +253,7 @@ final class MorningNoPriorBrokerTest {
         MorningBrokerUnitCycleTest.Retained.class,
         () -> cycle(MorningBrokerUnitCycleTest.baseline(), events).execute(proof::recheck));
     assertEquals(2, q.calls);
-    assertFalse(events.contains("retire"));
+    assertFalse(events.contains(FIXTURE_RETIRE_A2A9D4FF));
     var live = cycle(MorningPreviousBrokerTest.cold(), new ArrayList<>()).execute(proof::recheck);
     q.later += BrokerJournalEvidenceTest.row("AMQ221031: Ready", 4).replace("1234567", "1234568");
     proof.recheck(live);

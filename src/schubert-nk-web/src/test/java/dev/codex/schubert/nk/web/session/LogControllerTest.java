@@ -66,6 +66,12 @@ import org.springframework.web.context.support.AnnotationConfigWebApplicationCon
 
 /** NK-WEB-002/SCR014/FUN008/AUT002/UI225,232,235/SS313,314,323/PG218/PT-SCR093..103. */
 class LogControllerTest {
+  private static final String FIXTURE_GET_04F32A7E = "GET";
+  private static final String FIXTURE_LOGS_910E2326 = "/logs";
+  private static final String FIXTURE_0000_876EEFE0 = "0000";
+  private static final String FIXTURE_PAGE_861424BC = "page";
+  private static final String FIXTURE_LOGS_A0526482 = "logs";
+  private static final String FIXTURE_ADMIN_C4BB3010 = "ADMIN";
   private static final Clock CLOCK =
       Clock.fixed(Instant.parse("2026-09-20T00:00:00Z"), ZoneOffset.UTC);
   private static WebLogDatabaseFixture db;
@@ -109,7 +115,7 @@ class LogControllerTest {
   }
 
   private static MockHttpServletRequest raw() {
-    var request = new MockHttpServletRequest("GET", "/logs");
+    var request = new MockHttpServletRequest(FIXTURE_GET_04F32A7E, FIXTURE_LOGS_910E2326);
     request.setRemoteAddr("127.0.0.1");
     return request;
   }
@@ -120,7 +126,9 @@ class LogControllerTest {
 
   private static org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder
       pageRequest(SessionPrincipal principal) {
-    return get("/logs").principal(principal).requestAttr(CsrfToken.class.getName(), csrf());
+    return get(FIXTURE_LOGS_910E2326)
+        .principal(principal)
+        .requestAttr(CsrfToken.class.getName(), csrf());
   }
 
   private static void configure(
@@ -138,7 +146,7 @@ class LogControllerTest {
   @Test
   void log093SuccessAndIndependentWire() throws Exception {
     try (var f = new Fixture()) {
-      for (String code : List.of("0000", "0200"))
+      for (String code : List.of(FIXTURE_0000_876EEFE0, "0200"))
         for (int count : new int[] {0, 1, 100}) {
           f.code = code;
           f.count = count;
@@ -159,18 +167,19 @@ class LogControllerTest {
                   "2026-09-20T09:00",
                   "to",
                   "2026-09-20T10:00",
-                  "page",
+                  FIXTURE_PAGE_861424BC,
                   "1");
           var model = new ExtendedModelMap();
           var response = new MockHttpServletResponse();
           int before = f.requests.size();
           assertEquals(
-              "logs", f.controller.search(query, actor(UserRole.ADMIN), model, raw(), response));
+              FIXTURE_LOGS_A0526482,
+              f.controller.search(query, actor(UserRole.ADMIN), model, raw(), response));
           assertEquals(200, response.getStatus());
           assertEquals(before + 1, f.requests.size());
-          var page = assertInstanceOf(LogSearchViewModel.class, model.get("page"));
+          var page = assertInstanceOf(LogSearchViewModel.class, model.get(FIXTURE_PAGE_861424BC));
           assertEquals(count, page.getResults().orElseThrow().getRows().size());
-          assertEquals("ADMIN", page.getTopBar().getRole());
+          assertEquals(FIXTURE_ADMIN_C4BB3010, page.getTopBar().getRole());
           byte[] sent = f.requests.getLast();
           assertEquals(912, sent.length);
           assertEquals("LGSREQ01", ascii(sent, 11, 8));
@@ -206,14 +215,15 @@ class LogControllerTest {
               params("log_type", "unknown"),
               params("from", "2026-02-30T00:00"),
               params("from", "2026-01-01T00:00", "to", "2026-02-02T00:00"),
-              params("page", "+1"),
+              params(FIXTURE_PAGE_861424BC, "+1"),
               params("q", "\n"))) {
         var model = new ExtendedModelMap();
         var response = new MockHttpServletResponse();
         assertEquals(
-            "logs", f.controller.search(query, actor(UserRole.ADMIN), model, raw(), response));
+            FIXTURE_LOGS_A0526482,
+            f.controller.search(query, actor(UserRole.ADMIN), model, raw(), response));
         assertEquals(400, response.getStatus());
-        var page = assertInstanceOf(LogSearchViewModel.class, model.get("page"));
+        var page = assertInstanceOf(LogSearchViewModel.class, model.get(FIXTURE_PAGE_861424BC));
         assertTrue(page.getResults().isEmpty());
         assertFalse(page.getErrors().isEmpty());
         assertTrue(f.requests.isEmpty());
@@ -242,7 +252,7 @@ class LogControllerTest {
   void log096SessionInvalidIsTerminal() throws Exception {
     try (var f = new Fixture()) {
       f.code = "0102";
-      var request = f.security.mock("GET", "/logs");
+      var request = f.security.mock(FIXTURE_GET_04F32A7E, FIXTURE_LOGS_910E2326);
       var response = new MockHttpServletResponse();
       SecurityContextHolder.getContext()
           .setAuthentication(
@@ -289,7 +299,14 @@ class LogControllerTest {
       // A byte-valid reply may still name another request page; this is a view-binding failure.
       f.responder =
           (id, bytes) ->
-              response(id, ascii(bytes, 113, 64), "0000", 2, 1, 101, "public synthetic log");
+              response(
+                  id,
+                  ascii(bytes, 113, 64),
+                  FIXTURE_0000_876EEFE0,
+                  2,
+                  1,
+                  101,
+                  "public synthetic log");
       result = new MockHttpServletResponse();
       assertNull(
           f.controller.search(
@@ -398,19 +415,26 @@ class LogControllerTest {
       var get = mvc.perform(pageRequest(principal)).andReturn();
       assertEquals(200, get.getResponse().getStatus());
       assertEquals("Logs", Jsoup.parse(get.getResponse().getContentAsString()).title());
-      assertEquals("logs", Objects.requireNonNull(get.getModelAndView()).getViewName());
+      assertEquals(
+          FIXTURE_LOGS_A0526482, Objects.requireNonNull(get.getModelAndView()).getViewName());
       int before = f.requests.size();
       var head =
           mvc.perform(
-                  head("/logs").principal(principal).requestAttr(CsrfToken.class.getName(), csrf()))
+                  head(FIXTURE_LOGS_910E2326)
+                      .principal(principal)
+                      .requestAttr(CsrfToken.class.getName(), csrf()))
               .andReturn();
       assertEquals(200, head.getResponse().getStatus());
-      assertEquals("logs", Objects.requireNonNull(head.getModelAndView()).getViewName());
+      assertEquals(
+          FIXTURE_LOGS_A0526482, Objects.requireNonNull(head.getModelAndView()).getViewName());
       assertEquals(before + 1, f.requests.size());
       before = f.requests.size();
       assertEquals(
           405,
-          mvc.perform(post("/logs").principal(principal)).andReturn().getResponse().getStatus());
+          mvc.perform(post(FIXTURE_LOGS_910E2326).principal(principal))
+              .andReturn()
+              .getResponse()
+              .getStatus());
       for (var bad :
           List.of(
               pageRequest(principal).param("q", "a", "b"),
@@ -428,9 +452,9 @@ class LogControllerTest {
 
   @Test
   void log100RealHttpAuthorizationAndSession() throws Exception {
-    for (String role : List.of("USER", "ADMIN")) {
+    for (String role : List.of("USER", FIXTURE_ADMIN_C4BB3010)) {
       reset();
-      var api = new SessionFormLoginTest.Api("0000", role, "0000", 0);
+      var api = new SessionFormLoginTest.Api(FIXTURE_0000_876EEFE0, role, FIXTURE_0000_876EEFE0, 0);
       try (var f = new Fixture();
           var server =
               new EmbeddedWebSecurityTest.Server(
@@ -441,11 +465,11 @@ class LogControllerTest {
                   true,
                   true,
                   (mvc, invalid) -> configure(mvc, f.client, invalid))) {
-        var anonymous = server.send("GET", "/logs", null, null, true);
+        var anonymous = server.send(FIXTURE_GET_04F32A7E, FIXTURE_LOGS_910E2326, null, null, true);
         assertEquals(302, anonymous.statusCode());
         assertEquals("/login", anonymous.headers().firstValue("location").orElseThrow());
         assertTrue(f.requests.isEmpty());
-        var first = server.send("GET", "/login", null, null, true);
+        var first = server.send(FIXTURE_GET_04F32A7E, "/login", null, null, true);
         String initial = first.headers().firstValue("set-cookie").orElseThrow().split(";", 2)[0];
         var login =
             server.send(
@@ -456,11 +480,11 @@ class LogControllerTest {
                 true);
         assertEquals(302, login.statusCode());
         String cookie = login.headers().firstValue("set-cookie").orElseThrow().split(";", 2)[0];
-        var page = server.send("GET", "/logs?q=hello", cookie, null, true);
-        assertEquals(role.equals("ADMIN") ? 200 : 403, page.statusCode());
-        if (role.equals("ADMIN")) {
+        var page = server.send(FIXTURE_GET_04F32A7E, "/logs?q=hello", cookie, null, true);
+        assertEquals(role.equals(FIXTURE_ADMIN_C4BB3010) ? 200 : 403, page.statusCode());
+        if (role.equals(FIXTURE_ADMIN_C4BB3010)) {
           var dom = Jsoup.parse(page.body());
-          assertEquals("ADMIN", dom.select(".login-role").text());
+          assertEquals(FIXTURE_ADMIN_C4BB3010, dom.select(".login-role").text());
           assertEquals("hello", dom.select("input[name=q]").attr("value"));
           assertEquals(
               List.of("/js/log-search-validation.js"), dom.select("script[src]").eachAttr("src"));
@@ -468,20 +492,27 @@ class LogControllerTest {
           assertEquals(1, f.requests.size());
           assertTrue(page.headers().firstValue("cache-control").orElseThrow().contains("no-store"));
           int before = f.requests.size();
-          var head = server.send("HEAD", "/logs", cookie, null, true);
+          var head = server.send("HEAD", FIXTURE_LOGS_910E2326, cookie, null, true);
           assertEquals(200, head.statusCode());
           assertEquals("", head.body());
           assertEquals(before + 1, f.requests.size());
-          assertEquals(400, server.send("GET", "/logs?page=bad", cookie, null, true).statusCode());
+          assertEquals(
+              400,
+              server.send(FIXTURE_GET_04F32A7E, "/logs?page=bad", cookie, null, true).statusCode());
           assertEquals(before + 1, f.requests.size());
           f.code = "0102";
-          var expired = server.send("GET", "/logs", cookie, null, true);
+          var expired =
+              server.send(FIXTURE_GET_04F32A7E, FIXTURE_LOGS_910E2326, cookie, null, true);
           assertEquals(302, expired.statusCode());
           assertEquals(
               "/login?session-expired", expired.headers().firstValue("location").orElseThrow());
           assertTrue(
               expired.headers().firstValue("set-cookie").orElseThrow().contains("Max-Age=0"));
-          assertEquals(302, server.send("GET", "/logs", cookie, null, true).statusCode());
+          assertEquals(
+              302,
+              server
+                  .send(FIXTURE_GET_04F32A7E, FIXTURE_LOGS_910E2326, cookie, null, true)
+                  .statusCode());
           assertEquals(before + 2, f.requests.size());
         } else {
           assertTrue(f.requests.isEmpty());
@@ -511,10 +542,10 @@ class LogControllerTest {
                   var model = new ExtendedModelMap();
                   var response = new MockHttpServletResponse();
                   assertEquals(
-                      "logs",
+                      FIXTURE_LOGS_A0526482,
                       f.controller.search(
                           params("q", "query" + n), principal, model, raw(), response));
-                  var page = (LogSearchViewModel) model.get("page");
+                  var page = (LogSearchViewModel) model.get(FIXTURE_PAGE_861424BC);
                   assertEquals("reader" + n, page.getTopBar().getUsername());
                   assertEquals("query" + n, page.getFilters().getQ());
                   return null;
@@ -554,7 +585,7 @@ class LogControllerTest {
       f.message = "<img src=x onerror=alert(1)>";
       var page =
           Jsoup.parse(
-              mvc.perform(pageRequest(actor(UserRole.ADMIN)).param("page", "2"))
+              mvc.perform(pageRequest(actor(UserRole.ADMIN)).param(FIXTURE_PAGE_861424BC, "2"))
                   .andReturn()
                   .getResponse()
                   .getContentAsString());
@@ -596,7 +627,7 @@ class LogControllerTest {
         new JmsRequestReplyClient(new ReplyCorrelationRegistry(), CLOCK, 12);
     volatile int count = 1;
     volatile int total = 1;
-    volatile String code = "0000";
+    volatile String code = FIXTURE_0000_876EEFE0;
     volatile String message = "public synthetic log";
     volatile BiFunction<UUID, byte[], byte[]> responder = this::standard;
     final LogSearchWireClient client =
@@ -640,7 +671,7 @@ class LogControllerTest {
   // Independent UI232/235 fixed positions. Production encoder/decoder is never an oracle.
   private static byte[] response(
       UUID id, String context, String code, int page, int rows, int total, String message) {
-    boolean success = code.equals("0000") || code.equals("0200");
+    boolean success = code.equals(FIXTURE_0000_876EEFE0) || code.equals("0200");
     int count = success ? rows : 0;
     byte[] bytes = new byte[304 + 2088 * count];
     Arrays.fill(bytes, (byte) ' ');
@@ -674,7 +705,7 @@ class LogControllerTest {
       put(bytes, at + 45, 8, "INFO");
       put(bytes, at + 117, 512, message);
       put(bytes, at + 53, 64, "search");
-      put(bytes, at + 737, 8, "GET");
+      put(bytes, at + 737, 8, FIXTURE_GET_04F32A7E);
       put(bytes, at + 745, 256, "/search");
       put(bytes, at + 1001, 3, "200");
       put(bytes, at + 1004, 9, "123");

@@ -32,6 +32,15 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** NK-BAT-001/BAK/BKO/OPS009/UI251/SS341 6.10/333 7.5; SSC066/PG177; BAT258..273. */
 final class BackupBundlePublisherTest {
+  private static final String FIXTURE_SIZE_EB1E91E4 = "size";
+  private static final String FIXTURE_FORCE_34B3B0C3 = "force";
+  private static final String FIXTURE_SYNC_5CFA1A73 = "sync";
+  private static final String FIXTURE_PUBLISH_69201707 = "publish";
+  private static final String FIXTURE_MANIFEST_JSON_0D4099EC = "MANIFEST.json";
+  private static final String FIXTURE_SCHUBERT_NK_DUMP_96644B79 = "schubert_nk.dump";
+  private static final String FIXTURE_CLOCK_49F3C56E = "clock";
+  private static final String FIXTURE_NLINK_3DDD828B = "nlink";
+  private static final String FIXTURE_DEV_8A17302D = "dev";
   @TempDir Path temporary;
   // 119 pending read operations +20 force +1 child sync +4 publish +38 reader +119 final verify.
   private static final Map<String, Integer> INVENTORY =
@@ -46,17 +55,17 @@ final class BackupBundlePublisherTest {
           Map.entry("closeNames", 4),
           Map.entry("openReader", 9),
           Map.entry("read", 18),
-          Map.entry("size", 18),
+          Map.entry(FIXTURE_SIZE_EB1E91E4, 18),
           Map.entry("closeReader", 9),
           Map.entry("openDirectory", 7),
           Map.entry("openEntry", 18),
           Map.entry("close", 25),
           Map.entry("openWriter", 4),
           Map.entry("writerSize", 8),
-          Map.entry("force", 4),
+          Map.entry(FIXTURE_FORCE_34B3B0C3, 4),
           Map.entry("closeWriter", 4),
-          Map.entry("sync", 2),
-          Map.entry("publish", 1));
+          Map.entry(FIXTURE_SYNC_5CFA1A73, 2),
+          Map.entry(FIXTURE_PUBLISH_69201707, 1));
   private static final int CLOCKS = 514;
 
   /** PT-BAT-2732-001: SS341 6.10/343 5.3, independently fixed publication identity. */
@@ -74,9 +83,9 @@ final class BackupBundlePublisherTest {
         new EnvironmentInodePolicy.Metadata(0100600, 0, 0, 1, 5, 11, 24, modified, changed);
     var files =
         Map.of(
-            "MANIFEST.json",
+            FIXTURE_MANIFEST_JSON_0D4099EC,
             rootFile,
-            "schubert_nk.dump",
+            FIXTURE_SCHUBERT_NK_DUMP_96644B79,
             dump,
             "config.tar",
             new EnvironmentInodePolicy.Metadata(0100600, 0, 0, 1, 5, 11, 26, modified, changed),
@@ -84,10 +93,14 @@ final class BackupBundlePublisherTest {
             new EnvironmentInodePolicy.Metadata(0100600, 0, 0, 1, 5, 11, 27, modified, changed));
     var contents =
         Map.of(
-            "MANIFEST.json", manifest,
-            "schubert_nk.dump", content,
-            "config.tar", manifest,
-            "credentials.tar.age", manifest);
+            FIXTURE_MANIFEST_JSON_0D4099EC,
+            manifest,
+            FIXTURE_SCHUBERT_NK_DUMP_96644B79,
+            content,
+            "config.tar",
+            manifest,
+            "credentials.tar.age",
+            manifest);
     var original = new BackupArtifactVerifier.BundleSnapshot(manifest, directory, files, contents);
     assertTrue(
         original.samePublished(
@@ -120,14 +133,14 @@ final class BackupBundlePublisherTest {
     }
     var changedFiles = new HashMap<>(files);
     changedFiles.put(
-        "schubert_nk.dump",
+        FIXTURE_SCHUBERT_NK_DUMP_96644B79,
         new EnvironmentInodePolicy.Metadata(0100600, 41, 42, 1, 3, 11, 25, modified, changed));
     assertFalse(
         original.samePublished(
             new BackupArtifactVerifier.BundleSnapshot(
                 manifest, directory, changedFiles, contents)));
     var changedContents = new HashMap<>(contents);
-    changedContents.put("schubert_nk.dump", manifest);
+    changedContents.put(FIXTURE_SCHUBERT_NK_DUMP_96644B79, manifest);
     assertFalse(
         original.samePublished(
             new BackupArtifactVerifier.BundleSnapshot(
@@ -146,11 +159,11 @@ final class BackupBundlePublisherTest {
       goldenFinal(f);
       f.released();
       var actual = new HashMap<>(f.counts);
-      actual.remove("clock");
+      actual.remove(FIXTURE_CLOCK_49F3C56E);
       actual.remove("effectiveUid");
       assertEquals(INVENTORY, actual);
       assertEquals(301, f.position);
-      assertEquals(CLOCKS, f.counts.get("clock"));
+      assertEquals(CLOCKS, f.counts.get(FIXTURE_CLOCK_49F3C56E));
       assertEquals(6, f.counts.get("effectiveUid"));
     }
   }
@@ -159,13 +172,16 @@ final class BackupBundlePublisherTest {
   void forceOrderAndRetainedInodes() throws Exception {
     try (var f = fixture()) {
       f.bundlePublisher().publish(BackupArtifactFixture.expected());
-      int publish = f.events.indexOf("publish");
-      assertEquals(4, Collections.frequency(f.events.subList(0, publish), "force"));
+      int publish = f.events.indexOf(FIXTURE_PUBLISH_69201707);
+      assertEquals(4, Collections.frequency(f.events.subList(0, publish), FIXTURE_FORCE_34B3B0C3));
       assertEquals(4, Collections.frequency(f.events.subList(0, publish), "closeWriter"));
-      assertEquals(1, Collections.frequency(f.events.subList(0, publish), "sync"));
-      assertEquals("sync", f.events.get(publish + 1));
+      assertEquals(1, Collections.frequency(f.events.subList(0, publish), FIXTURE_SYNC_5CFA1A73));
+      assertEquals(FIXTURE_SYNC_5CFA1A73, f.events.get(publish + 1));
       assertEquals(0, f.counts.getOrDefault("write", 0));
-      assertEquals(0, Collections.frequency(f.events.subList(publish, f.events.size()), "force"));
+      assertEquals(
+          0,
+          Collections.frequency(
+              f.events.subList(publish, f.events.size()), FIXTURE_FORCE_34B3B0C3));
       assertEquals(
           5, Collections.frequency(f.events.subList(publish, f.events.size()), "openReader"));
       goldenFinal(f);
@@ -195,7 +211,17 @@ final class BackupBundlePublisherTest {
       fails(f);
     }
     for (var bad :
-        Map.<String, Object>of("mode", 0100644, "uid", 33, "gid", 33, "nlink", 2, "dev", -1L)
+        Map.<String, Object>of(
+                "mode",
+                0100644,
+                "uid",
+                33,
+                "gid",
+                33,
+                FIXTURE_NLINK_3DDD828B,
+                2,
+                FIXTURE_DEV_8A17302D,
+                -1L)
             .entrySet()) {
       try (var f = fixture()) {
         f.metadata =
@@ -222,11 +248,11 @@ final class BackupBundlePublisherTest {
       try (var f = fixture()) {
         f.hook =
             (event, n) -> {
-              if (event.equals("sync") && n == 2)
+              if (event.equals(FIXTURE_SYNC_5CFA1A73) && n == 2)
                 action(
                     () -> {
                       Path file = finalDirectory(f).resolve(name);
-                      if (name.equals("MANIFEST.json"))
+                      if (name.equals(FIXTURE_MANIFEST_JSON_0D4099EC))
                         Files.writeString(file, Files.readString(file).replace("nk-pt", "NK-PT"));
                       else {
                         byte[] bytes = Files.readAllBytes(file);
@@ -351,7 +377,8 @@ final class BackupBundlePublisherTest {
       try (var f = fixture()) {
         f.hook =
             (name, n) -> {
-              if (name.equals("clock") && n == selected) f.time += 1_800_000_000_000L;
+              if (name.equals(FIXTURE_CLOCK_49F3C56E) && n == selected)
+                f.time += 1_800_000_000_000L;
             };
         fails(f);
       }
@@ -361,7 +388,7 @@ final class BackupBundlePublisherTest {
         f.time = initial;
         f.hook =
             (name, n) -> {
-              if (name.equals("clock") && n == 2) f.time += 1_799_999_999_999L;
+              if (name.equals(FIXTURE_CLOCK_49F3C56E) && n == 2) f.time += 1_799_999_999_999L;
             };
         f.bundlePublisher().publish(BackupArtifactFixture.expected());
         goldenFinal(f);
@@ -371,7 +398,7 @@ final class BackupBundlePublisherTest {
     try (var f = fixture()) {
       f.hook =
           (name, n) -> {
-            if (name.equals("clock") && n == 2) f.time--;
+            if (name.equals(FIXTURE_CLOCK_49F3C56E) && n == 2) f.time--;
           };
       fails(f);
     }
@@ -384,7 +411,8 @@ final class BackupBundlePublisherTest {
       try (var f = fixture()) {
         f.hook =
             (name, n) -> {
-              if (name.equals("clock") && n == selected) Thread.currentThread().interrupt();
+              if (name.equals(FIXTURE_CLOCK_49F3C56E) && n == selected)
+                Thread.currentThread().interrupt();
             };
         try {
           fails(f);
@@ -408,7 +436,8 @@ final class BackupBundlePublisherTest {
       assertEquals(StorageIoException.Reason.COLLISION, failure.reason());
       assertEquals("existing", Files.readString(finalDirectory(f).resolve("sentinel")));
       assertArrayEquals(
-          BackupArtifactFixture.golden(), Files.readAllBytes(f.child.resolve("MANIFEST.json")));
+          BackupArtifactFixture.golden(),
+          Files.readAllBytes(f.child.resolve(FIXTURE_MANIFEST_JSON_0D4099EC)));
       f.released();
     }
     try (var f = fixture()) {
@@ -424,17 +453,27 @@ final class BackupBundlePublisherTest {
 
   @Test
   void namespaceReplacement() throws Exception {
-    for (String field : List.of("dev", "nlink", "size", "lastModifiedTime", "file-inode")) {
+    for (String field :
+        List.of(
+            FIXTURE_DEV_8A17302D,
+            FIXTURE_NLINK_3DDD828B,
+            FIXTURE_SIZE_EB1E91E4,
+            "lastModifiedTime",
+            "file-inode")) {
       try (var f = fixture()) {
         f.metadata =
             (role, values) -> {
               if (f.counts.get("attributes") < 26) return;
-              if (field.equals("dev")) values.put("dev", (Long) values.get("dev") + 1);
+              if (field.equals(FIXTURE_DEV_8A17302D))
+                values.put(FIXTURE_DEV_8A17302D, (Long) values.get(FIXTURE_DEV_8A17302D) + 1);
               else if (field.equals("file-inode")) {
                 if (role.equals("file")) values.put("ino", (Long) values.get("ino") + 1);
               } else if (role.equals("child")) {
-                if (field.equals("nlink")) values.put("nlink", (Integer) values.get("nlink") + 1);
-                if (field.equals("size")) values.put("size", (Long) values.get("size") + 1);
+                if (field.equals(FIXTURE_NLINK_3DDD828B))
+                  values.put(
+                      FIXTURE_NLINK_3DDD828B, (Integer) values.get(FIXTURE_NLINK_3DDD828B) + 1);
+                if (field.equals(FIXTURE_SIZE_EB1E91E4))
+                  values.put(FIXTURE_SIZE_EB1E91E4, (Long) values.get(FIXTURE_SIZE_EB1E91E4) + 1);
                 if (field.equals("lastModifiedTime"))
                   values.put("lastModifiedTime", java.nio.file.attribute.FileTime.fromMillis(0));
               }
@@ -446,7 +485,7 @@ final class BackupBundlePublisherTest {
     try (var f = fixture()) {
       f.hook =
           (name, n) -> {
-            if (name.equals("publish"))
+            if (name.equals(FIXTURE_PUBLISH_69201707))
               action(
                   () -> {
                     Path saved = f.parent.resolve("preserved-bundle");
@@ -472,14 +511,17 @@ final class BackupBundlePublisherTest {
     try (var f = fixture()) {
       f.hook =
           (name, n) -> {
-            if (name.equals("force") && n == 1)
+            if (name.equals(FIXTURE_FORCE_34B3B0C3) && n == 1)
               action(
                   () -> {
                     Files.move(
-                        f.child.resolve("MANIFEST.json"), f.parent.resolve("preserved-manifest"));
-                    Files.write(f.child.resolve("MANIFEST.json"), BackupArtifactFixture.golden());
+                        f.child.resolve(FIXTURE_MANIFEST_JSON_0D4099EC),
+                        f.parent.resolve("preserved-manifest"));
+                    Files.write(
+                        f.child.resolve(FIXTURE_MANIFEST_JSON_0D4099EC),
+                        BackupArtifactFixture.golden());
                     Files.setPosixFilePermissions(
-                        f.child.resolve("MANIFEST.json"),
+                        f.child.resolve(FIXTURE_MANIFEST_JSON_0D4099EC),
                         java.nio.file.attribute.PosixFilePermissions.fromString("rw-------"));
                   });
           };
@@ -568,10 +610,10 @@ final class BackupBundlePublisherTest {
       var io = new BackupBundlePublisher.NioIo();
       try (var child = f.root.openExistingChild(BackupArtifactFixture.DIR + ".part")) {
         child.atExistingEntryHandle(
-            "MANIFEST.json",
+            FIXTURE_MANIFEST_JSON_0D4099EC,
             held -> {
               assertEquals(0100600, io.attributes(held).get("mode"));
-              assertEquals(964L, io.attributes(held).get("size"));
+              assertEquals(964L, io.attributes(held).get(FIXTURE_SIZE_EB1E91E4));
               try (var channel = io.open(held)) {
                 ByteBuffer buffer = ByteBuffer.allocate(964);
                 while (buffer.hasRemaining()) assertTrue(channel.read(buffer) > 0);
@@ -635,7 +677,7 @@ final class BackupBundlePublisherTest {
       assertTrue(proof.samePublished(copied));
       var changedContents = new HashMap<>(copied.contents());
       changedContents.put(
-          "schubert_nk.dump",
+          FIXTURE_SCHUBERT_NK_DUMP_96644B79,
           new dev.codex.schubert.nk.batch.backup.BackupFileDigest(26, "0".repeat(64)));
       assertFalse(
           proof.samePublished(
@@ -707,14 +749,14 @@ final class BackupBundlePublisherTest {
           NullPointerException.class,
           () -> verifier.forcePending(BackupArtifactFixture.expected(), null, 100));
       assertThrows(NullPointerException.class, () -> verifier.verifyWithin(null, 100));
-      assertEquals(0, f.counts.getOrDefault("force", 0));
+      assertEquals(0, f.counts.getOrDefault(FIXTURE_FORCE_34B3B0C3, 0));
       f.bundlePublisher().publish(BackupArtifactFixture.expected());
       verifier.verify(BackupArtifactFixture.expected());
       reader.read(
           BackupArtifactFixture.DIR,
           BackupArtifactFixture.expected().databaseStep(),
           BackupArtifactFixture.expected().configurationStep());
-      assertEquals(4, f.counts.get("force"));
+      assertEquals(4, f.counts.get(FIXTURE_FORCE_34B3B0C3));
       goldenFinal(f);
       f.released();
     }
@@ -735,16 +777,16 @@ final class BackupBundlePublisherTest {
               + digest.sha256()
               + "\n"
               + "force="
-              + f.counts.get("force")
+              + f.counts.get(FIXTURE_FORCE_34B3B0C3)
               + "|publish="
-              + f.counts.get("publish")
+              + f.counts.get(FIXTURE_PUBLISH_69201707)
               + "|sync="
-              + f.counts.get("sync")
+              + f.counts.get(FIXTURE_SYNC_5CFA1A73)
               + "\n"
               + "io="
               + f.position
               + "|clock="
-              + f.counts.get("clock")
+              + f.counts.get(FIXTURE_CLOCK_49F3C56E)
               + "\n");
     }
   }
@@ -763,10 +805,10 @@ final class BackupBundlePublisherTest {
       throws IOException, NoSuchAlgorithmException {
     assertArrayEquals(
         BackupArtifactFixture.golden(),
-        Files.readAllBytes(finalDirectory(f).resolve("MANIFEST.json")));
+        Files.readAllBytes(finalDirectory(f).resolve(FIXTURE_MANIFEST_JSON_0D4099EC)));
     for (var expected :
         Map.of(
-                "schubert_nk.dump",
+                FIXTURE_SCHUBERT_NK_DUMP_96644B79,
                 BackupArtifactFixture.DUMP_HASH,
                 "config.tar",
                 BackupArtifactFixture.CONFIG_HASH,

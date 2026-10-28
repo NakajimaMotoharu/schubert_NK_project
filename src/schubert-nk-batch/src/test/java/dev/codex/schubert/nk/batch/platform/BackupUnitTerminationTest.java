@@ -39,12 +39,23 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** BTERM001..008; independent fixed Unit/placement and FD/metadata oracle, not root emulation. */
 final class BackupUnitTerminationTest {
+  private static final String FIXTURE_SCHUBERT_NK_BACKUP_SERVICE_3F43F5CD =
+      "schubert-nk-backup.service";
+  private static final String FIXTURE_MODE_B6D5C2C3 = "mode";
+  private static final String FIXTURE_DEV_8A17302D = "dev";
+  private static final String FIXTURE_INO_4BE7C1E0 = "ino";
   static final String UNIT =
       "Id=schubert-nk-backup.service\nLoadState=loaded\nActiveState=inactive\nSubState=dead\nJob=\nMainPID=0\nControlPID=0\nInvocationID=\nExecMainCode=0\nExecMainStatus=0\nExecMainStartTimestampMonotonic=0\nExecMainExitTimestampMonotonic=0\nResult=success\nType=oneshot\nRestart=no\nRemainAfterExit=yes\nKillMode=control-group\nSendSIGKILL=no\n";
   static final String PLACEMENT =
       "Id=schubert-nk-backup.service\nSlice=system.slice\nDelegate=no\nControlGroup=\n";
   static final List<String> ROLES =
-      List.of("root", "sys", "fs", "cgroup", "system.slice", "schubert-nk-backup.service");
+      List.of(
+          "root",
+          "sys",
+          "fs",
+          "cgroup",
+          "system.slice",
+          FIXTURE_SCHUBERT_NK_BACKUP_SERVICE_3F43F5CD);
   @TempDir Path temporary;
 
   static InspectorUnitSnapshot state(String bytes) {
@@ -119,7 +130,7 @@ final class BackupUnitTerminationTest {
                 } else throw new AssertionError("read-only namespace only");
                 event("open:" + role);
                 if (role.equals(missingRole)
-                    || (role.equals("schubert-nk-backup.service") && !present))
+                    || (role.equals(FIXTURE_SCHUBERT_NK_BACKUP_SERVICE_3F43F5CD) && !present))
                   throw new StorageIoException(StorageIoException.Reason.MISSING);
                 if (invalidFd) return -1;
                 int descriptor = next++;
@@ -157,13 +168,14 @@ final class BackupUnitTerminationTest {
       event("attributes:" + role);
       int i = ROLES.indexOf(role);
       Map<String, Object> m = new HashMap<>();
-      m.put("mode", (i == 1 || i == 3) ? 040555 : 040755);
+      m.put(FIXTURE_MODE_B6D5C2C3, (i == 1 || i == 3) ? 040555 : 040755);
       m.put("uid", 0);
       m.put("gid", 0);
       m.put("nlink", 3);
       m.put("size", 0L);
-      m.put("dev", i == 0 ? 1L : i < 3 ? 2L : 3L);
-      m.put("ino", (long) i + 10 + (inodeDrift && next > (present ? 16 : 15) ? 1 : 0));
+      m.put(FIXTURE_DEV_8A17302D, i == 0 ? 1L : i < 3 ? 2L : 3L);
+      m.put(
+          FIXTURE_INO_4BE7C1E0, (long) i + 10 + (inodeDrift && next > (present ? 16 : 15) ? 1 : 0));
       return change.apply(role, m);
     }
 
@@ -314,7 +326,15 @@ final class BackupUnitTerminationTest {
   @Test
   void bterm003EveryMetadataAndFilesystemCondition() {
     for (String role : ROLES) {
-      for (String key : List.of("mode", "uid", "gid", "nlink", "size", "dev", "ino")) {
+      for (String key :
+          List.of(
+              FIXTURE_MODE_B6D5C2C3,
+              "uid",
+              "gid",
+              "nlink",
+              "size",
+              FIXTURE_DEV_8A17302D,
+              FIXTURE_INO_4BE7C1E0)) {
         for (int kind = 0; kind < 3; kind++) {
           var f = new Fixture();
           f.present = true;
@@ -333,7 +353,19 @@ final class BackupUnitTerminationTest {
       }
       for (var entry :
           Map.<String, Object>of(
-                  "mode", 040777, "uid", 1, "gid", 1, "nlink", 1, "size", -1L, "dev", -1L, "ino",
+                  FIXTURE_MODE_B6D5C2C3,
+                  040777,
+                  "uid",
+                  1,
+                  "gid",
+                  1,
+                  "nlink",
+                  1,
+                  "size",
+                  -1L,
+                  FIXTURE_DEV_8A17302D,
+                  -1L,
+                  FIXTURE_INO_4BE7C1E0,
                   0L)
               .entrySet()) {
         var f = new Fixture();
@@ -354,12 +386,12 @@ final class BackupUnitTerminationTest {
       acl.badAclRole = role;
       rejected(acl);
     }
-    for (String role : List.of("fs", "system.slice", "schubert-nk-backup.service")) {
+    for (String role : List.of("fs", "system.slice", FIXTURE_SCHUBERT_NK_BACKUP_SERVICE_3F43F5CD)) {
       var f = new Fixture();
       f.present = true;
       f.change =
           (r, m) -> {
-            if (r.equals(role)) m.put("dev", 20L);
+            if (r.equals(role)) m.put(FIXTURE_DEV_8A17302D, 20L);
             return m;
           };
       rejected(f);
@@ -389,7 +421,7 @@ final class BackupUnitTerminationTest {
     baseline.present = true;
     baseline.adapter().quiescent();
     for (int i = 0; i < baseline.events.size(); i++) {
-      if (!baseline.events.get(i).contains("schubert-nk-backup.service")) continue;
+      if (!baseline.events.get(i).contains(FIXTURE_SCHUBERT_NK_BACKUP_SERVICE_3F43F5CD)) continue;
       for (var reason : StorageIoException.Reason.values()) {
         if (baseline.events.get(i).equals("open:schubert-nk-backup.service")
             && reason == StorageIoException.Reason.MISSING) continue;
@@ -604,7 +636,7 @@ final class BackupUnitTerminationTest {
                       "--no-ask-password",
                       "show",
                       "--property=Id,Slice,Delegate,ControlGroup",
-                      "schubert-nk-backup.service"),
+                      FIXTURE_SCHUBERT_NK_BACKUP_SERVICE_3F43F5CD),
                   command);
               return process;
             });
@@ -632,8 +664,8 @@ final class BackupUnitTerminationTest {
         NullPointerException.class, () -> new BackupUnitTermination.NativeObservations(null));
     var io = new BackupUnitTermination.NioIo();
     var metadata = io.attributes(temporary);
-    assertEquals(0, ((Integer) metadata.get("mode")) & 0170000 ^ 040000);
-    assertTrue(((Long) metadata.get("ino")) > 0);
+    assertEquals(0, ((Integer) metadata.get(FIXTURE_MODE_B6D5C2C3)) & 0170000 ^ 040000);
+    assertTrue(((Long) metadata.get(FIXTURE_INO_4BE7C1E0)) > 0);
     assertFalse(io.filesystem(temporary).isEmpty());
   }
 

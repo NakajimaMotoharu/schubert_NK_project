@@ -45,6 +45,14 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** PT-JMS-006/007/008/009 reply consumer transaction, late and fatal isolation matrix. */
 final class ArtemisReplyConsumerTest {
+  private static final String FIXTURE_NOT_A_UUID_C87A7FE1 = "not-a-uuid";
+  private static final String FIXTURE_NKMESSAGEID_1B669E52 = "NKMessageID";
+  private static final String FIXTURE_NKLAYOUTID_EB6996DB = "NKLayoutID";
+  private static final String FIXTURE_UNAVAILABLE_30F591F0 = "UNAVAILABLE";
+  private static final String FIXTURE_NKDELIVERYCOUNT_6AE5C7CF = "NKDeliveryCount";
+  private static final String FIXTURE_ID_1_9FB5E8A2 = "ID:1";
+  private static final String FIXTURE_LOGRSP01_BEEB0A2B = "LOGRSP01";
+  private static final String FIXTURE_001_A3FEAA64 = "001";
   private static final UUID REQUEST_ID = UUID.fromString("00000000-0000-0000-0000-000000000001");
   private static final UUID RESPONSE_ID = UUID.fromString("00000000-0000-0000-0000-000000000002");
   private static final Instant NOW = Instant.parse("2026-09-03T00:00:00Z");
@@ -88,9 +96,9 @@ final class ArtemisReplyConsumerTest {
         JMSConsumer replyQueue = receiver.createConsumer(queue(BrokerTopology.SYNC_REPLY_WEB));
         JMSConsumer dlqQueue = observer.createConsumer(queue(BrokerTopology.DEAD_LETTER))) {
       TextMessage invalid = producer.createTextMessage("opaque synthetic invalid body");
-      invalid.setJMSCorrelationID("not-a-uuid");
-      invalid.setStringProperty("NKMessageID", "not-a-uuid");
-      invalid.setStringProperty("NKLayoutID", "bad");
+      invalid.setJMSCorrelationID(FIXTURE_NOT_A_UUID_C87A7FE1);
+      invalid.setStringProperty(FIXTURE_NKMESSAGEID_1B669E52, FIXTURE_NOT_A_UUID_C87A7FE1);
+      invalid.setStringProperty(FIXTURE_NKLAYOUTID_EB6996DB, "bad");
       invalid.setStringProperty("NKProtocolVersion", "999");
       invalid.setStringProperty("UnapprovedSecret", "must-not-be-copied");
       producer
@@ -110,16 +118,18 @@ final class ArtemisReplyConsumerTest {
 
       TextMessage isolated = assertInstanceOf(TextMessage.class, dlqQueue.receive(5_000));
       assertEquals("opaque synthetic invalid body", isolated.getText());
-      assertEquals("UNAVAILABLE", isolated.getJMSCorrelationID());
-      assertEquals("UNAVAILABLE", isolated.getStringProperty("NKMessageID"));
-      assertEquals("UNAVAILABLE", isolated.getStringProperty("NKCorrelationID"));
-      assertEquals("UNAVAILABLE", isolated.getStringProperty("NKLayoutID"));
+      assertEquals(FIXTURE_UNAVAILABLE_30F591F0, isolated.getJMSCorrelationID());
+      assertEquals(
+          FIXTURE_UNAVAILABLE_30F591F0, isolated.getStringProperty(FIXTURE_NKMESSAGEID_1B669E52));
+      assertEquals(FIXTURE_UNAVAILABLE_30F591F0, isolated.getStringProperty("NKCorrelationID"));
+      assertEquals(
+          FIXTURE_UNAVAILABLE_30F591F0, isolated.getStringProperty(FIXTURE_NKLAYOUTID_EB6996DB));
       assertEquals("PROTOCOL_INVALID", isolated.getStringProperty("NKErrorCode"));
       assertEquals("WEB_REPLY", isolated.getStringProperty("NKDetectedBy"));
       assertEquals(NOW.toString(), isolated.getStringProperty("NKDetectedAt"));
       assertEquals("nk.sync.reply.web", isolated.getStringProperty("_AMQ_ORIG_ADDRESS"));
       assertEquals("nk.sync.reply.web.q", isolated.getStringProperty("_AMQ_ORIG_QUEUE"));
-      assertEquals(1, isolated.getIntProperty("NKDeliveryCount"));
+      assertEquals(1, isolated.getIntProperty(FIXTURE_NKDELIVERYCOUNT_6AE5C7CF));
       assertFalse(isolated.propertyExists("UnapprovedSecret"));
       assertEquals(DeliveryMode.PERSISTENT, isolated.getJMSDeliveryMode());
       assertEquals(0L, isolated.getJMSExpiration());
@@ -141,7 +151,7 @@ final class ArtemisReplyConsumerTest {
     assertThrows(NullPointerException.class, () -> new ArtemisReplyDlqSender(null));
 
     ArtemisReplyConsumer consumer = new ArtemisReplyConsumer(client, decoder, sender);
-    Message text = textMessage("getJMSMessageID", "ID:1");
+    Message text = textMessage("getJMSMessageID", FIXTURE_ID_1_9FB5E8A2);
     assertThrows(NullPointerException.class, () -> consumer.onMessage(null, text));
     assertThrows(
         NullPointerException.class,
@@ -163,13 +173,18 @@ final class ArtemisReplyConsumerTest {
     ContextState context = new ContextState();
 
     MessageState valid =
-        messageState("ID:provider-1", RESPONSE_ID.toString(), REQUEST_ID.toString(), "LOGRSP01", 2);
+        messageState(
+            "ID:provider-1",
+            RESPONSE_ID.toString(),
+            REQUEST_ID.toString(),
+            FIXTURE_LOGRSP01_BEEB0A2B,
+            2);
     sender.send(context.proxy(), valid.message);
     assertEquals("ID:provider-1", valid.strings.get("NKOriginalTransportID"));
-    assertEquals(RESPONSE_ID.toString(), valid.strings.get("NKMessageID"));
+    assertEquals(RESPONSE_ID.toString(), valid.strings.get(FIXTURE_NKMESSAGEID_1B669E52));
     assertEquals(REQUEST_ID.toString(), valid.strings.get("NKCorrelationID"));
-    assertEquals("LOGRSP01", valid.strings.get("NKLayoutID"));
-    assertEquals(2, valid.integers.get("NKDeliveryCount"));
+    assertEquals(FIXTURE_LOGRSP01_BEEB0A2B, valid.strings.get(FIXTURE_NKLAYOUTID_EB6996DB));
+    assertEquals(2, valid.integers.get(FIXTURE_NKDELIVERYCOUNT_6AE5C7CF));
     assertEquals(DeliveryMode.PERSISTENT, context.deliveryMode);
     assertEquals(0L, context.timeToLive);
     assertEquals(
@@ -185,21 +200,36 @@ final class ArtemisReplyConsumerTest {
 
     MessageState uppercase =
         messageState(
-            "ID:1", "AAAAAAAA-AAAA-AAAA-AAAA-AAAAAAAAAAAA", REQUEST_ID.toString(), "LOGRSP01", 1);
+            FIXTURE_ID_1_9FB5E8A2,
+            "AAAAAAAA-AAAA-AAAA-AAAA-AAAAAAAAAAAA",
+            REQUEST_ID.toString(),
+            FIXTURE_LOGRSP01_BEEB0A2B,
+            1);
     sender.send(context.proxy(), uppercase.message);
-    assertEquals("UNAVAILABLE", uppercase.strings.get("NKMessageID"));
+    assertEquals(FIXTURE_UNAVAILABLE_30F591F0, uppercase.strings.get(FIXTURE_NKMESSAGEID_1B669E52));
 
-    MessageState malformed = messageState("ID:1", "not-a-uuid", "not-a-uuid", "bad", null);
+    MessageState malformed =
+        messageState(
+            FIXTURE_ID_1_9FB5E8A2,
+            FIXTURE_NOT_A_UUID_C87A7FE1,
+            FIXTURE_NOT_A_UUID_C87A7FE1,
+            "bad",
+            null);
     sender.send(context.proxy(), malformed.message);
-    assertEquals("UNAVAILABLE", malformed.strings.get("NKMessageID"));
-    assertEquals("UNAVAILABLE", malformed.strings.get("NKCorrelationID"));
-    assertEquals("UNAVAILABLE", malformed.strings.get("NKLayoutID"));
-    assertEquals(1, malformed.integers.get("NKDeliveryCount"));
+    assertEquals(FIXTURE_UNAVAILABLE_30F591F0, malformed.strings.get(FIXTURE_NKMESSAGEID_1B669E52));
+    assertEquals(FIXTURE_UNAVAILABLE_30F591F0, malformed.strings.get("NKCorrelationID"));
+    assertEquals(FIXTURE_UNAVAILABLE_30F591F0, malformed.strings.get(FIXTURE_NKLAYOUTID_EB6996DB));
+    assertEquals(1, malformed.integers.get(FIXTURE_NKDELIVERYCOUNT_6AE5C7CF));
 
     MessageState zero =
-        messageState("ID:1", RESPONSE_ID.toString(), REQUEST_ID.toString(), "LOGRSP01", 0);
+        messageState(
+            FIXTURE_ID_1_9FB5E8A2,
+            RESPONSE_ID.toString(),
+            REQUEST_ID.toString(),
+            FIXTURE_LOGRSP01_BEEB0A2B,
+            0);
     sender.send(context.proxy(), zero.message);
-    assertEquals(1, zero.integers.get("NKDeliveryCount"));
+    assertEquals(1, zero.integers.get(FIXTURE_NKDELIVERYCOUNT_6AE5C7CF));
   }
 
   @Test
@@ -273,7 +303,12 @@ final class ArtemisReplyConsumerTest {
     ArtemisReplyConsumer consumer = consumer(new ReplyCorrelationRegistry());
 
     MessageState checkedMessage =
-        messageState("ID:1", RESPONSE_ID.toString(), REQUEST_ID.toString(), "LOGRSP01", 1);
+        messageState(
+            FIXTURE_ID_1_9FB5E8A2,
+            RESPONSE_ID.toString(),
+            REQUEST_ID.toString(),
+            FIXTURE_LOGRSP01_BEEB0A2B,
+            1);
     JMSException checked = new JMSException("synthetic-DLQ-read-failure");
     checkedMessage.transportReadFailure = checked;
     ContextState checkedContext = new ContextState();
@@ -290,7 +325,12 @@ final class ArtemisReplyConsumerTest {
                 dev.codex.schubert.nk.protocol.codec.PermanentProtocolException.class::isInstance));
 
     MessageState commitMessage =
-        messageState("ID:1", RESPONSE_ID.toString(), REQUEST_ID.toString(), "LOGRSP01", 1);
+        messageState(
+            FIXTURE_ID_1_9FB5E8A2,
+            RESPONSE_ID.toString(),
+            REQUEST_ID.toString(),
+            FIXTURE_LOGRSP01_BEEB0A2B,
+            1);
     ContextState commitContext = new ContextState();
     JMSRuntimeException runtime = new JMSRuntimeException("synthetic-DLQ-commit-failure");
     commitContext.commitFailure = runtime;
@@ -308,7 +348,12 @@ final class ArtemisReplyConsumerTest {
 
     // SS322§11 / ISO: keep the isolation phase even when its rollback is also unknown.
     MessageState unknownMessage =
-        messageState("ID:1", RESPONSE_ID.toString(), REQUEST_ID.toString(), "LOGRSP01", 1);
+        messageState(
+            FIXTURE_ID_1_9FB5E8A2,
+            RESPONSE_ID.toString(),
+            REQUEST_ID.toString(),
+            FIXTURE_LOGRSP01_BEEB0A2B,
+            1);
     JMSException unknownIsolation = new JMSException("synthetic-DLQ-unknown-read");
     unknownMessage.transportReadFailure = unknownIsolation;
     ContextState unknownContext = new ContextState();
@@ -347,9 +392,14 @@ final class ArtemisReplyConsumerTest {
   private static void assertSanitizedTransport(
       ArtemisReplyDlqSender sender, ContextState context, String transportId) throws Exception {
     MessageState state =
-        messageState(transportId, RESPONSE_ID.toString(), REQUEST_ID.toString(), "LOGRSP01", 1);
+        messageState(
+            transportId,
+            RESPONSE_ID.toString(),
+            REQUEST_ID.toString(),
+            FIXTURE_LOGRSP01_BEEB0A2B,
+            1);
     sender.send(context.proxy(), state.message);
-    assertEquals("UNAVAILABLE", state.strings.get("NKOriginalTransportID"));
+    assertEquals(FIXTURE_UNAVAILABLE_30F591F0, state.strings.get("NKOriginalTransportID"));
   }
 
   private static Queue queue(BrokerTopology destination) {
@@ -360,9 +410,9 @@ final class ArtemisReplyConsumerTest {
     BytesMessage reply = context.createBytesMessage();
     reply.writeBytes(body);
     reply.setJMSCorrelationID(REQUEST_ID.toString());
-    reply.setStringProperty("NKMessageID", RESPONSE_ID.toString());
-    reply.setStringProperty("NKLayoutID", "LOGRSP01");
-    reply.setStringProperty("NKProtocolVersion", "001");
+    reply.setStringProperty(FIXTURE_NKMESSAGEID_1B669E52, RESPONSE_ID.toString());
+    reply.setStringProperty(FIXTURE_NKLAYOUTID_EB6996DB, FIXTURE_LOGRSP01_BEEB0A2B);
+    reply.setStringProperty("NKProtocolVersion", FIXTURE_001_A3FEAA64);
     context
         .createProducer()
         .setDeliveryMode(DeliveryMode.PERSISTENT)
@@ -447,9 +497,9 @@ final class ArtemisReplyConsumerTest {
                   case "getIntProperty" -> 1;
                   case "getStringProperty" ->
                       switch ((String) arguments[0]) {
-                        case "NKMessageID" -> RESPONSE_ID.toString();
-                        case "NKLayoutID" -> "LOGRSP01";
-                        case "NKProtocolVersion" -> "001";
+                        case FIXTURE_NKMESSAGEID_1B669E52 -> RESPONSE_ID.toString();
+                        case FIXTURE_NKLAYOUTID_EB6996DB -> FIXTURE_LOGRSP01_BEEB0A2B;
+                        case "NKProtocolVersion" -> FIXTURE_001_A3FEAA64;
                         default -> throw new UnsupportedOperationException((String) arguments[0]);
                       };
                   default -> objectMethod(proxy, method.getName(), arguments);
@@ -465,8 +515,8 @@ final class ArtemisReplyConsumerTest {
     MessageState state = new MessageState();
     state.transportId = transportId;
     state.correlationId = correlationId;
-    state.strings.put("NKMessageID", messageId);
-    state.strings.put("NKLayoutID", layoutId);
+    state.strings.put(FIXTURE_NKMESSAGEID_1B669E52, messageId);
+    state.strings.put(FIXTURE_NKLAYOUTID_EB6996DB, layoutId);
     if (deliveryCount != null) {
       state.integers.put("JMSXDeliveryCount", deliveryCount);
     }
@@ -618,9 +668,9 @@ final class ArtemisReplyConsumerTest {
     byte[] body = new byte[280];
     Arrays.fill(body, (byte) ' ');
     ascii(body, 0, "SCHBNK01");
-    ascii(body, 8, "001");
-    ascii(body, 11, "LOGRSP01");
-    ascii(body, 19, "001");
+    ascii(body, 8, FIXTURE_001_A3FEAA64);
+    ascii(body, 11, FIXTURE_LOGRSP01_BEEB0A2B);
+    ascii(body, 19, FIXTURE_001_A3FEAA64);
     body[22] = 'S';
     body[23] = 'S';
     ascii(body, 24, RESPONSE_ID.toString());

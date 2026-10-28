@@ -13,23 +13,34 @@ import org.junit.jupiter.api.Test;
 
 /** NK-OPS-001/OPS009/UI251/SS343/PG372; PT-OPS-RASCOPE001..006. */
 final class RootServiceAdmissionScopeTest {
+  private static final String FIXTURE_ROOT_956E6E33 = "root";
+  private static final String FIXTURE_A_RELEASED_B491D631 = "A-released";
+
   @Test
   void rascope001OneReservedAOwnsWholePreflightAndOuterRecheck() throws IOException {
     var events = new ArrayList<String>();
     RootServiceAdmissionScope.execute(
-        () -> events.add("root"),
+        () -> events.add(FIXTURE_ROOT_956E6E33),
         work -> {
           events.add("A-acquired");
           try {
             work.execute(128);
             return Optional.of(Boolean.TRUE);
           } finally {
-            events.add("A-released");
+            events.add(FIXTURE_A_RELEASED_B491D631);
           }
         },
         fd -> events.add("work-" + fd));
     assertEquals(
-        List.of("root", "A-acquired", "root", "work-128", "root", "A-released", "root"), events);
+        List.of(
+            FIXTURE_ROOT_956E6E33,
+            "A-acquired",
+            FIXTURE_ROOT_956E6E33,
+            "work-128",
+            FIXTURE_ROOT_956E6E33,
+            FIXTURE_A_RELEASED_B491D631,
+            FIXTURE_ROOT_956E6E33),
+        events);
   }
 
   @Test
@@ -78,19 +89,20 @@ final class RootServiceAdmissionScopeTest {
         IOException.class,
         () ->
             RootServiceAdmissionScope.execute(
-                () -> events.add("root"),
+                () -> events.add(FIXTURE_ROOT_956E6E33),
                 work -> {
                   try {
                     work.execute(129);
                     return Optional.of(Boolean.TRUE);
                   } finally {
-                    events.add("A-released");
+                    events.add(FIXTURE_A_RELEASED_B491D631);
                   }
                 },
                 fd -> {
                   throw new IOException("synthetic failure");
                 }));
-    assertEquals(List.of("root", "root", "A-released"), events);
+    assertEquals(
+        List.of(FIXTURE_ROOT_956E6E33, FIXTURE_ROOT_956E6E33, FIXTURE_A_RELEASED_B491D631), events);
     var checks = new AtomicInteger();
     assertThrows(
         IOException.class,

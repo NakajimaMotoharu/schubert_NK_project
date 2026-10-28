@@ -22,6 +22,7 @@ import org.junit.jupiter.api.Test;
 
 /** OPS009/UI251/SS341/343/SSC089/105; PG344/PT-OPS-MINVALID001-006. */
 final class MorningCurrentInvalidationTest {
+  private static final String FIXTURE_WRITE_BC2434A1 = "write";
   private static final UUID BOOT = UUID.fromString("00000000-0000-0000-0000-000000000344");
   private static final UUID EPOCH = UUID.fromString("00000000-0000-0000-0000-000000000345");
   private static final UUID RUN = UUID.fromString("00000000-0000-0000-0000-000000000346");
@@ -41,7 +42,7 @@ final class MorningCurrentInvalidationTest {
     @Override
     public Epoch invalidate(UUID boot, UUID epoch, MaintenanceActivation activation)
         throws IOException {
-      events.add("write");
+      events.add(FIXTURE_WRITE_BC2434A1);
       if (failure != null) throw failure;
       assertEquals(BOOT, boot);
       assertEquals(EPOCH, epoch);
@@ -65,7 +66,7 @@ final class MorningCurrentInvalidationTest {
         MorningCurrentInvalidation.invalidate(
             () -> events.add("root"), store, BOOT, () -> EPOCH, PENDING);
     assertEquals(new Epoch(State.INVALID, BOOT, EPOCH, ACTIVATION, Optional.empty()), result);
-    assertEquals(List.of("root", "write", "readback", "root"), events);
+    assertEquals(List.of("root", FIXTURE_WRITE_BC2434A1, "readback", "root"), events);
   }
 
   @Test
@@ -111,7 +112,7 @@ final class MorningCurrentInvalidationTest {
             () ->
                 MorningCurrentInvalidation.invalidate(
                     () -> {}, store, BOOT, () -> EPOCH, PENDING)));
-    assertEquals(List.of("write"), store.events);
+    assertEquals(List.of(FIXTURE_WRITE_BC2434A1), store.events);
   }
 
   @Test
@@ -121,7 +122,7 @@ final class MorningCurrentInvalidationTest {
     assertThrows(
         IOException.class,
         () -> MorningCurrentInvalidation.invalidate(() -> {}, store, BOOT, () -> EPOCH, PENDING));
-    assertEquals(List.of("write", "readback"), store.events);
+    assertEquals(List.of(FIXTURE_WRITE_BC2434A1, "readback"), store.events);
     for (Epoch wrong :
         List.of(
             new Epoch(State.ISSUED, BOOT, EPOCH, ACTIVATION, Optional.of("a".repeat(64))),
@@ -141,7 +142,7 @@ final class MorningCurrentInvalidationTest {
           () ->
               MorningCurrentInvalidation.invalidate(
                   () -> {}, mismatch, BOOT, () -> EPOCH, PENDING));
-      assertEquals(List.of("write"), mismatch.events);
+      assertEquals(List.of(FIXTURE_WRITE_BC2434A1), mismatch.events);
     }
   }
 

@@ -41,6 +41,10 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** PT-DB-INBOX-212..220: real file/native/JDBC composition, explicitly synthetic OS admission. */
 final class InspectorApplicationTest {
+  private static final String FIXTURE_INBOX_INSPECTION_PROGRESS_4282AA88 =
+      "inbox_inspection_progress";
+  private static final String FIXTURE_DB_INBOX_INSPECTOR_03997756 = "db-inbox-inspector";
+  private static final String FIXTURE_READ_ONLY_210AFF1C = "read only";
   @TempDir static Path databaseRoot;
   @TempDir Path temporary;
   private static ApiLogDatabaseFixture db;
@@ -100,7 +104,7 @@ final class InspectorApplicationTest {
       assertEquals(10, io.opens);
       assertEquals(io.opens, io.closes);
       cleared(io);
-      assertEquals(1, count("inbox_inspection_progress"));
+      assertEquals(1, count(FIXTURE_INBOX_INSPECTION_PROGRESS_4282AA88));
     }
   }
 
@@ -143,7 +147,7 @@ final class InspectorApplicationTest {
           InspectionExecution.Status.STORAGE_FAILURE,
           application(f, calls, io).execute(RUN).status());
       assertTrue(calls.live.isEmpty());
-      assertEquals(0, count("inbox_inspection_progress"));
+      assertEquals(0, count(FIXTURE_INBOX_INSPECTION_PROGRESS_4282AA88));
       cleared(io);
       var unavailable =
           new InspectorSettings(
@@ -153,7 +157,7 @@ final class InspectorApplicationTest {
           new InspectorApplication(unavailable, calls, new TestSecurity(otherIo), otherIo);
       assertEquals(InspectionExecution.Status.STORAGE_FAILURE, disconnected.execute(RUN).status());
       assertTrue(calls.live.isEmpty());
-      assertEquals(0, count("inbox_inspection_progress"));
+      assertEquals(0, count(FIXTURE_INBOX_INSPECTION_PROGRESS_4282AA88));
       cleared(otherIo);
     }
   }
@@ -181,7 +185,7 @@ final class InspectorApplicationTest {
       assertTrue(io.buffers.isEmpty());
       assertTrue(calls.live.isEmpty());
       assertEquals(1, calls.finalCloses);
-      assertEquals(0, count("inbox_inspection_progress"));
+      assertEquals(0, count(FIXTURE_INBOX_INSPECTION_PROGRESS_4282AA88));
     }
     try (var f = fixture()) {
       var calls = new Calls(f.root);
@@ -193,14 +197,16 @@ final class InspectorApplicationTest {
       assertEquals(
           new InspectionProgress(RUN, Optional.empty(), 0, 0, 0, true),
           first.lastConfirmed().orElseThrow());
-      assertEquals(1, count("inbox_inspection_progress"));
+      assertEquals(1, count(FIXTURE_INBOX_INSPECTION_PROGRESS_4282AA88));
       var replay = app.execute(RUN, Optional.of(available));
       assertEquals(InspectionExecution.Status.SUCCESS, replay.status());
       assertEquals(
           new InspectionProgress(RUN, Optional.empty(), 0, 0, 0, true),
           replay.lastConfirmed().orElseThrow());
       assertEquals(
-          1, count("inbox_inspection_progress"), "borrowed-guard replay never duplicates progress");
+          1,
+          count(FIXTURE_INBOX_INSPECTION_PROGRESS_4282AA88),
+          "borrowed-guard replay never duplicates progress");
       assertTrue(calls.live.isEmpty());
       cleared(io);
     }
@@ -269,9 +275,10 @@ final class InspectorApplicationTest {
         List.of("password-missing", "password-invalid", "aes-missing", "same-version")) {
       try (var f = fixture()) {
         switch (fault) {
-          case "password-missing" -> Files.delete(f.root.resolve("db-inbox-inspector"));
+          case "password-missing" ->
+              Files.delete(f.root.resolve(FIXTURE_DB_INBOX_INSPECTOR_03997756));
           case "password-invalid" ->
-              Files.write(f.root.resolve("db-inbox-inspector"), new byte[] {0});
+              Files.write(f.root.resolve(FIXTURE_DB_INBOX_INSPECTOR_03997756), new byte[] {0});
           case "aes-missing" ->
               Files.delete(f.root.resolve(AesCredentialFile.RESPONSE_CURRENT.fileName()));
           case "same-version" -> f.write(AesCredentialFile.CONTEXT_PREVIOUS, "v1");
@@ -287,7 +294,7 @@ final class InspectorApplicationTest {
         assertTrue(calls.live.isEmpty());
         assertEquals(1, calls.finalCloses);
         cleared(io);
-        assertEquals(0, count("inbox_inspection_progress"));
+        assertEquals(0, count(FIXTURE_INBOX_INSPECTION_PROGRESS_4282AA88));
       }
     }
   }
@@ -306,7 +313,7 @@ final class InspectorApplicationTest {
       calls.failFinalClose = true;
       assertThrows(StorageIoException.class, () -> app.execute(RUN));
       assertTrue(calls.live.isEmpty());
-      assertEquals(1, count("inbox_inspection_progress"));
+      assertEquals(1, count(FIXTURE_INBOX_INSPECTION_PROGRESS_4282AA88));
       calls.failFinalClose = false;
       assertEquals(InspectionExecution.Status.SUCCESS, app.execute(RUN).status());
       assertTrue(calls.live.isEmpty());
@@ -320,8 +327,8 @@ final class InspectorApplicationTest {
     try (var f = fixture()) {
       var app = new InspectorApplication(settings(f));
       assertThrows(InspectorCredentialException.class, () -> app.execute(RUN));
-      assertEquals(0, count("inbox_inspection_progress"));
-      assertTrue(Files.isRegularFile(f.root.resolve("db-inbox-inspector")));
+      assertEquals(0, count(FIXTURE_INBOX_INSPECTION_PROGRESS_4282AA88));
+      assertTrue(Files.isRegularFile(f.root.resolve(FIXTURE_DB_INBOX_INSPECTOR_03997756)));
     }
   }
 
@@ -378,7 +385,7 @@ final class InspectorApplicationTest {
       assertTrue(calls.live.isEmpty());
       assertEquals(1, calls.finalCloses);
       cleared(io);
-      assertEquals(0, count("inbox_inspection_progress"));
+      assertEquals(0, count(FIXTURE_INBOX_INSPECTION_PROGRESS_4282AA88));
     }
   }
 
@@ -386,7 +393,7 @@ final class InspectorApplicationTest {
   void concurrentLifetimes() throws Exception {
     try (var f = fixture();
         var pool = Executors.newFixedThreadPool(8)) {
-      Files.delete(f.root.resolve("db-inbox-inspector"));
+      Files.delete(f.root.resolve(FIXTURE_DB_INBOX_INSPECTOR_03997756));
       var calls = new Calls(f.root);
       var work = new ArrayList<Callable<Boolean>>();
       for (int i = 0; i < 64; i++)
@@ -402,14 +409,14 @@ final class InspectorApplicationTest {
       for (var done : pool.invokeAll(work)) assertTrue(done.get(5, TimeUnit.SECONDS));
       assertTrue(calls.live.isEmpty());
       assertEquals(64, calls.finalCloses);
-      assertEquals(0, count("inbox_inspection_progress"));
+      assertEquals(0, count(FIXTURE_INBOX_INSPECTION_PROGRESS_4282AA88));
     }
   }
 
   private Fixture fixture() throws Exception {
     var f = new Fixture(temporary);
     for (var id : AesCredentialFile.values()) f.write(id, id.optional() ? "old" : "v1");
-    Files.write(f.root.resolve("db-inbox-inspector"), new byte[] {65});
+    Files.write(f.root.resolve(FIXTURE_DB_INBOX_INSPECTOR_03997756), new byte[] {65});
     return f;
   }
 
@@ -425,7 +432,7 @@ final class InspectorApplicationTest {
     String sql =
         switch (table) {
           case "request_inbox" -> "select count(*) from schubert.request_inbox";
-          case "inbox_inspection_progress" ->
+          case FIXTURE_INBOX_INSPECTION_PROGRESS_4282AA88 ->
               "select count(*) from schubert.inbox_inspection_progress";
           default -> throw new AssertionError();
         };
@@ -491,27 +498,27 @@ final class InspectorApplicationTest {
 
     @Override
     public int createFile(int p, String n) {
-      throw new AssertionError("read only");
+      throw new AssertionError(FIXTURE_READ_ONLY_210AFF1C);
     }
 
     @Override
     public void createDirectory(int p, String n) {
-      throw new AssertionError("read only");
+      throw new AssertionError(FIXTURE_READ_ONLY_210AFF1C);
     }
 
     @Override
     public void publish(int p, String a, String b) {
-      throw new AssertionError("read only");
+      throw new AssertionError(FIXTURE_READ_ONLY_210AFF1C);
     }
 
     @Override
     public void unlink(int p, String n) {
-      throw new AssertionError("read only");
+      throw new AssertionError(FIXTURE_READ_ONLY_210AFF1C);
     }
 
     @Override
     public void sync(int p) {
-      throw new AssertionError("read only");
+      throw new AssertionError(FIXTURE_READ_ONLY_210AFF1C);
     }
   }
 }

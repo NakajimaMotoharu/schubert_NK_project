@@ -44,6 +44,10 @@ import org.springframework.security.core.context.SecurityContextHolder;
  * BUG-073/YKT-065.
  */
 class ClosedServletSecurityFilterTest {
+  private static final String FIXTURE_USER_2DED8884 = "USER";
+  private static final String FIXTURE_ADMIN_C4BB3010 = "ADMIN";
+  private static final String FIXTURE_READER_F734AAEA = "reader";
+
   @AfterEach
   void clear() {
     SecurityContextHolder.clearContext();
@@ -52,11 +56,11 @@ class ClosedServletSecurityFilterTest {
   @Test
   void web138ClosedPrincipalImplementsServletContract() throws Exception {
     var filter = new ClosedServletSecurityFilter();
-    for (String role : List.of("ANONYMOUS", "USER", "ADMIN")) {
+    for (String role : List.of("ANONYMOUS", FIXTURE_USER_2DED8884, FIXTURE_ADMIN_C4BB3010)) {
       SecurityContextHolder.clearContext();
       SessionPrincipal p = null;
       if (!role.equals("ANONYMOUS")) {
-        p = principal("reader", role);
+        p = principal(FIXTURE_READER_F734AAEA, role);
         set(p);
       }
       var nativeRequest = hostile();
@@ -64,18 +68,18 @@ class ClosedServletSecurityFilterTest {
       var request = capture(filter, nativeRequest);
       assertEquals(p == null, trace.actor().isEmpty());
       if (p != null) {
-        assertEquals("reader", trace.actor().orElseThrow().getUsername());
+        assertEquals(FIXTURE_READER_F734AAEA, trace.actor().orElseThrow().getUsername());
         assertEquals(role, trace.actor().orElseThrow().getRole());
       }
       assertSame(p, request.getUserPrincipal());
-      assertEquals(p == null ? null : "reader", request.getRemoteUser());
+      assertEquals(p == null ? null : FIXTURE_READER_F734AAEA, request.getRemoteUser());
       assertEquals(p == null ? null : "FORM", request.getAuthType());
       assertFalse(request.isUserInRole(null));
       for (String candidate :
           List.of(
               "",
-              "USER",
-              "ADMIN",
+              FIXTURE_USER_2DED8884,
+              FIXTURE_ADMIN_C4BB3010,
               "ROLE_USER",
               "ROLE_ADMIN",
               "user",
@@ -96,7 +100,7 @@ class ClosedServletSecurityFilterTest {
   void web139ProgrammaticAuthenticationCannotBypassCoordination() throws Exception {
     for (boolean authenticated : List.of(false, true)) {
       SecurityContextHolder.clearContext();
-      var p = principal("reader", "USER");
+      var p = principal(FIXTURE_READER_F734AAEA, FIXTURE_USER_2DED8884);
       if (authenticated) set(p);
       var nativeRequest = hostile();
       var session = nativeRequest.getSession();
@@ -196,10 +200,13 @@ class ClosedServletSecurityFilterTest {
               workers.submit(
                   () -> {
                     try {
-                      var p = principal("user" + n, n % 2 == 0 ? "USER" : "ADMIN");
+                      var p =
+                          principal(
+                              "user" + n,
+                              n % 2 == 0 ? FIXTURE_USER_2DED8884 : FIXTURE_ADMIN_C4BB3010);
                       set(p);
                       var snapshot = capture(filter, hostile());
-                      set(principal("other" + n, "ADMIN"));
+                      set(principal("other" + n, FIXTURE_ADMIN_C4BB3010));
                       assertSame(p, snapshot.getUserPrincipal());
                       SecurityContextHolder.clearContext();
                       assertSame(p, snapshot.getUserPrincipal());
@@ -207,11 +214,19 @@ class ClosedServletSecurityFilterTest {
                           .submit(
                               () -> {
                                 try {
-                                  set(principal("foreign-reader", "ADMIN"));
+                                  set(principal("foreign-reader", FIXTURE_ADMIN_C4BB3010));
                                   assertSame(p, snapshot.getUserPrincipal());
                                   assertEquals("user" + n, snapshot.getRemoteUser());
-                                  assertTrue(snapshot.isUserInRole(n % 2 == 0 ? "USER" : "ADMIN"));
-                                  assertFalse(snapshot.isUserInRole(n % 2 == 0 ? "ADMIN" : "USER"));
+                                  assertTrue(
+                                      snapshot.isUserInRole(
+                                          n % 2 == 0
+                                              ? FIXTURE_USER_2DED8884
+                                              : FIXTURE_ADMIN_C4BB3010));
+                                  assertFalse(
+                                      snapshot.isUserInRole(
+                                          n % 2 == 0
+                                              ? FIXTURE_ADMIN_C4BB3010
+                                              : FIXTURE_USER_2DED8884));
                                 } finally {
                                   SecurityContextHolder.clearContext();
                                 }

@@ -18,6 +18,9 @@ import org.junit.jupiter.api.Test;
 
 /** SSC125 BROKERSTART001/002: independent daemon generation/intent/owner sequencing vectors. */
 final class MorningBrokerUnitCycleTest {
+  private static final String FIXTURE_RETIRE_A2A9D4FF = "retire";
+  private static final String FIXTURE_RETAINED_743E2854 = "retained";
+
   @Test
   void issbrokerstop001Known143IsNotAReceiptAndNeedsIndependentStoppedJournal() {
     String stopped =
@@ -135,7 +138,7 @@ final class MorningBrokerUnitCycleTest {
             },
             () -> {
               events.add("intent");
-              return () -> events.add("retire");
+              return () -> events.add(FIXTURE_RETIRE_A2A9D4FF);
             },
             BackupUnitStartClient.Target.BROKER)
         .start();
@@ -166,8 +169,8 @@ final class MorningBrokerUnitCycleTest {
     assertEquals(INV, live.invocation());
     assertEquals("BrokerLive[observations=<redacted>]", live.toString());
     assertEquals(2, events.stream().filter("Ops+journal"::equals).count());
-    assertEquals(1, events.stream().filter("retire"::equals).count());
-    assertTrue(events.indexOf("retire") > events.lastIndexOf("Ops+journal"));
+    assertEquals(1, events.stream().filter(FIXTURE_RETIRE_A2A9D4FF::equals).count());
+    assertTrue(events.indexOf(FIXTURE_RETIRE_A2A9D4FF) > events.lastIndexOf("Ops+journal"));
     assertTrue(events.indexOf("baseline") < events.indexOf("intent"));
     assertTrue(events.indexOf("intent") < events.indexOf("start"));
     assertThrows(IOException.class, () -> cycle.execute(actual -> fail("single start lifetime")));
@@ -232,7 +235,7 @@ final class MorningBrokerUnitCycleTest {
             });
     assertSame(actualSummary, live.stoppedJournal().orElseThrow());
     assertTrue(events.indexOf("prior-proof") < events.indexOf("start"));
-    assertEquals(1, events.stream().filter("retire"::equals).count());
+    assertEquals(1, events.stream().filter(FIXTURE_RETIRE_A2A9D4FF::equals).count());
   }
 
   @Test
@@ -259,7 +262,7 @@ final class MorningBrokerUnitCycleTest {
                 return start(events, fault.equals("client") ? 1 : 0);
               },
               () -> {
-                events.add("retained");
+                events.add(FIXTURE_RETAINED_743E2854);
                 throw new Retained();
               });
       assertThrows(
@@ -269,8 +272,8 @@ final class MorningBrokerUnitCycleTest {
                   actual -> {
                     if (fault.equals("readiness")) throw new IOException("Ops unavailable");
                   }));
-      assertFalse(events.contains("retire"), fault);
-      assertTrue(events.contains("retained"), fault);
+      assertFalse(events.contains(FIXTURE_RETIRE_A2A9D4FF), fault);
+      assertTrue(events.contains(FIXTURE_RETAINED_743E2854), fault);
     }
   }
 
@@ -286,7 +289,7 @@ final class MorningBrokerUnitCycleTest {
               () -> Optional.of(observation()),
               () -> start(events, 0),
               () -> {
-                events.add("retained");
+                events.add(FIXTURE_RETAINED_743E2854);
                 throw new Retained();
               });
       MorningBrokerUnitCycle.Readiness capture =
@@ -299,15 +302,15 @@ final class MorningBrokerUnitCycleTest {
       if (secondFails) {
         assertThrows(Retained.class, () -> cycle.execute(capture));
         assertEquals(List.of("first-actual"), observations);
-        assertFalse(events.contains("retire"));
-        assertTrue(events.contains("retained"));
+        assertFalse(events.contains(FIXTURE_RETIRE_A2A9D4FF));
+        assertTrue(events.contains(FIXTURE_RETAINED_743E2854));
       } else {
         var live = cycle.execute(capture);
         live.recheck();
         assertEquals(List.of("first-actual", "final-actual"), observations);
         assertEquals("final-actual", observations.getLast());
-        assertEquals(1, events.stream().filter("retire"::equals).count());
-        assertFalse(events.contains("retained"));
+        assertEquals(1, events.stream().filter(FIXTURE_RETIRE_A2A9D4FF::equals).count());
+        assertFalse(events.contains(FIXTURE_RETAINED_743E2854));
       }
     }
   }

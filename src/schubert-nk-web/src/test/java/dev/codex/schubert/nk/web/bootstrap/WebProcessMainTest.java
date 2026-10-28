@@ -25,6 +25,7 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** PT-OPS-WEB-MAIN-001..004. Independent exit/diagnostic oracle; no actual NK success claim. */
 final class WebProcessMainTest {
+  private static final String FIXTURE_UNTRUSTED_6FC6869D = "UNTRUSTED";
   @TempDir Path root;
   private final WebProcessMain main = new WebProcessMain();
   private static final Map<String, String> ENV =
@@ -91,9 +92,9 @@ final class WebProcessMainTest {
             ENV,
             SOURCE,
             inputs -> {
-              throw new IOException("UNTRUSTED");
+              throw new IOException(FIXTURE_UNTRUSTED_6FC6869D);
             }));
-    RuntimeException invalid = new IllegalArgumentException("UNTRUSTED");
+    RuntimeException invalid = new IllegalArgumentException(FIXTURE_UNTRUSTED_6FC6869D);
     assertSame(
         invalid,
         assertThrows(
@@ -106,7 +107,7 @@ final class WebProcessMainTest {
                     inputs -> {
                       throw invalid;
                     })));
-    RuntimeException unknown = new IllegalStateException("UNTRUSTED");
+    RuntimeException unknown = new IllegalStateException(FIXTURE_UNTRUSTED_6FC6869D);
     assertSame(
         unknown,
         assertThrows(
@@ -119,7 +120,7 @@ final class WebProcessMainTest {
                     inputs -> {
                       throw unknown;
                     })));
-    Error fatal = new AssertionError("UNTRUSTED");
+    Error fatal = new AssertionError(FIXTURE_UNTRUSTED_6FC6869D);
     assertSame(
         fatal,
         assertThrows(
@@ -156,7 +157,8 @@ final class WebProcessMainTest {
               NullPointerException.class, () -> new WebProcessMain(null, SOURCE, exits::add));
           assertThrows(NullPointerException.class, () -> new WebProcessMain(ENV, null, exits::add));
           assertThrows(NullPointerException.class, () -> new WebProcessMain(ENV, SOURCE, null));
-          WebProcessMain.fatal(Thread.currentThread(), new IllegalStateException("UNTRUSTED"));
+          WebProcessMain.fatal(
+              Thread.currentThread(), new IllegalStateException(FIXTURE_UNTRUSTED_6FC6869D));
         } finally {
           System.setErr(original);
           thread.setUncaughtExceptionHandler(originalHandler);

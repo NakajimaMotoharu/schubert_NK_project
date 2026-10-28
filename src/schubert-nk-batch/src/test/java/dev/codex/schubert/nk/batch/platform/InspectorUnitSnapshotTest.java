@@ -30,6 +30,15 @@ import org.junit.jupiter.api.Test;
 
 /** NK-OPS-001/OPS009/UI251/SS341 7.4; PG167/SSC060; UNIT001..008, 018/021. */
 final class InspectorUnitSnapshotTest {
+  private static final String FIXTURE_123456789ABCDEF08123456789ABCDEF_8265AB15 =
+      "123456789abcdef08123456789abcdef";
+  private static final String FIXTURE_ACTIVESTATE_8ACAC4AA = "ActiveState";
+  private static final String FIXTURE_SUBSTATE_39662EFC = "SubState";
+  private static final String FIXTURE_MAINPID_D7C01CF7 = "MainPID";
+  private static final String FIXTURE_CONTROLPID_32D1DE3E = "ControlPID";
+  private static final String FIXTURE_JOB_F32F4C4D = "Job";
+  private static final String FIXTURE_EXECMAINSTATUS_179A8E0B = "ExecMainStatus";
+  private static final String FIXTURE_FAILED_33D04BD7 = "failed";
   static final String GOLDEN =
       "Id=schubert-nk-inbox-inspector.service\nLoadState=loaded\nActiveState=active\nSubState=exited\nJob=\nMainPID=0\nControlPID=0\nInvocationID=123456789abcdef08123456789abcdef\nExecMainCode=1\nExecMainStatus=10\nExecMainStartTimestampMonotonic=1234567\nExecMainExitTimestampMonotonic=2345678\nResult=success\nType=oneshot\nRestart=no\nRemainAfterExit=no\nKillMode=control-group\nSendSIGKILL=no\n";
   static final UUID ID = UUID.fromString("12345678-9abc-def0-8123-456789abcdef");
@@ -52,7 +61,7 @@ final class InspectorUnitSnapshotTest {
         text =
             text.replace("Type=oneshot", "Type=simple").replace("Restart=no", "Restart=on-failure");
       var before = InspectorUnitSnapshot.parse(text.getBytes(StandardCharsets.US_ASCII), target);
-      assertTrue(before.failedRootGeneration("123456789abcdef08123456789abcdef"));
+      assertTrue(before.failedRootGeneration(FIXTURE_123456789ABCDEF08123456789ABCDEF_8265AB15));
       assertTrue(before.receiptAfter(Optional.empty()).isEmpty());
       assertTrue(before.failedRootStillStoppedAfter(before));
       var stopped =
@@ -90,7 +99,7 @@ final class InspectorUnitSnapshotTest {
         assertFalse(
             InspectorUnitSnapshot.parse(partial.getBytes(StandardCharsets.US_ASCII), target)
                 .failedRootStillStoppedAfter(before));
-      assertFalse(stopped.failedRootGeneration("123456789abcdef08123456789abcdef"));
+      assertFalse(stopped.failedRootGeneration(FIXTURE_123456789ABCDEF08123456789ABCDEF_8265AB15));
       for (var change :
           Map.ofEntries(
                   Map.entry("ExecMainStatus=30", "ExecMainStatus=0"),
@@ -111,7 +120,7 @@ final class InspectorUnitSnapshotTest {
                 text.replace(change.getKey(), change.getValue())
                     .getBytes(StandardCharsets.US_ASCII),
                 target);
-        assertFalse(bad.failedRootGeneration("123456789abcdef08123456789abcdef"));
+        assertFalse(bad.failedRootGeneration(FIXTURE_123456789ABCDEF08123456789ABCDEF_8265AB15));
         assertFalse(bad.failedRootStillStoppedAfter(before));
       }
       assertFalse(before.failedRootGeneration("wrong"));
@@ -123,7 +132,7 @@ final class InspectorUnitSnapshotTest {
     }
     assertFalse(
         InspectorUnitSnapshot.parse(GOLDEN.getBytes(StandardCharsets.US_ASCII))
-            .failedRootGeneration("123456789abcdef08123456789abcdef"));
+            .failedRootGeneration(FIXTURE_123456789ABCDEF08123456789ABCDEF_8265AB15));
   }
 
   @Test
@@ -163,7 +172,7 @@ final class InspectorUnitSnapshotTest {
             .replace("MainPID=0", "MainPID=123")
             .replace("ActiveState=active", "ActiveState=activating")
             .replace("SubState=exited", "SubState=start");
-    String invocation = "123456789abcdef08123456789abcdef";
+    String invocation = FIXTURE_123456789ABCDEF08123456789ABCDEF_8265AB15;
     assertTrue(
         InspectorUnitSnapshot.parse(
                 running.getBytes(StandardCharsets.US_ASCII), InspectorUnitSnapshot.Target.BACKUP)
@@ -262,7 +271,7 @@ final class InspectorUnitSnapshotTest {
                 "RemainAfterExit",
                 "true")
             .entrySet()) invalid(with(change.getKey(), change.getValue()));
-    for (String key : List.of("ActiveState", "SubState", "Result")) {
+    for (String key : List.of(FIXTURE_ACTIVESTATE_8ACAC4AA, FIXTURE_SUBSTATE_39662EFC, "Result")) {
       for (String bad : List.of("", "A", "has space", "x=y", "_x", "-x", "x".repeat(65)))
         invalid(with(key, bad));
       assertDoesNotThrow(() -> parse(with(key, "x".repeat(64))));
@@ -287,7 +296,8 @@ final class InspectorUnitSnapshotTest {
 
   @Test
   void scalarBounds() {
-    for (String key : List.of("MainPID", "ControlPID", "Job")) {
+    for (String key :
+        List.of(FIXTURE_MAINPID_D7C01CF7, FIXTURE_CONTROLPID_32D1DE3E, FIXTURE_JOB_F32F4C4D)) {
       for (String good : List.of("1", "4294967295"))
         assertDoesNotThrow(() -> parse(with(key, good)));
       for (String bad :
@@ -303,8 +313,9 @@ final class InspectorUnitSnapshotTest {
               "18446744073709551615",
               "9".repeat(21))) invalid(with(key, bad));
     }
-    invalid(with("Job", "0"));
-    for (String key : List.of("MainPID", "ControlPID")) invalid(with(key, ""));
+    invalid(with(FIXTURE_JOB_F32F4C4D, "0"));
+    for (String key : List.of(FIXTURE_MAINPID_D7C01CF7, FIXTURE_CONTROLPID_32D1DE3E))
+      invalid(with(key, ""));
     for (String key :
         List.of("ExecMainStartTimestampMonotonic", "ExecMainExitTimestampMonotonic")) {
       for (String good : List.of("0", "1", "18446744073709551615"))
@@ -318,13 +329,13 @@ final class InspectorUnitSnapshotTest {
             parse(
                 with(
                     with("ExecMainCode", Integer.toString(code)),
-                    "ExecMainStatus",
+                    FIXTURE_EXECMAINSTATUS_179A8E0B,
                     Integer.toString(status)));
         assertEquals(
             code == 1 && (status == 0 || status == 10),
             state.receiptAfter(Optional.empty()).isPresent());
       }
-    for (String key : List.of("ExecMainCode", "ExecMainStatus")) {
+    for (String key : List.of("ExecMainCode", FIXTURE_EXECMAINSTATUS_179A8E0B)) {
       for (String bad : List.of("", "-1", "01", "+1", "256")) invalid(with(key, bad));
     }
     invalid(with("ExecMainCode", "7"));
@@ -343,34 +354,48 @@ final class InspectorUnitSnapshotTest {
   @Test
   void quiescentStates() {
     for (String active :
-        List.of("inactive", "active", "failed", "activating", "deactivating", "unknown"))
-      for (String sub : List.of("dead", "exited", "failed", "running", "start", "unknown")) {
-        String input = with(with("ActiveState", active), "SubState", sub);
+        List.of(
+            "inactive", "active", FIXTURE_FAILED_33D04BD7, "activating", "deactivating", "unknown"))
+      for (String sub :
+          List.of("dead", "exited", FIXTURE_FAILED_33D04BD7, "running", "start", "unknown")) {
+        String input =
+            with(with(FIXTURE_ACTIVESTATE_8ACAC4AA, active), FIXTURE_SUBSTATE_39662EFC, sub);
         boolean expected =
             Set.of("inactive/dead", "active/exited", "failed/failed").contains(active + "/" + sub);
         assertEquals(expected, parse(input).quiescent(), active + "/" + sub);
       }
-    for (String key : List.of("MainPID", "ControlPID", "Job"))
+    for (String key :
+        List.of(FIXTURE_MAINPID_D7C01CF7, FIXTURE_CONTROLPID_32D1DE3E, FIXTURE_JOB_F32F4C4D))
       assertFalse(parse(with(key, "1")).quiescent(), key);
     assertTrue(parse(with("RemainAfterExit", "yes")).quiescent());
-    assertFalse(parse(with("MainPID", "4294967295")).quiescent());
+    assertFalse(parse(with(FIXTURE_MAINPID_D7C01CF7, "4294967295")).quiescent());
   }
 
   @Test
   void freshReceipt() {
     assertEquals(OptionalInt.of(10), parse(GOLDEN).receiptAfter(Optional.of(new UUID(0, 1))));
     assertEquals(
-        OptionalInt.of(0), parse(with("ExecMainStatus", "0")).receiptAfter(Optional.empty()));
+        OptionalInt.of(0),
+        parse(with(FIXTURE_EXECMAINSTATUS_179A8E0B, "0")).receiptAfter(Optional.empty()));
     assertTrue(parse(with("InvocationID", "")).receiptAfter(Optional.empty()).isEmpty());
-    for (String key : List.of("MainPID", "ControlPID", "Job"))
+    for (String key :
+        List.of(FIXTURE_MAINPID_D7C01CF7, FIXTURE_CONTROLPID_32D1DE3E, FIXTURE_JOB_F32F4C4D))
       assertTrue(parse(with(key, "1")).receiptAfter(Optional.empty()).isEmpty());
     assertTrue(
-        parse(with(with("ActiveState", "failed"), "SubState", "failed"))
+        parse(
+                with(
+                    with(FIXTURE_ACTIVESTATE_8ACAC4AA, FIXTURE_FAILED_33D04BD7),
+                    FIXTURE_SUBSTATE_39662EFC,
+                    FIXTURE_FAILED_33D04BD7))
             .receiptAfter(Optional.empty())
             .isEmpty());
     assertEquals(
         OptionalInt.of(10),
-        parse(with(with("ActiveState", "inactive"), "SubState", "dead"))
+        parse(
+                with(
+                    with(FIXTURE_ACTIVESTATE_8ACAC4AA, "inactive"),
+                    FIXTURE_SUBSTATE_39662EFC,
+                    "dead"))
             .receiptAfter(Optional.empty()));
     for (String result : List.of("timeout", "exit-code", "signal", "core-dump", "unknown"))
       assertTrue(parse(with("Result", result)).receiptAfter(Optional.empty()).isEmpty());
@@ -405,7 +430,7 @@ final class InspectorUnitSnapshotTest {
     var state = InspectorUnitSnapshot.parse(input);
     Arrays.fill(input, (byte) 0);
     assertTrue(state.matches(parse(GOLDEN)));
-    assertFalse(state.matches(parse(with("ExecMainStatus", "0"))));
+    assertFalse(state.matches(parse(with(FIXTURE_EXECMAINSTATUS_179A8E0B, "0"))));
     assertEquals(Optional.of(ID), state.invocationId());
     assertThrows(NullPointerException.class, () -> InspectorUnitSnapshot.parse(null));
     assertThrows(NullPointerException.class, () -> state.matches(null));
@@ -420,7 +445,9 @@ final class InspectorUnitSnapshotTest {
       List<Future<InspectorUnitSnapshot>> tasks = new ArrayList<>();
       for (int i = 0; i < 64; i++) {
         final int status = i % 2 == 0 ? 0 : 10;
-        tasks.add(pool.submit(() -> parse(with("ExecMainStatus", Integer.toString(status)))));
+        tasks.add(
+            pool.submit(
+                () -> parse(with(FIXTURE_EXECMAINSTATUS_179A8E0B, Integer.toString(status)))));
       }
       for (int i = 0; i < 64; i++) {
         var state = tasks.get(i).get(10, TimeUnit.SECONDS);

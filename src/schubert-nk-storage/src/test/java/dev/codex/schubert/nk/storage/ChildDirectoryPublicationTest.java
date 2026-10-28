@@ -28,62 +28,85 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** NK-OPS-001; BAK/BKO/OPS009/UI251/SS333 7.5/341 6.9; SSC065/PG176; PDIR001..008. */
 final class ChildDirectoryPublicationTest {
+  private static final String FIXTURE_PENDING_12ADAC54 = "pending";
+  private static final String FIXTURE_READY_40EC7F71 = "ready";
+  private static final String FIXTURE_OPENDIRECTORY_9E885716 = "openDirectory";
+  private static final String FIXTURE_PUBLISH_69201707 = "publish";
+  private static final String FIXTURE_SYNC_5CFA1A73 = "sync";
+  private static final String FIXTURE_CLOSE_97959247 = "close";
+  private static final String FIXTURE_READY_CONTENT_F3A9BB35 = "ready/content";
+  private static final String FIXTURE_FILE_BFDDE6F5 = "file";
+  private static final String FIXTURE_SYMLINK_36F374CF = "symlink";
+  private static final String FIXTURE_OUTSIDE_F78EA721 = "outside";
+  private static final String FIXTURE_PENDING_CONTENT_83FC1E31 = "pending/content";
   @TempDir Path temporary;
   private static final byte[] CONTENT = {65, 10};
 
   @Test
   void nativeDirectoryPublication() throws Exception {
     try (var f = new Fixture(temporary)) {
-      f.seed("pending", CONTENT);
-      Object inode = Files.getAttribute(f.path.resolve("pending"), "unix:ino");
-      Object device = Files.getAttribute(f.path.resolve("pending"), "unix:dev");
-      f.root.publishChild("pending", "ready");
-      assertEquals(List.of("openDirectory", "publish", "sync", "close"), f.events);
-      assertEquals(inode, Files.getAttribute(f.path.resolve("ready"), "unix:ino"));
-      assertEquals(device, Files.getAttribute(f.path.resolve("ready"), "unix:dev"));
-      assertArrayEquals(CONTENT, Files.readAllBytes(f.path.resolve("ready/content")));
-      assertFalse(Files.exists(f.path.resolve("pending")));
+      f.seed(FIXTURE_PENDING_12ADAC54, CONTENT);
+      Object inode = Files.getAttribute(f.path.resolve(FIXTURE_PENDING_12ADAC54), "unix:ino");
+      Object device = Files.getAttribute(f.path.resolve(FIXTURE_PENDING_12ADAC54), "unix:dev");
+      f.root.publishChild(FIXTURE_PENDING_12ADAC54, FIXTURE_READY_40EC7F71);
+      assertEquals(
+          List.of(
+              FIXTURE_OPENDIRECTORY_9E885716,
+              FIXTURE_PUBLISH_69201707,
+              FIXTURE_SYNC_5CFA1A73,
+              FIXTURE_CLOSE_97959247),
+          f.events);
+      assertEquals(inode, Files.getAttribute(f.path.resolve(FIXTURE_READY_40EC7F71), "unix:ino"));
+      assertEquals(device, Files.getAttribute(f.path.resolve(FIXTURE_READY_40EC7F71), "unix:dev"));
+      assertArrayEquals(
+          CONTENT, Files.readAllBytes(f.path.resolve(FIXTURE_READY_CONTENT_F3A9BB35)));
+      assertFalse(Files.exists(f.path.resolve(FIXTURE_PENDING_12ADAC54)));
       f.released();
     }
   }
 
   @Test
   void noReplaceAndSourceType() throws Exception {
-    for (String type : List.of("directory", "file", "symlink")) {
+    for (String type : List.of("directory", FIXTURE_FILE_BFDDE6F5, FIXTURE_SYMLINK_36F374CF)) {
       try (var f = new Fixture(temporary)) {
-        f.seed("pending", CONTENT);
-        Path ready = f.path.resolve("ready");
-        if (type.equals("directory")) f.seed("ready", new byte[] {9});
-        else if (type.equals("file")) Files.write(ready, new byte[] {9});
+        f.seed(FIXTURE_PENDING_12ADAC54, CONTENT);
+        Path ready = f.path.resolve(FIXTURE_READY_40EC7F71);
+        if (type.equals("directory")) f.seed(FIXTURE_READY_40EC7F71, new byte[] {9});
+        else if (type.equals(FIXTURE_FILE_BFDDE6F5)) Files.write(ready, new byte[] {9});
         else {
-          Files.write(f.path.resolve("outside"), new byte[] {9});
-          Files.createSymbolicLink(ready, f.path.resolve("outside"));
+          Files.write(f.path.resolve(FIXTURE_OUTSIDE_F78EA721), new byte[] {9});
+          Files.createSymbolicLink(ready, f.path.resolve(FIXTURE_OUTSIDE_F78EA721));
         }
-        failure(StorageIoException.Reason.COLLISION, () -> f.root.publishChild("pending", "ready"));
-        assertArrayEquals(CONTENT, Files.readAllBytes(f.path.resolve("pending/content")));
+        failure(
+            StorageIoException.Reason.COLLISION,
+            () -> f.root.publishChild(FIXTURE_PENDING_12ADAC54, FIXTURE_READY_40EC7F71));
+        assertArrayEquals(
+            CONTENT, Files.readAllBytes(f.path.resolve(FIXTURE_PENDING_CONTENT_83FC1E31)));
         assertArrayEquals(
             new byte[] {9},
             Files.readAllBytes(type.equals("directory") ? ready.resolve("content") : ready));
-        if (type.equals("symlink")) assertTrue(Files.isSymbolicLink(ready));
+        if (type.equals(FIXTURE_SYMLINK_36F374CF)) assertTrue(Files.isSymbolicLink(ready));
         f.released();
       }
     }
-    for (String type : List.of("missing", "file", "symlink")) {
+    for (String type : List.of("missing", FIXTURE_FILE_BFDDE6F5, FIXTURE_SYMLINK_36F374CF)) {
       try (var f = new Fixture(temporary)) {
-        if (type.equals("file")) Files.write(f.path.resolve("pending"), CONTENT);
-        if (type.equals("symlink")) {
-          f.seed("outside", CONTENT);
-          Files.createSymbolicLink(f.path.resolve("pending"), f.path.resolve("outside"));
+        if (type.equals(FIXTURE_FILE_BFDDE6F5))
+          Files.write(f.path.resolve(FIXTURE_PENDING_12ADAC54), CONTENT);
+        if (type.equals(FIXTURE_SYMLINK_36F374CF)) {
+          f.seed(FIXTURE_OUTSIDE_F78EA721, CONTENT);
+          Files.createSymbolicLink(
+              f.path.resolve(FIXTURE_PENDING_12ADAC54), f.path.resolve(FIXTURE_OUTSIDE_F78EA721));
         }
         failure(
             type.equals("missing")
                 ? StorageIoException.Reason.MISSING
                 : StorageIoException.Reason.UNAVAILABLE,
-            () -> f.root.publishChild("pending", "ready"));
-        assertFalse(Files.exists(f.path.resolve("ready")));
-        if (type.equals("file"))
-          assertArrayEquals(CONTENT, Files.readAllBytes(f.path.resolve("pending")));
-        if (type.equals("symlink"))
+            () -> f.root.publishChild(FIXTURE_PENDING_12ADAC54, FIXTURE_READY_40EC7F71));
+        assertFalse(Files.exists(f.path.resolve(FIXTURE_READY_40EC7F71)));
+        if (type.equals(FIXTURE_FILE_BFDDE6F5))
+          assertArrayEquals(CONTENT, Files.readAllBytes(f.path.resolve(FIXTURE_PENDING_12ADAC54)));
+        if (type.equals(FIXTURE_SYMLINK_36F374CF))
           assertArrayEquals(CONTENT, Files.readAllBytes(f.path.resolve("outside/content")));
         f.released();
       }
@@ -95,16 +118,24 @@ final class ChildDirectoryPublicationTest {
     var f = new Fixture(temporary);
     try {
       for (String name : new String[] {"", ".", "..", "a/b", "a\0b"}) {
-        assertThrows(IllegalArgumentException.class, () -> f.root.publishChild(name, "ready"));
-        assertThrows(IllegalArgumentException.class, () -> f.root.publishChild("pending", name));
+        assertThrows(
+            IllegalArgumentException.class,
+            () -> f.root.publishChild(name, FIXTURE_READY_40EC7F71));
+        assertThrows(
+            IllegalArgumentException.class,
+            () -> f.root.publishChild(FIXTURE_PENDING_12ADAC54, name));
       }
       assertThrows(IllegalArgumentException.class, () -> f.root.publishChild("same", "same"));
-      assertThrows(NullPointerException.class, () -> f.root.publishChild(null, "ready"));
-      assertThrows(NullPointerException.class, () -> f.root.publishChild("pending", null));
+      assertThrows(
+          NullPointerException.class, () -> f.root.publishChild(null, FIXTURE_READY_40EC7F71));
+      assertThrows(
+          NullPointerException.class, () -> f.root.publishChild(FIXTURE_PENDING_12ADAC54, null));
       assertTrue(f.events.isEmpty());
       f.root.close();
       f.events.clear();
-      failure(StorageIoException.Reason.UNAVAILABLE, () -> f.root.publishChild("pending", "ready"));
+      failure(
+          StorageIoException.Reason.UNAVAILABLE,
+          () -> f.root.publishChild(FIXTURE_PENDING_12ADAC54, FIXTURE_READY_40EC7F71));
       assertTrue(f.events.isEmpty());
     } finally {
       f.close();
@@ -113,10 +144,15 @@ final class ChildDirectoryPublicationTest {
 
   @Test
   void everyNativeFailure() throws Exception {
-    for (String point : List.of("openDirectory", "publish", "sync", "close")) {
+    for (String point :
+        List.of(
+            FIXTURE_OPENDIRECTORY_9E885716,
+            FIXTURE_PUBLISH_69201707,
+            FIXTURE_SYNC_5CFA1A73,
+            FIXTURE_CLOSE_97959247)) {
       for (int kind = 0; kind < 3; kind++) {
         try (var f = new Fixture(temporary)) {
-          f.seed("pending", CONTENT);
+          f.seed(FIXTURE_PENDING_12ADAC54, CONTENT);
           Throwable expected =
               kind == 0
                   ? new StorageIoException(StorageIoException.Reason.UNAVAILABLE)
@@ -127,17 +163,25 @@ final class ChildDirectoryPublicationTest {
           if (kind == 0)
             failure(
                 StorageIoException.Reason.UNAVAILABLE,
-                () -> f.root.publishChild("pending", "ready"));
+                () -> f.root.publishChild(FIXTURE_PENDING_12ADAC54, FIXTURE_READY_40EC7F71));
           else
             assertSame(
                 expected,
-                assertThrows(expected.getClass(), () -> f.root.publishChild("pending", "ready")));
+                assertThrows(
+                    expected.getClass(),
+                    () -> f.root.publishChild(FIXTURE_PENDING_12ADAC54, FIXTURE_READY_40EC7F71)));
           assertEquals(
-              point.equals("openDirectory") ? 0 : 1, Collections.frequency(f.events, "close"));
-          boolean renamed = point.equals("sync") || point.equals("close");
+              point.equals(FIXTURE_OPENDIRECTORY_9E885716) ? 0 : 1,
+              Collections.frequency(f.events, FIXTURE_CLOSE_97959247));
+          boolean renamed =
+              point.equals(FIXTURE_SYNC_5CFA1A73) || point.equals(FIXTURE_CLOSE_97959247);
           assertArrayEquals(
               CONTENT,
-              Files.readAllBytes(f.path.resolve(renamed ? "ready/content" : "pending/content")));
+              Files.readAllBytes(
+                  f.path.resolve(
+                      renamed
+                          ? FIXTURE_READY_CONTENT_F3A9BB35
+                          : FIXTURE_PENDING_CONTENT_83FC1E31)));
           f.released();
         }
       }
@@ -146,17 +190,22 @@ final class ChildDirectoryPublicationTest {
 
   @Test
   void uncertainPublication() throws Exception {
-    for (String point : List.of("sync", "close")) {
+    for (String point : List.of(FIXTURE_SYNC_5CFA1A73, FIXTURE_CLOSE_97959247)) {
       try (var f = new Fixture(temporary)) {
-        f.seed("pending", CONTENT);
+        f.seed(FIXTURE_PENDING_12ADAC54, CONTENT);
         f.faults.put(point, new StorageIoException(StorageIoException.Reason.UNAVAILABLE));
         failure(
-            StorageIoException.Reason.UNAVAILABLE, () -> f.root.publishChild("pending", "ready"));
-        assertFalse(Files.exists(f.path.resolve("pending")));
-        assertArrayEquals(CONTENT, Files.readAllBytes(f.path.resolve("ready/content")));
+            StorageIoException.Reason.UNAVAILABLE,
+            () -> f.root.publishChild(FIXTURE_PENDING_12ADAC54, FIXTURE_READY_40EC7F71));
+        assertFalse(Files.exists(f.path.resolve(FIXTURE_PENDING_12ADAC54)));
+        assertArrayEquals(
+            CONTENT, Files.readAllBytes(f.path.resolve(FIXTURE_READY_CONTENT_F3A9BB35)));
         f.faults.clear();
-        failure(StorageIoException.Reason.MISSING, () -> f.root.publishChild("pending", "ready"));
-        assertArrayEquals(CONTENT, Files.readAllBytes(f.path.resolve("ready/content")));
+        failure(
+            StorageIoException.Reason.MISSING,
+            () -> f.root.publishChild(FIXTURE_PENDING_12ADAC54, FIXTURE_READY_40EC7F71));
+        assertArrayEquals(
+            CONTENT, Files.readAllBytes(f.path.resolve(FIXTURE_READY_CONTENT_F3A9BB35)));
         f.released();
       }
     }
@@ -167,7 +216,7 @@ final class ChildDirectoryPublicationTest {
     for (int primaryKind = 0; primaryKind < 3; primaryKind++) {
       for (int closeKind = 0; closeKind < 4; closeKind++) {
         try (var f = new Fixture(temporary)) {
-          f.seed("pending", CONTENT);
+          f.seed(FIXTURE_PENDING_12ADAC54, CONTENT);
           Throwable primary =
               primaryKind == 0
                   ? new StorageIoException(StorageIoException.Reason.UNAVAILABLE)
@@ -180,23 +229,26 @@ final class ChildDirectoryPublicationTest {
                   : closeKind == 1
                       ? new IllegalStateException("public close")
                       : closeKind == 2 ? new AssertionError("public close") : primary;
-          f.faults.put("publish", primary);
-          f.faults.put("close", secondary);
+          f.faults.put(FIXTURE_PUBLISH_69201707, primary);
+          f.faults.put(FIXTURE_CLOSE_97959247, secondary);
           if (primaryKind == 0 && (closeKind == 0 || closeKind == 3))
             failure(
                 StorageIoException.Reason.UNAVAILABLE,
-                () -> f.root.publishChild("pending", "ready"));
+                () -> f.root.publishChild(FIXTURE_PENDING_12ADAC54, FIXTURE_READY_40EC7F71));
           else {
             Throwable expected = primaryKind == 0 ? secondary : primary;
             Throwable actual =
-                assertThrows(expected.getClass(), () -> f.root.publishChild("pending", "ready"));
+                assertThrows(
+                    expected.getClass(),
+                    () -> f.root.publishChild(FIXTURE_PENDING_12ADAC54, FIXTURE_READY_40EC7F71));
             assertSame(expected, actual);
             assertEquals(primaryKind == 0 ? 0 : 1, actual.getSuppressed().length);
             if (primaryKind != 0)
               assertInstanceOf(StorageIoException.class, actual.getSuppressed()[0]);
           }
-          assertArrayEquals(CONTENT, Files.readAllBytes(f.path.resolve("pending/content")));
-          assertEquals(1, Collections.frequency(f.events, "close"));
+          assertArrayEquals(
+              CONTENT, Files.readAllBytes(f.path.resolve(FIXTURE_PENDING_CONTENT_83FC1E31)));
+          assertEquals(1, Collections.frequency(f.events, FIXTURE_CLOSE_97959247));
           f.released();
         }
       }
@@ -206,15 +258,16 @@ final class ChildDirectoryPublicationTest {
   @Test
   void retainedParentCapability() throws Exception {
     try (var f = new Fixture(temporary)) {
-      f.seed("pending", CONTENT);
+      f.seed(FIXTURE_PENDING_12ADAC54, CONTENT);
       Path saved = f.path.resolveSibling("saved");
       Files.move(f.path, saved);
       Files.createDirectory(f.path);
-      f.seed("pending", new byte[] {9});
-      f.root.publishChild("pending", "ready");
-      assertArrayEquals(CONTENT, Files.readAllBytes(saved.resolve("ready/content")));
-      assertArrayEquals(new byte[] {9}, Files.readAllBytes(f.path.resolve("pending/content")));
-      assertFalse(Files.exists(f.path.resolve("ready")));
+      f.seed(FIXTURE_PENDING_12ADAC54, new byte[] {9});
+      f.root.publishChild(FIXTURE_PENDING_12ADAC54, FIXTURE_READY_40EC7F71);
+      assertArrayEquals(CONTENT, Files.readAllBytes(saved.resolve(FIXTURE_READY_CONTENT_F3A9BB35)));
+      assertArrayEquals(
+          new byte[] {9}, Files.readAllBytes(f.path.resolve(FIXTURE_PENDING_CONTENT_83FC1E31)));
+      assertFalse(Files.exists(f.path.resolve(FIXTURE_READY_40EC7F71)));
       f.released();
     }
   }
@@ -223,15 +276,15 @@ final class ChildDirectoryPublicationTest {
   void concurrentNoReplace() throws Exception {
     try (var f = new Fixture(temporary);
         var executor = Executors.newVirtualThreadPerTaskExecutor()) {
-      for (int i = 0; i < 8; i++) f.seed("pending" + i, new byte[] {(byte) i});
+      for (int i = 0; i < 8; i++) f.seed(FIXTURE_PENDING_12ADAC54 + i, new byte[] {(byte) i});
       List<Future<Boolean>> results = new ArrayList<>();
       for (int i = 0; i < 8; i++) {
-        String source = "pending" + i;
+        String source = FIXTURE_PENDING_12ADAC54 + i;
         results.add(
             executor.submit(
                 () -> {
                   try {
-                    f.root.publishChild(source, "ready");
+                    f.root.publishChild(source, FIXTURE_READY_40EC7F71);
                     return true;
                   } catch (StorageIoException failure) {
                     assertEquals(StorageIoException.Reason.COLLISION, failure.reason());
@@ -242,13 +295,13 @@ final class ChildDirectoryPublicationTest {
       int successes = 0;
       for (var result : results) if (result.get()) successes++;
       assertEquals(1, successes);
-      int winner = Files.readAllBytes(f.path.resolve("ready/content"))[0];
+      int winner = Files.readAllBytes(f.path.resolve(FIXTURE_READY_CONTENT_F3A9BB35))[0];
       for (int i = 0; i < 8; i++) {
-        if (i == winner) assertFalse(Files.exists(f.path.resolve("pending" + i)));
+        if (i == winner) assertFalse(Files.exists(f.path.resolve(FIXTURE_PENDING_12ADAC54 + i)));
         else
           assertArrayEquals(
               new byte[] {(byte) i},
-              Files.readAllBytes(f.path.resolve("pending" + i + "/content")));
+              Files.readAllBytes(f.path.resolve(FIXTURE_PENDING_12ADAC54 + i + "/content")));
       }
       f.released();
     }
@@ -286,17 +339,22 @@ final class ChildDirectoryPublicationTest {
                   new Class<?>[] {DirectoryCalls.class},
                   (proxy, method, args) -> {
                     String name = method.getName();
-                    if (!Set.of("openRoot", "openDirectory", "publish", "sync", "close")
+                    if (!Set.of(
+                            "openRoot",
+                            FIXTURE_OPENDIRECTORY_9E885716,
+                            FIXTURE_PUBLISH_69201707,
+                            FIXTURE_SYNC_5CFA1A73,
+                            FIXTURE_CLOSE_97959247)
                         .contains(name))
                       throw new AssertionError("unapproved directory mutation " + name);
-                    if (!name.equals("close")) point(name);
+                    if (!name.equals(FIXTURE_CLOSE_97959247)) point(name);
                     Object result;
                     try {
                       result = method.invoke(nativeCalls, args);
                     } catch (InvocationTargetException failure) {
                       throw failure.getCause();
                     }
-                    if (name.equals("close")) {
+                    if (name.equals(FIXTURE_CLOSE_97959247)) {
                       live.remove((Integer) args[0]);
                       point(name);
                     } else if (name.startsWith("open")) live.add((Integer) result);

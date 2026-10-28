@@ -45,6 +45,7 @@ import org.junit.jupiter.api.Test;
  * Independent DataOutputStream AAD and JCE golden envelopes; all values synthetic, not credentials.
  */
 class SessionPayloadCodecTest {
+  private static final String FIXTURE_READER_F734AAEA = "reader";
   private static final UUID ID = UUID.fromString("00112233-4455-6677-8899-aabbccddeeff");
   private static final Instant CREATED = Instant.parse("2026-09-08T00:00:00.123456Z");
   private static final SessionPayloadIdentity IDENTITY =
@@ -184,7 +185,9 @@ class SessionPayloadCodecTest {
               bytes("{}"),
               bytes("{\"formatVersion\":1,\"operationTokens\":[],\"password\":\"private-marker\"}"),
               bytes("null"),
-              bytes(json(true, "reader", "USER", null, null, 1).replace(TIME, "private-marker")),
+              bytes(
+                  json(true, FIXTURE_READER_F734AAEA, "USER", null, null, 1)
+                      .replace(TIME, "private-marker")),
               new byte[16385]))
         reason(PAYLOAD_INVALID, () -> codec.decrypt(IDENTITY, independent("v2", KEY, bad)));
       byte[] max = Arrays.copyOf(plain(false), 16384);
@@ -264,7 +267,12 @@ class SessionPayloadCodecTest {
                     codec.encrypt(
                         IDENTITY,
                         attributes(
-                            true, "reader" + n, UserRole.ADMIN, CSRF, "/logs?q=" + n, n % 11))));
+                            true,
+                            FIXTURE_READER_F734AAEA + n,
+                            UserRole.ADMIN,
+                            CSRF,
+                            "/logs?q=" + n,
+                            n % 11))));
       }
       var nonces = new HashSet<String>();
       for (int i = 0; i < 100; i++) {
@@ -275,7 +283,7 @@ class SessionPayloadCodecTest {
         check(
             codec.decrypt(IDENTITY, encrypted),
             true,
-            "reader" + i,
+            FIXTURE_READER_F734AAEA + i,
             UserRole.ADMIN,
             CSRF,
             "/logs?q=" + i,
@@ -376,15 +384,16 @@ class SessionPayloadCodecTest {
   }
 
   private static SessionAttributes sample(boolean authenticated) {
-    return attributes(authenticated, "reader", UserRole.ADMIN, CSRF, "/logs?q=日本語", 1);
+    return attributes(
+        authenticated, FIXTURE_READER_F734AAEA, UserRole.ADMIN, CSRF, "/logs?q=日本語", 1);
   }
 
   private static byte[] plain(boolean authenticated) {
-    return bytes(json(authenticated, "reader", "ADMIN", CSRF, "/logs?q=日本語", 1));
+    return bytes(json(authenticated, FIXTURE_READER_F734AAEA, "ADMIN", CSRF, "/logs?q=日本語", 1));
   }
 
   private static void checkSample(SessionAttributes actual, boolean authenticated) {
-    check(actual, authenticated, "reader", UserRole.ADMIN, CSRF, "/logs?q=日本語", 1);
+    check(actual, authenticated, FIXTURE_READER_F734AAEA, UserRole.ADMIN, CSRF, "/logs?q=日本語", 1);
   }
 
   private static List<byte[]> fields(String version) throws Exception {

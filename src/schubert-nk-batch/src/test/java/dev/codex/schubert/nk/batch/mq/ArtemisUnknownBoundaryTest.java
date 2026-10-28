@@ -21,6 +21,8 @@ import org.junit.jupiter.api.function.Executable;
 
 /** BUG381/YKT301; SS343 unknown identity, not a readiness retry; PT-OPS-MQUNKNOWN001..003. */
 final class ArtemisUnknownBoundaryTest {
+  private static final String FIXTURE_NK_SYNC_REQUEST_422EE207 = "nk.sync.request";
+  private static final String FIXTURE_SYNTHETIC_UNKNOWN_76302106 = "synthetic unknown";
 
   @Test
   void mqUnknown004FatalQueryAndEveryEncoderPreserveIdentity() {
@@ -45,10 +47,12 @@ final class ArtemisUnknownBoundaryTest {
         List.<Executable>of(
             () -> ArtemisManagementReadinessClient.read(session, "name"),
             () -> ArtemisManagementReadinessClient.putAcceptorsOperation(message),
-            () -> ArtemisManagementReadinessClient.putRolesOperation(message, "nk.sync.request"),
+            () ->
+                ArtemisManagementReadinessClient.putRolesOperation(
+                    message, FIXTURE_NK_SYNC_REQUEST_422EE207),
             () ->
                 ArtemisManagementReadinessClient.putAddressSettingsOperation(
-                    message, "nk.sync.request"),
+                    message, FIXTURE_NK_SYNC_REQUEST_422EE207),
             () ->
                 ArtemisManagementReadinessClient.putExpiryOperation(
                     message, "countMessages", "_AMQ_ACTUAL_EXPIRY < 1")))
@@ -70,8 +74,8 @@ final class ArtemisUnknownBoundaryTest {
   void mqUnknown001EveryReaderAndExchangePreservesUnknownIdentity() {
     for (RuntimeException unknown :
         List.of(
-            new IllegalStateException("synthetic unknown"),
-            new NullPointerException("synthetic unknown"))) {
+            new IllegalStateException(FIXTURE_SYNTHETIC_UNKNOWN_76302106),
+            new NullPointerException(FIXTURE_SYNTHETIC_UNKNOWN_76302106))) {
       var calls = new AtomicInteger();
       var session = session(unknown, calls);
       List<Executable> actions =
@@ -129,10 +133,12 @@ final class ArtemisUnknownBoundaryTest {
       for (Executable action :
           List.<Executable>of(
               () -> ArtemisManagementReadinessClient.putAcceptorsOperation(message),
-              () -> ArtemisManagementReadinessClient.putRolesOperation(message, "nk.sync.request"),
+              () ->
+                  ArtemisManagementReadinessClient.putRolesOperation(
+                      message, FIXTURE_NK_SYNC_REQUEST_422EE207),
               () ->
                   ArtemisManagementReadinessClient.putAddressSettingsOperation(
-                      message, "nk.sync.request"),
+                      message, FIXTURE_NK_SYNC_REQUEST_422EE207),
               () ->
                   ArtemisManagementReadinessClient.putExpiryOperation(
                       message, "countMessages", "_AMQ_ACTUAL_EXPIRY < 1")))
@@ -142,7 +148,7 @@ final class ArtemisUnknownBoundaryTest {
 
   @Test
   void mqUnknown002AllSixAssemblyStagesStopImmediatelyWithoutLaterRead() {
-    var unknown = new NullPointerException("synthetic unknown");
+    var unknown = new NullPointerException(FIXTURE_SYNTHETIC_UNKNOWN_76302106);
     var session = session(unknown, new AtomicInteger());
     for (int selected = 0; selected < 6; selected++) {
       var calls = new AtomicInteger();
@@ -193,7 +199,7 @@ final class ArtemisUnknownBoundaryTest {
         new BatchRun(
             UUID.fromString("11111111-2222-4333-8444-555555555555"),
             Instant.parse("2026-09-27T15:00:00Z"));
-    var unknown = new NullPointerException("synthetic unknown");
+    var unknown = new NullPointerException(FIXTURE_SYNTHETIC_UNKNOWN_76302106);
     var session = session(unknown, new AtomicInteger());
     for (boolean known : List.of(false, true)) {
       RuntimeException supplied = known ? new ArtemisManagementReadinessException() : unknown;

@@ -20,6 +20,7 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** SS313342354/SSC324; BUG1574/YKT1329; dummy scopes only, never actual Web/Root ownership. */
 final class WebStartupRetentionTest {
+  private static final String FIXTURE_REPLIES_A7DA19E5 = "replies";
   @TempDir Path temporary;
 
   @Test
@@ -27,11 +28,12 @@ final class WebStartupRetentionTest {
     var order = new ArrayList<String>();
     var startup = new IllegalStateException("public startup fixture");
     WebLogApplicationRuntime.closeAfterFailure(
-        startup, () -> order.add("worker"), () -> order.add("replies"));
-    assertEquals(List.of("worker", "replies"), order);
+        startup, () -> order.add("worker"), () -> order.add(FIXTURE_REPLIES_A7DA19E5));
+    assertEquals(List.of("worker", FIXTURE_REPLIES_A7DA19E5), order);
     order.clear();
-    WebLogApplicationRuntime.closeAfterFailure(startup, null, () -> order.add("replies"));
-    assertEquals(List.of("replies"), order);
+    WebLogApplicationRuntime.closeAfterFailure(
+        startup, null, () -> order.add(FIXTURE_REPLIES_A7DA19E5));
+    assertEquals(List.of(FIXTURE_REPLIES_A7DA19E5), order);
     var calls = new AtomicInteger();
     assertThrows(
         NullPointerException.class,

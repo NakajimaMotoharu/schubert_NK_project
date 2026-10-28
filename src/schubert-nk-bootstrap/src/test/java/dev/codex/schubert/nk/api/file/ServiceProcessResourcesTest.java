@@ -38,6 +38,7 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** PT-OPS-API-RES-001..006. Real credential channels/PG/pool, explicitly synthetic OS admission. */
 final class ServiceProcessResourcesTest {
+  private static final String FIXTURE_UNTRUSTED_6FC6869D = "UNTRUSTED";
   @TempDir static Path temporary;
   private static ApiLogDatabaseFixture database;
   private static String url;
@@ -124,14 +125,16 @@ final class ServiceProcessResourcesTest {
   void opsApiRes002CallbackAndPoolCloseCompoundFailuresDoNotReturnSuccess() throws Exception {
     for (Throwable body :
         List.of(
-            new IOException("UNTRUSTED"),
-            new IllegalStateException("UNTRUSTED"),
-            new AssertionError("UNTRUSTED"))) {
+            new IOException(FIXTURE_UNTRUSTED_6FC6869D),
+            new IllegalStateException(FIXTURE_UNTRUSTED_6FC6869D),
+            new AssertionError(FIXTURE_UNTRUSTED_6FC6869D))) {
       for (Throwable cleanup :
           Arrays.asList(
               null,
-              new IllegalStateException("UNTRUSTED"),
-              body instanceof IOException ? new AssertionError("UNTRUSTED") : body)) {
+              new IllegalStateException(FIXTURE_UNTRUSTED_6FC6869D),
+              body instanceof IOException
+                  ? new AssertionError(FIXTURE_UNTRUSTED_6FC6869D)
+                  : body)) {
         try (var fixture = new InspectorCredentialLoaderTest.Fixture(temporary)) {
           ServiceCredentialSetTest.install(fixture, ServiceConfigFiles.Service.API);
           var io = new InspectorCredentialLoaderTest.TestIo();
@@ -177,7 +180,7 @@ final class ServiceProcessResourcesTest {
               IllegalStateException.class,
               () -> credentialsRef.get().copyPassword(ServiceCredentialId.DB_API));
           for (Throwable secondary : body.getSuppressed())
-            assertFalse(secondary.toString().contains("UNTRUSTED"));
+            assertFalse(secondary.toString().contains(FIXTURE_UNTRUSTED_6FC6869D));
           ServiceCredentialSetTest.assertCleared(io);
         }
       }
@@ -201,7 +204,8 @@ final class ServiceProcessResourcesTest {
                 io,
                 (target, password) -> {
                   copied.set(password);
-                  if (failureStage == 0) throw new IllegalStateException("UNTRUSTED");
+                  if (failureStage == 0)
+                    throw new IllegalStateException(FIXTURE_UNTRUSTED_6FC6869D);
                   if (failureStage == 1) return null;
                   var source =
                       new ServiceDatabaseSource(ServiceConfigFiles.Service.API, target, password);
@@ -209,7 +213,8 @@ final class ServiceProcessResourcesTest {
                   return source;
                 },
                 source -> {
-                  if (failureStage == 2) throw new IllegalStateException("UNTRUSTED");
+                  if (failureStage == 2)
+                    throw new IllegalStateException(FIXTURE_UNTRUSTED_6FC6869D);
                   return null;
                 });
         Class<? extends RuntimeException> expectedFailure =

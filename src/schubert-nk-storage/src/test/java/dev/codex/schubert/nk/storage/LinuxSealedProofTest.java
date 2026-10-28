@@ -30,6 +30,11 @@ import org.junit.jupiter.api.Test;
 
 /** PT-OPS-SEAL-001..008; independent public byte vectors and actual immutable Linux memfd. */
 final class LinuxSealedProofTest {
+  private static final String FIXTURE_BODY_BFD4D039 = "body";
+  private static final String FIXTURE_CREATE_5498A731 = "create";
+  private static final String FIXTURE_CLOSE_17_F1422F88 = "close:17";
+  private static final String FIXTURE_AMD64_58D0BD71 = "amd64";
+  private static final String FIXTURE_LINUX_1CA133AF = "Linux";
   private static final byte[] VECTOR =
       "NKSTART1\npublic_fixture\n".getBytes(StandardCharsets.US_ASCII);
 
@@ -44,7 +49,7 @@ final class LinuxSealedProofTest {
                 input,
                 fd -> {
                   assertEquals(129, fd);
-                  f.events.add("body");
+                  f.events.add(FIXTURE_BODY_BFD4D039);
                   assertArrayEquals(VECTOR, f.written.toByteArray());
                   assertArrayEquals(VECTOR, f.calls().read(fd));
                   return "observed";
@@ -52,24 +57,31 @@ final class LinuxSealedProofTest {
     assertArrayEquals(VECTOR, input);
     assertEquals(
         List.of(
-            "create",
+            FIXTURE_CREATE_5498A731,
             "mode:17:384",
             "write:17",
             "fcntl:17:1033:15",
             "fcntl:17:1030:128",
-            "body",
+            FIXTURE_BODY_BFD4D039,
             "fcntl:129:1034:0",
             "read:129:0",
             "read:129:24",
             "close:129",
-            "close:17"),
+            FIXTURE_CLOSE_17_F1422F88),
         f.events);
   }
 
   @Test
   void opsSeal002AllCreationSyscallFailuresAndCleanup() {
     for (String failed :
-        List.of("create", "mode", "write", "seal", "duplicate", "closeReserved", "closeOriginal")) {
+        List.of(
+            FIXTURE_CREATE_5498A731,
+            "mode",
+            "write",
+            "seal",
+            "duplicate",
+            "closeReserved",
+            "closeOriginal")) {
       var f = new Fixture(VECTOR);
       f.failed = failed;
       unavailable(
@@ -80,20 +92,21 @@ final class LinuxSealedProofTest {
                       .withProof(
                           VECTOR,
                           fd -> {
-                            f.events.add("body");
+                            f.events.add(FIXTURE_BODY_BFD4D039);
                             return true;
                           })));
-      if (!failed.equals("create")) assertEquals("close:17", f.events.getLast());
+      if (!failed.equals(FIXTURE_CREATE_5498A731))
+        assertEquals(FIXTURE_CLOSE_17_F1422F88, f.events.getLast());
       if (List.of("closeReserved", "closeOriginal").contains(failed))
-        assertTrue(f.events.contains("body"));
-      else assertFalse(f.events.contains("body"));
+        assertTrue(f.events.contains(FIXTURE_BODY_BFD4D039));
+      else assertFalse(f.events.contains(FIXTURE_BODY_BFD4D039));
     }
     for (long count : List.of(0L, -1L, (long) VECTOR.length + 1)) {
       var f = new Fixture(VECTOR);
       f.writeResult = count;
       unavailable(
           assertThrows(StorageIoException.class, () -> f.calls().withProof(VECTOR, fd -> fail())));
-      assertEquals("close:17", f.events.getLast());
+      assertEquals(FIXTURE_CLOSE_17_F1422F88, f.events.getLast());
     }
     for (int reserved : List.of(127, 65536)) {
       var f = new Fixture(VECTOR);
@@ -101,7 +114,7 @@ final class LinuxSealedProofTest {
       unavailable(
           assertThrows(StorageIoException.class, () -> f.calls().withProof(VECTOR, fd -> fail())));
       assertEquals(
-          List.of("close:" + reserved, "close:17"),
+          List.of("close:" + reserved, FIXTURE_CLOSE_17_F1422F88),
           f.events.subList(f.events.size() - 2, f.events.size()));
     }
   }
@@ -137,7 +150,7 @@ final class LinuxSealedProofTest {
       f.chunk = 3;
       assertArrayEquals(vector, f.calls().withProof(vector, fd -> f.calls().read(fd)));
       assertArrayEquals(vector, f.written.toByteArray());
-      assertEquals("close:17", f.events.getLast());
+      assertEquals(FIXTURE_CLOSE_17_F1422F88, f.events.getLast());
     }
     var f = new Fixture(VECTOR);
     f.reserved = 65535;
@@ -164,24 +177,32 @@ final class LinuxSealedProofTest {
       assertThrows(IllegalArgumentException.class, () -> calls.read(fd));
     assertTrue(f.events.isEmpty());
     var symbols = Linker.nativeLinker().defaultLookup();
-    assertThrows(NullPointerException.class, () -> LinuxSealedProof.create(null, "amd64", symbols));
-    assertThrows(NullPointerException.class, () -> LinuxSealedProof.create("Linux", null, symbols));
-    assertThrows(NullPointerException.class, () -> LinuxSealedProof.create("Linux", "amd64", null));
+    assertThrows(
+        NullPointerException.class,
+        () -> LinuxSealedProof.create(null, FIXTURE_AMD64_58D0BD71, symbols));
+    assertThrows(
+        NullPointerException.class,
+        () -> LinuxSealedProof.create(FIXTURE_LINUX_1CA133AF, null, symbols));
+    assertThrows(
+        NullPointerException.class,
+        () -> LinuxSealedProof.create(FIXTURE_LINUX_1CA133AF, FIXTURE_AMD64_58D0BD71, null));
     for (String os : List.of("Windows", "linux", ""))
       assertThrows(
-          IllegalStateException.class, () -> LinuxSealedProof.create(os, "amd64", symbols));
+          IllegalStateException.class,
+          () -> LinuxSealedProof.create(os, FIXTURE_AMD64_58D0BD71, symbols));
     assertThrows(
-        IllegalStateException.class, () -> LinuxSealedProof.create("Linux", "unknown", symbols));
+        IllegalStateException.class,
+        () -> LinuxSealedProof.create(FIXTURE_LINUX_1CA133AF, "unknown", symbols));
     for (String missing : List.of("memfd_create", "write", "pread", "fcntl", "fchmod", "close"))
       assertThrows(
           IllegalStateException.class,
           () ->
               LinuxSealedProof.create(
-                  "Linux",
-                  "amd64",
+                  FIXTURE_LINUX_1CA133AF,
+                  FIXTURE_AMD64_58D0BD71,
                   name -> name.equals(missing) ? Optional.empty() : symbols.find(name)));
-    for (String arch : List.of("amd64", "x86_64", "aarch64"))
-      assertNotNull(LinuxSealedProof.create("Linux", arch, symbols));
+    for (String arch : List.of(FIXTURE_AMD64_58D0BD71, "x86_64", "aarch64"))
+      assertNotNull(LinuxSealedProof.create(FIXTURE_LINUX_1CA133AF, arch, symbols));
     LinuxSealedProof.CreateCall create = (n, flags) -> 17;
     LinuxSealedProof.WriteCall write = (d, b, n) -> n;
     LinuxSealedProof.ReadCall read = (d, b, n, o) -> 0;
@@ -235,7 +256,7 @@ final class LinuxSealedProofTest {
           if (knownBody && !cleanupUnknown) unavailable((StorageIoException) actual);
           else assertSame(unknown, actual);
           assertEquals(
-              List.of("close:129", "close:17"),
+              List.of("close:129", FIXTURE_CLOSE_17_F1422F88),
               f.events.subList(f.events.size() - 2, f.events.size()));
         }
   }
@@ -321,8 +342,8 @@ final class LinuxSealedProofTest {
           (name, flags) -> {
             assertEquals("schubert-startup-proof", name.getString(0));
             assertEquals(3, flags);
-            events.add("create");
-            return failed.equals("create") ? -1 : 17;
+            events.add(FIXTURE_CREATE_5498A731);
+            return failed.equals(FIXTURE_CREATE_5498A731) ? -1 : 17;
           },
           (fd, buffer, count) -> {
             events.add("write:" + fd);

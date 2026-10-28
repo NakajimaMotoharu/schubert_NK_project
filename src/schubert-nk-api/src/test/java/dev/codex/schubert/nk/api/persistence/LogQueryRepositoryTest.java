@@ -37,6 +37,9 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** UI235 fixed offsets and actual PostgreSQL projection, SSC-036/PT-ADM-055..060. */
 class LogQueryRepositoryTest {
+  private static final String FIXTURE_TOTAL_714BDB4B = "total";
+  private static final String FIXTURE_PAGES_41A6094E = "pages";
+  private static final String FIXTURE_EFFECTIVE_392A9D00 = "effective";
   @TempDir static Path root;
   static ApiLogDatabaseFixture database;
   static final Instant NOW = Instant.parse("2026-09-08T00:00:00Z");
@@ -258,13 +261,13 @@ class LogQueryRepositoryTest {
         temporary(() -> QUERIES.search(fault.wrap(c), ADMIN, request));
       }
       var max = new UserQueryFaults();
-      max.columns.put("total", 99999900L);
-      max.columns.put("pages", 999999L);
+      max.columns.put(FIXTURE_TOTAL_714BDB4B, 99999900L);
+      max.columns.put(FIXTURE_PAGES_41A6094E, 999999L);
       var result = QUERIES.search(max.wrap(c), ADMIN, request);
       assertEquals(new PagedResponseData(1, 100, 99999900L, 999999, 1, 100), result.data());
       for (String close : List.of("none", "resultClose", "statementClose")) {
         var fault = new UserQueryFaults();
-        fault.columns.put("total", 99999901L);
+        fault.columns.put(FIXTURE_TOTAL_714BDB4B, 99999901L);
         fault.fault = close;
         var error =
             assertThrows(
@@ -278,9 +281,9 @@ class LogQueryRepositoryTest {
       }
       for (String field :
           List.of(
-              "total",
-              "pages",
-              "effective",
+              FIXTURE_TOTAL_714BDB4B,
+              FIXTURE_PAGES_41A6094E,
+              FIXTURE_EFFECTIVE_392A9D00,
               "id",
               "logged_at",
               "category",
@@ -304,11 +307,11 @@ class LogQueryRepositoryTest {
                   2147483648L,
                   "id",
                   0L,
-                  "pages",
+                  FIXTURE_PAGES_41A6094E,
                   2147483648L,
-                  "effective",
+                  FIXTURE_EFFECTIVE_392A9D00,
                   2147483648L,
-                  "total",
+                  FIXTURE_TOTAL_714BDB4B,
                   -1L,
                   "message",
                   "")
@@ -354,13 +357,22 @@ class LogQueryRepositoryTest {
       var empty = new UserQueryFaults();
       empty.empty = true;
       temporary(() -> QUERIES.search(empty.wrap(c), ADMIN, request));
-      for (String field : List.of("total", "pages", "effective")) {
+      for (String field :
+          List.of(FIXTURE_TOTAL_714BDB4B, FIXTURE_PAGES_41A6094E, FIXTURE_EFFECTIVE_392A9D00)) {
         var fault = new UserQueryFaults();
         fault.columns.put(field, 7L);
         fault.changedRow = 2;
         temporary(() -> QUERIES.search(fault.wrap(c), ADMIN, request));
       }
-      for (var entry : Map.of("pages", 2L, "effective", 2L, "total", 3L).entrySet()) {
+      for (var entry :
+          Map.of(
+                  FIXTURE_PAGES_41A6094E,
+                  2L,
+                  FIXTURE_EFFECTIVE_392A9D00,
+                  2L,
+                  FIXTURE_TOTAL_714BDB4B,
+                  3L)
+              .entrySet()) {
         var fault = new UserQueryFaults();
         fault.columns.put(entry.getKey(), entry.getValue());
         temporary(() -> QUERIES.search(fault.wrap(c), ADMIN, request));

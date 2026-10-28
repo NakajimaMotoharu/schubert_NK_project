@@ -34,6 +34,15 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** CDB001..009. Literal role/lock vectors, injected JDBC failures and independent actual PG. */
 final class CleanupDatabaseSessionTest {
+  private static final String FIXTURE_PGPT_ADMIN_F5D1227C = "pgpt_admin";
+  private static final String FIXTURE_ROOT_CLEANUP_DATABASE_UNAVAILABLE_6B76238A =
+      "root cleanup database unavailable";
+  private static final String FIXTURE_AUTO_634635A2 = "auto";
+  private static final String FIXTURE_READONLY_C4A495E7 = "readonly";
+  private static final String FIXTURE_ISOLATION_AB1E8569 = "isolation";
+  private static final String FIXTURE_PRIVATE_D45CA6F9 = "PRIVATE";
+  private static final String FIXTURE_KNOWN_BADD3000 = "known";
+  private static final String FIXTURE_UNKNOWN_EB8BF0D8 = "unknown";
   @TempDir static Path directory;
   static BatchDatabaseFixture db;
   static String actualUrl;
@@ -49,7 +58,7 @@ final class CleanupDatabaseSessionTest {
     Path sql =
         Path.of(System.getProperty("nk.pt.repository"))
             .resolve("src/schubert-nk-api/src/main/resources/db");
-    try (var connection = DriverManager.getConnection(actualUrl, "pgpt_admin", "");
+    try (var connection = DriverManager.getConnection(actualUrl, FIXTURE_PGPT_ADMIN_F5D1227C, "");
         var statement = connection.createStatement()) {
       statement.execute(Files.readString(sql.resolve("provisioning/001_roles.sql")));
     }
@@ -127,7 +136,7 @@ final class CleanupDatabaseSessionTest {
     assertEquals(1, child.reads().get()); // Construction is not a fresh child admission.
     var calls = new AtomicInteger();
     assertEquals(
-        "root cleanup database unavailable",
+        FIXTURE_ROOT_CLEANUP_DATABASE_UNAVAILABLE_6B76238A,
         assertThrows(
                 IOException.class,
                 () ->
@@ -168,9 +177,9 @@ final class CleanupDatabaseSessionTest {
   void cdb003RoleStateRowsAndNullJdbcObjectsFailClosed() throws Exception {
     for (String kind :
         List.of(
-            "auto",
-            "readonly",
-            "isolation",
+            FIXTURE_AUTO_634635A2,
+            FIXTURE_READONLY_C4A495E7,
+            FIXTURE_ISOLATION_AB1E8569,
             "role",
             "recovery",
             "nullRole",
@@ -181,9 +190,9 @@ final class CleanupDatabaseSessionTest {
             "many")) {
       var p = new MorningDatabaseSessionTest.Probe();
       switch (kind) {
-        case "auto" -> p.auto = false;
-        case "readonly" -> p.readonly = true;
-        case "isolation" -> p.isolation = Connection.TRANSACTION_SERIALIZABLE;
+        case FIXTURE_AUTO_634635A2 -> p.auto = false;
+        case FIXTURE_READONLY_C4A495E7 -> p.readonly = true;
+        case FIXTURE_ISOLATION_AB1E8569 -> p.isolation = Connection.TRANSACTION_SERIALIZABLE;
         case "role" -> p.role.put("effective_role", "wrong");
         case "recovery" -> p.role.put("recovery", true);
         case "nullRole" -> p.role.remove("login_role");
@@ -214,9 +223,9 @@ final class CleanupDatabaseSessionTest {
   void cdb004SchemaAndRootGateMustPrecedeLockAndCallback() throws Exception {
     for (Throwable failure :
         List.of(
-            new IOException("PRIVATE"),
-            new SQLException("PRIVATE"),
-            new AssertionError("PRIVATE"))) {
+            new IOException(FIXTURE_PRIVATE_D45CA6F9),
+            new SQLException(FIXTURE_PRIVATE_D45CA6F9),
+            new AssertionError(FIXTURE_PRIVATE_D45CA6F9))) {
       var p = new MorningDatabaseSessionTest.Probe();
       p.faults.put("schema", failure);
       var calls = new AtomicInteger();
@@ -232,13 +241,13 @@ final class CleanupDatabaseSessionTest {
                             return true;
                           }));
       if (failure instanceof Error) assertSame(failure, actual);
-      else assertEquals("root cleanup database unavailable", actual.getMessage());
+      else assertEquals(FIXTURE_ROOT_CLEANUP_DATABASE_UNAVAILABLE_6B76238A, actual.getMessage());
       assertEquals(0, calls.get());
       assertFalse(p.events.stream().anyMatch(e -> e.startsWith("LOCK.")));
       p.released();
     }
     var blocked = new MorningDatabaseSessionTest.Probe();
-    blocked.faults.put("gate", new IOException("PRIVATE"));
+    blocked.faults.put("gate", new IOException(FIXTURE_PRIVATE_D45CA6F9));
     assertThrows(
         IOException.class, () -> blocked.cleanupSubject().execute(credential(), c -> true));
     assertTrue(blocked.events.stream().noneMatch(e -> e.startsWith("connect")));
@@ -282,7 +291,14 @@ final class CleanupDatabaseSessionTest {
     assertThrows(IllegalStateException.class, c::copyPassword);
     p.released();
     for (String kind :
-        List.of("null", "known", "unknown", "auto", "readonly", "isolation", "held")) {
+        List.of(
+            "null",
+            FIXTURE_KNOWN_BADD3000,
+            FIXTURE_UNKNOWN_EB8BF0D8,
+            FIXTURE_AUTO_634635A2,
+            FIXTURE_READONLY_C4A495E7,
+            FIXTURE_ISOLATION_AB1E8569,
+            "held")) {
       var current = new MorningDatabaseSessionTest.Probe();
       var unknown = new IllegalStateException("PUBLIC unknown");
       Throwable actual =
@@ -296,17 +312,18 @@ final class CleanupDatabaseSessionTest {
                           connection -> {
                             return switch (kind) {
                               case "null" -> null;
-                              case "known" -> throw new IOException("PRIVATE");
-                              case "unknown" -> throw unknown;
-                              case "auto" -> {
+                              case FIXTURE_KNOWN_BADD3000 ->
+                                  throw new IOException(FIXTURE_PRIVATE_D45CA6F9);
+                              case FIXTURE_UNKNOWN_EB8BF0D8 -> throw unknown;
+                              case FIXTURE_AUTO_634635A2 -> {
                                 current.auto = false;
                                 yield true;
                               }
-                              case "readonly" -> {
+                              case FIXTURE_READONLY_C4A495E7 -> {
                                 current.readonly = true;
                                 yield true;
                               }
-                              case "isolation" -> {
+                              case FIXTURE_ISOLATION_AB1E8569 -> {
                                 current.isolation = Connection.TRANSACTION_SERIALIZABLE;
                                 yield true;
                               }
@@ -316,9 +333,9 @@ final class CleanupDatabaseSessionTest {
                               }
                             };
                           }));
-      if (kind.equals("unknown")) assertSame(unknown, actual);
+      if (kind.equals(FIXTURE_UNKNOWN_EB8BF0D8)) assertSame(unknown, actual);
       else if (kind.equals("null")) assertInstanceOf(NullPointerException.class, actual);
-      else assertEquals("root cleanup database unavailable", actual.getMessage());
+      else assertEquals(FIXTURE_ROOT_CLEANUP_DATABASE_UNAVAILABLE_6B76238A, actual.getMessage());
       current.released();
     }
   }
@@ -332,7 +349,7 @@ final class CleanupDatabaseSessionTest {
             DriverManager::getConnection,
             connection -> assertFalse(connection.isClosed()));
     var childCalls = new AtomicInteger();
-    try (var observer = DriverManager.getConnection(actualUrl, "pgpt_admin", "");
+    try (var observer = DriverManager.getConnection(actualUrl, FIXTURE_PGPT_ADMIN_F5D1227C, "");
         var executor = Executors.newSingleThreadExecutor()) {
       assertEquals(
           "DONE",
@@ -350,7 +367,7 @@ final class CleanupDatabaseSessionTest {
                 try {
                   assertFalse(advisory(observer));
                   assertEquals(
-                      "root cleanup database unavailable",
+                      FIXTURE_ROOT_CLEANUP_DATABASE_UNAVAILABLE_6B76238A,
                       executor
                           .submit(
                               () ->
@@ -398,7 +415,7 @@ final class CleanupDatabaseSessionTest {
     var close = new MorningDatabaseSessionTest.Probe();
     close.faults.put("connection.close", new SQLException("PRIVATE close"));
     assertEquals(
-        "root cleanup database unavailable",
+        FIXTURE_ROOT_CLEANUP_DATABASE_UNAVAILABLE_6B76238A,
         assertThrows(
                 IOException.class,
                 () -> close.cleanupSubject().execute(credential(), connection -> true))
@@ -415,9 +432,9 @@ final class CleanupDatabaseSessionTest {
           || point.startsWith("HELD."))) continue;
       var faulted = new MorningDatabaseSessionTest.Probe();
       faulted.faultAt = point;
-      faulted.failure = new SQLException("PRIVATE");
+      faulted.failure = new SQLException(FIXTURE_PRIVATE_D45CA6F9);
       assertEquals(
-          "root cleanup database unavailable",
+          FIXTURE_ROOT_CLEANUP_DATABASE_UNAVAILABLE_6B76238A,
           assertThrows(
                   IOException.class,
                   () -> faulted.cleanupSubject().execute(credential(), connection -> true),
@@ -427,7 +444,8 @@ final class CleanupDatabaseSessionTest {
     }
     good.released();
 
-    for (String first : List.of("success", "known", "batch", "unknown"))
+    for (String first :
+        List.of("success", FIXTURE_KNOWN_BADD3000, "batch", FIXTURE_UNKNOWN_EB8BF0D8))
       for (String second : List.of("sql", "runtime", "error")) {
         var combined = new MorningDatabaseSessionTest.Probe();
         Throwable secondary =
@@ -448,19 +466,20 @@ final class CleanupDatabaseSessionTest {
                             credential(),
                             connection -> {
                               return switch (first) {
-                                case "known" -> throw new IOException("PRIVATE callback");
+                                case FIXTURE_KNOWN_BADD3000 ->
+                                    throw new IOException("PRIVATE callback");
                                 case "batch" -> throw new BatchRepositoryException();
-                                case "unknown" -> throw unknown;
+                                case FIXTURE_UNKNOWN_EB8BF0D8 -> throw unknown;
                                 default -> true;
                               };
                             }));
-        if (first.equals("unknown")) {
+        if (first.equals(FIXTURE_UNKNOWN_EB8BF0D8)) {
           assertSame(unknown, actual);
           assertEquals(1, unknown.getSuppressed().length);
           assertEquals(
               "batch repository operation failed", unknown.getSuppressed()[0].getMessage());
         } else if (second.equals("sql"))
-          assertEquals("root cleanup database unavailable", actual.getMessage());
+          assertEquals(FIXTURE_ROOT_CLEANUP_DATABASE_UNAVAILABLE_6B76238A, actual.getMessage());
         else assertSame(secondary, actual);
         combined.released();
       }
@@ -472,7 +491,7 @@ final class CleanupDatabaseSessionTest {
     nested.faults.put("ROLE.statement.close", new SQLException("PRIVATE statement close"));
     nested.faults.put("connection.close", new SQLException("PRIVATE connection close"));
     assertEquals(
-        "root cleanup database unavailable",
+        FIXTURE_ROOT_CLEANUP_DATABASE_UNAVAILABLE_6B76238A,
         assertThrows(
                 IOException.class,
                 () -> nested.cleanupSubject().execute(credential(), connection -> true))
@@ -503,7 +522,7 @@ final class CleanupDatabaseSessionTest {
             actualUrl, wrong.context(), wrong.snapshot(), wrong.release());
     assertEquals(1, wrong.reads().get());
     assertEquals(
-        "root cleanup database unavailable",
+        FIXTURE_ROOT_CLEANUP_DATABASE_UNAVAILABLE_6B76238A,
         assertThrows(
                 IOException.class,
                 () -> refused.execute(owner, connection -> calls.incrementAndGet()))
@@ -520,7 +539,7 @@ final class CleanupDatabaseSessionTest {
     assertEquals(1, child.reads().get());
     var borrowed = new ArrayList<Connection>();
     var validOwner = credential();
-    try (var observer = DriverManager.getConnection(actualUrl, "pgpt_admin", "")) {
+    try (var observer = DriverManager.getConnection(actualUrl, FIXTURE_PGPT_ADMIN_F5D1227C, "")) {
       assertEquals(
           "EXPIRY-OWNED",
           subject.execute(
@@ -565,7 +584,7 @@ final class CleanupDatabaseSessionTest {
 
   private static List<SchemaHistoryAdmission.Row> migrationRows() throws Exception {
     List<SchemaHistoryAdmission.Row> rows = new ArrayList<>();
-    try (var connection = DriverManager.getConnection(actualUrl, "pgpt_admin", "");
+    try (var connection = DriverManager.getConnection(actualUrl, FIXTURE_PGPT_ADMIN_F5D1227C, "");
         var statement =
             connection.prepareStatement(
                 "select installed_rank,version,type,script,checksum,success"

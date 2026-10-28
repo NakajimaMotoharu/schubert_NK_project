@@ -42,6 +42,14 @@ import org.junit.jupiter.api.io.TempDir;
  * NK-OPS-001/PT-OPS-LOCK-001..008; SS311/341/343; synthetic root metadata, real held inode/flock.
  */
 final class MaintenanceFileLockTest {
+  private static final String FIXTURE_RUN_5E87F618 = "run";
+  private static final String FIXTURE_APP_4E5EF144 = "app";
+  private static final String FIXTURE_FILE_BFDDE6F5 = "file";
+  private static final String FIXTURE_MODE_B6D5C2C3 = "mode";
+  private static final String FIXTURE_SIZE_EB1E91E4 = "size";
+  private static final String FIXTURE_INO_4BE7C1E0 = "ino";
+  private static final String FIXTURE_UNIX_MODE_18F40B0C = "unix:mode";
+  private static final String FIXTURE_ACL_43B23946 = "acl";
   @TempDir Path base;
 
   @Test
@@ -134,7 +142,7 @@ final class MaintenanceFileLockTest {
       rejected(f);
       assertEquals(0, f.calls.opened.get());
     }
-    for (String role : List.of("run", "app", "file")) {
+    for (String role : List.of(FIXTURE_RUN_5E87F618, FIXTURE_APP_4E5EF144, FIXTURE_FILE_BFDDE6F5)) {
       for (String key : List.of("uid", "gid"))
         for (int value : List.of(1, -1)) {
           var f = fixture();
@@ -156,10 +164,10 @@ final class MaintenanceFileLockTest {
       acl.acl = new byte[] {2, 0, 0, 0};
       rejected(acl);
     }
-    for (String role : List.of("run", "app")) {
+    for (String role : List.of(FIXTURE_RUN_5E87F618, FIXTURE_APP_4E5EF144)) {
       for (int mode : List.of(040777, 040775, 040700, 0140755, 044755)) {
         var f = fixture();
-        f.change = replace(role, "mode", mode);
+        f.change = replace(role, FIXTURE_MODE_B6D5C2C3, mode);
         rejected(f);
       }
       for (int links : List.of(0, 1, -1)) {
@@ -168,10 +176,10 @@ final class MaintenanceFileLockTest {
         rejected(f);
       }
       var f = fixture();
-      f.change = replace(role, "size", -1L);
+      f.change = replace(role, FIXTURE_SIZE_EB1E91E4, -1L);
       rejected(f);
     }
-    for (String role : List.of("app", "file")) {
+    for (String role : List.of(FIXTURE_APP_4E5EF144, FIXTURE_FILE_BFDDE6F5)) {
       var f = fixture();
       f.change = replace(role, "dev", Long.MAX_VALUE);
       rejected(f);
@@ -182,24 +190,32 @@ final class MaintenanceFileLockTest {
   void inodeAndAttributePolicy() throws Exception {
     for (int mode : List.of(0100644, 0100400, 040600, 0120600, 0140600)) {
       var f = fixture();
-      f.change = replace("file", "mode", mode);
+      f.change = replace(FIXTURE_FILE_BFDDE6F5, FIXTURE_MODE_B6D5C2C3, mode);
       rejected(f);
     }
     for (int links : List.of(0, 2, -1)) {
       var f = fixture();
-      f.change = replace("file", "nlink", links);
+      f.change = replace(FIXTURE_FILE_BFDDE6F5, "nlink", links);
       rejected(f);
     }
     for (long size : List.of(-1L, 1L, Long.MAX_VALUE)) {
       var f = fixture();
-      f.change = replace("file", "size", size);
+      f.change = replace(FIXTURE_FILE_BFDDE6F5, FIXTURE_SIZE_EB1E91E4, size);
       rejected(f);
     }
-    for (String role : List.of("run", "app", "file")) {
+    for (String role : List.of(FIXTURE_RUN_5E87F618, FIXTURE_APP_4E5EF144, FIXTURE_FILE_BFDDE6F5)) {
       var absent = fixture();
       absent.change = (r, m) -> r.equals(role) ? null : m;
       rejected(absent);
-      for (String key : List.of("mode", "uid", "gid", "nlink", "size", "dev", "ino")) {
+      for (String key :
+          List.of(
+              FIXTURE_MODE_B6D5C2C3,
+              "uid",
+              "gid",
+              "nlink",
+              FIXTURE_SIZE_EB1E91E4,
+              "dev",
+              FIXTURE_INO_4BE7C1E0)) {
         for (Object value : Arrays.asList(null, "unknown")) {
           var f = fixture();
           f.change = replace(role, key, value);
@@ -218,9 +234,9 @@ final class MaintenanceFileLockTest {
       }
       rejected(f);
     }
-    for (String role : List.of("run", "app")) {
+    for (String role : List.of(FIXTURE_RUN_5E87F618, FIXTURE_APP_4E5EF144)) {
       var f = fixture();
-      Path original = role.equals("run") ? f.runtime : f.app;
+      Path original = role.equals(FIXTURE_RUN_5E87F618) ? f.runtime : f.app;
       Path saved = original.resolveSibling(original.getFileName() + "-saved");
       Files.move(original, saved);
       Files.createSymbolicLink(original, saved);
@@ -230,7 +246,7 @@ final class MaintenanceFileLockTest {
 
   @Test
   void replacementAndPostconditions() throws Exception {
-    for (String role : List.of("run", "app", "file")) {
+    for (String role : List.of(FIXTURE_RUN_5E87F618, FIXTURE_APP_4E5EF144, FIXTURE_FILE_BFDDE6F5)) {
       var f = fixture();
       assertUnavailable(
           assertThrows(
@@ -240,23 +256,23 @@ final class MaintenanceFileLockTest {
                       .tryExclusive(
                           () -> {
                             Path path =
-                                role.equals("run")
+                                role.equals(FIXTURE_RUN_5E87F618)
                                     ? f.runtime
-                                    : role.equals("app") ? f.app : f.file;
+                                    : role.equals(FIXTURE_APP_4E5EF144) ? f.app : f.file;
                             Files.move(path, path.resolveSibling(path.getFileName() + "-saved"));
-                            if (role.equals("file")) {
+                            if (role.equals(FIXTURE_FILE_BFDDE6F5)) {
                               Files.createFile(path);
-                              Files.setAttribute(path, "unix:mode", 0600);
+                              Files.setAttribute(path, FIXTURE_UNIX_MODE_18F40B0C, 0600);
                             } else {
                               Files.createDirectory(path);
-                              Files.setAttribute(path, "unix:mode", 0755);
+                              Files.setAttribute(path, FIXTURE_UNIX_MODE_18F40B0C, 0755);
                             }
                             return 1;
                           })));
       assertEquals(0, f.calls.outstanding.get());
     }
-    for (String role : List.of("run", "app", "file"))
-      for (String change : List.of("mode", "acl", "identity")) {
+    for (String role : List.of(FIXTURE_RUN_5E87F618, FIXTURE_APP_4E5EF144, FIXTURE_FILE_BFDDE6F5))
+      for (String change : List.of(FIXTURE_MODE_B6D5C2C3, FIXTURE_ACL_43B23946, "identity")) {
         var f = fixture();
         assertUnavailable(
             assertThrows(
@@ -265,15 +281,17 @@ final class MaintenanceFileLockTest {
                     f.lock()
                         .tryExclusive(
                             () -> {
-                              if (change.equals("acl")) {
+                              if (change.equals(FIXTURE_ACL_43B23946)) {
                                 f.badRole = role;
                                 f.acl = new byte[] {1};
                               } else
                                 f.change =
                                     replace(
                                         role,
-                                        change.equals("mode") ? "mode" : "ino",
-                                        change.equals("mode")
+                                        change.equals(FIXTURE_MODE_B6D5C2C3)
+                                            ? FIXTURE_MODE_B6D5C2C3
+                                            : FIXTURE_INO_4BE7C1E0,
+                                        change.equals(FIXTURE_MODE_B6D5C2C3)
                                             ? (Object) Integer.valueOf(0777)
                                             : Long.valueOf(Long.MAX_VALUE));
                               return 1;
@@ -282,12 +300,13 @@ final class MaintenanceFileLockTest {
         assertEquals(0, external(f.file));
       }
     // Changing identity during initial capture must fail the pre-callback re-open comparison.
-    for (String role : List.of("run", "app", "file")) {
+    for (String role : List.of(FIXTURE_RUN_5E87F618, FIXTURE_APP_4E5EF144, FIXTURE_FILE_BFDDE6F5)) {
       var f = fixture();
       var reads = new AtomicInteger();
       f.change =
           (r, m) -> {
-            if (r.equals(role) && reads.incrementAndGet() > 1) m.put("ino", Long.MAX_VALUE);
+            if (r.equals(role) && reads.incrementAndGet() > 1)
+              m.put(FIXTURE_INO_4BE7C1E0, Long.MAX_VALUE);
             return m;
           };
       rejected(f);
@@ -375,8 +394,8 @@ final class MaintenanceFileLockTest {
       assertEquals(0, g.calls.outstanding.get());
       assertEquals(0, external(g.file));
     }
-    for (String role : List.of("run", "app", "file"))
-      for (String fault : List.of("attrs", "type", "readonly", "acl")) {
+    for (String role : List.of(FIXTURE_RUN_5E87F618, FIXTURE_APP_4E5EF144, FIXTURE_FILE_BFDDE6F5))
+      for (String fault : List.of("attrs", "type", "readonly", FIXTURE_ACL_43B23946)) {
         var f = fixture();
         f.badRole = role;
         f.fault = fault;
@@ -444,7 +463,7 @@ final class MaintenanceFileLockTest {
     assertThrows(
         NullPointerException.class,
         () -> new MaintenanceFileLock(f.runtime, f.calls, security, nativeLock, null));
-    for (Path path : List.of(Path.of("run"), Path.of("/"), Path.of("/run/../run")))
+    for (Path path : List.of(Path.of(FIXTURE_RUN_5E87F618), Path.of("/"), Path.of("/run/../run")))
       assertThrows(
           IllegalArgumentException.class,
           () -> new MaintenanceFileLock(path, f.calls, security, nativeLock, io));
@@ -456,8 +475,8 @@ final class MaintenanceFileLockTest {
         assertThrows(
             StorageIoException.class, () -> MaintenanceFileLock.create().tryExclusive(() -> 1)));
     var real = new MaintenanceFileLock.NioIo();
-    assertEquals(0L, real.attributes(f.file).get("size"));
-    assertEquals(0100600, real.attributes(f.file).get("mode"));
+    assertEquals(0L, real.attributes(f.file).get(FIXTURE_SIZE_EB1E91E4));
+    assertEquals(0100600, real.attributes(f.file).get(FIXTURE_MODE_B6D5C2C3));
     assertEquals("tmpfs", real.filesystemType(Path.of("/dev/shm")));
     assertEquals("sysfs", real.filesystemType(Path.of("/sys")));
     // BUG-141: native adapter oracle is independent kernel mount metadata, not a container default.
@@ -493,7 +512,7 @@ final class MaintenanceFileLockTest {
     assertEquals(Optional.of(1), f.lock().tryExclusive(() -> 1));
     // Probe mutation methods throw, so any create/chmod/delete repair would fail this test.
     assertEquals(0, Files.size(f.file));
-    assertEquals(0100600, Files.getAttribute(f.file, "unix:mode"));
+    assertEquals(0100600, Files.getAttribute(f.file, FIXTURE_UNIX_MODE_18F40B0C));
   }
 
   /** SSC109/BUG327, PT-OPS-MNAMESPACE001: independent private/host mount flags. */
@@ -511,7 +530,8 @@ final class MaintenanceFileLockTest {
 
             public Map<String, Object> attributes(Path held) throws IOException {
               var result = delegate.attributes(held);
-              if (condition.equals("drift") && isHost(held)) result.put("ino", Long.MAX_VALUE);
+              if (condition.equals("drift") && isHost(held))
+                result.put(FIXTURE_INO_4BE7C1E0, Long.MAX_VALUE);
               return result;
             }
 
@@ -522,7 +542,7 @@ final class MaintenanceFileLockTest {
             public boolean readOnly(Path held) throws IOException {
               if (isHost(held)) return condition.equals("host-ro");
               String role = f.role(held);
-              return role.equals("run") || condition.equals(role + "-ro");
+              return role.equals(FIXTURE_RUN_5E87F618) || condition.equals(role + "-ro");
             }
           };
       var adapter =
@@ -602,16 +622,19 @@ final class MaintenanceFileLockTest {
       this.runtime = runtime;
       app = Files.createDirectory(runtime.resolve("schubert-nk"));
       file = Files.createFile(app.resolve("maintenance.lock"));
-      Files.setAttribute(runtime, "unix:mode", 0755);
-      Files.setAttribute(app, "unix:mode", 0755);
-      Files.setAttribute(file, "unix:mode", 0600);
+      Files.setAttribute(runtime, FIXTURE_UNIX_MODE_18F40B0C, 0755);
+      Files.setAttribute(app, FIXTURE_UNIX_MODE_18F40B0C, 0755);
+      Files.setAttribute(file, FIXTURE_UNIX_MODE_18F40B0C, 0600);
       runInode = (Long) Files.getAttribute(runtime, "unix:ino");
     }
 
     String role(Path held) throws IOException {
       var attrs = Files.readAttributes(held, "unix:mode,ino");
-      if (((Integer) attrs.get("mode") & 0170000) != 040000) return "file";
-      return attrs.get("ino").equals(runInode) ? "run" : "app";
+      if (((Integer) attrs.get(FIXTURE_MODE_B6D5C2C3) & 0170000) != 040000)
+        return FIXTURE_FILE_BFDDE6F5;
+      return attrs.get(FIXTURE_INO_4BE7C1E0).equals(runInode)
+          ? FIXTURE_RUN_5E87F618
+          : FIXTURE_APP_4E5EF144;
     }
 
     void fault(Path held, String operation) throws IOException {
@@ -664,7 +687,7 @@ final class MaintenanceFileLockTest {
         public byte[] accessAcl(Path held, int maximum) throws StorageIoException {
           assertEquals(44, maximum);
           try {
-            fault(held, "acl");
+            fault(held, FIXTURE_ACL_43B23946);
             return badRole.equals(role(held)) ? acl : new byte[0];
           } catch (IOException e) {
             throw new StorageIoException(StorageIoException.Reason.UNAVAILABLE);

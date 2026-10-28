@@ -40,6 +40,8 @@ import org.junit.jupiter.api.Test;
 
 /** ISSSTEP004..007/SSC134: literal SS343 golden vectors, independent SQL-shaped input. */
 final class MorningPrestartEvidenceTest {
+  private static final String FIXTURE_REUSED_6A7675DD = "reused";
+  private static final String FIXTURE_NEW_80270E39 = "new";
   static final BackupManifest MANIFEST = BackupStepFixture.manifest();
   static final BatchRun RUN = MANIFEST.run();
   static final Instant START = Instant.parse("2026-09-13T02:00:00Z");
@@ -116,7 +118,7 @@ final class MorningPrestartEvidenceTest {
 
   static Input input(String mode) throws Exception {
     boolean failed = mode.equals("failed");
-    boolean reused = mode.equals("reused");
+    boolean reused = mode.equals(FIXTURE_REUSED_6A7675DD);
     Instant backupEnd = reused ? END.plusSeconds(1) : END;
     var begins =
         reused
@@ -278,7 +280,7 @@ final class MorningPrestartEvidenceTest {
 
   @Test
   void wire200002CrossRunReferenceHasThirteenFieldsAndKeepsCurrentReceipt() throws Exception {
-    var reused = input("reused");
+    var reused = input(FIXTURE_REUSED_6A7675DD);
     var references = new ArrayList<>(reused.cleanup().references());
     var old = references.getFirst().orElseThrow();
     var oldRun =
@@ -325,7 +327,7 @@ final class MorningPrestartEvidenceTest {
 
   @Test
   void issstep007ReferenceForeignRunWarningsAndMutableGateInput() throws Exception {
-    var reused = input("reused");
+    var reused = input(FIXTURE_REUSED_6A7675DD);
     var current = reused.cleanup().terminal().entries().get(0).attempt();
     var prior = reused.cleanup().references().get(0).orElseThrow();
     var foreign = new BatchRun(new UUID(0, 99), RUN.cutoff().minusSeconds(86400));
@@ -403,7 +405,7 @@ final class MorningPrestartEvidenceTest {
                 new Input(reused.backup(), noReference, reused.expiry()),
                 Optional.of("1".repeat(64)),
                 texts()));
-    var ordinary = input("new");
+    var ordinary = input(FIXTURE_NEW_80270E39);
     var foreignRows = new ArrayList<CleanupTerminalRepository.Entry>();
     for (var row : ordinary.cleanup().terminal().entries())
       foreignRows.add(
@@ -519,7 +521,7 @@ final class MorningPrestartEvidenceTest {
 
   @Test
   void issstep004ThreeFullGoldenVectorsUseTrueCurrentAndSeparatePrior() throws Exception {
-    for (String mode : List.of("new", "failed", "reused")) {
+    for (String mode : List.of(FIXTURE_NEW_80270E39, "failed", FIXTURE_REUSED_6A7675DD)) {
       var input = input(mode);
       byte[] expected;
       try (var stream =
@@ -531,7 +533,9 @@ final class MorningPrestartEvidenceTest {
           expected,
           encode(
                   input,
-                  mode.equals("reused") ? Optional.of("1".repeat(64)) : Optional.empty(),
+                  mode.equals(FIXTURE_REUSED_6A7675DD)
+                      ? Optional.of("1".repeat(64))
+                      : Optional.empty(),
                   texts())
               .getBytes(StandardCharsets.US_ASCII),
           mode);
@@ -540,7 +544,7 @@ final class MorningPrestartEvidenceTest {
 
   @Test
   void issstep005MissingChangedBindingOrGateCannotEncode() throws Exception {
-    var input = input("new");
+    var input = input(FIXTURE_NEW_80270E39);
     var good = texts();
     // A normal-zero worker with independently corrupted FAILED SQL rows is not a valid proof.
     var corrupt = input("corrupt-failed-row");
@@ -564,7 +568,7 @@ final class MorningPrestartEvidenceTest {
     var extra = new HashMap<>(good);
     extra.put("EXTRA", "ignored");
     assertThrows(IOException.class, () -> encode(input, Optional.empty(), extra));
-    var reused = input("reused");
+    var reused = input(FIXTURE_REUSED_6A7675DD);
     assertThrows(IOException.class, () -> encode(reused, Optional.empty(), good));
     assertThrows(IOException.class, () -> encode(reused, Optional.of("A".repeat(64)), good));
     var duplicateCleanup =
@@ -602,7 +606,7 @@ final class MorningPrestartEvidenceTest {
 
   @Test
   void issstep006DigestNullAndUnknownFailureNeverBecomeGateSuccess() throws Exception {
-    var input = input("new");
+    var input = input(FIXTURE_NEW_80270E39);
     assertThrows(
         IOException.class,
         () ->

@@ -23,6 +23,19 @@ import org.junit.jupiter.api.Test;
 
 /** PT-OPS-STARTADMIT-001..008. Independent literal packet; callback factory ordering, not R2. */
 final class ServiceStartupAdmissionTest {
+  private static final String FIXTURE_SCHUBERT_NK_STARTUP_ADMISSION_FD_7B7DD578 =
+      "SCHUBERT_NK_STARTUP_ADMISSION_FD";
+  private static final String FIXTURE_SCHUBERT_NK_STARTUP_PROOF_FD_1B41DB68 =
+      "SCHUBERT_NK_STARTUP_PROOF_FD";
+  private static final String FIXTURE_ROOT2FD_1240EBDA = "root2fd";
+  private static final String FIXTURE_PROOFCLOSED_15789758 = "proofClosed";
+  private static final String FIXTURE_A_CLOSE_B364A3FB = "A-close";
+  private static final String FIXTURE_CAPTURE_47EE4B87 = "capture";
+  private static final String FIXTURE_NSS_7B2D62B0 = "NSS";
+  private static final String FIXTURE_MANIFEST_6AF63D73 = "manifest";
+  private static final String FIXTURE_BUSINESS_CLEANUP_49F049C6 = "business-cleanup";
+  private static final String FIXTURE_CONFIG_48882AB4 = "config";
+
   @Test
   void monitor003CallerLockCannotBlockReadyInformationOrRelease() throws Exception {
     var fixture = new Fixture();
@@ -48,9 +61,9 @@ final class ServiceStartupAdmissionTest {
 
   static final Map<String, String> ENV =
       Map.of(
-          "SCHUBERT_NK_STARTUP_ADMISSION_FD",
+          FIXTURE_SCHUBERT_NK_STARTUP_ADMISSION_FD_7B7DD578,
           "128",
-          "SCHUBERT_NK_STARTUP_PROOF_FD",
+          FIXTURE_SCHUBERT_NK_STARTUP_PROOF_FD_1B41DB68,
           "129",
           "INVOCATION_ID",
           "11111111111111111111111111111111");
@@ -114,11 +127,11 @@ final class ServiceStartupAdmissionTest {
     public void execute(int a, int p, ServiceStartupAdmission.Admitted action) throws IOException {
       assertEquals(128, a);
       assertEquals(129, p);
-      order.add("root2fd");
+      order.add(FIXTURE_ROOT2FD_1240EBDA);
       try {
         if (gateFails) throw new IOException("known gate failure");
         byte[] bytes = proof.getBytes(StandardCharsets.US_ASCII);
-        order.add("proofClosed");
+        order.add(FIXTURE_PROOFCLOSED_15789758);
         try {
           action.execute(
               admission,
@@ -135,7 +148,7 @@ final class ServiceStartupAdmissionTest {
         }
       } finally {
         finalCloses++;
-        order.add("A-close");
+        order.add(FIXTURE_A_CLOSE_B364A3FB);
         if (closeFails) throw new IOException("close failure");
       }
     }
@@ -146,8 +159,8 @@ final class ServiceStartupAdmissionTest {
     }
 
     public ChildStartupContext.Observed capture() throws IOException {
-      order.add("capture");
-      failure("capture");
+      order.add(FIXTURE_CAPTURE_47EE4B87);
+      failure(FIXTURE_CAPTURE_47EE4B87);
       captures++;
       return changed && captures == 2
           ? new ChildStartupContext.Observed(
@@ -166,14 +179,14 @@ final class ServiceStartupAdmissionTest {
     public FixedServiceIdentity.Value identity(ServiceConfigFiles.Service service)
         throws IOException {
       assertEquals(this.service, service);
-      order.add("NSS");
-      failure("NSS");
+      order.add(FIXTURE_NSS_7B2D62B0);
+      failure(FIXTURE_NSS_7B2D62B0);
       return new FixedServiceIdentity.Value(200, 201, List.of(200L, 201L, 202L));
     }
 
     public String releaseHash() throws IOException {
-      order.add("manifest");
-      failure("manifest");
+      order.add(FIXTURE_MANIFEST_6AF63D73);
+      failure(FIXTURE_MANIFEST_6AF63D73);
       return release;
     }
 
@@ -190,7 +203,7 @@ final class ServiceStartupAdmissionTest {
                 factories++;
                 order.add("factory");
                 ready.release();
-                order.add("business-cleanup");
+                order.add(FIXTURE_BUSINESS_CLEANUP_49F049C6);
               });
     }
   }
@@ -256,16 +269,16 @@ final class ServiceStartupAdmissionTest {
     f.run();
     assertEquals(
         List.of(
-            "root2fd",
-            "proofClosed",
-            "capture",
-            "NSS",
-            "manifest",
-            "capture",
+            FIXTURE_ROOT2FD_1240EBDA,
+            FIXTURE_PROOFCLOSED_15789758,
+            FIXTURE_CAPTURE_47EE4B87,
+            FIXTURE_NSS_7B2D62B0,
+            FIXTURE_MANIFEST_6AF63D73,
+            FIXTURE_CAPTURE_47EE4B87,
             "factory",
             "ready-release",
-            "business-cleanup",
-            "A-close"),
+            FIXTURE_BUSINESS_CLEANUP_49F049C6,
+            FIXTURE_A_CLOSE_B364A3FB),
         f.order);
     assertEquals(1, f.factories);
     assertEquals(1, f.releases);
@@ -276,7 +289,7 @@ final class ServiceStartupAdmissionTest {
         .subject()
         .execute(
             () -> {
-              configured.order.add("config");
+              configured.order.add(FIXTURE_CONFIG_48882AB4);
               return new ServiceStartupAdmission.Configuration<>(snapshot, configured.config);
             },
             (value, ready) -> {
@@ -286,15 +299,15 @@ final class ServiceStartupAdmissionTest {
             });
     assertEquals(
         List.of(
-            "root2fd",
-            "proofClosed",
-            "config",
-            "capture",
-            "NSS",
-            "manifest",
-            "capture",
+            FIXTURE_ROOT2FD_1240EBDA,
+            FIXTURE_PROOFCLOSED_15789758,
+            FIXTURE_CONFIG_48882AB4,
+            FIXTURE_CAPTURE_47EE4B87,
+            FIXTURE_NSS_7B2D62B0,
+            FIXTURE_MANIFEST_6AF63D73,
+            FIXTURE_CAPTURE_47EE4B87,
             "ready-release",
-            "A-close"),
+            FIXTURE_A_CLOSE_B364A3FB),
         configured.order);
     var web = new Fixture();
     web.service = ServiceConfigFiles.Service.WEB;
@@ -319,11 +332,11 @@ final class ServiceStartupAdmissionTest {
     for (var env :
         List.of(
             Map.<String, String>of(),
-            Map.of("SCHUBERT_NK_STARTUP_ADMISSION_FD", "0"),
+            Map.of(FIXTURE_SCHUBERT_NK_STARTUP_ADMISSION_FD_7B7DD578, "0"),
             Map.of(
-                "SCHUBERT_NK_STARTUP_ADMISSION_FD",
+                FIXTURE_SCHUBERT_NK_STARTUP_ADMISSION_FD_7B7DD578,
                 "128",
-                "SCHUBERT_NK_STARTUP_PROOF_FD",
+                FIXTURE_SCHUBERT_NK_STARTUP_PROOF_FD_1B41DB68,
                 "128"))) {
       var f = new Fixture();
       f.env = env;
@@ -333,7 +346,7 @@ final class ServiceStartupAdmissionTest {
     var f = new Fixture();
     f.gateFails = true;
     denied(f);
-    assertEquals(List.of("root2fd", "A-close"), f.order);
+    assertEquals(List.of(FIXTURE_ROOT2FD_1240EBDA, FIXTURE_A_CLOSE_B364A3FB), f.order);
   }
 
   @Test
@@ -395,13 +408,19 @@ final class ServiceStartupAdmissionTest {
                 .subject()
                 .execute(
                     () -> {
-                      configFailure.order.add("config");
+                      configFailure.order.add(FIXTURE_CONFIG_48882AB4);
                       throw new IOException("PRIVATE");
                     },
                     (value, ready) -> {
                       throw new AssertionError("factory forbidden");
                     }));
-    assertEquals(List.of("root2fd", "proofClosed", "config", "A-close"), configFailure.order);
+    assertEquals(
+        List.of(
+            FIXTURE_ROOT2FD_1240EBDA,
+            FIXTURE_PROOFCLOSED_15789758,
+            FIXTURE_CONFIG_48882AB4,
+            FIXTURE_A_CLOSE_B364A3FB),
+        configFailure.order);
     var nullConfig = new Fixture();
     assertThrows(
         NullPointerException.class,
@@ -428,7 +447,8 @@ final class ServiceStartupAdmissionTest {
                     (value, ready) -> {
                       throw new AssertionError();
                     }));
-    for (String step : List.of("capture", "NSS", "manifest")) {
+    for (String step :
+        List.of(FIXTURE_CAPTURE_47EE4B87, FIXTURE_NSS_7B2D62B0, FIXTURE_MANIFEST_6AF63D73)) {
       var f = new Fixture();
       f.ioFault = step;
       denied(f);
@@ -451,19 +471,19 @@ final class ServiceStartupAdmissionTest {
             f.subject()
                 .execute(
                     ready -> {
-                      f.order.add("business-cleanup");
+                      f.order.add(FIXTURE_BUSINESS_CLEANUP_49F049C6);
                       throw new IOException("business failure");
                     }));
     assertEquals(
         List.of(
-            "root2fd",
-            "proofClosed",
-            "capture",
-            "NSS",
-            "manifest",
-            "capture",
-            "business-cleanup",
-            "A-close"),
+            FIXTURE_ROOT2FD_1240EBDA,
+            FIXTURE_PROOFCLOSED_15789758,
+            FIXTURE_CAPTURE_47EE4B87,
+            FIXTURE_NSS_7B2D62B0,
+            FIXTURE_MANIFEST_6AF63D73,
+            FIXTURE_CAPTURE_47EE4B87,
+            FIXTURE_BUSINESS_CLEANUP_49F049C6,
+            FIXTURE_A_CLOSE_B364A3FB),
         f.order);
     assertEquals(0, f.releases);
     var close = new Fixture();
@@ -506,8 +526,9 @@ final class ServiceStartupAdmissionTest {
       assertThrows(
           IllegalArgumentException.class,
           () -> new ServiceStartupAdmission(f.service, ENV, hash, f, f));
-    assertTrue(ChildStartupContext.isDescriptorKey("SCHUBERT_NK_STARTUP_ADMISSION_FD"));
-    assertTrue(ChildStartupContext.isDescriptorKey("SCHUBERT_NK_STARTUP_PROOF_FD"));
+    assertTrue(
+        ChildStartupContext.isDescriptorKey(FIXTURE_SCHUBERT_NK_STARTUP_ADMISSION_FD_7B7DD578));
+    assertTrue(ChildStartupContext.isDescriptorKey(FIXTURE_SCHUBERT_NK_STARTUP_PROOF_FD_1B41DB68));
     for (String alias :
         List.of(
             "schubert_nk_startup_proof_fd", "SCHUBERT_NK_STARTUP_TOKEN", "SCHUBERT_NK_CONFIG_DIR"))
@@ -564,9 +585,9 @@ final class ServiceStartupAdmissionTest {
             ServiceStartupAdmission.create(
                     ServiceConfigFiles.Service.API,
                     Map.of(
-                        "SCHUBERT_NK_STARTUP_ADMISSION_FD",
+                        FIXTURE_SCHUBERT_NK_STARTUP_ADMISSION_FD_7B7DD578,
                         "65534",
-                        "SCHUBERT_NK_STARTUP_PROOF_FD",
+                        FIXTURE_SCHUBERT_NK_STARTUP_PROOF_FD_1B41DB68,
                         "65535",
                         "INVOCATION_ID",
                         "11111111111111111111111111111111"),

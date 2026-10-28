@@ -29,6 +29,7 @@ import org.junit.jupiter.api.Test;
 
 /** NK-MSG-001/NK-ASY-001; MQ003008010/UI213231/SS312321342354/SSC319/BUG1565/YKT1322. */
 final class ConfirmedRollbackCallbackTest {
+  private static final String FIXTURE_UNEXPECTED_PROCESSOR_F5F5DD90 = "unexpected processor";
   private static final Clock CLOCK =
       Clock.fixed(Instant.parse("2026-10-20T00:00:00Z"), ZoneOffset.UTC);
 
@@ -351,7 +352,7 @@ final class ConfirmedRollbackCallbackTest {
         var listener =
             new SyncRequestListener(
                 ignored -> {
-                  throw new AssertionError("unexpected processor");
+                  throw new AssertionError(FIXTURE_UNEXPECTED_PROCESSOR_F5F5DD90);
                 },
                 CLOCK);
         if (legacy) listener.onMessage(context, message);
@@ -361,7 +362,7 @@ final class ConfirmedRollbackCallbackTest {
         var listener =
             new QuestionWorkListener(
                 ignored -> {
-                  throw new AssertionError("unexpected processor");
+                  throw new AssertionError(FIXTURE_UNEXPECTED_PROCESSOR_F5F5DD90);
                 },
                 CLOCK);
         if (legacy) listener.onMessage(context, message);
@@ -371,7 +372,7 @@ final class ConfirmedRollbackCallbackTest {
         var listener =
             new WebLogListener(
                 ignored -> {
-                  throw new AssertionError("unexpected processor");
+                  throw new AssertionError(FIXTURE_UNEXPECTED_PROCESSOR_F5F5DD90);
                 },
                 CLOCK);
         if (legacy) listener.onMessage(context, message);
@@ -400,7 +401,7 @@ final class ConfirmedRollbackCallbackTest {
                 new SyncRequestListener(
                     ignored -> {
                       processed.incrementAndGet();
-                      throw new AssertionError("unexpected processor");
+                      throw new AssertionError(FIXTURE_UNEXPECTED_PROCESSOR_F5F5DD90);
                     },
                     CLOCK),
                 committed,
@@ -415,7 +416,7 @@ final class ConfirmedRollbackCallbackTest {
                 new QuestionWorkListener(
                     ignored -> {
                       processed.incrementAndGet();
-                      throw new AssertionError("unexpected processor");
+                      throw new AssertionError(FIXTURE_UNEXPECTED_PROCESSOR_F5F5DD90);
                     },
                     CLOCK),
                 committed,
@@ -430,7 +431,7 @@ final class ConfirmedRollbackCallbackTest {
                 new WebLogListener(
                     ignored -> {
                       processed.incrementAndGet();
-                      throw new AssertionError("unexpected processor");
+                      throw new AssertionError(FIXTURE_UNEXPECTED_PROCESSOR_F5F5DD90);
                     },
                     CLOCK),
                 committed,

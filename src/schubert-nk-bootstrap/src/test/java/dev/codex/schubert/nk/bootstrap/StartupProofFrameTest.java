@@ -18,6 +18,7 @@ import org.junit.jupiter.api.Test;
 
 /** PT-OPS-PROOF-001..008, literal public vector independent of schema/production encoder. */
 final class StartupProofFrameTest {
+  private static final String FIXTURE_SERVICE_3E9B10A4 = "service";
   private static final String GOLDEN =
       """
       NKSTART1
@@ -95,7 +96,7 @@ final class StartupProofFrameTest {
     assertThrows(NullPointerException.class, () -> StartupProofFrame.parse(null));
     assertThrows(NullPointerException.class, () -> StartupProofFrame.fromFields(null));
     var nullValue = fields();
-    nullValue.put("service", null);
+    nullValue.put(FIXTURE_SERVICE_3E9B10A4, null);
     assertThrows(NullPointerException.class, () -> StartupProofFrame.fromFields(nullValue));
     var nullKey = fields();
     nullKey.put(null, "API");
@@ -187,9 +188,12 @@ final class StartupProofFrameTest {
 
   @Test
   void proof006ServiceBootEpochInvocationAndDigestDomains() {
-    assertEquals("WEB", StartupProofFrame.fromFields(with("service", "WEB")).value("service"));
+    assertEquals(
+        "WEB",
+        StartupProofFrame.fromFields(with(FIXTURE_SERVICE_3E9B10A4, "WEB"))
+            .value(FIXTURE_SERVICE_3E9B10A4));
     for (String service : List.of("web", "ROOT", "BATCH", " API", "API\n", "API=WEB"))
-      invalid(() -> StartupProofFrame.fromFields(with("service", service)));
+      invalid(() -> StartupProofFrame.fromFields(with(FIXTURE_SERVICE_3E9B10A4, service)));
     for (String key : List.of("boot_id", "permit_epoch"))
       for (String bad :
           List.of(
@@ -220,7 +224,7 @@ final class StartupProofFrameTest {
   void proof007ImmutableInputSnapshotAndByteOwnership() {
     var fields = fields();
     var frame = StartupProofFrame.fromFields(fields);
-    fields.put("service", "WEB");
+    fields.put(FIXTURE_SERVICE_3E9B10A4, "WEB");
     fields.clear();
     assertArrayEquals(bytes(GOLDEN), frame.encode());
     assertThrows(UnsupportedOperationException.class, () -> frame.fields().put("pid", "3"));

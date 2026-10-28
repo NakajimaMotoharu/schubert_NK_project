@@ -24,31 +24,52 @@ import org.junit.jupiter.api.Timeout;
 /** NK-AUT-001/NK-MSG-002; SS312/324/354; SSC329/BUG1592; PT-TX-GRAPH329001..008. */
 @Timeout(value = 5, threadMode = Timeout.ThreadMode.SEPARATE_THREAD)
 final class JdbcTransactionFatal329Test {
+  private static final String FIXTURE_PUBLIC_CLOSE_7F17170B = "PUBLIC close";
+  private static final String FIXTURE_ACQUIRE_1585EBC6 = "acquire";
+  private static final String FIXTURE_AUTO_FALSE_13D00E2B = "auto:false";
+  private static final String FIXTURE_HANDLE_A8507210 = "handle";
+  private static final String FIXTURE_ROLLBACK_3770B198 = "rollback";
+  private static final String FIXTURE_CLOSE_97959247 = "close";
+  private static final String FIXTURE_COMMIT_5EA9C586 = "commit";
   private static final Instant NOW = Instant.parse("2026-10-21T00:00:00Z");
 
   @Test
   void tx329001SqlPrimaryAndCloseFatalRetainIdentityAfterRollback() {
     var fixture = new Fixture();
-    var fatal = new AssertionError("PUBLIC close");
+    var fatal = new AssertionError(FIXTURE_PUBLIC_CLOSE_7F17170B);
     fixture.closeFailure = fatal;
     assertSame(
         fatal,
         assertThrows(
             AssertionError.class, () -> fixture.process(new SQLException("PUBLIC primary"))));
-    assertEquals(List.of("acquire", "auto:false", "handle", "rollback", "close"), fixture.events);
+    assertEquals(
+        List.of(
+            FIXTURE_ACQUIRE_1585EBC6,
+            FIXTURE_AUTO_FALSE_13D00E2B,
+            FIXTURE_HANDLE_A8507210,
+            FIXTURE_ROLLBACK_3770B198,
+            FIXTURE_CLOSE_97959247),
+        fixture.events);
   }
 
   @Test
   void tx329002ProtocolPrimaryAndCloseFatalCannotBecomeTemporary() {
     var fixture = new Fixture();
-    var fatal = new AssertionError("PUBLIC close");
+    var fatal = new AssertionError(FIXTURE_PUBLIC_CLOSE_7F17170B);
     fixture.closeFailure = fatal;
     assertSame(
         fatal,
         assertThrows(
             AssertionError.class,
             () -> fixture.process(new PermanentProtocolException("PUBLIC primary"))));
-    assertEquals(List.of("acquire", "auto:false", "handle", "rollback", "close"), fixture.events);
+    assertEquals(
+        List.of(
+            FIXTURE_ACQUIRE_1585EBC6,
+            FIXTURE_AUTO_FALSE_13D00E2B,
+            FIXTURE_HANDLE_A8507210,
+            FIXTURE_ROLLBACK_3770B198,
+            FIXTURE_CLOSE_97959247),
+        fixture.events);
   }
 
   @Test
@@ -58,7 +79,14 @@ final class JdbcTransactionFatal329Test {
     fixture.rollbackFailure = new IllegalStateException("PUBLIC rollback");
     fixture.closeFailure = fatal;
     assertSame(fatal, assertThrows(AssertionError.class, () -> fixture.process(fatal)));
-    assertEquals(List.of("acquire", "auto:false", "handle", "rollback", "close"), fixture.events);
+    assertEquals(
+        List.of(
+            FIXTURE_ACQUIRE_1585EBC6,
+            FIXTURE_AUTO_FALSE_13D00E2B,
+            FIXTURE_HANDLE_A8507210,
+            FIXTURE_ROLLBACK_3770B198,
+            FIXTURE_CLOSE_97959247),
+        fixture.events);
   }
 
   @Test
@@ -67,10 +95,17 @@ final class JdbcTransactionFatal329Test {
     var fatal = new AssertionError("PUBLIC commit");
     fixture.commitFailure = fatal;
     fixture.rollbackFailure = new AssertionError("PUBLIC rollback");
-    fixture.closeFailure = new AssertionError("PUBLIC close");
+    fixture.closeFailure = new AssertionError(FIXTURE_PUBLIC_CLOSE_7F17170B);
     assertSame(fatal, assertThrows(AssertionError.class, () -> fixture.process(null)));
     assertEquals(
-        List.of("acquire", "auto:false", "handle", "commit", "rollback", "close"), fixture.events);
+        List.of(
+            FIXTURE_ACQUIRE_1585EBC6,
+            FIXTURE_AUTO_FALSE_13D00E2B,
+            FIXTURE_HANDLE_A8507210,
+            FIXTURE_COMMIT_5EA9C586,
+            FIXTURE_ROLLBACK_3770B198,
+            FIXTURE_CLOSE_97959247),
+        fixture.events);
   }
 
   @Test
@@ -85,14 +120,28 @@ final class JdbcTransactionFatal329Test {
     assertEquals("request transaction is unavailable", actual.getMessage());
     assertNull(actual.getCause());
     assertEquals(0, actual.getSuppressed().length);
-    assertEquals(List.of("acquire", "auto:false", "handle", "rollback", "close"), fixture.events);
+    assertEquals(
+        List.of(
+            FIXTURE_ACQUIRE_1585EBC6,
+            FIXTURE_AUTO_FALSE_13D00E2B,
+            FIXTURE_HANDLE_A8507210,
+            FIXTURE_ROLLBACK_3770B198,
+            FIXTURE_CLOSE_97959247),
+        fixture.events);
   }
 
   @Test
   void tx329006NormalSuccessCommitsAndClosesBeforeReturningLiteralBytes() {
     var fixture = new Fixture();
     assertArrayEquals(new byte[] {4, 2}, fixture.process(null));
-    assertEquals(List.of("acquire", "auto:false", "handle", "commit", "close"), fixture.events);
+    assertEquals(
+        List.of(
+            FIXTURE_ACQUIRE_1585EBC6,
+            FIXTURE_AUTO_FALSE_13D00E2B,
+            FIXTURE_HANDLE_A8507210,
+            FIXTURE_COMMIT_5EA9C586,
+            FIXTURE_CLOSE_97959247),
+        fixture.events);
   }
 
   @Test
@@ -102,18 +151,32 @@ final class JdbcTransactionFatal329Test {
     var root = new SQLException("PUBLIC first");
     root.setNextException(new SQLException("PUBLIC next", fatal));
     assertSame(fatal, assertThrows(AssertionError.class, () -> fixture.process(root)));
-    assertEquals(List.of("acquire", "auto:false", "handle", "rollback", "close"), fixture.events);
+    assertEquals(
+        List.of(
+            FIXTURE_ACQUIRE_1585EBC6,
+            FIXTURE_AUTO_FALSE_13D00E2B,
+            FIXTURE_HANDLE_A8507210,
+            FIXTURE_ROLLBACK_3770B198,
+            FIXTURE_CLOSE_97959247),
+        fixture.events);
   }
 
   @Test
   void tx329008PostCommitCloseFailureIsNotAReplyOrAnInventedRollback() {
     var fixture = new Fixture();
-    fixture.closeFailure = new SQLException("PUBLIC close");
+    fixture.closeFailure = new SQLException(FIXTURE_PUBLIC_CLOSE_7F17170B);
     var actual = assertThrows(TemporaryInfrastructureException.class, () -> fixture.process(null));
     assertEquals("request transaction is unavailable", actual.getMessage());
     assertNull(actual.getCause());
     assertEquals(0, actual.getSuppressed().length);
-    assertEquals(List.of("acquire", "auto:false", "handle", "commit", "close"), fixture.events);
+    assertEquals(
+        List.of(
+            FIXTURE_ACQUIRE_1585EBC6,
+            FIXTURE_AUTO_FALSE_13D00E2B,
+            FIXTURE_HANDLE_A8507210,
+            FIXTURE_COMMIT_5EA9C586,
+            FIXTURE_CLOSE_97959247),
+        fixture.events);
   }
 
   private static final class Fixture {
@@ -132,16 +195,16 @@ final class JdbcTransactionFatal329Test {
                   (proxy, method, args) -> {
                     switch (method.getName()) {
                       case "setAutoCommit" -> events.add("auto:" + args[0]);
-                      case "commit" -> {
-                        events.add("commit");
+                      case FIXTURE_COMMIT_5EA9C586 -> {
+                        events.add(FIXTURE_COMMIT_5EA9C586);
                         throwIfPresent(commitFailure);
                       }
-                      case "rollback" -> {
-                        events.add("rollback");
+                      case FIXTURE_ROLLBACK_3770B198 -> {
+                        events.add(FIXTURE_ROLLBACK_3770B198);
                         throwIfPresent(rollbackFailure);
                       }
-                      case "close" -> {
-                        events.add("close");
+                      case FIXTURE_CLOSE_97959247 -> {
+                        events.add(FIXTURE_CLOSE_97959247);
                         throwIfPresent(closeFailure);
                       }
                       default ->
@@ -159,13 +222,13 @@ final class JdbcTransactionFatal329Test {
                     if (!method.getName().equals("getConnection")) {
                       throw new UnsupportedOperationException("unexpected fixture source call");
                     }
-                    events.add("acquire");
+                    events.add(FIXTURE_ACQUIRE_1585EBC6);
                     return connection;
                   });
       return new JdbcSyncRequestProcessor(
               dataSource,
               (actualConnection, actualRequest, instant) -> {
-                events.add("handle");
+                events.add(FIXTURE_HANDLE_A8507210);
                 assertSame(connection, actualConnection);
                 assertSame(request, actualRequest);
                 assertEquals(NOW, instant);

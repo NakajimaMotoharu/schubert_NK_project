@@ -22,6 +22,20 @@ import org.junit.jupiter.api.Test;
 
 /** SSC134/ISSCOMP001..003: hand-written 14-column literal, never production expected. */
 final class BackupTerminalObservationTest {
+  private static final String FIXTURE_COMMAND_FAILURE_38148BF2 = "COMMAND_FAILURE";
+  private static final String FIXTURE_BATCH_COMMAND_FAILED_7D52C711 = "batch command failed";
+  private static final String FIXTURE_ALREADY_SUCCESSFUL_0E316429 = "ALREADY_SUCCESSFUL";
+  private static final String FIXTURE_STEP_ALREADY_SUCCESSFUL_FOR_BUSINESS_DAT_B0F7DC85 =
+      "step already successful for business date";
+  private static final String FIXTURE_ENDED_AT_E151E393 = "ended_at";
+  private static final String FIXTURE_STATUS_CFC31BCC = "status";
+  private static final String FIXTURE_TARGET_COUNT_5B6567D4 = "target_count";
+  private static final String FIXTURE_SUCCESS_COUNT_716E5185 = "success_count";
+  private static final String FIXTURE_FAILURE_COUNT_C7E67F21 = "failure_count";
+  private static final String FIXTURE_BYTE_COUNT_6D76E237 = "byte_count";
+  private static final String FIXTURE_ERROR_CODE_B886CCEF = "error_code";
+  private static final String FIXTURE_ERROR_SUMMARY_3F58BF23 = "error_summary";
+
   @Test
   void isscomp003PairInvariantsAndOriginalReferencesCannotAliasOrDrift() {
     var success =
@@ -98,7 +112,7 @@ final class BackupTerminalObservationTest {
         IllegalArgumentException.class,
         () ->
             new BackupStepRepository.Terminal(
-                DB, END, success, Optional.of("COMMAND_FAILURE"), Optional.empty()));
+                DB, END, success, Optional.of(FIXTURE_COMMAND_FAILURE_38148BF2), Optional.empty()));
     assertThrows(
         IllegalArgumentException.class,
         () ->
@@ -143,8 +157,8 @@ final class BackupTerminalObservationTest {
             config,
             END,
             failed,
-            Optional.of("COMMAND_FAILURE"),
-            Optional.of("batch command failed"));
+            Optional.of(FIXTURE_COMMAND_FAILURE_38148BF2),
+            Optional.of(FIXTURE_BATCH_COMMAND_FAILED_7D52C711));
     assertThrows(
         IllegalArgumentException.class,
         () -> new MorningDatabaseSession.BackupObservation(List.of(d, failure), List.of()));
@@ -157,15 +171,15 @@ final class BackupTerminalObservationTest {
             new BatchStepAttempt(11, RUN, BatchStep.BACKUP_DB, 3, currentStart, true),
             currentStart,
             skipped,
-            Optional.of("ALREADY_SUCCESSFUL"),
-            Optional.of("step already successful for business date"));
+            Optional.of(FIXTURE_ALREADY_SUCCESSFUL_0E316429),
+            Optional.of(FIXTURE_STEP_ALREADY_SUCCESSFUL_FOR_BUSINESS_DAT_B0F7DC85));
     var sc =
         new BackupStepRepository.Terminal(
             new BatchStepAttempt(12, RUN, BatchStep.BACKUP_CONFIG, 3, currentStart, true),
             currentStart,
             skipped,
-            Optional.of("ALREADY_SUCCESSFUL"),
-            Optional.of("step already successful for business date"));
+            Optional.of(FIXTURE_ALREADY_SUCCESSFUL_0E316429),
+            Optional.of(FIXTURE_STEP_ALREADY_SUCCESSFUL_FOR_BUSINESS_DAT_B0F7DC85));
     assertEquals(
         List.of(d, c),
         new MorningDatabaseSession.BackupObservation(List.of(sd, sc), List.of(d, c)).prior());
@@ -196,7 +210,11 @@ final class BackupTerminalObservationTest {
         () -> new MorningDatabaseSession.BackupObservation(List.of(sd, sc), List.of(late, c)));
     var priorFailure =
         new BackupStepRepository.Terminal(
-            DB, END, failed, Optional.of("COMMAND_FAILURE"), Optional.of("batch command failed"));
+            DB,
+            END,
+            failed,
+            Optional.of(FIXTURE_COMMAND_FAILURE_38148BF2),
+            Optional.of(FIXTURE_BATCH_COMMAND_FAILED_7D52C711));
     assertThrows(
         IllegalArgumentException.class,
         () ->
@@ -245,14 +263,14 @@ final class BackupTerminalObservationTest {
     m.put("step", "BACKUP_DB");
     m.put("attempt", 2);
     m.put("started_at", START.atOffset(ZoneOffset.UTC));
-    m.put("ended_at", END.atOffset(ZoneOffset.UTC));
-    m.put("status", "SUCCESS");
-    m.put("target_count", 1L);
-    m.put("success_count", 1L);
-    m.put("failure_count", 0L);
-    m.put("byte_count", 26L);
-    m.put("error_code", null);
-    m.put("error_summary", null);
+    m.put(FIXTURE_ENDED_AT_E151E393, END.atOffset(ZoneOffset.UTC));
+    m.put(FIXTURE_STATUS_CFC31BCC, "SUCCESS");
+    m.put(FIXTURE_TARGET_COUNT_5B6567D4, 1L);
+    m.put(FIXTURE_SUCCESS_COUNT_716E5185, 1L);
+    m.put(FIXTURE_FAILURE_COUNT_C7E67F21, 0L);
+    m.put(FIXTURE_BYTE_COUNT_6D76E237, 26L);
+    m.put(FIXTURE_ERROR_CODE_B886CCEF, null);
+    m.put(FIXTURE_ERROR_SUMMARY_3F58BF23, null);
     return m;
   }
 
@@ -279,23 +297,28 @@ final class BackupTerminalObservationTest {
     assertEquals(Optional.empty(), actual.errorSummary());
     assertFalse(actual.toString().contains(RUN.id().toString()));
     var failed = literal();
-    failed.put("status", "FAILED");
-    failed.put("success_count", 0L);
-    failed.put("failure_count", 1L);
-    failed.put("byte_count", 0L);
-    failed.put("error_code", "COMMAND_FAILURE");
-    failed.put("error_summary", "batch command failed");
+    failed.put(FIXTURE_STATUS_CFC31BCC, "FAILED");
+    failed.put(FIXTURE_SUCCESS_COUNT_716E5185, 0L);
+    failed.put(FIXTURE_FAILURE_COUNT_C7E67F21, 1L);
+    failed.put(FIXTURE_BYTE_COUNT_6D76E237, 0L);
+    failed.put(FIXTURE_ERROR_CODE_B886CCEF, FIXTURE_COMMAND_FAILURE_38148BF2);
+    failed.put(FIXTURE_ERROR_SUMMARY_3F58BF23, FIXTURE_BATCH_COMMAND_FAILED_7D52C711);
     var f = BackupStepRepository.readTerminal(row(failed), DB, END);
-    assertEquals("COMMAND_FAILURE", f.errorCode().orElseThrow());
-    assertEquals("batch command failed", f.errorSummary().orElseThrow());
+    assertEquals(FIXTURE_COMMAND_FAILURE_38148BF2, f.errorCode().orElseThrow());
+    assertEquals(FIXTURE_BATCH_COMMAND_FAILED_7D52C711, f.errorSummary().orElseThrow());
     assertEquals(1, f.result().failure());
     var skipped = literal();
-    skipped.put("status", "SKIPPED");
-    skipped.put("ended_at", START.atOffset(ZoneOffset.UTC));
-    for (String key : List.of("target_count", "success_count", "failure_count", "byte_count"))
-      skipped.put(key, 0L);
-    skipped.put("error_code", "ALREADY_SUCCESSFUL");
-    skipped.put("error_summary", "step already successful for business date");
+    skipped.put(FIXTURE_STATUS_CFC31BCC, "SKIPPED");
+    skipped.put(FIXTURE_ENDED_AT_E151E393, START.atOffset(ZoneOffset.UTC));
+    for (String key :
+        List.of(
+            FIXTURE_TARGET_COUNT_5B6567D4,
+            FIXTURE_SUCCESS_COUNT_716E5185,
+            FIXTURE_FAILURE_COUNT_C7E67F21,
+            FIXTURE_BYTE_COUNT_6D76E237)) skipped.put(key, 0L);
+    skipped.put(FIXTURE_ERROR_CODE_B886CCEF, FIXTURE_ALREADY_SUCCESSFUL_0E316429);
+    skipped.put(
+        FIXTURE_ERROR_SUMMARY_3F58BF23, FIXTURE_STEP_ALREADY_SUCCESSFUL_FOR_BUSINESS_DAT_B0F7DC85);
     var s =
         BackupStepRepository.readTerminal(
             row(skipped), new BatchStepAttempt(1, RUN, BatchStep.BACKUP_DB, 2, START, true), END);
@@ -307,7 +330,8 @@ final class BackupTerminalObservationTest {
   @Test
   void isscomp002MissingOrAlteredColumnAndUnknownJdbcAreNotNormal() throws Exception {
     for (String key : literal().keySet()) {
-      if (key.equals("error_code") || key.equals("error_summary")) continue;
+      if (key.equals(FIXTURE_ERROR_CODE_B886CCEF) || key.equals(FIXTURE_ERROR_SUMMARY_3F58BF23))
+        continue;
       var input = literal();
       input.put(key, null);
       assertThrows(
@@ -321,14 +345,14 @@ final class BackupTerminalObservationTest {
             Map.entry("step", "BACKUP_CONFIG"),
             Map.entry("attempt", 3),
             Map.entry("started_at", START.plusSeconds(1).atOffset(ZoneOffset.UTC)),
-            Map.entry("ended_at", END.plusSeconds(1).atOffset(ZoneOffset.UTC)),
-            Map.entry("status", "RUNNING"),
-            Map.entry("target_count", -1L),
-            Map.entry("success_count", -1L),
-            Map.entry("failure_count", 1L),
-            Map.entry("byte_count", -1L),
-            Map.entry("error_code", "UNKNOWN"),
-            Map.entry("error_summary", "altered"));
+            Map.entry(FIXTURE_ENDED_AT_E151E393, END.plusSeconds(1).atOffset(ZoneOffset.UTC)),
+            Map.entry(FIXTURE_STATUS_CFC31BCC, "RUNNING"),
+            Map.entry(FIXTURE_TARGET_COUNT_5B6567D4, -1L),
+            Map.entry(FIXTURE_SUCCESS_COUNT_716E5185, -1L),
+            Map.entry(FIXTURE_FAILURE_COUNT_C7E67F21, 1L),
+            Map.entry(FIXTURE_BYTE_COUNT_6D76E237, -1L),
+            Map.entry(FIXTURE_ERROR_CODE_B886CCEF, "UNKNOWN"),
+            Map.entry(FIXTURE_ERROR_SUMMARY_3F58BF23, "altered"));
     for (var entry : changes.entrySet()) {
       var input = literal();
       input.put(entry.getKey(), entry.getValue());
@@ -338,15 +362,20 @@ final class BackupTerminalObservationTest {
           entry.getKey());
     }
     var reverse = literal();
-    reverse.put("ended_at", START.minusNanos(1000).atOffset(ZoneOffset.UTC));
+    reverse.put(FIXTURE_ENDED_AT_E151E393, START.minusNanos(1000).atOffset(ZoneOffset.UTC));
     assertThrows(
         SQLException.class, () -> BackupStepRepository.readTerminal(row(reverse), DB, END));
     var skipped = literal();
-    skipped.put("status", "SKIPPED");
-    skipped.put("error_code", "ALREADY_SUCCESSFUL");
-    skipped.put("error_summary", "step already successful for business date");
-    for (String key : List.of("target_count", "success_count", "failure_count", "byte_count"))
-      skipped.put(key, 0L);
+    skipped.put(FIXTURE_STATUS_CFC31BCC, "SKIPPED");
+    skipped.put(FIXTURE_ERROR_CODE_B886CCEF, FIXTURE_ALREADY_SUCCESSFUL_0E316429);
+    skipped.put(
+        FIXTURE_ERROR_SUMMARY_3F58BF23, FIXTURE_STEP_ALREADY_SUCCESSFUL_FOR_BUSINESS_DAT_B0F7DC85);
+    for (String key :
+        List.of(
+            FIXTURE_TARGET_COUNT_5B6567D4,
+            FIXTURE_SUCCESS_COUNT_716E5185,
+            FIXTURE_FAILURE_COUNT_C7E67F21,
+            FIXTURE_BYTE_COUNT_6D76E237)) skipped.put(key, 0L);
     assertThrows(
         SQLException.class, () -> BackupStepRepository.readTerminal(row(skipped), DB, END));
     var unknown = new IllegalArgumentException("private driver failure");

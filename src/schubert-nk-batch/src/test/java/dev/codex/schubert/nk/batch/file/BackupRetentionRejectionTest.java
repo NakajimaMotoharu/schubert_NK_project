@@ -37,6 +37,7 @@ import org.junit.jupiter.api.io.TempDir;
  * ownership/DB/Backup permission is created by these tests.
  */
 final class BackupRetentionRejectionTest {
+  private static final String FIXTURE_EFFECTIVEUID_EF410629 = "effectiveUid";
   @TempDir Path temporary;
 
   private static BackupManifestReader reader(BackupArtifactFixture fixture) {
@@ -54,7 +55,7 @@ final class BackupRetentionRejectionTest {
     try (var fixture = new BackupArtifactFixture(temporary)) {
       fixture.effective = 1000;
       unavailable(() -> reader(fixture).retentionNames(100));
-      assertEquals(1, fixture.counts.get("effectiveUid"));
+      assertEquals(1, fixture.counts.get(FIXTURE_EFFECTIVEUID_EF410629));
       assertEquals(0, fixture.counts.getOrDefault("openNames", 0));
       assertEquals(0, fixture.counts.getOrDefault("attributes", 0));
       fixture.unchanged();
@@ -67,10 +68,10 @@ final class BackupRetentionRejectionTest {
     try (var fixture = new BackupArtifactFixture(temporary)) {
       fixture.hook =
           (name, count) -> {
-            if (name.equals("effectiveUid") && count == 2) fixture.effective = 1000;
+            if (name.equals(FIXTURE_EFFECTIVEUID_EF410629) && count == 2) fixture.effective = 1000;
           };
       unavailable(() -> reader(fixture).retentionNames(100));
-      assertEquals(2, fixture.counts.get("effectiveUid"));
+      assertEquals(2, fixture.counts.get(FIXTURE_EFFECTIVEUID_EF410629));
       assertEquals(1, fixture.counts.get("openNames"));
       assertEquals(1, fixture.counts.get("closeNames"));
       fixture.unchanged();
@@ -83,7 +84,7 @@ final class BackupRetentionRejectionTest {
     try (var fixture = new BackupArtifactFixture(temporary)) {
       fixture.effective = 1000;
       unavailable(() -> reader(fixture).retentionRoot(100));
-      assertEquals(1, fixture.counts.get("effectiveUid"));
+      assertEquals(1, fixture.counts.get(FIXTURE_EFFECTIVEUID_EF410629));
       assertEquals(0, fixture.counts.getOrDefault("attributes", 0));
       fixture.unchanged();
       fixture.released();
@@ -95,7 +96,7 @@ final class BackupRetentionRejectionTest {
     try (var fixture = new BackupArtifactFixture(temporary)) {
       fixture.effective = 1000;
       unavailable(() -> reader(fixture).retentionDirectory(DIR, 100));
-      assertEquals(1, fixture.counts.get("effectiveUid"));
+      assertEquals(1, fixture.counts.get(FIXTURE_EFFECTIVEUID_EF410629));
       assertEquals(0, fixture.counts.getOrDefault("openEntry", 0));
       fixture.unchanged();
       fixture.released();

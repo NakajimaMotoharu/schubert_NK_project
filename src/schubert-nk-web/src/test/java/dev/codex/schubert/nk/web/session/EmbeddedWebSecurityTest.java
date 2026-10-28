@@ -81,6 +81,11 @@ import org.springframework.web.filter.CharacterEncodingFilter;
  * NK-WEB-001/PT-WEB-109..112; UI222/226/252; SS311/313/314/342/351/352; PG-D-109.
  */
 class EmbeddedWebSecurityTest {
+  private static final String FIXTURE_GET_04F32A7E = "GET";
+  private static final String FIXTURE_FIXTURE_D9E71FCD = "/fixture";
+  private static final String FIXTURE_SET_COOKIE_39067BC9 = "set-cookie";
+  private static final String FIXTURE_POST_E46D3AE9 = "POST";
+  private static final String FIXTURE_LOGIN_F843C044 = "/login";
   private static WebLogDatabaseFixture db;
 
   @BeforeAll
@@ -111,13 +116,13 @@ class EmbeddedWebSecurityTest {
                     .getResources("jakarta/servlet/http/HttpServletRequest.class"))
             .size());
     try (var server = new Server(root)) {
-      var get = server.send("GET", "/fixture", null, null, true);
+      var get = server.send(FIXTURE_GET_04F32A7E, FIXTURE_FIXTURE_D9E71FCD, null, null, true);
       assertEquals(200, get.statusCode());
       assertTrue(get.body().startsWith("TOKEN:"));
       String token = get.body().substring(6);
       assertEquals("02".repeat(32), token);
       assertHeaders(get);
-      String setCookie = get.headers().firstValue("set-cookie").orElseThrow();
+      String setCookie = get.headers().firstValue(FIXTURE_SET_COOKIE_39067BC9).orElseThrow();
       assertTrue(setCookie.startsWith("SCHUBERT_NK_SESSION="));
       assertTrue(setCookie.contains("Path=/"));
       assertTrue(setCookie.contains("Secure"));
@@ -126,11 +131,19 @@ class EmbeddedWebSecurityTest {
       assertFalse(setCookie.contains("Domain="));
       assertFalse(setCookie.contains("JSESSIONID"));
       String cookie = setCookie.split(";", 2)[0];
-      var ok = server.send("POST", "/fixture", cookie, "_csrf=" + token, true);
+      var ok =
+          server.send(
+              FIXTURE_POST_E46D3AE9, FIXTURE_FIXTURE_D9E71FCD, cookie, "_csrf=" + token, true);
       assertEquals(200, ok.statusCode());
       assertEquals("ok", ok.body());
       assertHeaders(ok);
-      var denied = server.send("POST", "/fixture", cookie, "_csrf=" + "ff".repeat(32), true);
+      var denied =
+          server.send(
+              FIXTURE_POST_E46D3AE9,
+              FIXTURE_FIXTURE_D9E71FCD,
+              cookie,
+              "_csrf=" + "ff".repeat(32),
+              true);
       assertEquals(403, denied.statusCode());
       assertEquals("error:403", denied.body());
       assertHeaders(denied);
@@ -147,7 +160,7 @@ class EmbeddedWebSecurityTest {
   @Test
   void web110RealErrorDispatchIsBoundedAndRedacted(@TempDir Path root) throws Exception {
     try (var server = new Server(root)) {
-      var proxy = server.send("GET", "/fixture", null, null, false);
+      var proxy = server.send(FIXTURE_GET_04F32A7E, FIXTURE_FIXTURE_D9E71FCD, null, null, false);
       assertEquals(403, proxy.statusCode());
       // Untrusted transport must not enter session/error application or duplicate security audit.
       assertEquals("", proxy.body());
@@ -156,9 +169,16 @@ class EmbeddedWebSecurityTest {
       assertEquals(1, server.ids.get());
       assertEquals(0, rowCount());
       assertHeaders(proxy);
-      var get = server.send("GET", "/fixture", null, null, true);
-      String cookie = get.headers().firstValue("set-cookie").orElseThrow().split(";", 2)[0];
-      var denied = server.send("POST", "/fixture", cookie, "_csrf=private-invalid-value", true);
+      var get = server.send(FIXTURE_GET_04F32A7E, FIXTURE_FIXTURE_D9E71FCD, null, null, true);
+      String cookie =
+          get.headers().firstValue(FIXTURE_SET_COOKIE_39067BC9).orElseThrow().split(";", 2)[0];
+      var denied =
+          server.send(
+              FIXTURE_POST_E46D3AE9,
+              FIXTURE_FIXTURE_D9E71FCD,
+              cookie,
+              "_csrf=private-invalid-value",
+              true);
       assertEquals(403, denied.statusCode());
       assertEquals("error:403", denied.body());
       assertEquals(1, server.errorCalls.get());
@@ -177,9 +197,10 @@ class EmbeddedWebSecurityTest {
   void web111RealFormParameterMergingRejectsUnknownAndQueryCredentials(@TempDir Path root)
       throws Exception {
     try (var server = new Server(root)) {
-      var get = server.send("GET", "/fixture", null, null, true);
+      var get = server.send(FIXTURE_GET_04F32A7E, FIXTURE_FIXTURE_D9E71FCD, null, null, true);
       String token = get.body().substring(6);
-      String cookie = get.headers().firstValue("set-cookie").orElseThrow().split(";", 2)[0];
+      String cookie =
+          get.headers().firstValue(FIXTURE_SET_COOKIE_39067BC9).orElseThrow().split(";", 2)[0];
       String body = "_csrf=" + token + "&username=reader&password=synthetic-password";
       for (String query :
           List.of(
@@ -188,20 +209,26 @@ class EmbeddedWebSecurityTest {
               "?username=other",
               "?%75sername=other",
               "?password=other")) {
-        var rejected = server.send("POST", "/login" + query, cookie, body, true);
+        var rejected =
+            server.send(FIXTURE_POST_E46D3AE9, FIXTURE_LOGIN_F843C044 + query, cookie, body, true);
         assertEquals(400, rejected.statusCode(), query);
         assertEquals(0, server.converted.get());
         assertFalse(rejected.body().contains("password"));
       }
       for (String suffix :
           List.of("&role=ADMIN", "&username=other", "&Password=other", "&=unknown")) {
-        assertEquals(400, server.send("POST", "/login", cookie, body + suffix, true).statusCode());
+        assertEquals(
+            400,
+            server
+                .send(FIXTURE_POST_E46D3AE9, FIXTURE_LOGIN_F843C044, cookie, body + suffix, true)
+                .statusCode());
         assertEquals(0, server.converted.get());
       }
-      var queryCsrf = server.send("POST", "/login?%5fcsrf=" + token, cookie, body, true);
+      var queryCsrf =
+          server.send(FIXTURE_POST_E46D3AE9, "/login?%5fcsrf=" + token, cookie, body, true);
       assertEquals(403, queryCsrf.statusCode());
       assertEquals(0, server.converted.get());
-      var valid = server.send("POST", "/login", cookie, body, true);
+      var valid = server.send(FIXTURE_POST_E46D3AE9, FIXTURE_LOGIN_F843C044, cookie, body, true);
       assertEquals(204, valid.statusCode());
       assertEquals(1, server.converted.get());
       assertEquals(0, server.context.getManager().getActiveSessions());
@@ -221,16 +248,30 @@ class EmbeddedWebSecurityTest {
       for (int i = 0; i < 100; i++) {
         jobs.add(
             () -> {
-              var get = server.send("GET", "/fixture", null, null, true);
+              var get =
+                  server.send(FIXTURE_GET_04F32A7E, FIXTURE_FIXTURE_D9E71FCD, null, null, true);
               assertEquals(200, get.statusCode());
               String token = get.body().substring(6);
-              String cookie = get.headers().firstValue("set-cookie").orElseThrow().split(";", 2)[0];
+              String cookie =
+                  get.headers()
+                      .firstValue(FIXTURE_SET_COOKIE_39067BC9)
+                      .orElseThrow()
+                      .split(";", 2)[0];
               assertTrue(cookies.add(cookie));
               assertTrue(tokens.add(token));
               assertEquals(
                   200,
-                  server.send("POST", "/fixture", cookie, "_csrf=" + token, true).statusCode());
-              var denied = server.send("POST", "/fixture", cookie, "_csrf=wrong", true);
+                  server
+                      .send(
+                          FIXTURE_POST_E46D3AE9,
+                          FIXTURE_FIXTURE_D9E71FCD,
+                          cookie,
+                          "_csrf=" + token,
+                          true)
+                      .statusCode());
+              var denied =
+                  server.send(
+                      FIXTURE_POST_E46D3AE9, FIXTURE_FIXTURE_D9E71FCD, cookie, "_csrf=wrong", true);
               assertEquals(403, denied.statusCode());
               assertHeaders(denied);
               return null;
@@ -514,7 +555,7 @@ class EmbeddedWebSecurityTest {
                 @Override
                 protected void doPost(HttpServletRequest request, HttpServletResponse response)
                     throws IOException {
-                  if (request.getRequestURI().equals("/login")) {
+                  if (request.getRequestURI().equals(FIXTURE_LOGIN_F843C044)) {
                     try {
                       var auth =
                           (UsernamePasswordAuthenticationToken)
@@ -534,7 +575,7 @@ class EmbeddedWebSecurityTest {
                 }
               })
           .setAsyncSupported(true);
-      context.addServletMapping(menuMvc ? "/login" : "/*", "fixture");
+      context.addServletMapping(menuMvc ? FIXTURE_LOGIN_F843C044 : "/*", "fixture");
       if (errorMvc) context.addServletMapping("/fixture-error", "fixture");
       if (errorMvc) {
         var invalid = new ApiSessionInvalidHandler(adapter, audit);

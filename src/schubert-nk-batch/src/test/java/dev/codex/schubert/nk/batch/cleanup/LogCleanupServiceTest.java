@@ -35,6 +35,13 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** NK-BAT-001; UI251/SS341/SSC-051; PG-D-138; PT-BAT-018..029. */
 final class LogCleanupServiceTest {
+  private static final String FIXTURE_TRUE_18D10C7D = "true";
+  private static final String FIXTURE_CLEANUP_EXECUTEQUERY_B4A62D16 = "cleanup.executeQuery";
+  private static final String FIXTURE_LOCK_RESULTCLOSE_E002B62D = "lock.resultClose";
+  private static final String FIXTURE_LOCK_STATEMENTCLOSE_8E469DBF = "lock.statementClose";
+  private static final String FIXTURE_UNLOCK_RESULTCLOSE_E34474D7 = "unlock.resultClose";
+  private static final String FIXTURE_UNLOCK_STATEMENTCLOSE_AB443FA6 = "unlock.statementClose";
+
   @Test
   void sharedOwnerBoundedTransactionAndActualPostcommitDeadline() throws Exception {
     assertThrows(NullPointerException.class, () -> LogCleanupService.withOwner(null));
@@ -166,17 +173,23 @@ final class LogCleanupServiceTest {
   void sessionLockOwnership() throws Exception {
     try (var parent = batch();
         var other = db.admin()) {
-      assertEquals("true", scalar(parent, "select pg_try_advisory_lock(71419602)::text"));
+      assertEquals(
+          FIXTURE_TRUE_18D10C7D, scalar(parent, "select pg_try_advisory_lock(71419602)::text"));
       assertEquals(0, new LogCleanupService(() -> 0).execute(parent, RUN).exitCode());
       assertEquals("false", scalar(other, "select pg_try_advisory_lock(71419602)::text"));
-      assertEquals("true", scalar(parent, "select pg_advisory_unlock(71419602)::text"));
-      assertEquals("true", scalar(other, "select pg_try_advisory_lock(71419602)::text"));
+      assertEquals(
+          FIXTURE_TRUE_18D10C7D, scalar(parent, "select pg_advisory_unlock(71419602)::text"));
+      assertEquals(
+          FIXTURE_TRUE_18D10C7D, scalar(other, "select pg_try_advisory_lock(71419602)::text"));
       stopped(
           CleanupStopReason.LOCK_BUSY, () -> new LogCleanupService(() -> 0).execute(parent, RUN));
-      assertEquals("true", scalar(other, "select pg_advisory_unlock(71419602)::text"));
+      assertEquals(
+          FIXTURE_TRUE_18D10C7D, scalar(other, "select pg_advisory_unlock(71419602)::text"));
       assertEquals(0, new LogCleanupService(() -> 0).execute(parent, RUN).exitCode());
-      assertEquals("true", scalar(other, "select pg_try_advisory_lock(71419602)::text"));
-      assertEquals("true", scalar(other, "select pg_advisory_unlock(71419602)::text"));
+      assertEquals(
+          FIXTURE_TRUE_18D10C7D, scalar(other, "select pg_try_advisory_lock(71419602)::text"));
+      assertEquals(
+          FIXTURE_TRUE_18D10C7D, scalar(other, "select pg_advisory_unlock(71419602)::text"));
     }
   }
 
@@ -309,7 +322,7 @@ final class LogCleanupServiceTest {
   @Test
   void rollbackAndUncertainCommit() throws Exception {
     logs(0, 1);
-    for (String fault : List.of("cleanup.executeQuery", "commitBefore")) {
+    for (String fault : List.of(FIXTURE_CLEANUP_EXECUTEQUERY_B4A62D16, "commitBefore")) {
       var probe = new ServiceJdbcProbe();
       probe.failAt.put(fault, 1);
       try (var c = batch()) {
@@ -345,26 +358,28 @@ final class LogCleanupServiceTest {
     // BUG-145/YKT-113: a primary LOCK_BUSY must not expose suppressed raw JDBC close errors.
     for (var faults :
         List.of(
-            List.of("lock.resultClose"),
-            List.of("lock.statementClose"),
-            List.of("lock.resultClose", "lock.statementClose"))) {
+            List.of(FIXTURE_LOCK_RESULTCLOSE_E002B62D),
+            List.of(FIXTURE_LOCK_STATEMENTCLOSE_8E469DBF),
+            List.of(FIXTURE_LOCK_RESULTCLOSE_E002B62D, FIXTURE_LOCK_STATEMENTCLOSE_8E469DBF))) {
       var probe = new ServiceJdbcProbe();
       faults.forEach(fault -> probe.failAt.put(fault, 1));
       try (var holder = db.admin();
           var c = batch()) {
-        assertEquals("true", scalar(holder, "select pg_try_advisory_lock(71419602)::text"));
+        assertEquals(
+            FIXTURE_TRUE_18D10C7D, scalar(holder, "select pg_try_advisory_lock(71419602)::text"));
         stopped(
             CleanupStopReason.LOCK_BUSY,
             () -> new LogCleanupService(() -> 0).execute(probe.wrap(c), RUN));
         assertEquals(faults.size(), probe.failures);
-        assertEquals(1, probe.seen.get("lock.resultClose"));
-        assertEquals(1, probe.seen.get("lock.statementClose"));
+        assertEquals(1, probe.seen.get(FIXTURE_LOCK_RESULTCLOSE_E002B62D));
+        assertEquals(1, probe.seen.get(FIXTURE_LOCK_STATEMENTCLOSE_8E469DBF));
         assertEquals(0, probe.commits);
         assertEquals(0, probe.rollbacks);
         assertEquals(0, probe.closes);
-        assertFalse(probe.seen.containsKey("cleanup.executeQuery"));
+        assertFalse(probe.seen.containsKey(FIXTURE_CLEANUP_EXECUTEQUERY_B4A62D16));
         assertTrue(c.getAutoCommit());
-        assertEquals("true", scalar(holder, "select pg_advisory_unlock(71419602)::text"));
+        assertEquals(
+            FIXTURE_TRUE_18D10C7D, scalar(holder, "select pg_advisory_unlock(71419602)::text"));
       }
       assertEquals("0", countLogs());
     }
@@ -380,8 +395,8 @@ final class LogCleanupServiceTest {
           sql(admin, "delete from schubert.batch_runs");
         }
       var probe = new ServiceJdbcProbe();
-      probe.failAt.put("unlock.resultClose", 1);
-      probe.failAt.put("unlock.statementClose", 1);
+      probe.failAt.put(FIXTURE_UNLOCK_RESULTCLOSE_E34474D7, 1);
+      probe.failAt.put(FIXTURE_UNLOCK_STATEMENTCLOSE_AB443FA6, 1);
       if (reason == CleanupStopReason.INTERRUPTED)
         probe.afterCommit = count -> Thread.currentThread().interrupt();
       try (var c = batch()) {
@@ -405,8 +420,8 @@ final class LogCleanupServiceTest {
             "unlock.executeQuery",
             "unlock.next",
             "unlock.getObject",
-            "unlock.resultClose",
-            "unlock.statementClose")) {
+            FIXTURE_UNLOCK_RESULTCLOSE_E34474D7,
+            FIXTURE_UNLOCK_STATEMENTCLOSE_AB443FA6)) {
       var probe = new ServiceJdbcProbe();
       probe.failAt.put(fault, 1);
       try (var c = batch()) {
@@ -543,13 +558,13 @@ final class LogCleanupServiceTest {
             "lock.executeQuery",
             "lock.next",
             "lock.getObject",
-            "lock.resultClose",
-            "lock.statementClose",
+            FIXTURE_LOCK_RESULTCLOSE_E002B62D,
+            FIXTURE_LOCK_STATEMENTCLOSE_8E469DBF,
             "cleanup.prepareStatement",
             "cleanup.setObject",
             "cleanup.setObject#2",
             "cleanup.setInt",
-            "cleanup.executeQuery",
+            FIXTURE_CLEANUP_EXECUTEQUERY_B4A62D16,
             "cleanup.next",
             "cleanup.getObject",
             "cleanup.getString",
@@ -590,7 +605,7 @@ final class LogCleanupServiceTest {
     }
     assertEquals("3|1|2|false", progress());
     var runtime = new ServiceJdbcProbe();
-    runtime.runtimeAt = "cleanup.executeQuery";
+    runtime.runtimeAt = FIXTURE_CLEANUP_EXECUTEQUERY_B4A62D16;
     try (var c = batch()) {
       var error =
           assertThrows(
@@ -638,10 +653,10 @@ final class LogCleanupServiceTest {
   private void resourceCompounds() throws Exception {
     for (var pair :
         List.of(
-            List.of("lock.next", "lock.resultClose"),
-            List.of("lock.executeQuery", "lock.statementClose"),
-            List.of("unlock.next", "unlock.resultClose"),
-            List.of("unlock.executeQuery", "unlock.statementClose"),
+            List.of("lock.next", FIXTURE_LOCK_RESULTCLOSE_E002B62D),
+            List.of("lock.executeQuery", FIXTURE_LOCK_STATEMENTCLOSE_8E469DBF),
+            List.of("unlock.next", FIXTURE_UNLOCK_RESULTCLOSE_E34474D7),
+            List.of("unlock.executeQuery", FIXTURE_UNLOCK_STATEMENTCLOSE_AB443FA6),
             List.of("clock", "unlock.prepareStatement"))) {
       for (int first = 0; first < 6; first++) {
         for (int second = 0; second < 6; second++) resourceCompound(pair, first, second, false);
@@ -704,21 +719,24 @@ final class LogCleanupServiceTest {
       boolean acquireFailure = first >= 0 && body.startsWith("lock.");
       assertEquals(
           first >= 0 && body.equals("lock.executeQuery") ? 0 : 1,
-          probe.seen.getOrDefault("lock.resultClose", 0));
-      assertEquals(1, probe.seen.getOrDefault("lock.statementClose", 0));
+          probe.seen.getOrDefault(FIXTURE_LOCK_RESULTCLOSE_E002B62D, 0));
+      assertEquals(1, probe.seen.getOrDefault(FIXTURE_LOCK_STATEMENTCLOSE_8E469DBF, 0));
       assertEquals(
           acquireFailure || clockBody || (first >= 0 && body.equals("unlock.executeQuery")) ? 0 : 1,
-          probe.seen.getOrDefault("unlock.resultClose", 0));
+          probe.seen.getOrDefault(FIXTURE_UNLOCK_RESULTCLOSE_E34474D7, 0));
       assertEquals(
-          acquireFailure || clockBody ? 0 : 1, probe.seen.getOrDefault("unlock.statementClose", 0));
+          acquireFailure || clockBody ? 0 : 1,
+          probe.seen.getOrDefault(FIXTURE_UNLOCK_STATEMENTCLOSE_AB443FA6, 0));
       assertEquals(0, probe.closes);
       assertTrue(c.getAutoCommit());
       assertFalse(c.isClosed());
     }
     // The failed borrowed connection has now been disposed; no session lock remains.
     try (var observer = db.admin()) {
-      assertEquals("true", scalar(observer, "select pg_try_advisory_lock(71419602)::text"));
-      assertEquals("true", scalar(observer, "select pg_advisory_unlock(71419602)::text"));
+      assertEquals(
+          FIXTURE_TRUE_18D10C7D, scalar(observer, "select pg_try_advisory_lock(71419602)::text"));
+      assertEquals(
+          FIXTURE_TRUE_18D10C7D, scalar(observer, "select pg_advisory_unlock(71419602)::text"));
     }
     assertEquals("0", countLogs());
   }

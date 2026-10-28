@@ -29,6 +29,11 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** PG221/PT-SCR113..116. No deployed DB/broker or credentials are used. */
 final class WebDependencyReadinessTest {
+  private static final String FIXTURE_PRIVATE_DB_PASSWORD_AD3D4CC0 = "private-db-password";
+  private static final String FIXTURE_WEB_ARTEMIS_REPLY_QUEUE_IS_UNAVAILABLE_B15CBB0F =
+      "Web Artemis reply Queue is unavailable";
+  private static final String FIXTURE_PRIVATE_MQ_PASSWORD_36C97947 = "private-mq-password";
+  private static final String FIXTURE_CLOSE_97959247 = "close";
   @TempDir Path root;
 
   @Test
@@ -84,7 +89,7 @@ final class WebDependencyReadinessTest {
         new DataSource[] {
           source(
               () -> {
-                throw new SQLException("private-db-password");
+                throw new SQLException(FIXTURE_PRIVATE_DB_PASSWORD_AD3D4CC0);
               }),
           source(() -> connection(true, true, false, closes)),
           source(() -> connection(true, false, true, closes))
@@ -102,7 +107,7 @@ final class WebDependencyReadinessTest {
     var noContext =
         assertThrows(
             WebStartupException.class, () -> new WebDependencyReadiness(db, () -> null).verify());
-    assertEquals("Web Artemis reply Queue is unavailable", noContext.getMessage());
+    assertEquals(FIXTURE_WEB_ARTEMIS_REPLY_QUEUE_IS_UNAVAILABLE_B15CBB0F, noContext.getMessage());
     var provider =
         assertThrows(
             WebStartupException.class,
@@ -110,7 +115,7 @@ final class WebDependencyReadinessTest {
                 new WebDependencyReadiness(
                         db,
                         () -> {
-                          throw new JMSRuntimeException("private-mq-password");
+                          throw new JMSRuntimeException(FIXTURE_PRIVATE_MQ_PASSWORD_36C97947);
                         })
                     .verify());
     assertNull(provider.getCause());
@@ -120,13 +125,13 @@ final class WebDependencyReadinessTest {
             WebStartupException.class,
             () ->
                 new WebDependencyReadiness(db, () -> context(true, false, brokerCloses)).verify());
-    assertEquals("Web Artemis reply Queue is unavailable", attach.getMessage());
+    assertEquals(FIXTURE_WEB_ARTEMIS_REPLY_QUEUE_IS_UNAVAILABLE_B15CBB0F, attach.getMessage());
     var close =
         assertThrows(
             WebStartupException.class,
             () ->
                 new WebDependencyReadiness(db, () -> context(false, true, brokerCloses)).verify());
-    assertEquals("Web Artemis reply Queue is unavailable", close.getMessage());
+    assertEquals(FIXTURE_WEB_ARTEMIS_REPLY_QUEUE_IS_UNAVAILABLE_B15CBB0F, close.getMessage());
     assertEquals(2, brokerCloses.get());
   }
 
@@ -143,7 +148,7 @@ final class WebDependencyReadinessTest {
                   new WebDependencyReadiness(
                           db, () -> factory.createContext(JMSContext.SESSION_TRANSACTED))
                       .verify());
-      assertEquals("Web Artemis reply Queue is unavailable", failure.getMessage());
+      assertEquals(FIXTURE_WEB_ARTEMIS_REPLY_QUEUE_IS_UNAVAILABLE_B15CBB0F, failure.getMessage());
     }
   }
 
@@ -157,8 +162,8 @@ final class WebDependencyReadinessTest {
             Connection.class,
             (instance, method, args) -> {
               switch (method.getName()) {
-                case "isValid" -> throw new SQLException("private-db-password");
-                case "close" -> {
+                case "isValid" -> throw new SQLException(FIXTURE_PRIVATE_DB_PASSWORD_AD3D4CC0);
+                case FIXTURE_CLOSE_97959247 -> {
                   closes.incrementAndGet();
                   throw fatal;
                 }
@@ -227,8 +232,9 @@ final class WebDependencyReadinessTest {
                               return "nk.sync.reply.web.q";
                             throw new AssertionError("unexpected Queue call " + called.getName());
                           });
-                  case "createConsumer" -> throw new JMSRuntimeException("private-mq-password");
-                  case "close" -> {
+                  case "createConsumer" ->
+                      throw new JMSRuntimeException(FIXTURE_PRIVATE_MQ_PASSWORD_36C97947);
+                  case FIXTURE_CLOSE_97959247 -> {
                     brokerCloses.incrementAndGet();
                     throw fatal;
                   }
@@ -251,7 +257,7 @@ final class WebDependencyReadinessTest {
                     new JMSRuntimeException("synthetic close"),
                     ordinaryCloses));
     var fixed = assertThrows(WebStartupException.class, ordinary::verify);
-    assertEquals("Web Artemis reply Queue is unavailable", fixed.getMessage());
+    assertEquals(FIXTURE_WEB_ARTEMIS_REPLY_QUEUE_IS_UNAVAILABLE_B15CBB0F, fixed.getMessage());
     assertNull(fixed.getCause());
     assertEquals(1, ordinaryCloses.get());
 
@@ -273,7 +279,7 @@ final class WebDependencyReadinessTest {
         (instance, method, args) -> {
           switch (method.getName()) {
             case "isValid" -> throw inspection;
-            case "close" -> {
+            case FIXTURE_CLOSE_97959247 -> {
               closes.incrementAndGet();
               throw closing;
             }
@@ -297,7 +303,7 @@ final class WebDependencyReadinessTest {
                   });
             }
             case "createConsumer" -> throw inspection;
-            case "close" -> {
+            case FIXTURE_CLOSE_97959247 -> {
               closes.incrementAndGet();
               throw closing;
             }
@@ -314,12 +320,12 @@ final class WebDependencyReadinessTest {
             switch (method.getName()) {
               case "isValid" -> {
                 assertEquals(2, args[0]);
-                if (inspectionFails) throw new SQLException("private-db-password");
+                if (inspectionFails) throw new SQLException(FIXTURE_PRIVATE_DB_PASSWORD_AD3D4CC0);
                 yield valid;
               }
-              case "close" -> {
+              case FIXTURE_CLOSE_97959247 -> {
                 closes.incrementAndGet();
-                if (closeFails) throw new SQLException("private-db-password");
+                if (closeFails) throw new SQLException(FIXTURE_PRIVATE_DB_PASSWORD_AD3D4CC0);
                 yield null;
               }
               default -> throw new AssertionError("unexpected JDBC call " + method.getName());
@@ -350,17 +356,18 @@ final class WebDependencyReadinessTest {
                     });
               }
               case "createConsumer" -> {
-                if (attachFails) throw new JMSRuntimeException("private-mq-password");
+                if (attachFails)
+                  throw new JMSRuntimeException(FIXTURE_PRIVATE_MQ_PASSWORD_36C97947);
                 yield proxy(
                     JMSConsumer.class,
                     (consumer, called, parameters) -> {
-                      if (called.getName().equals("close")) return null;
+                      if (called.getName().equals(FIXTURE_CLOSE_97959247)) return null;
                       throw new AssertionError("unexpected consumer call " + called.getName());
                     });
               }
-              case "close" -> {
+              case FIXTURE_CLOSE_97959247 -> {
                 closes.incrementAndGet();
-                if (closeFails) throw new JMSRuntimeException("private-mq-password");
+                if (closeFails) throw new JMSRuntimeException(FIXTURE_PRIVATE_MQ_PASSWORD_36C97947);
                 yield null;
               }
               default -> throw new AssertionError("unexpected JMS call " + method.getName());

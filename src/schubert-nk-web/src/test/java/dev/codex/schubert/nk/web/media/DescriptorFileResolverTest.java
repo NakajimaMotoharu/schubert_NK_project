@@ -27,6 +27,8 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** Seven approved format literals and actual held files; PT-MED-026, SS333. */
 class DescriptorFileResolverTest {
+  private static final String FIXTURE_AUDIO_OGG_96A5CB00 = "audio/ogg";
+  private static final String FIXTURE_MUSIC_D5800D43 = "MUSIC";
   @TempDir Path root;
 
   @Test
@@ -39,17 +41,17 @@ class DescriptorFileResolverTest {
       assertThrows(NullPointerException.class, () -> new DescriptorFileResolver(held, null));
       var resolver = new DescriptorFileResolver(held, identity);
       assertThrows(NullPointerException.class, () -> resolver.read(null, c -> fail("null read")));
-      var audio = descriptor(MediaType.AUDIO, "scenario/a.ogg", "audio/ogg");
+      var audio = descriptor(MediaType.AUDIO, "scenario/a.ogg", FIXTURE_AUDIO_OGG_96A5CB00);
       assertThrows(NullPointerException.class, () -> resolver.read(audio, null));
       for (String[] format :
           List.of(
-              new String[] {"AUDIO", "scenario/a.ogg", "audio/ogg"},
+              new String[] {"AUDIO", "scenario/a.ogg", FIXTURE_AUDIO_OGG_96A5CB00},
               new String[] {"VIDEO", "video/a.mp4", "video/mp4"},
-              new String[] {"MUSIC", "music/a.m4a", "audio/mp4"},
-              new String[] {"MUSIC", "music/a.mp3", "audio/mpeg"},
-              new String[] {"MUSIC", "music/a.ogg", "audio/ogg"},
-              new String[] {"MUSIC", "music/a.wav", "audio/wav"},
-              new String[] {"MUSIC", "music/a.flac", "audio/flac"})) {
+              new String[] {FIXTURE_MUSIC_D5800D43, "music/a.m4a", "audio/mp4"},
+              new String[] {FIXTURE_MUSIC_D5800D43, "music/a.mp3", "audio/mpeg"},
+              new String[] {FIXTURE_MUSIC_D5800D43, "music/a.ogg", FIXTURE_AUDIO_OGG_96A5CB00},
+              new String[] {FIXTURE_MUSIC_D5800D43, "music/a.wav", "audio/wav"},
+              new String[] {FIXTURE_MUSIC_D5800D43, "music/a.flac", "audio/flac"})) {
         Path file = root.resolve(format[1]);
         Files.createDirectories(file.getParent());
         Files.setPosixFilePermissions(
@@ -71,12 +73,15 @@ class DescriptorFileResolverTest {
       reject(
           () ->
               resolver.read(
-                  descriptor(MediaType.AUDIO, "scenario/" + "a".repeat(252) + ".ogg", "audio/ogg"),
+                  descriptor(
+                      MediaType.AUDIO,
+                      "scenario/" + "a".repeat(252) + ".ogg",
+                      FIXTURE_AUDIO_OGG_96A5CB00),
                   c -> fail("long segment")));
       reject(
           () ->
               resolver.read(
-                  descriptor(MediaType.AUDIO, "scenario/missing.ogg", "audio/ogg"),
+                  descriptor(MediaType.AUDIO, "scenario/missing.ogg", FIXTURE_AUDIO_OGG_96A5CB00),
                   c -> fail("missing")));
       reject(
           () ->

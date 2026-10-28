@@ -27,6 +27,7 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** Retained real files, independent Unix permissions and injected failures. PT-MED-045/046. */
 class AssetManifestLoaderTest {
+  private static final String FIXTURE_SIZE_EB1E91E4 = "size";
   @TempDir Path directory;
 
   @Test
@@ -89,7 +90,7 @@ class AssetManifestLoaderTest {
               Long.valueOf(34_524_034))) {
         var io = new FaultIo();
         io.attributeStep = 3;
-        io.attributeFault = "size";
+        io.attributeFault = FIXTURE_SIZE_EB1E91E4;
         io.sizeValue = bad;
         reject(() -> new AssetManifestLoader(fixture.held, fixture.identity, io).load(7));
         assertEquals(0, io.opens);
@@ -170,9 +171,9 @@ class AssetManifestLoaderTest {
           case "group" -> values.put("group", (GroupPrincipal) () -> "not-group");
           case "mode" -> values.put("mode", 0100600);
           case "nlink" -> values.put("nlink", 0);
-          case "size" -> {
-            values.remove("size");
-            if (!sizeValue.equals("missing")) values.put("size", sizeValue);
+          case FIXTURE_SIZE_EB1E91E4 -> {
+            values.remove(FIXTURE_SIZE_EB1E91E4);
+            if (!sizeValue.equals("missing")) values.put(FIXTURE_SIZE_EB1E91E4, sizeValue);
           }
           default -> fail("unknown test fault");
         }

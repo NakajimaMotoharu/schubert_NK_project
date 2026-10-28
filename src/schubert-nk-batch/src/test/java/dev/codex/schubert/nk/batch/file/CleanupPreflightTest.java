@@ -23,6 +23,11 @@ import org.junit.jupiter.api.Test;
 
 /** OPS-009/BAK-001/UI251/SS341/343/SSC104/PG333; CPR001..004 independent order oracle. */
 final class CleanupPreflightTest {
+  private static final String FIXTURE_GATE_4F83D3C8 = "gate";
+  private static final String FIXTURE_REQUEST_8869AD22 = "request";
+  private static final String FIXTURE_ORIGINAL_4D609353 = "original";
+  private static final String FIXTURE_DATABASE_21C67C24 = "database";
+  private static final String FIXTURE_PUBLIC_CANARY_73B3ABA9 = "PUBLIC_CANARY";
   private static final UUID RUN = UUID.fromString("12345678-9abc-def0-8123-456789abcdef");
   private static final UUID ACTIVATION = UUID.fromString("11111111-2222-4333-8444-555555555555");
   private static final Instant CUTOFF = Instant.parse("2026-09-12T15:00:00Z");
@@ -30,7 +35,14 @@ final class CleanupPreflightTest {
   private static final String SHA =
       "bd608252091beeda64978c96a85107bd329c56f4222cb0a21c39b868af45c370";
   private static final List<String> EXPECTED =
-      List.of("gate", "request", "original", "database", "request", "original", "gate");
+      List.of(
+          FIXTURE_GATE_4F83D3C8,
+          FIXTURE_REQUEST_8869AD22,
+          FIXTURE_ORIGINAL_4D609353,
+          FIXTURE_DATABASE_21C67C24,
+          FIXTURE_REQUEST_8869AD22,
+          FIXTURE_ORIGINAL_4D609353,
+          FIXTURE_GATE_4F83D3C8);
 
   private static CleanupWorkerRequest request() {
     return new CleanupWorkerRequest(RUN, ACTIVATION, CUTOFF, SHA);
@@ -65,29 +77,33 @@ final class CleanupPreflightTest {
     CleanupPreflight subject() {
       return new CleanupPreflight(
           () -> {
-            events.add("gate");
+            events.add(FIXTURE_GATE_4F83D3C8);
             gates++;
-            if (fail.equals("gate" + gates)) throw new IOException("PUBLIC_CANARY");
+            if (fail.equals(FIXTURE_GATE_4F83D3C8 + gates))
+              throw new IOException(FIXTURE_PUBLIC_CANARY_73B3ABA9);
           },
           () -> {
-            events.add("request");
+            events.add(FIXTURE_REQUEST_8869AD22);
             requestReads++;
-            if (fail.equals("request" + requestReads)) throw new IOException("PUBLIC_CANARY");
+            if (fail.equals(FIXTURE_REQUEST_8869AD22 + requestReads))
+              throw new IOException(FIXTURE_PUBLIC_CANARY_73B3ABA9);
             return requestReads == 1 ? request() : secondRequest;
           },
           value -> {
-            events.add("original");
+            events.add(FIXTURE_ORIGINAL_4D609353);
             originalReads++;
             assertEquals(request(), value);
-            if (fail.equals("original" + originalReads)) throw new IOException("PUBLIC_CANARY");
+            if (fail.equals(FIXTURE_ORIGINAL_4D609353 + originalReads))
+              throw new IOException(FIXTURE_PUBLIC_CANARY_73B3ABA9);
             return originalReads == 1 ? activation() : secondOriginal;
           },
           (value, observed) -> {
-            events.add("database");
+            events.add(FIXTURE_DATABASE_21C67C24);
             databaseReads++;
             assertEquals(request(), value);
             assertEquals(Instant.parse("2026-09-12T15:00:06.123456Z"), observed);
-            if (fail.equals("database")) throw new IOException("PUBLIC_CANARY");
+            if (fail.equals(FIXTURE_DATABASE_21C67C24))
+              throw new IOException(FIXTURE_PUBLIC_CANARY_73B3ABA9);
             return verified;
           },
           time,
@@ -138,7 +154,14 @@ final class CleanupPreflightTest {
   @Test
   void everyKnownStageFailureIsFixedAndStopsDownstream() { // CPR003
     for (String stage :
-        List.of("gate1", "request1", "original1", "database", "request2", "original2", "gate2")) {
+        List.of(
+            "gate1",
+            "request1",
+            "original1",
+            FIXTURE_DATABASE_21C67C24,
+            "request2",
+            "original2",
+            "gate2")) {
       var c = new Case();
       c.fail = stage;
       denied(c);
@@ -147,7 +170,7 @@ final class CleanupPreflightTest {
             case "gate1" -> 1;
             case "request1" -> 2;
             case "original1" -> 3;
-            case "database" -> 4;
+            case FIXTURE_DATABASE_21C67C24 -> 4;
             case "request2" -> 5;
             case "original2" -> 6;
             default -> 7;

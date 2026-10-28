@@ -41,6 +41,11 @@ import org.springframework.security.web.csrf.DefaultCsrfToken;
 
 /** NK-WEB-001/PT-WEB-050..053; FUN-001/AUT-001..004; UI226; SS313/314/351/352; PG-D-100. */
 class WebCsrfIntegrationTest {
+  private static final String FIXTURE_CSRF_A082304B = "_csrf";
+  private static final String FIXTURE_X_CSRF_TOKEN_E54F0E3F = "X-CSRF-TOKEN";
+  private static final String FIXTURE_CSRFTOKEN_CF3CFD11 = "csrfToken";
+  private static final String FIXTURE_QUESTIONS_NEW_F89B3C4E = "/questions/new";
+  private static final String FIXTURE_POST_E46D3AE9 = "POST";
   private static WebLogDatabaseFixture db;
   private static final String TOKEN = "02".repeat(32);
   private static final SessionPrincipal PRINCIPAL =
@@ -83,16 +88,17 @@ class WebCsrfIntegrationTest {
             assertNull(csrf.loadToken(r));
             var token = csrf.generateToken(r);
             assertEquals(TOKEN, token.getToken());
-            assertEquals("_csrf", token.getParameterName());
-            assertEquals("X-CSRF-TOKEN", token.getHeaderName());
+            assertEquals(FIXTURE_CSRF_A082304B, token.getParameterName());
+            assertEquals(FIXTURE_X_CSRF_TOKEN_E54F0E3F, token.getHeaderName());
             csrf.saveToken(token, r, s);
             String firstId = r.getSession().getId();
             assertEquals(TOKEN, Objects.requireNonNull(csrf.loadToken(r)).getToken());
             for (CsrfToken bad :
                 List.of(
-                    new DefaultCsrfToken("wrong", "_csrf", TOKEN),
-                    new DefaultCsrfToken("X-CSRF-TOKEN", "wrong", TOKEN),
-                    new DefaultCsrfToken("X-CSRF-TOKEN", "_csrf", "03".repeat(32))))
+                    new DefaultCsrfToken("wrong", FIXTURE_CSRF_A082304B, TOKEN),
+                    new DefaultCsrfToken(FIXTURE_X_CSRF_TOKEN_E54F0E3F, "wrong", TOKEN),
+                    new DefaultCsrfToken(
+                        FIXTURE_X_CSRF_TOKEN_E54F0E3F, FIXTURE_CSRF_A082304B, "03".repeat(32))))
               unavailable(() -> csrf.saveToken(bad, r, s));
             var rotated = csrf.generateToken(r);
             assertEquals("04".repeat(32), rotated.getToken());
@@ -117,12 +123,12 @@ class WebCsrfIntegrationTest {
     assertThrows(NullPointerException.class, () -> csrf.saveToken(null, null, s));
     assertThrows(NullPointerException.class, () -> csrf.saveToken(null, r, null));
     assertNull(csrf.loadToken(r));
-    r.getSession().setAttribute("csrfToken", List.of("bad"));
+    r.getSession().setAttribute(FIXTURE_CSRFTOKEN_CF3CFD11, List.of("bad"));
     unavailable(() -> csrf.loadToken(r));
-    r.getSession().setAttribute("csrfToken", "bad");
+    r.getSession().setAttribute(FIXTURE_CSRFTOKEN_CF3CFD11, "bad");
     unavailable(() -> csrf.loadToken(r));
     unavailable(() -> csrf.generateToken(r));
-    r.getSession().removeAttribute("csrfToken");
+    r.getSession().removeAttribute(FIXTURE_CSRFTOKEN_CF3CFD11);
     assertNull(csrf.loadToken(r));
     unavailable(() -> csrf.generateToken(r));
     var nullSession =
@@ -138,7 +144,7 @@ class WebCsrfIntegrationTest {
   @Test
   void web051OnlySingleBodyParameterResolves() {
     var handler = new FormCsrfTokenRequestHandler();
-    var token = new DefaultCsrfToken("X-CSRF-TOKEN", "_csrf", TOKEN);
+    var token = new DefaultCsrfToken(FIXTURE_X_CSRF_TOKEN_E54F0E3F, FIXTURE_CSRF_A082304B, TOKEN);
     var r = new MockHttpServletRequest();
     var s = new MockHttpServletResponse();
     var calls = new AtomicInteger();
@@ -150,8 +156,8 @@ class WebCsrfIntegrationTest {
           return token;
         });
     assertEquals(0, calls.get());
-    assertSame(r.getAttribute("_csrf"), r.getAttribute(CsrfToken.class.getName()));
-    assertEquals(TOKEN, ((CsrfToken) r.getAttribute("_csrf")).getToken());
+    assertSame(r.getAttribute(FIXTURE_CSRF_A082304B), r.getAttribute(CsrfToken.class.getName()));
+    assertEquals(TOKEN, ((CsrfToken) r.getAttribute(FIXTURE_CSRF_A082304B)).getToken());
     assertEquals(1, calls.get());
     assertThrows(NullPointerException.class, () -> handler.handle(null, s, () -> token));
     assertThrows(NullPointerException.class, () -> handler.handle(r, null, () -> token));
@@ -159,15 +165,15 @@ class WebCsrfIntegrationTest {
     assertThrows(NullPointerException.class, () -> handler.resolveCsrfTokenValue(null, token));
     assertThrows(NullPointerException.class, () -> handler.resolveCsrfTokenValue(r, null));
     assertNull(handler.resolveCsrfTokenValue(r, token));
-    r.addHeader("X-CSRF-TOKEN", TOKEN);
+    r.addHeader(FIXTURE_X_CSRF_TOKEN_E54F0E3F, TOKEN);
     assertNull(handler.resolveCsrfTokenValue(r, token));
     for (String value : List.of("a".repeat(64), "z".repeat(128))) {
-      r.setParameter("_csrf", value);
+      r.setParameter(FIXTURE_CSRF_A082304B, value);
       assertEquals(value, handler.resolveCsrfTokenValue(r, token));
     }
     for (String value :
         List.of("", "a".repeat(63), "a".repeat(129), "!".repeat(64), "日本語", "a".repeat(63) + " ")) {
-      r.setParameter("_csrf", value);
+      r.setParameter(FIXTURE_CSRF_A082304B, value);
       assertNull(handler.resolveCsrfTokenValue(r, token));
     }
     for (String[] values :
@@ -181,7 +187,7 @@ class WebCsrfIntegrationTest {
           };
       assertNull(handler.resolveCsrfTokenValue(malformed, token));
     }
-    r.setParameter("_csrf", TOKEN);
+    r.setParameter(FIXTURE_CSRF_A082304B, TOKEN);
     for (String query : List.of("_csrf=x", "x=1&_csrf", "%5Fcsrf=x", "_c%73rf=x", "%GG=x", "%=x")) {
       r.setQueryString(query);
       assertNull(handler.resolveCsrfTokenValue(r, token));
@@ -200,9 +206,9 @@ class WebCsrfIntegrationTest {
     for (int variant = 0; variant < 4; variant++) {
       int fault = variant;
       var original = new MockHttpSession(null, "independent-old-id");
-      original.setAttribute("csrfToken", TOKEN);
+      original.setAttribute(FIXTURE_CSRFTOKEN_CF3CFD11, TOKEN);
       var rotated = new MockHttpSession(null, "independent-new-id");
-      rotated.setAttribute("csrfToken", TOKEN);
+      rotated.setAttribute(FIXTURE_CSRFTOKEN_CF3CFD11, TOKEN);
       var request =
           new MockHttpServletRequest() {
             private boolean called;
@@ -224,8 +230,8 @@ class WebCsrfIntegrationTest {
             }
           };
       unavailable(() -> csrf.generateToken(request));
-      assertEquals(TOKEN, original.getAttribute("csrfToken"));
-      assertEquals(TOKEN, rotated.getAttribute("csrfToken"));
+      assertEquals(TOKEN, original.getAttribute(FIXTURE_CSRFTOKEN_CF3CFD11));
+      assertEquals(TOKEN, rotated.getAttribute(FIXTURE_CSRFTOKEN_CF3CFD11));
     }
     var unknown = new AssertionError("rotation unknown");
     var request =
@@ -235,7 +241,7 @@ class WebCsrfIntegrationTest {
             throw unknown;
           }
         };
-    request.getSession().setAttribute("csrfToken", TOKEN);
+    request.getSession().setAttribute(FIXTURE_CSRFTOKEN_CF3CFD11, TOKEN);
     assertSame(unknown, assertThrows(AssertionError.class, () -> csrf.generateToken(request)));
   }
 
@@ -254,14 +260,14 @@ class WebCsrfIntegrationTest {
               "/admin/users/1?ROLE",
               "/admin/users/1?PASSWORD",
               "/admin/users/1?UNLOCK",
-              "/questions/new",
+              FIXTURE_QUESTIONS_NEW_F89B3C4E,
               "/notifications/1?CANCEL",
               "/questions/1?DELETE")) {
         String[] parts = target.split("\\?", 2);
         for (int variant = 0; variant < 7; variant++) {
           var request =
               request(
-                  "POST",
+                  FIXTURE_POST_E46D3AE9,
                   parts[0],
                   cookie,
                   variant == 0
@@ -274,7 +280,7 @@ class WebCsrfIntegrationTest {
                                   ? new String[] {TOKEN, TOKEN}
                                   : variant == 4 ? new String[] {""} : new String[] {TOKEN});
           if (parts.length == 2) request.setParameter("operation", parts[1]);
-          if (variant == 1) request.addHeader("X-CSRF-TOKEN", TOKEN);
+          if (variant == 1) request.addHeader(FIXTURE_X_CSRF_TOKEN_E54F0E3F, TOKEN);
           if (variant == 5) request.setQueryString("_csrf=" + TOKEN);
           if (variant == 6) request.setQueryString("%5fcsrf=" + TOKEN);
           verify(f, request, variant == 0);
@@ -301,13 +307,27 @@ class WebCsrfIntegrationTest {
       var original = repo.createSession();
       var cookie = new Cookie("SCHUBERT_NK_SESSION", original.getId());
       var another = repo.createSession();
-      verify(f, request("POST", "/logout", cookie, new String[] {"04".repeat(32)}), false);
-      original.setAttribute("principal", PRINCIPAL);
-      var authenticated = new Cookie("SCHUBERT_NK_SESSION", original.getId());
-      verify(f, request("POST", "/questions/new", authenticated, new String[] {TOKEN}), false);
       verify(
           f,
-          request("POST", "/questions/new", authenticated, new String[] {"06".repeat(32)}),
+          request(FIXTURE_POST_E46D3AE9, "/logout", cookie, new String[] {"04".repeat(32)}),
+          false);
+      original.setAttribute("principal", PRINCIPAL);
+      var authenticated = new Cookie("SCHUBERT_NK_SESSION", original.getId());
+      verify(
+          f,
+          request(
+              FIXTURE_POST_E46D3AE9,
+              FIXTURE_QUESTIONS_NEW_F89B3C4E,
+              authenticated,
+              new String[] {TOKEN}),
+          false);
+      verify(
+          f,
+          request(
+              FIXTURE_POST_E46D3AE9,
+              FIXTURE_QUESTIONS_NEW_F89B3C4E,
+              authenticated,
+              new String[] {"06".repeat(32)}),
           true);
       var jobs = new ArrayList<Callable<Void>>();
       for (int i = 0; i < 100; i++)
@@ -315,7 +335,11 @@ class WebCsrfIntegrationTest {
             () -> {
               verify(
                   f,
-                  request("POST", "/questions/new", authenticated, new String[] {"06".repeat(32)}),
+                  request(
+                      FIXTURE_POST_E46D3AE9,
+                      FIXTURE_QUESTIONS_NEW_F89B3C4E,
+                      authenticated,
+                      new String[] {"06".repeat(32)}),
                   true);
               return null;
             });
@@ -330,19 +354,26 @@ class WebCsrfIntegrationTest {
                 verify(
                     f,
                     request(
-                        "POST", "/questions/new", authenticated, new String[] {"06".repeat(32)}),
+                        FIXTURE_POST_E46D3AE9,
+                        FIXTURE_QUESTIONS_NEW_F89B3C4E,
+                        authenticated,
+                        new String[] {"06".repeat(32)}),
                     true));
         f.failure = "";
       }
       f.clock.value = Instant.now().plusSeconds(28801);
       verify(
           f,
-          request("POST", "/questions/new", authenticated, new String[] {"06".repeat(32)}),
+          request(
+              FIXTURE_POST_E46D3AE9,
+              FIXTURE_QUESTIONS_NEW_F89B3C4E,
+              authenticated,
+              new String[] {"06".repeat(32)}),
           false);
       assertNull(repo.findById(original.getId()));
       repo.deleteById(another.getId());
       f.codec.close();
-      unavailable(() -> verify(f, request("POST", "/login", null, null), false));
+      unavailable(() -> verify(f, request(FIXTURE_POST_E46D3AE9, "/login", null, null), false));
     }
   }
 
@@ -362,7 +393,7 @@ class WebCsrfIntegrationTest {
     r.setSecure(true);
     r.setContentType("application/x-www-form-urlencoded");
     if (cookie != null) r.setCookies(cookie);
-    if (values != null) r.setParameter("_csrf", values);
+    if (values != null) r.setParameter(FIXTURE_CSRF_A082304B, values);
     return r;
   }
 

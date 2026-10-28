@@ -43,6 +43,24 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** SS341/343; PT-OPS-ARCHPROC001..008. Commands/environment are independent literal oracles. */
 final class BackupArchiveProcessTest {
+  private static final String FIXTURE_TERM0_8EA9815D = "term0";
+  private static final String FIXTURE_TERM1_C071C493 = "term1";
+  private static final String FIXTURE_TERM2_BBB60DC4 = "term2";
+  private static final String FIXTURE_CONFIRM0_B42BEF86 = "confirm0";
+  private static final String FIXTURE_CONFIRM1_838911E7 = "confirm1";
+  private static final String FIXTURE_CONFIRM2_443D7819 = "confirm2";
+  private static final String FIXTURE_NULLOUT_3BFB9582 = "nullOut";
+  private static final String FIXTURE_NULLIN_32E946E6 = "nullIn";
+  private static final String FIXTURE_NULLERR_90A1146C = "nullErr";
+  private static final String FIXTURE_PUBLIC_B7853257 = "public";
+  private static final String FIXTURE_PATH_83065DF9 = "PATH";
+  private static final String FIXTURE_USR_BIN_BIN_60CF6B2A = "/usr/bin:/bin";
+  private static final String FIXTURE_API_YML_77F26866 = "api.yml";
+  private static final String FIXTURE_INTERRUPT_DDE42D5D = "interrupt";
+  private static final String FIXTURE_ERROR_4D01709F = "error";
+  private static final String FIXTURE_WRITE_BC2434A1 = "write";
+  private static final String FIXTURE_CLOSEERR_A5A2C698 = "closeErr";
+  private static final String FIXTURE_USR_BIN_TRUE_2E1FF0D5 = "/usr/bin/true";
   private static final String STOP_TYPES =
       "NIREIIRERRRREEEE" + "IIREIIRERRRREEEE" + "RRRRRRRRRRRRRRRR" + "EEEEEEEEEEEEEEEE";
   private static final String STOP_SUPPRESSED =
@@ -178,7 +196,15 @@ final class BackupArchiveProcessTest {
           assertNull(secondary.getCause());
         }
       }
-      assertEquals(List.of("term0", "term1", "term2", "confirm0", "confirm1", "confirm2"), events);
+      assertEquals(
+          List.of(
+              FIXTURE_TERM0_8EA9815D,
+              FIXTURE_TERM1_C071C493,
+              FIXTURE_TERM2_BBB60DC4,
+              FIXTURE_CONFIRM0_B42BEF86,
+              FIXTURE_CONFIRM1_838911E7,
+              FIXTURE_CONFIRM2_443D7819),
+          events);
       assertTrue(processes.stream().noneMatch(Process::isAlive));
     }
   }
@@ -214,7 +240,15 @@ final class BackupArchiveProcessTest {
         assertSame(((TerminalVector) processes.get(winners.charAt(vector) - '0')).failure, actual);
         assertEquals(suppressed.charAt(vector) - '0', actual.getSuppressed().length);
       }
-      assertEquals(List.of("term0", "term1", "term2", "confirm0", "confirm1", "confirm2"), events);
+      assertEquals(
+          List.of(
+              FIXTURE_TERM0_8EA9815D,
+              FIXTURE_TERM1_C071C493,
+              FIXTURE_TERM2_BBB60DC4,
+              FIXTURE_CONFIRM0_B42BEF86,
+              FIXTURE_CONFIRM1_838911E7,
+              FIXTURE_CONFIRM2_443D7819),
+          events);
     }
   }
 
@@ -255,14 +289,15 @@ final class BackupArchiveProcessTest {
    */
   @Test
   void archiveown004NullableGettersAndIdleChildrenPreserveAdmissionAndInterrupt() throws Exception {
-    for (String absent : List.of("nullOut", "nullIn", "nullErr")) {
+    for (String absent :
+        List.of(FIXTURE_NULLOUT_3BFB9582, FIXTURE_NULLIN_32E946E6, FIXTURE_NULLERR_90A1146C)) {
       var fixture = new Fixture();
       fixture.scenario = absent;
-      refused(() -> fixture.runner.credentials(DIR, OUT, KEY, List.of("public")));
+      refused(() -> fixture.runner.credentials(DIR, OUT, KEY, List.of(FIXTURE_PUBLIC_B7853257)));
       var first = fixture.processes.getFirst();
-      assertEquals(absent.equals("nullOut") ? 0 : 1, first.outAcquired);
-      assertEquals(absent.equals("nullIn") ? 0 : 1, first.inAcquired);
-      assertEquals(absent.equals("nullErr") ? 0 : 1, first.errAcquired);
+      assertEquals(absent.equals(FIXTURE_NULLOUT_3BFB9582) ? 0 : 1, first.outAcquired);
+      assertEquals(absent.equals(FIXTURE_NULLIN_32E946E6) ? 0 : 1, first.inAcquired);
+      assertEquals(absent.equals(FIXTURE_NULLERR_90A1146C) ? 0 : 1, first.errAcquired);
       fixture.closed();
     }
     var events = new ArrayList<String>();
@@ -285,7 +320,13 @@ final class BackupArchiveProcessTest {
         assertThrows(
             IllegalStateException.class,
             () -> new BackupArchiveProcess.TerminalPlan().close(Arrays.asList(first, null, last))));
-    assertEquals(List.of("term0", "term2", "confirm0", "confirm2"), retainedEvents);
+    assertEquals(
+        List.of(
+            FIXTURE_TERM0_8EA9815D,
+            FIXTURE_TERM2_BBB60DC4,
+            FIXTURE_CONFIRM0_B42BEF86,
+            FIXTURE_CONFIRM2_443D7819),
+        retainedEvents);
   }
 
   /**
@@ -313,7 +354,15 @@ final class BackupArchiveProcessTest {
     assertSame(prior, primary.getSuppressed()[0]);
     for (int index = 1; index < 3; index++)
       assertInstanceOf(StorageIoException.class, primary.getSuppressed()[index]);
-    assertEquals(List.of("term0", "term1", "term2", "confirm0", "confirm1", "confirm2"), events);
+    assertEquals(
+        List.of(
+            FIXTURE_TERM0_8EA9815D,
+            FIXTURE_TERM1_C071C493,
+            FIXTURE_TERM2_BBB60DC4,
+            FIXTURE_CONFIRM0_B42BEF86,
+            FIXTURE_CONFIRM1_838911E7,
+            FIXTURE_CONFIRM2_443D7819),
+        events);
   }
 
   /** PT-OPS-ARCHOWN006: simultaneous plans cannot adopt or consume another call's processes. */
@@ -334,9 +383,15 @@ final class BackupArchiveProcessTest {
                   new BackupArchiveProcess.TerminalPlan().close(processes);
                   return events;
                 }));
-      assertEquals(List.of("term0", "confirm0"), futures.get(0).get(15, TimeUnit.SECONDS));
       assertEquals(
-          List.of("term0", "term1", "confirm0", "confirm1"),
+          List.of(FIXTURE_TERM0_8EA9815D, FIXTURE_CONFIRM0_B42BEF86),
+          futures.get(0).get(15, TimeUnit.SECONDS));
+      assertEquals(
+          List.of(
+              FIXTURE_TERM0_8EA9815D,
+              FIXTURE_TERM1_C071C493,
+              FIXTURE_CONFIRM0_B42BEF86,
+              FIXTURE_CONFIRM1_838911E7),
           futures.get(1).get(15, TimeUnit.SECONDS));
     }
   }
@@ -390,8 +445,8 @@ final class BackupArchiveProcessTest {
     assertEquals(List.of("/usr/bin/pg_restore", "--list", child(102)), f.calls.get(1).getFirst());
     assertEquals(
         Map.of(
-            "PATH",
-            "/usr/bin:/bin",
+            FIXTURE_PATH_83065DF9,
+            FIXTURE_USR_BIN_BIN_60CF6B2A,
             "LANG",
             "C",
             "LC_ALL",
@@ -410,10 +465,11 @@ final class BackupArchiveProcessTest {
             "5"),
         f.environments.getFirst());
     assertEquals(
-        Map.of("PATH", "/usr/bin:/bin", "LANG", "C", "LC_ALL", "C"), f.environments.get(1));
+        Map.of(FIXTURE_PATH_83065DF9, FIXTURE_USR_BIN_BIN_60CF6B2A, "LANG", "C", "LC_ALL", "C"),
+        f.environments.get(1));
     f.closed();
     f = new Fixture();
-    f.runner.configuration(DIR, OUT, List.of("api.yml", "web.yml"));
+    f.runner.configuration(DIR, OUT, List.of(FIXTURE_API_YML_77F26866, "web.yml"));
     assertEquals(List.of(tar()), f.calls.getFirst());
     assertEquals(Optional.of(OUT), f.outputs.getFirst());
     assertArrayEquals(
@@ -429,7 +485,7 @@ final class BackupArchiveProcessTest {
     now[0] = 1_800_000_000_000L - 7;
     var fixture = new Fixture();
     var runner = new BackupArchiveProcess(fixture, fixture, fixture::clock, Optional.of(parent));
-    runner.configuration(DIR, OUT, List.of("api.yml"));
+    runner.configuration(DIR, OUT, List.of(FIXTURE_API_YML_77F26866));
     assertEquals(7L, fixture.waitLimits.getFirst());
     fixture.closed();
     now[0]++;
@@ -437,7 +493,9 @@ final class BackupArchiveProcessTest {
     now[0] = 1_800_000_000_000L;
     var expired = new Fixture();
     var refused = new BackupArchiveProcess(expired, expired, expired::clock, Optional.of(parent));
-    assertThrows(IOException.class, () -> refused.configuration(DIR, OUT, List.of("api.yml")));
+    assertThrows(
+        IOException.class,
+        () -> refused.configuration(DIR, OUT, List.of(FIXTURE_API_YML_77F26866)));
     assertTrue(expired.calls.isEmpty());
     assertThrows(
         NullPointerException.class,
@@ -445,7 +503,9 @@ final class BackupArchiveProcessTest {
     var nativeRunner = new BackupArchiveProcess(fixture, MorningParentBudget.create());
     assertThrows(
         IOException.class,
-        () -> nativeRunner.configuration(Path.of("/tmp/not-an-fd"), OUT, List.of("api.yml")));
+        () ->
+            nativeRunner.configuration(
+                Path.of("/tmp/not-an-fd"), OUT, List.of(FIXTURE_API_YML_77F26866)));
   }
 
   @Test
@@ -457,7 +517,8 @@ final class BackupArchiveProcessTest {
     assertEquals(1, f.calls.size());
     assertEquals(Optional.empty(), f.outputs.getFirst());
     assertEquals(
-        Map.of("PATH", "/usr/bin:/bin", "LANG", "C", "LC_ALL", "C"), f.environments.getFirst());
+        Map.of(FIXTURE_PATH_83065DF9, FIXTURE_USR_BIN_BIN_60CF6B2A, "LANG", "C", "LC_ALL", "C"),
+        f.environments.getFirst());
     assertEquals(0, f.processes.getFirst().received.size());
     f.closed();
     for (long uid : new long[] {0, -1, 4294967296L, 991}) {
@@ -485,7 +546,7 @@ final class BackupArchiveProcessTest {
             Path.of("/proc/self/fd/99999999999"),
             Path.of("/proc/self/fd/3/child"))) {
       var f = new Fixture();
-      refused(() -> f.runner.configuration(bad, OUT, List.of("public")));
+      refused(() -> f.runner.configuration(bad, OUT, List.of(FIXTURE_PUBLIC_B7853257)));
       assertTrue(f.processes.isEmpty());
     }
     for (List<String> bad :
@@ -511,7 +572,7 @@ final class BackupArchiveProcessTest {
     assertThrows(
         NullPointerException.class,
         () -> f.runner.configuration(DIR, OUT, Arrays.asList("x", null)));
-    var list = new ArrayList<>(List.of("public"));
+    var list = new ArrayList<>(List.of(FIXTURE_PUBLIC_B7853257));
     var snapshot = new Fixture();
     snapshot.runner.configuration(DIR, OUT, list);
     list.clear();
@@ -526,22 +587,23 @@ final class BackupArchiveProcessTest {
 
   @Test
   void statusDeadlineAndCancellation() throws Exception {
-    for (String variant : List.of("none", "interrupt", "runtime", "error")) {
+    for (String variant :
+        List.of("none", FIXTURE_INTERRUPT_DDE42D5D, "runtime", FIXTURE_ERROR_4D01709F)) {
       for (String operation : List.of("dump", "configuration", "credentials")) {
         var pending = new Fixture();
         pending.stubborn = true;
         pending.holdEmptyWait = true;
-        pending.holdInterrupt = variant.equals("interrupt");
+        pending.holdInterrupt = variant.equals(FIXTURE_INTERRUPT_DDE42D5D);
         Throwable expectedUnknown =
-            variant.equals("error")
+            variant.equals(FIXTURE_ERROR_4D01709F)
                 ? new AssertionError("public primary")
                 : new IllegalStateException("public primary");
-        if (variant.equals("runtime") || variant.equals("error")) {
+        if (variant.equals("runtime") || variant.equals(FIXTURE_ERROR_4D01709F)) {
           pending.holdFaults.add(expectedUnknown);
           pending.holdFaults.add(new IllegalArgumentException("public secondary"));
           pending.holdFaults.add(new AssertionError("public secondary fatal"));
           pending.holdInterrupt = true;
-          pending.interruptOnHoldFault = variant.equals("error");
+          pending.interruptOnHoldFault = variant.equals(FIXTURE_ERROR_4D01709F);
         }
         if (operation.equals("dump")) pending.uid = 992;
         var borrowedReleased = new AtomicBoolean();
@@ -554,9 +616,11 @@ final class BackupArchiveProcessTest {
                       switch (operation) {
                         case "dump" -> pending.runner.dump(OUT, KEY, 992);
                         case "configuration" ->
-                            pending.runner.configuration(DIR, OUT, List.of("public"));
+                            pending.runner.configuration(
+                                DIR, OUT, List.of(FIXTURE_PUBLIC_B7853257));
                         case "credentials" ->
-                            pending.runner.credentials(DIR, OUT, KEY, List.of("public"));
+                            pending.runner.credentials(
+                                DIR, OUT, KEY, List.of(FIXTURE_PUBLIC_B7853257));
                         default -> throw new AssertionError("independent fixed operations");
                       }
                       return false;
@@ -580,7 +644,7 @@ final class BackupArchiveProcessTest {
           } finally {
             pending.terminalRelease.countDown();
           }
-          if (variant.equals("runtime") || variant.equals("error")) {
+          if (variant.equals("runtime") || variant.equals(FIXTURE_ERROR_4D01709F)) {
             var thrown =
                 assertThrows(ExecutionException.class, () -> result.get(5, TimeUnit.SECONDS));
             assertSame(
@@ -605,7 +669,7 @@ final class BackupArchiveProcessTest {
         firstUnknown,
         assertThrows(
             IllegalStateException.class,
-            () -> endedUnknown.runner.configuration(DIR, OUT, List.of("public"))));
+            () -> endedUnknown.runner.configuration(DIR, OUT, List.of(FIXTURE_PUBLIC_B7853257))));
     endedUnknown.closed();
     var cumulative = new Fixture();
     cumulative.uid = 992;
@@ -617,7 +681,7 @@ final class BackupArchiveProcessTest {
     var pipeline = new Fixture();
     pipeline.timeSequence =
         List.of(0L, 0L, TimeUnit.MINUTES.toNanos(29), TimeUnit.MINUTES.toNanos(30));
-    refused(() -> pipeline.runner.credentials(DIR, OUT, KEY, List.of("public")));
+    refused(() -> pipeline.runner.credentials(DIR, OUT, KEY, List.of(FIXTURE_PUBLIC_B7853257)));
     assertFalse(pipeline.processes.get(0).destroyed);
     assertTrue(pipeline.processes.get(1).destroyed, "age shares the original pipeline budget");
     pipeline.closed();
@@ -626,7 +690,7 @@ final class BackupArchiveProcessTest {
             "startIo",
             "exit",
             "timeout",
-            "interrupt",
+            FIXTURE_INTERRUPT_DDE42D5D,
             "negativeClock",
             "expiredClock",
             "lateInterrupt",
@@ -635,7 +699,7 @@ final class BackupArchiveProcessTest {
       var f = new Fixture();
       f.scenario = scenario;
       try {
-        refused(() -> f.runner.credentials(DIR, OUT, KEY, List.of("public")));
+        refused(() -> f.runner.credentials(DIR, OUT, KEY, List.of(FIXTURE_PUBLIC_B7853257)));
         f.closed();
       } finally {
         Thread.interrupted();
@@ -662,19 +726,19 @@ final class BackupArchiveProcessTest {
             "getOut",
             "getIn",
             "getErr",
-            "write",
+            FIXTURE_WRITE_BC2434A1,
             "closeOut",
             "closeIn",
-            "closeErr",
-            "nullOut",
-            "nullIn",
-            "nullErr"))
+            FIXTURE_CLOSEERR_A5A2C698,
+            FIXTURE_NULLOUT_3BFB9582,
+            FIXTURE_NULLIN_32E946E6,
+            FIXTURE_NULLERR_90A1146C))
       for (int process : List.of(0, 1)) {
-        if (process == 1 && failure.equals("write")) continue;
+        if (process == 1 && failure.equals(FIXTURE_WRITE_BC2434A1)) continue;
         var f = new Fixture();
         f.scenario = failure;
         f.badProcess = process;
-        refused(() -> f.runner.credentials(DIR, OUT, KEY, List.of("public")));
+        refused(() -> f.runner.credentials(DIR, OUT, KEY, List.of(FIXTURE_PUBLIC_B7853257)));
         f.closed();
       }
     for (String where :
@@ -682,10 +746,10 @@ final class BackupArchiveProcessTest {
             "getOut",
             "getIn",
             "getErr",
-            "write",
+            FIXTURE_WRITE_BC2434A1,
             "closeOut",
             "closeIn",
-            "closeErr",
+            FIXTURE_CLOSEERR_A5A2C698,
             "wait",
             "destroy")) {
       var f = new Fixture();
@@ -696,7 +760,7 @@ final class BackupArchiveProcessTest {
           f.unknown,
           assertThrows(
               IllegalStateException.class,
-              () -> f.runner.credentials(DIR, OUT, KEY, List.of("public"))));
+              () -> f.runner.credentials(DIR, OUT, KEY, List.of(FIXTURE_PUBLIC_B7853257))));
       f.closedStreams();
     }
     for (String scenario : List.of("terminateTimeout", "terminateInterrupt")) {
@@ -704,7 +768,7 @@ final class BackupArchiveProcessTest {
       f.scenario = scenario;
       f.beforeTimeout = true;
       try {
-        refused(() -> f.runner.credentials(DIR, OUT, KEY, List.of("public")));
+        refused(() -> f.runner.credentials(DIR, OUT, KEY, List.of(FIXTURE_PUBLIC_B7853257)));
         assertTrue(f.processes.stream().allMatch(p -> p.destroyed));
         f.closedStreams();
       } finally {
@@ -712,13 +776,13 @@ final class BackupArchiveProcessTest {
       }
     }
     var f = new Fixture();
-    f.scenario = "write";
+    f.scenario = FIXTURE_WRITE_BC2434A1;
     f.cleanupUnknown = new IllegalArgumentException("public cleanup sentinel");
     assertSame(
         f.cleanupUnknown,
         assertThrows(
             IllegalArgumentException.class,
-            () -> f.runner.credentials(DIR, OUT, KEY, List.of("public"))));
+            () -> f.runner.credentials(DIR, OUT, KEY, List.of(FIXTURE_PUBLIC_B7853257))));
     f.closedStreams();
   }
 
@@ -777,7 +841,7 @@ final class BackupArchiveProcessTest {
         calls.add(
             () -> {
               var f = new Fixture();
-              f.runner.credentials(DIR, OUT, KEY, List.of("public"));
+              f.runner.credentials(DIR, OUT, KEY, List.of(FIXTURE_PUBLIC_B7853257));
               f.closed();
               return true;
             });
@@ -839,7 +903,10 @@ final class BackupArchiveProcessTest {
         () -> guarded.execute(List.of(), Map.of(), Optional.empty()));
     Thread.currentThread().interrupt();
     try {
-      refused(() -> guarded.execute(List.of(List.of("/usr/bin/true")), Map.of(), Optional.empty()));
+      refused(
+          () ->
+              guarded.execute(
+                  List.of(List.of(FIXTURE_USR_BIN_TRUE_2E1FF0D5)), Map.of(), Optional.empty()));
       assertTrue(Thread.currentThread().isInterrupted());
     } finally {
       Thread.interrupted();
@@ -849,13 +916,13 @@ final class BackupArchiveProcessTest {
     var marker = new AssertionError("public controlled quarantine exit");
     for (Throwable failure :
         List.of(
-            new IOException("public"),
-            new IllegalStateException("public"),
-            new AssertionError("public"))) {
+            new IOException(FIXTURE_PUBLIC_B7853257),
+            new IllegalStateException(FIXTURE_PUBLIC_B7853257),
+            new AssertionError(FIXTURE_PUBLIC_B7853257))) {
       var pending =
           new BackupArchiveProcess.NativeStart(
               builders -> {
-                assertEquals(List.of("/usr/bin/true"), builders.getFirst().command());
+                assertEquals(List.of(FIXTURE_USR_BIN_TRUE_2E1FF0D5), builders.getFirst().command());
                 if (failure instanceof IOException io) throw io;
                 if (failure instanceof Error fatal) throw fatal;
                 throw (RuntimeException) failure;
@@ -870,16 +937,22 @@ final class BackupArchiveProcessTest {
           assertThrows(
               AssertionError.class,
               () ->
-                  pending.execute(List.of(List.of("/usr/bin/true")), Map.of(), Optional.empty())));
+                  pending.execute(
+                      List.of(List.of(FIXTURE_USR_BIN_TRUE_2E1FF0D5)),
+                      Map.of(),
+                      Optional.empty())));
     }
     assertEquals(3, quarantined.get());
     var returned =
         new BackupArchiveProcess.NativeStart(
             builders -> {
-              throw new IOException("public");
+              throw new IOException(FIXTURE_PUBLIC_B7853257);
             },
             first -> {});
-    refused(() -> returned.execute(List.of(List.of("/usr/bin/true")), Map.of(), Optional.empty()));
+    refused(
+        () ->
+            returned.execute(
+                List.of(List.of(FIXTURE_USR_BIN_TRUE_2E1FF0D5)), Map.of(), Optional.empty()));
     var pulses = new AtomicInteger();
     Thread.currentThread().interrupt();
     assertSame(
@@ -909,7 +982,8 @@ final class BackupArchiveProcessTest {
         new Thread(
             () -> {
               try {
-                fixed.execute(List.of(List.of("/usr/bin/true")), Map.of(), Optional.empty());
+                fixed.execute(
+                    List.of(List.of(FIXTURE_USR_BIN_TRUE_2E1FF0D5)), Map.of(), Optional.empty());
               } catch (IOException failure) {
                 returnedUnknown.set(true);
               } finally {
@@ -927,7 +1001,9 @@ final class BackupArchiveProcessTest {
         returnedUnknown.get(), "fixed Production factory must not unwind borrowed callback");
     var processes =
         nativeStart.execute(
-            List.of(List.of("/usr/bin/true")), Map.of("PATH", "/usr/bin:/bin"), Optional.empty());
+            List.of(List.of(FIXTURE_USR_BIN_TRUE_2E1FF0D5)),
+            Map.of(FIXTURE_PATH_83065DF9, FIXTURE_USR_BIN_BIN_60CF6B2A),
+            Optional.empty());
     assertEquals(0, processes.getFirst().waitFor());
     for (Process p : processes) {
       p.getInputStream().close();
@@ -1048,7 +1124,7 @@ final class BackupArchiveProcessTest {
         if (fixture.unknown != null) throw fixture.unknown;
         throw new IOException("private diagnostic");
       }
-      if (point.equals("closeErr") && index == 0 && fixture.cleanupUnknown != null)
+      if (point.equals(FIXTURE_CLOSEERR_A5A2C698) && index == 0 && fixture.cleanupUnknown != null)
         throw fixture.cleanupUnknown;
     }
 
@@ -1058,7 +1134,7 @@ final class BackupArchiveProcessTest {
         if (fixture.unknown != null) throw fixture.unknown;
         return null;
       }
-      if (selected("nullOut")) return null;
+      if (selected(FIXTURE_NULLOUT_3BFB9582)) return null;
       outAcquired++;
       return new ByteArrayInputStream(new byte[0]) {
         @Override
@@ -1075,12 +1151,12 @@ final class BackupArchiveProcessTest {
         if (fixture.unknown != null) throw fixture.unknown;
         return null;
       }
-      if (selected("nullIn")) return null;
+      if (selected(FIXTURE_NULLIN_32E946E6)) return null;
       inAcquired++;
       return new OutputStream() {
         @Override
         public void write(int b) throws IOException {
-          event("write");
+          event(FIXTURE_WRITE_BC2434A1);
           received.write(b);
         }
 
@@ -1098,13 +1174,13 @@ final class BackupArchiveProcessTest {
         if (fixture.unknown != null) throw fixture.unknown;
         return null;
       }
-      if (selected("nullErr")) return null;
+      if (selected(FIXTURE_NULLERR_90A1146C)) return null;
       errAcquired++;
       return new ByteArrayInputStream(new byte[0]) {
         @Override
         public void close() throws IOException {
           errClosed++;
-          event("closeErr");
+          event(FIXTURE_CLOSEERR_A5A2C698);
         }
       };
     }
@@ -1128,8 +1204,9 @@ final class BackupArchiveProcessTest {
         return true;
       }
       if (selected("wait") && fixture.unknown != null) throw fixture.unknown;
-      if (selected("interrupt") || destroyed && fixture.scenario.equals("terminateInterrupt"))
-        throw new InterruptedException("public");
+      if (selected(FIXTURE_INTERRUPT_DDE42D5D)
+          || destroyed && fixture.scenario.equals("terminateInterrupt"))
+        throw new InterruptedException(FIXTURE_PUBLIC_B7853257);
       if (destroyed && fixture.scenario.equals("terminateTimeout")) return false;
       if (!destroyed && (fixture.beforeTimeout || selected("timeout"))) return false;
       alive = false;

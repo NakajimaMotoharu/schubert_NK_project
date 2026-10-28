@@ -35,6 +35,7 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** PT-OPS-DBSOURCE-001..006; real isolated PG roles plus public JDBC fault/ownership probes. */
 final class ServiceDatabaseSourceTest {
+  private static final String FIXTURE_UNTRUSTED_6FC6869D = "UNTRUSTED";
   @TempDir static Path root;
   private static ApiLogDatabaseFixture database;
   private static String url;
@@ -144,7 +145,7 @@ final class ServiceDatabaseSourceTest {
               (target, p) -> {
                 properties.set(p);
                 if (nullResult) return null;
-                throw new SQLException("UNTRUSTED", "99999");
+                throw new SQLException(FIXTURE_UNTRUSTED_6FC6869D, "99999");
               })) {
         fixedFailure(source::getConnection);
         assertTrue(properties.get().isEmpty());
@@ -168,8 +169,8 @@ final class ServiceDatabaseSourceTest {
             (target, p) ->
                 probe(
                     database.api(),
-                    new SQLException("UNTRUSTED"),
-                    new SQLException("UNTRUSTED"),
+                    new SQLException(FIXTURE_UNTRUSTED_6FC6869D),
+                    new SQLException(FIXTURE_UNTRUSTED_6FC6869D),
                     new AtomicInteger(),
                     closed))) {
       fixedFailure(source::getConnection);
@@ -181,12 +182,15 @@ final class ServiceDatabaseSourceTest {
   void opsDbsource004UnknownAndCompoundFailuresPreserveIdentity() throws Exception {
     for (Throwable primary :
         List.of(
-            new IllegalStateException("UNTRUSTED"),
-            new NullPointerException("UNTRUSTED"),
-            new AssertionError("UNTRUSTED"))) {
+            new IllegalStateException(FIXTURE_UNTRUSTED_6FC6869D),
+            new NullPointerException(FIXTURE_UNTRUSTED_6FC6869D),
+            new AssertionError(FIXTURE_UNTRUSTED_6FC6869D))) {
       for (Throwable cleanup :
           Arrays.asList(
-              null, new SQLException("UNTRUSTED"), primary, new AssertionError("UNTRUSTED"))) {
+              null,
+              new SQLException(FIXTURE_UNTRUSTED_6FC6869D),
+              primary,
+              new AssertionError(FIXTURE_UNTRUSTED_6FC6869D))) {
         AtomicInteger closed = new AtomicInteger();
         AtomicReference<Properties> properties = new AtomicReference<>();
         try (var source =
@@ -209,7 +213,9 @@ final class ServiceDatabaseSourceTest {
       }
     }
     for (Throwable cleanup :
-        List.of(new IllegalStateException("UNTRUSTED"), new AssertionError("UNTRUSTED"))) {
+        List.of(
+            new IllegalStateException(FIXTURE_UNTRUSTED_6FC6869D),
+            new AssertionError(FIXTURE_UNTRUSTED_6FC6869D))) {
       AtomicInteger closed = new AtomicInteger();
       try (var source =
           new ServiceDatabaseSource(
@@ -219,7 +225,7 @@ final class ServiceDatabaseSourceTest {
               (target, p) ->
                   probe(
                       database.api(),
-                      new SQLException("UNTRUSTED"),
+                      new SQLException(FIXTURE_UNTRUSTED_6FC6869D),
                       cleanup,
                       new AtomicInteger(),
                       closed))) {
@@ -227,7 +233,7 @@ final class ServiceDatabaseSourceTest {
         assertEquals(1, closed.get());
       }
     }
-    IllegalStateException connectorFailure = new IllegalStateException("UNTRUSTED");
+    IllegalStateException connectorFailure = new IllegalStateException(FIXTURE_UNTRUSTED_6FC6869D);
     AtomicReference<Properties> properties = new AtomicReference<>();
     try (var source =
         new ServiceDatabaseSource(

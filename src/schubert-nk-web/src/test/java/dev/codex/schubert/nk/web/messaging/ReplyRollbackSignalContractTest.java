@@ -25,10 +25,12 @@ import org.junit.jupiter.api.Test;
 
 /** SS321§7/352; PG-D441/BUG1489; UNC012..016. No provider, DB, or external owner. */
 final class ReplyRollbackSignalContractTest {
+  private static final String FIXTURE_SYNTHETIC_ROLLBACK_C02E09E5 = "synthetic rollback";
+
   @Test
   void unconfirmedRollbackSignalsInfrastructureOnceAndNeverCommittedFatal() {
     var fixture = new Fixture();
-    fixture.rollbackFailure = new JMSRuntimeException("synthetic rollback");
+    fixture.rollbackFailure = new JMSRuntimeException(FIXTURE_SYNTHETIC_ROLLBACK_C02E09E5);
     try (var runtime = fixture.open()) {
       fixture.deliver();
       assertFalse(runtime.ready());
@@ -68,7 +70,7 @@ final class ReplyRollbackSignalContractTest {
       fixture.rollbackFailure =
           switch (mode) {
             case 0 -> null;
-            case 1 -> new JMSRuntimeException("synthetic rollback");
+            case 1 -> new JMSRuntimeException(FIXTURE_SYNTHETIC_ROLLBACK_C02E09E5);
             default -> new AssertionError("synthetic rollback fatal");
           };
       try (var runtime = fixture.open()) {
@@ -93,7 +95,7 @@ final class ReplyRollbackSignalContractTest {
         assertFalse(runtime.ready());
         assertEquals(1, fixture.committed.get());
         assertEquals(1, fixture.commits);
-        fixture.rollbackFailure = new JMSRuntimeException("synthetic rollback");
+        fixture.rollbackFailure = new JMSRuntimeException(FIXTURE_SYNTHETIC_ROLLBACK_C02E09E5);
         if (fatalError) {
           var error = new AssertionError("synthetic later fatal");
           fixture.readFailure = error;
@@ -139,7 +141,7 @@ final class ReplyRollbackSignalContractTest {
     var legacy = new Fixture();
     try (var owner = ArtemisReplyConsumers.bind(legacy::context)) {
       owner.start(legacy.reply(), ignored -> fail("not a committed DLQ"));
-      legacy.rollbackFailure = new JMSRuntimeException("synthetic rollback");
+      legacy.rollbackFailure = new JMSRuntimeException(FIXTURE_SYNTHETIC_ROLLBACK_C02E09E5);
       legacy.deliver();
       assertFalse(owner.ready());
       assertTrue(owner.terminalFailureObserved());

@@ -44,6 +44,8 @@ import org.junit.jupiter.api.io.TempDir;
  * PT-SCN-009-V01..V03. Physical-only verification; synthetic bytes are not a record codec oracle.
  */
 final class ScenarioReadyFileInspectorTest {
+  private static final String FIXTURE_READY_6630F9C3 = ".ready";
+  private static final String FIXTURE_OPENENTRY_4A0BE764 = "openEntry";
   private static final UUID ID = UUID.fromString("00000000-0000-4000-8000-000000000123");
 
   @TempDir(factory = TransferRootInspectionTest.Ext4Fixture.class)
@@ -59,7 +61,11 @@ final class ScenarioReadyFileInspectorTest {
         var inspector = new ScenarioReadyFileInspector(held, identity);
         var absent =
             new LargeResultDescriptor(
-                ID, "20260908/" + ID + ".ready", 4800L * count, "a".repeat(64), count);
+                ID,
+                "20260908/" + ID + FIXTURE_READY_6630F9C3,
+                4800L * count,
+                "a".repeat(64),
+                count);
         assertEquals(Availability.MISSING, inspector.inspect(absent));
         try (var entries = Files.list(root)) {
           assertEquals(0, entries.count());
@@ -150,7 +156,8 @@ final class ScenarioReadyFileInspectorTest {
       assertThrows(
           NullPointerException.class,
           () -> new ScenarioReadyFileInspector(held, identity).inspect(null));
-      for (String fault : List.of("openDay", "openEntry", "entryClose", "dayClose")) {
+      for (String fault :
+          List.of("openDay", FIXTURE_OPENENTRY_4A0BE764, "entryClose", "dayClose")) {
         calls.fault = fault;
         reject(() -> new ScenarioReadyFileInspector(held, identity).inspect(descriptor));
         calls.fault = "";
@@ -159,7 +166,7 @@ final class ScenarioReadyFileInspectorTest {
       var missing =
           new LargeResultDescriptor(
               new UUID(0, 99),
-              "20260908/" + new UUID(0, 99) + ".ready",
+              "20260908/" + new UUID(0, 99) + FIXTURE_READY_6630F9C3,
               4800,
               descriptor.sha256(),
               1);
@@ -227,7 +234,7 @@ final class ScenarioReadyFileInspectorTest {
       Files.createDirectory(date);
       mode(date, "rwxr-x---");
     }
-    Path ready = date.resolve(ID + ".ready");
+    Path ready = date.resolve(ID + FIXTURE_READY_6630F9C3);
     byte[] record = new byte[4800];
     Arrays.fill(record, (byte) 0x53);
     MessageDigest digest = MessageDigest.getInstance("SHA-256");
@@ -240,7 +247,7 @@ final class ScenarioReadyFileInspectorTest {
     mode(ready, "rw-r-----");
     return new LargeResultDescriptor(
         ID,
-        "20260908/" + ID + ".ready",
+        "20260908/" + ID + FIXTURE_READY_6630F9C3,
         4800L * count,
         HexFormat.of().formatHex(digest.digest()),
         count);
@@ -279,7 +286,8 @@ final class ScenarioReadyFileInspectorTest {
                 String name = method.getName();
                 boolean dayOpen = name.equals("openDirectory") && args[1].equals("20260908");
                 if (fault.equals("openDay") && dayOpen
-                    || fault.equals("openEntry") && name.equals("openEntry"))
+                    || fault.equals(FIXTURE_OPENENTRY_4A0BE764)
+                        && name.equals(FIXTURE_OPENENTRY_4A0BE764))
                   throw new StorageIoException(StorageIoException.Reason.UNAVAILABLE);
                 // Remove before kernel close makes the number reusable by another opening thread.
                 // DirectoryCalls consumes ownership even on close failure; do not erase a reused
@@ -295,7 +303,7 @@ final class ScenarioReadyFileInspectorTest {
                   int descriptor = (int) result;
                   live.add(descriptor);
                   if (dayOpen) date = descriptor;
-                  if (name.equals("openEntry")) entry = descriptor;
+                  if (name.equals(FIXTURE_OPENENTRY_4A0BE764)) entry = descriptor;
                 }
                 if (name.equals("close")) {
                   int descriptor = (int) args[0];

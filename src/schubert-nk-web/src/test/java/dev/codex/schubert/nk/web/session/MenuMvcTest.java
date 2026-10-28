@@ -59,6 +59,12 @@ import org.thymeleaf.templatemode.TemplateMode;
  * SS313/314/352; PG-D-115.
  */
 class MenuMvcTest {
+  private static final String FIXTURE_USER_2DED8884 = "USER";
+  private static final String FIXTURE_ADMIN_C4BB3010 = "ADMIN";
+  private static final String FIXTURE_READER_F734AAEA = "reader";
+  private static final String FIXTURE_0000_876EEFE0 = "0000";
+  private static final String FIXTURE_GET_04F32A7E = "GET";
+  private static final String FIXTURE_LOGIN_F843C044 = "/login";
   // Independent Current/UI223 oracle: never generated from production MenuCard or Model.
   private static final List<String> TITLES =
       List.of("シナリオ閲覧", "検索", "アニメ視聴", "音楽", "質問する", "通知", "質問回答", "ログ照会", "User管理");
@@ -107,9 +113,9 @@ class MenuMvcTest {
 
   @Test
   void web142MenuModelsPreserveRoleOrderAndClosedFields() {
-    for (String role : List.of("USER", "ADMIN")) {
-      var page = MenuViewModel.from(principal("reader", role));
-      int count = role.equals("USER") ? 7 : 9;
+    for (String role : List.of(FIXTURE_USER_2DED8884, FIXTURE_ADMIN_C4BB3010)) {
+      var page = MenuViewModel.from(principal(FIXTURE_READER_F734AAEA, role));
+      int count = role.equals(FIXTURE_USER_2DED8884) ? 7 : 9;
       assertEquals(
           TITLES.subList(0, count), page.getCards().stream().map(MenuCard::getTitle).toList());
       assertEquals(
@@ -119,12 +125,13 @@ class MenuMvcTest {
           URLS.subList(0, count), page.getCards().stream().map(MenuCard::getHref).toList());
       assertThrows(UnsupportedOperationException.class, () -> page.getCards().clear());
       assertEquals("schubert NK", page.getTopBar().getBrand());
-      assertEquals("reader", page.getTopBar().getUsername());
+      assertEquals(FIXTURE_READER_F734AAEA, page.getTopBar().getUsername());
       assertEquals(role, page.getTopBar().getRole());
       assertEquals("MenuViewModel[REDACTED]", page.toString());
       assertEquals("TopBarViewModel[REDACTED]", page.getTopBar().toString());
       var model = new ExtendedModelMap();
-      assertEquals("menu", new MenuController().show(principal("reader", role), model));
+      assertEquals(
+          "menu", new MenuController().show(principal(FIXTURE_READER_F734AAEA, role), model));
       assertEquals(Set.of("page"), model.keySet());
       assertInstanceOf(MenuViewModel.class, model.get("page"));
     }
@@ -133,7 +140,7 @@ class MenuMvcTest {
   @Test
   void web143MenuBoundaryNullForeignAndModelFaultsReject() {
     var controller = new MenuController();
-    var p = principal("reader", "USER");
+    var p = principal(FIXTURE_READER_F734AAEA, FIXTURE_USER_2DED8884);
     var model = new ExtendedModelMap();
     assertThrows(NullPointerException.class, () -> controller.show(null, model));
     assertThrows(NullPointerException.class, () -> controller.show(p, null));
@@ -191,15 +198,19 @@ class MenuMvcTest {
       var result =
           mock.perform(
                   get("/")
-                      .principal(principal("reader", "USER"))
-                      .param("role", "ADMIN")
+                      .principal(principal(FIXTURE_READER_F734AAEA, FIXTURE_USER_2DED8884))
+                      .param("role", FIXTURE_ADMIN_C4BB3010)
                       .requestAttr(
                           CsrfToken.class.getName(),
                           new DefaultCsrfToken("unused", "_csrf", "b".repeat(64))))
               .andReturn();
       assertEquals(200, result.getResponse().getStatus());
       assertEquals("UTF-8", result.getResponse().getCharacterEncoding());
-      verifyHtml(result.getResponse().getContentAsString(), "reader", "USER", "b".repeat(64));
+      verifyHtml(
+          result.getResponse().getContentAsString(),
+          FIXTURE_READER_F734AAEA,
+          FIXTURE_USER_2DED8884,
+          "b".repeat(64));
       assertEquals(
           404, mock.perform(get("/not-a-controller")).andReturn().getResponse().getStatus());
     }
@@ -207,26 +218,29 @@ class MenuMvcTest {
 
   @Test
   void web145RealHttpMenuHasExactCardsAndLogoutCsrf() throws Exception {
-    for (String role : List.of("USER", "ADMIN")) {
+    for (String role : List.of(FIXTURE_USER_2DED8884, FIXTURE_ADMIN_C4BB3010)) {
       reset();
-      var api = new SessionFormLoginTest.Api("0000", role, "0000", 0);
+      var api = new SessionFormLoginTest.Api(FIXTURE_0000_876EEFE0, role, FIXTURE_0000_876EEFE0, 0);
       try (var server = server(api, false)) {
-        var anonymous = server.send("GET", "/", null, null, true);
+        var anonymous = server.send(FIXTURE_GET_04F32A7E, "/", null, null, true);
         assertEquals(302, anonymous.statusCode());
-        assertEquals("/login", anonymous.headers().firstValue("location").orElseThrow());
-        var first = server.send("GET", "/login", cookie(anonymous), null, true);
+        assertEquals(
+            FIXTURE_LOGIN_F843C044, anonymous.headers().firstValue("location").orElseThrow());
+        var first =
+            server.send(
+                FIXTURE_GET_04F32A7E, FIXTURE_LOGIN_F843C044, cookie(anonymous), null, true);
         var login =
             server.send(
                 "POST",
-                "/login",
+                FIXTURE_LOGIN_F843C044,
                 cookie(anonymous),
-                form(first.body().substring(6), "reader", "p"),
+                form(first.body().substring(6), FIXTURE_READER_F734AAEA, "p"),
                 true);
         assertEquals(302, login.statusCode());
         assertEquals("/", login.headers().firstValue("location").orElseThrow());
-        var menu = server.send("GET", "/", cookie(login), null, true);
+        var menu = server.send(FIXTURE_GET_04F32A7E, "/", cookie(login), null, true);
         assertEquals(200, menu.statusCode());
-        verifyHtml(menu.body(), "reader", role, "04".repeat(32));
+        verifyHtml(menu.body(), FIXTURE_READER_F734AAEA, role, "04".repeat(32));
         safeHeaders(menu);
         assertTrue(menu.headers().allValues("set-cookie").isEmpty());
         assertEquals(0, server.context.getManager().getActiveSessions());
@@ -241,23 +255,25 @@ class MenuMvcTest {
   @Test
   void web146HtmlEscapesIdentityAndServesOnlySafeResources() throws Exception {
     String username = "<img src=x onerror=alert(1)>";
-    var api = new SessionFormLoginTest.Api("0000", "USER", "0000", 0);
+    var api =
+        new SessionFormLoginTest.Api(
+            FIXTURE_0000_876EEFE0, FIXTURE_USER_2DED8884, FIXTURE_0000_876EEFE0, 0);
     try (var server = server(api, false)) {
-      var first = server.send("GET", "/login", null, null, true);
+      var first = server.send(FIXTURE_GET_04F32A7E, FIXTURE_LOGIN_F843C044, null, null, true);
       var login =
           server.send(
               "POST",
-              "/login",
+              FIXTURE_LOGIN_F843C044,
               cookie(first),
               form(first.body().substring(6), username, "private-password-canary"),
               true);
-      var menu = server.send("GET", "/", cookie(login), null, true);
+      var menu = server.send(FIXTURE_GET_04F32A7E, "/", cookie(login), null, true);
       assertEquals(200, menu.statusCode());
-      verifyHtml(menu.body(), username, "USER", "04".repeat(32));
+      verifyHtml(menu.body(), username, FIXTURE_USER_2DED8884, "04".repeat(32));
       assertFalse(menu.body().contains(username));
       assertTrue(menu.body().contains("&lt;img"));
       assertFalse(menu.body().contains("private-password-canary"));
-      var css = server.send("GET", "/css/schubert.css", null, null, true);
+      var css = server.send(FIXTURE_GET_04F32A7E, "/css/schubert.css", null, null, true);
       assertEquals(200, css.statusCode());
       assertTrue(css.headers().firstValue("content-type").orElseThrow().startsWith("text/css"));
       assertTrue(css.body().contains("@media (max-width: 900px)"));
@@ -269,7 +285,7 @@ class MenuMvcTest {
       var head = server.send("HEAD", "/css/schubert.css", null, null, true);
       assertEquals(200, head.statusCode());
       assertEquals("", head.body());
-      var absent = server.send("GET", "/css/missing.css", cookie(login), null, true);
+      var absent = server.send(FIXTURE_GET_04F32A7E, "/css/missing.css", cookie(login), null, true);
       assertEquals(404, absent.statusCode());
       assertFalse(absent.body().contains("classpath:"));
       assertEquals(0, server.context.getManager().getActiveSessions());
@@ -279,7 +295,8 @@ class MenuMvcTest {
 
   @Test
   void web147ConcurrentMenuRenderingKeepsActorsAndCsrfSeparate() throws Exception {
-    var api = new SessionFormLoginTest.Api("0000", "DYNAMIC", "0000", 0);
+    var api =
+        new SessionFormLoginTest.Api(FIXTURE_0000_876EEFE0, "DYNAMIC", FIXTURE_0000_876EEFE0, 0);
     try (var server = server(api, true);
         var pool = Executors.newFixedThreadPool(8)) {
       var futures = new ArrayList<Future<Void>>();
@@ -290,25 +307,30 @@ class MenuMvcTest {
         futures.add(
             pool.submit(
                 () -> {
-                  var first = server.send("GET", "/login", null, null, true);
+                  var first =
+                      server.send(FIXTURE_GET_04F32A7E, FIXTURE_LOGIN_F843C044, null, null, true);
                   var login =
                       server.send(
                           "POST",
-                          "/login",
+                          FIXTURE_LOGIN_F843C044,
                           cookie(first),
                           form(first.body().substring(6), "user" + n, "password-user" + n),
                           true);
                   assertEquals(302, login.statusCode());
                   String cookie = cookie(login);
                   assertTrue(cookies.add(cookie));
-                  var menu = server.send("GET", "/", cookie, null, true);
+                  var menu = server.send(FIXTURE_GET_04F32A7E, "/", cookie, null, true);
                   assertEquals(200, menu.statusCode());
                   var document = Jsoup.parse(menu.body());
                   String csrf = document.select("form.logout-form input[name=_csrf]").attr("value");
                   assertEquals(64, csrf.length());
                   assertTrue(csrfTokens.add(csrf));
                   assertNotEquals(first.body().substring(6), csrf);
-                  verifyHtml(menu.body(), "user" + n, n % 2 == 0 ? "USER" : "ADMIN", csrf);
+                  verifyHtml(
+                      menu.body(),
+                      "user" + n,
+                      n % 2 == 0 ? FIXTURE_USER_2DED8884 : FIXTURE_ADMIN_C4BB3010,
+                      csrf);
                   return null;
                 }));
       }
@@ -332,7 +354,7 @@ class MenuMvcTest {
     assertEquals(1, document.select("main").size());
     assertEquals(
         List.of("/", "/notifications"), document.select("nav.nav-links a").eachAttr("href"));
-    int count = role.equals("USER") ? 7 : 9;
+    int count = role.equals(FIXTURE_USER_2DED8884) ? 7 : 9;
     assertEquals(
         TITLES.subList(0, count), document.select(".menu-grid .menu-item strong").eachText());
     assertEquals(

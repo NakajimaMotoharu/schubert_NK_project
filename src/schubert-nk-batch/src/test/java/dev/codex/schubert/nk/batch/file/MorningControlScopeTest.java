@@ -30,6 +30,21 @@ import org.junit.jupiter.api.Test;
 
 /** NK-OPS-001/OPS009/UI251/SS341/343/SSC089/094/105/106/108; PT-OPS-MCTRL001-018. */
 final class MorningControlScopeTest {
+  private static final String FIXTURE_M_ENTER_C0A587C0 = "M-enter";
+  private static final String FIXTURE_M_CLOSE_6125B1F5 = "M-close";
+  private static final String FIXTURE_A_ENTER_7CA343C0 = "A-enter";
+  private static final String FIXTURE_A_CLOSE_B364A3FB = "A-close";
+  private static final String FIXTURE_NO_STOP_2EDC182D = "no stop";
+  private static final String FIXTURE_NO_WORK_1254C0D8 = "no work";
+  private static final String FIXTURE_ROOT_956E6E33 = "root";
+  private static final String FIXTURE_STOP_EIGHT_3A7A7745 = "stop-eight";
+  private static final String FIXTURE_FRESH_EIGHT_937560B0 = "fresh-eight";
+  private static final String FIXTURE_TRUSTED_WORK_456CE552 = "trusted-work";
+  private static final String FIXTURE_2026_09_28T05_00_00Z_32CDB6A0 = "2026-09-28T05:00:00Z";
+  private static final String FIXTURE_DB_ORIGINAL_CLOSE_4CD86D7C = "DB-original-close";
+  private static final String FIXTURE_ORIGINAL_ENTER_7D335FBE = "original-enter";
+  private static final String FIXTURE_ORIGINAL_CLOSE_D4B88B9A = "original-close";
+  private static final String FIXTURE_INVALID_CF35E1BB = "INVALID";
 
   /** PT-OPS-MCTRL019: no null may select a new run or reach native ownership work. */
   @Test
@@ -98,14 +113,14 @@ final class MorningControlScopeTest {
 
     @Override
     public <T> Optional<T> execute(LinuxFileLock.Operation<T> operation) throws IOException {
-      events.add("M-enter");
+      events.add(FIXTURE_M_ENTER_C0A587C0);
       if (!available) return Optional.empty();
       held.set(true);
       try {
         return Optional.of(operation.execute());
       } finally {
         held.set(false);
-        events.add("M-close");
+        events.add(FIXTURE_M_CLOSE_6125B1F5);
       }
     }
   }
@@ -121,14 +136,14 @@ final class MorningControlScopeTest {
 
     @Override
     public <T> Optional<T> execute(LinuxFileLock.StartupOperation<T> operation) throws IOException {
-      events.add("A-enter");
+      events.add(FIXTURE_A_ENTER_7CA343C0);
       if (!available) return Optional.empty();
       held.set(true);
       try {
         return Optional.of(operation.execute(128));
       } finally {
         held.set(false);
-        events.add("A-close");
+        events.add(FIXTURE_A_CLOSE_B364A3FB);
       }
     }
   }
@@ -162,12 +177,13 @@ final class MorningControlScopeTest {
                 () -> {},
                 m,
                 blocked,
-                () -> fail("no stop"),
+                () -> fail(FIXTURE_NO_STOP_2EDC182D),
                 new HeldA(events),
                 () -> fail("no terminal"),
                 state -> fail("no invalidation"),
-                (state, database) -> fail("no work")));
-    assertEquals(List.of("M-enter", "intent-reject", "M-close"), events);
+                (state, database) -> fail(FIXTURE_NO_WORK_1254C0D8)));
+    assertEquals(
+        List.of(FIXTURE_M_ENTER_C0A587C0, "intent-reject", FIXTURE_M_CLOSE_6125B1F5), events);
 
     events.clear();
     var clear =
@@ -184,12 +200,14 @@ final class MorningControlScopeTest {
                 () -> {},
                 m,
                 clear,
-                () -> fail("no stop"),
+                () -> fail(FIXTURE_NO_STOP_2EDC182D),
                 new HeldA(events),
                 () -> fail("no terminal"),
                 state -> fail("no invalidation"),
-                (state, database) -> fail("no work")));
-    assertEquals(List.of("M-enter", "intent-clear", "original", "M-close"), events);
+                (state, database) -> fail(FIXTURE_NO_WORK_1254C0D8)));
+    assertEquals(
+        List.of(FIXTURE_M_ENTER_C0A587C0, "intent-clear", "original", FIXTURE_M_CLOSE_6125B1F5),
+        events);
     assertThrows(
         NullPointerException.class, () -> MorningControlScope.withClearIntent(null, () -> {}));
     assertThrows(
@@ -203,43 +221,43 @@ final class MorningControlScopeTest {
     var a = new HeldA(events);
     int result =
         MorningControlScope.execute(
-            () -> events.add("root"),
+            () -> events.add(FIXTURE_ROOT_956E6E33),
             m,
             () -> {
               assertTrue(m.held.get());
               assertFalse(a.held.get());
-              events.add("stop-eight");
+              events.add(FIXTURE_STOP_EIGHT_3A7A7745);
             },
             a,
             () -> {
               assertTrue(m.held.get());
               assertTrue(a.held.get());
-              events.add("fresh-eight");
+              events.add(FIXTURE_FRESH_EIGHT_937560B0);
             },
             () -> {
               assertTrue(m.held.get());
               assertTrue(a.held.get());
-              events.add("trusted-work");
+              events.add(FIXTURE_TRUSTED_WORK_456CE552);
               return 7;
             });
     assertEquals(7, result);
     assertEquals(
         List.of(
-            "root",
-            "M-enter",
-            "root",
-            "stop-eight",
-            "root",
-            "A-enter",
-            "root",
-            "fresh-eight",
-            "root",
-            "trusted-work",
-            "root",
-            "A-close",
-            "root",
-            "M-close",
-            "root"),
+            FIXTURE_ROOT_956E6E33,
+            FIXTURE_M_ENTER_C0A587C0,
+            FIXTURE_ROOT_956E6E33,
+            FIXTURE_STOP_EIGHT_3A7A7745,
+            FIXTURE_ROOT_956E6E33,
+            FIXTURE_A_ENTER_7CA343C0,
+            FIXTURE_ROOT_956E6E33,
+            FIXTURE_FRESH_EIGHT_937560B0,
+            FIXTURE_ROOT_956E6E33,
+            FIXTURE_TRUSTED_WORK_456CE552,
+            FIXTURE_ROOT_956E6E33,
+            FIXTURE_A_CLOSE_B364A3FB,
+            FIXTURE_ROOT_956E6E33,
+            FIXTURE_M_CLOSE_6125B1F5,
+            FIXTURE_ROOT_956E6E33),
         events);
     assertFalse(m.held.get());
     assertFalse(a.held.get());
@@ -256,14 +274,14 @@ final class MorningControlScopeTest {
                 IOException.class,
                 () ->
                     MorningControlScope.execute(
-                        () -> events.add("root"),
+                        () -> events.add(FIXTURE_ROOT_956E6E33),
                         m,
-                        () -> fail("no stop"),
+                        () -> fail(FIXTURE_NO_STOP_2EDC182D),
                         new HeldA(events),
                         () -> fail("no terminals"),
-                        () -> fail("no work")))
+                        () -> fail(FIXTURE_NO_WORK_1254C0D8)))
             .getMessage());
-    assertEquals(List.of("root", "M-enter"), events);
+    assertEquals(List.of(FIXTURE_ROOT_956E6E33, FIXTURE_M_ENTER_C0A587C0), events);
   }
 
   @Test
@@ -277,7 +295,7 @@ final class MorningControlScopeTest {
             IOException.class,
             () ->
                 MorningControlScope.execute(
-                    () -> events.add("root"),
+                    () -> events.add(FIXTURE_ROOT_956E6E33),
                     m,
                     () -> {
                       assertTrue(m.held.get());
@@ -285,8 +303,14 @@ final class MorningControlScopeTest {
                     },
                     new HeldA(events),
                     () -> fail("no terminals"),
-                    () -> fail("no work"))));
-    assertEquals(List.of("root", "M-enter", "root", "M-close"), events);
+                    () -> fail(FIXTURE_NO_WORK_1254C0D8))));
+    assertEquals(
+        List.of(
+            FIXTURE_ROOT_956E6E33,
+            FIXTURE_M_ENTER_C0A587C0,
+            FIXTURE_ROOT_956E6E33,
+            FIXTURE_M_CLOSE_6125B1F5),
+        events);
     assertFalse(m.held.get());
   }
 
@@ -302,15 +326,23 @@ final class MorningControlScopeTest {
                 IOException.class,
                 () ->
                     MorningControlScope.execute(
-                        () -> events.add("root"),
+                        () -> events.add(FIXTURE_ROOT_956E6E33),
                         m,
-                        () -> events.add("stop-eight"),
+                        () -> events.add(FIXTURE_STOP_EIGHT_3A7A7745),
                         a,
                         () -> fail("no A terminal observation"),
-                        () -> fail("no work")))
+                        () -> fail(FIXTURE_NO_WORK_1254C0D8)))
             .getMessage());
     assertEquals(
-        List.of("root", "M-enter", "root", "stop-eight", "root", "A-enter", "M-close"), events);
+        List.of(
+            FIXTURE_ROOT_956E6E33,
+            FIXTURE_M_ENTER_C0A587C0,
+            FIXTURE_ROOT_956E6E33,
+            FIXTURE_STOP_EIGHT_3A7A7745,
+            FIXTURE_ROOT_956E6E33,
+            FIXTURE_A_ENTER_7CA343C0,
+            FIXTURE_M_CLOSE_6125B1F5),
+        events);
     assertFalse(m.held.get());
     assertFalse(a.held.get());
   }
@@ -327,9 +359,9 @@ final class MorningControlScopeTest {
             IOException.class,
             () ->
                 MorningControlScope.execute(
-                    () -> events.add("root"),
+                    () -> events.add(FIXTURE_ROOT_956E6E33),
                     m,
-                    () -> events.add("stop-eight"),
+                    () -> events.add(FIXTURE_STOP_EIGHT_3A7A7745),
                     a,
                     () -> {
                       assertTrue(m.held.get() && a.held.get());
@@ -338,15 +370,15 @@ final class MorningControlScopeTest {
                     () -> fail("no change before fresh eight"))));
     assertEquals(
         List.of(
-            "root",
-            "M-enter",
-            "root",
-            "stop-eight",
-            "root",
-            "A-enter",
-            "root",
-            "A-close",
-            "M-close"),
+            FIXTURE_ROOT_956E6E33,
+            FIXTURE_M_ENTER_C0A587C0,
+            FIXTURE_ROOT_956E6E33,
+            FIXTURE_STOP_EIGHT_3A7A7745,
+            FIXTURE_ROOT_956E6E33,
+            FIXTURE_A_ENTER_7CA343C0,
+            FIXTURE_ROOT_956E6E33,
+            FIXTURE_A_CLOSE_B364A3FB,
+            FIXTURE_M_CLOSE_6125B1F5),
         events);
   }
 
@@ -433,7 +465,7 @@ final class MorningControlScopeTest {
     var run =
         new BatchRun(
             UUID.fromString("00000000-0000-0000-0000-000000000341"),
-            Instant.parse("2026-09-28T05:00:00Z"));
+            Instant.parse(FIXTURE_2026_09_28T05_00_00Z_32CDB6A0));
     var state =
         new MaintenanceRunState(
             new MaintenanceActivation(run, UUID.fromString("00000000-0000-0000-0000-000000000342")),
@@ -450,25 +482,25 @@ final class MorningControlScopeTest {
               return continuation.execute(state);
             } finally {
               originalHeld.set(false);
-              events.add("DB-original-close");
+              events.add(FIXTURE_DB_ORIGINAL_CLOSE_4CD86D7C);
             }
           }
         };
     int value =
         MorningControlScope.execute(
-            () -> events.add("root"),
+            () -> events.add(FIXTURE_ROOT_956E6E33),
             m,
             original,
             () -> {
               assertTrue(m.held.get());
               assertTrue(originalHeld.get());
               assertFalse(a.held.get());
-              events.add("stop-eight");
+              events.add(FIXTURE_STOP_EIGHT_3A7A7745);
             },
             a,
             () -> {
               assertTrue(originalHeld.get());
-              events.add("fresh-eight");
+              events.add(FIXTURE_FRESH_EIGHT_937560B0);
             },
             observed -> {
               assertSame(state, observed);
@@ -481,24 +513,24 @@ final class MorningControlScopeTest {
     assertEquals(7, value);
     assertEquals(
         List.of(
-            "root",
-            "M-enter",
-            "root",
+            FIXTURE_ROOT_956E6E33,
+            FIXTURE_M_ENTER_C0A587C0,
+            FIXTURE_ROOT_956E6E33,
             "DB-original-enter",
-            "root",
-            "stop-eight",
-            "root",
-            "A-enter",
-            "root",
-            "fresh-eight",
-            "root",
+            FIXTURE_ROOT_956E6E33,
+            FIXTURE_STOP_EIGHT_3A7A7745,
+            FIXTURE_ROOT_956E6E33,
+            FIXTURE_A_ENTER_7CA343C0,
+            FIXTURE_ROOT_956E6E33,
+            FIXTURE_FRESH_EIGHT_937560B0,
+            FIXTURE_ROOT_956E6E33,
             "same-run-work",
-            "root",
-            "A-close",
-            "DB-original-close",
-            "root",
-            "M-close",
-            "root"),
+            FIXTURE_ROOT_956E6E33,
+            FIXTURE_A_CLOSE_B364A3FB,
+            FIXTURE_DB_ORIGINAL_CLOSE_4CD86D7C,
+            FIXTURE_ROOT_956E6E33,
+            FIXTURE_M_CLOSE_6125B1F5,
+            FIXTURE_ROOT_956E6E33),
         events);
     assertFalse(originalHeld.get());
   }
@@ -525,14 +557,21 @@ final class MorningControlScopeTest {
             IOException.class,
             () ->
                 MorningControlScope.execute(
-                    () -> events.add("root"),
+                    () -> events.add(FIXTURE_ROOT_956E6E33),
                     m,
                     original,
-                    () -> fail("no stop"),
+                    () -> fail(FIXTURE_NO_STOP_2EDC182D),
                     a,
                     () -> fail("no fresh"),
-                    state -> fail("no work"))));
-    assertEquals(List.of("root", "M-enter", "root", "DB-reference-refused", "M-close"), events);
+                    state -> fail(FIXTURE_NO_WORK_1254C0D8))));
+    assertEquals(
+        List.of(
+            FIXTURE_ROOT_956E6E33,
+            FIXTURE_M_ENTER_C0A587C0,
+            FIXTURE_ROOT_956E6E33,
+            "DB-reference-refused",
+            FIXTURE_M_CLOSE_6125B1F5),
+        events);
     assertFalse(m.held.get());
     assertFalse(a.held.get());
   }
@@ -545,7 +584,7 @@ final class MorningControlScopeTest {
     var run =
         new BatchRun(
             UUID.fromString("00000000-0000-0000-0000-000000000344"),
-            Instant.parse("2026-09-28T05:00:00Z"));
+            Instant.parse(FIXTURE_2026_09_28T05_00_00Z_32CDB6A0));
     var state =
         new MaintenanceRunState(
             new MaintenanceActivation(run, UUID.fromString("00000000-0000-0000-0000-000000000345")),
@@ -555,55 +594,55 @@ final class MorningControlScopeTest {
           @Override
           public <T> T execute(MorningNewRunAdmission.Continuation<T> continuation)
               throws IOException {
-            events.add("original-enter");
+            events.add(FIXTURE_ORIGINAL_ENTER_7D335FBE);
             try {
               return continuation.execute(state);
             } finally {
-              events.add("original-close");
+              events.add(FIXTURE_ORIGINAL_CLOSE_D4B88B9A);
             }
           }
         };
     int value =
         MorningControlScope.execute(
-            () -> events.add("root"),
+            () -> events.add(FIXTURE_ROOT_956E6E33),
             m,
             original,
-            () -> events.add("stop-eight"),
+            () -> events.add(FIXTURE_STOP_EIGHT_3A7A7745),
             a,
-            () -> events.add("fresh-eight"),
+            () -> events.add(FIXTURE_FRESH_EIGHT_937560B0),
             observed -> {
               assertSame(state, observed);
               assertTrue(m.held.get() && a.held.get());
-              events.add("INVALID");
+              events.add(FIXTURE_INVALID_CF35E1BB);
             },
             observed -> {
               assertSame(state, observed);
               assertTrue(m.held.get() && a.held.get());
-              events.add("trusted-work");
+              events.add(FIXTURE_TRUSTED_WORK_456CE552);
               return 7;
             });
     assertEquals(7, value);
     assertEquals(
         List.of(
-            "root",
-            "M-enter",
-            "root",
-            "original-enter",
-            "root",
-            "stop-eight",
-            "root",
-            "A-enter",
-            "root",
-            "fresh-eight",
-            "root",
-            "INVALID",
-            "trusted-work",
-            "root",
-            "A-close",
-            "original-close",
-            "root",
-            "M-close",
-            "root"),
+            FIXTURE_ROOT_956E6E33,
+            FIXTURE_M_ENTER_C0A587C0,
+            FIXTURE_ROOT_956E6E33,
+            FIXTURE_ORIGINAL_ENTER_7D335FBE,
+            FIXTURE_ROOT_956E6E33,
+            FIXTURE_STOP_EIGHT_3A7A7745,
+            FIXTURE_ROOT_956E6E33,
+            FIXTURE_A_ENTER_7CA343C0,
+            FIXTURE_ROOT_956E6E33,
+            FIXTURE_FRESH_EIGHT_937560B0,
+            FIXTURE_ROOT_956E6E33,
+            FIXTURE_INVALID_CF35E1BB,
+            FIXTURE_TRUSTED_WORK_456CE552,
+            FIXTURE_ROOT_956E6E33,
+            FIXTURE_A_CLOSE_B364A3FB,
+            FIXTURE_ORIGINAL_CLOSE_D4B88B9A,
+            FIXTURE_ROOT_956E6E33,
+            FIXTURE_M_CLOSE_6125B1F5,
+            FIXTURE_ROOT_956E6E33),
         events);
   }
 
@@ -615,7 +654,7 @@ final class MorningControlScopeTest {
     var run =
         new BatchRun(
             UUID.fromString("00000000-0000-0000-0000-000000000344"),
-            Instant.parse("2026-09-28T05:00:00Z"));
+            Instant.parse(FIXTURE_2026_09_28T05_00_00Z_32CDB6A0));
     var state =
         new MaintenanceRunState(
             new MaintenanceActivation(run, UUID.fromString("00000000-0000-0000-0000-000000000345")),
@@ -635,12 +674,12 @@ final class MorningControlScopeTest {
             IOException.class,
             () ->
                 MorningControlScope.execute(
-                    () -> events.add("root"),
+                    () -> events.add(FIXTURE_ROOT_956E6E33),
                     m,
                     original,
-                    () -> events.add("stop-eight"),
+                    () -> events.add(FIXTURE_STOP_EIGHT_3A7A7745),
                     a,
-                    () -> events.add("fresh-eight"),
+                    () -> events.add(FIXTURE_FRESH_EIGHT_937560B0),
                     observed -> {
                       events.add("INVALID-fail");
                       throw failure;
@@ -648,19 +687,19 @@ final class MorningControlScopeTest {
                     observed -> fail("no trusted work after failed INVALID"))));
     assertEquals(
         List.of(
-            "root",
-            "M-enter",
-            "root",
-            "root",
-            "stop-eight",
-            "root",
-            "A-enter",
-            "root",
-            "fresh-eight",
-            "root",
+            FIXTURE_ROOT_956E6E33,
+            FIXTURE_M_ENTER_C0A587C0,
+            FIXTURE_ROOT_956E6E33,
+            FIXTURE_ROOT_956E6E33,
+            FIXTURE_STOP_EIGHT_3A7A7745,
+            FIXTURE_ROOT_956E6E33,
+            FIXTURE_A_ENTER_7CA343C0,
+            FIXTURE_ROOT_956E6E33,
+            FIXTURE_FRESH_EIGHT_937560B0,
+            FIXTURE_ROOT_956E6E33,
             "INVALID-fail",
-            "A-close",
-            "M-close"),
+            FIXTURE_A_CLOSE_B364A3FB,
+            FIXTURE_M_CLOSE_6125B1F5),
         events);
     assertFalse(m.held.get());
     assertFalse(a.held.get());
@@ -685,7 +724,7 @@ final class MorningControlScopeTest {
     var run =
         new BatchRun(
             UUID.fromString("00000000-0000-0000-0000-000000000346"),
-            Instant.parse("2026-09-28T05:00:00Z"));
+            Instant.parse(FIXTURE_2026_09_28T05_00_00Z_32CDB6A0));
     var state =
         new MaintenanceRunState(
             new MaintenanceActivation(run, UUID.fromString("00000000-0000-0000-0000-000000000347")),
@@ -728,21 +767,21 @@ final class MorningControlScopeTest {
                   });
             } finally {
               dbHeld.set(false);
-              events.add("DB-original-close");
+              events.add(FIXTURE_DB_ORIGINAL_CLOSE_4CD86D7C);
             }
           }
         };
     int value =
         MorningControlScope.executeOwned(
-            () -> events.add("root"),
+            () -> events.add(FIXTURE_ROOT_956E6E33),
             m,
             original,
-            () -> events.add("stop-eight"),
+            () -> events.add(FIXTURE_STOP_EIGHT_3A7A7745),
             a,
-            () -> events.add("fresh-eight"),
+            () -> events.add(FIXTURE_FRESH_EIGHT_937560B0),
             observed -> {
               assertSame(state, observed);
-              events.add("INVALID");
+              events.add(FIXTURE_INVALID_CF35E1BB);
             },
             (observed, database) -> {
               assertSame(state, observed);
@@ -751,10 +790,12 @@ final class MorningControlScopeTest {
               return 7;
             });
     assertEquals(7, value);
-    assertTrue(events.indexOf("stop-eight") < events.indexOf("fresh-eight"));
-    assertTrue(events.indexOf("fresh-eight") < events.indexOf("INVALID"));
-    assertTrue(events.indexOf("INVALID") < events.indexOf("backup-begin"));
-    assertTrue(events.indexOf("backup-begin") < events.indexOf("DB-original-close"));
+    assertTrue(
+        events.indexOf(FIXTURE_STOP_EIGHT_3A7A7745) < events.indexOf(FIXTURE_FRESH_EIGHT_937560B0));
+    assertTrue(
+        events.indexOf(FIXTURE_FRESH_EIGHT_937560B0) < events.indexOf(FIXTURE_INVALID_CF35E1BB));
+    assertTrue(events.indexOf(FIXTURE_INVALID_CF35E1BB) < events.indexOf("backup-begin"));
+    assertTrue(events.indexOf("backup-begin") < events.indexOf(FIXTURE_DB_ORIGINAL_CLOSE_4CD86D7C));
     assertFalse(m.held.get() || a.held.get() || dbHeld.get());
   }
 
@@ -770,7 +811,7 @@ final class MorningControlScopeTest {
             return fail("no original should open");
           }
         };
-    MorningControlScope.StopPass stop = () -> fail("no stop");
+    MorningControlScope.StopPass stop = () -> fail(FIXTURE_NO_STOP_2EDC182D);
     MorningControlScope.Terminals terminals = () -> fail("no terminals");
     MorningControlScope.Invalidation invalidation = state -> fail("no invalidation");
     MorningNewRunAdmission.OwnedContinuation<Boolean> work = (state, db) -> true;
@@ -860,12 +901,12 @@ final class MorningControlScopeTest {
         assertTrue(m.held.get());
         assertFalse(a.held.get());
         dbHeld.set(true);
-        events.add("original-enter");
+        events.add(FIXTURE_ORIGINAL_ENTER_7D335FBE);
         try {
           return work.execute(state, database);
         } finally {
           dbHeld.set(false);
-          events.add("original-close");
+          events.add(FIXTURE_ORIGINAL_CLOSE_D4B88B9A);
         }
       }
     };
@@ -882,15 +923,15 @@ final class MorningControlScopeTest {
     var epoch = invalidEpoch(state);
     int result =
         MorningControlScope.executeOwnedEpoch(
-            () -> events.add("root"),
+            () -> events.add(FIXTURE_ROOT_956E6E33),
             m,
             epochOriginal(events, m, a, dbHeld, state, database),
-            () -> events.add("stop-eight"),
+            () -> events.add(FIXTURE_STOP_EIGHT_3A7A7745),
             a,
-            () -> events.add("fresh-eight"),
+            () -> events.add(FIXTURE_FRESH_EIGHT_937560B0),
             observed -> {
               assertSame(state, observed);
-              events.add("INVALID");
+              events.add(FIXTURE_INVALID_CF35E1BB);
               return epoch;
             },
             (observed, borrowedDatabase, borrowedEpoch) -> {
@@ -906,25 +947,25 @@ final class MorningControlScopeTest {
     assertEquals(7, result);
     assertEquals(
         List.of(
-            "root",
-            "M-enter",
-            "root",
-            "original-enter",
-            "root",
-            "stop-eight",
-            "root",
-            "A-enter",
-            "root",
-            "fresh-eight",
-            "root",
-            "INVALID",
+            FIXTURE_ROOT_956E6E33,
+            FIXTURE_M_ENTER_C0A587C0,
+            FIXTURE_ROOT_956E6E33,
+            FIXTURE_ORIGINAL_ENTER_7D335FBE,
+            FIXTURE_ROOT_956E6E33,
+            FIXTURE_STOP_EIGHT_3A7A7745,
+            FIXTURE_ROOT_956E6E33,
+            FIXTURE_A_ENTER_7CA343C0,
+            FIXTURE_ROOT_956E6E33,
+            FIXTURE_FRESH_EIGHT_937560B0,
+            FIXTURE_ROOT_956E6E33,
+            FIXTURE_INVALID_CF35E1BB,
             "work",
-            "root",
-            "A-close",
-            "original-close",
-            "root",
-            "M-close",
-            "root"),
+            FIXTURE_ROOT_956E6E33,
+            FIXTURE_A_CLOSE_B364A3FB,
+            FIXTURE_ORIGINAL_CLOSE_D4B88B9A,
+            FIXTURE_ROOT_956E6E33,
+            FIXTURE_M_CLOSE_6125B1F5,
+            FIXTURE_ROOT_956E6E33),
         events);
     assertFalse(m.held.get() || a.held.get() || dbHeld.get());
   }
@@ -957,7 +998,7 @@ final class MorningControlScopeTest {
                     a,
                     () -> {},
                     invalidation,
-                    (s, d, e) -> fail("no work")));
+                    (s, d, e) -> fail(FIXTURE_NO_WORK_1254C0D8)));
       } else {
         assertSame(
             failure,
@@ -972,11 +1013,11 @@ final class MorningControlScopeTest {
                         a,
                         () -> {},
                         invalidation,
-                        (s, d, e) -> fail("no work"))));
+                        (s, d, e) -> fail(FIXTURE_NO_WORK_1254C0D8))));
       }
-      assertEquals(1, events.stream().filter("A-close"::equals).count());
-      assertEquals(1, events.stream().filter("original-close"::equals).count());
-      assertEquals(1, events.stream().filter("M-close"::equals).count());
+      assertEquals(1, events.stream().filter(FIXTURE_A_CLOSE_B364A3FB::equals).count());
+      assertEquals(1, events.stream().filter(FIXTURE_ORIGINAL_CLOSE_D4B88B9A::equals).count());
+      assertEquals(1, events.stream().filter(FIXTURE_M_CLOSE_6125B1F5::equals).count());
       assertFalse(m.held.get() || a.held.get() || dbHeld.get());
     }
   }
@@ -1006,10 +1047,10 @@ final class MorningControlScopeTest {
                   a,
                   () -> {},
                   s -> candidate,
-                  (s, d, e) -> fail("no work")));
-      assertEquals(1, events.stream().filter("A-close"::equals).count());
-      assertEquals(1, events.stream().filter("original-close"::equals).count());
-      assertEquals(1, events.stream().filter("M-close"::equals).count());
+                  (s, d, e) -> fail(FIXTURE_NO_WORK_1254C0D8)));
+      assertEquals(1, events.stream().filter(FIXTURE_A_CLOSE_B364A3FB::equals).count());
+      assertEquals(1, events.stream().filter(FIXTURE_ORIGINAL_CLOSE_D4B88B9A::equals).count());
+      assertEquals(1, events.stream().filter(FIXTURE_M_CLOSE_6125B1F5::equals).count());
       assertFalse(m.held.get() || a.held.get() || dbHeld.get());
     }
   }
@@ -1072,9 +1113,9 @@ final class MorningControlScopeTest {
         () ->
             MorningControlScope.executeOwnedEpoch(
                 () -> {}, m, original, stop, a, terminals, invalidation, (s, d, e) -> null));
-    assertEquals(1, events.stream().filter("A-close"::equals).count());
-    assertEquals(1, events.stream().filter("original-close"::equals).count());
-    assertEquals(1, events.stream().filter("M-close"::equals).count());
+    assertEquals(1, events.stream().filter(FIXTURE_A_CLOSE_B364A3FB::equals).count());
+    assertEquals(1, events.stream().filter(FIXTURE_ORIGINAL_CLOSE_D4B88B9A::equals).count());
+    assertEquals(1, events.stream().filter(FIXTURE_M_CLOSE_6125B1F5::equals).count());
     assertFalse(m.held.get() || a.held.get() || dbHeld.get());
   }
 }

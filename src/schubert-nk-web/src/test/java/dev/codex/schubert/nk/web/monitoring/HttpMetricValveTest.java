@@ -34,6 +34,10 @@ import org.junit.jupiter.api.Test;
 
 /** Unstarted owned Tomcat objects, actual Micrometer; no HTTP/socket/DB/Root. Spec1577. */
 class HttpMetricValveTest {
+  private static final String FIXTURE_GET_04F32A7E = "GET";
+  private static final String FIXTURE_LOGIN_F843C044 = "/login";
+  private static final String FIXTURE_ROUTE_E050EFD0 = "route";
+  private static final String FIXTURE_SUPPRESSION_DISABLED_BC2139ED = "suppression-disabled";
   private static final String ATTRIBUTE = HttpMetricValve.class.getName();
   private static final String REQUESTS = "nk_http_requests_total";
   private static final String DURATION = "nk_http_request_duration_seconds";
@@ -169,7 +173,7 @@ class HttpMetricValveTest {
     var registry = new OwnedRegistry();
     try (registry) {
       var valve = valve(registry, signal::incrementAndGet);
-      var request = request("GET", "/login");
+      var request = request(FIXTURE_GET_04F32A7E, FIXTURE_LOGIN_F843C044);
       var response = response(200);
       valve.invoke(request, response);
       assertEquals(0, total(registry));
@@ -180,10 +184,17 @@ class HttpMetricValveTest {
           1,
           registry
               .get(REQUESTS)
-              .tags("route", "/login", "method", "GET", "status_class", "2xx")
+              .tags(
+                  FIXTURE_ROUTE_E050EFD0,
+                  FIXTURE_LOGIN_F843C044,
+                  "method",
+                  FIXTURE_GET_04F32A7E,
+                  "status_class",
+                  "2xx")
               .counter()
               .count());
-      var timer = registry.get(DURATION).tag("route", "/login").timer();
+      var timer =
+          registry.get(DURATION).tag(FIXTURE_ROUTE_E050EFD0, FIXTURE_LOGIN_F843C044).timer();
       assertEquals(1, timer.count());
       assertEquals(250_000_000, timer.totalTime(TimeUnit.NANOSECONDS));
       assertEquals(200, response.getStatus());
@@ -200,7 +211,7 @@ class HttpMetricValveTest {
         var pool = Executors.newFixedThreadPool(8)) {
       var signal = new AtomicInteger();
       var valve = valve(registry, signal::incrementAndGet);
-      var request = request("POST", "/login");
+      var request = request("POST", FIXTURE_LOGIN_F843C044);
       var response = response(202);
       valve.invoke(request, response);
       valve.invoke(request, response);
@@ -215,7 +226,7 @@ class HttpMetricValveTest {
               .toList();
       for (var result : pool.invokeAll(jobs)) result.get();
       assertEquals(1, total(registry));
-      var other = request("POST", "/login");
+      var other = request("POST", FIXTURE_LOGIN_F843C044);
       valve.invoke(other, response);
       valve.log(other, response, 0);
       assertEquals(2, total(registry));
@@ -239,12 +250,18 @@ class HttpMetricValveTest {
             1,
             registry
                 .get(REQUESTS)
-                .tags("route", "/**", "method", "OTHER", "status_class", (statuses[i] / 100) + "xx")
+                .tags(
+                    FIXTURE_ROUTE_E050EFD0,
+                    "/**",
+                    "method",
+                    "OTHER",
+                    "status_class",
+                    (statuses[i] / 100) + "xx")
                 .counter()
                 .count());
       }
       assertEquals(4, total(registry));
-      assertEquals(4, registry.get(DURATION).tag("route", "/**").timer().count());
+      assertEquals(4, registry.get(DURATION).tag(FIXTURE_ROUTE_E050EFD0, "/**").timer().count());
       assertEquals(0, signal.get());
       for (var meter : registry.getMeters())
         assertFalse(meter.getId().toString().contains("canary"));
@@ -257,16 +274,16 @@ class HttpMetricValveTest {
       var signal = new AtomicInteger();
       var valve = valve(registry, signal::incrementAndGet);
       valve.log(null, null, 0);
-      valve.log(request("GET", "/"), null, 0);
-      valve.log(request("GET", "/"), response(200), 0);
-      var wrong = request("GET", "/");
+      valve.log(request(FIXTURE_GET_04F32A7E, "/"), null, 0);
+      valve.log(request(FIXTURE_GET_04F32A7E, "/"), response(200), 0);
+      var wrong = request(FIXTURE_GET_04F32A7E, "/");
       wrong.setAttribute(ATTRIBUTE, "not-owned");
       valve.log(wrong, response(200), 0);
       for (int invalid = 0; invalid < 5; invalid++) {
         var request =
             invalid == 1
                 ? new Request(new Connector(), new org.apache.coyote.Request())
-                : request("GET", "/");
+                : request(FIXTURE_GET_04F32A7E, "/");
         if (invalid == 1) WebRequestTrace.ensure(request, () -> new UUID(1, 2));
         var response = response(invalid == 2 ? 99 : invalid == 3 ? 600 : 200);
         valve.invoke(request, response);
@@ -295,7 +312,7 @@ class HttpMetricValveTest {
             };
         valve.log(request, response(200), 0);
       }
-      var request = request("GET", "/");
+      var request = request(FIXTURE_GET_04F32A7E, "/");
       valve.invoke(request, response(200));
       request.setAttribute(WebRequestTrace.class.getName(), "not-a-trace");
       valve.log(request, response(200), 0);
@@ -314,7 +331,7 @@ class HttpMetricValveTest {
         var denied =
             assertThrows(
                 IllegalStateException.class,
-                () -> failing.log(request("GET", "/"), response(200), 0));
+                () -> failing.log(request(FIXTURE_GET_04F32A7E, "/"), response(200), 0));
         assertEquals("HTTP metric terminal signal failed", denied.getMessage());
         assertEquals(1, called.get());
       }
@@ -330,7 +347,7 @@ class HttpMetricValveTest {
           registry.timerFailure = timerFailure;
           var called = new AtomicInteger();
           var valve = valve(registry, called::incrementAndGet);
-          var request = request("GET", "/login");
+          var request = request(FIXTURE_GET_04F32A7E, FIXTURE_LOGIN_F843C044);
           var response = response(200);
           valve.invoke(request, response);
           registry.fault = Optional.of(failure);
@@ -340,7 +357,13 @@ class HttpMetricValveTest {
           assertEquals(1, called.get());
           assertEquals(1, registry.attempts.get());
           assertEquals(timerFailure ? 1 : 0, total(registry));
-          assertEquals(0, registry.get(DURATION).tag("route", "/login").timer().count());
+          assertEquals(
+              0,
+              registry
+                  .get(DURATION)
+                  .tag(FIXTURE_ROUTE_E050EFD0, FIXTURE_LOGIN_F843C044)
+                  .timer()
+                  .count());
           assertEquals(0, registry.closes.get());
           assertEquals(200, response.getStatus());
         }
@@ -349,16 +372,17 @@ class HttpMetricValveTest {
 
   @Test
   void httpTerm007SignalAndCyclicFatalGraphsKeepFatalIdentity() throws Exception {
-    for (String mode : List.of("ordinary", "fatal", "same", "cycle", "suppression-disabled")) {
+    for (String mode :
+        List.of("ordinary", "fatal", "same", "cycle", FIXTURE_SUPPRESSION_DISABLED_BC2139ED)) {
       try (var registry = new FaultRegistry()) {
         var called = new AtomicInteger();
         RuntimeException primary =
-            mode.equals("suppression-disabled")
+            mode.equals(FIXTURE_SUPPRESSION_DISABLED_BC2139ED)
                 ? new SuppressionDisabledFailure()
                 : new IllegalArgumentException();
         var fatal = new AssertionError();
         Throwable secondary =
-            mode.equals("fatal") || mode.equals("suppression-disabled")
+            mode.equals("fatal") || mode.equals(FIXTURE_SUPPRESSION_DISABLED_BC2139ED)
                 ? fatal
                 : mode.equals("same") ? primary : new IllegalStateException();
         if (mode.equals("cycle")) {
@@ -376,11 +400,13 @@ class HttpMetricValveTest {
                   if (secondary instanceof Error error) throw error;
                   throw (RuntimeException) secondary;
                 });
-        var request = request("GET", "/");
+        var request = request(FIXTURE_GET_04F32A7E, "/");
         var response = response(200);
         valve.invoke(request, response);
         Throwable expected =
-            mode.equals("fatal") || mode.equals("cycle") || mode.equals("suppression-disabled")
+            mode.equals("fatal")
+                    || mode.equals("cycle")
+                    || mode.equals(FIXTURE_SUPPRESSION_DISABLED_BC2139ED)
                 ? fatal
                 : primary;
         assertSame(
@@ -389,7 +415,7 @@ class HttpMetricValveTest {
         assertEquals(1, called.get());
         assertEquals(1, registry.attempts.get());
         assertEquals(
-            mode.equals("same") || mode.equals("suppression-disabled") ? 0 : 1,
+            mode.equals("same") || mode.equals(FIXTURE_SUPPRESSION_DISABLED_BC2139ED) ? 0 : 1,
             primary.getSuppressed().length);
       }
     }
@@ -402,7 +428,7 @@ class HttpMetricValveTest {
       assertThrows(NullPointerException.class, () -> new HttpMetricValve(null, () -> {}));
       assertThrows(NullPointerException.class, () -> new HttpMetricValve(recorder, null));
       var valve = new HttpMetricValve(recorder, () -> {});
-      var request = request("GET", "/");
+      var request = request(FIXTURE_GET_04F32A7E, "/");
       var response = response(200);
       assertThrows(NullPointerException.class, () -> valve.invoke(null, response));
       assertThrows(NullPointerException.class, () -> valve.invoke(request, null));

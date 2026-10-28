@@ -21,6 +21,12 @@ import org.junit.jupiter.api.Test;
 
 /** NK-BAT-001/P017-11; SS331/341/343/SSC304; PT-EXP-4956-001..024. */
 final class ExpirySuccessfulScopeTest {
+  private static final String FIXTURE_SUCCESS_10855C7F = "SUCCESS";
+  private static final String FIXTURE_CLOSE_97959247 = "close";
+  private static final String FIXTURE_BODY_BFD4D039 = "body";
+  private static final String FIXTURE_STATEMENT_0E7F6009 = "statement";
+  private static final String FIXTURE_ROWS_97CDABCA = "rows";
+  private static final String FIXTURE_ACQUIRE_1585EBC6 = "acquire";
   private static final Instant OBSERVED = Instant.parse("2026-10-17T00:00:02Z");
 
   private static ExpiryAuditRepository.Snapshot audit(
@@ -35,7 +41,7 @@ final class ExpirySuccessfulScopeTest {
       assertDoesNotThrow(
           () ->
               ExpiryAuditRepository.verifySuccessfulAudit(
-                  audit("SUCCESS", end, null, null), OBSERVED));
+                  audit(FIXTURE_SUCCESS_10855C7F, end, null, null), OBSERVED));
     }
   }
 
@@ -48,24 +54,24 @@ final class ExpirySuccessfulScopeTest {
 
   @Test
   void exp4956003AbsentEndIsRejectedIndependentlyOfEarlierDbValidation() {
-    denied(audit("SUCCESS", null, null, null));
+    denied(audit(FIXTURE_SUCCESS_10855C7F, null, null, null));
   }
 
   @Test
   void exp4956004OneNanosecondFutureIsRejected() {
-    denied(audit("SUCCESS", OBSERVED.plusNanos(1), null, null));
+    denied(audit(FIXTURE_SUCCESS_10855C7F, OBSERVED.plusNanos(1), null, null));
   }
 
   @Test
   void exp4956005EvenEmptyErrorCodeIsRejected() {
     for (String code : List.of("", "INDEPENDENT_CODE"))
-      denied(audit("SUCCESS", OBSERVED, code, null));
+      denied(audit(FIXTURE_SUCCESS_10855C7F, OBSERVED, code, null));
   }
 
   @Test
   void exp4956006EvenEmptyErrorSummaryIsRejected() {
     for (String text : List.of("", "INDEPENDENT_SUMMARY"))
-      denied(audit("SUCCESS", OBSERVED, null, text));
+      denied(audit(FIXTURE_SUCCESS_10855C7F, OBSERVED, null, text));
   }
 
   @Test
@@ -81,7 +87,7 @@ final class ExpirySuccessfulScopeTest {
         NullPointerException.class,
         () ->
             ExpiryAuditRepository.verifySuccessfulAudit(
-                audit("SUCCESS", OBSERVED, null, null), null));
+                audit(FIXTURE_SUCCESS_10855C7F, OBSERVED, null, null), null));
   }
 
   @Test
@@ -90,13 +96,13 @@ final class ExpirySuccessfulScopeTest {
     Optional<ExpiryAuditRepository.Prior> expected = Optional.empty();
     var actual =
         using(
-            () -> events.add("close"),
+            () -> events.add(FIXTURE_CLOSE_97959247),
             () -> {
-              events.add("body");
+              events.add(FIXTURE_BODY_BFD4D039);
               return expected;
             });
     assertSame(expected, actual);
-    assertEquals(List.of("body", "close"), events);
+    assertEquals(List.of(FIXTURE_BODY_BFD4D039, FIXTURE_CLOSE_97959247), events);
   }
 
   @Test
@@ -174,20 +180,21 @@ final class ExpirySuccessfulScopeTest {
             () ->
                 using(
                     () -> {
-                      events.add("statement");
+                      events.add(FIXTURE_STATEMENT_0E7F6009);
                       throw statementClose;
                     },
                     () ->
                         using(
                             () -> {
-                              events.add("rows");
+                              events.add(FIXTURE_ROWS_97CDABCA);
                               throw rowClose;
                             },
                             () -> {
-                              events.add("body");
+                              events.add(FIXTURE_BODY_BFD4D039);
                               throw primary;
                             }))));
-    assertEquals(List.of("body", "rows", "statement"), events);
+    assertEquals(
+        List.of(FIXTURE_BODY_BFD4D039, FIXTURE_ROWS_97CDABCA, FIXTURE_STATEMENT_0E7F6009), events);
     assertArrayEquals(new Throwable[] {rowClose, statementClose}, primary.getSuppressed());
     var reference = new ArrayList<String>();
     assertSame(
@@ -196,12 +203,12 @@ final class ExpirySuccessfulScopeTest {
             IOException.class,
             () ->
                 javaTwr(
-                    () -> reference.add("statement"),
+                    () -> reference.add(FIXTURE_STATEMENT_0E7F6009),
                     () ->
                         javaTwr(
-                            () -> reference.add("rows"),
+                            () -> reference.add(FIXTURE_ROWS_97CDABCA),
                             () -> {
-                              reference.add("body");
+                              reference.add(FIXTURE_BODY_BFD4D039);
                               throw primary;
                             }))));
     assertEquals(reference, events);
@@ -389,16 +396,16 @@ final class ExpirySuccessfulScopeTest {
               () ->
                   ExpiryAuditRepository.usingJdbc(
                       () -> {
-                        events.add("acquire");
+                        events.add(FIXTURE_ACQUIRE_1585EBC6);
                         failClose(primary);
                         return new Object();
                       },
-                      resource -> events.add("close"),
+                      resource -> events.add(FIXTURE_CLOSE_97959247),
                       resource -> {
-                        events.add("body");
+                        events.add(FIXTURE_BODY_BFD4D039);
                         return Optional.empty();
                       })));
-      assertEquals(List.of("acquire"), events);
+      assertEquals(List.of(FIXTURE_ACQUIRE_1585EBC6), events);
       assertEquals(0, primary.getSuppressed().length);
     }
   }
@@ -410,25 +417,32 @@ final class ExpirySuccessfulScopeTest {
     events.add("make-acquire");
     ExpiryAuditRepository.JdbcAcquire<Object> acquire =
         () -> {
-          events.add("acquire");
+          events.add(FIXTURE_ACQUIRE_1585EBC6);
           return resource;
         };
     events.add("make-close");
     ExpiryAuditRepository.JdbcRelease<Object> release =
         actual -> {
           assertSame(resource, actual);
-          events.add("close");
+          events.add(FIXTURE_CLOSE_97959247);
         };
     events.add("make-read");
     ExpiryAuditRepository.JdbcRead<Object> read =
         actual -> {
           assertSame(resource, actual);
-          events.add("body");
+          events.add(FIXTURE_BODY_BFD4D039);
           return Optional.empty();
         };
     assertEquals(Optional.empty(), ExpiryAuditRepository.usingJdbc(acquire, release, read));
     assertEquals(
-        List.of("make-acquire", "make-close", "make-read", "acquire", "body", "close"), events);
+        List.of(
+            "make-acquire",
+            "make-close",
+            "make-read",
+            FIXTURE_ACQUIRE_1585EBC6,
+            FIXTURE_BODY_BFD4D039,
+            FIXTURE_CLOSE_97959247),
+        events);
   }
 
   @Test
@@ -442,13 +456,13 @@ final class ExpirySuccessfulScopeTest {
             () ->
                 using(
                     () -> {
-                      events.add("statement");
+                      events.add(FIXTURE_STATEMENT_0E7F6009);
                       throw outer;
                     },
                     () ->
                         using(
                             () -> {
-                              events.add("rows");
+                              events.add(FIXTURE_ROWS_97CDABCA);
                               throw primary;
                             },
                             () -> {
@@ -456,7 +470,7 @@ final class ExpirySuccessfulScopeTest {
                             })));
     assertSame(primary, result.getCause());
     assertArrayEquals(new Throwable[] {outer}, result.getSuppressed());
-    assertEquals(List.of("rows", "statement"), events);
+    assertEquals(List.of(FIXTURE_ROWS_97CDABCA, FIXTURE_STATEMENT_0E7F6009), events);
     var referencePrimary = new SQLException("PUBLIC_REFERENCE");
     var referenceOuter = new AssertionError("PUBLIC_REFERENCE_OUTER");
     var reference =

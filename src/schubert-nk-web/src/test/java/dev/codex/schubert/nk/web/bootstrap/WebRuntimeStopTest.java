@@ -14,6 +14,9 @@ import org.junit.jupiter.api.Test;
 
 /** SS342352 / PT-OPS-NWEB-STOP001..005. Independent literal 30s/phase/UNKNOWN oracle. */
 final class WebRuntimeStopTest {
+  private static final String FIXTURE_HTTP_DA90D362 = "HTTP";
+  private static final String FIXTURE_BROKER_4F6E4F9C = "broker";
+
   @Test
   void stop001NormalPhaseOrderAndRepeatedCloseNeverReleaseTwice() throws Exception {
     var clock = new AtomicLong(1_000_000_000L);
@@ -23,7 +26,7 @@ final class WebRuntimeStopTest {
     WebRuntimeStop.Step[] steps = {
       left -> {
         assertEquals(Duration.ofSeconds(30), left);
-        calls.add("HTTP");
+        calls.add(FIXTURE_HTTP_DA90D362);
         clock.addAndGet(2_000_000_000L);
       },
       left -> {
@@ -32,13 +35,13 @@ final class WebRuntimeStopTest {
       },
       left -> {
         assertEquals(Duration.ofSeconds(28), left);
-        calls.add("broker");
+        calls.add(FIXTURE_BROKER_4F6E4F9C);
       }
     };
     owner.close(steps);
     clock.set(80_000_000_000L);
     owner.close(steps);
-    assertEquals(List.of("HTTP", "worker", "broker"), calls);
+    assertEquals(List.of(FIXTURE_HTTP_DA90D362, "worker", FIXTURE_BROKER_4F6E4F9C), calls);
     assertThrows(NullPointerException.class, () -> new WebRuntimeStop(null));
   }
 
@@ -49,7 +52,7 @@ final class WebRuntimeStopTest {
     owner.begin();
     var calls = new ArrayList<String>();
     WebRuntimeStop.Step[] failed = {
-      left -> calls.add("HTTP"),
+      left -> calls.add(FIXTURE_HTTP_DA90D362),
       left -> {
         calls.add("worker-unknown");
         throw new IOException("private detail");
@@ -74,10 +77,13 @@ final class WebRuntimeStopTest {
           },
           left -> {
             assertEquals(Duration.ofSeconds(25), left);
-            calls.add("broker");
+            calls.add(FIXTURE_BROKER_4F6E4F9C);
           }
         });
-    assertEquals(List.of("HTTP", "worker-unknown", "worker-confirmed", "broker"), calls);
+    assertEquals(
+        List.of(
+            FIXTURE_HTTP_DA90D362, "worker-unknown", "worker-confirmed", FIXTURE_BROKER_4F6E4F9C),
+        calls);
   }
 
   @Test

@@ -23,6 +23,7 @@ import org.junit.jupiter.api.Test;
 
 /** OPS009/SYS002004/UI251/SS333343354/SSC308; PT-OPS-CGROUPFD001..008; synthetic FD only. */
 final class CgroupPrimitiveOwnerTest {
+  private static final String FIXTURE_OPENDIRECTORY_9E885716 = "openDirectory";
   private static final String[] TYPE = {
     "NIREIIRERRRREEEE", "IIREIIRERRRREEEE", "RRRRRRRRRRRRRRRR", "EEEEEEEEEEEEEEEE"
   };
@@ -50,7 +51,7 @@ final class CgroupPrimitiveOwnerTest {
                   new Class<?>[] {DirectoryCalls.class},
                   (proxy, method, args) -> {
                     switch (method.getName()) {
-                      case "openRoot", "openDirectory" -> {
+                      case "openRoot", FIXTURE_OPENDIRECTORY_9E885716 -> {
                         opened.add(method.getName());
                         if (opening != null) throw opening;
                         int value = returned == null ? next++ : returned;
@@ -93,11 +94,11 @@ final class CgroupPrimitiveOwnerTest {
       assertEquals(
           List.of(
               "openRoot",
-              "openDirectory",
-              "openDirectory",
-              "openDirectory",
-              "openDirectory",
-              "openDirectory"),
+              FIXTURE_OPENDIRECTORY_9E885716,
+              FIXTURE_OPENDIRECTORY_9E885716,
+              FIXTURE_OPENDIRECTORY_9E885716,
+              FIXTURE_OPENDIRECTORY_9E885716,
+              FIXTURE_OPENDIRECTORY_9E885716),
           fixture.opened);
     }
   }

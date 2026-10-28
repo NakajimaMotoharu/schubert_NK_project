@@ -22,6 +22,8 @@ import org.junit.jupiter.api.io.TempDir;
  * SSC269 hand-written Linux magic/LP64 byte oracle, real retained FD and no classification cache.
  */
 final class LinuxFilesystemClassifierTest {
+  private static final String FIXTURE_PROC_SELF_FD_42_875F6EE5 = "/proc/self/fd/42";
+  private static final String FIXTURE_TMPFS_5401E650 = "tmpfs";
   @TempDir Path root;
 
   @Test
@@ -43,7 +45,8 @@ final class LinuxFilesystemClassifierTest {
       assertSame(
           failure,
           assertThrows(
-              failure.getClass(), () -> classifier.filesystem(Path.of("/proc/self/fd/42"))));
+              failure.getClass(),
+              () -> classifier.filesystem(Path.of(FIXTURE_PROC_SELF_FD_42_875F6EE5))));
       assertNotNull(retained[0]);
       assertFalse(retained[0].scope().isAlive());
       assertThrows(IllegalStateException.class, () -> retained[0].get(ValueLayout.JAVA_LONG, 0));
@@ -57,7 +60,7 @@ final class LinuxFilesystemClassifierTest {
     var classifier =
         new LinuxFilesystemClassifier(
             (path, state) -> {
-              assertEquals("/proc/self/fd/42", path.getString(0));
+              assertEquals(FIXTURE_PROC_SELF_FD_42_875F6EE5, path.getString(0));
               assertEquals(120, state.byteSize());
               assertEquals(0, state.address() % 8);
               // Independent ABI vector: first long f_type, deliberately unrelated bsize/spares.
@@ -72,19 +75,22 @@ final class LinuxFilesystemClassifierTest {
             0xEF53L, "ext2/ext3/ext4",
             0x58465342L, "xfs",
             0x9123683EL, "btrfs",
-            0x01021994L, "tmpfs");
+            0x01021994L, FIXTURE_TMPFS_5401E650);
     for (var entry : expected.entrySet()) {
       magic[0] = entry.getKey();
-      assertEquals(entry.getValue(), classifier.filesystem(Path.of("/proc/self/fd/42")));
+      assertEquals(
+          entry.getValue(), classifier.filesystem(Path.of(FIXTURE_PROC_SELF_FD_42_875F6EE5)));
     }
     magic[0] = 0;
     assertEquals(
         StorageIoException.Reason.UNAVAILABLE,
         assertThrows(
-                StorageIoException.class, () -> classifier.filesystem(Path.of("/proc/self/fd/42")))
+                StorageIoException.class,
+                () -> classifier.filesystem(Path.of(FIXTURE_PROC_SELF_FD_42_875F6EE5)))
             .reason());
     magic[0] = 0x01021994L;
-    assertEquals("tmpfs", classifier.filesystem(Path.of("/proc/self/fd/42")));
+    assertEquals(
+        FIXTURE_TMPFS_5401E650, classifier.filesystem(Path.of(FIXTURE_PROC_SELF_FD_42_875F6EE5)));
     assertEquals(6, calls.get());
   }
 
@@ -153,7 +159,7 @@ final class LinuxFilesystemClassifierTest {
           case "ext2", "ext3", "ext4" -> "ext2/ext3/ext4";
           case "xfs" -> "xfs";
           case "btrfs" -> "btrfs";
-          case "tmpfs" -> "tmpfs";
+          case FIXTURE_TMPFS_5401E650 -> FIXTURE_TMPFS_5401E650;
           default -> throw new AssertionError("PT needs a qualified local filesystem");
         };
     var directory = OwnedTransferDirectory.open(LinuxDirectoryCalls.create(), root);

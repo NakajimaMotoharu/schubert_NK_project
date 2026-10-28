@@ -38,6 +38,19 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** BWORK001..008/NK-OPS-001/BAK/BKO/UI251/SS3416.1/343/SSC092/BUG274. Public bytes only. */
 final class BackupDatabaseWorkerTest {
+  private static final String FIXTURE_IDENTITY_EDC16DF8 = "identity";
+  private static final String FIXTURE_SELF_3A6B7E48 = "self";
+  private static final String FIXTURE_CREDENTIALS_01760C3E = "credentials";
+  private static final String FIXTURE_RUNTIME_2D52CD90 = "runtime";
+  private static final String FIXTURE_PGPASS_0B0C637C = "pgpass";
+  private static final String FIXTURE_DUMP_FAFBE323 = "dump";
+  private static final String FIXTURE_RW_016EE49D = "rw-------";
+  private static final String FIXTURE_SCHUBERT_NK_DUMP_96644B79 = "schubert_nk.dump";
+  private static final String FIXTURE_VERIFYDUMP_4A171C1D = "verifyDump";
+  private static final String FIXTURE_ABC_6CC43F85 = "abc";
+  private static final String FIXTURE_SIZE_EB1E91E4 = "size";
+  private static final String FIXTURE_MODE_B6D5C2C3 = "mode";
+  private static final String FIXTURE_DEV_8A17302D = "dev";
   @TempDir Path temporary;
   static final String REQUEST =
       "NKBACKUP1\nrun=11111111-2222-4333-8444-555555555555\nstarted=2026-09-27T15:00:00Z\n";
@@ -143,13 +156,13 @@ final class BackupDatabaseWorkerTest {
     }
 
     public FixedServiceIdentity.Value identity() throws IOException {
-      point("identity");
-      return nullPort.equals("identity") ? null : identity;
+      point(FIXTURE_IDENTITY_EDC16DF8);
+      return nullPort.equals(FIXTURE_IDENTITY_EDC16DF8) ? null : identity;
     }
 
     public ChildStartupContext.Observed self() throws IOException {
-      point("self");
-      return nullPort.equals("self") ? null : own;
+      point(FIXTURE_SELF_3A6B7E48);
+      return nullPort.equals(FIXTURE_SELF_3A6B7E48) ? null : own;
     }
 
     public InspectorUnitSnapshot unit() {
@@ -164,15 +177,17 @@ final class BackupDatabaseWorkerTest {
     }
 
     public OwnedTransferDirectory credentials() throws IOException {
-      point("credentials");
-      return nullPort.equals("credentials")
+      point(FIXTURE_CREDENTIALS_01760C3E);
+      return nullPort.equals(FIXTURE_CREDENTIALS_01760C3E)
           ? null
           : OwnedTransferDirectory.open(calls, credentials);
     }
 
     public OwnedTransferDirectory runtime() throws IOException {
-      point("runtime");
-      return nullPort.equals("runtime") ? null : OwnedTransferDirectory.open(calls, ram);
+      point(FIXTURE_RUNTIME_2D52CD90);
+      return nullPort.equals(FIXTURE_RUNTIME_2D52CD90)
+          ? null
+          : OwnedTransferDirectory.open(calls, ram);
     }
 
     public OwnedTransferDirectory backup() throws IOException {
@@ -188,40 +203,41 @@ final class BackupDatabaseWorkerTest {
     }
 
     public byte[] pgpass(OwnedTransferDirectory root) throws IOException {
-      point("pgpass");
-      if (nullPort.equals("pgpass")) return null;
+      point(FIXTURE_PGPASS_0B0C637C);
+      if (nullPort.equals(FIXTURE_PGPASS_0B0C637C)) return null;
       raw = BackupDatabaseWorkerTest.pgpass();
       return raw;
     }
 
     public void dump(Path output, Path pass, long uid) throws IOException {
-      point("dump");
+      point(FIXTURE_DUMP_FAFBE323);
       assertEquals(992, uid);
       assertArrayEquals(BackupDatabaseWorkerTest.pgpass(), Files.readAllBytes(pass));
       assertArrayEquals(new byte[raw.length], raw);
       assertEquals(
-          PosixFilePermissions.fromString("rw-------"), Files.getPosixFilePermissions(output));
+          PosixFilePermissions.fromString(FIXTURE_RW_016EE49D),
+          Files.getPosixFilePermissions(output));
       if (!emptyDump) Files.writeString(output, "PUBLIC DATABASE DUMP FIXTURE\n");
       if (replaceDump) {
-        Path name = backup.resolve(DIRECTORY).resolve("schubert_nk.dump");
+        Path name = backup.resolve(DIRECTORY).resolve(FIXTURE_SCHUBERT_NK_DUMP_96644B79);
         Files.move(name, name.resolveSibling("kept-original"));
         Files.writeString(name, "PUBLIC replacement\n");
-        Files.setPosixFilePermissions(name, PosixFilePermissions.fromString("rw-------"));
+        Files.setPosixFilePermissions(name, PosixFilePermissions.fromString(FIXTURE_RW_016EE49D));
       }
     }
 
     public void verifyDump(Path output, long uid) throws IOException {
-      point("verifyDump");
+      point(FIXTURE_VERIFYDUMP_4A171C1D);
       assertEquals(992, uid);
-      assertEquals("abc", Files.readString(output));
+      assertEquals(FIXTURE_ABC_6CC43F85, Files.readString(output));
       if (replaceDump) {
         Path name =
             backup
                 .resolve(DIRECTORY.substring(0, DIRECTORY.length() - 5))
-                .resolve("schubert_nk.dump");
+                .resolve(FIXTURE_SCHUBERT_NK_DUMP_96644B79);
         Files.move(name, name.resolveSibling("kept-original"));
-        Files.writeString(name, "abc");
-        Files.setPosixFilePermissions(name, PosixFilePermissions.fromString("rw-------"));
+        Files.writeString(name, FIXTURE_ABC_6CC43F85);
+        Files.setPosixFilePermissions(name, PosixFilePermissions.fromString(FIXTURE_RW_016EE49D));
       }
     }
 
@@ -290,17 +306,17 @@ final class BackupDatabaseWorkerTest {
     try (var f = new Fixture()) {
       prepareVerification(f);
       new BackupDatabaseWorker(f).execute();
-      assertEquals(1, f.counts.get("verifyDump"));
-      assertFalse(f.counts.containsKey("dump"));
-      assertFalse(f.counts.containsKey("pgpass"));
-      assertFalse(f.counts.containsKey("runtime"));
+      assertEquals(1, f.counts.get(FIXTURE_VERIFYDUMP_4A171C1D));
+      assertFalse(f.counts.containsKey(FIXTURE_DUMP_FAFBE323));
+      assertFalse(f.counts.containsKey(FIXTURE_PGPASS_0B0C637C));
+      assertFalse(f.counts.containsKey(FIXTURE_RUNTIME_2D52CD90));
       assertFalse(f.counts.containsKey("createPrivateFile"));
       assertEquals(
-          "abc",
+          FIXTURE_ABC_6CC43F85,
           Files.readString(
               f.backup
                   .resolve(DIRECTORY.substring(0, DIRECTORY.length() - 5))
-                  .resolve("schubert_nk.dump")));
+                  .resolve(FIXTURE_SCHUBERT_NK_DUMP_96644B79)));
       assertArrayEquals(new byte[f.request.length], f.request);
       assertTrue(f.fds.isEmpty());
     }
@@ -308,26 +324,28 @@ final class BackupDatabaseWorkerTest {
 
   @Test
   void bverify004CorruptionReplacementProcessFailureAndUnknownNeverRegenerate() throws Exception {
-    for (String failure : List.of("hash", "size", "replace", "process", "unknown", "missing")) {
+    for (String failure :
+        List.of("hash", FIXTURE_SIZE_EB1E91E4, "replace", "process", "unknown", "missing")) {
       try (var f = new Fixture()) {
         prepareVerification(f);
         if (failure.equals("hash")) f.requestText = f.requestText.replace("ba7816bf", "ca7816bf");
-        if (failure.equals("size"))
+        if (failure.equals(FIXTURE_SIZE_EB1E91E4))
           f.requestText = f.requestText.replace("dump_size=3", "dump_size=4");
         if (failure.equals("replace")) f.replaceDump = true;
-        if (failure.equals("process")) f.failures.put("verifyDump", new IOException("fixture"));
+        if (failure.equals("process"))
+          f.failures.put(FIXTURE_VERIFYDUMP_4A171C1D, new IOException("fixture"));
         if (failure.equals("missing"))
           f.requestText = f.requestText.replace("2026-09-27T15:00:00Z", "2026-09-27T15:00:01Z");
         var unknown = new IllegalStateException("fixture unknown");
-        if (failure.equals("unknown")) f.failures.put("verifyDump", unknown);
+        if (failure.equals("unknown")) f.failures.put(FIXTURE_VERIFYDUMP_4A171C1D, unknown);
         if (failure.equals("unknown"))
           assertSame(
               unknown,
               assertThrows(
                   IllegalStateException.class, () -> new BackupDatabaseWorker(f).execute()));
         else assertThrows(IOException.class, () -> new BackupDatabaseWorker(f).execute());
-        assertFalse(f.counts.containsKey("dump"));
-        assertFalse(f.counts.containsKey("pgpass"));
+        assertFalse(f.counts.containsKey(FIXTURE_DUMP_FAFBE323));
+        assertFalse(f.counts.containsKey(FIXTURE_PGPASS_0B0C637C));
         assertTrue(f.fds.isEmpty());
       }
     }
@@ -337,9 +355,9 @@ final class BackupDatabaseWorkerTest {
     String name = DIRECTORY.substring(0, DIRECTORY.length() - 5);
     Path directory = f.privateDirectory("existing-");
     Files.move(directory, f.backup.resolve(name));
-    Path dump = f.backup.resolve(name).resolve("schubert_nk.dump");
-    Files.writeString(dump, "abc");
-    Files.setPosixFilePermissions(dump, PosixFilePermissions.fromString("rw-------"));
+    Path dump = f.backup.resolve(name).resolve(FIXTURE_SCHUBERT_NK_DUMP_96644B79);
+    Files.writeString(dump, FIXTURE_ABC_6CC43F85);
+    Files.setPosixFilePermissions(dump, PosixFilePermissions.fromString(FIXTURE_RW_016EE49D));
     f.requestText =
         "NKBACKUPVERIFY1\nrun=11111111-2222-4333-8444-555555555555\nstarted=2026-09-27T15:00:00Z\n"
             + "manifest_sha256=aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa\ndump_size=3\n"
@@ -353,13 +371,13 @@ final class BackupDatabaseWorkerTest {
       f.released();
       assertEquals(
           "PUBLIC DATABASE DUMP FIXTURE\n",
-          Files.readString(f.backup.resolve(DIRECTORY).resolve("schubert_nk.dump")));
+          Files.readString(f.backup.resolve(DIRECTORY).resolve(FIXTURE_SCHUBERT_NK_DUMP_96644B79)));
       try (var files = Files.list(f.ram)) {
         assertEquals(0, files.count());
       }
-      assertEquals(1, f.counts.get("pgpass"));
-      assertEquals(1, f.counts.get("dump"));
-      assertEquals(2, f.counts.get("identity"));
+      assertEquals(1, f.counts.get(FIXTURE_PGPASS_0B0C637C));
+      assertEquals(1, f.counts.get(FIXTURE_DUMP_FAFBE323));
+      assertEquals(2, f.counts.get(FIXTURE_IDENTITY_EDC16DF8));
       assertEquals(
           PosixFilePermissions.fromString("rwx------"),
           Files.getPosixFilePermissions(f.backup.resolve(DIRECTORY)));
@@ -379,12 +397,12 @@ final class BackupDatabaseWorkerTest {
       try (var f = new Fixture()) {
         f.own = own;
         assertThrows(StorageIoException.class, f::execute);
-        assertFalse(f.counts.containsKey("credentials"));
+        assertFalse(f.counts.containsKey(FIXTURE_CREDENTIALS_01760C3E));
       }
     try (var f = new Fixture()) {
       f.invocation = "public-wrong";
       assertThrows(StorageIoException.class, f::execute);
-      assertFalse(f.counts.containsKey("credentials"));
+      assertFalse(f.counts.containsKey(FIXTURE_CREDENTIALS_01760C3E));
     }
     try (var f = new Fixture()) {
       f.state = UNIT.replace("MainPID=123", "MainPID=124");
@@ -394,7 +412,7 @@ final class BackupDatabaseWorkerTest {
       Thread.currentThread().interrupt();
       try {
         assertThrows(StorageIoException.class, f::execute);
-        assertFalse(f.counts.containsKey("credentials"));
+        assertFalse(f.counts.containsKey(FIXTURE_CREDENTIALS_01760C3E));
       } finally {
         assertTrue(Thread.interrupted());
       }
@@ -406,15 +424,15 @@ final class BackupDatabaseWorkerTest {
     assertThrows(NullPointerException.class, () -> new BackupDatabaseWorker(null));
     for (String name :
         List.of(
-            "identity",
-            "self",
+            FIXTURE_IDENTITY_EDC16DF8,
+            FIXTURE_SELF_3A6B7E48,
             "unit",
             "invocation",
-            "credentials",
-            "runtime",
+            FIXTURE_CREDENTIALS_01760C3E,
+            FIXTURE_RUNTIME_2D52CD90,
             "backup",
             "request",
-            "pgpass"))
+            FIXTURE_PGPASS_0B0C637C))
       try (var f = new Fixture()) {
         f.nullPort = name;
         assertThrows(NullPointerException.class, f::execute);
@@ -424,17 +442,17 @@ final class BackupDatabaseWorkerTest {
         // Material is not acquired if copy invariant cannot be established (BUG274).
         f.nullPort = name;
         assertThrows(NullPointerException.class, f::execute);
-        assertFalse(f.counts.containsKey("pgpass"));
+        assertFalse(f.counts.containsKey(FIXTURE_PGPASS_0B0C637C));
       }
   }
 
   @Test
   void rootMetadataAndOutputBinding() throws Exception {
-    for (var key : List.of("mode", "uid", "gid", "nlink", "size"))
+    for (var key : List.of(FIXTURE_MODE_B6D5C2C3, "uid", "gid", "nlink", FIXTURE_SIZE_EB1E91E4))
       try (var f = new Fixture()) {
         Object value =
             switch (key) {
-              case "mode" -> Integer.valueOf(040750);
+              case FIXTURE_MODE_B6D5C2C3 -> Integer.valueOf(040750);
               case "uid" -> Integer.valueOf(991);
               case "gid" -> Integer.valueOf(978);
               case "nlink" -> Integer.valueOf(1);
@@ -442,7 +460,7 @@ final class BackupDatabaseWorkerTest {
             };
         f.metadata = (p, m) -> m.put(key, value);
         assertThrows(StorageIoException.class, f::execute);
-        assertFalse(f.counts.containsKey("dump"));
+        assertFalse(f.counts.containsKey(FIXTURE_DUMP_FAFBE323));
       }
     for (String bad :
         List.of(
@@ -464,7 +482,7 @@ final class BackupDatabaseWorkerTest {
           case "alias" ->
               f.metadata =
                   (p, m) -> {
-                    m.put("dev", 1L);
+                    m.put(FIXTURE_DEV_8A17302D, 1L);
                     m.put("ino", 1L);
                   };
           case "childdev" ->
@@ -472,7 +490,8 @@ final class BackupDatabaseWorkerTest {
                   (p, m) -> {
                     if (Files.isDirectory(p) && p.toString().startsWith("/proc"))
                       try {
-                        if (Files.isSameFile(p, f.backup.resolve(DIRECTORY))) m.put("dev", -1L);
+                        if (Files.isSameFile(p, f.backup.resolve(DIRECTORY)))
+                          m.put(FIXTURE_DEV_8A17302D, -1L);
                       } catch (IOException ignored) {
                         /* new child not yet present */
                       }
@@ -480,7 +499,7 @@ final class BackupDatabaseWorkerTest {
           default ->
               f.metadata =
                   (p, m) -> {
-                    if (((Number) m.get("mode")).intValue() == 0100600) {
+                    if (((Number) m.get(FIXTURE_MODE_B6D5C2C3)).intValue() == 0100600) {
                       Object value =
                           switch (bad) {
                             case "filelinks" -> Integer.valueOf(2);
@@ -490,7 +509,9 @@ final class BackupDatabaseWorkerTest {
                       m.put(
                           bad.equals("filelinks")
                               ? "nlink"
-                              : bad.equals("filesize") ? "size" : "mode",
+                              : bad.equals("filesize")
+                                  ? FIXTURE_SIZE_EB1E91E4
+                                  : FIXTURE_MODE_B6D5C2C3,
                           value);
                     }
                   };
@@ -511,10 +532,15 @@ final class BackupDatabaseWorkerTest {
         f.metadata =
             (p, m) -> {
               try {
-                if (Files.readSymbolicLink(p).getFileName().toString().equals("schubert_nk.dump")) {
+                if (Files.readSymbolicLink(p)
+                    .getFileName()
+                    .toString()
+                    .equals(FIXTURE_SCHUBERT_NK_DUMP_96644B79)) {
                   int n = observations.incrementAndGet();
                   if (corruption.startsWith(n + ":"))
-                    m.put(corruption.substring(2), corruption.endsWith("size") ? 1L : -1L);
+                    m.put(
+                        corruption.substring(2),
+                        corruption.endsWith(FIXTURE_SIZE_EB1E91E4) ? 1L : -1L);
                 }
               } catch (IOException e) {
                 throw new AssertionError(e);
@@ -527,7 +553,7 @@ final class BackupDatabaseWorkerTest {
       f.metadata =
           (p, m) -> {
             try {
-              if (Files.isSameFile(p, f.ram)) m.put("dev", -1L);
+              if (Files.isSameFile(p, f.ram)) m.put(FIXTURE_DEV_8A17302D, -1L);
             } catch (IOException e) {
               throw new AssertionError(e);
             }
@@ -563,14 +589,21 @@ final class BackupDatabaseWorkerTest {
 
   @Test
   void postconditionsAndCompoundCloseFailure() throws Exception {
-    for (String change : List.of("identity", "self", "ram", "parent", "child", "child-device"))
+    for (String change :
+        List.of(
+            FIXTURE_IDENTITY_EDC16DF8,
+            FIXTURE_SELF_3A6B7E48,
+            "ram",
+            "parent",
+            "child",
+            "child-device"))
       try (var f = new Fixture()) {
         f.hook =
             (name, n) -> {
-              if (name.equals("dump")) {
-                if (change.equals("identity"))
+              if (name.equals(FIXTURE_DUMP_FAFBE323)) {
+                if (change.equals(FIXTURE_IDENTITY_EDC16DF8))
                   f.identity = new FixedServiceIdentity.Value(993, 977, List.of(977L, 986L));
-                else if (change.equals("self"))
+                else if (change.equals(FIXTURE_SELF_3A6B7E48))
                   f.own = self(992, 977, SELF.groups(), true, true, "0::/changed\n");
                 else
                   f.metadata =
@@ -583,7 +616,8 @@ final class BackupDatabaseWorkerTest {
                                       ? f.backup
                                       : f.backup.resolve(DIRECTORY);
                           if (Files.isSameFile(p, target))
-                            m.put(change.equals("child-device") ? "dev" : "ino", -1L);
+                            m.put(
+                                change.equals("child-device") ? FIXTURE_DEV_8A17302D : "ino", -1L);
                         } catch (IOException e) {
                           throw new AssertionError(e);
                         }
@@ -594,10 +628,10 @@ final class BackupDatabaseWorkerTest {
       }
     try (var f = new Fixture()) {
       var primary = new IllegalStateException("PUBLIC primary");
-      f.failures.put("dump", primary);
+      f.failures.put(FIXTURE_DUMP_FAFBE323, primary);
       f.hook =
           (name, n) -> {
-            if (name.equals("dump"))
+            if (name.equals(FIXTURE_DUMP_FAFBE323))
               f.failures.put(
                   "close#" + (f.counts.get("close") + 1),
                   new StorageIoException(StorageIoException.Reason.UNAVAILABLE));
@@ -613,7 +647,7 @@ final class BackupDatabaseWorkerTest {
       Files.writeString(f.backup.resolve(DIRECTORY).resolve("original"), "KEEP");
       assertThrows(StorageIoException.class, f::execute);
       assertEquals("KEEP", Files.readString(f.backup.resolve(DIRECTORY).resolve("original")));
-      assertFalse(f.counts.containsKey("pgpass"));
+      assertFalse(f.counts.containsKey(FIXTURE_PGPASS_0B0C637C));
     }
     try (var pool = Executors.newFixedThreadPool(2)) {
       var tasks = new ArrayList<Future<Boolean>>();
@@ -623,7 +657,8 @@ final class BackupDatabaseWorkerTest {
                 () -> {
                   try (var f = new Fixture()) {
                     f.execute();
-                    return Files.exists(f.backup.resolve(DIRECTORY).resolve("schubert_nk.dump"));
+                    return Files.exists(
+                        f.backup.resolve(DIRECTORY).resolve(FIXTURE_SCHUBERT_NK_DUMP_96644B79));
                   }
                 }));
       for (var task : tasks) assertTrue(task.get(10, TimeUnit.SECONDS));

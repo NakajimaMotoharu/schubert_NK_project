@@ -21,6 +21,8 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** REF201001..003 / OPS009 DAT009 UI251 SS331341343 SSC201 BUG788 YKT562. */
 final class SuccessProgressSealTest {
+  private static final String FIXTURE_CLEAN_LOG_A5BE1A72 = "CLEAN_LOG";
+  private static final String FIXTURE_CLEAN_INBOX_OUTBOX_12264CD8 = "CLEAN_INBOX_OUTBOX";
   @TempDir static Path root;
   static BatchDatabaseFixture db;
   static final String RUN = "12345678-9abc-def0-8123-456789abcdef";
@@ -96,8 +98,8 @@ final class SuccessProgressSealTest {
   void ref201001IndependentFullJsonShaAndCursorOnlyMutation() throws Exception {
     try (var c = db.open("schubert_batch")) {
       sql(c, "select pg_advisory_lock(71419602)");
-      assertEquals(hash(LOG_JSON), read(c, "CLEAN_LOG"));
-      assertEquals(hash(INBOX_JSON), read(c, "CLEAN_INBOX_OUTBOX"));
+      assertEquals(hash(LOG_JSON), read(c, FIXTURE_CLEAN_LOG_A5BE1A72));
+      assertEquals(hash(INBOX_JSON), read(c, FIXTURE_CLEAN_INBOX_OUTBOX_12264CD8));
       try (var admin = db.admin()) {
         sql(admin, "update schubert.log_cleanup_progress set after_id=2");
         sql(
@@ -105,11 +107,13 @@ final class SuccessProgressSealTest {
             "update schubert.inbox_inspection_progress set after_message_id='00000000-0000-4000-8000-000000000102'");
       }
       assertEquals(
-          hash(LOG_JSON.replace("\"after_id\":1", "\"after_id\":2")), read(c, "CLEAN_LOG"));
-      assertNotEquals(hash(LOG_JSON), read(c, "CLEAN_LOG"));
+          hash(LOG_JSON.replace("\"after_id\":1", "\"after_id\":2")),
+          read(c, FIXTURE_CLEAN_LOG_A5BE1A72));
+      assertNotEquals(hash(LOG_JSON), read(c, FIXTURE_CLEAN_LOG_A5BE1A72));
       assertEquals(
-          hash(INBOX_JSON.replace("000000000101", "000000000102")), read(c, "CLEAN_INBOX_OUTBOX"));
-      assertNotEquals(hash(INBOX_JSON), read(c, "CLEAN_INBOX_OUTBOX"));
+          hash(INBOX_JSON.replace("000000000101", "000000000102")),
+          read(c, FIXTURE_CLEAN_INBOX_OUTBOX_12264CD8));
+      assertNotEquals(hash(INBOX_JSON), read(c, FIXTURE_CLEAN_INBOX_OUTBOX_12264CD8));
       assertTrue(c.getAutoCommit());
       assertFalse(c.isClosed());
     }
@@ -127,15 +131,21 @@ final class SuccessProgressSealTest {
         }) {
       try (var c = db.open(role)) {
         assertEquals(
-            "42501", assertThrows(SQLException.class, () -> read(c, "CLEAN_LOG")).getSQLState());
+            "42501",
+            assertThrows(SQLException.class, () -> read(c, FIXTURE_CLEAN_LOG_A5BE1A72))
+                .getSQLState());
       }
     }
     try (var c = db.open("schubert_batch")) {
       assertEquals(
-          "55000", assertThrows(SQLException.class, () -> read(c, "CLEAN_LOG")).getSQLState());
+          "55000",
+          assertThrows(SQLException.class, () -> read(c, FIXTURE_CLEAN_LOG_A5BE1A72))
+              .getSQLState());
       sql(c, "select pg_advisory_lock_shared(71419602)");
       assertEquals(
-          "55000", assertThrows(SQLException.class, () -> read(c, "CLEAN_LOG")).getSQLState());
+          "55000",
+          assertThrows(SQLException.class, () -> read(c, FIXTURE_CLEAN_LOG_A5BE1A72))
+              .getSQLState());
       sql(c, "select pg_advisory_unlock_shared(71419602)");
       sql(c, "select pg_advisory_lock(71419602)");
       for (String step : new String[] {"CLEAN_TRANSFER", "", "CLEAN_LOG\n"})
@@ -149,7 +159,7 @@ final class SuccessProgressSealTest {
             QUERY.replace("'2026-09-13T02:00:01Z'", "'2026-09-12T14:59:59Z'")
           }) {
         try (var s = c.prepareStatement(bad)) {
-          s.setString(1, "CLEAN_LOG");
+          s.setString(1, FIXTURE_CLEAN_LOG_A5BE1A72);
           assertEquals("22023", assertThrows(SQLException.class, s::executeQuery).getSQLState());
         }
       }
@@ -162,7 +172,10 @@ final class SuccessProgressSealTest {
         var admin = db.admin()) {
       sql(c, "select pg_advisory_lock(71419602)");
       for (String table : new String[] {"log_cleanup_progress", "inbox_inspection_progress"}) {
-        String step = table.startsWith("log") ? "CLEAN_LOG" : "CLEAN_INBOX_OUTBOX";
+        String step =
+            table.startsWith("log")
+                ? FIXTURE_CLEAN_LOG_A5BE1A72
+                : FIXTURE_CLEAN_INBOX_OUTBOX_12264CD8;
         for (String alteration :
             new String[] {
               "completed_at=null",

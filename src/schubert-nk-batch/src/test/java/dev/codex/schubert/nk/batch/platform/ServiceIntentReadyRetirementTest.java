@@ -15,6 +15,8 @@ import org.junit.jupiter.api.Test;
 
 /** SSC178 live-ready intent capability is separate from Backup/worker terminus. */
 final class ServiceIntentReadyRetirementTest {
+  private static final String FIXTURE_RETIRE_A2A9D4FF = "retire";
+
   static BackupUnitStartClient.Attempt attempt(MaintenanceUnit unit, List<String> events)
       throws IOException {
     var child = new InspectorUnitProbeFixture.Child(new byte[0]);
@@ -30,7 +32,7 @@ final class ServiceIntentReadyRetirementTest {
                   }
 
                   public void retire() {
-                    events.add("retire");
+                    events.add(FIXTURE_RETIRE_A2A9D4FF);
                   }
                 },
             unit,
@@ -50,9 +52,9 @@ final class ServiceIntentReadyRetirementTest {
       }
       events.clear();
       owner.retireReadyAfter(() -> events.add("before"), () -> events.add("after"));
-      assertEquals(1, events.stream().filter("retire"::equals).count());
-      assertTrue(events.indexOf("before") < events.indexOf("retire"));
-      assertTrue(events.indexOf("retire") < events.indexOf("after"));
+      assertEquals(1, events.stream().filter(FIXTURE_RETIRE_A2A9D4FF::equals).count());
+      assertTrue(events.indexOf("before") < events.indexOf(FIXTURE_RETIRE_A2A9D4FF));
+      assertTrue(events.indexOf(FIXTURE_RETIRE_A2A9D4FF) < events.indexOf("after"));
       assertThrows(IOException.class, () -> owner.retireReadyAfter(() -> fail(), () -> fail()));
       assertThrows(IOException.class, () -> owner.requireRetained(() -> fail()));
     }
@@ -73,7 +75,7 @@ final class ServiceIntentReadyRetirementTest {
                       throw fault;
                     },
                     () -> fail())));
-    assertFalse(events.contains("retire"));
+    assertFalse(events.contains(FIXTURE_RETIRE_A2A9D4FF));
     assertSame(
         fault,
         assertThrows(
@@ -84,7 +86,7 @@ final class ServiceIntentReadyRetirementTest {
                     () -> {
                       throw fault;
                     })));
-    assertEquals(1, events.stream().filter("retire"::equals).count());
+    assertEquals(1, events.stream().filter(FIXTURE_RETIRE_A2A9D4FF::equals).count());
     assertThrows(IOException.class, () -> owner.retireReadyAfter(() -> fail(), () -> fail()));
     assertThrows(NullPointerException.class, () -> owner.retireReadyAfter(null, () -> {}));
     assertThrows(NullPointerException.class, () -> owner.retireReadyAfter(() -> {}, null));
@@ -104,7 +106,7 @@ final class ServiceIntentReadyRetirementTest {
       var owner = attempt(unit, events);
       assertThrows(IOException.class, () -> owner.requireRetained(() -> fail()));
       assertThrows(IOException.class, () -> owner.retireReadyAfter(() -> fail(), () -> fail()));
-      assertFalse(events.contains("retire"));
+      assertFalse(events.contains(FIXTURE_RETIRE_A2A9D4FF));
     }
   }
 }

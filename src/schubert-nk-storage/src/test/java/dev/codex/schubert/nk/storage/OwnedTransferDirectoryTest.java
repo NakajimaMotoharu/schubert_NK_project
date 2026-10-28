@@ -30,6 +30,14 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** Native FD ownership and path replacement tests. NK-SCN-001; SSC-019; PT-SCN-008-F02. */
 class OwnedTransferDirectoryTest {
+  private static final String FIXTURE_OUTSIDE_F78EA721 = "outside";
+  private static final String FIXTURE_ASSET_9D9381A7 = "asset";
+  private static final String FIXTURE_MISSING_4B62D186 = "missing";
+  private static final String FIXTURE_LINK_6EFEC986 = "link";
+  private static final String FIXTURE_SYNTHETIC_PRIVATE_PATH_6CBCF6F9 = "SYNTHETIC_PRIVATE_PATH";
+  private static final String FIXTURE_READY_6630F9C3 = ".ready";
+  private static final String FIXTURE_20260908_771C782C = "20260908/";
+  private static final String FIXTURE_PART_92B0D5FC = ".part";
   private static final UUID ID = UUID.fromString("00000000-0000-4000-8000-000000000123");
   private static final LocalDate DATE = LocalDate.of(2026, 9, 8);
   @TempDir Path root;
@@ -39,7 +47,7 @@ class OwnedTransferDirectoryTest {
     Path directory = Files.createDirectory(root.resolve("音楽 folder"));
     Path asset = directory.resolve("音源 name.ogg");
     write(asset);
-    Path outside = Files.createDirectory(root.resolve("outside"));
+    Path outside = Files.createDirectory(root.resolve(FIXTURE_OUTSIDE_F78EA721));
     Files.write(outside.resolve("音源 name.ogg"), new byte[] {9});
     FaultCalls calls = new FaultCalls();
     calls.readOnly = true;
@@ -84,28 +92,39 @@ class OwnedTransferDirectoryTest {
       assertThrows(
           NullPointerException.class,
           () -> parent.atExistingEntryHandle(null, OwnedTransferDirectoryTest::readHeld));
-      assertThrows(NullPointerException.class, () -> parent.atExistingEntryHandle("asset", null));
+      assertThrows(
+          NullPointerException.class,
+          () -> parent.atExistingEntryHandle(FIXTURE_ASSET_9D9381A7, null));
       for (String name : new String[] {"", ".", "..", "a/b", "a\0b"}) {
         assertThrows(IllegalArgumentException.class, () -> parent.openExistingChild(name));
         assertThrows(
             IllegalArgumentException.class,
             () -> parent.atExistingEntryHandle(name, OwnedTransferDirectoryTest::readHeld));
       }
-      failure(StorageIoException.Reason.MISSING, () -> parent.openExistingChild("missing"));
       failure(
           StorageIoException.Reason.MISSING,
-          () -> parent.atExistingEntryHandle("missing", p -> fail("missing entry callback")));
-      assertFalse(Files.exists(root.resolve("missing")));
-      write(root.resolve("asset"));
-      failure(StorageIoException.Reason.UNAVAILABLE, () -> parent.openExistingChild("asset"));
-      Files.createSymbolicLink(root.resolve("link"), root.resolve("asset"));
-      failure(StorageIoException.Reason.UNAVAILABLE, () -> parent.openExistingChild("link"));
+          () -> parent.openExistingChild(FIXTURE_MISSING_4B62D186));
+      failure(
+          StorageIoException.Reason.MISSING,
+          () ->
+              parent.atExistingEntryHandle(
+                  FIXTURE_MISSING_4B62D186, p -> fail("missing entry callback")));
+      assertFalse(Files.exists(root.resolve(FIXTURE_MISSING_4B62D186)));
+      write(root.resolve(FIXTURE_ASSET_9D9381A7));
+      failure(
+          StorageIoException.Reason.UNAVAILABLE,
+          () -> parent.openExistingChild(FIXTURE_ASSET_9D9381A7));
+      Files.createSymbolicLink(
+          root.resolve(FIXTURE_LINK_6EFEC986), root.resolve(FIXTURE_ASSET_9D9381A7));
+      failure(
+          StorageIoException.Reason.UNAVAILABLE,
+          () -> parent.openExistingChild(FIXTURE_LINK_6EFEC986));
       StorageIdentity expected = identity(root);
       failure(
           StorageIoException.Reason.UNAVAILABLE,
           () ->
               parent.atExistingEntryHandle(
-                  "link",
+                  FIXTURE_LINK_6EFEC986,
                   p -> {
                     StorageAttributeGuard.existingFile(
                         Files.readAttributes(p, "unix:owner,group,mode,nlink,size"), expected, 3);
@@ -117,10 +136,10 @@ class OwnedTransferDirectoryTest {
             StorageIoException.Reason.UNAVAILABLE,
             () ->
                 parent.atExistingEntryHandle(
-                    "asset",
+                    FIXTURE_ASSET_9D9381A7,
                     p -> {
                       calls.failClose = closeFailure;
-                      throw new IOException("SYNTHETIC_PRIVATE_PATH");
+                      throw new IOException(FIXTURE_SYNTHETIC_PRIVATE_PATH_6CBCF6F9);
                     }));
         assertEquals(before + 1, calls.closes);
         assertEquals(1, calls.live.size());
@@ -130,29 +149,34 @@ class OwnedTransferDirectoryTest {
           StorageIoException.Reason.UNAVAILABLE,
           () ->
               parent.atExistingEntryHandle(
-                  "asset",
+                  FIXTURE_ASSET_9D9381A7,
                   p -> {
                     calls.failClose = true;
                     return readHeld(p);
                   }));
       assertEquals(before + 1, calls.closes);
       assertEquals(1, calls.live.size());
-      assertArrayEquals(new byte[] {1, 2, 3}, Files.readAllBytes(root.resolve("asset")));
-      assertTrue(Files.isSymbolicLink(root.resolve("link")));
+      assertArrayEquals(
+          new byte[] {1, 2, 3}, Files.readAllBytes(root.resolve(FIXTURE_ASSET_9D9381A7)));
+      assertTrue(Files.isSymbolicLink(root.resolve(FIXTURE_LINK_6EFEC986)));
     }
-    failure(StorageIoException.Reason.UNAVAILABLE, () -> parent.openExistingChild("asset"));
     failure(
         StorageIoException.Reason.UNAVAILABLE,
-        () -> parent.atExistingEntryHandle("asset", OwnedTransferDirectoryTest::readHeld));
+        () -> parent.openExistingChild(FIXTURE_ASSET_9D9381A7));
+    failure(
+        StorageIoException.Reason.UNAVAILABLE,
+        () ->
+            parent.atExistingEntryHandle(
+                FIXTURE_ASSET_9D9381A7, OwnedTransferDirectoryTest::readHeld));
     assertTrue(calls.live.isEmpty());
   }
 
   @Test
   void rd01ExistingDateRetainsReadOnlyInodeAndOutlivesRootWithoutAnyMutation() throws Exception {
     Path date = Files.createDirectory(root.resolve("20260908"));
-    write(date.resolve(ID + ".ready"));
-    Path outside = Files.createDirectory(root.resolve("outside"));
-    Files.write(outside.resolve(ID + ".ready"), new byte[] {9});
+    write(date.resolve(ID + FIXTURE_READY_6630F9C3));
+    Path outside = Files.createDirectory(root.resolve(FIXTURE_OUTSIDE_F78EA721));
+    Files.write(outside.resolve(ID + FIXTURE_READY_6630F9C3), new byte[] {9});
     var before = Files.readAttributes(date, "unix:owner,group,mode,nlink");
     FaultCalls calls = new FaultCalls();
     calls.readOnly = true;
@@ -166,7 +190,8 @@ class OwnedTransferDirectoryTest {
           before, child.atDirectory(p -> Files.readAttributes(p, "unix:owner,group,mode,nlink")));
       assertArrayEquals(
           new byte[] {1, 2, 3}, child.atReadyHandle(ID, OwnedTransferDirectoryTest::readHeld));
-      assertArrayEquals(new byte[] {9}, Files.readAllBytes(outside.resolve(ID + ".ready")));
+      assertArrayEquals(
+          new byte[] {9}, Files.readAllBytes(outside.resolve(ID + FIXTURE_READY_6630F9C3)));
       assertTrue(Files.isSymbolicLink(date));
     } finally {
       parent.close();
@@ -207,7 +232,7 @@ class OwnedTransferDirectoryTest {
     FaultCalls calls = new FaultCalls();
     try (var parent = OwnedTransferDirectory.open(calls, root);
         var child = parent.openDate(DATE)) {
-      Path part = root.resolve("20260908/" + ID + ".part");
+      Path part = root.resolve(FIXTURE_20260908_771C782C + ID + FIXTURE_PART_92B0D5FC);
       Path retained = root.resolve("retained");
       StorageIdentity expected = identity(root);
       assertEquals(
@@ -264,12 +289,13 @@ class OwnedTransferDirectoryTest {
                     ID,
                     handle -> {
                       calls.failClose = fault != 0;
-                      if (fault != 1) throw new IOException("SYNTHETIC_PRIVATE_PATH");
+                      if (fault != 1)
+                        throw new IOException(FIXTURE_SYNTHETIC_PRIVATE_PATH_6CBCF6F9);
                       return Boolean.TRUE;
                     }));
         assertEquals(1, calls.live.size());
-        assertTrue(Files.exists(root.resolve(ID + ".part")));
-        assertEquals(0L, Files.size(root.resolve(ID + ".part")));
+        assertTrue(Files.exists(root.resolve(ID + FIXTURE_PART_92B0D5FC)));
+        assertEquals(0L, Files.size(root.resolve(ID + FIXTURE_PART_92B0D5FC)));
         parent.deletePart(ID);
       }
     }
@@ -285,7 +311,7 @@ class OwnedTransferDirectoryTest {
         var child = parent.openDate(DATE)) {
       StorageIdentity identity = identity(root);
       child.atPart(ID, OwnedTransferDirectoryTest::write);
-      Path part = root.resolve("20260908/" + ID + ".part");
+      Path part = root.resolve(FIXTURE_20260908_771C782C + ID + FIXTURE_PART_92B0D5FC);
       assertArrayEquals(
           new byte[] {1, 2, 3},
           child.atPartHandle(
@@ -303,9 +329,12 @@ class OwnedTransferDirectoryTest {
       child.deletePart(ID);
       child.atPart(ID, OwnedTransferDirectoryTest::write);
       child.publish(ID);
-      Path ready = root.resolve("20260908/" + ID + ".ready");
+      Path ready = root.resolve(FIXTURE_20260908_771C782C + ID + FIXTURE_READY_6630F9C3);
       Path outside =
-          Files.write(root.resolve("outside"), new byte[] {8}, StandardOpenOption.CREATE_NEW);
+          Files.write(
+              root.resolve(FIXTURE_OUTSIDE_F78EA721),
+              new byte[] {8},
+              StandardOpenOption.CREATE_NEW);
       assertArrayEquals(
           new byte[] {1, 2, 3},
           child.atReadyHandle(
@@ -330,9 +359,9 @@ class OwnedTransferDirectoryTest {
     try (var parent = OwnedTransferDirectory.open(calls, root);
         var child = parent.openDate(DATE)) {
       StorageIdentity identity = identity(root);
-      Path outside = root.resolve("outside");
+      Path outside = root.resolve(FIXTURE_OUTSIDE_F78EA721);
       write(outside);
-      Path ready = root.resolve("20260908/" + ID + ".ready");
+      Path ready = root.resolve(FIXTURE_20260908_771C782C + ID + FIXTURE_READY_6630F9C3);
       Files.createSymbolicLink(ready, outside);
       AtomicBoolean readAttempted = new AtomicBoolean();
       failure(
@@ -351,7 +380,8 @@ class OwnedTransferDirectoryTest {
                     return readHeld(handle);
                   }));
       assertFalse(readAttempted.get());
-      Files.createLink(root.resolve("20260908/" + ID + ".part"), outside);
+      Files.createLink(
+          root.resolve(FIXTURE_20260908_771C782C + ID + FIXTURE_PART_92B0D5FC), outside);
       failure(
           StorageIoException.Reason.UNAVAILABLE,
           () ->
@@ -392,7 +422,8 @@ class OwnedTransferDirectoryTest {
               child.atPartHandle(
                   ID,
                   path -> {
-                    throw new java.nio.file.FileAlreadyExistsException("SYNTHETIC_PRIVATE_PATH");
+                    throw new java.nio.file.FileAlreadyExistsException(
+                        FIXTURE_SYNTHETIC_PRIVATE_PATH_6CBCF6F9);
                   }));
       failure(
           StorageIoException.Reason.UNAVAILABLE,
@@ -401,7 +432,8 @@ class OwnedTransferDirectoryTest {
                   ID,
                   path -> {
                     calls.failClose = true;
-                    throw new java.nio.file.FileAlreadyExistsException("SYNTHETIC_PRIVATE_PATH");
+                    throw new java.nio.file.FileAlreadyExistsException(
+                        FIXTURE_SYNTHETIC_PRIVATE_PATH_6CBCF6F9);
                   }));
       assertEquals(2, calls.live.size());
       failure(
@@ -420,7 +452,7 @@ class OwnedTransferDirectoryTest {
               child.atPartHandle(
                   ID,
                   path -> {
-                    throw new IOException("SYNTHETIC_PRIVATE_PATH");
+                    throw new IOException(FIXTURE_SYNTHETIC_PRIVATE_PATH_6CBCF6F9);
                   }));
       assertEquals(2, calls.live.size());
     } finally {
@@ -502,7 +534,7 @@ class OwnedTransferDirectoryTest {
   void f02RootAndDateReplacementCannotRedirectWritePublishOrCleanup() throws Exception {
     FaultCalls calls = new FaultCalls();
     Path trusted = Files.createDirectory(root.resolve("trusted"));
-    Path outside = Files.createDirectory(root.resolve("outside"));
+    Path outside = Files.createDirectory(root.resolve(FIXTURE_OUTSIDE_F78EA721));
     try (var capability = OwnedTransferDirectory.open(calls, trusted)) {
       Files.move(trusted, root.resolve("anchored"));
       Files.createSymbolicLink(trusted, outside);
@@ -510,7 +542,7 @@ class OwnedTransferDirectoryTest {
         Files.move(root.resolve("anchored/20260908"), root.resolve("anchored/retained"));
         Files.createSymbolicLink(root.resolve("anchored/20260908"), outside);
         assertEquals(3L, date.atPart(ID, OwnedTransferDirectoryTest::write));
-        Path part = root.resolve("anchored/retained/" + ID + ".part");
+        Path part = root.resolve("anchored/retained/" + ID + FIXTURE_PART_92B0D5FC);
         assertEquals(
             PosixFilePermissions.fromString("rw-r-----"), Files.getPosixFilePermissions(part));
         date.publish(ID);
@@ -518,7 +550,7 @@ class OwnedTransferDirectoryTest {
         assertFalse(Files.exists(part));
         assertArrayEquals(
             new byte[] {1, 2, 3},
-            Files.readAllBytes(root.resolve("anchored/retained/" + ID + ".ready")));
+            Files.readAllBytes(root.resolve("anchored/retained/" + ID + FIXTURE_READY_6630F9C3)));
         assertEquals(3L, date.atPart(ID, OwnedTransferDirectoryTest::write));
         failure(StorageIoException.Reason.COLLISION, () -> date.publish(ID));
         assertArrayEquals(new byte[] {1, 2, 3}, date.atReady(ID, OwnedTransferDirectoryTest::read));
@@ -558,7 +590,7 @@ class OwnedTransferDirectoryTest {
             child.atReady(
                 ID,
                 path -> {
-                  IOException ex = new IOException("SYNTHETIC_PRIVATE_PATH");
+                  IOException ex = new IOException(FIXTURE_SYNTHETIC_PRIVATE_PATH_6CBCF6F9);
                   ex.addSuppressed(new IOException("SYNTHETIC_PRIVATE_CAUSE"));
                   throw ex;
                 }));
@@ -606,9 +638,11 @@ class OwnedTransferDirectoryTest {
         assertEquals(3L, first.atPart(ID, OwnedTransferDirectoryTest::write));
         assertEquals(3L, last.atPart(ID, OwnedTransferDirectoryTest::write));
         assertArrayEquals(
-            new byte[] {1, 2, 3}, Files.readAllBytes(root.resolve("00010101/" + ID + ".part")));
+            new byte[] {1, 2, 3},
+            Files.readAllBytes(root.resolve("00010101/" + ID + FIXTURE_PART_92B0D5FC)));
         assertArrayEquals(
-            new byte[] {1, 2, 3}, Files.readAllBytes(root.resolve("99991231/" + ID + ".part")));
+            new byte[] {1, 2, 3},
+            Files.readAllBytes(root.resolve("99991231/" + ID + FIXTURE_PART_92B0D5FC)));
       }
     }
     assertTrue(calls.live.isEmpty());
@@ -617,12 +651,12 @@ class OwnedTransferDirectoryTest {
   @Test
   void f02SymlinkAtAnyRootSegmentAndFailedTraversalReleaseEveryOwnedFd() throws Exception {
     FaultCalls calls = new FaultCalls();
-    Path outside = Files.createDirectory(root.resolve("outside"));
+    Path outside = Files.createDirectory(root.resolve(FIXTURE_OUTSIDE_F78EA721));
     Files.createDirectory(outside.resolve("child"));
-    Files.createSymbolicLink(root.resolve("link"), outside);
+    Files.createSymbolicLink(root.resolve(FIXTURE_LINK_6EFEC986), outside);
     failure(
         StorageIoException.Reason.UNAVAILABLE,
-        () -> OwnedTransferDirectory.open(calls, root.resolve("link")));
+        () -> OwnedTransferDirectory.open(calls, root.resolve(FIXTURE_LINK_6EFEC986)));
     assertTrue(calls.live.isEmpty());
     failure(
         StorageIoException.Reason.UNAVAILABLE,
@@ -630,7 +664,7 @@ class OwnedTransferDirectoryTest {
     assertTrue(calls.live.isEmpty());
     failure(
         StorageIoException.Reason.MISSING,
-        () -> OwnedTransferDirectory.open(calls, root.resolve("missing")));
+        () -> OwnedTransferDirectory.open(calls, root.resolve(FIXTURE_MISSING_4B62D186)));
     assertTrue(calls.live.isEmpty());
     calls.failClose = true;
     failure(StorageIoException.Reason.UNAVAILABLE, () -> OwnedTransferDirectory.open(calls, root));
@@ -656,7 +690,8 @@ class OwnedTransferDirectoryTest {
       child.atPart(ID, OwnedTransferDirectoryTest::write);
       calls.failSync = true;
       failure(StorageIoException.Reason.UNAVAILABLE, () -> child.publish(ID));
-      assertFalse(Files.exists(root.resolve("20260908/" + ID + ".part")));
+      assertFalse(
+          Files.exists(root.resolve(FIXTURE_20260908_771C782C + ID + FIXTURE_PART_92B0D5FC)));
       assertArrayEquals(new byte[] {1, 2, 3}, child.atReady(ID, OwnedTransferDirectoryTest::read));
       calls.failSync = false;
     }
@@ -712,7 +747,8 @@ class OwnedTransferDirectoryTest {
       assertEquals(0, close.get(10, TimeUnit.SECONDS));
       assertTrue(closed.get());
       assertArrayEquals(
-          new byte[] {1, 2, 3}, Files.readAllBytes(root.resolve("20260908/" + ID + ".part")));
+          new byte[] {1, 2, 3},
+          Files.readAllBytes(root.resolve(FIXTURE_20260908_771C782C + ID + FIXTURE_PART_92B0D5FC)));
     }
     assertTrue(calls.live.isEmpty());
   }

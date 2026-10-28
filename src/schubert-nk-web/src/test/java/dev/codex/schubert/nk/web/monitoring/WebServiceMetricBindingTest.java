@@ -27,6 +27,9 @@ import org.junit.jupiter.api.Test;
 
 /** 1835 WEBSERVICE001..014: own unstarted requests/SDK only, never a server/DB/native startup. */
 final class WebServiceMetricBindingTest {
+  private static final String FIXTURE_DEBUG_B6DFBABB = "DEBUG";
+  private static final String FIXTURE_POOL_3DB42356 = "pool";
+  private static final String FIXTURE_CONFIG_48882AB4 = "config";
   static final String REQUEST_ONE =
       "nk_http_requests_total{method=\"GET\",route=\"/login\",service=\"WEB\",status_class=\"2xx\"} 1.0\n";
   static final String REQUEST_ZERO =
@@ -78,7 +81,8 @@ final class WebServiceMetricBindingTest {
   }
 
   private static WebMetricContext<WebServiceMetricBinding> prepared(Fixture f, Runnable terminal) {
-    return WebServiceMetricBinding.prepareContext("DEBUG", f::pool, f::config, terminal);
+    return WebServiceMetricBinding.prepareContext(
+        FIXTURE_DEBUG_B6DFBABB, f::pool, f::config, terminal);
   }
 
   @Test
@@ -87,19 +91,27 @@ final class WebServiceMetricBindingTest {
     try (var registry = new OverflowSafeHttpMeterRegistry()) {
       assertThrows(
           NullPointerException.class,
-          () -> new WebServiceMetricBinding(null, f.config(), registry, "DEBUG", () -> {}));
+          () ->
+              new WebServiceMetricBinding(
+                  null, f.config(), registry, FIXTURE_DEBUG_B6DFBABB, () -> {}));
       assertThrows(
           NullPointerException.class,
-          () -> new WebServiceMetricBinding(f.pool(), null, registry, "DEBUG", () -> {}));
+          () ->
+              new WebServiceMetricBinding(
+                  f.pool(), null, registry, FIXTURE_DEBUG_B6DFBABB, () -> {}));
       assertThrows(
           NullPointerException.class,
-          () -> new WebServiceMetricBinding(f.pool(), f.config(), null, "DEBUG", () -> {}));
+          () ->
+              new WebServiceMetricBinding(
+                  f.pool(), f.config(), null, FIXTURE_DEBUG_B6DFBABB, () -> {}));
       assertThrows(
           NullPointerException.class,
           () -> new WebServiceMetricBinding(f.pool(), f.config(), registry, null, () -> {}));
       assertThrows(
           NullPointerException.class,
-          () -> new WebServiceMetricBinding(f.pool(), f.config(), registry, "DEBUG", null));
+          () ->
+              new WebServiceMetricBinding(
+                  f.pool(), f.config(), registry, FIXTURE_DEBUG_B6DFBABB, null));
       assertThrows(
           IllegalArgumentException.class,
           () -> new WebServiceMetricBinding(f.pool(), f.config(), registry, "debug", () -> {}));
@@ -119,13 +131,16 @@ final class WebServiceMetricBindingTest {
         };
     assertThrows(
         NullPointerException.class,
-        () -> WebServiceMetricBinding.prepareContext("DEBUG", null, f::config, () -> {}));
+        () ->
+            WebServiceMetricBinding.prepareContext(
+                FIXTURE_DEBUG_B6DFBABB, null, f::config, () -> {}));
     assertThrows(
         NullPointerException.class,
-        () -> WebServiceMetricBinding.prepareContext("DEBUG", pool, null, () -> {}));
+        () -> WebServiceMetricBinding.prepareContext(FIXTURE_DEBUG_B6DFBABB, pool, null, () -> {}));
     assertThrows(
         NullPointerException.class,
-        () -> WebServiceMetricBinding.prepareContext("DEBUG", pool, f::config, null));
+        () ->
+            WebServiceMetricBinding.prepareContext(FIXTURE_DEBUG_B6DFBABB, pool, f::config, null));
     assertThrows(
         NullPointerException.class,
         () -> WebServiceMetricBinding.prepareContext(null, pool, f::config, () -> {}));
@@ -164,22 +179,22 @@ final class WebServiceMetricBindingTest {
     var owner = new AtomicReference<WebMetricContext<WebServiceMetricBinding>>();
     try (var context =
         WebServiceMetricBinding.prepareContext(
-            "DEBUG",
+            FIXTURE_DEBUG_B6DFBABB,
             () -> {
               assertNotNull(owner.get());
-              order.add("pool");
+              order.add(FIXTURE_POOL_3DB42356);
               return f.pool();
             },
             () -> {
               assertNotNull(owner.get());
-              order.add("config");
+              order.add(FIXTURE_CONFIG_48882AB4);
               return f.config();
             },
             () -> {})) {
       owner.set(context);
       assertTrue(order.isEmpty());
       context.initialize();
-      assertEquals(List.of("pool", "config"), order);
+      assertEquals(List.of(FIXTURE_POOL_3DB42356, FIXTURE_CONFIG_48882AB4), order);
       assertTrue(f.calls.isEmpty());
       var binding = context.bindings().orElseThrow();
       assertSame(binding, context.bindings().orElseThrow());
@@ -188,7 +203,7 @@ final class WebServiceMetricBindingTest {
       assertTrue(body.contains("nk_db_pool_connections{service=\"WEB\",state=\"max\"} 2.0\n"));
       assertTrue(body.contains(REQUEST_ZERO));
       f.complete();
-      assertEquals(List.of("pool", "config"), order);
+      assertEquals(List.of(FIXTURE_POOL_3DB42356, FIXTURE_CONFIG_48882AB4), order);
     }
   }
 
@@ -197,7 +212,9 @@ final class WebServiceMetricBindingTest {
       throws Exception {
     var f = fixture();
     try (var registry = new OverflowSafeHttpMeterRegistry()) {
-      var binding = new WebServiceMetricBinding(f.pool(), f.config(), registry, "DEBUG", () -> {});
+      var binding =
+          new WebServiceMetricBinding(
+              f.pool(), f.config(), registry, FIXTURE_DEBUG_B6DFBABB, () -> {});
       var first = observer(binding);
       var second = observer(binding);
       assertNotSame(first, second);
@@ -313,7 +330,7 @@ final class WebServiceMetricBindingTest {
       var reads = new AtomicInteger();
       try (var context =
           WebServiceMetricBinding.prepareContext(
-              "DEBUG",
+              FIXTURE_DEBUG_B6DFBABB,
               () -> {
                 reads.incrementAndGet();
                 if (selected == 0) throw runtime;
@@ -346,13 +363,13 @@ final class WebServiceMetricBindingTest {
       var fatal = new AssertionError("config fatal fixture");
       try (var context =
           WebServiceMetricBinding.prepareContext(
-              "DEBUG",
+              FIXTURE_DEBUG_B6DFBABB,
               () -> {
-                order.add("pool");
+                order.add(FIXTURE_POOL_3DB42356);
                 return f.pool();
               },
               () -> {
-                order.add("config");
+                order.add(FIXTURE_CONFIG_48882AB4);
                 if (selected == 0) throw runtime;
                 if (selected == 1) throw fatal;
                 return null;
@@ -363,7 +380,7 @@ final class WebServiceMetricBindingTest {
         else if (selected == 1)
           assertSame(fatal, assertThrows(AssertionError.class, context::initialize));
         else assertThrows(NullPointerException.class, context::initialize);
-        assertEquals(List.of("pool", "config"), order);
+        assertEquals(List.of(FIXTURE_POOL_3DB42356, FIXTURE_CONFIG_48882AB4), order);
         assertTrue(f.calls.isEmpty());
         assertThrows(IllegalStateException.class, context::initialize);
       }
@@ -410,10 +427,11 @@ final class WebServiceMetricBindingTest {
     var registry = new AtomicReference<MeterRegistry>();
     var context =
         new WebMetricContext<WebServiceMetricBinding>(
-            "DEBUG",
+            FIXTURE_DEBUG_B6DFBABB,
             source -> {
               registry.set(source);
-              return new WebServiceMetricBinding(f.pool(), f.config(), source, "DEBUG", () -> {});
+              return new WebServiceMetricBinding(
+                  f.pool(), f.config(), source, FIXTURE_DEBUG_B6DFBABB, () -> {});
             },
             WebServiceMetricBinding::refresh);
     try {
@@ -436,7 +454,9 @@ final class WebServiceMetricBindingTest {
   void webservice015EmptyDependenciesReceiveOneFreshObserverInImmutableCopy() {
     var f = fixture();
     try (var registry = new OverflowSafeHttpMeterRegistry()) {
-      var binding = new WebServiceMetricBinding(f.pool(), f.config(), registry, "DEBUG", () -> {});
+      var binding =
+          new WebServiceMetricBinding(
+              f.pool(), f.config(), registry, FIXTURE_DEBUG_B6DFBABB, () -> {});
       var original = new java.util.HashMap<Class<?>, Object>();
       var result = binding.withHttpObserver(original);
       assertEquals(java.util.Set.of(HttpMetricValve.class), result.keySet());
@@ -452,7 +472,9 @@ final class WebServiceMetricBindingTest {
   void webservice016DependencySnapshotPreservesValueIdentityAndIgnoresLaterInputMutation() {
     var f = fixture();
     try (var registry = new OverflowSafeHttpMeterRegistry()) {
-      var binding = new WebServiceMetricBinding(f.pool(), f.config(), registry, "DEBUG", () -> {});
+      var binding =
+          new WebServiceMetricBinding(
+              f.pool(), f.config(), registry, FIXTURE_DEBUG_B6DFBABB, () -> {});
       var original = new java.util.HashMap<Class<?>, Object>();
       String marker = "fixture marker";
       Integer number = 7;
@@ -487,7 +509,7 @@ final class WebServiceMetricBindingTest {
     try (var registry = new OverflowSafeHttpMeterRegistry()) {
       var binding =
           new WebServiceMetricBinding(
-              f.pool(), f.config(), registry, "DEBUG", signal::incrementAndGet);
+              f.pool(), f.config(), registry, FIXTURE_DEBUG_B6DFBABB, signal::incrementAndGet);
       assertThrows(NullPointerException.class, () -> binding.withHttpObserver(null));
       assertThrows(
           NullPointerException.class,
@@ -507,7 +529,9 @@ final class WebServiceMetricBindingTest {
   void webservice018TypeMismatchAndPrimitiveKeyAreRejectedWithoutInputChanges() {
     var f = fixture();
     try (var registry = new OverflowSafeHttpMeterRegistry()) {
-      var binding = new WebServiceMetricBinding(f.pool(), f.config(), registry, "DEBUG", () -> {});
+      var binding =
+          new WebServiceMetricBinding(
+              f.pool(), f.config(), registry, FIXTURE_DEBUG_B6DFBABB, () -> {});
       var mismatch = java.util.Map.<Class<?>, Object>of(String.class, 7);
       var primitive = java.util.Map.<Class<?>, Object>of(int.class, 7);
       assertThrows(IllegalArgumentException.class, () -> binding.withHttpObserver(mismatch));
@@ -522,7 +546,9 @@ final class WebServiceMetricBindingTest {
   void webservice019ExistingObserverIsNotReplacedOrRegisteredTwice() {
     var f = fixture();
     try (var registry = new OverflowSafeHttpMeterRegistry()) {
-      var binding = new WebServiceMetricBinding(f.pool(), f.config(), registry, "DEBUG", () -> {});
+      var binding =
+          new WebServiceMetricBinding(
+              f.pool(), f.config(), registry, FIXTURE_DEBUG_B6DFBABB, () -> {});
       var existing = binding.createHttpObserver();
       var supplied = java.util.Map.<Class<?>, Object>of(HttpMetricValve.class, existing);
       assertThrows(IllegalArgumentException.class, () -> binding.withHttpObserver(supplied));
@@ -537,7 +563,9 @@ final class WebServiceMetricBindingTest {
   void webservice020DependencyProviderFailureIsOriginalAndNeverRetriedOrFormatted() {
     var f = fixture();
     try (var registry = new OverflowSafeHttpMeterRegistry()) {
-      var binding = new WebServiceMetricBinding(f.pool(), f.config(), registry, "DEBUG", () -> {});
+      var binding =
+          new WebServiceMetricBinding(
+              f.pool(), f.config(), registry, FIXTURE_DEBUG_B6DFBABB, () -> {});
       var reads = new AtomicInteger();
       var runtime = new IllegalStateException("entry provider fixture");
       java.util.Map<Class<?>, Object> bad =
@@ -610,7 +638,9 @@ final class WebServiceMetricBindingTest {
   void webservice022MalformedMapDuplicateTypeNeverOverwritesDependencies() {
     var f = fixture();
     try (var registry = new OverflowSafeHttpMeterRegistry()) {
-      var binding = new WebServiceMetricBinding(f.pool(), f.config(), registry, "DEBUG", () -> {});
+      var binding =
+          new WebServiceMetricBinding(
+              f.pool(), f.config(), registry, FIXTURE_DEBUG_B6DFBABB, () -> {});
       var duplicate =
           entries(
               java.util.Set.of(

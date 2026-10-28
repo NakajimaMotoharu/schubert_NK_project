@@ -31,6 +31,8 @@ import org.junit.jupiter.api.io.TempDir;
  * PT-OPS-API-REM004: actual broker wire/transactions; deterministic captured provider callbacks.
  */
 class ApiConsumerTerminalRemainderTest {
+  private static final String FIXTURE_QWKREQ01_19741256 = "QWKREQ01";
+
   @Test
   void protocolTerminalAndDirectFatalBothRemainStickyAcrossAllThreeGroups(@TempDir Path root)
       throws Exception {
@@ -130,7 +132,7 @@ class ApiConsumerTerminalRemainderTest {
                   producer,
                   destination,
                   InternalEventListenerTest.eventWire(
-                      n == 4 ? "WLGEVT01" : "QWKREQ01", n == 4 ? 2080 : 64));
+                      n == 4 ? "WLGEVT01" : FIXTURE_QWKREQ01_19741256, n == 4 ? 2080 : 64));
             var message = slot.consumer().receive(5000);
             assertNotNull(message);
             callback.onMessage(message);
@@ -165,7 +167,7 @@ class ApiConsumerTerminalRemainderTest {
             var returned = pending.receive(10000);
             assertNotNull(returned);
             assertArrayEquals(
-                InternalEventListenerTest.eventWire("QWKREQ01", 64),
+                InternalEventListenerTest.eventWire(FIXTURE_QWKREQ01_19741256, 64),
                 returned.getBody(byte[].class));
           }
         }
@@ -205,7 +207,7 @@ class ApiConsumerTerminalRemainderTest {
               source,
               new QuestionWorkListener(
                   event -> {
-                    assertEquals("QWKREQ01", event.header().layoutId().value());
+                    assertEquals(FIXTURE_QWKREQ01_19741256, event.header().layoutId().value());
                     assertEquals(64, event.payload().dataLength());
                     business.incrementAndGet();
                   },
@@ -215,7 +217,7 @@ class ApiConsumerTerminalRemainderTest {
         InternalEventListenerTest.sendEvent(
             producer,
             BrokerTopology.ASYNC_WORK,
-            InternalEventListenerTest.eventWire("QWKREQ01", 64));
+            InternalEventListenerTest.eventWire(FIXTURE_QWKREQ01_19741256, 64));
         assertTrue(completed.await(5, java.util.concurrent.TimeUnit.SECONDS));
         assertEquals(1, commits.get());
         assertEquals(1, business.get());
@@ -303,7 +305,7 @@ class ApiConsumerTerminalRemainderTest {
                 producer,
                 destination,
                 InternalEventListenerTest.eventWire(
-                    n == 4 ? "WLGEVT01" : "QWKREQ01", n == 4 ? 2080 : 64));
+                    n == 4 ? "WLGEVT01" : FIXTURE_QWKREQ01_19741256, n == 4 ? 2080 : 64));
             var slot = slots.get(n);
             var message = slot.consumer().receive(5000);
             assertNotNull(message);

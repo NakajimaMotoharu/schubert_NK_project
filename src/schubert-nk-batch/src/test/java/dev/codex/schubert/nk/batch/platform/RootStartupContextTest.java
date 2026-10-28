@@ -25,13 +25,23 @@ import org.junit.jupiter.api.Test;
 
 /** PT-OPS-ROOTCTX-001..009; literal kernel/system manager vector, never production expected. */
 final class RootStartupContextTest {
+  private static final String FIXTURE_SYNTHETIC_85DA8434 = "synthetic";
+  private static final String FIXTURE_PROCESS_B140B547 = "process";
+  private static final String FIXTURE_999_A90868B2 = "999";
+  private static final String FIXTURE_12345_AFC21EDA = "12345";
+  private static final String FIXTURE_STAT_F3E718BA = "stat";
+  private static final String FIXTURE_STARTUP_CONTEXT_UNAVAILABLE_1B156CA0 =
+      "startup context unavailable";
+
   /** PT-OPS-ROOTQUERYOWN001: partial getter ownership closes in the old strict order. */
   @Test
   void rootqueryown001GetterNullRuntimeAndFatalKeepExactPartialCleanupOrder() {
     for (int at : List.of(1, 2, 3))
       for (Throwable failure :
           new Throwable[] {
-            null, new IllegalStateException("synthetic"), new LinkageError("synthetic")
+            null,
+            new IllegalStateException(FIXTURE_SYNTHETIC_85DA8434),
+            new LinkageError(FIXTURE_SYNTHETIC_85DA8434)
           }) {
         var events = new ArrayList<String>();
         var process =
@@ -61,7 +71,7 @@ final class RootStartupContextTest {
               }
 
               public void destroy() {
-                events.add("process");
+                events.add(FIXTURE_PROCESS_B140B547);
                 super.destroy();
               }
             };
@@ -95,9 +105,9 @@ final class RootStartupContextTest {
         if (failure != null) assertSame(failure, actual);
         assertEquals(
             switch (at) {
-              case 1 -> List.of("process");
-              case 2 -> List.of("stdout", "process");
-              default -> List.of("stdin", "stdout", "process");
+              case 1 -> List.of(FIXTURE_PROCESS_B140B547);
+              case 2 -> List.of("stdout", FIXTURE_PROCESS_B140B547);
+              default -> List.of("stdin", "stdout", FIXTURE_PROCESS_B140B547);
             },
             events);
         assertEquals(1, process.destroyed);
@@ -114,9 +124,9 @@ final class RootStartupContextTest {
   void rootqueryown002FactoryIoRuntimeFatalAndNullNeverBecomeAProcessOwner() {
     for (Throwable failure :
         new Throwable[] {
-          new IOException("synthetic"),
-          new IllegalStateException("synthetic"),
-          new LinkageError("synthetic"),
+          new IOException(FIXTURE_SYNTHETIC_85DA8434),
+          new IllegalStateException(FIXTURE_SYNTHETIC_85DA8434),
+          new LinkageError(FIXTURE_SYNTHETIC_85DA8434),
           null
         }) {
       int[] opens = {0};
@@ -142,7 +152,7 @@ final class RootStartupContextTest {
     RootStartupContext.Service target = RootStartupContext.Service.API;
     String targetUnit;
     String targetGroup;
-    String targetStat = RootStartupContextTest.stat(200, "999");
+    String targetStat = RootStartupContextTest.stat(200, FIXTURE_999_A90868B2);
     long rootUid;
     int targetReads;
     boolean targetDrift;
@@ -241,7 +251,7 @@ final class RootStartupContextTest {
     assertThrows(NullPointerException.class, () -> root.recheckServiceGeneration(morning, null));
     f.targetStat = stat(200, "1000");
     assertThrows(IOException.class, () -> root.recheckServiceGeneration(morning, child));
-    f.targetStat = stat(200, "999");
+    f.targetStat = stat(200, FIXTURE_999_A90868B2);
     f.targetDrift = true;
     assertThrows(IOException.class, () -> root.recheckServiceGeneration(morning, child));
   }
@@ -258,10 +268,10 @@ final class RootStartupContextTest {
       var root = f.context();
       var morning = root.capture(RootStartupContext.Service.MORNING);
       var child = root.captureServiceRoot(morning, service);
-      f.targetStat = stat(200, "999").replace(") R ", ") Z ");
+      f.targetStat = stat(200, FIXTURE_999_A90868B2).replace(") R ", ") Z ");
       assertDoesNotThrow(() -> root.recheckServiceGeneration(morning, child));
       assertFalse(root.serviceGenerationExited(morning, child));
-      f.targetStat = stat(200, "999");
+      f.targetStat = stat(200, FIXTURE_999_A90868B2);
       f.rootUid = 999;
       root.recheckServiceGeneration(morning, child);
       assertFalse(root.serviceGenerationExited(morning, child));
@@ -278,7 +288,7 @@ final class RootStartupContextTest {
     var morning = root.capture(RootStartupContext.Service.MORNING);
     var child = root.captureServiceRoot(morning, RootStartupContext.Service.API);
     for (String state : List.of("Z", "X", "x", "?", "ZZ")) {
-      f.targetStat = stat(200, "999").replace(") R ", ") " + state + " ");
+      f.targetStat = stat(200, FIXTURE_999_A90868B2).replace(") R ", ") " + state + " ");
       assertThrows(IOException.class, () -> root.captureServiceRoot(morning, f.target));
       if (!state.equals("Z")) {
         assertThrows(IOException.class, () -> root.recheckServiceGeneration(morning, child));
@@ -288,16 +298,16 @@ final class RootStartupContextTest {
     f.targetStat = stat(200, "1000").replace(") R ", ") Z ");
     assertThrows(IOException.class, () -> root.recheckServiceGeneration(morning, child));
     assertThrows(IOException.class, () -> root.serviceGenerationExited(morning, child));
-    f.targetStat = stat(200, "999").replace(") R ", ") Z ");
+    f.targetStat = stat(200, FIXTURE_999_A90868B2).replace(") R ", ") Z ");
     f.targetGroup = "0::/system.slice/foreign.service\n";
     assertThrows(IOException.class, () -> root.recheckServiceGeneration(morning, child));
     f.targetGroup = "0::/system.slice/schubert-nk-api.service\n";
     f.targetDrift = true;
     assertThrows(IOException.class, () -> root.recheckServiceGeneration(morning, child));
     f.targetDrift = false;
-    f.own = stat(42, "12345").replace(") R ", ") Z ");
+    f.own = stat(42, FIXTURE_12345_AFC21EDA).replace(") R ", ") Z ");
     assertThrows(IOException.class, () -> root.recheckServiceGeneration(morning, child));
-    f.own = stat(42, "12345");
+    f.own = stat(42, FIXTURE_12345_AFC21EDA);
     f.init = stat(1, "5").replace(") R ", ") Z ");
     assertThrows(IOException.class, () -> root.recheckServiceGeneration(morning, child));
   }
@@ -357,7 +367,7 @@ final class RootStartupContextTest {
         List.of(
             "uid",
             "cgroup",
-            "stat",
+            FIXTURE_STAT_F3E718BA,
             "manager",
             "zeroPid",
             "largePid",
@@ -376,7 +386,7 @@ final class RootStartupContextTest {
       switch (fault) {
         case "uid" -> f.rootUid = 1;
         case "cgroup" -> f.targetGroup = "0::/system.slice/other.service\n";
-        case "stat" -> f.targetStat = stat(200, "0");
+        case FIXTURE_STAT_F3E718BA -> f.targetStat = stat(200, "0");
         case "manager" -> f.targetDrift = true;
         case "zeroPid" -> f.targetUnit = f.targetUnit.replace("MainPID=200", "MainPID=0");
         case "largePid" -> f.targetUnit = f.targetUnit.replace("MainPID=200", "MainPID=2147483648");
@@ -448,7 +458,7 @@ final class RootStartupContextTest {
     String exe = "/usr/lib/systemd/systemd";
     String boot = BOOT;
     String inv = INV;
-    String own = RootStartupContextTest.stat(42, "12345");
+    String own = RootStartupContextTest.stat(42, FIXTURE_12345_AFC21EDA);
     String init = RootStartupContextTest.stat(1, "5");
     String group = "0::/system.slice/schubert-nk-api.service\n";
     String unit = RootStartupContextTest.unit(RootStartupContext.Service.API);
@@ -484,7 +494,7 @@ final class RootStartupContextTest {
     }
 
     public byte[] stat(long p) throws IOException {
-      check("stat");
+      check(FIXTURE_STAT_F3E718BA);
       return bytes(p == 1 ? init : own);
     }
 
@@ -564,7 +574,7 @@ final class RootStartupContextTest {
     selected[0] = "<IO>";
     var sanitized =
         assertThrows(IOException.class, () -> context.maintenanceDeadline(morning, Long.MAX_VALUE));
-    assertEquals("startup context unavailable", sanitized.getMessage());
+    assertEquals(FIXTURE_STARTUP_CONTEXT_UNAVAILABLE_1B156CA0, sanitized.getMessage());
     assertNull(sanitized.getCause());
     assertEquals(0, sanitized.getSuppressed().length);
     selected[0] = "<NULL>";
@@ -586,7 +596,7 @@ final class RootStartupContextTest {
   static void rejected(Fixture f) {
     IOException e =
         assertThrows(IOException.class, () -> f.context().capture(RootStartupContext.Service.API));
-    assertEquals("startup context unavailable", e.getMessage());
+    assertEquals(FIXTURE_STARTUP_CONTEXT_UNAVAILABLE_1B156CA0, e.getMessage());
     assertNull(e.getCause());
   }
 
@@ -609,7 +619,7 @@ final class RootStartupContextTest {
     f.unit = f.unit.replace("MainPID=42", "MainPID=43");
     assertThrows(IOException.class, () -> context.recheck(snapshot));
     assertEquals(
-        "startup context unavailable",
+        FIXTURE_STARTUP_CONTEXT_UNAVAILABLE_1B156CA0,
         assertThrows(IOException.class, () -> context.recheck(snapshot)).getMessage());
   }
 
@@ -698,16 +708,16 @@ final class RootStartupContextTest {
     for (String s :
         List.of(
             "",
-            stat(43, "12345"),
+            stat(43, FIXTURE_12345_AFC21EDA),
             "42 foo\n",
             "42 (unclosed\n",
             "42 (x) R 1\n",
             stat(42, "0"),
             stat(42, "01"),
             stat(42, "9223372036854775808"),
-            stat(42, "12345").trim(),
-            stat(42, "12345").replace(" R ", " Z "),
-            stat(42, "12345").replace(" R ", " R  "))) {
+            stat(42, FIXTURE_12345_AFC21EDA).trim(),
+            stat(42, FIXTURE_12345_AFC21EDA).replace(" R ", " Z "),
+            stat(42, FIXTURE_12345_AFC21EDA).replace(" R ", " R  "))) {
       var f = new Fixture();
       f.own = s;
       rejected(f);
@@ -796,13 +806,13 @@ final class RootStartupContextTest {
                   1,
                   n == 3 ? null : "/group"));
     }
-    for (String fail : List.of("fs", "exe", "boot", "stat", "group", "unit")) {
+    for (String fail : List.of("fs", "exe", "boot", FIXTURE_STAT_F3E718BA, "group", "unit")) {
       var broken = new Fixture();
       broken.fail = fail;
       IOException e =
           assertThrows(
               IOException.class, () -> broken.context().capture(RootStartupContext.Service.API));
-      assertEquals("startup context unavailable", e.getMessage());
+      assertEquals(FIXTURE_STARTUP_CONTEXT_UNAVAILABLE_1B156CA0, e.getMessage());
       assertNull(e.getCause());
     }
   }
@@ -1001,14 +1011,14 @@ final class RootStartupContextTest {
     for (long pid :
         new long[] {Long.MIN_VALUE, 0, 1, (long) Integer.MAX_VALUE + 1, Long.MAX_VALUE}) {
       assertEquals(
-          "startup context unavailable",
+          FIXTURE_STARTUP_CONTEXT_UNAVAILABLE_1B156CA0,
           assertThrows(IOException.class, () -> io.serviceRootUid(pid)).getMessage());
     }
     // The qualified host PT runs as its ordinary account. Reading our own proc status
     // is allowed, but that identity must never qualify as a service Root identity.
     assertNotEquals(0, io.effectiveUid());
     assertEquals(
-        "startup context unavailable",
+        FIXTURE_STARTUP_CONTEXT_UNAVAILABLE_1B156CA0,
         assertThrows(IOException.class, () -> io.serviceRootUid(ProcessHandle.current().pid()))
             .getMessage());
   }

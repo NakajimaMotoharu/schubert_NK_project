@@ -26,6 +26,13 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** ROOTPAIR001..008: literal role/generation oracle; real FD IO, synthetic Root only. */
 final class RootFailedStartPairRecoveryTest {
+  private static final String FIXTURE_API_LAUNCH_5BC1797F = ".API.launch";
+  private static final String FIXTURE_WEB_LAUNCH_DD7B1D99 = ".WEB.launch";
+  private static final String FIXTURE_PERMIT_START_INTENT_4794D6AC = "permit-start.intent";
+  private static final String FIXTURE_EPOCH_CURRENT_92895879 = "epoch.current";
+  private static final String FIXTURE_OWNER_A60B1118 = ".owner";
+  private static final String FIXTURE_SYNC_5CFA1A73 = "sync";
+  private static final String FIXTURE_OWNER_622F06CB = "owner";
   @TempDir Path temporary;
 
   final class Fixture implements AutoCloseable {
@@ -36,9 +43,9 @@ final class RootFailedStartPairRecoveryTest {
       base.temporary = temporary;
       f = base.new Fixture("API");
       // Independent literal second generation, not a Production-derived expected frame.
-      String api = Files.readString(f.f.parent.resolve(f.epoch + ".API.launch"));
+      String api = Files.readString(f.f.parent.resolve(f.epoch + FIXTURE_API_LAUNCH_5BC1797F));
       f.put(
-          f.epoch + ".WEB.launch",
+          f.epoch + FIXTURE_WEB_LAUNCH_DD7B1D99,
           api.replace("service=API", "service=WEB")
               .replace("invocation=" + "2".repeat(32), "invocation=" + "3".repeat(32))
               .replace("pid=300", "pid=301"));
@@ -60,7 +67,9 @@ final class RootFailedStartPairRecoveryTest {
 
     List<String> names() {
       return List.of(
-          f.epoch + ".WEB.start.intent", f.epoch + ".API.start.intent", "permit-start.intent");
+          f.epoch + ".WEB.start.intent",
+          f.epoch + ".API.start.intent",
+          FIXTURE_PERMIT_START_INTENT_4794D6AC);
     }
 
     void assertQuarantined() throws IOException {
@@ -80,11 +89,11 @@ final class RootFailedStartPairRecoveryTest {
       var before = new HashMap<String, String>();
       for (String name :
           List.of(
-              "epoch.current",
+              FIXTURE_EPOCH_CURRENT_92895879,
               f.f.epoch + ".permit",
-              f.f.epoch + ".owner",
-              f.f.epoch + ".API.launch",
-              f.f.epoch + ".WEB.launch"))
+              f.f.epoch + FIXTURE_OWNER_A60B1118,
+              f.f.epoch + FIXTURE_API_LAUNCH_5BC1797F,
+              f.f.epoch + FIXTURE_WEB_LAUNCH_DD7B1D99))
         before.put(name, Files.readString(f.f.f.parent.resolve(name)));
       var pair = f.observe();
       assertEquals(ServiceConfigFiles.Service.API, pair.api().service());
@@ -97,7 +106,7 @@ final class RootFailedStartPairRecoveryTest {
       var order = new ArrayList<String>();
       f.f.f.hook =
           (event, count) -> {
-            if (event.equals("sync")) {
+            if (event.equals(FIXTURE_SYNC_5CFA1A73)) {
               for (String name : f.names())
                 if (!Files.exists(f.f.f.parent.resolve(name)) && !order.contains(name))
                   order.add(name);
@@ -130,15 +139,15 @@ final class RootFailedStartPairRecoveryTest {
               + "\n";
       String invalid =
           "NKEPOCH1\nstate=INVALID\n" + StartupLaunchFilesTest.BIND + "permit_sha256=-\n";
-      f.f.put("epoch.current", issued);
-      Files.delete(f.f.f.parent.resolve("permit-start.intent"));
+      f.f.put(FIXTURE_EPOCH_CURRENT_92895879, issued);
+      Files.delete(f.f.f.parent.resolve(FIXTURE_PERMIT_START_INTENT_4794D6AC));
       var retained = new HashMap<String, byte[]>();
       for (String name :
           List.of(
               f.f.epoch + ".permit",
-              f.f.epoch + ".owner",
-              f.f.epoch + ".API.launch",
-              f.f.epoch + ".WEB.launch"))
+              f.f.epoch + FIXTURE_OWNER_A60B1118,
+              f.f.epoch + FIXTURE_API_LAUNCH_5BC1797F,
+              f.f.epoch + FIXTURE_WEB_LAUNCH_DD7B1D99))
         retained.put(name, Files.readAllBytes(f.f.f.parent.resolve(name)));
       // The old retirement-only fixture deliberately forbids current replacement. This new
       // publication fixture permits only canonical atomic current replacement, not recovery IO.
@@ -166,7 +175,7 @@ final class RootFailedStartPairRecoveryTest {
             }
 
             public void replace(Path directory, String part, String current) throws IOException {
-              assertEquals("epoch.current", current);
+              assertEquals(FIXTURE_EPOCH_CURRENT_92895879, current);
               Files.move(
                   directory.resolve(part),
                   directory.resolve(current),
@@ -178,17 +187,19 @@ final class RootFailedStartPairRecoveryTest {
       assertEquals(pair.api().permit(), permits.readIssued());
       assertThrows(IOException.class, f::observe); // ISSUED is not failed-Pair authority.
       permits.revoke(pair.api().invalid(), pair.api().permit());
-      assertEquals(invalid, Files.readString(f.f.f.parent.resolve("epoch.current")));
-      assertFalse(Files.exists(f.f.f.parent.resolve("permit-start.intent")));
+      assertEquals(invalid, Files.readString(f.f.f.parent.resolve(FIXTURE_EPOCH_CURRENT_92895879)));
+      assertFalse(Files.exists(f.f.f.parent.resolve(FIXTURE_PERMIT_START_INTENT_4794D6AC)));
       assertThrows(IOException.class, f::observe); // Publication quarantine is still required.
       var publications = new ArrayList<String>();
       f.f.f.hook =
           (event, count) -> {
-            if (event.equals("sync")) {
+            if (event.equals(FIXTURE_SYNC_5CFA1A73)) {
               assertEquals(
                   "",
                   assertDoesNotThrow(
-                      () -> Files.readString(f.f.f.parent.resolve("permit-start.intent"))));
+                      () ->
+                          Files.readString(
+                              f.f.f.parent.resolve(FIXTURE_PERMIT_START_INTENT_4794D6AC))));
               for (String name : f.names())
                 assertEquals(
                     "", assertDoesNotThrow(() -> Files.readString(f.f.f.parent.resolve(name))));
@@ -201,7 +212,7 @@ final class RootFailedStartPairRecoveryTest {
       var order = new ArrayList<String>();
       f.f.f.hook =
           (event, count) -> {
-            if (event.equals("sync"))
+            if (event.equals(FIXTURE_SYNC_5CFA1A73))
               for (String name : f.names())
                 if (!Files.exists(f.f.f.parent.resolve(name)) && !order.contains(name))
                   order.add(name);
@@ -211,20 +222,20 @@ final class RootFailedStartPairRecoveryTest {
           List.of(
               f.f.epoch + ".WEB.start.intent",
               f.f.epoch + ".API.start.intent",
-              "permit-start.intent"),
+              FIXTURE_PERMIT_START_INTENT_4794D6AC),
           order);
-      assertEquals(invalid, Files.readString(f.f.f.parent.resolve("epoch.current")));
+      assertEquals(invalid, Files.readString(f.f.f.parent.resolve(FIXTURE_EPOCH_CURRENT_92895879)));
       for (var entry : retained.entrySet())
         assertArrayEquals(
             entry.getValue(), Files.readAllBytes(f.f.f.parent.resolve(entry.getKey())));
       try (var paths = Files.list(f.f.f.parent)) {
         assertEquals(
             Set.of(
-                "epoch.current",
+                FIXTURE_EPOCH_CURRENT_92895879,
                 f.f.epoch + ".permit",
-                f.f.epoch + ".owner",
-                f.f.epoch + ".API.launch",
-                f.f.epoch + ".WEB.launch"),
+                f.f.epoch + FIXTURE_OWNER_A60B1118,
+                f.f.epoch + FIXTURE_API_LAUNCH_5BC1797F,
+                f.f.epoch + FIXTURE_WEB_LAUNCH_DD7B1D99),
             paths
                 .map(p -> p.getFileName().toString())
                 .collect(java.util.stream.Collectors.toSet()));
@@ -243,13 +254,13 @@ final class RootFailedStartPairRecoveryTest {
               + "permit_sha256="
               + "9".repeat(64)
               + "\n";
-      f.f.put("epoch.current", foreign);
-      Files.delete(f.f.f.parent.resolve("permit-start.intent"));
+      f.f.put(FIXTURE_EPOCH_CURRENT_92895879, foreign);
+      Files.delete(f.f.f.parent.resolve(FIXTURE_PERMIT_START_INTENT_4794D6AC));
       var permits = new StartupPermitFiles(f.f.f.root, f.f.f, f.f, UUID::randomUUID);
       assertThrows(
           IOException.class, () -> permits.revoke(pair.api().invalid(), pair.api().permit()));
-      assertEquals(foreign, Files.readString(f.f.f.parent.resolve("epoch.current")));
-      assertFalse(Files.exists(f.f.f.parent.resolve("permit-start.intent")));
+      assertEquals(foreign, Files.readString(f.f.f.parent.resolve(FIXTURE_EPOCH_CURRENT_92895879)));
+      assertFalse(Files.exists(f.f.f.parent.resolve(FIXTURE_PERMIT_START_INTENT_4794D6AC)));
       for (String role : List.of("API", "WEB"))
         assertEquals(
             "", Files.readString(f.f.f.parent.resolve(f.f.epoch + "." + role + ".start.intent")));
@@ -266,7 +277,8 @@ final class RootFailedStartPairRecoveryTest {
           if (fault.equals("nonempty")) f.f.put(name, "not-empty");
           else {
             Files.delete(marker);
-            if (fault.equals("symlink")) Files.createSymbolicLink(marker, Path.of("epoch.current"));
+            if (fault.equals("symlink"))
+              Files.createSymbolicLink(marker, Path.of(FIXTURE_EPOCH_CURRENT_92895879));
           }
           assertThrows(IOException.class, f::observe, fault + name);
           for (String unchanged : f.names())
@@ -277,9 +289,9 @@ final class RootFailedStartPairRecoveryTest {
 
   @Test
   void crossedGenerationsOwnerDigestAndForeignNamespaceAreRejected() throws Exception {
-    for (String fault : List.of("pid", "invocation", "owner", "permit", "foreign"))
+    for (String fault : List.of("pid", "invocation", FIXTURE_OWNER_622F06CB, "permit", "foreign"))
       try (var f = new Fixture()) {
-        Path launch = f.f.f.parent.resolve(f.f.epoch + ".WEB.launch");
+        Path launch = f.f.f.parent.resolve(f.f.epoch + FIXTURE_WEB_LAUNCH_DD7B1D99);
         String text = Files.readString(launch);
         switch (fault) {
           case "pid" ->
@@ -287,7 +299,7 @@ final class RootFailedStartPairRecoveryTest {
           case "invocation" ->
               f.f.put(
                   launch.getFileName().toString(), text.replace("3".repeat(32), "2".repeat(32)));
-          case "owner" ->
+          case FIXTURE_OWNER_622F06CB ->
               f.f.put(
                   launch.getFileName().toString(),
                   text.replaceAll("owner_sha256=[0-9a-f]{64}", "owner_sha256=" + "1".repeat(64)));
@@ -304,7 +316,7 @@ final class RootFailedStartPairRecoveryTest {
 
   @Test
   void eachUnlinkAndSyncFailureRestoresAllThreeMarkers() throws Exception {
-    for (String event : List.of("unlink", "sync"))
+    for (String event : List.of("unlink", FIXTURE_SYNC_5CFA1A73))
       for (int stage = 1; stage <= 3; stage++)
         try (var f = new Fixture()) {
           var pair = f.observe();
@@ -350,12 +362,14 @@ final class RootFailedStartPairRecoveryTest {
 
   @Test
   void oneQuarantineFailureDoesNotSkipOtherRolesAndNeverOverwrites() throws Exception {
-    for (String bad : List.of("permit-start.intent", "API", "WEB"))
+    for (String bad : List.of(FIXTURE_PERMIT_START_INTENT_4794D6AC, "API", "WEB"))
       try (var f = new Fixture()) {
         var pair = f.observe();
         for (String name : f.names()) Files.delete(f.f.f.parent.resolve(name));
         String selected =
-            bad.equals("permit-start.intent") ? bad : f.f.epoch + "." + bad + ".start.intent";
+            bad.equals(FIXTURE_PERMIT_START_INTENT_4794D6AC)
+                ? bad
+                : f.f.epoch + "." + bad + ".start.intent";
         f.f.put(selected, "preserve anomalous inode");
         var failure = assertThrows(IOException.class, () -> f.quarantine(pair));
         assertEquals(1, failure.getSuppressed().length);
@@ -389,7 +403,7 @@ final class RootFailedStartPairRecoveryTest {
         Thread.interrupted();
       }
       f.assertQuarantined();
-      f.f.put(f.f.epoch + ".owner", "corrupt");
+      f.f.put(f.f.epoch + FIXTURE_OWNER_A60B1118, "corrupt");
       assertThrows(IOException.class, () -> f.retire(pair, ignored -> fail("changed owner")));
       f.assertQuarantined();
     }
@@ -397,7 +411,7 @@ final class RootFailedStartPairRecoveryTest {
 
   @Test
   void finalQuarantineSyncCannotLoseEarlierMarkerOrSharedSource() throws Exception {
-    for (String changed : List.of("permit-start.intent", "owner"))
+    for (String changed : List.of(FIXTURE_PERMIT_START_INTENT_4794D6AC, FIXTURE_OWNER_622F06CB))
       try (var f = new Fixture()) {
         var pair = f.observe();
         f.retire(pair, ignored -> {});
@@ -405,9 +419,10 @@ final class RootFailedStartPairRecoveryTest {
         f.f.f.hook =
             (name, count) -> {
               // Missing marker creation forces once, then the enclosing operation syncs once.
-              if (name.equals("sync") && ++syncs[0] == 6) {
+              if (name.equals(FIXTURE_SYNC_5CFA1A73) && ++syncs[0] == 6) {
                 try {
-                  if (changed.equals("owner")) f.f.put(f.f.epoch + ".owner", "corrupt");
+                  if (changed.equals(FIXTURE_OWNER_622F06CB))
+                    f.f.put(f.f.epoch + FIXTURE_OWNER_A60B1118, "corrupt");
                   else Files.delete(f.f.f.parent.resolve(changed));
                 } catch (IOException fault) {
                   throw new AssertionError(fault);
@@ -508,7 +523,8 @@ final class RootFailedStartPairRecoveryTest {
             IllegalArgumentException.class,
             () -> new RootFailedStartRecovery.PairEvidence(api, changed));
       var marker =
-          new BackupStartIntentFiles(f.f.f.root, f.f.f, f.f, () -> {}, "permit-start.intent");
+          new BackupStartIntentFiles(
+              f.f.f.root, f.f.f, f.f, () -> {}, FIXTURE_PERMIT_START_INTENT_4794D6AC);
       assertThrows(
           IOException.class,
           () -> marker.quarantineService(api.invalid(), ServiceConfigFiles.Service.API));

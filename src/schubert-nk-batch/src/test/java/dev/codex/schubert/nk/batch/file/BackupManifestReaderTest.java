@@ -46,6 +46,18 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** NK-BAT-001/BAK/BKO/UI251/SS341 6.7/343; SSC062/PG169; BAT226..241; independent017046. */
 final class BackupManifestReaderTest {
+  private static final String FIXTURE_MANIFEST_JSON_0D4099EC = "MANIFEST.json";
+  private static final String FIXTURE_SIZE_EB1E91E4 = "size";
+  private static final String FIXTURE_READ_6F365882 = "read";
+  private static final String FIXTURE_CLOSEDIRECTORY_11E791D5 = "closeDirectory";
+  private static final String FIXTURE_CLOCK_49F3C56E = "clock";
+  private static final String FIXTURE_PARENT_E31E1F44 = "parent";
+  private static final String FIXTURE_CHILD_0AFBC7C3 = "child";
+  private static final String FIXTURE_MODE_B6D5C2C3 = "mode";
+  private static final String FIXTURE_UID_0C18F38C = "uid";
+  private static final String FIXTURE_GID_0ACDD642 = "gid";
+  private static final String FIXTURE_PUBLIC_PRIMARY_DBDAEFC3 = "public primary";
+  private static final String FIXTURE_PUBLIC_UNKNOWN_5B451478 = "public unknown";
   @TempDir Path temporary;
   private static final UUID CLEANUP_ACTIVATION =
       UUID.fromString("11111111-2222-4333-8444-555555555555");
@@ -201,7 +213,7 @@ final class BackupManifestReaderTest {
             (event, number) -> {
               if (event.equals("openDirectory") && number == 3)
                 try {
-                  Path manifest = f.child.resolve("MANIFEST.json");
+                  Path manifest = f.child.resolve(FIXTURE_MANIFEST_JSON_0D4099EC);
                   String original = Files.readString(manifest, StandardCharsets.US_ASCII);
                   String changed =
                       cutoff
@@ -327,15 +339,15 @@ final class BackupManifestReaderTest {
           Map.entry("acl", 8),
           Map.entry("readonly", 8),
           Map.entry("openChannel", 1),
-          Map.entry("size", 2),
-          Map.entry("read", 2),
+          Map.entry(FIXTURE_SIZE_EB1E91E4, 2),
+          Map.entry(FIXTURE_READ_6F365882, 2),
           Map.entry("closeChannel", 1),
           Map.entry("openDirectory", 2),
-          Map.entry("closeDirectory", 2),
+          Map.entry(FIXTURE_CLOSEDIRECTORY_11E791D5, 2),
           Map.entry("openEntry", 2),
           Map.entry("closeEntry", 2),
           Map.entry("effectiveUid", 2),
-          Map.entry("clock", 63));
+          Map.entry(FIXTURE_CLOCK_49F3C56E, 63));
 
   @Test
   void canonicalRootManifest() throws Exception {
@@ -450,15 +462,15 @@ final class BackupManifestReaderTest {
 
   @Test
   void directoryAndOwnerContracts() throws Exception {
-    for (String role : List.of("parent", "child"))
+    for (String role : List.of(FIXTURE_PARENT_E31E1F44, FIXTURE_CHILD_0AFBC7C3))
       for (var bad :
           List.<Map.Entry<String, Object>>of(
-              Map.entry("mode", 040750),
-              Map.entry("mode", 0100700),
-              Map.entry("uid", 0),
-              Map.entry("gid", 0),
+              Map.entry(FIXTURE_MODE_B6D5C2C3, 040750),
+              Map.entry(FIXTURE_MODE_B6D5C2C3, 0100700),
+              Map.entry(FIXTURE_UID_0C18F38C, 0),
+              Map.entry(FIXTURE_GID_0ACDD642, 0),
               Map.entry("nlink", 1),
-              Map.entry("size", -1L))) {
+              Map.entry(FIXTURE_SIZE_EB1E91E4, -1L))) {
         try (var f = fixture()) {
           f.selectedRole = role;
           f.metadata = (r, m) -> m.put(bad.getKey(), bad.getValue());
@@ -468,12 +480,12 @@ final class BackupManifestReaderTest {
         }
       }
     try (var f = fixture()) {
-      f.selectedRole = "child";
+      f.selectedRole = FIXTURE_CHILD_0AFBC7C3;
       f.metadata = (r, m) -> m.put("dev", Long.MIN_VALUE);
       denied(() -> read(f));
       f.released();
     }
-    for (String role : List.of("parent", "child")) {
+    for (String role : List.of(FIXTURE_PARENT_E31E1F44, FIXTURE_CHILD_0AFBC7C3)) {
       try (var f = fixture()) {
         f.selectedRole = role;
         f.readonly = true;
@@ -495,9 +507,9 @@ final class BackupManifestReaderTest {
       try (var f = fixture()) {
         f.metadata =
             (r, m) -> {
-              if (r.equals("parent") || r.equals("child")) {
-                m.put("uid", (int) boundary);
-                m.put("gid", (int) boundary);
+              if (r.equals(FIXTURE_PARENT_E31E1F44) || r.equals(FIXTURE_CHILD_0AFBC7C3)) {
+                m.put(FIXTURE_UID_0C18F38C, (int) boundary);
+                m.put(FIXTURE_GID_0ACDD642, (int) boundary);
               }
             };
         var actual =
@@ -523,16 +535,16 @@ final class BackupManifestReaderTest {
   void manifestMetadataAndAcl() throws Exception {
     for (var bad :
         List.<Map.Entry<String, Object>>of(
-            Map.entry("mode", 0100640),
-            Map.entry("mode", 0120600),
-            Map.entry("uid", (int) UID),
-            Map.entry("gid", (int) GID),
+            Map.entry(FIXTURE_MODE_B6D5C2C3, 0100640),
+            Map.entry(FIXTURE_MODE_B6D5C2C3, 0120600),
+            Map.entry(FIXTURE_UID_0C18F38C, (int) UID),
+            Map.entry(FIXTURE_GID_0ACDD642, (int) GID),
             Map.entry("nlink", 2),
-            Map.entry("size", 0L),
-            Map.entry("size", 4097L),
+            Map.entry(FIXTURE_SIZE_EB1E91E4, 0L),
+            Map.entry(FIXTURE_SIZE_EB1E91E4, 4097L),
             Map.entry("dev", Long.MIN_VALUE))) {
       try (var f = fixture()) {
-        f.selectedRole = "MANIFEST.json";
+        f.selectedRole = FIXTURE_MANIFEST_JSON_0D4099EC;
         f.metadata = (r, m) -> m.put(bad.getKey(), bad.getValue());
         denied(() -> read(f));
         f.released();
@@ -540,7 +552,16 @@ final class BackupManifestReaderTest {
       }
     }
     for (String field :
-        List.of("mode", "uid", "gid", "nlink", "size", "dev", "ino", "lastModifiedTime", "ctime"))
+        List.of(
+            FIXTURE_MODE_B6D5C2C3,
+            FIXTURE_UID_0C18F38C,
+            FIXTURE_GID_0ACDD642,
+            "nlink",
+            FIXTURE_SIZE_EB1E91E4,
+            "dev",
+            "ino",
+            "lastModifiedTime",
+            "ctime"))
       for (boolean missing : List.of(false, true)) {
         try (var f = fixture()) {
           f.metadata =
@@ -552,7 +573,8 @@ final class BackupManifestReaderTest {
           f.released();
         }
       }
-    for (String role : List.of("parent", "child", "MANIFEST.json"))
+    for (String role :
+        List.of(FIXTURE_PARENT_E31E1F44, FIXTURE_CHILD_0AFBC7C3, FIXTURE_MANIFEST_JSON_0D4099EC))
       for (byte[] acl : Arrays.asList(null, new byte[1], new byte[44])) {
         try (var f = fixture()) {
           f.selectedRole = role;
@@ -562,7 +584,7 @@ final class BackupManifestReaderTest {
         }
       }
     try (var f = fixture()) {
-      f.selectedRole = "MANIFEST.json";
+      f.selectedRole = FIXTURE_MANIFEST_JSON_0D4099EC;
       f.readonly = true;
       denied(() -> read(f));
       f.released();
@@ -603,7 +625,7 @@ final class BackupManifestReaderTest {
     try (var f = fixture()) {
       f.hook =
           (name, n) -> {
-            if (name.equals("closeDirectory") && n == 2)
+            if (name.equals(FIXTURE_CLOSEDIRECTORY_11E791D5) && n == 2)
               io(() -> Files.writeString(f.parent.resolve("interference"), "public"));
           };
       denied(() -> read(f));
@@ -621,7 +643,7 @@ final class BackupManifestReaderTest {
               if (name.equals("openEntry") && n == 2)
                 io(
                     () -> {
-                      Path p = f.child.resolve("MANIFEST.json");
+                      Path p = f.child.resolve(FIXTURE_MANIFEST_JSON_0D4099EC);
                       switch (mode) {
                         case "replacement" -> {
                           Files.move(p, f.child.resolve("saved"));
@@ -647,7 +669,7 @@ final class BackupManifestReaderTest {
       }
     for (boolean hard : List.of(false, true))
       try (var f = fixture()) {
-        Path p = f.child.resolve("MANIFEST.json");
+        Path p = f.child.resolve(FIXTURE_MANIFEST_JSON_0D4099EC);
         Path saved = f.child.resolve("saved");
         Files.move(p, saved);
         if (hard) Files.createLink(p, saved);
@@ -659,12 +681,12 @@ final class BackupManifestReaderTest {
     try (var f = fixture()) {
       f.hook =
           (name, n) -> {
-            if (name.equals("read") && n == 2)
+            if (name.equals(FIXTURE_READ_6F365882) && n == 2)
               io(
                   () -> {
-                    Files.write(f.child.resolve("MANIFEST.json"), golden());
+                    Files.write(f.child.resolve(FIXTURE_MANIFEST_JSON_0D4099EC), golden());
                     Files.setLastModifiedTime(
-                        f.child.resolve("MANIFEST.json"), FileTime.fromMillis(1));
+                        f.child.resolve(FIXTURE_MANIFEST_JSON_0D4099EC), FileTime.fromMillis(1));
                   });
           };
       denied(() -> read(f));
@@ -676,20 +698,20 @@ final class BackupManifestReaderTest {
   void sizeAndReadBoundaries() throws Exception {
     for (int size : new int[] {0, 1, 4096, 4097})
       try (var f = fixture()) {
-        Files.write(f.child.resolve("MANIFEST.json"), new byte[size]);
+        Files.write(f.child.resolve(FIXTURE_MANIFEST_JSON_0D4099EC), new byte[size]);
         denied(() -> read(f));
         f.released();
       }
     for (String mode : List.of("zero", "short", "count", "position", "extra", "eof-position"))
       try (var f = fixture()) {
-        f.selectedRole = "MANIFEST.json";
+        f.selectedRole = FIXTURE_MANIFEST_JSON_0D4099EC;
         f.readMode = mode;
         denied(() -> read(f));
         f.released();
       }
     for (String mode : List.of("first", "last"))
       try (var f = fixture()) {
-        f.selectedRole = "MANIFEST.json";
+        f.selectedRole = FIXTURE_MANIFEST_JSON_0D4099EC;
         f.sizeMode = mode;
         denied(() -> read(f));
         f.released();
@@ -698,7 +720,7 @@ final class BackupManifestReaderTest {
       try (var f = fixture()) {
         f.smallRead = chunk;
         assertEquals(f.expected, read(f));
-        assertEquals((964 + chunk - 1) / chunk + 1, f.counts.get("read"));
+        assertEquals((964 + chunk - 1) / chunk + 1, f.counts.get(FIXTURE_READ_6F365882));
         f.released();
         f.unchanged();
       }
@@ -714,7 +736,7 @@ final class BackupManifestReaderTest {
             (new String(golden(), java.nio.charset.StandardCharsets.US_ASCII) + "\n")
                 .getBytes(java.nio.charset.StandardCharsets.US_ASCII))) {
       try (var f = fixture()) {
-        Files.write(f.child.resolve("MANIFEST.json"), invalid);
+        Files.write(f.child.resolve(FIXTURE_MANIFEST_JSON_0D4099EC), invalid);
         var failed = denied(() -> read(f));
         assertNull(failed.getCause());
         f.released();
@@ -725,7 +747,7 @@ final class BackupManifestReaderTest {
       String changed =
           new String(golden(), java.nio.charset.StandardCharsets.US_ASCII)
               .replace("\"id\":90000,", "\"id\":90002,");
-      Files.writeString(f.child.resolve("MANIFEST.json"), changed);
+      Files.writeString(f.child.resolve(FIXTURE_MANIFEST_JSON_0D4099EC), changed);
       denied(() -> read(f));
       f.released();
     }
@@ -746,7 +768,7 @@ final class BackupManifestReaderTest {
   @Test
   void closeFailurePrecedence() throws Exception {
     // BUG195: same unknown instance must never become TWR self-suppression failure.
-    for (String close : List.of("closeChannel", "closeEntry", "closeDirectory"))
+    for (String close : List.of("closeChannel", "closeEntry", FIXTURE_CLOSEDIRECTORY_11E791D5))
       for (Throwable primary :
           List.of(
               new IllegalStateException("public repeated"),
@@ -771,15 +793,15 @@ final class BackupManifestReaderTest {
       assertSame(fatal, assertThrows(AssertionError.class, () -> read(f)));
       f.released();
     }
-    for (String close : List.of("closeChannel", "closeEntry", "closeDirectory"))
+    for (String close : List.of("closeChannel", "closeEntry", FIXTURE_CLOSEDIRECTORY_11E791D5))
       for (int kind = 0; kind < 4; kind++)
         try (var f = fixture()) {
           Throwable primary =
               switch (kind) {
-                case 0 -> new IOException("public primary");
-                case 1 -> new IllegalStateException("public primary");
-                case 2 -> new NullPointerException("public primary");
-                default -> new AssertionError("public primary");
+                case 0 -> new IOException(FIXTURE_PUBLIC_PRIMARY_DBDAEFC3);
+                case 1 -> new IllegalStateException(FIXTURE_PUBLIC_PRIMARY_DBDAEFC3);
+                case 2 -> new NullPointerException(FIXTURE_PUBLIC_PRIMARY_DBDAEFC3);
+                default -> new AssertionError(FIXTURE_PUBLIC_PRIMARY_DBDAEFC3);
               };
           f.extraFaults.add("read#1");
           f.faultTypes.put("read#1", primary);
@@ -794,7 +816,7 @@ final class BackupManifestReaderTest {
             assertNull(secondary.getCause());
             assertEquals("transfer storage operation failed", secondary.getMessage());
           }
-          assertEquals(1, f.counts.get("read"));
+          assertEquals(1, f.counts.get(FIXTURE_READ_6F365882));
           assertTrue(f.counts.get(close) >= 1);
           f.released();
           f.unchanged();
@@ -819,7 +841,7 @@ final class BackupManifestReaderTest {
       try (var f = fixture()) {
         f.hook =
             (name, n) -> {
-              if (name.equals("clock") && n == 2) f.clockValue = 100 + elapsed;
+              if (name.equals(FIXTURE_CLOCK_49F3C56E) && n == 2) f.clockValue = 100 + elapsed;
             };
         denied(() -> read(f));
         f.released();
@@ -827,7 +849,7 @@ final class BackupManifestReaderTest {
     try (var f = fixture()) {
       f.hook =
           (name, n) -> {
-            if (name.equals("clock") && n == 2) f.clockValue = 100 + 1799999999999L;
+            if (name.equals(FIXTURE_CLOCK_49F3C56E) && n == 2) f.clockValue = 100 + 1799999999999L;
           };
       assertEquals(f.expected, read(f));
       f.released();
@@ -836,7 +858,7 @@ final class BackupManifestReaderTest {
       f.clockValue = Long.MAX_VALUE - 50;
       f.hook =
           (name, n) -> {
-            if (name.equals("clock") && n == 2) f.clockValue = Long.MIN_VALUE + 49;
+            if (name.equals(FIXTURE_CLOCK_49F3C56E) && n == 2) f.clockValue = Long.MIN_VALUE + 49;
           };
       assertEquals(f.expected, read(f));
       f.released();
@@ -846,7 +868,8 @@ final class BackupManifestReaderTest {
       try (var f = fixture()) {
         f.hook =
             (name, n) -> {
-              if (name.equals("clock") && n == selected) Thread.currentThread().interrupt();
+              if (name.equals(FIXTURE_CLOCK_49F3C56E) && n == selected)
+                Thread.currentThread().interrupt();
             };
         try {
           denied(() -> read(f));
@@ -854,7 +877,7 @@ final class BackupManifestReaderTest {
         } finally {
           Thread.interrupted();
         }
-        assertEquals(selected, f.counts.get("clock"));
+        assertEquals(selected, f.counts.get(FIXTURE_CLOCK_49F3C56E));
         f.released();
         f.unchanged();
       }
@@ -899,13 +922,13 @@ final class BackupManifestReaderTest {
         denied(() -> read(f));
         f.released();
       }
-    for (String point : List.of("attributes", "openChannel", "read"))
+    for (String point : List.of("attributes", "openChannel", FIXTURE_READ_6F365882))
       for (Throwable problem :
           List.of(
-              new IllegalArgumentException("public unknown"),
-              new IllegalStateException("public unknown"),
-              new NullPointerException("public unknown"),
-              new AssertionError("public unknown"))) {
+              new IllegalArgumentException(FIXTURE_PUBLIC_UNKNOWN_5B451478),
+              new IllegalStateException(FIXTURE_PUBLIC_UNKNOWN_5B451478),
+              new NullPointerException(FIXTURE_PUBLIC_UNKNOWN_5B451478),
+              new AssertionError(FIXTURE_PUBLIC_UNKNOWN_5B451478))) {
         try (var f = fixture()) {
           f.extraFaults.add(point + "#1");
           f.faultTypes.put(point + "#1", problem);
@@ -975,10 +998,10 @@ final class BackupManifestReaderTest {
   void readOnlyNativeAdapters() throws Exception {
     try (var f = fixture()) {
       var nio = new BackupManifestReader.NioIo();
-      var attributes = nio.attributes(f.child.resolve("MANIFEST.json"));
-      assertEquals(964L, attributes.get("size"));
-      assertEquals(0100600, attributes.get("mode"));
-      try (var channel = nio.open(f.child.resolve("MANIFEST.json"))) {
+      var attributes = nio.attributes(f.child.resolve(FIXTURE_MANIFEST_JSON_0D4099EC));
+      assertEquals(964L, attributes.get(FIXTURE_SIZE_EB1E91E4));
+      assertEquals(0100600, attributes.get(FIXTURE_MODE_B6D5C2C3));
+      try (var channel = nio.open(f.child.resolve(FIXTURE_MANIFEST_JSON_0D4099EC))) {
         var buffer = ByteBuffer.allocate(965);
         assertEquals(964, channel.read(buffer));
         assertEquals(-1, channel.read(buffer));

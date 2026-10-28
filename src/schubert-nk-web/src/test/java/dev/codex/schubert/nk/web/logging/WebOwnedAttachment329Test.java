@@ -27,6 +27,8 @@ import org.junit.jupiter.api.Timeout;
 /** SS312/324/332/354/SSC329330; BUG1592; PT-WEB-DISPATCH/REVOCATION-ATTACH329001..003. No I/O. */
 @Timeout(value = 5, threadMode = Timeout.ThreadMode.SEPARATE_THREAD)
 final class WebOwnedAttachment329Test {
+  private static final String FIXTURE_PUBLIC_ROLLBACK_FATAL_9B478DDF = "PUBLIC rollback fatal";
+  private static final String FIXTURE_PUBLIC_CLOSE_FATAL_F603A79F = "PUBLIC close fatal";
   private static final Clock CLOCK =
       Clock.fixed(Instant.parse("2026-10-22T00:00:00Z"), ZoneOffset.UTC);
 
@@ -34,7 +36,7 @@ final class WebOwnedAttachment329Test {
   void owned329001DispatcherRollbackGraphSurvivesDisabledSuppression() {
     for (boolean primaryHasFatal : new boolean[] {false, true}) {
       var first = new AssertionError("PUBLIC primary fatal");
-      var second = new AssertionError("PUBLIC rollback fatal");
+      var second = new AssertionError(FIXTURE_PUBLIC_ROLLBACK_FATAL_9B478DDF);
       var primary = new NoSuppression(primaryHasFatal ? graph(first) : null);
       var fixture = new Fixture(false, primary, graph(second), null);
       sameFatal(primaryHasFatal ? first : second, fixture);
@@ -44,7 +46,7 @@ final class WebOwnedAttachment329Test {
 
   @Test
   void owned329002DispatcherCloseGraphSurvivesAndNonFatalRawSqlRemainsSame() {
-    var fatal = new AssertionError("PUBLIC close fatal");
+    var fatal = new AssertionError(FIXTURE_PUBLIC_CLOSE_FATAL_F603A79F);
     var fixture = new Fixture(false, new NoSuppression(null), null, graph(fatal));
     sameFatal(fatal, fixture);
     fixture.verifyOwned();
@@ -62,9 +64,11 @@ final class WebOwnedAttachment329Test {
       Throwable rollback =
           mode == 0 || mode == 3
               ? new SQLException("PUBLIC rollback")
-              : mode == 1 ? new AssertionError("PUBLIC rollback fatal") : primary;
+              : mode == 1 ? new AssertionError(FIXTURE_PUBLIC_ROLLBACK_FATAL_9B478DDF) : primary;
       var closing =
-          mode == 2 ? primary : mode == 3 ? new AssertionError("PUBLIC close fatal") : null;
+          mode == 2
+              ? primary
+              : mode == 3 ? new AssertionError(FIXTURE_PUBLIC_CLOSE_FATAL_F603A79F) : null;
       var fixture = new Fixture(false, primary, rollback, closing);
       sameFatal(mode == 3 ? closing : primary, fixture);
       fixture.verifyOwned();
@@ -76,7 +80,7 @@ final class WebOwnedAttachment329Test {
   void owned329004RevocationRollbackGraphCannotSkipRemainingClose() {
     for (boolean primaryHasFatal : new boolean[] {false, true}) {
       var first = new AssertionError("PUBLIC primary fatal");
-      var second = new AssertionError("PUBLIC rollback fatal");
+      var second = new AssertionError(FIXTURE_PUBLIC_ROLLBACK_FATAL_9B478DDF);
       var fixture =
           new Fixture(
               true, new NoSuppression(primaryHasFatal ? graph(first) : null), graph(second), null);
@@ -87,11 +91,11 @@ final class WebOwnedAttachment329Test {
 
   @Test
   void owned329005RevocationCloseGraphAndBothFatalGraphsKeepPrimary() {
-    var closing = new AssertionError("PUBLIC close fatal");
+    var closing = new AssertionError(FIXTURE_PUBLIC_CLOSE_FATAL_F603A79F);
     var fixture = new Fixture(true, new NoSuppression(null), null, graph(closing));
     sameFatal(closing, fixture);
     fixture.verifyOwned();
-    var rollback = new AssertionError("PUBLIC rollback fatal");
+    var rollback = new AssertionError(FIXTURE_PUBLIC_ROLLBACK_FATAL_9B478DDF);
     var both =
         new Fixture(
             true,
@@ -116,8 +120,8 @@ final class WebOwnedAttachment329Test {
         new Fixture(
             true,
             primary,
-            new AssertionError("PUBLIC rollback fatal"),
-            new AssertionError("PUBLIC close fatal"));
+            new AssertionError(FIXTURE_PUBLIC_ROLLBACK_FATAL_9B478DDF),
+            new AssertionError(FIXTURE_PUBLIC_CLOSE_FATAL_F603A79F));
     sameFatal(primary, direct);
     direct.verifyOwned();
   }

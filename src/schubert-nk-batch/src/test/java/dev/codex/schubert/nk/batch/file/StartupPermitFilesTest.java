@@ -52,6 +52,21 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** PT-OPS-PERMITFILE001..008; SS343 SSC089; real Linux FD IO, explicitly synthetic root/tmpfs. */
 final class StartupPermitFilesTest {
+  private static final String FIXTURE_REPLACE_197D1A17 = "replace";
+  private static final String FIXTURE_DIR_16E08808 = "dir";
+  private static final String FIXTURE_FILE_BFDDE6F5 = "file";
+  private static final String FIXTURE_MODE_B6D5C2C3 = "mode";
+  private static final String FIXTURE_UID_0C18F38C = "uid";
+  private static final String FIXTURE_GID_0ACDD642 = "gid";
+  private static final String FIXTURE_SIZE_EB1E91E4 = "size";
+  private static final String FIXTURE_INO_4BE7C1E0 = "ino";
+  private static final String FIXTURE_ATTRIBUTES_D300E055 = "attributes";
+  private static final String FIXTURE_NEW_80270E39 = "new";
+  private static final String FIXTURE_CURRENT_694DF57A = "current";
+  private static final String FIXTURE_READ_6F365882 = "read";
+  private static final String FIXTURE_A_CLOSE_B364A3FB = "A-close";
+  private static final String FIXTURE_RETIRE_A2A9D4FF = "retire";
+  private static final String FIXTURE_INTENT_CLOSE_B54EC48E = "intent-close";
   private static final UUID BOOT = UUID.fromString("11111111-1111-1111-1111-111111111111");
   private static final UUID EPOCH = UUID.fromString("33333333-3333-3333-3333-333333333333");
   private static final UUID RUN = UUID.fromString("44444444-4444-4444-4444-444444444444");
@@ -310,7 +325,7 @@ final class StartupPermitFilesTest {
       assertEquals(issued, f.store.current());
       assertEquals(permit(), f.store.readIssued());
       assertTrue(f.events.indexOf("force") < f.events.indexOf("publish"));
-      assertTrue(f.events.indexOf("publish") < f.events.indexOf("replace"));
+      assertTrue(f.events.indexOf("publish") < f.events.indexOf(FIXTURE_REPLACE_197D1A17));
       assertEquals(0100600, Files.getAttribute(f.current, "unix:mode"));
       assertEquals(1, Files.getAttribute(f.permit, "unix:nlink"));
       f.released();
@@ -392,9 +407,18 @@ final class StartupPermitFilesTest {
 
   @Test
   void metadataAndSecurityMatrix() throws Exception {
-    for (String role : List.of("dir", "file"))
+    for (String role : List.of(FIXTURE_DIR_16E08808, FIXTURE_FILE_BFDDE6F5))
       for (String key :
-          List.of("mode", "uid", "gid", "nlink", "size", "dev", "ino", "lastModifiedTime", "ctime"))
+          List.of(
+              FIXTURE_MODE_B6D5C2C3,
+              FIXTURE_UID_0C18F38C,
+              FIXTURE_GID_0ACDD642,
+              "nlink",
+              FIXTURE_SIZE_EB1E91E4,
+              "dev",
+              FIXTURE_INO_4BE7C1E0,
+              "lastModifiedTime",
+              "ctime"))
         for (Object wrong : List.of("wrong type", -1))
           try (var f = fixture()) {
             f.seed(INVALID);
@@ -404,14 +428,14 @@ final class StartupPermitFilesTest {
                 };
             fail(f.store::current);
           }
-    for (String role : List.of("dir", "file"))
+    for (String role : List.of(FIXTURE_DIR_16E08808, FIXTURE_FILE_BFDDE6F5))
       for (String bad :
           List.of(
-              "uid",
-              "gid",
-              "mode",
+              FIXTURE_UID_0C18F38C,
+              FIXTURE_GID_0ACDD642,
+              FIXTURE_MODE_B6D5C2C3,
               "links",
-              "size",
+              FIXTURE_SIZE_EB1E91E4,
               "nullAttributes",
               "acl",
               "nullAcl",
@@ -428,13 +452,13 @@ final class StartupPermitFilesTest {
       f.uid = 1;
       fail(f.store::current);
       fail(() -> f.store.invalidate(BOOT, EPOCH, ACTIVE));
-      assertEquals(0, f.count("attributes"));
+      assertEquals(0, f.count(FIXTURE_ATTRIBUTES_D300E055));
     }
     try (var f = fixture()) {
       f.seed(INVALID);
       f.mutate =
           (role, m) -> {
-            if (role.equals("file")) m.put("dev", -17L);
+            if (role.equals(FIXTURE_FILE_BFDDE6F5)) m.put("dev", -17L);
           };
       fail(f.store::current);
     }
@@ -445,7 +469,7 @@ final class StartupPermitFilesTest {
     try (var f = fixture()) {
       f.mutate =
           (role, m) -> {
-            if (role.equals("file")) m.put("size", 1L);
+            if (role.equals(FIXTURE_FILE_BFDDE6F5)) m.put(FIXTURE_SIZE_EB1E91E4, 1L);
           };
       fail(() -> f.store.invalidate(BOOT, EPOCH, ACTIVE));
       assertEquals(0, f.count("openWriter"));
@@ -457,7 +481,13 @@ final class StartupPermitFilesTest {
       f.released();
     }
     // Instrument each actual acquired owner/IO position; failures must never yield a result.
-    for (String operation : List.of("new", "replace", "issue", "current", "read")) {
+    for (String operation :
+        List.of(
+            FIXTURE_NEW_80270E39,
+            FIXTURE_REPLACE_197D1A17,
+            "issue",
+            FIXTURE_CURRENT_694DF57A,
+            FIXTURE_READ_6F365882)) {
       Map<String, Integer> inventory;
       try (var f = fixture()) {
         f.setup(operation);
@@ -490,7 +520,7 @@ final class StartupPermitFilesTest {
       assertEquals(GOLD, Files.readString(f.permit));
       assertEquals(INVALID, Files.readString(f.current));
     }
-    for (String operation : List.of("new", "current"))
+    for (String operation : List.of(FIXTURE_NEW_80270E39, FIXTURE_CURRENT_694DF57A))
       for (String behavior : List.of("zero", "negative", "overflow", "position", "short"))
         try (var f = fixture()) {
           f.setup(operation);
@@ -498,12 +528,12 @@ final class StartupPermitFilesTest {
           fail(() -> f.run(operation));
           f.released();
         }
-    for (String operation : List.of("new", "current"))
+    for (String operation : List.of(FIXTURE_NEW_80270E39, FIXTURE_CURRENT_694DF57A))
       for (int at : List.of(1, 2, 3))
         try (var f = fixture()) {
           f.setup(operation);
           f.wrongSizeAt = at;
-          if (operation.equals("current") && at == 3) continue;
+          if (operation.equals(FIXTURE_CURRENT_694DF57A) && at == 3) continue;
           fail(() -> f.run(operation));
           f.released();
         }
@@ -532,14 +562,17 @@ final class StartupPermitFilesTest {
       assertEquals(INVALID, Files.readString(f.current));
       assertEquals(GOLD, Files.readString(f.permit));
     }
-    for (String key : List.of("ino", "lastModifiedTime", "ctime"))
+    for (String key : List.of(FIXTURE_INO_4BE7C1E0, "lastModifiedTime", "ctime"))
       try (var f = fixture()) {
         f.seed(INVALID);
         f.mutate =
             (role, m) -> {
-              if (role.equals("file") && f.count("attributes") >= 3)
+              if (role.equals(FIXTURE_FILE_BFDDE6F5) && f.count(FIXTURE_ATTRIBUTES_D300E055) >= 3)
                 m.put(
-                    key, key.equals("ino") ? 888L : java.nio.file.attribute.FileTime.fromMillis(0));
+                    key,
+                    key.equals(FIXTURE_INO_4BE7C1E0)
+                        ? 888L
+                        : java.nio.file.attribute.FileTime.fromMillis(0));
             };
         fail(f.store::current);
       }
@@ -547,7 +580,8 @@ final class StartupPermitFilesTest {
       f.seed(INVALID);
       f.mutate =
           (role, m) -> {
-            if (role.equals("dir") && f.count("attributes") > 3) m.put("ino", 999L);
+            if (role.equals(FIXTURE_DIR_16E08808) && f.count(FIXTURE_ATTRIBUTES_D300E055) > 3)
+              m.put(FIXTURE_INO_4BE7C1E0, 999L);
           };
       fail(f.store::current);
     }
@@ -580,7 +614,7 @@ final class StartupPermitFilesTest {
       f.seed(INVALID);
       RuntimeException sentinel = new IllegalStateException("public sentinel");
       f.unknown = sentinel;
-      f.fail = "read";
+      f.fail = FIXTURE_READ_6F365882;
       assertSame(sentinel, assertThrows(IllegalStateException.class, f.store::current));
       f.released();
     }
@@ -694,13 +728,16 @@ final class StartupPermitFilesTest {
       assertTrue(Files.exists(h.marker));
       assertEquals(1, h.storeCloses);
       h.events.add("nested-close");
-      h.events.add("A-close");
+      h.events.add(FIXTURE_A_CLOSE_B364A3FB);
       owner.commit();
       assertFalse(Files.exists(h.marker));
       assertEquals(permit(), f.store.readIssued());
       assertEquals(2, h.storeCloses);
-      assertTrue(h.events.indexOf("A-close") < h.events.indexOf("retire"));
-      assertTrue(h.events.indexOf("retire") < h.events.indexOf("intent-close"));
+      assertTrue(
+          h.events.indexOf(FIXTURE_A_CLOSE_B364A3FB) < h.events.indexOf(FIXTURE_RETIRE_A2A9D4FF));
+      assertTrue(
+          h.events.indexOf(FIXTURE_RETIRE_A2A9D4FF)
+              < h.events.indexOf(FIXTURE_INTENT_CLOSE_B54EC48E));
       assertThrows(IOException.class, owner::commit);
       assertThrows(IOException.class, () -> owner.issue(permit(), (p, e) -> {}));
       f.released();
@@ -711,7 +748,13 @@ final class StartupPermitFilesTest {
   @Test
   void isspub006FaultsRevokeWithoutDeletingEvidenceAndUnknownRetains() throws Exception {
     for (String failure :
-        List.of("begin", "proof", "store-close", "A-close", "retire", "intent-close")) {
+        List.of(
+            "begin",
+            "proof",
+            "store-close",
+            FIXTURE_A_CLOSE_B364A3FB,
+            FIXTURE_RETIRE_A2A9D4FF,
+            FIXTURE_INTENT_CLOSE_B54EC48E)) {
       for (boolean unknown : List.of(false, true)) {
         try (var f = fixture()) {
           f.seed(INVALID);
@@ -729,7 +772,7 @@ final class StartupPermitFilesTest {
                         (p, e) -> {
                           if (p == IssuePhase.AFTER_READBACK) h.point("proof");
                         });
-                    h.point("A-close");
+                    h.point(FIXTURE_A_CLOSE_B364A3FB);
                     owner.commit();
                   });
           if (unknown) assertSame(h.unknown, thrown);
@@ -754,8 +797,8 @@ final class StartupPermitFilesTest {
         owner.issue(permit(), (p, e) -> {});
         if (uncertainty.equals("corrupt")) Files.writeString(f.current, "CORRUPTED\n");
         else if (uncertainty.equals("revoke")) {
-          f.fail = "replace";
-          f.failAt = f.count("replace") + 1;
+          f.fail = FIXTURE_REPLACE_197D1A17;
+          f.failAt = f.count(FIXTURE_REPLACE_197D1A17) + 1;
         } else h.fail = uncertainty;
         assertThrows(PublicationRetained.class, owner::abort);
         assertEquals(1, h.retains);
@@ -768,9 +811,9 @@ final class StartupPermitFilesTest {
       f.seed(INVALID);
       var h = new PublicationHarness(f);
       h.owner().abort();
-      assertEquals(List.of("intent-close"), h.events);
+      assertEquals(List.of(FIXTURE_INTENT_CLOSE_B54EC48E), h.events);
       assertEquals(0, h.retains);
-      h.fail = "intent-close";
+      h.fail = FIXTURE_INTENT_CLOSE_B54EC48E;
       assertThrows(PublicationRetained.class, h.owner()::abort);
     }
   }
@@ -811,10 +854,10 @@ final class StartupPermitFilesTest {
         assertEquals(INVALID, Files.readString(f.current));
         assertTrue(Files.exists(h.marker));
         assertEquals(GOLD, Files.readString(f.permit));
-        int mutations = f.count("replace");
+        int mutations = f.count(FIXTURE_REPLACE_197D1A17);
         int closes = h.storeCloses;
         owner.abort();
-        assertEquals(mutations, f.count("replace"));
+        assertEquals(mutations, f.count(FIXTURE_REPLACE_197D1A17));
         assertEquals(closes, h.storeCloses);
         assertEquals(0, h.retains);
         assertThrows(IOException.class, () -> owner.issue(permit(), (p, e) -> {}));
@@ -876,7 +919,7 @@ final class StartupPermitFilesTest {
 
         public void retire() throws IOException {
           Files.delete(marker);
-          point("retire");
+          point(FIXTURE_RETIRE_A2A9D4FF);
         }
 
         public void quarantine() throws IOException {
@@ -885,7 +928,7 @@ final class StartupPermitFilesTest {
         }
 
         public void close() throws IOException {
-          point(recovery ? "recovery-close" : "intent-close");
+          point(recovery ? "recovery-close" : FIXTURE_INTENT_CLOSE_B54EC48E);
         }
       };
     }
@@ -998,18 +1041,21 @@ final class StartupPermitFilesTest {
     }
 
     void setup(String operation) throws Exception {
-      if (List.of("replace", "issue", "current", "read").contains(operation)) seed(INVALID);
-      if (operation.equals("read")) store.issue(invalid(), StartupPermitFilesTest.permit());
+      if (List.of(
+              FIXTURE_REPLACE_197D1A17, "issue", FIXTURE_CURRENT_694DF57A, FIXTURE_READ_6F365882)
+          .contains(operation)) seed(INVALID);
+      if (operation.equals(FIXTURE_READ_6F365882))
+        store.issue(invalid(), StartupPermitFilesTest.permit());
       reset();
     }
 
     void run(String operation) throws Exception {
       switch (operation) {
-        case "new" -> store.invalidate(BOOT, EPOCH, ACTIVE);
-        case "replace" -> store.invalidate(BOOT, ACT, ACTIVE);
+        case FIXTURE_NEW_80270E39 -> store.invalidate(BOOT, EPOCH, ACTIVE);
+        case FIXTURE_REPLACE_197D1A17 -> store.invalidate(BOOT, ACT, ACTIVE);
         case "issue" -> store.issue(invalid(), StartupPermitFilesTest.permit());
-        case "current" -> store.current();
-        case "read" -> store.readIssued();
+        case FIXTURE_CURRENT_694DF57A -> store.current();
+        case FIXTURE_READ_6F365882 -> store.readIssued();
         default -> throw new AssertionError();
       }
     }
@@ -1035,23 +1081,24 @@ final class StartupPermitFilesTest {
 
     @Override
     public Map<String, Object> attributes(Path p) throws IOException {
-      point("attributes");
+      point(FIXTURE_ATTRIBUTES_D300E055);
       Map<String, Object> m = new HashMap<>(nativeIo.attributes(p));
-      int type = (Integer) m.get("mode") & 0170000;
-      String role = type == 040000 ? "dir" : "file";
-      m.put("uid", 0);
-      m.put("gid", 0);
-      m.put("mode", type | (role.equals("dir") ? 0700 : 0600));
+      int type = (Integer) m.get(FIXTURE_MODE_B6D5C2C3) & 0170000;
+      String role = type == 040000 ? FIXTURE_DIR_16E08808 : FIXTURE_FILE_BFDDE6F5;
+      m.put(FIXTURE_UID_0C18F38C, 0);
+      m.put(FIXTURE_GID_0ACDD642, 0);
+      m.put(FIXTURE_MODE_B6D5C2C3, type | (role.equals(FIXTURE_DIR_16E08808) ? 0700 : 0600));
       if (role.equals(badRole))
         switch (bad) {
           case "nullAttributes" -> {
             return null;
           }
-          case "uid" -> m.put("uid", 1);
-          case "gid" -> m.put("gid", 1);
-          case "mode" -> m.put("mode", type | 0777);
-          case "links" -> m.put("nlink", role.equals("dir") ? 1 : 2);
-          case "size" -> m.put("size", role.equals("dir") ? -1L : 8193L);
+          case FIXTURE_UID_0C18F38C -> m.put(FIXTURE_UID_0C18F38C, 1);
+          case FIXTURE_GID_0ACDD642 -> m.put(FIXTURE_GID_0ACDD642, 1);
+          case FIXTURE_MODE_B6D5C2C3 -> m.put(FIXTURE_MODE_B6D5C2C3, type | 0777);
+          case "links" -> m.put("nlink", role.equals(FIXTURE_DIR_16E08808) ? 1 : 2);
+          case FIXTURE_SIZE_EB1E91E4 ->
+              m.put(FIXTURE_SIZE_EB1E91E4, role.equals(FIXTURE_DIR_16E08808) ? -1L : 8193L);
           default -> {}
         }
       mutate.accept(role, m);
@@ -1059,7 +1106,9 @@ final class StartupPermitFilesTest {
     }
 
     private String role(Path p) throws IOException {
-      return (((Integer) nativeIo.attributes(p).get("mode")) & 0170000) == 040000 ? "dir" : "file";
+      return (((Integer) nativeIo.attributes(p).get(FIXTURE_MODE_B6D5C2C3)) & 0170000) == 040000
+          ? FIXTURE_DIR_16E08808
+          : FIXTURE_FILE_BFDDE6F5;
     }
 
     @Override
@@ -1116,8 +1165,8 @@ final class StartupPermitFilesTest {
                   if (lateInterrupt) Thread.currentThread().interrupt();
                   return null;
                 }
-                if (name.equals("read")) {
-                  point("read");
+                if (name.equals(FIXTURE_READ_6F365882)) {
+                  point(FIXTURE_READ_6F365882);
                   ByteBuffer b = (ByteBuffer) args[0];
                   int start = b.position();
                   if (behavior.equals("zero")) return 0;
@@ -1133,7 +1182,7 @@ final class StartupPermitFilesTest {
                   if (behavior.equals("position")) b.position(start);
                   return result;
                 }
-                if (name.equals("size")) {
+                if (name.equals(FIXTURE_SIZE_EB1E91E4)) {
                   point("readSize");
                   return channel.size() + (count("readSize") == wrongSizeAt ? 1 : 0);
                 }
@@ -1188,7 +1237,7 @@ final class StartupPermitFilesTest {
 
     @Override
     public void replace(Path p, String part, String current) throws IOException {
-      point("replace");
+      point(FIXTURE_REPLACE_197D1A17);
       if (replaceFailure) throw new AtomicMoveNotSupportedException("public", "public", "public");
       nativeIo.replace(p, part, current);
     }

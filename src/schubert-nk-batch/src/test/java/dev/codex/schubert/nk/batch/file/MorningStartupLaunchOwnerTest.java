@@ -13,24 +13,30 @@ import org.junit.jupiter.api.Test;
 
 /** READY428007..009: literal owner order, no native ready or fake completed graph. */
 final class MorningStartupLaunchOwnerTest {
+  private static final String FIXTURE_API_E3AF609E = "API";
+  private static final String FIXTURE_COMPLETE_575951DB = "complete";
+  private static final String FIXTURE_START_API_02CEED19 = "start:API";
+
   @Test
   void sequence428007ApiThenWebBorrowSameApiAndNeverStopOnTrueCompletion() throws Exception {
     var events = new ArrayList<String>();
     MorningStartupLaunchOwner.sequence(
         (service, earlier) -> {
           assertEquals(
-              service == ServiceConfigFiles.Service.API ? List.of() : List.of("API"), earlier);
+              service == ServiceConfigFiles.Service.API ? List.of() : List.of(FIXTURE_API_E3AF609E),
+              earlier);
           assertThrows(UnsupportedOperationException.class, () -> earlier.add("extra"));
           events.add("start:" + service);
           return service.name();
         },
         slot -> fail("success must retain live service"),
         started -> {
-          assertEquals(List.of("API", "WEB"), started);
+          assertEquals(List.of(FIXTURE_API_E3AF609E, "WEB"), started);
           assertThrows(UnsupportedOperationException.class, () -> started.add("extra"));
-          events.add("complete");
+          events.add(FIXTURE_COMPLETE_575951DB);
         });
-    assertEquals(List.of("start:API", "start:WEB", "complete"), events);
+    assertEquals(
+        List.of(FIXTURE_START_API_02CEED19, "start:WEB", FIXTURE_COMPLETE_575951DB), events);
   }
 
   @Test
@@ -55,15 +61,21 @@ final class MorningStartupLaunchOwnerTest {
                         },
                         slot -> events.add("stop:" + slot),
                         started -> {
-                          events.add("complete");
+                          events.add(FIXTURE_COMPLETE_575951DB);
                           raise(failure);
                         }));
         assertSame(failure, actual);
         assertEquals(
             switch (stage) {
-              case 0 -> List.of("start:API");
-              case 1 -> List.of("start:API", "start:WEB", "stop:API");
-              default -> List.of("start:API", "start:WEB", "complete", "stop:WEB", "stop:API");
+              case 0 -> List.of(FIXTURE_START_API_02CEED19);
+              case 1 -> List.of(FIXTURE_START_API_02CEED19, "start:WEB", "stop:API");
+              default ->
+                  List.of(
+                      FIXTURE_START_API_02CEED19,
+                      "start:WEB",
+                      FIXTURE_COMPLETE_575951DB,
+                      "stop:WEB",
+                      "stop:API");
             },
             events);
       }
@@ -85,12 +97,13 @@ final class MorningStartupLaunchOwnerTest {
         NullPointerException.class,
         () ->
             MorningStartupLaunchOwner.<String>sequence(
-                (service, earlier) -> service == ServiceConfigFiles.Service.API ? "API" : null,
+                (service, earlier) ->
+                    service == ServiceConfigFiles.Service.API ? FIXTURE_API_E3AF609E : null,
                 closed::add,
                 ignored -> {
                   fail("not complete");
                 }));
-    assertEquals(List.of("API"), closed);
+    assertEquals(List.of(FIXTURE_API_E3AF609E), closed);
   }
 
   private static void raise(Throwable failure) throws IOException {

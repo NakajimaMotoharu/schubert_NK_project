@@ -35,6 +35,8 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** Independent inode, Unix attributes, byte and fault oracles. NK-MED-001; PT-MED-021..025. */
 class ExistingFileAccessTest {
+  private static final String FIXTURE_NESTED_67F38240 = "nested";
+  private static final String FIXTURE_SYNTHETIC_PRIVATE_PATH_6CBCF6F9 = "SYNTHETIC_PRIVATE_PATH";
   @TempDir Path root;
   private StorageIdentity identity;
 
@@ -125,7 +127,7 @@ class ExistingFileAccessTest {
 
   @Test
   void med023LinksMissingAndWrongUnixAttributesNeverExposeContent() throws Exception {
-    Path nested = Files.createDirectory(root.resolve("nested"));
+    Path nested = Files.createDirectory(root.resolve(FIXTURE_NESTED_67F38240));
     directory(nested);
     Path target = nested.resolve("x");
     file(target);
@@ -135,20 +137,20 @@ class ExistingFileAccessTest {
     try (held) {
       reject(() -> access.read(List.of("missing"), 3, never));
       reject(() -> access.read(List.of("missing", "x"), 3, never));
-      reject(() -> access.read(List.of("nested", "x", "x"), 3, never));
+      reject(() -> access.read(List.of(FIXTURE_NESTED_67F38240, "x", "x"), 3, never));
       Files.createSymbolicLink(root.resolve("link"), nested);
       reject(() -> access.read(List.of("link", "x"), 3, never));
       reject(() -> access.read(List.of("link"), 3, never));
       Files.createSymbolicLink(nested.resolve("symlink"), target);
-      reject(() -> access.read(List.of("nested", "symlink"), 3, never));
+      reject(() -> access.read(List.of(FIXTURE_NESTED_67F38240, "symlink"), 3, never));
       Files.createLink(nested.resolve("hard"), target);
-      reject(() -> access.read(List.of("nested", "x"), 3, never));
+      reject(() -> access.read(List.of(FIXTURE_NESTED_67F38240, "x"), 3, never));
       Files.delete(nested.resolve("hard"));
-      reject(() -> access.read(List.of("nested", "x"), 4, never));
+      reject(() -> access.read(List.of(FIXTURE_NESTED_67F38240, "x"), 4, never));
       for (Path changed : List.of(root, nested, target)) {
         var before = Files.getPosixFilePermissions(changed);
         Files.setPosixFilePermissions(changed, PosixFilePermissions.fromString("rwx------"));
-        reject(() -> access.read(List.of("nested", "x"), 3, never));
+        reject(() -> access.read(List.of(FIXTURE_NESTED_67F38240, "x"), 3, never));
         assertEquals(
             PosixFilePermissions.fromString("rwx------"), Files.getPosixFilePermissions(changed));
         Files.setPosixFilePermissions(changed, before);
@@ -156,22 +158,22 @@ class ExistingFileAccessTest {
       reject(
           () ->
               new ExistingFileAccess(held, new StorageIdentity("different", identity.group()))
-                  .read(List.of("nested", "x"), 3, never));
+                  .read(List.of(FIXTURE_NESTED_67F38240, "x"), 3, never));
       reject(
           () ->
               new ExistingFileAccess(held, new StorageIdentity(identity.owner(), "different"))
-                  .read(List.of("nested", "x"), 3, never));
+                  .read(List.of(FIXTURE_NESTED_67F38240, "x"), 3, never));
       assertArrayEquals(new byte[] {1, 2, 3}, Files.readAllBytes(target));
       assertTrue(Files.isSymbolicLink(nested.resolve("symlink")));
       assertFalse(Files.exists(root.resolve("missing")));
     }
-    reject(() -> access.read(List.of("nested", "x"), 3, never));
+    reject(() -> access.read(List.of(FIXTURE_NESTED_67F38240, "x"), 3, never));
   }
 
   @Test
   void med024OpenReadAttributeAndCloseFailuresAreRedactedAndOwned() throws Exception {
     compoundOwnership();
-    Path nested = Files.createDirectory(root.resolve("nested"));
+    Path nested = Files.createDirectory(root.resolve(FIXTURE_NESTED_67F38240));
     directory(nested);
     file(nested.resolve("x"));
     try (var held = OwnedTransferDirectory.open(LinuxDirectoryCalls.create(), root)) {
@@ -196,11 +198,11 @@ class ExistingFileAccessTest {
         reject(
             () ->
                 access.read(
-                    List.of("nested", "x"),
+                    List.of(FIXTURE_NESTED_67F38240, "x"),
                     3,
                     channel -> {
                       if (fault.equals("callback-close"))
-                        throw new IOException("SYNTHETIC_PRIVATE_PATH");
+                        throw new IOException(FIXTURE_SYNTHETIC_PRIVATE_PATH_6CBCF6F9);
                       return bytes(channel);
                     }));
         assertEquals(io.opens, io.closes);
@@ -217,7 +219,7 @@ class ExistingFileAccessTest {
 
   @Test
   void med025ConcurrentAndReplacedNamesRetainIndependentInodes() throws Exception {
-    Path nested = Files.createDirectory(root.resolve("nested"));
+    Path nested = Files.createDirectory(root.resolve(FIXTURE_NESTED_67F38240));
     directory(nested);
     file(nested.resolve("x"));
     try (var held = OwnedTransferDirectory.open(LinuxDirectoryCalls.create(), root);
@@ -233,7 +235,7 @@ class ExistingFileAccessTest {
                     byte[] result =
                         new ExistingFileAccess(held, identity, io)
                             .read(
-                                List.of("nested", "x"),
+                                List.of(FIXTURE_NESTED_67F38240, "x"),
                                 3,
                                 channel -> {
                                   assertEquals(0, channel.position());
@@ -253,7 +255,7 @@ class ExistingFileAccessTest {
       assertArrayEquals(
           new byte[] {1, 2, 3},
           access.read(
-              List.of("nested", "x"),
+              List.of(FIXTURE_NESTED_67F38240, "x"),
               3,
               channel -> {
                 Files.move(nested.resolve("x"), nested.resolve("saved"));
@@ -397,9 +399,10 @@ class ExistingFileAccessTest {
     @Override
     public Map<String, Object> attributes(Path held) throws IOException {
       attributes++;
-      if (fault.equals("attrs" + attributes)) throw new IOException("SYNTHETIC_PRIVATE_PATH");
+      if (fault.equals("attrs" + attributes))
+        throw new IOException(FIXTURE_SYNTHETIC_PRIVATE_PATH_6CBCF6F9);
       if (fault.equals("unsupported"))
-        throw new UnsupportedOperationException("SYNTHETIC_PRIVATE_PATH");
+        throw new UnsupportedOperationException(FIXTURE_SYNTHETIC_PRIVATE_PATH_6CBCF6F9);
       Map<String, Object> result =
           new HashMap<>(Files.readAttributes(held, "unix:owner,group,mode,nlink,size"));
       if (fault.equals("bad-post") && attributes == 4) result.put("nlink", 2);
@@ -408,7 +411,7 @@ class ExistingFileAccessTest {
 
     @Override
     public SeekableByteChannel openReadOnly(Path path) throws IOException {
-      if (fault.equals("open")) throw new IOException("SYNTHETIC_PRIVATE_PATH");
+      if (fault.equals("open")) throw new IOException(FIXTURE_SYNTHETIC_PRIVATE_PATH_6CBCF6F9);
       SeekableByteChannel delegate = FileChannel.open(path, StandardOpenOption.READ);
       channels.add(delegate);
       opens++;
@@ -417,7 +420,7 @@ class ExistingFileAccessTest {
 
         @Override
         public int read(ByteBuffer bytes) throws IOException {
-          if (fault.equals("read")) throw new IOException("SYNTHETIC_PRIVATE_PATH");
+          if (fault.equals("read")) throw new IOException(FIXTURE_SYNTHETIC_PRIVATE_PATH_6CBCF6F9);
           return delegate.read(bytes);
         }
 
@@ -440,7 +443,8 @@ class ExistingFileAccessTest {
         @Override
         public long size() throws IOException {
           sizes++;
-          if (fault.equals("size" + sizes)) throw new IOException("SYNTHETIC_PRIVATE_PATH");
+          if (fault.equals("size" + sizes))
+            throw new IOException(FIXTURE_SYNTHETIC_PRIVATE_PATH_6CBCF6F9);
           if (fault.equals("wrong-size" + sizes)) return 99;
           return delegate.size();
         }
@@ -461,7 +465,7 @@ class ExistingFileAccessTest {
           delegate.close();
           if (closeFailure != null) raiseUnknown(closeFailure);
           if (fault.equals("close") || fault.equals("callback-close"))
-            throw new IOException("SYNTHETIC_PRIVATE_PATH");
+            throw new IOException(FIXTURE_SYNTHETIC_PRIVATE_PATH_6CBCF6F9);
         }
       };
     }

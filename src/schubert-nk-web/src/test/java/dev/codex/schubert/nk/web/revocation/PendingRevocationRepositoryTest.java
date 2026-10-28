@@ -32,9 +32,11 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** RERUN004/QA050: isolated PG, independent literal SQL/time/lease oracle, no remote calls. */
 final class PendingRevocationRepositoryTest {
+  private static final String FIXTURE_TEST_4D967A30 = "test";
+  private static final String FIXTURE_CLOSE_97959247 = "close";
   private static final Instant NOW = Instant.parse("2026-09-08T00:00:00.123456Z");
   private static final EncryptedRevocationPayload PAYLOAD =
-      new EncryptedRevocationPayload("test", new byte[101]);
+      new EncryptedRevocationPayload(FIXTURE_TEST_4D967A30, new byte[101]);
   private static final UUID OWNER = new UUID(0, 101);
   private static final UUID SECOND = new UUID(0, 102);
   private static final PendingRevocationRepository REPO = new PendingRevocationRepository();
@@ -75,7 +77,7 @@ final class PendingRevocationRepositoryTest {
       assertTrue(r.next());
       assertEquals(new UUID(0, 1), r.getObject(1, UUID.class));
       assertArrayEquals(new byte[101], r.getBytes(2));
-      assertEquals("test", r.getString(3));
+      assertEquals(FIXTURE_TEST_4D967A30, r.getString(3));
       assertEquals(
           OffsetDateTime.parse("2026-09-08T00:00:00.123456Z"),
           r.getObject(4, OffsetDateTime.class));
@@ -118,11 +120,11 @@ final class PendingRevocationRepositoryTest {
       var row = rows.getFirst();
       assertEquals(identity(1), row.identity());
       assertArrayEquals(new byte[101], row.payload().ciphertext());
-      assertEquals("test", row.payload().keyVersion());
+      assertEquals(FIXTURE_TEST_4D967A30, row.payload().keyVersion());
       assertEquals(0, row.attemptCount());
       assertNull(row.expiresAt());
       assertEquals(OWNER, row.leaseOwner());
-      assertEquals("test", row.keyVersion());
+      assertEquals(FIXTURE_TEST_4D967A30, row.keyVersion());
       assertEquals(due.plusSeconds(10), row.leaseUntil());
       assertEquals("ClaimedRevocation[REDACTED]", row.toString());
       assertEquals(NOW.plusSeconds(1), rows.get(1).expiresAt());
@@ -237,7 +239,13 @@ final class PendingRevocationRepositoryTest {
   void rerun004eNullBoundsExplicitTransactionAndReadContracts() throws Exception {
     var row =
         new ClaimedRevocation(
-            identity(1), PAYLOAD, 100, NOW.plusSeconds(1), OWNER, NOW.plusSeconds(10), "test");
+            identity(1),
+            PAYLOAD,
+            100,
+            NOW.plusSeconds(1),
+            OWNER,
+            NOW.plusSeconds(10),
+            FIXTURE_TEST_4D967A30);
     try (var c = db.transaction()) {
       assertThrows(
           NullPointerException.class,
@@ -297,34 +305,52 @@ final class PendingRevocationRepositoryTest {
     }
     assertThrows(
         NullPointerException.class,
-        () -> new ClaimedRevocation(null, PAYLOAD, 0, null, OWNER, NOW.plusSeconds(10), "test"));
+        () ->
+            new ClaimedRevocation(
+                null, PAYLOAD, 0, null, OWNER, NOW.plusSeconds(10), FIXTURE_TEST_4D967A30));
     assertThrows(
         NullPointerException.class,
         () ->
             new ClaimedRevocation(
-                identity(1), PAYLOAD, 0, null, null, NOW.plusSeconds(10), "test"));
+                identity(1), PAYLOAD, 0, null, null, NOW.plusSeconds(10), FIXTURE_TEST_4D967A30));
     assertThrows(
         NullPointerException.class,
-        () -> new ClaimedRevocation(identity(1), PAYLOAD, 0, null, OWNER, null, "test"));
+        () ->
+            new ClaimedRevocation(
+                identity(1), PAYLOAD, 0, null, OWNER, null, FIXTURE_TEST_4D967A30));
     for (int count : new int[] {-1, 101})
       assertThrows(
           IllegalArgumentException.class,
           () ->
               new ClaimedRevocation(
-                  identity(1), PAYLOAD, count, null, OWNER, NOW.plusSeconds(10), "test"));
-    assertThrows(
-        IllegalArgumentException.class,
-        () -> new ClaimedRevocation(identity(1), PAYLOAD, 0, null, OWNER, NOW, "test"));
+                  identity(1),
+                  PAYLOAD,
+                  count,
+                  null,
+                  OWNER,
+                  NOW.plusSeconds(10),
+                  FIXTURE_TEST_4D967A30));
     assertThrows(
         IllegalArgumentException.class,
         () ->
             new ClaimedRevocation(
-                identity(1), PAYLOAD, 0, NOW, OWNER, NOW.plusSeconds(10), "test"));
+                identity(1), PAYLOAD, 0, null, OWNER, NOW, FIXTURE_TEST_4D967A30));
     assertThrows(
         IllegalArgumentException.class,
         () ->
             new ClaimedRevocation(
-                identity(1), PAYLOAD, 0, NOW.plusNanos(1), OWNER, NOW.plusSeconds(10), "test"));
+                identity(1), PAYLOAD, 0, NOW, OWNER, NOW.plusSeconds(10), FIXTURE_TEST_4D967A30));
+    assertThrows(
+        IllegalArgumentException.class,
+        () ->
+            new ClaimedRevocation(
+                identity(1),
+                PAYLOAD,
+                0,
+                NOW.plusNanos(1),
+                OWNER,
+                NOW.plusSeconds(10),
+                FIXTURE_TEST_4D967A30));
     assertThrows(
         NullPointerException.class,
         () -> new ClaimedRevocation(identity(1), null, 0, null, OWNER, NOW.plusSeconds(10), null));
@@ -346,7 +372,7 @@ final class PendingRevocationRepositoryTest {
       var rows = REPO.claim(c, OWNER, NOW.plusSeconds(5), NOW.plusSeconds(15), 100);
       assertEquals(2, rows.size());
       assertNull(rows.getFirst().payload());
-      assertEquals("test", rows.getFirst().keyVersion());
+      assertEquals(FIXTURE_TEST_4D967A30, rows.getFirst().keyVersion());
       assertNotNull(rows.get(1).payload());
       assertTrue(
           REPO.markFailure(
@@ -416,7 +442,8 @@ final class PendingRevocationRepositoryTest {
         c.rollback();
       }
     }
-    for (String kind : List.of("statement-null", "result-null", "execute", "next", "close")) {
+    for (String kind :
+        List.of("statement-null", "result-null", "execute", "next", FIXTURE_CLOSE_97959247)) {
       try (var c = db.transaction()) {
         assertThrows(
             SQLException.class,
@@ -434,7 +461,7 @@ final class PendingRevocationRepositoryTest {
               AssertionError.class,
               () ->
                   REPO.claim(
-                      fault(c, "close", null, fatal),
+                      fault(c, FIXTURE_CLOSE_97959247, null, fatal),
                       OWNER,
                       NOW.plusSeconds(5),
                       NOW.plusSeconds(15),
@@ -477,7 +504,7 @@ final class PendingRevocationRepositoryTest {
               + "),'hex')");
       try (var c = db.transaction()) {
         var row = REPO.claim(c, OWNER, NOW.plusSeconds(5), NOW.plusSeconds(15), 1).getFirst();
-        assertEquals("test", row.keyVersion());
+        assertEquals(FIXTURE_TEST_4D967A30, row.keyVersion());
         if (size <= 116) assertArrayEquals(new byte[size], row.payload().ciphertext());
         else assertNull(row.payload());
         assertTrue(
@@ -618,7 +645,8 @@ final class PendingRevocationRepositoryTest {
               PreparedStatement.class,
               s,
               (call, values) -> {
-                if (call.getName().equals("close") && kind.equals("statement-close")) {
+                if (call.getName().equals(FIXTURE_CLOSE_97959247)
+                    && kind.equals("statement-close")) {
                   s.close();
                   if (fatal != null) throw fatal;
                   throw new SQLException("private-statement-close-marker");
@@ -636,7 +664,8 @@ final class PendingRevocationRepositoryTest {
                     (get, columns) -> {
                       if (get.getName().equals("next") && kind.equals("next"))
                         throw new SQLException("private-provider-marker");
-                      if (get.getName().equals("close") && kind.equals("close")) {
+                      if (get.getName().equals(FIXTURE_CLOSE_97959247)
+                          && kind.equals(FIXTURE_CLOSE_97959247)) {
                         r.close();
                         if (fatal != null) throw fatal;
                         throw new SQLException("private-close-marker");

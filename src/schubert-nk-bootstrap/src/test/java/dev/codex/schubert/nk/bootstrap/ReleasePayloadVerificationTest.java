@@ -46,6 +46,15 @@ import org.junit.jupiter.api.io.TempDir;
  * Independent literal release/ZIP/CRC fixture. Synthetic owner/RO policy is not native admission.
  */
 final class ReleasePayloadVerificationTest {
+  private static final String FIXTURE_VERSION_1FF1675B = "VERSION";
+  private static final String FIXTURE_DUPLICATE_E75B7650 = "duplicate";
+  private static final String FIXTURE_WEB_WEB_JAR_DC712F8D = "web/web.jar";
+  private static final String FIXTURE_API_API_JAR_B212EFC7 = "api/api.jar";
+  private static final String FIXTURE_META_INF_MANIFEST_MF_41BB0D92 = "META-INF/MANIFEST.MF";
+  private static final String FIXTURE_NULL_F072CBEC = "null";
+  private static final String FIXTURE_SCHUBERT_NK_CURRENT_A7989072 = "schubert-nk/current";
+  private static final String FIXTURE_DEV_8A17302D = "dev";
+
   @Test
   void fullBom017InterruptDuringReadClosesAcquiredChannel() throws Exception {
     var f = new Fixture("interrupt-after-acquire");
@@ -69,7 +78,9 @@ final class ReleasePayloadVerificationTest {
     }
     var sameSize = new Fixture("same-size-tamper");
     Files.writeString(
-        sameSize.release.resolve("VERSION"), "1.2.3-PG314\n", StandardCharsets.US_ASCII);
+        sameSize.release.resolve(FIXTURE_VERSION_1FF1675B),
+        "1.2.3-PG314\n",
+        StandardCharsets.US_ASCII);
     refused(sameSize);
     var enumeration = new Fixture("enumeration-limit");
     enumeration.namesFault = "limit";
@@ -98,7 +109,7 @@ final class ReleasePayloadVerificationTest {
   void fullBom014ArchiveMetadataAndStreamDisagreementRefuseAndClose() throws Exception {
     for (String fault :
         List.of(
-            "duplicate",
+            FIXTURE_DUPLICATE_E75B7650,
             "negative-size",
             "oversized-entry",
             "short-stream",
@@ -119,16 +130,18 @@ final class ReleasePayloadVerificationTest {
   @Test
   void fullBom015MigrationEntriesBelongOnlyToApiAndHaveSqlSuffix() throws Exception {
     var wrongRole = new Fixture("migration-wrong-role");
-    wrongRole.payload.put("web/web.jar", jar(Map.of(SQL_PATH, SQL)));
+    wrongRole.payload.put(FIXTURE_WEB_WEB_JAR_DC712F8D, jar(Map.of(SQL_PATH, SQL)));
     wrongRole.publish();
     refused(wrongRole);
     var wrongSuffix = new Fixture("migration-wrong-suffix");
     wrongSuffix.payload.put(
-        "api/api.jar", jar(Map.of(SQL_PATH, SQL, "db/migration/notes.txt", new byte[] {1})));
+        FIXTURE_API_API_JAR_B212EFC7,
+        jar(Map.of(SQL_PATH, SQL, "db/migration/notes.txt", new byte[] {1})));
     wrongSuffix.publish();
     refused(wrongSuffix);
     var version = new Fixture("signed-wrong-version-bytes");
-    version.payload.put("VERSION", "1.2.3-OTHER\n".getBytes(StandardCharsets.US_ASCII));
+    version.payload.put(
+        FIXTURE_VERSION_1FF1675B, "1.2.3-OTHER\n".getBytes(StandardCharsets.US_ASCII));
     version.publish();
     refused(version);
   }
@@ -155,7 +168,9 @@ final class ReleasePayloadVerificationTest {
               .getBytes(StandardCharsets.US_ASCII));
     for (var item : manifestVectors.entrySet()) {
       var f = new Fixture("manifest-" + item.getKey());
-      f.payload.put("web/web.jar", jar(Map.of("META-INF/MANIFEST.MF", item.getValue())));
+      f.payload.put(
+          FIXTURE_WEB_WEB_JAR_DC712F8D,
+          jar(Map.of(FIXTURE_META_INF_MANIFEST_MF_41BB0D92, item.getValue())));
       f.publish();
       refused(f);
     }
@@ -167,20 +182,20 @@ final class ReleasePayloadVerificationTest {
             "x/../foreign.class",
             "nested.jar")) {
       var f = new Fixture("zip-name-" + Math.abs(name.hashCode()));
-      f.payload.put("web/web.jar", jar(Map.of(name, new byte[] {1})));
+      f.payload.put(FIXTURE_WEB_WEB_JAR_DC712F8D, jar(Map.of(name, new byte[] {1})));
       f.publish();
       refused(f);
     }
     var empty = new Fixture("empty-zip");
-    empty.payload.put("web/web.jar", jar(Map.of()));
+    empty.payload.put(FIXTURE_WEB_WEB_JAR_DC712F8D, jar(Map.of()));
     empty.publish();
     refused(empty);
     var valid = new Fixture("manifest-without-classpath");
     valid.payload.put(
-        "web/web.jar",
+        FIXTURE_WEB_WEB_JAR_DC712F8D,
         jar(
             Map.of(
-                "META-INF/MANIFEST.MF",
+                FIXTURE_META_INF_MANIFEST_MF_41BB0D92,
                 "Manifest-Version: 1.0\r\n\r\n".getBytes(StandardCharsets.US_ASCII),
                 "module-info.class",
                 new byte[] {7},
@@ -210,10 +225,10 @@ final class ReleasePayloadVerificationTest {
             "final-size",
             "close",
             "open",
-            "null")) {
+            FIXTURE_NULL_F072CBEC)) {
       var f = new Fixture("channel-" + fault);
       f.channelFault = fault;
-      if (fault.equals("null")) {
+      if (fault.equals(FIXTURE_NULL_F072CBEC)) {
         assertThrows(NullPointerException.class, () -> f.subject().verifyCandidate(f.approval));
         f.released();
       } else refused(f);
@@ -227,7 +242,7 @@ final class ReleasePayloadVerificationTest {
 
   @Test
   void fullBom013EnumerationNullForeignAndDuplicateAreNotSignedChildren() throws Exception {
-    for (String fault : List.of("null", "foreign", "duplicate")) {
+    for (String fault : List.of(FIXTURE_NULL_F072CBEC, "foreign", FIXTURE_DUPLICATE_E75B7650)) {
       var f = new Fixture("enumeration-" + fault);
       f.namesFault = fault;
       refused(f);
@@ -350,14 +365,15 @@ final class ReleasePayloadVerificationTest {
     Fixture(String name) throws Exception {
       opt = Files.createDirectories(temporary.resolve(name).resolve("opt"));
       release = Files.createDirectories(opt.resolve("schubert-nk/releases/" + VERSION));
-      Files.createSymbolicLink(opt.resolve("schubert-nk/current"), release);
-      payload.put("VERSION", (VERSION + "\n").getBytes(StandardCharsets.US_ASCII));
+      Files.createSymbolicLink(opt.resolve(FIXTURE_SCHUBERT_NK_CURRENT_A7989072), release);
+      payload.put(FIXTURE_VERSION_1FF1675B, (VERSION + "\n").getBytes(StandardCharsets.US_ASCII));
       payload.put(SQL_PATH, SQL.clone());
       payload.put(
-          "api/api.jar",
+          FIXTURE_API_API_JAR_B212EFC7,
           jar(Map.of("dev/codex/schubert/nk/api/Main.class", new byte[] {1}, SQL_PATH, SQL)));
       payload.put(
-          "web/web.jar", jar(Map.of("dev/codex/schubert/nk/web/Main.class", new byte[] {2})));
+          FIXTURE_WEB_WEB_JAR_DC712F8D,
+          jar(Map.of("dev/codex/schubert/nk/web/Main.class", new byte[] {2})));
       payload.put(
           "operations/batch.jar",
           jar(Map.of("dev/codex/schubert/nk/batch/Main.class", new byte[] {3})));
@@ -423,11 +439,13 @@ final class ReleasePayloadVerificationTest {
       int mode = (Integer) value.get("mode");
       value.put("gid", mode == 040755 || mode == 0120777 ? 0 : 986);
       if (metadataFault.equals("directory-device") && Files.isSameFile(held, release)) {
-        value.put("dev", ((Number) value.get("dev")).longValue() + 1);
+        value.put(FIXTURE_DEV_8A17302D, ((Number) value.get(FIXTURE_DEV_8A17302D)).longValue() + 1);
         metadataFaultReached++;
-      } else if (!metadataFault.isEmpty() && Files.isSameFile(held, release.resolve("VERSION"))) {
+      } else if (!metadataFault.isEmpty()
+          && Files.isSameFile(held, release.resolve(FIXTURE_VERSION_1FF1675B))) {
         if (metadataFault.equals("payload-device"))
-          value.put("dev", ((Number) value.get("dev")).longValue() + 1);
+          value.put(
+              FIXTURE_DEV_8A17302D, ((Number) value.get(FIXTURE_DEV_8A17302D)).longValue() + 1);
         else if (metadataFault.equals("material-size")) value.put("size", 67_108_865L);
         else throw new AssertionError("unregistered fixture");
         metadataFaultReached++;
@@ -440,13 +458,14 @@ final class ReleasePayloadVerificationTest {
     }
 
     public SeekableByteChannel open(Path held) throws IOException {
-      if (Files.isSameFile(held, release.resolve("VERSION"))) versionOpens++;
-      if (channelFault.isEmpty() || !Files.isSameFile(held, release.resolve("VERSION")))
+      if (Files.isSameFile(held, release.resolve(FIXTURE_VERSION_1FF1675B))) versionOpens++;
+      if (channelFault.isEmpty()
+          || !Files.isSameFile(held, release.resolve(FIXTURE_VERSION_1FF1675B)))
         return nio.open(held);
       channelFaultReached++;
       if (channelFault.equals("open")) throw new IOException("synthetic provider unavailable");
       var channel = nio.open(held);
-      if (channelFault.equals("null")) {
+      if (channelFault.equals(FIXTURE_NULL_F072CBEC)) {
         channel.close();
         channelCloses++;
         return null;
@@ -521,9 +540,9 @@ final class ReleasePayloadVerificationTest {
         var entries = new ArrayList<Path>();
         stream.forEach(entries::add);
         switch (namesFault) {
-          case "null" -> entries.add(null);
+          case FIXTURE_NULL_F072CBEC -> entries.add(null);
           case "foreign" -> entries.add(temporary.resolve("foreign-child"));
-          case "duplicate" -> entries.add(entries.getFirst());
+          case FIXTURE_DUPLICATE_E75B7650 -> entries.add(entries.getFirst());
           case "limit" -> {
             entries.clear();
             for (int index = 0; index <= 16384; index++)
@@ -547,7 +566,8 @@ final class ReleasePayloadVerificationTest {
 
     public ZipFile archive(Path held) throws IOException {
       if (failArchive) throw new IOException("PRIVATE");
-      if (!archiveFault.isEmpty() && Files.isSameFile(held, release.resolve("api/api.jar"))) {
+      if (!archiveFault.isEmpty()
+          && Files.isSameFile(held, release.resolve(FIXTURE_API_API_JAR_B212EFC7))) {
         archiveFaultReached++;
         return new ZipFile(held.toFile()) {
           public int size() {
@@ -557,7 +577,7 @@ final class ReleasePayloadVerificationTest {
           public Enumeration<? extends ZipEntry> entries() {
             var entries = new ArrayList<ZipEntry>();
             super.entries().asIterator().forEachRemaining(entries::add);
-            if (archiveFault.equals("duplicate")) entries.add(entries.getFirst());
+            if (archiveFault.equals(FIXTURE_DUPLICATE_E75B7650)) entries.add(entries.getFirst());
             for (int index = 0; index < entries.size(); index++) {
               var entry = entries.get(index);
               if (entry.getName().equals(SQL_PATH)) {
@@ -656,7 +676,8 @@ final class ReleasePayloadVerificationTest {
 
   @Test
   void fullBom002ByteInventoryAndNullContracts() throws Exception {
-    for (String path : List.of("VERSION", "SHA256SUMS", "api/api.jar", SQL_PATH)) {
+    for (String path :
+        List.of(FIXTURE_VERSION_1FF1675B, "SHA256SUMS", FIXTURE_API_API_JAR_B212EFC7, SQL_PATH)) {
       var f = new Fixture("alter-" + path.replace('/', '-'));
       Files.writeString(f.release.resolve(path), "wrong");
       refused(f);
@@ -665,9 +686,9 @@ final class ReleasePayloadVerificationTest {
     f.write("unknown", new byte[0]);
     refused(f);
     f = new Fixture("missing");
-    Files.delete(f.release.resolve("web/web.jar"));
+    Files.delete(f.release.resolve(FIXTURE_WEB_WEB_JAR_DC712F8D));
     refused(f);
-    var valid = new Fixture("null");
+    var valid = new Fixture(FIXTURE_NULL_F072CBEC);
     assertThrows(NullPointerException.class, () -> valid.subject().verify(null));
     valid.released();
   }
@@ -678,14 +699,14 @@ final class ReleasePayloadVerificationTest {
     f.readonly = false;
     refused(f);
     f = new Fixture("hardlink");
-    Files.createLink(f.release.resolve("other"), f.release.resolve("VERSION"));
+    Files.createLink(f.release.resolve("other"), f.release.resolve(FIXTURE_VERSION_1FF1675B));
     refused(f);
     f = new Fixture("directory");
     Files.createDirectory(f.release.resolve("empty"));
     refused(f);
     f = new Fixture("symlink");
-    Files.delete(f.release.resolve("VERSION"));
-    Files.createSymbolicLink(f.release.resolve("VERSION"), Path.of("SHA256SUMS"));
+    Files.delete(f.release.resolve(FIXTURE_VERSION_1FF1675B));
+    Files.createSymbolicLink(f.release.resolve(FIXTURE_VERSION_1FF1675B), Path.of("SHA256SUMS"));
     refused(f);
   }
 
@@ -728,11 +749,11 @@ final class ReleasePayloadVerificationTest {
     assertThrows(
         IOException.class, () -> ReleasePayloadVerification.sqlChecksum(new byte[] {(byte) 0xff}));
     var f = new Fixture("sql-missing");
-    f.payload.put("api/api.jar", jar(Map.of("own.class", new byte[] {1})));
+    f.payload.put(FIXTURE_API_API_JAR_B212EFC7, jar(Map.of("own.class", new byte[] {1})));
     f.publish();
     refused(f);
     f = new Fixture("sql-wrong");
-    f.payload.put("api/api.jar", jar(Map.of(SQL_PATH, new byte[] {1})));
+    f.payload.put(FIXTURE_API_API_JAR_B212EFC7, jar(Map.of(SQL_PATH, new byte[] {1})));
     f.publish();
     refused(f);
   }
@@ -751,12 +772,12 @@ final class ReleasePayloadVerificationTest {
             "systemd/caddy.service.d/schubert-nk-startup-policy.conf",
             "operations/runbooks/readme.md")) accepted.payload.put(path, new byte[0]);
     accepted.payload.put(
-        "web/web.jar",
+        FIXTURE_WEB_WEB_JAR_DC712F8D,
         jar(
             Map.of(
                 "META-INF/",
                 new byte[0],
-                "META-INF/MANIFEST.MF",
+                FIXTURE_META_INF_MANIFEST_MF_41BB0D92,
                 "Manifest-Version: 1.0\r\nClass-Path: lib/bootstrap.jar lib/storage.jar\r\n\r\n"
                     .getBytes(StandardCharsets.US_ASCII))));
     accepted.publish();
@@ -801,19 +822,20 @@ final class ReleasePayloadVerificationTest {
     refused(f);
     f = new Fixture("shaded");
     f.payload.put(
-        "web/web.jar", jar(Map.of("dev/codex/schubert/nk/storage/Shared.class", new byte[] {4})));
+        FIXTURE_WEB_WEB_JAR_DC712F8D,
+        jar(Map.of("dev/codex/schubert/nk/storage/Shared.class", new byte[] {4})));
     f.publish();
     refused(f);
     f = new Fixture("nestedzip");
-    f.payload.put("web/web.jar", jar(Map.of("inner.jar", new byte[] {4})));
+    f.payload.put(FIXTURE_WEB_WEB_JAR_DC712F8D, jar(Map.of("inner.jar", new byte[] {4})));
     f.publish();
     refused(f);
     f = new Fixture("classpath");
     f.payload.put(
-        "web/web.jar",
+        FIXTURE_WEB_WEB_JAR_DC712F8D,
         jar(
             Map.of(
-                "META-INF/MANIFEST.MF",
+                FIXTURE_META_INF_MANIFEST_MF_41BB0D92,
                 "Manifest-Version: 1.0\r\nClass-Path: https://wrong/x.jar\r\n\r\n"
                     .getBytes(StandardCharsets.US_ASCII))));
     f.publish();
@@ -849,11 +871,13 @@ final class ReleasePayloadVerificationTest {
   @Test
   void fullBom008EveryRetainedOwnerAndUntrustedDigest() throws Exception {
     var candidate = new Fixture("candidate-no-selector");
-    Files.delete(candidate.opt.resolve("schubert-nk/current"));
+    Files.delete(candidate.opt.resolve(FIXTURE_SCHUBERT_NK_CURRENT_A7989072));
     var candidateResult = candidate.subject().verifyCandidate(candidate.approval);
     assertEquals(VERSION, candidateResult.version());
     assertFalse(
-        Files.exists(candidate.opt.resolve("schubert-nk/current"), LinkOption.NOFOLLOW_LINKS));
+        Files.exists(
+            candidate.opt.resolve(FIXTURE_SCHUBERT_NK_CURRENT_A7989072),
+            LinkOption.NOFOLLOW_LINKS));
     candidate.released();
     int candidateOpens = candidate.calls.opened;
     int candidateCloses = candidate.calls.closed;
@@ -875,7 +899,7 @@ final class ReleasePayloadVerificationTest {
       fault.released();
     }
     var oldSelector = new Fixture("candidate-old-selector");
-    Path selector = oldSelector.opt.resolve("schubert-nk/current");
+    Path selector = oldSelector.opt.resolve(FIXTURE_SCHUBERT_NK_CURRENT_A7989072);
     Files.delete(selector);
     Path oldTarget = oldSelector.opt.resolve("schubert-nk/releases/old-version");
     Files.createSymbolicLink(selector, oldTarget);

@@ -27,13 +27,31 @@ import org.junit.jupiter.api.Test;
 
 /** PT-OPS-SERVICEID-001..008; public literal NSS vectors, no production expected generation. */
 final class FixedServiceIdentityTest {
+  private static final String FIXTURE_SYNTHETIC_85DA8434 = "synthetic";
+  private static final String FIXTURE_PROCESS_B140B547 = "process";
+  private static final String FIXTURE_FIXED_12AFF051 = "fixed";
+  private static final String FIXTURE_PASSWD_SCHUBERT_API_96EE1ECC = "passwd/schubert-api";
+  private static final String FIXTURE_GROUP_SCHUBERT_API_D38A74AF = "group/schubert-api";
+  private static final String FIXTURE_GROUP_SCHUBERT_37A26416 = "group/schubert";
+  private static final String FIXTURE_GROUP_SCHUBERT_READ_F79F2F9D = "group/schubert-read";
+  private static final String FIXTURE_USR_BIN_GETENT_556F8282 = "/usr/bin/getent";
+  private static final String FIXTURE_SERVICE_IDENTITY_UNAVAILABLE_2337BF6D =
+      "service identity unavailable";
+  private static final String FIXTURE_PASSWD_70C0A7EE = "passwd";
+  private static final String FIXTURE_GROUP_654E1E20 = "group";
+  private static final String FIXTURE_SCHUBERT_DDC9117F = "schubert";
+  private static final String FIXTURE_SCHUBERT_READ_57E4BB8C = "schubert-read";
+  private static final String FIXTURE_PRIVATE_D45CA6F9 = "PRIVATE";
+
   /** PT-OPS-NSSOWN001: every getter failure/null closes only already acquired resources. */
   @Test
   void nssown001GetterNullRuntimeAndFatalKeepExactPartialCleanupOrder() {
     for (int at : List.of(1, 2, 3))
       for (Throwable failure :
           new Throwable[] {
-            null, new IllegalStateException("synthetic"), new LinkageError("synthetic")
+            null,
+            new IllegalStateException(FIXTURE_SYNTHETIC_85DA8434),
+            new LinkageError(FIXTURE_SYNTHETIC_85DA8434)
           }) {
         var events = new ArrayList<String>();
         var process =
@@ -63,7 +81,7 @@ final class FixedServiceIdentityTest {
               }
 
               public void destroy() {
-                events.add("process");
+                events.add(FIXTURE_PROCESS_B140B547);
                 super.destroy();
               }
             };
@@ -93,13 +111,13 @@ final class FixedServiceIdentityTest {
                 expected,
                 () ->
                     new FixedServiceIdentity.NativeQuery(command -> process)
-                        .read(List.of("fixed")));
+                        .read(List.of(FIXTURE_FIXED_12AFF051)));
         if (failure != null) assertSame(failure, actual);
         assertEquals(
             switch (at) {
-              case 1 -> List.of("process");
-              case 2 -> List.of("stdout", "process");
-              default -> List.of("stdin", "stdout", "process");
+              case 1 -> List.of(FIXTURE_PROCESS_B140B547);
+              case 2 -> List.of("stdout", FIXTURE_PROCESS_B140B547);
+              default -> List.of("stdin", "stdout", FIXTURE_PROCESS_B140B547);
             },
             events);
         assertEquals(1, process.destroyed);
@@ -116,9 +134,9 @@ final class FixedServiceIdentityTest {
   void nssown002FactoryIoRuntimeFatalAndNullNeverBecomeAProcessOwner() {
     for (Throwable failure :
         new Throwable[] {
-          new IOException("synthetic"),
-          new IllegalStateException("synthetic"),
-          new LinkageError("synthetic"),
+          new IOException(FIXTURE_SYNTHETIC_85DA8434),
+          new IllegalStateException(FIXTURE_SYNTHETIC_85DA8434),
+          new LinkageError(FIXTURE_SYNTHETIC_85DA8434),
           null
         }) {
       int[] opens = {0};
@@ -132,7 +150,7 @@ final class FixedServiceIdentityTest {
               });
       Class<? extends Throwable> expected =
           failure == null ? NullPointerException.class : failure.getClass();
-      Throwable actual = assertThrows(expected, () -> query.read(List.of("fixed")));
+      Throwable actual = assertThrows(expected, () -> query.read(List.of(FIXTURE_FIXED_12AFF051)));
       if (failure != null) assertSame(failure, actual);
       assertEquals(1, opens[0]);
     }
@@ -144,12 +162,18 @@ final class FixedServiceIdentityTest {
 
   static final Map<String, String> GOLDEN =
       Map.of(
-          "passwd/schubert-api", "schubert-api:x:999:981::/nonexistent:/usr/sbin/nologin\n",
-          "passwd/schubert-web", "schubert-web:x:998:980::/nonexistent:/usr/sbin/nologin\n",
-          "group/schubert-api", "schubert-api:x:981:\n",
-          "group/schubert-web", "schubert-web:x:980:schubert-api\n",
-          "group/schubert", "schubert:x:986:schubert-api,schubert-web\n",
-          "group/schubert-read", "schubert-read:x:982:schubert-api,schubert-web\n");
+          FIXTURE_PASSWD_SCHUBERT_API_96EE1ECC,
+          "schubert-api:x:999:981::/nonexistent:/usr/sbin/nologin\n",
+          "passwd/schubert-web",
+          "schubert-web:x:998:980::/nonexistent:/usr/sbin/nologin\n",
+          FIXTURE_GROUP_SCHUBERT_API_D38A74AF,
+          "schubert-api:x:981:\n",
+          "group/schubert-web",
+          "schubert-web:x:980:schubert-api\n",
+          FIXTURE_GROUP_SCHUBERT_37A26416,
+          "schubert:x:986:schubert-api,schubert-web\n",
+          FIXTURE_GROUP_SCHUBERT_READ_F79F2F9D,
+          "schubert-read:x:982:schubert-api,schubert-web\n");
 
   static final class Fixture implements FixedServiceIdentity.Query {
     final Map<String, String> values = new HashMap<>(GOLDEN);
@@ -157,7 +181,7 @@ final class FixedServiceIdentityTest {
 
     public byte[] read(List<String> command) {
       commands.add(command);
-      assertEquals("/usr/bin/getent", command.get(0));
+      assertEquals(FIXTURE_USR_BIN_GETENT_556F8282, command.get(0));
       return bytes(values.getOrDefault(command.get(1) + "/" + command.get(2), ""));
     }
 
@@ -169,7 +193,7 @@ final class FixedServiceIdentityTest {
   static void rejected(Fixture f) {
     IOException e =
         assertThrows(IOException.class, () -> f.subject().resolve(ServiceConfigFiles.Service.API));
-    assertEquals("service identity unavailable", e.getMessage());
+    assertEquals(FIXTURE_SERVICE_IDENTITY_UNAVAILABLE_2337BF6D, e.getMessage());
     assertNull(e.getCause());
   }
 
@@ -185,14 +209,24 @@ final class FixedServiceIdentityTest {
         f.subject().resolveInspector());
     assertEquals(
         List.of(
-            List.of("/usr/bin/getent", "passwd", "schubert-inbox-inspector"),
-            List.of("/usr/bin/getent", "group", "schubert-inbox-inspector"),
-            List.of("/usr/bin/getent", "group", "schubert"),
-            List.of("/usr/bin/getent", "group", "schubert-read")),
+            List.of(
+                FIXTURE_USR_BIN_GETENT_556F8282,
+                FIXTURE_PASSWD_70C0A7EE,
+                "schubert-inbox-inspector"),
+            List.of(
+                FIXTURE_USR_BIN_GETENT_556F8282,
+                FIXTURE_GROUP_654E1E20,
+                "schubert-inbox-inspector"),
+            List.of(
+                FIXTURE_USR_BIN_GETENT_556F8282, FIXTURE_GROUP_654E1E20, FIXTURE_SCHUBERT_DDC9117F),
+            List.of(
+                FIXTURE_USR_BIN_GETENT_556F8282,
+                FIXTURE_GROUP_654E1E20,
+                FIXTURE_SCHUBERT_READ_57E4BB8C)),
         f.commands);
-    f.values.put("group/schubert-read", "schubert-read:x:976:\n");
+    f.values.put(FIXTURE_GROUP_SCHUBERT_READ_F79F2F9D, "schubert-read:x:976:\n");
     assertThrows(IOException.class, () -> f.subject().resolveInspector());
-    f.values.put("group/schubert-read", "schubert-read:x:982:\n");
+    f.values.put(FIXTURE_GROUP_SCHUBERT_READ_F79F2F9D, "schubert-read:x:982:\n");
     f.values.put("group/schubert-inbox-inspector", "schubert-inbox-inspector:x:975:\n");
     assertThrows(IOException.class, () -> f.subject().resolveInspector());
     f.values.remove("passwd/schubert-inbox-inspector");
@@ -217,25 +251,31 @@ final class FixedServiceIdentityTest {
     assertEquals(982L, f.subject().dataReadGroup());
     assertEquals(
         List.of(
-            List.of("/usr/bin/getent", "passwd", "schubert-data"),
-            List.of("/usr/bin/getent", "group", "schubert-data"),
-            List.of("/usr/bin/getent", "group", "schubert-read"),
-            List.of("/usr/bin/getent", "passwd", "schubert-migration"),
-            List.of("/usr/bin/getent", "group", "schubert-migration"),
-            List.of("/usr/bin/getent", "group", "schubert-read")),
+            List.of(FIXTURE_USR_BIN_GETENT_556F8282, FIXTURE_PASSWD_70C0A7EE, "schubert-data"),
+            List.of(FIXTURE_USR_BIN_GETENT_556F8282, FIXTURE_GROUP_654E1E20, "schubert-data"),
+            List.of(
+                FIXTURE_USR_BIN_GETENT_556F8282,
+                FIXTURE_GROUP_654E1E20,
+                FIXTURE_SCHUBERT_READ_57E4BB8C),
+            List.of(FIXTURE_USR_BIN_GETENT_556F8282, FIXTURE_PASSWD_70C0A7EE, "schubert-migration"),
+            List.of(FIXTURE_USR_BIN_GETENT_556F8282, FIXTURE_GROUP_654E1E20, "schubert-migration"),
+            List.of(
+                FIXTURE_USR_BIN_GETENT_556F8282,
+                FIXTURE_GROUP_654E1E20,
+                FIXTURE_SCHUBERT_READ_57E4BB8C)),
         f.commands);
     f.values.put("group/schubert-data", "schubert-data:x:982:\n");
     assertThrows(IOException.class, () -> f.subject().resolveDataOwner());
     f.values.put("group/schubert-data", "schubert-data:x:975:\n");
-    f.values.put("group/schubert-read", "schubert-read:x:975:\n");
+    f.values.put(FIXTURE_GROUP_SCHUBERT_READ_F79F2F9D, "schubert-read:x:975:\n");
     assertThrows(IOException.class, () -> f.subject().resolveDataOwner());
     f.values.remove("passwd/schubert-migration");
     assertThrows(IOException.class, () -> f.subject().resolveMigration());
-    f.values.put("group/schubert-read", "schubert-read:x:0:\n");
+    f.values.put(FIXTURE_GROUP_SCHUBERT_READ_F79F2F9D, "schubert-read:x:0:\n");
     assertEquals(
-        "service identity unavailable",
+        FIXTURE_SERVICE_IDENTITY_UNAVAILABLE_2337BF6D,
         assertThrows(IOException.class, () -> f.subject().dataReadGroup()).getMessage());
-    f.values.remove("group/schubert-read");
+    f.values.remove(FIXTURE_GROUP_SCHUBERT_READ_F79F2F9D);
     assertThrows(IOException.class, () -> f.subject().dataReadGroup());
   }
 
@@ -250,14 +290,17 @@ final class FixedServiceIdentityTest {
         assertDoesNotThrow(() -> backup.subject().resolveBackup()));
     assertEquals(
         List.of(
-            List.of("/usr/bin/getent", "passwd", "schubert-backup"),
-            List.of("/usr/bin/getent", "group", "schubert-backup"),
-            List.of("/usr/bin/getent", "group", "schubert")),
+            List.of(FIXTURE_USR_BIN_GETENT_556F8282, FIXTURE_PASSWD_70C0A7EE, "schubert-backup"),
+            List.of(FIXTURE_USR_BIN_GETENT_556F8282, FIXTURE_GROUP_654E1E20, "schubert-backup"),
+            List.of(
+                FIXTURE_USR_BIN_GETENT_556F8282,
+                FIXTURE_GROUP_654E1E20,
+                FIXTURE_SCHUBERT_DDC9117F)),
         backup.commands);
     backup.values.put("group/schubert-backup", "schubert-backup:x:978:\n");
     assertThrows(IOException.class, () -> backup.subject().resolveBackup());
     backup.values.put("group/schubert-backup", "schubert-backup:x:977:\n");
-    backup.values.put("group/schubert", "schubert:x:977:\n");
+    backup.values.put(FIXTURE_GROUP_SCHUBERT_37A26416, "schubert:x:977:\n");
     assertThrows(IOException.class, () -> backup.subject().resolveBackup());
     backup.values.remove("passwd/schubert-backup");
     assertThrows(IOException.class, () -> backup.subject().resolveBackup());
@@ -267,11 +310,15 @@ final class FixedServiceIdentityTest {
         assertDoesNotThrow(() -> f.subject().resolve(ServiceConfigFiles.Service.API)));
     assertEquals(
         List.of(
-            List.of("/usr/bin/getent", "passwd", "schubert-api"),
-            List.of("/usr/bin/getent", "group", "schubert-api"),
-            List.of("/usr/bin/getent", "group", "schubert"),
-            List.of("/usr/bin/getent", "group", "schubert-read"),
-            List.of("/usr/bin/getent", "group", "schubert-web")),
+            List.of(FIXTURE_USR_BIN_GETENT_556F8282, FIXTURE_PASSWD_70C0A7EE, "schubert-api"),
+            List.of(FIXTURE_USR_BIN_GETENT_556F8282, FIXTURE_GROUP_654E1E20, "schubert-api"),
+            List.of(
+                FIXTURE_USR_BIN_GETENT_556F8282, FIXTURE_GROUP_654E1E20, FIXTURE_SCHUBERT_DDC9117F),
+            List.of(
+                FIXTURE_USR_BIN_GETENT_556F8282,
+                FIXTURE_GROUP_654E1E20,
+                FIXTURE_SCHUBERT_READ_57E4BB8C),
+            List.of(FIXTURE_USR_BIN_GETENT_556F8282, FIXTURE_GROUP_654E1E20, "schubert-web")),
         f.commands);
     f.commands.clear();
     assertEquals(
@@ -280,10 +327,16 @@ final class FixedServiceIdentityTest {
     assertEquals(4, f.commands.size());
     f.commands.clear();
     assertEquals(986L, assertDoesNotThrow(() -> f.subject().configurationGroup()));
-    assertEquals(List.of(List.of("/usr/bin/getent", "group", "schubert")), f.commands);
-    f.values.put("group/schubert", "schubert:x:0:\n");
     assertEquals(
-        "service identity unavailable",
+        List.of(
+            List.of(
+                FIXTURE_USR_BIN_GETENT_556F8282,
+                FIXTURE_GROUP_654E1E20,
+                FIXTURE_SCHUBERT_DDC9117F)),
+        f.commands);
+    f.values.put(FIXTURE_GROUP_SCHUBERT_37A26416, "schubert:x:0:\n");
+    assertEquals(
+        FIXTURE_SERVICE_IDENTITY_UNAVAILABLE_2337BF6D,
         assertThrows(IOException.class, () -> f.subject().configurationGroup()).getMessage());
     var v = new FixedServiceIdentity.Value(999, 981, List.of(980L, 981L, 982L, 986L));
     assertEquals("980,981,982,986", v.groupArgument());
@@ -295,10 +348,10 @@ final class FixedServiceIdentityTest {
   void serviceid002EveryFixedRowMalformedMissingAliasAndShadowMarker() {
     for (String key :
         List.of(
-            "passwd/schubert-api",
-            "group/schubert-api",
-            "group/schubert",
-            "group/schubert-read",
+            FIXTURE_PASSWD_SCHUBERT_API_96EE1ECC,
+            FIXTURE_GROUP_SCHUBERT_API_D38A74AF,
+            FIXTURE_GROUP_SCHUBERT_37A26416,
+            FIXTURE_GROUP_SCHUBERT_READ_F79F2F9D,
             "group/schubert-web"))
       for (String bad :
           List.of(
@@ -306,7 +359,7 @@ final class FixedServiceIdentityTest {
               GOLDEN.get(key) + GOLDEN.get(key),
               GOLDEN.get(key).trim(),
               GOLDEN.get(key).replace(":x:", ":PRIVATE:"),
-              GOLDEN.get(key).replaceFirst("schubert", "other"),
+              GOLDEN.get(key).replaceFirst(FIXTURE_SCHUBERT_DDC9117F, "other"),
               GOLDEN.get(key).replace("\n", ":extra\n"),
               GOLDEN.get(key).replaceFirst(":", ""))) {
         var f = new Fixture();
@@ -317,20 +370,24 @@ final class FixedServiceIdentityTest {
 
   @Test
   void serviceid003UidGidBoundariesAndCanonicalDecimal() {
-    for (String key : List.of("passwd/schubert-api", "group/schubert-api"))
+    for (String key :
+        List.of(FIXTURE_PASSWD_SCHUBERT_API_96EE1ECC, FIXTURE_GROUP_SCHUBERT_API_D38A74AF))
       for (String bad : List.of("0", "01", "-1", "+1", "4294967295", "99999999999", "a", "1.0")) {
         var f = new Fixture();
-        String original = key.startsWith("passwd") ? ":999:" : ":981:";
+        String original = key.startsWith(FIXTURE_PASSWD_70C0A7EE) ? ":999:" : ":981:";
         f.values.put(key, f.values.get(key).replace(original, ":" + bad + ":"));
         rejected(f);
       }
     var f = new Fixture();
     f.values.put(
-        "passwd/schubert-api", GOLDEN.get("passwd/schubert-api").replace(":999:", ":4294967294:"));
+        FIXTURE_PASSWD_SCHUBERT_API_96EE1ECC,
+        GOLDEN.get(FIXTURE_PASSWD_SCHUBERT_API_96EE1ECC).replace(":999:", ":4294967294:"));
     assertEquals(
         4294967294L,
         assertDoesNotThrow(() -> f.subject().resolve(ServiceConfigFiles.Service.API)).uid());
-    f.values.put("passwd/schubert-api", GOLDEN.get("passwd/schubert-api").replace(":999:", ":1:"));
+    f.values.put(
+        FIXTURE_PASSWD_SCHUBERT_API_96EE1ECC,
+        GOLDEN.get(FIXTURE_PASSWD_SCHUBERT_API_96EE1ECC).replace(":999:", ":1:"));
     assertEquals(
         1L, assertDoesNotThrow(() -> f.subject().resolve(ServiceConfigFiles.Service.API)).uid());
   }
@@ -338,13 +395,13 @@ final class FixedServiceIdentityTest {
   @Test
   void serviceid004PrimaryMismatchDuplicateGroupsAndImplicitMembershipIgnored() {
     var f = new Fixture();
-    f.values.put("group/schubert-api", "schubert-api:x:900:\n");
+    f.values.put(FIXTURE_GROUP_SCHUBERT_API_D38A74AF, "schubert-api:x:900:\n");
     rejected(f);
     f = new Fixture();
-    f.values.put("group/schubert-read", "schubert-read:x:986:extra,unrelated\n");
+    f.values.put(FIXTURE_GROUP_SCHUBERT_READ_F79F2F9D, "schubert-read:x:986:extra,unrelated\n");
     rejected(f);
     var publicMembers = new Fixture();
-    publicMembers.values.put("group/schubert", "schubert:x:986:extra,unrelated\n");
+    publicMembers.values.put(FIXTURE_GROUP_SCHUBERT_37A26416, "schubert:x:986:extra,unrelated\n");
     assertEquals(
         List.of(980L, 981L, 982L, 986L),
         assertDoesNotThrow(() -> publicMembers.subject().resolve(ServiceConfigFiles.Service.API))
@@ -355,8 +412,8 @@ final class FixedServiceIdentityTest {
   @Test
   void serviceid005ByteNullAndImmutableValueInvariant() {
     var exact = new Fixture();
-    exact.values.put("group/schubert", "schubert:x:986:" + "m".repeat(1008) + "\n");
-    assertEquals(1024, bytes(exact.values.get("group/schubert")).length);
+    exact.values.put(FIXTURE_GROUP_SCHUBERT_37A26416, "schubert:x:986:" + "m".repeat(1008) + "\n");
+    assertEquals(1024, bytes(exact.values.get(FIXTURE_GROUP_SCHUBERT_37A26416)).length);
     assertEquals(
         List.of(980L, 981L, 982L, 986L),
         assertDoesNotThrow(() -> exact.subject().resolve(ServiceConfigFiles.Service.API)).groups());
@@ -364,11 +421,11 @@ final class FixedServiceIdentityTest {
         List.of(
             "\n",
             "x".repeat(1025),
-            GOLDEN.get("passwd/schubert-api").replace("\n", "\r\n"),
-            GOLDEN.get("passwd/schubert-api").replace("x", "\t"),
-            GOLDEN.get("passwd/schubert-api").replace("x", "\u007f"))) {
+            GOLDEN.get(FIXTURE_PASSWD_SCHUBERT_API_96EE1ECC).replace("\n", "\r\n"),
+            GOLDEN.get(FIXTURE_PASSWD_SCHUBERT_API_96EE1ECC).replace("x", "\t"),
+            GOLDEN.get(FIXTURE_PASSWD_SCHUBERT_API_96EE1ECC).replace("x", "\u007f"))) {
       var f = new Fixture();
-      f.values.put("passwd/schubert-api", bad);
+      f.values.put(FIXTURE_PASSWD_SCHUBERT_API_96EE1ECC, bad);
       rejected(f);
     }
     assertThrows(NullPointerException.class, () -> new FixedServiceIdentity(null));
@@ -454,7 +511,8 @@ final class FixedServiceIdentityTest {
 
   @Test
   void serviceid006NativeQueryTimeoutExitInterruptAndNoInheritedSecrets() {
-    var command = List.of("/usr/bin/getent", "group", "schubert");
+    var command =
+        List.of(FIXTURE_USR_BIN_GETENT_556F8282, FIXTURE_GROUP_654E1E20, FIXTURE_SCHUBERT_DDC9117F);
     var p = new Fake();
     assertArrayEquals(
         bytes("PUBLIC\n"),
@@ -504,7 +562,7 @@ final class FixedServiceIdentityTest {
             new ByteArrayInputStream(new byte[0]) {
               @Override
               public void close() throws IOException {
-                throw new IOException("PRIVATE");
+                throw new IOException(FIXTURE_PRIVATE_D45CA6F9);
               }
             };
       if (position == 2)
@@ -512,7 +570,7 @@ final class FixedServiceIdentityTest {
             new ByteArrayOutputStream() {
               @Override
               public void close() throws IOException {
-                throw new IOException("PRIVATE");
+                throw new IOException(FIXTURE_PRIVATE_D45CA6F9);
               }
             };
       if (position == 3)
@@ -520,18 +578,18 @@ final class FixedServiceIdentityTest {
             new ByteArrayInputStream(new byte[0]) {
               @Override
               public void close() throws IOException {
-                throw new IOException("PRIVATE");
+                throw new IOException(FIXTURE_PRIVATE_D45CA6F9);
               }
             };
       assertThrows(
           IOException.class,
-          () -> new FixedServiceIdentity.NativeQuery(c -> p).read(List.of("fixed")));
+          () -> new FixedServiceIdentity.NativeQuery(c -> p).read(List.of(FIXTURE_FIXED_12AFF051)));
       assertEquals(1, p.destroyed);
     }
     var p = new Fake();
     p.done = false;
     p.alive = true;
-    var fatal = new AssertionError("PRIVATE");
+    var fatal = new AssertionError(FIXTURE_PRIVATE_D45CA6F9);
     p.out =
         new ByteArrayInputStream(new byte[0]) {
           @Override
@@ -543,9 +601,11 @@ final class FixedServiceIdentityTest {
         fatal,
         assertThrows(
             AssertionError.class,
-            () -> new FixedServiceIdentity.NativeQuery(c -> p).read(List.of("fixed"))));
+            () ->
+                new FixedServiceIdentity.NativeQuery(c -> p)
+                    .read(List.of(FIXTURE_FIXED_12AFF051))));
     assertEquals(1, p.destroyed);
-    IOException known = new IOException("PRIVATE");
+    IOException known = new IOException(FIXTURE_PRIVATE_D45CA6F9);
     IOException fixed =
         assertThrows(
             IOException.class,
@@ -555,7 +615,7 @@ final class FixedServiceIdentityTest {
                           throw known;
                         })
                     .resolve(ServiceConfigFiles.Service.API));
-    assertEquals("service identity unavailable", fixed.getMessage());
+    assertEquals(FIXTURE_SERVICE_IDENTITY_UNAVAILABLE_2337BF6D, fixed.getMessage());
     assertNull(fixed.getCause());
   }
 

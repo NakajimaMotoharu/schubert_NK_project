@@ -33,6 +33,10 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** PT-OPS-AFD-001..008; A-only borrowed FD, independent syscall/ownership/interop oracles. */
 final class LinuxStartupFileLockTest {
+  private static final String FIXTURE_OPEN_35FF74AE = "open";
+  private static final String FIXTURE_CLOSE_128_7836A21E = "close:128";
+  private static final String FIXTURE_CLOSE_17_F1422F88 = "close:17";
+  private static final String FIXTURE_LOCK_E9DEB047 = "lock";
   @TempDir Path root;
   private static final StructLayout STATE = Linker.Option.captureStateLayout();
   private static final long ERRNO =
@@ -53,7 +57,13 @@ final class LinuxStartupFileLockTest {
                   return 42;
                 }));
     assertEquals(
-        List.of("open", "dup:17:1030:128", "flock:128:6", "body", "close:128", "close:17"),
+        List.of(
+            FIXTURE_OPEN_35FF74AE,
+            "dup:17:1030:128",
+            "flock:128:6",
+            "body",
+            FIXTURE_CLOSE_128_7836A21E,
+            FIXTURE_CLOSE_17_F1422F88),
         f.events);
   }
 
@@ -73,7 +83,13 @@ final class LinuxStartupFileLockTest {
                 StorageIoException.class,
                 () -> f.calls().tryExclusiveForStartup(HELD, fd -> fail())));
       assertEquals(
-          List.of("open", "dup:17:1030:128", "flock:128:6", "close:128", "close:17"), f.events);
+          List.of(
+              FIXTURE_OPEN_35FF74AE,
+              "dup:17:1030:128",
+              "flock:128:6",
+              FIXTURE_CLOSE_128_7836A21E,
+              FIXTURE_CLOSE_17_F1422F88),
+          f.events);
     }
     var f = new Fixture();
     f.lockResult = 1;
@@ -90,7 +106,7 @@ final class LinuxStartupFileLockTest {
     unavailable(
         assertThrows(
             StorageIoException.class, () -> f.calls().tryExclusiveForStartup(HELD, fd -> fail())));
-    assertEquals(List.of("open"), f.events);
+    assertEquals(List.of(FIXTURE_OPEN_35FF74AE), f.events);
     for (int reserved : List.of(-1, 17, 127, 65536)) {
       var fixture = new Fixture();
       fixture.reserved = reserved;
@@ -98,9 +114,9 @@ final class LinuxStartupFileLockTest {
           assertThrows(
               StorageIoException.class,
               () -> fixture.calls().tryExclusiveForStartup(HELD, fd -> fail())));
-      var expected = new ArrayList<>(List.of("open", "dup:17:1030:128"));
+      var expected = new ArrayList<>(List.of(FIXTURE_OPEN_35FF74AE, "dup:17:1030:128"));
       if (reserved == 127 || reserved == 65536) expected.add("close:" + reserved);
-      expected.add("close:17");
+      expected.add(FIXTURE_CLOSE_17_F1422F88);
       assertEquals(expected, fixture.events);
     }
     for (int closed : List.of(128, 17)) {
@@ -111,7 +127,7 @@ final class LinuxStartupFileLockTest {
               StorageIoException.class,
               () -> fixture.calls().tryExclusiveForStartup(HELD, fd -> 1)));
       assertEquals(
-          List.of("close:128", "close:17"),
+          List.of(FIXTURE_CLOSE_128_7836A21E, FIXTURE_CLOSE_17_F1422F88),
           fixture.events.subList(fixture.events.size() - 2, fixture.events.size()));
     }
   }
@@ -143,7 +159,7 @@ final class LinuxStartupFileLockTest {
           if (actual instanceof StorageIoException failure) unavailable(failure);
           else assertSame(unknown, actual);
           assertEquals(
-              List.of("close:128", "close:17"),
+              List.of(FIXTURE_CLOSE_128_7836A21E, FIXTURE_CLOSE_17_F1422F88),
               f.events.subList(f.events.size() - 2, f.events.size()));
         }
   }
@@ -193,11 +209,11 @@ final class LinuxStartupFileLockTest {
 
   @Test
   void opsAfd006RealNativeFlockAndSeparateImmutableProof() throws Exception {
-    Files.write(root.resolve("lock"), new byte[0]);
+    Files.write(root.resolve(FIXTURE_LOCK_E9DEB047), new byte[0]);
     try (var directory = OwnedTransferDirectory.open(LinuxDirectoryCalls.create(), root)) {
       boolean result =
           directory.atExistingEntryHandle(
-              "lock",
+              FIXTURE_LOCK_E9DEB047,
               held ->
                   LinuxFileLock.create()
                       .tryExclusiveForStartup(
@@ -205,7 +221,9 @@ final class LinuxStartupFileLockTest {
                           fd -> {
                             assertTrue(fd >= 128 && fd <= 65535);
                             assertEquals(
-                                20, assertDoesNotThrow(() -> external(root.resolve("lock"))));
+                                20,
+                                assertDoesNotThrow(
+                                    () -> external(root.resolve(FIXTURE_LOCK_E9DEB047))));
                             byte[] literal = new byte[] {65, 66, 67};
                             return LinuxSealedProof.create()
                                 .withProof(
@@ -222,22 +240,25 @@ final class LinuxStartupFileLockTest {
                                                   assertEquals(
                                                       20,
                                                       assertDoesNotThrow(
-                                                          () -> external(root.resolve("lock")))));
+                                                          () ->
+                                                              external(
+                                                                  root.resolve(
+                                                                      FIXTURE_LOCK_E9DEB047)))));
                                       return true;
                                     });
                           })
                       .orElseThrow());
       assertTrue(result);
     }
-    assertEquals(0, external(root.resolve("lock")));
+    assertEquals(0, external(root.resolve(FIXTURE_LOCK_E9DEB047)));
   }
 
   @Test
   void opsAfd007ConcurrentOnlyOneCallbackOwnsA() throws Exception {
-    Files.write(root.resolve("lock"), new byte[0]);
+    Files.write(root.resolve(FIXTURE_LOCK_E9DEB047), new byte[0]);
     try (var directory = OwnedTransferDirectory.open(LinuxDirectoryCalls.create(), root)) {
       directory.atExistingEntryHandle(
-          "lock",
+          FIXTURE_LOCK_E9DEB047,
           held -> {
             var barrier = new CyclicBarrier(16);
             var losers = new CountDownLatch(15);
@@ -271,14 +292,14 @@ final class LinuxStartupFileLockTest {
             return true;
           });
     }
-    assertEquals(0, external(root.resolve("lock")));
+    assertEquals(0, external(root.resolve(FIXTURE_LOCK_E9DEB047)));
   }
 
   @Test
   void opsAfd008ExistingOrdinaryMaintenanceScopeNeverExportsFd() throws Exception {
     var f = new Fixture();
     assertEquals(Optional.of(7), f.calls().tryExclusive(HELD, () -> 7));
-    assertEquals(List.of("open", "flock:17:6", "close:17"), f.events);
+    assertEquals(List.of(FIXTURE_OPEN_35FF74AE, "flock:17:6", FIXTURE_CLOSE_17_F1422F88), f.events);
     assertFalse(f.events.stream().anyMatch(event -> event.startsWith("dup:")));
   }
 
@@ -316,7 +337,7 @@ final class LinuxStartupFileLockTest {
             assertEquals("/proc/self/fd/9", path.getString(0));
             assertEquals(0x80000, flags);
             assertEquals(0, mode);
-            events.add("open");
+            events.add(FIXTURE_OPEN_35FF74AE);
             return openResult;
           },
           (state, fd, flags) -> {

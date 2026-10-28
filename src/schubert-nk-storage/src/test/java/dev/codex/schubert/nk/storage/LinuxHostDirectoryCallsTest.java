@@ -23,11 +23,16 @@ import org.junit.jupiter.api.Test;
 
 /** Fixed kernel anchor, read-only capability delegation, independent call-order oracle. */
 final class LinuxHostDirectoryCallsTest {
+  private static final String FIXTURE_UID_0C18F38C = "uid";
+  private static final String FIXTURE_AMD64_58D0BD71 = "amd64";
+  private static final String FIXTURE_LINUX_1CA133AF = "Linux";
+  private static final String FIXTURE_NO_MUTATION_68019DA1 = "no mutation";
+
   @Test
   void opsHost001FixedKernelAnchorAndNativeFlags() throws Exception {
     var fixture = new Fixture();
     assertEquals(17, fixture.calls().openRoot());
-    assertEquals(List.of("uid", "open:/proc/1/root:589824:0"), fixture.events);
+    assertEquals(List.of(FIXTURE_UID_0C18F38C, "open:/proc/1/root:589824:0"), fixture.events);
     assertFalse(Objects.requireNonNull(fixture.pointer).scope().isAlive());
   }
 
@@ -73,12 +78,12 @@ final class LinuxHostDirectoryCallsTest {
       var fixture = new Fixture();
       fixture.uid = uid;
       unavailable(assertThrows(StorageIoException.class, () -> fixture.calls().openRoot()));
-      assertEquals(List.of("uid"), fixture.events);
+      assertEquals(List.of(FIXTURE_UID_0C18F38C), fixture.events);
     }
     var fixture = new Fixture();
     fixture.openResult = -1;
     unavailable(assertThrows(StorageIoException.class, () -> fixture.calls().openRoot()));
-    assertEquals(List.of("uid", "open:/proc/1/root:589824:0"), fixture.events);
+    assertEquals(List.of(FIXTURE_UID_0C18F38C, "open:/proc/1/root:589824:0"), fixture.events);
     assertFalse(Objects.requireNonNull(fixture.pointer).scope().isAlive());
   }
 
@@ -109,26 +114,30 @@ final class LinuxHostDirectoryCallsTest {
         () -> new LinuxHostDirectoryCalls(fixture, fixture.security(), null));
     var symbols = Linker.nativeLinker().defaultLookup();
     assertThrows(
-        NullPointerException.class, () -> LinuxHostDirectoryCalls.create(null, "amd64", symbols));
+        NullPointerException.class,
+        () -> LinuxHostDirectoryCalls.create(null, FIXTURE_AMD64_58D0BD71, symbols));
     assertThrows(
-        NullPointerException.class, () -> LinuxHostDirectoryCalls.create("Linux", null, symbols));
+        NullPointerException.class,
+        () -> LinuxHostDirectoryCalls.create(FIXTURE_LINUX_1CA133AF, null, symbols));
     assertThrows(
-        NullPointerException.class, () -> LinuxHostDirectoryCalls.create("Linux", "amd64", null));
+        NullPointerException.class,
+        () -> LinuxHostDirectoryCalls.create(FIXTURE_LINUX_1CA133AF, FIXTURE_AMD64_58D0BD71, null));
     for (String os : List.of("Windows", "linux", ""))
       assertThrows(
-          IllegalStateException.class, () -> LinuxHostDirectoryCalls.create(os, "amd64", symbols));
+          IllegalStateException.class,
+          () -> LinuxHostDirectoryCalls.create(os, FIXTURE_AMD64_58D0BD71, symbols));
     assertThrows(
         IllegalStateException.class,
-        () -> LinuxHostDirectoryCalls.create("Linux", "unknown", symbols));
+        () -> LinuxHostDirectoryCalls.create(FIXTURE_LINUX_1CA133AF, "unknown", symbols));
     assertThrows(
         IllegalStateException.class,
         () ->
             LinuxHostDirectoryCalls.create(
-                "Linux",
-                "amd64",
+                FIXTURE_LINUX_1CA133AF,
+                FIXTURE_AMD64_58D0BD71,
                 name -> name.equals("open") ? Optional.empty() : symbols.find(name)));
-    for (String arch : List.of("amd64", "x86_64", "aarch64"))
-      assertNotNull(LinuxHostDirectoryCalls.create("Linux", arch, symbols));
+    for (String arch : List.of(FIXTURE_AMD64_58D0BD71, "x86_64", "aarch64"))
+      assertNotNull(LinuxHostDirectoryCalls.create(FIXTURE_LINUX_1CA133AF, arch, symbols));
     assertTrue(fixture.events.isEmpty());
   }
 
@@ -174,7 +183,7 @@ final class LinuxHostDirectoryCallsTest {
       return new InodeSecurityCalls() {
         @Override
         public long effectiveUid() {
-          events.add("uid");
+          events.add(FIXTURE_UID_0C18F38C);
           return uid;
         }
 
@@ -227,27 +236,27 @@ final class LinuxHostDirectoryCallsTest {
 
     @Override
     public int createFile(int fd, String n) {
-      throw new AssertionError("no mutation");
+      throw new AssertionError(FIXTURE_NO_MUTATION_68019DA1);
     }
 
     @Override
     public void createDirectory(int fd, String n) {
-      throw new AssertionError("no mutation");
+      throw new AssertionError(FIXTURE_NO_MUTATION_68019DA1);
     }
 
     @Override
     public void publish(int fd, String p, String r) {
-      throw new AssertionError("no mutation");
+      throw new AssertionError(FIXTURE_NO_MUTATION_68019DA1);
     }
 
     @Override
     public void unlink(int fd, String n) {
-      throw new AssertionError("no mutation");
+      throw new AssertionError(FIXTURE_NO_MUTATION_68019DA1);
     }
 
     @Override
     public void sync(int fd) {
-      throw new AssertionError("no mutation");
+      throw new AssertionError(FIXTURE_NO_MUTATION_68019DA1);
     }
   }
 }

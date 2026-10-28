@@ -16,6 +16,7 @@ import org.junit.jupiter.api.Test;
 
 /** Independent literal ASCII frames; public digest only, never production-generated expected. */
 final class ReleaseApprovalTest {
+  private static final String FIXTURE_1_2_3_PG313_33FF1495 = "1.2.3-PG313";
   private static final String SHA =
       "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb";
   private static final String GOLDEN =
@@ -32,9 +33,10 @@ final class ReleaseApprovalTest {
   @Test
   void approval001IndependentLiteral() {
     var decoded = ReleaseApproval.parse(bytes(GOLDEN));
-    assertEquals("1.2.3-PG313", decoded.version());
+    assertEquals(FIXTURE_1_2_3_PG313_33FF1495, decoded.version());
     assertEquals(SHA, decoded.manifestSha256());
-    assertArrayEquals(bytes(GOLDEN), new ReleaseApproval("1.2.3-PG313", SHA).encode());
+    assertArrayEquals(
+        bytes(GOLDEN), new ReleaseApproval(FIXTURE_1_2_3_PG313_33FF1495, SHA).encode());
   }
 
   @Test
@@ -47,7 +49,7 @@ final class ReleaseApprovalTest {
     }
     for (String v : List.of("", "a".repeat(65), "-x", ".x", "../x", "a/b", "é", "x\n")) {
       assertThrows(IllegalArgumentException.class, () -> new ReleaseApproval(v, SHA));
-      refused(GOLDEN.replace("1.2.3-PG313", v));
+      refused(GOLDEN.replace(FIXTURE_1_2_3_PG313_33FF1495, v));
     }
   }
 
@@ -120,7 +122,8 @@ final class ReleaseApprovalTest {
                   barrier.await(5, TimeUnit.SECONDS);
                   return ReleaseApproval.parse(bytes(GOLDEN)).version();
                 }));
-      for (var future : futures) assertEquals("1.2.3-PG313", future.get(5, TimeUnit.SECONDS));
+      for (var future : futures)
+        assertEquals(FIXTURE_1_2_3_PG313_33FF1495, future.get(5, TimeUnit.SECONDS));
     }
   }
 

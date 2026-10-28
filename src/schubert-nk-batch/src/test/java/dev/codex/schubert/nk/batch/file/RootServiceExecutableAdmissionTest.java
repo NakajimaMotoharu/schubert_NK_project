@@ -22,6 +22,12 @@ import org.junit.jupiter.api.Test;
 
 /** ROOTELF001..006: independent public ELF literal/hash/typed metadata, no native authority. */
 final class RootServiceExecutableAdmissionTest {
+  private static final String FIXTURE_SIZE_EB1E91E4 = "size";
+  private static final String FIXTURE_UID_0C18F38C = "uid";
+  private static final String FIXTURE_GID_0ACDD642 = "gid";
+  private static final String FIXTURE_MODE_B6D5C2C3 = "mode";
+  private static final String FIXTURE_NLINK_3DDD828B = "nlink";
+
   @Test
   void exactIndependentAlternativesTargetsAndNoRelativeOrExtraChain() throws Exception {
     for (String literal : List.of("/etc/alternatives/java", "/opt/jdk-25.0.4/bin/java")) {
@@ -85,7 +91,7 @@ final class RootServiceExecutableAdmissionTest {
     }
 
     public long size() {
-      return bytes.length + (fault.equals("size") ? 1 : 0);
+      return bytes.length + (fault.equals(FIXTURE_SIZE_EB1E91E4) ? 1 : 0);
     }
 
     public boolean isOpen() {
@@ -142,7 +148,8 @@ final class RootServiceExecutableAdmissionTest {
 
   @Test
   void boundedReadEofProgressAndIoCannotBecomeAHash() {
-    for (String fault : List.of("zero", "negative", "count", "eof-position", "size", "io")) {
+    for (String fault :
+        List.of("zero", "negative", "count", "eof-position", FIXTURE_SIZE_EB1E91E4, "io")) {
       var input = new Input(elf());
       input.fault = fault;
       assertThrows(IOException.class, () -> RootServiceExecutableAdmission.digest(input), fault);
@@ -152,13 +159,13 @@ final class RootServiceExecutableAdmissionTest {
 
   static Map<String, Object> metadata(int mode) {
     var a = new HashMap<String, Object>();
-    a.put("uid", 0);
-    a.put("gid", 0);
-    a.put("mode", mode);
-    a.put("nlink", mode == 040755 ? 2 : 1);
+    a.put(FIXTURE_UID_0C18F38C, 0);
+    a.put(FIXTURE_GID_0ACDD642, 0);
+    a.put(FIXTURE_MODE_B6D5C2C3, mode);
+    a.put(FIXTURE_NLINK_3DDD828B, mode == 040755 ? 2 : 1);
     a.put("dev", 3L);
     a.put("ino", 4L);
-    a.put("size", 64L);
+    a.put(FIXTURE_SIZE_EB1E91E4, 64L);
     a.put("lastModifiedTime", FileTime.fromMillis(1));
     a.put("ctime", FileTime.fromMillis(2));
     return a;
@@ -210,12 +217,25 @@ final class RootServiceExecutableAdmissionTest {
             key);
       }
     }
-    for (String key : List.of("uid", "gid", "mode", "nlink", "dev", "ino", "size")) {
+    for (String key :
+        List.of(
+            FIXTURE_UID_0C18F38C,
+            FIXTURE_GID_0ACDD642,
+            FIXTURE_MODE_B6D5C2C3,
+            FIXTURE_NLINK_3DDD828B,
+            "dev",
+            "ino",
+            FIXTURE_SIZE_EB1E91E4)) {
       var a = metadata(0100755);
       // BUG1312: a numeric conditional promotes Integer/Long to boxed Long before put.
       Object invalid;
       Class<?> expectedType;
-      if (Set.of("uid", "gid", "mode", "nlink").contains(key)) {
+      if (Set.of(
+              FIXTURE_UID_0C18F38C,
+              FIXTURE_GID_0ACDD642,
+              FIXTURE_MODE_B6D5C2C3,
+              FIXTURE_NLINK_3DDD828B)
+          .contains(key)) {
         invalid = Integer.valueOf(1);
         expectedType = Integer.class;
       } else {
@@ -223,7 +243,7 @@ final class RootServiceExecutableAdmissionTest {
         expectedType = Long.class;
       }
       a.put(key, invalid);
-      if (key.equals("nlink")) a.put(key, 2);
+      if (key.equals(FIXTURE_NLINK_3DDD828B)) a.put(key, 2);
       assertEquals(expectedType, a.get(key).getClass(), key);
       assertThrows(
           IOException.class,
@@ -250,12 +270,26 @@ final class RootServiceExecutableAdmissionTest {
     for (int mode : new int[] {040755, 0100755, 0120777}) {
       for (var fault :
           Map.<String, Object>of(
-                  "uid", 1, "gid", 1, "mode", 0100644, "dev", 0L, "ino", 0L, "size", -1L)
+                  FIXTURE_UID_0C18F38C,
+                  1,
+                  FIXTURE_GID_0ACDD642,
+                  1,
+                  FIXTURE_MODE_B6D5C2C3,
+                  0100644,
+                  "dev",
+                  0L,
+                  "ino",
+                  0L,
+                  FIXTURE_SIZE_EB1E91E4,
+                  -1L)
               .entrySet()) {
         var a = metadata(mode);
         a.put(fault.getKey(), fault.getValue());
         Class<?> expectedType =
-            Set.of("uid", "gid", "mode").contains(fault.getKey()) ? Integer.class : Long.class;
+            Set.of(FIXTURE_UID_0C18F38C, FIXTURE_GID_0ACDD642, FIXTURE_MODE_B6D5C2C3)
+                    .contains(fault.getKey())
+                ? Integer.class
+                : Long.class;
         assertEquals(expectedType, a.get(fault.getKey()).getClass(), fault.getKey());
         var calls = new java.util.concurrent.atomic.AtomicInteger();
         assertThrows(
@@ -267,7 +301,7 @@ final class RootServiceExecutableAdmissionTest {
         assertEquals(0, calls.get(), fault.getKey());
       }
       var links = metadata(mode);
-      links.put("nlink", mode == 040755 ? 1 : 2);
+      links.put(FIXTURE_NLINK_3DDD828B, mode == 040755 ? 1 : 2);
       var calls = new java.util.concurrent.atomic.AtomicInteger();
       assertThrows(
           IOException.class,
@@ -277,8 +311,8 @@ final class RootServiceExecutableAdmissionTest {
       assertEquals(0, calls.get());
       for (long size : mode == 0100755 ? new long[] {1, 8_388_608} : new long[] {0, 8_388_609}) {
         var a = metadata(mode);
-        a.put("size", size);
-        if (mode == 040755) a.put("nlink", Integer.MAX_VALUE);
+        a.put(FIXTURE_SIZE_EB1E91E4, size);
+        if (mode == 040755) a.put(FIXTURE_NLINK_3DDD828B, Integer.MAX_VALUE);
         assertEquals(
             a,
             RootServiceExecutableAdmission.checkedAttributes(
@@ -288,7 +322,7 @@ final class RootServiceExecutableAdmissionTest {
     }
     for (long size : new long[] {0, 8_388_609, Long.MAX_VALUE}) {
       var a = metadata(0100755);
-      a.put("size", size);
+      a.put(FIXTURE_SIZE_EB1E91E4, size);
       var calls = new java.util.concurrent.atomic.AtomicInteger();
       assertThrows(
           IOException.class,

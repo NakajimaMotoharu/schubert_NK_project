@@ -40,6 +40,11 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** SS324 §7.1/333 §6.1; SSC-027; PT-IDEM-SR01..SR03. Real PG, independent SQL/HMAC. */
 final class JdbcScenarioSnapshotReplacementTest {
+  private static final String FIXTURE_SCNREQ01_2CFBA57E = "SCNREQ01";
+  private static final String FIXTURE_001_A3FEAA64 = "001";
+  private static final String FIXTURE_SNAPSHOT1_AA1B72D1 = "snapshot1";
+  private static final String FIXTURE_SCNRSP01_DD42C8D5 = "SCNRSP01";
+  private static final String FIXTURE_EXECUTEUPDATE_5E0BBF58 = "executeUpdate";
   private static final UUID MESSAGE = new UUID(0x5700000000000000L, 1);
   private static final Instant RECEIVED = Instant.parse("2026-09-08T00:00:00Z");
   private static final Instant COMPLETED = Instant.parse("2026-09-08T00:00:01.123456Z");
@@ -82,7 +87,7 @@ final class JdbcScenarioSnapshotReplacementTest {
 
   @Test
   void replacementCommitsOnlyCiphertextAndKeyWithoutExtendingLifetime() throws Exception {
-    var request = request("SCNREQ01", "001", 101, MESSAGE, "30");
+    var request = request(FIXTURE_SCNREQ01_2CFBA57E, FIXTURE_001_A3FEAA64, 101, MESSAGE, "30");
     var canonical = request.canonicalRequest();
     try (canonical;
         var keys = keys()) {
@@ -98,9 +103,11 @@ final class JdbcScenarioSnapshotReplacementTest {
         assertFalse(connection.isClosed());
         assertFalse(connection.getAutoCommit());
         assertFalse(connection.isReadOnly());
-        assertStored("snapshot1", bytes(0)); // Another connection cannot see uncommitted bytes.
+        assertStored(
+            FIXTURE_SNAPSHOT1_AA1B72D1,
+            bytes(0)); // Another connection cannot see uncommitted bytes.
         connection.rollback();
-        assertStored("snapshot1", bytes(0));
+        assertStored(FIXTURE_SNAPSHOT1_AA1B72D1, bytes(0));
         coordinator.replaceScenarioSnapshot(connection, request, old(), next());
         connection.commit();
         assertStored("snapshot2", bytes(7));
@@ -135,8 +142,8 @@ final class JdbcScenarioSnapshotReplacementTest {
                             completion(
                                 InboxCompletionState.COMPLETED,
                                 FILE,
-                                "SCNRSP01",
-                                "001",
+                                FIXTURE_SCNRSP01_DD42C8D5,
+                                FIXTURE_001_A3FEAA64,
                                 Optional.of(
                                     new EncryptedResponseSnapshot(
                                         "snapshot" + candidate, bytes(candidate))),
@@ -174,7 +181,7 @@ final class JdbcScenarioSnapshotReplacementTest {
 
   @Test
   void invalidMetadataIdentityAndStoredStateRejectBeforeReplacement() throws Exception {
-    var request = request("SCNREQ01", "001", 101, MESSAGE, "30");
+    var request = request(FIXTURE_SCNREQ01_2CFBA57E, FIXTURE_001_A3FEAA64, 101, MESSAGE, "30");
     var canonical = request.canonicalRequest();
     try (canonical;
         var keys = keys()) {
@@ -185,43 +192,43 @@ final class JdbcScenarioSnapshotReplacementTest {
               completion(
                   InboxCompletionState.ERROR,
                   FILE,
-                  "SCNRSP01",
-                  "001",
+                  FIXTURE_SCNRSP01_DD42C8D5,
+                  FIXTURE_001_A3FEAA64,
                   old().responseSnapshot(),
                   COMPLETED),
               completion(
                   InboxCompletionState.COMPLETED,
                   InboxResultReference.none(),
-                  "SCNRSP01",
-                  "001",
+                  FIXTURE_SCNRSP01_DD42C8D5,
+                  FIXTURE_001_A3FEAA64,
                   old().responseSnapshot(),
                   COMPLETED),
               completion(
                   InboxCompletionState.COMPLETED,
                   FILE,
                   "GAMRSP01",
-                  "001",
+                  FIXTURE_001_A3FEAA64,
                   old().responseSnapshot(),
                   COMPLETED),
               completion(
                   InboxCompletionState.COMPLETED,
                   FILE,
-                  "SCNRSP01",
+                  FIXTURE_SCNRSP01_DD42C8D5,
                   "002",
                   old().responseSnapshot(),
                   COMPLETED),
               completion(
                   InboxCompletionState.COMPLETED,
                   FILE,
-                  "SCNRSP01",
-                  "001",
+                  FIXTURE_SCNRSP01_DD42C8D5,
+                  FIXTURE_001_A3FEAA64,
                   Optional.empty(),
                   COMPLETED),
               completion(
                   InboxCompletionState.COMPLETED,
                   FILE,
-                  "SCNRSP01",
-                  "001",
+                  FIXTURE_SCNRSP01_DD42C8D5,
+                  FIXTURE_001_A3FEAA64,
                   old().responseSnapshot(),
                   COMPLETED.plusNanos(1000)));
       for (var invalid : malformed) {
@@ -230,11 +237,11 @@ final class JdbcScenarioSnapshotReplacementTest {
       }
       for (var invalid :
           List.of(
-              request("GAMREQ01", "001", 101, MESSAGE, "30"),
-              request("SCNREQ01", "002", 101, MESSAGE, "30"),
-              request("SCNREQ01", "001", 102, MESSAGE, "30"),
-              request("SCNREQ01", "001", 101, new UUID(0, 99), "30"),
-              request("SCNREQ01", "001", 101, MESSAGE, "31"))) {
+              request("GAMREQ01", FIXTURE_001_A3FEAA64, 101, MESSAGE, "30"),
+              request(FIXTURE_SCNREQ01_2CFBA57E, "002", 101, MESSAGE, "30"),
+              request(FIXTURE_SCNREQ01_2CFBA57E, FIXTURE_001_A3FEAA64, 102, MESSAGE, "30"),
+              request(FIXTURE_SCNREQ01_2CFBA57E, FIXTURE_001_A3FEAA64, 101, new UUID(0, 99), "30"),
+              request(FIXTURE_SCNREQ01_2CFBA57E, FIXTURE_001_A3FEAA64, 101, MESSAGE, "31"))) {
         var invalidCanonical = invalid.canonicalRequest();
         try (invalidCanonical) {
           reject(coordinator, invalid, old(), next());
@@ -246,8 +253,8 @@ final class JdbcScenarioSnapshotReplacementTest {
           completion(
               InboxCompletionState.COMPLETED,
               FILE,
-              "SCNRSP01",
-              "001",
+              FIXTURE_SCNRSP01_DD42C8D5,
+              FIXTURE_001_A3FEAA64,
               Optional.of(new EncryptedResponseSnapshot("unknown", bytes(0))),
               COMPLETED),
           next());
@@ -260,9 +267,9 @@ final class JdbcScenarioSnapshotReplacementTest {
             completion(
                 InboxCompletionState.COMPLETED,
                 FILE,
-                "SCNRSP01",
-                "001",
-                Optional.of(new EncryptedResponseSnapshot("snapshot1", altered)),
+                FIXTURE_SCNRSP01_DD42C8D5,
+                FIXTURE_001_A3FEAA64,
+                Optional.of(new EncryptedResponseSnapshot(FIXTURE_SNAPSHOT1_AA1B72D1, altered)),
                 COMPLETED),
             next());
       }
@@ -300,7 +307,7 @@ final class JdbcScenarioSnapshotReplacementTest {
 
   @Test
   void nullTransactionAndJdbcFaultsPreserveOwnershipAndClearBindings() throws Exception {
-    var request = request("SCNREQ01", "001", 101, MESSAGE, "30");
+    var request = request(FIXTURE_SCNREQ01_2CFBA57E, FIXTURE_001_A3FEAA64, 101, MESSAGE, "30");
     var canonical = request.canonicalRequest();
     try (canonical;
         var keys = keys();
@@ -345,7 +352,7 @@ final class JdbcScenarioSnapshotReplacementTest {
               "setObject",
               "zero",
               "two",
-              "executeUpdate",
+              FIXTURE_EXECUTEUPDATE_5E0BBF58,
               "afterUpdate",
               "close",
               "executeAndClose")) {
@@ -360,7 +367,7 @@ final class JdbcScenarioSnapshotReplacementTest {
         assertFalse(c.isClosed());
         assertFalse(c.getAutoCommit());
         c.rollback();
-        assertStored("snapshot1", bytes(0));
+        assertStored(FIXTURE_SNAPSHOT1_AA1B72D1, bytes(0));
         for (byte[] binding : fault.bindings) assertArrayEquals(new byte[29], binding, point);
         assertArrayEquals(bytes(7), replacement.responseSnapshot().orElseThrow().ciphertext());
       }
@@ -369,7 +376,7 @@ final class JdbcScenarioSnapshotReplacementTest {
       assertEquals(1, observed.bindings.size());
       assertArrayEquals(new byte[29], observed.bindings.getFirst());
       c.rollback();
-      assertStored("snapshot1", bytes(0));
+      assertStored(FIXTURE_SNAPSHOT1_AA1B72D1, bytes(0));
       assertTimes();
     }
   }
@@ -428,9 +435,9 @@ final class JdbcScenarioSnapshotReplacementTest {
     return completion(
         InboxCompletionState.COMPLETED,
         FILE,
-        "SCNRSP01",
-        "001",
-        Optional.of(new EncryptedResponseSnapshot("snapshot1", bytes(0))),
+        FIXTURE_SCNRSP01_DD42C8D5,
+        FIXTURE_001_A3FEAA64,
+        Optional.of(new EncryptedResponseSnapshot(FIXTURE_SNAPSHOT1_AA1B72D1, bytes(0))),
         COMPLETED);
   }
 
@@ -438,8 +445,8 @@ final class JdbcScenarioSnapshotReplacementTest {
     return completion(
         InboxCompletionState.COMPLETED,
         FILE,
-        "SCNRSP01",
-        "001",
+        FIXTURE_SCNRSP01_DD42C8D5,
+        FIXTURE_001_A3FEAA64,
         Optional.of(new EncryptedResponseSnapshot("snapshot2", bytes(7))),
         COMPLETED);
   }
@@ -474,7 +481,9 @@ final class JdbcScenarioSnapshotReplacementTest {
     var bytes = new ByteArrayOutputStream();
     try (var data = new DataOutputStream(bytes)) {
       data.write("SCHUBERT-NK-OP1".getBytes(StandardCharsets.US_ASCII));
-      for (String value : List.of("101", "SCNREQ01", "001", "REQUEST:SCNREQ01")) lp(data, value);
+      for (String value :
+          List.of("101", FIXTURE_SCNREQ01_2CFBA57E, FIXTURE_001_A3FEAA64, "REQUEST:SCNREQ01"))
+        lp(data, value);
       data.writeInt(1);
       for (String value : List.of("scriptFileId", "N1", "30")) lp(data, value);
     }
@@ -590,14 +599,19 @@ final class JdbcScenarioSnapshotReplacementTest {
                 if (update && name.equals("setBytes")) bindings.add((byte[]) args[1]);
                 if (update
                     && (name.equals(point)
-                        || (name.equals("executeUpdate") && point.equals("executeAndClose")))) {
+                        || (name.equals(FIXTURE_EXECUTEUPDATE_5E0BBF58)
+                            && point.equals("executeAndClose")))) {
                   if (name.equals("close")) delegate.close();
                   throw new SQLException("synthetic JDBC failure", "08006");
                 }
-                if (update && name.equals("executeUpdate") && point.equals("zero")) return 0;
-                if (update && name.equals("executeUpdate") && point.equals("two")) return 2;
+                if (update && name.equals(FIXTURE_EXECUTEUPDATE_5E0BBF58) && point.equals("zero"))
+                  return 0;
+                if (update && name.equals(FIXTURE_EXECUTEUPDATE_5E0BBF58) && point.equals("two"))
+                  return 2;
                 Object result = invoke(delegate, method, args);
-                if (update && name.equals("executeUpdate") && point.equals("afterUpdate"))
+                if (update
+                    && name.equals(FIXTURE_EXECUTEUPDATE_5E0BBF58)
+                    && point.equals("afterUpdate"))
                   throw new SQLException("synthetic after update");
                 if (update && name.equals("close") && point.equals("executeAndClose"))
                   throw new SQLException("synthetic close");

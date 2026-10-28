@@ -50,14 +50,23 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** PG222/PT-SCR117..119: actual PG/Flyway, broker and secured HTTP, not deployed services. */
 final class WebApplicationTest {
+  private static final String FIXTURE_BROKER_4F6E4F9C = "broker";
+  private static final String FIXTURE_VM_0_0C76084A = "vm://0";
+  private static final String FIXTURE_HTTP_127_0_0_1_B897D8EE = "http://127.0.0.1:";
+  private static final String FIXTURE_LOGIN_F843C044 = "/login";
+  private static final String FIXTURE_X_FORWARDED_FOR_BECAABD0 = "X-Forwarded-For";
+  private static final String FIXTURE_203_0_113_1_9BB16FDC = "203.0.113.1";
+  private static final String FIXTURE_X_FORWARDED_PROTO_6D975CE8 = "X-Forwarded-Proto";
+  private static final String FIXTURE_HTTPS_F7FB094B = "https";
+  private static final String FIXTURE_SET_COOKIE_10F4EA2C = "Set-Cookie";
   @TempDir Path root;
   private final Clock clock = Clock.systemUTC();
 
   @Test
   void scr117ActualIntegratedLoginAndDirectDenial() throws Exception {
     var database = new WebLogDatabaseFixture(Files.createDirectory(root.resolve("pg")));
-    var broker = startBroker(Files.createDirectory(root.resolve("broker")));
-    try (var factory = new ActiveMQConnectionFactory("vm://0");
+    var broker = startBroker(Files.createDirectory(root.resolve(FIXTURE_BROKER_4F6E4F9C)));
+    try (var factory = new ActiveMQConnectionFactory(FIXTURE_VM_0_0C76084A);
         var codec = codec();
         var client = HttpClient.newBuilder().connectTimeout(Duration.ofSeconds(2)).build()) {
       var app =
@@ -71,9 +80,11 @@ final class WebApplicationTest {
               root, 0, (core, sessions) -> Map.of(), captured::set)) {
         assertSame(server, captured.get());
         var request =
-            HttpRequest.newBuilder(URI.create("http://127.0.0.1:" + server.port() + "/login"))
-                .header("X-Forwarded-For", "203.0.113.1")
-                .header("X-Forwarded-Proto", "https")
+            HttpRequest.newBuilder(
+                    URI.create(
+                        FIXTURE_HTTP_127_0_0_1_B897D8EE + server.port() + FIXTURE_LOGIN_F843C044))
+                .header(FIXTURE_X_FORWARDED_FOR_BECAABD0, FIXTURE_203_0_113_1_9BB16FDC)
+                .header(FIXTURE_X_FORWARDED_PROTO_6D975CE8, FIXTURE_HTTPS_F7FB094B)
                 .build();
         var page = client.send(request, HttpResponse.BodyHandlers.ofString());
         assertEquals(200, page.statusCode());
@@ -81,7 +92,10 @@ final class WebApplicationTest {
         assertEquals("schubert NK - ログイン", html.title());
         assertFalse(html.select("input[name=_csrf]").isEmpty());
         assertTrue(
-            page.headers().firstValue("Set-Cookie").orElse("").startsWith("SCHUBERT_NK_SESSION="));
+            page.headers()
+                .firstValue(FIXTURE_SET_COOKIE_10F4EA2C)
+                .orElse("")
+                .startsWith("SCHUBERT_NK_SESSION="));
         try (var connection = database.web();
             var statement = connection.createStatement();
             var rows =
@@ -92,7 +106,11 @@ final class WebApplicationTest {
         }
         var direct =
             client.send(
-                HttpRequest.newBuilder(URI.create("http://127.0.0.1:" + server.port() + "/login"))
+                HttpRequest.newBuilder(
+                        URI.create(
+                            FIXTURE_HTTP_127_0_0_1_B897D8EE
+                                + server.port()
+                                + FIXTURE_LOGIN_F843C044))
                     .build(),
                 HttpResponse.BodyHandlers.ofString());
         assertEquals(403, direct.statusCode());
@@ -148,7 +166,7 @@ final class WebApplicationTest {
     // BUG661: literal HTTP/SQL expectations cover the legacy delegates, not a coverage-only call.
     var database = new WebLogDatabaseFixture(Files.createDirectory(root.resolve("legacy-pg")));
     var broker = startBroker(Files.createDirectory(root.resolve("legacy-broker")));
-    try (var factory = new ActiveMQConnectionFactory("vm://0");
+    try (var factory = new ActiveMQConnectionFactory(FIXTURE_VM_0_0C76084A);
         var codec = codec();
         var client = HttpClient.newBuilder().connectTimeout(Duration.ofSeconds(2)).build()) {
       var app =
@@ -169,12 +187,13 @@ final class WebApplicationTest {
                       supplied.set(sessions);
                       return Map.of();
                     })) {
-          var uri = URI.create("http://127.0.0.1:" + server.port() + "/login");
+          var uri =
+              URI.create(FIXTURE_HTTP_127_0_0_1_B897D8EE + server.port() + FIXTURE_LOGIN_F843C044);
           var page =
               client.send(
                   HttpRequest.newBuilder(uri)
-                      .header("X-Forwarded-For", "203.0.113.1")
-                      .header("X-Forwarded-Proto", "https")
+                      .header(FIXTURE_X_FORWARDED_FOR_BECAABD0, FIXTURE_203_0_113_1_9BB16FDC)
+                      .header(FIXTURE_X_FORWARDED_PROTO_6D975CE8, FIXTURE_HTTPS_F7FB094B)
                       .build(),
                   HttpResponse.BodyHandlers.ofString());
           assertEquals(200, page.statusCode());
@@ -183,7 +202,7 @@ final class WebApplicationTest {
           assertFalse(html.select("input[name=_csrf]").isEmpty());
           assertTrue(
               page.headers()
-                  .firstValue("Set-Cookie")
+                  .firstValue(FIXTURE_SET_COOKIE_10F4EA2C)
                   .orElse("")
                   .startsWith("SCHUBERT_NK_SESSION="));
           try (var connection = database.web();
@@ -269,8 +288,8 @@ final class WebApplicationTest {
   @Test
   void scr124SessionFactoryWiresLogMvcUsingSecurityRepository() throws Exception {
     var database = new WebLogDatabaseFixture(Files.createDirectory(root.resolve("pg")));
-    var broker = startBroker(Files.createDirectory(root.resolve("broker")));
-    try (var factory = new ActiveMQConnectionFactory("vm://0");
+    var broker = startBroker(Files.createDirectory(root.resolve(FIXTURE_BROKER_4F6E4F9C)));
+    try (var factory = new ActiveMQConnectionFactory(FIXTURE_VM_0_0C76084A);
         var codec = codec();
         var client = HttpClient.newBuilder().connectTimeout(Duration.ofSeconds(2)).build()) {
       var audit = audit();
@@ -308,16 +327,20 @@ final class WebApplicationTest {
               LogMvcConfiguration.class)) {
         var page =
             client.send(
-                HttpRequest.newBuilder(URI.create("http://127.0.0.1:" + server.port() + "/login"))
-                    .header("X-Forwarded-For", "203.0.113.1")
-                    .header("X-Forwarded-Proto", "https")
+                HttpRequest.newBuilder(
+                        URI.create(
+                            FIXTURE_HTTP_127_0_0_1_B897D8EE
+                                + server.port()
+                                + FIXTURE_LOGIN_F843C044))
+                    .header(FIXTURE_X_FORWARDED_FOR_BECAABD0, FIXTURE_203_0_113_1_9BB16FDC)
+                    .header(FIXTURE_X_FORWARDED_PROTO_6D975CE8, FIXTURE_HTTPS_F7FB094B)
                     .build(),
                 HttpResponse.BodyHandlers.ofString());
         assertEquals(200, page.statusCode());
         assertEquals("schubert NK - ログイン", Jsoup.parse(page.body()).title());
         assertEquals(1, calls.get());
         assertNotNull(supplied.get());
-        String cookie = page.headers().firstValue("Set-Cookie").orElseThrow();
+        String cookie = page.headers().firstValue(FIXTURE_SET_COOKIE_10F4EA2C).orElseThrow();
         String sessionId = cookie.substring("SCHUBERT_NK_SESSION=".length(), cookie.indexOf(';'));
         assertNotNull(supplied.get().findById(sessionId));
       }
@@ -347,8 +370,8 @@ final class WebApplicationTest {
 
   @Test
   void scr126InvalidSessionDependenciesStopBeforeHttpBind() throws Exception {
-    var broker = startBroker(Files.createDirectory(root.resolve("broker")));
-    try (var factory = new ActiveMQConnectionFactory("vm://0");
+    var broker = startBroker(Files.createDirectory(root.resolve(FIXTURE_BROKER_4F6E4F9C)));
+    try (var factory = new ActiveMQConnectionFactory(FIXTURE_VM_0_0C76084A);
         var codec = codec();
         var reserved = new ServerSocket(0)) {
       var app =
@@ -382,8 +405,8 @@ final class WebApplicationTest {
   @Test
   void nativeCore001ExactFactoryPairReflectsHeldTokenIntoActualSecuritySession() throws Exception {
     var database = new WebLogDatabaseFixture(Files.createDirectory(root.resolve("pg")));
-    var broker = startBroker(Files.createDirectory(root.resolve("broker")));
-    try (var factory = new ActiveMQConnectionFactory("vm://0");
+    var broker = startBroker(Files.createDirectory(root.resolve(FIXTURE_BROKER_4F6E4F9C)));
+    try (var factory = new ActiveMQConnectionFactory(FIXTURE_VM_0_0C76084A);
         var codec = codec();
         var client = HttpClient.newBuilder().connectTimeout(Duration.ofSeconds(2)).build()) {
       var app =
@@ -407,15 +430,19 @@ final class WebApplicationTest {
               })) {
         var page =
             client.send(
-                HttpRequest.newBuilder(URI.create("http://127.0.0.1:" + server.port() + "/login"))
-                    .header("X-Forwarded-For", "203.0.113.1")
-                    .header("X-Forwarded-Proto", "https")
+                HttpRequest.newBuilder(
+                        URI.create(
+                            FIXTURE_HTTP_127_0_0_1_B897D8EE
+                                + server.port()
+                                + FIXTURE_LOGIN_F843C044))
+                    .header(FIXTURE_X_FORWARDED_FOR_BECAABD0, FIXTURE_203_0_113_1_9BB16FDC)
+                    .header(FIXTURE_X_FORWARDED_PROTO_6D975CE8, FIXTURE_HTTPS_F7FB094B)
                     .build(),
                 HttpResponse.BodyHandlers.ofString());
         assertEquals(200, page.statusCode());
         assertEquals("schubert NK - ログイン", Jsoup.parse(page.body()).title());
         assertEquals(1, calls.get());
-        String cookie = page.headers().firstValue("Set-Cookie").orElseThrow();
+        String cookie = page.headers().firstValue(FIXTURE_SET_COOKIE_10F4EA2C).orElseThrow();
         String sessionId = cookie.substring("SCHUBERT_NK_SESSION=".length(), cookie.indexOf(';'));
         var session = suppliedSpring.get().findById(sessionId);
         assertNotNull(session);
@@ -558,7 +585,7 @@ final class WebApplicationTest {
         .setLargeMessagesDirectory(root.resolve("large-messages").toString())
         .setSecurityEnabled(false)
         .clearAcceptorConfigurations()
-        .addAcceptorConfiguration("component", "vm://0");
+        .addAcceptorConfiguration("component", FIXTURE_VM_0_0C76084A);
     return new EmbeddedActiveMQ().setConfiguration(config).start();
   }
 

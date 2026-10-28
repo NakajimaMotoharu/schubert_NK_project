@@ -27,6 +27,10 @@ import org.junit.jupiter.api.Test;
 
 /** NK-OPS-001/OPS009/BAK001/UI251/SS331/341/343/SSC092/094/104; PT-OPS-MBPREP001-006. */
 final class MorningBackupPreparationTest {
+  private static final String FIXTURE_DB_BOTH_COMMITTED_AEC475F8 = "DB-both-committed";
+  private static final String FIXTURE_PUBLISH_69201707 = "publish";
+  private static final String FIXTURE_NO_PUBLISH_1A5B33B6 = "no publish";
+  private static final String FIXTURE_NO_WORK_1254C0D8 = "no work";
   private static final UUID RUN_ID = UUID.fromString("11111111-1111-4111-8111-111111111111");
   private static final UUID ACTIVATION = UUID.fromString("22222222-2222-4222-8222-222222222222");
   private static final UUID PART = UUID.fromString("33333333-3333-4333-8333-333333333333");
@@ -77,7 +81,7 @@ final class MorningBackupPreparationTest {
     @Override
     public MorningDatabaseSession.BackupBegins beginBackup(
         BatchRun run, Instant now, boolean recoverAbandoned) throws IOException {
-      events.add("DB-both-committed");
+      events.add(FIXTURE_DB_BOTH_COMMITTED_AEC475F8);
       suppliedRun = run;
       suppliedTime = now;
       suppliedRecover = recoverAbandoned;
@@ -116,7 +120,9 @@ final class MorningBackupPreparationTest {
               return "prepared";
             });
     assertEquals("prepared", result);
-    assertEquals(List.of("DB-both-committed", "publish-new-only", "worker-continuation"), events);
+    assertEquals(
+        List.of(FIXTURE_DB_BOTH_COMMITTED_AEC475F8, "publish-new-only", "worker-continuation"),
+        events);
     assertSame(RUN, db.suppliedRun);
     assertEquals(START, db.suppliedTime);
     assertFalse(db.suppliedRecover);
@@ -137,14 +143,14 @@ final class MorningBackupPreparationTest {
             db,
             clock(oneSecond),
             true,
-            (published, part) -> events.add("publish"),
+            (published, part) -> events.add(FIXTURE_PUBLISH_69201707),
             PART,
             (published, begins) -> published);
     assertEquals(RUN_ID, request.run());
     assertEquals(oneSecond, request.started());
     assertSame(RUN, db.suppliedRun);
     assertTrue(db.suppliedRecover);
-    assertEquals(List.of("DB-both-committed", "publish"), events);
+    assertEquals(List.of(FIXTURE_DB_BOTH_COMMITTED_AEC475F8, FIXTURE_PUBLISH_69201707), events);
   }
 
   @Test
@@ -162,9 +168,9 @@ final class MorningBackupPreparationTest {
                     db,
                     clock(START),
                     false,
-                    (request, part) -> fail("no publish"),
+                    (request, part) -> fail(FIXTURE_NO_PUBLISH_1A5B33B6),
                     PART,
-                    (request, begins) -> fail("no work"))));
+                    (request, begins) -> fail(FIXTURE_NO_WORK_1254C0D8))));
     db.failure = null;
     var other = new BatchRun(UUID.fromString("44444444-4444-4444-8444-444444444444"), CUTOFF);
     var bad =
@@ -201,9 +207,9 @@ final class MorningBackupPreparationTest {
                           db,
                           clock(START),
                           false,
-                          (request, part) -> fail("no publish"),
+                          (request, part) -> fail(FIXTURE_NO_PUBLISH_1A5B33B6),
                           PART,
-                          (request, begins) -> fail("no work")))
+                          (request, begins) -> fail(FIXTURE_NO_WORK_1254C0D8)))
               .getMessage());
     }
     db.begins = null;
@@ -215,9 +221,9 @@ final class MorningBackupPreparationTest {
                 db,
                 clock(START),
                 false,
-                (request, part) -> fail("no publish"),
+                (request, part) -> fail(FIXTURE_NO_PUBLISH_1A5B33B6),
                 PART,
-                (request, begins) -> fail("no work")));
+                (request, begins) -> fail(FIXTURE_NO_WORK_1254C0D8)));
     assertEquals(11, events.size()); // one failed begin, nine invalid handles, one null handle
   }
 
@@ -242,7 +248,7 @@ final class MorningBackupPreparationTest {
                     },
                     PART,
                     (request, begins) -> fail("no worker"))));
-    assertEquals(List.of("DB-both-committed", "publish-failed"), events);
+    assertEquals(List.of(FIXTURE_DB_BOTH_COMMITTED_AEC475F8, "publish-failed"), events);
   }
 
   @Test
@@ -264,9 +270,9 @@ final class MorningBackupPreparationTest {
                   db,
                   clock(START),
                   false,
-                  (request, id) -> fail("no publish"),
+                  (request, id) -> fail(FIXTURE_NO_PUBLISH_1A5B33B6),
                   part,
-                  (request, begins) -> fail("no work")));
+                  (request, begins) -> fail(FIXTURE_NO_WORK_1254C0D8)));
     }
     assertThrows(
         IOException.class,
@@ -276,9 +282,9 @@ final class MorningBackupPreparationTest {
                 db,
                 clock(START),
                 false,
-                (request, id) -> fail("no publish"),
+                (request, id) -> fail(FIXTURE_NO_PUBLISH_1A5B33B6),
                 new UUID(0, 0),
-                (request, begins) -> fail("no work")));
+                (request, begins) -> fail(FIXTURE_NO_WORK_1254C0D8)));
     assertThrows(
         IOException.class,
         () ->
@@ -287,9 +293,9 @@ final class MorningBackupPreparationTest {
                 db,
                 clock(CUTOFF.minusSeconds(1)),
                 false,
-                (request, id) -> fail("no publish"),
+                (request, id) -> fail(FIXTURE_NO_PUBLISH_1A5B33B6),
                 PART,
-                (request, begins) -> fail("no work")));
+                (request, begins) -> fail(FIXTURE_NO_WORK_1254C0D8)));
     assertThrows(
         IllegalArgumentException.class,
         () ->
@@ -298,9 +304,9 @@ final class MorningBackupPreparationTest {
                 db,
                 clock(Instant.parse("9999-12-31T23:59:59.999999Z")),
                 false,
-                (request, id) -> fail("no publish"),
+                (request, id) -> fail(FIXTURE_NO_PUBLISH_1A5B33B6),
                 PART,
-                (request, begins) -> fail("no work")));
+                (request, begins) -> fail(FIXTURE_NO_WORK_1254C0D8)));
     assertTrue(events.isEmpty());
   }
 
@@ -308,7 +314,8 @@ final class MorningBackupPreparationTest {
   void mbprep006NullContractBeforeIoAndNullResultAfterPublish() throws Exception {
     var events = new ArrayList<String>();
     var db = new Database(events);
-    MorningBackupPreparation.Publisher publisher = (request, part) -> events.add("publish");
+    MorningBackupPreparation.Publisher publisher =
+        (request, part) -> events.add(FIXTURE_PUBLISH_69201707);
     MorningBackupPreparation.Continuation<String> work = (request, begins) -> "ok";
     assertThrows(
         NullPointerException.class,
@@ -341,6 +348,6 @@ final class MorningBackupPreparationTest {
         () ->
             MorningBackupPreparation.execute(
                 STATE, db, clock(START), false, publisher, PART, (request, begins) -> null));
-    assertEquals(List.of("DB-both-committed", "publish"), events);
+    assertEquals(List.of(FIXTURE_DB_BOTH_COMMITTED_AEC475F8, FIXTURE_PUBLISH_69201707), events);
   }
 }

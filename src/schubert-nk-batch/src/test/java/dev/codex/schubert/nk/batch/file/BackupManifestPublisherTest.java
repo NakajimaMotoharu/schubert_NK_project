@@ -32,6 +32,17 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** NK-BAT-001/BAK/BKO/OPS009/UI251/SS341 6.8/343; SSC064/PG175; BAT242..257. */
 final class BackupManifestPublisherTest {
+  private static final String FIXTURE_MANIFEST_JSON_0D4099EC = "MANIFEST.json";
+  private static final String FIXTURE_PART_92B0D5FC = ".part";
+  private static final String FIXTURE_CLOCK_49F3C56E = "clock";
+  private static final String FIXTURE_PUBLISH_69201707 = "publish";
+  private static final String FIXTURE_UID_0C18F38C = "uid";
+  private static final String FIXTURE_GID_0ACDD642 = "gid";
+  private static final String FIXTURE_SIZE_EB1E91E4 = "size";
+  private static final String FIXTURE_DEV_8A17302D = "dev";
+  private static final String FIXTURE_ATTRIBUTES_D300E055 = "attributes";
+  private static final String FIXTURE_OPENREADER_6C81E9F8 = "openReader";
+  private static final String FIXTURE_SYNTHETIC_85DA8434 = "synthetic";
   @TempDir Path temporary;
 
   @Test
@@ -39,9 +50,10 @@ final class BackupManifestPublisherTest {
     try (var f = fixture()) {
       f.create();
       assertArrayEquals(
-          BackupArtifactFixture.golden(), Files.readAllBytes(f.child.resolve("MANIFEST.json")));
-      assertFalse(Files.exists(f.child.resolve(PART + ".part")));
-      assertEquals(109, f.counts.get("clock"));
+          BackupArtifactFixture.golden(),
+          Files.readAllBytes(f.child.resolve(FIXTURE_MANIFEST_JSON_0D4099EC)));
+      assertFalse(Files.exists(f.child.resolve(PART + FIXTURE_PART_92B0D5FC)));
+      assertEquals(109, f.counts.get(FIXTURE_CLOCK_49F3C56E));
       f.released();
     }
   }
@@ -55,8 +67,8 @@ final class BackupManifestPublisherTest {
               try {
                 assertEquals(
                     PosixFilePermissions.fromString("rw-------"),
-                    Files.getPosixFilePermissions(f.child.resolve(PART + ".part")));
-                assertEquals(0, Files.size(f.child.resolve(PART + ".part")));
+                    Files.getPosixFilePermissions(f.child.resolve(PART + FIXTURE_PART_92B0D5FC)));
+                assertEquals(0, Files.size(f.child.resolve(PART + FIXTURE_PART_92B0D5FC)));
               } catch (IOException ex) {
                 throw new AssertionError(ex);
               }
@@ -65,7 +77,7 @@ final class BackupManifestPublisherTest {
       f.create();
       f.released();
       assertEquals(1, f.counts.get("createPrivateFile"));
-      assertEquals(1, f.counts.get("publish"));
+      assertEquals(1, f.counts.get(FIXTURE_PUBLISH_69201707));
       assertEquals(1, f.counts.get("sync"));
     }
   }
@@ -77,14 +89,15 @@ final class BackupManifestPublisherTest {
         f.metadata =
             (role, values) -> {
               if (!role.equals("file")) {
-                values.put("uid", (int) owner);
-                values.put("gid", (int) owner);
+                values.put(FIXTURE_UID_0C18F38C, (int) owner);
+                values.put(FIXTURE_GID_0ACDD642, (int) owner);
               }
             };
         new BackupManifestPublisher(f.root, f, owner, owner, f, f::clock)
             .create(BackupArtifactFixture.expected(), PART);
         assertArrayEquals(
-            BackupArtifactFixture.golden(), Files.readAllBytes(f.child.resolve("MANIFEST.json")));
+            BackupArtifactFixture.golden(),
+            Files.readAllBytes(f.child.resolve(FIXTURE_MANIFEST_JSON_0D4099EC)));
         f.released();
       }
     }
@@ -100,7 +113,17 @@ final class BackupManifestPublisherTest {
     }
     for (String role : List.of("parent", "child")) {
       for (var change :
-          Map.<String, Object>of("mode", 040755, "uid", 2, "gid", 2, "nlink", 1, "size", -1L)
+          Map.<String, Object>of(
+                  "mode",
+                  040755,
+                  FIXTURE_UID_0C18F38C,
+                  2,
+                  FIXTURE_GID_0ACDD642,
+                  2,
+                  "nlink",
+                  1,
+                  FIXTURE_SIZE_EB1E91E4,
+                  -1L)
               .entrySet()) {
         try (var f = fixture()) {
           f.metadata =
@@ -130,7 +153,7 @@ final class BackupManifestPublisherTest {
     try (var f = fixture()) {
       f.metadata =
           (r, m) -> {
-            if (r.equals("child")) m.put("dev", -1L);
+            if (r.equals("child")) m.put(FIXTURE_DEV_8A17302D, -1L);
           };
       fails(f);
     }
@@ -139,13 +162,22 @@ final class BackupManifestPublisherTest {
   @Test
   void metadataNullTypes() throws Exception {
     for (String key :
-        List.of("mode", "uid", "gid", "nlink", "size", "dev", "ino", "lastModifiedTime", "ctime")) {
+        List.of(
+            "mode",
+            FIXTURE_UID_0C18F38C,
+            FIXTURE_GID_0ACDD642,
+            "nlink",
+            FIXTURE_SIZE_EB1E91E4,
+            FIXTURE_DEV_8A17302D,
+            "ino",
+            "lastModifiedTime",
+            "ctime")) {
       for (Object value : new Object[] {null, "wrong"}) {
         for (int observation : new int[] {1, 2, 3, 4, 8, 14}) {
           try (var f = fixture()) {
             f.metadata =
                 (r, m) -> {
-                  if (f.counts.get("attributes") == observation) m.put(key, value);
+                  if (f.counts.get(FIXTURE_ATTRIBUTES_D300E055) == observation) m.put(key, value);
                 };
             fails(f);
           }
@@ -163,13 +195,24 @@ final class BackupManifestPublisherTest {
     try (var f = fixture()) {
       f.metadata =
           (r, m) -> {
-            if (f.counts.get("attributes") == 4) m.put("size", 963L);
+            if (f.counts.get(FIXTURE_ATTRIBUTES_D300E055) == 4) m.put(FIXTURE_SIZE_EB1E91E4, 963L);
           };
       fails(f);
     }
     for (var change :
         Map.<String, Object>of(
-                "mode", 0100644, "uid", 1, "gid", 1, "nlink", 2, "size", -1L, "dev", -1L)
+                "mode",
+                0100644,
+                FIXTURE_UID_0C18F38C,
+                1,
+                FIXTURE_GID_0ACDD642,
+                1,
+                "nlink",
+                2,
+                FIXTURE_SIZE_EB1E91E4,
+                -1L,
+                FIXTURE_DEV_8A17302D,
+                -1L)
             .entrySet()) {
       try (var f = fixture()) {
         f.metadata =
@@ -183,7 +226,7 @@ final class BackupManifestPublisherTest {
       try (var f = fixture()) {
         f.metadata =
             (r, m) -> {
-              if (r.equals("file")) m.put("size", size);
+              if (r.equals("file")) m.put(FIXTURE_SIZE_EB1E91E4, size);
             };
         fails(f);
       }
@@ -203,7 +246,8 @@ final class BackupManifestPublisherTest {
       f.create();
       f.released();
       assertArrayEquals(
-          BackupArtifactFixture.golden(), Files.readAllBytes(f.child.resolve("MANIFEST.json")));
+          BackupArtifactFixture.golden(),
+          Files.readAllBytes(f.child.resolve(FIXTURE_MANIFEST_JSON_0D4099EC)));
     }
     for (String mode : List.of("zero", "negative", "large", "position")) {
       try (var f = fixture()) {
@@ -244,7 +288,8 @@ final class BackupManifestPublisherTest {
     try (var f = fixture()) {
       f.metadata =
           (r, m) -> {
-            if (f.counts.get("attributes") == 6) m.put("ctime", FileTime.fromMillis(0));
+            if (f.counts.get(FIXTURE_ATTRIBUTES_D300E055) == 6)
+              m.put("ctime", FileTime.fromMillis(0));
           };
       fails(f);
     }
@@ -252,14 +297,20 @@ final class BackupManifestPublisherTest {
 
   @Test
   void namespaceReplacement() throws Exception {
-    for (String boundary : List.of("publish", "openReader")) {
+    for (String boundary : List.of(FIXTURE_PUBLISH_69201707, FIXTURE_OPENREADER_6C81E9F8)) {
       try (var f = fixture()) {
         f.hook =
             (name, n) -> {
-              if ((boundary.equals("publish") && name.equals("publish"))
-                  || (boundary.equals("openReader") && name.equals("openReader") && n == 2)) {
+              if ((boundary.equals(FIXTURE_PUBLISH_69201707)
+                      && name.equals(FIXTURE_PUBLISH_69201707))
+                  || (boundary.equals(FIXTURE_OPENREADER_6C81E9F8)
+                      && name.equals(FIXTURE_OPENREADER_6C81E9F8)
+                      && n == 2)) {
                 try {
-                  String target = boundary.equals("publish") ? PART + ".part" : "MANIFEST.json";
+                  String target =
+                      boundary.equals(FIXTURE_PUBLISH_69201707)
+                          ? PART + FIXTURE_PART_92B0D5FC
+                          : FIXTURE_MANIFEST_JSON_0D4099EC;
                   Files.move(f.child.resolve(target), f.child.resolve("preserved-original"));
                   Files.write(f.child.resolve(target), BackupArtifactFixture.golden());
                   Files.setPosixFilePermissions(
@@ -278,7 +329,7 @@ final class BackupManifestPublisherTest {
     try (var f = fixture()) {
       f.hook =
           (name, n) -> {
-            if (name.equals("openReader") && n == 1) {
+            if (name.equals(FIXTURE_OPENREADER_6C81E9F8) && n == 1) {
               try {
                 Files.move(f.child, f.parent.resolve("preserved-child"));
                 Files.createDirectory(
@@ -296,12 +347,19 @@ final class BackupManifestPublisherTest {
           Files.readAllBytes(f.parent.resolve("preserved-child/MANIFEST.json")));
     }
     for (var change :
-        Map.<String, Object>of("size", 963L, "lastModifiedTime", FileTime.fromMillis(0), "dev", -1L)
+        Map.<String, Object>of(
+                FIXTURE_SIZE_EB1E91E4,
+                963L,
+                "lastModifiedTime",
+                FileTime.fromMillis(0),
+                FIXTURE_DEV_8A17302D,
+                -1L)
             .entrySet()) {
       try (var f = fixture()) {
         f.metadata =
             (r, m) -> {
-              if (f.counts.get("attributes") == 8) m.put(change.getKey(), change.getValue());
+              if (f.counts.get(FIXTURE_ATTRIBUTES_D300E055) == 8)
+                m.put(change.getKey(), change.getValue());
             };
         fails(f);
       }
@@ -310,7 +368,7 @@ final class BackupManifestPublisherTest {
       try (var f = fixture()) {
         f.metadata =
             (r, m) -> {
-              if (f.counts.get("attributes") == observation) m.put("ino", -1L);
+              if (f.counts.get(FIXTURE_ATTRIBUTES_D300E055) == observation) m.put("ino", -1L);
             };
         fails(f);
       }
@@ -319,15 +377,16 @@ final class BackupManifestPublisherTest {
 
   @Test
   void collisionAndPartRetention() throws Exception {
-    for (String name : List.of(PART + ".part", "MANIFEST.json")) {
+    for (String name : List.of(PART + FIXTURE_PART_92B0D5FC, FIXTURE_MANIFEST_JSON_0D4099EC)) {
       try (var f = fixture()) {
         Files.writeString(f.child.resolve(name), "existing public sentinel");
         var failure = assertThrows(StorageIoException.class, f::create);
         assertEquals(StorageIoException.Reason.COLLISION, failure.reason());
         assertEquals("existing public sentinel", Files.readString(f.child.resolve(name)));
-        if (name.equals("MANIFEST.json"))
+        if (name.equals(FIXTURE_MANIFEST_JSON_0D4099EC))
           assertArrayEquals(
-              BackupArtifactFixture.golden(), Files.readAllBytes(f.child.resolve(PART + ".part")));
+              BackupArtifactFixture.golden(),
+              Files.readAllBytes(f.child.resolve(PART + FIXTURE_PART_92B0D5FC)));
         f.released();
       }
     }
@@ -339,7 +398,7 @@ final class BackupManifestPublisherTest {
     // inventory.
     Map<String, Integer> inventory =
         Map.ofEntries(
-            Map.entry("attributes", 14),
+            Map.entry(FIXTURE_ATTRIBUTES_D300E055, 14),
             Map.entry("acl", 14),
             Map.entry("readonly", 14),
             Map.entry("openDirectory", 2),
@@ -351,16 +410,16 @@ final class BackupManifestPublisherTest {
             Map.entry("write", 1),
             Map.entry("force", 1),
             Map.entry("closeWriter", 1),
-            Map.entry("openReader", 2),
+            Map.entry(FIXTURE_OPENREADER_6C81E9F8, 2),
             Map.entry("read", 4),
-            Map.entry("size", 4),
+            Map.entry(FIXTURE_SIZE_EB1E91E4, 4),
             Map.entry("closeReader", 2),
-            Map.entry("publish", 1),
+            Map.entry(FIXTURE_PUBLISH_69201707, 1),
             Map.entry("sync", 1));
     try (var f = fixture()) {
       f.create();
       var counts = new HashMap<>(f.counts);
-      counts.remove("clock");
+      counts.remove(FIXTURE_CLOCK_49F3C56E);
       counts.remove("effectiveUid");
       assertEquals(inventory, counts);
       f.released();
@@ -372,7 +431,9 @@ final class BackupManifestPublisherTest {
           fails(f);
         }
         for (Throwable unknown :
-            List.of(new IllegalStateException("synthetic"), new AssertionError("synthetic"))) {
+            List.of(
+                new IllegalStateException(FIXTURE_SYNTHETIC_85DA8434),
+                new AssertionError(FIXTURE_SYNTHETIC_85DA8434))) {
           try (var f = fixture()) {
             f.faults.put(entry.getKey() + "#" + at, unknown);
             assertSame(unknown, assertThrows(unknown.getClass(), f::create));
@@ -389,14 +450,15 @@ final class BackupManifestPublisherTest {
       try (var f = fixture()) {
         f.hook =
             (n, c) -> {
-              if (n.equals("clock") && c == selected) f.time += 1_800_000_000_000L;
+              if (n.equals(FIXTURE_CLOCK_49F3C56E) && c == selected) f.time += 1_800_000_000_000L;
             };
         fails(f);
       }
       try (var f = fixture()) {
         f.hook =
             (n, c) -> {
-              if (n.equals("clock") && c == selected) Thread.currentThread().interrupt();
+              if (n.equals(FIXTURE_CLOCK_49F3C56E) && c == selected)
+                Thread.currentThread().interrupt();
             };
         try {
           fails(f);
@@ -411,7 +473,7 @@ final class BackupManifestPublisherTest {
         f.time = initial;
         f.hook =
             (n, c) -> {
-              if (n.equals("clock") && c == 2) f.time += 1_799_999_999_999L;
+              if (n.equals(FIXTURE_CLOCK_49F3C56E) && c == 2) f.time += 1_799_999_999_999L;
             };
         f.create();
         f.released();
@@ -428,7 +490,7 @@ final class BackupManifestPublisherTest {
       try (var f = fixture()) {
         f.hook =
             (n, c) -> {
-              if (n.equals("clock") && c == 2) f.time += elapsed;
+              if (n.equals(FIXTURE_CLOCK_49F3C56E) && c == 2) f.time += elapsed;
             };
         fails(f);
       }
@@ -445,7 +507,7 @@ final class BackupManifestPublisherTest {
     try (var f = fixture()) {
       f.hook =
           (n, c) -> {
-            if (n.equals("clock") && c == 2) Thread.currentThread().interrupt();
+            if (n.equals(FIXTURE_CLOCK_49F3C56E) && c == 2) Thread.currentThread().interrupt();
           };
       try {
         fails(f);
@@ -459,7 +521,9 @@ final class BackupManifestPublisherTest {
   @Test
   void compoundAndBufferWipe() throws Exception {
     for (Throwable primary :
-        List.of(new IllegalStateException("synthetic"), new AssertionError("synthetic"))) {
+        List.of(
+            new IllegalStateException(FIXTURE_SYNTHETIC_85DA8434),
+            new AssertionError(FIXTURE_SYNTHETIC_85DA8434))) {
       try (var f = fixture()) {
         f.faults.put("write#1", primary);
         f.faults.put("closeWriter#1", primary);
@@ -471,8 +535,8 @@ final class BackupManifestPublisherTest {
       }
     }
     try (var f = fixture()) {
-      Error fatal = new AssertionError("synthetic");
-      f.faults.put("write#1", new IOException("synthetic"));
+      Error fatal = new AssertionError(FIXTURE_SYNTHETIC_85DA8434);
+      f.faults.put("write#1", new IOException(FIXTURE_SYNTHETIC_85DA8434));
       f.faults.put("closeWriter#1", fatal);
       assertSame(fatal, assertThrows(AssertionError.class, f::create));
       f.released();
@@ -527,7 +591,8 @@ final class BackupManifestPublisherTest {
       assertNotEquals(a.get(), b.get());
       f.released();
       assertArrayEquals(
-          BackupArtifactFixture.golden(), Files.readAllBytes(f.child.resolve("MANIFEST.json")));
+          BackupArtifactFixture.golden(),
+          Files.readAllBytes(f.child.resolve(FIXTURE_MANIFEST_JSON_0D4099EC)));
     }
     // Different instances require the caller's common exclusion, per SS341 6.8.
     try (var f = fixture();
@@ -552,7 +617,8 @@ final class BackupManifestPublisherTest {
       var b = executor.submit(action);
       assertNotEquals(a.get(), b.get());
       assertArrayEquals(
-          BackupArtifactFixture.golden(), Files.readAllBytes(f.child.resolve("MANIFEST.json")));
+          BackupArtifactFixture.golden(),
+          Files.readAllBytes(f.child.resolve(FIXTURE_MANIFEST_JSON_0D4099EC)));
       f.released();
     }
   }
@@ -574,7 +640,7 @@ final class BackupManifestPublisherTest {
   void independentPublicationTrace() throws Exception {
     try (var f = fixture()) {
       f.create();
-      byte[] actual = Files.readAllBytes(f.child.resolve("MANIFEST.json"));
+      byte[] actual = Files.readAllBytes(f.child.resolve(FIXTURE_MANIFEST_JSON_0D4099EC));
       assertEquals(964, actual.length);
       assertEquals(
           BackupArtifactFixture.MANIFEST_HASH,
@@ -590,14 +656,14 @@ final class BackupManifestPublisherTest {
               + "create="
               + f.counts.get("createPrivateFile")
               + "|publish="
-              + f.counts.get("publish")
+              + f.counts.get(FIXTURE_PUBLISH_69201707)
               + "|sync="
               + f.counts.get("sync")
               + "\n"
               + "io="
               + f.position
               + "|clock="
-              + f.counts.get("clock")
+              + f.counts.get(FIXTURE_CLOCK_49F3C56E)
               + "\n");
       f.released();
     }

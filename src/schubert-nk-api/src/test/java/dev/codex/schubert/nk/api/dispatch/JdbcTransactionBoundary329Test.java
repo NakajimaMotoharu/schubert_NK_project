@@ -23,6 +23,9 @@ import org.junit.jupiter.api.Timeout;
 /** NK-MSG-002; SS312/324/354; SSC329; PT-TX-BOUNDARY329001..002; no I/O. */
 @Timeout(value = 5, threadMode = Timeout.ThreadMode.SEPARATE_THREAD)
 final class JdbcTransactionBoundary329Test {
+  private static final String FIXTURE_ROLLBACK_3770B198 = "rollback";
+  private static final String FIXTURE_CLOSE_97959247 = "close";
+
   @Test
   void boundary329001ProtocolCatalogDependsOnConfirmedCleanupOnly() {
     for (boolean closeFails : List.of(false, true)) {
@@ -44,7 +47,10 @@ final class JdbcTransactionBoundary329Test {
         assertNull(actual.getCause());
         assertEquals(0, actual.getSuppressed().length);
       }
-      assertEquals(List.of("acquire", "auto:false", "handle", "rollback", "close"), events);
+      assertEquals(
+          List.of(
+              "acquire", "auto:false", "handle", FIXTURE_ROLLBACK_3770B198, FIXTURE_CLOSE_97959247),
+          events);
     }
   }
 
@@ -59,7 +65,10 @@ final class JdbcTransactionBoundary329Test {
             AssertionError.class,
             () -> processor.process(ApiSyncRequestDispatcherTest.request("LGNREQ01"))));
     assertEquals(0, fatal.getSuppressed().length);
-    assertEquals(List.of("acquire", "auto:false", "handle", "rollback", "close"), events);
+    assertEquals(
+        List.of(
+            "acquire", "auto:false", "handle", FIXTURE_ROLLBACK_3770B198, FIXTURE_CLOSE_97959247),
+        events);
   }
 
   private static JdbcSyncRequestProcessor processor(
@@ -75,12 +84,12 @@ final class JdbcTransactionBoundary329Test {
                 (proxy, method, args) -> {
                   switch (method.getName()) {
                     case "setAutoCommit" -> events.add("auto:" + args[0]);
-                    case "rollback" -> {
-                      events.add("rollback");
+                    case FIXTURE_ROLLBACK_3770B198 -> {
+                      events.add(FIXTURE_ROLLBACK_3770B198);
                       if (rollbackFailure != null) throw rollbackFailure;
                     }
-                    case "close" -> {
-                      events.add("close");
+                    case FIXTURE_CLOSE_97959247 -> {
+                      events.add(FIXTURE_CLOSE_97959247);
                       if (closeFailure != null) throw closeFailure;
                     }
                     default ->

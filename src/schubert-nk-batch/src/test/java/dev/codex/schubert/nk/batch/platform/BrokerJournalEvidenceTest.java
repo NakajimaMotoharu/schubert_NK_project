@@ -20,6 +20,12 @@ import org.junit.jupiter.api.Test;
 /** SSC125 BROKERSTART003: hand-written vendor2.56 message oracle + independent JSON/metadata. */
 @org.junit.jupiter.api.parallel.Isolated("PG2478 provider outage is confined to the test JVM")
 final class BrokerJournalEvidenceTest {
+  private static final String FIXTURE_CURSOR_3_90789868 = "cursor-3";
+  private static final String FIXTURE_1234567_0D874C06 = "1234567";
+  private static final String FIXTURE_SCHUBERT_NK_BROKER_B01A080D = "schubert-nk-broker";
+  private static final String FIXTURE_CURSOR_4_46F72AF4 = "cursor-4";
+  private static final String FIXTURE_SHA_256_CA8FF120 = "SHA-256";
+
   @Test
   void bj2478001AnchorMetadataAndExactByteBoundariesRejectForeignOrMissingEvidence()
       throws Exception {
@@ -29,20 +35,20 @@ final class BrokerJournalEvidenceTest {
     var anchor = BrokerJournalEvidence.anchor(literal, BOOT, true);
     assertEquals(INV, anchor.invocation());
     assertEquals(BigInteger.valueOf(1234567), anchor.monotonic());
-    assertEquals("cursor-3", anchor.cursor());
+    assertEquals(FIXTURE_CURSOR_3_90789868, anchor.cursor());
     assertEquals("BrokerJournalAnchor[redacted]", anchor.toString());
     for (String invalid :
         List.of(
             start.replace(INV, "0".repeat(32)),
             start.replace(INV, "Q".repeat(32)),
-            start.replace("1234567", "0"),
+            start.replace(FIXTURE_1234567_0D874C06, "0"),
             start.replace("1790780400000000", "0"),
-            start.replace("cursor-3", ""),
+            start.replace(FIXTURE_CURSOR_3_90789868, ""),
             start.replace("\"PRIORITY\":\"6\"", "\"PRIORITY\":\"3\""),
-            start.replace("schubert-nk-broker", "foreign"),
+            start.replace(FIXTURE_SCHUBERT_NK_BROKER_B01A080D, "foreign"),
             start.replace("2.56.0", "2.55.0"),
             start.replace("AMQ221001", "AMQ224001"),
-            start.replace("schubert-nk-broker", "FATAL"),
+            start.replace(FIXTURE_SCHUBERT_NK_BROKER_B01A080D, "FATAL"),
             start.stripTrailing(),
             start + start)) {
       assertThrows(
@@ -51,10 +57,11 @@ final class BrokerJournalEvidenceTest {
     }
     String padded =
         start.replace(
-            "schubert-nk-broker", "schubert-nk-broker" + " ".repeat(65536 - literal.length));
+            FIXTURE_SCHUBERT_NK_BROKER_B01A080D,
+            FIXTURE_SCHUBERT_NK_BROKER_B01A080D + " ".repeat(65536 - literal.length));
     assertEquals(65536, padded.getBytes(StandardCharsets.UTF_8).length);
     assertEquals(
-        "cursor-3",
+        FIXTURE_CURSOR_3_90789868,
         BrokerJournalEvidence.anchor(padded.getBytes(StandardCharsets.UTF_8), BOOT, true).cursor());
     for (byte[] invalid : List.of(new byte[0], new byte[65537], new byte[] {(byte) 0xff, 10}))
       assertThrows(IOException.class, () -> BrokerJournalEvidence.anchor(invalid, BOOT, false));
@@ -106,8 +113,8 @@ final class BrokerJournalEvidenceTest {
     fields.put("_SYSTEMD_INVOCATION_ID", INV);
     fields.put("_BOOT_ID", "11111111111141118111111111111111");
     fields.put("_SYSTEMD_UNIT", "artemis.service");
-    fields.put("__CURSOR", "cursor-4");
-    fields.put("__MONOTONIC_TIMESTAMP", "1234567");
+    fields.put("__CURSOR", FIXTURE_CURSOR_4_46F72AF4);
+    fields.put("__MONOTONIC_TIMESTAMP", FIXTURE_1234567_0D874C06);
     fields.put("__REALTIME_TIMESTAMP", "1790780400000000");
     var canonical = new StringBuilder("NKJOURNAL1\n");
     fields.forEach(
@@ -121,10 +128,11 @@ final class BrokerJournalEvidenceTest {
     String digest =
         HexFormat.of()
             .formatHex(
-                MessageDigest.getInstance("SHA-256")
+                MessageDigest.getInstance(FIXTURE_SHA_256_CA8FF120)
                     .digest(canonical.toString().getBytes(StandardCharsets.US_ASCII)));
     var expectedAnchor =
-        new BrokerJournalEvidence.Anchor(INV, BigInteger.valueOf(1234567), "cursor-4", digest);
+        new BrokerJournalEvidence.Anchor(
+            INV, BigInteger.valueOf(1234567), FIXTURE_CURSOR_4_46F72AF4, digest);
     var actual =
         BrokerJournalEvidence.consumeClosedHistory(
             history.getBytes(StandardCharsets.UTF_8), BOOT, expectedAnchor);
@@ -132,7 +140,7 @@ final class BrokerJournalEvidenceTest {
     assertEquals(
         HexFormat.of()
             .formatHex(
-                MessageDigest.getInstance("SHA-256")
+                MessageDigest.getInstance(FIXTURE_SHA_256_CA8FF120)
                     .digest(history.getBytes(StandardCharsets.UTF_8))),
         actual.sha256());
     assertEquals(
@@ -140,9 +148,10 @@ final class BrokerJournalEvidenceTest {
     for (var invalid :
         List.of(
             new BrokerJournalEvidence.Anchor(INV, BigInteger.valueOf(1234567), "foreign", digest),
-            new BrokerJournalEvidence.Anchor(INV, BigInteger.valueOf(1234568), "cursor-4", digest),
             new BrokerJournalEvidence.Anchor(
-                INV, BigInteger.valueOf(1234567), "cursor-4", "0".repeat(64))))
+                INV, BigInteger.valueOf(1234568), FIXTURE_CURSOR_4_46F72AF4, digest),
+            new BrokerJournalEvidence.Anchor(
+                INV, BigInteger.valueOf(1234567), FIXTURE_CURSOR_4_46F72AF4, "0".repeat(64))))
       assertThrows(
           IOException.class,
           () ->
@@ -179,7 +188,7 @@ final class BrokerJournalEvidenceTest {
         "ba7816bf8f01cfea414140de5dae2223b00361a396177a9cb410ff61f20015ad",
         HexFormat.of()
             .formatHex(
-                MessageDigest.getInstance("SHA-256")
+                MessageDigest.getInstance(FIXTURE_SHA_256_CA8FF120)
                     .digest("abc".getBytes(StandardCharsets.US_ASCII))));
     assertEquals(3, read(GOLDEN).entries());
   }
@@ -198,7 +207,7 @@ final class BrokerJournalEvidenceTest {
             bytes, BOOT, INV, BigInteger.valueOf(1234567), BigInteger.valueOf(1234568));
     assertEquals(1, actual.entries());
     assertEquals(
-        HexFormat.of().formatHex(MessageDigest.getInstance("SHA-256").digest(bytes)),
+        HexFormat.of().formatHex(MessageDigest.getInstance(FIXTURE_SHA_256_CA8FF120).digest(bytes)),
         actual.sha256());
     for (String invalid :
         List.of(
@@ -206,7 +215,7 @@ final class BrokerJournalEvidenceTest {
             stopped.replace("AMQ221002", "AMQ221001"),
             stopped.replace("stopped, uptime", "started, uptime"),
             stopped.replace("2.56.0", "2.55.0"),
-            stopped.replace("1234567", "1234569"),
+            stopped.replace(FIXTURE_1234567_0D874C06, "1234569"),
             stopped.replace(INV, "6".repeat(32)),
             stopped.replace("\"PRIORITY\":\"6\"", "\"PRIORITY\":\"3\""),
             stopped + stopped))
@@ -261,7 +270,7 @@ final class BrokerJournalEvidenceTest {
     assertEquals(
         HexFormat.of()
             .formatHex(
-                MessageDigest.getInstance("SHA-256")
+                MessageDigest.getInstance(FIXTURE_SHA_256_CA8FF120)
                     .digest(GOLDEN.getBytes(StandardCharsets.UTF_8))),
         actual.sha256());
     assertEquals("BrokerJournalSummary[redacted]", actual.toString());
@@ -280,12 +289,12 @@ final class BrokerJournalEvidenceTest {
             Map.entry("11111111111141118111111111111111", "22222222222242228222222222222222"),
             Map.entry("artemis.service", "other.service"),
             Map.entry("\"PRIORITY\":\"6\"", "\"PRIORITY\":\"3\""),
-            Map.entry("cursor-3", "cursor-2"),
-            Map.entry("1234567", "1234566"),
+            Map.entry(FIXTURE_CURSOR_3_90789868, "cursor-2"),
+            Map.entry(FIXTURE_1234567_0D874C06, "1234566"),
             Map.entry("AMQ221013", "AMQ221014"),
             Map.entry("AMQ221007", "AMQ221008"),
             Map.entry("2.56.0", "2.55.0"),
-            Map.entry("schubert-nk-broker", "different-broker"),
+            Map.entry(FIXTURE_SCHUBERT_NK_BROKER_B01A080D, "different-broker"),
             Map.entry("Using NIO Journal", "ERROR journal load"),
             Map.entry("Server is now active", "AMQ224001: broken journal"),
             Map.entry("\"PRIORITY\":\"6\"", "\"PRIORITY\":\"6\",\"PRIORITY\":\"6\""),

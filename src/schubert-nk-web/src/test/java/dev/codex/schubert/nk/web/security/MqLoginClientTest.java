@@ -37,6 +37,12 @@ import org.junit.jupiter.api.Test;
 
 /** Independent UI232/234 byte vectors; PG-D-101/PT-WEB-054..059. No production oracle. */
 final class MqLoginClientTest {
+  private static final String FIXTURE_USER_2DED8884 = "USER";
+  private static final String FIXTURE_1_FB15673E = "::1";
+  private static final String FIXTURE_ALICE_0A50500B = "alice";
+  private static final String FIXTURE_0106_EF3D3B45 = "0106";
+  private static final String FIXTURE_SYNTHETIC_SENSITIVE_5D06BEDA = "synthetic-sensitive";
+  private static final String FIXTURE_MUST_NOT_SEND_71FCB2F2 = "must not send";
   private static final UUID ID = new UUID(0, 1);
   private static final Instant NOW = Instant.parse("2026-09-08T00:00:00.123456Z");
   private static final Clock CLOCK = Clock.fixed(NOW, ZoneOffset.UTC);
@@ -45,9 +51,16 @@ final class MqLoginClientTest {
   @Test
   void web054RequestAndSuccessMatchIndependentWire() {
     String[][] inputs = {
-      {" Alice ", "p", "127.0.0.1", "Alice", "p", "USER"},
+      {" Alice ", "p", "127.0.0.1", "Alice", "p", FIXTURE_USER_2DED8884},
       {" A\u0301 ", "e\u0301", "2001:db8::1", "Á", "é", "ADMIN"},
-      {"İ".repeat(32), "x".repeat(256), "::1", "İ".repeat(32), "x".repeat(256), "USER"},
+      {
+        "İ".repeat(32),
+        "x".repeat(256),
+        FIXTURE_1_FB15673E,
+        "İ".repeat(32),
+        "x".repeat(256),
+        FIXTURE_USER_2DED8884
+      },
       {"A".repeat(64), "é".repeat(128), "255.255.255.255", "A".repeat(64), "é".repeat(128), "ADMIN"}
     };
     for (String[] input : inputs) {
@@ -84,13 +97,13 @@ final class MqLoginClientTest {
     }
     assertEquals(
         "ALICE",
-        reply(success(ID, "ALICE", "USER", "b".repeat(64)), "alice")
+        reply(success(ID, "ALICE", FIXTURE_USER_2DED8884, "b".repeat(64)), FIXTURE_ALICE_0A50500B)
             .data()
             .username()
             .orElseThrow());
-    byte[] replay = success(ID, "alice", "ADMIN", "d".repeat(64));
+    byte[] replay = success(ID, FIXTURE_ALICE_0A50500B, "ADMIN", "d".repeat(64));
     put(replay, 208, "0200");
-    MqLoginClient.Reply replayed = reply(replay, "alice");
+    MqLoginClient.Reply replayed = reply(replay, FIXTURE_ALICE_0A50500B);
     assertEquals(ResultCode.IDEMPOTENT_SUCCESS, replayed.code());
     assertEquals(UserRole.ADMIN, replayed.data().role().orElseThrow());
     assertEquals(
@@ -101,10 +114,10 @@ final class MqLoginClientTest {
 
   @Test
   void web055ErrorProfilesRemainDistinct() {
-    for (String code : List.of("0101", "0106", "9000")) {
+    for (String code : List.of("0101", FIXTURE_0106_EF3D3B45, "9000")) {
       for (String message : List.of("", "現在処理できません。", "é".repeat(128))) {
-        int retry = code.equals("0106") ? 900 : 0;
-        MqLoginClient.Reply result = reply(error(ID, code, retry, message), "alice");
+        int retry = code.equals(FIXTURE_0106_EF3D3B45) ? 900 : 0;
+        MqLoginClient.Reply result = reply(error(ID, code, retry, message), FIXTURE_ALICE_0A50500B);
         assertEquals(code, result.code().wireValue());
         assertEquals(retry, result.data().retryAfterSeconds());
         assertEquals(0, result.data().remainingAttempts());
@@ -116,7 +129,11 @@ final class MqLoginClientTest {
         assertTrue(result.data().expiresAt().isEmpty());
       }
     }
-    assertEquals(0, reply(error(ID, "0106", 0, ""), "alice").data().retryAfterSeconds());
+    assertEquals(
+        0,
+        reply(error(ID, FIXTURE_0106_EF3D3B45, 0, ""), FIXTURE_ALICE_0A50500B)
+            .data()
+            .retryAfterSeconds());
   }
 
   @Test
@@ -140,21 +157,26 @@ final class MqLoginClientTest {
           IllegalArgumentException.class,
           () -> new MqLoginClient(client, sender, CLOCK, () -> ID, bad));
     assertThrows(NullPointerException.class, () -> new MqLoginExchangeException(null));
-    assertThrows(NullPointerException.class, () -> service.exchange("alice", null, "::1"));
+    assertThrows(
+        NullPointerException.class,
+        () -> service.exchange(FIXTURE_ALICE_0A50500B, null, FIXTURE_1_FB15673E));
     for (boolean nullUsername : List.of(true, false)) {
       char[] secret = "synthetic".toCharArray();
       assertThrows(
           NullPointerException.class,
           () ->
-              service.exchange(nullUsername ? null : "alice", secret, nullUsername ? "::1" : null));
+              service.exchange(
+                  nullUsername ? null : FIXTURE_ALICE_0A50500B,
+                  secret,
+                  nullUsername ? FIXTURE_1_FB15673E : null));
       assertArrayEquals(new char[secret.length], secret);
     }
     for (String username :
         List.of("", " ", "\u2003", "x".repeat(65), "é".repeat(33), "a\u0000b", "\ud800", "\udc00"))
-      invalid(service, username, "p", "::1");
+      invalid(service, username, "p", FIXTURE_1_FB15673E);
     for (String password :
         List.of("", "p ", "p\n", "\ud800", "\udc00", "x".repeat(257), "é".repeat(129)))
-      invalid(service, "alice", password, "::1");
+      invalid(service, FIXTURE_ALICE_0A50500B, password, FIXTURE_1_FB15673E);
     for (String address :
         List.of(
             "",
@@ -164,21 +186,21 @@ final class MqLoginClientTest {
             "127.0.0.1:80",
             "::xyz",
             "fe80::1%1",
-            "[fe80::1%1]")) invalid(service, "alice", "p", address);
+            "[fe80::1%1]")) invalid(service, FIXTURE_ALICE_0A50500B, "p", address);
     assertEquals(0, sent.get());
     assertEquals(0, client.pendingCount());
     MqLoginExchangeException fixed =
         new MqLoginExchangeException(MqLoginExchangeException.Reason.UNAVAILABLE);
-    fixed.addSuppressed(new IllegalArgumentException("synthetic-sensitive"));
+    fixed.addSuppressed(new IllegalArgumentException(FIXTURE_SYNTHETIC_SENSITIVE_5D06BEDA));
     assertEquals(0, fixed.getSuppressed().length);
     assertThrows(
         IllegalStateException.class,
-        () -> fixed.initCause(new IllegalStateException("synthetic-sensitive")));
+        () -> fixed.initCause(new IllegalStateException(FIXTURE_SYNTHETIC_SENSITIVE_5D06BEDA)));
   }
 
   @Test
   void web057MalformedOrUncorrelatedRepliesNeverAuthenticate() {
-    byte[] valid = success(ID, "alice", "USER", "a".repeat(64));
+    byte[] valid = success(ID, FIXTURE_ALICE_0A50500B, FIXTURE_USER_2DED8884, "a".repeat(64));
     List<byte[]> bad = new ArrayList<>();
     bad.add(new byte[0]);
     bad.add(Arrays.copyOf(valid, 255));
@@ -223,15 +245,16 @@ final class MqLoginClientTest {
     put(leakingError, 256 + 69, "a".repeat(64));
     bad.add(leakingError);
     bad.add(error(ID, "0101", 1, ""));
-    bad.add(error(ID, "0106", 901, ""));
+    bad.add(error(ID, FIXTURE_0106_EF3D3B45, 901, ""));
     byte[] invalidReplay = error(ID, "0200", 0, "");
     bad.add(invalidReplay);
-    byte[] wrongReplayUser = success(ID, "other", "USER", "a".repeat(64));
+    byte[] wrongReplayUser = success(ID, "other", FIXTURE_USER_2DED8884, "a".repeat(64));
     put(wrongReplayUser, 208, "0200");
     bad.add(wrongReplayUser);
     for (byte[] candidate : bad) {
       MqLoginExchangeException failure =
-          assertThrows(MqLoginExchangeException.class, () -> reply(candidate, "alice"));
+          assertThrows(
+              MqLoginExchangeException.class, () -> reply(candidate, FIXTURE_ALICE_0A50500B));
       fixed(failure, MqLoginExchangeException.Reason.UNAVAILABLE);
     }
   }
@@ -250,10 +273,11 @@ final class MqLoginClientTest {
                 handed.set(bytes);
                 sends.incrementAndGet();
                 switch (selected) {
-                  case 0 -> throw new JMSException("synthetic-sensitive");
-                  case 1 -> throw new JMSRuntimeException("synthetic-sensitive");
-                  case 2 -> throw new IllegalStateException("synthetic-sensitive");
-                  default -> throw new IllegalArgumentException("synthetic-sensitive");
+                  case 0 -> throw new JMSException(FIXTURE_SYNTHETIC_SENSITIVE_5D06BEDA);
+                  case 1 -> throw new JMSRuntimeException(FIXTURE_SYNTHETIC_SENSITIVE_5D06BEDA);
+                  case 2 -> throw new IllegalStateException(FIXTURE_SYNTHETIC_SENSITIVE_5D06BEDA);
+                  default ->
+                      throw new IllegalArgumentException(FIXTURE_SYNTHETIC_SENSITIVE_5D06BEDA);
                 }
               });
       unavailable(service);
@@ -284,12 +308,16 @@ final class MqLoginClientTest {
             new DateTimeException("clock-sensitive"))) {
       unavailable(
           new MqLoginClient(
-              client(), (id, b) -> fail("must not send"), new FaultClock(failure), () -> ID, WAIT));
+              client(),
+              (id, b) -> fail(FIXTURE_MUST_NOT_SEND_71FCB2F2),
+              new FaultClock(failure),
+              () -> ID,
+              WAIT));
     }
     unavailable(
         new MqLoginClient(
             client(),
-            (id, b) -> fail("must not send"),
+            (id, b) -> fail(FIXTURE_MUST_NOT_SEND_71FCB2F2),
             CLOCK,
             () -> {
               throw new IllegalStateException("uuid-sensitive");
@@ -299,8 +327,13 @@ final class MqLoginClientTest {
     assertThrows(
         NullPointerException.class,
         () ->
-            new MqLoginClient(client(), (id, b) -> fail("must not send"), CLOCK, () -> null, WAIT)
-                .exchange("alice", password, "::1"));
+            new MqLoginClient(
+                    client(),
+                    (id, b) -> fail(FIXTURE_MUST_NOT_SEND_71FCB2F2),
+                    CLOCK,
+                    () -> null,
+                    WAIT)
+                .exchange(FIXTURE_ALICE_0A50500B, password, FIXTURE_1_FB15673E));
     assertArrayEquals(new char[1], password);
     char[] nullClockPassword = {'p'};
     assertThrows(
@@ -308,11 +341,11 @@ final class MqLoginClientTest {
         () ->
             new MqLoginClient(
                     client(),
-                    (id, b) -> fail("must not send"),
+                    (id, b) -> fail(FIXTURE_MUST_NOT_SEND_71FCB2F2),
                     new FaultClock(null),
                     () -> ID,
                     WAIT)
-                .exchange("alice", nullClockPassword, "::1"));
+                .exchange(FIXTURE_ALICE_0A50500B, nullClockPassword, FIXTURE_1_FB15673E));
     assertArrayEquals(new char[1], nullClockPassword);
 
     JmsRequestReplyClient bounded =
@@ -334,9 +367,15 @@ final class MqLoginClientTest {
                               throw new IllegalStateException(e);
                             }
                             assertTrue(
-                                bounded.onReply(id, success(id, "alice", "USER", "a".repeat(64))));
+                                bounded.onReply(
+                                    id,
+                                    success(
+                                        id,
+                                        FIXTURE_ALICE_0A50500B,
+                                        FIXTURE_USER_2DED8884,
+                                        "a".repeat(64))));
                           })
-                      .exchange("alice", new char[] {'p'}, "::1"));
+                      .exchange(FIXTURE_ALICE_0A50500B, new char[] {'p'}, FIXTURE_1_FB15673E));
       try {
         assertTrue(sent.await(5, TimeUnit.SECONDS));
         unavailable(
@@ -368,7 +407,8 @@ final class MqLoginClientTest {
               buffers.add(body);
               String username = new String(body, 256, 64, StandardCharsets.UTF_8).stripTrailing();
               assertEquals(id.toString(), new String(body, 60, 36, StandardCharsets.US_ASCII));
-              assertTrue(client.onReply(id, success(id, username, "USER", "c".repeat(64))));
+              assertTrue(
+                  client.onReply(id, success(id, username, FIXTURE_USER_2DED8884, "c".repeat(64))));
             },
             CLOCK,
             () -> new UUID(0, ids.incrementAndGet()),
@@ -382,7 +422,8 @@ final class MqLoginClientTest {
               workers.submit(
                   () -> {
                     char[] password = {'p'};
-                    MqLoginClient.Reply result = service.exchange(name, password, "::1");
+                    MqLoginClient.Reply result =
+                        service.exchange(name, password, FIXTURE_1_FB15673E);
                     assertEquals(name, result.data().username().orElseThrow());
                     assertEquals(UserRole.USER, result.data().role().orElseThrow());
                     assertEquals(
@@ -415,7 +456,8 @@ final class MqLoginClientTest {
     char[] consumed = {'p'};
     fixed(
         assertThrows(
-            MqLoginExchangeException.class, () -> service.exchange("alice", consumed, "::1")),
+            MqLoginExchangeException.class,
+            () -> service.exchange(FIXTURE_ALICE_0A50500B, consumed, FIXTURE_1_FB15673E)),
         MqLoginExchangeException.Reason.UNAVAILABLE);
     assertArrayEquals(new char[1], consumed);
   }
@@ -446,7 +488,7 @@ final class MqLoginClientTest {
                 sent.incrementAndGet();
                 assertTrue(client.onReply(id, body));
               })
-          .exchange(username, new char[] {'p'}, "::1");
+          .exchange(username, new char[] {'p'}, FIXTURE_1_FB15673E);
     } finally {
       assertEquals(1, sent.get());
       assertEquals(0, client.pendingCount());

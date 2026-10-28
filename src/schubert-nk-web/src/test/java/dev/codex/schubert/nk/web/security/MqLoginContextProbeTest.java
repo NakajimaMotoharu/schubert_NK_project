@@ -38,6 +38,8 @@ import org.junit.jupiter.api.Test;
 
 /** UI232/234 independent IF-003 vectors; SSC-043/PG-D-102/PT-WEB-060..062. */
 final class MqLoginContextProbeTest {
+  private static final String FIXTURE_0000_876EEFE0 = "0000";
+  private static final String FIXTURE_SYNTHETIC_SECRET_BCCB0977 = "synthetic-secret";
   static final Clock CLOCK =
       Clock.fixed(Instant.parse("2026-09-08T00:00:00.123456Z"), ZoneOffset.UTC);
   static final Duration WAIT = Duration.ofSeconds(2);
@@ -46,7 +48,7 @@ final class MqLoginContextProbeTest {
 
   @Test
   void web060ProbeUsesFreshProtectedReadAndValidatesAllRecords() {
-    for (String code : List.of("0000", "0200")) {
+    for (String code : List.of(FIXTURE_0000_876EEFE0, "0200")) {
       for (int count : new int[] {0, 1, 10}) {
         JmsRequestReplyClient client = client();
         AtomicReference<byte[]> sent = new AtomicReference<>();
@@ -72,13 +74,13 @@ final class MqLoginContextProbeTest {
 
   @Test
   void web061ProbeRejectsMalformedAndFailedReplies() {
-    byte[] valid = response(ID, "a".repeat(64), "0000", 2);
+    byte[] valid = response(ID, "a".repeat(64), FIXTURE_0000_876EEFE0, 2);
     List<byte[]> bad = new ArrayList<>();
     bad.add(new byte[0]);
     bad.add(Arrays.copyOf(valid, 255));
     bad.add(Arrays.copyOf(valid, valid.length - 1));
     bad.add(Arrays.copyOf(valid, valid.length + 1));
-    byte[] other = header("LOGRSP01", ID, 24, "0000", false);
+    byte[] other = header("LOGRSP01", ID, 24, FIXTURE_0000_876EEFE0, false);
     put(other, 113, "a".repeat(64));
     bad.add(other);
     List<Consumer<byte[]>> mutations =
@@ -175,10 +177,10 @@ final class MqLoginContextProbeTest {
                 sends.incrementAndGet();
                 owned.set(body);
                 switch (selected) {
-                  case 0 -> throw new JMSException("synthetic-secret");
-                  case 1 -> throw new JMSRuntimeException("synthetic-secret");
-                  case 2 -> throw new IllegalStateException("synthetic-secret");
-                  default -> throw new IllegalArgumentException("synthetic-secret");
+                  case 0 -> throw new JMSException(FIXTURE_SYNTHETIC_SECRET_BCCB0977);
+                  case 1 -> throw new JMSRuntimeException(FIXTURE_SYNTHETIC_SECRET_BCCB0977);
+                  case 2 -> throw new IllegalStateException(FIXTURE_SYNTHETIC_SECRET_BCCB0977);
+                  default -> throw new IllegalArgumentException(FIXTURE_SYNTHETIC_SECRET_BCCB0977);
                 }
               });
       fixed(assertThrows(MqLoginExchangeException.class, () -> probe.isActive(CONTEXT)));
@@ -218,7 +220,7 @@ final class MqLoginContextProbeTest {
               sends.incrementAndGet();
               String context =
                   new String(body, 113, 64, java.nio.charset.StandardCharsets.US_ASCII);
-              assertTrue(client.onReply(id, response(id, context, "0000", 1)));
+              assertTrue(client.onReply(id, response(id, context, FIXTURE_0000_876EEFE0, 1)));
             },
             CLOCK,
             () -> new UUID(0, ids.incrementAndGet()),

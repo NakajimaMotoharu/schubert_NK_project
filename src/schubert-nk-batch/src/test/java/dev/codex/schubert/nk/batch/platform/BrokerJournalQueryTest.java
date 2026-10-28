@@ -21,6 +21,7 @@ import org.junit.jupiter.api.Test;
 
 /** NK-OPS-001/OPS009/UI251/SS343 SSC125; BROKERQUERY001..003. Independent process IO. */
 final class BrokerJournalQueryTest {
+  private static final String FIXTURE_FIXTURE_B086DE7B = "fixture";
   private static final List<String> COMMAND = List.of("/usr/bin/journalctl", "--output=json");
 
   @Test
@@ -122,10 +123,12 @@ final class BrokerJournalQueryTest {
   @Test
   void declaredReadFailureUnknownFailureAndCloseFailure() {
     var io = new Child(new byte[0]);
-    io.readFailure = new IOException("fixture");
+    io.readFailure = new IOException(FIXTURE_FIXTURE_B086DE7B);
     assertReason(StopGateFailure.COMMAND_FAILURE, io, 16);
     for (Throwable unexpected :
-        List.of(new IllegalStateException("fixture"), new AssertionError("fixture"))) {
+        List.of(
+            new IllegalStateException(FIXTURE_FIXTURE_B086DE7B),
+            new AssertionError(FIXTURE_FIXTURE_B086DE7B))) {
       var child = new Child(new byte[0]);
       child.readFailure = unexpected;
       assertSame(
@@ -221,7 +224,7 @@ final class BrokerJournalQueryTest {
         @Override
         public void close() throws IOException {
           stdinClosed++;
-          if (closeFailure) throw new IOException("fixture");
+          if (closeFailure) throw new IOException(FIXTURE_FIXTURE_B086DE7B);
         }
       };
     }
@@ -245,7 +248,7 @@ final class BrokerJournalQueryTest {
     public boolean waitFor(long timeout, TimeUnit unit) throws InterruptedException {
       waitBound = timeout;
       waitUnit = unit;
-      if (interrupt) throw new InterruptedException("fixture");
+      if (interrupt) throw new InterruptedException(FIXTURE_FIXTURE_B086DE7B);
       if (readDelayNanos > 0) assertTrue(drainStarted.await(5, TimeUnit.SECONDS));
       if (waitDelayNanos > 0) consumeNanos(waitDelayNanos);
       alive = !completed;

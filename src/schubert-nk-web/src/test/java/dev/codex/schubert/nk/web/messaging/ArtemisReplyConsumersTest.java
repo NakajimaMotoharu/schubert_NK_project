@@ -40,6 +40,11 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** PT-JMS-014 A-D: the dedicated Web reply consumer lifecycle on real Artemis and failure paths. */
 final class ArtemisReplyConsumersTest {
+  private static final String FIXTURE_GETSESSIONMODE_BF25AD1A = "getSessionMode";
+  private static final String FIXTURE_CREATECONSUMER_BEB7888D = "createConsumer";
+  private static final String FIXTURE_CLOSE_97959247 = "close";
+  private static final String FIXTURE_VM_0_0C76084A = "vm://0";
+
   @Test
   void jmsown003BindAcquisitionFailureAndNullKeepIdentityBeforeOwnership() {
     for (Throwable failure :
@@ -86,14 +91,14 @@ final class ArtemisReplyConsumersTest {
                 new Class<?>[] {JMSContext.class},
                 (proxy, method, args) ->
                     switch (method.getName()) {
-                      case "getSessionMode" -> JMSContext.SESSION_TRANSACTED;
-                      case "createConsumer" ->
+                      case FIXTURE_GETSESSIONMODE_BF25AD1A -> JMSContext.SESSION_TRANSACTED;
+                      case FIXTURE_CREATECONSUMER_BEB7888D ->
                           Proxy.newProxyInstance(
                               JMSConsumer.class.getClassLoader(),
                               new Class<?>[] {JMSConsumer.class},
                               (p, m, a) -> null);
                       case "start" -> throw fatal;
-                      case "close" -> {
+                      case FIXTURE_CLOSE_97959247 -> {
                         closes.incrementAndGet();
                         throw fatal;
                       }
@@ -123,13 +128,13 @@ final class ArtemisReplyConsumersTest {
                 new Class<?>[] {JMSContext.class},
                 (proxy, method, args) ->
                     switch (method.getName()) {
-                      case "getSessionMode" -> JMSContext.SESSION_TRANSACTED;
-                      case "createConsumer" ->
+                      case FIXTURE_GETSESSIONMODE_BF25AD1A -> JMSContext.SESSION_TRANSACTED;
+                      case FIXTURE_CREATECONSUMER_BEB7888D ->
                           Proxy.newProxyInstance(
                               JMSConsumer.class.getClassLoader(),
                               new Class<?>[] {JMSConsumer.class},
                               (p, m, a) -> null);
-                      case "close" -> {
+                      case FIXTURE_CLOSE_97959247 -> {
                         calls.incrementAndGet();
                         var failure = closeFailure.get();
                         if (failure != null) throw failure;
@@ -174,7 +179,7 @@ final class ArtemisReplyConsumersTest {
   @Test
   void oneConsumerDeliversActiveAndLateReplies(@TempDir Path root) throws Exception {
     EmbeddedActiveMQ broker = start(root);
-    try (ActiveMQConnectionFactory factory = new ActiveMQConnectionFactory("vm://0");
+    try (ActiveMQConnectionFactory factory = new ActiveMQConnectionFactory(FIXTURE_VM_0_0C76084A);
         JMSContext producer = factory.createContext(JMSContext.AUTO_ACKNOWLEDGE)) {
       ReplyCorrelationRegistry registry = new ReplyCorrelationRegistry();
       byte[] expected = responseWire();
@@ -215,7 +220,7 @@ final class ArtemisReplyConsumersTest {
   void invalidRepliesAreCommittedToDlqAndTerminalIsSignalledOnce(@TempDir Path root)
       throws Exception {
     EmbeddedActiveMQ broker = start(root);
-    try (ActiveMQConnectionFactory factory = new ActiveMQConnectionFactory("vm://0");
+    try (ActiveMQConnectionFactory factory = new ActiveMQConnectionFactory(FIXTURE_VM_0_0C76084A);
         JMSContext producer = factory.createContext(JMSContext.AUTO_ACKNOWLEDGE);
         JMSContext observer = factory.createContext(JMSContext.AUTO_ACKNOWLEDGE);
         JMSConsumer dlq =
@@ -280,7 +285,7 @@ final class ArtemisReplyConsumersTest {
         NullPointerException.class,
         () -> ArtemisReplyConsumers.start(() -> null, reply(new ReplyCorrelationRegistry()), null));
     EmbeddedActiveMQ broker = start(root);
-    try (ActiveMQConnectionFactory factory = new ActiveMQConnectionFactory("vm://0")) {
+    try (ActiveMQConnectionFactory factory = new ActiveMQConnectionFactory(FIXTURE_VM_0_0C76084A)) {
       IllegalStateException failure =
           assertThrows(
               IllegalStateException.class,
@@ -346,8 +351,8 @@ final class ArtemisReplyConsumersTest {
                 new Class<?>[] {JMSContext.class},
                 (proxy, method, arguments) ->
                     switch (method.getName()) {
-                      case "getSessionMode" -> JMSContext.SESSION_TRANSACTED;
-                      case "createConsumer" ->
+                      case FIXTURE_GETSESSIONMODE_BF25AD1A -> JMSContext.SESSION_TRANSACTED;
+                      case FIXTURE_CREATECONSUMER_BEB7888D ->
                           Proxy.newProxyInstance(
                               JMSConsumer.class.getClassLoader(),
                               new Class<?>[] {JMSConsumer.class},
@@ -361,7 +366,7 @@ final class ArtemisReplyConsumersTest {
                         rollbacks.incrementAndGet();
                         yield null;
                       }
-                      case "close" -> {
+                      case FIXTURE_CLOSE_97959247 -> {
                         closes.incrementAndGet();
                         yield null;
                       }
@@ -409,8 +414,8 @@ final class ArtemisReplyConsumersTest {
             new Class<?>[] {JMSContext.class},
             (proxy, method, args) ->
                 switch (method.getName()) {
-                  case "getSessionMode" -> JMSContext.SESSION_TRANSACTED;
-                  case "createConsumer" -> {
+                  case FIXTURE_GETSESSIONMODE_BF25AD1A -> JMSContext.SESSION_TRANSACTED;
+                  case FIXTURE_CREATECONSUMER_BEB7888D -> {
                     if (failCreate) {
                       throw new IllegalStateException("synthetic-create");
                     }
@@ -419,7 +424,7 @@ final class ArtemisReplyConsumersTest {
                         new Class<?>[] {JMSConsumer.class},
                         (p, m, a) -> null);
                   }
-                  case "close" -> {
+                  case FIXTURE_CLOSE_97959247 -> {
                     closes.incrementAndGet();
                     throw new IllegalStateException("synthetic-close");
                   }
@@ -487,7 +492,7 @@ final class ArtemisReplyConsumersTest {
         .setLargeMessagesDirectory(root.resolve("large-messages").toString())
         .setSecurityEnabled(false)
         .clearAcceptorConfigurations()
-        .addAcceptorConfiguration("component", "vm://0");
+        .addAcceptorConfiguration("component", FIXTURE_VM_0_0C76084A);
     return new EmbeddedActiveMQ().setConfiguration(configuration).start();
   }
 }

@@ -29,20 +29,31 @@ import org.junit.jupiter.api.io.TempDir;
 /** PG241/PT-OPS-MQ-016..018; independent SS321 role table and live authenticated broker. */
 @SuppressWarnings("try") // EmbeddedActiveMQ.stop declares Exception; fixture owns it.
 final class ArtemisRoleReadinessClientTest {
+  private static final String FIXTURE_SEND_9E27AAE5 = "send";
+  private static final String FIXTURE_CONSUME_5DB91001 = "consume";
+  private static final String FIXTURE_MANAGE_543AAB42 = "manage";
+  private static final String FIXTURE_BROWSE_AD464E52 = "browse";
+  private static final String FIXTURE_VIEW_26B1B25A = "view";
+  private static final String FIXTURE_EDIT_860D9EAA = "edit";
+  private static final String FIXTURE_NK_SYNC_REQUEST_422EE207 = "nk.sync.request";
+  private static final String FIXTURE_NK_WEB_C36D896A = "nk_web";
+  private static final String FIXTURE_NK_API_BF38B2E2 = "nk_api";
+  private static final String FIXTURE_NK_OPS_C6CBF84B = "nk_ops";
+  private static final String FIXTURE_NK_MQ_MAINTENANCE_DE2DC05D = "nk_mq_maintenance";
   // Independent PT oracle copied from SS321 §10 and the approved management-namespace delta.
   private static final String[] PERMISSIONS = {
-    "send",
-    "consume",
+    FIXTURE_SEND_9E27AAE5,
+    FIXTURE_CONSUME_5DB91001,
     "createDurableQueue",
     "deleteDurableQueue",
     "createNonDurableQueue",
     "deleteNonDurableQueue",
-    "manage",
-    "browse",
+    FIXTURE_MANAGE_543AAB42,
+    FIXTURE_BROWSE_AD464E52,
     "createAddress",
     "deleteAddress",
-    "view",
-    "edit"
+    FIXTURE_VIEW_26B1B25A,
+    FIXTURE_EDIT_860D9EAA
   };
   private static final Map<String, Map<String, Set<String>>> TABLE = table();
 
@@ -51,7 +62,7 @@ final class ArtemisRoleReadinessClientTest {
   @Test
   void opsMq1413002CorrectRoleCountWithNonObjectMembersIsRejected() {
     // SS321 independent role table: correct cardinality must not mask an invalid projection.
-    String match = "nk.sync.request";
+    String match = FIXTURE_NK_SYNC_REQUEST_422EE207;
     int required = TABLE.get(match).size();
     assertEquals(3, required);
     for (String member : new String[] {"null", "7", "true", "\"role\"", "[]"}) {
@@ -76,7 +87,7 @@ final class ArtemisRoleReadinessClientTest {
           fixture.broker.getActiveMQServer().getPostOffice().getAddresses().stream()
               .anyMatch(address -> address.toString().startsWith("activemq.management.")));
       String appCredential = UUID.randomUUID().toString();
-      fixture.security.addNewUser("pt_web", appCredential, "nk_web");
+      fixture.security.addNewUser("pt_web", appCredential, FIXTURE_NK_WEB_C36D896A);
       try (var app =
           fixture.factory.createSession("pt_web", appCredential, false, true, true, false, 0)) {
         assertRedacted(() -> reader.verify(app));
@@ -114,7 +125,7 @@ final class ArtemisRoleReadinessClientTest {
       duplicate.put(match, first.substring(0, first.length() - 1) + "," + first.substring(1));
       assertRedacted(() -> candidate(duplicate).verify(unusedSession()));
     }
-    String match = "nk.sync.request";
+    String match = FIXTURE_NK_SYNC_REQUEST_422EE207;
     for (String invalid :
         new String[] {
           "{}",
@@ -164,69 +175,104 @@ final class ArtemisRoleReadinessClientTest {
     assertThrows(
         IllegalStateException.class,
         () ->
-            ArtemisManagementReadinessClient.putRolesOperation(failingMessage, "nk.sync.request"));
+            ArtemisManagementReadinessClient.putRolesOperation(
+                failingMessage, FIXTURE_NK_SYNC_REQUEST_422EE207));
   }
 
   private static Map<String, Map<String, Set<String>>> table() {
     var values = new LinkedHashMap<String, Map<String, Set<String>>>();
     values.put(
-        "nk.sync.request",
-        Map.of("nk_web", Set.of("send"), "nk_api", Set.of("consume"), "nk_ops", Set.of("browse")));
+        FIXTURE_NK_SYNC_REQUEST_422EE207,
+        Map.of(
+            FIXTURE_NK_WEB_C36D896A,
+            Set.of(FIXTURE_SEND_9E27AAE5),
+            FIXTURE_NK_API_BF38B2E2,
+            Set.of(FIXTURE_CONSUME_5DB91001),
+            FIXTURE_NK_OPS_C6CBF84B,
+            Set.of(FIXTURE_BROWSE_AD464E52)));
     values.put(
         "nk.sync.reply.web",
-        Map.of("nk_web", Set.of("consume"), "nk_api", Set.of("send"), "nk_ops", Set.of("browse")));
+        Map.of(
+            FIXTURE_NK_WEB_C36D896A,
+            Set.of(FIXTURE_CONSUME_5DB91001),
+            FIXTURE_NK_API_BF38B2E2,
+            Set.of(FIXTURE_SEND_9E27AAE5),
+            FIXTURE_NK_OPS_C6CBF84B,
+            Set.of(FIXTURE_BROWSE_AD464E52)));
     values.put(
         "nk.async.work",
-        Map.of("nk_api", Set.of("send", "consume"), "nk_ops", Set.of("send", "browse")));
+        Map.of(
+            FIXTURE_NK_API_BF38B2E2,
+            Set.of(FIXTURE_SEND_9E27AAE5, FIXTURE_CONSUME_5DB91001),
+            FIXTURE_NK_OPS_C6CBF84B,
+            Set.of(FIXTURE_SEND_9E27AAE5, FIXTURE_BROWSE_AD464E52)));
     values.put(
         "nk.web.log",
-        Map.of("nk_web", Set.of("send"), "nk_api", Set.of("consume"), "nk_ops", Set.of("browse")));
+        Map.of(
+            FIXTURE_NK_WEB_C36D896A,
+            Set.of(FIXTURE_SEND_9E27AAE5),
+            FIXTURE_NK_API_BF38B2E2,
+            Set.of(FIXTURE_CONSUME_5DB91001),
+            FIXTURE_NK_OPS_C6CBF84B,
+            Set.of(FIXTURE_BROWSE_AD464E52)));
     values.put(
         "nk.dead.letter",
         Map.of(
-            "nk_web",
-            Set.of("send"),
-            "nk_api",
-            Set.of("send"),
-            "nk_ops",
-            Set.of("consume", "browse", "manage")));
+            FIXTURE_NK_WEB_C36D896A,
+            Set.of(FIXTURE_SEND_9E27AAE5),
+            FIXTURE_NK_API_BF38B2E2,
+            Set.of(FIXTURE_SEND_9E27AAE5),
+            FIXTURE_NK_OPS_C6CBF84B,
+            Set.of(FIXTURE_CONSUME_5DB91001, FIXTURE_BROWSE_AD464E52, FIXTURE_MANAGE_543AAB42)));
     values.put(
         "nk.expiry",
         Map.of(
-            "nk_mq_maintenance",
-            Set.of("consume", "browse"),
-            "nk_ops",
-            Set.of("consume", "browse", "manage")));
+            FIXTURE_NK_MQ_MAINTENANCE_DE2DC05D,
+            Set.of(FIXTURE_CONSUME_5DB91001, FIXTURE_BROWSE_AD464E52),
+            FIXTURE_NK_OPS_C6CBF84B,
+            Set.of(FIXTURE_CONSUME_5DB91001, FIXTURE_BROWSE_AD464E52, FIXTURE_MANAGE_543AAB42)));
     values.put(
         "activemq.management.#",
         Map.of(
-            "nk_ops",
+            FIXTURE_NK_OPS_C6CBF84B,
             Set.of(
-                "send",
-                "consume",
-                "manage",
+                FIXTURE_SEND_9E27AAE5,
+                FIXTURE_CONSUME_5DB91001,
+                FIXTURE_MANAGE_543AAB42,
                 "createAddress",
                 "deleteAddress",
                 "createNonDurableQueue",
                 "deleteNonDurableQueue"),
-            "nk_mq_maintenance",
+            FIXTURE_NK_MQ_MAINTENANCE_DE2DC05D,
             Set.of(
-                "send",
-                "consume",
-                "manage",
+                FIXTURE_SEND_9E27AAE5,
+                FIXTURE_CONSUME_5DB91001,
+                FIXTURE_MANAGE_543AAB42,
                 "createAddress",
                 "deleteAddress",
                 "createNonDurableQueue",
                 "deleteNonDurableQueue")));
-    values.put("mops.#", Map.of("nk_ops", Set.of("manage", "view", "edit")));
+    values.put(
+        "mops.#",
+        Map.of(
+            FIXTURE_NK_OPS_C6CBF84B,
+            Set.of(FIXTURE_MANAGE_543AAB42, FIXTURE_VIEW_26B1B25A, FIXTURE_EDIT_860D9EAA)));
     var view =
-        Map.of("nk_ops", Set.of("manage", "view"), "nk_mq_maintenance", Set.of("manage", "view"));
+        Map.of(
+            FIXTURE_NK_OPS_C6CBF84B,
+            Set.of(FIXTURE_MANAGE_543AAB42, FIXTURE_VIEW_26B1B25A),
+            FIXTURE_NK_MQ_MAINTENANCE_DE2DC05D,
+            Set.of(FIXTURE_MANAGE_543AAB42, FIXTURE_VIEW_26B1B25A));
     values.put("mops.queue.nk.expiry.q.countMessages", view);
     values.put("mops.queue.nk.expiry.q.getMessageCount", view);
     values.put("mops.queue.nk.expiry.q.getPersistentSize", view);
     values.put(
         "mops.queue.nk.expiry.q.removeMessages",
-        Map.of("nk_ops", Set.of("manage", "edit"), "nk_mq_maintenance", Set.of("manage", "edit")));
+        Map.of(
+            FIXTURE_NK_OPS_C6CBF84B,
+            Set.of(FIXTURE_MANAGE_543AAB42, FIXTURE_EDIT_860D9EAA),
+            FIXTURE_NK_MQ_MAINTENANCE_DE2DC05D,
+            Set.of(FIXTURE_MANAGE_543AAB42, FIXTURE_EDIT_860D9EAA)));
     return Map.copyOf(values);
   }
 
@@ -290,7 +336,7 @@ final class ArtemisRoleReadinessClientTest {
                 Map.of(
                     ActiveMQBasicSecurityManager.BOOTSTRAP_USER, "pt_ops",
                     ActiveMQBasicSecurityManager.BOOTSTRAP_PASSWORD, credential,
-                    ActiveMQBasicSecurityManager.BOOTSTRAP_ROLE, "nk_ops"));
+                    ActiveMQBasicSecurityManager.BOOTSTRAP_ROLE, FIXTURE_NK_OPS_C6CBF84B));
     var broker =
         new EmbeddedActiveMQ().setConfiguration(config).setSecurityManager(security).start();
     try {

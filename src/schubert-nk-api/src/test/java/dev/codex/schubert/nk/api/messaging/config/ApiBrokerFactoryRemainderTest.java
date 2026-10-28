@@ -12,6 +12,11 @@ import org.junit.jupiter.api.Test;
 
 /** PT-OPS-API-FACT001: fixed literal profiles, distinct failures, all earlier owners closed. */
 class ApiBrokerFactoryRemainderTest {
+  private static final String FIXTURE_TCP_127_0_0_1_61616_3EEAA5A0 = "tcp://127.0.0.1:61616";
+  private static final String FIXTURE_OPENSYNC_F61C9AD2 = "openSYNC";
+  private static final String FIXTURE_OPENWEB_LOG_882BB65F = "openWEB_LOG";
+  private static final String FIXTURE_CLOSESYNC_249C91FD = "closeSYNC";
+
   @Test
   void fact315004NullAtEveryPositionAndCompleteOwnerHaveLiteralReverseCleanup() {
     for (int at = 0; at <= 3; at++) {
@@ -24,7 +29,7 @@ class ApiBrokerFactoryRemainderTest {
               ArtemisConnectionFactoryProvider.ConsumerProfile, String, ActiveMQConnectionFactory>
           provider =
               (profile, endpoint) -> {
-                assertEquals("tcp://127.0.0.1:61616", endpoint);
+                assertEquals(FIXTURE_TCP_127_0_0_1_61616_3EEAA5A0, endpoint);
                 calls.add("open" + profile.name());
                 if (index.incrementAndGet() == failAt) return null;
                 var factory =
@@ -45,28 +50,41 @@ class ApiBrokerFactoryRemainderTest {
               return new char[] {'P', 'T'};
             };
         if (failAt == 0) {
-          var owner = ApiBrokerContexts.createOwned(passwords, "tcp://127.0.0.1:61616", provider);
+          var owner =
+              ApiBrokerContexts.createOwned(
+                  passwords, FIXTURE_TCP_127_0_0_1_61616_3EEAA5A0, provider);
           owner.close();
           owner.close();
           assertEquals(
               List.of(
-                  "openSYNC",
-                  "openWEB_LOG",
+                  FIXTURE_OPENSYNC_F61C9AD2,
+                  FIXTURE_OPENWEB_LOG_882BB65F,
                   "openASYNC",
                   "closeASYNC",
                   "closeWEB_LOG",
-                  "closeSYNC"),
+                  FIXTURE_CLOSESYNC_249C91FD),
               calls);
         } else {
           assertThrows(
               NullPointerException.class,
-              () -> ApiBrokerContexts.createOwned(passwords, "tcp://127.0.0.1:61616", provider));
+              () ->
+                  ApiBrokerContexts.createOwned(
+                      passwords, FIXTURE_TCP_127_0_0_1_61616_3EEAA5A0, provider));
           assertEquals(
               switch (failAt) {
-                case 1 -> List.of("openSYNC");
-                case 2 -> List.of("openSYNC", "openWEB_LOG", "closeSYNC");
+                case 1 -> List.of(FIXTURE_OPENSYNC_F61C9AD2);
+                case 2 ->
+                    List.of(
+                        FIXTURE_OPENSYNC_F61C9AD2,
+                        FIXTURE_OPENWEB_LOG_882BB65F,
+                        FIXTURE_CLOSESYNC_249C91FD);
                 default ->
-                    List.of("openSYNC", "openWEB_LOG", "openASYNC", "closeWEB_LOG", "closeSYNC");
+                    List.of(
+                        FIXTURE_OPENSYNC_F61C9AD2,
+                        FIXTURE_OPENWEB_LOG_882BB65F,
+                        "openASYNC",
+                        "closeWEB_LOG",
+                        FIXTURE_CLOSESYNC_249C91FD);
               },
               calls);
         }
@@ -100,9 +118,9 @@ class ApiBrokerFactoryRemainderTest {
                             copies.incrementAndGet();
                             return new char[] {'P', 'T'};
                           },
-                          "tcp://127.0.0.1:61616",
+                          FIXTURE_TCP_127_0_0_1_61616_3EEAA5A0,
                           (profile, endpoint) -> {
-                            assertEquals("tcp://127.0.0.1:61616", endpoint);
+                            assertEquals(FIXTURE_TCP_127_0_0_1_61616_3EEAA5A0, endpoint);
                             calls.add("open" + profile.name());
                             if (calls.stream().filter(x -> x.startsWith("open")).count() == stage)
                               raise(primary);
@@ -118,10 +136,19 @@ class ApiBrokerFactoryRemainderTest {
           assertSame(primary, actual);
           assertEquals(
               switch (stage) {
-                case 1 -> List.of("openSYNC");
-                case 2 -> List.of("openSYNC", "openWEB_LOG", "closeSYNC");
+                case 1 -> List.of(FIXTURE_OPENSYNC_F61C9AD2);
+                case 2 ->
+                    List.of(
+                        FIXTURE_OPENSYNC_F61C9AD2,
+                        FIXTURE_OPENWEB_LOG_882BB65F,
+                        FIXTURE_CLOSESYNC_249C91FD);
                 default ->
-                    List.of("openSYNC", "openWEB_LOG", "openASYNC", "closeWEB_LOG", "closeSYNC");
+                    List.of(
+                        FIXTURE_OPENSYNC_F61C9AD2,
+                        FIXTURE_OPENWEB_LOG_882BB65F,
+                        "openASYNC",
+                        "closeWEB_LOG",
+                        FIXTURE_CLOSESYNC_249C91FD);
               },
               calls);
           assertEquals(0, copies.get());
@@ -140,7 +167,7 @@ class ApiBrokerFactoryRemainderTest {
         () ->
             ApiBrokerContexts.createOwned(
                 null,
-                "tcp://127.0.0.1:61616",
+                FIXTURE_TCP_127_0_0_1_61616_3EEAA5A0,
                 (profile, endpoint) -> {
                   calls.incrementAndGet();
                   throw new AssertionError();
@@ -153,7 +180,7 @@ class ApiBrokerFactoryRemainderTest {
                   calls.incrementAndGet();
                   return new char[] {'P', 'T'};
                 },
-                "tcp://127.0.0.1:61616",
+                FIXTURE_TCP_127_0_0_1_61616_3EEAA5A0,
                 null));
     assertEquals(0, calls.get());
     assertThrows(

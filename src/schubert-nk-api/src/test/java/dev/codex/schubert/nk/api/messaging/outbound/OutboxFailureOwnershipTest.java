@@ -29,6 +29,7 @@ import org.junit.jupiter.api.Test;
 
 /** NK-MSG-002/MQ006008/ASY001/UI213241242/SS324332354/SSC320; PT-IDEM-FAIL320001..006. */
 final class OutboxFailureOwnershipTest {
+  private static final String FIXTURE_001_A3FEAA64 = "001";
   private static final Instant NOW = Instant.parse("2026-09-05T12:00:00Z");
   private static final Clock CLOCK = Clock.fixed(NOW, ZoneOffset.UTC);
   private static final UUID MESSAGE = UUID.fromString("00000000-0000-4000-8000-000000000001");
@@ -133,7 +134,7 @@ final class OutboxFailureOwnershipTest {
     assertEquals(MESSAGE.toString(), state.properties.get("NKMessageID"));
     assertEquals(MESSAGE.toString(), state.properties.get("_AMQ_DUPL_ID"));
     assertEquals("QWKREQ01", state.properties.get("NKLayoutID"));
-    assertEquals("001", state.properties.get("NKProtocolVersion"));
+    assertEquals(FIXTURE_001_A3FEAA64, state.properties.get("NKProtocolVersion"));
   }
 
   private static Throwable fault(int kind) {
@@ -159,7 +160,7 @@ final class OutboxFailureOwnershipTest {
         CORRELATION,
         OutboxDestination.ASYNC_WORK,
         "QWKREQ01",
-        "001",
+        FIXTURE_001_A3FEAA64,
         golden(),
         0,
         NOW,
@@ -173,9 +174,9 @@ final class OutboxFailureOwnershipTest {
     byte[] body = new byte[320];
     Arrays.fill(body, (byte) ' ');
     ascii(body, 0, "SCHBNK01");
-    ascii(body, 8, "001");
+    ascii(body, 8, FIXTURE_001_A3FEAA64);
     ascii(body, 11, "QWKREQ01");
-    ascii(body, 19, "001");
+    ascii(body, 19, FIXTURE_001_A3FEAA64);
     ascii(body, 22, "EI");
     ascii(body, 24, MESSAGE.toString());
     ascii(body, 60, CORRELATION.toString());

@@ -23,6 +23,7 @@ import org.junit.jupiter.api.Test;
 
 /** SSC130/ISSBROKER002: persisted independent SS321/343 literal vectors, no expected encoder. */
 final class MorningGateEvidenceBrokerTest {
+  private static final String FIXTURE_NK_EXPIRY_41CB6B4A = "nk.expiry";
   private static final StartupPermitRecords.Epoch EPOCH =
       new StartupPermitRecords.Epoch(
           StartupPermitRecords.State.INVALID,
@@ -78,8 +79,8 @@ final class MorningGateEvidenceBrokerTest {
       var settings = new HashMap<>(good.settings());
       var acceptor = new HashMap<>(good.acceptor());
       if (slot == 0) broker.remove("name");
-      if (slot == 1) topology.remove("nk.expiry");
-      if (slot == 2) settings.put("unknown", good.settings().get("nk.expiry"));
+      if (slot == 1) topology.remove(FIXTURE_NK_EXPIRY_41CB6B4A);
+      if (slot == 2) settings.put("unknown", good.settings().get(FIXTURE_NK_EXPIRY_41CB6B4A));
       if (slot == 3) acceptor.put("unknown", "value");
       var wrong =
           new ArtemisStartupObservation.Evidence(
@@ -90,9 +91,12 @@ final class MorningGateEvidenceBrokerTest {
       var topology = new HashMap<>(good.topology());
       var settings = new HashMap<>(good.settings());
       var fields =
-          new HashMap<>(topologySlot ? topology.get("nk.expiry") : settings.get("nk.expiry"));
+          new HashMap<>(
+              topologySlot
+                  ? topology.get(FIXTURE_NK_EXPIRY_41CB6B4A)
+                  : settings.get(FIXTURE_NK_EXPIRY_41CB6B4A));
       fields.remove(topologySlot ? "durable" : "maxSizeBytes");
-      (topologySlot ? topology : settings).put("nk.expiry", fields);
+      (topologySlot ? topology : settings).put(FIXTURE_NK_EXPIRY_41CB6B4A, fields);
       var wrong =
           new ArtemisStartupObservation.Evidence(
               topology, good.broker(), settings, good.acceptor(), good.roles(), good.pressure());
@@ -124,10 +128,10 @@ final class MorningGateEvidenceBrokerTest {
       var pressure = new HashMap<>(good.pressure());
       if (critical)
         pressure.put(
-            "nk.expiry",
+            FIXTURE_NK_EXPIRY_41CB6B4A,
             new ArtemisQueuePressureClient.Value(
                 5000, 0, ArtemisQueuePressureClient.Pressure.CRITICAL));
-      else pressure.remove("nk.expiry");
+      else pressure.remove(FIXTURE_NK_EXPIRY_41CB6B4A);
       var wrong =
           new ArtemisStartupObservation.Evidence(
               good.topology(),

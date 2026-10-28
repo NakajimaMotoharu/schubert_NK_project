@@ -11,6 +11,9 @@ import org.junit.jupiter.api.Test;
 
 /** OPS009/BAK001/UI251/SS341/342/343/SSC104/PG334; CMAIN001..004 independent exit oracle. */
 final class CleanupProcessMainTest {
+  private static final String FIXTURE_EXPIRY_ED8270E8 = "--expiry";
+  private static final String FIXTURE_PRIVATE_CANARY_82EBB556 = "PRIVATE_CANARY";
+
   @Test
   void nativeExitIsActualWorkOnlyAndCannotUsePreflightObservation() {
     for (int actual : new int[] {0, 10, 30})
@@ -65,20 +68,23 @@ final class CleanupProcessMainTest {
   @Test
   void expiryLiteralEntryAcceptsOnlyRealOutcomeAndUnknownIsNotNormalized() {
     for (int outcome : new int[] {0, 10, 30})
-      assertEquals(outcome, CleanupProcessMain.runExpiry(new String[] {"--expiry"}, () -> outcome));
-    assertEquals(30, CleanupProcessMain.runExpiry(new String[] {"--expiry"}, () -> 70));
+      assertEquals(
+          outcome,
+          CleanupProcessMain.runExpiry(new String[] {FIXTURE_EXPIRY_ED8270E8}, () -> outcome));
+    assertEquals(
+        30, CleanupProcessMain.runExpiry(new String[] {FIXTURE_EXPIRY_ED8270E8}, () -> 70));
     assertEquals(
         30,
         CleanupProcessMain.runExpiry(
-            new String[] {"--expiry"},
+            new String[] {FIXTURE_EXPIRY_ED8270E8},
             () -> {
-              throw new IOException("PRIVATE_CANARY");
+              throw new IOException(FIXTURE_PRIVATE_CANARY_82EBB556);
             }));
     for (String[] args :
         new String[][] {
           new String[0],
           new String[] {"--EXPIRY"},
-          new String[] {"--expiry", "extra"},
+          new String[] {FIXTURE_EXPIRY_ED8270E8, "extra"},
           new String[] {null}
         })
       assertEquals(
@@ -89,32 +95,32 @@ final class CleanupProcessMainTest {
                 fail("unexpected work");
                 return 0;
               }));
-    var unknown = new NullPointerException("PRIVATE_CANARY");
+    var unknown = new NullPointerException(FIXTURE_PRIVATE_CANARY_82EBB556);
     assertSame(
         unknown,
         assertThrows(
             NullPointerException.class,
             () ->
                 CleanupProcessMain.runExpiry(
-                    new String[] {"--expiry"},
+                    new String[] {FIXTURE_EXPIRY_ED8270E8},
                     () -> {
                       throw unknown;
                     })));
-    var fatal = new AssertionError("PRIVATE_CANARY");
+    var fatal = new AssertionError(FIXTURE_PRIVATE_CANARY_82EBB556);
     assertSame(
         fatal,
         assertThrows(
             AssertionError.class,
             () ->
                 CleanupProcessMain.runExpiry(
-                    new String[] {"--expiry"},
+                    new String[] {FIXTURE_EXPIRY_ED8270E8},
                     () -> {
                       throw fatal;
                     })));
     assertThrows(NullPointerException.class, () -> CleanupProcessMain.runExpiry(null, () -> 0));
     assertThrows(
         NullPointerException.class,
-        () -> CleanupProcessMain.runExpiry(new String[] {"--expiry"}, null));
+        () -> CleanupProcessMain.runExpiry(new String[] {FIXTURE_EXPIRY_ED8270E8}, null));
   }
 
   @Test
@@ -152,9 +158,9 @@ final class CleanupProcessMainTest {
         CleanupProcessMain.run(
             new String[0],
             () -> {
-              throw new IOException("PRIVATE_CANARY");
+              throw new IOException(FIXTURE_PRIVATE_CANARY_82EBB556);
             }));
-    var unexpected = new IllegalStateException("PRIVATE_CANARY");
+    var unexpected = new IllegalStateException(FIXTURE_PRIVATE_CANARY_82EBB556);
     assertSame(
         unexpected,
         assertThrows(

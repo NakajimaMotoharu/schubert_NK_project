@@ -21,6 +21,7 @@ import org.junit.jupiter.api.Test;
 
 /** NK-BAT-001/OPS009/DAT009/UI251/SS331 3.14/332/341; SSC057/PG164; BAT154..161. */
 final class CleanupStepValuesTest {
+  private static final String FIXTURE_CLEAN_BATCH_RUN_8E2C7ACA = "CLEAN_BATCH_RUN";
   static final BatchRun RUN = new BatchRun(new UUID(1, 2), Instant.parse("2026-09-12T15:00:00Z"));
   static final CleanupCounts ZERO = new CleanupCounts(0, 0, 0);
 
@@ -46,10 +47,10 @@ final class CleanupStepValuesTest {
       "CLEAN_SESSION",
       "CLEAN_INBOX_OUTBOX",
       "CLEAN_LOG",
-      "CLEAN_BATCH_RUN",
-      "CLEAN_BATCH_RUN",
-      "CLEAN_BATCH_RUN",
-      "CLEAN_BATCH_RUN"
+      FIXTURE_CLEAN_BATCH_RUN_8E2C7ACA,
+      FIXTURE_CLEAN_BATCH_RUN_8E2C7ACA,
+      FIXTURE_CLEAN_BATCH_RUN_8E2C7ACA,
+      FIXTURE_CLEAN_BATCH_RUN_8E2C7ACA
     };
     assertEquals(9, CleanupKind.values().length);
     for (int i = 0; i < expected.length; i++)

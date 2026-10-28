@@ -46,6 +46,12 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** NK-BAT-001/OPS009/DAT009/UI251/SS331 3.14/332/341; SSC057/PG164; BAT170..177. */
 final class StepCleanupServiceTest {
+  private static final String FIXTURE_CONNECTION_ROLLBACK_9F978A8C = "connection.rollback";
+  private static final String FIXTURE_CONNECTION_SETAUTOCOMMIT_D9B0AF8D =
+      "connection.setAutoCommit";
+  private static final String FIXTURE_CONNECTION_COMMIT_37C1B216 = "connection.commit";
+  private static final String FIXTURE_NONE_30A0924A = "none";
+
   @Test
   void sharedOwnerBoundaryRejectsBeforeCommitButNeverClaimsDurableChunkRollback() throws Exception {
     assertThrows(NullPointerException.class, () -> StepCleanupService.withOwner(null));
@@ -121,8 +127,10 @@ final class StepCleanupServiceTest {
                     injected[0]++;
                     throw primary;
                   }
-                  if ((!restore && key.equals("connection.rollback") && count == 1)
-                      || (restore && key.equals("connection.setAutoCommit") && count == 2)) {
+                  if ((!restore && key.equals(FIXTURE_CONNECTION_ROLLBACK_9F978A8C) && count == 1)
+                      || (restore
+                          && key.equals(FIXTURE_CONNECTION_SETAUTOCOMMIT_D9B0AF8D)
+                          && count == 2)) {
                     injected[1]++;
                     throw secondary;
                   }
@@ -157,7 +165,7 @@ final class StepCleanupServiceTest {
                               p.wrap(c), attempt(CleanupKind.QUESTIONS), CleanupKind.QUESTIONS));
             }
             assertArrayEquals(new int[] {1, 1}, injected);
-            assertEquals(restore ? 2 : 1, p.seen.get("connection.setAutoCommit"));
+            assertEquals(restore ? 2 : 1, p.seen.get(FIXTURE_CONNECTION_SETAUTOCOMMIT_D9B0AF8D));
             assertFalse(c.getAutoCommit());
             p.closed();
             c.rollback();
@@ -271,8 +279,8 @@ final class StepCleanupServiceTest {
                 new StepCleanupService(() -> 0)
                     .execute(p.wrap(c), attempt(CleanupKind.QUESTIONS), CleanupKind.QUESTIONS));
         var expected = new TreeMap<>(inventory(1));
-        expected.remove("connection.commit");
-        expected.put("connection.rollback", 1);
+        expected.remove(FIXTURE_CONNECTION_COMMIT_37C1B216);
+        expected.put(FIXTURE_CONNECTION_ROLLBACK_9F978A8C, 1);
         assertEquals(expected, p.seen);
         p.closed();
         assertTrue(c.getAutoCommit());
@@ -311,7 +319,7 @@ final class StepCleanupServiceTest {
         var p = new Probe();
         p.after =
             (k, n) -> {
-              if (k.equals("connection.commit") && n == 1)
+              if (k.equals(FIXTURE_CONNECTION_COMMIT_37C1B216) && n == 1)
                 sql(admin, "update schubert.batch_runs set status='FAILED' where id=90000");
             };
         stopped(
@@ -371,7 +379,7 @@ final class StepCleanupServiceTest {
       var p = new Probe();
       p.after =
           (k, n) -> {
-            if (k.equals("connection.commit") && n == 1)
+            if (k.equals(FIXTURE_CONNECTION_COMMIT_37C1B216) && n == 1)
               throw new SQLException("public unknown commit outcome", "08006");
           };
       stopped(
@@ -496,7 +504,8 @@ final class StepCleanupServiceTest {
         var p = new Probe();
         p.after =
             (k, n) -> {
-              if (k.equals("connection.commit") && n == point) Thread.currentThread().interrupt();
+              if (k.equals(FIXTURE_CONNECTION_COMMIT_37C1B216) && n == point)
+                Thread.currentThread().interrupt();
             };
         try {
           stopped(
@@ -524,7 +533,7 @@ final class StepCleanupServiceTest {
         var p = new Probe();
         p.after =
             (k, n) -> {
-              if (k.equals("connection.commit") && n == 1)
+              if (k.equals(FIXTURE_CONNECTION_COMMIT_37C1B216) && n == 1)
                 sql(
                     admin,
                     "update schubert.batch_runs set target_count="
@@ -539,7 +548,7 @@ final class StepCleanupServiceTest {
                 new StepCleanupService(() -> 0)
                     .execute(p.wrap(c), attempt(CleanupKind.QUESTIONS), CleanupKind.QUESTIONS));
         assertEquals("RUNNING|" + changed + "|" + changed + "|0|0|true", totals(admin, 90011));
-        assertEquals(1, p.seen.get("connection.rollback"));
+        assertEquals(1, p.seen.get(FIXTURE_CONNECTION_ROLLBACK_9F978A8C));
         p.closed();
       }
     }
@@ -576,7 +585,8 @@ final class StepCleanupServiceTest {
       var primary = new IllegalStateException("public primary");
       var p = new Probe();
       p.unknown.put("statement.executeQuery", primary);
-      p.unknown.put("connection.rollback", new NullPointerException("public secondary"));
+      p.unknown.put(
+          FIXTURE_CONNECTION_ROLLBACK_9F978A8C, new NullPointerException("public secondary"));
       assertSame(
           primary,
           assertThrows(
@@ -624,7 +634,7 @@ final class StepCleanupServiceTest {
           IllegalArgumentException.class,
           () -> service.execute(c, attempt(CleanupKind.QUESTIONS), CleanupKind.QUESTIONS));
     }
-    for (String cleanup : List.of("none", "rollback", "restore"))
+    for (String cleanup : List.of(FIXTURE_NONE_30A0924A, "rollback", "restore"))
       for (String primary : List.of("SQL", "REPOSITORY", "STOP", "RUNTIME", "NPE", "ERROR")) {
         reset(db);
         try (var c = locked(db, true)) {
@@ -644,8 +654,8 @@ final class StepCleanupServiceTest {
               (k, n) -> {
                 if (k.equals("connection.prepareStatement") && n == 1) throw failure;
               };
-          if (cleanup.equals("rollback")) p.fail("connection.rollback", 1);
-          if (cleanup.equals("restore")) p.fail("connection.setAutoCommit", 2);
+          if (cleanup.equals("rollback")) p.fail(FIXTURE_CONNECTION_ROLLBACK_9F978A8C, 1);
+          if (cleanup.equals("restore")) p.fail(FIXTURE_CONNECTION_SETAUTOCOMMIT_D9B0AF8D, 2);
           if (Set.of("RUNTIME", "NPE", "ERROR").contains(primary)) {
             var thrown =
                 assertThrows(
@@ -654,8 +664,9 @@ final class StepCleanupServiceTest {
                         service.execute(
                             p.wrap(c), attempt(CleanupKind.QUESTIONS), CleanupKind.QUESTIONS));
             assertSame(failure, thrown);
-            assertEquals(cleanup.equals("none") ? 0 : 1, thrown.getSuppressed().length);
-            if (!cleanup.equals("none")) {
+            assertEquals(
+                cleanup.equals(FIXTURE_NONE_30A0924A) ? 0 : 1, thrown.getSuppressed().length);
+            if (!cleanup.equals(FIXTURE_NONE_30A0924A)) {
               var extra =
                   assertInstanceOf(CleanupStoppedException.class, thrown.getSuppressed()[0]);
               assertEquals(CleanupStopReason.DATABASE_FAILURE, extra.reason());
@@ -664,7 +675,7 @@ final class StepCleanupServiceTest {
             }
           } else {
             var reason =
-                primary.equals("STOP") && cleanup.equals("none")
+                primary.equals("STOP") && cleanup.equals(FIXTURE_NONE_30A0924A)
                     ? CleanupStopReason.LOCK_BUSY
                     : CleanupStopReason.DATABASE_FAILURE;
             stopped(
@@ -675,8 +686,10 @@ final class StepCleanupServiceTest {
           }
           p.closed();
           assertFalse(c.isClosed());
-          assertEquals(cleanup.equals("rollback") ? 1 : 2, p.seen.get("connection.setAutoCommit"));
-          assertEquals(cleanup.equals("none"), c.getAutoCommit());
+          assertEquals(
+              cleanup.equals("rollback") ? 1 : 2,
+              p.seen.get(FIXTURE_CONNECTION_SETAUTOCOMMIT_D9B0AF8D));
+          assertEquals(cleanup.equals(FIXTURE_NONE_30A0924A), c.getAutoCommit());
           if (!c.getAutoCommit()) c.rollback();
         }
       }
@@ -728,8 +741,8 @@ final class StepCleanupServiceTest {
             "connection.getAutoCommit",
             "connection.isReadOnly",
             "connection.getTransactionIsolation")) m.merge(k, 1, Integer::sum);
-    m.put("connection.setAutoCommit", chunks * 2);
-    m.put("connection.commit", chunks);
+    m.put(FIXTURE_CONNECTION_SETAUTOCOMMIT_D9B0AF8D, chunks * 2);
+    m.put(FIXTURE_CONNECTION_COMMIT_37C1B216, chunks);
     return m;
   }
 
@@ -738,8 +751,8 @@ final class StepCleanupServiceTest {
    * PT inventory.
    */
   static long committedBeforeFault(String key, int position) {
-    if (key.equals("connection.setAutoCommit")) return position >= 2 ? 1 : 0;
-    if (key.equals("connection.commit")) return position >= 2 ? 1 : 0;
+    if (key.equals(FIXTURE_CONNECTION_SETAUTOCOMMIT_D9B0AF8D)) return position >= 2 ? 1 : 0;
+    if (key.equals(FIXTURE_CONNECTION_COMMIT_37C1B216)) return position >= 2 ? 1 : 0;
     int threshold = repositoryInventory().get(key);
     if (Set.of(
             "connection.getAutoCommit",

@@ -16,8 +16,11 @@ import org.junit.jupiter.api.Test;
 
 /** PT-OPS-WEB-LOAD-001..005, SS343 Web-only fixed file-to-parser bridge. */
 final class WebConfigurationLoaderTest {
+  private static final String FIXTURE_SCHUBERT_NK_CONFIG_DIR_DBE4C484 = "SCHUBERT_NK_CONFIG_DIR";
+  private static final String FIXTURE_ETC_SCHUBERT_NK_AB7CF1ED = "/etc/schubert-nk";
+  private static final String FIXTURE_NK_WEB_HTTP_PORT_F1BB508F = "nk.web.http.port";
   private static final Map<String, String> ENV =
-      Map.of("SCHUBERT_NK_CONFIG_DIR", "/etc/schubert-nk");
+      Map.of(FIXTURE_SCHUBERT_NK_CONFIG_DIR_DBE4C484, FIXTURE_ETC_SCHUBERT_NK_AB7CF1ED);
 
   @Test
   void opsWebLoad001FixedServiceAndLayerOrder() throws Exception {
@@ -32,7 +35,7 @@ final class WebConfigurationLoaderTest {
     WebNonSecretConfig config = new WebConfigurationLoader(source, ENV).load();
     assertEquals(1, calls.get());
     assertEquals("DEBUG", config.value("nk.monitoring.mode"));
-    assertEquals("8082", config.value("nk.web.http.port"));
+    assertEquals("8082", config.value(FIXTURE_NK_WEB_HTTP_PORT_F1BB508F));
     assertEquals("001", config.value("nk.protocol.version"));
   }
 
@@ -83,7 +86,7 @@ final class WebConfigurationLoaderTest {
       for (int i = 0; i < 32; i++) results.add(executor.submit(loader::load));
       for (var result : results) {
         assertEquals("STANDARD", result.get().value("nk.monitoring.mode"));
-        assertEquals("8080", result.get().value("nk.web.http.port"));
+        assertEquals("8080", result.get().value(FIXTURE_NK_WEB_HTTP_PORT_F1BB508F));
       }
     }
     assertEquals(32, calls.get());
@@ -101,11 +104,11 @@ final class WebConfigurationLoaderTest {
     for (Map<String, String> invalid :
         java.util.List.of(
             Map.<String, String>of(),
-            Map.of("SCHUBERT_NK_CONFIG_DIR", "/tmp/config"),
-            Map.of("schubert_nk_config_dir", "/etc/schubert-nk"),
+            Map.of(FIXTURE_SCHUBERT_NK_CONFIG_DIR_DBE4C484, "/tmp/config"),
+            Map.of("schubert_nk_config_dir", FIXTURE_ETC_SCHUBERT_NK_AB7CF1ED),
             Map.of(
-                "SCHUBERT_NK_CONFIG_DIR",
-                "/etc/schubert-nk",
+                FIXTURE_SCHUBERT_NK_CONFIG_DIR_DBE4C484,
+                FIXTURE_ETC_SCHUBERT_NK_AB7CF1ED,
                 "SCHUBERT_NK_PASSWORD",
                 "not-a-secret"))) {
       assertEquals(
@@ -120,9 +123,14 @@ final class WebConfigurationLoaderTest {
     assertEquals(
         "8080",
         new WebConfigurationLoader(
-                source, Map.of("SCHUBERT_NK_CONFIG_DIR", "/etc/schubert-nk", "PATH", "/usr/bin"))
+                source,
+                Map.of(
+                    FIXTURE_SCHUBERT_NK_CONFIG_DIR_DBE4C484,
+                    FIXTURE_ETC_SCHUBERT_NK_AB7CF1ED,
+                    "PATH",
+                    "/usr/bin"))
             .load()
-            .value("nk.web.http.port"));
+            .value(FIXTURE_NK_WEB_HTTP_PORT_F1BB508F));
     assertEquals(1, calls.get());
     // BUG268: fixed names do not certify supplied FD values or readiness.
     for (String key :
@@ -130,7 +138,10 @@ final class WebConfigurationLoaderTest {
       var approved = new java.util.HashMap<>(ENV);
       approved.put(key, "not-an-admitted-descriptor");
       assertEquals(
-          "8080", new WebConfigurationLoader(source, approved).load().value("nk.web.http.port"));
+          "8080",
+          new WebConfigurationLoader(source, approved)
+              .load()
+              .value(FIXTURE_NK_WEB_HTTP_PORT_F1BB508F));
       for (String alias :
           java.util.List.of(key.toLowerCase(java.util.Locale.ROOT), key + "_OTHER")) {
         var invalid = new java.util.HashMap<>(ENV);

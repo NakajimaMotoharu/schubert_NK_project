@@ -25,6 +25,8 @@ import org.junit.jupiter.api.Test;
  * SSC129/ISSPG001/ISSREL001. Literal SS field order and independent UTF8 conversion; no authority.
  */
 final class MorningGateEvidenceTest {
+  private static final String FIXTURE_SCHUBERT_BATCH_F9C88479 = "schubert_batch";
+  private static final String FIXTURE_PUBLIC_C22DFCF6 = "PUBLIC";
   private static final String MORNING = "1".repeat(32);
   private static final String BROKER = "2".repeat(32);
   private static final StartupPermitRecords.Epoch EPOCH =
@@ -101,15 +103,15 @@ final class MorningGateEvidenceTest {
 
   private static MorningDatabaseSession.DatabaseObservation database() {
     return new MorningDatabaseSession.DatabaseObservation(
-        "schubert_batch",
-        "schubert_batch",
+        FIXTURE_SCHUBERT_BATCH_F9C88479,
+        FIXTURE_SCHUBERT_BATCH_F9C88479,
         "schubert_nk",
         true,
         false,
         2,
         false,
         true,
-        facts("PUBLIC", artifacts()));
+        facts(FIXTURE_PUBLIC_C22DFCF6, artifacts()));
   }
 
   @Test
@@ -189,7 +191,12 @@ final class MorningGateEvidenceTest {
     assertArrayEquals(
         expected.toString().getBytes(StandardCharsets.US_ASCII),
         MorningGateEvidence.release(
-            EPOCH, MORNING, BROKER, facts("PUBLIC", artifacts()), "f".repeat(64), "9".repeat(64)));
+            EPOCH,
+            MORNING,
+            BROKER,
+            facts(FIXTURE_PUBLIC_C22DFCF6, artifacts()),
+            "f".repeat(64),
+            "9".repeat(64)));
     assertThrows(
         IOException.class,
         () ->
@@ -217,15 +224,15 @@ final class MorningGateEvidenceTest {
     for (int field = 0; field < 8; field++) {
       var wrong =
           new MorningDatabaseSession.DatabaseObservation(
-              field == 0 ? "wrong" : "schubert_batch",
-              field == 1 ? "wrong" : "schubert_batch",
+              field == 0 ? "wrong" : FIXTURE_SCHUBERT_BATCH_F9C88479,
+              field == 1 ? "wrong" : FIXTURE_SCHUBERT_BATCH_F9C88479,
               field == 2 ? "wrong" : "schubert_nk",
               field != 3,
               field == 4,
               field == 5 ? 8 : 2,
               field == 6,
               field != 7,
-              facts("PUBLIC", artifacts()));
+              facts(FIXTURE_PUBLIC_C22DFCF6, artifacts()));
       assertThrows(
           IOException.class, () -> MorningGateEvidence.postgres(EPOCH, MORNING, BROKER, wrong));
     }
@@ -263,7 +270,7 @@ final class MorningGateEvidenceTest {
 
   @Test
   void issRel002MalformedHashesMapsAndArtifactPathsAreRejected() {
-    var good = facts("PUBLIC", artifacts());
+    var good = facts(FIXTURE_PUBLIC_C22DFCF6, artifacts());
     var contents = good.contents();
     for (String wrong : List.of("", "a".repeat(63), "A".repeat(64), "g".repeat(64))) {
       assertThrows(
@@ -281,7 +288,7 @@ final class MorningGateEvidenceTest {
                   EPOCH,
                   MORNING,
                   BROKER,
-                  facts("PUBLIC", badHash),
+                  facts(FIXTURE_PUBLIC_C22DFCF6, badHash),
                   "f".repeat(64),
                   "9".repeat(64)));
     }
@@ -295,7 +302,7 @@ final class MorningGateEvidenceTest {
                   EPOCH,
                   MORNING,
                   BROKER,
-                  facts("PUBLIC", badPath),
+                  facts(FIXTURE_PUBLIC_C22DFCF6, badPath),
                   "f".repeat(64),
                   "9".repeat(64)));
     }
@@ -308,7 +315,7 @@ final class MorningGateEvidenceTest {
                 EPOCH,
                 MORNING,
                 BROKER,
-                facts("PUBLIC", missingArtifact),
+                facts(FIXTURE_PUBLIC_C22DFCF6, missingArtifact),
                 "f".repeat(64),
                 "9".repeat(64)));
     for (int slot = 0; slot < 4; slot++) {
@@ -321,7 +328,13 @@ final class MorningGateEvidenceTest {
       var wrong =
           new RootReleaseAdmission.DatabaseInspection(
               new StartupReleaseManifest.Contents(
-                  "PUBLIC", "a".repeat(64), ROWS, build, platform, versions, artifacts()),
+                  FIXTURE_PUBLIC_C22DFCF6,
+                  "a".repeat(64),
+                  ROWS,
+                  build,
+                  platform,
+                  versions,
+                  artifacts()),
               ROWS,
               runtime);
       assertThrows(
@@ -333,7 +346,13 @@ final class MorningGateEvidenceTest {
       var extra =
           new RootReleaseAdmission.DatabaseInspection(
               new StartupReleaseManifest.Contents(
-                  "PUBLIC", "a".repeat(64), ROWS, build, platform, versions, artifacts()),
+                  FIXTURE_PUBLIC_C22DFCF6,
+                  "a".repeat(64),
+                  ROWS,
+                  build,
+                  platform,
+                  versions,
+                  artifacts()),
               ROWS,
               runtime);
       assertThrows(
@@ -351,7 +370,7 @@ final class MorningGateEvidenceTest {
 
   @Test
   void issPg003MissingOrReorderedSchemaAndNilOwnershipNeverEncode() {
-    var good = facts("PUBLIC", artifacts());
+    var good = facts(FIXTURE_PUBLIC_C22DFCF6, artifacts());
     for (var rows :
         List.of(
             List.<SchemaHistoryAdmission.Row>of(),
@@ -361,8 +380,8 @@ final class MorningGateEvidenceTest {
           new RootReleaseAdmission.DatabaseInspection(good.contents(), rows, good.runtime());
       var db =
           new MorningDatabaseSession.DatabaseObservation(
-              "schubert_batch",
-              "schubert_batch",
+              FIXTURE_SCHUBERT_BATCH_F9C88479,
+              FIXTURE_SCHUBERT_BATCH_F9C88479,
               "schubert_nk",
               true,
               false,

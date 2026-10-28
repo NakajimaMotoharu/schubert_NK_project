@@ -27,6 +27,13 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** RBCR001..012. Public bytes, real held IO, explicitly synthetic root/readonly/tmpfs metadata. */
 final class RootBatchCredentialReaderTest {
+  private static final String FIXTURE_CLEANUP_REQUEST_EE39FE0F = "cleanup-request";
+  private static final String FIXTURE_31100027_2222_4333_8444_555555555555_2B6EB22D =
+      "31100027-2222-4333-8444-555555555555";
+  private static final String FIXTURE_UID_0C18F38C = "uid";
+  private static final String FIXTURE_MODE_B6D5C2C3 = "mode";
+  private static final String FIXTURE_DB_BATCH_118430FD = "db-batch";
+
   @Test
   void cfreq005PrivateCopyChoosesClosedProfileAndRedactsMalformedFrame() throws Exception {
     String failed =
@@ -45,11 +52,11 @@ final class RootBatchCredentialReaderTest {
         configuration=8,4,2026-09-28,2026-09-30T01:02:03Z,2026-09-30T01:02:05Z,FAILED,1,0,1,0,COMMAND_FAILURE,batch command failed
         """;
     try (var f = fixture()) {
-      Files.writeString(f.parent.resolve("cleanup-request"), CLEANUP_REQUEST);
+      Files.writeString(f.parent.resolve(FIXTURE_CLEANUP_REQUEST_EE39FE0F), CLEANUP_REQUEST);
       assertInstanceOf(
           dev.codex.schubert.nk.batch.platform.CleanupWorkerRequest.class,
           reader(f).readCleanupProfile());
-      Files.writeString(f.parent.resolve("cleanup-request"), failed);
+      Files.writeString(f.parent.resolve(FIXTURE_CLEANUP_REQUEST_EE39FE0F), failed);
       var result =
           assertInstanceOf(
               dev.codex.schubert.nk.batch.platform.CleanupFailedBackupRequest.class,
@@ -60,7 +67,7 @@ final class RootBatchCredentialReaderTest {
       assertThrows(IOException.class, () -> reader(f).readCleanupRequest());
       for (String invalid :
           List.of("", "x".repeat(1025), failed.replace("NKCLEANFAIL1", "NKCLEANFAIL2"))) {
-        Files.writeString(f.parent.resolve("cleanup-request"), invalid);
+        Files.writeString(f.parent.resolve(FIXTURE_CLEANUP_REQUEST_EE39FE0F), invalid);
         var exception = assertThrows(IOException.class, () -> reader(f).readCleanupProfile());
         assertFalse(exception.toString().contains("NKCLEANFAIL"));
       }
@@ -84,7 +91,7 @@ final class RootBatchCredentialReaderTest {
       Files.writeString(f.parent.resolve("maintenance-owner"), literal);
       f.chunk = 3;
       var owner = reader(f).readMaintenanceOwner();
-      assertEquals("31100027-2222-4333-8444-555555555555", owner.run().toString());
+      assertEquals(FIXTURE_31100027_2222_4333_8444_555555555555_2B6EB22D, owner.run().toString());
       assertEquals(200L, owner.morning().pid());
       assertEquals(100L, owner.morning().startTicks());
       assertEquals(1800000000001L, owner.deadlineNanos());
@@ -124,11 +131,11 @@ final class RootBatchCredentialReaderTest {
     f.readonly = true;
     f.metadata =
         (role, m) -> {
-          m.put("uid", 0);
+          m.put(FIXTURE_UID_0C18F38C, 0);
           m.put("gid", 0);
-          m.put("mode", role.equals("parent") ? 040500 : 0100400);
+          m.put(FIXTURE_MODE_B6D5C2C3, role.equals("parent") ? 040500 : 0100400);
         };
-    Files.writeString(f.parent.resolve("db-batch"), "PUBLIC_é\n");
+    Files.writeString(f.parent.resolve(FIXTURE_DB_BATCH_118430FD), "PUBLIC_é\n");
     return f;
   }
 
@@ -173,7 +180,8 @@ final class RootBatchCredentialReaderTest {
     for (int size : List.of(1, 65536))
       try (var f = fixture()) {
         Files.write(
-            f.parent.resolve("db-batch"), "P".repeat(size).getBytes(StandardCharsets.UTF_8));
+            f.parent.resolve(FIXTURE_DB_BATCH_118430FD),
+            "P".repeat(size).getBytes(StandardCharsets.UTF_8));
         try (var c = reader(f).read()) {
           char[] p = c.copyPassword();
           assertEquals(size, p.length);
@@ -196,7 +204,7 @@ final class RootBatchCredentialReaderTest {
       f.released();
     }
     try (var f = fixture()) {
-      Files.move(f.parent.resolve("db-batch"), f.parent.resolve("db-api"));
+      Files.move(f.parent.resolve(FIXTURE_DB_BATCH_118430FD), f.parent.resolve("db-api"));
       assertThrows(IOException.class, () -> reader(f).read());
       f.released();
     }
@@ -206,7 +214,16 @@ final class RootBatchCredentialReaderTest {
   void everyMetadataAndPolicyBoundary() throws Exception {
     for (String role : List.of("parent", "file"))
       for (String field :
-          List.of("mode", "uid", "gid", "nlink", "size", "dev", "ino", "lastModifiedTime", "ctime"))
+          List.of(
+              FIXTURE_MODE_B6D5C2C3,
+              FIXTURE_UID_0C18F38C,
+              "gid",
+              "nlink",
+              "size",
+              "dev",
+              "ino",
+              "lastModifiedTime",
+              "ctime"))
         for (String kind : List.of("missing", "wrong", "invalid"))
           try (var f = fixture()) {
             var valid = f.metadata;
@@ -227,7 +244,8 @@ final class RootBatchCredentialReaderTest {
             assertThrows(IOException.class, () -> reader(f).read(), role + field + kind);
             f.released();
           }
-    for (String kind : List.of("acl", "nullAcl", "readonly", "filesystem", "map", "uid", "device"))
+    for (String kind :
+        List.of("acl", "nullAcl", "readonly", "filesystem", "map", FIXTURE_UID_0C18F38C, "device"))
       try (var f = fixture()) {
         switch (kind) {
           case "acl" -> f.acl = new byte[] {1};
@@ -235,7 +253,7 @@ final class RootBatchCredentialReaderTest {
           case "readonly" -> f.readonly = false;
           case "filesystem" -> f.copyFilesystem = "ext4";
           case "map" -> f.nullMap = true;
-          case "uid" -> f.effective = 1;
+          case FIXTURE_UID_0C18F38C -> f.effective = 1;
           default -> {
             var valid = f.metadata;
             f.metadata =
@@ -275,7 +293,7 @@ final class RootBatchCredentialReaderTest {
   @Test
   void progressSizeAndIndependentCodecNegatives() throws Exception {
     try (var f = fixture()) {
-      Files.writeString(f.parent.resolve("db-batch"), "P".repeat(65536));
+      Files.writeString(f.parent.resolve(FIXTURE_DB_BATCH_118430FD), "P".repeat(65536));
       f.readMode = "extra";
       assertThrows(IOException.class, () -> reader(f).read());
       f.released();
@@ -300,7 +318,7 @@ final class RootBatchCredentialReaderTest {
             new byte[] {'P', 0, 'Q'},
             new byte[] {'P', '\n', 'Q'}))
       try (var f = fixture()) {
-        Files.write(f.parent.resolve("db-batch"), bytes);
+        Files.write(f.parent.resolve(FIXTURE_DB_BATCH_118430FD), bytes);
         assertThrows(Exception.class, () -> reader(f).read());
         f.released();
       }
@@ -376,9 +394,9 @@ final class RootBatchCredentialReaderTest {
               new RootBatchCredentialReader.Io() {
                 public Map<String, Object> attributes(Path p) throws IOException {
                   var m = new HashMap<>(nativeIo.attributes(p));
-                  boolean dir = ((Integer) m.get("mode") & 0170000) == 040000;
-                  m.put("mode", dir ? 040500 : 0100400);
-                  m.put("uid", 0);
+                  boolean dir = ((Integer) m.get(FIXTURE_MODE_B6D5C2C3) & 0170000) == 040000;
+                  m.put(FIXTURE_MODE_B6D5C2C3, dir ? 040500 : 0100400);
+                  m.put(FIXTURE_UID_0C18F38C, 0);
                   m.put("gid", 0);
                   return m;
                 }
@@ -431,9 +449,9 @@ final class RootBatchCredentialReaderTest {
   @Test
   void rbcr009FixedCleanupCopyCanonicalAndSeparateBatchPassword() throws Exception {
     try (var f = fixture()) {
-      Files.writeString(f.parent.resolve("cleanup-request"), CLEANUP_REQUEST);
+      Files.writeString(f.parent.resolve(FIXTURE_CLEANUP_REQUEST_EE39FE0F), CLEANUP_REQUEST);
       var request = reader(f).readCleanupRequest();
-      assertEquals("31100027-2222-4333-8444-555555555555", request.run().toString());
+      assertEquals(FIXTURE_31100027_2222_4333_8444_555555555555_2B6EB22D, request.run().toString());
       assertEquals("31100027-6666-4777-8888-999999999999", request.activation().toString());
       assertEquals("2026-09-27T15:00:00Z", request.cutoff().toString());
       assertEquals("0123456789abcdef".repeat(4), request.manifestSha256());
@@ -457,7 +475,8 @@ final class RootBatchCredentialReaderTest {
             "X".repeat(257)))
       try (var f = fixture()) {
         Files.write(
-            f.parent.resolve("cleanup-request"), invalid.getBytes(StandardCharsets.US_ASCII));
+            f.parent.resolve(FIXTURE_CLEANUP_REQUEST_EE39FE0F),
+            invalid.getBytes(StandardCharsets.US_ASCII));
         assertEquals(
             "root cleanup request unavailable",
             assertThrows(IOException.class, () -> reader(f).readCleanupRequest()).getMessage());
@@ -474,19 +493,19 @@ final class RootBatchCredentialReaderTest {
   void rbcr011CleanupHeldFileFaultAndRootPolicy() throws Exception {
     for (String mode : List.of("short", "zero", "position"))
       try (var f = fixture()) {
-        Files.writeString(f.parent.resolve("cleanup-request"), CLEANUP_REQUEST);
+        Files.writeString(f.parent.resolve(FIXTURE_CLEANUP_REQUEST_EE39FE0F), CLEANUP_REQUEST);
         f.readMode = mode;
         assertThrows(Exception.class, () -> reader(f).readCleanupRequest());
         f.released();
       }
     try (var f = fixture()) {
-      Files.writeString(f.parent.resolve("cleanup-request"), CLEANUP_REQUEST);
+      Files.writeString(f.parent.resolve(FIXTURE_CLEANUP_REQUEST_EE39FE0F), CLEANUP_REQUEST);
       f.effective = 1;
       assertThrows(IOException.class, () -> reader(f).readCleanupRequest());
       f.released();
     }
     try (var f = fixture()) {
-      Files.writeString(f.parent.resolve("cleanup-request"), CLEANUP_REQUEST);
+      Files.writeString(f.parent.resolve(FIXTURE_CLEANUP_REQUEST_EE39FE0F), CLEANUP_REQUEST);
       f.acl = new byte[] {1};
       assertThrows(IOException.class, () -> reader(f).readCleanupRequest());
       f.released();
@@ -496,15 +515,17 @@ final class RootBatchCredentialReaderTest {
   @Test
   void rbcr012CleanupReplayAfterBadCopyNeverFallsBackToSource() throws Exception {
     try (var f = fixture()) {
-      Path copy = f.parent.resolve("cleanup-request");
+      Path copy = f.parent.resolve(FIXTURE_CLEANUP_REQUEST_EE39FE0F);
       Files.writeString(copy, CLEANUP_REQUEST.replace("NKCLEAN1", "NKCLEAN2"));
       var subject = reader(f);
       assertThrows(IOException.class, subject::readCleanupRequest);
       Files.writeString(copy, CLEANUP_REQUEST);
       assertEquals(
-          "31100027-2222-4333-8444-555555555555", subject.readCleanupRequest().run().toString());
+          FIXTURE_31100027_2222_4333_8444_555555555555_2B6EB22D,
+          subject.readCleanupRequest().run().toString());
       assertEquals(
-          "31100027-2222-4333-8444-555555555555", subject.readCleanupRequest().run().toString());
+          FIXTURE_31100027_2222_4333_8444_555555555555_2B6EB22D,
+          subject.readCleanupRequest().run().toString());
       f.released();
     }
   }

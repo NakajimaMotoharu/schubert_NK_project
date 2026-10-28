@@ -36,6 +36,13 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** PT-OPS-RELEASE-001..008; literal SHA256 abc vector, real retained FD and independent faults. */
 final class StartupReleaseManifestTest {
+  private static final String FIXTURE_PRIVATE_D45CA6F9 = "PRIVATE";
+  private static final String FIXTURE_ABC_6CC43F85 = "abc";
+  private static final String FIXTURE_INO_4BE7C1E0 = "ino";
+  private static final String FIXTURE_CURRENT_694DF57A = "current";
+  private static final String FIXTURE_MODE_B6D5C2C3 = "mode";
+  private static final String FIXTURE_GID_0ACDD642 = "gid";
+  private static final String FIXTURE_SIZE_EB1E91E4 = "size";
   @TempDir Path temporary;
 
   @Test
@@ -113,7 +120,8 @@ final class StartupReleaseManifestTest {
             "0.1.0");
     var actual = f.subject().publicInformation(expectedDigest);
     assertEquals(expected, actual);
-    assertThrows(UnsupportedOperationException.class, () -> actual.put("secret", "PRIVATE"));
+    assertThrows(
+        UnsupportedOperationException.class, () -> actual.put("secret", FIXTURE_PRIVATE_D45CA6F9));
     assertTrue(f.calls.owned.isEmpty());
     assertEquals(f.calls.opened, f.calls.closed);
     assertThrows(IOException.class, () -> f.subject().publicInformation("0".repeat(64)));
@@ -121,7 +129,7 @@ final class StartupReleaseManifestTest {
     Files.writeString(f.manifest, json.replace("\"release\":\"v1\"", "\"release\":\"v2\""));
     String changed = f.subject().sha256();
     assertThrows(IOException.class, () -> f.subject().publicInformation(changed));
-    Files.writeString(f.manifest, "abc");
+    Files.writeString(f.manifest, FIXTURE_ABC_6CC43F85);
     assertThrows(
         IOException.class,
         () ->
@@ -206,7 +214,7 @@ final class StartupReleaseManifestTest {
     int selectors;
     int selectorChangeAt;
     int channelsClosed;
-    String changedKey = "ino";
+    String changedKey = FIXTURE_INO_4BE7C1E0;
     byte[] acl = {};
     boolean zeroRead;
     boolean shortRead;
@@ -228,9 +236,9 @@ final class StartupReleaseManifestTest {
       for (Path p : List.of(app, releases, release))
         Files.setPosixFilePermissions(p, PosixFilePermissions.fromString("rwxr-x---"));
       manifest = release.resolve("RELEASE-MANIFEST.json");
-      Files.writeString(manifest, "abc");
+      Files.writeString(manifest, FIXTURE_ABC_6CC43F85);
       Files.setPosixFilePermissions(manifest, PosixFilePermissions.fromString("rw-r-----"));
-      Files.createSymbolicLink(app.resolve("current"), release);
+      Files.createSymbolicLink(app.resolve(FIXTURE_CURRENT_694DF57A), release);
     }
 
     StartupReleaseManifest subject() {
@@ -239,33 +247,34 @@ final class StartupReleaseManifestTest {
 
     public Map<String, Object> attributes(Path held) throws IOException {
       if (unknown != null) throw unknown;
-      if (failAttributes) throw new IOException("PRIVATE");
+      if (failAttributes) throw new IOException(FIXTURE_PRIVATE_D45CA6F9);
       Map<String, Object> a = new HashMap<>(nio.attributes(held));
       a.put("uid", 0);
-      int mode = (Integer) a.get("mode");
-      a.put("gid", mode == 040755 || mode == 0120777 ? 0 : 986);
+      int mode = (Integer) a.get(FIXTURE_MODE_B6D5C2C3);
+      a.put(FIXTURE_GID_0ACDD642, mode == 040755 || mode == 0120777 ? 0 : 986);
       mutation.accept(a);
       if (++observations == changeAt) {
-        if (changedKey.equals("ino")) a.put("ino", (Long) a.get("ino") + 1);
+        if (changedKey.equals(FIXTURE_INO_4BE7C1E0))
+          a.put(FIXTURE_INO_4BE7C1E0, (Long) a.get(FIXTURE_INO_4BE7C1E0) + 1);
         else a.put(changedKey, FileTime.fromMillis(1));
       }
       return a;
     }
 
     public Path selector(Path held) throws IOException {
-      if (failSelector) throw new IOException("PRIVATE");
+      if (failSelector) throw new IOException(FIXTURE_PRIVATE_D45CA6F9);
       return ++selectors == selectorChangeAt ? releases.resolve("v2") : nio.selector(held);
     }
 
     public SeekableByteChannel open(Path held) throws IOException {
-      if (failOpen) throw new IOException("PRIVATE");
+      if (failOpen) throw new IOException(FIXTURE_PRIVATE_D45CA6F9);
       SeekableByteChannel source = nio.open(held);
       return new SeekableByteChannel() {
         int sizes;
         int reads;
 
         public int read(ByteBuffer b) throws IOException {
-          if (failRead) throw new IOException("PRIVATE");
+          if (failRead) throw new IOException(FIXTURE_PRIVATE_D45CA6F9);
           if (zeroRead) return 0;
           if (shortRead) return -1;
           if (oversizedRead) {
@@ -283,7 +292,7 @@ final class StartupReleaseManifestTest {
         public void close() throws IOException {
           source.close();
           channelsClosed++;
-          if (channelCloseFailure) throw new IOException("PRIVATE");
+          if (channelCloseFailure) throw new IOException(FIXTURE_PRIVATE_D45CA6F9);
         }
 
         public boolean isOpen() {
@@ -339,8 +348,8 @@ final class StartupReleaseManifestTest {
     assertEquals(Set.of(), f.calls.owned);
     assertEquals(f.calls.opened, f.calls.closed);
     assertEquals(1, f.channelsClosed);
-    assertEquals("abc", Files.readString(f.manifest));
-    assertEquals(f.release, Files.readSymbolicLink(f.app.resolve("current")));
+    assertEquals(FIXTURE_ABC_6CC43F85, Files.readString(f.manifest));
+    assertEquals(f.release, Files.readSymbolicLink(f.app.resolve(FIXTURE_CURRENT_694DF57A)));
   }
 
   @Test
@@ -362,21 +371,21 @@ final class StartupReleaseManifestTest {
             "/opt/schubert-nk/releases/" + "a".repeat(65)))
       assertThrows(IOException.class, () -> StartupReleaseManifest.version(Path.of(bad), opt));
     var f = new Fixture("selector");
-    Files.delete(f.app.resolve("current"));
-    Files.writeString(f.app.resolve("current"), "abc");
+    Files.delete(f.app.resolve(FIXTURE_CURRENT_694DF57A));
+    Files.writeString(f.app.resolve(FIXTURE_CURRENT_694DF57A), FIXTURE_ABC_6CC43F85);
     denied(f);
-    Files.delete(f.app.resolve("current"));
-    Files.createSymbolicLink(f.app.resolve("current"), Path.of("releases/v1"));
+    Files.delete(f.app.resolve(FIXTURE_CURRENT_694DF57A));
+    Files.createSymbolicLink(f.app.resolve(FIXTURE_CURRENT_694DF57A), Path.of("releases/v1"));
     denied(f);
-    Files.delete(f.app.resolve("current"));
-    Files.createSymbolicLink(f.app.resolve("current"), f.release);
+    Files.delete(f.app.resolve(FIXTURE_CURRENT_694DF57A));
+    Files.createSymbolicLink(f.app.resolve(FIXTURE_CURRENT_694DF57A), f.release);
     Files.move(f.release, f.releases.resolve("other"));
     Files.createSymbolicLink(f.release, f.releases.resolve("other"));
     denied(f);
     Files.delete(f.release);
     Files.move(f.releases.resolve("other"), f.release);
     Files.delete(f.manifest);
-    Files.createSymbolicLink(f.manifest, f.app.resolve("current"));
+    Files.createSymbolicLink(f.manifest, f.app.resolve(FIXTURE_CURRENT_694DF57A));
     denied(f);
   }
 
@@ -384,7 +393,16 @@ final class StartupReleaseManifestTest {
   void release003EveryTypedAttributeOwnerModeLinkAndAclRejection() throws Exception {
     var f = new Fixture("metadata");
     for (String key :
-        List.of("uid", "gid", "mode", "nlink", "dev", "ino", "size", "lastModifiedTime", "ctime")) {
+        List.of(
+            "uid",
+            FIXTURE_GID_0ACDD642,
+            FIXTURE_MODE_B6D5C2C3,
+            "nlink",
+            "dev",
+            FIXTURE_INO_4BE7C1E0,
+            FIXTURE_SIZE_EB1E91E4,
+            "lastModifiedTime",
+            "ctime")) {
       f.mutation = a -> a.remove(key);
       denied(f);
       f.mutation = a -> a.put(key, "wrong");
@@ -392,24 +410,38 @@ final class StartupReleaseManifestTest {
     }
     for (var bad :
         Map.<String, Object>of(
-                "uid", 1, "gid", 1, "mode", 040777, "nlink", 0, "dev", 0L, "ino", 0L, "size", -1L)
+                "uid",
+                1,
+                FIXTURE_GID_0ACDD642,
+                1,
+                FIXTURE_MODE_B6D5C2C3,
+                040777,
+                "nlink",
+                0,
+                "dev",
+                0L,
+                FIXTURE_INO_4BE7C1E0,
+                0L,
+                FIXTURE_SIZE_EB1E91E4,
+                -1L)
             .entrySet()) {
       f.mutation = a -> a.put(bad.getKey(), bad.getValue());
       denied(f);
     }
     f.mutation =
         a -> {
-          if ((Integer) a.get("mode") == 0120777) a.put("nlink", 2);
+          if ((Integer) a.get(FIXTURE_MODE_B6D5C2C3) == 0120777) a.put("nlink", 2);
         };
     denied(f);
     f.mutation =
         a -> {
-          if ((Integer) a.get("mode") == 0100640) a.put("size", 0L);
+          if ((Integer) a.get(FIXTURE_MODE_B6D5C2C3) == 0100640) a.put(FIXTURE_SIZE_EB1E91E4, 0L);
         };
     denied(f);
     f.mutation =
         a -> {
-          if ((Integer) a.get("mode") == 0100640) a.put("size", 1_048_577L);
+          if ((Integer) a.get(FIXTURE_MODE_B6D5C2C3) == 0100640)
+            a.put(FIXTURE_SIZE_EB1E91E4, 1_048_577L);
         };
     denied(f);
     f.mutation = a -> {};
@@ -443,13 +475,22 @@ final class StartupReleaseManifestTest {
   @Test
   void release005ReadLengthEofBoundaryAndIoFailures() throws Exception {
     for (String fault :
-        List.of("zero", "short", "over", "size", "attr", "selector", "read", "open", "close")) {
+        List.of(
+            "zero",
+            "short",
+            "over",
+            FIXTURE_SIZE_EB1E91E4,
+            "attr",
+            "selector",
+            "read",
+            "open",
+            "close")) {
       var f = new Fixture(fault);
       switch (fault) {
         case "zero" -> f.zeroRead = true;
         case "short" -> f.shortRead = true;
         case "over" -> f.oversizedRead = true;
-        case "size" -> f.alteredSize = true;
+        case FIXTURE_SIZE_EB1E91E4 -> f.alteredSize = true;
         case "attr" -> f.failAttributes = true;
         case "selector" -> f.failSelector = true;
         case "read" -> f.failRead = true;
@@ -462,7 +503,7 @@ final class StartupReleaseManifestTest {
     var mismatched = new Fixture("sizeinitial");
     mismatched.mutation =
         a -> {
-          if ((Integer) a.get("mode") == 0100640) a.put("size", 4L);
+          if ((Integer) a.get(FIXTURE_MODE_B6D5C2C3) == 0100640) a.put(FIXTURE_SIZE_EB1E91E4, 4L);
         };
     denied(mismatched);
     var bound = new Fixture("bound");
@@ -522,7 +563,7 @@ final class StartupReleaseManifestTest {
     f.mutation =
         a -> {
           a.put("dev", -1L);
-          a.put("ino", -1L);
+          a.put(FIXTURE_INO_4BE7C1E0, -1L);
         };
     assertEquals(64, f.subject().sha256().length());
     var maxGroup =
@@ -534,7 +575,7 @@ final class StartupReleaseManifestTest {
             new StartupReleaseManifest.Io() {
               public Map<String, Object> attributes(Path p) throws IOException {
                 var a = f.attributes(p);
-                if ((Integer) a.get("gid") == 986) a.put("gid", -2);
+                if ((Integer) a.get(FIXTURE_GID_0ACDD642) == 986) a.put(FIXTURE_GID_0ACDD642, -2);
                 return a;
               }
 
@@ -567,7 +608,7 @@ final class StartupReleaseManifestTest {
     var f = new Fixture("nativeio");
     var io = new StartupReleaseManifest.NioIo();
     assertEquals(f.release, io.selector(f.app));
-    assertEquals(0100640, io.attributes(f.manifest).get("mode"));
+    assertEquals(0100640, io.attributes(f.manifest).get(FIXTURE_MODE_B6D5C2C3));
     try (var channel = io.open(f.manifest)) {
       var bytes = ByteBuffer.allocate(3);
       assertEquals(3, channel.read(bytes));

@@ -25,6 +25,7 @@ import org.junit.jupiter.api.Test;
 
 /** PG232/PT-JMS-017: closed Log-path layout registration, independent dispatch markers. */
 final class LogPathSyncRequestProcessorTest {
+  private static final String FIXTURE_LGNREQ01_217C66A4 = "LGNREQ01";
   private static final byte[] LOGIN_REPLY = "login-reply".getBytes(StandardCharsets.US_ASCII);
   private static final byte[] GAME_REPLY = "game-reply".getBytes(StandardCharsets.US_ASCII);
   private static final byte[] LOG_REPLY = "log-reply".getBytes(StandardCharsets.US_ASCII);
@@ -48,7 +49,7 @@ final class LogPathSyncRequestProcessorTest {
               logs.incrementAndGet();
               return LOG_REPLY;
             });
-    assertArrayEquals(LOGIN_REPLY, router.process(request("LGNREQ01", 384)));
+    assertArrayEquals(LOGIN_REPLY, router.process(request(FIXTURE_LGNREQ01_217C66A4, 384)));
     assertArrayEquals(GAME_REPLY, router.process(request("GAMREQ01", 0)));
     assertArrayEquals(LOG_REPLY, router.process(request("LGSREQ01", 656)));
     assertEquals(1, login.get());
@@ -81,7 +82,8 @@ final class LogPathSyncRequestProcessorTest {
         NullPointerException.class, () -> new LogPathSyncRequestProcessor(reply, reply, null));
     var router = new LogPathSyncRequestProcessor(ignored -> null, reply, reply);
     assertThrows(NullPointerException.class, () -> router.process(null));
-    assertThrows(NullPointerException.class, () -> router.process(request("LGNREQ01", 384)));
+    assertThrows(
+        NullPointerException.class, () -> router.process(request(FIXTURE_LGNREQ01_217C66A4, 384)));
   }
 
   @Test
@@ -100,7 +102,8 @@ final class LogPathSyncRequestProcessorTest {
     assertEquals(
         permanent,
         assertThrows(
-            PermanentProtocolException.class, () -> router.process(request("LGNREQ01", 384))));
+            PermanentProtocolException.class,
+            () -> router.process(request(FIXTURE_LGNREQ01_217C66A4, 384))));
     assertEquals(
         retryable,
         assertThrows(
@@ -135,7 +138,7 @@ final class LogPathSyncRequestProcessorTest {
                 () ->
                     router.process(
                         switch (selected) {
-                          case 0 -> request("LGNREQ01", 384);
+                          case 0 -> request(FIXTURE_LGNREQ01_217C66A4, 384);
                           case 1 -> request("GAMREQ01", 0);
                           default -> request("LGSREQ01", 656);
                         })));
@@ -158,7 +161,7 @@ final class LogPathSyncRequestProcessorTest {
   private static WireMessage<FixedPayload> request(String layout, int dataLength) {
     UUID id = UUID.fromString("00000000-0000-0000-0000-000000000001");
     var context =
-        layout.equals("LGNREQ01")
+        layout.equals(FIXTURE_LGNREQ01_217C66A4)
             ? Optional.<AuthenticationContext>empty()
             : Optional.of(AuthenticationContext.of("a".repeat(64)));
     var header =

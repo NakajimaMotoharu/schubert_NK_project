@@ -22,6 +22,7 @@ import org.junit.jupiter.api.Test;
 
 /** NK-OPS-001/OPS009/UI251/SS341/343/SSC115/BUG325/YKT257; PT-OPS-MMAIN009-010. */
 final class MorningBackupObservedCompletionTest {
+  private static final String FIXTURE_UNUSED_PORT_4AA9831A = "unused port";
   private static final Instant BEGIN = Instant.parse("2026-09-30T03:30:00Z");
 
   private static MorningDatabaseSession.BackupBegins begins() {
@@ -166,20 +167,20 @@ final class MorningBackupObservedCompletionTest {
     IOException denied;
 
     public void requireUnused(BatchRun run) {
-      throw new AssertionError("unused port");
+      throw new AssertionError(FIXTURE_UNUSED_PORT_4AA9831A);
     }
 
     public void requireConsistent(BatchRun run) {
-      throw new AssertionError("unused port");
+      throw new AssertionError(FIXTURE_UNUSED_PORT_4AA9831A);
     }
 
     public MorningDatabaseSession.BackupBegins beginBackup(
         BatchRun run, Instant now, boolean recover) {
-      throw new AssertionError("unused port");
+      throw new AssertionError(FIXTURE_UNUSED_PORT_4AA9831A);
     }
 
     public <T> T handoffCleanup(MorningDatabaseSession.CleanupHandoff<T> work) {
-      throw new AssertionError("unused port");
+      throw new AssertionError(FIXTURE_UNUSED_PORT_4AA9831A);
     }
 
     public void failBackup(

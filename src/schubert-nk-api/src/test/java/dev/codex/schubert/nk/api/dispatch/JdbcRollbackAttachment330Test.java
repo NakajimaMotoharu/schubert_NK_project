@@ -19,6 +19,11 @@ import org.junit.jupiter.api.Timeout;
 /** NK-MSG-002; SS312/324/354; SSC329330/BUG1592; PT-TX-ATTACH330001..003; no I/O. */
 @Timeout(value = 5, threadMode = Timeout.ThreadMode.SEPARATE_THREAD)
 final class JdbcRollbackAttachment330Test {
+  private static final String FIXTURE_ACQUIRE_1585EBC6 = "acquire";
+  private static final String FIXTURE_HANDLE_A8507210 = "handle";
+  private static final String FIXTURE_ROLLBACK_3770B198 = "rollback";
+  private static final String FIXTURE_CLOSE_97959247 = "close";
+
   @Test
   void attachment330001DisabledPrimaryCannotLoseRollbackFatalAndMustClose() {
     var events = new ArrayList<String>();
@@ -32,7 +37,14 @@ final class JdbcRollbackAttachment330Test {
             AssertionError.class,
             () -> processor.process(ApiSyncRequestDispatcherTest.request("LGNREQ01"))));
     assertEquals(0, primary.getSuppressed().length);
-    assertEquals(List.of("acquire", "auto:false", "handle", "rollback", "close"), events);
+    assertEquals(
+        List.of(
+            FIXTURE_ACQUIRE_1585EBC6,
+            "auto:false",
+            FIXTURE_HANDLE_A8507210,
+            FIXTURE_ROLLBACK_3770B198,
+            FIXTURE_CLOSE_97959247),
+        events);
   }
 
   @Test
@@ -47,7 +59,14 @@ final class JdbcRollbackAttachment330Test {
             AssertionError.class,
             () -> processor.process(ApiSyncRequestDispatcherTest.request("LGNREQ01"))));
     assertEquals(0, primary.getSuppressed().length);
-    assertEquals(List.of("acquire", "auto:false", "handle", "rollback", "close"), events);
+    assertEquals(
+        List.of(
+            FIXTURE_ACQUIRE_1585EBC6,
+            "auto:false",
+            FIXTURE_HANDLE_A8507210,
+            FIXTURE_ROLLBACK_3770B198,
+            FIXTURE_CLOSE_97959247),
+        events);
   }
 
   @Test
@@ -66,7 +85,14 @@ final class JdbcRollbackAttachment330Test {
             DisabledError.class,
             () -> processor.process(ApiSyncRequestDispatcherTest.request("LGNREQ01"))));
     assertEquals(0, fatal.getSuppressed().length);
-    assertEquals(List.of("acquire", "auto:false", "handle", "rollback", "close"), events);
+    assertEquals(
+        List.of(
+            FIXTURE_ACQUIRE_1585EBC6,
+            "auto:false",
+            FIXTURE_HANDLE_A8507210,
+            FIXTURE_ROLLBACK_3770B198,
+            FIXTURE_CLOSE_97959247),
+        events);
   }
 
   private static JdbcSyncRequestProcessor processor(
@@ -82,12 +108,12 @@ final class JdbcRollbackAttachment330Test {
                 (proxy, method, args) -> {
                   switch (method.getName()) {
                     case "setAutoCommit" -> events.add("auto:" + args[0]);
-                    case "rollback" -> {
-                      events.add("rollback");
+                    case FIXTURE_ROLLBACK_3770B198 -> {
+                      events.add(FIXTURE_ROLLBACK_3770B198);
                       throw rollbackFailure;
                     }
-                    case "close" -> {
-                      events.add("close");
+                    case FIXTURE_CLOSE_97959247 -> {
+                      events.add(FIXTURE_CLOSE_97959247);
                       if (closeFailure != null) throw closeFailure;
                     }
                     default ->
@@ -104,7 +130,7 @@ final class JdbcRollbackAttachment330Test {
                 (proxy, method, args) -> {
                   if (!method.getName().equals("getConnection"))
                     throw new UnsupportedOperationException("unexpected source fixture call");
-                  events.add("acquire");
+                  events.add(FIXTURE_ACQUIRE_1585EBC6);
                   return connection;
                 });
     return new JdbcSyncRequestProcessor(
@@ -112,7 +138,7 @@ final class JdbcRollbackAttachment330Test {
         (c, request, at) -> {
           assertSame(connection, c);
           assertEquals(Instant.EPOCH, at);
-          events.add("handle");
+          events.add(FIXTURE_HANDLE_A8507210);
           if (primary instanceof RuntimeException runtime) throw runtime;
           if (primary instanceof Error fatal) throw fatal;
           throw new AssertionError("unsupported fixture primary");

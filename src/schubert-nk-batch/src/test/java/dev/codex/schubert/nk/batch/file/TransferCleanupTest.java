@@ -23,6 +23,9 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** SSC118/TRANSFER001..003: real Linux retained FDs, independent fixed files/counts. */
 final class TransferCleanupTest {
+  private static final String FIXTURE_TRANSFER_77080795 = "transfer";
+  private static final String FIXTURE_20260929_B9A07E08 = "20260929";
+  private static final String FIXTURE_20260928_00F30CE2 = "20260928";
   @TempDir Path fixture;
   private static final Instant CUTOFF = Instant.parse("2026-09-30T00:00:00Z");
   private static final String A = "11111111-2222-4333-8444-555555555555.part";
@@ -30,11 +33,11 @@ final class TransferCleanupTest {
 
   @Test
   void transfer001DeletesOldRegularFilesAndOnlyEmptyCanonicalDatesKeepsRoot() throws Exception {
-    Path root = directory(fixture.resolve("transfer"));
-    Path date = directory(root.resolve("20260929"));
+    Path root = directory(fixture.resolve(FIXTURE_TRANSFER_77080795));
+    Path date = directory(root.resolve(FIXTURE_20260929_B9A07E08));
     file(date.resolve(A), new byte[] {1, 2, 3}, CUTOFF.minusSeconds(1));
     file(date.resolve(B), new byte[] {4, 5}, CUTOFF.minusSeconds(2));
-    directory(root.resolve("20260928"));
+    directory(root.resolve(FIXTURE_20260928_00F30CE2));
     var guard = new AtomicInteger();
     try (var held = OwnedTransferDirectory.open(LinuxDirectoryCalls.create(), root)) {
       var outcome = service(held, root, guard::incrementAndGet).execute(CUTOFF);
@@ -52,8 +55,8 @@ final class TransferCleanupTest {
 
   @Test
   void transfer002KeepsBoundaryFutureUnknownSymlinkHardlinkBadModeAndDepthThree() throws Exception {
-    Path root = directory(fixture.resolve("transfer"));
-    Path date = directory(root.resolve("20260929"));
+    Path root = directory(fixture.resolve(FIXTURE_TRANSFER_77080795));
+    Path date = directory(root.resolve(FIXTURE_20260929_B9A07E08));
     file(date.resolve(A), new byte[] {1, 2, 3}, CUTOFF.minusSeconds(1));
     file(date.resolve(B), new byte[] {4, 5}, CUTOFF);
     file(
@@ -70,7 +73,7 @@ final class TransferCleanupTest {
             new byte[] {10},
             CUTOFF.minusSeconds(1));
     Files.setPosixFilePermissions(wrong, PosixFilePermissions.fromString("rw-------"));
-    Path nested = directory(date.resolve("20260928"));
+    Path nested = directory(date.resolve(FIXTURE_20260928_00F30CE2));
     file(nested.resolve(A), new byte[] {11}, CUTOFF.minusSeconds(1));
     file(
         date.resolve("AAAAAAAA-2222-4333-8444-555555555555.part"),
@@ -78,7 +81,7 @@ final class TransferCleanupTest {
         CUTOFF.minusSeconds(1));
     directory(root.resolve("20260230"));
     file(root.resolve("note"), new byte[] {13}, CUTOFF.minusSeconds(1));
-    Files.createSymbolicLink(root.resolve("20260928"), fixture);
+    Files.createSymbolicLink(root.resolve(FIXTURE_20260928_00F30CE2), fixture);
     try (var held = OwnedTransferDirectory.open(LinuxDirectoryCalls.create(), root)) {
       var result = service(held, root, () -> {}).execute(CUTOFF);
       assertEquals(new TransferCleanup.Outcome(1, 1, 0, 11, 3), result);
@@ -89,19 +92,19 @@ final class TransferCleanupTest {
     assertTrue(Files.exists(date.resolve(B)));
     assertArrayEquals(new byte[] {8, 9}, Files.readAllBytes(outside));
     assertArrayEquals(new byte[] {11}, Files.readAllBytes(nested.resolve(A)));
-    assertTrue(Files.isSymbolicLink(root.resolve("20260928")));
+    assertTrue(Files.isSymbolicLink(root.resolve(FIXTURE_20260928_00F30CE2)));
   }
 
   @Test
   void transfer003RetainedRootIsNotRedirectedAndFailedGuardDoesNotDelete() throws Exception {
-    Path root = directory(fixture.resolve("transfer"));
-    Path date = directory(root.resolve("20260929"));
+    Path root = directory(fixture.resolve(FIXTURE_TRANSFER_77080795));
+    Path date = directory(root.resolve(FIXTURE_20260929_B9A07E08));
     file(date.resolve(A), new byte[] {1, 2, 3}, CUTOFF.minusSeconds(1));
     try (var held = OwnedTransferDirectory.open(LinuxDirectoryCalls.create(), root)) {
       Path old = fixture.resolve("held-old");
       Files.move(root, old);
       directory(root);
-      Path newDate = directory(root.resolve("20260929"));
+      Path newDate = directory(root.resolve(FIXTURE_20260929_B9A07E08));
       file(newDate.resolve(A), new byte[] {7, 8}, CUTOFF.minusSeconds(1));
       var failed = new AtomicInteger();
       assertThrows(
@@ -116,7 +119,8 @@ final class TransferCleanupTest {
                       })
                   .execute(CUTOFF));
       assertArrayEquals(
-          new byte[] {1, 2, 3}, Files.readAllBytes(old.resolve("20260929").resolve(A)));
+          new byte[] {1, 2, 3},
+          Files.readAllBytes(old.resolve(FIXTURE_20260929_B9A07E08).resolve(A)));
       assertEquals(
           new TransferCleanup.Outcome(1, 1, 0, 0, 3), service(held, old, () -> {}).execute(CUTOFF));
       assertArrayEquals(new byte[] {7, 8}, Files.readAllBytes(newDate.resolve(A)));
@@ -126,7 +130,7 @@ final class TransferCleanupTest {
 
   @Test
   void nullInvalidIdentityAndRootModeRefuseWithoutMutation() throws Exception {
-    Path root = directory(fixture.resolve("transfer"));
+    Path root = directory(fixture.resolve(FIXTURE_TRANSFER_77080795));
     try (var held = OwnedTransferDirectory.open(LinuxDirectoryCalls.create(), root)) {
       var security = LinuxInodeSecurity.create();
       assertThrows(
@@ -171,7 +175,7 @@ final class TransferCleanupTest {
   void transfer3048001RootIdentityAclAndReadOnlyRefuseBeforeDeletingAnyByte() throws Exception {
     for (String fault : new String[] {"uid", "gid", "nullAcl", "acl", "readonly"}) {
       Path root = directory(fixture.resolve("transfer-" + fault));
-      Path date = directory(root.resolve("20260929"));
+      Path date = directory(root.resolve(FIXTURE_20260929_B9A07E08));
       Path original = file(date.resolve(A), new byte[] {17, 23, 41}, CUTOFF.minusSeconds(1));
       long uid = Integer.toUnsignedLong((Integer) Files.getAttribute(root, "unix:uid"));
       long gid = Integer.toUnsignedLong((Integer) Files.getAttribute(root, "unix:gid"));

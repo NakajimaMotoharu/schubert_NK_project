@@ -23,6 +23,9 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** SSC095/PG312/PT-DB-SCHEMA001..008. Isolated PG; literal role/row/catalog oracle. */
 final class StartupSchemaProjectionTest {
+  private static final String FIXTURE_SCHUBERT_APP_5AB151CF = "schubert_app";
+  private static final String FIXTURE_SCHUBERT_WEB_SESSION_1E78D426 = "schubert_web_session";
+  private static final String FIXTURE_SCHUBERT_BATCH_F9C88479 = "schubert_batch";
   @TempDir static Path root;
   private static ApiLogDatabaseFixture db;
   private static String url;
@@ -50,7 +53,7 @@ final class StartupSchemaProjectionTest {
   @Test
   void dbSchema001ExactProfileIncludesSchemaCreation() throws Exception {
     assertEquals(VERSIONS, MigrationInventory.VERSIONS);
-    try (var c = role("schubert_app");
+    try (var c = role(FIXTURE_SCHUBERT_APP_5AB151CF);
         var s = c.createStatement();
         var rows = s.executeQuery(QUERY)) {
       assertTrue(rows.next());
@@ -108,7 +111,11 @@ final class StartupSchemaProjectionTest {
 
   @Test
   void dbSchema003OnlyExactRuntimeRolesMayExecute() throws Exception {
-    for (String name : List.of("schubert_app", "schubert_web_session", "schubert_batch"))
+    for (String name :
+        List.of(
+            FIXTURE_SCHUBERT_APP_5AB151CF,
+            FIXTURE_SCHUBERT_WEB_SESSION_1E78D426,
+            FIXTURE_SCHUBERT_BATCH_F9C88479))
       try (var c = role(name);
           var s = c.createStatement();
           var r = s.executeQuery(QUERY)) {
@@ -136,7 +143,11 @@ final class StartupSchemaProjectionTest {
 
   @Test
   void dbSchema004NoDirectHistoryOrMetadataCreateOrOwnerEscalation() throws Exception {
-    for (String name : List.of("schubert_app", "schubert_web_session", "schubert_batch"))
+    for (String name :
+        List.of(
+            FIXTURE_SCHUBERT_APP_5AB151CF,
+            FIXTURE_SCHUBERT_WEB_SESSION_1E78D426,
+            FIXTURE_SCHUBERT_BATCH_F9C88479))
       try (var c = role(name)) {
         denied(c, "select * from schubert_meta.flyway_schema_history");
         denied(c, "create table schubert_meta.pgpt_forbidden(id integer)");
@@ -151,7 +162,7 @@ final class StartupSchemaProjectionTest {
           assertFalse(r.getBoolean(3));
         }
       }
-    try (var c = role("schubert_web_session")) {
+    try (var c = role(FIXTURE_SCHUBERT_WEB_SESSION_1E78D426)) {
       denied(c, "select * from schubert.users");
       try (var s = c.createStatement();
           var r = s.executeQuery("select has_schema_privilege(current_user,'schubert','USAGE')")) {
@@ -186,7 +197,7 @@ final class StartupSchemaProjectionTest {
         c.rollback();
       }
     }
-    try (var c = role("schubert_batch");
+    try (var c = role(FIXTURE_SCHUBERT_BATCH_F9C88479);
         var s = c.createStatement();
         var r =
             s.executeQuery(
@@ -198,7 +209,7 @@ final class StartupSchemaProjectionTest {
 
   @Test
   void dbSchema006TemporaryShadowCannotChangeQualifiedProjection() throws Exception {
-    try (var c = role("schubert_batch");
+    try (var c = role(FIXTURE_SCHUBERT_BATCH_F9C88479);
         var s = c.createStatement()) {
       s.execute("create temp table flyway_schema_history(installed_rank integer)");
       s.execute("insert into flyway_schema_history values(9999)");
@@ -215,7 +226,7 @@ final class StartupSchemaProjectionTest {
 
   @Test
   void dbSchema007ReadOnlyTransactionAndNoBusinessWrites() throws Exception {
-    try (var c = role("schubert_batch")) {
+    try (var c = role(FIXTURE_SCHUBERT_BATCH_F9C88479)) {
       c.setReadOnly(true);
       c.setAutoCommit(false);
       try (var s = c.createStatement();
@@ -239,7 +250,11 @@ final class StartupSchemaProjectionTest {
     try (var pool = java.util.concurrent.Executors.newVirtualThreadPerTaskExecutor()) {
       var barrier = new java.util.concurrent.CyclicBarrier(3);
       var tasks = new ArrayList<java.util.concurrent.Future<Integer>>();
-      for (String name : List.of("schubert_app", "schubert_web_session", "schubert_batch"))
+      for (String name :
+          List.of(
+              FIXTURE_SCHUBERT_APP_5AB151CF,
+              FIXTURE_SCHUBERT_WEB_SESSION_1E78D426,
+              FIXTURE_SCHUBERT_BATCH_F9C88479))
         tasks.add(
             pool.submit(
                 () -> {

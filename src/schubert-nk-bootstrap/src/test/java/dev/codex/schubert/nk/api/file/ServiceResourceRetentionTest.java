@@ -16,6 +16,11 @@ import org.junit.jupiter.api.Test;
 
 /** PT-NHOLD316001; literal release/outer-frame oracles, no DB/Root/service credentials. */
 final class ServiceResourceRetentionTest {
+  private static final String FIXTURE_PUBLIC_FIXTURE_49B9B929 = "public fixture";
+  private static final String FIXTURE_CLOSE_3CA44CAE = "CLOSE";
+  private static final String FIXTURE_INTERVAL_CONFIRMED_54BC4400 = "INTERVAL_CONFIRMED";
+  private static final String FIXTURE_RUNTIME_2D52CD90 = "runtime";
+
   @Test
   @org.junit.jupiter.api.parallel.ResourceLock(org.junit.jupiter.api.parallel.Resources.SYSTEM_ERR)
   void hold318004PreparedDiagnosticUsesLiteralAndChecksNullBeforeSink() throws Exception {
@@ -106,7 +111,7 @@ final class ServiceResourceRetentionTest {
     for (boolean retained : List.of(false, true))
       assertThrows(
           NullPointerException.class, () -> ServiceProcessResources.ownedRelease(null, retained));
-    var marker = new IOException("public fixture");
+    var marker = new IOException(FIXTURE_PUBLIC_FIXTURE_49B9B929);
     ResourceScope.Release<Object> failing =
         ignored -> {
           throw marker;
@@ -153,7 +158,7 @@ final class ServiceResourceRetentionTest {
       for (int failure = 0; failure < 3; failure++)
         OwnedRetentionProcess.assertHeld(
             Driver.class,
-            List.of("CLOSE", "INTERVAL_CONFIRMED"),
+            List.of(FIXTURE_CLOSE_3CA44CAE, FIXTURE_INTERVAL_CONFIRMED_54BC4400),
             Integer.toString(style),
             Integer.toString(failure),
             Boolean.toString(failure != 0));
@@ -161,29 +166,37 @@ final class ServiceResourceRetentionTest {
 
   @Test
   void hold318001DiagnosticFailureDoesNotUnwindTheOriginalFrame() throws Exception {
-    for (String kind : List.of("runtime", "error"))
+    for (String kind : List.of(FIXTURE_RUNTIME_2D52CD90, "error"))
       OwnedRetentionProcess.assertHeldWhenDiagnosticUnavailable(
           DiagnosticDriver.class,
-          List.of("CLOSE", "DIAGNOSTIC_FAILED", "INTERVAL_CONFIRMED"),
+          List.of(FIXTURE_CLOSE_3CA44CAE, "DIAGNOSTIC_FAILED", FIXTURE_INTERVAL_CONFIRMED_54BC4400),
           kind);
   }
 
   @Test
   void hold318002TickFailureWaitsAFullFallbackIntervalDespiteInterrupts() throws Exception {
-    for (String kind : List.of("runtime", "error"))
+    for (String kind : List.of(FIXTURE_RUNTIME_2D52CD90, "error"))
       OwnedRetentionProcess.assertHeld(
           ObservationDriver.class,
-          List.of("CLOSE", "TICK_FAILED", "TICK_RETRY_DELAY_CONFIRMED", "INTERVAL_CONFIRMED"),
+          List.of(
+              FIXTURE_CLOSE_3CA44CAE,
+              "TICK_FAILED",
+              "TICK_RETRY_DELAY_CONFIRMED",
+              FIXTURE_INTERVAL_CONFIRMED_54BC4400),
           "tick",
           kind);
   }
 
   @Test
   void hold318003FallbackFailureStillCannotReleaseTheOuterOwner() throws Exception {
-    for (String kind : List.of("runtime", "error"))
+    for (String kind : List.of(FIXTURE_RUNTIME_2D52CD90, "error"))
       OwnedRetentionProcess.assertHeld(
           ObservationDriver.class,
-          List.of("CLOSE", "TICK_FAILED", "FALLBACK_FAILED", "INTERVAL_CONFIRMED"),
+          List.of(
+              FIXTURE_CLOSE_3CA44CAE,
+              "TICK_FAILED",
+              "FALLBACK_FAILED",
+              FIXTURE_INTERVAL_CONFIRMED_54BC4400),
           "fallback",
           kind);
   }
@@ -193,7 +206,7 @@ final class ServiceResourceRetentionTest {
       OwnedRetentionProcess.deadline();
       boolean fallbackFailure = arguments[0].equals("fallback");
       Throwable marker =
-          arguments[1].equals("runtime")
+          arguments[1].equals(FIXTURE_RUNTIME_2D52CD90)
               ? new IllegalStateException("fixture observation")
               : new AssertionError("fixture observation");
       var attempts = new AtomicInteger();
@@ -244,7 +257,7 @@ final class ServiceResourceRetentionTest {
       try {
         ServiceProcessResources.ownedRelease(
                 (Object ignored) -> {
-                  System.out.println("CLOSE");
+                  System.out.println(FIXTURE_CLOSE_3CA44CAE);
                   OwnedRetentionProcess.observeInterval(owner);
                   owner.interrupt();
                   throw new IOException("fixture release");
@@ -275,7 +288,7 @@ final class ServiceResourceRetentionTest {
             public void println(String message) {
               assertEquals("service resource release unconfirmed", message);
               System.out.println("DIAGNOSTIC_FAILED");
-              if (arguments[0].equals("runtime"))
+              if (arguments[0].equals(FIXTURE_RUNTIME_2D52CD90))
                 throw new IllegalStateException("fixture diagnostic");
               throw new AssertionError("fixture diagnostic");
             }
@@ -284,7 +297,7 @@ final class ServiceResourceRetentionTest {
         try {
           ServiceProcessResources.ownedRelease(
                   (Object ignored) -> {
-                    System.out.println("CLOSE");
+                    System.out.println(FIXTURE_CLOSE_3CA44CAE);
                     OwnedRetentionProcess.observeInterval(Thread.currentThread());
                     throw new IOException("fixture release");
                   },
@@ -306,13 +319,13 @@ final class ServiceResourceRetentionTest {
       boolean interrupted = Boolean.parseBoolean(arguments[2]);
       Closeable failing =
           () -> {
-            System.out.println("CLOSE");
+            System.out.println(FIXTURE_CLOSE_3CA44CAE);
             OwnedRetentionProcess.observeInterval(Thread.currentThread());
             if (interrupted) Thread.currentThread().interrupt();
             switch (kind) {
-              case 0 -> throw new IOException("public fixture");
-              case 1 -> throw new IllegalStateException("public fixture");
-              default -> throw new AssertionError("public fixture");
+              case 0 -> throw new IOException(FIXTURE_PUBLIC_FIXTURE_49B9B929);
+              case 1 -> throw new IllegalStateException(FIXTURE_PUBLIC_FIXTURE_49B9B929);
+              default -> throw new AssertionError(FIXTURE_PUBLIC_FIXTURE_49B9B929);
             }
           };
       try {

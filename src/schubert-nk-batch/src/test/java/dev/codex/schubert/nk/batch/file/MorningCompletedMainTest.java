@@ -20,6 +20,7 @@ import org.junit.jupiter.api.Test;
 
 /** MAIN455001/002 typed completion after all-scope return, not native execution credit. */
 final class MorningCompletedMainTest {
+  private static final String FIXTURE_RESUME_EF1497F0 = "--resume";
   static final UUID RUN = UUID.fromString("00000000-0000-4000-8000-000000000455");
   static final MaintenanceActivation ACTIVATION =
       new MaintenanceActivation(
@@ -46,7 +47,7 @@ final class MorningCompletedMainTest {
     assertEquals(
         10,
         MorningProcessMain.runCompleted(
-            new String[] {"--resume", RUN.toString()},
+            new String[] {FIXTURE_RESUME_EF1497F0, RUN.toString()},
             (budget, run) -> {
               assertEquals(Optional.of(RUN), run);
               return new MaintenanceCompletion(
@@ -103,11 +104,11 @@ final class MorningCompletedMainTest {
     for (String[] args :
         List.of(
             new String[] {"x"},
-            new String[] {"--resume"},
-            new String[] {"--resume", "00000000-0000-0000-0000-000000000000"},
-            new String[] {"--resume", "invalid"},
-            new String[] {"--resume", RUN.toString(), "x"},
-            new String[] {"--resume", null},
+            new String[] {FIXTURE_RESUME_EF1497F0},
+            new String[] {FIXTURE_RESUME_EF1497F0, "00000000-0000-0000-0000-000000000000"},
+            new String[] {FIXTURE_RESUME_EF1497F0, "invalid"},
+            new String[] {FIXTURE_RESUME_EF1497F0, RUN.toString(), "x"},
+            new String[] {FIXTURE_RESUME_EF1497F0, null},
             new String[] {null, RUN.toString()})) {
       assertEquals(
           70,

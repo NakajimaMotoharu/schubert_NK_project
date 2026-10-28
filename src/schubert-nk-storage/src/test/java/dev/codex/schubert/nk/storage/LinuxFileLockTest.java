@@ -34,6 +34,14 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** NK-OPS-001/PT-OPS-FLOCK-001..008; SS311/341/343; actual isolated Linux flock interop. */
 final class LinuxFileLockTest {
+  private static final String FIXTURE_LOCK_E9DEB047 = "lock";
+  private static final String FIXTURE_PROC_SELF_FD_9_A033018C = "/proc/self/fd/9";
+  private static final String FIXTURE_OPEN_35FF74AE = "open";
+  private static final String FIXTURE_FLOCK_17_54971FDC = "flock:17";
+  private static final String FIXTURE_CLOSE_17_F1422F88 = "close:17";
+  private static final String FIXTURE_AMD64_58D0BD71 = "amd64";
+  private static final String FIXTURE_LINUX_1CA133AF = "Linux";
+  private static final String FIXTURE_ORIGINAL_4D609353 = "original";
   @TempDir Path root;
   private static final StructLayout STATE = Linker.Option.captureStateLayout();
   private static final long ERRNO =
@@ -41,7 +49,7 @@ final class LinuxFileLockTest {
 
   @BeforeEach
   void fixture() throws IOException {
-    Files.write(root.resolve("lock"), new byte[] {3, 5, 8});
+    Files.write(root.resolve(FIXTURE_LOCK_E9DEB047), new byte[] {3, 5, 8});
   }
 
   @Test
@@ -55,7 +63,8 @@ final class LinuxFileLockTest {
           assertTrue(Files.exists(path));
           return true;
         });
-    assertArrayEquals(new byte[] {3, 5, 8}, Files.readAllBytes(root.resolve("lock")));
+    assertArrayEquals(
+        new byte[] {3, 5, 8}, Files.readAllBytes(root.resolve(FIXTURE_LOCK_E9DEB047)));
   }
 
   @Test
@@ -68,10 +77,12 @@ final class LinuxFileLockTest {
               lock.tryExclusive(
                   path,
                   () -> {
-                    assertEquals(20, assertDoesNotThrow(() -> external(root.resolve("lock"))));
+                    assertEquals(
+                        20,
+                        assertDoesNotThrow(() -> external(root.resolve(FIXTURE_LOCK_E9DEB047))));
                     return 7;
                   }));
-          assertEquals(0, external(root.resolve("lock")));
+          assertEquals(0, external(root.resolve(FIXTURE_LOCK_E9DEB047)));
           try (var executor = Executors.newSingleThreadExecutor()) {
             var child =
                 new ProcessBuilder(
@@ -80,7 +91,7 @@ final class LinuxFileLockTest {
                         "-n",
                         "-E",
                         "20",
-                        root.resolve("lock").toString(),
+                        root.resolve(FIXTURE_LOCK_E9DEB047).toString(),
                         "/bin/sh",
                         "-c",
                         "printf 'READY\\n'; read -r ignored || :")
@@ -109,11 +120,15 @@ final class LinuxFileLockTest {
 
   @Test
   void fcntlIsNotFlock() throws Exception {
-    try (var channel = FileChannel.open(root.resolve("lock"), StandardOpenOption.WRITE);
+    try (var channel =
+            FileChannel.open(root.resolve(FIXTURE_LOCK_E9DEB047), StandardOpenOption.WRITE);
         var fcntl = channel.lock()) {
       assertTrue(fcntl.isValid());
       assertEquals(
-          0, external(root.resolve("lock"))); // Native Linux flock and fcntl do not interact.
+          0,
+          external(
+              root.resolve(
+                  FIXTURE_LOCK_E9DEB047))); // Native Linux flock and fcntl do not interact.
       held(
           path -> {
             assertEquals(Optional.of(1), LinuxFileLock.create().tryExclusive(path, () -> 1));
@@ -149,7 +164,7 @@ final class LinuxFileLockTest {
                             throw runtime;
                           })));
           assertThrows(NullPointerException.class, () -> lock.tryExclusive(path, () -> null));
-          assertEquals(0, external(root.resolve("lock")));
+          assertEquals(0, external(root.resolve(FIXTURE_LOCK_E9DEB047)));
           assertEquals(Optional.of(1), lock.tryExclusive(path, () -> 1));
           return true;
         });
@@ -161,13 +176,19 @@ final class LinuxFileLockTest {
               StorageIoException.class,
               () ->
                   broken.tryExclusive(
-                      Path.of("/proc/self/fd/9"),
+                      Path.of(FIXTURE_PROC_SELF_FD_9_A033018C),
                       () -> {
                         calls.add("operation");
                         if (failOperation) throw new IOException("SECRET_CANARY");
                         return 1;
                       })));
-      assertEquals(List.of("open", "flock:17", "operation", "close:17"), calls);
+      assertEquals(
+          List.of(
+              FIXTURE_OPEN_35FF74AE,
+              FIXTURE_FLOCK_17_54971FDC,
+              "operation",
+              FIXTURE_CLOSE_17_F1422F88),
+          calls);
     }
     var calls = new ArrayList<String>();
     assertUnavailable(
@@ -176,11 +197,13 @@ final class LinuxFileLockTest {
             () ->
                 fake(17, -1, 11, -1, calls)
                     .tryExclusive(
-                        Path.of("/proc/self/fd/9"),
+                        Path.of(FIXTURE_PROC_SELF_FD_9_A033018C),
                         () -> {
                           throw new AssertionError("not acquired");
                         })));
-    assertEquals(List.of("open", "flock:17", "close:17"), calls);
+    assertEquals(
+        List.of(FIXTURE_OPEN_35FF74AE, FIXTURE_FLOCK_17_54971FDC, FIXTURE_CLOSE_17_F1422F88),
+        calls);
   }
 
   @Test
@@ -198,7 +221,7 @@ final class LinuxFileLockTest {
                 (state, path, flags, mode) -> {
                   assertEquals(0x80000, flags);
                   assertEquals(0, mode);
-                  order.add("open");
+                  order.add(FIXTURE_OPEN_35FF74AE);
                   return 17;
                 },
                 (state, descriptor, flags) -> {
@@ -219,14 +242,14 @@ final class LinuxFileLockTest {
                 unknown.getClass(),
                 () ->
                     scoped.tryExclusive(
-                        Path.of("/proc/self/fd/9"),
+                        Path.of(FIXTURE_PROC_SELF_FD_9_A033018C),
                         () -> {
                           order.add("body");
                           if (known) throw new IOException("public I/O");
                           if (unknown instanceof RuntimeException failure) throw failure;
                           throw (Error) unknown;
                         })));
-        assertEquals(List.of("open", "flock", "body", "close"), order);
+        assertEquals(List.of(FIXTURE_OPEN_35FF74AE, "flock", "body", "close"), order);
         assertEquals(known ? 0 : 1, unknown.getSuppressed().length);
         for (Throwable secondary : unknown.getSuppressed())
           assertUnavailable(assertInstanceOf(StorageIoException.class, secondary));
@@ -238,7 +261,7 @@ final class LinuxFileLockTest {
         assertEquals(
             Optional.empty(),
             lock.tryExclusive(
-                Path.of("/proc/self/fd/9"),
+                Path.of(FIXTURE_PROC_SELF_FD_9_A033018C),
                 () -> {
                   throw new AssertionError("no operation");
                 }));
@@ -248,28 +271,36 @@ final class LinuxFileLockTest {
                 StorageIoException.class,
                 () ->
                     lock.tryExclusive(
-                        Path.of("/proc/self/fd/9"),
+                        Path.of(FIXTURE_PROC_SELF_FD_9_A033018C),
                         () -> {
                           throw new AssertionError("no operation");
                         })));
-      assertEquals(List.of("open", "flock:17", "close:17"), calls);
+      assertEquals(
+          List.of(FIXTURE_OPEN_35FF74AE, FIXTURE_FLOCK_17_54971FDC, FIXTURE_CLOSE_17_F1422F88),
+          calls);
     }
     var calls = new ArrayList<String>();
     assertUnavailable(
         assertThrows(
             StorageIoException.class,
-            () -> fake(-1, 0, 0, 0, calls).tryExclusive(Path.of("/proc/self/fd/9"), () -> 1)));
-    assertEquals(List.of("open"), calls);
+            () ->
+                fake(-1, 0, 0, 0, calls)
+                    .tryExclusive(Path.of(FIXTURE_PROC_SELF_FD_9_A033018C), () -> 1)));
+    assertEquals(List.of(FIXTURE_OPEN_35FF74AE), calls);
     calls.clear();
     assertUnavailable(
         assertThrows(
             StorageIoException.class,
-            () -> fake(17, 1, 11, 0, calls).tryExclusive(Path.of("/proc/self/fd/9"), () -> 1)));
-    assertEquals(List.of("open", "flock:17", "close:17"), calls);
+            () ->
+                fake(17, 1, 11, 0, calls)
+                    .tryExclusive(Path.of(FIXTURE_PROC_SELF_FD_9_A033018C), () -> 1)));
+    assertEquals(
+        List.of(FIXTURE_OPEN_35FF74AE, FIXTURE_FLOCK_17_54971FDC, FIXTURE_CLOSE_17_F1422F88),
+        calls);
     calls.clear();
     assertEquals(
         Optional.of(2), fake(0, 0, 0, 0, calls).tryExclusive(Path.of("/proc/self/fd/0"), () -> 2));
-    assertEquals(List.of("open", "flock:0", "close:0"), calls);
+    assertEquals(List.of(FIXTURE_OPEN_35FF74AE, "flock:0", "close:0"), calls);
     assertUnavailable(
         assertThrows(
             StorageIoException.class,
@@ -282,7 +313,7 @@ final class LinuxFileLockTest {
     var lock = fake(17, 0, 0, 0, new ArrayList<>());
     for (String name :
         List.of(
-            "lock",
+            FIXTURE_LOCK_E9DEB047,
             "/tmp/lock",
             "/proc/1/fd/9",
             "/proc/self/fd",
@@ -301,28 +332,38 @@ final class LinuxFileLockTest {
     }
     assertThrows(NullPointerException.class, () -> lock.tryExclusive(null, () -> 1));
     assertThrows(
-        NullPointerException.class, () -> lock.tryExclusive(Path.of("/proc/self/fd/9"), null));
+        NullPointerException.class,
+        () -> lock.tryExclusive(Path.of(FIXTURE_PROC_SELF_FD_9_A033018C), null));
     var symbols = Linker.nativeLinker().defaultLookup();
-    assertThrows(NullPointerException.class, () -> LinuxFileLock.create(null, "amd64", symbols));
-    assertThrows(NullPointerException.class, () -> LinuxFileLock.create("Linux", null, symbols));
-    assertThrows(NullPointerException.class, () -> LinuxFileLock.create("Linux", "amd64", null));
-    for (String os : List.of("Windows", "linux", ""))
-      assertThrows(IllegalStateException.class, () -> LinuxFileLock.create(os, "amd64", symbols));
     assertThrows(
-        IllegalStateException.class, () -> LinuxFileLock.create("Linux", "unknown", symbols));
-    for (String missing : List.of("open", "flock", "close")) {
+        NullPointerException.class,
+        () -> LinuxFileLock.create(null, FIXTURE_AMD64_58D0BD71, symbols));
+    assertThrows(
+        NullPointerException.class,
+        () -> LinuxFileLock.create(FIXTURE_LINUX_1CA133AF, null, symbols));
+    assertThrows(
+        NullPointerException.class,
+        () -> LinuxFileLock.create(FIXTURE_LINUX_1CA133AF, FIXTURE_AMD64_58D0BD71, null));
+    for (String os : List.of("Windows", "linux", ""))
+      assertThrows(
+          IllegalStateException.class,
+          () -> LinuxFileLock.create(os, FIXTURE_AMD64_58D0BD71, symbols));
+    assertThrows(
+        IllegalStateException.class,
+        () -> LinuxFileLock.create(FIXTURE_LINUX_1CA133AF, "unknown", symbols));
+    for (String missing : List.of(FIXTURE_OPEN_35FF74AE, "flock", "close")) {
       var failure =
           assertThrows(
               IllegalStateException.class,
               () ->
                   LinuxFileLock.create(
-                      "Linux",
-                      "amd64",
+                      FIXTURE_LINUX_1CA133AF,
+                      FIXTURE_AMD64_58D0BD71,
                       name -> name.equals(missing) ? Optional.empty() : symbols.find(name)));
       assertEquals("native file locking is unavailable", failure.getMessage());
     }
-    for (String arch : List.of("amd64", "x86_64", "aarch64"))
-      assertNotNull(LinuxFileLock.create("Linux", arch, symbols));
+    for (String arch : List.of(FIXTURE_AMD64_58D0BD71, "x86_64", "aarch64"))
+      assertNotNull(LinuxFileLock.create(FIXTURE_LINUX_1CA133AF, arch, symbols));
     LinuxFileLock.OpenCall open = (s, p, f, m) -> 1;
     LinuxFileLock.LockCall flock = (s, d, f) -> 0;
     LinuxFileLock.CloseCall close = (s, d) -> 0;
@@ -372,24 +413,29 @@ final class LinuxFileLockTest {
     var lock = LinuxFileLock.create();
     held(
         path -> {
-          Files.move(root.resolve("lock"), root.resolve("original"));
-          Files.write(root.resolve("lock"), new byte[] {1});
+          Files.move(root.resolve(FIXTURE_LOCK_E9DEB047), root.resolve(FIXTURE_ORIGINAL_4D609353));
+          Files.write(root.resolve(FIXTURE_LOCK_E9DEB047), new byte[] {1});
           assertEquals(
               Optional.of(3),
               lock.tryExclusive(
                   path,
                   () -> {
-                    assertEquals(20, assertDoesNotThrow(() -> external(root.resolve("original"))));
-                    assertEquals(0, assertDoesNotThrow(() -> external(root.resolve("lock"))));
+                    assertEquals(
+                        20,
+                        assertDoesNotThrow(
+                            () -> external(root.resolve(FIXTURE_ORIGINAL_4D609353))));
+                    assertEquals(
+                        0, assertDoesNotThrow(() -> external(root.resolve(FIXTURE_LOCK_E9DEB047))));
                     return 3;
                   }));
           assertArrayEquals(new byte[] {3, 5, 8}, Files.readAllBytes(path));
-          assertEquals(0, external(root.resolve("original")));
+          assertEquals(0, external(root.resolve(FIXTURE_ORIGINAL_4D609353)));
           assertEquals(Optional.of(4), lock.tryExclusive(path, () -> 4));
           return true;
         });
-    assertArrayEquals(new byte[] {1}, Files.readAllBytes(root.resolve("lock")));
-    assertArrayEquals(new byte[] {3, 5, 8}, Files.readAllBytes(root.resolve("original")));
+    assertArrayEquals(new byte[] {1}, Files.readAllBytes(root.resolve(FIXTURE_LOCK_E9DEB047)));
+    assertArrayEquals(
+        new byte[] {3, 5, 8}, Files.readAllBytes(root.resolve(FIXTURE_ORIGINAL_4D609353)));
   }
 
   private static LinuxFileLock fake(
@@ -399,7 +445,7 @@ final class LinuxFileLockTest {
           assertTrue(path.getString(0).matches("/proc/self/fd/[0-9]+"));
           assertEquals(0x80000, flags);
           assertEquals(0, mode);
-          calls.add("open");
+          calls.add(FIXTURE_OPEN_35FF74AE);
           return opened;
         },
         (state, descriptor, flags) -> {
@@ -436,7 +482,7 @@ final class LinuxFileLockTest {
   private <T> T held(Checked<T> operation) throws Exception {
     try (var directory = OwnedTransferDirectory.open(LinuxDirectoryCalls.create(), root)) {
       return directory.atExistingEntryHandle(
-          "lock", path -> assertDoesNotThrow(() -> operation.execute(path)));
+          FIXTURE_LOCK_E9DEB047, path -> assertDoesNotThrow(() -> operation.execute(path)));
     }
   }
 

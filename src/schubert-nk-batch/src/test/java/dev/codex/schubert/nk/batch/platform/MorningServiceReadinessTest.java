@@ -18,6 +18,8 @@ import org.junit.jupiter.api.Test;
 
 /** SSC164; explicit kernel/HTTP golden vectors independent of production serialization. */
 final class MorningServiceReadinessTest {
+  private static final String FIXTURE_12345_AFC21EDA = "12345";
+  private static final String FIXTURE_999_A90868B2 = "999";
   static final String MAIN = "dev.codex.schubert.nk.api.bootstrap.ApiProcessMain";
   static final Map<String, String> INFO =
       Map.of(
@@ -47,8 +49,8 @@ final class MorningServiceReadinessTest {
     MorningServiceReadiness.Response health =
         new MorningServiceReadiness.Response(200, "{\"status\":\"UP\"}");
     MorningServiceReadiness.Response info = new MorningServiceReadiness.Response(200, GOLDEN);
-    Set<String> before = Set.of("12345");
-    Set<String> after = Set.of("12345");
+    Set<String> before = Set.of(FIXTURE_12345_AFC21EDA);
+    Set<String> after = Set.of(FIXTURE_12345_AFC21EDA);
     int guards;
     int statusReads;
     int sockets;
@@ -76,7 +78,7 @@ final class MorningServiceReadinessTest {
       if (rawHighBitStatus) return new byte[] {(byte) 0xff};
       return nullStatus
           ? null
-          : (driftStatus && statusReads > 1 ? STATUS.replace("999", "998") : status)
+          : (driftStatus && statusReads > 1 ? STATUS.replace(FIXTURE_999_A90868B2, "998") : status)
               .getBytes(StandardCharsets.US_ASCII);
     }
 
@@ -124,7 +126,8 @@ final class MorningServiceReadinessTest {
     var root = kernel.context();
     var morning = root.capture(RootStartupContext.Service.MORNING);
     var child = root.captureServiceRoot(morning, RootStartupContext.Service.API);
-    kernel.targetStat = RootStartupContextTest.stat(200, "999").replace(") R ", ") Z ");
+    kernel.targetStat =
+        RootStartupContextTest.stat(200, FIXTURE_999_A90868B2).replace(") R ", ") Z ");
     var f = new Fixture();
     f.command = "";
     var observer =
@@ -138,7 +141,7 @@ final class MorningServiceReadinessTest {
     assertEquals(0, f.sockets);
     assertEquals(2, f.requests); // status and empty cmdline, no HTTP.
     assertFalse(root.serviceGenerationExited(morning, child));
-    kernel.targetStat = RootStartupContextTest.stat(200, "999");
+    kernel.targetStat = RootStartupContextTest.stat(200, FIXTURE_999_A90868B2);
     f.command = "/usr/bin/java\0--enable-native-access=ALL-UNNAMED\0" + MAIN + "\0";
     assertTrue(observer.ready());
     assertEquals(2, f.sockets);
@@ -256,11 +259,21 @@ final class MorningServiceReadinessTest {
     for (boolean ipv6 : List.of(false, true)) {
       String address = ipv6 ? "0000000000000000FFFF00000100007F:1F9B" : "0100007F:1F9B";
       String[] row = {
-        "0:", address, "00000000:0000", "0A", "0:0", "00:0", "0", "999", "0", "12345"
+        "0:",
+        address,
+        "00000000:0000",
+        "0A",
+        "0:0",
+        "00:0",
+        "0",
+        FIXTURE_999_A90868B2,
+        "0",
+        FIXTURE_12345_AFC21EDA
       };
       assertEquals(
-          Set.of("12345"),
-          MorningServiceReadiness.listeners(String.join(" ", row), Set.of("12345"), 8091, ipv6));
+          Set.of(FIXTURE_12345_AFC21EDA),
+          MorningServiceReadiness.listeners(
+              String.join(" ", row), Set.of(FIXTURE_12345_AFC21EDA), 8091, ipv6));
       assertEquals(
           Set.of(),
           MorningServiceReadiness.listeners(String.join(" ", row), Set.of("12346"), 8091, ipv6));
@@ -276,7 +289,7 @@ final class MorningServiceReadinessTest {
         assertEquals(
             Set.of(),
             MorningServiceReadiness.listeners(
-                String.join(" ", changed), Set.of("12345"), 8091, ipv6));
+                String.join(" ", changed), Set.of(FIXTURE_12345_AFC21EDA), 8091, ipv6));
       }
       for (int index : List.of(3, 9)) {
         var changed = row.clone();
@@ -284,11 +297,12 @@ final class MorningServiceReadinessTest {
         assertEquals(
             Set.of(),
             MorningServiceReadiness.listeners(
-                String.join(" ", changed), Set.of("12345"), 8091, ipv6));
+                String.join(" ", changed), Set.of(FIXTURE_12345_AFC21EDA), 8091, ipv6));
       }
       for (String invalid : List.of("", "malformed", String.join(" ", Arrays.copyOf(row, 9))))
         assertEquals(
-            Set.of(), MorningServiceReadiness.listeners(invalid, Set.of("12345"), 8091, ipv6));
+            Set.of(),
+            MorningServiceReadiness.listeners(invalid, Set.of(FIXTURE_12345_AFC21EDA), 8091, ipv6));
     }
   }
 

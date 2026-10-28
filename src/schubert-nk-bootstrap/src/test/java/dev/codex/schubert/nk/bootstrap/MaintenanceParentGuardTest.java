@@ -19,6 +19,9 @@ import org.junit.jupiter.api.Test;
 
 /** PT-COWNER678001..006: independent monotonic/parent vectors, no actual Unit authority. */
 final class MaintenanceParentGuardTest {
+  private static final String FIXTURE_CLOCK_49F3C56E = "clock";
+  private static final String FIXTURE_MORNING_D4147245 = "MORNING";
+
   private static MaintenanceOwnerFrame frame(boolean cleanup) {
     return new MaintenanceOwnerFrame(
         new UUID(0, 1),
@@ -44,7 +47,7 @@ final class MaintenanceParentGuardTest {
           owner.parentsGuard(
               () -> {
                 int index = reads.getAndIncrement();
-                events.add("clock" + index);
+                events.add(FIXTURE_CLOCK_49F3C56E + index);
                 return index == 0 ? 100 : 200;
               },
               (kind, observed) -> {
@@ -54,8 +57,8 @@ final class MaintenanceParentGuardTest {
       assertEquals(300, guard.remainingNanos());
       assertEquals(
           cleanup
-              ? List.of("clock0", "MORNING", "CLEANUP", "clock1")
-              : List.of("clock0", "MORNING", "clock1"),
+              ? List.of("clock0", FIXTURE_MORNING_D4147245, "CLEANUP", "clock1")
+              : List.of("clock0", FIXTURE_MORNING_D4147245, "clock1"),
           events);
       assertEquals(2, reads.get());
     }
@@ -101,14 +104,17 @@ final class MaintenanceParentGuardTest {
           frame(true)
               .parentsGuard(
                   () -> {
-                    events.add("clock");
+                    events.add(FIXTURE_CLOCK_49F3C56E);
                     return reads.getAndIncrement() == 0 ? 100 : after;
                   },
                   (kind, owner) -> events.add(kind.name()));
       assertEquals(
           "maintenance owner unavailable",
           assertThrows(IOException.class, guard::remainingNanos).getMessage());
-      assertEquals(List.of("clock", "MORNING", "CLEANUP", "clock"), events);
+      assertEquals(
+          List.of(
+              FIXTURE_CLOCK_49F3C56E, FIXTURE_MORNING_D4147245, "CLEANUP", FIXTURE_CLOCK_49F3C56E),
+          events);
       assertEquals(2, reads.get());
     }
     var reads = new AtomicInteger();
@@ -138,7 +144,7 @@ final class MaintenanceParentGuardTest {
               frame(true)
                       .parentsGuard(
                           () -> {
-                            calls.add("clock");
+                            calls.add(FIXTURE_CLOCK_49F3C56E);
                             return 100;
                           },
                           (kind, owner) -> {
@@ -149,8 +155,8 @@ final class MaintenanceParentGuardTest {
       assertSame(original, actual);
       assertEquals(
           failed == ChildStartupContext.MaintenanceParent.MORNING
-              ? List.of("clock", "MORNING")
-              : List.of("clock", "MORNING", "CLEANUP"),
+              ? List.of(FIXTURE_CLOCK_49F3C56E, FIXTURE_MORNING_D4147245)
+              : List.of(FIXTURE_CLOCK_49F3C56E, FIXTURE_MORNING_D4147245, "CLEANUP"),
           calls);
     }
     var reads = new AtomicInteger();

@@ -43,6 +43,9 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** PT-JMS-005/006 actual-provider transport matrix with independent SS 321/322 bytes. */
 final class ArtemisTransportContractTest {
+  private static final String FIXTURE_LOGREQ01_A98AF5F3 = "LOGREQ01";
+  private static final String FIXTURE_NK_SYNC_REPLY_WEB_6759A786 = "nk.sync.reply.web";
+  private static final String FIXTURE_001_A3FEAA64 = "001";
   private static final UUID MESSAGE_ID = UUID.fromString("00000000-0000-0000-0000-000000000001");
   private static final UUID CORRELATION_ID =
       UUID.fromString("00000000-0000-0000-0000-000000000002");
@@ -55,16 +58,16 @@ final class ArtemisTransportContractTest {
         List.of(
             new RouteVector(
                 "nk.sync.request",
-                "LOGREQ01",
+                FIXTURE_LOGREQ01_A98AF5F3,
                 MessageKind.REQUEST,
                 InteractionKind.SYNCHRONOUS,
                 'Q',
                 'S',
                 0,
                 5_000,
-                Optional.of("nk.sync.reply.web")),
+                Optional.of(FIXTURE_NK_SYNC_REPLY_WEB_6759A786)),
             new RouteVector(
-                "nk.sync.reply.web",
+                FIXTURE_NK_SYNC_REPLY_WEB_6759A786,
                 "LOGRSP01",
                 MessageKind.RESPONSE,
                 InteractionKind.SYNCHRONOUS,
@@ -145,14 +148,14 @@ final class ArtemisTransportContractTest {
     RouteVector request =
         new RouteVector(
             "nk.sync.request",
-            "LOGREQ01",
+            FIXTURE_LOGREQ01_A98AF5F3,
             MessageKind.REQUEST,
             InteractionKind.SYNCHRONOUS,
             'Q',
             'S',
             0,
             5_000,
-            Optional.of("nk.sync.reply.web"));
+            Optional.of(FIXTURE_NK_SYNC_REPLY_WEB_6759A786));
     ExpectedRoute route = request.expectedRoute();
     byte[] validBody = independentWire(request);
 
@@ -164,7 +167,10 @@ final class ArtemisTransportContractTest {
       map.setString("synthetic", "non-business-map");
       ObjectMessage object = context.createObjectMessage("synthetic non-business object");
       for (Message wrongType : List.of(text, map, object)) {
-        setRequestIdentity(wrongType, "LOGREQ01", new ActiveMQQueue("nk.sync.reply.web"));
+        setRequestIdentity(
+            wrongType,
+            FIXTURE_LOGREQ01_A98AF5F3,
+            new ActiveMQQueue(FIXTURE_NK_SYNC_REPLY_WEB_6759A786));
         Message received =
             roundTrip(
                 context,
@@ -178,23 +184,23 @@ final class ArtemisTransportContractTest {
       assertRouteBodyLimit(
           context,
           request.address(),
-          "LOGREQ01",
+          FIXTURE_LOGREQ01_A98AF5F3,
           MESSAGE_ID,
           1_000_000,
           5_000,
-          Optional.of("nk.sync.reply.web"),
+          Optional.of(FIXTURE_NK_SYNC_REPLY_WEB_6759A786),
           route);
 
       ExpectedRoute replyRoute =
           new ExpectedRoute(
               MessageKind.RESPONSE,
               InteractionKind.SYNCHRONOUS,
-              "nk.sync.reply.web",
+              FIXTURE_NK_SYNC_REPLY_WEB_6759A786,
               Optional.empty(),
               true);
       assertRouteBodyLimit(
           context,
-          "nk.sync.reply.web",
+          FIXTURE_NK_SYNC_REPLY_WEB_6759A786,
           "LOGRSP01",
           CORRELATION_ID,
           1_000_000,
@@ -233,7 +239,10 @@ final class ArtemisTransportContractTest {
           webLogRoute);
 
       BytesMessage shortBody = bytes(context, new byte[255]);
-      setRequestIdentity(shortBody, "LOGREQ01", new ActiveMQQueue("nk.sync.reply.web"));
+      setRequestIdentity(
+          shortBody,
+          FIXTURE_LOGREQ01_A98AF5F3,
+          new ActiveMQQueue(FIXTURE_NK_SYNC_REPLY_WEB_6759A786));
       assertDecodeRejected(
           roundTrip(
               context,
@@ -244,7 +253,10 @@ final class ArtemisTransportContractTest {
           route);
 
       BytesMessage nonPersistent = bytes(context, validBody);
-      setRequestIdentity(nonPersistent, "LOGREQ01", new ActiveMQQueue("nk.sync.reply.web"));
+      setRequestIdentity(
+          nonPersistent,
+          FIXTURE_LOGREQ01_A98AF5F3,
+          new ActiveMQQueue(FIXTURE_NK_SYNC_REPLY_WEB_6759A786));
       assertDecodeRejected(
           roundTrip(
               context,
@@ -256,9 +268,9 @@ final class ArtemisTransportContractTest {
 
       BytesMessage missingLayout = bytes(context, validBody);
       missingLayout.setJMSCorrelationID(MESSAGE_ID.toString());
-      missingLayout.setJMSReplyTo(new ActiveMQQueue("nk.sync.reply.web"));
+      missingLayout.setJMSReplyTo(new ActiveMQQueue(FIXTURE_NK_SYNC_REPLY_WEB_6759A786));
       missingLayout.setStringProperty("NKMessageID", MESSAGE_ID.toString());
-      missingLayout.setStringProperty("NKProtocolVersion", "001");
+      missingLayout.setStringProperty("NKProtocolVersion", FIXTURE_001_A3FEAA64);
       Message missingReceived =
           roundTrip(
               context,
@@ -269,7 +281,8 @@ final class ArtemisTransportContractTest {
       assertThrows(PermanentProtocolException.class, () -> GUARD.read(missingReceived, route));
 
       BytesMessage unknownLayout = bytes(context, validBody);
-      setRequestIdentity(unknownLayout, "ZZZREQ01", new ActiveMQQueue("nk.sync.reply.web"));
+      setRequestIdentity(
+          unknownLayout, "ZZZREQ01", new ActiveMQQueue(FIXTURE_NK_SYNC_REPLY_WEB_6759A786));
       assertDecodeRejected(
           roundTrip(
               context,
@@ -280,7 +293,10 @@ final class ArtemisTransportContractTest {
           route);
 
       BytesMessage unknownProtocol = bytes(context, validBody);
-      setRequestIdentity(unknownProtocol, "LOGREQ01", new ActiveMQQueue("nk.sync.reply.web"));
+      setRequestIdentity(
+          unknownProtocol,
+          FIXTURE_LOGREQ01_A98AF5F3,
+          new ActiveMQQueue(FIXTURE_NK_SYNC_REPLY_WEB_6759A786));
       unknownProtocol.setStringProperty("NKProtocolVersion", "999");
       assertDecodeRejected(
           roundTrip(
@@ -292,7 +308,8 @@ final class ArtemisTransportContractTest {
           route);
 
       BytesMessage dynamicReply = bytes(context, validBody);
-      setRequestIdentity(dynamicReply, "LOGREQ01", new ActiveMQQueue("nk.unapproved.reply"));
+      setRequestIdentity(
+          dynamicReply, FIXTURE_LOGREQ01_A98AF5F3, new ActiveMQQueue("nk.unapproved.reply"));
       Message dynamicReceived =
           roundTrip(
               context,
@@ -398,7 +415,7 @@ final class ArtemisTransportContractTest {
     message.setJMSCorrelationID(correlationId.toString());
     message.setStringProperty("NKMessageID", MESSAGE_ID.toString());
     message.setStringProperty("NKLayoutID", layoutId);
-    message.setStringProperty("NKProtocolVersion", "001");
+    message.setStringProperty("NKProtocolVersion", FIXTURE_001_A3FEAA64);
   }
 
   private static void setReplyTo(Message message, Queue replyTo) {
@@ -414,9 +431,9 @@ final class ArtemisTransportContractTest {
     byte[] body = new byte[totalLength];
     Arrays.fill(body, (byte) ' ');
     ascii(body, 0, "SCHBNK01");
-    ascii(body, 8, "001");
+    ascii(body, 8, FIXTURE_001_A3FEAA64);
     ascii(body, 11, vector.layoutId());
-    ascii(body, 19, "001");
+    ascii(body, 19, FIXTURE_001_A3FEAA64);
     body[22] = (byte) vector.messageKindWire();
     body[23] = (byte) vector.interactionKindWire();
     ascii(body, 24, MESSAGE_ID.toString());

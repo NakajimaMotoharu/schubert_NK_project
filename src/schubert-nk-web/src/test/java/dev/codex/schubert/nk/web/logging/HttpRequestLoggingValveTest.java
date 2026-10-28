@@ -49,6 +49,13 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** Native terminal HTTP observations, not synthetic Servlet-finally success; REQ001..006/016. */
 final class HttpRequestLoggingValveTest {
+  private static final String FIXTURE_GET_04F32A7E = "GET";
+  private static final String FIXTURE_LOGIN_F843C044 = "/login";
+  private static final String FIXTURE_POST_E46D3AE9 = "POST";
+  private static final String FIXTURE_STATUS_CFC31BCC = "status";
+  private static final String FIXTURE_PATH_D070C7EC = "path";
+  private static final String FIXTURE_DETAILS_521BCB5E = "details";
+  private static final String FIXTURE_RESPONSEBYTES_0785275F = "responseBytes";
   private static WebLogDatabaseFixture db;
   @TempDir Path root;
 
@@ -76,23 +83,30 @@ final class HttpRequestLoggingValveTest {
                 root, 0, filter(), Map.of(WebRequestLogProducer.class, fixture.producer));
         var client = HttpClient.newBuilder().connectTimeout(Duration.ofSeconds(3)).build()) {
       int port = server.port();
-      var login = send(client, port, "GET", "/login?password=synthetic-secret-canary", true);
+      var login =
+          send(client, port, FIXTURE_GET_04F32A7E, "/login?password=synthetic-secret-canary", true);
       assertEquals(200, login.statusCode());
       assertTrue(login.body().contains("schubert NK"));
-      var head = send(client, port, "HEAD", "/login", true);
+      var head = send(client, port, "HEAD", FIXTURE_LOGIN_F843C044, true);
       assertEquals(200, head.statusCode());
       assertEquals("", head.body());
-      var redirect = send(client, port, "POST", "/login?case=redirect", true);
+      var redirect = send(client, port, FIXTURE_POST_E46D3AE9, "/login?case=redirect", true);
       assertEquals(302, redirect.statusCode());
       assertEquals("/", redirect.headers().firstValue("Location").orElseThrow());
-      var rejected = send(client, port, "POST", "/login?case=rejected", true);
+      var rejected = send(client, port, FIXTURE_POST_E46D3AE9, "/login?case=rejected", true);
       assertEquals(403, rejected.statusCode());
-      var error = send(client, port, "POST", "/login?case=error", true);
+      var error = send(client, port, FIXTURE_POST_E46D3AE9, "/login?case=error", true);
       assertEquals(500, error.statusCode());
       var missing =
-          send(client, port, "GET", "/private-canary?token=synthetic-secret-canary", true);
+          send(
+              client,
+              port,
+              FIXTURE_GET_04F32A7E,
+              "/private-canary?token=synthetic-secret-canary",
+              true);
       assertEquals(404, missing.statusCode());
-      var untrusted = send(client, port, "GET", "/login?cookie=synthetic-secret-canary", false);
+      var untrusted =
+          send(client, port, FIXTURE_GET_04F32A7E, "/login?cookie=synthetic-secret-canary", false);
       assertEquals(403, untrusted.statusCode());
       awaitEntries(
           fixture, 8); // Six trusted REQUEST, then PENDING/FAILED for untrusted IP absence.
@@ -100,8 +114,9 @@ final class HttpRequestLoggingValveTest {
       var ids = new HashSet<String>();
       for (int i = 0; i < 8; i++) {
         var json = fixture.logger.entries.get(i).json();
-        assertEquals(statuses[i], json.get("status").getAsInt());
-        assertEquals(i >= 5 ? "/**" : "/login", json.get("path").getAsString());
+        assertEquals(statuses[i], json.get(FIXTURE_STATUS_CFC31BCC).getAsInt());
+        assertEquals(
+            i >= 5 ? "/**" : FIXTURE_LOGIN_F843C044, json.get(FIXTURE_PATH_D070C7EC).getAsString());
         assertTrue(json.get("elapsedMs").getAsLong() >= 0);
         assertFalse(json.toString().contains("canary"));
         assertFalse(json.toString().contains("case="));
@@ -115,8 +130,8 @@ final class HttpRequestLoggingValveTest {
               .entries
               .getFirst()
               .json()
-              .getAsJsonObject("details")
-              .get("responseBytes")
+              .getAsJsonObject(FIXTURE_DETAILS_521BCB5E)
+              .get(FIXTURE_RESPONSEBYTES_0785275F)
               .getAsLong());
       assertEquals(
           0,
@@ -125,8 +140,8 @@ final class HttpRequestLoggingValveTest {
               .entries
               .get(1)
               .json()
-              .getAsJsonObject("details")
-              .get("responseBytes")
+              .getAsJsonObject(FIXTURE_DETAILS_521BCB5E)
+              .get(FIXTURE_RESPONSEBYTES_0785275F)
               .getAsLong());
       assertEquals(6, count());
       assertEquals(
@@ -136,7 +151,7 @@ final class HttpRequestLoggingValveTest {
               .entries
               .getLast()
               .json()
-              .getAsJsonObject("details")
+              .getAsJsonObject(FIXTURE_DETAILS_521BCB5E)
               .get("projectionStatus")
               .getAsString());
       // No producer-owned JDBC/JMS/key close: caller can still decrypt/query after HTTP owner
@@ -152,11 +167,12 @@ final class HttpRequestLoggingValveTest {
             WebHttpServer.start(
                 root, 0, filter(), Map.of(WebRequestLogProducer.class, fixture.producer));
         var client = HttpClient.newBuilder().connectTimeout(Duration.ofSeconds(3)).build()) {
-      var response = send(client, server.port(), "POST", "/login?case=async", true);
+      var response = send(client, server.port(), FIXTURE_POST_E46D3AE9, "/login?case=async", true);
       assertEquals(202, response.statusCode());
       assertEquals("完了", response.body());
       awaitEntries(fixture, 1);
-      assertEquals(202, fixture.logger.entries.getFirst().json().get("status").getAsInt());
+      assertEquals(
+          202, fixture.logger.entries.getFirst().json().get(FIXTURE_STATUS_CFC31BCC).getAsInt());
       assertEquals(
           6,
           fixture
@@ -164,15 +180,18 @@ final class HttpRequestLoggingValveTest {
               .entries
               .getFirst()
               .json()
-              .getAsJsonObject("details")
-              .get("responseBytes")
+              .getAsJsonObject(FIXTURE_DETAILS_521BCB5E)
+              .get(FIXTURE_RESPONSEBYTES_0785275F)
               .getAsLong());
-      var redispatch = send(client, server.port(), "GET", "/login?case=dispatch", true);
+      var redispatch =
+          send(client, server.port(), FIXTURE_GET_04F32A7E, "/login?case=dispatch", true);
       assertEquals(200, redispatch.statusCode());
       assertTrue(redispatch.body().contains("schubert NK"));
       awaitEntries(fixture, 2);
       assertEquals(2, count());
-      assertEquals("/login", fixture.logger.entries.getLast().json().get("path").getAsString());
+      assertEquals(
+          FIXTURE_LOGIN_F843C044,
+          fixture.logger.entries.getLast().json().get(FIXTURE_PATH_D070C7EC).getAsString());
       assertEquals(2, fixture.logger.entries.size());
     }
   }
@@ -197,13 +216,13 @@ final class HttpRequestLoggingValveTest {
       request.setAttribute(WebRequestTrace.class.getName(), "wrong-trace");
       valve.log(request, response, 0);
       request.setAttribute(WebRequestTrace.class.getName(), trace);
-      coyote.setMethod("GET");
+      coyote.setMethod(FIXTURE_GET_04F32A7E);
       request.setAttribute(WebRequestContext.class.getName(), "wrong-context");
       valve.log(request, response, 0);
       assertEquals(6, fixture.logger.entries.size());
       for (var entry : fixture.logger.entries) {
         assertEquals("UNKNOWN", entry.json().get("outcome").getAsString());
-        assertFalse(entry.json().has("status"));
+        assertFalse(entry.json().has(FIXTURE_STATUS_CFC31BCC));
       }
       valve.log(request, response, 0);
       assertEquals(6, fixture.logger.entries.size()); // Already claimed.
@@ -219,8 +238,8 @@ final class HttpRequestLoggingValveTest {
         new WebRequestLogProducerTest.Fixture(WebRequestLogProducerTest.source(db::web))) {
       var valve = new HttpRequestLoggingValve(fixture.producer);
       var coyote = new org.apache.coyote.Request();
-      coyote.setMethod("POST");
-      coyote.requestURI().setString("/login");
+      coyote.setMethod(FIXTURE_POST_E46D3AE9);
+      coyote.requestURI().setString(FIXTURE_LOGIN_F843C044);
       var request = new Request(new Connector(), coyote);
       var response = new Response(new org.apache.coyote.Response());
       var firstMessage = new UUID(2, 88);
@@ -234,11 +253,11 @@ final class HttpRequestLoggingValveTest {
           });
       assertThrows(IOException.class, () -> valve.invoke(request, response));
       var trace = WebRequestTrace.existing(request).orElseThrow();
-      assertEquals("/login", trace.route());
+      assertEquals(FIXTURE_LOGIN_F843C044, trace.route());
       assertEquals(firstMessage, trace.correlationId());
       WebRequestTrace.businessIdentifiers(() -> new UUID(2, 89)).get();
       assertEquals(firstMessage, trace.correlationId());
-      coyote.setMethod("POST");
+      coyote.setMethod(FIXTURE_POST_E46D3AE9);
       coyote.requestURI().setString("/not-login");
       var other = new Request(new Connector(), coyote);
       valve.setNext(null);
@@ -256,16 +275,23 @@ final class HttpRequestLoggingValveTest {
                 root, 0, filter(), Map.of(WebRequestLogProducer.class, fixture.producer));
         var client = HttpClient.newBuilder().connectTimeout(Duration.ofSeconds(3)).build()) {
       for (String mode : List.of("timeout", "async-error")) {
-        var response = send(client, server.port(), "POST", "/login?case=" + mode, true);
+        var response =
+            send(client, server.port(), FIXTURE_POST_E46D3AE9, "/login?case=" + mode, true);
         assertEquals(503, response.statusCode());
         assertEquals("", response.body());
       }
       awaitEntries(fixture, 2);
       assertEquals(2, count());
       for (var entry : fixture.logger.entries) {
-        assertEquals(503, entry.json().get("status").getAsInt());
+        assertEquals(503, entry.json().get(FIXTURE_STATUS_CFC31BCC).getAsInt());
         assertEquals("FAILURE", entry.json().get("outcome").getAsString());
-        assertEquals(0, entry.json().getAsJsonObject("details").get("responseBytes").getAsLong());
+        assertEquals(
+            0,
+            entry
+                .json()
+                .getAsJsonObject(FIXTURE_DETAILS_521BCB5E)
+                .get(FIXTURE_RESPONSEBYTES_0785275F)
+                .getAsLong());
         assertFalse(entry.json().toString().contains("canary"));
       }
     }
@@ -303,14 +329,17 @@ final class HttpRequestLoggingValveTest {
       assertEquals(1, interruptedWrite.get());
       var json = fixture.logger.entries.getFirst().json();
       // Installed CoyoteAdapter async failure sets native final 500; the received header stays 200.
-      assertEquals(500, json.get("status").getAsInt());
+      assertEquals(500, json.get(FIXTURE_STATUS_CFC31BCC).getAsInt());
       assertEquals("FAILURE", json.get("outcome").getAsString());
       assertEquals("ERROR", json.get("level").getAsString());
-      long bytes = json.getAsJsonObject("details").get("responseBytes").getAsLong();
+      long bytes =
+          json.getAsJsonObject(FIXTURE_DETAILS_521BCB5E)
+              .get(FIXTURE_RESPONSEBYTES_0785275F)
+              .getAsLong();
       assertTrue(bytes >= 1024);
       assertTrue(bytes < 1024 + 4194304L);
       assertEquals(1, count());
-      assertEquals("/login", json.get("path").getAsString());
+      assertEquals(FIXTURE_LOGIN_F843C044, json.get(FIXTURE_PATH_D070C7EC).getAsString());
     }
   }
 
@@ -340,7 +369,7 @@ final class HttpRequestLoggingValveTest {
                       send(
                           client,
                           server.port(),
-                          "POST",
+                          FIXTURE_POST_E46D3AE9,
                           "/login?case=parallel&owner=" + owner,
                           true)));
         }
@@ -359,7 +388,7 @@ final class HttpRequestLoggingValveTest {
           assertTrue(events.add(json.get("messageId").getAsString()));
           assertTrue(requests.add(json.get("requestId").getAsString()));
           assertTrue(correlations.add(UUID.fromString(json.get("correlationId").getAsString())));
-          assertEquals("/login", json.get("path").getAsString());
+          assertEquals(FIXTURE_LOGIN_F843C044, json.get(FIXTURE_PATH_D070C7EC).getAsString());
           assertFalse(json.toString().contains("owner="));
         }
         var expected = new HashSet<UUID>();
@@ -377,7 +406,10 @@ final class HttpRequestLoggingValveTest {
           WebHttpServer.start(
               root, 0, filter(), Map.of(WebRequestLogProducer.class, fixture.producer));
       try (var client = HttpClient.newBuilder().connectTimeout(Duration.ofSeconds(3)).build()) {
-        assertEquals(200, send(client, server.port(), "GET", "/login", true).statusCode());
+        assertEquals(
+            200,
+            send(client, server.port(), FIXTURE_GET_04F32A7E, FIXTURE_LOGIN_F843C044, true)
+                .statusCode());
         awaitEntries(fixture, 1);
       } finally {
         server.close();
@@ -418,7 +450,7 @@ final class HttpRequestLoggingValveTest {
                 });
         var valve = new HttpRequestLoggingValve(producer);
         var coyote = new org.apache.coyote.Request();
-        coyote.setMethod("GET");
+        coyote.setMethod(FIXTURE_GET_04F32A7E);
         var request = new Request(new Connector(), coyote);
         var response = new Response(new org.apache.coyote.Response());
         WebRequestTrace.ensure(request, UUID::randomUUID);
@@ -563,7 +595,7 @@ final class HttpRequestLoggingValveTest {
                 if (count < 2) {
                   http.setAttribute("pt.dispatch-count", count + 1);
                   var async = http.startAsync();
-                  async.start(() -> async.dispatch("/login"));
+                  async.start(() -> async.dispatch(FIXTURE_LOGIN_F843C044));
                   return;
                 }
               }

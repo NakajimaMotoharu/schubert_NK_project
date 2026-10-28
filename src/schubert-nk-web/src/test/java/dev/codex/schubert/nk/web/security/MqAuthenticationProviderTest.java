@@ -40,6 +40,15 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 /** Actual Spring authentication types with independent wire senders; SSC-043/PT-WEB-063..067. */
 final class MqAuthenticationProviderTest {
+  private static final String FIXTURE_USER_2DED8884 = "USER";
+  private static final String FIXTURE_ADMIN_C4BB3010 = "ADMIN";
+  private static final String FIXTURE_0000_876EEFE0 = "0000";
+  private static final String FIXTURE_ALICE_1EA1F9A4 = "Alice";
+  private static final String FIXTURE_0200_FC9DB3AC = "0200";
+  private static final String FIXTURE_JMS_1AEA59D9 = "JMS";
+  private static final String FIXTURE_LOGIN_SERVICE_IS_UNAVAILABLE_7A0A73D7 =
+      "login service is unavailable";
+
   @Test
   void web063DetailsAndLockDelayAreBoundedAndRedacted() {
     String longest = "ffff:ffff:ffff:ffff:ffff:ffff:255.255.255.255";
@@ -78,21 +87,21 @@ final class MqAuthenticationProviderTest {
 
   @Test
   void web064FreshAuthenticationConsumesCredentialsAndUsesApiRole() {
-    for (String role : List.of("USER", "ADMIN")) {
-      var fixture = new Fixture("0000", role, "0000", CLOCK);
+    for (String role : List.of(FIXTURE_USER_2DED8884, FIXTURE_ADMIN_C4BB3010)) {
+      var fixture = new Fixture(FIXTURE_0000_876EEFE0, role, FIXTURE_0000_876EEFE0, CLOCK);
       char[] password = "e\u0301".toCharArray();
       var input = input(" Alice ", password);
       Authentication result = fixture.provider.authenticate(input);
       assertTrue(result.isAuthenticated());
       assertNull(result.getCredentials());
       assertNull(result.getDetails());
-      assertEquals("Alice", result.getName());
+      assertEquals(FIXTURE_ALICE_1EA1F9A4, result.getName());
       assertEquals(
           List.of("ROLE_" + role),
           result.getAuthorities().stream().map(a -> a.getAuthority()).toList());
       SessionPrincipal principal = assertInstanceOf(SessionPrincipal.class, result.getPrincipal());
-      assertEquals("Alice", principal.username());
-      assertEquals("Alice", principal.getName());
+      assertEquals(FIXTURE_ALICE_1EA1F9A4, principal.username());
+      assertEquals(FIXTURE_ALICE_1EA1F9A4, principal.getName());
       assertEquals(UserRole.valueOf(role), principal.role());
       assertEquals("a".repeat(64), principal.authenticationContext().wireValue());
       assertEquals(Instant.parse("2026-09-08T00:00:00.123Z"), principal.loginAt());
@@ -112,10 +121,10 @@ final class MqAuthenticationProviderTest {
     // Old immutable expiry has passed, but API idle may have extended; current probe is
     // authoritative.
     Clock later = Clock.fixed(Instant.parse("2026-09-09T00:00:00Z"), ZoneOffset.UTC);
-    for (String code : List.of("0000", "0200")) {
-      var fixture = new Fixture("0200", "ADMIN", code, later);
+    for (String code : List.of(FIXTURE_0000_876EEFE0, FIXTURE_0200_FC9DB3AC)) {
+      var fixture = new Fixture(FIXTURE_0200_FC9DB3AC, FIXTURE_ADMIN_C4BB3010, code, later);
       char[] secret = {'p'};
-      var input = input("Alice", secret);
+      var input = input(FIXTURE_ALICE_1EA1F9A4, secret);
       var result = fixture.provider.authenticate(input);
       assertTrue(result.isAuthenticated());
       SessionPrincipal principal = assertInstanceOf(SessionPrincipal.class, result.getPrincipal());
@@ -131,9 +140,9 @@ final class MqAuthenticationProviderTest {
       assertEquals(2, fixture.ids.get());
       fixture.closed();
     }
-    for (String code : List.of("0102", "9000", "MALFORMED", "JMS")) {
-      var fixture = new Fixture("0200", "ADMIN", code, later);
-      var input = input("Alice", new char[] {'p'});
+    for (String code : List.of("0102", "9000", "MALFORMED", FIXTURE_JMS_1AEA59D9)) {
+      var fixture = new Fixture(FIXTURE_0200_FC9DB3AC, FIXTURE_ADMIN_C4BB3010, code, later);
+      var input = input(FIXTURE_ALICE_1EA1F9A4, new char[] {'p'});
       if (code.equals("0102"))
         fixed(
             assertThrows(BadCredentialsException.class, () -> fixture.provider.authenticate(input)),
@@ -142,7 +151,7 @@ final class MqAuthenticationProviderTest {
         fixed(
             assertThrows(
                 AuthenticationServiceException.class, () -> fixture.provider.authenticate(input)),
-            "login service is unavailable");
+            FIXTURE_LOGIN_SERVICE_IS_UNAVAILABLE_7A0A73D7);
       assertNull(input.getCredentials());
       assertEquals(1, fixture.logins.get());
       assertEquals(1, fixture.probes.get());
@@ -152,7 +161,8 @@ final class MqAuthenticationProviderTest {
 
   @Test
   void web066FailureAndNullTypesNeverBecomeAuthentication() {
-    var base = new Fixture("0000", "USER", "0000", CLOCK);
+    var base =
+        new Fixture(FIXTURE_0000_876EEFE0, FIXTURE_USER_2DED8884, FIXTURE_0000_876EEFE0, CLOCK);
     assertThrows(NullPointerException.class, () -> new MqAuthenticationProvider(null, base.probe));
     assertThrows(NullPointerException.class, () -> new MqAuthenticationProvider(base.login, null));
     assertThrows(NullPointerException.class, () -> base.provider.authenticate(null));
@@ -163,41 +173,43 @@ final class MqAuthenticationProviderTest {
     List<UsernamePasswordAuthenticationToken> invalid = new ArrayList<>();
     invalid.add(input(123, new char[] {'p'}));
     invalid.add(input(null, new char[] {'p'}));
-    invalid.add(input("Alice", null));
-    invalid.add(input("Alice", "synthetic-password-string"));
-    var noDetails = input("Alice", new char[] {'p'});
+    invalid.add(input(FIXTURE_ALICE_1EA1F9A4, null));
+    invalid.add(input(FIXTURE_ALICE_1EA1F9A4, "synthetic-password-string"));
+    var noDetails = input(FIXTURE_ALICE_1EA1F9A4, new char[] {'p'});
     noDetails.setDetails(null);
     invalid.add(noDetails);
-    var wrongDetails = input("Alice", new char[] {'p'});
+    var wrongDetails = input(FIXTURE_ALICE_1EA1F9A4, new char[] {'p'});
     wrongDetails.setDetails("untrusted-XFF");
     invalid.add(wrongDetails);
     invalid.add(
         UsernamePasswordAuthenticationToken.authenticated(
-            "Alice", new char[] {'p'}, List.of(new SimpleGrantedAuthority("ROLE_ADMIN"))));
-    invalid.add(new DerivedToken("Alice", new char[] {'p'}));
+            FIXTURE_ALICE_1EA1F9A4,
+            new char[] {'p'},
+            List.of(new SimpleGrantedAuthority("ROLE_ADMIN"))));
+    invalid.add(new DerivedToken(FIXTURE_ALICE_1EA1F9A4, new char[] {'p'}));
     for (var input : invalid) {
       Object supplied = input.getCredentials();
       fixed(
           assertThrows(
               AuthenticationServiceException.class, () -> base.provider.authenticate(input)),
-          "login service is unavailable");
+          FIXTURE_LOGIN_SERVICE_IS_UNAVAILABLE_7A0A73D7);
       assertNull(input.getCredentials());
       if (supplied instanceof char[] chars) assertArrayEquals(new char[chars.length], chars);
     }
     char[] unsupportedSecret = {'p'};
-    var unsupported = new TestingAuthenticationToken("Alice", unsupportedSecret);
+    var unsupported = new TestingAuthenticationToken(FIXTURE_ALICE_1EA1F9A4, unsupportedSecret);
     fixed(
         assertThrows(
             AuthenticationServiceException.class, () -> base.provider.authenticate(unsupported)),
-        "login service is unavailable");
+        FIXTURE_LOGIN_SERVICE_IS_UNAVAILABLE_7A0A73D7);
     assertArrayEquals(new char[1], unsupportedSecret);
     assertEquals(0, base.logins.get());
     assertEquals(0, base.probes.get());
     base.closed();
-    for (String code : List.of("0101", "0106", "9000", "JMS")) {
-      var fixture = new Fixture(code, "USER", "0000", CLOCK);
+    for (String code : List.of("0101", "0106", "9000", FIXTURE_JMS_1AEA59D9)) {
+      var fixture = new Fixture(code, FIXTURE_USER_2DED8884, FIXTURE_0000_876EEFE0, CLOCK);
       char[] password = {'p'};
-      var input = input("Alice", password);
+      var input = input(FIXTURE_ALICE_1EA1F9A4, password);
       switch (code) {
         case "0101" ->
             fixed(
@@ -216,7 +228,7 @@ final class MqAuthenticationProviderTest {
                 assertThrows(
                     AuthenticationServiceException.class,
                     () -> fixture.provider.authenticate(input)),
-                "login service is unavailable");
+                FIXTURE_LOGIN_SERVICE_IS_UNAVAILABLE_7A0A73D7);
       }
       assertArrayEquals(new char[1], password);
       assertNull(input.getCredentials());
@@ -234,7 +246,8 @@ final class MqAuthenticationProviderTest {
 
   @Test
   void web067ConcurrentProvidersNeverCrossCredentialsOrPrincipals() throws Exception {
-    var fixture = new Fixture("0200", "ADMIN", "0000", CLOCK);
+    var fixture =
+        new Fixture(FIXTURE_0200_FC9DB3AC, FIXTURE_ADMIN_C4BB3010, FIXTURE_0000_876EEFE0, CLOCK);
     try (var workers = Executors.newFixedThreadPool(8)) {
       List<Future<?>> results = new ArrayList<>();
       synchronized (fixture.provider) {
@@ -312,21 +325,22 @@ final class MqAuthenticationProviderTest {
                 buffers.add(body);
                 assertEquals("LGNREQ01", new String(body, 11, 8, StandardCharsets.US_ASCII));
                 assertEquals(id.toString(), new String(body, 60, 36, StandardCharsets.US_ASCII));
-                if (loginCode.equals("JMS")) throw new JMSException("synthetic-provider-secret");
+                if (loginCode.equals(FIXTURE_JMS_1AEA59D9))
+                  throw new JMSException("synthetic-provider-secret");
                 String username = new String(body, 256, 64, StandardCharsets.UTF_8).stripTrailing();
                 String context = "a".repeat(64);
                 String effectiveRole = role;
                 if (username.startsWith("user")) {
                   int ordinal = Integer.parseInt(username.substring(4));
                   context = String.format(java.util.Locale.ROOT, "%064x", ordinal);
-                  effectiveRole = ordinal % 2 == 0 ? "USER" : "ADMIN";
+                  effectiveRole = ordinal % 2 == 0 ? FIXTURE_USER_2DED8884 : FIXTURE_ADMIN_C4BB3010;
                   assertEquals(
                       "password-" + username,
                       new String(body, 320, 256, StandardCharsets.UTF_8).stripTrailing());
                 }
                 issued.add(context);
                 byte[] reply;
-                if (List.of("0000", "0200").contains(loginCode)) {
+                if (List.of(FIXTURE_0000_876EEFE0, FIXTURE_0200_FC9DB3AC).contains(loginCode)) {
                   reply = success(id, username, effectiveRole, context);
                   put(reply, 208, loginCode);
                 } else
@@ -348,7 +362,8 @@ final class MqAuthenticationProviderTest {
                 assertEquals(id.toString(), new String(body, 60, 36, StandardCharsets.US_ASCII));
                 String context = new String(body, 113, 64, StandardCharsets.US_ASCII);
                 assertTrue(issued.contains(context));
-                if (probeCode.equals("JMS")) throw new JMSException("synthetic-probe-secret");
+                if (probeCode.equals(FIXTURE_JMS_1AEA59D9))
+                  throw new JMSException("synthetic-probe-secret");
                 byte[] reply =
                     probeCode.equals("MALFORMED")
                         ? new byte[0]

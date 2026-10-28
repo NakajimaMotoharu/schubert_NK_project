@@ -17,6 +17,14 @@ import org.junit.jupiter.api.Test;
 
 /** SS341/343/SSC092/105/106 fixed-argv, intent and unknown-owner vectors; no real Unit start. */
 final class BackupUnitStartClientTest {
+  private static final String FIXTURE_SAME_LIVE_API_WEB_FENCE_B31368ED = "same-live-API-WEB-fence";
+  private static final String FIXTURE_ROOT_956E6E33 = "root";
+  private static final String FIXTURE_POLICY_17AD92E6 = "policy";
+  private static final String FIXTURE_CLIENT_0426EDC5 = "client";
+  private static final String FIXTURE_INTENT_3A4C15E5 = "intent";
+  private static final String FIXTURE_RETIRE_A2A9D4FF = "retire";
+  private static final String FIXTURE_WAIT_F3010736 = "wait";
+
   @Test
   void monitor001CallerLockCannotBlockOwnedStartStatus() throws Exception {
     var process = child();
@@ -76,13 +84,18 @@ final class BackupUnitStartClientTest {
   @Test
   void caddy457001BorrowedFenceCloseVerifiesWithoutReleasingAnyServiceOwner() throws Exception {
     var events = new ArrayList<String>();
-    var marker = BackupUnitStartClient.caddyFence(() -> events.add("same-live-API-WEB-fence"));
+    var marker =
+        BackupUnitStartClient.caddyFence(
+            () -> events.add(FIXTURE_SAME_LIVE_API_WEB_FENCE_B31368ED));
     assertTrue(events.isEmpty());
     marker.requireRetained();
     marker.closeObservation();
     marker.retire();
     assertEquals(
-        List.of("same-live-API-WEB-fence", "same-live-API-WEB-fence", "same-live-API-WEB-fence"),
+        List.of(
+            FIXTURE_SAME_LIVE_API_WEB_FENCE_B31368ED,
+            FIXTURE_SAME_LIVE_API_WEB_FENCE_B31368ED,
+            FIXTURE_SAME_LIVE_API_WEB_FENCE_B31368ED),
         events);
     assertThrows(NullPointerException.class, () -> BackupUnitStartClient.caddyFence(null));
     for (Throwable failure :
@@ -177,48 +190,70 @@ final class BackupUnitStartClientTest {
     var process = child();
     var success =
         new BackupUnitStartClient(
-            () -> sequence.add("root"),
-            () -> sequence.add("policy"),
+            () -> sequence.add(FIXTURE_ROOT_956E6E33),
+            () -> sequence.add(FIXTURE_POLICY_17AD92E6),
             command -> {
-              sequence.add("client");
+              sequence.add(FIXTURE_CLIENT_0426EDC5);
               return process;
             },
             () -> {
-              sequence.add("intent");
-              return () -> sequence.add("retire");
+              sequence.add(FIXTURE_INTENT_3A4C15E5);
+              return () -> sequence.add(FIXTURE_RETIRE_A2A9D4FF);
             });
     assertEquals(BackupUnitStartClient.Status.CLIENT_EXITED_ZERO, success.start().status());
-    assertEquals(List.of("root", "policy", "root", "intent", "client", "root", "root"), sequence);
+    assertEquals(
+        List.of(
+            FIXTURE_ROOT_956E6E33,
+            FIXTURE_POLICY_17AD92E6,
+            FIXTURE_ROOT_956E6E33,
+            FIXTURE_INTENT_3A4C15E5,
+            FIXTURE_CLIENT_0426EDC5,
+            FIXTURE_ROOT_956E6E33,
+            FIXTURE_ROOT_956E6E33),
+        sequence);
     process.allClosed();
 
     sequence.clear();
     var failedPublication =
         new BackupUnitStartClient(
-            () -> sequence.add("root"),
-            () -> sequence.add("policy"),
+            () -> sequence.add(FIXTURE_ROOT_956E6E33),
+            () -> sequence.add(FIXTURE_POLICY_17AD92E6),
             command -> fail("no start after uncertain intent publication"),
             () -> {
               sequence.add("intent-unknown");
               throw new IOException("test-only publication uncertainty");
             });
     assertThrows(IOException.class, failedPublication::start);
-    assertEquals(List.of("root", "policy", "root", "intent-unknown"), sequence);
+    assertEquals(
+        List.of(
+            FIXTURE_ROOT_956E6E33,
+            FIXTURE_POLICY_17AD92E6,
+            FIXTURE_ROOT_956E6E33,
+            "intent-unknown"),
+        sequence);
 
     sequence.clear();
     var uncertainStart =
         new BackupUnitStartClient(
-            () -> sequence.add("root"),
-            () -> sequence.add("policy"),
+            () -> sequence.add(FIXTURE_ROOT_956E6E33),
+            () -> sequence.add(FIXTURE_POLICY_17AD92E6),
             command -> {
               sequence.add("client-unknown");
               throw new IOException("test-only unknown delivery");
             },
             () -> {
-              sequence.add("intent");
-              return () -> sequence.add("retire");
+              sequence.add(FIXTURE_INTENT_3A4C15E5);
+              return () -> sequence.add(FIXTURE_RETIRE_A2A9D4FF);
             });
     assertEquals(BackupUnitStartClient.Status.UNKNOWN, uncertainStart.start().status());
-    assertEquals(List.of("root", "policy", "root", "intent", "client-unknown"), sequence);
+    assertEquals(
+        List.of(
+            FIXTURE_ROOT_956E6E33,
+            FIXTURE_POLICY_17AD92E6,
+            FIXTURE_ROOT_956E6E33,
+            FIXTURE_INTENT_3A4C15E5,
+            "client-unknown"),
+        sequence);
     assertThrows(
         NullPointerException.class,
         () -> new BackupUnitStartClient(() -> {}, () -> {}, command -> child(), null));
@@ -230,16 +265,23 @@ final class BackupUnitStartClientTest {
     var process = child();
     var attempt =
         new BackupUnitStartClient(
-                () -> sequence.add("root"),
+                () -> sequence.add(FIXTURE_ROOT_956E6E33),
                 () -> {},
                 command -> process,
                 () -> {
                   sequence.add("publish");
-                  return () -> sequence.add("retire");
+                  return () -> sequence.add(FIXTURE_RETIRE_A2A9D4FF);
                 })
             .start();
     assertEquals(BackupUnitStartClient.Status.CLIENT_EXITED_ZERO, attempt.status());
-    assertEquals(List.of("root", "root", "publish", "root", "root"), sequence);
+    assertEquals(
+        List.of(
+            FIXTURE_ROOT_956E6E33,
+            FIXTURE_ROOT_956E6E33,
+            "publish",
+            FIXTURE_ROOT_956E6E33,
+            FIXTURE_ROOT_956E6E33),
+        sequence);
     assertThrows(
         IOException.class,
         () ->
@@ -248,10 +290,10 @@ final class BackupUnitStartClientTest {
                   sequence.add("not-complete");
                   throw new IOException("worker not terminal");
                 }));
-    assertFalse(sequence.contains("retire"));
+    assertFalse(sequence.contains(FIXTURE_RETIRE_A2A9D4FF));
     attempt.retireAfter(() -> sequence.add("full-parent-proof"));
-    assertEquals("retire", sequence.getLast());
-    assertEquals(1, sequence.stream().filter("retire"::equals).count());
+    assertEquals(FIXTURE_RETIRE_A2A9D4FF, sequence.getLast());
+    assertEquals(1, sequence.stream().filter(FIXTURE_RETIRE_A2A9D4FF::equals).count());
     assertThrows(IOException.class, () -> attempt.retireAfter(() -> fail("cannot repeat")));
     process.allClosed();
 
@@ -347,8 +389,8 @@ final class BackupUnitStartClientTest {
     var sequence = new ArrayList<String>();
     var client =
         new BackupUnitStartClient(
-            () -> sequence.add("root"),
-            () -> sequence.add("policy"),
+            () -> sequence.add(FIXTURE_ROOT_956E6E33),
+            () -> sequence.add(FIXTURE_POLICY_17AD92E6),
             command -> {
               assertEquals(
                   List.of(
@@ -360,15 +402,23 @@ final class BackupUnitStartClientTest {
                       "start",
                       "schubert-nk-backup.service"),
                   command);
-              sequence.add("client");
+              sequence.add(FIXTURE_CLIENT_0426EDC5);
               return process;
             });
     var attempt = client.start();
     assertEquals(BackupUnitStartClient.Status.CLIENT_EXITED_ZERO, attempt.status());
-    assertEquals(List.of("root", "policy", "root", "client", "root", "root"), sequence);
+    assertEquals(
+        List.of(
+            FIXTURE_ROOT_956E6E33,
+            FIXTURE_POLICY_17AD92E6,
+            FIXTURE_ROOT_956E6E33,
+            FIXTURE_CLIENT_0426EDC5,
+            FIXTURE_ROOT_956E6E33,
+            FIXTURE_ROOT_956E6E33),
+        sequence);
     process.allClosed();
     assertEquals(0, process.destroyed);
-    assertEquals(1, process.counts.get("wait"));
+    assertEquals(1, process.counts.get(FIXTURE_WAIT_F3010736));
   }
 
   @Test
@@ -448,7 +498,7 @@ final class BackupUnitStartClientTest {
     assertEquals(BackupUnitStartClient.Status.CLIENT_EXITED_ZERO, attempt.awaitClient());
     assertEquals(BackupUnitStartClient.Status.CLIENT_EXITED_ZERO, attempt.awaitClient());
     assertEquals(1, starts[0]);
-    assertEquals(2, process.counts.get("wait"));
+    assertEquals(2, process.counts.get(FIXTURE_WAIT_F3010736));
     process.allClosed();
   }
 
@@ -531,7 +581,7 @@ final class BackupUnitStartClientTest {
     var afterWait = child();
     afterWait.hook =
         (name, count) -> {
-          if (name.equals("wait") && count == 1) Thread.currentThread().interrupt();
+          if (name.equals(FIXTURE_WAIT_F3010736) && count == 1) Thread.currentThread().interrupt();
         };
     try {
       var attempt = new BackupUnitStartClient(() -> {}, () -> {}, command -> afterWait).start();
@@ -629,7 +679,7 @@ final class BackupUnitStartClientTest {
     assertEquals(BackupUnitStartClient.Status.CLIENT_EXITED_ZERO, attempt.status());
     assertEquals(BackupUnitStartClient.Status.CLIENT_EXITED_ZERO, attempt.awaitClient());
     assertEquals(1, spawns[0]);
-    assertEquals(1, child.counts.get("wait"));
+    assertEquals(1, child.counts.get(FIXTURE_WAIT_F3010736));
     child.allClosed();
     // No Unit state or backup artifact is present in this fixture. The client exposes only an
     // opaque command result, and parent fresh-Invocation/full-process/archive gates remain open.

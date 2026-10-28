@@ -38,6 +38,12 @@ import org.junit.jupiter.api.io.TempDir;
  * PT-IDEM-012: independent SS323 golden and actual broker transaction/duplicate after-conditions.
  */
 final class WebLogMessageSenderTest {
+  private static final String FIXTURE_SEND_9E27AAE5 = "send";
+  private static final String FIXTURE_COMMIT_5EA9C586 = "commit";
+  private static final String FIXTURE_ROLLBACK_3770B198 = "rollback";
+  private static final String FIXTURE_CLOSE_97959247 = "close";
+  private static final String FIXTURE_MODE_B6D5C2C3 = "mode";
+  private static final String FIXTURE_OPEN_35FF74AE = "open";
   private static final Instant NOW = Instant.parse("2026-09-06T00:00:00Z");
   private static final WebLogPayloadIdentity IDENTITY =
       new WebLogPayloadIdentity(
@@ -192,7 +198,7 @@ final class WebLogMessageSenderTest {
                 JMSProducer.class.getClassLoader(),
                 new Class<?>[] {JMSProducer.class},
                 (proxy, method, arguments) -> {
-                  if (!java.util.List.of("setDeliveryMode", "setTimeToLive", "send")
+                  if (!java.util.List.of("setDeliveryMode", "setTimeToLive", FIXTURE_SEND_9E27AAE5)
                       .contains(method.getName()))
                     throw new AssertionError("unexpected synthetic producer call");
                   return proxy;
@@ -211,13 +217,13 @@ final class WebLogMessageSenderTest {
                   return bytes;
                 case "createProducer":
                   return producer;
-                case "commit":
+                case FIXTURE_COMMIT_5EA9C586:
                   counts[2].incrementAndGet();
                   return null;
-                case "rollback":
+                case FIXTURE_ROLLBACK_3770B198:
                   counts[3].incrementAndGet();
                   return null;
-                case "close":
+                case FIXTURE_CLOSE_97959247:
                   counts[0].incrementAndGet();
                   if (closing.isPresent()) throw closing.orElseThrow();
                   return null;
@@ -306,14 +312,22 @@ final class WebLogMessageSenderTest {
       assertEquals("web log JMS lifecycle failed", nullContext.getMessage());
       assertInstanceOf(NullPointerException.class, nullContext.getCause());
       for (String failpoint :
-          new String[] {"mode", "write", "send", "commit", "rollback", "close", "open"}) {
+          new String[] {
+            FIXTURE_MODE_B6D5C2C3,
+            "write",
+            FIXTURE_SEND_9E27AAE5,
+            FIXTURE_COMMIT_5EA9C586,
+            FIXTURE_ROLLBACK_3770B198,
+            FIXTURE_CLOSE_97959247,
+            FIXTURE_OPEN_35FF74AE
+          }) {
         AtomicInteger rolledBack = new AtomicInteger();
         AtomicReference<byte[]> written = new AtomicReference<>();
         WebLogMessageSender sender =
             new WebLogMessageSender(
                 codec,
                 () -> {
-                  if (failpoint.equals("open")) {
+                  if (failpoint.equals(FIXTURE_OPEN_35FF74AE)) {
                     throw new JMSRuntimeException("synthetic open failure");
                   }
                   return fakeContext(failpoint, rolledBack, written);
@@ -322,9 +336,9 @@ final class WebLogMessageSenderTest {
             assertThrows(WebLogSendException.class, () -> sender.send(row), failpoint);
         String expected =
             switch (failpoint) {
-              case "mode" -> "web log JMS context is not transacted";
-              case "commit" -> "web log JMS commit was not confirmed";
-              case "open", "close" -> "web log JMS lifecycle failed";
+              case FIXTURE_MODE_B6D5C2C3 -> "web log JMS context is not transacted";
+              case FIXTURE_COMMIT_5EA9C586 -> "web log JMS commit was not confirmed";
+              case FIXTURE_OPEN_35FF74AE, FIXTURE_CLOSE_97959247 -> "web log JMS lifecycle failed";
               default -> "web log JMS send was not confirmed";
             };
         assertEquals(expected, error.getMessage());
@@ -333,12 +347,12 @@ final class WebLogMessageSenderTest {
           assertArrayEquals(
               new byte[2336], written.get(), "owned plaintext erased on all send exits");
         }
-        if (failpoint.equals("rollback")) {
+        if (failpoint.equals(FIXTURE_ROLLBACK_3770B198)) {
           assertEquals(1, error.getCause().getSuppressed().length);
         }
         assertEquals(
             switch (failpoint) {
-              case "mode", "open", "close" -> 0;
+              case FIXTURE_MODE_B6D5C2C3, FIXTURE_OPEN_35FF74AE, FIXTURE_CLOSE_97959247 -> 0;
               default -> 1;
             },
             rolledBack.get());
@@ -375,11 +389,11 @@ final class WebLogMessageSenderTest {
                       switch (method.getName()) {
                         case "getSessionMode" -> JMSContext.SESSION_TRANSACTED;
                         case "createBytesMessage" -> message;
-                        case "rollback" -> {
+                        case FIXTURE_ROLLBACK_3770B198 -> {
                           rollbacks.incrementAndGet();
                           throw primary;
                         }
-                        case "close" -> {
+                        case FIXTURE_CLOSE_97959247 -> {
                           closes.incrementAndGet();
                           yield null;
                         }
@@ -452,8 +466,9 @@ final class WebLogMessageSenderTest {
                 JMSProducer.class.getClassLoader(),
                 new Class<?>[] {JMSProducer.class},
                 (proxy, method, args) -> {
-                  if (method.getName().equals("send")
-                      && (point.equals("send") || point.equals("rollback"))) {
+                  if (method.getName().equals(FIXTURE_SEND_9E27AAE5)
+                      && (point.equals(FIXTURE_SEND_9E27AAE5)
+                          || point.equals(FIXTURE_ROLLBACK_3770B198))) {
                     throw new JMSRuntimeException("synthetic send failure");
                   }
                   return proxy;
@@ -465,26 +480,26 @@ final class WebLogMessageSenderTest {
             (proxy, method, args) ->
                 switch (method.getName()) {
                   case "getSessionMode" ->
-                      point.equals("mode")
+                      point.equals(FIXTURE_MODE_B6D5C2C3)
                           ? JMSContext.AUTO_ACKNOWLEDGE
                           : JMSContext.SESSION_TRANSACTED;
                   case "createBytesMessage" -> bytes;
                   case "createProducer" -> producer;
-                  case "commit" -> {
-                    if (point.equals("commit")) {
+                  case FIXTURE_COMMIT_5EA9C586 -> {
+                    if (point.equals(FIXTURE_COMMIT_5EA9C586)) {
                       throw new JMSRuntimeException("synthetic commit failure");
                     }
                     yield null;
                   }
-                  case "rollback" -> {
+                  case FIXTURE_ROLLBACK_3770B198 -> {
                     rolledBack.incrementAndGet();
-                    if (point.equals("rollback")) {
+                    if (point.equals(FIXTURE_ROLLBACK_3770B198)) {
                       throw new JMSRuntimeException("synthetic rollback failure");
                     }
                     yield null;
                   }
-                  case "close" -> {
-                    if (point.equals("close")) {
+                  case FIXTURE_CLOSE_97959247 -> {
+                    if (point.equals(FIXTURE_CLOSE_97959247)) {
                       throw new JMSRuntimeException("synthetic close failure");
                     }
                     yield null;

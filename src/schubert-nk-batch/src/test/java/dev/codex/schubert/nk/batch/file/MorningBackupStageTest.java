@@ -26,6 +26,11 @@ import org.junit.jupiter.api.Test;
 
 /** NK-OPS-001/OPS009/BAK001/UI251/SS341/343/SSC089/092/094/104/105; MBSTAGE001-004. */
 final class MorningBackupStageTest {
+  private static final String FIXTURE_BOTH_BACKUP_BEGINS_COMMITTED_AF100AAF =
+      "both-backup-begins-committed";
+  private static final String FIXTURE_M_A_DB_ORIGINAL_CLOSE_92A6AD74 = "M/A/DB/original-close";
+  private static final String FIXTURE_REQUEST_PUBLISHED_B66E103F = "request-published";
+  private static final String FIXTURE_PUBLICATION_REFUSED_38D9B6DA = "publication-refused";
   private static final BatchRun RUN =
       new BatchRun(
           UUID.fromString("11111111-1111-4111-8111-111111111111"),
@@ -91,14 +96,16 @@ final class MorningBackupStageTest {
         assertEquals(
             List.of(
                 "M/A/DB/original-enter;INVALID",
-                "both-backup-begins-committed",
+                FIXTURE_BOTH_BACKUP_BEGINS_COMMITTED_AF100AAF,
                 "request",
                 "same-epoch-work",
-                "M/A/DB/original-close"),
+                FIXTURE_M_A_DB_ORIGINAL_CLOSE_92A6AD74),
             events);
       } else {
         assertThrows(IOException.class, execute::call);
-        assertEquals(List.of("M/A/DB/original-enter;INVALID", "M/A/DB/original-close"), events);
+        assertEquals(
+            List.of("M/A/DB/original-enter;INVALID", FIXTURE_M_A_DB_ORIGINAL_CLOSE_92A6AD74),
+            events);
       }
     }
   }
@@ -122,7 +129,7 @@ final class MorningBackupStageTest {
         return continuation.execute(STATE, database);
       } finally {
         held.set(false);
-        events.add("M/A/DB/original-close");
+        events.add(FIXTURE_M_A_DB_ORIGINAL_CLOSE_92A6AD74);
       }
     }
   }
@@ -155,7 +162,7 @@ final class MorningBackupStageTest {
       assertEquals(RUN, run);
       assertEquals(NOW, now);
       recover = recoverAbandoned;
-      events.add("both-backup-begins-committed");
+      events.add(FIXTURE_BOTH_BACKUP_BEGINS_COMMITTED_AF100AAF);
       if (error != null) throw error;
       return new MorningDatabaseSession.BackupBegins(
           new BatchStepAttempt(41, RUN, BatchStep.BACKUP_DB, 1, NOW, false),
@@ -179,7 +186,7 @@ final class MorningBackupStageTest {
               assertTrue(scope.held.get());
               assertEquals(RUN.id(), request.run());
               assertEquals(PART, part);
-              events.add("request-published");
+              events.add(FIXTURE_REQUEST_PUBLISHED_B66E103F);
             },
             Clock.fixed(NOW, ZoneOffset.UTC),
             false,
@@ -197,10 +204,10 @@ final class MorningBackupStageTest {
     assertEquals(
         List.of(
             "M/A/DB/original-enter;INVALID",
-            "both-backup-begins-committed",
-            "request-published",
+            FIXTURE_BOTH_BACKUP_BEGINS_COMMITTED_AF100AAF,
+            FIXTURE_REQUEST_PUBLISHED_B66E103F,
             "worker-boundary",
-            "M/A/DB/original-close"),
+            FIXTURE_M_A_DB_ORIGINAL_CLOSE_92A6AD74),
         events);
   }
 
@@ -240,8 +247,8 @@ final class MorningBackupStageTest {
     assertEquals(
         List.of(
             "M/A/DB/original-enter;INVALID",
-            "both-backup-begins-committed",
-            "M/A/DB/original-close"),
+            FIXTURE_BOTH_BACKUP_BEGINS_COMMITTED_AF100AAF,
+            FIXTURE_M_A_DB_ORIGINAL_CLOSE_92A6AD74),
         events);
     events.clear();
     scope.database.error = null;
@@ -251,7 +258,7 @@ final class MorningBackupStageTest {
             MorningBackupStage.execute(
                 scope,
                 (request, part) -> {
-                  events.add("publication-refused");
+                  events.add(FIXTURE_PUBLICATION_REFUSED_38D9B6DA);
                   throw new IOException("new-only conflict");
                 },
                 Clock.fixed(NOW, ZoneOffset.UTC),
@@ -261,9 +268,9 @@ final class MorningBackupStageTest {
     assertEquals(
         List.of(
             "M/A/DB/original-enter;INVALID",
-            "both-backup-begins-committed",
-            "publication-refused",
-            "M/A/DB/original-close"),
+            FIXTURE_BOTH_BACKUP_BEGINS_COMMITTED_AF100AAF,
+            FIXTURE_PUBLICATION_REFUSED_38D9B6DA,
+            FIXTURE_M_A_DB_ORIGINAL_CLOSE_92A6AD74),
         events);
   }
 
@@ -296,7 +303,7 @@ final class MorningBackupStageTest {
             MorningBackupStage.execute(
                 scope, publisher, clock, false, PART, (request, begins) -> null));
     assertFalse(scope.held.get());
-    assertEquals("M/A/DB/original-close", events.getLast());
+    assertEquals(FIXTURE_M_A_DB_ORIGINAL_CLOSE_92A6AD74, events.getLast());
   }
 
   @Test
@@ -310,7 +317,7 @@ final class MorningBackupStageTest {
               assertTrue(scope.held.get());
               assertEquals(RUN.id(), request.run());
               assertEquals(PART, part);
-              events.add("request-published");
+              events.add(FIXTURE_REQUEST_PUBLISHED_B66E103F);
             },
             Clock.fixed(NOW, ZoneOffset.UTC),
             false,
@@ -332,10 +339,10 @@ final class MorningBackupStageTest {
     assertEquals(
         List.of(
             "M/A/DB/original-enter;INVALID",
-            "both-backup-begins-committed",
-            "request-published",
+            FIXTURE_BOTH_BACKUP_BEGINS_COMMITTED_AF100AAF,
+            FIXTURE_REQUEST_PUBLISHED_B66E103F,
             "owned-worker-boundary",
-            "M/A/DB/original-close"),
+            FIXTURE_M_A_DB_ORIGINAL_CLOSE_92A6AD74),
         events);
   }
 
@@ -397,7 +404,7 @@ final class MorningBackupStageTest {
             MorningBackupStage.executeOwned(
                 scope,
                 (request, part) -> {
-                  events.add("publication-refused");
+                  events.add(FIXTURE_PUBLICATION_REFUSED_38D9B6DA);
                   throw new IOException("test-only publication failure");
                 },
                 Clock.fixed(NOW, ZoneOffset.UTC),
@@ -408,9 +415,9 @@ final class MorningBackupStageTest {
     assertEquals(
         List.of(
             "M/A/DB/original-enter;INVALID",
-            "both-backup-begins-committed",
-            "publication-refused",
-            "M/A/DB/original-close"),
+            FIXTURE_BOTH_BACKUP_BEGINS_COMMITTED_AF100AAF,
+            FIXTURE_PUBLICATION_REFUSED_38D9B6DA,
+            FIXTURE_M_A_DB_ORIGINAL_CLOSE_92A6AD74),
         events);
   }
 
@@ -448,6 +455,6 @@ final class MorningBackupStageTest {
                 PART,
                 (state, database, request, begins, part) -> null));
     assertFalse(scope.held.get());
-    assertEquals("M/A/DB/original-close", events.getLast());
+    assertEquals(FIXTURE_M_A_DB_ORIGINAL_CLOSE_92A6AD74, events.getLast());
   }
 }

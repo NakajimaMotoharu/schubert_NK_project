@@ -18,6 +18,8 @@ import org.junit.jupiter.api.Test;
 
 /** PT-OPS-API-REM001..003: independent provider identity/order, not native acceptance. */
 class ApiConsumerRemainderTest {
+  private static final String FIXTURE_CLOSE_97959247 = "close";
+
   @Test
   void factoryFailureSignalsBeforeClosingAllEarlierOwnersWithFatalPriority() {
     for (boolean primaryFatal : List.of(false, true)) {
@@ -179,7 +181,7 @@ class ApiConsumerRemainderTest {
         for (boolean same : List.of(false, true)) {
           Throwable primary =
               primaryFatal ? new AssertionError("startup") : new IllegalStateException("startup");
-          Throwable closing = same ? primary : new AssertionError("close");
+          Throwable closing = same ? primary : new AssertionError(FIXTURE_CLOSE_97959247);
           var count = new AtomicInteger();
           var stopped = new AtomicInteger();
           Supplier<JMSContext> source =
@@ -190,7 +192,8 @@ class ApiConsumerRemainderTest {
                         JMSContext.class.getClassLoader(),
                         new Class<?>[] {JMSContext.class},
                         (p, m, a) -> {
-                          if (m.getName().equals("close")) assertEquals(1, stopped.get());
+                          if (m.getName().equals(FIXTURE_CLOSE_97959247))
+                            assertEquals(1, stopped.get());
                           return QuestionWorkConsumersTest.invoke(delegate, m, a);
                         });
               };
@@ -231,7 +234,8 @@ class ApiConsumerRemainderTest {
             JMSContext.class.getClassLoader(),
             new Class<?>[] {JMSContext.class},
             (p, m, a) -> {
-              if (m.getName().equals("close")) calls.add("close" + number);
+              if (m.getName().equals(FIXTURE_CLOSE_97959247))
+                calls.add(FIXTURE_CLOSE_97959247 + number);
               return QuestionWorkConsumersTest.invoke(delegate, m, a);
             });
   }

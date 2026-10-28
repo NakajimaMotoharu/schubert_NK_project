@@ -41,6 +41,12 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** PT-AUT-004-01..06: production PBKDF2/JDBC/session/audit, independent hash and SQL oracle. */
 final class AuthenticationServiceTest {
+  private static final String FIXTURE_LOGIN_USER_D270AFC0 = "login-user";
+  private static final String FIXTURE_SELECT_FAILED_COUNT_FROM_SCHUBERT_APP_US_DB6B407A =
+      "select failed_count from schubert.app_users";
+  private static final String FIXTURE_SYNTHETIC_WRONG_EEC4C437 = "synthetic-wrong";
+  private static final String FIXTURE_UNKNOWN_EB8BF0D8 = "unknown";
+
   // BUG1108/YKT877: retain only failed isolated synthetic fixtures for bounded
   // SQLSTATE diagnosis. Never copy the private DB/log into public evidence.
   @TempDir(cleanup = CleanupMode.ON_SUCCESS)
@@ -133,7 +139,13 @@ final class AuthenticationServiceTest {
           assertInstanceOf(
               LoginResult.Success.class,
               service.authenticate(
-                  connection, "login-user", password, client, message, correlation, NOW));
+                  connection,
+                  FIXTURE_LOGIN_USER_D270AFC0,
+                  password,
+                  client,
+                  message,
+                  correlation,
+                  NOW));
       assertArrayEquals(new char[password.length], password);
       assertEquals(ResultCode.SUCCESS, accepted.resultCode());
       assertEquals(0, accepted.retryAfterSeconds());
@@ -153,9 +165,10 @@ final class AuthenticationServiceTest {
           "000000000", new String(wire, 167, 9, java.nio.charset.StandardCharsets.US_ASCII));
       assertEquals(0, scalar("select count(*) from schubert.auth_sessions"));
       assertEquals(0, scalar("select count(*) from schubert.app_logs"));
-      assertEquals(2, scalar("select failed_count from schubert.app_users"));
+      assertEquals(2, scalar(FIXTURE_SELECT_FAILED_COUNT_FROM_SCHUBERT_APP_US_DB6B407A));
       connection.rollback();
-      service.authenticate(connection, "login-user", password(), client, message, correlation, NOW);
+      service.authenticate(
+          connection, FIXTURE_LOGIN_USER_D270AFC0, password(), client, message, correlation, NOW);
       connection.commit();
       assertFalse(connection.isClosed());
     }
@@ -202,11 +215,18 @@ final class AuthenticationServiceTest {
       seed();
       seenHashes.clear();
       if (condition.equals("disabled")) execute("update schubert.app_users set status='DISABLED'");
-      char[] raw = condition.equals("wrong") ? "synthetic-wrong".toCharArray() : password();
+      char[] raw =
+          condition.equals("wrong") ? FIXTURE_SYNTHETIC_WRONG_EEC4C437.toCharArray() : password();
       var failure =
           assertInstanceOf(
               LoginResult.Failure.class,
-              call(service, condition.equals("absent") ? "unknown" : "login-user", raw, NOW));
+              call(
+                  service,
+                  condition.equals("absent")
+                      ? FIXTURE_UNKNOWN_EB8BF0D8
+                      : FIXTURE_LOGIN_USER_D270AFC0,
+                  raw,
+                  NOW));
       assertEquals(new LoginResult.Failure(ResultCode.AUTHENTICATION_FAILED, 0), failure);
       assertEquals("LoginFailure[code=0101, retryAfterSeconds=0]", failure.toString());
       assertArrayEquals(new char[raw.length], raw);
@@ -217,7 +237,7 @@ final class AuthenticationServiceTest {
       assertEquals(1, scalar("select failed_count from schubert.login_ip_attempts"));
       assertEquals(
           condition.equals("absent") ? 0 : 1,
-          scalar("select failed_count from schubert.app_users"));
+          scalar(FIXTURE_SELECT_FAILED_COUNT_FROM_SCHUBERT_APP_US_DB6B407A));
       assertEquals(
           1,
           scalar(
@@ -229,11 +249,11 @@ final class AuthenticationServiceTest {
     var alwaysTrue = checked((raw, stored) -> true);
     assertEquals(
         ResultCode.AUTHENTICATION_FAILED,
-        call(alwaysTrue, "unknown", password(), NOW).resultCode());
+        call(alwaysTrue, FIXTURE_UNKNOWN_EB8BF0D8, password(), NOW).resultCode());
     execute("update schubert.app_users set status='DISABLED'");
     assertEquals(
         ResultCode.AUTHENTICATION_FAILED,
-        call(alwaysTrue, "login-user", password(), NOW).resultCode());
+        call(alwaysTrue, FIXTURE_LOGIN_USER_D270AFC0, password(), NOW).resultCode());
     assertEquals(0, scalar("select count(*) from schubert.auth_sessions"));
   }
 
@@ -308,7 +328,8 @@ final class AuthenticationServiceTest {
     assertEquals(7, accepted.actor().userId());
     assertEquals(
         ResultCode.AUTHENTICATION_FAILED,
-        call(realService(), display, "synthetic-wrong".toCharArray(), NOW).resultCode());
+        call(realService(), display, FIXTURE_SYNTHETIC_WRONG_EEC4C437.toCharArray(), NOW)
+            .resultCode());
     try (Connection c = database.api();
         var s = c.createStatement();
         var rows =
@@ -338,7 +359,7 @@ final class AuthenticationServiceTest {
               return false;
             });
     for (int i = 1; i <= 5; i++) {
-      var result = call(service, "login-user", password(), NOW);
+      var result = call(service, FIXTURE_LOGIN_USER_D270AFC0, password(), NOW);
       assertEquals(
           i == 5 ? ResultCode.LOCKED : ResultCode.AUTHENTICATION_FAILED, result.resultCode());
       assertEquals(i == 5 ? 900 : 0, result.retryAfterSeconds());
@@ -349,10 +370,10 @@ final class AuthenticationServiceTest {
     char[] lockedPassword = password();
     assertEquals(
         new LoginResult.Failure(ResultCode.LOCKED, 870),
-        call(service, "login-user", lockedPassword, NOW.plusSeconds(30)));
+        call(service, FIXTURE_LOGIN_USER_D270AFC0, lockedPassword, NOW.plusSeconds(30)));
     assertArrayEquals(new char[lockedPassword.length], lockedPassword);
     assertEquals(5, calls.get());
-    assertEquals(5, scalar("select failed_count from schubert.app_users"));
+    assertEquals(5, scalar(FIXTURE_SELECT_FAILED_COUNT_FROM_SCHUBERT_APP_US_DB6B407A));
     assertEquals(5, scalar("select failed_count from schubert.login_ip_attempts"));
     assertEquals(
         1,
@@ -363,24 +384,27 @@ final class AuthenticationServiceTest {
     for (int i = 1; i <= 10; i++)
       assertEquals(
           i == 10 ? ResultCode.LOCKED : ResultCode.AUTHENTICATION_FAILED,
-          call(service, "unknown", password(), NOW).resultCode());
+          call(service, FIXTURE_UNKNOWN_EB8BF0D8, password(), NOW).resultCode());
     assertEquals(10, calls.get());
     assertEquals(
-        new LoginResult.Failure(ResultCode.LOCKED, 900), call(service, "unknown", password(), NOW));
+        new LoginResult.Failure(ResultCode.LOCKED, 900),
+        call(service, FIXTURE_UNKNOWN_EB8BF0D8, password(), NOW));
     assertEquals(10, calls.get());
-    assertEquals(0, scalar("select failed_count from schubert.app_users"));
+    assertEquals(0, scalar(FIXTURE_SELECT_FAILED_COUNT_FROM_SCHUBERT_APP_US_DB6B407A));
     // Two locks: select the later deadline, then ceil fractional microsecond and cap at 900.
     execute(
         "update schubert.app_users set"
             + " failed_count=5,failure_window_started_at='2026-09-08T00:00:00Z',locked_until='2026-09-08T00:20:00Z'");
-    assertEquals(900, call(service, "login-user", password(), NOW).retryAfterSeconds());
+    assertEquals(
+        900, call(service, FIXTURE_LOGIN_USER_D270AFC0, password(), NOW).retryAfterSeconds());
     execute("update schubert.app_users set locked_until='2026-09-08T00:00:01.000001Z'");
     execute("update schubert.login_ip_attempts set locked_until='2026-09-08T00:00:01Z'");
-    assertEquals(2, call(service, "login-user", password(), NOW).retryAfterSeconds());
+    assertEquals(
+        2, call(service, FIXTURE_LOGIN_USER_D270AFC0, password(), NOW).retryAfterSeconds());
     // At strict lock expiry, hashing resumes. At the inclusive failure-window endpoint it relocks.
     assertEquals(
         ResultCode.LOCKED,
-        call(service, "login-user", password(), NOW.plusSeconds(900)).resultCode());
+        call(service, FIXTURE_LOGIN_USER_D270AFC0, password(), NOW.plusSeconds(900)).resultCode());
     assertEquals(11, calls.get());
   }
 
@@ -391,12 +415,12 @@ final class AuthenticationServiceTest {
       for (boolean accepted : new boolean[] {true, false}) {
         seed();
         try (Connection connection = database.transaction()) {
-          char[] raw = accepted ? password() : "synthetic-wrong".toCharArray();
+          char[] raw = accepted ? password() : FIXTURE_SYNTHETIC_WRONG_EEC4C437.toCharArray();
           assertInfrastructure(
               () ->
                   service.authenticate(
                       intercept(connection, fault),
-                      "login-user",
+                      FIXTURE_LOGIN_USER_D270AFC0,
                       raw,
                       client,
                       UUID.randomUUID(),
@@ -417,7 +441,7 @@ final class AuthenticationServiceTest {
             () ->
                 service.authenticate(
                     intercept(connection, fault),
-                    "login-user",
+                    FIXTURE_LOGIN_USER_D270AFC0,
                     raw,
                     client,
                     UUID.randomUUID(),
@@ -438,7 +462,7 @@ final class AuthenticationServiceTest {
           () ->
               unavailable.authenticate(
                   connection,
-                  "login-user",
+                  FIXTURE_LOGIN_USER_D270AFC0,
                   raw,
                   client,
                   UUID.randomUUID(),
@@ -463,7 +487,7 @@ final class AuthenticationServiceTest {
                         })
                     .authenticate(
                         connection,
-                        "login-user",
+                        FIXTURE_LOGIN_USER_D270AFC0,
                         raw,
                         client,
                         UUID.randomUUID(),
@@ -488,9 +512,10 @@ final class AuthenticationServiceTest {
               return java.util.Arrays.equals(candidate, "synthetic-password".toCharArray());
             });
     var first =
-        assertInstanceOf(LoginResult.Success.class, call(service, "login-user", password(), NOW));
-    call(service, "login-user", password(), NOW.plusSeconds(1));
-    call(service, "login-user", password(), NOW.plusSeconds(2));
+        assertInstanceOf(
+            LoginResult.Success.class, call(service, FIXTURE_LOGIN_USER_D270AFC0, password(), NOW));
+    call(service, FIXTURE_LOGIN_USER_D270AFC0, password(), NOW.plusSeconds(1));
+    call(service, FIXTURE_LOGIN_USER_D270AFC0, password(), NOW.plusSeconds(2));
     assertEquals(2, scalar("select count(*) from schubert.auth_sessions where not revoked"));
     assertEquals(
         1,
@@ -509,7 +534,8 @@ final class AuthenticationServiceTest {
     try (var executor = Executors.newFixedThreadPool(8)) {
       var successes = new ArrayList<Future<LoginResult>>();
       for (int i = 0; i < 12; i++)
-        successes.add(executor.submit(() -> call(service, "login-user", password(), NOW)));
+        successes.add(
+            executor.submit(() -> call(service, FIXTURE_LOGIN_USER_D270AFC0, password(), NOW)));
       for (var result : successes) assertEquals(ResultCode.SUCCESS, result.get().resultCode());
       assertEquals(12, scalar("select count(*) from schubert.auth_sessions"));
       assertEquals(2, scalar("select count(*) from schubert.auth_sessions where not revoked"));
@@ -519,7 +545,12 @@ final class AuthenticationServiceTest {
       for (int i = 0; i < 20; i++)
         failures.add(
             executor.submit(
-                () -> call(service, "login-user", "synthetic-wrong".toCharArray(), NOW)));
+                () ->
+                    call(
+                        service,
+                        FIXTURE_LOGIN_USER_D270AFC0,
+                        FIXTURE_SYNTHETIC_WRONG_EEC4C437.toCharArray(),
+                        NOW)));
       int invalid = 0;
       int locked = 0;
       for (var result : failures) {
@@ -530,7 +561,7 @@ final class AuthenticationServiceTest {
       assertEquals(4, invalid);
       assertEquals(16, locked);
     }
-    assertEquals(5, scalar("select failed_count from schubert.app_users"));
+    assertEquals(5, scalar(FIXTURE_SELECT_FAILED_COUNT_FROM_SCHUBERT_APP_US_DB6B407A));
     assertEquals(5, scalar("select failed_count from schubert.login_ip_attempts"));
     assertEquals(32, scalar("select count(*) from schubert.app_logs where action like 'LOGIN_%'"));
     assertEquals(
@@ -566,7 +597,7 @@ final class AuthenticationServiceTest {
                     realService()
                         .authenticate(
                             attempted,
-                            "login-user",
+                            FIXTURE_LOGIN_USER_D270AFC0,
                             raw,
                             client,
                             UUID.randomUUID(),
@@ -611,7 +642,7 @@ final class AuthenticationServiceTest {
             () ->
                 service.authenticate(
                     index == 0 ? null : connection,
-                    index == 1 ? null : "login-user",
+                    index == 1 ? null : FIXTURE_LOGIN_USER_D270AFC0,
                     raw,
                     index == 2 ? null : client,
                     index == 3 ? null : UUID.randomUUID(),
@@ -624,7 +655,7 @@ final class AuthenticationServiceTest {
           () ->
               service.authenticate(
                   connection,
-                  "login-user",
+                  FIXTURE_LOGIN_USER_D270AFC0,
                   null,
                   client,
                   UUID.randomUUID(),
@@ -636,7 +667,7 @@ final class AuthenticationServiceTest {
           () ->
               service.authenticate(
                   connection,
-                  "login-user",
+                  FIXTURE_LOGIN_USER_D270AFC0,
                   raw,
                   client,
                   UUID.randomUUID(),
@@ -711,7 +742,7 @@ final class AuthenticationServiceTest {
   }
 
   private static void assertEmptyTransactionEffects() throws SQLException {
-    assertEquals(0, scalar("select failed_count from schubert.app_users"));
+    assertEquals(0, scalar(FIXTURE_SELECT_FAILED_COUNT_FROM_SCHUBERT_APP_US_DB6B407A));
     assertEquals(0, scalar("select count(*) from schubert.login_ip_attempts"));
     assertEquals(0, scalar("select count(*) from schubert.auth_sessions"));
     assertEquals(0, scalar("select count(*) from schubert.app_logs"));

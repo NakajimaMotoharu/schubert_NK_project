@@ -12,6 +12,8 @@ import org.junit.jupiter.api.Test;
 
 /** PT-IDEM-009/011 null, bounds, defensive-copy, and redaction contract. */
 final class OutboxModelTest {
+  private static final String FIXTURE_QWKREQ01_19741256 = "QWKREQ01";
+  private static final String FIXTURE_001_A3FEAA64 = "001";
   private static final UUID MESSAGE = UUID.fromString("71000000-0000-0000-0000-000000000001");
   private static final UUID CORRELATION = UUID.fromString("72000000-0000-0000-0000-000000000001");
   private static final Instant NOW = Instant.parse("2026-09-05T00:00:00Z");
@@ -28,8 +30,8 @@ final class OutboxModelTest {
     assertEquals(MESSAGE, entry.messageId());
     assertEquals(CORRELATION, entry.correlationId());
     assertEquals(OutboxDestination.ASYNC_WORK, entry.destination());
-    assertEquals("QWKREQ01", entry.layoutId());
-    assertEquals("001", entry.layoutVersion());
+    assertEquals(FIXTURE_QWKREQ01_19741256, entry.layoutId());
+    assertEquals(FIXTURE_001_A3FEAA64, entry.layoutVersion());
     assertArrayEquals(new byte[] {1, 2, 3}, entry.body());
     assertEquals(0, entry.attemptCount());
     assertEquals(NOW, entry.nextAttemptAt());
@@ -43,28 +45,46 @@ final class OutboxModelTest {
   @Test
   void entryRejectsEveryInvalidBoundaryAndNull() {
     assertThrows(
-        IllegalArgumentException.class, () -> entry(0, 0, "QWKREQ01", "001", bytes(), "w"));
+        IllegalArgumentException.class,
+        () -> entry(0, 0, FIXTURE_QWKREQ01_19741256, FIXTURE_001_A3FEAA64, bytes(), "w"));
     assertThrows(
         IllegalArgumentException.class,
-        () -> entry(1_000_000_000_000L, 0, "QWKREQ01", "001", bytes(), "w"));
+        () ->
+            entry(
+                1_000_000_000_000L,
+                0,
+                FIXTURE_QWKREQ01_19741256,
+                FIXTURE_001_A3FEAA64,
+                bytes(),
+                "w"));
     assertThrows(
-        IllegalArgumentException.class, () -> entry(1, -1, "QWKREQ01", "001", bytes(), "w"));
+        IllegalArgumentException.class,
+        () -> entry(1, -1, FIXTURE_QWKREQ01_19741256, FIXTURE_001_A3FEAA64, bytes(), "w"));
     assertThrows(
-        IllegalArgumentException.class, () -> entry(1, 101, "QWKREQ01", "001", bytes(), "w"));
+        IllegalArgumentException.class,
+        () -> entry(1, 101, FIXTURE_QWKREQ01_19741256, FIXTURE_001_A3FEAA64, bytes(), "w"));
     assertThrows(
         NullPointerException.class, () -> entry(null, CORRELATION, OutboxDestination.ASYNC_WORK));
     assertThrows(
         NullPointerException.class, () -> entry(MESSAGE, null, OutboxDestination.ASYNC_WORK));
     assertThrows(NullPointerException.class, () -> entry(MESSAGE, CORRELATION, null));
-    assertThrows(NullPointerException.class, () -> entry(1, 0, null, "001", bytes(), "w"));
     assertThrows(
-        IllegalArgumentException.class, () -> entry(1, 0, "lower001", "001", bytes(), "w"));
-    assertThrows(NullPointerException.class, () -> entry(1, 0, "QWKREQ01", null, bytes(), "w"));
+        NullPointerException.class, () -> entry(1, 0, null, FIXTURE_001_A3FEAA64, bytes(), "w"));
     assertThrows(
-        IllegalArgumentException.class, () -> entry(1, 0, "QWKREQ01", "01A", bytes(), "w"));
-    assertThrows(NullPointerException.class, () -> entry(1, 0, "QWKREQ01", "001", null, "w"));
+        IllegalArgumentException.class,
+        () -> entry(1, 0, "lower001", FIXTURE_001_A3FEAA64, bytes(), "w"));
     assertThrows(
-        IllegalArgumentException.class, () -> entry(1, 0, "QWKREQ01", "001", new byte[0], "w"));
+        NullPointerException.class,
+        () -> entry(1, 0, FIXTURE_QWKREQ01_19741256, null, bytes(), "w"));
+    assertThrows(
+        IllegalArgumentException.class,
+        () -> entry(1, 0, FIXTURE_QWKREQ01_19741256, "01A", bytes(), "w"));
+    assertThrows(
+        NullPointerException.class,
+        () -> entry(1, 0, FIXTURE_QWKREQ01_19741256, FIXTURE_001_A3FEAA64, null, "w"));
+    assertThrows(
+        IllegalArgumentException.class,
+        () -> entry(1, 0, FIXTURE_QWKREQ01_19741256, FIXTURE_001_A3FEAA64, new byte[0], "w"));
     assertThrows(
         NullPointerException.class, () -> entryWithTimes(null, NOW.minusSeconds(1), "w", NOW));
     assertThrows(NullPointerException.class, () -> entryWithTimes(NOW, null, "w", NOW));
@@ -85,8 +105,8 @@ final class OutboxModelTest {
     assertEquals(MESSAGE, request.messageId());
     assertEquals(CORRELATION, request.correlationId());
     assertEquals(OutboxDestination.ASYNC_WORK, request.destination());
-    assertEquals("QWKREQ01", request.layoutId());
-    assertEquals("001", request.layoutVersion());
+    assertEquals(FIXTURE_QWKREQ01_19741256, request.layoutId());
+    assertEquals(FIXTURE_001_A3FEAA64, request.layoutVersion());
     assertArrayEquals(bytes(), request.body());
     assertEquals(NOW, request.nextAttemptAt());
     assertEquals(NOW.minusSeconds(1), request.createdAt());
@@ -99,8 +119,8 @@ final class OutboxModelTest {
                 null,
                 CORRELATION,
                 OutboxDestination.ASYNC_WORK,
-                "QWKREQ01",
-                "001",
+                FIXTURE_QWKREQ01_19741256,
+                FIXTURE_001_A3FEAA64,
                 bytes(),
                 NOW,
                 NOW));
@@ -108,10 +128,26 @@ final class OutboxModelTest {
         NullPointerException.class,
         () ->
             request(
-                MESSAGE, null, OutboxDestination.ASYNC_WORK, "QWKREQ01", "001", bytes(), NOW, NOW));
+                MESSAGE,
+                null,
+                OutboxDestination.ASYNC_WORK,
+                FIXTURE_QWKREQ01_19741256,
+                FIXTURE_001_A3FEAA64,
+                bytes(),
+                NOW,
+                NOW));
     assertThrows(
         NullPointerException.class,
-        () -> request(MESSAGE, CORRELATION, null, "QWKREQ01", "001", bytes(), NOW, NOW));
+        () ->
+            request(
+                MESSAGE,
+                CORRELATION,
+                null,
+                FIXTURE_QWKREQ01_19741256,
+                FIXTURE_001_A3FEAA64,
+                bytes(),
+                NOW,
+                NOW));
     assertThrows(
         NullPointerException.class,
         () ->
@@ -120,7 +156,7 @@ final class OutboxModelTest {
                 CORRELATION,
                 OutboxDestination.ASYNC_WORK,
                 null,
-                "001",
+                FIXTURE_001_A3FEAA64,
                 bytes(),
                 NOW,
                 NOW));
@@ -132,7 +168,7 @@ final class OutboxModelTest {
                 CORRELATION,
                 OutboxDestination.ASYNC_WORK,
                 "BAD",
-                "001",
+                FIXTURE_001_A3FEAA64,
                 bytes(),
                 NOW,
                 NOW));
@@ -143,7 +179,7 @@ final class OutboxModelTest {
                 MESSAGE,
                 CORRELATION,
                 OutboxDestination.ASYNC_WORK,
-                "QWKREQ01",
+                FIXTURE_QWKREQ01_19741256,
                 null,
                 bytes(),
                 NOW,
@@ -155,7 +191,7 @@ final class OutboxModelTest {
                 MESSAGE,
                 CORRELATION,
                 OutboxDestination.ASYNC_WORK,
-                "QWKREQ01",
+                FIXTURE_QWKREQ01_19741256,
                 "1",
                 bytes(),
                 NOW,
@@ -167,8 +203,8 @@ final class OutboxModelTest {
                 MESSAGE,
                 CORRELATION,
                 OutboxDestination.ASYNC_WORK,
-                "QWKREQ01",
-                "001",
+                FIXTURE_QWKREQ01_19741256,
+                FIXTURE_001_A3FEAA64,
                 null,
                 NOW,
                 NOW));
@@ -179,8 +215,8 @@ final class OutboxModelTest {
                 MESSAGE,
                 CORRELATION,
                 OutboxDestination.ASYNC_WORK,
-                "QWKREQ01",
-                "001",
+                FIXTURE_QWKREQ01_19741256,
+                FIXTURE_001_A3FEAA64,
                 new byte[0],
                 NOW,
                 NOW));
@@ -191,8 +227,8 @@ final class OutboxModelTest {
                 MESSAGE,
                 CORRELATION,
                 OutboxDestination.ASYNC_WORK,
-                "QWKREQ01",
-                "001",
+                FIXTURE_QWKREQ01_19741256,
+                FIXTURE_001_A3FEAA64,
                 bytes(),
                 null,
                 NOW));
@@ -203,8 +239,8 @@ final class OutboxModelTest {
                 MESSAGE,
                 CORRELATION,
                 OutboxDestination.ASYNC_WORK,
-                "QWKREQ01",
-                "001",
+                FIXTURE_QWKREQ01_19741256,
+                FIXTURE_001_A3FEAA64,
                 bytes(),
                 NOW,
                 null));
@@ -238,7 +274,7 @@ final class OutboxModelTest {
   }
 
   private static OutboxEntry entry(byte[] body) {
-    return entry(1, 0, "QWKREQ01", "001", body, "worker-a");
+    return entry(1, 0, FIXTURE_QWKREQ01_19741256, FIXTURE_001_A3FEAA64, body, "worker-a");
   }
 
   private static OutboxEntry entry(
@@ -260,7 +296,18 @@ final class OutboxModelTest {
 
   private static OutboxEntry entry(UUID message, UUID correlation, OutboxDestination destination) {
     return new OutboxEntry(
-        1, message, correlation, destination, "QWKREQ01", "001", bytes(), 0, NOW, NOW, "w", NOW);
+        1,
+        message,
+        correlation,
+        destination,
+        FIXTURE_QWKREQ01_19741256,
+        FIXTURE_001_A3FEAA64,
+        bytes(),
+        0,
+        NOW,
+        NOW,
+        "w",
+        NOW);
   }
 
   private static OutboxEntry entryWithTimes(
@@ -270,8 +317,8 @@ final class OutboxModelTest {
         MESSAGE,
         CORRELATION,
         OutboxDestination.ASYNC_WORK,
-        "QWKREQ01",
-        "001",
+        FIXTURE_QWKREQ01_19741256,
+        FIXTURE_001_A3FEAA64,
         bytes(),
         0,
         next,
@@ -285,8 +332,8 @@ final class OutboxModelTest {
         MESSAGE,
         CORRELATION,
         OutboxDestination.ASYNC_WORK,
-        "QWKREQ01",
-        "001",
+        FIXTURE_QWKREQ01_19741256,
+        FIXTURE_001_A3FEAA64,
         body,
         NOW,
         NOW.minusSeconds(1));

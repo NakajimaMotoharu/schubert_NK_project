@@ -59,6 +59,7 @@ import org.junit.jupiter.api.function.Executable;
  * PT-SCN-009-F01..F03: independent record offsets/hash, immutable metadata and call side effects.
  */
 final class ScenarioFileRegeneratorTest {
+  private static final String FIXTURE_SCN_F30DFFA3 = "SCN";
   private static final AuthenticatedActor ACTOR = new AuthenticatedActor(101, "reader", Role.USER);
   private static final Instant TIME = Instant.parse("2026-09-08T00:00:01.123Z");
   private static final UUID NEW_FILE = UUID.fromString("00000000-0000-4000-8000-000000000456");
@@ -179,10 +180,11 @@ final class ScenarioFileRegeneratorTest {
       assertThrows(NullPointerException.class, () -> subject.regenerate(null, current, TIME));
       assertThrows(NullPointerException.class, () -> subject.regenerate(saved, null, TIME));
       assertThrows(NullPointerException.class, () -> subject.regenerate(saved, current, null));
-      var request = request("SCN");
+      var request = request(FIXTURE_SCN_F30DFFA3);
       for (var other :
           List.of(
-              responses.captureSuccess(request, ACTOR, typed("SCN", false, 1), FILE, TIME),
+              responses.captureSuccess(
+                  request, ACTOR, typed(FIXTURE_SCN_F30DFFA3, false, 1), FILE, TIME),
               responses.captureFailure(request, ACTOR, ResultCode.NOT_FOUND, FILE, TIME))) {
         var invalid = responses.read(request, ACTOR, other);
         denied(() -> subject.regenerate(invalid, current, TIME));
@@ -252,7 +254,7 @@ final class ScenarioFileRegeneratorTest {
   private static ScenarioDetailSnapshot current(int count, ScenarioDetailResponseData metadata) {
     return new ScenarioDetailSnapshot(
         metadata,
-        typed("SCN", false, count).records().stream()
+        typed(FIXTURE_SCN_F30DFFA3, false, count).records().stream()
             .map(ScenarioEntryRecord.class::cast)
             .toList());
   }
@@ -270,10 +272,10 @@ final class ScenarioFileRegeneratorTest {
   private static ScenarioReplayService.Snapshot saved(
       ScenarioReplayService responses, int count, String hash, boolean navigation)
       throws Exception {
-    var request = request("SCN");
+    var request = request(FIXTURE_SCN_F30DFFA3);
     byte[] wire =
         wire(
-            "SCN",
+            FIXTURE_SCN_F30DFFA3,
             request.header().messageId(),
             FILE,
             "20260908090001123",

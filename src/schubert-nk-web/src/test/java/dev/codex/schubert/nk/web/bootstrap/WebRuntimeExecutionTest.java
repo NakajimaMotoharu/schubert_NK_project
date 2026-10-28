@@ -14,6 +14,10 @@ import org.junit.jupiter.api.Test;
 
 /** SS313342352/PG-D378/WEB-REM004: independent control order and original failure identity. */
 final class WebRuntimeExecutionTest {
+  private static final String FIXTURE_START_A92AE961 = "start";
+  private static final String FIXTURE_STOP_6F2BE2FE = "stop";
+  private static final String FIXTURE_CLOSE_97959247 = "close";
+
   @Test
   void rem004NormalAndEveryStartOrAwaitFailureStopsAndClosesOnce() throws Exception {
     for (int phase : new int[] {-1, 0, 1}) {
@@ -26,7 +30,7 @@ final class WebRuntimeExecutionTest {
         var start =
             (WebRuntimeExecution.Start)
                 () -> {
-                  events.add("start");
+                  events.add(FIXTURE_START_A92AE961);
                   if (phase == 0) raise(primary);
                 };
         var await =
@@ -37,7 +41,10 @@ final class WebRuntimeExecutionTest {
                 };
         if (phase == -1)
           WebRuntimeExecution.execute(
-              start, await, () -> events.add("stop"), () -> events.add("close"));
+              start,
+              await,
+              () -> events.add(FIXTURE_STOP_6F2BE2FE),
+              () -> events.add(FIXTURE_CLOSE_97959247));
         else
           assertSame(
               primary,
@@ -45,11 +52,15 @@ final class WebRuntimeExecutionTest {
                   primary.getClass(),
                   () ->
                       WebRuntimeExecution.execute(
-                          start, await, () -> events.add("stop"), () -> events.add("close"))));
+                          start,
+                          await,
+                          () -> events.add(FIXTURE_STOP_6F2BE2FE),
+                          () -> events.add(FIXTURE_CLOSE_97959247))));
         assertEquals(
             phase == 0
-                ? List.of("start", "stop", "close")
-                : List.of("start", "await", "stop", "close"),
+                ? List.of(FIXTURE_START_A92AE961, FIXTURE_STOP_6F2BE2FE, FIXTURE_CLOSE_97959247)
+                : List.of(
+                    FIXTURE_START_A92AE961, "await", FIXTURE_STOP_6F2BE2FE, FIXTURE_CLOSE_97959247),
             events);
       }
     }
@@ -60,16 +71,17 @@ final class WebRuntimeExecutionTest {
             () ->
                 WebRuntimeExecution.execute(
                     () -> {
-                      events.add("start");
+                      events.add(FIXTURE_START_A92AE961);
                       throw new LifecycleException("synthetic private");
                     },
                     () -> fail("failed startup must not await"),
-                    () -> events.add("stop"),
-                    () -> events.add("close")));
+                    () -> events.add(FIXTURE_STOP_6F2BE2FE),
+                    () -> events.add(FIXTURE_CLOSE_97959247)));
     assertEquals("Web HTTP startup unavailable", converted.getMessage());
     assertNull(converted.getCause());
     assertEquals(0, converted.getSuppressed().length);
-    assertEquals(List.of("start", "stop", "close"), events);
+    assertEquals(
+        List.of(FIXTURE_START_A92AE961, FIXTURE_STOP_6F2BE2FE, FIXTURE_CLOSE_97959247), events);
   }
 
   @Test

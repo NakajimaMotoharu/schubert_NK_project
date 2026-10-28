@@ -20,6 +20,8 @@ import org.junit.jupiter.api.Test;
 
 /** PT-OPS-TXOWNER001..004; SS342 SSC185/BUG693. Stateful TX oracle is independent of DB code. */
 final class MorningCompletionChecksTest {
+  private static final String FIXTURE_PEER_B7216580 = "peer";
+
   @Test
   void txowner001PeerBracketsDatabaseButTransactionOwnerNeverReadsIt() throws Exception {
     var events = new ArrayList<String>();
@@ -29,23 +31,30 @@ final class MorningCompletionChecksTest {
           if (!autoCommit.get()) throw new IOException("independent nested DB rejection");
           events.add("DB");
         };
-    var checks = new MorningCompletionChecks(() -> events.add("peer"), db);
+    var checks = new MorningCompletionChecks(() -> events.add(FIXTURE_PEER_B7216580), db);
     checks.verify();
-    assertEquals(List.of("peer", "DB", "peer"), events);
+    assertEquals(List.of(FIXTURE_PEER_B7216580, "DB", FIXTURE_PEER_B7216580), events);
     events.clear();
     autoCommit.set(false);
     // Former production callback calls a combined gate from a repository TX: reproduce refusal.
     assertThrows(IOException.class, checks::verify);
-    assertEquals(List.of("peer"), events);
+    assertEquals(List.of(FIXTURE_PEER_B7216580), events);
     events.clear();
     var owner = checks.ownerGuard(() -> 71L);
     assertEquals(71L, owner.remainingNanos());
     assertEquals(71L, owner.remainingNanos());
-    assertEquals(List.of("peer", "peer"), events);
+    assertEquals(List.of(FIXTURE_PEER_B7216580, FIXTURE_PEER_B7216580), events);
     assertFalse(autoCommit.get());
     autoCommit.set(true);
     checks.verify();
-    assertEquals(List.of("peer", "peer", "peer", "DB", "peer"), events);
+    assertEquals(
+        List.of(
+            FIXTURE_PEER_B7216580,
+            FIXTURE_PEER_B7216580,
+            FIXTURE_PEER_B7216580,
+            "DB",
+            FIXTURE_PEER_B7216580),
+        events);
   }
 
   @Test

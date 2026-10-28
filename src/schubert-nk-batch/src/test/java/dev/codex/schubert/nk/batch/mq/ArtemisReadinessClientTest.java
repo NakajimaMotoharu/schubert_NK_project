@@ -31,6 +31,8 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** PG223/PT-OPS-MQ-001..004; real broker and independent Core query fault matrix. */
 final class ArtemisReadinessClientTest {
+  private static final String FIXTURE_ISEXISTS_4121EC78 = "isExists";
+  private static final String FIXTURE_ISAUTOCREATEQUEUES_DBD40EFD = "isAutoCreateQueues";
   private static final List<String> ADDRESSES =
       List.of(
           "nk.sync.request",
@@ -85,10 +87,10 @@ final class ArtemisReadinessClientTest {
     var reader = new ArtemisReadinessClient();
     for (var fault :
         Map.<String, Object>ofEntries(
-                Map.entry("isExists", false),
+                Map.entry(FIXTURE_ISEXISTS_4121EC78, false),
                 Map.entry("isSupportsAnycast", false),
                 Map.entry("isSupportsMulticast", true),
-                Map.entry("isAutoCreateQueues", true),
+                Map.entry(FIXTURE_ISAUTOCREATEQUEUES_DBD40EFD, true),
                 Map.entry("isAutoCreateAddresses", true),
                 Map.entry("getQueueNames", List.of(SimpleString.of("foreign.q"))))
             .entrySet()) {
@@ -96,11 +98,11 @@ final class ArtemisReadinessClientTest {
     }
     for (var fault :
         Map.<String, Object>ofEntries(
-                Map.entry("isExists", false),
+                Map.entry(FIXTURE_ISEXISTS_4121EC78, false),
                 Map.entry("isTemporary", true),
                 Map.entry("isDurable", false),
                 Map.entry("isAutoCreated", true),
-                Map.entry("isAutoCreateQueues", true),
+                Map.entry(FIXTURE_ISAUTOCREATEQUEUES_DBD40EFD, true),
                 Map.entry("getRoutingType", RoutingType.MULTICAST),
                 Map.entry("getAddress", SimpleString.of("foreign")),
                 Map.entry("getName", SimpleString.of("foreign.q")))
@@ -179,8 +181,10 @@ final class ArtemisReadinessClientTest {
                 (query, property, ignored) -> {
                   if (addressFault && property.getName().equals(faultMethod)) return faultValue;
                   return switch (property.getName()) {
-                    case "isExists", "isSupportsAnycast" -> true;
-                    case "isSupportsMulticast", "isAutoCreateQueues", "isAutoCreateAddresses" ->
+                    case FIXTURE_ISEXISTS_4121EC78, "isSupportsAnycast" -> true;
+                    case "isSupportsMulticast",
+                        FIXTURE_ISAUTOCREATEQUEUES_DBD40EFD,
+                        "isAutoCreateAddresses" ->
                         false;
                     case "getQueueNames" -> List.of(SimpleString.of(address + ".q"));
                     default ->
@@ -197,8 +201,9 @@ final class ArtemisReadinessClientTest {
                 (query, property, ignored) -> {
                   if (!addressFault && property.getName().equals(faultMethod)) return faultValue;
                   return switch (property.getName()) {
-                    case "isExists", "isDurable" -> true;
-                    case "isTemporary", "isAutoCreated", "isAutoCreateQueues" -> false;
+                    case FIXTURE_ISEXISTS_4121EC78, "isDurable" -> true;
+                    case "isTemporary", "isAutoCreated", FIXTURE_ISAUTOCREATEQUEUES_DBD40EFD ->
+                        false;
                     case "getRoutingType" -> RoutingType.ANYCAST;
                     case "getAddress" ->
                         SimpleString.of(queue.toString().replaceFirst("\\.q$", ""));

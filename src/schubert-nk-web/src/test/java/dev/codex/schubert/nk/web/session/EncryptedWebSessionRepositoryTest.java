@@ -64,6 +64,10 @@ import org.junit.jupiter.api.io.TempDir;
  * SSC-041/PG-D-098/BUG-057/YKT-052. Isolated synthetic DB and public JDBC fault boundaries.
  */
 class EncryptedWebSessionRepositoryTest {
+  private static final String FIXTURE_STATEMENT_EXECUTEUPDATE_84172022 = "statement.executeUpdate";
+  private static final String FIXTURE_CONNECTION_COMMIT_37C1B216 = "connection.commit";
+  private static final String FIXTURE_GET_04F32A7E = "GET";
+  private static final String FIXTURE_LOGS_910E2326 = "/logs";
   private static final Instant NOW = Instant.parse("2026-09-08T00:00:00.123456Z");
   private static WebLogDatabaseFixture db;
   private static final SessionPrincipal PRINCIPAL =
@@ -144,7 +148,8 @@ class EncryptedWebSessionRepositoryTest {
       unavailable(() -> fixture.repository.find(created.sessionId()));
       assertEquals(1, count());
       fixture.deleteCount = null;
-      for (String fault : List.of("statement.executeUpdate", "connection.commit")) {
+      for (String fault :
+          List.of(FIXTURE_STATEMENT_EXECUTEUPDATE_84172022, FIXTURE_CONNECTION_COMMIT_37C1B216)) {
         fixture.failure = fault;
         unavailable(() -> fixture.repository.find(created.sessionId()));
         assertTrue(fixture.hit);
@@ -207,7 +212,7 @@ class EncryptedWebSessionRepositoryTest {
         unavailable(() -> f.repository.find(original.sessionId()));
         assertEquals(2, count());
         f.deleteCount = null;
-        f.failure = "connection.commit";
+        f.failure = FIXTURE_CONNECTION_COMMIT_37C1B216;
         unavailable(() -> f.repository.find(original.sessionId()));
         assertEquals(2, count());
         f.failure = "";
@@ -263,10 +268,14 @@ class EncryptedWebSessionRepositoryTest {
                       new SessionAttributes(
                           current.principal(),
                           current.csrfToken(),
-                          Optional.of(SavedRequestTarget.fromGet("GET", "/logs")),
+                          Optional.of(
+                              SavedRequestTarget.fromGet(
+                                  FIXTURE_GET_04F32A7E, FIXTURE_LOGS_910E2326)),
                           SessionAttributeCodecTest.tokens(10)))
               .orElseThrow();
-      assertEquals(json(false, "02".repeat(32), "/logs", 10), storedJson(updated, new byte[32]));
+      assertEquals(
+          json(false, "02".repeat(32), FIXTURE_LOGS_910E2326, 10),
+          storedJson(updated, new byte[32]));
       unavailable(() -> f.repository.mutate(created.sessionId(), current -> null));
       unavailable(
           () ->
@@ -299,7 +308,8 @@ class EncryptedWebSessionRepositoryTest {
                           current.savedRequest(),
                           SessionAttributeCodecTest.tokens(11))));
       var after = f.repository.find(created.sessionId()).orElseThrow();
-      assertEquals(json(false, "02".repeat(32), "/logs", 10), storedJson(after, new byte[32]));
+      assertEquals(
+          json(false, "02".repeat(32), FIXTURE_LOGS_910E2326, 10), storedJson(after, new byte[32]));
       f.repository.invalidate(created.sessionId());
       f.repository.invalidate(created.sessionId());
       assertTrue(
@@ -326,7 +336,8 @@ class EncryptedWebSessionRepositoryTest {
               new SessionAttributes(
                   current.principal(),
                   current.csrfToken(),
-                  Optional.of(SavedRequestTarget.fromGet("GET", "/logs")),
+                  Optional.of(
+                      SavedRequestTarget.fromGet(FIXTURE_GET_04F32A7E, FIXTURE_LOGS_910E2326)),
                   SessionAttributeCodecTest.tokens(2)));
       f.clock.value = NOW.plusSeconds(1);
       var authenticated = f.repository.authenticate(created.sessionId(), PRINCIPAL).orElseThrow();
@@ -335,7 +346,8 @@ class EncryptedWebSessionRepositoryTest {
       assertEquals(NOW.plusSeconds(1), authenticated.row().identity().createdAt());
       assertEquals(NOW.plusSeconds(28801), authenticated.row().expiresAt());
       assertEquals(
-          json(true, "04".repeat(32), "/logs", 2), storedJson(authenticated, new byte[32]));
+          json(true, "04".repeat(32), FIXTURE_LOGS_910E2326, 2),
+          storedJson(authenticated, new byte[32]));
       assertEquals(PRINCIPAL, authenticated.attributes().principal().orElseThrow());
       assertTrue(f.repository.find(created.sessionId()).isEmpty());
       assertEquals(1, count());
@@ -363,13 +375,14 @@ class EncryptedWebSessionRepositoryTest {
           var s =
               c.prepareStatement(
                   "update schubert_web_session.web_http_sessions set attributes_ciphertext=? where id=?")) {
-        s.setBytes(1, independentEnvelope(original, json(false, null, "/logs", 2)));
+        s.setBytes(1, independentEnvelope(original, json(false, null, FIXTURE_LOGS_910E2326, 2)));
         s.setObject(2, original.row().identity().id());
         assertEquals(1, s.executeUpdate());
       }
       var authenticated = f.repository.authenticate(original.sessionId(), PRINCIPAL).orElseThrow();
       assertEquals(
-          json(true, "04".repeat(32), "/logs", 2), storedJson(authenticated, new byte[32]));
+          json(true, "04".repeat(32), FIXTURE_LOGS_910E2326, 2),
+          storedJson(authenticated, new byte[32]));
       assertTrue(f.repository.find(original.sessionId()).isEmpty());
     }
   }
@@ -420,9 +433,9 @@ class EncryptedWebSessionRepositoryTest {
                   "connection.setReadOnly",
                   "connection.prepareStatement",
                   "statement.setString",
-                  "statement.executeUpdate",
+                  FIXTURE_STATEMENT_EXECUTEUPDATE_84172022,
                   "statement.close",
-                  "connection.commit",
+                  FIXTURE_CONNECTION_COMMIT_37C1B216,
                   "connection.close"));
       if (op > 0 && op < 4)
         methods.addAll(
@@ -451,7 +464,7 @@ class EncryptedWebSessionRepositoryTest {
       f.nullConnection = true;
       unavailable(f.repository::create);
       f.nullConnection = false;
-      f.failure = "statement.executeUpdate";
+      f.failure = FIXTURE_STATEMENT_EXECUTEUPDATE_84172022;
       f.rollbackFailure = true;
       unavailable(() -> f.repository.find(original.sessionId()));
       assertTrue(f.rollbackHit);
@@ -571,7 +584,7 @@ class EncryptedWebSessionRepositoryTest {
               new SessionAttributes(
                   current.principal(),
                   current.csrfToken(),
-                  Optional.of(SavedRequestTarget.fromGet("GET", "/logs?n=0")),
+                  Optional.of(SavedRequestTarget.fromGet(FIXTURE_GET_04F32A7E, "/logs?n=0")),
                   current.operationTokens()));
       var jobs = new ArrayList<Callable<Void>>();
       for (int i = 0; i < 100; i++)
@@ -589,7 +602,8 @@ class EncryptedWebSessionRepositoryTest {
                                 current.principal(),
                                 current.csrfToken(),
                                 Optional.of(
-                                    SavedRequestTarget.fromGet("GET", "/logs?n=" + (previous + 1))),
+                                    SavedRequestTarget.fromGet(
+                                        FIXTURE_GET_04F32A7E, "/logs?n=" + (previous + 1))),
                                 current.operationTokens());
                           })
                       .isPresent());
@@ -876,7 +890,7 @@ class EncryptedWebSessionRepositoryTest {
               new Class<?>[] {type},
               (proxy, method, args) -> {
                 String name = kind + "." + method.getName();
-                if (name.equals("connection.commit")) commits.incrementAndGet();
+                if (name.equals(FIXTURE_CONNECTION_COMMIT_37C1B216)) commits.incrementAndGet();
                 if (name.equals("connection.rollback")) rollbacks.incrementAndGet();
                 if (name.equals("connection.close")) {
                   live.decrementAndGet();
@@ -901,10 +915,10 @@ class EncryptedWebSessionRepositoryTest {
                   if (method.getName().equals("close")) method.invoke(target, args);
                   throw new SQLException("private-jdbc-marker");
                 }
-                if (name.equals("statement.executeUpdate")
+                if (name.equals(FIXTURE_STATEMENT_EXECUTEUPDATE_84172022)
                     && sql.startsWith("delete ")
                     && deleteCount != null) return deleteCount;
-                if (name.equals("statement.executeUpdate")
+                if (name.equals(FIXTURE_STATEMENT_EXECUTEUPDATE_84172022)
                     && sql.startsWith("update ")
                     && updateCount != null) return updateCount;
                 if (kind.equals("result")

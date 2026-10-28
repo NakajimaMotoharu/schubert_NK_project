@@ -68,6 +68,11 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** Real PG18 and Artemis, literal UI236 offsets; no production-generated expected wire. */
 class QuestionSubmissionServiceTest {
+  private static final String FIXTURE_PUBLIC_FIXTURE_2BAE0C98 = "Public fixture";
+  private static final String FIXTURE_0200_FC9DB3AC = "0200";
+  private static final String FIXTURE_9000_0CDC37EC = "9000";
+  private static final String FIXTURE_DIFFERENT_7F1988DF = "different";
+  private static final String FIXTURE_CLOSE_97959247 = "close";
   @TempDir static Path root;
   static ApiLogDatabaseFixture db;
   static final Instant NOW = Instant.parse("2026-10-01T00:00:00.123456Z");
@@ -112,7 +117,7 @@ class QuestionSubmissionServiceTest {
               assertEquals(0, h.live.get());
               owned.wake();
             };
-        var initial = request("Public fixture", M0, TOKEN, NOW, CONTEXT);
+        var initial = request(FIXTURE_PUBLIC_FIXTURE_2BAE0C98, M0, TOKEN, NOW, CONTEXT);
         assertArrayEquals(
             response(M0, new UUID(700, 3), "0000", RECEIPT, 1, NOW), h.service.process(initial));
         assertNotEquals(Thread.currentThread().threadId(), sendingThread.get());
@@ -130,11 +135,13 @@ class QuestionSubmissionServiceTest {
             h.text(
                 "select md5(response_body_encrypted)||':'||completed_at::text||':'||expires_at::text from schubert.request_inbox");
         assertArrayEquals(
-            response(M0, new UUID(700, 4), "0200", RECEIPT, 1, NOW), h.service.process(initial));
+            response(M0, new UUID(700, 4), FIXTURE_0200_FC9DB3AC, RECEIPT, 1, NOW),
+            h.service.process(initial));
         UUID retry = new UUID(701, 2);
         assertArrayEquals(
-            response(retry, new UUID(700, 5), "0200", RECEIPT, 1, NOW),
-            h.service.process(request("Public fixture", retry, TOKEN, NOW, CONTEXT)));
+            response(retry, new UUID(700, 5), FIXTURE_0200_FC9DB3AC, RECEIPT, 1, NOW),
+            h.service.process(
+                request(FIXTURE_PUBLIC_FIXTURE_2BAE0C98, retry, TOKEN, NOW, CONTEXT)));
         assertEquals(
             frozen,
             h.text(
@@ -158,7 +165,8 @@ class QuestionSubmissionServiceTest {
             604800,
             h.scalar(
                 "select extract(epoch from expires_at-completed_at)::bigint from schubert.request_inbox"));
-        assertEquals("Public fixture", h.text("select body from schubert.questions"));
+        assertEquals(
+            FIXTURE_PUBLIC_FIXTURE_2BAE0C98, h.text("select body from schubert.questions"));
         assertEquals(
             1,
             h.scalar(
@@ -186,9 +194,10 @@ class QuestionSubmissionServiceTest {
   void asub002TotalDeadlineCommitRemainsAndLaterReplayRequiresOriginalSent() throws Exception {
     try (var h = new Fixture()) {
       h.nanoStep = 750_000_000;
-      var input = request("Public fixture", M0, TOKEN, NOW, CONTEXT);
+      var input = request(FIXTURE_PUBLIC_FIXTURE_2BAE0C98, M0, TOKEN, NOW, CONTEXT);
       assertArrayEquals(
-          response(M0, new UUID(700, 1), "9000", "", 0, NOW), h.service.process(input));
+          response(M0, new UUID(700, 1), FIXTURE_9000_0CDC37EC, "", 0, NOW),
+          h.service.process(input));
       assertEquals(0, h.scalar("select count(*) from schubert.questions"));
       h.nanoStep = 0;
       h.ids.set(0);
@@ -199,7 +208,8 @@ class QuestionSubmissionServiceTest {
             h.nanos.set(2_000_000_000);
           };
       assertArrayEquals(
-          response(M0, new UUID(700, 3), "9000", "", 0, NOW), h.service.process(input));
+          response(M0, new UUID(700, 3), FIXTURE_9000_0CDC37EC, "", 0, NOW),
+          h.service.process(input));
       assertEquals(1, h.scalar("select count(*) from schubert.questions"));
       assertEquals("COMPLETED", h.text("select processing_state from schubert.request_inbox"));
       assertEquals("PENDING", h.text("select status from schubert.mq_outbox"));
@@ -214,14 +224,15 @@ class QuestionSubmissionServiceTest {
                 "update schubert.mq_outbox set status='SENT',sent_at='2026-10-01T00:00:00.123456Z'");
           };
       assertArrayEquals(
-          response(M0, new UUID(700, 4), "0200", RECEIPT, 1, NOW), h.service.process(input));
+          response(M0, new UUID(700, 4), FIXTURE_0200_FC9DB3AC, RECEIPT, 1, NOW),
+          h.service.process(input));
       assertEquals(
           frozen,
           h.text(
               "select md5(response_body_encrypted)||':'||expires_at::text from schubert.request_inbox"));
       h.ids.set(0);
       assertArrayEquals(
-          response(new UUID(701, 3), new UUID(700, 1), "9000", "", 0, NOW),
+          response(new UUID(701, 3), new UUID(700, 1), FIXTURE_9000_0CDC37EC, "", 0, NOW),
           h.service.process(
               request("late", new UUID(701, 3), new UUID(702, 3), NOW.minusSeconds(2), CONTEXT)));
       assertEquals(1, h.scalar("select count(*) from schubert.questions"));
@@ -234,24 +245,29 @@ class QuestionSubmissionServiceTest {
       byte[] denied = response(M0, new UUID(700, 1), "0102", "", 0, NOW);
       put(denied, 113, "c".repeat(64));
       assertArrayEquals(
-          denied, h.service.process(request("Public fixture", M0, TOKEN, NOW, "c".repeat(64))));
+          denied,
+          h.service.process(
+              request(FIXTURE_PUBLIC_FIXTURE_2BAE0C98, M0, TOKEN, NOW, "c".repeat(64))));
       assertEquals(0, h.scalar("select count(*) from schubert.request_inbox"));
       h.ids.set(0);
       h.confirmOnSignal();
-      h.service.process(request("Public fixture", M0, TOKEN, NOW, CONTEXT));
+      h.service.process(request(FIXTURE_PUBLIC_FIXTURE_2BAE0C98, M0, TOKEN, NOW, CONTEXT));
       assertArrayEquals(
           response(new UUID(701, 2), new UUID(700, 4), "0105", "", 0, NOW),
-          h.service.process(request("different", new UUID(701, 2), TOKEN, NOW, CONTEXT)));
+          h.service.process(
+              request(FIXTURE_DIFFERENT_7F1988DF, new UUID(701, 2), TOKEN, NOW, CONTEXT)));
       assertThrows(
           PermanentProtocolException.class,
-          () -> h.service.process(request("different", M0, TOKEN, NOW, CONTEXT)));
+          () -> h.service.process(request(FIXTURE_DIFFERENT_7F1988DF, M0, TOKEN, NOW, CONTEXT)));
       h.sql("delete from schubert.request_inbox");
       assertArrayEquals(
-          response(new UUID(701, 3), new UUID(700, 5), "9000", "", 0, NOW),
-          h.service.process(request("Public fixture", new UUID(701, 3), TOKEN, NOW, CONTEXT)));
+          response(new UUID(701, 3), new UUID(700, 5), FIXTURE_9000_0CDC37EC, "", 0, NOW),
+          h.service.process(
+              request(FIXTURE_PUBLIC_FIXTURE_2BAE0C98, new UUID(701, 3), TOKEN, NOW, CONTEXT)));
       assertArrayEquals(
           response(new UUID(701, 4), new UUID(700, 6), "0105", "", 0, NOW),
-          h.service.process(request("different", new UUID(701, 4), TOKEN, NOW, CONTEXT)));
+          h.service.process(
+              request(FIXTURE_DIFFERENT_7F1988DF, new UUID(701, 4), TOKEN, NOW, CONTEXT)));
       assertEquals(0, h.scalar("select count(*) from schubert.request_inbox"));
       assertEquals(1, h.scalar("select count(*) from schubert.questions"));
       assertEquals(1, h.scalar("select count(*) from schubert.mq_outbox"));
@@ -266,13 +282,16 @@ class QuestionSubmissionServiceTest {
       h.fault = "rollback";
       assertThrows(
           TemporaryInfrastructureException.class,
-          () -> h.service.process(request("different", new UUID(701, 5), TOKEN, NOW, CONTEXT)));
+          () ->
+              h.service.process(
+                  request(FIXTURE_DIFFERENT_7F1988DF, new UUID(701, 5), TOKEN, NOW, CONTEXT)));
       h.fault = "none";
       h.prepareFault = "insert into schubert.app_logs";
       assertThrows(
           TemporaryInfrastructureException.class,
           () ->
-              h.service.process(request("Public fixture", new UUID(701, 6), TOKEN, NOW, CONTEXT)));
+              h.service.process(
+                  request(FIXTURE_PUBLIC_FIXTURE_2BAE0C98, new UUID(701, 6), TOKEN, NOW, CONTEXT)));
       assertEquals(0, h.live.get());
     }
   }
@@ -297,7 +316,9 @@ class QuestionSubmissionServiceTest {
         var failure =
             assertThrows(
                 TemporaryInfrastructureException.class,
-                () -> h.service.process(request("Public fixture", M0, TOKEN, NOW, CONTEXT)),
+                () ->
+                    h.service.process(
+                        request(FIXTURE_PUBLIC_FIXTURE_2BAE0C98, M0, TOKEN, NOW, CONTEXT)),
                 fault);
         assertFalse(failure.toString().contains("private"));
         for (String table :
@@ -306,15 +327,18 @@ class QuestionSubmissionServiceTest {
         assertEquals(0, h.live.get(), fault);
       }
     }
-    for (String fault : List.of("close", "rollback"))
+    for (String fault : List.of(FIXTURE_CLOSE_97959247, "rollback"))
       try (var h = new Fixture()) {
         h.fault = fault;
         if (fault.equals("rollback")) h.prepareFault = "insert into schubert.notifications";
         assertThrows(
             TemporaryInfrastructureException.class,
-            () -> h.service.process(request("Public fixture", M0, TOKEN, NOW, CONTEXT)));
+            () ->
+                h.service.process(
+                    request(FIXTURE_PUBLIC_FIXTURE_2BAE0C98, M0, TOKEN, NOW, CONTEXT)));
         assertEquals(
-            fault.equals("close") ? 1 : 0, h.scalar("select count(*) from schubert.questions"));
+            fault.equals(FIXTURE_CLOSE_97959247) ? 1 : 0,
+            h.scalar("select count(*) from schubert.questions"));
         assertEquals(0, h.live.get());
       }
   }
@@ -339,12 +363,14 @@ class QuestionSubmissionServiceTest {
             "update schubert.questions set receipt_id=repeat('1',26)")) {
       try (var h = new Fixture()) {
         h.confirmOnSignal();
-        h.service.process(request("Public fixture", M0, TOKEN, NOW, CONTEXT));
+        h.service.process(request(FIXTURE_PUBLIC_FIXTURE_2BAE0C98, M0, TOKEN, NOW, CONTEXT));
         h.sql(mutation);
         assertThrows(
             TemporaryInfrastructureException.class,
             () ->
-                h.service.process(request("Public fixture", new UUID(701, 2), TOKEN, NOW, CONTEXT)),
+                h.service.process(
+                    request(
+                        FIXTURE_PUBLIC_FIXTURE_2BAE0C98, new UUID(701, 2), TOKEN, NOW, CONTEXT)),
             mutation);
         assertEquals(1, h.scalar("select count(*) from schubert.questions"));
         assertEquals(1, h.scalar("select count(*) from schubert.request_inbox"));
@@ -357,7 +383,7 @@ class QuestionSubmissionServiceTest {
   void asub006ReceiptOnlyCollisionRetryAndClosedBoundary() throws Exception {
     try (var h = new Fixture()) {
       h.confirmOnSignal();
-      h.service.process(request("Public fixture", M0, TOKEN, NOW, CONTEXT));
+      h.service.process(request(FIXTURE_PUBLIC_FIXTURE_2BAE0C98, M0, TOKEN, NOW, CONTEXT));
       AtomicInteger index = new AtomicInteger();
       h.receipts = new QuestionReceiptIdGenerator(bound -> index.getAndIncrement() < 26 ? 0 : 1);
       h.ids.set(100);
@@ -399,7 +425,7 @@ class QuestionSubmissionServiceTest {
       UUID fresh = UUID.fromString(new String(actual, 24, 36, StandardCharsets.US_ASCII));
       assertEquals(4, fresh.version());
       assertNotEquals(M0, fresh);
-      assertArrayEquals(response(M0, fresh, "9000", "", 0, NOW), actual);
+      assertArrayEquals(response(M0, fresh, FIXTURE_9000_0CDC37EC, "", 0, NOW), actual);
       assertEquals(0, h.scalar("select count(*) from schubert.questions"));
       for (int i = 0; i < 9; i++) {
         int missing = i;
@@ -486,16 +512,17 @@ class QuestionSubmissionServiceTest {
                         new Class<?>[] {Connection.class},
                         (cp, cm, ca) -> {
                           String name = cm.getName();
-                          if (name.equals(fault) && !name.equals("close"))
+                          if (name.equals(fault) && !name.equals(FIXTURE_CLOSE_97959247))
                             throw new SQLException("private-provider");
                           if (name.equals("prepareStatement")
                               && (ca[0].toString().stripLeading().startsWith(fault)
                                   || ca[0].toString().stripLeading().startsWith(prepareFault)))
                             throw new SQLException("private-SQL");
                           Object value = invoke(actual, cm, ca);
-                          if (name.equals("close")) {
+                          if (name.equals(FIXTURE_CLOSE_97959247)) {
                             live.decrementAndGet();
-                            if (fault.equals("close")) throw new SQLException("private-close");
+                            if (fault.equals(FIXTURE_CLOSE_97959247))
+                              throw new SQLException("private-close");
                           }
                           return value;
                         });
@@ -598,7 +625,7 @@ class QuestionSubmissionServiceTest {
   static byte[] response(
       UUID correlation, UUID response, String code, String receipt, long question, Instant time) {
     byte[] bytes = header("QSBRSP01", "SA", response, correlation, time, CONTEXT, code);
-    if (code.equals("0000") || code.equals("0200")) {
+    if (code.equals("0000") || code.equals(FIXTURE_0200_FC9DB3AC)) {
       put(bytes, 256, receipt);
       put(bytes, 282, String.format(Locale.ROOT, "%012d", question));
       put(bytes, 294, date(time));

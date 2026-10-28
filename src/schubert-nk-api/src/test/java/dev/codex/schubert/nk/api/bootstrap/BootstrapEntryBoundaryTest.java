@@ -19,6 +19,8 @@ import org.junit.jupiter.api.Test;
 
 /** PT-ADM-BOOT669001..005 / SS343354 / PG-D401: internal composition, no Unit proof. */
 final class BootstrapEntryBoundaryTest {
+  private static final String FIXTURE_UNTRUSTED_DETAILS_EF7516ED = "untrusted details";
+
   @Test
   void fixedNormalStatusAndAbsentOrPresentCaptureOrder() throws Exception {
     for (int status : new int[] {0, 20, 50, 70}) {
@@ -66,8 +68,8 @@ final class BootstrapEntryBoundaryTest {
                 new String[0],
                 Map.of(),
                 (a, e) -> {
-                  if (error) throw new AssertionError("untrusted details");
-                  throw new IOException("untrusted details");
+                  if (error) throw new AssertionError(FIXTURE_UNTRUSTED_DETAILS_EF7516ED);
+                  throw new IOException(FIXTURE_UNTRUSTED_DETAILS_EF7516ED);
                 },
                 () -> {
                   assertEquals(
@@ -96,8 +98,8 @@ final class BootstrapEntryBoundaryTest {
                 Map.of(),
                 (a, e) -> 20,
                 () -> {
-                  if (error) throw new AssertionError("untrusted details");
-                  throw new IOException("untrusted details");
+                  if (error) throw new AssertionError(FIXTURE_UNTRUSTED_DETAILS_EF7516ED);
+                  throw new IOException(FIXTURE_UNTRUSTED_DETAILS_EF7516ED);
                 },
                 diagnostics));
       }
@@ -118,9 +120,9 @@ final class BootstrapEntryBoundaryTest {
                 new String[0],
                 Map.of(),
                 (arguments, environment) -> {
-                  if (kind == 0) throw new IOException("untrusted details");
-                  if (kind == 1) throw new SQLException("untrusted details");
-                  throw new NoSuchAlgorithmException("untrusted details");
+                  if (kind == 0) throw new IOException(FIXTURE_UNTRUSTED_DETAILS_EF7516ED);
+                  if (kind == 1) throw new SQLException(FIXTURE_UNTRUSTED_DETAILS_EF7516ED);
+                  throw new NoSuchAlgorithmException(FIXTURE_UNTRUSTED_DETAILS_EF7516ED);
                 },
                 () -> false,
                 diagnostics));

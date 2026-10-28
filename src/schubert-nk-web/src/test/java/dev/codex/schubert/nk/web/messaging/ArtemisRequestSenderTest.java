@@ -39,6 +39,11 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** PT-JMS-005/006 production request sender transaction and transport tests. */
 final class ArtemisRequestSenderTest {
+  private static final String FIXTURE_GETSESSIONMODE_BF25AD1A = "getSessionMode";
+  private static final String FIXTURE_CREATEBYTESMESSAGE_F47217B2 = "createBytesMessage";
+  private static final String FIXTURE_ROLLBACK_3770B198 = "rollback";
+  private static final String FIXTURE_CLOSE_97959247 = "close";
+  private static final String FIXTURE_001_A3FEAA64 = "001";
   private static final UUID MESSAGE_ID = UUID.fromString("00000000-0000-0000-0000-000000000001");
 
   /** SSC321/BUG1569: fixed primary/cleanup ownership table, no broker or connected context. */
@@ -112,18 +117,18 @@ final class ArtemisRequestSenderTest {
             new Class<?>[] {JMSContext.class},
             (proxy, method, arguments) -> {
               switch (method.getName()) {
-                case "getSessionMode":
+                case FIXTURE_GETSESSIONMODE_BF25AD1A:
                   if (!(primary instanceof JMSException)) throw primary;
                   return JMSContext.SESSION_TRANSACTED;
-                case "createBytesMessage":
+                case FIXTURE_CREATEBYTESMESSAGE_F47217B2:
                   return bytes;
                 case "commit":
                   commits.incrementAndGet();
                   return null;
-                case "rollback":
+                case FIXTURE_ROLLBACK_3770B198:
                   rollbacks.incrementAndGet();
                   return null;
-                case "close":
+                case FIXTURE_CLOSE_97959247:
                   closed.incrementAndGet();
                   if (closing.isPresent()) throw closing.orElseThrow();
                   return null;
@@ -156,7 +161,7 @@ final class ArtemisRequestSenderTest {
       assertEquals("QSBREQ01", actual.getStringProperty("NKLayoutID"));
       assertEquals(MESSAGE_ID.toString(), actual.getStringProperty("NKMessageID"));
       assertEquals(MESSAGE_ID.toString(), actual.getJMSCorrelationID());
-      assertEquals("001", actual.getStringProperty("NKProtocolVersion"));
+      assertEquals(FIXTURE_001_A3FEAA64, actual.getStringProperty("NKProtocolVersion"));
       assertEquals(
           "nk.sync.reply.web", ((ActiveMQDestination) actual.getJMSReplyTo()).getAddress());
       assertEquals(DeliveryMode.PERSISTENT, actual.getJMSDeliveryMode());
@@ -197,7 +202,7 @@ final class ArtemisRequestSenderTest {
             "nk.sync.reply.web", ((ActiveMQDestination) actual.getJMSReplyTo()).getAddress());
         assertEquals(MESSAGE_ID.toString(), actual.getStringProperty("NKMessageID"));
         assertEquals("LOGREQ01", actual.getStringProperty("NKLayoutID"));
-        assertEquals("001", actual.getStringProperty("NKProtocolVersion"));
+        assertEquals(FIXTURE_001_A3FEAA64, actual.getStringProperty("NKProtocolVersion"));
         assertEquals(DeliveryMode.PERSISTENT, actual.getJMSDeliveryMode());
         assertTrue(
             actual.getJMSExpiration()
@@ -219,7 +224,8 @@ final class ArtemisRequestSenderTest {
         new ArtemisRequestSender(
             () -> {
               opened.set(true);
-              return context(Map.of("getSessionMode", JMSContext.SESSION_TRANSACTED));
+              return context(
+                  Map.of(FIXTURE_GETSESSIONMODE_BF25AD1A, JMSContext.SESSION_TRANSACTED));
             });
     assertThrows(NullPointerException.class, () -> new ArtemisRequestSender(null));
     assertThrows(NullPointerException.class, () -> unopened.send(null, request));
@@ -242,7 +248,7 @@ final class ArtemisRequestSenderTest {
     assertThrows(NullPointerException.class, () -> nullContext.send(MESSAGE_ID, request));
     ArtemisRequestSender autoAck =
         new ArtemisRequestSender(
-            () -> context(Map.of("getSessionMode", JMSContext.AUTO_ACKNOWLEDGE)));
+            () -> context(Map.of(FIXTURE_GETSESSIONMODE_BF25AD1A, JMSContext.AUTO_ACKNOWLEDGE)));
     assertThrows(IllegalStateException.class, () -> autoAck.send(MESSAGE_ID, request));
   }
 
@@ -265,11 +271,11 @@ final class ArtemisRequestSenderTest {
             () ->
                 context(
                     Map.of(
-                        "getSessionMode",
+                        FIXTURE_GETSESSIONMODE_BF25AD1A,
                         JMSContext.SESSION_TRANSACTED,
-                        "createBytesMessage",
+                        FIXTURE_CREATEBYTESMESSAGE_F47217B2,
                         failingMessage,
-                        "rollback",
+                        FIXTURE_ROLLBACK_3770B198,
                         checkedRollback)));
     assertEquals(
         checked, assertThrows(JMSException.class, () -> checkedSender.send(MESSAGE_ID, request)));
@@ -282,11 +288,11 @@ final class ArtemisRequestSenderTest {
             () ->
                 context(
                     Map.of(
-                        "getSessionMode",
+                        FIXTURE_GETSESSIONMODE_BF25AD1A,
                         JMSContext.SESSION_TRANSACTED,
-                        "createBytesMessage",
+                        FIXTURE_CREATEBYTESMESSAGE_F47217B2,
                         runtime,
-                        "rollback",
+                        FIXTURE_ROLLBACK_3770B198,
                         rollback)));
     JMSRuntimeException actual =
         assertThrows(JMSRuntimeException.class, () -> runtimeSender.send(MESSAGE_ID, request));
@@ -370,14 +376,14 @@ final class ArtemisRequestSenderTest {
         JMSContext.class,
         (method, ignored) ->
             switch (method.getName()) {
-              case "getSessionMode" -> JMSContext.SESSION_TRANSACTED;
-              case "createBytesMessage" -> throw primary;
-              case "rollback" -> {
+              case FIXTURE_GETSESSIONMODE_BF25AD1A -> JMSContext.SESSION_TRANSACTED;
+              case FIXTURE_CREATEBYTESMESSAGE_F47217B2 -> throw primary;
+              case FIXTURE_ROLLBACK_3770B198 -> {
                 rollbackCalls.incrementAndGet();
                 if (rollback != null) throw rollback;
                 yield null;
               }
-              case "close" -> {
+              case FIXTURE_CLOSE_97959247 -> {
                 closeCalls.incrementAndGet();
                 if (close != null) throw close;
                 yield null;
@@ -403,11 +409,11 @@ final class ArtemisRequestSenderTest {
         JMSContext.class,
         (method, ignored) ->
             switch (method.getName()) {
-              case "getSessionMode" -> JMSContext.SESSION_TRANSACTED;
-              case "createBytesMessage" -> message;
+              case FIXTURE_GETSESSIONMODE_BF25AD1A -> JMSContext.SESSION_TRANSACTED;
+              case FIXTURE_CREATEBYTESMESSAGE_F47217B2 -> message;
               case "createProducer" -> producer[0];
               case "commit" -> null;
-              case "close" -> {
+              case FIXTURE_CLOSE_97959247 -> {
                 closeCalls.incrementAndGet();
                 throw close;
               }
@@ -430,7 +436,7 @@ final class ArtemisRequestSenderTest {
           if (action != null) {
             return action;
           }
-          if (method.getName().equals("close")) {
+          if (method.getName().equals(FIXTURE_CLOSE_97959247)) {
             return null;
           }
           if (method.getName().equals("toString")) {
@@ -513,9 +519,9 @@ final class ArtemisRequestSenderTest {
     byte[] body = new byte[total];
     Arrays.fill(body, (byte) ' ');
     ascii(body, 0, "SCHBNK01");
-    ascii(body, 8, "001");
+    ascii(body, 8, FIXTURE_001_A3FEAA64);
     ascii(body, 11, layout);
-    ascii(body, 19, "001");
+    ascii(body, 19, FIXTURE_001_A3FEAA64);
     body[22] = (byte) kind;
     body[23] = (byte) interaction;
     ascii(body, 24, MESSAGE_ID.toString());

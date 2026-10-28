@@ -46,6 +46,13 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** Real held-inode publication with independent wire/hash/FS/accounting oracle. W07..W10. */
 class ScenarioFileWriterTest {
+  private static final String FIXTURE_USERS_774733B7 = "users";
+  private static final String FIXTURE_20260908_771C782C = "20260908/";
+  private static final String FIXTURE_READY_6630F9C3 = ".ready";
+  private static final String FIXTURE_20260908_520314A3 = "20260908";
+  private static final String FIXTURE_UNIX_MODE_18F40B0C = "unix:mode";
+  private static final String FIXTURE_PART_92B0D5FC = ".part";
+  private static final String FIXTURE_SYNTHETIC_PRIVATE_PATH_6CBCF6F9 = "SYNTHETIC_PRIVATE_PATH";
   private static final Instant NOW = Instant.parse("2026-09-07T15:00:00Z");
   private static final UUID ID = UUID.fromString("00000000-0000-4000-8000-000000000123");
 
@@ -55,7 +62,7 @@ class ScenarioFileWriterTest {
   @Test
   void w07GoldenFilesHaveJstDateExactDescriptorAndNewOnlySharedGroupPermissions() throws Exception {
     for (int count : new int[] {1, 200, 201, 10000}) {
-      Path root = root("count-" + count, "users");
+      Path root = root("count-" + count, FIXTURE_USERS_774733B7);
       StorageIdentity identity = identity(root);
       var capacity = new TransferCapacity(0, 0);
       var calls = new Calls();
@@ -63,18 +70,25 @@ class ScenarioFileWriterTest {
         var writer = new ScenarioFileWriter(owned, identity, capacity, () -> ID);
         LargeResultDescriptor result = writer.publish(records(count), NOW);
         assertEquals(ID, result.fileId());
-        assertEquals("20260908/" + ID + ".ready", result.relativePath());
+        assertEquals(
+            FIXTURE_20260908_771C782C + ID + FIXTURE_READY_6630F9C3, result.relativePath());
         assertEquals(4800, result.recordLength());
         assertEquals(count, result.recordCount());
         assertEquals(4800L * count, result.byteLength());
         Path ready = root.resolve(result.relativePath());
         assertEquals(goldenFile(ready, count), result.sha256());
-        assertEquals(040750, Files.getAttribute(root.resolve("20260908"), "unix:mode"));
-        assertEquals(0100640, Files.getAttribute(ready, "unix:mode"));
         assertEquals(
-            "users", Files.readAttributes(ready, PosixFileAttributes.class).group().getName());
-        assertEquals("users", identity(root.resolve("20260908")).group());
-        assertFalse(Files.exists(root.resolve("20260908/" + ID + ".part")));
+            040750,
+            Files.getAttribute(
+                root.resolve(FIXTURE_20260908_520314A3), FIXTURE_UNIX_MODE_18F40B0C));
+        assertEquals(0100640, Files.getAttribute(ready, FIXTURE_UNIX_MODE_18F40B0C));
+        assertEquals(
+            FIXTURE_USERS_774733B7,
+            Files.readAttributes(ready, PosixFileAttributes.class).group().getName());
+        assertEquals(
+            FIXTURE_USERS_774733B7, identity(root.resolve(FIXTURE_20260908_520314A3)).group());
+        assertFalse(
+            Files.exists(root.resolve(FIXTURE_20260908_771C782C + ID + FIXTURE_PART_92B0D5FC)));
         usage(capacity, 4800L * count, 1);
       }
       assertTrue(calls.live.isEmpty());
@@ -83,9 +97,9 @@ class ScenarioFileWriterTest {
 
   @Test
   void w07ExistingDateIsValidatedNotRepairedAndDateBoundaryUsesJst() throws Exception {
-    Path root = root("existing", "users");
+    Path root = root("existing", FIXTURE_USERS_774733B7);
     StorageIdentity identity = identity(root);
-    Path day = Files.createDirectory(root.resolve("20260908"));
+    Path day = Files.createDirectory(root.resolve(FIXTURE_20260908_520314A3));
     Files.setPosixFilePermissions(day, PosixFilePermissions.fromString("rwxr-x---"));
     var capacity = new TransferCapacity(0, 0);
     try (var owned = OwnedTransferDirectory.open(LinuxDirectoryCalls.create(), root)) {
@@ -94,22 +108,27 @@ class ScenarioFileWriterTest {
           () ->
               writer.publish(
                   records(1), NOW)); // Existing child still belongs to primary mini group.
-      assertNotEquals("users", identity(day).group());
+      assertNotEquals(FIXTURE_USERS_774733B7, identity(day).group());
       Files.setAttribute(
           day,
           "posix:group",
-          day.getFileSystem().getUserPrincipalLookupService().lookupPrincipalByGroupName("users"));
+          day.getFileSystem()
+              .getUserPrincipalLookupService()
+              .lookupPrincipalByGroupName(FIXTURE_USERS_774733B7));
       Files.setPosixFilePermissions(day, PosixFilePermissions.fromString("rwx------"));
       reject(() -> writer.publish(records(1), NOW));
-      assertEquals(040700, Files.getAttribute(day, "unix:mode"));
+      assertEquals(040700, Files.getAttribute(day, FIXTURE_UNIX_MODE_18F40B0C));
       Files.setPosixFilePermissions(day, PosixFilePermissions.fromString("rwxr-x---"));
-      assertEquals("20260908/" + ID + ".ready", writer.publish(records(1), NOW).relativePath());
       assertEquals(
-          "20260907/" + ID + ".ready",
+          FIXTURE_20260908_771C782C + ID + FIXTURE_READY_6630F9C3,
+          writer.publish(records(1), NOW).relativePath());
+      assertEquals(
+          "20260907/" + ID + FIXTURE_READY_6630F9C3,
           writer.publish(records(1), NOW.minusNanos(1)).relativePath());
       usage(capacity, 9600, 2);
       var wrong =
-          new ScenarioFileWriter(owned, new StorageIdentity("unknown-owner", "users"), capacity);
+          new ScenarioFileWriter(
+              owned, new StorageIdentity("unknown-owner", FIXTURE_USERS_774733B7), capacity);
       reject(() -> wrong.publish(records(1), NOW));
       usage(capacity, 9600, 2);
     }
@@ -125,7 +144,10 @@ class ScenarioFileWriterTest {
           var day = owned.openDate(java.time.LocalDate.of(2026, 9, 8))) {
         for (int i = 0; i < 3; i++) {
           Files.write(
-              root.resolve("20260908/" + id(i) + (readyCollision ? ".ready" : ".part")),
+              root.resolve(
+                  FIXTURE_20260908_771C782C
+                      + id(i)
+                      + (readyCollision ? FIXTURE_READY_6630F9C3 : FIXTURE_PART_92B0D5FC)),
               new byte[] {(byte) i},
               StandardOpenOption.CREATE_NEW);
         }
@@ -146,9 +168,14 @@ class ScenarioFileWriterTest {
           assertArrayEquals(
               new byte[] {(byte) i},
               Files.readAllBytes(
-                  root.resolve("20260908/" + id(i) + (readyCollision ? ".ready" : ".part"))));
+                  root.resolve(
+                      FIXTURE_20260908_771C782C
+                          + id(i)
+                          + (readyCollision ? FIXTURE_READY_6630F9C3 : FIXTURE_PART_92B0D5FC))));
           if (readyCollision)
-            assertFalse(Files.exists(root.resolve("20260908/" + id(i) + ".part")));
+            assertFalse(
+                Files.exists(
+                    root.resolve(FIXTURE_20260908_771C782C + id(i) + FIXTURE_PART_92B0D5FC)));
         }
         AtomicInteger exhausted = new AtomicInteger();
         var failure =
@@ -164,7 +191,8 @@ class ScenarioFileWriterTest {
         reject(() -> failure.publish(records(1), NOW));
         assertEquals(4, exhausted.get());
         usage(capacity, 4800, 1);
-        Object mode = day.atDirectory(handle -> Files.getAttribute(handle, "unix:mode"));
+        Object mode =
+            day.atDirectory(handle -> Files.getAttribute(handle, FIXTURE_UNIX_MODE_18F40B0C));
         assertEquals(040750, mode);
       }
       assertTrue(calls.live.isEmpty());
@@ -244,8 +272,10 @@ class ScenarioFileWriterTest {
                 owned, identity, capacity, () -> ID, new FaultIo(identity, fault));
         reject(() -> writer.publish(records(1), NOW));
         usage(capacity, 0, 0);
-        assertFalse(Files.exists(root.resolve("20260908/" + ID + ".part")));
-        assertFalse(Files.exists(root.resolve("20260908/" + ID + ".ready")));
+        assertFalse(
+            Files.exists(root.resolve(FIXTURE_20260908_771C782C + ID + FIXTURE_PART_92B0D5FC)));
+        assertFalse(
+            Files.exists(root.resolve(FIXTURE_20260908_771C782C + ID + FIXTURE_READY_6630F9C3)));
       }
       assertTrue(calls.live.isEmpty(), fault.name());
     }
@@ -284,10 +314,19 @@ class ScenarioFileWriterTest {
         assertEquals(1, generated.get());
         usage(capacity, 4800, 1);
         boolean part = fault == Fault.CLEANUP;
-        assertEquals(part, Files.exists(root.resolve("20260908/" + ID + ".part")));
-        assertEquals(!part, Files.exists(root.resolve("20260908/" + ID + ".ready")));
-        if (part) assertEquals(0, Files.size(root.resolve("20260908/" + ID + ".part")));
-        else assertEquals(4800, Files.size(root.resolve("20260908/" + ID + ".ready")));
+        assertEquals(
+            part,
+            Files.exists(root.resolve(FIXTURE_20260908_771C782C + ID + FIXTURE_PART_92B0D5FC)));
+        assertEquals(
+            !part,
+            Files.exists(root.resolve(FIXTURE_20260908_771C782C + ID + FIXTURE_READY_6630F9C3)));
+        if (part)
+          assertEquals(
+              0, Files.size(root.resolve(FIXTURE_20260908_771C782C + ID + FIXTURE_PART_92B0D5FC)));
+        else
+          assertEquals(
+              4800,
+              Files.size(root.resolve(FIXTURE_20260908_771C782C + ID + FIXTURE_READY_6630F9C3)));
       }
       assertTrue(calls.live.isEmpty(), fault.name());
     }
@@ -314,7 +353,7 @@ class ScenarioFileWriterTest {
       }
       assertEquals(100, ids.size());
       usage(capacity, 480000, 100);
-      try (var entries = Files.list(root.resolve("20260908"))) {
+      try (var entries = Files.list(root.resolve(FIXTURE_20260908_520314A3))) {
         assertEquals(100, entries.count());
       }
     }
@@ -433,7 +472,7 @@ class ScenarioFileWriterTest {
     @Override
     public void initializeDirectory(Path handle) throws IOException {
       if (fault == Fault.DIR_INIT || fault == Fault.DIR_INIT_CLOSE)
-        throw new IOException("SYNTHETIC_PRIVATE_PATH");
+        throw new IOException(FIXTURE_SYNTHETIC_PRIVATE_PATH_6CBCF6F9);
       actual.initializeDirectory(handle);
     }
 
@@ -441,11 +480,12 @@ class ScenarioFileWriterTest {
     public LargeResultContent writePart(Path handle, ScenarioRecordStream records)
         throws IOException, NoSuchAlgorithmException {
       if (fault == Fault.WRITE_IO || fault == Fault.CLEANUP)
-        throw new IOException("SYNTHETIC_PRIVATE_PATH");
-      if (fault == Fault.WRITE_RUNTIME) throw new IllegalStateException("SYNTHETIC_PRIVATE_PATH");
+        throw new IOException(FIXTURE_SYNTHETIC_PRIVATE_PATH_6CBCF6F9);
+      if (fault == Fault.WRITE_RUNTIME)
+        throw new IllegalStateException(FIXTURE_SYNTHETIC_PRIVATE_PATH_6CBCF6F9);
       if (fault == Fault.WRITE_NULL) return null;
       if (fault == Fault.WRITE_SECURITY || fault == Fault.SECURITY_CLOSE)
-        throw new NoSuchAlgorithmException("SYNTHETIC_PRIVATE_PATH");
+        throw new NoSuchAlgorithmException(FIXTURE_SYNTHETIC_PRIVATE_PATH_6CBCF6F9);
       var content = actual.writePart(handle, records);
       if (fault == Fault.PART_HASH) {
         Files.write(handle, new byte[] {'9'}, StandardOpenOption.WRITE);
@@ -457,7 +497,8 @@ class ScenarioFileWriterTest {
     @Override
     public void verify(Path handle, LargeResultContent content)
         throws IOException, NoSuchAlgorithmException {
-      if (fault == Fault.READY_RUNTIME) throw new IllegalStateException("SYNTHETIC_PRIVATE_PATH");
+      if (fault == Fault.READY_RUNTIME)
+        throw new IllegalStateException(FIXTURE_SYNTHETIC_PRIVATE_PATH_6CBCF6F9);
       actual.verify(handle, content);
     }
   }

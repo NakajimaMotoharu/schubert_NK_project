@@ -19,12 +19,31 @@ import org.junit.jupiter.api.Test;
  * admission.
  */
 final class MorningBackupUnitCycleTest {
+  private static final String FIXTURE_NONE_C44E6DD7 = "NONE";
+  private static final String FIXTURE_START_A92AE961 = "start";
+  private static final String FIXTURE_BASELINE_DF191278 = "baseline";
+  private static final String FIXTURE_NO_WAIT_9D7311C0 = "no wait";
+  private static final String FIXTURE_POST_STOP_ACTUAL_C0C5198B = "post-stop-actual";
+  private static final String FIXTURE_STOP_6F2BE2FE = "stop";
+  private static final String FIXTURE_TERMINAL_C34E20C4 = "terminal";
+  private static final String FIXTURE_RETAIN_689680EF = "retain";
+  private static final String FIXTURE_NO_PROOF_9963CA9D = "no proof";
+  private static final String FIXTURE_ROOT_956E6E33 = "root";
+  private static final String FIXTURE_RECEIPT_E08EA766 = "receipt";
+  private static final String FIXTURE_WAIT_F3010736 = "wait";
+  private static final String FIXTURE_ORIGINAL_REQUEST_5251A035 = "original-request";
+
   /** SS343/SSC136/PT-OPS-BUCYCLE3244001: completed proof is read-only, never a new start. */
   @Test
   void bucycle3244001CompletedBackupRequiresSameBaselineReceiptAndQuiescentTerminal()
       throws Exception {
     for (String fault :
-        List.of("NONE", "OTHER_INVOCATION", "NOT_QUIESCENT", "MISSING_BASELINE", "MISSING_TYPED")) {
+        List.of(
+            FIXTURE_NONE_C44E6DD7,
+            "OTHER_INVOCATION",
+            "NOT_QUIESCENT",
+            "MISSING_BASELINE",
+            "MISSING_TYPED")) {
       var actual = ExpiryReceiptFixture.backupReceipt(0);
       var fixture = new Cycle3244(BackupUnitStartClient.Target.BACKUP, actual, false);
       var cycle = fixture.subject();
@@ -64,7 +83,7 @@ final class MorningBackupUnitCycleTest {
       if (fault.equals("OTHER_INVOCATION"))
         fixture.stopped = ExpiryReceiptFixture.backupReceipt(0, "8".repeat(32));
       if (fault.equals("NOT_QUIESCENT")) fixture.quiet = false;
-      if (fault.equals("NONE")) {
+      if (fault.equals(FIXTURE_NONE_C44E6DD7)) {
         cycle.recheckCompletedBackup();
         cycle.recheckCompletedBackup();
         assertThrows(Retained.class, cycle::retainUnresolvedOwner);
@@ -117,7 +136,8 @@ final class MorningBackupUnitCycleTest {
     }
     for (var target :
         List.of(BackupUnitStartClient.Target.CLEANUP, BackupUnitStartClient.Target.EXPIRY)) {
-      for (String fault : List.of("NONE", "NULL", "FOREIGN", "DOUBLE", "WRONG_PHASE_RECEIPT")) {
+      for (String fault :
+          List.of(FIXTURE_NONE_C44E6DD7, "NULL", "FOREIGN", "DOUBLE", "WRONG_PHASE_RECEIPT")) {
         var actual =
             target == BackupUnitStartClient.Target.CLEANUP
                 ? ExpiryReceiptFixture.cleanupReceipt(30)
@@ -153,14 +173,15 @@ final class MorningBackupUnitCycleTest {
               fixture.completions++;
               fixture.events.add("completion");
             };
-        if (fault.equals("NONE")) {
+        if (fault.equals(FIXTURE_NONE_C44E6DD7)) {
           assertSame(actual, cycle.executeHandoff(handoff, complete, fixture::originalProof));
           assertSame(actual, cycle.completedReceipt());
           assertEquals(1, fixture.completions);
           assertEquals(1, fixture.proofs);
           assertEquals(1, fixture.start.retire);
           assertEquals(
-              List.of("borrow", "start", "reacquire", "completion", "original"), fixture.events);
+              List.of("borrow", FIXTURE_START_A92AE961, "reacquire", "completion", "original"),
+              fixture.events);
         } else {
           assertThrows(
               Retained.class,
@@ -260,7 +281,7 @@ final class MorningBackupUnitCycleTest {
           },
           () -> {
             starts++;
-            events.add("start");
+            events.add(FIXTURE_START_A92AE961);
             return start;
           },
           () -> {
@@ -290,7 +311,7 @@ final class MorningBackupUnitCycleTest {
             () -> {},
             new MorningBackupUnitCycle.Receipt() {
               public Object capture() {
-                return "baseline";
+                return FIXTURE_BASELINE_DF191278;
               }
 
               public boolean freshZero(Object baseline) {
@@ -310,7 +331,7 @@ final class MorningBackupUnitCycleTest {
             () -> start,
             StopAttempt::new,
             () -> true,
-            () -> fail("no wait"),
+            () -> fail(FIXTURE_NO_WAIT_9D7311C0),
             () -> {
               throw new Retained();
             },
@@ -405,7 +426,7 @@ final class MorningBackupUnitCycleTest {
                 return new StopAttempt();
               },
               () -> true,
-              () -> fail("no wait"),
+              () -> fail(FIXTURE_NO_WAIT_9D7311C0),
               () -> {
                 throw new Retained();
               },
@@ -461,17 +482,17 @@ final class MorningBackupUnitCycleTest {
                     Object b, BackupUnitReceiptGate.TerminalReceipt before) {
                   assertEquals("actual-baseline", b);
                   assertSame(actual, before);
-                  events.add("post-stop-actual");
+                  events.add(FIXTURE_POST_STOP_ACTUAL_C0C5198B);
                   return actual;
                 }
               },
               () -> start,
               () -> {
-                events.add("stop");
+                events.add(FIXTURE_STOP_6F2BE2FE);
                 return new StopAttempt();
               },
               () -> true,
-              () -> fail("no wait"),
+              () -> fail(FIXTURE_NO_WAIT_9D7311C0),
               () -> {
                 throw new Retained();
               },
@@ -487,12 +508,17 @@ final class MorningBackupUnitCycleTest {
                 events.add("parent-config");
               }));
       assertEquals(
-          List.of("stop", "post-stop-actual", "parent-config", "post-stop-actual", "retire-proof"),
+          List.of(
+              FIXTURE_STOP_6F2BE2FE,
+              FIXTURE_POST_STOP_ACTUAL_C0C5198B,
+              "parent-config",
+              FIXTURE_POST_STOP_ACTUAL_C0C5198B,
+              "retire-proof"),
           events);
       assertSame(actual, cycle.completedReceipt());
       assertEquals(1, start.retire);
       cycle.recheckCompletedBackup();
-      assertEquals("post-stop-actual", events.getLast());
+      assertEquals(FIXTURE_POST_STOP_ACTUAL_C0C5198B, events.getLast());
       assertThrows(Retained.class, cycle::retainUnresolvedOwner);
       assertThrows(NullPointerException.class, () -> cycle.executeObserved(() -> {}, null));
     }
@@ -504,7 +530,7 @@ final class MorningBackupUnitCycleTest {
               () -> {},
               new MorningBackupUnitCycle.Receipt() {
                 public Object capture() {
-                  return "baseline";
+                  return FIXTURE_BASELINE_DF191278;
                 }
 
                 public boolean freshZero(Object b) {
@@ -518,7 +544,7 @@ final class MorningBackupUnitCycleTest {
               () -> start,
               StopAttempt::new,
               () -> true,
-              () -> fail("no wait"),
+              () -> fail(FIXTURE_NO_WAIT_9D7311C0),
               () -> {
                 throw new Retained();
               },
@@ -543,7 +569,7 @@ final class MorningBackupUnitCycleTest {
               () -> {},
               new MorningBackupUnitCycle.Receipt() {
                 public Object capture() {
-                  return "baseline";
+                  return FIXTURE_BASELINE_DF191278;
                 }
 
                 public boolean freshZero(Object baseline) {
@@ -552,23 +578,23 @@ final class MorningBackupUnitCycleTest {
                 }
 
                 public Optional<MorningBackupUnitCycle.Outcome> terminal(Object baseline) {
-                  assertEquals("baseline", baseline);
+                  assertEquals(FIXTURE_BASELINE_DF191278, baseline);
                   events.add("failed-receipt");
                   return Optional.of(MorningBackupUnitCycle.Outcome.FAILED);
                 }
               },
               () -> start,
               () -> {
-                events.add("stop");
+                events.add(FIXTURE_STOP_6F2BE2FE);
                 return new StopAttempt();
               },
               () -> {
-                events.add("terminal");
+                events.add(FIXTURE_TERMINAL_C34E20C4);
                 return true;
               },
               () -> fail("known terminal needs no wait"),
               () -> {
-                events.add("retain");
+                events.add(FIXTURE_RETAIN_689680EF);
                 throw new Retained();
               },
               budget());
@@ -580,10 +606,16 @@ final class MorningBackupUnitCycleTest {
             if (completionFails) throw new IOException("unknown commit");
           };
       if (completionFails) {
-        assertThrows(Retained.class, () -> cycle.execute(() -> fail("no proof"), completion));
+        assertThrows(
+            Retained.class, () -> cycle.execute(() -> fail(FIXTURE_NO_PROOF_9963CA9D), completion));
         assertEquals(0, start.retire);
         assertEquals(
-            List.of("failed-receipt", "stop", "terminal", "db-failed-request-retired", "retain"),
+            List.of(
+                "failed-receipt",
+                FIXTURE_STOP_6F2BE2FE,
+                FIXTURE_TERMINAL_C34E20C4,
+                "db-failed-request-retired",
+                FIXTURE_RETAIN_689680EF),
             events);
       } else {
         assertEquals(
@@ -593,11 +625,11 @@ final class MorningBackupUnitCycleTest {
         assertEquals(
             List.of(
                 "failed-receipt",
-                "stop",
-                "terminal",
+                FIXTURE_STOP_6F2BE2FE,
+                FIXTURE_TERMINAL_C34E20C4,
                 "db-failed-request-retired",
                 "original-current",
-                "terminal"),
+                FIXTURE_TERMINAL_C34E20C4),
             events);
       }
       assertThrows(NullPointerException.class, () -> cycle.execute(() -> {}, null));
@@ -652,55 +684,55 @@ final class MorningBackupUnitCycleTest {
     int[] observations = {0};
     var cycle =
         new MorningBackupUnitCycle(
-            () -> events.add("root"),
+            () -> events.add(FIXTURE_ROOT_956E6E33),
             new MorningBackupUnitCycle.Receipt() {
               public Object capture() {
-                events.add("baseline");
+                events.add(FIXTURE_BASELINE_DF191278);
                 return "pre-start";
               }
 
               public boolean freshZero(Object baseline) {
                 assertEquals("pre-start", baseline);
-                events.add("receipt");
+                events.add(FIXTURE_RECEIPT_E08EA766);
                 return ++observations[0] == 2;
               }
             },
             () -> {
-              events.add("start");
+              events.add(FIXTURE_START_A92AE961);
               return start;
             },
             () -> {
-              events.add("stop");
+              events.add(FIXTURE_STOP_6F2BE2FE);
               return stop;
             },
             () -> {
-              events.add("terminal");
+              events.add(FIXTURE_TERMINAL_C34E20C4);
               return true;
             },
-            () -> events.add("wait"),
+            () -> events.add(FIXTURE_WAIT_F3010736),
             () -> fail("known complete cycle must not be retained"),
             budget());
-    cycle.execute(() -> events.add("original-request"));
+    cycle.execute(() -> events.add(FIXTURE_ORIGINAL_REQUEST_5251A035));
     assertEquals(
         List.of(
-            "root",
-            "baseline",
-            "root",
-            "start",
-            "root",
-            "receipt",
-            "wait",
-            "receipt",
-            "root",
-            "stop",
-            "root",
-            "terminal",
-            "root",
-            "root",
-            "original-request",
-            "terminal",
-            "root",
-            "root"),
+            FIXTURE_ROOT_956E6E33,
+            FIXTURE_BASELINE_DF191278,
+            FIXTURE_ROOT_956E6E33,
+            FIXTURE_START_A92AE961,
+            FIXTURE_ROOT_956E6E33,
+            FIXTURE_RECEIPT_E08EA766,
+            FIXTURE_WAIT_F3010736,
+            FIXTURE_RECEIPT_E08EA766,
+            FIXTURE_ROOT_956E6E33,
+            FIXTURE_STOP_6F2BE2FE,
+            FIXTURE_ROOT_956E6E33,
+            FIXTURE_TERMINAL_C34E20C4,
+            FIXTURE_ROOT_956E6E33,
+            FIXTURE_ROOT_956E6E33,
+            FIXTURE_ORIGINAL_REQUEST_5251A035,
+            FIXTURE_TERMINAL_C34E20C4,
+            FIXTURE_ROOT_956E6E33,
+            FIXTURE_ROOT_956E6E33),
         events);
     assertEquals(1, start.retire);
     assertEquals(0, start.await);
@@ -721,9 +753,9 @@ final class MorningBackupUnitCycleTest {
             start,
             stop,
             () -> {
-              events.add("wait");
+              events.add(FIXTURE_WAIT_F3010736);
               if (++waits[0] == 2) {
-                assertFalse(events.contains("stop"));
+                assertFalse(events.contains(FIXTURE_STOP_6F2BE2FE));
                 start.status = BackupUnitStartClient.Status.CLIENT_EXITED_ZERO;
               }
               if (waits[0] == 4) {
@@ -732,13 +764,15 @@ final class MorningBackupUnitCycleTest {
               }
             },
             () -> fail("eventually reaped attempts must complete"));
-    cycle.execute(() -> events.add("original-request"));
+    cycle.execute(() -> events.add(FIXTURE_ORIGINAL_REQUEST_5251A035));
     assertEquals(4, waits[0]);
     assertEquals(2, start.await);
     assertEquals(2, stop.await);
     assertEquals(1, start.retire);
-    assertTrue(events.indexOf("stop") > events.indexOf("receipt"));
-    assertTrue(events.indexOf("original-request") > events.indexOf("terminal"));
+    assertTrue(events.indexOf(FIXTURE_STOP_6F2BE2FE) > events.indexOf(FIXTURE_RECEIPT_E08EA766));
+    assertTrue(
+        events.indexOf(FIXTURE_ORIGINAL_REQUEST_5251A035)
+            > events.indexOf(FIXTURE_TERMINAL_C34E20C4));
 
     start.status = BackupUnitStartClient.Status.UNKNOWN;
     stop.status = MaintenanceUnitStopClient.Status.CLIENT_EXITED_ZERO;
@@ -753,12 +787,12 @@ final class MorningBackupUnitCycleTest {
               if (start.await >= 4) throw new Retained();
             },
             () -> {
-              pendingEvents.add("retain");
+              pendingEvents.add(FIXTURE_RETAIN_689680EF);
               throw new Retained();
             });
-    assertThrows(Retained.class, () -> pending.execute(() -> fail("no proof")));
+    assertThrows(Retained.class, () -> pending.execute(() -> fail(FIXTURE_NO_PROOF_9963CA9D)));
     assertEquals(before, start.retire);
-    assertEquals("retain", pendingEvents.getLast());
+    assertEquals(FIXTURE_RETAIN_689680EF, pendingEvents.getLast());
   }
 
   @Test
@@ -771,7 +805,7 @@ final class MorningBackupUnitCycleTest {
             () -> {},
             new MorningBackupUnitCycle.Receipt() {
               public Object capture() {
-                return "baseline";
+                return FIXTURE_BASELINE_DF191278;
               }
 
               public boolean freshZero(Object baseline) throws IOException {
@@ -779,22 +813,23 @@ final class MorningBackupUnitCycleTest {
               }
             },
             () -> {
-              events.add("start");
+              events.add(FIXTURE_START_A92AE961);
               return start;
             },
             () -> {
-              events.add("stop");
+              events.add(FIXTURE_STOP_6F2BE2FE);
               return stop;
             },
             () -> true,
             () -> {},
             () -> {
-              events.add("retain");
+              events.add(FIXTURE_RETAIN_689680EF);
               throw new Retained();
             },
             budget());
-    assertThrows(Retained.class, () -> brokenReceipt.execute(() -> fail("no proof")));
-    assertEquals(List.of("start", "retain"), events);
+    assertThrows(
+        Retained.class, () -> brokenReceipt.execute(() -> fail(FIXTURE_NO_PROOF_9963CA9D)));
+    assertEquals(List.of(FIXTURE_START_A92AE961, FIXTURE_RETAIN_689680EF), events);
     assertEquals(0, start.retire);
 
     events.clear();
@@ -812,7 +847,7 @@ final class MorningBackupUnitCycleTest {
               }
             },
             () -> {
-              events.add("start");
+              events.add(FIXTURE_START_A92AE961);
               return start;
             },
             () -> stop,
@@ -837,11 +872,17 @@ final class MorningBackupUnitCycleTest {
             stop,
             () -> {},
             () -> {
-              events.add("retain");
+              events.add(FIXTURE_RETAIN_689680EF);
               throw new Retained();
             });
-    assertThrows(Retained.class, () -> failed.execute(() -> fail("no proof")));
-    assertEquals(List.of("baseline", "start", "terminal", "retain"), events);
+    assertThrows(Retained.class, () -> failed.execute(() -> fail(FIXTURE_NO_PROOF_9963CA9D)));
+    assertEquals(
+        List.of(
+            FIXTURE_BASELINE_DF191278,
+            FIXTURE_START_A92AE961,
+            FIXTURE_TERMINAL_C34E20C4,
+            FIXTURE_RETAIN_689680EF),
+        events);
     assertEquals(0, start.retire);
 
     events.clear();
@@ -850,10 +891,11 @@ final class MorningBackupUnitCycleTest {
         () -> {
           throw new IOException("uncertain marker retirement");
         };
-    assertThrows(Retained.class, () -> failed.execute(() -> events.add("original-request")));
+    assertThrows(
+        Retained.class, () -> failed.execute(() -> events.add(FIXTURE_ORIGINAL_REQUEST_5251A035)));
     assertEquals(0, start.retire);
-    assertTrue(events.contains("stop"));
-    assertEquals("retain", events.getLast());
+    assertTrue(events.contains(FIXTURE_STOP_6F2BE2FE));
+    assertEquals(FIXTURE_RETAIN_689680EF, events.getLast());
     assertThrows(NullPointerException.class, () -> failed.execute(null));
     assertThrows(
         NullPointerException.class,
@@ -895,25 +937,27 @@ final class MorningBackupUnitCycleTest {
               () -> {},
               receipt(events),
               () -> {
-                events.add("start");
+                events.add(FIXTURE_START_A92AE961);
                 if (failure instanceof IOException known) throw known;
                 if (failure instanceof RuntimeException unknown) throw unknown;
                 throw (Error) failure;
               },
               () -> {
-                events.add("stop");
+                events.add(FIXTURE_STOP_6F2BE2FE);
                 fail("unknown start cannot stop");
                 return null;
               },
               () -> true,
               () -> {},
               () -> {
-                events.add("retain");
+                events.add(FIXTURE_RETAIN_689680EF);
                 throw new Retained();
               },
               budget());
-      assertThrows(Retained.class, () -> cycle.execute(() -> fail("no proof")));
-      assertEquals(List.of("baseline", "start", "retain"), events);
+      assertThrows(Retained.class, () -> cycle.execute(() -> fail(FIXTURE_NO_PROOF_9963CA9D)));
+      assertEquals(
+          List.of(FIXTURE_BASELINE_DF191278, FIXTURE_START_A92AE961, FIXTURE_RETAIN_689680EF),
+          events);
     }
     for (boolean nullAttempt : List.of(true, false)) {
       var events = new ArrayList<String>();
@@ -922,7 +966,7 @@ final class MorningBackupUnitCycleTest {
               () -> {},
               receipt(events),
               () -> {
-                events.add("start");
+                events.add(FIXTURE_START_A92AE961);
                 if (nullAttempt) return null;
                 return new MorningBackupUnitCycle.StartAttempt() {
                   public BackupUnitStartClient.Status status() {
@@ -946,12 +990,14 @@ final class MorningBackupUnitCycleTest {
               () -> true,
               () -> {},
               () -> {
-                events.add("retain");
+                events.add(FIXTURE_RETAIN_689680EF);
                 throw new Retained();
               },
               budget());
-      assertThrows(Retained.class, () -> cycle.execute(() -> fail("no proof")));
-      assertEquals(List.of("baseline", "start", "retain"), events);
+      assertThrows(Retained.class, () -> cycle.execute(() -> fail(FIXTURE_NO_PROOF_9963CA9D)));
+      assertEquals(
+          List.of(FIXTURE_BASELINE_DF191278, FIXTURE_START_A92AE961, FIXTURE_RETAIN_689680EF),
+          events);
     }
     var awaitEvents = new ArrayList<String>();
     var nullAwait =
@@ -977,14 +1023,16 @@ final class MorningBackupUnitCycleTest {
               return null;
             },
             () -> true,
-            () -> awaitEvents.add("wait"),
+            () -> awaitEvents.add(FIXTURE_WAIT_F3010736),
             () -> {
-              awaitEvents.add("retain");
+              awaitEvents.add(FIXTURE_RETAIN_689680EF);
               throw new Retained();
             },
             budget());
-    assertThrows(Retained.class, () -> nullAwait.execute(() -> fail("no proof")));
-    assertEquals(List.of("baseline", "wait", "retain"), awaitEvents);
+    assertThrows(Retained.class, () -> nullAwait.execute(() -> fail(FIXTURE_NO_PROOF_9963CA9D)));
+    assertEquals(
+        List.of(FIXTURE_BASELINE_DF191278, FIXTURE_WAIT_F3010736, FIXTURE_RETAIN_689680EF),
+        awaitEvents);
   }
 
   @Test
@@ -998,7 +1046,7 @@ final class MorningBackupUnitCycleTest {
             () -> {},
             receipt(events),
             () -> {
-              events.add("start");
+              events.add(FIXTURE_START_A92AE961);
               return new StartAttempt();
             },
             StopAttempt::new,
@@ -1007,7 +1055,7 @@ final class MorningBackupUnitCycleTest {
             () -> fail("no start, no retention"),
             parentBudget);
     now[0] = deadline;
-    assertThrows(IOException.class, () -> before.execute(() -> fail("no proof")));
+    assertThrows(IOException.class, () -> before.execute(() -> fail(FIXTURE_NO_PROOF_9963CA9D)));
     assertTrue(events.isEmpty());
 
     now[0] = 0;
@@ -1019,7 +1067,7 @@ final class MorningBackupUnitCycleTest {
             () -> {},
             receipt(events),
             () -> {
-              events.add("start");
+              events.add(FIXTURE_START_A92AE961);
               now[0] = deadline;
               return start;
             },
@@ -1030,12 +1078,14 @@ final class MorningBackupUnitCycleTest {
             () -> true,
             () -> {},
             () -> {
-              events.add("retain");
+              events.add(FIXTURE_RETAIN_689680EF);
               throw new Retained();
             },
             parentBudget);
-    assertThrows(Retained.class, () -> afterStart.execute(() -> fail("no proof")));
-    assertEquals(List.of("baseline", "start", "retain"), events);
+    assertThrows(Retained.class, () -> afterStart.execute(() -> fail(FIXTURE_NO_PROOF_9963CA9D)));
+    assertEquals(
+        List.of(FIXTURE_BASELINE_DF191278, FIXTURE_START_A92AE961, FIXTURE_RETAIN_689680EF),
+        events);
     assertEquals(0, start.retire);
 
     now[0] = 0;
@@ -1045,18 +1095,18 @@ final class MorningBackupUnitCycleTest {
             () -> {},
             new MorningBackupUnitCycle.Receipt() {
               public Object capture() {
-                events.add("baseline");
-                return "baseline";
+                events.add(FIXTURE_BASELINE_DF191278);
+                return FIXTURE_BASELINE_DF191278;
               }
 
               public boolean freshZero(Object baseline) {
-                assertEquals("baseline", baseline);
+                assertEquals(FIXTURE_BASELINE_DF191278, baseline);
                 now[0] = deadline;
                 return false;
               }
             },
             () -> {
-              events.add("start");
+              events.add(FIXTURE_START_A92AE961);
               return start;
             },
             () -> {
@@ -1066,12 +1116,15 @@ final class MorningBackupUnitCycleTest {
             () -> true,
             () -> {},
             () -> {
-              events.add("retain");
+              events.add(FIXTURE_RETAIN_689680EF);
               throw new Retained();
             },
             parentBudget);
-    assertThrows(Retained.class, () -> duringReceipt.execute(() -> fail("no proof")));
-    assertEquals(List.of("baseline", "start", "retain"), events);
+    assertThrows(
+        Retained.class, () -> duringReceipt.execute(() -> fail(FIXTURE_NO_PROOF_9963CA9D)));
+    assertEquals(
+        List.of(FIXTURE_BASELINE_DF191278, FIXTURE_START_A92AE961, FIXTURE_RETAIN_689680EF),
+        events);
     assertEquals(0, start.retire);
 
     now[0] = 0;
@@ -1091,7 +1144,7 @@ final class MorningBackupUnitCycleTest {
               throw new Retained();
             },
             parentBudget);
-    assertThrows(Retained.class, () -> duringStop.execute(() -> fail("no proof")));
+    assertThrows(Retained.class, () -> duringStop.execute(() -> fail(FIXTURE_NO_PROOF_9963CA9D)));
     assertEquals(0, start.retire);
 
     now[0] = 0;
@@ -1109,20 +1162,20 @@ final class MorningBackupUnitCycleTest {
               throw new Retained();
             },
             parentBudget);
-    assertThrows(Retained.class, () -> beforeRetire.execute(() -> fail("no proof")));
+    assertThrows(Retained.class, () -> beforeRetire.execute(() -> fail(FIXTURE_NO_PROOF_9963CA9D)));
     assertEquals(0, start.retire);
   }
 
   private static MorningBackupUnitCycle.Receipt receipt(List<String> events) {
     return new MorningBackupUnitCycle.Receipt() {
       public Object capture() {
-        events.add("baseline");
-        return "baseline";
+        events.add(FIXTURE_BASELINE_DF191278);
+        return FIXTURE_BASELINE_DF191278;
       }
 
       public boolean freshZero(Object baseline) {
-        events.add("receipt");
-        assertEquals("baseline", baseline);
+        events.add(FIXTURE_RECEIPT_E08EA766);
+        assertEquals(FIXTURE_BASELINE_DF191278, baseline);
         return true;
       }
     };
@@ -1138,15 +1191,15 @@ final class MorningBackupUnitCycleTest {
         () -> {},
         receipt(events),
         () -> {
-          events.add("start");
+          events.add(FIXTURE_START_A92AE961);
           return start;
         },
         () -> {
-          events.add("stop");
+          events.add(FIXTURE_STOP_6F2BE2FE);
           return stop;
         },
         () -> {
-          events.add("terminal");
+          events.add(FIXTURE_TERMINAL_C34E20C4);
           return true;
         },
         wait,

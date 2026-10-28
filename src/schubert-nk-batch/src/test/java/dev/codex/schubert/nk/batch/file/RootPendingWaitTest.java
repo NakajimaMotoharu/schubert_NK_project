@@ -19,6 +19,13 @@ import org.junit.jupiter.api.Test;
 
 /** PT-ROOTWAIT-SSC307-001..012: literal sequence/clock/identity oracles, no native authority. */
 final class RootPendingWaitTest {
+  private static final String FIXTURE_CLOCK_10_79F89E76 = "clock:10";
+  private static final String FIXTURE_OWNER_1_2DF3970D = "owner:1";
+  private static final String FIXTURE_READ_1_9B660CEF = "read:1";
+  private static final String FIXTURE_OWNER_2_202E7B96 = "owner:2";
+  private static final String FIXTURE_CLOCK_99_019E434D = "clock:99";
+  private static final String FIXTURE_PAUSE_1_F203A93F = "pause:1";
+
   private static RootStartupContext.Snapshot self(ServiceConfigFiles.Service service) {
     var role = RootStartupContext.Service.valueOf(service.name());
     return new RootStartupContext.Snapshot(
@@ -47,11 +54,25 @@ final class RootPendingWaitTest {
       var io = new Fake(10, 11);
       io.launches = List.of(Optional.of(record(service, 300)));
       RootStartupPending.awaitLaunch(self(service), 100, io);
-      assertEquals(List.of("clock:10", "owner:1", "read:1", "owner:2", "clock:11"), io.events);
+      assertEquals(
+          List.of(
+              FIXTURE_CLOCK_10_79F89E76,
+              FIXTURE_OWNER_1_2DF3970D,
+              FIXTURE_READ_1_9B660CEF,
+              FIXTURE_OWNER_2_202E7B96,
+              "clock:11"),
+          io.events);
     }
     var boundary = new Fake(99, 99);
     RootStartupPending.awaitLaunch(self(ServiceConfigFiles.Service.API), 100, boundary);
-    assertEquals(List.of("clock:99", "owner:1", "read:1", "owner:2", "clock:99"), boundary.events);
+    assertEquals(
+        List.of(
+            FIXTURE_CLOCK_99_019E434D,
+            FIXTURE_OWNER_1_2DF3970D,
+            FIXTURE_READ_1_9B660CEF,
+            FIXTURE_OWNER_2_202E7B96,
+            FIXTURE_CLOCK_99_019E434D),
+        boundary.events);
   }
 
   @Test
@@ -65,8 +86,19 @@ final class RootPendingWaitTest {
     RootStartupPending.awaitLaunch(self(ServiceConfigFiles.Service.API), 100, io);
     assertEquals(
         List.of(
-            "clock:1", "owner:1", "read:1", "pause:1", "clock:2", "owner:2", "read:2", "pause:2",
-            "clock:3", "owner:3", "read:3", "owner:4", "clock:4"),
+            "clock:1",
+            FIXTURE_OWNER_1_2DF3970D,
+            FIXTURE_READ_1_9B660CEF,
+            FIXTURE_PAUSE_1_F203A93F,
+            "clock:2",
+            FIXTURE_OWNER_2_202E7B96,
+            "read:2",
+            "pause:2",
+            "clock:3",
+            "owner:3",
+            "read:3",
+            "owner:4",
+            "clock:4"),
         io.events);
   }
 
@@ -86,7 +118,14 @@ final class RootPendingWaitTest {
     io.launches = List.of(Optional.empty());
     unavailable(
         () -> RootStartupPending.awaitLaunch(self(ServiceConfigFiles.Service.API), 100, io));
-    assertEquals(List.of("clock:99", "owner:1", "read:1", "pause:1", "clock:100"), io.events);
+    assertEquals(
+        List.of(
+            FIXTURE_CLOCK_99_019E434D,
+            FIXTURE_OWNER_1_2DF3970D,
+            FIXTURE_READ_1_9B660CEF,
+            FIXTURE_PAUSE_1_F203A93F,
+            "clock:100"),
+        io.events);
   }
 
   @Test
@@ -96,7 +135,13 @@ final class RootPendingWaitTest {
       unavailable(
           () -> RootStartupPending.awaitLaunch(self(ServiceConfigFiles.Service.API), 100, io));
       assertEquals(
-          List.of("clock:99", "owner:1", "read:1", "owner:2", "clock:" + value), io.events);
+          List.of(
+              FIXTURE_CLOCK_99_019E434D,
+              FIXTURE_OWNER_1_2DF3970D,
+              FIXTURE_READ_1_9B660CEF,
+              FIXTURE_OWNER_2_202E7B96,
+              "clock:" + value),
+          io.events);
     }
   }
 
@@ -114,25 +159,34 @@ final class RootPendingWaitTest {
               () -> RootStartupPending.awaitLaunch(self(ServiceConfigFiles.Service.API), 100, io)));
       assertEquals(
           index == 1
-              ? List.of("clock:10", "owner:1")
-              : List.of("clock:10", "owner:1", "read:1", "owner:2"),
+              ? List.of(FIXTURE_CLOCK_10_79F89E76, FIXTURE_OWNER_1_2DF3970D)
+              : List.of(
+                  FIXTURE_CLOCK_10_79F89E76,
+                  FIXTURE_OWNER_1_2DF3970D,
+                  FIXTURE_READ_1_9B660CEF,
+                  FIXTURE_OWNER_2_202E7B96),
           io.events);
     }
   }
 
   @Test
   void pending007UnknownClockOwnerReadAndPauseFailuresKeepIdentity() {
-    for (String event : List.of("clock:10", "owner:1", "read:1", "pause:1")) {
+    for (String event :
+        List.of(
+            FIXTURE_CLOCK_10_79F89E76,
+            FIXTURE_OWNER_1_2DF3970D,
+            FIXTURE_READ_1_9B660CEF,
+            FIXTURE_PAUSE_1_F203A93F)) {
       for (Throwable failure :
           List.of(
               new IOException("PUBLIC_IO"),
               new IllegalStateException("PUBLIC_RUNTIME"),
               new AssertionError("PUBLIC_ERROR"))) {
-        if (event.equals("pause:1") && failure instanceof IOException) continue;
+        if (event.equals(FIXTURE_PAUSE_1_F203A93F) && failure instanceof IOException) continue;
         var io = new Fake(10);
         io.failAt = event;
         io.failure = failure;
-        if (event.equals("pause:1")) io.launches = List.of(Optional.empty());
+        if (event.equals(FIXTURE_PAUSE_1_F203A93F)) io.launches = List.of(Optional.empty());
         assertSame(
             failure,
             assertThrows(
@@ -150,7 +204,9 @@ final class RootPendingWaitTest {
     io.launches = List.of(Optional.of(record(ServiceConfigFiles.Service.API, 301)));
     unavailable(
         () -> RootStartupPending.awaitLaunch(self(ServiceConfigFiles.Service.API), 100, io));
-    assertEquals(List.of("clock:10", "owner:1", "read:1"), io.events);
+    assertEquals(
+        List.of(FIXTURE_CLOCK_10_79F89E76, FIXTURE_OWNER_1_2DF3970D, FIXTURE_READ_1_9B660CEF),
+        io.events);
   }
 
   @Test
@@ -168,7 +224,13 @@ final class RootPendingWaitTest {
       assertNull(failure.getCause());
       assertEquals(0, failure.getSuppressed().length);
       assertTrue(Thread.currentThread().isInterrupted());
-      assertEquals(List.of("clock:10", "owner:1", "read:1", "pause:1"), io.events);
+      assertEquals(
+          List.of(
+              FIXTURE_CLOCK_10_79F89E76,
+              FIXTURE_OWNER_1_2DF3970D,
+              FIXTURE_READ_1_9B660CEF,
+              FIXTURE_PAUSE_1_F203A93F),
+          io.events);
     } finally {
       Thread.interrupted();
       if (wasInterrupted) Thread.currentThread().interrupt();
@@ -187,7 +249,9 @@ final class RootPendingWaitTest {
     assertThrows(
         NullPointerException.class,
         () -> RootStartupPending.awaitLaunch(self(ServiceConfigFiles.Service.API), 100, io));
-    assertEquals(List.of("clock:10", "owner:1", "read:1"), io.events);
+    assertEquals(
+        List.of(FIXTURE_CLOCK_10_79F89E76, FIXTURE_OWNER_1_2DF3970D, FIXTURE_READ_1_9B660CEF),
+        io.events);
   }
 
   @Test

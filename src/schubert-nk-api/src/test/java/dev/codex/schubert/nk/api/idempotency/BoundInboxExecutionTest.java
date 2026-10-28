@@ -39,6 +39,12 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** Real PostgreSQL, independent SQL/LP/HMAC/body expectations. SSC-033/PT-IDEM-B01..B04. */
 final class BoundInboxExecutionTest {
+  private static final String FIXTURE_DELETE_FROM_SCHUBERT_REQUEST_INBOX_D18913CC =
+      "delete from schubert.request_inbox";
+  private static final String FIXTURE_USTREQ01_D6E6CD9B = "USTREQ01";
+  private static final String FIXTURE_USER_3_2B58DC49 = "USER:3";
+  private static final String FIXTURE_WRONG_PK_A0157D1B = "wrong-pk";
+  private static final String FIXTURE_001_A3FEAA64 = "001";
   private static final UUID ORIGINAL = new UUID(0x5800000000000000L, 1);
   private static final UUID RETRY = new UUID(0x5800000000000000L, 2);
   private static final UUID TOKEN = new UUID(0x5800000000000000L, 3);
@@ -64,7 +70,7 @@ final class BoundInboxExecutionTest {
 
   @BeforeEach
   void reset() throws Exception {
-    sql("delete from schubert.request_inbox");
+    sql(FIXTURE_DELETE_FROM_SCHUBERT_REQUEST_INBOX_D18913CC);
     sql("delete from schubert.app_users");
     sql(
         "insert into schubert.app_users(id,username,username_key,password_hash,role,status,password_changed_at,created_at,updated_at) values(1,'owner','owner','synthetic-test-hash','USER','ACTIVE','2026-09-08T00:00:00Z','2026-09-08T00:00:00Z','2026-09-08T00:00:00Z')");
@@ -74,7 +80,7 @@ final class BoundInboxExecutionTest {
   void boundFirstMessageAndOperationTokenKeepOriginalAadIdentity() throws Exception {
     try (var keys = keys();
         var crypto = crypto();
-        var canonical = canonical("USTREQ01", "USER:3");
+        var canonical = canonical(FIXTURE_USTREQ01_D6E6CD9B, FIXTURE_USER_3_2B58DC49);
         var c = database.transaction()) {
       var coordinator = new JdbcInboxCoordinator(keys);
       var completion = completion(crypto.encrypt(identity(ORIGINAL), BODY));
@@ -122,7 +128,7 @@ final class BoundInboxExecutionTest {
   @Test
   void boundNullCorruptIdentityAndSqlFaultsNeverProduceReplay() throws Exception {
     try (var keys = keys();
-        var canonical = canonical("USTREQ01", "USER:3");
+        var canonical = canonical(FIXTURE_USTREQ01_D6E6CD9B, FIXTURE_USER_3_2B58DC49);
         var c = database.transaction()) {
       var coordinator = new JdbcInboxCoordinator(keys);
       var request = request(ORIGINAL, canonical);
@@ -142,7 +148,8 @@ final class BoundInboxExecutionTest {
       }
       seedProcessing(request);
       for (String fault :
-          List.of("null-pk", "wrong-pk", "query", "result-close", "statement-close")) {
+          List.of(
+              "null-pk", FIXTURE_WRONG_PK_A0157D1B, "query", "result-close", "statement-close")) {
         Exception failure =
             assertThrows(
                 Exception.class,
@@ -151,7 +158,7 @@ final class BoundInboxExecutionTest {
         if (fault.equals("null-pk"))
           assertEquals(
               "22004", assertInstanceOf(java.sql.SQLDataException.class, failure).getSQLState());
-        else if (fault.equals("wrong-pk"))
+        else if (fault.equals(FIXTURE_WRONG_PK_A0157D1B))
           assertEquals(InboxException.Reason.MESSAGE_ID_REUSE, ((InboxException) failure).reason());
         else assertInstanceOf(SQLException.class, failure);
         assertFalse(c.isClosed());
@@ -179,13 +186,13 @@ final class BoundInboxExecutionTest {
                     InboxException.class,
                     () ->
                         coordinator.inspectMessage(
-                            fault(read, "wrong-pk", new AtomicInteger()), request))
+                            fault(read, FIXTURE_WRONG_PK_A0157D1B, new AtomicInteger()), request))
                 .reason());
         read.rollback();
         assertFalse(read.isClosed());
         assertTrue(read.isReadOnly());
       }
-      sql("delete from schubert.request_inbox");
+      sql(FIXTURE_DELETE_FROM_SCHUBERT_REQUEST_INBOX_D18913CC);
       assertThrows(
           SQLException.class,
           () ->
@@ -204,10 +211,10 @@ final class BoundInboxExecutionTest {
   @Test
   void boundConcurrentInsertRecoveryAndProcessingUseStoredMessage() throws Exception {
     try (var keys = keys();
-        var canonical = canonical("USTREQ01", "USER:3")) {
+        var canonical = canonical(FIXTURE_USTREQ01_D6E6CD9B, FIXTURE_USER_3_2B58DC49)) {
       var coordinator = new JdbcInboxCoordinator(keys);
       for (UUID incoming : List.of(ORIGINAL, RETRY)) {
-        sql("delete from schubert.request_inbox");
+        sql(FIXTURE_DELETE_FROM_SCHUBERT_REQUEST_INBOX_D18913CC);
         try (var c = database.transaction()) {
           var injected = afterSavepoint(c, () -> seedProcessing(request(ORIGINAL, canonical)));
           var result = coordinator.executeBound(injected, request(incoming, canonical), NEVER);
@@ -220,7 +227,7 @@ final class BoundInboxExecutionTest {
           assertEquals(1, count());
         }
       }
-      sql("delete from schubert.request_inbox");
+      sql(FIXTURE_DELETE_FROM_SCHUBERT_REQUEST_INBOX_D18913CC);
       var calls = new AtomicInteger();
       try (var workers = Executors.newFixedThreadPool(10)) {
         var results = new ArrayList<java.util.concurrent.Future<BoundInboxExecution>>();
@@ -229,7 +236,7 @@ final class BoundInboxExecutionTest {
           results.add(
               workers.submit(
                   () -> {
-                    try (var local = canonical("USTREQ01", "USER:3");
+                    try (var local = canonical(FIXTURE_USTREQ01_D6E6CD9B, FIXTURE_USER_3_2B58DC49);
                         var c = database.transaction()) {
                       var result =
                           coordinator.executeBound(
@@ -355,11 +362,11 @@ final class BoundInboxExecutionTest {
   }
 
   private static ResponseSnapshotIdentity identity(UUID message) {
-    return ResponseSnapshotIdentity.authenticated(message, "USTRSP01", "001", 1);
+    return ResponseSnapshotIdentity.authenticated(message, "USTRSP01", FIXTURE_001_A3FEAA64, 1);
   }
 
   private static CanonicalRequest canonical(String layout, String target) {
-    return new CanonicalRequest("1", layout, "001", target, List.of());
+    return new CanonicalRequest("1", layout, FIXTURE_001_A3FEAA64, target, List.of());
   }
 
   private static InboxRequest request(UUID message, CanonicalRequest canonical) {
@@ -367,7 +374,9 @@ final class BoundInboxExecutionTest {
         message,
         message,
         OptionalLong.of(1),
-        canonical.layoutId().equals("USTREQ01") ? Optional.of(TOKEN) : Optional.empty(),
+        canonical.layoutId().equals(FIXTURE_USTREQ01_D6E6CD9B)
+            ? Optional.of(TOKEN)
+            : Optional.empty(),
         canonical,
         RECEIVED,
         RECEIVED.plusSeconds(86400));
@@ -378,7 +387,7 @@ final class BoundInboxExecutionTest {
         InboxCompletionState.COMPLETED,
         InboxResultReference.numeric(InboxResultReferenceType.USER, 3),
         "USTRSP01",
-        "001",
+        FIXTURE_001_A3FEAA64,
         Optional.of(snapshot),
         FINISHED);
   }
@@ -390,7 +399,7 @@ final class BoundInboxExecutionTest {
         InboxCompletionState.COMPLETED,
         InboxResultReference.numeric(InboxResultReferenceType.SCENARIO_FILE, 30),
         "SCNRSP01",
-        "001",
+        FIXTURE_001_A3FEAA64,
         Optional.of(new EncryptedResponseSnapshot("test", bytes)),
         FINISHED);
   }
@@ -432,7 +441,8 @@ final class BoundInboxExecutionTest {
     var buffer = new ByteArrayOutputStream();
     try (var stream = new DataOutputStream(buffer)) {
       stream.write("SCHUBERT-NK-OP1".getBytes(StandardCharsets.US_ASCII));
-      for (String value : List.of("1", canonical.layoutId(), "001", canonical.target())) {
+      for (String value :
+          List.of("1", canonical.layoutId(), FIXTURE_001_A3FEAA64, canonical.target())) {
         byte[] bytes = value.getBytes(StandardCharsets.UTF_8);
         stream.writeInt(bytes.length);
         stream.write(bytes);
@@ -508,7 +518,7 @@ final class BoundInboxExecutionTest {
                             (rp, rm, ra) -> {
                               if (rm.getName().equals("getObject") && "message_id".equals(ra[0])) {
                                 if (mode.equals("null-pk")) return null;
-                                if (mode.equals("wrong-pk")) return RETRY;
+                                if (mode.equals(FIXTURE_WRONG_PK_A0157D1B)) return RETRY;
                               }
                               Object rr = invoke(rows, rm, ra);
                               if (rm.getName().equals("close") && mode.equals("result-close"))

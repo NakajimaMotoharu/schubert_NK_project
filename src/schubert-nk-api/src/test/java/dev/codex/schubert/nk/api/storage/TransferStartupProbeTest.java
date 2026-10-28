@@ -36,6 +36,11 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** Exclusive diagnostic ownership and failure postconditions on real ext4; P01..P03. */
 class TransferStartupProbeTest {
+  private static final String FIXTURE_20260908_520314A3 = "20260908";
+  private static final String FIXTURE_USERS_774733B7 = "users";
+  private static final String FIXTURE_RWXR_X_E5EF2357 = "rwxr-x---";
+  private static final String FIXTURE_READY_6630F9C3 = ".ready";
+  private static final String FIXTURE_SYNTHETIC_PRIVATE_PATH_6CBCF6F9 = "SYNTHETIC_PRIVATE_PATH";
   private static final UUID ID = UUID.fromString("00000000-0000-4000-8000-000000000001");
   private static final Instant NOW = Instant.parse("2026-09-07T15:00:00Z");
 
@@ -64,11 +69,11 @@ class TransferStartupProbeTest {
         assertEquals(4, id.version());
         assertEquals(2, id.variant());
       }
-      for (String date : new String[] {"20260907", "20260908"}) {
+      for (String date : new String[] {"20260907", FIXTURE_20260908_520314A3}) {
         Path day = root.resolve(date);
         assertEquals(040750, Files.getAttribute(day, "unix:mode"));
         assertEquals(
-            "users",
+            FIXTURE_USERS_774733B7,
             Files.readAttributes(day, java.nio.file.attribute.PosixFileAttributes.class)
                 .group()
                 .getName());
@@ -118,7 +123,8 @@ class TransferStartupProbeTest {
       assertThrows(NullPointerException.class, () -> io.verify(null, false));
       reject(
           () ->
-              new TransferStartupProbe(held, new StorageIdentity("wrong-owner", "users"))
+              new TransferStartupProbe(
+                      held, new StorageIdentity("wrong-owner", FIXTURE_USERS_774733B7))
                   .verify(NOW));
       reject(
           () ->
@@ -127,12 +133,12 @@ class TransferStartupProbeTest {
       mode(root, "rwx------");
       reject(() -> probe.verify(NOW));
       assertEquals(040700, Files.getAttribute(root, "unix:mode"));
-      mode(root, "rwxr-x---");
+      mode(root, FIXTURE_RWXR_X_E5EF2357);
       Path day = day(root);
       mode(day, "rwx------");
       reject(() -> probe.verify(NOW));
       assertEquals(040700, Files.getAttribute(day, "unix:mode"));
-      mode(day, "rwxr-x---");
+      mode(day, FIXTURE_RWXR_X_E5EF2357);
       assertEquals(0, calls.creates);
     }
     reject(() -> new TransferStartupProbe(held, identity).verify(NOW));
@@ -173,7 +179,7 @@ class TransferStartupProbeTest {
               new TransferStartupProbe(held, identity, () -> ID, new HeldProbeFileIo(identity))
                   .verify(NOW));
       assertArrayEquals(new byte[] {9}, Files.readAllBytes(day.resolve(ID + ".part")));
-      assertFalse(Files.exists(day.resolve(ID + ".ready")));
+      assertFalse(Files.exists(day.resolve(ID + FIXTURE_READY_6630F9C3)));
     }
     assertTrue(calls.live.isEmpty());
   }
@@ -239,11 +245,11 @@ class TransferStartupProbeTest {
         try {
           reject(() -> new TransferStartupProbe(held, identity, () -> ID, io).verify(NOW));
         } finally {
-          mode(day, "rwxr-x---");
+          mode(day, FIXTURE_RWXR_X_E5EF2357);
         }
         assertEquals(1, calls.live.size(), fault.name());
         boolean part = fault == Fault.UNLINK;
-        Path remaining = day.resolve(ID + (part ? ".part" : ".ready"));
+        Path remaining = day.resolve(ID + (part ? ".part" : FIXTURE_READY_6630F9C3));
         byte[] expected = pattern(part || fault == Fault.REPLACE_SECOND);
         if (fault == Fault.READY_HASH) expected[0] = 'X';
         assertArrayEquals(expected, Files.readAllBytes(remaining), fault.name());
@@ -269,11 +275,11 @@ class TransferStartupProbeTest {
                         held,
                         identity,
                         () -> ID,
-                        new FaultIo(identity, root.resolve("20260908"), fault))
+                        new FaultIo(identity, root.resolve(FIXTURE_20260908_520314A3), fault))
                     .verify(NOW));
         assertEquals(0, calls.creates);
         assertEquals(1, calls.live.size());
-        Path day = root.resolve("20260908");
+        Path day = root.resolve(FIXTURE_20260908_520314A3);
         assertTrue(Files.isDirectory(day));
         try (var names = Files.list(day)) {
           assertEquals(0, names.count());
@@ -285,14 +291,14 @@ class TransferStartupProbeTest {
 
   private Path root(String name) throws IOException {
     Path root = Files.createDirectory(fixture.resolve(name));
-    mode(root, "rwxr-x---");
+    mode(root, FIXTURE_RWXR_X_E5EF2357);
     group(root);
     return root;
   }
 
   private static Path day(Path root) throws IOException {
-    Path result = Files.createDirectory(root.resolve("20260908"));
-    mode(result, "rwxr-x---");
+    Path result = Files.createDirectory(root.resolve(FIXTURE_20260908_520314A3));
+    mode(result, FIXTURE_RWXR_X_E5EF2357);
     group(result);
     return result;
   }
@@ -305,11 +311,13 @@ class TransferStartupProbeTest {
     Files.setAttribute(
         path,
         "posix:group",
-        path.getFileSystem().getUserPrincipalLookupService().lookupPrincipalByGroupName("users"));
+        path.getFileSystem()
+            .getUserPrincipalLookupService()
+            .lookupPrincipalByGroupName(FIXTURE_USERS_774733B7));
   }
 
   private static StorageIdentity identity(Path root) throws IOException {
-    return new StorageIdentity(Files.getOwner(root).getName(), "users");
+    return new StorageIdentity(Files.getOwner(root).getName(), FIXTURE_USERS_774733B7);
   }
 
   private static byte[] pattern(boolean second) {
@@ -333,7 +341,7 @@ class TransferStartupProbeTest {
           String target = Files.readSymbolicLink(handle).toString();
           assertFalse(
               target.startsWith(root.toString())
-                  && (target.contains(".part") || target.contains(".ready")),
+                  && (target.contains(".part") || target.contains(FIXTURE_READY_6630F9C3)),
               "diagnostic file channel leaked");
         } catch (NoSuchFileException closedDuringEnumeration) {
           /* Only an already closed FD vanished. */
@@ -387,17 +395,19 @@ class TransferStartupProbeTest {
 
     @Override
     public void initializeDirectory(Path path) throws IOException {
-      if (fault == Fault.INIT_DIRECTORY) throw new IOException("SYNTHETIC_PRIVATE_PATH");
+      if (fault == Fault.INIT_DIRECTORY)
+        throw new IOException(FIXTURE_SYNTHETIC_PRIVATE_PATH_6CBCF6F9);
       delegate.initializeDirectory(path);
     }
 
     @Override
     public void write(Path path, boolean second) throws IOException, NoSuchAlgorithmException {
       if (!second && fault == Fault.WRITE_FIRST || second && fault == Fault.WRITE_SECOND)
-        throw new IOException("SYNTHETIC_PRIVATE_PATH");
+        throw new IOException(FIXTURE_SYNTHETIC_PRIVATE_PATH_6CBCF6F9);
       if (fault == Fault.WRITE_SECURITY)
-        throw new NoSuchAlgorithmException("SYNTHETIC_PRIVATE_PATH");
-      if (fault == Fault.WRITE_RUNTIME) throw new IllegalStateException("SYNTHETIC_PRIVATE_PATH");
+        throw new NoSuchAlgorithmException(FIXTURE_SYNTHETIC_PRIVATE_PATH_6CBCF6F9);
+      if (fault == Fault.WRITE_RUNTIME)
+        throw new IllegalStateException(FIXTURE_SYNTHETIC_PRIVATE_PATH_6CBCF6F9);
       delegate.write(path, second);
       assertArrayEquals(pattern(second), Files.readAllBytes(path));
     }
@@ -414,7 +424,7 @@ class TransferStartupProbeTest {
       delegate.verify(path, second);
       if (!second && readyChecks == 2) {
         if (fault == Fault.READY_DELETE) mode(day, "r-xr-x---");
-        if (fault == Fault.READY_MISSING) Files.delete(day.resolve(ID + ".ready"));
+        if (fault == Fault.READY_MISSING) Files.delete(day.resolve(ID + FIXTURE_READY_6630F9C3));
       }
     }
   }
@@ -468,7 +478,7 @@ class TransferStartupProbeTest {
       if (creates == 2 && fault == Fault.FOREIGN_SECOND_PART) {
         try {
           Files.write(
-              root.resolve("20260908").resolve(name),
+              root.resolve(FIXTURE_20260908_520314A3).resolve(name),
               new byte[] {9},
               StandardOpenOption.CREATE_NEW);
         } catch (IOException failure) {
@@ -481,7 +491,7 @@ class TransferStartupProbeTest {
     @Override
     public int openEntry(int parent, String name) throws StorageIoException {
       String kind = "P";
-      if (name.endsWith(".ready")) {
+      if (name.endsWith(FIXTURE_READY_6630F9C3)) {
         kind = "R" + (++readyOpens);
         if (readyOpens == 1 && fault == Fault.READY_OPEN) throw unavailable();
       }

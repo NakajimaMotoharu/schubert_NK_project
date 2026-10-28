@@ -23,6 +23,12 @@ import org.junit.jupiter.api.Test;
 
 /** NK-OPS-001/OPS009/UI251/SS343/SSC308; QUERYOWN001..006; independent literal oracles. */
 final class ProcessResourceScopeTest {
+  private static final String FIXTURE_RELEASE_847DBD91 = "release";
+  private static final String FIXTURE_BODY_BFD4D039 = "body";
+  private static final String FIXTURE_FIXED_FIXTURE_A29D66D0 = "fixed fixture";
+  private static final String FIXTURE_INTERRUPT_DDE42D5D = "interrupt";
+  private static final String FIXTURE_PRIVATE_BODY_3605D837 = "private body";
+
   @Test
   void queryown001LiteralTwentyFourFailurePriorityRows() throws Exception {
     // Rows: normal/IO/interruption/known-stop/runtime/error; columns: normal/stop/runtime/error.
@@ -41,11 +47,11 @@ final class ProcessResourceScopeTest {
               if (legacy) {
                 ProcessResourceScope.use(
                     () -> {
-                      calls.add("release");
+                      calls.add(FIXTURE_RELEASE_847DBD91);
                       raiseUnchecked(cleanup);
                     },
                     () -> {
-                      calls.add("body");
+                      calls.add(FIXTURE_BODY_BFD4D039);
                       raise(body);
                     });
               } else
@@ -56,19 +62,22 @@ final class ProcessResourceScopeTest {
                     },
                     resource -> {
                       assertSame(owned, resource);
-                      calls.add("release");
+                      calls.add(FIXTURE_RELEASE_847DBD91);
                       raiseUnchecked(cleanup);
                     },
                     resource -> {
                       assertSame(owned, resource);
-                      calls.add("body");
+                      calls.add(FIXTURE_BODY_BFD4D039);
                       raise(body);
                     });
             } catch (IOException | InterruptedException | RuntimeException | Error observed) {
               actual = observed;
             }
             assertEquals(
-                legacy ? List.of("body", "release") : List.of("factory", "body", "release"), calls);
+                legacy
+                    ? List.of(FIXTURE_BODY_BFD4D039, FIXTURE_RELEASE_847DBD91)
+                    : List.of("factory", FIXTURE_BODY_BFD4D039, FIXTURE_RELEASE_847DBD91),
+                calls);
             char expected = winner[row].charAt(column);
             if (expected == 'N') assertNull(actual);
             else {
@@ -245,8 +254,8 @@ final class ProcessResourceScopeTest {
                   () -> {
                     if (streaming)
                       reader.executeStreaming(
-                          List.of("fixed fixture"), 8, TimeUnit.SECONDS.toNanos(5));
-                    else reader.execute(List.of("fixed fixture"), 8);
+                          List.of(FIXTURE_FIXED_FIXTURE_A29D66D0), 8, TimeUnit.SECONDS.toNanos(5));
+                    else reader.execute(List.of(FIXTURE_FIXED_FIXTURE_A29D66D0), 8);
                   });
           if (missing) assertInstanceOf(NullPointerException.class, actual);
           else assertSame(child.fault, actual);
@@ -261,15 +270,17 @@ final class ProcessResourceScopeTest {
           NullPointerException.class,
           () -> {
             if (streaming)
-              reader.executeStreaming(List.of("fixed fixture"), 8, TimeUnit.SECONDS.toNanos(5));
-            else reader.execute(List.of("fixed fixture"), 8);
+              reader.executeStreaming(
+                  List.of(FIXTURE_FIXED_FIXTURE_A29D66D0), 8, TimeUnit.SECONDS.toNanos(5));
+            else reader.execute(List.of(FIXTURE_FIXED_FIXTURE_A29D66D0), 8);
           });
     }
   }
 
   @Test
   void queryown007StreamingDeadlineAndDrainCancellationUseIndependentMonotonicVectors() {
-    for (String mode : List.of("beforeWait", "wait", "exit", "beforeGet", "timeout", "interrupt")) {
+    for (String mode :
+        List.of("beforeWait", "wait", "exit", "beforeGet", "timeout", FIXTURE_INTERRUPT_DDE42D5D)) {
       var child = new StreamingChild(mode);
       var ticks = new AtomicInteger();
       long remaining = mode.equals("timeout") ? 1 : TimeUnit.SECONDS.toNanos(1);
@@ -288,11 +299,14 @@ final class ProcessResourceScopeTest {
         var actual =
             assertThrows(
                 StopGateException.class,
-                () -> reader.executeStreaming(List.of("fixed fixture"), 8, remaining));
+                () ->
+                    reader.executeStreaming(List.of(FIXTURE_FIXED_FIXTURE_A29D66D0), 8, remaining));
         assertEquals(
             mode.equals("exit")
                 ? StopGateFailure.COMMAND_FAILURE
-                : mode.equals("interrupt") ? StopGateFailure.INTERRUPTED : StopGateFailure.TIMEOUT,
+                : mode.equals(FIXTURE_INTERRUPT_DDE42D5D)
+                    ? StopGateFailure.INTERRUPTED
+                    : StopGateFailure.TIMEOUT,
             actual.reason());
         assertEquals(0, actual.getSuppressed().length);
         assertEquals(mode.equals("beforeWait") ? 0 : 1, child.waits);
@@ -300,7 +314,8 @@ final class ProcessResourceScopeTest {
         assertEquals(1, child.inputClosed);
         assertEquals(1, child.errorClosed);
         assertEquals(1, child.destroyed);
-        assertEquals(mode.equals("interrupt"), Thread.currentThread().isInterrupted());
+        assertEquals(
+            mode.equals(FIXTURE_INTERRUPT_DDE42D5D), Thread.currentThread().isInterrupted());
       } finally {
         Thread.interrupted();
         child.drained.countDown();
@@ -319,7 +334,9 @@ final class ProcessResourceScopeTest {
           StopGateFailure.TIMEOUT,
           assertThrows(
                   StopGateException.class,
-                  () -> reader.executeStreaming(List.of("fixed fixture"), (int) input[0], input[1]))
+                  () ->
+                      reader.executeStreaming(
+                          List.of(FIXTURE_FIXED_FIXTURE_A29D66D0), (int) input[0], input[1]))
               .reason());
     }
     assertEquals(0, starts.get());
@@ -396,7 +413,7 @@ final class ProcessResourceScopeTest {
 
     @Override
     public int exitValue() {
-      if (mode.equals("interrupt")) Thread.currentThread().interrupt();
+      if (mode.equals(FIXTURE_INTERRUPT_DDE42D5D)) Thread.currentThread().interrupt();
       return mode.equals("exit") ? 1 : 0;
     }
 
@@ -414,11 +431,11 @@ final class ProcessResourceScopeTest {
   private static Throwable failure(int index) {
     return switch (index) {
       case 0 -> null;
-      case 1 -> new IOException("private body");
-      case 2 -> new InterruptedException("private body");
+      case 1 -> new IOException(FIXTURE_PRIVATE_BODY_3605D837);
+      case 2 -> new InterruptedException(FIXTURE_PRIVATE_BODY_3605D837);
       case 3 -> new StopGateException(StopGateFailure.TIMEOUT);
-      case 4 -> new IllegalStateException("private body");
-      case 5 -> new AssertionError("private body");
+      case 4 -> new IllegalStateException(FIXTURE_PRIVATE_BODY_3605D837);
+      case 5 -> new AssertionError(FIXTURE_PRIVATE_BODY_3605D837);
       default -> throw new AssertionError(index);
     };
   }

@@ -21,6 +21,11 @@ import org.junit.jupiter.api.Test;
 
 /** Literal internal vectors; synthetic parents confer no Unit/start authority. */
 final class InspectorOwnerContractTest {
+  private static final String FIXTURE_MAINTENANCE_OWNER_UNAVAILABLE_AD441CA9 =
+      "maintenance owner unavailable";
+  private static final String FIXTURE_PARENT_E31E1F44 = "parent";
+  private static final String FIXTURE_INSPECTOR_E0E36519 = "inspector";
+  private static final String FIXTURE_WORK_DD3E8955 = "work";
   private static final UUID BOOT = new UUID(0, 1);
   private static final InspectionRun RUN =
       new InspectionRun(new UUID(0, 2), Instant.parse("2026-10-09T00:00:00.123456Z"));
@@ -55,7 +60,7 @@ final class InspectorOwnerContractTest {
             owner(BOOT, RUN.id(), RUN.cutoff().plusNanos(1000), true),
             owner(BOOT, RUN.id(), RUN.cutoff(), false))) {
       assertEquals(
-          "maintenance owner unavailable",
+          FIXTURE_MAINTENANCE_OWNER_UNAVAILABLE_AD441CA9,
           assertThrows(
                   IOException.class,
                   () -> InspectorApplication.validateOwner(RUN, BOOT.toString(), invalid))
@@ -83,33 +88,33 @@ final class InspectorOwnerContractTest {
         InspectorApplication.executeGuarded(
             RUN,
             () -> {
-              events.add("parent");
+              events.add(FIXTURE_PARENT_E31E1F44);
               return 500;
             },
             () -> {
-              events.add("inspector");
+              events.add(FIXTURE_INSPECTOR_E0E36519);
               return true;
             },
             (run, held) -> {
               assertSame(RUN, run);
               assertTrue(held.isPresent());
-              events.add("work");
+              events.add(FIXTURE_WORK_DD3E8955);
               assertEquals(500, held.orElseThrow().remainingNanos());
               return RESULT;
             });
     assertSame(RESULT, actual);
     assertEquals(
         List.of(
-            "parent",
-            "inspector",
-            "parent",
-            "work",
-            "parent",
-            "inspector",
-            "parent",
-            "parent",
-            "inspector",
-            "parent"),
+            FIXTURE_PARENT_E31E1F44,
+            FIXTURE_INSPECTOR_E0E36519,
+            FIXTURE_PARENT_E31E1F44,
+            FIXTURE_WORK_DD3E8955,
+            FIXTURE_PARENT_E31E1F44,
+            FIXTURE_INSPECTOR_E0E36519,
+            FIXTURE_PARENT_E31E1F44,
+            FIXTURE_PARENT_E31E1F44,
+            FIXTURE_INSPECTOR_E0E36519,
+            FIXTURE_PARENT_E31E1F44),
         events);
   }
 
@@ -125,7 +130,7 @@ final class InspectorOwnerContractTest {
                   InspectorApplication.executeGuarded(
                       RUN,
                       () -> {
-                        events.add("parent");
+                        events.add(FIXTURE_PARENT_E31E1F44);
                         if (throwFailure) throw original;
                         return 0;
                       },
@@ -138,8 +143,8 @@ final class InspectorOwnerContractTest {
                         return RESULT;
                       }));
       if (throwFailure) assertSame(original, actual);
-      else assertEquals("maintenance owner unavailable", actual.getMessage());
-      assertEquals(List.of("parent"), events);
+      else assertEquals(FIXTURE_MAINTENANCE_OWNER_UNAVAILABLE_AD441CA9, actual.getMessage());
+      assertEquals(List.of(FIXTURE_PARENT_E31E1F44), events);
     }
   }
 
@@ -155,11 +160,11 @@ final class InspectorOwnerContractTest {
                   InspectorApplication.executeGuarded(
                       RUN,
                       () -> {
-                        events.add("parent");
+                        events.add(FIXTURE_PARENT_E31E1F44);
                         return 500;
                       },
                       () -> {
-                        events.add("inspector");
+                        events.add(FIXTURE_INSPECTOR_E0E36519);
                         if (throwFailure) throw original;
                         return false;
                       },
@@ -168,8 +173,8 @@ final class InspectorOwnerContractTest {
                         return RESULT;
                       }));
       if (throwFailure) assertSame(original, actual);
-      else assertEquals("maintenance owner unavailable", actual.getMessage());
-      assertEquals(List.of("parent", "inspector"), events);
+      else assertEquals(FIXTURE_MAINTENANCE_OWNER_UNAVAILABLE_AD441CA9, actual.getMessage());
+      assertEquals(List.of(FIXTURE_PARENT_E31E1F44, FIXTURE_INSPECTOR_E0E36519), events);
     }
   }
 
@@ -177,26 +182,33 @@ final class InspectorOwnerContractTest {
   void postWorkExpiryAndTypedFailureNeverReturnResult() {
     var events = new ArrayList<String>();
     assertEquals(
-        "maintenance owner unavailable",
+        FIXTURE_MAINTENANCE_OWNER_UNAVAILABLE_AD441CA9,
         assertThrows(
                 IOException.class,
                 () ->
                     InspectorApplication.executeGuarded(
                         RUN,
                         () -> {
-                          events.add("parent");
-                          return events.contains("work") ? 0 : 500;
+                          events.add(FIXTURE_PARENT_E31E1F44);
+                          return events.contains(FIXTURE_WORK_DD3E8955) ? 0 : 500;
                         },
                         () -> {
-                          events.add("inspector");
+                          events.add(FIXTURE_INSPECTOR_E0E36519);
                           return true;
                         },
                         (run, guard) -> {
-                          events.add("work");
+                          events.add(FIXTURE_WORK_DD3E8955);
                           return RESULT;
                         }))
             .getMessage());
-    assertEquals(List.of("parent", "inspector", "parent", "work", "parent"), events);
+    assertEquals(
+        List.of(
+            FIXTURE_PARENT_E31E1F44,
+            FIXTURE_INSPECTOR_E0E36519,
+            FIXTURE_PARENT_E31E1F44,
+            FIXTURE_WORK_DD3E8955,
+            FIXTURE_PARENT_E31E1F44),
+        events);
     for (boolean crypto : List.of(false, true)) {
       events.clear();
       var io = new IOException("operation IO");
@@ -208,20 +220,26 @@ final class InspectorOwnerContractTest {
                   InspectorApplication.executeGuarded(
                       RUN,
                       () -> {
-                        events.add("parent");
+                        events.add(FIXTURE_PARENT_E31E1F44);
                         return 500;
                       },
                       () -> {
-                        events.add("inspector");
+                        events.add(FIXTURE_INSPECTOR_E0E36519);
                         return true;
                       },
                       (run, guard) -> {
-                        events.add("work");
+                        events.add(FIXTURE_WORK_DD3E8955);
                         if (crypto) throw hash;
                         throw io;
                       }));
       assertSame(crypto ? hash : io, actual);
-      assertEquals(List.of("parent", "inspector", "parent", "work"), events);
+      assertEquals(
+          List.of(
+              FIXTURE_PARENT_E31E1F44,
+              FIXTURE_INSPECTOR_E0E36519,
+              FIXTURE_PARENT_E31E1F44,
+              FIXTURE_WORK_DD3E8955),
+          events);
     }
   }
 

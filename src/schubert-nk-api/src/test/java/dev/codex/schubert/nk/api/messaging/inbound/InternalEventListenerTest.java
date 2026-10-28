@@ -45,6 +45,10 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** PT-JMS-005/006/007/009 async-work and Web-log listener route matrix. */
 final class InternalEventListenerTest {
+  private static final String FIXTURE_VM_0_0C76084A = "vm://0";
+  private static final String FIXTURE_QWKREQ01_19741256 = "QWKREQ01";
+  private static final String FIXTURE_WLGEVT01_31AD1E1D = "WLGEVT01";
+  private static final String FIXTURE_001_A3FEAA64 = "001";
   private static final UUID EVENT_ID = UUID.fromString("00000000-0000-0000-0000-000000000003");
   private static final UUID CORRELATION_ID =
       UUID.fromString("00000000-0000-0000-0000-000000000001");
@@ -56,7 +60,7 @@ final class InternalEventListenerTest {
   void deliveryAwareWorkerReceivesActualCountAndOriginalTransport(@TempDir Path root)
       throws Exception {
     var broker = start(root);
-    try (var factory = new ActiveMQConnectionFactory("vm://0");
+    try (var factory = new ActiveMQConnectionFactory(FIXTURE_VM_0_0C76084A);
         var producer = factory.createContext(JMSContext.AUTO_ACKNOWLEDGE);
         var receiving = factory.createContext(JMSContext.SESSION_TRANSACTED);
         var work = receiving.createConsumer(queue(BrokerTopology.ASYNC_WORK))) {
@@ -82,14 +86,14 @@ final class InternalEventListenerTest {
                         dev.codex.schubert.nk.protocol.layout.FixedPayload>
                     event,
                 DeliveryMetadata delivery) {
-              assertEquals("QWKREQ01", event.header().layoutId().value());
+              assertEquals(FIXTURE_QWKREQ01_19741256, event.header().layoutId().value());
               lastEvent.set(event);
               observed.add(delivery);
               if (delivery.deliveryCount() < 4) throw failure;
             }
           };
       var listener = new QuestionWorkListener(processor, CLOCK);
-      sendEvent(producer, BrokerTopology.ASYNC_WORK, eventWire("QWKREQ01", 64));
+      sendEvent(producer, BrokerTopology.ASYNC_WORK, eventWire(FIXTURE_QWKREQ01_19741256, 64));
       String transport = null;
       for (int count = 1; count <= 4; count++) {
         // SS321/QA041: actual delays are 1s, 5s, 25s. Keep the approved broker profile.
@@ -126,7 +130,7 @@ final class InternalEventListenerTest {
   @DisplayName("PT-JMS-EVENT-DELIVERY: unbounded transport metadata is isolated before business")
   void invalidDeliveryMetadataCannotReachBusiness(@TempDir Path root) throws Exception {
     var broker = start(root);
-    try (var factory = new ActiveMQConnectionFactory("vm://0");
+    try (var factory = new ActiveMQConnectionFactory(FIXTURE_VM_0_0C76084A);
         var producer = factory.createContext(JMSContext.AUTO_ACKNOWLEDGE);
         var receiving = factory.createContext(JMSContext.SESSION_TRANSACTED);
         var observing = factory.createContext(JMSContext.AUTO_ACKNOWLEDGE);
@@ -134,7 +138,7 @@ final class InternalEventListenerTest {
         var dlq = observing.createConsumer(queue(BrokerTopology.DEAD_LETTER))) {
       var calls = new AtomicInteger();
       var listener = new QuestionWorkListener(event -> calls.incrementAndGet(), CLOCK);
-      sendEvent(producer, BrokerTopology.ASYNC_WORK, eventWire("QWKREQ01", 64));
+      sendEvent(producer, BrokerTopology.ASYNC_WORK, eventWire(FIXTURE_QWKREQ01_19741256, 64));
       var original = required(work.receive(5000));
       var malformed =
           (BytesMessage)
@@ -165,7 +169,7 @@ final class InternalEventListenerTest {
   @DisplayName("PT-JMS-005/007 work and Web-log events validate and commit on exact queues")
   void bothInternalEventRoutesProcessAndCommit(@TempDir Path root) throws Exception {
     EmbeddedActiveMQ broker = start(root);
-    try (ActiveMQConnectionFactory factory = new ActiveMQConnectionFactory("vm://0");
+    try (ActiveMQConnectionFactory factory = new ActiveMQConnectionFactory(FIXTURE_VM_0_0C76084A);
         JMSContext producer = factory.createContext(JMSContext.AUTO_ACKNOWLEDGE);
         JMSContext listenerContext = factory.createContext(JMSContext.SESSION_TRANSACTED);
         JMSConsumer workQueue = listenerContext.createConsumer(queue(BrokerTopology.ASYNC_WORK));
@@ -176,7 +180,7 @@ final class InternalEventListenerTest {
           new QuestionWorkListener(
               event -> {
                 workCount.incrementAndGet();
-                assertEquals("QWKREQ01", event.header().layoutId().value());
+                assertEquals(FIXTURE_QWKREQ01_19741256, event.header().layoutId().value());
                 assertEquals(MessageKind.EVENT, event.header().messageKind());
                 assertEquals(InteractionKind.INTERNAL, event.header().interactionKind());
                 assertEquals(64, event.payload().dataLength());
@@ -186,24 +190,24 @@ final class InternalEventListenerTest {
           new WebLogListener(
               event -> {
                 logCount.incrementAndGet();
-                assertEquals("WLGEVT01", event.header().layoutId().value());
+                assertEquals(FIXTURE_WLGEVT01_31AD1E1D, event.header().layoutId().value());
                 assertEquals(2_080, event.payload().dataLength());
               },
               CLOCK);
 
-      sendEvent(producer, BrokerTopology.ASYNC_WORK, eventWire("QWKREQ01", 64));
+      sendEvent(producer, BrokerTopology.ASYNC_WORK, eventWire(FIXTURE_QWKREQ01_19741256, 64));
       work.onMessage(listenerContext, required(workQueue.receive(5_000)));
-      sendEvent(producer, BrokerTopology.WEB_LOG, eventWire("WLGEVT01", 2_080));
+      sendEvent(producer, BrokerTopology.WEB_LOG, eventWire(FIXTURE_WLGEVT01_31AD1E1D, 2_080));
       log.onMessage(listenerContext, required(logQueue.receive(5_000)));
 
       var rollbackPhases = new AtomicInteger();
-      sendEvent(producer, BrokerTopology.ASYNC_WORK, eventWire("QWKREQ01", 64));
+      sendEvent(producer, BrokerTopology.ASYNC_WORK, eventWire(FIXTURE_QWKREQ01_19741256, 64));
       work.onMessage(
           listenerContext,
           required(workQueue.receive(5_000)),
           rollbackPhases::incrementAndGet,
           rollbackPhases::incrementAndGet);
-      sendEvent(producer, BrokerTopology.WEB_LOG, eventWire("WLGEVT01", 2_080));
+      sendEvent(producer, BrokerTopology.WEB_LOG, eventWire(FIXTURE_WLGEVT01_31AD1E1D, 2_080));
       log.onMessage(
           listenerContext,
           required(logQueue.receive(5_000)),
@@ -223,7 +227,7 @@ final class InternalEventListenerTest {
   @DisplayName("PT-JMS-007 event processor failure rolls back for broker redelivery")
   void eventProcessorFailureRollsBackForRedelivery(@TempDir Path root) throws Exception {
     EmbeddedActiveMQ broker = start(root);
-    try (ActiveMQConnectionFactory factory = new ActiveMQConnectionFactory("vm://0");
+    try (ActiveMQConnectionFactory factory = new ActiveMQConnectionFactory(FIXTURE_VM_0_0C76084A);
         JMSContext producer = factory.createContext(JMSContext.AUTO_ACKNOWLEDGE);
         JMSContext listenerContext = factory.createContext(JMSContext.SESSION_TRANSACTED);
         JMSConsumer workQueue = listenerContext.createConsumer(queue(BrokerTopology.ASYNC_WORK))) {
@@ -234,7 +238,7 @@ final class InternalEventListenerTest {
                 throw failure;
               },
               CLOCK);
-      sendEvent(producer, BrokerTopology.ASYNC_WORK, eventWire("QWKREQ01", 64));
+      sendEvent(producer, BrokerTopology.ASYNC_WORK, eventWire(FIXTURE_QWKREQ01_19741256, 64));
       Message first = required(workQueue.receive(5_000));
       assertEquals(1, first.getIntProperty("JMSXDeliveryCount"));
       assertSame(
@@ -254,7 +258,7 @@ final class InternalEventListenerTest {
   @DisplayName("PT-JMS-006/009 invalid Web-log type is isolated before processor")
   void invalidWebLogIsCommittedToDlqAndSignalsFatal(@TempDir Path root) throws Exception {
     EmbeddedActiveMQ broker = start(root);
-    try (ActiveMQConnectionFactory factory = new ActiveMQConnectionFactory("vm://0");
+    try (ActiveMQConnectionFactory factory = new ActiveMQConnectionFactory(FIXTURE_VM_0_0C76084A);
         JMSContext producer = factory.createContext(JMSContext.AUTO_ACKNOWLEDGE);
         JMSContext listenerContext = factory.createContext(JMSContext.SESSION_TRANSACTED);
         JMSContext observer = factory.createContext(JMSContext.AUTO_ACKNOWLEDGE);
@@ -263,8 +267,8 @@ final class InternalEventListenerTest {
       TextMessage invalid = producer.createTextMessage("opaque invalid Web log");
       invalid.setJMSCorrelationID(CORRELATION_ID.toString());
       invalid.setStringProperty("NKMessageID", EVENT_ID.toString());
-      invalid.setStringProperty("NKLayoutID", "WLGEVT01");
-      invalid.setStringProperty("NKProtocolVersion", "001");
+      invalid.setStringProperty("NKLayoutID", FIXTURE_WLGEVT01_31AD1E1D);
+      invalid.setStringProperty("NKProtocolVersion", FIXTURE_001_A3FEAA64);
       producer
           .createProducer()
           .setDeliveryMode(DeliveryMode.PERSISTENT)
@@ -343,8 +347,11 @@ final class InternalEventListenerTest {
     event.setJMSCorrelationID(CORRELATION_ID.toString());
     event.setStringProperty("NKMessageID", EVENT_ID.toString());
     event.setStringProperty(
-        "NKLayoutID", destination == BrokerTopology.ASYNC_WORK ? "QWKREQ01" : "WLGEVT01");
-    event.setStringProperty("NKProtocolVersion", "001");
+        "NKLayoutID",
+        destination == BrokerTopology.ASYNC_WORK
+            ? FIXTURE_QWKREQ01_19741256
+            : FIXTURE_WLGEVT01_31AD1E1D);
+    event.setStringProperty("NKProtocolVersion", FIXTURE_001_A3FEAA64);
     context
         .createProducer()
         .setDeliveryMode(DeliveryMode.PERSISTENT)
@@ -387,9 +394,9 @@ final class InternalEventListenerTest {
     byte[] body = new byte[totalLength];
     Arrays.fill(body, (byte) ' ');
     ascii(body, 0, "SCHBNK01");
-    ascii(body, 8, "001");
+    ascii(body, 8, FIXTURE_001_A3FEAA64);
     ascii(body, 11, layout);
-    ascii(body, 19, "001");
+    ascii(body, 19, FIXTURE_001_A3FEAA64);
     body[22] = 'E';
     body[23] = 'I';
     ascii(body, 24, EVENT_ID.toString());
@@ -420,7 +427,7 @@ final class InternalEventListenerTest {
         .setLargeMessagesDirectory(root.resolve("large-messages").toString())
         .setSecurityEnabled(false)
         .clearAcceptorConfigurations()
-        .addAcceptorConfiguration("component", "vm://0");
+        .addAcceptorConfiguration("component", FIXTURE_VM_0_0C76084A);
     return new EmbeddedActiveMQ().setConfiguration(configuration).start();
   }
 }

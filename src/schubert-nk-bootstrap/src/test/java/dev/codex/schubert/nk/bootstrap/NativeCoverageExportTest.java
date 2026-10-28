@@ -42,6 +42,19 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** NEXPORT617: modeled Root metadata is data only; actual host tmpfs, FD and bytes stay real. */
 final class NativeCoverageExportTest {
+  private static final String FIXTURE_TERMINAL_C34E20C4 = "terminal";
+  private static final String FIXTURE_BEFORE_EXEC_5E9C7F43 = "before-exec";
+  private static final String FIXTURE_CLOSING_091DF3F4 = "closing";
+  private static final String FIXTURE_TARGET_AA962F43 = "target";
+  private static final String FIXTURE_UID_0C18F38C = "uid";
+  private static final String FIXTURE_GID_0ACDD642 = "gid";
+  private static final String FIXTURE_MODE_B6D5C2C3 = "mode";
+  private static final String FIXTURE_NLINK_3DDD828B = "nlink";
+  private static final String FIXTURE_DEV_8A17302D = "dev";
+  private static final String FIXTURE_INO_4BE7C1E0 = "ino";
+  private static final String FIXTURE_TERMINAL_EXEC_ADA03D11 = ".terminal.exec";
+  private static final String FIXTURE_RUN_46B71B1E = "/run";
+  private static final String FIXTURE_FILE_BFDDE6F5 = "file";
   private static final String INV = "1234567890abcdef1234567890abcdef";
   private static final byte[] GOLDEN = {1, (byte) 0xc0, (byte) 0xc0, 0x10, 7, 0x10, 1};
   @TempDir Path temporary;
@@ -141,7 +154,7 @@ final class NativeCoverageExportTest {
   }
 
   private static void refused(Fixture f) {
-    assertThrows(IOException.class, () -> f.export("terminal"));
+    assertThrows(IOException.class, () -> f.export(FIXTURE_TERMINAL_C34E20C4));
     assertTrue(f.calls.live.isEmpty(), "all owned descriptors must be released after refusal");
   }
 
@@ -149,16 +162,16 @@ final class NativeCoverageExportTest {
   void nexport617001SixLiteralRolesAndRootBeforeExecUseRealHeldOutput() throws Exception {
     for (Role role : ROLES) {
       var f = fixture(role);
-      f.export("terminal");
-      f.success("terminal");
+      f.export(FIXTURE_TERMINAL_C34E20C4);
+      f.success(FIXTURE_TERMINAL_C34E20C4);
       assertEquals(2, f.invocations);
       assertEquals(2, f.cgroups);
       assertEquals(2, f.resolvers);
       assertEquals(role.phase() == FixedNativeCoverageProfile.Phase.ROOT ? 0 : 2, f.snapshots);
       if (role.phase() == FixedNativeCoverageProfile.Phase.ROOT) {
         var before = fixture(role);
-        before.export("before-exec");
-        before.success("before-exec");
+        before.export(FIXTURE_BEFORE_EXEC_5E9C7F43);
+        before.success(FIXTURE_BEFORE_EXEC_5E9C7F43);
       }
     }
   }
@@ -170,24 +183,24 @@ final class NativeCoverageExportTest {
     for (Role role : ROLES) {
       var f = fixture(role);
       if (role.terminal() == null) {
-        assertThrows(IOException.class, () -> f.export("closing"));
+        assertThrows(IOException.class, () -> f.export(FIXTURE_CLOSING_091DF3F4));
         assertEquals(0, f.calls.creates);
       } else {
-        f.export("terminal");
-        f.success("terminal");
-        f.export("closing");
+        f.export(FIXTURE_TERMINAL_C34E20C4);
+        f.success(FIXTURE_TERMINAL_C34E20C4);
+        f.export(FIXTURE_CLOSING_091DF3F4);
         assertArrayEquals(
             new byte[] {1, (byte) 0xc0, (byte) 0xc0, 0x10, 7, 0x10, 1},
-            Files.readAllBytes(f.output("closing")));
+            Files.readAllBytes(f.output(FIXTURE_CLOSING_091DF3F4)));
         assertArrayEquals(
             new byte[] {1, (byte) 0xc0, (byte) 0xc0, 0x10, 7, 0x10, 1},
-            Files.readAllBytes(f.output("terminal")));
-        assertEquals(0100600, Files.getAttribute(f.output("closing"), "unix:mode"));
-        assertEquals(1, Files.getAttribute(f.output("closing"), "unix:nlink"));
+            Files.readAllBytes(f.output(FIXTURE_TERMINAL_C34E20C4)));
+        assertEquals(0100600, Files.getAttribute(f.output(FIXTURE_CLOSING_091DF3F4), "unix:mode"));
+        assertEquals(1, Files.getAttribute(f.output(FIXTURE_CLOSING_091DF3F4), "unix:nlink"));
         assertEquals(2, f.calls.creates);
         assertEquals(2, f.calls.syncs);
-        assertThrows(IOException.class, () -> f.export("closing"));
-        assertArrayEquals(GOLDEN, Files.readAllBytes(f.output("closing")));
+        assertThrows(IOException.class, () -> f.export(FIXTURE_CLOSING_091DF3F4));
+        assertArrayEquals(GOLDEN, Files.readAllBytes(f.output(FIXTURE_CLOSING_091DF3F4)));
         assertTrue(f.calls.live.isEmpty());
       }
     }
@@ -212,7 +225,7 @@ final class NativeCoverageExportTest {
       f.fault = fault;
       refused(f);
       assertEquals(0, f.calls.creates, fault);
-      assertFalse(Files.exists(f.output("terminal")));
+      assertFalse(Files.exists(f.output(FIXTURE_TERMINAL_C34E20C4)));
     }
     var f = fixture(ROLES.get(0));
     for (String name : List.of("foreign", INV + ".unknown.exec", "../terminal.exec"))
@@ -232,7 +245,7 @@ final class NativeCoverageExportTest {
         IllegalArgumentException.class,
         () -> NativeCoveragePrivateFile.export(profile(f.role), INV, GOLDEN, null));
     var ordinary = fixture(ROLES.get(2));
-    assertThrows(IOException.class, () -> ordinary.export("before-exec"));
+    assertThrows(IOException.class, () -> ordinary.export(FIXTURE_BEFORE_EXEC_5E9C7F43));
     assertEquals(0, ordinary.calls.creates);
     assertTrue(f.calls.live.isEmpty());
   }
@@ -242,7 +255,7 @@ final class NativeCoverageExportTest {
       throws Exception {
     for (Role role : ROLES) {
       if (role.terminal() == null) continue;
-      for (String suffix : List.of("unknown", "before-exec")) {
+      for (String suffix : List.of("unknown", FIXTURE_BEFORE_EXEC_5E9C7F43)) {
         var f = fixture(role);
         assertThrows(
             IOException.class,
@@ -269,18 +282,28 @@ final class NativeCoverageExportTest {
       assertEquals(observation == 2 ? 0 : 1, f.calls.syncs);
       assertArrayEquals(
           new byte[] {9, (byte) 0xc0, (byte) 0xc0, 0x10, 7, 0x10, 1},
-          Files.readAllBytes(f.output("terminal")));
+          Files.readAllBytes(f.output(FIXTURE_TERMINAL_C34E20C4)));
       assertArrayEquals(new byte[] {1, (byte) 0xc0, (byte) 0xc0, 0x10, 7, 0x10, 1}, GOLDEN);
-      assertEquals(0100600, Files.getAttribute(f.output("terminal"), "unix:mode"));
-      assertEquals(1, Files.getAttribute(f.output("terminal"), "unix:nlink"));
+      assertEquals(0100600, Files.getAttribute(f.output(FIXTURE_TERMINAL_C34E20C4), "unix:mode"));
+      assertEquals(1, Files.getAttribute(f.output(FIXTURE_TERMINAL_C34E20C4), "unix:nlink"));
     }
   }
 
   @Test
   void nexport617003EachHeldDirectoryAndFileObservationRejectsBeforeAcceptance() throws Exception {
-    for (String part : List.of("run", "service", "parent", "target"))
-      for (String field : List.of("uid", "gid", "mode", "nlink", "dev", "ino", "acl", "null"))
-        for (int visit : part.equals("target") ? new int[] {1, 2, 3, 4, 5} : new int[] {1, 2}) {
+    for (String part : List.of("run", "service", "parent", FIXTURE_TARGET_AA962F43))
+      for (String field :
+          List.of(
+              FIXTURE_UID_0C18F38C,
+              FIXTURE_GID_0ACDD642,
+              FIXTURE_MODE_B6D5C2C3,
+              FIXTURE_NLINK_3DDD828B,
+              FIXTURE_DEV_8A17302D,
+              FIXTURE_INO_4BE7C1E0,
+              "acl",
+              "null"))
+        for (int visit :
+            part.equals(FIXTURE_TARGET_AA962F43) ? new int[] {1, 2, 3, 4, 5} : new int[] {1, 2}) {
           var f = fixture(ROLES.get(0));
           f.fault = part + "#" + visit + ":" + field;
           refused(f);
@@ -306,15 +329,17 @@ final class NativeCoverageExportTest {
       refused(f);
     }
     var existing = fixture(ROLES.get(0));
-    Files.write(existing.output("terminal"), new byte[] {9}, StandardOpenOption.CREATE_NEW);
+    Files.write(
+        existing.output(FIXTURE_TERMINAL_C34E20C4), new byte[] {9}, StandardOpenOption.CREATE_NEW);
     refused(existing);
-    assertArrayEquals(new byte[] {9}, Files.readAllBytes(existing.output("terminal")));
+    assertArrayEquals(
+        new byte[] {9}, Files.readAllBytes(existing.output(FIXTURE_TERMINAL_C34E20C4)));
     var symlink = fixture(ROLES.get(0));
     Path target = symlink.parent.resolve("original");
     Files.write(target, new byte[] {8}, StandardOpenOption.CREATE_NEW);
-    Files.createSymbolicLink(symlink.output("terminal"), target);
+    Files.createSymbolicLink(symlink.output(FIXTURE_TERMINAL_C34E20C4), target);
     refused(symlink);
-    assertTrue(Files.isSymbolicLink(symlink.output("terminal")));
+    assertTrue(Files.isSymbolicLink(symlink.output(FIXTURE_TERMINAL_C34E20C4)));
     assertArrayEquals(new byte[] {8}, Files.readAllBytes(target));
     var missing = fixture(ROLES.get(0));
     Files.move(missing.target, missing.target.resolveSibling("preserved"));
@@ -348,8 +373,8 @@ final class NativeCoverageExportTest {
           GOLDEN,
           Files.readAllBytes(
               fault.equals("replace-target")
-                  ? f.parent.resolve("saved-target").resolve(INV + ".terminal.exec")
-                  : f.output("terminal")));
+                  ? f.parent.resolve("saved-target").resolve(INV + FIXTURE_TERMINAL_EXEC_ADA03D11)
+                  : f.output(FIXTURE_TERMINAL_C34E20C4)));
       assertEquals(1, f.calls.creates);
       assertFalse(f.calls.closes.isEmpty());
     }
@@ -376,7 +401,7 @@ final class NativeCoverageExportTest {
           IOException.class,
           () ->
               NativeCoveragePrivateFile.export(
-                  profile(f.role), INV + ".terminal.exec", new byte[length], f));
+                  profile(f.role), INV + FIXTURE_TERMINAL_EXEC_ADA03D11, new byte[length], f));
       assertEquals(0, f.calls.creates);
       assertTrue(f.calls.live.isEmpty());
     }
@@ -390,13 +415,13 @@ final class NativeCoverageExportTest {
       var f = fixture(ROLES.get(2));
       f.fault = fault;
       refused(f);
-      assertArrayEquals(GOLDEN, Files.readAllBytes(f.output("terminal")));
+      assertArrayEquals(GOLDEN, Files.readAllBytes(f.output(FIXTURE_TERMINAL_C34E20C4)));
     }
     for (int field = 1; field <= 9; field++) {
       var f = fixture(ROLES.get(2));
       f.fault = "ordinary-final#" + field;
       refused(f);
-      assertArrayEquals(GOLDEN, Files.readAllBytes(f.output("terminal")));
+      assertArrayEquals(GOLDEN, Files.readAllBytes(f.output(FIXTURE_TERMINAL_C34E20C4)));
       assertEquals(2, f.snapshots);
     }
   }
@@ -434,14 +459,17 @@ final class NativeCoverageExportTest {
     try (directory) {
       directory.atDirectory(
           held -> {
-            assertTrue(Files.isSameFile(Path.of("/run"), held));
-            assertEquals(Files.getFileStore(Path.of("/run")).type(), io.filesystem(held));
+            assertTrue(Files.isSameFile(Path.of(FIXTURE_RUN_46B71B1E), held));
             assertEquals(
-                Files.readAttributes(Path.of("/run"), "unix:uid,gid,mode,nlink,dev,ino"),
+                Files.getFileStore(Path.of(FIXTURE_RUN_46B71B1E)).type(), io.filesystem(held));
+            assertEquals(
+                Files.readAttributes(
+                    Path.of(FIXTURE_RUN_46B71B1E), "unix:uid,gid,mode,nlink,dev,ino"),
                 io.attributes(held));
-            assertEquals(Files.getAttribute(Path.of("/run"), "unix:size"), io.size(held));
             assertEquals(
-                Files.getFileStore(Path.of("/run")).isReadOnly(),
+                Files.getAttribute(Path.of(FIXTURE_RUN_46B71B1E), "unix:size"), io.size(held));
+            assertEquals(
+                Files.getFileStore(Path.of(FIXTURE_RUN_46B71B1E)).isReadOnly(),
                 io.security().readOnlyFilesystem(held));
             return true;
           });
@@ -465,7 +493,7 @@ final class NativeCoverageExportTest {
             IOException.class,
             () ->
                 NativeCoveragePrivateFile.export(
-                    profile(ROLES.get(0)), INV + ".terminal.exec", GOLDEN));
+                    profile(ROLES.get(0)), INV + FIXTURE_TERMINAL_EXEC_ADA03D11, GOLDEN));
     assertEquals("service identity unavailable", error.getMessage());
     assertNull(error.getCause());
     // Independent getent exit2 proves the rejecting prerequisite; no fake role/UID grant or write.
@@ -474,7 +502,14 @@ final class NativeCoverageExportTest {
   @Test
   void nexport619001TypedOracleMutationsHaveTheSpecifiedValuesRatherThanTypeErrors()
       throws Exception {
-    for (String field : List.of("uid", "gid", "mode", "nlink", "dev", "ino")) {
+    for (String field :
+        List.of(
+            FIXTURE_UID_0C18F38C,
+            FIXTURE_GID_0ACDD642,
+            FIXTURE_MODE_B6D5C2C3,
+            FIXTURE_NLINK_3DDD828B,
+            FIXTURE_DEV_8A17302D,
+            FIXTURE_INO_4BE7C1E0)) {
       var f = fixture(ROLES.get(0));
       f.fault = "target#1:" + field;
       long originalInode = (Long) Files.getAttribute(f.target, "unix:ino");
@@ -482,9 +517,9 @@ final class NativeCoverageExportTest {
         var metadata = held.atDirectory(f::attributes);
         assertNotNull(metadata);
         Object value = metadata.get(field);
-        if (field.equals("dev") || field.equals("ino")) {
+        if (field.equals(FIXTURE_DEV_8A17302D) || field.equals(FIXTURE_INO_4BE7C1E0)) {
           assertInstanceOf(Long.class, value);
-          assertEquals(field.equals("dev") ? 0L : originalInode + 1, value);
+          assertEquals(field.equals(FIXTURE_DEV_8A17302D) ? 0L : originalInode + 1, value);
         } else {
           assertInstanceOf(Integer.class, value);
           assertEquals(Integer.valueOf(1), value);
@@ -494,12 +529,13 @@ final class NativeCoverageExportTest {
     }
     var f = fixture(ROLES.get(0));
     f.fault = "file#1:nlink";
-    Files.write(f.output("terminal"), new byte[] {9}, StandardOpenOption.CREATE_NEW);
+    Files.write(f.output(FIXTURE_TERMINAL_C34E20C4), new byte[] {9}, StandardOpenOption.CREATE_NEW);
     try (var held = OwnedTransferDirectory.open(f.calls, f.target)) {
-      var metadata = held.atExistingEntryHandle(INV + ".terminal.exec", f::attributes);
+      var metadata =
+          held.atExistingEntryHandle(INV + FIXTURE_TERMINAL_EXEC_ADA03D11, f::attributes);
       assertNotNull(metadata);
-      assertInstanceOf(Integer.class, metadata.get("nlink"));
-      assertEquals(Integer.valueOf(2), metadata.get("nlink"));
+      assertInstanceOf(Integer.class, metadata.get(FIXTURE_NLINK_3DDD828B));
+      assertEquals(Integer.valueOf(2), metadata.get(FIXTURE_NLINK_3DDD828B));
     }
     assertTrue(f.calls.live.isEmpty());
   }
@@ -508,7 +544,19 @@ final class NativeCoverageExportTest {
   void nchannel193001ReadOnlyAgentMetadataRequiresExactlyOneLink() throws Exception {
     Map<String, Object> metadata =
         new HashMap<>(
-            Map.of("uid", 0, "gid", 0, "mode", 0100644, "nlink", 1, "dev", 2L, "ino", 3L));
+            Map.of(
+                FIXTURE_UID_0C18F38C,
+                0,
+                FIXTURE_GID_0ACDD642,
+                0,
+                FIXTURE_MODE_B6D5C2C3,
+                0100644,
+                FIXTURE_NLINK_3DDD828B,
+                1,
+                FIXTURE_DEV_8A17302D,
+                2L,
+                FIXTURE_INO_4BE7C1E0,
+                3L));
     var identity = NativeCoveragePrivateFile.checked(metadata, new byte[0], 0, 0, 0100644);
     assertEquals(0L, identity.uid());
     assertEquals(0L, identity.gid());
@@ -517,7 +565,7 @@ final class NativeCoverageExportTest {
     assertEquals(2L, identity.device());
     assertEquals(3L, identity.inode());
     for (int links : new int[] {0, 2}) {
-      metadata.put("nlink", links);
+      metadata.put(FIXTURE_NLINK_3DDD828B, links);
       assertThrows(
           IOException.class,
           () -> NativeCoveragePrivateFile.checked(metadata, new byte[0], 0, 0, 0100644));
@@ -562,7 +610,11 @@ final class NativeCoverageExportTest {
         IllegalArgumentException.class,
         () ->
             NativeCoveragePrivateFile.export(
-                profile(untouched.role), INV + ".terminal.exec", GOLDEN, untouched, null));
+                profile(untouched.role),
+                INV + FIXTURE_TERMINAL_EXEC_ADA03D11,
+                GOLDEN,
+                untouched,
+                null));
     assertEquals(0, untouched.calls.creates);
     for (String fault : List.of("write-null", "read-null")) {
       var f = fixture(ROLES.get(0));
@@ -571,11 +623,12 @@ final class NativeCoverageExportTest {
           IllegalArgumentException.class,
           () ->
               NativeCoveragePrivateFile.export(
-                  profile(f.role), INV + ".terminal.exec", GOLDEN, f, channels));
+                  profile(f.role), INV + FIXTURE_TERMINAL_EXEC_ADA03D11, GOLDEN, f, channels));
       assertTrue(f.calls.live.isEmpty());
       assertTrue(channels.opened.stream().allMatch(c -> !c.isOpen() && !c.delegate.isOpen()));
       assertEquals(1, f.calls.creates);
-      assertEquals(fault.equals("write-null") ? 0 : 7, Files.size(f.output("terminal")));
+      assertEquals(
+          fault.equals("write-null") ? 0 : 7, Files.size(f.output(FIXTURE_TERMINAL_C34E20C4)));
     }
   }
 
@@ -601,7 +654,7 @@ final class NativeCoverageExportTest {
           IOException.class,
           () ->
               NativeCoveragePrivateFile.export(
-                  profile(f.role), INV + ".terminal.exec", GOLDEN, f, channels),
+                  profile(f.role), INV + FIXTURE_TERMINAL_EXEC_ADA03D11, GOLDEN, f, channels),
           fault);
       assertTrue(f.calls.live.isEmpty(), fault);
       assertTrue(
@@ -612,7 +665,7 @@ final class NativeCoverageExportTest {
           fault.equals("write-zero") || fault.equals("write-error")
               ? new byte[0]
               : new byte[] {1, (byte) 0xc0, (byte) 0xc0, 0x10, 7, 0x10, 1},
-          Files.readAllBytes(f.output("terminal")),
+          Files.readAllBytes(f.output(FIXTURE_TERMINAL_C34E20C4)),
           fault);
       assertEquals(fault.startsWith("read-") ? 1 : 0, channels.readerCount);
       assertEquals(fault.startsWith("read-") ? 2 : 1, channels.opened.size());
@@ -641,7 +694,7 @@ final class NativeCoverageExportTest {
     }
 
     private FileChannel open(Path held, boolean reading) throws IOException {
-      assertTrue(Files.isSameFile(held, fixture.output("terminal")));
+      assertTrue(Files.isSameFile(held, fixture.output(FIXTURE_TERMINAL_C34E20C4)));
       var delegate =
           Objects.requireNonNull(
               reading
@@ -825,7 +878,19 @@ final class NativeCoverageExportTest {
       assertEquals(1, calls.creates);
       assertEquals(1, calls.syncs);
       assertTrue(calls.live.isEmpty());
-      assertEquals(Map.of("run", 2, "service", 2, "parent", 2, "target", 5, "file", 3), visits);
+      assertEquals(
+          Map.of(
+              "run",
+              2,
+              "service",
+              2,
+              "parent",
+              2,
+              FIXTURE_TARGET_AA962F43,
+              5,
+              FIXTURE_FILE_BFDDE6F5,
+              3),
+          visits);
     }
 
     private void fail(String operation) throws IOException {
@@ -923,8 +988,8 @@ final class NativeCoverageExportTest {
       if (path.equals(run)) return "run";
       if (path.equals(service)) return "service";
       if (path.equals(parent)) return "parent";
-      if (path.equals(target)) return "target";
-      return Files.isRegularFile(held) ? "file" : "ancestor";
+      if (path.equals(target)) return FIXTURE_TARGET_AA962F43;
+      return Files.isRegularFile(held) ? FIXTURE_FILE_BFDDE6F5 : "ancestor";
     }
 
     public @Nullable Map<String, ? extends @Nullable Object> attributes(Path held)
@@ -935,18 +1000,29 @@ final class NativeCoverageExportTest {
       var values =
           new HashMap<String, Object>(
               Files.readAttributes(held, "unix:uid,gid,mode,nlink,dev,ino"));
-      boolean actor = part.equals("target") || part.equals("file");
-      values.put("uid", (int) (actor ? role.uid() : 0));
-      values.put("gid", (int) (actor ? role.gid() : 0));
+      boolean actor = part.equals(FIXTURE_TARGET_AA962F43) || part.equals(FIXTURE_FILE_BFDDE6F5);
+      values.put(FIXTURE_UID_0C18F38C, (int) (actor ? role.uid() : 0));
+      values.put(FIXTURE_GID_0ACDD642, (int) (actor ? role.gid() : 0));
       String prefix = part + "#" + visit + ":";
       if (fault.equals(prefix + "null")) return null;
-      for (String field : List.of("uid", "gid", "mode", "nlink", "dev", "ino"))
+      for (String field :
+          List.of(
+              FIXTURE_UID_0C18F38C,
+              FIXTURE_GID_0ACDD642,
+              FIXTURE_MODE_B6D5C2C3,
+              FIXTURE_NLINK_3DDD828B,
+              FIXTURE_DEV_8A17302D,
+              FIXTURE_INO_4BE7C1E0))
         if (fault.equals(prefix + field)) {
-          if (field.equals("dev") || field.equals("ino")) {
-            long changed = field.equals("ino") ? ((Long) values.get("ino")) + 1 : 0;
+          if (field.equals(FIXTURE_DEV_8A17302D) || field.equals(FIXTURE_INO_4BE7C1E0)) {
+            long changed =
+                field.equals(FIXTURE_INO_4BE7C1E0)
+                    ? ((Long) values.get(FIXTURE_INO_4BE7C1E0)) + 1
+                    : 0;
             values.put(field, Long.valueOf(changed));
           } else {
-            int changed = field.equals("nlink") && part.equals("file") ? 2 : 1;
+            int changed =
+                field.equals(FIXTURE_NLINK_3DDD828B) && part.equals(FIXTURE_FILE_BFDDE6F5) ? 2 : 1;
             values.put(field, Integer.valueOf(changed));
           }
         }
@@ -1042,7 +1118,9 @@ final class NativeCoverageExportTest {
       assertTrue(live.remove(fd));
       actual.close(fd);
       int count = closes.merge(part, 1, Integer::sum);
-      if (fixture.fault.equals("replace-target") && part.equals("target") && count == 1) {
+      if (fixture.fault.equals("replace-target")
+          && part.equals(FIXTURE_TARGET_AA962F43)
+          && count == 1) {
         try {
           Files.move(fixture.target, fixture.parent.resolve("saved-target"));
           Files.createDirectory(fixture.target);

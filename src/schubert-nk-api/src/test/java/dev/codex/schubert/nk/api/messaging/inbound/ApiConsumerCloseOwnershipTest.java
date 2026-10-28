@@ -27,13 +27,18 @@ import org.junit.jupiter.api.Test;
 
 /** SSC314/BUG1548/YKT1307; PT-API-JMS-CLOSE001..006; finite owned proxies, no broker. */
 final class ApiConsumerCloseOwnershipTest {
+  private static final String FIXTURE_FIXTURE_B086DE7B = "fixture";
+  private static final String FIXTURE_UNEXPECTED_TERMINAL_58F0270E = "unexpected terminal";
+
   @Test
   void close001OnlyUnconfirmedContextIsRetriedAcrossAllThreeConsumers() throws Exception {
     for (int kind = 0; kind < 3; kind++) {
       int count = kind == 0 ? 4 : 1;
       for (int bad = 0; bad < count; bad++) {
         for (Throwable marker :
-            List.of(new IllegalStateException("fixture"), new AssertionError("fixture"))) {
+            List.of(
+                new IllegalStateException(FIXTURE_FIXTURE_B086DE7B),
+                new AssertionError(FIXTURE_FIXTURE_B086DE7B))) {
           var contexts = fixtures(count, bad, marker, false);
           var index = new AtomicInteger();
           var owner = open(kind, () -> contexts.get(index.getAndIncrement()).context);
@@ -71,7 +76,9 @@ final class ApiConsumerCloseOwnershipTest {
   @Test
   void close003StoppedConsumersDoNotInspectOrProcessAnotherDelivery() throws Exception {
     for (int kind = 0; kind < 3; kind++) {
-      var contexts = fixtures(kind == 0 ? 4 : 1, 0, new IllegalStateException("fixture"), false);
+      var contexts =
+          fixtures(
+              kind == 0 ? 4 : 1, 0, new IllegalStateException(FIXTURE_FIXTURE_B086DE7B), false);
       var index = new AtomicInteger();
       var owner = open(kind, () -> contexts.get(index.getAndIncrement()).context);
       assertThrows(IllegalStateException.class, owner::close);
@@ -95,7 +102,9 @@ final class ApiConsumerCloseOwnershipTest {
   void close004ParentRetainsOnlyUnknownChildAcrossReverseGroupClose() throws Exception {
     for (int bad = 0; bad < 6; bad++) {
       for (Throwable marker :
-          List.of(new IllegalStateException("fixture"), new AssertionError("fixture"))) {
+          List.of(
+              new IllegalStateException(FIXTURE_FIXTURE_B086DE7B),
+              new AssertionError(FIXTURE_FIXTURE_B086DE7B))) {
         var contexts = fixtures(6, bad, marker, false);
         var order = new ArrayList<Integer>();
         for (int i = 0; i < 6; i++) {
@@ -155,7 +164,7 @@ final class ApiConsumerCloseOwnershipTest {
         ignored -> {},
         ignored -> {},
         Clock.systemUTC(),
-        ignored -> fail("unexpected terminal"),
+        ignored -> fail(FIXTURE_UNEXPECTED_TERMINAL_58F0270E),
         () -> fail("unexpected fatal"));
   }
 
@@ -169,17 +178,17 @@ final class ApiConsumerCloseOwnershipTest {
                     throw new AssertionError("unexpected processor");
                   },
                   Clock.systemUTC()),
-              ignored -> fail("unexpected terminal"));
+              ignored -> fail(FIXTURE_UNEXPECTED_TERMINAL_58F0270E));
       case 1 ->
           WebLogConsumers.start(
               factory,
               new WebLogListener(ignored -> fail("unexpected processor"), Clock.systemUTC()),
-              ignored -> fail("unexpected terminal"));
+              ignored -> fail(FIXTURE_UNEXPECTED_TERMINAL_58F0270E));
       case 2 ->
           QuestionWorkConsumers.start(
               factory,
               new QuestionWorkListener(ignored -> fail("unexpected processor"), Clock.systemUTC()),
-              ignored -> fail("unexpected terminal"),
+              ignored -> fail(FIXTURE_UNEXPECTED_TERMINAL_58F0270E),
               () -> fail("unexpected fatal"));
       default -> throw new AssertionError("fixture kind");
     };

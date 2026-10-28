@@ -23,6 +23,8 @@ import org.junit.jupiter.api.Test;
  * invokes main/run/admission, registers hooks, starts a provider pool or touches real JDBC.
  */
 final class ApiProcessObservationFactoryTest {
+  private static final String FIXTURE_STANDARD_E303A9CB = "STANDARD";
+
   private static DataSource pool(AtomicInteger opens) {
     return DataSource.class.cast(
         Proxy.newProxyInstance(
@@ -44,10 +46,10 @@ final class ApiProcessObservationFactoryTest {
           () -> ApiProcessMain.prepareObservations(null, pool, lifetime));
       assertThrows(
           NullPointerException.class,
-          () -> ApiProcessMain.prepareObservations("STANDARD", null, lifetime));
+          () -> ApiProcessMain.prepareObservations(FIXTURE_STANDARD_E303A9CB, null, lifetime));
       assertThrows(
           NullPointerException.class,
-          () -> ApiProcessMain.prepareObservations("STANDARD", pool, null));
+          () -> ApiProcessMain.prepareObservations(FIXTURE_STANDARD_E303A9CB, pool, null));
       assertFalse(lifetime.stopping());
     }
     assertEquals(0, opens.get());
@@ -70,7 +72,8 @@ final class ApiProcessObservationFactoryTest {
   void apiObsBoot003() throws IOException {
     var opens = new AtomicInteger();
     try (var lifetime = new ApiProcessLifetime(() -> 0)) {
-      var observations = ApiProcessMain.prepareObservations("STANDARD", pool(opens), lifetime);
+      var observations =
+          ApiProcessMain.prepareObservations(FIXTURE_STANDARD_E303A9CB, pool(opens), lifetime);
       try {
         observations.initialize();
         assertTrue(observations.metrics().bindings().isEmpty());
@@ -122,7 +125,8 @@ final class ApiProcessObservationFactoryTest {
             })) {
       assertThrows(
           NullPointerException.class, () -> ApiProcessMain.closeObservations(null, lifetime));
-      var observations = ApiProcessMain.prepareObservations("STANDARD", pool(opens), lifetime);
+      var observations =
+          ApiProcessMain.prepareObservations(FIXTURE_STANDARD_E303A9CB, pool(opens), lifetime);
       try {
         assertThrows(
             NullPointerException.class, () -> ApiProcessMain.closeObservations(observations, null));
@@ -148,7 +152,8 @@ final class ApiProcessObservationFactoryTest {
               reads.incrementAndGet();
               return now.get();
             })) {
-      var observations = ApiProcessMain.prepareObservations("STANDARD", pool(opens), lifetime);
+      var observations =
+          ApiProcessMain.prepareObservations(FIXTURE_STANDARD_E303A9CB, pool(opens), lifetime);
       try {
         observations.initialize();
         ApiProcessMain.closeObservations(observations, lifetime);
@@ -173,7 +178,8 @@ final class ApiProcessObservationFactoryTest {
             () -> {
               throw fatal;
             });
-    var observations = ApiProcessMain.prepareObservations("STANDARD", pool(opens), lifetime);
+    var observations =
+        ApiProcessMain.prepareObservations(FIXTURE_STANDARD_E303A9CB, pool(opens), lifetime);
     try {
       observations.initialize();
       assertSame(

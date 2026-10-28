@@ -18,12 +18,14 @@ import org.junit.jupiter.api.Test;
 
 /** PT-JMS-024 A-F: synthetic public credential only; no real password or session is retained. */
 final class ApiBrokerContextsTest {
+  private static final String FIXTURE_PT_PUBLIC_MARKER_6351621C = "PT_PUBLIC_MARKER";
+
   @Test
   void closePhaseRetriesOnlyUnknownFactoryAndNeverReadsSecretsAfterStop() {
     for (int bad = 0; bad < 3; bad++) {
       for (Throwable marker :
           java.util.List.of(
-              new IllegalStateException("PT_PUBLIC_MARKER"),
+              new IllegalStateException(FIXTURE_PT_PUBLIC_MARKER_6351621C),
               new AssertionError("PT_PUBLIC_FATAL"))) {
         var factories = java.util.List.of(new FakeFactory(), new FakeFactory(), new FakeFactory());
         factories.get(bad).closeFault = marker;
@@ -146,7 +148,7 @@ final class ApiBrokerContextsTest {
         java.util.List.<Supplier<char[]>>of(
             () -> null,
             () -> {
-              throw new IllegalStateException("PT_PUBLIC_MARKER");
+              throw new IllegalStateException(FIXTURE_PT_PUBLIC_MARKER_6351621C);
             })) {
       try (var owner = new ApiBrokerContexts(source, sync, log, sync, log)) {
         var failure = assertThrows(IllegalStateException.class, owner.sync()::get);
@@ -207,8 +209,8 @@ final class ApiBrokerContextsTest {
   void closeTriesBothFactoriesAndPreservesFatalPriority() {
     var ordinarySync = new FakeFactory();
     var ordinaryLog = new FakeFactory();
-    ordinarySync.closeFault = new IllegalStateException("PT_PUBLIC_MARKER");
-    ordinaryLog.closeFault = new IllegalStateException("PT_PUBLIC_MARKER");
+    ordinarySync.closeFault = new IllegalStateException(FIXTURE_PT_PUBLIC_MARKER_6351621C);
+    ordinaryLog.closeFault = new IllegalStateException(FIXTURE_PT_PUBLIC_MARKER_6351621C);
     var owner =
         new ApiBrokerContexts(
             () -> new char[] {'P'}, ordinarySync, ordinaryLog, ordinarySync, ordinaryLog);
@@ -226,7 +228,7 @@ final class ApiBrokerContextsTest {
     var fatalLog = new FakeFactory();
     var fatal = new AssertionError("PT_PUBLIC_FATAL");
     fatalSync.closeFault = fatal;
-    fatalLog.closeFault = new IllegalStateException("PT_PUBLIC_MARKER");
+    fatalLog.closeFault = new IllegalStateException(FIXTURE_PT_PUBLIC_MARKER_6351621C);
     var fatalOwner =
         new ApiBrokerContexts(() -> new char[] {'P'}, fatalSync, fatalLog, fatalSync, fatalLog);
     assertSame(fatal, assertThrows(AssertionError.class, fatalOwner::close));
@@ -235,7 +237,7 @@ final class ApiBrokerContextsTest {
 
     var onlySyncFault = new FakeFactory();
     var healthyLog = new FakeFactory();
-    onlySyncFault.closeFault = new IllegalStateException("PT_PUBLIC_MARKER");
+    onlySyncFault.closeFault = new IllegalStateException(FIXTURE_PT_PUBLIC_MARKER_6351621C);
     var syncOwner =
         new ApiBrokerContexts(
             () -> new char[] {'P'}, onlySyncFault, healthyLog, onlySyncFault, healthyLog);
@@ -248,7 +250,8 @@ final class ApiBrokerContextsTest {
     var ordinarySyncAfterFatal = new FakeFactory();
     var fatalLogOnly = new FakeFactory();
     var logFatal = new AssertionError("PT_PUBLIC_FATAL");
-    ordinarySyncAfterFatal.closeFault = new IllegalStateException("PT_PUBLIC_MARKER");
+    ordinarySyncAfterFatal.closeFault =
+        new IllegalStateException(FIXTURE_PT_PUBLIC_MARKER_6351621C);
     fatalLogOnly.closeFault = logFatal;
     var logOwner =
         new ApiBrokerContexts(
@@ -301,7 +304,7 @@ final class ApiBrokerContextsTest {
       opens++;
       fixedRoleAndMode = "nk_api".equals(user) && sessionMode == JMSContext.SESSION_TRANSACTED;
       publicSyntheticSecretOnly = "PT".equals(password);
-      if (failOpen) throw new IllegalStateException("PT_PUBLIC_MARKER");
+      if (failOpen) throw new IllegalStateException(FIXTURE_PT_PUBLIC_MARKER_6351621C);
       return returnNull ? null : context;
     }
 

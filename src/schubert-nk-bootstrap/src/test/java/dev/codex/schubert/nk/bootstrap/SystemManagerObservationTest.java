@@ -21,6 +21,17 @@ import org.junit.jupiter.api.Test;
 
 /** Independent fixed bytes/stateful owner and clock oracle; MANAGER817001..006. */
 final class SystemManagerObservationTest {
+  private static final String FIXTURE_CLOSE_97959247 = "close";
+  private static final String FIXTURE_LOADSTATE_26A05807 = "LoadState";
+  private static final String FIXTURE_ACTIVESTATE_8ACAC4AA = "ActiveState";
+  private static final String FIXTURE_SUBSTATE_39662EFC = "SubState";
+  private static final String FIXTURE_MAINPID_D7C01CF7 = "MainPID";
+  private static final String FIXTURE_INVOCATIONID_0F13ED0E = "InvocationID";
+  private static final String FIXTURE_CONTROLGROUP_45352F50 = "ControlGroup";
+  private static final String FIXTURE_START_A92AE961 = "start";
+  private static final String FIXTURE_OWNER1_E15700EC = "owner1";
+  private static final String FIXTURE_OWNER2_7DFC143F = "owner2";
+
   /** PT-OPS-MANAGEROWN001: failed/null acquisition never registers a pending owner. */
   @Test
   void managerown001FactoryFailuresKeepIdentityAndAllowAFreshNextAcquisition() throws Exception {
@@ -56,7 +67,7 @@ final class SystemManagerObservationTest {
                   StandardCharsets.US_ASCII)
               .startsWith("Id=schubert-nk-api.service\nLoadState=loaded\n"));
       assertEquals(2, creates[0]);
-      assertEquals("close", accepted.events.getLast());
+      assertEquals(FIXTURE_CLOSE_97959247, accepted.events.getLast());
       assertTrue(accepted.closed);
     }
   }
@@ -112,7 +123,7 @@ final class SystemManagerObservationTest {
     assertThrows(IOException.class, () -> query.read(SystemManagerObservation.Service.API, FIELDS));
     assertEquals(1, creates[0]);
     assertEquals(1, checks[0]);
-    assertEquals(1, delegate.events.stream().filter("close"::equals).count());
+    assertEquals(1, delegate.events.stream().filter(FIXTURE_CLOSE_97959247::equals).count());
   }
 
   static final String FIELDS =
@@ -126,17 +137,17 @@ final class SystemManagerObservationTest {
             Map.of(
                 "Id",
                 "schubert-nk-api.service",
-                "LoadState",
+                FIXTURE_LOADSTATE_26A05807,
                 "loaded",
-                "ActiveState",
+                FIXTURE_ACTIVESTATE_8ACAC4AA,
                 "active",
-                "SubState",
+                FIXTURE_SUBSTATE_39662EFC,
                 "running",
-                "MainPID",
+                FIXTURE_MAINPID_D7C01CF7,
                 "200",
-                "InvocationID",
+                FIXTURE_INVOCATIONID_0F13ED0E,
                 "00112233445566778899aabbccddeeff",
-                "ControlGroup",
+                FIXTURE_CONTROLGROUP_45352F50,
                 "/system.slice/schubert-nk-api.service",
                 "ExecMainStartTimestampMonotonic",
                 "3000000"));
@@ -162,7 +173,7 @@ final class SystemManagerObservationTest {
     public void start(SystemManagerObservation.Budget budget) throws IOException {
       long micros = budget.remainingMicros();
       assertTrue(micros > 0 && micros <= 5000000);
-      at("start");
+      at(FIXTURE_START_A92AE961);
     }
 
     public SystemManagerObservation.Owner owner(long micros) throws IOException {
@@ -179,7 +190,7 @@ final class SystemManagerObservationTest {
     }
 
     public void close() throws IOException {
-      events.add("close");
+      events.add(FIXTURE_CLOSE_97959247);
       if (failClose) throw new IOException("literal uncertain close");
       closed = true;
     }
@@ -211,7 +222,7 @@ final class SystemManagerObservationTest {
                 var session = new Session();
                 session.expectedService = target;
                 session.values.put("Id", unit);
-                session.values.put("ControlGroup", "/system.slice/" + unit);
+                session.values.put(FIXTURE_CONTROLGROUP_45352F50, "/system.slice/" + unit);
                 created.add(session);
                 return session;
               },
@@ -231,17 +242,17 @@ final class SystemManagerObservationTest {
       for (var session : created) {
         assertEquals(
             List.of(
-                "start",
-                "owner1",
+                FIXTURE_START_A92AE961,
+                FIXTURE_OWNER1_E15700EC,
                 "Id",
-                "LoadState",
-                "ActiveState",
-                "SubState",
-                "MainPID",
-                "InvocationID",
-                "ControlGroup",
-                "owner2",
-                "close"),
+                FIXTURE_LOADSTATE_26A05807,
+                FIXTURE_ACTIVESTATE_8ACAC4AA,
+                FIXTURE_SUBSTATE_39662EFC,
+                FIXTURE_MAINPID_D7C01CF7,
+                FIXTURE_INVOCATIONID_0F13ED0E,
+                FIXTURE_CONTROLGROUP_45352F50,
+                FIXTURE_OWNER2_7DFC143F,
+                FIXTURE_CLOSE_97959247),
             session.events);
         assertTrue(session.closed);
       }
@@ -314,17 +325,17 @@ final class SystemManagerObservationTest {
     assertNotSame(created.get(0), created.get(1));
     assertEquals(
         List.of(
-            "start",
-            "owner1",
+            FIXTURE_START_A92AE961,
+            FIXTURE_OWNER1_E15700EC,
             "Id",
-            "LoadState",
-            "ActiveState",
-            "SubState",
-            "MainPID",
-            "InvocationID",
-            "ControlGroup",
-            "owner2",
-            "close"),
+            FIXTURE_LOADSTATE_26A05807,
+            FIXTURE_ACTIVESTATE_8ACAC4AA,
+            FIXTURE_SUBSTATE_39662EFC,
+            FIXTURE_MAINPID_D7C01CF7,
+            FIXTURE_INVOCATIONID_0F13ED0E,
+            FIXTURE_CONTROLGROUP_45352F50,
+            FIXTURE_OWNER2_7DFC143F,
+            FIXTURE_CLOSE_97959247),
         created.get(0).events);
     assertTrue(created.stream().allMatch(s -> s.closed));
   }
@@ -349,7 +360,9 @@ final class SystemManagerObservationTest {
           () ->
               new SystemManagerObservation(() -> s, () -> 0)
                   .read(SystemManagerObservation.Service.API, FIELDS));
-      assertEquals(List.of("start", "owner1", "close"), s.events);
+      assertEquals(
+          List.of(FIXTURE_START_A92AE961, FIXTURE_OWNER1_E15700EC, FIXTURE_CLOSE_97959247),
+          s.events);
     }
     assertEquals("SystemManagerOwner[REDACTED]", session.first.toString());
     for (String bad :
@@ -369,16 +382,16 @@ final class SystemManagerObservationTest {
   void everyBoundaryIoRuntimeFatalAndUnknownCloseRemainFailure() {
     for (String fault :
         List.of(
-            "start",
-            "owner1",
+            FIXTURE_START_A92AE961,
+            FIXTURE_OWNER1_E15700EC,
             "Id",
-            "LoadState",
-            "ActiveState",
-            "SubState",
-            "MainPID",
-            "InvocationID",
-            "ControlGroup",
-            "owner2"))
+            FIXTURE_LOADSTATE_26A05807,
+            FIXTURE_ACTIVESTATE_8ACAC4AA,
+            FIXTURE_SUBSTATE_39662EFC,
+            FIXTURE_MAINPID_D7C01CF7,
+            FIXTURE_INVOCATIONID_0F13ED0E,
+            FIXTURE_CONTROLGROUP_45352F50,
+            FIXTURE_OWNER2_7DFC143F))
       for (int kind = 0; kind < 3; kind++) {
         var s = new Session();
         s.fault = fault;
@@ -393,7 +406,7 @@ final class SystemManagerObservationTest {
             };
         assertThrows(expected, () -> query.read(SystemManagerObservation.Service.API, FIELDS));
         assertTrue(s.closed);
-        assertEquals("close", s.events.getLast());
+        assertEquals(FIXTURE_CLOSE_97959247, s.events.getLast());
       }
     var s = new Session();
     s.failClose = true;
@@ -436,7 +449,7 @@ final class SystemManagerObservationTest {
           IOException.class,
           () -> interruptedQuery.read(SystemManagerObservation.Service.API, FIELDS));
       assertTrue(interruptedSession.closed);
-      assertEquals(List.of("close"), interruptedSession.events);
+      assertEquals(List.of(FIXTURE_CLOSE_97959247), interruptedSession.events);
     } finally {
       Thread.interrupted();
     }
@@ -447,13 +460,13 @@ final class SystemManagerObservationTest {
       assertThrows(
           IOException.class, () -> query.read(SystemManagerObservation.Service.API, FIELDS));
       assertTrue(s.closed);
-      assertEquals(List.of("close"), s.events);
+      assertEquals(List.of(FIXTURE_CLOSE_97959247), s.events);
     }
     var s = new Session();
     int[] reads = {0};
     var query = new SystemManagerObservation(() -> s, () -> reads[0]++ < 5 ? 0 : 5_000_000_000L);
     assertThrows(IOException.class, () -> query.read(SystemManagerObservation.Service.API, FIELDS));
-    assertFalse(s.events.contains("owner2"));
+    assertFalse(s.events.contains(FIXTURE_OWNER2_7DFC143F));
     assertTrue(s.closed);
   }
 
@@ -468,7 +481,8 @@ final class SystemManagerObservationTest {
             },
             () -> 0);
     assertThrows(
-        IOException.class, () -> query.read(SystemManagerObservation.Service.API, "MainPID"));
+        IOException.class,
+        () -> query.read(SystemManagerObservation.Service.API, FIXTURE_MAINPID_D7C01CF7));
     assertThrows(NullPointerException.class, () -> query.read(null, FIELDS));
     assertThrows(
         NullPointerException.class, () -> query.read(SystemManagerObservation.Service.API, null));

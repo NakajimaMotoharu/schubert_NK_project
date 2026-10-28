@@ -30,6 +30,9 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** EXP711: literal MQ outcomes + genuine isolated SQL; never a native admission claim. */
 final class ExpiryResultContractTest {
+  private static final String FIXTURE_HEALTH_69B7C75B = "health";
+  private static final String FIXTURE_OBSERVE_584F9502 = "observe";
+  private static final String FIXTURE_PURGE_B6F2C785 = "purge";
   @TempDir static Path root;
   static BatchDatabaseFixture db;
   static final UUID RUN = UUID.fromString("71100000-2222-4333-8444-555555555555");
@@ -108,14 +111,14 @@ final class ExpiryResultContractTest {
 
     @Override
     public boolean healthy() {
-      calls.add("health");
+      calls.add(FIXTURE_HEALTH_69B7C75B);
       if (healthCalls++ > 0 && healthFails) throw new ArtemisManagementReadinessException();
       return !unhealthy;
     }
 
     @Override
     public ArtemisExpiryPurgeClient.Observation observe(BatchRun run) {
-      calls.add("observe");
+      calls.add(FIXTURE_OBSERVE_584F9502);
       assertEquals(RUN, run.id());
       assertEquals(CUTOFF, run.cutoff());
       return new ArtemisExpiryPurgeClient.Observation(
@@ -125,7 +128,7 @@ final class ExpiryResultContractTest {
     @Override
     public ArtemisExpiryPurgeClient.Result purge(
         BatchRun run, ArtemisExpiryPurgeClient.Observation observed) {
-      calls.add("purge");
+      calls.add(FIXTURE_PURGE_B6F2C785);
       assertEquals(RUN, run.id());
       assertEquals(
           new ArtemisExpiryPurgeClient.Observation(1790121600000L, 3, 2, 300, 200), observed);
@@ -154,7 +157,14 @@ final class ExpiryResultContractTest {
       assertFalse(c.isClosed());
       assertTrue(c.getAutoCommit());
     }
-    assertEquals(List.of("health", "observe", "purge", "health", "now"), work.calls);
+    assertEquals(
+        List.of(
+            FIXTURE_HEALTH_69B7C75B,
+            FIXTURE_OBSERVE_584F9502,
+            FIXTURE_PURGE_B6F2C785,
+            FIXTURE_HEALTH_69B7C75B,
+            "now"),
+        work.calls);
     assertEquals("SUCCESS|3|1|2|2|0|200|NULL", audit());
   }
 
@@ -167,7 +177,14 @@ final class ExpiryResultContractTest {
       assertTrue(c.getAutoCommit());
     }
     assertEquals("WARNING|3|NULL|2|0|2|200|COMMAND_FAILURE", audit());
-    assertEquals(List.of("health", "observe", "purge", "health", "now"), work.calls);
+    assertEquals(
+        List.of(
+            FIXTURE_HEALTH_69B7C75B,
+            FIXTURE_OBSERVE_584F9502,
+            FIXTURE_PURGE_B6F2C785,
+            FIXTURE_HEALTH_69B7C75B,
+            "now"),
+        work.calls);
   }
 
   @Test
@@ -252,7 +269,9 @@ final class ExpiryResultContractTest {
       assertTrue(c.getAutoCommit());
     }
     assertEquals("RUNNING|3|NULL|2|0|0|200|NULL", audit());
-    assertEquals(List.of("health", "observe", "purge"), work.calls);
+    assertEquals(
+        List.of(FIXTURE_HEALTH_69B7C75B, FIXTURE_OBSERVE_584F9502, FIXTURE_PURGE_B6F2C785),
+        work.calls);
   }
 
   @Test
@@ -293,7 +312,9 @@ final class ExpiryResultContractTest {
         else assertEquals(0, CleanupExpiryExecution.executeAuthenticated(c, skipped, OWNER, work));
         assertTrue(c.getAutoCommit());
       }
-      assertEquals(List.of("health", "observe", "health"), work.calls);
+      assertEquals(
+          List.of(FIXTURE_HEALTH_69B7C75B, FIXTURE_OBSERVE_584F9502, FIXTURE_HEALTH_69B7C75B),
+          work.calls);
       assertEquals(before, allRows());
     }
   }
@@ -326,14 +347,16 @@ final class ExpiryResultContractTest {
                       c,
                       request(),
                       () -> {
-                        if (work.calls.contains("purge")) throw expected;
+                        if (work.calls.contains(FIXTURE_PURGE_B6F2C785)) throw expected;
                         return 10_000_000_000L;
                       },
                       work)));
       assertFalse(c.isClosed());
     }
     assertEquals("RUNNING|3|NULL|2|0|0|200|NULL", audit());
-    assertEquals(List.of("health", "observe", "purge"), work.calls);
+    assertEquals(
+        List.of(FIXTURE_HEALTH_69B7C75B, FIXTURE_OBSERVE_584F9502, FIXTURE_PURGE_B6F2C785),
+        work.calls);
   }
 
   @Test
@@ -367,7 +390,7 @@ final class ExpiryResultContractTest {
                   work));
     }
     assertTrue(once.get());
-    assertEquals(List.of("health", "observe"), work.calls);
+    assertEquals(List.of(FIXTURE_HEALTH_69B7C75B, FIXTURE_OBSERVE_584F9502), work.calls);
     assertEquals("RUNNING|4|NULL|2|0|0|200|NULL", audit());
   }
 

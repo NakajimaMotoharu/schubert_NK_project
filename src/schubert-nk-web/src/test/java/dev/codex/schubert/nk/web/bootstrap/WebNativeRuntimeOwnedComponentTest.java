@@ -44,6 +44,7 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** WEBOWN327001..007 / SS313343354. Own DB/JMS/HTTP/FDs, not native Root admission. */
 final class WebNativeRuntimeOwnedComponentTest {
+  private static final String FIXTURE_RUNTIME_2D52CD90 = "runtime";
   @TempDir Path temporary;
 
   @Test
@@ -333,7 +334,9 @@ final class WebNativeRuntimeOwnedComponentTest {
   @Test
   void webown327007NativeBindingsUseFixedLiteralsAndVerifyOwnMetadata() throws Exception {
     var config = WebNonSecretConfig.parse("", "");
-    assertEquals(Path.of("/run/schubert-nk/web"), WebNativeRuntime.nativePath(config, "runtime"));
+    assertEquals(
+        Path.of("/run/schubert-nk/web"),
+        WebNativeRuntime.nativePath(config, FIXTURE_RUNTIME_2D52CD90));
     assertEquals(
         Path.of("/srv/schubert-nk/data/transfer"),
         WebNativeRuntime.nativePath(config, "nk.web.storage.transfer-root"));
@@ -346,7 +349,9 @@ final class WebNativeRuntimeOwnedComponentTest {
         IllegalArgumentException.class, () -> WebNativeRuntime.nativePath(config, "unknown"));
     assertThrows(
         IllegalArgumentException.class, () -> WebNativeRuntime.nativePort(config, "unknown"));
-    assertThrows(NullPointerException.class, () -> WebNativeRuntime.nativePath(null, "runtime"));
+    assertThrows(
+        NullPointerException.class,
+        () -> WebNativeRuntime.nativePath(null, FIXTURE_RUNTIME_2D52CD90));
     assertThrows(NullPointerException.class, () -> WebNativeRuntime.nativePath(config, null));
     assertThrows(
         NullPointerException.class, () -> WebNativeRuntime.nativePort(null, "nk.web.http.port"));
@@ -394,7 +399,7 @@ final class WebNativeRuntimeOwnedComponentTest {
       this.root = root;
       // Validate the exact shared fixture format before creating any external owned resource.
       assertEquals("tcp://127.0.0.1:1", configAtPort(1).value("nk.mq.url"));
-      for (String name : new String[] {"runtime", "transfer", "assets", "keys"})
+      for (String name : new String[] {FIXTURE_RUNTIME_2D52CD90, "transfer", "assets", "keys"})
         Files.createDirectory(root.resolve(name));
       database = new WebLogDatabaseFixture(Files.createDirectory(root.resolve("database")));
       broker = new EmbeddedActiveMQ();
@@ -502,7 +507,7 @@ final class WebNativeRuntimeOwnedComponentTest {
       assertNotNull(config);
       return root.resolve(
           switch (key) {
-            case "runtime" -> "runtime";
+            case FIXTURE_RUNTIME_2D52CD90 -> FIXTURE_RUNTIME_2D52CD90;
             case "nk.web.storage.transfer-root" -> "transfer";
             case "nk.web.storage.asset-root" -> "assets";
             default -> throw new AssertionError("unexpected component path");

@@ -26,6 +26,12 @@ import org.junit.jupiter.api.Test;
  * Independent actual HTTP status/JSON literals, not a native startup admission. WEB-READY001..003.
  */
 final class WebManagementServerTest {
+  private static final String FIXTURE_SYNTHETIC_ACQUISITION_5736B45C = "synthetic acquisition";
+  private static final String FIXTURE_ACTUATOR_HEALTH_286D1BF0 = "/actuator/health";
+  private static final String FIXTURE_APP_4E5EF144 = "app";
+  private static final String FIXTURE_ACTUATOR_HEALTH_READINESS_5BC040D5 =
+      "/actuator/health/readiness";
+
   /** BUG1561/YKT1318/PG-D471: fixed independent eight-input exception-priority matrix. */
   @Test
   void ready007CompoundStartupCleanupKeepsPrimaryAndFixedDiagnostic() throws Exception {
@@ -160,11 +166,11 @@ final class WebManagementServerTest {
   void httpOwn002FactoryFailureIdentityAndNullAreNotStarted() {
     for (Throwable primary :
         java.util.List.of(
-            new IOException("synthetic acquisition"),
-            new IllegalArgumentException("synthetic acquisition"),
-            new IllegalStateException("synthetic acquisition"),
-            new NullPointerException("synthetic acquisition"),
-            new AssertionError("synthetic acquisition"))) {
+            new IOException(FIXTURE_SYNTHETIC_ACQUISITION_5736B45C),
+            new IllegalArgumentException(FIXTURE_SYNTHETIC_ACQUISITION_5736B45C),
+            new IllegalStateException(FIXTURE_SYNTHETIC_ACQUISITION_5736B45C),
+            new NullPointerException(FIXTURE_SYNTHETIC_ACQUISITION_5736B45C),
+            new AssertionError(FIXTURE_SYNTHETIC_ACQUISITION_5736B45C))) {
       var calls = new AtomicInteger();
       assertSame(
           primary,
@@ -358,7 +364,8 @@ final class WebManagementServerTest {
       var response =
           CLIENT.sendAsync(
               HttpRequest.newBuilder(
-                      URI.create("http://127.0.0.1:" + server.port() + "/actuator/health"))
+                      URI.create(
+                          "http://127.0.0.1:" + server.port() + FIXTURE_ACTUATOR_HEALTH_286D1BF0))
                   .timeout(Duration.ofSeconds(3))
                   .GET()
                   .build(),
@@ -400,7 +407,7 @@ final class WebManagementServerTest {
       assertThrows(IOException.class, () -> server.promote(releases::incrementAndGet));
       assertEquals(0, releases.get());
       server.start();
-      assertEquals(503, get(server, "/actuator/health").statusCode());
+      assertEquals(503, get(server, FIXTURE_ACTUATOR_HEALTH_286D1BF0).statusCode());
       assertThrows(IllegalStateException.class, server::start);
       assertThrows(NullPointerException.class, () -> server.closeWithin(null));
       assertThrows(IllegalArgumentException.class, () -> server.closeWithin(Duration.ofNanos(-1)));
@@ -437,7 +444,7 @@ final class WebManagementServerTest {
                   }));
       assertTrue(bound.get() > 0);
       try (var reopened = WebManagementServer.open(INFO, () -> true, bound.get())) {
-        assertEquals(503, get(reopened, "/actuator/health").statusCode());
+        assertEquals(503, get(reopened, FIXTURE_ACTUATOR_HEALTH_286D1BF0).statusCode());
       }
       assertThrows(
           NullPointerException.class, () -> WebManagementServer.open(INFO, () -> true, 0, null));
@@ -454,7 +461,7 @@ final class WebManagementServerTest {
       Map.of(
           "commit",
           "a".repeat(40),
-          "app",
+          FIXTURE_APP_4E5EF144,
           "0.1.0",
           "config",
           "1",
@@ -482,7 +489,10 @@ final class WebManagementServerTest {
     var server = WebManagementServer.open(INFO, healthy::get, 0);
     try {
       assertFalse(server.ready());
-      for (String path : new String[] {"/actuator/health", "/actuator/health/readiness"}) {
+      for (String path :
+          new String[] {
+            FIXTURE_ACTUATOR_HEALTH_286D1BF0, FIXTURE_ACTUATOR_HEALTH_READINESS_5BC040D5
+          }) {
         var down = get(server, path);
         assertEquals(503, down.statusCode());
         assertEquals("{\"status\":\"DOWN\"}", down.body());
@@ -518,15 +528,15 @@ final class WebManagementServerTest {
           });
       assertTrue(server.ready());
       assertEquals(1, releases.get());
-      assertEquals(200, get(server, "/actuator/health/readiness").statusCode());
-      assertEquals("{\"status\":\"UP\"}", get(server, "/actuator/health").body());
+      assertEquals(200, get(server, FIXTURE_ACTUATOR_HEALTH_READINESS_5BC040D5).statusCode());
+      assertEquals("{\"status\":\"UP\"}", get(server, FIXTURE_ACTUATOR_HEALTH_286D1BF0).body());
       assertEquals(
           "# TYPE schubert_nk_web_ready gauge\nschubert_nk_web_ready 1\n",
           get(server, "/actuator/prometheus").body());
       assertThrows(IOException.class, () -> server.promote(releases::incrementAndGet));
       healthy.set(false);
       assertFalse(server.ready());
-      assertEquals(503, get(server, "/actuator/health").statusCode());
+      assertEquals(503, get(server, FIXTURE_ACTUATOR_HEALTH_286D1BF0).statusCode());
       server.close();
       server.close();
       assertFalse(server.ready());
@@ -555,7 +565,7 @@ final class WebManagementServerTest {
                     }));
         assertEquals(mode == 0 ? 0 : 1, releases.get());
         assertFalse(server.ready());
-        assertEquals(503, get(server, "/actuator/health/readiness").statusCode());
+        assertEquals(503, get(server, FIXTURE_ACTUATOR_HEALTH_READINESS_5BC040D5).statusCode());
         healthy.set(true);
         assertThrows(IOException.class, () -> server.promote(releases::incrementAndGet));
       }
@@ -581,8 +591,10 @@ final class WebManagementServerTest {
       assertThrows(IOException.class, () -> server.promote(releases::incrementAndGet));
       assertEquals(1, releases.get());
       try (var replacement = WebManagementServer.open(INFO, () -> true, port)) {
-        assertEquals(503, get(replacement, "/actuator/health/readiness").statusCode());
-        assertEquals("{\"status\":\"DOWN\"}", get(replacement, "/actuator/health").body());
+        assertEquals(
+            503, get(replacement, FIXTURE_ACTUATOR_HEALTH_READINESS_5BC040D5).statusCode());
+        assertEquals(
+            "{\"status\":\"DOWN\"}", get(replacement, FIXTURE_ACTUATOR_HEALTH_286D1BF0).body());
       }
     } finally {
       server.close();
@@ -597,15 +609,15 @@ final class WebManagementServerTest {
         IllegalArgumentException.class, () -> WebManagementServer.open(Map.of(), () -> true, 0));
     for (String value : new String[] {"", "PRIVATE\"", "a".repeat(129), "x".repeat(40)}) {
       var bad = new HashMap<>(INFO);
-      bad.put(value.length() == 40 ? "commit" : "app", value);
+      bad.put(value.length() == 40 ? "commit" : FIXTURE_APP_4E5EF144, value);
       assertThrows(
           IllegalArgumentException.class, () -> WebManagementServer.open(bad, () -> true, 0));
     }
     var missing = new HashMap<>(INFO);
-    missing.put("app", null);
+    missing.put(FIXTURE_APP_4E5EF144, null);
     assertThrows(
         NullPointerException.class, () -> WebManagementServer.open(missing, () -> true, 0));
-    missing.put("app", "1");
+    missing.put(FIXTURE_APP_4E5EF144, "1");
     missing.put("commit", null);
     assertThrows(
         NullPointerException.class, () -> WebManagementServer.open(missing, () -> true, 0));

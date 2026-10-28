@@ -68,6 +68,12 @@ import org.springframework.security.web.context.SecurityContextHolderFilter;
 
 /** NK-WEB-001/PT-WEB-101..108; FUN-001/AUT-004/MON-004; UI222/226/252; SS313/314/342/351/352. */
 class WebRequestSecurityTest {
+  private static final String FIXTURE_X_FORWARDED_FOR_BECAABD0 = "X-Forwarded-For";
+  private static final String FIXTURE_REQUESTID_C180E78F = "requestId";
+  private static final String FIXTURE_DETAILS_521BCB5E = "details";
+  private static final String FIXTURE_PRIVATE_ATTRIBUTE_5C4BBC15 = "private attribute";
+  private static final String FIXTURE_ANONYMOUS_9F338305 = "ANONYMOUS";
+  private static final String FIXTURE_USER_2DED8884 = "USER";
   private static final UUID ID = new UUID(0, 123);
   private static final String ATTRIBUTE = WebRequestContext.class.getName();
   private static final Clock CLOCK =
@@ -148,13 +154,15 @@ class WebRequestSecurityTest {
             assertEquals(
                 new UUID(0, 2), WebRequestContext.require((HttpServletRequest) r).requestId()));
     assertEquals(2, ids.get());
-    request.removeHeader("X-Forwarded-For");
-    request.addHeader("X-Forwarded-For", "203.0.113.2");
+    request.removeHeader(FIXTURE_X_FORWARDED_FOR_BECAABD0);
+    request.addHeader(FIXTURE_X_FORWARDED_FOR_BECAABD0, "203.0.113.2");
     var rejected = new MockHttpServletResponse();
     filter.doFilter(request, rejected, (r, s) -> fail("changed client must not continue"));
     assertEquals(403, rejected.getStatus());
     assertSame(existing, WebRequestContext.require(request));
-    assertEquals(new UUID(0, 1).toString(), log.entries.getLast().get("requestId").getAsString());
+    assertEquals(
+        new UUID(0, 1).toString(),
+        log.entries.getLast().get(FIXTURE_REQUESTID_C180E78F).getAsString());
     request.removeHeader("X-Forwarded-Proto");
     filter.doFilter(
         request, new MockHttpServletResponse(), (r, s) -> fail("redispatch must revalidate"));
@@ -169,8 +177,8 @@ class WebRequestSecurityTest {
       var request = untouched();
       switch (invalid) {
         case "PEER" -> request.setRemoteAddr("203.0.113.9");
-        case "MISSING" -> request.removeHeader("X-Forwarded-For");
-        case "DUPLICATE" -> request.addHeader("X-Forwarded-For", "203.0.113.2");
+        case "MISSING" -> request.removeHeader(FIXTURE_X_FORWARDED_FOR_BECAABD0);
+        case "DUPLICATE" -> request.addHeader(FIXTURE_X_FORWARDED_FOR_BECAABD0, "203.0.113.2");
         default -> request.addHeader("Forwarded", "synthetic-secret");
       }
       var response = new MockHttpServletResponse();
@@ -187,10 +195,13 @@ class WebRequestSecurityTest {
       assertNull(response.getErrorMessage());
       var event = log.entries.getLast();
       assertEquals("AUTHORIZATION_DENIED", event.get("action").getAsString());
-      assertEquals("PROXY", event.getAsJsonObject("details").get("reason").getAsString());
-      assertEquals("/**", event.getAsJsonObject("details").get("route").getAsString());
       assertEquals(
-          "HTTP_REQUEST", event.getAsJsonObject("details").get("targetType").getAsString());
+          "PROXY", event.getAsJsonObject(FIXTURE_DETAILS_521BCB5E).get("reason").getAsString());
+      assertEquals(
+          "/**", event.getAsJsonObject(FIXTURE_DETAILS_521BCB5E).get("route").getAsString());
+      assertEquals(
+          "HTTP_REQUEST",
+          event.getAsJsonObject(FIXTURE_DETAILS_521BCB5E).get("targetType").getAsString());
       assertFalse(event.has("remoteAddress"));
       assertFalse(event.has("actorUsername"));
       assertFalse(event.toString().contains("synthetic-secret"));
@@ -266,16 +277,16 @@ class WebRequestSecurityTest {
               @Override
               public Object getAttribute(String name) {
                 if (!set) {
-                  if (state) throw new IllegalStateException("private attribute");
-                  throw new IllegalArgumentException("private attribute");
+                  if (state) throw new IllegalStateException(FIXTURE_PRIVATE_ATTRIBUTE_5C4BBC15);
+                  throw new IllegalArgumentException(FIXTURE_PRIVATE_ATTRIBUTE_5C4BBC15);
                 }
                 return super.getAttribute(name);
               }
 
               @Override
               public void setAttribute(String name, Object value) {
-                if (state) throw new IllegalStateException("private attribute");
-                throw new IllegalArgumentException("private attribute");
+                if (state) throw new IllegalStateException(FIXTURE_PRIVATE_ATTRIBUTE_5C4BBC15);
+                throw new IllegalArgumentException(FIXTURE_PRIVATE_ATTRIBUTE_5C4BBC15);
               }
             };
         unavailable(() -> filter.doFilter(request, new MockHttpServletResponse(), never));
@@ -316,7 +327,7 @@ class WebRequestSecurityTest {
   void web105CsrfDeniedHandlerIgnoresSecretExceptionsAndPreservesSession() throws Exception {
     var log = new Log();
     var handler = new WebCsrfDeniedHandler(audit(log));
-    for (String role : List.of("ANONYMOUS", "USER", "ADMIN")) {
+    for (String role : List.of(FIXTURE_ANONYMOUS_9F338305, FIXTURE_USER_2DED8884, "ADMIN")) {
       SecurityContextHolder.clearContext();
       var request = trusted(new MockHttpServletRequest("POST", "/questions/new"));
       var session = new MockHttpSession();
@@ -328,7 +339,7 @@ class WebRequestSecurityTest {
               request,
               response,
               (r, s) -> {
-                if (!role.equals("ANONYMOUS"))
+                if (!role.equals(FIXTURE_ANONYMOUS_9F338305))
                   SecurityContextHolder.getContext().setAuthentication(authentication(role));
                 handler.handle((HttpServletRequest) r, (HttpServletResponse) s, secretException());
               });
@@ -338,11 +349,12 @@ class WebRequestSecurityTest {
       assertNull(response.getCookie("SCHUBERT_NK_SESSION"));
       assertNull(response.getErrorMessage());
       var event = log.entries.getLast();
-      assertEquals("CSRF", event.getAsJsonObject("details").get("reason").getAsString());
+      assertEquals(
+          "CSRF", event.getAsJsonObject(FIXTURE_DETAILS_521BCB5E).get("reason").getAsString());
       assertEquals("AUTHORIZATION_DENIED", event.get("action").getAsString());
-      assertEquals(ID.toString(), event.get("requestId").getAsString());
+      assertEquals(ID.toString(), event.get(FIXTURE_REQUESTID_C180E78F).getAsString());
       assertEquals("203.0.113.1", event.get("remoteAddress").getAsString());
-      if (role.equals("ANONYMOUS")) assertFalse(event.has("actorUsername"));
+      if (role.equals(FIXTURE_ANONYMOUS_9F338305)) assertFalse(event.has("actorUsername"));
       else {
         assertEquals("reader", event.get("actorUsername").getAsString());
         assertEquals(role, event.get("actorRole").getAsString());
@@ -355,7 +367,7 @@ class WebRequestSecurityTest {
 
   @Test
   void web106ActualCsrfFilterUsesProductionDeniedAudit() throws Exception {
-    for (String role : List.of("ANONYMOUS", "USER", "ADMIN")) {
+    for (String role : List.of(FIXTURE_ANONYMOUS_9F338305, FIXTURE_USER_2DED8884, "ADMIN")) {
       try (var c = db.web();
           var s = c.createStatement()) {
         s.executeUpdate("delete from schubert_web_session.web_http_sessions");
@@ -364,8 +376,9 @@ class WebRequestSecurityTest {
         f.clock.value = Instant.now();
         var adapter = new SpringEncryptedSessionRepository(f.repository, f.clock);
         var initial = adapter.createSession();
-        if (!role.equals("ANONYMOUS")) initial.setAttribute("principal", principal(role));
-        String token = role.equals("ANONYMOUS") ? "02".repeat(32) : "04".repeat(32);
+        if (!role.equals(FIXTURE_ANONYMOUS_9F338305))
+          initial.setAttribute("principal", principal(role));
+        String token = role.equals(FIXTURE_ANONYMOUS_9F338305) ? "02".repeat(32) : "04".repeat(32);
         var log = new Log();
         var ids = new AtomicInteger();
         var transport =
@@ -414,7 +427,8 @@ class WebRequestSecurityTest {
           assertNull(SecurityContextHolder.getContext().getAuthentication());
           assertEquals(1, log.entries.size());
           assertEquals(
-              new UUID(0, 1).toString(), log.entries.getFirst().get("requestId").getAsString());
+              new UUID(0, 1).toString(),
+              log.entries.getFirst().get(FIXTURE_REQUESTID_C180E78F).getAsString());
           assertEquals(token, adapter.findById(initial.getId()).getAttribute("csrfToken"));
         }
         assertEquals(2, ids.get());
@@ -479,8 +493,8 @@ class WebRequestSecurityTest {
               SecurityContextHolder.clearContext();
               try {
                 var request = untouched();
-                request.removeHeader("X-Forwarded-For");
-                request.addHeader("X-Forwarded-For", ip);
+                request.removeHeader(FIXTURE_X_FORWARDED_FOR_BECAABD0);
+                request.addHeader(FIXTURE_X_FORWARDED_FOR_BECAABD0, ip);
                 var response = new MockHttpServletResponse();
                 filter.doFilter(
                     request,
@@ -488,7 +502,8 @@ class WebRequestSecurityTest {
                     (r, s) -> {
                       expected.put(
                           WebRequestContext.require((HttpServletRequest) r).requestId(), ip);
-                      SecurityContextHolder.getContext().setAuthentication(authentication("USER"));
+                      SecurityContextHolder.getContext()
+                          .setAuthentication(authentication(FIXTURE_USER_2DED8884));
                       handler.handle(
                           (HttpServletRequest) r, (HttpServletResponse) s, secretException());
                     });
@@ -521,11 +536,12 @@ class WebRequestSecurityTest {
     assertEquals(100, log.entries.size());
     var seen = new HashSet<UUID>();
     for (var event : log.entries) {
-      UUID id = UUID.fromString(event.get("requestId").getAsString());
+      UUID id = UUID.fromString(event.get(FIXTURE_REQUESTID_C180E78F).getAsString());
       assertTrue(seen.add(id));
       assertEquals(expected.get(id), event.get("remoteAddress").getAsString());
-      assertEquals("USER", event.get("actorRole").getAsString());
-      assertEquals("CSRF", event.getAsJsonObject("details").get("reason").getAsString());
+      assertEquals(FIXTURE_USER_2DED8884, event.get("actorRole").getAsString());
+      assertEquals(
+          "CSRF", event.getAsJsonObject(FIXTURE_DETAILS_521BCB5E).get("reason").getAsString());
     }
   }
 
@@ -539,7 +555,7 @@ class WebRequestSecurityTest {
 
   private static MockHttpServletRequest trusted(MockHttpServletRequest r) {
     r.setRemoteAddr("127.0.0.1");
-    r.addHeader("X-Forwarded-For", "203.0.113.1");
+    r.addHeader(FIXTURE_X_FORWARDED_FOR_BECAABD0, "203.0.113.1");
     r.addHeader("X-Forwarded-Proto", "https");
     r.setSecure(true);
     return r;

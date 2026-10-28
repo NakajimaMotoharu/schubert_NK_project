@@ -30,6 +30,10 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** CORE004..006 independent ownership faults + actual guarded broker callback Error/no ACK. */
 class QuestionWorkConsumersTest {
+  private static final String FIXTURE_PRIMARY_B9312202 = "primary";
+  private static final String FIXTURE_START_A92AE961 = "start";
+  private static final String FIXTURE_CLOSE_97959247 = "close";
+
   @Test
   void jmsown001AcquisitionFailureAndNullKeepIdentityWithoutFatalNotification() {
     for (Throwable failure :
@@ -108,7 +112,9 @@ class QuestionWorkConsumersTest {
         var closes = new AtomicInteger();
         var signals = new AtomicInteger();
         Throwable primary =
-            mode == 4 ? new AssertionError("primary") : new IllegalStateException("primary");
+            mode == 4
+                ? new AssertionError(FIXTURE_PRIMARY_B9312202)
+                : new IllegalStateException(FIXTURE_PRIMARY_B9312202);
         Throwable notification =
             switch (mode) {
               case 1 -> primary;
@@ -118,13 +124,13 @@ class QuestionWorkConsumersTest {
             };
         Supplier<JMSContext> factory =
             () -> {
-              var delegate = context("start", primary, null, closes);
+              var delegate = context(FIXTURE_START_A92AE961, primary, null, closes);
               return (JMSContext)
                   Proxy.newProxyInstance(
                       JMSContext.class.getClassLoader(),
                       new Class<?>[] {JMSContext.class},
                       (p, m, a) -> {
-                        if (m.getName().equals("close"))
+                        if (m.getName().equals(FIXTURE_CLOSE_97959247))
                           assertTrue(stopped.get(), "shared stop precedes provider drain");
                         return invoke(delegate, m, a);
                       });
@@ -200,7 +206,7 @@ class QuestionWorkConsumersTest {
             "createConsumer",
             "null-consumer",
             "setMessageListener",
-            "start")) {
+            FIXTURE_START_A92AE961)) {
       for (boolean fatal : List.of(false, true)) {
         var closes = new AtomicInteger();
         Throwable failure =
@@ -216,17 +222,18 @@ class QuestionWorkConsumersTest {
       }
     }
     for (boolean same : List.of(false, true)) {
-      Error primary = new AssertionError("primary");
-      Throwable close = same ? primary : new IllegalStateException("close");
+      Error primary = new AssertionError(FIXTURE_PRIMARY_B9312202);
+      Throwable close = same ? primary : new IllegalStateException(FIXTURE_CLOSE_97959247);
       var closes = new AtomicInteger();
       assertSame(
           primary,
           assertThrows(
-              AssertionError.class, () -> start(() -> context("start", primary, close, closes))));
+              AssertionError.class,
+              () -> start(() -> context(FIXTURE_START_A92AE961, primary, close, closes))));
       assertEquals(1, closes.get());
       assertEquals(same ? 0 : 1, primary.getSuppressed().length);
     }
-    Error close = new AssertionError("close");
+    Error close = new AssertionError(FIXTURE_CLOSE_97959247);
     var closes = new AtomicInteger();
     assertSame(
         close,
@@ -234,10 +241,17 @@ class QuestionWorkConsumersTest {
             AssertionError.class,
             () ->
                 start(
-                    () -> context("start", new IllegalStateException("primary"), close, closes))));
+                    () ->
+                        context(
+                            FIXTURE_START_A92AE961,
+                            new IllegalStateException(FIXTURE_PRIMARY_B9312202),
+                            close,
+                            closes))));
     assertEquals(1, closes.get());
     for (Throwable closing :
-        List.of(new IllegalStateException("close"), new AssertionError("close"))) {
+        List.of(
+            new IllegalStateException(FIXTURE_CLOSE_97959247),
+            new AssertionError(FIXTURE_CLOSE_97959247))) {
       var count = new AtomicInteger();
       var owner = start(() -> context("", null, closing, count));
       assertTrue(owner.ready());
@@ -404,7 +418,7 @@ class QuestionWorkConsumersTest {
             JMSContext.class.getClassLoader(),
             new Class<?>[] {JMSContext.class},
             (p, m, a) -> {
-              if (m.getName().equals("close")) {
+              if (m.getName().equals(FIXTURE_CLOSE_97959247)) {
                 closes.incrementAndGet();
                 if (close != null) throw close;
                 return null;
@@ -413,7 +427,7 @@ class QuestionWorkConsumersTest {
               return switch (m.getName()) {
                 case "getSessionMode" -> point.equals("mode") ? 1 : JMSContext.SESSION_TRANSACTED;
                 case "createConsumer" -> point.equals("null-consumer") ? null : consumer;
-                case "setAutoStart", "start" -> null;
+                case "setAutoStart", FIXTURE_START_A92AE961 -> null;
                 default -> throw new AssertionError(m.getName());
               };
             });

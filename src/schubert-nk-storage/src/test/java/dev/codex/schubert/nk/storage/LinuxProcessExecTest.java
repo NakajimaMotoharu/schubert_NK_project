@@ -27,6 +27,9 @@ import org.junit.jupiter.api.Test;
 
 /** Independent literal pointer vectors/native same PID oracle; SS342/343; SSC086. */
 final class LinuxProcessExecTest {
+  private static final String FIXTURE_JAVA_4108EFE1 = "java";
+  private static final String FIXTURE_AMD64_58D0BD71 = "amd64";
+  private static final String FIXTURE_LINUX_1CA133AF = "Linux";
   private static final Path HELD = Path.of("/proc/self/fd/17");
 
   @Test
@@ -70,7 +73,7 @@ final class LinuxProcessExecTest {
       var replacement =
           new LinuxProcessExec(
               (file, argv, env) -> {
-                assertEquals(List.of("java"), strings(argv));
+                assertEquals(List.of(FIXTURE_JAVA_4108EFE1), strings(argv));
                 assertEquals(List.of(), strings(env));
                 calls.incrementAndGet();
                 return returned;
@@ -78,7 +81,7 @@ final class LinuxProcessExecTest {
       unavailable(
           assertThrows(
               StorageIoException.class,
-              () -> replacement.replace(HELD, List.of("java"), Map.of())));
+              () -> replacement.replace(HELD, List.of(FIXTURE_JAVA_4108EFE1), Map.of())));
       assertEquals(1, calls.get());
     }
     // Real execve ENOENT, never a raw native diagnostic.
@@ -87,7 +90,10 @@ final class LinuxProcessExecTest {
             StorageIoException.class,
             () ->
                 LinuxProcessExec.create()
-                    .replace(Path.of("/proc/self/fd/2147483647"), List.of("java"), Map.of())));
+                    .replace(
+                        Path.of("/proc/self/fd/2147483647"),
+                        List.of(FIXTURE_JAVA_4108EFE1),
+                        Map.of())));
   }
 
   @Test
@@ -107,21 +113,27 @@ final class LinuxProcessExecTest {
       invalid(
           assertThrows(
               IllegalArgumentException.class,
-              () -> replacement.replace(Path.of(path), List.of("java"), Map.of())));
-    assertThrows(
-        NullPointerException.class, () -> replacement.replace(null, List.of("java"), Map.of()));
-    assertThrows(NullPointerException.class, () -> replacement.replace(HELD, null, Map.of()));
-    assertThrows(
-        NullPointerException.class, () -> replacement.replace(HELD, List.of("java"), null));
+              () -> replacement.replace(Path.of(path), List.of(FIXTURE_JAVA_4108EFE1), Map.of())));
     assertThrows(
         NullPointerException.class,
-        () -> replacement.replace(HELD, Arrays.asList("java", null), Map.of()));
+        () -> replacement.replace(null, List.of(FIXTURE_JAVA_4108EFE1), Map.of()));
+    assertThrows(NullPointerException.class, () -> replacement.replace(HELD, null, Map.of()));
+    assertThrows(
+        NullPointerException.class,
+        () -> replacement.replace(HELD, List.of(FIXTURE_JAVA_4108EFE1), null));
+    assertThrows(
+        NullPointerException.class,
+        () -> replacement.replace(HELD, Arrays.asList(FIXTURE_JAVA_4108EFE1, null), Map.of()));
     var bad = new HashMap<String, String>();
     bad.put(null, "x");
-    assertThrows(NullPointerException.class, () -> replacement.replace(HELD, List.of("java"), bad));
+    assertThrows(
+        NullPointerException.class,
+        () -> replacement.replace(HELD, List.of(FIXTURE_JAVA_4108EFE1), bad));
     bad.clear();
     bad.put("X", null);
-    assertThrows(NullPointerException.class, () -> replacement.replace(HELD, List.of("java"), bad));
+    assertThrows(
+        NullPointerException.class,
+        () -> replacement.replace(HELD, List.of(FIXTURE_JAVA_4108EFE1), bad));
     assertThrows(NullPointerException.class, () -> new LinuxProcessExec(null));
     assertEquals(0, calls.get());
   }
@@ -181,19 +193,29 @@ final class LinuxProcessExecTest {
   @Test
   void opsExec005PlatformAndSymbolContracts() {
     var symbols = Linker.nativeLinker().defaultLookup();
-    assertThrows(NullPointerException.class, () -> LinuxProcessExec.create(null, "amd64", symbols));
-    assertThrows(NullPointerException.class, () -> LinuxProcessExec.create("Linux", null, symbols));
-    assertThrows(NullPointerException.class, () -> LinuxProcessExec.create("Linux", "amd64", null));
+    assertThrows(
+        NullPointerException.class,
+        () -> LinuxProcessExec.create(null, FIXTURE_AMD64_58D0BD71, symbols));
+    assertThrows(
+        NullPointerException.class,
+        () -> LinuxProcessExec.create(FIXTURE_LINUX_1CA133AF, null, symbols));
+    assertThrows(
+        NullPointerException.class,
+        () -> LinuxProcessExec.create(FIXTURE_LINUX_1CA133AF, FIXTURE_AMD64_58D0BD71, null));
     for (String os : List.of("Windows", "linux", ""))
       assertThrows(
-          IllegalStateException.class, () -> LinuxProcessExec.create(os, "amd64", symbols));
-    assertThrows(
-        IllegalStateException.class, () -> LinuxProcessExec.create("Linux", "unknown", symbols));
+          IllegalStateException.class,
+          () -> LinuxProcessExec.create(os, FIXTURE_AMD64_58D0BD71, symbols));
     assertThrows(
         IllegalStateException.class,
-        () -> LinuxProcessExec.create("Linux", "amd64", name -> Optional.empty()));
-    for (String arch : List.of("amd64", "x86_64", "aarch64"))
-      assertNotNull(LinuxProcessExec.create("Linux", arch, symbols));
+        () -> LinuxProcessExec.create(FIXTURE_LINUX_1CA133AF, "unknown", symbols));
+    assertThrows(
+        IllegalStateException.class,
+        () ->
+            LinuxProcessExec.create(
+                FIXTURE_LINUX_1CA133AF, FIXTURE_AMD64_58D0BD71, name -> Optional.empty()));
+    for (String arch : List.of(FIXTURE_AMD64_58D0BD71, "x86_64", "aarch64"))
+      assertNotNull(LinuxProcessExec.create(FIXTURE_LINUX_1CA133AF, arch, symbols));
   }
 
   @Test

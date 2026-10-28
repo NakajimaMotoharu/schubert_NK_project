@@ -35,6 +35,9 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** Explicit HTTP header/body oracles on actual retained files and fault ports. PT-MED-027..032. */
 class MediaRangeServiceTest {
+  private static final String FIXTURE_AUDIO_OGG_96A5CB00 = "audio/ogg";
+  private static final String FIXTURE_MUSIC_D5800D43 = "MUSIC";
+  private static final String FIXTURE_SYNTHETIC_PRIVATE_PATH_6CBCF6F9 = "SYNTHETIC_PRIVATE_PATH";
   @TempDir Path root;
   private StorageIdentity identity;
   private final byte[] content = new byte[2_097_155];
@@ -117,13 +120,13 @@ class MediaRangeServiceTest {
       // The seven MIME mappings are descriptor-validated; HTTP preserves each real MIME inline.
       for (String[] format :
           List.of(
-              new String[] {"AUDIO", "scenario/a.ogg", "audio/ogg"},
+              new String[] {"AUDIO", "scenario/a.ogg", FIXTURE_AUDIO_OGG_96A5CB00},
               new String[] {"VIDEO", "video/a.mp4", "video/mp4"},
-              new String[] {"MUSIC", "music/a.m4a", "audio/mp4"},
-              new String[] {"MUSIC", "music/a.mp3", "audio/mpeg"},
-              new String[] {"MUSIC", "music/a.ogg", "audio/ogg"},
-              new String[] {"MUSIC", "music/a.wav", "audio/wav"},
-              new String[] {"MUSIC", "music/a.flac", "audio/flac"})) {
+              new String[] {FIXTURE_MUSIC_D5800D43, "music/a.m4a", "audio/mp4"},
+              new String[] {FIXTURE_MUSIC_D5800D43, "music/a.mp3", "audio/mpeg"},
+              new String[] {FIXTURE_MUSIC_D5800D43, "music/a.ogg", FIXTURE_AUDIO_OGG_96A5CB00},
+              new String[] {FIXTURE_MUSIC_D5800D43, "music/a.wav", "audio/wav"},
+              new String[] {FIXTURE_MUSIC_D5800D43, "music/a.flac", "audio/flac"})) {
         var d =
             new MediaDescriptor(
                 MediaType.valueOf(format[0]),
@@ -238,7 +241,7 @@ class MediaRangeServiceTest {
                     Thread.currentThread().interrupt();
                     throw new IOException("interrupted");
                   }
-                  if (position == 1) throw new IOException("SYNTHETIC_PRIVATE_PATH");
+                  if (position == 1) throw new IOException(FIXTURE_SYNTHETIC_PRIVATE_PATH_6CBCF6F9);
                   real.read(d, op);
                 },
                 maximum);
@@ -303,7 +306,7 @@ class MediaRangeServiceTest {
                 (d, op) -> {
                   boolean first = attempts.incrementAndGet() == 1;
                   if (first && fault.equals("source"))
-                    throw new IOException("SYNTHETIC_PRIVATE_PATH");
+                    throw new IOException(FIXTURE_SYNTHETIC_PRIVATE_PATH_6CBCF6F9);
                   real.read(
                       d,
                       channel -> {
@@ -311,7 +314,7 @@ class MediaRangeServiceTest {
                         op.execute(channel);
                       });
                   if (first && fault.equals("post-close"))
-                    throw new IOException("SYNTHETIC_PRIVATE_PATH");
+                    throw new IOException(FIXTURE_SYNTHETIC_PRIVATE_PATH_6CBCF6F9);
                 });
         FakeResponse response = new FakeResponse(fault);
         reject(
@@ -384,7 +387,7 @@ class MediaRangeServiceTest {
         "音源.ogg",
         2_097_155,
         "a".repeat(64),
-        "audio/ogg",
+        FIXTURE_AUDIO_OGG_96A5CB00,
         disposition);
   }
 
@@ -406,7 +409,8 @@ class MediaRangeServiceTest {
       boolean head) {
     Map<String, String> expected = new HashMap<>();
     expected.put("Accept-Ranges", "bytes");
-    expected.put("Content-Type", download ? "application/octet-stream" : "audio/ogg");
+    expected.put(
+        "Content-Type", download ? "application/octet-stream" : FIXTURE_AUDIO_OGG_96A5CB00);
     expected.put(
         "Content-Disposition",
         (download ? "attachment" : "inline")
@@ -458,7 +462,7 @@ class MediaRangeServiceTest {
     @Override
     public void begin(int value, Map<String, String> values) throws IOException {
       begins++;
-      if (fault.equals("begin")) throw new IOException("SYNTHETIC_PRIVATE_PATH");
+      if (fault.equals("begin")) throw new IOException(FIXTURE_SYNTHETIC_PRIVATE_PATH_6CBCF6F9);
       status = value;
       headers = values;
     }
@@ -466,7 +470,7 @@ class MediaRangeServiceTest {
     @Override
     public OutputStream body() throws IOException {
       bodyCalls++;
-      if (fault.equals("body")) throw new IOException("SYNTHETIC_PRIVATE_PATH");
+      if (fault.equals("body")) throw new IOException(FIXTURE_SYNTHETIC_PRIVATE_PATH_6CBCF6F9);
       return new OutputStream() {
         @Override
         public void write(int value) {
@@ -477,7 +481,7 @@ class MediaRangeServiceTest {
         public void write(byte[] bytes, int offset, int length) throws IOException {
           writes++;
           if (fault.equals("write") || fault.equals("partial") && writes == 2)
-            throw new IOException("SYNTHETIC_PRIVATE_PATH");
+            throw new IOException(FIXTURE_SYNTHETIC_PRIVATE_PATH_6CBCF6F9);
           assertTrue(length <= 65_536);
           output.write(bytes, offset, length);
         }

@@ -25,6 +25,8 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** PT-DB-INBOX-197..201; real bounded IO, explicitly synthetic root-manager metadata. */
 final class InspectorDatabaseCredentialLoaderTest {
+  private static final String FIXTURE_MODE_B6D5C2C3 = "mode";
+  private static final String FIXTURE_SIZE_EB1E91E4 = "size";
   @TempDir Path temporary;
   private static final String NAME = "db-inbox-inspector";
 
@@ -99,13 +101,13 @@ final class InspectorDatabaseCredentialLoaderTest {
       for (var change :
           List.<Consumer<Map<String, Object>>>of(
               a -> a.put("uid", 12345),
-              a -> a.put("mode", 0100640),
-              a -> a.put("mode", 040550),
+              a -> a.put(FIXTURE_MODE_B6D5C2C3, 0100640),
+              a -> a.put(FIXTURE_MODE_B6D5C2C3, 040550),
               a -> a.put("nlink", 2),
               a -> a.put("nlink", 0),
-              a -> a.put("size", 0L),
-              a -> a.put("size", 65537L),
-              a -> a.put("size", null),
+              a -> a.put(FIXTURE_SIZE_EB1E91E4, 0L),
+              a -> a.put(FIXTURE_SIZE_EB1E91E4, 65537L),
+              a -> a.put(FIXTURE_SIZE_EB1E91E4, null),
               a -> a.put("uid", null))) {
         var io = new TestIo();
         io.fileChange = change;
@@ -114,7 +116,15 @@ final class InspectorDatabaseCredentialLoaderTest {
       }
       for (String key :
           List.of(
-              "uid", "gid", "mode", "nlink", "size", "dev", "ino", "lastModifiedTime", "ctime")) {
+              "uid",
+              "gid",
+              FIXTURE_MODE_B6D5C2C3,
+              "nlink",
+              FIXTURE_SIZE_EB1E91E4,
+              "dev",
+              "ino",
+              "lastModifiedTime",
+              "ctime")) {
         var io = new TestIo();
         io.lateFileChange = a -> a.remove(key);
         failure(() -> f.loader(io).loadDatabasePassword());
@@ -136,7 +146,7 @@ final class InspectorDatabaseCredentialLoaderTest {
         io.assertCleared(65537);
       }
       var directory = new TestIo();
-      directory.rootChange = a -> a.put("mode", 040750);
+      directory.rootChange = a -> a.put(FIXTURE_MODE_B6D5C2C3, 040750);
       failure(() -> f.loader(directory).loadDatabasePassword());
       assertEquals(0, directory.opens);
       Path other = f.root.resolve("hard-link");

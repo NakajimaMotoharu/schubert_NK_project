@@ -27,6 +27,13 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** Real retained FD/IO, public literal approval, explicitly synthetic root metadata/context. */
 final class RootReleaseApprovalReaderTest {
+  private static final String FIXTURE_UID_0C18F38C = "uid";
+  private static final String FIXTURE_GID_0ACDD642 = "gid";
+  private static final String FIXTURE_MODE_B6D5C2C3 = "mode";
+  private static final String FIXTURE_INO_4BE7C1E0 = "ino";
+  private static final String FIXTURE_SIZE_EB1E91E4 = "size";
+  private static final String FIXTURE_DEV_8A17302D = "dev";
+  private static final String FIXTURE_PRIVATE_D45CA6F9 = "PRIVATE";
   @TempDir Path temporary;
   private static final String SHA = "b".repeat(64);
   private static final String GOLDEN =
@@ -40,14 +47,14 @@ final class RootReleaseApprovalReaderTest {
     long appInode = (Long) Files.getAttribute(app, "unix:ino");
     f.metadata =
         (role, m) -> {
-          m.put("uid", 0);
-          m.put("gid", 0);
-          if (role.equals("parent")) m.put("mode", 040755);
+          m.put(FIXTURE_UID_0C18F38C, 0);
+          m.put(FIXTURE_GID_0ACDD642, 0);
+          if (role.equals("parent")) m.put(FIXTURE_MODE_B6D5C2C3, 040755);
           else if (role.equals("child")) {
-            boolean application = m.get("ino").equals(appInode);
-            m.put("mode", application ? 040750 : 040700);
-            if (application) m.put("gid", 2001);
-          } else m.put("mode", 0100400);
+            boolean application = m.get(FIXTURE_INO_4BE7C1E0).equals(appInode);
+            m.put(FIXTURE_MODE_B6D5C2C3, application ? 040750 : 040700);
+            if (application) m.put(FIXTURE_GID_0ACDD642, 2001);
+          } else m.put(FIXTURE_MODE_B6D5C2C3, 0100400);
         };
     return f;
   }
@@ -138,7 +145,16 @@ final class RootReleaseApprovalReaderTest {
   void approvalRead003AllMetadataContracts() throws Exception {
     for (String role : List.of("parent", "child", "file"))
       for (String field :
-          List.of("mode", "uid", "gid", "nlink", "size", "dev", "ino", "lastModifiedTime", "ctime"))
+          List.of(
+              FIXTURE_MODE_B6D5C2C3,
+              FIXTURE_UID_0C18F38C,
+              FIXTURE_GID_0ACDD642,
+              "nlink",
+              FIXTURE_SIZE_EB1E91E4,
+              FIXTURE_DEV_8A17302D,
+              FIXTURE_INO_4BE7C1E0,
+              "lastModifiedTime",
+              "ctime"))
         for (String kind : List.of("missing", "wrong", "invalid"))
           try (var f = fixture()) {
             var valid = f.metadata;
@@ -150,9 +166,15 @@ final class RootReleaseApprovalReaderTest {
                       case "missing" -> m.remove(field);
                       case "wrong" -> m.put(field, "wrong");
                       default -> {
-                        if (Set.of("size", "dev", "ino").contains(field)) m.put(field, -1L);
-                        else if (Set.of("mode", "uid", "gid", "nlink").contains(field))
-                          m.put(field, -1);
+                        if (Set.of(
+                                FIXTURE_SIZE_EB1E91E4, FIXTURE_DEV_8A17302D, FIXTURE_INO_4BE7C1E0)
+                            .contains(field)) m.put(field, -1L);
+                        else if (Set.of(
+                                FIXTURE_MODE_B6D5C2C3,
+                                FIXTURE_UID_0C18F38C,
+                                FIXTURE_GID_0ACDD642,
+                                "nlink")
+                            .contains(field)) m.put(field, -1);
                         else m.remove(field);
                       }
                     }
@@ -165,7 +187,7 @@ final class RootReleaseApprovalReaderTest {
             "acl",
             "nullAcl",
             "map",
-            "uid",
+            FIXTURE_UID_0C18F38C,
             "device",
             "length0",
             "length193",
@@ -177,13 +199,14 @@ final class RootReleaseApprovalReaderTest {
           case "acl" -> f.acl = new byte[] {1};
           case "nullAcl" -> f.acl = null;
           case "map" -> f.nullMap = true;
-          case "uid" -> f.effective = 1;
+          case FIXTURE_UID_0C18F38C -> f.effective = 1;
           case "directoryDevice" -> {
             var valid = f.metadata;
             f.metadata =
                 (r, m) -> {
                   valid.accept(r, m);
-                  if (r.equals("child") && m.get("mode").equals(040700)) m.put("dev", 123L);
+                  if (r.equals("child") && m.get(FIXTURE_MODE_B6D5C2C3).equals(040700))
+                    m.put(FIXTURE_DEV_8A17302D, 123L);
                 };
           }
           default -> {
@@ -193,11 +216,11 @@ final class RootReleaseApprovalReaderTest {
                   valid.accept(r, m);
                   if (r.equals("file"))
                     switch (kind) {
-                      case "device" -> m.put("dev", 123L);
-                      case "length0" -> m.put("size", 0L);
-                      case "length193" -> m.put("size", 193L);
+                      case "device" -> m.put(FIXTURE_DEV_8A17302D, 123L);
+                      case "length0" -> m.put(FIXTURE_SIZE_EB1E91E4, 0L);
+                      case "length193" -> m.put(FIXTURE_SIZE_EB1E91E4, 193L);
                       case "link2" -> m.put("nlink", 2);
-                      default -> m.put("ino", 0L);
+                      default -> m.put(FIXTURE_INO_4BE7C1E0, 0L);
                     }
                 };
           }
@@ -222,7 +245,9 @@ final class RootReleaseApprovalReaderTest {
       }
     for (String event : new HashSet<>(events))
       for (Throwable failure :
-          List.of(new IllegalStateException("PRIVATE"), new AssertionError("PRIVATE")))
+          List.of(
+              new IllegalStateException(FIXTURE_PRIVATE_D45CA6F9),
+              new AssertionError(FIXTURE_PRIVATE_D45CA6F9)))
         try (var f = fixture()) {
           f.faults.put(event + "#1", failure);
           assertSame(failure, assertThrows(Throwable.class, () -> reader(f).read()));
@@ -230,14 +255,14 @@ final class RootReleaseApprovalReaderTest {
         }
     for (Throwable primary :
         List.of(
-            new IOException("PRIVATE"),
-            new IllegalStateException("PRIVATE"),
-            new AssertionError("PRIVATE")))
+            new IOException(FIXTURE_PRIVATE_D45CA6F9),
+            new IllegalStateException(FIXTURE_PRIVATE_D45CA6F9),
+            new AssertionError(FIXTURE_PRIVATE_D45CA6F9)))
       for (Throwable close :
           List.of(
-              new IOException("PRIVATE"),
-              new IllegalStateException("PRIVATE"),
-              new AssertionError("PRIVATE"),
+              new IOException(FIXTURE_PRIVATE_D45CA6F9),
+              new IllegalStateException(FIXTURE_PRIVATE_D45CA6F9),
+              new AssertionError(FIXTURE_PRIVATE_D45CA6F9),
               primary))
         try (var f = fixture()) {
           var actual =
@@ -305,7 +330,7 @@ final class RootReleaseApprovalReaderTest {
         f.metadata =
             (r, m) -> {
               valid.accept(r, m);
-              if (f.counts.get("attributes") == at) m.put("ino", 1234567L);
+              if (f.counts.get("attributes") == at) m.put(FIXTURE_INO_4BE7C1E0, 1234567L);
             };
         assertThrows(IOException.class, () -> reader(f).read());
         f.released();
@@ -388,7 +413,7 @@ final class RootReleaseApprovalReaderTest {
     Path p = temporary.resolve("public");
     Files.writeString(p, GOLDEN);
     var io = new RootReleaseApprovalReader.NativeIo();
-    assertEquals((long) GOLDEN.length(), io.attributes(p).get("size"));
+    assertEquals((long) GOLDEN.length(), io.attributes(p).get(FIXTURE_SIZE_EB1E91E4));
     try (var channel = io.open(p)) {
       var buffer = ByteBuffer.allocate(GOLDEN.length());
       assertEquals(GOLDEN.length(), channel.read(buffer));

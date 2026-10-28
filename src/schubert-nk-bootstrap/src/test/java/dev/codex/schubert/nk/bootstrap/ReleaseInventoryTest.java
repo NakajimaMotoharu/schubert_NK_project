@@ -21,6 +21,14 @@ import org.junit.jupiter.api.Test;
 
 /** Literal test-only JSON builder; no production serialization/DB/file observation for expected. */
 final class ReleaseInventoryTest {
+  private static final String FIXTURE_VERSION_1FF1675B = "VERSION";
+  private static final String FIXTURE_API_API_JAR_B212EFC7 = "api/api.jar";
+  private static final String FIXTURE_BOOTSTRAP_1DEBF0DD = "bootstrap";
+  private static final String FIXTURE_PROTOCOL_2FE8E787 = "protocol";
+  private static final String FIXTURE_STORAGE_6545EE8B = "storage";
+  private static final String FIXTURE_1_2_3_PG313_33FF1495 = "1.2.3-PG313";
+  private static final String FIXTURE_API_LIB_A_JAR_F4CA5D9B = "api/lib/a.jar";
+  private static final String FIXTURE_API_LIB_STORAGE_JAR_EEA9544D = "api/lib/storage.jar";
   private static final String SHA = "b".repeat(64);
   private static final String COMMIT = "a".repeat(40);
   private static final String SCHEMA =
@@ -53,15 +61,19 @@ final class ReleaseInventoryTest {
     Fixture() {
       for (String path :
           List.of(
-              "VERSION",
-              "api/api.jar",
+              FIXTURE_VERSION_1FF1675B,
+              FIXTURE_API_API_JAR_B212EFC7,
               "web/web.jar",
               "operations/batch.jar",
               "db/migration/V001__first.sql")) files.put(path, artifact(path, "16", SHA));
-      for (String name : List.of("bootstrap", "protocol", "storage")) {
+      for (String name :
+          List.of(
+              FIXTURE_BOOTSTRAP_1DEBF0DD, FIXTURE_PROTOCOL_2FE8E787, FIXTURE_STORAGE_6545EE8B)) {
         var paths = new ArrayList<String>();
         for (String role :
-            name.equals("protocol") ? List.of("api", "web") : List.of("api", "operations", "web")) {
+            name.equals(FIXTURE_PROTOCOL_2FE8E787)
+                ? List.of("api", "web")
+                : List.of("api", "operations", "web")) {
           String path = role + "/lib/" + name + ".jar";
           paths.add(path);
           files.put(path, artifact(path, "16", SHA));
@@ -97,7 +109,7 @@ final class ReleaseInventoryTest {
   @Test
   void bomProfile001IndependentLiteralClaims() throws Exception {
     var value = ReleaseInventory.parse(bytes(golden()));
-    assertEquals("1.2.3-PG313", value.release());
+    assertEquals(FIXTURE_1_2_3_PG313_33FF1495, value.release());
     assertEquals("001", value.versions().get("schema"));
     assertEquals(COMMIT, value.source().get("commit"));
     assertEquals("25.0.4", value.build().get("jdkVersion"));
@@ -125,9 +137,9 @@ final class ReleaseInventoryTest {
             "artifacts",
             "migrations",
             "app",
-            "protocol",
-            "storage",
-            "bootstrap",
+            FIXTURE_PROTOCOL_2FE8E787,
+            FIXTURE_STORAGE_6545EE8B,
+            FIXTURE_BOOTSTRAP_1DEBF0DD,
             "schema",
             "config",
             "commit",
@@ -172,25 +184,27 @@ final class ReleaseInventoryTest {
     refused("[]");
     refused(golden().substring(0, 30));
     String padded = golden() + " ".repeat(1_048_576 - bytes(golden()).length);
-    assertEquals("1.2.3-PG313", ReleaseInventory.parse(bytes(padded)).release());
+    assertEquals(FIXTURE_1_2_3_PG313_33FF1495, ReleaseInventory.parse(bytes(padded)).release());
   }
 
   @Test
   void bomProfile004StrictNumbersAndBoundaryValues() throws Exception {
     var f = new Fixture();
     for (String number : List.of("0", Long.toString(Long.MAX_VALUE))) {
-      f.files.put("api/api.jar", artifact("api/api.jar", number, SHA));
+      f.files.put(
+          FIXTURE_API_API_JAR_B212EFC7, artifact(FIXTURE_API_API_JAR_B212EFC7, number, SHA));
       assertEquals(
           Long.parseLong(number),
           ReleaseInventory.parse(bytes(f.text())).artifacts().stream()
-              .filter(a -> a.path().equals("api/api.jar"))
+              .filter(a -> a.path().equals(FIXTURE_API_API_JAR_B212EFC7))
               .findFirst()
               .orElseThrow()
               .size());
     }
     for (String number :
         List.of("-1", "-0", "01", "1.0", "1e0", "9223372036854775808", "\"16\"", "null")) {
-      f.files.put("api/api.jar", artifact("api/api.jar", number, SHA));
+      f.files.put(
+          FIXTURE_API_API_JAR_B212EFC7, artifact(FIXTURE_API_API_JAR_B212EFC7, number, SHA));
       refused(f.text());
     }
     for (String number : List.of("24", "26", "25.0", "\"25\"", "null"))
@@ -226,37 +240,48 @@ final class ReleaseInventoryTest {
     for (String coordinate : List.of("", "g:a", "g:a:v:x", "g:a:v\n", "g:é:v"))
       assertThrows(
           IllegalArgumentException.class,
-          () -> new ReleaseInventory.Dependency(coordinate, List.of("api/lib/a.jar")));
+          () ->
+              new ReleaseInventory.Dependency(coordinate, List.of(FIXTURE_API_LIB_A_JAR_F4CA5D9B)));
     assertThrows(
         NullPointerException.class,
-        () -> new ReleaseInventory.Dependency(null, List.of("api/lib/a.jar")));
+        () -> new ReleaseInventory.Dependency(null, List.of(FIXTURE_API_LIB_A_JAR_F4CA5D9B)));
     assertThrows(NullPointerException.class, () -> new ReleaseInventory.Dependency("g:a:v", null));
     for (List<String> paths :
         List.of(
             List.<String>of(),
-            List.of("api/lib/a.jar", "api/lib/a.jar"),
-            List.of("web/lib/a.jar", "api/lib/a.jar"),
+            List.of(FIXTURE_API_LIB_A_JAR_F4CA5D9B, FIXTURE_API_LIB_A_JAR_F4CA5D9B),
+            List.of("web/lib/a.jar", FIXTURE_API_LIB_A_JAR_F4CA5D9B),
             List.of("api/lib/a.txt"),
             List.of("api/a.jar"),
-            List.of("api/lib/a.jar", "api/lib/b.jar", "api/lib/c.jar", "api/lib/d.jar")))
+            List.of(
+                FIXTURE_API_LIB_A_JAR_F4CA5D9B, "api/lib/b.jar", "api/lib/c.jar", "api/lib/d.jar")))
       assertThrows(
           IllegalArgumentException.class, () -> new ReleaseInventory.Dependency("g:a:v", paths));
-    var paths = new ArrayList<>(List.of("api/lib/a.jar"));
+    var paths = new ArrayList<>(List.of(FIXTURE_API_LIB_A_JAR_F4CA5D9B));
     var value = new ReleaseInventory.Dependency("g:a:v", paths);
     paths.clear();
-    assertEquals(List.of("api/lib/a.jar"), value.paths());
+    assertEquals(List.of(FIXTURE_API_LIB_A_JAR_F4CA5D9B), value.paths());
     assertThrows(UnsupportedOperationException.class, () -> value.paths().clear());
   }
 
   @Test
   void bomProfile007RequiredPayloadAndOrdering() {
-    for (String path : List.of("VERSION", "api/api.jar", "web/web.jar", "operations/batch.jar")) {
+    for (String path :
+        List.of(
+            FIXTURE_VERSION_1FF1675B,
+            FIXTURE_API_API_JAR_B212EFC7,
+            "web/web.jar",
+            "operations/batch.jar")) {
       var f = new Fixture();
       f.files.remove(path);
       refused(f.text());
     }
     var f = new Fixture();
-    f.files.put("VERSION", artifact("VERSION", "16", SHA) + "," + artifact("VERSION", "16", SHA));
+    f.files.put(
+        FIXTURE_VERSION_1FF1675B,
+        artifact(FIXTURE_VERSION_1FF1675B, "16", SHA)
+            + ","
+            + artifact(FIXTURE_VERSION_1FF1675B, "16", SHA));
     refused(f.text());
     refused(
         golden().replace("\"artifacts\":[", "\"artifacts\":[" + artifact("zz", "16", SHA) + ","));
@@ -286,24 +311,29 @@ final class ReleaseInventoryTest {
     f.files.put("api/lib/unknown.txt", artifact("api/lib/unknown.txt", "16", SHA));
     refused(f.text());
     f = new Fixture();
-    f.files.remove("api/lib/storage.jar");
+    f.files.remove(FIXTURE_API_LIB_STORAGE_JAR_EEA9544D);
     refused(f.text());
     for (String size : List.of("15", "17")) {
       f = new Fixture();
-      f.files.put("api/lib/storage.jar", artifact("api/lib/storage.jar", size, SHA));
+      f.files.put(
+          FIXTURE_API_LIB_STORAGE_JAR_EEA9544D,
+          artifact(FIXTURE_API_LIB_STORAGE_JAR_EEA9544D, size, SHA));
       refused(f.text());
     }
     f = new Fixture();
-    f.files.put("api/lib/storage.jar", artifact("api/lib/storage.jar", "16", "a".repeat(64)));
+    f.files.put(
+        FIXTURE_API_LIB_STORAGE_JAR_EEA9544D,
+        artifact(FIXTURE_API_LIB_STORAGE_JAR_EEA9544D, "16", "a".repeat(64)));
     refused(f.text());
     f = new Fixture();
-    f.deps.put("z:a:v", dependency("z:a:v", List.of("api/lib/storage.jar")));
+    f.deps.put("z:a:v", dependency("z:a:v", List.of(FIXTURE_API_LIB_STORAGE_JAR_EEA9544D)));
     refused(f.text());
   }
 
   @Test
   void bomProfile010SharedVersionsAndRequiredRoles() {
-    for (String shared : List.of("bootstrap", "protocol", "storage")) {
+    for (String shared :
+        List.of(FIXTURE_BOOTSTRAP_1DEBF0DD, FIXTURE_PROTOCOL_2FE8E787, FIXTURE_STORAGE_6545EE8B)) {
       // BUG291: the expected GAV remains; the extra GAV must not shadow its runtime classes.
       var shadow = new Fixture();
       String extra = "dev.codex.schubert:schubert-nk-" + shared + ":0.2.0";
@@ -318,7 +348,8 @@ final class ReleaseInventoryTest {
     }
     var f = new Fixture();
     String c = "dev.codex.schubert:schubert-nk-storage:0.1.0";
-    f.deps.put(c, dependency(c, List.of("api/lib/storage.jar", "web/lib/storage.jar")));
+    f.deps.put(
+        c, dependency(c, List.of(FIXTURE_API_LIB_STORAGE_JAR_EEA9544D, "web/lib/storage.jar")));
     f.files.remove("operations/lib/storage.jar");
     refused(f.text());
     f = new Fixture();
@@ -390,7 +421,7 @@ final class ReleaseInventoryTest {
     assertThrows(UnsupportedOperationException.class, () -> value.artifacts().clear());
     assertThrows(UnsupportedOperationException.class, () -> value.dependencies().clear());
     assertThrows(UnsupportedOperationException.class, () -> value.migrations().clear());
-    assertEquals("1.2.3-PG313", value.release());
+    assertEquals(FIXTURE_1_2_3_PG313_33FF1495, value.release());
   }
 
   @Test
@@ -441,14 +472,27 @@ final class ReleaseInventoryTest {
     String c = f.deps.firstKey();
     f.deps.put(
         c,
-        dependency(c, List.of("api/lib/a.jar", "api/lib/b.jar", "api/lib/c.jar", "api/lib/d.jar")));
+        dependency(
+            c,
+            List.of(
+                FIXTURE_API_LIB_A_JAR_F4CA5D9B,
+                "api/lib/b.jar",
+                "api/lib/c.jar",
+                "api/lib/d.jar")));
     refused(f.text());
   }
 
   @Test
   void bomProfile015AllMetadataScalarContracts() {
     for (String field :
-        List.of("release", "app", "protocol", "storage", "bootstrap", "schema", "config"))
+        List.of(
+            "release",
+            "app",
+            FIXTURE_PROTOCOL_2FE8E787,
+            FIXTURE_STORAGE_6545EE8B,
+            FIXTURE_BOOTSTRAP_1DEBF0DD,
+            "schema",
+            "config"))
       refused(golden().replaceFirst("\"" + field + "\":\"[^\"]*\"", "\"" + field + "\":\"\""));
     refused(golden().replace(COMMIT, "b".repeat(39)));
     refused(golden().replace(COMMIT, "A".repeat(40)));
@@ -470,7 +514,8 @@ final class ReleaseInventoryTest {
                   barrier.await(5, TimeUnit.SECONDS);
                   return ReleaseInventory.parse(bytes(golden())).release();
                 }));
-      for (var future : futures) assertEquals("1.2.3-PG313", future.get(5, TimeUnit.SECONDS));
+      for (var future : futures)
+        assertEquals(FIXTURE_1_2_3_PG313_33FF1495, future.get(5, TimeUnit.SECONDS));
     }
   }
 }

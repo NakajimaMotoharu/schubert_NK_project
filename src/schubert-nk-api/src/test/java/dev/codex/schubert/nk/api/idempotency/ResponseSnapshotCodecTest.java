@@ -26,11 +26,14 @@ import org.junit.jupiter.api.Test;
 
 /** PT-IDEM-007/008 independent AES-GCM, bound, tamper and compression-bomb vectors. */
 final class ResponseSnapshotCodecTest {
+  private static final String FIXTURE_LOGRSP01_BEEB0A2B = "LOGRSP01";
+  private static final String FIXTURE_001_A3FEAA64 = "001";
   private static final byte[] NKENC1 = "NKENC1".getBytes(StandardCharsets.US_ASCII);
   private static final byte FORMAT_VERSION = 1;
   private static final UUID MESSAGE_ID = UUID.fromString("00000000-0000-0000-0000-000000000007");
   private static final ResponseSnapshotIdentity IDENTITY =
-      ResponseSnapshotIdentity.authenticated(MESSAGE_ID, "LOGRSP01", "001", 7);
+      ResponseSnapshotIdentity.authenticated(
+          MESSAGE_ID, FIXTURE_LOGRSP01_BEEB0A2B, FIXTURE_001_A3FEAA64, 7);
   private static final byte[] CURRENT_KEY = sequence(0);
   private static final byte[] PREVIOUS_KEY = sequence(32);
   private static final byte[] NONCE = new byte[] {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11};
@@ -43,7 +46,8 @@ final class ResponseSnapshotCodecTest {
     byte[] literal = new byte[312];
     System.arraycopy(java.util.HexFormat.of().parseHex("4e4b515259310041"), 0, literal, 0, 8);
     Arrays.fill(literal, 8, literal.length, (byte) ' ');
-    var identity = ResponseSnapshotIdentity.authenticated(MESSAGE_ID, "QSSRSP01", "001", 7);
+    var identity =
+        ResponseSnapshotIdentity.authenticated(MESSAGE_ID, "QSSRSP01", FIXTURE_001_A3FEAA64, 7);
     byte[] frame = QuestionQueryScopeFrame.wrap(dev.codex.schubert.nk.api.domain.Role.ADMIN, wire);
     try (var codec = fixedCodec("k2", CURRENT_KEY, null, null)) {
       var actual = codec.encrypt(identity, frame);
@@ -106,11 +110,13 @@ final class ResponseSnapshotCodecTest {
         new ResponseSnapshotCodec("k2", CURRENT_KEY, null, null)) {
       EncryptedResponseSnapshot snapshot =
           productionConstructor.encrypt(
-              ResponseSnapshotIdentity.anonymous(MESSAGE_ID, "LGNRSP01", "001"), new byte[0]);
+              ResponseSnapshotIdentity.anonymous(MESSAGE_ID, "LGNRSP01", FIXTURE_001_A3FEAA64),
+              new byte[0]);
       assertArrayEquals(
           new byte[0],
           productionConstructor.decrypt(
-              ResponseSnapshotIdentity.anonymous(MESSAGE_ID, "LGNRSP01", "001"), snapshot));
+              ResponseSnapshotIdentity.anonymous(MESSAGE_ID, "LGNRSP01", FIXTURE_001_A3FEAA64),
+              snapshot));
     }
   }
 
@@ -192,15 +198,28 @@ final class ResponseSnapshotCodecTest {
           codec,
           current,
           ResponseSnapshotIdentity.authenticated(
-              UUID.fromString("00000000-0000-0000-0000-000000000008"), "LOGRSP01", "001", 7));
+              UUID.fromString("00000000-0000-0000-0000-000000000008"),
+              FIXTURE_LOGRSP01_BEEB0A2B,
+              FIXTURE_001_A3FEAA64,
+              7));
       assertInvalidAad(
-          codec, current, ResponseSnapshotIdentity.authenticated(MESSAGE_ID, "QSTRSP01", "001", 7));
+          codec,
+          current,
+          ResponseSnapshotIdentity.authenticated(MESSAGE_ID, "QSTRSP01", FIXTURE_001_A3FEAA64, 7));
       assertInvalidAad(
-          codec, current, ResponseSnapshotIdentity.authenticated(MESSAGE_ID, "LOGRSP01", "002", 7));
+          codec,
+          current,
+          ResponseSnapshotIdentity.authenticated(MESSAGE_ID, FIXTURE_LOGRSP01_BEEB0A2B, "002", 7));
       assertInvalidAad(
-          codec, current, ResponseSnapshotIdentity.authenticated(MESSAGE_ID, "LOGRSP01", "001", 8));
+          codec,
+          current,
+          ResponseSnapshotIdentity.authenticated(
+              MESSAGE_ID, FIXTURE_LOGRSP01_BEEB0A2B, FIXTURE_001_A3FEAA64, 8));
       assertInvalidAad(
-          codec, current, ResponseSnapshotIdentity.anonymous(MESSAGE_ID, "LOGRSP01", "001"));
+          codec,
+          current,
+          ResponseSnapshotIdentity.anonymous(
+              MESSAGE_ID, FIXTURE_LOGRSP01_BEEB0A2B, FIXTURE_001_A3FEAA64));
     }
 
     try (ResponseSnapshotCodec codecWithoutRotation = fixedCodec("k2", CURRENT_KEY, null, null)) {
@@ -233,30 +252,40 @@ final class ResponseSnapshotCodecTest {
   void identitySnapshotKeyAndLifecycleContractsRejectNullAndInvalidValues() {
     assertThrows(
         NullPointerException.class,
-        () -> new ResponseSnapshotIdentity(null, "LOGRSP01", "001", OptionalLong.empty()));
+        () ->
+            new ResponseSnapshotIdentity(
+                null, FIXTURE_LOGRSP01_BEEB0A2B, FIXTURE_001_A3FEAA64, OptionalLong.empty()));
     assertThrows(
         NullPointerException.class,
-        () -> new ResponseSnapshotIdentity(MESSAGE_ID, null, "001", OptionalLong.empty()));
+        () ->
+            new ResponseSnapshotIdentity(
+                MESSAGE_ID, null, FIXTURE_001_A3FEAA64, OptionalLong.empty()));
     assertThrows(
         NullPointerException.class,
-        () -> new ResponseSnapshotIdentity(MESSAGE_ID, "LOGRSP01", null, OptionalLong.empty()));
+        () ->
+            new ResponseSnapshotIdentity(
+                MESSAGE_ID, FIXTURE_LOGRSP01_BEEB0A2B, null, OptionalLong.empty()));
     assertThrows(
         NullPointerException.class,
-        () -> new ResponseSnapshotIdentity(MESSAGE_ID, "LOGRSP01", "001", null));
+        () ->
+            new ResponseSnapshotIdentity(
+                MESSAGE_ID, FIXTURE_LOGRSP01_BEEB0A2B, FIXTURE_001_A3FEAA64, null));
     assertThrows(
         IllegalArgumentException.class,
-        () -> ResponseSnapshotIdentity.anonymous(MESSAGE_ID, "short", "001"));
+        () -> ResponseSnapshotIdentity.anonymous(MESSAGE_ID, "short", FIXTURE_001_A3FEAA64));
     assertThrows(
         IllegalArgumentException.class,
-        () -> ResponseSnapshotIdentity.anonymous(MESSAGE_ID, "LOGRSP01", "v1"));
-    assertThrows(
-        IllegalArgumentException.class,
-        () -> ResponseSnapshotIdentity.authenticated(MESSAGE_ID, "LOGRSP01", "001", 0));
+        () -> ResponseSnapshotIdentity.anonymous(MESSAGE_ID, FIXTURE_LOGRSP01_BEEB0A2B, "v1"));
     assertThrows(
         IllegalArgumentException.class,
         () ->
             ResponseSnapshotIdentity.authenticated(
-                MESSAGE_ID, "LOGRSP01", "001", 1_000_000_000_000L));
+                MESSAGE_ID, FIXTURE_LOGRSP01_BEEB0A2B, FIXTURE_001_A3FEAA64, 0));
+    assertThrows(
+        IllegalArgumentException.class,
+        () ->
+            ResponseSnapshotIdentity.authenticated(
+                MESSAGE_ID, FIXTURE_LOGRSP01_BEEB0A2B, FIXTURE_001_A3FEAA64, 1_000_000_000_000L));
 
     assertThrows(
         NullPointerException.class, () -> new EncryptedResponseSnapshot(null, new byte[29]));

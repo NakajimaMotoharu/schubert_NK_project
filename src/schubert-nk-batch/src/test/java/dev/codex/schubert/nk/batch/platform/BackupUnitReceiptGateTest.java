@@ -15,6 +15,16 @@ import org.junit.jupiter.api.Test;
 
 /** SS341/343 fixed 18-field vectors; no real Unit start or fabricated kernel acceptance. */
 final class BackupUnitReceiptGateTest {
+  private static final String FIXTURE_ACTIVE_DB0FB2BF = "active";
+  private static final String FIXTURE_FAILED_33D04BD7 = "failed";
+  private static final String FIXTURE_EXITED_3D0FE3B1 = "exited";
+  private static final String FIXTURE_SUCCESS_68E7A699 = "success";
+  private static final String FIXTURE_EXIT_CODE_BC9E614D = "exit-code";
+  private static final String FIXTURE_DEAD_0453462F = "dead";
+  private static final String FIXTURE_ROOT_956E6E33 = "root";
+  private static final String FIXTURE_BUS_3490092C = "bus";
+  private static final String FIXTURE_KERNEL_0CFA9728 = "kernel";
+
   @Test
   void isscomp009StoppedGcRetainsRealZeroAndNonZeroButRejectsPartialAndForeignState()
       throws Exception {
@@ -40,13 +50,13 @@ final class BackupUnitReceiptGateTest {
       actual.set(
           state(
               FRESH,
-              code == 0 ? "active" : "failed",
-              code == 0 ? "exited" : "failed",
+              code == 0 ? FIXTURE_ACTIVE_DB0FB2BF : FIXTURE_FAILED_33D04BD7,
+              code == 0 ? FIXTURE_EXITED_3D0FE3B1 : FIXTURE_FAILED_33D04BD7,
               "",
               "0",
               "1",
               Integer.toString(code),
-              code == 0 ? "success" : "exit-code"));
+              code == 0 ? FIXTURE_SUCCESS_68E7A699 : FIXTURE_EXIT_CODE_BC9E614D));
       var receipt = gate.observeResult(baseline).orElseThrow();
       actual.set(
           InspectorUnitSnapshot.parse(
@@ -58,12 +68,12 @@ final class BackupUnitReceiptGateTest {
           state(
               FRESH,
               "inactive",
-              "dead",
+              FIXTURE_DEAD_0453462F,
               "",
               "0",
               "1",
               Integer.toString(code),
-              code == 0 ? "success" : "exit-code"));
+              code == 0 ? FIXTURE_SUCCESS_68E7A699 : FIXTURE_EXIT_CODE_BC9E614D));
       gate.requireStoppedResult(baseline, receipt);
       List<String> corrupt =
           List.of(
@@ -215,11 +225,20 @@ final class BackupUnitReceiptGateTest {
   }
 
   private static InspectorUnitSnapshot oldState() {
-    return state(OLD, "inactive", "dead", "", "0", "1", "0", "success");
+    return state(
+        OLD, "inactive", FIXTURE_DEAD_0453462F, "", "0", "1", "0", FIXTURE_SUCCESS_68E7A699);
   }
 
   private static InspectorUnitSnapshot fresh() {
-    return state(FRESH, "active", "exited", "", "0", "1", "0", "success");
+    return state(
+        FRESH,
+        FIXTURE_ACTIVE_DB0FB2BF,
+        FIXTURE_EXITED_3D0FE3B1,
+        "",
+        "0",
+        "1",
+        "0",
+        FIXTURE_SUCCESS_68E7A699);
   }
 
   @Test
@@ -272,7 +291,16 @@ final class BackupUnitReceiptGateTest {
   @Test
   void bgate009FreshFailureIsTerminalButNeverSuccessOrUnknown() throws Exception {
     for (String status : List.of("1", "255")) {
-      var failed = state(FRESH, "failed", "failed", "", "0", "1", status, "exit-code");
+      var failed =
+          state(
+              FRESH,
+              FIXTURE_FAILED_33D04BD7,
+              FIXTURE_FAILED_33D04BD7,
+              "",
+              "0",
+              "1",
+              status,
+              FIXTURE_EXIT_CODE_BC9E614D);
       var script = new Script(oldState(), failed);
       var gate = script.gate();
       var terminal = gate.observeTerminal(gate.capture()).orElseThrow();
@@ -293,19 +321,77 @@ final class BackupUnitReceiptGateTest {
     for (var candidate :
         List.of(
             oldState(),
-            state("", "inactive", "dead", "", "0", "1", "1", "exit-code"),
-            state(FRESH, "activating", "start", "1", "123", "1", "1", "exit-code"),
-            state(FRESH, "failed", "failed", "", "0", "2", "15", "signal"),
-            state(FRESH, "failed", "failed", "", "0", "1", "1", "timeout"),
-            state(FRESH, "failed", "failed", "", "0", "1", "0", "exit-code"),
-            state(FRESH, "active", "exited", "", "0", "1", "1", "exit-code"),
-            state(FRESH, "failed", "dead", "", "0", "1", "1", "exit-code"))) {
+            state(
+                "",
+                "inactive",
+                FIXTURE_DEAD_0453462F,
+                "",
+                "0",
+                "1",
+                "1",
+                FIXTURE_EXIT_CODE_BC9E614D),
+            state(FRESH, "activating", "start", "1", "123", "1", "1", FIXTURE_EXIT_CODE_BC9E614D),
+            state(
+                FRESH,
+                FIXTURE_FAILED_33D04BD7,
+                FIXTURE_FAILED_33D04BD7,
+                "",
+                "0",
+                "2",
+                "15",
+                "signal"),
+            state(
+                FRESH,
+                FIXTURE_FAILED_33D04BD7,
+                FIXTURE_FAILED_33D04BD7,
+                "",
+                "0",
+                "1",
+                "1",
+                "timeout"),
+            state(
+                FRESH,
+                FIXTURE_FAILED_33D04BD7,
+                FIXTURE_FAILED_33D04BD7,
+                "",
+                "0",
+                "1",
+                "0",
+                FIXTURE_EXIT_CODE_BC9E614D),
+            state(
+                FRESH,
+                FIXTURE_ACTIVE_DB0FB2BF,
+                FIXTURE_EXITED_3D0FE3B1,
+                "",
+                "0",
+                "1",
+                "1",
+                FIXTURE_EXIT_CODE_BC9E614D),
+            state(
+                FRESH,
+                FIXTURE_FAILED_33D04BD7,
+                FIXTURE_DEAD_0453462F,
+                "",
+                "0",
+                "1",
+                "1",
+                FIXTURE_EXIT_CODE_BC9E614D))) {
       var script = new Script(oldState(), candidate);
       var unknown = script.gate();
       assertTrue(unknown.observeTerminal(unknown.capture()).isEmpty());
     }
     var drift =
-        new Script(oldState(), state(FRESH, "failed", "failed", "", "0", "1", "1", "exit-code"));
+        new Script(
+            oldState(),
+            state(
+                FRESH,
+                FIXTURE_FAILED_33D04BD7,
+                FIXTURE_FAILED_33D04BD7,
+                "",
+                "0",
+                "1",
+                "1",
+                FIXTURE_EXIT_CODE_BC9E614D));
     drift.kernel = List.of(Optional.of(oldState()), Optional.of(fresh()));
     var changed = drift.gate();
     assertTrue(changed.observeTerminal(changed.capture()).isEmpty());
@@ -334,17 +420,17 @@ final class BackupUnitReceiptGateTest {
     }
 
     void root() throws IOException {
-      calls.add("root");
+      calls.add(FIXTURE_ROOT_956E6E33);
       if (++roots == rootFailureAt) throw new IOException("public changed root");
     }
 
     Optional<InspectorUnitSnapshot> bus() {
-      calls.add("bus");
+      calls.add(FIXTURE_BUS_3490092C);
       return this.bus.get(b++);
     }
 
     Optional<InspectorUnitSnapshot> kernel() throws IOException {
-      calls.add("kernel");
+      calls.add(FIXTURE_KERNEL_0CFA9728);
       if (kernelFailure) throw new IOException("public kernel fault");
       return this.kernel.get(k++);
     }
@@ -359,10 +445,27 @@ final class BackupUnitReceiptGateTest {
     var s = new Script(oldState(), fresh());
     var gate = s.gate();
     var before = gate.capture();
-    assertEquals(List.of("root", "bus", "kernel", "bus", "root"), s.calls);
+    assertEquals(
+        List.of(
+            FIXTURE_ROOT_956E6E33,
+            FIXTURE_BUS_3490092C,
+            FIXTURE_KERNEL_0CFA9728,
+            FIXTURE_BUS_3490092C,
+            FIXTURE_ROOT_956E6E33),
+        s.calls);
     assertTrue(gate.observe(before).isPresent());
     assertEquals(
-        List.of("root", "bus", "kernel", "bus", "root", "root", "bus", "kernel", "bus", "root"),
+        List.of(
+            FIXTURE_ROOT_956E6E33,
+            FIXTURE_BUS_3490092C,
+            FIXTURE_KERNEL_0CFA9728,
+            FIXTURE_BUS_3490092C,
+            FIXTURE_ROOT_956E6E33,
+            FIXTURE_ROOT_956E6E33,
+            FIXTURE_BUS_3490092C,
+            FIXTURE_KERNEL_0CFA9728,
+            FIXTURE_BUS_3490092C,
+            FIXTURE_ROOT_956E6E33),
         s.calls);
   }
 
@@ -390,10 +493,29 @@ final class BackupUnitReceiptGateTest {
 
   @Test
   void bgate003RunningOldInvocationAndFailedReceiptStayEmpty() throws Exception {
-    var running = state(FRESH, "activating", "start", "1", "123", "1", "0", "success");
+    var running =
+        state(FRESH, "activating", "start", "1", "123", "1", "0", FIXTURE_SUCCESS_68E7A699);
     var noNew = oldState();
-    var status10 = state(FRESH, "active", "exited", "", "0", "1", "10", "success");
-    var failed = state(FRESH, "failed", "failed", "", "0", "1", "1", "exit-code");
+    var status10 =
+        state(
+            FRESH,
+            FIXTURE_ACTIVE_DB0FB2BF,
+            FIXTURE_EXITED_3D0FE3B1,
+            "",
+            "0",
+            "1",
+            "10",
+            FIXTURE_SUCCESS_68E7A699);
+    var failed =
+        state(
+            FRESH,
+            FIXTURE_FAILED_33D04BD7,
+            FIXTURE_FAILED_33D04BD7,
+            "",
+            "0",
+            "1",
+            "1",
+            FIXTURE_EXIT_CODE_BC9E614D);
     for (var candidate : List.of(running, noNew, status10, failed)) {
       var s = new Script(oldState(), candidate);
       var gate = s.gate();
@@ -416,7 +538,16 @@ final class BackupUnitReceiptGateTest {
     changedKernel.kernel =
         List.of(
             Optional.of(oldState()),
-            Optional.of(state(OTHER, "active", "exited", "", "0", "1", "0", "success")));
+            Optional.of(
+                state(
+                    OTHER,
+                    FIXTURE_ACTIVE_DB0FB2BF,
+                    FIXTURE_EXITED_3D0FE3B1,
+                    "",
+                    "0",
+                    "1",
+                    "0",
+                    FIXTURE_SUCCESS_68E7A699)));
     var g2 = changedKernel.gate();
     assertTrue(g2.observe(g2.capture()).isEmpty());
     for (Optional<InspectorUnitSnapshot> after :
@@ -525,7 +656,8 @@ final class BackupUnitReceiptGateTest {
         () -> BackupUnitReceiptGate.create(context, wrong, script::bus, script::kernel));
     var injected = BackupUnitReceiptGate.create(context, expected, script::bus, script::kernel);
     assertNotNull(injected.capture());
-    assertEquals(List.of("bus", "kernel", "bus"), script.calls);
+    assertEquals(
+        List.of(FIXTURE_BUS_3490092C, FIXTURE_KERNEL_0CFA9728, FIXTURE_BUS_3490092C), script.calls);
   }
 
   @Test
@@ -539,7 +671,16 @@ final class BackupUnitReceiptGateTest {
             Optional.of(oldState()),
             Optional.of(oldState()),
             Optional.of(fresh()),
-            Optional.of(state(OTHER, "active", "exited", "", "0", "1", "0", "success")));
+            Optional.of(
+                state(
+                    OTHER,
+                    FIXTURE_ACTIVE_DB0FB2BF,
+                    FIXTURE_EXITED_3D0FE3B1,
+                    "",
+                    "0",
+                    "1",
+                    "0",
+                    FIXTURE_SUCCESS_68E7A699)));
     var g2 = late.gate();
     assertTrue(g2.observe(g2.capture()).isEmpty());
   }

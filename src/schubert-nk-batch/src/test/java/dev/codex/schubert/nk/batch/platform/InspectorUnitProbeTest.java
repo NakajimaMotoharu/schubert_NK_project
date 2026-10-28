@@ -38,18 +38,26 @@ import org.junit.jupiter.api.Test;
 
 /** NK-OPS-001/OPS009/UI251/SS341 7.4; PG167/SSC060; UNIT009..016, 018/023. */
 final class InspectorUnitProbeTest {
+  private static final String FIXTURE_START_A92AE961 = "start";
+  private static final String FIXTURE_GET_STDERR_32508F78 = "get.stderr";
+  private static final String FIXTURE_STDIN_CLOSE_19580EAC = "stdin.close";
+  private static final String FIXTURE_STDERR_CLOSE_3758A092 = "stderr.close";
+  private static final String FIXTURE_STDOUT_READ_BCED14C9 = "stdout.read";
+  private static final String FIXTURE_STDOUT_CLOSE_7CEE1B52 = "stdout.close";
+  private static final String FIXTURE_STATE_55AF5B1D = "state";
+  private static final String FIXTURE_PUBLIC_PRIMARY_DBDAEFC3 = "public primary";
   private static final List<String> OPERATIONS =
       List.of(
-          "start",
+          FIXTURE_START_A92AE961,
           "get.stdout",
           "get.stdin",
-          "get.stderr",
-          "stdin.close",
-          "stderr.close",
+          FIXTURE_GET_STDERR_32508F78,
+          FIXTURE_STDIN_CLOSE_19580EAC,
+          FIXTURE_STDERR_CLOSE_3758A092,
           "wait",
           "exit",
-          "stdout.read",
-          "stdout.close",
+          FIXTURE_STDOUT_READ_BCED14C9,
+          FIXTURE_STDOUT_CLOSE_7CEE1B52,
           "alive");
 
   @Test
@@ -73,7 +81,7 @@ final class InspectorUnitProbeTest {
                 var expected = new ArrayList<>(processes ? processCommand() : stateCommand());
                 expected.set(expected.size() - 1, "schubert-nk-backup.service");
                 assertEquals(expected, command);
-                child.event("start");
+                child.event(FIXTURE_START_A92AE961);
                 return child;
               },
               InspectorUnitSnapshot.Target.BACKUP);
@@ -100,7 +108,7 @@ final class InspectorUnitProbeTest {
       var reader =
           new InspectorUnitProbe.NativeReader(
               command -> {
-                child.event("start");
+                child.event(FIXTURE_START_A92AE961);
                 assertEquals(processes ? processCommand() : stateCommand(), command);
                 assertThrows(UnsupportedOperationException.class, () -> command.add("unsafe"));
                 return child;
@@ -118,7 +126,7 @@ final class InspectorUnitProbeTest {
     }
     var s = new Script();
     assertTrue(new InspectorUnitProbe(s).read().quiescent());
-    assertEquals(List.of("state"), s.calls);
+    assertEquals(List.of(FIXTURE_STATE_55AF5B1D), s.calls);
     s.wiped();
   }
 
@@ -130,7 +138,7 @@ final class InspectorUnitProbeTest {
       var probe = new InspectorUnitProbe(s);
       OptionalInt actual = probe.completionAfter(Optional.empty());
       assertEquals(OptionalInt.of(status), actual);
-      assertEquals(List.of("state", "processes", "state"), s.calls);
+      assertEquals(List.of(FIXTURE_STATE_55AF5B1D, "processes", FIXTURE_STATE_55AF5B1D), s.calls);
       s.wiped();
       Path target = Path.of("target", "inspector-unit-traces");
       Files.createDirectories(target);
@@ -148,7 +156,7 @@ final class InspectorUnitProbeTest {
     s = new Script();
     s.states = List.of(with("MainPID", "1"));
     assertTrue(new InspectorUnitProbe(s).completionAfter(Optional.empty()).isEmpty());
-    assertEquals(List.of("state"), s.calls);
+    assertEquals(List.of(FIXTURE_STATE_55AF5B1D), s.calls);
     s.wiped();
     s = new Script();
     assertEquals(
@@ -179,7 +187,7 @@ final class InspectorUnitProbeTest {
       var s = new Script();
       s.states = List.of(GOLDEN, with(entry.getKey(), entry.getValue()));
       assertTrue(new InspectorUnitProbe(s).quiescent().isEmpty(), entry.getKey());
-      assertEquals(List.of("state", "processes", "state"), s.calls);
+      assertEquals(List.of(FIXTURE_STATE_55AF5B1D, "processes", FIXTURE_STATE_55AF5B1D), s.calls);
       s.wiped();
     }
     for (String key : List.of("Id", "LoadState", "Type", "Restart", "KillMode", "SendSIGKILL")) {
@@ -193,13 +201,13 @@ final class InspectorUnitProbeTest {
       var s = new Script();
       s.processes = wrong.getBytes(StandardCharsets.US_ASCII);
       assertTrue(new InspectorUnitProbe(s).quiescent().isEmpty());
-      assertEquals(List.of("state", "processes"), s.calls);
+      assertEquals(List.of(FIXTURE_STATE_55AF5B1D, "processes"), s.calls);
       s.wiped();
     }
     var s = new Script();
     s.states = List.of(with("Job", "1"));
     assertTrue(new InspectorUnitProbe(s).quiescent().isEmpty());
-    assertEquals(List.of("state"), s.calls);
+    assertEquals(List.of(FIXTURE_STATE_55AF5B1D), s.calls);
     s.wiped();
   }
 
@@ -216,7 +224,7 @@ final class InspectorUnitProbeTest {
       absent.wiped();
       var runtime = new Script();
       runtime.failAt = position;
-      runtime.runtime = new IllegalStateException("public primary");
+      runtime.runtime = new IllegalStateException(FIXTURE_PUBLIC_PRIMARY_DBDAEFC3);
       assertSame(
           runtime.runtime,
           assertThrows(
@@ -229,7 +237,7 @@ final class InspectorUnitProbeTest {
       failed(StopGateFailure.COMMAND_FAILURE, () -> reader(child).readState());
       child.allClosed();
       child.wiped();
-      assertFalse(child.counts.containsKey("stdout.read"));
+      assertFalse(child.counts.containsKey(FIXTURE_STDOUT_READ_BCED14C9));
     }
     failed(
         StopGateFailure.COMMAND_FAILURE,
@@ -286,7 +294,7 @@ final class InspectorUnitProbeTest {
     assertThrows(NullPointerException.class, () -> reader(missing).readState());
     missing.allClosed();
     child = child();
-    child.ioFailures.add("stdout.read");
+    child.ioFailures.add(FIXTURE_STDOUT_READ_BCED14C9);
     final var broken = child;
     failed(StopGateFailure.COMMAND_FAILURE, () -> reader(broken).readState());
     broken.allClosed();
@@ -379,38 +387,47 @@ final class InspectorUnitProbeTest {
     }
     for (String point : OPERATIONS) {
       var child = child();
-      var primary = new IllegalStateException("public primary");
+      var primary = new IllegalStateException(FIXTURE_PUBLIC_PRIMARY_DBDAEFC3);
       child.hook =
           (name, count) -> {
             if (name.equals(point) && count == 1) throw primary;
           };
       assertSame(
           primary, assertThrows(IllegalStateException.class, () -> reader(child).readState()));
-      if (!Set.of("start", "get.stdout", "get.stdin", "get.stderr").contains(point))
-        child.allClosed();
+      if (!Set.of(FIXTURE_START_A92AE961, "get.stdout", "get.stdin", FIXTURE_GET_STDERR_32508F78)
+          .contains(point)) child.allClosed();
       child.wiped();
     }
-    for (String failing : List.of("stdout.read", "stdout.close", "stdin.close", "stderr.close")) {
+    for (String failing :
+        List.of(
+            FIXTURE_STDOUT_READ_BCED14C9,
+            FIXTURE_STDOUT_CLOSE_7CEE1B52,
+            FIXTURE_STDIN_CLOSE_19580EAC,
+            FIXTURE_STDERR_CLOSE_3758A092)) {
       var child = child();
       child.ioFailures.add(failing);
       failed(StopGateFailure.COMMAND_FAILURE, () -> reader(child).readState());
       child.allClosed();
       child.wiped();
     }
-    for (String cleanup : List.of("stdout.close", "stdin.close", "stderr.close"))
+    for (String cleanup :
+        List.of(
+            FIXTURE_STDOUT_CLOSE_7CEE1B52,
+            FIXTURE_STDIN_CLOSE_19580EAC,
+            FIXTURE_STDERR_CLOSE_3758A092))
       for (Throwable primary :
           List.of(
-              new IllegalStateException("public primary"),
-              new NullPointerException("public primary"),
-              new AssertionError("public primary"))) {
+              new IllegalStateException(FIXTURE_PUBLIC_PRIMARY_DBDAEFC3),
+              new NullPointerException(FIXTURE_PUBLIC_PRIMARY_DBDAEFC3),
+              new AssertionError(FIXTURE_PUBLIC_PRIMARY_DBDAEFC3))) {
         var child = child();
         child.ioFailures.add(cleanup);
         // BUG190: stderr must already be owned when the primary failure occurs.
         String point =
             switch (cleanup) {
-              case "stdout.close" -> "stdout.read";
-              case "stdin.close" -> "get.stderr";
-              default -> "stdin.close";
+              case FIXTURE_STDOUT_CLOSE_7CEE1B52 -> FIXTURE_STDOUT_READ_BCED14C9;
+              case FIXTURE_STDIN_CLOSE_19580EAC -> FIXTURE_GET_STDERR_32508F78;
+              default -> FIXTURE_STDIN_CLOSE_19580EAC;
             };
         child.hook =
             (name, count) -> {
@@ -424,7 +441,7 @@ final class InspectorUnitProbeTest {
         assertEquals(1, primary.getSuppressed().length);
         assertEquals(1, child.output.closed);
         assertEquals(1, child.input.closed);
-        assertEquals(cleanup.equals("stdin.close") ? 0 : 1, child.error.closed);
+        assertEquals(cleanup.equals(FIXTURE_STDIN_CLOSE_19580EAC) ? 0 : 1, child.error.closed);
         for (Throwable suppressed : primary.getSuppressed()) {
           assertInstanceOf(StopGateException.class, suppressed);
           assertEquals("application stop check failed", suppressed.getMessage());
@@ -433,18 +450,22 @@ final class InspectorUnitProbeTest {
         child.wiped();
       }
     // BUG195/YKT154: repeated unknown throwable must not trigger TWR self-suppression.
-    for (String cleanup : List.of("stdout.close", "stdin.close", "stderr.close"))
+    for (String cleanup :
+        List.of(
+            FIXTURE_STDOUT_CLOSE_7CEE1B52,
+            FIXTURE_STDIN_CLOSE_19580EAC,
+            FIXTURE_STDERR_CLOSE_3758A092))
       for (Throwable primary :
           List.of(
-              new IllegalStateException("public primary"),
-              new NullPointerException("public primary"),
-              new AssertionError("public primary"))) {
+              new IllegalStateException(FIXTURE_PUBLIC_PRIMARY_DBDAEFC3),
+              new NullPointerException(FIXTURE_PUBLIC_PRIMARY_DBDAEFC3),
+              new AssertionError(FIXTURE_PUBLIC_PRIMARY_DBDAEFC3))) {
         var repeated = child();
         String point =
             switch (cleanup) {
-              case "stdout.close" -> "stdout.read";
-              case "stdin.close" -> "get.stderr";
-              default -> "stdin.close";
+              case FIXTURE_STDOUT_CLOSE_7CEE1B52 -> FIXTURE_STDOUT_READ_BCED14C9;
+              case FIXTURE_STDIN_CLOSE_19580EAC -> FIXTURE_GET_STDERR_32508F78;
+              default -> FIXTURE_STDIN_CLOSE_19580EAC;
             };
         repeated.hook =
             (name, count) -> {
@@ -461,7 +482,7 @@ final class InspectorUnitProbeTest {
         assertNull(secondary.getCause());
         assertEquals(1, repeated.output.closed);
         assertEquals(1, repeated.input.closed);
-        assertEquals(cleanup.equals("stdin.close") ? 0 : 1, repeated.error.closed);
+        assertEquals(cleanup.equals(FIXTURE_STDIN_CLOSE_19580EAC) ? 0 : 1, repeated.error.closed);
         repeated.wiped();
       }
     // I/O, timeout and interrupted known primaries cannot hide unknown/fatal cleanup.
@@ -472,12 +493,12 @@ final class InspectorUnitProbeTest {
               new NullPointerException("public cleanup"),
               new AssertionError("public cleanup"))) {
         var compound = child();
-        if (known == 0) compound.ioFailures.add("stdout.read");
+        if (known == 0) compound.ioFailures.add(FIXTURE_STDOUT_READ_BCED14C9);
         if (known == 1) compound.completed = false;
         if (known == 2) compound.waitInterrupt = true;
         compound.hook =
             (name, count) -> {
-              if (name.equals("stdout.close")) {
+              if (name.equals(FIXTURE_STDOUT_CLOSE_7CEE1B52)) {
                 if (cleanup instanceof RuntimeException failure) throw failure;
                 throw (Error) cleanup;
               }
@@ -493,7 +514,11 @@ final class InspectorUnitProbeTest {
         }
       }
     var child = child();
-    child.ioFailures.addAll(Set.of("stdout.close", "stdin.close", "stderr.close"));
+    child.ioFailures.addAll(
+        Set.of(
+            FIXTURE_STDOUT_CLOSE_7CEE1B52,
+            FIXTURE_STDIN_CLOSE_19580EAC,
+            FIXTURE_STDERR_CLOSE_3758A092));
     failed(StopGateFailure.COMMAND_FAILURE, () -> reader(child).readState());
     child.allClosed();
   }
@@ -769,7 +794,7 @@ final class InspectorUnitProbeTest {
   private static InspectorUnitProbe.NativeReader reader(Child child) {
     return new InspectorUnitProbe.NativeReader(
         command -> {
-          child.event("start");
+          child.event(FIXTURE_START_A92AE961);
           return child;
         });
   }

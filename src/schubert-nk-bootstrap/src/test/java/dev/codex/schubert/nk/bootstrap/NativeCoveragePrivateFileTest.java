@@ -27,6 +27,8 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** Actual host held inode byte/owner oracle; not the native outer fixed-path/process admission. */
 final class NativeCoveragePrivateFileTest {
+  private static final String FIXTURE_REPLACE_197D1A17 = "replace";
+  private static final String FIXTURE_NLINK_3DDD828B = "nlink";
   private static final byte[] GOLDEN = {1, (byte) 0xc0, (byte) 0xc0, 0x10, 7, 0x10, 1};
   private static final String NAME = "1234567890abcdef1234567890abcdef.terminal.exec";
   @TempDir Path root;
@@ -186,7 +188,7 @@ final class NativeCoveragePrivateFileTest {
   @Test
   void nexport193004CloseSyncAndNamespaceReplacementAreNonSuccessAndPreserveBytes()
       throws Exception {
-    for (String fault : List.of("close", "sync", "replace")) {
+    for (String fault : List.of("close", "sync", FIXTURE_REPLACE_197D1A17)) {
       var calls = new Calls();
       calls.fault = fault;
       String name = fault + ".exec";
@@ -200,8 +202,10 @@ final class NativeCoveragePrivateFileTest {
         assertArrayEquals(
             GOLDEN,
             Files.readAllBytes(
-                fault.equals("replace") ? root.resolve(name + ".saved") : root.resolve(name)));
-        if (fault.equals("replace"))
+                fault.equals(FIXTURE_REPLACE_197D1A17)
+                    ? root.resolve(name + ".saved")
+                    : root.resolve(name)));
+        if (fault.equals(FIXTURE_REPLACE_197D1A17))
           assertArrayEquals(new byte[] {9}, Files.readAllBytes(root.resolve(name)));
         assertEquals(1, calls.live.size());
         calls.fault = "";
@@ -221,7 +225,18 @@ final class NativeCoveragePrivateFileTest {
       throws Exception {
     var golden =
         Map.<String, Object>of(
-            "uid", 999, "gid", 981, "mode", 0100600, "nlink", 1, "dev", 17L, "ino", 23L);
+            "uid",
+            999,
+            "gid",
+            981,
+            "mode",
+            0100600,
+            FIXTURE_NLINK_3DDD828B,
+            1,
+            "dev",
+            17L,
+            "ino",
+            23L);
     assertEquals(
         new NativeCoveragePrivateFile.Identity(999, 981, 0100600, 1, 17, 23),
         NativeCoveragePrivateFile.checked(golden, new byte[0], 999, 981, 0100600));
@@ -251,7 +266,7 @@ final class NativeCoveragePrivateFileTest {
     for (String field : golden.keySet()) {
       var bad = new HashMap<>(golden);
       switch (field) {
-        case "uid", "gid", "mode", "nlink" -> bad.put(field, 0);
+        case "uid", "gid", "mode", FIXTURE_NLINK_3DDD828B -> bad.put(field, 0);
         case "dev", "ino" -> bad.put(field, 0L);
         default -> fail("unregistered fixture field");
       }
@@ -261,7 +276,7 @@ final class NativeCoveragePrivateFileTest {
           field);
     }
     var linked = new HashMap<>(golden);
-    linked.put("nlink", 2);
+    linked.put(FIXTURE_NLINK_3DDD828B, 2);
     assertThrows(
         IOException.class,
         () -> NativeCoveragePrivateFile.checked(linked, new byte[0], 999, 981, 0100600));
@@ -270,7 +285,7 @@ final class NativeCoveragePrivateFileTest {
     assertEquals(
         new NativeCoveragePrivateFile.Identity(999, 981, 040700, 2, 17, 23),
         NativeCoveragePrivateFile.checked(directory, new byte[0], 999, 981, 040700));
-    directory.put("nlink", 1);
+    directory.put(FIXTURE_NLINK_3DDD828B, 1);
     assertThrows(
         IOException.class,
         () -> NativeCoveragePrivateFile.checked(directory, new byte[0], 999, 981, 040700));
@@ -347,7 +362,7 @@ final class NativeCoveragePrivateFileTest {
         createdFd = -1; // The consumed descriptor number may immediately be reused for readback.
         if (fault.equals("close"))
           throw new StorageIoException(StorageIoException.Reason.UNAVAILABLE);
-        if (fault.equals("replace")) {
+        if (fault.equals(FIXTURE_REPLACE_197D1A17)) {
           try {
             Files.move(output, output.resolveSibling(output.getFileName() + ".saved"));
             Files.write(output, new byte[] {9});

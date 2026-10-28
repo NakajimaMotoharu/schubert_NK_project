@@ -33,9 +33,11 @@ import org.junit.jupiter.api.Test;
  * readiness or native registration evidence.
  */
 final class ApiSyncRequestDispatcherTest {
+  private static final String FIXTURE_LGNREQ01_217C66A4 = "LGNREQ01";
+  private static final String FIXTURE_LGNRSP01_A267E8A2 = "LGNRSP01";
   private static final List<String> IDS =
       List.of(
-          "LGNREQ01",
+          FIXTURE_LGNREQ01_217C66A4,
           "LOGREQ01",
           "GAMREQ01",
           "SPKREQ01",
@@ -96,7 +98,7 @@ final class ApiSyncRequestDispatcherTest {
       input.remove(id);
       assertThrows(IOException.class, () -> new ApiSyncRequestDispatcher(input));
     }
-    for (String id : List.of("LGNRSP01", "WLGEVT01", "QWKREQ01", "ZZZREQ01", "")) {
+    for (String id : List.of(FIXTURE_LGNRSP01_A267E8A2, "WLGEVT01", "QWKREQ01", "ZZZREQ01", "")) {
       var input = registrations();
       input.put(id, r -> new byte[0]);
       assertThrows(IOException.class, () -> new ApiSyncRequestDispatcher(input));
@@ -108,22 +110,23 @@ final class ApiSyncRequestDispatcherTest {
   void nullBoundaryAndDelegateNullRejectWithoutSuccess() throws Exception {
     assertThrows(NullPointerException.class, () -> new ApiSyncRequestDispatcher(null));
     var input = registrations();
-    input.put("LGNREQ01", null);
+    input.put(FIXTURE_LGNREQ01_217C66A4, null);
     assertThrows(NullPointerException.class, () -> new ApiSyncRequestDispatcher(input));
     var nullKey = registrations();
     nullKey.put(null, r -> new byte[0]);
     assertThrows(NullPointerException.class, () -> new ApiSyncRequestDispatcher(nullKey));
     var delegates = registrations();
-    delegates.put("LGNREQ01", r -> null);
+    delegates.put(FIXTURE_LGNREQ01_217C66A4, r -> null);
     var router = new ApiSyncRequestDispatcher(delegates);
     assertThrows(NullPointerException.class, () -> router.process(null));
-    assertThrows(NullPointerException.class, () -> router.process(request("LGNREQ01")));
+    assertThrows(
+        NullPointerException.class, () -> router.process(request(FIXTURE_LGNREQ01_217C66A4)));
   }
 
   @Test
   void validResponseOrInternalRouteCannotBeConsumedAsRequest() throws Exception {
     var router = new ApiSyncRequestDispatcher(registrations());
-    for (String id : List.of("LGNRSP01", "WLGEVT01", "QWKREQ01", "ZZZREQ01"))
+    for (String id : List.of(FIXTURE_LGNRSP01_A267E8A2, "WLGEVT01", "QWKREQ01", "ZZZREQ01"))
       assertThrows(TemporaryInfrastructureException.class, () -> router.process(request(id)));
   }
 
@@ -133,7 +136,7 @@ final class ApiSyncRequestDispatcherTest {
     var failure = new IllegalStateException("public fixture");
     var fatal = new AssertionError("public fatal");
     input.put(
-        "LGNREQ01",
+        FIXTURE_LGNREQ01_217C66A4,
         r -> {
           throw failure;
         });
@@ -145,7 +148,8 @@ final class ApiSyncRequestDispatcherTest {
     var router = new ApiSyncRequestDispatcher(input);
     assertSame(
         failure,
-        assertThrows(IllegalStateException.class, () -> router.process(request("LGNREQ01"))));
+        assertThrows(
+            IllegalStateException.class, () -> router.process(request(FIXTURE_LGNREQ01_217C66A4))));
     assertSame(
         fatal, assertThrows(AssertionError.class, () -> router.process(request("LOGREQ01"))));
   }
@@ -164,10 +168,10 @@ final class ApiSyncRequestDispatcherTest {
   static WireMessage<FixedPayload> request(String id) {
     var message = new UUID(0, 1);
     boolean event = Set.of("WLGEVT01", "QWKREQ01").contains(id);
-    boolean response = id.equals("LGNRSP01");
+    boolean response = id.equals(FIXTURE_LGNRSP01_A267E8A2);
     var kind = event ? MessageKind.EVENT : response ? MessageKind.RESPONSE : MessageKind.REQUEST;
     var context =
-        event || Set.of("LGNREQ01", "LGNRSP01").contains(id)
+        event || Set.of(FIXTURE_LGNREQ01_217C66A4, FIXTURE_LGNRSP01_A267E8A2).contains(id)
             ? Optional.<AuthenticationContext>empty()
             : Optional.of(AuthenticationContext.of("a".repeat(64)));
     return new WireMessage<>(

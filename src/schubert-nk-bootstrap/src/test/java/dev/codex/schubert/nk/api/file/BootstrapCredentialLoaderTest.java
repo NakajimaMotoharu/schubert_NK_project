@@ -16,13 +16,20 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** Fixed bootstrap-only names/independent golden, held-inode faults/zero. SS343/SSC188/BOOT007. */
 final class BootstrapCredentialLoaderTest {
+  private static final String FIXTURE_BOOTSTRAP_ADMIN_USERNAME_E46B3E2D =
+      "bootstrap-admin-username";
+  private static final String FIXTURE_BOOTSTRAP_ADMIN_PASSWORD_55E7842A =
+      "bootstrap-admin-password";
   @TempDir Path temporary;
 
   @Test
   void fixedGoldenUsernameAndPasswordConsumeOnlyOwnedCopies() throws Exception {
     try (var f = new Fixture(temporary)) {
       for (boolean username : List.of(true, false)) {
-        String name = username ? "bootstrap-admin-username" : "bootstrap-admin-password";
+        String name =
+            username
+                ? FIXTURE_BOOTSTRAP_ADMIN_USERNAME_E46B3E2D
+                : FIXTURE_BOOTSTRAP_ADMIN_PASSWORD_55E7842A;
         String expected = username ? "Initial.Admin" : "synthetic-credential";
         byte[] golden = (expected + "\r\n").getBytes(StandardCharsets.UTF_8);
         Files.write(f.root.resolve(name), golden);
@@ -53,7 +60,10 @@ final class BootstrapCredentialLoaderTest {
           InspectorCredentialException.class, () -> f.loader(new TestIo()).readBootstrapPassword());
       for (byte[] invalid :
           List.of(new byte[] {(byte) 0xff}, new byte[] {0}, new byte[] {'\n'}, new byte[0])) {
-        for (String name : List.of("bootstrap-admin-username", "bootstrap-admin-password"))
+        for (String name :
+            List.of(
+                FIXTURE_BOOTSTRAP_ADMIN_USERNAME_E46B3E2D,
+                FIXTURE_BOOTSTRAP_ADMIN_PASSWORD_55E7842A))
           Files.write(f.root.resolve(name), invalid);
         assertThrows(
             InspectorCredentialException.class,
@@ -62,8 +72,8 @@ final class BootstrapCredentialLoaderTest {
             InspectorCredentialException.class,
             () -> f.loader(new TestIo()).readBootstrapPassword());
       }
-      Files.write(f.root.resolve("bootstrap-admin-username"), new byte[257]);
-      Files.write(f.root.resolve("bootstrap-admin-password"), new byte[65537]);
+      Files.write(f.root.resolve(FIXTURE_BOOTSTRAP_ADMIN_USERNAME_E46B3E2D), new byte[257]);
+      Files.write(f.root.resolve(FIXTURE_BOOTSTRAP_ADMIN_PASSWORD_55E7842A), new byte[65537]);
       assertThrows(
           InspectorCredentialException.class, () -> f.loader(new TestIo()).readBootstrapUsername());
       assertThrows(
@@ -76,7 +86,10 @@ final class BootstrapCredentialLoaderTest {
     try (var f = new Fixture(temporary)) {
       for (boolean username : List.of(true, false)) {
         Files.writeString(
-            f.root.resolve(username ? "bootstrap-admin-username" : "bootstrap-admin-password"),
+            f.root.resolve(
+                username
+                    ? FIXTURE_BOOTSTRAP_ADMIN_USERNAME_E46B3E2D
+                    : FIXTURE_BOOTSTRAP_ADMIN_PASSWORD_55E7842A),
             "synthetic-input\n");
         for (String fault :
             List.of(

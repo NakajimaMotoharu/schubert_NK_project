@@ -32,6 +32,12 @@ import org.junit.jupiter.api.Test;
 
 /** NK-BAT-001/NK-OPS-001; OPS009/UI251/SS341/343/SSC055/094/PG343/346; PT-OPS-MNEW001-011. */
 final class MorningNewRunAdmissionTest {
+  private static final String FIXTURE_ROOT_956E6E33 = "root";
+  private static final String FIXTURE_REFERENCES_3C0C408A = "references";
+  private static final String FIXTURE_DB_CLOSE_4353325B = "db-close";
+  private static final String FIXTURE_FILE_CLOSE_C39730AD = "file-close";
+  private static final String FIXTURE_MORNING_NEW_RUN_ADMISSION_UNAVAILABLE_B389B256 =
+      "Morning new-run admission unavailable";
   private static final UUID RUN = UUID.fromString("00000000-0000-0000-0000-000000000341");
   private static final UUID ACTIVATION = UUID.fromString("00000000-0000-0000-0000-000000000342");
   private static final Instant CLOCK = Instant.parse("2026-09-28T05:00:00.123456789Z");
@@ -48,7 +54,7 @@ final class MorningNewRunAdmissionTest {
 
     MorningNewRunAdmission admission() {
       return new MorningNewRunAdmission(
-          () -> events.add("root"),
+          () -> events.add(FIXTURE_ROOT_956E6E33),
           new MorningNewRunAdmission.Database() {
             @Override
             public <T> T execute(MorningNewRunAdmission.DatabaseWork<T> work) throws IOException {
@@ -58,7 +64,7 @@ final class MorningNewRunAdmissionTest {
                 return work.execute(
                     new MorningDatabaseSession.Access() {
                       public void requireUnused(BatchRun run) throws IOException {
-                        events.add("references");
+                        events.add(FIXTURE_REFERENCES_3C0C408A);
                         if (referenceFailure != null) throw referenceFailure;
                       }
 
@@ -85,7 +91,7 @@ final class MorningNewRunAdmissionTest {
                     });
               } finally {
                 dbHeld.set(false);
-                events.add("db-close");
+                events.add(FIXTURE_DB_CLOSE_4353325B);
               }
             }
           },
@@ -135,7 +141,7 @@ final class MorningNewRunAdmissionTest {
                 return work.execute(original);
               } finally {
                 fileHeld.set(false);
-                events.add("file-close");
+                events.add(FIXTURE_FILE_CLOSE_C39730AD);
               }
             }
           },
@@ -159,7 +165,7 @@ final class MorningNewRunAdmissionTest {
                   held.set(original);
                   try (var other = Executors.newSingleThreadExecutor()) {
                     assertEquals(
-                        "Morning new-run admission unavailable",
+                        FIXTURE_MORNING_NEW_RUN_ADMISSION_UNAVAILABLE_B389B256,
                         assertDoesNotThrow(
                             () ->
                                 other
@@ -207,20 +213,20 @@ final class MorningNewRunAdmissionTest {
     assertEquals("held", result);
     assertEquals(
         List.of(
-            "root",
+            FIXTURE_ROOT_956E6E33,
             "db-enter",
-            "root",
-            "references",
-            "root",
+            FIXTURE_ROOT_956E6E33,
+            FIXTURE_REFERENCES_3C0C408A,
+            FIXTURE_ROOT_956E6E33,
             "file-enter",
-            "root",
+            FIXTURE_ROOT_956E6E33,
             "original-start",
-            "root",
+            FIXTURE_ROOT_956E6E33,
             "continuation",
-            "root",
-            "file-close",
-            "db-close",
-            "root"),
+            FIXTURE_ROOT_956E6E33,
+            FIXTURE_FILE_CLOSE_C39730AD,
+            FIXTURE_DB_CLOSE_4353325B,
+            FIXTURE_ROOT_956E6E33),
         h.events);
     assertFalse(h.dbHeld.get());
     assertFalse(h.fileHeld.get());
@@ -233,7 +239,14 @@ final class MorningNewRunAdmissionTest {
     assertSame(
         h.referenceFailure,
         assertThrows(IOException.class, () -> h.admission().execute(state -> fail("no stop"))));
-    assertEquals(List.of("root", "db-enter", "root", "references", "db-close"), h.events);
+    assertEquals(
+        List.of(
+            FIXTURE_ROOT_956E6E33,
+            "db-enter",
+            FIXTURE_ROOT_956E6E33,
+            FIXTURE_REFERENCES_3C0C408A,
+            FIXTURE_DB_CLOSE_4353325B),
+        h.events);
     assertFalse(h.dbHeld.get());
   }
 
@@ -245,7 +258,8 @@ final class MorningNewRunAdmissionTest {
         h.startFailure,
         assertThrows(IOException.class, () -> h.admission().execute(state -> fail("no stop"))));
     assertEquals("original-start", h.events.get(7));
-    assertEquals(List.of("file-close", "db-close"), h.events.subList(8, 10));
+    assertEquals(
+        List.of(FIXTURE_FILE_CLOSE_C39730AD, FIXTURE_DB_CLOSE_4353325B), h.events.subList(8, 10));
     assertFalse(h.dbHeld.get());
     assertFalse(h.fileHeld.get());
   }
@@ -256,10 +270,11 @@ final class MorningNewRunAdmissionTest {
       var h = new Harness();
       h.originalVariant = variant;
       assertEquals(
-          "Morning new-run admission unavailable",
+          FIXTURE_MORNING_NEW_RUN_ADMISSION_UNAVAILABLE_B389B256,
           assertThrows(IOException.class, () -> h.admission().execute(state -> fail("no stop")))
               .getMessage());
-      assertEquals(List.of("file-close", "db-close"), h.events.subList(8, 10));
+      assertEquals(
+          List.of(FIXTURE_FILE_CLOSE_C39730AD, FIXTURE_DB_CLOSE_4353325B), h.events.subList(8, 10));
     }
   }
 
@@ -278,7 +293,8 @@ final class MorningNewRunAdmissionTest {
                           throw failure;
                         })));
     assertEquals(
-        List.of("file-close", "db-close"), h.events.subList(h.events.size() - 2, h.events.size()));
+        List.of(FIXTURE_FILE_CLOSE_C39730AD, FIXTURE_DB_CLOSE_4353325B),
+        h.events.subList(h.events.size() - 2, h.events.size()));
     assertFalse(h.dbHeld.get());
     assertFalse(h.fileHeld.get());
   }
@@ -298,7 +314,8 @@ final class MorningNewRunAdmissionTest {
                           throw runtime;
                         })));
     assertEquals(
-        List.of("file-close", "db-close"), a.events.subList(a.events.size() - 2, a.events.size()));
+        List.of(FIXTURE_FILE_CLOSE_C39730AD, FIXTURE_DB_CLOSE_4353325B),
+        a.events.subList(a.events.size() - 2, a.events.size()));
     var b = new Harness();
     assertThrows(NullPointerException.class, () -> b.admission().execute(state -> null));
     assertFalse(b.dbHeld.get());
@@ -312,7 +329,7 @@ final class MorningNewRunAdmissionTest {
     assertTrue(h.events.isEmpty());
     var duplicate =
         new MorningNewRunAdmission(
-            () -> h.events.add("root"),
+            () -> h.events.add(FIXTURE_ROOT_956E6E33),
             new MorningNewRunAdmission.Database() {
               @Override
               public <T> T execute(MorningNewRunAdmission.DatabaseWork<T> work) {
@@ -328,10 +345,10 @@ final class MorningNewRunAdmissionTest {
             Clock.fixed(CLOCK, ZoneOffset.UTC),
             () -> RUN);
     assertEquals(
-        "Morning new-run admission unavailable",
+        FIXTURE_MORNING_NEW_RUN_ADMISSION_UNAVAILABLE_B389B256,
         assertThrows(IOException.class, () -> duplicate.execute(state -> fail("no work")))
             .getMessage());
-    assertEquals(List.of("root"), h.events);
+    assertEquals(List.of(FIXTURE_ROOT_956E6E33), h.events);
   }
 
   @Test
@@ -381,7 +398,7 @@ final class MorningNewRunAdmissionTest {
             1,
             "/system.slice/schubert-nk-cleanup.service");
     assertEquals(
-        "Morning new-run admission unavailable",
+        FIXTURE_MORNING_NEW_RUN_ADMISSION_UNAVAILABLE_B389B256,
         assertThrows(
                 IOException.class,
                 () -> MorningNewRunAdmission.create(RootStartupContext.create(), wrong))
@@ -415,10 +432,10 @@ final class MorningNewRunAdmissionTest {
                       });
                 });
     assertTrue(completed);
-    assertTrue(h.events.indexOf("references") < h.events.indexOf("begin-backup"));
+    assertTrue(h.events.indexOf(FIXTURE_REFERENCES_3C0C408A) < h.events.indexOf("begin-backup"));
     assertTrue(h.events.indexOf("begin-backup") < h.events.indexOf("handoff"));
     assertEquals(
-        List.of("file-close", "db-close", "root"),
+        List.of(FIXTURE_FILE_CLOSE_C39730AD, FIXTURE_DB_CLOSE_4353325B, FIXTURE_ROOT_956E6E33),
         h.events.subList(h.events.size() - 3, h.events.size()));
   }
 }

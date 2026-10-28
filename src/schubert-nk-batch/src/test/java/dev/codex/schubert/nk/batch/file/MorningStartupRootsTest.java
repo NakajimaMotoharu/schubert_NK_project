@@ -37,6 +37,8 @@ import org.junit.jupiter.api.io.TempDir;
  * literal six-line wire vector. Not native root/issuer acceptance.
  */
 final class MorningStartupRootsTest {
+  private static final String FIXTURE_INO_4BE7C1E0 = "ino";
+  private static final String FIXTURE_READ_ONLY_A9812E1E = "read-only";
   @TempDir Path temporary;
   private static final StartupPermitRecords.Epoch EPOCH =
       new StartupPermitRecords.Epoch(
@@ -115,10 +117,10 @@ final class MorningStartupRootsTest {
             map -> map.put("mode", 040777),
             map -> map.put("nlink", 1),
             map -> map.put("dev", -1L),
-            map -> map.put("ino", 0L),
+            map -> map.put(FIXTURE_INO_4BE7C1E0, 0L),
             map -> map.put("size", -1L),
             map -> map.put("ctime", "wrong"),
-            map -> map.put("ino", 1000L))) {
+            map -> map.put(FIXTURE_INO_4BE7C1E0, 1000L))) {
       var f = fixture();
       f.invalid = invalid;
       assertThrows(IOException.class, () -> f.reader().capture());
@@ -137,7 +139,7 @@ final class MorningStartupRootsTest {
     }
     var f = fixture();
     var actual = f.reader().capture();
-    f.invalid = map -> map.put("ino", (long) map.get("ino") + 100);
+    f.invalid = map -> map.put(FIXTURE_INO_4BE7C1E0, (long) map.get(FIXTURE_INO_4BE7C1E0) + 100);
     assertThrows(IOException.class, () -> f.reader().recheck(actual));
     var nullAcl = fixture();
     nullAcl.nullAcl = true;
@@ -281,7 +283,7 @@ final class MorningStartupRootsTest {
                         drift ? (long) ++reads : size,
                         "dev",
                         42L,
-                        "ino",
+                        FIXTURE_INO_4BE7C1E0,
                         1000L + index,
                         "lastModifiedTime",
                         time,
@@ -341,23 +343,23 @@ final class MorningStartupRootsTest {
     }
 
     public int createFile(int parent, String name) {
-      throw new AssertionError("read-only");
+      throw new AssertionError(FIXTURE_READ_ONLY_A9812E1E);
     }
 
     public void createDirectory(int parent, String name) {
-      throw new AssertionError("read-only");
+      throw new AssertionError(FIXTURE_READ_ONLY_A9812E1E);
     }
 
     public void publish(int directory, String part, String ready) {
-      throw new AssertionError("read-only");
+      throw new AssertionError(FIXTURE_READ_ONLY_A9812E1E);
     }
 
     public void unlink(int directory, String name) {
-      throw new AssertionError("read-only");
+      throw new AssertionError(FIXTURE_READ_ONLY_A9812E1E);
     }
 
     public void sync(int directory) {
-      throw new AssertionError("read-only");
+      throw new AssertionError(FIXTURE_READ_ONLY_A9812E1E);
     }
   }
 }

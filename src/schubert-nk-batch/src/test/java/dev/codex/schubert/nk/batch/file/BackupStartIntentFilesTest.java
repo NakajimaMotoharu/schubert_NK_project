@@ -19,6 +19,7 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** PT-OPS-BFENCE001-006; public marker bytes only, synthetic root metadata. */
 final class BackupStartIntentFilesTest {
+  private static final String FIXTURE_BACKUP_START_INTENT_4FC63345 = "backup-start.intent";
   @TempDir Path temporary;
 
   private BackupPublicationFixture fixture() throws Exception {
@@ -77,7 +78,7 @@ final class BackupStartIntentFilesTest {
       first.requireClear();
       var token = first.begin();
       first.requirePresent(token);
-      Path marker = fixture.parent.resolve("backup-start.intent");
+      Path marker = fixture.parent.resolve(FIXTURE_BACKUP_START_INTENT_4FC63345);
       assertTrue(Files.isRegularFile(marker));
       assertArrayEquals(new byte[0], Files.readAllBytes(marker));
       assertThrows(IOException.class, first::requireClear);
@@ -99,7 +100,7 @@ final class BackupStartIntentFilesTest {
       fixture.faults.put("sync#1", new IOException("test-only"));
       var owner = files(fixture);
       assertThrows(IOException.class, owner::begin);
-      assertTrue(Files.exists(fixture.parent.resolve("backup-start.intent")));
+      assertTrue(Files.exists(fixture.parent.resolve(FIXTURE_BACKUP_START_INTENT_4FC63345)));
       fixture.faults.clear();
       assertThrows(IOException.class, files(fixture)::requireClear);
       fixture.released();
@@ -110,7 +111,7 @@ final class BackupStartIntentFilesTest {
   void existingOrCorruptMarkerIsNeverRepaired() throws Exception {
     for (String content : List.of("", "unexpected")) {
       try (var fixture = fixture()) {
-        Path marker = fixture.parent.resolve("backup-start.intent");
+        Path marker = fixture.parent.resolve(FIXTURE_BACKUP_START_INTENT_4FC63345);
         Files.writeString(marker, content);
         assertThrows(IOException.class, files(fixture)::requireClear);
         assertEquals(content, Files.readString(marker));
@@ -145,7 +146,7 @@ final class BackupStartIntentFilesTest {
         try {
           BackupStartIntentFiles selected = owner;
           assertThrows(IOException.class, selected::begin);
-          assertFalse(Files.exists(fixture.parent.resolve("backup-start.intent")));
+          assertFalse(Files.exists(fixture.parent.resolve(FIXTURE_BACKUP_START_INTENT_4FC63345)));
         } finally {
           Thread.interrupted();
         }
@@ -173,7 +174,7 @@ final class BackupStartIntentFilesTest {
       var right = executor.submit(race);
       start.countDown();
       assertEquals(1, (left.get() ? 1 : 0) + (right.get() ? 1 : 0));
-      assertTrue(Files.exists(fixture.parent.resolve("backup-start.intent")));
+      assertTrue(Files.exists(fixture.parent.resolve(FIXTURE_BACKUP_START_INTENT_4FC63345)));
       assertThrows(IOException.class, files(fixture)::requireClear);
       fixture.released();
     }

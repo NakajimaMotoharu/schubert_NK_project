@@ -45,6 +45,8 @@ import org.junit.jupiter.api.io.TempDir;
  * PT-AUT-005-I/006: real DB state and independent cryptography, never production-derived expected.
  */
 final class AuthSessionServiceTest {
+  private static final String FIXTURE_TRUE_18D10C7D = "true";
+  private static final String FIXTURE_NOT_REVOKED_A3EC8CEA = "not revoked";
   @TempDir static Path root;
   private static ApiLogDatabaseFixture database;
   private static ContextHash hashes;
@@ -95,7 +97,7 @@ final class AuthSessionServiceTest {
       String expected = HexFormat.of().formatHex(raw);
       assertEquals(expected, issued.context().wireValue());
       assertArrayEquals(new byte[32], random.last);
-      assertEquals(0, count("true"));
+      assertEquals(0, count(FIXTURE_TRUE_18D10C7D));
       try (var statement = connection.createStatement();
           var row = statement.executeQuery("select * from schubert.auth_sessions")) {
         assertTrue(row.next());
@@ -126,7 +128,7 @@ final class AuthSessionServiceTest {
         assertFalse(row.next());
       }
       connection.rollback();
-      assertEquals(0, count("true"));
+      assertEquals(0, count(FIXTURE_TRUE_18D10C7D));
       byte[] ipv6 = new byte[16];
       ipv6[15] = 1;
       service.issue(connection, 7, InetAddress.getByAddress(ipv6), MESSAGE, MESSAGE, NOW);
@@ -154,7 +156,7 @@ final class AuthSessionServiceTest {
         count(
             "id='00000000-0000-0000-0000-00000000000b' and revoked and revoke_reason='REPLACED' and"
                 + " revoked_at='2026-09-07T01:00:00Z'"));
-    assertEquals(2, count("not revoked"));
+    assertEquals(2, count(FIXTURE_NOT_REVOKED_A3EC8CEA));
     seed();
     for (UUID id :
         List.of(
@@ -164,7 +166,7 @@ final class AuthSessionServiceTest {
       issue(new AuthSessionService(hashes, codec, new SecureRandom(), () -> id), 7, NOW);
     }
     assertEquals(1, count("id='00000000-0000-0000-0000-000000000001' and revoked"));
-    assertEquals(2, count("not revoked"));
+    assertEquals(2, count(FIXTURE_NOT_REVOKED_A3EC8CEA));
     seed();
     var equalExpiry = issue(service, 7, NOW.minusSeconds(30000));
     var pastExpiry = issue(service, 7, NOW.minusSeconds(29900));
@@ -208,8 +210,8 @@ final class AuthSessionServiceTest {
       assertEquals(100, ids.size());
       assertEquals(100, contexts.size());
     }
-    assertEquals(100, count("true"));
-    assertEquals(2, count("not revoked"));
+    assertEquals(100, count(FIXTURE_TRUE_18D10C7D));
+    assertEquals(2, count(FIXTURE_NOT_REVOKED_A3EC8CEA));
     assertEquals(98, count("revoked and revoke_reason='REPLACED'"));
     try (Connection connection = database.api();
         var statement = connection.createStatement();
@@ -230,7 +232,7 @@ final class AuthSessionServiceTest {
     assertTrue(sql.get(1).startsWith("insert into schubert.auth_sessions"));
     assertTrue(sql.get(2).endsWith("order by last_accessed_at,id for update"));
     assertTrue(sql.get(3).contains("revoke_reason='REPLACED'"));
-    assertEquals(100, count("true"));
+    assertEquals(100, count(FIXTURE_TRUE_18D10C7D));
   }
 
   @Test
@@ -257,7 +259,7 @@ final class AuthSessionServiceTest {
       assertInfrastructure(() -> service.issue(connection, 7, client, MESSAGE, MESSAGE, NOW));
       connection.rollback();
     }
-    assertEquals(1, count("true"));
+    assertEquals(1, count(FIXTURE_TRUE_18D10C7D));
     for (String fault :
         List.of(
             "getAutoCommit",
@@ -289,8 +291,8 @@ final class AuthSessionServiceTest {
         assertFalse(connection.isClosed());
         connection.rollback();
       }
-      assertEquals(2, count("true"));
-      assertEquals(2, count("not revoked"));
+      assertEquals(2, count(FIXTURE_TRUE_18D10C7D));
+      assertEquals(2, count(FIXTURE_NOT_REVOKED_A3EC8CEA));
     }
     try (Connection connection = database.transaction()) {
       assertInfrastructure(
@@ -337,7 +339,7 @@ final class AuthSessionServiceTest {
       }
       connection.rollback();
     }
-    assertEquals(2, count("not revoked"));
+    assertEquals(2, count(FIXTURE_NOT_REVOKED_A3EC8CEA));
     for (String fault : List.of("auditPrepare", "zeroAudit", "auditAfter", "auditClose")) {
       try (Connection connection = database.transaction()) {
         assertInfrastructure(
@@ -351,8 +353,8 @@ final class AuthSessionServiceTest {
                     NOW));
         connection.rollback();
       }
-      assertEquals(2, count("true"));
-      assertEquals(2, count("not revoked"));
+      assertEquals(2, count(FIXTURE_TRUE_18D10C7D));
+      assertEquals(2, count(FIXTURE_NOT_REVOKED_A3EC8CEA));
       try (Connection connection = database.api();
           var statement = connection.createStatement();
           var row = statement.executeQuery("select count(*) from schubert.app_logs")) {
@@ -429,7 +431,7 @@ final class AuthSessionServiceTest {
     assertThrows(
         IllegalArgumentException.class,
         () -> new IssuedContext(identity, raw, NOW, NOW.minusSeconds(1)));
-    assertEquals(0, count("true"));
+    assertEquals(0, count(FIXTURE_TRUE_18D10C7D));
   }
 
   private static IssuedContext issue(AuthSessionService service, long user, Instant now)

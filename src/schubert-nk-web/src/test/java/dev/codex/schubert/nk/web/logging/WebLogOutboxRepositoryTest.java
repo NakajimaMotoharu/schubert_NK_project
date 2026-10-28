@@ -26,6 +26,8 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** PT-IDEM-012: SS 324/331/332 SQL after-conditions independent of production query generation. */
 final class WebLogOutboxRepositoryTest {
+  private static final String FIXTURE_JMS_FAILURE_E8ABB41B = "JMS_FAILURE";
+  private static final String FIXTURE_WORKER_1636F9EC = "worker";
   private static final Instant NOW = Instant.parse("2026-09-06T00:00:00Z");
   private static final UUID CORRELATION = new UUID(4, 5);
   private static final EncryptedWebLogPayload PAYLOAD =
@@ -164,8 +166,10 @@ final class WebLogOutboxRepositoryTest {
           ClaimedWebLog row = repository.claim(connection, "owner", NOW, 1).getFirst();
           ClaimedWebLog wrong = withOwner(row, "other");
           assertFalse(repository.markSent(connection, wrong, NOW));
-          assertFalse(repository.markFailure(connection, wrong, NOW, "JMS_FAILURE"));
-          assertTrue(repository.markFailure(connection, row, NOW.plusSeconds(3), "JMS_FAILURE"));
+          assertFalse(repository.markFailure(connection, wrong, NOW, FIXTURE_JMS_FAILURE_E8ABB41B));
+          assertTrue(
+              repository.markFailure(
+                  connection, row, NOW.plusSeconds(3), FIXTURE_JMS_FAILURE_E8ABB41B));
           connection.commit();
         }
         try (Connection connection = db.web();
@@ -182,7 +186,7 @@ final class WebLogOutboxRepositoryTest {
           assertNull(rows.getString(4));
           assertNull(rows.getObject(5, java.time.OffsetDateTime.class));
           assertNull(rows.getObject(6, java.time.OffsetDateTime.class));
-          assertEquals("JMS_FAILURE", rows.getString(7));
+          assertEquals(FIXTURE_JMS_FAILURE_E8ABB41B, rows.getString(7));
         }
       }
     }
@@ -191,13 +195,15 @@ final class WebLogOutboxRepositoryTest {
     WebLogOutboxRepository random = new WebLogOutboxRepository();
     try (Connection connection = db.transaction()) {
       ClaimedWebLog row = random.claim(connection, "random", NOW, 1).getFirst();
-      assertTrue(random.markFailure(connection, row, NOW, "JMS_FAILURE"));
+      assertTrue(random.markFailure(connection, row, NOW, FIXTURE_JMS_FAILURE_E8ABB41B));
       ClaimedWebLog retried = random.claim(connection, "random", NOW.plusSeconds(2), 1).getFirst();
       assertFalse(retried.nextAttemptAt().isBefore(NOW.plusMillis(900)));
       assertFalse(retried.nextAttemptAt().isAfter(NOW.plusMillis(1100)));
       assertTrue(random.markSent(connection, retried, NOW.plusSeconds(3)));
       assertFalse(random.markSent(connection, retried, NOW.plusSeconds(4)));
-      assertFalse(random.markFailure(connection, retried, NOW.plusSeconds(4), "JMS_FAILURE"));
+      assertFalse(
+          random.markFailure(
+              connection, retried, NOW.plusSeconds(4), FIXTURE_JMS_FAILURE_E8ABB41B));
       connection.commit();
     }
     assertEquals("SENT", scalar("status"));
@@ -216,7 +222,7 @@ final class WebLogOutboxRepositoryTest {
     }
     insert(1, NOW);
     try (Connection connection = db.transaction()) {
-      ClaimedWebLog row = repository.claim(connection, "worker", NOW, 1).getFirst();
+      ClaimedWebLog row = repository.claim(connection, FIXTURE_WORKER_1636F9EC, NOW, 1).getFirst();
       assertThrows(
           NullPointerException.class, () -> repository.enqueue(connection, null, PAYLOAD, NOW));
       assertThrows(
@@ -252,7 +258,7 @@ final class WebLogOutboxRepositoryTest {
             IllegalArgumentException.class,
             () -> new WebLogOutboxRepository(() -> jitter).markFailure(connection, row, NOW, "X"));
       }
-      assertEquals("worker", ClaimedWebLog.requireWorker("worker"));
+      assertEquals(FIXTURE_WORKER_1636F9EC, ClaimedWebLog.requireWorker(FIXTURE_WORKER_1636F9EC));
       for (long id : new long[] {0, 1_000_000_000_000L}) {
         assertThrows(
             IllegalArgumentException.class,
@@ -292,7 +298,7 @@ final class WebLogOutboxRepositoryTest {
                 Map.entry("attempt_count", 0),
                 Map.entry("next_attempt_at", NOW.atOffset(java.time.ZoneOffset.UTC)),
                 Map.entry("created_at", NOW.atOffset(java.time.ZoneOffset.UTC)),
-                Map.entry("lease_owner", "worker"),
+                Map.entry("lease_owner", FIXTURE_WORKER_1636F9EC),
                 Map.entry("lease_until", NOW.plusSeconds(10).atOffset(java.time.ZoneOffset.UTC))));
     assertEquals(1, WebLogOutboxRepository.read(result(fields)).id());
     for (String column : fields.keySet()) {

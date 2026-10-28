@@ -25,6 +25,7 @@ import org.junit.jupiter.api.io.TempDir;
 /** PG240/PT-OPS-MQ-013..015; independent SS321 loopback/CORE literals and real Ops broker. */
 @SuppressWarnings("try") // EmbeddedActiveMQ.stop declares Exception; fixture owns it.
 final class ArtemisAcceptorReadinessClientTest {
+  private static final String FIXTURE_NK_SYNC_REQUEST_422EE207 = "nk.sync.request";
   private static final String GOOD_JSON =
       "[{\"name\":\"core\",\"factoryClassName\":\"org.apache.activemq.artemis.core.remoting.impl.netty.NettyAcceptorFactory\",\"params\":{\"scheme\":\"tcp\",\"port\":\"61616\",\"host\":\"127.0.0.1\",\"protocols\":\"CORE\"},\"extraProps\":{}}]";
   @TempDir Path root;
@@ -58,7 +59,7 @@ final class ArtemisAcceptorReadinessClientTest {
       assertEquals(11, detailed.broker().size());
       var addresses =
           java.util.Set.of(
-              "nk.sync.request",
+              FIXTURE_NK_SYNC_REQUEST_422EE207,
               "nk.sync.reply.web",
               "nk.async.work",
               "nk.web.log",
@@ -79,10 +80,13 @@ final class ArtemisAcceptorReadinessClientTest {
             detailed.pressure().get(address));
       }
       assertEquals(12, detailed.roles().size());
-      assertEquals(Boolean.TRUE, detailed.roles().get("nk.sync.request").get("nk_web").get("send"));
       assertEquals(
-          Boolean.FALSE, detailed.roles().get("nk.sync.request").get("nk_web").get("consume"));
-      assertEquals(12, detailed.roles().get("nk.sync.request").get("nk_web").size());
+          Boolean.TRUE,
+          detailed.roles().get(FIXTURE_NK_SYNC_REQUEST_422EE207).get("nk_web").get("send"));
+      assertEquals(
+          Boolean.FALSE,
+          detailed.roles().get(FIXTURE_NK_SYNC_REQUEST_422EE207).get("nk_web").get("consume"));
+      assertEquals(12, detailed.roles().get(FIXTURE_NK_SYNC_REQUEST_422EE207).get("nk_web").size());
       assertThrows(UnsupportedOperationException.class, () -> detailed.broker().clear());
       assertThrows(
           UnsupportedOperationException.class, () -> detailed.settings().get("nk.expiry").clear());

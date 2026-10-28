@@ -24,6 +24,9 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** ROOTREC001/003/004: real FD IO, explicitly synthetic root/tmpfs; not native authority. */
 final class RootFailedStartRecoveryTest {
+  private static final String FIXTURE_EPOCH_CURRENT_92895879 = "epoch.current";
+  private static final String FIXTURE_PERMIT_START_INTENT_4794D6AC = "permit-start.intent";
+  private static final String FIXTURE_API_E3AF609E = "API";
   @TempDir Path temporary;
   static final String PERMIT =
       "NKPERMIT1\n"
@@ -63,7 +66,7 @@ final class RootFailedStartRecoveryTest {
                   MessageDigest.getInstance("SHA-256")
                       .digest(PERMIT.getBytes(StandardCharsets.US_ASCII)));
       put(
-          "epoch.current",
+          FIXTURE_EPOCH_CURRENT_92895879,
           "NKEPOCH1\nstate=INVALID\n" + StartupLaunchFilesTest.BIND + "permit_sha256=-\n");
       put(epoch + ".permit", PERMIT);
       put(epoch + ".owner", StartupLaunchFilesTest.OWNER);
@@ -81,7 +84,7 @@ final class RootFailedStartRecoveryTest {
                                   StartupLaunchFilesTest.OWNER.getBytes(
                                       StandardCharsets.US_ASCII)))));
       put(epoch + "." + service + ".start.intent", "");
-      put("permit-start.intent", "");
+      put(FIXTURE_PERMIT_START_INTENT_4794D6AC, "");
     }
 
     void put(String name, String value) throws IOException {
@@ -129,12 +132,12 @@ final class RootFailedStartRecoveryTest {
 
   @Test
   void bothClosedRolesRetireOnlyTwoIntentsAndPreserveInvalidAndArtifacts() throws Exception {
-    for (String role : List.of("API", "WEB"))
+    for (String role : List.of(FIXTURE_API_E3AF609E, "WEB"))
       try (var f = new Fixture(role)) {
         var before = new HashMap<String, String>();
         for (var name :
             List.of(
-                "epoch.current",
+                FIXTURE_EPOCH_CURRENT_92895879,
                 f.epoch + ".permit",
                 f.epoch + ".owner",
                 f.epoch + "." + role + ".launch"))
@@ -149,7 +152,7 @@ final class RootFailedStartRecoveryTest {
         assertFalse(proofs.isEmpty());
         assertTrue(proofs.stream().allMatch(evidence::equals));
         assertFalse(Files.exists(f.f.parent.resolve(f.epoch + "." + role + ".start.intent")));
-        assertFalse(Files.exists(f.f.parent.resolve("permit-start.intent")));
+        assertFalse(Files.exists(f.f.parent.resolve(FIXTURE_PERMIT_START_INTENT_4794D6AC)));
         for (var entry : before.entrySet())
           assertEquals(entry.getValue(), Files.readString(f.f.parent.resolve(entry.getKey())));
         var permits = new StartupPermitFiles(f.f.root, f.f, f, UUID::randomUUID);
@@ -165,12 +168,12 @@ final class RootFailedStartRecoveryTest {
   void unknownOrMissingAndProofFailurePreserveQuarantine() throws Exception {
     for (String bad :
         List.of("unknown", "stray.part", "41100027-4444-4333-8444-555555555555.API.start.intent"))
-      try (var f = new Fixture("API")) {
+      try (var f = new Fixture(FIXTURE_API_E3AF609E)) {
         f.put(bad, "");
         assertThrows(IOException.class, f::observe);
-        assertTrue(Files.exists(f.f.parent.resolve("permit-start.intent")));
+        assertTrue(Files.exists(f.f.parent.resolve(FIXTURE_PERMIT_START_INTENT_4794D6AC)));
       }
-    try (var f = new Fixture("API")) {
+    try (var f = new Fixture(FIXTURE_API_E3AF609E)) {
       var e = f.observe();
       assertThrows(
           IOException.class,
@@ -181,33 +184,33 @@ final class RootFailedStartRecoveryTest {
                     throw new IOException("synthetic actual closure unavailable");
                   }));
       assertTrue(Files.exists(f.f.parent.resolve(f.epoch + ".API.start.intent")));
-      assertTrue(Files.exists(f.f.parent.resolve("permit-start.intent")));
+      assertTrue(Files.exists(f.f.parent.resolve(FIXTURE_PERMIT_START_INTENT_4794D6AC)));
       assertThrows(NullPointerException.class, () -> f.retire(null, ignored -> {}));
       assertThrows(NullPointerException.class, () -> f.retire(e, null));
       f.put(f.epoch + ".WEB.start.intent", "");
       assertThrows(IOException.class, f::observe);
       Files.delete(f.f.parent.resolve(f.epoch + ".WEB.start.intent"));
-      f.put("permit-start.intent", "nonempty");
+      f.put(FIXTURE_PERMIT_START_INTENT_4794D6AC, "nonempty");
       assertThrows(IOException.class, () -> f.retire(e, ignored -> {}));
     }
   }
 
   @Test
   void syncFailureAfterLastUnlinkMustRemainQuarantined() throws Exception {
-    try (var f = new Fixture("API")) {
+    try (var f = new Fixture(FIXTURE_API_E3AF609E)) {
       var e = f.observe();
       var injected = new java.util.concurrent.atomic.AtomicBoolean();
       f.f.hook =
           (name, count) -> {
             if (name.equals("sync")
-                && !Files.exists(f.f.parent.resolve("permit-start.intent"))
+                && !Files.exists(f.f.parent.resolve(FIXTURE_PERMIT_START_INTENT_4794D6AC))
                 && injected.compareAndSet(false, true))
               f.f.faults.put("sync#" + count, new IOException("synthetic post-unlink sync fault"));
           };
       assertThrows(IOException.class, () -> f.retire(e, ignored -> {}));
       assertTrue(injected.get());
       assertTrue(
-          Files.exists(f.f.parent.resolve("permit-start.intent")),
+          Files.exists(f.f.parent.resolve(FIXTURE_PERMIT_START_INTENT_4794D6AC)),
           "unknown durability cannot become clear");
       assertEquals(
           e.invalid(), new StartupPermitFiles(f.f.root, f.f, f, UUID::randomUUID).current());
@@ -216,14 +219,14 @@ final class RootFailedStartRecoveryTest {
 
   @Test
   void changedOwnerPermitCurrentAndInterruptedNeverRetire() throws Exception {
-    for (String name : List.of("epoch.current", "permit", "owner", "API.launch"))
-      try (var f = new Fixture("API")) {
+    for (String name : List.of(FIXTURE_EPOCH_CURRENT_92895879, "permit", "owner", "API.launch"))
+      try (var f = new Fixture(FIXTURE_API_E3AF609E)) {
         var e = f.observe();
-        f.put(name.equals("epoch.current") ? name : f.epoch + "." + name, "corrupt");
+        f.put(name.equals(FIXTURE_EPOCH_CURRENT_92895879) ? name : f.epoch + "." + name, "corrupt");
         assertThrows(IOException.class, () -> f.retire(e, ignored -> fail("changed evidence")));
-        assertTrue(Files.exists(f.f.parent.resolve("permit-start.intent")));
+        assertTrue(Files.exists(f.f.parent.resolve(FIXTURE_PERMIT_START_INTENT_4794D6AC)));
       }
-    try (var f = new Fixture("API")) {
+    try (var f = new Fixture(FIXTURE_API_E3AF609E)) {
       var e = f.observe();
       Thread.currentThread().interrupt();
       try {
@@ -231,7 +234,7 @@ final class RootFailedStartRecoveryTest {
       } finally {
         Thread.interrupted();
       }
-      assertTrue(Files.exists(f.f.parent.resolve("permit-start.intent")));
+      assertTrue(Files.exists(f.f.parent.resolve(FIXTURE_PERMIT_START_INTENT_4794D6AC)));
     }
   }
 }

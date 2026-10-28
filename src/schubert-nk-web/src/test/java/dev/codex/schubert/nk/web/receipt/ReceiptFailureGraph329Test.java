@@ -22,17 +22,23 @@ import org.junit.jupiter.api.Timeout;
 /** NK-WEB-002; SS312/331/332/354/SSC329; BUG1592/YKT1348; PT-WEB-RECEIPT-GRAPH329001..003. */
 @Timeout(value = 5, threadMode = Timeout.ThreadMode.SEPARATE_THREAD)
 final class ReceiptFailureGraph329Test {
+  private static final String FIXTURE_GETCONNECTION_1DAA73DB = "getConnection";
+  private static final String FIXTURE_RESULTSETCLOSE_A86694E9 = "ResultSetClose";
+  private static final String FIXTURE_PREPAREDSTATEMENTCLOSE_118BF14E = "PreparedStatementClose";
+  private static final String FIXTURE_EXECUTEQUERY_85C8C423 = "executeQuery";
+  private static final String FIXTURE_PUBLIC_PRIMARY_B5003780 = "PUBLIC primary";
   private static final String ID = "00000000000000000000000001";
   private static final Instant TIME = Instant.parse("2026-10-04T00:00:00.123Z");
 
   @Test
   void receipt329001SelectedSqlGraphPreservesFatalAfterOwnedSetupClose() {
-    for (String point : new String[] {"getConnection", "setAutoCommit"}) {
+    for (String point : new String[] {FIXTURE_GETCONNECTION_1DAA73DB, "setAutoCommit"}) {
       for (int mode = 0; mode < 3; mode++) {
         var fatal = new AssertionError("PUBLIC fatal");
         var fixture = new Fixture(point, graph(fatal, mode), "", null);
         assertSame(fatal, assertThrows(AssertionError.class, () -> fixture.repository().find(ID)));
-        assertEquals(point.equals("getConnection") ? 0 : 1, fixture.connectionCloses);
+        assertEquals(
+            point.equals(FIXTURE_GETCONNECTION_1DAA73DB) ? 0 : 1, fixture.connectionCloses);
         assertEquals(0, fixture.rollbacks);
         assertEquals(0, fixture.commits);
       }
@@ -43,7 +49,11 @@ final class ReceiptFailureGraph329Test {
   void receipt329002BothSqlCleanupGraphsCannotDisappearBeforeFixedCatalog() {
     for (String point :
         new String[] {
-          "ResultSetClose", "PreparedStatementClose", "rollback", "ConnectionClose", "InsertClose"
+          FIXTURE_RESULTSETCLOSE_A86694E9,
+          FIXTURE_PREPAREDSTATEMENTCLOSE_118BF14E,
+          "rollback",
+          "ConnectionClose",
+          "InsertClose"
         }) {
       var fatal = new AssertionError("PUBLIC fatal");
       boolean insert = point.equals("InsertClose");
@@ -51,9 +61,11 @@ final class ReceiptFailureGraph329Test {
           new Fixture(
               insert
                   ? "executeUpdate"
-                  : point.equals("ResultSetClose") ? "getString" : "executeQuery",
-              new SQLException("PUBLIC primary"),
-              insert ? "PreparedStatementClose" : point,
+                  : point.equals(FIXTURE_RESULTSETCLOSE_A86694E9)
+                      ? "getString"
+                      : FIXTURE_EXECUTEQUERY_85C8C423,
+              new SQLException(FIXTURE_PUBLIC_PRIMARY_B5003780),
+              insert ? FIXTURE_PREPAREDSTATEMENTCLOSE_118BF14E : point,
               graph(fatal, 2));
       assertSame(
           fatal,
@@ -65,7 +77,8 @@ final class ReceiptFailureGraph329Test {
               }));
       assertEquals(1, fixture.connectionCloses, point);
       assertEquals(1, fixture.statementCloses, point);
-      assertEquals(point.equals("ResultSetClose") ? 1 : 0, fixture.resultCloses, point);
+      assertEquals(
+          point.equals(FIXTURE_RESULTSETCLOSE_A86694E9) ? 1 : 0, fixture.resultCloses, point);
       assertEquals(1, fixture.rollbacks, point);
       assertEquals(0, fixture.commits, point);
     }
@@ -74,17 +87,19 @@ final class ReceiptFailureGraph329Test {
   @Test
   void receipt329003ExistingUnknownPriorityAndFixedNonFatalCyclesAreUnchanged() {
     var same = graph(null, 3);
-    var sql = new Fixture("executeQuery", same, "PreparedStatementClose", same);
+    var sql =
+        new Fixture(
+            FIXTURE_EXECUTEQUERY_85C8C423, same, FIXTURE_PREPAREDSTATEMENTCLOSE_118BF14E, same);
     var fixed = assertThrows(ReceiptReferenceException.class, () -> sql.repository().find(ID));
     assertEquals("receipt reference unavailable", fixed.getMessage());
     assertNull(fixed.getCause());
     assertEquals(0, fixed.getSuppressed().length);
-    var unknown = new IllegalStateException("PUBLIC primary");
+    var unknown = new IllegalStateException(FIXTURE_PUBLIC_PRIMARY_B5003780);
     var unknownFixture =
         new Fixture(
-            "executeQuery",
+            FIXTURE_EXECUTEQUERY_85C8C423,
             unknown,
-            "PreparedStatementClose",
+            FIXTURE_PREPAREDSTATEMENTCLOSE_118BF14E,
             new AssertionError("PUBLIC ignored secondary"));
     assertSame(
         unknown,
@@ -95,15 +110,18 @@ final class ReceiptFailureGraph329Test {
     var cleanup = new IllegalStateException("PUBLIC cleanup");
     var replaced =
         new Fixture(
-            "executeQuery", new SQLException("PUBLIC primary"), "PreparedStatementClose", cleanup);
+            FIXTURE_EXECUTEQUERY_85C8C423,
+            new SQLException(FIXTURE_PUBLIC_PRIMARY_B5003780),
+            FIXTURE_PREPAREDSTATEMENTCLOSE_118BF14E,
+            cleanup);
     assertSame(
         cleanup, assertThrows(IllegalStateException.class, () -> replaced.repository().find(ID)));
-    var primaryError = new AssertionError("PUBLIC primary");
+    var primaryError = new AssertionError(FIXTURE_PUBLIC_PRIMARY_B5003780);
     var error =
         new Fixture(
-            "executeQuery",
+            FIXTURE_EXECUTEQUERY_85C8C423,
             primaryError,
-            "PreparedStatementClose",
+            FIXTURE_PREPAREDSTATEMENTCLOSE_118BF14E,
             new AssertionError("PUBLIC secondary"));
     assertSame(primaryError, assertThrows(AssertionError.class, () -> error.repository().find(ID)));
     for (Fixture fixture : new Fixture[] {sql, unknownFixture, replaced, error}) {
@@ -155,8 +173,8 @@ final class ReceiptFailureGraph329Test {
                   DataSource.class.getClassLoader(),
                   new Class<?>[] {DataSource.class},
                   (object, method, args) -> {
-                    assertEquals("getConnection", method.getName());
-                    fail("getConnection");
+                    assertEquals(FIXTURE_GETCONNECTION_1DAA73DB, method.getName());
+                    fail(FIXTURE_GETCONNECTION_1DAA73DB);
                     return connection();
                   });
       return new ReceiptReferenceRepository(source);
@@ -201,11 +219,11 @@ final class ReceiptFailureGraph329Test {
                 String name = method.getName();
                 if (name.equals("close")) {
                   statementCloses++;
-                  fail("PreparedStatementClose");
+                  fail(FIXTURE_PREPAREDSTATEMENTCLOSE_118BF14E);
                   return null;
                 }
                 fail(name);
-                if (name.equals("executeQuery")) return result();
+                if (name.equals(FIXTURE_EXECUTEQUERY_85C8C423)) return result();
                 if (name.equals("executeUpdate")) return 1;
                 if (java.util.Set.of("setString", "setLong", "setObject").contains(name))
                   return null;
@@ -222,7 +240,7 @@ final class ReceiptFailureGraph329Test {
                 String name = method.getName();
                 if (name.equals("close")) {
                   resultCloses++;
-                  fail("ResultSetClose");
+                  fail(FIXTURE_RESULTSETCLOSE_A86694E9);
                   return null;
                 }
                 fail(name);

@@ -25,6 +25,12 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** NK-OPS-001/OPS009/BAK001/UI251/SS341/343/SSC092/094/104; PT-OPS-MBPUB001-006. */
 final class MorningBackupRequestPublicationTest {
+  private static final String FIXTURE_CLOSE_97959247 = "close";
+  private static final String FIXTURE_PRIMARY_9466F7E5 = "PRIMARY";
+  private static final String FIXTURE_MORNING_BACKUP_REQUEST_UNAVAILABLE_F80624F3 =
+      "Morning backup request unavailable";
+  private static final String FIXTURE_PREPARE_NEW_ONLY_E4D47A46 = "prepare-new-only";
+  private static final String FIXTURE_ROOT_956E6E33 = "root";
   private static final UUID RUN = UUID.fromString("11111111-1111-4111-8111-111111111111");
   private static final UUID PART = UUID.fromString("33333333-3333-4333-8333-333333333333");
   private static final BackupWorkerRequest REQUEST =
@@ -94,13 +100,13 @@ final class MorningBackupRequestPublicationTest {
                 };
               });
       assertEquals(List.of("open", "assemble"), events);
-      assertEquals(0, fixture.counts.getOrDefault("close", 0));
+      assertEquals(0, fixture.counts.getOrDefault(FIXTURE_CLOSE_97959247, 0));
       assertFalse(fixture.descriptors.isEmpty());
       try (owner) {
         owner.prepare(REQUEST, PART);
       }
       assertEquals(List.of("open", "assemble", "prepare", "owned-close"), events);
-      assertEquals(1, fixture.counts.get("close"));
+      assertEquals(1, fixture.counts.get(FIXTURE_CLOSE_97959247));
       assertTrue(fixture.descriptors.isEmpty());
     }
   }
@@ -134,7 +140,7 @@ final class MorningBackupRequestPublicationTest {
               StorageIoException.Reason.UNAVAILABLE, ((StorageIoException) actual).reason());
         } else if (failure != null) assertSame(failure, actual);
         else assertInstanceOf(NullPointerException.class, actual);
-        assertEquals(1, fixture.counts.get("close"));
+        assertEquals(1, fixture.counts.get(FIXTURE_CLOSE_97959247));
         assertTrue(fixture.descriptors.isEmpty());
       }
     }
@@ -144,7 +150,9 @@ final class MorningBackupRequestPublicationTest {
   void mbpub010AssemblyCloseMatrixPreservesIndependentFailurePriority(@TempDir Path temporary)
       throws Exception {
     String[][] expected = {
-      {"IO", "CLOSE", "CLOSE"}, {"PRIMARY", "PRIMARY", "PRIMARY"}, {"PRIMARY", "PRIMARY", "PRIMARY"}
+      {"IO", "CLOSE", "CLOSE"},
+      {FIXTURE_PRIMARY_9466F7E5, FIXTURE_PRIMARY_9466F7E5, FIXTURE_PRIMARY_9466F7E5},
+      {FIXTURE_PRIMARY_9466F7E5, FIXTURE_PRIMARY_9466F7E5, FIXTURE_PRIMARY_9466F7E5}
     };
     for (int p = 0; p < 3; p++) {
       for (int c = 0; c < 3; c++) {
@@ -185,7 +193,7 @@ final class MorningBackupRequestPublicationTest {
               assertSame(after, actual);
               assertEquals(0, actual.getSuppressed().length);
             }
-            case "PRIMARY" -> {
+            case FIXTURE_PRIMARY_9466F7E5 -> {
               assertSame(before, actual);
               assertEquals(1, actual.getSuppressed().length);
               assertInstanceOf(StorageIoException.class, actual.getSuppressed()[0]);
@@ -193,7 +201,7 @@ final class MorningBackupRequestPublicationTest {
             }
             default -> fail("literal matrix only");
           }
-          assertEquals(1, fixture.counts.get("close"));
+          assertEquals(1, fixture.counts.get(FIXTURE_CLOSE_97959247));
           assertTrue(fixture.descriptors.isEmpty());
         }
       }
@@ -213,12 +221,12 @@ final class MorningBackupRequestPublicationTest {
           new RootStartupContext.Snapshot(
               service, RUN.toString(), "1".repeat(32), 2, 1, 1, "/system.slice/" + service.unit());
       assertEquals(
-          "Morning backup request unavailable",
+          FIXTURE_MORNING_BACKUP_REQUEST_UNAVAILABLE_F80624F3,
           assertThrows(
                   IOException.class, () -> MorningBackupRequestPublication.create(context, wrong))
               .getMessage());
       assertEquals(
-          "Morning backup request unavailable",
+          FIXTURE_MORNING_BACKUP_REQUEST_UNAVAILABLE_F80624F3,
           assertThrows(
                   IOException.class,
                   () -> MorningBackupRequestPublication.create(context, wrong, Optional.empty()))
@@ -250,13 +258,13 @@ final class MorningBackupRequestPublicationTest {
     public void prepare(BackupWorkerRequest request, UUID part) throws IOException {
       assertSame(REQUEST, request);
       assertEquals(PART, part);
-      events.add("prepare-new-only");
+      events.add(FIXTURE_PREPARE_NEW_ONLY_E4D47A46);
       if (prepareFailure != null) throw prepareFailure;
     }
 
     @Override
     public void close() throws IOException {
-      events.add("close");
+      events.add(FIXTURE_CLOSE_97959247);
       if (closeFailure != null) throw closeFailure;
     }
   }
@@ -267,14 +275,22 @@ final class MorningBackupRequestPublicationTest {
     var owner = new FakeOwner(events);
     var subject =
         new MorningBackupRequestPublication(
-            () -> events.add("root"),
+            () -> events.add(FIXTURE_ROOT_956E6E33),
             () -> {
               events.add("open-fixed");
               return owner;
             });
     subject.publish(REQUEST, PART);
     assertEquals(
-        List.of("root", "open-fixed", "root", "prepare-new-only", "root", "close", "root"), events);
+        List.of(
+            FIXTURE_ROOT_956E6E33,
+            "open-fixed",
+            FIXTURE_ROOT_956E6E33,
+            FIXTURE_PREPARE_NEW_ONLY_E4D47A46,
+            FIXTURE_ROOT_956E6E33,
+            FIXTURE_CLOSE_97959247,
+            FIXTURE_ROOT_956E6E33),
+        events);
   }
 
   @Test
@@ -288,7 +304,7 @@ final class MorningBackupRequestPublicationTest {
             },
             () -> fail("no open"));
     assertEquals(
-        "Morning backup request unavailable",
+        FIXTURE_MORNING_BACKUP_REQUEST_UNAVAILABLE_F80624F3,
         assertThrows(IOException.class, () -> subject.publish(REQUEST, PART)).getMessage());
     assertEquals(List.of("root-refuse"), events);
   }
@@ -303,7 +319,7 @@ final class MorningBackupRequestPublicationTest {
               throw failure;
             });
     assertEquals(
-        "Morning backup request unavailable",
+        FIXTURE_MORNING_BACKUP_REQUEST_UNAVAILABLE_F80624F3,
         assertThrows(IOException.class, () -> refused.publish(REQUEST, PART)).getMessage());
     var missing = new MorningBackupRequestPublication(() -> {}, () -> null);
     assertThrows(NullPointerException.class, () -> missing.publish(REQUEST, PART));
@@ -314,11 +330,18 @@ final class MorningBackupRequestPublicationTest {
     var events = new ArrayList<String>();
     var owner = new FakeOwner(events);
     owner.prepareFailure = new IOException("raw file name");
-    var subject = new MorningBackupRequestPublication(() -> events.add("root"), () -> owner);
+    var subject =
+        new MorningBackupRequestPublication(() -> events.add(FIXTURE_ROOT_956E6E33), () -> owner);
     assertEquals(
-        "Morning backup request unavailable",
+        FIXTURE_MORNING_BACKUP_REQUEST_UNAVAILABLE_F80624F3,
         assertThrows(IOException.class, () -> subject.publish(REQUEST, PART)).getMessage());
-    assertEquals(List.of("root", "root", "prepare-new-only", "close"), events);
+    assertEquals(
+        List.of(
+            FIXTURE_ROOT_956E6E33,
+            FIXTURE_ROOT_956E6E33,
+            FIXTURE_PREPARE_NEW_ONLY_E4D47A46,
+            FIXTURE_CLOSE_97959247),
+        events);
 
     events.clear();
     owner.prepareFailure = null;
@@ -326,19 +349,33 @@ final class MorningBackupRequestPublicationTest {
     var late =
         new MorningBackupRequestPublication(
             () -> {
-              events.add("root");
+              events.add(FIXTURE_ROOT_956E6E33);
               if (checks.incrementAndGet() == 3) throw new IOException("raw");
             },
             () -> owner);
     assertThrows(IOException.class, () -> late.publish(REQUEST, PART));
-    assertEquals(List.of("root", "root", "prepare-new-only", "root", "close"), events);
+    assertEquals(
+        List.of(
+            FIXTURE_ROOT_956E6E33,
+            FIXTURE_ROOT_956E6E33,
+            FIXTURE_PREPARE_NEW_ONLY_E4D47A46,
+            FIXTURE_ROOT_956E6E33,
+            FIXTURE_CLOSE_97959247),
+        events);
 
     events.clear();
     owner.closeFailure = new IOException("raw close");
     assertEquals(
-        "Morning backup request unavailable",
+        FIXTURE_MORNING_BACKUP_REQUEST_UNAVAILABLE_F80624F3,
         assertThrows(IOException.class, () -> subject.publish(REQUEST, PART)).getMessage());
-    assertEquals(List.of("root", "root", "prepare-new-only", "root", "close"), events);
+    assertEquals(
+        List.of(
+            FIXTURE_ROOT_956E6E33,
+            FIXTURE_ROOT_956E6E33,
+            FIXTURE_PREPARE_NEW_ONLY_E4D47A46,
+            FIXTURE_ROOT_956E6E33,
+            FIXTURE_CLOSE_97959247),
+        events);
   }
 
   @Test
@@ -346,9 +383,16 @@ final class MorningBackupRequestPublicationTest {
     var events = new ArrayList<String>();
     var owner = new FakeOwner(events);
     owner.prepareFailure = new IOException("existing file");
-    var subject = new MorningBackupRequestPublication(() -> events.add("root"), () -> owner);
+    var subject =
+        new MorningBackupRequestPublication(() -> events.add(FIXTURE_ROOT_956E6E33), () -> owner);
     assertThrows(IOException.class, () -> subject.publish(REQUEST, PART));
-    assertEquals(List.of("root", "root", "prepare-new-only", "close"), events);
+    assertEquals(
+        List.of(
+            FIXTURE_ROOT_956E6E33,
+            FIXTURE_ROOT_956E6E33,
+            FIXTURE_PREPARE_NEW_ONLY_E4D47A46,
+            FIXTURE_CLOSE_97959247),
+        events);
   }
 
   @Test
@@ -361,14 +405,15 @@ final class MorningBackupRequestPublicationTest {
         NullPointerException.class,
         () -> new MorningBackupRequestPublication(() -> fail("no root"), null));
     var subject =
-        new MorningBackupRequestPublication(() -> events.add("root"), () -> fail("no open"));
+        new MorningBackupRequestPublication(
+            () -> events.add(FIXTURE_ROOT_956E6E33), () -> fail("no open"));
     assertThrows(NullPointerException.class, () -> subject.publish(null, PART));
     assertThrows(NullPointerException.class, () -> subject.publish(REQUEST, null));
     assertTrue(events.isEmpty());
     Thread.currentThread().interrupt();
     try {
       assertEquals(
-          "Morning backup request unavailable",
+          FIXTURE_MORNING_BACKUP_REQUEST_UNAVAILABLE_F80624F3,
           assertThrows(IOException.class, () -> subject.publish(REQUEST, PART)).getMessage());
       assertTrue(events.isEmpty());
     } finally {

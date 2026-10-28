@@ -42,6 +42,12 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** NK-BAT-001/BAK/BKO/OPS009/UI251/SS341 6.6; PG168/SSC061; BAT218..225. */
 final class BackupCommitServiceTest {
+  private static final String FIXTURE_PAIR_ROW_NEXT_29F9C13D = "pair.row.next";
+  private static final String FIXTURE_CONNECTION_ROLLBACK_9F978A8C = "connection.rollback";
+  private static final String FIXTURE_CONNECTION_SETAUTOCOMMIT_D9B0AF8D =
+      "connection.setAutoCommit";
+  private static final String FIXTURE_CONNECTION_COMMIT_37C1B216 = "connection.commit";
+  private static final String FIXTURE_PUBLIC_B7853257 = "public";
   @TempDir static Path root;
   static BatchDatabaseFixture db;
 
@@ -68,12 +74,14 @@ final class BackupCommitServiceTest {
             int[] injected = {0, 0};
             p.before =
                 (key, count) -> {
-                  if (key.equals("pair.row.next") && count == 1) {
+                  if (key.equals(FIXTURE_PAIR_ROW_NEXT_29F9C13D) && count == 1) {
                     injected[0]++;
                     throw primary;
                   }
-                  if ((!restore && key.equals("connection.rollback") && count == 1)
-                      || (restore && key.equals("connection.setAutoCommit") && count == 2)) {
+                  if ((!restore && key.equals(FIXTURE_CONNECTION_ROLLBACK_9F978A8C) && count == 1)
+                      || (restore
+                          && key.equals(FIXTURE_CONNECTION_SETAUTOCOMMIT_D9B0AF8D)
+                          && count == 2)) {
                     injected[1]++;
                     throw secondary;
                   }
@@ -98,7 +106,7 @@ final class BackupCommitServiceTest {
               failed(() -> new BackupCommitService().complete(p.wrap(c), manifest(), END));
             }
             assertArrayEquals(new int[] {1, 1}, injected);
-            assertEquals(restore ? 2 : 1, p.seen.get("connection.setAutoCommit"));
+            assertEquals(restore ? 2 : 1, p.seen.get(FIXTURE_CONNECTION_SETAUTOCOMMIT_D9B0AF8D));
             assertFalse(c.getAutoCommit());
             p.closed();
             c.rollback();
@@ -163,8 +171,8 @@ final class BackupCommitServiceTest {
       p.closed();
       assertEquals(RUNNING, state(admin));
       assertTrue(c.getAutoCommit());
-      assertEquals(1, p.seen.get("connection.rollback"));
-      assertFalse(p.seen.containsKey("connection.commit"));
+      assertEquals(1, p.seen.get(FIXTURE_CONNECTION_ROLLBACK_9F978A8C));
+      assertFalse(p.seen.containsKey(FIXTURE_CONNECTION_COMMIT_37C1B216));
       // The old other run remains untouched by either rollback or a later successful retry.
       sql(
           admin,
@@ -187,10 +195,10 @@ final class BackupCommitServiceTest {
         if (committed)
           p.after =
               (key, n) -> {
-                if (key.equals("connection.commit"))
+                if (key.equals(FIXTURE_CONNECTION_COMMIT_37C1B216))
                   throw new SQLException("PUBLIC_DIAGNOSTIC_CANARY");
               };
-        else p.fail("connection.commit", 1);
+        else p.fail(FIXTURE_CONNECTION_COMMIT_37C1B216, 1);
         failed(() -> new BackupCommitService().complete(p.wrap(c), manifest(), END));
         p.closed();
         assertEquals(committed ? SUCCEEDED : RUNNING, state(admin));
@@ -261,7 +269,8 @@ final class BackupCommitServiceTest {
           failed(() -> new BackupCommitService().complete(p.wrap(c), manifest(), END));
           assertEquals(1, p.hits, entry.getKey() + "#" + occurrence);
           p.closed();
-          boolean committed = entry.getKey().equals("connection.setAutoCommit") && occurrence == 2;
+          boolean committed =
+              entry.getKey().equals(FIXTURE_CONNECTION_SETAUTOCOMMIT_D9B0AF8D) && occurrence == 2;
           assertEquals(committed ? SUCCEEDED : RUNNING, state(admin));
           count++;
           if (!c.getAutoCommit()) c.rollback();
@@ -275,12 +284,14 @@ final class BackupCommitServiceTest {
         var p = new Probe();
         p.fail("update.statement.executeUpdate", 2);
         p.fail(
-            rollbackFails ? "connection.rollback" : "connection.setAutoCommit",
+            rollbackFails
+                ? FIXTURE_CONNECTION_ROLLBACK_9F978A8C
+                : FIXTURE_CONNECTION_SETAUTOCOMMIT_D9B0AF8D,
             rollbackFails ? 1 : 2);
         failed(() -> new BackupCommitService().complete(p.wrap(c), manifest(), END));
         p.closed();
         assertEquals(2, p.hits);
-        assertEquals(rollbackFails ? 1 : 2, p.seen.get("connection.setAutoCommit"));
+        assertEquals(rollbackFails ? 1 : 2, p.seen.get(FIXTURE_CONNECTION_SETAUTOCOMMIT_D9B0AF8D));
         assertFalse(c.getAutoCommit());
         assertEquals(RUNNING, state(admin));
         c.rollback();
@@ -316,8 +327,8 @@ final class BackupCommitServiceTest {
             Thread.interrupted();
           }
           boolean committed =
-              entry.getKey().equals("connection.commit")
-                  || entry.getKey().equals("connection.setAutoCommit") && at == 2;
+              entry.getKey().equals(FIXTURE_CONNECTION_COMMIT_37C1B216)
+                  || entry.getKey().equals(FIXTURE_CONNECTION_SETAUTOCOMMIT_D9B0AF8D) && at == 2;
           assertEquals(committed ? SUCCEEDED : RUNNING, state(admin));
           if (!c.getAutoCommit()) c.rollback();
         } finally {
@@ -344,8 +355,9 @@ final class BackupCommitServiceTest {
     try (var c = locked(db, true)) {
       var primary = new IllegalStateException("public primary");
       var p = new Probe();
-      p.unknown.put("pair.row.next", primary);
-      p.unknown.put("connection.rollback", new NullPointerException("public secondary"));
+      p.unknown.put(FIXTURE_PAIR_ROW_NEXT_29F9C13D, primary);
+      p.unknown.put(
+          FIXTURE_CONNECTION_ROLLBACK_9F978A8C, new NullPointerException("public secondary"));
       assertSame(
           primary,
           assertThrows(
@@ -357,27 +369,28 @@ final class BackupCommitServiceTest {
     }
     for (Throwable primary :
         List.of(
-            new IllegalStateException("public"),
-            new IllegalArgumentException("public"),
-            new NullPointerException("public"),
-            new AssertionError("public")))
+            new IllegalStateException(FIXTURE_PUBLIC_B7853257),
+            new IllegalArgumentException(FIXTURE_PUBLIC_B7853257),
+            new NullPointerException(FIXTURE_PUBLIC_B7853257),
+            new AssertionError(FIXTURE_PUBLIC_B7853257)))
       for (int cleanup = 0; cleanup < 3; cleanup++) {
         reset(db);
         try (var c = locked(db, true)) {
           var p = new Probe();
-          p.unknown.put("pair.row.next", primary);
-          if (cleanup == 1) p.fail("connection.rollback", 1);
-          if (cleanup == 2) p.fail("connection.setAutoCommit", 2);
+          p.unknown.put(FIXTURE_PAIR_ROW_NEXT_29F9C13D, primary);
+          if (cleanup == 1) p.fail(FIXTURE_CONNECTION_ROLLBACK_9F978A8C, 1);
+          if (cleanup == 2) p.fail(FIXTURE_CONNECTION_SETAUTOCOMMIT_D9B0AF8D, 2);
           // Each crossing uses a new throwable so earlier suppressed failures cannot leak into this
           // case.
           Throwable unique;
-          if (primary instanceof AssertionError) unique = new AssertionError("public");
+          if (primary instanceof AssertionError)
+            unique = new AssertionError(FIXTURE_PUBLIC_B7853257);
           else if (primary instanceof NullPointerException)
-            unique = new NullPointerException("public");
+            unique = new NullPointerException(FIXTURE_PUBLIC_B7853257);
           else if (primary instanceof IllegalArgumentException)
-            unique = new IllegalArgumentException("public");
-          else unique = new IllegalStateException("public");
-          p.unknown.put("pair.row.next", unique);
+            unique = new IllegalArgumentException(FIXTURE_PUBLIC_B7853257);
+          else unique = new IllegalStateException(FIXTURE_PUBLIC_B7853257);
+          p.unknown.put(FIXTURE_PAIR_ROW_NEXT_29F9C13D, unique);
           assertSame(
               unique,
               assertThrows(

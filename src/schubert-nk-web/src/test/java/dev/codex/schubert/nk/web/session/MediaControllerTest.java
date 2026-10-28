@@ -77,6 +77,12 @@ import org.springframework.web.context.support.AnnotationConfigWebApplicationCon
 
 /** UI232/235 literal byte oracle + SS333 HTTP/stream oracle. PG-D-343/PT-MED-HTTP001..010. */
 class MediaControllerTest {
+  private static final String FIXTURE_0000_876EEFE0 = "0000";
+  private static final String FIXTURE_GET_04F32A7E = "GET";
+  private static final String FIXTURE_HEAD_DEE4F10B = "HEAD";
+  private static final String FIXTURE_DOWNLOAD_9638BA4D = "download";
+  private static final String FIXTURE_TRACK1_3926438E = "track1";
+  private static final String FIXTURE_AUD_5C44DBC9 = "AUD";
   private static WebLogDatabaseFixture db;
   private static final Clock CLOCK =
       Clock.fixed(Instant.parse("2026-10-02T19:00:00Z"), ZoneOffset.UTC);
@@ -116,8 +122,8 @@ class MediaControllerTest {
     try (var f = new Fixture(root)) {
       var seen = new HashSet<UUID>();
       for (var role : UserRole.values())
-        for (var code : List.of("0000", "0200"))
-          for (var method : List.of("GET", "HEAD"))
+        for (var code : List.of(FIXTURE_0000_876EEFE0, "0200"))
+          for (var method : List.of(FIXTURE_GET_04F32A7E, FIXTURE_HEAD_DEE4F10B))
             for (var path : PATHS) {
               f.code = code;
               var r = f.request(method, path);
@@ -132,7 +138,7 @@ class MediaControllerTest {
               assertEquals("bytes", s.getHeader("Accept-Ranges"));
               assertEquals("private, no-store", s.getHeader("Cache-Control"));
               assertEquals("nosniff", s.getHeader("X-Content-Type-Options"));
-              boolean attachment = path.contains("download");
+              boolean attachment = path.contains(FIXTURE_DOWNLOAD_9638BA4D);
               assertEquals(
                   attachment ? "application/octet-stream" : mime(path), s.getContentType());
               assertTrue(
@@ -141,14 +147,17 @@ class MediaControllerTest {
               assertNull(s.getHeader("ETag"));
               assertNull(s.getHeader("Last-Modified"));
               assertArrayEquals(
-                  method.equals("HEAD") ? new byte[0] : FILE, s.getContentAsByteArray());
+                  method.equals(FIXTURE_HEAD_DEE4F10B) ? new byte[0] : FILE,
+                  s.getContentAsByteArray());
               var event = f.log.events.getLast();
               assertEquals(
                   attachment ? "MEDIA_DOWNLOADED" : "MEDIA_STREAMED",
                   event.get("action").getAsString());
               assertEquals("SUCCESS", event.get("outcome").getAsString());
               assertEquals(role.name(), event.get("actorRole").getAsString());
-              assertEquals(method.equals("HEAD") ? 0 : 12, event.get("responseBytes").getAsLong());
+              assertEquals(
+                  method.equals(FIXTURE_HEAD_DEE4F10B) ? 0 : 12,
+                  event.get("responseBytes").getAsLong());
               String text = event.toString();
               assertFalse(text.contains(HASH));
               assertFalse(text.contains("synthetic-query"));
@@ -181,13 +190,13 @@ class MediaControllerTest {
     int[] last = {0, 4, 11, 11, 11, 4, -1, -1, -1, -1, -1, -1, -1, 11};
     try (var f = new Fixture(root)) {
       for (var path : PATHS)
-        for (var method : List.of("GET", "HEAD"))
+        for (var method : List.of(FIXTURE_GET_04F32A7E, FIXTURE_HEAD_DEE4F10B))
           for (int i = 0; i < inputs.length; i++) {
             var r = f.request(method, path);
             r.addHeader("Range", inputs[i]);
             var s = new MockHttpServletResponse();
             call(f.controller, path, actor(UserRole.USER), r, s);
-            boolean download = path.contains("download");
+            boolean download = path.contains(FIXTURE_DOWNLOAD_9638BA4D);
             boolean bad = first[i] < 0;
             int status = download ? 200 : bad ? 416 : 206;
             assertEquals(status, s.getStatus());
@@ -197,7 +206,7 @@ class MediaControllerTest {
                 download ? null : bad ? "bytes */12" : "bytes " + first[i] + "-" + last[i] + "/12",
                 s.getHeader("Content-Range"));
             byte[] expected =
-                method.equals("HEAD") || (!download && bad)
+                method.equals(FIXTURE_HEAD_DEE4F10B) || (!download && bad)
                     ? new byte[0]
                     : download ? FILE : Arrays.copyOfRange(FILE, first[i], last[i] + 1);
             assertArrayEquals(expected, s.getContentAsByteArray());
@@ -227,19 +236,23 @@ class MediaControllerTest {
       }
       for (String id : List.of("", "0", "-1", "+1", " 7", "7 ", "1000000000000", "1.0", "１２")) {
         var s = new MockHttpServletResponse();
-        f.controller.audio(id, actor(UserRole.USER), f.request("GET", "/audio/7"), s);
+        f.controller.audio(
+            id, actor(UserRole.USER), f.request(FIXTURE_GET_04F32A7E, "/audio/7"), s);
         assertEquals(400, s.getStatus());
       }
       for (String id : List.of("", "a".repeat(65), "字".repeat(22), "bad\n", "bad ")) {
         for (boolean video : List.of(false, true)) {
           var s = new MockHttpServletResponse();
           if (video)
-            f.controller.video(id, actor(UserRole.USER), f.request("GET", PATHS.get(2)), s);
-          else f.controller.music(id, actor(UserRole.USER), f.request("GET", PATHS.get(3)), s);
+            f.controller.video(
+                id, actor(UserRole.USER), f.request(FIXTURE_GET_04F32A7E, PATHS.get(2)), s);
+          else
+            f.controller.music(
+                id, actor(UserRole.USER), f.request(FIXTURE_GET_04F32A7E, PATHS.get(3)), s);
           assertEquals(400, s.getStatus());
         }
       }
-      var r = f.request("GET", PATHS.getFirst());
+      var r = f.request(FIXTURE_GET_04F32A7E, PATHS.getFirst());
       var s = new MockHttpServletResponse();
       assertThrows(
           NullPointerException.class, () -> f.controller.audio(null, actor(UserRole.USER), r, s));
@@ -257,7 +270,10 @@ class MediaControllerTest {
       assertEquals(200, s.getStatus());
       var normalized = new MockHttpServletResponse();
       f.controller.music(
-          "e\u0301", actor(UserRole.USER), f.request("GET", "/music/media/é"), normalized);
+          "e\u0301",
+          actor(UserRole.USER),
+          f.request(FIXTURE_GET_04F32A7E, "/music/media/é"),
+          normalized);
       assertEquals(200, normalized.getStatus());
       assertEquals(
           "é", new String(f.requests.getLast(), 256, 64, StandardCharsets.UTF_8).stripTrailing());
@@ -274,17 +290,17 @@ class MediaControllerTest {
         for (int i = 0; i < codes.length; i++) {
           f.code = codes[i];
           var s = new MockHttpServletResponse();
-          call(f.controller, path, actor(UserRole.USER), f.request("GET", path), s);
+          call(f.controller, path, actor(UserRole.USER), f.request(FIXTURE_GET_04F32A7E, path), s);
           assertEquals(statuses[i], s.getStatus());
         }
-      f.code = "0000";
+      f.code = FIXTURE_0000_876EEFE0;
       for (int mode = 0; mode < 7; mode++) {
         final int mutation = mode;
         f.reply =
             (id, b) -> {
               if (mutation == 0) throw new jakarta.jms.JMSException("synthetic-private-path");
               if (mutation == 1) return new byte[0];
-              var bytes = response(id, b, "0000");
+              var bytes = response(id, b, FIXTURE_0000_876EEFE0);
               if (mutation == 2) put(bytes, 60, new UUID(0, 999).toString());
               if (mutation == 3) bytes[113] = 'b';
               if (mutation == 4) bytes[212] = 'x';
@@ -297,7 +313,7 @@ class MediaControllerTest {
             f.controller,
             PATHS.getFirst(),
             actor(UserRole.USER),
-            f.request("GET", PATHS.getFirst()),
+            f.request(FIXTURE_GET_04F32A7E, PATHS.getFirst()),
             s);
         assertEquals(503, s.getStatus());
         assertFalse(s.getContentAsString().contains("private-path"));
@@ -315,7 +331,7 @@ class MediaControllerTest {
           final int mutation = mode;
           f.reply =
               (id, b) -> {
-                var bytes = response(id, b, "0000");
+                var bytes = response(id, b, FIXTURE_0000_876EEFE0);
                 if (mutation == 0) {
                   Arrays.fill(bytes, 256, 320, (byte) ' ');
                   put(bytes, 256, "8");
@@ -333,7 +349,7 @@ class MediaControllerTest {
                 return bytes;
               };
           var s = new MockHttpServletResponse();
-          call(f.controller, path, actor(UserRole.ADMIN), f.request("GET", path), s);
+          call(f.controller, path, actor(UserRole.ADMIN), f.request(FIXTURE_GET_04F32A7E, path), s);
           assertEquals(503, s.getStatus());
         }
       assertEquals(0, f.opens.get());
@@ -345,7 +361,7 @@ class MediaControllerTest {
   void http006ApiInvalidClearsActualEncryptedSessionForAllMediaRoutes() throws Exception {
     try (var f = new Fixture(root)) {
       f.code = "0102";
-      for (var method : List.of("GET", "HEAD"))
+      for (var method : List.of(FIXTURE_GET_04F32A7E, FIXTURE_HEAD_DEE4F10B))
         for (var path : PATHS) {
           var snapshot = f.security.authenticated(actor(UserRole.USER));
           var r = raw(method, path);
@@ -386,7 +402,7 @@ class MediaControllerTest {
           f.controller,
           PATHS.getFirst(),
           actor(UserRole.USER),
-          f.request("GET", PATHS.getFirst()),
+          f.request(FIXTURE_GET_04F32A7E, PATHS.getFirst()),
           s);
       assertEquals(503, s.getStatus());
       assertNull(s.getHeader("Retry-After"));
@@ -406,7 +422,7 @@ class MediaControllerTest {
                       f.controller,
                       PATHS.getFirst(),
                       actor(UserRole.USER),
-                      f.request("GET", PATHS.getFirst()),
+                      f.request(FIXTURE_GET_04F32A7E, PATHS.getFirst()),
                       committed));
       assertEquals("media response interrupted", e.getMessage());
       assertNull(e.getCause());
@@ -440,7 +456,7 @@ class MediaControllerTest {
           f.controller,
           PATHS.getFirst(),
           actor(UserRole.USER),
-          f.request("GET", PATHS.getFirst()),
+          f.request(FIXTURE_GET_04F32A7E, PATHS.getFirst()),
           aborted);
       assertEquals(503, aborted.getStatus());
       var event = f.log.events.getLast();
@@ -474,7 +490,7 @@ class MediaControllerTest {
                           f.controller,
                           PATHS.getFirst(),
                           actor(UserRole.USER),
-                          f.request("GET", PATHS.getFirst()),
+                          f.request(FIXTURE_GET_04F32A7E, PATHS.getFirst()),
                           response);
                       assertEquals(200, response.getStatus());
                     } catch (Exception failure) {
@@ -490,7 +506,7 @@ class MediaControllerTest {
               f.controller,
               PATHS.getFirst(),
               actor(UserRole.USER),
-              f.request("GET", PATHS.getFirst()),
+              f.request(FIXTURE_GET_04F32A7E, PATHS.getFirst()),
               busy);
           assertEquals(503, busy.getStatus());
           assertEquals("1", busy.getHeader("Retry-After"));
@@ -506,7 +522,7 @@ class MediaControllerTest {
           f.controller,
           PATHS.getFirst(),
           actor(UserRole.USER),
-          f.request("GET", PATHS.getFirst()),
+          f.request(FIXTURE_GET_04F32A7E, PATHS.getFirst()),
           normal);
       assertEquals(200, normal.getStatus());
       f.erased();
@@ -530,7 +546,7 @@ class MediaControllerTest {
       var mvc = MockMvcBuilders.webAppContextSetup(context).build();
       for (var path : PATHS)
         for (boolean head : List.of(false, true)) {
-          var r = f.request(head ? "HEAD" : "GET", path);
+          var r = f.request(head ? FIXTURE_HEAD_DEE4F10B : FIXTURE_GET_04F32A7E, path);
           var result =
               mvc.perform(
                       (head ? head(path) : get(path))
@@ -549,7 +565,9 @@ class MediaControllerTest {
         int sends = f.requests.size();
         var response = new MockHttpServletResponse();
         f.security.run(
-            raw("GET", path), response, (request, res) -> fail("anonymous media reached business"));
+            raw(FIXTURE_GET_04F32A7E, path),
+            response,
+            (request, res) -> fail("anonymous media reached business"));
         assertEquals(403, response.getStatus());
         assertEquals(sends, f.requests.size());
       }
@@ -571,7 +589,7 @@ class MediaControllerTest {
                     String path = PATHS.get(sequence % 5);
                     String context = String.format(Locale.ROOT, "%064x", sequence + 1);
                     f.expectedContext.set(context);
-                    var r = f.request("GET", path);
+                    var r = f.request(FIXTURE_GET_04F32A7E, path);
                     r.addHeader("Range", "bytes=2-4");
                     var response = new MockHttpServletResponse();
                     call(
@@ -584,9 +602,10 @@ class MediaControllerTest {
                             CLOCK.instant()),
                         r,
                         response);
-                    assertEquals(path.contains("download") ? 200 : 206, response.getStatus());
+                    assertEquals(
+                        path.contains(FIXTURE_DOWNLOAD_9638BA4D) ? 200 : 206, response.getStatus());
                     assertArrayEquals(
-                        path.contains("download")
+                        path.contains(FIXTURE_DOWNLOAD_9638BA4D)
                             ? FILE
                             : "cde".getBytes(StandardCharsets.US_ASCII),
                         response.getContentAsByteArray());
@@ -630,7 +649,8 @@ class MediaControllerTest {
                   new LayoutId("VIDREQ01"), new VideoDescriptorRequestData("opening"), List.of()),
               new TypedPayloadValues(
                   new LayoutId("MEDREQ01"),
-                  new MusicDescriptorRequestData("track1", ContentDisposition.INLINE),
+                  new MusicDescriptorRequestData(
+                      FIXTURE_TRACK1_3926438E, ContentDisposition.INLINE),
                   List.of()),
               new TypedPayloadValues(
                   new LayoutId("AUDREQ01"), new VideoDescriptorRequestData("opening"), List.of()),
@@ -721,8 +741,8 @@ class MediaControllerTest {
       case "/audio/7" -> c.audio("7", p, r, s);
       case "/audio/7/download" -> c.audioDownload("7", p, r, s);
       case "/animation/media/opening" -> c.video("opening", p, r, s);
-      case "/music/media/track1" -> c.music("track1", p, r, s);
-      case "/music/download/track1" -> c.musicDownload("track1", p, r, s);
+      case "/music/media/track1" -> c.music(FIXTURE_TRACK1_3926438E, p, r, s);
+      case "/music/download/track1" -> c.musicDownload(FIXTURE_TRACK1_3926438E, p, r, s);
       default -> throw new AssertionError();
     }
   }
@@ -768,20 +788,26 @@ class MediaControllerTest {
     put(b, 187, "000000000000");
     put(b, 199, String.format(Locale.ROOT, "%09d", b.length));
     put(b, 208, code);
-    boolean ok = code.equals("0000") || code.equals("0200");
+    boolean ok = code.equals(FIXTURE_0000_876EEFE0) || code.equals("0200");
     put(b, 1088, ok ? "000000000012" : "000000000000");
     if (ok) {
       String logical =
-          type.equals("AUD")
+          type.equals(FIXTURE_AUD_5C44DBC9)
               ? Long.toString(Long.parseLong(ascii(request, 256, 12)))
               : new String(request, 256, 64, StandardCharsets.UTF_8).stripTrailing();
-      String name = type.equals("AUD") ? "a.ogg" : video ? "a.mp4" : "a.wav";
+      String name = type.equals(FIXTURE_AUD_5C44DBC9) ? "a.ogg" : video ? "a.mp4" : "a.wav";
       put(b, 256, logical);
-      put(b, 320, (type.equals("AUD") ? "scenario/" : video ? "video/" : "music/") + name);
+      put(
+          b,
+          320,
+          (type.equals(FIXTURE_AUD_5C44DBC9) ? "scenario/" : video ? "video/" : "music/") + name);
       put(b, 832, name);
       put(b, 1100, HASH);
-      put(b, 1164, type.equals("AUD") ? "audio/ogg" : video ? "video/mp4" : "audio/wav");
-      b[1228] = (byte) (video ? 'I' : request[type.equals("AUD") ? 268 : 320]);
+      put(
+          b,
+          1164,
+          type.equals(FIXTURE_AUD_5C44DBC9) ? "audio/ogg" : video ? "video/mp4" : "audio/wav");
+      b[1228] = (byte) (video ? 'I' : request[type.equals(FIXTURE_AUD_5C44DBC9) ? 268 : 320]);
       if (video) {
         put(b, 1280, "Opening");
         put(b, 1536, "OPENING");
@@ -823,9 +849,11 @@ class MediaControllerTest {
               assertEquals(expectedContext.get(), ascii(b, 113, 64));
               String path = expectedPath.get();
               String type =
-                  path.startsWith("/audio") ? "AUD" : path.startsWith("/animation") ? "VID" : "MED";
+                  path.startsWith("/audio")
+                      ? FIXTURE_AUD_5C44DBC9
+                      : path.startsWith("/animation") ? "VID" : "MED";
               assertEquals(type, ascii(b, 11, 3));
-              int length = type.equals("AUD") ? 16 : type.equals("VID") ? 64 : 72;
+              int length = type.equals(FIXTURE_AUD_5C44DBC9) ? 16 : type.equals("VID") ? 64 : 72;
               var expected = new byte[256 + length];
               Arrays.fill(expected, (byte) ' ');
               put(expected, 0, "SCHBNK01001");
@@ -839,19 +867,19 @@ class MediaControllerTest {
               put(expected, 181, String.format(Locale.ROOT, "%06d", length));
               put(expected, 187, "000000000000");
               put(expected, 199, String.format(Locale.ROOT, "%09d", expected.length));
-              if (type.equals("AUD")) {
+              if (type.equals(FIXTURE_AUD_5C44DBC9)) {
                 put(expected, 256, "000000000007");
-                expected[268] = (byte) (path.contains("download") ? 'A' : 'I');
+                expected[268] = (byte) (path.contains(FIXTURE_DOWNLOAD_9638BA4D) ? 'A' : 'I');
               } else {
                 put(
                     expected,
                     256,
-                    path.substring(path.lastIndexOf('/') + 1).equals("track1")
-                            || path.endsWith("download")
-                        ? "track1"
+                    path.substring(path.lastIndexOf('/') + 1).equals(FIXTURE_TRACK1_3926438E)
+                            || path.endsWith(FIXTURE_DOWNLOAD_9638BA4D)
+                        ? FIXTURE_TRACK1_3926438E
                         : path.substring(path.lastIndexOf('/') + 1));
                 if (type.equals("MED"))
-                  expected[320] = (byte) (path.contains("download") ? 'A' : 'I');
+                  expected[320] = (byte) (path.contains(FIXTURE_DOWNLOAD_9638BA4D) ? 'A' : 'I');
               }
               assertArrayEquals(expected, b);
               var replyBytes = this.reply.receive(id, b);
@@ -862,7 +890,7 @@ class MediaControllerTest {
             Duration.ofSeconds(1));
     final MediaController controller =
         new MediaController(client, security.handler, service, audit);
-    volatile String code = "0000";
+    volatile String code = FIXTURE_0000_876EEFE0;
     volatile Reply reply = (id, b) -> response(id, b, code);
     volatile MediaRangeService.FileSource source = this::read;
     final Path file;

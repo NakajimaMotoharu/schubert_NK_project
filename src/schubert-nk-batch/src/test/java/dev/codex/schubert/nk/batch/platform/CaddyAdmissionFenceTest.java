@@ -14,20 +14,22 @@ import org.junit.jupiter.api.Test;
 
 /** SS342 SSC186; PT-OPS-CADDYFENCE001..003. Independent literal ownership order. */
 final class CaddyAdmissionFenceTest {
+  private static final String FIXTURE_FULL_1E594123 = "full";
+  private static final String FIXTURE_OWNER_622F06CB = "owner";
   private static final List<String> ORDER =
       List.of(
-          "full",
+          FIXTURE_FULL_1E594123,
           "API-context",
-          "owner",
+          FIXTURE_OWNER_622F06CB,
           "API-marker",
-          "owner",
+          FIXTURE_OWNER_622F06CB,
           "API-context",
           "WEB-context",
-          "owner",
+          FIXTURE_OWNER_622F06CB,
           "WEB-marker",
-          "owner",
+          FIXTURE_OWNER_622F06CB,
           "WEB-context",
-          "full");
+          FIXTURE_FULL_1E594123);
 
   @FunctionalInterface
   interface Check {
@@ -76,12 +78,15 @@ final class CaddyAdmissionFenceTest {
     var web = attempt(MaintenanceUnit.WEB, check, starts);
     var fence =
         BackupUnitStartClient.caddyAdmissionFence(
-            () -> check.run("full"), () -> check.run("owner"), api, web);
+            () -> check.run(FIXTURE_FULL_1E594123),
+            () -> check.run(FIXTURE_OWNER_622F06CB),
+            api,
+            web);
     armed[0] = true;
     fence.verify();
     assertEquals(ORDER, events);
-    assertEquals(2, Collections.frequency(events, "full"));
-    assertEquals(4, Collections.frequency(events, "owner"));
+    assertEquals(2, Collections.frequency(events, FIXTURE_FULL_1E594123));
+    assertEquals(4, Collections.frequency(events, FIXTURE_OWNER_622F06CB));
     assertEquals(2, starts[0]);
     assertEquals(BackupUnitStartClient.Status.CLIENT_EXITED_ZERO, api.status());
     assertEquals(BackupUnitStartClient.Status.CLIENT_EXITED_ZERO, web.status());
@@ -114,7 +119,10 @@ final class CaddyAdmissionFenceTest {
         var web = attempt(MaintenanceUnit.WEB, check, starts);
         var fence =
             BackupUnitStartClient.caddyAdmissionFence(
-                () -> check.run("full"), () -> check.run("owner"), api, web);
+                () -> check.run(FIXTURE_FULL_1E594123),
+                () -> check.run(FIXTURE_OWNER_622F06CB),
+                api,
+                web);
         armed[0] = true;
         assertSame(fault, assertThrows(fault.getClass(), fence::verify));
         assertEquals(ORDER.subList(0, failAt + 1), events);

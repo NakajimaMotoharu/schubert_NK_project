@@ -25,22 +25,29 @@ import org.junit.jupiter.api.io.TempDir;
 /** PG242/PT-OPS-MQ-019..021; real Ops metrics and independent SS321 capacity literals. */
 @SuppressWarnings("try") // EmbeddedActiveMQ.stop declares Exception; fixture owns it.
 final class ArtemisQueuePressureClientTest {
+  private static final String FIXTURE_NK_SYNC_REQUEST_422EE207 = "nk.sync.request";
+  private static final String FIXTURE_NK_DEAD_LETTER_6588D12C = "nk.dead.letter";
   private static final Set<String> ADDRESSES =
       Set.of(
-          "nk.sync.request",
+          FIXTURE_NK_SYNC_REQUEST_422EE207,
           "nk.sync.reply.web",
           "nk.async.work",
           "nk.web.log",
-          "nk.dead.letter",
+          FIXTURE_NK_DEAD_LETTER_6588D12C,
           "nk.expiry");
   // Exact integer threshold literals from SS321 §5.2; none is obtained from production.
   private static final Map<String, long[]> BOUNDARIES =
       Map.of(
-          "nk.sync.request", new long[] {250, 450, 187_904_820, 241_591_911},
-          "nk.sync.reply.web", new long[] {250, 450, 187_904_820, 241_591_911},
-          "nk.async.work", new long[] {5_000, 9_000, 751_619_277, 966_367_642},
-          "nk.web.log", new long[] {5_000, 9_000, 187_904_820, 241_591_911},
-          "nk.expiry", new long[] {1_000, 5_000, 751_619_277, 966_367_642});
+          FIXTURE_NK_SYNC_REQUEST_422EE207,
+          new long[] {250, 450, 187_904_820, 241_591_911},
+          "nk.sync.reply.web",
+          new long[] {250, 450, 187_904_820, 241_591_911},
+          "nk.async.work",
+          new long[] {5_000, 9_000, 751_619_277, 966_367_642},
+          "nk.web.log",
+          new long[] {5_000, 9_000, 187_904_820, 241_591_911},
+          "nk.expiry",
+          new long[] {1_000, 5_000, 751_619_277, 966_367_642});
 
   @TempDir Path root;
 
@@ -88,14 +95,38 @@ final class ArtemisQueuePressureClientTest {
       assertState(address, 0, b[3], ArtemisQueuePressureClient.Pressure.CRITICAL);
       assertState(address, 0, b[3] + 1, ArtemisQueuePressureClient.Pressure.CRITICAL);
     }
-    assertState("nk.dead.letter", 0, 0, ArtemisQueuePressureClient.Pressure.NORMAL);
-    assertState("nk.dead.letter", 1, 0, ArtemisQueuePressureClient.Pressure.ALERT);
-    assertState("nk.dead.letter", 10_000, 1_503_238_553, ArtemisQueuePressureClient.Pressure.ALERT);
-    assertState("nk.dead.letter", 0, 1_503_238_554, ArtemisQueuePressureClient.Pressure.WARNING);
-    assertState("nk.dead.letter", 1, 1_503_238_554, ArtemisQueuePressureClient.Pressure.ALERT);
-    assertState("nk.dead.letter", 0, 1_932_735_283, ArtemisQueuePressureClient.Pressure.WARNING);
-    assertState("nk.dead.letter", 1, 1_932_735_284, ArtemisQueuePressureClient.Pressure.CRITICAL);
-    assertState("nk.sync.request", 250, 241_591_911, ArtemisQueuePressureClient.Pressure.CRITICAL);
+    assertState(FIXTURE_NK_DEAD_LETTER_6588D12C, 0, 0, ArtemisQueuePressureClient.Pressure.NORMAL);
+    assertState(FIXTURE_NK_DEAD_LETTER_6588D12C, 1, 0, ArtemisQueuePressureClient.Pressure.ALERT);
+    assertState(
+        FIXTURE_NK_DEAD_LETTER_6588D12C,
+        10_000,
+        1_503_238_553,
+        ArtemisQueuePressureClient.Pressure.ALERT);
+    assertState(
+        FIXTURE_NK_DEAD_LETTER_6588D12C,
+        0,
+        1_503_238_554,
+        ArtemisQueuePressureClient.Pressure.WARNING);
+    assertState(
+        FIXTURE_NK_DEAD_LETTER_6588D12C,
+        1,
+        1_503_238_554,
+        ArtemisQueuePressureClient.Pressure.ALERT);
+    assertState(
+        FIXTURE_NK_DEAD_LETTER_6588D12C,
+        0,
+        1_932_735_283,
+        ArtemisQueuePressureClient.Pressure.WARNING);
+    assertState(
+        FIXTURE_NK_DEAD_LETTER_6588D12C,
+        1,
+        1_932_735_284,
+        ArtemisQueuePressureClient.Pressure.CRITICAL);
+    assertState(
+        FIXTURE_NK_SYNC_REQUEST_422EE207,
+        250,
+        241_591_911,
+        ArtemisQueuePressureClient.Pressure.CRITICAL);
   }
 
   @Test
@@ -118,7 +149,9 @@ final class ArtemisQueuePressureClientTest {
     // Integer and Long are the two legal Core management integer projections.
     assertEquals(
         ArtemisQueuePressureClient.Pressure.NORMAL,
-        new ArtemisQueuePressureClient((s, q, a) -> 0).inspect(session).get("nk.sync.request"));
+        new ArtemisQueuePressureClient((s, q, a) -> 0)
+            .inspect(session)
+            .get(FIXTURE_NK_SYNC_REQUEST_422EE207));
     var oneMissingByte =
         new ArtemisQueuePressureClient(
             (s, q, a) -> q.equals("nk.sync.request.q") && a.equals("persistentSize") ? null : 0L);

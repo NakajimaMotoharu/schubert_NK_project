@@ -47,6 +47,9 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** NK-BAT-001/BAK/BKO/OPS009/UI251/SS331 8.3/341 6.6; PG168/SSC061; BAT210..217. */
 final class BackupStepRepositoryTest {
+  private static final String FIXTURE_RUNNING_294BDBF9 = "RUNNING";
+  private static final String FIXTURE_STATUS_CFC31BCC = "status";
+  private static final String FIXTURE_ENDED_AT_E151E393 = "ended_at";
   @TempDir static Path root;
   static BatchDatabaseFixture db;
 
@@ -140,14 +143,14 @@ final class BackupStepRepositoryTest {
   @Test
   void statusCounterAndTimeMatrix() throws Exception {
     List<String> statuses =
-        List.of("RUNNING", "SUCCESS", "WARNING", "FAILED", "SKIPPED", "UNKNOWN", "");
+        List.of(FIXTURE_RUNNING_294BDBF9, "SUCCESS", "WARNING", "FAILED", "SKIPPED", "UNKNOWN", "");
     try (var c = locked(db, false)) {
       for (String left : statuses)
         for (String right : statuses) {
           var p = new Probe();
-          p.change(1, "status", left);
-          p.change(2, "status", right);
-          if (left.equals("RUNNING") && right.equals("RUNNING"))
+          p.change(1, FIXTURE_STATUS_CFC31BCC, left);
+          p.change(2, FIXTURE_STATUS_CFC31BCC, right);
+          if (left.equals(FIXTURE_RUNNING_294BDBF9) && right.equals(FIXTURE_RUNNING_294BDBF9))
             assertTrue(new BackupStepRepository(p.wrap(c)).inspect(manifest(), END).isEmpty());
           else failed(() -> new BackupStepRepository(p.wrap(c)).inspect(manifest(), END));
           p.closed();
@@ -161,9 +164,12 @@ final class BackupStepRepositoryTest {
           p.closed();
           c.rollback();
         }
-      for (String col : List.of("ended_at", "error_code", "error_summary")) {
+      for (String col : List.of(FIXTURE_ENDED_AT_E151E393, "error_code", "error_summary")) {
         var p = new Probe();
-        p.change(1, col, col.equals("ended_at") ? END.atOffset(ZoneOffset.UTC) : "PUBLIC");
+        p.change(
+            1,
+            col,
+            col.equals(FIXTURE_ENDED_AT_E151E393) ? END.atOffset(ZoneOffset.UTC) : "PUBLIC");
         failed(() -> new BackupStepRepository(p.wrap(c)).inspect(manifest(), END));
         p.closed();
         c.rollback();
@@ -184,19 +190,20 @@ final class BackupStepRepositoryTest {
               END.plusSeconds(1).atOffset(ZoneOffset.UTC),
               CONTENT.plusNanos(1).atOffset(ZoneOffset.UTC))) {
         var p = new Probe();
-        p.change(1, "ended_at", wrong);
+        p.change(1, FIXTURE_ENDED_AT_E151E393, wrong);
         failed(() -> new BackupStepRepository(p.wrap(c)).inspect(manifest(), END));
         p.closed();
         c.rollback();
       }
       var split = new Probe();
-      split.change(1, "ended_at", CONTENT.atOffset(ZoneOffset.UTC));
+      split.change(1, FIXTURE_ENDED_AT_E151E393, CONTENT.atOffset(ZoneOffset.UTC));
       failed(() -> new BackupStepRepository(split.wrap(c)).inspect(manifest(), END));
       split.closed();
       c.rollback();
-      for (String status : List.of("RUNNING", "FAILED", "WARNING", "SKIPPED", "UNKNOWN")) {
+      for (String status :
+          List.of(FIXTURE_RUNNING_294BDBF9, "FAILED", "WARNING", "SKIPPED", "UNKNOWN")) {
         var p = new Probe();
-        p.change(1, "status", status);
+        p.change(1, FIXTURE_STATUS_CFC31BCC, status);
         failed(() -> new BackupStepRepository(p.wrap(c)).inspect(manifest(), END));
         p.closed();
         c.rollback();
@@ -235,9 +242,10 @@ final class BackupStepRepositoryTest {
         var p = new Probe();
         p.overrideSequence = 2;
         for (int row : new int[] {1, 2}) {
-          p.change(row, "ended_at", pending ? null : CONTENT.atOffset(ZoneOffset.UTC));
+          p.change(
+              row, FIXTURE_ENDED_AT_E151E393, pending ? null : CONTENT.atOffset(ZoneOffset.UTC));
           if (pending) {
-            p.change(row, "status", "RUNNING");
+            p.change(row, FIXTURE_STATUS_CFC31BCC, FIXTURE_RUNNING_294BDBF9);
             for (String col :
                 List.of("target_count", "success_count", "failure_count", "byte_count"))
               p.change(row, col, 0L);
@@ -367,7 +375,8 @@ final class BackupStepRepositoryTest {
         c.rollback();
       }
       for (String col : COLUMNS) {
-        if (Set.of("ended_at", "error_code", "error_summary").contains(col)) continue;
+        if (Set.of(FIXTURE_ENDED_AT_E151E393, "error_code", "error_summary").contains(col))
+          continue;
         var p = new Probe();
         p.change(1, col, null);
         failed(() -> new BackupStepRepository(p.wrap(c)).inspect(manifest(), END));
@@ -377,7 +386,7 @@ final class BackupStepRepositoryTest {
       seedSuccess(c);
       c.commit();
       var nilEnd = new Probe();
-      nilEnd.change(1, "ended_at", null);
+      nilEnd.change(1, FIXTURE_ENDED_AT_E151E393, null);
       failed(() -> new BackupStepRepository(nilEnd.wrap(c)).inspect(manifest(), END));
       nilEnd.closed();
       c.rollback();

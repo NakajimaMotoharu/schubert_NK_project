@@ -17,6 +17,8 @@ import org.junit.jupiter.api.Test;
 
 /** SSC196/PT-OPS-NC196001..004: literal roles/options/NSS, no production-derived oracle. */
 final class TerminalNativeCoverageProfileTest {
+  private static final String FIXTURE_ORDINARY_6FA29C65 = "-ordinary";
+  private static final String FIXTURE_INSPECTOR_2F813AA2 = "INSPECTOR-";
   private static final String INV = "1234567890abcdef1234567890abcdef";
   private static final String PREFIX =
       "-javaagent:/opt/pgpt-tools-pg390/jacoco-agent.jar=output=none,append=false,dumponexit=false,sessionid=";
@@ -33,12 +35,12 @@ final class TerminalNativeCoverageProfileTest {
         List.of("schubert-nk-inbox-inspector.service", "schubert-nk-bootstrap-admin.service");
     var dirs = List.of("ordinary-inspector196", "ordinary-bootstrap196");
     for (int i = 0; i < 2; i++) {
-      String expected = PREFIX + labels.get(i) + "-" + INV + "-ordinary";
+      String expected = PREFIX + labels.get(i) + "-" + INV + FIXTURE_ORDINARY_6FA29C65;
       var profile =
           FixedNativeCoverageProfile.parseTerminal(roles.get(i), INV, List.of(expected))
               .orElseThrow();
       assertEquals(expected, profile.argument());
-      assertEquals(labels.get(i) + "-" + INV + "-ordinary", profile.sessionId());
+      assertEquals(labels.get(i) + "-" + INV + FIXTURE_ORDINARY_6FA29C65, profile.sessionId());
       assertEquals(INV, profile.invocation());
       assertEquals(FixedNativeCoverageProfile.Phase.ORDINARY, profile.phase());
       assertEquals("0::/system.slice/" + units.get(i) + "\n", profile.cgroup());
@@ -58,7 +60,7 @@ final class TerminalNativeCoverageProfileTest {
   @Test
   void nc196002NullUnknownDuplicateAndExpandedProfilesAreRejected() {
     var role = FixedNativeCoverageProfile.TerminalRole.INSPECTOR;
-    String valid = PREFIX + "INSPECTOR-" + INV + "-ordinary";
+    String valid = PREFIX + FIXTURE_INSPECTOR_2F813AA2 + INV + FIXTURE_ORDINARY_6FA29C65;
     assertThrows(
         IllegalArgumentException.class,
         () -> FixedNativeCoverageProfile.parseTerminal(null, INV, List.of()));
@@ -76,9 +78,9 @@ final class TerminalNativeCoverageProfileTest {
           () -> FixedNativeCoverageProfile.parseTerminal(role, bad, List.of(valid)));
     for (String bad :
         List.of(
-            valid.replace("INSPECTOR-", "BOOTSTRAP-"),
-            valid.replace("INSPECTOR-", "API-"),
-            valid.replace("-ordinary", "-root"),
+            valid.replace(FIXTURE_INSPECTOR_2F813AA2, "BOOTSTRAP-"),
+            valid.replace(FIXTURE_INSPECTOR_2F813AA2, "API-"),
+            valid.replace(FIXTURE_ORDINARY_6FA29C65, "-root"),
             valid.replace(INV, "a".repeat(32)),
             valid.replace("output=none", "output=file"),
             valid.replace("append=false", "append=true"),
@@ -107,7 +109,7 @@ final class TerminalNativeCoverageProfileTest {
         FixedNativeCoverageProfile.parseTerminal(
                 FixedNativeCoverageProfile.TerminalRole.INSPECTOR,
                 INV,
-                List.of(PREFIX + "INSPECTOR-" + INV + "-ordinary"))
+                List.of(PREFIX + FIXTURE_INSPECTOR_2F813AA2 + INV + FIXTURE_ORDINARY_6FA29C65))
             .orElseThrow();
     assertEquals(
         new FixedServiceIdentity.Value(991, 976, List.of(976L, 982L, 986L)),
@@ -116,7 +118,7 @@ final class TerminalNativeCoverageProfileTest {
         FixedNativeCoverageProfile.parseTerminal(
                 FixedNativeCoverageProfile.TerminalRole.BOOTSTRAP,
                 INV,
-                List.of(PREFIX + "BOOTSTRAP-" + INV + "-ordinary"))
+                List.of(PREFIX + "BOOTSTRAP-" + INV + FIXTURE_ORDINARY_6FA29C65))
             .orElseThrow();
     assertEquals(
         new FixedServiceIdentity.Value(999, 981, List.of(980L, 981L, 982L, 986L)),
@@ -149,7 +151,7 @@ final class TerminalNativeCoverageProfileTest {
           role == FixedNativeCoverageProfile.TerminalRole.INSPECTOR ? "INSPECTOR" : "BOOTSTRAP";
       var profile =
           FixedNativeCoverageProfile.parseTerminal(
-                  role, INV, List.of(PREFIX + label + "-" + INV + "-ordinary"))
+                  role, INV, List.of(PREFIX + label + "-" + INV + FIXTURE_ORDINARY_6FA29C65))
               .orElseThrow();
       AtomicInteger reads = new AtomicInteger();
       var agent =
@@ -159,7 +161,7 @@ final class TerminalNativeCoverageProfileTest {
             }
 
             public String session() {
-              return label + "-" + INV + "-ordinary";
+              return label + "-" + INV + FIXTURE_ORDINARY_6FA29C65;
             }
 
             public byte[] executionDataWithoutReset() {

@@ -18,6 +18,8 @@ import org.junit.jupiter.api.Test;
 
 /** 1870/APISTOP001..018: literal arithmetic and own finite clock ports, no runtime hooks/TERM. */
 final class ApiStopBudgetTest {
+  private static final String FIXTURE_CLOCK_49F3C56E = "clock";
+
   private static final class Fixture {
     final AtomicLong now = new AtomicLong();
     final AtomicInteger reads = new AtomicInteger();
@@ -147,7 +149,7 @@ final class ApiStopBudgetTest {
   @Test
   void apiStop011() {
     var f = new Fixture();
-    var primary = new IllegalStateException("clock");
+    var primary = new IllegalStateException(FIXTURE_CLOCK_49F3C56E);
     f.failure = primary;
     assertSame(primary, assertThrows(IllegalStateException.class, f.budget::begin));
     f.failure = null;
@@ -159,7 +161,7 @@ final class ApiStopBudgetTest {
   @Test
   void apiStop012() {
     var f = new Fixture();
-    var fatal = new AssertionError("clock");
+    var fatal = new AssertionError(FIXTURE_CLOCK_49F3C56E);
     f.failure = fatal;
     assertSame(fatal, assertThrows(AssertionError.class, f.budget::begin));
     f.failure = null;
@@ -172,7 +174,7 @@ final class ApiStopBudgetTest {
   void apiStop013() {
     var f = new Fixture();
     f.budget.begin();
-    var primary = new IllegalStateException("clock");
+    var primary = new IllegalStateException(FIXTURE_CLOCK_49F3C56E);
     f.failure = primary;
     assertSame(primary, assertThrows(IllegalStateException.class, f.budget::remainingNanos));
     f.failure = null;
@@ -184,7 +186,7 @@ final class ApiStopBudgetTest {
   void apiStop014() {
     var f = new Fixture();
     f.budget.begin();
-    var fatal = new AssertionError("clock");
+    var fatal = new AssertionError(FIXTURE_CLOCK_49F3C56E);
     f.failure = fatal;
     assertSame(fatal, assertThrows(AssertionError.class, f.budget::remainingNanos));
     f.failure = null;

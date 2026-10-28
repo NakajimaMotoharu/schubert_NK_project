@@ -41,11 +41,17 @@ import org.springframework.session.web.http.SessionRepositoryFilter;
 
 /** NK-WEB-001/PT-WEB-076..081; FUN-001/AUT-001..004; UI221/226; SS313/314/352; PG-D-104. */
 class SessionSavedRequestTest {
+  private static final String FIXTURE_SEARCH_F32C67A7 = "/search";
+  private static final String FIXTURE_GET_04F32A7E = "GET";
+  private static final String FIXTURE_POST_E46D3AE9 = "POST";
+  private static final String FIXTURE_SCHUBERT_NK_SESSION_DD9EE5FF = "SCHUBERT_NK_SESSION";
+  private static final String FIXTURE_SAVEDREQUEST_50131C2B = "savedRequest";
+  private static final String FIXTURE_BAD_CBFEDA2B = "bad";
   private static WebLogDatabaseFixture db;
   private static final List<String> SCREENS =
       List.of(
           "/",
-          "/search",
+          FIXTURE_SEARCH_F32C67A7,
           "/scenarios",
           "/scenarios/NUKITASHI1",
           "/scenarios/NUKITASHI2/SS",
@@ -105,7 +111,7 @@ class SessionSavedRequestTest {
               "?q=../x%2Fy%20z&speaker=名前",
               "?=x&&q=token%3Dvalue",
               "?q=a?b;c%3Bd")) {
-        var target = SavedScreenTarget.fromGet("GET", path + query);
+        var target = SavedScreenTarget.fromGet(FIXTURE_GET_04F32A7E, path + query);
         assertEquals(path + query, target.location());
         assertEquals("SavedScreenTarget[REDACTED]", target.toString());
       }
@@ -113,11 +119,12 @@ class SessionSavedRequestTest {
     for (int bytes : new int[] {2047, 2048}) {
       String target = "/search?q=あ" + "a".repeat(bytes - 13);
       assertEquals(bytes, target.getBytes(StandardCharsets.UTF_8).length);
-      assertEquals(target, SavedScreenTarget.fromGet("GET", target).location());
+      assertEquals(target, SavedScreenTarget.fromGet(FIXTURE_GET_04F32A7E, target).location());
     }
-    invalid("GET", "/search?q=あ" + "a".repeat(2036));
+    invalid(FIXTURE_GET_04F32A7E, "/search?q=あ" + "a".repeat(2036));
     assertThrows(NullPointerException.class, () -> SavedScreenTarget.fromGet(null, "/"));
-    assertThrows(NullPointerException.class, () -> SavedScreenTarget.fromGet("GET", null));
+    assertThrows(
+        NullPointerException.class, () -> SavedScreenTarget.fromGet(FIXTURE_GET_04F32A7E, null));
   }
 
   @Test
@@ -155,10 +162,11 @@ class SessionSavedRequestTest {
             "/animation/unknown",
             "/scenarios/a/b/c",
             "/questions/accepted/x/y");
-    for (String target : invalidTargets) invalid("GET", target);
+    for (String target : invalidTargets) invalid(FIXTURE_GET_04F32A7E, target);
     for (String method :
-        List.of("POST", "HEAD", "PUT", "DELETE", "OPTIONS", "TRACE", "PATCH", "get", ""))
-      invalid(method, "/search");
+        List.of(
+            FIXTURE_POST_E46D3AE9, "HEAD", "PUT", "DELETE", "OPTIONS", "TRACE", "PATCH", "get", ""))
+      invalid(method, FIXTURE_SEARCH_F32C67A7);
     for (String key :
         List.of(
             "password",
@@ -167,7 +175,7 @@ class SessionSavedRequestTest {
             "PasswordConfirmation",
             "JSESSIONID",
             "j%73essionid",
-            "SCHUBERT_NK_SESSION",
+            FIXTURE_SCHUBERT_NK_SESSION_DD9EE5FF,
             "confirmPassword",
             "_csrf",
             "%5fcsrf",
@@ -179,24 +187,24 @@ class SessionSavedRequestTest {
             "session",
             "sessionId",
             "token")) {
-      invalid("GET", "/search?" + key + "=private-value");
-      invalid("GET", "/search?q=normal&" + key);
+      invalid(FIXTURE_GET_04F32A7E, "/search?" + key + "=private-value");
+      invalid(FIXTURE_GET_04F32A7E, "/search?q=normal&" + key);
     }
     try (var f = new Fixture(db)) {
       var adapter = adapter(f);
       var cache = new EncryptedSessionRequestCache(adapter);
       for (String target : invalidTargets) {
-        var r = marked(adapter, request("GET", target, null));
+        var r = marked(adapter, request(FIXTURE_GET_04F32A7E, target, null));
         cache.saveRequest(r, new MockHttpServletResponse());
         assertNull(r.getSession(false));
       }
-      for (String method : List.of("POST", "HEAD", "PUT", "DELETE")) {
-        var r = marked(adapter, request(method, "/search", null));
+      for (String method : List.of(FIXTURE_POST_E46D3AE9, "HEAD", "PUT", "DELETE")) {
+        var r = marked(adapter, request(method, FIXTURE_SEARCH_F32C67A7, null));
         r.setContent("password=synthetic-not-saved".getBytes(StandardCharsets.UTF_8));
         cache.saveRequest(r, new MockHttpServletResponse());
         assertNull(r.getSession(false));
       }
-      var ajax = marked(adapter, request("GET", "/search?q=valid", null));
+      var ajax = marked(adapter, request(FIXTURE_GET_04F32A7E, "/search?q=valid", null));
       ajax.addHeader("X-Requested-With", "XMLHttpRequest");
       cache.saveRequest(ajax, new MockHttpServletResponse());
       assertNull(ajax.getSession(false));
@@ -212,7 +220,7 @@ class SessionSavedRequestTest {
       var cache = new EncryptedSessionRequestCache(adapter);
       var filter = new WebSessionFilterFactory().create(adapter);
       var response = new MockHttpServletResponse();
-      var initial = request("GET", "/search?q=日本語&page=2", null);
+      var initial = request(FIXTURE_GET_04F32A7E, "/search?q=日本語&page=2", null);
       initial.addHeader("Host", "outside.example");
       initial.addHeader("X-Private", "synthetic-header");
       initial.addPreferredLocale(Locale.FRENCH);
@@ -226,10 +234,11 @@ class SessionSavedRequestTest {
             var out = (HttpServletResponse) res;
             assertNull(cache.getRequest(r, out));
             cache.saveRequest(r, out);
-            assertEquals("/search?q=日本語&page=2", r.getSession().getAttribute("savedRequest"));
+            assertEquals(
+                "/search?q=日本語&page=2", r.getSession().getAttribute(FIXTURE_SAVEDREQUEST_50131C2B));
             assertNull(r.getSession().getAttribute("SPRING_SECURITY_SAVED_REQUEST"));
             var saved = Objects.requireNonNull(cache.getRequest(r, out));
-            assertEquals("GET", saved.getMethod());
+            assertEquals(FIXTURE_GET_04F32A7E, saved.getMethod());
             assertEquals("/search?q=日本語&page=2", saved.getRedirectUrl());
             assertEquals(List.of(), saved.getCookies());
             assertEquals(List.of(), saved.getHeaderNames());
@@ -242,22 +251,24 @@ class SessionSavedRequestTest {
             assertThrows(NullPointerException.class, () -> saved.getParameterValues(null));
             assertThrows(
                 UnsupportedOperationException.class,
-                () -> saved.getCookies().add(new Cookie("bad", "bad")));
+                () ->
+                    saved.getCookies().add(new Cookie(FIXTURE_BAD_CBFEDA2B, FIXTURE_BAD_CBFEDA2B)));
             assertThrows(
-                UnsupportedOperationException.class, () -> saved.getHeaderNames().add("bad"));
+                UnsupportedOperationException.class,
+                () -> saved.getHeaderNames().add(FIXTURE_BAD_CBFEDA2B));
             assertThrows(
                 UnsupportedOperationException.class, () -> saved.getLocales().add(Locale.ROOT));
             assertThrows(
                 UnsupportedOperationException.class,
-                () -> saved.getParameterMap().put("q", new String[] {"bad"}));
+                () -> saved.getParameterMap().put("q", new String[] {FIXTURE_BAD_CBFEDA2B}));
           });
-      var issued = Objects.requireNonNull(response.getCookie("SCHUBERT_NK_SESSION"));
+      var issued = Objects.requireNonNull(response.getCookie(FIXTURE_SCHUBERT_NK_SESSION_DD9EE5FF));
       assertTrue(issued.getSecure());
       assertTrue(issued.isHttpOnly());
       assertEquals("Lax", issued.getAttribute("SameSite"));
       var second = new MockHttpServletResponse();
       filter.doFilter(
-          request("POST", "/login", issued),
+          request(FIXTURE_POST_E46D3AE9, "/login", issued),
           second,
           (req, res) -> {
             var r = (HttpServletRequest) req;
@@ -275,7 +286,8 @@ class SessionSavedRequestTest {
           });
       assertNotEquals(
           issued.getValue(),
-          Objects.requireNonNull(second.getCookie("SCHUBERT_NK_SESSION")).getValue());
+          Objects.requireNonNull(second.getCookie(FIXTURE_SCHUBERT_NK_SESSION_DD9EE5FF))
+              .getValue());
       assertNull(adapter.findById(issued.getValue()));
       assertEquals(1, count());
     }
@@ -288,9 +300,9 @@ class SessionSavedRequestTest {
       var adapter = adapter(f);
       var cache = new EncryptedSessionRequestCache(adapter);
       var initial = adapter.createSession();
-      initial.setAttribute("savedRequest", "/search?q=abc&page=2");
+      initial.setAttribute(FIXTURE_SAVEDREQUEST_50131C2B, "/search?q=abc&page=2");
       var filter = new WebSessionFilterFactory().create(adapter);
-      var cookie = new Cookie("SCHUBERT_NK_SESSION", initial.getId());
+      var cookie = new Cookie(FIXTURE_SCHUBERT_NK_SESSION_DD9EE5FF, initial.getId());
       for (String target :
           List.of(
               "/search?q=abc&page=3",
@@ -300,7 +312,7 @@ class SessionSavedRequestTest {
               "/search?q=abc&page=2&",
               "/audio/1")) {
         filter.doFilter(
-            request("GET", target, cookie),
+            request(FIXTURE_GET_04F32A7E, target, cookie),
             new MockHttpServletResponse(),
             (req, res) -> {
               var r = (HttpServletRequest) req;
@@ -310,14 +322,14 @@ class SessionSavedRequestTest {
             });
       }
       filter.doFilter(
-          request("POST", "/search?q=abc&page=2", cookie),
+          request(FIXTURE_POST_E46D3AE9, "/search?q=abc&page=2", cookie),
           new MockHttpServletResponse(),
           (req, res) -> {
             assertNull(
                 cache.getMatchingRequest((HttpServletRequest) req, (HttpServletResponse) res));
             assertNotNull(cache.getRequest((HttpServletRequest) req, (HttpServletResponse) res));
           });
-      var exact = request("GET", "/search?q=abc&page=2", cookie);
+      var exact = request(FIXTURE_GET_04F32A7E, "/search?q=abc&page=2", cookie);
       exact.addHeader("X-Fresh", "fresh");
       exact.addParameter("q", "abc");
       filter.doFilter(
@@ -335,10 +347,11 @@ class SessionSavedRequestTest {
             cache.removeRequest(r, out);
           });
       assertNull(
-          Objects.requireNonNull(adapter.findById(initial.getId())).getAttribute("savedRequest"));
-      for (String url : List.of("/search", "/search?")) {
+          Objects.requireNonNull(adapter.findById(initial.getId()))
+              .getAttribute(FIXTURE_SAVEDREQUEST_50131C2B));
+      for (String url : List.of(FIXTURE_SEARCH_F32C67A7, "/search?")) {
         filter.doFilter(
-            request("GET", url, cookie),
+            request(FIXTURE_GET_04F32A7E, url, cookie),
             new MockHttpServletResponse(),
             (req, res) -> {
               var r = (HttpServletRequest) req;
@@ -356,7 +369,7 @@ class SessionSavedRequestTest {
     try (var f = new Fixture(db)) {
       var adapter = adapter(f);
       var cache = new EncryptedSessionRequestCache(adapter);
-      var r = marked(adapter, request("GET", "/search", null));
+      var r = marked(adapter, request(FIXTURE_GET_04F32A7E, FIXTURE_SEARCH_F32C67A7, null));
       var response = new MockHttpServletResponse();
       assertThrows(NullPointerException.class, () -> new EncryptedSessionRequestCache(null));
       assertThrows(NullPointerException.class, () -> cache.saveRequest(null, response));
@@ -384,14 +397,14 @@ class SessionSavedRequestTest {
       for (Object bad :
           List.of(
               42,
-              List.of("/search"),
+              List.of(FIXTURE_SEARCH_F32C67A7),
               "//outside",
               "/login",
               "/search?password=synthetic",
               "/scenarios/x;jsessionid=synthetic",
               "/search?JSESSIONID=synthetic",
               "/search?SCHUBERT_NK_SESSION=synthetic")) {
-        session.setAttribute("savedRequest", bad);
+        session.setAttribute(FIXTURE_SAVEDREQUEST_50131C2B, bad);
         unavailable(() -> cache.getRequest(r, response));
       }
       for (boolean state : new boolean[] {false, true}) {
@@ -418,7 +431,8 @@ class SessionSavedRequestTest {
                 throw fault();
               }
             };
-        var injected = marked(adapter, request("GET", "/search", null));
+        var injected =
+            marked(adapter, request(FIXTURE_GET_04F32A7E, FIXTURE_SEARCH_F32C67A7, null));
         injected.setSession(faulty);
         unavailable(() -> cache.saveRequest(injected, response));
         unavailable(() -> cache.getRequest(injected, response));
@@ -435,7 +449,7 @@ class SessionSavedRequestTest {
         var adapter = adapter(f);
         var cache = new EncryptedSessionRequestCache(adapter);
         var initial = adapter.createSession();
-        initial.setAttribute("savedRequest", "/logs");
+        initial.setAttribute(FIXTURE_SAVEDREQUEST_50131C2B, "/logs");
         var response = new MockHttpServletResponse();
         unavailable(
             () ->
@@ -443,7 +457,9 @@ class SessionSavedRequestTest {
                     .create(adapter)
                     .doFilter(
                         request(
-                            "GET", "/search", new Cookie("SCHUBERT_NK_SESSION", initial.getId())),
+                            FIXTURE_GET_04F32A7E,
+                            FIXTURE_SEARCH_F32C67A7,
+                            new Cookie(FIXTURE_SCHUBERT_NK_SESSION_DD9EE5FF, initial.getId())),
                         response,
                         (req, res) -> {
                           var r = (HttpServletRequest) req;
@@ -456,7 +472,7 @@ class SessionSavedRequestTest {
                           out.setStatus(503);
                         }));
         assertEquals(503, response.getStatus());
-        assertNull(response.getCookie("SCHUBERT_NK_SESSION"));
+        assertNull(response.getCookie(FIXTURE_SCHUBERT_NK_SESSION_DD9EE5FF));
         f.failure = "";
         assertEquals(1, count());
       }
@@ -483,7 +499,10 @@ class SessionSavedRequestTest {
               new WebSessionFilterFactory()
                   .create(adapter)
                   .doFilter(
-                      request("GET", location, new Cookie("SCHUBERT_NK_SESSION", id)),
+                      request(
+                          FIXTURE_GET_04F32A7E,
+                          location,
+                          new Cookie(FIXTURE_SCHUBERT_NK_SESSION_DD9EE5FF, id)),
                       new MockHttpServletResponse(),
                       (req, res) -> {
                         var r = (HttpServletRequest) req;
@@ -502,7 +521,8 @@ class SessionSavedRequestTest {
       for (int i = 0; i < 100; i++)
         assertEquals(
             "/search?q=reader" + i,
-            Objects.requireNonNull(adapter.findById(ids.get(i))).getAttribute("savedRequest"));
+            Objects.requireNonNull(adapter.findById(ids.get(i)))
+                .getAttribute(FIXTURE_SAVEDREQUEST_50131C2B));
       assertEquals(100, count());
       String first = ids.getFirst();
       var response = new MockHttpServletResponse();
@@ -511,7 +531,10 @@ class SessionSavedRequestTest {
               new WebSessionFilterFactory()
                   .create(adapter)
                   .doFilter(
-                      request("GET", "/search?q=reader0", new Cookie("SCHUBERT_NK_SESSION", first)),
+                      request(
+                          FIXTURE_GET_04F32A7E,
+                          "/search?q=reader0",
+                          new Cookie(FIXTURE_SCHUBERT_NK_SESSION_DD9EE5FF, first)),
                       response,
                       (req, res) -> {
                         var r = (HttpServletRequest) req;
@@ -521,7 +544,7 @@ class SessionSavedRequestTest {
                         unavailable(() -> cache.saveRequest(r, out));
                         unavailable(() -> cache.removeRequest(r, out));
                       }));
-      assertNull(response.getCookie("SCHUBERT_NK_SESSION"));
+      assertNull(response.getCookie(FIXTURE_SCHUBERT_NK_SESSION_DD9EE5FF));
       assertEquals(99, count());
       var original = Objects.requireNonNull(adapter.findById(ids.get(1)));
       original.setAttribute("operationTokens", SessionAttributeCodecTest.tokens(2));
@@ -531,7 +554,9 @@ class SessionSavedRequestTest {
           .create(adapter)
           .doFilter(
               request(
-                  "GET", "/search?q=reader1", new Cookie("SCHUBERT_NK_SESSION", original.getId())),
+                  FIXTURE_GET_04F32A7E,
+                  "/search?q=reader1",
+                  new Cookie(FIXTURE_SCHUBERT_NK_SESSION_DD9EE5FF, original.getId())),
               new MockHttpServletResponse(),
               (req, res) -> {
                 var r = (HttpServletRequest) req;

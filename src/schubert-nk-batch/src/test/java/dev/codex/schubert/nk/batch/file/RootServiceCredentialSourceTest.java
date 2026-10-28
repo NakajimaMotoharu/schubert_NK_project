@@ -18,6 +18,10 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** ROOTSRC001..006: public synthetic host/root metadata, no real credential material. SSC138. */
 final class RootServiceCredentialSourceTest {
+  private static final String FIXTURE_UID_0C18F38C = "uid";
+  private static final String FIXTURE_GID_0ACDD642 = "gid";
+  private static final String FIXTURE_MODE_B6D5C2C3 = "mode";
+  private static final String FIXTURE_DB_API_D0987F66 = "db-api";
   @TempDir Path temporary;
 
   private BackupPublicationFixture fixture() throws Exception {
@@ -26,11 +30,11 @@ final class RootServiceCredentialSourceTest {
     f.copyFilesystem = "ext4";
     f.metadata =
         (role, m) -> {
-          m.put("uid", 0);
-          m.put("gid", 0);
-          m.put("mode", role.equals("parent") ? 040700 : 0100600);
+          m.put(FIXTURE_UID_0C18F38C, 0);
+          m.put(FIXTURE_GID_0ACDD642, 0);
+          m.put(FIXTURE_MODE_B6D5C2C3, role.equals("parent") ? 040700 : 0100600);
         };
-    Files.writeString(f.parent.resolve("db-api"), "PUBLIC_é\n");
+    Files.writeString(f.parent.resolve(FIXTURE_DB_API_D0987F66), "PUBLIC_é\n");
     return f;
   }
 
@@ -53,7 +57,7 @@ final class RootServiceCredentialSourceTest {
   private static int read(BackupPublicationFixture f, byte[] material) throws IOException {
     try {
       return RootServiceCredentialSource.readFixed(
-          f.root, f, io(f), new EnvironmentInodePolicy(f, f), "db-api", 0, material);
+          f.root, f, io(f), new EnvironmentInodePolicy(f, f), FIXTURE_DB_API_D0987F66, 0, material);
     } catch (IOException | RuntimeException | Error failure) {
       if (material != null) Arrays.fill(material, (byte) 0);
       throw failure;
@@ -85,7 +89,16 @@ final class RootServiceCredentialSourceTest {
   void everySecurityMutationRefusesRootSourceWithoutRepair() throws Exception {
     for (String fault :
         List.of(
-            "uid", "gid", "mode", "link", "readonly", "fs", "acl", "size", "device", "effective")) {
+            FIXTURE_UID_0C18F38C,
+            FIXTURE_GID_0ACDD642,
+            FIXTURE_MODE_B6D5C2C3,
+            "link",
+            "readonly",
+            "fs",
+            "acl",
+            "size",
+            "device",
+            "effective")) {
       try (var f = fixture()) {
         switch (fault) {
           case "readonly" -> f.readonly = true;
@@ -95,14 +108,14 @@ final class RootServiceCredentialSourceTest {
           default ->
               f.metadata =
                   (role, m) -> {
-                    m.put("uid", 0);
-                    m.put("gid", 0);
-                    m.put("mode", role.equals("parent") ? 040700 : 0100600);
+                    m.put(FIXTURE_UID_0C18F38C, 0);
+                    m.put(FIXTURE_GID_0ACDD642, 0);
+                    m.put(FIXTURE_MODE_B6D5C2C3, role.equals("parent") ? 040700 : 0100600);
                     if (!role.equals("parent"))
                       switch (fault) {
-                        case "uid" -> m.put("uid", 1);
-                        case "gid" -> m.put("gid", 1);
-                        case "mode" -> m.put("mode", 0100640);
+                        case FIXTURE_UID_0C18F38C -> m.put(FIXTURE_UID_0C18F38C, 1);
+                        case FIXTURE_GID_0ACDD642 -> m.put(FIXTURE_GID_0ACDD642, 1);
+                        case FIXTURE_MODE_B6D5C2C3 -> m.put(FIXTURE_MODE_B6D5C2C3, 0100640);
                         case "link" -> m.put("nlink", 2);
                         case "size" -> m.put("size", 65537L);
                         default -> m.put("dev", -1L);
@@ -110,7 +123,7 @@ final class RootServiceCredentialSourceTest {
                   };
         }
         assertThrows(IOException.class, () -> read(f, new byte[65537]), fault);
-        assertEquals("PUBLIC_é\n", Files.readString(f.parent.resolve("db-api")));
+        assertEquals("PUBLIC_é\n", Files.readString(f.parent.resolve(FIXTURE_DB_API_D0987F66)));
         f.released();
       }
     }
@@ -143,7 +156,7 @@ final class RootServiceCredentialSourceTest {
     try (var f = fixture()) {
       assertThrows(IOException.class, () -> read(f, new byte[65536]));
       assertThrows(NullPointerException.class, () -> read(f, null));
-      Files.delete(f.parent.resolve("db-api"));
+      Files.delete(f.parent.resolve(FIXTURE_DB_API_D0987F66));
       assertThrows(IOException.class, () -> read(f, new byte[65537]));
       f.released();
     }

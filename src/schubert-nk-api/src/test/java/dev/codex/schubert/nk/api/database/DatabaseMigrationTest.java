@@ -55,12 +55,27 @@ import org.postgresql.util.PSQLException;
  */
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 final class DatabaseMigrationTest {
+  private static final String FIXTURE_SCHUBERT_WEB_SESSION_1E78D426 = "schubert_web_session";
+  private static final String FIXTURE_CREATEDB_AF6714D1 = "createdb";
+  private static final String FIXTURE_127_0_0_1_88270499 = "127.0.0.1";
+  private static final String FIXTURE_JDBC_POSTGRESQL_127_0_0_1_5FD48870 =
+      "jdbc:postgresql://127.0.0.1:";
+  private static final String FIXTURE_DB_PROVISIONING_001_ROLES_SQL_71D5D411 =
+      "db/provisioning/001_roles.sql";
+  private static final String FIXTURE_CLASSPATH_DB_MIGRATION_0053F0D8 = "classpath:db/migration";
+  private static final String FIXTURE_SCHUBERT_META_52A185FE = "schubert_meta";
+  private static final String FIXTURE_23514_8632CD65 = "23514";
+  private static final String FIXTURE_NULL_F072CBEC = "null";
+  private static final String FIXTURE_SET_ROLE_SCHUBERT_BATCH_6F492B89 = "set role schubert_batch";
+  private static final String FIXTURE_RESET_ROLE_E5818A11 = "reset role";
+  private static final String FIXTURE_SCHUBERT_BATCH_F9C88479 = "schubert_batch";
+  private static final String FIXTURE_22023_CDCA15BB = "22023";
   // BUG-088/YKT-079: independent approved inventory, shared by normal and concurrent startup PT.
   private static final List<String> MIGRATION_VERSIONS = MigrationInventory.VERSIONS;
   private static final String DATABASE = "schubert_nk";
   private static final String ADMIN = "pgpt_admin";
   private static final String MIGRATION = "schubert_migration";
-  private static final String WEB_ROLE = "schubert_web_session";
+  private static final String WEB_ROLE = FIXTURE_SCHUBERT_WEB_SESSION_1E78D426;
   private static final String FIXED_TIME = "2026-09-02 00:00:00+00";
   private static final String HASH = "a".repeat(64);
   private static final String CIPHER = "decode('" + "00".repeat(29) + "','hex')";
@@ -117,17 +132,17 @@ final class DatabaseMigrationTest {
         "start");
 
     run(
-        pgBinary("createdb"),
+        pgBinary(FIXTURE_CREATEDB_AF6714D1),
         "-h",
-        "127.0.0.1",
+        FIXTURE_127_0_0_1_88270499,
         "-p",
         Integer.toString(port),
         "-U",
         ADMIN,
         DATABASE);
-    jdbcUrl = "jdbc:postgresql://127.0.0.1:" + port + "/" + DATABASE;
-    executeResourceAsAdmin("db/provisioning/001_roles.sql");
-    flyway = configuredFlyway(jdbcUrl, true, "classpath:db/migration");
+    jdbcUrl = FIXTURE_JDBC_POSTGRESQL_127_0_0_1_5FD48870 + port + "/" + DATABASE;
+    executeResourceAsAdmin(FIXTURE_DB_PROVISIONING_001_ROLES_SQL_71D5D411);
+    flyway = configuredFlyway(jdbcUrl, true, FIXTURE_CLASSPATH_DB_MIGRATION_0053F0D8);
     firstMigration = flyway.migrate();
   }
 
@@ -169,7 +184,7 @@ final class DatabaseMigrationTest {
   @DisplayName("PT-DB-002 schemas, pg_trgm and 24 tables (SSC175)")
   void schemasExtensionAndTablesMatchTheIndependentCatalog() throws SQLException {
     assertEquals(
-        Set.of("schubert", "schubert_meta", "schubert_web_session"),
+        Set.of("schubert", FIXTURE_SCHUBERT_META_52A185FE, FIXTURE_SCHUBERT_WEB_SESSION_1E78D426),
         querySet(
             ADMIN,
             "select schema_name from information_schema.schemata "
@@ -317,12 +332,12 @@ final class DatabaseMigrationTest {
     try (Connection connection = connection(ADMIN)) {
       connection.setAutoCommit(false);
       execute(connection, userInsert(1, "u".repeat(64), 999999999));
-      assertRejects(connection, "23514", userInsert(2, "u".repeat(65), 0));
-      assertRejects(connection, "23514", userInsert(3, "user", 1000000000));
-      assertRejects(connection, "23514", userInsertWithRole(4, "OTHER"));
+      assertRejects(connection, FIXTURE_23514_8632CD65, userInsert(2, "u".repeat(65), 0));
+      assertRejects(connection, FIXTURE_23514_8632CD65, userInsert(3, "user", 1000000000));
+      assertRejects(connection, FIXTURE_23514_8632CD65, userInsertWithRole(4, "OTHER"));
       assertRejects(
           connection,
-          "23514",
+          FIXTURE_23514_8632CD65,
           "insert into schubert.script_files(game_id,display_order,storage_relative_path,display_path,file_name,sha256,byte_size,created_at) "
               + "values(1,1,'../escape','shown','file.ks','"
               + HASH
@@ -331,7 +346,7 @@ final class DatabaseMigrationTest {
               + "')");
       assertRejects(
           connection,
-          "23514",
+          FIXTURE_23514_8632CD65,
           "insert into schubert.script_files(game_id,display_order,storage_relative_path,display_path,file_name,sha256,byte_size,created_at) "
               + "values(1,1,'ok/file','shown','file.ks','INVALID',0,'"
               + FIXED_TIME
@@ -349,7 +364,7 @@ final class DatabaseMigrationTest {
       execute(connection, userInsert(10, "owner", 0));
       assertRejects(
           connection,
-          "23514",
+          FIXTURE_23514_8632CD65,
           "insert into schubert.auth_sessions values('"
               + UUID_1
               + "',10,'"
@@ -365,16 +380,33 @@ final class DatabaseMigrationTest {
               + "',null,'127.0.0.1','"
               + UUID_2
               + "')");
-      assertRejects(connection, "23514", questionInsert(10, true, "null", "null"));
-      execute(connection, questionInsert(10, false, "null", "null"));
       assertRejects(
           connection,
-          "23514",
-          jobInsert("RECEIVED", "'" + FIXED_TIME + "'", "null", "null", "null", "null"));
-      execute(connection, jobInsert("RECEIVED", "null", "null", "null", "null", "null"));
+          FIXTURE_23514_8632CD65,
+          questionInsert(10, true, FIXTURE_NULL_F072CBEC, FIXTURE_NULL_F072CBEC));
+      execute(connection, questionInsert(10, false, FIXTURE_NULL_F072CBEC, FIXTURE_NULL_F072CBEC));
       assertRejects(
           connection,
-          "23514",
+          FIXTURE_23514_8632CD65,
+          jobInsert(
+              "RECEIVED",
+              "'" + FIXED_TIME + "'",
+              FIXTURE_NULL_F072CBEC,
+              FIXTURE_NULL_F072CBEC,
+              FIXTURE_NULL_F072CBEC,
+              FIXTURE_NULL_F072CBEC));
+      execute(
+          connection,
+          jobInsert(
+              "RECEIVED",
+              FIXTURE_NULL_F072CBEC,
+              FIXTURE_NULL_F072CBEC,
+              FIXTURE_NULL_F072CBEC,
+              FIXTURE_NULL_F072CBEC,
+              FIXTURE_NULL_F072CBEC));
+      assertRejects(
+          connection,
+          FIXTURE_23514_8632CD65,
           "insert into schubert.notifications(job_id,question_id,owner_user_id,notification_type,state,accepted_at,state_changed_at,created_at,updated_at) "
               + "values(1,1,10,'ERROR','ERROR','"
               + FIXED_TIME
@@ -387,7 +419,7 @@ final class DatabaseMigrationTest {
               + "')");
       assertRejects(
           connection,
-          "23514",
+          FIXTURE_23514_8632CD65,
           "insert into schubert.request_inbox(message_id,correlation_id,request_layout_id,request_version,"
               + "request_fingerprint_hmac,fingerprint_key_version,processing_state,created_at,completed_at,expires_at) values('"
               + UUID_1
@@ -406,7 +438,7 @@ final class DatabaseMigrationTest {
               "00000000-0000-0000-0000-000000000003", "00000000-0000-0000-0000-000000000004", 29));
       assertRejects(
           connection,
-          "23514",
+          FIXTURE_23514_8632CD65,
           completedSnapshotInboxInsert(
               "00000000-0000-0000-0000-000000000005", "00000000-0000-0000-0000-000000000006", 28));
       execute(
@@ -417,14 +449,14 @@ final class DatabaseMigrationTest {
               1_050_000));
       assertRejects(
           connection,
-          "23514",
+          FIXTURE_23514_8632CD65,
           completedSnapshotInboxInsert(
               "00000000-0000-0000-0000-000000000009",
               "00000000-0000-0000-0000-000000000010",
               1_050_001));
       assertRejects(
           connection,
-          "23514",
+          FIXTURE_23514_8632CD65,
           "insert into schubert.mq_outbox(message_id,correlation_id,destination,layout_id,layout_version,body,status,"
               + "next_attempt_at,lease_owner,created_at) values('"
               + UUID_1
@@ -437,7 +469,7 @@ final class DatabaseMigrationTest {
               + "')");
       assertRejects(
           connection,
-          "23514",
+          FIXTURE_23514_8632CD65,
           "insert into schubert_web_session.web_http_sessions values('"
               + UUID_1
               + "','"
@@ -451,7 +483,7 @@ final class DatabaseMigrationTest {
               + "','2026-09-03 00:00:00+00',28801,0)");
       assertRejects(
           connection,
-          "23514",
+          FIXTURE_23514_8632CD65,
           "insert into schubert.app_logs(id,logged_at,service,category,level,action,message,"
               + "security_hold_until) values(600,'2026-01-01 00:00:00+00','API','ACTION','INFO',"
               + "'TEST_ACTION','public test log','2026-09-03 00:00:00+00')");
@@ -495,8 +527,16 @@ final class DatabaseMigrationTest {
           queryLong(
               connection, "select count(*) from schubert.entry_audio_links where entry_id=301"));
 
-      execute(connection, questionInsert(20, false, "null", "null"));
-      execute(connection, jobInsert("RECEIVED", "null", "null", "null", "null", "null"));
+      execute(connection, questionInsert(20, false, FIXTURE_NULL_F072CBEC, FIXTURE_NULL_F072CBEC));
+      execute(
+          connection,
+          jobInsert(
+              "RECEIVED",
+              FIXTURE_NULL_F072CBEC,
+              FIXTURE_NULL_F072CBEC,
+              FIXTURE_NULL_F072CBEC,
+              FIXTURE_NULL_F072CBEC,
+              FIXTURE_NULL_F072CBEC));
       execute(
           connection,
           "insert into schubert.notifications(job_id,question_id,owner_user_id,notification_type,state,accepted_at,state_changed_at,created_at,updated_at) "
@@ -564,7 +604,7 @@ final class DatabaseMigrationTest {
       SQLException error =
           assertThrows(
               SQLException.class, () -> execute(connection, "set constraints all immediate"));
-      assertEquals("23514", error.getSQLState());
+      assertEquals(FIXTURE_23514_8632CD65, error.getSQLState());
       PSQLException postgresError = (PSQLException) error;
       assertNotNull(postgresError.getServerErrorMessage());
       assertEquals(
@@ -636,7 +676,7 @@ final class DatabaseMigrationTest {
               + "'public expired hold log','"
               + "2026-06-04 00:00:00+00"
               + "')");
-      execute(connection, "set role schubert_batch");
+      execute(connection, FIXTURE_SET_ROLE_SCHUBERT_BATCH_6F492B89);
       assertEquals(
           "3|2|1|OK",
           queryString(
@@ -647,7 +687,7 @@ final class DatabaseMigrationTest {
                   + "','"
                   + FIXED_TIME
                   + "',10)"));
-      execute(connection, "reset role");
+      execute(connection, FIXTURE_RESET_ROLE_E5818A11);
       assertEquals(
           1L, queryLong(connection, "select count(*) from schubert.app_logs where id=701"));
       assertEquals(
@@ -691,7 +731,7 @@ final class DatabaseMigrationTest {
               + CIPHER
               + ",'key-1','2026-09-01 00:00:00+00','2026-09-02 00:00:00+00',"
               + "'2026-09-03 00:00:00+00',28800,0)");
-      execute(connection, "set role schubert_batch");
+      execute(connection, FIXTURE_SET_ROLE_SCHUBERT_BATCH_6F492B89);
       assertEquals(
           "3|3|0|OK",
           queryString(
@@ -702,7 +742,7 @@ final class DatabaseMigrationTest {
                   + "','"
                   + FIXED_TIME
                   + "',10)"));
-      execute(connection, "reset role");
+      execute(connection, FIXTURE_RESET_ROLE_E5818A11);
       assertEquals(
           1L,
           queryLong(connection, "select count(*) from schubert.auth_sessions where user_id=801"));
@@ -730,19 +770,23 @@ final class DatabaseMigrationTest {
       assertEquals(
           "BACKUP_GATE",
           queryString(
-              "schubert_batch",
+              FIXTURE_SCHUBERT_BATCH_F9C88479,
               "select reason_code from " + function + "('" + UUID_1 + "','" + FIXED_TIME + "',1)"));
       assertSqlState(
-          "schubert_batch", "22023", "select * from " + function + "(null,'" + FIXED_TIME + "',1)");
+          FIXTURE_SCHUBERT_BATCH_F9C88479,
+          FIXTURE_22023_CDCA15BB,
+          "select * from " + function + "(null,'" + FIXED_TIME + "',1)");
       assertSqlState(
-          "schubert_batch", "22023", "select * from " + function + "('" + UUID_1 + "',null,1)");
+          FIXTURE_SCHUBERT_BATCH_F9C88479,
+          FIXTURE_22023_CDCA15BB,
+          "select * from " + function + "('" + UUID_1 + "',null,1)");
       assertSqlState(
-          "schubert_batch",
-          "22023",
+          FIXTURE_SCHUBERT_BATCH_F9C88479,
+          FIXTURE_22023_CDCA15BB,
           "select * from " + function + "('" + UUID_1 + "','" + FIXED_TIME + "',0)");
       assertSqlState(
-          "schubert_batch",
-          "22023",
+          FIXTURE_SCHUBERT_BATCH_F9C88479,
+          FIXTURE_22023_CDCA15BB,
           "select * from "
               + function
               + "('"
@@ -760,7 +804,7 @@ final class DatabaseMigrationTest {
         assertEquals(
             "LOCK_BUSY",
             queryString(
-                "schubert_batch",
+                FIXTURE_SCHUBERT_BATCH_F9C88479,
                 "select reason_code from schubert."
                     + cleanup
                     + "('"
@@ -802,10 +846,10 @@ final class DatabaseMigrationTest {
             + "'2026-08-30 00:00:00+00','2026-09-01 00:00:00+00'),"
             + "(904,904,904,801,'COMPLETED','COMPLETED','2026-09-01 00:00:00+00',"
             + "'2026-09-01 12:00:00+00',null,null,'2026-09-01 00:00:00+00','2026-09-01 12:00:00+00')");
-    execute(connection, "set role schubert_batch");
+    execute(connection, FIXTURE_SET_ROLE_SCHUBERT_BATCH_6F492B89);
     assertEquals(
         "3|3|0|OK", cleanupResult(connection, "maintenance_cleanup_notifications", FIXED_TIME, 10));
-    execute(connection, "reset role");
+    execute(connection, FIXTURE_RESET_ROLE_E5818A11);
     assertEquals(
         1L,
         queryLong(
@@ -831,10 +875,10 @@ final class DatabaseMigrationTest {
             + "accepted_at,state_changed_at,created_at,updated_at) values(912,912,912,801,'ACCEPTED','RECEIVED',"
             + "'2026-08-30 00:00:00+00','2026-08-30 00:00:00+00',"
             + "'2026-08-30 00:00:00+00','2026-08-30 00:00:00+00')");
-    execute(connection, "set role schubert_batch");
+    execute(connection, FIXTURE_SET_ROLE_SCHUBERT_BATCH_6F492B89);
     assertEquals(
         "1|1|0|OK", cleanupResult(connection, "maintenance_cleanup_questions", FIXED_TIME, 10));
-    execute(connection, "reset role");
+    execute(connection, FIXTURE_RESET_ROLE_E5818A11);
     assertEquals(
         List.of("912", "913"),
         queryList(
@@ -882,12 +926,12 @@ final class DatabaseMigrationTest {
             + CIPHER
             + ",'key-1','ERROR','2026-08-29 00:00:00+00',"
             + "'2026-08-29 00:00:00+00',null)");
-    execute(connection, "set role schubert_batch");
+    execute(connection, FIXTURE_SET_ROLE_SCHUBERT_BATCH_6F492B89);
     // BUG-014/QA-046/SS331 3.7: two-day SENT and ALL Inbox rows remain in normal batch.
     assertEquals(
         "0|0|0|OK",
         cleanupResult(connection, "maintenance_cleanup_message_stores", FIXED_TIME, 10));
-    execute(connection, "reset role");
+    execute(connection, FIXTURE_RESET_ROLE_E5818A11);
     assertEquals(
         2L,
         queryLong(
@@ -919,10 +963,10 @@ final class DatabaseMigrationTest {
             + "'2024-01-01 00:00:00+00',null,'RUNNING'),"
             + "(936,'00000000-0000-0000-0009-000000000006','2026-01-01','RECENT_SUCCESS',1,"
             + "'2026-01-01 00:00:00+00','2026-01-01 00:01:00+00','SUCCESS')");
-    execute(connection, "set role schubert_batch");
+    execute(connection, FIXTURE_SET_ROLE_SCHUBERT_BATCH_6F492B89);
     assertEquals(
         "3|3|0|OK", cleanupResult(connection, "maintenance_cleanup_batch_runs", FIXED_TIME, 10));
-    execute(connection, "reset role");
+    execute(connection, FIXTURE_RESET_ROLE_E5818A11);
     assertEquals(
         List.of("934", "935", "936"),
         queryList(
@@ -965,10 +1009,11 @@ final class DatabaseMigrationTest {
     assertAllowed("schubert_app", "select count(*) from schubert.games");
     assertDenied("schubert_app", "select count(*) from schubert_web_session.web_http_sessions");
     assertAllowed(
-        "schubert_web_session", "select count(*) from schubert_web_session.web_http_sessions");
-    assertDenied("schubert_web_session", "select count(*) from schubert.app_users");
-    assertAllowed("schubert_batch", "select count(*) from schubert.batch_runs");
-    assertDenied("schubert_batch", "select count(*) from schubert.questions");
+        FIXTURE_SCHUBERT_WEB_SESSION_1E78D426,
+        "select count(*) from schubert_web_session.web_http_sessions");
+    assertDenied(FIXTURE_SCHUBERT_WEB_SESSION_1E78D426, "select count(*) from schubert.app_users");
+    assertAllowed(FIXTURE_SCHUBERT_BATCH_F9C88479, "select count(*) from schubert.batch_runs");
+    assertDenied(FIXTURE_SCHUBERT_BATCH_F9C88479, "select count(*) from schubert.questions");
     assertAllowed("schubert_backup", "select count(*) from schubert.questions");
     assertDenied(
         "schubert_backup",
@@ -1008,21 +1053,21 @@ final class DatabaseMigrationTest {
   void concurrentInitialMigrationProducesOneHistory() throws Exception {
     String parallelDatabase = "schubert_parallel";
     run(
-        pgBinary("createdb"),
+        pgBinary(FIXTURE_CREATEDB_AF6714D1),
         "-h",
-        "127.0.0.1",
+        FIXTURE_127_0_0_1_88270499,
         "-p",
         Integer.toString(port),
         "-U",
         ADMIN,
         parallelDatabase);
-    String parallelUrl = "jdbc:postgresql://127.0.0.1:" + port + "/" + parallelDatabase;
-    executeResource(ADMIN, parallelUrl, "db/provisioning/001_roles.sql");
+    String parallelUrl = FIXTURE_JDBC_POSTGRESQL_127_0_0_1_5FD48870 + port + "/" + parallelDatabase;
+    executeResource(ADMIN, parallelUrl, FIXTURE_DB_PROVISIONING_001_ROLES_SQL_71D5D411);
     execute(ADMIN, parallelUrl, "create schema schubert_meta authorization nk_owner");
 
     Callable<Integer> migrate =
         () ->
-            configuredFlyway(parallelUrl, false, "classpath:db/migration")
+            configuredFlyway(parallelUrl, false, FIXTURE_CLASSPATH_DB_MIGRATION_0053F0D8)
                 .migrate()
                 .migrationsExecuted;
     try (ExecutorService executor = Executors.newFixedThreadPool(2)) {
@@ -1121,29 +1166,29 @@ final class DatabaseMigrationTest {
       execute(connection, row);
       assertRejects(
           connection,
-          "23514",
+          FIXTURE_23514_8632CD65,
           "update schubert.batch_runs set expiry_cutoff_at='2031-05-25 00:00:00+00'"
               + " where business_date='2031-06-01' and step='CLEAN_EXPIRY'");
       assertRejects(
           connection,
-          "23514",
+          FIXTURE_23514_8632CD65,
           "update schubert.batch_runs set status='SUCCESS'"
               + " where business_date='2031-06-01' and step='CLEAN_EXPIRY'");
       assertRejects(
           connection,
-          "23514",
+          FIXTURE_23514_8632CD65,
           "update schubert.batch_runs set expiry_cutoff_at='infinity',"
               + "expiry_before_count=2,expiry_after_count=1"
               + " where business_date='2031-06-01' and step='CLEAN_EXPIRY'");
       assertRejects(
           connection,
-          "23514",
+          FIXTURE_23514_8632CD65,
           "update schubert.batch_runs set expiry_cutoff_at='2031-05-25 00:00:00+00',"
               + "expiry_before_count=1,expiry_after_count=2"
               + " where business_date='2031-06-01' and step='CLEAN_EXPIRY'");
       assertRejects(
           connection,
-          "23514",
+          FIXTURE_23514_8632CD65,
           "update schubert.batch_runs set expiry_cutoff_at='2031-05-25 00:00:00+00',"
               + "expiry_before_count=-1,expiry_after_count=0"
               + " where business_date='2031-06-01' and step='CLEAN_EXPIRY'");
@@ -1156,17 +1201,17 @@ final class DatabaseMigrationTest {
               + " where business_date='2031-06-01' and step='CLEAN_EXPIRY'");
       assertRejects(
           connection,
-          "23514",
+          FIXTURE_23514_8632CD65,
           "update schubert.batch_runs set expiry_after_count=0"
               + " where business_date='2031-06-01' and step='CLEAN_EXPIRY'");
       assertRejects(
           connection,
-          "23514",
+          FIXTURE_23514_8632CD65,
           "update schubert.batch_runs set target_count=2"
               + " where business_date='2031-06-01' and step='CLEAN_EXPIRY'");
       assertRejects(
           connection,
-          "23514",
+          FIXTURE_23514_8632CD65,
           "update schubert.batch_runs set failure_count=1"
               + " where business_date='2031-06-01' and step='CLEAN_EXPIRY'");
       execute(
@@ -1177,17 +1222,18 @@ final class DatabaseMigrationTest {
               + "','2031-06-02','BACKUP_DB',1,'2031-06-02 00:00:00+00','RUNNING')");
       assertRejects(
           connection,
-          "23514",
+          FIXTURE_23514_8632CD65,
           "update schubert.batch_runs set expiry_cutoff_at='2031-05-26 00:00:00+00',"
               + "expiry_before_count=2,expiry_after_count=1"
               + " where business_date='2031-06-02' and step='BACKUP_DB'");
       connection.rollback();
     }
     assertAllowed(
-        "schubert_batch",
+        FIXTURE_SCHUBERT_BATCH_F9C88479,
         "select expiry_cutoff_at,expiry_before_count,expiry_after_count from schubert.batch_runs limit 0");
     assertDenied(
-        "schubert_web_session", "select expiry_cutoff_at from schubert.batch_runs limit 0");
+        FIXTURE_SCHUBERT_WEB_SESSION_1E78D426,
+        "select expiry_cutoff_at from schubert.batch_runs limit 0");
   }
 
   @Test
@@ -1196,26 +1242,26 @@ final class DatabaseMigrationTest {
   void legacySuccessfulExpiryAuditIsNotGuessedOrPartiallyMigrated() throws Exception {
     String legacyDatabase = "schubert_expiry_legacy";
     run(
-        pgBinary("createdb"),
+        pgBinary(FIXTURE_CREATEDB_AF6714D1),
         "-h",
-        "127.0.0.1",
+        FIXTURE_127_0_0_1_88270499,
         "-p",
         Integer.toString(port),
         "-U",
         ADMIN,
         legacyDatabase);
-    String legacyUrl = "jdbc:postgresql://127.0.0.1:" + port + "/" + legacyDatabase;
-    executeResource(ADMIN, legacyUrl, "db/provisioning/001_roles.sql");
+    String legacyUrl = FIXTURE_JDBC_POSTGRESQL_127_0_0_1_5FD48870 + port + "/" + legacyDatabase;
+    executeResource(ADMIN, legacyUrl, FIXTURE_DB_PROVISIONING_001_ROLES_SQL_71D5D411);
     execute(ADMIN, legacyUrl, "create schema schubert_meta authorization nk_owner");
     var old =
         Flyway.configure()
             .dataSource(legacyUrl, MIGRATION, "")
-            .defaultSchema("schubert_meta")
-            .schemas("schubert_meta")
+            .defaultSchema(FIXTURE_SCHUBERT_META_52A185FE)
+            .schemas(FIXTURE_SCHUBERT_META_52A185FE)
             .createSchemas(false)
             .initSql("SET ROLE nk_owner")
             .table("flyway_schema_history")
-            .locations("classpath:db/migration")
+            .locations(FIXTURE_CLASSPATH_DB_MIGRATION_0053F0D8)
             .target("020")
             .validateOnMigrate(true)
             .outOfOrder(false)
@@ -1233,7 +1279,8 @@ final class DatabaseMigrationTest {
             + "'2031-06-03 00:00:01+00','SUCCESS')");
     assertThrows(
         org.flywaydb.core.api.FlywayException.class,
-        () -> configuredFlyway(legacyUrl, false, "classpath:db/migration").migrate());
+        () ->
+            configuredFlyway(legacyUrl, false, FIXTURE_CLASSPATH_DB_MIGRATION_0053F0D8).migrate());
     assertEquals(
         20L,
         queryLong(
@@ -1256,26 +1303,26 @@ final class DatabaseMigrationTest {
   void stagedExpiryAuditPreservesOldRowsAndUnknownAfter() throws Exception {
     String stageDatabase = "schubert_expiry_stage";
     run(
-        pgBinary("createdb"),
+        pgBinary(FIXTURE_CREATEDB_AF6714D1),
         "-h",
-        "127.0.0.1",
+        FIXTURE_127_0_0_1_88270499,
         "-p",
         Integer.toString(port),
         "-U",
         ADMIN,
         stageDatabase);
-    String stageUrl = "jdbc:postgresql://127.0.0.1:" + port + "/" + stageDatabase;
-    executeResource(ADMIN, stageUrl, "db/provisioning/001_roles.sql");
+    String stageUrl = FIXTURE_JDBC_POSTGRESQL_127_0_0_1_5FD48870 + port + "/" + stageDatabase;
+    executeResource(ADMIN, stageUrl, FIXTURE_DB_PROVISIONING_001_ROLES_SQL_71D5D411);
     execute(ADMIN, stageUrl, "create schema schubert_meta authorization nk_owner");
     var throughV021 =
         Flyway.configure()
             .dataSource(stageUrl, MIGRATION, "")
-            .defaultSchema("schubert_meta")
-            .schemas("schubert_meta")
+            .defaultSchema(FIXTURE_SCHUBERT_META_52A185FE)
+            .schemas(FIXTURE_SCHUBERT_META_52A185FE)
             .createSchemas(false)
             .initSql("SET ROLE nk_owner")
             .table("flyway_schema_history")
-            .locations("classpath:db/migration")
+            .locations(FIXTURE_CLASSPATH_DB_MIGRATION_0053F0D8)
             .target("021")
             .validateOnMigrate(true)
             .outOfOrder(false)
@@ -1303,7 +1350,7 @@ final class DatabaseMigrationTest {
       connection.setAutoCommit(false);
       assertRejects(
           connection,
-          "23514",
+          FIXTURE_23514_8632CD65,
           "update schubert.batch_runs set expiry_cutoff_at='2031-05-28 00:00:00+00',"
               + "expiry_before_count=2,target_count=2,byte_count=64"
               + " where business_date='2031-06-04' and attempt=1");
@@ -1315,7 +1362,8 @@ final class DatabaseMigrationTest {
         // Current V023 full-profile/security coverage is StartupSchemaProjectionTest001..008.
         Flyway.configure()
             .configuration(
-                configuredFlyway(stageUrl, false, "classpath:db/migration").getConfiguration())
+                configuredFlyway(stageUrl, false, FIXTURE_CLASSPATH_DB_MIGRATION_0053F0D8)
+                    .getConfiguration())
             .target("022")
             .load()
             .migrate()
@@ -1336,17 +1384,17 @@ final class DatabaseMigrationTest {
               + " where business_date='2031-06-04' and attempt=1");
       assertRejects(
           connection,
-          "23514",
+          FIXTURE_23514_8632CD65,
           "update schubert.batch_runs set status='SUCCESS'"
               + " where business_date='2031-06-04' and attempt=1");
       assertRejects(
           connection,
-          "23514",
+          FIXTURE_23514_8632CD65,
           "update schubert.batch_runs set target_count=3"
               + " where business_date='2031-06-04' and attempt=1");
       assertRejects(
           connection,
-          "23514",
+          FIXTURE_23514_8632CD65,
           "update schubert.batch_runs set success_count=1"
               + " where business_date='2031-06-04' and attempt=1");
       connection.commit();
@@ -1400,7 +1448,8 @@ final class DatabaseMigrationTest {
         0,
         Flyway.configure()
             .configuration(
-                configuredFlyway(stageUrl, false, "classpath:db/migration").getConfiguration())
+                configuredFlyway(stageUrl, false, FIXTURE_CLASSPATH_DB_MIGRATION_0053F0D8)
+                    .getConfiguration())
             .target("022")
             .load()
             .migrate()
@@ -1489,8 +1538,8 @@ final class DatabaseMigrationTest {
   private static Flyway configuredFlyway(String url, boolean createSchemas, String location) {
     return Flyway.configure()
         .dataSource(url, MIGRATION, "")
-        .defaultSchema("schubert_meta")
-        .schemas("schubert_meta")
+        .defaultSchema(FIXTURE_SCHUBERT_META_52A185FE)
+        .schemas(FIXTURE_SCHUBERT_META_52A185FE)
         .createSchemas(createSchemas)
         .initSql("SET ROLE nk_owner")
         .table("flyway_schema_history")
@@ -1620,7 +1669,7 @@ final class DatabaseMigrationTest {
                         WEB_ROLE,
                         jdbcUrl,
                         "update " + table + " set " + mutation + " where id='" + id + "'"));
-        assertEquals("23514", failure.getSQLState());
+        assertEquals(FIXTURE_23514_8632CD65, failure.getSQLState());
       }
     } finally {
       execute(WEB_ROLE, jdbcUrl, "delete from " + table + " where id='" + id + "'");

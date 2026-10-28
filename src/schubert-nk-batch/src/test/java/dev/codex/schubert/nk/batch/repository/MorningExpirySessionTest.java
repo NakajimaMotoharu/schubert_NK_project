@@ -39,6 +39,14 @@ import org.junit.jupiter.api.io.TempDir;
  * Provider counters are fixed input here; genuine native MQ/Unit evidence is separate in 294.
  */
 final class MorningExpirySessionTest {
+  private static final String FIXTURE_AUTOCOMMIT_36FCE733 = "AUTOCOMMIT";
+  private static final String FIXTURE_READONLY_72E7E87D = "READONLY";
+  private static final String FIXTURE_GETAUTOCOMMIT_C0200BDE = "getAutoCommit";
+  private static final String FIXTURE_ISREADONLY_B1148EC6 = "isReadOnly";
+  private static final String FIXTURE_PGPT_ADMIN_F5D1227C = "pgpt_admin";
+  private static final String FIXTURE_VALID_53E4338E = "VALID";
+  private static final String FIXTURE_SCHUBERT_BATCH_F9C88479 = "schubert_batch";
+  private static final String FIXTURE_SUCCESS_10855C7F = "SUCCESS";
   @TempDir static Path root;
   static BatchDatabaseFixture db;
   static String url;
@@ -54,7 +62,12 @@ final class MorningExpirySessionTest {
   void mdb2614001ExpiryReadbackRejectsRunningWrongTargetAndDbDriftWithoutMutation()
       throws Exception {
     for (String fault :
-        List.of("RUNNING", "WRONG_TARGET", "WRONG_BEGIN", "AUTOCOMMIT", "READONLY")) {
+        List.of(
+            "RUNNING",
+            "WRONG_TARGET",
+            "WRONG_BEGIN",
+            FIXTURE_AUTOCOMMIT_36FCE733,
+            FIXTURE_READONLY_72E7E87D)) {
       reset();
       var armed = new java.util.concurrent.atomic.AtomicBoolean();
       var retained = new java.util.concurrent.atomic.AtomicReference<Connection>();
@@ -75,9 +88,11 @@ final class MorningExpirySessionTest {
                         new Class<?>[] {Connection.class},
                         (unused, method, args) -> {
                           if (armed.get()) {
-                            if (fault.equals("AUTOCOMMIT")
-                                && method.getName().equals("getAutoCommit")) return false;
-                            if (fault.equals("READONLY") && method.getName().equals("isReadOnly"))
+                            if (fault.equals(FIXTURE_AUTOCOMMIT_36FCE733)
+                                && method.getName().equals(FIXTURE_GETAUTOCOMMIT_C0200BDE))
+                              return false;
+                            if (fault.equals(FIXTURE_READONLY_72E7E87D)
+                                && method.getName().equals(FIXTURE_ISREADONLY_B1148EC6))
                               return true;
                           }
                           return mdb2604Invoke(method, connection, args);
@@ -120,7 +135,7 @@ final class MorningExpirySessionTest {
             return Boolean.TRUE;
           });
       assertTrue(retained.get().isClosed());
-      try (var observer = DriverManager.getConnection(url, "pgpt_admin", "");
+      try (var observer = DriverManager.getConnection(url, FIXTURE_PGPT_ADMIN_F5D1227C, "");
           var statement = observer.createStatement();
           var rows =
               statement.executeQuery(
@@ -137,7 +152,13 @@ final class MorningExpirySessionTest {
   @Test
   void mdb2612001CleanupReferencesRejectDriftAndForgedSnapshotWithoutChangingRows()
       throws Exception {
-    for (String fault : List.of("VALID", "AUTOCOMMIT", "READONLY", "MISMATCH", "SQL")) {
+    for (String fault :
+        List.of(
+            FIXTURE_VALID_53E4338E,
+            FIXTURE_AUTOCOMMIT_36FCE733,
+            FIXTURE_READONLY_72E7E87D,
+            "MISMATCH",
+            "SQL")) {
       reset();
       var armed = new java.util.concurrent.atomic.AtomicBoolean();
       var retained = new java.util.concurrent.atomic.AtomicReference<Connection>();
@@ -154,9 +175,11 @@ final class MorningExpirySessionTest {
                         new Class<?>[] {Connection.class},
                         (unused, method, args) -> {
                           if (armed.get()) {
-                            if (fault.equals("AUTOCOMMIT")
-                                && method.getName().equals("getAutoCommit")) return false;
-                            if (fault.equals("READONLY") && method.getName().equals("isReadOnly"))
+                            if (fault.equals(FIXTURE_AUTOCOMMIT_36FCE733)
+                                && method.getName().equals(FIXTURE_GETAUTOCOMMIT_C0200BDE))
+                              return false;
+                            if (fault.equals(FIXTURE_READONLY_72E7E87D)
+                                && method.getName().equals(FIXTURE_ISREADONLY_B1148EC6))
                               return true;
                             if (fault.equals("SQL")
                                 && method.getName().equals("prepareStatement")
@@ -192,7 +215,7 @@ final class MorningExpirySessionTest {
             }
             var expectedInput = new CleanupTerminalRepository.Snapshot(entries);
             armed.set(true);
-            if (fault.equals("VALID"))
+            if (fault.equals(FIXTURE_VALID_53E4338E))
               assertEquals(
                   List.of(
                       Optional.empty(),
@@ -209,7 +232,7 @@ final class MorningExpirySessionTest {
             return Boolean.TRUE;
           });
       assertTrue(retained.get().isClosed());
-      try (var observer = DriverManager.getConnection(url, "pgpt_admin", "");
+      try (var observer = DriverManager.getConnection(url, FIXTURE_PGPT_ADMIN_F5D1227C, "");
           var statement = observer.createStatement();
           var rows =
               statement.executeQuery(
@@ -233,7 +256,12 @@ final class MorningExpirySessionTest {
   void mdb2610001CleanupReadbackRejectsDbDriftReceiptAndBackupModeWithoutMutation()
       throws Exception {
     for (String fault :
-        List.of("AUTOCOMMIT", "READONLY", "CODE10", "FAILED_MODE", "REJECTED_READONLY")) {
+        List.of(
+            FIXTURE_AUTOCOMMIT_36FCE733,
+            FIXTURE_READONLY_72E7E87D,
+            "CODE10",
+            "FAILED_MODE",
+            "REJECTED_READONLY")) {
       reset();
       var rejected = ExpiryReceiptFixture.cleanupReceipt(30);
       var armed = new java.util.concurrent.atomic.AtomicBoolean();
@@ -251,10 +279,13 @@ final class MorningExpirySessionTest {
                         new Class<?>[] {Connection.class},
                         (unused, method, args) -> {
                           if (armed.get()) {
-                            if (fault.equals("AUTOCOMMIT")
-                                && method.getName().equals("getAutoCommit")) return false;
-                            if ((fault.equals("READONLY") || fault.equals("REJECTED_READONLY"))
-                                && method.getName().equals("isReadOnly")) return true;
+                            if (fault.equals(FIXTURE_AUTOCOMMIT_36FCE733)
+                                && method.getName().equals(FIXTURE_GETAUTOCOMMIT_C0200BDE))
+                              return false;
+                            if ((fault.equals(FIXTURE_READONLY_72E7E87D)
+                                    || fault.equals("REJECTED_READONLY"))
+                                && method.getName().equals(FIXTURE_ISREADONLY_B1148EC6))
+                              return true;
                           }
                           return mdb2604Invoke(method, connection, args);
                         });
@@ -280,7 +311,7 @@ final class MorningExpirySessionTest {
             return Boolean.TRUE;
           });
       assertTrue(retained.get().isClosed());
-      try (var observer = DriverManager.getConnection(url, "pgpt_admin", "");
+      try (var observer = DriverManager.getConnection(url, FIXTURE_PGPT_ADMIN_F5D1227C, "");
           var statement = observer.createStatement();
           var rows =
               statement.executeQuery(
@@ -302,7 +333,7 @@ final class MorningExpirySessionTest {
   /** PT-MDB2608-001: failed expiry handoff is not a worker success or renewed authority. */
   @Test
   void mdb2608001ExpiryHandoffRejectsTransactionUnlockAndReacquireFailure() throws Exception {
-    for (String fault : List.of("AUTOCOMMIT", "UNLOCK", "RELOCK")) {
+    for (String fault : List.of(FIXTURE_AUTOCOMMIT_36FCE733, "UNLOCK", "RELOCK")) {
       reset();
       var armed = new java.util.concurrent.atomic.AtomicBoolean();
       var callbacks = new java.util.concurrent.atomic.AtomicInteger();
@@ -320,8 +351,9 @@ final class MorningExpirySessionTest {
                         new Class<?>[] {Connection.class},
                         (unused, method, args) -> {
                           if (armed.get()) {
-                            if (fault.equals("AUTOCOMMIT")
-                                && method.getName().equals("getAutoCommit")) return false;
+                            if (fault.equals(FIXTURE_AUTOCOMMIT_36FCE733)
+                                && method.getName().equals(FIXTURE_GETAUTOCOMMIT_C0200BDE))
+                              return false;
                             if (method.getName().equals("prepareStatement")
                                 && ((fault.equals("UNLOCK")
                                         && ((String) args[0]).contains("pg_advisory_unlock"))
@@ -363,7 +395,7 @@ final class MorningExpirySessionTest {
             return Boolean.TRUE;
           });
       assertTrue(retained.get().isClosed());
-      try (var observer = DriverManager.getConnection(url, "pgpt_admin", "");
+      try (var observer = DriverManager.getConnection(url, FIXTURE_PGPT_ADMIN_F5D1227C, "");
           var statement = observer.createStatement();
           var rows =
               statement.executeQuery(
@@ -380,7 +412,8 @@ final class MorningExpirySessionTest {
   @Test
   void mdb2606001ExpiryAdmissionRejectsForeignRunAndTransactionDriftBeforePublishing()
       throws Exception {
-    for (String fault : List.of("FOREIGN_RUN", "AUTOCOMMIT", "READONLY")) {
+    for (String fault :
+        List.of("FOREIGN_RUN", FIXTURE_AUTOCOMMIT_36FCE733, FIXTURE_READONLY_72E7E87D)) {
       reset();
       var armed = new java.util.concurrent.atomic.AtomicBoolean();
       var retained = new java.util.concurrent.atomic.AtomicReference<Connection>();
@@ -397,11 +430,12 @@ final class MorningExpirySessionTest {
                         new Class<?>[] {Connection.class},
                         (unused, method, args) -> {
                           if (armed.get()
-                              && fault.equals("AUTOCOMMIT")
-                              && method.getName().equals("getAutoCommit")) return false;
+                              && fault.equals(FIXTURE_AUTOCOMMIT_36FCE733)
+                              && method.getName().equals(FIXTURE_GETAUTOCOMMIT_C0200BDE))
+                            return false;
                           if (armed.get()
-                              && fault.equals("READONLY")
-                              && method.getName().equals("isReadOnly")) return true;
+                              && fault.equals(FIXTURE_READONLY_72E7E87D)
+                              && method.getName().equals(FIXTURE_ISREADONLY_B1148EC6)) return true;
                           return mdb2604Invoke(method, connection, args);
                         });
               },
@@ -423,7 +457,7 @@ final class MorningExpirySessionTest {
             return Boolean.TRUE;
           });
       assertTrue(retained.get().isClosed());
-      try (var observer = DriverManager.getConnection(url, "pgpt_admin", "");
+      try (var observer = DriverManager.getConnection(url, FIXTURE_PGPT_ADMIN_F5D1227C, "");
           var statement = observer.createStatement();
           var rows =
               statement.executeQuery(
@@ -446,7 +480,8 @@ final class MorningExpirySessionTest {
   @Test
   void mdb2604001PermitReadbackRequiresBothLocksAndFreshSchemaWithoutChangingRows()
       throws Exception {
-    for (String fault : List.of("VALID", "INITIAL_HELD", "FINAL_HELD", "SCHEMA_SQL")) {
+    for (String fault :
+        List.of(FIXTURE_VALID_53E4338E, "INITIAL_HELD", "FINAL_HELD", "SCHEMA_SQL")) {
       reset();
       var armed = new java.util.concurrent.atomic.AtomicBoolean();
       var heldReads = new java.util.concurrent.atomic.AtomicInteger();
@@ -521,10 +556,10 @@ final class MorningExpirySessionTest {
               throw new IOException("isolated SQL precondition unavailable", failure);
             }
             armed.set(true);
-            if (fault.equals("VALID")) {
+            if (fault.equals(FIXTURE_VALID_53E4338E)) {
               var value = session.inspectPermitDatabase(OWNER);
-              assertEquals("schubert_batch", value.loginRole());
-              assertEquals("schubert_batch", value.effectiveRole());
+              assertEquals(FIXTURE_SCHUBERT_BATCH_F9C88479, value.loginRole());
+              assertEquals(FIXTURE_SCHUBERT_BATCH_F9C88479, value.effectiveRole());
               assertEquals("schubert_nk", value.database());
               assertTrue(value.autoCommit());
               assertFalse(value.jdbcReadOnly());
@@ -543,7 +578,7 @@ final class MorningExpirySessionTest {
             return Boolean.TRUE;
           });
       assertTrue(retained.get().isClosed());
-      try (var observer = DriverManager.getConnection(url, "pgpt_admin", "");
+      try (var observer = DriverManager.getConnection(url, FIXTURE_PGPT_ADMIN_F5D1227C, "");
           var statement = observer.createStatement();
           var rows =
               statement.executeQuery(
@@ -566,7 +601,7 @@ final class MorningExpirySessionTest {
   }
 
   private static String mdb2604Rows() throws SQLException {
-    try (var observer = DriverManager.getConnection(url, "pgpt_admin", "");
+    try (var observer = DriverManager.getConnection(url, FIXTURE_PGPT_ADMIN_F5D1227C, "");
         var statement =
             observer.prepareStatement(
                 "select step,attempt,status,started_at,ended_at,target_count,success_count,failure_count,byte_count,error_code,error_summary from schubert.batch_runs where run_id=? order by step")) {
@@ -593,7 +628,7 @@ final class MorningExpirySessionTest {
                   ? "FAILED"
                   : step.equals("CLEAN_EXPIRY")
                       ? "RUNNING"
-                      : step.equals("CLEAN_TRANSFER") ? "SUCCESS" : "SKIPPED",
+                      : step.equals("CLEAN_TRANSFER") ? FIXTURE_SUCCESS_10855C7F : "SKIPPED",
               rows.getString("status"));
           assertEquals(0, rows.getLong("byte_count"));
           var fields = new ArrayList<String>();
@@ -617,7 +652,7 @@ final class MorningExpirySessionTest {
     Path resources =
         Path.of(
             System.getProperty("nk.pt.repository"), "src/schubert-nk-api/src/main/resources/db");
-    try (var c = DriverManager.getConnection(url, "pgpt_admin", "");
+    try (var c = DriverManager.getConnection(url, FIXTURE_PGPT_ADMIN_F5D1227C, "");
         var s = c.createStatement()) {
       s.execute(Files.readString(resources.resolve("provisioning/001_roles.sql")));
     }
@@ -641,7 +676,7 @@ final class MorningExpirySessionTest {
 
   @BeforeEach
   void reset() throws Exception {
-    try (var c = DriverManager.getConnection(url, "pgpt_admin", "");
+    try (var c = DriverManager.getConnection(url, FIXTURE_PGPT_ADMIN_F5D1227C, "");
         var s = c.createStatement()) {
       s.execute("delete from schubert.batch_runs");
     }
@@ -680,7 +715,7 @@ final class MorningExpirySessionTest {
     session.failBackup(backup, start.plusSeconds(1), failed, failed);
     session.handoffCleanup(
         () -> {
-          try (var c = DriverManager.getConnection(url, "schubert_batch", "")) {
+          try (var c = DriverManager.getConnection(url, FIXTURE_SCHUBERT_BATCH_F9C88479, "")) {
             sql(c, "select pg_advisory_lock(71419602)");
             assertTrue(held(c));
             for (String step :
@@ -717,7 +752,7 @@ final class MorningExpirySessionTest {
                     + "','"
                     + start.plusSeconds(attempt == 1 ? 3 : 2)
                     + "','"
-                    + (attempt == 1 ? "SUCCESS" : "SKIPPED")
+                    + (attempt == 1 ? FIXTURE_SUCCESS_10855C7F : "SKIPPED")
                     + "',0,0,0,0"
                     + (attempt == 1
                         ? ""
@@ -753,7 +788,8 @@ final class MorningExpirySessionTest {
                     IOException.class, () -> s.beginExpiry(RUN, NOW.plusSeconds(60), OWNER));
                 s.handoffExpiry(
                     () -> {
-                      try (var c = DriverManager.getConnection(url, "schubert_batch", "")) {
+                      try (var c =
+                          DriverManager.getConnection(url, FIXTURE_SCHUBERT_BATCH_F9C88479, "")) {
                         sql(c, "select pg_advisory_lock(71419602)");
                         assertTrue(held(c));
                         c.setAutoCommit(false);
@@ -783,7 +819,7 @@ final class MorningExpirySessionTest {
                 var observed = s.observeExpiry(begins, receipt, OWNER);
                 assertEquals(
                     new ExpiryAuditRepository.Snapshot(
-                        "SUCCESS",
+                        FIXTURE_SUCCESS_10855C7F,
                         Instant.parse("2026-09-05T15:00:00Z"),
                         3L,
                         1L,
@@ -831,14 +867,14 @@ final class MorningExpirySessionTest {
                 return true;
               });
     }
-    try (var c = DriverManager.getConnection(url, "pgpt_admin", "");
+    try (var c = DriverManager.getConnection(url, FIXTURE_PGPT_ADMIN_F5D1227C, "");
         var s = c.createStatement();
         var r =
             s.executeQuery(
                 "select attempt,status,target_count,success_count,failure_count,byte_count,error_code,started_at=ended_at as same_time,expiry_before_count,expiry_after_count from schubert.batch_runs where step='CLEAN_EXPIRY' order by attempt")) {
       assertTrue(r.next());
       assertEquals(1, r.getInt("attempt"));
-      assertEquals("SUCCESS", r.getString("status"));
+      assertEquals(FIXTURE_SUCCESS_10855C7F, r.getString("status"));
       assertEquals(2, r.getLong("target_count"));
       assertEquals(2, r.getLong("success_count"));
       assertEquals(0, r.getLong("failure_count"));
@@ -875,7 +911,7 @@ final class MorningExpirySessionTest {
               assertThrows(NullPointerException.class, () -> s.beginExpiry(RUN, NOW, null));
               return true;
             });
-    try (var c = DriverManager.getConnection(url, "pgpt_admin", "");
+    try (var c = DriverManager.getConnection(url, FIXTURE_PGPT_ADMIN_F5D1227C, "");
         var s = c.createStatement();
         var r =
             s.executeQuery("select count(*) from schubert.batch_runs where step='CLEAN_EXPIRY'")) {

@@ -43,6 +43,13 @@ import org.springframework.mock.web.MockHttpServletResponse;
 
 /** NK-WEB-001/PT-WEB-044..049; FUN-001/AUT-001..004; UI226; SS314/331/352; SSC-042. */
 class SpringWebSessionTest {
+  private static final String FIXTURE_CSRFTOKEN_CF3CFD11 = "csrfToken";
+  private static final String FIXTURE_OPERATIONTOKENS_F00C8D6B = "operationTokens";
+  private static final String FIXTURE_PRINCIPAL_590C90CB = "principal";
+  private static final String FIXTURE_SAVEDREQUEST_50131C2B = "savedRequest";
+  private static final String FIXTURE_BAD_CBFEDA2B = "bad";
+  private static final String FIXTURE_LOGS_910E2326 = "/logs";
+  private static final String FIXTURE_SCHUBERT_NK_SESSION_DD9EE5FF = "SCHUBERT_NK_SESSION";
   private static WebLogDatabaseFixture db;
   private static final Instant NOW = Instant.parse("2026-09-08T00:00:00.123456Z");
   private static final SessionPrincipal PRINCIPAL =
@@ -118,42 +125,54 @@ class SpringWebSessionTest {
     try (var f = new Fixture(db)) {
       var repo = adapter(f);
       var session = repo.createSession();
-      assertEquals(Set.of("csrfToken", "operationTokens"), session.getAttributeNames());
-      assertNull(session.getAttribute("principal"));
-      assertNull(session.getAttribute("savedRequest"));
-      assertNull(session.getAttribute("unknown"));
-      assertEquals(List.of(), session.getAttribute("operationTokens"));
-      String originalId = session.getId();
-      String csrf = session.getAttribute("csrfToken");
-      assertEquals("02".repeat(32), csrf);
-      session.setAttribute("csrfToken", csrf);
-      session.removeAttribute("principal");
-      session.setAttribute("savedRequest", "/logs?q=abc");
-      session.setAttribute("operationTokens", SessionAttributeCodecTest.tokens(2));
-      var reloaded = Objects.requireNonNull(repo.findById(originalId));
-      assertEquals("/logs?q=abc", reloaded.getAttribute("savedRequest"));
-      assertEquals(SessionAttributeCodecTest.tokens(2), reloaded.getAttribute("operationTokens"));
-      session.setAttribute("principal", PRINCIPAL);
-      assertEquals(PRINCIPAL, session.getAttribute("principal"));
       assertEquals(
-          Set.of("principal", "csrfToken", "savedRequest", "operationTokens"),
+          Set.of(FIXTURE_CSRFTOKEN_CF3CFD11, FIXTURE_OPERATIONTOKENS_F00C8D6B),
+          session.getAttributeNames());
+      assertNull(session.getAttribute(FIXTURE_PRINCIPAL_590C90CB));
+      assertNull(session.getAttribute(FIXTURE_SAVEDREQUEST_50131C2B));
+      assertNull(session.getAttribute("unknown"));
+      assertEquals(List.of(), session.getAttribute(FIXTURE_OPERATIONTOKENS_F00C8D6B));
+      String originalId = session.getId();
+      String csrf = session.getAttribute(FIXTURE_CSRFTOKEN_CF3CFD11);
+      assertEquals("02".repeat(32), csrf);
+      session.setAttribute(FIXTURE_CSRFTOKEN_CF3CFD11, csrf);
+      session.removeAttribute(FIXTURE_PRINCIPAL_590C90CB);
+      session.setAttribute(FIXTURE_SAVEDREQUEST_50131C2B, "/logs?q=abc");
+      session.setAttribute(FIXTURE_OPERATIONTOKENS_F00C8D6B, SessionAttributeCodecTest.tokens(2));
+      var reloaded = Objects.requireNonNull(repo.findById(originalId));
+      assertEquals("/logs?q=abc", reloaded.getAttribute(FIXTURE_SAVEDREQUEST_50131C2B));
+      assertEquals(
+          SessionAttributeCodecTest.tokens(2),
+          reloaded.getAttribute(FIXTURE_OPERATIONTOKENS_F00C8D6B));
+      session.setAttribute(FIXTURE_PRINCIPAL_590C90CB, PRINCIPAL);
+      assertEquals(PRINCIPAL, session.getAttribute(FIXTURE_PRINCIPAL_590C90CB));
+      assertEquals(
+          Set.of(
+              FIXTURE_PRINCIPAL_590C90CB,
+              FIXTURE_CSRFTOKEN_CF3CFD11,
+              FIXTURE_SAVEDREQUEST_50131C2B,
+              FIXTURE_OPERATIONTOKENS_F00C8D6B),
           session.getAttributeNames());
       assertNotEquals(originalId, session.getId());
       assertNull(repo.findById(originalId));
-      assertEquals("04".repeat(32), session.getAttribute("csrfToken"));
-      assertEquals("/logs?q=abc", session.getAttribute("savedRequest"));
-      assertEquals(SessionAttributeCodecTest.tokens(2), session.getAttribute("operationTokens"));
+      assertEquals("04".repeat(32), session.getAttribute(FIXTURE_CSRFTOKEN_CF3CFD11));
+      assertEquals("/logs?q=abc", session.getAttribute(FIXTURE_SAVEDREQUEST_50131C2B));
+      assertEquals(
+          SessionAttributeCodecTest.tokens(2),
+          session.getAttribute(FIXTURE_OPERATIONTOKENS_F00C8D6B));
       assertEquals(NOW, session.getCreationTime());
       assertEquals(NOW, session.getLastAccessedTime());
       assertEquals(Duration.ofHours(8), session.getMaxInactiveInterval());
       assertEquals("SpringWebSession[REDACTED]", session.toString());
-      session.removeAttribute("savedRequest");
+      session.removeAttribute(FIXTURE_SAVEDREQUEST_50131C2B);
       // QA049 supersedes legacy pending deletion; only dedicated issue retires consumed.
-      unavailable(() -> session.setAttribute("operationTokens", null));
-      assertNull(session.getAttribute("savedRequest"));
-      assertEquals(SessionAttributeCodecTest.tokens(2), session.getAttribute("operationTokens"));
+      unavailable(() -> session.setAttribute(FIXTURE_OPERATIONTOKENS_F00C8D6B, null));
+      assertNull(session.getAttribute(FIXTURE_SAVEDREQUEST_50131C2B));
+      assertEquals(
+          SessionAttributeCodecTest.tokens(2),
+          session.getAttribute(FIXTURE_OPERATIONTOKENS_F00C8D6B));
       assertThrows(UnsupportedOperationException.class, () -> session.getAttributeNames().clear());
-      List<SessionOperationToken> tokens = session.getAttribute("operationTokens");
+      List<SessionOperationToken> tokens = session.getAttribute(FIXTURE_OPERATIONTOKENS_F00C8D6B);
       assertThrows(
           UnsupportedOperationException.class,
           () -> tokens.add(SessionAttributeCodecTest.tokens(1).getFirst()));
@@ -161,27 +180,37 @@ class SpringWebSessionTest {
           List.of(
               "password",
               "SPRING_SECURITY_CONTEXT",
-              "principal",
-              "csrfToken",
-              "savedRequest",
-              "operationTokens"))
+              FIXTURE_PRINCIPAL_590C90CB,
+              FIXTURE_CSRFTOKEN_CF3CFD11,
+              FIXTURE_SAVEDREQUEST_50131C2B,
+              FIXTURE_OPERATIONTOKENS_F00C8D6B))
         assertThrows(
             IllegalArgumentException.class, () -> session.setAttribute(name, new Object()));
-      assertThrows(IllegalArgumentException.class, () -> session.removeAttribute("principal"));
-      assertThrows(IllegalArgumentException.class, () -> session.removeAttribute("csrfToken"));
+      assertThrows(
+          IllegalArgumentException.class,
+          () -> session.removeAttribute(FIXTURE_PRINCIPAL_590C90CB));
+      assertThrows(
+          IllegalArgumentException.class,
+          () -> session.removeAttribute(FIXTURE_CSRFTOKEN_CF3CFD11));
       assertThrows(IllegalArgumentException.class, () -> session.removeAttribute("unknown"));
       for (String invalid : List.of("", "//outside", "https://outside", "/../logs"))
         assertThrows(
-            IllegalArgumentException.class, () -> session.setAttribute("savedRequest", invalid));
+            IllegalArgumentException.class,
+            () -> session.setAttribute(FIXTURE_SAVEDREQUEST_50131C2B, invalid));
       assertThrows(
           IllegalArgumentException.class,
-          () -> session.setAttribute("operationTokens", Arrays.asList((Object) null)));
+          () ->
+              session.setAttribute(FIXTURE_OPERATIONTOKENS_F00C8D6B, Arrays.asList((Object) null)));
       assertThrows(
           IllegalArgumentException.class,
-          () -> session.setAttribute("operationTokens", List.of("bad")));
+          () ->
+              session.setAttribute(
+                  FIXTURE_OPERATIONTOKENS_F00C8D6B, List.of(FIXTURE_BAD_CBFEDA2B)));
       assertThrows(
           IllegalArgumentException.class,
-          () -> session.setAttribute("operationTokens", SessionAttributeCodecTest.tokens(11)));
+          () ->
+              session.setAttribute(
+                  FIXTURE_OPERATIONTOKENS_F00C8D6B, SessionAttributeCodecTest.tokens(11)));
       verifyStoredHash(session.getId());
       var legacy = f.repository.create();
       var attributes =
@@ -196,14 +225,14 @@ class SpringWebSessionTest {
         assertEquals(1, s.executeUpdate());
       }
       var absentCsrf = Objects.requireNonNull(repo.findById(legacy.sessionId().cookieValue()));
-      assertEquals(Set.of("operationTokens"), absentCsrf.getAttributeNames());
-      assertNull(absentCsrf.getAttribute("csrfToken"));
-      absentCsrf.removeAttribute("csrfToken");
+      assertEquals(Set.of(FIXTURE_OPERATIONTOKENS_F00C8D6B), absentCsrf.getAttributeNames());
+      assertNull(absentCsrf.getAttribute(FIXTURE_CSRFTOKEN_CF3CFD11));
+      absentCsrf.removeAttribute(FIXTURE_CSRFTOKEN_CF3CFD11);
       absentCsrf.changeSessionId();
-      String issued = absentCsrf.getAttribute("csrfToken");
+      String issued = absentCsrf.getAttribute(FIXTURE_CSRFTOKEN_CF3CFD11);
       assertNotNull(issued);
       assertEquals(64, issued.length());
-      assertNull(absentCsrf.getAttribute("principal"));
+      assertNull(absentCsrf.getAttribute(FIXTURE_PRINCIPAL_590C90CB));
     }
   }
 
@@ -213,27 +242,28 @@ class SpringWebSessionTest {
       var repo = adapter(f);
       var initial = repo.createSession();
       var tokenA = SessionAttributeCodecTest.tokens(1).getFirst();
-      initial.setAttribute("operationTokens", List.of(tokenA));
+      initial.setAttribute(FIXTURE_OPERATIONTOKENS_F00C8D6B, List.of(tokenA));
       var staleDeletion = Objects.requireNonNull(repo.findById(initial.getId()));
       var alreadyRemoved = Objects.requireNonNull(repo.findById(initial.getId()));
-      unavailable(() -> initial.setAttribute("operationTokens", List.of()));
-      unavailable(() -> alreadyRemoved.removeAttribute("operationTokens"));
-      assertEquals(List.of(tokenA), alreadyRemoved.getAttribute("operationTokens"));
+      unavailable(() -> initial.setAttribute(FIXTURE_OPERATIONTOKENS_F00C8D6B, List.of()));
+      unavailable(() -> alreadyRemoved.removeAttribute(FIXTURE_OPERATIONTOKENS_F00C8D6B));
+      assertEquals(List.of(tokenA), alreadyRemoved.getAttribute(FIXTURE_OPERATIONTOKENS_F00C8D6B));
       var tokenB = new SessionOperationToken("QDLREQ01", tokenA.token(), tokenA.issuedAt());
       assertThrows(
           IllegalArgumentException.class,
-          () -> initial.setAttribute("operationTokens", List.of(tokenB)));
-      unavailable(() -> staleDeletion.removeAttribute("operationTokens"));
+          () -> initial.setAttribute(FIXTURE_OPERATIONTOKENS_F00C8D6B, List.of(tokenB)));
+      unavailable(() -> staleDeletion.removeAttribute(FIXTURE_OPERATIONTOKENS_F00C8D6B));
       assertEquals(
           List.of(tokenA),
-          Objects.requireNonNull(repo.findById(initial.getId())).getAttribute("operationTokens"));
+          Objects.requireNonNull(repo.findById(initial.getId()))
+              .getAttribute(FIXTURE_OPERATIONTOKENS_F00C8D6B));
       repo.deleteById(initial.getId());
     }
     try (var f = new Fixture(db);
         var pool = Executors.newFixedThreadPool(10)) {
       var repo = adapter(f);
       var original = repo.createSession();
-      original.setAttribute("savedRequest", "/logs");
+      original.setAttribute(FIXTURE_SAVEDREQUEST_50131C2B, FIXTURE_LOGS_910E2326);
       String id = original.getId();
       var values = SessionAttributeCodecTest.tokens(10);
       for (boolean add : new boolean[] {true, false}) {
@@ -246,23 +276,27 @@ class SpringWebSessionTest {
           else assertTrue(desired.remove(token));
           jobs.add(
               () -> {
-                if (add) session.setAttribute("operationTokens", desired);
-                else unavailable(() -> session.setAttribute("operationTokens", desired));
+                if (add) session.setAttribute(FIXTURE_OPERATIONTOKENS_F00C8D6B, desired);
+                else
+                  unavailable(
+                      () -> session.setAttribute(FIXTURE_OPERATIONTOKENS_F00C8D6B, desired));
                 return null;
               });
         }
         for (var future : pool.invokeAll(jobs)) future.get(30, TimeUnit.SECONDS);
         var current = Objects.requireNonNull(repo.findById(id));
-        List<SessionOperationToken> actual = current.getAttribute("operationTokens");
+        List<SessionOperationToken> actual = current.getAttribute(FIXTURE_OPERATIONTOKENS_F00C8D6B);
         assertEquals(new HashSet<>(values), new HashSet<>(actual));
-        assertEquals("/logs", current.getAttribute("savedRequest"));
-        assertEquals("02".repeat(32), current.getAttribute("csrfToken"));
+        assertEquals(FIXTURE_LOGS_910E2326, current.getAttribute(FIXTURE_SAVEDREQUEST_50131C2B));
+        assertEquals("02".repeat(32), current.getAttribute(FIXTURE_CSRFTOKEN_CF3CFD11));
       }
       var a = Objects.requireNonNull(repo.findById(id));
       var b = Objects.requireNonNull(repo.findById(id));
-      unavailable(() -> a.setAttribute("operationTokens", List.of(values.getFirst())));
-      unavailable(() -> b.setAttribute("operationTokens", List.of(values.getFirst())));
-      List<SessionOperationToken> preserved = b.getAttribute("operationTokens");
+      unavailable(
+          () -> a.setAttribute(FIXTURE_OPERATIONTOKENS_F00C8D6B, List.of(values.getFirst())));
+      unavailable(
+          () -> b.setAttribute(FIXTURE_OPERATIONTOKENS_F00C8D6B, List.of(values.getFirst())));
+      List<SessionOperationToken> preserved = b.getAttribute(FIXTURE_OPERATIONTOKENS_F00C8D6B);
       assertEquals(10, preserved.size());
       assertEquals(new HashSet<>(values), new HashSet<>(preserved));
       var changed =
@@ -270,18 +304,19 @@ class SpringWebSessionTest {
               "QDLREQ01", values.getFirst().token(), values.getFirst().issuedAt());
       assertThrows(
           IllegalArgumentException.class,
-          () -> b.setAttribute("operationTokens", List.of(changed)));
+          () -> b.setAttribute(FIXTURE_OPERATIONTOKENS_F00C8D6B, List.of(changed)));
       var stale = original;
-      unavailable(() -> stale.setAttribute("operationTokens", List.of(changed)));
-      a.setAttribute("operationTokens", values);
+      unavailable(() -> stale.setAttribute(FIXTURE_OPERATIONTOKENS_F00C8D6B, List.of(changed)));
+      a.setAttribute(FIXTURE_OPERATIONTOKENS_F00C8D6B, values);
       var full = Objects.requireNonNull(repo.findById(id));
       var extra = new SessionOperationToken("QSBREQ01", new UUID(0, 99), NOW);
-      unavailable(() -> original.setAttribute("operationTokens", List.of(extra)));
+      unavailable(() -> original.setAttribute(FIXTURE_OPERATIONTOKENS_F00C8D6B, List.of(extra)));
       assertEquals(
           new HashSet<>(values),
-          new HashSet<>(full.<List<SessionOperationToken>>getAttribute("operationTokens")));
+          new HashSet<>(
+              full.<List<SessionOperationToken>>getAttribute(FIXTURE_OPERATIONTOKENS_F00C8D6B)));
       repo.deleteById(id);
-      unavailable(() -> full.setAttribute("operationTokens", List.of()));
+      unavailable(() -> full.setAttribute(FIXTURE_OPERATIONTOKENS_F00C8D6B, List.of()));
       assertEquals(0, count());
     }
   }
@@ -292,7 +327,7 @@ class SpringWebSessionTest {
       var repo = adapter(f);
       var initial = repo.createSession();
       var values = SessionAttributeCodecTest.tokens(10);
-      initial.setAttribute("operationTokens", values);
+      initial.setAttribute(FIXTURE_OPERATIONTOKENS_F00C8D6B, values);
       var stale = Objects.requireNonNull(repo.findById(initial.getId()));
       var retiredStale = Objects.requireNonNull(repo.findById(initial.getId()));
       var id = WebSessionId.parse(initial.getId());
@@ -306,19 +341,20 @@ class SpringWebSessionTest {
               first.token(),
               dev.codex.schubert.nk.protocol.header.ResultCode.SUCCESS);
       assertEquals(Optional.of(NOW), completed.completedAt());
-      stale.setAttribute("operationTokens", values);
+      stale.setAttribute(FIXTURE_OPERATIONTOKENS_F00C8D6B, values);
       assertEquals(
           completed, f.repository.find(id).orElseThrow().attributes().operationTokens().getFirst());
       var completedSnapshot = Objects.requireNonNull(repo.findById(initial.getId()));
       var completedValues = new ArrayList<>(values);
       completedValues.set(0, completed);
-      completedSnapshot.setAttribute("operationTokens", completedValues);
-      unavailable(() -> completedSnapshot.removeAttribute("operationTokens"));
+      completedSnapshot.setAttribute(FIXTURE_OPERATIONTOKENS_F00C8D6B, completedValues);
+      unavailable(() -> completedSnapshot.removeAttribute(FIXTURE_OPERATIONTOKENS_F00C8D6B));
       var newToken = lifecycle.issue(id, "QDLREQ01");
       assertEquals(new UUID(0, 99), newToken.token());
       assertThrows(
-          IllegalArgumentException.class, () -> stale.setAttribute("operationTokens", values));
-      retiredStale.setAttribute("operationTokens", values);
+          IllegalArgumentException.class,
+          () -> stale.setAttribute(FIXTURE_OPERATIONTOKENS_F00C8D6B, values));
+      retiredStale.setAttribute(FIXTURE_OPERATIONTOKENS_F00C8D6B, values);
       assertEquals(
           List.of(
               new UUID(0, 2),
@@ -337,13 +373,13 @@ class SpringWebSessionTest {
       // Removing an already retired stale entry is a no-op; retaining it never re-inserts it.
       // Fresh retiredStale now contains current token99, so use the untouched initial snapshot
       // to omit only the already-retired UUID1 without omitting any current row tuple.
-      initial.setAttribute("operationTokens", values.subList(1, 10));
+      initial.setAttribute(FIXTURE_OPERATIONTOKENS_F00C8D6B, values.subList(1, 10));
       assertEquals(10, f.repository.find(id).orElseThrow().attributes().operationTokens().size());
       var forgedCompletion =
           new SessionOperationToken("QSBREQ01", new UUID(0, 200), NOW, Optional.of(NOW));
       assertThrows(
           IllegalArgumentException.class,
-          () -> stale.setAttribute("operationTokens", List.of(forgedCompletion)));
+          () -> stale.setAttribute(FIXTURE_OPERATIONTOKENS_F00C8D6B, List.of(forgedCompletion)));
       assertEquals(0, f.live.get());
     }
   }
@@ -381,8 +417,8 @@ class SpringWebSessionTest {
           NullPointerException.class,
           () -> new SpringWebSession(repo, f.repository, f.clock, null));
       assertThrows(IllegalArgumentException.class, () -> adapter(f).save(session));
-      assertNull(repo.findById("bad"));
-      repo.deleteById("bad");
+      assertNull(repo.findById(FIXTURE_BAD_CBFEDA2B));
+      repo.deleteById(FIXTURE_BAD_CBFEDA2B);
       session.setMaxInactiveInterval(Duration.ofHours(8));
       for (Duration bad :
           List.of(
@@ -403,8 +439,8 @@ class SpringWebSessionTest {
       assertNull(repo.findById(session.getId()));
       unavailable(session::changeSessionId);
       unavailable(() -> session.setLastAccessedTime(NOW));
-      unavailable(() -> session.setAttribute("savedRequest", "/logs"));
-      unavailable(() -> session.setAttribute("principal", PRINCIPAL));
+      unavailable(() -> session.setAttribute(FIXTURE_SAVEDREQUEST_50131C2B, FIXTURE_LOGS_910E2326));
+      unavailable(() -> session.setAttribute(FIXTURE_PRINCIPAL_590C90CB, PRINCIPAL));
       f.clock.value = NOW;
       var active = repo.createSession();
       synchronized (active) {
@@ -436,11 +472,12 @@ class SpringWebSessionTest {
           first,
           (req, res) -> {
             var session = ((HttpServletRequest) req).getSession();
-            session.setAttribute("savedRequest", "/logs?q=abc");
-            session.setAttribute("operationTokens", SessionAttributeCodecTest.tokens(2));
+            session.setAttribute(FIXTURE_SAVEDREQUEST_50131C2B, "/logs?q=abc");
+            session.setAttribute(
+                FIXTURE_OPERATIONTOKENS_F00C8D6B, SessionAttributeCodecTest.tokens(2));
             ((HttpServletResponse) res).setStatus(200);
           });
-      Cookie cookie = Objects.requireNonNull(first.getCookie("SCHUBERT_NK_SESSION"));
+      Cookie cookie = Objects.requireNonNull(first.getCookie(FIXTURE_SCHUBERT_NK_SESSION_DD9EE5FF));
       String original = cookie.getValue();
       assertEquals(43, original.length());
       assertEquals(32, Base64.getUrlDecoder().decode(original).length);
@@ -460,13 +497,14 @@ class SpringWebSessionTest {
             var session = ((HttpServletRequest) req).getSession(false);
             assertNotNull(session);
             assertEquals(original, session.getId());
-            assertEquals("/logs?q=abc", session.getAttribute("savedRequest"));
-            session.setAttribute("principal", PRINCIPAL);
+            assertEquals("/logs?q=abc", session.getAttribute(FIXTURE_SAVEDREQUEST_50131C2B));
+            session.setAttribute(FIXTURE_PRINCIPAL_590C90CB, PRINCIPAL);
             assertNotEquals(original, session.getId());
-            assertEquals(PRINCIPAL, session.getAttribute("principal"));
-            assertEquals("04".repeat(32), session.getAttribute("csrfToken"));
+            assertEquals(PRINCIPAL, session.getAttribute(FIXTURE_PRINCIPAL_590C90CB));
+            assertEquals("04".repeat(32), session.getAttribute(FIXTURE_CSRFTOKEN_CF3CFD11));
           });
-      var authenticated = Objects.requireNonNull(second.getCookie("SCHUBERT_NK_SESSION"));
+      var authenticated =
+          Objects.requireNonNull(second.getCookie(FIXTURE_SCHUBERT_NK_SESSION_DD9EE5FF));
       assertNotEquals(original, authenticated.getValue());
       assertNull(repo.findById(original));
       assertEquals(1, count());
@@ -478,14 +516,14 @@ class SpringWebSessionTest {
             var request = (HttpServletRequest) req;
             String before = request.getSession().getId();
             assertNotEquals(before, request.changeSessionId());
-            assertEquals(PRINCIPAL, request.getSession().getAttribute("principal"));
+            assertEquals(PRINCIPAL, request.getSession().getAttribute(FIXTURE_PRINCIPAL_590C90CB));
             assertEquals(
                 SessionAttributeCodecTest.tokens(2),
-                request.getSession().getAttribute("operationTokens"));
+                request.getSession().getAttribute(FIXTURE_OPERATIONTOKENS_F00C8D6B));
           });
       assertNotEquals(
           authenticated.getValue(),
-          Objects.requireNonNull(third.getCookie("SCHUBERT_NK_SESSION")).getValue());
+          Objects.requireNonNull(third.getCookie(FIXTURE_SCHUBERT_NK_SESSION_DD9EE5FF)).getValue());
     }
   }
 
@@ -496,15 +534,19 @@ class SpringWebSessionTest {
       var repo = adapter(f);
       var filter = new WebSessionFilterFactory().create(repo);
       var created = repo.createSession();
-      var cookie = new Cookie("SCHUBERT_NK_SESSION", created.getId());
+      var cookie = new Cookie(FIXTURE_SCHUBERT_NK_SESSION_DD9EE5FF, created.getId());
       var logout = new MockHttpServletResponse();
       filter.doFilter(
           request(cookie),
           logout,
           (req, res) -> ((HttpServletRequest) req).getSession().invalidate());
       assertEquals(0, count());
-      assertEquals(0, Objects.requireNonNull(logout.getCookie("SCHUBERT_NK_SESSION")).getMaxAge());
-      for (Cookie absent : List.of(cookie, new Cookie("SCHUBERT_NK_SESSION", "bad"))) {
+      assertEquals(
+          0,
+          Objects.requireNonNull(logout.getCookie(FIXTURE_SCHUBERT_NK_SESSION_DD9EE5FF))
+              .getMaxAge());
+      for (Cookie absent :
+          List.of(cookie, new Cookie(FIXTURE_SCHUBERT_NK_SESSION_DD9EE5FF, FIXTURE_BAD_CBFEDA2B))) {
         filter.doFilter(
             request(absent),
             new MockHttpServletResponse(),
@@ -516,7 +558,7 @@ class SpringWebSessionTest {
       unavailable(
           () ->
               filter.doFilter(
-                  request(new Cookie("SCHUBERT_NK_SESSION", active.getId())),
+                  request(new Cookie(FIXTURE_SCHUBERT_NK_SESSION_DD9EE5FF, active.getId())),
                   response,
                   (req, res) -> {
                     var session = ((HttpServletRequest) req).getSession(false);
@@ -524,12 +566,12 @@ class SpringWebSessionTest {
                     repo.deleteById(session.getId());
                     ((HttpServletResponse) res).flushBuffer();
                   }));
-      assertNull(response.getCookie("SCHUBERT_NK_SESSION"));
+      assertNull(response.getCookie(FIXTURE_SCHUBERT_NK_SESSION_DD9EE5FF));
       assertEquals(0, count());
       var expired = repo.createSession();
       f.clock.value = f.clock.value.plusSeconds(28800);
       filter.doFilter(
-          request(new Cookie("SCHUBERT_NK_SESSION", expired.getId())),
+          request(new Cookie(FIXTURE_SCHUBERT_NK_SESSION_DD9EE5FF, expired.getId())),
           new MockHttpServletResponse(),
           (req, res) -> assertNull(((HttpServletRequest) req).getSession(false)));
       assertEquals(0, count());
@@ -541,7 +583,7 @@ class SpringWebSessionTest {
   }
 
   private static MockHttpServletRequest request(Cookie cookie) {
-    var request = new MockHttpServletRequest("GET", "/logs");
+    var request = new MockHttpServletRequest("GET", FIXTURE_LOGS_910E2326);
     request.setSecure(true);
     if (cookie != null) request.setCookies(cookie);
     return request;

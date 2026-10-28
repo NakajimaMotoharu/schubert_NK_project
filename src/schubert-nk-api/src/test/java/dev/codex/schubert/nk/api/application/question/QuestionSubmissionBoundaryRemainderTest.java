@@ -52,6 +52,8 @@ import org.postgresql.util.ServerErrorMessage;
 
 /** PG-D380 / PT-QST-ASUB-008..012: public process, independent wire and SQL postconditions. */
 class QuestionSubmissionBoundaryRemainderTest {
+  private static final String FIXTURE_PUBLIC_FIXTURE_2BAE0C98 = "Public fixture";
+  private static final String FIXTURE_9000_0CDC37EC = "9000";
   @TempDir static Path root;
   static ApiLogDatabaseFixture database;
 
@@ -71,7 +73,8 @@ class QuestionSubmissionBoundaryRemainderTest {
       f.h.confirmOnSignal();
       assertArrayEquals(
           response(M0, new UUID(700, 3), "0000", RECEIPT, 1, NOW),
-          f.service.process(request("Public fixture", M0, TOKEN, NOW.plusSeconds(10), CONTEXT)));
+          f.service.process(
+              request(FIXTURE_PUBLIC_FIXTURE_2BAE0C98, M0, TOKEN, NOW.plusSeconds(10), CONTEXT)));
       assertEquals(1, f.h.scalar("select count(*) from schubert.questions"));
     }
     try (var f = new Boundary()) {
@@ -82,8 +85,8 @@ class QuestionSubmissionBoundaryRemainderTest {
             if (method.equals("commit")) f.h.nanos.set(2_000_000_000L);
           };
       assertArrayEquals(
-          response(M0, new UUID(700, 3), "9000", "", 0, NOW),
-          f.service.process(request("Public fixture", M0, TOKEN, NOW, CONTEXT)));
+          response(M0, new UUID(700, 3), FIXTURE_9000_0CDC37EC, "", 0, NOW),
+          f.service.process(request(FIXTURE_PUBLIC_FIXTURE_2BAE0C98, M0, TOKEN, NOW, CONTEXT)));
       assertEquals(0, wake.get());
       assertEquals(1, f.h.scalar("select count(*) from schubert.questions"));
       assertEquals("COMPLETED", f.h.text("select processing_state from schubert.request_inbox"));
@@ -98,8 +101,8 @@ class QuestionSubmissionBoundaryRemainderTest {
               f.h.nanos.set(2_000_000_000L);
           };
       assertArrayEquals(
-          response(M0, new UUID(700, 3), "9000", "", 0, NOW),
-          f.service.process(request("Public fixture", M0, TOKEN, NOW, CONTEXT)));
+          response(M0, new UUID(700, 3), FIXTURE_9000_0CDC37EC, "", 0, NOW),
+          f.service.process(request(FIXTURE_PUBLIC_FIXTURE_2BAE0C98, M0, TOKEN, NOW, CONTEXT)));
       assertEquals("SENT", f.h.text("select status from schubert.mq_outbox"));
       assertEquals(1, f.h.scalar("select count(*) from schubert.questions"));
     }
@@ -117,8 +120,8 @@ class QuestionSubmissionBoundaryRemainderTest {
             }
           };
       assertArrayEquals(
-          response(M0, new UUID(700, 1), "9000", "", 0, NOW),
-          f.service.process(request("Public fixture", M0, TOKEN, NOW, CONTEXT)));
+          response(M0, new UUID(700, 1), FIXTURE_9000_0CDC37EC, "", 0, NOW),
+          f.service.process(request(FIXTURE_PUBLIC_FIXTURE_2BAE0C98, M0, TOKEN, NOW, CONTEXT)));
       assertEquals(0, f.h.scalar("select count(*) from schubert.questions"));
       assertTrue(observed.get() > 0);
     }
@@ -132,11 +135,13 @@ class QuestionSubmissionBoundaryRemainderTest {
         if (secondary)
           assertThrows(
               TemporaryInfrastructureException.class,
-              () -> f.service.process(request("Public fixture", M0, TOKEN, NOW, CONTEXT)));
+              () ->
+                  f.service.process(
+                      request(FIXTURE_PUBLIC_FIXTURE_2BAE0C98, M0, TOKEN, NOW, CONTEXT)));
         else
           assertArrayEquals(
-              response(M0, new UUID(700, 3), "9000", "", 0, NOW),
-              f.service.process(request("Public fixture", M0, TOKEN, NOW, CONTEXT)));
+              response(M0, new UUID(700, 3), FIXTURE_9000_0CDC37EC, "", 0, NOW),
+              f.service.process(request(FIXTURE_PUBLIC_FIXTURE_2BAE0C98, M0, TOKEN, NOW, CONTEXT)));
         assertEquals(1, f.h.scalar("select count(*) from schubert.questions"));
         assertEquals(0, f.h.live.get());
       }
@@ -145,7 +150,9 @@ class QuestionSubmissionBoundaryRemainderTest {
       try {
         assertThrows(
             TemporaryInfrastructureException.class,
-            () -> f.service.process(request("Public fixture", M0, TOKEN, NOW, CONTEXT)));
+            () ->
+                f.service.process(
+                    request(FIXTURE_PUBLIC_FIXTURE_2BAE0C98, M0, TOKEN, NOW, CONTEXT)));
         assertTrue(Thread.currentThread().isInterrupted());
       } finally {
         Thread.interrupted();
@@ -156,8 +163,8 @@ class QuestionSubmissionBoundaryRemainderTest {
       var calls = new AtomicInteger();
       f.h.signal = () -> f.ticks = () -> calls.incrementAndGet() < 3 ? 0 : 2_000_000_000L;
       assertArrayEquals(
-          response(M0, new UUID(700, 3), "9000", "", 0, NOW),
-          f.service.process(request("Public fixture", M0, TOKEN, NOW, CONTEXT)));
+          response(M0, new UUID(700, 3), FIXTURE_9000_0CDC37EC, "", 0, NOW),
+          f.service.process(request(FIXTURE_PUBLIC_FIXTURE_2BAE0C98, M0, TOKEN, NOW, CONTEXT)));
       assertEquals(1, f.h.scalar("select count(*) from schubert.questions"));
       assertTrue(calls.get() >= 3);
     }
@@ -180,7 +187,7 @@ class QuestionSubmissionBoundaryRemainderTest {
     for (var entry : values.entrySet())
       try (var f = new Boundary()) {
         f.h.confirmOnSignal();
-        f.service.process(request("Public fixture", M0, TOKEN, NOW, CONTEXT));
+        f.service.process(request(FIXTURE_PUBLIC_FIXTURE_2BAE0C98, M0, TOKEN, NOW, CONTEXT));
         String preserved =
             f.h.text(
                 "select md5(response_body_encrypted)||':'||completed_at::text from schubert.request_inbox");
@@ -195,7 +202,9 @@ class QuestionSubmissionBoundaryRemainderTest {
         assertThrows(
             TemporaryInfrastructureException.class,
             () ->
-                f.service.process(request("Public fixture", new UUID(701, 2), TOKEN, NOW, CONTEXT)),
+                f.service.process(
+                    request(
+                        FIXTURE_PUBLIC_FIXTURE_2BAE0C98, new UUID(701, 2), TOKEN, NOW, CONTEXT)),
             entry.getKey());
         assertEquals(
             preserved,
@@ -207,7 +216,7 @@ class QuestionSubmissionBoundaryRemainderTest {
       }
     try (var f = new Boundary()) {
       f.h.confirmOnSignal();
-      f.service.process(request("Public fixture", M0, TOKEN, NOW, CONTEXT));
+      f.service.process(request(FIXTURE_PUBLIC_FIXTURE_2BAE0C98, M0, TOKEN, NOW, CONTEXT));
       var calls = new AtomicInteger();
       f.hook =
           (sql, m, a, actual) ->
@@ -217,7 +226,8 @@ class QuestionSubmissionBoundaryRemainderTest {
       assertThrows(
           TemporaryInfrastructureException.class,
           () ->
-              f.service.process(request("Public fixture", new UUID(701, 2), TOKEN, NOW, CONTEXT)));
+              f.service.process(
+                  request(FIXTURE_PUBLIC_FIXTURE_2BAE0C98, new UUID(701, 2), TOKEN, NOW, CONTEXT)));
       assertEquals(1, f.h.scalar("select count(*) from schubert.questions"));
       assertEquals(2, calls.get());
     }
@@ -245,7 +255,9 @@ class QuestionSubmissionBoundaryRemainderTest {
             };
         assertThrows(
             TemporaryInfrastructureException.class,
-            () -> f.service.process(request("Public fixture", M0, TOKEN, NOW, CONTEXT)));
+            () ->
+                f.service.process(
+                    request(FIXTURE_PUBLIC_FIXTURE_2BAE0C98, M0, TOKEN, NOW, CONTEXT)));
         assertEquals(1, inserts.get());
         assertEquals(0, f.h.scalar("select count(*) from schubert.questions"));
         assertEquals(0, f.h.scalar("select count(*) from schubert.request_inbox"));
@@ -259,7 +271,8 @@ class QuestionSubmissionBoundaryRemainderTest {
                   : actual;
       assertThrows(
           TemporaryInfrastructureException.class,
-          () -> f.service.process(request("Public fixture", M0, TOKEN, NOW, CONTEXT)));
+          () ->
+              f.service.process(request(FIXTURE_PUBLIC_FIXTURE_2BAE0C98, M0, TOKEN, NOW, CONTEXT)));
       assertEquals(0, f.h.scalar("select count(*) from schubert.questions"));
       assertEquals(0, f.h.scalar("select count(*) from schubert.request_inbox"));
       assertEquals(0, f.h.scalar("select count(*) from schubert.app_logs"));
@@ -269,7 +282,8 @@ class QuestionSubmissionBoundaryRemainderTest {
       f.identifier = () -> M0;
       assertThrows(
           TemporaryInfrastructureException.class,
-          () -> f.service.process(request("Public fixture", M0, TOKEN, NOW, CONTEXT)));
+          () ->
+              f.service.process(request(FIXTURE_PUBLIC_FIXTURE_2BAE0C98, M0, TOKEN, NOW, CONTEXT)));
       assertEquals(0, f.h.scalar("select count(*) from schubert.questions"));
       assertEquals(0, f.h.scalar("select count(*) from schubert.async_jobs"));
     }
@@ -287,7 +301,7 @@ class QuestionSubmissionBoundaryRemainderTest {
                   throw failure;
                 return actual;
               };
-          var input = request("Public fixture", M0, TOKEN, NOW, CONTEXT);
+          var input = request(FIXTURE_PUBLIC_FIXTURE_2BAE0C98, M0, TOKEN, NOW, CONTEXT);
           if (secondary || reason.equals("STATE_CORRUPT"))
             assertThrows(TemporaryInfrastructureException.class, () -> f.service.process(input));
           else if (reason.equals("MESSAGE_ID_REUSE"))
@@ -311,7 +325,7 @@ class QuestionSubmissionBoundaryRemainderTest {
                 throw failure;
               return actual;
             };
-        var input = request("Public fixture", M0, TOKEN, NOW, CONTEXT);
+        var input = request(FIXTURE_PUBLIC_FIXTURE_2BAE0C98, M0, TOKEN, NOW, CONTEXT);
         if (secondary)
           assertThrows(TemporaryInfrastructureException.class, () -> f.service.process(input));
         else
@@ -333,14 +347,16 @@ class QuestionSubmissionBoundaryRemainderTest {
                     : actual;
         assertThrows(
             TemporaryInfrastructureException.class,
-            () -> f.service.process(request("Public fixture", M0, TOKEN, NOW, CONTEXT)));
+            () ->
+                f.service.process(
+                    request(FIXTURE_PUBLIC_FIXTURE_2BAE0C98, M0, TOKEN, NOW, CONTEXT)));
         assertEquals(0, f.h.scalar("select count(*) from schubert.questions"));
         assertEquals(0, f.h.scalar("select count(*) from schubert.request_inbox"));
       }
     for (String defect : List.of("result", "time", "question", "submitted"))
       try (var f = new Boundary()) {
         f.h.confirmOnSignal();
-        f.service.process(request("Public fixture", M0, TOKEN, NOW, CONTEXT));
+        f.service.process(request(FIXTURE_PUBLIC_FIXTURE_2BAE0C98, M0, TOKEN, NOW, CONTEXT));
         byte[] wire =
             response(
                 M0,
@@ -367,7 +383,8 @@ class QuestionSubmissionBoundaryRemainderTest {
             TemporaryInfrastructureException.class,
             () ->
                 f.service.process(
-                    request("Public fixture", new UUID(701, 2), TOKEN, NOW, CONTEXT)));
+                    request(
+                        FIXTURE_PUBLIC_FIXTURE_2BAE0C98, new UUID(701, 2), TOKEN, NOW, CONTEXT)));
         assertEquals(1, f.h.scalar("select count(*) from schubert.questions"));
         assertEquals(1, f.h.scalar("select count(*) from schubert.async_jobs"));
       }
@@ -387,7 +404,7 @@ class QuestionSubmissionBoundaryRemainderTest {
                   && m.getName().equals("executeUpdate")) throw fatal;
               return actual;
             };
-        var input = request("Public fixture", M0, TOKEN, NOW, CONTEXT);
+        var input = request(FIXTURE_PUBLIC_FIXTURE_2BAE0C98, M0, TOKEN, NOW, CONTEXT);
         byte[] borrowed = input.payload().copyData();
         assertSame(fatal, assertThrows(LinkageError.class, () -> f.service.process(input)));
         assertEquals(secondary ? 1 : 0, fatal.getSuppressed().length);

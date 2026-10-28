@@ -30,6 +30,14 @@ import org.junit.jupiter.api.Test;
 
 /** OPS009/UI251/SS341§11/343§6.15/SSC055/094/BUG317; PG345/346/PT-OPS-MRESUME001-010. */
 final class MorningResumeAdmissionTest {
+  private static final String FIXTURE_ROOT_956E6E33 = "root";
+  private static final String FIXTURE_DB_ENTER_26938A52 = "DB-enter";
+  private static final String FIXTURE_REFERENCES_3C0C408A = "references";
+  private static final String FIXTURE_DB_CLOSE_FA8A29FA = "DB-close";
+  private static final String FIXTURE_FILE_ENTER_A7A9047E = "file-enter";
+  private static final String FIXTURE_RESUME_D1C375C5 = "resume";
+  private static final String FIXTURE_FILE_CLOSE_C39730AD = "file-close";
+
   @Test
   void mresume011VerifiedOriginalIsBoundToSameHeldOwnerThreadAndLifetime() throws Exception {
     var h = new Harness();
@@ -96,11 +104,11 @@ final class MorningResumeAdmissionTest {
 
     MorningResumeAdmission admission() {
       return new MorningResumeAdmission(
-          () -> events.add("root"),
+          () -> events.add(FIXTURE_ROOT_956E6E33),
           new MorningResumeAdmission.Database() {
             @Override
             public <T> T execute(MorningResumeAdmission.DatabaseWork<T> work) throws IOException {
-              events.add("DB-enter");
+              events.add(FIXTURE_DB_ENTER_26938A52);
               if (databaseFailure != null) throw databaseFailure;
               dbHeld.set(true);
               try {
@@ -111,7 +119,7 @@ final class MorningResumeAdmissionTest {
                       }
 
                       public void requireConsistent(BatchRun run) throws IOException {
-                        events.add("references");
+                        events.add(FIXTURE_REFERENCES_3C0C408A);
                         assertEquals(RUN, run.id());
                         assertEquals(CUTOFF, run.cutoff());
                         if (referencesFailure != null) throw referencesFailure;
@@ -138,20 +146,20 @@ final class MorningResumeAdmissionTest {
                     });
               } finally {
                 dbHeld.set(false);
-                events.add("DB-close");
+                events.add(FIXTURE_DB_CLOSE_FA8A29FA);
               }
             }
           },
           new MorningResumeAdmission.Originals() {
             @Override
             public <T> T execute(MorningResumeAdmission.FileWork<T> work) throws IOException {
-              events.add("file-enter");
+              events.add(FIXTURE_FILE_ENTER_A7A9047E);
               fileHeld.set(true);
               try {
                 return work.execute(
                     new MorningResumeAdmission.Files() {
                       public MaintenanceRunState resume(UUID run, UUID next) throws IOException {
-                        events.add("resume");
+                        events.add(FIXTURE_RESUME_D1C375C5);
                         assertTrue(dbHeld.get(), "DB advisory must be owned before durable resume");
                         assertEquals(RUN, run);
                         assertEquals(NEXT, next);
@@ -167,7 +175,7 @@ final class MorningResumeAdmissionTest {
                     });
               } finally {
                 fileHeld.set(false);
-                events.add("file-close");
+                events.add(FIXTURE_FILE_CLOSE_C39730AD);
               }
             }
           },
@@ -191,20 +199,20 @@ final class MorningResumeAdmissionTest {
     assertEquals("same-run", result);
     assertEquals(
         List.of(
-            "root",
-            "DB-enter",
-            "root",
-            "file-enter",
-            "root",
-            "resume",
-            "root",
-            "references",
-            "root",
+            FIXTURE_ROOT_956E6E33,
+            FIXTURE_DB_ENTER_26938A52,
+            FIXTURE_ROOT_956E6E33,
+            FIXTURE_FILE_ENTER_A7A9047E,
+            FIXTURE_ROOT_956E6E33,
+            FIXTURE_RESUME_D1C375C5,
+            FIXTURE_ROOT_956E6E33,
+            FIXTURE_REFERENCES_3C0C408A,
+            FIXTURE_ROOT_956E6E33,
             "continuation",
-            "root",
-            "file-close",
-            "DB-close",
-            "root"),
+            FIXTURE_ROOT_956E6E33,
+            FIXTURE_FILE_CLOSE_C39730AD,
+            FIXTURE_DB_CLOSE_FA8A29FA,
+            FIXTURE_ROOT_956E6E33),
         h.events);
     assertFalse(h.fileHeld.get());
     assertFalse(h.dbHeld.get());
@@ -220,7 +228,14 @@ final class MorningResumeAdmissionTest {
             IOException.class, () -> h.admission().execute(RUN, state -> fail("no continuation"))));
     assertEquals(
         List.of(
-            "root", "DB-enter", "root", "file-enter", "root", "resume", "file-close", "DB-close"),
+            FIXTURE_ROOT_956E6E33,
+            FIXTURE_DB_ENTER_26938A52,
+            FIXTURE_ROOT_956E6E33,
+            FIXTURE_FILE_ENTER_A7A9047E,
+            FIXTURE_ROOT_956E6E33,
+            FIXTURE_RESUME_D1C375C5,
+            FIXTURE_FILE_CLOSE_C39730AD,
+            FIXTURE_DB_CLOSE_FA8A29FA),
         h.events);
   }
 
@@ -233,8 +248,9 @@ final class MorningResumeAdmissionTest {
         assertThrows(
             IOException.class, () -> h.admission().execute(RUN, state -> fail("no continuation"))));
     assertEquals(
-        List.of("file-close", "DB-close"), h.events.subList(h.events.size() - 2, h.events.size()));
-    assertTrue(h.events.contains("resume"));
+        List.of(FIXTURE_FILE_CLOSE_C39730AD, FIXTURE_DB_CLOSE_FA8A29FA),
+        h.events.subList(h.events.size() - 2, h.events.size()));
+    assertTrue(h.events.contains(FIXTURE_RESUME_D1C375C5));
     assertFalse(h.fileHeld.get() || h.dbHeld.get());
   }
 
@@ -248,8 +264,8 @@ final class MorningResumeAdmissionTest {
         "Morning same-run resume unavailable",
         assertThrows(IOException.class, () -> h.admission().execute(RUN, state -> fail("no work")))
             .getMessage());
-    assertFalse(h.events.contains("references"));
-    assertEquals("DB-close", h.events.getLast());
+    assertFalse(h.events.contains(FIXTURE_REFERENCES_3C0C408A));
+    assertEquals(FIXTURE_DB_CLOSE_FA8A29FA, h.events.getLast());
   }
 
   @Test
@@ -273,7 +289,7 @@ final class MorningResumeAdmissionTest {
                   return true;
                 });
     assertTrue(completed);
-    assertTrue(h.events.contains("references"));
+    assertTrue(h.events.contains(FIXTURE_REFERENCES_3C0C408A));
   }
 
   @Test
@@ -358,9 +374,9 @@ final class MorningResumeAdmissionTest {
         h.databaseFailure,
         assertThrows(
             IOException.class, () -> h.admission().execute(RUN, state -> fail("no continuation"))));
-    assertEquals(List.of("root", "DB-enter"), h.events);
-    assertFalse(h.events.contains("file-enter"));
-    assertFalse(h.events.contains("resume"));
+    assertEquals(List.of(FIXTURE_ROOT_956E6E33, FIXTURE_DB_ENTER_26938A52), h.events);
+    assertFalse(h.events.contains(FIXTURE_FILE_ENTER_A7A9047E));
+    assertFalse(h.events.contains(FIXTURE_RESUME_D1C375C5));
   }
 
   @Test
@@ -383,10 +399,10 @@ final class MorningResumeAdmissionTest {
                       });
                 });
     assertTrue(completed);
-    assertTrue(h.events.indexOf("references") < h.events.indexOf("begin-backup"));
+    assertTrue(h.events.indexOf(FIXTURE_REFERENCES_3C0C408A) < h.events.indexOf("begin-backup"));
     assertTrue(h.events.indexOf("begin-backup") < h.events.indexOf("handoff"));
     assertEquals(
-        List.of("file-close", "DB-close", "root"),
+        List.of(FIXTURE_FILE_CLOSE_C39730AD, FIXTURE_DB_CLOSE_FA8A29FA, FIXTURE_ROOT_956E6E33),
         h.events.subList(h.events.size() - 3, h.events.size()));
   }
 }

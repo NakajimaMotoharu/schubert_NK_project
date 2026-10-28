@@ -25,14 +25,18 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** PG229/PT-JMS-016: API receive-group ownership, distinct from full process boot. */
 final class ApiMessagingRuntimeTest {
+  private static final String FIXTURE_VM_0_0C76084A = "vm://0";
+  private static final String FIXTURE_NK_SYNC_REQUEST_Q_583BA80B = "nk.sync.request.q";
+  private static final String FIXTURE_NK_WEB_LOG_Q_88E21E63 = "nk.web.log.q";
+
   @Test
   void core001ActualSixContextsThirdFifoProfileAndOneFatalAcrossThreeQueues(@TempDir Path root)
       throws Exception {
     var broker = startBroker(root);
-    try (var sync = new ActiveMQConnectionFactory("vm://0");
-        var log = new ActiveMQConnectionFactory("vm://0");
-        var async = new ActiveMQConnectionFactory("vm://0");
-        var sending = new ActiveMQConnectionFactory("vm://0");
+    try (var sync = new ActiveMQConnectionFactory(FIXTURE_VM_0_0C76084A);
+        var log = new ActiveMQConnectionFactory(FIXTURE_VM_0_0C76084A);
+        var async = new ActiveMQConnectionFactory(FIXTURE_VM_0_0C76084A);
+        var sending = new ActiveMQConnectionFactory(FIXTURE_VM_0_0C76084A);
         var producer = sending.createContext(JMSContext.AUTO_ACKNOWLEDGE);
         var observation = sending.createContext(JMSContext.AUTO_ACKNOWLEDGE);
         var dlq =
@@ -53,8 +57,8 @@ final class ApiMessagingRuntimeTest {
               Clock.systemUTC(),
               ignored -> terminal.incrementAndGet(),
               fatal::incrementAndGet)) {
-        assertEquals(4, consumerCount(broker, "nk.sync.request.q"));
-        assertEquals(1, consumerCount(broker, "nk.web.log.q"));
+        assertEquals(4, consumerCount(broker, FIXTURE_NK_SYNC_REQUEST_Q_583BA80B));
+        assertEquals(1, consumerCount(broker, FIXTURE_NK_WEB_LOG_Q_88E21E63));
         assertEquals(1, consumerCount(broker, "nk.async.work.q"));
         assertEquals(0, async.getConsumerWindowSize());
         assertTrue(runtime.ready());
@@ -73,8 +77,8 @@ final class ApiMessagingRuntimeTest {
         assertTrue(runtime.terminalFailureObserved());
         assertFalse(runtime.ready());
       }
-      assertEquals(0, consumerCount(broker, "nk.sync.request.q"));
-      assertEquals(0, consumerCount(broker, "nk.web.log.q"));
+      assertEquals(0, consumerCount(broker, FIXTURE_NK_SYNC_REQUEST_Q_583BA80B));
+      assertEquals(0, consumerCount(broker, FIXTURE_NK_WEB_LOG_Q_88E21E63));
       assertEquals(0, consumerCount(broker, "nk.async.work.q"));
     } finally {
       broker.stop();
@@ -176,8 +180,8 @@ final class ApiMessagingRuntimeTest {
     var syncOpens = new AtomicInteger();
     var logOpens = new AtomicInteger();
     EmbeddedActiveMQ broker = startBroker(root);
-    try (var sync = new ActiveMQConnectionFactory("vm://0");
-        var log = new ActiveMQConnectionFactory("vm://0")) {
+    try (var sync = new ActiveMQConnectionFactory(FIXTURE_VM_0_0C76084A);
+        var log = new ActiveMQConnectionFactory(FIXTURE_VM_0_0C76084A)) {
       sync.setConsumerWindowSize(1_048_576);
       log.setConsumerWindowSize(65_536);
       try (var runtime =
@@ -198,12 +202,12 @@ final class ApiMessagingRuntimeTest {
         assertEquals(65_536, log.getConsumerWindowSize());
         assertEquals(4, syncOpens.get());
         assertEquals(1, logOpens.get());
-        assertEquals(4, consumerCount(broker, "nk.sync.request.q"));
-        assertEquals(1, consumerCount(broker, "nk.web.log.q"));
+        assertEquals(4, consumerCount(broker, FIXTURE_NK_SYNC_REQUEST_Q_583BA80B));
+        assertEquals(1, consumerCount(broker, FIXTURE_NK_WEB_LOG_Q_88E21E63));
         assertTrue(runtime.ready());
       }
-      assertEquals(0, consumerCount(broker, "nk.sync.request.q"));
-      assertEquals(0, consumerCount(broker, "nk.web.log.q"));
+      assertEquals(0, consumerCount(broker, FIXTURE_NK_SYNC_REQUEST_Q_583BA80B));
+      assertEquals(0, consumerCount(broker, FIXTURE_NK_WEB_LOG_Q_88E21E63));
     } finally {
       broker.stop();
     }
@@ -212,7 +216,7 @@ final class ApiMessagingRuntimeTest {
   @Test
   void opensFiveConsumersAndSignalsOneTerminalAcrossGroups(@TempDir Path root) throws Exception {
     EmbeddedActiveMQ broker = startBroker(root);
-    try (var factory = new ActiveMQConnectionFactory("vm://0");
+    try (var factory = new ActiveMQConnectionFactory(FIXTURE_VM_0_0C76084A);
         JMSContext producer = factory.createContext(JMSContext.AUTO_ACKNOWLEDGE);
         JMSContext observer = factory.createContext(JMSContext.AUTO_ACKNOWLEDGE);
         var dlq = observer.createConsumer(new ActiveMQQueue("nk.dead.letter::nk.dead.letter.q"))) {
@@ -227,8 +231,8 @@ final class ApiMessagingRuntimeTest {
               ignored -> terminals.incrementAndGet());
       assertTrue(runtime.ready());
       assertFalse(runtime.terminalFailureObserved());
-      assertEquals(4, consumerCount(broker, "nk.sync.request.q"));
-      assertEquals(1, consumerCount(broker, "nk.web.log.q"));
+      assertEquals(4, consumerCount(broker, FIXTURE_NK_SYNC_REQUEST_Q_583BA80B));
+      assertEquals(1, consumerCount(broker, FIXTURE_NK_WEB_LOG_Q_88E21E63));
       producer
           .createProducer()
           .send(
@@ -246,8 +250,8 @@ final class ApiMessagingRuntimeTest {
       runtime.close();
       runtime.close();
       assertFalse(runtime.ready());
-      assertEquals(0, consumerCount(broker, "nk.sync.request.q"));
-      assertEquals(0, consumerCount(broker, "nk.web.log.q"));
+      assertEquals(0, consumerCount(broker, FIXTURE_NK_SYNC_REQUEST_Q_583BA80B));
+      assertEquals(0, consumerCount(broker, FIXTURE_NK_WEB_LOG_Q_88E21E63));
     } finally {
       broker.stop();
     }
@@ -409,7 +413,7 @@ final class ApiMessagingRuntimeTest {
         .setLargeMessagesDirectory(root.resolve("large-messages").toString())
         .setSecurityEnabled(false)
         .clearAcceptorConfigurations()
-        .addAcceptorConfiguration("component", "vm://0");
+        .addAcceptorConfiguration("component", FIXTURE_VM_0_0C76084A);
     return new EmbeddedActiveMQ().setConfiguration(configuration).start();
   }
 }

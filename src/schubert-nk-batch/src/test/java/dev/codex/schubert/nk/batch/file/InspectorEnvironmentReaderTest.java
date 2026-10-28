@@ -45,6 +45,18 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** Real retained inodes/channels; only root/GID/FS admission is synthetic. EFILE001..008. */
 final class InspectorEnvironmentReaderTest {
+  private static final String FIXTURE_DIR_16E08808 = "dir";
+  private static final String FIXTURE_FILE_BFDDE6F5 = "file";
+  private static final String FIXTURE_UID_0C18F38C = "uid";
+  private static final String FIXTURE_GID_0ACDD642 = "gid";
+  private static final String FIXTURE_MODE_B6D5C2C3 = "mode";
+  private static final String FIXTURE_SIZE_EB1E91E4 = "size";
+  private static final String FIXTURE_OPENENTRY_4A0BE764 = "openEntry";
+  private static final String FIXTURE_TMPFS_5401E650 = "tmpfs";
+  private static final String FIXTURE_ORIGINAL_4D609353 = "original";
+  private static final String FIXTURE_READ_6F365882 = "read";
+  private static final String FIXTURE_CHANNELCLOSE_CFE1554A = "channelClose";
+  private static final String FIXTURE_READONLY_C4A495E7 = "readonly";
   @TempDir Path temporary;
   private static final String STATIC =
       "NK_INSPECTOR_DB_URL=jdbc:postgresql://127.0.0.1:5432/schubert_nk\n"
@@ -123,22 +135,31 @@ final class InspectorEnvironmentReaderTest {
         assertEquals(0, f.count("attributes"));
       }
     for (boolean runtime : List.of(false, true))
-      for (String role : List.of("dir", "file")) {
-        for (String field : List.of("uid", "gid", "mode", "nlink", "size")) {
+      for (String role : List.of(FIXTURE_DIR_16E08808, FIXTURE_FILE_BFDDE6F5)) {
+        for (String field :
+            List.of(
+                FIXTURE_UID_0C18F38C,
+                FIXTURE_GID_0ACDD642,
+                FIXTURE_MODE_B6D5C2C3,
+                "nlink",
+                FIXTURE_SIZE_EB1E91E4)) {
           List<Object> values =
               switch (field) {
-                case "uid", "gid" -> List.of(7, -1);
-                case "mode" -> List.of(0, 0120777, 0140600, 0100666, 040777);
-                case "nlink" -> role.equals("dir") ? List.of(0, 1) : List.of(0, 2);
-                case "size" ->
-                    role.equals("dir") ? List.of(-1L) : List.of(-1L, 0L, runtime ? 111L : 65849L);
+                case FIXTURE_UID_0C18F38C, FIXTURE_GID_0ACDD642 -> List.of(7, -1);
+                case FIXTURE_MODE_B6D5C2C3 -> List.of(0, 0120777, 0140600, 0100666, 040777);
+                case "nlink" -> role.equals(FIXTURE_DIR_16E08808) ? List.of(0, 1) : List.of(0, 2);
+                case FIXTURE_SIZE_EB1E91E4 ->
+                    role.equals(FIXTURE_DIR_16E08808)
+                        ? List.of(-1L)
+                        : List.of(-1L, 0L, runtime ? 111L : 65849L);
                 default -> throw new AssertionError(field);
               };
           for (Object value : values)
             try (var f = fixture(runtime)) {
               f.change = change(role, field, value);
               reject(f);
-              if (role.equals("dir")) assertEquals(0, f.count("openEntry"));
+              if (role.equals(FIXTURE_DIR_16E08808))
+                assertEquals(0, f.count(FIXTURE_OPENENTRY_4A0BE764));
             }
         }
         for (String type : List.of("nfs", "cifs", "overlay", "", "unknown"))
@@ -153,13 +174,14 @@ final class InspectorEnvironmentReaderTest {
           reject(f);
         }
       }
-    for (String type : List.of("ext2", "ext3", "ext4", "ext2/ext3/ext4", "xfs", "btrfs", "tmpfs")) {
+    for (String type :
+        List.of("ext2", "ext3", "ext4", "ext2/ext3/ext4", "xfs", "btrfs", FIXTURE_TMPFS_5401E650)) {
       try (var f = fixture(false)) {
         f.filesystem = type;
         f.readonly = true;
         assertArrayEquals(bytes(STATIC), f.reader().readStatic());
       }
-      if (!type.equals("tmpfs"))
+      if (!type.equals(FIXTURE_TMPFS_5401E650))
         try (var f = fixture(true)) {
           f.filesystem = type;
           reject(f);
@@ -170,17 +192,25 @@ final class InspectorEnvironmentReaderTest {
       reject(f);
     }
     try (var f = fixture(false)) {
-      f.change = change("file", "dev", Long.MAX_VALUE);
+      f.change = change(FIXTURE_FILE_BFDDE6F5, "dev", Long.MAX_VALUE);
       reject(f);
     }
   }
 
   @Test
   void metadataAndNull() throws Exception {
-    for (String role : List.of("dir", "file")) {
+    for (String role : List.of(FIXTURE_DIR_16E08808, FIXTURE_FILE_BFDDE6F5)) {
       for (String key :
           List.of(
-              "mode", "uid", "gid", "nlink", "size", "dev", "ino", "lastModifiedTime", "ctime")) {
+              FIXTURE_MODE_B6D5C2C3,
+              FIXTURE_UID_0C18F38C,
+              FIXTURE_GID_0ACDD642,
+              "nlink",
+              FIXTURE_SIZE_EB1E91E4,
+              "dev",
+              "ino",
+              "lastModifiedTime",
+              "ctime")) {
         for (Object wrong : Arrays.asList(null, "not-the-declared-type"))
           try (var f = fixture(false)) {
             f.change = change(role, key, wrong);
@@ -237,7 +267,9 @@ final class InspectorEnvironmentReaderTest {
         f.sizeDelta = difference;
         f.change =
             (role, values) -> {
-              if (role.equals("file")) values.put("size", ((Long) values.get("size")) + difference);
+              if (role.equals(FIXTURE_FILE_BFDDE6F5))
+                values.put(
+                    FIXTURE_SIZE_EB1E91E4, ((Long) values.get(FIXTURE_SIZE_EB1E91E4)) + difference);
             };
         reject(f);
       }
@@ -253,7 +285,7 @@ final class InspectorEnvironmentReaderTest {
       byte[] over = new byte[65849];
       Files.write(f.file, over);
       f.sizeDelta = -1;
-      f.change = change("file", "size", 65848L);
+      f.change = change(FIXTURE_FILE_BFDDE6F5, FIXTURE_SIZE_EB1E91E4, 65848L);
       reject(f);
       assertEquals(65849, f.maximumBuffer);
     }
@@ -263,7 +295,7 @@ final class InspectorEnvironmentReaderTest {
             () ->
                 f.change =
                     change(
-                        "file",
+                        FIXTURE_FILE_BFDDE6F5,
                         field,
                         field.equals("ctime") || field.equals("lastModifiedTime")
                             ? FileTime.fromMillis(0)
@@ -282,25 +314,26 @@ final class InspectorEnvironmentReaderTest {
     try (var f = fixture(false)) {
       f.afterRead =
           () -> {
-            Files.move(f.file, f.directory.resolve("original"));
+            Files.move(f.file, f.directory.resolve(FIXTURE_ORIGINAL_4D609353));
             Files.writeString(f.file, STATIC);
           };
       reject(f);
-      assertEquals(STATIC, Files.readString(f.directory.resolve("original")));
+      assertEquals(STATIC, Files.readString(f.directory.resolve(FIXTURE_ORIGINAL_4D609353)));
       assertEquals(STATIC, Files.readString(f.file));
       f.released();
     }
     try (var f = fixture(false)) {
-      f.afterRead = () -> f.change = change("dir", "ino", Long.MAX_VALUE);
+      f.afterRead = () -> f.change = change(FIXTURE_DIR_16E08808, "ino", Long.MAX_VALUE);
       reject(f);
     }
     for (String kind : List.of("missing", "symlink", "directory", "hardlink"))
       try (var f = fixture(false)) {
-        Files.move(f.file, f.directory.resolve("original"));
+        Files.move(f.file, f.directory.resolve(FIXTURE_ORIGINAL_4D609353));
         switch (kind) {
-          case "symlink" -> Files.createSymbolicLink(f.file, Path.of("original"));
+          case "symlink" -> Files.createSymbolicLink(f.file, Path.of(FIXTURE_ORIGINAL_4D609353));
           case "directory" -> Files.createDirectory(f.file);
-          case "hardlink" -> Files.createLink(f.file, f.directory.resolve("original"));
+          case "hardlink" ->
+              Files.createLink(f.file, f.directory.resolve(FIXTURE_ORIGINAL_4D609353));
           case "missing" -> {}
           default -> throw new AssertionError(kind);
         }
@@ -320,13 +353,13 @@ final class InspectorEnvironmentReaderTest {
                 new AssertionError("public compound")))
           try (var f = fixture(runtime)) {
             if (known) {
-              f.fail = "read";
+              f.fail = FIXTURE_READ_6F365882;
               f.failAt = 2;
             }
             f.compound =
                 (name, count) -> {
-                  if ((count == 1 && name.equals("channelClose"))
-                      || (!known && count == 2 && name.equals("read"))) {
+                  if ((count == 1 && name.equals(FIXTURE_CHANNELCLOSE_CFE1554A))
+                      || (!known && count == 2 && name.equals(FIXTURE_READ_6F365882))) {
                     if (unknown instanceof RuntimeException failure) throw failure;
                     throw (Error) unknown;
                   }
@@ -339,8 +372,8 @@ final class InspectorEnvironmentReaderTest {
                       if (runtime) f.reader().readRun(RUN);
                       else f.reader().readStatic();
                     }));
-            assertEquals(2, f.count("read"));
-            assertEquals(1, f.count("channelClose"));
+            assertEquals(2, f.count(FIXTURE_READ_6F365882));
+            assertEquals(1, f.count(FIXTURE_CHANNELCLOSE_CFE1554A));
             assertEquals(known ? 0 : 1, unknown.getSuppressed().length);
             for (Throwable secondary : unknown.getSuppressed()) {
               var fixed = assertInstanceOf(StorageIoException.class, secondary);
@@ -363,19 +396,19 @@ final class InspectorEnvironmentReaderTest {
             5,
             "filesystem",
             5,
-            "readonly",
+            FIXTURE_READONLY_C4A495E7,
             5,
-            "openEntry",
+            FIXTURE_OPENENTRY_4A0BE764,
             2,
             "entryClose",
             2,
             "openChannel",
             1,
-            "size",
+            FIXTURE_SIZE_EB1E91E4,
             2,
-            "read",
+            FIXTURE_READ_6F365882,
             2,
-            "channelClose",
+            FIXTURE_CHANNELCLOSE_CFE1554A,
             1);
     try (var f = fixture(false)) {
       assertArrayEquals(bytes(STATIC), f.reader().readStatic());
@@ -391,7 +424,7 @@ final class InspectorEnvironmentReaderTest {
         }
       }
     try (var f = fixture(false)) {
-      f.fail = "read";
+      f.fail = FIXTURE_READ_6F365882;
       f.failAt = 1;
       f.failCloses = true;
       reject(f);
@@ -423,7 +456,7 @@ final class InspectorEnvironmentReaderTest {
       f.lateInterrupt = true;
       try {
         reject(f);
-        assertEquals(5, f.count("readonly"));
+        assertEquals(5, f.count(FIXTURE_READONLY_C4A495E7));
         assertTrue(Thread.currentThread().isInterrupted());
       } finally {
         Thread.interrupted();
@@ -537,7 +570,7 @@ final class InspectorEnvironmentReaderTest {
     Fixture(Path directory, boolean runtime) throws Exception {
       this.directory = directory;
       this.runtime = runtime;
-      this.filesystem = runtime ? "tmpfs" : "ext4";
+      this.filesystem = runtime ? FIXTURE_TMPFS_5401E650 : "ext4";
       file = directory.resolve("inbox-inspector.env");
       Files.writeString(file, runtime ? RUNTIME : STATIC);
       DirectoryCalls delegate = LinuxDirectoryCalls.create();
@@ -549,7 +582,7 @@ final class InspectorEnvironmentReaderTest {
                   new Class<?>[] {DirectoryCalls.class},
                   (proxy, method, args) -> {
                     String name = method.getName();
-                    if (name.equals("openEntry")) point("openEntry");
+                    if (name.equals(FIXTURE_OPENENTRY_4A0BE764)) point(FIXTURE_OPENENTRY_4A0BE764);
                     boolean ownedClose = name.equals("close") && entries.remove((Integer) args[0]);
                     Object result;
                     try {
@@ -557,7 +590,7 @@ final class InspectorEnvironmentReaderTest {
                     } catch (InvocationTargetException failure) {
                       throw failure.getCause();
                     }
-                    if (name.equals("openEntry")) entries.add((Integer) result);
+                    if (name.equals(FIXTURE_OPENENTRY_4A0BE764)) entries.add((Integer) result);
                     if (ownedClose) point("entryClose");
                     return result;
                   });
@@ -576,13 +609,16 @@ final class InspectorEnvironmentReaderTest {
     void point(String name) throws StorageIoException {
       int n = counts.computeIfAbsent(name, key -> new AtomicInteger()).incrementAndGet();
       compound.accept(name, n);
-      if (lateInterrupt && name.equals("readonly") && n == 5) Thread.currentThread().interrupt();
+      if (lateInterrupt && name.equals(FIXTURE_READONLY_C4A495E7) && n == 5)
+        Thread.currentThread().interrupt();
       if ((name.equals(fail) && n == failAt) || (failCloses && name.endsWith("Close")))
         throw new StorageIoException(StorageIoException.Reason.UNAVAILABLE);
     }
 
     String role(Path held) throws IOException {
-      return (((Integer) real.attributes(held).get("mode")) & 0170000) == 040000 ? "dir" : "file";
+      return (((Integer) real.attributes(held).get(FIXTURE_MODE_B6D5C2C3)) & 0170000) == 040000
+          ? FIXTURE_DIR_16E08808
+          : FIXTURE_FILE_BFDDE6F5;
     }
 
     boolean selected(Path held) throws IOException {
@@ -595,11 +631,15 @@ final class InspectorEnvironmentReaderTest {
       String role = role(held);
       if (nullAttributes && selected(held)) return null;
       Map<String, Object> values = new HashMap<>(real.attributes(held));
-      int type = ((Integer) values.get("mode")) & 0170000;
+      int type = ((Integer) values.get(FIXTURE_MODE_B6D5C2C3)) & 0170000;
       values.put(
-          "mode", type | (role.equals("dir") ? (runtime ? 0700 : 0750) : (runtime ? 0600 : 0640)));
-      values.put("uid", 0);
-      values.put("gid", runtime ? 0 : (int) group);
+          FIXTURE_MODE_B6D5C2C3,
+          type
+              | (role.equals(FIXTURE_DIR_16E08808)
+                  ? (runtime ? 0700 : 0750)
+                  : (runtime ? 0600 : 0640)));
+      values.put(FIXTURE_UID_0C18F38C, 0);
+      values.put(FIXTURE_GID_0ACDD642, runtime ? 0 : (int) group);
       change.accept(role, values);
       return values;
     }
@@ -608,7 +648,7 @@ final class InspectorEnvironmentReaderTest {
     public String filesystem(Path held) throws IOException {
       point("filesystem");
       assertNotNull(real.filesystem(held));
-      return selected(held) ? filesystem : (runtime ? "tmpfs" : "ext4");
+      return selected(held) ? filesystem : (runtime ? FIXTURE_TMPFS_5401E650 : "ext4");
     }
 
     @Override
@@ -624,7 +664,7 @@ final class InspectorEnvironmentReaderTest {
 
     @Override
     public boolean readOnlyFilesystem(Path held) throws StorageIoException {
-      point("readonly");
+      point(FIXTURE_READONLY_C4A495E7);
       try {
         return selected(held) && readonly;
       } catch (IOException failure) {
@@ -649,7 +689,7 @@ final class InspectorEnvironmentReaderTest {
         @Override
         public int read(ByteBuffer target) throws IOException {
           compoundBuffers.add(target.array());
-          point("read");
+          point(FIXTURE_READ_6F365882);
           maximumBuffer = Math.max(maximumBuffer, target.capacity());
           int start = target.position();
           int remaining = target.remaining();
@@ -674,7 +714,7 @@ final class InspectorEnvironmentReaderTest {
 
         @Override
         public long size() throws IOException {
-          point("size");
+          point(FIXTURE_SIZE_EB1E91E4);
           return channel.size() + sizeDelta + (++sizes == 2 ? endSizeDelta : 0);
         }
 
@@ -687,7 +727,7 @@ final class InspectorEnvironmentReaderTest {
         public void close() throws IOException {
           channel.close();
           channels.decrementAndGet();
-          point("channelClose");
+          point(FIXTURE_CHANNELCLOSE_CFE1554A);
           if (rawClose) throw new IOException("synthetic-path/content from close must not escape");
         }
 

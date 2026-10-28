@@ -24,6 +24,16 @@ import org.junit.jupiter.api.Test;
 
 /** NK-OPS-001/PT-OPS-STOP-009..016; SS341/343; real readonly tool and fault-controlled Process. */
 final class SystemctlStateSourceTest {
+  private static final String FIXTURE_SECRET_CANARY_06ACD2BD = "SECRET_CANARY";
+  private static final String FIXTURE_OUTPUT_4BBB1F94 = "output";
+  private static final String FIXTURE_INPUT_48AED237 = "input";
+  private static final String FIXTURE_ERROR_4D01709F = "error";
+  private static final String FIXTURE_RUNTIME_2D52CD90 = "runtime";
+  private static final String FIXTURE_TIMEOUT_492BD020 = "timeout";
+  private static final String FIXTURE_INTERRUPT_DDE42D5D = "interrupt";
+  private static final String FIXTURE_EXIT_397F64AC = "exit";
+  private static final String FIXTURE_OVERSIZE_F21E85A5 = "oversize";
+
   @Test
   void fixedCommandAndSuccess() {
     for (var unit : ApplicationUnit.values()) {
@@ -60,7 +70,7 @@ final class SystemctlStateSourceTest {
         () ->
             new SystemctlStateSource(
                     command -> {
-                      throw new IOException("SECRET_CANARY");
+                      throw new IOException(FIXTURE_SECRET_CANARY_06ACD2BD);
                     })
                 .read(ApplicationUnit.API));
     for (int code : List.of(1, 20, 50, 255, -1)) {
@@ -121,15 +131,23 @@ final class SystemctlStateSourceTest {
   @Test
   void closeFailures() {
     // PG173/SSC063/BUG195/YKT154: independent 4 x 3 x 7 compound matrix.
-    for (String scope : List.of("output", "input", "error", "term"))
+    for (String scope :
+        List.of(FIXTURE_OUTPUT_4BBB1F94, FIXTURE_INPUT_48AED237, FIXTURE_ERROR_4D01709F, "term"))
       for (String primary :
-          List.of("runtime", "io", "timeout", "interrupt", "exit", "oversize", "success"))
+          List.of(
+              FIXTURE_RUNTIME_2D52CD90,
+              "io",
+              FIXTURE_TIMEOUT_492BD020,
+              FIXTURE_INTERRUPT_DDE42D5D,
+              FIXTURE_EXIT_397F64AC,
+              FIXTURE_OVERSIZE_F21E85A5,
+              "success"))
         for (Throwable unknown :
             List.of(
                 new IllegalStateException("synthetic compound"),
                 new NullPointerException("synthetic compound"),
                 new AssertionError("synthetic compound"))) {
-          byte[] vector = new byte[primary.equals("oversize") ? 1025 : 3];
+          byte[] vector = new byte[primary.equals(FIXTURE_OVERSIZE_F21E85A5) ? 1025 : 3];
           java.util.Arrays.fill(vector, (byte) 7);
           var compound = new Child(vector);
           compound.cleanupAlive = true;
@@ -140,23 +158,25 @@ final class SystemctlStateSourceTest {
                 throwUnknown(unknown);
               };
           switch (scope) {
-            case "output" -> compound.output.ending = cleanup;
-            case "input" -> compound.input.ending = cleanup;
-            case "error" -> compound.error.ending = cleanup;
+            case FIXTURE_OUTPUT_4BBB1F94 -> compound.output.ending = cleanup;
+            case FIXTURE_INPUT_48AED237 -> compound.input.ending = cleanup;
+            case FIXTURE_ERROR_4D01709F -> compound.error.ending = cleanup;
             case "term" -> compound.ending = cleanup;
             default -> throw new AssertionError(scope);
           }
-          if (primary.equals("runtime")) compound.waiting = () -> throwUnknown(unknown);
+          if (primary.equals(FIXTURE_RUNTIME_2D52CD90))
+            compound.waiting = () -> throwUnknown(unknown);
           if (primary.equals("io")) compound.output.failRead = true;
-          if (primary.equals("timeout")) compound.completed = false;
-          if (primary.equals("interrupt")) compound.interrupted = true;
-          if (primary.equals("exit")) compound.code = 1;
+          if (primary.equals(FIXTURE_TIMEOUT_492BD020)) compound.completed = false;
+          if (primary.equals(FIXTURE_INTERRUPT_DDE42D5D)) compound.interrupted = true;
+          if (primary.equals(FIXTURE_EXIT_397F64AC)) compound.code = 1;
           try {
             Throwable actual =
                 assertThrows(unknown.getClass(), () -> source(compound).read(ApplicationUnit.API));
             assertSame(unknown, actual);
-            assertEquals(primary.equals("runtime") ? 1 : 0, actual.getSuppressed().length);
-            if (primary.equals("runtime")) {
+            assertEquals(
+                primary.equals(FIXTURE_RUNTIME_2D52CD90) ? 1 : 0, actual.getSuppressed().length);
+            if (primary.equals(FIXTURE_RUNTIME_2D52CD90)) {
               var fixed = assertInstanceOf(StopGateException.class, actual.getSuppressed()[0]);
               assertEquals(StopGateFailure.COMMAND_FAILURE, fixed.reason());
               assertNull(fixed.getCause());
@@ -165,9 +185,12 @@ final class SystemctlStateSourceTest {
             assertEquals(1, injected[0]);
             closed(compound);
             assertEquals(1, compound.destroyed);
-            assertEquals(primary.equals("interrupt"), Thread.currentThread().isInterrupted());
             assertEquals(
-                primary.equals("oversize") ? 1025 : primary.equals("success") ? 3 : 0,
+                primary.equals(FIXTURE_INTERRUPT_DDE42D5D), Thread.currentThread().isInterrupted());
+            assertEquals(
+                primary.equals(FIXTURE_OVERSIZE_F21E85A5)
+                    ? 1025
+                    : primary.equals("success") ? 3 : 0,
                 compound.output.delivered.length);
             assertArrayEquals(
                 new byte[compound.output.delivered.length], compound.output.delivered);
@@ -175,27 +198,36 @@ final class SystemctlStateSourceTest {
             Thread.interrupted();
           }
         }
-    for (String stream : List.of("output", "input", "error"))
-      for (String primary : List.of("success", "exit", "timeout", "oversize", "io", "interrupt")) {
-        var child = new Child(new byte[primary.equals("oversize") ? 1025 : 0]);
-        child.output.failClose = stream.equals("output");
-        child.input.failClose = stream.equals("input");
-        child.error.failClose = stream.equals("error");
-        if (primary.equals("exit")) child.code = 1;
-        if (primary.equals("timeout")) child.completed = false;
+    for (String stream :
+        List.of(FIXTURE_OUTPUT_4BBB1F94, FIXTURE_INPUT_48AED237, FIXTURE_ERROR_4D01709F))
+      for (String primary :
+          List.of(
+              "success",
+              FIXTURE_EXIT_397F64AC,
+              FIXTURE_TIMEOUT_492BD020,
+              FIXTURE_OVERSIZE_F21E85A5,
+              "io",
+              FIXTURE_INTERRUPT_DDE42D5D)) {
+        var child = new Child(new byte[primary.equals(FIXTURE_OVERSIZE_F21E85A5) ? 1025 : 0]);
+        child.output.failClose = stream.equals(FIXTURE_OUTPUT_4BBB1F94);
+        child.input.failClose = stream.equals(FIXTURE_INPUT_48AED237);
+        child.error.failClose = stream.equals(FIXTURE_ERROR_4D01709F);
+        if (primary.equals(FIXTURE_EXIT_397F64AC)) child.code = 1;
+        if (primary.equals(FIXTURE_TIMEOUT_492BD020)) child.completed = false;
         if (primary.equals("io")) child.output.failRead = true;
-        if (primary.equals("interrupt")) child.interrupted = true;
+        if (primary.equals(FIXTURE_INTERRUPT_DDE42D5D)) child.interrupted = true;
         var expected =
             switch (primary) {
-              case "timeout" -> StopGateFailure.TIMEOUT;
-              case "oversize" -> StopGateFailure.MALFORMED_STATE;
-              case "interrupt" -> StopGateFailure.INTERRUPTED;
+              case FIXTURE_TIMEOUT_492BD020 -> StopGateFailure.TIMEOUT;
+              case FIXTURE_OVERSIZE_F21E85A5 -> StopGateFailure.MALFORMED_STATE;
+              case FIXTURE_INTERRUPT_DDE42D5D -> StopGateFailure.INTERRUPTED;
               default -> StopGateFailure.COMMAND_FAILURE;
             };
         try {
           failed(expected, () -> source(child).read(ApplicationUnit.API));
           closed(child);
-          assertEquals(primary.equals("interrupt"), Thread.currentThread().isInterrupted());
+          assertEquals(
+              primary.equals(FIXTURE_INTERRUPT_DDE42D5D), Thread.currentThread().isInterrupted());
         } finally {
           Thread.interrupted();
         }
@@ -255,27 +287,29 @@ final class SystemctlStateSourceTest {
   @Test
   void nullAndRuntimeContracts() {
     // BUG-157: register each acquisition before the next getter may fail.
-    for (String getter : List.of("output", "input", "error")) {
+    for (String getter :
+        List.of(FIXTURE_OUTPUT_4BBB1F94, FIXTURE_INPUT_48AED237, FIXTURE_ERROR_4D01709F)) {
       var failed = new Child(new byte[0]);
       failed.getFailure = getter;
       assertSame(
           failed.getterFailure,
           assertThrows(
               IllegalStateException.class, () -> source(failed).read(ApplicationUnit.API)));
-      assertEquals(getter.equals("output") ? 0 : 1, failed.output.closed);
-      assertEquals(getter.equals("error") ? 1 : 0, failed.input.closed);
+      assertEquals(getter.equals(FIXTURE_OUTPUT_4BBB1F94) ? 0 : 1, failed.output.closed);
+      assertEquals(getter.equals(FIXTURE_ERROR_4D01709F) ? 1 : 0, failed.input.closed);
       assertEquals(0, failed.error.closed);
       assertEquals(0, failed.waits);
       assertEquals(0, failed.output.reads);
       assertEquals(1, failed.destroyed);
     }
-    for (String getter : List.of("output", "input", "error")) {
+    for (String getter :
+        List.of(FIXTURE_OUTPUT_4BBB1F94, FIXTURE_INPUT_48AED237, FIXTURE_ERROR_4D01709F)) {
       var missing = new Child(new byte[0]);
       missing.nullGetter = getter;
       assertThrows(NullPointerException.class, () -> source(missing).read(ApplicationUnit.API));
-      assertEquals(getter.equals("output") ? 0 : 1, missing.output.closed);
-      assertEquals(getter.equals("input") ? 0 : 1, missing.input.closed);
-      assertEquals(getter.equals("error") ? 0 : 1, missing.error.closed);
+      assertEquals(getter.equals(FIXTURE_OUTPUT_4BBB1F94) ? 0 : 1, missing.output.closed);
+      assertEquals(getter.equals(FIXTURE_INPUT_48AED237) ? 0 : 1, missing.input.closed);
+      assertEquals(getter.equals(FIXTURE_ERROR_4D01709F) ? 0 : 1, missing.error.closed);
       assertEquals(0, missing.waits);
       assertEquals(0, missing.output.reads);
       assertEquals(1, missing.destroyed);
@@ -354,22 +388,22 @@ final class SystemctlStateSourceTest {
 
     @Override
     public InputStream getInputStream() {
-      if (getFailure.equals("output")) throw getterFailure;
-      if (nullGetter.equals("output")) return null;
+      if (getFailure.equals(FIXTURE_OUTPUT_4BBB1F94)) throw getterFailure;
+      if (nullGetter.equals(FIXTURE_OUTPUT_4BBB1F94)) return null;
       return output;
     }
 
     @Override
     public InputStream getErrorStream() {
-      if (getFailure.equals("error")) throw getterFailure;
-      if (nullGetter.equals("error")) return null;
+      if (getFailure.equals(FIXTURE_ERROR_4D01709F)) throw getterFailure;
+      if (nullGetter.equals(FIXTURE_ERROR_4D01709F)) return null;
       return error;
     }
 
     @Override
     public OutputStream getOutputStream() {
-      if (getFailure.equals("input")) throw getterFailure;
-      if (nullGetter.equals("input")) return null;
+      if (getFailure.equals(FIXTURE_INPUT_48AED237)) throw getterFailure;
+      if (nullGetter.equals(FIXTURE_INPUT_48AED237)) return null;
       return input;
     }
 
@@ -385,7 +419,7 @@ final class SystemctlStateSourceTest {
       assertEquals(TimeUnit.SECONDS, unit);
       waiting.run();
       if (runtime != null) throw runtime;
-      if (interrupted) throw new InterruptedException("SECRET_CANARY");
+      if (interrupted) throw new InterruptedException(FIXTURE_SECRET_CANARY_06ACD2BD);
       alive = !completed;
       return completed;
     }
@@ -438,7 +472,7 @@ final class SystemctlStateSourceTest {
       assertEquals(1025, length);
       maximumRequested = length;
       reads++;
-      if (failRead) throw new IOException("SECRET_CANARY");
+      if (failRead) throw new IOException(FIXTURE_SECRET_CANARY_06ACD2BD);
       delivered = bytes.readNBytes(length);
       return delivered;
     }
@@ -447,7 +481,7 @@ final class SystemctlStateSourceTest {
     public void close() throws IOException {
       closed++;
       ending.run();
-      if (failClose) throw new IOException("SECRET_CANARY");
+      if (failClose) throw new IOException(FIXTURE_SECRET_CANARY_06ACD2BD);
     }
   }
 
@@ -465,7 +499,7 @@ final class SystemctlStateSourceTest {
     public void close() throws IOException {
       closed++;
       ending.run();
-      if (failClose) throw new IOException("SECRET_CANARY");
+      if (failClose) throw new IOException(FIXTURE_SECRET_CANARY_06ACD2BD);
     }
   }
 }

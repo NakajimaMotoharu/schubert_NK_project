@@ -33,6 +33,10 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** NK-BAT-001; DAT-009/OPS-009/UI251/SS311/331 3.12/332/343; SSC055/PG159; BAT082..089. */
 final class RunReferenceRepositoryTest {
+  private static final String FIXTURE_STATEMENT_CLOSE_FE807BAF = "statement.close";
+  private static final String FIXTURE_ROW_CLOSE_F197F129 = "row.close";
+  private static final String FIXTURE_INBOX_INSPECTION_PROGRESS_4282AA88 =
+      "inbox_inspection_progress";
   @TempDir static Path root;
   static BatchDatabaseFixture db;
   static final BatchRun RUN =
@@ -53,10 +57,10 @@ final class RunReferenceRepositoryTest {
           Map.entry("statement.setQueryTimeout", 1),
           Map.entry("statement.setObject", 2),
           Map.entry("statement.executeQuery", 1),
-          Map.entry("statement.close", 1),
+          Map.entry(FIXTURE_STATEMENT_CLOSE_FE807BAF, 1),
           Map.entry("row.next", 2),
           Map.entry("row.getObject", 4),
-          Map.entry("row.close", 1));
+          Map.entry(FIXTURE_ROW_CLOSE_F197F129, 1));
 
   @BeforeAll
   static void start() throws Exception {
@@ -72,7 +76,7 @@ final class RunReferenceRepositoryTest {
   void reset() throws Exception {
     try (var c = db.admin()) {
       for (String table :
-          List.of("batch_runs", "inbox_inspection_progress", "log_cleanup_progress"))
+          List.of("batch_runs", FIXTURE_INBOX_INSPECTION_PROGRESS_4282AA88, "log_cleanup_progress"))
         sql(c, "delete from schubert." + table);
     }
   }
@@ -113,7 +117,7 @@ final class RunReferenceRepositoryTest {
       assertEquals(EMPTY, repository.read(RUN));
       history(admin, RUN);
       assertEquals(new RunReferences(true, false, false, true), repository.read(RUN));
-      progress(admin, "inbox_inspection_progress", RUN);
+      progress(admin, FIXTURE_INBOX_INSPECTION_PROGRESS_4282AA88, RUN);
       assertEquals(new RunReferences(true, true, false, true), repository.read(RUN));
       progress(admin, "log_cleanup_progress", RUN);
       assertEquals(new RunReferences(true, true, true, true), repository.read(RUN));
@@ -123,7 +127,7 @@ final class RunReferenceRepositoryTest {
       c.rollback();
       // BUG167/DB249/BAT083: SQL literal fixture cannot cancel a JDBC bind calendar defect.
       for (String table :
-          List.of("batch_runs", "inbox_inspection_progress", "log_cleanup_progress"))
+          List.of("batch_runs", FIXTURE_INBOX_INSPECTION_PROGRESS_4282AA88, "log_cleanup_progress"))
         sql(admin, "delete from schubert." + table);
       for (String literal :
           List.of("0001-01-01T00:00:00Z", "1582-10-05T00:00:00Z", "9999-12-31T23:59:59.999999Z")) {
@@ -229,8 +233,8 @@ final class RunReferenceRepositoryTest {
           c.rollback();
         }
       Probe both = new Probe();
-      both.failAt.put("row.close", 1);
-      both.failAt.put("statement.close", 1);
+      both.failAt.put(FIXTURE_ROW_CLOSE_F197F129, 1);
+      both.failAt.put(FIXTURE_STATEMENT_CLOSE_FE807BAF, 1);
       redacted(() -> new RunReferenceRepository(both.wrap(c)).read(RUN));
       assertEquals(2, both.failures);
       both.assertOwnedClosed();
@@ -249,10 +253,10 @@ final class RunReferenceRepositoryTest {
                 Throwable.class, () -> new RunReferenceRepository(probe.wrap(c)).read(RUN)));
         probe.assertOwnedClosed();
         assertEquals(sample.first() < 0 ? 1 : 2, probe.failures);
-        assertEquals(1, probe.seen.getOrDefault("statement.close", 0));
+        assertEquals(1, probe.seen.getOrDefault(FIXTURE_STATEMENT_CLOSE_FE807BAF, 0));
         assertEquals(
             sample.first() >= 0 && sample.body().equals("statement.executeQuery") ? 0 : 1,
-            probe.seen.getOrDefault("row.close", 0));
+            probe.seen.getOrDefault(FIXTURE_ROW_CLOSE_F197F129, 0));
         for (String call :
             List.of(
                 "close",
@@ -279,7 +283,7 @@ final class RunReferenceRepositoryTest {
             var probe = new Probe();
             var failure = new IllegalStateException("public same provider fault");
             probe.thrown.put("row.next", failure);
-            probe.thrown.put("row.close", failure);
+            probe.thrown.put(FIXTURE_ROW_CLOSE_F197F129, failure);
             assertSame(
                 failure,
                 assertThrows(
@@ -295,7 +299,7 @@ final class RunReferenceRepositoryTest {
         Thread.interrupted();
       }
       Probe last = new Probe();
-      last.interruptAt = "statement.close";
+      last.interruptAt = FIXTURE_STATEMENT_CLOSE_FE807BAF;
       try {
         redacted(() -> new RunReferenceRepository(last.wrap(c)).read(RUN));
         assertTrue(Thread.currentThread().isInterrupted());
@@ -331,7 +335,7 @@ final class RunReferenceRepositoryTest {
       assertEquals(new RunReferences(true, false, false, true), repository.read(RUN));
       c.rollback();
       assertEquals(EMPTY, repository.read(RUN));
-      progress(admin, "inbox_inspection_progress", RUN);
+      progress(admin, FIXTURE_INBOX_INSPECTION_PROGRESS_4282AA88, RUN);
       assertEquals(new RunReferences(false, true, false, true), repository.read(RUN));
       sql(
           admin,
@@ -459,7 +463,7 @@ final class RunReferenceRepositoryTest {
                 if (name.equals("close")) {
                   Object value = invoke(statement, m, a);
                   statements--;
-                  hit("statement.close");
+                  hit(FIXTURE_STATEMENT_CLOSE_FE807BAF);
                   return value;
                 }
                 hit("statement." + name);
@@ -494,7 +498,7 @@ final class RunReferenceRepositoryTest {
                 if (name.equals("close")) {
                   Object value = invoke(row, m, a);
                   rows--;
-                  hit("row.close");
+                  hit(FIXTURE_ROW_CLOSE_F197F129);
                   return value;
                 }
                 hit("row." + name);

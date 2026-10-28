@@ -47,6 +47,11 @@ import org.junit.jupiter.api.io.TempDir;
  * assertion of actual root-manager credential provisioning.
  */
 final class InspectorCredentialLoaderTest {
+  private static final String FIXTURE_UID_0C18F38C = "uid";
+  private static final String FIXTURE_MODE_B6D5C2C3 = "mode";
+  private static final String FIXTURE_NLINK_3DDD828B = "nlink";
+  private static final String FIXTURE_SIZE_EB1E91E4 = "size";
+  private static final String FIXTURE_READ_ONLY_210AFF1C = "read only";
   @TempDir Path temporary;
   private static final AesCredentialFile CURRENT = AesCredentialFile.CONTEXT_CURRENT;
   private static final AesCredentialFile PREVIOUS = AesCredentialFile.CONTEXT_PREVIOUS;
@@ -110,8 +115,8 @@ final class InspectorCredentialLoaderTest {
     try (var fixture = new Fixture(temporary)) {
       for (var change :
           List.<Consumer<Map<String, Object>>>of(
-              a -> a.put("uid", 12345), a -> a.put("mode", 040750),
-              a -> a.put("mode", 0100440), a -> a.put("nlink", 0))) {
+              a -> a.put(FIXTURE_UID_0C18F38C, 12345), a -> a.put(FIXTURE_MODE_B6D5C2C3, 040750),
+              a -> a.put(FIXTURE_MODE_B6D5C2C3, 0100440), a -> a.put(FIXTURE_NLINK_3DDD828B, 0))) {
         var io = new TestIo();
         io.rootChange = change;
         failure(() -> fixture.loader(io).load(CURRENT));
@@ -134,7 +139,7 @@ final class InspectorCredentialLoaderTest {
     try (var fixture = new Fixture(temporary)) {
       for (int type : new int[] {0, 010000, 020000, 040000, 060000, 0120000, 0140000}) {
         var io = new TestIo();
-        io.fileChange = a -> a.put("mode", type | 0440);
+        io.fileChange = a -> a.put(FIXTURE_MODE_B6D5C2C3, type | 0440);
         failure(() -> fixture.loader(io).load(CURRENT));
         assertEquals(0, io.fileNative);
         assertEquals(0, io.opens);
@@ -154,7 +159,15 @@ final class InspectorCredentialLoaderTest {
     try (var fixture = new Fixture(temporary)) {
       for (String key :
           List.of(
-              "mode", "uid", "gid", "nlink", "size", "dev", "ino", "lastModifiedTime", "ctime")) {
+              FIXTURE_MODE_B6D5C2C3,
+              FIXTURE_UID_0C18F38C,
+              "gid",
+              FIXTURE_NLINK_3DDD828B,
+              FIXTURE_SIZE_EB1E91E4,
+              "dev",
+              "ino",
+              "lastModifiedTime",
+              "ctime")) {
         for (int variant = 0; variant < 3; variant++) {
           int mode = variant;
           var io = new TestIo();
@@ -172,11 +185,11 @@ final class InspectorCredentialLoaderTest {
       failure(() -> fixture.loader(absent).load(CURRENT));
       for (var change :
           List.<Consumer<Map<String, Object>>>of(
-              a -> a.put("size", 53L),
-              a -> a.put("size", 70L),
-              a -> a.put("nlink", 2),
-              a -> a.put("uid", -1),
-              a -> a.put("mode", 0100640))) {
+              a -> a.put(FIXTURE_SIZE_EB1E91E4, 53L),
+              a -> a.put(FIXTURE_SIZE_EB1E91E4, 70L),
+              a -> a.put(FIXTURE_NLINK_3DDD828B, 2),
+              a -> a.put(FIXTURE_UID_0C18F38C, -1),
+              a -> a.put(FIXTURE_MODE_B6D5C2C3, 0100640))) {
         var io = new TestIo();
         io.fileChange = change;
         failure(() -> fixture.loader(io).load(CURRENT));
@@ -221,14 +234,23 @@ final class InspectorCredentialLoaderTest {
     try (var fixture = new Fixture(temporary)) {
       for (String key :
           List.of(
-              "uid", "gid", "nlink", "size", "dev", "ino", "mode", "lastModifiedTime", "ctime")) {
+              FIXTURE_UID_0C18F38C,
+              "gid",
+              FIXTURE_NLINK_3DDD828B,
+              FIXTURE_SIZE_EB1E91E4,
+              "dev",
+              "ino",
+              FIXTURE_MODE_B6D5C2C3,
+              "lastModifiedTime",
+              "ctime")) {
         var io = new TestIo();
         io.lateFileChange = map -> alter(map, key);
         failure(() -> fixture.loader(io).load(CURRENT));
         assertEquals(1, io.closes);
         io.assertCleared();
       }
-      for (String key : List.of("gid", "size", "dev", "ino", "lastModifiedTime", "ctime")) {
+      for (String key :
+          List.of("gid", FIXTURE_SIZE_EB1E91E4, "dev", "ino", "lastModifiedTime", "ctime")) {
         var io = new TestIo();
         io.lateRootChange = map -> alter(map, key);
         failure(() -> fixture.loader(io).load(CURRENT));
@@ -493,7 +515,7 @@ final class InspectorCredentialLoaderTest {
     @Override
     public Map<String, Object> attributes(Path held) throws IOException {
       Map<String, Object> map = new HashMap<>(actual.attributes(held));
-      boolean directory = ((Integer) map.get("mode") & 0170000) == 040000;
+      boolean directory = ((Integer) map.get(FIXTURE_MODE_B6D5C2C3) & 0170000) == 040000;
       if (directory) {
         rootAttributes++;
         if (fault.equals("attributes-root") || fault.equals("root-final") && rootAttributes > 1)
@@ -507,8 +529,10 @@ final class InspectorCredentialLoaderTest {
         if (fault.equals("null-file-map")) return null; // deliberately broken boundary result
       }
       // Explicit OS metadata seam; never claims this nonprivileged fixture is root-owned.
-      map.put("uid", 0);
-      map.put("mode", ((Integer) map.get("mode") & 0170000) | (directory ? 0550 : 0440));
+      map.put(FIXTURE_UID_0C18F38C, 0);
+      map.put(
+          FIXTURE_MODE_B6D5C2C3,
+          ((Integer) map.get(FIXTURE_MODE_B6D5C2C3) & 0170000) | (directory ? 0550 : 0440));
       (directory ? rootChange : fileChange).accept(map);
       if (directory && rootAttributes > 1) lateRootChange.accept(map);
       if (!directory && fileAttributes > 1) lateFileChange.accept(map);
@@ -594,12 +618,12 @@ final class InspectorCredentialLoaderTest {
 
         @Override
         public int write(ByteBuffer source) {
-          throw new AssertionError("read only");
+          throw new AssertionError(FIXTURE_READ_ONLY_210AFF1C);
         }
 
         @Override
         public SeekableByteChannel truncate(long size) {
-          throw new AssertionError("read only");
+          throw new AssertionError(FIXTURE_READ_ONLY_210AFF1C);
         }
       };
     }
@@ -698,27 +722,27 @@ final class InspectorCredentialLoaderTest {
 
     @Override
     public int createFile(int parent, String name) {
-      throw new AssertionError("read only");
+      throw new AssertionError(FIXTURE_READ_ONLY_210AFF1C);
     }
 
     @Override
     public void createDirectory(int parent, String name) {
-      throw new AssertionError("read only");
+      throw new AssertionError(FIXTURE_READ_ONLY_210AFF1C);
     }
 
     @Override
     public void publish(int directory, String part, String ready) {
-      throw new AssertionError("read only");
+      throw new AssertionError(FIXTURE_READ_ONLY_210AFF1C);
     }
 
     @Override
     public void unlink(int directory, String name) {
-      throw new AssertionError("read only");
+      throw new AssertionError(FIXTURE_READ_ONLY_210AFF1C);
     }
 
     @Override
     public void sync(int directory) {
-      throw new AssertionError("read only");
+      throw new AssertionError(FIXTURE_READ_ONLY_210AFF1C);
     }
   }
 }

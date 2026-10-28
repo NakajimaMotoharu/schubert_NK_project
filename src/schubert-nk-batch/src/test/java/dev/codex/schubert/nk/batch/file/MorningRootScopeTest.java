@@ -17,6 +17,11 @@ import org.junit.jupiter.api.Test;
 
 /** NK-OPS-001/OPS009/UI251/SS341/343/PG336; PT-OPS-MROOT001-006. */
 final class MorningRootScopeTest {
+  private static final String FIXTURE_M_ENTER_C0A587C0 = "M-enter";
+  private static final String FIXTURE_M_CLOSE_6125B1F5 = "M-close";
+  private static final String FIXTURE_ROOT_956E6E33 = "root";
+  private static final String FIXTURE_POLICY_17AD92E6 = "policy";
+
   private static final class Held implements MorningRootScope.Exclusive {
     private final List<String> order;
     private final AtomicBoolean held;
@@ -29,14 +34,14 @@ final class MorningRootScopeTest {
 
     @Override
     public <T> Optional<T> execute(LinuxFileLock.Operation<T> operation) throws IOException {
-      order.add("M-enter");
+      order.add(FIXTURE_M_ENTER_C0A587C0);
       if (!available) return Optional.empty();
       held.set(true);
       try {
         return Optional.of(operation.execute());
       } finally {
         held.set(false);
-        order.add("M-close");
+        order.add(FIXTURE_M_CLOSE_6125B1F5);
       }
     }
   }
@@ -48,7 +53,7 @@ final class MorningRootScopeTest {
     var lock = new Held(order, held);
     var result =
         MorningRootScope.execute(
-            () -> order.add("root"),
+            () -> order.add(FIXTURE_ROOT_956E6E33),
             lock,
             () -> {
               assertTrue(held.get());
@@ -63,15 +68,15 @@ final class MorningRootScopeTest {
     assertFalse(held.get());
     assertEquals(
         List.of(
-            "root",
-            "M-enter",
-            "root",
+            FIXTURE_ROOT_956E6E33,
+            FIXTURE_M_ENTER_C0A587C0,
+            FIXTURE_ROOT_956E6E33,
             "all-eight-policy",
-            "root",
+            FIXTURE_ROOT_956E6E33,
             "trusted-continuation",
-            "root",
-            "M-close",
-            "root"),
+            FIXTURE_ROOT_956E6E33,
+            FIXTURE_M_CLOSE_6125B1F5,
+            FIXTURE_ROOT_956E6E33),
         order);
   }
 
@@ -85,11 +90,11 @@ final class MorningRootScopeTest {
         IOException.class,
         () ->
             MorningRootScope.execute(
-                () -> order.add("root"),
+                () -> order.add(FIXTURE_ROOT_956E6E33),
                 lock,
                 () -> fail("no policy on M contention"),
                 () -> fail("no continuation on M contention")));
-    assertEquals(List.of("root", "M-enter"), order);
+    assertEquals(List.of(FIXTURE_ROOT_956E6E33, FIXTURE_M_ENTER_C0A587C0), order);
     assertFalse(held.get());
   }
 
@@ -104,14 +109,20 @@ final class MorningRootScopeTest {
             IOException.class,
             () ->
                 MorningRootScope.execute(
-                    () -> order.add("root"),
+                    () -> order.add(FIXTURE_ROOT_956E6E33),
                     new Held(order, held),
                     () -> {
                       assertTrue(held.get());
                       throw failure;
                     },
                     () -> fail("no continuation after policy failure"))));
-    assertEquals(List.of("root", "M-enter", "root", "M-close"), order);
+    assertEquals(
+        List.of(
+            FIXTURE_ROOT_956E6E33,
+            FIXTURE_M_ENTER_C0A587C0,
+            FIXTURE_ROOT_956E6E33,
+            FIXTURE_M_CLOSE_6125B1F5),
+        order);
     assertFalse(held.get());
   }
 
@@ -126,14 +137,22 @@ final class MorningRootScopeTest {
             IOException.class,
             () ->
                 MorningRootScope.execute(
-                    () -> order.add("root"),
+                    () -> order.add(FIXTURE_ROOT_956E6E33),
                     new Held(order, held),
-                    () -> order.add("policy"),
+                    () -> order.add(FIXTURE_POLICY_17AD92E6),
                     () -> {
                       assertTrue(held.get());
                       throw failure;
                     })));
-    assertEquals(List.of("root", "M-enter", "root", "policy", "root", "M-close"), order);
+    assertEquals(
+        List.of(
+            FIXTURE_ROOT_956E6E33,
+            FIXTURE_M_ENTER_C0A587C0,
+            FIXTURE_ROOT_956E6E33,
+            FIXTURE_POLICY_17AD92E6,
+            FIXTURE_ROOT_956E6E33,
+            FIXTURE_M_CLOSE_6125B1F5),
+        order);
     assertFalse(held.get());
   }
 
@@ -142,8 +161,8 @@ final class MorningRootScopeTest {
     var order = new ArrayList<String>();
     var held = new AtomicBoolean();
     var lock = new Held(order, held);
-    MorningRootScope.Gate root = () -> order.add("root");
-    MorningRootScope.Policy policy = () -> order.add("policy");
+    MorningRootScope.Gate root = () -> order.add(FIXTURE_ROOT_956E6E33);
+    MorningRootScope.Policy policy = () -> order.add(FIXTURE_POLICY_17AD92E6);
     LinuxFileLock.Operation<Boolean> continuation = () -> true;
     assertThrows(
         NullPointerException.class,
@@ -167,14 +186,23 @@ final class MorningRootScopeTest {
             () ->
                 MorningRootScope.execute(
                     () -> {
-                      order.add("root");
+                      order.add(FIXTURE_ROOT_956E6E33);
                       if (order.size() == 8) throw failure;
                     },
                     lock,
                     policy,
                     continuation)));
     assertEquals(
-        List.of("root", "M-enter", "root", "policy", "root", "root", "M-close", "root"), order);
+        List.of(
+            FIXTURE_ROOT_956E6E33,
+            FIXTURE_M_ENTER_C0A587C0,
+            FIXTURE_ROOT_956E6E33,
+            FIXTURE_POLICY_17AD92E6,
+            FIXTURE_ROOT_956E6E33,
+            FIXTURE_ROOT_956E6E33,
+            FIXTURE_M_CLOSE_6125B1F5,
+            FIXTURE_ROOT_956E6E33),
+        order);
     assertFalse(held.get());
   }
 
@@ -194,19 +222,21 @@ final class MorningRootScopeTest {
                   MorningRootScope.execute(
                       () -> {
                         if (++checks[0] == target) throw failure;
-                        order.add("root");
+                        order.add(FIXTURE_ROOT_956E6E33);
                       },
                       new Held(order, held),
-                      () -> order.add("policy"),
+                      () -> order.add(FIXTURE_POLICY_17AD92E6),
                       () -> {
                         order.add("continuation");
                         return true;
                       })));
       assertFalse(held.get());
       assertEquals(target, checks[0]);
-      assertEquals(target > 2 ? 1 : 0, order.stream().filter("policy"::equals).count());
+      assertEquals(
+          target > 2 ? 1 : 0, order.stream().filter(FIXTURE_POLICY_17AD92E6::equals).count());
       assertEquals(target > 3 ? 1 : 0, order.stream().filter("continuation"::equals).count());
-      assertEquals(target > 1 ? 1 : 0, order.stream().filter("M-close"::equals).count());
+      assertEquals(
+          target > 1 ? 1 : 0, order.stream().filter(FIXTURE_M_CLOSE_6125B1F5::equals).count());
     }
   }
 }

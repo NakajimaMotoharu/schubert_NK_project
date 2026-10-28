@@ -30,6 +30,15 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** NK-BAT-001; UI251/SS311/331/332/341; PG-D-137; PT-BAT-001..017. */
 final class CleanupRepositoryTest {
+  private static final String FIXTURE_TRUE_18D10C7D = "true";
+  private static final String FIXTURE_TARGET_COUNT_5B6567D4 = "target_count";
+  private static final String FIXTURE_DELETED_COUNT_EA6A9020 = "deleted_count";
+  private static final String FIXTURE_RESULTCLOSE_4AFF6AC1 = "resultClose";
+  private static final String FIXTURE_STATEMENTCLOSE_D5A13A63 = "statementClose";
+  private static final String FIXTURE_MAINTENANCE_READ_LOG_CLEANUP_PROGRESS_75EF2AB2 =
+      "maintenance_read_log_cleanup_progress";
+  private static final String FIXTURE_MAINTENANCE_CLEANUP_LOGS_01FD6149 =
+      "maintenance_cleanup_logs";
   @TempDir static Path root;
   private static BatchDatabaseFixture db;
   private static final BatchRun RUN =
@@ -179,14 +188,14 @@ final class CleanupRepositoryTest {
       assertTrue(c.getAutoCommit());
       c.setAutoCommit(false);
       // The parent's session lock and SQL transaction lock share this exact connection.
-      assertEquals("true", scalar(c, "select pg_try_advisory_lock(71419602)::text"));
+      assertEquals(FIXTURE_TRUE_18D10C7D, scalar(c, "select pg_try_advisory_lock(71419602)::text"));
       assertEquals(new LogCleanupProgress(RUN, ZERO, false), repository.readLogProgress(RUN));
       for (var kind : CleanupKind.values())
         assertEquals(new CleanupChunk(ZERO, CleanupReason.OK), repository.execute(RUN, kind, 1));
       assertTrue(repository.readLogProgress(RUN).complete());
       assertFalse(c.isClosed());
       assertFalse(c.getAutoCommit());
-      assertEquals("true", scalar(c, "select pg_advisory_unlock(71419602)::text"));
+      assertEquals(FIXTURE_TRUE_18D10C7D, scalar(c, "select pg_advisory_unlock(71419602)::text"));
       c.rollback();
     }
   }
@@ -250,12 +259,14 @@ final class CleanupRepositoryTest {
       redacted(() -> r.readLogProgress(RUN));
       c.rollback();
       sql(admin, "update schubert.batch_runs set status='SUCCESS'");
-      assertEquals("true", scalar(admin, "select pg_try_advisory_lock(71419602)::text"));
+      assertEquals(
+          FIXTURE_TRUE_18D10C7D, scalar(admin, "select pg_try_advisory_lock(71419602)::text"));
       for (var kind : CleanupKind.values())
         assertEquals(new CleanupChunk(ZERO, CleanupReason.LOCK_BUSY), r.execute(RUN, kind, 1));
       redacted(() -> r.readLogProgress(RUN));
       c.rollback();
-      assertEquals("true", scalar(admin, "select pg_advisory_unlock(71419602)::text"));
+      assertEquals(
+          FIXTURE_TRUE_18D10C7D, scalar(admin, "select pg_advisory_unlock(71419602)::text"));
       assertEquals("0", scalar(admin, "select count(*) from schubert.log_cleanup_progress"));
     }
   }
@@ -284,7 +295,12 @@ final class CleanupRepositoryTest {
 
   @Test
   void rowProjectionFailures() throws Exception {
-    for (String column : List.of("target_count", "deleted_count", "skipped_count", "reason_code")) {
+    for (String column :
+        List.of(
+            FIXTURE_TARGET_COUNT_5B6567D4,
+            FIXTURE_DELETED_COUNT_EA6A9020,
+            "skipped_count",
+            "reason_code")) {
       var p = new BatchJdbcProbe();
       p.columns.put(column, null);
       rejectProjection(p, false);
@@ -294,18 +310,19 @@ final class CleanupRepositoryTest {
       p.columns.put("reason_code", reason);
       rejectProjection(p, false);
     }
-    for (String column : List.of("target_count", "deleted_count", "skipped_count")) {
+    for (String column :
+        List.of(FIXTURE_TARGET_COUNT_5B6567D4, FIXTURE_DELETED_COUNT_EA6A9020, "skipped_count")) {
       var p = new BatchJdbcProbe();
       p.columns.put(column, -1L);
       rejectProjection(p, false);
     }
     var large = new BatchJdbcProbe();
-    large.columns.put("target_count", 2L);
-    large.columns.put("deleted_count", 2L);
+    large.columns.put(FIXTURE_TARGET_COUNT_5B6567D4, 2L);
+    large.columns.put(FIXTURE_DELETED_COUNT_EA6A9020, 2L);
     rejectProjection(large, false);
     var rejected = new BatchJdbcProbe();
-    rejected.columns.put("target_count", 1L);
-    rejected.columns.put("deleted_count", 1L);
+    rejected.columns.put(FIXTURE_TARGET_COUNT_5B6567D4, 1L);
+    rejected.columns.put(FIXTURE_DELETED_COUNT_EA6A9020, 1L);
     rejected.columns.put("reason_code", "LOCK_BUSY");
     rejectProjection(rejected, false);
     var empty = new BatchJdbcProbe();
@@ -318,13 +335,18 @@ final class CleanupRepositoryTest {
 
   @Test
   void progressProjectionFailures() throws Exception {
-    for (String column : List.of("target_count", "deleted_count", "skipped_count", "complete")) {
+    for (String column :
+        List.of(
+            FIXTURE_TARGET_COUNT_5B6567D4,
+            FIXTURE_DELETED_COUNT_EA6A9020,
+            "skipped_count",
+            "complete")) {
       var p = new BatchJdbcProbe();
       p.columns.put(column, null);
       rejectProjection(p, true);
     }
     var negative = new BatchJdbcProbe();
-    negative.columns.put("target_count", -1L);
+    negative.columns.put(FIXTURE_TARGET_COUNT_5B6567D4, -1L);
     rejectProjection(negative, true);
     var empty = new BatchJdbcProbe();
     empty.empty = true;
@@ -352,8 +374,8 @@ final class CleanupRepositoryTest {
               "executeQuery",
               "next",
               "getObject",
-              "resultClose",
-              "statementClose")) {
+              FIXTURE_RESULTCLOSE_4AFF6AC1,
+              FIXTURE_STATEMENTCLOSE_D5A13A63)) {
         var p = new BatchJdbcProbe();
         p.fault = fault;
         rejectProjection(p, progress);
@@ -602,7 +624,9 @@ final class CleanupRepositoryTest {
       for (var sample : JdbcResourceCases.all()) {
         var probe = new BatchJdbcProbe();
         probe.selectedSql =
-            progress ? "maintenance_read_log_cleanup_progress" : "maintenance_cleanup_logs";
+            progress
+                ? FIXTURE_MAINTENANCE_READ_LOG_CLEANUP_PROGRESS_75EF2AB2
+                : FIXTURE_MAINTENANCE_CLEANUP_LOGS_01FD6149;
         var faults = new HashMap<String, Throwable>();
         sample.install(faults);
         faults.forEach((key, value) -> probe.thrown.put(resourceFaultName(key), value));
@@ -615,10 +639,10 @@ final class CleanupRepositoryTest {
                   : () -> repository.execute(RUN, CleanupKind.LOGS, 1);
           sample.verify(assertThrows(Throwable.class, action::run));
           assertEquals(sample.first() < 0 ? 1 : 2, probe.injected);
-          assertEquals(1, probe.faultOccurrences.getOrDefault("statementClose", 0));
+          assertEquals(1, probe.faultOccurrences.getOrDefault(FIXTURE_STATEMENTCLOSE_D5A13A63, 0));
           assertEquals(
               sample.first() >= 0 && sample.body().equals("statement.executeQuery") ? 0 : 1,
-              probe.faultOccurrences.getOrDefault("resultClose", 0));
+              probe.faultOccurrences.getOrDefault(FIXTURE_RESULTCLOSE_4AFF6AC1, 0));
           assertEquals(0, probe.liveRows);
           assertEquals(0, probe.liveStatements);
           assertEquals(0, probe.commits);
@@ -637,7 +661,9 @@ final class CleanupRepositoryTest {
       for (boolean statement : List.of(false, true)) {
         var probe = new BatchJdbcProbe();
         probe.selectedSql =
-            progress ? "maintenance_read_log_cleanup_progress" : "maintenance_cleanup_logs";
+            progress
+                ? FIXTURE_MAINTENANCE_READ_LOG_CLEANUP_PROGRESS_75EF2AB2
+                : FIXTURE_MAINTENANCE_CLEANUP_LOGS_01FD6149;
         probe.nullStatement = statement;
         probe.nullRows = !statement;
         try (var c = transaction()) {
@@ -651,8 +677,10 @@ final class CleanupRepositoryTest {
           assertEquals(statement ? "JDBC statement" : "JDBC result", failure.getMessage());
           assertEquals(0, probe.liveRows);
           assertEquals(0, probe.liveStatements);
-          assertEquals(statement ? 0 : 1, probe.faultOccurrences.getOrDefault("statementClose", 0));
-          assertEquals(0, probe.faultOccurrences.getOrDefault("resultClose", 0));
+          assertEquals(
+              statement ? 0 : 1,
+              probe.faultOccurrences.getOrDefault(FIXTURE_STATEMENTCLOSE_D5A13A63, 0));
+          assertEquals(0, probe.faultOccurrences.getOrDefault(FIXTURE_RESULTCLOSE_4AFF6AC1, 0));
           assertEquals(0, probe.closes);
           c.rollback();
         }
@@ -663,9 +691,9 @@ final class CleanupRepositoryTest {
   private static String resourceFaultName(String name) {
     return switch (name) {
       case "row.next" -> "next";
-      case "row.close" -> "resultClose";
+      case "row.close" -> FIXTURE_RESULTCLOSE_4AFF6AC1;
       case "statement.executeQuery" -> "executeQuery";
-      case "statement.close" -> "statementClose";
+      case "statement.close" -> FIXTURE_STATEMENTCLOSE_D5A13A63;
       default -> throw new AssertionError("unknown fixture boundary");
     };
   }
@@ -673,13 +701,15 @@ final class CleanupRepositoryTest {
   private static void resourceRed(boolean progress, boolean same) throws Exception {
     var probe = new BatchJdbcProbe();
     probe.selectedSql =
-        progress ? "maintenance_read_log_cleanup_progress" : "maintenance_cleanup_logs";
+        progress
+            ? FIXTURE_MAINTENANCE_READ_LOG_CLEANUP_PROGRESS_75EF2AB2
+            : FIXTURE_MAINTENANCE_CLEANUP_LOGS_01FD6149;
     Throwable failure =
         same
             ? new IllegalStateException("public same fixture")
             : new IllegalArgumentException("public provider argument fixture");
     probe.thrown.put(same ? "next" : "executeQuery", failure);
-    if (same) probe.thrown.put("resultClose", failure);
+    if (same) probe.thrown.put(FIXTURE_RESULTCLOSE_4AFF6AC1, failure);
     try (var c = transaction()) {
       if (progress) new CleanupRepository(c).execute(RUN, CleanupKind.LOGS, 1);
       var repository = new CleanupRepository(probe.wrap(c));
@@ -696,7 +726,9 @@ final class CleanupRepositoryTest {
 
   private static void rejectProjection(BatchJdbcProbe probe, boolean progress) throws Exception {
     probe.selectedSql =
-        progress ? "maintenance_read_log_cleanup_progress" : "maintenance_cleanup_logs";
+        progress
+            ? FIXTURE_MAINTENANCE_READ_LOG_CLEANUP_PROGRESS_75EF2AB2
+            : FIXTURE_MAINTENANCE_CLEANUP_LOGS_01FD6149;
     try (var c = transaction()) {
       var repository = new CleanupRepository(probe.wrap(c));
       if (progress) redacted(() -> repository.readLogProgress(RUN));

@@ -27,6 +27,9 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** NK-OPS-001; OPS-009/UI251/SS333/343 §6.10; PG-D-153; PT-OPS-PFILE-001..008. */
 class PrivateDirectoryEntryTest {
+  private static final String FIXTURE_UNIX_MODE_18F40B0C = "unix:mode";
+  private static final String FIXTURE_RETAINED_EXEC_1FEFDEDD = "retained.exec";
+  private static final String FIXTURE_CLOSE_97959247 = "close";
   private static final UUID ID = UUID.fromString("00000000-0000-4000-8000-000000000001");
   private static final String TARGET = "inbox-inspector.env";
   private static final byte[] CONTENT = {65, 61, 49, 10};
@@ -40,7 +43,7 @@ class PrivateDirectoryEntryTest {
           directory.createPrivatePart(
               ID,
               path -> {
-                assertEquals(0100600, Files.getAttribute(path, "unix:mode"));
+                assertEquals(0100600, Files.getAttribute(path, FIXTURE_UNIX_MODE_18F40B0C));
                 assertEquals(1, Files.getAttribute(path, "unix:nlink"));
                 assertEquals(2, calls.live.size());
                 write(path, CONTENT);
@@ -55,7 +58,7 @@ class PrivateDirectoryEntryTest {
       directory.createPart(
           regular,
           path -> {
-            assertEquals(0100640, Files.getAttribute(path, "unix:mode"));
+            assertEquals(0100640, Files.getAttribute(path, FIXTURE_UNIX_MODE_18F40B0C));
             write(path, CONTENT);
             return true;
           });
@@ -82,26 +85,27 @@ class PrivateDirectoryEntryTest {
       directory.createPrivateEntry(
           name,
           held -> {
-            assertEquals(0100600, Files.getAttribute(held, "unix:mode"));
+            assertEquals(0100600, Files.getAttribute(held, FIXTURE_UNIX_MODE_18F40B0C));
             assertEquals(1, Files.getAttribute(held, "unix:nlink"));
             assertEquals(2, calls.live.size());
-            Files.move(root.resolve(name), root.resolve("retained.exec"));
+            Files.move(root.resolve(name), root.resolve(FIXTURE_RETAINED_EXEC_1FEFDEDD));
             Files.write(root.resolve(name), new byte[] {9});
             write(held, CONTENT);
             return true;
           });
       directory.sync();
       assertEquals(before + 1, calls.closes);
-      assertArrayEquals(CONTENT, Files.readAllBytes(root.resolve("retained.exec")));
+      assertArrayEquals(CONTENT, Files.readAllBytes(root.resolve(FIXTURE_RETAINED_EXEC_1FEFDEDD)));
       assertArrayEquals(new byte[] {9}, Files.readAllBytes(root.resolve(name)));
       failure(
           StorageIoException.Reason.COLLISION,
           () -> directory.createPrivateEntry(name, p -> fail("existing callback")));
-      Files.createSymbolicLink(root.resolve("linked.exec"), root.resolve("retained.exec"));
+      Files.createSymbolicLink(
+          root.resolve("linked.exec"), root.resolve(FIXTURE_RETAINED_EXEC_1FEFDEDD));
       failure(
           StorageIoException.Reason.COLLISION,
           () -> directory.createPrivateEntry("linked.exec", p -> fail("symlink callback")));
-      assertArrayEquals(CONTENT, Files.readAllBytes(root.resolve("retained.exec")));
+      assertArrayEquals(CONTENT, Files.readAllBytes(root.resolve(FIXTURE_RETAINED_EXEC_1FEFDEDD)));
     }
     assertTrue(calls.live.isEmpty());
   }
@@ -136,7 +140,7 @@ class PrivateDirectoryEntryTest {
           () -> directory.createPrivateEntry("create.exec", p -> fail("failed create callback")));
       assertFalse(Files.exists(root.resolve("create.exec")));
       calls.fail = "";
-      for (String kind : new String[] {"write", "close", "both"}) {
+      for (String kind : new String[] {"write", FIXTURE_CLOSE_97959247, "both"}) {
         int before = calls.closes;
         failure(
             StorageIoException.Reason.UNAVAILABLE,
@@ -145,8 +149,8 @@ class PrivateDirectoryEntryTest {
                     kind + ".exec",
                     held -> {
                       write(held, CONTENT);
-                      if (!kind.equals("write")) calls.fail = "close";
-                      if (!kind.equals("close"))
+                      if (!kind.equals("write")) calls.fail = FIXTURE_CLOSE_97959247;
+                      if (!kind.equals(FIXTURE_CLOSE_97959247))
                         throw new IOException("private failure not exported");
                       return true;
                     }));
@@ -188,7 +192,8 @@ class PrivateDirectoryEntryTest {
       for (var result : results) if (result.get(5, TimeUnit.SECONDS)) winners++;
       assertEquals(1, winners);
       assertArrayEquals(CONTENT, Files.readAllBytes(root.resolve("one.exec")));
-      assertEquals(0100600, Files.getAttribute(root.resolve("one.exec"), "unix:mode"));
+      assertEquals(
+          0100600, Files.getAttribute(root.resolve("one.exec"), FIXTURE_UNIX_MODE_18F40B0C));
     }
   }
 
@@ -213,7 +218,7 @@ class PrivateDirectoryEntryTest {
       directory.publishAs(ID, TARGET);
       assertFalse(Files.exists(part(ID)));
       assertArrayEquals(CONTENT, Files.readAllBytes(target));
-      assertEquals(0100600, Files.getAttribute(target, "unix:mode"));
+      assertEquals(0100600, Files.getAttribute(target, FIXTURE_UNIX_MODE_18F40B0C));
       failure(StorageIoException.Reason.MISSING, () -> directory.publishAs(ID, "other"));
       assertFalse(Files.exists(root.resolve("other")));
       directory.unlinkEntry(TARGET);
@@ -261,7 +266,7 @@ class PrivateDirectoryEntryTest {
                   directory.createPrivatePart(
                       id,
                       path -> {
-                        calls.fail = mode == 1 ? "close" : "";
+                        calls.fail = mode == 1 ? FIXTURE_CLOSE_97959247 : "";
                         throw new IOException("synthetic private path must not escape");
                       }));
         }
@@ -317,7 +322,7 @@ class PrivateDirectoryEntryTest {
           StorageIoException.Reason.UNAVAILABLE,
           () -> directory.createPrivatePart(ID, p -> fail("failed create callback")));
       assertFalse(Files.exists(part(ID)));
-      calls.fail = "close";
+      calls.fail = FIXTURE_CLOSE_97959247;
       failure(StorageIoException.Reason.UNAVAILABLE, () -> create(directory, ID, CONTENT));
       assertArrayEquals(CONTENT, Files.readAllBytes(part(ID)));
       assertEquals(1, calls.live.size());
@@ -550,7 +555,7 @@ class PrivateDirectoryEntryTest {
       assertTrue(live.remove(fd));
       closes++;
       nativeCalls.close(fd);
-      point("close");
+      point(FIXTURE_CLOSE_97959247);
     }
   }
 }

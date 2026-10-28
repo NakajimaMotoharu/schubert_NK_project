@@ -32,20 +32,33 @@ import org.junit.jupiter.api.Test;
 
 /** PARENT455001/002 actual-data envelope, independent literal outcomes and full-row reread. */
 final class MorningCompletionEvidenceTest {
+  private static final String FIXTURE_FAILED_33D04BD7 = "failed";
+  private static final String FIXTURE_NEW_80270E39 = "new";
+  private static final String FIXTURE_2026_09_13T02_03_00_123456Z_F0D2FDC5 =
+      "2026-09-13T02:03:00.123456Z";
+  private static final String FIXTURE_OWNER_622F06CB = "owner";
+  private static final String FIXTURE_RECHECKCONSISTENT_5EE00750 = "recheckConsistent";
+  private static final String FIXTURE_OBSERVEBACKUP_27930785 = "observeBackup";
+  private static final String FIXTURE_OBSERVECLEANUP_4D4AB132 = "observeCleanup";
+  private static final String FIXTURE_CLEANUPREFERENCES_751F9B6E = "cleanupReferences";
+  private static final String FIXTURE_RECHECKEXPIRY_8896A6B5 = "recheckExpiry";
+  private static final String FIXTURE_BOUNDARY_7AE59C97 = "boundary";
+  private static final String FIXTURE_87654321_9ABC_DEF0_8123_456789ABCDEF_4738B00F =
+      "87654321-9abc-def0-8123-456789abcdef";
   static final Clock CLOCK =
       Clock.fixed(Instant.parse("2026-09-13T02:03:00.123456789Z"), ZoneOffset.UTC);
 
   static MorningCompletionEvidence fixture(String mode) throws Exception {
     var input = MorningPrestartEvidenceTest.input(mode);
     var rows = input.backup().rows();
-    var stopped = new StoppedBackupFixture(mode.equals("failed") ? 30 : 0, true);
+    var stopped = new StoppedBackupFixture(mode.equals(FIXTURE_FAILED_33D04BD7) ? 30 : 0, true);
     return new MorningCompletionEvidence(
-        mode.equals("failed")
+        mode.equals(FIXTURE_FAILED_33D04BD7)
             ? MorningBackupUnitCycle.Outcome.FAILED
             : MorningBackupUnitCycle.Outcome.SUCCESS,
         new MorningDatabaseSession.BackupBegins(
             rows.current().get(0).attempt(), rows.current().get(1).attempt()),
-        mode.equals("failed")
+        mode.equals(FIXTURE_FAILED_33D04BD7)
             ? Optional.empty()
             : Optional.of(MorningPrestartEvidenceTest.MANIFEST),
         rows,
@@ -57,19 +70,19 @@ final class MorningCompletionEvidenceTest {
 
   @Test
   void parent455001BackupFailureIsWarningNotAnAbsoluteGate() throws Exception {
-    for (String mode : List.of("new", "reused", "failed")) {
+    for (String mode : List.of(FIXTURE_NEW_80270E39, "reused", FIXTURE_FAILED_33D04BD7)) {
       var f = fixture(mode);
       var result = f.completion(MorningPrestartEvidenceTest.EPOCH.activation(), CLOCK);
       assertEquals(
-          mode.equals("failed")
+          mode.equals(FIXTURE_FAILED_33D04BD7)
               ? MaintenanceCompletion.Outcome.WARNING
               : MaintenanceCompletion.Outcome.SUCCESS,
           result.outcome());
-      assertEquals(Instant.parse("2026-09-13T02:03:00.123456Z"), result.endedAt());
+      assertEquals(Instant.parse(FIXTURE_2026_09_13T02_03_00_123456Z_F0D2FDC5), result.endedAt());
       assertEquals(MorningPrestartEvidenceTest.EPOCH.activation(), result.activation());
       assertEquals("MorningCompletionEvidence[actual=<redacted>]", f.toString());
     }
-    var f = fixture("new");
+    var f = fixture(FIXTURE_NEW_80270E39);
     assertThrows(IOException.class, () -> f.completion(MorningCompletedMainTest.ACTIVATION, CLOCK));
     assertThrows(
         IOException.class,
@@ -81,7 +94,7 @@ final class MorningCompletionEvidenceTest {
 
   @Test
   void parent455002FreshFullDatabaseAndReceiptsAreRequired() throws Exception {
-    for (String mode : List.of("new", "reused", "failed")) {
+    for (String mode : List.of(FIXTURE_NEW_80270E39, "reused", FIXTURE_FAILED_33D04BD7)) {
       var f = fixture(mode);
       var events = new ArrayList<String>();
       MorningDatabaseSession.Access db = database(f, events, "");
@@ -89,36 +102,39 @@ final class MorningCompletionEvidenceTest {
           db,
           CLOCK,
           () -> {
-            events.add("owner");
+            events.add(FIXTURE_OWNER_622F06CB);
             return 10_000_000_000L;
           });
       assertEquals(
           List.of(
-              "owner",
-              "recheckConsistent",
-              "owner",
-              "observeBackup",
-              "owner",
-              "owner",
-              mode.equals("failed") ? "observeCleanupBackupUnavailable" : "observeCleanup",
-              "owner",
-              "owner",
-              "cleanupReferences",
-              "owner",
-              "owner",
-              "recheckExpiry",
-              "owner",
-              "recheckConsistent",
-              "owner"),
+              FIXTURE_OWNER_622F06CB,
+              FIXTURE_RECHECKCONSISTENT_5EE00750,
+              FIXTURE_OWNER_622F06CB,
+              FIXTURE_OBSERVEBACKUP_27930785,
+              FIXTURE_OWNER_622F06CB,
+              FIXTURE_OWNER_622F06CB,
+              mode.equals(FIXTURE_FAILED_33D04BD7)
+                  ? "observeCleanupBackupUnavailable"
+                  : FIXTURE_OBSERVECLEANUP_4D4AB132,
+              FIXTURE_OWNER_622F06CB,
+              FIXTURE_OWNER_622F06CB,
+              FIXTURE_CLEANUPREFERENCES_751F9B6E,
+              FIXTURE_OWNER_622F06CB,
+              FIXTURE_OWNER_622F06CB,
+              FIXTURE_RECHECKEXPIRY_8896A6B5,
+              FIXTURE_OWNER_622F06CB,
+              FIXTURE_RECHECKCONSISTENT_5EE00750,
+              FIXTURE_OWNER_622F06CB),
           events);
       for (String failed :
           List.of(
-              "recheckConsistent",
-              "observeBackup",
-              "observeCleanup",
-              "cleanupReferences",
-              "recheckExpiry")) {
-        if (mode.equals("failed") && failed.equals("observeCleanup")) continue;
+              FIXTURE_RECHECKCONSISTENT_5EE00750,
+              FIXTURE_OBSERVEBACKUP_27930785,
+              FIXTURE_OBSERVECLEANUP_4D4AB132,
+              FIXTURE_CLEANUPREFERENCES_751F9B6E,
+              FIXTURE_RECHECKEXPIRY_8896A6B5)) {
+        if (mode.equals(FIXTURE_FAILED_33D04BD7) && failed.equals(FIXTURE_OBSERVECLEANUP_4D4AB132))
+          continue;
         assertThrows(
             IOException.class,
             () -> f.verify(database(f, new ArrayList<>(), failed), CLOCK, () -> 10_000_000_000L));
@@ -137,25 +153,26 @@ final class MorningCompletionEvidenceTest {
               events.add(name);
               if (name.equals(fault)) throw new IOException("fixed DB fault");
               return switch (name) {
-                case "recheckConsistent" -> {
+                case FIXTURE_RECHECKCONSISTENT_5EE00750 -> {
                   assertEquals(MorningPrestartEvidenceTest.RUN, args[0]);
                   yield null;
                 }
-                case "observeBackup" -> {
+                case FIXTURE_OBSERVEBACKUP_27930785 -> {
                   assertEquals(f.begins(), args[0]);
                   assertEquals(f.manifest(), args[1]);
-                  assertEquals(Instant.parse("2026-09-13T02:03:00.123456Z"), args[2]);
+                  assertEquals(
+                      Instant.parse(FIXTURE_2026_09_13T02_03_00_123456Z_F0D2FDC5), args[2]);
                   yield f.backup();
                 }
-                case "observeCleanup", "observeCleanupBackupUnavailable" -> {
+                case FIXTURE_OBSERVECLEANUP_4D4AB132, "observeCleanupBackupUnavailable" -> {
                   assertEquals(MorningPrestartEvidenceTest.RUN, args[0]);
                   yield f.cleanup().terminal();
                 }
-                case "cleanupReferences" -> {
+                case FIXTURE_CLEANUPREFERENCES_751F9B6E -> {
                   assertEquals(f.cleanup().terminal(), args[0]);
                   yield f.cleanup().references();
                 }
-                case "recheckExpiry" -> {
+                case FIXTURE_RECHECKEXPIRY_8896A6B5 -> {
                   assertEquals(f.expiry(), args[0]);
                   yield null;
                 }
@@ -167,9 +184,14 @@ final class MorningCompletionEvidenceTest {
   /** COMP203002: all eight independent compound boundaries are mandatory, never cached. */
   @Test
   void comp203002ChangedCompoundBoundaryRefusesBeforeOrAfterItsDatabaseRead() throws Exception {
-    var reads = List.of("observeBackup", "observeCleanup", "cleanupReferences", "recheckExpiry");
+    var reads =
+        List.of(
+            FIXTURE_OBSERVEBACKUP_27930785,
+            FIXTURE_OBSERVECLEANUP_4D4AB132,
+            FIXTURE_CLEANUPREFERENCES_751F9B6E,
+            FIXTURE_RECHECKEXPIRY_8896A6B5);
     for (int failAt = 0; failAt <= 8; failAt++) {
-      var f = fixture("new");
+      var f = fixture(FIXTURE_NEW_80270E39);
       var events = new ArrayList<String>();
       var calls = new java.util.concurrent.atomic.AtomicInteger();
       var failure = new IOException("independent peer/graph changed");
@@ -177,7 +199,7 @@ final class MorningCompletionEvidenceTest {
       dev.codex.schubert.nk.batch.platform.BackupUnitStartClient.RetirementGate boundary =
           () -> {
             int call = calls.incrementAndGet();
-            events.add("boundary" + call);
+            events.add(FIXTURE_BOUNDARY_7AE59C97 + call);
             if (call == refused) throw failure;
           };
       var db = database(f, events, "");
@@ -190,9 +212,9 @@ final class MorningCompletionEvidenceTest {
             boundary);
         assertEquals(8, calls.get());
         for (int i = 0; i < 4; i++) {
-          int before = events.indexOf("boundary" + (2 * i + 1));
+          int before = events.indexOf(FIXTURE_BOUNDARY_7AE59C97 + (2 * i + 1));
           int read = events.indexOf(reads.get(i));
-          int after = events.indexOf("boundary" + (2 * i + 2));
+          int after = events.indexOf(FIXTURE_BOUNDARY_7AE59C97 + (2 * i + 2));
           assertTrue(before < read && read < after);
         }
       } else {
@@ -209,10 +231,10 @@ final class MorningCompletionEvidenceTest {
                         boundary)));
         assertEquals(failAt, calls.get());
         assertEquals(failAt / 2, events.stream().filter(reads::contains).count());
-        assertEquals("boundary" + failAt, events.getLast());
+        assertEquals(FIXTURE_BOUNDARY_7AE59C97 + failAt, events.getLast());
       }
     }
-    var f = fixture("new");
+    var f = fixture(FIXTURE_NEW_80270E39);
     assertThrows(
         NullPointerException.class,
         () ->
@@ -226,10 +248,10 @@ final class MorningCompletionEvidenceTest {
 
   @Test
   void parent539001BeginsAndTargetAndOutcomeMustMatchTheActualPair() throws Exception {
-    var f = fixture("new");
+    var f = fixture(FIXTURE_NEW_80270E39);
     var otherRun =
         new BatchRun(
-            UUID.fromString("87654321-9abc-def0-8123-456789abcdef"),
+            UUID.fromString(FIXTURE_87654321_9ABC_DEF0_8123_456789ABCDEF_4738B00F),
             f.begins().database().run().cutoff());
     var database = f.begins().database();
     var config = f.begins().configuration();
@@ -304,7 +326,7 @@ final class MorningCompletionEvidenceTest {
 
   @Test
   void parent539002WarningCompletionAndActualStepTimeBoundariesAreIndependent() throws Exception {
-    var f = fixture("new");
+    var f = fixture(FIXTURE_NEW_80270E39);
     for (String time : List.of("2026-09-13T02:00:30Z", "2026-09-13T02:01:30Z")) {
       var error =
           assertThrows(
@@ -415,7 +437,7 @@ final class MorningCompletionEvidenceTest {
 
   @Test
   void parent539003DefaultOriginalLookupAcceptsOnlyTheExactRetainedRun() throws Exception {
-    var f = fixture("new");
+    var f = fixture(FIXTURE_NEW_80270E39);
     var events = new ArrayList<String>();
     var delegate = database(f, events, "");
     var lookups = new java.util.concurrent.atomic.AtomicInteger();
@@ -425,20 +447,21 @@ final class MorningCompletionEvidenceTest {
                 getClass().getClassLoader(),
                 new Class<?>[] {MorningDatabaseSession.Access.class},
                 (proxy, method, args) -> {
-                  if (method.getName().equals("cleanupReferences")) {
+                  if (method.getName().equals(FIXTURE_CLEANUPREFERENCES_751F9B6E)) {
                     var lookup = (SuccessRunLookup) args[2];
                     assertEquals(
                         MorningPrestartEvidenceTest.RUN,
                         lookup.resolve(
                             UUID.fromString("12345678-9abc-def0-8123-456789abcdef"),
-                            Instant.parse("2026-09-13T02:03:00.123456Z")));
+                            Instant.parse(FIXTURE_2026_09_13T02_03_00_123456Z_F0D2FDC5)));
                     var rejected =
                         assertThrows(
                             IOException.class,
                             () ->
                                 lookup.resolve(
-                                    UUID.fromString("87654321-9abc-def0-8123-456789abcdef"),
-                                    Instant.parse("2026-09-13T02:03:00.123456Z")));
+                                    UUID.fromString(
+                                        FIXTURE_87654321_9ABC_DEF0_8123_456789ABCDEF_4738B00F),
+                                    Instant.parse(FIXTURE_2026_09_13T02_03_00_123456Z_F0D2FDC5)));
                     assertEquals("Morning completion evidence unavailable", rejected.getMessage());
                     assertNull(rejected.getCause());
                     lookups.addAndGet(2);
@@ -451,12 +474,12 @@ final class MorningCompletionEvidenceTest {
                 });
     f.verify(db, CLOCK, () -> 10_000_000_000L);
     assertEquals(2, lookups.get());
-    assertEquals(1, Collections.frequency(events, "cleanupReferences"));
+    assertEquals(1, Collections.frequency(events, FIXTURE_CLEANUPREFERENCES_751F9B6E));
   }
 
   @Test
   void parent455004MismatchedManifestReceiptAndNullContractReject() throws Exception {
-    var f = fixture("new");
+    var f = fixture(FIXTURE_NEW_80270E39);
     assertThrows(
         IllegalArgumentException.class,
         () ->
@@ -509,8 +532,8 @@ final class MorningCompletionEvidenceTest {
   /** SSC218/PARENT540001: envelope admission, not upstream invalid record fabrication. */
   @Test
   void parent540001BackupOutcomeRequiresTheActualStatusAndFixedFailureReason() throws Exception {
-    var success = fixture("new");
-    var failure = fixture("failed");
+    var success = fixture(FIXTURE_NEW_80270E39);
+    var failure = fixture(FIXTURE_FAILED_33D04BD7);
     rejected(failure, success.backup(), failure.cleanup(), failure.expiry());
     for (var status : List.of(BatchStepResult.Status.FAILED, BatchStepResult.Status.WARNING)) {
       var rows = new ArrayList<BackupStepRepository.Terminal>();
@@ -532,10 +555,10 @@ final class MorningCompletionEvidenceTest {
 
   @Test
   void parent540002ForeignBackupPairIsRejectedAndUpstreamPairIsImmutable() throws Exception {
-    var f = fixture("new");
+    var f = fixture(FIXTURE_NEW_80270E39);
     var foreign =
         new BatchRun(
-            UUID.fromString("87654321-9abc-def0-8123-456789abcdef"),
+            UUID.fromString(FIXTURE_87654321_9ABC_DEF0_8123_456789ABCDEF_4738B00F),
             Instant.parse("2026-09-12T15:00:00Z"));
     var rows = new ArrayList<BackupStepRepository.Terminal>();
     for (var old : f.backup().current()) {
@@ -562,10 +585,10 @@ final class MorningCompletionEvidenceTest {
 
   @Test
   void parent540003CleanupRunAndUnavailableReasonAreBoundToBackupOutcome() throws Exception {
-    var f = fixture("new");
+    var f = fixture(FIXTURE_NEW_80270E39);
     var foreign =
         new BatchRun(
-            UUID.fromString("87654321-9abc-def0-8123-456789abcdef"),
+            UUID.fromString(FIXTURE_87654321_9ABC_DEF0_8123_456789ABCDEF_4738B00F),
             Instant.parse("2026-09-12T15:00:00Z"));
     var foreignRows = new ArrayList<CleanupTerminalRepository.Entry>();
     for (var row : f.cleanup().terminal().entries()) {
@@ -581,7 +604,7 @@ final class MorningCompletionEvidenceTest {
     var first = rows.getFirst();
     rows.set(0, new CleanupTerminalRepository.Entry(first.attempt(), first.endedAt(), unavailable));
     rejected(f, f.backup(), cleanup(f, rows), f.expiry());
-    var failed = fixture("failed");
+    var failed = fixture(FIXTURE_FAILED_33D04BD7);
     rows = new ArrayList<>(failed.cleanup().terminal().entries());
     var last = rows.getLast();
     rows.set(6, new CleanupTerminalRepository.Entry(last.attempt(), last.endedAt(), unavailable));
@@ -594,10 +617,10 @@ final class MorningCompletionEvidenceTest {
   @Test
   void parent540004ExpiryMustBelongToTheSameRunEvenWhenAllTerminalValuesAreValid()
       throws Exception {
-    var f = fixture("new");
+    var f = fixture(FIXTURE_NEW_80270E39);
     var foreign =
         new BatchRun(
-            UUID.fromString("87654321-9abc-def0-8123-456789abcdef"),
+            UUID.fromString(FIXTURE_87654321_9ABC_DEF0_8123_456789ABCDEF_4738B00F),
             Instant.parse("2026-09-12T15:00:00Z"));
     var old = f.expiry();
     var expiry =

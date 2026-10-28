@@ -23,6 +23,13 @@ import org.junit.jupiter.api.Test;
 
 /** PG-D378/SS342343352/PT-OPS-WEB-REM005..006. Fake owner is not native authority or a pass. */
 final class WebTerminalCaptureTest {
+  private static final String FIXTURE_CLOSE_97959247 = "close";
+  private static final String FIXTURE_OPEN_35FF74AE = "open";
+  private static final String FIXTURE_VERIFY1_FA6566A5 = "verify1";
+  private static final String FIXTURE_VERIFY2_47D6C149 = "verify2";
+  private static final String FIXTURE_CAPTURE_47EE4B87 = "capture";
+  private static final String FIXTURE_FIND_3FBE8AE3 = "find";
+  private static final String FIXTURE_OVERRIDE_454D2E95 = "override";
   private static final NonSecretConfigSource FORBIDDEN =
       service -> {
         throw new AssertionError("argv must reject before file IO");
@@ -41,11 +48,11 @@ final class WebTerminalCaptureTest {
             },
             actual -> {
               assertSame(resource, actual);
-              events.add("close");
+              events.add(FIXTURE_CLOSE_97959247);
             });
     owner.verifyOwner();
     owner.close();
-    assertEquals(List.of("verify", "close"), events);
+    assertEquals(List.of("verify", FIXTURE_CLOSE_97959247), events);
     assertThrows(
         NullPointerException.class, () -> new WebTerminalCapture.Owner<>(null, x -> {}, x -> {}));
     assertThrows(
@@ -96,25 +103,26 @@ final class WebTerminalCaptureTest {
             var capture =
                 new WebTerminalCapture(
                     () -> {
-                      events.add("open");
+                      events.add(FIXTURE_OPEN_35FF74AE);
                       if (failing == 0) raise(primary);
                       return new WebTerminalCapture.Owner<>(
                           resource,
                           actual -> {
                             assertSame(resource, actual);
                             int n = verifies.getAndIncrement();
-                            events.add(n == 0 ? "verify1" : "verify2");
+                            events.add(
+                                n == 0 ? FIXTURE_VERIFY1_FA6566A5 : FIXTURE_VERIFY2_47D6C149);
                             if (failing == (n == 0 ? 1 : 3)) raise(primary);
                           },
                           actual -> {
                             assertSame(resource, actual);
-                            events.add("close");
+                            events.add(FIXTURE_CLOSE_97959247);
                             if (failing == 4) raise(primary);
                           });
                     },
                     point -> {
                       assertEquals(FixedNativeCoverageCheckpoint.Point.TERMINAL, point);
-                      events.add("capture");
+                      events.add(FIXTURE_CAPTURE_47EE4B87);
                       if (failing == 2) raise(primary);
                     });
             var main =
@@ -127,27 +135,61 @@ final class WebTerminalCaptureTest {
                     },
                     inv -> {
                       assertEquals("f".repeat(32), inv);
-                      events.add("find");
+                      events.add(FIXTURE_FIND_3FBE8AE3);
                       return Optional.of(capture);
                     });
             var bytes = new ByteArrayOutputStream();
             try (var err = new PrintStream(bytes, false, StandardCharsets.UTF_8)) {
               System.setErr(err);
-              if (failing == -1) main.main(new String[] {"override"});
+              if (failing == -1) main.main(new String[] {FIXTURE_OVERRIDE_454D2E95});
               else
                 assertSame(
                     primary,
-                    assertThrows(primary.getClass(), () -> main.main(new String[] {"override"})));
+                    assertThrows(
+                        primary.getClass(),
+                        () -> main.main(new String[] {FIXTURE_OVERRIDE_454D2E95})));
             }
             List<String> expected =
                 switch (failing) {
                   case -1 ->
-                      List.of("find", "open", "verify1", "capture", "verify2", "close", "exit");
-                  case 0 -> List.of("find", "open");
-                  case 1 -> List.of("find", "open", "verify1", "close");
-                  case 2 -> List.of("find", "open", "verify1", "capture", "close");
-                  case 3 -> List.of("find", "open", "verify1", "capture", "verify2", "close");
-                  default -> List.of("find", "open", "verify1", "capture", "verify2", "close");
+                      List.of(
+                          FIXTURE_FIND_3FBE8AE3,
+                          FIXTURE_OPEN_35FF74AE,
+                          FIXTURE_VERIFY1_FA6566A5,
+                          FIXTURE_CAPTURE_47EE4B87,
+                          FIXTURE_VERIFY2_47D6C149,
+                          FIXTURE_CLOSE_97959247,
+                          "exit");
+                  case 0 -> List.of(FIXTURE_FIND_3FBE8AE3, FIXTURE_OPEN_35FF74AE);
+                  case 1 ->
+                      List.of(
+                          FIXTURE_FIND_3FBE8AE3,
+                          FIXTURE_OPEN_35FF74AE,
+                          FIXTURE_VERIFY1_FA6566A5,
+                          FIXTURE_CLOSE_97959247);
+                  case 2 ->
+                      List.of(
+                          FIXTURE_FIND_3FBE8AE3,
+                          FIXTURE_OPEN_35FF74AE,
+                          FIXTURE_VERIFY1_FA6566A5,
+                          FIXTURE_CAPTURE_47EE4B87,
+                          FIXTURE_CLOSE_97959247);
+                  case 3 ->
+                      List.of(
+                          FIXTURE_FIND_3FBE8AE3,
+                          FIXTURE_OPEN_35FF74AE,
+                          FIXTURE_VERIFY1_FA6566A5,
+                          FIXTURE_CAPTURE_47EE4B87,
+                          FIXTURE_VERIFY2_47D6C149,
+                          FIXTURE_CLOSE_97959247);
+                  default ->
+                      List.of(
+                          FIXTURE_FIND_3FBE8AE3,
+                          FIXTURE_OPEN_35FF74AE,
+                          FIXTURE_VERIFY1_FA6566A5,
+                          FIXTURE_CAPTURE_47EE4B87,
+                          FIXTURE_VERIFY2_47D6C149,
+                          FIXTURE_CLOSE_97959247);
                 };
             assertEquals(expected, events);
             assertEquals(failing == -1 ? List.of(70) : List.of(), exits);
@@ -178,7 +220,9 @@ final class WebTerminalCaptureTest {
                 c -> fail("failed close must not terminate"),
                 inv -> Optional.of(capture));
         assertSame(
-            primary, assertThrows(IOException.class, () -> main.main(new String[] {"override"})));
+            primary,
+            assertThrows(
+                IOException.class, () -> main.main(new String[] {FIXTURE_OVERRIDE_454D2E95})));
         assertArrayEquals(new Throwable[] {secondary}, primary.getSuppressed());
         assertThrows(
             NullPointerException.class,
@@ -208,7 +252,7 @@ final class WebTerminalCaptureTest {
                   assertNull(inv);
                   return Optional.empty();
                 })
-            .main(new String[] {"override"});
+            .main(new String[] {FIXTURE_OVERRIDE_454D2E95});
         assertEquals(List.of(70), exits);
         assertEquals("WEB process stopped\n", out.toString(StandardCharsets.UTF_8));
         var failure = new IOException("synthetic lookup");
@@ -224,7 +268,7 @@ final class WebTerminalCaptureTest {
                             inv -> {
                               throw failure;
                             })
-                        .main(new String[] {"override"})));
+                        .main(new String[] {FIXTURE_OVERRIDE_454D2E95})));
       } finally {
         System.setErr(old);
         t.setUncaughtExceptionHandler(h);

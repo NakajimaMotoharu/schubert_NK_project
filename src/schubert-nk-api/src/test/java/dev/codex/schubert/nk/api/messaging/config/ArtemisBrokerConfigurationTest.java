@@ -35,6 +35,8 @@ import org.junit.jupiter.api.Test;
  * topology, limit and ACL in this test is a literal oracle independent from the XML.
  */
 final class ArtemisBrokerConfigurationTest {
+  private static final String FIXTURE_NK_DEAD_LETTER_6588D12C = "nk.dead.letter";
+  private static final String FIXTURE_NK_EXPIRY_41CB6B4A = "nk.expiry";
   private static final long MIB = 1024L * 1024L;
   private static final Set<String> ADDRESSES =
       Set.of(
@@ -42,8 +44,8 @@ final class ArtemisBrokerConfigurationTest {
           "nk.sync.reply.web",
           "nk.async.work",
           "nk.web.log",
-          "nk.dead.letter",
-          "nk.expiry");
+          FIXTURE_NK_DEAD_LETTER_6588D12C,
+          FIXTURE_NK_EXPIRY_41CB6B4A);
 
   private static Configuration configuration;
 
@@ -123,8 +125,8 @@ final class ArtemisBrokerConfigurationTest {
     expected.put("nk.sync.reply.web", new Capacity(32, 50, 224, 450));
     expected.put("nk.async.work", new Capacity(128, 1_000, 896, 9_000));
     expected.put("nk.web.log", new Capacity(64, 1_000, 192, 9_000));
-    expected.put("nk.dead.letter", new Capacity(128, 1_000, 1_920, 9_000));
-    expected.put("nk.expiry", new Capacity(64, 1_000, 960, 9_000));
+    expected.put(FIXTURE_NK_DEAD_LETTER_6588D12C, new Capacity(128, 1_000, 1_920, 9_000));
+    expected.put(FIXTURE_NK_EXPIRY_41CB6B4A, new Capacity(64, 1_000, 960, 9_000));
 
     assertEquals(ADDRESSES, configuration.getAddressSettings().keySet());
     expected.forEach(
@@ -140,8 +142,8 @@ final class ArtemisBrokerConfigurationTest {
     expected.put("nk.sync.reply.web", Set.of("nk_web:C", "nk_api:S", "nk_ops:B"));
     expected.put("nk.async.work", Set.of("nk_api:CS", "nk_ops:BS"));
     expected.put("nk.web.log", Set.of("nk_web:S", "nk_api:C", "nk_ops:B"));
-    expected.put("nk.dead.letter", Set.of("nk_web:S", "nk_api:S", "nk_ops:BCM"));
-    expected.put("nk.expiry", Set.of("nk_mq_maintenance:BC", "nk_ops:BCM"));
+    expected.put(FIXTURE_NK_DEAD_LETTER_6588D12C, Set.of("nk_web:S", "nk_api:S", "nk_ops:BCM"));
+    expected.put(FIXTURE_NK_EXPIRY_41CB6B4A, Set.of("nk_mq_maintenance:BC", "nk_ops:BCM"));
     expected.put("activemq.management.#", Set.of("nk_ops:CMSadnx", "nk_mq_maintenance:CMSadnx"));
     expected.put("mops.#", Set.of("nk_ops:Mve"));
     expected.put(
@@ -170,8 +172,8 @@ final class ArtemisBrokerConfigurationTest {
   }
 
   private static void assertAddressPolicy(AddressSettings settings, Capacity capacity) {
-    assertEquals("nk.dead.letter", settings.getDeadLetterAddress().toString());
-    assertEquals("nk.expiry", settings.getExpiryAddress().toString());
+    assertEquals(FIXTURE_NK_DEAD_LETTER_6588D12C, settings.getDeadLetterAddress().toString());
+    assertEquals(FIXTURE_NK_EXPIRY_41CB6B4A, settings.getExpiryAddress().toString());
     assertEquals(1_000L, settings.getRedeliveryDelay());
     assertEquals(5.0, settings.getRedeliveryMultiplier());
     assertEquals(0.0, settings.getRedeliveryCollisionAvoidanceFactor());

@@ -13,6 +13,9 @@ import org.junit.jupiter.api.Test;
 
 /** SSC119/289 COWNER: independently specified CLOCK_MONOTONIC timespec and overflow vectors. */
 class LinuxMonotonicClockTest {
+  private static final String FIXTURE_AMD64_58D0BD71 = "amd64";
+  private static final String FIXTURE_LINUX_1CA133AF = "Linux";
+
   @Test
   void literalTimespecAndExactSignedLongBoundary() throws Exception {
     assertEquals(0L, clock(0, 0).nowNanos());
@@ -39,20 +42,28 @@ class LinuxMonotonicClockTest {
   void fixedAbiPlatformAndSymbolFailures() throws Exception {
     var symbols = Linker.nativeLinker().defaultLookup();
     assertThrows(
-        NullPointerException.class, () -> LinuxMonotonicClock.create(null, "amd64", symbols));
+        NullPointerException.class,
+        () -> LinuxMonotonicClock.create(null, FIXTURE_AMD64_58D0BD71, symbols));
     assertThrows(
-        NullPointerException.class, () -> LinuxMonotonicClock.create("Linux", null, symbols));
+        NullPointerException.class,
+        () -> LinuxMonotonicClock.create(FIXTURE_LINUX_1CA133AF, null, symbols));
     assertThrows(
-        NullPointerException.class, () -> LinuxMonotonicClock.create("Linux", "amd64", null));
-    assertThrows(
-        IllegalStateException.class, () -> LinuxMonotonicClock.create("Windows", "amd64", symbols));
-    assertThrows(
-        IllegalStateException.class, () -> LinuxMonotonicClock.create("Linux", "unknown", symbols));
+        NullPointerException.class,
+        () -> LinuxMonotonicClock.create(FIXTURE_LINUX_1CA133AF, FIXTURE_AMD64_58D0BD71, null));
     assertThrows(
         IllegalStateException.class,
-        () -> LinuxMonotonicClock.create("Linux", "amd64", name -> Optional.empty()));
-    for (String architecture : new String[] {"amd64", "x86_64", "aarch64"}) {
-      long time = LinuxMonotonicClock.create("Linux", architecture, symbols).nowNanos();
+        () -> LinuxMonotonicClock.create("Windows", FIXTURE_AMD64_58D0BD71, symbols));
+    assertThrows(
+        IllegalStateException.class,
+        () -> LinuxMonotonicClock.create(FIXTURE_LINUX_1CA133AF, "unknown", symbols));
+    assertThrows(
+        IllegalStateException.class,
+        () ->
+            LinuxMonotonicClock.create(
+                FIXTURE_LINUX_1CA133AF, FIXTURE_AMD64_58D0BD71, name -> Optional.empty()));
+    for (String architecture : new String[] {FIXTURE_AMD64_58D0BD71, "x86_64", "aarch64"}) {
+      long time =
+          LinuxMonotonicClock.create(FIXTURE_LINUX_1CA133AF, architecture, symbols).nowNanos();
       assertTrue(time > 0, "host uptime must be a positive monotonic observation");
     }
     var actual = LinuxMonotonicClock.create();

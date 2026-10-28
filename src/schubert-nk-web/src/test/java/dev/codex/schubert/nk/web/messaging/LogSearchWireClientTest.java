@@ -43,6 +43,10 @@ import org.junit.jupiter.api.Test;
 
 /** PG213/PT-WEB270..277/FUN008/AUT/MON/MQ/UI232,234,235/SS311,312,321,323,352. */
 class LogSearchWireClientTest {
+  private static final String FIXTURE_LGSREQ01_A99ED320 = "LGSREQ01";
+  private static final String FIXTURE_0000_876EEFE0 = "0000";
+  private static final String FIXTURE_SEARCH_F32C67A7 = "/search";
+  private static final String FIXTURE_SYNTHETIC_85DA8434 = "synthetic";
   private static final Clock CLOCK =
       Clock.fixed(Instant.parse("2026-09-20T00:00:00Z"), ZoneOffset.UTC);
   private static final Duration WAIT = Duration.ofSeconds(2);
@@ -54,11 +58,11 @@ class LogSearchWireClientTest {
     var f = new Fixture();
     f.reply =
         (id, b) -> {
-          var expected = header("LGSREQ01", 656, 0, 0, "", id, CONTEXT.wireValue());
+          var expected = header(FIXTURE_LGSREQ01_A99ED320, 656, 0, 0, "", id, CONTEXT.wireValue());
           number(expected, 890, 6, 1);
           number(expected, 896, 3, 100);
           assertArrayEquals(expected, b);
-          return response(0, false, "0000", id, CONTEXT.wireValue());
+          return response(0, false, FIXTURE_0000_876EEFE0, id, CONTEXT.wireValue());
         };
     assertEquals(ResultCode.SUCCESS, f.client.exchange(input(), CONTEXT).resultCode());
     assertEquals(1, f.sent.size());
@@ -70,25 +74,26 @@ class LogSearchWireClientTest {
         var one = new Fixture();
         one.reply =
             (id, b) -> {
-              var expected = header("LGSREQ01", 656, 0, 0, "", id, CONTEXT.wireValue());
+              var expected =
+                  header(FIXTURE_LGSREQ01_A99ED320, 656, 0, 0, "", id, CONTEXT.wireValue());
               put(expected, 256, 256, "キーワード");
               put(expected, 512, 16, type);
               put(expected, 528, 64, "action");
-              put(expected, 592, 256, "/search");
+              put(expected, 592, 256, FIXTURE_SEARCH_F32C67A7);
               put(expected, 848, 8, level);
               put(expected, 856, 17, "20260901090000000");
               put(expected, 873, 17, "20261002090000000");
               number(expected, 890, 6, 999999);
               number(expected, 896, 3, 100);
               assertArrayEquals(expected, b);
-              return response(0, false, "0000", id, CONTEXT.wireValue());
+              return response(0, false, FIXTURE_0000_876EEFE0, id, CONTEXT.wireValue());
             };
         var data =
             new LogSearchRequestData(
                 Optional.of("キーワード"),
                 Optional.of(LogType.valueOf(type)),
                 Optional.of("action"),
-                Optional.of("/search"),
+                Optional.of(FIXTURE_SEARCH_F32C67A7),
                 Optional.of(LogLevel.valueOf(level)),
                 Optional.of(Instant.parse("2026-09-01T00:00:00Z")),
                 Optional.of(Instant.parse("2026-10-02T00:00:00Z")),
@@ -98,7 +103,9 @@ class LogSearchWireClientTest {
             ResultCode.SUCCESS,
             one.client
                 .exchange(
-                    new TypedPayloadValues(new LayoutId("LGSREQ01"), data, List.of()), CONTEXT)
+                    new TypedPayloadValues(
+                        new LayoutId(FIXTURE_LGSREQ01_A99ED320), data, List.of()),
+                    CONTEXT)
                 .resultCode());
         assertEquals(1, one.sent.size());
         one.erased();
@@ -109,7 +116,7 @@ class LogSearchWireClientTest {
   void web271SuccessProfiles() {
     for (int n : new int[] {0, 1, 100})
       for (boolean optional : List.of(false, true))
-        for (String code : List.of("0000", "0200")) {
+        for (String code : List.of(FIXTURE_0000_876EEFE0, "0200")) {
           var f = new Fixture();
           f.reply = (id, b) -> response(n, optional, code, id, CONTEXT.wireValue());
           var result = f.client.exchange(input(), CONTEXT);
@@ -138,7 +145,8 @@ class LogSearchWireClientTest {
             assertEquals(
                 optional ? Optional.of(new UUID(0, 3)) : Optional.empty(), v.correlationId());
             assertEquals(optional ? Optional.of("GET") : Optional.empty(), v.httpMethod());
-            assertEquals(optional ? Optional.of("/search") : Optional.empty(), v.path());
+            assertEquals(
+                optional ? Optional.of(FIXTURE_SEARCH_F32C67A7) : Optional.empty(), v.path());
             assertEquals(
                 optional ? Optional.of(new HttpStatusCode(200)) : Optional.empty(), v.httpStatus());
             assertEquals(
@@ -192,7 +200,7 @@ class LogSearchWireClientTest {
       var f = new Fixture();
       f.reply =
           (id, b) -> {
-            var out = response(1, true, "0000", id, CONTEXT.wireValue());
+            var out = response(1, true, FIXTURE_0000_876EEFE0, id, CONTEXT.wireValue());
             change.accept(out);
             return out;
           };
@@ -260,7 +268,8 @@ class LogSearchWireClientTest {
           Reason.INVALID_INPUT,
           () ->
               f.client.exchange(
-                  new TypedPayloadValues(new LayoutId("LGSREQ01"), data, List.of()), CONTEXT));
+                  new TypedPayloadValues(new LayoutId(FIXTURE_LGSREQ01_A99ED320), data, List.of()),
+                  CONTEXT));
     }
     assertTrue(f.sent.isEmpty());
     assertThrows(NullPointerException.class, () -> f.client.exchange(null, CONTEXT));
@@ -293,20 +302,20 @@ class LogSearchWireClientTest {
     for (JmsRequestSender sender :
         List.<JmsRequestSender>of(
             (id, b) -> {
-              throw new JMSException("synthetic");
+              throw new JMSException(FIXTURE_SYNTHETIC_85DA8434);
             },
             (id, b) -> {
-              throw new JMSRuntimeException("synthetic");
+              throw new JMSRuntimeException(FIXTURE_SYNTHETIC_85DA8434);
             },
             (id, b) -> {
-              throw new IllegalStateException("synthetic");
+              throw new IllegalStateException(FIXTURE_SYNTHETIC_85DA8434);
             },
             (id, b) -> {})) {
       var client = new LogSearchWireClient(wire, sender, CLOCK, () -> ID, Duration.ofMillis(1));
       rejected(Reason.UNAVAILABLE, () -> client.exchange(input(), CONTEXT));
       assertEquals(0, wire.pendingCount());
     }
-    var failure = new AssertionError("synthetic");
+    var failure = new AssertionError(FIXTURE_SYNTHETIC_85DA8434);
     var client =
         new LogSearchWireClient(
             wire,
@@ -334,7 +343,7 @@ class LogSearchWireClientTest {
             (id, b) -> sends.incrementAndGet(),
             CLOCK,
             () -> {
-              throw new IllegalStateException("synthetic");
+              throw new IllegalStateException(FIXTURE_SYNTHETIC_85DA8434);
             },
             WAIT);
     rejected(Reason.UNAVAILABLE, () -> badId.exchange(input(), CONTEXT));
@@ -356,8 +365,10 @@ class LogSearchWireClientTest {
             wire,
             (id, b) -> {
               assertTrue(observed.add(id));
-              assertEquals("LGSREQ01", ascii(b, 11, 8));
-              assertTrue(wire.onReply(id, response(0, false, "0000", id, ascii(b, 113, 64))));
+              assertEquals(FIXTURE_LGSREQ01_A99ED320, ascii(b, 11, 8));
+              assertTrue(
+                  wire.onReply(
+                      id, response(0, false, FIXTURE_0000_876EEFE0, id, ascii(b, 113, 64))));
             },
             CLOCK,
             () -> new UUID(0, ids.incrementAndGet()),
@@ -386,7 +397,7 @@ class LogSearchWireClientTest {
   @Test
   void web277OwnershipAndDiagnostics() {
     var f = new Fixture();
-    var caller = response(1, true, "0000", ID, CONTEXT.wireValue());
+    var caller = response(1, true, FIXTURE_0000_876EEFE0, ID, CONTEXT.wireValue());
     var original = caller.clone();
     f.reply = (id, b) -> caller;
     var result = f.client.exchange(input(), CONTEXT);
@@ -409,7 +420,7 @@ class LogSearchWireClientTest {
 
   private static TypedPayloadValues input() {
     return new TypedPayloadValues(
-        new LayoutId("LGSREQ01"),
+        new LayoutId(FIXTURE_LGSREQ01_A99ED320),
         new LogSearchRequestData(
             Optional.empty(),
             Optional.empty(),
@@ -424,7 +435,7 @@ class LogSearchWireClientTest {
   }
 
   private static byte[] response(int n, boolean optional, String code, UUID id, String context) {
-    boolean success = code.equals("0000") || code.equals("0200");
+    boolean success = code.equals(FIXTURE_0000_876EEFE0) || code.equals("0200");
     int count = success ? n : 0;
     var b = header("LGSRSP01", 48, 2088, count, code, id, context);
     number(b, 256, 6, success ? 1 : 0);
@@ -446,7 +457,7 @@ class LogSearchWireClientTest {
         put(b, at + 665, 36, new UUID(0, 2).toString());
         put(b, at + 701, 36, new UUID(0, 3).toString());
         put(b, at + 737, 8, "GET");
-        put(b, at + 745, 256, "/search");
+        put(b, at + 745, 256, FIXTURE_SEARCH_F32C67A7);
         put(b, at + 1001, 3, "200");
         put(b, at + 1004, 9, "123");
         put(b, at + 1013, 45, "127.0.0.1");
@@ -503,7 +514,7 @@ class LogSearchWireClientTest {
     assertEquals(reason, failure.reason());
     assertEquals("protected read exchange rejected", failure.getMessage());
     assertNull(failure.getCause());
-    failure.addSuppressed(new IllegalStateException("synthetic"));
+    failure.addSuppressed(new IllegalStateException(FIXTURE_SYNTHETIC_85DA8434));
     assertEquals(0, failure.getSuppressed().length);
   }
 
@@ -512,7 +523,7 @@ class LogSearchWireClientTest {
         new JmsRequestReplyClient(new ReplyCorrelationRegistry(), CLOCK, 12);
     final List<byte[]> sent = new ArrayList<>();
     BiFunction<UUID, byte[], byte[]> reply =
-        (id, b) -> response(0, false, "0000", id, CONTEXT.wireValue());
+        (id, b) -> response(0, false, FIXTURE_0000_876EEFE0, id, CONTEXT.wireValue());
     final JmsRequestSender sender =
         (id, b) -> {
           sent.add(b);

@@ -25,13 +25,16 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** PT-OPS-CFGFILE-001..007, SS343 fixed file names and held-inode byte contract. */
 final class ServiceConfigFilesTest {
+  private static final String FIXTURE_API_YML_77F26866 = "api.yml";
+  private static final String FIXTURE_WRONG_D78ED9EF = "wrong";
+  private static final String FIXTURE_SIZE_EB1E91E4 = "size";
   @TempDir Path temporary;
 
   private Path root() throws Exception {
     Path root = Files.createDirectory(temporary.resolve("config"));
     Files.setPosixFilePermissions(root, PosixFilePermissions.fromString("rwxr-x---"));
     write(root, "common.yml", "nk.protocol.version: '001'\n");
-    write(root, "api.yml", "nk.db.pool.api.max: '8'\n");
+    write(root, FIXTURE_API_YML_77F26866, "nk.db.pool.api.max: '8'\n");
     write(root, "web.yml", "nk.web.http.port: '8080'\n");
     return root;
   }
@@ -80,19 +83,19 @@ final class ServiceConfigFilesTest {
   @Test
   void opsCfgfile002MissingSymlinkAndNonRegularAreRejected() throws Exception {
     Path root = root();
-    Files.delete(root.resolve("api.yml"));
+    Files.delete(root.resolve(FIXTURE_API_YML_77F26866));
     unavailable(() -> read(root, ServiceConfigFiles.Service.API));
-    Files.createSymbolicLink(root.resolve("api.yml"), root.resolve("web.yml"));
+    Files.createSymbolicLink(root.resolve(FIXTURE_API_YML_77F26866), root.resolve("web.yml"));
     unavailable(() -> read(root, ServiceConfigFiles.Service.API));
-    Files.delete(root.resolve("api.yml"));
-    Files.createDirectory(root.resolve("api.yml"));
+    Files.delete(root.resolve(FIXTURE_API_YML_77F26866));
+    Files.createDirectory(root.resolve(FIXTURE_API_YML_77F26866));
     unavailable(() -> read(root, ServiceConfigFiles.Service.API));
   }
 
   @Test
   void opsCfgfile003LengthEncodingAndModeBoundaries() throws Exception {
     Path root = root();
-    Path api = root.resolve("api.yml");
+    Path api = root.resolve(FIXTURE_API_YML_77F26866);
     Files.writeString(api, "");
     unavailable(() -> read(root, ServiceConfigFiles.Service.API));
     Files.writeString(api, "a".repeat(16_385));
@@ -108,7 +111,7 @@ final class ServiceConfigFilesTest {
   @Test
   void opsCfgfile004RootAndFileIdentityPolicy() throws Exception {
     Path root = root();
-    Path api = root.resolve("api.yml");
+    Path api = root.resolve(FIXTURE_API_YML_77F26866);
     Files.createLink(root.resolve("alias.yml"), api);
     unavailable(() -> read(root, ServiceConfigFiles.Service.API));
     Files.delete(root.resolve("alias.yml"));
@@ -119,7 +122,7 @@ final class ServiceConfigFilesTest {
         () ->
             ServiceConfigFiles.read(
                 root,
-                new StorageIdentity("wrong", "wrong"),
+                new StorageIdentity(FIXTURE_WRONG_D78ED9EF, FIXTURE_WRONG_D78ED9EF),
                 LinuxDirectoryCalls.create(),
                 ServiceConfigFiles.Service.API));
     assertEquals(
@@ -131,21 +134,19 @@ final class ServiceConfigFilesTest {
     Path root = root();
     Map<String, Object> genuine =
         Files.readAttributes(
-            root.resolve("api.yml"), "unix:owner,group,mode,nlink,dev,ino,size,ctime");
+            root.resolve(FIXTURE_API_YML_77F26866),
+            "unix:owner,group,mode,nlink,dev,ino,size,ctime");
     StorageIdentity identity = identity(root);
     long device = (Long) genuine.get("dev");
-    for (String key : List.of("owner", "group", "mode", "nlink", "dev", "ino", "size", "ctime")) {
+    for (String key :
+        List.of("owner", "group", "mode", "nlink", "dev", "ino", FIXTURE_SIZE_EB1E91E4, "ctime")) {
       var missing = new HashMap<>(genuine);
       missing.remove(key);
       unavailable(() -> ServiceConfigFiles.checked(missing, identity, false, device));
     }
     for (Map.Entry<String, Object> mutation :
         Map.<String, Object>of(
-                "mode", 0100600,
-                "nlink", 0,
-                "dev", -1L,
-                "ino", 0L,
-                "size", -1L)
+                "mode", 0100600, "nlink", 0, "dev", -1L, "ino", 0L, FIXTURE_SIZE_EB1E91E4, -1L)
             .entrySet()) {
       var changed = new HashMap<>(genuine);
       changed.put(mutation.getKey(), mutation.getValue());
@@ -155,18 +156,21 @@ final class ServiceConfigFilesTest {
     extraLink.put("nlink", 2);
     unavailable(() -> ServiceConfigFiles.checked(extraLink, identity, false, device));
     var zero = new HashMap<>(genuine);
-    zero.put("size", 0L);
+    zero.put(FIXTURE_SIZE_EB1E91E4, 0L);
     unavailable(() -> ServiceConfigFiles.checked(zero, identity, false, device));
     var longFile = new HashMap<>(genuine);
-    longFile.put("size", 16_385L);
+    longFile.put(FIXTURE_SIZE_EB1E91E4, 16_385L);
     unavailable(() -> ServiceConfigFiles.checked(longFile, identity, false, device));
     unavailable(() -> ServiceConfigFiles.checked(genuine, identity, false, device + 1));
     unavailable(
         () ->
             ServiceConfigFiles.checked(
-                genuine, new StorageIdentity("wrong", "wrong"), false, device));
+                genuine,
+                new StorageIdentity(FIXTURE_WRONG_D78ED9EF, FIXTURE_WRONG_D78ED9EF),
+                false,
+                device));
     var wrongGroup = new HashMap<>(genuine);
-    wrongGroup.put("group", (GroupPrincipal) () -> "wrong");
+    wrongGroup.put("group", (GroupPrincipal) () -> FIXTURE_WRONG_D78ED9EF);
     unavailable(() -> ServiceConfigFiles.checked(wrongGroup, identity, false, device));
     assertEquals(device, ServiceConfigFiles.checked(genuine, identity, false, device).device());
   }

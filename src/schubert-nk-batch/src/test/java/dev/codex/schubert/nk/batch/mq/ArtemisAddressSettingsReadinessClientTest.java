@@ -32,6 +32,9 @@ import org.junit.jupiter.api.io.TempDir;
 /** PG237/PT-OPS-MQ-010..012; live broker and independent SS321 literal mutation oracle. */
 @SuppressWarnings("try") // EmbeddedActiveMQ.stop declares Exception; the fixture is caller-owned.
 final class ArtemisAddressSettingsReadinessClientTest {
+  private static final String FIXTURE_NK_SYNC_REQUEST_422EE207 = "nk.sync.request";
+  private static final String FIXTURE_FALSE_076DE6E7 = "false";
+  private static final String FIXTURE_MAXSIZEBYTES_76AE4935 = "maxSizeBytes";
   @TempDir Path root;
 
   @Test
@@ -43,7 +46,7 @@ final class ArtemisAddressSettingsReadinessClientTest {
           fixture.broker.getActiveMQServer().getPostOffice().getAddresses().stream()
               .anyMatch(address -> address.toString().startsWith("activemq.management.")));
       Map<String, long[]> expected = new LinkedHashMap<>();
-      expected.put("nk.sync.request", new long[] {32, 50, 224, 450});
+      expected.put(FIXTURE_NK_SYNC_REQUEST_422EE207, new long[] {32, 50, 224, 450});
       expected.put("nk.sync.reply.web", new long[] {32, 50, 224, 450});
       expected.put("nk.async.work", new long[] {128, 1_000, 896, 9_000});
       expected.put("nk.web.log", new long[] {64, 1_000, 192, 9_000});
@@ -53,13 +56,13 @@ final class ArtemisAddressSettingsReadinessClientTest {
           Map.ofEntries(
               Map.entry("deadLetterAddress", "\"nk.dead.letter\""),
               Map.entry("expiryAddress", "\"nk.expiry\""),
-              Map.entry("autoCreateDeadLetterResources", "false"),
-              Map.entry("autoCreateExpiryResources", "false"),
-              Map.entry("autoCreateAddresses", "false"),
-              Map.entry("autoCreateQueues", "false"),
-              Map.entry("autoDeleteAddresses", "false"),
-              Map.entry("autoDeleteQueues", "false"),
-              Map.entry("autoDeleteCreatedQueues", "false"),
+              Map.entry("autoCreateDeadLetterResources", FIXTURE_FALSE_076DE6E7),
+              Map.entry("autoCreateExpiryResources", FIXTURE_FALSE_076DE6E7),
+              Map.entry("autoCreateAddresses", FIXTURE_FALSE_076DE6E7),
+              Map.entry("autoCreateQueues", FIXTURE_FALSE_076DE6E7),
+              Map.entry("autoDeleteAddresses", FIXTURE_FALSE_076DE6E7),
+              Map.entry("autoDeleteQueues", FIXTURE_FALSE_076DE6E7),
+              Map.entry("autoDeleteCreatedQueues", FIXTURE_FALSE_076DE6E7),
               Map.entry("addressFullMessagePolicy", "\"PAGE\""),
               Map.entry("pageFullMessagePolicy", "\"FAIL\""),
               Map.entry("diskFullMessagePolicy", "\"BLOCK\""),
@@ -82,7 +85,8 @@ final class ArtemisAddressSettingsReadinessClientTest {
                         fixture.session, entry.getKey()));
         long[] capacity = entry.getValue();
         assertEquals(
-            capacity[0] * 1024 * 1024, actual.getJsonNumber("maxSizeBytes").longValueExact());
+            capacity[0] * 1024 * 1024,
+            actual.getJsonNumber(FIXTURE_MAXSIZEBYTES_76AE4935).longValueExact());
         assertEquals(capacity[1], actual.getJsonNumber("maxSizeMessages").longValueExact());
         assertEquals(
             capacity[2] * 1024 * 1024, actual.getJsonNumber("pageLimitBytes").longValueExact());
@@ -100,7 +104,7 @@ final class ArtemisAddressSettingsReadinessClientTest {
   @Test
   void opsMq011RejectsEveryCommonAndCapacityDriftAndMissingValues() throws Exception {
     try (var fixture = securedBroker()) {
-      String source = source(fixture, "nk.sync.request");
+      String source = source(fixture, FIXTURE_NK_SYNC_REQUEST_422EE207);
       var parsed = JsonUtil.readJsonObject(source);
       var fields =
           new String[] {
@@ -126,7 +130,7 @@ final class ArtemisAddressSettingsReadinessClientTest {
             "maxDeliveryAttempts",
             "enableMetrics",
             "enableIngressTimestamp",
-            "maxSizeBytes",
+            FIXTURE_MAXSIZEBYTES_76AE4935,
             "maxSizeMessages",
             "pageLimitBytes",
             "pageLimitMessages"
@@ -138,7 +142,9 @@ final class ArtemisAddressSettingsReadinessClientTest {
             () ->
                 new ArtemisAddressSettingsReadinessClient(
                         (session, address) ->
-                            address.equals("nk.sync.request") ? changed : source(fixture, address))
+                            address.equals(FIXTURE_NK_SYNC_REQUEST_422EE207)
+                                ? changed
+                                : source(fixture, address))
                     .verify(fixture.session));
       }
       var wrongNumber = JsonUtil.readJsonObject("{\"value\":1}").get("value");
@@ -149,7 +155,10 @@ final class ArtemisAddressSettingsReadinessClientTest {
         var current = JsonUtil.readJsonObject(source(fixture, address));
         for (String field :
             new String[] {
-              "maxSizeBytes", "maxSizeMessages", "pageLimitBytes", "pageLimitMessages"
+              FIXTURE_MAXSIZEBYTES_76AE4935,
+              "maxSizeMessages",
+              "pageLimitBytes",
+              "pageLimitMessages"
             }) {
           String changed = changed(current, field, wrongNumber, false);
           assertRedacted(
@@ -160,12 +169,14 @@ final class ArtemisAddressSettingsReadinessClientTest {
                       .verify(fixture.session));
         }
       }
-      String missing = changed(parsed, "maxSizeBytes", JsonValue.NULL, true);
+      String missing = changed(parsed, FIXTURE_MAXSIZEBYTES_76AE4935, JsonValue.NULL, true);
       assertRedacted(
           () ->
               new ArtemisAddressSettingsReadinessClient(
                       (session, address) ->
-                          address.equals("nk.sync.request") ? missing : source(fixture, address))
+                          address.equals(FIXTURE_NK_SYNC_REQUEST_422EE207)
+                              ? missing
+                              : source(fixture, address))
                   .verify(fixture.session));
       assertFalse(fixture.session.isClosed());
     }
@@ -207,7 +218,7 @@ final class ArtemisAddressSettingsReadinessClientTest {
           IllegalStateException.class,
           () ->
               ArtemisManagementReadinessClient.putAddressSettingsOperation(
-                  failingMessage, "nk.sync.request"));
+                  failingMessage, FIXTURE_NK_SYNC_REQUEST_422EE207));
       // Artemis repository resolves unknown names through a default match. The full six-value
       // verifier must reject that fallback; the raw management operation is not an existence test.
       Object fallback =

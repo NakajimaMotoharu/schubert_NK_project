@@ -24,6 +24,8 @@ import org.junit.jupiter.api.Test;
 
 /** PT-OPS-MTERM001..008; public literal ports, never synthetic root authorization. */
 final class MaintenanceUnitTerminationTest {
+  private static final String FIXTURE_SCHUBERT_NK_BACKUP_SERVICE_3F43F5CD =
+      "schubert-nk-backup.service";
   private static final String COLD =
       "Id=schubert-nk-backup.service\nLoadState=loaded\nActiveState=inactive\nSubState=dead\nJob=\nMainPID=0\nControlPID=0\nSlice=system.slice\nDelegate=no\nControlGroup=\nInvocationID=\nStateChangeTimestampMonotonic=0\n";
   private static final List<String> NAMES =
@@ -34,14 +36,14 @@ final class MaintenanceUnitTerminationTest {
           "schubert-nk-cleanup.service",
           "schubert-nk-inbox-inspector.service",
           "schubert-nk-expiry-cleanup.service",
-          "schubert-nk-backup.service",
+          FIXTURE_SCHUBERT_NK_BACKUP_SERVICE_3F43F5CD,
           "artemis.service");
 
   static final class Fixture implements MaintenanceUnitTermination.Observations {
     final BackupUnitTerminationTest.Fixture kernel = new BackupUnitTerminationTest.Fixture();
     final List<byte[]> delivered = new ArrayList<>();
     MaintenanceUnit target = MaintenanceUnit.BACKUP;
-    String name = "schubert-nk-backup.service";
+    String name = FIXTURE_SCHUBERT_NK_BACKUP_SERVICE_3F43F5CD;
     String state = COLD;
     String processes = "a(sus) 0\n";
     int reads;
@@ -56,7 +58,7 @@ final class MaintenanceUnitTerminationTest {
       reads++;
       kernel.event("manager-state");
       if (nullState) return null;
-      String observed = state.replace("schubert-nk-backup.service", name);
+      String observed = state.replace(FIXTURE_SCHUBERT_NK_BACKUP_SERVICE_3F43F5CD, name);
       if (kernel.present && !emptyPresentGroup)
         observed = observed.replace("ControlGroup=\n", "ControlGroup=/system.slice/" + name + "\n");
       if (drift && reads > 1)
@@ -65,7 +67,7 @@ final class MaintenanceUnitTerminationTest {
       if (wrongUnit)
         return MaintenanceStopSnapshot.parse(
             MaintenanceUnit.WEB,
-            COLD.replace("schubert-nk-backup.service", "schubert-nk-web.service")
+            COLD.replace(FIXTURE_SCHUBERT_NK_BACKUP_SERVICE_3F43F5CD, "schubert-nk-web.service")
                 .getBytes(StandardCharsets.US_ASCII));
       return MaintenanceStopSnapshot.parse(target, observed.getBytes(StandardCharsets.US_ASCII));
     }
@@ -90,7 +92,7 @@ final class MaintenanceUnitTerminationTest {
                     Object[] forwarded = arguments == null ? null : arguments.clone();
                     if (method.getName().equals("openDirectory") && name.equals(forwarded[1])) {
                       assertEquals(NAMES.get(target.ordinal()), forwarded[1], "fixed leaf only");
-                      forwarded[1] = "schubert-nk-backup.service";
+                      forwarded[1] = FIXTURE_SCHUBERT_NK_BACKUP_SERVICE_3F43F5CD;
                     }
                     try {
                       return method.invoke(delegate, forwarded);
@@ -128,7 +130,7 @@ final class MaintenanceUnitTerminationTest {
       var actual = f.adapter().quiescentObservation().orElseThrow();
       assertEquals(
           List.of(
-              "schubert-nk-backup.service",
+              FIXTURE_SCHUBERT_NK_BACKUP_SERVICE_3F43F5CD,
               "loaded",
               "inactive",
               "dead",
@@ -332,7 +334,9 @@ final class MaintenanceUnitTerminationTest {
       String name = NAMES.get(index);
       for (boolean processes : List.of(false, true)) {
         byte[] expected =
-            (processes ? "a(sus) 0\n" : COLD.replace("schubert-nk-backup.service", name))
+            (processes
+                    ? "a(sus) 0\n"
+                    : COLD.replace(FIXTURE_SCHUBERT_NK_BACKUP_SERVICE_3F43F5CD, name))
                 .getBytes(StandardCharsets.US_ASCII);
         var child = new InspectorUnitProbeFixture.Child(expected);
         var reader =

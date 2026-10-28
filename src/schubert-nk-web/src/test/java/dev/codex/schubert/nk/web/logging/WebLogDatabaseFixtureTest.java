@@ -16,15 +16,16 @@ import org.junit.jupiter.api.io.TempDir;
  * Test-only ownership/config regressions, not Production DB or native acceptance. BUG552/YKT396.
  */
 class WebLogDatabaseFixtureTest {
+  private static final String FIXTURE_NK_PT_REPOSITORY_6BE068AF = "nk.pt.repository";
   @TempDir Path root;
 
   @Test
   void fixture001MissingAndBlankPropertyRejectBeforeAnyResource() throws Exception {
-    String original = System.getProperty("nk.pt.repository");
+    String original = System.getProperty(FIXTURE_NK_PT_REPOSITORY_6BE068AF);
     try {
       for (String value : new String[] {null, "", " "}) {
-        if (value == null) System.clearProperty("nk.pt.repository");
-        else System.setProperty("nk.pt.repository", value);
+        if (value == null) System.clearProperty(FIXTURE_NK_PT_REPOSITORY_6BE068AF);
+        else System.setProperty(FIXTURE_NK_PT_REPOSITORY_6BE068AF, value);
         var failure =
             assertThrows(IllegalArgumentException.class, () -> new WebLogDatabaseFixture(root));
         assertEquals("PT repository property is required", failure.getMessage());
@@ -33,14 +34,14 @@ class WebLogDatabaseFixtureTest {
         }
       }
     } finally {
-      if (original == null) System.clearProperty("nk.pt.repository");
-      else System.setProperty("nk.pt.repository", original);
+      if (original == null) System.clearProperty(FIXTURE_NK_PT_REPOSITORY_6BE068AF);
+      else System.setProperty(FIXTURE_NK_PT_REPOSITORY_6BE068AF, original);
     }
   }
 
   @Test
   void fixture002SetupSqlFailureStopsOnlyConfirmedOwnedDatabase() throws Exception {
-    String original = System.getProperty("nk.pt.repository");
+    String original = System.getProperty(FIXTURE_NK_PT_REPOSITORY_6BE068AF);
     Path repository = Files.createDirectory(root.resolve("repository"));
     Path script =
         repository.resolve("src/schubert-nk-api/src/main/resources/db/provisioning/001_roles.sql");
@@ -48,15 +49,15 @@ class WebLogDatabaseFixtureTest {
     Files.writeString(script, "SELECT 1 / 0;\n", StandardCharsets.US_ASCII);
     Path database = Files.createDirectory(root.resolve("database"));
     try {
-      System.setProperty("nk.pt.repository", repository.toString());
+      System.setProperty(FIXTURE_NK_PT_REPOSITORY_6BE068AF, repository.toString());
       var failure = assertThrows(SQLException.class, () -> new WebLogDatabaseFixture(database));
       assertEquals(0, failure.getSuppressed().length);
       assertTrue(Files.isDirectory(database.resolve("data")));
       assertFalse(Files.exists(database.resolve("data/postmaster.pid")));
       assertFalse(Files.exists(database.resolve("data/postmaster.opts.lock")));
     } finally {
-      if (original == null) System.clearProperty("nk.pt.repository");
-      else System.setProperty("nk.pt.repository", original);
+      if (original == null) System.clearProperty(FIXTURE_NK_PT_REPOSITORY_6BE068AF);
+      else System.setProperty(FIXTURE_NK_PT_REPOSITORY_6BE068AF, original);
     }
   }
 

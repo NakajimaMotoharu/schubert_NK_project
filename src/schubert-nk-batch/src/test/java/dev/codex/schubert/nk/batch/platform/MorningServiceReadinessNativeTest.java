@@ -22,6 +22,7 @@ import org.junit.jupiter.api.io.TempDir;
  * acceptance.
  */
 final class MorningServiceReadinessNativeTest {
+  private static final String FIXTURE_ACTUATOR_INFO_37B10116 = "/actuator/info";
   @TempDir Path directory;
 
   @Test
@@ -48,21 +49,22 @@ final class MorningServiceReadinessNativeTest {
       assertEquals(200, actual.status());
       assertEquals("{\"status\":\"UP\"}", actual.body());
       body.set("{\"commit\":\"golden\"}");
-      assertEquals(body.get(), io.get("/actuator/info").body());
+      assertEquals(body.get(), io.get(FIXTURE_ACTUATOR_INFO_37B10116).body());
       code.set(503);
-      assertEquals(new MorningServiceReadiness.Response(503, ""), io.get("/actuator/info"));
+      assertEquals(
+          new MorningServiceReadiness.Response(503, ""), io.get(FIXTURE_ACTUATOR_INFO_37B10116));
       code.set(302);
-      assertEquals(302, io.get("/actuator/info").status());
+      assertEquals(302, io.get(FIXTURE_ACTUATOR_INFO_37B10116).status());
       code.set(200);
       body.set("x".repeat(4097));
-      assertThrows(IOException.class, () -> io.get("/actuator/info"));
+      assertThrows(IOException.class, () -> io.get(FIXTURE_ACTUATOR_INFO_37B10116));
       body.set("\0");
-      assertThrows(IOException.class, () -> io.get("/actuator/info"));
+      assertThrows(IOException.class, () -> io.get(FIXTURE_ACTUATOR_INFO_37B10116));
       assertThrows(IllegalArgumentException.class, () -> io.get("/wrong"));
     } finally {
       server.stop(0);
     }
-    assertThrows(IOException.class, () -> io.get("/actuator/info"));
+    assertThrows(IOException.class, () -> io.get(FIXTURE_ACTUATOR_INFO_37B10116));
   }
 
   @Test

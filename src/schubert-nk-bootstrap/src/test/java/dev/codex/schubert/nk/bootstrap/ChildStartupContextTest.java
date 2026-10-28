@@ -22,6 +22,9 @@ import org.junit.jupiter.api.Test;
 
 /** PT-OPS-CHILDCTX-001..008: independent public proof and Linux text vectors. */
 final class ChildStartupContextTest {
+  private static final String FIXTURE_128_6F7E5D9F = "128";
+  private static final String FIXTURE_INVOCATION_ID_AC3E1A2D = "INVOCATION_ID";
+  private static final String FIXTURE_PROC_1E4EC60E = "proc";
   static final String BOOT = "11111111-1111-1111-1111-111111111111";
   static final String INV = "11111111111111111111111111111111";
   static final String A = "SCHUBERT_NK_STARTUP_ADMISSION_FD";
@@ -67,13 +70,14 @@ final class ChildStartupContextTest {
       """;
 
   static Map<String, String> environment() {
-    return new HashMap<>(Map.of(A, "128", P, "129", "INVOCATION_ID", INV));
+    return new HashMap<>(
+        Map.of(A, FIXTURE_128_6F7E5D9F, P, "129", FIXTURE_INVOCATION_ID_AC3E1A2D, INV));
   }
 
   static final class Fixture implements ChildStartupContext.Io {
     long pid = 42;
     long uid = 200;
-    String filesystem = "proc";
+    String filesystem = FIXTURE_PROC_1E4EC60E;
     String boot = BOOT + "\n";
     String stat = "42 (comm (with) spaces) S " + "0 ".repeat(18) + "12345\n";
     String status = STATUS;
@@ -211,7 +215,7 @@ final class ChildStartupContextTest {
 
   @Test
   void childctx002EnvironmentMissingAliasNullAndDescriptorBounds() throws Exception {
-    for (String key : List.of(A, P, "INVOCATION_ID")) {
+    for (String key : List.of(A, P, FIXTURE_INVOCATION_ID_AC3E1A2D)) {
       var env = environment();
       env.remove(key);
       assertThrows(IOException.class, () -> ChildStartupContext.inputs(env));
@@ -225,28 +229,28 @@ final class ChildStartupContextTest {
       }
     for (String key : List.of("schubert_nk_startup_admission_fd", "SCHUBERT_NK_STARTUP_OTHER")) {
       var env = environment();
-      env.put(key, "128");
+      env.put(key, FIXTURE_128_6F7E5D9F);
       assertThrows(IOException.class, () -> ChildStartupContext.inputs(env));
     }
     for (String bad : List.of("0".repeat(32), "A".repeat(32), "1".repeat(31), INV + "\n")) {
       var env = environment();
-      env.put("INVOCATION_ID", bad);
+      env.put(FIXTURE_INVOCATION_ID_AC3E1A2D, bad);
       assertThrows(IOException.class, () -> ChildStartupContext.inputs(env));
     }
     var same = environment();
-    same.put(P, "128");
+    same.put(P, FIXTURE_128_6F7E5D9F);
     assertThrows(IOException.class, () -> ChildStartupContext.inputs(same));
     var edge = environment();
     edge.put(P, "65535");
     assertEquals(65535, ChildStartupContext.inputs(edge).proofFd());
     assertThrows(NullPointerException.class, () -> ChildStartupContext.inputs(null));
-    for (String key : List.of(A, P, "INVOCATION_ID")) {
+    for (String key : List.of(A, P, FIXTURE_INVOCATION_ID_AC3E1A2D)) {
       var env = environment();
       env.put(key, null);
       assertThrows(NullPointerException.class, () -> ChildStartupContext.inputs(env));
     }
     var nullKey = environment();
-    nullKey.put(null, "128");
+    nullKey.put(null, FIXTURE_128_6F7E5D9F);
     assertThrows(NullPointerException.class, () -> ChildStartupContext.inputs(nullKey));
     assertThrows(NullPointerException.class, () -> new ChildStartupContext.Inputs(128, 129, null));
   }
@@ -451,7 +455,7 @@ final class ChildStartupContextTest {
           }
 
           public String filesystem() {
-            return "proc";
+            return FIXTURE_PROC_1E4EC60E;
           }
 
           public byte[] boot() {
@@ -483,7 +487,7 @@ final class ChildStartupContextTest {
           }
 
           public String filesystem() {
-            return "proc";
+            return FIXTURE_PROC_1E4EC60E;
           }
 
           public byte[] boot() {
@@ -542,7 +546,7 @@ final class ChildStartupContextTest {
   void childctx008NativeProcOnlyDoesNotGrantAuthority() throws Exception {
     var nativeIo = new ChildStartupContext.NativeIo();
     assertEquals(ProcessHandle.current().pid(), nativeIo.pid());
-    assertEquals("proc", nativeIo.filesystem());
+    assertEquals(FIXTURE_PROC_1E4EC60E, nativeIo.filesystem());
     assertEquals(37, nativeIo.boot().length);
     assertTrue(nativeIo.stat(nativeIo.pid()).length > 0);
     assertTrue(nativeIo.status(nativeIo.pid()).length > 0);

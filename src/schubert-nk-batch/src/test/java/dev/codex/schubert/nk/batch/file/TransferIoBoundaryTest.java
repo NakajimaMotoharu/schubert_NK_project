@@ -34,6 +34,8 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** SS333§12/SSC118; NK-OPS-001/1483, public own bytes and read-only fault inputs. */
 final class TransferIoBoundaryTest {
+  private static final String FIXTURE_ROOT_956E6E33 = "root";
+  private static final String FIXTURE_CLOSE_97959247 = "close";
   @TempDir Path temporary;
   private static final Instant CUTOFF = Instant.parse("2026-09-30T00:00:00Z");
   private static final String NAME = "11111111-2222-4333-8444-555555555555.part";
@@ -92,7 +94,7 @@ final class TransferIoBoundaryTest {
   /** PT-OPS-TRANSFER-IO-004: inode remains a separately necessary identity check. */
   @Test
   void transferIo004RootAndChildInodeChangesAbortWithoutDeletion() throws Exception {
-    for (String role : List.of("root", "child")) {
+    for (String role : List.of(FIXTURE_ROOT_956E6E33, "child")) {
       try (var f = new Fixture(temporary, true)) {
         var before = f.original();
         f.transform =
@@ -115,14 +117,15 @@ final class TransferIoBoundaryTest {
         var before = f.original();
         f.transform =
             (role, values) -> {
-              if (role.equals("root") && f.observations.get("root") == 2) {
+              if (role.equals(FIXTURE_ROOT_956E6E33)
+                  && f.observations.get(FIXTURE_ROOT_956E6E33) == 2) {
                 Object value = values.get(attribute);
                 if (value instanceof Integer integer) values.put(attribute, integer + 1);
                 else values.put(attribute, ((Long) value) + 1);
               }
             };
         assertThrows(IOException.class, () -> f.subject(f).execute(CUTOFF));
-        assertEquals(2, f.observations.get("root"));
+        assertEquals(2, f.observations.get(FIXTURE_ROOT_956E6E33));
         f.protectedWithoutMutation(before);
       }
     }
@@ -151,7 +154,7 @@ final class TransferIoBoundaryTest {
             "filesystemIOException",
             "openIOException",
             "iterator",
-            "close",
+            FIXTURE_CLOSE_97959247,
             "nullStream",
             "nullEntry",
             "nullName")) {
@@ -221,7 +224,9 @@ final class TransferIoBoundaryTest {
     BiConsumer<String, Map<String, Object>> transform = (role, values) -> {};
 
     Fixture(Path temporary, boolean seed) throws Exception {
-      path = directory(Files.createTempDirectory(temporary, "transfer-").resolve("root"));
+      path =
+          directory(
+              Files.createTempDirectory(temporary, "transfer-").resolve(FIXTURE_ROOT_956E6E33));
       date = path.resolve("20260929");
       file = date.resolve(NAME);
       if (seed) {
@@ -247,7 +252,7 @@ final class TransferIoBoundaryTest {
                             "unlink",
                             "removeEmptyDirectory",
                             "sync",
-                            "close")
+                            FIXTURE_CLOSE_97959247)
                         .contains(name)) throw new AssertionError("cleanup cannot create/publish");
                     if (name.equals("unlink")) {
                       unlinks++;
@@ -260,7 +265,7 @@ final class TransferIoBoundaryTest {
                     } catch (InvocationTargetException failure) {
                       throw failure.getCause();
                     }
-                    if (name.equals("close"))
+                    if (name.equals(FIXTURE_CLOSE_97959247))
                       assertTrue(descriptors.remove((Integer) args[0]), "FD consumed once");
                     else if (name.startsWith("open"))
                       assertTrue(descriptors.add((Integer) result), "new owned FD");
@@ -309,7 +314,9 @@ final class TransferIoBoundaryTest {
       if (injecting("nullMap")) return null;
       var values = new HashMap<>(nio.metadata(held));
       String role =
-          Files.isSameFile(held, path) ? "root" : Files.isDirectory(held) ? "child" : "file";
+          Files.isSameFile(held, path)
+              ? FIXTURE_ROOT_956E6E33
+              : Files.isDirectory(held) ? "child" : "file";
       observations.merge(role, 1, Integer::sum);
       if (injecting("size")) values.put("size", -1L);
       if (injecting("links")) values.put("nlink", 1);
@@ -356,7 +363,8 @@ final class TransferIoBoundaryTest {
         public void close() throws IOException {
           delegate.close();
           closedStreams++;
-          if (injecting("close")) throw new IOException("synthetic stream close failure");
+          if (injecting(FIXTURE_CLOSE_97959247))
+            throw new IOException("synthetic stream close failure");
         }
       };
     }

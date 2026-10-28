@@ -63,6 +63,10 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** RERUN005: independent UI wire/SQL, real API participants; transport fixture, not VM/IT/ST. */
 final class RevocationRetryCoordinatorTest {
+  private static final String FIXTURE_0102_C967CE66 = "0102";
+  private static final String FIXTURE_0000_876EEFE0 = "0000";
+  private static final String FIXTURE_ACQUIRE_1585EBC6 = "acquire";
+  private static final String FIXTURE_CLOSE_97959247 = "close";
   private static final Instant REQUESTED = Instant.parse("2026-09-08T00:00:00.123456Z");
   private static final AuthenticationContext AUTH = AuthenticationContext.of("a".repeat(64));
   private static final byte[] KEY = new byte[32]; // Public synthetic vector, never deployed.
@@ -157,15 +161,16 @@ final class RevocationRetryCoordinatorTest {
 
   @Test
   void rerun005cGeneral0102ErrorWrongWireAndTimeoutKeepOriginalRow() throws Exception {
-    for (String mode : List.of("0102", "9000", "wrong-context", "wrong-correlation", "timeout")) {
+    for (String mode :
+        List.of(FIXTURE_0102_C967CE66, "9000", "wrong-context", "wrong-correlation", "timeout")) {
       reset();
       try (var f = new Fixture()) {
         f.enqueue(1);
-        if (mode.equals("0102") || mode.equals("9000")) f.code = mode;
+        if (mode.equals(FIXTURE_0102_C967CE66) || mode.equals("9000")) f.code = mode;
         else f.replyFault = mode;
         assertEquals(RevocationRetryCoordinator.Outcome.RETAINED, f.coordinator().dispatchOne());
         String warning =
-            mode.equals("0102")
+            mode.equals(FIXTURE_0102_C967CE66)
                 ? "SESSION_INVALID"
                 : mode.equals("9000")
                     ? "API_REJECTED"
@@ -221,7 +226,7 @@ final class RevocationRetryCoordinatorTest {
       reset();
       try (var f = new Fixture()) {
         f.enqueue(1);
-        f.code = failure ? "0102" : "0000";
+        f.code = failure ? FIXTURE_0102_C967CE66 : FIXTURE_0000_876EEFE0;
         f.afterReply = () -> f.clock.set(REQUESTED.plusSeconds(15));
         assertEquals(RevocationRetryCoordinator.Outcome.STALE, f.coordinator().dispatchOne());
         assertEquals(
@@ -265,7 +270,7 @@ final class RevocationRetryCoordinatorTest {
     }
     for (String phase :
         List.of(
-            "acquire",
+            FIXTURE_ACQUIRE_1585EBC6,
             "null",
             "setAutoCommit",
             "setReadOnly",
@@ -273,7 +278,7 @@ final class RevocationRetryCoordinatorTest {
             "prepareStatement",
             "commit",
             "commit-after",
-            "close")) {
+            FIXTURE_CLOSE_97959247)) {
       reset();
       try (var f = new Fixture()) {
         f.enqueue(1);
@@ -284,7 +289,7 @@ final class RevocationRetryCoordinatorTest {
         assertEquals(
             1,
             count("select count(*) from schubert_web_session.pending_context_revocations", true));
-        if (phase.equals("commit-after") || phase.equals("close")) {
+        if (phase.equals("commit-after") || phase.equals(FIXTURE_CLOSE_97959247)) {
           f.fault = "";
           f.clock.set(REQUESTED.plusSeconds(15));
           f.expectedStamp = "20260908090015123";
@@ -292,12 +297,12 @@ final class RevocationRetryCoordinatorTest {
         }
       }
     }
-    for (String code : List.of("0000", "0102")) {
+    for (String code : List.of(FIXTURE_0000_876EEFE0, FIXTURE_0102_C967CE66)) {
       reset();
       try (var f = new Fixture()) {
         f.enqueue(1);
         f.code = code;
-        f.fault = "acquire";
+        f.fault = FIXTURE_ACQUIRE_1585EBC6;
         f.faultAcquisition = 2;
         fixed(() -> f.coordinator().dispatchOne());
         assertEquals(1, f.ids.size());
@@ -312,7 +317,7 @@ final class RevocationRetryCoordinatorTest {
 
   @Test
   void rerun005gFatalIdentityNestedCyclicFailuresAndResourceAfterconditions() throws Exception {
-    for (String phase : List.of("acquire", "setReadOnly", "close")) {
+    for (String phase : List.of(FIXTURE_ACQUIRE_1585EBC6, "setReadOnly", FIXTURE_CLOSE_97959247)) {
       reset();
       try (var f = new Fixture()) {
         f.enqueue(1);
@@ -493,7 +498,7 @@ final class RevocationRetryCoordinatorTest {
     boolean realApi;
     boolean loseReply;
     boolean parallel;
-    String code = "0000";
+    String code = FIXTURE_0000_876EEFE0;
     String expectedStamp = "20260908090005123";
     String replyFault = "";
     String fault = "";
@@ -605,7 +610,7 @@ final class RevocationRetryCoordinatorTest {
                   throw new UnsupportedOperationException("fixture only getConnection");
                 int index = acquisitions.incrementAndGet();
                 boolean inject = index == faultAcquisition;
-                if (inject && fault.equals("acquire")) {
+                if (inject && fault.equals(FIXTURE_ACQUIRE_1585EBC6)) {
                   if (primaryFault != null) throw primaryFault;
                   throw new SQLException("private-acquire-marker");
                 }
@@ -620,7 +625,7 @@ final class RevocationRetryCoordinatorTest {
                     new Class<?>[] {Connection.class},
                     (target, call, values) -> {
                       String name = call.getName();
-                      if (name.equals("close")) {
+                      if (name.equals(FIXTURE_CLOSE_97959247)) {
                         try {
                           invoke(real, call, values);
                         } finally {
@@ -631,7 +636,7 @@ final class RevocationRetryCoordinatorTest {
                         }
                         if (index == 1) afterFirstClose.run();
                         if (inject && closeFault != null) throw closeFault;
-                        if (inject && fault.equals("close")) {
+                        if (inject && fault.equals(FIXTURE_CLOSE_97959247)) {
                           if (fatal != null) throw fatal;
                           throw new SQLException("private-close-marker");
                         }
@@ -685,7 +690,9 @@ final class RevocationRetryCoordinatorTest {
     put(
         result,
         256,
-        code.equals("0000") || code.equals("0200") ? "20260908090005123" : "00000000000000000");
+        code.equals(FIXTURE_0000_876EEFE0) || code.equals("0200")
+            ? "20260908090005123"
+            : "00000000000000000");
     return result;
   }
 

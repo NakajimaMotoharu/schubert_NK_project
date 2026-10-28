@@ -44,6 +44,12 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** PT-IDEM-012; independent SS323 wire offsets and SS331/351 SQL afterconditions. */
 final class WebLogIngestServiceTest {
+  private static final String FIXTURE_00000000_0000_0000_0000_000000000012_7E8766AA =
+      "00000000-0000-0000-0000-000000000012";
+  private static final String FIXTURE_GETCONNECTION_1DAA73DB = "getConnection";
+  private static final String FIXTURE_PREPARESTATEMENT_CB987D1F = "prepareStatement";
+  private static final String FIXTURE_EXECUTEUPDATE_5E0BBF58 = "executeUpdate";
+  private static final String FIXTURE_RUNTIME_2D52CD90 = "runtime";
   @TempDir static Path root;
   static ApiLogDatabaseFixture database;
 
@@ -85,8 +91,11 @@ final class WebLogIngestServiceTest {
       assertEquals("HTTP_REQUEST_COMPLETED", rows.getString("action"));
       assertEquals("Synthetic request complete", rows.getString("message"));
       assertEquals("00000000-0000-0000-0000-000000000099", rows.getString("request_id"));
-      assertEquals("00000000-0000-0000-0000-000000000012", rows.getString("message_id"));
-      assertEquals("00000000-0000-0000-0000-000000000012", rows.getString("source_message_id"));
+      assertEquals(
+          FIXTURE_00000000_0000_0000_0000_000000000012_7E8766AA, rows.getString("message_id"));
+      assertEquals(
+          FIXTURE_00000000_0000_0000_0000_000000000012_7E8766AA,
+          rows.getString("source_message_id"));
       assertEquals("00000000-0000-0000-0000-000000000015", rows.getString("correlation_id"));
       assertNull(rows.getObject("actor_user_id"));
       assertNull(rows.getObject("security_hold_until"));
@@ -187,13 +196,13 @@ final class WebLogIngestServiceTest {
   void transactionFailuresNeverReportSuccessAndAlwaysReleaseConnection() throws Exception {
     for (String point :
         List.of(
-            "getConnection",
+            FIXTURE_GETCONNECTION_1DAA73DB,
             "setAutoCommit",
-            "prepareStatement",
-            "executeUpdate",
+            FIXTURE_PREPARESTATEMENT_CB987D1F,
+            FIXTURE_EXECUTEUPDATE_5E0BBF58,
             "commit",
             "close",
-            "runtime")) {
+            FIXTURE_RUNTIME_2D52CD90)) {
       for (boolean rollbackFails : List.of(false, true)) {
         database.reset();
         AtomicInteger closed = new AtomicInteger();
@@ -202,7 +211,7 @@ final class WebLogIngestServiceTest {
             new WebLogIngestService(
                 source(
                     () -> {
-                      if (point.equals("getConnection")) {
+                      if (point.equals(FIXTURE_GETCONNECTION_1DAA73DB)) {
                         throw new SQLException("synthetic-sensitive-driver-text");
                       }
                       Connection real = database.api();
@@ -226,18 +235,21 @@ final class WebLogIngestServiceTest {
                                 if (name.equals(point)) {
                                   throw new SQLException("synthetic-sensitive-driver-text");
                                 }
-                                if (name.equals("prepareStatement") && point.equals("runtime")) {
+                                if (name.equals(FIXTURE_PREPARESTATEMENT_CB987D1F)
+                                    && point.equals(FIXTURE_RUNTIME_2D52CD90)) {
                                   throw new IllegalStateException("synthetic runtime");
                                 }
                                 Object result = invoke(real, method, arguments);
-                                if (name.equals("prepareStatement")
-                                    && point.equals("executeUpdate")) {
+                                if (name.equals(FIXTURE_PREPARESTATEMENT_CB987D1F)
+                                    && point.equals(FIXTURE_EXECUTEUPDATE_5E0BBF58)) {
                                   var statement = (java.sql.PreparedStatement) result;
                                   return Proxy.newProxyInstance(
                                       Connection.class.getClassLoader(),
                                       new Class<?>[] {java.sql.PreparedStatement.class},
                                       (ignored, operation, args) -> {
-                                        if (operation.getName().equals("executeUpdate")) {
+                                        if (operation
+                                            .getName()
+                                            .equals(FIXTURE_EXECUTEUPDATE_5E0BBF58)) {
                                           throw new SQLException("synthetic-sensitive-bound-value");
                                         }
                                         return invoke(statement, operation, args);
@@ -246,7 +258,7 @@ final class WebLogIngestServiceTest {
                                 return result;
                               });
                     }));
-        if (point.equals("runtime")) {
+        if (point.equals(FIXTURE_RUNTIME_2D52CD90)) {
           assertThrows(IllegalStateException.class, () -> service.ingest(event(golden())));
         } else {
           var failure =
@@ -258,9 +270,14 @@ final class WebLogIngestServiceTest {
           assertNull(failure.getCause());
           assertEquals(0, failure.getSuppressed().length);
         }
-        assertEquals(point.equals("getConnection") ? 0 : 1, closed.get(), point);
+        assertEquals(point.equals(FIXTURE_GETCONNECTION_1DAA73DB) ? 0 : 1, closed.get(), point);
         assertEquals(
-            List.of("prepareStatement", "executeUpdate", "commit", "runtime").contains(point)
+            List.of(
+                        FIXTURE_PREPARESTATEMENT_CB987D1F,
+                        FIXTURE_EXECUTEUPDATE_5E0BBF58,
+                        "commit",
+                        FIXTURE_RUNTIME_2D52CD90)
+                    .contains(point)
                 ? 1
                 : 0,
             rolledBack.get(),
@@ -362,7 +379,7 @@ final class WebLogIngestServiceTest {
       throws jakarta.jms.JMSException {
     var message = context.createBytesMessage();
     message.writeBytes(golden());
-    message.setStringProperty("NKMessageID", "00000000-0000-0000-0000-000000000012");
+    message.setStringProperty("NKMessageID", FIXTURE_00000000_0000_0000_0000_000000000012_7E8766AA);
     message.setStringProperty("NKLayoutID", "WLGEVT01");
     message.setStringProperty("NKProtocolVersion", "001");
     message.setJMSCorrelationID("00000000-0000-0000-0000-000000000015");
@@ -392,7 +409,7 @@ final class WebLogIngestServiceTest {
     byte[] wire = new byte[2336];
     Arrays.fill(wire, (byte) ' ');
     ascii(wire, 0, "SCHBNK01001WLGEVT01001EI");
-    ascii(wire, 24, "00000000-0000-0000-0000-000000000012");
+    ascii(wire, 24, FIXTURE_00000000_0000_0000_0000_000000000012_7E8766AA);
     ascii(wire, 60, "00000000-0000-0000-0000-000000000015");
     ascii(wire, 96, "20260905060000000");
     ascii(wire, 177, "0256002080000000000000000002336");
@@ -442,7 +459,7 @@ final class WebLogIngestServiceTest {
             DataSource.class.getClassLoader(),
             new Class<?>[] {DataSource.class},
             (proxy, method, arguments) -> {
-              if (method.getName().equals("getConnection")) {
+              if (method.getName().equals(FIXTURE_GETCONNECTION_1DAA73DB)) {
                 return factory.open();
               }
               throw new UnsupportedOperationException(method.getName());

@@ -48,6 +48,9 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** Independent golden file + SQL oracle, SSC067/SS341 6.11/017070, BAT274..281. */
 final class BackupBundleCompletionTest {
+  private static final String FIXTURE_CLOCK_49F3C56E = "clock";
+  private static final String FIXTURE_CONNECTION_COMMIT_37C1B216 = "connection.commit";
+  private static final String FIXTURE_SCHUBERT_NK_DUMP_96644B79 = "schubert_nk.dump";
   @TempDir static Path databaseRoot;
   @TempDir Path temporary;
   static BatchDatabaseFixture db;
@@ -74,7 +77,7 @@ final class BackupBundleCompletionTest {
           Map.entry("next", 8),
           Map.entry("closeNames", 2),
           Map.entry("effectiveUid", 4),
-          Map.entry("clock", 274));
+          Map.entry(FIXTURE_CLOCK_49F3C56E, 274));
 
   @BeforeAll
   static void start() throws Exception {
@@ -101,7 +104,7 @@ final class BackupBundleCompletionTest {
       assertEquals(END, complete(completion, p.wrap(c), f));
       assertEquals(INVENTORY, f.counts);
       assertEquals(161, f.position);
-      assertEquals(1, p.seen.get("connection.commit"));
+      assertEquals(1, p.seen.get(FIXTURE_CONNECTION_COMMIT_37C1B216));
       assertEquals(1, p.seen.get("connection.rollback"));
       assertEquals(4, p.seen.get("connection.setAutoCommit"));
       succeeded(END);
@@ -137,7 +140,7 @@ final class BackupBundleCompletionTest {
         var committed = new AtomicBoolean();
         p.before =
             (key, n) -> {
-              if (key.equals("connection.commit")) committed.set(true);
+              if (key.equals(FIXTURE_CONNECTION_COMMIT_37C1B216)) committed.set(true);
               if ((key + "#" + n).equals(fault)
                   || (fault.equals("readback.query")
                       && committed.get()
@@ -149,7 +152,7 @@ final class BackupBundleCompletionTest {
             };
         repositoryFailure(() -> complete(completion(f, () -> WALL), p.wrap(c), f));
         assertEquals(1, hits.get(), fault);
-        assertEquals(1, p.seen.get("connection.commit"), fault);
+        assertEquals(1, p.seen.get(FIXTURE_CONNECTION_COMMIT_37C1B216), fault);
         succeeded(END);
         p.released();
         f.released();
@@ -170,7 +173,7 @@ final class BackupBundleCompletionTest {
       var writes = new AtomicInteger();
       p.after =
           (key, n) -> {
-            if (key.equals("connection.commit")) {
+            if (key.equals(FIXTURE_CONNECTION_COMMIT_37C1B216)) {
               assertEquals(1, n);
               sql(
                   "update schubert.batch_runs set ended_at='2026-09-12T15:00:04.987653Z'"
@@ -180,7 +183,7 @@ final class BackupBundleCompletionTest {
           };
       repositoryFailure(() -> complete(completion(f, () -> WALL), p.wrap(c), f));
       assertEquals(1, writes.get());
-      assertEquals(1, p.seen.get("connection.commit"));
+      assertEquals(1, p.seen.get(FIXTURE_CONNECTION_COMMIT_37C1B216));
       assertEquals(0, p.seen.getOrDefault("connection.rollback", 0));
       assertFalse(c.getAutoCommit());
       assertFalse(c.isClosed());
@@ -213,7 +216,7 @@ final class BackupBundleCompletionTest {
           case "dump", "config", "credentials" -> {
             String file =
                 bad.equals("dump")
-                    ? "schubert_nk.dump"
+                    ? FIXTURE_SCHUBERT_NK_DUMP_96644B79
                     : bad.equals("config") ? "config.tar" : "credentials.tar.age";
             byte[] bytes = Files.readAllBytes(f.child.resolve(file));
             bytes[0] ^= 1;
@@ -320,7 +323,7 @@ final class BackupBundleCompletionTest {
           int target = at;
           f.hook =
               (name, n) -> {
-                if (name.equals("clock") && n == target) {
+                if (name.equals(FIXTURE_CLOCK_49F3C56E) && n == target) {
                   if (interrupt) Thread.currentThread().interrupt();
                   else f.clockValue = 100 + LIMIT;
                 }
@@ -344,7 +347,7 @@ final class BackupBundleCompletionTest {
           var c = owned()) {
         f.hook =
             (name, n) -> {
-              if (name.equals("clock") && n == 2) f.clockValue = 100 + elapsed;
+              if (name.equals(FIXTURE_CLOCK_49F3C56E) && n == 2) f.clockValue = 100 + elapsed;
             };
         if (elapsed == LIMIT - 1) assertEquals(END, complete(completion(f, () -> WALL), c, f));
         else denied(() -> complete(completion(f, () -> WALL), c, f));
@@ -358,7 +361,7 @@ final class BackupBundleCompletionTest {
       f.clockValue = Long.MAX_VALUE - 100;
       f.hook =
           (name, n) -> {
-            if (name.equals("clock") && n == 2) f.clockValue = Long.MIN_VALUE + 100;
+            if (name.equals(FIXTURE_CLOCK_49F3C56E) && n == 2) f.clockValue = Long.MIN_VALUE + 100;
           };
       assertEquals(END, complete(completion(f, () -> WALL), c, f));
       f.released();
@@ -377,7 +380,7 @@ final class BackupBundleCompletionTest {
         Supplier<Instant> clock =
             () -> {
               assertEquals(161, f.position);
-              assertEquals(272, f.counts.get("clock"));
+              assertEquals(272, f.counts.get(FIXTURE_CLOCK_49F3C56E));
               calls.incrementAndGet();
               return invalid;
             };
@@ -396,7 +399,7 @@ final class BackupBundleCompletionTest {
         var p = new CompletionJdbcProbe();
         p.after =
             (key, n) -> {
-              if (key.equals("connection.commit"))
+              if (key.equals(FIXTURE_CONNECTION_COMMIT_37C1B216))
                 throw new SQLException("public uncertain response");
             };
         repositoryFailure(() -> complete(completion(f, () -> WALL), p.wrap(c), f));
@@ -404,15 +407,15 @@ final class BackupBundleCompletionTest {
         succeeded(END);
         f.released();
       }
-      byte[] original = Files.readAllBytes(f.child.resolve("schubert_nk.dump"));
-      Files.writeString(f.child.resolve("schubert_nk.dump"), "public damage");
+      byte[] original = Files.readAllBytes(f.child.resolve(FIXTURE_SCHUBERT_NK_DUMP_96644B79));
+      Files.writeString(f.child.resolve(FIXTURE_SCHUBERT_NK_DUMP_96644B79), "public damage");
       try (var c = owned()) {
         var p = new CompletionJdbcProbe();
         denied(() -> complete(completion(f, () -> WALL.plusSeconds(10)), p.wrap(c), f));
         assertTrue(p.seen.isEmpty());
         succeeded(END);
       }
-      Files.write(f.child.resolve("schubert_nk.dump"), original);
+      Files.write(f.child.resolve(FIXTURE_SCHUBERT_NK_DUMP_96644B79), original);
       try (var c = owned()) {
         assertEquals(END, complete(completion(f, () -> WALL.plusSeconds(10)), c, f));
         succeeded(END);
@@ -495,7 +498,7 @@ final class BackupBundleCompletionTest {
   @Test
   void unknownFailuresAndResourceOwnership() throws Exception {
     for (int kind = 0; kind < 3; kind++) {
-      for (String stage : List.of("io", "clock", "wall", "jdbc")) {
+      for (String stage : List.of("io", FIXTURE_CLOCK_49F3C56E, "wall", "jdbc")) {
         reset();
         try (var f = fixture();
             var c = owned()) {
@@ -511,10 +514,10 @@ final class BackupBundleCompletionTest {
             f.faultTypes.put("read#1", original);
             f.faultTypes.put("closeChannel#1", original);
           }
-          if (stage.equals("clock"))
+          if (stage.equals(FIXTURE_CLOCK_49F3C56E))
             f.hook =
                 (name, n) -> {
-                  if (name.equals("clock") && n == 2) unchecked(original);
+                  if (name.equals(FIXTURE_CLOCK_49F3C56E) && n == 2) unchecked(original);
                 };
           if (stage.equals("jdbc"))
             p.before =
@@ -555,7 +558,7 @@ final class BackupBundleCompletionTest {
       f.hook =
           (name, n) -> {
             threads.add(Thread.currentThread().threadId());
-            if (name.equals("clock") && n == 1) {
+            if (name.equals(FIXTURE_CLOCK_49F3C56E) && n == 1) {
               entered.countDown();
               try {
                 assertTrue(release.await(10, TimeUnit.SECONDS));

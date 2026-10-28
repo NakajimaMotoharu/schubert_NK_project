@@ -46,18 +46,29 @@ import org.junit.jupiter.api.io.TempDir;
  * oracle.
  */
 class JdbcWebSessionStoreTest {
+  private static final String FIXTURE_ATTRIBUTES_CIPHERTEXT_F6D35D47 = "attributes_ciphertext";
+  private static final String FIXTURE_CREATED_AT_BF93598C = "created_at";
+  private static final String FIXTURE_LAST_ACCESSED_AT_7FEFBA03 = "last_accessed_at";
+  private static final String FIXTURE_EXPIRES_AT_FECC6BB9 = "expires_at";
+  private static final String FIXTURE_MAX_INACTIVE_SECONDS_992F4497 = "max_inactive_seconds";
+  private static final String FIXTURE_VERSION_43CCC4D0 = "version";
+  private static final String FIXTURE_RESULT_CLOSE_17406567 = "result.close";
+  private static final String FIXTURE_STATEMENT_CLOSE_FE807BAF = "statement.close";
+  private static final String FIXTURE_CONNECTION_PREPARESTATEMENT_D4089450 =
+      "connection.prepareStatement";
+  private static final String FIXTURE_RESULT_GETOBJECT_E20BD340 = "result.getObject";
   private static final Instant NOW = Instant.parse("2026-09-08T00:00:00.123456Z");
   private static final List<String> COLUMNS =
       List.of(
           "id",
           "session_id_hash",
-          "attributes_ciphertext",
+          FIXTURE_ATTRIBUTES_CIPHERTEXT_F6D35D47,
           "key_version",
-          "created_at",
-          "last_accessed_at",
-          "expires_at",
-          "max_inactive_seconds",
-          "version");
+          FIXTURE_CREATED_AT_BF93598C,
+          FIXTURE_LAST_ACCESSED_AT_7FEFBA03,
+          FIXTURE_EXPIRES_AT_FECC6BB9,
+          FIXTURE_MAX_INACTIVE_SECONDS_992F4497,
+          FIXTURE_VERSION_43CCC4D0);
   private static final JdbcWebSessionStore STORE = new JdbcWebSessionStore();
   private static final EncryptedSessionPayload PAYLOAD =
       new EncryptedSessionPayload("v1", new byte[64]);
@@ -113,18 +124,25 @@ class JdbcWebSessionStoreTest {
           assertTrue(result.next());
           assertEquals(new UUID(0, 1), result.getObject("id", UUID.class));
           assertEquals(hash(1), result.getString("session_id_hash"));
-          assertArrayEquals(new byte[64], result.getBytes("attributes_ciphertext"));
+          assertArrayEquals(new byte[64], result.getBytes(FIXTURE_ATTRIBUTES_CIPHERTEXT_F6D35D47));
           assertEquals("v1", result.getString("key_version"));
           assertEquals(
-              NOW, result.getObject("created_at", java.time.OffsetDateTime.class).toInstant());
+              NOW,
+              result
+                  .getObject(FIXTURE_CREATED_AT_BF93598C, java.time.OffsetDateTime.class)
+                  .toInstant());
           assertEquals(
               NOW.plusSeconds(1),
-              result.getObject("last_accessed_at", java.time.OffsetDateTime.class).toInstant());
+              result
+                  .getObject(FIXTURE_LAST_ACCESSED_AT_7FEFBA03, java.time.OffsetDateTime.class)
+                  .toInstant());
           assertEquals(
               NOW.plusSeconds(28801),
-              result.getObject("expires_at", java.time.OffsetDateTime.class).toInstant());
-          assertEquals(28800, result.getInt("max_inactive_seconds"));
-          assertEquals(0, result.getLong("version"));
+              result
+                  .getObject(FIXTURE_EXPIRES_AT_FECC6BB9, java.time.OffsetDateTime.class)
+                  .toInstant());
+          assertEquals(28800, result.getInt(FIXTURE_MAX_INACTIVE_SECONDS_992F4497));
+          assertEquals(0, result.getLong(FIXTURE_VERSION_43CCC4D0));
           assertFalse(result.next());
         }
       }
@@ -363,7 +381,7 @@ class JdbcWebSessionStoreTest {
 
   @Test
   void web029EveryJdbcFailureIsRedactedAndResourcesClose() throws Exception {
-    for (String close : List.of("result.close", "statement.close")) {
+    for (String close : List.of(FIXTURE_RESULT_CLOSE_17406567, FIXTURE_STATEMENT_CLOSE_FE807BAF)) {
       try (var c = db.transaction()) {
         var fault = new Fault();
         fault.failure = close;
@@ -381,18 +399,18 @@ class JdbcWebSessionStoreTest {
               List.of(
                   "connection.getAutoCommit",
                   "connection.isReadOnly",
-                  "connection.prepareStatement",
+                  FIXTURE_CONNECTION_PREPARESTATEMENT_D4089450,
                   "statement.setString",
-                  "statement.close"));
+                  FIXTURE_STATEMENT_CLOSE_FE807BAF));
       if (op == 0)
         methods.addAll(
             List.of(
                 "statement.executeQuery",
                 "result.next",
-                "result.getObject",
+                FIXTURE_RESULT_GETOBJECT_E20BD340,
                 "result.getString",
                 "result.getBytes",
-                "result.close"));
+                FIXTURE_RESULT_CLOSE_17406567));
       else {
         methods.addAll(
             List.of("statement.setObject", "statement.setLong", "statement.executeUpdate"));
@@ -415,8 +433,9 @@ class JdbcWebSessionStoreTest {
           assertTrue(fault.hit, method);
           assertFalse(c.isClosed());
           c.rollback();
-          if (method.equals("statement.close")) assertEquals(1, fault.statementsClosed);
-          if (method.equals("result.close")) {
+          if (method.equals(FIXTURE_STATEMENT_CLOSE_FE807BAF))
+            assertEquals(1, fault.statementsClosed);
+          if (method.equals(FIXTURE_RESULT_CLOSE_17406567)) {
             assertEquals(1, fault.resultsClosed);
             assertEquals(1, fault.statementsClosed);
           }
@@ -424,8 +443,8 @@ class JdbcWebSessionStoreTest {
       }
       for (String method :
           op == 0
-              ? List.of("connection.prepareStatement", "statement.executeQuery")
-              : List.of("connection.prepareStatement")) {
+              ? List.of(FIXTURE_CONNECTION_PREPARESTATEMENT_D4089450, "statement.executeQuery")
+              : List.of(FIXTURE_CONNECTION_PREPARESTATEMENT_D4089450)) {
         try (var c = db.transaction()) {
           var fault = new Fault();
           fault.nullResource = method;
@@ -454,7 +473,7 @@ class JdbcWebSessionStoreTest {
       try (var c = db.transaction()) {
         var fault = new Fault();
         fault.columns.put(column, null);
-        fault.failure = "result.close";
+        fault.failure = FIXTURE_RESULT_CLOSE_17406567;
         unavailable(() -> STORE.findLocked(fault.wrap(c), hash(1)));
         assertTrue(fault.columnHit);
         assertEquals(1, fault.resultsClosed);
@@ -465,18 +484,24 @@ class JdbcWebSessionStoreTest {
     var invalid = new ArrayList<Map.Entry<String, Object>>();
     invalid.add(Map.entry("session_id_hash", "a".repeat(63)));
     invalid.add(Map.entry("key_version", "bad id"));
-    invalid.add(Map.entry("attributes_ciphertext", new byte[28]));
-    invalid.add(Map.entry("attributes_ciphertext", new byte[16437]));
-    invalid.add(Map.entry("created_at", NOW.plusSeconds(2).atOffset(ZoneOffset.UTC)));
-    invalid.add(Map.entry("created_at", NOW.plusNanos(1).atOffset(ZoneOffset.UTC)));
-    invalid.add(Map.entry("last_accessed_at", NOW.minusNanos(1000).atOffset(ZoneOffset.UTC)));
-    invalid.add(Map.entry("last_accessed_at", NOW.plusNanos(1).atOffset(ZoneOffset.UTC)));
-    invalid.add(Map.entry("expires_at", NOW.atOffset(ZoneOffset.UTC)));
-    invalid.add(Map.entry("expires_at", NOW.plusSeconds(2).plusNanos(1).atOffset(ZoneOffset.UTC)));
-    invalid.add(Map.entry("max_inactive_seconds", 0));
-    invalid.add(Map.entry("max_inactive_seconds", 28801));
-    invalid.add(Map.entry("version", -1L));
-    invalid.add(Map.entry("version", 1000000000L));
+    invalid.add(Map.entry(FIXTURE_ATTRIBUTES_CIPHERTEXT_F6D35D47, new byte[28]));
+    invalid.add(Map.entry(FIXTURE_ATTRIBUTES_CIPHERTEXT_F6D35D47, new byte[16437]));
+    invalid.add(
+        Map.entry(FIXTURE_CREATED_AT_BF93598C, NOW.plusSeconds(2).atOffset(ZoneOffset.UTC)));
+    invalid.add(Map.entry(FIXTURE_CREATED_AT_BF93598C, NOW.plusNanos(1).atOffset(ZoneOffset.UTC)));
+    invalid.add(
+        Map.entry(
+            FIXTURE_LAST_ACCESSED_AT_7FEFBA03, NOW.minusNanos(1000).atOffset(ZoneOffset.UTC)));
+    invalid.add(
+        Map.entry(FIXTURE_LAST_ACCESSED_AT_7FEFBA03, NOW.plusNanos(1).atOffset(ZoneOffset.UTC)));
+    invalid.add(Map.entry(FIXTURE_EXPIRES_AT_FECC6BB9, NOW.atOffset(ZoneOffset.UTC)));
+    invalid.add(
+        Map.entry(
+            FIXTURE_EXPIRES_AT_FECC6BB9, NOW.plusSeconds(2).plusNanos(1).atOffset(ZoneOffset.UTC)));
+    invalid.add(Map.entry(FIXTURE_MAX_INACTIVE_SECONDS_992F4497, 0));
+    invalid.add(Map.entry(FIXTURE_MAX_INACTIVE_SECONDS_992F4497, 28801));
+    invalid.add(Map.entry(FIXTURE_VERSION_43CCC4D0, -1L));
+    invalid.add(Map.entry(FIXTURE_VERSION_43CCC4D0, 1000000000L));
     for (var entry : invalid) {
       try (var c = db.transaction()) {
         var fault = new Fault();
@@ -501,8 +526,8 @@ class JdbcWebSessionStoreTest {
     for (boolean closeFailure : List.of(false, true)) {
       try (var connection = db.transaction()) {
         var fault = new Fault();
-        fault.runtimeFailure = "result.getObject";
-        if (closeFailure) fault.failure = "result.close";
+        fault.runtimeFailure = FIXTURE_RESULT_GETOBJECT_E20BD340;
+        if (closeFailure) fault.failure = FIXTURE_RESULT_CLOSE_17406567;
         var failure =
             assertThrows(
                 SessionStoreException.class,
@@ -528,7 +553,7 @@ class JdbcWebSessionStoreTest {
     try (var connection = db.transaction()) {
       var fault = new Fault();
       fault.columns.put("id", null);
-      fault.failure = "result.close";
+      fault.failure = FIXTURE_RESULT_CLOSE_17406567;
       SessionStoreException failure =
           assertThrows(
               SessionStoreException.class, () -> STORE.findLocked(fault.wrap(connection), hash(1)));
@@ -620,7 +645,7 @@ class JdbcWebSessionStoreTest {
         if (op != 1) STORE.insert(c, row(1, 0));
         var fault = new Fault();
         var fatal = new AssertionError("private-jdbc-fatal");
-        fault.failure = op == 0 ? "result.getObject" : "statement.setString";
+        fault.failure = op == 0 ? FIXTURE_RESULT_GETOBJECT_E20BD340 : "statement.setString";
         if (op == 0) fault.fatalClose = fatal;
         else fault.fatalStatementClose = fatal;
         assertSame(
@@ -647,7 +672,7 @@ class JdbcWebSessionStoreTest {
         var closing = new SQLException("private-jdbc-close", fatal);
         fault.resultCloseFault = closing;
         if (marker) fault.columns.put("id", null);
-        else fault.failure = "result.getObject";
+        else fault.failure = FIXTURE_RESULT_GETOBJECT_E20BD340;
         assertSame(
             fatal,
             assertThrows(AssertionError.class, () -> STORE.findLocked(fault.wrap(c), hash(1))));
@@ -750,18 +775,19 @@ class JdbcWebSessionStoreTest {
               new Class<?>[] {type},
               (proxy, method, args) -> {
                 String name = kind + "." + method.getName();
-                if (name.equals("connection.prepareStatement")) sql.add((String) args[0]);
-                if (name.equals("statement.close")) statementsClosed++;
-                if (name.equals("result.close")) resultsClosed++;
-                if (name.equals("result.close") && fatalClose != null) {
+                if (name.equals(FIXTURE_CONNECTION_PREPARESTATEMENT_D4089450))
+                  sql.add((String) args[0]);
+                if (name.equals(FIXTURE_STATEMENT_CLOSE_FE807BAF)) statementsClosed++;
+                if (name.equals(FIXTURE_RESULT_CLOSE_17406567)) resultsClosed++;
+                if (name.equals(FIXTURE_RESULT_CLOSE_17406567) && fatalClose != null) {
                   method.invoke(target, args);
                   throw fatalClose;
                 }
-                if (name.equals("statement.close") && fatalStatementClose != null) {
+                if (name.equals(FIXTURE_STATEMENT_CLOSE_FE807BAF) && fatalStatementClose != null) {
                   method.invoke(target, args);
                   throw fatalStatementClose;
                 }
-                if (name.equals("result.close") && resultCloseFault != null) {
+                if (name.equals(FIXTURE_RESULT_CLOSE_17406567) && resultCloseFault != null) {
                   method.invoke(target, args);
                   throw resultCloseFault;
                 }

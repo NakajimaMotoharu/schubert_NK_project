@@ -13,6 +13,9 @@ import org.junit.jupiter.api.Test;
 
 /** SS341/343/SSC102 independent argv/status/ownership vectors; no real stop in host PT. */
 final class MaintenanceUnitStopClientTest {
+  private static final String FIXTURE_ROOT_956E6E33 = "root";
+  private static final String FIXTURE_WAIT_F3010736 = "wait";
+
   @Test
   void monitor002CallerLockCannotBlockOwnedStopStatus() throws Exception {
     var process = child();
@@ -52,7 +55,7 @@ final class MaintenanceUnitStopClientTest {
       var sequence = new java.util.ArrayList<String>();
       var client =
           new MaintenanceUnitStopClient(
-              () -> sequence.add("root"),
+              () -> sequence.add(FIXTURE_ROOT_956E6E33),
               current -> {
                 assertSame(unit, current);
                 sequence.add("policy");
@@ -73,11 +76,19 @@ final class MaintenanceUnitStopClientTest {
       var result = client.stop(unit);
       assertEquals(MaintenanceUnitStopClient.Status.CLIENT_EXITED_ZERO, result.status());
       assertSame(unit, result.unit());
-      assertEquals(List.of("root", "policy", "root", "start", "root", "root"), sequence);
+      assertEquals(
+          List.of(
+              FIXTURE_ROOT_956E6E33,
+              "policy",
+              FIXTURE_ROOT_956E6E33,
+              "start",
+              FIXTURE_ROOT_956E6E33,
+              FIXTURE_ROOT_956E6E33),
+          sequence);
       process.allClosed();
       assertEquals(0, process.destroyed);
       assertEquals(MaintenanceUnitStopClient.Status.CLIENT_EXITED_ZERO, result.awaitClient());
-      assertEquals(1, process.counts.get("wait"));
+      assertEquals(1, process.counts.get(FIXTURE_WAIT_F3010736));
     }
   }
 
@@ -147,7 +158,7 @@ final class MaintenanceUnitStopClientTest {
     process.completed = true;
     assertEquals(MaintenanceUnitStopClient.Status.CLIENT_EXITED_ZERO, result.awaitClient());
     process.allClosed();
-    assertEquals(2, process.counts.get("wait"));
+    assertEquals(2, process.counts.get(FIXTURE_WAIT_F3010736));
     assertEquals(0, process.destroyed);
   }
 
@@ -183,7 +194,7 @@ final class MaintenanceUnitStopClientTest {
     var sentinel = new AssertionError("public unknown");
     unknown.hook =
         (name, count) -> {
-          if (name.equals("wait")) throw sentinel;
+          if (name.equals(FIXTURE_WAIT_F3010736)) throw sentinel;
         };
     var result =
         new MaintenanceUnitStopClient(() -> {}, unit -> {}, command -> unknown)
@@ -286,7 +297,7 @@ final class MaintenanceUnitStopClientTest {
     var afterWait = child();
     afterWait.hook =
         (name, count) -> {
-          if (name.equals("wait") && count == 1) Thread.currentThread().interrupt();
+          if (name.equals(FIXTURE_WAIT_F3010736) && count == 1) Thread.currentThread().interrupt();
         };
     try {
       var attempt =
@@ -381,7 +392,7 @@ final class MaintenanceUnitStopClientTest {
     int[] starts = {0};
     var client =
         new MaintenanceUnitStopClient(
-            () -> sequence.add("root"),
+            () -> sequence.add(FIXTURE_ROOT_956E6E33),
             unit -> sequence.add(unit.serviceName()),
             command -> {
               starts[0]++;
@@ -390,10 +401,10 @@ final class MaintenanceUnitStopClientTest {
     client.preflightAll();
     assertEquals(0, starts[0]);
     assertEquals(17, sequence.size());
-    assertEquals("root", sequence.getFirst());
+    assertEquals(FIXTURE_ROOT_956E6E33, sequence.getFirst());
     for (int index = 0; index < NAMES.size(); index++) {
       assertEquals(NAMES.get(index), sequence.get(1 + index * 2));
-      assertEquals("root", sequence.get(2 + index * 2));
+      assertEquals(FIXTURE_ROOT_956E6E33, sequence.get(2 + index * 2));
     }
   }
 

@@ -28,6 +28,8 @@ import org.junit.jupiter.api.Test;
 
 /** SS316/PT-NHOLD316004: self-owned loopback bind/start, never native admission. */
 final class ApiManagementBindTest {
+  private static final String FIXTURE_STOP_4E645B50 = "STOP";
+  private static final String FIXTURE_RUNTIME_2D52CD90 = "runtime";
   private static final Map<String, String> INFO =
       Map.of(
           "commit",
@@ -71,7 +73,8 @@ final class ApiManagementBindTest {
 
   @Test
   void bind316002UnstartedOwnerRetainsAndInvalidInputsPrecedeFactory() throws Exception {
-    OwnedRetentionProcess.assertHeld(StartupDriver.class, List.of("STOP"), "-1", "runtime");
+    OwnedRetentionProcess.assertHeld(
+        StartupDriver.class, List.of(FIXTURE_STOP_4E645B50), "-1", FIXTURE_RUNTIME_2D52CD90);
     var acquired = new AtomicInteger();
     ApiManagementServer.Factory forbidden =
         (address, backlog) -> {
@@ -93,9 +96,9 @@ final class ApiManagementBindTest {
   @Test
   void bind316003EveryUnconfirmedSetupReleaseRetainsWithoutStartRetry() throws Exception {
     for (int phase = 0; phase < 3; phase++) {
-      for (String kind : List.of("runtime", "error"))
+      for (String kind : List.of(FIXTURE_RUNTIME_2D52CD90, "error"))
         OwnedRetentionProcess.assertHeld(
-            StartupDriver.class, List.of("STOP"), Integer.toString(phase), kind);
+            StartupDriver.class, List.of(FIXTURE_STOP_4E645B50), Integer.toString(phase), kind);
     }
   }
 
@@ -185,8 +188,8 @@ final class ApiManagementBindTest {
 
   @Test
   void bind316005UnconfirmedCleanupRetainsTheBoundOwnerAndOuterFrame() throws Exception {
-    for (String kind : List.of("runtime", "error"))
-      OwnedRetentionProcess.assertHeld(Driver.class, List.of("START", "STOP"), kind);
+    for (String kind : List.of(FIXTURE_RUNTIME_2D52CD90, "error"))
+      OwnedRetentionProcess.assertHeld(Driver.class, List.of("START", FIXTURE_STOP_4E645B50), kind);
   }
 
   @Test
@@ -306,7 +309,7 @@ final class ApiManagementBindTest {
       OwnedRetentionProcess.deadline();
       int phase = Integer.parseInt(arguments[0]);
       Throwable marker =
-          arguments[1].equals("runtime")
+          arguments[1].equals(FIXTURE_RUNTIME_2D52CD90)
               ? new IllegalStateException("fixture setup")
               : new AssertionError("fixture setup");
       try {
@@ -320,7 +323,7 @@ final class ApiManagementBindTest {
                         new SetupFailureServer(address, backlog, phase, marker) {
                           @Override
                           public void stop(int delay) {
-                            System.out.println("STOP");
+                            System.out.println(FIXTURE_STOP_4E645B50);
                             super.stop(delay);
                           }
                         }),
@@ -345,7 +348,7 @@ final class ApiManagementBindTest {
     public static void main(String[] arguments) throws IOException {
       OwnedRetentionProcess.deadline();
       Throwable marker =
-          arguments[0].equals("runtime")
+          arguments[0].equals(FIXTURE_RUNTIME_2D52CD90)
               ? new IllegalStateException("fixture unknown")
               : new AssertionError("fixture unknown");
       try {
@@ -366,7 +369,7 @@ final class ApiManagementBindTest {
 
                           @Override
                           public void stop(int delay) {
-                            System.out.println("STOP");
+                            System.out.println(FIXTURE_STOP_4E645B50);
                             if (marker instanceof RuntimeException runtime) throw runtime;
                             throw (Error) marker;
                           }

@@ -32,6 +32,20 @@ import org.junit.jupiter.api.function.Executable;
 
 /** OPS-009/UI251/SS343 6.12; PG-D-155; GID001..008; only synthetic opaque group fields persist. */
 final class ConfigurationGroupResolverTest {
+  private static final String FIXTURE_GETOUTPUT_EDEDFDA6 = "getOutput";
+  private static final String FIXTURE_GETINPUT_C176A12E = "getInput";
+  private static final String FIXTURE_GETERROR_B99C59FA = "getError";
+  private static final String FIXTURE_READ_6F365882 = "read";
+  private static final String FIXTURE_WAIT_F3010736 = "wait";
+  private static final String FIXTURE_EXIT_397F64AC = "exit";
+  private static final String FIXTURE_CLOSEERROR_A8973196 = "closeError";
+  private static final String FIXTURE_CLOSEINPUT_52DA80F1 = "closeInput";
+  private static final String FIXTURE_CLOSEOUTPUT_1CE26F68 = "closeOutput";
+  private static final String FIXTURE_TIMEOUT_492BD020 = "timeout";
+  private static final String FIXTURE_INTERRUPT_DDE42D5D = "interrupt";
+  private static final String FIXTURE_RUNTIME_2D52CD90 = "runtime";
+  private static final String FIXTURE_OVERSIZE_F21E85A5 = "oversize";
+  private static final String FIXTURE_EXCEPTION_C22CB22F = "exception";
   private static final List<String> COMMAND = List.of("/usr/bin/getent", "group", "schubert");
   private static final byte[] RECORD = ascii("schubert:x:2000:member\n");
 
@@ -108,13 +122,21 @@ final class ConfigurationGroupResolverTest {
   void ownedCommandAndExit() throws Exception {
     var child = new Child(RECORD);
     assertEquals(2000, resolver(child).resolve());
-    assertEquals(List.of("getOutput", "getInput", "getError"), child.events.subList(0, 3));
-    assertEquals(2, Collections.frequency(child.events, "read"));
-    assertEquals(1, Collections.frequency(child.events, "wait"));
-    assertEquals(1, Collections.frequency(child.events, "exit"));
-    assertTrue(child.events.lastIndexOf("read") < child.events.indexOf("closeError"));
     assertEquals(
-        List.of("closeError", "closeInput", "closeOutput", "alive"),
+        List.of(FIXTURE_GETOUTPUT_EDEDFDA6, FIXTURE_GETINPUT_C176A12E, FIXTURE_GETERROR_B99C59FA),
+        child.events.subList(0, 3));
+    assertEquals(2, Collections.frequency(child.events, FIXTURE_READ_6F365882));
+    assertEquals(1, Collections.frequency(child.events, FIXTURE_WAIT_F3010736));
+    assertEquals(1, Collections.frequency(child.events, FIXTURE_EXIT_397F64AC));
+    assertTrue(
+        child.events.lastIndexOf(FIXTURE_READ_6F365882)
+            < child.events.indexOf(FIXTURE_CLOSEERROR_A8973196));
+    assertEquals(
+        List.of(
+            FIXTURE_CLOSEERROR_A8973196,
+            FIXTURE_CLOSEINPUT_52DA80F1,
+            FIXTURE_CLOSEOUTPUT_1CE26F68,
+            "alive"),
         child.events.subList(child.events.size() - 4, child.events.size()));
     assertEquals(65537, child.maximum);
     child.closedAndCleared();
@@ -140,13 +162,14 @@ final class ConfigurationGroupResolverTest {
 
   @Test
   void timeoutInterruptAndTermination() throws Exception {
-    for (String mode : List.of("timeout", "interrupt")) {
+    for (String mode : List.of(FIXTURE_TIMEOUT_492BD020, FIXTURE_INTERRUPT_DDE42D5D)) {
       var child = new Child(RECORD);
       child.mode = mode;
       child.alive = true;
       try {
         failure(() -> resolver(child).resolve());
-        assertEquals(mode.equals("interrupt"), Thread.currentThread().isInterrupted());
+        assertEquals(
+            mode.equals(FIXTURE_INTERRUPT_DDE42D5D), Thread.currentThread().isInterrupted());
         assertEquals(1, child.destroyed);
         assertEquals(0, child.forceDestroyed);
         child.closedAndCleared();
@@ -179,15 +202,28 @@ final class ConfigurationGroupResolverTest {
   @Test
   void stdioFailureMatrix() throws Exception {
     // PG174/SSC063/BUG195/YKT154: private IO scope keeps the existing Future oracle.
-    for (String scope : List.of("closeOutput", "closeInput", "closeError", "destroy"))
+    for (String scope :
+        List.of(
+            FIXTURE_CLOSEOUTPUT_1CE26F68,
+            FIXTURE_CLOSEINPUT_52DA80F1,
+            FIXTURE_CLOSEERROR_A8973196,
+            "destroy"))
       for (String primary :
-          List.of("runtime", "read", "timeout", "interrupt", "exit", "oversize", "success"))
+          List.of(
+              FIXTURE_RUNTIME_2D52CD90,
+              FIXTURE_READ_6F365882,
+              FIXTURE_TIMEOUT_492BD020,
+              FIXTURE_INTERRUPT_DDE42D5D,
+              FIXTURE_EXIT_397F64AC,
+              FIXTURE_OVERSIZE_F21E85A5,
+              "success"))
         for (Throwable unknown :
             List.of(
                 new IllegalStateException("synthetic compound"),
                 new NullPointerException("synthetic compound"),
                 new AssertionError("synthetic compound"))) {
-          var child = new Child(primary.equals("oversize") ? new byte[65537] : RECORD);
+          var child =
+              new Child(primary.equals(FIXTURE_OVERSIZE_F21E85A5) ? new byte[65537] : RECORD);
           child.alive = true;
           int[] injected = {0};
           child.compound =
@@ -196,16 +232,20 @@ final class ConfigurationGroupResolverTest {
                   injected[0]++;
                   throwUnknown(unknown);
                 }
-                if (name.equals("wait") && primary.equals("runtime")) throwUnknown(unknown);
+                if (name.equals(FIXTURE_WAIT_F3010736) && primary.equals(FIXTURE_RUNTIME_2D52CD90))
+                  throwUnknown(unknown);
               };
-          if (primary.equals("exit")) child.exit = 2;
-          if (primary.equals("timeout") || primary.equals("interrupt")) child.mode = primary;
-          if (primary.equals("read")) child.readBehavior = "exception";
+          if (primary.equals(FIXTURE_EXIT_397F64AC)) child.exit = 2;
+          if (primary.equals(FIXTURE_TIMEOUT_492BD020)
+              || primary.equals(FIXTURE_INTERRUPT_DDE42D5D)) child.mode = primary;
+          if (primary.equals(FIXTURE_READ_6F365882))
+            child.readBehavior = FIXTURE_EXCEPTION_C22CB22F;
           try {
             Throwable actual = assertThrows(unknown.getClass(), () -> resolver(child).resolve());
             assertSame(unknown, actual);
-            assertEquals(primary.equals("runtime") ? 1 : 0, actual.getSuppressed().length);
-            if (primary.equals("runtime")) {
+            assertEquals(
+                primary.equals(FIXTURE_RUNTIME_2D52CD90) ? 1 : 0, actual.getSuppressed().length);
+            if (primary.equals(FIXTURE_RUNTIME_2D52CD90)) {
               var fixed = assertInstanceOf(IOException.class, actual.getSuppressed()[0]);
               assertEquals("configuration group lookup failed", fixed.getMessage());
               assertNull(fixed.getCause());
@@ -214,45 +254,61 @@ final class ConfigurationGroupResolverTest {
             assertEquals(1, injected[0]);
             assertEquals(1, child.destroyed);
             assertEquals(0, child.forceDestroyed);
-            assertTrue(child.events.contains("wait"));
-            assertEquals(primary.equals("interrupt"), Thread.currentThread().isInterrupted());
+            assertTrue(child.events.contains(FIXTURE_WAIT_F3010736));
+            assertEquals(
+                primary.equals(FIXTURE_INTERRUPT_DDE42D5D), Thread.currentThread().isInterrupted());
             child.closedAndCleared();
-            assertArrayEquals(primary.equals("oversize") ? new byte[65537] : RECORD, child.record);
+            assertArrayEquals(
+                primary.equals(FIXTURE_OVERSIZE_F21E85A5) ? new byte[65537] : RECORD, child.record);
           } finally {
             Thread.interrupted();
           }
         }
-    for (String getter : List.of("getOutput", "getInput", "getError")) {
+    for (String getter :
+        List.of(FIXTURE_GETOUTPUT_EDEDFDA6, FIXTURE_GETINPUT_C176A12E, FIXTURE_GETERROR_B99C59FA)) {
       var child = new Child(RECORD);
       child.getFailure = getter;
       child.alive = true;
       assertSame(
           child.runtime,
           assertThrows(IllegalStateException.class, () -> resolver(child).resolve()));
-      assertEquals(getter.equals("getOutput") ? 0 : 1, child.outputClosed);
-      assertEquals(getter.equals("getError") ? 1 : 0, child.inputClosed);
+      assertEquals(getter.equals(FIXTURE_GETOUTPUT_EDEDFDA6) ? 0 : 1, child.outputClosed);
+      assertEquals(getter.equals(FIXTURE_GETERROR_B99C59FA) ? 1 : 0, child.inputClosed);
       assertEquals(0, child.errorClosed);
       assertEquals(1, child.destroyed);
     }
-    for (String missing : List.of("getOutput", "getInput", "getError")) {
+    for (String missing :
+        List.of(FIXTURE_GETOUTPUT_EDEDFDA6, FIXTURE_GETINPUT_C176A12E, FIXTURE_GETERROR_B99C59FA)) {
       var child = new Child(RECORD);
       child.nullGetter = missing;
       assertThrows(NullPointerException.class, () -> resolver(child).resolve());
-      assertEquals(missing.equals("getOutput") ? 0 : 1, child.outputClosed);
-      assertEquals(missing.equals("getInput") ? 0 : 1, child.inputClosed);
-      assertEquals(missing.equals("getError") ? 0 : 1, child.errorClosed);
+      assertEquals(missing.equals(FIXTURE_GETOUTPUT_EDEDFDA6) ? 0 : 1, child.outputClosed);
+      assertEquals(missing.equals(FIXTURE_GETINPUT_C176A12E) ? 0 : 1, child.inputClosed);
+      assertEquals(missing.equals(FIXTURE_GETERROR_B99C59FA) ? 0 : 1, child.errorClosed);
     }
-    for (String close : List.of("closeOutput", "closeInput", "closeError", "all"))
+    for (String close :
+        List.of(
+            FIXTURE_CLOSEOUTPUT_1CE26F68,
+            FIXTURE_CLOSEINPUT_52DA80F1,
+            FIXTURE_CLOSEERROR_A8973196,
+            "all"))
       for (String primary :
-          List.of("success", "exit", "timeout", "interrupt", "read", "oversize")) {
-        var child = new Child(primary.equals("oversize") ? new byte[65537] : RECORD);
+          List.of(
+              "success",
+              FIXTURE_EXIT_397F64AC,
+              FIXTURE_TIMEOUT_492BD020,
+              FIXTURE_INTERRUPT_DDE42D5D,
+              FIXTURE_READ_6F365882,
+              FIXTURE_OVERSIZE_F21E85A5)) {
+        var child = new Child(primary.equals(FIXTURE_OVERSIZE_F21E85A5) ? new byte[65537] : RECORD);
         child.closeFailure = close;
-        if (primary.equals("exit")) child.exit = 2;
-        if (primary.equals("timeout") || primary.equals("interrupt")) {
+        if (primary.equals(FIXTURE_EXIT_397F64AC)) child.exit = 2;
+        if (primary.equals(FIXTURE_TIMEOUT_492BD020)
+            || primary.equals(FIXTURE_INTERRUPT_DDE42D5D)) {
           child.mode = primary;
           child.alive = true;
         }
-        if (primary.equals("read")) child.readBehavior = "exception";
+        if (primary.equals(FIXTURE_READ_6F365882)) child.readBehavior = FIXTURE_EXCEPTION_C22CB22F;
         try {
           failure(() -> resolver(child).resolve());
           child.closedAndCleared();
@@ -260,7 +316,8 @@ final class ConfigurationGroupResolverTest {
           Thread.interrupted();
         }
       }
-    for (String point : List.of("wait", "exit", "closeOutput")) {
+    for (String point :
+        List.of(FIXTURE_WAIT_F3010736, FIXTURE_EXIT_397F64AC, FIXTURE_CLOSEOUTPUT_1CE26F68)) {
       var child = new Child(RECORD);
       child.runtimeAt = point;
       assertSame(
@@ -269,7 +326,7 @@ final class ConfigurationGroupResolverTest {
       child.closedAndCleared();
     }
     var programming = new Child(RECORD);
-    programming.runtimeAt = "read";
+    programming.runtimeAt = FIXTURE_READ_6F365882;
     var rejected = assertThrows(IllegalStateException.class, () -> resolver(programming).resolve());
     assertEquals("configuration group reader failed", rejected.getMessage());
     assertNull(rejected.getCause());
@@ -283,7 +340,7 @@ final class ConfigurationGroupResolverTest {
 
   @Test
   void sourceBufferAndNoLeak() throws Exception {
-    for (String mode : List.of("zero", "negative", "overflow", "exception")) {
+    for (String mode : List.of("zero", "negative", "overflow", FIXTURE_EXCEPTION_C22CB22F)) {
       var child = new Child(RECORD);
       child.readBehavior = mode;
       failure(() -> resolver(child).resolve());
@@ -456,15 +513,16 @@ final class ConfigurationGroupResolverTest {
 
     void closeEvent(String name) throws IOException {
       event(name);
-      if (interruptClose && name.equals("closeOutput")) Thread.currentThread().interrupt();
+      if (interruptClose && name.equals(FIXTURE_CLOSEOUTPUT_1CE26F68))
+        Thread.currentThread().interrupt();
       if (closeFailure.equals(name) || closeFailure.equals("all"))
         throw new IOException("synthetic opaque close diagnostic");
     }
 
     @Override
     public InputStream getInputStream() {
-      event("getOutput");
-      if (nullGetter.equals("getOutput")) return null;
+      event(FIXTURE_GETOUTPUT_EDEDFDA6);
+      if (nullGetter.equals(FIXTURE_GETOUTPUT_EDEDFDA6)) return null;
       return new InputStream() {
         @Override
         public int read() {
@@ -473,7 +531,7 @@ final class ConfigurationGroupResolverTest {
 
         @Override
         public int read(byte[] target, int offset, int length) throws IOException {
-          event("read");
+          event(FIXTURE_READ_6F365882);
           observed.add(target);
           maximum = Math.max(maximum, target.length);
           assertEquals(65537, target.length);
@@ -481,7 +539,7 @@ final class ConfigurationGroupResolverTest {
           if (readBehavior.equals("zero")) return 0;
           if (readBehavior.equals("negative")) return -2;
           if (readBehavior.equals("overflow")) return length + 1;
-          if (readBehavior.equals("exception")) {
+          if (readBehavior.equals(FIXTURE_EXCEPTION_C22CB22F)) {
             target[offset] = 99;
             throw new IOException("synthetic opaque read diagnostic");
           }
@@ -495,15 +553,15 @@ final class ConfigurationGroupResolverTest {
         @Override
         public void close() throws IOException {
           outputClosed++;
-          closeEvent("closeOutput");
+          closeEvent(FIXTURE_CLOSEOUTPUT_1CE26F68);
         }
       };
     }
 
     @Override
     public OutputStream getOutputStream() {
-      event("getInput");
-      if (nullGetter.equals("getInput")) return null;
+      event(FIXTURE_GETINPUT_C176A12E);
+      if (nullGetter.equals(FIXTURE_GETINPUT_C176A12E)) return null;
       return new OutputStream() {
         @Override
         public void write(int value) {
@@ -513,15 +571,15 @@ final class ConfigurationGroupResolverTest {
         @Override
         public void close() throws IOException {
           inputClosed++;
-          closeEvent("closeInput");
+          closeEvent(FIXTURE_CLOSEINPUT_52DA80F1);
         }
       };
     }
 
     @Override
     public InputStream getErrorStream() {
-      event("getError");
-      if (nullGetter.equals("getError")) return null;
+      event(FIXTURE_GETERROR_B99C59FA);
+      if (nullGetter.equals(FIXTURE_GETERROR_B99C59FA)) return null;
       return new InputStream() {
         @Override
         public int read() {
@@ -531,18 +589,19 @@ final class ConfigurationGroupResolverTest {
         @Override
         public void close() throws IOException {
           errorClosed++;
-          closeEvent("closeError");
+          closeEvent(FIXTURE_CLOSEERROR_A8973196);
         }
       };
     }
 
     @Override
     public boolean waitFor(long time, TimeUnit unit) throws InterruptedException {
-      event("wait");
+      event(FIXTURE_WAIT_F3010736);
       assertEquals(5, time);
       assertEquals(TimeUnit.SECONDS, unit);
-      if (mode.equals("interrupt")) throw new InterruptedException("synthetic wait diagnostic");
-      return !mode.equals("timeout");
+      if (mode.equals(FIXTURE_INTERRUPT_DDE42D5D))
+        throw new InterruptedException("synthetic wait diagnostic");
+      return !mode.equals(FIXTURE_TIMEOUT_492BD020);
     }
 
     @Override
@@ -552,7 +611,7 @@ final class ConfigurationGroupResolverTest {
 
     @Override
     public int exitValue() {
-      event("exit");
+      event(FIXTURE_EXIT_397F64AC);
       return exit;
     }
 

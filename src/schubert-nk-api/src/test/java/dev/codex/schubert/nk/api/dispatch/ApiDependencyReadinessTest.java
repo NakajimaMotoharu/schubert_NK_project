@@ -28,6 +28,15 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** PG234/266/PT-JMS-019/022: borrowed API DB/JMS admission, not broker management readiness. */
 final class ApiDependencyReadinessTest {
+  private static final String FIXTURE_NK_SYNC_REQUEST_NK_SYNC_REQUEST_Q_D0778F85 =
+      "nk.sync.request::nk.sync.request.q";
+  private static final String FIXTURE_NK_WEB_LOG_NK_WEB_LOG_Q_BD49E4FA = "nk.web.log::nk.web.log.q";
+  private static final String FIXTURE_API_ARTEMIS_RECEIVE_QUEUES_UNAVAILABLE_949A1CD8 =
+      "API Artemis receive queues unavailable";
+  private static final String FIXTURE_PRIVATE_MQ_PASSWORD_36C97947 = "private-mq-password";
+  private static final String FIXTURE_GETSESSIONMODE_BF25AD1A = "getSessionMode";
+  private static final String FIXTURE_CLOSE_97959247 = "close";
+
   @Test
   void thirdProfileProbesOnlyFixedAsyncQueueAndEveryNullPortIsRejected() {
     var closes = new AtomicInteger();
@@ -36,14 +45,17 @@ final class ApiDependencyReadinessTest {
     java.util.function.Supplier<JMSContext> sync =
         () ->
             singleQueueContext(
-                "nk.sync.request::nk.sync.request.q",
+                FIXTURE_NK_SYNC_REQUEST_NK_SYNC_REQUEST_Q_D0778F85,
                 false,
                 new AtomicInteger(),
                 new AtomicInteger());
     java.util.function.Supplier<JMSContext> log =
         () ->
             singleQueueContext(
-                "nk.web.log::nk.web.log.q", false, new AtomicInteger(), new AtomicInteger());
+                FIXTURE_NK_WEB_LOG_NK_WEB_LOG_Q_BD49E4FA,
+                false,
+                new AtomicInteger(),
+                new AtomicInteger());
     java.util.function.Supplier<JMSContext> async =
         () -> singleQueueContext("nk.async.work::nk.async.work.q", false, attaches, closes);
     new ApiDependencyReadiness(db, sync, log, async).verify();
@@ -118,8 +130,13 @@ final class ApiDependencyReadinessTest {
             db,
             () ->
                 singleQueueContext(
-                    "nk.sync.request::nk.sync.request.q", false, syncAttaches, syncCloses),
-            () -> singleQueueContext("nk.web.log::nk.web.log.q", false, logAttaches, logCloses));
+                    FIXTURE_NK_SYNC_REQUEST_NK_SYNC_REQUEST_Q_D0778F85,
+                    false,
+                    syncAttaches,
+                    syncCloses),
+            () ->
+                singleQueueContext(
+                    FIXTURE_NK_WEB_LOG_NK_WEB_LOG_Q_BD49E4FA, false, logAttaches, logCloses));
     assertDoesNotThrow(admission::verify);
     assertEquals(1, syncAttaches.get());
     assertEquals(1, logAttaches.get());
@@ -139,10 +156,15 @@ final class ApiDependencyReadinessTest {
             db,
             () ->
                 singleQueueContext(
-                    "nk.sync.request::nk.sync.request.q", false, syncAttaches, syncCloses),
-            () -> singleQueueContext("nk.web.log::nk.web.log.q", true, logAttaches, logCloses));
+                    FIXTURE_NK_SYNC_REQUEST_NK_SYNC_REQUEST_Q_D0778F85,
+                    false,
+                    syncAttaches,
+                    syncCloses),
+            () ->
+                singleQueueContext(
+                    FIXTURE_NK_WEB_LOG_NK_WEB_LOG_Q_BD49E4FA, true, logAttaches, logCloses));
     var failure = assertThrows(IllegalStateException.class, admission::verify);
-    assertEquals("API Artemis receive queues unavailable", failure.getMessage());
+    assertEquals(FIXTURE_API_ARTEMIS_RECEIVE_QUEUES_UNAVAILABLE_949A1CD8, failure.getMessage());
     assertNull(failure.getCause());
     assertEquals(1, syncAttaches.get());
     assertEquals(1, logAttaches.get());
@@ -206,7 +228,7 @@ final class ApiDependencyReadinessTest {
         java.util.List.of(
             (java.util.function.Supplier<JMSContext>) () -> null,
             () -> {
-              throw new JMSRuntimeException("private-mq-password");
+              throw new JMSRuntimeException(FIXTURE_PRIVATE_MQ_PASSWORD_36C97947);
             },
             () -> context(false, 0, false, closes),
             () -> context(true, 1, false, closes),
@@ -215,7 +237,7 @@ final class ApiDependencyReadinessTest {
       var failure =
           assertThrows(
               IllegalStateException.class, () -> new ApiDependencyReadiness(db, broker).verify());
-      assertEquals("API Artemis receive queues unavailable", failure.getMessage());
+      assertEquals(FIXTURE_API_ARTEMIS_RECEIVE_QUEUES_UNAVAILABLE_949A1CD8, failure.getMessage());
       assertNull(failure.getCause());
     }
     assertEquals(4, closes.get());
@@ -228,7 +250,7 @@ final class ApiDependencyReadinessTest {
     try (var factory = new ActiveMQConnectionFactory("vm://0")) {
       var db = source(() -> connection(true, false, false, new AtomicInteger()));
       assertEquals(
-          "API Artemis receive queues unavailable",
+          FIXTURE_API_ARTEMIS_RECEIVE_QUEUES_UNAVAILABLE_949A1CD8,
           assertThrows(
                   IllegalStateException.class,
                   () ->
@@ -249,8 +271,8 @@ final class ApiDependencyReadinessTest {
         proxy(
             JMSContext.class,
             (ignored, method, args) -> {
-              if (method.getName().equals("getSessionMode")) throw inspection;
-              if (method.getName().equals("close")) {
+              if (method.getName().equals(FIXTURE_GETSESSIONMODE_BF25AD1A)) throw inspection;
+              if (method.getName().equals(FIXTURE_CLOSE_97959247)) {
                 closed.incrementAndGet();
                 throw fatal;
               }
@@ -274,8 +296,8 @@ final class ApiDependencyReadinessTest {
         proxy(
             JMSContext.class,
             (ignored, method, args) -> {
-              if (method.getName().equals("getSessionMode")) throw inspection;
-              if (method.getName().equals("close")) {
+              if (method.getName().equals(FIXTURE_GETSESSIONMODE_BF25AD1A)) throw inspection;
+              if (method.getName().equals(FIXTURE_CLOSE_97959247)) {
                 closed.incrementAndGet();
                 throw closeFailure;
               }
@@ -285,7 +307,7 @@ final class ApiDependencyReadinessTest {
         assertThrows(
             IllegalStateException.class,
             () -> new ApiDependencyReadiness(database, () -> context).verify());
-    assertEquals("API Artemis receive queues unavailable", observed.getMessage());
+    assertEquals(FIXTURE_API_ARTEMIS_RECEIVE_QUEUES_UNAVAILABLE_949A1CD8, observed.getMessage());
     assertNull(observed.getCause());
     assertEquals(1, closed.get());
   }
@@ -300,8 +322,8 @@ final class ApiDependencyReadinessTest {
         proxy(
             JMSContext.class,
             (ignored, method, args) -> {
-              if (method.getName().equals("getSessionMode")) throw inspection;
-              if (method.getName().equals("close")) {
+              if (method.getName().equals(FIXTURE_GETSESSIONMODE_BF25AD1A)) throw inspection;
+              if (method.getName().equals(FIXTURE_CLOSE_97959247)) {
                 closed.incrementAndGet();
                 throw closeFailure;
               }
@@ -328,7 +350,7 @@ final class ApiDependencyReadinessTest {
                     Connection.class,
                     (ignored, method, args) -> {
                       if (method.getName().equals("isValid")) throw inspection;
-                      if (method.getName().equals("close")) {
+                      if (method.getName().equals(FIXTURE_CLOSE_97959247)) {
                         closed.incrementAndGet();
                         throw fatal;
                       }
@@ -384,7 +406,7 @@ final class ApiDependencyReadinessTest {
         Connection.class,
         (ignored, method, args) -> {
           if (method.getName().equals("isValid")) throw inspection;
-          if (method.getName().equals("close")) {
+          if (method.getName().equals(FIXTURE_CLOSE_97959247)) {
             closed.incrementAndGet();
             throw closeFailure;
           }
@@ -403,7 +425,7 @@ final class ApiDependencyReadinessTest {
                 if (inspectFails) throw new SQLException("private-db-password");
                 yield valid;
               }
-              case "close" -> {
+              case FIXTURE_CLOSE_97959247 -> {
                 closes.incrementAndGet();
                 if (closeFails) throw new SQLException("private-db-password");
                 yield null;
@@ -419,24 +441,27 @@ final class ApiDependencyReadinessTest {
         JMSContext.class,
         (ignored, method, arguments) ->
             switch (method.getName()) {
-              case "getSessionMode" ->
+              case FIXTURE_GETSESSIONMODE_BF25AD1A ->
                   transacted ? JMSContext.SESSION_TRANSACTED : JMSContext.AUTO_ACKNOWLEDGE;
               case "createConsumer" -> {
                 int index = attaches.incrementAndGet();
                 assertEquals(
-                    index == 1 ? "nk.sync.request::nk.sync.request.q" : "nk.web.log::nk.web.log.q",
+                    index == 1
+                        ? FIXTURE_NK_SYNC_REQUEST_NK_SYNC_REQUEST_Q_D0778F85
+                        : FIXTURE_NK_WEB_LOG_NK_WEB_LOG_Q_BD49E4FA,
                     ((jakarta.jms.Queue) arguments[0]).getQueueName());
-                if (index == attachFailure) throw new JMSRuntimeException("private-mq-password");
+                if (index == attachFailure)
+                  throw new JMSRuntimeException(FIXTURE_PRIVATE_MQ_PASSWORD_36C97947);
                 yield proxy(
                     JMSConsumer.class,
                     (consumer, called, args) -> {
-                      if (called.getName().equals("close")) return null;
+                      if (called.getName().equals(FIXTURE_CLOSE_97959247)) return null;
                       throw new AssertionError(called.getName());
                     });
               }
-              case "close" -> {
+              case FIXTURE_CLOSE_97959247 -> {
                 closes.incrementAndGet();
-                if (closeFails) throw new JMSRuntimeException("private-mq-password");
+                if (closeFails) throw new JMSRuntimeException(FIXTURE_PRIVATE_MQ_PASSWORD_36C97947);
                 yield null;
               }
               default -> throw new AssertionError(method.getName());
@@ -449,19 +474,20 @@ final class ApiDependencyReadinessTest {
         JMSContext.class,
         (ignored, method, arguments) ->
             switch (method.getName()) {
-              case "getSessionMode" -> JMSContext.SESSION_TRANSACTED;
+              case FIXTURE_GETSESSIONMODE_BF25AD1A -> JMSContext.SESSION_TRANSACTED;
               case "createConsumer" -> {
                 assertEquals(expected, ((jakarta.jms.Queue) arguments[0]).getQueueName());
                 attaches.incrementAndGet();
-                if (attachFails) throw new JMSRuntimeException("private-mq-password");
+                if (attachFails)
+                  throw new JMSRuntimeException(FIXTURE_PRIVATE_MQ_PASSWORD_36C97947);
                 yield proxy(
                     JMSConsumer.class,
                     (consumer, called, args) -> {
-                      if (called.getName().equals("close")) return null;
+                      if (called.getName().equals(FIXTURE_CLOSE_97959247)) return null;
                       throw new AssertionError(called.getName());
                     });
               }
-              case "close" -> {
+              case FIXTURE_CLOSE_97959247 -> {
                 closes.incrementAndGet();
                 yield null;
               }

@@ -38,6 +38,7 @@ import org.junit.jupiter.api.io.TempDir;
  * non-native Access never acquire JDBC/Unit/owner authority.
  */
 final class MorningDatabaseAccessContractTest {
+  private static final String FIXTURE_SCHUBERT_BATCH_F9C88479 = "schubert_batch";
   private static final BatchRun RUN =
       new BatchRun(
           UUID.fromString("58500000-2222-4333-8444-555555555555"),
@@ -239,10 +240,26 @@ final class MorningDatabaseAccessContractTest {
             Map.of());
     var expected =
         new MorningDatabaseSession.DatabaseObservation(
-            "schubert_batch", "schubert_batch", "schubert_nk", true, false, 2, false, true, facts);
+            FIXTURE_SCHUBERT_BATCH_F9C88479,
+            FIXTURE_SCHUBERT_BATCH_F9C88479,
+            "schubert_nk",
+            true,
+            false,
+            2,
+            false,
+            true,
+            facts);
     var changed =
         new MorningDatabaseSession.DatabaseObservation(
-            "schubert_batch", "schubert_batch", "schubert_nk", false, false, 2, false, true, facts);
+            FIXTURE_SCHUBERT_BATCH_F9C88479,
+            FIXTURE_SCHUBERT_BATCH_F9C88479,
+            "schubert_nk",
+            false,
+            false,
+            2,
+            false,
+            true,
+            facts);
     var observed = new java.util.concurrent.atomic.AtomicReference<>(expected);
     var reads = new AtomicInteger();
     var access =

@@ -60,6 +60,12 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** RERUN006A..G: literal UI/independent JCA/SQL; borrowed local DB/key owners, not native. */
 final class LocalLogoutCoordinatorTest {
+  private static final String FIXTURE_0000_876EEFE0 = "0000";
+  private static final String FIXTURE_0102_C967CE66 = "0102";
+  private static final String FIXTURE_9000_0CDC37EC = "9000";
+  private static final String FIXTURE_ACQUIRE_1585EBC6 = "acquire";
+  private static final String FIXTURE_CLOSE_97959247 = "close";
+  private static final String FIXTURE_REVOKE_4DBB5115 = "revoke";
   private static final Instant NOW = Instant.parse("2026-09-08T00:00:00.123456Z");
   private static final AuthenticationContext AUTH = AuthenticationContext.of("b".repeat(64));
   private static final SessionPrincipal PRINCIPAL =
@@ -87,7 +93,7 @@ final class LocalLogoutCoordinatorTest {
 
   @Test
   void rerun006aConfirmedAndIdempotentDeleteOnlyOldSessionNeverQueue() throws Exception {
-    for (String code : List.of("0000", "0200")) {
+    for (String code : List.of(FIXTURE_0000_876EEFE0, "0200")) {
       reset();
       try (var f = new Fixture()) {
         var id = f.authenticated();
@@ -106,7 +112,13 @@ final class LocalLogoutCoordinatorTest {
   @Test
   void rerun006bFailedWireAtomicRetainDestroyUnknownExpiryAndIndependentCipher() throws Exception {
     for (String mode :
-        List.of("0102", "9000", "bad-context", "bad-correlation", "timeout", "lost")) {
+        List.of(
+            FIXTURE_0102_C967CE66,
+            FIXTURE_9000_0CDC37EC,
+            "bad-context",
+            "bad-correlation",
+            "timeout",
+            "lost")) {
       reset();
       try (var f = new Fixture()) {
         var id = f.authenticated();
@@ -116,9 +128,9 @@ final class LocalLogoutCoordinatorTest {
         assertEquals(1, pending());
         assertEquals(1, f.ids.size());
         String reason =
-            mode.equals("0102")
+            mode.equals(FIXTURE_0102_C967CE66)
                 ? "SESSION_INVALID"
-                : mode.equals("9000")
+                : mode.equals(FIXTURE_9000_0CDC37EC)
                     ? "API_REJECTED"
                     : mode.startsWith("bad-") ? "INVALID_RESPONSE" : "UNAVAILABLE";
         verifyRetained(reason);
@@ -134,7 +146,7 @@ final class LocalLogoutCoordinatorTest {
       throws Exception {
     for (String mode :
         List.of(
-            "acquire",
+            FIXTURE_ACQUIRE_1585EBC6,
             "null",
             "setAutoCommit",
             "setReadOnly",
@@ -142,17 +154,18 @@ final class LocalLogoutCoordinatorTest {
             "delete",
             "commit",
             "commit-after",
-            "close")) {
+            FIXTURE_CLOSE_97959247)) {
       reset();
       try (var f = new Fixture()) {
         var id = f.authenticated();
-        f.mode = "9000";
+        f.mode = FIXTURE_9000_0CDC37EC;
         f.fault = mode;
         f.acquisitions.set(0);
         fixed(() -> f.coordinator().logout(id, AUTH));
         assertFalse(exists(id));
         assertEquals(1, f.ids.size());
-        assertEquals(mode.equals("commit-after") || mode.equals("close") ? 1 : 0, pending());
+        assertEquals(
+            mode.equals("commit-after") || mode.equals(FIXTURE_CLOSE_97959247) ? 1 : 0, pending());
         assertEquals(0, f.active.get());
         f.resources();
       }
@@ -160,7 +173,7 @@ final class LocalLogoutCoordinatorTest {
     reset();
     try (var f = new Fixture()) {
       var id = f.authenticated();
-      f.code = "0000";
+      f.code = FIXTURE_0000_876EEFE0;
       f.fault = "delete";
       f.acquisitions.set(0);
       fixed(() -> f.coordinator().logout(id, AUTH));
@@ -176,7 +189,7 @@ final class LocalLogoutCoordinatorTest {
       reset();
       try (var f = new Fixture()) {
         var id = f.authenticated();
-        f.mode = "9000";
+        f.mode = FIXTURE_9000_0CDC37EC;
         if (closedCodec) f.revoke.close();
         else f.clock.at = null;
         fixed(() -> f.coordinator().logout(id, AUTH));
@@ -188,8 +201,8 @@ final class LocalLogoutCoordinatorTest {
     reset();
     try (var f = new Fixture()) {
       var id = f.authenticated();
-      f.mode = "9000";
-      f.fault = "acquire";
+      f.mode = FIXTURE_9000_0CDC37EC;
+      f.fault = FIXTURE_ACQUIRE_1585EBC6;
       f.always = true;
       f.acquisitions.set(0);
       fixed(() -> f.coordinator().logout(id, AUTH));
@@ -209,7 +222,7 @@ final class LocalLogoutCoordinatorTest {
       try (var f = new Fixture()) {
         var id = f.authenticated();
         var fatal = new AssertionError("private-fatal-marker");
-        f.mode = "9000";
+        f.mode = FIXTURE_9000_0CDC37EC;
         f.acquisitions.set(0);
         if (mode.equals("wire")) f.wireFatal = fatal;
         else if (mode.equals("same-fatal")) {
@@ -219,7 +232,7 @@ final class LocalLogoutCoordinatorTest {
           f.fault = "enqueue";
           f.closeFatal = fatal;
         } else {
-          f.fault = "acquire";
+          f.fault = FIXTURE_ACQUIRE_1585EBC6;
           f.closeFatal = fatal;
           f.fatalIndex = 2;
         }
@@ -239,7 +252,7 @@ final class LocalLogoutCoordinatorTest {
       reset();
       try (var f = new Fixture()) {
         var id = f.authenticated();
-        f.mode = "9000";
+        f.mode = FIXTURE_9000_0CDC37EC;
         f.fault = "setReadOnly";
         f.acquisitions.set(0);
         var primary = new SQLException("private-primary");
@@ -305,7 +318,7 @@ final class LocalLogoutCoordinatorTest {
       assertEquals(0, pending());
       assertTrue(f.ids.isEmpty());
       f.sessions.invalidate(id);
-      f.mode = "0102";
+      f.mode = FIXTURE_0102_C967CE66;
       assertEquals(LocalLogoutCoordinator.Outcome.QUEUED, f.coordinator().logout(id, AUTH));
       assertFalse(exists(id));
       assertEquals(1, pending());
@@ -320,7 +333,7 @@ final class LocalLogoutCoordinatorTest {
     try (var f = new Fixture()) {
       var ids = new ArrayList<WebSessionId>();
       for (int i = 0; i < 100; i++) ids.add(f.authenticated());
-      f.mode = "9000";
+      f.mode = FIXTURE_9000_0CDC37EC;
       try (var pool = Executors.newFixedThreadPool(12)) {
         var futures = new ArrayList<Future<LocalLogoutCoordinator.Outcome>>();
         for (var id : ids) futures.add(pool.submit(() -> f.coordinator().logout(id, AUTH)));
@@ -384,7 +397,7 @@ final class LocalLogoutCoordinatorTest {
       assertTrue(r.next());
       UUID id = r.getObject(1, UUID.class);
       byte[] wire = r.getBytes(2);
-      assertEquals("revoke", r.getString(3));
+      assertEquals(FIXTURE_REVOKE_4DBB5115, r.getString(3));
       assertEquals(NOW, r.getObject(4, OffsetDateTime.class).toInstant());
       assertEquals(NOW.plusSeconds(5), r.getObject(5, OffsetDateTime.class).toInstant());
       assertEquals(0, r.getInt(6));
@@ -397,7 +410,7 @@ final class LocalLogoutCoordinatorTest {
       assertArrayEquals("NKENC1".getBytes(StandardCharsets.US_ASCII), Arrays.copyOf(wire, 6));
       assertEquals(1, wire[6]);
       assertEquals(6, wire[7]);
-      assertEquals("revoke", new String(wire, 8, 6, StandardCharsets.US_ASCII));
+      assertEquals(FIXTURE_REVOKE_4DBB5115, new String(wire, 8, 6, StandardCharsets.US_ASCII));
       var bytes = new ByteArrayOutputStream();
       try (var out = new DataOutputStream(bytes)) {
         for (byte[] field :
@@ -414,7 +427,7 @@ final class LocalLogoutCoordinatorTest {
                     .putInt(NOW.getNano())
                     .array(),
                 new byte[] {1},
-                "revoke".getBytes(StandardCharsets.US_ASCII))) {
+                FIXTURE_REVOKE_4DBB5115.getBytes(StandardCharsets.US_ASCII))) {
           out.writeInt(field.length);
           out.write(field);
         }
@@ -451,7 +464,7 @@ final class LocalLogoutCoordinatorTest {
     final SessionPayloadCodec sessionCodec =
         new SessionPayloadCodec("session", new byte[32], null, null);
     final RevocationPayloadCodec revoke =
-        new RevocationPayloadCodec("revoke", new byte[32], null, null);
+        new RevocationPayloadCodec(FIXTURE_REVOKE_4DBB5115, new byte[32], null, null);
     final JmsRequestReplyClient replies =
         new JmsRequestReplyClient(new ReplyCorrelationRegistry(), clock, 12);
     final AtomicInteger active = new AtomicInteger();
@@ -462,7 +475,7 @@ final class LocalLogoutCoordinatorTest {
     final AtomicLong sequence = new AtomicLong(100);
     final EncryptedWebSessionRepository sessions =
         new EncryptedWebSessionRepository(source(), sessionCodec, clock);
-    String code = "0000";
+    String code = FIXTURE_0000_876EEFE0;
     String mode = "";
     String fault = "";
     boolean always;
@@ -498,7 +511,13 @@ final class LocalLogoutCoordinatorTest {
       if (wireFatal != null) throw wireFatal;
       if (mode.equals("lost")) throw new JMSException("private-lost-response");
       if (mode.equals("timeout")) return;
-      byte[] response = header(false, mode.equals("0102") || mode.equals("9000") ? mode : code, id);
+      byte[] response =
+          header(
+              false,
+              mode.equals(FIXTURE_0102_C967CE66) || mode.equals(FIXTURE_9000_0CDC37EC)
+                  ? mode
+                  : code,
+              id);
       if (mode.equals("bad-context")) put(response, 113, "c".repeat(64));
       if (mode.equals("bad-correlation")) put(response, 60, new UUID(0, 999).toString());
       assertTrue(replies.onReply(id, response));
@@ -515,7 +534,8 @@ final class LocalLogoutCoordinatorTest {
                   throw new UnsupportedOperationException("only fixture getConnection");
                 int index = acquisitions.incrementAndGet();
                 boolean inject = always || index == 1;
-                if (inject && fault.equals("acquire")) throw new SQLException("private-acquire");
+                if (inject && fault.equals(FIXTURE_ACQUIRE_1585EBC6))
+                  throw new SQLException("private-acquire");
                 if (inject && fault.equals("null")) return null;
                 var real = db.web();
                 active.incrementAndGet();
@@ -526,7 +546,7 @@ final class LocalLogoutCoordinatorTest {
                     new Class<?>[] {Connection.class},
                     (target, call, values) -> {
                       String name = call.getName();
-                      if (name.equals("close")) {
+                      if (name.equals(FIXTURE_CLOSE_97959247)) {
                         try {
                           invoke(real, call, values);
                         } finally {
@@ -534,7 +554,7 @@ final class LocalLogoutCoordinatorTest {
                           caller.decrementAndGet();
                         }
                         if (index == fatalIndex && closeFatal != null) throw closeFatal;
-                        if (inject && fault.equals("close"))
+                        if (inject && fault.equals(FIXTURE_CLOSE_97959247))
                           throw new SQLException("private-close");
                         return null;
                       }
@@ -607,7 +627,9 @@ final class LocalLogoutCoordinatorTest {
       put(
           result,
           256,
-          code.equals("0000") || code.equals("0200") ? "20260908090000123" : "00000000000000000");
+          code.equals(FIXTURE_0000_876EEFE0) || code.equals("0200")
+              ? "20260908090000123"
+              : "00000000000000000");
     return result;
   }
 

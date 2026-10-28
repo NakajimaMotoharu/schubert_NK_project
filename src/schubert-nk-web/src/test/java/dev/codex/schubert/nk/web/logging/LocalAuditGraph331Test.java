@@ -25,6 +25,8 @@ import org.junit.jupiter.api.Test;
 
 /** MON003/UI235252/SS312351354/SSC331; PT-WEB-LOCAL331001..004; BUG1601/YKT1354. */
 final class LocalAuditGraph331Test {
+  private static final String FIXTURE_PRIVATE_GRAPH_CANARY_1937FAEF = "PRIVATE_GRAPH_CANARY";
+
   @Test
   void local331001LoggerGraphSignalsOnceBeforeOriginalFatalWithoutAnyProjection() {
     for (int edge = 0; edge < 4; edge++) {
@@ -140,20 +142,20 @@ final class LocalAuditGraph331Test {
   }
 
   private static RuntimeException graph(Error fatal, int edge) {
-    if (edge == 0) return new RuntimeException("PRIVATE_GRAPH_CANARY", fatal);
+    if (edge == 0) return new RuntimeException(FIXTURE_PRIVATE_GRAPH_CANARY_1937FAEF, fatal);
     if (edge == 1) {
-      var failure = new RuntimeException("PRIVATE_GRAPH_CANARY");
+      var failure = new RuntimeException(FIXTURE_PRIVATE_GRAPH_CANARY_1937FAEF);
       failure.addSuppressed(fatal);
       return failure;
     }
     if (edge == 2) {
-      var linked = new JMSException("PRIVATE_GRAPH_CANARY");
+      var linked = new JMSException(FIXTURE_PRIVATE_GRAPH_CANARY_1937FAEF);
       linked.setLinkedException(new Exception(fatal));
-      return new RuntimeException("PRIVATE_GRAPH_CANARY", linked);
+      return new RuntimeException(FIXTURE_PRIVATE_GRAPH_CANARY_1937FAEF, linked);
     }
-    var sql = new SQLException("PRIVATE_GRAPH_CANARY");
-    sql.setNextException(new SQLException("PRIVATE_GRAPH_CANARY", fatal));
-    return new RuntimeException("PRIVATE_GRAPH_CANARY", sql);
+    var sql = new SQLException(FIXTURE_PRIVATE_GRAPH_CANARY_1937FAEF);
+    sql.setNextException(new SQLException(FIXTURE_PRIVATE_GRAPH_CANARY_1937FAEF, fatal));
+    return new RuntimeException(FIXTURE_PRIVATE_GRAPH_CANARY_1937FAEF, sql);
   }
 
   private static final class Fixture implements AutoCloseable, Logger {

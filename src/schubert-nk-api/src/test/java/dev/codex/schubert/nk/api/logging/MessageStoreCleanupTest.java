@@ -18,6 +18,7 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** PT-IDEM-013 / PT-DB-011. SS324/332/341 independent retention and NULL regression. */
 final class MessageStoreCleanupTest {
+  private static final String FIXTURE_SENT_6C701E27 = "SENT";
   private static final UUID RUN = UUID.fromString("00000000-0000-0000-0000-000000000031");
   private static final Instant CUTOFF = Instant.parse("2026-09-07T00:00:00Z");
   @TempDir static Path root;
@@ -68,8 +69,8 @@ final class MessageStoreCleanupTest {
   void sentRowsYoungerThanSevenDaysMustRemain() throws SQLException {
     try (var connection = database.admin()) {
       backup(connection);
-      outbox(connection, false, 1, "SENT", CUTOFF.minusSeconds(172800), null);
-      outbox(connection, true, 2, "SENT", CUTOFF.minusSeconds(172800), null);
+      outbox(connection, false, 1, FIXTURE_SENT_6C701E27, CUTOFF.minusSeconds(172800), null);
+      outbox(connection, true, 2, FIXTURE_SENT_6C701E27, CUTOFF.minusSeconds(172800), null);
       assertEquals("0|0|0|OK", cleanup(connection, 1000));
       assertEquals(2, rows(connection));
     }
@@ -81,12 +82,24 @@ final class MessageStoreCleanupTest {
       backup(connection);
       for (boolean web : List.of(false, true)) {
         Instant boundary = CUTOFF.minusSeconds(604800);
-        outbox(connection, web, 1, "SENT", boundary.minusNanos(1000), null);
-        outbox(connection, web, 2, "SENT", boundary, null);
-        outbox(connection, web, 3, "SENT", boundary.plusNanos(1000), null);
-        outbox(connection, web, 4, "SENT", boundary.minusNanos(1000), CUTOFF.minusNanos(1000));
-        outbox(connection, web, 5, "SENT", boundary.minusNanos(1000), CUTOFF);
-        outbox(connection, web, 6, "SENT", boundary.minusNanos(1000), CUTOFF.plusNanos(1000));
+        outbox(connection, web, 1, FIXTURE_SENT_6C701E27, boundary.minusNanos(1000), null);
+        outbox(connection, web, 2, FIXTURE_SENT_6C701E27, boundary, null);
+        outbox(connection, web, 3, FIXTURE_SENT_6C701E27, boundary.plusNanos(1000), null);
+        outbox(
+            connection,
+            web,
+            4,
+            FIXTURE_SENT_6C701E27,
+            boundary.minusNanos(1000),
+            CUTOFF.minusNanos(1000));
+        outbox(connection, web, 5, FIXTURE_SENT_6C701E27, boundary.minusNanos(1000), CUTOFF);
+        outbox(
+            connection,
+            web,
+            6,
+            FIXTURE_SENT_6C701E27,
+            boundary.minusNanos(1000),
+            CUTOFF.plusNanos(1000));
         outbox(connection, web, 7, "PENDING", null, null);
         outbox(connection, web, 8, "ERROR", null, CUTOFF.minusNanos(1000));
       }
@@ -111,9 +124,9 @@ final class MessageStoreCleanupTest {
     try (var connection = database.admin();
         var locked = database.admin()) {
       backup(connection);
-      outbox(connection, false, 1, "SENT", CUTOFF.minusSeconds(604801), null);
-      outbox(connection, false, 2, "SENT", CUTOFF.minusSeconds(604801), null);
-      outbox(connection, true, 3, "SENT", CUTOFF.minusSeconds(604801), null);
+      outbox(connection, false, 1, FIXTURE_SENT_6C701E27, CUTOFF.minusSeconds(604801), null);
+      outbox(connection, false, 2, FIXTURE_SENT_6C701E27, CUTOFF.minusSeconds(604801), null);
+      outbox(connection, true, 3, FIXTURE_SENT_6C701E27, CUTOFF.minusSeconds(604801), null);
       locked.setAutoCommit(false);
       try (var statement = locked.createStatement();
           var result =

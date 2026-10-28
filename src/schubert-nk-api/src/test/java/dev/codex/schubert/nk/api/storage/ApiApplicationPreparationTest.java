@@ -35,6 +35,10 @@ import org.junit.jupiter.api.io.TempDir;
  * evidence only; native Root/ordinary full registration/ready remains separate.
  */
 final class ApiApplicationPreparationTest {
+  private static final String FIXTURE_DISPATCH_BEFORE_EXPOSURE_28246F61 =
+      "dispatch before exposure";
+  private static final String FIXTURE_NO_JMS_DURING_ASSEMBLY_F0C35470 = "no JMS during assembly";
+
   @TempDir(factory = TransferRootInspectionTest.Ext4Fixture.class)
   Path directory;
 
@@ -162,7 +166,7 @@ final class ApiApplicationPreparationTest {
                     count,
                     CLOCK,
                     () -> {
-                      throw new AssertionError("dispatch before exposure");
+                      throw new AssertionError(FIXTURE_DISPATCH_BEFORE_EXPOSURE_28246F61);
                     },
                     (ignored, outbox) -> calls.incrementAndGet()));
       assertThrows(
@@ -178,7 +182,7 @@ final class ApiApplicationPreparationTest {
                   7,
                   CLOCK,
                   () -> {
-                    throw new AssertionError("dispatch before exposure");
+                    throw new AssertionError(FIXTURE_DISPATCH_BEFORE_EXPOSURE_28246F61);
                   },
                   (ignored, outbox) -> calls.incrementAndGet()));
       Files.setPosixFilePermissions(transfer, PosixFilePermissions.fromString("rwx------"));
@@ -195,7 +199,7 @@ final class ApiApplicationPreparationTest {
                   7,
                   CLOCK,
                   () -> {
-                    throw new AssertionError("dispatch before exposure");
+                    throw new AssertionError(FIXTURE_DISPATCH_BEFORE_EXPOSURE_28246F61);
                   },
                   (ignored, outbox) -> calls.incrementAndGet()));
       assertEquals(0, calls.get());
@@ -228,7 +232,7 @@ final class ApiApplicationPreparationTest {
                         7,
                         CLOCK,
                         () -> {
-                          throw new AssertionError("dispatch before exposure");
+                          throw new AssertionError(FIXTURE_DISPATCH_BEFORE_EXPOSURE_28246F61);
                         },
                         (ignored, outbox) -> {
                           if (failure instanceof IOException io) throw io;
@@ -301,7 +305,7 @@ final class ApiApplicationPreparationTest {
                         7,
                         CLOCK,
                         () -> {
-                          throw new AssertionError("dispatch before exposure");
+                          throw new AssertionError(FIXTURE_DISPATCH_BEFORE_EXPOSURE_28246F61);
                         },
                         (processors, outbox) -> operations.incrementAndGet()));
         assertEquals("API cryptography unavailable", failure.getMessage());
@@ -345,7 +349,7 @@ final class ApiApplicationPreparationTest {
                   7,
                   CLOCK,
                   () -> {
-                    throw new AssertionError("no JMS during assembly");
+                    throw new AssertionError(FIXTURE_NO_JMS_DURING_ASSEMBLY_F0C35470);
                   },
                   operation));
       assertThrows(
@@ -359,7 +363,7 @@ final class ApiApplicationPreparationTest {
                   7,
                   CLOCK,
                   () -> {
-                    throw new AssertionError("no JMS during assembly");
+                    throw new AssertionError(FIXTURE_NO_JMS_DURING_ASSEMBLY_F0C35470);
                   },
                   operation));
       assertThrows(
@@ -373,7 +377,7 @@ final class ApiApplicationPreparationTest {
                   7,
                   CLOCK,
                   () -> {
-                    throw new AssertionError("no JMS during assembly");
+                    throw new AssertionError(FIXTURE_NO_JMS_DURING_ASSEMBLY_F0C35470);
                   },
                   operation));
       assertThrows(
@@ -387,7 +391,7 @@ final class ApiApplicationPreparationTest {
                   7,
                   CLOCK,
                   () -> {
-                    throw new AssertionError("no JMS during assembly");
+                    throw new AssertionError(FIXTURE_NO_JMS_DURING_ASSEMBLY_F0C35470);
                   },
                   operation));
       assertThrows(
@@ -401,7 +405,7 @@ final class ApiApplicationPreparationTest {
                   7,
                   null,
                   () -> {
-                    throw new AssertionError("no JMS during assembly");
+                    throw new AssertionError(FIXTURE_NO_JMS_DURING_ASSEMBLY_F0C35470);
                   },
                   operation));
       assertThrows(
@@ -415,7 +419,7 @@ final class ApiApplicationPreparationTest {
                   7,
                   CLOCK,
                   () -> {
-                    throw new AssertionError("no JMS during assembly");
+                    throw new AssertionError(FIXTURE_NO_JMS_DURING_ASSEMBLY_F0C35470);
                   },
                   null));
       assertThrows(
@@ -434,7 +438,7 @@ final class ApiApplicationPreparationTest {
                   7,
                   CLOCK,
                   () -> {
-                    throw new AssertionError("no JMS during assembly");
+                    throw new AssertionError(FIXTURE_NO_JMS_DURING_ASSEMBLY_F0C35470);
                   },
                   operation));
       assertEquals(

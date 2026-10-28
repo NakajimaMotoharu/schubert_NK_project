@@ -46,6 +46,8 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** PT-QRY001..004/NTF001..004; literal SQL fixtures, typed expected values, no expected codec. */
 final class QuestionQueryRepositoryTest {
+  private static final String FIXTURE_EXECUTE_7FB37A54 = "execute";
+  private static final String FIXTURE_CLOSE_97959247 = "close";
   @TempDir static Path root;
   static ApiLogDatabaseFixture db;
   static final AuthenticatedActor USER = new AuthenticatedActor(1, "u1", Role.USER);
@@ -375,8 +377,8 @@ final class QuestionQueryRepositoryTest {
               "short-rows",
               "question-body-null",
               "state-unknown",
-              "execute",
-              "close")) {
+              FIXTURE_EXECUTE_7FB37A54,
+              FIXTURE_CLOSE_97959247)) {
         var failure =
             assertThrows(
                 QuestionQueryException.class,
@@ -394,13 +396,20 @@ final class QuestionQueryRepositoryTest {
                     () -> repository.questionSearch(fault(c, fault), USER, questions(1)))
                 .resultCode());
       for (String fault :
-          List.of("extra-detail", "question-body-null", "state-unknown", "execute", "close"))
+          List.of(
+              "extra-detail",
+              "question-body-null",
+              "state-unknown",
+              FIXTURE_EXECUTE_7FB37A54,
+              FIXTURE_CLOSE_97959247))
         assertThrows(
             QuestionQueryException.class,
             () ->
                 repository.questionDetail(
                     fault(c, fault), USER, new QuestionDetailRequestData(new QuestionId(3))));
-      for (String fault : List.of("type-unknown", "error-unknown", "execute", "close"))
+      for (String fault :
+          List.of(
+              "type-unknown", "error-unknown", FIXTURE_EXECUTE_7FB37A54, FIXTURE_CLOSE_97959247))
         assertThrows(
             QuestionQueryException.class,
             () ->
@@ -560,11 +569,12 @@ final class QuestionQueryRepositoryTest {
                   PreparedStatement.class.getClassLoader(),
                   new Class<?>[] {PreparedStatement.class},
                   (sp, sm, sa) -> {
-                    if (sm.getName().equals("executeQuery") && fault.equals("execute"))
+                    if (sm.getName().equals("executeQuery")
+                        && fault.equals(FIXTURE_EXECUTE_7FB37A54))
                       throw new SQLException("private-diagnostic");
                     Object rows = QuestionSubmissionServiceTest.invoke(result, sm, sa);
-                    if (sm.getName().equals("close")
-                        && (fault.equals("close") || fault.equals("cap-close")))
+                    if (sm.getName().equals(FIXTURE_CLOSE_97959247)
+                        && (fault.equals(FIXTURE_CLOSE_97959247) || fault.equals("cap-close")))
                       throw new SQLException("private-close");
                     if (!sm.getName().equals("executeQuery")) return rows;
                     return Proxy.newProxyInstance(

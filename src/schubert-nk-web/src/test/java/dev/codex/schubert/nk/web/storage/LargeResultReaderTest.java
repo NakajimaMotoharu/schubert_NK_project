@@ -28,6 +28,9 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** Real native inode + read-only channel, independent bytes/attributes; PT-SCN-008-RD05. */
 class LargeResultReaderTest {
+  private static final String FIXTURE_RWXR_X_E5EF2357 = "rwxr-x---";
+  private static final String FIXTURE_20260908_520314A3 = "20260908";
+  private static final String FIXTURE_READY_6630F9C3 = ".ready";
   @TempDir Path root;
 
   @Test
@@ -63,10 +66,10 @@ class LargeResultReaderTest {
   @Test
   void rd05ReadOnlyFileAdapterReturnsVerifiedRecordsWithoutChangingFileOrOwningRoot()
       throws Exception {
-    mode(root, "rwxr-x---");
-    Path day = Files.createDirectory(root.resolve("20260908"));
-    mode(day, "rwxr-x---");
-    Path file = day.resolve(ScenarioFileFixture.ID + ".ready");
+    mode(root, FIXTURE_RWXR_X_E5EF2357);
+    Path day = Files.createDirectory(root.resolve(FIXTURE_20260908_520314A3));
+    mode(day, FIXTURE_RWXR_X_E5EF2357);
+    Path file = day.resolve(ScenarioFileFixture.ID + FIXTURE_READY_6630F9C3);
     var descriptor = ScenarioFileFixture.write(file, 201);
     var before = Files.readAttributes(file, "unix:owner,group,mode,nlink,size,lastModifiedTime");
     var calls = new ReadOnlyCalls();
@@ -91,8 +94,8 @@ class LargeResultReaderTest {
   @Test
   void rd05NullClosedAndWrongOwnershipModeAndSizeAreDeniedWithoutRepair() throws Exception {
     var descriptor = prepare();
-    Path day = root.resolve("20260908");
-    Path file = day.resolve(ScenarioFileFixture.ID + ".ready");
+    Path day = root.resolve(FIXTURE_20260908_520314A3);
+    Path file = day.resolve(ScenarioFileFixture.ID + FIXTURE_READY_6630F9C3);
     var calls = new ReadOnlyCalls();
     var parent = OwnedTransferDirectory.open(calls, root);
     try (parent) {
@@ -114,7 +117,7 @@ class LargeResultReaderTest {
         failure(() -> reader.readScenario(descriptor));
         assertEquals(
             PosixFilePermissions.fromString("rwx------"), Files.getPosixFilePermissions(target));
-        mode(target, target.equals(file) ? "rw-r-----" : "rwxr-x---");
+        mode(target, target.equals(file) ? "rw-r-----" : FIXTURE_RWXR_X_E5EF2357);
         assertEquals(1, calls.live.size());
       }
       Files.write(file, new byte[] {9});
@@ -123,7 +126,7 @@ class LargeResultReaderTest {
       var badDate =
           new LargeResultDescriptor(
               ScenarioFileFixture.ID,
-              "00000101/" + ScenarioFileFixture.ID + ".ready",
+              "00000101/" + ScenarioFileFixture.ID + FIXTURE_READY_6630F9C3,
               4800,
               descriptor.sha256(),
               1);
@@ -137,8 +140,8 @@ class LargeResultReaderTest {
   void rd05SymlinkHardLinkDirectoryMissingAndUnlinkedHeldInodeAreDeniedAndNeverDeleted()
       throws Exception {
     var descriptor = prepare();
-    Path day = root.resolve("20260908");
-    Path file = day.resolve(ScenarioFileFixture.ID + ".ready");
+    Path day = root.resolve(FIXTURE_20260908_520314A3);
+    Path file = day.resolve(ScenarioFileFixture.ID + FIXTURE_READY_6630F9C3);
     var calls = new ReadOnlyCalls();
     try (var parent = OwnedTransferDirectory.open(calls, root)) {
       var reader = new LargeResultReader(parent, identity());
@@ -156,7 +159,7 @@ class LargeResultReaderTest {
       assertTrue(Files.isSymbolicLink(file));
       Files.delete(file);
       Files.createDirectory(file);
-      mode(file, "rwxr-x---");
+      mode(file, FIXTURE_RWXR_X_E5EF2357);
       failure(() -> reader.readScenario(descriptor));
       assertTrue(Files.isDirectory(file));
       Files.delete(file);
@@ -212,10 +215,11 @@ class LargeResultReaderTest {
   }
 
   private LargeResultDescriptor prepare() throws Exception {
-    mode(root, "rwxr-x---");
-    Path day = Files.createDirectory(root.resolve("20260908"));
-    mode(day, "rwxr-x---");
-    return ScenarioFileFixture.write(day.resolve(ScenarioFileFixture.ID + ".ready"), 1);
+    mode(root, FIXTURE_RWXR_X_E5EF2357);
+    Path day = Files.createDirectory(root.resolve(FIXTURE_20260908_520314A3));
+    mode(day, FIXTURE_RWXR_X_E5EF2357);
+    return ScenarioFileFixture.write(
+        day.resolve(ScenarioFileFixture.ID + FIXTURE_READY_6630F9C3), 1);
   }
 
   private StorageIdentity identity() throws Exception {
@@ -254,7 +258,7 @@ class LargeResultReaderTest {
     public int openDirectory(int parent, String name) throws StorageIoException {
       int fd = delegate.openDirectory(parent, name);
       assertTrue(live.add(fd));
-      if (name.equals("20260908")) dates.add(fd);
+      if (name.equals(FIXTURE_20260908_520314A3)) dates.add(fd);
       return fd;
     }
 

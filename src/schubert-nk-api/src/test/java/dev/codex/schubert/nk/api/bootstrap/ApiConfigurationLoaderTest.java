@@ -16,8 +16,10 @@ import org.junit.jupiter.api.Test;
 
 /** PT-OPS-API-LOAD-001..005, SS343 API-only fixed file-to-parser bridge. */
 final class ApiConfigurationLoaderTest {
+  private static final String FIXTURE_SCHUBERT_NK_CONFIG_DIR_DBE4C484 = "SCHUBERT_NK_CONFIG_DIR";
+  private static final String FIXTURE_ETC_SCHUBERT_NK_AB7CF1ED = "/etc/schubert-nk";
   private static final Map<String, String> ENV =
-      Map.of("SCHUBERT_NK_CONFIG_DIR", "/etc/schubert-nk");
+      Map.of(FIXTURE_SCHUBERT_NK_CONFIG_DIR_DBE4C484, FIXTURE_ETC_SCHUBERT_NK_AB7CF1ED);
 
   @Test
   void opsApiLoad001FixedServiceAndLayerOrder() throws Exception {
@@ -101,11 +103,11 @@ final class ApiConfigurationLoaderTest {
     for (Map<String, String> invalid :
         java.util.List.of(
             Map.<String, String>of(),
-            Map.of("SCHUBERT_NK_CONFIG_DIR", "/tmp/config"),
-            Map.of("schubert_nk_config_dir", "/etc/schubert-nk"),
+            Map.of(FIXTURE_SCHUBERT_NK_CONFIG_DIR_DBE4C484, "/tmp/config"),
+            Map.of("schubert_nk_config_dir", FIXTURE_ETC_SCHUBERT_NK_AB7CF1ED),
             Map.of(
-                "SCHUBERT_NK_CONFIG_DIR",
-                "/etc/schubert-nk",
+                FIXTURE_SCHUBERT_NK_CONFIG_DIR_DBE4C484,
+                FIXTURE_ETC_SCHUBERT_NK_AB7CF1ED,
                 "SCHUBERT_NK_PASSWORD",
                 "not-a-secret"))) {
       assertEquals(
@@ -120,7 +122,12 @@ final class ApiConfigurationLoaderTest {
     assertEquals(
         "8",
         new ApiConfigurationLoader(
-                source, Map.of("SCHUBERT_NK_CONFIG_DIR", "/etc/schubert-nk", "PATH", "/usr/bin"))
+                source,
+                Map.of(
+                    FIXTURE_SCHUBERT_NK_CONFIG_DIR_DBE4C484,
+                    FIXTURE_ETC_SCHUBERT_NK_AB7CF1ED,
+                    "PATH",
+                    "/usr/bin"))
             .load()
             .value("nk.db.pool.api.max"));
     assertEquals(1, calls.get());

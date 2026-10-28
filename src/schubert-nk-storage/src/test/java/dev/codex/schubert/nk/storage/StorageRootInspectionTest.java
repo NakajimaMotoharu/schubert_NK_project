@@ -20,13 +20,22 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** PT-SCN-008-A07: real Linux six-root, no-follow and read-only startup prerequisite. */
 class StorageRootInspectionTest {
+  private static final String FIXTURE_DEV_8A17302D = "dev";
+  private static final String FIXTURE_INO_4BE7C1E0 = "ino";
+  private static final String FIXTURE_OWNER_622F06CB = "owner";
+  private static final String FIXTURE_GROUP_654E1E20 = "group";
+  private static final String FIXTURE_NLINK_3DDD828B = "nlink";
+  private static final String FIXTURE_RWXR_X_E5EF2357 = "rwxr-x---";
   @TempDir Path temporary;
 
   @Test
   void a08DeviceAndInodeBothDefinePhysicalRootIdentity() throws Exception {
-    var same = StorageRootInspection.inode(Map.of("dev", 8L, "ino", 200L));
-    var otherDevice = StorageRootInspection.inode(Map.of("dev", 9L, "ino", 200L));
-    var otherInode = StorageRootInspection.inode(Map.of("dev", 8L, "ino", 201L));
+    var same =
+        StorageRootInspection.inode(Map.of(FIXTURE_DEV_8A17302D, 8L, FIXTURE_INO_4BE7C1E0, 200L));
+    var otherDevice =
+        StorageRootInspection.inode(Map.of(FIXTURE_DEV_8A17302D, 9L, FIXTURE_INO_4BE7C1E0, 200L));
+    var otherInode =
+        StorageRootInspection.inode(Map.of(FIXTURE_DEV_8A17302D, 8L, FIXTURE_INO_4BE7C1E0, 201L));
     var seen = new HashSet<StorageRootInspection.Inode>();
     StorageRootInspection.requireDistinct(seen, same);
     StorageRootInspection.requireDistinct(seen, otherDevice);
@@ -35,12 +44,12 @@ class StorageRootInspectionTest {
     assertThrows(StorageIoException.class, () -> StorageRootInspection.requireDistinct(seen, same));
     for (Map<String, Object> bad :
         java.util.List.of(
-            Map.<String, Object>of("ino", 200L),
-            Map.<String, Object>of("dev", 8L),
-            Map.<String, Object>of("dev", "8", "ino", 200L),
-            Map.<String, Object>of("dev", 8L, "ino", "200"),
-            Map.<String, Object>of("dev", -1L, "ino", 200L),
-            Map.<String, Object>of("dev", 8L, "ino", 0L))) {
+            Map.<String, Object>of(FIXTURE_INO_4BE7C1E0, 200L),
+            Map.<String, Object>of(FIXTURE_DEV_8A17302D, 8L),
+            Map.<String, Object>of(FIXTURE_DEV_8A17302D, "8", FIXTURE_INO_4BE7C1E0, 200L),
+            Map.<String, Object>of(FIXTURE_DEV_8A17302D, 8L, FIXTURE_INO_4BE7C1E0, "200"),
+            Map.<String, Object>of(FIXTURE_DEV_8A17302D, -1L, FIXTURE_INO_4BE7C1E0, 200L),
+            Map.<String, Object>of(FIXTURE_DEV_8A17302D, 8L, FIXTURE_INO_4BE7C1E0, 0L))) {
       assertThrows(StorageIoException.class, () -> StorageRootInspection.inode(bad));
     }
     assertThrows(NullPointerException.class, () -> StorageRootInspection.inode(null));
@@ -52,15 +61,18 @@ class StorageRootInspectionTest {
 
   @Test
   void a07MetadataAndProviderNegativeMatrix() throws Exception {
-    StorageIdentity expected = new StorageIdentity("owner", "group");
+    StorageIdentity expected = new StorageIdentity(FIXTURE_OWNER_622F06CB, FIXTURE_GROUP_654E1E20);
     Map<String, Object> valid = new HashMap<>();
     valid.put("mode", 040700);
-    valid.put("nlink", 2);
-    valid.put("owner", (UserPrincipal) () -> "owner");
-    valid.put("group", (GroupPrincipal) () -> "group");
+    valid.put(FIXTURE_NLINK_3DDD828B, 2);
+    valid.put(FIXTURE_OWNER_622F06CB, (UserPrincipal) () -> FIXTURE_OWNER_622F06CB);
+    valid.put(FIXTURE_GROUP_654E1E20, (GroupPrincipal) () -> FIXTURE_GROUP_654E1E20);
     StorageRootInspection.requireBackup(valid, expected);
     StorageRootInspection.requireDirectory(valid);
-    for (String key : new String[] {"mode", "nlink", "owner", "group"}) {
+    for (String key :
+        new String[] {
+          "mode", FIXTURE_NLINK_3DDD828B, FIXTURE_OWNER_622F06CB, FIXTURE_GROUP_654E1E20
+        }) {
       Map<String, Object> missing = new HashMap<>(valid);
       missing.remove(key);
       assertThrows(
@@ -73,18 +85,18 @@ class StorageRootInspectionTest {
           StorageIoException.class, () -> StorageRootInspection.requireBackup(changed, expected));
     }
     Map<String, Object> zeroLinks = new HashMap<>(valid);
-    zeroLinks.put("nlink", 0);
+    zeroLinks.put(FIXTURE_NLINK_3DDD828B, 0);
     assertThrows(StorageIoException.class, () -> StorageRootInspection.requireDirectory(zeroLinks));
     Map<String, Object> wrongLinks = new HashMap<>(valid);
-    wrongLinks.put("nlink", "two");
+    wrongLinks.put(FIXTURE_NLINK_3DDD828B, "two");
     assertThrows(
         StorageIoException.class, () -> StorageRootInspection.requireDirectory(wrongLinks));
     Map<String, Object> wrongOwner = new HashMap<>(valid);
-    wrongOwner.put("owner", (UserPrincipal) () -> "wrong");
+    wrongOwner.put(FIXTURE_OWNER_622F06CB, (UserPrincipal) () -> "wrong");
     assertThrows(
         StorageIoException.class, () -> StorageRootInspection.requireBackup(wrongOwner, expected));
     Map<String, Object> wrongGroup = new HashMap<>(valid);
-    wrongGroup.put("group", (GroupPrincipal) () -> "wrong");
+    wrongGroup.put(FIXTURE_GROUP_654E1E20, (GroupPrincipal) () -> "wrong");
     assertThrows(
         StorageIoException.class, () -> StorageRootInspection.requireBackup(wrongGroup, expected));
     try (DirectoryStream<Path> secure = Files.newDirectoryStream(temporary)) {
@@ -118,11 +130,11 @@ class StorageRootInspectionTest {
 
     Files.setPosixFilePermissions(roots[0], permissions("rwxrwx---"));
     unavailable(roots, identity, identity, identity);
-    Files.setPosixFilePermissions(roots[0], permissions("rwxr-x---"));
+    Files.setPosixFilePermissions(roots[0], permissions(FIXTURE_RWXR_X_E5EF2357));
     Files.setPosixFilePermissions(roots[1], permissions("rwx------"));
     unavailable(roots, identity, identity, identity);
-    Files.setPosixFilePermissions(roots[1], permissions("rwxr-x---"));
-    Files.setPosixFilePermissions(roots[2], permissions("rwxr-x---"));
+    Files.setPosixFilePermissions(roots[1], permissions(FIXTURE_RWXR_X_E5EF2357));
+    Files.setPosixFilePermissions(roots[2], permissions(FIXTURE_RWXR_X_E5EF2357));
     unavailable(roots, identity, identity, identity);
     Files.setPosixFilePermissions(roots[2], permissions("rwx------"));
 
@@ -158,7 +170,7 @@ class StorageRootInspectionTest {
     for (int index = 0; index < roots.length; index++) {
       roots[index] = Files.createDirectory(temporary.resolve("root" + index));
       Files.setPosixFilePermissions(
-          roots[index], permissions(index == 2 ? "rwx------" : "rwxr-x---"));
+          roots[index], permissions(index == 2 ? "rwx------" : FIXTURE_RWXR_X_E5EF2357));
     }
     return roots;
   }

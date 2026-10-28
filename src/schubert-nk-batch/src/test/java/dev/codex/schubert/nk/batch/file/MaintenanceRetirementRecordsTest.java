@@ -35,6 +35,7 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** SS343 6.16; SSC055/PG161; BAT090..097. Literal expected values never use Production encoders. */
 final class MaintenanceRetirementRecordsTest {
+  private static final String FIXTURE_PLAN_A6DBC386 = ".plan";
   static final String ID = "12345678-9abc-def0-8123-456789abcdef";
   static final String ACT = "fedcba98-7654-3210-8fed-cba987654321";
   static final String CUTOFF = "2025-01-01T00:00:00.000000Z";
@@ -228,18 +229,20 @@ final class MaintenanceRetirementRecordsTest {
     try (var f = new MaintenanceRunFilesTest.Fixture(temporary);
         var root = OwnedTransferDirectory.open(f.calls, f.attempts)) {
       var records = new DurableRecordFiles(root, f, f);
-      records.publish(ACT + ".plan", ascii(DONE), new UUID(1, 1));
-      assertArrayEquals(ascii(DONE), records.read(ACT + ".plan").orElseThrow());
-      records.remove(ACT + ".plan", ascii(DONE));
-      for (String name : List.of(ID + ".plan", ACT + ".retire"))
+      records.publish(ACT + FIXTURE_PLAN_A6DBC386, ascii(DONE), new UUID(1, 1));
+      assertArrayEquals(ascii(DONE), records.read(ACT + FIXTURE_PLAN_A6DBC386).orElseThrow());
+      records.remove(ACT + FIXTURE_PLAN_A6DBC386, ascii(DONE));
+      for (String name : List.of(ID + FIXTURE_PLAN_A6DBC386, ACT + ".retire"))
         assertThrows(
             StorageIoException.class,
             () ->
                 records.publish(
-                    name, ascii(name.endsWith(".plan") ? DONE : MARKER), new UUID(1, 2)));
+                    name,
+                    ascii(name.endsWith(FIXTURE_PLAN_A6DBC386) ? DONE : MARKER),
+                    new UUID(1, 2)));
       assertThrows(
           StorageIoException.class,
-          () -> records.publish(ACT + ".plan", ascii(MARKER), new UUID(1, 3)));
+          () -> records.publish(ACT + FIXTURE_PLAN_A6DBC386, ascii(MARKER), new UUID(1, 3)));
       assertThrows(
           StorageIoException.class,
           () -> records.publish(ID + ".retire", ascii(DONE), new UUID(1, 4)));

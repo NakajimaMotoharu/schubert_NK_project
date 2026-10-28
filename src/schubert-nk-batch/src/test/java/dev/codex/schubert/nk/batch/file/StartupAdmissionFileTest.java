@@ -40,6 +40,14 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** Independent metadata matrices plus actual NOFOLLOW/flock; synthetic root/tmpfs admission. */
 final class StartupAdmissionFileTest {
+  private static final String FIXTURE_SERVICE_3E9B10A4 = "service";
+  private static final String FIXTURE_FILE_BFDDE6F5 = "file";
+  private static final String FIXTURE_INO_4BE7C1E0 = "ino";
+  private static final String FIXTURE_DEV_8A17302D = "dev";
+  private static final String FIXTURE_MODE_B6D5C2C3 = "mode";
+  private static final String FIXTURE_OTHER_LOCK_7F80A9E4 = "other.lock";
+  private static final String FIXTURE_UNIX_MODE_18F40B0C = "unix:mode";
+  private static final String FIXTURE_NO_MUTATION_68019DA1 = "no mutation";
   @TempDir Path base;
 
   @Test
@@ -109,21 +117,24 @@ final class StartupAdmissionFileTest {
     var mismatch = fixture();
     mismatch.change =
         (view, role, m) -> {
-          if (view.equals("service") && role.equals("file")) m.put("ino", (Long) m.get("ino") + 1);
+          if (view.equals(FIXTURE_SERVICE_3E9B10A4) && role.equals(FIXTURE_FILE_BFDDE6F5))
+            m.put(FIXTURE_INO_4BE7C1E0, (Long) m.get(FIXTURE_INO_4BE7C1E0) + 1);
           return m;
         };
     rejected(mismatch);
     var device = fixture();
     device.change =
         (view, role, m) -> {
-          if (role.equals("file")) m.put("dev", (Long) m.get("dev") + 1);
+          if (role.equals(FIXTURE_FILE_BFDDE6F5))
+            m.put(FIXTURE_DEV_8A17302D, (Long) m.get(FIXTURE_DEV_8A17302D) + 1);
           return m;
         };
     rejected(device);
     var app = fixture();
     app.change =
         (view, role, m) -> {
-          if (role.equals("app")) m.put("dev", (Long) m.get("dev") + 1);
+          if (role.equals("app"))
+            m.put(FIXTURE_DEV_8A17302D, (Long) m.get(FIXTURE_DEV_8A17302D) + 1);
           return m;
         };
     rejected(app);
@@ -131,8 +142,16 @@ final class StartupAdmissionFileTest {
 
   @Test
   void admissionLock003EveryTypedMetadataAndBoundaryRejected() throws Exception {
-    for (String role : List.of("run", "app", "file")) {
-      for (String key : List.of("mode", "uid", "gid", "nlink", "size", "dev", "ino")) {
+    for (String role : List.of("run", "app", FIXTURE_FILE_BFDDE6F5)) {
+      for (String key :
+          List.of(
+              FIXTURE_MODE_B6D5C2C3,
+              "uid",
+              "gid",
+              "nlink",
+              "size",
+              FIXTURE_DEV_8A17302D,
+              FIXTURE_INO_4BE7C1E0)) {
         for (boolean missing : List.of(false, true)) {
           var f = fixture();
           f.change =
@@ -155,12 +174,12 @@ final class StartupAdmissionFileTest {
                   1,
                   "gid",
                   1,
-                  "mode",
+                  FIXTURE_MODE_B6D5C2C3,
                   0,
                   "nlink",
-                  role.equals("file") ? 2 : 1,
+                  role.equals(FIXTURE_FILE_BFDDE6F5) ? 2 : 1,
                   "size",
-                  role.equals("file") ? 1L : -1L)
+                  role.equals(FIXTURE_FILE_BFDDE6F5) ? 1L : -1L)
               .entrySet()) {
         var f = fixture();
         f.change =
@@ -197,7 +216,7 @@ final class StartupAdmissionFileTest {
   void admissionLock004PhysicalSymlinkReplacementAndNoRepair() throws Exception {
     var symbolic = fixture();
     Files.delete(symbolic.file);
-    Files.createSymbolicLink(symbolic.file, Path.of("other.lock"));
+    Files.createSymbolicLink(symbolic.file, Path.of(FIXTURE_OTHER_LOCK_7F80A9E4));
     rejected(symbolic);
     var replaced = fixture();
     Path old = replaced.app.resolve("old.lock");
@@ -211,7 +230,7 @@ final class StartupAdmissionFileTest {
                         fd -> {
                           Files.move(replaced.file, old);
                           Files.createFile(replaced.file);
-                          Files.setAttribute(replaced.file, "unix:mode", 0600);
+                          Files.setAttribute(replaced.file, FIXTURE_UNIX_MODE_18F40B0C, 0600);
                           return 1;
                         })));
     assertEquals(0, external(old));
@@ -414,7 +433,7 @@ final class StartupAdmissionFileTest {
         assertThrows(
             StorageIoException.class, () -> StartupAdmissionFile.create().tryExclusive(fd -> 1)));
     var actual = new StartupAdmissionFile.NioIo();
-    assertEquals(0100600, actual.attributes(f.file).get("mode"));
+    assertEquals(0100600, actual.attributes(f.file).get(FIXTURE_MODE_B6D5C2C3));
     assertEquals("tmpfs", actual.filesystemType(Path.of("/dev/shm")));
   }
 
@@ -472,7 +491,7 @@ final class StartupAdmissionFileTest {
     final AtomicInteger hostReadonlyCalls = new AtomicInteger();
     final AtomicInteger privateReadonlyCalls = new AtomicInteger();
     final Calls host = new Calls("host");
-    final Calls service = new Calls("service");
+    final Calls service = new Calls(FIXTURE_SERVICE_3E9B10A4);
     volatile int openFailure;
     volatile int closeFailure;
     volatile int negativeResult;
@@ -489,11 +508,12 @@ final class StartupAdmissionFileTest {
       this.runtime = runtime;
       app = Files.createDirectory(runtime.resolve("schubert-nk"));
       file = Files.createFile(app.resolve("startup-admission.lock"));
-      Files.createFile(app.resolve("other.lock"));
-      Files.setAttribute(runtime, "unix:mode", 0755);
-      Files.setAttribute(app, "unix:mode", 0755);
-      Files.setAttribute(file, "unix:mode", 0600);
-      Files.setAttribute(app.resolve("other.lock"), "unix:mode", 0600);
+      Files.createFile(app.resolve(FIXTURE_OTHER_LOCK_7F80A9E4));
+      Files.setAttribute(runtime, FIXTURE_UNIX_MODE_18F40B0C, 0755);
+      Files.setAttribute(app, FIXTURE_UNIX_MODE_18F40B0C, 0755);
+      Files.setAttribute(file, FIXTURE_UNIX_MODE_18F40B0C, 0600);
+      Files.setAttribute(
+          app.resolve(FIXTURE_OTHER_LOCK_7F80A9E4), FIXTURE_UNIX_MODE_18F40B0C, 0600);
       runInode = (Long) Files.getAttribute(runtime, "unix:ino");
       fileInode = (Long) Files.getAttribute(file, "unix:ino");
     }
@@ -504,8 +524,9 @@ final class StartupAdmissionFileTest {
 
     String role(Path held) throws IOException {
       var m = Files.readAttributes(held, "unix:mode,ino");
-      if (((Integer) m.get("mode") & 0170000) != 040000) return "file";
-      return m.get("ino").equals(runInode) ? "run" : "app";
+      if (((Integer) m.get(FIXTURE_MODE_B6D5C2C3) & 0170000) != 040000)
+        return FIXTURE_FILE_BFDDE6F5;
+      return m.get(FIXTURE_INO_4BE7C1E0).equals(runInode) ? "run" : "app";
     }
 
     void failure(String name) throws IOException {
@@ -525,8 +546,9 @@ final class StartupAdmissionFileTest {
           var m = new HashMap<>(Files.readAttributes(held, "unix:mode,uid,gid,nlink,size,dev,ino"));
           m.put("uid", 0);
           m.put("gid", 0);
-          if (separate && view(held).equals("service") && role(held).equals("file"))
-            m.put("ino", fileInode);
+          if (separate
+              && view(held).equals(FIXTURE_SERVICE_3E9B10A4)
+              && role(held).equals(FIXTURE_FILE_BFDDE6F5)) m.put(FIXTURE_INO_4BE7C1E0, fileInode);
           return change.apply(view(held), role(held), m);
         }
 
@@ -607,8 +629,10 @@ final class StartupAdmissionFileTest {
             () ->
                 real.openEntry(
                     parent,
-                    separate && name.equals("service") && child.equals("startup-admission.lock")
-                        ? "other.lock"
+                    separate
+                            && name.equals(FIXTURE_SERVICE_3E9B10A4)
+                            && child.equals("startup-admission.lock")
+                        ? FIXTURE_OTHER_LOCK_7F80A9E4
                         : child));
       }
 
@@ -623,27 +647,27 @@ final class StartupAdmissionFileTest {
 
       @Override
       public int createFile(int parent, String child) {
-        throw new AssertionError("no mutation");
+        throw new AssertionError(FIXTURE_NO_MUTATION_68019DA1);
       }
 
       @Override
       public void createDirectory(int parent, String child) {
-        throw new AssertionError("no mutation");
+        throw new AssertionError(FIXTURE_NO_MUTATION_68019DA1);
       }
 
       @Override
       public void publish(int directory, String part, String ready) {
-        throw new AssertionError("no mutation");
+        throw new AssertionError(FIXTURE_NO_MUTATION_68019DA1);
       }
 
       @Override
       public void unlink(int directory, String child) {
-        throw new AssertionError("no mutation");
+        throw new AssertionError(FIXTURE_NO_MUTATION_68019DA1);
       }
 
       @Override
       public void sync(int directory) {
-        throw new AssertionError("no mutation");
+        throw new AssertionError(FIXTURE_NO_MUTATION_68019DA1);
       }
     }
   }

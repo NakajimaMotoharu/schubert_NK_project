@@ -59,6 +59,21 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** PG231/SSC324 START003: Log-path boot, ownership and distinct fatal infrastructure health. */
 final class WebLogApplicationRuntimeTest {
+  private static final String FIXTURE_TEST_4D967A30 = "test";
+  private static final String FIXTURE_WEB_LOG_WORKER_34947EFB = "web-log-worker";
+  private static final String FIXTURE_BROKER_4F6E4F9C = "broker";
+  private static final String FIXTURE_VM_0_0C76084A = "vm://0";
+  private static final String FIXTURE_HTTP_127_0_0_1_B897D8EE = "http://127.0.0.1:";
+  private static final String FIXTURE_X_FORWARDED_FOR_BECAABD0 = "X-Forwarded-For";
+  private static final String FIXTURE_203_0_113_1_9BB16FDC = "203.0.113.1";
+  private static final String FIXTURE_X_FORWARDED_PROTO_6D975CE8 = "X-Forwarded-Proto";
+  private static final String FIXTURE_HTTPS_F7FB094B = "https";
+  private static final String FIXTURE_SET_COOKIE_10F4EA2C = "Set-Cookie";
+  private static final String FIXTURE_HTTPONLY_03BEA470 = "httponly";
+  private static final String FIXTURE_SECURE_ABE38CF1 = "secure";
+  private static final String FIXTURE_COOKIE_1E78060F = "Cookie";
+  private static final String FIXTURE_HTTP_A321F717 = "http";
+  private static final String FIXTURE_WORKER_1636F9EC = "worker";
 
   @Test
   void start324003FatalReplyInfrastructureSignalsRuntimeWithoutBusinessAck() throws Exception {
@@ -115,8 +130,9 @@ final class WebLogApplicationRuntimeTest {
                         default -> throw new AssertionError("unexpected context fixture operation");
                       });
         };
-    try (var sessionCodec = new SessionPayloadCodec("test", new byte[32], null, null);
-        var logCodec = new WebLogPayloadCodec("test", new byte[32], null, null)) {
+    try (var sessionCodec =
+            new SessionPayloadCodec(FIXTURE_TEST_4D967A30, new byte[32], null, null);
+        var logCodec = new WebLogPayloadCodec(FIXTURE_TEST_4D967A30, new byte[32], null, null)) {
       try (var runtime =
           WebLogApplicationRuntime.start(
               root,
@@ -128,7 +144,7 @@ final class WebLogApplicationRuntimeTest {
               audit(),
               java.util.UUID::randomUUID,
               dispatcher(source(db::web), logCodec, contexts),
-              "web-log-worker",
+              FIXTURE_WEB_LOG_WORKER_34947EFB,
               10,
               Duration.ofMillis(10),
               ignored -> committedSignals.incrementAndGet())) {
@@ -200,13 +216,14 @@ final class WebLogApplicationRuntimeTest {
   @Test
   void scr134RealHttpLoginUsesProductionApiBrokerAndSession() throws Exception {
     var db = new WebLogDatabaseFixture(Files.createDirectory(root.resolve("pg")));
-    var broker = startBroker(Files.createDirectory(root.resolve("broker")));
-    try (var factory = new ActiveMQConnectionFactory("vm://0");
+    var broker = startBroker(Files.createDirectory(root.resolve(FIXTURE_BROKER_4F6E4F9C)));
+    try (var factory = new ActiveMQConnectionFactory(FIXTURE_VM_0_0C76084A);
         var fingerprints = new FingerprintKeyRing("f1", syntheticKey(7), null, null);
         var contexts = new AuthContextCodec("a1", syntheticKey(1), null, null);
         var snapshots = new ResponseSnapshotCodec("s1", syntheticKey(3), null, null);
-        var sessionCodec = new SessionPayloadCodec("test", syntheticKey(4), null, null);
-        var logCodec = new WebLogPayloadCodec("test", syntheticKey(5), null, null);
+        var sessionCodec =
+            new SessionPayloadCodec(FIXTURE_TEST_4D967A30, syntheticKey(4), null, null);
+        var logCodec = new WebLogPayloadCodec(FIXTURE_TEST_4D967A30, syntheticKey(5), null, null);
         var client = HttpClient.newBuilder().connectTimeout(Duration.ofSeconds(2)).build()) {
       try (var connection = db.api();
           var statement =
@@ -248,7 +265,7 @@ final class WebLogApplicationRuntimeTest {
                   audit(),
                   java.util.UUID::randomUUID,
                   dispatcher(source(db::web), logCodec, transport),
-                  "web-log-worker",
+                  FIXTURE_WEB_LOG_WORKER_34947EFB,
                   10,
                   Duration.ofMillis(10),
                   ignored -> {
@@ -256,12 +273,12 @@ final class WebLogApplicationRuntimeTest {
                   })) {
         assertTrue(api.ready());
         assertTrue(web.ready());
-        URI login = URI.create("http://127.0.0.1:" + web.port() + "/login");
+        URI login = URI.create(FIXTURE_HTTP_127_0_0_1_B897D8EE + web.port() + "/login");
         var get =
             client.send(
                 HttpRequest.newBuilder(login)
-                    .header("X-Forwarded-For", "203.0.113.1")
-                    .header("X-Forwarded-Proto", "https")
+                    .header(FIXTURE_X_FORWARDED_FOR_BECAABD0, FIXTURE_203_0_113_1_9BB16FDC)
+                    .header(FIXTURE_X_FORWARDED_PROTO_6D975CE8, FIXTURE_HTTPS_F7FB094B)
                     .build(),
                 HttpResponse.BodyHandlers.ofString());
         assertEquals(200, get.statusCode());
@@ -271,9 +288,10 @@ final class WebLogApplicationRuntimeTest {
         assertNotNull(hidden);
         String csrf = hidden.attr("value");
         assertFalse(csrf.isEmpty());
-        String anonymousSetCookie = get.headers().firstValue("Set-Cookie").orElseThrow();
-        assertTrue(anonymousSetCookie.toLowerCase(Locale.ROOT).contains("httponly"));
-        assertTrue(anonymousSetCookie.toLowerCase(Locale.ROOT).contains("secure"));
+        String anonymousSetCookie =
+            get.headers().firstValue(FIXTURE_SET_COOKIE_10F4EA2C).orElseThrow();
+        assertTrue(anonymousSetCookie.toLowerCase(Locale.ROOT).contains(FIXTURE_HTTPONLY_03BEA470));
+        assertTrue(anonymousSetCookie.toLowerCase(Locale.ROOT).contains(FIXTURE_SECURE_ABE38CF1));
         String anonymousCookie = anonymousSetCookie.split(";", 2)[0];
         assertTrue(anonymousCookie.startsWith("SCHUBERT_NK_SESSION="));
         String form =
@@ -282,27 +300,31 @@ final class WebLogApplicationRuntimeTest {
         var post =
             client.send(
                 HttpRequest.newBuilder(login)
-                    .header("X-Forwarded-For", "203.0.113.1")
-                    .header("X-Forwarded-Proto", "https")
-                    .header("Cookie", anonymousCookie)
+                    .header(FIXTURE_X_FORWARDED_FOR_BECAABD0, FIXTURE_203_0_113_1_9BB16FDC)
+                    .header(FIXTURE_X_FORWARDED_PROTO_6D975CE8, FIXTURE_HTTPS_F7FB094B)
+                    .header(FIXTURE_COOKIE_1E78060F, anonymousCookie)
                     .header("Content-Type", "application/x-www-form-urlencoded;charset=UTF-8")
                     .POST(HttpRequest.BodyPublishers.ofString(form, StandardCharsets.UTF_8))
                     .build(),
                 HttpResponse.BodyHandlers.ofString());
         assertEquals(302, post.statusCode());
         assertEquals("/", post.headers().firstValue("Location").orElseThrow());
-        String authenticatedSetCookie = post.headers().firstValue("Set-Cookie").orElseThrow();
-        assertTrue(authenticatedSetCookie.toLowerCase(Locale.ROOT).contains("httponly"));
-        assertTrue(authenticatedSetCookie.toLowerCase(Locale.ROOT).contains("secure"));
+        String authenticatedSetCookie =
+            post.headers().firstValue(FIXTURE_SET_COOKIE_10F4EA2C).orElseThrow();
+        assertTrue(
+            authenticatedSetCookie.toLowerCase(Locale.ROOT).contains(FIXTURE_HTTPONLY_03BEA470));
+        assertTrue(
+            authenticatedSetCookie.toLowerCase(Locale.ROOT).contains(FIXTURE_SECURE_ABE38CF1));
         String authenticatedCookie = authenticatedSetCookie.split(";", 2)[0];
         assertTrue(authenticatedCookie.startsWith("SCHUBERT_NK_SESSION="));
         assertNotEquals(anonymousCookie, authenticatedCookie);
         var menu =
             client.send(
-                HttpRequest.newBuilder(URI.create("http://127.0.0.1:" + web.port() + "/"))
-                    .header("X-Forwarded-For", "203.0.113.1")
-                    .header("X-Forwarded-Proto", "https")
-                    .header("Cookie", authenticatedCookie)
+                HttpRequest.newBuilder(
+                        URI.create(FIXTURE_HTTP_127_0_0_1_B897D8EE + web.port() + "/"))
+                    .header(FIXTURE_X_FORWARDED_FOR_BECAABD0, FIXTURE_203_0_113_1_9BB16FDC)
+                    .header(FIXTURE_X_FORWARDED_PROTO_6D975CE8, FIXTURE_HTTPS_F7FB094B)
+                    .header(FIXTURE_COOKIE_1E78060F, authenticatedCookie)
                     .build(),
                 HttpResponse.BodyHandlers.ofString());
         assertEquals(200, menu.statusCode());
@@ -335,13 +357,14 @@ final class WebLogApplicationRuntimeTest {
   @Test
   void scr135RealHttpAdminLogSearchUsesProductionApiBroker() throws Exception {
     var db = new WebLogDatabaseFixture(Files.createDirectory(root.resolve("pg")));
-    var broker = startBroker(Files.createDirectory(root.resolve("broker")));
-    try (var factory = new ActiveMQConnectionFactory("vm://0");
+    var broker = startBroker(Files.createDirectory(root.resolve(FIXTURE_BROKER_4F6E4F9C)));
+    try (var factory = new ActiveMQConnectionFactory(FIXTURE_VM_0_0C76084A);
         var fingerprints = new FingerprintKeyRing("f1", syntheticKey(7), null, null);
         var contexts = new AuthContextCodec("a1", syntheticKey(1), null, null);
         var snapshots = new ResponseSnapshotCodec("s1", syntheticKey(3), null, null);
-        var sessionCodec = new SessionPayloadCodec("test", syntheticKey(4), null, null);
-        var logCodec = new WebLogPayloadCodec("test", syntheticKey(5), null, null);
+        var sessionCodec =
+            new SessionPayloadCodec(FIXTURE_TEST_4D967A30, syntheticKey(4), null, null);
+        var logCodec = new WebLogPayloadCodec(FIXTURE_TEST_4D967A30, syntheticKey(5), null, null);
         var client = HttpClient.newBuilder().connectTimeout(Duration.ofSeconds(2)).build()) {
       try (var connection = db.api();
           var statement =
@@ -390,18 +413,18 @@ final class WebLogApplicationRuntimeTest {
                   audit(),
                   java.util.UUID::randomUUID,
                   dispatcher(source(db::web), logCodec, transport),
-                  "web-log-worker",
+                  FIXTURE_WEB_LOG_WORKER_34947EFB,
                   10,
                   Duration.ofMillis(10),
                   ignored -> {
                     throw new AssertionError("unexpected terminal Web reply");
                   })) {
-        URI login = URI.create("http://127.0.0.1:" + web.port() + "/login");
+        URI login = URI.create(FIXTURE_HTTP_127_0_0_1_B897D8EE + web.port() + "/login");
         var get =
             client.send(
                 HttpRequest.newBuilder(login)
-                    .header("X-Forwarded-For", "203.0.113.1")
-                    .header("X-Forwarded-Proto", "https")
+                    .header(FIXTURE_X_FORWARDED_FOR_BECAABD0, FIXTURE_203_0_113_1_9BB16FDC)
+                    .header(FIXTURE_X_FORWARDED_PROTO_6D975CE8, FIXTURE_HTTPS_F7FB094B)
                     .build(),
                 HttpResponse.BodyHandlers.ofString());
         assertEquals(200, get.statusCode());
@@ -409,27 +432,27 @@ final class WebLogApplicationRuntimeTest {
         var csrf = Jsoup.parse(get.body()).selectFirst("input[name=_csrf]");
         assertNotNull(csrf);
         assertFalse(csrf.attr("value").isEmpty());
-        String anonymous = get.headers().firstValue("Set-Cookie").orElseThrow();
-        assertTrue(anonymous.toLowerCase(Locale.ROOT).contains("secure"));
-        assertTrue(anonymous.toLowerCase(Locale.ROOT).contains("httponly"));
+        String anonymous = get.headers().firstValue(FIXTURE_SET_COOKIE_10F4EA2C).orElseThrow();
+        assertTrue(anonymous.toLowerCase(Locale.ROOT).contains(FIXTURE_SECURE_ABE38CF1));
+        assertTrue(anonymous.toLowerCase(Locale.ROOT).contains(FIXTURE_HTTPONLY_03BEA470));
         String form =
             "username=adminpt&password=synthetic-password&_csrf="
                 + URLEncoder.encode(csrf.attr("value"), StandardCharsets.UTF_8);
         var post =
             client.send(
                 HttpRequest.newBuilder(login)
-                    .header("X-Forwarded-For", "203.0.113.1")
-                    .header("X-Forwarded-Proto", "https")
-                    .header("Cookie", anonymous.split(";", 2)[0])
+                    .header(FIXTURE_X_FORWARDED_FOR_BECAABD0, FIXTURE_203_0_113_1_9BB16FDC)
+                    .header(FIXTURE_X_FORWARDED_PROTO_6D975CE8, FIXTURE_HTTPS_F7FB094B)
+                    .header(FIXTURE_COOKIE_1E78060F, anonymous.split(";", 2)[0])
                     .header("Content-Type", "application/x-www-form-urlencoded;charset=UTF-8")
                     .POST(HttpRequest.BodyPublishers.ofString(form, StandardCharsets.UTF_8))
                     .build(),
                 HttpResponse.BodyHandlers.ofString());
         assertEquals(302, post.statusCode());
         assertEquals("/", post.headers().firstValue("Location").orElseThrow());
-        String authenticated = post.headers().firstValue("Set-Cookie").orElseThrow();
-        assertTrue(authenticated.toLowerCase(Locale.ROOT).contains("secure"));
-        assertTrue(authenticated.toLowerCase(Locale.ROOT).contains("httponly"));
+        String authenticated = post.headers().firstValue(FIXTURE_SET_COOKIE_10F4EA2C).orElseThrow();
+        assertTrue(authenticated.toLowerCase(Locale.ROOT).contains(FIXTURE_SECURE_ABE38CF1));
+        assertTrue(authenticated.toLowerCase(Locale.ROOT).contains(FIXTURE_HTTPONLY_03BEA470));
         String cookie = authenticated.split(";", 2)[0];
         assertNotEquals(anonymous.split(";", 2)[0], cookie);
         try (var connection = db.api();
@@ -443,10 +466,11 @@ final class WebLogApplicationRuntimeTest {
         var result =
             client.send(
                 HttpRequest.newBuilder(
-                        URI.create("http://127.0.0.1:" + web.port() + "/logs?action=PTSCR135"))
-                    .header("X-Forwarded-For", "203.0.113.1")
-                    .header("X-Forwarded-Proto", "https")
-                    .header("Cookie", cookie)
+                        URI.create(
+                            FIXTURE_HTTP_127_0_0_1_B897D8EE + web.port() + "/logs?action=PTSCR135"))
+                    .header(FIXTURE_X_FORWARDED_FOR_BECAABD0, FIXTURE_203_0_113_1_9BB16FDC)
+                    .header(FIXTURE_X_FORWARDED_PROTO_6D975CE8, FIXTURE_HTTPS_F7FB094B)
+                    .header(FIXTURE_COOKIE_1E78060F, cookie)
                     .build(),
                 HttpResponse.BodyHandlers.ofString());
         assertEquals(200, result.statusCode());
@@ -456,10 +480,11 @@ final class WebLogApplicationRuntimeTest {
         assertTrue(rows.first().text().contains("synthetic log result"));
         var games =
             client.send(
-                HttpRequest.newBuilder(URI.create("http://127.0.0.1:" + web.port() + "/scenarios"))
-                    .header("X-Forwarded-For", "203.0.113.1")
-                    .header("X-Forwarded-Proto", "https")
-                    .header("Cookie", cookie)
+                HttpRequest.newBuilder(
+                        URI.create(FIXTURE_HTTP_127_0_0_1_B897D8EE + web.port() + "/scenarios"))
+                    .header(FIXTURE_X_FORWARDED_FOR_BECAABD0, FIXTURE_203_0_113_1_9BB16FDC)
+                    .header(FIXTURE_X_FORWARDED_PROTO_6D975CE8, FIXTURE_HTTPS_F7FB094B)
+                    .header(FIXTURE_COOKIE_1E78060F, cookie)
                     .build(),
                 HttpResponse.BodyHandlers.ofString());
         assertEquals(200, games.statusCode());
@@ -523,10 +548,11 @@ final class WebLogApplicationRuntimeTest {
   @Test
   void scr127RealReplyWorkerAndSecuredLogMvcStartAndClose() throws Exception {
     var db = new WebLogDatabaseFixture(Files.createDirectory(root.resolve("pg")));
-    var broker = startBroker(Files.createDirectory(root.resolve("broker")));
-    try (var factory = new ActiveMQConnectionFactory("vm://0");
-        var sessionCodec = new SessionPayloadCodec("test", new byte[32], null, null);
-        var logCodec = new WebLogPayloadCodec("test", new byte[32], null, null);
+    var broker = startBroker(Files.createDirectory(root.resolve(FIXTURE_BROKER_4F6E4F9C)));
+    try (var factory = new ActiveMQConnectionFactory(FIXTURE_VM_0_0C76084A);
+        var sessionCodec =
+            new SessionPayloadCodec(FIXTURE_TEST_4D967A30, new byte[32], null, null);
+        var logCodec = new WebLogPayloadCodec(FIXTURE_TEST_4D967A30, new byte[32], null, null);
         var client = HttpClient.newBuilder().connectTimeout(Duration.ofSeconds(2)).build()) {
       var contexts =
           (dev.codex.schubert.nk.web.messaging.JmsContextFactory)
@@ -543,7 +569,7 @@ final class WebLogApplicationRuntimeTest {
               audit(),
               java.util.UUID::randomUUID,
               dispatcher,
-              "web-log-worker",
+              FIXTURE_WEB_LOG_WORKER_34947EFB,
               10,
               Duration.ofMillis(10),
               ignored -> {
@@ -555,9 +581,9 @@ final class WebLogApplicationRuntimeTest {
       assertEquals(1, consumerCount(broker));
       var page =
           client.send(
-              HttpRequest.newBuilder(URI.create("http://127.0.0.1:" + port + "/login"))
-                  .header("X-Forwarded-For", "203.0.113.1")
-                  .header("X-Forwarded-Proto", "https")
+              HttpRequest.newBuilder(URI.create(FIXTURE_HTTP_127_0_0_1_B897D8EE + port + "/login"))
+                  .header(FIXTURE_X_FORWARDED_FOR_BECAABD0, FIXTURE_203_0_113_1_9BB16FDC)
+                  .header(FIXTURE_X_FORWARDED_PROTO_6D975CE8, FIXTURE_HTTPS_F7FB094B)
                   .build(),
               HttpResponse.BodyHandlers.ofString());
       assertEquals(200, page.statusCode());
@@ -576,13 +602,14 @@ final class WebLogApplicationRuntimeTest {
   @Test
   void scr128InvalidReplyDlqMakesWholeRuntimeNotReady() throws Exception {
     var db = new WebLogDatabaseFixture(Files.createDirectory(root.resolve("pg")));
-    var broker = startBroker(Files.createDirectory(root.resolve("broker")));
-    try (var factory = new ActiveMQConnectionFactory("vm://0");
+    var broker = startBroker(Files.createDirectory(root.resolve(FIXTURE_BROKER_4F6E4F9C)));
+    try (var factory = new ActiveMQConnectionFactory(FIXTURE_VM_0_0C76084A);
         var producer = factory.createContext(JMSContext.AUTO_ACKNOWLEDGE);
         var observer = factory.createContext(JMSContext.AUTO_ACKNOWLEDGE);
         var dlq = observer.createConsumer(new ActiveMQQueue("nk.dead.letter::nk.dead.letter.q"));
-        var sessionCodec = new SessionPayloadCodec("test", new byte[32], null, null);
-        var logCodec = new WebLogPayloadCodec("test", new byte[32], null, null)) {
+        var sessionCodec =
+            new SessionPayloadCodec(FIXTURE_TEST_4D967A30, new byte[32], null, null);
+        var logCodec = new WebLogPayloadCodec(FIXTURE_TEST_4D967A30, new byte[32], null, null)) {
       var contexts =
           (dev.codex.schubert.nk.web.messaging.JmsContextFactory)
               () -> factory.createContext(JMSContext.SESSION_TRANSACTED);
@@ -599,7 +626,7 @@ final class WebLogApplicationRuntimeTest {
               audit(),
               java.util.UUID::randomUUID,
               dispatcher(source(db::web), logCodec, contexts),
-              "web-log-worker",
+              FIXTURE_WEB_LOG_WORKER_34947EFB,
               10,
               Duration.ofMillis(10),
               ignored -> {
@@ -625,10 +652,11 @@ final class WebLogApplicationRuntimeTest {
 
   @Test
   void scr129PartialStartupClosesReplyConsumer() throws Exception {
-    var broker = startBroker(Files.createDirectory(root.resolve("broker")));
-    try (var factory = new ActiveMQConnectionFactory("vm://0");
-        var sessionCodec = new SessionPayloadCodec("test", new byte[32], null, null);
-        var logCodec = new WebLogPayloadCodec("test", new byte[32], null, null)) {
+    var broker = startBroker(Files.createDirectory(root.resolve(FIXTURE_BROKER_4F6E4F9C)));
+    try (var factory = new ActiveMQConnectionFactory(FIXTURE_VM_0_0C76084A);
+        var sessionCodec =
+            new SessionPayloadCodec(FIXTURE_TEST_4D967A30, new byte[32], null, null);
+        var logCodec = new WebLogPayloadCodec(FIXTURE_TEST_4D967A30, new byte[32], null, null)) {
       var contexts =
           (dev.codex.schubert.nk.web.messaging.JmsContextFactory)
               () -> factory.createContext(JMSContext.SESSION_TRANSACTED);
@@ -669,7 +697,7 @@ final class WebLogApplicationRuntimeTest {
                   audit(),
                   java.util.UUID::randomUUID,
                   dispatcher,
-                  "web-log-worker",
+                  FIXTURE_WEB_LOG_WORKER_34947EFB,
                   10,
                   Duration.ofMillis(10),
                   ignored -> {}));
@@ -686,11 +714,11 @@ final class WebLogApplicationRuntimeTest {
     var runtime =
         new WebLogApplicationRuntime(
             () -> {
-              order.add("http");
+              order.add(FIXTURE_HTTP_A321F717);
               throw new SQLException("http close");
             },
             () -> {
-              order.add("worker");
+              order.add(FIXTURE_WORKER_1636F9EC);
               throw new IllegalStateException("worker close");
             },
             () -> {
@@ -707,9 +735,9 @@ final class WebLogApplicationRuntimeTest {
     assertEquals("Web Log runtime stop failed", failure.getMessage());
     assertNull(failure.getCause());
     assertEquals(0, failure.getSuppressed().length);
-    assertEquals(java.util.List.of("http"), order);
+    assertEquals(java.util.List.of(FIXTURE_HTTP_A321F717), order);
     assertThrows(IllegalStateException.class, runtime::close);
-    assertEquals(java.util.List.of("http", "http"), order);
+    assertEquals(java.util.List.of(FIXTURE_HTTP_A321F717, FIXTURE_HTTP_A321F717), order);
     assertFalse(runtime.ready());
     assertThrows(IllegalStateException.class, runtime::port);
     var notReady =
@@ -763,8 +791,9 @@ final class WebLogApplicationRuntimeTest {
             () -> {
               throw new AssertionError("broker must not be borrowed");
             };
-    try (var sessionCodec = new SessionPayloadCodec("test", new byte[32], null, null);
-        var logCodec = new WebLogPayloadCodec("test", new byte[32], null, null)) {
+    try (var sessionCodec =
+            new SessionPayloadCodec(FIXTURE_TEST_4D967A30, new byte[32], null, null);
+        var logCodec = new WebLogPayloadCodec(FIXTURE_TEST_4D967A30, new byte[32], null, null)) {
       var dispatcher = dispatcher(database, logCodec, contexts);
       assertThrows(
           NullPointerException.class,
@@ -779,7 +808,7 @@ final class WebLogApplicationRuntimeTest {
                   audit(),
                   java.util.UUID::randomUUID,
                   dispatcher,
-                  "worker",
+                  FIXTURE_WORKER_1636F9EC,
                   1,
                   Duration.ofSeconds(1),
                   ignored -> {}));
@@ -796,7 +825,7 @@ final class WebLogApplicationRuntimeTest {
                   audit(),
                   java.util.UUID::randomUUID,
                   dispatcher,
-                  "worker",
+                  FIXTURE_WORKER_1636F9EC,
                   1,
                   Duration.ofSeconds(1),
                   ignored -> {}));
@@ -813,7 +842,7 @@ final class WebLogApplicationRuntimeTest {
                   audit(),
                   java.util.UUID::randomUUID,
                   dispatcher,
-                  "worker",
+                  FIXTURE_WORKER_1636F9EC,
                   1,
                   Duration.ofSeconds(1),
                   ignored -> {}));
@@ -830,7 +859,7 @@ final class WebLogApplicationRuntimeTest {
                   audit(),
                   java.util.UUID::randomUUID,
                   dispatcher,
-                  "worker",
+                  FIXTURE_WORKER_1636F9EC,
                   1,
                   Duration.ofSeconds(1),
                   ignored -> {}));
@@ -847,7 +876,7 @@ final class WebLogApplicationRuntimeTest {
                   null,
                   java.util.UUID::randomUUID,
                   dispatcher,
-                  "worker",
+                  FIXTURE_WORKER_1636F9EC,
                   1,
                   Duration.ofSeconds(1),
                   ignored -> {}));
@@ -864,7 +893,7 @@ final class WebLogApplicationRuntimeTest {
                   audit(),
                   null,
                   dispatcher,
-                  "worker",
+                  FIXTURE_WORKER_1636F9EC,
                   1,
                   Duration.ofSeconds(1),
                   ignored -> {}));
@@ -881,7 +910,7 @@ final class WebLogApplicationRuntimeTest {
                   audit(),
                   java.util.UUID::randomUUID,
                   null,
-                  "worker",
+                  FIXTURE_WORKER_1636F9EC,
                   1,
                   Duration.ofSeconds(1),
                   ignored -> {}));
@@ -915,7 +944,7 @@ final class WebLogApplicationRuntimeTest {
                   audit(),
                   java.util.UUID::randomUUID,
                   dispatcher,
-                  "worker",
+                  FIXTURE_WORKER_1636F9EC,
                   1,
                   null,
                   ignored -> {}));
@@ -932,7 +961,7 @@ final class WebLogApplicationRuntimeTest {
                   audit(),
                   java.util.UUID::randomUUID,
                   dispatcher,
-                  "worker",
+                  FIXTURE_WORKER_1636F9EC,
                   1,
                   Duration.ofSeconds(1),
                   null));
@@ -992,7 +1021,7 @@ final class WebLogApplicationRuntimeTest {
         .setLargeMessagesDirectory(root.resolve("large-messages").toString())
         .setSecurityEnabled(false)
         .clearAcceptorConfigurations()
-        .addAcceptorConfiguration("component", "vm://0");
+        .addAcceptorConfiguration("component", FIXTURE_VM_0_0C76084A);
     return new EmbeddedActiveMQ().setConfiguration(configuration).start();
   }
 

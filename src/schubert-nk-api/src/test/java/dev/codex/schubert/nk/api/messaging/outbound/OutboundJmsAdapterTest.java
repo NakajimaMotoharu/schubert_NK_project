@@ -40,6 +40,7 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** PT-JMS-005/007/009 production Reply/DLQ adapters and listener-owned transaction. */
 final class OutboundJmsAdapterTest {
+  private static final String FIXTURE_001_A3FEAA64 = "001";
   private static final UUID REQUEST_ID = UUID.fromString("00000000-0000-0000-0000-000000000001");
   private static final UUID RESPONSE_ID = UUID.fromString("00000000-0000-0000-0000-000000000002");
   private static final Instant DETECTED_AT = Instant.parse("2026-09-03T00:00:00Z");
@@ -71,7 +72,7 @@ final class OutboundJmsAdapterTest {
       assertEquals(REQUEST_ID.toString(), reply.getJMSCorrelationID());
       assertEquals(RESPONSE_ID.toString(), reply.getStringProperty("NKMessageID"));
       assertEquals("LOGRSP01", reply.getStringProperty("NKLayoutID"));
-      assertEquals("001", reply.getStringProperty("NKProtocolVersion"));
+      assertEquals(FIXTURE_001_A3FEAA64, reply.getStringProperty("NKProtocolVersion"));
       assertNull(reply.getJMSReplyTo());
       assertEquals(DeliveryMode.PERSISTENT, reply.getJMSDeliveryMode());
       assertTrue(
@@ -171,7 +172,7 @@ final class OutboundJmsAdapterTest {
             4,
             REQUEST_ID,
             new LayoutId("LOGREQ01"),
-            "001",
+            FIXTURE_001_A3FEAA64,
             "nk.sync.request"));
   }
 
@@ -227,9 +228,9 @@ final class OutboundJmsAdapterTest {
     byte[] body = new byte[totalLength];
     Arrays.fill(body, (byte) ' ');
     ascii(body, 0, "SCHBNK01");
-    ascii(body, 8, "001");
+    ascii(body, 8, FIXTURE_001_A3FEAA64);
     ascii(body, 11, layout);
-    ascii(body, 19, "001");
+    ascii(body, 19, FIXTURE_001_A3FEAA64);
     body[22] = (byte) kind;
     body[23] = (byte) interaction;
     ascii(body, 24, messageId.toString());

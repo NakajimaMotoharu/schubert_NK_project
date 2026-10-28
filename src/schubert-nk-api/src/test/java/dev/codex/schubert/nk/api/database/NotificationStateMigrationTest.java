@@ -27,6 +27,8 @@ import org.junit.jupiter.api.io.TempDir;
 /** PT-QST-STATE-001..003; UI242/SS331/SSC152/BUG422/YKT333. Independent legacy DB oracle. */
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 final class NotificationStateMigrationTest {
+  private static final String FIXTURE_ACCEPTED_E50B782C = "ACCEPTED";
+  private static final String FIXTURE_ERROR_F717E7D8 = "ERROR";
   @TempDir static Path root;
   private static ApiLogDatabaseFixture database;
   private static String url;
@@ -127,7 +129,9 @@ final class NotificationStateMigrationTest {
       var failure =
           assertThrows(org.flywaydb.core.api.FlywayException.class, () -> upgrade().migrate());
       assertTrue(failure.getMessage().contains("LEGACY_NOTIFICATION_STATE"));
-      assertEquals("ACCEPTED", value(c, "select state from schubert.notifications where id=12"));
+      assertEquals(
+          FIXTURE_ACCEPTED_E50B782C,
+          value(c, "select state from schubert.notifications where id=12"));
       assertEquals(
           history,
           value(
@@ -142,7 +146,7 @@ final class NotificationStateMigrationTest {
                   c,
                   "select pg_get_constraintdef(oid) from pg_constraint "
                       + "where conrelid='schubert.notifications'::regclass and conname='ck_notifications_state'")
-              .contains("ACCEPTED"));
+              .contains(FIXTURE_ACCEPTED_E50B782C));
       sql(
           c,
           "update schubert.async_jobs set state='RECEIVED',started_at=null,processing_message_id=null where id=11");
@@ -201,10 +205,15 @@ final class NotificationStateMigrationTest {
   void exactStateAllowlistAndLeastPrivilegeRemainEnforced() throws Exception {
     try (var c = database.api()) {
       c.setAutoCommit(false);
-      for (String state : List.of("RECEIVED", "PROCESSING", "COMPLETED", "ERROR", "CANCELLED")) {
-        String code = state.equals("ERROR") ? "'PROCESS_FAILED'" : "null";
-        String detail = state.equals("ERROR") ? "'independent public error'" : "null";
-        String type = state.equals("ERROR") || state.equals("COMPLETED") ? state : "ACCEPTED";
+      for (String state :
+          List.of("RECEIVED", "PROCESSING", "COMPLETED", FIXTURE_ERROR_F717E7D8, "CANCELLED")) {
+        String code = state.equals(FIXTURE_ERROR_F717E7D8) ? "'PROCESS_FAILED'" : "null";
+        String detail =
+            state.equals(FIXTURE_ERROR_F717E7D8) ? "'independent public error'" : "null";
+        String type =
+            state.equals(FIXTURE_ERROR_F717E7D8) || state.equals("COMPLETED")
+                ? state
+                : FIXTURE_ACCEPTED_E50B782C;
         sql(
             c,
             "update schubert.notifications set state='"
@@ -220,7 +229,7 @@ final class NotificationStateMigrationTest {
         assertEquals(
             type, value(c, "select notification_type from schubert.notifications where id=12"));
       }
-      for (String invalid : List.of("ACCEPTED", "UNKNOWN", "", "received")) {
+      for (String invalid : List.of(FIXTURE_ACCEPTED_E50B782C, "UNKNOWN", "", "received")) {
         var point = c.setSavepoint();
         assertEquals(
             "23514",

@@ -21,6 +21,7 @@ import org.junit.jupiter.api.Test;
  * credentials, DB/JMS, native readiness or actual API success is claimed.
  */
 final class ApiAdmittedConfigurationTest {
+  private static final String FIXTURE_UNTRUSTED_6FC6869D = "UNTRUSTED";
   private static final Map<String, String> ENV =
       Map.of(
           "SCHUBERT_NK_CONFIG_DIR",
@@ -84,7 +85,7 @@ final class ApiAdmittedConfigurationTest {
             () ->
                 ApiProcessMain.admittedConfiguration(
                     () -> {
-                      throw new NoSuchAlgorithmException("UNTRUSTED");
+                      throw new NoSuchAlgorithmException(FIXTURE_UNTRUSTED_6FC6869D);
                     },
                     status));
     assertEquals(70, status[0]);
@@ -96,7 +97,7 @@ final class ApiAdmittedConfigurationTest {
   @Test
   void ssc301004IoFailureIdentityAnd50Remain() {
     int[] status = {50};
-    var original = new IOException("UNTRUSTED");
+    var original = new IOException(FIXTURE_UNTRUSTED_6FC6869D);
     assertSame(
         original,
         assertThrows(
@@ -113,7 +114,7 @@ final class ApiAdmittedConfigurationTest {
   @Test
   void ssc301005UnknownRuntimeAndErrorRemainUnknown() {
     int[] status = {50};
-    var runtime = new IllegalStateException("UNTRUSTED");
+    var runtime = new IllegalStateException(FIXTURE_UNTRUSTED_6FC6869D);
     assertSame(
         runtime,
         assertThrows(
@@ -124,7 +125,7 @@ final class ApiAdmittedConfigurationTest {
                       throw runtime;
                     },
                     status)));
-    var fatal = new AssertionError("UNTRUSTED");
+    var fatal = new AssertionError(FIXTURE_UNTRUSTED_6FC6869D);
     assertSame(
         fatal,
         assertThrows(
@@ -187,7 +188,7 @@ final class ApiAdmittedConfigurationTest {
                   () ->
                       ApiProcessMain.admittedConfiguration(
                           () -> {
-                            throw new IllegalArgumentException("UNTRUSTED");
+                            throw new IllegalArgumentException(FIXTURE_UNTRUSTED_6FC6869D);
                           },
                           status));
             } else {

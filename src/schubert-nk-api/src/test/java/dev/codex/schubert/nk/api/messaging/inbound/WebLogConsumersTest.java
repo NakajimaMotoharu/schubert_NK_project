@@ -39,6 +39,8 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** PG228/PT-JMS-015: actual Artemis Web-log projection consumer, not full API bootstrap. */
 final class WebLogConsumersTest {
+  private static final String FIXTURE_VM_0_0C76084A = "vm://0";
+
   @Test
   void jmsown002AcquisitionFailureAndNullKeepIdentityWithoutFatalNotification() {
     for (Throwable failure :
@@ -93,7 +95,7 @@ final class WebLogConsumersTest {
   @Test
   void oneConsumerCommitsValidatedWebLog(@TempDir Path root) throws Exception {
     EmbeddedActiveMQ broker = startBroker(root);
-    try (var factory = new ActiveMQConnectionFactory("vm://0");
+    try (var factory = new ActiveMQConnectionFactory(FIXTURE_VM_0_0C76084A);
         JMSContext producer = factory.createContext(JMSContext.AUTO_ACKNOWLEDGE)) {
       var processed = new AtomicInteger();
       var done = new CountDownLatch(1);
@@ -128,7 +130,7 @@ final class WebLogConsumersTest {
   @Test
   void temporaryProcessorFailureRollsBackAndRedelivers(@TempDir Path root) throws Exception {
     EmbeddedActiveMQ broker = startBroker(root);
-    try (var factory = new ActiveMQConnectionFactory("vm://0");
+    try (var factory = new ActiveMQConnectionFactory(FIXTURE_VM_0_0C76084A);
         JMSContext producer = factory.createContext(JMSContext.AUTO_ACKNOWLEDGE)) {
       var attempts = new AtomicInteger();
       var done = new CountDownLatch(1);
@@ -160,7 +162,7 @@ final class WebLogConsumersTest {
   @Test
   void permanentInvalidEventsCommitDlqAndSignalTerminalOnce(@TempDir Path root) throws Exception {
     EmbeddedActiveMQ broker = startBroker(root);
-    try (var factory = new ActiveMQConnectionFactory("vm://0");
+    try (var factory = new ActiveMQConnectionFactory(FIXTURE_VM_0_0C76084A);
         JMSContext producer = factory.createContext(JMSContext.AUTO_ACKNOWLEDGE);
         JMSContext observer = factory.createContext(JMSContext.AUTO_ACKNOWLEDGE);
         var dlq = observer.createConsumer(queue(BrokerTopology.DEAD_LETTER))) {
@@ -206,7 +208,7 @@ final class WebLogConsumersTest {
   @Test
   void startupRejectsNullAndWrongModeBeforeDelivery(@TempDir Path root) throws Exception {
     EmbeddedActiveMQ broker = startBroker(root);
-    try (var factory = new ActiveMQConnectionFactory("vm://0")) {
+    try (var factory = new ActiveMQConnectionFactory(FIXTURE_VM_0_0C76084A)) {
       var listener = new WebLogListener(ignored -> {}, CLOCK);
       assertThrows(
           NullPointerException.class, () -> WebLogConsumers.start(null, listener, ignored -> {}));
@@ -383,7 +385,7 @@ final class WebLogConsumersTest {
         .setLargeMessagesDirectory(root.resolve("large-messages").toString())
         .setSecurityEnabled(false)
         .clearAcceptorConfigurations()
-        .addAcceptorConfiguration("component", "vm://0");
+        .addAcceptorConfiguration("component", FIXTURE_VM_0_0C76084A);
     return new EmbeddedActiveMQ().setConfiguration(configuration).start();
   }
 }

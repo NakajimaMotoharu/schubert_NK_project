@@ -26,6 +26,7 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** Independent ownership counts and real Tomcat/ASYNC terminal, NATIVE-STOP001..003. */
 final class WebHttpAdmissionTest {
+  private static final String FIXTURE_LOGIN_F843C044 = "/login";
   @TempDir Path root;
 
   @Test
@@ -111,10 +112,10 @@ final class WebHttpAdmissionTest {
             Map.of(WebHttpAdmission.class, gate));
     try (var client = HttpClient.newBuilder().connectTimeout(Duration.ofSeconds(3)).build()) {
       String base = "http://127.0.0.1:" + server.port();
-      assertEquals(Set.of("/", "/login", "/error"), server.mappedPaths());
-      assertEquals(503, get(client, base + "/login").statusCode());
+      assertEquals(Set.of("/", FIXTURE_LOGIN_F843C044, "/error"), server.mappedPaths());
+      assertEquals(503, get(client, base + FIXTURE_LOGIN_F843C044).statusCode());
       gate.admit();
-      assertEquals(200, get(client, base + "/login").statusCode());
+      assertEquals(200, get(client, base + FIXTURE_LOGIN_F843C044).statusCode());
       var waiting =
           client.sendAsync(
               HttpRequest.newBuilder(URI.create(base + "/test/async"))
@@ -123,7 +124,7 @@ final class WebHttpAdmissionTest {
               HttpResponse.BodyHandlers.ofString());
       assertTrue(entered.await(3, TimeUnit.SECONDS));
       gate.refuse();
-      assertEquals(503, get(client, base + "/login").statusCode());
+      assertEquals(503, get(client, base + FIXTURE_LOGIN_F843C044).statusCode());
       assertThrows(IOException.class, () -> gate.drain(Duration.ZERO));
       var owned = async.get();
       assertNotNull(owned);

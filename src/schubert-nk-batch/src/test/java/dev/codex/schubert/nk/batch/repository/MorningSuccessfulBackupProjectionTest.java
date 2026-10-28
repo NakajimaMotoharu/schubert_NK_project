@@ -22,21 +22,27 @@ import org.junit.jupiter.api.Test;
  * no VM, no ownership grant, no production-generated oracle.
  */
 final class MorningSuccessfulBackupProjectionTest {
+  private static final String FIXTURE_BACKUP_DB_6C03A087 = "BACKUP_DB";
+  private static final String FIXTURE_ATTEMPT_7FD8A755 = "attempt";
+  private static final String FIXTURE_STARTED_AT_D1210657 = "started_at";
+  private static final String FIXTURE_ENDED_AT_E151E393 = "ended_at";
+  private static final String FIXTURE_BYTE_COUNT_6D76E237 = "byte_count";
+  private static final String FIXTURE_BACKUP_CONFIG_8386D7E7 = "BACKUP_CONFIG";
   private static final Instant OBSERVED = Instant.parse("2026-09-28T03:00:00Z");
 
   private static Map<String, Object> row(String step) {
     var value = new HashMap<String, Object>();
-    boolean database = step.equals("BACKUP_DB");
+    boolean database = step.equals(FIXTURE_BACKUP_DB_6C03A087);
     value.put("id", database ? 1737001L : 1737002L);
     value.put("business_date", LocalDate.of(2026, 9, 28));
     value.put("step", step);
-    value.put("attempt", 1);
-    value.put("started_at", OffsetDateTime.parse("2026-09-28T02:00:00Z"));
-    value.put("ended_at", OffsetDateTime.parse("2026-09-28T02:00:03Z"));
+    value.put(FIXTURE_ATTEMPT_7FD8A755, 1);
+    value.put(FIXTURE_STARTED_AT_D1210657, OffsetDateTime.parse("2026-09-28T02:00:00Z"));
+    value.put(FIXTURE_ENDED_AT_E151E393, OffsetDateTime.parse("2026-09-28T02:00:03Z"));
     value.put("target_count", database ? 1L : 2L);
     value.put("success_count", database ? 1L : 2L);
     value.put("failure_count", 0L);
-    value.put("byte_count", database ? 26L : 67L);
+    value.put(FIXTURE_BYTE_COUNT_6D76E237, database ? 26L : 67L);
     value.put("error_code", null);
     value.put("error_summary", null);
     return value;
@@ -64,8 +70,8 @@ final class MorningSuccessfulBackupProjectionTest {
       var probe = new MorningDatabaseSessionTest.Probe();
       probe.successfulRows =
           reversed
-              ? List.of(row("BACKUP_CONFIG"), row("BACKUP_DB"))
-              : List.of(row("BACKUP_DB"), row("BACKUP_CONFIG"));
+              ? List.of(row(FIXTURE_BACKUP_CONFIG_8386D7E7), row(FIXTURE_BACKUP_DB_6C03A087))
+              : List.of(row(FIXTURE_BACKUP_DB_6C03A087), row(FIXTURE_BACKUP_CONFIG_8386D7E7));
       var result =
           probe
               .subject()
@@ -96,9 +102,13 @@ final class MorningSuccessfulBackupProjectionTest {
                 session -> session.successfulBackup(MorningDatabaseSessionTest.RUN, OBSERVED))
             .isEmpty());
     probe.released();
-    rejected(List.of(row("BACKUP_DB")));
-    rejected(List.of(row("BACKUP_DB"), row("BACKUP_CONFIG"), row("BACKUP_DB")));
-    rejected(List.of(row("BACKUP_DB"), row("BACKUP_DB")));
+    rejected(List.of(row(FIXTURE_BACKUP_DB_6C03A087)));
+    rejected(
+        List.of(
+            row(FIXTURE_BACKUP_DB_6C03A087),
+            row(FIXTURE_BACKUP_CONFIG_8386D7E7),
+            row(FIXTURE_BACKUP_DB_6C03A087)));
+    rejected(List.of(row(FIXTURE_BACKUP_DB_6C03A087), row(FIXTURE_BACKUP_DB_6C03A087)));
   }
 
   @Test
@@ -107,16 +117,18 @@ final class MorningSuccessfulBackupProjectionTest {
         List.of(
             "step",
             "business_date",
-            "started_at",
-            "ended_at",
+            FIXTURE_STARTED_AT_D1210657,
+            FIXTURE_ENDED_AT_E151E393,
             "target_count",
             "success_count",
             "failure_count",
-            "byte_count",
+            FIXTURE_BYTE_COUNT_6D76E237,
             "id",
-            "attempt")) {
+            FIXTURE_ATTEMPT_7FD8A755)) {
       for (int which : new int[] {0, 1}) {
-        var rows = new ArrayList<>(List.of(row("BACKUP_DB"), row("BACKUP_CONFIG")));
+        var rows =
+            new ArrayList<>(
+                List.of(row(FIXTURE_BACKUP_DB_6C03A087), row(FIXTURE_BACKUP_CONFIG_8386D7E7)));
         rows.get(which).put(field, null);
         rejected(rows);
       }
@@ -127,51 +139,56 @@ final class MorningSuccessfulBackupProjectionTest {
   void mdbProj1737004EachSemanticFieldCounterexampleRejects() throws Exception {
     var invalid = new HashMap<String, Object>();
     invalid.put("business_date", LocalDate.of(2026, 9, 27));
-    invalid.put("ended_at", OffsetDateTime.parse("2026-09-28T01:59:59Z"));
+    invalid.put(FIXTURE_ENDED_AT_E151E393, OffsetDateTime.parse("2026-09-28T01:59:59Z"));
     invalid.put("target_count", 3L);
     invalid.put("success_count", 0L);
     invalid.put("failure_count", 1L);
-    invalid.put("byte_count", 0L);
+    invalid.put(FIXTURE_BYTE_COUNT_6D76E237, 0L);
     invalid.put("error_code", "FIXED_FAULT");
     invalid.put("error_summary", "PUBLIC_FIXTURE");
     invalid.put("step", "CLEAN_LOG");
     for (var mutation : invalid.entrySet()) {
       for (int which : new int[] {0, 1}) {
-        var rows = new ArrayList<>(List.of(row("BACKUP_DB"), row("BACKUP_CONFIG")));
+        var rows =
+            new ArrayList<>(
+                List.of(row(FIXTURE_BACKUP_DB_6C03A087), row(FIXTURE_BACKUP_CONFIG_8386D7E7)));
         rows.get(which).put(mutation.getKey(), mutation.getValue());
         rejected(rows);
       }
     }
     for (String timestamp :
         List.of("2026-09-28T03:00:00.000001Z", "2026-09-28T02:00:03.000000001Z")) {
-      var bad = row("BACKUP_DB");
-      bad.put("ended_at", OffsetDateTime.parse(timestamp));
-      rejected(List.of(bad, row("BACKUP_CONFIG")));
+      var bad = row(FIXTURE_BACKUP_DB_6C03A087);
+      bad.put(FIXTURE_ENDED_AT_E151E393, OffsetDateTime.parse(timestamp));
+      rejected(List.of(bad, row(FIXTURE_BACKUP_CONFIG_8386D7E7)));
     }
   }
 
   @Test
   void mdbProj1737005PairAttemptStartAndEndMustBeOneBundle() throws Exception {
-    for (String field : List.of("attempt", "started_at", "ended_at")) {
-      var bad = row("BACKUP_CONFIG");
+    for (String field :
+        List.of(FIXTURE_ATTEMPT_7FD8A755, FIXTURE_STARTED_AT_D1210657, FIXTURE_ENDED_AT_E151E393)) {
+      var bad = row(FIXTURE_BACKUP_CONFIG_8386D7E7);
       bad.put(
           field,
-          field.equals("attempt")
+          field.equals(FIXTURE_ATTEMPT_7FD8A755)
               ? 2
               : OffsetDateTime.parse(
-                  field.equals("started_at") ? "2026-09-28T02:00:01Z" : "2026-09-28T02:00:04Z"));
-      rejected(List.of(row("BACKUP_DB"), bad));
+                  field.equals(FIXTURE_STARTED_AT_D1210657)
+                      ? "2026-09-28T02:00:01Z"
+                      : "2026-09-28T02:00:04Z"));
+      rejected(List.of(row(FIXTURE_BACKUP_DB_6C03A087), bad));
     }
   }
 
   @Test
   void mdbProj1737006EndAtObservationAndPositiveByteBoundaryRemainEligible() throws Exception {
     var probe = new MorningDatabaseSessionTest.Probe();
-    var db = row("BACKUP_DB");
-    var config = row("BACKUP_CONFIG");
+    var db = row(FIXTURE_BACKUP_DB_6C03A087);
+    var config = row(FIXTURE_BACKUP_CONFIG_8386D7E7);
     for (var row : List.of(db, config)) {
-      row.put("ended_at", OBSERVED.atOffset(java.time.ZoneOffset.UTC));
-      row.put("byte_count", 1L);
+      row.put(FIXTURE_ENDED_AT_E151E393, OBSERVED.atOffset(java.time.ZoneOffset.UTC));
+      row.put(FIXTURE_BYTE_COUNT_6D76E237, 1L);
     }
     probe.successfulRows = List.of(db, config);
     var result =
@@ -198,7 +215,8 @@ final class MorningSuccessfulBackupProjectionTest {
             "HISTORY.statement.close")) {
       for (int kind : new int[] {0, 1, 2}) {
         var probe = new MorningDatabaseSessionTest.Probe();
-        probe.successfulRows = List.of(row("BACKUP_DB"), row("BACKUP_CONFIG"));
+        probe.successfulRows =
+            List.of(row(FIXTURE_BACKUP_DB_6C03A087), row(FIXTURE_BACKUP_CONFIG_8386D7E7));
         Throwable failure =
             switch (kind) {
               case 0 -> new java.sql.SQLException("PRIVATE_PROVIDER_DIAGNOSTIC");

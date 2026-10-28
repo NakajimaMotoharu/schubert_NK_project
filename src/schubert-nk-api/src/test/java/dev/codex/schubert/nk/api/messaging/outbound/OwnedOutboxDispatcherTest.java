@@ -19,6 +19,8 @@ import org.junit.jupiter.api.Test;
 
 /** Owned thread lifecycle at real dispatch/open boundary, not a synthetic covered run method. */
 class OwnedOutboxDispatcherTest {
+  private static final String FIXTURE_FIXTURE_B086DE7B = "fixture";
+
   @Test
   void graph322001NestedFatalStopsOwnedWorkerBeforeAnotherDispatch() throws Exception {
     var previous = System.err;
@@ -127,7 +129,7 @@ class OwnedOutboxDispatcherTest {
         dispatcher(
             () -> {
               attempts.countDown();
-              throw new SQLException("fixture");
+              throw new SQLException(FIXTURE_FIXTURE_B086DE7B);
             });
     var owned = OwnedOutboxDispatcher.create(d, "pt");
     try {
@@ -176,7 +178,7 @@ class OwnedOutboxDispatcherTest {
     var d =
         dispatcher(
             () -> {
-              throw new SQLException("fixture");
+              throw new SQLException(FIXTURE_FIXTURE_B086DE7B);
             });
     assertThrows(NullPointerException.class, () -> OwnedOutboxDispatcher.start(null, "pt"));
     assertThrows(NullPointerException.class, () -> OwnedOutboxDispatcher.start(d, null));
@@ -199,7 +201,7 @@ class OwnedOutboxDispatcherTest {
                   } catch (InterruptedException e) {
                     Thread.currentThread().interrupt();
                   }
-                  throw new SQLException("fixture");
+                  throw new SQLException(FIXTURE_FIXTURE_B086DE7B);
                 }),
             "pt");
     try (var executor = Executors.newSingleThreadExecutor()) {
@@ -264,7 +266,7 @@ class OwnedOutboxDispatcherTest {
                   thread.set(Thread.currentThread());
                   entered.countDown();
                   Thread.currentThread().interrupt();
-                  throw new SQLException("fixture");
+                  throw new SQLException(FIXTURE_FIXTURE_B086DE7B);
                 }),
             "pt");
     try {
@@ -296,7 +298,7 @@ class OwnedOutboxDispatcherTest {
                   }
                   assertThrows(IllegalStateException.class, reference.get()::close);
                   completed.countDown();
-                  throw new SQLException("fixture");
+                  throw new SQLException(FIXTURE_FIXTURE_B086DE7B);
                 }),
             "pt");
     try {

@@ -35,6 +35,13 @@ import org.junit.jupiter.api.io.TempDir;
 
 /** NK-OPS-001/BAK/BKO/UI251/SS3416.1/SSC090/091; PT-OPS-DBCP001..008. */
 final class BackupDatabaseCopyTest {
+  private static final String FIXTURE_UID_0C18F38C = "uid";
+  private static final String FIXTURE_GID_0ACDD642 = "gid";
+  private static final String FIXTURE_PART_92B0D5FC = ".part";
+  private static final String FIXTURE_UNLINK_04963CA9 = "unlink";
+  private static final String FIXTURE_DEV_8A17302D = "dev";
+  private static final String FIXTURE_FILE_BFDDE6F5 = "file";
+  private static final String FIXTURE_SIZE_EB1E91E4 = "size";
   @TempDir Path temporary;
 
   private static byte[] golden() {
@@ -47,8 +54,8 @@ final class BackupDatabaseCopyTest {
     f.effective = UID;
     f.metadata =
         (role, m) -> {
-          m.put("uid", (int) UID);
-          m.put("gid", (int) GID);
+          m.put(FIXTURE_UID_0C18F38C, (int) UID);
+          m.put(FIXTURE_GID_0ACDD642, (int) GID);
         };
     return f;
   }
@@ -86,11 +93,11 @@ final class BackupDatabaseCopyTest {
       f.chunk = 7;
       create(f);
       f.released();
-      assertFalse(Files.exists(f.parent.resolve(PART + ".part")));
+      assertFalse(Files.exists(f.parent.resolve(PART + FIXTURE_PART_92B0D5FC)));
       assertEquals(2, f.counts.get("force"));
       assertEquals(2, f.counts.get("closeWriter"));
       assertEquals(2, f.counts.get("closeReader"));
-      assertEquals(1, f.counts.get("unlink"));
+      assertEquals(1, f.counts.get(FIXTURE_UNLINK_04963CA9));
       assertEquals(1, f.counts.get("sync"));
     }
   }
@@ -144,8 +151,8 @@ final class BackupDatabaseCopyTest {
       f.effective = 0xffff_ffffL;
       f.metadata =
           (role, m) -> {
-            m.put("uid", -1);
-            m.put("gid", -1);
+            m.put(FIXTURE_UID_0C18F38C, -1);
+            m.put(FIXTURE_GID_0ACDD642, -1);
           };
       new BackupDatabaseCopy(f.root, f, 0xffff_ffffL, 0xffff_ffffL, f)
           .dump(golden(), PART, p -> {});
@@ -161,48 +168,77 @@ final class BackupDatabaseCopyTest {
         var parents = new AtomicInteger();
         f.metadata =
             (role, m) -> {
-              m.put("uid", (int) UID);
-              m.put("gid", (int) GID);
+              m.put(FIXTURE_UID_0C18F38C, (int) UID);
+              m.put(FIXTURE_GID_0ACDD642, (int) GID);
               if (role.equals("parent")
                   && parents.incrementAndGet() == 2
-                  && vector.equals("parent:dev")) m.put("dev", -1L);
-              if (role.equals("file")) {
+                  && vector.equals("parent:dev")) m.put(FIXTURE_DEV_8A17302D, -1L);
+              if (role.equals(FIXTURE_FILE_BFDDE6F5)) {
                 int at = files.incrementAndGet();
                 if (vector.startsWith(at + ":")) {
                   String key = vector.substring(vector.indexOf(':') + 1);
-                  m.put(key, key.equals("size") ? at == 1 ? 1L : 0L : -1L);
+                  m.put(key, key.equals(FIXTURE_SIZE_EB1E91E4) ? at == 1 ? 1L : 0L : -1L);
                 }
               }
             };
         fails(f);
       }
     }
-    for (String role : List.of("parent", "file"))
+    for (String role : List.of("parent", FIXTURE_FILE_BFDDE6F5))
       for (var change :
-          Map.<String, Object>of("mode", 0, "uid", 1, "gid", 1, "nlink", 0, "size", -1L).entrySet())
+          Map.<String, Object>of(
+                  "mode",
+                  0,
+                  FIXTURE_UID_0C18F38C,
+                  1,
+                  FIXTURE_GID_0ACDD642,
+                  1,
+                  "nlink",
+                  0,
+                  FIXTURE_SIZE_EB1E91E4,
+                  -1L)
+              .entrySet())
         try (var f = fixture()) {
           f.metadata =
               (r, m) -> {
-                m.put("uid", (int) UID);
-                m.put("gid", (int) GID);
+                m.put(FIXTURE_UID_0C18F38C, (int) UID);
+                m.put(FIXTURE_GID_0ACDD642, (int) GID);
                 if (r.equals(role)) m.put(change.getKey(), change.getValue());
               };
           fails(f);
         }
     for (String key :
-        List.of("mode", "uid", "gid", "nlink", "size", "dev", "ino", "lastModifiedTime", "ctime"))
+        List.of(
+            "mode",
+            FIXTURE_UID_0C18F38C,
+            FIXTURE_GID_0ACDD642,
+            "nlink",
+            FIXTURE_SIZE_EB1E91E4,
+            FIXTURE_DEV_8A17302D,
+            "ino",
+            "lastModifiedTime",
+            "ctime"))
       for (Object value : new Object[] {null, "wrong"})
         try (var f = fixture()) {
           f.metadata =
               (role, m) -> {
-                m.put("uid", (int) UID);
-                m.put("gid", (int) GID);
+                m.put(FIXTURE_UID_0C18F38C, (int) UID);
+                m.put(FIXTURE_GID_0ACDD642, (int) GID);
                 m.put(key, value);
               };
           fails(f);
         }
     for (String kind :
-        List.of("nullMap", "aclNull", "acl", "readonly", "fs", "fsNull", "actor", "dev", "size"))
+        List.of(
+            "nullMap",
+            "aclNull",
+            "acl",
+            "readonly",
+            "fs",
+            "fsNull",
+            "actor",
+            FIXTURE_DEV_8A17302D,
+            FIXTURE_SIZE_EB1E91E4))
       try (var f = fixture()) {
         switch (kind) {
           case "nullMap" -> f.nullMap = true;
@@ -215,10 +251,14 @@ final class BackupDatabaseCopyTest {
           default ->
               f.metadata =
                   (role, m) -> {
-                    m.put("uid", (int) UID);
-                    m.put("gid", (int) GID);
-                    if (role.equals("file"))
-                      m.put(kind.equals("dev") ? "dev" : "size", kind.equals("dev") ? -1L : 65537L);
+                    m.put(FIXTURE_UID_0C18F38C, (int) UID);
+                    m.put(FIXTURE_GID_0ACDD642, (int) GID);
+                    if (role.equals(FIXTURE_FILE_BFDDE6F5))
+                      m.put(
+                          kind.equals(FIXTURE_DEV_8A17302D)
+                              ? FIXTURE_DEV_8A17302D
+                              : FIXTURE_SIZE_EB1E91E4,
+                          kind.equals(FIXTURE_DEV_8A17302D) ? -1L : 65537L);
                   };
         }
         fails(f);
@@ -227,9 +267,9 @@ final class BackupDatabaseCopyTest {
       var n = new AtomicInteger();
       f.metadata =
           (role, m) -> {
-            m.put("uid", (int) UID);
-            m.put("gid", (int) GID);
-            if (role.equals("file") && n.incrementAndGet() > 1) m.put("ino", -1L);
+            m.put(FIXTURE_UID_0C18F38C, (int) UID);
+            m.put(FIXTURE_GID_0ACDD642, (int) GID);
+            if (role.equals(FIXTURE_FILE_BFDDE6F5) && n.incrementAndGet() > 1) m.put("ino", -1L);
           };
       fails(f);
     }
@@ -237,9 +277,9 @@ final class BackupDatabaseCopyTest {
       var n = new AtomicInteger();
       f.metadata =
           (role, m) -> {
-            m.put("uid", (int) UID);
-            m.put("gid", (int) GID);
-            if (role.equals("file") && n.incrementAndGet() > 2)
+            m.put(FIXTURE_UID_0C18F38C, (int) UID);
+            m.put(FIXTURE_GID_0ACDD642, (int) GID);
+            if (role.equals(FIXTURE_FILE_BFDDE6F5) && n.incrementAndGet() > 2)
               m.put("ctime", java.nio.file.attribute.FileTime.fromMillis(0));
           };
       fails(f);
@@ -307,8 +347,9 @@ final class BackupDatabaseCopyTest {
                             }));
         if (expected instanceof IOException) assertInstanceOf(StorageIoException.class, actual);
         else assertSame(expected, actual);
-        assertArrayEquals(golden(), Files.readAllBytes(f.parent.resolve(PART + ".part")));
-        assertFalse(f.counts.containsKey("unlink"));
+        assertArrayEquals(
+            golden(), Files.readAllBytes(f.parent.resolve(PART + FIXTURE_PART_92B0D5FC)));
+        assertFalse(f.counts.containsKey(FIXTURE_UNLINK_04963CA9));
         f.released();
       }
     try (var f = fixture();
@@ -335,8 +376,9 @@ final class BackupDatabaseCopyTest {
       try {
         assertTrue(entered.await(2, TimeUnit.SECONDS));
         assertFalse(result.isDone());
-        assertFalse(f.counts.containsKey("unlink"));
-        assertArrayEquals(golden(), Files.readAllBytes(f.parent.resolve(PART + ".part")));
+        assertFalse(f.counts.containsKey(FIXTURE_UNLINK_04963CA9));
+        assertArrayEquals(
+            golden(), Files.readAllBytes(f.parent.resolve(PART + FIXTURE_PART_92B0D5FC)));
       } finally {
         release.countDown();
       }
@@ -358,7 +400,7 @@ final class BackupDatabaseCopyTest {
                       p -> {
                         f.readMode = "nonzero";
                       }));
-      assertTrue(Files.exists(f.parent.resolve(PART + ".part")));
+      assertTrue(Files.exists(f.parent.resolve(PART + FIXTURE_PART_92B0D5FC)));
       f.released();
     }
     try (var f = fixture()) {
@@ -370,18 +412,21 @@ final class BackupDatabaseCopyTest {
                       golden(),
                       PART,
                       p -> {
-                        Files.move(f.parent.resolve(PART + ".part"), f.parent.resolve("retained"));
-                        Files.write(f.parent.resolve(PART + ".part"), golden());
+                        Files.move(
+                            f.parent.resolve(PART + FIXTURE_PART_92B0D5FC),
+                            f.parent.resolve("retained"));
+                        Files.write(f.parent.resolve(PART + FIXTURE_PART_92B0D5FC), golden());
                       }));
       assertArrayEquals(golden(), Files.readAllBytes(f.parent.resolve("retained")));
-      assertFalse(f.counts.containsKey("unlink"));
+      assertFalse(f.counts.containsKey(FIXTURE_UNLINK_04963CA9));
       f.released();
     }
     try (var f = fixture()) {
       f.faults.put("sync#1", new IOException("public uncertain sync"));
       fails(f);
       assertFalse(
-          Files.exists(f.parent.resolve(PART + ".part")), "no recreation after uncertain unlink");
+          Files.exists(f.parent.resolve(PART + FIXTURE_PART_92B0D5FC)),
+          "no recreation after uncertain unlink");
     }
     try (var f = fixture()) {
       f.hook =
@@ -389,7 +434,8 @@ final class BackupDatabaseCopyTest {
             if (name.equals("openWriter") && n == 2) f.writeMode = "zero";
           };
       fails(f);
-      assertArrayEquals(golden(), Files.readAllBytes(f.parent.resolve(PART + ".part")));
+      assertArrayEquals(
+          golden(), Files.readAllBytes(f.parent.resolve(PART + FIXTURE_PART_92B0D5FC)));
     }
     try (var f = fixture()) {
       try {
@@ -407,9 +453,10 @@ final class BackupDatabaseCopyTest {
   @Test
   void repeatedCollisionAndConcurrentRoots() throws Exception {
     try (var f = fixture()) {
-      Files.write(f.parent.resolve(PART + ".part"), golden());
+      Files.write(f.parent.resolve(PART + FIXTURE_PART_92B0D5FC), golden());
       fails(f);
-      assertArrayEquals(golden(), Files.readAllBytes(f.parent.resolve(PART + ".part")));
+      assertArrayEquals(
+          golden(), Files.readAllBytes(f.parent.resolve(PART + FIXTURE_PART_92B0D5FC)));
     }
     try (var f = fixture()) {
       create(f);
@@ -447,7 +494,7 @@ final class BackupDatabaseCopyTest {
                 assertArrayEquals(golden(), Files.readAllBytes(p));
                 assertArrayEquals(new byte[raw.length], raw);
               });
-      assertFalse(Files.exists(runtime.resolve(PART + ".part")));
+      assertFalse(Files.exists(runtime.resolve(PART + FIXTURE_PART_92B0D5FC)));
     } finally {
       Files.delete(runtime);
     }
