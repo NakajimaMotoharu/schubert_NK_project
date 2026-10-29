@@ -1,0 +1,19 @@
+# 2554 JMS例外順位十七raw指摘 静的点検結果
+
+2026-10-29/2553・PG-D842・event2938/source0061/HEAD3ba2eca61/開始1/4/8pp cap10。PG14000 entry966d3d6b/manifest db1b067e3924d9cb775c38ab1a2023c43d34c254dd401ed0b602da1ed180b145 真正0、PG14002 entry882283af/manifest e5373c0b17c92d208635eabd21002fd5ea6d42643db60af4ce4b8dc2bc4494c2 真正0。
+
+十七原rawは12operand/9catch、7単独span＋5重複span（multiplicity2）。原XML/offset/ordinal/rowhash/全source/ownerを結合し、十六typed反例・47source guard削除反例・4組の別順位boolモデルを確認。いずれも静的metadataで、製品PT/Throwable操作/JMS/DB/Root/native/VM等0。
+
+API/Web factoryはprimary direct Errorを保持し、非Error primary＋close Errorだけsecondary昇格。native onUnconfirmedの非帰還契約より先へ進む変更なし。API broker live closeは逆順の全未確認childを試行し正常帰還後のみphase保存、最初のdirect Errorを保持しscratch finally消去。Web brokerはobserver前のclosed成功化をせず、固定catalog前のgraph分類を保持する。
+
+Outbox/Web送信は各SSC320321のfirst-primary Error/非fatal primary＋close Error昇格を保持。WebLogDispatcher rollbackは元Errorを保持、同dispatcher direct closeは1451に明記された既component別のdistinct close Error優先であり、send規則への一括置換はしない。1451は過去仕様根拠であって当sourceの動的成功として流用しない。graph口/実close/ACK/commit/rollback/配備/Root/nativeは未検証HOLDを保持。
+
+修正要と確定した製品障害なし、Main/Test変更0。全十七raw/whole pendingを保持し、source理由を抑制/除外・新機能・受入へ変換しない。
+
+旧14004 entry86be5d48/body1/OUTなしはPRIOR=OUTとなった工具生成不備。BUG2084/YKT1832先行登録後に旧工具を保持、新14005 entry80333e64/session47333/manifest 93800c9f3b853037be7a7563e1c5cba65ab998788d99bfcc075e67b17626aa0e 真正0、新14006 entryb5f596f8/session18125/manifest 86da93aaa9b96407716ba6a8146105cb53092796fc3518c0e651d00dfdf98b4e 真正0。原WBS/995旧runtime/八typed反例/四role衝突反例・二元helper非該当を確認、前後全WBSaudit1/HOLDを保持。誤った手動overlay呼出pinはguardがwrite前拒否し、元の実測93800c9fを確認してからだけ二JSONを更新、元Product・14000/02の再演0。
+
+485=bb90ab5305dbc342a0141db4ab0c1b412b9e542495ee3d7b28be2b21a8681690/486=9503c4084dd1158f004c13b43ed4186e2b39085b9952a2edc205d82646de1306。raw6247/corr3194不変、refs3424→3441/pending2563→2580/noRef2823→2806、Main catch未参照69→52。
+
+PGPT-20261008-2939原event：共有37→37/reset1793774153/丸め共有差0pp≠専有費0、専有費・N/T・工数null、fresh残63（2026-10-29 13:03:31 UTC）。
+
+正式1964/53・17/190・工数null/QA051final/全actualHOLD/全保全物不変。次は独立通常ParentGuard元wholeの後続資格/依存を確認する。普通保存/報告/PMO待ち停止なし。
