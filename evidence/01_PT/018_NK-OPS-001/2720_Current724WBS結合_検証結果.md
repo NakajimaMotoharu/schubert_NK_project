@@ -1,0 +1,15 @@
+# 2720 Current724 WBS結合 検証結果
+
+2026-10-30 08:35 JST、2719/PG-D924/event3109、source6b53efeec87f3ec36a840dd8e7759656cb4aee5c、dev-foundation、保存e32f08d9fe9041a08a07a1b6b131bec2ad70f3fe。checkedentry14602→14604→14606→14608の真正終了は各0（後二session3799/75683を終端回収）。これはmetadata検証でProduct再実行/新TestID/新受入/実測coverage追加0。
+
+本Program/evidence/provisional下：
+- PG14602-current-thirty-five-host724-registry-v1/manifest.json：cb752b18897912632a0787498e4d08982756123861b950ab0fa10dbd58fff89b
+- PG14604-current-thirty-five-host724-registry-post-v1/manifest.json：323a092c12394d44289c34332c22a5d5bf5a4a760668056793f41a01670d2936
+- PG14606-current-thirty-five-host724-wbs-v1/manifest.json：c5160caf7e760666fe6f452f5c8ef7259103b4b12ebf2494a90441ea0a052535
+- PG14608-current-thirty-five-host724-wbs-post-v1/manifest.json：34d7018206ccd13e70d987edc0116470970d5c800a6d7159d4f2f76852525299
+
+原35execの公開XMLから724一意methods/93suites・FES0を独立再算出、全normal14216input/Jar一致、172Source227physical(code221/meta6)、四100109/163physical(code158/meta5)、自然061/62、noCode1、未達Inbound一Source L10/M2を保持。Catalog二Source単一exec置換・旧二未達unit historyを正確に継承、初回35＋資格1=36JVM/延べ780、unique724。元660に新64/12Sourceを結合、owner266path=130baseline80candidate56UNKNOWN。27metadata/3summary反例、固定文脈18/23/5を維持。tool diagnosticの旧error文章中の660/201等は凍結履歴で、assert値と出力は724/227に独立一致している。新障害なし。
+
+485の二既存sectionへtypedGuardCurrentHostPG14606Overlayだけ追記、原660/全旧side/予算/受入semantic維持。485 hash360a3bfe52f07e94fba83c2984015f6819c909e3826092534143a0f210a489bd、486 hash92f70e5f94dbc06d68dc732fe96ed4d49e030ddac3edb412cfac275da57cffbe。所定wholeaudit前後actual1/ValueError current physical candidate exact Git/worktree scopeをHOLDのまま保持し22反例で偽のside・費用・工数変更を拒否。whole監査PASSへの読み替えなし。
+
+正式1964PT/53scope・歴史17/190・工数null・QA051final・全F03/451・実環境/HOLD不変。fresh8:35:35JST29used/残71/reset1793774153/短期null、usage0dd8e20c N/Tnull、費用配賦不明。元.25/2/4ppと全見積/cursor固定。次は既読Log表示二Test747行/二Main403/Form全body/実Log型と既読Page/TopBar等を使い、原whole16/2を新通常群として実行する。
