@@ -1,0 +1,804 @@
+{
+  "approvedDesignHashes": {
+    "documents/300_SS/310_\u30a2\u30d7\u30ea\u30b1\u30fc\u30b7\u30e7\u30f3/314_\u8a8d\u8a3c\u30fb\u8a8d\u53ef\u30fbsession\u30fbCSRF\u5b9f\u88c5\u8a2d\u8a08.md": "ab7a1907d0861ca1b6d4181d674f98a73c13f8a4b897b86f655b5a30ce202a7b",
+    "documents/300_SS/320_\u30e1\u30c3\u30bb\u30fc\u30b8\u30f3\u30b0/321_Artemis\u7269\u7406\u69cb\u6210\u30fbJMS\u8a2d\u5b9a\u8a2d\u8a08.md": "2fbf317dcc6d2048abb3c8ecdc9747e7b3d46cdba4753bec6bbc9e3ace5d5d1c",
+    "documents/300_SS/320_\u30e1\u30c3\u30bb\u30fc\u30b8\u30f3\u30b0/324_Outbox\u30fbInbox\u30fb\u51aa\u7b49\u6027\u30fb\u518d\u9001\u8a2d\u8a08.md": "2bc99fd66ca1121a1ab4ae44e97aab96b52d4cf4c8145f6a425f89c7b07ce774",
+    "documents/300_SS/340_batch\u30fb\u57fa\u76e4/342_Caddy\u30fbsystemd\u30fbPostgreSQL\u30fbJava\u8a2d\u5b9a\u8a2d\u8a08.md": "3775cb1faf0b96572f4913d06682100da1861f1d364a66f4118b03e27abf4b82",
+    "documents/300_SS/340_batch\u30fb\u57fa\u76e4/343_\u8a2d\u5b9afile\u30fbdirectory\u30fb\u521d\u671fdata\u30fbmigration\u30fb\u5207\u623b\u3057\u8a2d\u8a08.md": "d8be70ce4c170df7939f7803723bb021c99ba40a72819f9b5d861731425332b2",
+    "documents/300_SS/350_\u904b\u7528\u30fb\u54c1\u8cea/351_Log\u30fbmetric\u30fbalert\u30fberror code\u8a2d\u8a08.md": "9da7c4e4f24740e031f37f984ec562d56e14ff098b1433af3ec55fe15bd195e6"
+  },
+  "directNkRelatedSourceScope": {
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/ContextHash.java": {
+      "dev.codex.schubert.nk.protocol.header.AuthenticationContext": {
+        "path": "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/header/AuthenticationContext.java",
+        "qualification": "SOURCE_HASH_ONLY_NOT_WHOLE_REVIEW_OR_EXECUTION",
+        "sha256": "aaa18a4c954a425c943e8c30ea1752b665b249e86d8f1767e9e37f4aa61a6b66"
+      }
+    },
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/BatchMetricRecorder.java": {
+      "dev.codex.schubert.nk.batch.monitoring.BatchMetricContract.Status": {
+        "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/BatchMetricContract.java",
+        "qualification": "SOURCE_HASH_ONLY_NOT_WHOLE_REVIEW_OR_EXECUTION",
+        "sha256": "ee933bc6a1237c89ffb8e6f92dabf05d9ed8010991e4460f7f72161d304c261a"
+      },
+      "dev.codex.schubert.nk.batch.monitoring.BatchMetricContract.Step": {
+        "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/BatchMetricContract.java",
+        "qualification": "SOURCE_HASH_ONLY_NOT_WHOLE_REVIEW_OR_EXECUTION",
+        "sha256": "ee933bc6a1237c89ffb8e6f92dabf05d9ed8010991e4460f7f72161d304c261a"
+      }
+    },
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/FixedNativeCoverageCheckpoint.java": {
+      "dev.codex.schubert.nk.storage.ServiceConfigFiles": {
+        "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ServiceConfigFiles.java",
+        "qualification": "SOURCE_HASH_ONLY_NOT_WHOLE_REVIEW_OR_EXECUTION",
+        "sha256": "11b33bed1889750459c6e27c65a7cacd69c51c79f78cd85da252093c504912d6"
+      }
+    },
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebHttpServer.java": {
+      "dev.codex.schubert.nk.web.config.RequestLogMvcConfiguration": {
+        "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/config/RequestLogMvcConfiguration.java",
+        "qualification": "SOURCE_HASH_ONLY_NOT_WHOLE_REVIEW_OR_EXECUTION",
+        "sha256": "a07d0f37eaca52eb2037816617c9a9d4fab82386ddb67af1310f9208291c3238"
+      },
+      "dev.codex.schubert.nk.web.config.WebMvcConfiguration": {
+        "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/config/WebMvcConfiguration.java",
+        "qualification": "SOURCE_HASH_ONLY_NOT_WHOLE_REVIEW_OR_EXECUTION",
+        "sha256": "72ac4fcc161a85182e17d6167640cb18c93faed174fdd142225eaf1d84912d30"
+      },
+      "dev.codex.schubert.nk.web.logging.HttpRequestLoggingValve": {
+        "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/HttpRequestLoggingValve.java",
+        "qualification": "SOURCE_HASH_ONLY_NOT_WHOLE_REVIEW_OR_EXECUTION",
+        "sha256": "19af893a76f867e565339218b60043d667f745d494df1085916036f6c3f0a66f"
+      },
+      "dev.codex.schubert.nk.web.logging.WebRequestLogProducer": {
+        "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebRequestLogProducer.java",
+        "qualification": "SOURCE_HASH_ONLY_NOT_WHOLE_REVIEW_OR_EXECUTION",
+        "sha256": "f68eb4c356f08234f64c9ab39af6f463933fe0e69fac7cab35feb24875b80b0e"
+      },
+      "dev.codex.schubert.nk.web.monitoring.HttpMetricValve": {
+        "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/HttpMetricValve.java",
+        "qualification": "SOURCE_HASH_ONLY_NOT_WHOLE_REVIEW_OR_EXECUTION",
+        "sha256": "f7dd88544d4d690d19a519488904e058a4ee8c2d8b7595c75b0494b872204a75"
+      }
+    },
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebLogApplicationRuntime.java": {
+      "dev.codex.schubert.nk.web.config.LogMvcConfiguration": {
+        "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/config/LogMvcConfiguration.java",
+        "qualification": "SOURCE_HASH_ONLY_NOT_WHOLE_REVIEW_OR_EXECUTION",
+        "sha256": "2bd503e7b08e3b6cb85f7bf14f8677c50a98c086509d8dfebc66049615e29958"
+      },
+      "dev.codex.schubert.nk.web.config.ScenarioLogMvcConfiguration": {
+        "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/config/ScenarioLogMvcConfiguration.java",
+        "qualification": "SOURCE_HASH_ONLY_NOT_WHOLE_REVIEW_OR_EXECUTION",
+        "sha256": "65811bdf21928fec013a473ea67a7df07752e2531587e847b821f21c888b66ba"
+      },
+      "dev.codex.schubert.nk.web.logging.WebLogDispatcher": {
+        "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebLogDispatcher.java",
+        "qualification": "SOURCE_HASH_ONLY_NOT_WHOLE_REVIEW_OR_EXECUTION",
+        "sha256": "76b0c079bbc7704ccf64ee9a42acf88c0f9f4fc8fd461ff5d306d6ff48e11c66"
+      },
+      "dev.codex.schubert.nk.web.logging.WebLogReplayWorker": {
+        "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebLogReplayWorker.java",
+        "qualification": "SOURCE_HASH_ONLY_NOT_WHOLE_REVIEW_OR_EXECUTION",
+        "sha256": "51972e99e350715e5404d70a08af31f8a7be26b3b143919d79bfa4363c450ab8"
+      },
+      "dev.codex.schubert.nk.web.logging.WebSecurityAudit": {
+        "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebSecurityAudit.java",
+        "qualification": "SOURCE_HASH_ONLY_NOT_WHOLE_REVIEW_OR_EXECUTION",
+        "sha256": "ce6fc0f8c9031c15077b7fd929837641e38fd9ac5b33683468e63224d53cd1f3"
+      },
+      "dev.codex.schubert.nk.web.messaging.ArtemisReplyConsumer": {
+        "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/ArtemisReplyConsumer.java",
+        "qualification": "SOURCE_HASH_ONLY_NOT_WHOLE_REVIEW_OR_EXECUTION",
+        "sha256": "93599988b634badfe849f38f66abc4125ab5cc25e404c32fbda688f0060e101c"
+      },
+      "dev.codex.schubert.nk.web.messaging.ArtemisReplyConsumers": {
+        "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/ArtemisReplyConsumers.java",
+        "qualification": "SOURCE_HASH_ONLY_NOT_WHOLE_REVIEW_OR_EXECUTION",
+        "sha256": "134a6f35746447e6e27020ae8b82da5d67c136f0d20c46e94b41e5b8b81bc47f"
+      },
+      "dev.codex.schubert.nk.web.messaging.ArtemisReplyDlqSender": {
+        "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/ArtemisReplyDlqSender.java",
+        "qualification": "SOURCE_HASH_ONLY_NOT_WHOLE_REVIEW_OR_EXECUTION",
+        "sha256": "81a3c31e993d9fba59ad5fdbfa7d26d26d8f21541e81fd885fb2dec5ba222c16"
+      },
+      "dev.codex.schubert.nk.web.messaging.ArtemisRequestSender": {
+        "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/ArtemisRequestSender.java",
+        "qualification": "SOURCE_HASH_ONLY_NOT_WHOLE_REVIEW_OR_EXECUTION",
+        "sha256": "2478a0eb7438a76f10e15719fd9c647c899ec62895fdb8ba7a8e26d72bfc3e6c"
+      },
+      "dev.codex.schubert.nk.web.messaging.JmsContextFactory": {
+        "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/JmsContextFactory.java",
+        "qualification": "SOURCE_HASH_ONLY_NOT_WHOLE_REVIEW_OR_EXECUTION",
+        "sha256": "c0ee93a61df9c1c02f1682986cba4343923228b17c08582a3153d4a6de105443"
+      },
+      "dev.codex.schubert.nk.web.messaging.JmsReplyDecoder": {
+        "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/JmsReplyDecoder.java",
+        "qualification": "SOURCE_HASH_ONLY_NOT_WHOLE_REVIEW_OR_EXECUTION",
+        "sha256": "f6d03f1809ddd5d58df0c9a0b670be35e5884b8d10d30b42ada40a5f0285c78f"
+      },
+      "dev.codex.schubert.nk.web.messaging.JmsRequestReplyClient": {
+        "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/JmsRequestReplyClient.java",
+        "qualification": "SOURCE_HASH_ONLY_NOT_WHOLE_REVIEW_OR_EXECUTION",
+        "sha256": "cc0689a25334f9b2eb12983e5e952a0a19af703c28ff4898ff8b57f2a6aa7b39"
+      },
+      "dev.codex.schubert.nk.web.messaging.LogSearchWireClient": {
+        "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/LogSearchWireClient.java",
+        "qualification": "SOURCE_HASH_ONLY_NOT_WHOLE_REVIEW_OR_EXECUTION",
+        "sha256": "4606ebc5e433903fa46f1a356d38368bb7ae4871efb4c30892932a560908154b"
+      },
+      "dev.codex.schubert.nk.web.messaging.ScenarioWireClient": {
+        "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/ScenarioWireClient.java",
+        "qualification": "SOURCE_HASH_ONLY_NOT_WHOLE_REVIEW_OR_EXECUTION",
+        "sha256": "7e3709a36bc952b9c0f3cefdeddc51eb43df92a77021848456b87578dbf75315"
+      },
+      "dev.codex.schubert.nk.web.security.ApiSessionInvalidHandler": {
+        "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/ApiSessionInvalidHandler.java",
+        "qualification": "SOURCE_HASH_ONLY_NOT_WHOLE_REVIEW_OR_EXECUTION",
+        "sha256": "4fa8c1c3de0a3d5e2093e43a8f25f7aac82049bf6b3230bacb9a07c6646caf12"
+      },
+      "dev.codex.schubert.nk.web.security.MqAuthenticationProvider": {
+        "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/MqAuthenticationProvider.java",
+        "qualification": "SOURCE_HASH_ONLY_NOT_WHOLE_REVIEW_OR_EXECUTION",
+        "sha256": "95ba9e2b71c5b5288e9185d833897adf82949554374de6e5cced94c46b27b7b7"
+      },
+      "dev.codex.schubert.nk.web.security.MqLoginClient": {
+        "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/MqLoginClient.java",
+        "qualification": "SOURCE_HASH_ONLY_NOT_WHOLE_REVIEW_OR_EXECUTION",
+        "sha256": "9c654ea40f781e8600cfb6254cbb52f0ee0f2072261d145701fc721ca28a5a6c"
+      },
+      "dev.codex.schubert.nk.web.security.MqLoginContextProbe": {
+        "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/MqLoginContextProbe.java",
+        "qualification": "SOURCE_HASH_ONLY_NOT_WHOLE_REVIEW_OR_EXECUTION",
+        "sha256": "65b26fb1ccb7aad49ce727aaa88d8f6af4f175de7e4c4afbe5fabbcff09ae45d"
+      },
+      "dev.codex.schubert.nk.web.session.SessionPayloadCodec": {
+        "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/SessionPayloadCodec.java",
+        "qualification": "SOURCE_HASH_ONLY_NOT_WHOLE_REVIEW_OR_EXECUTION",
+        "sha256": "9556be0630f6268cbe20da1d5f3ba37630376f653d954d90781c1ac69257f793"
+      },
+      "dev.codex.schubert.nk.web.session.SessionStoreException": {
+        "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/SessionStoreException.java",
+        "qualification": "SOURCE_HASH_ONLY_NOT_WHOLE_REVIEW_OR_EXECUTION",
+        "sha256": "93717ee948f88bd799a14cdad397c0d92e584711c32f571df8592be379033ed1"
+      }
+    },
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebNativeRuntime.java": {
+      "dev.codex.schubert.nk.api.file.ServiceCredentialSet": {
+        "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/file/ServiceCredentialSet.java",
+        "qualification": "SOURCE_HASH_ONLY_NOT_WHOLE_REVIEW_OR_EXECUTION",
+        "sha256": "e7d2f7b92faebadf6133baeb407d6352d6362cee087b89a8f2959515322e3aca"
+      },
+      "dev.codex.schubert.nk.bootstrap.ServiceStartupAdmission": {
+        "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/ServiceStartupAdmission.java",
+        "qualification": "SOURCE_HASH_ONLY_NOT_WHOLE_REVIEW_OR_EXECUTION",
+        "sha256": "22ea6cf3eeff49c4d70899b5b6d0e91c0b585515e3ec8a794b43caa79d9e506e"
+      },
+      "dev.codex.schubert.nk.storage.DirectoryCalls": {
+        "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/DirectoryCalls.java",
+        "qualification": "SOURCE_HASH_ONLY_NOT_WHOLE_REVIEW_OR_EXECUTION",
+        "sha256": "4449a5a316c2e9e4da3e3bbd2068707974557fe032cd0708dcbe7306532cdaaf"
+      },
+      "dev.codex.schubert.nk.storage.LinuxDirectoryCalls": {
+        "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/LinuxDirectoryCalls.java",
+        "qualification": "SOURCE_HASH_ONLY_NOT_WHOLE_REVIEW_OR_EXECUTION",
+        "sha256": "dfe405024fad5aff573c227802572dc65b3e7bfb7f915af59847d6dc0c69b5df"
+      },
+      "dev.codex.schubert.nk.storage.OwnedTransferDirectory": {
+        "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/OwnedTransferDirectory.java",
+        "qualification": "SOURCE_HASH_ONLY_NOT_WHOLE_REVIEW_OR_EXECUTION",
+        "sha256": "2531a763d1779b40ae132ad0c1d749eb374dab830e5acb2eaacf1a4d4d69f841"
+      },
+      "dev.codex.schubert.nk.storage.ResourceScope": {
+        "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ResourceScope.java",
+        "qualification": "SOURCE_HASH_ONLY_NOT_WHOLE_REVIEW_OR_EXECUTION",
+        "sha256": "639d3e7a51ad7d4fd2b45a9d5b8f7536ece257f08b0db9955249704009d00bbf"
+      },
+      "dev.codex.schubert.nk.storage.StorageAttributeGuard": {
+        "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/StorageAttributeGuard.java",
+        "qualification": "SOURCE_HASH_ONLY_NOT_WHOLE_REVIEW_OR_EXECUTION",
+        "sha256": "d4752c82283b4ab0fc11b5ba738b32b5ce43045bab4576bc210fe4c4d50c635b"
+      },
+      "dev.codex.schubert.nk.storage.StorageIdentity": {
+        "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/StorageIdentity.java",
+        "qualification": "SOURCE_HASH_ONLY_NOT_WHOLE_REVIEW_OR_EXECUTION",
+        "sha256": "e19734a40b13885ac0d62b3abb117a788d9a7e0839d002d5f655d162cce3cd74"
+      },
+      "dev.codex.schubert.nk.storage.StorageIoException": {
+        "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/StorageIoException.java",
+        "qualification": "SOURCE_HASH_ONLY_NOT_WHOLE_REVIEW_OR_EXECUTION",
+        "sha256": "2a1233e46a8f05a0dbf7e42034ad3e34afecf14814ebf5111527db6b6e179284"
+      },
+      "dev.codex.schubert.nk.web.logging.WebLogDispatcher": {
+        "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebLogDispatcher.java",
+        "qualification": "SOURCE_HASH_ONLY_NOT_WHOLE_REVIEW_OR_EXECUTION",
+        "sha256": "76b0c079bbc7704ccf64ee9a42acf88c0f9f4fc8fd461ff5d306d6ff48e11c66"
+      },
+      "dev.codex.schubert.nk.web.logging.WebLogMessageSender": {
+        "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebLogMessageSender.java",
+        "qualification": "SOURCE_HASH_ONLY_NOT_WHOLE_REVIEW_OR_EXECUTION",
+        "sha256": "8299e7a3b9bef6f654b780dbd06d3831c3a137f806fafdc8e8e480c0473e3738"
+      },
+      "dev.codex.schubert.nk.web.logging.WebLogOutboxRepository": {
+        "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebLogOutboxRepository.java",
+        "qualification": "SOURCE_HASH_ONLY_NOT_WHOLE_REVIEW_OR_EXECUTION",
+        "sha256": "b37b87f7e787540b2ccf20ce92d014a2b71d7f038ae4cfecc22ab3133177933e"
+      },
+      "dev.codex.schubert.nk.web.logging.WebLogReplayWorker": {
+        "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebLogReplayWorker.java",
+        "qualification": "SOURCE_HASH_ONLY_NOT_WHOLE_REVIEW_OR_EXECUTION",
+        "sha256": "51972e99e350715e5404d70a08af31f8a7be26b3b143919d79bfa4363c450ab8"
+      },
+      "dev.codex.schubert.nk.web.logging.WebMediaAudit": {
+        "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebMediaAudit.java",
+        "qualification": "SOURCE_HASH_ONLY_NOT_WHOLE_REVIEW_OR_EXECUTION",
+        "sha256": "d25e211a6d33544b7b96dbd4c245dc225b5b5a4fd90c4392c7524d0844fe3128"
+      },
+      "dev.codex.schubert.nk.web.logging.WebRequestLogProducer": {
+        "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebRequestLogProducer.java",
+        "qualification": "SOURCE_HASH_ONLY_NOT_WHOLE_REVIEW_OR_EXECUTION",
+        "sha256": "f68eb4c356f08234f64c9ab39af6f463933fe0e69fac7cab35feb24875b80b0e"
+      },
+      "dev.codex.schubert.nk.web.logging.WebSecurityAudit": {
+        "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/logging/WebSecurityAudit.java",
+        "qualification": "SOURCE_HASH_ONLY_NOT_WHOLE_REVIEW_OR_EXECUTION",
+        "sha256": "ce6fc0f8c9031c15077b7fd929837641e38fd9ac5b33683468e63224d53cd1f3"
+      },
+      "dev.codex.schubert.nk.web.media.DescriptorFileResolver": {
+        "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/media/DescriptorFileResolver.java",
+        "qualification": "SOURCE_HASH_ONLY_NOT_WHOLE_REVIEW_OR_EXECUTION",
+        "sha256": "e9b36e0155e5a49f5667b3668bc11fb84d4aa031f865188cd5e3529a0d878653"
+      },
+      "dev.codex.schubert.nk.web.media.MediaRangeService": {
+        "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/media/MediaRangeService.java",
+        "qualification": "SOURCE_HASH_ONLY_NOT_WHOLE_REVIEW_OR_EXECUTION",
+        "sha256": "6add8f1a1e8470b3f8aedc86e273138c7446de07ab16a772587df00f2c59e69a"
+      },
+      "dev.codex.schubert.nk.web.messaging.ArtemisReplyConsumer": {
+        "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/ArtemisReplyConsumer.java",
+        "qualification": "SOURCE_HASH_ONLY_NOT_WHOLE_REVIEW_OR_EXECUTION",
+        "sha256": "93599988b634badfe849f38f66abc4125ab5cc25e404c32fbda688f0060e101c"
+      },
+      "dev.codex.schubert.nk.web.messaging.ArtemisReplyConsumers": {
+        "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/ArtemisReplyConsumers.java",
+        "qualification": "SOURCE_HASH_ONLY_NOT_WHOLE_REVIEW_OR_EXECUTION",
+        "sha256": "134a6f35746447e6e27020ae8b82da5d67c136f0d20c46e94b41e5b8b81bc47f"
+      },
+      "dev.codex.schubert.nk.web.messaging.ArtemisReplyDlqSender": {
+        "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/ArtemisReplyDlqSender.java",
+        "qualification": "SOURCE_HASH_ONLY_NOT_WHOLE_REVIEW_OR_EXECUTION",
+        "sha256": "81a3c31e993d9fba59ad5fdbfa7d26d26d8f21541e81fd885fb2dec5ba222c16"
+      },
+      "dev.codex.schubert.nk.web.messaging.ArtemisRequestSender": {
+        "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/ArtemisRequestSender.java",
+        "qualification": "SOURCE_HASH_ONLY_NOT_WHOLE_REVIEW_OR_EXECUTION",
+        "sha256": "2478a0eb7438a76f10e15719fd9c647c899ec62895fdb8ba7a8e26d72bfc3e6c"
+      },
+      "dev.codex.schubert.nk.web.messaging.CommittedFatalReplyException": {
+        "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/CommittedFatalReplyException.java",
+        "qualification": "SOURCE_HASH_ONLY_NOT_WHOLE_REVIEW_OR_EXECUTION",
+        "sha256": "0d2a1a7c5eceda3627e62e6d3f87a1868653fc7328a2d69e15c1ecc7ec605c12"
+      },
+      "dev.codex.schubert.nk.web.messaging.JmsReplyDecoder": {
+        "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/JmsReplyDecoder.java",
+        "qualification": "SOURCE_HASH_ONLY_NOT_WHOLE_REVIEW_OR_EXECUTION",
+        "sha256": "f6d03f1809ddd5d58df0c9a0b670be35e5884b8d10d30b42ada40a5f0285c78f"
+      },
+      "dev.codex.schubert.nk.web.messaging.JmsRequestReplyClient": {
+        "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/JmsRequestReplyClient.java",
+        "qualification": "SOURCE_HASH_ONLY_NOT_WHOLE_REVIEW_OR_EXECUTION",
+        "sha256": "cc0689a25334f9b2eb12983e5e952a0a19af703c28ff4898ff8b57f2a6aa7b39"
+      },
+      "dev.codex.schubert.nk.web.messaging.LogoutWireClient": {
+        "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/LogoutWireClient.java",
+        "qualification": "SOURCE_HASH_ONLY_NOT_WHOLE_REVIEW_OR_EXECUTION",
+        "sha256": "8411aaeee9f580c1cc3fe16afdcaabdc9893b3f0c4cebb996a168f6b0909d578"
+      },
+      "dev.codex.schubert.nk.web.messaging.ReplyCorrelationRegistry": {
+        "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/ReplyCorrelationRegistry.java",
+        "qualification": "SOURCE_HASH_ONLY_NOT_WHOLE_REVIEW_OR_EXECUTION",
+        "sha256": "1a28f9d8ec9438f13621358c02181557fdc3a19f4afd55303ad727ce6fc9ed75"
+      },
+      "dev.codex.schubert.nk.web.messaging.WebBrokerContexts": {
+        "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/WebBrokerContexts.java",
+        "qualification": "SOURCE_HASH_ONLY_NOT_WHOLE_REVIEW_OR_EXECUTION",
+        "sha256": "093e19a0dab933309178946242efbd01c3dc4a47c0f97e1cf0fb1d5807be5c1c"
+      },
+      "dev.codex.schubert.nk.web.monitoring.WebMetricContext": {
+        "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/WebMetricContext.java",
+        "qualification": "SOURCE_HASH_ONLY_NOT_WHOLE_REVIEW_OR_EXECUTION",
+        "sha256": "75eb5457ae1a264b1606ef910fed53b148075456992c534a58f28455b1952b4f"
+      },
+      "dev.codex.schubert.nk.web.monitoring.WebServiceMetricBinding": {
+        "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/monitoring/WebServiceMetricBinding.java",
+        "qualification": "SOURCE_HASH_ONLY_NOT_WHOLE_REVIEW_OR_EXECUTION",
+        "sha256": "ee7591d71269a4238cdda10c5fbae3c7a61b37b8230f893776329e9d1df7ef64"
+      },
+      "dev.codex.schubert.nk.web.revocation.RevocationRetryCoordinator": {
+        "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/revocation/RevocationRetryCoordinator.java",
+        "qualification": "SOURCE_HASH_ONLY_NOT_WHOLE_REVIEW_OR_EXECUTION",
+        "sha256": "974e90ecfa4daafb035c801940593ef63f48d0caf49f11fc355265ca1afe04b2"
+      },
+      "dev.codex.schubert.nk.web.revocation.RevocationRetryWorker": {
+        "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/revocation/RevocationRetryWorker.java",
+        "qualification": "SOURCE_HASH_ONLY_NOT_WHOLE_REVIEW_OR_EXECUTION",
+        "sha256": "3db3ddaf2ce6f36c1f783c8ac7bee96dbd71fe8fe5755d58af7637c6010f29e3"
+      },
+      "dev.codex.schubert.nk.web.security.MqAuthenticationProvider": {
+        "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/MqAuthenticationProvider.java",
+        "qualification": "SOURCE_HASH_ONLY_NOT_WHOLE_REVIEW_OR_EXECUTION",
+        "sha256": "95ba9e2b71c5b5288e9185d833897adf82949554374de6e5cced94c46b27b7b7"
+      },
+      "dev.codex.schubert.nk.web.security.MqLoginClient": {
+        "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/MqLoginClient.java",
+        "qualification": "SOURCE_HASH_ONLY_NOT_WHOLE_REVIEW_OR_EXECUTION",
+        "sha256": "9c654ea40f781e8600cfb6254cbb52f0ee0f2072261d145701fc721ca28a5a6c"
+      },
+      "dev.codex.schubert.nk.web.security.MqLoginContextProbe": {
+        "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/security/MqLoginContextProbe.java",
+        "qualification": "SOURCE_HASH_ONLY_NOT_WHOLE_REVIEW_OR_EXECUTION",
+        "sha256": "65b26fb1ccb7aad49ce727aaa88d8f6af4f175de7e4c4afbe5fabbcff09ae45d"
+      },
+      "dev.codex.schubert.nk.web.storage.LargeResultReader": {
+        "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/storage/LargeResultReader.java",
+        "qualification": "SOURCE_HASH_ONLY_NOT_WHOLE_REVIEW_OR_EXECUTION",
+        "sha256": "c034edd141bcb5e529ee842dbe270635ecd299876bca9d2d9ae71aa10faccbc8"
+      }
+    }
+  },
+  "importsAreNotRuntimeAllowlist": true,
+  "planSha256": "898c1336b178a8e3ce8c5389fadd2dcb7c5743cf43eb354300cb5f97d8c0d4bd",
+  "rows": [
+    {
+      "attributes": {
+        "begincolumn": "5",
+        "beginline": "24",
+        "class": "ContextHash",
+        "endcolumn": "17",
+        "endline": "24",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#avoidsynchronizedstatement",
+        "method": "calculate",
+        "package": "dev.codex.schubert.nk.api.security",
+        "priority": "3",
+        "rule": "AvoidSynchronizedStatement",
+        "ruleset": "Multithreading"
+      },
+      "basis": "485_ORIGINAL_LOGICAL_OWNER_ONLY_NOT_OLD_PT_OR_BYTES",
+      "canonicalCostOwner": "WBS-P007-03",
+      "canonicalOwner": "WBS-P007-03",
+      "coordinateScope": {
+        "prefixLines": null,
+        "prefixSha256": null,
+        "wholeJavaUnicodeTranslationValidated": false
+      },
+      "currentWholeJoinPending": true,
+      "disposition": "EXPLICIT_SOURCE_CONTRACT_CURRENT_WHOLE_JOIN_PENDING",
+      "id": "PMD-00393",
+      "monitor": "stateLock",
+      "nativeRuntimeProven": false,
+      "occurrenceOrdinal": 0,
+      "originalRowSha256": "01461ce771e8957b7b8fe3eba8bc4e04b3c475a34e6fbb978afc6645634660c3",
+      "ownershipStatus": "BASELINE_LOGICAL_REFERENCE",
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/ContextHash.java",
+      "productTestsExecuted": 0,
+      "qualityGatePass": false,
+      "rawDiagnosticMultiplicity": 1,
+      "rawRetained": true,
+      "reason": "SS314\u00a76 raw ASCII SHA256\u3092\u5171\u6709MessageDigest\u306eprivate monitor\u3067\u76f4\u5217\u5316\u3002\u51fa\u529b\u306flower hex\u3001raw\u3068digest byte\u914d\u5217\u306f\u5404finally\u3067wipe\u3002caller monitor\u3078\u4f9d\u5b58\u305b\u305a\u3001hash\u7d50\u679c\u3092log\u3057\u306a\u3044\u3002JCA\u5b9f\u88c5\u306e\u6709\u754c\u6027/\u5b9f\u8a8d\u8a3c\u7d50\u679c/\u6697\u53f7vector\u306f\u672c\u9759\u7684\u70b9\u691c\u306e\u8cc7\u683c\u3067\u306a\u3044\u3002",
+      "rule": "AvoidSynchronizedStatement",
+      "source": "0061d178cda80c2ce3926290619c64db125dbcfc",
+      "sourceChanged": false,
+      "sourceSha256": "9b0714ec9dc88f3f15e11341d71d873250fee8436ebad03b3fb1079060392581",
+      "spanEndExclusive": 1001,
+      "spanSha256": "44fa15f223a9395c28540901a5052c69b21bf9bf20a679b9042591efc235e9da",
+      "spanStart": 989,
+      "typeToken": "synchronized"
+    },
+    {
+      "attributes": {
+        "begincolumn": "5",
+        "beginline": "67",
+        "class": "BatchMetricRecorder",
+        "endcolumn": "17",
+        "endline": "67",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#avoidsynchronizedstatement",
+        "method": "record",
+        "package": "dev.codex.schubert.nk.batch.monitoring",
+        "priority": "3",
+        "rule": "AvoidSynchronizedStatement",
+        "ruleset": "Multithreading"
+      },
+      "basis": "P01809_RD171_UI252_SS351_MONITORING_CODE_AND_PT",
+      "canonicalCostOwner": "WBS-P018-09",
+      "canonicalOwner": "WBS-P018-09",
+      "coordinateScope": {
+        "prefixLines": null,
+        "prefixSha256": null,
+        "wholeJavaUnicodeTranslationValidated": false
+      },
+      "currentWholeJoinPending": true,
+      "disposition": "EXPLICIT_SOURCE_CONTRACT_CURRENT_WHOLE_JOIN_PENDING",
+      "id": "PMD-02958",
+      "monitor": "lock",
+      "nativeRuntimeProven": false,
+      "occurrenceOrdinal": 0,
+      "originalRowSha256": "ed040eb2187e355b9ef27bc63017671697c4be4af89281a7d470c220641d2e2f",
+      "ownershipStatus": "NEW_LOGICAL_CANDIDATE_REVIEWED_NOT_ACCEPTED",
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/monitoring/BatchMetricRecorder.java",
+      "productTestsExecuted": 0,
+      "qualityGatePass": false,
+      "rawDiagnosticMultiplicity": 1,
+      "rawRetained": true,
+      "reason": "SS351\u306ecaller-proven terminal metadata\u3060\u3051\u3092\u501f\u7528registry\u3078\u8a18\u9332\u3002\u6642\u523b\u00b5s/range\u691c\u67fb\u5f8cSTANDARD\u306f\u7121\u8a18\u9332\u3001private lock\u3067counter\u3068lastSuccess\u306e\u5358\u8abf\u6700\u5927\u3092\u66f4\u65b0\u3057\u6b20\u6e2c\u306fNaN\u3002metric\u306fbatch\u6210\u529f\u3084dedup authority\u3067\u306a\u3044\u3002registry callback/\u5b9fbatch/\u4e26\u884c\u5b8c\u4e86\u306f\u672a\u6e2c\u5b9a\u3002",
+      "rule": "AvoidSynchronizedStatement",
+      "source": "0061d178cda80c2ce3926290619c64db125dbcfc",
+      "sourceChanged": false,
+      "sourceSha256": "248563d0e9454cb496734c8d6c5b167c0ba3a7cc7fc9bcf6aca0e808c539a12d",
+      "spanEndExclusive": 3049,
+      "spanSha256": "44fa15f223a9395c28540901a5052c69b21bf9bf20a679b9042591efc235e9da",
+      "spanStart": 3037,
+      "typeToken": "synchronized"
+    },
+    {
+      "attributes": {
+        "begincolumn": "5",
+        "beginline": "116",
+        "class": "FixedNativeCoverageCheckpoint",
+        "endcolumn": "17",
+        "endline": "116",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#avoidsynchronizedstatement",
+        "method": "capture",
+        "package": "dev.codex.schubert.nk.bootstrap",
+        "priority": "3",
+        "rule": "AvoidSynchronizedStatement",
+        "ruleset": "Multithreading"
+      },
+      "basis": "485_ORIGINAL_LOGICAL_OWNER_ONLY_NOT_OLD_PT_OR_BYTES",
+      "canonicalCostOwner": "WBS-P018-08",
+      "canonicalOwner": "WBS-P018-08",
+      "coordinateScope": {
+        "prefixLines": null,
+        "prefixSha256": null,
+        "wholeJavaUnicodeTranslationValidated": false
+      },
+      "currentWholeJoinPending": true,
+      "disposition": "EXPLICIT_SOURCE_CONTRACT_CURRENT_WHOLE_JOIN_PENDING",
+      "id": "PMD-06152",
+      "monitor": "lock",
+      "nativeRuntimeProven": false,
+      "occurrenceOrdinal": 0,
+      "originalRowSha256": "4a8ca50f662a4ba775f53642df5ec85a2eb4dbf4a2d56b201de845151501a251",
+      "ownershipStatus": "BASELINE_LOGICAL_REFERENCE",
+      "path": "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/bootstrap/FixedNativeCoverageCheckpoint.java",
+      "productTestsExecuted": 0,
+      "qualityGatePass": false,
+      "rawDiagnosticMultiplicity": 1,
+      "rawRetained": true,
+      "reason": "SS343/451\u9694\u96e2PT\u306eagent export\u4e00\u56declaim\u3002private lock\u4e0b\u3067agent/I/O\u524d\u306bpoint\u6d88\u8cbb\u3001closing\u306fterminal\u6210\u529f\u5f8c\u3060\u3051\u3002version/session\u3092\u524d\u5f8c\u691c\u67fb\u3001reset\u7121\u3057snapshot\u3068clone export\u3001\u672a\u77e5/\u90e8\u5206capture\u3092\u518d\u8a66\u884c\u3057\u306a\u3044\u3002\u5b9fagent/native/FS export\u306f\u8d77\u52d50\u3001header\u3060\u3051\u3067CRC\u3084\u5168coverage\u8cc7\u683c\u3092\u8a8d\u5b9a\u3057\u306a\u3044\u3002",
+      "rule": "AvoidSynchronizedStatement",
+      "source": "0061d178cda80c2ce3926290619c64db125dbcfc",
+      "sourceChanged": false,
+      "sourceSha256": "95d70220aaa00265151d92ec1c4d4e5e7e220ed4508668461ce0b497b988e86d",
+      "spanEndExclusive": 4145,
+      "spanSha256": "44fa15f223a9395c28540901a5052c69b21bf9bf20a679b9042591efc235e9da",
+      "spanStart": 4133,
+      "typeToken": "synchronized"
+    },
+    {
+      "attributes": {
+        "begincolumn": "7",
+        "beginline": "171",
+        "class": "WebHttpServer",
+        "endcolumn": "19",
+        "endline": "171",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#avoidsynchronizedstatement",
+        "method": "startWithOwner",
+        "package": "dev.codex.schubert.nk.web.bootstrap",
+        "priority": "3",
+        "rule": "AvoidSynchronizedStatement",
+        "ruleset": "Multithreading"
+      },
+      "basis": "485_ORIGINAL_LOGICAL_OWNER_ONLY_NOT_OLD_PT_OR_BYTES",
+      "canonicalCostOwner": "WBS-P018-06",
+      "canonicalOwner": "WBS-P018-06",
+      "coordinateScope": {
+        "prefixLines": null,
+        "prefixSha256": null,
+        "wholeJavaUnicodeTranslationValidated": false
+      },
+      "currentWholeJoinPending": true,
+      "disposition": "EXPLICIT_SOURCE_CONTRACT_CURRENT_WHOLE_JOIN_PENDING",
+      "id": "PMD-07211",
+      "monitor": "result.lifecycleLock",
+      "nativeRuntimeProven": false,
+      "occurrenceOrdinal": 0,
+      "originalRowSha256": "90b335ef9d22367cf4fb130ccd978704d8530c4858e200122804ad963a900d9a",
+      "ownershipStatus": "BASELINE_LOGICAL_REFERENCE",
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebHttpServer.java",
+      "productTestsExecuted": 0,
+      "qualityGatePass": false,
+      "rawDiagnosticMultiplicity": 1,
+      "rawRetained": true,
+      "reason": "SS313/342 private lifecycleLock\u3067started/closed\u3068vendor stop/destroy\u6bb5\u968e\u3092\u76f4\u5217\u5316\u3002owner\u3092vendor mutation\u524d\u306b\u6355\u6349\u3057started\u306fcontext STARTED\u5f8c\u3060\u3051\u3002port/mappings\u306fstarted\u304b\u3064notclosed\u306e\u307f\u3001stop\u6210\u529f\u5f8c\u3060\u3051stopped\u3001destroy\u6210\u529f\u5f8c\u3060\u3051destroyed\u3002vendor/mapper callback\u306flock\u5185\u3068\u306a\u308a\u6709\u754c\u6027\u3068\u4e26\u884c\u505c\u6b62\u5b9f\u8a3c\u306f\u672a\u53d6\u5f97\u3001native owner\u306e\u5916budget\u3078\u5408\u7b97\u3057\u306a\u3044\u3002",
+      "rule": "AvoidSynchronizedStatement",
+      "source": "0061d178cda80c2ce3926290619c64db125dbcfc",
+      "sourceChanged": false,
+      "sourceSha256": "b1e458ef9a9a246f8bb70866dbf671a005bbb569b9c4e27c20b525c20b3180a5",
+      "spanEndExclusive": 7521,
+      "spanSha256": "44fa15f223a9395c28540901a5052c69b21bf9bf20a679b9042591efc235e9da",
+      "spanStart": 7509,
+      "typeToken": "synchronized"
+    },
+    {
+      "attributes": {
+        "begincolumn": "5",
+        "beginline": "224",
+        "class": "WebHttpServer",
+        "endcolumn": "17",
+        "endline": "224",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#avoidsynchronizedstatement",
+        "method": "port",
+        "package": "dev.codex.schubert.nk.web.bootstrap",
+        "priority": "3",
+        "rule": "AvoidSynchronizedStatement",
+        "ruleset": "Multithreading"
+      },
+      "basis": "485_ORIGINAL_LOGICAL_OWNER_ONLY_NOT_OLD_PT_OR_BYTES",
+      "canonicalCostOwner": "WBS-P018-06",
+      "canonicalOwner": "WBS-P018-06",
+      "coordinateScope": {
+        "prefixLines": null,
+        "prefixSha256": null,
+        "wholeJavaUnicodeTranslationValidated": false
+      },
+      "currentWholeJoinPending": true,
+      "disposition": "EXPLICIT_SOURCE_CONTRACT_CURRENT_WHOLE_JOIN_PENDING",
+      "id": "PMD-07217",
+      "monitor": "lifecycleLock",
+      "nativeRuntimeProven": false,
+      "occurrenceOrdinal": 0,
+      "originalRowSha256": "99a3c6e57b6684d596bbb898dd0881e2e4994b8638c0c01ac0e08574d3b531db",
+      "ownershipStatus": "BASELINE_LOGICAL_REFERENCE",
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebHttpServer.java",
+      "productTestsExecuted": 0,
+      "qualityGatePass": false,
+      "rawDiagnosticMultiplicity": 1,
+      "rawRetained": true,
+      "reason": "SS313/342 private lifecycleLock\u3067started/closed\u3068vendor stop/destroy\u6bb5\u968e\u3092\u76f4\u5217\u5316\u3002owner\u3092vendor mutation\u524d\u306b\u6355\u6349\u3057started\u306fcontext STARTED\u5f8c\u3060\u3051\u3002port/mappings\u306fstarted\u304b\u3064notclosed\u306e\u307f\u3001stop\u6210\u529f\u5f8c\u3060\u3051stopped\u3001destroy\u6210\u529f\u5f8c\u3060\u3051destroyed\u3002vendor/mapper callback\u306flock\u5185\u3068\u306a\u308a\u6709\u754c\u6027\u3068\u4e26\u884c\u505c\u6b62\u5b9f\u8a3c\u306f\u672a\u53d6\u5f97\u3001native owner\u306e\u5916budget\u3078\u5408\u7b97\u3057\u306a\u3044\u3002",
+      "rule": "AvoidSynchronizedStatement",
+      "source": "0061d178cda80c2ce3926290619c64db125dbcfc",
+      "sourceChanged": false,
+      "sourceSha256": "b1e458ef9a9a246f8bb70866dbf671a005bbb569b9c4e27c20b525c20b3180a5",
+      "spanEndExclusive": 9517,
+      "spanSha256": "44fa15f223a9395c28540901a5052c69b21bf9bf20a679b9042591efc235e9da",
+      "spanStart": 9505,
+      "typeToken": "synchronized"
+    },
+    {
+      "attributes": {
+        "begincolumn": "5",
+        "beginline": "234",
+        "class": "WebHttpServer",
+        "endcolumn": "17",
+        "endline": "234",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#avoidsynchronizedstatement",
+        "method": "mappedPaths",
+        "package": "dev.codex.schubert.nk.web.bootstrap",
+        "priority": "3",
+        "rule": "AvoidSynchronizedStatement",
+        "ruleset": "Multithreading"
+      },
+      "basis": "485_ORIGINAL_LOGICAL_OWNER_ONLY_NOT_OLD_PT_OR_BYTES",
+      "canonicalCostOwner": "WBS-P018-06",
+      "canonicalOwner": "WBS-P018-06",
+      "coordinateScope": {
+        "prefixLines": null,
+        "prefixSha256": null,
+        "wholeJavaUnicodeTranslationValidated": false
+      },
+      "currentWholeJoinPending": true,
+      "disposition": "EXPLICIT_SOURCE_CONTRACT_CURRENT_WHOLE_JOIN_PENDING",
+      "id": "PMD-07218",
+      "monitor": "lifecycleLock",
+      "nativeRuntimeProven": false,
+      "occurrenceOrdinal": 0,
+      "originalRowSha256": "fe93246c46701c90a2a2d5aedefd5fa290c0f434bcd413bb2caf4ea4914b1176",
+      "ownershipStatus": "BASELINE_LOGICAL_REFERENCE",
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebHttpServer.java",
+      "productTestsExecuted": 0,
+      "qualityGatePass": false,
+      "rawDiagnosticMultiplicity": 1,
+      "rawRetained": true,
+      "reason": "SS313/342 private lifecycleLock\u3067started/closed\u3068vendor stop/destroy\u6bb5\u968e\u3092\u76f4\u5217\u5316\u3002owner\u3092vendor mutation\u524d\u306b\u6355\u6349\u3057started\u306fcontext STARTED\u5f8c\u3060\u3051\u3002port/mappings\u306fstarted\u304b\u3064notclosed\u306e\u307f\u3001stop\u6210\u529f\u5f8c\u3060\u3051stopped\u3001destroy\u6210\u529f\u5f8c\u3060\u3051destroyed\u3002vendor/mapper callback\u306flock\u5185\u3068\u306a\u308a\u6709\u754c\u6027\u3068\u4e26\u884c\u505c\u6b62\u5b9f\u8a3c\u306f\u672a\u53d6\u5f97\u3001native owner\u306e\u5916budget\u3078\u5408\u7b97\u3057\u306a\u3044\u3002",
+      "rule": "AvoidSynchronizedStatement",
+      "source": "0061d178cda80c2ce3926290619c64db125dbcfc",
+      "sourceChanged": false,
+      "sourceSha256": "b1e458ef9a9a246f8bb70866dbf671a005bbb569b9c4e27c20b525c20b3180a5",
+      "spanEndExclusive": 9868,
+      "spanSha256": "44fa15f223a9395c28540901a5052c69b21bf9bf20a679b9042591efc235e9da",
+      "spanStart": 9856,
+      "typeToken": "synchronized"
+    },
+    {
+      "attributes": {
+        "begincolumn": "5",
+        "beginline": "248",
+        "class": "WebHttpServer",
+        "endcolumn": "17",
+        "endline": "248",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#avoidsynchronizedstatement",
+        "method": "close",
+        "package": "dev.codex.schubert.nk.web.bootstrap",
+        "priority": "3",
+        "rule": "AvoidSynchronizedStatement",
+        "ruleset": "Multithreading"
+      },
+      "basis": "485_ORIGINAL_LOGICAL_OWNER_ONLY_NOT_OLD_PT_OR_BYTES",
+      "canonicalCostOwner": "WBS-P018-06",
+      "canonicalOwner": "WBS-P018-06",
+      "coordinateScope": {
+        "prefixLines": null,
+        "prefixSha256": null,
+        "wholeJavaUnicodeTranslationValidated": false
+      },
+      "currentWholeJoinPending": true,
+      "disposition": "EXPLICIT_SOURCE_CONTRACT_CURRENT_WHOLE_JOIN_PENDING",
+      "id": "PMD-07219",
+      "monitor": "lifecycleLock",
+      "nativeRuntimeProven": false,
+      "occurrenceOrdinal": 0,
+      "originalRowSha256": "6a7c6cbda0ad292daadd61ba3e7c659eb36d78996cbbbddcb8687265cfff468b",
+      "ownershipStatus": "BASELINE_LOGICAL_REFERENCE",
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebHttpServer.java",
+      "productTestsExecuted": 0,
+      "qualityGatePass": false,
+      "rawDiagnosticMultiplicity": 1,
+      "rawRetained": true,
+      "reason": "SS313/342 private lifecycleLock\u3067started/closed\u3068vendor stop/destroy\u6bb5\u968e\u3092\u76f4\u5217\u5316\u3002owner\u3092vendor mutation\u524d\u306b\u6355\u6349\u3057started\u306fcontext STARTED\u5f8c\u3060\u3051\u3002port/mappings\u306fstarted\u304b\u3064notclosed\u306e\u307f\u3001stop\u6210\u529f\u5f8c\u3060\u3051stopped\u3001destroy\u6210\u529f\u5f8c\u3060\u3051destroyed\u3002vendor/mapper callback\u306flock\u5185\u3068\u306a\u308a\u6709\u754c\u6027\u3068\u4e26\u884c\u505c\u6b62\u5b9f\u8a3c\u306f\u672a\u53d6\u5f97\u3001native owner\u306e\u5916budget\u3078\u5408\u7b97\u3057\u306a\u3044\u3002",
+      "rule": "AvoidSynchronizedStatement",
+      "source": "0061d178cda80c2ce3926290619c64db125dbcfc",
+      "sourceChanged": false,
+      "sourceSha256": "b1e458ef9a9a246f8bb70866dbf671a005bbb569b9c4e27c20b525c20b3180a5",
+      "spanEndExclusive": 10434,
+      "spanSha256": "44fa15f223a9395c28540901a5052c69b21bf9bf20a679b9042591efc235e9da",
+      "spanStart": 10422,
+      "typeToken": "synchronized"
+    },
+    {
+      "attributes": {
+        "begincolumn": "5",
+        "beginline": "256",
+        "class": "WebLogApplicationRuntime",
+        "endcolumn": "17",
+        "endline": "256",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#avoidsynchronizedstatement",
+        "method": "close",
+        "package": "dev.codex.schubert.nk.web.bootstrap",
+        "priority": "3",
+        "rule": "AvoidSynchronizedStatement",
+        "ruleset": "Multithreading"
+      },
+      "basis": "485_ORIGINAL_LOGICAL_OWNER_ONLY_NOT_OLD_PT_OR_BYTES",
+      "canonicalCostOwner": "WBS-P006-04",
+      "canonicalOwner": "WBS-P006-04",
+      "coordinateScope": {
+        "prefixLines": null,
+        "prefixSha256": null,
+        "wholeJavaUnicodeTranslationValidated": false
+      },
+      "currentWholeJoinPending": true,
+      "disposition": "EXPLICIT_SOURCE_CONTRACT_CURRENT_WHOLE_JOIN_PENDING",
+      "id": "PMD-07221",
+      "monitor": "stopLock",
+      "nativeRuntimeProven": false,
+      "occurrenceOrdinal": 0,
+      "originalRowSha256": "6fe02d8ab39d04e3a62aa43ee5fece6740f11f8adc56214d5fa8e46f35af1016",
+      "ownershipStatus": "BASELINE_LOGICAL_REFERENCE",
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebLogApplicationRuntime.java",
+      "productTestsExecuted": 0,
+      "qualityGatePass": false,
+      "rawDiagnosticMultiplicity": 1,
+      "rawRetained": true,
+      "reason": "SS321/324/342\u501f\u7528\u4f9d\u5b58\u3092\u6b8b\u3059private stopLock\u3002http\u2192replay\u2192replies\u306e\u9806\u3001\u6210\u529fphase\u3060\u3051advance\u3001\u9014\u4e2dUNKNOWN\u3067\u306f\u4e0b\u6d41\u89e3\u653e\u305b\u305aretryable owner\u4fdd\u6301\u3001closed\u306f\u5168\u7d42\u7aef\u5f8c\u3002startup cleanup UNKNOWN\u306e\u539f\u7121\u9650\u4fdd\u6301\u3092\u52d5\u7684\u8a66\u9a13\u3057\u306a\u3044\u3002graph classifier/\u5b9fdrain/\u5b9fstop/\u5916\u671f\u9650\u306f\u672a\u53d7\u5165HOLD\u3001\u30ed\u30fc\u30ab\u30ebready\u3092\u5168\u4f53ready\u3078\u6607\u683c\u3057\u306a\u3044\u3002",
+      "rule": "AvoidSynchronizedStatement",
+      "source": "0061d178cda80c2ce3926290619c64db125dbcfc",
+      "sourceChanged": false,
+      "sourceSha256": "24759417295528fcda7b59a4c3055c2310ed406b6a507ebdb3af581cc8558498",
+      "spanEndExclusive": 10033,
+      "spanSha256": "44fa15f223a9395c28540901a5052c69b21bf9bf20a679b9042591efc235e9da",
+      "spanStart": 10021,
+      "typeToken": "synchronized"
+    },
+    {
+      "attributes": {
+        "begincolumn": "5",
+        "beginline": "146",
+        "class": "WebNativeRuntime",
+        "endcolumn": "17",
+        "endline": "146",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#avoidsynchronizedstatement",
+        "method": "start",
+        "package": "dev.codex.schubert.nk.web.bootstrap",
+        "priority": "3",
+        "rule": "AvoidSynchronizedStatement",
+        "ruleset": "Multithreading"
+      },
+      "basis": "485_ORIGINAL_LOGICAL_OWNER_ONLY_NOT_OLD_PT_OR_BYTES",
+      "canonicalCostOwner": "WBS-P018-06",
+      "canonicalOwner": "WBS-P018-06",
+      "coordinateScope": {
+        "prefixLines": null,
+        "prefixSha256": null,
+        "wholeJavaUnicodeTranslationValidated": false
+      },
+      "currentWholeJoinPending": true,
+      "disposition": "EXPLICIT_SOURCE_CONTRACT_CURRENT_WHOLE_JOIN_PENDING",
+      "id": "PMD-07254",
+      "monitor": "ownerLock",
+      "nativeRuntimeProven": false,
+      "occurrenceOrdinal": 0,
+      "originalRowSha256": "fcbb9157232404db8f7f73032827d3038962f8e81f5331d261e202a17c488f02",
+      "ownershipStatus": "BASELINE_LOGICAL_REFERENCE",
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebNativeRuntime.java",
+      "productTestsExecuted": 0,
+      "qualityGatePass": false,
+      "rawDiagnosticMultiplicity": 1,
+      "rawRetained": true,
+      "reason": "SS342/343\u4e00\u3064\u306enative partial owner\u3092private ownerLock\u3067start/close\u76f4\u5217\u5316\u3002startAttempted\u5148\u884c\u3001\u5168\u696d\u52d9map/management\u6210\u7acb\u5f8c\u3060\u3051ready release+admit\u3002close\u306f\u6700\u521d\u306estop.begin\u3092\u4fdd\u6301\u3057\u3066admission\u62d2\u5426\u3001drain/http/retry/replay/replies/management/metrics/assets/transfer/codecs/broker\u306ephase\u3002lock\u7372\u5f97\u5f85\u3061\u81ea\u4f53\u3084vendor/native/DB/JMS/\u9375\u306e\u7d42\u4e86\u6642\u9593\u306fSource review\u3060\u3051\u3067\u5b9f\u8a3c\u3057\u306a\u3044\u3002\u65e7native\u8cc7\u683c\u79fb\u690d0\u3002",
+      "rule": "AvoidSynchronizedStatement",
+      "source": "0061d178cda80c2ce3926290619c64db125dbcfc",
+      "sourceChanged": false,
+      "sourceSha256": "c9701244fed7a903c0858a5b8ef4bd78a3ddd499b76bbb9358a5f7181c4bec45",
+      "spanEndExclusive": 7150,
+      "spanSha256": "44fa15f223a9395c28540901a5052c69b21bf9bf20a679b9042591efc235e9da",
+      "spanStart": 7138,
+      "typeToken": "synchronized"
+    },
+    {
+      "attributes": {
+        "begincolumn": "5",
+        "beginline": "385",
+        "class": "WebNativeRuntime",
+        "endcolumn": "17",
+        "endline": "385",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_multithreading.html#avoidsynchronizedstatement",
+        "method": "close",
+        "package": "dev.codex.schubert.nk.web.bootstrap",
+        "priority": "3",
+        "rule": "AvoidSynchronizedStatement",
+        "ruleset": "Multithreading"
+      },
+      "basis": "485_ORIGINAL_LOGICAL_OWNER_ONLY_NOT_OLD_PT_OR_BYTES",
+      "canonicalCostOwner": "WBS-P018-06",
+      "canonicalOwner": "WBS-P018-06",
+      "coordinateScope": {
+        "prefixLines": null,
+        "prefixSha256": null,
+        "wholeJavaUnicodeTranslationValidated": false
+      },
+      "currentWholeJoinPending": true,
+      "disposition": "EXPLICIT_SOURCE_CONTRACT_CURRENT_WHOLE_JOIN_PENDING",
+      "id": "PMD-07261",
+      "monitor": "ownerLock",
+      "nativeRuntimeProven": false,
+      "occurrenceOrdinal": 0,
+      "originalRowSha256": "5246efeb95855e10950932ac29e81915a9b9033d5c6d7e587323b65b5dea0cd6",
+      "ownershipStatus": "BASELINE_LOGICAL_REFERENCE",
+      "path": "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/bootstrap/WebNativeRuntime.java",
+      "productTestsExecuted": 0,
+      "qualityGatePass": false,
+      "rawDiagnosticMultiplicity": 1,
+      "rawRetained": true,
+      "reason": "SS342/343\u4e00\u3064\u306enative partial owner\u3092private ownerLock\u3067start/close\u76f4\u5217\u5316\u3002startAttempted\u5148\u884c\u3001\u5168\u696d\u52d9map/management\u6210\u7acb\u5f8c\u3060\u3051ready release+admit\u3002close\u306f\u6700\u521d\u306estop.begin\u3092\u4fdd\u6301\u3057\u3066admission\u62d2\u5426\u3001drain/http/retry/replay/replies/management/metrics/assets/transfer/codecs/broker\u306ephase\u3002lock\u7372\u5f97\u5f85\u3061\u81ea\u4f53\u3084vendor/native/DB/JMS/\u9375\u306e\u7d42\u4e86\u6642\u9593\u306fSource review\u3060\u3051\u3067\u5b9f\u8a3c\u3057\u306a\u3044\u3002\u65e7native\u8cc7\u683c\u79fb\u690d0\u3002",
+      "rule": "AvoidSynchronizedStatement",
+      "source": "0061d178cda80c2ce3926290619c64db125dbcfc",
+      "sourceChanged": false,
+      "sourceSha256": "c9701244fed7a903c0858a5b8ef4bd78a3ddd499b76bbb9358a5f7181c4bec45",
+      "spanEndExclusive": 16826,
+      "spanSha256": "44fa15f223a9395c28540901a5052c69b21bf9bf20a679b9042591efc235e9da",
+      "spanStart": 16814,
+      "typeToken": "synchronized"
+    }
+  ],
+  "source": "0061d178cda80c2ce3926290619c64db125dbcfc"
+}
