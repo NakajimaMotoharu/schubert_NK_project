@@ -1,0 +1,313 @@
+{
+  "actualExit": 0,
+  "cases": [
+    {
+      "classname": "dev.codex.schubert.nk.api.messaging.inbound.DeliveryMetadataTest",
+      "name": "countsAndPrintable128ByteBoundaryAreNotCapped"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.api.messaging.inbound.DeliveryMetadataTest",
+      "name": "nullMissingInvalidAndControlMetadataReject"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.api.messaging.inbound.InboundTransactionsPrimaryContractTest",
+      "name": "jmsP001SameRollbackFailureNeverSelfSuppresses"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.api.messaging.inbound.InboundTransactionsPrimaryContractTest",
+      "name": "jmsP002DistinctEqualsTrueRollbackFailureIsRetainedByIdentity"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.api.messaging.inbound.InboundTransactionsPrimaryContractTest",
+      "name": "jmsP003RollbackErrorRemainsFatalAndSameIdentity"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.api.messaging.inbound.InboundTransactionsPrimaryContractTest",
+      "name": "jmsP004SameProtocolIsolationFailureRemainsOriginalAndUncommitted"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.api.messaging.inbound.InboundTransactionsPrimaryContractTest",
+      "name": "jmsP005DistinctIsolationFailureRetainsProtocolAndNeverCommits"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.transport.FailedJmsIsolationExceptionTest",
+      "name": "iso009PrimaryAndProtocolAreRequired"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.transport.FailedJmsIsolationExceptionTest",
+      "name": "iso010SameNodeIsRetainedWithoutSelfSuppression"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.transport.FailedJmsIsolationExceptionTest",
+      "name": "iso011EqualsTrueDoesNotHideDistinctProtocolIdentity"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.transport.FailedJmsIsolationExceptionTest",
+      "name": "iso012DisabledPrimarySuppressionCannotHideProtocol"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.transport.UnconfirmedJmsRollbackExceptionTest",
+      "name": "disabledPrimarySuppressionDoesNotHideRollbackFailure"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.transport.UnconfirmedJmsRollbackExceptionTest",
+      "name": "distinctEqualValuedNodesAreBothRetained"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.transport.UnconfirmedJmsRollbackExceptionTest",
+      "name": "primaryAndRollbackMustBothBePresent"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.transport.UnconfirmedJmsRollbackExceptionTest",
+      "name": "sameNodeIsRetainedOnceWithoutSelfSuppression"
+    }
+  ],
+  "coverageExecUnion": false,
+  "effortPercent": null,
+  "formalUpdated": false,
+  "four100Physical": 3,
+  "four100SourcePrograms": 3,
+  "fullSourceUnits": {
+    "dev/codex/schubert/nk/api/messaging/inbound/DeliveryMetadata": {
+      "counters": {
+        "BRANCH": {
+          "covered": 12,
+          "missed": 0
+        },
+        "CLASS": {
+          "covered": 1,
+          "missed": 0
+        },
+        "LINE": {
+          "covered": 10,
+          "missed": 0
+        },
+        "METHOD": {
+          "covered": 3,
+          "missed": 0
+        }
+      },
+      "execSha256": "de0afcedd95fc718f912a9a648e9978bbdc58decc0f93319146962c00fc93580",
+      "four100": true,
+      "physical": [
+        "dev/codex/schubert/nk/api/messaging/inbound/DeliveryMetadata"
+      ],
+      "post": "PG14244-delivery-metadata-whole-two-post-v1",
+      "postSha256": "14f6fb3937435588c58bfa0cdbe7fa6b0ef04b0b3eed7436b4918cd1f15a63bd",
+      "sessionIdentity": "PG14242-ORIGINAL-DELIVERY-METADATA-TWO"
+    },
+    "dev/codex/schubert/nk/api/messaging/inbound/InboundTransactions": {
+      "counters": {
+        "BRANCH": {
+          "covered": 4,
+          "missed": 0
+        },
+        "CLASS": {
+          "covered": 1,
+          "missed": 0
+        },
+        "LINE": {
+          "covered": 24,
+          "missed": 10
+        },
+        "METHOD": {
+          "covered": 4,
+          "missed": 2
+        }
+      },
+      "execSha256": "36eb4f40eca27499372e04c0ef573f43990e979e1c223915aac026b8c8575ea9",
+      "four100": false,
+      "physical": [
+        "dev/codex/schubert/nk/api/messaging/inbound/InboundTransactions"
+      ],
+      "post": "PG14254-inbound-primary-whole-five-post-v1",
+      "postSha256": "d1c31c2b14489e72fe15ab7a72188746a8ec7ce78439c3ebab659dcaad4a08f6",
+      "sessionIdentity": "PG14252-ORIGINAL-INBOUND-PRIMARY-FIVE"
+    },
+    "dev/codex/schubert/nk/protocol/transport/FailedJmsIsolationException": {
+      "counters": {
+        "BRANCH": {
+          "covered": 2,
+          "missed": 0
+        },
+        "CLASS": {
+          "covered": 1,
+          "missed": 0
+        },
+        "LINE": {
+          "covered": 6,
+          "missed": 0
+        },
+        "METHOD": {
+          "covered": 1,
+          "missed": 0
+        }
+      },
+      "execSha256": "a131ba1cb5940ff2969325c8014431dfe0a5049ee63681ef5e292d80ee9bb28a",
+      "four100": true,
+      "physical": [
+        "dev/codex/schubert/nk/protocol/transport/FailedJmsIsolationException"
+      ],
+      "post": "PG14258-protocol-carrier-whole-eight-post-v1",
+      "postSha256": "2b9ce8ebf4b329a2e36d329bcf7cb91a9396fbe2c40dd6be09fdaa1247ac1e9a",
+      "sessionIdentity": "PG14256-ORIGINAL-PROTOCOL-CARRIERS-EIGHT"
+    },
+    "dev/codex/schubert/nk/protocol/transport/UnconfirmedJmsRollbackException": {
+      "counters": {
+        "BRANCH": {
+          "covered": 2,
+          "missed": 0
+        },
+        "CLASS": {
+          "covered": 1,
+          "missed": 0
+        },
+        "LINE": {
+          "covered": 5,
+          "missed": 0
+        },
+        "METHOD": {
+          "covered": 1,
+          "missed": 0
+        }
+      },
+      "execSha256": "a131ba1cb5940ff2969325c8014431dfe0a5049ee63681ef5e292d80ee9bb28a",
+      "four100": true,
+      "physical": [
+        "dev/codex/schubert/nk/protocol/transport/UnconfirmedJmsRollbackException"
+      ],
+      "post": "PG14258-protocol-carrier-whole-eight-post-v1",
+      "postSha256": "2b9ce8ebf4b329a2e36d329bcf7cb91a9396fbe2c40dd6be09fdaa1247ac1e9a",
+      "sessionIdentity": "PG14256-ORIGINAL-PROTOCOL-CARRIERS-EIGHT"
+    }
+  },
+  "incompleteSourcePrograms": 1,
+  "invocation": {
+    "actualPythonCommand": [
+      "/usr/bin/python3",
+      "-B",
+      "tools/quality/pg14260_typed_guard_current_host_registry.py"
+    ],
+    "arbitraryArgumentsRecorded": false,
+    "entrypointPath": "tools/quality/pg14260_typed_guard_current_host_registry.py",
+    "entrypointSha256": "54e4be476627785d70c5d6ed901d0e00f75d77110538a521ea371cc0abc14fd4",
+    "helperPath": "tools/quality/host_tool_invocation.py",
+    "helperSha256": "85d616a3db4ff47f4c95ae2e0dd57954bc2b09f28b8f2a685b986e5621545c46",
+    "libraryPath": "tools/quality/pg14260_typed_guard_current_host_registry.py",
+    "librarySha256": "54e4be476627785d70c5d6ed901d0e00f75d77110538a521ea371cc0abc14fd4",
+    "loadedProjectPythonSources": {
+      "tools/quality/g07_host_class_provenance_inputs.py": "a676cb3e4145177c3c243722d737592ce7d44c3f29cfe4f670662ef7651f046b",
+      "tools/quality/host_tool_invocation.py": "85d616a3db4ff47f4c95ae2e0dd57954bc2b09f28b8f2a685b986e5621545c46",
+      "tools/quality/pg14260_typed_guard_current_host_registry.py": "54e4be476627785d70c5d6ed901d0e00f75d77110538a521ea371cc0abc14fd4",
+      "tools/quality/trace_owner_join.py": "f71ab155344149f6997937c00b62cbed161652c5f7dc9fabbeb11825f81bca75"
+    },
+    "provenance": "OBSERVED_SYS_ARGV_AND_ORIG_ARGV_NOT_RECONSTRUCTED"
+  },
+  "measuredPhysical": 4,
+  "measuredSourcePrograms": 4,
+  "newAccepted": 0,
+  "newTestIds": 0,
+  "normalManifestSha256": "1d0a3dee2f054010a81c67f4a8ef11e7d4370c9640efa9bcb8eead51168c81a3",
+  "originalExecs": 3,
+  "originalPostReferences": [
+    {
+      "execSha256": "de0afcedd95fc718f912a9a648e9978bbdc58decc0f93319146962c00fc93580",
+      "name": "PG14244-delivery-metadata-whole-two-post-v1",
+      "scope": "ORIGINAL_SCOPED_PT_NOT_WHOLE_451",
+      "sessionIdentity": "PG14242-ORIGINAL-DELIVERY-METADATA-TWO",
+      "sha256": "14f6fb3937435588c58bfa0cdbe7fa6b0ef04b0b3eed7436b4918cd1f15a63bd",
+      "suites": 1,
+      "tests": 2
+    },
+    {
+      "execSha256": "36eb4f40eca27499372e04c0ef573f43990e979e1c223915aac026b8c8575ea9",
+      "name": "PG14254-inbound-primary-whole-five-post-v1",
+      "scope": "ORIGINAL_SCOPED_PT_NOT_WHOLE_451",
+      "sessionIdentity": "PG14252-ORIGINAL-INBOUND-PRIMARY-FIVE",
+      "sha256": "d1c31c2b14489e72fe15ab7a72188746a8ec7ce78439c3ebab659dcaad4a08f6",
+      "suites": 1,
+      "tests": 5
+    },
+    {
+      "execSha256": "a131ba1cb5940ff2969325c8014431dfe0a5049ee63681ef5e292d80ee9bb28a",
+      "name": "PG14258-protocol-carrier-whole-eight-post-v1",
+      "scope": "ORIGINAL_SCOPED_PT_NOT_WHOLE_451",
+      "sessionIdentity": "PG14256-ORIGINAL-PROTOCOL-CARRIERS-EIGHT",
+      "sha256": "2b9ce8ebf4b329a2e36d329bcf7cb91a9396fbe2c40dd6be09fdaa1247ac1e9a",
+      "suites": 2,
+      "tests": 8
+    }
+  ],
+  "originalTestsReexecutedByRegistry": 0,
+  "owners": {
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/inbound/DeliveryMetadata.java": {
+      "basis": "485_ORIGINAL_LOGICAL_OWNER_ONLY_NOT_OLD_PT_OR_BYTES",
+      "canonicalCostOwner": "WBS-P005-03",
+      "canonicalOwner": "WBS-P005-03",
+      "ownershipStatus": "BASELINE_LOGICAL_REFERENCE",
+      "sha256": "6d87d23892dd6f43a52ce58149943070375a8b2288e5cd9569ec0991e557057f"
+    },
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/inbound/InboundTransactions.java": {
+      "basis": "485_ORIGINAL_LOGICAL_OWNER_ONLY_NOT_OLD_PT_OR_BYTES",
+      "canonicalCostOwner": "WBS-P005-03",
+      "canonicalOwner": "WBS-P005-03",
+      "ownershipStatus": "BASELINE_LOGICAL_REFERENCE",
+      "sha256": "c2bfde63f582b8c8d9432c5dd15c4ce73ad49dec7304bdcccf290dfa63cc1248"
+    },
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/inbound/DeliveryMetadataTest.java": {
+      "basis": "NO_BASELINE_OR_APPROVED_INTERNAL_RULE; DO_NOT_INFER_FROM_CHANGE_OWNER",
+      "canonicalCostOwner": null,
+      "canonicalOwner": null,
+      "ownershipStatus": "UNKNOWN",
+      "sha256": "3396be3bb620ccfb7ee9c213abea51fefa35d7b327752ef2b0819b06402b2b94"
+    },
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/inbound/InboundTransactionsPrimaryContractTest.java": {
+      "basis": "NO_BASELINE_OR_APPROVED_INTERNAL_RULE; DO_NOT_INFER_FROM_CHANGE_OWNER",
+      "canonicalCostOwner": null,
+      "canonicalOwner": null,
+      "ownershipStatus": "UNKNOWN",
+      "sha256": "86c393968624410459270b52718aeefb37093b75db6e6ad2f5d891d506c582aa"
+    },
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/transport/FailedJmsIsolationException.java": {
+      "basis": "NO_BASELINE_OR_APPROVED_INTERNAL_RULE; DO_NOT_INFER_FROM_CHANGE_OWNER",
+      "canonicalCostOwner": null,
+      "canonicalOwner": null,
+      "ownershipStatus": "UNKNOWN",
+      "sha256": "8b22ea28c7a14624bb86b6a8b80661460d446418b61b76c42cdbba7f7f74dfbb"
+    },
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/transport/UnconfirmedJmsRollbackException.java": {
+      "basis": "NO_BASELINE_OR_APPROVED_INTERNAL_RULE; DO_NOT_INFER_FROM_CHANGE_OWNER",
+      "canonicalCostOwner": null,
+      "canonicalOwner": null,
+      "ownershipStatus": "UNKNOWN",
+      "sha256": "4ca8f9a3d350557e66b026eb96753c6cac7fe14c3204fc302af86f0dd2795938"
+    },
+    "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/transport/FailedJmsIsolationExceptionTest.java": {
+      "basis": "NO_BASELINE_OR_APPROVED_INTERNAL_RULE; DO_NOT_INFER_FROM_CHANGE_OWNER",
+      "canonicalCostOwner": null,
+      "canonicalOwner": null,
+      "ownershipStatus": "UNKNOWN",
+      "sha256": "4b38735c88ffee065f3499688a29df85d1d3e97a51401d9f9ce0805f75e41cca"
+    },
+    "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/transport/UnconfirmedJmsRollbackExceptionTest.java": {
+      "basis": "NO_BASELINE_OR_APPROVED_INTERNAL_RULE; DO_NOT_INFER_FROM_CHANGE_OWNER",
+      "canonicalCostOwner": null,
+      "canonicalOwner": null,
+      "ownershipStatus": "UNKNOWN",
+      "sha256": "189a8e5fc185e9cf70c22a72ff25be675ab284e5dc62bfd7920988456829bda9"
+    }
+  },
+  "priorSource0061TestsTransferred": false,
+  "source": "6b53efeec87f3ec36a840dd8e7759656cb4aee5c",
+  "suiteNames": [
+    "dev.codex.schubert.nk.api.messaging.inbound.DeliveryMetadataTest",
+    "dev.codex.schubert.nk.api.messaging.inbound.InboundTransactionsPrimaryContractTest",
+    "dev.codex.schubert.nk.protocol.transport.FailedJmsIsolationExceptionTest",
+    "dev.codex.schubert.nk.protocol.transport.UnconfirmedJmsRollbackExceptionTest"
+  ],
+  "suites": 4,
+  "tests": 15,
+  "unknownOwnerPaths": 6,
+  "whole451Accepted": false,
+  "wholeF03Accepted": false
+}
