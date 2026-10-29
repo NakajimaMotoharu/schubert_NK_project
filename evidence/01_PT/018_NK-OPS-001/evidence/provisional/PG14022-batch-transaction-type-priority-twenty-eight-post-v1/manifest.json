@@ -1,0 +1,88 @@
+{
+  "actualExit": 0,
+  "correctedToolBug": "BUG2085/YKT1833",
+  "coverage": null,
+  "effortPercent": null,
+  "formalUpdated": false,
+  "invocation": {
+    "actualPythonCommand": [
+      "/usr/bin/python3",
+      "-B",
+      "tools/quality/pg14022_batch_transaction_type_priority_post.py"
+    ],
+    "arbitraryArgumentsRecorded": false,
+    "entrypointPath": "tools/quality/pg14022_batch_transaction_type_priority_post.py",
+    "entrypointSha256": "7989dbe8317fc40aab13905b5262aa44af68140612fcd8972c04db7ec6b1ef8f",
+    "helperPath": "tools/quality/host_tool_invocation.py",
+    "helperSha256": "85d616a3db4ff47f4c95ae2e0dd57954bc2b09f28b8f2a685b986e5621545c46",
+    "libraryPath": "tools/quality/pg14022_batch_transaction_type_priority_post.py",
+    "librarySha256": "7989dbe8317fc40aab13905b5262aa44af68140612fcd8972c04db7ec6b1ef8f",
+    "loadedProjectPythonSources": {
+      "tools/quality/g07_host_class_provenance_inputs.py": "a676cb3e4145177c3c243722d737592ce7d44c3f29cfe4f670662ef7651f046b",
+      "tools/quality/host_tool_invocation.py": "85d616a3db4ff47f4c95ae2e0dd57954bc2b09f28b8f2a685b986e5621545c46",
+      "tools/quality/pg14021_batch_transaction_type_priority_contexts_v2.py": "feddb61f673a3f70fa233c38982bbb0f8bc01dcae1bdb0d30edc2dca2bf6b865",
+      "tools/quality/pg14022_batch_transaction_type_priority_post.py": "7989dbe8317fc40aab13905b5262aa44af68140612fcd8972c04db7ec6b1ef8f",
+      "tools/quality/pmd_source_span_ascii.py": "00cb61ffe01d9ff229feb6df64c9a38aa7f7685fb4fe71cdcedaf08ad162399d",
+      "tools/quality/snapshot_program_qualified_v2.py": "fbc20fdee6831e70e3744da9518bd1a7df39d816d87d0616ce4a1a8d7f407fc1",
+      "tools/quality/trace_owner_join.py": "f71ab155344149f6997937c00b62cbed161652c5f7dc9fabbeb11825f81bca75"
+    },
+    "provenance": "OBSERVED_SYS_ARGV_AND_ORIG_ARGV_NOT_RECONSTRUCTED"
+  },
+  "labels": [
+    "id:str",
+    "source:str",
+    "sourceSha256:str",
+    "catchAnchor:int",
+    "occurrenceOrdinal:int",
+    "rawDiagnosticMultiplicity:int",
+    "spanStart:int",
+    "spanEndExclusive:int",
+    "spanSha256:str",
+    "reason:str",
+    "canonicalCostOwner:str",
+    "rawRetained:bool",
+    "rawRetained:int",
+    "sourceChanged:bool",
+    "nativeRuntimeProven:bool",
+    "productTestsExecuted:bool"
+  ],
+  "metadataNegativeVectors": 16,
+  "modelsAreNotProductTests": true,
+  "nativeRuntimeProven": false,
+  "newAccepted": 0,
+  "productTestsExecuted": 0,
+  "rawMultiplicityPerSpan": 2,
+  "rawRetained": 28,
+  "reviewManifestSha256": "544d50d47ef9abee500841c698b05dd39cddc973bab634e187d5b0846105a1fd",
+  "reviewSha256": "d78aa779dc7bbbdd1dbcb4e6d5e69f605f66b327010ee7873d37c01169f145fb",
+  "source": "0061d178cda80c2ce3926290619c64db125dbcfc",
+  "sourceContexts": 28,
+  "sourceOwnershipNegativeVectors": 22,
+  "staticPriorityModels": [
+    {
+      "cleanup": "known",
+      "primary": "unknown",
+      "selection": "primary"
+    },
+    {
+      "cleanup": "unknown",
+      "primary": "unknown",
+      "selection": "primary"
+    },
+    {
+      "cleanup": "unknown",
+      "primary": "known",
+      "selection": "cleanup"
+    },
+    {
+      "cleanup": "known",
+      "primary": "known",
+      "selection": "fixed"
+    }
+  ],
+  "uniqueCatchClauses": 2,
+  "uniqueOperandSpans": 14,
+  "warningCatchAnchorNegativeVectors": 4,
+  "whole451Accepted": false,
+  "wholeF03Accepted": false
+}
