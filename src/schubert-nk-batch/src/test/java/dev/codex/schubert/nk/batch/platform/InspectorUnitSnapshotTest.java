@@ -433,6 +433,19 @@ final class InspectorUnitSnapshotTest {
   }
 
   @Test
+  void normalExitCodeIsLiteralOnlyAfterNormalMainCode() {
+    // PT-SNAPSHOT-NORMAL-EXIT-001: SS341 7.4 manager data, not a genuine receipt.
+    for (int status : new int[] {0, 1, 10, 30, 70, 143, 255}) {
+      var state = parse(with(FIXTURE_EXECMAINSTATUS_179A8E0B, Integer.toString(status)));
+      assertEquals(status, state.normalExitCode());
+    }
+    for (int code : new int[] {0, 2, 3, 4, 5, 6}) {
+      var state = parse(with("ExecMainCode", Integer.toString(code)));
+      malformed(state::normalExitCode);
+    }
+  }
+
+  @Test
   void immutabilityAndNull() {
     byte[] input = GOLDEN.getBytes(StandardCharsets.US_ASCII);
     var state = InspectorUnitSnapshot.parse(input);
