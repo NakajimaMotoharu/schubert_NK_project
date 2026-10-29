@@ -208,6 +208,8 @@ public final class UserQueryApplicationService implements SyncRequestProcessor {
                       case Saved ignoredSaved -> throw new TemporaryInfrastructureException();
                     });
       } catch (InboxException failure) {
+        // BUG2092/YKT1840; SS312/324 SSC329: inspect fatal graph before mismatch.
+        TemporaryInfrastructureException.preserveFatal(failure);
         if (messageMismatch(failure)) return invalid(connection, request, actor);
         throw failure;
       }

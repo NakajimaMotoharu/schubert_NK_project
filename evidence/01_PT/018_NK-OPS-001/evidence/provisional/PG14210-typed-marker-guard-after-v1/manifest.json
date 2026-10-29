@@ -1,0 +1,336 @@
+{
+  "actualExit": 0,
+  "actualExternalOperations": 0,
+  "additionalCommandScope": "typed-marker eligibility only; not whole Source review",
+  "additionalSubmissionScope": "execute/executeCanonical method-local only",
+  "baselineHashes": {
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/UserMutationApplicationService.java": "ac2490b101fec96b81e0ff64ab09ab2f5b8858ebe545949bb7f3de43bf56a51b",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/UserQueryApplicationService.java": "d1140a68e86ce376ced5c88b8acbd700c25dd1892f9482596c10873e4c6274fa",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/log/LogQueryApplicationService.java": "e99b4604337997365950b7e4d062d7f952bdd7ec89996939e7a5e21e34dcf4c0",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/media/MediaApplicationService.java": "217b86beb833a3be43fefffa486ac124a5ba52a0dab205e000dfdb631598aa7a",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/QuestionCommandService.java": "9e188be488c14e55b22a0c6dc65eb90e9f5ba4167bd04620290ad665ae6ab306",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/QuestionMutationApplicationService.java": "fae41cea1f384210aac9d90898e65b2776676e7955fe48a3b3b59fb8a3b1f6c5",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/QuestionQueryApplicationService.java": "d919b15ab399a820bc9aa7c752c3f79b922a7a94c11046d6f33aa992ac6af0b8",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/QuestionSubmissionService.java": "d303f5a79375d69bbc4f45c91d4ab74bd5744c40baafe45f6cbe8beb692ffaa2",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/QuestionWorkerService.java": "e3cf7a1056e03ce46380893697cb2d2faefa02a88ea966a14ff99646763b3c83",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/scenario/ScenarioApplicationService.java": "778ab847405c6fabba7d9bfdfc723b302ddb41aa539c77f431c401286cdfabaa"
+  },
+  "baselineMissingSites": [
+    "admin/UserQueryApplicationService:persist:InboxException",
+    "log/LogQueryApplicationService:persist:InboxException",
+    "question/QuestionQueryApplicationService:complete:AuthenticationContextException",
+    "question/QuestionQueryApplicationService:persist:InboxException"
+  ],
+  "baselineSource": "0061d178cda80c2ce3926290619c64db125dbcfc",
+  "beforeManifestSha256": "0cd4cfaceaed943f2e9585cf176d2c9a06870ff05b69addfcd90bd59461cd510",
+  "bugs": [
+    "BUG2092",
+    "BUG2093"
+  ],
+  "candidateGitSource": null,
+  "candidateIsUnfrozenWorktree": true,
+  "changedProductionPaths": [
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/UserQueryApplicationService.java",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/log/LogQueryApplicationService.java",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/QuestionQueryApplicationService.java"
+  ],
+  "codeConformanceGateExit": 0,
+  "coverage": null,
+  "dynamicConformance": null,
+  "effortPercent": null,
+  "formalUpdated": false,
+  "fullJavaParserSemanticBinding": false,
+  "heldGraph9": "HOLD_NOT_EXECUTED_NO_SUBSTITUTE",
+  "horizontal": "YKT1840",
+  "invocation": {
+    "actualPythonCommand": [
+      "/usr/bin/python3",
+      "-B",
+      "tools/quality/pg14212_typed_marker_guard_static_post_v2.py"
+    ],
+    "arbitraryArgumentsRecorded": false,
+    "entrypointPath": "tools/quality/pg14212_typed_marker_guard_static_post_v2.py",
+    "entrypointSha256": "b8bf6b4d9d5976c6d9edaba09e17b09c52be28d7ad9d859c7c88a17d7ae18046",
+    "helperPath": "tools/quality/host_tool_invocation.py",
+    "helperSha256": "85d616a3db4ff47f4c95ae2e0dd57954bc2b09f28b8f2a685b986e5621545c46",
+    "libraryPath": "tools/quality/pg14210_typed_marker_guard_static_v2.py",
+    "librarySha256": "4048e386b9cfb5fe5434d3d8bb641a0dfe40aabd62f8019bc72327c3634564d7",
+    "loadedProjectPythonSources": {
+      "tools/quality/g07_host_class_provenance_inputs.py": "a676cb3e4145177c3c243722d737592ce7d44c3f29cfe4f670662ef7651f046b",
+      "tools/quality/host_tool_invocation.py": "85d616a3db4ff47f4c95ae2e0dd57954bc2b09f28b8f2a685b986e5621545c46",
+      "tools/quality/pg14210_typed_marker_guard_static_v2.py": "4048e386b9cfb5fe5434d3d8bb641a0dfe40aabd62f8019bc72327c3634564d7",
+      "tools/quality/pg14212_typed_marker_guard_static_post_v2.py": "b8bf6b4d9d5976c6d9edaba09e17b09c52be28d7ad9d859c7c88a17d7ae18046",
+      "tools/quality/public_java_digest_provenance.py": "dd47f8735a61ce849995633c3290a6ad047842ef3263829ce359db413778f7a0"
+    },
+    "provenance": "OBSERVED_SYS_ARGV_AND_ORIG_ARGV_NOT_RECONSTRUCTED"
+  },
+  "javaCompilerBindingVerified": false,
+  "metadataNegativeVectors": 16,
+  "missingSites": [],
+  "negativeLabels": [
+    "admin/UserQueryApplicationService:persist:InboxException:removed",
+    "admin/UserQueryApplicationService:persist:InboxException:comment-only",
+    "admin/UserQueryApplicationService:persist:InboxException:string-only",
+    "admin/UserQueryApplicationService:persist:InboxException:wrong-receiver",
+    "log/LogQueryApplicationService:persist:InboxException:removed",
+    "log/LogQueryApplicationService:persist:InboxException:comment-only",
+    "log/LogQueryApplicationService:persist:InboxException:string-only",
+    "log/LogQueryApplicationService:persist:InboxException:wrong-receiver",
+    "question/QuestionQueryApplicationService:persist:InboxException:removed",
+    "question/QuestionQueryApplicationService:persist:InboxException:comment-only",
+    "question/QuestionQueryApplicationService:persist:InboxException:string-only",
+    "question/QuestionQueryApplicationService:persist:InboxException:wrong-receiver",
+    "question/QuestionQueryApplicationService:complete:AuthenticationContextException:removed",
+    "question/QuestionQueryApplicationService:complete:AuthenticationContextException:comment-only",
+    "question/QuestionQueryApplicationService:complete:AuthenticationContextException:string-only",
+    "question/QuestionQueryApplicationService:complete:AuthenticationContextException:wrong-receiver"
+  ],
+  "newAccepted": 0,
+  "newProductTestIds": 0,
+  "normalManifestSha256": "8a3edc7a98ac32ea75ccf981dd38ee144159a8d0372bdd90922d6312a2219f65",
+  "observedHashes": {
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/UserMutationApplicationService.java": "ac2490b101fec96b81e0ff64ab09ab2f5b8858ebe545949bb7f3de43bf56a51b",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/UserQueryApplicationService.java": "26c1ae5f478d9561660fbd010a6496ff3edbe5cdf5416535af50fe12021285c3",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/log/LogQueryApplicationService.java": "ca397a1b238ff4647188c7c1ed777e6a8243a0c12f8fa1595258726bb6e61756",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/media/MediaApplicationService.java": "217b86beb833a3be43fefffa486ac124a5ba52a0dab205e000dfdb631598aa7a",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/QuestionCommandService.java": "9e188be488c14e55b22a0c6dc65eb90e9f5ba4167bd04620290ad665ae6ab306",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/QuestionMutationApplicationService.java": "fae41cea1f384210aac9d90898e65b2776676e7955fe48a3b3b59fb8a3b1f6c5",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/QuestionQueryApplicationService.java": "93029308e85bad6c693ffcf30ab435f42fef2b4a56de713f5ec1e7752f071275",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/QuestionSubmissionService.java": "d303f5a79375d69bbc4f45c91d4ab74bd5744c40baafe45f6cbe8beb692ffaa2",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/QuestionWorkerService.java": "e3cf7a1056e03ce46380893697cb2d2faefa02a88ea966a14ff99646763b3c83",
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/scenario/ScenarioApplicationService.java": "778ab847405c6fabba7d9bfdfc723b302ddb41aa539c77f431c401286cdfabaa"
+  },
+  "originalActualDatabasePt": "HOLD_NOT_EXECUTED",
+  "originalEightSourceWholeBodyReviewed": true,
+  "otherInputBytesUnchanged": true,
+  "phase": "after",
+  "productTestsExecuted": 0,
+  "requiredGuard": "first executable statement uses exact caught receiver",
+  "staticConformance": true,
+  "typedSiteCount": 22,
+  "typedSites": [
+    {
+      "bodyTokenSha256": "f13df6001a6dc437606a72e82b08d172c5cfb347c4578c9529f215006a803692",
+      "catchLine": 132,
+      "firstStatementIsRequiredGuard": true,
+      "headerTypes": "AuthenticationContextException",
+      "methodRoleFromManualReview": "execute",
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/UserMutationApplicationService.java",
+      "receiver": "failure",
+      "siteId": "admin/UserMutationApplicationService:execute:AuthenticationContextException"
+    },
+    {
+      "bodyTokenSha256": "2f6e2c75de414a1748429146f73d31b5a8eed803ba2fe0b9a5ed066a3f4537c8",
+      "catchLine": 169,
+      "firstStatementIsRequiredGuard": true,
+      "headerTypes": "InboxException",
+      "methodRoleFromManualReview": "execute",
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/UserMutationApplicationService.java",
+      "receiver": "failure",
+      "siteId": "admin/UserMutationApplicationService:execute:InboxException"
+    },
+    {
+      "bodyTokenSha256": "554accb87608f679a34ae9af25913b7ab3e8fa7a099b752b0d911f6949a74e77",
+      "catchLine": 118,
+      "firstStatementIsRequiredGuard": true,
+      "headerTypes": "AuthenticationContextException",
+      "methodRoleFromManualReview": "inspect",
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/UserQueryApplicationService.java",
+      "receiver": "failure",
+      "siteId": "admin/UserQueryApplicationService:inspect:AuthenticationContextException"
+    },
+    {
+      "bodyTokenSha256": "db5063d228637f41c675a8fa80090eb3db91a50b8189b6e0f490008e238f914f",
+      "catchLine": 128,
+      "firstStatementIsRequiredGuard": true,
+      "headerTypes": "InboxException",
+      "methodRoleFromManualReview": "inspect",
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/UserQueryApplicationService.java",
+      "receiver": "failure",
+      "siteId": "admin/UserQueryApplicationService:inspect:InboxException"
+    },
+    {
+      "bodyTokenSha256": "548ed15b2daacb55c4300ec894a552a9afb6e7ad01eb2424fa316a573a257c2e",
+      "catchLine": 165,
+      "firstStatementIsRequiredGuard": true,
+      "headerTypes": "AuthenticationContextException",
+      "methodRoleFromManualReview": "complete",
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/UserQueryApplicationService.java",
+      "receiver": "failure",
+      "siteId": "admin/UserQueryApplicationService:complete:AuthenticationContextException"
+    },
+    {
+      "bodyTokenSha256": "888a0f4922447d8caca81ff8dc2ebb512d7fa59d0401d632028509e3c0d23a9f",
+      "catchLine": 210,
+      "firstStatementIsRequiredGuard": true,
+      "headerTypes": "InboxException",
+      "methodRoleFromManualReview": "persist",
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/admin/UserQueryApplicationService.java",
+      "receiver": "failure",
+      "siteId": "admin/UserQueryApplicationService:persist:InboxException"
+    },
+    {
+      "bodyTokenSha256": "554accb87608f679a34ae9af25913b7ab3e8fa7a099b752b0d911f6949a74e77",
+      "catchLine": 118,
+      "firstStatementIsRequiredGuard": true,
+      "headerTypes": "AuthenticationContextException",
+      "methodRoleFromManualReview": "inspect",
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/log/LogQueryApplicationService.java",
+      "receiver": "failure",
+      "siteId": "log/LogQueryApplicationService:inspect:AuthenticationContextException"
+    },
+    {
+      "bodyTokenSha256": "db5063d228637f41c675a8fa80090eb3db91a50b8189b6e0f490008e238f914f",
+      "catchLine": 128,
+      "firstStatementIsRequiredGuard": true,
+      "headerTypes": "InboxException",
+      "methodRoleFromManualReview": "inspect",
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/log/LogQueryApplicationService.java",
+      "receiver": "failure",
+      "siteId": "log/LogQueryApplicationService:inspect:InboxException"
+    },
+    {
+      "bodyTokenSha256": "548ed15b2daacb55c4300ec894a552a9afb6e7ad01eb2424fa316a573a257c2e",
+      "catchLine": 159,
+      "firstStatementIsRequiredGuard": true,
+      "headerTypes": "AuthenticationContextException",
+      "methodRoleFromManualReview": "complete",
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/log/LogQueryApplicationService.java",
+      "receiver": "failure",
+      "siteId": "log/LogQueryApplicationService:complete:AuthenticationContextException"
+    },
+    {
+      "bodyTokenSha256": "888a0f4922447d8caca81ff8dc2ebb512d7fa59d0401d632028509e3c0d23a9f",
+      "catchLine": 204,
+      "firstStatementIsRequiredGuard": true,
+      "headerTypes": "InboxException",
+      "methodRoleFromManualReview": "persist",
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/log/LogQueryApplicationService.java",
+      "receiver": "failure",
+      "siteId": "log/LogQueryApplicationService:persist:InboxException"
+    },
+    {
+      "bodyTokenSha256": "f206665c8cc5b123e52ae356910fd2ea2ac6ec6033259386b5404b542259387a",
+      "catchLine": 240,
+      "firstStatementIsRequiredGuard": true,
+      "headerTypes": "AuthenticationContextException | AccessRejected",
+      "methodRoleFromManualReview": "transaction",
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/media/MediaApplicationService.java",
+      "receiver": "failure",
+      "siteId": "media/MediaApplicationService:transaction:AuthenticationContextException"
+    },
+    {
+      "bodyTokenSha256": "3ac2050ce12c57070028ffb652774a8d906323a1ec24eb08e4876cfd1c0a0a93",
+      "catchLine": 244,
+      "firstStatementIsRequiredGuard": true,
+      "headerTypes": "InboxException",
+      "methodRoleFromManualReview": "transaction",
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/media/MediaApplicationService.java",
+      "receiver": "failure",
+      "siteId": "media/MediaApplicationService:transaction:InboxException"
+    },
+    {
+      "bodyTokenSha256": "ca08e586da3b35f9759b17dbec088ac89d4780d9176efde890f25992f66b4abc",
+      "catchLine": 139,
+      "firstStatementIsRequiredGuard": true,
+      "headerTypes": "AuthenticationContextException",
+      "methodRoleFromManualReview": "execute",
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/QuestionMutationApplicationService.java",
+      "receiver": "invalid",
+      "siteId": "question/QuestionMutationApplicationService:execute:AuthenticationContextException"
+    },
+    {
+      "bodyTokenSha256": "6028b1c16393335fb882f1f01fe360d01ecb847f93147bd011d77aa6e875804f",
+      "catchLine": 175,
+      "firstStatementIsRequiredGuard": true,
+      "headerTypes": "InboxException",
+      "methodRoleFromManualReview": "execute",
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/QuestionMutationApplicationService.java",
+      "receiver": "conflict",
+      "siteId": "question/QuestionMutationApplicationService:execute:InboxException"
+    },
+    {
+      "bodyTokenSha256": "22e20bb437688322122e42afd99fe63709940563685bdee40f1eb32b9342a71a",
+      "catchLine": 118,
+      "firstStatementIsRequiredGuard": true,
+      "headerTypes": "AuthenticationContextException",
+      "methodRoleFromManualReview": "inspect",
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/QuestionQueryApplicationService.java",
+      "receiver": "failure",
+      "siteId": "question/QuestionQueryApplicationService:inspect:AuthenticationContextException"
+    },
+    {
+      "bodyTokenSha256": "db5063d228637f41c675a8fa80090eb3db91a50b8189b6e0f490008e238f914f",
+      "catchLine": 127,
+      "firstStatementIsRequiredGuard": true,
+      "headerTypes": "InboxException",
+      "methodRoleFromManualReview": "inspect",
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/QuestionQueryApplicationService.java",
+      "receiver": "failure",
+      "siteId": "question/QuestionQueryApplicationService:inspect:InboxException"
+    },
+    {
+      "bodyTokenSha256": "4d6ad6800101e31a38d349445a0363ede24e3e13fcef9b24ecd623babac7a4b2",
+      "catchLine": 166,
+      "firstStatementIsRequiredGuard": true,
+      "headerTypes": "AuthenticationContextException",
+      "methodRoleFromManualReview": "complete",
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/QuestionQueryApplicationService.java",
+      "receiver": "failure",
+      "siteId": "question/QuestionQueryApplicationService:complete:AuthenticationContextException"
+    },
+    {
+      "bodyTokenSha256": "888a0f4922447d8caca81ff8dc2ebb512d7fa59d0401d632028509e3c0d23a9f",
+      "catchLine": 226,
+      "firstStatementIsRequiredGuard": true,
+      "headerTypes": "InboxException",
+      "methodRoleFromManualReview": "persist",
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/QuestionQueryApplicationService.java",
+      "receiver": "failure",
+      "siteId": "question/QuestionQueryApplicationService:persist:InboxException"
+    },
+    {
+      "bodyTokenSha256": "f206665c8cc5b123e52ae356910fd2ea2ac6ec6033259386b5404b542259387a",
+      "catchLine": 306,
+      "firstStatementIsRequiredGuard": true,
+      "headerTypes": "AuthenticationContextException | AccessRejected",
+      "methodRoleFromManualReview": "transaction",
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/scenario/ScenarioApplicationService.java",
+      "receiver": "failure",
+      "siteId": "scenario/ScenarioApplicationService:transaction:AuthenticationContextException"
+    },
+    {
+      "bodyTokenSha256": "26f2cb02a69f620acdd9b444ba6834b050937ff7ac98daa06d09dd3b8144159f",
+      "catchLine": 311,
+      "firstStatementIsRequiredGuard": true,
+      "headerTypes": "InboxException",
+      "methodRoleFromManualReview": "transaction",
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/scenario/ScenarioApplicationService.java",
+      "receiver": "failure",
+      "siteId": "scenario/ScenarioApplicationService:transaction:InboxException"
+    },
+    {
+      "bodyTokenSha256": "810b9ed3602a4a84b0d320fdf3d790e3d120f4020665c1e071f115a44bffb364",
+      "catchLine": 225,
+      "firstStatementIsRequiredGuard": true,
+      "headerTypes": "AuthenticationContextException",
+      "methodRoleFromManualReview": "execute",
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/QuestionSubmissionService.java",
+      "receiver": "invalid",
+      "siteId": "question/QuestionSubmissionService:execute:AuthenticationContextException"
+    },
+    {
+      "bodyTokenSha256": "7d2a1d49aff9a6381d08c8c6c8b4454588f4f6d6f5e841f3fd09bc143a54039b",
+      "catchLine": 258,
+      "firstStatementIsRequiredGuard": true,
+      "headerTypes": "InboxException",
+      "methodRoleFromManualReview": "executeCanonical",
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/QuestionSubmissionService.java",
+      "receiver": "conflict",
+      "siteId": "question/QuestionSubmissionService:executeCanonical:InboxException"
+    }
+  ],
+  "whole451Accepted": false,
+  "wholeF03Accepted": false,
+  "wholeJavaUnicodeTranslationValidated": false
+}

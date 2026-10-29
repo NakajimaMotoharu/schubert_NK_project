@@ -164,6 +164,8 @@ public final class QuestionQueryApplicationService implements SyncRequestProcess
           authentication.verify(
               connection, request.header().authenticationContext().orElseThrow(), clock.instant());
     } catch (AuthenticationContextException failure) {
+      // BUG2093/YKT1840; SS312 SSC329: inspect fatal graph before SESSION_INVALID.
+      TemporaryInfrastructureException.preserveFatal(failure);
       return reject(connection, request, Optional.empty(), Rejection.SESSION_INVALID);
     }
     if (stage instanceof VerifiedStage verified && verified.actor().userId() != actor.userId())
@@ -222,6 +224,8 @@ public final class QuestionQueryApplicationService implements SyncRequestProcess
                       case Saved ignoredSaved -> throw new TemporaryInfrastructureException();
                     });
       } catch (InboxException failure) {
+        // BUG2092/YKT1840; SS312/324 SSC329: inspect fatal graph before mismatch.
+        TemporaryInfrastructureException.preserveFatal(failure);
         if (messageMismatch(failure)) return invalid(connection, request, actor);
         throw failure;
       }
