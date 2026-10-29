@@ -1,0 +1,15 @@
+# 2562 最後Main型判定二件 限定source参照結果
+
+合流完了追記：14044 entryf41809d6/session74645/manifest 28092d60e031be855606ea95218097fa5f748c54f978f33b6e4f30478f3ed761、14046 entry80cefe72/session14767/manifest fe9e710daccfc1c90c38db63f93b238dacf46c4b3e8ddc0e3cca87d192a49186 は真正0。原WBS/995旧runtime/予算受入不変、八typed反例/前後audit1-HOLD、refs3493/pending2632/noRef2754/raw6247corr3194。485=bf450f04a036d9ea265929e7f65243803a8673cfa500c634ab2eb3dc7818794d/486=966d84869770015c274c949e0cf6b6c400d23b7417fe527360778fc180d81de1。原catalog Main型判定未参照0は静的参照が揃っただけで、警告削除/F03全PASS/実測資格とはしない。
+
+PGPT-20261008-2947：共有38→38/reset1793774153/丸め共有差0pp≠専有費0、専有費・N/T・工数null、fresh残62（2026-10-29 13:40:56 UTC）。
+
+以下の未実施表記は当時の段階記録として保持する。正式/工数null/QA051final・全actualHOLD/保全物は不変。
+
+2026-10-29/2561・PG-D846/event2946/source0061/HEAD7b9d73bbb/開始0.5/2/4pp cap10。14040 entry29467364/manifest **e8c5e0c68bec62316a450966069f70e141ebf9d6a2fbaaddf36afd2aa71cd6c7**、14042 entryea0da82d/manifest **24fcea5f81ca2b4d178b4b18be989d199034c1e4d002391c25d475314469c964**、真正0。原2ID/全byte/元XML・rowhash/型/明示catch/owner/SSを確認、14typed反例・6prefix資格反例・14source句反例0。初稿のunused import一件は事前pyflakes1/&&でentry/body未開始、未invoked草稿のみ除去してから初回body0、製品再試行0。
+
+QuestionのUnicode escape字列は727行目で選択417行目の後。1～417行の原prefixはescape/CR/NULなし・SHA382bb161498bbd3d20250df0029f0241f5980ab866aba1a345334a19faedea52、既span工具を非改変で当prefixにだけ適用しPSQLExceptionの選択位置を原XMLと独立照合した。全fileのUnicode翻訳資格はfalse、後半を削除/置換して通したのではなく選択点までの原入力そのもの。whole source/全PT未検証は保持する。
+
+insertQuestionはdriver PSQL型/SQLstate23505/receipt固有constraintの全条件後だけsavepoint rollback/再生成、他のtoken/owner/SQL失敗をreceipt衝突として再試行しない。verifyAtはforce有り＋StorageIo型だけreasonを固定新例外へ保持し、他既知failureは固定unavailable。全buffer/canonicalのfinally消去とlock unlockを維持。実DB/Backup/force/read/native/graph/Root/回収/退役等0。Main/Test/正本/期待値変更・修正要と確定した製品障害0、代替完了/PASS/coverage/native/受入への換算0。
+
+14044/46のWBS参照保持合流は未実施で完了後追記。元raw/全whole pending・995旧runtime/予算受入・正式1964/53・17/190・工数null/QA051final・原本全保全を維持する。

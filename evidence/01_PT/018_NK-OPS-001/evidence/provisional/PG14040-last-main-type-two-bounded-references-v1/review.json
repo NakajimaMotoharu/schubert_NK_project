@@ -1,0 +1,101 @@
+{
+  "approvedDesignHashes": {
+    "documents/300_SS/310_\u30a2\u30d7\u30ea\u30b1\u30fc\u30b7\u30e7\u30f3/312_\u51e6\u7406sequence\u30fbmethod\u30fb\u4f8b\u5916\u30fbtransaction\u8a2d\u8a08.md": "7fc9bb837b9669f301c4c8d1b0b93ea1d680fd6c30e34b7f754e5210beb3765b",
+    "documents/300_SS/330_\u30c7\u30fc\u30bf\u30fb\u30d5\u30a1\u30a4\u30eb/331_DB\u7269\u7406\u30fbDDL\u30fbindex\u30fb\u6a29\u9650\u8a2d\u8a08.md": "7f6e0430a38769dad5d94ed8d95faaab124f4bb86246c478feee5b50ffca26d5",
+    "documents/300_SS/340_batch\u30fb\u57fa\u76e4/341_\u671dbatch\u30fbbackup\u30fb\u524a\u9664\u30fb\u518d\u5b9f\u884c\u8a2d\u8a08.md": "b721e6f7d0ee3f17cfe1a2d38512623814b0a10c8a7ad8ae737c62eeda192195"
+  },
+  "rows": [
+    {
+      "attributes": {
+        "begincolumn": "34",
+        "beginline": "417",
+        "class": "QuestionSubmissionService",
+        "endcolumn": "47",
+        "endline": "417",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidinstanceofchecksincatchclause",
+        "method": "insertQuestion",
+        "package": "dev.codex.schubert.nk.api.application.question",
+        "priority": "3",
+        "rule": "AvoidInstanceofChecksInCatchClause",
+        "ruleset": "Error Prone"
+      },
+      "basis": "485_ORIGINAL_LOGICAL_OWNER_ONLY_NOT_OLD_PT_OR_BYTES",
+      "canonicalCostOwner": "WBS-P011-02",
+      "canonicalOwner": "WBS-P011-02",
+      "catchAnchor": 17566,
+      "coordinateScope": {
+        "mode": "ORIGINAL_NO_ESCAPE_PREFIX_THROUGH_SELECTED_LINE",
+        "prefixLines": 417,
+        "prefixSha256": "382bb161498bbd3d20250df0029f0241f5980ab866aba1a345334a19faedea52",
+        "spanProofIsPrefixOnly": true,
+        "suffixUnicodeEscapesNotTranslated": true,
+        "wholeJavaUnicodeTranslationValidated": false
+      },
+      "currentWholeJoinPending": true,
+      "disposition": "BOUNDED_TYPE_REASON_CURRENT_WHOLE_JOIN_PENDING",
+      "id": "PMD-00048",
+      "nativeRuntimeProven": false,
+      "occurrenceOrdinal": 0,
+      "originalRowSha256": "ae65ecb446a0a8039ec2060156a08fca70060ad46c9d106dadc84a89266c2690",
+      "ownershipStatus": "BASELINE_LOGICAL_REFERENCE",
+      "path": "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/application/question/QuestionSubmissionService.java",
+      "productTestsExecuted": 0,
+      "rawDiagnosticMultiplicity": 1,
+      "rawRetained": true,
+      "reason": "Question insert permits bounded savepoint retry only for driver-typed PostgreSQL23505 plus the exact receipt unique constraint, after fatal graph classification. Other SQL/state/constraint/null metadata propagates failure; ownership/token failures are not retried as receipt collisions. This raw reference uses the unchanged no-Unicode-escape prefix through source line417, not a whole-file Java Unicode translation claim. Actual DB/savepoint/retry/graph remains unqualified.",
+      "rule": "AvoidInstanceofChecksInCatchClause",
+      "source": "0061d178cda80c2ce3926290619c64db125dbcfc",
+      "sourceChanged": false,
+      "sourceSha256": "d303f5a79375d69bbc4f45c91d4ab74bd5744c40baafe45f6cbe8beb692ffaa2",
+      "spanEndExclusive": 17708,
+      "spanSha256": "b45ba18f790b9b71438e87acc9b5a6994498d45a756f141170941d3a7d469296",
+      "spanStart": 17695,
+      "typeToken": "PSQLException"
+    },
+    {
+      "attributes": {
+        "begincolumn": "49",
+        "beginline": "566",
+        "class": "BackupArtifactVerifier",
+        "endcolumn": "67",
+        "endline": "566",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidinstanceofchecksincatchclause",
+        "method": "verifyAt",
+        "package": "dev.codex.schubert.nk.batch.file",
+        "priority": "3",
+        "rule": "AvoidInstanceofChecksInCatchClause",
+        "ruleset": "Error Prone"
+      },
+      "basis": "485_ORIGINAL_LOGICAL_OWNER_ONLY_NOT_OLD_PT_OR_BYTES",
+      "canonicalCostOwner": "WBS-P017-05",
+      "canonicalOwner": "WBS-P017-05",
+      "catchAnchor": 24199,
+      "coordinateScope": {
+        "mode": "ORIGINAL_ORDINARY_LF_FULL_SOURCE",
+        "spanProofIsPrefixOnly": false,
+        "wholeJavaUnicodeTranslationValidated": false
+      },
+      "currentWholeJoinPending": true,
+      "disposition": "BOUNDED_TYPE_REASON_CURRENT_WHOLE_JOIN_PENDING",
+      "id": "PMD-02778",
+      "nativeRuntimeProven": false,
+      "occurrenceOrdinal": 0,
+      "originalRowSha256": "c621433fa48bfbf3eec007c8472cb7468436bb211a118cb9dca6e36ea11c0365",
+      "ownershipStatus": "BASELINE_LOGICAL_REFERENCE",
+      "path": "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/file/BackupArtifactVerifier.java",
+      "productTestsExecuted": 0,
+      "rawDiagnosticMultiplicity": 1,
+      "rawRetained": true,
+      "reason": "Backup verifyAt checked failure preserves a typed StorageIoException reason only on the existing force-enabled durability path; otherwise fixed unavailable. The instanceof is necessary before reason access in the IO/iterator/unsupported union, while buffers and lock release remain finally-owned. No actual artifact/root/force/verification/Backup/key/native result follows from this static reason.",
+      "rule": "AvoidInstanceofChecksInCatchClause",
+      "source": "0061d178cda80c2ce3926290619c64db125dbcfc",
+      "sourceChanged": false,
+      "sourceSha256": "244c5b3542468956bbe0fef5ae2054f8deb509d4d5db537e4e9b4d2ba9727cbf",
+      "spanEndExclusive": 24356,
+      "spanSha256": "03f73ee9d2ae3331d84b235827528e799434e8de8cc74186e43448608bdda071",
+      "spanStart": 24338,
+      "typeToken": "StorageIoException"
+    }
+  ],
+  "source": "0061d178cda80c2ce3926290619c64db125dbcfc"
+}

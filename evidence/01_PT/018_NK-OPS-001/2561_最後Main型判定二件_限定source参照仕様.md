@@ -1,0 +1,9 @@
+# 2561 最後のMain型判定二件 限定source参照仕様
+
+2026-10-29/PG-D846/event2946/source0061/HEAD7b9d73bbb、WBS-F03/開始0.5/2/4pp cap10、P01102/P01705は原owner参照追加0。製品PT0、既HOLD全維持。公開QuestionSubmissionService.insertQuestion全method/oneIdとBackupArtifactVerifier.verifyAt全method/必要capture/read/guardを読取、承認SS312/331/341と原PMD XMLから個別点検する。
+
+Question PMD00048はPSQLException/SQL23505/正確なreceipt unique名だけのsavepoint retry、Backup PMD02778は既force有り時だけStorageIoException.reason保持。実DB/savepoint/Backup/FS/Root/VM/native/鍵/回収/退役/permission操作をしない。警告抑制/型分岐の機械変換や実測成功への読み替え0。
+
+着手時はQuestionの全sourceにUnicode escape字列があり通常span helper全体の適用外とした。追加読取でその字列は727行目だけ、当417行目までの原prefixには皆無と確認した。14040はprefix原byte/hashを固定し、既存helperを変更せず通常LF prefixにだけ適用する。後半のUnicodeを削除/置換/実行しない。これで選択spanだけの位置対応を示すが、全file Java Unicode translation/汎用parserの資格は未成立を維持する。group開始の限定性を拡大せず、prefix成立が観測できなければ行単位理由だけ/未参照を保持する。
+
+14040/42で原2ID/rowhash/XML/offset/明示catch/owner/source・prefixと型/条件反例を独立照合し2562へ保存。期待値は承認SS/DDL名/固定categoryと原XML、Production methodやDB実行からexpected生成0。normal13832全inputは同byte確認時だけ再利用、旧run別sourceを転用しない。rawとwhole pendingを保持し正式/工数null/QA051final・原予算/原本保全不変更。
