@@ -1,0 +1,3182 @@
+{
+  "actualExit": 0,
+  "additionalScopeReferences": [
+    {
+      "execSha256": "70af1762b62bdbf9987ad7016b609494b634c64eb41e188febf88de1cf0424ca",
+      "name": "PG14342-current-frame-value-object-counter-v1",
+      "newExecs": 0,
+      "newTests": 0,
+      "scope": "ADDITIONAL_SOURCE_SAME_ALREADY_COUNTED_EXEC",
+      "sessionIdentity": "PG14326-ORIGINAL-PROTOCOL-FRAME-PAYLOAD24",
+      "sha256": "33aab1ab9c5d919e481f1f0789c07428ec789601a3e3332421b10caff9c4e2a3",
+      "testsAlreadyCounted": 24
+    }
+  ],
+  "cases": [
+    {
+      "classname": "dev.codex.schubert.nk.api.messaging.inbound.DeliveryMetadataTest",
+      "name": "countsAndPrintable128ByteBoundaryAreNotCapped"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.api.messaging.inbound.DeliveryMetadataTest",
+      "name": "nullMissingInvalidAndControlMetadataReject"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.api.messaging.inbound.InboundTransactionsPrimaryContractTest",
+      "name": "jmsP001SameRollbackFailureNeverSelfSuppresses"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.api.messaging.inbound.InboundTransactionsPrimaryContractTest",
+      "name": "jmsP002DistinctEqualsTrueRollbackFailureIsRetainedByIdentity"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.api.messaging.inbound.InboundTransactionsPrimaryContractTest",
+      "name": "jmsP003RollbackErrorRemainsFatalAndSameIdentity"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.api.messaging.inbound.InboundTransactionsPrimaryContractTest",
+      "name": "jmsP004SameProtocolIsolationFailureRemainsOriginalAndUncommitted"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.api.messaging.inbound.InboundTransactionsPrimaryContractTest",
+      "name": "jmsP005DistinctIsolationFailureRetainsProtocolAndNeverCommits"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.codec.AuthenticationErrorProfileTest",
+      "name": "allOtherResponseErrorProfilesRetainTheirIndividualContracts"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.codec.AuthenticationErrorProfileTest",
+      "name": "loginLockAndFailurePreserveOnlyApprovedErrorFields"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.codec.AuthenticationErrorProfileTest",
+      "name": "malformedLoginErrorBoundariesAndTypesAreRejected"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.codec.FieldCodecNfcGoldenTest",
+      "name": "nfcGolden001HangulJamoFitsComposedByteWidth"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.codec.FieldCodecNfcGoldenTest",
+      "name": "nfcGolden002AngstromUsesCanonicalTwoByteScalarBeforeWidthCheck"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.codec.FieldCodecNfcGoldenTest",
+      "name": "nfcGolden003CanonicalCombiningOrderIsRequiredWithoutComposition"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.codec.FieldCodecTest",
+      "name": "booleanAndReservedFieldsRejectUnknownBytes"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.codec.FieldCodecTest",
+      "name": "numericCodecChecksDigitsRangeAndOverflow"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.codec.FieldCodecTest",
+      "name": "numericErrorFillerDoesNotBecomeBusinessZero"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.codec.FieldCodecTest",
+      "name": "numericSemanticCeilingIsIndependentOfWireAndLongCapacity"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.codec.FieldCodecTest",
+      "name": "textDecodeIsStrictCanonicalAndOptionalAware"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.codec.FieldCodecTest",
+      "name": "textEncodeNormalizesUtf8AndPadsWithAsciiSpace"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.codec.MessageCodecTest",
+      "name": "fixedPayloadIsDefensiveAndWireMessageChecksLengths"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.codec.MessageCodecTest",
+      "name": "fullMessageRoundTripsAtByteBoundariesAndRejectsInvalidSizes"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.codec.MessageCodecTest",
+      "name": "headerDecoderRejectsEveryFixedFieldAndProfileCorruption"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.codec.MessageCodecTest",
+      "name": "headerEncodingMatchesIndependentUi232GoldenVector"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.codec.MessageCodecTest",
+      "name": "metadataAndExpectedRouteEstablishNullAndRangeContracts"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.codec.MessageCodecTest",
+      "name": "responseAndEventHeadersRoundTripWithoutLeakingContext"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.codec.MessageCodecTest",
+      "name": "transportAndRouteContractsRejectEveryMismatch"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.codec.PayloadCodecTest",
+      "name": "allSixtyFourLayoutsRoundTripMinimumSuccessValues"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.codec.PayloadCodecTest",
+      "name": "decodeRejectsLengthsNullsFixedValuesAndBadErrorFillers"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.codec.PayloadCodecTest",
+      "name": "encodeRejectsUnknownMissingWrongTypeAndRecordViolations"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.codec.PayloadCodecTest",
+      "name": "everyResponseLayoutUsesExactErrorFillersAndNoRecords"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.codec.PayloadCodecTest",
+      "name": "fixedAndIndependentGoldenFieldsEncodeAtExactOffsets"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.codec.PayloadCodecTest",
+      "name": "numericDigitLimitIsCheckedWithoutOverflow"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.codec.PayloadCodecTest",
+      "name": "resultCodeProfilePreservesOnlyTheApprovedCancellationConflictState"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.codec.PayloadCodecTest",
+      "name": "valuesAreImmutableNullSafeAndRedacted"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.codec.PayloadGoldenVectorTest",
+      "name": "allSixtyFourLayoutsMatchIndependentMinimumMaximumAndErrorHashes"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.codec.PayloadGoldenVectorTest",
+      "name": "everyRepeatingLayoutAcceptsItsMaximumRecordBoundary"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.codec.PayloadGoldenVectorTest",
+      "name": "sharedCodecProducesIdenticalBytesUnderConcurrentUse"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.codec.ScenarioRecordEncodingTest",
+      "name": "rd02RejectsNullUnknownNonRecordLengthAndMalformedFieldBytes"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.codec.ScenarioRecordEncodingTest",
+      "name": "rd02SingleRecordDecodeUsesLiteralGoldenAndOwnsItsValues"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.codec.ScenarioRecordEncodingTest",
+      "name": "w03SingleRecordGoldenHasNoInventedDataAndRejectsNullUnknownAndNonRecordLayouts"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.header.HeaderModelTest",
+      "name": "authenticationContextValidatesAndRedacts"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.header.HeaderModelTest",
+      "name": "enumsMapOnlyApprovedWireValues"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.header.HeaderModelTest",
+      "name": "headerConstructorRejectsEveryStructuralViolation"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.header.HeaderModelTest",
+      "name": "headerLengthArithmeticAcceptsExactMillionAndRejectsTheNextByteAndOverflow"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.header.HeaderModelTest",
+      "name": "headerReferencesRejectNullAtTheNamedInvariantBoundary"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.header.HeaderModelTest",
+      "name": "headerValidateAgainstRejectsEachMetadataMismatch"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.header.HeaderModelTest",
+      "name": "validHeadersCoverRequestResponseErrorAndEventProfiles"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.layout.LayoutFieldCatalogTest",
+      "name": "catalogMatchesIndependentUi234To236Fixture"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.layout.LayoutFieldCatalogTest",
+      "name": "layoutFieldsRejectWrongAreaGapLengthAndNull"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.layout.LayoutFieldCatalogTest",
+      "name": "parserRejectsMalformedUnknownAndDuplicateRows"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.layout.LayoutMetadataTest",
+      "name": "layoutDefinitionChecksEveryLengthAndKindInvariant"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.layout.LayoutMetadataTest",
+      "name": "layoutIdAndFieldDefinitionAreStrictAndOneBased"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.layout.LayoutMetadataTest",
+      "name": "registryMatchesIndependentUi233Catalog"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.layout.LayoutMetadataTest",
+      "name": "registryRejectsEmptyNullDuplicateAndKindMismatches"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.transport.FailedJmsIsolationExceptionTest",
+      "name": "iso009PrimaryAndProtocolAreRequired"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.transport.FailedJmsIsolationExceptionTest",
+      "name": "iso010SameNodeIsRetainedWithoutSelfSuppression"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.transport.FailedJmsIsolationExceptionTest",
+      "name": "iso011EqualsTrueDoesNotHideDistinctProtocolIdentity"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.transport.FailedJmsIsolationExceptionTest",
+      "name": "iso012DisabledPrimarySuppressionCannotHideProtocol"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.transport.UnconfirmedJmsRollbackExceptionTest",
+      "name": "disabledPrimarySuppressionDoesNotHideRollbackFailure"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.transport.UnconfirmedJmsRollbackExceptionTest",
+      "name": "distinctEqualValuedNodesAreBothRetained"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.transport.UnconfirmedJmsRollbackExceptionTest",
+      "name": "primaryAndRollbackMustBothBePresent"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.protocol.transport.UnconfirmedJmsRollbackExceptionTest",
+      "name": "sameNodeIsRetainedOnceWithoutSelfSuppression"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.form.LogSearchFormTest",
+      "name": "web278DefaultsAndFilters"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.form.LogSearchFormTest",
+      "name": "web279TextAndBinding"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.form.LogSearchFormTest",
+      "name": "web280Characters"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.form.LogSearchFormTest",
+      "name": "web281PageAndEnums"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.form.LogSearchFormTest",
+      "name": "web282Dates"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.form.LogSearchFormTest",
+      "name": "web283DateRange"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.form.LogSearchFormTest",
+      "name": "web284NullOwnershipAndRedaction"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.form.LogSearchFormTest",
+      "name": "web285ConcurrentBinding"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.form.QuestionSubmitFormTest",
+      "name": "qstForm001IndependentGoldenAndNoQuestionTrimming"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.form.QuestionSubmitFormTest",
+      "name": "qstForm002ByteBoundariesAfterNfcWithoutTruncation"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.form.QuestionSubmitFormTest",
+      "name": "qstForm003ControlsUnicodeAndTrailingSpaceAreNotTrimmed"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.form.QuestionSubmitFormTest",
+      "name": "qstForm004CanonicalUuidSyntaxWithoutIssuingAuthorization"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.form.QuestionSubmitFormTest",
+      "name": "qstForm005ClosedBindingMissingDuplicateAndNullContracts"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.form.QuestionSubmitFormTest",
+      "name": "qstForm006ImmutableSnapshotsAndRedaction"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.form.QuestionSubmitFormTest",
+      "name": "qstForm007TerminalClosePreservesOtherOwners"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.form.QuestionSubmitFormTest",
+      "name": "qstForm008ConcurrentIndependentBodiesAndTokens"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.form.ScenarioSearchFormTest",
+      "name": "web214CanonicalRequest"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.form.ScenarioSearchFormTest",
+      "name": "web215ByteBoundaries"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.form.ScenarioSearchFormTest",
+      "name": "web216UnicodeAndEnums"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.form.ScenarioSearchFormTest",
+      "name": "web217BindingAllowlist"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.form.ScenarioSearchFormTest",
+      "name": "web218PageBoundaries"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.form.ScenarioSearchFormTest",
+      "name": "web219InvalidCannotRequest"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.form.ScenarioSearchFormTest",
+      "name": "web220NullOwnershipRedaction"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.form.ScenarioSearchFormTest",
+      "name": "web221ConcurrentValidation"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.form.TargetOperationFormTest",
+      "name": "target001BothIndependentFortyEightByteGolden"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.form.TargetOperationFormTest",
+      "name": "target002PositiveN12BoundariesAndCanonicalTargetEquality"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.form.TargetOperationFormTest",
+      "name": "target003EachRequiredFieldMissingNullEmptyMultipleAndNullElement"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.form.TargetOperationFormTest",
+      "name": "target004ClosedOperationConfirmationAndCanonicalUuid"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.form.TargetOperationFormTest",
+      "name": "target005ClosedFieldsAndOnlyCsrfTransportAllowance"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.form.TargetOperationFormTest",
+      "name": "target006TopLevelNullAndUnsupportedInternalSelector"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.form.TargetOperationFormTest",
+      "name": "target007ClosedImmutableSnapshotsDoNotRetainMutableInput"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.form.TargetOperationFormTest",
+      "name": "target008OneHundredParallelBindHasNoSharedMutableState"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.form.UserCreateFormTest",
+      "name": "create001IndependentWireAndClosedRoleEnabledValues"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.form.UserCreateFormTest",
+      "name": "create002NfcCodePointAndByteBoundariesWithoutPasswordTrimming"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.form.UserCreateFormTest",
+      "name": "create003RequiredClosedBindingAndNullContracts"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.form.UserCreateFormTest",
+      "name": "create004UsernamePasswordAndUnicodeRejections"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.form.UserCreateFormTest",
+      "name": "create005ConfirmationEnumFlagAndCanonicalToken"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.form.UserCreateFormTest",
+      "name": "create006ImmutableProjectionAndSecretLifetime"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.form.UserCreateFormTest",
+      "name": "create007OneHundredConcurrentIndependentRequests"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.form.UserCreateFormTest",
+      "name": "create008InvalidSecretsRemainAbsentAndClosedInvalidCannotSend"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.form.UserMutationFormTest",
+      "name": "change001StatusGolden"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.form.UserMutationFormTest",
+      "name": "change002RoleGolden"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.form.UserMutationFormTest",
+      "name": "change003UnlockGolden"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.form.UserMutationFormTest",
+      "name": "change004PasswordGoldenAndNoSecretProjection"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.form.UserMutationFormTest",
+      "name": "change005OperationAndUnknownFieldRejection"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.form.UserMutationFormTest",
+      "name": "change006PathAndHiddenIdentifier"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.form.UserMutationFormTest",
+      "name": "change007VersionSyntax"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.form.UserMutationFormTest",
+      "name": "change008ConfirmAndTokenSyntax"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.form.UserMutationFormTest",
+      "name": "change009ClosedRoleAndBoolean"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.form.UserMutationFormTest",
+      "name": "change010PasswordNfcCodepointByteBoundaries"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.form.UserMutationFormTest",
+      "name": "change011PasswordInvalidAndTrustedUsername"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.form.UserMutationFormTest",
+      "name": "change012NullMissingAndDuplicates"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.form.UserMutationFormTest",
+      "name": "change013ImmutableSnapshotAndRedaction"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.form.UserMutationFormTest",
+      "name": "change014TerminalCloseAndSeparateDto"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.form.UserMutationFormTest",
+      "name": "change015OneHundredIndependentParallelOperations"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.form.UserMutationFormTest",
+      "name": "change016InputCannotGrantApiAuthority"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.messaging.JmsRequestReplyClientTest",
+      "name": "approvedConfiguredWaitsAccept1To20AndRejectTheNextWithoutSending"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.messaging.JmsRequestReplyClientTest",
+      "name": "constructorRegistryAndRequestBoundsDenyInvalidInputBeforeSend"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.messaging.JmsRequestReplyClientTest",
+      "name": "elapsedWaitExpiresAndSubsequentReplyIsLate"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.messaging.JmsRequestReplyClientTest",
+      "name": "exceptionReasonIsAClosedNonSecretClassification"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.messaging.JmsRequestReplyClientTest",
+      "name": "exchangeRegistersBeforeOneSendAndReturnsDefensiveReply"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.messaging.JmsRequestReplyClientTest",
+      "name": "interruptedWaitRemovesRegistrationAndRestoresInterruptFlag"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.messaging.JmsRequestReplyClientTest",
+      "name": "replyAtDeadlineFailsTheWaitingFutureAsLate"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.messaging.JmsRequestReplyClientTest",
+      "name": "sendFailureCancelsRegistrationAndPropagatesJmsException"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.messaging.ReplyCorrelationRegistryTest",
+      "name": "lateCompletionAndExplicitExpiryFailTheWaiterWithoutDelivery"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.messaging.ReplyCorrelationRegistryTest",
+      "name": "nullDeadlineAndCapacityContractsFailBeforeMutation"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.messaging.ReplyCorrelationRegistryTest",
+      "name": "oneOfOneHundredSimultaneousResponsesWins"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.messaging.ReplyCorrelationRegistryTest",
+      "name": "registrationIsBoundedDuplicateSafeAndReleasesCapacityOnCancel"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.messaging.ReplyCorrelationRegistryTest",
+      "name": "successfulCompletionIsAtomicAndDefensivelyCopiesBody"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.messaging.ReplyCorrelationTerminalRaceTest",
+      "name": "callerCompletionViewCannotSetOrCancelTheRegistryPromise"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.messaging.ReplyCorrelationTerminalRaceTest",
+      "name": "concurrentRegistrationsRespectCapacityAndReuseAllSlots"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.messaging.ReplyCorrelationTerminalRaceTest",
+      "name": "nanosecondDeadlineAndCopiesStayIndependent"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.messaging.ReplyCorrelationTerminalRaceTest",
+      "name": "terminalRaceHasOneWinnerAndReturnsThePermit"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.messaging.WebBusinessWireClientsTest",
+      "name": "wire001EighteenRequestsMatchIndependentUiByteOffsets"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.messaging.WebBusinessWireClientsTest",
+      "name": "wire002AcceptanceAndIdempotentResultsRemainTyped"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.messaging.WebBusinessWireClientsTest",
+      "name": "wire003CapabilitiesAreClosedBeforeTransport"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.messaging.WebBusinessWireClientsTest",
+      "name": "wire004NullConfigurationAndInputNeverBecomeValidWork"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.messaging.WebBusinessWireClientsTest",
+      "name": "wire005AcceptanceRejectsWrongKindContextGenerationAndFiller"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.messaging.WebBusinessWireClientsTest",
+      "name": "wire006ErrorsTimeoutAndUnknownFailuresNeverRetry"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.messaging.WebBusinessWireClientsTest",
+      "name": "wire007RetriesUseNewMessageIdsAndRetainOperationTokenOnly"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.messaging.WebBusinessWireClientsTest",
+      "name": "wire008ConcurrentFacadesKeepRepliesAndContextsSeparate"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.messaging.WebBusinessWireClientsTest",
+      "name": "wire009QuestionPageRecordsUseIndependentUiVectorsAndPreserveOrder"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.messaging.WebBusinessWireClientsTest",
+      "name": "wire010RequestRecordsAreRejectedBeforeEncodingOrSending"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.messaging.WebBusinessWireClientsTest",
+      "name": "wire011ResponseShapeMismatchNeverBecomesAQuestionPage"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.messaging.WebBusinessWireClientsTest",
+      "name": "wire012MalformedQuestionRecordsAreRejectedWithoutRetry"
+    }
+  ],
+  "coverageExecUnion": false,
+  "effortPercent": null,
+  "executablePhysical": 65,
+  "formalUpdated": false,
+  "four100ExecutablePhysical": 38,
+  "four100Physical": 41,
+  "four100SourcePrograms": 32,
+  "fullSourceUnits": {
+    "dev/codex/schubert/nk/api/messaging/inbound/DeliveryMetadata": {
+      "branchNaturallyZero": false,
+      "counters": {
+        "BRANCH": {
+          "covered": 12,
+          "missed": 0
+        },
+        "CLASS": {
+          "covered": 1,
+          "missed": 0
+        },
+        "LINE": {
+          "covered": 10,
+          "missed": 0
+        },
+        "METHOD": {
+          "covered": 3,
+          "missed": 0
+        }
+      },
+      "execSha256": "de0afcedd95fc718f912a9a648e9978bbdc58decc0f93319146962c00fc93580",
+      "four100": true,
+      "metadataOnly": false,
+      "physical": [
+        "dev/codex/schubert/nk/api/messaging/inbound/DeliveryMetadata"
+      ],
+      "post": "PG14244-delivery-metadata-whole-two-post-v1",
+      "postSha256": "14f6fb3937435588c58bfa0cdbe7fa6b0ef04b0b3eed7436b4918cd1f15a63bd",
+      "sessionIdentity": "PG14242-ORIGINAL-DELIVERY-METADATA-TWO"
+    },
+    "dev/codex/schubert/nk/api/messaging/inbound/InboundTransactions": {
+      "branchNaturallyZero": false,
+      "counters": {
+        "BRANCH": {
+          "covered": 4,
+          "missed": 0
+        },
+        "CLASS": {
+          "covered": 1,
+          "missed": 0
+        },
+        "LINE": {
+          "covered": 24,
+          "missed": 10
+        },
+        "METHOD": {
+          "covered": 4,
+          "missed": 2
+        }
+      },
+      "execSha256": "36eb4f40eca27499372e04c0ef573f43990e979e1c223915aac026b8c8575ea9",
+      "four100": false,
+      "metadataOnly": false,
+      "physical": [
+        "dev/codex/schubert/nk/api/messaging/inbound/InboundTransactions"
+      ],
+      "post": "PG14254-inbound-primary-whole-five-post-v1",
+      "postSha256": "d1c31c2b14489e72fe15ab7a72188746a8ec7ce78439c3ebab659dcaad4a08f6",
+      "sessionIdentity": "PG14252-ORIGINAL-INBOUND-PRIMARY-FIVE"
+    },
+    "dev/codex/schubert/nk/protocol/codec/ExpectedRoute": {
+      "branchNaturallyZero": false,
+      "counters": {
+        "BRANCH": {
+          "covered": 18,
+          "missed": 0
+        },
+        "CLASS": {
+          "covered": 1,
+          "missed": 0
+        },
+        "LINE": {
+          "covered": 14,
+          "missed": 0
+        },
+        "METHOD": {
+          "covered": 1,
+          "missed": 0
+        }
+      },
+      "execSha256": "70af1762b62bdbf9987ad7016b609494b634c64eb41e188febf88de1cf0424ca",
+      "four100": true,
+      "metadataOnly": false,
+      "physical": [
+        "dev/codex/schubert/nk/protocol/codec/ExpectedRoute"
+      ],
+      "post": "PG14328-protocol-frame-payload-whole-twenty-four-post-v1",
+      "postSha256": "8099de1c6e2169ff4102f81db07c679b924966e2e502b2dac16155ad4fdb8d3f",
+      "sessionIdentity": "PG14326-ORIGINAL-PROTOCOL-FRAME-PAYLOAD24"
+    },
+    "dev/codex/schubert/nk/protocol/codec/FieldCodec": {
+      "branchNaturallyZero": false,
+      "counters": {
+        "BRANCH": {
+          "covered": 84,
+          "missed": 0
+        },
+        "CLASS": {
+          "covered": 1,
+          "missed": 0
+        },
+        "LINE": {
+          "covered": 119,
+          "missed": 0
+        },
+        "METHOD": {
+          "covered": 15,
+          "missed": 0
+        }
+      },
+      "execSha256": "1e492548fe23cfecfe53a2c363e0d9713f602c12ae4c05371df57669b5c11cf5",
+      "four100": true,
+      "metadataOnly": false,
+      "physical": [
+        "dev/codex/schubert/nk/protocol/codec/FieldCodec"
+      ],
+      "post": "PG14324-protocol-field-whole-nine-post-v1",
+      "postSha256": "05f5e0ddaba5a9d006bd18efbd80db6834642b6b8906b786320b446c7cabb5ad",
+      "sessionIdentity": "PG14322-ORIGINAL-PROTOCOL-FIELD9"
+    },
+    "dev/codex/schubert/nk/protocol/codec/FieldEncodingException": {
+      "branchNaturallyZero": true,
+      "counters": {
+        "BRANCH": {
+          "covered": 0,
+          "missed": 0
+        },
+        "CLASS": {
+          "covered": 1,
+          "missed": 0
+        },
+        "LINE": {
+          "covered": 4,
+          "missed": 0
+        },
+        "METHOD": {
+          "covered": 2,
+          "missed": 0
+        }
+      },
+      "execSha256": "1e492548fe23cfecfe53a2c363e0d9713f602c12ae4c05371df57669b5c11cf5",
+      "four100": false,
+      "metadataOnly": false,
+      "physical": [
+        "dev/codex/schubert/nk/protocol/codec/FieldEncodingException"
+      ],
+      "post": "PG14324-protocol-field-whole-nine-post-v1",
+      "postSha256": "05f5e0ddaba5a9d006bd18efbd80db6834642b6b8906b786320b446c7cabb5ad",
+      "sessionIdentity": "PG14322-ORIGINAL-PROTOCOL-FIELD9"
+    },
+    "dev/codex/schubert/nk/protocol/codec/FixedWidthDecoder": {
+      "branchNaturallyZero": false,
+      "counters": {
+        "BRANCH": {
+          "covered": 10,
+          "missed": 0
+        },
+        "CLASS": {
+          "covered": 1,
+          "missed": 0
+        },
+        "LINE": {
+          "covered": 28,
+          "missed": 0
+        },
+        "METHOD": {
+          "covered": 3,
+          "missed": 0
+        }
+      },
+      "execSha256": "70af1762b62bdbf9987ad7016b609494b634c64eb41e188febf88de1cf0424ca",
+      "four100": true,
+      "metadataOnly": false,
+      "physical": [
+        "dev/codex/schubert/nk/protocol/codec/FixedWidthDecoder"
+      ],
+      "post": "PG14328-protocol-frame-payload-whole-twenty-four-post-v1",
+      "postSha256": "8099de1c6e2169ff4102f81db07c679b924966e2e502b2dac16155ad4fdb8d3f",
+      "sessionIdentity": "PG14326-ORIGINAL-PROTOCOL-FRAME-PAYLOAD24"
+    },
+    "dev/codex/schubert/nk/protocol/codec/FixedWidthEncoder": {
+      "branchNaturallyZero": false,
+      "counters": {
+        "BRANCH": {
+          "covered": 2,
+          "missed": 0
+        },
+        "CLASS": {
+          "covered": 1,
+          "missed": 0
+        },
+        "LINE": {
+          "covered": 26,
+          "missed": 0
+        },
+        "METHOD": {
+          "covered": 4,
+          "missed": 0
+        }
+      },
+      "execSha256": "70af1762b62bdbf9987ad7016b609494b634c64eb41e188febf88de1cf0424ca",
+      "four100": true,
+      "metadataOnly": false,
+      "physical": [
+        "dev/codex/schubert/nk/protocol/codec/FixedWidthEncoder"
+      ],
+      "post": "PG14328-protocol-frame-payload-whole-twenty-four-post-v1",
+      "postSha256": "8099de1c6e2169ff4102f81db07c679b924966e2e502b2dac16155ad4fdb8d3f",
+      "sessionIdentity": "PG14326-ORIGINAL-PROTOCOL-FRAME-PAYLOAD24"
+    },
+    "dev/codex/schubert/nk/protocol/codec/HeaderCodec": {
+      "branchNaturallyZero": false,
+      "counters": {
+        "BRANCH": {
+          "covered": 6,
+          "missed": 0
+        },
+        "CLASS": {
+          "covered": 1,
+          "missed": 0
+        },
+        "LINE": {
+          "covered": 73,
+          "missed": 0
+        },
+        "METHOD": {
+          "covered": 9,
+          "missed": 0
+        }
+      },
+      "execSha256": "70af1762b62bdbf9987ad7016b609494b634c64eb41e188febf88de1cf0424ca",
+      "four100": true,
+      "metadataOnly": false,
+      "physical": [
+        "dev/codex/schubert/nk/protocol/codec/HeaderCodec"
+      ],
+      "post": "PG14328-protocol-frame-payload-whole-twenty-four-post-v1",
+      "postSha256": "8099de1c6e2169ff4102f81db07c679b924966e2e502b2dac16155ad4fdb8d3f",
+      "sessionIdentity": "PG14326-ORIGINAL-PROTOCOL-FRAME-PAYLOAD24"
+    },
+    "dev/codex/schubert/nk/protocol/codec/MessageEncodingException": {
+      "branchNaturallyZero": true,
+      "counters": {
+        "BRANCH": {
+          "covered": 0,
+          "missed": 0
+        },
+        "CLASS": {
+          "covered": 1,
+          "missed": 0
+        },
+        "LINE": {
+          "covered": 4,
+          "missed": 0
+        },
+        "METHOD": {
+          "covered": 2,
+          "missed": 0
+        }
+      },
+      "execSha256": "70af1762b62bdbf9987ad7016b609494b634c64eb41e188febf88de1cf0424ca",
+      "four100": false,
+      "metadataOnly": false,
+      "physical": [
+        "dev/codex/schubert/nk/protocol/codec/MessageEncodingException"
+      ],
+      "post": "PG14328-protocol-frame-payload-whole-twenty-four-post-v1",
+      "postSha256": "8099de1c6e2169ff4102f81db07c679b924966e2e502b2dac16155ad4fdb8d3f",
+      "sessionIdentity": "PG14326-ORIGINAL-PROTOCOL-FRAME-PAYLOAD24"
+    },
+    "dev/codex/schubert/nk/protocol/codec/PayloadCodec": {
+      "branchNaturallyZero": false,
+      "counters": {
+        "BRANCH": {
+          "covered": 146,
+          "missed": 0
+        },
+        "CLASS": {
+          "covered": 1,
+          "missed": 0
+        },
+        "LINE": {
+          "covered": 181,
+          "missed": 0
+        },
+        "METHOD": {
+          "covered": 25,
+          "missed": 0
+        }
+      },
+      "execSha256": "70af1762b62bdbf9987ad7016b609494b634c64eb41e188febf88de1cf0424ca",
+      "four100": true,
+      "metadataOnly": false,
+      "physical": [
+        "dev/codex/schubert/nk/protocol/codec/PayloadCodec",
+        "dev/codex/schubert/nk/protocol/codec/PayloadCodec$1"
+      ],
+      "post": "PG14328-protocol-frame-payload-whole-twenty-four-post-v1",
+      "postSha256": "8099de1c6e2169ff4102f81db07c679b924966e2e502b2dac16155ad4fdb8d3f",
+      "sessionIdentity": "PG14326-ORIGINAL-PROTOCOL-FRAME-PAYLOAD24"
+    },
+    "dev/codex/schubert/nk/protocol/codec/PermanentProtocolException": {
+      "branchNaturallyZero": true,
+      "counters": {
+        "BRANCH": {
+          "covered": 0,
+          "missed": 0
+        },
+        "CLASS": {
+          "covered": 1,
+          "missed": 0
+        },
+        "LINE": {
+          "covered": 4,
+          "missed": 0
+        },
+        "METHOD": {
+          "covered": 2,
+          "missed": 0
+        }
+      },
+      "execSha256": "1e492548fe23cfecfe53a2c363e0d9713f602c12ae4c05371df57669b5c11cf5",
+      "four100": false,
+      "metadataOnly": false,
+      "physical": [
+        "dev/codex/schubert/nk/protocol/codec/PermanentProtocolException"
+      ],
+      "post": "PG14324-protocol-field-whole-nine-post-v1",
+      "postSha256": "05f5e0ddaba5a9d006bd18efbd80db6834642b6b8906b786320b446c7cabb5ad",
+      "sessionIdentity": "PG14322-ORIGINAL-PROTOCOL-FIELD9"
+    },
+    "dev/codex/schubert/nk/protocol/codec/ProtocolValidator": {
+      "branchNaturallyZero": false,
+      "counters": {
+        "BRANCH": {
+          "covered": 24,
+          "missed": 0
+        },
+        "CLASS": {
+          "covered": 1,
+          "missed": 0
+        },
+        "LINE": {
+          "covered": 22,
+          "missed": 0
+        },
+        "METHOD": {
+          "covered": 1,
+          "missed": 0
+        }
+      },
+      "execSha256": "70af1762b62bdbf9987ad7016b609494b634c64eb41e188febf88de1cf0424ca",
+      "four100": true,
+      "metadataOnly": false,
+      "physical": [
+        "dev/codex/schubert/nk/protocol/codec/ProtocolValidator"
+      ],
+      "post": "PG14328-protocol-frame-payload-whole-twenty-four-post-v1",
+      "postSha256": "8099de1c6e2169ff4102f81db07c679b924966e2e502b2dac16155ad4fdb8d3f",
+      "sessionIdentity": "PG14326-ORIGINAL-PROTOCOL-FRAME-PAYLOAD24"
+    },
+    "dev/codex/schubert/nk/protocol/codec/TransportBodyType": {
+      "branchNaturallyZero": true,
+      "counters": {
+        "BRANCH": {
+          "covered": 0,
+          "missed": 0
+        },
+        "CLASS": {
+          "covered": 1,
+          "missed": 0
+        },
+        "LINE": {
+          "covered": 5,
+          "missed": 0
+        },
+        "METHOD": {
+          "covered": 1,
+          "missed": 0
+        }
+      },
+      "execSha256": "70af1762b62bdbf9987ad7016b609494b634c64eb41e188febf88de1cf0424ca",
+      "four100": false,
+      "metadataOnly": false,
+      "physical": [
+        "dev/codex/schubert/nk/protocol/codec/TransportBodyType"
+      ],
+      "post": "PG14328-protocol-frame-payload-whole-twenty-four-post-v1",
+      "postSha256": "8099de1c6e2169ff4102f81db07c679b924966e2e502b2dac16155ad4fdb8d3f",
+      "sessionIdentity": "PG14326-ORIGINAL-PROTOCOL-FRAME-PAYLOAD24"
+    },
+    "dev/codex/schubert/nk/protocol/codec/TransportMetadata": {
+      "branchNaturallyZero": false,
+      "counters": {
+        "BRANCH": {
+          "covered": 12,
+          "missed": 0
+        },
+        "CLASS": {
+          "covered": 1,
+          "missed": 0
+        },
+        "LINE": {
+          "covered": 17,
+          "missed": 0
+        },
+        "METHOD": {
+          "covered": 1,
+          "missed": 0
+        }
+      },
+      "execSha256": "70af1762b62bdbf9987ad7016b609494b634c64eb41e188febf88de1cf0424ca",
+      "four100": true,
+      "metadataOnly": false,
+      "physical": [
+        "dev/codex/schubert/nk/protocol/codec/TransportMetadata"
+      ],
+      "post": "PG14328-protocol-frame-payload-whole-twenty-four-post-v1",
+      "postSha256": "8099de1c6e2169ff4102f81db07c679b924966e2e502b2dac16155ad4fdb8d3f",
+      "sessionIdentity": "PG14326-ORIGINAL-PROTOCOL-FRAME-PAYLOAD24"
+    },
+    "dev/codex/schubert/nk/protocol/header/AuthenticationContext": {
+      "branchNaturallyZero": false,
+      "counters": {
+        "BRANCH": {
+          "covered": 6,
+          "missed": 0
+        },
+        "CLASS": {
+          "covered": 1,
+          "missed": 0
+        },
+        "LINE": {
+          "covered": 13,
+          "missed": 0
+        },
+        "METHOD": {
+          "covered": 7,
+          "missed": 0
+        }
+      },
+      "execSha256": "c2a7f870cda9a717e56e8cf78da7a4907e2062b20c95d7ed37067071c047ad1b",
+      "four100": true,
+      "metadataOnly": false,
+      "physical": [
+        "dev/codex/schubert/nk/protocol/header/AuthenticationContext"
+      ],
+      "post": "PG14346-protocol-header-layout-whole-fourteen-post-v1",
+      "postSha256": "6a7fbff5dd2ebf7acac4690c9717354df4dd6e0bbac88c2973e747e795a63d77",
+      "sessionIdentity": "PG14344-ORIGINAL-PROTOCOL-HEADER-LAYOUT14"
+    },
+    "dev/codex/schubert/nk/protocol/header/CommonHeader": {
+      "branchNaturallyZero": false,
+      "counters": {
+        "BRANCH": {
+          "covered": 70,
+          "missed": 0
+        },
+        "CLASS": {
+          "covered": 1,
+          "missed": 0
+        },
+        "LINE": {
+          "covered": 68,
+          "missed": 0
+        },
+        "METHOD": {
+          "covered": 8,
+          "missed": 0
+        }
+      },
+      "execSha256": "c2a7f870cda9a717e56e8cf78da7a4907e2062b20c95d7ed37067071c047ad1b",
+      "four100": true,
+      "metadataOnly": false,
+      "physical": [
+        "dev/codex/schubert/nk/protocol/header/CommonHeader"
+      ],
+      "post": "PG14346-protocol-header-layout-whole-fourteen-post-v1",
+      "postSha256": "6a7fbff5dd2ebf7acac4690c9717354df4dd6e0bbac88c2973e747e795a63d77",
+      "sessionIdentity": "PG14344-ORIGINAL-PROTOCOL-HEADER-LAYOUT14"
+    },
+    "dev/codex/schubert/nk/protocol/header/InteractionKind": {
+      "branchNaturallyZero": false,
+      "counters": {
+        "BRANCH": {
+          "covered": 6,
+          "missed": 0
+        },
+        "CLASS": {
+          "covered": 1,
+          "missed": 0
+        },
+        "LINE": {
+          "covered": 16,
+          "missed": 0
+        },
+        "METHOD": {
+          "covered": 4,
+          "missed": 0
+        }
+      },
+      "execSha256": "c2a7f870cda9a717e56e8cf78da7a4907e2062b20c95d7ed37067071c047ad1b",
+      "four100": true,
+      "metadataOnly": false,
+      "physical": [
+        "dev/codex/schubert/nk/protocol/header/InteractionKind"
+      ],
+      "post": "PG14346-protocol-header-layout-whole-fourteen-post-v1",
+      "postSha256": "6a7fbff5dd2ebf7acac4690c9717354df4dd6e0bbac88c2973e747e795a63d77",
+      "sessionIdentity": "PG14344-ORIGINAL-PROTOCOL-HEADER-LAYOUT14"
+    },
+    "dev/codex/schubert/nk/protocol/header/MessageKind": {
+      "branchNaturallyZero": false,
+      "counters": {
+        "BRANCH": {
+          "covered": 6,
+          "missed": 0
+        },
+        "CLASS": {
+          "covered": 1,
+          "missed": 0
+        },
+        "LINE": {
+          "covered": 16,
+          "missed": 0
+        },
+        "METHOD": {
+          "covered": 4,
+          "missed": 0
+        }
+      },
+      "execSha256": "c2a7f870cda9a717e56e8cf78da7a4907e2062b20c95d7ed37067071c047ad1b",
+      "four100": true,
+      "metadataOnly": false,
+      "physical": [
+        "dev/codex/schubert/nk/protocol/header/MessageKind"
+      ],
+      "post": "PG14346-protocol-header-layout-whole-fourteen-post-v1",
+      "postSha256": "6a7fbff5dd2ebf7acac4690c9717354df4dd6e0bbac88c2973e747e795a63d77",
+      "sessionIdentity": "PG14344-ORIGINAL-PROTOCOL-HEADER-LAYOUT14"
+    },
+    "dev/codex/schubert/nk/protocol/header/ResultCode": {
+      "branchNaturallyZero": true,
+      "counters": {
+        "BRANCH": {
+          "covered": 0,
+          "missed": 0
+        },
+        "CLASS": {
+          "covered": 1,
+          "missed": 0
+        },
+        "LINE": {
+          "covered": 24,
+          "missed": 0
+        },
+        "METHOD": {
+          "covered": 7,
+          "missed": 0
+        }
+      },
+      "execSha256": "c2a7f870cda9a717e56e8cf78da7a4907e2062b20c95d7ed37067071c047ad1b",
+      "four100": false,
+      "metadataOnly": false,
+      "physical": [
+        "dev/codex/schubert/nk/protocol/header/ResultCode"
+      ],
+      "post": "PG14346-protocol-header-layout-whole-fourteen-post-v1",
+      "postSha256": "6a7fbff5dd2ebf7acac4690c9717354df4dd6e0bbac88c2973e747e795a63d77",
+      "sessionIdentity": "PG14344-ORIGINAL-PROTOCOL-HEADER-LAYOUT14"
+    },
+    "dev/codex/schubert/nk/protocol/layout/FieldArea": {
+      "branchNaturallyZero": true,
+      "counters": {
+        "BRANCH": {
+          "covered": 0,
+          "missed": 0
+        },
+        "CLASS": {
+          "covered": 1,
+          "missed": 0
+        },
+        "LINE": {
+          "covered": 4,
+          "missed": 0
+        },
+        "METHOD": {
+          "covered": 1,
+          "missed": 0
+        }
+      },
+      "execSha256": "c2a7f870cda9a717e56e8cf78da7a4907e2062b20c95d7ed37067071c047ad1b",
+      "four100": false,
+      "metadataOnly": false,
+      "physical": [
+        "dev/codex/schubert/nk/protocol/layout/FieldArea"
+      ],
+      "post": "PG14346-protocol-header-layout-whole-fourteen-post-v1",
+      "postSha256": "6a7fbff5dd2ebf7acac4690c9717354df4dd6e0bbac88c2973e747e795a63d77",
+      "sessionIdentity": "PG14344-ORIGINAL-PROTOCOL-HEADER-LAYOUT14"
+    },
+    "dev/codex/schubert/nk/protocol/layout/FieldDefinition": {
+      "branchNaturallyZero": false,
+      "counters": {
+        "BRANCH": {
+          "covered": 15,
+          "missed": 0
+        },
+        "CLASS": {
+          "covered": 1,
+          "missed": 0
+        },
+        "LINE": {
+          "covered": 28,
+          "missed": 0
+        },
+        "METHOD": {
+          "covered": 3,
+          "missed": 0
+        }
+      },
+      "execSha256": "c2a7f870cda9a717e56e8cf78da7a4907e2062b20c95d7ed37067071c047ad1b",
+      "four100": true,
+      "metadataOnly": false,
+      "physical": [
+        "dev/codex/schubert/nk/protocol/layout/FieldDefinition",
+        "dev/codex/schubert/nk/protocol/layout/FieldDefinition$1"
+      ],
+      "post": "PG14346-protocol-header-layout-whole-fourteen-post-v1",
+      "postSha256": "6a7fbff5dd2ebf7acac4690c9717354df4dd6e0bbac88c2973e747e795a63d77",
+      "sessionIdentity": "PG14344-ORIGINAL-PROTOCOL-HEADER-LAYOUT14"
+    },
+    "dev/codex/schubert/nk/protocol/layout/FixedPayload": {
+      "branchNaturallyZero": false,
+      "counters": {
+        "BRANCH": {
+          "covered": 8,
+          "missed": 0
+        },
+        "CLASS": {
+          "covered": 1,
+          "missed": 0
+        },
+        "LINE": {
+          "covered": 27,
+          "missed": 0
+        },
+        "METHOD": {
+          "covered": 7,
+          "missed": 0
+        }
+      },
+      "execSha256": "70af1762b62bdbf9987ad7016b609494b634c64eb41e188febf88de1cf0424ca",
+      "four100": true,
+      "metadataOnly": false,
+      "physical": [
+        "dev/codex/schubert/nk/protocol/layout/FixedPayload"
+      ],
+      "post": "PG14342-current-frame-value-object-counter-v1",
+      "postSha256": "33aab1ab9c5d919e481f1f0789c07428ec789601a3e3332421b10caff9c4e2a3",
+      "sessionIdentity": "PG14326-ORIGINAL-PROTOCOL-FRAME-PAYLOAD24"
+    },
+    "dev/codex/schubert/nk/protocol/layout/LayoutDefinition": {
+      "branchNaturallyZero": false,
+      "counters": {
+        "BRANCH": {
+          "covered": 28,
+          "missed": 0
+        },
+        "CLASS": {
+          "covered": 1,
+          "missed": 0
+        },
+        "LINE": {
+          "covered": 40,
+          "missed": 0
+        },
+        "METHOD": {
+          "covered": 5,
+          "missed": 0
+        }
+      },
+      "execSha256": "c2a7f870cda9a717e56e8cf78da7a4907e2062b20c95d7ed37067071c047ad1b",
+      "four100": true,
+      "metadataOnly": false,
+      "physical": [
+        "dev/codex/schubert/nk/protocol/layout/LayoutDefinition"
+      ],
+      "post": "PG14346-protocol-header-layout-whole-fourteen-post-v1",
+      "postSha256": "6a7fbff5dd2ebf7acac4690c9717354df4dd6e0bbac88c2973e747e795a63d77",
+      "sessionIdentity": "PG14344-ORIGINAL-PROTOCOL-HEADER-LAYOUT14"
+    },
+    "dev/codex/schubert/nk/protocol/layout/LayoutFieldCatalog": {
+      "branchNaturallyZero": false,
+      "counters": {
+        "BRANCH": {
+          "covered": 57,
+          "missed": 0
+        },
+        "CLASS": {
+          "covered": 2,
+          "missed": 0
+        },
+        "LINE": {
+          "covered": 122,
+          "missed": 0
+        },
+        "METHOD": {
+          "covered": 23,
+          "missed": 0
+        }
+      },
+      "execSha256": "c2a7f870cda9a717e56e8cf78da7a4907e2062b20c95d7ed37067071c047ad1b",
+      "four100": true,
+      "metadataOnly": false,
+      "physical": [
+        "dev/codex/schubert/nk/protocol/layout/LayoutFieldCatalog",
+        "dev/codex/schubert/nk/protocol/layout/LayoutFieldCatalog$1",
+        "dev/codex/schubert/nk/protocol/layout/LayoutFieldCatalog$MutableFields"
+      ],
+      "post": "PG14346-protocol-header-layout-whole-fourteen-post-v1",
+      "postSha256": "6a7fbff5dd2ebf7acac4690c9717354df4dd6e0bbac88c2973e747e795a63d77",
+      "sessionIdentity": "PG14344-ORIGINAL-PROTOCOL-HEADER-LAYOUT14"
+    },
+    "dev/codex/schubert/nk/protocol/layout/LayoutFields": {
+      "branchNaturallyZero": false,
+      "counters": {
+        "BRANCH": {
+          "covered": 8,
+          "missed": 0
+        },
+        "CLASS": {
+          "covered": 1,
+          "missed": 0
+        },
+        "LINE": {
+          "covered": 19,
+          "missed": 0
+        },
+        "METHOD": {
+          "covered": 3,
+          "missed": 0
+        }
+      },
+      "execSha256": "c2a7f870cda9a717e56e8cf78da7a4907e2062b20c95d7ed37067071c047ad1b",
+      "four100": true,
+      "metadataOnly": false,
+      "physical": [
+        "dev/codex/schubert/nk/protocol/layout/LayoutFields"
+      ],
+      "post": "PG14346-protocol-header-layout-whole-fourteen-post-v1",
+      "postSha256": "6a7fbff5dd2ebf7acac4690c9717354df4dd6e0bbac88c2973e747e795a63d77",
+      "sessionIdentity": "PG14344-ORIGINAL-PROTOCOL-HEADER-LAYOUT14"
+    },
+    "dev/codex/schubert/nk/protocol/layout/LayoutId": {
+      "branchNaturallyZero": false,
+      "counters": {
+        "BRANCH": {
+          "covered": 2,
+          "missed": 0
+        },
+        "CLASS": {
+          "covered": 1,
+          "missed": 0
+        },
+        "LINE": {
+          "covered": 9,
+          "missed": 0
+        },
+        "METHOD": {
+          "covered": 4,
+          "missed": 0
+        }
+      },
+      "execSha256": "c2a7f870cda9a717e56e8cf78da7a4907e2062b20c95d7ed37067071c047ad1b",
+      "four100": true,
+      "metadataOnly": false,
+      "physical": [
+        "dev/codex/schubert/nk/protocol/layout/LayoutId"
+      ],
+      "post": "PG14346-protocol-header-layout-whole-fourteen-post-v1",
+      "postSha256": "6a7fbff5dd2ebf7acac4690c9717354df4dd6e0bbac88c2973e747e795a63d77",
+      "sessionIdentity": "PG14344-ORIGINAL-PROTOCOL-HEADER-LAYOUT14"
+    },
+    "dev/codex/schubert/nk/protocol/layout/LayoutRegistry": {
+      "branchNaturallyZero": false,
+      "counters": {
+        "BRANCH": {
+          "covered": 30,
+          "missed": 0
+        },
+        "CLASS": {
+          "covered": 1,
+          "missed": 0
+        },
+        "LINE": {
+          "covered": 113,
+          "missed": 0
+        },
+        "METHOD": {
+          "covered": 13,
+          "missed": 0
+        }
+      },
+      "execSha256": "c2a7f870cda9a717e56e8cf78da7a4907e2062b20c95d7ed37067071c047ad1b",
+      "four100": true,
+      "metadataOnly": false,
+      "physical": [
+        "dev/codex/schubert/nk/protocol/layout/LayoutRegistry"
+      ],
+      "post": "PG14346-protocol-header-layout-whole-fourteen-post-v1",
+      "postSha256": "6a7fbff5dd2ebf7acac4690c9717354df4dd6e0bbac88c2973e747e795a63d77",
+      "sessionIdentity": "PG14344-ORIGINAL-PROTOCOL-HEADER-LAYOUT14"
+    },
+    "dev/codex/schubert/nk/protocol/layout/LayoutValidationException": {
+      "branchNaturallyZero": true,
+      "counters": {
+        "BRANCH": {
+          "covered": 0,
+          "missed": 0
+        },
+        "CLASS": {
+          "covered": 1,
+          "missed": 0
+        },
+        "LINE": {
+          "covered": 4,
+          "missed": 0
+        },
+        "METHOD": {
+          "covered": 2,
+          "missed": 0
+        }
+      },
+      "execSha256": "c2a7f870cda9a717e56e8cf78da7a4907e2062b20c95d7ed37067071c047ad1b",
+      "four100": false,
+      "metadataOnly": false,
+      "physical": [
+        "dev/codex/schubert/nk/protocol/layout/LayoutValidationException"
+      ],
+      "post": "PG14346-protocol-header-layout-whole-fourteen-post-v1",
+      "postSha256": "6a7fbff5dd2ebf7acac4690c9717354df4dd6e0bbac88c2973e747e795a63d77",
+      "sessionIdentity": "PG14344-ORIGINAL-PROTOCOL-HEADER-LAYOUT14"
+    },
+    "dev/codex/schubert/nk/protocol/layout/Padding": {
+      "branchNaturallyZero": true,
+      "counters": {
+        "BRANCH": {
+          "covered": 0,
+          "missed": 0
+        },
+        "CLASS": {
+          "covered": 1,
+          "missed": 0
+        },
+        "LINE": {
+          "covered": 4,
+          "missed": 0
+        },
+        "METHOD": {
+          "covered": 1,
+          "missed": 0
+        }
+      },
+      "execSha256": "c2a7f870cda9a717e56e8cf78da7a4907e2062b20c95d7ed37067071c047ad1b",
+      "four100": false,
+      "metadataOnly": false,
+      "physical": [
+        "dev/codex/schubert/nk/protocol/layout/Padding"
+      ],
+      "post": "PG14346-protocol-header-layout-whole-fourteen-post-v1",
+      "postSha256": "6a7fbff5dd2ebf7acac4690c9717354df4dd6e0bbac88c2973e747e795a63d77",
+      "sessionIdentity": "PG14344-ORIGINAL-PROTOCOL-HEADER-LAYOUT14"
+    },
+    "dev/codex/schubert/nk/protocol/layout/PayloadValues": {
+      "branchNaturallyZero": true,
+      "counters": {
+        "BRANCH": {
+          "covered": 0,
+          "missed": 0
+        },
+        "CLASS": {
+          "covered": 1,
+          "missed": 0
+        },
+        "LINE": {
+          "covered": 6,
+          "missed": 0
+        },
+        "METHOD": {
+          "covered": 2,
+          "missed": 0
+        }
+      },
+      "execSha256": "70af1762b62bdbf9987ad7016b609494b634c64eb41e188febf88de1cf0424ca",
+      "four100": false,
+      "metadataOnly": false,
+      "physical": [
+        "dev/codex/schubert/nk/protocol/layout/PayloadValues"
+      ],
+      "post": "PG14342-current-frame-value-object-counter-v1",
+      "postSha256": "33aab1ab9c5d919e481f1f0789c07428ec789601a3e3332421b10caff9c4e2a3",
+      "sessionIdentity": "PG14326-ORIGINAL-PROTOCOL-FRAME-PAYLOAD24"
+    },
+    "dev/codex/schubert/nk/protocol/layout/Presence": {
+      "branchNaturallyZero": true,
+      "counters": {
+        "BRANCH": {
+          "covered": 0,
+          "missed": 0
+        },
+        "CLASS": {
+          "covered": 1,
+          "missed": 0
+        },
+        "LINE": {
+          "covered": 5,
+          "missed": 0
+        },
+        "METHOD": {
+          "covered": 1,
+          "missed": 0
+        }
+      },
+      "execSha256": "c2a7f870cda9a717e56e8cf78da7a4907e2062b20c95d7ed37067071c047ad1b",
+      "four100": false,
+      "metadataOnly": false,
+      "physical": [
+        "dev/codex/schubert/nk/protocol/layout/Presence"
+      ],
+      "post": "PG14346-protocol-header-layout-whole-fourteen-post-v1",
+      "postSha256": "6a7fbff5dd2ebf7acac4690c9717354df4dd6e0bbac88c2973e747e795a63d77",
+      "sessionIdentity": "PG14344-ORIGINAL-PROTOCOL-HEADER-LAYOUT14"
+    },
+    "dev/codex/schubert/nk/protocol/layout/UnsupportedLayoutException": {
+      "branchNaturallyZero": true,
+      "counters": {
+        "BRANCH": {
+          "covered": 0,
+          "missed": 0
+        },
+        "CLASS": {
+          "covered": 1,
+          "missed": 0
+        },
+        "LINE": {
+          "covered": 2,
+          "missed": 0
+        },
+        "METHOD": {
+          "covered": 1,
+          "missed": 0
+        }
+      },
+      "execSha256": "c2a7f870cda9a717e56e8cf78da7a4907e2062b20c95d7ed37067071c047ad1b",
+      "four100": false,
+      "metadataOnly": false,
+      "physical": [
+        "dev/codex/schubert/nk/protocol/layout/UnsupportedLayoutException"
+      ],
+      "post": "PG14346-protocol-header-layout-whole-fourteen-post-v1",
+      "postSha256": "6a7fbff5dd2ebf7acac4690c9717354df4dd6e0bbac88c2973e747e795a63d77",
+      "sessionIdentity": "PG14344-ORIGINAL-PROTOCOL-HEADER-LAYOUT14"
+    },
+    "dev/codex/schubert/nk/protocol/layout/WireMessage": {
+      "branchNaturallyZero": false,
+      "counters": {
+        "BRANCH": {
+          "covered": 6,
+          "missed": 0
+        },
+        "CLASS": {
+          "covered": 1,
+          "missed": 0
+        },
+        "LINE": {
+          "covered": 8,
+          "missed": 0
+        },
+        "METHOD": {
+          "covered": 1,
+          "missed": 0
+        }
+      },
+      "execSha256": "70af1762b62bdbf9987ad7016b609494b634c64eb41e188febf88de1cf0424ca",
+      "four100": true,
+      "metadataOnly": false,
+      "physical": [
+        "dev/codex/schubert/nk/protocol/layout/WireMessage"
+      ],
+      "post": "PG14342-current-frame-value-object-counter-v1",
+      "postSha256": "33aab1ab9c5d919e481f1f0789c07428ec789601a3e3332421b10caff9c4e2a3",
+      "sessionIdentity": "PG14326-ORIGINAL-PROTOCOL-FRAME-PAYLOAD24"
+    },
+    "dev/codex/schubert/nk/protocol/layout/WireType": {
+      "branchNaturallyZero": true,
+      "counters": {
+        "BRANCH": {
+          "covered": 0,
+          "missed": 0
+        },
+        "CLASS": {
+          "covered": 1,
+          "missed": 0
+        },
+        "LINE": {
+          "covered": 4,
+          "missed": 0
+        },
+        "METHOD": {
+          "covered": 1,
+          "missed": 0
+        }
+      },
+      "execSha256": "c2a7f870cda9a717e56e8cf78da7a4907e2062b20c95d7ed37067071c047ad1b",
+      "four100": false,
+      "metadataOnly": false,
+      "physical": [
+        "dev/codex/schubert/nk/protocol/layout/WireType"
+      ],
+      "post": "PG14346-protocol-header-layout-whole-fourteen-post-v1",
+      "postSha256": "6a7fbff5dd2ebf7acac4690c9717354df4dd6e0bbac88c2973e747e795a63d77",
+      "sessionIdentity": "PG14344-ORIGINAL-PROTOCOL-HEADER-LAYOUT14"
+    },
+    "dev/codex/schubert/nk/protocol/transport/FailedJmsIsolationException": {
+      "branchNaturallyZero": false,
+      "counters": {
+        "BRANCH": {
+          "covered": 2,
+          "missed": 0
+        },
+        "CLASS": {
+          "covered": 1,
+          "missed": 0
+        },
+        "LINE": {
+          "covered": 6,
+          "missed": 0
+        },
+        "METHOD": {
+          "covered": 1,
+          "missed": 0
+        }
+      },
+      "execSha256": "a131ba1cb5940ff2969325c8014431dfe0a5049ee63681ef5e292d80ee9bb28a",
+      "four100": true,
+      "metadataOnly": false,
+      "physical": [
+        "dev/codex/schubert/nk/protocol/transport/FailedJmsIsolationException"
+      ],
+      "post": "PG14258-protocol-carrier-whole-eight-post-v1",
+      "postSha256": "2b9ce8ebf4b329a2e36d329bcf7cb91a9396fbe2c40dd6be09fdaa1247ac1e9a",
+      "sessionIdentity": "PG14256-ORIGINAL-PROTOCOL-CARRIERS-EIGHT"
+    },
+    "dev/codex/schubert/nk/protocol/transport/UnconfirmedJmsRollbackException": {
+      "branchNaturallyZero": false,
+      "counters": {
+        "BRANCH": {
+          "covered": 2,
+          "missed": 0
+        },
+        "CLASS": {
+          "covered": 1,
+          "missed": 0
+        },
+        "LINE": {
+          "covered": 5,
+          "missed": 0
+        },
+        "METHOD": {
+          "covered": 1,
+          "missed": 0
+        }
+      },
+      "execSha256": "a131ba1cb5940ff2969325c8014431dfe0a5049ee63681ef5e292d80ee9bb28a",
+      "four100": true,
+      "metadataOnly": false,
+      "physical": [
+        "dev/codex/schubert/nk/protocol/transport/UnconfirmedJmsRollbackException"
+      ],
+      "post": "PG14258-protocol-carrier-whole-eight-post-v1",
+      "postSha256": "2b9ce8ebf4b329a2e36d329bcf7cb91a9396fbe2c40dd6be09fdaa1247ac1e9a",
+      "sessionIdentity": "PG14256-ORIGINAL-PROTOCOL-CARRIERS-EIGHT"
+    },
+    "dev/codex/schubert/nk/web/form/CancelForm": {
+      "branchNaturallyZero": true,
+      "counters": {
+        "BRANCH": {
+          "covered": 0,
+          "missed": 0
+        },
+        "CLASS": {
+          "covered": 1,
+          "missed": 0
+        },
+        "LINE": {
+          "covered": 10,
+          "missed": 0
+        },
+        "METHOD": {
+          "covered": 7,
+          "missed": 0
+        }
+      },
+      "execSha256": "4a819e4bdd403de3266822084494aefc390d17ee6b98fa5d1b2a450d6684bde3",
+      "four100": false,
+      "metadataOnly": false,
+      "physical": [
+        "dev/codex/schubert/nk/web/form/CancelForm"
+      ],
+      "post": "PG14298-web-target-mutation-whole-twenty-four-post-v1",
+      "postSha256": "2836720bd34b54355f65fff51f67c6a1f0ccf2a6d4f3791ffcb99260f7803012",
+      "sessionIdentity": "PG14296-ORIGINAL-WEB-TARGET-MUTATION24"
+    },
+    "dev/codex/schubert/nk/web/form/LogSearchForm": {
+      "branchNaturallyZero": false,
+      "counters": {
+        "BRANCH": {
+          "covered": 54,
+          "missed": 0
+        },
+        "CLASS": {
+          "covered": 3,
+          "missed": 0
+        },
+        "LINE": {
+          "covered": 109,
+          "missed": 0
+        },
+        "METHOD": {
+          "covered": 17,
+          "missed": 0
+        }
+      },
+      "execSha256": "d83a75eda8483aaf2b58744a12499d04a647081b00b1a91e02462b92f5db8b41",
+      "four100": true,
+      "metadataOnly": false,
+      "physical": [
+        "dev/codex/schubert/nk/web/form/LogSearchForm",
+        "dev/codex/schubert/nk/web/form/LogSearchForm$Code",
+        "dev/codex/schubert/nk/web/form/LogSearchForm$Field"
+      ],
+      "post": "PG14272-web-three-forms-whole-twenty-four-post-v1",
+      "postSha256": "09fe225e89c4366efb79605456382c56aa4cde8e7392017cb2ae785b19250c0b",
+      "sessionIdentity": "PG14270-ORIGINAL-WEB-THREE-FORMS24"
+    },
+    "dev/codex/schubert/nk/web/form/PasswordResetForm": {
+      "branchNaturallyZero": true,
+      "counters": {
+        "BRANCH": {
+          "covered": 0,
+          "missed": 0
+        },
+        "CLASS": {
+          "covered": 1,
+          "missed": 0
+        },
+        "LINE": {
+          "covered": 14,
+          "missed": 0
+        },
+        "METHOD": {
+          "covered": 8,
+          "missed": 0
+        }
+      },
+      "execSha256": "4a819e4bdd403de3266822084494aefc390d17ee6b98fa5d1b2a450d6684bde3",
+      "four100": false,
+      "metadataOnly": false,
+      "physical": [
+        "dev/codex/schubert/nk/web/form/PasswordResetForm"
+      ],
+      "post": "PG14298-web-target-mutation-whole-twenty-four-post-v1",
+      "postSha256": "2836720bd34b54355f65fff51f67c6a1f0ccf2a6d4f3791ffcb99260f7803012",
+      "sessionIdentity": "PG14296-ORIGINAL-WEB-TARGET-MUTATION24"
+    },
+    "dev/codex/schubert/nk/web/form/QuestionDeleteForm": {
+      "branchNaturallyZero": true,
+      "counters": {
+        "BRANCH": {
+          "covered": 0,
+          "missed": 0
+        },
+        "CLASS": {
+          "covered": 1,
+          "missed": 0
+        },
+        "LINE": {
+          "covered": 10,
+          "missed": 0
+        },
+        "METHOD": {
+          "covered": 7,
+          "missed": 0
+        }
+      },
+      "execSha256": "4a819e4bdd403de3266822084494aefc390d17ee6b98fa5d1b2a450d6684bde3",
+      "four100": false,
+      "metadataOnly": false,
+      "physical": [
+        "dev/codex/schubert/nk/web/form/QuestionDeleteForm"
+      ],
+      "post": "PG14298-web-target-mutation-whole-twenty-four-post-v1",
+      "postSha256": "2836720bd34b54355f65fff51f67c6a1f0ccf2a6d4f3791ffcb99260f7803012",
+      "sessionIdentity": "PG14296-ORIGINAL-WEB-TARGET-MUTATION24"
+    },
+    "dev/codex/schubert/nk/web/form/QuestionSubmitForm": {
+      "branchNaturallyZero": false,
+      "counters": {
+        "BRANCH": {
+          "covered": 32,
+          "missed": 0
+        },
+        "CLASS": {
+          "covered": 1,
+          "missed": 0
+        },
+        "LINE": {
+          "covered": 55,
+          "missed": 0
+        },
+        "METHOD": {
+          "covered": 13,
+          "missed": 0
+        }
+      },
+      "execSha256": "d83a75eda8483aaf2b58744a12499d04a647081b00b1a91e02462b92f5db8b41",
+      "four100": true,
+      "metadataOnly": false,
+      "physical": [
+        "dev/codex/schubert/nk/web/form/QuestionSubmitForm"
+      ],
+      "post": "PG14272-web-three-forms-whole-twenty-four-post-v1",
+      "postSha256": "09fe225e89c4366efb79605456382c56aa4cde8e7392017cb2ae785b19250c0b",
+      "sessionIdentity": "PG14270-ORIGINAL-WEB-THREE-FORMS24"
+    },
+    "dev/codex/schubert/nk/web/form/ScenarioSearchForm": {
+      "branchNaturallyZero": false,
+      "counters": {
+        "BRANCH": {
+          "covered": 42,
+          "missed": 0
+        },
+        "CLASS": {
+          "covered": 3,
+          "missed": 0
+        },
+        "LINE": {
+          "covered": 90,
+          "missed": 0
+        },
+        "METHOD": {
+          "covered": 19,
+          "missed": 0
+        }
+      },
+      "execSha256": "d83a75eda8483aaf2b58744a12499d04a647081b00b1a91e02462b92f5db8b41",
+      "four100": true,
+      "metadataOnly": false,
+      "physical": [
+        "dev/codex/schubert/nk/web/form/ScenarioSearchForm",
+        "dev/codex/schubert/nk/web/form/ScenarioSearchForm$Code",
+        "dev/codex/schubert/nk/web/form/ScenarioSearchForm$Field"
+      ],
+      "post": "PG14272-web-three-forms-whole-twenty-four-post-v1",
+      "postSha256": "09fe225e89c4366efb79605456382c56aa4cde8e7392017cb2ae785b19250c0b",
+      "sessionIdentity": "PG14270-ORIGINAL-WEB-THREE-FORMS24"
+    },
+    "dev/codex/schubert/nk/web/form/TargetOperationInput": {
+      "branchNaturallyZero": false,
+      "counters": {
+        "BRANCH": {
+          "covered": 32,
+          "missed": 0
+        },
+        "CLASS": {
+          "covered": 1,
+          "missed": 0
+        },
+        "LINE": {
+          "covered": 42,
+          "missed": 0
+        },
+        "METHOD": {
+          "covered": 4,
+          "missed": 0
+        }
+      },
+      "execSha256": "4a819e4bdd403de3266822084494aefc390d17ee6b98fa5d1b2a450d6684bde3",
+      "four100": true,
+      "metadataOnly": false,
+      "physical": [
+        "dev/codex/schubert/nk/web/form/TargetOperationInput"
+      ],
+      "post": "PG14298-web-target-mutation-whole-twenty-four-post-v1",
+      "postSha256": "2836720bd34b54355f65fff51f67c6a1f0ccf2a6d4f3791ffcb99260f7803012",
+      "sessionIdentity": "PG14296-ORIGINAL-WEB-TARGET-MUTATION24"
+    },
+    "dev/codex/schubert/nk/web/form/UserChangeForm": {
+      "branchNaturallyZero": false,
+      "counters": {
+        "BRANCH": {
+          "covered": 0,
+          "missed": 0
+        },
+        "CLASS": {
+          "covered": 0,
+          "missed": 0
+        },
+        "LINE": {
+          "covered": 0,
+          "missed": 0
+        },
+        "METHOD": {
+          "covered": 0,
+          "missed": 0
+        }
+      },
+      "execSha256": "4a819e4bdd403de3266822084494aefc390d17ee6b98fa5d1b2a450d6684bde3",
+      "four100": false,
+      "metadataOnly": true,
+      "physical": [
+        "dev/codex/schubert/nk/web/form/UserChangeForm"
+      ],
+      "post": "PG14298-web-target-mutation-whole-twenty-four-post-v1",
+      "postSha256": "2836720bd34b54355f65fff51f67c6a1f0ccf2a6d4f3791ffcb99260f7803012",
+      "sessionIdentity": "PG14296-ORIGINAL-WEB-TARGET-MUTATION24"
+    },
+    "dev/codex/schubert/nk/web/form/UserCreateForm": {
+      "branchNaturallyZero": false,
+      "counters": {
+        "BRANCH": {
+          "covered": 48,
+          "missed": 0
+        },
+        "CLASS": {
+          "covered": 1,
+          "missed": 0
+        },
+        "LINE": {
+          "covered": 75,
+          "missed": 0
+        },
+        "METHOD": {
+          "covered": 11,
+          "missed": 0
+        }
+      },
+      "execSha256": "621d8d3c6c2516aeb9f45ecfa2c741db1f38cd10fdbfdb68c28bdf6f1e9fea12",
+      "four100": true,
+      "metadataOnly": false,
+      "physical": [
+        "dev/codex/schubert/nk/web/form/UserCreateForm"
+      ],
+      "post": "PG14294-web-user-create-whole-eight-post-v1",
+      "postSha256": "0b744221948357f4aadf98a89bddee5fd97988d42ad1c8b4a9e7059da6a3de5b",
+      "sessionIdentity": "PG14288-ORIGINAL-WEB-USER-CREATE8"
+    },
+    "dev/codex/schubert/nk/web/form/UserMutationInput": {
+      "branchNaturallyZero": false,
+      "counters": {
+        "BRANCH": {
+          "covered": 70,
+          "missed": 0
+        },
+        "CLASS": {
+          "covered": 1,
+          "missed": 0
+        },
+        "LINE": {
+          "covered": 98,
+          "missed": 0
+        },
+        "METHOD": {
+          "covered": 12,
+          "missed": 0
+        }
+      },
+      "execSha256": "4a819e4bdd403de3266822084494aefc390d17ee6b98fa5d1b2a450d6684bde3",
+      "four100": true,
+      "metadataOnly": false,
+      "physical": [
+        "dev/codex/schubert/nk/web/form/UserMutationInput"
+      ],
+      "post": "PG14298-web-target-mutation-whole-twenty-four-post-v1",
+      "postSha256": "2836720bd34b54355f65fff51f67c6a1f0ccf2a6d4f3791ffcb99260f7803012",
+      "sessionIdentity": "PG14296-ORIGINAL-WEB-TARGET-MUTATION24"
+    },
+    "dev/codex/schubert/nk/web/form/UserRoleForm": {
+      "branchNaturallyZero": true,
+      "counters": {
+        "BRANCH": {
+          "covered": 0,
+          "missed": 0
+        },
+        "CLASS": {
+          "covered": 1,
+          "missed": 0
+        },
+        "LINE": {
+          "covered": 15,
+          "missed": 0
+        },
+        "METHOD": {
+          "covered": 8,
+          "missed": 0
+        }
+      },
+      "execSha256": "4a819e4bdd403de3266822084494aefc390d17ee6b98fa5d1b2a450d6684bde3",
+      "four100": false,
+      "metadataOnly": false,
+      "physical": [
+        "dev/codex/schubert/nk/web/form/UserRoleForm"
+      ],
+      "post": "PG14298-web-target-mutation-whole-twenty-four-post-v1",
+      "postSha256": "2836720bd34b54355f65fff51f67c6a1f0ccf2a6d4f3791ffcb99260f7803012",
+      "sessionIdentity": "PG14296-ORIGINAL-WEB-TARGET-MUTATION24"
+    },
+    "dev/codex/schubert/nk/web/form/UserStatusForm": {
+      "branchNaturallyZero": true,
+      "counters": {
+        "BRANCH": {
+          "covered": 0,
+          "missed": 0
+        },
+        "CLASS": {
+          "covered": 1,
+          "missed": 0
+        },
+        "LINE": {
+          "covered": 14,
+          "missed": 0
+        },
+        "METHOD": {
+          "covered": 8,
+          "missed": 0
+        }
+      },
+      "execSha256": "4a819e4bdd403de3266822084494aefc390d17ee6b98fa5d1b2a450d6684bde3",
+      "four100": false,
+      "metadataOnly": false,
+      "physical": [
+        "dev/codex/schubert/nk/web/form/UserStatusForm"
+      ],
+      "post": "PG14298-web-target-mutation-whole-twenty-four-post-v1",
+      "postSha256": "2836720bd34b54355f65fff51f67c6a1f0ccf2a6d4f3791ffcb99260f7803012",
+      "sessionIdentity": "PG14296-ORIGINAL-WEB-TARGET-MUTATION24"
+    },
+    "dev/codex/schubert/nk/web/form/UserUnlockForm": {
+      "branchNaturallyZero": true,
+      "counters": {
+        "BRANCH": {
+          "covered": 0,
+          "missed": 0
+        },
+        "CLASS": {
+          "covered": 1,
+          "missed": 0
+        },
+        "LINE": {
+          "covered": 12,
+          "missed": 0
+        },
+        "METHOD": {
+          "covered": 8,
+          "missed": 0
+        }
+      },
+      "execSha256": "4a819e4bdd403de3266822084494aefc390d17ee6b98fa5d1b2a450d6684bde3",
+      "four100": false,
+      "metadataOnly": false,
+      "physical": [
+        "dev/codex/schubert/nk/web/form/UserUnlockForm"
+      ],
+      "post": "PG14298-web-target-mutation-whole-twenty-four-post-v1",
+      "postSha256": "2836720bd34b54355f65fff51f67c6a1f0ccf2a6d4f3791ffcb99260f7803012",
+      "sessionIdentity": "PG14296-ORIGINAL-WEB-TARGET-MUTATION24"
+    },
+    "dev/codex/schubert/nk/web/messaging/JmsRequestReplyClient": {
+      "branchNaturallyZero": false,
+      "counters": {
+        "BRANCH": {
+          "covered": 18,
+          "missed": 0
+        },
+        "CLASS": {
+          "covered": 1,
+          "missed": 0
+        },
+        "LINE": {
+          "covered": 51,
+          "missed": 0
+        },
+        "METHOD": {
+          "covered": 10,
+          "missed": 0
+        }
+      },
+      "execSha256": "21fc9d372e4409bc53a83bc94bd160cd9a4b35832dea360ab8d1074c198c2e62",
+      "four100": true,
+      "metadataOnly": false,
+      "physical": [
+        "dev/codex/schubert/nk/web/messaging/JmsRequestReplyClient"
+      ],
+      "post": "PG14318-web-memory-coordinator-whole-seventeen-post-v1",
+      "postSha256": "7b2205bf1d214dc1262512fc8d46b184ab7ff13294742e96476e35f004b7985d",
+      "sessionIdentity": "PG14316-ORIGINAL-WEB-MEMORY-COORDINATOR17"
+    },
+    "dev/codex/schubert/nk/web/messaging/JmsRequestReplyException": {
+      "branchNaturallyZero": true,
+      "counters": {
+        "BRANCH": {
+          "covered": 0,
+          "missed": 0
+        },
+        "CLASS": {
+          "covered": 2,
+          "missed": 0
+        },
+        "LINE": {
+          "covered": 11,
+          "missed": 0
+        },
+        "METHOD": {
+          "covered": 4,
+          "missed": 0
+        }
+      },
+      "execSha256": "21fc9d372e4409bc53a83bc94bd160cd9a4b35832dea360ab8d1074c198c2e62",
+      "four100": false,
+      "metadataOnly": false,
+      "physical": [
+        "dev/codex/schubert/nk/web/messaging/JmsRequestReplyException",
+        "dev/codex/schubert/nk/web/messaging/JmsRequestReplyException$Reason"
+      ],
+      "post": "PG14318-web-memory-coordinator-whole-seventeen-post-v1",
+      "postSha256": "7b2205bf1d214dc1262512fc8d46b184ab7ff13294742e96476e35f004b7985d",
+      "sessionIdentity": "PG14316-ORIGINAL-WEB-MEMORY-COORDINATOR17"
+    },
+    "dev/codex/schubert/nk/web/messaging/LogoutWireClient": {
+      "branchNaturallyZero": true,
+      "counters": {
+        "BRANCH": {
+          "covered": 0,
+          "missed": 0
+        },
+        "CLASS": {
+          "covered": 1,
+          "missed": 0
+        },
+        "LINE": {
+          "covered": 5,
+          "missed": 0
+        },
+        "METHOD": {
+          "covered": 2,
+          "missed": 0
+        }
+      },
+      "execSha256": "ab073ea5f0ab2d5ff3d0be91fb1ce19b7497394aad93842786c9558b71dfa7c5",
+      "four100": false,
+      "metadataOnly": false,
+      "physical": [
+        "dev/codex/schubert/nk/web/messaging/LogoutWireClient"
+      ],
+      "post": "PG14314-web-business-wire-whole-twelve-post-v1",
+      "postSha256": "06f8b8d26d79ec31f64c588144f6c7d54b74a35bfa72ef44fe72ca2e53e0719e",
+      "sessionIdentity": "PG14312-ORIGINAL-WEB-BUSINESS-WIRE12"
+    },
+    "dev/codex/schubert/nk/web/messaging/MediaDescriptorWireClient": {
+      "branchNaturallyZero": true,
+      "counters": {
+        "BRANCH": {
+          "covered": 0,
+          "missed": 0
+        },
+        "CLASS": {
+          "covered": 1,
+          "missed": 0
+        },
+        "LINE": {
+          "covered": 5,
+          "missed": 0
+        },
+        "METHOD": {
+          "covered": 2,
+          "missed": 0
+        }
+      },
+      "execSha256": "ab073ea5f0ab2d5ff3d0be91fb1ce19b7497394aad93842786c9558b71dfa7c5",
+      "four100": false,
+      "metadataOnly": false,
+      "physical": [
+        "dev/codex/schubert/nk/web/messaging/MediaDescriptorWireClient"
+      ],
+      "post": "PG14314-web-business-wire-whole-twelve-post-v1",
+      "postSha256": "06f8b8d26d79ec31f64c588144f6c7d54b74a35bfa72ef44fe72ca2e53e0719e",
+      "sessionIdentity": "PG14312-ORIGINAL-WEB-BUSINESS-WIRE12"
+    },
+    "dev/codex/schubert/nk/web/messaging/NotificationWireClient": {
+      "branchNaturallyZero": true,
+      "counters": {
+        "BRANCH": {
+          "covered": 0,
+          "missed": 0
+        },
+        "CLASS": {
+          "covered": 1,
+          "missed": 0
+        },
+        "LINE": {
+          "covered": 5,
+          "missed": 0
+        },
+        "METHOD": {
+          "covered": 2,
+          "missed": 0
+        }
+      },
+      "execSha256": "ab073ea5f0ab2d5ff3d0be91fb1ce19b7497394aad93842786c9558b71dfa7c5",
+      "four100": false,
+      "metadataOnly": false,
+      "physical": [
+        "dev/codex/schubert/nk/web/messaging/NotificationWireClient"
+      ],
+      "post": "PG14314-web-business-wire-whole-twelve-post-v1",
+      "postSha256": "06f8b8d26d79ec31f64c588144f6c7d54b74a35bfa72ef44fe72ca2e53e0719e",
+      "sessionIdentity": "PG14312-ORIGINAL-WEB-BUSINESS-WIRE12"
+    },
+    "dev/codex/schubert/nk/web/messaging/PendingReply": {
+      "branchNaturallyZero": true,
+      "counters": {
+        "BRANCH": {
+          "covered": 0,
+          "missed": 0
+        },
+        "CLASS": {
+          "covered": 1,
+          "missed": 0
+        },
+        "LINE": {
+          "covered": 13,
+          "missed": 0
+        },
+        "METHOD": {
+          "covered": 8,
+          "missed": 0
+        }
+      },
+      "execSha256": "21fc9d372e4409bc53a83bc94bd160cd9a4b35832dea360ab8d1074c198c2e62",
+      "four100": false,
+      "metadataOnly": false,
+      "physical": [
+        "dev/codex/schubert/nk/web/messaging/PendingReply"
+      ],
+      "post": "PG14318-web-memory-coordinator-whole-seventeen-post-v1",
+      "postSha256": "7b2205bf1d214dc1262512fc8d46b184ab7ff13294742e96476e35f004b7985d",
+      "sessionIdentity": "PG14316-ORIGINAL-WEB-MEMORY-COORDINATOR17"
+    },
+    "dev/codex/schubert/nk/web/messaging/ProtectedReadWireClient": {
+      "branchNaturallyZero": false,
+      "counters": {
+        "BRANCH": {
+          "covered": 26,
+          "missed": 0
+        },
+        "CLASS": {
+          "covered": 2,
+          "missed": 0
+        },
+        "LINE": {
+          "covered": 80,
+          "missed": 0
+        },
+        "METHOD": {
+          "covered": 11,
+          "missed": 0
+        }
+      },
+      "execSha256": "ab073ea5f0ab2d5ff3d0be91fb1ce19b7497394aad93842786c9558b71dfa7c5",
+      "four100": true,
+      "metadataOnly": false,
+      "physical": [
+        "dev/codex/schubert/nk/web/messaging/ProtectedReadWireClient",
+        "dev/codex/schubert/nk/web/messaging/ProtectedReadWireClient$Result"
+      ],
+      "post": "PG14314-web-business-wire-whole-twelve-post-v1",
+      "postSha256": "06f8b8d26d79ec31f64c588144f6c7d54b74a35bfa72ef44fe72ca2e53e0719e",
+      "sessionIdentity": "PG14312-ORIGINAL-WEB-BUSINESS-WIRE12"
+    },
+    "dev/codex/schubert/nk/web/messaging/QuestionWireClient": {
+      "branchNaturallyZero": true,
+      "counters": {
+        "BRANCH": {
+          "covered": 0,
+          "missed": 0
+        },
+        "CLASS": {
+          "covered": 1,
+          "missed": 0
+        },
+        "LINE": {
+          "covered": 5,
+          "missed": 0
+        },
+        "METHOD": {
+          "covered": 2,
+          "missed": 0
+        }
+      },
+      "execSha256": "ab073ea5f0ab2d5ff3d0be91fb1ce19b7497394aad93842786c9558b71dfa7c5",
+      "four100": false,
+      "metadataOnly": false,
+      "physical": [
+        "dev/codex/schubert/nk/web/messaging/QuestionWireClient"
+      ],
+      "post": "PG14314-web-business-wire-whole-twelve-post-v1",
+      "postSha256": "06f8b8d26d79ec31f64c588144f6c7d54b74a35bfa72ef44fe72ca2e53e0719e",
+      "sessionIdentity": "PG14312-ORIGINAL-WEB-BUSINESS-WIRE12"
+    },
+    "dev/codex/schubert/nk/web/messaging/ReplyCorrelationRegistry": {
+      "branchNaturallyZero": false,
+      "counters": {
+        "BRANCH": {
+          "covered": 22,
+          "missed": 0
+        },
+        "CLASS": {
+          "covered": 1,
+          "missed": 0
+        },
+        "LINE": {
+          "covered": 61,
+          "missed": 0
+        },
+        "METHOD": {
+          "covered": 9,
+          "missed": 0
+        }
+      },
+      "execSha256": "21fc9d372e4409bc53a83bc94bd160cd9a4b35832dea360ab8d1074c198c2e62",
+      "four100": true,
+      "metadataOnly": false,
+      "physical": [
+        "dev/codex/schubert/nk/web/messaging/ReplyCorrelationRegistry"
+      ],
+      "post": "PG14318-web-memory-coordinator-whole-seventeen-post-v1",
+      "postSha256": "7b2205bf1d214dc1262512fc8d46b184ab7ff13294742e96476e35f004b7985d",
+      "sessionIdentity": "PG14316-ORIGINAL-WEB-MEMORY-COORDINATOR17"
+    },
+    "dev/codex/schubert/nk/web/messaging/UserAdministrationWireClient": {
+      "branchNaturallyZero": true,
+      "counters": {
+        "BRANCH": {
+          "covered": 0,
+          "missed": 0
+        },
+        "CLASS": {
+          "covered": 1,
+          "missed": 0
+        },
+        "LINE": {
+          "covered": 5,
+          "missed": 0
+        },
+        "METHOD": {
+          "covered": 2,
+          "missed": 0
+        }
+      },
+      "execSha256": "ab073ea5f0ab2d5ff3d0be91fb1ce19b7497394aad93842786c9558b71dfa7c5",
+      "four100": false,
+      "metadataOnly": false,
+      "physical": [
+        "dev/codex/schubert/nk/web/messaging/UserAdministrationWireClient"
+      ],
+      "post": "PG14314-web-business-wire-whole-twelve-post-v1",
+      "postSha256": "06f8b8d26d79ec31f64c588144f6c7d54b74a35bfa72ef44fe72ca2e53e0719e",
+      "sessionIdentity": "PG14312-ORIGINAL-WEB-BUSINESS-WIRE12"
+    }
+  },
+  "generatedMetadataPhysical": 3,
+  "incompleteSourcePrograms": 1,
+  "invocation": {
+    "actualPythonCommand": [
+      "/usr/bin/python3",
+      "-B",
+      "tools/quality/pg14350_current_eleven_host147_registry.py"
+    ],
+    "arbitraryArgumentsRecorded": false,
+    "entrypointPath": "tools/quality/pg14350_current_eleven_host147_registry.py",
+    "entrypointSha256": "3ab61843f2bb912676d53eca9488db7114c3c9c8aaa892e0203eb91dbd847290",
+    "helperPath": "tools/quality/host_tool_invocation.py",
+    "helperSha256": "85d616a3db4ff47f4c95ae2e0dd57954bc2b09f28b8f2a685b986e5621545c46",
+    "libraryPath": "tools/quality/pg14350_current_eleven_host147_registry.py",
+    "librarySha256": "3ab61843f2bb912676d53eca9488db7114c3c9c8aaa892e0203eb91dbd847290",
+    "loadedProjectPythonSources": {
+      "tools/quality/g07_host_class_provenance_inputs.py": "a676cb3e4145177c3c243722d737592ce7d44c3f29cfe4f670662ef7651f046b",
+      "tools/quality/host_tool_invocation.py": "85d616a3db4ff47f4c95ae2e0dd57954bc2b09f28b8f2a685b986e5621545c46",
+      "tools/quality/pg14350_current_eleven_host147_registry.py": "3ab61843f2bb912676d53eca9488db7114c3c9c8aaa892e0203eb91dbd847290",
+      "tools/quality/trace_owner_join.py": "f71ab155344149f6997937c00b62cbed161652c5f7dc9fabbeb11825f81bca75"
+    },
+    "provenance": "OBSERVED_SYS_ARGV_AND_ORIG_ARGV_NOT_RECONSTRUCTED"
+  },
+  "measuredPhysical": 69,
+  "measuredSourcePrograms": 59,
+  "metadataClasses": {
+    "dev/codex/schubert/nk/protocol/codec/PayloadCodec$1": {
+      "kind": "COMPILER_SYNTHETIC_STANDARD_FILTER",
+      "postSha256": "8099de1c6e2169ff4102f81db07c679b924966e2e502b2dac16155ad4fdb8d3f",
+      "sha256": "53f9aa0b90a4c1b18ddb96d610e8e350c290fafd882894e771e79cff8994f1bc"
+    },
+    "dev/codex/schubert/nk/protocol/layout/FieldDefinition$1": {
+      "kind": "COMPILER_SYNTHETIC_STANDARD_FILTER",
+      "postSha256": "6a7fbff5dd2ebf7acac4690c9717354df4dd6e0bbac88c2973e747e795a63d77",
+      "sha256": "2caeec8800498c522c2127a4b68a77dd69d8c716d1a6dfb722c739671aa26556"
+    },
+    "dev/codex/schubert/nk/protocol/layout/LayoutFieldCatalog$1": {
+      "kind": "COMPILER_SYNTHETIC_STANDARD_FILTER",
+      "postSha256": "6a7fbff5dd2ebf7acac4690c9717354df4dd6e0bbac88c2973e747e795a63d77",
+      "sha256": "c0f2a8654bfafc59e4987e8d80157d06bb3a91f2547643add9eb8071567af7aa"
+    },
+    "dev/codex/schubert/nk/web/form/UserChangeForm": {
+      "kind": "NO_CODE",
+      "postSha256": "2836720bd34b54355f65fff51f67c6a1f0ccf2a6d4f3791ffcb99260f7803012",
+      "sha256": "e20ec408862dd749812cd4ef1bc82bbf83a5d779143c7f5155b6ee06dcd40643"
+    }
+  },
+  "metadataPhysical": 4,
+  "metadataSourcePrograms": 1,
+  "naturalZeroBranchPhysical": 26,
+  "naturalZeroBranchSourcePrograms": 25,
+  "newAccepted": 0,
+  "newTestIds": 0,
+  "normalManifestSha256": "1d0a3dee2f054010a81c67f4a8ef11e7d4370c9640efa9bcb8eead51168c81a3",
+  "originalExecs": 11,
+  "originalPostReferences": [
+    {
+      "execSha256": "de0afcedd95fc718f912a9a648e9978bbdc58decc0f93319146962c00fc93580",
+      "name": "PG14244-delivery-metadata-whole-two-post-v1",
+      "scope": "ORIGINAL_SCOPED_PT_NOT_WHOLE_451",
+      "sessionIdentity": "PG14242-ORIGINAL-DELIVERY-METADATA-TWO",
+      "sha256": "14f6fb3937435588c58bfa0cdbe7fa6b0ef04b0b3eed7436b4918cd1f15a63bd",
+      "suites": 1,
+      "tests": 2
+    },
+    {
+      "execSha256": "36eb4f40eca27499372e04c0ef573f43990e979e1c223915aac026b8c8575ea9",
+      "name": "PG14254-inbound-primary-whole-five-post-v1",
+      "scope": "ORIGINAL_SCOPED_PT_NOT_WHOLE_451",
+      "sessionIdentity": "PG14252-ORIGINAL-INBOUND-PRIMARY-FIVE",
+      "sha256": "d1c31c2b14489e72fe15ab7a72188746a8ec7ce78439c3ebab659dcaad4a08f6",
+      "suites": 1,
+      "tests": 5
+    },
+    {
+      "execSha256": "a131ba1cb5940ff2969325c8014431dfe0a5049ee63681ef5e292d80ee9bb28a",
+      "name": "PG14258-protocol-carrier-whole-eight-post-v1",
+      "scope": "ORIGINAL_SCOPED_PT_NOT_WHOLE_451",
+      "sessionIdentity": "PG14256-ORIGINAL-PROTOCOL-CARRIERS-EIGHT",
+      "sha256": "2b9ce8ebf4b329a2e36d329bcf7cb91a9396fbe2c40dd6be09fdaa1247ac1e9a",
+      "suites": 2,
+      "tests": 8
+    },
+    {
+      "execSha256": "d83a75eda8483aaf2b58744a12499d04a647081b00b1a91e02462b92f5db8b41",
+      "name": "PG14272-web-three-forms-whole-twenty-four-post-v1",
+      "scope": "ORIGINAL_SCOPED_PT_NOT_WHOLE_451",
+      "sessionIdentity": "PG14270-ORIGINAL-WEB-THREE-FORMS24",
+      "sha256": "09fe225e89c4366efb79605456382c56aa4cde8e7392017cb2ae785b19250c0b",
+      "suites": 3,
+      "tests": 24
+    },
+    {
+      "execSha256": "621d8d3c6c2516aeb9f45ecfa2c741db1f38cd10fdbfdb68c28bdf6f1e9fea12",
+      "name": "PG14294-web-user-create-whole-eight-post-v1",
+      "scope": "ORIGINAL_SCOPED_PT_NOT_WHOLE_451",
+      "sessionIdentity": "PG14288-ORIGINAL-WEB-USER-CREATE8",
+      "sha256": "0b744221948357f4aadf98a89bddee5fd97988d42ad1c8b4a9e7059da6a3de5b",
+      "suites": 1,
+      "tests": 8
+    },
+    {
+      "execSha256": "4a819e4bdd403de3266822084494aefc390d17ee6b98fa5d1b2a450d6684bde3",
+      "name": "PG14298-web-target-mutation-whole-twenty-four-post-v1",
+      "scope": "ORIGINAL_SCOPED_PT_NOT_WHOLE_451",
+      "sessionIdentity": "PG14296-ORIGINAL-WEB-TARGET-MUTATION24",
+      "sha256": "2836720bd34b54355f65fff51f67c6a1f0ccf2a6d4f3791ffcb99260f7803012",
+      "suites": 2,
+      "tests": 24
+    },
+    {
+      "execSha256": "ab073ea5f0ab2d5ff3d0be91fb1ce19b7497394aad93842786c9558b71dfa7c5",
+      "name": "PG14314-web-business-wire-whole-twelve-post-v1",
+      "scope": "ORIGINAL_SCOPED_PT_NOT_WHOLE_451",
+      "sessionIdentity": "PG14312-ORIGINAL-WEB-BUSINESS-WIRE12",
+      "sha256": "06f8b8d26d79ec31f64c588144f6c7d54b74a35bfa72ef44fe72ca2e53e0719e",
+      "suites": 1,
+      "tests": 12
+    },
+    {
+      "execSha256": "21fc9d372e4409bc53a83bc94bd160cd9a4b35832dea360ab8d1074c198c2e62",
+      "name": "PG14318-web-memory-coordinator-whole-seventeen-post-v1",
+      "scope": "ORIGINAL_SCOPED_PT_NOT_WHOLE_451",
+      "sessionIdentity": "PG14316-ORIGINAL-WEB-MEMORY-COORDINATOR17",
+      "sha256": "7b2205bf1d214dc1262512fc8d46b184ab7ff13294742e96476e35f004b7985d",
+      "suites": 3,
+      "tests": 17
+    },
+    {
+      "execSha256": "1e492548fe23cfecfe53a2c363e0d9713f602c12ae4c05371df57669b5c11cf5",
+      "name": "PG14324-protocol-field-whole-nine-post-v1",
+      "scope": "ORIGINAL_SCOPED_PT_NOT_WHOLE_451",
+      "sessionIdentity": "PG14322-ORIGINAL-PROTOCOL-FIELD9",
+      "sha256": "05f5e0ddaba5a9d006bd18efbd80db6834642b6b8906b786320b446c7cabb5ad",
+      "suites": 2,
+      "tests": 9
+    },
+    {
+      "execSha256": "70af1762b62bdbf9987ad7016b609494b634c64eb41e188febf88de1cf0424ca",
+      "name": "PG14328-protocol-frame-payload-whole-twenty-four-post-v1",
+      "scope": "ORIGINAL_SCOPED_PT_NOT_WHOLE_451",
+      "sessionIdentity": "PG14326-ORIGINAL-PROTOCOL-FRAME-PAYLOAD24",
+      "sha256": "8099de1c6e2169ff4102f81db07c679b924966e2e502b2dac16155ad4fdb8d3f",
+      "suites": 5,
+      "tests": 24
+    },
+    {
+      "execSha256": "c2a7f870cda9a717e56e8cf78da7a4907e2062b20c95d7ed37067071c047ad1b",
+      "name": "PG14346-protocol-header-layout-whole-fourteen-post-v1",
+      "scope": "ORIGINAL_SCOPED_PT_NOT_WHOLE_451",
+      "sessionIdentity": "PG14344-ORIGINAL-PROTOCOL-HEADER-LAYOUT14",
+      "sha256": "6a7fbff5dd2ebf7acac4690c9717354df4dd6e0bbac88c2973e747e795a63d77",
+      "suites": 3,
+      "tests": 14
+    }
+  ],
+  "originalTestsReexecutedByRegistry": 0,
+  "owners": {
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/inbound/DeliveryMetadata.java": {
+      "basis": "485_ORIGINAL_LOGICAL_OWNER_ONLY_NOT_OLD_PT_OR_BYTES",
+      "canonicalCostOwner": "WBS-P005-03",
+      "canonicalOwner": "WBS-P005-03",
+      "ownershipStatus": "BASELINE_LOGICAL_REFERENCE",
+      "sha256": "6d87d23892dd6f43a52ce58149943070375a8b2288e5cd9569ec0991e557057f"
+    },
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/messaging/inbound/InboundTransactions.java": {
+      "basis": "485_ORIGINAL_LOGICAL_OWNER_ONLY_NOT_OLD_PT_OR_BYTES",
+      "canonicalCostOwner": "WBS-P005-03",
+      "canonicalOwner": "WBS-P005-03",
+      "ownershipStatus": "BASELINE_LOGICAL_REFERENCE",
+      "sha256": "c2bfde63f582b8c8d9432c5dd15c4ce73ad49dec7304bdcccf290dfa63cc1248"
+    },
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/inbound/DeliveryMetadataTest.java": {
+      "basis": "NO_BASELINE_OR_APPROVED_INTERNAL_RULE; DO_NOT_INFER_FROM_CHANGE_OWNER",
+      "canonicalCostOwner": null,
+      "canonicalOwner": null,
+      "ownershipStatus": "UNKNOWN",
+      "sha256": "3396be3bb620ccfb7ee9c213abea51fefa35d7b327752ef2b0819b06402b2b94"
+    },
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/messaging/inbound/InboundTransactionsPrimaryContractTest.java": {
+      "basis": "NO_BASELINE_OR_APPROVED_INTERNAL_RULE; DO_NOT_INFER_FROM_CHANGE_OWNER",
+      "canonicalCostOwner": null,
+      "canonicalOwner": null,
+      "ownershipStatus": "UNKNOWN",
+      "sha256": "86c393968624410459270b52718aeefb37093b75db6e6ad2f5d891d506c582aa"
+    },
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/ExpectedRoute.java": {
+      "basis": "485_ORIGINAL_LOGICAL_OWNER_ONLY_NOT_OLD_PT_OR_BYTES",
+      "canonicalCostOwner": "WBS-P002-03",
+      "canonicalOwner": "WBS-P002-03",
+      "ownershipStatus": "BASELINE_LOGICAL_REFERENCE",
+      "sha256": "e512bf8bb9a289e5ef3d12ecc4c11f4e01feec3a1e0b8716e2db64ffd416baf2"
+    },
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/FieldCodec.java": {
+      "basis": "485_ORIGINAL_LOGICAL_OWNER_ONLY_NOT_OLD_PT_OR_BYTES",
+      "canonicalCostOwner": "WBS-P002-01",
+      "canonicalOwner": "WBS-P002-01",
+      "ownershipStatus": "BASELINE_LOGICAL_REFERENCE",
+      "sha256": "43a625c478114afea49c8ee423926d7d330d58dd56b3667a803108c068121513"
+    },
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/FieldEncodingException.java": {
+      "basis": "485_ORIGINAL_LOGICAL_OWNER_ONLY_NOT_OLD_PT_OR_BYTES",
+      "canonicalCostOwner": "WBS-P002-01",
+      "canonicalOwner": "WBS-P002-01",
+      "ownershipStatus": "BASELINE_LOGICAL_REFERENCE",
+      "sha256": "60f7a35b38a0a90dfc7caf0746de64668d4dd31c3d14f7ec81b6eb7bd671f669"
+    },
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/FixedWidthDecoder.java": {
+      "basis": "485_ORIGINAL_LOGICAL_OWNER_ONLY_NOT_OLD_PT_OR_BYTES",
+      "canonicalCostOwner": "WBS-P002-01",
+      "canonicalOwner": "WBS-P002-01",
+      "ownershipStatus": "BASELINE_LOGICAL_REFERENCE",
+      "sha256": "dd3701dd1c9bad9d8e0116ffbec56287afefe3a618a25f954ebb6cc70f4ec9d5"
+    },
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/FixedWidthEncoder.java": {
+      "basis": "485_ORIGINAL_LOGICAL_OWNER_ONLY_NOT_OLD_PT_OR_BYTES",
+      "canonicalCostOwner": "WBS-P002-01",
+      "canonicalOwner": "WBS-P002-01",
+      "ownershipStatus": "BASELINE_LOGICAL_REFERENCE",
+      "sha256": "69f271a7a06d71ee1092b5a0513e47514829662c6389582f77e99eb340887a21"
+    },
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/HeaderCodec.java": {
+      "basis": "485_ORIGINAL_LOGICAL_OWNER_ONLY_NOT_OLD_PT_OR_BYTES",
+      "canonicalCostOwner": "WBS-P002-03",
+      "canonicalOwner": "WBS-P002-03",
+      "ownershipStatus": "BASELINE_LOGICAL_REFERENCE",
+      "sha256": "9a4c85c4794558cd0cfe00a87567c707dea439b879c840c0a766c761fda288f3"
+    },
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/MessageEncodingException.java": {
+      "basis": "485_ORIGINAL_LOGICAL_OWNER_ONLY_NOT_OLD_PT_OR_BYTES",
+      "canonicalCostOwner": "WBS-P002-03",
+      "canonicalOwner": "WBS-P002-03",
+      "ownershipStatus": "BASELINE_LOGICAL_REFERENCE",
+      "sha256": "7728bc86a1258f37488c72d0c7eb392cbc9891da33906d6965962526e4f64ab3"
+    },
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/PayloadCodec.java": {
+      "basis": "485_ORIGINAL_LOGICAL_OWNER_ONLY_NOT_OLD_PT_OR_BYTES",
+      "canonicalCostOwner": "WBS-P002-02",
+      "canonicalOwner": "WBS-P002-02",
+      "ownershipStatus": "BASELINE_LOGICAL_REFERENCE",
+      "sha256": "38f9b8d4e5a4aee7afef87edb102317a55182b3e1b958ec2f0f6496770cff181"
+    },
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/PermanentProtocolException.java": {
+      "basis": "485_ORIGINAL_LOGICAL_OWNER_ONLY_NOT_OLD_PT_OR_BYTES",
+      "canonicalCostOwner": "WBS-P002-04",
+      "canonicalOwner": "WBS-P002-04",
+      "ownershipStatus": "BASELINE_LOGICAL_REFERENCE",
+      "sha256": "9193af24f93fcd0d45e536abbacbe4adf46029619de6d6f63e889b9af44ea2d3"
+    },
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/ProtocolValidator.java": {
+      "basis": "485_ORIGINAL_LOGICAL_OWNER_ONLY_NOT_OLD_PT_OR_BYTES",
+      "canonicalCostOwner": "WBS-P002-01",
+      "canonicalOwner": "WBS-P002-01",
+      "ownershipStatus": "BASELINE_LOGICAL_REFERENCE",
+      "sha256": "34b7707426eadec20b44d245c8a6dde5e2b7ad4cd3323625eb30a0a8822a5b70"
+    },
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/TransportBodyType.java": {
+      "basis": "485_ORIGINAL_LOGICAL_OWNER_ONLY_NOT_OLD_PT_OR_BYTES",
+      "canonicalCostOwner": "WBS-P002-03",
+      "canonicalOwner": "WBS-P002-03",
+      "ownershipStatus": "BASELINE_LOGICAL_REFERENCE",
+      "sha256": "e0fdf54397d7d935407d498fcb0679fd957b7af091727fd978c9d67df74f81b8"
+    },
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/codec/TransportMetadata.java": {
+      "basis": "485_ORIGINAL_LOGICAL_OWNER_ONLY_NOT_OLD_PT_OR_BYTES",
+      "canonicalCostOwner": "WBS-P002-03",
+      "canonicalOwner": "WBS-P002-03",
+      "ownershipStatus": "BASELINE_LOGICAL_REFERENCE",
+      "sha256": "198dac5e9cad2046e8e78a4323bfe2e0e2a4a3842044015e8088c1149fcdf646"
+    },
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/header/AuthenticationContext.java": {
+      "basis": "485_ORIGINAL_LOGICAL_OWNER_ONLY_NOT_OLD_PT_OR_BYTES",
+      "canonicalCostOwner": "WBS-P001-01",
+      "canonicalOwner": "WBS-P001-01",
+      "ownershipStatus": "BASELINE_LOGICAL_REFERENCE",
+      "sha256": "aaa18a4c954a425c943e8c30ea1752b665b249e86d8f1767e9e37f4aa61a6b66"
+    },
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/header/CommonHeader.java": {
+      "basis": "485_ORIGINAL_LOGICAL_OWNER_ONLY_NOT_OLD_PT_OR_BYTES",
+      "canonicalCostOwner": "WBS-P001-01",
+      "canonicalOwner": "WBS-P001-01",
+      "ownershipStatus": "BASELINE_LOGICAL_REFERENCE",
+      "sha256": "13d093f420eeb2d41883e17e2a0cddb9defe04e8528a511f29bc6ef861518f8d"
+    },
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/header/InteractionKind.java": {
+      "basis": "485_ORIGINAL_LOGICAL_OWNER_ONLY_NOT_OLD_PT_OR_BYTES",
+      "canonicalCostOwner": "WBS-P001-01",
+      "canonicalOwner": "WBS-P001-01",
+      "ownershipStatus": "BASELINE_LOGICAL_REFERENCE",
+      "sha256": "5424c3f1ad90de3965e298380da683ec72644ecd8fae80117c01001d1d0aa620"
+    },
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/header/MessageKind.java": {
+      "basis": "485_ORIGINAL_LOGICAL_OWNER_ONLY_NOT_OLD_PT_OR_BYTES",
+      "canonicalCostOwner": "WBS-P001-01",
+      "canonicalOwner": "WBS-P001-01",
+      "ownershipStatus": "BASELINE_LOGICAL_REFERENCE",
+      "sha256": "3b003356680171b300d7c5d680b05cec255f4267190907c62cfaec3261a920a0"
+    },
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/header/ResultCode.java": {
+      "basis": "485_ORIGINAL_LOGICAL_OWNER_ONLY_NOT_OLD_PT_OR_BYTES",
+      "canonicalCostOwner": "WBS-P001-01",
+      "canonicalOwner": "WBS-P001-01",
+      "ownershipStatus": "BASELINE_LOGICAL_REFERENCE",
+      "sha256": "ade5ac5514ed62f2be57419eeab2d3a5e27da98a1c6607621be60e3a11c162f4"
+    },
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/FieldArea.java": {
+      "basis": "485_ORIGINAL_LOGICAL_OWNER_ONLY_NOT_OLD_PT_OR_BYTES",
+      "canonicalCostOwner": "WBS-P001-02",
+      "canonicalOwner": "WBS-P001-02",
+      "ownershipStatus": "BASELINE_LOGICAL_REFERENCE",
+      "sha256": "204ca119d0ad946294d03e3fb5d151f3c5ba541e97fe72dce960f024ae72cf50"
+    },
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/FieldDefinition.java": {
+      "basis": "485_ORIGINAL_LOGICAL_OWNER_ONLY_NOT_OLD_PT_OR_BYTES",
+      "canonicalCostOwner": "WBS-P001-02",
+      "canonicalOwner": "WBS-P001-02",
+      "ownershipStatus": "BASELINE_LOGICAL_REFERENCE",
+      "sha256": "7aee31bed1ddf707311f1aac8568c8de71907d9b19986261e80f92e5fe86f263"
+    },
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/FixedPayload.java": {
+      "basis": "485_ORIGINAL_LOGICAL_OWNER_ONLY_NOT_OLD_PT_OR_BYTES",
+      "canonicalCostOwner": "WBS-P001-03",
+      "canonicalOwner": "WBS-P001-03",
+      "ownershipStatus": "BASELINE_LOGICAL_REFERENCE",
+      "sha256": "e6323fb27286a91eb41481a7458fef14dd897c90a961c35f40d00b19eae59e0f"
+    },
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/LayoutDefinition.java": {
+      "basis": "485_ORIGINAL_LOGICAL_OWNER_ONLY_NOT_OLD_PT_OR_BYTES",
+      "canonicalCostOwner": "WBS-P001-02",
+      "canonicalOwner": "WBS-P001-02",
+      "ownershipStatus": "BASELINE_LOGICAL_REFERENCE",
+      "sha256": "d4ad2f50f40e9cb860786af43875583ac324fd2e6055f0bee1e6804101257d5d"
+    },
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/LayoutFieldCatalog.java": {
+      "basis": "485_ORIGINAL_LOGICAL_OWNER_ONLY_NOT_OLD_PT_OR_BYTES",
+      "canonicalCostOwner": "WBS-P001-02",
+      "canonicalOwner": "WBS-P001-02",
+      "ownershipStatus": "BASELINE_LOGICAL_REFERENCE",
+      "sha256": "4c89c1814a3cade6aeb7bced22898974b203b9efde7ab7a2bcf2c1b7d8930c55"
+    },
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/LayoutFields.java": {
+      "basis": "485_ORIGINAL_LOGICAL_OWNER_ONLY_NOT_OLD_PT_OR_BYTES",
+      "canonicalCostOwner": "WBS-P001-02",
+      "canonicalOwner": "WBS-P001-02",
+      "ownershipStatus": "BASELINE_LOGICAL_REFERENCE",
+      "sha256": "c62cfffa3b8616cc820480b8166919ce98c7f8c4f15fa4a2fc63e55659cc8e51"
+    },
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/LayoutId.java": {
+      "basis": "485_ORIGINAL_LOGICAL_OWNER_ONLY_NOT_OLD_PT_OR_BYTES",
+      "canonicalCostOwner": "WBS-P001-02",
+      "canonicalOwner": "WBS-P001-02",
+      "ownershipStatus": "BASELINE_LOGICAL_REFERENCE",
+      "sha256": "87c8f01b5f84f211a8902d323eba221d11dc6b6add1cfe2a514fdbb68e82bc24"
+    },
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/LayoutRegistry.java": {
+      "basis": "485_ORIGINAL_LOGICAL_OWNER_ONLY_NOT_OLD_PT_OR_BYTES",
+      "canonicalCostOwner": "WBS-P001-02",
+      "canonicalOwner": "WBS-P001-02",
+      "ownershipStatus": "BASELINE_LOGICAL_REFERENCE",
+      "sha256": "6c8f5806097d9827a02058f8c1b53f108e2e40f28ef190ead2a7f9140be080f8"
+    },
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/LayoutValidationException.java": {
+      "basis": "485_ORIGINAL_LOGICAL_OWNER_ONLY_NOT_OLD_PT_OR_BYTES",
+      "canonicalCostOwner": "WBS-P001-02",
+      "canonicalOwner": "WBS-P001-02",
+      "ownershipStatus": "BASELINE_LOGICAL_REFERENCE",
+      "sha256": "b99e562fe3afd1f1e11a7ff415f25999c14e46016d5a115022706d4f8674a9df"
+    },
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/Padding.java": {
+      "basis": "485_ORIGINAL_LOGICAL_OWNER_ONLY_NOT_OLD_PT_OR_BYTES",
+      "canonicalCostOwner": "WBS-P001-02",
+      "canonicalOwner": "WBS-P001-02",
+      "ownershipStatus": "BASELINE_LOGICAL_REFERENCE",
+      "sha256": "e67fe4d4ac4c38b5056b45ba60f481c8d8e77dc354dfe1ea543d220da302d8bb"
+    },
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/PayloadValues.java": {
+      "basis": "485_ORIGINAL_LOGICAL_OWNER_ONLY_NOT_OLD_PT_OR_BYTES",
+      "canonicalCostOwner": "WBS-P001-03",
+      "canonicalOwner": "WBS-P001-03",
+      "ownershipStatus": "BASELINE_LOGICAL_REFERENCE",
+      "sha256": "c761ed2b16ebf55916abd1b91958c094d6fd31b491c9aea6662edee27a799e5d"
+    },
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/Presence.java": {
+      "basis": "485_ORIGINAL_LOGICAL_OWNER_ONLY_NOT_OLD_PT_OR_BYTES",
+      "canonicalCostOwner": "WBS-P001-02",
+      "canonicalOwner": "WBS-P001-02",
+      "ownershipStatus": "BASELINE_LOGICAL_REFERENCE",
+      "sha256": "222046f9576699922b9e7e0692ace81c43a345f3a7fc1b11c009143b7271b378"
+    },
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/UnsupportedLayoutException.java": {
+      "basis": "485_ORIGINAL_LOGICAL_OWNER_ONLY_NOT_OLD_PT_OR_BYTES",
+      "canonicalCostOwner": "WBS-P001-02",
+      "canonicalOwner": "WBS-P001-02",
+      "ownershipStatus": "BASELINE_LOGICAL_REFERENCE",
+      "sha256": "ed22caff978204b37fce0e3b9221758e7539596b64e3c19be77f76f7b7901dd2"
+    },
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/WireMessage.java": {
+      "basis": "485_ORIGINAL_LOGICAL_OWNER_ONLY_NOT_OLD_PT_OR_BYTES",
+      "canonicalCostOwner": "WBS-P001-02",
+      "canonicalOwner": "WBS-P001-02",
+      "ownershipStatus": "BASELINE_LOGICAL_REFERENCE",
+      "sha256": "521ec97482cfe772177fd96abb829a441177371986c622584d820e7fb2e641a9"
+    },
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/layout/WireType.java": {
+      "basis": "485_ORIGINAL_LOGICAL_OWNER_ONLY_NOT_OLD_PT_OR_BYTES",
+      "canonicalCostOwner": "WBS-P001-02",
+      "canonicalOwner": "WBS-P001-02",
+      "ownershipStatus": "BASELINE_LOGICAL_REFERENCE",
+      "sha256": "22ac1353bdc960042885401477ad0685849d126d2ecd6786e4ba488a9cb76e6b"
+    },
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/transport/FailedJmsIsolationException.java": {
+      "basis": "NO_BASELINE_OR_APPROVED_INTERNAL_RULE; DO_NOT_INFER_FROM_CHANGE_OWNER",
+      "canonicalCostOwner": null,
+      "canonicalOwner": null,
+      "ownershipStatus": "UNKNOWN",
+      "sha256": "8b22ea28c7a14624bb86b6a8b80661460d446418b61b76c42cdbba7f7f74dfbb"
+    },
+    "src/schubert-nk-protocol/src/main/java/dev/codex/schubert/nk/protocol/transport/UnconfirmedJmsRollbackException.java": {
+      "basis": "NO_BASELINE_OR_APPROVED_INTERNAL_RULE; DO_NOT_INFER_FROM_CHANGE_OWNER",
+      "canonicalCostOwner": null,
+      "canonicalOwner": null,
+      "ownershipStatus": "UNKNOWN",
+      "sha256": "4ca8f9a3d350557e66b026eb96753c6cac7fe14c3204fc302af86f0dd2795938"
+    },
+    "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/AuthenticationErrorProfileTest.java": {
+      "basis": "NO_BASELINE_OR_APPROVED_INTERNAL_RULE; DO_NOT_INFER_FROM_CHANGE_OWNER",
+      "canonicalCostOwner": null,
+      "canonicalOwner": null,
+      "ownershipStatus": "UNKNOWN",
+      "sha256": "41ebd3cd62dc2c154a9a6aa89bb7152f5a6e52e6f62a2fcaf673a60be27bd93a"
+    },
+    "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/FieldCodecNfcGoldenTest.java": {
+      "basis": "NO_BASELINE_OR_APPROVED_INTERNAL_RULE; DO_NOT_INFER_FROM_CHANGE_OWNER",
+      "canonicalCostOwner": null,
+      "canonicalOwner": null,
+      "ownershipStatus": "UNKNOWN",
+      "sha256": "f94593eb1b57c9ce6c65dfac75dec1061439471fb2a66ff8877f5fc1c93dfceb"
+    },
+    "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/FieldCodecTest.java": {
+      "basis": "NO_BASELINE_OR_APPROVED_INTERNAL_RULE; DO_NOT_INFER_FROM_CHANGE_OWNER",
+      "canonicalCostOwner": null,
+      "canonicalOwner": null,
+      "ownershipStatus": "UNKNOWN",
+      "sha256": "bf10cc0ce49e2411917dbe66aa8c15312a399ea40284b67b5d2ff383a971e3b1"
+    },
+    "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/MessageCodecTest.java": {
+      "basis": "NO_BASELINE_OR_APPROVED_INTERNAL_RULE; DO_NOT_INFER_FROM_CHANGE_OWNER",
+      "canonicalCostOwner": null,
+      "canonicalOwner": null,
+      "ownershipStatus": "UNKNOWN",
+      "sha256": "65e12cc4b54b26c0730e868925a88bc0f335061113d3b77cb90f4a9e195f23ca"
+    },
+    "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/PayloadCodecTest.java": {
+      "basis": "NO_BASELINE_OR_APPROVED_INTERNAL_RULE; DO_NOT_INFER_FROM_CHANGE_OWNER",
+      "canonicalCostOwner": null,
+      "canonicalOwner": null,
+      "ownershipStatus": "UNKNOWN",
+      "sha256": "becfdcb277f693d7f8f70a06e1b5a32361d84856314a66f2116625d80b264970"
+    },
+    "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/PayloadGoldenVectorTest.java": {
+      "basis": "NO_BASELINE_OR_APPROVED_INTERNAL_RULE; DO_NOT_INFER_FROM_CHANGE_OWNER",
+      "canonicalCostOwner": null,
+      "canonicalOwner": null,
+      "ownershipStatus": "UNKNOWN",
+      "sha256": "d9828b15fcf0655bdb0ffa2028c6812e1600866c9e230d3d649a9d075a6604ad"
+    },
+    "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/codec/ScenarioRecordEncodingTest.java": {
+      "basis": "NO_BASELINE_OR_APPROVED_INTERNAL_RULE; DO_NOT_INFER_FROM_CHANGE_OWNER",
+      "canonicalCostOwner": null,
+      "canonicalOwner": null,
+      "ownershipStatus": "UNKNOWN",
+      "sha256": "53352d9758286a925435d60aba66ad2637610d1cd4cfd01d286d7a4bef764a15"
+    },
+    "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/header/HeaderModelTest.java": {
+      "basis": "NO_BASELINE_OR_APPROVED_INTERNAL_RULE; DO_NOT_INFER_FROM_CHANGE_OWNER",
+      "canonicalCostOwner": null,
+      "canonicalOwner": null,
+      "ownershipStatus": "UNKNOWN",
+      "sha256": "2f20adba3d3b4dfa8eef16e36ad571f91c7ffffa9b080a15a04f1bfddabd631f"
+    },
+    "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/LayoutFieldCatalogTest.java": {
+      "basis": "NO_BASELINE_OR_APPROVED_INTERNAL_RULE; DO_NOT_INFER_FROM_CHANGE_OWNER",
+      "canonicalCostOwner": null,
+      "canonicalOwner": null,
+      "ownershipStatus": "UNKNOWN",
+      "sha256": "ad2df79ad437b878561567c4364f458336669c1c0394c0c5e602b529bae483ef"
+    },
+    "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/layout/LayoutMetadataTest.java": {
+      "basis": "NO_BASELINE_OR_APPROVED_INTERNAL_RULE; DO_NOT_INFER_FROM_CHANGE_OWNER",
+      "canonicalCostOwner": null,
+      "canonicalOwner": null,
+      "ownershipStatus": "UNKNOWN",
+      "sha256": "e3ea04e5b8a49be88eb3e0adcd2f5b5bc5a20f6793ba9e3be632545fe282b436"
+    },
+    "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/transport/FailedJmsIsolationExceptionTest.java": {
+      "basis": "NO_BASELINE_OR_APPROVED_INTERNAL_RULE; DO_NOT_INFER_FROM_CHANGE_OWNER",
+      "canonicalCostOwner": null,
+      "canonicalOwner": null,
+      "ownershipStatus": "UNKNOWN",
+      "sha256": "4b38735c88ffee065f3499688a29df85d1d3e97a51401d9f9ce0805f75e41cca"
+    },
+    "src/schubert-nk-protocol/src/test/java/dev/codex/schubert/nk/protocol/transport/UnconfirmedJmsRollbackExceptionTest.java": {
+      "basis": "NO_BASELINE_OR_APPROVED_INTERNAL_RULE; DO_NOT_INFER_FROM_CHANGE_OWNER",
+      "canonicalCostOwner": null,
+      "canonicalOwner": null,
+      "ownershipStatus": "UNKNOWN",
+      "sha256": "189a8e5fc185e9cf70c22a72ff25be675ab284e5dc62bfd7920988456829bda9"
+    },
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/form/CancelForm.java": {
+      "basis": "485_ORIGINAL_LOGICAL_OWNER_ONLY_NOT_OLD_PT_OR_BYTES",
+      "canonicalCostOwner": "WBS-P016-21",
+      "canonicalOwner": "WBS-P016-21",
+      "ownershipStatus": "BASELINE_LOGICAL_REFERENCE",
+      "sha256": "c73d6d50c61b068b632c452f4af2ac570f1ba0bcbc0809d31f051efc05a51284"
+    },
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/form/LogSearchForm.java": {
+      "basis": "485_ORIGINAL_LOGICAL_OWNER_ONLY_NOT_OLD_PT_OR_BYTES",
+      "canonicalCostOwner": "WBS-P016-14",
+      "canonicalOwner": "WBS-P016-14",
+      "ownershipStatus": "BASELINE_LOGICAL_REFERENCE",
+      "sha256": "d3022a7ea6ac2e00f14d5719f9d9b00bce3b509f4dac7d66091444d818d8c642"
+    },
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/form/PasswordResetForm.java": {
+      "basis": "485_ORIGINAL_LOGICAL_OWNER_ONLY_NOT_OLD_PT_OR_BYTES",
+      "canonicalCostOwner": "WBS-P016-17",
+      "canonicalOwner": "WBS-P016-17",
+      "ownershipStatus": "BASELINE_LOGICAL_REFERENCE",
+      "sha256": "5f3efc52bcae063faec1531fcd9d1949ad576f5355f327001bc5dd888092cd1d"
+    },
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/form/QuestionDeleteForm.java": {
+      "basis": "485_ORIGINAL_LOGICAL_OWNER_ONLY_NOT_OLD_PT_OR_BYTES",
+      "canonicalCostOwner": "WBS-P016-23",
+      "canonicalOwner": "WBS-P016-23",
+      "ownershipStatus": "BASELINE_LOGICAL_REFERENCE",
+      "sha256": "0655e04b7cd37e9d9e3570db7386b92547e4c38cafc3501615a680233faab7d0"
+    },
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/form/QuestionSubmitForm.java": {
+      "basis": "485_ORIGINAL_LOGICAL_OWNER_ONLY_NOT_OLD_PT_OR_BYTES",
+      "canonicalCostOwner": "WBS-P016-18",
+      "canonicalOwner": "WBS-P016-18",
+      "ownershipStatus": "BASELINE_LOGICAL_REFERENCE",
+      "sha256": "725f0fbe38aaec853e50da6eb5ea060eb0a8fe7e4a18faa5ddb9febce3f03b6f"
+    },
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/form/ScenarioSearchForm.java": {
+      "basis": "485_ORIGINAL_LOGICAL_OWNER_ONLY_NOT_OLD_PT_OR_BYTES",
+      "canonicalCostOwner": "WBS-P016-03",
+      "canonicalOwner": "WBS-P016-03",
+      "ownershipStatus": "BASELINE_LOGICAL_REFERENCE",
+      "sha256": "ce70478c3c11c49ae841e849a6e9d81064cbda1f590c956d3cfe48f751c2ac78"
+    },
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/form/TargetOperationInput.java": {
+      "basis": "485_ORIGINAL_LOGICAL_OWNER_ONLY_NOT_OLD_PT_OR_BYTES",
+      "canonicalCostOwner": "WBS-P015-07",
+      "canonicalOwner": "WBS-P015-07",
+      "ownershipStatus": "BASELINE_LOGICAL_REFERENCE",
+      "sha256": "91e810d742b97b6607a1fa7939b485ea18eca6703e2039b961ced106f8c2af48"
+    },
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/form/UserChangeForm.java": {
+      "basis": "485_ORIGINAL_LOGICAL_OWNER_ONLY_NOT_OLD_PT_OR_BYTES",
+      "canonicalCostOwner": "WBS-P016-17",
+      "canonicalOwner": "WBS-P016-17",
+      "ownershipStatus": "BASELINE_LOGICAL_REFERENCE",
+      "sha256": "86c971c5eb84ba1fce0240b6a72238a05a0769f85af2a439a297d6ab3bd6550e"
+    },
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/form/UserCreateForm.java": {
+      "basis": "485_ORIGINAL_LOGICAL_OWNER_ONLY_NOT_OLD_PT_OR_BYTES",
+      "canonicalCostOwner": "WBS-P016-16",
+      "canonicalOwner": "WBS-P016-16",
+      "ownershipStatus": "BASELINE_LOGICAL_REFERENCE",
+      "sha256": "5b599ddb57dfd4ba0b8a89547567b1d48bedb5d6ac09439c5dc0abd6cda25b86"
+    },
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/form/UserMutationInput.java": {
+      "basis": "485_ORIGINAL_LOGICAL_OWNER_ONLY_NOT_OLD_PT_OR_BYTES",
+      "canonicalCostOwner": "WBS-P016-17",
+      "canonicalOwner": "WBS-P016-17",
+      "ownershipStatus": "BASELINE_LOGICAL_REFERENCE",
+      "sha256": "a5532415afe5314c6578ff9cbe6362fd9cb39ab6eb13d043c5153adeb4703d7c"
+    },
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/form/UserRoleForm.java": {
+      "basis": "485_ORIGINAL_LOGICAL_OWNER_ONLY_NOT_OLD_PT_OR_BYTES",
+      "canonicalCostOwner": "WBS-P016-17",
+      "canonicalOwner": "WBS-P016-17",
+      "ownershipStatus": "BASELINE_LOGICAL_REFERENCE",
+      "sha256": "5d915e86e749f1d932bf4f1c8b37b1b787162b70cc6207858b09f99365f607ec"
+    },
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/form/UserStatusForm.java": {
+      "basis": "485_ORIGINAL_LOGICAL_OWNER_ONLY_NOT_OLD_PT_OR_BYTES",
+      "canonicalCostOwner": "WBS-P016-17",
+      "canonicalOwner": "WBS-P016-17",
+      "ownershipStatus": "BASELINE_LOGICAL_REFERENCE",
+      "sha256": "d92c506396ad2fc1084a2cf87c5b688d9e62be60875e076f52d72a3ded9e7081"
+    },
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/form/UserUnlockForm.java": {
+      "basis": "485_ORIGINAL_LOGICAL_OWNER_ONLY_NOT_OLD_PT_OR_BYTES",
+      "canonicalCostOwner": "WBS-P016-17",
+      "canonicalOwner": "WBS-P016-17",
+      "ownershipStatus": "BASELINE_LOGICAL_REFERENCE",
+      "sha256": "721ff28339f4e5684a20781491dbe74802d5ef092ad32a44bd23f7841a38493c"
+    },
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/JmsRequestReplyClient.java": {
+      "basis": "485_ORIGINAL_LOGICAL_OWNER_ONLY_NOT_OLD_PT_OR_BYTES",
+      "canonicalCostOwner": "WBS-P005-02",
+      "canonicalOwner": "WBS-P005-02",
+      "ownershipStatus": "BASELINE_LOGICAL_REFERENCE",
+      "sha256": "cc0689a25334f9b2eb12983e5e952a0a19af703c28ff4898ff8b57f2a6aa7b39"
+    },
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/JmsRequestReplyException.java": {
+      "basis": "485_ORIGINAL_LOGICAL_OWNER_ONLY_NOT_OLD_PT_OR_BYTES",
+      "canonicalCostOwner": "WBS-P005-02",
+      "canonicalOwner": "WBS-P005-02",
+      "ownershipStatus": "BASELINE_LOGICAL_REFERENCE",
+      "sha256": "11ffd0f90e7064a7f42bef1029c65fc37e5cadbfe2b49a4b7bd3d775d9dd164b"
+    },
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/LogoutWireClient.java": {
+      "basis": "485_ORIGINAL_LOGICAL_OWNER_ONLY_NOT_OLD_PT_OR_BYTES",
+      "canonicalCostOwner": "WBS-P015-05",
+      "canonicalOwner": "WBS-P015-05",
+      "ownershipStatus": "BASELINE_LOGICAL_REFERENCE",
+      "sha256": "8411aaeee9f580c1cc3fe16afdcaabdc9893b3f0c4cebb996a168f6b0909d578"
+    },
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/MediaDescriptorWireClient.java": {
+      "basis": "485_ORIGINAL_LOGICAL_OWNER_ONLY_NOT_OLD_PT_OR_BYTES",
+      "canonicalCostOwner": "WBS-P005-02",
+      "canonicalOwner": "WBS-P005-02",
+      "ownershipStatus": "BASELINE_LOGICAL_REFERENCE",
+      "sha256": "eb1a8d9cbc013cd171ea658cad67511a6adceee78c34db39f0ebdb1f3bd8a02a"
+    },
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/NotificationWireClient.java": {
+      "basis": "485_ORIGINAL_LOGICAL_OWNER_ONLY_NOT_OLD_PT_OR_BYTES",
+      "canonicalCostOwner": "WBS-P016-21",
+      "canonicalOwner": "WBS-P016-21",
+      "ownershipStatus": "BASELINE_LOGICAL_REFERENCE",
+      "sha256": "f945859ec735eb33390de809b3f65177dda579536c8f2749a9c433aa52df12cf"
+    },
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/PendingReply.java": {
+      "basis": "485_ORIGINAL_LOGICAL_OWNER_ONLY_NOT_OLD_PT_OR_BYTES",
+      "canonicalCostOwner": "WBS-P005-02",
+      "canonicalOwner": "WBS-P005-02",
+      "ownershipStatus": "BASELINE_LOGICAL_REFERENCE",
+      "sha256": "346a3d7ddf65889875a3f1907eda05fd061a4788aabf5d7361b461790185c42b"
+    },
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/ProtectedReadWireClient.java": {
+      "basis": "485_ORIGINAL_LOGICAL_OWNER_ONLY_NOT_OLD_PT_OR_BYTES",
+      "canonicalCostOwner": "WBS-P005-02",
+      "canonicalOwner": "WBS-P005-02",
+      "ownershipStatus": "BASELINE_LOGICAL_REFERENCE",
+      "sha256": "6e4a8c190ccb5bceb4d8412ad8b8139c156e0fbe5ae55ee6b17e1989c8ac1e60"
+    },
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/QuestionWireClient.java": {
+      "basis": "485_ORIGINAL_LOGICAL_OWNER_ONLY_NOT_OLD_PT_OR_BYTES",
+      "canonicalCostOwner": "WBS-P016-18",
+      "canonicalOwner": "WBS-P016-18",
+      "ownershipStatus": "BASELINE_LOGICAL_REFERENCE",
+      "sha256": "7f6299cc4d6acd5fa944a02eade9c826f0f1268951c8c17a63b4b641bebde1a0"
+    },
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/ReplyCorrelationRegistry.java": {
+      "basis": "485_ORIGINAL_LOGICAL_OWNER_ONLY_NOT_OLD_PT_OR_BYTES",
+      "canonicalCostOwner": "WBS-P005-02",
+      "canonicalOwner": "WBS-P005-02",
+      "ownershipStatus": "BASELINE_LOGICAL_REFERENCE",
+      "sha256": "1a28f9d8ec9438f13621358c02181557fdc3a19f4afd55303ad727ce6fc9ed75"
+    },
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/messaging/UserAdministrationWireClient.java": {
+      "basis": "485_ORIGINAL_LOGICAL_OWNER_ONLY_NOT_OLD_PT_OR_BYTES",
+      "canonicalCostOwner": "WBS-P016-17",
+      "canonicalOwner": "WBS-P016-17",
+      "ownershipStatus": "BASELINE_LOGICAL_REFERENCE",
+      "sha256": "fefe8a3a47ac916e0b869b82753701f8204f0a175870c81bb3638d7871cec006"
+    },
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/form/LogSearchFormTest.java": {
+      "basis": "NO_BASELINE_OR_APPROVED_INTERNAL_RULE; DO_NOT_INFER_FROM_CHANGE_OWNER",
+      "canonicalCostOwner": null,
+      "canonicalOwner": null,
+      "ownershipStatus": "UNKNOWN",
+      "sha256": "161a06a8a30679831ed54f25649de2316c6c5356414244418b84da2825835d28"
+    },
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/form/QuestionSubmitFormTest.java": {
+      "basis": "NO_BASELINE_OR_APPROVED_INTERNAL_RULE; DO_NOT_INFER_FROM_CHANGE_OWNER",
+      "canonicalCostOwner": null,
+      "canonicalOwner": null,
+      "ownershipStatus": "UNKNOWN",
+      "sha256": "20f36e9696c7b1e664b9039189d3a2bb5359275f9894af19214f32abb6843c96"
+    },
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/form/ScenarioSearchFormTest.java": {
+      "basis": "NO_BASELINE_OR_APPROVED_INTERNAL_RULE; DO_NOT_INFER_FROM_CHANGE_OWNER",
+      "canonicalCostOwner": null,
+      "canonicalOwner": null,
+      "ownershipStatus": "UNKNOWN",
+      "sha256": "b681fa5dd2a4a9a5fe8baf3f17840ce070260d39af172a4fe52bd9c356d63d4b"
+    },
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/form/TargetOperationFormTest.java": {
+      "basis": "NO_BASELINE_OR_APPROVED_INTERNAL_RULE; DO_NOT_INFER_FROM_CHANGE_OWNER",
+      "canonicalCostOwner": null,
+      "canonicalOwner": null,
+      "ownershipStatus": "UNKNOWN",
+      "sha256": "2e0ddf8c3369a6a2a17a264cac49e55b18f472e86eb11aad6a3ec50423eeb00c"
+    },
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/form/UserCreateFormTest.java": {
+      "basis": "NO_BASELINE_OR_APPROVED_INTERNAL_RULE; DO_NOT_INFER_FROM_CHANGE_OWNER",
+      "canonicalCostOwner": null,
+      "canonicalOwner": null,
+      "ownershipStatus": "UNKNOWN",
+      "sha256": "3366b1d112fc8b0f729bd7fbdad445a84c2f8743886879bccfa3a14d7e4dbc20"
+    },
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/form/UserMutationFormTest.java": {
+      "basis": "NO_BASELINE_OR_APPROVED_INTERNAL_RULE; DO_NOT_INFER_FROM_CHANGE_OWNER",
+      "canonicalCostOwner": null,
+      "canonicalOwner": null,
+      "ownershipStatus": "UNKNOWN",
+      "sha256": "c9d1ce61914955f60048577ed9a2221afb18663f5d8beadc51056e84be819412"
+    },
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/JmsRequestReplyClientTest.java": {
+      "basis": "NO_BASELINE_OR_APPROVED_INTERNAL_RULE; DO_NOT_INFER_FROM_CHANGE_OWNER",
+      "canonicalCostOwner": null,
+      "canonicalOwner": null,
+      "ownershipStatus": "UNKNOWN",
+      "sha256": "3a115c2a3508f914b58a9b4702ae718abd6234b185a6df1996d32bec98da9c3d"
+    },
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/ReplyCorrelationRegistryTest.java": {
+      "basis": "NO_BASELINE_OR_APPROVED_INTERNAL_RULE; DO_NOT_INFER_FROM_CHANGE_OWNER",
+      "canonicalCostOwner": null,
+      "canonicalOwner": null,
+      "ownershipStatus": "UNKNOWN",
+      "sha256": "2b35e3a19dd33b72ba123a7e2f5d098499e9257b1dd90e080139b81e7a160461"
+    },
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/ReplyCorrelationTerminalRaceTest.java": {
+      "basis": "NO_BASELINE_OR_APPROVED_INTERNAL_RULE; DO_NOT_INFER_FROM_CHANGE_OWNER",
+      "canonicalCostOwner": null,
+      "canonicalOwner": null,
+      "ownershipStatus": "UNKNOWN",
+      "sha256": "ded026184e89c0427125c85b513742d4c3863e769d5bbb818ee474788a86b1d1"
+    },
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/WebBusinessWireClientsTest.java": {
+      "basis": "NO_BASELINE_OR_APPROVED_INTERNAL_RULE; DO_NOT_INFER_FROM_CHANGE_OWNER",
+      "canonicalCostOwner": null,
+      "canonicalOwner": null,
+      "ownershipStatus": "UNKNOWN",
+      "sha256": "5e8ddf531e8ab4145bb25dfc215e1a78ec590e7a52214a77b455dd55167ed8a3"
+    }
+  },
+  "priorSource0061TestsTransferred": false,
+  "source": "6b53efeec87f3ec36a840dd8e7759656cb4aee5c",
+  "suiteNames": [
+    "dev.codex.schubert.nk.api.messaging.inbound.DeliveryMetadataTest",
+    "dev.codex.schubert.nk.api.messaging.inbound.InboundTransactionsPrimaryContractTest",
+    "dev.codex.schubert.nk.protocol.codec.AuthenticationErrorProfileTest",
+    "dev.codex.schubert.nk.protocol.codec.FieldCodecNfcGoldenTest",
+    "dev.codex.schubert.nk.protocol.codec.FieldCodecTest",
+    "dev.codex.schubert.nk.protocol.codec.MessageCodecTest",
+    "dev.codex.schubert.nk.protocol.codec.PayloadCodecTest",
+    "dev.codex.schubert.nk.protocol.codec.PayloadGoldenVectorTest",
+    "dev.codex.schubert.nk.protocol.codec.ScenarioRecordEncodingTest",
+    "dev.codex.schubert.nk.protocol.header.HeaderModelTest",
+    "dev.codex.schubert.nk.protocol.layout.LayoutFieldCatalogTest",
+    "dev.codex.schubert.nk.protocol.layout.LayoutMetadataTest",
+    "dev.codex.schubert.nk.protocol.transport.FailedJmsIsolationExceptionTest",
+    "dev.codex.schubert.nk.protocol.transport.UnconfirmedJmsRollbackExceptionTest",
+    "dev.codex.schubert.nk.web.form.LogSearchFormTest",
+    "dev.codex.schubert.nk.web.form.QuestionSubmitFormTest",
+    "dev.codex.schubert.nk.web.form.ScenarioSearchFormTest",
+    "dev.codex.schubert.nk.web.form.TargetOperationFormTest",
+    "dev.codex.schubert.nk.web.form.UserCreateFormTest",
+    "dev.codex.schubert.nk.web.form.UserMutationFormTest",
+    "dev.codex.schubert.nk.web.messaging.JmsRequestReplyClientTest",
+    "dev.codex.schubert.nk.web.messaging.ReplyCorrelationRegistryTest",
+    "dev.codex.schubert.nk.web.messaging.ReplyCorrelationTerminalRaceTest",
+    "dev.codex.schubert.nk.web.messaging.WebBusinessWireClientsTest"
+  ],
+  "suites": 24,
+  "supplementalOwnershipCandidates": {
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/ReplyCorrelationTerminalRaceTest.java": {
+      "additionalCostPp": 0,
+      "basis": "2391_SS321_9_TERMINAL_ARBITRATION_CAPACITY_AND_VIEW_INDEPENDENT_ORACLES",
+      "candidateCostOwner": "WBS-P005-02",
+      "candidateOwner": "WBS-P005-02",
+      "currentBaselineOwnerStillUnknown": true,
+      "historicalRuntimeNotTransferred": true,
+      "manifest": "evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG12902-reply-terminal-trace-v1/manifest.json",
+      "manifestSha256": "abc790d1356a461040d3dfe52c9db8ffb1cf9f6736a3ee200db4cb74c1d68590",
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/messaging/ReplyCorrelationTerminalRaceTest.java",
+      "sha256": "ded026184e89c0427125c85b513742d4c3863e769d5bbb818ee474788a86b1d1",
+      "status": "NEW_LOGICAL_CANDIDATE_REVIEWED_NOT_ACCEPTED"
+    }
+  },
+  "tests": 147,
+  "unknownOwnerPaths": 26,
+  "whole451Accepted": false,
+  "wholeF03Accepted": false
+}
