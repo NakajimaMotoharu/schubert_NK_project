@@ -1,0 +1,9 @@
+# 2641 現十host133件・生成metadata区分 限定registry参照仕様
+
+2026-10-30 JST、dev-foundation/Source6b53/保存a634c8b7ca098e7a24d3369b2a6d7d8471f6c2f5。群3029開始0.25/2/4pp cap10、PG-D885。元71の14302/04・WBS side14306/08を歴史保持、新たに独立完了した14314/18/24/28の四post62methodを既六postへ結び、十exec133/21suiteを元XMLと同Source/compile pinから一意確認。元Product/JVM再実行0/exec合成0/旧source成功転用0。
+
+期待=完全39Source/46physical(code44/meta2)、四100二十Sourceの完全閉包26physical(code25＋compiler-generated metadata1)、自然branch0十七Source18physical、standalone noCode一Source一physical、未達Inbound一Source一physical(line10/method2miss)。metadata二件はUserChangeFormのnoCodeとPayloadCodec$1のcode-bearing syntheticを区別する。後者はpost14328のACC_SYNTHETIC4128/SourceFile/標準JaCoCo全counter0/手動除外なしを根拠とし、無根拠にnoCode扱い又は分母除外しない。
+
+60ownerpathのbaseline既知37/UNKNOWN23を既canonicalで照合。Race Testの旧候補P00502は同byte/固定公開根拠をsupplementalとして保持し、baseline昇格/旧runtime再束縛/追加費用加算をしない。
+
+新14332registry→独立14334（全元返却XML133/各完全閉包・カテゴリ・owner・候補/反例）→14336二WBS既sectionへの新sideだけ＋486inventorySha256→14338独立全旧semantic/master481484/予算/受入不変・反例/所定wholeaudit前後真正HOLD。旧3exec15/6exec71と995runtime/原資格を上書きせず各source/runを明示。commandは新各entryをpg11123_checked_python_entry経由一回、結果2642・実hash/時刻/終了・不成立点を保存、formal/工数null/QA051final/HOLDと二held工具metadata前除外は不変更。
