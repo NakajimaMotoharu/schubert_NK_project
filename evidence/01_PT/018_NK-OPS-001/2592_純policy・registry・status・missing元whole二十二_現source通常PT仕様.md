@@ -1,0 +1,7 @@
+# 2592 純policy・registry・status・missing元whole二十二 現source通常PT仕様
+
+2026-10-30 JST/PG-D862/event2978/source0061、F03開始0.5/1.5/3cap10・八Main/Test canonicalP01809候補未受入/追加費0。元MONPIPE001～007＋ASYNCBYTE001/RESTARTFLAG001・ALERTREG001～004・MONSTATUS001～006・MONMISSING001～003（全9/4/6/3=22/4suite）を現20exec289method44suite/後続と照合、当whole未含有。全body/helper/initializer/callbackと四Main、Mode/Threshold/Lifecycleの既読依存は純JDK enum/値/private状態。DLQ/integrity/restarts/backup等は供給値による論理状態で、実保護資源・復旧承認・対象観測や制御はしない。全actualHOLD/QA051final維持。
+
+独立oracle：PIPEはSS351全12conditionの固定normal/warning/critical入力とidentity/count/first-last/cause recovery/72順序、async byteとcountの独立、rate-limitflag・不正値未更新、全32modeの代表とimmutable/64一意count。REGは閉じた72key/同keydedup/昇格/順序・protected12保持/null/64count。STATUSは明示STANDARD/DEBUG header＋固定列/全行literal/UTCミリ秒/Instant.MIN-MAX黄金値、並べ替えがcaller listを変えずnull/重複/closed拒否・64task同値。MISSINGは全72keyのgap300・301/600/601で60だけclose/protected12残、null/負/逆行state不変と64欠測でも旧snapshot不変。期待をproduction methodから生成0（StatusTest helperは入力eventだけを作りexpected文字列は独立）。
+
+14152 checked entry→Java25/Xlint-all/Werror、元whole22/4・新append=false/session/並列suite実行off、自己pool原invokeAll/await10秒とget/close絶対期限不足・外child180秒を区別。14154全Source六normalJar/原XML/FES0/八false-result/sessionCRCを独立確認、四SourcePolicy/Registry/Status/ObservationContextの全physical/Codeを測定。自然branch0=N/A/未達保持、既generated filter以外除外/人工呼出/旧exec合成0。Root/VM/FS/DB/JMS/HTTP/credential/権限/実管理/intent/permit/退役/回収・HOLD抽出/新stub代替0。2593結果へ時刻/OS/JDK/branch/source/command/退出/各Test実際/原入力期待/coverage/BUG/hashと限定範囲、正式1964-53/17-190/工数null/451-F03を自動更新しない。
