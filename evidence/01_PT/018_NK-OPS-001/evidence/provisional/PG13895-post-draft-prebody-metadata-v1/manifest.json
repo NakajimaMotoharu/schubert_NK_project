@@ -1,0 +1,58 @@
+{
+  "recordKind": "PREBODY_DRAFT_FAILURE_AND_IN_MEMORY_LITERAL_REPLACEMENT_CHECKS",
+  "source": "0061d178cda80c2ce3926290619c64db125dbcfc",
+  "actualExit": null,
+  "productTestsExecuted": 0,
+  "newAccepted": 0,
+  "formalUpdated": false,
+  "whole451Accepted": false,
+  "effortPercent": null,
+  "failedPrebody": {
+    "draftPath": "tools/quality/pg13894_live_intent_fence_whole_six_post.py",
+    "reconstructedDraftSha256": "db09c9fd1c2ac740ae1b29990b29acea44971921f96dd7d1c238f300233936d2",
+    "draftHashReconstructedAfterFailureNotOriginalTerminalCapture": true,
+    "observedCommand": "env PYTHONPATH=<pyflakes3.4.0-runtime>:tools/quality python3 -B -m pyflakes tools/quality/pg13894_live_intent_fence_whole_six_post.py",
+    "observedExit": 1,
+    "observedError": "unterminated string literal (detected at line 22)",
+    "checkedEntryBodyStarted": false,
+    "productTestReruns": 0,
+    "cause": "JS String.replace replacement argument interpreted dollar-apostrophe as suffix substitution; draft failed guarded lint before entry invocation."
+  },
+  "correction": {
+    "uninvokedDraftOnly": true,
+    "method": "literal split/join for every replacement pair; complete exact draft patch, invoked tools and Product sources unchanged",
+    "prebodyLintAfterCorrection": 0,
+    "postEntrySha256": "737534b612afc0629a4cc794fa08201bd911cf598fd46dbfb55619718dee9b8f",
+    "postManifestSha256": "837db6b5e9152aa8d7a150646fe651b96d23f81293c20f43c214235210dc8037",
+    "postActualExit": 0
+  },
+  "metadataOnlyReplacementChecks": [
+    {
+      "marker": "$&",
+      "expectedLiteral": "left$&right",
+      "actualSplitJoin": "left$&right",
+      "metacharacterReplacement": "left|right"
+    },
+    {
+      "marker": "$'",
+      "expectedLiteral": "left$'right",
+      "actualSplitJoin": "left$'right",
+      "metacharacterReplacement": "leftrightright"
+    },
+    {
+      "marker": "$$",
+      "expectedLiteral": "left$$right",
+      "actualSplitJoin": "left$$right",
+      "metacharacterReplacement": "left$right"
+    },
+    {
+      "marker": "$`",
+      "expectedLiteral": "left$`right",
+      "actualSplitJoin": "left$`right",
+      "metacharacterReplacement": "leftleftright"
+    }
+  ],
+  "metadataChecks": 4,
+  "noProductClassInvokedByMetadataChecks": true,
+  "noOriginalRootOrRefusedOperationRetried": true
+}
