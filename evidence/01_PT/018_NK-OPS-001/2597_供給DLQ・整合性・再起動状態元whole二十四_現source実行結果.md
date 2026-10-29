@@ -1,0 +1,7 @@
+# 2597 供給DLQ・整合性・再起動状態元whole二十四 現source実行結果
+
+2026-10-30 JST/2596/PG-D864/event2982→83/source0061・F03開始0.5/1.5/3cap10・canonicalP01809候補未受入/追加費0。元DLQMON001～008/INTEGRITYMON001～008/RESTARTMON001～008全24/3suite/FES0、独立入力期待2596・実際全PASS/原XML各case/hashへ記録。checked entry command `python3 -B tools/quality/pg11123_checked_python_entry.py tools/quality/pg14164_dlq_integrity_restart_whole_twenty_four_pt.py`、entry8e68b384ab4401f2e549e37d3c9f7d8fd0ce49f43a2b5fa1e0187ee9bdcde4ab/session20540真正0。時刻/OS/Java25.0.4/branch/source/六normalJar/環境/原command/退出は原manifest。
+
+原`evidence/provisional/PG14164-dlq-integrity-restart-whole-twenty-four-pt-v1/manifest.json` SHA256 `f63125054b4b1c575399736619e4ac059fff48802efa8c0e93b0119e8b65ff15`。同checked entry14166 post/entrySHA `648ed428593eef5bb2d3bbb8f2958428340d2be0c64808a2f9b4f6f3ecbb1f42`/真正0、`evidence/provisional/PG14166-dlq-integrity-restart-whole-twenty-four-post-v1/manifest.json` SHA256 `b82f772091789826222714328ceff0eb3da7085a143b89bfb3ade7c603b49f0c`。全Source六Jar/原XML/八false-result/一exec-sessionCRC0、三全Source七physical/Code独立測定、各Source四正分母100/合計L58M16C7B32全miss0。原default generated filter/record契約assert保持・追加除外/人工呼出/旧exec合成/元24再演0。
+
+製品/工具失敗0・関連新BUG/SSCなし。実資源/incident/queue/DB/key/config/probe/repair/retirement/systemd/history/control操作0、供給警報値と自己poolのみで全actualHOLD/QA051final維持。current22→23exec/344→368method/52→55suite、技術四10032→35program/56→63physical・自然0六Source別。正式1964-53/17-190/工数null/全F03-451/原予算/995runtime不変。共有枠は原event2983・専有費N/Tnull、次=14168公開/exact保存push→Transfer元metric/health全body審査、既成功再演0。
