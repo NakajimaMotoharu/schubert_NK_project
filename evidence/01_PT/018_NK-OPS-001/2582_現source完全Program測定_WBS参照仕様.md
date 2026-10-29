@@ -1,0 +1,9 @@
+# 2582 現source完全Program測定 WBS参照仕様
+
+2026-10-30 JST/PG-D857/event2968/source0061、主費F03開始0.2/1/2pp cap10。原Source/元PT/coverageの再実行ではなく、既に当sourceで独立資格済みの元16post・183method/31suiteと完全Source四100の15program23executable physicalをWBSから一意に辿る暫定参照を追加する。全995旧runtime、Snapshot中心の既currentQualification、原予算/accepted/正式は変えない。
+
+原13956の完全九program・11postを元pinで保持し、新14014/14094/14101/14112/14118の五postを結合する。各postの元source/真正0/XML case identityと現normal13832/全input・六Jar hashを確認し、case重複0/総183を導出する。Source単位counterは各元exec内の値のみ、全execをunionしない。ApiStopBudget一＋Timed三＋Metric二の六programを九へ足し、ContextHash/Checksの自然branch0二SourceとParentGuard等の部分/未実測は別枠に保持する。各Sourceの現canonicalは485から取り、未知を変更担当で埋めない。
+
+保存前WBS485/486原byte/hashを固定し、既二sectionへ新provisional measurement参照だけ追加、486 inventorySha256再束縛・原snapshot/予算/受入のsemantic不変を確認する。旧995sourceRows/歴史runtime/原currentQualificationは一切置換せず、新側fieldはCURRENT_SCOPED_HOST_MEASUREMENT_REFERENCES_NOT_FORMAL。前後WBS監査は真正結果を保存し既HOLD/1をPASSにしない。独立postは全二JSON・元post/case/Source counter・owner未知/重複/旧run合算/正式増/原予算変異の拒否を確認。結果2583/manifestへhash/退出/未達を残す。
+
+BUG2091/YKT1839訂正：旧checkpointが略称を「共有post内の文脈名」としたのは誤り。実fileはtools/quality/pmd_context_disposition.pyとpmd_contract_disposition.py。両全文を読取し、個別vendor/Source/wholeSource/独立XML/明示finding lineの技術判定に限りqualityGatePass=False/raw保持で、全品質の免除/合格を返さないと確認。本群でもrule/classifier/config・全raw/原HOLD/実環境は変更せず、既case成功から警告削除や全品質認定を行わない。

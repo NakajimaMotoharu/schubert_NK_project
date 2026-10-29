@@ -1,0 +1,11 @@
+# 2583 現source完全Program測定 WBS参照結果
+
+2026-10-30 JST/2582/PG-D857/event2968/source0061、開始0.2/1/2cap10。原16post183method31suite・完全Source四100の15program23physical/自然branch0二Sourceを原証拠から参照する。旧995rows/歴史runtime/current Snapshot資格/正式/accepted/予算と既raw警告は不変更。14122 primary・二WBS限定overlay・14124 independentの真正退出/hashを後記し、未実施を合格にしない。
+
+14122/9d0af322/9c01f2521b537607e818f5cce2d3f20eacce84fe4649053faa41451afef46903→14124/fd0f6de2/286770c3a64176fab2b3d9ce51836baf68374b57729272f4209b9eb77b2965a4はchecked entry lint/body真正0。原13956九program＋ApiBudget一＋Timed三＋Metric二の15と全16post/183case重複0/31suite、全input/六Jar・各元postを確認。元実行/coverage再解析0、Source countersは別execのまま参照しglobal union0。自然branch0二Source/ParentGuard等の部分・未実測を別保持し、scopeを増やして正式/qualityへ加算しない。
+
+485/486の既二sectionへcurrentScopedHostMeasurementsPG14122の暫定参照のみ追加。旧995rows SHAとSnapshot currentQualification SHA/原予算・accepted/元snapshot意味を保持し、12typed反例（owner推定/自然0の100化/重複/合成/旧歴史改変/警告削除/正式増等）と全二JSON exact bytesを照合。485=3cacce76a16c553f556e6a00cf05a48b3d25e5ca701a55f5081c5b2ccf3e9234、486=3a31a522bb413fb638e0271611b9d2975131f6a594afbce5990c08610e7a67b9、前後全WBS監査は真正1/HOLDで未受入。
+
+BUG2091/YKT1839は456/460の次checkpointと2582へ追記訂正。実pmd_context_disposition.py=ca7dd1a05c261e06368413368be38d1f5de3ca714f636b881cf0e87e4c0035bc、pmd_contract_disposition.py=36d3462499c7637bf880a8a935d38af4ab4db73f4b7848d1f161a02f092d2705の非改変hash/全文・個別technicalだけ/qualityGatePass=Falseを確認。原略称誤記・元commitは保全、classifier/rules/Source/Test/原rawと実環境変更0。旧2581は所在を断定せず非該当。
+
+prebody helperの括弧Syntax lint1は未bind draftだけ是正、registry/body/postは唯一真正0。新Product PT/新機能/受入/正式0、原16/183/31の技術量は増えずWBS参照整備のみ。正式1964-53/17-190/工数null/QA051final・trace3574/2713/2673/全actualHOLD/全保全物と二held工具不変。原event2969にfresh/共有差・次commandを保存、専有費/N/T null。次は14126公開/exact保存push後、未資格の純mode/metric/context元wholeを索引/全bodyで選ぶ。
