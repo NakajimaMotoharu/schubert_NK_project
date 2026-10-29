@@ -25,3 +25,7 @@ NK-OPS-001/OPS009/UI251/SS341 §7.4・SS343/SSC060。Main `InspectorUnitSnapshot
 既公知3行traceはpost初hashの限界を維持。秘密/実credential/私有raw/VM/DB/鍵/保持原本/Graph9/二held工具はアクセス0。元jobは全owned真正終端・外部UNOBSERVED_HOLD、新操作/二重起動0。正式1964PT/53scope・個別17/190・工数null・QA051finalを不変更。障害を発見すれば修正前915/916へ起票する。
 
 実command/環境/対象commit・coverage/実際値/終了/BUG/証跡path/hashは2523と新専用manifestへ記録する。event2903のappend自体は成功、直後の表示で戻り値strをdict扱いしたTypeError1は管理表示のみ・再append0、製品/試験は未起動。既成功確認の再演ではなく、変更後の全program単一exec閉鎖に必要な再検証として区別する。
+
+### 事前静的実測と修正前起票（同群・予算不変更）
+
+初候補23582/13812は六compile0/PT0、13814は選択三Test raw3（新AvoidDuplicateLiterals1/既有限pool DoNotUseThreads2）、六Main13816/18は全1843/Low/Max指摘・MissingClass/Error0。13820のunused importはlint1/body未開始で原fileを保持、別13821でMain全byte不変/1978Test中当outer一physicalだけ変更/旧九assertと全source完全復元を真正0確認（manifest56f647d8…）。旧PTは起動しない。BUG2080/YKT1828修正前起票後、ExecMainCodeの四回の同一literalをprivate定数へ整理した。独立逆変換で23582の全tokenを復元し、新Test ID/expected/元九は不変。修正後は別sourceをfreezeし、13832以降の新compile・静的を当新sourceへ結合してから、未開始の全23を初回実行する。旧成功を新sourceへ移さず、未実行全23を再実行件数に数えない。専有消費/残工数はnull、actual source修正1と管理lint1を分離する。

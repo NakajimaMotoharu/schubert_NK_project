@@ -30,6 +30,7 @@ import org.junit.jupiter.api.Test;
 
 /** NK-OPS-001/OPS009/UI251/SS341 7.4; PG167/SSC060; UNIT001..008, 018/021. */
 final class InspectorUnitSnapshotTest {
+  private static final String FIXTURE_EXECMAINCODE = "ExecMainCode";
   private static final String FIXTURE_RESULT_SUCCESS_C6F30111 = "Result=success";
   private static final String FIXTURE_RESULT_EXIT_CODE_009C3BFA = "Result=exit-code";
   private static final String FIXTURE_EXECMAINSTATUS_30_43AE239C = "ExecMainStatus=30";
@@ -336,17 +337,17 @@ final class InspectorUnitSnapshotTest {
         var state =
             parse(
                 with(
-                    with("ExecMainCode", Integer.toString(code)),
+                    with(FIXTURE_EXECMAINCODE, Integer.toString(code)),
                     FIXTURE_EXECMAINSTATUS_179A8E0B,
                     Integer.toString(status)));
         assertEquals(
             code == 1 && (status == 0 || status == 10),
             state.receiptAfter(Optional.empty()).isPresent());
       }
-    for (String key : List.of("ExecMainCode", FIXTURE_EXECMAINSTATUS_179A8E0B)) {
+    for (String key : List.of(FIXTURE_EXECMAINCODE, FIXTURE_EXECMAINSTATUS_179A8E0B)) {
       for (String bad : List.of("", "-1", "01", "+1", "256")) invalid(with(key, bad));
     }
-    invalid(with("ExecMainCode", "7"));
+    invalid(with(FIXTURE_EXECMAINCODE, "7"));
     for (String id : List.of("", "f".repeat(32), "0".repeat(31) + "1"))
       assertDoesNotThrow(() -> parse(with("InvocationID", id)));
     for (String id :
@@ -440,7 +441,7 @@ final class InspectorUnitSnapshotTest {
       assertEquals(status, state.normalExitCode());
     }
     for (int code : new int[] {0, 2, 3, 4, 5, 6}) {
-      var state = parse(with("ExecMainCode", Integer.toString(code)));
+      var state = parse(with(FIXTURE_EXECMAINCODE, Integer.toString(code)));
       malformed(state::normalExitCode);
     }
   }
