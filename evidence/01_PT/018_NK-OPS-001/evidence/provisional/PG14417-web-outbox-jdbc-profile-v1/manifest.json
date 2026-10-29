@@ -1,0 +1,133 @@
+{
+  "actualDatabaseActions": 0,
+  "actualExit": 0,
+  "actualNetworkActions": 0,
+  "formalUpdated": false,
+  "helperSha256": "77b26001efedf8251758a81cd18adfcb8a006a870664f72bfc1981466b8eb1fe",
+  "invocation": {
+    "actualPythonCommand": [
+      "/usr/bin/python3",
+      "-B",
+      "tools/quality/pg14417_web_outbox_jdbc_profile.py"
+    ],
+    "arbitraryArgumentsRecorded": false,
+    "entrypointPath": "tools/quality/pg14417_web_outbox_jdbc_profile.py",
+    "entrypointSha256": "a800eefed755d8a8fff90832d07e2e7be594dba47ac74d6ca0ca82e5aba08219",
+    "helperPath": "tools/quality/host_tool_invocation.py",
+    "helperSha256": "85d616a3db4ff47f4c95ae2e0dd57954bc2b09f28b8f2a685b986e5621545c46",
+    "libraryPath": "tools/quality/pg14417_web_outbox_jdbc_profile.py",
+    "librarySha256": "a800eefed755d8a8fff90832d07e2e7be594dba47ac74d6ca0ca82e5aba08219",
+    "loadedProjectPythonSources": {
+      "tools/quality/g07_host_class_provenance_inputs.py": "a676cb3e4145177c3c243722d737592ce7d44c3f29cfe4f670662ef7651f046b",
+      "tools/quality/host_tool_invocation.py": "85d616a3db4ff47f4c95ae2e0dd57954bc2b09f28b8f2a685b986e5621545c46",
+      "tools/quality/pg14417_web_outbox_jdbc_profile.py": "a800eefed755d8a8fff90832d07e2e7be594dba47ac74d6ca0ca82e5aba08219",
+      "tools/quality/pure_jdbc_fixture_scope_v1.py": "faaad91d679005d57265298dadf8a75d448d44f89cd8763de0a0b21b87944d70",
+      "tools/quality/reviewed_jdbc_fixture_scope_v2.py": "77b26001efedf8251758a81cd18adfcb8a006a870664f72bfc1981466b8eb1fe"
+    },
+    "provenance": "OBSERVED_SYS_ARGV_AND_ORIG_ARGV_NOT_RECONSTRUCTED"
+  },
+  "labels": [
+    "WebOutboxMetricCollectorTest:forbidden:DriverManager",
+    "WebOutboxMetricCollectorTest:forbidden:DataSource",
+    "WebOutboxMetricCollectorTest:forbidden:InitialContext",
+    "WebOutboxMetricCollectorTest:forbidden:org.postgresql",
+    "WebOutboxMetricCollectorTest:forbidden:getConnection(",
+    "WebOutboxMetricCollectorTest:forbidden:jdbc:",
+    "WebOutboxMetricCollectorTest:forbidden:Class.forName(",
+    "WebOutboxMetricCollectorTest:forbidden:ProcessBuilder",
+    "WebOutboxMetricCollectorTest:forbidden:Runtime.getRuntime(",
+    "WebOutboxMetricCollectorTest:forbidden:EmbeddedActiveMQ",
+    "WebOutboxMetricCollectorTest:forbidden:ActiveMQConnectionFactory",
+    "WebOutboxMetricCollectorTest:forbidden:preserveFatal(",
+    "WebOutboxMetricCollectorTest:forbidden:ServiceProcessResources",
+    "WebOutboxMetricCollectorTest:forbidden:Files.",
+    "WebOutboxMetricCollectorTest:forbidden:Path.of(",
+    "WebOutboxMetricCollectorTest:missing:class WebOutboxMetricCollectorTest",
+    "WebOutboxMetricCollectorTest:missing:new WebOutboxObservationRepository()",
+    "WebOutboxMetricCollectorTest:missing:Thread.State.BLOCKED",
+    "WebOutboxMetricRecorderTest:forbidden:DriverManager",
+    "WebOutboxMetricRecorderTest:forbidden:DataSource",
+    "WebOutboxMetricRecorderTest:forbidden:InitialContext",
+    "WebOutboxMetricRecorderTest:forbidden:org.postgresql",
+    "WebOutboxMetricRecorderTest:forbidden:getConnection(",
+    "WebOutboxMetricRecorderTest:forbidden:jdbc:",
+    "WebOutboxMetricRecorderTest:forbidden:Class.forName(",
+    "WebOutboxMetricRecorderTest:forbidden:ProcessBuilder",
+    "WebOutboxMetricRecorderTest:forbidden:Runtime.getRuntime(",
+    "WebOutboxMetricRecorderTest:forbidden:EmbeddedActiveMQ",
+    "WebOutboxMetricRecorderTest:forbidden:ActiveMQConnectionFactory",
+    "WebOutboxMetricRecorderTest:forbidden:preserveFatal(",
+    "WebOutboxMetricRecorderTest:forbidden:ServiceProcessResources",
+    "WebOutboxMetricRecorderTest:forbidden:Files.",
+    "WebOutboxMetricRecorderTest:forbidden:Path.of(",
+    "WebOutboxMetricRecorderTest:missing:class WebOutboxMetricRecorderTest",
+    "WebOutboxMetricRecorderTest:missing:SimpleMeterRegistry",
+    "WebOutboxMetricRecorderTest:missing:90715647",
+    "WebOutboxObservationRepositoryTest:forbidden:DriverManager",
+    "WebOutboxObservationRepositoryTest:forbidden:DataSource",
+    "WebOutboxObservationRepositoryTest:forbidden:InitialContext",
+    "WebOutboxObservationRepositoryTest:forbidden:org.postgresql",
+    "WebOutboxObservationRepositoryTest:forbidden:getConnection(",
+    "WebOutboxObservationRepositoryTest:forbidden:jdbc:",
+    "WebOutboxObservationRepositoryTest:forbidden:Class.forName(",
+    "WebOutboxObservationRepositoryTest:forbidden:ProcessBuilder",
+    "WebOutboxObservationRepositoryTest:forbidden:Runtime.getRuntime(",
+    "WebOutboxObservationRepositoryTest:forbidden:EmbeddedActiveMQ",
+    "WebOutboxObservationRepositoryTest:forbidden:ActiveMQConnectionFactory",
+    "WebOutboxObservationRepositoryTest:forbidden:preserveFatal(",
+    "WebOutboxObservationRepositoryTest:forbidden:ServiceProcessResources",
+    "WebOutboxObservationRepositoryTest:forbidden:Files.",
+    "WebOutboxObservationRepositoryTest:forbidden:Path.of(",
+    "WebOutboxObservationRepositoryTest:missing:Proxy.newProxyInstance(",
+    "WebOutboxObservationRepositoryTest:missing:Connection.class",
+    "WebOutboxObservationRepositoryTest:missing:PreparedStatement.class",
+    "WebOutboxObservationRepositoryTest:missing:ResultSet.class",
+    "WebOutboxObservationRepositoryTest:missing:borrowed connection must not be mutated or closed",
+    "WebOutboxObservationRepositoryTest:missing:FROM schubert_web_session.web_log_outbox GROUP BY status",
+    "null",
+    "empty",
+    "unknown-key",
+    "null-text"
+  ],
+  "negativeVectors": 61,
+  "newAccepted": 0,
+  "positive": 1,
+  "productTestsExecuted": 0,
+  "required": {
+    "WebOutboxMetricCollectorTest": [
+      "class WebOutboxMetricCollectorTest",
+      "new WebOutboxObservationRepository()",
+      "Thread.State.BLOCKED"
+    ],
+    "WebOutboxMetricRecorderTest": [
+      "class WebOutboxMetricRecorderTest",
+      "SimpleMeterRegistry",
+      "90715647"
+    ],
+    "WebOutboxObservationRepositoryTest": [
+      "Proxy.newProxyInstance(",
+      "Connection.class",
+      "PreparedStatement.class",
+      "ResultSet.class",
+      "borrowed connection must not be mutated or closed",
+      "FROM schubert_web_session.web_log_outbox GROUP BY status"
+    ]
+  },
+  "safetyOrPermissionOverride": false,
+  "source": "6b53efeec87f3ec36a840dd8e7759656cb4aee5c",
+  "testHashes": {
+    "WebOutboxMetricCollectorTest": {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebOutboxMetricCollectorTest.java",
+      "sha256": "4c4596c912ef7772249b63e75becd7b396deb6defce9599bfb829e6e711240d5"
+    },
+    "WebOutboxMetricRecorderTest": {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebOutboxMetricRecorderTest.java",
+      "sha256": "ff7e8faa0bc057eaa1a691b0ee855b7c37b65463d458a573667e3896e1a41b32"
+    },
+    "WebOutboxObservationRepositoryTest": {
+      "path": "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/monitoring/WebOutboxObservationRepositoryTest.java",
+      "sha256": "175d1c5385409c114cc2e8cf4d80f7028acf2c5bac6918e6293191a7d2f88078"
+    }
+  },
+  "toolChecks": 62
+}
