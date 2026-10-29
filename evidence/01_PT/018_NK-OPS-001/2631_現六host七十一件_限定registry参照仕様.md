@@ -1,0 +1,9 @@
+# 2631 現六host exec七十一件の限定registry・WBS参照仕様
+
+2026-10-30 JST、branch dev-foundation/Source6b53/保存814e95126992d7d8a2f456c002b44caa58a26d9d。群3018開始0.25/1.5/3pp cap10、PG-D880、製品実行0。旧14260/62の3exec15は正しい履歴として保持し、新六post71/10suiteだけを新registry14302→独立14304へ固定。元14244/54/58/72/94/98の実hashと六compile-sourceを照合し全元XML71を一意join。execは合成せず各完全Sourceのcounterを別々に保持する。
+
+期待は個別postの完全Source閉包から独立算術：17Source/21physical(code20/metadata1)、四100九Source13physical・自然branch0六Source6physical・metadata一Source・未達Inbound一Source（L10/M2miss）。noCodeはclassfile全method hasCode=falseと測定全0、natural branch0は実測branch covered/missedとも0かつLMC三counter100、四100へ転記しない。27ownerpathのknown15/UNKNOWN12を既canonicalのまま照合し費用ownerを捏造しない。
+
+元XML/hash/Source/unique/count/actualexit/CRC・各完全閉包の独立確認とmetadata変異を実施し、新テスト/PASS/正式/工数率/品質受入に換算0。次14306は二WBS既sectionに新参照fieldだけをside追加し、原14264/旧995runtime/既資格/master481484/予算/受入を不変更、486 inventorySha256だけ現byteへ再束縛。14308独立は元HEADと全旧semantic不変・新field/hash/型/件数/unknown/natural0/noCode/未達と変異拒否・所定wholeaudit前後の真正HOLDを照合。
+
+commandは各新工具をpg11123_checked_python_entry経由で一回。全体audit1-HOLDを限定writer成功へ混ぜず、元PT/coverage/外部actual/HOLD工具二件は実行/読取0。結果・hash・時刻・cursor・未検証を2632/456へ保存、通常区切りでは停止しない。
