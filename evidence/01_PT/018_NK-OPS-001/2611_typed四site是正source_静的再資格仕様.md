@@ -1,0 +1,9 @@
+# 2611 typed四site是正source 静的再資格仕様
+
+着手前2026-10-30 JST、source6b53efeec87f3ec36a840dd8e7759656cb4aee5c/PG14216・14218。独立postで全1843Main/1978Testを照合し、変更28physicalは三Main source closure内だけ・他1815Main/全1978Test byte不変、原PT未実行。変更にはdebugの影響もあり28を28新機能/障害としない。新群CURRENT_TYPED_GUARD_SOURCE_QUALIFICATION_V1/WBS-F03、開始0.5/2/4pp cap10、追加発見是正後のsource再認証/必要静的検証費として元計画消化と分ける。
+
+PG14222は元f03_spotbugs_freshを用い、現source六Jarの全1843MainをSpotBugs4.10.4/max/low・exclude/onlyAnalyzeなしで新-only slotへ一度解析する。reuseはtool runtime/SDK byteだけ、旧Product解析結果ではない。事前14218のcandidateSourceHashesとnormal14216 hash固定。rawStatic=nullはPMD/CS未測定を表しSpotBugs0で全静的0へ変換しない。独立postは元XML/classstats全件/aux・Jar/source hashと真正終了を照合し製品PT0/全451未受入を維持する。
+
+PG14226は既全Java static測定器13253と同じ固定rule/Java25/record対応PMD7.28/Checkstyle14.3・aux正規化を使い、changedInputPaths三Mainの全fileだけを新-only slotで解析する。1821全Javaの確認再演ではない。全source/hash/六Jar/1978Testの不変照合を保ち、新解析scope=3Main/0Test、原警告/位置/hashと処理errorを保存する。raw warningを違反確定/免除へ一括変換せず、処理成功とquality gateを分離。後続の独立postとcontext/原警告のoffset対応は別判定。抑制/rule緩和/警告削除0。
+
+PT着手判定=HOST_STATIC_ONLY。全commandは静的SDKを起動するだけで製品Main/Test/graph/DB/VM/Root/サービス/鍵/permit/回収/配備/native等0。実DBを含む元Application PTとgraph9はHOLD、新mock/抽出fixtureを作らない。変化した三Mainの動的再試験/四coverage/同source全451は未成立。成功した旧0061の400件を新sourceへ転用せず、正式1964/53・個別17/190・工数null/QA051final/全HOLDを維持する。各真正command/終了/source・tool・report hash/原本pathはmanifest、結果2612へ記録する。
