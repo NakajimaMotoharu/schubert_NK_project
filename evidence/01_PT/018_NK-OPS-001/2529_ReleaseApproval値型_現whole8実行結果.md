@@ -1,5 +1,11 @@
 # 2529 ReleaseApproval値型 現whole8実行結果
 
+## BUG2081/YKT1829 枠表記の追記訂正（2026-10-29、原本文保全）
+
+event2910→2911/source0061d178cda80c2ce3926290619c64db125dbcfc/共有31→32/同reset1793774153/共有観測差1pp/専有費null/最後のfresh残68（2026-10-29 01:11:50 UTC）。
+
+末尾の31→31/丸め差0は説明文の転記誤りで、この追記と原event2911を正とする。原API/eventは32を正しく保存済み、予算/個別費null/試験/coverage/受入不変。原a1bd/13876は保全し、履歴や試験を再演しない。共有観測差1ppをPGPT専有費や実トークン数へ換算しない。
+
 2026-10-29、2528/PG-D829/source0061d178c不変更。完全ReleaseApproval一physicalのline21/method7/class1/branch10、全miss0・gate0。公開claims値型の単一exec測定であり、署名/承認発行/Root/実原本の認証は未受入HOLD。Source/Main/Test変更/新Test ID/新受入0、正式1964PT/53scope・17/190・工数null/QA051final不変更。
 
 |証拠（018_NK-OPS-001/evidence/provisional配下）|SHA-256 / 結果|
