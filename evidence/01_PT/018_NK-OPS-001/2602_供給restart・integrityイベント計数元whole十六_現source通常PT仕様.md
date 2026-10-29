@@ -1,0 +1,7 @@
+# 2602 供給restart・integrityイベント計数元whole十六 現source通常PT仕様
+
+2026-10-30 JST/PG-D867/event2988/source0061、F03開始0.5/1.5/3cap10・四Main/Test canonicalP01809候補未受入/追加費0。原1710/1708と後続・current24exec384method57suiteを照合、元8/8全body/helper/initializer/counter factory・increment callback/Source二とBatchStep純enum、既Mode/Serviceを全文読取しPT_DEFAULT。自己SimpleMeterRegistryと供給閉enumだけで実process/systemd/history/権限/DB/鍵/file/config probe/repair/retirement/intent/permit/回収0、HOLD whole抽出/新stub代替/拒否探索再試行0。
+
+RESTARTMET001～008：固定四reason×六serviceの24series/初期0とborrowed ownership、全pair4回＋一回→総97/対象5・隣4だけ、parse大小文字/空/未知/nullとvalues defensive copy/原enum factory。両modeのnull拒否/STD登録・保持0、第二factory失敗はprefix1/同Throwable/未close、increment前後故障は一回のみ/0又1・retry/補償/formatなし。64taskは入力から事前計算した24pair頻度と一致/別owner7、foreignGauge value7は置換/close不可。INTEGRITYMET001～008：固定三area×十step30series・BatchStep二backup真/他偽、全pair4回＋一回→総121、parse/defensive copy/両mode/null/第二factory/increment前後故障/64事前頻度・別owner/foreignGaugeの同観点。期待はSS351閉label/JDK値/独立literal/入力から事前計数でProduction method生成0。
+
+14182 checked entry→Java25/Xlint-all/Werror/元16二suite/新append=false/session、自己pool元get5秒とinvokeAll/TWR局所絶対期限不足・外child180秒を区別。14184全Source六normalJar/原XML/FES0/八false-result/sessionCRC・二Source全四physical（各outerとReason/Area）の全Codeを独立測定、helper BatchStepの資格へ拡張0。元assert/default generated filter保持・人工呼出/追加除外/旧exec合成/既current24-384再演0、自然0/未達は保持。2603結果へ時刻/OS/JDK/branch/source/command/退出/各Test入力期待実際/counters/BUG/path/hash、正式/個別受入/工数null/全451-F03・全actualHOLD/QA051final維持。

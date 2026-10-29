@@ -1,0 +1,7 @@
+# 2603 供給restart・integrityイベント計数元whole十六 現source実行結果
+
+2026-10-30 JST/2602/PG-D867/event2988→89/source0061・F03開始0.5/1.5/3cap10・canonicalP01809候補未受入/追加費0。元RESTARTMET001～008/INTEGRITYMET001～008全16/2suite/FES0、入力独立期待2602・実際全PASS/原XML各case/hashへ固定。command `python3 -B tools/quality/pg11123_checked_python_entry.py tools/quality/pg14182_restart_integrity_metric_whole_sixteen_pt.py`、entrybb002d8a8f5f44e9af5f06bf3dc50b120c9a3d1cf053c4351d283f35c47c5fae/session19184真正0。時刻/OS/Java25.0.4/branch/source/六normalJar/空設定/command/退出は原manifest。
+
+原`evidence/provisional/PG14182-restart-integrity-metric-whole-sixteen-pt-v1/manifest.json` SHA256 `bdf28aa1c4960cede1f5c0dcfeb61d5517dccae973f5080f644619cf69d0352c`。同entry14184 post/entrySHA `dd993b45e5fa7157627eefce740763923e7cd47bfa9143f32f3d7ef0a98208af`/真正0、`evidence/provisional/PG14184-restart-integrity-metric-whole-sixteen-post-v1/manifest.json` SHA256 `b347197725c6dc320320ed9791e796e4156c8ff20f5092093e3d57da80d494d7`。全Source六Jar/原XML/八false-result/単一exec-sessionCRC0、二Source四physical全Code独立測定・各四100、L61M10C4B24全miss0。元assert/default生成filter保持、追加除外/人工呼出/旧execunion/元16再演0、BatchStepはhelperで対象資格に含めない。
+
+製品/工具失敗0・新BUG/SSCなし。自己SDK/供給enumのみ、実process/DB/鍵/整合性probe/repair/retirement/サービス操作0。current24→25exec/384→400method/57→59suite・技術四10037→39program/69→73physical・自然0六Source別。WBS side14176は先行24/384/57履歴を保持し当16は別証拠。正式1964-53/17-190/工数null/QA051final/全F03-451/原予算・995runtime不変、共有枠原event2989・専有費N/Tnull。全actualHOLD/保全物維持、次=14186公開/exact保存push→静的未参照Main generic-catch根拠の限定審査、既2125 thread文脈/現25-400成功を重複分類/再演しない。
