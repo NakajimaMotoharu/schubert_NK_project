@@ -1,0 +1,15 @@
+# 2560 残Main型判定二十二rawと五十合流 静的点検結果
+
+合流完了追記（2026-10-29）：14032 entry91753c62/session36903/manifest 00e70a07521d68dbaa468b00f5fb927afc2a01675699b0e3d176b9d624b88cd3、14034 entry18b22777/session10826/manifest 84a1e12d207f47f14ed490b179718a5806b330ecb335325c2d7593dc1c241658 は真正0。Batch28＋残22を重複なく一度でjoin、raw6247/corr3194/全995歴史runtime/予算受入不変、refs3491/pending2630/noRef2756・全WBSaudit1/HOLD。485=f2ac41a15f565c225d5fd809cdc9e0e2e31b9ffe5f65bb2f34901acfbd9f314f/486=a361a94f5f92afcad4c3c0e3d69b300337048ae63935ddfed45e24f81bd8be5e、八typed反例0。現原catalog Mainの未参照catchは00048/02778二件、全raw警告/実測不足は残る。
+
+PGPT-20261008-2945：共有38→38/reset1793774153/丸め共有差0pp≠専有費0、専有費・N/T・工数null、fresh残62（2026-10-29 13:26:21 UTC）。
+
+以下の未合流記述は当時の段階記録として保持し、本追記を現在地とする。製品PT/coverage/native/新受入の加点0。
+
+2026-10-29/2559・PG-D845/event2944/source0061/HEADd08abbd3e/開始1/4/8pp cap10。14028 entrydc40b9ca/manifest **ac8f64cc8ae4758453c9e1e3a63b759246397c393b522728510110a18d75a391**、14030 entry3e0376d9/manifest **84a7ac1e6f3bcee3fdce0d04b1d96f1a7dd9a5aab1400b71f273f221fc7b8b85**、各checked entry真正0。
+
+22raw/15span/11catchを原XML/offset/ordinal/rowhash/現byte/485ownerへ結合。16typed反例・41source guard削除反例・4nested catch誤対応反例0。Scenarioのtyped COLLISION判定とReplyのprimary Error判定は、内側catch終了後の外側catchに属する。単なる直前catchのrfind結果を正解にせず、別原XMLと明示宣言へ対応した。動的Throwable/fixture/bind/start/close/DB/Backup/getent/process/TERM/Root/native操作0。
+
+ReadinessはDB/JMS close成功まで進まず、直接primary Errorを保持、非fatal primary＋close Errorだけ昇格しcatalog前に元graphを分類する。ApiMessagingRuntimeは通知/cleanup/first-direct Errorと逆順成功phaseを区別、actual consumers/UNKNOWN/既Graph9は未検証HOLD。Scenarioは未公開COLLISIONだけretry、cleanup不明でreservation保持・ready削除0を維持。Cleanup admissionとConfigurationGroupResolverは各checked/unknown順位と割込/復元・所有条件を区別し、既データ回収や実NSS確認へ拡張しない。Reply startupの元primary Errorをcleanupで置換しない。
+
+QuestionSubmissionの1rawはUnicode escapeのため現span工具非適用を保持、BackupArtifactVerifier1rawは未選択。未判定を消したり未参照ゼロとはしない。14032/34の合流は未実施で、28＋22の双方の原postと原予算/995歴史runtime/正式受入を保持して一度に追記する。元PG/PT実行・source/正常期待値/承認SSの変更なし。全raw/whole pendingを維持、代替完了/PASS/coverage/native/新受入に計上0。

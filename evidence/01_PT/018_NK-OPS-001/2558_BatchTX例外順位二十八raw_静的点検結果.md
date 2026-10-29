@@ -1,5 +1,11 @@
 # 2558 Batch TX例外順位二十八raw 静的点検結果
 
+合流完了追記（2026-10-29）：14032 entry91753c62/session36903/manifest 00e70a07521d68dbaa468b00f5fb927afc2a01675699b0e3d176b9d624b88cd3、14034 entry18b22777/session10826/manifest 84a1e12d207f47f14ed490b179718a5806b330ecb335325c2d7593dc1c241658 は真正0。Batch28＋残22を重複なく一度でjoin、raw6247/corr3194/全995歴史runtime/予算受入不変、refs3491/pending2630/noRef2756・全WBSaudit1/HOLD。485=f2ac41a15f565c225d5fd809cdc9e0e2e31b9ffe5f65bb2f34901acfbd9f314f/486=a361a94f5f92afcad4c3c0e3d69b300337048ae63935ddfed45e24f81bd8be5e、八typed反例0。現原catalog Mainの未参照catchは00048/02778二件、全raw警告/実測不足は残る。
+
+PGPT-20261008-2945：共有38→38/reset1793774153/丸め共有差0pp≠専有費0、専有費・N/T・工数null、fresh残62（2026-10-29 13:26:21 UTC）。
+
+以下の未合流記述は当時の段階記録として保持し、本追記を現在地とする。製品PT/coverage/native/新受入の加点0。
+
 2557/58/PG-D844/event2942→43/source0061/開始0.5/2/4cap10。旧14020/754f591cは全catch数4と指摘包含catch数2の混同でbody1/OUTなし、BUG2085/YKT1833先行→14021/feddb61f/544d50d4→14022/7989dbe8/session90720/2be36f60真正0、28raw/14operand/内側cleanup二catch・16typed/22source/四anchor反例を確認。STARTの四は原文保持・ENDで訂正。Main/Test/原XML/PT/coverage/受入0。原WBS refs3441/pending2580/noRef2806は未変更、点検28は未合流として別保持。
 
 PGPT-20261008-2943：共有38→38/reset1793774153/共有観測差0pp（専有費0の証明ではない）・N/T/専有費/工数null、fresh残62（2026-10-29 13:15:51 UTC）。
