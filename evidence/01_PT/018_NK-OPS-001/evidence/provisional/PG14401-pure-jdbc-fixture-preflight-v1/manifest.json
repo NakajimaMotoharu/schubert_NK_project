@@ -1,0 +1,77 @@
+{
+  "actualDatabaseActions": 0,
+  "actualExit": 0,
+  "actualNetworkActions": 0,
+  "bug": "BUG-2100",
+  "formalUpdated": false,
+  "helperSha256": "faaad91d679005d57265298dadf8a75d448d44f89cd8763de0a0b21b87944d70",
+  "invocation": {
+    "actualPythonCommand": [
+      "/usr/bin/python3",
+      "-B",
+      "tools/quality/pg14401_pure_jdbc_fixture_preflight.py"
+    ],
+    "arbitraryArgumentsRecorded": false,
+    "entrypointPath": "tools/quality/pg14401_pure_jdbc_fixture_preflight.py",
+    "entrypointSha256": "92e86ef318c6613541b1daffa3eace28494ba98814b07b685ad74a2e9679327e",
+    "helperPath": "tools/quality/host_tool_invocation.py",
+    "helperSha256": "85d616a3db4ff47f4c95ae2e0dd57954bc2b09f28b8f2a685b986e5621545c46",
+    "libraryPath": "tools/quality/pg14401_pure_jdbc_fixture_preflight.py",
+    "librarySha256": "92e86ef318c6613541b1daffa3eace28494ba98814b07b685ad74a2e9679327e",
+    "loadedProjectPythonSources": {
+      "tools/quality/g07_host_class_provenance_inputs.py": "a676cb3e4145177c3c243722d737592ce7d44c3f29cfe4f670662ef7651f046b",
+      "tools/quality/host_tool_invocation.py": "85d616a3db4ff47f4c95ae2e0dd57954bc2b09f28b8f2a685b986e5621545c46",
+      "tools/quality/pg14401_pure_jdbc_fixture_preflight.py": "92e86ef318c6613541b1daffa3eace28494ba98814b07b685ad74a2e9679327e",
+      "tools/quality/pure_jdbc_fixture_scope_v1.py": "faaad91d679005d57265298dadf8a75d448d44f89cd8763de0a0b21b87944d70"
+    },
+    "provenance": "OBSERVED_SYS_ARGV_AND_ORIG_ARGV_NOT_RECONSTRUCTED"
+  },
+  "labels": [
+    "forbidden:DriverManager",
+    "forbidden:DataSource",
+    "forbidden:InitialContext",
+    "forbidden:org.postgresql",
+    "forbidden:getConnection(",
+    "forbidden:jdbc:",
+    "forbidden:Class.forName(",
+    "forbidden:ProcessBuilder",
+    "forbidden:Runtime.getRuntime(",
+    "forbidden:EmbeddedActiveMQ",
+    "forbidden:ActiveMQConnectionFactory",
+    "forbidden:preserveFatal(",
+    "forbidden:ServiceProcessResources",
+    "forbidden:Files.",
+    "forbidden:Path.of(",
+    "missing:Proxy.newProxyInstance(",
+    "missing:Connection.class",
+    "missing:PreparedStatement.class",
+    "missing:ResultSet.class",
+    "missing:borrowed connection must not be mutated or closed",
+    "missing:SELECT state, COUNT(*) AS job_count FROM schubert.async_jobs GROUP BY state",
+    "null",
+    "empty",
+    "unknown-key",
+    "null-text"
+  ],
+  "negativeVectors": 25,
+  "newAccepted": 0,
+  "positive": 1,
+  "productTestsExecuted": 0,
+  "source": "6b53efeec87f3ec36a840dd8e7759656cb4aee5c",
+  "testHashes": {
+    "AsyncJobCountRepositoryTest": {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/AsyncJobCountRepositoryTest.java",
+      "sha256": "3f6c16ee0a85788b96746a87d870d2874d4ee753e639abb89796f0fcba632042"
+    },
+    "AsyncJobMetricCollectorTest": {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/AsyncJobMetricCollectorTest.java",
+      "sha256": "e91c368880999ba74d2157210ecaa3c80f4388ee80a4d94f1862a0efc1c973ed"
+    },
+    "AsyncJobMetricRecorderTest": {
+      "path": "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/AsyncJobMetricRecorderTest.java",
+      "sha256": "714b91b3dd34aed6cc3379bf02d161f6f12f0216bffbb9859822efb4ee5aa3d6"
+    }
+  },
+  "toolChecks": 26,
+  "ykt": "YKT-1847"
+}
