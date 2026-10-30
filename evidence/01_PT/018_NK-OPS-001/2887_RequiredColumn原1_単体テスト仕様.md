@@ -1,0 +1,5 @@
+# 2887 RequiredColumn原1単体テスト仕様
+
+source6b53/normal14216、工程/実MainownerP00405baseline/TestUNKNOWN。NK-DAT001/MSG002・DAT009/UI241242/SS331332354/PT-QUALITY002/既BUG016YKT013。Mainと原RequiredColumnTest全体を読了、原method requiredValuesRetainIdentityAndNullFailsWithSqlState（@DisplayName保持）一件だけを実行。String/Instant/byte[]のsameobject identity、不正NULL→SQLDataException SQLSTATE22004・固定秘匿message・cause無しを独立literalでassert。実DB/SQL/driver/credential/file/Graphなし、NPE catch正常化0。public requireValue全null/nonnull条件を検査、allocation等のJDK内部障害を人工発生させない。
+
+実Jar全Source physicalを事前確認、rawoneownJVM/元XML/宣言ID/actualexit/環境command/SHA/CRC/sessionと四counterを保存、post/独立証跡へ対応。private空utility constructorの実Codeをinventoryに保持し、公式JaCoCo PrivateEmptyNoArgConstructorFilterが適用される場合は対象/理由を結果へ明記（外部から呼べない空constructor、追加除外/反射/無意味な到達テストなし）。Sourceの全意味が備わったことと実DB後条件/実schema適合は別。本通常PTの実四counterだけを数え旧success/nativeを転用しない。group3281の0.25/1/3pp固定、共通metadata結合は先行Main群へ含め二重課金0・専有費token不明null。正式/HOLD/工数null不変更、結果2888/後続manifestへ追跡。

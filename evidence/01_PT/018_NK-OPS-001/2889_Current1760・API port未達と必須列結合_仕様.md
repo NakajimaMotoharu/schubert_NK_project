@@ -1,0 +1,3 @@
+# 2889 Current1760・API port未達と必須列結合仕様
+
+元1748へ2886原11/2と2888原1/1を一度のmetadata結合で追加。原run/source/oracle/費用は二群別、success/gapは混同しない。Main Source全三physical(一Code二NoCode)は未達strictgate1、Required一Source一Codeだけ四100。旧全proof/cost/domain/owner/108反復とNoCode19全値を保持し新接口二だけ足す。15312 registry→15314独立34反例→15316二side→15318独立28反例。1760/207・362Source484physical463Code21meta、四197/303(292Code11meta)、自然153/165・standalone NoCode6/6・未達6Source10physical（旧5/7＋Main1/3）、原85+Catalog1=86JVM1868method=1760+108、owner277baseline/204candidate/114UNKNOWN。元二side/481484の全意味保持、wholeaudit実1HOLD/正式1964-53/17-190/工数null/QA051final不変更。metadata費はP01805群へ含め、Required群との等分/再加算0。

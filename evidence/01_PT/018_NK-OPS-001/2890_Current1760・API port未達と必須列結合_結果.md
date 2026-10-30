@@ -1,0 +1,5 @@
+# 2890 Current1760・API port未達と必須列結合結果
+
+2889全真正0。15312/a592370c→4b526f197b393c25f9d77293ad2dad1e7ab91a1724c835aa6bb552385397d080、15314/73fc2cbe→5029262deaaafab2fe1b1ff4a6f7472a547941126eef469078262b554fea2c86/34反例、15316/6a342677→8f933ab2ba32b7f8da8a15ef30084ae3514b54990e4fe9b0ba5ad74f4c8df301、15318/0c9ec919/session16477真正0→619cf8bbf61d2bffb487764c61584bf38ce185d8d5cc6ce77a7716027fb67b6e/28反例。
+
+1760/207・362Source484physical463Code21meta、四197/303(292Code11meta)、自然153/165・NoCodeSource6/6・未達6/10、原85+Catalog1=86JVM1868method=1760+108repeat、owner277/204/114UNKNOWN。Main159line29method6branch missを残し、Requiredのみ新四100。二接口NoCodeの実属性/元proof参照と旧metadata19全値、全旧proof/cost/domain/owner/481484/二side-onlyを確認。wholeaudit前後1同physical-scope HOLD、正式1964-53/17-190/工数null/QA051final/全HOLD不変更、新受入0。元二群の費用/失敗/実欠測を保持・Product/原post再演0、実commit次publicsaveへ。

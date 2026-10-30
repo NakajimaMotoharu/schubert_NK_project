@@ -1,0 +1,11 @@
+# 2886 API設定data-port/readiness原11結果
+
+2885/source6b53/normal14216。15300/80777cc1/session11021 lint/body真正0、原whole11/2 FES0、manifestde9cb79a296838fd5112450d14ac6531dbb510eed64860853a807108fdbd58d4。元XML/宣言/exec/環境/command/開始終了はraw/stagesへ保存。static admittedConfiguration8/readiness3だけ、Main ctor/main/run/実Rootは未実行、別原MainTest6はHOLD・抽出0。
+
+15302/00bea87d/session74790 lint/body0、manifestff665193ddb62c0ed11afac98a9bc5465167ad5348552b2d1d093951de59b92b。全Main三physical=Code一/NoCode接口二、同Jar/SHA/CRC/単一session一致。実counterはL17covered159miss/M5covered29miss/C1covered0miss/B12covered6miss、四100=false・three100=false・自然B0=false・strictgate1を保持、原11成功をMain全体/native完成へ変換0。未達全lineはpost.missedLinesへ保存し長い原ログを反復読取しない。
+
+passive六prefix（NativeGate/NativeObservation/ChildNativeIo/ApiLifetime/ServiceResources/ConfigNio）は各normalJar存在・元同exec記録0/trueprobe0、reader compile/read0・異session/不足args期待1。Productロード/呼出なし、実credential/file/DB/JMS/native/admission/lifetime/Unit/権限操作0、graphHOLD不変更。helper ServiceStartupAdmission.Configurationの固定hash検査は純dataだけ、NativeGate等へ進まない。
+
+15304/e671f2b4は製造中工具の初回lint1（unused local natural）、bodyStarted=false/OUT0。原draftを保存し新15305v2/725094a4 lint/body0→4cc5defabe34aedf85ef9bf461d98138b5a0b8b568a3a49cbcf0a0719564cf79、29意味反例・原11XML/全Main実未達/真NoCode二・passive六境界0/独立8管理truth＋4runtime truth/short-circuit順/工場sampling0を確認。SS343 SSC301・既独立23key goldenのafec3045...hash（PG15226/7fad8f75）と一致し期待値のProduction再計算0。Main baselineP01805/Test二UNKNOWNを保持。初回未完成工具lint失敗は製品障害や試験失敗へ加算せず、本文実装済み不一致なし・新BUG0。原11/post/旧golden Test再演0。
+
+global registry1748は未更新、新11は独立資格済み・全旧caseとの非重複確認済みの暫定未結合。内部効率改善として次の独立通常単位と一括metadata結合し、個別原run/費用/期待値/実未達/品質条件を分離保持する。正式1964-53/17-190/工数null/QA051final/全HOLD不変更、新受入0。event3279の1/4/8pp固定、metadata結合費は当群へ含め他群へ再加算しない。

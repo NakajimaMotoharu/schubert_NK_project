@@ -1,0 +1,9 @@
+# 2888 RequiredColumn原1結果
+
+2887/source6b53/normal14216。旧15306/c5467b11 lint0/body1・OUT/compile/JVM0はimport java.sql一括禁止がSQLDataException型だけを誤検出、BUG2125/YKT1872先行起票・旧凍結→新15307v2/c5b464a2/session5831 lint/body真正0、原1/1 FES0/manifestcaafa8ae9909b8cd0f3ff7a7e2293c8a07260d1cab79505486e6b053f6b4f189。SQL importは例外一型だけ、Connection/DriverManager/Statement三拒否と実getConnection/DataSource禁止維持、実DB/SQL/driver/Graph/file/外部0。@DisplayNameと原method全文を保持し、原1初回・確認再演なし。
+
+旧15308/a5aa2660 lint0/body1・OUT/SLOT0はduplicate反例がindex1を前提にしてcase1でIndexError、BUG2126/YKT1873先行起票・旧凍結→新15309v2/27f377e2 lint/body真正0、manifeste26d863768b8659de2840b77421fd2f675d66a5dd9418b91a1796e691853d632。case0 copyをappendし一件→二重をvalidator拒否へ確認、元8metadata反例を完了。全一Source一physicalCode/SHA/CRC/単一exec一致、L3M1C1B2全miss0四100/strictgate0。
+
+private空utility ctorは実Code flags2/descriptor()V/codeLength5/source空bodyをinventoryに保持、公式JaCoCo PrivateEmptyNoArgConstructorFilterの既定動作による対象/理由を明示。実classfileのCode method2と測定METHOD1は別指標、追加除外/反射や空constructor到達の無意味なassertion0。15310/8f86f19b lint/body0→700b7781f168bf6fcab5da9c0c014233d2e56fa10dcd901858c7d03f064941aa、29意味反例/三SQL import反例・独立22004/固定message/cause0・String/Instant/byte[]同identity/SS332必須NULLのepoch補完禁止・実official core内filter class存在を確認。Main baselineP00405/TestUNKNOWN保持。
+
+横展開2125は旧新raw/原Main-Test/2887-88、15300の二原Test/15240の原Testはsql importなし・元normalhash一致で非該当。2126は旧新post/原case1、元15152/15302は実case16/11と元資格hash一致でindex1が有効・非該当、成功post再演0。限定対象実hash/元資格は15310.horizontalScopeHashes/各invocation/今回publicsaveへ保存。両工具scope限定完了2026-10-31・修正commit次保存後追記、全過去/held未保証、品質/仕様/正式/HOLD不変更。元3281予算0.25/1/3pp固定、共通metadataは先行Main群費用へ含め二重加算0、専有費/実token不明null。
