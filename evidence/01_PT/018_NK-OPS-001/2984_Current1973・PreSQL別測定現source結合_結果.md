@@ -1,0 +1,3 @@
+# Current1973・PreSQL別測定現source結合 結果
+
+2026-10-31/PG-D955/2983仕様。15688 entry5714e13b/manifest1788fd682f0aa663ca6f2225bdd102d24198f049dd94b1f800d8cceffbf75ac3、15690 entry70a091f5/session18317/manifestd6431a7e22daa5e9dfb540fe7a863332ee9f4286b8d564683f50de61c3f46b0d全真正0。registry15684/15687固定実hash・34反例とWBS二side29反例を照合。追加13caseのみ/新Source0/全438Source proof-counter不変更、additionalScopeReferencesに別実行測定を追記し、既API digest訂正・全旧history/費用/481484保持。485新overlayと486 inventorySha256のみ、whole audit前後actual1同physical-scope HOLD、全体451合格としない。BUG2140/YKT1887後続PINにNone無し・実固定値と独立hash一致、旧失敗を保持、当工具有限scope完了。Product再演/VM/DB接続0、正式/受入/工数変更0。
