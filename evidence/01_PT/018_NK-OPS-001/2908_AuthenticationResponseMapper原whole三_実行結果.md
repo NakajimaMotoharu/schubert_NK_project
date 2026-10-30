@@ -1,0 +1,9 @@
+# 2908 AuthenticationResponseMapper原whole三・限定結果
+
+2907、source6b53/normal14216/保存HEADa230eb7db79fdc756b3e9b509b447651e0327af2/push2193真正0。PG15384/09336787/session61302真正0、原3/1 FES0、rawf32bdb8fa5350ca001c9454587ba5cc3140500fb92d74672fe7b5b69e83ea492。PG15386/195e02de/sharedv2、post5aefc24bbc8bbd2ecb6a36bafe8ed439ee3208da641771c8e8787efe54d3b59b真正0・元exec一回passive分析/8metadata反例、全一Source一Code L34M6C1B6miss0・四100/strictgate0。主Source以外のDTO/Protocolは別契約で完了加算しない。
+
+PG15388/a48ac4e7、独立manifeste4b7f18e4085cb8c0c51b0f5a90b284b0490c31d939feb7cbd27995177c913cb真正0・24意味反例。origin/main UI234原8fieldの開始/長さと432byte、logout2field/24byte、UTF8利用者9byte＋space55、二role/合成context/数字fill/固定利用者messageとerror identity全space、Python日時+9h/millis floorを独立照合。11期待vector/9uniqueSHA（重複期待をcase増加にしない）をmanifestへ保存、動的実値は原JUnit全byteassertの成功と原Test pinで結合する。実wire受信や実Login応答を捕捉した証拠とはしない。公開a64/UUID0,1は元Test合成goldenのみ、実credential/sessionを収集/保存0。
+
+manifestはevidence/provisional/PG15384-auth-response-mapper-three-pt-v1、PG15386-auth-response-mapper-three-post-v2、PG15388-auth-response-mapper-three-independent-v1のmanifest.json。実日時/OS/JDK25.0.4/argv/branch/source/exit/XML/exec/entry/依存hashは原manifest。全Main/current/normal/snapshot/一JarclassとMain ownerbaselineP00704/TestUNKNOWN一致、正常format/null/六staticはnormal14216/14224参照・確認再演0。rawSource変更/新Test設計/製造機能/実Login/crypto/DB/network/Graph/VM/native/Root0、新障害0。
+
+群3300の0.5/2/5固定、後続独立認可policyが成立すれば共同metadata費は当先行群に含め二重配賦0。currentregistry1795のままで原3結合は後続metadata時、正式1964/53・歴史17/190・工数null/QA051final/全HOLD不変。

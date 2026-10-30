@@ -1,0 +1,181 @@
+{
+  "actualExit": 0,
+  "actualLiveObservation": false,
+  "authoritativeDesign": {
+    "commit": "8b91944df5820535e23ba2469740f1c0aa94c447",
+    "gitRef": "origin/main",
+    "path": "documents/300_SS/310_\u30a2\u30d7\u30ea\u30b1\u30fc\u30b7\u30e7\u30f3/314_\u8a8d\u8a3c\u30fb\u8a8d\u53ef\u30fbsession\u30fbCSRF\u5b9f\u88c5\u8a2d\u8a08.md",
+    "sha256": "ab7a1907d0861ca1b6d4181d674f98a73c13f8a4b897b86f655b5a30ce202a7b"
+  },
+  "baselineMainOwnerRows": 3,
+  "candidateOwnersNotAccepted": true,
+  "effortPercent": null,
+  "formalUpdated": false,
+  "four100SourcePrograms": 3,
+  "incompleteSourcePrograms": 0,
+  "independentOracleTokens": [
+    "new AuthenticatedActor(7, \"synthetic-user\", role)",
+    "service.requireNotificationOwner(actor, 7)",
+    "service.requireQuestionOwner(actor, 7)",
+    "service.requireNotificationOwner(actor, 8)",
+    "assertEquals(ResultCode.NOT_FOUND, notification.resultCode())",
+    "\"operation is not available\"",
+    "assertNull(notification.getCause())",
+    "if (role == Role.ADMIN)",
+    "service.requireAdmin(actor)",
+    "service.requireQuestionOwner(actor, 8)",
+    "ResultCode.FORBIDDEN",
+    "999_999_999_999L",
+    "1_000_000_000_000L",
+    "\"\u00e9\".repeat(32) + \"x\"",
+    "new AuthenticatedActor(1, null, Role.USER)",
+    "new AuthenticatedActor(1, \"u\", null)",
+    "service.requireAdmin(null)",
+    "service.requireNotificationOwner(null, 1)",
+    "service.requireQuestionOwner(null, 1)",
+    "new AuthorizationException(null)",
+    "new AuthorizationException(ResultCode.SUCCESS)"
+  ],
+  "independentPolicyMatrix": [
+    [
+      "USER",
+      "admin",
+      null,
+      "FORBIDDEN"
+    ],
+    [
+      "ADMIN",
+      "admin",
+      null,
+      "ALLOW"
+    ],
+    [
+      "USER",
+      "notification",
+      "OWN",
+      "ALLOW"
+    ],
+    [
+      "USER",
+      "notification",
+      "OTHER",
+      "NOT_FOUND"
+    ],
+    [
+      "ADMIN",
+      "notification",
+      "OWN",
+      "ALLOW"
+    ],
+    [
+      "ADMIN",
+      "notification",
+      "OTHER",
+      "NOT_FOUND"
+    ],
+    [
+      "USER",
+      "question",
+      "OWN",
+      "ALLOW"
+    ],
+    [
+      "USER",
+      "question",
+      "OTHER",
+      "NOT_FOUND"
+    ],
+    [
+      "ADMIN",
+      "question",
+      "OWN",
+      "ALLOW"
+    ],
+    [
+      "ADMIN",
+      "question",
+      "OTHER",
+      "ALLOW"
+    ]
+  ],
+  "invocation": {
+    "actualPythonCommand": [
+      "/usr/bin/python3",
+      "-B",
+      "tools/quality/pg15394_pure_authorization_two_independent.py"
+    ],
+    "arbitraryArgumentsRecorded": false,
+    "entrypointPath": "tools/quality/pg15394_pure_authorization_two_independent.py",
+    "entrypointSha256": "5b025d3762a3e42adf63f6257840c9c8d452c8a9c42e6ca1daa23d9783ad51d9",
+    "helperPath": "tools/quality/host_tool_invocation.py",
+    "helperSha256": "85d616a3db4ff47f4c95ae2e0dd57954bc2b09f28b8f2a685b986e5621545c46",
+    "libraryPath": "tools/quality/pg15394_pure_authorization_two_independent.py",
+    "librarySha256": "5b025d3762a3e42adf63f6257840c9c8d452c8a9c42e6ca1daa23d9783ad51d9",
+    "loadedProjectPythonSources": {
+      "tools/quality/classfile_code_metadata.py": "2227e1e8df1ff91b606f094c7ee64366023273ca740d4d47126ed0928190e2f0",
+      "tools/quality/g07_host_class_provenance_inputs.py": "a676cb3e4145177c3c243722d737592ce7d44c3f29cfe4f670662ef7651f046b",
+      "tools/quality/host_tool_invocation.py": "85d616a3db4ff47f4c95ae2e0dd57954bc2b09f28b8f2a685b986e5621545c46",
+      "tools/quality/pg15394_pure_authorization_two_independent.py": "5b025d3762a3e42adf63f6257840c9c8d452c8a9c42e6ca1daa23d9783ad51d9",
+      "tools/quality/trace_owner_join.py": "f71ab155344149f6997937c00b62cbed161652c5f7dc9fabbeb11825f81bca75"
+    },
+    "provenance": "OBSERVED_SYS_ARGV_AND_ORIG_ARGV_NOT_RECONSTRUCTED"
+  },
+  "naturallyBranchZeroSourcePrograms": 0,
+  "negativeLabels": [
+    "source",
+    "tests",
+    "suites",
+    "cases",
+    "totals",
+    "fullSourceUnits",
+    "physicalClasses",
+    "owners",
+    "targetUnitFour100",
+    "strictFour100GateExit",
+    "singleSession",
+    "crcMismatch",
+    "metadataClasses",
+    "manualCounterExclusions",
+    "newAccepted",
+    "productTestsReexecutedByPost",
+    "formalUpdated",
+    "whole451Accepted",
+    "wholeF03Accepted",
+    "oldCoverageTransferred",
+    "actualFilesOpenedByProduct",
+    "rootMainInvoked",
+    "cryptoOrKeyOperationsInvoked",
+    "effortPercent"
+  ],
+  "newAccepted": 0,
+  "newUniqueMethods": 2,
+  "originalMethodsReexecuted": 0,
+  "physicalClasses": 3,
+  "postSha256": "baa867dc17450ec2c1d8e85d62abc23a7f6ce86543fda6a5d0136b16d622d495",
+  "semanticNegativeVectors": 24,
+  "source": "6b53efeec87f3ec36a840dd8e7759656cb4aee5c",
+  "sourcePrograms": 3,
+  "suites": 1,
+  "tests": 2,
+  "totals": {
+    "BRANCH": {
+      "covered": 24,
+      "missed": 0
+    },
+    "CLASS": {
+      "covered": 3,
+      "missed": 0
+    },
+    "LINE": {
+      "covered": 34,
+      "missed": 0
+    },
+    "METHOD": {
+      "covered": 9,
+      "missed": 0
+    }
+  },
+  "unknownTestOwnerRows": 1,
+  "whole451Accepted": false,
+  "wholeF03Accepted": false
+}

@@ -1,5 +1,7 @@
 # PGPT成果物一覧・進捗
 
+2026-10-31追加：2907～2912で原認証応答3/一Source＋純認可2/三Sourceを現source実行・独立結合、四Sourceすべて四100。現1795→1800/219・Source376→380・四206→210、自然156/168・未達8/13保持。全旧proof/費用/candidate215保持、新cohort資格の増分で新Test設計/製造機能/正式/受入0。正式1964/53・歴史17/190・工数null/QA051final/全HOLD不変。次直近12Testのexact担当候補joinを整備して通常PG/PT継続。
+
 2026-10-31追加：2901～2906で原時間境界3/一Source未達＋純Login policy15/四Source（三四100・一自然B0-LMC100）を現source実行/独立結合。現1777→1795/217・Source371→376・四203→206・自然155→156・測定拡大の未達7/12→8/13。新機能/TestID設計/正式/受入0、全旧proof/費用/candidate215保持。owner291baseline/215candidate/113UNKNOWN、正式1964/53・歴史17/190・工数null/QA051final/全HOLD不変、通常PG/PT継続。
 
 2026-10-31追加：2895～2900で現source原Inputs4/一Source未達＋Outbox13/八Source（四100六・自然B0-LMC100二）を実行/独立結合。現cohort1760→1777、Source362→371、四197→203、自然153→155、測定拡大の未達6/10→7/12。新機能/新TestID作成/正式受入の増分ではなく当source資格。owner286baseline/215候補/108UNKNOWN、原費用/全旧proof保持。正式1964/53・歴史17/190・工数null/QA051final/全HOLD不変、通常PG/PT継続。
