@@ -1,5 +1,7 @@
 # PGPT成果物一覧・進捗
 
+2026-10-31追加：2957～60/PG-D949、原Inbox値四whole15/4を現sourceで初回成功、全14Source15Codeを測定し九四100/三自然B0/二未達。独立28/Python LP-NFC-HMAC/SSC157 frame/所有buffer/N12・SQLSTATE、registry34/WBS29反例が成功。現1879→1894/240・Source407→421・四228→237・自然162→165・未達11/20→13/22は測定拡大。新障害/原PT再演0、全旧proof/費用/訂正・正式1964/53・工数null/全HOLD保持、通常PG/PT継続。
+
 2026-10-31追加：2953～56/PG-D948、公開合成Session codec原9/1を初回成功・全三Source三Code L142M17C3B58miss0/三四100。独立28・Node/Python匿名/合成principal JSON/七AAD/GCM、registry34/WBS29反例を確認。現1870→1879/236・Source404→407・四225→228、自然162/未達11/20不変。既JSON Test helperは全未変更sourceをcompileするが既7件は再演/再加算0、新障害0。全旧proof/費用/訂正履歴・正式1964/53・工数null/全HOLD保持、通常PG/PT継続。
 
 2026-10-31追加：2949～52/PG-D947、公開合成WebLog codec原9/1・3Source3Codeを現source初回成功、全L164M19C3B60miss0/三四100、独立28＋元Node回収3/registry34/WBS29反例を確認。現1861→1870/235・Source401→404・四222→225、自然162/未達11/20不変。BUG2136/YKT1883のstdout label誤りは元Node actual0/stream/command/hashを束縛して受動回収、Node/Product再演0。全旧proof/費用/訂正履歴と正式1964/53・工数null/全HOLDを保持し通常PG/PT継続。

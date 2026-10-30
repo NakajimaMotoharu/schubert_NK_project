@@ -1,0 +1,11 @@
+# 公開Inbox値四whole十五：通常単体テスト仕様
+
+PG15582/PG-D949、Production6b53/normal14216固定、基点837f379e7d642d03c3786f97328c7e32955c33d5、群3330開始1/3/8共有枠pp固定。2145/2146の明示PT_DEFAULTと全Main/Test/helperを事前確認し、現source未登録の原InboxModel5/OperationFingerprint5/SecretBuffer3/QuestionQueryScopeFrame2を全wholeのまま一JVMで実行する。旧f977/sourceの15成功は歴史証跡として保持し現sourceへ合算しない。
+
+新targetはidempotency packageのOperationFingerprint/CanonicalRequest/CanonicalField/WipingByteArrayOutputStream/QuestionQueryScopeFrame/ResponseSnapshotIdentity/InboxRequest/InboxResultReference/InboxResultReferenceType/InboxCompletion/InboxCompletionState/InboxExecution/InboxExecutionStatus/InboxExceptionの14Source15Code（Reason含む）。全source/normalJar/現registry非重複・実ownerを確認、scope frameはP01401/他13はP00601、関連費用追加0。既Roleはhelperで再受入しない。ResponseSnapshotIdentityは値だけで、保留中ResponseSnapshotCodec/FingerprintKeyRing/Graph等を呼ばない。
+
+PT-IDEM001002/004～006/WIPE001～003/QRY-SCOPE001003、NK-MSG-002/NK-QRY-001、RD MQ006～010/FUN103～105/DAT009/AUT002/QST008、UI241242224236、SS324§3/5/6/15・352/SSC157。独立期待は明示N12/owner/token-layout八件/expiry/result union/SQLSTATE23000,55000,XX000,25000、HMAC既OpenSSL canonical hex/605896204af0c777ef2911589343b4e4a50cd7aa87560662a5f634249240be81、NFC/null=ffffffffと空=00000000区別、公開3byteのコピー/消去・8192成長/1050000境界、scope prefix4e4b515259310055又は41と264frame/二照会route/未知拒否で固定。Python struct/unicodedata/hmacの別実装でcanonical/HMACとframe oracleを検証する。
+
+原wholeを抽出/改作しない。自JVMだけSunJCE除去/復元、launcherはJCA provider順の実前後同一を成功markerで確認。actual DB/JMS/file/鍵/credential/権限付与/認証/Root/VM/Graph/actual heapdump0。protected自所有bufferを公開subclass seamで見る原Testは他process・実秘密のdumpではない。crypto/publicSyntheticKeys true、actual key/credential false。
+
+全14Source15Codeを一exec/session/CRC/XML/実JVM環境で四counter実測、未達を除外や旧exec合算で埋めない。既2146のCanonicalField/ResponseIdentity未達は現実測で再確認し、B0は自然として別計上。専用post15584を先行固定、独立15586で期待値/metadata反例/所有/非保留境界を照合する。commandはpg11123_checked_python_entry.py経由pg15582_public_inbox_values_fifteen_pt.py、終了/source/環境/結果/hash/BUGは2958へ。正式1964/53・歴史17/190・工数null/QA051final/全HOLD不変。
