@@ -1,0 +1,11 @@
+# 公開合成SessionCodec原whole九：通常単体テスト結果
+
+2953/PG-D948、2026-10-31 JST、dev-foundation、基点a76fe3bb4b8e21a93636e2f8381a1d9e2176dd14、Production6b53/normal14216固定。原whole9/1 FES0・再試行0、entryc932c62f/session25165/actual0、raw PG15566-public-session-codec-nine-pt-v1/manifest.json SHA 7712a52d7dec5d507ba71241efbcba5e8a2f1abd55c82da4b3535d77ae179443。元JVM環境/時刻/command/source/Test ID/input/expected/actual/XML/exec/sessionを当rawへ保存。SessionAttributeCodecTestは未変更全sourceをhelperとしてcompileし、既7methodは選択・再実行・加算しない。
+
+専用post PG15568-public-session-codec-nine-post-v1/manifest.json SHA 305f59711ae025aa6d038ac54c9617f55b7736693c87c22e5d898e48bb83840f、entry5e1b5020/session27080/actual0。Codec L101M10C1B42、Identity L28M3C1B10、EncryptedPayload L13M4C1B6、全miss0。三Source三Code合計L142M17C3B58miss0/三四100、strictGate0、単一exec/CRC0/manual/生成filter追加0。既JSON codec113L15M1C42B/旧例外2Codeの元資格/counterは再受入しない。
+
+独立PG15570-public-session-codec-nine-independent-v1/manifest.json SHA 0eede8a11d9f702c2bdac02ea2d19d7986ecd78f537bf5bb4708f1f97db7d9c8、entrydfe4cdc1/actual0、28意味反例。原九全method/実ownerP01501三行/Test UNKNOWN一行、全新target/既helper集合、helperTest実compile source SHA54c9a088と選択caseが新9だけであること、独立JSON literal/legacy v1/current v2/最大境界、承認origin/main SS352を照合。
+
+既固定Node24.19.0/OpenSSL3.5.7とPython json/UUID/structで公開合成JSON匿名・principal有の両profile及び七AAD/GCMを独立算出。AAD SHAe5c6cd3a7b1e4b1659379632f14d1d69d76767b2b4ce958dd739a6f8d31c40e4、二envelope SHAb7b69a57268c6441476aee3181773473a519a576cf74a664f8dfd1dd13c47616 / d9b9291473a538e7602343d78d13dc554f9e0b1d883dc72e0191cf83abbf636b。Node/Python平文SHA一致・tag16・envelope=平文+38を確認、原独立JCAと同parameterのoracleであり本番captureではない。NKENC1 envelope/AAD format1とJSON schema current2/legacy1は別version。
+
+crypto/publicSyntheticKeys/自JVM JCA復元true、syntheticSessionAttributesSerialized true、actual key/credential/実session-cookie-token-auth発行/DB/file/service/native/VM/Root/Graph0。fixtureは既公開a/b/c×64とfake UUID/時刻で本物session情報を保存しない。新製品/工具障害0、旧成功PT再演0、公開manifestは当フォルダevidence/provisional各PG名。正式1964/53・歴史17/190・工数null/QA051final/全HOLD不変。
