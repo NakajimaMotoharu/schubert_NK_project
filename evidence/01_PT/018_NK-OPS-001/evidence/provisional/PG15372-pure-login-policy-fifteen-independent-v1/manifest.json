@@ -1,0 +1,151 @@
+{
+  "actualExit": 0,
+  "actualLiveObservation": false,
+  "authoritativeDesign": {
+    "commit": "8b91944df5820535e23ba2469740f1c0aa94c447",
+    "gitRef": "origin/main",
+    "path": "documents/300_SS/310_\u30a2\u30d7\u30ea\u30b1\u30fc\u30b7\u30e7\u30f3/314_\u8a8d\u8a3c\u30fb\u8a8d\u53ef\u30fbsession\u30fbCSRF\u5b9f\u88c5\u8a2d\u8a08.md",
+    "sha256": "ab7a1907d0861ca1b6d4181d674f98a73c13f8a4b897b86f655b5a30ce202a7b"
+  },
+  "baselineMainOwnerRows": 4,
+  "candidateOwnersNotAccepted": true,
+  "effortPercent": null,
+  "formalUpdated": false,
+  "four100SourcePrograms": 3,
+  "incompleteSourcePrograms": 0,
+  "independentCeilingCases": 2700,
+  "independentPolicyChecks": {
+    "LoginAttemptSequenceTest": [
+      "2026-10-28T00:15:04Z",
+      "2026-10-28T00:15:09Z",
+      "int seconds = 1; seconds <= 900",
+      "int before = seconds == 900 ? 900 : seconds + 1",
+      "assertEquals(seconds, locked.retryAfterSeconds(exact))",
+      "assertEquals(900 - seconds, locked.retryAfterSeconds(at))",
+      "assertSame(locked, locked.afterFailure(at))",
+      "assertEquals(0, emptyUser.failedCount())",
+      "assertEquals(0, emptyIp.failedCount())"
+    ],
+    "LoginAttemptStateTest": [
+      "kind == LoginAttemptKind.USER ? 5 : 10",
+      "END.minusNanos(1)",
+      "END.plusNanos(1)",
+      "assertEquals(offset <= 0, state.isLocked(at))",
+      "assertEquals(900, state.retryAfterSeconds(START))",
+      "state.afterFailure(START.plusSeconds(899))",
+      "active.afterFailure(START.minusNanos(1))",
+      "farFuture.afterFailure(Instant.MAX)",
+      "Optional.empty()"
+    ],
+    "LoginUsernameTest": [
+      "assertEquals(\"\u00c9COLE\"",
+      "assertEquals(\"\u00e9cole\"",
+      "\"\u03bf\u03c2\"",
+      "\"\u03bf\u03c3\u03b1\"",
+      "Locale.setDefault(original)",
+      "scalar <= Character.MAX_CODE_POINT",
+      "scalar >= 0xd800 && scalar <= 0xdfff",
+      "after * 2 <= before * 3",
+      "assertEquals(3, maximumNumerator)",
+      "assertEquals(2, maximumDenominator)",
+      "assertEquals(0x0130, maximumScalar)",
+      "96, new LoginUsername("
+    ],
+    "PasswordPolicyTest": [
+      "List.of(\"a\", \"a\".repeat(11), \"a\".repeat(12), \"a\".repeat(128), \"a\".repeat(256))",
+      "\"a\".repeat(11), \"a\".repeat(129)",
+      "\"a\".repeat(257)",
+      "assertArrayEquals(new char[input.length], input)",
+      "policy.normalizeForCreation(input, null)",
+      "policy.normalizeForLogin(null)",
+      "\"different-user\"",
+      "\"1\".repeat(12).toCharArray()",
+      "assertNull(failure.getCause())"
+    ]
+  },
+  "independentUtf8Vectors": [
+    64,
+    96,
+    256,
+    256
+  ],
+  "invocation": {
+    "actualPythonCommand": [
+      "/usr/bin/python3",
+      "-B",
+      "tools/quality/pg15372_pure_login_policy_fifteen_independent.py"
+    ],
+    "arbitraryArgumentsRecorded": false,
+    "entrypointPath": "tools/quality/pg15372_pure_login_policy_fifteen_independent.py",
+    "entrypointSha256": "39d6083da73af56cb3ab47f99e640e658ac1f17efffc1deb31f6f25aab433e73",
+    "helperPath": "tools/quality/host_tool_invocation.py",
+    "helperSha256": "85d616a3db4ff47f4c95ae2e0dd57954bc2b09f28b8f2a685b986e5621545c46",
+    "libraryPath": "tools/quality/pg15372_pure_login_policy_fifteen_independent.py",
+    "librarySha256": "39d6083da73af56cb3ab47f99e640e658ac1f17efffc1deb31f6f25aab433e73",
+    "loadedProjectPythonSources": {
+      "tools/quality/classfile_code_metadata.py": "2227e1e8df1ff91b606f094c7ee64366023273ca740d4d47126ed0928190e2f0",
+      "tools/quality/g07_host_class_provenance_inputs.py": "a676cb3e4145177c3c243722d737592ce7d44c3f29cfe4f670662ef7651f046b",
+      "tools/quality/host_tool_invocation.py": "85d616a3db4ff47f4c95ae2e0dd57954bc2b09f28b8f2a685b986e5621545c46",
+      "tools/quality/pg15372_pure_login_policy_fifteen_independent.py": "39d6083da73af56cb3ab47f99e640e658ac1f17efffc1deb31f6f25aab433e73",
+      "tools/quality/trace_owner_join.py": "f71ab155344149f6997937c00b62cbed161652c5f7dc9fabbeb11825f81bca75"
+    },
+    "provenance": "OBSERVED_SYS_ARGV_AND_ORIG_ARGV_NOT_RECONSTRUCTED"
+  },
+  "naturallyBranchZeroSourcePrograms": 1,
+  "negativeLabels": [
+    "source",
+    "tests",
+    "suites",
+    "cases",
+    "totals",
+    "fullSourceUnits",
+    "physicalClasses",
+    "owners",
+    "targetUnitFour100",
+    "strictFour100GateExit",
+    "singleSession",
+    "crcMismatch",
+    "metadataClasses",
+    "manualCounterExclusions",
+    "newAccepted",
+    "productTestsReexecutedByPost",
+    "formalUpdated",
+    "whole451Accepted",
+    "wholeF03Accepted",
+    "oldCoverageTransferred",
+    "actualFilesOpenedByProduct",
+    "rootMainInvoked",
+    "effortPercent"
+  ],
+  "newAccepted": 0,
+  "newUniqueMethods": 15,
+  "originalMethodsReexecuted": 0,
+  "physicalClasses": 4,
+  "postSha256": "330c621dc195273b9ba290a7b72b8658b0fd237c42bf2d2c277e7f0ee00a0df2",
+  "semanticNegativeVectors": 23,
+  "source": "6b53efeec87f3ec36a840dd8e7759656cb4aee5c",
+  "sourcePrograms": 4,
+  "suites": 4,
+  "tests": 15,
+  "totals": {
+    "BRANCH": {
+      "covered": 72,
+      "missed": 0
+    },
+    "CLASS": {
+      "covered": 4,
+      "missed": 0
+    },
+    "LINE": {
+      "covered": 78,
+      "missed": 0
+    },
+    "METHOD": {
+      "covered": 19,
+      "missed": 0
+    }
+  },
+  "unknownTestOwnerRows": 4,
+  "whole451Accepted": false,
+  "wholeF03Accepted": false
+}

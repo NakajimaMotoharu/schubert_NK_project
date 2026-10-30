@@ -1,0 +1,7 @@
+# 2902 QuestionCommandMetadata原時間境界三・限定結果
+
+2901、source6b53/normal14216/保存HEAD ea1f5f8a029e70e2de2656aceeca98f0b9b612f6（push91577真正0）。PG15362/b28ada45/session42441真正0・whole原3/1 FES0、raw509aab8f920fe36b73391b707ad285bc4dbc346842e97965e96e74be53808f22。PG15364/ac8dbf58/sharedv2、postfd66524cfa291b77589113f626484ea540a6fac425a295b222b986681c1f4e0c真正0・原exec一回passive分析/8metadata反例、全一Source一Code L8cov1miss/M1cov1miss/C1/B4miss0・four100false/strictgate1。record生成accessorは公式filter不変更、物理一覧に保持。手動toStringの21行は未実行、null契約も原3の対象外なので成功を捏造しない。
+
+PG15366/670d2334、独立manifest5b6ef588ac5fcc8582db46181db13becec8ddc83ae25b295d1cda4fdab194dc2真正0・24意味反例。原3XML/宣言/ISO literalと架空UUID、proleptic Gregorian日数から計算したepoch基準nanosecond八vector・1000ns floor/上下限を独立照合。期待値生成にProduct不使用、negative preepochのfloorも-1→-1000で確認。Main baselineP01103/TestUNKNOWN、原Service wholeは@BeforeAll実DB・Graph依存を保持しnull/redaction部分の抽出や新fixtureによる迂回0。
+
+manifestはevidence/provisional/PG15362-question-time-three-pt-v1、PG15364-question-time-three-post-v2、PG15366-question-time-three-independent-v1のmanifest.json。実日時/OS/JDK25.0.4/command/branch/source/XML/exec/依存/entry/hash/終了値は原manifest、静的normal14216/14224参照で確認再演0。新Source/原3を現cohortへ追加可能だが新機能/TestID作成/正式/受入/工数0。新障害0、実DB/IO/network/credential/native/Root/Graph/VM等0。群3295開始0.5/2/4pp固定、次の独立policy群が成立すれば共同metadataを一括し当先行群へ費用を含め二重配賦0。専有実費/tokennull、正式1964/53・歴史17/190・工数null/QA051final/全HOLD不変。registryは現1777のままで、結合後に現件数を更新する。
