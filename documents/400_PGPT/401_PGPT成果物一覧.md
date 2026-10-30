@@ -1,5 +1,7 @@
 # PGPT成果物一覧・進捗
 
+2026-10-31追加：2915～2918/PG-D938、ContextHash原whole3を現source一execで成功・専用post/別独立34意味反例。L11M2C1miss0/B0自然N/A、SHA256実行true/actual keyfalse/自JVM provider復元を区別。現1800→1803/220・Source380→381・自然156→157、四210/316・未達8/13保持、原93JVM1911=1803+108。初回未完成工具lint1を保持し別v2の初回実行でありProduct再演0、新設計/機能/正式/受入0。全旧proof/費用/227candidate/正式1964/53/工数null/全HOLD保持、通常PG/PT継続。
+
 2026-10-31追加：2913/14・PG-D937で直近whole12 Testの主subject/原40TestID/SS/元postを明示対応。owner295baseline不変/215→227candidate/115→103UNKNOWN、旧exact11・原941943/費用/全旧proof保持。担当候補化だけで現1800/380Source/全counter/正式/工数/受入は増加0。独立63resolver/57意味/28WBS反例・全G13未受入を明示、通常PG/PT継続。
 
 2026-10-31追加：2907～2912で原認証応答3/一Source＋純認可2/三Sourceを現source実行・独立結合、四Sourceすべて四100。現1795→1800/219・Source376→380・四206→210、自然156/168・未達8/13保持。全旧proof/費用/candidate215保持、新cohort資格の増分で新Test設計/製造機能/正式/受入0。正式1964/53・歴史17/190・工数null/QA051final/全HOLD不変。次直近12Testのexact担当候補joinを整備して通常PG/PT継続。

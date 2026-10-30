@@ -1,0 +1,11 @@
+# 2915 ContextHash原whole三・現source通常PT仕様
+
+NK-AUT-001/WBS-P007-03、AUT001/UI226§5/SS314§6.1・352/PT-AUT005-H01/BUG036YKT032、元2573/2574/PG-D852を正とする。旧Source0061の14092/94は既成功の歴史で、現在Source6b53/normal14216/registry1800には未資格のため新sourceの原whole3を一回実行する。旧成功/coverageを転用せず、新Test設計/機能/受入へ再計上しない。
+
+Main9b0714ec/Testeafd2eb1/Protocol AuthenticationContext全文と初期化読了。固定公開合成a/b各64 ASCIIのSHA256はPython hashlibで独立にffe054…/a0fab1…へ照合、hex decodeした32byteではない。外caller monitorを保持しても独立virtualThreadで5秒以内に処理、100taskのdigest状態分離/null拒否/63,65,uppercase/nonhex/空拒否、toStringにhash無し。Test3は本人のfresh child JVMのJCA provider配列だけを一時除去しmandatory SHA256不在をNoSuchAlgorithmExceptionで拒否、finally全provider順序を復元して元配列同一をassertする。OS/他JVM/provider file/権限/アプリ設定を変更しない。
+
+PT_DEFAULT、標準JCA SHA256と自JVM registry/threadだけ。実credential/秘密key/実session/context/実認証/DB/JMS/network/Graph/native/Root/VM/権限操作0。公開Test内の合成a/b vectorと既launcherを使い、保留Test抽出/別fixture/拒否探索なし。Crypto実行true（鍵無しSHA256）、actualSecretKeysLoaded/actualCredentialValuesUsed=false、ownFreshJvmProviderStateOnly/childLocalJcaRegistryRestorationTested=trueを専用postで明示する。共有purev2はcrypto=false前提のため変更・流用せず、旧14094解析契約を現在のfixed normal/静的/readerへ合わせた専用一Source postだけを用いる。
+
+初回工具draft15418はpyflakes1/構文不備・body/JVM未開始で保持する。JS文字列置換のreplacementでdollar+singlequoteを特別展開した生成ミスで、未完成工具の初回lint失敗であり既実装Productの仕様違反/プラットフォーム拒否ではない。新15419v2は当一lineをliteral mapで定め、同じ新群見積のまま別file/別slotに固定、pyflakes0を確認してから初回Productへ。専用15420 draftも事前pyflakes0、RAWは元真正terminal取得後にだけ実hashへ凍結し、その前には呼ばない。期待値/Production/Main/Test/旧sourceに変更0。
+
+command python3 -B tools/quality/pg11123_checked_python_entry.py tools/quality/pg15419_context_hash_three_pt_v2.py。全current/normal/snapshot/sixJar/元Test/既reporter13728・既launcher aa25e79cをpin、fresh compile/一child原whole3/新session/180秒timeout。whole3XML/FES/終了/実環境/execCRC・全Source oneclass Code ctor/calculateを独立測定、branch自然0はN/A/strictgate1を保持し四100へ偽装しない。別独立15422はPythonASCII SHA/原3TestID・source/actualJCA復元assert/flags・全Code/readerstagehash/typedcounter/意味反例を照合、分析をProduct再演にしない。群3307開始0.5/2/4pp固定、初回lint/tool作業とsource再資格を原設計成果へ混ぜず記録する。結果2916/manifest、正式1964/53・歴史17/190・工数null/QA051final・全HOLD不変更。

@@ -1,0 +1,110 @@
+"""Independent original whole3/source closure/CRC; natural branch zero is not synthetic100."""
+import copy
+import json
+import os
+from pathlib import Path
+import shutil
+import zipfile
+import xml.etree.ElementTree as ET
+import g07_host_class_provenance_inputs as data
+from host_tool_invocation import capture,verify
+import scoped_prometheus_post as validator
+import pg15419_context_hash_three_pt_v2 as original
+import typed_marker_guard_qualified_v1 as cfg
+import pg9666_pagination_static as runner
+from trace_owner_join import canonical
+
+RAW='af16a93a8ddf54157ca3c4b679c3867d9eebac10b7de7b2e2eed4ec3f13a5915'
+RUN=data.ROOT.parent/'pgpt-runs/PG379/pg15419-context-hash-three-pt-v2'
+OUT=data.BASE/'PG15420-context-hash-three-post-v1'
+SLOT=data.ROOT.parent/'pgpt-runs/PG379/pg15420-context-hash-three-post-v1'
+NAME='dev/codex/schubert/nk/api/security/ContextHash'
+MAIN='src/schubert-nk-api/src/main/java/'+NAME+'.java'
+TOTAL=3
+
+def assess(raw):
+    validator.common.SOURCE=original.SOURCE;validator.COUNTS=original.COUNTS;validator.EXPECTED_FIXTURE_HASHES={};validator.assess(raw)
+
+def main():
+    invocation=capture(__file__);assert isinstance(RAW,str) and len(RAW)==64 and not SLOT.exists() and not OUT.exists()
+    raw=data.read_checked(data.BASE/'PG15419-context-hash-three-pt-v2/manifest.json',RAW)
+    assert data.sha((RUN/'manifest.safe.json').read_bytes())==RAW;assess(raw)
+    normal,normal_pin=cfg.normal();hashes=normal['begin']['inputHashes'];snapshot=original.COMPILE/'snapshot'
+    static_pin='294810b2dab116dbc73bdf41ee39940378f89e173f8100a6109ff5571f3e159e'
+    static=data.read_checked(cfg.out(cfg,14224)/'manifest.json',static_pin)
+    assert raw['source']==normal['source']==static['source']==original.SOURCE
+    assert normal['actualExit']==static['actualExit']==normal['testsExecuted']==0
+    assert hashes==raw['begin']['sourceHashes'] and hashes[MAIN]=='9b0714ec9dc88f3f15e11341d71d873250fee8436ebad03b3fb1079060392581'
+    assert all(data.sha((data.ROOT/p).read_bytes())==data.sha((snapshot/p).read_bytes())==h for p,h in hashes.items())
+    for key in ['dependencyHashes','testSourceHashes','emptyConfigHashes','fixtureHashes']:
+        assert all(data.sha(Path(p).read_bytes())==h for p,h in raw['begin'][key].items())
+    assert data.sha((RUN/'jacoco.exec').read_bytes())==raw['execSha256']
+    actual=[]
+    for filename,h in raw['xmlHashes'].items():
+        path=RUN/'xml'/filename;assert data.sha(path.read_bytes())==h;root=ET.parse(path).getroot()
+        assert raw['suites'][root.get('name')]=={k:int(root.get(k,'0')) for k in ['tests','failures','errors','skipped']}
+        for case in root.findall('testcase'):
+            assert not list(case);actual.append((case.get('classname'),case.get('name')))
+    assert len(actual)==len(set(actual))==TOTAL and set(actual)=={(r['classname'],r['name']) for r in raw['cases']}
+    prefix=[]
+    with (RUN/'selected-junit.log').open() as stream:
+        for _ in range(32):
+            line=stream.readline(513)
+            if any(line.startswith(k+'=') for k in ['runtime.version','os.name','os.arch','os.version']):prefix.append(line.strip().split('=',1))
+    assert len(prefix)==len(dict(prefix))==4 and dict(prefix)==raw['stages'][1]['reportedEnvironment'] and raw['stages'][1]['environmentBasis']=='ORIGINAL_OWN_JVM_PREFIX_NOT_CURRENT_HOST_SUBSTITUTION'
+    agent='-javaagent:'+str(validator.common.AGENT)+'=destfile='+str(RUN/'jacoco.exec')+',append=false,sessionid='+original.SESSION
+    assert agent in raw['stages'][1]['command'] and raw['begin']['selectedSuites']==original.COUNTS
+    labels=[]
+    for label,change in [('source',lambda v:v.update(source='0'*40)),('failed',lambda v:v['cases'][0].update(result='NOT_PASS')),('duplicate',lambda v:v['cases'].append(copy.deepcopy(v['cases'][0]))),('scope',lambda v:v['begin'].update(selectedSuites={'UnknownTest':TOTAL})),('union',lambda v:v['begin'].update(priorCoverageTransferred=True)),('formal',lambda v:v.update(formalUpdated=True)),('timeout',lambda v:v['stages'][1].update(timedOut=True)),('fixture',lambda v:v['begin']['fixtureHashes'].update({'unknown':'0'*64}))]:
+        bad=copy.deepcopy(raw);change(bad)
+        try:assess(bad)
+        except ValueError:labels.append(label)
+        else:raise AssertionError('false current ordinary qualification')
+    runtime=data.read_checked(data.BASE/'PG13378-db-duration-eight-post-recovery-v3/manifest.json','adcb55b80aa70a449e74280aa465f752308310c41c876cf83a5a78c3dda3c882')
+    tool_slot=data.ROOT.parent/'pgpt-runs/PG379/pg13376-db-duration-eight-post-v1';audit=tool_slot/'audit'
+    tools=runtime['toolAndDependencyHashes'];compiled=runtime['reusedCompiledClasses']
+    assert all(data.sha(Path(p).read_bytes())==h for p,h in tools.items()) and {p.name for p in audit.iterdir()}==set(compiled)
+    assert all(data.sha((audit/name).read_bytes())==h for name,h in compiled.items())
+    receipt=data.read_checked(tool_slot/'session-identity-exit.safe.json','2bbd55eefa4fc2b0532660748a0f35bfeca6cb69e45e732fc67759add964a84b')
+    cp=receipt['command'][2];entries=cp.split(os.pathsep);libraries={p for p in tools if p.endswith('.jar')}
+    assert entries[0]==str(audit) and set(entries[1:])==libraries and len(entries)==len(libraries)+1==5
+    with zipfile.ZipFile(normal['jars']['api']['path']) as jar:
+        closure={p[:-6] for p in jar.namelist() if p==NAME+'.class' or p.startswith(NAME+'$') and p.endswith('.class')}
+        assert closure=={NAME}
+        path=snapshot/'src/schubert-nk-api/target/classes'/(NAME+'.class')
+        assert jar.read(NAME+'.class')==path.read_bytes()
+    import classfile_code_metadata as code
+    decoded=code.decode(path.read_bytes(),NAME+'.class')
+    assert {m['name'] for m in decoded['methods'] if m['hasCode']}=={'<init>','calculate'}
+    logical={r['path']:r for r in json.loads((data.ROOT/'documents/400_PGPT/470_PMO/485_WBS網羅性・受入対応.json').read_bytes())['artifacts']}
+    owners={p:dict(sha256=hashes[p],**canonical(p,logical)) for p in [MAIN,*[str(p.relative_to(data.ROOT)) for p in original.TESTS.values()]]}
+    assert owners[MAIN]['canonicalOwner']==owners[MAIN]['canonicalCostOwner']=='WBS-P007-03'
+    SLOT.mkdir();runner.SLOT=SLOT;component=SLOT/'component';component.mkdir()
+    target=component/(NAME+'.class');target.parent.mkdir(parents=True);shutil.copyfile(path,target)
+    physical={NAME:data.sha(path.read_bytes())};assert data.sha(target.read_bytes())==physical[NAME]
+    data.write(SLOT/'begin.safe.json',dict(source=original.SOURCE,invocation=invocation,originalManifestSha256=RAW,execSha256=raw['execSha256'],normalManifestSha256=normal_pin,physicalClasses=physical,priorProductResultsReused=False,productTestsReexecuted=0))
+    diagnostic=data.ROOT/'tools/quality/architecture/ComponentCoverageDiagnostic.java'
+    diagnostic_pin='fa4bbb49ea151813cc936b8943646b4e98454de25b4d109a0f76217788526ec6'
+    classes=data.ROOT.parent/'pgpt-runs/PG379/pg13586-lgs-boundary-whole-eight-measured-post-v1/diagnostic-classes'
+    assert data.sha(diagnostic.read_bytes())==diagnostic_pin and data.sha((classes/'ComponentCoverageDiagnostic.class').read_bytes())=='3e422b4d874c97ecd09542207e2ccbca0ad4cf1addd0a3c5ddb3e22eebacec5f'
+    jdk=runner.TC/'jdk-25.0.4/bin';stages=[]
+    for label,command in [('session-identity',[str(jdk/'java'),'-cp',cp,'CoverageSessionIdentity',str(RUN/'jacoco.exec'),original.SESSION]),('coverage-audit',[str(jdk/'java'),'-cp',str(classes)+os.pathsep+cp,'ComponentCoverageDiagnostic',str(RUN/'jacoco.exec'),str(component),NAME])]:
+        stage=runner.step(label,command,SLOT,timeout=120);stages.append(stage);data.write(SLOT/(label+'-stage.safe.json'),stage);assert stage['actualExit']==0 and not stage['timedOut']
+    data.write(SLOT/'audit-stages.safe.json',stages);rows={}
+    for line in (SLOT/'coverage-audit.stdout').read_text().splitlines():
+        fields=line.split('\t')
+        if fields[0]=='CLASS':rows[fields[1]]=dict(crc64=fields[2],counters={v.split(':')[0]:dict(missed=int(v.split(':')[1]),covered=int(v.split(':')[2])) for v in fields[3:]})
+    assert set(rows)=={NAME} and set(rows[NAME]['counters'])=={'LINE','METHOD','CLASS','BRANCH'}
+    totals=rows[NAME]['counters'];four100=all(v['missed']==0 and v['covered']>0 for v in totals.values())
+    applicable=all(v['missed']==0 for v in totals.values())
+    natural_branch=totals['BRANCH']==dict(missed=0,covered=0)
+    assert natural_branch and not four100
+    assert all(data.sha(Path(p).read_bytes())==h for p,h in tools.items()) and all(data.sha((audit/name).read_bytes())==h for name,h in compiled.items())
+    assert data.sha((RUN/'jacoco.exec').read_bytes())==raw['execSha256'] and all(data.sha((data.ROOT/p).read_bytes())==h for p,h in hashes.items())
+    verify(invocation);OUT.mkdir()
+    for filename,h in raw['xmlHashes'].items():shutil.copyfile(RUN/'xml'/filename,OUT/filename);assert data.sha((OUT/filename).read_bytes())==h
+    data.write(OUT/'manifest.json',dict(actualExit=0,source=original.SOURCE,invocation=invocation,originalManifestSha256=RAW,normalManifestSha256=normal_pin,staticPostManifestSha256=static_pin,tests=TOTAL,suites=1,failures=0,errors=0,skipped=0,reruns=0,newTestIds=0,newAccepted=0,sourceChanged=False,
+      targetSourceUnits=1,completeSourceUnitClosure={NAME:sorted(closure)},sourcePhysicalInventory={NAME:dict(sha256=physical[NAME],flags=decoded['flags'],sourceFile=decoded['sourceFile'],methods=decoded['methods'])},fullSourceUnits={NAME:dict(physical=sorted(closure),totals=totals,four100=four100,metadataOnly=False,branchNaturallyZero=natural_branch,threeCounter100=all(totals[k]['missed']==0 and totals[k]['covered']>0 for k in ['LINE','METHOD','CLASS']))},metadataClasses=[],manualCounterExclusions=[],officialGeneratedFiltersUnchanged=True,helperSourceProgramsNotAcceptedByTheseTargetCounters=True,completeSourceCoverageMeasured=True,naturalZeroBranch=natural_branch,branchPercent=None,branchReason='NO_SOURCE_CONDITIONAL_JUMPS_NATURAL_ZERO_NOT_SYNTHETIC_100',targetUnitFour100=four100,allMeasuredApplicableCountersCovered=applicable,strictFour100GateExit=0 if four100 else 1,
+      cases=raw['cases'],xmlHashes=raw['xmlHashes'],execSha256=raw['execSha256'],singleSession=True,sessionIdentity=original.SESSION,crcMismatch=0,physicalClasses=physical,executable=rows,totals=totals,stages=stages,owners=owners,registryChanged=False,metadataNegativeVectors=len(labels),negativeLabels=labels,reusedToolRuntimeOnly=True,toolRuntimeManifestSha256='adcb55b80aa70a449e74280aa465f752308310c41c876cf83a5a78c3dda3c882',priorProductResultsReused=False,productTestsReexecutedByPost=0,oldCoverageTransferred=False,whole451Accepted=False,wholeF03Accepted=False,formalUpdated=False,effortPercent=None,actualVmActions=0,actualDatabaseActions=0,actualServiceActions=0,actualNetworkActions=0,childLocalJcaRegistryRestorationTested=True,ownFreshJvmProviderStateOnly=True,cryptoOrKeyOperationsInvoked=True,cryptoOperationKind='SHA256_PUBLIC_FIXED_ASCII64_NO_KEYS',actualSecretKeysLoaded=False,actualCredentialValuesUsed=False,actualAuthenticationOrSessionIssued=False,onlyReviewedPureValueSuites=False,actualFilesOpenedByProduct=False,reportedEnvironment=raw['stages'][1]['reportedEnvironment'],rootMainInvoked=False))
+    print(data.sha((OUT/'manifest.json').read_bytes()));print(json.dumps(dict(actualExit=0,tests=3,suites=1,totals=totals,crcMismatch=0,singleSession=True,naturalBranchNA=natural_branch)))
+if __name__=='__main__':main()

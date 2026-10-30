@@ -1,0 +1,11 @@
+# 2916 ContextHash原whole三・現source限定結果
+
+2915/PG-D938、source6b53/normal14216/保存HEAD64c380b31b04146f8e44238a88180892a610fd46/push24651真正0。旧15418未完成draftはpyflakes1/body/JVM未開始、source31d3cf55f9865833dfce5cc39c15e6e0415ec21073cbba0f3ac7639e65e59117保持。new15419v2/cef5d4ce/session46976真正0、原whole3/1 FES0、rawaf16a93a8ddf54157ca3c4b679c3867d9eebac10b7de7b2e2eed4ec3f13a5915。既Main/Test/元3Caseを改変せず当sourceの初回実行、旧0061/14092成功は保全のみで転用0。
+
+専用15420/7d45fe71はdraft段階pyflakes0・元terminal取得後RAWを実af16へ固定して初回body0、post4012b66d2bae7a216495e1b73a23ea8a89c2aa5eb86766f36308d6242ccfe15e。元exec一回passive、元3XML/実環境prefix・一sessionCRC/全Source一class Code ctor/calculateを測定、L11M2C1全miss0/B0=N/A・strictgate1/targetFour100false。自然B0-LMC100であり人工branch/手動除外/別exec unionなし。Crypto実行true=鍵無しSHA256、actualSecretKeys/credential/sessionIssued=false、本人JVM provider状態だけ/復元assert済みを専用fieldで明示し共有purev2を変更・誤用0。
+
+15422/dfe876a9、独立manifest1d0d4a2884157befba8e4616f7719e9a8a83a1306cb2ce32d3fedf5d3d952f02真正0・34意味反例。Python hashlibによる既公開a/b各64ASCII固定vector、hex decode32byteとの差、外caller monitor下の5秒/100virtualTask分離/null/不正入力・@Isolatedとproviderのfinally復元/元配列順序同一assertを原3XML/Test pinへ対応。Source/実Jar全Code/owner/原post stage command/cwd/終了/output hashも独立確認、初回lint失敗を合格へ加算0。
+
+manifestはevidence/provisional/PG15419-context-hash-three-pt-v2、PG15420-context-hash-three-post-v1、PG15422-context-hash-three-independent-v1のmanifest.json。実日時/OS/JDK25.0.4/command/branch/source/exit/XML/exec/entry/hash/依存は元manifest。Main baselineP00703/TestUNKNOWN、静的normal14216/14224参照で不要な全回帰/再静的反復0。実credential/鍵/実認証/DB/JMS/network/Graph/VM/Root/OS provider設定等0。provider一時除去は当child内だけで他JVM/OS設定や権限を変更していない。
+
+群3307開始0.5/2/4固定、初回工具lintと現在source再資格を新機能・Test設計・正式受入・工数へ混ぜない。新製品障害0、元Source/Testの仕様違反は未発見、未完成工具初回lintは別記保持。専有実費/実tokennull、fresh04:59 used41/rem59/reset1793774153/短期null・usage04:59cursor78b0e020/N-Tnull、明示usage欠測を0補填しない。正式1964/53・歴史17/190・工数null/QA051final/全HOLD不変。結合2917/2918へ。
