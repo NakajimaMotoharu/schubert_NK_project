@@ -1,0 +1,11 @@
+# 2878 FixedServiceExecArguments原5結果
+
+2877/source6b53/normal14216。当初eventのcanonical親P01804は484にchildrenがあり実leaf guardで拒否、event未登録。後段発行前に親exit1をguardせず15258 preflightへ進めた誤りはBUG2122/YKT1869起票、旧entry46eff1b1はFiles. substringがServiceConfigFiles.Serviceへ誤一致してlint0/body1・OUTなし/compile-JVM未開始。新event3273で実leafP01804.01へ元見積1/3/8ppを現在時刻の遅延登録し、過去開始時刻や元実費を捏造しない。先行pushは6675f95aへ成功しており、計測失敗の同combined command exit1と分離、origin/dev-foundation実refで確認済み。
+
+旧raw工具を凍結後、新15259v2/entry17343add/session43335 lint/body真正0、原whole5/1 FES0、manifest65384096840e6402df1ad4eb1c6590beadca1f917a3a11d44de7a7ad85ca6820。safe enum許可と実Files三語拒否を境界付きで確認、元5はこれが初回・重複実行0。原XML/exec/環境command/start/actualexitはraw/stagesへ固定、文字列生成のみ/実exec/NSS/権限/agent導入0。
+
+旧15260/c93a3897 lint0/body1・OUT/SLOT未作成、実Jarにあるjavac enum switchの$1を物理一覧から漏らし、fail-closed。BUG2123/YKT1870修正前起票、旧工具凍結→15261v2/7a05f707 lint/body0、manifest330db5435a282e0f6d4c72af0f536871871f2ad20f7fc0760b91bbeebba9a6c8。全一Source二physicalは両方Codeあり、$1はSYNTHETIC/唯一clinit/固定SwitchMap名/同Source/Jar実byteを確認。変更していない公式JaCoCo Analyzerは$1を全counter0と報告、生成理由/名前/実CodeはgeneratedFilteredClasses/理由fieldへ別保存しNoCodeやclass欠落へ偽装0。通常Mainの同exec/session/CRCは一致、生成classのexec CRCは未測定null/資格falseのまま。全Source counters L27M6C1B8 miss0四100、追加manual除外/フィルタ変更0。Code physical2と測定CLASS1は異なる指標であり、全物理Code資格を測定CLASS2へ水増ししない。
+
+15262/eb9d6667 lint/body0、manifestebe40fe36f407faee91e486ca18901afad67b7c0114fae51e0c223e019a4fbcf。原5 XML/全宣言/全二物理/公式generated zeroを独立照合、29意味反例・3Files token反例、Web/API完全argv二golden（Production.argumentsから期待値生成0）/origin-main SS342の固定setpriv/Java/明示group/NNP/禁止init-groupsを照合。Main baselineP01804/TestUNKNOWN。横展開：旧15258/60凍結、新raw/post是正・三反例、15240は元clock TestにFiles.参照なし、15222は公開三template固定の別契約、15242/24の実Jar closureは元proof/byteに一致しswitchmap無しの非該当を再演なく確認。2877/78は実字句/全物理と誤前提を訂正記録。限定path/hashは独立manifest.horizontalScopeHashes/各invocation、doc hashは公開保存へ対応。BUG2122/YKT1869・BUG2123/YKT1870は当工具scope限定完了2026-10-31、全過去/held未保証、実commit後追記。通常PTを拒否再試行に変換0。
+
+正式1964PT/53scope・17/190・工数null・QA051final/Graph/実環境HOLD不変更、新受入0。group3273原予算1/3/8ppにmetadata/工具是正を含め費加算0・専有token/実費不明null。

@@ -1,0 +1,5 @@
+# 2877 FixedServiceExecArguments原5単体テスト仕様
+
+source6b53/normal14216、WBS-P01804工程担当、Main canonical baselineP01804/TestUNKNOWN。SYS002004/OPS009/UI212251253/SS311342§4.2/343/SSC086～089193、原rexec001/002/003/004/193全部・Main/依存Profile/Identity全文読了。固定Web/APIのUID998/999・GID980/981とsort済みgroup literal、cap削除/NNP/no-shell、Java固定memory/GC/classpath/entry、immutable list、null/不正Value拒否、4threads40jobs、普通profile一引数挿入とROOT/別service/nullの拒否を手書きList oracleで確認する。literal agent/JVM optionは文字列だけで、実agent追加・target JVM/業務起動・setpriv・NSS/NativeQuery・権限/配備/署名変更なし。文字列OutOfMemoryErrorは実OOM注入でないため、本文確認に基づき単語guardから除く（Productionや安全条件を緩和しない）。既拒否/HOLD操作の別harness再演でない原whole通常PTである。
+
+新self-owned JVM原5 oneexec、原XML/TestID/actualexit/環境command/hashを保存、bootstrap全Main Source/Jar/Code/CRC/sessionと四counterをpassive測定。依存Profile/Identityはこのtargetcounterで全Source受入しない。独立SS342の固定vectorへ照合し、独立期待値はProduction.argumentsを呼ばず原Test List literalを静的decodeする。実native/runtime/実NSS/保持ELFの証明へ換算0。command checked-entry pg15258、Java25.0.4 normal依存、元成功再演0・coverage除外0、group事前1/3/8pp固定/unknown費null、正式/HOLD/工数率null保持。結果2878と後続manifestへ対応。
