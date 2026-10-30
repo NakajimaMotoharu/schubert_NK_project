@@ -1,0 +1,9 @@
+# 2814 Current1090・Fake source十Source結合結果
+
+2813仕様、Production6b53/normal14216固定。14972/6351ecee87a03d9c3442af3794e35f42615d19420c23f884ed62f123f0daacc6：lint0/body0。14974/a1947333913bb8d64f0dcc16b6f8a19823600b4f2aa64284e1aaf4e09c535b75：lint0/body0・33反例。原57/八suiteと完全10Sourceのみ追加、元1033全semanticと候補ownerを保持し、cases/全closure/counter型/JVM/反復80/別JSdomain/費用履歴を照合した。
+
+現1090/156・312Source407physical(code389meta18)、四152/234(code224meta10)、自然150/162/NoCode6/未達4Source5physical、original66＋Catalog1=67JVM1170method=unique1090+repeat80、owner270/121/103UNKNOWN。protocol全158Sourceの対応を保持、resource wrappers35/JS4/Node30はJava Mainの件数へ加算しない。
+
+WBS side書込14976および独立14978はこの時点では未実施。正規完了後に実hash/終了・反例を追記する。正式1964PT/53scope・旧17/190・工数null・whole451/F03/G07/QA051final/安全HOLD不変。元着手見積0.5/2/5pp固定、実token/専有費不明null、製品再演/execunion/外部操作0。
+
+完了追記00:15 JST：14976/a74957054eb999285988732456324589f3864384e426838a52bba60e6300303e lint0/body0、14978/a135c33866eda46086384c1a3e10921ff5fb7a3ef36980068477456c586f715a/session40873真正0・28反例。485二sideのtypedGuardCurrentHostPG14976Overlayだけを追加、486 inventorySha256だけ変更、481/484/全旧semantic/費用不変。wholeaudit前後は既知終了1（current physical candidate exact Git/worktree scope）HOLDでありPASSではない。全限定side未結合0。次も許可済み独立PG/PTへ継続する。
