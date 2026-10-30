@@ -1,0 +1,1856 @@
+[
+  {
+    "applicabilityAcceptedByWholeGate": false,
+    "contextLines": [
+      "      try {",
+      "        owned = Objects.requireNonNull(resource, \"acquired resource\");",
+      "        result = action.run(owned);",
+      "      } catch (IOException | RuntimeException | Error primary) {",
+      "        if (resource != null) {",
+      "          try {",
+      "            release.close(resource);"
+    ],
+    "currentWholeJoinPending": true,
+    "designReference": {
+      "originMain": "8b91944df5820535e23ba2469740f1c0aa94c447",
+      "path": "documents/300_SS/330_\u30c7\u30fc\u30bf\u30fb\u30d5\u30a1\u30a4\u30eb/333_\u5927\u5bb9\u91cf\u7d50\u679cfile\u30fbmedia\u30fbRange\u914d\u4fe1\u8a2d\u8a08.md",
+      "sections": [
+        "SSC063",
+        "SSC308"
+      ],
+      "sha256": "d861735e91a6930bbf239937deda29f3675fbf50817953a61e07c0255387fa66"
+    },
+    "id": "STO14664-001",
+    "productTestsExecutedByReview": 0,
+    "productionChanged": false,
+    "proposedDisposition": "REVIEWED_DESIGN_REQUIRED_BOUNDARY_RAW_RETAINED",
+    "qualityGatePass": false,
+    "rationale": "Unknown Runtime/Error is caught only to attempt owned release once, then rethrown with original identity; no normal return or NPE normalization. Main resource-null branch rejects without granting ownership.",
+    "raw": {
+      "attributes": {
+        "begincolumn": "30",
+        "beginline": "82",
+        "class": "ResourceScope",
+        "endcolumn": "46",
+        "endline": "82",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidcatchinggenericexception",
+        "method": "acquire",
+        "package": "dev.codex.schubert.nk.storage",
+        "priority": "3",
+        "rule": "AvoidCatchingGenericException",
+        "ruleset": "Error Prone"
+      },
+      "kind": "main",
+      "message": "Avoid catching RuntimeException in try-catch block",
+      "module": "storage",
+      "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ResourceScope.java",
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "639d3e7a51ad7d4fd2b45a9d5b8f7536ece257f08b0db9955249704009d00bbf",
+      "tool": "pmd"
+    },
+    "rawOccurrence": 1,
+    "rawRetained": true,
+    "rulesOrSuppressionChanged": false,
+    "semanticRole": "PRIMARY_RUNTIME",
+    "sourceMethod": "acquire",
+    "sourceToken": "RuntimeException",
+    "testReferences": [
+      {
+        "classname": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory006BodyIoReasonsAreRedactedAndExistingSuppressionIsNotExported",
+        "post": "PG14654-storage-resource-whole-twenty-six-post-v1",
+        "postSha256": "64716d82a4588387921fc49a0cdb423c79b661c22429a7a5662ab56edcac5a5f"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory007BodyAndCloseIoAlwaysBecomeUnavailableWithoutRawSuppression",
+        "post": "PG14654-storage-resource-whole-twenty-six-post-v1",
+        "postSha256": "64716d82a4588387921fc49a0cdb423c79b661c22429a7a5662ab56edcac5a5f"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory008UnknownCloseTakesPriorityOverBodyIo",
+        "post": "PG14654-storage-resource-whole-twenty-six-post-v1",
+        "postSha256": "64716d82a4588387921fc49a0cdb423c79b661c22429a7a5662ab56edcac5a5f"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory009UnknownBodyKeepsIdentityAfterSuccessfulClose",
+        "post": "PG14654-storage-resource-whole-twenty-six-post-v1",
+        "postSha256": "64716d82a4588387921fc49a0cdb423c79b661c22429a7a5662ab56edcac5a5f"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory010UnknownCompoundAndSelfFailureHaveSanitizedOrderedSuppression",
+        "post": "PG14654-storage-resource-whole-twenty-six-post-v1",
+        "postSha256": "64716d82a4588387921fc49a0cdb423c79b661c22429a7a5662ab56edcac5a5f"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory011SuccessfulBodyCannotHideAnyCloseFailure",
+        "post": "PG14654-storage-resource-whole-twenty-six-post-v1",
+        "postSha256": "64716d82a4588387921fc49a0cdb423c79b661c22429a7a5662ab56edcac5a5f"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory015IncompleteAssemblyMatchesIndependentThreeByFourGolden",
+        "post": "PG14654-storage-resource-whole-twenty-six-post-v1",
+        "postSha256": "64716d82a4588387921fc49a0cdb423c79b661c22429a7a5662ab56edcac5a5f"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory016NullCompleteOwnerIsReleasedWithSanitizedCompoundFailure",
+        "post": "PG14654-storage-resource-whole-twenty-six-post-v1",
+        "postSha256": "64716d82a4588387921fc49a0cdb423c79b661c22429a7a5662ab56edcac5a5f"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory017RepeatedAndAlreadySuppressedFailuresKeepIndependentPriority",
+        "post": "PG14654-storage-resource-whole-twenty-six-post-v1",
+        "postSha256": "64716d82a4588387921fc49a0cdb423c79b661c22429a7a5662ab56edcac5a5f"
+      }
+    ]
+  },
+  {
+    "applicabilityAcceptedByWholeGate": false,
+    "contextLines": [
+      "      try {",
+      "        owned = Objects.requireNonNull(resource, \"acquired resource\");",
+      "        result = action.run(owned);",
+      "      } catch (IOException | RuntimeException | Error primary) {",
+      "        if (resource != null) {",
+      "          try {",
+      "            release.close(resource);"
+    ],
+    "currentWholeJoinPending": true,
+    "designReference": {
+      "originMain": "8b91944df5820535e23ba2469740f1c0aa94c447",
+      "path": "documents/300_SS/330_\u30c7\u30fc\u30bf\u30fb\u30d5\u30a1\u30a4\u30eb/333_\u5927\u5bb9\u91cf\u7d50\u679cfile\u30fbmedia\u30fbRange\u914d\u4fe1\u8a2d\u8a08.md",
+      "sections": [
+        "SSC063",
+        "SSC308"
+      ],
+      "sha256": "d861735e91a6930bbf239937deda29f3675fbf50817953a61e07c0255387fa66"
+    },
+    "id": "STO14664-002",
+    "productTestsExecutedByReview": 0,
+    "productionChanged": false,
+    "proposedDisposition": "REVIEWED_DESIGN_REQUIRED_BOUNDARY_RAW_RETAINED",
+    "qualityGatePass": false,
+    "rationale": "Unknown Runtime/Error is caught only to attempt owned release once, then rethrown with original identity; no normal return or NPE normalization. Main resource-null branch rejects without granting ownership.",
+    "raw": {
+      "attributes": {
+        "begincolumn": "49",
+        "beginline": "82",
+        "class": "ResourceScope",
+        "endcolumn": "54",
+        "endline": "82",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidcatchinggenericexception",
+        "method": "acquire",
+        "package": "dev.codex.schubert.nk.storage",
+        "priority": "3",
+        "rule": "AvoidCatchingGenericException",
+        "ruleset": "Error Prone"
+      },
+      "kind": "main",
+      "message": "Avoid catching Error in try-catch block",
+      "module": "storage",
+      "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ResourceScope.java",
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "639d3e7a51ad7d4fd2b45a9d5b8f7536ece257f08b0db9955249704009d00bbf",
+      "tool": "pmd"
+    },
+    "rawOccurrence": 1,
+    "rawRetained": true,
+    "rulesOrSuppressionChanged": false,
+    "semanticRole": "PRIMARY_ERROR",
+    "sourceMethod": "acquire",
+    "sourceToken": "Error",
+    "testReferences": [
+      {
+        "classname": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory006BodyIoReasonsAreRedactedAndExistingSuppressionIsNotExported",
+        "post": "PG14654-storage-resource-whole-twenty-six-post-v1",
+        "postSha256": "64716d82a4588387921fc49a0cdb423c79b661c22429a7a5662ab56edcac5a5f"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory007BodyAndCloseIoAlwaysBecomeUnavailableWithoutRawSuppression",
+        "post": "PG14654-storage-resource-whole-twenty-six-post-v1",
+        "postSha256": "64716d82a4588387921fc49a0cdb423c79b661c22429a7a5662ab56edcac5a5f"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory008UnknownCloseTakesPriorityOverBodyIo",
+        "post": "PG14654-storage-resource-whole-twenty-six-post-v1",
+        "postSha256": "64716d82a4588387921fc49a0cdb423c79b661c22429a7a5662ab56edcac5a5f"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory009UnknownBodyKeepsIdentityAfterSuccessfulClose",
+        "post": "PG14654-storage-resource-whole-twenty-six-post-v1",
+        "postSha256": "64716d82a4588387921fc49a0cdb423c79b661c22429a7a5662ab56edcac5a5f"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory010UnknownCompoundAndSelfFailureHaveSanitizedOrderedSuppression",
+        "post": "PG14654-storage-resource-whole-twenty-six-post-v1",
+        "postSha256": "64716d82a4588387921fc49a0cdb423c79b661c22429a7a5662ab56edcac5a5f"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory011SuccessfulBodyCannotHideAnyCloseFailure",
+        "post": "PG14654-storage-resource-whole-twenty-six-post-v1",
+        "postSha256": "64716d82a4588387921fc49a0cdb423c79b661c22429a7a5662ab56edcac5a5f"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory015IncompleteAssemblyMatchesIndependentThreeByFourGolden",
+        "post": "PG14654-storage-resource-whole-twenty-six-post-v1",
+        "postSha256": "64716d82a4588387921fc49a0cdb423c79b661c22429a7a5662ab56edcac5a5f"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory016NullCompleteOwnerIsReleasedWithSanitizedCompoundFailure",
+        "post": "PG14654-storage-resource-whole-twenty-six-post-v1",
+        "postSha256": "64716d82a4588387921fc49a0cdb423c79b661c22429a7a5662ab56edcac5a5f"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory017RepeatedAndAlreadySuppressedFailuresKeepIndependentPriority",
+        "post": "PG14654-storage-resource-whole-twenty-six-post-v1",
+        "postSha256": "64716d82a4588387921fc49a0cdb423c79b661c22429a7a5662ab56edcac5a5f"
+      }
+    ]
+  },
+  {
+    "applicabilityAcceptedByWholeGate": false,
+    "contextLines": [
+      "        if (resource != null) {",
+      "          try {",
+      "            release.close(resource);",
+      "          } catch (IOException | RuntimeException | Error secondary) {",
+      "            if (primary instanceof IOException && !(secondary instanceof IOException))",
+      "              throw secondary;",
+      "            primary.addSuppressed(new StorageIoException(StorageIoException.Reason.UNAVAILABLE));"
+    ],
+    "currentWholeJoinPending": true,
+    "designReference": {
+      "originMain": "8b91944df5820535e23ba2469740f1c0aa94c447",
+      "path": "documents/300_SS/330_\u30c7\u30fc\u30bf\u30fb\u30d5\u30a1\u30a4\u30eb/333_\u5927\u5bb9\u91cf\u7d50\u679cfile\u30fbmedia\u30fbRange\u914d\u4fe1\u8a2d\u8a08.md",
+      "sections": [
+        "SSC063",
+        "SSC308"
+      ],
+      "sha256": "d861735e91a6930bbf239937deda29f3675fbf50817953a61e07c0255387fa66"
+    },
+    "id": "STO14664-003",
+    "productTestsExecutedByReview": 0,
+    "productionChanged": false,
+    "proposedDisposition": "REVIEWED_DESIGN_REQUIRED_BOUNDARY_RAW_RETAINED",
+    "qualityGatePass": false,
+    "rationale": "Release Runtime/Error cannot be hidden: after IO primary it wins, otherwise original unknown primary survives with bounded sanitized suppression. Success-body release failure propagates.",
+    "raw": {
+      "attributes": {
+        "begincolumn": "34",
+        "beginline": "86",
+        "class": "ResourceScope",
+        "endcolumn": "50",
+        "endline": "86",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidcatchinggenericexception",
+        "method": "acquire",
+        "package": "dev.codex.schubert.nk.storage",
+        "priority": "3",
+        "rule": "AvoidCatchingGenericException",
+        "ruleset": "Error Prone"
+      },
+      "kind": "main",
+      "message": "Avoid catching RuntimeException in try-catch block",
+      "module": "storage",
+      "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ResourceScope.java",
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "639d3e7a51ad7d4fd2b45a9d5b8f7536ece257f08b0db9955249704009d00bbf",
+      "tool": "pmd"
+    },
+    "rawOccurrence": 1,
+    "rawRetained": true,
+    "rulesOrSuppressionChanged": false,
+    "semanticRole": "SECONDARY_RUNTIME",
+    "sourceMethod": "acquire",
+    "sourceToken": "RuntimeException",
+    "testReferences": [
+      {
+        "classname": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory006BodyIoReasonsAreRedactedAndExistingSuppressionIsNotExported",
+        "post": "PG14654-storage-resource-whole-twenty-six-post-v1",
+        "postSha256": "64716d82a4588387921fc49a0cdb423c79b661c22429a7a5662ab56edcac5a5f"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory007BodyAndCloseIoAlwaysBecomeUnavailableWithoutRawSuppression",
+        "post": "PG14654-storage-resource-whole-twenty-six-post-v1",
+        "postSha256": "64716d82a4588387921fc49a0cdb423c79b661c22429a7a5662ab56edcac5a5f"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory008UnknownCloseTakesPriorityOverBodyIo",
+        "post": "PG14654-storage-resource-whole-twenty-six-post-v1",
+        "postSha256": "64716d82a4588387921fc49a0cdb423c79b661c22429a7a5662ab56edcac5a5f"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory009UnknownBodyKeepsIdentityAfterSuccessfulClose",
+        "post": "PG14654-storage-resource-whole-twenty-six-post-v1",
+        "postSha256": "64716d82a4588387921fc49a0cdb423c79b661c22429a7a5662ab56edcac5a5f"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory010UnknownCompoundAndSelfFailureHaveSanitizedOrderedSuppression",
+        "post": "PG14654-storage-resource-whole-twenty-six-post-v1",
+        "postSha256": "64716d82a4588387921fc49a0cdb423c79b661c22429a7a5662ab56edcac5a5f"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory011SuccessfulBodyCannotHideAnyCloseFailure",
+        "post": "PG14654-storage-resource-whole-twenty-six-post-v1",
+        "postSha256": "64716d82a4588387921fc49a0cdb423c79b661c22429a7a5662ab56edcac5a5f"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory015IncompleteAssemblyMatchesIndependentThreeByFourGolden",
+        "post": "PG14654-storage-resource-whole-twenty-six-post-v1",
+        "postSha256": "64716d82a4588387921fc49a0cdb423c79b661c22429a7a5662ab56edcac5a5f"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory016NullCompleteOwnerIsReleasedWithSanitizedCompoundFailure",
+        "post": "PG14654-storage-resource-whole-twenty-six-post-v1",
+        "postSha256": "64716d82a4588387921fc49a0cdb423c79b661c22429a7a5662ab56edcac5a5f"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory017RepeatedAndAlreadySuppressedFailuresKeepIndependentPriority",
+        "post": "PG14654-storage-resource-whole-twenty-six-post-v1",
+        "postSha256": "64716d82a4588387921fc49a0cdb423c79b661c22429a7a5662ab56edcac5a5f"
+      }
+    ]
+  },
+  {
+    "applicabilityAcceptedByWholeGate": false,
+    "contextLines": [
+      "        if (resource != null) {",
+      "          try {",
+      "            release.close(resource);",
+      "          } catch (IOException | RuntimeException | Error secondary) {",
+      "            if (primary instanceof IOException && !(secondary instanceof IOException))",
+      "              throw secondary;",
+      "            primary.addSuppressed(new StorageIoException(StorageIoException.Reason.UNAVAILABLE));"
+    ],
+    "currentWholeJoinPending": true,
+    "designReference": {
+      "originMain": "8b91944df5820535e23ba2469740f1c0aa94c447",
+      "path": "documents/300_SS/330_\u30c7\u30fc\u30bf\u30fb\u30d5\u30a1\u30a4\u30eb/333_\u5927\u5bb9\u91cf\u7d50\u679cfile\u30fbmedia\u30fbRange\u914d\u4fe1\u8a2d\u8a08.md",
+      "sections": [
+        "SSC063",
+        "SSC308"
+      ],
+      "sha256": "d861735e91a6930bbf239937deda29f3675fbf50817953a61e07c0255387fa66"
+    },
+    "id": "STO14664-004",
+    "productTestsExecutedByReview": 0,
+    "productionChanged": false,
+    "proposedDisposition": "REVIEWED_DESIGN_REQUIRED_BOUNDARY_RAW_RETAINED",
+    "qualityGatePass": false,
+    "rationale": "Release Runtime/Error cannot be hidden: after IO primary it wins, otherwise original unknown primary survives with bounded sanitized suppression. Success-body release failure propagates.",
+    "raw": {
+      "attributes": {
+        "begincolumn": "53",
+        "beginline": "86",
+        "class": "ResourceScope",
+        "endcolumn": "58",
+        "endline": "86",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidcatchinggenericexception",
+        "method": "acquire",
+        "package": "dev.codex.schubert.nk.storage",
+        "priority": "3",
+        "rule": "AvoidCatchingGenericException",
+        "ruleset": "Error Prone"
+      },
+      "kind": "main",
+      "message": "Avoid catching Error in try-catch block",
+      "module": "storage",
+      "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ResourceScope.java",
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "639d3e7a51ad7d4fd2b45a9d5b8f7536ece257f08b0db9955249704009d00bbf",
+      "tool": "pmd"
+    },
+    "rawOccurrence": 1,
+    "rawRetained": true,
+    "rulesOrSuppressionChanged": false,
+    "semanticRole": "SECONDARY_ERROR",
+    "sourceMethod": "acquire",
+    "sourceToken": "Error",
+    "testReferences": [
+      {
+        "classname": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory006BodyIoReasonsAreRedactedAndExistingSuppressionIsNotExported",
+        "post": "PG14654-storage-resource-whole-twenty-six-post-v1",
+        "postSha256": "64716d82a4588387921fc49a0cdb423c79b661c22429a7a5662ab56edcac5a5f"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory007BodyAndCloseIoAlwaysBecomeUnavailableWithoutRawSuppression",
+        "post": "PG14654-storage-resource-whole-twenty-six-post-v1",
+        "postSha256": "64716d82a4588387921fc49a0cdb423c79b661c22429a7a5662ab56edcac5a5f"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory008UnknownCloseTakesPriorityOverBodyIo",
+        "post": "PG14654-storage-resource-whole-twenty-six-post-v1",
+        "postSha256": "64716d82a4588387921fc49a0cdb423c79b661c22429a7a5662ab56edcac5a5f"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory009UnknownBodyKeepsIdentityAfterSuccessfulClose",
+        "post": "PG14654-storage-resource-whole-twenty-six-post-v1",
+        "postSha256": "64716d82a4588387921fc49a0cdb423c79b661c22429a7a5662ab56edcac5a5f"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory010UnknownCompoundAndSelfFailureHaveSanitizedOrderedSuppression",
+        "post": "PG14654-storage-resource-whole-twenty-six-post-v1",
+        "postSha256": "64716d82a4588387921fc49a0cdb423c79b661c22429a7a5662ab56edcac5a5f"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory011SuccessfulBodyCannotHideAnyCloseFailure",
+        "post": "PG14654-storage-resource-whole-twenty-six-post-v1",
+        "postSha256": "64716d82a4588387921fc49a0cdb423c79b661c22429a7a5662ab56edcac5a5f"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory015IncompleteAssemblyMatchesIndependentThreeByFourGolden",
+        "post": "PG14654-storage-resource-whole-twenty-six-post-v1",
+        "postSha256": "64716d82a4588387921fc49a0cdb423c79b661c22429a7a5662ab56edcac5a5f"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory016NullCompleteOwnerIsReleasedWithSanitizedCompoundFailure",
+        "post": "PG14654-storage-resource-whole-twenty-six-post-v1",
+        "postSha256": "64716d82a4588387921fc49a0cdb423c79b661c22429a7a5662ab56edcac5a5f"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory017RepeatedAndAlreadySuppressedFailuresKeepIndependentPriority",
+        "post": "PG14654-storage-resource-whole-twenty-six-post-v1",
+        "postSha256": "64716d82a4588387921fc49a0cdb423c79b661c22429a7a5662ab56edcac5a5f"
+      }
+    ]
+  },
+  {
+    "applicabilityAcceptedByWholeGate": false,
+    "contextLines": [
+      "          try {",
+      "            release.close(resource);",
+      "          } catch (IOException | RuntimeException | Error secondary) {",
+      "            if (primary instanceof IOException && !(secondary instanceof IOException))",
+      "              throw secondary;",
+      "            primary.addSuppressed(new StorageIoException(StorageIoException.Reason.UNAVAILABLE));",
+      "          }"
+    ],
+    "currentWholeJoinPending": true,
+    "designReference": {
+      "originMain": "8b91944df5820535e23ba2469740f1c0aa94c447",
+      "path": "documents/300_SS/330_\u30c7\u30fc\u30bf\u30fb\u30d5\u30a1\u30a4\u30eb/333_\u5927\u5bb9\u91cf\u7d50\u679cfile\u30fbmedia\u30fbRange\u914d\u4fe1\u8a2d\u8a08.md",
+      "sections": [
+        "SSC063",
+        "SSC308"
+      ],
+      "sha256": "d861735e91a6930bbf239937deda29f3675fbf50817953a61e07c0255387fa66"
+    },
+    "id": "STO14664-005",
+    "productTestsExecutedByReview": 0,
+    "productionChanged": false,
+    "proposedDisposition": "REVIEWED_DESIGN_REQUIRED_BOUNDARY_RAW_RETAINED",
+    "qualityGatePass": false,
+    "rationale": "The exact primary-IO/secondary-IO distinctions implement approved SSC063/308 priority, not recovery by broad catch. Duplicated multi-catch diagnostics remain separate raw occurrences.",
+    "raw": {
+      "attributes": {
+        "begincolumn": "36",
+        "beginline": "87",
+        "class": "ResourceScope",
+        "endcolumn": "47",
+        "endline": "87",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidinstanceofchecksincatchclause",
+        "method": "acquire",
+        "package": "dev.codex.schubert.nk.storage",
+        "priority": "3",
+        "rule": "AvoidInstanceofChecksInCatchClause",
+        "ruleset": "Error Prone"
+      },
+      "kind": "main",
+      "message": "An instanceof check is being performed on the caught exception. Create a separate catch clause for IOException.",
+      "module": "storage",
+      "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ResourceScope.java",
+      "rule": "AvoidInstanceofChecksInCatchClause",
+      "sourceSha256": "639d3e7a51ad7d4fd2b45a9d5b8f7536ece257f08b0db9955249704009d00bbf",
+      "tool": "pmd"
+    },
+    "rawOccurrence": 1,
+    "rawRetained": true,
+    "rulesOrSuppressionChanged": false,
+    "semanticRole": "PRIMARY_IO_PRIORITY",
+    "sourceMethod": "acquire",
+    "sourceToken": "IOException",
+    "testReferences": [
+      {
+        "classname": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory006BodyIoReasonsAreRedactedAndExistingSuppressionIsNotExported",
+        "post": "PG14654-storage-resource-whole-twenty-six-post-v1",
+        "postSha256": "64716d82a4588387921fc49a0cdb423c79b661c22429a7a5662ab56edcac5a5f"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory007BodyAndCloseIoAlwaysBecomeUnavailableWithoutRawSuppression",
+        "post": "PG14654-storage-resource-whole-twenty-six-post-v1",
+        "postSha256": "64716d82a4588387921fc49a0cdb423c79b661c22429a7a5662ab56edcac5a5f"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory008UnknownCloseTakesPriorityOverBodyIo",
+        "post": "PG14654-storage-resource-whole-twenty-six-post-v1",
+        "postSha256": "64716d82a4588387921fc49a0cdb423c79b661c22429a7a5662ab56edcac5a5f"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory009UnknownBodyKeepsIdentityAfterSuccessfulClose",
+        "post": "PG14654-storage-resource-whole-twenty-six-post-v1",
+        "postSha256": "64716d82a4588387921fc49a0cdb423c79b661c22429a7a5662ab56edcac5a5f"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory010UnknownCompoundAndSelfFailureHaveSanitizedOrderedSuppression",
+        "post": "PG14654-storage-resource-whole-twenty-six-post-v1",
+        "postSha256": "64716d82a4588387921fc49a0cdb423c79b661c22429a7a5662ab56edcac5a5f"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory011SuccessfulBodyCannotHideAnyCloseFailure",
+        "post": "PG14654-storage-resource-whole-twenty-six-post-v1",
+        "postSha256": "64716d82a4588387921fc49a0cdb423c79b661c22429a7a5662ab56edcac5a5f"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory015IncompleteAssemblyMatchesIndependentThreeByFourGolden",
+        "post": "PG14654-storage-resource-whole-twenty-six-post-v1",
+        "postSha256": "64716d82a4588387921fc49a0cdb423c79b661c22429a7a5662ab56edcac5a5f"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory016NullCompleteOwnerIsReleasedWithSanitizedCompoundFailure",
+        "post": "PG14654-storage-resource-whole-twenty-six-post-v1",
+        "postSha256": "64716d82a4588387921fc49a0cdb423c79b661c22429a7a5662ab56edcac5a5f"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory017RepeatedAndAlreadySuppressedFailuresKeepIndependentPriority",
+        "post": "PG14654-storage-resource-whole-twenty-six-post-v1",
+        "postSha256": "64716d82a4588387921fc49a0cdb423c79b661c22429a7a5662ab56edcac5a5f"
+      }
+    ]
+  },
+  {
+    "applicabilityAcceptedByWholeGate": false,
+    "contextLines": [
+      "          try {",
+      "            release.close(resource);",
+      "          } catch (IOException | RuntimeException | Error secondary) {",
+      "            if (primary instanceof IOException && !(secondary instanceof IOException))",
+      "              throw secondary;",
+      "            primary.addSuppressed(new StorageIoException(StorageIoException.Reason.UNAVAILABLE));",
+      "          }"
+    ],
+    "currentWholeJoinPending": true,
+    "designReference": {
+      "originMain": "8b91944df5820535e23ba2469740f1c0aa94c447",
+      "path": "documents/300_SS/330_\u30c7\u30fc\u30bf\u30fb\u30d5\u30a1\u30a4\u30eb/333_\u5927\u5bb9\u91cf\u7d50\u679cfile\u30fbmedia\u30fbRange\u914d\u4fe1\u8a2d\u8a08.md",
+      "sections": [
+        "SSC063",
+        "SSC308"
+      ],
+      "sha256": "d861735e91a6930bbf239937deda29f3675fbf50817953a61e07c0255387fa66"
+    },
+    "id": "STO14664-006",
+    "productTestsExecutedByReview": 0,
+    "productionChanged": false,
+    "proposedDisposition": "REVIEWED_DESIGN_REQUIRED_BOUNDARY_RAW_RETAINED",
+    "qualityGatePass": false,
+    "rationale": "The exact primary-IO/secondary-IO distinctions implement approved SSC063/308 priority, not recovery by broad catch. Duplicated multi-catch diagnostics remain separate raw occurrences.",
+    "raw": {
+      "attributes": {
+        "begincolumn": "36",
+        "beginline": "87",
+        "class": "ResourceScope",
+        "endcolumn": "47",
+        "endline": "87",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidinstanceofchecksincatchclause",
+        "method": "acquire",
+        "package": "dev.codex.schubert.nk.storage",
+        "priority": "3",
+        "rule": "AvoidInstanceofChecksInCatchClause",
+        "ruleset": "Error Prone"
+      },
+      "kind": "main",
+      "message": "An instanceof check is being performed on the caught exception. Create a separate catch clause for IOException.",
+      "module": "storage",
+      "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ResourceScope.java",
+      "rule": "AvoidInstanceofChecksInCatchClause",
+      "sourceSha256": "639d3e7a51ad7d4fd2b45a9d5b8f7536ece257f08b0db9955249704009d00bbf",
+      "tool": "pmd"
+    },
+    "rawOccurrence": 2,
+    "rawRetained": true,
+    "rulesOrSuppressionChanged": false,
+    "semanticRole": "PRIMARY_IO_PRIORITY",
+    "sourceMethod": "acquire",
+    "sourceToken": "IOException",
+    "testReferences": [
+      {
+        "classname": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory006BodyIoReasonsAreRedactedAndExistingSuppressionIsNotExported",
+        "post": "PG14654-storage-resource-whole-twenty-six-post-v1",
+        "postSha256": "64716d82a4588387921fc49a0cdb423c79b661c22429a7a5662ab56edcac5a5f"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory007BodyAndCloseIoAlwaysBecomeUnavailableWithoutRawSuppression",
+        "post": "PG14654-storage-resource-whole-twenty-six-post-v1",
+        "postSha256": "64716d82a4588387921fc49a0cdb423c79b661c22429a7a5662ab56edcac5a5f"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory008UnknownCloseTakesPriorityOverBodyIo",
+        "post": "PG14654-storage-resource-whole-twenty-six-post-v1",
+        "postSha256": "64716d82a4588387921fc49a0cdb423c79b661c22429a7a5662ab56edcac5a5f"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory009UnknownBodyKeepsIdentityAfterSuccessfulClose",
+        "post": "PG14654-storage-resource-whole-twenty-six-post-v1",
+        "postSha256": "64716d82a4588387921fc49a0cdb423c79b661c22429a7a5662ab56edcac5a5f"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory010UnknownCompoundAndSelfFailureHaveSanitizedOrderedSuppression",
+        "post": "PG14654-storage-resource-whole-twenty-six-post-v1",
+        "postSha256": "64716d82a4588387921fc49a0cdb423c79b661c22429a7a5662ab56edcac5a5f"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory011SuccessfulBodyCannotHideAnyCloseFailure",
+        "post": "PG14654-storage-resource-whole-twenty-six-post-v1",
+        "postSha256": "64716d82a4588387921fc49a0cdb423c79b661c22429a7a5662ab56edcac5a5f"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory015IncompleteAssemblyMatchesIndependentThreeByFourGolden",
+        "post": "PG14654-storage-resource-whole-twenty-six-post-v1",
+        "postSha256": "64716d82a4588387921fc49a0cdb423c79b661c22429a7a5662ab56edcac5a5f"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory016NullCompleteOwnerIsReleasedWithSanitizedCompoundFailure",
+        "post": "PG14654-storage-resource-whole-twenty-six-post-v1",
+        "postSha256": "64716d82a4588387921fc49a0cdb423c79b661c22429a7a5662ab56edcac5a5f"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory017RepeatedAndAlreadySuppressedFailuresKeepIndependentPriority",
+        "post": "PG14654-storage-resource-whole-twenty-six-post-v1",
+        "postSha256": "64716d82a4588387921fc49a0cdb423c79b661c22429a7a5662ab56edcac5a5f"
+      }
+    ]
+  },
+  {
+    "applicabilityAcceptedByWholeGate": false,
+    "contextLines": [
+      "          try {",
+      "            release.close(resource);",
+      "          } catch (IOException | RuntimeException | Error secondary) {",
+      "            if (primary instanceof IOException && !(secondary instanceof IOException))",
+      "              throw secondary;",
+      "            primary.addSuppressed(new StorageIoException(StorageIoException.Reason.UNAVAILABLE));",
+      "          }"
+    ],
+    "currentWholeJoinPending": true,
+    "designReference": {
+      "originMain": "8b91944df5820535e23ba2469740f1c0aa94c447",
+      "path": "documents/300_SS/330_\u30c7\u30fc\u30bf\u30fb\u30d5\u30a1\u30a4\u30eb/333_\u5927\u5bb9\u91cf\u7d50\u679cfile\u30fbmedia\u30fbRange\u914d\u4fe1\u8a2d\u8a08.md",
+      "sections": [
+        "SSC063",
+        "SSC308"
+      ],
+      "sha256": "d861735e91a6930bbf239937deda29f3675fbf50817953a61e07c0255387fa66"
+    },
+    "id": "STO14664-007",
+    "productTestsExecutedByReview": 0,
+    "productionChanged": false,
+    "proposedDisposition": "REVIEWED_DESIGN_REQUIRED_BOUNDARY_RAW_RETAINED",
+    "qualityGatePass": false,
+    "rationale": "The exact primary-IO/secondary-IO distinctions implement approved SSC063/308 priority, not recovery by broad catch. Duplicated multi-catch diagnostics remain separate raw occurrences.",
+    "raw": {
+      "attributes": {
+        "begincolumn": "74",
+        "beginline": "87",
+        "class": "ResourceScope",
+        "endcolumn": "85",
+        "endline": "87",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidinstanceofchecksincatchclause",
+        "method": "acquire",
+        "package": "dev.codex.schubert.nk.storage",
+        "priority": "3",
+        "rule": "AvoidInstanceofChecksInCatchClause",
+        "ruleset": "Error Prone"
+      },
+      "kind": "main",
+      "message": "An instanceof check is being performed on the caught exception. Create a separate catch clause for IOException.",
+      "module": "storage",
+      "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ResourceScope.java",
+      "rule": "AvoidInstanceofChecksInCatchClause",
+      "sourceSha256": "639d3e7a51ad7d4fd2b45a9d5b8f7536ece257f08b0db9955249704009d00bbf",
+      "tool": "pmd"
+    },
+    "rawOccurrence": 1,
+    "rawRetained": true,
+    "rulesOrSuppressionChanged": false,
+    "semanticRole": "SECONDARY_IO_PRIORITY",
+    "sourceMethod": "acquire",
+    "sourceToken": "IOException",
+    "testReferences": [
+      {
+        "classname": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory006BodyIoReasonsAreRedactedAndExistingSuppressionIsNotExported",
+        "post": "PG14654-storage-resource-whole-twenty-six-post-v1",
+        "postSha256": "64716d82a4588387921fc49a0cdb423c79b661c22429a7a5662ab56edcac5a5f"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory007BodyAndCloseIoAlwaysBecomeUnavailableWithoutRawSuppression",
+        "post": "PG14654-storage-resource-whole-twenty-six-post-v1",
+        "postSha256": "64716d82a4588387921fc49a0cdb423c79b661c22429a7a5662ab56edcac5a5f"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory008UnknownCloseTakesPriorityOverBodyIo",
+        "post": "PG14654-storage-resource-whole-twenty-six-post-v1",
+        "postSha256": "64716d82a4588387921fc49a0cdb423c79b661c22429a7a5662ab56edcac5a5f"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory009UnknownBodyKeepsIdentityAfterSuccessfulClose",
+        "post": "PG14654-storage-resource-whole-twenty-six-post-v1",
+        "postSha256": "64716d82a4588387921fc49a0cdb423c79b661c22429a7a5662ab56edcac5a5f"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory010UnknownCompoundAndSelfFailureHaveSanitizedOrderedSuppression",
+        "post": "PG14654-storage-resource-whole-twenty-six-post-v1",
+        "postSha256": "64716d82a4588387921fc49a0cdb423c79b661c22429a7a5662ab56edcac5a5f"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory011SuccessfulBodyCannotHideAnyCloseFailure",
+        "post": "PG14654-storage-resource-whole-twenty-six-post-v1",
+        "postSha256": "64716d82a4588387921fc49a0cdb423c79b661c22429a7a5662ab56edcac5a5f"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory015IncompleteAssemblyMatchesIndependentThreeByFourGolden",
+        "post": "PG14654-storage-resource-whole-twenty-six-post-v1",
+        "postSha256": "64716d82a4588387921fc49a0cdb423c79b661c22429a7a5662ab56edcac5a5f"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory016NullCompleteOwnerIsReleasedWithSanitizedCompoundFailure",
+        "post": "PG14654-storage-resource-whole-twenty-six-post-v1",
+        "postSha256": "64716d82a4588387921fc49a0cdb423c79b661c22429a7a5662ab56edcac5a5f"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory017RepeatedAndAlreadySuppressedFailuresKeepIndependentPriority",
+        "post": "PG14654-storage-resource-whole-twenty-six-post-v1",
+        "postSha256": "64716d82a4588387921fc49a0cdb423c79b661c22429a7a5662ab56edcac5a5f"
+      }
+    ]
+  },
+  {
+    "applicabilityAcceptedByWholeGate": false,
+    "contextLines": [
+      "          try {",
+      "            release.close(resource);",
+      "          } catch (IOException | RuntimeException | Error secondary) {",
+      "            if (primary instanceof IOException && !(secondary instanceof IOException))",
+      "              throw secondary;",
+      "            primary.addSuppressed(new StorageIoException(StorageIoException.Reason.UNAVAILABLE));",
+      "          }"
+    ],
+    "currentWholeJoinPending": true,
+    "designReference": {
+      "originMain": "8b91944df5820535e23ba2469740f1c0aa94c447",
+      "path": "documents/300_SS/330_\u30c7\u30fc\u30bf\u30fb\u30d5\u30a1\u30a4\u30eb/333_\u5927\u5bb9\u91cf\u7d50\u679cfile\u30fbmedia\u30fbRange\u914d\u4fe1\u8a2d\u8a08.md",
+      "sections": [
+        "SSC063",
+        "SSC308"
+      ],
+      "sha256": "d861735e91a6930bbf239937deda29f3675fbf50817953a61e07c0255387fa66"
+    },
+    "id": "STO14664-008",
+    "productTestsExecutedByReview": 0,
+    "productionChanged": false,
+    "proposedDisposition": "REVIEWED_DESIGN_REQUIRED_BOUNDARY_RAW_RETAINED",
+    "qualityGatePass": false,
+    "rationale": "The exact primary-IO/secondary-IO distinctions implement approved SSC063/308 priority, not recovery by broad catch. Duplicated multi-catch diagnostics remain separate raw occurrences.",
+    "raw": {
+      "attributes": {
+        "begincolumn": "74",
+        "beginline": "87",
+        "class": "ResourceScope",
+        "endcolumn": "85",
+        "endline": "87",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidinstanceofchecksincatchclause",
+        "method": "acquire",
+        "package": "dev.codex.schubert.nk.storage",
+        "priority": "3",
+        "rule": "AvoidInstanceofChecksInCatchClause",
+        "ruleset": "Error Prone"
+      },
+      "kind": "main",
+      "message": "An instanceof check is being performed on the caught exception. Create a separate catch clause for IOException.",
+      "module": "storage",
+      "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ResourceScope.java",
+      "rule": "AvoidInstanceofChecksInCatchClause",
+      "sourceSha256": "639d3e7a51ad7d4fd2b45a9d5b8f7536ece257f08b0db9955249704009d00bbf",
+      "tool": "pmd"
+    },
+    "rawOccurrence": 2,
+    "rawRetained": true,
+    "rulesOrSuppressionChanged": false,
+    "semanticRole": "SECONDARY_IO_PRIORITY",
+    "sourceMethod": "acquire",
+    "sourceToken": "IOException",
+    "testReferences": [
+      {
+        "classname": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory006BodyIoReasonsAreRedactedAndExistingSuppressionIsNotExported",
+        "post": "PG14654-storage-resource-whole-twenty-six-post-v1",
+        "postSha256": "64716d82a4588387921fc49a0cdb423c79b661c22429a7a5662ab56edcac5a5f"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory007BodyAndCloseIoAlwaysBecomeUnavailableWithoutRawSuppression",
+        "post": "PG14654-storage-resource-whole-twenty-six-post-v1",
+        "postSha256": "64716d82a4588387921fc49a0cdb423c79b661c22429a7a5662ab56edcac5a5f"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory008UnknownCloseTakesPriorityOverBodyIo",
+        "post": "PG14654-storage-resource-whole-twenty-six-post-v1",
+        "postSha256": "64716d82a4588387921fc49a0cdb423c79b661c22429a7a5662ab56edcac5a5f"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory009UnknownBodyKeepsIdentityAfterSuccessfulClose",
+        "post": "PG14654-storage-resource-whole-twenty-six-post-v1",
+        "postSha256": "64716d82a4588387921fc49a0cdb423c79b661c22429a7a5662ab56edcac5a5f"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory010UnknownCompoundAndSelfFailureHaveSanitizedOrderedSuppression",
+        "post": "PG14654-storage-resource-whole-twenty-six-post-v1",
+        "postSha256": "64716d82a4588387921fc49a0cdb423c79b661c22429a7a5662ab56edcac5a5f"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory011SuccessfulBodyCannotHideAnyCloseFailure",
+        "post": "PG14654-storage-resource-whole-twenty-six-post-v1",
+        "postSha256": "64716d82a4588387921fc49a0cdb423c79b661c22429a7a5662ab56edcac5a5f"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory015IncompleteAssemblyMatchesIndependentThreeByFourGolden",
+        "post": "PG14654-storage-resource-whole-twenty-six-post-v1",
+        "postSha256": "64716d82a4588387921fc49a0cdb423c79b661c22429a7a5662ab56edcac5a5f"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory016NullCompleteOwnerIsReleasedWithSanitizedCompoundFailure",
+        "post": "PG14654-storage-resource-whole-twenty-six-post-v1",
+        "postSha256": "64716d82a4588387921fc49a0cdb423c79b661c22429a7a5662ab56edcac5a5f"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory017RepeatedAndAlreadySuppressedFailuresKeepIndependentPriority",
+        "post": "PG14654-storage-resource-whole-twenty-six-post-v1",
+        "postSha256": "64716d82a4588387921fc49a0cdb423c79b661c22429a7a5662ab56edcac5a5f"
+      }
+    ]
+  },
+  {
+    "applicabilityAcceptedByWholeGate": false,
+    "contextLines": [
+      "      return result;",
+      "    } catch (IOException failure) {",
+      "      throw new StorageIoException(",
+      "          failure instanceof StorageIoException storage && failure.getSuppressed().length == 0",
+      "              ? storage.reason()",
+      "              : StorageIoException.Reason.UNAVAILABLE);",
+      "    }"
+    ],
+    "currentWholeJoinPending": true,
+    "designReference": {
+      "originMain": "8b91944df5820535e23ba2469740f1c0aa94c447",
+      "path": "documents/300_SS/330_\u30c7\u30fc\u30bf\u30fb\u30d5\u30a1\u30a4\u30eb/333_\u5927\u5bb9\u91cf\u7d50\u679cfile\u30fbmedia\u30fbRange\u914d\u4fe1\u8a2d\u8a08.md",
+      "sections": [
+        "SSC063",
+        "SSC308"
+      ],
+      "sha256": "d861735e91a6930bbf239937deda29f3675fbf50817953a61e07c0255387fa66"
+    },
+    "id": "STO14664-009",
+    "productTestsExecutedByReview": 0,
+    "productionChanged": false,
+    "proposedDisposition": "REVIEWED_DESIGN_REQUIRED_BOUNDARY_RAW_RETAINED",
+    "qualityGatePass": false,
+    "rationale": "Known Storage reason survives only when prior suppression is absent; return uses new bounded exception and never exports raw cause/suppression. Other IO becomes UNAVAILABLE.",
+    "raw": {
+      "attributes": {
+        "begincolumn": "30",
+        "beginline": "98",
+        "class": "ResourceScope",
+        "endcolumn": "48",
+        "endline": "98",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidinstanceofchecksincatchclause",
+        "method": "acquire",
+        "package": "dev.codex.schubert.nk.storage",
+        "priority": "3",
+        "rule": "AvoidInstanceofChecksInCatchClause",
+        "ruleset": "Error Prone"
+      },
+      "kind": "main",
+      "message": "An instanceof check is being performed on the caught exception. Create a separate catch clause for StorageIoException.",
+      "module": "storage",
+      "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ResourceScope.java",
+      "rule": "AvoidInstanceofChecksInCatchClause",
+      "sourceSha256": "639d3e7a51ad7d4fd2b45a9d5b8f7536ece257f08b0db9955249704009d00bbf",
+      "tool": "pmd"
+    },
+    "rawOccurrence": 1,
+    "rawRetained": true,
+    "rulesOrSuppressionChanged": false,
+    "semanticRole": "REASON_SANITIZATION",
+    "sourceMethod": "acquire",
+    "sourceToken": "StorageIoException",
+    "testReferences": [
+      {
+        "classname": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory006BodyIoReasonsAreRedactedAndExistingSuppressionIsNotExported",
+        "post": "PG14654-storage-resource-whole-twenty-six-post-v1",
+        "postSha256": "64716d82a4588387921fc49a0cdb423c79b661c22429a7a5662ab56edcac5a5f"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory007BodyAndCloseIoAlwaysBecomeUnavailableWithoutRawSuppression",
+        "post": "PG14654-storage-resource-whole-twenty-six-post-v1",
+        "postSha256": "64716d82a4588387921fc49a0cdb423c79b661c22429a7a5662ab56edcac5a5f"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory008UnknownCloseTakesPriorityOverBodyIo",
+        "post": "PG14654-storage-resource-whole-twenty-six-post-v1",
+        "postSha256": "64716d82a4588387921fc49a0cdb423c79b661c22429a7a5662ab56edcac5a5f"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory009UnknownBodyKeepsIdentityAfterSuccessfulClose",
+        "post": "PG14654-storage-resource-whole-twenty-six-post-v1",
+        "postSha256": "64716d82a4588387921fc49a0cdb423c79b661c22429a7a5662ab56edcac5a5f"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory010UnknownCompoundAndSelfFailureHaveSanitizedOrderedSuppression",
+        "post": "PG14654-storage-resource-whole-twenty-six-post-v1",
+        "postSha256": "64716d82a4588387921fc49a0cdb423c79b661c22429a7a5662ab56edcac5a5f"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory011SuccessfulBodyCannotHideAnyCloseFailure",
+        "post": "PG14654-storage-resource-whole-twenty-six-post-v1",
+        "postSha256": "64716d82a4588387921fc49a0cdb423c79b661c22429a7a5662ab56edcac5a5f"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory015IncompleteAssemblyMatchesIndependentThreeByFourGolden",
+        "post": "PG14654-storage-resource-whole-twenty-six-post-v1",
+        "postSha256": "64716d82a4588387921fc49a0cdb423c79b661c22429a7a5662ab56edcac5a5f"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory016NullCompleteOwnerIsReleasedWithSanitizedCompoundFailure",
+        "post": "PG14654-storage-resource-whole-twenty-six-post-v1",
+        "postSha256": "64716d82a4588387921fc49a0cdb423c79b661c22429a7a5662ab56edcac5a5f"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.storage.FactoryResourceScopeTest",
+        "method": "factory017RepeatedAndAlreadySuppressedFailuresKeepIndependentPriority",
+        "post": "PG14654-storage-resource-whole-twenty-six-post-v1",
+        "postSha256": "64716d82a4588387921fc49a0cdb423c79b661c22429a7a5662ab56edcac5a5f"
+      }
+    ]
+  },
+  {
+    "applicabilityAcceptedByWholeGate": false,
+    "contextLines": [
+      "      T result;",
+      "      try {",
+      "        result = action.run();",
+      "      } catch (IOException | RuntimeException | Error primary) {",
+      "        try {",
+      "          release.close();",
+      "        } catch (IOException | RuntimeException | Error secondary) {"
+    ],
+    "currentWholeJoinPending": true,
+    "designReference": {
+      "originMain": "8b91944df5820535e23ba2469740f1c0aa94c447",
+      "path": "documents/300_SS/330_\u30c7\u30fc\u30bf\u30fb\u30d5\u30a1\u30a4\u30eb/333_\u5927\u5bb9\u91cf\u7d50\u679cfile\u30fbmedia\u30fbRange\u914d\u4fe1\u8a2d\u8a08.md",
+      "sections": [
+        "SSC063",
+        "SSC308"
+      ],
+      "sha256": "d861735e91a6930bbf239937deda29f3675fbf50817953a61e07c0255387fa66"
+    },
+    "id": "STO14664-010",
+    "productTestsExecutedByReview": 0,
+    "productionChanged": false,
+    "proposedDisposition": "REVIEWED_DESIGN_REQUIRED_BOUNDARY_RAW_RETAINED",
+    "qualityGatePass": false,
+    "rationale": "Unknown Runtime/Error is caught only to attempt owned release once, then rethrown with original identity; no normal return or NPE normalization. Main resource-null branch rejects without granting ownership.",
+    "raw": {
+      "attributes": {
+        "begincolumn": "30",
+        "beginline": "112",
+        "class": "ResourceScope",
+        "endcolumn": "46",
+        "endline": "112",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidcatchinggenericexception",
+        "method": "use",
+        "package": "dev.codex.schubert.nk.storage",
+        "priority": "3",
+        "rule": "AvoidCatchingGenericException",
+        "ruleset": "Error Prone"
+      },
+      "kind": "main",
+      "message": "Avoid catching RuntimeException in try-catch block",
+      "module": "storage",
+      "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ResourceScope.java",
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "639d3e7a51ad7d4fd2b45a9d5b8f7536ece257f08b0db9955249704009d00bbf",
+      "tool": "pmd"
+    },
+    "rawOccurrence": 1,
+    "rawRetained": true,
+    "rulesOrSuppressionChanged": false,
+    "semanticRole": "PRIMARY_RUNTIME",
+    "sourceMethod": "use",
+    "sourceToken": "RuntimeException",
+    "testReferences": [
+      {
+        "classname": "dev.codex.schubert.nk.storage.ResourceScopeTest",
+        "method": "knownIoFailures",
+        "post": "PG14654-storage-resource-whole-twenty-six-post-v1",
+        "postSha256": "64716d82a4588387921fc49a0cdb423c79b661c22429a7a5662ab56edcac5a5f"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.storage.ResourceScopeTest",
+        "method": "unknownBodyFailures",
+        "post": "PG14654-storage-resource-whole-twenty-six-post-v1",
+        "postSha256": "64716d82a4588387921fc49a0cdb423c79b661c22429a7a5662ab56edcac5a5f"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.storage.ResourceScopeTest",
+        "method": "knownBodyUnknownCleanup",
+        "post": "PG14654-storage-resource-whole-twenty-six-post-v1",
+        "postSha256": "64716d82a4588387921fc49a0cdb423c79b661c22429a7a5662ab56edcac5a5f"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.storage.ResourceScopeTest",
+        "method": "unknownCompoundFailures",
+        "post": "PG14654-storage-resource-whole-twenty-six-post-v1",
+        "postSha256": "64716d82a4588387921fc49a0cdb423c79b661c22429a7a5662ab56edcac5a5f"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.storage.ResourceScopeTest",
+        "method": "nullAndNullableContracts",
+        "post": "PG14654-storage-resource-whole-twenty-six-post-v1",
+        "postSha256": "64716d82a4588387921fc49a0cdb423c79b661c22429a7a5662ab56edcac5a5f"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.storage.ResourceScopeTest",
+        "method": "nestedScopes",
+        "post": "PG14654-storage-resource-whole-twenty-six-post-v1",
+        "postSha256": "64716d82a4588387921fc49a0cdb423c79b661c22429a7a5662ab56edcac5a5f"
+      }
+    ]
+  },
+  {
+    "applicabilityAcceptedByWholeGate": false,
+    "contextLines": [
+      "      T result;",
+      "      try {",
+      "        result = action.run();",
+      "      } catch (IOException | RuntimeException | Error primary) {",
+      "        try {",
+      "          release.close();",
+      "        } catch (IOException | RuntimeException | Error secondary) {"
+    ],
+    "currentWholeJoinPending": true,
+    "designReference": {
+      "originMain": "8b91944df5820535e23ba2469740f1c0aa94c447",
+      "path": "documents/300_SS/330_\u30c7\u30fc\u30bf\u30fb\u30d5\u30a1\u30a4\u30eb/333_\u5927\u5bb9\u91cf\u7d50\u679cfile\u30fbmedia\u30fbRange\u914d\u4fe1\u8a2d\u8a08.md",
+      "sections": [
+        "SSC063",
+        "SSC308"
+      ],
+      "sha256": "d861735e91a6930bbf239937deda29f3675fbf50817953a61e07c0255387fa66"
+    },
+    "id": "STO14664-011",
+    "productTestsExecutedByReview": 0,
+    "productionChanged": false,
+    "proposedDisposition": "REVIEWED_DESIGN_REQUIRED_BOUNDARY_RAW_RETAINED",
+    "qualityGatePass": false,
+    "rationale": "Unknown Runtime/Error is caught only to attempt owned release once, then rethrown with original identity; no normal return or NPE normalization. Main resource-null branch rejects without granting ownership.",
+    "raw": {
+      "attributes": {
+        "begincolumn": "49",
+        "beginline": "112",
+        "class": "ResourceScope",
+        "endcolumn": "54",
+        "endline": "112",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidcatchinggenericexception",
+        "method": "use",
+        "package": "dev.codex.schubert.nk.storage",
+        "priority": "3",
+        "rule": "AvoidCatchingGenericException",
+        "ruleset": "Error Prone"
+      },
+      "kind": "main",
+      "message": "Avoid catching Error in try-catch block",
+      "module": "storage",
+      "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ResourceScope.java",
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "639d3e7a51ad7d4fd2b45a9d5b8f7536ece257f08b0db9955249704009d00bbf",
+      "tool": "pmd"
+    },
+    "rawOccurrence": 1,
+    "rawRetained": true,
+    "rulesOrSuppressionChanged": false,
+    "semanticRole": "PRIMARY_ERROR",
+    "sourceMethod": "use",
+    "sourceToken": "Error",
+    "testReferences": [
+      {
+        "classname": "dev.codex.schubert.nk.storage.ResourceScopeTest",
+        "method": "knownIoFailures",
+        "post": "PG14654-storage-resource-whole-twenty-six-post-v1",
+        "postSha256": "64716d82a4588387921fc49a0cdb423c79b661c22429a7a5662ab56edcac5a5f"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.storage.ResourceScopeTest",
+        "method": "unknownBodyFailures",
+        "post": "PG14654-storage-resource-whole-twenty-six-post-v1",
+        "postSha256": "64716d82a4588387921fc49a0cdb423c79b661c22429a7a5662ab56edcac5a5f"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.storage.ResourceScopeTest",
+        "method": "knownBodyUnknownCleanup",
+        "post": "PG14654-storage-resource-whole-twenty-six-post-v1",
+        "postSha256": "64716d82a4588387921fc49a0cdb423c79b661c22429a7a5662ab56edcac5a5f"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.storage.ResourceScopeTest",
+        "method": "unknownCompoundFailures",
+        "post": "PG14654-storage-resource-whole-twenty-six-post-v1",
+        "postSha256": "64716d82a4588387921fc49a0cdb423c79b661c22429a7a5662ab56edcac5a5f"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.storage.ResourceScopeTest",
+        "method": "nullAndNullableContracts",
+        "post": "PG14654-storage-resource-whole-twenty-six-post-v1",
+        "postSha256": "64716d82a4588387921fc49a0cdb423c79b661c22429a7a5662ab56edcac5a5f"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.storage.ResourceScopeTest",
+        "method": "nestedScopes",
+        "post": "PG14654-storage-resource-whole-twenty-six-post-v1",
+        "postSha256": "64716d82a4588387921fc49a0cdb423c79b661c22429a7a5662ab56edcac5a5f"
+      }
+    ]
+  },
+  {
+    "applicabilityAcceptedByWholeGate": false,
+    "contextLines": [
+      "      } catch (IOException | RuntimeException | Error primary) {",
+      "        try {",
+      "          release.close();",
+      "        } catch (IOException | RuntimeException | Error secondary) {",
+      "          if (primary instanceof IOException && !(secondary instanceof IOException))",
+      "            throw secondary;",
+      "          primary.addSuppressed(new StorageIoException(StorageIoException.Reason.UNAVAILABLE));"
+    ],
+    "currentWholeJoinPending": true,
+    "designReference": {
+      "originMain": "8b91944df5820535e23ba2469740f1c0aa94c447",
+      "path": "documents/300_SS/330_\u30c7\u30fc\u30bf\u30fb\u30d5\u30a1\u30a4\u30eb/333_\u5927\u5bb9\u91cf\u7d50\u679cfile\u30fbmedia\u30fbRange\u914d\u4fe1\u8a2d\u8a08.md",
+      "sections": [
+        "SSC063",
+        "SSC308"
+      ],
+      "sha256": "d861735e91a6930bbf239937deda29f3675fbf50817953a61e07c0255387fa66"
+    },
+    "id": "STO14664-012",
+    "productTestsExecutedByReview": 0,
+    "productionChanged": false,
+    "proposedDisposition": "REVIEWED_DESIGN_REQUIRED_BOUNDARY_RAW_RETAINED",
+    "qualityGatePass": false,
+    "rationale": "Release Runtime/Error cannot be hidden: after IO primary it wins, otherwise original unknown primary survives with bounded sanitized suppression. Success-body release failure propagates.",
+    "raw": {
+      "attributes": {
+        "begincolumn": "32",
+        "beginline": "115",
+        "class": "ResourceScope",
+        "endcolumn": "48",
+        "endline": "115",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidcatchinggenericexception",
+        "method": "use",
+        "package": "dev.codex.schubert.nk.storage",
+        "priority": "3",
+        "rule": "AvoidCatchingGenericException",
+        "ruleset": "Error Prone"
+      },
+      "kind": "main",
+      "message": "Avoid catching RuntimeException in try-catch block",
+      "module": "storage",
+      "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ResourceScope.java",
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "639d3e7a51ad7d4fd2b45a9d5b8f7536ece257f08b0db9955249704009d00bbf",
+      "tool": "pmd"
+    },
+    "rawOccurrence": 1,
+    "rawRetained": true,
+    "rulesOrSuppressionChanged": false,
+    "semanticRole": "SECONDARY_RUNTIME",
+    "sourceMethod": "use",
+    "sourceToken": "RuntimeException",
+    "testReferences": [
+      {
+        "classname": "dev.codex.schubert.nk.storage.ResourceScopeTest",
+        "method": "knownIoFailures",
+        "post": "PG14654-storage-resource-whole-twenty-six-post-v1",
+        "postSha256": "64716d82a4588387921fc49a0cdb423c79b661c22429a7a5662ab56edcac5a5f"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.storage.ResourceScopeTest",
+        "method": "unknownBodyFailures",
+        "post": "PG14654-storage-resource-whole-twenty-six-post-v1",
+        "postSha256": "64716d82a4588387921fc49a0cdb423c79b661c22429a7a5662ab56edcac5a5f"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.storage.ResourceScopeTest",
+        "method": "knownBodyUnknownCleanup",
+        "post": "PG14654-storage-resource-whole-twenty-six-post-v1",
+        "postSha256": "64716d82a4588387921fc49a0cdb423c79b661c22429a7a5662ab56edcac5a5f"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.storage.ResourceScopeTest",
+        "method": "unknownCompoundFailures",
+        "post": "PG14654-storage-resource-whole-twenty-six-post-v1",
+        "postSha256": "64716d82a4588387921fc49a0cdb423c79b661c22429a7a5662ab56edcac5a5f"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.storage.ResourceScopeTest",
+        "method": "nullAndNullableContracts",
+        "post": "PG14654-storage-resource-whole-twenty-six-post-v1",
+        "postSha256": "64716d82a4588387921fc49a0cdb423c79b661c22429a7a5662ab56edcac5a5f"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.storage.ResourceScopeTest",
+        "method": "nestedScopes",
+        "post": "PG14654-storage-resource-whole-twenty-six-post-v1",
+        "postSha256": "64716d82a4588387921fc49a0cdb423c79b661c22429a7a5662ab56edcac5a5f"
+      }
+    ]
+  },
+  {
+    "applicabilityAcceptedByWholeGate": false,
+    "contextLines": [
+      "      } catch (IOException | RuntimeException | Error primary) {",
+      "        try {",
+      "          release.close();",
+      "        } catch (IOException | RuntimeException | Error secondary) {",
+      "          if (primary instanceof IOException && !(secondary instanceof IOException))",
+      "            throw secondary;",
+      "          primary.addSuppressed(new StorageIoException(StorageIoException.Reason.UNAVAILABLE));"
+    ],
+    "currentWholeJoinPending": true,
+    "designReference": {
+      "originMain": "8b91944df5820535e23ba2469740f1c0aa94c447",
+      "path": "documents/300_SS/330_\u30c7\u30fc\u30bf\u30fb\u30d5\u30a1\u30a4\u30eb/333_\u5927\u5bb9\u91cf\u7d50\u679cfile\u30fbmedia\u30fbRange\u914d\u4fe1\u8a2d\u8a08.md",
+      "sections": [
+        "SSC063",
+        "SSC308"
+      ],
+      "sha256": "d861735e91a6930bbf239937deda29f3675fbf50817953a61e07c0255387fa66"
+    },
+    "id": "STO14664-013",
+    "productTestsExecutedByReview": 0,
+    "productionChanged": false,
+    "proposedDisposition": "REVIEWED_DESIGN_REQUIRED_BOUNDARY_RAW_RETAINED",
+    "qualityGatePass": false,
+    "rationale": "Release Runtime/Error cannot be hidden: after IO primary it wins, otherwise original unknown primary survives with bounded sanitized suppression. Success-body release failure propagates.",
+    "raw": {
+      "attributes": {
+        "begincolumn": "51",
+        "beginline": "115",
+        "class": "ResourceScope",
+        "endcolumn": "56",
+        "endline": "115",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidcatchinggenericexception",
+        "method": "use",
+        "package": "dev.codex.schubert.nk.storage",
+        "priority": "3",
+        "rule": "AvoidCatchingGenericException",
+        "ruleset": "Error Prone"
+      },
+      "kind": "main",
+      "message": "Avoid catching Error in try-catch block",
+      "module": "storage",
+      "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ResourceScope.java",
+      "rule": "AvoidCatchingGenericException",
+      "sourceSha256": "639d3e7a51ad7d4fd2b45a9d5b8f7536ece257f08b0db9955249704009d00bbf",
+      "tool": "pmd"
+    },
+    "rawOccurrence": 1,
+    "rawRetained": true,
+    "rulesOrSuppressionChanged": false,
+    "semanticRole": "SECONDARY_ERROR",
+    "sourceMethod": "use",
+    "sourceToken": "Error",
+    "testReferences": [
+      {
+        "classname": "dev.codex.schubert.nk.storage.ResourceScopeTest",
+        "method": "knownIoFailures",
+        "post": "PG14654-storage-resource-whole-twenty-six-post-v1",
+        "postSha256": "64716d82a4588387921fc49a0cdb423c79b661c22429a7a5662ab56edcac5a5f"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.storage.ResourceScopeTest",
+        "method": "unknownBodyFailures",
+        "post": "PG14654-storage-resource-whole-twenty-six-post-v1",
+        "postSha256": "64716d82a4588387921fc49a0cdb423c79b661c22429a7a5662ab56edcac5a5f"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.storage.ResourceScopeTest",
+        "method": "knownBodyUnknownCleanup",
+        "post": "PG14654-storage-resource-whole-twenty-six-post-v1",
+        "postSha256": "64716d82a4588387921fc49a0cdb423c79b661c22429a7a5662ab56edcac5a5f"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.storage.ResourceScopeTest",
+        "method": "unknownCompoundFailures",
+        "post": "PG14654-storage-resource-whole-twenty-six-post-v1",
+        "postSha256": "64716d82a4588387921fc49a0cdb423c79b661c22429a7a5662ab56edcac5a5f"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.storage.ResourceScopeTest",
+        "method": "nullAndNullableContracts",
+        "post": "PG14654-storage-resource-whole-twenty-six-post-v1",
+        "postSha256": "64716d82a4588387921fc49a0cdb423c79b661c22429a7a5662ab56edcac5a5f"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.storage.ResourceScopeTest",
+        "method": "nestedScopes",
+        "post": "PG14654-storage-resource-whole-twenty-six-post-v1",
+        "postSha256": "64716d82a4588387921fc49a0cdb423c79b661c22429a7a5662ab56edcac5a5f"
+      }
+    ]
+  },
+  {
+    "applicabilityAcceptedByWholeGate": false,
+    "contextLines": [
+      "        try {",
+      "          release.close();",
+      "        } catch (IOException | RuntimeException | Error secondary) {",
+      "          if (primary instanceof IOException && !(secondary instanceof IOException))",
+      "            throw secondary;",
+      "          primary.addSuppressed(new StorageIoException(StorageIoException.Reason.UNAVAILABLE));",
+      "        }"
+    ],
+    "currentWholeJoinPending": true,
+    "designReference": {
+      "originMain": "8b91944df5820535e23ba2469740f1c0aa94c447",
+      "path": "documents/300_SS/330_\u30c7\u30fc\u30bf\u30fb\u30d5\u30a1\u30a4\u30eb/333_\u5927\u5bb9\u91cf\u7d50\u679cfile\u30fbmedia\u30fbRange\u914d\u4fe1\u8a2d\u8a08.md",
+      "sections": [
+        "SSC063",
+        "SSC308"
+      ],
+      "sha256": "d861735e91a6930bbf239937deda29f3675fbf50817953a61e07c0255387fa66"
+    },
+    "id": "STO14664-014",
+    "productTestsExecutedByReview": 0,
+    "productionChanged": false,
+    "proposedDisposition": "REVIEWED_DESIGN_REQUIRED_BOUNDARY_RAW_RETAINED",
+    "qualityGatePass": false,
+    "rationale": "The exact primary-IO/secondary-IO distinctions implement approved SSC063/308 priority, not recovery by broad catch. Duplicated multi-catch diagnostics remain separate raw occurrences.",
+    "raw": {
+      "attributes": {
+        "begincolumn": "34",
+        "beginline": "116",
+        "class": "ResourceScope",
+        "endcolumn": "45",
+        "endline": "116",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidinstanceofchecksincatchclause",
+        "method": "use",
+        "package": "dev.codex.schubert.nk.storage",
+        "priority": "3",
+        "rule": "AvoidInstanceofChecksInCatchClause",
+        "ruleset": "Error Prone"
+      },
+      "kind": "main",
+      "message": "An instanceof check is being performed on the caught exception. Create a separate catch clause for IOException.",
+      "module": "storage",
+      "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ResourceScope.java",
+      "rule": "AvoidInstanceofChecksInCatchClause",
+      "sourceSha256": "639d3e7a51ad7d4fd2b45a9d5b8f7536ece257f08b0db9955249704009d00bbf",
+      "tool": "pmd"
+    },
+    "rawOccurrence": 1,
+    "rawRetained": true,
+    "rulesOrSuppressionChanged": false,
+    "semanticRole": "PRIMARY_IO_PRIORITY",
+    "sourceMethod": "use",
+    "sourceToken": "IOException",
+    "testReferences": [
+      {
+        "classname": "dev.codex.schubert.nk.storage.ResourceScopeTest",
+        "method": "knownIoFailures",
+        "post": "PG14654-storage-resource-whole-twenty-six-post-v1",
+        "postSha256": "64716d82a4588387921fc49a0cdb423c79b661c22429a7a5662ab56edcac5a5f"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.storage.ResourceScopeTest",
+        "method": "unknownBodyFailures",
+        "post": "PG14654-storage-resource-whole-twenty-six-post-v1",
+        "postSha256": "64716d82a4588387921fc49a0cdb423c79b661c22429a7a5662ab56edcac5a5f"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.storage.ResourceScopeTest",
+        "method": "knownBodyUnknownCleanup",
+        "post": "PG14654-storage-resource-whole-twenty-six-post-v1",
+        "postSha256": "64716d82a4588387921fc49a0cdb423c79b661c22429a7a5662ab56edcac5a5f"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.storage.ResourceScopeTest",
+        "method": "unknownCompoundFailures",
+        "post": "PG14654-storage-resource-whole-twenty-six-post-v1",
+        "postSha256": "64716d82a4588387921fc49a0cdb423c79b661c22429a7a5662ab56edcac5a5f"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.storage.ResourceScopeTest",
+        "method": "nullAndNullableContracts",
+        "post": "PG14654-storage-resource-whole-twenty-six-post-v1",
+        "postSha256": "64716d82a4588387921fc49a0cdb423c79b661c22429a7a5662ab56edcac5a5f"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.storage.ResourceScopeTest",
+        "method": "nestedScopes",
+        "post": "PG14654-storage-resource-whole-twenty-six-post-v1",
+        "postSha256": "64716d82a4588387921fc49a0cdb423c79b661c22429a7a5662ab56edcac5a5f"
+      }
+    ]
+  },
+  {
+    "applicabilityAcceptedByWholeGate": false,
+    "contextLines": [
+      "        try {",
+      "          release.close();",
+      "        } catch (IOException | RuntimeException | Error secondary) {",
+      "          if (primary instanceof IOException && !(secondary instanceof IOException))",
+      "            throw secondary;",
+      "          primary.addSuppressed(new StorageIoException(StorageIoException.Reason.UNAVAILABLE));",
+      "        }"
+    ],
+    "currentWholeJoinPending": true,
+    "designReference": {
+      "originMain": "8b91944df5820535e23ba2469740f1c0aa94c447",
+      "path": "documents/300_SS/330_\u30c7\u30fc\u30bf\u30fb\u30d5\u30a1\u30a4\u30eb/333_\u5927\u5bb9\u91cf\u7d50\u679cfile\u30fbmedia\u30fbRange\u914d\u4fe1\u8a2d\u8a08.md",
+      "sections": [
+        "SSC063",
+        "SSC308"
+      ],
+      "sha256": "d861735e91a6930bbf239937deda29f3675fbf50817953a61e07c0255387fa66"
+    },
+    "id": "STO14664-015",
+    "productTestsExecutedByReview": 0,
+    "productionChanged": false,
+    "proposedDisposition": "REVIEWED_DESIGN_REQUIRED_BOUNDARY_RAW_RETAINED",
+    "qualityGatePass": false,
+    "rationale": "The exact primary-IO/secondary-IO distinctions implement approved SSC063/308 priority, not recovery by broad catch. Duplicated multi-catch diagnostics remain separate raw occurrences.",
+    "raw": {
+      "attributes": {
+        "begincolumn": "34",
+        "beginline": "116",
+        "class": "ResourceScope",
+        "endcolumn": "45",
+        "endline": "116",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidinstanceofchecksincatchclause",
+        "method": "use",
+        "package": "dev.codex.schubert.nk.storage",
+        "priority": "3",
+        "rule": "AvoidInstanceofChecksInCatchClause",
+        "ruleset": "Error Prone"
+      },
+      "kind": "main",
+      "message": "An instanceof check is being performed on the caught exception. Create a separate catch clause for IOException.",
+      "module": "storage",
+      "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ResourceScope.java",
+      "rule": "AvoidInstanceofChecksInCatchClause",
+      "sourceSha256": "639d3e7a51ad7d4fd2b45a9d5b8f7536ece257f08b0db9955249704009d00bbf",
+      "tool": "pmd"
+    },
+    "rawOccurrence": 2,
+    "rawRetained": true,
+    "rulesOrSuppressionChanged": false,
+    "semanticRole": "PRIMARY_IO_PRIORITY",
+    "sourceMethod": "use",
+    "sourceToken": "IOException",
+    "testReferences": [
+      {
+        "classname": "dev.codex.schubert.nk.storage.ResourceScopeTest",
+        "method": "knownIoFailures",
+        "post": "PG14654-storage-resource-whole-twenty-six-post-v1",
+        "postSha256": "64716d82a4588387921fc49a0cdb423c79b661c22429a7a5662ab56edcac5a5f"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.storage.ResourceScopeTest",
+        "method": "unknownBodyFailures",
+        "post": "PG14654-storage-resource-whole-twenty-six-post-v1",
+        "postSha256": "64716d82a4588387921fc49a0cdb423c79b661c22429a7a5662ab56edcac5a5f"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.storage.ResourceScopeTest",
+        "method": "knownBodyUnknownCleanup",
+        "post": "PG14654-storage-resource-whole-twenty-six-post-v1",
+        "postSha256": "64716d82a4588387921fc49a0cdb423c79b661c22429a7a5662ab56edcac5a5f"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.storage.ResourceScopeTest",
+        "method": "unknownCompoundFailures",
+        "post": "PG14654-storage-resource-whole-twenty-six-post-v1",
+        "postSha256": "64716d82a4588387921fc49a0cdb423c79b661c22429a7a5662ab56edcac5a5f"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.storage.ResourceScopeTest",
+        "method": "nullAndNullableContracts",
+        "post": "PG14654-storage-resource-whole-twenty-six-post-v1",
+        "postSha256": "64716d82a4588387921fc49a0cdb423c79b661c22429a7a5662ab56edcac5a5f"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.storage.ResourceScopeTest",
+        "method": "nestedScopes",
+        "post": "PG14654-storage-resource-whole-twenty-six-post-v1",
+        "postSha256": "64716d82a4588387921fc49a0cdb423c79b661c22429a7a5662ab56edcac5a5f"
+      }
+    ]
+  },
+  {
+    "applicabilityAcceptedByWholeGate": false,
+    "contextLines": [
+      "        try {",
+      "          release.close();",
+      "        } catch (IOException | RuntimeException | Error secondary) {",
+      "          if (primary instanceof IOException && !(secondary instanceof IOException))",
+      "            throw secondary;",
+      "          primary.addSuppressed(new StorageIoException(StorageIoException.Reason.UNAVAILABLE));",
+      "        }"
+    ],
+    "currentWholeJoinPending": true,
+    "designReference": {
+      "originMain": "8b91944df5820535e23ba2469740f1c0aa94c447",
+      "path": "documents/300_SS/330_\u30c7\u30fc\u30bf\u30fb\u30d5\u30a1\u30a4\u30eb/333_\u5927\u5bb9\u91cf\u7d50\u679cfile\u30fbmedia\u30fbRange\u914d\u4fe1\u8a2d\u8a08.md",
+      "sections": [
+        "SSC063",
+        "SSC308"
+      ],
+      "sha256": "d861735e91a6930bbf239937deda29f3675fbf50817953a61e07c0255387fa66"
+    },
+    "id": "STO14664-016",
+    "productTestsExecutedByReview": 0,
+    "productionChanged": false,
+    "proposedDisposition": "REVIEWED_DESIGN_REQUIRED_BOUNDARY_RAW_RETAINED",
+    "qualityGatePass": false,
+    "rationale": "The exact primary-IO/secondary-IO distinctions implement approved SSC063/308 priority, not recovery by broad catch. Duplicated multi-catch diagnostics remain separate raw occurrences.",
+    "raw": {
+      "attributes": {
+        "begincolumn": "72",
+        "beginline": "116",
+        "class": "ResourceScope",
+        "endcolumn": "83",
+        "endline": "116",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidinstanceofchecksincatchclause",
+        "method": "use",
+        "package": "dev.codex.schubert.nk.storage",
+        "priority": "3",
+        "rule": "AvoidInstanceofChecksInCatchClause",
+        "ruleset": "Error Prone"
+      },
+      "kind": "main",
+      "message": "An instanceof check is being performed on the caught exception. Create a separate catch clause for IOException.",
+      "module": "storage",
+      "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ResourceScope.java",
+      "rule": "AvoidInstanceofChecksInCatchClause",
+      "sourceSha256": "639d3e7a51ad7d4fd2b45a9d5b8f7536ece257f08b0db9955249704009d00bbf",
+      "tool": "pmd"
+    },
+    "rawOccurrence": 1,
+    "rawRetained": true,
+    "rulesOrSuppressionChanged": false,
+    "semanticRole": "SECONDARY_IO_PRIORITY",
+    "sourceMethod": "use",
+    "sourceToken": "IOException",
+    "testReferences": [
+      {
+        "classname": "dev.codex.schubert.nk.storage.ResourceScopeTest",
+        "method": "knownIoFailures",
+        "post": "PG14654-storage-resource-whole-twenty-six-post-v1",
+        "postSha256": "64716d82a4588387921fc49a0cdb423c79b661c22429a7a5662ab56edcac5a5f"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.storage.ResourceScopeTest",
+        "method": "unknownBodyFailures",
+        "post": "PG14654-storage-resource-whole-twenty-six-post-v1",
+        "postSha256": "64716d82a4588387921fc49a0cdb423c79b661c22429a7a5662ab56edcac5a5f"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.storage.ResourceScopeTest",
+        "method": "knownBodyUnknownCleanup",
+        "post": "PG14654-storage-resource-whole-twenty-six-post-v1",
+        "postSha256": "64716d82a4588387921fc49a0cdb423c79b661c22429a7a5662ab56edcac5a5f"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.storage.ResourceScopeTest",
+        "method": "unknownCompoundFailures",
+        "post": "PG14654-storage-resource-whole-twenty-six-post-v1",
+        "postSha256": "64716d82a4588387921fc49a0cdb423c79b661c22429a7a5662ab56edcac5a5f"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.storage.ResourceScopeTest",
+        "method": "nullAndNullableContracts",
+        "post": "PG14654-storage-resource-whole-twenty-six-post-v1",
+        "postSha256": "64716d82a4588387921fc49a0cdb423c79b661c22429a7a5662ab56edcac5a5f"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.storage.ResourceScopeTest",
+        "method": "nestedScopes",
+        "post": "PG14654-storage-resource-whole-twenty-six-post-v1",
+        "postSha256": "64716d82a4588387921fc49a0cdb423c79b661c22429a7a5662ab56edcac5a5f"
+      }
+    ]
+  },
+  {
+    "applicabilityAcceptedByWholeGate": false,
+    "contextLines": [
+      "        try {",
+      "          release.close();",
+      "        } catch (IOException | RuntimeException | Error secondary) {",
+      "          if (primary instanceof IOException && !(secondary instanceof IOException))",
+      "            throw secondary;",
+      "          primary.addSuppressed(new StorageIoException(StorageIoException.Reason.UNAVAILABLE));",
+      "        }"
+    ],
+    "currentWholeJoinPending": true,
+    "designReference": {
+      "originMain": "8b91944df5820535e23ba2469740f1c0aa94c447",
+      "path": "documents/300_SS/330_\u30c7\u30fc\u30bf\u30fb\u30d5\u30a1\u30a4\u30eb/333_\u5927\u5bb9\u91cf\u7d50\u679cfile\u30fbmedia\u30fbRange\u914d\u4fe1\u8a2d\u8a08.md",
+      "sections": [
+        "SSC063",
+        "SSC308"
+      ],
+      "sha256": "d861735e91a6930bbf239937deda29f3675fbf50817953a61e07c0255387fa66"
+    },
+    "id": "STO14664-017",
+    "productTestsExecutedByReview": 0,
+    "productionChanged": false,
+    "proposedDisposition": "REVIEWED_DESIGN_REQUIRED_BOUNDARY_RAW_RETAINED",
+    "qualityGatePass": false,
+    "rationale": "The exact primary-IO/secondary-IO distinctions implement approved SSC063/308 priority, not recovery by broad catch. Duplicated multi-catch diagnostics remain separate raw occurrences.",
+    "raw": {
+      "attributes": {
+        "begincolumn": "72",
+        "beginline": "116",
+        "class": "ResourceScope",
+        "endcolumn": "83",
+        "endline": "116",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidinstanceofchecksincatchclause",
+        "method": "use",
+        "package": "dev.codex.schubert.nk.storage",
+        "priority": "3",
+        "rule": "AvoidInstanceofChecksInCatchClause",
+        "ruleset": "Error Prone"
+      },
+      "kind": "main",
+      "message": "An instanceof check is being performed on the caught exception. Create a separate catch clause for IOException.",
+      "module": "storage",
+      "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ResourceScope.java",
+      "rule": "AvoidInstanceofChecksInCatchClause",
+      "sourceSha256": "639d3e7a51ad7d4fd2b45a9d5b8f7536ece257f08b0db9955249704009d00bbf",
+      "tool": "pmd"
+    },
+    "rawOccurrence": 2,
+    "rawRetained": true,
+    "rulesOrSuppressionChanged": false,
+    "semanticRole": "SECONDARY_IO_PRIORITY",
+    "sourceMethod": "use",
+    "sourceToken": "IOException",
+    "testReferences": [
+      {
+        "classname": "dev.codex.schubert.nk.storage.ResourceScopeTest",
+        "method": "knownIoFailures",
+        "post": "PG14654-storage-resource-whole-twenty-six-post-v1",
+        "postSha256": "64716d82a4588387921fc49a0cdb423c79b661c22429a7a5662ab56edcac5a5f"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.storage.ResourceScopeTest",
+        "method": "unknownBodyFailures",
+        "post": "PG14654-storage-resource-whole-twenty-six-post-v1",
+        "postSha256": "64716d82a4588387921fc49a0cdb423c79b661c22429a7a5662ab56edcac5a5f"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.storage.ResourceScopeTest",
+        "method": "knownBodyUnknownCleanup",
+        "post": "PG14654-storage-resource-whole-twenty-six-post-v1",
+        "postSha256": "64716d82a4588387921fc49a0cdb423c79b661c22429a7a5662ab56edcac5a5f"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.storage.ResourceScopeTest",
+        "method": "unknownCompoundFailures",
+        "post": "PG14654-storage-resource-whole-twenty-six-post-v1",
+        "postSha256": "64716d82a4588387921fc49a0cdb423c79b661c22429a7a5662ab56edcac5a5f"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.storage.ResourceScopeTest",
+        "method": "nullAndNullableContracts",
+        "post": "PG14654-storage-resource-whole-twenty-six-post-v1",
+        "postSha256": "64716d82a4588387921fc49a0cdb423c79b661c22429a7a5662ab56edcac5a5f"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.storage.ResourceScopeTest",
+        "method": "nestedScopes",
+        "post": "PG14654-storage-resource-whole-twenty-six-post-v1",
+        "postSha256": "64716d82a4588387921fc49a0cdb423c79b661c22429a7a5662ab56edcac5a5f"
+      }
+    ]
+  },
+  {
+    "applicabilityAcceptedByWholeGate": false,
+    "contextLines": [
+      "      return result;",
+      "    } catch (IOException failure) {",
+      "      throw new StorageIoException(",
+      "          failure instanceof StorageIoException storage && failure.getSuppressed().length == 0",
+      "              ? storage.reason()",
+      "              : StorageIoException.Reason.UNAVAILABLE);",
+      "    }"
+    ],
+    "currentWholeJoinPending": true,
+    "designReference": {
+      "originMain": "8b91944df5820535e23ba2469740f1c0aa94c447",
+      "path": "documents/300_SS/330_\u30c7\u30fc\u30bf\u30fb\u30d5\u30a1\u30a4\u30eb/333_\u5927\u5bb9\u91cf\u7d50\u679cfile\u30fbmedia\u30fbRange\u914d\u4fe1\u8a2d\u8a08.md",
+      "sections": [
+        "SSC063",
+        "SSC308"
+      ],
+      "sha256": "d861735e91a6930bbf239937deda29f3675fbf50817953a61e07c0255387fa66"
+    },
+    "id": "STO14664-018",
+    "productTestsExecutedByReview": 0,
+    "productionChanged": false,
+    "proposedDisposition": "REVIEWED_DESIGN_REQUIRED_BOUNDARY_RAW_RETAINED",
+    "qualityGatePass": false,
+    "rationale": "Known Storage reason survives only when prior suppression is absent; return uses new bounded exception and never exports raw cause/suppression. Other IO becomes UNAVAILABLE.",
+    "raw": {
+      "attributes": {
+        "begincolumn": "30",
+        "beginline": "126",
+        "class": "ResourceScope",
+        "endcolumn": "48",
+        "endline": "126",
+        "externalInfoUrl": "https://docs.pmd-code.org/snapshot/pmd_rules_java_errorprone.html#avoidinstanceofchecksincatchclause",
+        "method": "use",
+        "package": "dev.codex.schubert.nk.storage",
+        "priority": "3",
+        "rule": "AvoidInstanceofChecksInCatchClause",
+        "ruleset": "Error Prone"
+      },
+      "kind": "main",
+      "message": "An instanceof check is being performed on the caught exception. Create a separate catch clause for StorageIoException.",
+      "module": "storage",
+      "path": "src/schubert-nk-storage/src/main/java/dev/codex/schubert/nk/storage/ResourceScope.java",
+      "rule": "AvoidInstanceofChecksInCatchClause",
+      "sourceSha256": "639d3e7a51ad7d4fd2b45a9d5b8f7536ece257f08b0db9955249704009d00bbf",
+      "tool": "pmd"
+    },
+    "rawOccurrence": 1,
+    "rawRetained": true,
+    "rulesOrSuppressionChanged": false,
+    "semanticRole": "REASON_SANITIZATION",
+    "sourceMethod": "use",
+    "sourceToken": "StorageIoException",
+    "testReferences": [
+      {
+        "classname": "dev.codex.schubert.nk.storage.ResourceScopeTest",
+        "method": "knownIoFailures",
+        "post": "PG14654-storage-resource-whole-twenty-six-post-v1",
+        "postSha256": "64716d82a4588387921fc49a0cdb423c79b661c22429a7a5662ab56edcac5a5f"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.storage.ResourceScopeTest",
+        "method": "unknownBodyFailures",
+        "post": "PG14654-storage-resource-whole-twenty-six-post-v1",
+        "postSha256": "64716d82a4588387921fc49a0cdb423c79b661c22429a7a5662ab56edcac5a5f"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.storage.ResourceScopeTest",
+        "method": "knownBodyUnknownCleanup",
+        "post": "PG14654-storage-resource-whole-twenty-six-post-v1",
+        "postSha256": "64716d82a4588387921fc49a0cdb423c79b661c22429a7a5662ab56edcac5a5f"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.storage.ResourceScopeTest",
+        "method": "unknownCompoundFailures",
+        "post": "PG14654-storage-resource-whole-twenty-six-post-v1",
+        "postSha256": "64716d82a4588387921fc49a0cdb423c79b661c22429a7a5662ab56edcac5a5f"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.storage.ResourceScopeTest",
+        "method": "nullAndNullableContracts",
+        "post": "PG14654-storage-resource-whole-twenty-six-post-v1",
+        "postSha256": "64716d82a4588387921fc49a0cdb423c79b661c22429a7a5662ab56edcac5a5f"
+      },
+      {
+        "classname": "dev.codex.schubert.nk.storage.ResourceScopeTest",
+        "method": "nestedScopes",
+        "post": "PG14654-storage-resource-whole-twenty-six-post-v1",
+        "postSha256": "64716d82a4588387921fc49a0cdb423c79b661c22429a7a5662ab56edcac5a5f"
+      }
+    ]
+  }
+]
