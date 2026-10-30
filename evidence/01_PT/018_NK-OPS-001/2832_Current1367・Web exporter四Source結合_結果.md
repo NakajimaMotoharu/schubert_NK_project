@@ -1,0 +1,9 @@
+# 2832 Current1367・Web exporter四Source結合結果
+
+2831/source6b53/normal14216。15050/52/54/56は未実施、現1319を保持して真正結果だけ後から追記する。旧80反復を保持し、新unique48/必要反復14は別計上、未実証を正式受入/工数率へ転用しない。
+
+完了追記：15050/6524ae373d11f4eb8cb691deaff85aee31dc7a64b1839a59ae69bb79a923b0f6、15052/cc54390ddfeb9bcbd7a8efe658083082be7ab419766017969cd595909ce98aeb（33反例）、15054/873e180ee3bccd9df843b7ca04ce3d8ab3223de82c6a512d739c274812075e04はlint0/body0。15056の真正結果は次追記で実hash/exitを固定する。新48/必要14の重複集合は既WebMetricScrapeTest全14と完全一致、原method62・unique増分48/旧80+14=repeat94・1461=1367+94を独立導出した。
+
+最終追記00:53 JST：15056/491091c2befa98e3aba23b03ba8a21c23371f16993e1c1b8d8babd49dae7d8f6/session12672真正0・28反例。485二sideのtypedGuardCurrentHostPG15054Overlayだけ追加、486inventorySha256だけ、481/484/旧全semantic/cost/既証跡不変。wholeaudit前後は既知1HOLD、局所記録成功を全体受入へ変換しない。
+
+現1367/179・336Source447physical(code429meta18)、四175/273(code263meta10)、自然151/163/NoCode6/未達4Source5physical、original70＋Catalog1=71JVM1461method=unique1367+repeat94、owner270/168/103UNKNOWN、全限定side未結合0。原1319/80反復履歴/別JS・Catalog・SQLjoint/domain/費用と候補役割を保持。正式1964PT/53scope/旧17-190/工数null/QA051final/全HOLD不変。製品再演は2830の必要14だけで、metadataからの追加製品実行0。元見積0.5/2/5pp/cap5固定・実token/専有費null。
