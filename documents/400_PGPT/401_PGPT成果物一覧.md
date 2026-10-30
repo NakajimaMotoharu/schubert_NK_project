@@ -1,5 +1,7 @@
 # PGPT成果物一覧・進捗
 
+2026-10-31追加：2945～48/PG-D946、公開合成Media4/Revoke7を現source初回実行、独立28/Node固定GCM＋Python AAD/UI byte offset、registry34/WBS29反例成功。現1850→1861/234・Source397→401・四219→222・自然162不増・未達10/17→11/20はMediaDecoder測定拡大。BUG2135/YKT1882先行是正で既例外helper二件を新targetから分離し旧counter/proof保持、原11再演0。crypto合成true/実key-credential-authfalse、正式1964/53・工数null/全HOLD維持、通常PG/PT継続。
+
 2026-10-31追加：2941～44/PG-D945、合成JMS guard原6/1を現sourceで初回成功・全二Source（二Code）一四100/一自然B0、独立24/registry34/WBS29反例を確認。current1844→1850/232・Source395→397・四218→219/自然161→162・未達10/17不変。全旧proof/費用/訂正履歴保持、実broker/credential/Graph等操作0、正式1964/53・歴史17/190・工数null/全HOLD不変、通常PG/PT継続。
 
 2026-10-31追加：2937～40/PG-D944、接続前Factory原3＋閉じた値契約原2を現source一JVMで成功。専用全Source post/独立24/registry34/WBS29反例・未接続/秘密無しを確認。現1839→1844/231、Source394→395・四218不増・未達9/15→10/17は測定拡大。BUG2132～34/YKT1879～81はpost入口名/LF/AST型の工具限定是正、原5件再演0。全旧proof/費用/訂正履歴を保持、正式1964/53・歴史17/190・工数null/全HOLD不変、通常PG/PT継続。

@@ -1,0 +1,13 @@
+# 公開合成Media四・Revoke七：通常単体テスト結果
+
+2945/PG-D946、2026-10-31 JST、dev-foundation、基点05192f3bce060f28a3bf6d94d6589f77c0dd749d、Production6b53/normal14216固定。原Media4/Revoke7の全11/2 FES0、再試行0、checked entry53945e9a/session8950/actual0。raw PG15535-public-media-revoke-eleven-pt-v2/manifest.json SHA c9bf931dc1b91e8e87d3528ccdd3d9f59f6829dcc376b79448a107e2bf3485eb。元JVMの環境/時間/command/input/Test ID/actual/XML/exec/sessionは当rawに保存、別JVM値の流用0。
+
+専用post PG15536-public-media-revoke-eleven-post-v1/manifest.json SHA bb9ddfe2a43c3259772bb835e3a3a438c93342822686d8f85b10a70bc2244ebf、entry61a8a369/actual0。新targetは4Source/6Code。MediaDecoder本体+Binding+ResultはL91cov10miss/M12cov1miss/C3/B28cov3miss、未呼出decodeVerified等を除外せず未達。RevocationCodecはL99M10C1B40、IdentityはL25M3C1B8、EncryptedPayloadはL13M4C1B6、全miss0/三Source四100。全target合計L228cov10miss/M29cov1miss/C6/B82cov3miss、単一exec/CRC0/manual除外0。旧例外helper2Source4Codeは元14728の資格・counterを保持し再受入しない。
+
+独立PG15538-public-media-revoke-eleven-independent-v1/manifest.json SHA fae779efaf3b0a897bcf43b033ce9a5a03475290ff7e81b44d9ce550fde0cdb7、entry015ba17a/actual0、28意味反例。原全method一意・全新Source/physical/owners/current/秘密無し/JCA復元/旧helperproofを照合。UI235のMEDIA1024をoffset0/64/576/832/844/908/972/973、長64/512/256/12/64/64/1/51で独立検証し、video1024/1280/1296の追加位置、UI232 header、承認origin/main三文書の同byteを確認。
+
+固定Node24.19.0/OpenSSL3.5.7（binary SHA bc17c508ffeed0ec622934f9b7fa72f8e78da65350e63c3eceb56fa688aa5e12）で公開合成key/context/nonceだけの独立GCM vectorを一回算出。Python struct/UUIDの六lengthprefix AADと一致、AAD SHA14913bbc71be8ac809209fb6bb9ec98ac779a13190e781b97454aae7153a8fbd、NKENC1 envelope102byte SHA10aacdd6681f19a05fd8896a406bbae212f3e0c8568826414cf74f6c41847d10。これは原独立JCAと同parameterの別実装oracleで、本番captureではない。原assertionが生成expectedと実Product結果を比較済み。
+
+crypto/publicSyntheticKeys/自JVM JCA復元true、actual秘密鍵/credential/実認証session発行/DB/file/native/service/VM/Root/Graph0。MediaのMessageDigest.isEqualは公開context比較のみ。生成raw/post初回draftはJS置換のdollar展開によりpyflakes syntax1、本文未開始で修正（原PT未実行）。旧15534/af2ee4cは既資格例外二件を新target扱いしてpreflight1/OUT-SLOT-compile-JVM前停止、BUG2135/YKT1882修正前起票/旧凍結。new15535で四target/二helperへ分離、全六の実current/normal/snapshot SHA、旧二proof/元counter不変更と独立反例・他Source/費用保持を確認して当工具有限scope限定完了2026-10-31。原11を再起動せず初回実行、source/Test/expected/開始見積不変更。初回誤診断importのpyflakes path不足は私有code実行前のModuleNotFoundErrorであり製品結果ではない。
+
+公開manifestは当フォルダevidence/provisional/各PG名、private raw/実key/credentialなし。修正commitは本書/新工具/台帳を含む最初、実hash後記。新製品障害0、正式1964/53・歴史17/190・工数null/QA051final/451/全HOLD不変。
