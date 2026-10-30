@@ -1,4 +1,4 @@
-"""Shared pure whole-Source postv2; handles single-method negative data, not expanded runtime permission."""
+"""Shared v2 pure whole-Source post; single-case duplicate canary fixed, no scope broadening."""
 from contextlib import ExitStack
 import copy
 import json
@@ -14,13 +14,6 @@ import scoped_prometheus_post as validator
 import typed_marker_guard_qualified_v1 as cfg
 import pg9666_pagination_static as runner
 from trace_owner_join import canonical
-
-
-def duplicate_case_for_negative(value):
-    """Alter only copied metadata; a singleton cannot replace a nonexistent index1."""
-    cases=value['cases']
-    if len(cases)>1:cases[1]=copy.deepcopy(cases[0])
-    else:cases.append(copy.deepcopy(cases[0]))
 
 
 def validate_profile(value):
@@ -103,7 +96,7 @@ def verify_profile(original,profile):
     agent='-javaagent:'+str(validator.common.AGENT)+'=destfile='+str(RUN/'jacoco.exec')+',append=false,sessionid='+original.SESSION
     assert agent in raw['stages'][1]['command'] and raw['begin']['selectedSuites']==original.COUNTS
     labels=[]
-    for label,change in [('source',lambda v:v.update(source='0'*40)),('failed',lambda v:v['cases'][0].update(result='NOT_PASS')),('duplicate',duplicate_case_for_negative),('scope',lambda v:v['begin'].update(selectedSuites={'UnknownTest':TOTAL})),('union',lambda v:v['begin'].update(priorCoverageTransferred=True)),('formal',lambda v:v.update(formalUpdated=True)),('timeout',lambda v:v['stages'][1].update(timedOut=True)),('fixture',lambda v:v['begin']['fixtureHashes'].update({'unknown':'0'*64}))]:
+    for label,change in [('source',lambda v:v.update(source='0'*40)),('failed',lambda v:v['cases'][0].update(result='NOT_PASS')),('duplicate',lambda v:v['cases'].append(copy.deepcopy(v['cases'][0]))),('scope',lambda v:v['begin'].update(selectedSuites={'UnknownTest':TOTAL})),('union',lambda v:v['begin'].update(priorCoverageTransferred=True)),('formal',lambda v:v.update(formalUpdated=True)),('timeout',lambda v:v['stages'][1].update(timedOut=True)),('fixture',lambda v:v['begin']['fixtureHashes'].update({'unknown':'0'*64}))]:
         bad=copy.deepcopy(raw);change(bad)
         try:assess(bad)
         except ValueError:labels.append(label)

@@ -1,0 +1,5 @@
+# 2891 共有post単一case v2工具資格仕様
+
+source6b53/normal14216、BUG2126/YKT1873追加発見、工程G01、group3287予算0.25/1/3pp固定・G13群3285の0.5/2/5とは別。既共有v1/dedda4f1は14670/72で8case資格済みだがduplicate反例にindex1前提が残ることを全文で確認。旧共有/source/proofを保存し、v2はdocstringとduplicate appendだけ変更、閉profile/no fixture/全Code/baselineMain-TestUNKNOWN/module-package一致/manual全body読取という適用条件を拡張しない。NoCode/不一致namespace/未知owner/native等は対象外。共通化を理由にHOLDの別harness実行をしない。
+
+原資格1/11/16caseの公開rawをbyte/hash/source/元invocationで照合、メタコピー上duplicate append/one missingの計6反例を拒否する。旧18profile/12意味反例は原14672/5bbb4975実hash資格を再利用し確認再演しない。一case最小条件の新共有工具資格として、既成功Required1の同execを新slotで一回post分析（Product classload/invoke/PT再演0）。originalTestsAlreadyCounted=true/newProductExecutions0、元e26d post全意味と独立一致させる。新測定は既試験の再加算・新coverage/新Source・正式受入・工数率増加0。NoCode/Source未達や上位品質を除外で解決しない。旧型入力はvalid、新単一caseでも反例生成がIndexErrorにならないことを実証する。source/command/exit/hashはPG15324のmanifest、別独立postへ対応。

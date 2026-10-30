@@ -1,5 +1,7 @@
 # PGPT成果物一覧・進捗
 
+2026-10-31現在：2890の現source6b53/normal14216限定技術registry1760/207・362Source、四197/303・未達6/10・原85+Catalog1=86JVM1868method=1760+108repeat。正式1964PT/53scope・歴史17/190・工数null/QA051final/全HOLD不変更。2891/92/PG-D935は共有post最小case不備の工具資格（新PT/coverage/Source/受入0）、原1/11/16メタ6反例・旧18/12参照・23新独立反例、Product確認再演0。直近担当UNKNOWN11のG13群は別未完で、分類を進捗率へ換算しない。
+
 2026-10-28追加：2377/2378/PG-D757、ApiDurationExporter原24/一suiteとfixture二定数/19参照是正、六normal0/PMD-CS0/六SpotBugs0。raw8473/累計944、Main6L1M1B未達はmethod別に保持し100%補完0、正式1964-53/17-190/工数null/HOLD不変。次は必要なapproved接続のwholefixtureを別scopeで審査・通常PG/PT継続。
 
 2026-10-28追加：2375/2376/PG-D756、MetricContext両role各33＝66/二suiteの同source成功と二Main148L26M2C51B全miss0。16指摘是正/raw8475/累計942・ownership四新参照、六normal0/SpotBugs0・PMDraw38/静的真正1と全六artifact未達を保持。BUG1998の旧工具1/旧sourcef29 build1は保全・当sourcef75へ成功転用0。正式1964-53/17-190/工数null/HOLD不変、保存後通常PG/PT継続。
