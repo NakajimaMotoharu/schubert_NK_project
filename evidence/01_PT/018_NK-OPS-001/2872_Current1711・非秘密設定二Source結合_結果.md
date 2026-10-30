@@ -1,0 +1,5 @@
+# 2872 Current1711・非秘密設定二Source結合結果
+
+2871の同source metadata結合完了、Product再実行0。PG15230/2a179b95 lint/body0→9ffe1d9a2d535571f5bf94e4bab1353afb88b7b9a71820afa31c5534247c9a21、PG15232/64ec8ef3 lint/body0→29200b69926a5e4f2c8a82c8f0ea85736fd737db764d0d79c184f664d1486261/34反例、PG15234/a1b056d3 lint/body0→651d99bf0aacf1ba484ff2b4a525e3f3d1a68c5214026346815565959522d272、PG15236/fd95e6df/session10355真正0→71e1128b11b4e570b85b68d4570fc7aecf6b8469352cf1e608cc229ef6a55fc1/28反例。
+
+1711/199・356Source472physical454Code18meta、四192/294(284Code10meta)、自然153/165、NoCode6/6、未達5Source7physical不増。API/Web NonSecretConfigの新二Sourceだけ四100へ追加、原14新規ID、旧108反復保持。原80＋Catalog1=81JVM1819method、owner272/204/105UNKNOWN。二side型/原全proof/cost/domain/ownerと481/484不変、全WBS audit前後exit1「ValueError: current physical candidate exact Git/worktree scope」はHOLDのまま。正式1964PT/53scope・17/190・工数null・QA051final・全HOLD不変更。単一group3268の費用へ含め再加算0、次公開保存の実commit/hashをcheckpointで記録する。

@@ -1,0 +1,9 @@
+# 2870 API/Web NonSecretConfig原whole14結果
+
+source6b53efeec87f3ec36a840dd8e7759656cb4aee5c / normal14216固定、2869。PG15222元run真正exit0・API7/Web7・2suite F/E/S0、raw manifest74ac8c3a3c38d50da20e80ca81a75d59dd2295d61d3ffec11368f59857959c73、entry77a912cd。中断後は元manifest/XML/compile-exit/selected-junit-exitを読取回収し、同じPTを再起動していない。元XMLのAPI08385277/Webde61e5f5、単一exec14b0bf3845d589913afb4c65ca90b62014f7d8190b783980968c0ea96ad90c84。原JVMの環境四field/command/実終了はraw begin/stages、現在host値で上書き0。
+
+PG15224/entryea164902 lint/body0・manifest5d714d963f1183844fb41f46e41ebd2e3ecece0a37d3c6d7700ca18f9a218c53。bootstrap実Jarの二Source全物理二Code、同session/SHA/CRC一致、LINE237/METHOD25/CLASS2/BRANCH150、各miss0・四counter100、strictgate0。normal six静的資格14224/294810b2は同source既存証拠参照のみ・再演0。実外部起動/DB/MQ接続/credential読取なし、nk.pt.repositoryはnormal snapshotだけ。公開common/api/web template三件は実Git source/現在/snapshot/normal入力hashを前後で一致確認、秘密設定は一切入力しない。
+
+PG15226/entry68a671eb lint/body0・manifest7fad8f7566a946e3fdf76353f56fdf9e0f896647db5c7cd0fa172269626634f3。原Test宣言14ID↔元XML14の完全対応、実二Code/Jar closure/counter、独立30意味反例、origin/main SS343 §4–5初期値20行、API23/Web20の独立固定golden key/valueとLF/ソート/SHA256 oracleを照合（Production parse/defaultで期待値を作らない）。Main二件は485実rowのP018-01 logical baseline、Test二件はcanonical UNKNOWN/nullを保持。上位仕様/正式1964-53/17-190/工数null/QA051final・Graph/実環境HOLDは不変更。自動生成除外・旧source exec合算・新受入加算0。
+
+準備JS二回は構文/置換guardで工具作成前に終了、製品/検証body再演なし。補助CLIに存在しないstatus、brace展開で存在しない二読取pathを渡した誤りは読取前終了・成果に不算入、実二pathと正規pollへ是正。BUG新規対象の製品不一致なし。修正済BUG2120/YKT1867の実commit94fc9ea/push23011真正0は台帳追記。元group3268の見積2/6/10pp固定、専有消費・実token不明null、共有39/残61は費用確定/完成率へ変換0。結果と全hashは各manifestと公開保存へ追跡。
