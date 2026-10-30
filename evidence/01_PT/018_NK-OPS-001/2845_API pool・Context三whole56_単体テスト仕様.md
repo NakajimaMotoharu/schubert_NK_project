@@ -1,0 +1,78 @@
+# 2845 API pool・Context三whole56 単体テスト仕様
+
+NK-OPS-001/WBS-P018-09/RD171/UI252/SS311・342・351/1635/1639/1815/1825/1827、Production6b53/normal14216固定、dev-foundation。event3241で着手前2/6/10pp cap10固定。原Recorder8/Binding15/Context33=56、current1511との全suite/全Source重複なしを起動前照合。
+
+三Mainは全直接読了、Recorder原262行とObservationTest.Fixture全定義/initializers・Collector/Observation・CustomPayload/ExactDurationRegistry/Supportも読了。Binding488/Context845行は既全読Web counterpartとの全文明示role正規化差分を全読した。API package/名前/タグ/prefix・CONFIG_INVALID・ExactDurationSupportの差と、Binding期待値1/1/0/2→3/5/2/8・最大8の全差分を確認。原Api Testをfresh実行しWeb成功は転用しない。ObservationTestはFixtureのcompile-onlyで原8methodの再演/加算0。
+
+独立oracle：literal3/5/2/8、真ゼロ0/0/0/8とunknown NaN、Long.MAX_VALUE→IEEE754 2^63（immutable long snapshotは保持）、固定API/state四series/getter active→idle→pending→max、供給失敗は欠測・identity保持。Context7.5→9.5→11.5/固定ready textと独立Runtime CPU数、DEBUG単回・STANDARD lazy、null/unknown/各factory/setup/refresh失敗、非再入/競合closeは未確認・stop後新access拒否・明示closeだけ再操作、standard→custom解放順。有限8worker/64job、latch/Future上限30秒/finally解放・親180秒。
+
+借用fake Hikariインターフェースは四getterのみ、他getter/control/credentialはAssertionError。実pool/DB/JMX lookup・設定変更/外部VM/Root/Graph/鍵/配備/networkなし。自己child標準SDK/GC listenerは当ownerが保持/解放、forcedGC/heapdump/attach/targetprocessなし。許可済み独立通常PT、拒否操作や安全境界探索ではない。
+
+command: `env PYTHONPATH=tools/quality python3 -B tools/quality/pg11123_checked_python_entry.py tools/quality/pg15114_api_pool_context_fifty_six_pt.py`。Java25.0.4/freshjavac -proc:none -Xlint:all -Werror/固定六normalJar。post15116は同一exec/CRC/全三Source五Code closureを測定、独立15118は原全宣言XML・SS351 pool行/標準SDK/実ownerを別読照合。全OS/JDK/時刻/command/exit/source/hash/input/XML/session/exec/coverage/BUGを2846/public manifestへ。実測前coverage未確認、自然B0はN/A/除外なし/公式filter不変/Failed-flaky-skipped-not-runを合格へ加算0。
+
+正式1964-53/17-190/工数null/QA051final/451-F03-G07/全安全HOLD維持。障害は修正前915/916へ。以下method名が原Test IDで元XMLに一意対応。
+
+## DbPoolMetricRecorderTest
+
+- `poolMetric001DebugHasExactlyFourCanonicalUnknownSeries`
+- `poolMetric002LiteralCountsAndIndependentGaugeValuesRemainExact`
+- `poolMetric003MissingAndTrueZeroAreDistinctAndRecoverable`
+- `poolMetric004StandardNeverRegistersOrRetainsAndStillRejectsNull`
+- `poolMetric005NegativeMissingUnknownAndMaximumBoundariesDoNotWrap`
+- `poolMetric006ParallelUpdatesKeepWholeImmutableSnapshots`
+- `poolMetric007PartialProviderFailurePreservesIdentityAndBorrowedLifetime`
+- `poolMetric008OwnersAndRepeatedObservationsCannotGrowLabelCardinality`
+
+## ApiDbPoolMetricBindingTest
+
+- `apipoolb001NullAndUnknownModeNeverReadBorrowedGetters`
+- `apipoolb002ConstructorRegistersMetadataWithoutSamplingThenPublishesExactValues`
+- `apipoolb003InvalidObservationClearsAndTrueZeroRecoversWithoutSeriesGrowth`
+- `apipoolb004StandardNeverReadsEvenFailingGetterAndCreatesNoSeries`
+- `apipoolb005EveryRuntimeGetterFailureClearsPreservesIdentityAndDoesNotRetry`
+- `apipoolb006DirectGetterErrorRemainsFatalAndMissing`
+- `apipoolb007LastSnapshotIsImmutableNotLiveGetterOrFreshnessAuthority`
+- `apipoolb008RealContextRefreshOwnsSdkButNeverControlsOrClosesBorrowedBean`
+- `apipoolb009MaximumIntegerStatisticsWidenExactlyWithoutClampOrWrap`
+- `apipoolb011PreparedStandardNeverAcquiresBorrowedBeanReferences`
+- `apipoolb012FactoryRejectsNullAndUnknownModeBeforeSupplierRead`
+- `apipoolb013CallerCapturesOwnerBeforeDeferredBeanReferencesAndSamplesOnlyAtRender`
+- `apipoolb014PoolSupplierFailureOrNullRetainsPartialOwnerAndNeverReadsConfiguration`
+- `apipoolb015ConfigurationSupplierFailureOrNullPreservesPrimaryAndNeverReadsStatistics`
+- `apipoolb010OneRetainedCollectorSerializesBothOwnedRefreshes`
+
+## ApiMetricContextTest
+
+- `apimctx001StandardHandshakeReadsNoFactoryOrSetup`
+- `apimctx002DefaultSourceRetainsBindingsAndOfficialSdkGolden`
+- `apimctx003UninitializedAndClosedBeforeInitNeverAcquire`
+- `apimctx004ModeNullAndUnknownFailBeforeSdkAcquisition`
+- `apimctx005ConstructorPortsAreNonNull`
+- `apimctx006CustomFactoryRuntimePreservesIdentityAndOneAttempt`
+- `apimctx007CustomFactoryErrorIsNeverNormalized`
+- `apimctx008NullCustomRegistryNeverBecomesSuccess`
+- `apimctx009ClosedCustomCandidateIsRetainedForExplicitCleanup`
+- `apimctx010SetupRuntimeLeavesCustomOwnedAndStandardUnstarted`
+- `apimctx011SetupErrorPreservesIdentityAndPartialOwner`
+- `apimctx012NullBindingIsRejectedBeforeStandard`
+- `apimctx013StandardFactoryRuntimeKeepsCustomAndBindingsUnpublished`
+- `apimctx014StandardFactoryErrorIsPrimary`
+- `apimctx015NullStandardFactoryResultRetainsCustom`
+- `apimctx016StandardCloseFailureRetainsCustomAndDeniesNewAccess`
+- `apimctx017CustomCloseFailureDoesNotRepeatConfirmedStandardClose`
+- `apimctx018CallerCapturePrecedesEverySdkFactory`
+- `apimctx019SingleInitializeAndIdempotentClose`
+- `apimctx020RenderFailureKeepsOwnerAndDoesNotReacquire`
+- `apimctx021ContendedCloseIsUnconfirmedWithoutFreeingInFlightSources`
+- `apimctx022StandardRenderRuntimeErrorAndNullKeepStructuralOwnership`
+- `apimctx023StopDuringCustomFactoryOrSetupPreventsStandardAcquisition`
+- `apimctx024StopDuringStandardAcquisitionKeepsBothOwnersUnconfirmed`
+- `apimctx025ReentrantSetupCloseCannotConfirmOrStartStandard`
+- `apimctx026ReentrantRenderClosePropagatesAndRetainsAllResources`
+- `apimctx027RefreshUsesStrongBindingBeforeEachFullRender`
+- `apimctx028StandardNeverReadsRefreshOrSetup`
+- `apimctx029NullRefreshRejectedBeforeRegistration`
+- `apimctx030RefreshRuntimeRetainsSdkAndAllowsOnlyExplicitNextRender`
+- `apimctx031RefreshErrorIdentityIsNotNormalOrFallback`
+- `apimctx032RefreshReentrantStopCannotProduceDetailedSuccess`
+- `apimctx033RefreshContendedStopRetainsUntilSamplerReturns`
