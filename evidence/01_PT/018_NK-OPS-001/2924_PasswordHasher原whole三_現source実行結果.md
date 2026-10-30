@@ -1,0 +1,11 @@
+# 2924 PasswordHasher原whole三・現source限定結果
+
+2923/PG-D940、source6b53/normal14216/保存HEAD50fbc940d429507dbb4de711a1ee74c520c38161・push82507真正0。15452/fbb72fd2/session93116真正0、原3/1 FES0、raw8ed0341660234dc97d19c757b8cfcfe2baa8130b33e88d8c86820bba00d9265c。全current/snapshot/MainTest/reporter/launcher/正常Jarを照合し原コード変更0、旧source成功/既PolicyTestの確認再演0。
+
+15454/119fe4bf/20b1787d8803c86bb0f3c65de60bbe74e063ad60156e860ae230ad86ba4fba91真正0、一完全Source一Code L19M5C1B2 miss0/四100。元exec/3XML/実環境prefix/一sessionCRC0、全五Code methodを確認し、manual除外/coverage合成0。15456/76948c52/8a66fcf52b2a47ab4c07d79f20fde3c830f582cddd76449e22d1719b71d43bd1真正0・35意味反例、元3TestID/SS314§4/currentSource/Jar/Code/typedcounter/owner/stagehash/crypto flagsを別照合。
+
+期待値は元JCE oracleから生成して製品と比較した真正assert。別Python hashlib.pbkdf2_hmacの公開NFC é×12/salt0..15/310000/32byteではderived hex bda8dd787158e51a97d80be5daa1cfbcf6e0e2a25018fefb2fe1e54baa3ab2ff、prefix/salt込み107ASCIIbyte・SSのDB255byte以内。合成入力以外のpassword/credentialは取得・保存しない。これは独立oracle側の検算で製品出力captureを捏造していない。正常encodeの二独立salt・256UTF8byte末尾差異/元input消去・不正世代固定例外/null/消去を元3成功で確認。固定Spring Security crypto7.1.1/hash6e8bb233を実runtimeでpin、provider変更なし。
+
+crypto=true/publicSyntheticTestPasswordsUsed=true/actualSecretKeysLoaded=false/actualCredentialValuesUsed=false/actualAuthenticationOrSessionIssued=false、childLocalJcaRegistryRestorationTested=false。実key/実login/DB/JMS/network/VM/Root/Graph/権限操作0。新障害0、通常工具lint/body全0。Module一覧の計画読取で不存在435 pathにexit2を観測、rgで実431を特定した読取診断でありplatform拒否/製品試験失敗ではない。
+
+manifestはevidence/provisional/PG15452-password-hasher-three-pt-v1、PG15454-password-hasher-three-post-v1、PG15456-password-hasher-three-independent-v1のmanifest.json。実日時/OS/JDK25.0.4/branch/source/command/exit/全hash/XML/exec/coverageは各manifest。Main baselineP00701/TestUNKNOWN、元群3312の0.5/2/5pp固定、共同metadataは本群内・後続18群へ重複配賦0、専有実費/実tokennull。新cohort原3で新Test設計/製造/正式/受入加算0、正式1964/53・歴史17/190・工数null/QA051final/全HOLD不変。結合2927/2928へ。
