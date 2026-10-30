@@ -1,0 +1,23 @@
+{
+  "recordType": "OBSERVATION_OF_ORIGINAL_COLLECTED_TOOL_FAILURE_NOT_REEXECUTION",
+  "observedAtJST": "2026-10-30T10:03:00+09:00",
+  "originalExactFailureTimeJST": null,
+  "source": "6b53efeec87f3ec36a840dd8e7759656cb4aee5c",
+  "entry": "tools/quality/pg14682_current816_incremental_registry_post.py",
+  "entrySha256": "31e88270be7df981ca51c2fec02580935fb2797931ad198da17f983febae62f8",
+  "command": "env PYTHONPATH=tools/quality python3 -B tools/quality/pg11123_checked_python_entry.py tools/quality/pg14682_current816_incremental_registry_post.py",
+  "checkedLintExit": 0,
+  "bodyStarted": true,
+  "observedBodyExit": 1,
+  "error": "KeyError: 'ServiceCredentialId'",
+  "sourceStatement": "module=source.split('/')[5];jar=jars[module]",
+  "failureReason": "class name segment used as module; no Product execution or WBS write by this tool",
+  "publicResultDirectoryCreated": false,
+  "toolFailureNotPlatformRefusal": true,
+  "productTestsExecuted": 0,
+  "originalRunReexecuted": false,
+  "bug": "BUG-2108",
+  "ykt": "YKT-1855",
+  "formalUpdated": false,
+  "newAccepted": 0
+}
