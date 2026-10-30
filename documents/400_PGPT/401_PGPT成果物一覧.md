@@ -1,5 +1,7 @@
 # PGPT成果物一覧・進捗
 
+2026-10-31追加：2941～44/PG-D945、合成JMS guard原6/1を現sourceで初回成功・全二Source（二Code）一四100/一自然B0、独立24/registry34/WBS29反例を確認。current1844→1850/232・Source395→397・四218→219/自然161→162・未達10/17不変。全旧proof/費用/訂正履歴保持、実broker/credential/Graph等操作0、正式1964/53・歴史17/190・工数null/全HOLD不変、通常PG/PT継続。
+
 2026-10-31追加：2937～40/PG-D944、接続前Factory原3＋閉じた値契約原2を現source一JVMで成功。専用全Source post/独立24/registry34/WBS29反例・未接続/秘密無しを確認。現1839→1844/231、Source394→395・四218不増・未達9/15→10/17は測定拡大。BUG2132～34/YKT1879～81はpost入口名/LF/AST型の工具限定是正、原5件再演0。全旧proof/費用/訂正履歴を保持、正式1964/53・歴史17/190・工数null/全HOLD不変、通常PG/PT継続。
 
 2026-10-31追加：2933～36/PG-D943、原Web入力4＋MockLogin4を現sourceで初回成功・専用post/独立40意味反例・承認brand/HTTP-DOM/設定null/実Codeを確認。現1831→1839/228・Source392→394、四218不増・自然160→161、WebInputs wrapper未達一/二追加で全未達9/15。旧API digest訂正/元proof/cost/227候補保持・WBS29へ訂正削除反例追加。BUG2131/YKT1878はFiles型名誤認のpreflight限定是正、旧8は未実行・Product再演0。実server/Browser/CHR/正式/受入/工数へ加点せず、正式1964/53・工数null/全HOLD維持、通常PG/PT継続。
