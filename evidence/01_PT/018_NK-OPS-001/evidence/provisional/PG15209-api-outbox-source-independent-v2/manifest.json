@@ -1,0 +1,134 @@
+{
+  "actualExit": 0,
+  "actualLiveObservation": true,
+  "authoritativeDesign": {
+    "commit": "8b91944df5820535e23ba2469740f1c0aa94c447",
+    "gitRef": "origin/main",
+    "path": "documents/300_SS/350_\u904b\u7528\u30fb\u54c1\u8cea/351_Log\u30fbmetric\u30fbalert\u30fberror code\u8a2d\u8a08.md",
+    "sha256": "9da7c4e4f24740e031f37f984ec562d56e14ff098b1433af3ec55fe15bd195e6"
+  },
+  "candidateOwnerRows": 2,
+  "candidateOwnersNotAccepted": true,
+  "coverageGapReason": "OWNED_ATTEMPT_OVERLOAD_UNEXECUTED_GRAPH_DEPENDENT_FAULT_WHOLE_HOLD",
+  "effortPercent": null,
+  "externalVmOrTargetProcessObserved": false,
+  "forcedGcOrHeapDump": false,
+  "formalUpdated": false,
+  "four100SourcePrograms": 0,
+  "horizontalQualifiedReferences": {
+    "PG15173-api-metric-http-independent-v2": "3d7e26466eeaff07701b104debde09537f7c149faca34095ae5941789f4b4ad7",
+    "PG15190-web-metric-http-independent-v1": "f6079d56e0ec4ef061b1242e4bea6b0491a3adeb71eb5ab9df4464b4a6c7d5b5"
+  },
+  "horizontalScopeHashes": {
+    "evidence/01_PT/018_NK-OPS-001/2865_API OutboxObservationSource\u539fwhole20_\u5358\u4f53\u30c6\u30b9\u30c8\u4ed5\u69d8.md": "70d4ad15aa2caa77a2d62b1794c99768a2da748e8b4d0828da5de5fc87308e95",
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/monitoring/OutboxObservationRepositoryTest.java": "60de5831df6c273130930756bef2d5551c265d17eda8e2b7d80a0eb27bd2b9e8",
+    "tools/quality/pg15208_api_outbox_source_independent.py": "f492b3372df9f91d54f7a623d81ade006bc26b7740bbff2fb5f2ee04b193f233"
+  },
+  "incompletePhysicalClasses": 2,
+  "incompleteSourcePrograms": 1,
+  "independentMetricRows": 3,
+  "independentMetricTableSha256": "d3472905e168bd89640bb62f004ae712eb82fba075725064d57214c42f2d2bcd",
+  "independentSqlLiteral": "SELECT status, COUNT(*) AS row_count, MIN(created_at) AS oldest_created_at FROM schubert.mq_outbox GROUP BY status",
+  "independentThresholdRows": 12,
+  "independentThresholdTableSha256": "9ec15e247335ebf04d17a7091862b42b984b33f2d8e1302a79ddf025c9e938eb",
+  "invocation": {
+    "actualPythonCommand": [
+      "/usr/bin/python3",
+      "-B",
+      "tools/quality/pg15209_api_outbox_source_independent_v2.py"
+    ],
+    "arbitraryArgumentsRecorded": false,
+    "entrypointPath": "tools/quality/pg15209_api_outbox_source_independent_v2.py",
+    "entrypointSha256": "a0543916f7e6ecd21aff81b7ae6474532638ab419dc8d838fb364173a1747056",
+    "helperPath": "tools/quality/host_tool_invocation.py",
+    "helperSha256": "85d616a3db4ff47f4c95ae2e0dd57954bc2b09f28b8f2a685b986e5621545c46",
+    "libraryPath": "tools/quality/pg15209_api_outbox_source_independent_v2.py",
+    "librarySha256": "a0543916f7e6ecd21aff81b7ae6474532638ab419dc8d838fb364173a1747056",
+    "loadedProjectPythonSources": {
+      "tools/quality/classfile_code_metadata.py": "2227e1e8df1ff91b606f094c7ee64366023273ca740d4d47126ed0928190e2f0",
+      "tools/quality/g07_host_class_provenance_inputs.py": "a676cb3e4145177c3c243722d737592ce7d44c3f29cfe4f670662ef7651f046b",
+      "tools/quality/host_tool_invocation.py": "85d616a3db4ff47f4c95ae2e0dd57954bc2b09f28b8f2a685b986e5621545c46",
+      "tools/quality/pg15209_api_outbox_source_independent_v2.py": "a0543916f7e6ecd21aff81b7ae6474532638ab419dc8d838fb364173a1747056",
+      "tools/quality/trace_owner_join.py": "f71ab155344149f6997937c00b62cbed161652c5f7dc9fabbeb11825f81bca75"
+    },
+    "provenance": "OBSERVED_SYS_ARGV_AND_ORIG_ARGV_NOT_RECONSTRUCTED"
+  },
+  "naturallyBranchZeroPhysicalClasses": 0,
+  "naturallyBranchZeroSourcePrograms": 0,
+  "negativeLabels": [
+    "ownChildJvmStandardSdkObserved",
+    "forcedGcOrHeapDump",
+    "externalVmOrTargetProcessObserved",
+    "source",
+    "tests",
+    "suites",
+    "targetUnitFour100",
+    "strictFour100GateExit",
+    "singleSession",
+    "crcMismatch",
+    "metadataClasses",
+    "manualCounterExclusions",
+    "totals",
+    "fullSourceUnits",
+    "fixtureHashes",
+    "owners",
+    "newAccepted",
+    "productTestsReexecutedByPost",
+    "formalUpdated",
+    "whole451Accepted",
+    "wholeF03Accepted",
+    "oldCoverageTransferred",
+    "coverageExecUnion",
+    "effortPercent",
+    "canonicalOwnersRemainCandidateNotAccepted",
+    "helperSourceProgramsNotAcceptedByTheseTargetCounters"
+  ],
+  "newAccepted": 0,
+  "newUniqueMethods": 20,
+  "observationScope": "OWN_CHILD_JVM_ONLY",
+  "originalHelpersCompileOnly": true,
+  "originalMethodsReexecuted": 0,
+  "physicalClasses": 2,
+  "postSha256": "b057305b8c6da82a7ad0b5e142e1c46de7118c6bb2f5bc7aee16fde75c28924e",
+  "semanticNegativeVectors": 26,
+  "source": "6b53efeec87f3ec36a840dd8e7759656cb4aee5c",
+  "sourcePrograms": 1,
+  "sqlLiteralNegativeLabels": [
+    "wrong-SQL",
+    "missing-part",
+    "extra-part"
+  ],
+  "sqlLiteralNegativeVectors": 3,
+  "suites": 1,
+  "tests": 20,
+  "totals": {
+    "BRANCH": {
+      "covered": 7,
+      "missed": 4
+    },
+    "CLASS": {
+      "covered": 2,
+      "missed": 0
+    },
+    "LINE": {
+      "covered": 25,
+      "missed": 8
+    },
+    "METHOD": {
+      "covered": 5,
+      "missed": 1
+    }
+  },
+  "unexecutedOwnedOverloadLines": [
+    64,
+    65,
+    66,
+    67,
+    68,
+    69,
+    70,
+    71
+  ],
+  "whole451Accepted": false,
+  "wholeF03Accepted": false
+}
