@@ -1,0 +1,5 @@
+# 2931 現1831・digest開示訂正結合仕様
+
+2929/2930、BUG2129/2130・YKT1876/1877、元群3316/0.25-1-3固定。PG15475の旧15342 effect flag訂正とPG15476独立21意味反例/AST最小差/225 registered Testの既知helper確認を、元1831 registry/485二sideへ一度の機械反映で結合する。Product/既execの再解析/再実行は0、新PT/Source/counter/正式/受入/工数も0。元4Testのcrypto=false欄は旧hash付きで保持し、effective SHA256=true/非秘密設定/actual secret-credential-authfalseの追記をcanonicalな訂正として参照する。旧ind15344はこの効果flagを検証していなかった事実を保持し、成功結果を当訂正検証へ読み替えない。
+
+PG15480は新registry15478へpostDisclosureCorrections[旧post SHA]と対象ApiStartupInputs SourceのeffectDisclosureCorrection参照だけを追加、delta三fieldを0/前ref更新/metadataOnlyを明記する。他の全case/Sourceカウンタ/原proof/cost/owner/coverage/JVM/resource domainは不変更。485二sideは新15480overlay、486はinventorySha256だけ、481484/旧side/原予算/受入を保持する。PG15482で原registry/新二side/全旧値一致とregistry34・WBS28反例、wholeauditの真正1/HOLD不変を独立照合する。限定metadata成功を全sourceや全call graph/実環境の受入にしない。結果2932、正常な後続metadataはこの訂正を継承し旧flag単独を正本へ戻さない。

@@ -1,0 +1,9 @@
+# 2929 非秘密設定digest開示訂正・pure適用guard仕様
+
+BUG2129/YKT1876、PG-D942、群PG15474-NONSECRET-DIGEST-DISCLOSURE/WBS-G01元0.25/1/3pp固定。現source6b53/normal14216/current1831を保持し、既ApiStartupInputs原4/旧15342-22f14eebのcrypto=falseという報告分類だけを是正する。成功した原001のload→ApiConfigurationLoader.load→ApiNonSecretConfig.parse、および原004の直接parseはcanonical非秘密UTF8をJDK SHA256へ必ず渡す。実secret/key/credential/認証ではない。旧Source/Test/raw/XML/終了0/exec/全counter未達2L1M/4TestIDは変えず、旧sourceへ成功を転用せず、Productも既成功postも再実行しない。
+
+新sharedpurev3はv2を凍結保存したまま、既知JDK暗号型/設定parser・loader・inputs/既知hash・codec・hasher型がMain/Testのtextに現れる場合をpure=false固定profileには不適用として拒否する。これは保守的字句guardで全call graph/意味解析/新permissionを保証せず、全helper/initializerの人相当レビュー義務を維持する。Source pathは従来閉profile、Testはsrc/test/javaだけ、旧profileフィールド/型/owner/namespace/物理closure/NoCode禁止/単一case反例は不変更。必要なら専用truthful crypto postを作るのでありHOLD解除や許可操作の拡張をしない。
+
+原v2とv3のAST差を新guard/呼出/fieldだけへ限定し、通常値・単語境界・不正型・全block型の陽性/陰性をmetadataだけで検証する。新guardの本番post全経路を再実行したとは称さず、元analysis部分の同一性と旧資格を参照する。独立postで新guard組込位置/新旧元解析AST同一と反例を確認する。
+
+横展開は現1831の全originalPostReferencesとnormal登録Testについて、API/Web non-secret parser/helperの具体参照を有限検索する。15224設定14/15302構成11はcrypto未指定、15342入力4だけ明示false；未指定をfalseへ補完しない。全過去/全間接依存/heldの効果無しとは認定しない。追記erratumは旧post hash/source/実raw/hash/XMLと元counterへ束縛し、effective crypto=true/非秘密SHA256/actual secretfalse/old manifest retainedを示す。新実行/新TestID/新Source/coverage/正式/受入/工数の増分は0、元費用・開始見積を再配賦しない。新2930結果へpath/hash/実command/exit/反例/限定横展開/未保証を保存し、次current metadataは訂正参照を必ず保持する。全HOLD/正式1964-53/歴史17-190/工数null/QA051final維持。

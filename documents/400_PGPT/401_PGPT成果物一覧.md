@@ -1,5 +1,7 @@
 # PGPT成果物一覧・進捗
 
+2026-10-31追加：2929～2932/PG-D942、非秘密設定helperのSHA256を旧API入力postがcrypto=falseと記載したmetadata誤りをBUG2129/YKT1876へ先行起票し、旧hash/source/raw/counterを保持した追記で訂正。new sharedpurev3の既知crypto/helper拒否と解析AST不変を31+9check/独立21反例で確認、途中v1/v2 pin転記誤りはBUG2130/YKT1877先行是正。225登録Testの既知chain検索は誤記1/未指定2・未登録tool1を区別し全call graph保証0。current1831/392Source/全counter/正式/工数/受入は不増、訂正参照をregistry/二WBSへ反映して通常PG/PT継続。
+
 2026-10-31追加：2923～28/PG-D940941。原Hasher3/一Source四100＋公開値四whole18/六Source（四四100・二自然B0）を現sourceで初回実行、独立35/36意味反例・公開PBKDF2/数学alphabet/JSON/二public file/四heldProbe0確認。共通metadataを一度に結合し費用二重計上0、current1810→1831/226・Source385→392・四213→218・自然158→160・旧未達8/13不変。原96JVM1939=1831+108、正式1964/53・歴史17/190・工数null/QA051final/全HOLDは不変、通常PG/PT継続。
 
 2026-10-31追加：2919～2922/PG-D939、公開合成鍵AuthContextCodec原whole7を現sourceで初回成功・専用post/独立36意味反例/Node固定AES oracleを確認。全四Source五Code L139M19C5B48miss0、内三四100・例外一自然B0。current1803→1810/221・Source381→385・四210→213・自然157→158、旧未達8/13不変。BUG2128/YKT1875はreader完全class名呼出の工具限定是正、原PT再演0・旧失敗/drafts保全。全旧proof/cost/227候補/正式1964-53/歴史17-190/工数null/全HOLD不変更、通常PG/PT継続。
