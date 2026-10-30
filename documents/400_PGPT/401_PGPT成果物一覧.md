@@ -1,5 +1,7 @@
 # PGPT成果物一覧・進捗
 
+2026-10-31追加：2977～80/PG-D954、既存MediaBind四/ScenarioScript二/QuestionBind四の原whole10/3を現source初回成功。全二新Source四Codeの未達99L9M31Bを隠さず登録、独立30/既helper完全保持/未選択JUnit二・公開UUID非保存/registry34/WBS29成功。現1950→1960/253・Source436→438・四243/自然172不変、未達15-24→17-28は測定拡大。新製品/実行工具障害・原10再演0、全旧proof/cost/訂正・正式1964/53・工数null/全HOLD保持、通常PG/PT継続。
+
 2026-10-31追加：2973～76/PG-D953、LogSearch八/ReplyDecoder六の原whole14/2を現source初回成功。全三Source三Code L79M15C3B38miss0/decoder一四100・二自然B0、独立28・承認語句3/固定LOG280-QSB320 wire/registry34/WBS29成功。現1936→1950/250・Source433→436・四242→243/自然170→172、未達15-24不変。BUG2139/YKT1886は承認語句の誤参照を先行是正、旧失敗保持・原14再演0。全旧proof/cost/訂正・正式1964/53・工数null/全HOLD保持、通常PG/PT継続。
 
 2026-10-31追加：2969～72/PG-D952、Animation/Music/Scenario原whole24/3を現source一JVMで初回成功。全三Source四Code L24M10C4miss0/自然B0、独立28・17header field/11request byte vector/registry34/WBS29成功。現1912→1936/248・Source430→433・自然167→170、四242/未達15-24不変。BUG2138/YKT1885は独立OUT実名とguess参照の差を先行是正、旧失敗/元成功保持・原24再演0。全旧proof/cost/訂正・正式1964/53・工数null/全HOLD保持、通常PG/PT継続。
