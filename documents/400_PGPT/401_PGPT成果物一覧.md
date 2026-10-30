@@ -1,5 +1,7 @@
 # PGPT成果物一覧・進捗
 
+2026-10-31追加：2937～40/PG-D944、接続前Factory原3＋閉じた値契約原2を現source一JVMで成功。専用全Source post/独立24/registry34/WBS29反例・未接続/秘密無しを確認。現1839→1844/231、Source394→395・四218不増・未達9/15→10/17は測定拡大。BUG2132～34/YKT1879～81はpost入口名/LF/AST型の工具限定是正、原5件再演0。全旧proof/費用/訂正履歴を保持、正式1964/53・歴史17/190・工数null/全HOLD不変、通常PG/PT継続。
+
 2026-10-31追加：2933～36/PG-D943、原Web入力4＋MockLogin4を現sourceで初回成功・専用post/独立40意味反例・承認brand/HTTP-DOM/設定null/実Codeを確認。現1831→1839/228・Source392→394、四218不増・自然160→161、WebInputs wrapper未達一/二追加で全未達9/15。旧API digest訂正/元proof/cost/227候補保持・WBS29へ訂正削除反例追加。BUG2131/YKT1878はFiles型名誤認のpreflight限定是正、旧8は未実行・Product再演0。実server/Browser/CHR/正式/受入/工数へ加点せず、正式1964/53・工数null/全HOLD維持、通常PG/PT継続。
 
 2026-10-31追加：2929～2932/PG-D942、非秘密設定helperのSHA256を旧API入力postがcrypto=falseと記載したmetadata誤りをBUG2129/YKT1876へ先行起票し、旧hash/source/raw/counterを保持した追記で訂正。new sharedpurev3の既知crypto/helper拒否と解析AST不変を31+9check/独立21反例で確認、途中v1/v2 pin転記誤りはBUG2130/YKT1877先行是正。225登録Testの既知chain検索は誤記1/未指定2・未登録tool1を区別し全call graph保証0。current1831/392Source/全counter/正式/工数/受入は不増、訂正参照をregistry/二WBSへ反映して通常PG/PT継続。

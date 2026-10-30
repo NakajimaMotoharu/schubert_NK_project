@@ -1,0 +1,11 @@
+# Current1844・接続前Factory値契約現source結合：結果
+
+保存時追記：初回commit起動はPython本体をshellとして渡したためshell2/commit無し、通常Python heredocへ戻した。次のexact stageは実行済み工具10fileの末尾空行だけをgit diff --checkが指摘しcommit前停止、原工具byteと実行hashを保持。これら実行済み/失敗凍結の履歴工具は後から整形せず、Git診断の全行が該当10fileのEOF警告だけであることとexact公開hashを照合して保存する。本番Java/品質gate/branch保護を緩和する操作ではない。初回pushはEverything up-to-date/0で新成果未push、完了としない。PG15516公開saveは旧時点のまま保持、新追記後はPG15517別manifestで封印する。
+
+2939/PG-D944、Production6b53/normal14216固定。15508 entry9049452e/actual0、registry PG15508-current1844-credentialfree-factory-values-registry-v1/manifest.json SHA 394b7af6c45830184e1c8d84f33f4fde096041eede2862b485dc280f380d6842。15510 entrya7da52b1/actual0、独立post PG15510-current1844-credentialfree-factory-values-registry-post-v1/manifest.json SHA 9a607f04642cc778ac19ba66070711261286ae4e6f75aae1057806477b981681、34意味反例。
+
+15512 entry6839d0ff/actual0、writer PG15512-current1844-credentialfree-factory-values-wbs-v1/manifest.json SHA 1e79e76c0ea1fdaf902fc3981ffae00b890879c6cdb6f68169a1499c12b60b20。15514 entry5e99ffd2/session34322/body0、独立post PG15514-current1844-credentialfree-factory-values-wbs-post-v1/manifest.json SHA 6ccf5d8e97ac43e256ab3f6f98b36a805752e93635d16b392829a9fe8e2a43be、29意味反例。後続同shellの誤441 path sedは2、検証body0と区別する。
+
+現1844/231・395Source521physical500Code21meta、四218/324（313Code11meta）・自然161/174・NoCode6/6・未達10/17。原97+Catalog1=98JVM1952=1844+108repeat、Resource Java35/JS4/Node30children別domain。owner310baseline227candidate115UNKNOWN。新cohort5・測定Source1の技術増分だけで、新設計Test/新機能/正式受入/工数率の増分0。legacy field newTestIds=5はcohort差分であり新規設計数ではない。
+
+全旧proof/case/counter/ownership/cost/941943及びAPI digest訂正global/sourceを保持。485二side typedGuardCurrentHostPG15512Overlay/486inventorySha256だけ、481484/旧side/受入不変更。wholeWBS audit前後実1/current physical candidate exact Git/worktree scope HOLD、PASSとしない。正式1964PT/53scope・歴史17/190・工数null/QA051final/451F03G07G13/全Graph/実環境HOLD不変。次は限定工具障害完了記録とexact公開保存push、その後477のfollowup索引から独立未完PG/PTを継続。
