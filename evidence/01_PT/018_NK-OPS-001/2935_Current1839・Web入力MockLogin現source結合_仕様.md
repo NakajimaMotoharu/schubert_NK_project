@@ -1,0 +1,5 @@
+# 2935 現1839・Web入力MockLogin現source metadata結合仕様
+
+2933/2934、source6b53/normal14216/旧1831・392Source固定。原Web入力4/MockLogin4を同一sourceの新8unique/二Source三Codeとして一度だけ結合する。元Main/Test/全oldproof/cost/candidate227/原941943を保持し、旧API digest開示訂正postDisclosureCorrectionsと対象SourceのeffectDisclosureCorrectionを必ず継承する。新scopeは非秘密SHA256/immutable packaged resource/MockMvc-only/実private・credential・authfalseを明示、Browser/CHR/実起動へ加点しない。
+
+15492/15494で元8XML/全Code/Jar/CRC/独立40反例/実Source categoriesを照合、新scopeは自然B0LMC100一・未達一/二physicalで、全体未達8/13→9/15は測定範囲追加であり既旧Sourceの劣化ではない。485二side15496 overlayと486inventorySha256だけ反映し481484/全旧side/元費用/受入不変を15498で独立確認する。通常registry34反例に加え、WBSは旧digest訂正削除の反例を追加して29反例とする。wholeaudit真正1/current physical scope HOLDを保持、限定metadata成功を全WBSへ拡大0。共同metadata費は元群3318内・二重配賦0、結果2936。
