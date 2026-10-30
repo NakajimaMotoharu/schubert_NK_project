@@ -1,0 +1,5 @@
+# 2876 Current1729・停止予算Source結合結果
+
+2875実0。15248/cc03e41f→64e5758fc7b382c109741c9f97d291b746046b6446e6befc4beb07c6c662c8bd、15250/56e59bf1→96044e9d06ed125c56a43da295d29390add8f060e84774c0f4a41b4dca6b9fa6/34反例、15252/f52ee01a→66fd79b8e9501d2f0c2cc20f73f6fa75127b92bb8ba6e5a71fc97387be75aa5d、15254/19c14180/session52718真正0→25ccf7d2c46e922ae21be95606534e16d4b7ad7cc488137de2f30b05ab3bc11e/28反例。
+
+1729/200・357Source473physical455Code18meta、四193/295(285Code10meta)、自然153/165、NoCode6/6、未達5/7不変、原81+Catalog1=82JVM1837method=1729+108repeat。owner272/204/107UNKNOWN、全旧proof/cost/domain/owner/481484保持・二side-only、wholeaudit前後1同physical-scope HOLD。新受入0/正式1964-53/17-190/工数null/QA051final/Graph・外部HOLD不変更、Product再演0。group3270同予算内metadata費追加0、実commitは次公開保存checkpointへ。

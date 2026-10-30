@@ -1,0 +1,9 @@
+# 2874 ApiStopBudget原18結果
+
+2873/source6b53/normal14216。PG15240/entry7dbad799/session66230 lint/body真正0、原whole18/1 FES0・manifestb5e2c1a74401b7d9342865e06bdaa9b72ceb36f4380f0b76b65e35c32d8b2019、単一exec077bffeb738442db07c3228d6fc9fc13775a2ffb850a949d4bab9281727fe384。元JVM環境/command/start/終了・XML/TestID/hashはraw/stagesへ固定、現hostで代用0。Main/Test全読/normal実byte/既registry非重複・自己所有有限clock/threadだけ、外部停止/TERM/権限操作なし。
+
+PG15242/entry45d00812 lint/body0、manifest242a987a6b39aa0365fa0b479e41ffe12b6b5d01cfc9e49c4f6e3a7945da1001、全一Source一Code/Jar/hash/CRC/session一致、L24M5C1B12全miss0四100/strictgate0。Main/Test二canonical UNKNOWNはそのまま、P01805工程担当をowner/cost確定へ流用0。
+
+旧15244/entry3a27c40e lint0/body1・OUT未作成、Java long literalのLをregexで許さず四vector読取漏れ。保存失敗をBUG2121/YKT1868へ修正前起票し旧工具凍結、Product再演0。新15245v2/entryec1b17d2 lint/body0、manifestb05a4e1dc4f900e3a0eadc455afdec0f775757f60886d40992a3539a82053f36、原18 XML宣言一致・全Code/counter・26意味反例・独立四clock vector/値違い欠落逆順三反例・Java suffix文法不正/値欠落/余分三反例とLありなし同値を実証。SS342 main正本のAPI60sを確認、fake20ns wrap/逆行/再begin非延長・clockfaultidentity・並行一claimを元assertionから照合した。横展開の旧reader/新v2・原Test・2873/74・直前15226を実body/hash確認、15226はJSON文字列のみ・numeric parserなしで非該当、仕様/結果は実期待値説明で数値parserなし。全過去/held未保証。当工具scope限定完了2026-10-31、修正commitは本書/新v2/台帳を含む最初・実hash後続追記。
+
+原LogRequestとServiceDatabaseSourceのwhole Testは実DB fixtureのため未実行HOLD、正常部分抽出や代替動的再演0。新platform拒否なし。準備JSの置換guard失敗は作成/実行前で不算入。正式1964-53/17-190/工数null/QA051final/Graph・実環境HOLD不変。event3270見積1/3/8pp維持、工具手戻りを別原因記録し元計画消化/新受入に加算しない。
