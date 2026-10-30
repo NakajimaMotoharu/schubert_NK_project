@@ -1,0 +1,13 @@
+# 2828 Batch monitoring原全体inventory結果
+
+2827/source6b53/normal14216、現1319/332Sourceを保持。旧15036 entry92160599bbda45228c55c054a9f54fb3f8549fbde6dea45d2e769d856d71e39bはlint0/body1・FileNotFoundErrorでOUT未作成。六manifest群の最初の実名PG14930-batch-monitoring-pure-fifty-five-post-v1/PG14932-batch-monitoring-pure-independent-v1を短縮転記したもの。原385PT/六runは成功保持、inventory自体は未確認、製品再演0/外部0。BUG2118/YKT1865へ修正前起票した。platform/security拒否ではなく通常の工具参照誤りであり、旧工具を再実行せず新v2で是正する。
+
+元着手見積0.25/1/3pp/cap3は保持、追加発見/工具手戻りを新PG成果や元計画消化と混同しない。新v2の実結果・path/hash・全対象横展開/反例・限定完了は真正終了後に追記する。
+
+完了追記00:39 JST：新工具15037v2/entryfb6d078370cecfe79675fe17afcc0442e8bcf477b36a13df9fa8d1c29294f026、lint0/body0、公開PG15037-batch-monitoring-inventory-v2/manifest.json SHA256 `410d2dc0b43c263322916a099957ac85f365e9b1c498dc1e02ce1be4d2bfc4ea`。六postをcurrent1319.originalPostReferencesのsha→一意実名へ先行joinし、独立六を含む全12依存の実hash/資格対応を確認。六正常/誤alias・未知sha・欠落の18反例、全集計22反例で再発防止。旧二名を是正し他10名は元hash/資格と実一致して非該当、旧工具byte/失敗を保持し元成功385試験の再演0。BUG2118/YKT1865当工具限定完了、修正commitは本書と新v2を含む最初の保存commit（後続記録へ実hash追記）。
+
+normal14216/current/実Jar：業務Main40Source/全71Codeと原全41Test/385methodが完全一致、case/Source/physical重複0・全385宣言を元XMLへ照合、元6JVM/6exec/session/独立postを保持。36Source四counter非空100、4Source自然B0/LMC100でN/A。参考計数L1166/M263/C71/B537全miss0はdisjoint Sourceの既測定値の合計であり、合成execや正式module coverageを作成していない。
+
+package-info.java/class各一は正規NullMarked annotation、実fields0/methods0/Code0のmetadataで0/0 N/A、全normal Main41file/72classから隠さずmanifestへSource/hash/Code記録を保存した。これを四100や新Source受入へ加算しない。現registry1319/176・332Source443physical/70JVM1399methodを変更0、正式1964/53・旧17/190・工数null・全HOLD不変。自己JVM実測は15018の通常PT、実VM/native/CHR/全module/retention/運用品質は別残件。
+
+fresh00:39used37/rem63/reset1793774153/短期null、00:27から共有観測1pp・他chat/PMO混合不明なので専有費/実tokenはnull、quotaからtoken換算0。usage00:22cursor74a9922b/N-Tnull・次01:22、disk11GiB/96%・削除/転送0。今回停止条件には該当せず、保存後に他の許可済みPG/PTを継続する。
