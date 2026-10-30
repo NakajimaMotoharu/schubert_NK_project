@@ -1,5 +1,7 @@
 # PGPT成果物一覧・進捗
 
+2026-10-31追加：2969～72/PG-D952、Animation/Music/Scenario原whole24/3を現source一JVMで初回成功。全三Source四Code L24M10C4miss0/自然B0、独立28・17header field/11request byte vector/registry34/WBS29成功。現1912→1936/248・Source430→433・自然167→170、四242/未達15-24不変。BUG2138/YKT1885は独立OUT実名とguess参照の差を先行是正、旧失敗/元成功保持・原24再演0。全旧proof/cost/訂正・正式1964/53・工数null/全HOLD保持、通常PG/PT継続。
+
 2026-10-31追加：2965～68/PG-D951、Proxy DLQ三/純Health四/未起動HTTP valve二を現source初回実行。全五Source七Codeの三四100/HealthとAdmission二未達、独立28/registry34/WBS29成功。現1903→1912/245・Source425→430・四239→242/未達13-22→15-24は測定拡大。BUG2137/YKT1884は負suiteが正値と同じ工具不備を先行是正、旧失敗保持/原9再演0。全旧proof/cost/訂正・正式1964/53・工数null/全HOLD保持、通常PG/PT継続。
 
 2026-10-31追加：2961～64/PG-D950、配列Checksum四/メモリ容量五の原9を現source初回成功。全四Source七Code L121M19C7B60miss0（二四100/二自然B0）、独立28/registry34/WBS29反例成功。現1894→1903/242・Source421→425・四237→239・自然165→167/未達13-22不変。Inspector四は既Graph依存HOLDを継承、新障害/原9再演0。全旧proof/cost/訂正・正式1964/53・工数null/全HOLD保持、通常PG/PT継続。
