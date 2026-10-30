@@ -1,0 +1,7 @@
+# 2899 現1777・二原run/九Source/owner候補保持結合仕様
+
+source6b53/normal14216の元current1760/15331-cfb7c63eとowner独立15332-ff060c6dを基点とし、2896の原4/一Source二Code未達、2898の原13/八Source八Code（四100六/自然B0-LMC100二）だけ一括metadataへ加える。原2execはsource/単独session/CRCを分離しcoverage union0、ケース重複を拒否する。総case1777/suite212/JVM原87+Catalog1=88/実method1885=unique1777+repeat108、Source371/physical494=Code473+metadata21、四203/309=Code298+meta11、自然155/167、standaloneNoCode6/6、未達7/12を独立集計。Inputsの自然B0だがLMC未達は自然閉鎖へ加算しない。
+
+旧全case/原proof/cost/domain/215owner候補/metadata/原941943/受入/費用を保持、新ownerはMain九baseline/Test五UNKNOWNとして286baseline/215candidate/108UNKNOWN。共同metadataの費用はInputs先行群だけ、後続Outboxへ追加0。原TestIDの新作成/新機能/受入/正式/工数増分0、registryのnewTestIds17は現cohort未登録原methodの増分であり工程の新試験設計17ではない。旧source成功移植0。
+
+15352 builder/15354 independentで全typed counter・boolean/原費用・候補不変と34反例、15356は485二sideへ新overlayと486 inventorySha256だけ、15358 independentで28反例/481484/旧side/cost/acceptance不変/所定whole WBS前後真正結果を保存する。既scope差HOLDを限定metadata合格へ混ぜない。実行は各no-args entryをpg11123_checked_python_entry.py経由でpython3 -B、Product再演0。結果2900/各manifestへ。

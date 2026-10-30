@@ -1,5 +1,7 @@
 # PGPT成果物一覧・進捗
 
+2026-10-31追加：2895～2900で現source原Inputs4/一Source未達＋Outbox13/八Source（四100六・自然B0-LMC100二）を実行/独立結合。現cohort1760→1777、Source362→371、四197→203、自然153→155、測定拡大の未達6/10→7/12。新機能/新TestID作成/正式受入の増分ではなく当source資格。owner286baseline/215候補/108UNKNOWN、原費用/全旧proof保持。正式1964/53・歴史17/190・工数null/QA051final/全HOLD不変、通常PG/PT継続。
+
 2026-10-31追加：2893/94・PG-D936で現行11artifactの担当候補を限定資格、owner277baseline不変/204→215候補/114→103UNKNOWN。原10suite63methodは既証拠参照のみ、新PT/coverage/Source/受入0。current1760/207・362Source・四197/303・未達6/10と正式1964/53・工数null・全HOLD不変。BUG2127/YKT1874工具限定是正、原941/943/cost/旧proofを保持、通常PG/PTへ継続。
 
 2026-10-31現在：2890の現source6b53/normal14216限定技術registry1760/207・362Source、四197/303・未達6/10・原85+Catalog1=86JVM1868method=1760+108repeat。正式1964PT/53scope・歴史17/190・工数null/QA051final/全HOLD不変更。2891/92/PG-D935は共有post最小case不備の工具資格（新PT/coverage/Source/受入0）、原1/11/16メタ6反例・旧18/12参照・23新独立反例、Product確認再演0。直近担当UNKNOWN11のG13群は別未完で、分類を進捗率へ換算しない。
