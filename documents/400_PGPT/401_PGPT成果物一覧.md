@@ -1,5 +1,7 @@
 # PGPT成果物一覧・進捗
 
+2026-10-31追加：2965～68/PG-D951、Proxy DLQ三/純Health四/未起動HTTP valve二を現source初回実行。全五Source七Codeの三四100/HealthとAdmission二未達、独立28/registry34/WBS29成功。現1903→1912/245・Source425→430・四239→242/未達13-22→15-24は測定拡大。BUG2137/YKT1884は負suiteが正値と同じ工具不備を先行是正、旧失敗保持/原9再演0。全旧proof/cost/訂正・正式1964/53・工数null/全HOLD保持、通常PG/PT継続。
+
 2026-10-31追加：2961～64/PG-D950、配列Checksum四/メモリ容量五の原9を現source初回成功。全四Source七Code L121M19C7B60miss0（二四100/二自然B0）、独立28/registry34/WBS29反例成功。現1894→1903/242・Source421→425・四237→239・自然165→167/未達13-22不変。Inspector四は既Graph依存HOLDを継承、新障害/原9再演0。全旧proof/cost/訂正・正式1964/53・工数null/全HOLD保持、通常PG/PT継続。
 
 2026-10-31追加：2957～60/PG-D949、原Inbox値四whole15/4を現sourceで初回成功、全14Source15Codeを測定し九四100/三自然B0/二未達。独立28/Python LP-NFC-HMAC/SSC157 frame/所有buffer/N12・SQLSTATE、registry34/WBS29反例が成功。現1879→1894/240・Source407→421・四228→237・自然162→165・未達11/20→13/22は測定拡大。新障害/原PT再演0、全旧proof/費用/訂正・正式1964/53・工数null/全HOLD保持、通常PG/PT継続。
