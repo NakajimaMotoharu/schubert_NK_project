@@ -1,0 +1,11 @@
+# 2882 Profile/Terminal原14結果
+
+2881/source6b53/normal14216。15276/e9500c3a/session78497 lint/body真正0、原14/3 FES0、manifest5904cdcde28f372b55148118f1e28a52ab8e282c1b9b473079d76c07316cfa1d、同exec11fc83f2191cf1af23a6fb32b14d697c6db9a4886fc3debaa5c61f4b2184336d。原環境/command/開始終了/全XML/hash/Test宣言と一回実行を固定、旧argv5/Fixture Test再演なし。
+
+15278/6cfd531d/session62837 lint/body真正0、manifest0dde7b7d8ff705d5466522d43072e16f294838a5ec4cbfdc144c7f5e33af79f5。二Source五physical=四Code＋Factory NoCode。Profile L62M17C3B46・Terminal L27M5C1B18、計L89M22C4B64 miss0・両四100。実Jar全prefix/同SourceFile/Code/元exec CRCと単一session一致、Factoryはflags1536/abstract method一つ全hasCode false/公式Analyzer全zeroで明示NoCode（人工除外なし）。
+
+新passive reader653c860f/compiledce3c7f09を公式JaCoCo cpだけでcompile/read各0、異session/不足args各期待1。元同execのNativeCoveragePrivateFile・Checkpoint$PublicAgent・Identity$NativeQuery全三prefixはnormalJar存在を維持したまま記録class0/trueprobe0。Product class load/init/invoke0、実native/agentexport/NSS/私有file/Root/keys/permission/DB操作0、読取を実native資格に加算0。rawの空に近いPATH/LANGだけのENV・予約prefix不在のownagent一つ・元MXBean default Optional.emptyも独立照合。Fake byte headerとMap exportはnative実stream証拠でない。
+
+旧15280/0442fab7 lint0/body1・OUT0はcounter数字の全置換衝突でCLASS期待値を4→64へ誤変換した工具不備、元実測/14PT不変更。BUG2124/YKT1871先行起票し旧凍結、新15281v2/ff110a7f lint/body0→1708610f4667ba09c7321ef4588b2f1be03222b3011d747b0d059845d23a5275。名前付き四role期待辞書L89M22C4B64、全role値違いとboolean型の5反例、元28意味反例/全14XML宣言/全五class/NoCode・二MainbaselineP01808/三TestUNKNOWNを独立確認。SS354 SSC234のterminal→entry-return→closing・agentなしI/O0・union禁止と六profile固定vector/agent pin/NSS Valueの原literal oracleを照合（Production expected生成0）。横展開の旧新工具、15278は元実集計、15262/15245は既実CLASS1で衝突なし・元hash/資格一致、2881/82は事前/実Code四NoCode一と誤期待を区別、製品/post再演0。当工具scope限定完了2026-10-31、実修正commit次保存後追記。
+
+元事前eventはP01808親がchildrenありとしてguardで拒否、後段発行前exit guardが機能し実装/製品0。481/484実nodeを読取りleaf.01/event3276で元予定1/4/8pp不変更、元親費用加算0。正式1964-53/17-190/工数null/QA051final/Graph・実環境HOLD不変、新受入0。

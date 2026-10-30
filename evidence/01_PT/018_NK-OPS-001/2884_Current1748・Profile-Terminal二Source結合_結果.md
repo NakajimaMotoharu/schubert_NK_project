@@ -1,0 +1,5 @@
+# 2884 Current1748・Profile/Terminal二Source結合結果
+
+2883全真正0。15284/c9e2ee0f→7bc09027b74939ddc45fb92d63bb82be1c096f898670f275bed940cbe507435d、15286/d82c74d0→06b823d46e3934938ab9e1a3e457f4f22bb920191affb48a334d1f05ded08d97/34反例、15288/42e736c0→e187d112920e0a5c8faa826ae61232f114d24792fcc652b36cf5b8a5eb17544a、15290/9a6fd896/session93529真正0→0662a464ab6a8d3300016a965fd5caf671837915c0adf9446e326e8283485041/28反例。
+
+1748/204・360Source480physical461Code19meta、四196/302(291Code11meta)、自然153/165・standalone NoCodeSource6/6・未達5/7不変、原83+Catalog1=84JVM1856method=1748+108repeat、owner275/204/111UNKNOWN。追加Factoryは実NoCode一件、旧metadata18全値を保持、元生成Codezeroの理由/未測定CRCは旧postに保持。全旧proof/cost/domain/owners/481484/二side-onlyを確認、wholeaudit前後1同physical-scope HOLD。newAccepted0/正式1964-53/17-190/工数null/QA051final/全HOLD不変更、Product再演0、元group3276同予算内metadata費追加0、実commit次公開保存checkpoint。
