@@ -1,5 +1,7 @@
 # PGPT成果物一覧・進捗
 
+2026-10-31追加：2919～2922/PG-D939、公開合成鍵AuthContextCodec原whole7を現sourceで初回成功・専用post/独立36意味反例/Node固定AES oracleを確認。全四Source五Code L139M19C5B48miss0、内三四100・例外一自然B0。current1803→1810/221・Source381→385・四210→213・自然157→158、旧未達8/13不変。BUG2128/YKT1875はreader完全class名呼出の工具限定是正、原PT再演0・旧失敗/drafts保全。全旧proof/cost/227候補/正式1964-53/歴史17-190/工数null/全HOLD不変更、通常PG/PT継続。
+
 2026-10-31追加：2915～2918/PG-D938、ContextHash原whole3を現source一execで成功・専用post/別独立34意味反例。L11M2C1miss0/B0自然N/A、SHA256実行true/actual keyfalse/自JVM provider復元を区別。現1800→1803/220・Source380→381・自然156→157、四210/316・未達8/13保持、原93JVM1911=1803+108。初回未完成工具lint1を保持し別v2の初回実行でありProduct再演0、新設計/機能/正式/受入0。全旧proof/費用/227candidate/正式1964/53/工数null/全HOLD保持、通常PG/PT継続。
 
 2026-10-31追加：2913/14・PG-D937で直近whole12 Testの主subject/原40TestID/SS/元postを明示対応。owner295baseline不変/215→227candidate/115→103UNKNOWN、旧exact11・原941943/費用/全旧proof保持。担当候補化だけで現1800/380Source/全counter/正式/工数/受入は増加0。独立63resolver/57意味/28WBS反例・全G13未受入を明示、通常PG/PT継続。
