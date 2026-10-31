@@ -1,0 +1,7 @@
+# ReleaseApproval公開値原whole八・実行結果
+
+3229/PG-D1036/Source6b53/normal14216、原16588 SHAb2c1925427e837974d3097aeec60a7e40b87fa4c57ceb04d3ca2dd7e8d96e2a7/entry9262b673/session4117終端6734d6真正0、8/1suiteFES0。共有v3不変更f41c2d98の16590 SHA66b7475c88493faca40ea0ed85e6c63ef017ce62028a1a053a9a82a9f02ec6d7/entry8837aa1a/session73179終端479d04真正0、全1Source1physical LINE21/METHOD7/CLASS1/BRANCH10 miss0・単一exec/CRC0/手動除外0。
+
+16592 SHA7e8669f03dc22f2448d914c675d936295242a35718d36556100b4b63c806361d/entry89992850/session68425終端a0eb8e真正0、27反例/八独立oracle・手書ASCII/frame/version/digest/192byte/null/copy/四並行の原期待とapproved SS343を照合。資格済受動readerで四held六native無probe/Root27無record。公開digest placeholderのみで実hash計算/秘密key/署名/承認発行/運用permit/file/Root/VM/DB/JMS/HTTP/回収/退役0。自己executor一/宣言四task、実thread数null。旧0061結果は歴史保全・当sourceへ転用0、原八再演/Source/Test/SS変更0。
+
+START3521のMain76行表記は実wc70行へ本結果/ENDで追記訂正、元eventを改変しない。元Test145行/全Main body読取・hashとPT対象/費用/成果は不変。正式1964/53/歴史17/190/工数null/QA051final/F03全体/451/全HOLD不変、各manifestの実command/環境/時刻/exit/XML/exec/hashへ追跡。

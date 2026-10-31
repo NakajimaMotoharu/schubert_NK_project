@@ -1,5 +1,7 @@
 # PGPT成果物一覧・進捗
 
+2026-11-01追加：3229～32/PG-D1036、原ReleaseApproval八/一FES0、共有v3不変更・全一Source一physical21L7M1C10B未達0/独立27＋八と四held六native・Root不在。現2277/314・506Source761physical/四273404、registry34/WBS29＋四真正0、公開claimsだけ・実承認発行/正式/工数null/HOLD加点0。
+
 2026-11-01追加：3225～28/PG-D1035、原MediaBodyStreamer二/一FES0、全一Source一physical19L1M1C12B四未達0・独立38/八oracle。現2269/313・505Source760physical/四272403、registry34/WBS29＋四真正0。Test-own一時fileのみ・借用channel所有維持、実media/正式/工数null/HOLD加点0。
 
 2026-11-01追加：3221～24/PG-D1034、原ManagementEncoder三・全1Source6physical未達保持/独立32＋六/Guard-only監査。補助scopeだけ現2267/312へ結合し旧Source/counter/history exact保持・新Source/coverage達成加点0。registry34＋二/WBS29＋四真正0、正式/工数null/HOLD不変。
