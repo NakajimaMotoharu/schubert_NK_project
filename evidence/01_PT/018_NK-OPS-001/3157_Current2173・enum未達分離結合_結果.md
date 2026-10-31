@@ -1,0 +1,7 @@
+# Current2173・enum未達分離結合 結果
+
+2026-10-31/PG-D1013/3156。16318/f28080/entry76aea4真正0、registry7c618826ff3db2244157c3b1df5fe0c7af7790db3e7d6c45176fbf0b7549e6be。16320/2f4aef/entryce6e8e真正0、独立fee80f8dc0c4c09a400e3412e64cc66eca3514a70ae25651c2f682e5cffe12c0・全34非退化反例。
+
+実測2173/295・135JVM2305=2173+132repeat、484Source680physical635Code45meta・四262/383不変更・自然177/192・NoCode-only6/6・未達39/99。普通2155/5786/未参照3631・quality18別、owner398baseline229候補176UNKNOWN、三genuine NoCode追加と未実行Codeの分母保持/元全履歴・scope/cost/受入不変更を全objectで確認した。
+
+WBS16322/3c33c0/entry4817f4真正0、SHAf34e704dc28d5367695c6924cac877a1fb05ae6467a99fb55cc41298e9f83a4d。16324/b05e94/671fd2-session28582終端e0a717真正0、SHAc4eaf318764fbc9448476544754e8548fa9a0d9b3aa9fcb53d4b266b3407109f、二side typedGuardCurrentHostPG16322Overlay/486hashだけ更新・全旧意味/481484cost保持・29＋普通四反例。G13は保存診断旧943/current1065/HOLDで全audit再実行0、元計画新受入/正式更新0・工数率null/全HOLD保持、元群0.5/2/5不変更・結合費再加算0。
