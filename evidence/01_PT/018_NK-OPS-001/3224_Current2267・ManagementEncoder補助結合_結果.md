@@ -1,0 +1,9 @@
+# Current2267・ManagementEncoder補助結合結果
+
+16562 SHA4ed1fa5d5c1a4297d884710c05a76905bc279b12d2c1ff9f35022d3250a18bef/9aa8cb真正0→16564 SHA0f1147ed6226f806b970e605d49c1ade535810706c555ac4d749e00b0c24610e/fcb455全34＋chain二真正0。旧全Source/physical/counter/proof/history/costをexact保持、補助scope原三だけ追加、新Source/physical0。原PT/post/独立再演0。
+
+固有2264→2267/311→312suite（resource39内数/非resource2228）、147JVM2399=2267＋132repeat、普通2248/5786残3538/quality19別。504Source759physical=683executable＋76zero-counter、四271402=386＋16/自然182197/NoCode-only6/6/partial45154不変。owner426baseline/230候補未受入/192UNKNOWN。
+
+16566 SHAb86e7dff3988b95c4b02e71b6afd608d6adce9908438e49001b7202859164f5a/cb498c→16568 SHA0e81d152caab7eb028e8b47716c76a033211ac97a9d5d464f20d91d889a07681/session55607終端910a7b全29＋普通四真正0。485二side/486hashだけ、481484全旧cost/受入・G13全体HOLD保持。正式1964/53・歴史17/190/工数null/QA051final/F03全体/451/全HOLD不変。
+
+開始/現used62同integer≠費用0・専有費/N/Tnull、凍結1/3/6cap10。usage00:35:25 cursor a6bd99a433cea7cfcb2f550ec93efd5b323e484c4e2efba27c0f15d798a43004/NO_NEW_EXPLICIT_USAGE_RECORD/不完全。通常小群/報告/commitで停止しない。

@@ -1,0 +1,7 @@
+# ManagementEncoder原whole三・実行結果
+
+3221/PG-D1034/Source6b53/normal14216不変更。原16556 SHA2e67fbf506cd1129ca9fec9c62485736d60257349eb85f78254edc032456a803/entry584d3947/session58490終端7391df真正0、3PT/1suite/F-E-S0。16558 SHA74db80ee6173cb1ae309f125572070673008dd3d86cadd70c50186b6ec6e4e54/entry64a12476/session65309終端1121e9真正0、全1Source6physical（Code一・真正NoCode interface五）、L26covered98miss/M7covered33miss/C1covered0miss/B5covered53miss、strictgate1保持。単一exec6690bbec/CRC0/除外・合成0。
+
+四held/六native無probe・Root回収27無record。Frame族五のうちGuard interfaceだけrecord/probe一、outer/Clock/Parent/ParentProbe無record。一probeのhitは呼出回数ではない。caller供給lambdaだけで親認証・Frame生成0。実Root/VM/DB/JMS接続/鍵/配備/permit/回収0。16560 SHA263239554edf87a9f3a17c7485cf4c19ece1f4b76da7f0bd8d148df9d97c0ea3/entry29553ddd/終端75ff00真正0、32反例/6独立oracle（入力同一性・順序、known固定変換、unknown同一instance、interrupt保持解除、二回check/start0or1、2000msreset）。元PT再演/Source/Test/SS/newID変更0。
+
+先行1259standalone有限hostのみで実owner/期限/Rootへの換算0。既Mgmt広域別scope証拠を保持し補助参照のみ・新Source/physical資格0。16558初稿lint-only/body未開始のliteral置換是正は実行失敗の再演ではない。正式1964/53・工数null・QA051final/全HOLD不変。各manifestにcommand/環境/時刻/exit/XML/exec/hashを保持。
