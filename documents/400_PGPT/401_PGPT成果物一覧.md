@@ -1,5 +1,7 @@
 # PGPT成果物一覧・進捗
 
+2026-10-31追加：3072～75/PG-D982、失敗Backup公開profile原whole六成功・二Source三Code L93M11C3B84四100、独立24＋5/registry34/WBS29＋4。current2116/283・476Source660physical/四255-372、ordinary2107/5786/fixture九別。実回収/DB/manager/Root資格は0、旧helper/費用/全正式/HOLD保持。
+
 2026-10-31追加：3068～71/PG-D981、Cleanup/Expiry公開codec原whole三Test16成功・独立24＋5/全一Source L150M18C3B108四100。current2094→2110/281・474Source657physical/四253Source369physical、ordinary2101/5786参照/fixture九別。registry34/WBS29＋4成功、全旧cost/proof/補足を保持・正式/工数/451/HOLD不変更。
 
 2026-10-31追加：3066/3067・PG-D980、現BatchRunRepository全八JDBC所有scopeの48診断を用途レビュー、独立metadata25変異拒否。現1491raw不変更、既562参照＋新用途48=610/当未接続・未用途レビュー881。静的判断だけで新PT/coverage/全F03/正式へ加算0、registry2094/278・四252/366・工数null/全HOLD維持。
