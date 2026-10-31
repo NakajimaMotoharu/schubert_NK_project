@@ -1,5 +1,7 @@
 # PGPT成果物一覧・進捗
 
+2026-10-31追加：3193～96/PG-D1027、公開Config七の原四/1suiteFES0、七source-copy-唯一classpath/metadata18/TestCRC二一致・normal1843Main無probe。現2201/302（resource39内数、非resource2162）・Main492/723/四265不変、16450/52/54/56全34/WBS29＋四真正0。Main coverage N/A/正式1964/53/工数null/全HOLD維持、旧成功転用0。
+
 2026-10-31追加：3189～92/PG-D1026、原MSTOP七＋新観測順quality一=8/2suiteFES0・独立30/九oracle、Snapshot58L12M1C56B全miss0・enum自然B0三100。現2197/301・492/723・四265/390・自然178/193・普通2178/quality19、元partial/history保持/WBS真正0。表示だけBUG2177の正誤是正、原PT再演0・正式1964/53/工数null/HOLD不変。
 
 2026-10-31追加：3184～88/PG-D1025、原ProcessScope七1suite FES0・32L2M1C22B全miss0/独立26＋七oracle。現2189/299・四264/389・491/722不変、旧partialを履歴保持/union0。16420/23/24/26独立/WBS真正0・工具2176有限是正、正式/工数null/全HOLD不変。3188はused55→60の技術+53method/+6四100、正式/個別受入+0と手戻りを点検。
