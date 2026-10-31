@@ -1,0 +1,15 @@
+# 終端観測工具profileの是正・横展開
+
+2026-11-01 08:35 JST、BUG2196/YKT1943、BUG2197/YKT1944。いずれも修正前起票、元失敗byteを保持、元7PT/whole回帰の再演0。Source/Test/SS/品質条件不変更。group17180の事前見積2/5/9pp内に工具手戻りとして記録し、元計画消化と混ぜない。
+
+BUG2196：旧17184-f3173450の全23Cycle record不在期待は、EXP1749002がwrong target反例用にbackupReceipt(0)を作りOutcome.SUCCESSを参照することを落としていた。初期receipt(10)推定は台帳へ追記訂正済み。既承認data enumだけ5 true probes、他22/RootFailed五/inactive十不在を新17185-f38eda19で区別。70反例/7独立oracle、57de81真正0。これは既許可のenum値域の事実照合であり、禁止bodyの実行や品質条件の緩和ではない。
+
+有限横展開17183-cycle-enum-finite-audit-v1/manifest.json SHA256 `5ae8bc3d571e0bbc01449d1a674d1b1090996db27c2658d65f3a81a5bcfaac99`、24e17d真正0。RootScope7/Owner3/当7の元post hashを固定し、enum hits0/0/5と各他22/五/十不在、12メタデータ反例を確認。各旧群の事実を本群へ合成しない。元17184はOUTなし/body1のまま。
+
+BUG2197：旧17188-72239357/af5543は、partial昇格反例の旧Source名MorningRootScopeがrepository namespaceに残りKeyError。新17189-99d20888は検証済みexpected_newの全二Sourceで反例を作り、参照実在/非退化を要求する。34一般反例/2chain/3profile真正0。旧body1/OUTなしを保持し、registry本体1002c019/元7PTの成功と混同しない。
+
+有限横展開の初回17187-d2b7d6b1/fc606aは全四100%旧17046の追加schemaを取り違えてbody1/OUTなし。これは元17046の不具合でない。source集合を末尾scopeから推定せず、固定current/previous registryの全Source差集合から求める17191-partial-fixture-source-audit-v2/manifest.json SHA256 `1ec7eb87835bf2d22075eecab68b50eaa2ae4943be9fe5a724c0700e0ef3770e`、2dac24真正0を正とする。
+
+17191の有限8family：17030/17046/17062/17079/17128/17144の元fixtureは全て実在し非退化、17188のみ不在、17189の新二Sourceは全反例済み。全四100%の降格反例とpartial昇格反例を区別し8境界vectorを確認。対象外scope-only型は新Source追加反例なし/全object比較で非該当、別のProduct実行なし。探索しただけでなく元registry hash/AST target/mutation値/判定を各rowに保存。
+
+再発防止：群着手前のclosure/metadata/partial/作用事実tableを固定し、反例はその実集合を使用する。copyしたclass名・過去群の不在宣言を資格に流用しない。工具失敗/再試行をeventsへ残し費用を0としない。現在両BUG/YKTはRETEST_PASS_SAVE_PENDING、exact17194保存・commit/push後に有限閉鎖記録を追記する。別BUG2195/YKT1942の歴史EOF警告は別途OPENで、本件へ取り込まない。正式品質/受入増0。

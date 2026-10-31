@@ -1,5 +1,7 @@
 # PGPT成果物一覧・進捗
 
+2026-11-01追加：3346～49/PG-D1074、終端観測原7/2FES0→二Main19physical未達935L106M8C517B、独立70/七oracle。現2616/380・Main543937/四284428、全旧proof保持。BUG2196/97工具失敗と有限横展開3family/8familyを分離し元Product再演0・保存後有限閉鎖予定。MainDB全PGレビュー未完/実DB等HOLD/正式工数nullを保持。
+
 2026-11-01追加：3345/PG-D1073/BUG2195/YKT1942、保存時EOF警告9の厳密照合/5反例/4生成境界・実行bytes保全。元git check終了2はNOT_PASSを保持、Product品質緩和/再実行/新受入0。2609/378の元真正試験と保存書式残存を分離する。
 
 2026-11-01追加：3342～44/PG-D1072、Owner純callback原3/1FES0・九physical未達418L46M3C86B/独立65三oracle。scope-only現2609/378、Main541918/四284428旧proof保持、registry34三profile/WBS29四真正0。実API/Web/stop等0・正式工数null/HOLD不変。
