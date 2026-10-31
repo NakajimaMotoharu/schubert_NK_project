@@ -1,0 +1,13 @@
+# Current2415・Web未登録Lifetime結合結果
+
+2026-11-01/3277～78/PG-D1051、Source6b53/normal14216未配備。原四FES0/全一Source一physicalの未達28L3M8Bを保持し、旧Source実測/execを合算しない。
+
+16830 registry/3683ebc7ba48e13e970c847b20f9e240a60de7423a9d85255de58bcf1642d306/f0248d genuine0→16832 post/46a4a2f9cf69ecc15075f977f30dd29715f9886653222d0002f2f009149e8cde/session94944終端fb98ac genuine0・全34＋chain二/profile二。scopeをpartial/uninstalled literalへ固定、Testpathは実catalogと独立照合し旧profile/四100への不正昇格を拒否。全旧case/proof/counter/owner/history/cost exact保持。
+
+16834 WBS/e4d2c3260184b28b09e52eefdf8a9c006f44bbcecfcb28fa920df5043641a36a/c947d0 genuine0→16836 post/e9f55735d675738f78798e6bf42da738ec241307c282907e799d5ea96d972d48/session52765終端668527 genuine0・全29＋普通四。485二side/486inventory hashだけ、原481/484/旧全費用受入/943candidate/1065scope/G13HOLD不変更。
+
+現固有2415/341（resource53内数/非resource2362）、普通2396/5786参照/残3390・quality19別、163JUnit JVM2547=2415＋132必要repeat。Main525827=716適用Code＋111zero（NoCode104/compiler6/official-only1）、四282426/自然183198/NoCode-only6/6不変、partial54Source197physical。新一Sourceはpartialで四100増0・未達の新分母を残し、Source数を完成率へ読み替えない。owner454baseline/231候補未受入/221UNKNOWN、新Testと既Mainの実担当を作業群から捏造0。
+
+正式1964/53・歴史17/190/新WBS受入0/工数null・QA051final/G07/F03全体/451/全HOLD/BUG1743・YKT1494のactualHook未検証を維持。開始0.5/1.5/3共有pp cap10固定、開始終了表示used66/rem34/reset1793774153・短期null/券0、同integer≠専有費0/N/Tallocatednull・原残予測不変更・次used70点検3261。usage04:15:45 ee7defc6不完全/次05:15。Source/test不変更・新BUG0・原四再演0。
+
+候補WebAuditSink whole4は元Testのruntime-failed signal/local sink branchがWebRequestLogProducer.local→WebStartupException.preserveFatalを呼び、既four-held動的範囲へ達するためwhole保留・安全body抽出0。API/WebProcessMain whole9のactualexternal child/native/同agent・ApiCommittedFatal2のApiProcessLifetime・WebRuntimeExecution2のServiceProcessResources clinitも保留。次ChildBroker5/Caddy2は元Fake Ioのdata相関である可能性を先行293/319/1928/全Test・ChildStartupContextのconstructor/clinit/calleeと固定NSS Fixtureの実処理まで確認して判定し、NativeIo/getent/systemctl等を実行しない。現時点未着手、旧実Root/native結果を再利用した許可へ拡張しない。通常小群/commit/PMO待ち停止0。

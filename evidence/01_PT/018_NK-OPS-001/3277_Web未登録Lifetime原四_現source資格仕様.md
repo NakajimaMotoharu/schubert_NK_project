@@ -1,0 +1,7 @@
+# Web未登録Lifetime原四・現source資格仕様
+
+2026-11-01/PG-D1051予定、Source6b53/HEAD6145ed5ef7cf0abe6632abfce41aa9dfc2aa4c21。F03主/原canonical担当P01806参照追加0、開始0.5/1.5/3共有pp cap10凍結・N/Tallocated/工数null。全WebLifetimeOrdinaryCloseTest/全WebProcessLifetimeをfresh読了、1880/1882/1942/43の未install契約を参照し旧64446実測を転用しない。WLCLOSE001～004/SYS004/AUT002/MON003/UI212243253/SS313342352/PG-D369。
+
+原whole4は未installの自己所有オブジェクトだけ。close二回のstopping、fail後のfixed IOException/healthy未呼出とnull、close済finishedへの別worker shutdown、公開monitorを保持した別worker closeの独立oracle。二自己singleExecutor/二taskはFuture5秒とcloseで回収、constructorで作るhook Thread四objectは未start・未登録。install/add/removeShutdownHook/main/retainUnknown/holdUnknownInterval/実Thread.sleep/provider/native/DBVMRoot/credential・keys/原本退役配備等は未到達。クラス名のnative語を根拠に正常unitを一括代替せず、実callgraphと初期installed=false不変から範囲を限定する。全OS syscall tracerを取得したとは称さない。
+
+16823freshreviewplan→16824原四初回一回/原XML FES0→16826全一Source一Code・未達分母保持/単一exec CRC/四held六native・Root不在→16828独立oracle→registry/WBS予定。Main/Test/期待/SS無変更・新fixture/保留whole抽出0、全source counter100を事前仮定しない。実hook/割込待機/UNKNOWNの未実測は保持し、BUG1743/YKT1494のSTATIC_FIXED_PT_HOLDや正式1964/53/歴史17/190/QA051final/451/工数null/全HOLDを閉じない。通常小群/commit/PMO待ち停止なし、fresh残10以下又は取得不能保全。

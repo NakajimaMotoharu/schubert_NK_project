@@ -1,5 +1,7 @@
 # PGPT成果物一覧・進捗
 
+2026-11-01追加：3277～79/PG-D1051、Web未登録Lifetime原4/1FES0・一Source一Code L30cov28miss/M7cov3miss/C1/B6cov8miss保持・独立53/四oracle。現2415/341・525827/四282426不変、registry34＋chain二/profile二/WBS29＋四真正0。実Hook/UNKNOWN/BUG1743/新WBS/正式/工数null/HOLD閉鎖0。
+
 2026-11-01追加：3274～76/PG-D1050、同入口のRoot.run6/self3/wait12/launch境界1の原whole22/4FES0・三Source十一physical未達205L29M1C64B保持、独立53/四oracle family。現2411/340・Main524826/四282426不変、scope-only独立registry34＋三/WBS29＋四真正0・全旧proof非合成/置換。実Root/新WBS/正式/工数null/HOLD加点0。
 
 2026-11-01追加：3271～73/PG-D1049、公開RootProof原4/1FES0・全二Source九physical/未達169L26M1C46B保持、独立51/四oracle・未使用native fixture三無record。現2389/336/524826・四282426不変、registry34＋chain二/profile二/WBS29＋四真正0。工具2187字句境界是正・旧未開始失敗保全、実Root/新WBS/正式/工数null/HOLD加点0。
