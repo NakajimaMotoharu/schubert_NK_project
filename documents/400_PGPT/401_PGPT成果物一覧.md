@@ -1,5 +1,7 @@
 # PGPT成果物一覧・進捗
 
+2026-11-01追加：3303～05/PG-D1059、停止client原13/1FES0→全三既Source18physical未達240L56M2C171B・独立60/十三oracle→現2509/359。scope-only registry34/三profile・WBS29/四真正0、Main529850/四282426・正式工数null/HOLD不変更。実Unit stop0・自己true子一/monitor一明示・既Policy7再演0。
+
 2026-11-01追加：3300～02/PG-D1058、Root memory原三/三FES0→全既一Source八physical未達122L40M1C98B保持・独立58三oracle。現2496/358/529850/四282426不変、registry34/三profile・WBS29/四真正0。新WBS/正式受入/工数加点0・全actualHOLD保持。
 
 2026-11-01追加：3295～99/PG-D1057、原起動client17/1FES0→全三Source27physicalの全未達保持・独立60/17oracle→現2493/355。Main529850/四282426不変、既二proof非置換・新一partial追加、registry34/WBS29＋四真正0。六群十一eventの正式見積field/計測leaf追記訂正・独立照合、元費用/時刻/受入不変更。実Unit/VM/Root/HOLD/正式/工数加点0。
