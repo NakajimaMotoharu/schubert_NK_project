@@ -1,0 +1,5 @@
+# Current2043・生成値契約現source結合 結果
+
+2026-10-31／3019／PG-D964。15830/60c92a78/aa6307430c5663038062515e34f78107035e4fa436d9e5da91a6f93032fc7a43→15832/81eef47f/session72855/4c0650287ba21bfa866457e607fc533f67eba62a670129bd220d531780ceb877、checkedEntry lint/body全真正0・registry34/WBS29反例。485二side typedGuardCurrentHostPG15830Overlayだけ追加/486 inventorySha256のみ、全旧cost/所有/受入/Sourceproof/API-Mock訂正/481484 byte不変・wholeaudit前後actual1 physical-scope HOLD。
+
+原12/2の新caseと一JVMだけ追加し、五既全四100 Source/十七physicalを重複受入0、部分値scopeをadditionalScopeReferencesへ別保存・全旧source proof/counter不変。現2043/271・458Source615physical584Code31meta、四247/360・自然174/189・NoCode6/6・未達31/60、117JVM2151method。BUG2149の五Main担当区分は原candidate維持、独立反例でbaseline偽装拒否。正式1964/53・17/190・工数null/QA051final/全451HOLD不変更。次exact15834保存通常push後も継続。

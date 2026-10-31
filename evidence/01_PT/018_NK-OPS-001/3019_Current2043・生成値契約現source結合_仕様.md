@@ -1,0 +1,5 @@
+# Current2043・生成値契約現source結合 仕様
+
+2026-10-31／3017／PG-D964／群3361、元0.75/2/5共有pp cap10。15826 registry dc8e5ea4115e406ef4951c060586261fce5e189fb92a65c694b2daca56199f85、15828独立4b99361104d23a63a30fd8f014c82792d31d671ccb20781344a0482c3a393af8のactual0/source/34反例/summaryを固定し、485二sideへ追加・486 inventorySha256のみ再束縛する。元HEAD836a449c1502aa7e53ef95cd69928237948042f5の全cost/所有/受入/Sourceproof/API-Mock訂正・481484 byte不変。
+
+新方法十二/二suite/一JVMだけ追加、五Source全四100 proof/counterは元値完全保持し再受入/unionしない。今回五Source十七Codeの部分値scopeはadditionalScopeReferencesで分離し、未ロード六Code全covered0を分母に維持。現2043/271・458Source615physical584Code31meta、四247/360・自然174/189・NoCode6/6・未達31/60不変。新二Testのcandidate担当だけ追加し元五Main担当区分をBASELINEへ昇格しない。独立WBS反例と前後wholeaudit実1/HOLDを照合、正式1964/53・17/190・工数null/QA051final/451全HOLD不変更。
