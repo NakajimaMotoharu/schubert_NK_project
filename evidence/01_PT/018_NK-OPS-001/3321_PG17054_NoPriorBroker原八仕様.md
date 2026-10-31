@@ -1,0 +1,13 @@
+# MorningNoPriorBroker原八・現source資格仕様
+
+2026-11-01、PG-D1065予定、Production6b53efeec87f3ec36a840dd8e7759656cb4aee5c/HEADa923d6a1c。主WBS-F03、P018-03参照追加費0。開始見積り低2/標準5/高9共有pp・cap10、freshused69残31/reset1793774153、専有費/実N/T不明null。元見積り/v3/v4固定・見積減額を完成率にしない。
+
+PT_DEFAULT：MorningNoPriorBrokerTest原whole8を一回だけ選択。全Main/Test・実際のhelper呼出しをレビュー。RootStartupContextTest.Fixture、MaintenanceUnitTerminationTest.Fixture→BackupUnitTerminationTest.FixtureのDirectoryCallsはJava proxy/Map/固定整数、InodeSecurityCallsは注入値。Pathの文字列/proxy返却uid0は実FD・権限操作ではない。MaintenanceUnitTerminationは四port注入constructorのみ、nativeObserver/create/NativeObservationsを呼ばない。MorningGateEvidence.stop/headerは固定Epoch値の検査と文字列/byte組立てだけ。BackupUnitStartClientのBROKER注入constructorはOptional.empty budgetで実clockなし。
+
+副作用：公開非秘密journal byteへのSHA256とfakeQuery、二つの所有Thread（wrong-thread拒否後join）、synthetic start/retire callback、公開golden二つのclasspath読取。Threadは外部jobではない。実VM/DB/network/Root/Unit/proc/権限/鍵/permitやintentの発行退役/失敗cohortなし。新fixture/期待値変更/held Testの部分抽出なし。元helper全fileはfresh compileするがhelperの@Testを選択しない。provider outage・実native helper@Testは不実行。
+
+ISS-COLD001～008：二回空journalとhistory/native closedの区別、第二読取/unknown/null/partial拒否、起動前後の同一boot/変更の再確認、foreign/prior/start境界・malformed/duplicate拒否、baseline整合、present/absent原golden完全一致、旧Closedの再確認、wrong-thread/late-row拒否。期待値は元Testの手書文字列・回数・例外identity・イベント順と、SS343に基づく既存golden二つ。Productionでexpectedを生成しない。関連NK-OPS-001/OPS009、UI251、SS341/342/343・SSC137以降は元Source comment/Test IDを追跡する。
+
+targetはMorningBrokerUnitCycle全10physical（5Code/5genuineNoCode、Baseline.defaultと匿名$1はCode）と既MorningPreviousBroker全5physical（3Code/2NoCode）。未実行Codeを分母に残し、旧Previousの別run counterへ合成しない。Root memoryが実行されるためRoot outer不在とは主張せず、NativeIo三/四held六native/RootFailed・実BackupCycleの不在を同execで照合する。
+
+17053事前レビュー→17054原八→17056 passive全二Source/CRC/session/coverage/境界→17058独立oracle→17060/62registry→17064/66WBS→17068exact保存。正式1964/53・歴史17/190・工数null・QA051final/G07/G13/F03全体/451/全HOLD維持。fresh残10以下/取得不能なら保全停止、通常小群/commit/PMO待ち停止0。
