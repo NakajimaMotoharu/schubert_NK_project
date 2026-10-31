@@ -1,5 +1,7 @@
 # PGPT成果物一覧・進捗
 
+2026-10-31追加：3058～61/PG-D978、Expiry fakeJDBC原3＋必要repeat24のjoint27/2成功・独立27、current2088→2091/277（新3）。同exec二Source置換/旧history追加保持、Source473/654・四251/365へ一増・未達40/92。Repo残L145/B139は保持、proxy interface callと実backend0を区別、registry34/WBS29＋4成功。普通decl参照2085/5786、別fixture六保持、正式/工数/451/HOLD不変更。
+
 2026-10-31追加：3054～57/PG-D977、Expiry成功監査/JDBC自己所有portの原whole24/1成功・独立24、current2064→2088/276。全二Source八physicalで自然B0一/Repository未達一を分離、Source470/651・四250不変/自然176。普通Test参照2082/5786・当未参照3704、別fixture六保持。registry34＋3＋4/WBS29＋4成功、BUG2154工具件数guardの旧失敗保持/有限是正。正式1964-53/工数null/451/HOLD不変更。
 
 2026-10-31追加：3052～53/PG-D976、現856Testsource/1978classから普通宣言5786を全一意結合、2058既実行参照/3728当台帳未参照・独立23。current2064の他六は明示品質fixture別domain、RepeatedTest一宣言別保持。module別分母/参照を表にし、工程完成率・coverage・原正式へ加算0。次候補whole programの選定へ使用。
