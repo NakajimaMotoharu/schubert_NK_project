@@ -1,5 +1,7 @@
 # PGPT成果物一覧・進捗
 
+2026-10-31追加：3148/49/PG-D1011、現Thread五/消失FD emptycatch二を全四Source・原13505/34 XML/全attrsへ結合。割込み読取/owner threadId/park-clear永久保持を分離・外部期限等未実証を保持、参照1171＋用途128=1299/1491・残192generic。BUG2170YKT1917の旧raw座標混同は旧版凍結/有限是正、八文字列/独立26＋原起源四反例。実Product/新formal/免除/抑制0、全正式/HOLD不変更。
+
 2026-10-31追加：3144～47/PG-D1010、Storage属性原七を現source初回資格・7/1FES0、全Source一Code 44L8M1C42B全miss0・原空private constructor既定filter/物理9測定8を明示。自己新0700親/七子の合成file/link/子permissionと実後条件を確認・独立26＋八oracle/registry34/WBS29＋4。技術2164/293・481Source671physical・四261/382・普通2146/5786/quality18別、元計画新受入0。BUG2169YKT1916工具comment誤認は旧版凍結/有限是正・Production変更0、全正式/工数null/HOLD保持。
 
 2026-10-31追加：3143/BUG2168/YKT1915、PG16216/16232の元3453～56を保存し、3465/66で既leaf P018-03.02の公開byte期待拒否という部分だけへ計測対応訂正。canonical親/二凍結予算/actual費null/受入0を保持、16272八metadata反例・原四row/原sample80・35start/11idを確認。3467はnotes countだけのerratum、元PT/Source再演・再配賦0。通常PG/PT継続。

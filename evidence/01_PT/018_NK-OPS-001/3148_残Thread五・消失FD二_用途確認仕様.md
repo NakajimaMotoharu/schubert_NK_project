@@ -1,0 +1,11 @@
+# 残Thread五・消失FD二 用途確認仕様
+
+2026-10-31、PG-D1011、WBS-F03。開始HEADd6dc2e3acd5840814a99368f42239ec9b09a81ff/push52641終端e65707真正0、Production6b53/normal14216。freshused57/rem43/reset1793774153、開始0.5/2/5共有pp cap10、元予測/専有費/N-Tnullを保持。先行indexはMorningPermitPublication六/FixedUnit七/Caddy十四/Service九候補、2472/2476原評価順・既wholeHOLDを参照。元成功runの確認再演はしない。
+
+現queue199のDoNotUseThreads五・EmptyCatchBlock二を全四Source本文（FixedUnitCgroupNamespace/MorningPermitPublication/MorningCaddyReadiness/MorningServiceReadiness）で確認済み。対象はcheckの割込み読取二、field初期化のthreadId記録一/ownerの同thread照合一、retainNativeのpark一秒＋割込みclear一、NativeIo.socketsのNoSuchFileException catch二。単語だけで全Threadを同じ免除にせず、保持loopは実際にpark/clear/無限保持する意図と外部hard deadline未実証を明記する。
+
+期待=原座標/全属性/診断/全Source SHAと当purposeを一意結合。checkはrecheck/uid確認の前後に割込みを読取し固定IOException拒否、ownerは生成時threadIdに一致しない呼出を拒否（capability認証の代用でない）。retainNativeは状態clear有り・帰還無し・外部期限依存のままであり、読取だけ/停止成功とはしない。二empty catchは対象FDがreadSymbolicLink前に消失したNoSuchFileExceptionだけでdescriptorへ追加せず、その他IOExceptionを同catchへ広げない。空集合拒否/前後socket共通性はSourceの直接条件だけ、実kernel/PID/FD再利用/世代/接続成功を証明しない。
+
+16290で原七row/全Source/catchの明示範囲・用途と残存リスクを記録、数値/文字列metadata負例だけを実行する。16292は原raw/current観測/row・source・PMD半開列からのraw byte spanと全七記録/残queueを独立再構成し、元26相当のmetadata拒否を確認する。byte spanはraw referenceでJava AST/type/Unicode変換後範囲の証明ではない。行内prefix/対象はASCII、以前のunicode escapeの存在を隠さない。
+
+SourceやProduction class/Graph/Root/VM/DB/permit-intent/権限/実FS/readiness/Threadを実行しない。新manual七はF03限定用途レビューで、raw抑制0・actualViolationCount null・PT免除false/新受入0。目標は参照1171＋用途128=1299/1491・残192generic、正式1964/53/歴史17/190/工数null/QA051final/全HOLD維持。3149へ実command/終了/hash/結果を保存、通常群で全体停止0。
