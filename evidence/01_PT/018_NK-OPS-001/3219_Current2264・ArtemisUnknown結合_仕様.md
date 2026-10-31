@@ -1,0 +1,5 @@
+# Current2264・ArtemisUnknown結合仕様
+
+3217/18の原whole四をcurrent2260へ追加する。普通decl15950/元XML/source/hash・case非重複を確認。新ReadinessClient（partial）/ReadinessException/ExpiryPurgeExceptionの三Source三Codeだけ追加し、既Management例外の自然0三100 proof/pointerを保持。全oldcase/counter/owner/history/cost/resource/JS領域を不変更、除外/union/旧source転用0。
+
+16547 writer-v2/16548独立34＋chain差異二を用い、16546の旧oracle数5/未反映失敗は凍結する。core16542は共有v3不変更、受動HOLD検証とoracleは独立16544に分離して両方をpinする。16550で485両side typedGuardCurrentHostPG16550Overlayだけ追加・486inventoryhashだけ更新し16552で29＋普通四反例を照合。481/484/旧受入/費用/G13全体HOLDを保持。newAccepted0/正式1964/53/歴史17/190/QA051final/工数null/全HOLD不変更。
