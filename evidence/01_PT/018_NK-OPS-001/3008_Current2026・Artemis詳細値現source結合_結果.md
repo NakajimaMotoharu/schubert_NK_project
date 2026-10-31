@@ -1,0 +1,5 @@
+# Current2026・Artemis詳細値現source結合 結果
+
+2026-10-31／3007／PG-D961。15782/46d986ee/aebaf736f6f0fc44201926ec909d7ac4d18deccfd5c6da097284ac28ea35c750→15784/40f1f79d/session72395/085df73338f1b29c600bbae8450133aefd3abdd863148165a1164abf175f5868、checkedEntry lint/body全真正0、registry34/WBS29反例。485二side typedGuardCurrentHostPG15782Overlayだけ追加/486 inventorySha256のみ、原481484と全旧費用/受入/所有/API及びMock効果訂正/別scope/history不変、wholeaudit前後actual1のphysical-scope HOLDを維持。
+
+2026unique/267suite、452Source606physical576Code30meta、四247/360・自然173/188・NoCode Source6/6不変、未達26/52。三Main canonical/cost=P01710、Test UNKNOWNを推定補完しない。新原3/1JVM以外の再実行0、分母を全十三physicalで保持、六NoCodeをSource全体のNoCode受入へ混同0。BUG2147/2148有限scope完了は3006の全対象根拠/反例/旧失敗保持を参照。正式1964/53・17/190・工数null/QA051final/全451安全HOLD不変更。exact15786保存通常push後も次の許可host PG/PTへ継続。

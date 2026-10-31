@@ -1,0 +1,5 @@
+# Current2026・Artemis詳細値現source結合 仕様
+
+2026-10-31／3005／PG-D961／群3355、元0.75/3/7共有pp cap10固定。PG15778 registry dfc4ce5dd3bcb7f674aeadf10e0c23324343814dfebf64ba6f6dd2febca43776とPG15780独立7bcd60123ab4666bc32b3400ec7599fdf8397f5594a67d9d927f6b36c25939e1のactual0/source/34反例/独立typed summaryを照合し485二sideへ追加、486 inventorySha256のみ再束縛する。
+
+2026方法267suite・452Source606physical576Code30metadata、四247/360・自然173/188・NoCode Source6/6不変、未達26Source52physical。新三Source十三physical中abstract六は全Code無し・public旗差も保持、outer Code未実行は51L9M1C10B全missで分母に含める。原3非再演、全旧cost/所有/受入/誤効果訂正/別scopeを保持、481484 byte不変。独立WBS反例と前後wholeaudit実1/HOLD維持を確認する。正式1964/53・17/190・工数null・QA051final/全HOLDは不変更。

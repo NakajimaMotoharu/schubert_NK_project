@@ -1,5 +1,7 @@
 # PGPT成果物一覧・進捗
 
+2026-10-31追加：3005～3008/PG-D961、ArtemisDetailedValuesTest原whole三/1成功・独立42/registry34/WBS29。current2023→2026/267、三Source十三physical=七Code六NoCode、全L107cov141miss/M23cov46miss/C6cov1miss/B44cov52miss・未達保持。実Core session/management/parent/broker0。BUG2147/2148工具是正・旧失敗保持、原三非再演・正式/工数/HOLD不変。
+
 2026-10-31追加：3001～3004/PG-D960、既登録Mock12非再演・補助二Source追加受動測定。現2023方法/266suite不変、Source447→449/physical591→593、四247/360不変・未達23/39。独立35/registry34/WBS29、BUG2146効果説明を先行是正・全旧counter保持。新機能/正式受入0・工数null/HOLD維持。
 
 2026-10-31追加：2997～3000/PG-D959、Login Client6/Probe3/Provider5原whole14/3成功・独立38/spec逆幅1/registry34/WBS29。現2009→2023/266・Source443→447・新四Source五Code L176M24C5B76全miss0、四243→247/自然173/未達21-37不変。旧五helper proof保持/再受入0、合成Spring/fixtureと実認証権限を分離・raw保存0。BUG2145はIP値45+Reserved19の仕様表記を先行是正、原14再演0・正式/工数/全HOLD不変。
