@@ -1,5 +1,7 @@
 # CleanupTerminal 現48診断・八scope用途レビュー 結果
 
+保存追補：修正commit fc2189382d4626464f895af48e8b8a7db734baea/push75391真正0（6751be）。全旧二失敗と新版/全proofを16064 SHA72a1503c1dd579844a559aba0cc82f0de28b3aa168293b84ae2a41ed2da9f0cfへ保存。BUG2155/56・YKT1902/03は当工具の有限対象だけを台帳で完了、全F03/実資源/元PT/正式は未受入のまま。
+
 2026-10-31 / PG-D984 / 3080 / event3403。Main626行/SS332/331を静的に読むだけで、Product/DB/VM/Root等0。
 
 | proof（evidence/provisional/配下） | manifest SHA256 | actual |
