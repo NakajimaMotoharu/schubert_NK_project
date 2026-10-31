@@ -1,0 +1,7 @@
+# Current2174・wrapper未達分離結合 結果
+
+2026-10-31/PG-D1014/3160。16334/333fb9/entry232f50真正0、registry4692639392b626eaecd51bf435d54399ada80d7ba95b680e839b378484806215。16336/6d66ce/entry2e3e4c真正0、独立da04a476eb878923825e746d5fca270f910decdd6304d0b7c1f007c8f85c2e46・全34非退化反例。
+
+実測2174unique/296suite・136JVM2306=2174+132repeat、485Source682physical637Code45meta、四262/383・自然177/192・NoCode-only6/6不変更・未達40/101。普通2156/5786/未参照3630・quality18別、owner399baseline229候補177UNKNOWN。元全意味/実証/訂正/費用/正式を全object独立保持し、Root outerの未実行Codeを除外していない。
+
+WBS16338/c1aa30/entry7febdd真正0、SHAca9d0191cecb1c90584a706be5a34a5c3562e3e3c1ccaefedb25381f4f6088ad。16340/13120b/0704b4-session92500終端365398真正0、SHA98c8815a346302f1d63b310939e2450076e867965f925351e0b29534651a8970、二side typedGuardCurrentHostPG16338Overlay/486hashだけ更新・全旧意味/481484cost/正式保持・29＋普通四反例。G13旧943/current1065は保存診断/HOLDで全audit再実行0。元計画新受入/正式更新0・工数率null/全HOLD保持、原群0.5/1.5/4凍結・結合費再加算0。
