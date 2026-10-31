@@ -1,5 +1,7 @@
 # PGPT成果物一覧・進捗
 
+2026-10-31追加：3013～3016/PG-D963、WebRequestIdentityConsistency原whole三/1成功・独立47/registry34/WBS29。current2028→2031/269、四Source六Code L93cov83miss/M16cov9miss/C5cov1miss/B26cov68miss、未ロードAudit.Routeも全分母保持。旧Address全proof保持・実HTTP/audit/session0。四247/360不変・未達31/60、新BUG0・正式/工数/HOLD不変。
+
 2026-10-31追加：3009～3012/PG-D962、AcceptorObjectBoundary原whole二/1成功・独立42/registry34/WBS29、current2026→2028/268・Source452→454。二Source三physical Code二/Reader metadata一、L41cov8miss/M5cov2miss/C2/B19cov15miss。例外一自然三counter100で自然174/189、四247/360不変・未達27/54。実broker/port/権限操作0、新BUG/実行工具障害0・正式/工数/HOLD不変。
 
 2026-10-31追加：3005～3008/PG-D961、ArtemisDetailedValuesTest原whole三/1成功・独立42/registry34/WBS29。current2023→2026/267、三Source十三physical=七Code六NoCode、全L107cov141miss/M23cov46miss/C6cov1miss/B44cov52miss・未達保持。実Core session/management/parent/broker0。BUG2147/2148工具是正・旧失敗保持、原三非再演・正式/工数/HOLD不変。
