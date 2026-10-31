@@ -1,5 +1,7 @@
 # PGPT成果物一覧・進捗
 
+2026-10-31追加：2997～3000/PG-D959、Login Client6/Probe3/Provider5原whole14/3成功・独立38/spec逆幅1/registry34/WBS29。現2009→2023/266・Source443→447・新四Source五Code L176M24C5B76全miss0、四243→247/自然173/未達21-37不変。旧五helper proof保持/再受入0、合成Spring/fixtureと実認証権限を分離・raw保存0。BUG2145はIP値45+Reserved19の仕様表記を先行是正、原14再演0・正式/工数/全HOLD不変。
+
 2026-10-31追加：2993～96/PG-D958、QuestionReceiptRecovery原4/固定例外原1 whole5/2成功・独立32/registry34/WBS29。current2004→2009/263・Source442→443・新一Source二Code L11M4C2全miss0/自然B0、自然173/188・四243/未達21-37不変。旧三helper全proof保持/再受入0、新BUG/実行工具障害/原再演0、実crypto/鍵/DB/Root操作0・正式/工数/全HOLD不変更。
 
 2026-10-31追加：2989～92/PG-D957、Caddy公開IP/inode値原whole9/3真正成功・独立37/reader五負例/registry34/WBS29。current1995→2004/261・Source440→442・五physical全分母、Snapshot未ロードCodeも0coverage保持し未達21/37、四243/自然172不変。BUG2144は旧reader用途不適合を先行是正・元失敗保持/原9再演0、実file/鍵/TLS/権限/Root操作0・正式/工数/全HOLD不変。

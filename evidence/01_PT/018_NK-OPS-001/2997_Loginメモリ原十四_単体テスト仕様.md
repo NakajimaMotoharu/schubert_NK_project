@@ -1,0 +1,9 @@
+# Loginメモリ 原十四仕様
+
+2026-10-31/PG-D959、群3350、主P00706/関連P00502P01502追加配賦0、元1-4-8共有pp cap10固定。開始HEAD4fa7860ac88cfcb5de21faeba8944f76483164ce/push75305真正0、Production6b53/normal14216未配備不変更。fresh共有used46/rem54/短期null/券0・専有費N-T工数null。旧2494/2496の17ab成功は履歴保持、新sourceへ転用せず今回当6b53初回の必要資格確認。
+
+PT_DEFAULT：MqLoginClientTest whole6/PT-WEB054..059（568行）、MqLoginContextProbeTest whole3/PT-WEB060..062（317行）、MqAuthenticationProviderTest whole5/PT-WEB063..067（386行）を全読。Main Client236/Probe146/Provider90相当・LoginClientAddress/Locked/ExchangeException及びSessionPrincipal/ClosedWebAuthentication/JmsRequestReplyClient/ReplyCorrelationRegistry/PendingReplyを全読。memory sender/coordinatorだけで、actual sender/broker/Connection/Context/DB/HTTP/session/Root/VM/native/鍵・Graph0。型名authenticationはローカル合成Spring token/role投影であり外部の認証grantでない。公開合成credentialだけを自己JVMで供給・消去し、実credential使用0・raw電文/password/contextを新公開証跡へ保存しない。IPv4/IPv6はJDK ofLiteralでDNS0。保留wholeからの抽出/新fixture0。
+
+SS314321323324352/UI226232234の独立offset golden。Login request640/reply688、username64/password256/Client address45＋Reserved19（合計割付64、値長は45まで。BUG2145/YKT1892で略記を訂正）、NFC・casefold・境界byte/null/不正Unicode/IP、許可0000/0200/0101/0106/9000・lock0..900/error filler/欠落相関/未知layout/不正recordを確認。GAM probe request256/reply265+272*n（n0/1/10）、0102だけfalse・他不正は固定UNAVAILABLE、0200 replayはfresh probe後だけlocal投影。char[]/wire bufferの全消去、8worker/100caller×三wholeの隔離/role・identity/pending0、1ns timeout/interrupt復元/capacity/固定例外cause-suppressed無しを検証。反復数をTest IDへ加算しない。期待値をProduction methodから生成しない。全JVM180秒・Future5/10秒/各待機上限2秒、executor close自体の局所無限待ちは全JVM上限と区別。
+
+新target四Source＝MqLoginClient outer/Reply二Code、Probe/Provider/Address各一Code。既ExchangeException/Locked/Coordinator/Registry/PendingReply五Sourceの全proof/counterを保持し再受入/union0。未資格SessionPrincipal/ClosedWebAuthenticationはhelper使用だけでcoverage資格へ昇格しない。15742原14/3→15744同exec環境/XML/CRC/五Code全分母・四held六native受動absence→15746独立SS/metadata反例→registry/WBS。未達があれば隠さず保持、正式1964-53/17-190/工数null/QA051final/全451・安全HOLD不変更。
