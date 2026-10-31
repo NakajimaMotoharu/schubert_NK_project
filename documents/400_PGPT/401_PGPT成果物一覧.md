@@ -1,5 +1,7 @@
 # PGPT成果物一覧・進捗
 
+2026-11-01追加：3318～20/PG-D1064、InspectorRun byte原4/1FES0・全一Source一Code7L2M1C2B四未達0/独立55・四oracle。現2539/364・Main533863/四284428、registry34/二chain二profile・WBS29/四真正0。16自己worker64task/配列所有だけ・実発行/IO/正式工数null/HOLD加点0。
+
 2026-11-01追加：3315～17/PG-D1063、固定journal原4/1FES0→全二Source八physical未達136L16M1C71B・独立54/四oracle→現2535/363・Main532862/四283427不変。新一partial/既Journal proof保持、registry34/二chain二profile・WBS29/四真正0。実journal/Unit/Root/正式工数null/HOLD加点0。
 
 2026-11-01追加：3312～14/PG-D1062、Inspector静的環境原6/1FES0・全一Source一Code16L3M1C16B四未達0/独立56・六oracle。現2531/362・Main531857/四283427、registry34/二chain二profile・WBS29/四真正0。公開template読取/自己八thread64taskのみ・正式工数null/HOLD不変更。
