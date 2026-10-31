@@ -1,5 +1,7 @@
 # PGPT成果物一覧・進捗
 
+2026-10-31追加：3143/BUG2168/YKT1915、PG16216/16232の元3453～56を保存し、3465/66で既leaf P018-03.02の公開byte期待拒否という部分だけへ計測対応訂正。canonical親/二凍結予算/actual費null/受入0を保持、16272八metadata反例・原四row/原sample80・35start/11idを確認。3467はnotes countだけのerratum、元PT/Source再演・再配賦0。通常PG/PT継続。
+
 2026-10-31追加：3141/42/PG-D1009、release読取の割込み状態確認二用途を現Source/承認SSへ結合・八metadata反例/独立26＋列四。参照1171＋用途121=1292/1491・残199、readのchannel取得先行リスクを明示し全I/O前拒否等へ一般化0。BUG2167/YKT1914 PMD半開端点の工具誤りは旧版凍結/有限是正、実Product/PT0・全正式/HOLD不変更。
 
 2026-10-31追加：3139/40/PG-D1008、Admission既理由十二を二Source同byte/fullattrs/rawへ接続・独立26＋None schema二。参照1171＋用途119=1290/1491・残201（当finally残0）、旧facts全19None/root件数0を補造せず保持。BUG2166/YKT1913 truthy誤仮定は旧工具凍結/有限是正、実Product/新manual0・全正式/HOLD不変更。
