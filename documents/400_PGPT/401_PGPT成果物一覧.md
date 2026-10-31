@@ -1,5 +1,7 @@
 # PGPT成果物一覧・進捗
 
+2026-10-31追加：3094/95/PG-D990、旧Batch二Session44理由を全五Source/設計同byte・明示reason schema/旧new spanで接続、独立26真正0。参照772＋用途96=868/1491・当残623、旧新判断2も歴史のまま/新manual0。不要な全文再レビューと元PT/解析再演を避け、current2133/285/四258-376・全正式/HOLD不変更。
+
 2026-10-31追加：3092/93/PG-D989、JMS三owner既72用途を現全Source同byte/64signature group/全発生・理由・risk・owner/costで接続、独立27真正0・新manual/PT0。参照728＋用途96=824/1491・当残667、旧gate1/全違反null保持。current2133/285/四258-376・全正式/HOLD不変更。
 
 2026-10-31追加：3090/91/PG-D988、資源複合既存46理由を32signature group/全occurrence・旧new両spanで接続、独立26真正0。参照656＋用途96=752/1491・残739、新manual/PT0。BUG2159/YKT1906のcurrent schema旧field仮定を修正前起票/旧失敗凍結/新16101有限是正、元Product/正式/HOLD不変更。
