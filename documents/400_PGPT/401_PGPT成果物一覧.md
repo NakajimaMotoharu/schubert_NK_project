@@ -1,5 +1,7 @@
 # PGPT成果物一覧・進捗
 
+2026-10-31追加：3137/38/PG-D1007、監視同期十一＋同一例外/gap四の既根拠を三family/全六Source同byte・全attrs/原rawへ参照接続・独立26。参照1159＋用途119=1278/1491・残213、当選択queue同期0だがF03全体未受入。旧全controls/pending/型・scope/currentCasesを保持・新runtime/manual/PT0、正式/HOLD不変更。
+
 2026-10-31追加：3135/36/PG-D1006、十四legacy family元347から全35Source同byte/原座標・診断の133（generic128/resource4/finally1）を参照接続・独立26。既参照1144＋用途119=1263/1491・残228、旧fullattrs/invocation欠落/元全row・runtime/pendingを歴史保持し新資格へ昇格0。実Product/新manual0、全正式/HOLD不変更。
 
 2026-10-31追加：3131～34/PG-D1005、公開StartupProofFrame原八を現6b53で初回資格、全Source三Code 71L13M3C38B miss0・独立26＋数値八oracle/registry34/WBS29＋4。技術2157/292、480Source670physical、四260/381、普通2139/5786/quality18別。旧0061/8資格転用なし・原計画新受入0、BUG2165YKT1912旧mapping反例の退化は凍結/有限是正・元Product再演0。全正式/工数null/HOLD維持。
