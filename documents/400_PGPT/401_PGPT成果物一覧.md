@@ -1,5 +1,7 @@
 # PGPT成果物一覧・進捗
 
+2026-10-31追加：3054～57/PG-D977、Expiry成功監査/JDBC自己所有portの原whole24/1成功・独立24、current2064→2088/276。全二Source八physicalで自然B0一/Repository未達一を分離、Source470/651・四250不変/自然176。普通Test参照2082/5786・当未参照3704、別fixture六保持。registry34＋3＋4/WBS29＋4成功、BUG2154工具件数guardの旧失敗保持/有限是正。正式1964-53/工数null/451/HOLD不変更。
+
 2026-10-31追加：3052～53/PG-D976、現856Testsource/1978classから普通宣言5786を全一意結合、2058既実行参照/3728当台帳未参照・独立23。current2064の他六は明示品質fixture別domain、RepeatedTest一宣言別保持。module別分母/参照を表にし、工程完成率・coverage・原正式へ加算0。次候補whole programの選定へ使用。
 
 2026-10-31追加：3050～51/PG-D975、現965Main/1843class中1841を二方式で受動metadata照合、11922method(Code11393/NoCode529)・独立26。二Graph class entryは読取前HOLD/全method分母null、全965SourceFile結合・恣意的coverage除外なし。metadata数をPT/coverage/完成率には換算0、正式/451/HOLD不変更。
