@@ -1,0 +1,5 @@
+# Current2224 観測parser全Source結合 仕様
+
+Source6b53/PG-D1028/3197～98。current2201へ原普通23/3suiteを追加、Resource39/quality19は別内数で不変。新whole InspectorUnitSnapshot＋Target二Codeだけを一Source追加し全四100を明記、既InspectorUnitProbe/MorningCycle等のproof/全metadata/旧実行/cost/受入は不変更。Input Golden/Unit templateと三Testのcanonical/UNKNOWNを実正本ruleで記録する。
+
+16466→16468独立34、16470二side新overlay/486inventoryhash→16472独立29＋普通四。field typedGuardCurrentHostPG16470Overlay/結果3200、元481484/全side/cost/正式・G13旧943/current1065全auditHOLDは不変。原23はRoot/cohort/Nativeの受入でなく、旧Source/exec union/新WBSleaf加点0。

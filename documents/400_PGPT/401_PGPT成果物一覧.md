@@ -1,5 +1,7 @@
 # PGPT成果物一覧・進捗
 
+2026-10-31追加：3197～3200/PG-D1028、原観測data23/3suiteFES0・独立31/13oracle、whole一Source二Code222L34M2C320B全miss0。原JVM終端scalar三行hash/四held六native無probe/Root27無record、公開SHA使用を正直に開示。現2224/305・Main493/725・四266/392、16466/68/70/72全34/WBS29＋四真正0。実Root/cohort/鍵/VM等操作0、正式1964/53/工数null/全HOLD維持。
+
 2026-10-31追加：3193～96/PG-D1027、公開Config七の原四/1suiteFES0、七source-copy-唯一classpath/metadata18/TestCRC二一致・normal1843Main無probe。現2201/302（resource39内数、非resource2162）・Main492/723/四265不変、16450/52/54/56全34/WBS29＋四真正0。Main coverage N/A/正式1964/53/工数null/全HOLD維持、旧成功転用0。
 
 2026-10-31追加：3189～92/PG-D1026、原MSTOP七＋新観測順quality一=8/2suiteFES0・独立30/九oracle、Snapshot58L12M1C56B全miss0・enum自然B0三100。現2197/301・492/723・四265/390・自然178/193・普通2178/quality19、元partial/history保持/WBS真正0。表示だけBUG2177の正誤是正、原PT再演0・正式1964/53/工数null/HOLD不変。
