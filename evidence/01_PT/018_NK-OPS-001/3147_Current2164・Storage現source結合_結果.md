@@ -1,0 +1,7 @@
+# Current2164・Storage現source結合 結果
+
+2026-10-31、3146/PG-D1010。16280/c3e584/entrye08817真正0、registry SHA57e0226d76bb40fa0db7b73c9dc041e82fcd7506d54d890569454648a2145118。16282/a70c3e/entry2b9bf1真正0、独立SHA42838df9bf0a1514b586d9fa0c05157f2ff6255ebe30d8178f925093d1618a91、全34非退化反例。
+
+実測2164unique/293suite、133JVM2296=2164+132repeat、481Source671physical=629Code42meta、四261/382=370Code12meta・自然176/191・NoCode-only6/6・未達38/92。普通2146/5786・未参照3640/quality18別、owner396baseline229候補173UNKNOWN、元全履歴/訂正/資源・JS/Node/費用/正式保持を全object独立確認。
+
+485/486は16284/57e241/entry6dc55f真正0、SHAe5b8b0f9773d46801c012acca426325a43b58be0c0c866e02c489dff4beb7d2f、16286/327bb9/session2698終端1a631f真正0、SHAdfe10c10fac14e8ff9b45ba36bc930e6896392b7a157a94910a3eec212db9a4d。二side typedGuardCurrentHostPG16284Overlay/486hashだけの更新・全旧意味/481484費用保持、29＋普通四反例を独立確認。G13は旧943/current1065の保存診断参照・NOT_REEXECUTED_EXISTING_SCOPE_HOLD_RETAINED、全audit/PASS捏造0。全scope正式/工数率/新WBS受入0、原開始見積0.5/3/6不変更・結合費用再加算0。
