@@ -1,0 +1,11 @@
+# Current2374・BrokerXML結合結果
+
+2026-11-01/3262～63/PG-D1046。Production6b53/normal14216未配備。PG16750-current2374-broker-xml-registry-v1/afa9060c34781dc13ea5bc9ad56554b00bc0df56f906c6bb877e97b043aa1399 は保存manifest actualExit0と実entry hash/argvを回収、元tool応答のシェル終端codeはcontext跨ぎで未回収のため推定しない。結果未回収を理由にwriter/原PT再実行0。
+
+独立16753-v2/65d58ec75beaddd9a49976619493e115168d1ac2996e3952ea300c11edbf334b/cb7c06 genuine0。全object独立再構築/実XML四/全34非退化＋chain束縛三、全旧Main/counter/history/cost/acceptance保持。16754 WBS/87e590900c045e0b8de212ed9d67641edcd26e11634d3d4d3f62e8e5dff530e9/279b16 genuine0、16756 post/6ef48c6ea9bb6b58ecaa1d91bc88d7ec29d79246724294b74ca5b656fd19088b/session56201終端5a0801 genuine0、全29＋普通四。二metadata side追加と486inventory hashだけ、481/484/原190受入/943candidate/1065現分母/全G13HOLD不変更。
+
+現2374uniqueJUnit/333suite（resource53内数/非resource2321）、普通2355/5786参照/残3431、quality19は別。158JUnit JVM2506method=2374＋132必要repeat。Main521Source812physical=708Code＋104zero、strict四281Source421physical=397Code＋24zero・自然183198/NoCode6/6/partial51187は不変。owner450baseline/231候補未受入/213UNKNOWN、新XML/Test参照を既artifact主担当から勝手に費用ownerへ変換しない。元WBS新規受入0/正式1964PT53scope/工数null/QA051final/G07/F03全体/451/全HOLD保持。
+
+BUG2185/YKT1932：旧16752は旧16718 importが残り7e3d8b/body1・out無し、旧byte/失敗を保持。修正前起票後、新16753で依存定数を独立宣言しchain誤束縛三を再発防止へ追加。16750は自前定数で非該当、16754/56は具体import/REG/POST/FIELDを実行前点検し全object検証で非該当。Production原四再演0。工具修正費と当初計画消化を分離、実commit/push照合後だけ有限閉鎖。
+
+開始0.5/1/2共有pp cap10凍結、開始/終了used65は整数共有観測に過ぎずactualAllocatedPp/N/T=null・費用0ではない。次点検used70/基点3261、元残見積不変更。次群は現ordinary未参照と先行followupからwhole/callee/副作用を先行確認、実DBServiceAdmission/retainedUnixAssetは保留、保留whole抽出/新mock迂回0。通常小区切り停止0。

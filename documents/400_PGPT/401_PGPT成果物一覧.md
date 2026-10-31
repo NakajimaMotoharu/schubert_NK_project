@@ -1,5 +1,7 @@
 # PGPT成果物一覧・進捗
 
+2026-11-01追加：3262～64/PG-D1046、Broker公開XML原4/1FES0・20＋独立47/四oracle、Main1843無record/実broker接続0。現2374/333/resource53内数、Main521812/四281421不変、独立registry34＋chain三/WBS29＋四。工具2185旧失敗保全・独立定数版是正/原四再演0、正式/工数null/HOLD不変。
+
 2026-11-01追加：3258～61/PG-D1045、SchemaHistoryAdmission原9/1FES0・全二Source三Code L89M8C3B78未達0/独立48・一oracle、現2370/332・521Source812physical/四281421。registry34＋二/WBS29＋四真正0。60→65表示ppは技術+181PT/+17四100 Source・新WBS/正式更新0を明示し次70点検、工数null/HOLD不変。
 
 2026-11-01追加：3255～57/PG-D1044、SupplementaryUnitTemplate原whole5/1FES0・四public resource唯一定義/独立20＋42・五oracle/十二canary、Main1843無record/Test二CRC一致。現2361/331/resource49内数・Main519809/四279418不変、registry34/WBS29＋四真正0。実directive/credential target/Unit/正式/工数null/HOLD加点0。
