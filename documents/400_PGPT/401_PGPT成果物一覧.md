@@ -1,5 +1,7 @@
 # PGPT成果物一覧・進捗
 
+2026-10-31追加：3123/24/PG-D1002、Throwable同一性の旧型・用途28を18Source同byte/全raw attrs/診断/元AST行へ接続・独立26。参照961＋用途119=1080/1491・残411、当queue同一性残0。旧型classpath/実行資格転用・新型解析/PT0、Graph動的HOLD・全正式維持。
+
 2026-10-31追加：3121/22/PG-D1001、現release collector全819行/同package18からMap三用途を新review・16200独立26/三byte span。参照933＋用途119=1052/1491・残439（当queue Map残0）、実verify/crypto/署名/Root0・新PT0。BUG2163/YKT1910を対象以前ASCII prefix＋全Source hashで有限是正・共通reader不変更、全正式/HOLD維持。
 
 2026-10-31追加：3119/20/PG-D1000、局所Map既16理由を七Source同byte/全attrs/原診断rowSHAへ接続・独立26。参照933＋用途116=1049/1491・残442、新manual/PT0。Source不一致ReleasePayload三は除外・旧runtime/旧spanを歴史として分離、全正式/HOLD不変更。
