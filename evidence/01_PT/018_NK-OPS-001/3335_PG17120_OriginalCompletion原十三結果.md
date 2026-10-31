@@ -1,0 +1,11 @@
+# Original completion/default原十三 実行結果
+
+2026-11-01、3334/PG-D1069、Production6b53/normal14216未配備・不変更。17119 reviewcbfc702a74b72ffb64a02992e77189dc80c86f333d8bcb5a450eb7799e612362→17120 raw92c5e181d171b1f683856a25acd03e280c7c2e2ceff281e9111e8c5a6384f18c/session18423終端572fb1 genuine0（entry6ea27f86・原13/2 F/E/S0/rerun0）。元Test/XML/exec/環境/source pinはmanifest参照。
+
+17122 post0d10875209b1f4aff31608faa307c751e4586199c3e39472f4cdf928af5b191a/session95426終端39e265 genuine0：全二Source26physical/12Code14NoCode・Lcovered64 missed187/M19/49/C6/6/B27/23、strictFour100GateExit1保持。NewRun全16はL62/98 M17/25 C4/3 B27/15、Resume全10はL2/89 M2/24 C2/3 B0/8。六native-factory匿名classはCode/allmiss、default Code有のOriginalFiles/OriginalProof/Resume.FilesをNoCodeへ偽装しない。
+
+17124 independent6ec742cc582a2b910aaf8e84cbadd1fe71616b55de0df3ab50bc167c8a92fce3/ea88ac genuine0・62型付き反例/13独立oracle、SS341342343 origin/main byte一致・全13normal宣言/XML一致。四held六native/RootFailed五/実BackupCycle23/inactive九/未選択helper二無record。両target Sourceは新規測定だが実create/openCredentials/DB/Files IOには到達していない。fixtureのfake publication/ref/rootはOptional/整数/List/固定record/AtomicBooleanだけで、真正DONE・実原本発行・所有認証の根拠にはしない。
+
+自己Executor三つ各task一つ/5秒get/try-closeとplatformThread一つjoinのみ・crypto/clock/file/実resume/Unit/Root/VM/DB/鍵/permit/cohort0。公開固定UUID時刻とWARNING fixture、IO/RTE/Error identity/既存done不変/未確認後poison/異thread/null/dead所有を元期待へ束縛。SourceTestSS/新BUG/成功再演0。
+
+前候補NewRunAdmissionTest12/ResumeAdmissionTest11はRootStartupContext.createの実呼出しを確認しwholeHOLD。MainTerminationPortTest8もMorningProcessMain.runCompleted556のMorningParentBudget.create→Linux clock依存でwholeHOLD確定。原wholeの部分抽出や新fixtureによる再演0、新プラットフォーム拒否と誤記しない。共有used70同整数≠PGPT専有費0・N/Tallocatednull/全品質維持。

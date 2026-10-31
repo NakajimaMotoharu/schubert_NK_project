@@ -1,0 +1,13 @@
+# Original completion/default原十三・現source資格仕様
+
+2026-11-01、PG-D1069予定、Production6b53/normal14216/HEADe1d66b723。主WBS-F03/P01803参照追加費0。低2/標準5/高9共有pp cap10/freshused70残30/reset1793774153、N/T/専有費null・元/v3v4v5見積固定。原wholeMorningOriginalCompletionTest12/UnsupportedOriginalProofTest1=13/2。
+
+PT_DEFAULT：全二TestとMainNewRun403/Resume238、scopedOriginalProofとDefaultFilesのcallgraph読了。選択13はstatic factoryが作る同一thread/lifetimeのJava objectに、手書state/公開固定UUID時刻/AtomicBooleanとfake OriginalFiles/root callbackを注入する。実create/openCredentials/DB session/Files.start/resume/Root.createは呼ばず、後者のdefault verifyはIOExceptionで即拒否する。Fixture.completeはstored Optionalとpublish整数だけ・参照callbackも公開BatchRun値返却だけで、実公開/署名/発行/回収退役/原本/Backup/DB/Root/VM/鍵への操作0。
+
+独立oracle：pending→一度fake publication→done再確認の明示順序、既WARNING doneは他時刻/outcomeで上書きせずpublish0、未確認後のpending proof poison、file/root前後のIOException/RTE/Error identity、異thread/dead/null/activation拒否、既存/新completed参照経路とdefault-port拒否を手書List/整数/identity・固定record期待値で照合する。自己Executor三つ各task一つ（get5秒/try-close）とplatformThread一つjoinだけ、外部process/clock読取/crypto/goldenfile0。recordの名前やfake publishを実所有認証/原本DONEと誤記しない。
+
+targetは新MorningNewRunAdmission全16physical=7Code9NoCode、新MorningResumeAdmission全10=5Code5NoCode、計2Source26physical/12Code14NoCode。OriginalFiles/OriginalProof/Resume.Filesはinterface flag1536でもdefault Code有でありNoCode扱いしない。native factory匿名classもCode全分母・未実行allmiss保持。四held六native/RootFailed/実BackupCycle/RootNativeIo/実Linux等不在を同execへ束縛する。元Test/Main/SS/期待変更/新fixture/heldwhole部分抽出0。
+
+NewRunAdmissionTest12/ResumeAdmissionTest11は元TestのRootStartupContext.create実呼出しによりwholeHOLD確定。MainTerminationPortTest8もMorningProcessMain.main→runCompletedの556でMorningParentBudget.create→実Linux clockに至るためwholeHOLD、原wholeを部分抽出しない。これは新拒否発生や権限制御解除ではない。関連NK-OPS001/NK-BAT001/OPS009/UI251/SS341342343/SSC055094178240318/ORIG455/RLOOK200002852003004/COMP203003・originalPort001等元TestID。
+
+17119review→17120原13一回→17122同exec全closure/CRC/session/coverage/境界→17124独立13oracle→17126/28new-only registry（Source2/partial2・全旧proof保持）→17130/32WBS→17134exact保存。formal1964/53/歴史17/190/工数null/QA051final/G07/G13/F03/451/HOLD不変、fresh残10以下/取得不能で保全・通常小群/commit/PMO待ち停止0。
