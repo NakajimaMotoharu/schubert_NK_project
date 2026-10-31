@@ -1,0 +1,9 @@
+# RootEntry・Self・Wait原whole22 現source資格仕様
+
+2026-11-01/PG-D1050予定、Source6b53/HEAD9cdb67191c6cd0c59e5263eae311b8a4e2904b54。F03主/canonical既責任追加0、着手前1/3/6共有pp cap10を固定・N/Tallocated/工数null。最新250/1047/1490/1926・全四Test/三Mainと実到達data calleeを読了。Origin/mainをfresh fetchし、SS343SSC299 byte d8be70ce4c170df7939f7803723bb021c99ba40a72819f9b5d861731425332b2一致、旧250のRMAIN006非公開constructor記述は歴史、現SSC299はJava25公開noargを固定本番callbackのbindだけとして承認済（再承認不要）。
+
+PT_DEFAULTはRootServiceLauncherTest原6、RootStartupPendingTest原3、RootPendingWaitTest原12、StartupLaunchBoundaryTest原1のwhole22/4suite。同一入口の引数・相関・待機をまとめ、途中で対象を追加しない。Root.runに自己Admission callback、verifySelfに公開固定Snapshot/record、awaitLaunch/readLaunchに元Fake/LaunchReadだけを渡す。所有/clockの名はdata portで実native観測ではない。reflectionはgetDeclaredConstructor/getConstructors/getMethodの公開構造metadataだけ、newInstance/setAccessible/main/constructor起動0。RootPendingWaitはFake clock/pause・任意のIO/Runtime/Error object identity・interrupt復元（元thread状態をfinallyで戻す）、実Thread.sleep/サービス/DB/Root/VM/permit/原本/credential/鍵/配備・退役0。
+
+独立期待：RMAIN001～006はAPI/WEBのみ・戻り30/不正argv70/未知例外同identity/null/反復状態無し/SSC299構造。ROOTSELF001～003は両role/boot/invocation/pid/tick/他role/null。ROOTWAIT-SSC307001～012は1047のliteral順序、期限99/100/101・延長無し、owner前後・欠落だけempty、unknown同identity/固定IOException/cause無し/interrupt。CORR-LAUNCH001はDELと手書きgold+Xの固定IOException/cause/suppressed0。Productionからexpected生成0、合成UUIDやpublic goldは実boot・owner証明でない。JDBC/JMS/同時worker/再送は当port契約に非適用、繰返し/欠落loopは元Fakeで境界を確認する。
+
+helperは不変更StartupLaunchRecordTest定義のfresh compile/compiletime GOLD参照のみ、helperの@Test実行/新fixture/保留whole抽出0。全三Source十一physical（適用Code四/NoCode六/compiler enum-map zero一）を受動測定し未実行匿名Codeも全miss保持。旧16794/先行LaunchRecord proofは置換/exec合成せず、新補助scope参照だけを付ける。Source/四100加点0と事前固定、元counterが不利に見えても除外しない。16708ではなくPG16808原whole→16810同exec/全分母/CRC/held-native監査→16812独立oracle→scope-only registry/WBS予定。sourceMain/Test/SS変更0・正式1964/53/QA051final/451/全HOLD維持。小群/commit/PMO待ち停止なし、fresh残10以下又は取得不能保全。
