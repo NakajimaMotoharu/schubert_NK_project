@@ -1,5 +1,7 @@
 # PGPT成果物一覧・進捗
 
+2026-10-31追加：3023～3024/PG-D966、固定公開五producer manifest→十execのhash/source参照を照合、公開consumer/dispatcher二sourceを生成元と誤認しない独立22反例成功。生成設定根拠は未確認、binary閉鎖0/22・残4493/実秘密null/HOLD保持、Product再演/受入加算0。
+
 2026-10-31追加：3021～3022/PG-D965、G07固定公開exec十件/155226byteを独立Python/公式JaCoCo readerで形式相互照合。工具正常5/異常14/API型4・独立31反例、値/単体hash保存・Product classload/実行0。2087 class-data record/175220probe bitsは歴史metadata集計でPT/coverageへ加算0。session/class由来未証明・binary closed0/22、残4493/実秘密null/全G07-HOLD維持、新BUG0。
 
 2026-10-31追加：3017～3020/PG-D964、GeneratedMetric原八＋GeneratedWeb原四 whole12/2成功・独立47/registry34/WBS29。current2031→2043/271、新Source0・既五全四100 proof/counter完全保持。別scope十七CodeのL110cov176miss/M16cov53miss/C11cov6miss/B9cov86miss・未ロード六Codeも全分母、生成filter不変更。BUG2149担当区分誤仮定を先行是正、原12再演0・正式/工数/HOLD不変。
