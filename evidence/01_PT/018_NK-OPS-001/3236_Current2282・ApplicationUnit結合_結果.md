@@ -1,0 +1,9 @@
+# Current2282・Application Unit結合結果
+
+16608 SHA2474e9273df26df9b0d3af9822dbe6ebb927429ef9e1f0b72b9543b2d6b9576e/504081→16610 SHA3510478d48ad003acbd47214891848b5e3424af98b8c5c30868fda4c39baa3a1/172abb全34真正0。原五/post再演0、resource44を固有2282の内数に保持、全旧Source/counter/proof/history/cost exact保全。
+
+現固有2282/315・resource44内数/非resource2238・普通2263/5786参照/残3523/quality19、150JUnit JVM2414=2282＋132repeat。Main506Source761physical=685executable＋76zero・四273404=388＋16/自然182197/NoCode6/6/partial45154は不変、Main N/Aを四100へ加点0。owner430baseline230候補196UNKNOWN。16612 SHAce911ca2a0c29238441142d58296fc5f432dfdfc028b663627a060caa560fbb7/dea192→16614 SHA9c00fbf2263857ea5e6ee4a2b58f2aaaea8838e35d5a1d17da437d4241e6acb3/session25424終端578a95全29＋普通四真正0。485二side/486hashだけ・481484全旧費用受入/G13全体HOLD保持。
+
+BUG2181/YKT1928はagent別集合とCP排除、BUG2182/YKT1929はactual+1/全20非退化反例と後続全34/29＋四へ横展開した。派生元16446/48は正しい非該当、全対象確認済・実commit後有限閉鎖。元失敗/原source/全保全物を保持。新Production/Test/SS変更0、正式1964/53/歴史17/190/工数null/QA051final/全F03/451/HOLD不変。
+
+開始used62/終used63・同reset1793774153の共有観測差1ppでありPGPT専有費ではない。0.5/2/4cap10固定・個別費/N/Tnull。usage00:35:25 cursor a6bd99a4不完全/次01:35。通常小群/commit/報告/PMO待ち停止0。
