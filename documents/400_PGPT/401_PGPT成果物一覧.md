@@ -1,5 +1,7 @@
 # PGPT成果物一覧・進捗
 
+2026-10-31追加：3121/22/PG-D1001、現release collector全819行/同package18からMap三用途を新review・16200独立26/三byte span。参照933＋用途119=1052/1491・残439（当queue Map残0）、実verify/crypto/署名/Root0・新PT0。BUG2163/YKT1910を対象以前ASCII prefix＋全Source hashで有限是正・共通reader不変更、全正式/HOLD維持。
+
 2026-10-31追加：3119/20/PG-D1000、局所Map既16理由を七Source同byte/全attrs/原診断rowSHAへ接続・独立26。参照933＋用途116=1049/1491・残442、新manual/PT0。Source不一致ReleasePayload三は除外・旧runtime/旧spanを歴史として分離、全正式/HOLD不変更。
 
 2026-10-31追加：3114共有50→55定期点検/3115～18/PG-D999、MorningBackup合成metadata/catalog原8/3成功・全Source一/三physical（二NoCode）を未達のまま測定、独立26＋六固定表/registry34/WBS29＋4。current2144/289・478Source665physical/四258-376不変/未達38-92、普通2127/5786/fixture17別。実Backup/原本/権限/鍵0、全正式/HOLD維持。
