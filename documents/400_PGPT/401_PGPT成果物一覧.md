@@ -1,5 +1,7 @@
 # PGPT成果物一覧・進捗
 
+2026-11-01追加：3246～48/PG-D1041、原memory RootScope/BootstrapEntry/Cleanup全16/3FES0・全三Source十二physical、Cleanup四100/他二L90M11B34未達保持・独立44/三oracle。現2339/326・515Source790physical/四278416、registry34＋二/WBS29＋四真正0。実RootADMIN削除DB等/正式/工数null/HOLD加点0。
+
 2026-11-01追加：3243～45/PG-D1040、MorningBackupHandoff原whole8/2FES0・全二Source四physical L75/M12/C2/B38未達0・独立44/二oracle、現2323/323・512Source778physical/四277411。registry34＋二/WBS29＋四、旧case/proof/費用保持・正式/工数null/HOLD加点0。
 
 2026-11-01追加：3241～42/PG-D1039、補助effect有限八は追加訂正2/既訂正1/非該当5、独立metadata42・registry34＋三/WBS29＋四真正0。旧post/全case/counter/history保全、原PT再演/新試験/正式加点0・YKT1931保存後有限閉鎖。
