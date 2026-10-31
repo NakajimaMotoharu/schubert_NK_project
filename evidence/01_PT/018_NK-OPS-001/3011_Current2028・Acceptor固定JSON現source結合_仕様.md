@@ -1,0 +1,5 @@
+# Current2028・Acceptor固定JSON現source結合 仕様
+
+2026-10-31／3009／PG-D962／群3357、元0.5/2/5共有pp cap10。15794 registry d1484938af6778e1d3e019eb792de2d60d094ef56c10f56c425788a80f4396b3、15796独立9e1904a5fd361e4eb345c026d07d3e9b4a6fd8131158aab8977f450dc5b4c0e0のactual0/source/34反例/summaryを照合して485二sideに追加、486 inventorySha256だけ再束縛。元HEAD04211576888519c423f33102a560a6d6954c2650の全費用/受入/所有/旧Sourceproof・API-Mock効果訂正保持、481484 byte不変。
+
+2028方法268suite・454Source609physical578Code31meta、四247/360不変・自然174/189・NoCode Source6/6、未達27Source54physical。自然branch0を四100へ加算しない。独立WBS反例/全旧semanticsを照合、wholeaudit前後実1 physical-scope HOLD維持、原PT/実環境再演0。正式1964/53・17/190・工数null/QA051final保留/全451安全条件を変えない。
