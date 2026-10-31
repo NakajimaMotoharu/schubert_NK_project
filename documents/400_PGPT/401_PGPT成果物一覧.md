@@ -1,5 +1,7 @@
 # PGPT成果物一覧・進捗
 
+2026-10-31追加：3076～79/PG-D983、Backup公開要求原whole九成功・一Source二Code L61M8C2B52四100、独立24＋5/registry34/WBS29＋4。current2125/284・477Source662physical/四256-374、ordinary2116/5786/fixture九別、実Backup/DB/Root等0・全旧費用/正式/HOLD保持。
+
 2026-10-31追加：3072～75/PG-D982、失敗Backup公開profile原whole六成功・二Source三Code L93M11C3B84四100、独立24＋5/registry34/WBS29＋4。current2116/283・476Source660physical/四255-372、ordinary2107/5786/fixture九別。実回収/DB/manager/Root資格は0、旧helper/費用/全正式/HOLD保持。
 
 2026-10-31追加：3068～71/PG-D981、Cleanup/Expiry公開codec原whole三Test16成功・独立24＋5/全一Source L150M18C3B108四100。current2094→2110/281・474Source657physical/四253Source369physical、ordinary2101/5786参照/fixture九別。registry34/WBS29＋4成功、全旧cost/proof/補足を保持・正式/工数/451/HOLD不変更。
