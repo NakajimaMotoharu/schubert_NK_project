@@ -1,0 +1,9 @@
+# Memory live-intent fence原八・現source資格結果
+
+2026-11-01、3292/PG-D1056、Source6b53/HEADc4817f84。3562/b8da15単独event真正0後に別tool aa3744を発行、16906 plan7b2637fd970a11a932b1477dc139dcc153d66b2f9998d7d454f0025ddc673c23→16908 entry55109e8d/session97894終端1fe109真正0。原whole8/3 F/E/S/aborted/not-run0、raw0c7431617e02c6c89a990482fe273ae2827cd7c9b23a3f8927ebf46b42479abbに元JVM OS/JDK/command/exit/XML/case/単一exec/hashを保存。元八初回一回、Main/Test/SS/期待/新fixture変更0。
+
+16910 f1682a56247b26676f366bc4684db898067878a92e996fabb509f04d46d2d0b1/session6333終端43e965真正0、全一既Source十二physical=七Code/五NoCode、L125covered171missed/M18-48/C4-3/B53-51、strict四100=1。MarkerLeaseのdefault二Codeを除外せず、RetirementGateはabstract Code無し/flags1537、他四abstractは1536。未実行匿名1/2・Targetも全miss保持。既Source proofと合算/置換0。
+
+16912独立4850855d13b902dc1236169893bd9be776ca8d97c96ddd68f7c3e8e073d85198/be943a真正0、54非退化反例/八oracle。固定12順/full2/owner4/start callback2、12点×IO/RTE/Errorの同一性・prefix停止、誤role/null/close-only/未提供proof拒否、before→一回memory retire→after・前後故障で再発行なしを確認。loopをJUnit件数へ加算0。元Child/三memory streamとList callbackだけで実process spawn/start/intent退役0、syntheticRetirementCallbacksInvoked=trueとactual操作0を分離、callerResourcesClosedByProduct=trueは自己streamのみ。四held六native trueprobe0、RootFailed五/Cycle23/inactive五無record、元未使用SnapshotTest/Fixture.Script二helperも無record。元helpers全文をそのままcompileしたがhelper@Test/staticIDは実行しない。
+
+共有used67残33/reset1793774153・短期null、fresh05:41以降reset券available1を観測したが使用/課金/override0。同整数≠専有費0、N/Tallocatednull・元/改訂残/群見積保持。当群工具失敗/新BUG0、前群2190/91・YKT1937/38はc4817f84/push19959終端1b8b6b真正0の実保存後有限閉鎖を追記。新WBS/正式更新0、1964/53/歴史17-190/工数null/QA051final/451/全HOLD維持。

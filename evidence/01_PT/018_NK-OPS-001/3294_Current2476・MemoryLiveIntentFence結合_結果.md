@@ -1,0 +1,9 @@
+# Current2476・Memory live-intent fence結合結果
+
+2026-11-01、3292/93/PG-D1056。16914 registry881b7f3d10d92ad54bfa23f3f407f4038edb3cbfd1eb85c43c07cb90337b9000/5a8a94真正0→16916独立0ba74250cfca95198d0a1f16454c06e6d8a989a0cb349300a476a123bea50417/session20215終端0bfcb6真正0・全34＋profile三。元XML/catalogから八/三suite/Test三pathを導出、既Source/NoCode/counter/全旧proof/費用受入は不変更の追加scope-only参照。
+
+固有2468→2476、suite351→354、ordinary2449→2457/5786（残3329）/quality19別、resource67内数/非resource2409。168元JUnit JVM2608=2476＋132必要repeat、joint48不変。Main528Source843physical=728Code＋115zero（NoCode108/compiler6/official-only1）、四282Source426physical/自然183Source198physical/NoCode-only6-6/partial57Source213physical不変。owner461baseline231候補234UNKNOWN、新三Testを正式owner/受入へ変換しない。
+
+16918 WBS8fb7040c57d0106378454c4ec4e11e148b16f225738cf39b8698a057cbfc70ad/051bf4真正0→16920 b17cdc76083c97f399c990531615cd266a1aa0377f502c3c4414590ea5c14ecb/session45680終端f0869f真正0・29＋ordinary四。485二side typedGuardCurrentHostPG16918Overlay/486inventoryhashだけ、481/484原費用/受入・旧全side/943凍結/現1065差/G13HOLD維持、全体audit再演0。
+
+次候補BackupUnitStartClientTest原whole17は全687行/全BackupUnitStartClient685・RootStartupContext630/既Fixture・MonitorProbe・NativeStart/Policy/NativeReader constructorの到達を確認中。実systemctlではなく一自己child /usr/bin/trueの5秒wait/三stream closeを含むため、単語nativeで一律許可/拒否せず全call pathを証拠化し、具体的な独立性が成立するまで未実行。実Root/NativeIo/FFI/Unit/VM/DB/credential/原本/回収退役/旧拒否範囲は保留のまま。既保留wholeからmethodを抽出せず、Test/fixtureは不変更。通常小群/PMO待ち停止0・fresh残10以下又は取得不能保全。
