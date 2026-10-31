@@ -1,5 +1,7 @@
 # PGPT成果物一覧・進捗
 
+2026-11-01追加：3258～61/PG-D1045、SchemaHistoryAdmission原9/1FES0・全二Source三Code L89M8C3B78未達0/独立48・一oracle、現2370/332・521Source812physical/四281421。registry34＋二/WBS29＋四真正0。60→65表示ppは技術+181PT/+17四100 Source・新WBS/正式更新0を明示し次70点検、工数null/HOLD不変。
+
 2026-11-01追加：3255～57/PG-D1044、SupplementaryUnitTemplate原whole5/1FES0・四public resource唯一定義/独立20＋42・五oracle/十二canary、Main1843無record/Test二CRC一致。現2361/331/resource49内数・Main519809/四279418不変、registry34/WBS29＋四真正0。実directive/credential target/Unit/正式/工数null/HOLD加点0。
 
 2026-11-01追加：3252～54/PG-D1043、MaintenanceParentGuard原whole6/1FES0、全一Source五physical/Guard default二Code未実行も全分母へ保持・未達68L11M1C53B・独立44/一oracle。現2356/330・519Source809physical/四279418不変、registry34＋二/WBS29＋四真正0。実parent/native/正式/工数null/HOLD加点0。

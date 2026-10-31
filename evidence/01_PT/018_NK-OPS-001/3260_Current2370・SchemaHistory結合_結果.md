@@ -1,0 +1,11 @@
+# Current2370・SchemaHistory結合結果
+
+3258～59/PG-D1045。16734 SHA7abb04160133704f8dbd39e97938e3de2a21ef266adbc1651e167cc742ce6629/12b227→16736 SHA9a0de2c13a3806d11e97b5eeca2754e2a533aeece025f5a464ab9c8298ce2357/session94130終端1b3327全34＋二真正0。XML実9/1・閉じたSource名二/三Code physical・四達成二/自然0/partial0を集合から導出、旧全case/counter/Source/proof/history/cost/開示訂正保持。module=bootstrapをpackage=apiと取り違えない。
+
+現固有2370/332（前2361/331から+9/+1）、resource49内数/非resource2321、普通2351/5786参照/3435未参照/quality19。157JUnit JVM2502=2370＋132repeat。Main521Source812physical=708Code＋104zero、四281Source421physical=397Code＋24zero・自然183198/NoCode6/6/partial51187。owner449baseline231候補212UNKNOWN、未知を作業ownerから補完しない。
+
+16738 SHA21051a045f9e3422d2590fd3a752fbce648fdbe1b595546bfe76f2b9bb0988a0/f5331c→16740 SHAc9e51aaec9a65bb8468c63b4c082d2691cfe294a4e1009d31e2ac057202a14c5/session13835終端03c255全29＋普通四真正0。485二side/486hashのみ・全旧scope/受入/費用/原943・現1065/G13全体HOLD保持。Source6b53/normal14216/六static14224不変更未配備、正式1964/53・歴史17/190・工数null・QA051final/G07/F03全体/451/全HOLD不変。
+
+群開始0.5/2/4共有pp cap10固定、開始64→終了65/reset1793774153の共有観測差1ppはPGPT専有費でない。N/T/allocated費null、usage03:17:11 cursor0320d317f3b73c00431b82219e07c1ef812ed100c11bcf9e1d46c766989fc7a9/NO_NEW_EXPLICIT_USAGE_RECORD/不完全・次04:17欠測補填0。元計画の受入/旧source実績/新資格/静的レビュー/工具手戻りを分け、見積減額を出来高にしない。65点検は3261参照。
+
+先行resource5は実保存d984b23764f90366245ab68fcbdc4b82f0321bb5/exact8b91ba/push66951終端458442真正0。次は同helperを使うServiceDatabaseAdmissionTestの先行根拠/whole/calleeを確認してから通常PT候補とする（未判定）。AssetManifestLoaderTest2は初回読取でMediaAssetFixture/retained Unix owner・link/mode/native保持へ依存し、既Linux/実保持契約からの独立性未証明のためwhole保留・残メソッド抽出/別fixture0。実RootVMDB鍵等HOLDを緩和せず、通常小群/commit/PMO待ち停止0。
