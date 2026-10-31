@@ -1,0 +1,3 @@
+# Current1995・MediaScenario現source結合 結果
+
+2026-10-31/2987/PG-D956。15704/d9925b67/7022fdc4fa88a9b7e92b532e8611e55c27e28f4a5b861e9d0a785a67c42026bf、15706/8e43f20b/session47218/c9c607237d29fea4a598589e020aaa2633fd385bf71dc7e494a74e384a42b127全真正0、registry34/WBS29反例。二sideの新overlayだけ/486 inventorySha256だけ・481484/元全scope-owner-cost・既disclosure訂正/別測定/旧proof保持。current1995/440Source/579physical、二Source二Code二metadataの未達保持、四243/355/自然172/186不変。wholeaudit前後actual1同physical-scope HOLD、全体451の合格0。Product/VM/DB操作0、正式/工数/受入不変更。BUG2141～43/横展開1888～90の三転記不備は元失敗保持・15707三反例/全後続実結合で有限scope完了。保存HEAD57324d09f6598a53db010d4ee85583a501d38701/元見積同一、次exact15708保存通常pushし独立PG/PTへ継続。

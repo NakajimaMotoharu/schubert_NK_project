@@ -1,5 +1,7 @@
 # PGPT成果物一覧・進捗
 
+2026-10-31追加：2985～88/PG-D956、Media/Scenario接続前原whole22/2真正成功、39null/33zero-JDBC/独立32・registry34/WBS29。current1973→1995/258・Source438→440・二新Source全Code二/NoCode二は未達保持、四243/自然172不変。BUG2141～43転記工具を先行是正し元失敗保持/再演0、三横断反例で再発防止、正式/工数/全HOLD不変更。
+
 2026-10-31追加：2981～84/PG-D955、PreSQL原whole13/3成功、独立32/registry34/WBS29。現1960→1973/256、新Source0、全旧438Source proof/coverage不変更・同exec別測定を明示。23 NPE/13 zero-JDBC assertions、実JDBC/SQL/DB0。BUG2140/YKT1887未束縛PIN工具を先行是正・元失敗保持/原13再演0、正式/工数/全HOLD不変。
 
 2026-10-31追加：2977～80/PG-D954、既存MediaBind四/ScenarioScript二/QuestionBind四の原whole10/3を現source初回成功。全二新Source四Codeの未達99L9M31Bを隠さず登録、独立30/既helper完全保持/未選択JUnit二・公開UUID非保存/registry34/WBS29成功。現1950→1960/253・Source436→438・四243/自然172不変、未達15-24→17-28は測定拡大。新製品/実行工具障害・原10再演0、全旧proof/cost/訂正・正式1964/53・工数null/全HOLD保持、通常PG/PT継続。
