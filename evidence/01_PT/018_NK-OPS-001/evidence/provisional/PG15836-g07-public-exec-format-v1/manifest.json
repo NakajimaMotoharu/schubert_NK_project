@@ -1,0 +1,572 @@
+{
+  "actualDatabaseActions": 0,
+  "actualExit": 0,
+  "actualNetworkActions": 0,
+  "actualSecretCount": null,
+  "actualServiceActions": 0,
+  "actualVmActions": 0,
+  "additionalFalsePositives": 0,
+  "apiTypeNegativeVectors": 4,
+  "binaryReviewCompleted": false,
+  "classNameValuesOrHashesSaved": false,
+  "compiledMetadataClasses": {
+    "PublicJacocoFormatMetadataV1$Counts.class": "d6186547e221e56517f228ff287916b4316225bfa37d360ffa21dc92591f18a2",
+    "PublicJacocoFormatMetadataV1.class": "ba21169ca13d11405e9f977e15709db5230801efb5af93f7f72ae2a2bc3ef9f8"
+  },
+  "contentCommit": "05d73a7974da8df92228160b96d91e7a006768f3",
+  "coverageExecUnion": false,
+  "effortPercent": null,
+  "formalUpdated": false,
+  "formatEvidenceOnly": true,
+  "formatInspectedBytes": 155226,
+  "formatInspectedFiles": 10,
+  "historicalScanSource": "fb9fce0f91de3d9fdfa634fe277592700f915e45",
+  "historyExpanded": false,
+  "inputFilesMutated": false,
+  "inventorySha256": "f14aadb1a1e2f5d6a435ef53e701f315a9f116c29ae4c6a426ff221c7a9e698d",
+  "invocation": {
+    "actualPythonCommand": [
+      "/usr/bin/python3",
+      "-B",
+      "tools/quality/pg15836_g07_public_exec_format.py"
+    ],
+    "arbitraryArgumentsRecorded": false,
+    "entrypointPath": "tools/quality/pg15836_g07_public_exec_format.py",
+    "entrypointSha256": "445f788f933a9e73abf90a3670da6c403056ec7ccda4003174fcdc2bc8aecf23",
+    "helperPath": "tools/quality/host_tool_invocation.py",
+    "helperSha256": "85d616a3db4ff47f4c95ae2e0dd57954bc2b09f28b8f2a685b986e5621545c46",
+    "libraryPath": "tools/quality/pg15836_g07_public_exec_format.py",
+    "librarySha256": "445f788f933a9e73abf90a3670da6c403056ec7ccda4003174fcdc2bc8aecf23",
+    "loadedProjectPythonSources": {
+      "tools/quality/g07_host_class_provenance_inputs.py": "a676cb3e4145177c3c243722d737592ce7d44c3f29cfe4f670662ef7651f046b",
+      "tools/quality/host_tool_invocation.py": "85d616a3db4ff47f4c95ae2e0dd57954bc2b09f28b8f2a685b986e5621545c46",
+      "tools/quality/pg15836_g07_public_exec_format.py": "445f788f933a9e73abf90a3670da6c403056ec7ccda4003174fcdc2bc8aecf23",
+      "tools/quality/pg9666_pagination_static.py": "75347ce8aef713e43a3d2fd39e0e0b6244da9427caa8dc51d36e539d629e0ef5",
+      "tools/quality/public_jacoco_exec_format_v1.py": "3852ec2b30f22b4f38bcfb046d7d4a29f751fafdd792ce07d8ce8fc08fc44cec"
+    },
+    "provenance": "OBSERVED_SYS_ARGV_AND_ORIG_ARGV_NOT_RECONSTRUCTED"
+  },
+  "metadataNegativeVectors": 14,
+  "metadataPositiveVectors": 5,
+  "newAccepted": 0,
+  "officialLibraryPath": "/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.core/0.8.15/org.jacoco.core-0.8.15.jar",
+  "officialLibrarySha256": "ade1e0fdb4cd80d8537b57c6edb70a1360c47fdc518c20c65314517479bc4d0d",
+  "originalNativeReexecuted": false,
+  "os": {
+    "machine": "x86_64",
+    "release": "7.0.0-38-generic",
+    "system": "Linux"
+  },
+  "otherPngFilesUninspected": 12,
+  "privateRawRead": false,
+  "probeArraysSaved": false,
+  "productClassesLoaded": false,
+  "productMethodsInvoked": false,
+  "productTestsExecuted": 0,
+  "remainingBinaryOrContainerGate": 22,
+  "remainingUnclassified": 4493,
+  "resultsSha256": "71f18f8f7328ef8de60a95f615ebe33642e7ec8cfa9e8bb58bc13c1b8b6e64e1",
+  "reviewHead": "cfd66687d24ed60ab9256567d6efd9281ea739da",
+  "scanManifestSha256": "f8e16b697c1c509791c6674bb17661c54e8685c0f04425bed8bf7ea86a94a739",
+  "scannerExecuted": false,
+  "sessionAndClassProvenanceQualified": false,
+  "sessionIdValuesOrHashesSaved": false,
+  "source": "6b53efeec87f3ec36a840dd8e7759656cb4aee5c",
+  "sourceRuntimeQualificationTransferred": false,
+  "specification": "evidence/01_PT/018_NK-OPS-001/3021_G07\u516c\u958bexec\u5341\u4ef6_\u5f62\u5f0f\u5883\u754c\u9650\u5b9a\u4ed5\u69d8.md",
+  "stages": [
+    {
+      "actualExit": 0,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+        "--release",
+        "25",
+        "-proc:none",
+        "-Xlint:all",
+        "-Werror",
+        "-cp",
+        "/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.core/0.8.15/org.jacoco.core-0.8.15.jar",
+        "-d",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg15836-g07-public-exec-format-v1/classes",
+        "/home/mini/codex/project1/work/pgpt-foundation/tools/quality/architecture/PublicJacocoFormatMetadataV1.java"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg15836-g07-public-exec-format-v1",
+      "endUTC": "2026-10-31T01:52:39.699767+00:00",
+      "startUTC": "2026-10-31T01:52:38.879447+00:00",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "timedOut": false
+    },
+    {
+      "actualExit": 0,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-cp",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg15836-g07-public-exec-format-v1/classes:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.core/0.8.15/org.jacoco.core-0.8.15.jar",
+        "PublicJacocoFormatMetadataV1",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg15836-g07-public-exec-format-v1/public-tool-fixtures/header-only.exec"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg15836-g07-public-exec-format-v1",
+      "endUTC": "2026-10-31T01:52:39.764842+00:00",
+      "startUTC": "2026-10-31T01:52:39.700225+00:00",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSha256": "7fbc82322655e293cd8d6badbc4c7f4e64711576644d1e82e79a7ae55421553b",
+      "timedOut": false
+    },
+    {
+      "actualExit": 0,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-cp",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg15836-g07-public-exec-format-v1/classes:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.core/0.8.15/org.jacoco.core-0.8.15.jar",
+        "PublicJacocoFormatMetadataV1",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg15836-g07-public-exec-format-v1/public-tool-fixtures/two-headers.exec"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg15836-g07-public-exec-format-v1",
+      "endUTC": "2026-10-31T01:52:39.829909+00:00",
+      "startUTC": "2026-10-31T01:52:39.765257+00:00",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSha256": "6d8298aa5b53cf7905799cae24c310627480afca281fa8389bba8249265aa9e7",
+      "timedOut": false
+    },
+    {
+      "actualExit": 0,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-cp",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg15836-g07-public-exec-format-v1/classes:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.core/0.8.15/org.jacoco.core-0.8.15.jar",
+        "PublicJacocoFormatMetadataV1",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg15836-g07-public-exec-format-v1/public-tool-fixtures/ascii-metadata.exec"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg15836-g07-public-exec-format-v1",
+      "endUTC": "2026-10-31T01:52:39.894899+00:00",
+      "startUTC": "2026-10-31T01:52:39.830333+00:00",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSha256": "935f50699f001c307dbbd12aaa00aa2fc3735feb5def415746b47c75e9bf60e4",
+      "timedOut": false
+    },
+    {
+      "actualExit": 0,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-cp",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg15836-g07-public-exec-format-v1/classes:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.core/0.8.15/org.jacoco.core-0.8.15.jar",
+        "PublicJacocoFormatMetadataV1",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg15836-g07-public-exec-format-v1/public-tool-fixtures/modified-utf-nul-and-surrogates.exec"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg15836-g07-public-exec-format-v1",
+      "endUTC": "2026-10-31T01:52:39.960205+00:00",
+      "startUTC": "2026-10-31T01:52:39.895329+00:00",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSha256": "d86e762d86e51bdd9945ae0c590fd495ca89fc3f93502f2fb6a9a0e4d070090a",
+      "timedOut": false
+    },
+    {
+      "actualExit": 0,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-cp",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg15836-g07-public-exec-format-v1/classes:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.core/0.8.15/org.jacoco.core-0.8.15.jar",
+        "PublicJacocoFormatMetadataV1",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg15836-g07-public-exec-format-v1/public-tool-fixtures/unused-padding-is-not-hidden.exec"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg15836-g07-public-exec-format-v1",
+      "endUTC": "2026-10-31T01:52:40.025265+00:00",
+      "startUTC": "2026-10-31T01:52:39.960683+00:00",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSha256": "935f50699f001c307dbbd12aaa00aa2fc3735feb5def415746b47c75e9bf60e4",
+      "timedOut": false
+    },
+    {
+      "actualExit": 2,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-cp",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg15836-g07-public-exec-format-v1/classes:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.core/0.8.15/org.jacoco.core-0.8.15.jar",
+        "PublicJacocoFormatMetadataV1",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg15836-g07-public-exec-format-v1/public-tool-fixtures/empty.exec"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg15836-g07-public-exec-format-v1",
+      "endUTC": "2026-10-31T01:52:40.090139+00:00",
+      "startUTC": "2026-10-31T01:52:40.025675+00:00",
+      "stderrSha256": "00d7d071cc0d9151c8c850989670a00966a387c6a74668482b415714bc733e3b",
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "timedOut": false
+    },
+    {
+      "actualExit": 2,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-cp",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg15836-g07-public-exec-format-v1/classes:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.core/0.8.15/org.jacoco.core-0.8.15.jar",
+        "PublicJacocoFormatMetadataV1",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg15836-g07-public-exec-format-v1/public-tool-fixtures/not-header-first.exec"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg15836-g07-public-exec-format-v1",
+      "endUTC": "2026-10-31T01:52:40.155417+00:00",
+      "startUTC": "2026-10-31T01:52:40.090714+00:00",
+      "stderrSha256": "043539217d0dab0afb84d08bb27a0a1229d35bd1213d54c4137d27117d8f27cf",
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "timedOut": false
+    },
+    {
+      "actualExit": 2,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-cp",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg15836-g07-public-exec-format-v1/classes:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.core/0.8.15/org.jacoco.core-0.8.15.jar",
+        "PublicJacocoFormatMetadataV1",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg15836-g07-public-exec-format-v1/public-tool-fixtures/bad-magic.exec"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg15836-g07-public-exec-format-v1",
+      "endUTC": "2026-10-31T01:52:40.220941+00:00",
+      "startUTC": "2026-10-31T01:52:40.156168+00:00",
+      "stderrSha256": "043539217d0dab0afb84d08bb27a0a1229d35bd1213d54c4137d27117d8f27cf",
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "timedOut": false
+    },
+    {
+      "actualExit": 2,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-cp",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg15836-g07-public-exec-format-v1/classes:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.core/0.8.15/org.jacoco.core-0.8.15.jar",
+        "PublicJacocoFormatMetadataV1",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg15836-g07-public-exec-format-v1/public-tool-fixtures/bad-version.exec"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg15836-g07-public-exec-format-v1",
+      "endUTC": "2026-10-31T01:52:40.286159+00:00",
+      "startUTC": "2026-10-31T01:52:40.221358+00:00",
+      "stderrSha256": "589085cdad3c0c920bb57731c82a280e67c7a98491d1acc9ab3344ec9614811a",
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "timedOut": false
+    },
+    {
+      "actualExit": 2,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-cp",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg15836-g07-public-exec-format-v1/classes:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.core/0.8.15/org.jacoco.core-0.8.15.jar",
+        "PublicJacocoFormatMetadataV1",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg15836-g07-public-exec-format-v1/public-tool-fixtures/truncated-header.exec"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg15836-g07-public-exec-format-v1",
+      "endUTC": "2026-10-31T01:52:40.351244+00:00",
+      "startUTC": "2026-10-31T01:52:40.286531+00:00",
+      "stderrSha256": "00d7d071cc0d9151c8c850989670a00966a387c6a74668482b415714bc733e3b",
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "timedOut": false
+    },
+    {
+      "actualExit": 2,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-cp",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg15836-g07-public-exec-format-v1/classes:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.core/0.8.15/org.jacoco.core-0.8.15.jar",
+        "PublicJacocoFormatMetadataV1",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg15836-g07-public-exec-format-v1/public-tool-fixtures/truncated-session-length.exec"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg15836-g07-public-exec-format-v1",
+      "endUTC": "2026-10-31T01:52:40.416418+00:00",
+      "startUTC": "2026-10-31T01:52:40.351647+00:00",
+      "stderrSha256": "e5adae107817f1c3b5559cbac07cefc9851c56fed07fc84661e9894f060de8f1",
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "timedOut": false
+    },
+    {
+      "actualExit": 2,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-cp",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg15836-g07-public-exec-format-v1/classes:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.core/0.8.15/org.jacoco.core-0.8.15.jar",
+        "PublicJacocoFormatMetadataV1",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg15836-g07-public-exec-format-v1/public-tool-fixtures/truncated-session-timestamp.exec"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg15836-g07-public-exec-format-v1",
+      "endUTC": "2026-10-31T01:52:40.481278+00:00",
+      "startUTC": "2026-10-31T01:52:40.416830+00:00",
+      "stderrSha256": "e5adae107817f1c3b5559cbac07cefc9851c56fed07fc84661e9894f060de8f1",
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "timedOut": false
+    },
+    {
+      "actualExit": 2,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-cp",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg15836-g07-public-exec-format-v1/classes:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.core/0.8.15/org.jacoco.core-0.8.15.jar",
+        "PublicJacocoFormatMetadataV1",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg15836-g07-public-exec-format-v1/public-tool-fixtures/invalid-modified-utf.exec"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg15836-g07-public-exec-format-v1",
+      "endUTC": "2026-10-31T01:52:40.546602+00:00",
+      "startUTC": "2026-10-31T01:52:40.481694+00:00",
+      "stderrSha256": "835a48a46227428e745017a01ec8ae05965979735c4f4ada7182d9f840a020ad",
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "timedOut": false
+    },
+    {
+      "actualExit": 2,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-cp",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg15836-g07-public-exec-format-v1/classes:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.core/0.8.15/org.jacoco.core-0.8.15.jar",
+        "PublicJacocoFormatMetadataV1",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg15836-g07-public-exec-format-v1/public-tool-fixtures/truncated-class-name.exec"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg15836-g07-public-exec-format-v1",
+      "endUTC": "2026-10-31T01:52:40.611506+00:00",
+      "startUTC": "2026-10-31T01:52:40.547007+00:00",
+      "stderrSha256": "e5adae107817f1c3b5559cbac07cefc9851c56fed07fc84661e9894f060de8f1",
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "timedOut": false
+    },
+    {
+      "actualExit": 2,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-cp",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg15836-g07-public-exec-format-v1/classes:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.core/0.8.15/org.jacoco.core-0.8.15.jar",
+        "PublicJacocoFormatMetadataV1",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg15836-g07-public-exec-format-v1/public-tool-fixtures/truncated-probe-varint.exec"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg15836-g07-public-exec-format-v1",
+      "endUTC": "2026-10-31T01:52:40.676542+00:00",
+      "startUTC": "2026-10-31T01:52:40.612254+00:00",
+      "stderrSha256": "e5adae107817f1c3b5559cbac07cefc9851c56fed07fc84661e9894f060de8f1",
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "timedOut": false
+    },
+    {
+      "actualExit": 2,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-cp",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg15836-g07-public-exec-format-v1/classes:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.core/0.8.15/org.jacoco.core-0.8.15.jar",
+        "PublicJacocoFormatMetadataV1",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg15836-g07-public-exec-format-v1/public-tool-fixtures/truncated-probes.exec"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg15836-g07-public-exec-format-v1",
+      "endUTC": "2026-10-31T01:52:40.741392+00:00",
+      "startUTC": "2026-10-31T01:52:40.676852+00:00",
+      "stderrSha256": "e5adae107817f1c3b5559cbac07cefc9851c56fed07fc84661e9894f060de8f1",
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "timedOut": false
+    },
+    {
+      "actualExit": 2,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-cp",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg15836-g07-public-exec-format-v1/classes:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.core/0.8.15/org.jacoco.core-0.8.15.jar",
+        "PublicJacocoFormatMetadataV1",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg15836-g07-public-exec-format-v1/public-tool-fixtures/unknown-trailing-block.exec"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg15836-g07-public-exec-format-v1",
+      "endUTC": "2026-10-31T01:52:40.806300+00:00",
+      "startUTC": "2026-10-31T01:52:40.741843+00:00",
+      "stderrSha256": "043539217d0dab0afb84d08bb27a0a1229d35bd1213d54c4137d27117d8f27cf",
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "timedOut": false
+    },
+    {
+      "actualExit": 2,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-cp",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg15836-g07-public-exec-format-v1/classes:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.core/0.8.15/org.jacoco.core-0.8.15.jar",
+        "PublicJacocoFormatMetadataV1",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg15836-g07-public-exec-format-v1/public-tool-fixtures/truncated-appended-header.exec"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg15836-g07-public-exec-format-v1",
+      "endUTC": "2026-10-31T01:52:40.871214+00:00",
+      "startUTC": "2026-10-31T01:52:40.806639+00:00",
+      "stderrSha256": "e5adae107817f1c3b5559cbac07cefc9851c56fed07fc84661e9894f060de8f1",
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "timedOut": false
+    },
+    {
+      "actualExit": 2,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-cp",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg15836-g07-public-exec-format-v1/classes:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.core/0.8.15/org.jacoco.core-0.8.15.jar",
+        "PublicJacocoFormatMetadataV1",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg15836-g07-public-exec-format-v1/public-tool-fixtures/truncated-large-utf-field.exec"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg15836-g07-public-exec-format-v1",
+      "endUTC": "2026-10-31T01:52:40.936132+00:00",
+      "startUTC": "2026-10-31T01:52:40.871483+00:00",
+      "stderrSha256": "e5adae107817f1c3b5559cbac07cefc9851c56fed07fc84661e9894f060de8f1",
+      "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "timedOut": false
+    },
+    {
+      "actualExit": 0,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-cp",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg15836-g07-public-exec-format-v1/classes:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.core/0.8.15/org.jacoco.core-0.8.15.jar",
+        "PublicJacocoFormatMetadataV1",
+        "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG383-native-deployment/morning-first.exec"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg15836-g07-public-exec-format-v1",
+      "endUTC": "2026-10-31T01:52:41.003298+00:00",
+      "startUTC": "2026-10-31T01:52:40.938813+00:00",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSha256": "c0a1e094310c90df2640e5a56efb060ed2179acb49869a51674c2ea3d1c91117",
+      "timedOut": false
+    },
+    {
+      "actualExit": 0,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-cp",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg15836-g07-public-exec-format-v1/classes:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.core/0.8.15/org.jacoco.core-0.8.15.jar",
+        "PublicJacocoFormatMetadataV1",
+        "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG384-native-deployment/morning-first.exec"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg15836-g07-public-exec-format-v1",
+      "endUTC": "2026-10-31T01:52:41.070873+00:00",
+      "startUTC": "2026-10-31T01:52:41.006356+00:00",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSha256": "c60c9720af4616524641d4cd0d61d3b3cddb6d9a584fbca1a369c29b625ad0f7",
+      "timedOut": false
+    },
+    {
+      "actualExit": 0,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-cp",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg15836-g07-public-exec-format-v1/classes:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.core/0.8.15/org.jacoco.core-0.8.15.jar",
+        "PublicJacocoFormatMetadataV1",
+        "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG385-native-deployment/backup-first.exec"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg15836-g07-public-exec-format-v1",
+      "endUTC": "2026-10-31T01:52:41.136425+00:00",
+      "startUTC": "2026-10-31T01:52:41.071961+00:00",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSha256": "37ef171a0c803e2b4df8154670bf158c60db81c6d730eab092aa5cd45cb48b81",
+      "timedOut": false
+    },
+    {
+      "actualExit": 0,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-cp",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg15836-g07-public-exec-format-v1/classes:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.core/0.8.15/org.jacoco.core-0.8.15.jar",
+        "PublicJacocoFormatMetadataV1",
+        "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG385-native-deployment/morning-first.exec"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg15836-g07-public-exec-format-v1",
+      "endUTC": "2026-10-31T01:52:41.206691+00:00",
+      "startUTC": "2026-10-31T01:52:41.141890+00:00",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSha256": "013dc0f85c5f64cafe5d05c0340a821d06c9993c10f02804856af6c1d29b2324",
+      "timedOut": false
+    },
+    {
+      "actualExit": 0,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-cp",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg15836-g07-public-exec-format-v1/classes:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.core/0.8.15/org.jacoco.core-0.8.15.jar",
+        "PublicJacocoFormatMetadataV1",
+        "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG386-native-backup-failure/pg386-failed-backup.exec"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg15836-g07-public-exec-format-v1",
+      "endUTC": "2026-10-31T01:52:41.272238+00:00",
+      "startUTC": "2026-10-31T01:52:41.207780+00:00",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSha256": "5dd030d3e6b17fa54c68eb0dc05d696ec2e971c3cf7e62101ebe0624a7bfb562",
+      "timedOut": false
+    },
+    {
+      "actualExit": 0,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-cp",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg15836-g07-public-exec-format-v1/classes:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.core/0.8.15/org.jacoco.core-0.8.15.jar",
+        "PublicJacocoFormatMetadataV1",
+        "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG386-native-backup-failure/pg386-failed-parent.exec"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg15836-g07-public-exec-format-v1",
+      "endUTC": "2026-10-31T01:52:41.341884+00:00",
+      "startUTC": "2026-10-31T01:52:41.277295+00:00",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSha256": "b7753baabb74c02cc22df89fd90b1e34008a4400ebc7ee7a20b6c28ab35d4225",
+      "timedOut": false
+    },
+    {
+      "actualExit": 0,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-cp",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg15836-g07-public-exec-format-v1/classes:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.core/0.8.15/org.jacoco.core-0.8.15.jar",
+        "PublicJacocoFormatMetadataV1",
+        "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG386-native-backup-failure/pg386-positive-backup.exec"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg15836-g07-public-exec-format-v1",
+      "endUTC": "2026-10-31T01:52:41.407758+00:00",
+      "startUTC": "2026-10-31T01:52:41.342900+00:00",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSha256": "37ef171a0c803e2b4df8154670bf158c60db81c6d730eab092aa5cd45cb48b81",
+      "timedOut": false
+    },
+    {
+      "actualExit": 0,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-cp",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg15836-g07-public-exec-format-v1/classes:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.core/0.8.15/org.jacoco.core-0.8.15.jar",
+        "PublicJacocoFormatMetadataV1",
+        "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG386-native-backup-failure/pg386-positive-parent.exec"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg15836-g07-public-exec-format-v1",
+      "endUTC": "2026-10-31T01:52:41.477772+00:00",
+      "startUTC": "2026-10-31T01:52:41.413127+00:00",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSha256": "9f2795d2ed6962e511c11b35cf0af5fd7684200a3c05dd1e27314f56737836d3",
+      "timedOut": false
+    },
+    {
+      "actualExit": 0,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-cp",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg15836-g07-public-exec-format-v1/classes:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.core/0.8.15/org.jacoco.core-0.8.15.jar",
+        "PublicJacocoFormatMetadataV1",
+        "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG387-native-normal-resume/backup.exec"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg15836-g07-public-exec-format-v1",
+      "endUTC": "2026-10-31T01:52:41.543822+00:00",
+      "startUTC": "2026-10-31T01:52:41.478753+00:00",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSha256": "42fe04fad5dc6a403e86a0ba4bc6ebe23f5d75ac60971012ae0643aa33f97607",
+      "timedOut": false
+    },
+    {
+      "actualExit": 0,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-cp",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg15836-g07-public-exec-format-v1/classes:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.core/0.8.15/org.jacoco.core-0.8.15.jar",
+        "PublicJacocoFormatMetadataV1",
+        "/home/mini/codex/project1/work/pgpt-foundation/evidence/01_PT/018_NK-OPS-001/evidence/provisional/PG387-native-normal-resume/parent.exec"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg15836-g07-public-exec-format-v1",
+      "endUTC": "2026-10-31T01:52:41.612272+00:00",
+      "startUTC": "2026-10-31T01:52:41.547759+00:00",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSha256": "0b9e23f638a927679cfebe62e04304625d09cd69ae632d523df9119acae016d6",
+      "timedOut": false
+    }
+  ],
+  "toolSourceHashes": {
+    "tools/quality/architecture/PublicJacocoFormatMetadataV1.java": "5042f1732f0b1e2741f8331ca789fd4139cad063cfda10f94e64fb3267fd47aa",
+    "tools/quality/public_jacoco_exec_format_v1.py": "3852ec2b30f22b4f38bcfb046d7d4a29f751fafdd792ce07d8ce8fc08fc44cec"
+  },
+  "vectorsSha256": "616862806a0f6b68b5f8605e58f666d94c789f0003e317e3b1d9bc53c2a35ea0",
+  "wbs": "WBS-G07",
+  "whole451SecretGateAccepted": false
+}
