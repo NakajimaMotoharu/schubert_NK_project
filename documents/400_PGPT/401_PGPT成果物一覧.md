@@ -1,5 +1,7 @@
 # PGPT成果物一覧・進捗
 
+2026-10-31追加：3164/65/PG-D1016、JMS配送/start/send/Log六Source全974行・47warning/32catchを現13253XML/全attrs/Source/UTF8 byteへ結合、Source十八/独立26＋byte四。参照1171＋用途195=1366/1491・残125、component別Error優先/confirmed rollbackとGraph/provider未実証を区別・実PT0/actualViolationnull/PT免除false。新BUG/Source変更0、全正式/工数null/HOLD不変更。
+
 2026-10-31追加：3162/63/PG-D1015、API/Web context/factory三Sourceのgeneric二十row（十二catch）を現13253XML/全attrs/全Source/UTF8 byteへ結合・Source九/UTF8二・独立26＋byte四。参照1171＋用途148=1319/1491・残172、UNKNOWN非帰還/Graph内部/実provider・物理String消去は未実証、actualViolationnull/PT免除false/実PT0。BUG2172YKT1919の全文ASCII前提は旧版凍結/有限是正、全正式/工数null/HOLD保持。
 
 2026-10-31追加：3158～61/PG-D1014、1507明示data-only原一1/1FES0・二固定組/null/redaction・独立26＋二/registry34/WBS29＋4。全Root Sourceouter＋Observed二Codeを測り32L5M1C16Bmiss/strict1の未達を保持、合成値を権限発行/実Root/permit操作とせず実経路0。技術2174/296・485/682・四262/383/自然177/192不変更・未達40/101・普通2156/5786quality18別、元計画新受入/正式更新0・工数null/全HOLD保持。
