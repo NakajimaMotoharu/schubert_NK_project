@@ -1,5 +1,7 @@
 # PGPT成果物一覧・進捗
 
+2026-10-31追加：3180～83/PG-D1024、原八/2suite FES0・独立34＋filter四/八oracle。技術2182/298・491Source722physical・四263/386、公式filtered一を真正NoCodeと分離/全40保持。16404/06/08/10実績結合0、正式1964/53・工数null・全HOLD不変。工具BUG2173～75/YKT1920～22有限是正、原PT再演0。
+
 2026-10-31追加：3178/79/PG-D1023、質問/局所監査全三Main1881行/22warning15catchを原XML・変換ゼロ資格・全Source/attrs/SSへ結合、Source九/独立30＋byte四。参照1171＋用途310=1481/1491・残Root十HOLD。Product/PT/正式加点0、actualViolationnull/PT免除false・F03全体未受入・全HOLD維持。
 
 2026-10-31追加：3176/77/PG-D1022、JLS25変換ゼロ限定span工具をmetadata正常七/拒否二十・byte三/座標八・独立十五で確認。三Source各ineligible marker二/eligible零・原XML22型位置一致、semantic用途加点0/queue残32不変。製品/拒否PT/coverage/正式受入に換算0・全HOLD保持。
