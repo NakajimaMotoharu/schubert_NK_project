@@ -1,0 +1,9 @@
+# Current2110・公開codec全Source 現source結合 仕様
+
+3068の後段metadata条件を具体化する。新P01707 Source一つ/全三class/原16methodをcurrent2094へ加える。旧一部proofの置換ではなく新Source追加であり、Source増分1をregistry/independent双方で一致させる。原wholeTestの新登録16であって新作Test method16ではない。
+
+全旧helpers/Catalog/joint/qualityfixture九/訂正/owner/cost/正式を保持し、ordinary5786の内数だけを2085→2101参照/未参照3701→3685へ変更する。混在九をordinary分母へ入れず、工数率を試験数から算出しない。
+
+PG16016 registry/PG16018独立：元XML/全case、Source closure、三physicalの各実counterから全四を独立再構成。全registry一致・有限34変異で履歴消去/二重加算/四100偽装/普通とfixture混同/PASS転用を拒否する。PG16020 writerは485の二side新fieldだけ、486はinventory hashだけを機械更新し、PG16022独立29＋ordinary4で全旧意味と費用が保持されることを確認する。
+
+481/484、旧941論理/943物理候補、現1065UNQUALIFIED descriptorを変更しない。既G13 scope HOLDは15848/50の固定証拠を参照し、既知差が不変なのにwhole監査を反復して合格を作らない。元all451/native/正式1964-53・QA051final/工数null・全HOLDは不変更。

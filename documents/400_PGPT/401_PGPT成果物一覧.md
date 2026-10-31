@@ -1,5 +1,7 @@
 # PGPT成果物一覧・進捗
 
+2026-10-31追加：3068～71/PG-D981、Cleanup/Expiry公開codec原whole三Test16成功・独立24＋5/全一Source L150M18C3B108四100。current2094→2110/281・474Source657physical/四253Source369physical、ordinary2101/5786参照/fixture九別。registry34/WBS29＋4成功、全旧cost/proof/補足を保持・正式/工数/451/HOLD不変更。
+
 2026-10-31追加：3066/3067・PG-D980、現BatchRunRepository全八JDBC所有scopeの48診断を用途レビュー、独立metadata25変異拒否。現1491raw不変更、既562参照＋新用途48=610/当未接続・未用途レビュー881。静的判断だけで新PT/coverage/全F03/正式へ加算0、registry2094/278・四252/366・工数null/全HOLD維持。
 
 2026-10-31追加：3062～65/PG-D979、RunReferences独立16表/新品質fixture三成功・semantic23＋oracle5、一Source L6M3C1B14四100。current2091→2094/278・四252/366・未達39/91、Source473不変（一Source閉鎖、追加0）。ordinary参照2085/5786は不変/別fixture九、生成member適用性明記、registry34/WBS29＋4成功、正式/工数/451/HOLD不変更。
