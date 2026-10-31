@@ -1,5 +1,7 @@
 # PGPT成果物一覧・進捗
 
+2026-10-31追加：3150～53/PG-D1012、InspectionAttempt原八を現source初回資格8/1FES0・全一Source一Code36L5M1C24Bmiss0、独立八算術＋64並行差分/26metadata・registry34/WBS29＋4。技術2172/294・482/672・四262/383・普通2154/5786/quality18別、業務/DB/Root/実終了証明でない純値。QCMnull/redaction/Health.readyは既HOLDの抽出をせず新fixture0、元計画新受入/正式更新0・工数null・全HOLD不変更。
+
 2026-10-31追加：3148/49/PG-D1011、現Thread五/消失FD emptycatch二を全四Source・原13505/34 XML/全attrsへ結合。割込み読取/owner threadId/park-clear永久保持を分離・外部期限等未実証を保持、参照1171＋用途128=1299/1491・残192generic。BUG2170YKT1917の旧raw座標混同は旧版凍結/有限是正、八文字列/独立26＋原起源四反例。実Product/新formal/免除/抑制0、全正式/HOLD不変更。
 
 2026-10-31追加：3144～47/PG-D1010、Storage属性原七を現source初回資格・7/1FES0、全Source一Code 44L8M1C42B全miss0・原空private constructor既定filter/物理9測定8を明示。自己新0700親/七子の合成file/link/子permissionと実後条件を確認・独立26＋八oracle/registry34/WBS29＋4。技術2164/293・481Source671physical・四261/382・普通2146/5786/quality18別、元計画新受入0。BUG2169YKT1916工具comment誤認は旧版凍結/有限是正・Production変更0、全正式/工数null/HOLD保持。

@@ -1,0 +1,7 @@
+# Current2172・Inspection純値結合 結果
+
+2026-10-31、3152/PG-D1012。16302/301f5e/entry666d34真正0、registry000254c960de391f58918a11980b7cc1c62f3fa1cfdabb95188f3ada22d95254。16304/bed90c/entrye339d8真正0、独立2858bb57901ed3ea068013d25e34bb8b93f0409acb75487ae243b560f4d7ba85、全34反例。
+
+実測2172unique/294suite・134JVM2304=2172+132repeat、482Source672physical630Code42meta・四262/383=371Code12meta・自然176/191・NoCode-only6/6・未達38/92。普通2154/5786・未参照3632/quality18別、owner397baseline229候補174UNKNOWN、元全履歴/訂正/費用/資源/JSdomainを全object独立保持。
+
+WBS16306/7c0315/entry8bfb7e真正0、SHA0669039916d8dcb7af1d53f1a656411d2a5c8e718f1ec6d601961cb4d79fc737。16308/343ddb/session30144終端6d1a8d真正0、SHA80e83bfc6dca18752a1aa55f3c621a3e7ff358502184ba95e63d11af99056f8a、二side typedGuardCurrentHostPG16306Overlay/486hashだけ更新・旧全意味/481484cost保持・29＋普通四反例。G13は保存診断旧943/current1065/HOLD・全audit再実行0。元計画新受入/正式更新0・工数率null、全HOLD不変更、原群0.75/3/6凍結/結合費再加算0。

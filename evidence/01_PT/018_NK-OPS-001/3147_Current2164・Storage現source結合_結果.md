@@ -1,5 +1,7 @@
 # Current2164・Storage現source結合 結果
 
+2026-10-31語句補記（新測定0）：末尾の「工数率/新WBS受入0」は更新増分0という記述であり、工数率の値を0と認定したものではない。正確には新WBS受入/正式更新0、工数率は一貫して未較正null。元manifest/旧Git byte/実Source/PT/counter/全HOLDは不変更。
+
 2026-10-31、3146/PG-D1010。16280/c3e584/entrye08817真正0、registry SHA57e0226d76bb40fa0db7b73c9dc041e82fcd7506d54d890569454648a2145118。16282/a70c3e/entry2b9bf1真正0、独立SHA42838df9bf0a1514b586d9fa0c05157f2ff6255ebe30d8178f925093d1618a91、全34非退化反例。
 
 実測2164unique/293suite、133JVM2296=2164+132repeat、481Source671physical=629Code42meta、四261/382=370Code12meta・自然176/191・NoCode-only6/6・未達38/92。普通2146/5786・未参照3640/quality18別、owner396baseline229候補173UNKNOWN、元全履歴/訂正/資源・JS/Node/費用/正式保持を全object独立確認。
