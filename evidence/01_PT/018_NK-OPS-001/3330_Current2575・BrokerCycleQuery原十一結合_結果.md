@@ -1,0 +1,9 @@
+# Current2575・Broker cycle/query原十一 結合結果
+
+2026-11-01、3328/29/PG-D1067。17094 registry77c898f3394948f03a994af4724920366b50b921b7f6e99096d6be2957e7b172/0dfdd7 genuine0→17096 post5ee540b681c5a4c8e82526b2acd1a1dcc999d5f4923db6eb33c0cac25e963a03/7eee02 genuine0・全34metadata/三profile。scope-onlyで全既Main/metadata/proof/費用/受入不変更。原whole二suite全11/XML/catalog/実Testpath二を新参照し、新Source/physical/four100加算0。
+
+固有2564→2575/suite369→371、普通2545→2556/5786残3230/quality19別/resource67内数・非resource2508。179元JUnit JVM2707=2575＋132必要repeat/joint48不変。Main536878/748Code130zero（genuineNoCode122/compiler7/official1）、四284428/自然183198/NoCode6-6/partial63246不変。owner469baseline231候補251UNKNOWN、formal1964/53/歴史17/190/工数null。
+
+17098 WBS31437b9173ae981bda07dd3d08405cdab68727dccc6788ab2b28029bbdfb84c2/7e0224 genuine0→17100 post91978f5def68a2838a51e4204d83797eb42e5aacd549d32073c80eb243aeea08/session83574終端777638 genuine0・29metadata＋普通四。485二side typedGuardCurrentHostPG17098Overlay/486inventoryhashのみ、481/484/943凍結・1065差/旧全scope受入費用保持。
+
+前3327点検/2194閉鎖はc55ec102328769b608e6022fbb937885aca70273/exact17085-630cf113/8files、c525cd genuine0→push7369終端e5b425 genuine0保存。次候補MorningStopPass10/CleanupUnitCycle4/InspectorUnitCycle4/PostgresObservationRows1は全本文/実calleeの残確認が必要で現在未実行、部分抽出せず具体独立wholeだけ通常PTへ。Parent/VM/DB/鍵/permit/cohort等HOLDは不変更・小群/commit/PMO待ち停止0。
