@@ -1,0 +1,13 @@
+# G13・現Production物理scope差分診断 結果
+
+2026-10-31／PG-D967／3025対応。群3367（元0.5/2/5共有pp cap10）、HEADf55a72c458626bbdaeebe9bfcc4c39a3103dc15a/push84090真正0。Production6b53/normal14216不変更。
+
+PG15848 manifest c3dc199b0393b4aeccd21ec4dc5bacca23e596b8b55f4dd2977af32d985f1468・entrye607629544604709d38b147054e7f67dbfddff77e969681bd279383d8d33f586、真正0。元941 logical/旧e7d候補943の集合・hashは当固定Gitと一致。現Productionは1065、現追跡src集合と全ファイルbyteがProduction Gitに一致。追加122（Java114/monitoring配備8）、削除0、共通943中byte変更24。この不一致が既存whole auditの厳格scope HOLDを説明する。新sourceへ旧4222 whole・native・正式認定を再束縛しない。
+
+全追加一覧 added-public-artifacts.json SHA256 555780780ba0e2ed803decd0a9b278f4d51efa6bf9a4683a68272a9d241d95f1。共通変更一覧 changed-common-artifacts.json c82fa36056d551f38fb5e375d808f98f874943610909228e88709dafe63cbb63。担当候補は既存明示ruleによるC07八/P01805一(ApiStopBudget)/P01809百十三、UNKNOWN追加0。これは候補の担当照合であり新規工程受入・費用追加ではない。baseline owner優先、cost再割当0。旧current候補には現在追加が存在しないため、追加を旧全体証跡でcoverしたとは扱わない。
+
+PG15850 manifest51e3358248219830256033c712189b9a479e63c31353f77322eb825fda79816b・entryc4475e486e8bad3fffc823c0bc4a8de55e695c1950a8597cde1d54ab979d5ce6、真正0。独立set/全追加sha/共通変更sha/担当literalを照合し17反例を拒否。485/486/941/943/481/484・全旧成功失敗/費用・受入を不変更。whole auditを確認目的で再実行せず、guard変更/除外/自動candidate source置換0。
+
+後続：既943との差だけを明示した現1065 descriptorと全RD/UI/SS/Test/設定join、現在sourceの未受入品質（Graph/外部HOLDを含む）を閉じてから正式current candidateの版更新とwhole auditを行う。今回のstatic差分診断をその代替資格にはしない。既存host2043/271・458Source、四247/360・自然174/189・未達31/60、正式1964/53/歴史17/190/工数null/QA051finalは不変。
+
+Product/旧native/VM/DB/key/Root/保留fixture/外部操作0、二heldmetadata前除外。初回metricsの誤leaf G13-07はwriterがappend前拒否、正規実leaf G13.07で3367を一度起票、費用二重加算0。新BUG/プラットフォーム拒否0。共有used48/rem52、N/T・専有費null。次は現registry未登録の許可された元whole PTへ進み、この同一差分診断は反復しない。

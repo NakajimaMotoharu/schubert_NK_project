@@ -1,5 +1,7 @@
 # PGPT成果物一覧・進捗
 
+2026-10-31追加：3025～26/PG-D967、G13旧候補943と現Production/追跡1065の全byte・scope差を具体化。追加122(Java114/配備8)・削除0・共通変更24、既存明示担当候補C078/P018051/P01809113・独立17反例真正0。旧whole/current資格転用0、whole guard/正本WBS不変更、正式/工数/HOLD不変。
+
 2026-10-31追加：3023～3024/PG-D966、固定公開五producer manifest→十execのhash/source参照を照合、公開consumer/dispatcher二sourceを生成元と誤認しない独立22反例成功。生成設定根拠は未確認、binary閉鎖0/22・残4493/実秘密null/HOLD保持、Product再演/受入加算0。
 
 2026-10-31追加：3021～3022/PG-D965、G07固定公開exec十件/155226byteを独立Python/公式JaCoCo readerで形式相互照合。工具正常5/異常14/API型4・独立31反例、値/単体hash保存・Product classload/実行0。2087 class-data record/175220probe bitsは歴史metadata集計でPT/coverageへ加算0。session/class由来未証明・binary closed0/22、残4493/実秘密null/全G07-HOLD維持、新BUG0。
