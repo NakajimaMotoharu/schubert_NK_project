@@ -1,5 +1,7 @@
 # PGPT成果物一覧・進捗
 
+2026-11-01追加：3286～88/PG-D1054、CaddyReadiness原20/1FES0・一Source四physical未達98L11M1C38B保持/独立56十oracle。現2454/347・528843/四282426不変・partial57213、registry34＋二profile/WBS29＋四真正0。BUG2190着手記録の非leafと遅延captureを明示/原20再演0、実TLS/Unit/Root/新WBS/正式/工数null/HOLD加点0。
+
 2026-11-01追加：3283～85/PG-D1053、Parent6/Inspector3/FixedCaddy3原十二/三FES0・全三既Source十七physical未達288L69M5C225B保持/独立54十二oracle。現2434/346、Source527839/四282426不変・元proof非合成/非置換のscope-only追加、registry34＋三/WBS29＋四真正0。実OS/NSS/Root/新WBS/正式/工数null/HOLD加点0。
 
 2026-11-01追加：3280～82/PG-D1052、ChildBroker5/Caddy2原七/二FES0・全二Source十二physical未達270L62M5C188B保持/独立54七oracle。現2422/343・527839/四282426不変、registry34＋chain二/profile三/WBS29＋四真正0。BUG2188/YKT1935は工具独立再構成旧件数をXML導出へ是正、原PT再演0。実Unit/proc/getent/新WBS/正式/工数null/HOLD加点0。
