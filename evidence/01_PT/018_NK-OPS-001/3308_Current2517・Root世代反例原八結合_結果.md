@@ -1,0 +1,9 @@
+# Current2517・Root世代反例原八 結合結果
+
+2026-11-01、3306/07/PG-D1060。PG16980 registryb40926fc863ff327d1d4eefc1683d5240bf9256ec098dd46c49db94b31a5f68f/4d14e2 genuine0→PG16982独立b3b335b2376f7997d995e310207dd743bb7f7ac3642edd527530ce77085c0103/session58393終端759854 genuine0・全34/三profile。元XML/catalogの八/一Testpathを照合、既Root全Source/proof/counter/NoCode/費用/受入保持、scope参照だけ追加。
+
+固有2509→2517/suite359→360、普通2490→2498/5786残3288/quality19別、resource67内数/非resource2450。172元JUnit JVM2649=2517＋132必要repeat・joint48不変。Main529850=732Code118zero（NoCode111/compiler6/official1）、四282426/自然183198/NoCode6-6/partial58220不変・owner462baseline231候補240UNKNOWN。正式1964/53/歴史17/190/工数null/QA051final/HOLD加点0。
+
+PG16984 WBS7da37195ef2908704d85d0a695f04a112f07ccfea45e3b6efe3cef29d5237237/9e9720 genuine0→PG16986独立961ece6bc702e34a28190479dcbcaec3ccb7b2ea3920311501d8fc8e1373dde7/session68791終端0cd247 genuine0・29＋ordinary四。485二side typedGuardCurrentHostPG16984Overlay/486inventoryhashのみ、481/484/943凍結/現1065差/G13HOLD/全旧費用受入を保持。
+
+前停止13は6e6c4b9f19bf91fe9ecbfa46865d6708f5673a93/exact16972-572a1933/29files、push11238終端ccf92f genuine0に保存。次MorningServiceReadinessTest whole8は全Test/全Main/元RootFixture/FixedIdentity.Valueを読了、注入Ioと固定HTTP/status/command/socket tableだけ・default create不呼出。compiler enum mapはCode有/official zero-counterをgenuineNoCodeと分離、NativeIo/実HTTP/procは未実行の全分母へ保持する。原whole同source未参照/新Sourceを次着手時に固定し、実NativeTest3やRootTest22を混ぜない。

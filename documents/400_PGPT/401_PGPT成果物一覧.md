@@ -1,5 +1,7 @@
 # PGPT成果物一覧・進捗
 
+2026-11-01追加：3306～08/PG-D1060、Root世代反例原8/1FES0→全既Source八physical未達106L38M2C60B保持・独立58/八oracle→現2517/360。scope-only registry34/三profile・WBS29/四真正0、Main529850/四282426・正式工数null/HOLD不変更。実OS/Rootauthority加点0。
+
 2026-11-01追加：3303～05/PG-D1059、停止client原13/1FES0→全三既Source18physical未達240L56M2C171B・独立60/十三oracle→現2509/359。scope-only registry34/三profile・WBS29/四真正0、Main529850/四282426・正式工数null/HOLD不変更。実Unit stop0・自己true子一/monitor一明示・既Policy7再演0。
 
 2026-11-01追加：3300～02/PG-D1058、Root memory原三/三FES0→全既一Source八physical未達122L40M1C98B保持・独立58三oracle。現2496/358/529850/四282426不変、registry34/三profile・WBS29/四真正0。新WBS/正式受入/工数加点0・全actualHOLD保持。
