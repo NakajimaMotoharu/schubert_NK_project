@@ -1,5 +1,7 @@
 # PGPT成果物一覧・進捗
 
+2026-10-31追加：3048～49/PG-D974、固定五保存schemaの全row/hashを現rawへ照合、独立23・追加279参照/合計562/選択未参照929。元1491raw・283参照/旧失敗・費用保持、新規review/PT/適用性合格には加算0。次は全Mainのclass/method分母・明示TestIDの静的整理を優先する。
+
 2026-10-31追加：3046～47/PG-D973、保存解析から現全965Main/1491rawを11累積変更込みで構成、選択67review入力283厳密参照/1208当選択未参照、独立24。BUG2152/53の仮説/schema誤りを先行起票し旧工具失敗保持・新版有限是正。raw/参照数をF03合格・PT免除へ転用せず、正式/工数/HOLD不変更。
 
 2026-10-31追加：3044～45/PG-D972、G13現source全1065の未認定静的descriptor（Java969=製造965＋Characterization4、deployment35/resource61）。旧943lineage/追加122/共通変更24を全path-byteで結合・独立31＋binding6。485へ別UNQUALIFIED field、旧資格/費用/受入は保持・新正式/leaf0。厳密method-TestID traceは未検証、whole G13/HOLD不変更。
