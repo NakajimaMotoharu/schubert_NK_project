@@ -1,5 +1,7 @@
 # PGPT成果物一覧・進捗
 
+2026-10-31追加：3110～13/PG-D998、原公開Caddy設定whole3/1成功・全一SourceはL24/133・B22/100未達保持、旧資格は維持/exec合算0。独立25＋5＋2/registry34/WBS29＋4、current2136/286・普通2119/5786/fixture17別。BUG2162/YKT1909 raw invocation階層仮定を有限是正・元3PT再演0、全正式/HOLD不変更。
+
 2026-10-31追加：3108/09/PG-D997、旧空catch十五中同Source/全attrsの十・七Sourceを参照接続、独立26真正0。参照917＋用途116=1033/1491・残458、二NativeIo Source不一致を除外。旧design歴史・新manual/PT/実loop/適用性認定0、全正式/HOLD維持。
 
 2026-10-31追加：3106/07/PG-D996、旧鍵label/null/資源/slot理由9を六Source同byte・原診断row/専用schemaへ接続、16150独立26真正0。参照907＋用途116=1023/1491・残468、新manual/PT0。旧欠落field補造・鍵/codec実行・G07資格推測0、全正式/HOLD維持。
