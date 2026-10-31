@@ -1,5 +1,7 @@
 # PGPT成果物一覧・進捗
 
+2026-11-01追加：3331～33/PG-D1068、原stop-pass/行境界11/2FES0→二Source九physical未達283L22M3C107B/独立58十一oracle→現2586/373・Main537886/四284428不変。新Stop一partial/既Gate保持、registry34/二chain二profile・WBS29/四真正0。実Unit/DB等0・Cleanup/Inspector/BackupVerification wholeは実native依存HOLD/部分抽出0、正式工数null不変更。
+
 2026-11-01追加：3328～30/PG-D1067、原cycle/query11/2FES0→二既Source16physical未達153L33M1C39B/独立60十一oracle→現2575/371。scope-only registry34/三profile・WBS29/四真正0、全旧Main/counter/proof非置換・新Source/四100加算0。fake Java Process/自己virtual drain/Java時計と実native/Unitを区別・正式工数null/HOLD不変更。
 
 2026-11-01追加：3327共有65→70点検、+194固有method/+15Source/+3四100Sourceを新WBS/正式/実経路閉鎖0と区別。実PGPT費/token/工数率null・原/v3v4v5見積固定、同系whole束ね/arity事前確認へ是正し継続。BUG2194/YKT1941は04e02a0df/pushc14dc7の実保存後有限閉鎖、旧失敗/原17保全。

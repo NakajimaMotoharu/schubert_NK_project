@@ -1,0 +1,11 @@
+# Stop pass/Postgres rows原十一 実行結果
+
+2026-11-01、3331/PG-D1068、Production6b53/normal14216未配備・不変更。17103 review98d54d5bb68375856afa0f971d5a4f9ec829e0146103f0ae1ff1e7bc22d85d12→17104 raw9bc8c7cadfc8d8d88fdd0be484b75222683f58b92e5ce996a16ac0a8a5823d27/session94458終端08057e genuine0（entry03eac9ca・原11/2 F/E/S0/rerun0）。元Test/XML/exec/normal/environmentのpinはmanifest参照。
+
+17106 post9100afdb99d43b8d3359a8840c30fc981f9aa0d14ad78c771b4a4854ebe96b77/session39137終端80edfd genuine0：全二Source九physical/5Code4NoCode、Lcovered164 missed283/M14/22/C2/3/B45/107・strictFour100GateExit1保持。StopPass全八はL34/25 M6/12 C1/3 B11/3、GateEvidence全一はL130/258 M8/10 C1/0 B34/104。Stopの匿名三classは全Code/allmiss、既Gateの広い別proofへcounter合成/置換しない。
+
+17108 independent6bf1d01f84ad5562699bdcaf1fc072cd820a700f2cc612e56b988aaf9c7ac6d3/bbd5ec genuine0・58型付き反例/11独立oracle、SS341342343 origin/main byte一致・元11normal宣言/XML一致。RootFixture memory outerとNativeIo三を区別し、四held六native/RootFailed五/BackupCycle23/inactive七/未選択helper二無recordを当execに束縛。原helper全体22は選択しない。
+
+所有singleThreadExecutor二つ/各task一つ、Java sleep/nanoTime/currentThread interrupt/finally clearとfake Stop/Attempt/Terminalsだけ、実Unit stop/OS child/Root/VM/DB/SQL/JMS/鍵/permit/cohort/原本操作0。Rowsは公開record/固定Epochの1000/1001行・rank gap/元snapshot不変の独立byte期待値。crypto/digest計算/公開goldenfile読取0を実態に合わせて宣言（他群のSHAは転記しない）。SourceTestSS/期待変更/新BUG/成功再演0。
+
+併せてCleanupUnitCycleTest4/InspectorUnitCycleTest4はMorningParentBudget.create→LinuxMonotonicClock.createの実calleeを確認しwholeHOLD。UnsupportedBackupVerificationTest1も元BackupDatabaseWorkerTest.Fixtureの115～119でLinuxDirectoryCalls.create実委譲を確認しwholeHOLD・未実行/部分抽出0。MainTerminationPortTest8はMorningProcessMainのbudget.create依存を確認中で未実行。安全分類を新しいプラットフォーム拒否発生とは記録しない。共有used70同整数を専有費0にせず、N/Tallocatednull/全品質・正式・HOLD維持。
