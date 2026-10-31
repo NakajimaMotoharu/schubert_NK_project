@@ -1,0 +1,10 @@
+# Current2226・Batch列挙全Source結合結果
+
+3201～03/PG-D1029、Production6b53不変更。PG16482 SHA71620afa247589ff1dc183dc822d7d0ab562eac1f47794b540a44cc37fcfa8f1/26fb91真正0→PG16484 SHA200c86a94628ca2df6a749a95b33b811f9b48fbb866b78d44135f6064c283e19/adde14独立34真正0。
+
+固有JUnit2224→2226/305→307suite、普通2205→2207/5786参照・未参照3579、quality19別/resource39内数。原Exec141＋追加資格1=142JVM、2358method=2226＋必要repeat132。Source493→496/physical725→746=671executable＋75zero-counter。四100は266Source/392physical=377Code＋15zero-counterで不変、自然branch0三100は178→179Source/193→194physical、NoCode-only6/6不変、未達43→45Source/134→154physical。未達増は新たに分母へ含めた未実行外側で、既成功の破壊や合格偽装ではない。全五old Source/metadata/history/case/cost保持、old coverage union0。
+
+Owner418baseline/230候補未受入/187UNKNOWN。新Main3は既canonical参照、Test2はUNKNOWN（1922/1924にchange責任があってもcanonical認定とはしない）。PG16486 WBS SHAacf437ab536d71780871b9a7b7d7dbca505c26ef8dd5872ed790997cd0958ea3/f76097→PG16488 SHAb90d8d4076c8edd5a13ed7b3b96c6cec05f562b4f2d87dbf0e1184ea83ef8a97/session28055終端9f39d3全29＋普通四真正0。485両side新pointer/486hashだけ、全受入・481/484・元費用不変更、G13全体HOLDを保持。
+
+開始1/3/6pp cap10は固定、開始/現共有used61同integerでも費用0とは扱わない。専有費/N/T/工数率null、acceptedDelta0/正式1964/53・歴史17/190・QA051final不変。BUG2178/YKT1925は元不実行を保持し再発防止済・実commit後有限閉鎖。通常区切りでは停止せず、未参照wholeの独立性を確認し次の許可済みPG/PTへ継続。
+

@@ -1,0 +1,8 @@
+# Current2226・Batch列挙全Source結合仕様
+
+3201/3202の原whole2と全8Source測定を、既current2224/16466・独立16468へ追加する。新規case完全修飾名二件の非重複、元二XML、current普通宣言15950との一致を必須とする。resource39は固有JUnitの内数、quality19と別、JavaScript/Node30はJavaへ加算しない。
+
+新全SourceはApplicationUnit一physical/RootStartupContext八/BackupUnitStartClient十二=3Source21physical（13Code8NoCode）。Root/Backupの未実行外側をpartialとし、既測定五Sourceと全歴史proof/counter/owner/costを保持、exec union0。原Postの測定28physicalから新21だけを加え、残七の重複加算0。branch0三100一Sourceを自然0として加え四100は増やさない。
+
+16482writer/16484独立34負例でold全objectと新差分・五owner（Main3/Test2）を照合する。485両sideはtypedGuardCurrentHostPG16486Overlayだけ追加、486inventoryhashだけ更新、481/484/既受入/全旧costをbyte保持、G13凍結943/現1065範囲未資格HOLDを維持する。WBS independentは29＋普通宣言四反例を要求。新個別受入0/正式0/工数null。
+
