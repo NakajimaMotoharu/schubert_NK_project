@@ -1,5 +1,7 @@
 # PGPT成果物一覧・進捗
 
+2026-11-01追加：3241～42/PG-D1039、補助effect有限八は追加訂正2/既訂正1/非該当5、独立metadata42・registry34＋三/WBS29＋四真正0。旧post/全case/counter/history保全、原PT再演/新試験/正式加点0・YKT1931保存後有限閉鎖。
+
 2026-11-01追加：3237～40/PG-D1038、原Morning memory-port33/6FES0・全4Source13physical（Code7/NoCode6）、四二/自然一/parent未達保持。独立41/六・RootFailed五不在/注入cycle23別監査、現2315/321・510Source774physical/四275407、registry34＋二/開示訂正34＋三/WBS29＋四真正0。工具2183差分生成是正・補助UUID2184当target訂正/横展開残、実Root/正式/工数null/HOLD加点0。
 
 2026-11-01追加：3233～36/PG-D1037、原ApplicationServiceUnit五/一FES0・公開四copy/自己syntax parserのみ、全1843Main無record/二Test CRC一致・Maincoverage N/A。現2282/315/resource44内数、Main506/761・四273404不変。BUG2181/2182旧失敗保全/新版20反例・registry34/WBS29＋四真正0、実Unit/正式/工数null/HOLD加点0。
