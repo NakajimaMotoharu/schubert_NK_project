@@ -1,5 +1,7 @@
 # PGPT成果物一覧・進捗
 
+2026-11-01追加：3327共有65→70点検、+194固有method/+15Source/+3四100Sourceを新WBS/正式/実経路閉鎖0と区別。実PGPT費/token/工数率null・原/v3v4v5見積固定、同系whole束ね/arity事前確認へ是正し継続。BUG2194/YKT1941は04e02a0df/pushc14dc7の実保存後有限閉鎖、旧失敗/原17保全。
+
 2026-11-01追加：3324～26/PG-D1066、原gate/stop/unit17/4FES0→全三Source八physical未達121L8M0C62B保持/独立57十七oracle→現2564/369・Main536878/四284428不変。BUG2194二Sourceのpartial個数転記を修正前起票→新17079/有限17073是正・旧失敗/原17保全、registry34/二chain二profile・WBS29/四真正0。実DB/JMS/Root等0・正式工数null/HOLD加点0。
 
 2026-11-01追加：3321～23/PG-D1065、NoPrior原8/1FES0→全二Source15physical未達106L25M1C50B・独立55/八oracle→現2547/365・Main534873/四284428不変。新Cycle partial一/既Previous proof保持、registry34/二chain二profile・WBS29/四真正0。memory Root/namespaceと実nativeを分離・正式工数null/HOLD加点0。
