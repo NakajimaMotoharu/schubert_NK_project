@@ -1,0 +1,11 @@
+# Current2350・TerminalStop結合結果
+
+3249～50/PG-D1042。16686 SHA15e805c911a7c73dae491adb1c8f00cae23c9de3985dcc541db75e87471026c3/fff83e→16688 SHA2bdacd52e7d87d529fdd4fcb7309be80f87bbaeb472f9b8d674433c050463fca/session66152終端8b780d全34＋二真正0。XML実11/3・三閉じたSource名/全十四physical/九interface・WebStop四達成一/二physical・partial二を集合から導出し、全旧case/counter/history/費用/開示訂正保持。
+
+現固有2350/329（前2339/326から+11/+3）、resource44内数/非resource2306、普通2331/5786参照/3455未参照/quality19。154JUnit JVM2482=2350＋132repeat。Main518Source804physical=702Code＋102zero-counter、四279Source418physical=394Code＋24zero・自然183198/NoCode6/6/partial50Source182physical。owner442baseline230候補210UNKNOWN、canonicalを作業ownerから捏造0。
+
+16690 SHAd2dced753fda1e23bfc3a522de65582b4793e433481bf6d9660f17418c34c473/531c0c→16692 SHA7c5a04bcb231ea8a242779e272e3fb993b89a887837dcdb913975f68d6d43402/session24253終端1ba528全29＋普通四真正0。485二side/486hashのみ・全旧scope/費用/受入/原943・現1065/G13全体HOLD保持。Source6b53/normal14216/静的14224六module0不変更・未配備、正式1964/53・歴史17/190・工数null/QA051final/G07/F03全体/451/全actualHOLD不変。技術増分を正式又は工数完成率にしない。
+
+開始1/3/6共有pp cap10・開始/終了used64/reset1793774153の整数同値は専有費0でない。N/T/allocated費null、usage02:35:56 cursor d7ad992d808c6c8c8a2b50fdecbfec1684d268c05f91689b72ea3bfe3540ea24/不完全/次03:35、欠測補填0。旧静的review入力再認証・現source限定技術資格・元計画消化を分け、旧Source原成功を二度加算0。
+
+先行16は実保存cf106d40566e4fc0d77efc77a0576b45adde39d3/exactb734fb/push47522終端393fb0真正0。次は2555 MaintenanceParentGuard原六と2573 ContextHash原三の既後続/現参照有無から未参照wholeを選び、全byte/callee/副作用の独立性成立後だけ通常PTへ。既受入/成功の確認再演・保留whole抽出/新fixture迂回0。通常小群/commit/PMO待ち停止0・fresh残10以下又は取得不能保全。
