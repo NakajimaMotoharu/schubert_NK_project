@@ -1,5 +1,7 @@
 # PGPT成果物一覧・進捗
 
+2026-11-01追加：3295～99/PG-D1057、原起動client17/1FES0→全三Source27physicalの全未達保持・独立60/17oracle→現2493/355。Main529850/四282426不変、既二proof非置換・新一partial追加、registry34/WBS29＋四真正0。六群十一eventの正式見積field/計測leaf追記訂正・独立照合、元費用/時刻/受入不変更。実Unit/VM/Root/HOLD/正式/工数加点0。
+
 2026-11-01追加：3292～94/PG-D1056、memory CaddyFence/unsupportedMarker/readyRetirement原8/3FES0→全一既Source十二physical未達171L48M3C51B保持・独立54八oracle・元未使用helper二無record。現2476/354・Main528843/四282426不変、scope-only registry34＋三/WBS29＋四真正0。実start/intent退役/新WBS/正式/工数null/HOLD加点0。
 
 2026-11-01追加：3289～91/PG-D1055、公開Unit四whole原14/4FES0→post22/十四oracle・全1843Main無record/四TestCRC→独立45/有限resource domain確認、現2468/351・resource67内数/Main528843/四282426不変。registry34/WBS29＋四真正0、BUG2190の別tool発行実証/BUG2191の非退化file field是正・旧工具失敗保持/原14再演0。実Unit/credential/新WBS/正式/工数null/HOLD加点0。
