@@ -1,5 +1,7 @@
 # PGPT成果物一覧・進捗
 
+2026-11-01追加：3340～41/PG-D1071、Storage静的raw18行のglobalID/局所XMLidentity2/保存レビュー接続と独立23反例。purpose/reference706→724/残785→767、dup4保持・個体対応推測0。製品PT/解析再演0、2606/377・四284428・正式1964/53不変、F03未受入/工数null/HOLD維持。
+
 2026-11-01追加：3337～39/PG-D1070、原RootScope/Cleanup値7/2FES0→二Source六physical未達160L21M1C32B/独立64七oracle→現2606/377・Main541918/四284428不変。新二partial/全旧proof保持、registry34/二chain二profile・WBS29/四真正0。fakeM/receiptと実所有を区別・正式工数null/HOLD維持。PMD18は既Storage二Sourceの提案根拠でqualityGate1/global join未完と再確認・昇格0。
 
 2026-11-01追加：3334～36/PG-D1069、原Original/default13/2FES0→二Source26physical未達187L49M6C23B/独立62十三oracle→現2599/375・Main539912/四284428不変。新二partial/default有CodeとNoCode14分離、registry34/二chain二profile・WBS29/四真正0。fake publication/stateだけで真正DONE認定0・実Root等HOLD/正式工数null維持。
