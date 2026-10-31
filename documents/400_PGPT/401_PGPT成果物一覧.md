@@ -1,5 +1,7 @@
 # PGPT成果物一覧・進捗
 
+2026-10-31追加：3176/77/PG-D1022、JLS25変換ゼロ限定span工具をmetadata正常七/拒否二十・byte三/座標八・独立十五で確認。三Source各ineligible marker二/eligible零・原XML22型位置一致、semantic用途加点0/queue残32不変。製品/拒否PT/coverage/正式受入に換算0・全HOLD保持。
+
 2026-10-31追加：3174/75/PG-D1021、Batch四Main1511行/18warning9catchを現13505/34 XML・候補Source SHA/全attrsへ結合、Source十二/独立26＋byte四。参照1171＋用途288=1459/1491・残32。FD論理消費/実解放・失敗buffer wipe・不確定publication保持を区別、実PT/正式加点0・全HOLD保持。
 
 2026-10-31追加：3172/73/PG-D1020、保守JDBC全三Main1077行/19warning11catch/Source九/独立27＋byte四。原XML/全Source/三承認SS・依存順位helperを結合し、read typed finallyとusingJdbc既TWR契約を分離。参照1171＋用途270=1441/1491・残50、Product/PT/正式加点0・全HOLD保持。
