@@ -1,0 +1,9 @@
+# JMS例外境界 三Source二十site 用途確認結果
+
+2026-10-31/3162/PG-D1015/WBS-F03、原群0.5/2/5共有pp凍結・Production6b53/normal14216/Main/Test不変更。16345/e032b68f/entry74125f真正0、manifest516fd56986dae16a471bebbec54e7f0cc2e6a94b8196a8578728a0456202991a。16346/de4b79a5/entrye52531真正0、manifest9d67e4ee28a6ff2211be179d8382830617d559a2254baae7d204083345da7814、独立26＋UTF8 byte四反例、原Source guard九反例/UTF8前置二正例。各command/source/全三Main SHA/原13253manifest・findings・XML/全attrs・診断/byte/用途・risk・残queueは公開provisional各manifest/purposes.jsonへ固定。
+
+二十はwarning row（RuntimeException/Exception/Errorそれぞれ、union catch同句の別row）で、実catch clause十二。API constructorは捕捉済ownerを逆順closeし失敗secondaryを保存・observer通知/非self suppression等へ進むが、UNKNOWN observerがcatch内部で非帰還なら後続unwind停止があり得る。API closeは未完ownerの全試行後にobserver/再throw判断、成功ownerだけflagを立てる。API/Web openはsupplier/createContext失敗をdeclared fatal check経由で固定redacted失敗にし、借用charをfinally wipeするがimmutable String/provider物理消去は保証しない。Web/provider setup失敗は所有close後にsecondary Error優先/attachment、Web close失敗はclosedにしない。Graph関数の内部/実帰還/循環/実providerやretention期限は未実証・HOLDのまま。
+
+旧16344/3a1ad9/b66ac0f0は正当§コメントを含むSourceへの全文ASCII仮定でbody1/OUT前・Product0。BUG2172/YKT1919先行後に旧byte/失敗を保全、新16345は元helperの文字offsetをUTF8 prefix byte長へ明示変換し全三Source20sliceを保持。16346は原XML/行連結から独立byte再構成・文字offset誤用/端点±/誤basis四を拒否。§と注釈の二microfixtureは合成文字列だけ、元helper不変更、旧16291は既prefix encodeでbyte換算するため根拠付き非該当（671e49）・元成功再演0。
+
+参照1171＋限定用途148=1319/1491・残172（RootFailedStartRecovery十HOLDを含み当Source内容は未読）。新manual二十は当rowへの用途結合でfirst-ever理由数は不明null、PT/新機能/受入へ加点0。実Product/JMS/credential/Graph/Root/VM/DB/native/鍵/close/permit/権限操作0、raw抑制0・actualViolationCount null/PT免除false。技術2174/296・四262/383/正式1964-53/歴史17-190/工数null/QA051final/G07/G13/451/全HOLD保持。fresh20:17used58/rem42/reset1793774153/短期null/券0、専有N/T/actual費null、usage19:40:25cursor854411c50af5754d6bb9cc6c89b275ec65662eff6e0c41f7d7b8a14abc9b90dc/次20:40・欠測補填0。
