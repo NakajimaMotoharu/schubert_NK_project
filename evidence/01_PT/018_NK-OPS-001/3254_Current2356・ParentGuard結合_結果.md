@@ -1,0 +1,11 @@
+# Current2356・ParentGuard結合結果
+
+3252～53/PG-D1043。16702 SHAd5ad11a6daba111c78e448263e4990304e2868f938b9feabee9e82c638fb7893/1db42c→16704 SHAb5978213521890e5bc546fbfe726337881eeb310421ac9e0b5ddbca59b824ef3/259bcc全34＋二真正0。XML実6/1・閉じたSource一/全五physical/二interface・四0/自然0/partial1から差分導出し、全既case/counter/history/費用/開示訂正/既Guard補助証拠を保持。以前の別Source補助scopeを全Frame証拠へ合成0。
+
+現固有2356/330（前2350/329から+6/+1）、resource44内数/非resource2312、普通2337/5786参照/3449未参照/quality19。155JUnit JVM2488=2356＋132repeat。Main519Source809physical=705Code＋104zero-counter、四279Source418physical=394Code＋24zero不変・自然183198/NoCode6/6/partial51Source187physical。owner443baseline230候補211UNKNOWN、未割当を作業ownerから補完しない。
+
+16706 SHAe2b50f1b0df8554db60a25253eaa1dba58f9c120914c03759acc8878dc74c74d/bdbbd2→16708 SHAc5d59a6654bf45d87ea7efdd1e41ceca9786fa1cf065de12d45d8c904870a030/session9031終端2501c1全29＋普通四真正0。485二side/486hashのみ、全旧scope/費用/受入/原943・現1065/G13全体HOLD保持。Source6b53/normal14216/六静的14224不変更・未配備、正式1964/53・歴史17/190・工数null・QA051final/G07/F03全体/451/全HOLD不変。
+
+開始0.5/2/4共有pp cap10/開始終了used64同reset1793774153の整数同値≠専有費0、N/Tallocated費null。usage02:35:56 cursor d7ad992d808c6c8c8a2b50fdecbfec1684d268c05f91689b72ea3bfe3540ea24/不完全・次03:35欠測補填0。旧静的review再認証と現sourceの限定6資格は区別し、元計画の二重加算0。先行11は実保存093996030544a336305a6c0449bf4985c26f2e12/exacta94311/push97195終端3df2ef真正0。
+
+次は現ordinary未参照SupplementaryUnitTemplateTest原whole5。後続索引2355/2349で公開template-only確認、全Test後半・四resource・唯一classpathと実directive非実行を確認してから通常PTへ。既ContextHash3は完了済のため再演0、他のDB/native/Graph等候補は名前だけ許可せずHOLD維持。通常小群/commit/PMO待ち停止0・fresh残10以下又は取得不能保全。
