@@ -1,0 +1,5 @@
+# Current2236・WebTrace全Source結合仕様
+
+3205/06の原whole10をcurrent2226へ追加し、原XML/普通宣言15950の完全method集合との一致を要求する。新Trace（Scope含む）/Interceptor/MVC三Source四physicalを追加、既Contextのpartial一Sourceを当全Source単一exec proofへ更新する。旧pointerのcounter/exec/session/proofをqualificationReplacedUnitHistoryへ保存し、旧全case/history/owner/cost/NoCode/resource/JS/Node領域を保持、exec union0。適用branch無しMVCは自然0三100だけ。
+
+16498 writer/16501独立34で全old/new metadataを別再構築。16500の説明flag誤記はBUG2179、pinned新版16501を用い、previousSourceProofsNotReplaced=False/既Context pointer置換True/旧証拠保全Trueを明示する。485両sideはtypedGuardCurrentHostPG16502Overlayだけ追加、486inventoryhashだけ更新し481/484/旧受入と費用/G13凍結scopeを保持する。16504は通常29＋普通四に加えpointer説明二反例を要求する。正式1964/53/歴史17/190/QA051final/工数null/HOLDは不変更。

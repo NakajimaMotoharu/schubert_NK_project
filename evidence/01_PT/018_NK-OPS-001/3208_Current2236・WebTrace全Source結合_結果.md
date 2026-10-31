@@ -1,0 +1,9 @@
+# Current2236・WebTrace全Source結合結果
+
+3205～07/PG-D1030。16498 SHA22e410c2d964d99e5a0932286bcebc400490368362f13e82689f1747d8887e1f/23f3e8真正0。16500の元34check/全metadataは正しいが説明flagだけBUG2179/YKT1926、旧0ccab64eを凍結し新16501 SHA795dd5da9f7b6c41693407cc6a1c8c4dbe58744fb3bf91f549889b34982b7bcd/session14088終端613231全34真正0へ束縛。旧Context pointerはhistory、現pointerは123L等を含む当全Source証拠へ更新、旧原proofのbyte変更/消去0。
+
+固有JUnit2226→2236/307→308suite、普通2207→2217/5786参照・未参照3569/quality19・resource39内数。143JVM/2368method=2236＋132必要repeat。Main496→499Source/746→750physical=675executable＋75zero-counter。四100は266→269Source/392→396physical=381executable＋15zero-counter、自然branch0三100は179→180Source/194→195physical、NoCode-only6/6不変。Context旧partial閉鎖で未達45→44Source/154→153physical。新三Source/既partial一更新を区別し、費用/全受入へ二重加算0。
+
+owner421baseline/230候補未受入/188UNKNOWN。新Main3はcanonical基礎参照、Test1はUNKNOWNを保持（主change責任から推定0）。16502 WBS SHAce184fc5ec4383ef5e3abf262189cc45b2da2cec25dd4afeab75ffec24fb1560/64734e→16504 SHAd4a3c9afcb9a59f31686b2ce1eb90b4b1d113bd7249db08631d681cb4be186b3/session63998終端820569全29＋普通四＋説明二真正0。485両side/486hashのみ、481/484/旧scope/全旧owner・費用・受入不変更、G13凍結943/現1065の全体HOLD維持。
+
+開始1/3/6共有pp cap10固定、開始/現used61が同integerでも消費0とはしない。専有費/N/T/工数率null、newAccepted0・正式1964PT/53scope・歴史17/190/QA051final/451/F03全体/HOLD不変更。BUG2179/YKT1926は説明是正・全対象確認/再発防止済、実commit/push後有限閉鎖。次の通常許可済みPG/PTへ継続し、小群/commit/報告では停止しない。
