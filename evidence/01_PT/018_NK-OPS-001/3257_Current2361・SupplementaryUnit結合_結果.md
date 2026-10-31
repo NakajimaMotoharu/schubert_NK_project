@@ -1,0 +1,11 @@
+# Current2361・SupplementaryUnit結合結果
+
+3255～56/PG-D1044。16718 SHAffe55277fc876f69ec79556013e41aaaf8cdb08acc61877281eb310636212c52/cff280→16720 SHAf14967e9f2f99fe7480dfd3a9bb213badf44fa71335ca2dbe0a2a7c4a9c7781b/bc195f全34真正0。元XML実5/1、Test/四resourceのcanonical/candidate ownerだけ追加し、全既Main Source/counter/case/history/cost/開示訂正を保持。resource-only referenceへ当四template domainを結合し、実Unit受入を加算しない。
+
+現固有2361/331（前2356/330から+5/+1）、resource49内数/非resource2312不変、普通2342/5786参照/3444未参照/quality19。156JUnit JVM2493=2361＋132repeat。Main519Source809physical=705Code＋104zero・四279Source418physical=394＋24/自然183198/NoCode6/6/partial51187すべて不変。owner447baseline231候補211UNKNOWN、候補を正式割当としない。
+
+16722 SHAed560cf07d2d524dbc98b325bad9ca058c063511ddf878ea4f8a6a5c26b8e3df/d25fba→16724 SHAab3ff6f842d632f7d8754685c1ad49fd5e39c97507337c3eb3cf30556b4aa4a7/session29504終端f56969全29＋普通四真正0。485二side/486hashだけ・481484/全旧scope・受入・費用/原943・現1065/G13全体HOLD不変。Source6b53/normal14216未配備/六static14224を変更せず、正式1964/53・歴史17/190・工数null・QA051final/G07/F03全体/451/HOLD不変。
+
+開始0.5/1.5/3共有pp cap10・開始終了used64同reset1793774153、整数同値≠費用0・N/T/allocated費null。usage02:35:56 cursor d7ad992d808c6c8c8a2b50fdecbfec1684d268c05f91689b72ea3bfe3540ea24/不完全・次03:35欠測補填0。旧原13/旧source成果の二重加算0、resource試験とMain coverageを分離。先行Guard六は実保存c94feac02df76b62318718f7e7d0e39e1dea13b8/exact3d5877/push93410終端28c6c3真正0。
+
+次候補SchemaHistoryAdmissionTest9は全523行/Main SchemaHistoryAdmission/JdbcAdmissionFailures全読了。原Connection/Statement/ResultSetはhand Proxyだけでactual DBなし、close 64組合せは独立Winner表/元例外identity、JdbcAdmissionFailuresは固定副例外だけ・Graph9を呼ばない。自己八virtual taskはhost180秒で上限。現suite0/両Source未参照を確認したが、正式着手前には先行索引・module=bootstrap（package=apiに誤推定しない）/全byteと開始見積りを別凍結する。HOLD解除/実DB検証/保留whole抽出/新fixture迂回0、通常小群/commit/PMO待ち停止0。

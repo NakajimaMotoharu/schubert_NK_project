@@ -1,5 +1,7 @@
 # PGPT成果物一覧・進捗
 
+2026-11-01追加：3255～57/PG-D1044、SupplementaryUnitTemplate原whole5/1FES0・四public resource唯一定義/独立20＋42・五oracle/十二canary、Main1843無record/Test二CRC一致。現2361/331/resource49内数・Main519809/四279418不変、registry34/WBS29＋四真正0。実directive/credential target/Unit/正式/工数null/HOLD加点0。
+
 2026-11-01追加：3252～54/PG-D1043、MaintenanceParentGuard原whole6/1FES0、全一Source五physical/Guard default二Code未実行も全分母へ保持・未達68L11M1C53B・独立44/一oracle。現2356/330・519Source809physical/四279418不変、registry34＋二/WBS29＋四真正0。実parent/native/正式/工数null/HOLD加点0。
 
 2026-11-01追加：3249～51/PG-D1042、Api/WebTerminalCapture・WebStop原whole11/3FES0、全三Source14physical・Stop四100/Terminal二未達8L4M保持、独立48/三oracle。現2350/329・518Source804physical/四279418、registry34＋二/WBS29＋四真正0。実native capture/所有停止/正式/工数null/HOLD加点0。

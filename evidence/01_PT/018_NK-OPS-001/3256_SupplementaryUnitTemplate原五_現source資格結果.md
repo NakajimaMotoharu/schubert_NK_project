@@ -1,0 +1,11 @@
+# SupplementaryUnitTemplate原五・現source資格結果
+
+2026-11-01/3255/PG-D1044・Source6b53/HEADc94feac02df76b62318718f7e7d0e39e1dea13b8。原Test335行と公開四template128行を全読了。旧2355のSource2efcd/原13PTは歴史参照だけ、当sourceへ転用せず原whole5を一回実施。
+
+16712 SHA77d80b8fa7b515c3ae2b7993a26bf769aa7f0801e486c6dcf7067c4afd97db52、entry4db5a24b/session92799終端10a12a真正0・5/1FES0。新launcherは未変更whole5を選択するだけ。fixed JDK25.0.4/JUnit1.13.4/JaCoCo0.8.15/新javac-Werror/cleanENV、一JVM一session/appendfalse。全六Production Main jarと旧Test classesをCPから排除し、四resourceはfrozen14216/source6b53から自己classes/systemdへbyte同一コピー・前後唯一classpath定義を確認。ExecStart/LoadCredential/EnvironmentFileは文字列だけ、対象file/Unitへのアクセスやsystemd-analyzeを含む実directive実行0。実時刻/OS/tool/command/終了/input/Test/helper/resource/dependency/hash/XML/execはmanifest。
+
+16714 SHAda1df35232073867a24c00569710cb3644fc45c9ea5b0035bd465d42cbc6b67b/session19833終端f3a9dc真正0、20非退化metadata反例/五独立oracle group。元XML/全Source/copy/deps・session/summary FES-abort-container0・Main1843無record/trueprobe0・Testとnested Template二physical CRC一致。Main coverage N/A/null・四counter達成加点0。自己child以外の稼働process、VM/DB/Root/鍵/原本/Backup/ADMIN/Caddy/Unit/ネットワークへ操作0。
+
+16716 SHAb57abd64803ce7584e10b8828dce64f3775e1346aa065bb173c553d4379ad6f1/5e1a12真正0、独立42意味反例・四public path/copy/唯一CP・whole五固定ID/実XML・五oracle group/十二元mutation canaryを照合。期待はTest側の独立全directive map/順序/reset/上限/heap合計算術でProduction関数から生成0。null parser/未知directive/duplicate/任意option/自動enableと権限prefixを受け入れないoracle自身も反証する。実credential値・秘密keys読取0。
+
+元5再演/Source/Test/template/SS変更・新BUG0、resource検査を実Unit合成/実効identity/資源性能/credential運用又はIT/ST受入としない。正式1964/53・歴史17/190・工数null/QA051final/451/全HOLD不変。
