@@ -1,0 +1,7 @@
+# MorningPreviousBroker原四 実行結果
+
+2026-11-01、3315/PG-D1063、Production6b53/HEADc63e9e6ce、3584→3585・凍結1/3/6共有pp cap10/N/Tallocatednull。PG17021 review6f7edff13796bfecb6881b7aecda1fa2bf3e6a69210312676f5a36e40151ccdc→PG17022 rawb61f411e20683b05c028f73480d9d3dece4cc7ddc0028fca4e18e84e10d1f5f3/session95391終端cef1b5 genuine0、全原四/一suite F/E/S/aborted/not-run0。command=python3 -B tools/quality/pg11123_checked_python_entry.py tools/quality/pg17022_previous_broker_memory_journal_four_pt.py。JDK25.0.4/元JVM OS prefix・開始終了/command・全input/exec/XML hashは元manifest/stages固定。
+
+PG17024 passived3c879ff684a8ecaa64e1719d1838c3c708a98deb3fbca99db12cc57125e3a41/session50521終端027d39 genuine0、全二Source八physical=六Code二NoCode。新MorningPrevious L98covered90miss/M16-12/C2-1/B25-35、既BrokerJournal L144/46 M13/4 C3/0 B62/36、総L242/136 M29/16 C5/1 B87/71・strict四100=1未達。NoPrior未実行を全miss、Evidence abstract1537/Query1536をgenuineNoCodeと区別、既Journal資格へunion/置換0。
+
+PG17026独立5a0e3ead74957b48b7891cd878f277444150a7a4ad7d6826d53d3351c9814367/4f3375 genuine0、54反例/四literal oracle。固定四journal rows/boot/interval1234567～8/entry4/query5→6と独立JCA SHA、member順不変/初回raw不改変・内容drift拒否、native143のactual fixture intervalと冷却/historyの分離、live/foreign/malformed/missing/late/duplicate/anchor変更・unknown/null伝播を元Testで確認。publicDigestOnly=true/cryptoOrKeyOperationsInvoked=trueだが秘密鍵/provider変更なし、実journalctl/停止/Unit/Root/DBVM/原本回収退役0。四held六native/RootFailed五Cycle23inactive五無probe・元unused helper二無record、元helper@Test未選択。新BUG0・正式1964/53/工数null/HOLD不変更。
