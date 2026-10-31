@@ -1,0 +1,9 @@
+# Root memory世代・引数・欠落UID原三・現source資格仕様
+
+2026-11-01、PG-D1058予定、Production6b53/HEAD991081021、WBS-F03主/既P01803参照追加0。着手3574、低0.75/標準2/高4共有pp cap10、freshused68残32/reset1793774153、券使用課金0/N/Tallocatednull。元1924/1912/1507/UI251/SS343・SSC137164、ROOT2118/OPS-DATA-511002/ROOTIDENTITYPORT001に追跡。全三Test/fullRootStartupContext/元LaunchFixture/Fixture/staticdataを読了、元whole未参照・source/hashはnormal14216へ照合する。
+
+PT_DEFAULT：RootGenerationTruthTableの4tupleはfalse,false→false、false,true→false、true,false→IOException、true,true→trueと必ず二回statを元手書tableで検査。NoSuchFileExceptionはmemory callbackが投げるだけで実file読取0。DeadlineArgumentは全role/不正budget/nullで固定IOException/cause無し/suppressed0・Proxy全IO呼出0を期待。UnsupportedRootIdentityは原LaunchFixture固定dataを委譲するがserviceRootUid既定実装がIOExceptionを投げ、二度目Unit取得前に拒否・targetReads1/morningpid42。実UIDや権限を取得/変更しない。期待をProductionから生成せず元Test変更0。
+
+RootStartupContextTest全classをfresh compileするがhelper Fixture/LaunchFixture/bytes/stat/unitだけ利用、同classの@Testを実行しない。全calleeは注入IO/通常collection/ASCII/number validation/recordだけ、NativeIo/default.create/Systemctl/getent/proc/VMDB/鍵/intent/Backup/実回収退役/外部processなし。SourceにNativeIoが含まれても無recordを別証明し、defaultCodeを持つIoはCode分母に残す。既RootContext全8physical=5Code/3NoCodeの未達も保持して旧proofへ合算置換しない。
+
+16941静的binding→16942元三一回→16944同exec passive全分母/CRC/元JVM/四held六native/RootFailed/Cycle/inactive/RootNativeIo→16946独立三literal oracle→16948/50registry→16952/54WBS→16956exact保存。正式1964/53・歴史17/190/工数null/QA051final/全actualHOLD不変。event単独真正0後に別PT・通常小群/commit/PMO待ち停止0、fresh残10以下/取得不能で保全。

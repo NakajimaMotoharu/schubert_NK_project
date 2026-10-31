@@ -1,0 +1,9 @@
+# Current2496・Root memory原三結合結果
+
+2026-11-01、3300/3301/PG-D1058。PG16948 registry8f3e4e94b231f47165d6c74db933b7ef64f3928f84344dea69bcf3c8bc3c5708/c5b517 genuine0→PG16950独立8e53aaf0a4db90e36974579a4941d3ddc7ff09f21229e119db641f9fddee4f13/session5480終端452e6f genuine0、34metadata/三profile。元XML/catalogから全三Testpathを導出、既Root全Source/metadata/counterと旧scope費用受入を維持・scope参照のみ追加。
+
+固有2493→2496/suite355→358、普通2474→2477/5786残3309/quality19別、resource67内数/非resource2429。170元JUnit JVM2628=2496＋132必要repeat、joint48不変。Main529850=732Code118zero（NoCode111/compiler6/official1）、四282426/自然183198/NoCode6-6/partial58220不変。owner462baseline231候補238UNKNOWN、元三Testを受入へ変換しない。
+
+PG16952 WBS ecb9a6c443f1e3988fa9ceae5150fefa5fa531054c4805f07152999922af72c0/102a0b genuine0→PG16954独立2849981ee4b34183583764352b8db18ba092e78cd0fb1fc0fb548a4a88873db0/session46337終端4cd32c genuine0・29＋ordinary四。485二side typedGuardCurrentHostPG16952Overlay/486inventoryhashのみ、481/484/943凍結/現1065差/G13HOLD・全旧費用受入を保持。正式1964/53/歴史17/190/工数null/QA051final/全HOLD不変更。
+
+991081021は前17/計測訂正exact16940 1c4faa64/38filesのcommit、push88018終端4b7e0b genuine0に保存済。BUG2192/YKT1939有限六群十一event/正式export/再発防止3574も実証済、元失敗/遅延/費用不変更で有限閉鎖。次StopClientTest13は全本文/StopClient/Policy/元helpers読了、同じ自己true子/monitorだけの独立性を着手前に固定、既PolicyTest7は資格済で再演しない。
