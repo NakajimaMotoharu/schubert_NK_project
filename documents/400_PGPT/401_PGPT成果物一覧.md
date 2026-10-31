@@ -1,5 +1,7 @@
 # PGPT成果物一覧・進捗
 
+2026-10-31追加：3035～38/PG-D970、ScenarioRecordStream原whole5/1成功・一Source L30M6C1B16全100、独立38＋説明訂正五/registry34＋分類三＋訂正三/WBS29。2055→2060/274・Source462→463・四250/364、自己最大48MB/16channel/JDK forceと公開SHAを明示。BUG2151は128public refs全照合・Reader一fieldだけ補足訂正し旧原4/counter不変更。正式/工数/HOLD不変。
+
 2026-10-31追加：3031～34/PG-D969、MaintenanceRecords原whole8/1成功・独立36/registry34＋partial三/WBS29。2047→2055/273・Source460→462、全L66cov17miss/M18cov2miss/C3/B21。Completion一四100/codec未達二method17lineを分離、独立ASCII四trace一致・自己64task/32WARNING。原8再演/実親・退役・Root-native0、正式/工数/HOLD不変。
 
 2026-10-31追加：3027～30/PG-D968、ScenarioRecordReader原whole4/1成功・独立38/registry34＋自然B0三/WBS29。現2043→2047/272・Source458→460、二Source全L31M4C2B14miss0、Reader一厳密四100/例外一自然B0を分離。BUG2150工具期待値是正/原4再演0、whole scope既HOLDの無用反復を15848/50参照に置換（新whole合格扱い0）、正式/工数/HOLD不変。

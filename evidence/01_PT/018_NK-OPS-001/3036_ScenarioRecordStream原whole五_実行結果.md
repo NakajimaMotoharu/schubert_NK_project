@@ -1,0 +1,17 @@
+# ScenarioRecordStream原whole五・実行結果
+
+2026-10-31／PG-D970／3035対応、Production6b53/normal14216固定。15886/1f3666c9/session85689、原whole5/1 suite F/E/S/aborted/flaky/not-run0・真正exit0、manifest ecce4866b916ac616dee6779ac962253322bb7f2704f694273509df37dd5aff0。Java25.0.4/JUnit Jupiter5.13.4・Platform1.13.4/JaCoCo0.8.15、原child OS/JDK/実時刻/command/input/deps/Source/XML/exec/hashは当公開manifestと固定run manifest.safe.json、environmentは当JVMの実prefixを保持。
+
+15888/52d0420e/session40169/221c4b68ed3f128cf26e43510f9d73c96bf4e031f9844b953a24b0b332aa6477は同exec/単一session/CRC0、全一Source一Code L30/M6/C1/B16全miss0・四100/strict0、真正exit0。全Codeを分母へ含めmanual除外/生成filter変更0、四held六native trueprobe0。旧LargeResultContent/codec/StorageIoException等のSource proofをこのSource受入数へ加算0。
+
+15890/fefb3c19/7aee60001f2663b25555ded009bc03b5d8628307009cf1fdf6e2f6c4cac2ea34は独立38＋BUG2151訂正五反例全真正0。UI234承認1-based offsetから別Pythonでrecord1を再構成、SHA49f72d58dfc197bcc94a857e8292e86191a84b07ca7d80c6e8d8b6b56c6f3196。さらに1/201/10000件の独立全byte/hash期待を積み、independent-golden-record-vectors.json b86530e52947f2acd0574b6a82739f1b49dd25fa32420ac0771a95290cedeaca。原Testは実file全4800byte/EOFと別JDK期待digestを毎record比較して成功。別Pythonのhashを未保存の実filehashだと偽称せず独立oracleの根拠として保存。自己8thread16channel・4800buffer/7byte分割・force前後/四故障・null/10001/不正201件目・caller所有を原五で確認。
+
+自己JUnit TempDirの公開fixtureをJDK FileChannelで実write/read/force(true)/close・普通のcleanup、SHA256あり。Mainが借用channelへ書く作用とfile open/publish/deleteを分け、後三者は0。storage FFM/native port、実業務root/原本、親/Root/VM/DB/JMS/HTTP/network/鍵/認証/Graph0。型データのbyte検証を真正親DONE/配備/IT-ST合格へ換算0。原成功五・旧2366別source資格は確認再演/転用しない。
+
+## BUG2151／YKT1898：説明fieldのみの訂正
+
+先行起票後15889/d90cd74a/4f9439fb32a5f5876e07bbe731a4864e3c9b46da3e946b18428b46df2f54773f真正0。current2055の113 original及びunit/additional/joint/resourceを併せた128個の一意public postをhash束縛して全照合。testOwnNewSlotPublicEvidenceWrites=Trueは三個：15460は原Test二summaryをSLOTに出す原output manifestで非該当、15872はCWD四traceの独立全byte一致で非該当、15856 ReaderだけTempDir fixture作用をSLOT証跡保存と混同したため訂正。
+
+旧15856/d6f4922e・原4/XML/exec/Counter/crypto宣言は全byte凍結、再演0。effectiveTestOwnNewSlotPublicEvidenceWrites=False・effectiveTestOwnedTemporaryFixtureWrites=True等を新証跡として追加。実TempDir絶対pathは未保存/推定しない。補足はpost全体のTest body作用で、個々のException classがfileを書くという意味ではない。新Stream15888もfixture/forceを正直に別fieldで宣言しSLOT証跡出力False。15890訂正五反例・15894 global/perSource消失と旧counter変更三反例・15898二side29を検証、全対象修正又は非該当と再発防止確認・検索だけ完了0。有限scope完了、実commit保存後記。
+
+Main/source/case/counter/正式受入/費用・全既存API digest/Mock訂正を保持し、台帳・結果・registry global/Reader二unit/二WBS sideへ明示反映。原17/190・正式1964/53・工数null/QA051final・451/全HOLD維持。証跡は各PG15886/88/89/90/94公開manifest.jsonと原五XML、Input/期待/oracle出力はsource/hashで追跡可能。
