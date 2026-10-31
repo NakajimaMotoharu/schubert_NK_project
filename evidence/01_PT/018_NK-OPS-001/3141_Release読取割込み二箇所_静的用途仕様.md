@@ -1,0 +1,11 @@
+# Release読取 割込み二箇所 静的用途仕様
+
+2026-10-31、PG-D1009/主WBS-F03・原Main canonical P018-03は変更担当と分離/追加配賦0。HEADd097a7dc2d695aa7dfbb36a6df61a3584e2234a7、Production6b53/normal14216不変更。fresh18:29used56/rem44/reset1793774153/短期null/券0、N/T専有null、開始0.5/1.5/4共有pp cap10、原予測不変更。
+
+先行index ReleasePayloadVerification/3121・3122（全Main395/caller424読取と同package18検索、16199/16200）・2476/2477を照合。同Main01dfe01fe186a9fe8e65098bb2a020cb8f4855e9033043c89696998262dec348/caller3f2ae514697c8bac938eb9e0202a4e25346774b8875ce08c63d8117538753937の不変更を固定し、全文再読の代わりに現checked/readとrequire終端を点検した。旧6292 Thread16には当Mainが無く、旧成功/旧理由の同byte転用はしない。
+
+新manual用途二：DoNotUseThreadsの222行checked/268行readはいずれもThread.currentThread().isInterruptedの状態読取であり、その箇所にworker作成/start/sleep/interrupt状態クリアはない。checkedはreader.checkedより先、readは各channel.readより先にrequireで拒否し、falseはStorageIoException(UNAVAILABLE)へ進む。割込み時に正常値を返す処理ではない。JDK実行や実Thread状態を測らず、ローカルSourceの直接call順/既定失敗だけを確認する。providerの間接Thread作成、blocking IO完了/元30分deadline、Root/実FS/署名/配備の成功保証へ一般化0。
+
+16266で現二PMD fullattrs/原raw/診断/全Source・承認SS343を結び、各methodを固定Source文字列内で囲った制御順と目的/残riskを保存。pmd_source_span_asciiは全体後方Unicode escape384行を拒否するため、既16199の明示ASCII prefix契約だけ再利用、全Source hashを保持し旧helper変更0。16268で独立byte/line offset・二call位置/require拒否・manifest26反例・非同値順序/状態クリア/worker追加metadataを確認する。新Product入力fixture・実メソッド実行を含まない。
+
+期待=旧参照1171不変＋新用途119→121=1292/1491・残199/thread残5、実PG変更不要という当二箇所の限定判断。actualViolationCount null・PT_EXECUTION_EXEMPT=false、Source用途レビューを動的PT/coverage/PASSへ混ぜない。全正式1964/53・歴史17/190・工数null/QA051final/G07/G13/451/F03/実Root等HOLDを維持し、3142/manifestへ実command/時刻/source/終了/hashを保存して後続PG/PTを継続する。
