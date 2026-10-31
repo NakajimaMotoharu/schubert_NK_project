@@ -1,5 +1,7 @@
 # PGPT成果物一覧・進捗
 
+2026-10-31追加：3106/07/PG-D996、旧鍵label/null/資源/slot理由9を六Source同byte・原診断row/専用schemaへ接続、16150独立26真正0。参照907＋用途116=1023/1491・残468、新manual/PT0。旧欠落field補造・鍵/codec実行・G07資格推測0、全正式/HOLD維持。
+
 2026-10-31追加：3104/05/PG-D995、API/Web readiness現199行をSSC330で新20用途レビュー、12catch別再構成/独立26。参照898不変・用途116=1014/1491・残477、Source不一致の旧5960転用0。製品PT/実型・Graph/資源資格へ加算せず、全正式/HOLD維持。
 
 2026-10-31追加：3102/03/PG-D994、Systemd14/API readonly13の既理由を二専用schema/原診断rowへ接続、独立26。参照898＋用途96=994/1491・残497、新manual/PT0。BUG2161/YKT1908のmessage共通field仮定を有限是正し元row不改変、全正式/HOLD維持。
