@@ -1,0 +1,5 @@
+# Current2023・既登録Mock補助Source現source結合 結果
+
+2026-10-31／3003／PG-D960。15766/69706bee/a61a8607190a73d3f487e62729f569b31ede6dd16acd26df0a86ec2383303312、15768/9e29ea7d/session29956/a842965185732da650c171e186a80496651d639324377775e0c1b4a678c6f531、checkedEntry lint/body全0。registry34/WBS29反例で独立検査。485二sideにtypedGuardCurrentHostPG15766Overlay、486 inventorySha256のみ、全旧cost/所有/受入/過去証跡/API訂正・481484 byte不変。wholeaudit前後actual1 physical-scope HOLDは未解決のまま。
+
+2023unique/266suite、449Source593physical569Code24meta。四247/360・自然173/188不変、未達23/39。canonical ClosedWebAuthentication=P01502、SessionPrincipal=P01501、group/component追加予算0/専有費null。元12の新規計上・Product再演・旧source成功転用0。新測定参照だけ追加し全cases/元post/JVM数を保持。BUG2146/YKT1893は3002/15759訂正・15760逆変更反例・15764/68誤情報排除で限定scope完了、旧誤記録を削除しない。正式/工数/実環境/451受入は増やさない。公開保存15770後も許可host PG/PTを継続する。

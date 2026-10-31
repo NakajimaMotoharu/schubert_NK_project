@@ -1,0 +1,7 @@
+# 既登録Mock実行・補助二Source 追加測定仕様
+
+2026-10-31/PG-D960・群3352/3353所有明確化、元0.5/2/5共有pp cap10固定。保存HEAD2dde8c314c272d2a740aeef727b66de0aae4c766/push40474真正0・fetch0/main8b91944df、Production6b53/normal14216不変更。主P01502/関連canonical P01501、原startのP00701は関連assembly参照でSource owner推定に使わず訂正追記、追加配賦0/専有費N-T工数null。共有直近used47/rem53。
+
+PG14540既存同source原12/3（2701/2702、既registry登録済み）と独立14542の実hash/終了を参照し、ClosedWebAuthentication/SessionPrincipal全二Source/二Codeのcoverageだけをその一execから追加測定する。新JUnit・旧whole再演・新fixture/Production呼出0、cases/JVM/実行回数/新TestIDの増分0。別exec union/別source転用0。全Main二は前段2997で全読、元Mockのrole/principal/入力不変・foreign認証拒否・null/未知・ThreadLocal隔離の独立assertは2701/2702の元契約を参照。既四Source proofを置換せず、両補助Sourceの未達があればそのまま保持し100に補完しない。
+
+15758は元raw4a8e7469/独立b3e3509a・normalInput/Class/Jar・current registryの12case登録を固定し、所有自己slotへ二classだけコピーして受動coverage/session/CRC/四held六native absenceを照合。source単位の全physicalを保持し手動除外0。新Root/VM/HTTP/DB/JMS/認証・session権限/鍵/Graphの操作0、効果説明は元Mock実行の合成オブジェクトを新実行と混同しない。独立15760で全Source counter/型/旧実行参照/新PT0の反例と原期待assert対応を確認し、必要なregistry/WBS参照を後続番号で保存。正式1964-53/17-190/工数null/QA051final/全451安全HOLD/保全物不変更。

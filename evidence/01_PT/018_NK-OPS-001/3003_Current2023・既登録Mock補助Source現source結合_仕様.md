@@ -1,0 +1,7 @@
+# Current2023・既登録Mock補助Source現source結合 仕様
+
+2026-10-31／PG-D960／群3352・所有訂正3353。開始見積0.5/2/5共有pp、cap10不変更。
+
+PG15762（8c2d3069736a32b9154f030a14f6ca8274e2f4059a3f5507f67f778cbd277bb8）と独立PG15764（12ab69dbc272a9a767e456f41c5292cf0aa6cd96f672c4d50eb011060fa53b14）の真正0・同source・34反例を固定し、485の二sideへ追加overlay、486のinventorySha256だけを再束縛する。元HEAD2dde8c314c272d2a740aeef727b66de0aae4c766の全旧費用・所有・受入・旧Source証跡/API digest訂正を保持。481/484はbyte不変。
+
+新規JUnit/JVM/方法0、既登録原12を再演せず二Source二Codeの全分母を追加測定。2023方法/266suite/449Source593physical、四100は247Source360physicalで不変、未達23Source39physicalを保持する。metadata独立検査は反例・型・両side・旧semanticsを照合し、wholeWBS監査は前後ともactual1のphysical-scope HOLDを成功へ変換しない。正式1964/53・17/190・工数null・QA051final保留を不変更。保留ファイル二件はmetadata取得前に除外する。
