@@ -1,5 +1,7 @@
 # PGPT成果物一覧・進捗
 
+2026-10-31追加：3174/75/PG-D1021、Batch四Main1511行/18warning9catchを現13505/34 XML・候補Source SHA/全attrsへ結合、Source十二/独立26＋byte四。参照1171＋用途288=1459/1491・残32。FD論理消費/実解放・失敗buffer wipe・不確定publication保持を区別、実PT/正式加点0・全HOLD保持。
+
 2026-10-31追加：3172/73/PG-D1020、保守JDBC全三Main1077行/19warning11catch/Source九/独立27＋byte四。原XML/全Source/三承認SS・依存順位helperを結合し、read typed finallyとusingJdbc既TWR契約を分離。参照1171＋用途270=1441/1491・残50、Product/PT/正式加点0・全HOLD保持。
 
 2026-10-31追加：3170/71/PG-D1019、Session/再送全三Main635行の13warning8catchを原XML/全Source/UTF8/承認SS三正本へ結合、Source九/独立27＋byte四。参照1171＋用途251=1422/1491・残69。実Graph/DB/session/worker未実証・Product/PT/正式加点0・全HOLD保持。
