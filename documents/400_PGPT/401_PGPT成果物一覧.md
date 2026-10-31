@@ -1,5 +1,7 @@
 # PGPT成果物一覧・進捗
 
+2026-11-01追加：3352～54/PG-D1076、Artemis proxy原3/1FES0→全二Code未達37L10M1C1B/独立66三oracle。scope-only現2619/381、Main543937/四284428旧proof保持、registry34三profile/WBS29四真正0。実broker/接続/電文0・正式工数null/HOLD不変。
+
 2026-11-01追加：3350～51/PG-D1075、API観測4Main/527行PG静的レビュー・既HOLD依存の元134件は起動前NOT_RUN/null。17196-d714469a/静的10反例0をPT成功へ加算0。固有2616/380・四284428/正式工数null不変、2196/97有限閉鎖追記・2195OPEN、独立残件へ継続。
 
 2026-11-01追加：3346～49/PG-D1074、終端観測原7/2FES0→二Main19physical未達935L106M8C517B、独立70/七oracle。現2616/380・Main543937/四284428、全旧proof保持。BUG2196/97工具失敗と有限横展開3family/8familyを分離し元Product再演0・保存後有限閉鎖予定。MainDB全PGレビュー未完/実DB等HOLD/正式工数nullを保持。
