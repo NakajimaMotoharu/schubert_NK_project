@@ -1,5 +1,7 @@
 # PGPT成果物一覧・進捗
 
+2026-10-31追加：3127～30/PG-D1004、公開起動相関record原四＋独立DEL/EOF一が5/2・全Source53L9M1C34B miss0、DigestFactory真NoCode一/受動親値制約/二metadata反例・独立26＋六oracle/registry34/WBS29＋4。current2149/291、479Source667physical、四259/378、普通2131/5786・quality18別。BUG2164/YKT1911工具誤検知と準備regex失敗は保全・有限是正、Product再演0。正式/工数null/全HOLD維持。
+
 2026-10-31追加：3125/26/PG-D1003、同期/表示可視性既50を19Source同byte/原row/全attrsへ接続・独立26。参照1011＋用途119=1130/1491・残361、statement monitor残11/method同期・volatile残0。新manual/PT/実monitor/JCA/Root等0・旧risk/座標scope/未受入保持、全正式/HOLD不変更。
 
 2026-10-31追加：3123/24/PG-D1002、Throwable同一性の旧型・用途28を18Source同byte/全raw attrs/診断/元AST行へ接続・独立26。参照961＋用途119=1080/1491・残411、当queue同一性残0。旧型classpath/実行資格転用・新型解析/PT0、Graph動的HOLD・全正式維持。
