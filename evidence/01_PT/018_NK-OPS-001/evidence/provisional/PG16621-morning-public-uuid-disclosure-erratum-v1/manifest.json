@@ -1,0 +1,93 @@
+{
+  "actualExit": 0,
+  "bug": "BUG2184",
+  "effectiveDisclosure": {
+    "actualAuthenticationOrSessionIssued": false,
+    "actualSecretKeysLoaded": false,
+    "effectiveLiveIdentifierUsedAsTestInput": false,
+    "effectivePublicSyntheticUuidFixture": true,
+    "effectiveSyntheticIdentifiersFromFixedPublicFixtures": true,
+    "interpretation": "FIXED_PUBLIC_PROOF_IDS_NOT_LIVE_BOOT_SESSION_PERMIT_OR_AUTHORITY"
+  },
+  "effortPercent": null,
+  "formalUpdated": false,
+  "horizontal": "YKT1931",
+  "independentGoldenFileHashes": {
+    "src/schubert-nk-batch/src/test/resources/ops/issuer-prestart-failed-v2-golden.txt": "eda4285f0df2c54a4ca10946013dbfc145440da6999637ca035f56ec86a66d4a",
+    "src/schubert-nk-batch/src/test/resources/ops/issuer-prestart-new-v2-golden.txt": "842b41b0e1f131f65fef2127bee72ae840e94dfa67c4c3240799608d8a553b1c",
+    "src/schubert-nk-batch/src/test/resources/ops/issuer-prestart-reused-v2-golden.txt": "f5877b39aece1cbbd31e9016fdb34ea65fb4ddc933e93428ab4d6b2f0ad6849e"
+  },
+  "invocation": {
+    "actualPythonCommand": [
+      "/usr/bin/python3",
+      "-B",
+      "tools/quality/pg16621_morning_public_uuid_disclosure_erratum.py"
+    ],
+    "arbitraryArgumentsRecorded": false,
+    "entrypointPath": "tools/quality/pg16621_morning_public_uuid_disclosure_erratum.py",
+    "entrypointSha256": "d576a2d5544460c925db4650314f666a2aae40f9843e1d24833a0ddb10ee7a9d",
+    "helperPath": "tools/quality/host_tool_invocation.py",
+    "helperSha256": "85d616a3db4ff47f4c95ae2e0dd57954bc2b09f28b8f2a685b986e5621545c46",
+    "libraryPath": "tools/quality/pg16621_morning_public_uuid_disclosure_erratum.py",
+    "librarySha256": "d576a2d5544460c925db4650314f666a2aae40f9843e1d24833a0ddb10ee7a9d",
+    "loadedProjectPythonSources": {
+      "tools/quality/g07_host_class_provenance_inputs.py": "a676cb3e4145177c3c243722d737592ce7d44c3f29cfe4f670662ef7651f046b",
+      "tools/quality/host_tool_invocation.py": "85d616a3db4ff47f4c95ae2e0dd57954bc2b09f28b8f2a685b986e5621545c46",
+      "tools/quality/pg16621_morning_public_uuid_disclosure_erratum.py": "d576a2d5544460c925db4650314f666a2aae40f9843e1d24833a0ddb10ee7a9d"
+    },
+    "provenance": "OBSERVED_SYS_ARGV_AND_ORIG_ARGV_NOT_RECONSTRUCTED"
+  },
+  "metadataNegativeVectors": 8,
+  "negativeLabels": [
+    "effectivePublicSyntheticUuidFixture",
+    "effectiveSyntheticIdentifiersFromFixedPublicFixtures",
+    "effectiveLiveIdentifierUsedAsTestInput",
+    "actualAuthenticationOrSessionIssued",
+    "actualSecretKeysLoaded",
+    "interpretation",
+    "shape",
+    "shape"
+  ],
+  "newAccepted": 0,
+  "observedSyntheticUuidFieldNames": {
+    "src/schubert-nk-batch/src/test/resources/ops/issuer-prestart-failed-v2-golden.txt": [
+      "activation_id",
+      "boot_id",
+      "broker_invocation_id",
+      "epoch_id",
+      "morning_invocation_id",
+      "run_id"
+    ],
+    "src/schubert-nk-batch/src/test/resources/ops/issuer-prestart-new-v2-golden.txt": [
+      "activation_id",
+      "boot_id",
+      "broker_invocation_id",
+      "epoch_id",
+      "morning_invocation_id",
+      "run_id"
+    ],
+    "src/schubert-nk-batch/src/test/resources/ops/issuer-prestart-reused-v2-golden.txt": [
+      "activation_id",
+      "boot_id",
+      "broker_invocation_id",
+      "epoch_id",
+      "morning_invocation_id",
+      "run_id"
+    ]
+  },
+  "originalIndependent": [
+    "PG16622-morning-pure-data-original-33-independent-v1",
+    "899f8f79bb5adee3815c59d5549bcff6d6aa968c11a16717b4383c93caaf0874"
+  ],
+  "originalPost": [
+    "PG16620-morning-pure-data-original-33-post-v1",
+    "a878d423f42737c284f3f7aa6cea59619e0da023340a532f5d3f24e93f3e2424"
+  ],
+  "originalPublicSyntheticUuidFixture": false,
+  "originalQualificationAndCountersUnchanged": true,
+  "previousIndependentEffectFlagWasNotChecked": true,
+  "priorManifestRetained": true,
+  "productTestsReexecuted": 0,
+  "rawIdentifierValuesRecorded": false,
+  "source": "6b53efeec87f3ec36a840dd8e7759656cb4aee5c"
+}

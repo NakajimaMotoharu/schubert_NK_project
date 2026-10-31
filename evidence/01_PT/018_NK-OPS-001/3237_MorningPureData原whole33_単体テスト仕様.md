@@ -1,0 +1,15 @@
+# Morning pure data・completion原whole33・単体テスト仕様
+
+2026-11-01/PG-D1038/Source6b53/normal14216/dev-foundation/HEAD4344fb237185a40ecede21b606036d383b2645c0。NK-OPS001/BAK001/OPS009/UI251/SS341342343/SSC126134135185203218237326、既2534/2536のwhole20＋13を統合・変更せず現source資格へ。主F03/canonicalP017-12参照追加0、開始1/4/8共有pp cap10・N/T/専有費/工数null。
+
+旧13904 raw3cb373c2のpublic sourceHashesと現14216を比較し差はAPIのQuestionQueryApplicationService/UserQueryApplicationService/LogQueryApplicationService三Mainだけ、全Test/fixture/resourceとMorning全Main/callee入力は同byte。既2534/2536の全Test/helper・到達経路レビューをこのbyte証明付きで再利用し、旧PT成功/exec/coverageを現sourceへ転用しない。現在のChecks全Test/全Main、Prestart全297、Completion全201、LaunchOwner初期化とretireCompleted/Progress/Phase、MorningProcessMain初期化/archive/completeObservedBackup、StoppedBackupFixture全bodyを別途確認。無関係な三API Queryは注入batch経路へ到達しない。
+
+選択はMorningPrestartEvidenceTest5/CompletionEvidenceTest11/StoppedBackupCompletionTest4/CompletionChecksTest5/BackupObservedCompletionTest2/CompletionRetirementTest6、計33/6suite。Compile専用MorningCompletedMainTest4/BatchDatabaseFixture等をPASSへ加算せず、旧held whole抽出/新fixtureは0。Golden三は手書issuer-prestart-{new,failed,reused}-v2を固定、独立期待は2534/2536記載の全byte/十row・五gate/新失敗再使用/異run/欠落null/row/reference/同instance/四TX22peer52retained/八phase/十二event/八境界×六原因×IO-runtime-fatal。全Test IDは原FQCN#methodで一意、loopをJUnit件数に水増ししない。
+
+実行は既handwritten guard/DB-shaped proxy/clock/receipt/kernel/start-stop-retire callback・Atomic budgetだけ。MorningBackupUnitCycleの注入constructor/executeObserved/recheck/stop後conditionを実行し、実Unit/manager/Root/VM/DB/native/原本Backup/credential/key/permit発行/intent unlink・実退役/配備/failed-cohort回収0。Testのliteral event「intent-retired」「explicit-stop」を実操作の証明としない。MorningProcessMainのstatic archive/completeObservedBackupは呼ぶがdefault constructor/main/executeCompletedBackupは呼ばない。RootFailedStartRecovery本文/処理へ触れない。retain/waitはfixture AssertionErrorでUNKNOWN正常化0。
+
+Prestartが公開ASCII frameをSHA-256計算する実cryptoはtrue・公開digestだけ/秘密keyなし。DigestFactory異常は独立fixture注入、known例外の固定変換・unknown identityを維持。Fixtureのstatic初期化/メソッドを既レビューと同byteで確認し、実DB fixtureはcompile/signatureだけでconstructor/DB/pg_ctlは実行0。共有pure-value/no-crypto工具の条件を緩めず専用postを使う。
+
+Target全4Source13physicalを保持（Code7・真正NoCode6、Started record等の未実行Codeも0coveredで全分母へ）。ParentLaunchOwnerは一部だけの実行なので全Source未達を隠さず、三他Sourceの各counterとbranch自然0を区別する。単一exec/CRC/公式既定filter・除外/人工到達/exec union0。四held/六native不在・RootFailedStartRecovery族無recordを確認し、既許可の注入BackupCycle族の実行record/probeを別auditへ保存する。前群のcycle込み全27無recordを当群へ流用せず、named mock cycleを禁止処理の新fixtureへ変換しない。
+
+checked16618→16620受動whole/単一session/CRC/到達scope→16622独立oracle/metadata→registry/WBS。全input/helper/SDK/source/branch/HEAD/OSJDK/command/時刻/真正exit/XML/実counter/hashをmanifestへ結合、F/E/S/flaky/notrun/未確認は加算0。正式1964/53/歴史17/190/工数null/QA051final/G07/G13/F03全体/451/全HOLDを維持。実Root/真正DONE/DB後条件/同owner/native/CHR受入への換算0。
