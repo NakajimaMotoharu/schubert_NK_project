@@ -1,5 +1,7 @@
 # PGPT成果物一覧・進捗
 
+2026-10-31追加：3209～12/PG-D1031、原ReleaseInventory全16/一suiteFES0・全1Source3Code246L29M3C102B未達0/独立30・十oracle・registry34/WBS29＋四真正0。現2252/309・500Source753physical/四270399/未達44153、純JSON/合成hash label・自己四taskのみ、実release/署名/DB/鍵/配備へ換算0。Source/Test/新BUG/正式加点0・工数null/HOLD不変。
+
 2026-10-31追加：3205～08/PG-D1030、原WebRequestTrace全十/一suiteFES0、四Source五Code123L33M5C40B適用未達0・独立31/八oracle・34route/37annotation/14公開Source read。現2236/308・499Source750physical/四269396/自然180195/partial44153、Context旧partial history保持・registry34/WBS29＋四＋説明二真正0。BUG2179の説明flagは元保持/新版有限是正、Source/Test/正式/工数null/HOLD加点0。
 
 2026-10-31追加：3201～04/PG-D1029、原Batch列挙catalog二whole/FES0・独立27/五oracle/入口回帰五、全8Source28physicalを測定し外側未実行12Codeを分母保持。現2226/307、Source496/746、四266/392不変・自然179/194・partial45/154、old五広域proof保持、registry34/WBS29＋四真正0。BUG2178/YKT1925入口欠落を元未実行として保持/是正、正式/工数null/HOLD加点0。

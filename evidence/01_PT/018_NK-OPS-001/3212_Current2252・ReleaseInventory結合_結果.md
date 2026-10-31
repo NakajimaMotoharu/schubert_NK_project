@@ -1,0 +1,9 @@
+# Current2252・ReleaseInventory結合結果
+
+3209～11/PG-D1031。16514 SHA14e8a27f44cfaed103801f6a098b2b78e2ce7937800bceb9fc619f3c06b50ce6/e5ba4f→16516 SHA2425f8941979ff70078ac7190dcb99bf99eb2a11ed460318f875b9e440b42642/session39833終端fe973c全34真正0。新1Source3Codeの全四100を追加し全old proof/pointer/historyを保持、前群Contextの旧partial/historyも変更0。今回追加専用なのでpreviousSourceProofsNotReplaced=Trueは正当であり前群pointer置換の説明とは区別する。
+
+固有JUnit2236→2252/308→309suite（resource39内数/非resource2213）、普通2217→2233/5786参照・未参照3553/quality19別。144JVM/2384method=2252＋132必要repeat。Main499→500Source/750→753physical=678executable＋75zero-counter、四269→270Source/396→399physical=384executable＋15zero-counter。自然180/195・NoCode-only6/6・未達44/153不変。newTestID/Source/Test変更0、元source成果/旧execの合算0。
+
+owner422baseline/230候補未受入/189UNKNOWN、新MainはP018-02・Test UNKNOWN、費用の参照主責とcanonicalを混同しない。16518 WBS SHA52aa80f6002fc3ca25f9525d11973e7ed2f52065953cdb8da751936d02a798bd/c39bcd→16520 SHA0e171104c237d2d0e9926bbea94486912fe713a474d80a3276e339990ed0140e/session34932終端05ad45全29＋普通四真正0。485両side/486hashのみ、481/484/全旧scope/owner/cost/受入・G13凍結943/現1065全体HOLDを保持。
+
+開始1/3/6共有pp cap10固定、開始/現61同integerを消費0へ変換しない。専有費/N/T/工数率null、個別newAccepted0/正式1964PT/53scope・歴史17/190/QA051final/451/F03全体/HOLD不変更。全実外部/Root/DB/鍵/署名/配備操作0、次の独立通常PTへ継続する。通常小群/commit/報告/PMO待ちでは停止しない。
