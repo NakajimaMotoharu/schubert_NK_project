@@ -1,5 +1,7 @@
 # PGPT成果物一覧・進捗
 
+2026-10-31追加：3046～47/PG-D973、保存解析から現全965Main/1491rawを11累積変更込みで構成、選択67review入力283厳密参照/1208当選択未参照、独立24。BUG2152/53の仮説/schema誤りを先行起票し旧工具失敗保持・新版有限是正。raw/参照数をF03合格・PT免除へ転用せず、正式/工数/HOLD不変更。
+
 2026-10-31追加：3044～45/PG-D972、G13現source全1065の未認定静的descriptor（Java969=製造965＋Characterization4、deployment35/resource61）。旧943lineage/追加122/共通変更24を全path-byteで結合・独立31＋binding6。485へ別UNQUALIFIED field、旧資格/費用/受入は保持・新正式/leaf0。厳密method-TestID traceは未検証、whole G13/HOLD不変更。
 
 2026-10-31追加：3039～43/PG-D971、公開値original whole4/1成功・独立43/registry34＋outer三/WBS29。2060→2064/275・五Source全22physical(17Code5NoCode)分母へ未達保持、outerCode十二trueprobe0。四100増分0/未達37Source83physical・正式/工数/HOLD不変更。45→50共有点検で+152method/+38Source/四+8・新規受入0を数値化し、次は極小値型追加よりG13現1065静的descriptor/残F03適用性へ優先変更。
