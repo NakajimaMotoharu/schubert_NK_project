@@ -1,0 +1,9 @@
+# Current2564・Morning gate原十七 結合結果
+
+2026-11-01、3324/25/PG-D1066。17076 registry b2d956a16015cad96c7ee106ace35071b4ca5d37b54c72a08777f0896adda540/7c703e genuine0→新17079独立69003c60592808a842b21cebd12d3bce3fcee3de2ee86f195a839d18ce7b0eec/ae22f3 genuine0・全34/二chain二profile。旧17078失敗はBUG2194として保持、原17再演0・旧Journal/全proof/cost/受入非置換・非合成。
+
+固有2547→2564/suite365→369、普通2528→2545/5786残3241/quality19別、resource67内数/非resource2497。178元JUnit JVM2696=2564＋132必要repeat/joint48不変。Main536878=748Code130zero（genuineNoCode122/compiler7/official1）、厳密四284428/自然183198/NoCode6-6不変、partial63Source246physical。owner469baseline231候補249UNKNOWN、未知を解消扱いしない。Source測定/試験参照の母集団増を工数率にしない・新WBS受入0。
+
+17080 WBS f9a42748e69f73caf7cc81c409735fb528510cdd2062476901992186d174de2b/d03b52 genuine0→17082 postb4bbbabafd5351d487b81a8a85cc956a36ec988dcf7f22b6928a3b321f694790/session80675終端5135a0 genuine0・29metadata＋普通四。485二side typedGuardCurrentHostPG17080Overlay/486inventoryhashだけ、481484/943凍結・現1065差/全旧scope受入費用維持。
+
+前6d6eff92c1840b2b17f306328f395c022311896c/exact17068-4524a867/29filesを9ee893 genuine0で保存、push74896終端9d0a11 genuine0。次はused70の約5pp点検（基点3261 used65）を別見積りで行い、実経路/新WBS増0とmetadata手戻りを分離し、許可済み次経路を具体化する。単なるcommit/点検で停止せず、actualRoot/native等HOLDを解除しない。正式1964/53/歴史17/190/工数null/QA051final不変。

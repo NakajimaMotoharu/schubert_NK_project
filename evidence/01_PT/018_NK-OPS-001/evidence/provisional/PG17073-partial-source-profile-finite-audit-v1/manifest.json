@@ -1,0 +1,92 @@
+{
+  "actualExit": 0,
+  "bug": "BUG-2194",
+  "crossDeployment": "YKT-1941",
+  "exactChangedLines": [
+    "- OUT=data.BASE/'PG17078-current2564-morning-gate-evidence-registry-post-v1'",
+    "+ OUT=data.BASE/'PG17079-current2564-morning-gate-evidence-registry-post-v2'",
+    "-     require(len(physical)==5 and len(meta)==2 and meta<=physical and len(four_physical)==0 and len(natural_physical)==0 and len(partial_names)==1 and len({c for c,n in actual})==4,'independent measured sets and actual XML suites')",
+    "+     require(len(physical)==5 and len(meta)==2 and meta<=physical and len(four_physical)==0 and len(natural_physical)==0 and len(partial_names)==2 and len({c for c,n in actual})==4,'independent measured sets and actual XML suites')"
+  ],
+  "formalUpdated": false,
+  "invocation": {
+    "actualPythonCommand": [
+      "/usr/bin/python3",
+      "-B",
+      "tools/quality/pg17073_partial_source_profile_finite_audit.py"
+    ],
+    "arbitraryArgumentsRecorded": false,
+    "entrypointPath": "tools/quality/pg17073_partial_source_profile_finite_audit.py",
+    "entrypointSha256": "067bce3c0b59957cc63ae1ebbdf26c1c212260771ad751253262ecb0e1eefe10",
+    "helperPath": "tools/quality/host_tool_invocation.py",
+    "helperSha256": "85d616a3db4ff47f4c95ae2e0dd57954bc2b09f28b8f2a685b986e5621545c46",
+    "libraryPath": "tools/quality/pg17073_partial_source_profile_finite_audit.py",
+    "librarySha256": "067bce3c0b59957cc63ae1ebbdf26c1c212260771ad751253262ecb0e1eefe10",
+    "loadedProjectPythonSources": {
+      "tools/quality/g07_host_class_provenance_inputs.py": "a676cb3e4145177c3c243722d737592ce7d44c3f29cfe4f670662ef7651f046b",
+      "tools/quality/host_tool_invocation.py": "85d616a3db4ff47f4c95ae2e0dd57954bc2b09f28b8f2a685b986e5621545c46",
+      "tools/quality/pg17073_partial_source_profile_finite_audit.py": "067bce3c0b59957cc63ae1ebbdf26c1c212260771ad751253262ecb0e1eefe10"
+    },
+    "provenance": "OBSERVED_SYS_ARGV_AND_ORIG_ARGV_NOT_RECONSTRUCTED"
+  },
+  "newAccepted": 0,
+  "newPostSha256": "69003c60592808a842b21cebd12d3bce3fcee3de2ee86f195a839d18ce7b0eec",
+  "oldExecutedToolBytesPreserved": true,
+  "productTestsExecuted": 0,
+  "profiles": [
+    {
+      "actualPartial": 1,
+      "classification": "NON_APPLICABLE_MATCH",
+      "expectedPartial": 1,
+      "newSources": [
+        "dev/codex/schubert/nk/batch/platform/MorningPreviousBroker"
+      ],
+      "sha256": "ae437bf33659f9615b70c15f70b7b4dd984698b1d0a200896e330ba6285c4a0a",
+      "tool": "pg17030_current2535_previous_broker_journal_registry_post.py"
+    },
+    {
+      "actualPartial": 0,
+      "classification": "NON_APPLICABLE_MATCH",
+      "expectedPartial": 0,
+      "newSources": [
+        "dev/codex/schubert/nk/batch/platform/InspectorRunEnvironment"
+      ],
+      "sha256": "c5ad5b88bfc3c978d47295e5f149aac7594152e3d22763858a3e55633d314695",
+      "tool": "pg17046_current2539_inspector_run_environment_registry_post.py"
+    },
+    {
+      "actualPartial": 1,
+      "classification": "NON_APPLICABLE_MATCH",
+      "expectedPartial": 1,
+      "newSources": [
+        "dev/codex/schubert/nk/batch/platform/MorningBrokerUnitCycle"
+      ],
+      "sha256": "7d9756eca2ea462085a93c2ebf93fa9beb528595c822508f1dd4b348933f0737",
+      "tool": "pg17062_current2547_no_prior_broker_registry_post.py"
+    },
+    {
+      "actualPartial": 2,
+      "classification": "OLD_FAILED_RETAINED_NOT_ACCEPTED",
+      "expectedPartial": 1,
+      "newSources": [
+        "dev/codex/schubert/nk/batch/file/MorningGateEvidence",
+        "dev/codex/schubert/nk/batch/platform/MorningUnitTerminals"
+      ],
+      "sha256": "889485e62a0c2d16969df086268674c738a665dec29f25abdfaa40b3d3fbaf55",
+      "tool": "pg17078_current2564_morning_gate_evidence_registry_post.py"
+    },
+    {
+      "actualPartial": 2,
+      "classification": "NON_APPLICABLE_MATCH",
+      "expectedPartial": 2,
+      "newSources": [
+        "dev/codex/schubert/nk/batch/file/MorningGateEvidence",
+        "dev/codex/schubert/nk/batch/platform/MorningUnitTerminals"
+      ],
+      "sha256": "a9cdc891dc313663b7e76fb184e4936c28c807c5c7a976265c384881be29faec",
+      "tool": "pg17079_current2564_morning_gate_evidence_registry_post_v2.py"
+    }
+  ],
+  "source": "6b53efeec87f3ec36a840dd8e7759656cb4aee5c",
+  "staticArityNegativeAndBoundaryVectors": 7
+}
