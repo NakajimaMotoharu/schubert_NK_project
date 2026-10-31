@@ -1,5 +1,7 @@
 # PGPT成果物一覧・進捗
 
+2026-11-01追加：3225～28/PG-D1035、原MediaBodyStreamer二/一FES0、全一Source一physical19L1M1C12B四未達0・独立38/八oracle。現2269/313・505Source760physical/四272403、registry34/WBS29＋四真正0。Test-own一時fileのみ・借用channel所有維持、実media/正式/工数null/HOLD加点0。
+
 2026-11-01追加：3221～24/PG-D1034、原ManagementEncoder三・全1Source6physical未達保持/独立32＋六/Guard-only監査。補助scopeだけ現2267/312へ結合し旧Source/counter/history exact保持・新Source/coverage達成加点0。registry34＋二/WBS29＋四真正0、正式/工数null/HOLD不変。
 
 2026-11-01追加：3217～20/PG-D1033、原ArtemisUnknown全四/FES0、共有post-v3不変更・四全Source/四Codeの未達43L/2M/35Bを保持、独立27/八oracle/四held六native無probe・Root27無record。現2264/311・504Source759physical/自然182197/未達45154、四271402不変。BUG2180のoracle件数転記は旧失敗保持/新版27・8へ是正、registry34＋二/WBS29＋四真正0、正式/工数null/HOLD加点0。

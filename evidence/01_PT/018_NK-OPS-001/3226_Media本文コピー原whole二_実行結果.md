@@ -1,0 +1,7 @@
+# Media本文コピー原whole二・実行結果
+
+3225/PG-D1035/Source6b53/normal14216。原16572 SHA5018198c35b345ba7ae6855284d204c7c17d817cb64c5e54bc199a22d94cd1b1/entrybf60957d/session98278終端a9f1a7真正0、二/一suite F/E/S0。16574 SHA4af1a3553a0e298c32650d8c3de8ddddca2f22d43cb3c3effc74185e3d688b57/entryc45b001f/session61887終端4d2e2e真正0、全一Source一physical/CRC0/単一exec、LINE19/METHOD1/CLASS1/BRANCH12すべてmiss0、四gate0。空private ctorは公式既定filterのみ・手動除外/人工呼出0、元PT再演0。
+
+Test自身がTempDirへ合成1,048,580byteを書込みFileChannelを開きtry-with-resourcesでclose、Productionは借用channelのsize/position/readとtarget.writeのみ、close/flush/open/permitなし。独立16576 SHAefae310a1468ae4c82da6ba9ef484c20674c2f13e7c725f67c5591d44d959743/entry77d6cea3/92cb40真正0、38反例/八oracle。SS333正本d861735eとliteral配列/サイズ境界/短read/0length/全I/O失敗/部分送信と資源非closeを照合、独立slice SHA五をmanifestへ保存した。これら追加hashは新規製品試験数ではない。
+
+四held六native無probe・Root27無record、実media認証/保持inode/LinuxDirectoryCalls/鍵/Root/VM/DB/JMS/HTTP/回収/退役0。原whole不変更/部分抽出0、専用postでTest-owned資源I/Oを明示しpure-value共有工具の条件を緩めない。正式1964/53・歴史17/190/工数null/QA051final/全HOLD不変。公開manifestに実command/環境/時刻/Source/HEAD/exit/XML/exec/hashを保持。

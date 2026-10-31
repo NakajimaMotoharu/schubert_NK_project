@@ -1,0 +1,7 @@
+# Current2269・Media本文コピー結合結果
+
+16578 SHA904113f06119812459aff0cf967fce4f7aedf28283812af2137122902b3bad7b/e3c305→16580 SHAd29c8549016b95056e3e93bbfab302cf686d1146174ad73545e5ca2249ffbc47/59af63全34真正0。原二/受動post/独立の再演0、旧全Source/proof/history/costをexact保持し新Source一・physical一だけ追加。
+
+現固有JUnit2269/313、resource39内数/非resource2230、普通2250/5786参照/未参照3536/quality19。148JVM2401method=2269＋132repeat。505Source760physical=684executable＋76zero、四272403=387＋16・自然182197/NoCode6/6/partial45154不変、owner427baseline230候補193UNKNOWN。16582 SHA1ff0d7a214bdc692bdd44848af07090f6b92384df24bb5cc4ab6d364b8337eff/889a4b→16584 SHA479321f823f7589e27d5cfc330eda0b0a1d2745b93df8c4d338d9f68954c3bb2/session92616終端72e15e全29＋四真正0。485二side/486hashだけ、481484/全旧cost/受入・G13診断HOLD保持。
+
+正式1964/53・歴史17/190/工数null/QA051final/F03全体/451/全HOLD不変・Source/Test/SS変更/新BUG0。開始/終used62同integer≠費用0、専有費/N/Tnull・凍結0.5/1.5/3cap10維持。usage00:35cursor a6bd99a4は不完全/欠測補填0。通常小群/commit/報告/PMO待ち停止0。
