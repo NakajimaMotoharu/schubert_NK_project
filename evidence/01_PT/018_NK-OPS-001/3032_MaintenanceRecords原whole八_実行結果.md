@@ -1,0 +1,13 @@
+# MaintenanceRecords原whole八・実行結果
+
+2026-10-31／PG-D969／3031対応、Production6b53/normal14216固定、Java25.0.4/JUnit Jupiter5.13.4・Platform1.13.4/JaCoCo0.8.15。PG15870 entrye3622fff/session42865、原whole8/1 F/E/S/aborted/flaky/not-run0、真正exit0。manifest f030cf8f0e3c67de38d9d0f4fa93090bdb96e675121bf65bb72d8831860bafb5。元OS/JDK/時刻/command/正常compile/XML/一exec/expected/actual/全inputhashは当公開manifestと固定run manifest.safe.jsonへ。JUnit13.4という旧3027略記ではなく、上記のJupiter/Platformの別versionを使用している。
+
+15872/46d05d7e/deee7008abb150f9a857f063540e5ddca0691afa01cc0b2ebae2f975c2ee60d7は同exec/CRC0/単一session・全二Source三Codeの受動測定、真正0。全L66cov17miss/M18cov2miss/C3/B21全branchmiss0。MaintenanceCompletionはL17/M5/C2/B6全100、MaintenanceRecordsはL49cov17miss/M13cov2miss/C1/B15でretirement/readRetirement二method17line未実行。全branch100を全program100へ換算せず、当scope厳密四gate1。NoCode変換/手動除外/生成filter変更0、四held六native trueprobe0。
+
+15874/eb1d6761/8f35acabc3b04a38a10f4958657fa894c3651e592e0dab5a2985756b1cc5fe4eは独立36反例真正0。別Python手書きASCIIからanchor72/activation109/completion140・141byteを作り、元run自己CWDの四trace出力と全byte一致。independent-public-trace-oracles.json SHA338b5bc54a66141e401461bc820d647dae4ee0eebbe19b6809d5fa47df92264e、各expected/actual全hashとTestID PT-BAT038へ結合。public fixtureであり真正親DONE/原本identityではない。8thread64task、unique64/WARNING32、全future/close完了を原assertで確認。依存BatchRun/MaintActivationの元proof保持・追加受入0。
+
+自己SLOT target/maintenance-record-tracesに公開固定四recordを書込む以外、実原本/intent/permit退役・Run業務成功・service/Root/native/VM/DB/JMS/HTTP/network/鍵/crypto/Graph操作0。元MaintenanceRetirementRecordsTest wholeはMaintenanceRunFilesTest.Fixture内LinuxDirectoryCalls.createを含むためNOT_STARTED_HOLD、部分抽出0・その未達を維持。Source読取のRootServiceFacts/Facts等もmetadata reviewだけで未実行、権限許可としない。
+
+新BUG/実行工具失敗/プラットフォーム拒否0。準備pyflakes-only draftの冗長条件はbody前に簡素化し、実行後tool byte不変更。metricsは最初P01712 split親component要求をappend前guardが正常拒否、実leafP00403＋関連論理owner P01712費用0で3372を一回起票。原見積1/3/7 cap10固定・共有used49差0≠専有費0、N/Tnull。
+
+証跡はevidence/provisional/PG15870-maintenance-records-eight-pt-v1、PG15872-maintenance-records-eight-post-v1、PG15874-maintenance-records-eight-independent-v1、PG15878-current2055-maintenance-records-registry-post-v1の各manifest.json。元8確認再演・旧source成果合算0。正式1964/53・歴史17/190・工数null/QA051final/全451・安全HOLD不変。
