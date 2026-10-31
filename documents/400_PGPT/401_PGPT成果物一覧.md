@@ -1,5 +1,7 @@
 # PGPT成果物一覧・進捗
 
+2026-11-01追加：3268～70/PG-D1048、公開PermitRecord原8/1FES0・一Source五physical（四Code/一NoCode）L119M25C4B30 miss0、独立49/八oracle。現2385/335・522Source817physical/四282426、registry34＋chain二/profile二/WBS29＋四真正0。工具2186profile三literal是正・旧二未採用出力保全/原八再演0、実許可発行退役/新WBS/正式/工数null/HOLD加点0。
+
 2026-11-01追加：3265～67/PG-D1047、BootstrapClosing原3/1FES0・全一Source三physical L26cov69miss/M3cov5miss/C1/B21cov25miss、独立50/一oracle。現2377/334・既521812/四281421不変、全旧proof保持/合成0・registry34/WBS29＋四真正0。実ADMIN/native停止/新WBS/正式/工数null/HOLD加点0。
 
 2026-11-01追加：3262～64/PG-D1046、Broker公開XML原4/1FES0・20＋独立47/四oracle、Main1843無record/実broker接続0。現2374/333/resource53内数、Main521812/四281421不変、独立registry34＋chain三/WBS29＋四。工具2185旧失敗保全・独立定数版是正/原四再演0、正式/工数null/HOLD不変。
