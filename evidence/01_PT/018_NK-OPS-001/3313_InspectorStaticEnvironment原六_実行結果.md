@@ -1,0 +1,9 @@
+# InspectorStaticEnvironment原六 実行結果
+
+2026-11-01、3312/PG-D1062、Production6b53/HEAD765416af4、3582→3583・事前凍結0.75/2/4共有pp cap10/N/Tallocatednull。PG17005 review977d93c302deb80009c9d96a6d1129aaf4482673b519e67ec292a877f74cae8f→PG17006 rawada9935b69ff7e7462af30a75f087c45f72b66bb7d9c36c4bdb952e7baa346f3/session45756終端237cc5 genuine0、原whole六/一suite F/E/S/aborted/not-run0。command=python3 -B tools/quality/pg11123_checked_python_entry.py tools/quality/pg17006_inspector_static_environment_six_pt.py。JDK25.0.4/元JVM環境・開始終了・command・全input/exec/XML hashは元manifest/stages固定、固定-Dnk.pt.repositoryは一個だけ。
+
+PG17008 passive25c269a0a0bda655e2e937d570fe8f5f149c159a922013356eac80ef621c17eb/session23419終端d86371 genuine0。全一Source一Code physicalのLINE16/METHOD3/CLASS1/BRANCH16すべてmiss0、strict四100=0。手動counter除外/生成code除外/別exec union0、元Source/全Code/CRC一致・単一session PG17006-INSPECTOR-STATIC-ENVIRONMENT-ORIGINAL6で測定。
+
+PG17010独立975b207b35d805bdc93b554fdca85cda02cf0a11895150858f9b16cc2d67fb27/fc0f0f genuine0、56非退化反例/六literal oracle。GOLDEN/公開template三placeholder、全byte拒否、port/db/version字種/重複/16byte、4095固定15byte列から総65535/65536/65537を独立算出、MAX65848/null/不変入力と固定sanitized例外、八自己thread64taskを照合。元期待値をProductionで生成せず全原Test/Main/SS不変更。
+
+公開template hash2f8514321264c8fa67d73694ce7a441a7e3450ab520a60f0c052364304ab3f73を元normal/current/plan/postで一致、実IOはTestのこの公開file読取だけ。ProductionはASCII/regex/collectionのみで実IOなし、入力のDB URL/password文字列・$記号も実接続/credential/シェル実行をしない。RootFailed五/Cycle23/inactive五/四held六native無probe、外部child/VM/Unit/Root/原本回収退役0。新BUG0・正式1964/53/工数null/HOLD不変更。
