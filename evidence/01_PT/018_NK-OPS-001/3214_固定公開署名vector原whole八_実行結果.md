@@ -1,0 +1,11 @@
+# 固定公開署名vector原whole八・実行結果
+
+3213/PG-D1032。2026-10-31、dev-foundation/HEAD70459982024f9b20196927386b41c4bbf9bd80e8、Production6b53/normal14216不変更未配備。原JVM23:35:48.418485～23:35:49.541477 JST、JDK25.0.4+7-1-26.04-Ubuntu/Linux7.0.0-38-generic/amd64。原ReleaseSignatureVerifierTest全8/1suite F/E/S/flaky/rerun/not-run0、新ID0、entryfde72a29/session25463終端3bdcf8真正0。
+
+commandは `python3 -B tools/quality/pg11123_checked_python_entry.py tools/quality/pg16524_release_public_signature_original_eight_pt.py`、続いて16526/16528。公開raw PG16524-release-public-signature-original-eight-pt-v1/manifest.json SHA3cf39551215d747b93f4f81d1b709394b0002ae235548a643b50ce7987946be7、exec00a4e8bfee6031ce3fced309105aaf96d1d54dd23bf7f6bd4ff1ebd375ff0944、単一session PG16524-RELEASE-PUBLIC-SIGNATURE-ORIGINAL-EIGHT。元work/pgpt-runs/PG379/pg16524-release-public-signature-original-eight-pt-v1のXML/環境/command/source/archive/時刻/終了/hashへ結合、原八再演0/旧source成功転用0。
+
+post16526 SHAadcbf15d515e0b0d46e6844d4400f2c1931bf206e831968264db6bb3f05f8844/session15373終端1e33af真正0。全1Source3physical=outer/NativeCryptoのCode二＋Crypto interface真正NoCode一。line32/32・method8/8・class2/2・branch10/10、全miss0/CRC0/strictgate0、全physical保持・除外/exec union0。NoCode interfaceは実Code無しをbyteで検証したもので到達不能扱いや分母隠しではない。四held/六native無probe・Root回収27physical無record。
+
+独立16528 SHAb7978cf372684e6d108cae82984bbfd45be0a99df0286e6c688441cd247f876e/c82ff6真正0。33反例/七境界・identity・消去・並行oracle＋RFC公開tuple二、元八宣言/実XML・origin/main SS343同byteを確認。RFC8032§7.1 TEST1/2のpublic key32byte＋message0/1byte＋signature64byteを公式公開原典と手で照合し、Test constantからの独立tuple hashは0e1d4c11a5a51315bf2daccae025f9654fd7309bf941e57dece4caeea65c280c／6097870ca6d0211b3dd4e7a4ce26bc35d0c3b21f295f8f503426a521610a5ba8。原典の閲覧時刻は23:33頃の分単位記録で、private seed/原典全文を試験入力やGit成果物へ格納・利用0。参照 https://www.rfc-editor.org/rfc/rfc8032.html#section-7.1 。Production signer/verifyでexpected生成0。
+
+JCAの固定public key decode/署名verifyは実行したためcryptoInvoked/publicKeysDecoded=true。秘密・運用keyfile/KeyStore/credential実体、keypair生成・sign・運用署名/承認発行・実release/配備・Root/VM/DB/JMS/permit/intent/回収/退役/Graph実行は0。pool宣言4/task4、実thread数null、JDK/JCA内部copyの消去保証はしない。通常JDK primitiveの技術閉鎖であり運用鍵・Root/native所有・配備/正式451資格の代用ではない。Source/Test/SS/新BUG0、正式1964/53・歴史17/190・QA051final/工数null/HOLD不変更。

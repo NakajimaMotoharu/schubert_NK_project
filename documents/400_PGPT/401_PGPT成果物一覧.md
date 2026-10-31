@@ -1,5 +1,7 @@
 # PGPT成果物一覧・進捗
 
+2026-10-31追加：3213～16/PG-D1032、原固定公開RFC署名vector全八/一suiteFES0・全一Source三physical（Code二/真正NoCode一）32L8M2C10B未達0、独立33・七境界oracle＋公開tuple二、registry34/WBS29＋四真正0。現2260/310・501Source756physical・四271402/未達44153、実public JCA検証true/秘密・運用key/sign/Root/実配備0。Source/Test/新BUG/正式加点0・工数null/HOLD不変。
+
 2026-10-31追加：3209～12/PG-D1031、原ReleaseInventory全16/一suiteFES0・全1Source3Code246L29M3C102B未達0/独立30・十oracle・registry34/WBS29＋四真正0。現2252/309・500Source753physical/四270399/未達44153、純JSON/合成hash label・自己四taskのみ、実release/署名/DB/鍵/配備へ換算0。Source/Test/新BUG/正式加点0・工数null/HOLD不変。
 
 2026-10-31追加：3205～08/PG-D1030、原WebRequestTrace全十/一suiteFES0、四Source五Code123L33M5C40B適用未達0・独立31/八oracle・34route/37annotation/14公開Source read。現2236/308・499Source750physical/四269396/自然180195/partial44153、Context旧partial history保持・registry34/WBS29＋四＋説明二真正0。BUG2179の説明flagは元保持/新版有限是正、Source/Test/正式/工数null/HOLD加点0。
