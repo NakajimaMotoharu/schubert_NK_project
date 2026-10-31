@@ -1,5 +1,7 @@
 # PGPT成果物一覧・進捗
 
+2026-10-31追加：3050～51/PG-D975、現965Main/1843class中1841を二方式で受動metadata照合、11922method(Code11393/NoCode529)・独立26。二Graph class entryは読取前HOLD/全method分母null、全965SourceFile結合・恣意的coverage除外なし。metadata数をPT/coverage/完成率には換算0、正式/451/HOLD不変更。
+
 2026-10-31追加：3048～49/PG-D974、固定五保存schemaの全row/hashを現rawへ照合、独立23・追加279参照/合計562/選択未参照929。元1491raw・283参照/旧失敗・費用保持、新規review/PT/適用性合格には加算0。次は全Mainのclass/method分母・明示TestIDの静的整理を優先する。
 
 2026-10-31追加：3046～47/PG-D973、保存解析から現全965Main/1491rawを11累積変更込みで構成、選択67review入力283厳密参照/1208当選択未参照、独立24。BUG2152/53の仮説/schema誤りを先行起票し旧工具失敗保持・新版有限是正。raw/参照数をF03合格・PT免除へ転用せず、正式/工数/HOLD不変更。
