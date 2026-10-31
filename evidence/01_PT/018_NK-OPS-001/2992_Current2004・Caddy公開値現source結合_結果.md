@@ -1,0 +1,3 @@
+# Current2004 Caddy公開値 現source結合結果
+
+2026-10-31/2991/PG-D957。15720/0421cef4/8b416979ee25722bcf4c5519a2b238f492b20d9d2e0f8f3835ed9b52a80ff11e、15722/d4114dc0/session33816/c725156c2a2059994f50c0f89002be567c559fdf49f8f9ad89efe56f2bc4fe92全真正0。registry34/WBS29・全旧proof/cost/metadata/別測定/API digest訂正/481484/受入を保持。485二side新overlayと486inventorySha256のみ、whole audit前後actual1同physical-scope HOLDのまま。current2004/442Source/584physical、四243/自然172不変、Snapshot未実行Codeも分母保持し未達21/37。正式1964/53/17-190/工数null/QA051final/全451安全HOLD不変更、Product/PT/VM/DB/権限操作0。BUG2144は2990の全限定対象/五passive負例で工具scope限定完了、元実行を再演しない。次exact15724保存通常push後、未完host PG/PTへ継続。

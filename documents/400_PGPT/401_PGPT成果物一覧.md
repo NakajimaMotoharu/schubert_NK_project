@@ -1,5 +1,7 @@
 # PGPT成果物一覧・進捗
 
+2026-10-31追加：2989～92/PG-D957、Caddy公開IP/inode値原whole9/3真正成功・独立37/reader五負例/registry34/WBS29。current1995→2004/261・Source440→442・五physical全分母、Snapshot未ロードCodeも0coverage保持し未達21/37、四243/自然172不変。BUG2144は旧reader用途不適合を先行是正・元失敗保持/原9再演0、実file/鍵/TLS/権限/Root操作0・正式/工数/全HOLD不変。
+
 2026-10-31追加：2985～88/PG-D956、Media/Scenario接続前原whole22/2真正成功、39null/33zero-JDBC/独立32・registry34/WBS29。current1973→1995/258・Source438→440・二新Source全Code二/NoCode二は未達保持、四243/自然172不変。BUG2141～43転記工具を先行是正し元失敗保持/再演0、三横断反例で再発防止、正式/工数/全HOLD不変更。
 
 2026-10-31追加：2981～84/PG-D955、PreSQL原whole13/3成功、独立32/registry34/WBS29。現1960→1973/256、新Source0、全旧438Source proof/coverage不変更・同exec別測定を明示。23 NPE/13 zero-JDBC assertions、実JDBC/SQL/DB0。BUG2140/YKT1887未束縛PIN工具を先行是正・元失敗保持/原13再演0、正式/工数/全HOLD不変。
