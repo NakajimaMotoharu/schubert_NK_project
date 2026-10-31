@@ -1,0 +1,9 @@
+# 質問・局所監査 三Source二十二site 用途確認結果
+
+2026-10-31/3178/PG-D1023/WBS-F03、開始1/4/8共有pp cap10維持。Submission795/Worker791/Log295全1881行と1448/1461/1467・承認SS312324351を確認。16392/chunk32d6e4/entrydb979a3e・lint0/body0、manifest **9c29b2aeddef946dcfcfc9b38b5d7afdbaf60a9f8f8631e51180bc728200947b**。独立16394/chunk496ea5/entryde527ec2・lint0/body0、manifest **87ed14caa6e477bbb2bfbd10eb6b7d180f2165b9861034cd74482af30c0dc808**。Source control九/metadata30＋byte四反例。independent工具生成前のJS anchor assert一回は適用前停止・file/body/Product未実行、対象guard行を明示してdraft生成（元成功の再実行ではない）。
+
+commandは `python3 -B tools/quality/pg11123_checked_python_entry.py tools/quality/pg16392_question_local_audit_twentytwo_purpose.py` と同方式16394。各 `evidence/provisional/PG16392-question-local-audit-twentytwo-purpose-v1/` と `PG16394-question-local-audit-twentytwo-post-v1/` に実時刻/環境/tool/Source/run/真正終了を保持。原13253XML/findings/全Source SHA/attrs/診断と元16386/88の22span・helper5d0866d2を結合。独立側はhelperを呼ばず、raw連続backslash regexで各Source二ineligible/eligible零とUTF8 byte位置を再構成。資格を用途確認と混同せず、Source修正/マスク/翻訳0。
+
+Submissionは受付/短いSENT read/保持拒否auditの各owned transaction、原monotonic budget・保存結果/受付identityを維持し、rollback secondaryのfatalでもTWR closeを残す。Workerはprovider Runtimeをfatal分類してからactual count4で分け、通常業務ERRORと最終DLQ dispatch/SENT待機を別にし、durable ERROR証明不整合をfatal ACKへしない。Logはlocal PENDING→ordinary projection FAILEDとprimitive logger故障/既terminal通知の順・直接Error規則を分離。projectの直接rollback Error優先は1448の既契約であり、API first-primary表へ統一しない。callback/provider帰還・Graph finite/identity・実DB/crypto/session/commit-close/SENT/ACK/nativeは今回未実証。
+
+参照1171＋用途310=1481/1491・残RootFailedStartRecovery十（Source本文/実hash/metadataへの新アクセス無し）。first-ever理由数/actualViolationCount null・抑制0/PT免除false、F03/451全体受入false。新Product/PT/Source変更/BUG/拒否/正式受入0、2174/296・四262/383・正式1964/53・歴史17/190・工数null/QA051final・全HOLD不変更。fresh21:07used59/rem41/reset1793774153/短期null/券0、actual/N/Tnull、usage20:36:50cursor3c92ac8b…/次21:36欠測補填0。保存後は通常PTの原whole候補を既参照/catalog/後続証跡と照合して選び、Root保留を迂回せず継続する。
