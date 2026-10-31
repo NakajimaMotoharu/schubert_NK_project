@@ -1,5 +1,7 @@
 # PGPT成果物一覧・進捗
 
+2026-10-31追加：3039～43/PG-D971、公開値original whole4/1成功・独立43/registry34＋outer三/WBS29。2060→2064/275・五Source全22physical(17Code5NoCode)分母へ未達保持、outerCode十二trueprobe0。四100増分0/未達37Source83physical・正式/工数/HOLD不変更。45→50共有点検で+152method/+38Source/四+8・新規受入0を数値化し、次は極小値型追加よりG13現1065静的descriptor/残F03適用性へ優先変更。
+
 2026-10-31追加：3035～38/PG-D970、ScenarioRecordStream原whole5/1成功・一Source L30M6C1B16全100、独立38＋説明訂正五/registry34＋分類三＋訂正三/WBS29。2055→2060/274・Source462→463・四250/364、自己最大48MB/16channel/JDK forceと公開SHAを明示。BUG2151は128public refs全照合・Reader一fieldだけ補足訂正し旧原4/counter不変更。正式/工数/HOLD不変。
 
 2026-10-31追加：3031～34/PG-D969、MaintenanceRecords原whole8/1成功・独立36/registry34＋partial三/WBS29。2047→2055/273・Source460→462、全L66cov17miss/M18cov2miss/C3/B21。Completion一四100/codec未達二method17lineを分離、独立ASCII四trace一致・自己64task/32WARNING。原8再演/実親・退役・Root-native0、正式/工数/HOLD不変。
