@@ -1,0 +1,5 @@
+# Current2661・Scenario配信Snapshot原六 結合結果
+
+3369/3370/PG-D1082・source6b53。17298-a5e3a7b7→17300-a028cefdの原6/2・24独立反例/6oracle/新二Source一四100一partial/固有offset26根拠を17302-b92a45b5→17304-e82d9045へ両側binding。元logical/941・943歴史physical・owner/cost・全旧Source/counter/受入/予測不変更、overlay二領域追加と486.inventorySha256だけ更新。既全WBS監査HOLDは未再実行/未受入。
+
+現2661/390・普通2642残3144/resource71内数/quality19別/190JVM2793/必要repeat132、Main549943/四288432/executable407/自然183198/NoCode6-6/partial72307。物理943同数を歴史943のsource再束縛へ使わない。新規製造Main0/新規測定Main2、Delivery全32L4M1C4B四100、Snapshot未達1L2B保持。Main canonical P00806/P00805・Test二UNKNOWNでowner482baseline233候補271UNKNOWN、変更費F03からcanonical捏造0。正式1964PT53scope/17of190/工数null/QA051final/全HOLD不変。
