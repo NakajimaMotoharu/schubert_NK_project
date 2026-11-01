@@ -1,5 +1,7 @@
 # PGPT成果物一覧・進捗
 
+2026-11-01追加：3448/3449/PG-D1114。API/Web新Map guard二＋必要原Inputs八は十件/四suite成功、全二Source26L8M4C全miss0/branch自然0=N/A・strictgate1保持。旧partial二履歴保存、現2852/429・quality46/普通2806・自然187204/四298443不変。非秘密SHA256 trueを開示/実key-native-start0、正式1964/53/新WBS受入0/工数null/HOLD維持。
+
 2026-11-01追加：3446/3447/PG-D1113。退役純codec独立四＋元Records必要repeat八を一exec十二二成功、全二Source83L18M2C31B四100。既Retirement Source初測定一/新規製造file0、旧Records partial履歴保存。現2850/427・quality44/普通2806不変、四298443・217JVM2997/repeat147。実GC/退役/Root/native0、正式1964/53/新WBS受入0/工数null/HOLD不変。
 
 2026-11-01追加：3444/3445/PG-D1112、閉projection新独立quality六一成功、全14L2M1C18B四100/旧partial履歴。現2846/426・quality40/普通2806不変、四296441・216JVM2985/repeat139。工具説明混入/訂正rawschema/XML所在の2222～24・YKT1969～71は先行起票→metadataのみ是正/独立照合、原成功再演0。正式1964/53/新WBS受入0/工数null/HOLD維持。
