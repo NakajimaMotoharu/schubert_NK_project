@@ -1,5 +1,7 @@
 # PGPT成果物一覧・進捗
 
+2026-11-01追加：3355～57/PG-D1077、資格buffer/ACL値原20/3FES0、Db/Aesの二Source四counter100%、Access未達3L1M6Bを保持。独立67/20oracle・design固有補足、現2639/384・Main546940/四286430、registry34二chain四profile/WBS29四真正0。Test乱数byte/三自己poolを開示・実資格/鍵file/権限操作0、正式工数null/HOLD不変。
+
 2026-11-01追加：3352～54/PG-D1076、Artemis proxy原3/1FES0→全二Code未達37L10M1C1B/独立66三oracle。scope-only現2619/381、Main543937/四284428旧proof保持、registry34三profile/WBS29四真正0。実broker/接続/電文0・正式工数null/HOLD不変。
 
 2026-11-01追加：3350～51/PG-D1075、API観測4Main/527行PG静的レビュー・既HOLD依存の元134件は起動前NOT_RUN/null。17196-d714469a/静的10反例0をPT成功へ加算0。固有2616/380・四284428/正式工数null不変、2196/97有限閉鎖追記・2195OPEN、独立残件へ継続。
