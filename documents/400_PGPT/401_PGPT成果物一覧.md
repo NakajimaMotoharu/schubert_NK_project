@@ -1,5 +1,7 @@
 # PGPT成果物一覧・進捗
 
+2026-11-02追加：3501/3502/PG-D1139、最新WBS primary13846の明示270Test候補を当same-byteへ接続・工具276/13/独立34/WBS29等。owner585/532/六UNKNOWNへ（累計296改善）、旧資格flag不明五は不明保持・旧runtime転用0。残六はJS四/resource一/品質工具一で根拠row無し。製品PT/coverage/新製造/受入0、現3008/451/正式/工数null/HOLD維持。
+
 2026-11-02追加：3499/3500/PG-D1138、BUG2234/YKT1981 same-byte24候補（既Main三/Test・fixture21）を元明示根拠へ接続・工具30/13・独立34/WBS29等。先行二を含めowner候補26改善、585/262/276へ訂正、他276は旧登録なし24/byte相違252の理由保持。製品PT/coverage/新製造/受入0・現3008/451/正式/工数null/HOLD不変。
 
 2026-11-02追加：3497/3498/PG-D1137、BUG2234/YKT1981先行起票・同byte二Testの既明示owner候補接続/工具14vector・独立registry34/WBS29等。owner585/238/300へ二候補だけ解決し試験/Source/cost/受入不変更。横展開の追加same-byte24は未確認でYKT OPEN、二件だけ完了としない。現3008/451・正式/工数null/HOLD不変。
