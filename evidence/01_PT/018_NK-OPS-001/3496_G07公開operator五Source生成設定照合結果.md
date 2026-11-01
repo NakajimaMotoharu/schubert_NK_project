@@ -1,0 +1,13 @@
+# G07 公開operator五Source・限定照合結果
+
+3495/PG-D1136、評価source6b53efeec87f3ec36a840dd8e7759656cb4aee5c/HEADcc388c2f491ff2600fc0757ee9c369b90e774dd6/dev-foundation。歴史scan sourcefb9fce0f/content05d73a7974da8df92228160b96d91e7a006768f3と別domain、当sourceへnative結果を移転0。
+
+新固定読取対象五件は全て現在trackedで元inventoryの全byte SHAと一致。Pg383/384/385/386/387TrustedDeploymentは177/162/162/162/319行、合計982行。直接のjavaagent/sessionid/destfile/JaCoCo writer/RuntimeData/setSessionId literalは当五Source内0。公開class/main宣言とhash/bytes/行数/元Git objectをsource-witnesses.jsonへ保存。operatorは配備等の入口であり、直接literalの不在は環境/JVM/間接呼出の設定不存在を証明しない。今回はその先のsource/実操作へ拡大しない。
+
+command=python3 -B tools/quality/pg11123_checked_python_entry.py tools/quality/pg18400_g07_public_operator_source.py、2794d2真正0、entry8f9383ad38eb15b6318252a8ac1bc3e221bb4202e58a004e11327a9820c35e8a・PG18400-g07-public-operator-source-v1/manifest.json SHA7c9eb1697ec0c7a6514a820bbb5dbb7b35f788688f1e38a5c64860e315fbaaf4。独立command同wrapperのpg18402_g07_public_operator_source_post.py、73aacb真正0、entry477de784f02e8480cf0f9a9077265a491d3934b632393937cc6c068a294a06a8・PG18402-g07-public-operator-source-post-v1/manifest.json SHAffc7af97080264ee57d4e6b14981745ff30de0b37f6eb5f521f29498ba8e8ea7。metadata40反例・safe row六改変の固定equal比較、全五元inventory/宣言/行数/実sourcehash独立照合。実時刻/OS/Python/実command/hash/終了は当manifest/invocationを正とする。
+
+NO_DIRECT_LITERAL_CONFIGURATION_IN_FIXED_READ_SET、generator source-bound資格・環境/推移closure・実exec session/class由来は未証明。3024の不足は残るが、新五Sourceも直接生成設定の証明にはならないことを追加確認した。binary閉鎖0/22・未分類4493・actualSecretCount null・G07/451未受入を維持し、同じ不足を次群で再照合しない。新しい具体的公開根拠がない限りこのread-setを拡大しない。
+
+Product/Java工具compile/load/main/Unit/VM/SSH/DB/署名/配備/stop/scan/exec parse/別履歴/私有raw/参照先path読取0。source内私有path文字列は参照先へアクセスしていない。RootFailed source/保持二工具metadata前除外/原本DBBackup鍵/native/旧成功失敗保全。確認作用actual0は製品PT成功でない。新PG/PT PASS/coverage/ordinary/新受入0、現3008/451・Main650/1093/四334486/正式1964/53・歴史17/190/工数null/QA051final/全HOLD不変。
+
+群開始.5/2/4pp cap10/開始3757固定、共有88→88は整数丸め・他chat未分離、専有費N/Tnull。実利用枠reman12・reset1793774153/短期null、原見積/改訂残予測/群見積保持、券/課金/モデル変更0。新source/新PTを作る必要性のない証拠上の不足を文書レビューとして扱い、通常小区切りで全体停止しない。

@@ -1,0 +1,9 @@
+# G07 公開operator五Source・生成設定の限定照合仕様
+
+群PG18400-G07-PUBLIC-PRODUCER-SOURCE/開始3757、事前.5/2/4pp cap10/WBS-G07、PG-D1136。評価source6b53/開始HEADcc388c2f491ff2600fc0757ee9c369b90e774dd6、元scanはcontent05d73a7974da8df92228160b96d91e7a006768f3/歴史sourcefb9fce0fで別domain。3023/3024の既二source/五manifest/十exec参照照合を再演せず、新たに元scan inventoryへ存在する公開tracked Java五Sourceを限定候補として調べる。
+
+対象はtools/quality/vm/050_s1/Pg383TrustedDeployment.java～Pg387TrustedDeployment.javaのみ。元inventory SHAにそれぞれ3252f49b/c37ca6c9/12d8e47e/6b22e954/ec63768dの全64桁を照合してから静的文字列/行数/宣言名を確認する。現在trackedで元byteと一致することは生産tool実行の許可や実際の生成由来の証明でない。operatorのcompile/main/VM/SSH/systemctl/DB/配備/署名/stop等は一切実行しない。source内の私有path記述は参照先を開かず、鍵/credential/raw/失敗cohort/RootFailed source/保持二工具へアクセス0。新fixture/Product/Java起動/exec decode/scan/別Git履歴取得0。
+
+到達可能な限定成果は「固定五Sourceで直接のjavaagent/sessionid/destfile/JaCoCo writer設定literalを見つけたか」と各Sourceのhash/bytes/lines/公開class宣言・operator役割の対応。literalが無いことを、環境/JVM設定/呼出先/全生成経路不存在と同一視しない。そこまで未確認ならNO_DIRECT_LITERAL_CONFIGURATION_IN_FIXED_READ_SETと保持し、generator source-bound/実session/class由来/非秘密/22binary閉鎖/4493分類完了は認定0。原私有工具の回収や間接経路への対象拡大は当群に含めない。
+
+実commandは新18400 Python読取manifest writerと18402独立readerだけ、元operatorをsubprocessで呼ばない（git ls-filesのnames-only tracked照合のみ）。独立readerは元inventory・実source全byteとsafe schema/未知field/偽generator証明/偽PASSを反例で確認し、3496へ実時刻/環境/command/exit/path/hash/限界を保存する。確認作用のactualExit0を製品PT/coverage/正式受入へ加点しない。原見積/改訂残予測/元scan/先行成功/全HOLD/451/モデル/費用条件を保持する。

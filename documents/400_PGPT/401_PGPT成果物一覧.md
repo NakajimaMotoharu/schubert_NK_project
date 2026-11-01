@@ -1,5 +1,7 @@
 # PGPT成果物一覧・進捗
 
+2026-11-02追加：3495/3496/PG-D1136、元scan一致の公開operator五Source/982行を追加限定照合・独立40metadata否定/六改変比較。直接agent設定literal0だがgenerator/環境/実session由来は未証明、binary閉鎖0/22/残4493/G07未受入。製品PT/coverage/新受入0・現3008/451等不変、同read-set反復をしない。
+
 2026-11-01追加：3493/3494/PG-D1135、Webログclaim値独立六件一suite・一Source17L3M1C10B四counter100、独立44否定/六oracle/数値九・worker九/CRC一。実claim/lease所有/再送/DB/crypto0、現3008/451・普通2806不変/quality202・Main650/1093、正式/新受入0/工数null/HOLD維持。
 
 2026-11-01追加：3491/3492/PG-D1134、質問通知検索formの独立26件二suite/全二Source150L25M2C104B四counter100、独立43否定/26oracle/別UTC五対・日数差三。供給role分岐は実認可でなく、実DB/HTTP/Graph0。現3002/450・普通2806不変/quality196・Main649/1092、正式/新受入0/工数null/HOLD維持。
