@@ -1,5 +1,7 @@
 # PGPT成果物一覧・進捗
 
+2026-11-01追加：3407/PG-D1095、C08 canonical契約十二対応/原八全method・50receipt参照、独立30・新製品実行0。scope一→contract+scope二evidence-ready、criteriaAccepted/leaf0・正式工数null/HOLD不変。
+
 2026-11-01追加：3404～06/PG-D1094、自己API default loopback原一/一成功・独立31/一oracle/TestCRC/差分定義三反例。旧API11/fullSource不変・scope-only現2747/405/四289434不変、BUG2210旧失敗/新v2保全、正式工数null/HOLD不変。
 
 2026-11-01追加：3403/PG-D1093、C08現owned一/一Source/run/原担当結合・独立30、inventory evidence-ready一/criteriaAccepted0/leaf未受入。BUG2209工具正本読取是正・dev353の空行三差を保全しmain全byte固定、既四WBS/予算/2746実測/正式工数null/HOLD不変。

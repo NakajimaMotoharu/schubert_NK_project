@@ -1,0 +1,303 @@
+{
+  "rows": [
+    {
+      "design": "SS343\u00a76.8/SS353\u00a71,18",
+      "expect": "argv zero; nonzero argc or unresolved placeholder exits70 before Java",
+      "id": "C08-C01",
+      "kind": "OWNED_SCRIPT",
+      "methods": [
+        "argumentsAndPlaceholders"
+      ],
+      "rd": [
+        "OPS-002",
+        "OPS-005"
+      ],
+      "scriptAnchors": [
+        "if [ \"$#\" -ne 0 ]; then",
+        "*@*) exit 70 ;;"
+      ],
+      "testAnchors": [
+        "List.of(List.of(\"unknown\"), List.of(\"one\", \"two\"))",
+        "assertEquals(70, result.code())"
+      ],
+      "testIds": [
+        "PT-OPS-INBOX-004"
+      ]
+    },
+    {
+      "design": "SS343\u00a76.8/SS353\u00a712,13",
+      "expect": "fixed Java/artifacts/classpath, bounded memory, UTF8/UTC, no configurable command or secret output",
+      "id": "C08-C02",
+      "kind": "OWNED_SCRIPT",
+      "methods": [
+        "releaseClasspathAndIsolation"
+      ],
+      "rd": [
+        "OPS-004",
+        "OPS-005"
+      ],
+      "scriptAnchors": [
+        "--enable-native-access=ALL-UNNAMED",
+        "-cp '@API_JAR@:@LIB_DIR@/*'",
+        "-XX:+ExitOnOutOfMemoryError"
+      ],
+      "testAnchors": [
+        "List.of(",
+        "\"eval \", \"sudo \", \"systemd-run\""
+      ],
+      "testIds": [
+        "PT-OPS-INBOX-008"
+      ]
+    },
+    {
+      "design": "SS343\u00a76.8/SS353\u00a710",
+      "expect": "exact receipts0/10/50/70 with successful JVM marker map to corresponding OS exits; JVM0 alone not business success",
+      "id": "C08-C03",
+      "kind": "OWNED_SCRIPT",
+      "methods": [
+        "statusMapping"
+      ],
+      "rd": [
+        "OPS-010",
+        "OPS-017"
+      ],
+      "scriptAnchors": [
+        "printf '.'",
+        "20 30 0a 2e') exit 0",
+        "20 31 30 0a 2e') exit 10",
+        "20 35 30 0a 2e') exit 50",
+        "20 37 30 0a 2e') exit 70"
+      ],
+      "testAnchors": [
+        "List.of(0, 10, 50, 70)",
+        "assertEquals(status, result.code())"
+      ],
+      "testIds": [
+        "PT-OPS-INBOX-002"
+      ]
+    },
+    {
+      "design": "SS343\u00a76.8/SS353\u00a710,18",
+      "expect": "JVM1/70/143 or absent Java never normalized to success",
+      "id": "C08-C04",
+      "kind": "OWNED_SCRIPT",
+      "methods": [
+        "statusMapping"
+      ],
+      "rd": [
+        "OPS-010",
+        "OPS-017"
+      ],
+      "scriptAnchors": [
+        "printf '!'",
+        "*) exit 50 ;;"
+      ],
+      "testAnchors": [
+        "List.of(1, 70, 143)",
+        "root.resolve(\"missing-java\")"
+      ],
+      "testIds": [
+        "PT-OPS-INBOX-002"
+      ]
+    },
+    {
+      "design": "SS343\u00a76.8 SSC053/SS353\u00a71,18",
+      "expect": "29 malformed raw receipt vectors including every NUL position/highbit/CRLF/extraLF/duplicate reject50 without normalization",
+      "id": "C08-C05",
+      "kind": "OWNED_SCRIPT",
+      "methods": [
+        "malformedReceipts"
+      ],
+      "rd": [
+        "OPS-005",
+        "MON-004"
+      ],
+      "scriptAnchors": [
+        "/usr/bin/od -An -v -tx1 -w64"
+      ],
+      "testAnchors": [
+        "assertEquals(29, receipts.size())",
+        "receipts.add(exact.substring(0, i) + '\\0' + exact.substring(i))"
+      ],
+      "testIds": [
+        "PT-OPS-INBOX-003"
+      ]
+    },
+    {
+      "design": "SS343\u00a76.8/SS353\u00a718",
+      "expect": "od failure returns50; test-only fixed boundary fault not production configurable tool",
+      "id": "C08-C06",
+      "kind": "OWNED_SCRIPT",
+      "methods": [
+        "statusMapping"
+      ],
+      "rd": [
+        "OPS-002",
+        "OPS-005"
+      ],
+      "scriptAnchors": [
+        "else\n    exit 50\nfi"
+      ],
+      "testAnchors": [
+        "\"#!/bin/sh\\nexit 1\\n\"",
+        "Files.readString(injected).replace(\"/usr/bin/od\""
+      ],
+      "testIds": [
+        "PT-OPS-INBOX-002"
+      ]
+    },
+    {
+      "design": "SS343\u00a76.8/SS353\u00a712",
+      "expect": "wrapper consumes receipt internally; no body/password/token/credential or receipt printed",
+      "id": "C08-C07",
+      "kind": "OWNED_SCRIPT",
+      "methods": [
+        "statusMapping",
+        "malformedReceipts",
+        "argumentsAndPlaceholders",
+        "realMainBridge"
+      ],
+      "rd": [
+        "OPS-005",
+        "MON-004"
+      ],
+      "scriptAnchors": [
+        "inspector_receipt=$("
+      ],
+      "testAnchors": [
+        "assertEquals(\"\", result.out())",
+        "assertEquals(new Result(70, \"\", \"\"), result)"
+      ],
+      "testIds": [
+        "PT-OPS-INBOX-002",
+        "PT-OPS-INBOX-003",
+        "PT-OPS-INBOX-004",
+        "PT-OPS-INBOX-005"
+      ]
+    },
+    {
+      "design": "451\u00a73 Shell/SS353\u00a713",
+      "expect": "original sh-n/ShellCheck0.11 style/error/warning zero on rendered exact wrapper",
+      "id": "C08-C08",
+      "kind": "OWNED_SCRIPT",
+      "methods": [
+        "renderedShellCheck"
+      ],
+      "rd": [
+        "OPS-004"
+      ],
+      "scriptAnchors": [
+        "#!/bin/sh",
+        "set -eu"
+      ],
+      "testAnchors": [
+        "\"--shell=sh\", \"--severity=style\"",
+        "assertEquals(new Result(0, \"\", \"\"), result)"
+      ],
+      "testIds": [
+        "PT-OPS-INBOX-001"
+      ]
+    },
+    {
+      "design": "SS343\u00a76.8/SS353\u00a73,10",
+      "expect": "related C02 unit ordered before Broker/API/Web/Caddy, fixed private actor/entry/exit10/hardening, own syntax-only verifier",
+      "id": "C08-R01",
+      "kind": "RELATED_OWNER_NOT_NEW_C08_ARTIFACT",
+      "methods": [
+        "baseUnitAndSyntax"
+      ],
+      "rd": [
+        "OPS-009",
+        "OPS-011"
+      ],
+      "scriptAnchors": [],
+      "testAnchors": [
+        "Unit.Before=artemis.service schubert-nk-api.service schubert-nk-web.service caddy.service",
+        "Service.SuccessExitStatus=10",
+        "Service.ExecStart=/opt/schubert-nk/current/operations/bin/schubert-nk-inbox-inspector"
+      ],
+      "testIds": [
+        "PT-OPS-INBOX-006"
+      ]
+    },
+    {
+      "design": "SS343\u00a76.8/SS353\u00a712",
+      "expect": "related C02 absolute credential paths and none/context/response/both four declarations; no actual key/rotation",
+      "id": "C08-R02",
+      "kind": "RELATED_OWNER_NOT_NEW_C08_ARTIFACT",
+      "methods": [
+        "previousProfiles"
+      ],
+      "rd": [
+        "OPS-005"
+      ],
+      "scriptAnchors": [],
+      "testAnchors": [
+        "List.of(context, response)",
+        "\"Service.LoadCredential\""
+      ],
+      "testIds": [
+        "PT-OPS-INBOX-007"
+      ]
+    },
+    {
+      "design": "SS343\u00a76.8/451\u00a72",
+      "expect": "related F02 Java25/JDBC42.7.13 compile dependency verified separately, no extra ownership/fee",
+      "id": "C08-R03",
+      "kind": "RELATED_OWNER_NOT_NEW_C08_ARTIFACT",
+      "methods": [
+        "releaseClasspathAndIsolation"
+      ],
+      "rd": [
+        "OPS-004"
+      ],
+      "scriptAnchors": [],
+      "testAnchors": [
+        "assertEquals(\"25\",",
+        "assertEquals(\"42.7.13\","
+      ],
+      "testIds": [
+        "PT-OPS-INBOX-008"
+      ]
+    },
+    {
+      "design": "SS343\u00a76.8/SS353\u00a71,18",
+      "expect": "own empty-env child missing config returns70 before native factory; no real launcher success/native coverage claim",
+      "id": "C08-R04",
+      "kind": "RELATED_OWNER_NOT_NEW_C08_ARTIFACT",
+      "methods": [
+        "realMainBridge"
+      ],
+      "rd": [
+        "OPS-005"
+      ],
+      "scriptAnchors": [
+        "dev.codex.schubert.nk.api.maintenance.InspectorLauncher"
+      ],
+      "testAnchors": [
+        "assertEquals(new Result(70, \"\", \"\"), result)"
+      ],
+      "testIds": [
+        "PT-OPS-INBOX-005"
+      ]
+    }
+  ],
+  "scopeLimits": [
+    {
+      "reason": "Human incident triage/manual system,DB,backup,asset,rotation/drift/disaster/smoke/IT rehearsals; owned shell exposes only fixed private Inspector. These obligations stay other actor/workflow/IT gates, not C08 execution authority or accepted system outcome.",
+      "section": "SS353\u00a72-6,8-9,11-17"
+    },
+    {
+      "reason": "DLQ browse/replay/approval and actual DB/JMS effects not implemented by wrapper; no new message/credential/body access, other workflow acceptance/HOLD unchanged.",
+      "section": "SS353\u00a77.1-7.2/SSC156"
+    },
+    {
+      "reason": "Historical cohort recovery contracts remain HOLD; no investigation/replay/authority inferred from missing notice or script metadata. No old PID/source/run reused.",
+      "section": "SS353\u00a720 and historical SSC headers"
+    },
+    {
+      "reason": "Owned artifact is POSIX sh, declares no Java class/method and owns no related Java Source. Java four counters unmeasured/not asserted, not exclusion of any Java code; global Java/PMD/F03/451 conditions unchanged. Shell uses argc/placeholder/hex fail-closed contract, no Java NPE concept.",
+      "section": "451 Java coverage/null/static"
+    }
+  ]
+}
