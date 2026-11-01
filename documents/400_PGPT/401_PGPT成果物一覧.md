@@ -1,5 +1,7 @@
 # PGPT成果物一覧・進捗
 
+2026-11-01追加：3474/3475/PG-D1126、Media表示新十二件一suite成功・全二Source89L11M2C41B四counter100。生成switch一はCode有/公式filter0として物理保持。stub hashは未検証・実file/client/Browser受入0、Current六固定title根拠は読取のみ。現2937/440・quality131/普通2806不変・Main631/1072/四328480、新製造0/正式1964/53/新WBS受入0/工数null/HOLD維持。
+
 2026-11-01追加：3471既HOLD照合・3472/3473/PG-D1125、User表示新八件一suite成功・全二Source三Code113L34M3C36B四counter100。独立byte根拠の説明誤記BUG2230/YKT1977は原文保全→標準codec四vector/EF・逆順二否定で訂正、Main/Test/製品再演0。現2925/439・quality119/普通2806不変・Main629/1069/四326477、新製造0/正式1964/53/新WBS受入0/工数null/HOLD維持。
 
 2026-11-01追加：3468共有80→85点検・3469/3470/PG-D1124、要求表示新十件一suite成功・四Source79L22M4C22B四counter100。pure form/locator/mapだけ、password非保持/200Unicode/整合・全nullを独立検証。現2917/438・quality111/普通2806不変・Main627/1066/四324474、新製造0/正式1964/53/新WBS受入0/工数null/HOLD維持。
