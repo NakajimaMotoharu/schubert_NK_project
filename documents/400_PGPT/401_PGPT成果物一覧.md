@@ -1,5 +1,7 @@
 # PGPT成果物一覧・進捗
 
+2026-11-01追加：3403/PG-D1093、C08現owned一/一Source/run/原担当結合・独立30、inventory evidence-ready一/criteriaAccepted0/leaf未受入。BUG2209工具正本読取是正・dev353の空行三差を保全しmain全byte固定、既四WBS/予算/2746実測/正式工数null/HOLD不変。
+
 2026-11-01追加：3400～02/PG-D1092、Inspector配備原八/一・50自己工具receipt成功、独立25/八oracle/三catalog反例/Test三CRC。own empty-env child CLIは未測定/未native資格・Main加点0、現2746/404/resource79内数/四289434不変、BUG2208旧失敗/新v2・Source helper十一manifest束縛、正式工数null/HOLD不変。
 
 2026-11-01追加：3397～3399/PG-D1091、Expiry owner値/公開雛形read原二/一成功・全三physical未達213L18M1C64B。独立30/二oracle/Unit五否定/TestCRC、工具BUG2206/07とYKT1953/54旧失敗/新v2を保全、現2738/403/Main559982/四289434不変・正式工数null/HOLD不変。
