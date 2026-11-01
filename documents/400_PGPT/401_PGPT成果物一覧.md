@@ -1,5 +1,7 @@
 # PGPT成果物一覧・進捗
 
+2026-11-01追加：3444/3445/PG-D1112、閉projection新独立quality六一成功、全14L2M1C18B四100/旧partial履歴。現2846/426・quality40/普通2806不変、四296441・216JVM2985/repeat139。工具説明混入/訂正rawschema/XML所在の2222～24・YKT1969～71は先行起票→metadataのみ是正/独立照合、原成功再演0。正式1964/53/新WBS受入0/工数null/HOLD維持。
+
 2026-11-01追加：3442/3443/PG-D1111、Web純ready独立二＋既healthy必要repeat四を一exec測定・六二成功、全7L2M1C24B四100/旧partial履歴。現2840/425・quality34/普通2806不変・四295440、215JVM2979/総repeat139・joint55method5run。正式1964/53/新WBS受入0/工数null/HOLD不変。
 
 2026-11-01追加：3440/3441/PG-D1110。Principal表示snapshot独立五一成功、全一Source15L3M1C10B四100/旧partial履歴保存。現2838/424・普通2806/quality32・四294439、正式1964/53/新WBS受入0/工数null不変。17918工具cascadeはBUG2220/YKT1967先行→17919v2と独立metadata否定二・WBS二面真正0、原成功再演0。17925完成manifest回収/元wrapper終端未回収は区別し3441記録。

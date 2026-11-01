@@ -1,0 +1,26 @@
+# 閉Web認証projection値境界 独立PT結果
+
+source6b53efeec87f3ec36a840dd8e7759656cb4aee5c未配備、qualification HEAD61e8258e6a32aecbc2c3d98fb0cc96ecfcfcb281/dev-foundation。群17950/event3700、固定1.5/4/8pp cap10、3444/PG-D1112。Main41行/auxiliary全body読了、Main/Test不変更、新独立quality六一。
+
+17950/session28660終端953b5a真正0・六一FESabort0→17952/session96180終端897314真正0・全一Source一Code14L2M1C18B全miss0/strictgate0。ただし旧17952の説明field一つに前群mixed4+2が混入（BUG2222/YKT1969）、元d82c2f50は歴史保存し資格参照は訂正17955へ。17953/f6a572真正1のraw schema tests誤参照（BUG2223/YKT1970）を修正前起票→17955/9eb0d1真正0はmetadataだけ訂正、普通0/quality6・rawケース/suite閉集合を確認し各否定三。元Product/成功analyzer再演0、全source・数値・元stage/exec/環境不変更。
+
+17954/db696b真正0・metadata32/六oracle/TestCRC外一＋subclass一の全二physical、同数unknown physical否定を含む。null/anonymous、USERADMIN exact token・同principal/role一個・credentials/details null、foreign型/subclass/未認証/foreign principal/nullprincipal、credentials/details、authority数0/2/逆/未知/null値、状態変化の再読を手書独立期待へ結合。SSEは固定catalog ctorのみでpreserveFatal/graph0。自己JVM内DTOを実SecurityContext/SessionRepository/Filter/APIへ設置せず、実認証/権限付与/session発行0。
+
+|公開manifest（evidence/provisional/<名称>/manifest.json）|SHA256|
+|---|---|
+|PG17949-closed-projection-value-review-v1|3445ac22444a6ca1d2e20a8f523e45529933ee1dec08268cd5826790218413a0|
+|PG17950-closed-projection-six-pt-v1|c32700867c3272c5453906200ebde55b097f6f93e7ac638b1c3ad8b954bddf7a|
+|PG17955-closed-projection-six-post-v3|1926662d6d41c53dba39955e9c29a52f1d1e540e8882b4c70257c677a0ad0d9e|
+|PG17954-closed-projection-six-independent-v1|17019f5d360ca190b629980bf04815695e8b9b4317ec93c800daf384b868ad1d|
+|PG17958-current2846-closed-projection-registry-v1|b65ad3a517cd4ef79b9587ec948e17bf397d873274d2f800861e1bcab59f2c94|
+|PG17961-current2846-closed-projection-registry-post-v2|49b2143675ba8d3562892988ac50296e67f06e9219029a84c6499f09e28c1705|
+|PG17962-current2846-closed-projection-wbs-v1|46b0da1a957c41ff6f5c69b590d2260298b8dc01ca07b7f4f60c64aba7c9ac01|
+|PG17964-current2846-closed-projection-wbs-post-v1|183c4b6a0ac72b401ef9d1b90426c3b8a0d63ff98d3e73b4d98e0b8b5d1c19db|
+|PG17952-closed-projection-six-post-v1|d82c2f5047798011110314ec634bcbd8abff267c00dd6d906d4f61455bd928c7|
+|PG17965-closed-projection-source-binding-v1|f0705ed49d336cc5ae350ecee20b9ea195c2f914f91ef31f5787540af6ba8ef0|
+
+17958/b9dfd7真正0→旧17960/a9669e真正1はmetadata訂正directoryへ元XML実体を誤期待（BUG2224/YKT1971修正前起票）。新17961/session17739終端00effa真正0で元17952のhash/source/actual0/cases/exec/session/XMLhash lineageを照合して元XMLを読取、否定三＋metadata34/置換四/入力二。17962/d76a9f→17964/session76162終端5ef325真正0・WBS29/ordinary四/writerbinding二、17965/94a9d9真正0・九source binding。旧失敗entry/終了/未作成OUTと原誤fieldを不変保全し、新source成功への流用0。工具mapの継承禁止・今回literal fieldだけの一回mappingへ改める。元GROUP_START writerの1a0d19 syntax errorはbody/event前、正規start3700だけ・二重試験0。
+
+旧ClosedWebAuthentication partial15759-a11c2bc0をqualificationReplacedUnitHistoryへ保存、新全同一分母一execへ置換/union0。固定公開context/Instant/role/DTO/authority・anonymous公開keyラベルのString hashだけ、実秘密/crypto/key/DBJMS/HTTP/FS/native/VM/Root/時計/Thread/executor0。callerの値を消して受入する動作なし、NPEはnonnull API違反だけでcatch正常化0。元normal14216/静的14224はMain不変更で再用しF03全体合格へ拡張しない。
+
+XML・command/実OS-JDK/時刻/終了code・branch/HEAD・input/Main/Test/class/exec hashはrawと元postおよび訂正lineageを根拠とする。新6を普通5786へ加算せずquality40別。固有2846/426・普通2806/5786残2980/resource79内数、216JVM2985=2846+139repeat、joint55method5run不変。Main5871020/822Code198zero・四296441Code416/自然185200/NoCode定義23-23/partial83356、別注釈37/owner522baseline236候補302UNKNOWN不変。正式1964/53・歴史17/190・新WBS受入0/工数null/QA051final/G07G13F03/451/全HOLD維持。三工具障害は有限再試験済み/保存commit push待ち、全PGPT完了ではない。
