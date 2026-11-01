@@ -1,0 +1,11 @@
+# Receipt・所有JDBC 原三PT結果
+
+source6b53efeec87f3ec36a840dd8e7759656cb4aee5c、3429/PG-D1105。17760 rawd8dd24ba736352e41dab8db845b6284af6cb6a59e45e0e8af42457745fafeae3/session33574終端62d16f真正0、原三/一suite・F/E/S/abort0。17762 posta2f6f4384ff5545642bbe0ab540e1d20e98292a810f6110c7229fa22055952c8/session78817終端e12454真正0、全source/元環境/単一session/CRC0/四held六native/Root不在確認。
+
+全二Source/三physical=Code二/NoCode Work一、未実行Code class0でも未実行method/branchを全分母。LINE covered65/missed29、METHOD9/1、CLASS2/0、BRANCH15/21、strict四100 gate1。Repository63L8M1C15B covered/29L1M21B missed、Exception2L1M1C全covered・自然B0（strict四100へ変換0）。補助SessionStoreException等の既proof/counterは保持/union0。
+
+17764 independentdfc6bd5f5cb63c49128a9b1cc9d26401a43a4518bdaf44bf552567c542fa7a08/080eb4真正0、metadata32否定/原三oracle/TestCRC一。元fatal identity・Setup取得前後close0/1、ResultSet/Statement/rollback/Connection/register cleanup各取得済scopeの一回解放、commit0、既unknown同一性/固定marker・SQL循環固定catalog/cause null/suppressed0を独立確認。元primary Error順位をAPIの別契約へ統一しない。実DB/認証/owner/acceptance/operation token/Root/native0。Fixture独自Thread0/JUnit元Timeout framework worker実数null。元ReceiptReferenceの実物31行を確認し、群開始記録の34は31へ追記訂正、元event保持/費用・成果再加算0。
+
+17768 registry34cfd2a3112993b52da7443376e7fd7470ed9709fd00e3612f3b5792c24d8727/f2be65→17770独立5aa885a45dfdbf3ba89291ec70f85573935e641bb89d4a44e15a00d64920173f/876a42真正0、metadata34/chain二/profile三/summary四。固有2810/419・普通2791/5786残2995/quality19別/resource79内数、210JVM2942=2810+132repeat/joint48。Main5691002/Code821metadata181（173trueNoCode7compiler1official）、四291436Code411不変・自然185200新一/NoCode6-6/partial87360、owner506baseline234候補300UNKNOWN。
+
+開始1/3/6cap10・共有79→79/reset1793774153は丸め観測、N/T・専有費null。15:03:22 usage cursorf777f656b7d6ab959a32358a72b11c68de2fc9fc4383765fab50604df8a263d3/9f825a真正0、明示usage新規0・不完全/欠測0補填なし、次16:03:22。今回工具/製品障害0/成功確認再演0。正式1964PT53scope・歴史17/190・新WBS受入0/工数null/QA051final/F03G07G13/451/全HOLD不変更。全commands/OS/JDK/branch/HEAD/time/input/XML/exec/hash/exitは各公開manifest保存。
