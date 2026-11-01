@@ -135,6 +135,19 @@ status/redirect、Content-Type/Disposition/Length/Range、security/cache header�
 Current sourceと実動が異なる場合は実動証跡をbaselineにする。NKで修正する利用者差異は新規DIFと必要なQA/RDF/UIC承認前に
 許容しない。
 
+### 8.1 CHR-L01の相関付き比較（QA-051/SSC-184、2026-11-02承認）
+
+§8のbaseline一致規則には、UI264 §5.1/DIF-010に明記したログaction名称と比較投影の差分だけを追加適用する。Current baselineを再取得・上書きして差分を消さず、他caseへこの例外を広げない。
+
+1. 実行前にCurrent/NKのsource・設計・artifact・fixture・oracle版と、今回操作ごとの独立期待表を固定する。SS351 §4/§4.1からcategory/action/記録先/必要件数を導き、実装や実測から期待値を生成しない。
+2. 既存ログの保全用beforeと専用fixtureを区別する。同じ操作とDOM条件を用い、request/event/message相関とbefore/afterの整合snapshotを保存する。時刻・最大IDの水位だけを相関証明に使わない。
+3. Current/NKのPK等を直接一致させる代わりに、承認されたaction対応と論理操作の相関を明示した安全投影を比較する。投影のfield/key、before/after、期待差分をartifactへ記録し、相関不能・不足・未登録追加を無視しない。
+4. REQUESTはlocal→outbox→DBを同じeventの識別根拠で追跡し、論理DB投影の欠落0・重複0、必要HTTP項目保持、再送時の冪等性を独立に検証する。業務/security監査の正本は既存設計のAPI transaction内DB記録のままとし、REQUEST投影で代替しない。
+5. 既承認設計の追加技術行も独立期待表で検証する。`menu`/`log_search`相当、画面の日時順・100件/page・表示件数・明細・検索及び業務結果の未登録差分をnormalizationで消さない。既存ログ保全の前後条件も検証する。
+6. 相関・観測の不足又は未承認の件数/順序/表示差は未判定又は不合格として記録し、別途仕様判断が必要なら影響を特定する。本承認を包括的な差分免除としない。
+
+比較artifact/oracleの改修、独立正常/欠落/重複/相関誤り/対象外差分の検証、最終同sourceの実NK CHR-L01は未完である。過去のactual0、設計承認、原観測を新方式のPASSに変換しない。今回のQA回答待ちは解消するが、資源所有・権限・安全・他の品質HOLD、利用枠停止と明示再開条件は維持する。
+
 ## 9. Case別実装契約
 
 | Case | Driver・入力 | Oracle・証跡 |
