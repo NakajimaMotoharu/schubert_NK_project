@@ -1,5 +1,7 @@
 # PGPT成果物一覧・進捗
 
+2026-11-02追加：3497/3498/PG-D1137、BUG2234/YKT1981先行起票・同byte二Testの既明示owner候補接続/工具14vector・独立registry34/WBS29等。owner585/238/300へ二候補だけ解決し試験/Source/cost/受入不変更。横展開の追加same-byte24は未確認でYKT OPEN、二件だけ完了としない。現3008/451・正式/工数null/HOLD不変。
+
 2026-11-02追加：3495/3496/PG-D1136、元scan一致の公開operator五Source/982行を追加限定照合・独立40metadata否定/六改変比較。直接agent設定literal0だがgenerator/環境/実session由来は未証明、binary閉鎖0/22/残4493/G07未受入。製品PT/coverage/新受入0・現3008/451等不変、同read-set反復をしない。
 
 2026-11-01追加：3493/3494/PG-D1135、Webログclaim値独立六件一suite・一Source17L3M1C10B四counter100、独立44否定/六oracle/数値九・worker九/CRC一。実claim/lease所有/再送/DB/crypto0、現3008/451・普通2806不変/quality202・Main650/1093、正式/新受入0/工数null/HOLD維持。
