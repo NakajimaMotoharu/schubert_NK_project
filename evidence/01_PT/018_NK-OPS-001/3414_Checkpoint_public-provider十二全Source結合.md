@@ -1,0 +1,7 @@
+# 3414 public checkpoint十二・全Source結合
+
+PT共通922001/NCHECK597001..005/NCHECK193001..006→whole FixedNativeCoverageCheckpointTest520→raw17620 XML十二→同exec/session/元Test CRC→完全FixedNativeCoverageCheckpoint.java八physical→registry17628/17630→WBS17632/17634を一意対応。source/Main95d70220/Test40d28e8f・provenance/input/hashは3412/3413/17635を参照。fake binary7byteを実native session/probe/現在actorの証拠に流用しない。
+
+主F03・P01809は費用参照内数、canonical/cost ownerは485実定義からMain baseline一と新Test UNKNOWN一を保存。旧全proof/経費/受入/943歴史候補不変を独立modelとmetadata29+ordinary四で確認。typedGuardCurrentHostPG17632Overlayはtechnical current560Source/990physicalだけでphase完成率ではない。
+
+先行fork-agent問題のmetadata-only候補を、名前だけでwhole許可とせずTest520/Main253/具体callee・agent absence・fake provider・公開reflection/resource・各fault境界を読んで別群PT_DEFAULTを確定した。rootnative/私有export/HOLD解除に依存しない原十二だけ一回。次のRootCurrentPermitPreflightTest六はdata verify/null guard/注入run callbackだけかを最新1001/1069/実run bodyから別確認し、同じ許可判断の無条件横流しをしない。
