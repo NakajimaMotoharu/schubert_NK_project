@@ -86,7 +86,7 @@ program/characterization/
 | DIF-007 | 一部画面だけnav情報 | 全保護画面にusername/role/logout | AUT-002、SECURITY設計 | Top bar情報追加 | CHR-U02 | UI設計決定 |
 | DIF-008 | 0件は空領域となる画面あり | `該当するデータはありません` | Accessibility、TST-002 | 空状態が明確 | CHR-S04/L01 | UI設計決定 |
 | DIF-009 | 複数voice時に本文重複の可能性 | Entry単位group化し本文1回 | DAT-004、現行dataの将来整合 | 現行1 link dataでは差なし | CHR-S08 | UI設計決定 |
-| DIF-010 | Log条件/levelが限定 | WARN、From/To、MQ/SYSTEM/BATCH等追加 | FUN-008、MON-003 | ADMIN検索項目追加 | CHR-L01 | RD確定 |
+| DIF-010 | Log条件/levelが限定、actionは空又は旧名称 | WARN、From/To、MQ/SYSTEM/BATCH等追加、SS351のaction名称へ統一。既存ログ保全＋今回操作の相関付き安全投影＋独立NK期待値で比較 | FUN-008、MON-003、QA-051/UIC-010/SSC-184 | ADMIN検索項目追加・ログaction名称統一。欠落/重複、未登録の表示・件数・順序差は許容しない | CHR-L01 | RD確定、QA-051の二点を2026-11-02承認。実装/比較試験は未完 |
 | DIF-011 | 認証済みHTML cache方針が限定的 | `Cache-Control: no-store` | SYS-013、MON-004 | Back時に再取得あり | CHR-O01 | UI設計決定 |
 | DIF-012 | 無効Rangeの明示仕様なし | 416＋総長Content-Range | PER-004、TST-002 | 不正Range応答を標準化 | CHR-M04/M07 | UI設計決定 |
 | DIF-013 | Inline onchange | CSP適合のsame-origin外部JS、無効時button | Security、TST-002 | 見える操作は維持 | CHR-S02 | UI設計決定 |
@@ -96,6 +96,20 @@ program/characterization/
 
 `UI設計決定`はRD範囲内の軽微な具体化であり、STで受入確認する。期待値変更または新たな利用者差異が判明した場合は、無断で
 追加せずQA/RDFB適用要否を判定し、本表、test oracle、関連設計を同時更新する。
+
+### 5.1 DIF-010の追加承認範囲（QA-051、2026-11-02）
+
+利用者は①ログactionをNK設計の名称へ統一すること、②全DB raw配列の一致だけでなく、既存ログを保全し今回操作との相関を明示した安全投影と独立したNK期待値で比較することを承認した。以下はCHR-L01の限定差分であり、他caseや業務結果の包括的な免除ではない。
+
+- HTTP REQUESTの空actionは、対応する実HTTP eventを確認した場合に`HTTP_REQUEST_COMPLETED`と対応付ける。`login_success`は`LOGIN_SUCCEEDED`、scenario検索の`search`は`SCENARIO_SEARCHED`と対応付ける。種別・操作が異なる行まで文字列置換しない。
+- その他のactionはSS351 §4のcatalogと実操作から個別に対応を定義する。`menu`/`log_search`相当の記録は削除・無視せず、操作とNK側記録の対応を示す。未対応は合格にしない。
+- Current baselineと既存ログは変更しない。専用fixture、before/after、操作ごとのrequest/event/message相関、観測時点を保存し、時刻や最大IDの水位だけで今回操作の行と断定しない。
+- local/outbox/DB間の各eventの到達・欠落0・重複0を独立に確認し、ACTION/SECURITY等の件数・category・actionは承認済みSSの期待表と比較する。NK実装や今回の実測値から期待値を作らない。
+- 追加category/技術行は、既存承認設計が要求する行だけを区別して検証する。任意の追加行の無視、category全体の除外、件数差の一律許容をしない。
+- UIの日時降順、100件/page、表示件数、明細、検索結果及び同操作の業務結果は引き続き検証する。今回未承認の差分は別途判断とし、normalizationで隠さない。
+- 比較artifactにはcase、対象field/element、旧値とNK期待値、相関根拠、追加行の根拠を固定する。秘密を除いた比較投影を用い、原証跡は既存のアクセス・保全規則に従う。
+
+比較oracle/artifactの実装と同sourceでの比較試験は別途必要であり、本承認だけでCHR-L01又はPGPTをPASS/完了にしない。具体手順はSS355 §8.1、期待値の根拠はSS351 §4.1、画面はUI225 §2.1、ログ分類はUI252 §3.1を参照する。
 
 ## 6. Gate・完了条件
 
