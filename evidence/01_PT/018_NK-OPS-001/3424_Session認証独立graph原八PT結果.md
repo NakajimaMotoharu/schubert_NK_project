@@ -1,0 +1,17 @@
+# Session・認証 独立graph原八PT結果
+
+source6b53efeec87f3ec36a840dd8e7759656cb4aee5c、3423/PG-D1102。原八/四suite、F/E/S/abort0、原17700-dd8b3d2e64f3b3ab05072d84e878ed968dfc42bf30e2021550835da2567513e8/session82963終端f4be0f真正0。17702-fd3c5636081f8d5ffcf3209e783c724bd161f5bfb422c23ee97641b83e377b1b/session85334終端06b51b真正0、原独立17704-e8fe7b47ac49c3a5128d1150e40c837c32693b3ce0d4d34a5b155562429adb16/d03276真正0。
+
+全二Source/全二Code/metadata0、未実行Code0、除外0/公式filter不変更。LINE35/35、METHOD4/4、CLASS2/2、BRANCH26/26、全miss0/strict四100 gate0。Authは17L/2M/1C/14B、Session18L/2M/1C/12B。単一exec/session/CRC0、四held/六native/Root不在確認。原四Testの全method/byte/CRC・元先行fatal identity、固定catalog/cause null/suppressed0・null/finite cycle/SQL-next/各module優先順を独立に確認。Test fixture独自Thread0、JUnit元Timeoutのframework workerは存在/実総数未測定null。
+
+## BUG2214・副作用表示の訂正
+
+元17702のUUID副作用二fieldは旧template由来のtrueで、原graphにはUUIDが無い。17708/c7d2bf body1はscope guardで拒否/OUT未作成、修正前起票BUG2214/YKT1961。新17703-9edb754483f74fb5f665cb314a346b4f5f6932240ea1a8b7392d1a1112aea10c/691f10真正0は二fieldだけfalse訂正・原全Source/run/exec/XML/CRC/coverage/時刻不変を閉集合確認。元Product/成功reader再演0。最初のlintunused jsonはa6e0ff/bodyStartedfalse、draft削除後の別byteで本体初回起動。
+
+新独立17705-0bfc39ede2a488d821eddc91fa8187d5a07fc557c46e7607a7453354543a7556/4d8149真正0、原独立28否定/八oracle/四CRCを同core根拠として保持し、新訂正metadata12否定を別計上、合算して新PTにしない。原六入力(UUID無し)・比較元17642/17662/17682の固定UUID実在と非該当根拠を全有限対象確認。原誤表示/失敗/費用を保持、有限保存push前はPASS_SAVE_PENDING。
+
+## 同source資格の増分
+
+新17709 registry8bffd1673fe3b9ca322be03a5b296b84d3bd2a21f2fdeef5561f84a4db2196b8/0cf4cb、17710独立6b365fbc7cacda2e581b58648bc0d40fece6fe6bef3a5bce49e102e6416cf6a9/session19275終端9cf679真正0、metadata34/chain二/profile三/summary四。固有2801/416、普通2782/5786残3004/quality19別/resource79内数、207JVM2933=2801+132repeat/joint48。新Main二/physical二とも四counter100、Main562992/Code813metadata179、四100291436/Code411、自然183198/NoCode6-6/partial82352不変。owner499baseline234候補297UNKNOWN。canonical Auth ownerは既485のP007-03を保持し、今回の主担当F03/関連Auth P002-01と混同して上書きしない。
+
+共有78→79/reset1793774153、丸め1ppは共有口座差で専有費/実tokenへの換算0。原見積1/3/6cap10維持、実N/T/配賦null。正常原八の新実測と工具是正を分離し、Root/WSE/TIE Graph9/actualHOLD解除0。正式1964PT53scope・歴史17/190・新WBS受入0/工数null/QA051final/G07G13F03全体/451は不変更。全commands/OS/JDK/branch/HEAD/source/time/XML/exec/hashは各manifestへ。

@@ -1,0 +1,727 @@
+{
+  "actualAuthenticationOrSessionIssued": false,
+  "actualBackendSqlOperations": 0,
+  "actualBackupOrArchiveOperations": 0,
+  "actualBrowserActions": 0,
+  "actualCredentialFileValuesRead": false,
+  "actualCredentialValuesUsed": false,
+  "actualExit": 0,
+  "actualFailedCohortCollectionOperations": 0,
+  "actualFilesOpenedByProduct": false,
+  "actualGetentOrSystemctlInvoked": false,
+  "actualHookRegistrationOrRemovalInvoked": false,
+  "actualJdbcBackendConnected": false,
+  "actualJmsConnectionsCreated": 0,
+  "actualNativeHookOrProviderOperation": false,
+  "actualNetworkActions": 0,
+  "actualPermitIssueSignPublishOrRetire": false,
+  "actualPermitNamespaceLookups": 0,
+  "actualProcRead": false,
+  "actualRootOsAdmissionInvoked": false,
+  "actualRootRecoveryOperations": 0,
+  "actualSecretKeysLoaded": false,
+  "actualServiceActions": 0,
+  "actualVirtualDrainWorkerCount": 0,
+  "actualVmActions": 0,
+  "allMeasuredApplicableCountersCovered": true,
+  "approvedInjectedBackupCycleOnly": false,
+  "callerResourcesClosedByProduct": false,
+  "cases": [
+    {
+      "classname": "dev.codex.schubert.nk.api.security.AuthenticationFailureGraphTest",
+      "name": "suppressedCyclesTerminateAndReachableFatalRetainsIdentity",
+      "nonPass": [],
+      "result": "PASS"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.api.security.AuthenticationJdbcGraph328Test",
+      "name": "auth328002SqlNextCycleTerminatesAndPreservesTheOriginalFatal",
+      "nonPass": [],
+      "result": "PASS"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.api.security.AuthenticationJdbcGraph328Test",
+      "name": "auth328003ExistingSuppressedPriorityNullAndRedactionRemainFixed",
+      "nonPass": [],
+      "result": "PASS"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.api.security.AuthenticationJdbcGraph328Test",
+      "name": "auth328001CauseFatalCannotBecomeAnInfrastructureResult",
+      "nonPass": [],
+      "result": "PASS"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.session.SessionFailureGraphTest",
+      "name": "mixedCauseAndSuppressedCyclesTerminateAndReachableFatalRetainsIdentity",
+      "nonPass": [],
+      "result": "PASS"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.session.SessionJdbcGraph328Test",
+      "name": "graph328002MixedCyclesAreFiniteAndLateFatalRetainsIdentity",
+      "nonPass": [],
+      "result": "PASS"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.session.SessionJdbcGraph328Test",
+      "name": "graph328001SqlNextFatalCannotBecomeAnOrdinaryCatalog",
+      "nonPass": [],
+      "result": "PASS"
+    },
+    {
+      "classname": "dev.codex.schubert.nk.web.session.SessionJdbcGraph328Test",
+      "name": "graph328003ExistingCausePriorityNullAndRedactionRemainFixed",
+      "nonPass": [],
+      "result": "PASS"
+    }
+  ],
+  "characterisationAccepted": false,
+  "checkedGraphInputHashes": {
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthenticationInfrastructureException.java": "4b64f5d458370b67b3f5f156ffb879151eb69c30fbe9819660e70cc81e55a402",
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/AuthenticationFailureGraphTest.java": "d18eae10d916bfb12d1787a9eed3e1afa89ad4c6a3cffab9a51a4d306c97e0b3",
+    "src/schubert-nk-api/src/test/java/dev/codex/schubert/nk/api/security/AuthenticationJdbcGraph328Test.java": "88ea63184e86a97550683c94b545a17d530a38e924aac87733d89ce1e1ac2c70",
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/SessionStoreException.java": "93717ee948f88bd799a14cdad397c0d92e584711c32f571df8592be379033ed1",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/SessionFailureGraphTest.java": "3ab62c90af53ffb1e6fd9f01e650324bb16e201fd4eeecc7a5ba21f2127d7a10",
+    "src/schubert-nk-web/src/test/java/dev/codex/schubert/nk/web/session/SessionJdbcGraph328Test.java": "a946c07a2cd3b6c28d0ee244c42dd41de4706e03378418ec4462ae53c72551c0"
+  },
+  "completeSourceCoverageMeasured": true,
+  "completeSourceUnitClosure": {
+    "dev/codex/schubert/nk/api/security/AuthenticationInfrastructureException": [
+      "dev/codex/schubert/nk/api/security/AuthenticationInfrastructureException"
+    ],
+    "dev/codex/schubert/nk/web/session/SessionStoreException": [
+      "dev/codex/schubert/nk/web/session/SessionStoreException"
+    ]
+  },
+  "correctedDisclosureFields": [
+    "publicSyntheticUuidFixture",
+    "publicFixedUuidFixtureOnly"
+  ],
+  "crcMismatch": 0,
+  "cryptoOrKeyOperationsInvoked": false,
+  "declaredFakeExclusiveLockOnly": false,
+  "declaredMaximumVirtualDrainWorkerCount": 0,
+  "declaredOwnExecutorInstances": 0,
+  "declaredOwnPlatformThreadCount": 0,
+  "declaredOwnTaskCount": 0,
+  "disclosureCorrectionOf": [
+    "PG17702-session-auth-graph-eight-post-v1",
+    "fd3c5636081f8d5ffcf3209e783c724bd161f5bfb422c23ee97641b83e377b1b"
+  ],
+  "effectDisclosureDomain": "ORIGINAL_INDEPENDENT_MODULE_LOCAL_THROWABLE_SQL_EXCEPTION_MEMORY_GRAPHS_NO_HELD_CLASSIFIER_OR_DB",
+  "effortPercent": null,
+  "errors": 0,
+  "execSha256": "d28334fe8770801e545eebb42545f1f78310b9c75cf1111a177903506e39d12c",
+  "executable": {
+    "dev/codex/schubert/nk/api/security/AuthenticationInfrastructureException": {
+      "counters": {
+        "BRANCH": {
+          "covered": 14,
+          "missed": 0
+        },
+        "CLASS": {
+          "covered": 1,
+          "missed": 0
+        },
+        "LINE": {
+          "covered": 17,
+          "missed": 0
+        },
+        "METHOD": {
+          "covered": 2,
+          "missed": 0
+        }
+      },
+      "crc64": "23042de7b11b1de3"
+    },
+    "dev/codex/schubert/nk/web/session/SessionStoreException": {
+      "counters": {
+        "BRANCH": {
+          "covered": 12,
+          "missed": 0
+        },
+        "CLASS": {
+          "covered": 1,
+          "missed": 0
+        },
+        "LINE": {
+          "covered": 18,
+          "missed": 0
+        },
+        "METHOD": {
+          "covered": 2,
+          "missed": 0
+        }
+      },
+      "crc64": "3abce0d3ea584053"
+    }
+  },
+  "failures": 0,
+  "finiteRelatedDisclosureReview": [
+    {
+      "fixtureSha256": "0c399beb935a699b1fbcc027612ba8e86a704ff9ff71bc187cc209fe252688a2",
+      "originalFixture": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/RootCurrentPermitPreflightTest.java",
+      "post": "PG17642-current-permit-data-six-post-v1",
+      "postSha256": "f59b1db5c4b23ed3981bad802ab621b9f90dce497ac030ce73d4a7892b87cfea",
+      "reason": "ORIGINAL_FIXED_UUID_VALUES_REALLY_PRESENT",
+      "requiresChange": false
+    },
+    {
+      "fixtureSha256": "3f128e8b94f7b2e7854525017a85e3ed2124089ea7c16637d84313b4204dcf8f",
+      "originalFixture": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/file/RootServiceProofTest.java",
+      "post": "PG17662-root-entry-denial-four-post-v1",
+      "postSha256": "733fdc388fe8048c75b75a2a386b6aadce3b071339970bf786351eae051cd508",
+      "reason": "ORIGINAL_FIXED_UUID_VALUES_REALLY_PRESENT",
+      "requiresChange": false
+    },
+    {
+      "fixtureSha256": "73ec7a8bca1a6540dec83520b7072b56fd7c988e55d9d1a86afb67b0a9125a02",
+      "originalFixture": "src/schubert-nk-batch/src/test/java/dev/codex/schubert/nk/batch/platform/BrokerJournalEvidenceTest.java",
+      "post": "PG17682-public-journal-deadline-nine-post-v1",
+      "postSha256": "1aa5ae001a9df7d4db9c140370c5f604b792b0e15d6e7f67359795a5d68707f1",
+      "reason": "ORIGINAL_FIXED_UUID_VALUES_REALLY_PRESENT",
+      "requiresChange": false
+    }
+  ],
+  "forbiddenProductProbeHits": 0,
+  "formalUpdated": false,
+  "fullSourceUnits": {
+    "dev/codex/schubert/nk/api/security/AuthenticationInfrastructureException": {
+      "branchNaturallyZero": false,
+      "four100": true,
+      "metadataOnly": false,
+      "physical": [
+        "dev/codex/schubert/nk/api/security/AuthenticationInfrastructureException"
+      ],
+      "threeCounter100": true,
+      "totals": {
+        "BRANCH": {
+          "covered": 14,
+          "missed": 0
+        },
+        "CLASS": {
+          "covered": 1,
+          "missed": 0
+        },
+        "LINE": {
+          "covered": 17,
+          "missed": 0
+        },
+        "METHOD": {
+          "covered": 2,
+          "missed": 0
+        }
+      }
+    },
+    "dev/codex/schubert/nk/web/session/SessionStoreException": {
+      "branchNaturallyZero": false,
+      "four100": true,
+      "metadataOnly": false,
+      "physical": [
+        "dev/codex/schubert/nk/web/session/SessionStoreException"
+      ],
+      "threeCounter100": true,
+      "totals": {
+        "BRANCH": {
+          "covered": 12,
+          "missed": 0
+        },
+        "CLASS": {
+          "covered": 1,
+          "missed": 0
+        },
+        "LINE": {
+          "covered": 18,
+          "missed": 0
+        },
+        "METHOD": {
+          "covered": 2,
+          "missed": 0
+        }
+      }
+    }
+  },
+  "inMemoryCredentialBufferAndAclValuesOnly": false,
+  "independentModuleLocalThrowableGraphsOnly": true,
+  "invocation": {
+    "actualPythonCommand": [
+      "/usr/bin/python3",
+      "-B",
+      "tools/quality/pg17703_session_auth_graph_disclosure_post_v2.py"
+    ],
+    "arbitraryArgumentsRecorded": false,
+    "entrypointPath": "tools/quality/pg17703_session_auth_graph_disclosure_post_v2.py",
+    "entrypointSha256": "60d72138fcd808fb412989b2da3fe53aa0148a8b6bc827b72d2203d848cd1d3a",
+    "helperPath": "tools/quality/host_tool_invocation.py",
+    "helperSha256": "85d616a3db4ff47f4c95ae2e0dd57954bc2b09f28b8f2a685b986e5621545c46",
+    "libraryPath": "tools/quality/pg17703_session_auth_graph_disclosure_post_v2.py",
+    "librarySha256": "60d72138fcd808fb412989b2da3fe53aa0148a8b6bc827b72d2203d848cd1d3a",
+    "loadedProjectPythonSources": {
+      "tools/quality/g07_host_class_provenance_inputs.py": "a676cb3e4145177c3c243722d737592ce7d44c3f29cfe4f670662ef7651f046b",
+      "tools/quality/host_tool_invocation.py": "85d616a3db4ff47f4c95ae2e0dd57954bc2b09f28b8f2a685b986e5621545c46",
+      "tools/quality/pg17703_session_auth_graph_disclosure_post_v2.py": "60d72138fcd808fb412989b2da3fe53aa0148a8b6bc827b72d2203d848cd1d3a"
+    },
+    "provenance": "OBSERVED_SYS_ARGV_AND_ORIG_ARGV_NOT_RECONSTRUCTED"
+  },
+  "junitFrameworkWorkerActualCount": null,
+  "junitTimeoutSeparateFrameworkWorkerOnly": true,
+  "manualCounterExclusions": [],
+  "memoryJournalQueryPortsOnly": false,
+  "memoryRootScopeAndCleanupCompletionValuesOnly": false,
+  "metadataClasses": [],
+  "metadataNegativeVectors": 8,
+  "nativeNamedReadNullGuardOnlyInvoked": false,
+  "naturalZeroBranch": false,
+  "negativeLabels": [
+    "source",
+    "failed",
+    "duplicate",
+    "scope",
+    "union",
+    "formal",
+    "timeout",
+    "fixture"
+  ],
+  "newAccepted": 0,
+  "newFixtureNotExtractedFromHeldTests": true,
+  "newTestIds": 0,
+  "normalManifestSha256": "1d0a3dee2f054010a81c67f4a8ef11e7d4370c9640efa9bcb8eead51168c81a3",
+  "normalOrdinaryTestSourceDomain": true,
+  "officialGeneratedFiltersUnchanged": true,
+  "oldCoverageTransferred": false,
+  "originalCoverageProofManifestSha256": "fd3c5636081f8d5ffcf3209e783c724bd161f5bfb422c23ee97641b83e377b1b",
+  "originalManifestSha256": "dd8b3d2e64f3b3ab05072d84e878ed968dfc42bf30e2021550835da2567513e8",
+  "originalSelectedProofRetained": true,
+  "originalTestsAndPassiveReadersReexecuted": 0,
+  "originalUnusedHelperProbeAudit": {},
+  "ownCurrentThreadInterruptFlagModifiedAndFinallyCleared": false,
+  "ownThreadCount": 0,
+  "ownVirtualDrainWorkersInvoked": false,
+  "owners": {
+    "src/schubert-nk-api/src/main/java/dev/codex/schubert/nk/api/security/AuthenticationInfrastructureException.java": {
+      "basis": "485_ORIGINAL_LOGICAL_OWNER_ONLY_NOT_OLD_PT_OR_BYTES",
+      "canonicalCostOwner": "WBS-P007-03",
+      "canonicalOwner": "WBS-P007-03",
+      "ownershipStatus": "BASELINE_LOGICAL_REFERENCE",
+      "sha256": "4b64f5d458370b67b3f5f156ffb879151eb69c30fbe9819660e70cc81e55a402"
+    },
+    "src/schubert-nk-web/src/main/java/dev/codex/schubert/nk/web/session/SessionStoreException.java": {
+      "basis": "485_ORIGINAL_LOGICAL_OWNER_ONLY_NOT_OLD_PT_OR_BYTES",
+      "canonicalCostOwner": "WBS-P015-01",
+      "canonicalOwner": "WBS-P015-01",
+      "ownershipStatus": "BASELINE_LOGICAL_REFERENCE",
+      "sha256": "93717ee948f88bd799a14cdad397c0d92e584711c32f571df8592be379033ed1"
+    }
+  },
+  "passiveCoverageReaderClassSha256": "9977e1c733e40e4752261c38e6a679a91cf2d33b6d2be72180e1f67af01a94a3",
+  "passiveCoverageReaderSourceSha256": "97cecbbff82e9c93d41f13e94872b792f374f84d34973a930daefb79bb7be260",
+  "passiveHeldReaderClassSha256": "59259d0206719c9b32138b0bed646601593b38989e0ca4a92277e23dcd977f62",
+  "passiveHeldReaderSourceSha256": "b0db809993acdc26b9e6f961c65ba4d92d19965a6221e555b924acc9171d547b",
+  "passiveNativeBoundaryAbsence": {
+    "execSha256": "d28334fe8770801e545eebb42545f1f78310b9c75cf1111a177903506e39d12c",
+    "productClassesLoaded": false,
+    "productMethodsInvoked": false,
+    "readerClassSha256": "77bf5fb8b9c8f950205050842b94939143cb76263ccae967c4fff9cfed47b973",
+    "readerSourceSha256": "7cc43c0254642e490fc4f4875f63c4e8a580ac7b793f35ab51626c16ba1778d1",
+    "rows": [
+      [
+        "OWNED_API_PORT_NATIVE_PREFIX_NO_TRUE_PROBES",
+        "dev/codex/schubert/nk/bootstrap/ServiceStartupAdmission$NativeGate",
+        "0",
+        "0"
+      ],
+      [
+        "OWNED_API_PORT_NATIVE_PREFIX_NO_TRUE_PROBES",
+        "dev/codex/schubert/nk/bootstrap/ServiceStartupAdmission$NativeObservation",
+        "0",
+        "0"
+      ],
+      [
+        "OWNED_API_PORT_NATIVE_PREFIX_NO_TRUE_PROBES",
+        "dev/codex/schubert/nk/bootstrap/ChildStartupContext$NativeIo",
+        "0",
+        "0"
+      ],
+      [
+        "OWNED_API_PORT_NATIVE_PREFIX_NO_TRUE_PROBES",
+        "dev/codex/schubert/nk/api/bootstrap/ApiProcessLifetime",
+        "0",
+        "0"
+      ],
+      [
+        "OWNED_API_PORT_NATIVE_PREFIX_NO_TRUE_PROBES",
+        "dev/codex/schubert/nk/api/file/ServiceProcessResources",
+        "0",
+        "0"
+      ],
+      [
+        "OWNED_API_PORT_NATIVE_PREFIX_NO_TRUE_PROBES",
+        "dev/codex/schubert/nk/storage/ServiceConfigFiles$NioIo",
+        "0",
+        "0"
+      ]
+    ],
+    "sessionIdentity": "PG17700-INDEPENDENT-SESSION-AUTH-GRAPH-ORIGINAL8"
+  },
+  "physicalClasses": {
+    "dev/codex/schubert/nk/api/security/AuthenticationInfrastructureException": "aaabfcb342f4bb1fce8daebbe982d191ed2bcfa89c5eb8cebb5348b07a6c8d3c",
+    "dev/codex/schubert/nk/web/session/SessionStoreException": "834c44344725062843f77e5bd267e8084119f0988aa40b4643416ee89defef3a"
+  },
+  "priorProductResultsReused": false,
+  "productTestsReexecutedByPost": 0,
+  "publicDigestOnly": false,
+  "publicFixedUuidFixtureOnly": false,
+  "publicKeyVersionLabelOnly": false,
+  "publicRandomUuidFixtureGenerated": false,
+  "publicSourceReadHashes": {},
+  "publicSyntheticUuidFixture": false,
+  "realRuntimeCredentialOrKeyLoaded": false,
+  "registryChanged": false,
+  "reportedEnvironment": {
+    "os.arch": "amd64",
+    "os.name": "Linux",
+    "os.version": "7.0.0-38-generic",
+    "runtime.version": "25.0.4+7-1-26.04-Ubuntu"
+  },
+  "reruns": 0,
+  "reusedToolRuntimeOnly": true,
+  "reviewedInactiveBoundaryAudit": {
+    "dev/codex/schubert/nk/batch/platform/RootStartupContext": {
+      "recordPresent": false,
+      "trueProbeHits": 0
+    },
+    "dev/codex/schubert/nk/batch/platform/RootStartupContext$NativeIo": {
+      "recordPresent": false,
+      "trueProbeHits": 0
+    },
+    "dev/codex/schubert/nk/batch/platform/RootStartupContext$NativeIo$LinkRead": {
+      "recordPresent": false,
+      "trueProbeHits": 0
+    },
+    "dev/codex/schubert/nk/batch/platform/RootStartupContext$NativeIo$UnitQuery": {
+      "recordPresent": false,
+      "trueProbeHits": 0
+    },
+    "dev/codex/schubert/nk/batch/platform/SystemctlStateSource$NativeProcess": {
+      "recordPresent": false,
+      "trueProbeHits": 0
+    },
+    "dev/codex/schubert/nk/batch/repository/BatchDatabaseFixture": {
+      "recordPresent": false,
+      "trueProbeHits": 0
+    },
+    "dev/codex/schubert/nk/storage/LinuxDirectoryCalls": {
+      "recordPresent": false,
+      "trueProbeHits": 0
+    },
+    "dev/codex/schubert/nk/storage/LinuxFileLock": {
+      "recordPresent": false,
+      "trueProbeHits": 0
+    },
+    "dev/codex/schubert/nk/storage/LinuxInodeSecurity": {
+      "recordPresent": false,
+      "trueProbeHits": 0
+    },
+    "dev/codex/schubert/nk/storage/LinuxMonotonicClock": {
+      "recordPresent": false,
+      "trueProbeHits": 0
+    }
+  },
+  "rootMainInvoked": false,
+  "rootProbeAuditAllowedDataEnum": "dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle$Outcome",
+  "rootRecoveryProbeAudit": {
+    "dev/codex/schubert/nk/batch/file/RootFailedStartRecovery": {
+      "recordPresent": false,
+      "trueProbeHits": 0
+    },
+    "dev/codex/schubert/nk/batch/file/RootFailedStartRecovery$Evidence": {
+      "recordPresent": false,
+      "trueProbeHits": 0
+    },
+    "dev/codex/schubert/nk/batch/file/RootFailedStartRecovery$PairEvidence": {
+      "recordPresent": false,
+      "trueProbeHits": 0
+    },
+    "dev/codex/schubert/nk/batch/file/RootFailedStartRecovery$PairProof": {
+      "recordPresent": false,
+      "trueProbeHits": 0
+    },
+    "dev/codex/schubert/nk/batch/file/RootFailedStartRecovery$Proof": {
+      "recordPresent": false,
+      "trueProbeHits": 0
+    }
+  },
+  "rootRecoveryProbeAuditScope": "ROOT_FAILED_START_RECOVERY_ABSENT_CYCLE_ENUM_ONLY_NO_START_STOP",
+  "sessionIdentity": "PG17700-INDEPENDENT-SESSION-AUTH-GRAPH-ORIGINAL8",
+  "singleSession": true,
+  "skipped": 0,
+  "source": "6b53efeec87f3ec36a840dd8e7759656cb4aee5c",
+  "sourceChanged": false,
+  "sourcePhysicalInventory": {
+    "dev/codex/schubert/nk/api/security/AuthenticationInfrastructureException": {
+      "flags": 49,
+      "methods": [
+        {
+          "codeLength": 7,
+          "descriptor": "()V",
+          "flags": 0,
+          "hasCode": true,
+          "name": "<init>"
+        },
+        {
+          "codeLength": 159,
+          "descriptor": "(Ljava/lang/Throwable;)V",
+          "flags": 9,
+          "hasCode": true,
+          "name": "preserveFatal"
+        }
+      ],
+      "sha256": "aaabfcb342f4bb1fce8daebbe982d191ed2bcfa89c5eb8cebb5348b07a6c8d3c",
+      "sourceFile": "AuthenticationInfrastructureException.java"
+    },
+    "dev/codex/schubert/nk/web/session/SessionStoreException": {
+      "flags": 33,
+      "methods": [
+        {
+          "codeLength": 7,
+          "descriptor": "()V",
+          "flags": 1,
+          "hasCode": true,
+          "name": "<init>"
+        },
+        {
+          "codeLength": 135,
+          "descriptor": "(Ljava/lang/Throwable;)V",
+          "flags": 9,
+          "hasCode": true,
+          "name": "preserveFatal"
+        }
+      ],
+      "sha256": "834c44344725062843f77e5bd267e8084119f0988aa40b4643416ee89defef3a",
+      "sourceFile": "SessionStoreException.java"
+    }
+  },
+  "stages": [
+    {
+      "actualExit": 0,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-cp",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg14762-question-sql-joint-eighteen-post-v1/probe-classes:/home/mini/codex/project1/work/pgpt-runs/PG379/pg13376-db-duration-eight-post-v1/audit:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.core/0.8.15/org.jacoco.core-0.8.15.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm/9.10.1/asm-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-tree/9.10.1/asm-tree-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-commons/9.10.1/asm-commons-9.10.1.jar",
+        "ReviewedProjectionHeldProbeAudit",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg17700-session-auth-graph-eight-pt-v1/jacoco.exec",
+        "PG17700-INDEPENDENT-SESSION-AUTH-GRAPH-ORIGINAL8"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg17702-session-auth-graph-eight-post-v1",
+      "endUTC": "2026-11-01T05:31:16.118245+00:00",
+      "startUTC": "2026-11-01T05:31:16.053482+00:00",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSha256": "445d3415a156d9c7ca3c672bd9e02ef7f7a012b380bc090dd2f05ecf174bd188",
+      "timedOut": false
+    },
+    {
+      "actualExit": 0,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-cp",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg15302-api-config-readiness-eleven-post-v1/passive-classes:/home/mini/codex/project1/work/pgpt-runs/PG379/pg13376-db-duration-eight-post-v1/audit:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.core/0.8.15/org.jacoco.core-0.8.15.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm/9.10.1/asm-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-tree/9.10.1/asm-tree-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-commons/9.10.1/asm-commons-9.10.1.jar",
+        "OwnedApiPortBoundaryProbeAbsence",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg17700-session-auth-graph-eight-pt-v1/jacoco.exec",
+        "PG17700-INDEPENDENT-SESSION-AUTH-GRAPH-ORIGINAL8"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg17702-session-auth-graph-eight-post-v1",
+      "endUTC": "2026-11-01T05:31:16.183358+00:00",
+      "startUTC": "2026-11-01T05:31:16.119007+00:00",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSha256": "e8b9c705b65166bc78bb5d4b9cae38704edf14e13c8c8aceb0186bdf7d1aa512",
+      "timedOut": false
+    },
+    {
+      "actualExit": 0,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-cp",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg13376-db-duration-eight-post-v1/audit:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.core/0.8.15/org.jacoco.core-0.8.15.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm/9.10.1/asm-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-tree/9.10.1/asm-tree-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-commons/9.10.1/asm-commons-9.10.1.jar",
+        "CoverageSessionIdentity",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg17700-session-auth-graph-eight-pt-v1/jacoco.exec",
+        "PG17700-INDEPENDENT-SESSION-AUTH-GRAPH-ORIGINAL8"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg17702-session-auth-graph-eight-post-v1",
+      "endUTC": "2026-11-01T05:31:16.248531+00:00",
+      "startUTC": "2026-11-01T05:31:16.183825+00:00",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSha256": "fa6e465607b726af2033b7de432359bf530d83ce9459514e447fe3db1f46806a",
+      "timedOut": false
+    },
+    {
+      "actualExit": 0,
+      "command": [
+        "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+        "-cp",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg15713-caddy-public-value-nine-post-v2/diagnostic-classes:/home/mini/codex/project1/work/pgpt-runs/PG379/pg13376-db-duration-eight-post-v1/audit:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.core/0.8.15/org.jacoco.core-0.8.15.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm/9.10.1/asm-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-tree/9.10.1/asm-tree-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-commons/9.10.1/asm-commons-9.10.1.jar",
+        "WholeSourceCoverageMeasureV1",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg17700-session-auth-graph-eight-pt-v1/jacoco.exec",
+        "/home/mini/codex/project1/work/pgpt-runs/PG379/pg17702-session-auth-graph-eight-post-v1/component",
+        "dev/codex/schubert/nk/api/security/AuthenticationInfrastructureException",
+        "dev/codex/schubert/nk/web/session/SessionStoreException"
+      ],
+      "cwd": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg17702-session-auth-graph-eight-post-v1",
+      "endUTC": "2026-11-01T05:31:16.365523+00:00",
+      "startUTC": "2026-11-01T05:31:16.249392+00:00",
+      "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSha256": "57e39b8306430f6e3633e791dcd7ebfda940de9344abf1e9a234e18b28ff163c",
+      "timedOut": false
+    }
+  ],
+  "staticPostManifestSha256": "294810b2dab116dbc73bdf41ee39940378f89e173f8100a6109ff5571f3e159e",
+  "staticReviewBindingSha256": "03f4c11eaac5cf9681d9fe07d239d73824f4f228b6c5e2870bdb43d16fe506f3",
+  "strictFour100GateExit": 0,
+  "stubDescriptorContentHashNotVerified": false,
+  "suites": 4,
+  "syntheticArchiveCallbacksInvoked": false,
+  "syntheticAuthenticationContextValueUsed": false,
+  "syntheticBackupCycleProbeAudit": {
+    "dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle": {
+      "recordPresent": false,
+      "trueProbeHits": 0
+    },
+    "dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle$1": {
+      "recordPresent": false,
+      "trueProbeHits": 0
+    },
+    "dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle$2": {
+      "recordPresent": false,
+      "trueProbeHits": 0
+    },
+    "dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle$3": {
+      "recordPresent": false,
+      "trueProbeHits": 0
+    },
+    "dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle$BackupCompletion": {
+      "recordPresent": false,
+      "trueProbeHits": 0
+    },
+    "dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle$BackupResult": {
+      "recordPresent": false,
+      "trueProbeHits": 0
+    },
+    "dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle$Completion": {
+      "recordPresent": false,
+      "trueProbeHits": 0
+    },
+    "dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle$Gate": {
+      "recordPresent": false,
+      "trueProbeHits": 0
+    },
+    "dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle$Handoff": {
+      "recordPresent": false,
+      "trueProbeHits": 0
+    },
+    "dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle$ObservedCompletion": {
+      "recordPresent": false,
+      "trueProbeHits": 0
+    },
+    "dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle$ObservedWork": {
+      "recordPresent": false,
+      "trueProbeHits": 0
+    },
+    "dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle$Outcome": {
+      "recordPresent": false,
+      "trueProbeHits": 0
+    },
+    "dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle$ParentProof": {
+      "recordPresent": false,
+      "trueProbeHits": 0
+    },
+    "dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle$Receipt": {
+      "recordPresent": false,
+      "trueProbeHits": 0
+    },
+    "dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle$Retain": {
+      "recordPresent": false,
+      "trueProbeHits": 0
+    },
+    "dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle$Start": {
+      "recordPresent": false,
+      "trueProbeHits": 0
+    },
+    "dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle$StartAttempt": {
+      "recordPresent": false,
+      "trueProbeHits": 0
+    },
+    "dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle$Started": {
+      "recordPresent": false,
+      "trueProbeHits": 0
+    },
+    "dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle$Stop": {
+      "recordPresent": false,
+      "trueProbeHits": 0
+    },
+    "dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle$StopAttempt": {
+      "recordPresent": false,
+      "trueProbeHits": 0
+    },
+    "dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle$Terminal": {
+      "recordPresent": false,
+      "trueProbeHits": 0
+    },
+    "dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle$Unresolved": {
+      "recordPresent": false,
+      "trueProbeHits": 0
+    },
+    "dev/codex/schubert/nk/batch/platform/MorningBackupUnitCycle$Wait": {
+      "recordPresent": false,
+      "trueProbeHits": 0
+    }
+  },
+  "syntheticCompletionPublicationCallbacksInvoked": false,
+  "syntheticJdbcApiCallsInvoked": false,
+  "syntheticJdbcPortsOnly": false,
+  "syntheticJdbcPrepareBindUpdateCloseInvoked": false,
+  "syntheticOriginalOwnerPortsOnly": false,
+  "syntheticPermitRecordConstructionOnly": false,
+  "syntheticRetirementCallbacksInvoked": false,
+  "syntheticRootAdmissionCallbackInvoked": false,
+  "syntheticScenarioPublisherCallbackInvoked": false,
+  "syntheticStateFieldsOnly": false,
+  "targetSourceUnits": 2,
+  "targetUnitFour100": true,
+  "testOwnJavaMonotonicClockRead": false,
+  "testOwnScalarTraceWritten": false,
+  "testOwnSecureRandomFixtureBytesGenerated": false,
+  "testOwnTemporaryContentWritten": false,
+  "testOwnedFileChannelsOpened": false,
+  "testPublicGoldenResourcesRead": false,
+  "testPublicSourceRead": false,
+  "tests": 8,
+  "toolRuntimeManifestSha256": "adcb55b80aa70a449e74280aa465f752308310c41c876cf83a5a78c3dda3c882",
+  "totals": {
+    "BRANCH": {
+      "covered": 26,
+      "missed": 0
+    },
+    "CLASS": {
+      "covered": 2,
+      "missed": 0
+    },
+    "LINE": {
+      "covered": 35,
+      "missed": 0
+    },
+    "METHOD": {
+      "covered": 4,
+      "missed": 0
+    }
+  },
+  "unexecutedCodeClasses": [],
+  "whole451Accepted": false,
+  "wholeF03Accepted": false,
+  "wholePrior27AbsenceClaimed": false,
+  "xmlHashes": {
+    "TEST-dev.codex.schubert.nk.api.security.AuthenticationFailureGraphTest.xml": "76fbfc0fb1ccf442bfae63169725ee58cb0e7f885963daeefd13d7706955538a",
+    "TEST-dev.codex.schubert.nk.api.security.AuthenticationJdbcGraph328Test.xml": "82014569ae7cd5545d96009dd0290e01bfb583a83e19d48d230a71125793e9e6",
+    "TEST-dev.codex.schubert.nk.web.session.SessionFailureGraphTest.xml": "17606dee7d96b7cb8927c2926801855b288c82dc5dc2e56d5926d6ee899bbd1d",
+    "TEST-dev.codex.schubert.nk.web.session.SessionJdbcGraph328Test.xml": "2d00a74e625b1e80b035c56f9b35db012fd34061f42e6744e84a979c7a762318"
+  }
+}
