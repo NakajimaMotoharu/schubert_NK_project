@@ -1,5 +1,7 @@
 # PGPT成果物一覧・進捗
 
+2026-11-01追加：3394～3396/PG-D1090、公開ELF/typed metadata原六/一成功・独立27/六oracle/Test四CRC、同全Source五physical未達150L48M1C10B。scope-onlyで既17312 counter/proof保持・現2736/402/Main558979/四289434不変、registry34三profile/WBS29ordinary四・全actualHOLD/正式工数null不変。
+
 2026-11-01追加：3391～3393/PG-D1089、fake descriptor所有原16/2成功・独立31/16oracle/Test四CRC、全二Source十五physical未達143L34M7C116B保持。現2730/401/Main558979/四289434不変、registry34二chain三profile＋公開要約四/WBS29ordinary四、元df0成功移植0/全actualHOLD/正式工数null不変。
 
 2026-11-01追加：3388～3390/PG-D1088、自己所有Web HTTP原13/2成功・独立31/十三oracle/Test八CRC、全Source二physical/未達12L3M5B。現2714/399/Main556964/四289434不変、registry34二chain二profile＋要約四/WBS29ordinary四、初回全真正0/新BUG0/正式工数null/HOLD不変。
