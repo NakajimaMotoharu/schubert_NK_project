@@ -1,0 +1,84 @@
+{
+  "actualCorruptionObserved": false,
+  "actualExit": 0,
+  "currentQualifiedCasesFromTargets": 0,
+  "currentSelectedAppendFalseIncompatible": true,
+  "effortPercent": null,
+  "explicitAppendFalseGuard": 1,
+  "formalUpdated": false,
+  "holdReleased": false,
+  "invocation": {
+    "actualPythonCommand": [
+      "/usr/bin/python3",
+      "-B",
+      "tools/quality/pg17600_fork_agent_static_review_v1.py"
+    ],
+    "arbitraryArgumentsRecorded": false,
+    "entrypointPath": "tools/quality/pg17600_fork_agent_static_review_v1.py",
+    "entrypointSha256": "321f6940c2c6a50ee9b62116e4603502a76baa68bb042c0e3f6cde0bd7a1e382",
+    "helperPath": "tools/quality/host_tool_invocation.py",
+    "helperSha256": "85d616a3db4ff47f4c95ae2e0dd57954bc2b09f28b8f2a685b986e5621545c46",
+    "libraryPath": "tools/quality/pg17600_fork_agent_static_review_v1.py",
+    "librarySha256": "321f6940c2c6a50ee9b62116e4603502a76baa68bb042c0e3f6cde0bd7a1e382",
+    "loadedProjectPythonSources": {
+      "tools/quality/g07_host_class_provenance_inputs.py": "a676cb3e4145177c3c243722d737592ce7d44c3f29cfe4f670662ef7651f046b",
+      "tools/quality/host_tool_invocation.py": "85d616a3db4ff47f4c95ae2e0dd57954bc2b09f28b8f2a685b986e5621545c46",
+      "tools/quality/pg17600_fork_agent_static_review_v1.py": "321f6940c2c6a50ee9b62116e4603502a76baa68bb042c0e3f6cde0bd7a1e382"
+    },
+    "provenance": "OBSERVED_SYS_ARGV_AND_ORIG_ARGV_NOT_RECONSTRUCTED"
+  },
+  "metadataNegativeVectors": 16,
+  "metadataOnlyNonApplicable": 1,
+  "negativeLabels": [
+    "productTestsExecuted",
+    "actualCorruptionObserved",
+    "holdReleased",
+    "targets",
+    "unchangedForwarding",
+    "explicitAppendFalseGuard",
+    "metadataOnlyNonApplicable",
+    "source",
+    "currentQualifiedCasesFromTargets",
+    "whole451Accepted",
+    "formalUpdated",
+    "newAccepted",
+    "ordinaryMavenContractAllowsAppend",
+    "currentSelectedAppendFalseIncompatible",
+    "pastProofsInvalidated",
+    "productDefectDemonstrated"
+  ],
+  "newAccepted": 0,
+  "officialAppendDefaultStaticObservation": {
+    "command": [
+      "javap",
+      "-classpath",
+      "org.jacoco.core-0.8.15.jar",
+      "-c",
+      "org.jacoco.core.runtime.AgentOptions"
+    ],
+    "jarSha256": "ade1e0fdb4cd80d8537b57c6edb70a1360c47fdc518c20c65314517479bc4d0d",
+    "methodBytecode": [
+      "ldc append",
+      "iconst_1",
+      "invokespecial getOption:(Ljava/lang/String;Z)Z",
+      "ireturn"
+    ],
+    "originalExit": 0,
+    "originalToolResponse": "53c597",
+    "toolReexecuted": false
+  },
+  "ordinaryMavenContractAllowsAppend": true,
+  "originalContractHashes": {
+    "evidence/01_PT/018_NK-OPS-001/1001_\u5916\u90e8main\u5f15\u6570\u30fbOS\u6240\u6709\u306a\u3057\u62d2\u5426\u306e\u72ec\u7acbPT\u4ed5\u69d8.md": "21bf0eb51db2e140a44e7782f76a4cf00c90935b45c7d70cd8e8681bd05a63d2",
+    "evidence/01_PT/018_NK-OPS-001/1003_SSC299\u4e09entry\u7d42\u4e86\u8981\u6c42\u30fb\u5b9fCLI\u9650\u5b9aPT\u7d50\u679c.md": "937b3e4aa38b32db4eb1e6dbb30e18b5d45f6139fc90458f7687c075f5f3812c"
+  },
+  "pastProofsInvalidated": false,
+  "productDefectDemonstrated": false,
+  "productTestsExecuted": 0,
+  "reviewScope": "AGENT_ARGUMENT_BUILDER_AND_HELPER_ONLY_NOT_WHOLE_TEST",
+  "source": "6b53efeec87f3ec36a840dd8e7759656cb4aee5c",
+  "targetContextSha256": "2962250cb265c9d0f1ac4a9806269ba8470a17435f5a0e0c96f594408fc5d40b",
+  "targets": 17,
+  "unchangedForwarding": 15,
+  "whole451Accepted": false
+}

@@ -1,5 +1,7 @@
 # PGPT成果物一覧・進捗
 
+2026-11-01追加：3411/PG-D1097、JaCoCo子継承17の有限静的適合性レビュー・metadata16。Maven append契約と現限定false不適合を分離、BUG2211/YKT1958 OPEN_HOLD/過去破損・製品欠陥未実証、原PT/coverage/受入加点0。
+
 2026-11-01追加：3408～10/PG-D1096、保持Expiry監査14/Caddy floor1の原二whole十五成功、独立28/十五oracle/整数五vector/TestCRC二、全十二physical未達保持/旧proof不変。現2762/407・四289434不変、正式工数null/HOLD不変。
 
 2026-11-01追加：3407/PG-D1095、C08 canonical契約十二対応/原八全method・50receipt参照、独立30・新製品実行0。scope一→contract+scope二evidence-ready、criteriaAccepted/leaf0・正式工数null/HOLD不変。
