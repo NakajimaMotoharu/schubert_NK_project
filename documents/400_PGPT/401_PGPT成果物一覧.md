@@ -1,5 +1,7 @@
 # PGPT成果物一覧・進捗
 
+2026-11-01追加：3378～3380/PG-D1085、Inspector設定原4/1成功、全一Source/二Code L38M6C2B32四100・独立25四oracle/TestCRC。現2685/394/Main553957/四289434（+1Source/+2physical）、registry34二chain二profile＋公開要約四/WBS29ordinary四、正式工数null/HOLD不変。
+
 2026-11-01追加：3375～3377/PG-D1084、Inspector所有/entry原12/2成功・独立27/十二oracle/Test三CRC、全七physical分母/未達66L11M6B。現2681/393・Main552955/四288432不変、registry34二chain三profile＋公開要約四/WBS29ordinary四、正式工数null/HOLD不変。
 
 2026-11-01追加：3372～3374/PG-D1083、Root ELF原8/1成功・全五physical（NoCode三/未実行Code一）を分母保持、独立27/八oracle/hashlib二vector/Test二CRC。現2669/391・Main550948・四288432不変/partial73312、BUG2201工具要約是正・正式/工数null/全HOLD不変。
