@@ -1,5 +1,7 @@
 # PGPT成果物一覧・進捗
 
+2026-11-01追加：3452/3453/PG-D1116。Query固定catalog新五件/一suite成功、全五Source20L10M5C8B全miss0、四Source四100＋一三counter100/branchN/A。現2863/431・quality57/普通2806不変・Main5961029/四303448/自然190207、新製造0。BUG2226/YKT1973工具件数は製品起動前拒否→新v2 literal五/独立否定で是正、実query/SQLstate/DB/Graph0、正式1964/53/新WBS受入0/工数null/HOLD維持。
+
 2026-11-01追加：3450/3451/PG-D1115。管理値/catalog新六件/一suite成功、三Source21L7M3C6B全miss0、一四100＋二三counter100/branchN/A。現2858/430・quality52/普通2806不変・Main5911024/四299444/自然189206、新規製造0。実User/DB/provider/graph0、正式1964/53/新WBS受入0/工数null/HOLD維持。
 
 2026-11-01追加：3448/3449/PG-D1114。API/Web新Map guard二＋必要原Inputs八は十件/四suite成功、全二Source26L8M4C全miss0/branch自然0=N/A・strictgate1保持。旧partial二履歴保存、現2852/429・quality46/普通2806・自然187204/四298443不変。非秘密SHA256 trueを開示/実key-native-start0、正式1964/53/新WBS受入0/工数null/HOLD維持。
