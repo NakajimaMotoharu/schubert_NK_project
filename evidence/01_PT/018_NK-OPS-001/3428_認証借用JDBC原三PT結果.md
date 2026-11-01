@@ -1,0 +1,13 @@
+# 認証・借用JDBC 原三PT結果
+
+source6b53efeec87f3ec36a840dd8e7759656cb4aee5c、3427/PG-D1104。17740 raw827e6ab1aeeb00140d978867cebad6b97fe9f1240426de9aa699c769f4cc238c/session60950終端10fac2真正0、原三/一suite・F/E/S/abort0。17742 postf1082ea1d6aa3d8aad341dd00a03dde5f61b8bb1562bce759ab1304576af22bf/session19753終端cc057f真正0、全source/元環境/単一session/CRC0/四held・六native・Root不在照合。
+
+全三Source/三physical Code三・NoCode0/未実行Code class0、未実行method/branchは全分母。LINE covered122/missed56、METHOD13/2、CLASS3/0、BRANCH26/40、strict四100 gate1。AuthService36L4M1C10B covered/18L1M14B missed、Attempt61L7M1C11B/33L1M19B、Audit25L2M1C5B/5L0M7B。既AuthInfrastructure等の別proof/counterは保持し合算0。
+
+17744 independent0a4527c4c62b330601d228d8855befe9414bae0d9edaaededb4f29b706831316/c4ca37真正0、metadata31否定/原三oracle/TestCRC一、独立算術statement lifecycle24/ResultSet close6。各modeの元fatal identity/固定catalog・cause/suppressed0、statement closeと借用connection commit/rollback/close0、password char[3]zero/false predicate3を元assertionから確認。DBやsessionの成功に変換しない。
+
+公開zero32byte keyのcodec constructor複製/close wipeとContextHash SHA256 object一・SecureRandom object二の明示constructorを実行。object数は当Test/calleeの直接記述からの構成数でJDK全内部alloc実測ではない。JDK provider内部entropy/device読取回数はnull・0補填なし。cryptoOrKeyOperationsInvoked=true、秘密key/credential/file読取・nonce生成/暗号化/復号/実session発行・native provider actor操作なし。固定UUID/IP・公開char配列だけ、実DB/JMS/Root/VM/権限操作0。補助五Mainのhash/ctor/calleeを固定、Source/Test/期待値変更0。
+
+17748 registryd3209b354ef0d91ca7f7877a511f2744591d7fff4605f5885a637107287c11f5/8375c0→17750独立215189212c576794299460d92d4d5b3d33a3621a42e8aa93e89e06abe7ab16ba/session84685終端77f151真正0、metadata34/chain二/profile四/summary四。固有2807/418・普通2788/5786残2998/quality19別/resource79内数、209JVM2939=2807+132repeat/joint48。Main567999/Code819metadata180、四291436Code411・自然184199/NoCode6-6不変/partial86358（新三）。owner504baseline234候補299UNKNOWN。
+
+開始1.5/4/8cap10・共有79→79/reset1793774153は丸め観測、N/T/専有費null。今回工具/製品障害0、原成功確認再演0。正式1964PT53scope・歴史17/190・新WBS受入0/工数null/QA051final/F03G07G13/451/全HOLD維持。全commands/OS/JDK/branch/HEAD/time/input/XML/exec/hash/exitは各公開manifestへ保存。

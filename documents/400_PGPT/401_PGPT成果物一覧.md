@@ -1,5 +1,7 @@
 # PGPT成果物一覧・進捗
 
+2026-11-01追加：3427/3428/PG-D1104、認証借用JDBC原三成功・独立31/三oracle/TestCRC一/statement24・ResultSet6後条件、公開zero key ctor-wipeとJDK provider object構成を開示。現2807/418/Main567999/四291436不変/partial86358、全分母未達と実DB/session未実施を保持、正式工数null/HOLD不変。
+
 2026-11-01追加：3425/3426/PG-D1103、Revocation独立graph原三成功・独立31/三oracle/TestCRC一。現2804/417/Main564996/四291436不変・自然184199新一/partial83355、全四physical未達と未実行Outcome保持・実Logout/DB/Root0。BUG2215の非空未実行class identity契約を是正、正式工数null/HOLD不変。
 
 2026-11-01追加：3423/3424/PG-D1102、保留Graph9と別実装のSession/認証原八成功、独立28/八oracle/四TestCRC。新二Source全二Codeの四counter100（35L4M2C26B）・現2801/416/Main562992/四291436、実DB/Root/native0。BUG2214のUUID副作用二表示をmetadata閉集合で是正/独立12・元成功再演0、正式工数null/HOLD不変。
