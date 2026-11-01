@@ -1,5 +1,7 @@
 # PGPT成果物一覧・進捗
 
+2026-11-01追加：3381～3383/PG-D1086、Web codec所有原5/1成功、全Source三physical/未達5L4M1C、独立30/五oracle/AAD113・LP否定七/Test六CRC。現2690/395/Main554960/四289434不変、BUG2202工具誤記旧失敗/新v2是正保存、正式工数null/HOLD不変。
+
 2026-11-01追加：3378～3380/PG-D1085、Inspector設定原4/1成功、全一Source/二Code L38M6C2B32四100・独立25四oracle/TestCRC。現2685/394/Main553957/四289434（+1Source/+2physical）、registry34二chain二profile＋公開要約四/WBS29ordinary四、正式工数null/HOLD不変。
 
 2026-11-01追加：3375～3377/PG-D1084、Inspector所有/entry原12/2成功・独立27/十二oracle/Test三CRC、全七physical分母/未達66L11M6B。現2681/393・Main552955/四288432不変、registry34二chain三profile＋公開要約四/WBS29ordinary四、正式工数null/HOLD不変。
