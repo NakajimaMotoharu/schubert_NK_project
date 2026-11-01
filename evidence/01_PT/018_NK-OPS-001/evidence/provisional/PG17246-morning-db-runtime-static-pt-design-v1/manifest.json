@@ -1,0 +1,452 @@
+{
+  "actualDatabaseActions": 0,
+  "actualExit": 0,
+  "actualNetworkActions": 0,
+  "actualServiceActions": 0,
+  "actualVmActions": 0,
+  "anchors": {
+    "D-MDB-001": [
+      {
+        "firstLine": 478,
+        "text": "public <T> T execute("
+      },
+      {
+        "firstLine": 509,
+        "text": "session.active = false;"
+      },
+      {
+        "firstLine": 818,
+        "text": "thread != Thread.currentThread().threadId()"
+      }
+    ],
+    "D-MDB-002": [
+      {
+        "firstLine": 823,
+        "text": "public DatabaseObservation inspectPermitDatabase("
+      },
+      {
+        "firstLine": 828,
+        "text": "if (!cleanupVerified || !expiryHandoffStarted)"
+      }
+    ],
+    "D-MDB-003": [
+      {
+        "firstLine": 856,
+        "text": "public void requireUnused("
+      },
+      {
+        "firstLine": 868,
+        "text": "public void requireConsistent("
+      }
+    ],
+    "D-MDB-004": [
+      {
+        "firstLine": 877,
+        "text": "public BackupBegins beginBackup("
+      },
+      {
+        "firstLine": 894,
+        "text": "backupCommitted = true;"
+      }
+    ],
+    "D-MDB-005": [
+      {
+        "firstLine": 905,
+        "text": "public Optional<BackupBegins> successfulBackup("
+      },
+      {
+        "firstLine": 958,
+        "text": "private BatchStepAttempt successfulHandle("
+      }
+    ],
+    "D-MDB-006": [
+      {
+        "firstLine": 986,
+        "text": "public BackupBegins beginResumeBackup("
+      },
+      {
+        "firstLine": 1015,
+        "text": "public void completeReusedBackup("
+      }
+    ],
+    "D-MDB-007": [
+      {
+        "firstLine": 1041,
+        "text": "private void completionGuard("
+      },
+      {
+        "firstLine": 1154,
+        "text": "public Instant completeBackup("
+      }
+    ],
+    "D-MDB-008": [
+      {
+        "firstLine": 1172,
+        "text": "public void failBackup("
+      },
+      {
+        "firstLine": 1221,
+        "text": "public BackupFailureSnapshot failedBackupSnapshot("
+      },
+      {
+        "firstLine": 1250,
+        "text": "private void failedObservationGuard("
+      }
+    ],
+    "D-MDB-009": [
+      {
+        "firstLine": 676,
+        "text": "public BackupObservation observeBackup("
+      },
+      {
+        "firstLine": 737,
+        "text": "private List<BackupStepRepository.Terminal> observeBackupPair("
+      }
+    ],
+    "D-MDB-010": [
+      {
+        "firstLine": 1264,
+        "text": "public <T> T handoffCleanup("
+      },
+      {
+        "firstLine": 1270,
+        "text": "handoffStarted = true;"
+      }
+    ],
+    "D-MDB-011": [
+      {
+        "firstLine": 1094,
+        "text": "public void requireAbandonedRequest("
+      },
+      {
+        "firstLine": 1107,
+        "text": "connection.setReadOnly(true);"
+      }
+    ],
+    "D-MDB-012": [
+      {
+        "firstLine": 1055,
+        "text": "public void recheckConsistent("
+      },
+      {
+        "firstLine": 1070,
+        "text": "SET TRANSACTION READ ONLY"
+      },
+      {
+        "firstLine": 641,
+        "text": "JdbcResourceFailures.replace(failure, secondary)"
+      }
+    ],
+    "D-MDB-013": [
+      {
+        "firstLine": 1290,
+        "text": "public ExpiryBegins beginExpiry("
+      },
+      {
+        "firstLine": 1331,
+        "text": "if (current.skipped() != prior.isPresent())"
+      }
+    ],
+    "D-MDB-014": [
+      {
+        "firstLine": 1370,
+        "text": "public <T> T handoffExpiry("
+      },
+      {
+        "firstLine": 1376,
+        "text": "expiryHandoffStarted = true;"
+      }
+    ],
+    "D-MDB-015": [
+      {
+        "firstLine": 1396,
+        "text": "public ExpiryObservation observeExpiry("
+      },
+      {
+        "firstLine": 1441,
+        "text": "? 10"
+      },
+      {
+        "firstLine": 1442,
+        "text": "? 30 : -1;"
+      }
+    ],
+    "D-MDB-016": [
+      {
+        "firstLine": 1589,
+        "text": "private CleanupTerminalRepository.Snapshot observeCleanup("
+      },
+      {
+        "firstLine": 1627,
+        "text": "cleanupVerified = true;"
+      }
+    ],
+    "D-MDB-017": [
+      {
+        "firstLine": 1477,
+        "text": "public CleanupTerminalRepository.RejectedSnapshot observeCleanupRejected("
+      },
+      {
+        "firstLine": 1522,
+        "text": "public java.util.List<Optional<CleanupTerminalRepository.Entry>> cleanupReferences("
+      }
+    ],
+    "D-MDB-018": [
+      {
+        "firstLine": 1638,
+        "text": "static SuccessRunLookup currentRunReference("
+      },
+      {
+        "firstLine": 1301,
+        "text": "if (!id.equals(run.id())) throw unavailable();"
+      }
+    ]
+  },
+  "approvedDesignHashes": {
+    "documents/300_SS/330_\u30c7\u30fc\u30bf\u30fb\u30d5\u30a1\u30a4\u30eb/331_DB\u7269\u7406\u30fbDDL\u30fbindex\u30fb\u6a29\u9650\u8a2d\u8a08.md": "7f6e0430a38769dad5d94ed8d95faaab124f4bb86246c478feee5b50ffca26d5",
+    "documents/300_SS/330_\u30c7\u30fc\u30bf\u30fb\u30d5\u30a1\u30a4\u30eb/332_SQL\u30fbtransaction\u30fblock\u30fb\u524a\u9664\u8a2d\u8a08.md": "bf35de0b4d24a253eb75808f0280fa92eb3f02f8ba3a988a227f96c7213781a5",
+    "documents/300_SS/340_batch\u30fb\u57fa\u76e4/341_\u671dbatch\u30fbbackup\u30fb\u524a\u9664\u30fb\u518d\u5b9f\u884c\u8a2d\u8a08.md": "b721e6f7d0ee3f17cfe1a2d38512623814b0a10c8a7ad8ae737c62eeda192195",
+    "documents/300_SS/340_batch\u30fb\u57fa\u76e4/343_\u8a2d\u5b9afile\u30fbdirectory\u30fb\u521d\u671fdata\u30fbmigration\u30fb\u5207\u623b\u3057\u8a2d\u8a08.md": "d8be70ce4c170df7939f7803723bb021c99ba40a72819f9b5d861731425332b2"
+  },
+  "coverage": null,
+  "designRows": [
+    [
+      "D-MDB-001",
+      "execute / Session.guard",
+      "341 SSC104;332 SSC063",
+      "callback\u7d42\u4e86\u3067active=false\u3001\u540cthread\u30fb\u975ehandoff\u30fb\u975einterrupt\u9650\u5b9a\u3002Connection/owned credential\u306e\u8cac\u52d9\u3001SQL/IO\u65e2\u77e5\u56fa\u5b9a\u3068\u672a\u77e5identity\u30fbclose\u9806\u4f4d\u3092\u533a\u5225\u3002\u5225thread/\u518d\u5165/\u7d42\u4e86\u5f8c/\u53d6\u5f97\u524d\u5931\u6557/close\u540c\u6642\u5931\u6557\u306f\u975e\u6210\u529f\u3002",
+      "public <T> T execute(",
+      "session.active = false;",
+      "thread != Thread.currentThread().threadId()"
+    ],
+    [
+      "D-MDB-002",
+      "inspectPermitDatabase",
+      "341 SSC104/200",
+      "cleanupVerified\u304b\u3064expiryHandoffStarted\u5f8c\u3060\u3051\u3001\u540cConnection\u306erole/schema/advisory\u3092\u524d\u5f8c\u7167\u5408\u3002null\u30fbrole\u5909\u5316\u30fblock\u6d88\u5931\u30fbowner\u671f\u9650\u30fbschema unknown\u3092\u62d2\u5426\u3057permit\u3092\u751f\u6210\u3057\u306a\u3044\u3002",
+      "public DatabaseObservation inspectPermitDatabase(",
+      "if (!cleanupVerified || !expiryHandoffStarted)"
+    ],
+    [
+      "D-MDB-003",
+      "requireUnused / requireConsistent",
+      "341 SSC094;332 \u00a78.3",
+      "\u65b0run\u306f\u53c2\u71670\u3001resume\u306fidentityConsistent\u3002backupCommitted\u524d\u9650\u5b9a\u3001\u540crun/cutoff\u306e\u524d\u5f8cguard\u3002\u5b58\u5728\u30fb\u4e0d\u6574\u5408\u3092\u6210\u529f\u88dc\u5b8c\u305b\u305aSQL\u7b49\u306e\u5b9f\u5f8c\u6761\u4ef6\u306f\u672a\u5b9f\u6e2c\u3002",
+      "public void requireUnused(",
+      "public void requireConsistent("
+    ],
+    [
+      "D-MDB-004",
+      "beginBackup",
+      "341 SSC104",
+      "schema\u78ba\u8a8d\u2192\u540cTX\u4e8cstep begin\u2192commit\u78ba\u5b9a\u2192autoCommit=true\u2192backupCommitted\u3002\u9014\u4e2d\u5931\u6557\u3067\u306f\u624b\u4fee\u5fa9/\u518d\u767a\u884c\u3057\u306a\u3044\u3002commit\u9001\u9054unknown\u5f8c\u306b\u6a29\u9650\u3084\u6210\u529f\u3092\u4ed8\u4e0e\u3057\u306a\u3044\u3002",
+      "public BackupBegins beginBackup(",
+      "backupCommitted = true;"
+    ],
+    [
+      "D-MDB-005",
+      "successfulBackup / successfulHandle",
+      "341 SSC200;331 \u00a78.3",
+      "\u6700\u65b0\u4e8cSUCCESS\u304c\u540crun/date/attempt/start/end\u306e\u4e00\u675f\u3067\u3001\u5225step\u3001\u00b5s\u3001\u7d42\u4e86\u2266now\u3001\u56fa\u5b9atarget/success1\u53c8\u306f2/failure0/byte>0/error null\u3002\u6b20\u843d/3\u884c/\u672a\u6765/\u65e5\u9055\u3044/driver\u672a\u77e5\u3092\u62d2\u5426\u3002SQL literal\u3068\u72ec\u7acb14\u5217\u5024\u3092\u5c06\u6765oracle\u306b\u3059\u308b\u3002",
+      "public Optional<BackupBegins> successfulBackup(",
+      "private BatchStepAttempt successfulHandle("
+    ],
+    [
+      "D-MDB-006",
+      "beginResumeBackup / completeReusedBackup",
+      "341 SSC200",
+      "\u540cmanifest\u518d\u8aad\u3068\u540chandle\u306e\u65e2SUCCESS\u78ba\u8a8d\u3001\u4e8cSKIP\u78ba\u8a8d\u5f8c\u306e\u307fcommit\u3002\u518d\u7528\u5b8c\u4e86\u306freadback/rollback\u5f8cbackupFinished\u3002\u5143SUCCESS\u3092\u4eca\u56de\u65b0Backup\u6210\u529f\u3078\u6570\u3048\u305a\u3001manifest\u4ea4\u63db/null/\u4e0d\u4e00\u81f4\u62d2\u5426\u3002",
+      "public BackupBegins beginResumeBackup(",
+      "public void completeReusedBackup("
+    ],
+    [
+      "D-MDB-007",
+      "completionGuard / completeBackup",
+      "341 SSC104/134",
+      "\u540cbegin\u3001\u672afinished/\u672ahandoff\u3001autoCommit/RW/READ_COMMITTED/HELD\u3002\u72ec\u7acbbundle\u5b8c\u6210callback\u524d\u5f8c\u306b\u518d\u78ba\u8a8d\u3057\u3001\u8fd4\u5374\u6642\u523b\u3060\u3051\u3067DB/\u539f\u672c/Unit\u6210\u529f\u3092\u8a8d\u5b9a\u3057\u306a\u3044\u3002",
+      "private void completionGuard(",
+      "public Instant completeBackup("
+    ],
+    [
+      "D-MDB-008",
+      "failBackup / failedBackupSnapshot / failedObservationGuard",
+      "341 SSC134;332 SSC063",
+      "\u4e8cFAILED\u3060\u3051\u540cTX\u78ba\u5b9a\u2192\u72ec\u7acb\u4e8c\u884c\u518d\u8aad\u2192rollback\u5f8cfinished\u3002\u6b63\u78ba\u306aCOMMAND_FAILURE(1,0,1,0)\u4e8c\u5024\u3060\u3051ended\u4fdd\u6301\u3002snapshot\u306f\u540cbegin/end/owner\u306e\u518d\u8aad\u3067\u3001\u7570\u306a\u308bfailed\u7406\u7531\u304b\u3089\u4ee3\u66ff\u6a29\u9650\u3092\u4f5c\u3089\u306a\u3044\u3002",
+      "public void failBackup(",
+      "public BackupFailureSnapshot failedBackupSnapshot(",
+      "private void failedObservationGuard("
+    ],
+    [
+      "D-MDB-009",
+      "observeBackup / observeBackupPair",
+      "341 SSC134/200",
+      "current\u4e8crow\u3092id\u6607\u9806lock\u3057semantic DB/config\u9806\u3078\u623b\u3059\u3002\u518d\u7528\u3067\u306f\u5143manifest+prior\u4e8cSUCCESS\u3001\u901a\u5e38\u3067\u306fexpected handle\u3001\u672amanifest\u3067\u306f\u6b63\u78ba\u306afailed/end\u4e00\u81f4\u3002\u4f59\u884c/NULL/\u4e0d\u540c\u5024/owner\u6545\u969c\u306f\u975e\u6210\u529f\u3002",
+      "public BackupObservation observeBackup(",
+      "private List<BackupStepRepository.Terminal> observeBackupPair("
+    ],
+    [
+      "D-MDB-010",
+      "handoffCleanup",
+      "341 SSC104",
+      "backupFinished\u5f8c\u4e00\u56de\u3001\u958b\u59cb\u524dautoCommit=true\u3001inHandoff\u4e2dSession\u518d\u5165\u4e0d\u53ef\u3002\u5b50callback\u5f8c\u306block\u56de\u53ce\u3068guard\u3092\u6e80\u305f\u3057\u3066\u8fd4\u3059\u3002callback/\u518d\u53d6\u5f97\u5931\u6557\u3067\u3082\u958b\u59cb\u6e08\u307f\u5370\u3092\u623b\u3057\u3066\u518d\u767a\u884c\u3057\u306a\u3044\u3002",
+      "public <T> T handoffCleanup(",
+      "handoffStarted = true;"
+    ],
+    [
+      "D-MDB-011",
+      "requireAbandonedRequest",
+      "341 SSC104;332 \u00a78.3",
+      "\u540crun\u3001\u5143start\u304ccutoff\u4ee5\u5f8c/\u4eca\u56destart\u672a\u6e80\u3001\u4e8cstep\u5143FAILED/ABANDONED\u3067attempt\u5c0f\u30fb\u65e5\u4ed8/\u7d42\u4e86\u7a93\u4e00\u81f4\u3002RO TX\u4e8crow/\u4f59\u884c\u62d2\u5426\u3001rollback/\u72b6\u614b\u5fa9\u5e30/consistent\u518d\u8aad\u3002\u65e2request\u3092\u66f8\u63db\u3048\u305a\u5225run\u3092\u6551\u6e08\u3057\u306a\u3044\u3002",
+      "public void requireAbandonedRequest(",
+      "connection.setReadOnly(true);"
+    ],
+    [
+      "D-MDB-012",
+      "recheckConsistent",
+      "332 SSC063",
+      "JDBC RW\u8a2d\u5b9a\u306e\u307e\u307eserver SET TRANSACTION READ ONLY\u3002Statement\u53d6\u5f97\u76f4\u5f8cprimary\u8a18\u9332/direct close\u3001SQL-only\u56fa\u5b9a\u5909\u63db\u30fb\u672a\u77e5identity\u7dad\u6301\u3002Connection\u501f\u7528\u3068close\u6240\u6709\u3092\u5206\u3051\u3001\u5931\u6557\u6642\u306b\u5024\u3092\u8fd4\u3055\u306a\u3044\u3002",
+      "public void recheckConsistent(",
+      "SET TRANSACTION READ ONLY",
+      "JdbcResourceFailures.replace(failure, secondary)"
+    ],
+    [
+      "D-MDB-013",
+      "beginExpiry overloads",
+      "341 SSC200",
+      "cleanupVerified\u3001expiry\u672ahandoff/\u672abegin\u3001\u540cBackup run\u5fc5\u9808\u3002prior audit\u3068current.SKIP\u6574\u5408\u3001commit\u5f8c\u306b\u5143SUCCESS\u53c8\u306f\u6b63\u78baRUNNING\u521d\u671f\u76e3\u67fb\u3092\u72ec\u7acb\u518d\u8aad\u3001rollback/owner\u518d\u78ba\u8a8d\u5f8c\u3060\u3051begins\u3092\u4fdd\u6301\u3002\u5143audit\u66f4\u65b0\u3084\u518dpurge\u3092\u8a31\u53ef\u3057\u306a\u3044\u3002",
+      "public ExpiryBegins beginExpiry(",
+      "if (current.skipped() != prior.isPresent())"
+    ],
+    [
+      "D-MDB-014",
+      "handoffExpiry",
+      "341 SSC200/104",
+      "cleanupVerified\uff0bexpiryBegins\u5f8c\u4e00\u56de\u3060\u3051handoff\u3002\u958b\u59cb\u6e08\u307f\u3092\u4fdd\u6301\u3057\u3001finally inHandoff\u89e3\u9664\u306f\u518d\u5b9f\u884c\u8a31\u53ef\u3067\u306f\u306a\u3044\u3002\u5225thread\u30fb\u91cd\u8907\u30fbautoCommit false\u30fb\u5b50/\u518d\u53d6\u5f97unknown\u3092\u975e\u6210\u529f\u3002",
+      "public <T> T handoffExpiry(",
+      "expiryHandoffStarted = true;"
+    ],
+    [
+      "D-MDB-015",
+      "observeExpiry",
+      "341 SSC200;331 expiry\u76e3\u67fb",
+      "\u540cbegins/EXPIRY receipt\u3002SKIP\u306fexit0\uff0b\u5143audit\u4e00\u81f4\u3001\u901a\u5e38SUCCESS0/WARNING10/FAILED30\u3092\u53b3\u5bc6\u7167\u5408\u3057ended\u975enull\u3001\u8a31\u53eferror NONE/COMMAND_FAILURE/SAFETY_FAILURE\u3060\u3051\u3002rollback\u5f8cowner\u518d\u78ba\u8a8d\u3001\u672a\u77e5status/\u7d42\u4e86/\u4e0d\u4e00\u81f4\u30920\u88dc\u5b8c\u3057\u306a\u3044\u3002",
+      "public ExpiryObservation observeExpiry(",
+      "? 10",
+      "? 30 : -1;"
+    ],
+    [
+      "D-MDB-016",
+      "observeCleanup variants",
+      "341 SSC199/200",
+      "Backupfinished\uff0bhandoff\u3001receipt0/10\u306e\u307f\u3001failedBackup\u3068\u4fdd\u6301failureEnded\u6574\u5408\u3002\u4e03terminal\u3092\u73fe\u5728DB\u304b\u3089\u8aad\u307f\u5404SKIP/backupUnavailable/finished\u3092\u518d\u691c\u67fb\u3001receipt\u4e00\u81f4\u30fbrollback\u30fbowner\u518d\u78ba\u8a8d\u5f8c\u3060\u3051cleanupVerified\u3002\u62d2\u542630\u3068\u306f\u5206\u3051\u308b\u3002",
+      "private CleanupTerminalRepository.Snapshot observeCleanup(",
+      "cleanupVerified = true;"
+    ],
+    [
+      "D-MDB-017",
+      "observeCleanupRejected / cleanupReferences overloads",
+      "341 SSC199/200/201",
+      "\u62d2\u5426\u306fCLEANUP exit30\u30fb\u540cowner\u306ereadRejected\u4e8c\u56de\u4e00\u81f4\u3060\u3051\u3067\u5b8c\u4e86/\u65b0attempt\u3067\u306a\u3044\u3002\u5143\u53c2\u7167\u306fexpected\u5168row\u518d\u8aad\u5f8c\u3060\u3051\u53d6\u5f97\u3001\u5143\u6210\u529fseals/\u9032\u6357\u306fRepository\u5074\u5225\u5951\u7d04\u3002NULL/\u4ea4\u63db/unknown\u3092\u6210\u529f\u5024\u3067\u57cb\u3081\u306a\u3044\u3002",
+      "public CleanupTerminalRepository.RejectedSnapshot observeCleanupRejected(",
+      "public java.util.List<Optional<CleanupTerminalRepository.Entry>> cleanupReferences("
+    ],
+    [
+      "D-MDB-018",
+      "currentRunReference",
+      "341 SSC200",
+      "data-only same-run lookup\u3067foreign UUID\u62d2\u5426\u3002\u73fe\u5728run\u3092\u8fd4\u3059\u3060\u3051\u3067\u539f\u672csession\u80fd\u529b\u3084\u7ba1\u7406\u691c\u7d22\u30fb\u540c\u65e5\u5225run\u6210\u529f\u306e\u8a8d\u5b9a\u3092\u4f5c\u3089\u306a\u3044\u3002originals\u6ce8\u5165\u7d4c\u8def\u3068\u533a\u5225\u3002",
+      "static SuccessRunLookup currentRunReference(",
+      "if (!id.equals(run.id())) throw unavailable();"
+    ]
+  ],
+  "documentPath": "documents/400_PGPT/450_\u54c1\u8cea/3361_MorningDBSession\u5b9f\u884c\u90e8_\u9759\u7684PT\u8a2d\u8a08\u5bfe\u5fdc.md",
+  "documentSha256": "d78c0c9ad64c62e385501ce2899ecc7a8ea1586fdbf5b729545b51d3f6f939d6",
+  "dynamicStatus": "NOT_EXECUTED_HOLD",
+  "effortPercent": null,
+  "formalUpdated": false,
+  "invocation": {
+    "actualPythonCommand": [
+      "/usr/bin/python3",
+      "-B",
+      "tools/quality/pg17246_morning_db_runtime_static_pt_design.py"
+    ],
+    "arbitraryArgumentsRecorded": false,
+    "entrypointPath": "tools/quality/pg17246_morning_db_runtime_static_pt_design.py",
+    "entrypointSha256": "6728328ea3f35d4d7405954dbfc2685aa33978a5e6499850aa6f069ccf93fedd",
+    "helperPath": "tools/quality/host_tool_invocation.py",
+    "helperSha256": "85d616a3db4ff47f4c95ae2e0dd57954bc2b09f28b8f2a685b986e5621545c46",
+    "libraryPath": "tools/quality/pg17246_morning_db_runtime_static_pt_design.py",
+    "librarySha256": "6728328ea3f35d4d7405954dbfc2685aa33978a5e6499850aa6f069ccf93fedd",
+    "loadedProjectPythonSources": {
+      "tools/quality/g07_host_class_provenance_inputs.py": "a676cb3e4145177c3c243722d737592ce7d44c3f29cfe4f670662ef7651f046b",
+      "tools/quality/host_tool_invocation.py": "85d616a3db4ff47f4c95ae2e0dd57954bc2b09f28b8f2a685b986e5621545c46",
+      "tools/quality/pg17246_morning_db_runtime_static_pt_design.py": "6728328ea3f35d4d7405954dbfc2685aa33978a5e6499850aa6f069ccf93fedd"
+    },
+    "provenance": "OBSERVED_SYS_ARGV_AND_ORIG_ARGV_NOT_RECONSTRUCTED"
+  },
+  "manualRuntimeReadRanges": [
+    [
+      661,
+      1645
+    ],
+    [
+      478,
+      547
+    ]
+  ],
+  "metadataNegativeVectors": 17,
+  "negativeLabels": [
+    "source",
+    "productTestsExecuted",
+    "status",
+    "dynamicStatus",
+    "coverage",
+    "newAccepted",
+    "formalUpdated",
+    "effortPercent",
+    "wholeCurrentTestSemanticReviewComplete",
+    "oldRuntimeTransferred",
+    "newFullPgReviewCredit",
+    "priorWholePgReviewReused",
+    "designRows",
+    "actualVmActions",
+    "actualDatabaseActions",
+    "actualNetworkActions",
+    "actualServiceActions"
+  ],
+  "newAccepted": 0,
+  "newFullPgReviewCredit": 0,
+  "oldRuntimeTransferred": false,
+  "priorReferences": [
+    [
+      "PG11580-batch-session-source-review-v1",
+      "198461923534abf92c0bb71cecb4c83bc98f5dd3f0b5228c67f95ca1c24dcadc"
+    ],
+    [
+      "PG11582-batch-session-source-review-post-v1",
+      "7f2130d91fa6fe4e4b1b3846455218702099d19effb32b6e6d361219300c57a3"
+    ],
+    [
+      "PG16112-batch-session-saved44-reference-v1",
+      "0425538b6334d0ae7be11ef628a76bbfaf4efcfe182c5a5536d56b0810114966"
+    ],
+    [
+      "PG16114-batch-session-reference-post-v1",
+      "8b334d8ea9700d5e2e1972c1db8ed15e04212a1d7508b535d97d8dae3fa22168"
+    ]
+  ],
+  "priorStaticReviewSource": "7f035ccfe89c46e8f4fae52099b1c0e4e890e66b",
+  "priorWholePgReviewReused": true,
+  "productTestsExecuted": 0,
+  "source": "6b53efeec87f3ec36a840dd8e7759656cb4aee5c",
+  "sourceHashes": {
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/BatchRepositoryException.java": "134bcdaecf9f02adc74d5cb728782c41f19497b0c0c37ee2cd4a70b0155179b6",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/CleanupDatabaseSession.java": "a09d018ae56a45401c2fdaefdb1ac44da8390ebe2e1ff71a4edb8be6297ea6a7",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/JdbcResourceFailures.java": "f4cff9bb43cacfde5be699fd61d4e25526523d5ef5e478aa88dcbb8bdde6928a",
+    "src/schubert-nk-batch/src/main/java/dev/codex/schubert/nk/batch/repository/MorningDatabaseSession.java": "27bda4446e8b0a112963704b95d530af2357d254f3f6bced1ce04284fb5e88e2",
+    "src/schubert-nk-bootstrap/src/main/java/dev/codex/schubert/nk/api/maintenance/InspectorDbCredential.java": "68f7c253171f2245f0b238f7c4481eaf5495acca9330aa750947f2ff1cd67ae0"
+  },
+  "status": "STATIC_PT_DESIGN_MAPPING_RECORDED",
+  "whole451Accepted": false,
+  "wholeCurrentTestSemanticReviewComplete": false
+}
