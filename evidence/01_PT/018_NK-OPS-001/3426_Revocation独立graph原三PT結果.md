@@ -1,0 +1,15 @@
+# Revocation独立graph 原三PT結果
+
+source6b53efeec87f3ec36a840dd8e7759656cb4aee5c、3425/PG-D1103。Main Coordinator181行/Exception10・原Test64行。17720 raw918c173e5540676e824c1fe2855bcaf433753c942e3f94c410eb175d4c0b0b68/session57436終端4e0faa真正0、原三/一suite・F/E/S/abort0。17722 post0281f99d232137b79e2adff27f4e340fc7236d27ce8283d484fe4dd47046c268/session58123終端c9da67真正0、source/session/全closure/CRC0・四held/六native/Root不在確認。
+
+呼ぶのはmodule-local preserveFatalと固定exception constructorだけ。未呼出しtransaction.combineのWSE参照を消去/別経路化せず保留し、Main全体の分母には残す。元三literal oracle/identity/優先/null/redactionを確認、実Logout/DB接続/codec/JMS/revoke/Root/native0、fixture独自Thread0・JUnit Timeout framework worker実総数null。
+
+全二Source/四physical=Code三＋NoCode SqlWork一、未実行Outcome Code一も全分母。LINE covered17/missed82、METHOD2/10、CLASS2/1、BRANCH12/32、strict四100 gate1。RetryExceptionだけは全2L1M1C/branch0で自然B0・三counter100、branch実測100へ変換しない。Coordinatorは15L1M1C12B coveredの部分測定、他未実行method/enum/取引は未証明。
+
+## 独立検証と工具是正
+
+旧17724/c7ffc8/entry3d1041dc body1は、未実行class名を['unknown']へ替える同件数否定がlen1契約を通ることをselftestが検出。修正前BUG2215/YKT1962、SLOT/OUT前・Product/CRC reader未実行、旧byte/失敗保持。新17725-v2 77f32b2bb28610706ec52ae2a8f5b689006eb65368733e0864cbc94a34bd368b/4f4556真正0はOutcome完全名list/全physical閉集合へ是正し、同件数誤名と欠落を拒否。metadata31否定/原三oracle/TestCRC一。原postのexecレコード/全counter/集合一致と、前graphの空集合len0は非該当として元証拠を参照、原成功再演0。
+
+17728 registry0a9215529d00fa998c6c81a4e0c6cdfc2dfab988988a12a679f8d4edbcbb58c5/8f22cf、17730独立484b1d0fc7f932e2ff773eac6c616b6df743f4d0e91a5414e521b9de8c6bcc53/session86451終端149e4e真正0、metadata34/chain二/profile三/summary四。固有2804/417・普通2785/5786残3001/quality19別/resource79内数、208JVM2936=2804+132repeat/joint48。Main564996/Code816metadata180（172NoCode7compiler1official）、四291436Code411不変、自然184199（新一）/NoCode6-6/partial83355（新一Source三physical）。owner501baseline234候補298UNKNOWN。
+
+開始見積1/2.5/5cap10・共有79→79/reset1793774153、丸め差を専有0/実tokenへ換算しない。N/T/実配賦null、正式1964PT53scope・歴史17/190・新WBS受入0/工数null・QA051final/全F03/451/G07G13/HOLD不変更。BUG2215有限PASS_SAVE_PENDING、保存push後だけ閉鎖。全command/time/OS/JDK/branch/HEAD/input/XML/exec/hash/actual exitは各manifest保存。
