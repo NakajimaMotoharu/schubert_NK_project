@@ -120,6 +120,16 @@ projection/local/metadata故障の固定internal codeは`WEB_REQUEST_LOG_PROJECT
 
 Action名追加は351とLog画面filter/testを同時更新する。フリーテキストactionを許さない。
 
+### 4.1 Currentとのaction対応・独立期待値（QA-051/SSC-184、2026-11-02承認）
+
+CHR-L01ではUI264 §5.1のDIF-010を適用し、NKのactionを本節catalogへ統一する。空REQUEST→`HTTP_REQUEST_COMPLETED`、`login_success`→`LOGIN_SUCCEEDED`、scenario検索の`search`→`SCENARIO_SEARCHED`は、それぞれ同じ実操作・categoryの相関根拠が成立する行だけを対応付ける。Currentの値を汎用uppercase化して対応を推測しない。
+
+操作ごとに、本設計及び既承認UIからcategory/action/記録先/必要件数/REQUESTのHTTP項目を独立した期待表へ固定する。`menu`/`log_search`相当の記録とcallerを対応表へ含め、未対応・不足は未完のまま残す。実測値を期待件数として採用しない。
+
+既存ログとCurrent baselineは不変とし、fixture・before/after・request/event/message相関・整合した観測時点から今回操作を識別する。水位のみの選択、追加技術行の一律除外、秘密を含むraw比較出力は禁止する。local/outbox/DBの冪等性、欠落0・重複0及び画面の件数/順序/明細はSS355 §8.1で独立に検証する。
+
+本承認は比較仕様の確定であり、実装・比較oracle・実NK試験・正式受入は未完。wire/schema、ログ生成・保存・送達責務や未知の業務差分を変更・免除しない。
+
 ## 5. Result・internal error catalog
 
 ### 5.1 Wire result（上位確定）
