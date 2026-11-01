@@ -1,5 +1,7 @@
 # PGPT成果物一覧・進捗
 
+2026-11-01追加：3415～17/PG-D1099、permit data原六/一成功・独立28/六oracle/行guard三反例/TestCRC、旧17640未起動失敗/BUG2212新v2保全。現2780/409/Main560990・四289434不変/実permit-Root操作0、全Source未達保持・正式工数null/HOLD不変。
+
 2026-11-01追加：3412～14/PG-D1098、public checkpoint原十二/一成功・独立28/十二oracle/7byte/TestCRC、全Source八physical・private native exporter不在確認。現2774/408/Main560990・四289434不変/未達9L3M6Bを保持、実native/正式資格加点0。
 
 2026-11-01追加：3411/PG-D1097、JaCoCo子継承17の有限静的適合性レビュー・metadata16。Maven append契約と現限定false不適合を分離、BUG2211/YKT1958 OPEN_HOLD/過去破損・製品欠陥未実証、原PT/coverage/受入加点0。
