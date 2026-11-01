@@ -1,5 +1,7 @@
 # PGPT成果物一覧・進捗
 
+2026-11-01追加：3479/PG-D1128、BUG2231/YKT1978の予定時刻labelを旧byte保持・追記訂正。元raw/eventの時刻・PT/counter不変更、管理二否定/二正常だけで製品実行・受入加算0。
+
 2026-11-01追加：3476既HOLD照合/3477～78/PG-D1127、Technical Rowと固定例外の新八件一suite成功・四Source23L7M4C16B未達0、一四100＋三自然B0N/A。固定DLQ文言を実commit成功と混同0、合成値だけ/認証DBcrypto0。現2945/441・quality139/普通2806不変・Main635/1076、正式/新受入0/工数null/HOLD維持。
 
 2026-11-01追加：3474/3475/PG-D1126、Media表示新十二件一suite成功・全二Source89L11M2C41B四counter100。生成switch一はCode有/公式filter0として物理保持。stub hashは未検証・実file/client/Browser受入0、Current六固定title根拠は読取のみ。現2937/440・quality131/普通2806不変・Main631/1072/四328480、新製造0/正式1964/53/新WBS受入0/工数null/HOLD維持。
