@@ -1,5 +1,7 @@
 # PGPT成果物一覧・進捗
 
+2026-11-01追加：3462/3463/PG-D1121、保守metadata/OS名syntax新六件一suite成功・三Source21L7M3C6B未達0、二四100＋一自然B0。実DB/OS所有/親結果へ代用0、JDK zone初期化と内部IO未知を分離。現2895/435・quality89/普通2806不変・Main616/1053、新製造0・正式1964/53/新WBS受入0/工数null/HOLD維持。
+
 2026-11-01追加：3460/3461/PG-D1120、Menu内部六件/一suite成功・全三Source37L12M3C4B未達0、二四100＋一自然B0。Current legacy五組は原template固定、追加四説明は目的/単一行のみ、実HTTP/DB/CHR受入0。工具regex2228/YKT1975は先行起票→新独立v2/三parser反例で是正・原成功再演0。現2889/434・quality83/普通2806不変・Main6131050/四314463/自然196213、新製造0・正式1964/53/新WBS受入0/工数null/HOLD維持。
 
 2026-11-01追加：3458/3459/PG-D1119。認証不変値/catalog新十二件/一suite成功・全九Source十一physical79L18M10C30B全miss0、五Source四100＋四三counter100/branchN/A・NoCode interface一を独立証明。現2883/433・quality77/普通2806不変、Main6101047/四312461/自然195212、既Source初測定九/新製造0・実認証/session/鍵/DB0。正式1964/53/新WBS受入0/工数null/HOLD維持。
