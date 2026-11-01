@@ -1,5 +1,7 @@
 # PGPT成果物一覧・進捗
 
+2026-11-01追加：3391～3393/PG-D1089、fake descriptor所有原16/2成功・独立31/16oracle/Test四CRC、全二Source十五physical未達143L34M7C116B保持。現2730/401/Main558979/四289434不変、registry34二chain三profile＋公開要約四/WBS29ordinary四、元df0成功移植0/全actualHOLD/正式工数null不変。
+
 2026-11-01追加：3388～3390/PG-D1088、自己所有Web HTTP原13/2成功・独立31/十三oracle/Test八CRC、全Source二physical/未達12L3M5B。現2714/399/Main556964/四289434不変、registry34二chain二profile＋要約四/WBS29ordinary四、初回全真正0/新BUG0/正式工数null/HOLD不変。
 
 2026-11-01追加：3384共有70→75点検（+126case/+5四100Source・正式0）→3385～3387/PG-D1087、自己所有HTTP原11/2成功、全Source二physical/未達17L4M15B・独立31/十一oracle/Test三CRC。現2701/397/Main555962/四289434不変、工具2203～05旧失敗/新非循環callback/alias是正保持、正式工数null/HOLD不変。
