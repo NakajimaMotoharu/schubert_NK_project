@@ -1,5 +1,7 @@
 # PGPT成果物一覧・進捗
 
+2026-11-01追加：3372～3374/PG-D1083、Root ELF原8/1成功・全五physical（NoCode三/未実行Code一）を分母保持、独立27/八oracle/hashlib二vector/Test二CRC。現2669/391・Main550948・四288432不変/partial73312、BUG2201工具要約是正・正式/工数null/全HOLD不変。
+
 2026-11-01追加：3369～3371/PG-D1082、配信/Snapshot原6/2成功・独立24六oracle/TestCRC/UI全26field根拠。新二Main測定、一四100一partial（未達1L2B）、現2661/390/Main549943/四288432、registry34二chain三profile/WBS29ordinary四・正式工数null/HOLD不変。
 
 2026-11-01追加：3366～68/PG-D1081、ScenarioAudit原5/1成功・Main新測定一Source四100（35L2M1C7B）、独立22五oracle/TestCRC/承認固有trace、現2655/388・Main547941/四287431へ各一増。registry34/2chain/2profile/WBS29ordinary四・BUG2200工具旧失敗保持/新v2是正、正式工数null/全HOLD不変。
