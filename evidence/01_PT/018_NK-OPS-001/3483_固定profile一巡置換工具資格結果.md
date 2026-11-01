@@ -1,0 +1,9 @@
+# 固定profile一巡置換工具 資格結果
+
+3482/PG-D1130。helper literal_profile_replace_v2.mjs SHA3370b22463c9e46781511d0de63e216c8d207f425a4fe3cf8c91d4bc7aa08df2、selftest a7f197117d7173b701b08dd7f6a2350c4b5425fcc55acbdf43b6f1b2213382a6。旧v1 dfdd02e8不変更・旧selftest再演0。環境PATHにnodeなしを読取確認し、既存固定絶対pathのNode v24.19.0/bc17c508を利用、追加導入0。
+
+PG18288-literal-profile-qualification-v1/manifest.json SHA c37e66f0a8d7bb0bc5cb1cc5d8bac9671df1dfa903b0566028f088f0a770f1c1、checked entry a3069b18/8d2d4a真正0。十五固定literal成功・別regexなし位置scan十五一致・三十一拒否・512境界とimmutable snapshot四確認。A→B/B→CやPG番号の原位置一巡、ドル補間なし/overlap/digest断片・裸数値禁止を確認。初draftのunused Pathはdf04df lint1/bodyStartedfalseで本体未起動、未実行draft修正後だけNode新selftest一回、製品障害/PASSへ加算0。
+
+PG18289-literal-profile-independent-v1/manifest.json SHA081f2a8d6375b92d3e207af0cecc0ba7fa6aef7d7520f177ba00ffa88f4838a7、entryad717956/2ad7a4真正0。十三metadata否定と元stdout/stderr/runtime/helper/test全hash/真正terminalを独立照合しselftest/元Product再演0。元source6b53・HEAD77d06c1ca353d5604cdd49d28d5c9ef4b48307b8、実command/exit/time/versionは両manifest/invocation/stage。
+
+限界：信頼済みJSON/通常literal配列を渡す内部機械置換用であり、Proxy/getter/accessorや任意objectの安全sandboxではない。Java/Python意味解析、Source/期待値正しさ、当該PTの実行許可や品質合格も保証しない。新しい未実行draftの作成だけに使い、既実行Source/Test/helperは不変。生成後の独立hash/field/compile/oracle/coverage/451照合を省略しない。実PG/PT件数・coverage/native/正式受入への加点0、固有2955/442/Main641/1082等の元測定不変、全HOLD/工数null保持。事前0.25/.75/2pp cap10、actualN/T専有費不明null、共有残量は最新456へ。
