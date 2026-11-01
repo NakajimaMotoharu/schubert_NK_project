@@ -1,0 +1,62 @@
+[
+  {
+    "id": "REV-001",
+    "finding": "開始依存をTBDと混同",
+    "action": "DEP/PREPはexecution_blockers、ISSはdecision_issuesへ分離。CONFIRMEDは実行可能ではない。",
+    "status": "CORRECTED"
+  },
+  {
+    "id": "REV-002",
+    "finding": "進行中実装のsource混在リスク",
+    "action": "初回49feと固定補助source ce284を区別。全参照は固定commit bytesのSHA、working差分は別observed SHA。target生成SQLは参照から除外。",
+    "status": "CORRECTED"
+  },
+  {
+    "id": "REV-003",
+    "finding": "Login/setup監査がLog fixture countを増やす",
+    "action": "IT-IF017のkeyword=IT-LOG-FIXTUREで固定5rowだけを対象化、日付未指定の契約は維持。",
+    "status": "CORRECTED"
+  },
+  {
+    "id": "REV-004",
+    "finding": "相互ADMIN減員の後着を常に0105とした",
+    "action": "User/session lock順を独立検討し先着barrierを固定、後着actor失効は0102、自己保護は0105へ分離。",
+    "status": "CORRECTED"
+  },
+  {
+    "id": "REV-005",
+    "finding": "最終DLQ物理copyを論理隔離と混同する危険",
+    "action": "IT-ASY008でM0/W/Dと1論理/最大2物理の正常説明を明示。単純DLQ1件を全crashへ適用しない。",
+    "status": "CORRECTED"
+  },
+  {
+    "id": "REV-006",
+    "finding": "lease切替後の遅着送信を一律二重送信NGにする危険",
+    "action": "QA050の唯一有効lease/CAS/同lease dispatchと、遅着attempt追跡・失効論理更新1を区別。",
+    "status": "CORRECTED"
+  },
+  {
+    "id": "REV-007",
+    "finding": "ACTION/SECURITYのcategory別監査row数がSSで一意でない",
+    "action": "ISS-AUDITへ起票、影響ケースPENDING_DECISION。現実装の件数を採用しない。",
+    "status": "OPEN"
+  },
+  {
+    "id": "REV-008",
+    "finding": "field errorの400相当を一意statusと誤認する危険",
+    "action": "ISS-HTTPFORMへ分離し境界caseはPENDING_DECISION、合法/非更新/byte条件は継続。",
+    "status": "OPEN"
+  },
+  {
+    "id": "REV-009",
+    "finding": "全条件block数をIT網羅率とみなす危険",
+    "action": "文書管理/内部PT/実結合/開始依存に分類、構造割当と意味的充足を別判定、pendingリンクは充足認定0。",
+    "status": "CORRECTED"
+  },
+  {
+    "id": "REV-010",
+    "finding": "8.2restoreの計測起点の曖昧さ",
+    "action": "RPOは最新一貫checkpointとの差、RTOは検知→公開再開経過、損失範囲を記録。",
+    "status": "CORRECTED"
+  }
+]

@@ -1,0 +1,1705 @@
+{
+  "version": 1,
+  "authored_date_jst": "2026-11-01",
+  "review_date_jst": "2026-11-02",
+  "reference_capture_utc": "2026-11-01T15:08:01.507955+00:00",
+  "initial_clock_observation_utc": "2026-11-01T14:28:36Z",
+  "design_commit": "8b91944df5820535e23ba2469740f1c0aa94c447",
+  "design_ref": "origin/main (fetch確認済)",
+  "implementation_branch": "dev-foundation",
+  "implementation_source": "ce284deb86508071d03cf913ce94344f2e49bc9a",
+  "reported_production_source": "6b53efeec87f3ec36a840dd8e7759656cb4aee5c",
+  "production_deployed": false,
+  "implementation_dirty_policy": "PGPT作業中。読取hashのみ、stash/job/worktree変更なし。参照hashは固定commitのbytes。observed_worktree_sha256は別の読取値でありworktree_equals_reference=falseを正本へ混ぜない。",
+  "documents": [
+    {
+      "kind": "DESIGN",
+      "path": "documents/100_RD/101_要件定義書一覧.md",
+      "sha256": "573afec3fdec201761c6f012a9631756aba14d699ab38716c3752a4201aa0c88",
+      "bytes": 2932,
+      "source_commit": "8b91944df5820535e23ba2469740f1c0aa94c447",
+      "equals_committed": true,
+      "observed_worktree_sha256": "573afec3fdec201761c6f012a9631756aba14d699ab38716c3752a4201aa0c88",
+      "worktree_equals_reference": true
+    },
+    {
+      "kind": "DESIGN",
+      "path": "documents/100_RD/110_総則・方針/111_システム化方針.md",
+      "sha256": "63a265f5395f847a680f36c1e13271c69061c5fb4079167411ce94d20f3f8e6e",
+      "bytes": 3653,
+      "source_commit": "8b91944df5820535e23ba2469740f1c0aa94c447",
+      "equals_committed": true,
+      "observed_worktree_sha256": "63a265f5395f847a680f36c1e13271c69061c5fb4079167411ce94d20f3f8e6e",
+      "worktree_equals_reference": true
+    },
+    {
+      "kind": "DESIGN",
+      "path": "documents/100_RD/110_総則・方針/112_スコープ定義.md",
+      "sha256": "44541053a2ab9517756c576269ac0eb9f396e2a562309a7372f56f7e49b81b76",
+      "bytes": 2454,
+      "source_commit": "8b91944df5820535e23ba2469740f1c0aa94c447",
+      "equals_committed": true,
+      "observed_worktree_sha256": "44541053a2ab9517756c576269ac0eb9f396e2a562309a7372f56f7e49b81b76",
+      "worktree_equals_reference": true
+    },
+    {
+      "kind": "DESIGN",
+      "path": "documents/100_RD/120_機能要件/121_機能要件定義.md",
+      "sha256": "0b38b8f5755ff0b98e3202f23604ab0f481f4595321f1a9b82349ca85363f018",
+      "bytes": 3809,
+      "source_commit": "8b91944df5820535e23ba2469740f1c0aa94c447",
+      "equals_committed": true,
+      "observed_worktree_sha256": "0b38b8f5755ff0b98e3202f23604ab0f481f4595321f1a9b82349ca85363f018",
+      "worktree_equals_reference": true
+    },
+    {
+      "kind": "DESIGN",
+      "path": "documents/100_RD/120_機能要件/122_通知・非同期処理要件.md",
+      "sha256": "e139ac16542337ca1255dd8885c9a2e6a831097a8001ba5404facc61be74e3b5",
+      "bytes": 4221,
+      "source_commit": "8b91944df5820535e23ba2469740f1c0aa94c447",
+      "equals_committed": true,
+      "observed_worktree_sha256": "e139ac16542337ca1255dd8885c9a2e6a831097a8001ba5404facc61be74e3b5",
+      "worktree_equals_reference": true
+    },
+    {
+      "kind": "DESIGN",
+      "path": "documents/100_RD/120_機能要件/123_質問・回答機能要件.md",
+      "sha256": "7a996aad85802ab9811f553235214c3469c6470afcfe22da46cb59db4b95fc64",
+      "bytes": 2610,
+      "source_commit": "8b91944df5820535e23ba2469740f1c0aa94c447",
+      "equals_committed": true,
+      "observed_worktree_sha256": "7a996aad85802ab9811f553235214c3469c6470afcfe22da46cb59db4b95fc64",
+      "worktree_equals_reference": true
+    },
+    {
+      "kind": "DESIGN",
+      "path": "documents/100_RD/130_インターフェース要件/131_MQインターフェース要件.md",
+      "sha256": "d3acc47cd61bf9b7fe1c56160ef43a912b1a4558343068e709bc3e204ce741a1",
+      "bytes": 8831,
+      "source_commit": "8b91944df5820535e23ba2469740f1c0aa94c447",
+      "equals_committed": true,
+      "observed_worktree_sha256": "d3acc47cd61bf9b7fe1c56160ef43a912b1a4558343068e709bc3e204ce741a1",
+      "worktree_equals_reference": true
+    },
+    {
+      "kind": "DESIGN",
+      "path": "documents/100_RD/130_インターフェース要件/132_共通固定長電文方式要件.md",
+      "sha256": "62adc306da4a1c59bc17e935eb0452efd54bb9705770186c9edaff2c53518047",
+      "bytes": 8355,
+      "source_commit": "8b91944df5820535e23ba2469740f1c0aa94c447",
+      "equals_committed": true,
+      "observed_worktree_sha256": "62adc306da4a1c59bc17e935eb0452efd54bb9705770186c9edaff2c53518047",
+      "worktree_equals_reference": true
+    },
+    {
+      "kind": "DESIGN",
+      "path": "documents/100_RD/140_データ要件/141_データ・移行対象要件.md",
+      "sha256": "32bcb56ffe7e817d9ebe7605b6f89a8ac2497dc789c5a7ff9e0b99fa3f4417a0",
+      "bytes": 4654,
+      "source_commit": "8b91944df5820535e23ba2469740f1c0aa94c447",
+      "equals_committed": true,
+      "observed_worktree_sha256": "32bcb56ffe7e817d9ebe7605b6f89a8ac2497dc789c5a7ff9e0b99fa3f4417a0",
+      "worktree_equals_reference": true
+    },
+    {
+      "kind": "DESIGN",
+      "path": "documents/100_RD/150_非機能要件/151_性能・可用性要件.md",
+      "sha256": "c33570a425c17f3ae3256925726254f7ff19179e5a5649b3043d778b4cfca26c",
+      "bytes": 3676,
+      "source_commit": "8b91944df5820535e23ba2469740f1c0aa94c447",
+      "equals_committed": true,
+      "observed_worktree_sha256": "c33570a425c17f3ae3256925726254f7ff19179e5a5649b3043d778b4cfca26c",
+      "worktree_equals_reference": true
+    },
+    {
+      "kind": "DESIGN",
+      "path": "documents/100_RD/160_移行要件/161_移行・切替要件.md",
+      "sha256": "c8cf504eb76e691fc6f7f12d4881532ef7bcfd8ef9fef3b90249ecc04ba3de01",
+      "bytes": 1568,
+      "source_commit": "8b91944df5820535e23ba2469740f1c0aa94c447",
+      "equals_committed": true,
+      "observed_worktree_sha256": "c8cf504eb76e691fc6f7f12d4881532ef7bcfd8ef9fef3b90249ecc04ba3de01",
+      "worktree_equals_reference": true
+    },
+    {
+      "kind": "DESIGN",
+      "path": "documents/100_RD/170_運用・保守要件/171_運用・監視要件.md",
+      "sha256": "89c685c72b2c4314547fd2eb1a6daa8ba14a30ca0d28ecb102d3178cf86a7b87",
+      "bytes": 7305,
+      "source_commit": "8b91944df5820535e23ba2469740f1c0aa94c447",
+      "equals_committed": true,
+      "observed_worktree_sha256": "89c685c72b2c4314547fd2eb1a6daa8ba14a30ca0d28ecb102d3178cf86a7b87",
+      "worktree_equals_reference": true
+    },
+    {
+      "kind": "DESIGN",
+      "path": "documents/100_RD/180_試験・受入要件/181_互換性・受入要件.md",
+      "sha256": "4f5a45aab218140aa91a25ac0c5e02b64279ac4489440a33bfc3031cc77ddbb9",
+      "bytes": 5623,
+      "source_commit": "8b91944df5820535e23ba2469740f1c0aa94c447",
+      "equals_committed": true,
+      "observed_worktree_sha256": "4f5a45aab218140aa91a25ac0c5e02b64279ac4489440a33bfc3031cc77ddbb9",
+      "worktree_equals_reference": true
+    },
+    {
+      "kind": "DESIGN",
+      "path": "documents/100_RD/190_要件管理/191_未決事項・課題一覧.md",
+      "sha256": "0d04587e4cbd84d1d3c2b867dc991d4875d6eef998fd2050f305e916c1640c48",
+      "bytes": 2652,
+      "source_commit": "8b91944df5820535e23ba2469740f1c0aa94c447",
+      "equals_committed": true,
+      "observed_worktree_sha256": "0d04587e4cbd84d1d3c2b867dc991d4875d6eef998fd2050f305e916c1640c48",
+      "worktree_equals_reference": true
+    },
+    {
+      "kind": "DESIGN",
+      "path": "documents/100_RD/190_要件管理/192_技術選定候補.md",
+      "sha256": "db90bf32e20540e574c8068ae81a4a1f75a06b823215a848b4f0ded1005c5aea",
+      "bytes": 7957,
+      "source_commit": "8b91944df5820535e23ba2469740f1c0aa94c447",
+      "equals_committed": true,
+      "observed_worktree_sha256": "db90bf32e20540e574c8068ae81a4a1f75a06b823215a848b4f0ded1005c5aea",
+      "worktree_equals_reference": true
+    },
+    {
+      "kind": "DESIGN",
+      "path": "documents/100_RD/190_要件管理/193_要件定義フェーズ完了報告.md",
+      "sha256": "90f61757426e57e46e47280ae15806d8c8912cf24abef2039f030d0a057f4788",
+      "bytes": 4233,
+      "source_commit": "8b91944df5820535e23ba2469740f1c0aa94c447",
+      "equals_committed": true,
+      "observed_worktree_sha256": "90f61757426e57e46e47280ae15806d8c8912cf24abef2039f030d0a057f4788",
+      "worktree_equals_reference": true
+    },
+    {
+      "kind": "DESIGN",
+      "path": "documents/200_UI/201_基本設計書一覧.md",
+      "sha256": "09a716e93c75e7db82b92fb756728ed23f01bc976d1429e257055c057ed49217",
+      "bytes": 8818,
+      "source_commit": "8b91944df5820535e23ba2469740f1c0aa94c447",
+      "equals_committed": true,
+      "observed_worktree_sha256": "09a716e93c75e7db82b92fb756728ed23f01bc976d1429e257055c057ed49217",
+      "worktree_equals_reference": true
+    },
+    {
+      "kind": "DESIGN",
+      "path": "documents/200_UI/210_アーキテクチャ/211_システム全体構成設計.md",
+      "sha256": "841af694adc4123d6d75b8a9a3859b69841d63b67db53f8a928cfa28b79906bc",
+      "bytes": 6784,
+      "source_commit": "8b91944df5820535e23ba2469740f1c0aa94c447",
+      "equals_committed": true,
+      "observed_worktree_sha256": "841af694adc4123d6d75b8a9a3859b69841d63b67db53f8a928cfa28b79906bc",
+      "worktree_equals_reference": true
+    },
+    {
+      "kind": "DESIGN",
+      "path": "documents/200_UI/210_アーキテクチャ/212_コンポーネント・接続設計.md",
+      "sha256": "1fce18e0bc4c647e9e284eabd31450a71b588556ffa3fb4100f92d0b5666d5cf",
+      "bytes": 8658,
+      "source_commit": "8b91944df5820535e23ba2469740f1c0aa94c447",
+      "equals_committed": true,
+      "observed_worktree_sha256": "1fce18e0bc4c647e9e284eabd31450a71b588556ffa3fb4100f92d0b5666d5cf",
+      "worktree_equals_reference": true
+    },
+    {
+      "kind": "DESIGN",
+      "path": "documents/200_UI/210_アーキテクチャ/213_処理方式・状態遷移設計.md",
+      "sha256": "c2a89cca35a18de5cfae5eadd76a0cb8929733ddb4e494e97dca09943d00cbfd",
+      "bytes": 8825,
+      "source_commit": "8b91944df5820535e23ba2469740f1c0aa94c447",
+      "equals_committed": true,
+      "observed_worktree_sha256": "c2a89cca35a18de5cfae5eadd76a0cb8929733ddb4e494e97dca09943d00cbfd",
+      "worktree_equals_reference": true
+    },
+    {
+      "kind": "DESIGN",
+      "path": "documents/200_UI/220_画面・認証/221_画面一覧・画面遷移設計.md",
+      "sha256": "a1006b4c192491905897c20d27c60ef4300c31462abb08414e70bb92e8cb4acd",
+      "bytes": 6829,
+      "source_commit": "8b91944df5820535e23ba2469740f1c0aa94c447",
+      "equals_committed": true,
+      "observed_worktree_sha256": "a1006b4c192491905897c20d27c60ef4300c31462abb08414e70bb92e8cb4acd",
+      "worktree_equals_reference": true
+    },
+    {
+      "kind": "DESIGN",
+      "path": "documents/200_UI/220_画面・認証/222_画面共通・レイアウト設計.md",
+      "sha256": "8a52f0de895933c5696d7d5d385287729480a40384cd1855ea99d3d9a914763c",
+      "bytes": 6904,
+      "source_commit": "8b91944df5820535e23ba2469740f1c0aa94c447",
+      "equals_committed": true,
+      "observed_worktree_sha256": "8a52f0de895933c5696d7d5d385287729480a40384cd1855ea99d3d9a914763c",
+      "worktree_equals_reference": true
+    },
+    {
+      "kind": "DESIGN",
+      "path": "documents/200_UI/220_画面・認証/223_現行機能画面設計.md",
+      "sha256": "db8c325e5d79f27a41ac5c92c815590d2434320ffcecd8dffd80953aa7c2aa1d",
+      "bytes": 9437,
+      "source_commit": "8b91944df5820535e23ba2469740f1c0aa94c447",
+      "equals_committed": true,
+      "observed_worktree_sha256": "db8c325e5d79f27a41ac5c92c815590d2434320ffcecd8dffd80953aa7c2aa1d",
+      "worktree_equals_reference": true
+    },
+    {
+      "kind": "DESIGN",
+      "path": "documents/200_UI/220_画面・認証/224_質問・通知画面設計.md",
+      "sha256": "f4e20115d1438064729150d6a717bdb71a477351efa718e4f6c22b52d36aa4c5",
+      "bytes": 8631,
+      "source_commit": "8b91944df5820535e23ba2469740f1c0aa94c447",
+      "equals_committed": true,
+      "observed_worktree_sha256": "f4e20115d1438064729150d6a717bdb71a477351efa718e4f6c22b52d36aa4c5",
+      "worktree_equals_reference": true
+    },
+    {
+      "kind": "DESIGN",
+      "path": "documents/200_UI/220_画面・認証/225_管理・ログ画面設計.md",
+      "sha256": "1a50cbb5ea27d54f9ce5a81d5feaf7dba99ce0f9f5b40dd61022544e5be188d4",
+      "bytes": 5905,
+      "source_commit": "8b91944df5820535e23ba2469740f1c0aa94c447",
+      "equals_committed": true,
+      "observed_worktree_sha256": "1a50cbb5ea27d54f9ce5a81d5feaf7dba99ce0f9f5b40dd61022544e5be188d4",
+      "worktree_equals_reference": true
+    },
+    {
+      "kind": "DESIGN",
+      "path": "documents/200_UI/220_画面・認証/226_認証・認可・セッション設計.md",
+      "sha256": "30e0470c98990546f4d02f8e2c72088eb4779950ac56ac3354b0b3e1e0502d40",
+      "bytes": 10409,
+      "source_commit": "8b91944df5820535e23ba2469740f1c0aa94c447",
+      "equals_committed": true,
+      "observed_worktree_sha256": "30e0470c98990546f4d02f8e2c72088eb4779950ac56ac3354b0b3e1e0502d40",
+      "worktree_equals_reference": true
+    },
+    {
+      "kind": "DESIGN",
+      "path": "documents/200_UI/230_インターフェース/231_MQ論理構成設計.md",
+      "sha256": "5ad4cbff20353d678aa2c159ea7ddf1bfaabb0f8ad73f2e577869218fcef1d8b",
+      "bytes": 9824,
+      "source_commit": "8b91944df5820535e23ba2469740f1c0aa94c447",
+      "equals_committed": true,
+      "observed_worktree_sha256": "5ad4cbff20353d678aa2c159ea7ddf1bfaabb0f8ad73f2e577869218fcef1d8b",
+      "worktree_equals_reference": true
+    },
+    {
+      "kind": "DESIGN",
+      "path": "documents/200_UI/230_インターフェース/232_固定長電文共通仕様.md",
+      "sha256": "e2092eb5e02855734bf7faec37abcee5d918de3b7fa689e7ae1a9f4b81228288",
+      "bytes": 9108,
+      "source_commit": "8b91944df5820535e23ba2469740f1c0aa94c447",
+      "equals_committed": true,
+      "observed_worktree_sha256": "e2092eb5e02855734bf7faec37abcee5d918de3b7fa689e7ae1a9f4b81228288",
+      "worktree_equals_reference": true
+    },
+    {
+      "kind": "DESIGN",
+      "path": "documents/200_UI/230_インターフェース/233_固定長電文インターフェース一覧.md",
+      "sha256": "d3ef40fd6d075ae27a88d4484032b9d727f43a8f053f1c36253465cbb0c641bb",
+      "bytes": 7089,
+      "source_commit": "8b91944df5820535e23ba2469740f1c0aa94c447",
+      "equals_committed": true,
+      "observed_worktree_sha256": "d3ef40fd6d075ae27a88d4484032b9d727f43a8f053f1c36253465cbb0c641bb",
+      "worktree_equals_reference": true
+    },
+    {
+      "kind": "DESIGN",
+      "path": "documents/200_UI/230_インターフェース/234_認証・検索・シナリオ電文仕様.md",
+      "sha256": "8f9abda07bc93262c264eae723c74245165bf0806b273b0d007e9fa46f37fa46",
+      "bytes": 10824,
+      "source_commit": "8b91944df5820535e23ba2469740f1c0aa94c447",
+      "equals_committed": true,
+      "observed_worktree_sha256": "8f9abda07bc93262c264eae723c74245165bf0806b273b0d007e9fa46f37fa46",
+      "worktree_equals_reference": true
+    },
+    {
+      "kind": "DESIGN",
+      "path": "documents/200_UI/230_インターフェース/235_メディア・ログ電文仕様.md",
+      "sha256": "67fa2bed07055caf3ba4343245aebf378ef1ac2e3217a6c513289caa01c6033e",
+      "bytes": 11284,
+      "source_commit": "8b91944df5820535e23ba2469740f1c0aa94c447",
+      "equals_committed": true,
+      "observed_worktree_sha256": "67fa2bed07055caf3ba4343245aebf378ef1ac2e3217a6c513289caa01c6033e",
+      "worktree_equals_reference": true
+    },
+    {
+      "kind": "DESIGN",
+      "path": "documents/200_UI/230_インターフェース/236_管理・質問・通知電文仕様.md",
+      "sha256": "0468f20da240ed61e056084f80e88f3b3f5d60b3afb70f23710a8320c5c653c9",
+      "bytes": 14039,
+      "source_commit": "8b91944df5820535e23ba2469740f1c0aa94c447",
+      "equals_committed": true,
+      "observed_worktree_sha256": "0468f20da240ed61e056084f80e88f3b3f5d60b3afb70f23710a8320c5c653c9",
+      "worktree_equals_reference": true
+    },
+    {
+      "kind": "DESIGN",
+      "path": "documents/200_UI/230_インターフェース/237_大容量結果・メディア配信設計.md",
+      "sha256": "e94d2f76c5238e6c70f962c8e019f80b511a95220d8958744d9b0325b7aa96b0",
+      "bytes": 7353,
+      "source_commit": "8b91944df5820535e23ba2469740f1c0aa94c447",
+      "equals_committed": true,
+      "observed_worktree_sha256": "e94d2f76c5238e6c70f962c8e019f80b511a95220d8958744d9b0325b7aa96b0",
+      "worktree_equals_reference": true
+    },
+    {
+      "kind": "DESIGN",
+      "path": "documents/200_UI/240_データ/241_DB論理構成設計.md",
+      "sha256": "f6864bee106c4cfccb5a68a423d186a5973398c497ff3f3a34605f08420c68d2",
+      "bytes": 10674,
+      "source_commit": "8b91944df5820535e23ba2469740f1c0aa94c447",
+      "equals_committed": true,
+      "observed_worktree_sha256": "f6864bee106c4cfccb5a68a423d186a5973398c497ff3f3a34605f08420c68d2",
+      "worktree_equals_reference": true
+    },
+    {
+      "kind": "DESIGN",
+      "path": "documents/200_UI/240_データ/242_主要テーブル・制約設計.md",
+      "sha256": "0de31c355741e1a0e9530cdeb84d1126ac1a16c9ed5767a9bac7d2e2e052f3c5",
+      "bytes": 18050,
+      "source_commit": "8b91944df5820535e23ba2469740f1c0aa94c447",
+      "equals_committed": true,
+      "observed_worktree_sha256": "0de31c355741e1a0e9530cdeb84d1126ac1a16c9ed5767a9bac7d2e2e052f3c5",
+      "worktree_equals_reference": true
+    },
+    {
+      "kind": "DESIGN",
+      "path": "documents/200_UI/240_データ/243_ファイル・データ配置設計.md",
+      "sha256": "308a5c17e82a9b6e0d5458b5f9944ee8cb930289276180aabfe845046f259f4d",
+      "bytes": 5896,
+      "source_commit": "8b91944df5820535e23ba2469740f1c0aa94c447",
+      "equals_committed": true,
+      "observed_worktree_sha256": "308a5c17e82a9b6e0d5458b5f9944ee8cb930289276180aabfe845046f259f4d",
+      "worktree_equals_reference": true
+    },
+    {
+      "kind": "DESIGN",
+      "path": "documents/200_UI/250_運用・非機能/251_朝バッチ・バックアップ・起動停止設計.md",
+      "sha256": "6dc961aebad948e77567b6c2d584d01c00eb62aee27826aefd47dd41e286f7dd",
+      "bytes": 12319,
+      "source_commit": "8b91944df5820535e23ba2469740f1c0aa94c447",
+      "equals_committed": true,
+      "observed_worktree_sha256": "6dc961aebad948e77567b6c2d584d01c00eb62aee27826aefd47dd41e286f7dd",
+      "worktree_equals_reference": true
+    },
+    {
+      "kind": "DESIGN",
+      "path": "documents/200_UI/250_運用・非機能/252_ログ・監視・障害復旧設計.md",
+      "sha256": "76c30f05fc6656802015aedd25d4483f676e41793c41b0b038cc1fdaa14d78b3",
+      "bytes": 8741,
+      "source_commit": "8b91944df5820535e23ba2469740f1c0aa94c447",
+      "equals_committed": true,
+      "observed_worktree_sha256": "76c30f05fc6656802015aedd25d4483f676e41793c41b0b038cc1fdaa14d78b3",
+      "worktree_equals_reference": true
+    },
+    {
+      "kind": "DESIGN",
+      "path": "documents/200_UI/250_運用・非機能/253_性能・容量・可用性・セキュリティ設計.md",
+      "sha256": "edc41bda36671fb2f5e1a446ec2167b4ded902889876cedaffd07d2a6d34de07",
+      "bytes": 8975,
+      "source_commit": "8b91944df5820535e23ba2469740f1c0aa94c447",
+      "equals_committed": true,
+      "observed_worktree_sha256": "edc41bda36671fb2f5e1a446ec2167b4ded902889876cedaffd07d2a6d34de07",
+      "worktree_equals_reference": true
+    },
+    {
+      "kind": "DESIGN",
+      "path": "documents/200_UI/250_運用・非機能/254_移行・切替・切戻し設計.md",
+      "sha256": "281751170c289cc755777775beb4f997e7b3c5fe0171a0e14d654758b9ff713a",
+      "bytes": 6714,
+      "source_commit": "8b91944df5820535e23ba2469740f1c0aa94c447",
+      "equals_committed": true,
+      "observed_worktree_sha256": "281751170c289cc755777775beb4f997e7b3c5fe0171a0e14d654758b9ff713a",
+      "worktree_equals_reference": true
+    },
+    {
+      "kind": "DESIGN",
+      "path": "documents/200_UI/260_引継ぎ・監査/261_後続工程引継ぎ事項.md",
+      "sha256": "591803f1d71fdd171ff77152aedadc4bb3aa7b9b73a71589a5cc8fbfca95a32e",
+      "bytes": 9498,
+      "source_commit": "8b91944df5820535e23ba2469740f1c0aa94c447",
+      "equals_committed": true,
+      "observed_worktree_sha256": "591803f1d71fdd171ff77152aedadc4bb3aa7b9b73a71589a5cc8fbfca95a32e",
+      "worktree_equals_reference": true
+    },
+    {
+      "kind": "DESIGN",
+      "path": "documents/200_UI/260_引継ぎ・監査/262_RD要件トレーサビリティ.md",
+      "sha256": "1e21b4863e2c426abe238b51257b1b46bc4385abdfb682d4222f3caa08d5bb10",
+      "bytes": 11876,
+      "source_commit": "8b91944df5820535e23ba2469740f1c0aa94c447",
+      "equals_committed": true,
+      "observed_worktree_sha256": "1e21b4863e2c426abe238b51257b1b46bc4385abdfb682d4222f3caa08d5bb10",
+      "worktree_equals_reference": true
+    },
+    {
+      "kind": "DESIGN",
+      "path": "documents/200_UI/260_引継ぎ・監査/263_基本設計横断監査報告.md",
+      "sha256": "c57a187f7c6d5238fda9d479c9a5d7c7165dbb85b1f2e5ffc9e5f7288d86494c",
+      "bytes": 11584,
+      "source_commit": "8b91944df5820535e23ba2469740f1c0aa94c447",
+      "equals_committed": true,
+      "observed_worktree_sha256": "c57a187f7c6d5238fda9d479c9a5d7c7165dbb85b1f2e5ffc9e5f7288d86494c",
+      "worktree_equals_reference": true
+    },
+    {
+      "kind": "DESIGN",
+      "path": "documents/200_UI/260_引継ぎ・監査/264_現行互換性Characterization Test仕様.md",
+      "sha256": "4a20782c864b0f823c09eb2c31a908f4326dadca031dd451fcf9a74da857bcb4",
+      "bytes": 10679,
+      "source_commit": "8b91944df5820535e23ba2469740f1c0aa94c447",
+      "equals_committed": true,
+      "observed_worktree_sha256": "4a20782c864b0f823c09eb2c31a908f4326dadca031dd451fcf9a74da857bcb4",
+      "worktree_equals_reference": true
+    },
+    {
+      "kind": "DESIGN",
+      "path": "documents/200_UI/260_引継ぎ・監査/265_基本設計フェーズ完了報告.md",
+      "sha256": "7365456ba47e83eb359b3f6e2e1bb2670a48bc53c110c1345b2743ae7b6fd851",
+      "bytes": 6822,
+      "source_commit": "8b91944df5820535e23ba2469740f1c0aa94c447",
+      "equals_committed": true,
+      "observed_worktree_sha256": "7365456ba47e83eb359b3f6e2e1bb2670a48bc53c110c1345b2743ae7b6fd851",
+      "worktree_equals_reference": true
+    },
+    {
+      "kind": "DESIGN",
+      "path": "documents/300_SS/301_詳細設計書一覧.md",
+      "sha256": "019985a4118d93701be7b89a02cc212eabc46e32801892dc37ee05a3e1cd72a6",
+      "bytes": 13221,
+      "source_commit": "8b91944df5820535e23ba2469740f1c0aa94c447",
+      "equals_committed": true,
+      "observed_worktree_sha256": "019985a4118d93701be7b89a02cc212eabc46e32801892dc37ee05a3e1cd72a6",
+      "worktree_equals_reference": true
+    },
+    {
+      "kind": "DESIGN",
+      "path": "documents/300_SS/310_アプリケーション/311_モジュール・package・class責務設計.md",
+      "sha256": "0ea8db09a37dca68f906ab00b298bb0691a005df4e059b28f170432d4cccead6",
+      "bytes": 32485,
+      "source_commit": "8b91944df5820535e23ba2469740f1c0aa94c447",
+      "equals_committed": true,
+      "observed_worktree_sha256": "0ea8db09a37dca68f906ab00b298bb0691a005df4e059b28f170432d4cccead6",
+      "worktree_equals_reference": true
+    },
+    {
+      "kind": "DESIGN",
+      "path": "documents/300_SS/310_アプリケーション/312_処理sequence・method・例外・transaction設計.md",
+      "sha256": "7fc9bb837b9669f301c4c8d1b0b93ea1d680fd6c30e34b7f754e5210beb3765b",
+      "bytes": 32221,
+      "source_commit": "8b91944df5820535e23ba2469740f1c0aa94c447",
+      "equals_committed": true,
+      "observed_worktree_sha256": "7fc9bb837b9669f301c4c8d1b0b93ea1d680fd6c30e34b7f754e5210beb3765b",
+      "worktree_equals_reference": true
+    },
+    {
+      "kind": "DESIGN",
+      "path": "documents/300_SS/310_アプリケーション/313_画面template・controller・form設計.md",
+      "sha256": "76946dc55f4e2a4bda6dd40610ce5d993d0b2b727b3cbeffd80afa930a5af67b",
+      "bytes": 32106,
+      "source_commit": "8b91944df5820535e23ba2469740f1c0aa94c447",
+      "equals_committed": true,
+      "observed_worktree_sha256": "76946dc55f4e2a4bda6dd40610ce5d993d0b2b727b3cbeffd80afa930a5af67b",
+      "worktree_equals_reference": true
+    },
+    {
+      "kind": "DESIGN",
+      "path": "documents/300_SS/310_アプリケーション/314_認証・認可・session・CSRF実装設計.md",
+      "sha256": "ab7a1907d0861ca1b6d4181d674f98a73c13f8a4b897b86f655b5a30ce202a7b",
+      "bytes": 47096,
+      "source_commit": "8b91944df5820535e23ba2469740f1c0aa94c447",
+      "equals_committed": true,
+      "observed_worktree_sha256": "ab7a1907d0861ca1b6d4181d674f98a73c13f8a4b897b86f655b5a30ce202a7b",
+      "worktree_equals_reference": true
+    },
+    {
+      "kind": "DESIGN",
+      "path": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+      "sha256": "2fbf317dcc6d2048abb3c8ecdc9747e7b3d46cdba4753bec6bbc9e3ace5d5d1c",
+      "bytes": 32652,
+      "source_commit": "8b91944df5820535e23ba2469740f1c0aa94c447",
+      "equals_committed": true,
+      "observed_worktree_sha256": "2fbf317dcc6d2048abb3c8ecdc9747e7b3d46cdba4753bec6bbc9e3ace5d5d1c",
+      "worktree_equals_reference": true
+    },
+    {
+      "kind": "DESIGN",
+      "path": "documents/300_SS/320_メッセージング/322_固定長電文codec実装設計.md",
+      "sha256": "f6dcecf979d9dbac0338aae079d5730f97ba53afaa3dd46db3e20ef49b21618d",
+      "bytes": 13397,
+      "source_commit": "8b91944df5820535e23ba2469740f1c0aa94c447",
+      "equals_committed": true,
+      "observed_worktree_sha256": "f6dcecf979d9dbac0338aae079d5730f97ba53afaa3dd46db3e20ef49b21618d",
+      "worktree_equals_reference": true
+    },
+    {
+      "kind": "DESIGN",
+      "path": "documents/300_SS/320_メッセージング/323_全電文layout・Java・DB対応表.md",
+      "sha256": "085a751480baf929bea7c80e758a66b3fffe4dee4a3f4fd84b6eed2b38e86523",
+      "bytes": 26765,
+      "source_commit": "8b91944df5820535e23ba2469740f1c0aa94c447",
+      "equals_committed": true,
+      "observed_worktree_sha256": "085a751480baf929bea7c80e758a66b3fffe4dee4a3f4fd84b6eed2b38e86523",
+      "worktree_equals_reference": true
+    },
+    {
+      "kind": "DESIGN",
+      "path": "documents/300_SS/320_メッセージング/324_Outbox・Inbox・冪等性・再送設計.md",
+      "sha256": "2bc99fd66ca1121a1ab4ae44e97aab96b52d4cf4c8145f6a425f89c7b07ce774",
+      "bytes": 55435,
+      "source_commit": "8b91944df5820535e23ba2469740f1c0aa94c447",
+      "equals_committed": true,
+      "observed_worktree_sha256": "2bc99fd66ca1121a1ab4ae44e97aab96b52d4cf4c8145f6a425f89c7b07ce774",
+      "worktree_equals_reference": true
+    },
+    {
+      "kind": "DESIGN",
+      "path": "documents/300_SS/330_データ・ファイル/331_DB物理・DDL・index・権限設計.md",
+      "sha256": "7f6e0430a38769dad5d94ed8d95faaab124f4bb86246c478feee5b50ffca26d5",
+      "bytes": 85654,
+      "source_commit": "8b91944df5820535e23ba2469740f1c0aa94c447",
+      "equals_committed": true,
+      "observed_worktree_sha256": "7f6e0430a38769dad5d94ed8d95faaab124f4bb86246c478feee5b50ffca26d5",
+      "worktree_equals_reference": true
+    },
+    {
+      "kind": "DESIGN",
+      "path": "documents/300_SS/330_データ・ファイル/332_SQL・transaction・lock・削除設計.md",
+      "sha256": "bf35de0b4d24a253eb75808f0280fa92eb3f02f8ba3a988a227f96c7213781a5",
+      "bytes": 38571,
+      "source_commit": "8b91944df5820535e23ba2469740f1c0aa94c447",
+      "equals_committed": true,
+      "observed_worktree_sha256": "bf35de0b4d24a253eb75808f0280fa92eb3f02f8ba3a988a227f96c7213781a5",
+      "worktree_equals_reference": true
+    },
+    {
+      "kind": "DESIGN",
+      "path": "documents/300_SS/330_データ・ファイル/333_大容量結果file・media・Range配信設計.md",
+      "sha256": "d861735e91a6930bbf239937deda29f3675fbf50817953a61e07c0255387fa66",
+      "bytes": 43593,
+      "source_commit": "8b91944df5820535e23ba2469740f1c0aa94c447",
+      "equals_committed": true,
+      "observed_worktree_sha256": "d861735e91a6930bbf239937deda29f3675fbf50817953a61e07c0255387fa66",
+      "worktree_equals_reference": true
+    },
+    {
+      "kind": "DESIGN",
+      "path": "documents/300_SS/340_batch・基盤/341_朝batch・backup・削除・再実行設計.md",
+      "sha256": "b721e6f7d0ee3f17cfe1a2d38512623814b0a10c8a7ad8ae737c62eeda192195",
+      "bytes": 117757,
+      "source_commit": "8b91944df5820535e23ba2469740f1c0aa94c447",
+      "equals_committed": true,
+      "observed_worktree_sha256": "b721e6f7d0ee3f17cfe1a2d38512623814b0a10c8a7ad8ae737c62eeda192195",
+      "worktree_equals_reference": true
+    },
+    {
+      "kind": "DESIGN",
+      "path": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+      "sha256": "3775cb1faf0b96572f4913d06682100da1861f1d364a66f4118b03e27abf4b82",
+      "bytes": 80709,
+      "source_commit": "8b91944df5820535e23ba2469740f1c0aa94c447",
+      "equals_committed": true,
+      "observed_worktree_sha256": "3775cb1faf0b96572f4913d06682100da1861f1d364a66f4118b03e27abf4b82",
+      "worktree_equals_reference": true
+    },
+    {
+      "kind": "DESIGN",
+      "path": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+      "sha256": "d8be70ce4c170df7939f7803723bb021c99ba40a72819f9b5d861731425332b2",
+      "bytes": 458990,
+      "source_commit": "8b91944df5820535e23ba2469740f1c0aa94c447",
+      "equals_committed": true,
+      "observed_worktree_sha256": "d8be70ce4c170df7939f7803723bb021c99ba40a72819f9b5d861731425332b2",
+      "worktree_equals_reference": true
+    },
+    {
+      "kind": "DESIGN",
+      "path": "documents/300_SS/350_運用・品質/351_Log・metric・alert・error code設計.md",
+      "sha256": "9da7c4e4f24740e031f37f984ec562d56e14ff098b1433af3ec55fe15bd195e6",
+      "bytes": 25744,
+      "source_commit": "8b91944df5820535e23ba2469740f1c0aa94c447",
+      "equals_committed": true,
+      "observed_worktree_sha256": "9da7c4e4f24740e031f37f984ec562d56e14ff098b1433af3ec55fe15bd195e6",
+      "worktree_equals_reference": true
+    },
+    {
+      "kind": "DESIGN",
+      "path": "documents/300_SS/350_運用・品質/352_Security・credential・監査実装設計.md",
+      "sha256": "d77617872d91f83af55e12520279d48c7c5385b85b09e4377ef81ed03b1aad03",
+      "bytes": 23782,
+      "source_commit": "8b91944df5820535e23ba2469740f1c0aa94c447",
+      "equals_committed": true,
+      "observed_worktree_sha256": "d77617872d91f83af55e12520279d48c7c5385b85b09e4377ef81ed03b1aad03",
+      "worktree_equals_reference": true
+    },
+    {
+      "kind": "DESIGN",
+      "path": "documents/300_SS/350_運用・品質/353_障害検知・復旧runbook.md",
+      "sha256": "39708837ac8fc5e9245d8633eb40580ddb048e517ddf8ec19c8192e434a34719",
+      "bytes": 139108,
+      "source_commit": "8b91944df5820535e23ba2469740f1c0aa94c447",
+      "equals_committed": true,
+      "observed_worktree_sha256": "39708837ac8fc5e9245d8633eb40580ddb048e517ddf8ec19c8192e434a34719",
+      "worktree_equals_reference": true
+    },
+    {
+      "kind": "DESIGN",
+      "path": "documents/300_SS/350_運用・品質/354_PT・IT試験観点詳細設計.md",
+      "sha256": "edfd716ed55ff4b72739ed2e142c1dd7812a9682ba24895a765c1934b49bb0ae",
+      "bytes": 90337,
+      "source_commit": "8b91944df5820535e23ba2469740f1c0aa94c447",
+      "equals_committed": true,
+      "observed_worktree_sha256": "edfd716ed55ff4b72739ed2e142c1dd7812a9682ba24895a765c1934b49bb0ae",
+      "worktree_equals_reference": true
+    },
+    {
+      "kind": "DESIGN",
+      "path": "documents/300_SS/350_運用・品質/355_Characterization Test実行準備・PG開始gate.md",
+      "sha256": "445541909b1f56ce1785042c974f29bdd131a84d65e2fbdd02a8988c2c9cd5db",
+      "bytes": 15752,
+      "source_commit": "8b91944df5820535e23ba2469740f1c0aa94c447",
+      "equals_committed": true,
+      "observed_worktree_sha256": "445541909b1f56ce1785042c974f29bdd131a84d65e2fbdd02a8988c2c9cd5db",
+      "worktree_equals_reference": true
+    },
+    {
+      "kind": "DESIGN",
+      "path": "documents/300_SS/360_引継ぎ・監査/361_RD・UI・SSトレーサビリティ.md",
+      "sha256": "e4462e29b2a958c5742fb4e8fe93baafcb43beedb04d2c8d026c9258c0660611",
+      "bytes": 14727,
+      "source_commit": "8b91944df5820535e23ba2469740f1c0aa94c447",
+      "equals_committed": true,
+      "observed_worktree_sha256": "e4462e29b2a958c5742fb4e8fe93baafcb43beedb04d2c8d026c9258c0660611",
+      "worktree_equals_reference": true
+    },
+    {
+      "kind": "DESIGN",
+      "path": "documents/300_SS/360_引継ぎ・監査/362_PG・PT・IT工程引継ぎ事項.md",
+      "sha256": "2e4e683de1864f1e6625831d7c8f14ab606f10d6fc13e19844ecf2945dfe2baa",
+      "bytes": 16030,
+      "source_commit": "8b91944df5820535e23ba2469740f1c0aa94c447",
+      "equals_committed": true,
+      "observed_worktree_sha256": "2e4e683de1864f1e6625831d7c8f14ab606f10d6fc13e19844ecf2945dfe2baa",
+      "worktree_equals_reference": true
+    },
+    {
+      "kind": "DESIGN",
+      "path": "documents/300_SS/360_引継ぎ・監査/363_詳細設計横断監査報告.md",
+      "sha256": "9b1d02562426cae132ab8228141fe5fc7bdc79590dad40253f79affec9ba3b21",
+      "bytes": 14522,
+      "source_commit": "8b91944df5820535e23ba2469740f1c0aa94c447",
+      "equals_committed": true,
+      "observed_worktree_sha256": "9b1d02562426cae132ab8228141fe5fc7bdc79590dad40253f79affec9ba3b21",
+      "worktree_equals_reference": true
+    },
+    {
+      "kind": "DESIGN",
+      "path": "documents/300_SS/360_引継ぎ・監査/364_詳細設計フェーズ完了報告.md",
+      "sha256": "73443ada29d233d16f6d14eda9df81f571ae2a0976dd3753564e09946895bebe",
+      "bytes": 12106,
+      "source_commit": "8b91944df5820535e23ba2469740f1c0aa94c447",
+      "equals_committed": true,
+      "observed_worktree_sha256": "73443ada29d233d16f6d14eda9df81f571ae2a0976dd3753564e09946895bebe",
+      "worktree_equals_reference": true
+    },
+    {
+      "kind": "DESIGN",
+      "path": "documents/900_OTHER/910_台帳/911_確認事項一覧.md",
+      "sha256": "22824557d637f60373f06705d2cc5ca66c1afd8d3e5361fde33c2716b54015ea",
+      "bytes": 31829,
+      "source_commit": "8b91944df5820535e23ba2469740f1c0aa94c447",
+      "equals_committed": true,
+      "observed_worktree_sha256": "22824557d637f60373f06705d2cc5ca66c1afd8d3e5361fde33c2716b54015ea",
+      "worktree_equals_reference": true
+    },
+    {
+      "kind": "DESIGN",
+      "path": "documents/900_OTHER/910_台帳/912_要件定義フィードバック事象管理台帳.md",
+      "sha256": "2d9bc6f027b970e0d1c3bbd89e0ad580c329ef3c76b6ea0dc7c75853da7988f8",
+      "bytes": 861,
+      "source_commit": "8b91944df5820535e23ba2469740f1c0aa94c447",
+      "equals_committed": true,
+      "observed_worktree_sha256": "2d9bc6f027b970e0d1c3bbd89e0ad580c329ef3c76b6ea0dc7c75853da7988f8",
+      "worktree_equals_reference": true
+    },
+    {
+      "kind": "DESIGN",
+      "path": "documents/900_OTHER/910_台帳/913_基本設計修正管理台帳.md",
+      "sha256": "8767b58cf21aa3028656d814b61befcd31160be668c04e85a62b13f33f2ac1c2",
+      "bytes": 10610,
+      "source_commit": "8b91944df5820535e23ba2469740f1c0aa94c447",
+      "equals_committed": true,
+      "observed_worktree_sha256": "8767b58cf21aa3028656d814b61befcd31160be668c04e85a62b13f33f2ac1c2",
+      "worktree_equals_reference": true
+    },
+    {
+      "kind": "DESIGN",
+      "path": "documents/900_OTHER/910_台帳/914_詳細設計修正管理台帳.md",
+      "sha256": "4cfdc373814258f6d0aa1b7365ea5e02d24051c7710c5ff066c4f92c94b58b43",
+      "bytes": 541856,
+      "source_commit": "8b91944df5820535e23ba2469740f1c0aa94c447",
+      "equals_committed": true,
+      "observed_worktree_sha256": "4cfdc373814258f6d0aa1b7365ea5e02d24051c7710c5ff066c4f92c94b58b43",
+      "worktree_equals_reference": true
+    },
+    {
+      "kind": "DESIGN",
+      "path": "AGENTS.md",
+      "sha256": "cde68eb54aa42dda708622fea28afb2c835f324ac49c9699ede7d975a32fe1b5",
+      "bytes": 1330,
+      "source_commit": "8b91944df5820535e23ba2469740f1c0aa94c447",
+      "equals_committed": true,
+      "observed_worktree_sha256": "cde68eb54aa42dda708622fea28afb2c835f324ac49c9699ede7d975a32fe1b5",
+      "worktree_equals_reference": true
+    },
+    {
+      "kind": "DESIGN",
+      "path": "README.md",
+      "sha256": "4556d890c87b2570fb3ebe2ab6e0d7c8a860be41eb16e6daf931d4d59075a972",
+      "bytes": 3054,
+      "source_commit": "8b91944df5820535e23ba2469740f1c0aa94c447",
+      "equals_committed": true,
+      "observed_worktree_sha256": "4556d890c87b2570fb3ebe2ab6e0d7c8a860be41eb16e6daf931d4d59075a972",
+      "worktree_equals_reference": true
+    },
+    {
+      "kind": "IMPLEMENTATION_AUXILIARY",
+      "path": "documents/400_PGPT/460_完了報告/461_PG完了報告.md",
+      "sha256": "1480937ab1fafb30693bc1eab1f7b177feb5ac4aaed4dfefec5249ea9a61520e",
+      "bytes": 1299,
+      "source_commit": "ce284deb86508071d03cf913ce94344f2e49bc9a",
+      "equals_committed": true,
+      "observed_worktree_sha256": "1480937ab1fafb30693bc1eab1f7b177feb5ac4aaed4dfefec5249ea9a61520e",
+      "worktree_equals_reference": true
+    },
+    {
+      "kind": "IMPLEMENTATION_AUXILIARY",
+      "path": "documents/400_PGPT/460_完了報告/462_PT完了報告.md",
+      "sha256": "bd654e3d666ca584af8439163856fd88761a4d09da9545d2493f0b53eaf56939",
+      "bytes": 1348,
+      "source_commit": "ce284deb86508071d03cf913ce94344f2e49bc9a",
+      "equals_committed": true,
+      "observed_worktree_sha256": "bd654e3d666ca584af8439163856fd88761a4d09da9545d2493f0b53eaf56939",
+      "worktree_equals_reference": true
+    },
+    {
+      "kind": "IMPLEMENTATION_AUXILIARY",
+      "path": "documents/400_PGPT/460_完了報告/463_PGPTフェーズ完了報告.md",
+      "sha256": "6be457f6f0b4c956e06fe227217eab6e045c145e47477adcf73fad18e15cb0d0",
+      "bytes": 1286,
+      "source_commit": "ce284deb86508071d03cf913ce94344f2e49bc9a",
+      "equals_committed": true,
+      "observed_worktree_sha256": "6be457f6f0b4c956e06fe227217eab6e045c145e47477adcf73fad18e15cb0d0",
+      "worktree_equals_reference": true
+    },
+    {
+      "kind": "IMPLEMENTATION_AUXILIARY",
+      "path": "documents/400_PGPT/460_完了報告/464_IT・ST引継ぎ事項.md",
+      "sha256": "3259e00ad26ee5cebc773f9c86815d47227888efc164f9cacf693014b7a6915e",
+      "bytes": 9070,
+      "source_commit": "ce284deb86508071d03cf913ce94344f2e49bc9a",
+      "equals_committed": true,
+      "observed_worktree_sha256": "3259e00ad26ee5cebc773f9c86815d47227888efc164f9cacf693014b7a6915e",
+      "worktree_equals_reference": true
+    },
+    {
+      "kind": "IMPLEMENTATION_AUXILIARY",
+      "path": "documents/400_PGPT/450_品質/451_Build・静的解析・coverage方針.md",
+      "sha256": "d0e0b4834adaa57bf872b0fb7d1e43338d27b7a53bd43d27c3eeb94332412bd7",
+      "bytes": 10477,
+      "source_commit": "ce284deb86508071d03cf913ce94344f2e49bc9a",
+      "equals_committed": true,
+      "observed_worktree_sha256": "d0e0b4834adaa57bf872b0fb7d1e43338d27b7a53bd43d27c3eeb94332412bd7",
+      "worktree_equals_reference": true
+    },
+    {
+      "kind": "IMPLEMENTATION_AUXILIARY",
+      "path": "documents/400_PGPT/450_品質/452_継続走行・再走管理.md",
+      "sha256": "8ce2168d5ee777c2b31d08819006e0e603d39b5d07ba45b9b190efcc56ff4806",
+      "bytes": 31289,
+      "source_commit": "ce284deb86508071d03cf913ce94344f2e49bc9a",
+      "equals_committed": true,
+      "observed_worktree_sha256": "8ce2168d5ee777c2b31d08819006e0e603d39b5d07ba45b9b190efcc56ff4806",
+      "worktree_equals_reference": true
+    },
+    {
+      "kind": "IMPLEMENTATION_AUXILIARY",
+      "path": "documents/400_PGPT/450_品質/456_領域別進捗・利用枠・中断再開管理.md",
+      "sha256": "5644fb440a2c277f99951421d3c6622e17603236e5bae9fc850d8fc242a64be3",
+      "bytes": 5075748,
+      "source_commit": "ce284deb86508071d03cf913ce94344f2e49bc9a",
+      "equals_committed": true,
+      "observed_worktree_sha256": "03e9ff31725abf0caa68fcc6471444624ff7eec452fd7d328518f413ffa1e00a",
+      "worktree_equals_reference": false
+    },
+    {
+      "kind": "IMPLEMENTATION_AUXILIARY",
+      "path": "documents/400_PGPT/450_品質/457_Inbox削除保護の実行主体・承認論点.md",
+      "sha256": "d95a25a262d05f2f9c109251647197b061f6a9edd4d0fd6c979b65cb5811ece6",
+      "bytes": 6504,
+      "source_commit": "ce284deb86508071d03cf913ce94344f2e49bc9a",
+      "equals_committed": true,
+      "observed_worktree_sha256": "d95a25a262d05f2f9c109251647197b061f6a9edd4d0fd6c979b65cb5811ece6",
+      "worktree_equals_reference": true
+    },
+    {
+      "kind": "IMPLEMENTATION_AUXILIARY",
+      "path": "documents/400_PGPT/450_品質/460_基盤残件・再開優先順.md",
+      "sha256": "a2a24f4a2a1441a1cd50901a537bc283a8433dfd57b98aad6aee93b885785b93",
+      "bytes": 2367593,
+      "source_commit": "ce284deb86508071d03cf913ce94344f2e49bc9a",
+      "equals_committed": true,
+      "observed_worktree_sha256": "67aaa36ffb916db96aa7c5d20503607aaddd0bd4834ff43a138168c5295b0434",
+      "worktree_equals_reference": false
+    },
+    {
+      "kind": "IMPLEMENTATION_AUXILIARY",
+      "path": "documents/400_PGPT/450_品質/461_拒否PT代替確認・例外管理.md",
+      "sha256": "2688b2304f8c4b752da9495f0195fc0cbac6b6236a5cc7dcf927c47eab2e57a1",
+      "bytes": 4674,
+      "source_commit": "ce284deb86508071d03cf913ce94344f2e49bc9a",
+      "equals_committed": true,
+      "observed_worktree_sha256": "2688b2304f8c4b752da9495f0195fc0cbac6b6236a5cc7dcf927c47eab2e57a1",
+      "worktree_equals_reference": true
+    },
+    {
+      "kind": "IMPLEMENTATION_AUXILIARY",
+      "path": "documents/400_PGPT/450_品質/462_PT着手前判定・通常PT選択台帳.md",
+      "sha256": "a1105459479ee28c95eb87c628693d8b67b49e3c8fe96c8b5f99768078069765",
+      "bytes": 41184,
+      "source_commit": "ce284deb86508071d03cf913ce94344f2e49bc9a",
+      "equals_committed": true,
+      "observed_worktree_sha256": "a1105459479ee28c95eb87c628693d8b67b49e3c8fe96c8b5f99768078069765",
+      "worktree_equals_reference": true
+    },
+    {
+      "kind": "IMPLEMENTATION_AUXILIARY",
+      "path": "documents/400_PGPT/470_PMO/471_実行計画_外部起動・実NK受入.md",
+      "sha256": "390b8e7fdbd25796d5c91136906e3b8b67840de3c771e665a68d2c2a5cd1aafd",
+      "bytes": 15309,
+      "source_commit": "ce284deb86508071d03cf913ce94344f2e49bc9a",
+      "equals_committed": true,
+      "observed_worktree_sha256": "390b8e7fdbd25796d5c91136906e3b8b67840de3c771e665a68d2c2a5cd1aafd",
+      "worktree_equals_reference": true
+    },
+    {
+      "kind": "IMPLEMENTATION_AUXILIARY",
+      "path": "documents/400_PGPT/470_PMO/477_GPT61Sol実行計画・再開判定.md",
+      "sha256": "70363cf1bf2d2e0e686aed4eb3c3ce779d4f22ed53d16e437466dbec6683a4bf",
+      "bytes": 39638,
+      "source_commit": "ce284deb86508071d03cf913ce94344f2e49bc9a",
+      "equals_committed": true,
+      "observed_worktree_sha256": "70363cf1bf2d2e0e686aed4eb3c3ce779d4f22ed53d16e437466dbec6683a4bf",
+      "worktree_equals_reference": true
+    },
+    {
+      "kind": "IMPLEMENTATION_AUXILIARY",
+      "path": "documents/400_PGPT/470_PMO/478_再開プロンプト_GPT61Sol.md",
+      "sha256": "9212a55e6f7cb6033cf8f40ee122f882553e67af28bcf9d1dcc3811ba79c1164",
+      "bytes": 22078,
+      "source_commit": "ce284deb86508071d03cf913ce94344f2e49bc9a",
+      "equals_committed": true,
+      "observed_worktree_sha256": "9212a55e6f7cb6033cf8f40ee122f882553e67af28bcf9d1dcc3811ba79c1164",
+      "worktree_equals_reference": true
+    },
+    {
+      "kind": "IMPLEMENTATION_AUXILIARY",
+      "path": "documents/400_PGPT/470_PMO/479_詳細WBS・進捗算定規則.md",
+      "sha256": "e8aee40da81971a87da7c3571261cbb249b44157be176ad0d04608bcc74be971",
+      "bytes": 40088,
+      "source_commit": "ce284deb86508071d03cf913ce94344f2e49bc9a",
+      "equals_committed": true,
+      "observed_worktree_sha256": "e8aee40da81971a87da7c3571261cbb249b44157be176ad0d04608bcc74be971",
+      "worktree_equals_reference": true
+    },
+    {
+      "kind": "IMPLEMENTATION_AUXILIARY",
+      "path": "documents/400_PGPT/470_PMO/481_PGPT詳細WBS.json",
+      "sha256": "a37f9c07337a51b61bc2656e6b3d5713221184806c9fb537ed4c545b70a914a5",
+      "bytes": 1042289,
+      "source_commit": "ce284deb86508071d03cf913ce94344f2e49bc9a",
+      "equals_committed": true,
+      "observed_worktree_sha256": "a37f9c07337a51b61bc2656e6b3d5713221184806c9fb537ed4c545b70a914a5",
+      "worktree_equals_reference": true
+    },
+    {
+      "kind": "IMPLEMENTATION_AUXILIARY",
+      "path": "documents/400_PGPT/470_PMO/485_WBS網羅性・受入対応.json",
+      "sha256": "2be34294f3c0ac7547faf0c6f19f7703f3ef8ffacd8d44e60ee0de8e05b31c54",
+      "bytes": 17449282,
+      "source_commit": "ce284deb86508071d03cf913ce94344f2e49bc9a",
+      "equals_committed": true,
+      "observed_worktree_sha256": "db2458ca6d8fa21577368843d77d88a3eb8822f011819ba7f3a6a1e14f996bf4",
+      "worktree_equals_reference": false
+    },
+    {
+      "kind": "IMPLEMENTATION_AUXILIARY",
+      "path": "documents/400_PGPT/470_PMO/486_WBS現行実績.json",
+      "sha256": "608109bf0ff894b11e7e08c9bdf6a375420a248b73b784f1c55944262ddda20a",
+      "bytes": 858117,
+      "source_commit": "ce284deb86508071d03cf913ce94344f2e49bc9a",
+      "equals_committed": true,
+      "observed_worktree_sha256": "9a702486af0308fec98f52e503680c41073721b2f684b8e8f6c21a48421f24fd",
+      "worktree_equals_reference": false
+    },
+    {
+      "kind": "IMPLEMENTATION_AUXILIARY",
+      "path": "documents/400_PGPT/470_PMO/487_WBS実行計測規約.json",
+      "sha256": "b4b8c860a44774dc4c90f70fe22db1429aae440e2524e84b3a5ad2de6c6c3713",
+      "bytes": 6922,
+      "source_commit": "ce284deb86508071d03cf913ce94344f2e49bc9a",
+      "equals_committed": true,
+      "observed_worktree_sha256": "b4b8c860a44774dc4c90f70fe22db1429aae440e2524e84b3a5ad2de6c6c3713",
+      "worktree_equals_reference": true
+    },
+    {
+      "kind": "IMPLEMENTATION_AUXILIARY",
+      "path": "documents/400_PGPT/401_PGPT成果物一覧.md",
+      "sha256": "b011b9069e46cb806489d2f7aa8e0f79d988b8588a6c49c3590ec1fe16e0f1ce",
+      "bytes": 196001,
+      "source_commit": "ce284deb86508071d03cf913ce94344f2e49bc9a",
+      "equals_committed": true,
+      "observed_worktree_sha256": "3f282e32216acdc0b6a6cdf27963d083d2e8896a8839413fa9a9856b0082d15c",
+      "worktree_equals_reference": false
+    },
+    {
+      "kind": "IMPLEMENTATION_AUXILIARY",
+      "path": "documents/400_PGPT/420_環境/421_開発環境・toolchain構築記録.md",
+      "sha256": "cd9bfb6054956dd3e80591926bdb17ef610d62176c8a9efc360d50baf0db9110",
+      "bytes": 86508,
+      "source_commit": "ce284deb86508071d03cf913ce94344f2e49bc9a",
+      "equals_committed": true,
+      "observed_worktree_sha256": "cd9bfb6054956dd3e80591926bdb17ef610d62176c8a9efc360d50baf0db9110",
+      "worktree_equals_reference": true
+    },
+    {
+      "kind": "IMPLEMENTATION_AUXILIARY",
+      "path": "documents/400_PGPT/420_環境/424_隔離Linux_PGPT環境構築記録.md",
+      "sha256": "8d2e0018dc7c071abb7edbdca8bc3806f5d2f1c237ffefe7f52e9f8a185f3c74",
+      "bytes": 10405,
+      "source_commit": "ce284deb86508071d03cf913ce94344f2e49bc9a",
+      "equals_committed": true,
+      "observed_worktree_sha256": "8d2e0018dc7c071abb7edbdca8bc3806f5d2f1c237ffefe7f52e9f8a185f3c74",
+      "worktree_equals_reference": true
+    },
+    {
+      "kind": "IMPLEMENTATION_AUXILIARY",
+      "path": "documents/400_PGPT/420_環境/425_専用LAN_PGPT環境・移送記録.md",
+      "sha256": "3a6653aec41732f0fde832acbea264410c4902ef80974d7bb0914104936ba015",
+      "bytes": 10895,
+      "source_commit": "ce284deb86508071d03cf913ce94344f2e49bc9a",
+      "equals_committed": true,
+      "observed_worktree_sha256": "3a6653aec41732f0fde832acbea264410c4902ef80974d7bb0914104936ba015",
+      "worktree_equals_reference": true
+    },
+    {
+      "kind": "IMPLEMENTATION_AUXILIARY",
+      "path": "documents/900_OTHER/910_台帳/915_障害表.md",
+      "sha256": "e27a223ecda8d10c61d5b106d5c2776a100103514d19661a312603a05dcab87b",
+      "bytes": 3180151,
+      "source_commit": "ce284deb86508071d03cf913ce94344f2e49bc9a",
+      "equals_committed": true,
+      "observed_worktree_sha256": "e27a223ecda8d10c61d5b106d5c2776a100103514d19661a312603a05dcab87b",
+      "worktree_equals_reference": true
+    },
+    {
+      "kind": "IMPLEMENTATION_AUXILIARY",
+      "path": "documents/900_OTHER/910_台帳/916_横展開管理台帳.md",
+      "sha256": "55fd8a57eb8235a66f8a16c05fa933749c101c81212320b63869ad51133a67da",
+      "bytes": 2332607,
+      "source_commit": "ce284deb86508071d03cf913ce94344f2e49bc9a",
+      "equals_committed": true,
+      "observed_worktree_sha256": "55fd8a57eb8235a66f8a16c05fa933749c101c81212320b63869ad51133a67da",
+      "worktree_equals_reference": true
+    },
+    {
+      "kind": "IMPLEMENTATION_AUXILIARY",
+      "path": "tools/quality/018_collect_verified_evidence_set.py",
+      "sha256": "e5c20b9286e010068ff197fa93f962bfe0fb7a132480beb19b47db879ec0ae17",
+      "bytes": 10597,
+      "source_commit": "ce284deb86508071d03cf913ce94344f2e49bc9a",
+      "equals_committed": true,
+      "observed_worktree_sha256": "e5c20b9286e010068ff197fa93f962bfe0fb7a132480beb19b47db879ec0ae17",
+      "worktree_equals_reference": true
+    },
+    {
+      "kind": "IMPLEMENTATION_AUXILIARY",
+      "path": "tools/quality/vm/050_s1/README.md",
+      "sha256": "4569c799bee183b466060f6a1228ea96b15b47dfdbd7e109445b86f163605d2b",
+      "bytes": 4988,
+      "source_commit": "ce284deb86508071d03cf913ce94344f2e49bc9a",
+      "equals_committed": true,
+      "observed_worktree_sha256": "4569c799bee183b466060f6a1228ea96b15b47dfdbd7e109445b86f163605d2b",
+      "worktree_equals_reference": true
+    },
+    {
+      "kind": "IMPLEMENTATION_AUXILIARY",
+      "path": "program/characterization/tests/resources/cases/case-requirements.json",
+      "sha256": "f31eaff19732157415dccc960d85bf6a68e0eb188bf98b79d54a7c0887dea569",
+      "bytes": 3739,
+      "source_commit": "ce284deb86508071d03cf913ce94344f2e49bc9a",
+      "equals_committed": true,
+      "observed_worktree_sha256": "f31eaff19732157415dccc960d85bf6a68e0eb188bf98b79d54a7c0887dea569",
+      "worktree_equals_reference": true
+    },
+    {
+      "kind": "IMPLEMENTATION_AUXILIARY",
+      "path": "program/characterization/tests/resources/cases/catalog.json",
+      "sha256": "df412392032ad324a5e5dd92b0703c03287a7744af47aa42cd34a0a617e46d38",
+      "bytes": 1667,
+      "source_commit": "ce284deb86508071d03cf913ce94344f2e49bc9a",
+      "equals_committed": true,
+      "observed_worktree_sha256": "df412392032ad324a5e5dd92b0703c03287a7744af47aa42cd34a0a617e46d38",
+      "worktree_equals_reference": true
+    },
+    {
+      "kind": "IMPLEMENTATION_AUXILIARY",
+      "path": "program/characterization/tests/resources/cases/dif-allowlist.json",
+      "sha256": "43239fe3d3f42c488dcbeb58017fde78830ba3771930a9c97cd65c3c7a7c5cb6",
+      "bytes": 3686,
+      "source_commit": "ce284deb86508071d03cf913ce94344f2e49bc9a",
+      "equals_committed": true,
+      "observed_worktree_sha256": "43239fe3d3f42c488dcbeb58017fde78830ba3771930a9c97cd65c3c7a7c5cb6",
+      "worktree_equals_reference": true
+    },
+    {
+      "kind": "IMPLEMENTATION_AUXILIARY",
+      "path": "program/characterization/tests/resources/cases/gate-contract.json",
+      "sha256": "bd5d0b960a8544f1ea7d7c5621ee261a254c3d868da05abf175beda71b1d8ca9",
+      "bytes": 1717,
+      "source_commit": "ce284deb86508071d03cf913ce94344f2e49bc9a",
+      "equals_committed": true,
+      "observed_worktree_sha256": "bd5d0b960a8544f1ea7d7c5621ee261a254c3d868da05abf175beda71b1d8ca9",
+      "worktree_equals_reference": true
+    },
+    {
+      "kind": "IMPLEMENTATION_AUXILIARY",
+      "path": "program/characterization/tests/resources/cases/schema.json",
+      "sha256": "8116075a4a7915addf446845fc4a87f54431af96c274bd48c6fee59e981e23f8",
+      "bytes": 341,
+      "source_commit": "ce284deb86508071d03cf913ce94344f2e49bc9a",
+      "equals_committed": true,
+      "observed_worktree_sha256": "8116075a4a7915addf446845fc4a87f54431af96c274bd48c6fee59e981e23f8",
+      "worktree_equals_reference": true
+    },
+    {
+      "kind": "IMPLEMENTATION_AUXILIARY",
+      "path": "program/characterization/baseline/current/manifest.json",
+      "sha256": "4eb22323a475e15a3fae4ef9ccf3e128f1616591c2271f048bcf6473915ab8f9",
+      "bytes": 699,
+      "source_commit": "ce284deb86508071d03cf913ce94344f2e49bc9a",
+      "equals_committed": true,
+      "observed_worktree_sha256": "4eb22323a475e15a3fae4ef9ccf3e128f1616591c2271f048bcf6473915ab8f9",
+      "worktree_equals_reference": true
+    },
+    {
+      "kind": "IMPLEMENTATION_AUXILIARY",
+      "path": "src/deployment/caddy/Caddyfile.template",
+      "sha256": "2914bfd4134186911562071f92652ce750e513213a749672dd161615c3d8763c",
+      "bytes": 749,
+      "source_commit": "ce284deb86508071d03cf913ce94344f2e49bc9a",
+      "equals_committed": true,
+      "observed_worktree_sha256": "2914bfd4134186911562071f92652ce750e513213a749672dd161615c3d8763c",
+      "worktree_equals_reference": true
+    },
+    {
+      "kind": "IMPLEMENTATION_AUXILIARY",
+      "path": "src/deployment/config/api.env.template",
+      "sha256": "6ba707e0f670eaff9dc66ab4282c20e5632360e50306c8087853ba241dcc65af",
+      "bytes": 40,
+      "source_commit": "ce284deb86508071d03cf913ce94344f2e49bc9a",
+      "equals_committed": true,
+      "observed_worktree_sha256": "6ba707e0f670eaff9dc66ab4282c20e5632360e50306c8087853ba241dcc65af",
+      "worktree_equals_reference": true
+    },
+    {
+      "kind": "IMPLEMENTATION_AUXILIARY",
+      "path": "src/deployment/config/api.yml.template",
+      "sha256": "206f4ed29da0fca31c1bab15015eb5b4db93255846c411f5d1815050d66bf267",
+      "bytes": 1038,
+      "source_commit": "ce284deb86508071d03cf913ce94344f2e49bc9a",
+      "equals_committed": true,
+      "observed_worktree_sha256": "206f4ed29da0fca31c1bab15015eb5b4db93255846c411f5d1815050d66bf267",
+      "worktree_equals_reference": true
+    },
+    {
+      "kind": "IMPLEMENTATION_AUXILIARY",
+      "path": "src/deployment/config/batch.yml.template",
+      "sha256": "f8777bdd604dd1c0e1064d9c743fc15986baba737dcd852038e7bc5060efb8d9",
+      "bytes": 572,
+      "source_commit": "ce284deb86508071d03cf913ce94344f2e49bc9a",
+      "equals_committed": true,
+      "observed_worktree_sha256": "f8777bdd604dd1c0e1064d9c743fc15986baba737dcd852038e7bc5060efb8d9",
+      "worktree_equals_reference": true
+    },
+    {
+      "kind": "IMPLEMENTATION_AUXILIARY",
+      "path": "src/deployment/config/common.yml.template",
+      "sha256": "d61acf911e08a15cfdb2700eb81db7bbbb920cb3ccd80f1665652af4b4b7880a",
+      "bytes": 175,
+      "source_commit": "ce284deb86508071d03cf913ce94344f2e49bc9a",
+      "equals_committed": true,
+      "observed_worktree_sha256": "d61acf911e08a15cfdb2700eb81db7bbbb920cb3ccd80f1665652af4b4b7880a",
+      "worktree_equals_reference": true
+    },
+    {
+      "kind": "IMPLEMENTATION_AUXILIARY",
+      "path": "src/deployment/config/inbox-inspector.env.template",
+      "sha256": "2f8514321264c8fa67d73694ce7a441a7e3450ab520a60f0c052364304ab3f73",
+      "bytes": 134,
+      "source_commit": "ce284deb86508071d03cf913ce94344f2e49bc9a",
+      "equals_committed": true,
+      "observed_worktree_sha256": "2f8514321264c8fa67d73694ce7a441a7e3450ab520a60f0c052364304ab3f73",
+      "worktree_equals_reference": true
+    },
+    {
+      "kind": "IMPLEMENTATION_AUXILIARY",
+      "path": "src/deployment/config/web.env.template",
+      "sha256": "6ba707e0f670eaff9dc66ab4282c20e5632360e50306c8087853ba241dcc65af",
+      "bytes": 40,
+      "source_commit": "ce284deb86508071d03cf913ce94344f2e49bc9a",
+      "equals_committed": true,
+      "observed_worktree_sha256": "6ba707e0f670eaff9dc66ab4282c20e5632360e50306c8087853ba241dcc65af",
+      "worktree_equals_reference": true
+    },
+    {
+      "kind": "IMPLEMENTATION_AUXILIARY",
+      "path": "src/deployment/config/web.yml.template",
+      "sha256": "3e9a7ba4ada50e82e450cdd634439c2c122fed051de089010dee07dfd2d25cb7",
+      "bytes": 844,
+      "source_commit": "ce284deb86508071d03cf913ce94344f2e49bc9a",
+      "equals_committed": true,
+      "observed_worktree_sha256": "3e9a7ba4ada50e82e450cdd634439c2c122fed051de089010dee07dfd2d25cb7",
+      "worktree_equals_reference": true
+    },
+    {
+      "kind": "IMPLEMENTATION_AUXILIARY",
+      "path": "src/deployment/monitoring/grafana/datasources-debug.yml.template",
+      "sha256": "bd89d8d91b4efc6c3eb0e7c882055a475e9bb992ceb9d53bb0197401b2efb3e1",
+      "bytes": 448,
+      "source_commit": "ce284deb86508071d03cf913ce94344f2e49bc9a",
+      "equals_committed": true,
+      "observed_worktree_sha256": "bd89d8d91b4efc6c3eb0e7c882055a475e9bb992ceb9d53bb0197401b2efb3e1",
+      "worktree_equals_reference": true
+    },
+    {
+      "kind": "IMPLEMENTATION_AUXILIARY",
+      "path": "src/deployment/monitoring/grafana/datasources-standard.yml.template",
+      "sha256": "dd6805ddf4d267a3c5bdc4a80125afd11dd29b44cb51cabd98443aa38405e5cc",
+      "bytes": 88,
+      "source_commit": "ce284deb86508071d03cf913ce94344f2e49bc9a",
+      "equals_committed": true,
+      "observed_worktree_sha256": "dd6805ddf4d267a3c5bdc4a80125afd11dd29b44cb51cabd98443aa38405e5cc",
+      "worktree_equals_reference": true
+    },
+    {
+      "kind": "IMPLEMENTATION_AUXILIARY",
+      "path": "src/deployment/monitoring/grafana/grafana.ini.template",
+      "sha256": "f621a703ee20994890af674109b7dcc6071b1ed468f8de575003c2da8d56a05b",
+      "bytes": 651,
+      "source_commit": "ce284deb86508071d03cf913ce94344f2e49bc9a",
+      "equals_committed": true,
+      "observed_worktree_sha256": "f621a703ee20994890af674109b7dcc6071b1ed468f8de575003c2da8d56a05b",
+      "worktree_equals_reference": true
+    },
+    {
+      "kind": "IMPLEMENTATION_AUXILIARY",
+      "path": "src/deployment/monitoring/prometheus/debug-arguments.json.template",
+      "sha256": "8056a3d9ccb357da3d3fdfcf25215d951f9996b6fac9e03548106b246840405a",
+      "bytes": 266,
+      "source_commit": "ce284deb86508071d03cf913ce94344f2e49bc9a",
+      "equals_committed": true,
+      "observed_worktree_sha256": "8056a3d9ccb357da3d3fdfcf25215d951f9996b6fac9e03548106b246840405a",
+      "worktree_equals_reference": true
+    },
+    {
+      "kind": "IMPLEMENTATION_AUXILIARY",
+      "path": "src/deployment/monitoring/prometheus/debug.yml.template",
+      "sha256": "df964a0793af23bc61d3531fa516d0dd4787a5a5595cda64e96d3f0e01f43f6a",
+      "bytes": 761,
+      "source_commit": "ce284deb86508071d03cf913ce94344f2e49bc9a",
+      "equals_committed": true,
+      "observed_worktree_sha256": "df964a0793af23bc61d3531fa516d0dd4787a5a5595cda64e96d3f0e01f43f6a",
+      "worktree_equals_reference": true
+    },
+    {
+      "kind": "IMPLEMENTATION_AUXILIARY",
+      "path": "src/deployment/monitoring/prometheus/standard.yml.template",
+      "sha256": "52e6254d2eb82f4f3072f8c5a96a2b21b2fee350480a8ebe3f4018f53d8716e8",
+      "bytes": 103,
+      "source_commit": "ce284deb86508071d03cf913ce94344f2e49bc9a",
+      "equals_committed": true,
+      "observed_worktree_sha256": "52e6254d2eb82f4f3072f8c5a96a2b21b2fee350480a8ebe3f4018f53d8716e8",
+      "worktree_equals_reference": true
+    },
+    {
+      "kind": "IMPLEMENTATION_AUXILIARY",
+      "path": "src/deployment/operations/inbox-inspector.sh.template",
+      "sha256": "4069033ac536e63c4d9507f31a8d152ee1dd8a89e211d3bb17100dac9e8cc6c3",
+      "bytes": 1284,
+      "source_commit": "ce284deb86508071d03cf913ce94344f2e49bc9a",
+      "equals_committed": true,
+      "observed_worktree_sha256": "4069033ac536e63c4d9507f31a8d152ee1dd8a89e211d3bb17100dac9e8cc6c3",
+      "worktree_equals_reference": true
+    },
+    {
+      "kind": "IMPLEMENTATION_AUXILIARY",
+      "path": "src/deployment/postgresql/pg_hba.conf.template",
+      "sha256": "c73a1809eb70f3934fcb6621f3d60f782e6a5fef2946f178fad8294e1bcb8850",
+      "bytes": 985,
+      "source_commit": "ce284deb86508071d03cf913ce94344f2e49bc9a",
+      "equals_committed": true,
+      "observed_worktree_sha256": "c73a1809eb70f3934fcb6621f3d60f782e6a5fef2946f178fad8294e1bcb8850",
+      "worktree_equals_reference": true
+    },
+    {
+      "kind": "IMPLEMENTATION_AUXILIARY",
+      "path": "src/deployment/postgresql/postgresql.conf.template",
+      "sha256": "aa4474413deccf08e3f30b458355602145dd611ac0329e2a83a1f1007f9149eb",
+      "bytes": 1077,
+      "source_commit": "ce284deb86508071d03cf913ce94344f2e49bc9a",
+      "equals_committed": true,
+      "observed_worktree_sha256": "aa4474413deccf08e3f30b458355602145dd611ac0329e2a83a1f1007f9149eb",
+      "worktree_equals_reference": true
+    },
+    {
+      "kind": "IMPLEMENTATION_AUXILIARY",
+      "path": "src/deployment/systemd/schubert-nk-api.service.template",
+      "sha256": "c81f848198dff4e24f7d607aef3caf3b3fa5d401278eeb0b1707662bdbc2d630",
+      "bytes": 2255,
+      "source_commit": "ce284deb86508071d03cf913ce94344f2e49bc9a",
+      "equals_committed": true,
+      "observed_worktree_sha256": "c81f848198dff4e24f7d607aef3caf3b3fa5d401278eeb0b1707662bdbc2d630",
+      "worktree_equals_reference": true
+    },
+    {
+      "kind": "IMPLEMENTATION_AUXILIARY",
+      "path": "src/deployment/systemd/schubert-nk-backup.service.template",
+      "sha256": "2328437591829502f9318c39358b3c5f9ed06afb4d4116febcb3d1860d3b2b8a",
+      "bytes": 1976,
+      "source_commit": "ce284deb86508071d03cf913ce94344f2e49bc9a",
+      "equals_committed": true,
+      "observed_worktree_sha256": "2328437591829502f9318c39358b3c5f9ed06afb4d4116febcb3d1860d3b2b8a",
+      "worktree_equals_reference": true
+    },
+    {
+      "kind": "IMPLEMENTATION_AUXILIARY",
+      "path": "src/deployment/systemd/schubert-nk-bootstrap-admin.service.template",
+      "sha256": "e38a6021b2881ec832a8ca7fa8961f8754619b110415ef35a6aa0992e556d392",
+      "bytes": 1701,
+      "source_commit": "ce284deb86508071d03cf913ce94344f2e49bc9a",
+      "equals_committed": true,
+      "observed_worktree_sha256": "e38a6021b2881ec832a8ca7fa8961f8754619b110415ef35a6aa0992e556d392",
+      "worktree_equals_reference": true
+    },
+    {
+      "kind": "IMPLEMENTATION_AUXILIARY",
+      "path": "src/deployment/systemd/schubert-nk-cleanup.service.template",
+      "sha256": "a7446238928b4446a65fdd6088a7a5ad374b5a4507ade1adf9084190091c34a2",
+      "bytes": 2077,
+      "source_commit": "ce284deb86508071d03cf913ce94344f2e49bc9a",
+      "equals_committed": true,
+      "observed_worktree_sha256": "a7446238928b4446a65fdd6088a7a5ad374b5a4507ade1adf9084190091c34a2",
+      "worktree_equals_reference": true
+    },
+    {
+      "kind": "IMPLEMENTATION_AUXILIARY",
+      "path": "src/deployment/systemd/schubert-nk-expiry-cleanup.service.template",
+      "sha256": "0e6c3453373e4eb9c20ff175408ff66db731acda376c0b343e89f3541cf30709",
+      "bytes": 1937,
+      "source_commit": "ce284deb86508071d03cf913ce94344f2e49bc9a",
+      "equals_committed": true,
+      "observed_worktree_sha256": "0e6c3453373e4eb9c20ff175408ff66db731acda376c0b343e89f3541cf30709",
+      "worktree_equals_reference": true
+    },
+    {
+      "kind": "IMPLEMENTATION_AUXILIARY",
+      "path": "src/deployment/systemd/schubert-nk-morning-controller.service.template",
+      "sha256": "e9ce87045404893edede09b86dfb55523698ed26eeef3c4cb2b386f16518613b",
+      "bytes": 1947,
+      "source_commit": "ce284deb86508071d03cf913ce94344f2e49bc9a",
+      "equals_committed": true,
+      "observed_worktree_sha256": "e9ce87045404893edede09b86dfb55523698ed26eeef3c4cb2b386f16518613b",
+      "worktree_equals_reference": true
+    },
+    {
+      "kind": "IMPLEMENTATION_AUXILIARY",
+      "path": "src/deployment/systemd/schubert-nk-morning.target.template",
+      "sha256": "befb463e738a7cec5379b98cbb9ca68026fe49bb5ab7c593038bae9df8ebfacb",
+      "bytes": 537,
+      "source_commit": "ce284deb86508071d03cf913ce94344f2e49bc9a",
+      "equals_committed": true,
+      "observed_worktree_sha256": "befb463e738a7cec5379b98cbb9ca68026fe49bb5ab7c593038bae9df8ebfacb",
+      "worktree_equals_reference": true
+    },
+    {
+      "kind": "IMPLEMENTATION_AUXILIARY",
+      "path": "src/deployment/systemd/schubert-nk-web.service.template",
+      "sha256": "eb3980ad64852645ffe2a07ac2ac4f453aeb8ce9cedd1d9147e1a1d3d863acbc",
+      "bytes": 2191,
+      "source_commit": "ce284deb86508071d03cf913ce94344f2e49bc9a",
+      "equals_committed": true,
+      "observed_worktree_sha256": "eb3980ad64852645ffe2a07ac2ac4f453aeb8ce9cedd1d9147e1a1d3d863acbc",
+      "worktree_equals_reference": true
+    },
+    {
+      "kind": "IMPLEMENTATION_AUXILIARY",
+      "path": "src/deployment/artemis/etc/broker.xml",
+      "sha256": "161cbc5fc57ae38e4d75f45e8c752a781732aa3bf6c93c6d7ce8eb1cdaae1820",
+      "bytes": 15584,
+      "source_commit": "ce284deb86508071d03cf913ce94344f2e49bc9a",
+      "equals_committed": true,
+      "observed_worktree_sha256": "161cbc5fc57ae38e4d75f45e8c752a781732aa3bf6c93c6d7ce8eb1cdaae1820",
+      "worktree_equals_reference": true
+    },
+    {
+      "kind": "IMPLEMENTATION_AUXILIARY",
+      "path": "src/schubert-nk-api/pom.xml",
+      "sha256": "2c9786c2431606e25aef3e07117a43ee1abe4a4aa239900c4d7ae6d20469617f",
+      "bytes": 8250,
+      "source_commit": "ce284deb86508071d03cf913ce94344f2e49bc9a",
+      "equals_committed": true,
+      "observed_worktree_sha256": "2c9786c2431606e25aef3e07117a43ee1abe4a4aa239900c4d7ae6d20469617f",
+      "worktree_equals_reference": true
+    },
+    {
+      "kind": "IMPLEMENTATION_AUXILIARY",
+      "path": "src/schubert-nk-batch/pom.xml",
+      "sha256": "64e9340a5bfe76246716e7d95888d0d2e30be046c06448d266f8fcf97e3cd495",
+      "bytes": 6934,
+      "source_commit": "ce284deb86508071d03cf913ce94344f2e49bc9a",
+      "equals_committed": true,
+      "observed_worktree_sha256": "64e9340a5bfe76246716e7d95888d0d2e30be046c06448d266f8fcf97e3cd495",
+      "worktree_equals_reference": true
+    },
+    {
+      "kind": "IMPLEMENTATION_AUXILIARY",
+      "path": "src/schubert-nk-bootstrap/pom.xml",
+      "sha256": "8d207c8efa88ed95e731aa5ffa8346e135082c624f134ca3c31d8749095658fe",
+      "bytes": 6151,
+      "source_commit": "ce284deb86508071d03cf913ce94344f2e49bc9a",
+      "equals_committed": true,
+      "observed_worktree_sha256": "8d207c8efa88ed95e731aa5ffa8346e135082c624f134ca3c31d8749095658fe",
+      "worktree_equals_reference": true
+    },
+    {
+      "kind": "IMPLEMENTATION_AUXILIARY",
+      "path": "src/schubert-nk-protocol/pom.xml",
+      "sha256": "f76b730fa1cb1b34a88182ca5b685ca14fb71361c037f9418f0895d2a3022d7d",
+      "bytes": 4276,
+      "source_commit": "ce284deb86508071d03cf913ce94344f2e49bc9a",
+      "equals_committed": true,
+      "observed_worktree_sha256": "f76b730fa1cb1b34a88182ca5b685ca14fb71361c037f9418f0895d2a3022d7d",
+      "worktree_equals_reference": true
+    },
+    {
+      "kind": "IMPLEMENTATION_AUXILIARY",
+      "path": "src/schubert-nk-storage/pom.xml",
+      "sha256": "d4ed59631b9ebf965db518fbe4b7894c2beb71ee3f7c1e9cdbf7b4241c8179c7",
+      "bytes": 4309,
+      "source_commit": "ce284deb86508071d03cf913ce94344f2e49bc9a",
+      "equals_committed": true,
+      "observed_worktree_sha256": "d4ed59631b9ebf965db518fbe4b7894c2beb71ee3f7c1e9cdbf7b4241c8179c7",
+      "worktree_equals_reference": true
+    },
+    {
+      "kind": "IMPLEMENTATION_AUXILIARY",
+      "path": "src/schubert-nk-web/pom.xml",
+      "sha256": "9b6c47c3ab3ba0d105f41f081de10b2234af4653fdc371a8eacdf9cabb78761b",
+      "bytes": 10272,
+      "source_commit": "ce284deb86508071d03cf913ce94344f2e49bc9a",
+      "equals_committed": true,
+      "observed_worktree_sha256": "9b6c47c3ab3ba0d105f41f081de10b2234af4653fdc371a8eacdf9cabb78761b",
+      "worktree_equals_reference": true
+    },
+    {
+      "kind": "IMPLEMENTATION_AUXILIARY",
+      "path": "src/schubert-nk-api/src/main/resources/db/migration/V001__schemas_and_extension.sql",
+      "sha256": "f687a36d1e296d38306997808b0f4440e484e24dd37b3862476fb470e56930da",
+      "bytes": 1114,
+      "source_commit": "ce284deb86508071d03cf913ce94344f2e49bc9a",
+      "equals_committed": true,
+      "observed_worktree_sha256": "f687a36d1e296d38306997808b0f4440e484e24dd37b3862476fb470e56930da",
+      "worktree_equals_reference": true
+    },
+    {
+      "kind": "IMPLEMENTATION_AUXILIARY",
+      "path": "src/schubert-nk-api/src/main/resources/db/migration/V002__account_session_and_master_tables.sql",
+      "sha256": "23f82d08f89bf6abfb75cbf41d126b174fcef5cf77563755fc316b31fb817e8e",
+      "bytes": 15262,
+      "source_commit": "ce284deb86508071d03cf913ce94344f2e49bc9a",
+      "equals_committed": true,
+      "observed_worktree_sha256": "23f82d08f89bf6abfb75cbf41d126b174fcef5cf77563755fc316b31fb817e8e",
+      "worktree_equals_reference": true
+    },
+    {
+      "kind": "IMPLEMENTATION_AUXILIARY",
+      "path": "src/schubert-nk-api/src/main/resources/db/migration/V003__business_message_log_and_web_tables.sql",
+      "sha256": "85f05cda30be1dd7856fb1eee3b25f42c6513641ab5d30b92410210f5460aa5e",
+      "bytes": 20383,
+      "source_commit": "ce284deb86508071d03cf913ce94344f2e49bc9a",
+      "equals_committed": true,
+      "observed_worktree_sha256": "85f05cda30be1dd7856fb1eee3b25f42c6513641ab5d30b92410210f5460aa5e",
+      "worktree_equals_reference": true
+    },
+    {
+      "kind": "IMPLEMENTATION_AUXILIARY",
+      "path": "src/schubert-nk-api/src/main/resources/db/migration/V004__indexes_and_initial_data.sql",
+      "sha256": "fdf634ace2beef2d57e28ad65c2ed488eab493cb2b0d8b1d421eab8397b8079e",
+      "bytes": 3793,
+      "source_commit": "ce284deb86508071d03cf913ce94344f2e49bc9a",
+      "equals_committed": true,
+      "observed_worktree_sha256": "fdf634ace2beef2d57e28ad65c2ed488eab493cb2b0d8b1d421eab8397b8079e",
+      "worktree_equals_reference": true
+    },
+    {
+      "kind": "IMPLEMENTATION_AUXILIARY",
+      "path": "src/schubert-nk-api/src/main/resources/db/migration/V005__gin_functions_views_and_grants.sql",
+      "sha256": "daf64a15c753cea106b593e6da944db08f7b13c94d3f2aa4ec6626fcd8b56ff9",
+      "bytes": 16698,
+      "source_commit": "ce284deb86508071d03cf913ce94344f2e49bc9a",
+      "equals_committed": true,
+      "observed_worktree_sha256": "daf64a15c753cea106b593e6da944db08f7b13c94d3f2aa4ec6626fcd8b56ff9",
+      "worktree_equals_reference": true
+    },
+    {
+      "kind": "IMPLEMENTATION_AUXILIARY",
+      "path": "src/schubert-nk-api/src/main/resources/db/migration/V006__cleanup_null_bounds_and_outbox_retention.sql",
+      "sha256": "79623b56b8fe9d27af75df6a5db5cf47f4b93fb7b5ae2b9eb4d19ce6d6624052",
+      "bytes": 12838,
+      "source_commit": "ce284deb86508071d03cf913ce94344f2e49bc9a",
+      "equals_committed": true,
+      "observed_worktree_sha256": "79623b56b8fe9d27af75df6a5db5cf47f4b93fb7b5ae2b9eb4d19ce6d6624052",
+      "worktree_equals_reference": true
+    },
+    {
+      "kind": "IMPLEMENTATION_AUXILIARY",
+      "path": "src/schubert-nk-api/src/main/resources/db/migration/V007__username_comparison_key_expansion.sql",
+      "sha256": "3b93f98b801c967c78113f3931b89b32aa9dc821d336af6c81076efc26da0401",
+      "bytes": 542,
+      "source_commit": "ce284deb86508071d03cf913ce94344f2e49bc9a",
+      "equals_committed": true,
+      "observed_worktree_sha256": "3b93f98b801c967c78113f3931b89b32aa9dc821d336af6c81076efc26da0401",
+      "worktree_equals_reference": true
+    },
+    {
+      "kind": "IMPLEMENTATION_AUXILIARY",
+      "path": "src/schubert-nk-api/src/main/resources/db/migration/V008__auth_inbox_inspection_boundary.sql",
+      "sha256": "a90b338170322bd190335d2cfd382bb36b6f8b1243410345ef35b54dda928412",
+      "bytes": 3306,
+      "source_commit": "ce284deb86508071d03cf913ce94344f2e49bc9a",
+      "equals_committed": true,
+      "observed_worktree_sha256": "a90b338170322bd190335d2cfd382bb36b6f8b1243410345ef35b54dda928412",
+      "worktree_equals_reference": true
+    },
+    {
+      "kind": "IMPLEMENTATION_AUXILIARY",
+      "path": "src/schubert-nk-api/src/main/resources/db/migration/V009__conditional_auth_inbox_deletion.sql",
+      "sha256": "537c7844709ed116f23fa60c64ae378e79eadad79f2e8003bbfd688f42335312",
+      "bytes": 3566,
+      "source_commit": "ce284deb86508071d03cf913ce94344f2e49bc9a",
+      "equals_committed": true,
+      "observed_worktree_sha256": "537c7844709ed116f23fa60c64ae378e79eadad79f2e8003bbfd688f42335312",
+      "worktree_equals_reference": true
+    },
+    {
+      "kind": "IMPLEMENTATION_AUXILIARY",
+      "path": "src/schubert-nk-api/src/main/resources/db/migration/V010__full_inbox_scan_and_restricted_deletion.sql",
+      "sha256": "c27a17adba2367ded5dcefe1532f5b42e7e4e35259f32388fe2667049e8644b0",
+      "bytes": 7200,
+      "source_commit": "ce284deb86508071d03cf913ce94344f2e49bc9a",
+      "equals_committed": true,
+      "observed_worktree_sha256": "c27a17adba2367ded5dcefe1532f5b42e7e4e35259f32388fe2667049e8644b0",
+      "worktree_equals_reference": true
+    },
+    {
+      "kind": "IMPLEMENTATION_AUXILIARY",
+      "path": "src/schubert-nk-api/src/main/resources/db/migration/V011__batch_outbox_only_cleanup.sql",
+      "sha256": "18e92bfc225f39c7a0ecaf9bdbeef329e5a47c0af3283d12f858deb4aec09928",
+      "bytes": 2676,
+      "source_commit": "ce284deb86508071d03cf913ce94344f2e49bc9a",
+      "equals_committed": true,
+      "observed_worktree_sha256": "18e92bfc225f39c7a0ecaf9bdbeef329e5a47c0af3283d12f858deb4aec09928",
+      "worktree_equals_reference": true
+    },
+    {
+      "kind": "IMPLEMENTATION_AUXILIARY",
+      "path": "src/schubert-nk-api/src/main/resources/db/migration/V012__durable_inbox_inspection_progress.sql",
+      "sha256": "21e4c781a4b4c1a18240d8e47fae5bc2d11593d7b4ad05590ed10a67ebcb9411",
+      "bytes": 8517,
+      "source_commit": "ce284deb86508071d03cf913ce94344f2e49bc9a",
+      "equals_committed": true,
+      "observed_worktree_sha256": "21e4c781a4b4c1a18240d8e47fae5bc2d11593d7b4ad05590ed10a67ebcb9411",
+      "worktree_equals_reference": true
+    },
+    {
+      "kind": "IMPLEMENTATION_AUXILIARY",
+      "path": "src/schubert-nk-api/src/main/resources/db/migration/V013__cleanup_backup_and_retention_guards.sql",
+      "sha256": "d56446bcfb7b3fa74ad0939baa3e2c0d263dd8a975cb7e3a9ce06bac2be85a74",
+      "bytes": 9696,
+      "source_commit": "ce284deb86508071d03cf913ce94344f2e49bc9a",
+      "equals_committed": true,
+      "observed_worktree_sha256": "d56446bcfb7b3fa74ad0939baa3e2c0d263dd8a975cb7e3a9ce06bac2be85a74",
+      "worktree_equals_reference": true
+    },
+    {
+      "kind": "IMPLEMENTATION_AUXILIARY",
+      "path": "src/schubert-nk-api/src/main/resources/db/migration/V014__durable_log_cleanup_progress.sql",
+      "sha256": "d2ba884de86c59c5815559aaf17a83b7a0546fcc7f9f48649dd744d127270229",
+      "bytes": 8986,
+      "source_commit": "ce284deb86508071d03cf913ce94344f2e49bc9a",
+      "equals_committed": true,
+      "observed_worktree_sha256": "d2ba884de86c59c5815559aaf17a83b7a0546fcc7f9f48649dd744d127270229",
+      "worktree_equals_reference": true
+    },
+    {
+      "kind": "IMPLEMENTATION_AUXILIARY",
+      "path": "src/schubert-nk-api/src/main/resources/db/migration/V015__question_query_inbox_deletion.sql",
+      "sha256": "1c5544165e1ab8441f6edf3dcc83dbb5ac9e05a6e6bfb9a7086d0d8ea0f6396b",
+      "bytes": 3752,
+      "source_commit": "ce284deb86508071d03cf913ce94344f2e49bc9a",
+      "equals_committed": true,
+      "observed_worktree_sha256": "1c5544165e1ab8441f6edf3dcc83dbb5ac9e05a6e6bfb9a7086d0d8ea0f6396b",
+      "worktree_equals_reference": true
+    },
+    {
+      "kind": "IMPLEMENTATION_AUXILIARY",
+      "path": "src/schubert-nk-api/src/main/resources/db/migration/V016__question_mutation_inbox_references.sql",
+      "sha256": "99a9ae01ff3a6833d22d7c514c67c2229eb459e38bbf3e38da17a6b796f38aa8",
+      "bytes": 8972,
+      "source_commit": "ce284deb86508071d03cf913ce94344f2e49bc9a",
+      "equals_committed": true,
+      "observed_worktree_sha256": "99a9ae01ff3a6833d22d7c514c67c2229eb459e38bbf3e38da17a6b796f38aa8",
+      "worktree_equals_reference": true
+    },
+    {
+      "kind": "IMPLEMENTATION_AUXILIARY",
+      "path": "src/schubert-nk-api/src/main/resources/db/migration/V017__backup_rerun_success_history.sql",
+      "sha256": "c412685a319defa1cb4f91846c02d69dbbc18457da5feb9d66266d2aec3446ce",
+      "bytes": 493,
+      "source_commit": "ce284deb86508071d03cf913ce94344f2e49bc9a",
+      "equals_committed": true,
+      "observed_worktree_sha256": "c412685a319defa1cb4f91846c02d69dbbc18457da5feb9d66266d2aec3446ce",
+      "worktree_equals_reference": true
+    },
+    {
+      "kind": "IMPLEMENTATION_AUXILIARY",
+      "path": "src/schubert-nk-api/src/main/resources/db/migration/V018__maintenance_run_references.sql",
+      "sha256": "8799bd8dbe60b34e8c7a4e507ad54b2c41979be47973943b5e868d1224f302c9",
+      "bytes": 2421,
+      "source_commit": "ce284deb86508071d03cf913ce94344f2e49bc9a",
+      "equals_committed": true,
+      "observed_worktree_sha256": "8799bd8dbe60b34e8c7a4e507ad54b2c41979be47973943b5e868d1224f302c9",
+      "worktree_equals_reference": true
+    },
+    {
+      "kind": "IMPLEMENTATION_AUXILIARY",
+      "path": "src/schubert-nk-api/src/main/resources/db/migration/V019__parent_inbox_inspection_summary.sql",
+      "sha256": "6b03d147fff575c05ac20d8a706e2fd83b5fc7565c55f4df8511ed0c3f07be5a",
+      "bytes": 2057,
+      "source_commit": "ce284deb86508071d03cf913ce94344f2e49bc9a",
+      "equals_committed": true,
+      "observed_worktree_sha256": "6b03d147fff575c05ac20d8a706e2fd83b5fc7565c55f4df8511ed0c3f07be5a",
+      "worktree_equals_reference": true
+    },
+    {
+      "kind": "IMPLEMENTATION_AUXILIARY",
+      "path": "src/schubert-nk-api/src/main/resources/db/migration/V020__atomic_cleanup_step_counts.sql",
+      "sha256": "e91ef0d596f08e891a025da7e760761b7836f6e298d1c362f9fd02c05ff99983",
+      "bytes": 11145,
+      "source_commit": "ce284deb86508071d03cf913ce94344f2e49bc9a",
+      "equals_committed": true,
+      "observed_worktree_sha256": "e91ef0d596f08e891a025da7e760761b7836f6e298d1c362f9fd02c05ff99983",
+      "worktree_equals_reference": true
+    },
+    {
+      "kind": "IMPLEMENTATION_AUXILIARY",
+      "path": "src/schubert-nk-api/src/main/resources/db/migration/V021__expiry_batch_run_audit.sql",
+      "sha256": "608d028dcaa17713165090db60d7b3af2da9df7edfd493dc7bef4d9e1aa6435e",
+      "bytes": 1759,
+      "source_commit": "ce284deb86508071d03cf913ce94344f2e49bc9a",
+      "equals_committed": true,
+      "observed_worktree_sha256": "608d028dcaa17713165090db60d7b3af2da9df7edfd493dc7bef4d9e1aa6435e",
+      "worktree_equals_reference": true
+    },
+    {
+      "kind": "IMPLEMENTATION_AUXILIARY",
+      "path": "src/schubert-nk-api/src/main/resources/db/migration/V022__staged_expiry_batch_run_audit.sql",
+      "sha256": "56968e34731b766afd7b59523c2734be5fe0d063deda77414670729df9b12735",
+      "bytes": 1700,
+      "source_commit": "ce284deb86508071d03cf913ce94344f2e49bc9a",
+      "equals_committed": true,
+      "observed_worktree_sha256": "56968e34731b766afd7b59523c2734be5fe0d063deda77414670729df9b12735",
+      "worktree_equals_reference": true
+    },
+    {
+      "kind": "IMPLEMENTATION_AUXILIARY",
+      "path": "src/schubert-nk-api/src/main/resources/db/migration/V023__startup_schema_history_projection.sql",
+      "sha256": "f604fcbe406c79ab3271482da1d509e7b64aa32bace21bdd766f4ee8ca986492",
+      "bytes": 1078,
+      "source_commit": "ce284deb86508071d03cf913ce94344f2e49bc9a",
+      "equals_committed": true,
+      "observed_worktree_sha256": "f604fcbe406c79ab3271482da1d509e7b64aa32bace21bdd766f4ee8ca986492",
+      "worktree_equals_reference": true
+    },
+    {
+      "kind": "IMPLEMENTATION_AUXILIARY",
+      "path": "src/schubert-nk-api/src/main/resources/db/migration/V024__notification_received_state.sql",
+      "sha256": "d4f2060b208e2bf181aa0bf28eb5b11a04a0e4b3d9bd81ec5cd9ea0435428c9b",
+      "bytes": 951,
+      "source_commit": "ce284deb86508071d03cf913ce94344f2e49bc9a",
+      "equals_committed": true,
+      "observed_worktree_sha256": "d4f2060b208e2bf181aa0bf28eb5b11a04a0e4b3d9bd81ec5cd9ea0435428c9b",
+      "worktree_equals_reference": true
+    },
+    {
+      "kind": "IMPLEMENTATION_AUXILIARY",
+      "path": "src/schubert-nk-api/src/main/resources/db/migration/V025__question_dlq_outbox_identity.sql",
+      "sha256": "040ffee84a17abbbbcc7f5817a56ec9332826ea06e57deeffc2eac83bd6b7609",
+      "bytes": 3076,
+      "source_commit": "ce284deb86508071d03cf913ce94344f2e49bc9a",
+      "equals_committed": true,
+      "observed_worktree_sha256": "040ffee84a17abbbbcc7f5817a56ec9332826ea06e57deeffc2eac83bd6b7609",
+      "worktree_equals_reference": true
+    },
+    {
+      "kind": "IMPLEMENTATION_AUXILIARY",
+      "path": "src/schubert-nk-api/src/main/resources/db/migration/V026__web_receipt_references.sql",
+      "sha256": "a24ce25ccc80cde118f39734ef40fd3da9ab2ab61a368119aeae64f98b86fedb",
+      "bytes": 15042,
+      "source_commit": "ce284deb86508071d03cf913ce94344f2e49bc9a",
+      "equals_committed": true,
+      "observed_worktree_sha256": "a24ce25ccc80cde118f39734ef40fd3da9ab2ab61a368119aeae64f98b86fedb",
+      "worktree_equals_reference": true
+    },
+    {
+      "kind": "IMPLEMENTATION_AUXILIARY",
+      "path": "src/schubert-nk-api/src/main/resources/db/migration/V027__pending_revocation_unknown_expiry.sql",
+      "sha256": "622c0e17246cb86b417381e4687b3e5e52c8b63c7035515e08304ec76dd28c79",
+      "bytes": 376,
+      "source_commit": "ce284deb86508071d03cf913ce94344f2e49bc9a",
+      "equals_committed": true,
+      "observed_worktree_sha256": "622c0e17246cb86b417381e4687b3e5e52c8b63c7035515e08304ec76dd28c79",
+      "worktree_equals_reference": true
+    },
+    {
+      "kind": "IMPLEMENTATION_AUXILIARY",
+      "path": "src/schubert-nk-api/src/main/resources/db/migration/V028__retained_success_progress_seals.sql",
+      "sha256": "692d09eb4b639b9aec83cdec942f8511aec43bd3dd51e2dffb623782321a46a9",
+      "bytes": 4074,
+      "source_commit": "ce284deb86508071d03cf913ce94344f2e49bc9a",
+      "equals_committed": true,
+      "observed_worktree_sha256": "692d09eb4b639b9aec83cdec942f8511aec43bd3dd51e2dffb623782321a46a9",
+      "worktree_equals_reference": true
+    }
+  ],
+  "phase_states": {
+    "specification": "REVIEWED_WITH_OPEN_ITEMS",
+    "pgpt": "IN_PROGRESS",
+    "it_ready": false,
+    "it_result": "NOT_EXECUTED",
+    "authoring_completed": true,
+    "specification_reviewed": true,
+    "specification_all_confirmed": false
+  }
+}

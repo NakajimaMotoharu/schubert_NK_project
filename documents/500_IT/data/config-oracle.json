@@ -1,0 +1,1292 @@
+[
+  {
+    "document": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+    "section": "3. `broker.xml` global設定",
+    "line": 92,
+    "design_table_row": "| 設定 | 初期値 | 理由・検証 |"
+  },
+  {
+    "document": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+    "section": "3. `broker.xml` global設定",
+    "line": 94,
+    "design_table_row": "| `persistence-enabled` | true | Durable request/work/log/DLQ/Expiry |"
+  },
+  {
+    "document": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+    "section": "3. `broker.xml` global設定",
+    "line": 95,
+    "design_table_row": "| `journal-type` | NIO | 単一SSD、native依存削減 |"
+  },
+  {
+    "document": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+    "section": "3. `broker.xml` global設定",
+    "line": 96,
+    "design_table_row": "| `journal-file-size` | 10MiB | 小規模queueとcompaction単位 |"
+  },
+  {
+    "document": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+    "section": "3. `broker.xml` global設定",
+    "line": 97,
+    "design_table_row": "| `journal-min-files` | 4 | 起動時最低pool |"
+  },
+  {
+    "document": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+    "section": "3. `broker.xml` global設定",
+    "line": 98,
+    "design_table_row": "| `journal-pool-files` | 20 | 200MiB事前pool、実測後上限内調整 |"
+  },
+  {
+    "document": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+    "section": "3. `broker.xml` global設定",
+    "line": 99,
+    "design_table_row": "| `journal-compact-min-files` | 10 | 小file増加抑止 |"
+  },
+  {
+    "document": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+    "section": "3. `broker.xml` global設定",
+    "line": 100,
+    "design_table_row": "| `journal-compact-percentage` | 30 | reclaim閾値 |"
+  },
+  {
+    "document": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+    "section": "3. `broker.xml` global設定",
+    "line": 101,
+    "design_table_row": "| `global-max-size` | 512MiB | JVM heap 1GiB内でAddress memory high-water合計448MiBを包含 |"
+  },
+  {
+    "document": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+    "section": "3. `broker.xml` global設定",
+    "line": 102,
+    "design_table_row": "| `global-max-messages` | 50,000 | UI全Queue件数上限41,000件に運用余裕 |"
+  },
+  {
+    "document": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+    "section": "3. `broker.xml` global設定",
+    "line": 103,
+    "design_table_row": "| `max-disk-usage` | 90 | 90%でproducer block/readiness false |"
+  },
+  {
+    "document": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+    "section": "3. `broker.xml` global設定",
+    "line": 104,
+    "design_table_row": "| `disk-scan-period` | 5,000ms | Disk枯渇検知 |"
+  },
+  {
+    "document": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+    "section": "3. `broker.xml` global設定",
+    "line": 105,
+    "design_table_row": "| `id-cache-size` | 20,000 | Outbox duplicate IDを保持。Async/Web log各上限以上 |"
+  },
+  {
+    "document": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+    "section": "3. `broker.xml` global設定",
+    "line": 106,
+    "design_table_row": "| `persist-id-cache` | true | Broker再起動跨ぎduplicate detection |"
+  },
+  {
+    "document": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+    "section": "3. `broker.xml` global設定",
+    "line": 107,
+    "design_table_row": "| `graceful-shutdown-enabled` | true | 計画停止でConsumer切断待ち |"
+  },
+  {
+    "document": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+    "section": "3. `broker.xml` global設定",
+    "line": 108,
+    "design_table_row": "| `graceful-shutdown-timeout` | 60,000ms | API stop上限と一致 |"
+  },
+  {
+    "document": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+    "section": "3. `broker.xml` global設定",
+    "line": 109,
+    "design_table_row": "| Auto create/delete | 全てfalse | 未定義Address/Queueを起動失敗にする |"
+  },
+  {
+    "document": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+    "section": "4. Address・Queue定義",
+    "line": 118,
+    "design_table_row": "| Address | Queue | Durable | Producer | Consumer | Body/TTL |"
+  },
+  {
+    "document": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+    "section": "4. Address・Queue定義",
+    "line": 120,
+    "design_table_row": "| `nk.sync.request` | `nk.sync.request.q` | ○ | `nk_web` | `nk_api` | 最大1,000,000 byte、TTL 5秒 |"
+  },
+  {
+    "document": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+    "section": "4. Address・Queue定義",
+    "line": 121,
+    "design_table_row": "| `nk.sync.reply.web` | `nk.sync.reply.web.q` | ○ | `nk_api` | `nk_web` | 最大1,000,000 byte、TTL 10秒 |"
+  },
+  {
+    "document": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+    "section": "4. Address・Queue定義",
+    "line": 122,
+    "design_table_row": "| `nk.async.work` | `nk.async.work.q` | ○ | `nk_api` dispatcher | `nk_api` worker | 最大1,000 byte、TTLなし |"
+  },
+  {
+    "document": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+    "section": "4. Address・Queue定義",
+    "line": 123,
+    "design_table_row": "| `nk.web.log` | `nk.web.log.q` | ○ | `nk_web` dispatcher | `nk_api` ingestor | 最大10,000 byte、TTLなし |"
+  },
+  {
+    "document": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+    "section": "4. Address・Queue定義",
+    "line": 124,
+    "design_table_row": "| `nk.dead.letter` | `nk.dead.letter.q` | ○ | Broker/fatal handler | Ops browse/replay tool | 元messageの定義上限、TTLなし |"
+  },
+  {
+    "document": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+    "section": "4. Address・Queue定義",
+    "line": 125,
+    "design_table_row": "| `nk.expiry` | `nk.expiry.q` | ○ | Broker | Ops/maintenance | 元messageの定義上限、TTLなし |"
+  },
+  {
+    "document": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+    "section": "5.2 容量",
+    "line": 147,
+    "design_table_row": "| Match | 合計保存上限 | 合計件数上限 | Full policy | Warning/Critical |"
+  },
+  {
+    "document": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+    "section": "5.2 容量",
+    "line": 149,
+    "design_table_row": "| `nk.sync.request` | 256MiB | 500 | PAGE→上限FAIL | 250/450件、70/90% |"
+  },
+  {
+    "document": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+    "section": "5.2 容量",
+    "line": 150,
+    "design_table_row": "| `nk.sync.reply.web` | 256MiB | 500 | PAGE→上限FAIL | 250/450件、70/90% |"
+  },
+  {
+    "document": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+    "section": "5.2 容量",
+    "line": 151,
+    "design_table_row": "| `nk.async.work` | 1GiB | 10,000 | PAGE→上限FAIL | 5,000/9,000件、70/90% |"
+  },
+  {
+    "document": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+    "section": "5.2 容量",
+    "line": 152,
+    "design_table_row": "| `nk.web.log` | 256MiB | 10,000 | PAGE→上限FAIL | 5,000/9,000件、70/90% |"
+  },
+  {
+    "document": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+    "section": "5.2 容量",
+    "line": 153,
+    "design_table_row": "| `nk.dead.letter` | 2GiB | 10,000 | PAGE→上限FAIL | 1件/増加継続 |"
+  },
+  {
+    "document": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+    "section": "5.2 容量",
+    "line": 154,
+    "design_table_row": "| `nk.expiry` | 1GiB | 10,000 | PAGE→上限FAIL | 1,000/5,000件、70/90% |"
+  },
+  {
+    "document": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+    "section": "5.3 QA-042/UIC-002承認値",
+    "line": 161,
+    "design_table_row": "| Match | Memory high-water (`max-size-bytes` / `max-size-messages`) | Paging store上限 (`page-limit-bytes` / `page-limit-messages`) | 合計上限 |"
+  },
+  {
+    "document": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+    "section": "5.3 QA-042/UIC-002承認値",
+    "line": 163,
+    "design_table_row": "| `nk.sync.request` | 32MiB / 50 | 224MiB / 450 | 256MiB / 500 |"
+  },
+  {
+    "document": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+    "section": "5.3 QA-042/UIC-002承認値",
+    "line": 164,
+    "design_table_row": "| `nk.sync.reply.web` | 32MiB / 50 | 224MiB / 450 | 256MiB / 500 |"
+  },
+  {
+    "document": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+    "section": "5.3 QA-042/UIC-002承認値",
+    "line": 165,
+    "design_table_row": "| `nk.async.work` | 128MiB / 1,000 | 896MiB / 9,000 | 1GiB / 10,000 |"
+  },
+  {
+    "document": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+    "section": "5.3 QA-042/UIC-002承認値",
+    "line": 166,
+    "design_table_row": "| `nk.web.log` | 64MiB / 1,000 | 192MiB / 9,000 | 256MiB / 10,000 |"
+  },
+  {
+    "document": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+    "section": "5.3 QA-042/UIC-002承認値",
+    "line": 167,
+    "design_table_row": "| `nk.dead.letter` | 128MiB / 1,000 | 1,920MiB / 9,000 | 2GiB / 10,000 |"
+  },
+  {
+    "document": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+    "section": "5.3 QA-042/UIC-002承認値",
+    "line": 168,
+    "design_table_row": "| `nk.expiry` | 64MiB / 1,000 | 960MiB / 9,000 | 1GiB / 10,000 |"
+  },
+  {
+    "document": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+    "section": "5.4 再配送（QA-041/UIC-001反映済み）",
+    "line": 187,
+    "design_table_row": "| 設定 | 値 | 実効動作 |"
+  },
+  {
+    "document": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+    "section": "5.4 再配送（QA-041/UIC-001反映済み）",
+    "line": 189,
+    "design_table_row": "| `max-delivery-attempts` | 4 | 初回＋再配送3回。4回目の失敗後にDLQへroute |"
+  },
+  {
+    "document": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+    "section": "5.4 再配送（QA-041/UIC-001反映済み）",
+    "line": 190,
+    "design_table_row": "| `redelivery-delay` | 1,000ms | 第1再配送は1秒後 |"
+  },
+  {
+    "document": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+    "section": "5.4 再配送（QA-041/UIC-001反映済み）",
+    "line": 191,
+    "design_table_row": "| `redelivery-delay-multiplier` | 5.0 | 次回delayを前回の5倍にする |"
+  },
+  {
+    "document": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+    "section": "5.4 再配送（QA-041/UIC-001反映済み）",
+    "line": 192,
+    "design_table_row": "| `max-redelivery-delay` | 30,000ms | delay上限。3回の範囲ではcapへ到達しない |"
+  },
+  {
+    "document": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+    "section": "5.4 再配送（QA-041/UIC-001反映済み）",
+    "line": 193,
+    "design_table_row": "| 実効delay | 1秒、5秒、25秒 | QA-041承認済みの一意なrelease/test oracle |"
+  },
+  {
+    "document": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+    "section": "6. JMS connection factory",
+    "line": 200,
+    "design_table_row": "| Client | Connection | Session/consumer | 初期値 |"
+  },
+  {
+    "document": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+    "section": "6. JMS connection factory",
+    "line": 202,
+    "design_table_row": "| Web request producer | `nk_web`専用pool | transacted producer session | call timeout 2秒、block-on-durable-send=true |"
+  },
+  {
+    "document": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+    "section": "6. JMS connection factory",
+    "line": 203,
+    "design_table_row": "| Web reply consumer | 同connection、専用session | transacted consumer、1 | consumer window 1MiB、selector/registry相関 |"
+  },
+  {
+    "document": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+    "section": "6. JMS connection factory",
+    "line": 204,
+    "design_table_row": "| Web log dispatcher | 別session | transacted producer | reconnect/retry、HTTP threadと分離 |"
+  },
+  {
+    "document": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+    "section": "6. JMS connection factory",
+    "line": 205,
+    "design_table_row": "| API sync | `nk_api` connection | transacted listener、concurrency 4 | max 8、consumer window 1MiB |"
+  },
+  {
+    "document": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+    "section": "6. JMS connection factory",
+    "line": 206,
+    "design_table_row": "| API async | 別session | transacted listener、concurrency 1 | consumer window 0、priorityなし |"
+  },
+  {
+    "document": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+    "section": "6. JMS connection factory",
+    "line": 207,
+    "design_table_row": "| API Web log | 別session | transacted listener、concurrency 1 | consumer window 64KiB |"
+  },
+  {
+    "document": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+    "section": "6. JMS connection factory",
+    "line": 208,
+    "design_table_row": "| API outbox/reply | listener sessionまたは専用dispatcher | transacted producer | Persistent、send commit確認 |"
+  },
+  {
+    "document": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+    "section": "8. Property・body guard",
+    "line": 227,
+    "design_table_row": "| Property | 設計 |"
+  },
+  {
+    "document": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+    "section": "8. Property・body guard",
+    "line": 229,
+    "design_table_row": "| `JMSDeliveryMode` | PERSISTENT |"
+  },
+  {
+    "document": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+    "section": "8. Property・body guard",
+    "line": 230,
+    "design_table_row": "| `JMSCorrelationID` | wire Correlation ID |"
+  },
+  {
+    "document": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+    "section": "8. Property・body guard",
+    "line": 231,
+    "design_table_row": "| `JMSReplyTo` | Requestだけ、allowlist Address |"
+  },
+  {
+    "document": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+    "section": "8. Property・body guard",
+    "line": 232,
+    "design_table_row": "| `JMSExpiration` | Request 5秒、reply 10秒、internal 0 |"
+  },
+  {
+    "document": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+    "section": "8. Property・body guard",
+    "line": 233,
+    "design_table_row": "| `NKMessageID` | wire Message ID |"
+  },
+  {
+    "document": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+    "section": "8. Property・body guard",
+    "line": 234,
+    "design_table_row": "| `NKLayoutID` | wire layout ID |"
+  },
+  {
+    "document": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+    "section": "8. Property・body guard",
+    "line": 235,
+    "design_table_row": "| `NKProtocolVersion` | `001` |"
+  },
+  {
+    "document": "documents/300_SS/320_メッセージング/321_Artemis物理構成・JMS設定設計.md",
+    "section": "8. Property・body guard",
+    "line": 236,
+    "design_table_row": "| `_AMQ_DUPL_ID` | Outbox/work/log eventでは業務Message ID ASCII byte。Request/replyも設定可 |"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+    "section": "4.1 Dependency",
+    "line": 235,
+    "design_table_row": "| Unit | `After` | `Requires` | `Wants`/note |"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+    "section": "4.1 Dependency",
+    "line": 237,
+    "design_table_row": "| `schubert-nk-backup` | PostgreSQL | PostgreSQL | 失敗はmorning続行 |"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+    "section": "4.1 Dependency",
+    "line": 238,
+    "design_table_row": "| `schubert-nk-cleanup` | backup | PostgreSQL | Backup成否はDB rowで分岐 |"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+    "section": "4.1 Dependency",
+    "line": 239,
+    "design_table_row": "| `artemis` | cleanup | cleanup | Cleanup safety failureで起動不可 |"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+    "section": "4.1 Dependency",
+    "line": 240,
+    "design_table_row": "| `schubert-nk-expiry-cleanup.service` | Artemis | Artemis | API Consumer前に実行。SSC099: SS341§2の完全名、別名expiry-cleanup.serviceを作らない |"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+    "section": "4.1 Dependency",
+    "line": 241,
+    "design_table_row": "| `schubert-nk-api` | expiry, Artemis, PostgreSQL | Artemis, PostgreSQL | SSC139: expiryの実前処理は正規issuer/Root許可で必須、API dependencyによる保守子再実行は禁止。readiness poll後にWeb |"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+    "section": "4.1 Dependency",
+    "line": 242,
+    "design_table_row": "| `schubert-nk-web` | API, Artemis, PostgreSQL | API, Artemis, PostgreSQL | technical DBが必要 |"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+    "section": "4.1 Dependency",
+    "line": 243,
+    "design_table_row": "| `caddy` | Web | Web | Packageの自由先行起動をdisable |"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+    "section": "4.2 Java service共通",
+    "line": 261,
+    "design_table_row": "| Directive | Web/API | 理由 |"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+    "section": "4.2 Java service共通",
+    "line": 263,
+    "design_table_row": "| `Type` | `simple` | Java processを直接ExecStart、shellを挟まない |"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+    "section": "4.2 Java service共通",
+    "line": 264,
+    "design_table_row": "| `User`/`Group` | service別専用account | OS権限分離 |"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+    "section": "4.2 Java service共通",
+    "line": 265,
+    "design_table_row": "| `WorkingDirectory` | `/opt/schubert-nk/current/<web|api>` | release symlinkのread-only artifact |"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+    "section": "4.2 Java service共通",
+    "line": 266,
+    "design_table_row": "| `EnvironmentFile` | `/etc/schubert-nk/<service>.env` | 非秘密・0600 root:service、古い環境を残さない |"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+    "section": "4.2 Java service共通",
+    "line": 267,
+    "design_table_row": "| `LoadCredential` | DB/MQ/AES/HMAC secretを個別file | Secretをenv/argv/Gitへ出さない |"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+    "section": "4.2 Java service共通",
+    "line": 268,
+    "design_table_row": "| `UMask` | `0027` | 新規fileのgroup以外読取禁止 |"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+    "section": "4.2 Java service共通",
+    "line": 269,
+    "design_table_row": "| `Restart` | `on-failure`, `RestartSec=5s` | Process/protocol異常復旧 |"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+    "section": "4.2 Java service共通",
+    "line": 270,
+    "design_table_row": "| Start limit | interval 600s, burst 5 | Poison/config errorのrestart loop停止。UI 252と一致 |"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+    "section": "4.2 Java service共通",
+    "line": 271,
+    "design_table_row": "| `TimeoutStartSec` | 120s | readinessは別poll、起動hangのbound |"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+    "section": "4.2 Java service共通",
+    "line": 272,
+    "design_table_row": "| `TimeoutStopSec` | Web 30s/API 60s | UI 251のgraceful上限 |"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+    "section": "4.2 Java service共通",
+    "line": 273,
+    "design_table_row": "| `SendSIGKILL` | `no` | Timeout後の自動強制終了を禁止 |"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+    "section": "4.2 Java service共通",
+    "line": 274,
+    "design_table_row": "| `LimitNOFILE` | 65536 | MQ/DB/media FD、leak監視 |"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+    "section": "5.1 Resource",
+    "line": 315,
+    "design_table_row": "| Process | Heap | Direct/Metaspace上限 | systemd `MemoryMax` | Native headroom | Thread/pool |"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+    "section": "5.1 Resource",
+    "line": 317,
+    "design_table_row": "| Web | `-Xms384m -Xmx768m` | 128m / 192m | 1536M | 448m | HTTP 16/max32、MQ wait 12/max20 |"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+    "section": "5.1 Resource",
+    "line": 318,
+    "design_table_row": "| API | `-Xms512m -Xmx1024m` | 256m / 256m | 2048M | 512m | Sync consumer 4/max8、async 1、DB pool 8 |"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+    "section": "5.1 Resource",
+    "line": 319,
+    "design_table_row": "| Batch | `-Xms256m -Xmx768m` | 128m / 192m | 1536M | 448m | DB connection 1、step worker 1 |"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+    "section": "5.1 Resource",
+    "line": 320,
+    "design_table_row": "| Artemis | `-Xms768m -Xmx1024m` | 256m / 192m | 2048M | 576m | 321のbroker thread/config |"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+    "section": "5.2 Spring主要値",
+    "line": 341,
+    "design_table_row": "| Key | Web | API |"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+    "section": "5.2 Spring主要値",
+    "line": 343,
+    "design_table_row": "| `server.address` | `127.0.0.1` | Main HTTP disabled |"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+    "section": "5.2 Spring主要値",
+    "line": 344,
+    "design_table_row": "| `server.port` | `8080` | `-1`相当 |"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+    "section": "5.2 Spring主要値",
+    "line": 345,
+    "design_table_row": "| `management.server.address/port` | `127.0.0.1:8081` | `127.0.0.1:8091` |"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+    "section": "5.2 Spring主要値",
+    "line": 346,
+    "design_table_row": "| Exposed actuator | `health,info,prometheus` | `health,info,prometheus` |"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+    "section": "5.2 Spring主要値",
+    "line": 347,
+    "design_table_row": "| Health details | loopbackでも`never`、component statusはlog/metric | 同じ |"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+    "section": "5.2 Spring主要値",
+    "line": 348,
+    "design_table_row": "| HTTP threads | 16 initial/max32、queue 32 | management最小 |"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+    "section": "5.2 Spring主要値",
+    "line": 349,
+    "design_table_row": "| Graceful shutdown | enabled、phase timeout 30s | enabled、phase timeout 60s |"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+    "section": "5.2 Spring主要値",
+    "line": 350,
+    "design_table_row": "| DB pool | Web technical max 2/min 1、connect 3s | max 8/min 2、connect 3s |"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+    "section": "5.2 Spring主要値",
+    "line": 351,
+    "design_table_row": "| JMS request wait | 2s、semaphore 12/max20 | Listener 4/max8、async 1 |"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+    "section": "6.1 `postgresql.conf`初期値",
+    "line": 362,
+    "design_table_row": "| Key | Value | 理由 |"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+    "section": "6.1 `postgresql.conf`初期値",
+    "line": 364,
+    "design_table_row": "| `listen_addresses` | `127.0.0.1,::1` | Loopback専用 |"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+    "section": "6.1 `postgresql.conf`初期値",
+    "line": 365,
+    "design_table_row": "| `port` | 5432 | UI default |"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+    "section": "6.1 `postgresql.conf`初期値",
+    "line": 366,
+    "design_table_row": "| `max_connections` | 40 | API 8＋Web 2＋batch/migration/ops＋管理・復旧余裕 |"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+    "section": "6.1 `postgresql.conf`初期値",
+    "line": 367,
+    "design_table_row": "| `shared_buffers` | 2GB | 16GB host/PG 4GB budgetの初期値 |"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+    "section": "6.1 `postgresql.conf`初期値",
+    "line": 368,
+    "design_table_row": "| `effective_cache_size` | 6GB | OS cacheを含むplanner hint、allocationではない |"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+    "section": "6.1 `postgresql.conf`初期値",
+    "line": 369,
+    "design_table_row": "| `work_mem` | 8MB | 同時sort/hashの倍率消費をbound |"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+    "section": "6.1 `postgresql.conf`初期値",
+    "line": 370,
+    "design_table_row": "| `maintenance_work_mem` | 512MB | Migration/index/maintenance、app同時多重なし |"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+    "section": "6.1 `postgresql.conf`初期値",
+    "line": 371,
+    "design_table_row": "| `max_worker_processes` | 8 | 小規模single host |"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+    "section": "6.1 `postgresql.conf`初期値",
+    "line": 372,
+    "design_table_row": "| `max_parallel_workers` | 4 | CPU/メモリ上限 |"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+    "section": "6.1 `postgresql.conf`初期値",
+    "line": 373,
+    "design_table_row": "| `max_parallel_workers_per_gather` | 2 | 1 queryの占有防止 |"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+    "section": "6.1 `postgresql.conf`初期値",
+    "line": 374,
+    "design_table_row": "| `temp_file_limit` | 2GB | 異常sortのSSD枯渇防止 |"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+    "section": "6.1 `postgresql.conf`初期値",
+    "line": 375,
+    "design_table_row": "| `wal_compression` | on | WAL容量抑制 |"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+    "section": "6.1 `postgresql.conf`初期値",
+    "line": 376,
+    "design_table_row": "| `min_wal_size` / `max_wal_size` | 1GB / 4GB | Checkpoint・30GB DB budget |"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+    "section": "6.1 `postgresql.conf`初期値",
+    "line": 377,
+    "design_table_row": "| `checkpoint_timeout` | 15min | 小規模の初期値 |"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+    "section": "6.1 `postgresql.conf`初期値",
+    "line": 378,
+    "design_table_row": "| `checkpoint_completion_target` | 0.9 | I/O平準化 |"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+    "section": "6.1 `postgresql.conf`初期値",
+    "line": 379,
+    "design_table_row": "| `deadlock_timeout` | 500ms | API lock timeoutと合わせ早期検出 |"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+    "section": "6.1 `postgresql.conf`初期値",
+    "line": 380,
+    "design_table_row": "| `password_encryption` | `scram-sha-256` | MD5非使用 |"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+    "section": "6.1 `postgresql.conf`初期値",
+    "line": 381,
+    "design_table_row": "| `ssl` | off | Loopback内のみ、OS・rolesで保護 |"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+    "section": "6.2 Roleごとのtimeout",
+    "line": 395,
+    "design_table_row": "| Role | `statement_timeout` | `lock_timeout` | `idle_in_transaction_session_timeout` |"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+    "section": "6.2 Roleごとのtimeout",
+    "line": 397,
+    "design_table_row": "| `schubert_app` | 1500ms | 500ms | 15s |"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+    "section": "6.2 Roleごとのtimeout",
+    "line": 398,
+    "design_table_row": "| `schubert_web_session` | 1500ms | 500ms | 15s |"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+    "section": "6.2 Roleごとのtimeout",
+    "line": 399,
+    "design_table_row": "| `schubert_batch` | 30min | 5s | 60s |"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+    "section": "6.2 Roleごとのtimeout",
+    "line": 400,
+    "design_table_row": "| `schubert_backup` | 30min | 5s | 60s |"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+    "section": "6.2 Roleごとのtimeout",
+    "line": 401,
+    "design_table_row": "| `schubert_migration` | 30min | 5s | 60s |"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+    "section": "6.2 Roleごとのtimeout",
+    "line": 402,
+    "design_table_row": "| `schubert_ops_ro` | 10s | 1s | 15s |"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+    "section": "6.2 Roleごとのtimeout",
+    "line": 403,
+    "design_table_row": "| `schubert_inbox_inspector`（SSC-049） | 30s | 5s | 専用単発transaction、process上限30min。既存provisioningに未設定のidle値を設定済みとしない |"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+    "section": "8. Resource・disk合計・実測gates",
+    "line": 450,
+    "design_table_row": "| 分類 | 設計budget | Gate |"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+    "section": "8. Resource・disk合計・実測gates",
+    "line": 452,
+    "design_table_row": "| PostgreSQL | 4GB | RSS/shared/work memory合計、temp/WAL、query plan |"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+    "section": "8. Resource・disk合計・実測gates",
+    "line": 453,
+    "design_table_row": "| Artemis | 2GB | JVM/direct/RSS、Queue 41,000件相当 |"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+    "section": "8. Resource・disk合計・実測gates",
+    "line": 454,
+    "design_table_row": "| API | 2GB | 8 DB connection、8 sync consumer max、codec/file mode |"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+    "section": "8. Resource・disk合計・実測gates",
+    "line": 455,
+    "design_table_row": "| Web | 1.5GB | 20 wait/20 stream、session/outbox |"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+    "section": "8. Resource・disk合計・実測gates",
+    "line": 456,
+    "design_table_row": "| OS/Caddy/cache | 3GB | 停止/起動・broker I/Oを含む |"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+    "section": "8. Resource・disk合計・実測gates",
+    "line": 457,
+    "design_table_row": "| Safety/DEBUG | 3.5GB | STANDARDでDEBUG 2GBを起動しない |"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+    "section": "9. Configuration validation・drift",
+    "line": 467,
+    "design_table_row": "| Component | Deploy前 | 起動後 |"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+    "section": "9. Configuration validation・drift",
+    "line": 469,
+    "design_table_row": "| Caddy | fmt/adapt/validate、bind/cert/key permission | TLS/header/upstream/55160/firewall |"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+    "section": "9. Configuration validation・drift",
+    "line": 470,
+    "design_table_row": "| Systemd | `systemd-analyze verify`、unit diff、user/path | `systemctl show`のMemoryMax/restart/timeout/hardening |"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+    "section": "9. Configuration validation・drift",
+    "line": 471,
+    "design_table_row": "| PostgreSQL | config/hba parse、`postgres -C`、role/grant diff | `SHOW`実効値、pg_isready、remote接続拒否 |"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+    "section": "9. Configuration validation・drift",
+    "line": 472,
+    "design_table_row": "| Artemis | XML schema、address/security diff | Management APIのAddress/Queue/journal/security/effective settings |"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/342_Caddy・systemd・PostgreSQL・Java設定設計.md",
+    "section": "9. Configuration validation・drift",
+    "line": 473,
+    "design_table_row": "| Java | Java 25/toolchain、config schema、secret permission | `/info`のversion、health、JVM flag/resource |"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+    "section": "4. Config file・設定sourceの優先順",
+    "line": 874,
+    "design_table_row": "| 優先 | Source | 用途 |"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+    "section": "4. Config file・設定sourceの優先順",
+    "line": 876,
+    "design_table_row": "| 1（低） | Jar内default | 上位で確定済みの非環境値、安全なfail-closed default |"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+    "section": "4. Config file・設定sourceの優先順",
+    "line": 877,
+    "design_table_row": "| 2 | `/etc/schubert-nk/common.yml` | protocol/timezone/monitoring共通 |"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+    "section": "4. Config file・設定sourceの優先順",
+    "line": 878,
+    "design_table_row": "| 3 | `/etc/schubert-nk/<web|api|batch>.yml` | Process別port/pool/path/retention |"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+    "section": "4. Config file・設定sourceの優先順",
+    "line": 879,
+    "design_table_row": "| 4 | `/etc/schubert-nk/<service>.env` | JVM option、config file location等の非秘密 |"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+    "section": "4. Config file・設定sourceの優先順",
+    "line": 880,
+    "design_table_row": "| 5（高） | systemd credential/config tree | DB/MQ password、AES/HMAC key、backup recipient等のsecret |"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+    "section": "5.1 Common・Web",
+    "line": 891,
+    "design_table_row": "| Key | Production initial | Validation/関連UI |"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+    "section": "5.1 Common・Web",
+    "line": 893,
+    "design_table_row": "| `nk.protocol.version` | `001` | 完全一致、UI 232 |"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+    "section": "5.1 Common・Web",
+    "line": 894,
+    "design_table_row": "| `nk.time.display-zone` | `Asia/Tokyo` | Wire/viewだけ、DB/JVM UTC |"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+    "section": "5.1 Common・Web",
+    "line": 895,
+    "design_table_row": "| `nk.monitoring.mode` | `STANDARD` | STANDARD/DEBUG、UI 252 |"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+    "section": "5.1 Common・Web",
+    "line": 896,
+    "design_table_row": "| `nk.web.http.address/port` | `127.0.0.1` / `8080` | Loopback |"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+    "section": "5.1 Common・Web",
+    "line": 897,
+    "design_table_row": "| `nk.web.management.port` | `8081` | Loopback、Caddy非proxy |"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+    "section": "5.1 Common・Web",
+    "line": 898,
+    "design_table_row": "| `nk.web.mq.reply-timeout` | `2s` | 100ms..2s、UI 212/253 |"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+    "section": "5.1 Common・Web",
+    "line": 899,
+    "design_table_row": "| `nk.web.mq.wait.initial/max` | `12` / `20` | max<=20 |"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+    "section": "5.1 Common・Web",
+    "line": 900,
+    "design_table_row": "| `nk.web.session.idle-timeout` | `8h` | UI 226、無断短縮禁止 |"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+    "section": "5.1 Common・Web",
+    "line": 901,
+    "design_table_row": "| `nk.web.session.max-per-user` | `2` | APIが最終強制 |"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+    "section": "5.1 Common・Web",
+    "line": 902,
+    "design_table_row": "| `nk.web.storage.asset-root` | `/srv/schubert-nk/data/assets` | absolute real dir/read-only |"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+    "section": "5.1 Common・Web",
+    "line": 903,
+    "design_table_row": "| `nk.web.storage.transfer-root` | `/srv/schubert-nk/data/transfer` | absolute real dir/read-only |"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+    "section": "5.1 Common・Web",
+    "line": 904,
+    "design_table_row": "| `nk.web.media.max-streams` | `20` | 1..20 |"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+    "section": "5.1 Common・Web",
+    "line": 905,
+    "design_table_row": "| `nk.web.media.max-range-bytes` | `1048576` | UI 223/237と完全一致 |"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+    "section": "5.2 API・JMS・DB",
+    "line": 909,
+    "design_table_row": "| Key | Production initial | Validation/関連UI |"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+    "section": "5.2 API・JMS・DB",
+    "line": 911,
+    "design_table_row": "| `nk.mq.url` | `tcp://127.0.0.1:61616` | Loopback/coreのみ |"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+    "section": "5.2 API・JMS・DB",
+    "line": 912,
+    "design_table_row": "| `nk.mq.sync-request/reply` | UI 231のAddress名 | 321のallowlistと完全一致 |"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+    "section": "5.2 API・JMS・DB",
+    "line": 913,
+    "design_table_row": "| `nk.mq.async-work/web-log/dlq/expiry` | UI 231のAddress名 | Unknown禁止 |"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+    "section": "5.2 API・JMS・DB",
+    "line": 914,
+    "design_table_row": "| `nk.api.sync-consumers.initial/max` | `4` / `8` | DB pool<=8 |"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+    "section": "5.2 API・JMS・DB",
+    "line": 915,
+    "design_table_row": "| `nk.api.async-consumers` | `1` | 固定、変更禁止 |"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+    "section": "5.2 API・JMS・DB",
+    "line": 916,
+    "design_table_row": "| `nk.db.url` | `jdbc:postgresql://127.0.0.1:5432/schubert_nk` | Loopback、parameter allowlist |"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+    "section": "5.2 API・JMS・DB",
+    "line": 917,
+    "design_table_row": "| `nk.db.pool.api.max/min` | `8` / `2` | UI 253 |"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+    "section": "5.2 API・JMS・DB",
+    "line": 918,
+    "design_table_row": "| `nk.db.pool.web.max/min` | `2` / `1` | UI 212の初期上限2、Technical schema専用 |"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+    "section": "5.2 API・JMS・DB",
+    "line": 919,
+    "design_table_row": "| `nk.db.connect-timeout` | `3s` | UI 212 |"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+    "section": "5.2 API・JMS・DB",
+    "line": 920,
+    "design_table_row": "| `nk.api.storage.asset-root` | `/srv/schubert-nk/data/assets` | read-only |"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+    "section": "5.2 API・JMS・DB",
+    "line": 921,
+    "design_table_row": "| `nk.api.storage.transfer-root` | `/srv/schubert-nk/data/transfer` | write、secure root |"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+    "section": "5.2 API・JMS・DB",
+    "line": 922,
+    "design_table_row": "| `nk.inbox.reference/update-retention` | `24h` / `7d` | UI 251、324 |"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+    "section": "5.2 API・JMS・DB",
+    "line": 923,
+    "design_table_row": "| `nk.outbox.sent-retention` | `7d` | PENDING/ERRORは無期限 |"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+    "section": "5.3 Batch・backup",
+    "line": 935,
+    "design_table_row": "| Key | Initial | Validation |"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+    "section": "5.3 Batch・backup",
+    "line": 937,
+    "design_table_row": "| `nk.batch.zone/schedule` | `Asia/Tokyo` / `05:00` | systemd timerと照合 |"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+    "section": "5.3 Batch・backup",
+    "line": 938,
+    "design_table_row": "| `nk.batch.backup-root` | `/srv/schubert-nk/backup` | absolute real dir、other root非重複 |"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+    "section": "5.3 Batch・backup",
+    "line": 939,
+    "design_table_row": "| `nk.batch.backup-generations` | `7` | 固定、短縮禁止 |"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+    "section": "5.3 Batch・backup",
+    "line": 940,
+    "design_table_row": "| `nk.batch.transfer-cleanup` | enabled | 取得ACKなし、次回朝 |"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+    "section": "5.3 Batch・backup",
+    "line": 941,
+    "design_table_row": "| `nk.batch.expiry-retention` | `7d` | DLQに適用しない |"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+    "section": "5.3 Batch・backup",
+    "line": 942,
+    "design_table_row": "| `nk.batch.log-retention` | `90d` | Security hold除外 |"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+    "section": "5.3 Batch・backup",
+    "line": 943,
+    "design_table_row": "| `nk.batch.run-retention` | `400d` | FAILED調査中除外 |"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+    "section": "5.3 Batch・backup",
+    "line": 944,
+    "design_table_row": "| `nk.batch.chunk-size` | notification/question 1000、log 10000 | 1..defined max |"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+    "section": "6. Credential catalog・rotation",
+    "line": 950,
+    "design_table_row": "| Credential ID | Consumer | 形式・rotation |"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+    "section": "6. Credential catalog・rotation",
+    "line": 952,
+    "design_table_row": "| `db-api`,`db-web`,`db-batch`,`db-migration` | 対応process | PostgreSQL SCRAM password、service別。`db-batch`はdumpへ使用しない |"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+    "section": "6. Credential catalog・rotation",
+    "line": 953,
+    "design_table_row": "| `db-backup` | backup unit | QA-043/UIC-003承認済みの`schubert_backup`専用SCRAM password。`schubert-backup` OS userだけへ配布 |"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+    "section": "6. Credential catalog・rotation",
+    "line": 954,
+    "design_table_row": "| `db-inbox-inspector` | 非公開Inbox保守検査processのみ | QA-046/UIC-006/SSC-049の`schubert_inbox_inspector`専用SCRAM password。batch/Web/backup/通常APIへ配布しない |"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+    "section": "6. Credential catalog・rotation",
+    "line": 955,
+    "design_table_row": "| `mq-web`,`mq-api`,`mq-maintenance`,`mq-ops` | 対応process | Artemis credential、Address権限別 |"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+    "section": "6. Credential catalog・rotation",
+    "line": 956,
+    "design_table_row": "| `web-session-aes-current/previous` | Web | AES-256-GCM、key version付き |"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+    "section": "6. Credential catalog・rotation",
+    "line": 957,
+    "design_table_row": "| `web-revoke-aes-current/previous` | Web | Pending context revoke暗号、session keyと分離 |"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+    "section": "6. Credential catalog・rotation",
+    "line": 958,
+    "design_table_row": "| `api-context-aes-current/previous` | API、非公開Inbox保守検査process（SSC-049/QA-046） | `auth_sessions.context_ciphertext`暗号、key version付き。batch/Web/backupへ配布不可 |"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+    "section": "6. Credential catalog・rotation",
+    "line": 959,
+    "design_table_row": "| `api-inbox-response-aes-current/previous` | API、非公開Inbox保守検査process（SSC-049/QA-046） | Inbox replay response暗号、context keyと分離。検査はreadのみ、batch/Web/backupへ配布不可 |"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+    "section": "6. Credential catalog・rotation",
+    "line": 960,
+    "design_table_row": "| `operation-hmac-current/previous` | API | 256 bit以上、HMAC-SHA-256 |"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+    "section": "6. Credential catalog・rotation",
+    "line": 961,
+    "design_table_row": "| `web-log-aes-current/previous` | Webのみ | Technical outbox保存・復号。API ingestへ配布しない（SSC-007） |"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+    "section": "6. Credential catalog・rotation",
+    "line": 962,
+    "design_table_row": "| `backup-age-recipient` | backup unit | 公開keyのみserver保持、private keyはoffline |"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+    "section": "6. Credential catalog・rotation",
+    "line": 963,
+    "design_table_row": "| Caddy TLS key/state | Caddy | Caddy専用OS権限、fingerprint管理 |"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+    "section": "6.2 Runtime credential権限の限定（SSC-049、PG-D-132）",
+    "line": 996,
+    "design_table_row": "| 形式 | Directory | AES file | Access ACL |"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+    "section": "6.2 Runtime credential権限の限定（SSC-049、PG-D-132）",
+    "line": 998,
+    "design_table_row": "| system manager root所有＋専用UID ACL | type directory、mode0550、nlink>=1 | type regular、mode0440、nlink=1、size54～69 | owner root、USER_OBJ=r-x/r--、USER=専用UID:r-x/r--、GROUP_OBJ=---、MASK=r-x/r--、OTHER=---の5 entryのみ |"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+    "section": "6.2 Runtime credential権限の限定（SSC-049、PG-D-132）",
+    "line": 999,
+    "design_table_row": "| 専用UID所有fallback | type directory、mode0500、nlink>=1 | type regular、mode0400、nlink=1、size54～69 | access ACLなし、owner=専用UID、実filesystem readonly必須 |"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+    "section": "6.8 非公開launcherの入力・receipt・credential profile（SSC-049、PG-D-144）",
+    "line": 1067,
+    "design_table_row": "| Key | 受理契約 |"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+    "section": "6.8 非公開launcherの入力・receipt・credential profile（SSC-049、PG-D-144）",
+    "line": 1069,
+    "design_table_row": "| `CREDENTIALS_DIRECTORY` | systemdが設定するprivate root、1～4096文字、InspectorSettingsの絶対正規化path（`/`不可）。特定の未保証systemd内部path prefixを推測しない。保持inode/専用UID/ACL/ROは既存readerが毎回検証 |"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+    "section": "6.8 非公開launcherの入力・receipt・credential profile（SSC-049、PG-D-144）",
+    "line": 1070,
+    "design_table_row": "| `NK_INSPECTOR_DB_URL` | 1～256文字、§6.6のcanonical loopback専用DB URL |"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+    "section": "6.8 非公開launcherの入力・receipt・credential profile（SSC-049、PG-D-144）",
+    "line": 1071,
+    "design_table_row": "| `NK_INSPECTOR_RUN_ID` | canonical小文字36文字UUID、parse後toStringが原値と一致 |"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+    "section": "6.8 非公開launcherの入力・receipt・credential profile（SSC-049、PG-D-144）",
+    "line": 1072,
+    "design_table_row": "| `NK_INSPECTOR_CUTOFF` | 1～32文字、UTC Instant canonical文字列と完全一致、InspectionRunの年/精度契約（microsecond以下）を維持。offset別表現/補完/丸め禁止 |"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+    "section": "6.8 非公開launcherの入力・receipt・credential profile（SSC-049、PG-D-144）",
+    "line": 1073,
+    "design_table_row": "| `NK_INSPECTOR_FINGERPRINT_VERSIONS` | 1～65536文字のcomma区切り、空要素/重複不可、各versionは§6.5の1～16 ASCII。HMAC秘密値は含めない |"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+    "section": "6.13 永続run原本・activation・completion（SSC-055/PG-D-156、先行b6b5f0f6）",
+    "line": 1152,
+    "design_table_row": "| 種別 | 行1 | 続く行 | byte長 |"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+    "section": "6.13 永続run原本・activation・completion（SSC-055/PG-D-156、先行b6b5f0f6）",
+    "line": 1154,
+    "design_table_row": "| anchor | `NKRUN1` | run UUID、cutoff | 72 |"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+    "section": "6.13 永続run原本・activation・completion（SSC-055/PG-D-156、先行b6b5f0f6）",
+    "line": 1155,
+    "design_table_row": "| begin/active | `NKACT1` | run UUID、cutoff、activation UUID | 109 |"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+    "section": "6.13 永続run原本・activation・completion（SSC-055/PG-D-156、先行b6b5f0f6）",
+    "line": 1156,
+    "design_table_row": "| done | `NKDONE1` | run UUID、cutoff、activation UUID、ended_at、`0`または`10` | 140/141 |"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+    "section": "6.15 固定永続namespaceとrun lifecycle（SSC-055/PG-D-158、先行36b5f85b）",
+    "line": 1194,
+    "design_table_row": "| Session操作 | 前提と順序 | 結果/中断保全 |"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+    "section": "6.15 固定永続namespaceとrun lifecycle（SSC-055/PG-D-158、先行36b5f85b）",
+    "line": 1196,
+    "design_table_row": "| start(BatchRun, activationUUID) | null/型検証→全scan、active/pendingなし、run UUID未登録、activation UUIDは全履歴未使用。callerがDB既存legacy ID非衝突を別照会。anchor→begin→activeを各durable公開→全graph期待値と照合 | 同じ固定activationを返す。各公開途中の失敗は原本/partを保全、停止/update等はcallerがこの成功後だけ行う |"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+    "section": "6.15 固定永続namespaceとrun lifecycle（SSC-055/PG-D-158、先行36b5f85b）",
+    "line": 1197,
+    "design_table_row": "| resume(runUUID, nextActivationUUID)・activeあり | 全scan、active.runが指定runと一致 | 同activationとOptional completionを返す。doneありは回復状態であり今回の副作用実行成功とは数えない。勝手にactiveを消さず、親終端確認後completeへ |"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+    "section": "6.15 固定永続namespaceとrun lifecycle（SSC-055/PG-D-158、先行36b5f85b）",
+    "line": 1198,
+    "design_table_row": "| resume・activeなし/未完了beginあり | pendingが指定runだけ、anchor/未完了begin完全一致 | 同beginからactiveだけ再公開、同activationを返す。nextActivationUUIDへ取り替えない |"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+    "section": "6.15 固定永続namespaceとrun lifecycle（SSC-055/PG-D-158、先行36b5f85b）",
+    "line": 1199,
+    "design_table_row": "| resume・activeなし/anchorのみまたは全activation完了 | 原本必須、他runのpendingなし、nextActivationUUID未使用 | 新begin→active、原本cutoffを変更しない。旧completionを新activationへコピーしない |"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+    "section": "6.15 固定永続namespaceとrun lifecycle（SSC-055/PG-D-158、先行36b5f85b）",
+    "line": 1200,
+    "design_table_row": "| complete(MaintenanceCompletion) | 全scan、指定activationとanchor/begin一致、activeは同activationまたは同done確定済みの不存在。別active/別既done・doneなしでactive不存在は拒否。callerは実子終端/親の許容morning終端/DB stepを別確認 | 同doneは全値一致だけ、新doneはdurable公開→同activeだけ退役→全graph照合。同じcompletion再試行は冪等。別終了時刻/0↔10で上書きしない |"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+    "section": "6.16 完全な退役計画による原本GC（SSC-055/PG-D-161、先行4d534ba9）",
+    "line": 1224,
+    "design_table_row": "| record | 正規ASCII LFの順序 | 長さ |"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+    "section": "6.16 完全な退役計画による原本GC（SSC-055/PG-D-161、先行4d534ba9）",
+    "line": 1226,
+    "design_table_row": "| plan | 既存NKDONE1をそのまま使用。nameはactivation UUID | 140/141 |"
+  },
+  {
+    "document": "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+    "section": "6.16 完全な退役計画による原本GC（SSC-055/PG-D-161、先行4d534ba9）",
+    "line": 1227,
+    "design_table_row": "| marker | `NKRET1`、run UUID、cutoff、latestEnded、preparedAt、count、digest、最後LF | 195～204 |"
+  }
+]
