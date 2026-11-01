@@ -1,0 +1,121 @@
+{
+  "published_at_jst": "2026-10-03",
+  "source_branch": "dev-foundation",
+  "source_commit": "075a864d826ba91d6bb699b8d31e734317a84fd4",
+  "target_branch": "main",
+  "scope": [
+    "README.md",
+    "AGENTS.md",
+    "documents/100_RD",
+    "documents/200_UI",
+    "documents/300_SS",
+    "documents/900_OTHER/910_台帳/911_確認事項一覧.md",
+    "documents/900_OTHER/910_台帳/912_要件定義フィードバック事象管理台帳.md",
+    "documents/900_OTHER/910_台帳/913_基本設計修正管理台帳.md",
+    "documents/900_OTHER/910_台帳/914_詳細設計修正管理台帳.md"
+  ],
+  "meaning": "Latest committed design descriptions and design-change records; implementation/PT completion states remain unchanged",
+  "ssc_included": "SSC-001 through SSC-166; retain open implementation/PT statuses",
+  "excluded": "Uncommitted changes and unaccepted implementation/configuration/tools/evidence",
+  "pmo_qa_update": {
+    "date_jst": "2026-10-03",
+    "base_main_commit": "63da074623aea961413acc8534888fb0b42d4286",
+    "read_only_implementation_context_commit": "e3183cfa8563345e0cf59cbb052b412b015b793f",
+    "authority": "Direct user PMO answers QA047-049 and continuing authorization to publish finalized design documents to main",
+    "approved": [
+      "QA-047: limited recovery with RCA/corrective/preventive actions; execution not certified",
+      "QA-048: business DB authoritative; Web locator revalidated by API on every GET",
+      "QA-049: combined 10 pending/consumed tokens and versioned completion state"
+    ],
+    "still_pending": [],
+    "scope": [
+      "documents/200_UI/220_画面・認証/224_質問・通知画面設計.md",
+      "documents/200_UI/220_画面・認証/225_管理・ログ画面設計.md",
+      "documents/200_UI/220_画面・認証/226_認証・認可・セッション設計.md",
+      "documents/200_UI/240_データ/241_DB論理構成設計.md",
+      "documents/200_UI/240_データ/242_主要テーブル・制約設計.md",
+      "documents/200_UI/250_運用・非機能/251_朝バッチ・バックアップ・起動停止設計.md",
+      "documents/300_SS/310_アプリケーション/311_モジュール・package・class責務設計.md",
+      "documents/300_SS/310_アプリケーション/313_画面template・controller・form設計.md",
+      "documents/300_SS/310_アプリケーション/314_認証・認可・session・CSRF実装設計.md",
+      "documents/300_SS/320_メッセージング/324_Outbox・Inbox・冪等性・再送設計.md",
+      "documents/300_SS/330_データ・ファイル/331_DB物理・DDL・index・権限設計.md",
+      "documents/300_SS/340_batch・基盤/341_朝batch・backup・削除・再実行設計.md",
+      "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+      "documents/300_SS/350_運用・品質/353_障害検知・復旧runbook.md",
+      "documents/900_OTHER/910_台帳/911_確認事項一覧.md",
+      "documents/900_OTHER/910_台帳/913_基本設計修正管理台帳.md",
+      "documents/900_OTHER/910_台帳/914_詳細設計修正管理台帳.md"
+    ],
+    "completion": "Design descriptions only; native recovery, implementation, DDL deployment, independent PT and related incidents remain open",
+    "publication_commit_message": "docs(pmo): record QA047-049 decisions and quantify QA050 retry load",
+    "verification_receipt": "Outside the repository: PMO/20261003/qa047_050_publication.json; remote commit verified after push",
+    "subsequent_resolution": "QA050 subsequently approved by user; current decision and open implementation/test status recorded in qa050_approval"
+  },
+  "qa050_approval": {
+    "date_jst": "2026-10-03",
+    "base_main_commit": "27c9b84bb65c195977b2be72033928a91084979e",
+    "read_only_implementation_context_commit": "e06916a6a5134be025790a5b2fa7446a4c470b28",
+    "authority": "Direct user QA050 approval: implement 15-minute retries and adjust interval if IT/ST performance tests identify issues; continuing authorization to publish finalized designs to main",
+    "retry_policy": "initial 5s/30s/5m backoff retained; subsequent retries every 15 minutes; test-driven interval adjustment and repeat comparison",
+    "status": "QA050 answered/approved; UIC009/SSC171 design finalized, implementation/deployment/PT/IT/ST still open",
+    "scope": [
+      "documents/200_UI/220_画面・認証/226_認証・認可・セッション設計.md",
+      "documents/200_UI/240_データ/242_主要テーブル・制約設計.md",
+      "documents/200_UI/250_運用・非機能/251_朝バッチ・バックアップ・起動停止設計.md",
+      "documents/200_UI/250_運用・非機能/253_性能・容量・可用性・セキュリティ設計.md",
+      "documents/300_SS/310_アプリケーション/312_処理sequence・method・例外・transaction設計.md",
+      "documents/300_SS/310_アプリケーション/314_認証・認可・session・CSRF実装設計.md",
+      "documents/300_SS/330_データ・ファイル/331_DB物理・DDL・index・権限設計.md",
+      "documents/300_SS/340_batch・基盤/341_朝batch・backup・削除・再実行設計.md",
+      "documents/300_SS/340_batch・基盤/343_設定file・directory・初期data・migration・切戻し設計.md",
+      "documents/300_SS/350_運用・品質/351_Log・metric・alert・error code設計.md",
+      "documents/300_SS/350_運用・品質/352_Security・credential・監査実装設計.md",
+      "documents/300_SS/350_運用・品質/354_PT・IT試験観点詳細設計.md",
+      "documents/900_OTHER/910_台帳/911_確認事項一覧.md",
+      "documents/900_OTHER/910_台帳/913_基本設計修正管理台帳.md",
+      "documents/900_OTHER/910_台帳/914_詳細設計修正管理台帳.md"
+    ],
+    "publication_commit_message": "docs(pmo): approve QA050 fifteen-minute retries and IT-ST tuning",
+    "verification_receipt": "Outside repository: PMO/20261003/qa050_approval_publication.json",
+    "excludes": [
+      "implementation code",
+      "DDL deployment",
+      "configuration changes",
+      "VM recovery",
+      "unaccepted evidence"
+    ]
+  },
+  "qa051_approval": {
+    "date_jst": "2026-11-02",
+    "base_main_commit": "8b91944df5820535e23ba2469740f1c0aa94c447",
+    "read_only_implementation_context_commit": "d3edd2c50baeac5bae8d9522138e5394741521cf",
+    "authority": "Direct user PMO reply: 1. 問題ありません。 2. 問題ありません。 Approval of QA-051 items1 and2; AGENTS continuing authority for design-only publication",
+    "approved": [
+      "NK catalog action names in DIF-010",
+      "Preserve existing logs and compare operation-correlated safe projections against independent NK action/category expectations and missing/duplicate-zero evidence"
+    ],
+    "status": "QA051 decision resolved; UIC010/SSC184 design finalized; oracle/artifact implementation, independent tests, actual same-source CHR-L01 and formal acceptance open",
+    "scope": [
+      "documents/900_OTHER/910_台帳/911_確認事項一覧.md",
+      "documents/900_OTHER/910_台帳/913_基本設計修正管理台帳.md",
+      "documents/900_OTHER/910_台帳/914_詳細設計修正管理台帳.md",
+      "documents/200_UI/220_画面・認証/225_管理・ログ画面設計.md",
+      "documents/200_UI/250_運用・非機能/252_ログ・監視・障害復旧設計.md",
+      "documents/200_UI/260_引継ぎ・監査/264_現行互換性Characterization Test仕様.md",
+      "documents/300_SS/350_運用・品質/351_Log・metric・alert・error code設計.md",
+      "documents/300_SS/350_運用・品質/355_Characterization Test実行準備・PG開始gate.md"
+    ],
+    "verification_receipt": "Outside repository: PMO/hourly-monitor/qa051-approval-20261102.json",
+    "baseline_changed": false,
+    "execution_resumed": false,
+    "excluded": [
+      "product/test/tool code",
+      "configuration/deployment",
+      "raw evidence and baseline",
+      "PGPT and automation resume",
+      "other safety/ownership/authority/quality holds",
+      "unregistered visible/business differences"
+    ]
+  }
+}
