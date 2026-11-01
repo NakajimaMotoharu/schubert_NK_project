@@ -1,5 +1,7 @@
 # Web入場・実待機・割込み PT結果
 
+2026-11-01 16:03 計測表記訂正：本文/456のjoint49は誤記。元17825 manifestを変更せず4862e1の読取で確認し、necessaryJointRepeatedMethodsは16+8+24+3=51 method、jointQualificationReferencesは4 run。totalRepeatedOriginalMethods135と2962=2827+135は不変。下記の旧記述を履歴として保持し、今後は「joint必要repeat51method/4run」と単位を明記。新成果・再実行・費用消化への加算0。
+
 source6b53efeec87f3ec36a840dd8e7759656cb4aee5c/未配備、branch dev-foundation/qualification HEAD38cfc28168a1e07d10a6b08149f8c12a67ca8782。PG17810開始event3685、固定1.5/4/8pp cap10。原Main/Test変更0。新quality Test二件と全original Admission三件を同JVMで一度実行、原三のrepeatは新testを含む全Source資格に必要、確認再演/旧exec union0。
 
 PG17816/session28865終端5a5de2真正0/五二FESabort0→17818/session7283終端7f8e2f真正0→17820/5f7fed真正0/独立31・五oracle・Test CRC二。元Sourceの未達83/87/88もcoverされ、全一Source一Codeの48L/9M/1C/24Bは全miss0、strictgate0。先に作った公開active lease一の状態・実worker TIMED_WAITING観測・Futureとexecutor終端・固定IO例外/cause null/suppressed0/割込みflagを独立oracleとした。worker状態を停止証明に代用0。新二件のnull契約はlatch先行publication/worker nonnull・outcome異常時だけexception参照、元三のnull/欠落/範囲negativeを保持。
