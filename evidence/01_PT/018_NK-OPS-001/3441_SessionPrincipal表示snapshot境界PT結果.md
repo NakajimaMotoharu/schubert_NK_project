@@ -1,0 +1,25 @@
+# SessionPrincipal 表示snapshot境界 独立PT結果
+
+source6b53efeec87f3ec36a840dd8e7759656cb4aee5c/未配備、qualification HEADbec06882d4cdba94a6dbf556a8b4f6ae9913bf3e/branch dev-foundation。群17910/event3695/固定1/3/6pp cap10、3440の独立五件。Production Main/Test不変更、保留suiteの抽出0。
+
+17910/session55433終端8ef590真正0・五一FESabort0→17912/session93700終端ce0f02真正0→17914/c58f9b真正0。全一Source一Codeの15L3M1C10B全miss0/strictgate0。独立metadata32/五oracle/Test CRC一、単一exec・原byteとCRC一致、coverage union0。NFC表示64byte/比較key96byteの区別、UTF8境界・不正Unicode/control/末尾ASCIIspace・四field null・USERADMIN snapshot/redacted表示を固定独立期待値で確認。原環境・時刻・command・XML/exec/class・OS/JDK・branch/HEADはraw/post各manifest、期待値根拠は3440を正とする。normal14216/静的14224は同一Main hashで再利用し確認再演0。
+
+|段階（evidence/provisional/<名称>/manifest.json）|SHA256|
+|---|---|
+|PG17909-session-principal-boundary-review-v1|9ab220a7480bfe027d3229da85e384e8b6857c8b5a49a7f07559de7ff3df7031|
+|PG17910-session-principal-boundary-five-pt-v1|10e447a191229f8a74566e03259e828a729644c9b3cf1c26b4fd2521efd000d2|
+|PG17912-session-principal-boundary-five-post-v1|d560235918b9a547adbd511a74563a3b8d5388dbe9ba337a65fb2891ebf60676|
+|PG17914-session-principal-boundary-five-independent-v1|903cf55c01aec31640f320030ec46ccbd5ba7a860b5eb2cb9355e5a9b6257984|
+|PG17919-current2838-session-principal-registry-v2|ac992c8e92288235c219c8331a7801a36084b8e6387d5949945552515de5ee27|
+|PG17920-current2838-session-principal-registry-post-v1|9f4976670cd75b0fb07019c932b62d7646ce062054551c1486025e9d8efa4597|
+|PG17922-current2838-session-principal-wbs-v1|45bc4f20e8c7992a71ff8416b27ebe85ff58041c294686c321f2c8458f6e3356|
+|PG17924-current2838-session-principal-wbs-post-v1|41848e6a9324d321912dd866f840aa7a2c291e64b6339805c55b54f9006629b3|
+|PG17925-session-principal-source-binding-v1|7dda182cfb0975ab7b735b30dc533239346f20771c2fb49f4f7fac8da12a47c5|
+
+17918/714877真正1はPREV/OUT連続置換の自己参照による新registryの出力前失敗。修正前BUG2220/YKT1967起票・元entry2def97e6/失敗状態を保持。新17919/fdbbe7真正0はPREV17888-fd5a392e literalとOUT分離、self-reference/wronghashの否定二。17920/session46914終端7a8576真正0 metadata34/置換四、17922/ee8ec5→17924/session77739終端15f8ef真正0 metadata29/ordinary四/writerbinding二。新fixture原五/成功readerを再実行しない。
+
+17925は完成済みactualExit0のimmutable manifestを回収。context中断で元wrapper終端表示は未回収のため、その終了を推測せず保持。再実行せず独立読取581bb0真正0でentry/helper hash、八入力のsource/actualExit/hashを確認。source結合の証拠であり実PT再実行ではない。旧partial15759-a11c2bc0はqualificationReplacedUnitHistoryへ保存、全同一分母を新単一execへ置換し元測定不変。
+
+固定公開typed context/Instantとmemory値だけ。実context/login/session/Cookie/JSONdecoder/SecurityContext/HTTP/DBJMS/鍵/crypto/Root/native0、直接Thread/executor/task/UUID/乱数0。record公式生成filterは不変更、component assertはsnapshot契約の確認でcoverage目的touchではない。NPEはnonnull API invariant違反としてpublication前拒否しcatch正常化0。並行/実再送/認証成立の外側責務は未実施。
+
+固有2838/424・普通2806/5786残2980/quality32別/resource79内数、214JVM2973=2838+135必要repeat、joint51method/4run不変。Main5871020/822Code198zero、四294439Code414（今回+一）/自然185200/NoCode定義23-23/partial85358（今回−一）、37注釈別・owner522baseline236候補302UNKNOWN不変。NoCode17/37の母集団補正とは別に新五/一Source四100を実測として記録。正式1964/53・歴史17/190・新WBS受入0・工数null・QA051final/G07G13F03/451/全HOLD維持。BUG2220有限再試験済み・保存commit/push後に閉鎖、工程全完了ではない。

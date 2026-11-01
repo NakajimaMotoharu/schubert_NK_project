@@ -1,5 +1,7 @@
 # PGPT成果物一覧・進捗
 
+2026-11-01追加：3440/3441/PG-D1110。Principal表示snapshot独立五一成功、全一Source15L3M1C10B四100/旧partial履歴保存。現2838/424・普通2806/quality32・四294439、正式1964/53/新WBS受入0/工数null不変。17918工具cascadeはBUG2220/YKT1967先行→17919v2と独立metadata否定二・WBS二面真正0、原成功再演0。17925完成manifest回収/元wrapper終端未回収は区別し3441記録。
+
 2026-11-01追加：3438/3439/PG-D1109。Caddy数字peer/単一headerの新独立memory六一成功/独立32・六oracle・TestCRC一、全一Source20L3M1C18B四100。現2833/423・quality27別/普通2806不変・四293438新一/partial86359、実Caddy/filter/audit/session/Root/native受入0、元partial履歴保持・正式工数null/HOLD不変。
 
 2026-11-01追加：3436～37/PG-D1108。NoCode interface17の全counter0とpackage-info37の公式非計測を分離・元54byte保持、測定5871020/Code822不変・四292437/固有2827不変。これは母集団補正で新実装/PT・WBS受入0。2218/19を失敗保持/成功解析JVMのmetadata回収・再演0で是正、joint51method/4runへ記述訂正・総repeat135不変、正式工数null/HOLD不変。
