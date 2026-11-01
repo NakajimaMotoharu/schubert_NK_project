@@ -1,5 +1,7 @@
 # PGPT成果物一覧・進捗
 
+2026-11-01追加：3363～65/PG-D1080、元成功投影7/1成功・独立22七oracle、元DB helper65/lifecycle2非実行・Main全17physical未達保持。現2650/387/四286430不変、registry34/3profile/WBS29ordinary四・工具2198/99元失敗と新version是正保持、正式工数null/HOLD不変。
+
 2026-11-01追加：3361/62/PG-D1079、MorningDB runtime18静的PT設計対応・動的0/metadata17。既全文PG参照を保持し新全文PG0、現2643/386・四286430/正式工数null・全HOLD不変。
 
 2026-11-01追加：3358～60/PG-D1078、RuntimePOM原4/2成功・独立20四oracle/全1843Main非実行/CRC0、現2643/386・resource71内数、Main546940/四286430不変。registry34/WBS29ordinary四・正式工数null/全HOLD保持。
