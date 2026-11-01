@@ -1,0 +1,9 @@
+# Caddy固定拒否例外・既存exec受動補完仕様
+
+群PG18050/開始3713、HEAD32a08ad595bc8af99543dc6f3e68fea410f1d34b、source6b53efeec87f3ec36a840dd8e7759656cb4aee5c未配備。事前固定0.5/1.5/4pp cap10、fresh83%使用/17残、F03主費・canonical参照P015-02追加費0。3713の参照P003-03は誤記で次eventにP015-02へ追記訂正、開始予算不変/費用付替え0。
+
+3438/3439・SS314§3/5/342§3.1、NK-WEB001/FUN001/AUT001004・UI226234・BUG066/PG-D105/PT-WEB082～089。CaddyRequestRejectedException全13行・元CaddyAddressBoundaryContractTest全六method/denied helperを読了。PROXY-BOUNDARY002～005の既実行は固定request proxy is invalid/cause null/suppressed0を直接assert済み。nonnull request・Servlet/header拒否の独立literal oracleを元のまま使い、例外ctor一Source/一Codeを旧17880の同単一execから初測定する。新Test/新製品JVM/新case/repeat0、既成功確認だけの試験再演0。
+
+Main SHA d6c50441cde4887be9a0d9585bb41512ee5228042419b78d48437a1f88620967、全closure/normalJar/snapshot/現source・Code属性を照合。元raw f4c4d89053c402a449304b947428e2f9203bc86453c90c2db39688f3094c6605、元post22f6c56e81a6194651e054694fb881c17da3857840e4db491f570d429e5851bb、独立2594c867ee5d542223d53feaa3c2caaf0ab99bc378f50f1b67fbb9a9c0f9e51aを不変再用。元XML六/一・FES0/元Test全CRC/既zero held-native auditを同execSHAへ束縛。四counter各値を公式JaCoCo0.8.15/資格済WholeSourceCoverageMeasureV1で受動測定し、branch自然0はN/Aとして四100へ転換しない。counter未達/unknown class/別session/CRC不一致は拒否。
+
+command python3 -B tools/quality/pg11123_checked_python_entry.py tools/quality/pg18050_caddy_exception_passive_post_v1.py。製品classは分析対象byteでClassLoaderへ載せず、metadata/exec readerのみ。新sourceへの旧成功移植なし、元production Main/Test/exec/xml不変、除外/union0。解析結果を3455へhash/環境/command/終了codeと記録し、独立metadata反例・全旧registry/cost/受入保持と二面WBS bindingを確認。新受入/正式1964/53・歴史17/190・工数null/QA051final/451/HOLDは更新しない。実Caddy/HTTP/認証/filter/audit/session/DB/Root/nativeの証拠として使わない。

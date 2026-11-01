@@ -1,0 +1,25 @@
+# Caddy固定拒否例外・既存exec受動補完結果
+
+3454/PG-D1117、source6b53efeec87f3ec36a840dd8e7759656cb4aee5c未配備・開始HEAD32a08ad595bc8af99543dc6f3e68fea410f1d34b/dev-foundation。開始3713/固定0.5-1.5-4pp cap10。関連canonical owner P015-02、3713のP003-03は誤記・本結果とendで追記訂正、開始予算/実費付替え0。
+
+元17880六件/一suiteのexec/xml/Test/sourceを不変再用、新PT/new JUnit JVM/repeat/新製造0。受動18050/aea819真正0で全一Source一Code2L1M1C全miss0・branch0=N/A、strictgate1保持。readerはProduct classをロード/実行せずbyte分析のみ。元固定request proxy is invalid/cause null/suppressed0 oracleを保持し、元post22f6c56e/独立2594c867の同exec zero held/native auditへ結合。18052/015744真正0は二十semantic否定/独立constructor分母・元単一session/XML/CRC/source/oracle一致。
+
+旧18058/ed8ff6真正0・7f55093dは入力否定数2を実施せずliteral報告した未資格draft。修正前BUG2227/YKT1974、全旧byte保存/後続へ流用0。新18059-v2/9f8fed真正0は既exec欠落/既測定Source二反例を実拒否・labelsから件数算出。18060/session12045終端ef072c metadata34/境界四/入力二・18062/bebfb5→18064/session34465終端19f22c metadata29ordinary四binding二・18065/6de899八source結合を全真正0確認。
+
+|公開manifest（evidence/provisional/）|SHA256|
+|---|---|
+|PG18050-caddy-exception-passive-post-v1/manifest.json|44dd5ce1b6c9d4f6eac7ab5044ee9fdff10ea292f825723625a48e3f457f6b30|
+|PG18052-caddy-exception-passive-independent-v1/manifest.json|c78ba416730171b13c38379a61c44252acc58c2b52bb14294f6b3effbb1158a5|
+|PG18059-current2863-caddy-passive-registry-v2/manifest.json|e3d39ba1ef37df634338d1be0bc6cb02f0104c16c3c6c634071d772288f78bba|
+|PG18060-current2863-caddy-passive-registry-post-v1/manifest.json|3bea75de1a337f7d40c771452554e12aeb15611237b8be7df3e8c91babdf755f|
+|PG18062-current2863-caddy-passive-wbs-v1/manifest.json|03384ebeebf0015bbedc02df01949ee964e36044daf6795ed8da9af2a87cae81|
+|PG18064-current2863-caddy-passive-wbs-post-v1/manifest.json|03b4e18eb18754ca54787d02ffe54b2cdd488add8d630ee2f7582ea7923f944f|
+|PG17882-caddy-address-boundary-six-post-v1/manifest.json|22f6c56e81a6194651e054694fb881c17da3857840e4db491f570d429e5851bb|
+|PG17884-caddy-address-boundary-six-independent-v1/manifest.json|2594c867ee5d542223d53feaa3c2caaf0ab99bc378f50f1b67fbb9a9c0f9e51a|
+|PG18065-caddy-passive-source-binding-v1/manifest.json|cc11d6ae3a09cee5f51755ff84b2ce6d0295ef01094071a7e3db8d2bd36957b8|
+
+各manifestにsource/invocation/command/終了code/hash、元環境は17880のreportedEnvironmentを継承し現在JDKで上書きしない。新受動reader command/toolchainは18050.passiveCoverageStageを参照。実入力は既exec＋全class/snapshot、期待は13行の固定constructorと上位SS314/342・3438独立literal、実値2L1M1C全miss0/branch分母0。対象Main SHA d6c50441cde4887be9a0d9585bb41512ee5228042419b78d48437a1f88620967、元Test SHA f0612ddb3090a317163f1793408c724796c1ab818fde23b0942192283178c6c0。除外/execunion/古source移植0。
+
+固有2863/431・220JVM3018/必要repeat155/joint71method七runすべて不変。普通2806/5786不足2980/quality57別、Main597Source/1030physical（832Code198zero）、四303/448Code423不変、自然191/208へ一追加、NoCode23/23・partial80/351不変。owner532baseline236候補302UNKNOWN。正式1964/53・歴史17/190/新WBS受入0/工数null/QA051final/451/全HOLD維持。静的候補QuestionController/StartupSchemaProjection/RunReference/InspectionExecutorは実DBfixture、BorrowedJdbcFatal329はTIE.preserveFatal依存でwholeHOLD・method抽出/代替実行0。
+
+fresh18:48 used83/rem17/reset1793774153/短期null。共有丸め差0は無償を意味せずallocated/N/T null、usage18:43 cursor11a9bbf8f3c60c60fce1bc5fe44db1597cf524db59fed73509fd156588f943b8/incompleteを維持。end/保存/commit/pushは次checkpointへ追記。
