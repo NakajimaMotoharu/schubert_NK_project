@@ -1,0 +1,96 @@
+{
+  "actualExit": 0,
+  "completedWitnessStages": [
+    {
+      "name": "javac",
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg18318-composite-bytecode-witness-v1/javac-exit.safe.json",
+      "sha256": "e13731e7e52a8d3275968877d4514bb14f01324e66bedaa797ba0cc3a3f3281c",
+      "stage": {
+        "actualExit": 0,
+        "command": [
+          "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/javac",
+          "--release",
+          "25",
+          "-proc:none",
+          "-Xlint:all",
+          "-Werror",
+          "-cp",
+          "/home/mini/codex/project1/work/pgpt-runs/PG379/pg13376-db-duration-eight-post-v1/audit:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.core/0.8.15/org.jacoco.core-0.8.15.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm/9.10.1/asm-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-tree/9.10.1/asm-tree-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-commons/9.10.1/asm-commons-9.10.1.jar",
+          "-d",
+          "/home/mini/codex/project1/work/pgpt-runs/PG379/pg18318-composite-bytecode-witness-v1/tool-classes",
+          "/home/mini/codex/project1/work/pgpt-foundation/tools/quality/architecture/CoverageDeclaredMethodWitnessV1.java"
+        ],
+        "cwd": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg18318-composite-bytecode-witness-v1",
+        "endUTC": "2026-11-01T13:54:20.469935+00:00",
+        "startUTC": "2026-11-01T13:54:20.004373+00:00",
+        "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stdoutSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "timedOut": false
+      }
+    },
+    {
+      "name": "static-instrument-bytes",
+      "path": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg18318-composite-bytecode-witness-v1/static-instrument-bytes-exit.safe.json",
+      "sha256": "d98cf1b5d8a598e2e8a84f4364a814cf1f38f389bf46cc5ccd33727de906f893",
+      "stage": {
+        "actualExit": 0,
+        "command": [
+          "/home/mini/codex/project1/work/toolchain/jdk-25.0.4/bin/java",
+          "-cp",
+          "/home/mini/codex/project1/work/pgpt-runs/PG379/pg18318-composite-bytecode-witness-v1/tool-classes:/home/mini/codex/project1/work/pgpt-runs/PG379/pg13376-db-duration-eight-post-v1/audit:/home/mini/codex/project1/work/toolchain/m2/repository/org/jacoco/org.jacoco.core/0.8.15/org.jacoco.core-0.8.15.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm/9.10.1/asm-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-tree/9.10.1/asm-tree-9.10.1.jar:/home/mini/codex/project1/work/toolchain/m2/repository/org/ow2/asm/asm-commons/9.10.1/asm-commons-9.10.1.jar",
+          "CoverageDeclaredMethodWitnessV1",
+          "/home/mini/codex/project1/work/pgpt-runs/PG379/pg14216-typed-marker-guard-six-compile-v1/snapshot/src/schubert-nk-web/target/classes/dev/codex/schubert/nk/web/config/ScenarioLogMvcConfiguration.class",
+          "/home/mini/codex/project1/work/pgpt-runs/PG379/pg18318-composite-bytecode-witness-v1/instrumented-public-config.class"
+        ],
+        "cwd": "/home/mini/codex/project1/work/pgpt-runs/PG379/pg18318-composite-bytecode-witness-v1",
+        "endUTC": "2026-11-01T13:54:20.585406+00:00",
+        "startUTC": "2026-11-01T13:54:20.470268+00:00",
+        "stderrSha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stdoutSha256": "ba570898fa9db15c111491fd66bf8504f665c89bf1e087e3551c0ee8855f4a72",
+        "timedOut": false
+      }
+    }
+  ],
+  "effortPercent": null,
+  "failedEvidencePromotedToPass": false,
+  "formalUpdated": false,
+  "invocation": {
+    "actualPythonCommand": [
+      "/usr/bin/python3",
+      "-B",
+      "tools/quality/pg18317_carrier_failure_preservation.py"
+    ],
+    "arbitraryArgumentsRecorded": false,
+    "entrypointPath": "tools/quality/pg18317_carrier_failure_preservation.py",
+    "entrypointSha256": "5e06ff225e658fc572cdfe3fed19a2273d4d36cfb66f710a3d8630c1e5ca3ac4",
+    "helperPath": "tools/quality/host_tool_invocation.py",
+    "helperSha256": "85d616a3db4ff47f4c95ae2e0dd57954bc2b09f28b8f2a685b986e5621545c46",
+    "libraryPath": "tools/quality/pg18317_carrier_failure_preservation.py",
+    "librarySha256": "5e06ff225e658fc572cdfe3fed19a2273d4d36cfb66f710a3d8630c1e5ca3ac4",
+    "loadedProjectPythonSources": {
+      "tools/quality/g07_host_class_provenance_inputs.py": "a676cb3e4145177c3c243722d737592ce7d44c3f29cfe4f670662ef7651f046b",
+      "tools/quality/host_tool_invocation.py": "85d616a3db4ff47f4c95ae2e0dd57954bc2b09f28b8f2a685b986e5621545c46",
+      "tools/quality/pg18317_carrier_failure_preservation.py": "5e06ff225e658fc572cdfe3fed19a2273d4d36cfb66f710a3d8630c1e5ca3ac4"
+    },
+    "provenance": "OBSERVED_SYS_ARGV_AND_ORIG_ARGV_NOT_RECONSTRUCTED"
+  },
+  "newAccepted": 0,
+  "oldTestsOrToolsReexecuted": false,
+  "oldXmlHashes": {
+    "TEST-dev.codex.schubert.nk.api.application.scenario.ScenarioCarrierSuccessContractTest.xml": "b05b0b454a6a33bdffdc310ec05139bd5fa5188acdf1b07a7598beae7ce7ea0e",
+    "TEST-dev.codex.schubert.nk.api.logging.ProjectionFailureValueContractTest.xml": "57532dd27bda43b9fbbaca8b2feaed7d04aea8fe394e65845538b008449bb0b0",
+    "TEST-dev.codex.schubert.nk.api.maintenance.InboxFailureValueContractTest.xml": "fa4a730848dd885686588feae4d7e8730189642d2a56f545ae75eb0c2151f53a",
+    "TEST-dev.codex.schubert.nk.web.config.CompositeMvcDeclarationContractTest.xml": "0559a3f33b8c6f844788635b41f2f8e7efbf4c2bc40cefc364d94a683b7983e2"
+  },
+  "originalFailedCases": 1,
+  "originalFailedRawExit": 1,
+  "originalFailedRawSha256": "01fd16320e3b840c6f1feed9407c06558f13adae8e09a29a0ce8b78871072fa4",
+  "originalFailedWitnessEntrySha256": "4cc7f723ae8d54bdceff7e6fb15c90b7f465a94f1c1ed54a6df6cf8b324ea34e",
+  "originalFailedWitnessExit": 1,
+  "originalFailedWitnessExitBasis": "OBSERVED_TOOL_TERMINAL_TRANSCRIPTION_NOT_A_NEW_RUN",
+  "originalFailedWitnessToolResultChunk": "716d61",
+  "originalSuccessfulButUnqualifiedCases": 4,
+  "preservationOnly": true,
+  "productTestsExecuted": 0,
+  "source": "6b53efeec87f3ec36a840dd8e7759656cb4aee5c"
+}
